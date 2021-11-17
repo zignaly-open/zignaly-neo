@@ -9,6 +9,4 @@ function UILayout() {
   );
 }
 
-
-
 export default UILayout;
