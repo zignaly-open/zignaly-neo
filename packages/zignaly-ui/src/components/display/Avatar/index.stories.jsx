@@ -34,6 +34,9 @@ Image.args = {
   size: sizeTypesId.MEDIUM,
   image: 'https://64.media.tumblr.com/1ca5ac368badaea331737f7856d844a8/tumblr_qdawidrDy61rpwm80o1_250.jpg'
 };
+Image.parameters = {
+  jest: ['index.test.js']
+};
 
 // With Metamask
 export const Metamask = Template.bind({});
@@ -41,4 +44,7 @@ Metamask.args = {
   hash: '0xc3B2CFa1684dd33e8Ea8F657122f42b288d32852',
   size: sizeTypesId.MEDIUM,
   image: ''
+};
+Metamask.parameters = {
+  jest: ['index.test.js']
 };

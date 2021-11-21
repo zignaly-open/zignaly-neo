@@ -24,13 +24,14 @@ function Avatar({
   }, [image, hash, size]);
 
   return (
-    <styled.Layout className={[size]}>
+    <styled.Layout className={[size]} data-testid="avatar-view">
       {image ? (
         <styled.Image
           src={image}
         />
       ) : (
         <styled.JazzIcon
+          data-testid="icon-input"
           ref={jazzIconRef}
         />
       )}

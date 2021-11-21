@@ -6,9 +6,8 @@
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-
-    "test": "jest",
-    "test:generate-output": "jest --json --outputFile=.tests.json"
+    "test:generate-output": "jest --json --outputFile=.jest-test-results.json || true",
+    "test": "jest -u"
   },
   "repository": {
     "type": "git",
@@ -23,27 +22,52 @@
   "homepage": "https://github.com/zignaly-open/react-component-library#readme",
   "devDependencies": {
     "@babel/core": "^7.15.8",
+    "@babel/plugin-syntax-jsx": "^7.16.0",
+    "@babel/preset-react": "^7.16.0",
     "@storybook/addon-actions": "^6.3.12",
     "@storybook/addon-essentials": "^6.3.12",
     "@storybook/addon-jest": "^6.3.12",
     "@storybook/addon-links": "^6.3.12",
     "@storybook/react": "^6.3.12",
+    "@testing-library/jest-dom": "^5.15.0",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
     "babel-loader": "^8.2.3",
+    "enzyme": "^3.11.0",
     "eslint": "^7.32.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^5.1.1",
     "eslint-plugin-react": "^7.27.0",
-    "jest": "^27.3.1"
+    "jest": "^27.3.1",
+    "puppeteer": "^11.0.0"
   },
   "dependencies": {
+    "@babel/plugin-transform-runtime": "^7.16.4",
     "@metamask/jazzicon": "^2.0.0",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/react-hooks": "^7.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-number-format": "^4.7.3",
     "react-spring": "^9.3.0",
+    "react-test-renderer": "^17.0.2",
     "react-use": "^17.3.1",
     "styled-components": "^5.3.3"
+  },
+  "jest": {
+    "rootDir": ".",
+    "setupFilesAfterEnv": [
+      "<rootDir>/jest.setup.js"
+    ],
+    "testEnvironment": "jsdom",
+    "moduleNameMapper": {
+      "^@root(.*)$": "<rootDir>/src$1",
+      "^@assets(.*)$": "<rootDir>/src/assets$1",
+      "^@hooks(.*)$": "<rootDir>/src/hooks$1",
+      "^@components(.*)$": "<rootDir>/src/components$1",
+      "^@utils(.*)$": "<rootDir>/src/utils$1",
+      "^@types(.*)$": "<rootDir>/src/types$1"
+    }
   }
 }
