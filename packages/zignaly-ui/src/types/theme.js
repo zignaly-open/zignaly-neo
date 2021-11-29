@@ -1,4 +1,5 @@
-const dark = {
+export const dark = {
+  name: 'dark',
   gradient: {
     1: {
       colorOne: '#149CAD',
@@ -49,7 +50,8 @@ const dark = {
   }
 };
 
-const light = {
+export const light = {
+  name: 'light',
   gradient: {
     1: {
       colorOne: '#817CCE',
