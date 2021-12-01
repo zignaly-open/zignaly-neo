@@ -1,6 +1,16 @@
-// Layouts
-import UILayout from './src/components/layouts/UILayout';
+// Components
+import Avatar from './src/components/display/Avatar';
+import Typography from './src/components/display/Typhography';
 
 export default {
-  UILayout
+
+  /**
+   * =-=-=-=-=-=-=-=
+   *   Components
+   * =-=-=-=-=-=-=-=
+   */
+
+  // Display
+  Avatar,
+  Typography
 };
