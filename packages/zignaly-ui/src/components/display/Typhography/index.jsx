@@ -11,17 +11,13 @@ const componentByVariants = {
   h4: 'h4',
   h5: 'h5',
   h6: 'h6',
-  subtitle1: 'h4',
-  subtitle2: 'h4',
-  body1: 'span',
-  body2: 'span',
-  body3: 'span',
+  body: 'span',
   number: 'span'
 };
 
 function Typography({
   children,
-  variant = 'body2',
+  variant = 'body',
   size = 'medium',
   style = null,
   weight = null,
@@ -31,7 +27,7 @@ function Typography({
   return (
     <styled.Layout
       weight={weight}
-      className={[variant, size, `style-${style}`, className]}
+      className={[variant, size, style && `style-${style}`, className]}
       as={component ?? componentByVariants[variant]}
     >
       {children}

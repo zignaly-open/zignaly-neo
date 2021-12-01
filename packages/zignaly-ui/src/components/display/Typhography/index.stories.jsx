@@ -36,6 +36,9 @@ export default {
         'number'
       ]
     }
+  },
+  parameters: {
+    jest: ['index.test.js']
   }
 };
 
