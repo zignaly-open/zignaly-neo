@@ -1,5 +1,6 @@
 // Dependencies
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Styles
 import * as styled from './index.styles';
@@ -34,5 +35,18 @@ function Typography({
     </styled.Layout>
   );
 }
+
+Typography.propTypes = {
+  variant: PropTypes.oneOf([
+    'h1',
+    'h2',
+    'h3',
+    'h4',
+    'h5',
+    'h6',
+    'body',
+    'number'
+  ])
+};
 
 export default Typography;

@@ -29,6 +29,7 @@
     "@storybook/addon-essentials": "^6.4.3",
     "@storybook/addon-jest": "^6.4.3",
     "@storybook/addon-links": "^6.4.3",
+    "@storybook/addon-options": "^5.3.21",
     "@storybook/react": "^6.4.3",
     "@testing-library/jest-dom": "^5.15.0",
     "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
@@ -43,13 +44,17 @@
     "eslint-plugin-storybook": "^0.5.1",
     "jest": "^27.3.1",
     "puppeteer": "^11.0.0",
-    "storybook-addon-styled-component-theme": "^2.0.0"
+    "storybook-addon-styled-component-theme": "^2.0.0",
+    "storybook-dark-mode": "^1.0.8",
+    "storybook-figma": "^0.1.2"
   },
   "dependencies": {
     "@babel/plugin-transform-runtime": "^7.16.4",
     "@metamask/jazzicon": "^2.0.0",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
+    "ethers": "^5.5.2",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-number-format": "^4.7.3",

@@ -1,5 +1,6 @@
 // Dependencies
 import { addDecorator } from "@storybook/react";
+import { themes as sbThemes } from '@storybook/theming';
 
 // Theme Provider
 import { ThemeProvider } from "styled-components";
@@ -28,6 +29,10 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  darkMode: {
+    dark: { ...sbThemes.dark, appBg: '#2d2d2d' },
+    light: { ...sbThemes.normal, appBg: 'white' }
+  }
 }
 
 
