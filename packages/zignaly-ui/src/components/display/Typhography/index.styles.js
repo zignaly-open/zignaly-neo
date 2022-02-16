@@ -5,6 +5,7 @@ import { styledIf } from '@utils/styled';
 export const Layout = styled.h1`
   font-family: 'Poppins', sans-serif;
   margin: 0;
+  
   &.h1 {
     &.medium {
       font-weight: 600;
@@ -154,6 +155,8 @@ export const Layout = styled.h1`
   }
   
   ${props => `
+    color: ${props.theme.typhography.textColor};
+       
     ${styledIf(props.weight, `
       font-weight: ${props.weight} !important;
     `)}
