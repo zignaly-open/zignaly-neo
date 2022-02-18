@@ -8,6 +8,8 @@ import * as styled from './index.styles';
 
 // Assets
 import ZigCoinIcon from '@assets/images/zignaly-coin.svg';
+
+// Components
 import Typography from '@components/display/Typhography';
 
 function ZigWalletIndicator({
@@ -17,10 +19,11 @@ function ZigWalletIndicator({
     <NumberFormat
       value={utils.formatUnits(BigNumber.from(zigs === '' ? '0' : String(zigs)))}
       displayType={'text'}
-      suffix={' ZIG'}
       thousandSeparator={true}
       renderText={(value) => (
-        <Typography>{value}</Typography>
+        <styled.Value>
+          <Typography>{value}</Typography> <styled.Token>ZIG</styled.Token>
+        </styled.Value>
       )}
     />
   ), [zigs]);
@@ -28,7 +31,7 @@ function ZigWalletIndicator({
   const renderLevel = useMemo(() => (
     <styled.Level>
       <span>🐬</span>
-      <Typography variant={'h6'}>Level: Dolphin</Typography>
+      <Typography variant={'h6'}>Dolphin</Typography>
     </styled.Level>
   ), []);
 

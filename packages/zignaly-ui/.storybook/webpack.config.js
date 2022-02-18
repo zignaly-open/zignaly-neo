@@ -10,8 +10,7 @@ module.exports = async ({ config }) => {
       "@hooks": resolve("../src/hooks"),
       "@utils": resolve("../src/utils"),
       "@types": resolve("../src/types"),
-    }
+    },
   });
-
   return config;
 };

@@ -1,8 +1,10 @@
 const light = {
   name: 'light',
 
-  typhography: {
-    textColor: '#000'
+  zigWalletIndicator: {
+    valueTextColor: '#FFFFFF',
+    levelTextColor: '#706F82',
+    tokenTextColor: '#9864EF'
   }
 };
 

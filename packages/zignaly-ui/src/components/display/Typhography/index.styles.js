@@ -155,7 +155,7 @@ export const Layout = styled.h1`
   }
   
   ${props => `
-    color: ${props.theme.typhography.textColor};
+    color: inherit;
        
     ${styledIf(props.weight, `
       font-weight: ${props.weight} !important;
