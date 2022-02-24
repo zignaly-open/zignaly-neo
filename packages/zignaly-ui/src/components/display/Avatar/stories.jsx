@@ -35,7 +35,7 @@ Image.args = {
   image: 'https://64.media.tumblr.com/1ca5ac368badaea331737f7856d844a8/tumblr_qdawidrDy61rpwm80o1_250.jpg'
 };
 Image.parameters = {
-  jest: ['index.test.js']
+  jest: ['test.js']
 };
 
 // With Metamask
@@ -46,5 +46,5 @@ Metamask.args = {
   image: ''
 };
 Metamask.parameters = {
-  jest: ['index.test.js']
+  jest: ['test.js']
 };

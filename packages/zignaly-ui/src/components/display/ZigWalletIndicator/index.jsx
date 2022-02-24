@@ -4,7 +4,7 @@ import { BigNumber, utils } from 'ethers';
 import NumberFormat from 'react-number-format';
 
 // Styles
-import * as styled from './index.styles';
+import * as styled from './styles';
 
 // Assets
 import ZigCoinIcon from '@assets/images/zignaly-coin.svg';
@@ -12,8 +12,12 @@ import ZigCoinIcon from '@assets/images/zignaly-coin.svg';
 // Components
 import Typography from '@components/display/Typhography';
 
+// Utils
+import { rankTypes, rankTypesId } from '@types/ranks';
+
 function ZigWalletIndicator({
-  zigs = 0
+  zigs = 0,
+  rankId = rankTypesId.DOLPHIN
 }) {
   const renderZigsCoins = useMemo(() => (
     <NumberFormat
@@ -30,10 +34,10 @@ function ZigWalletIndicator({
 
   const renderLevel = useMemo(() => (
     <styled.Level>
-      <span>🐬</span>
-      <Typography variant={'h6'}>Dolphin</Typography>
+      <styled.RankIcon src={rankTypes[rankId].icon} />
+      <Typography variant={'h6'}>{rankTypes[rankId].name}</Typography>
     </styled.Level>
-  ), []);
+  ), [rankId]);
 
   return (
     <styled.Layout>

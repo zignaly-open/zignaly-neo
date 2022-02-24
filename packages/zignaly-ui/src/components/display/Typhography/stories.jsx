@@ -38,7 +38,7 @@ export default {
     }
   },
   parameters: {
-    jest: ['index.test.js']
+    jest: ['test.js']
   }
 };
 

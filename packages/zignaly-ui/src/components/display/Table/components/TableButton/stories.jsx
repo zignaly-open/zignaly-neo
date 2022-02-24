@@ -5,10 +5,10 @@ import React from 'react';
 import EditPenIcon from '@assets/icons/edit-pen-icon.svg';
 
 // Component
-import TableButton from './';
+import TableButton from './index';
 
 export default {
-  title: 'Inputs/TableButton',
+  title: 'Display/Table/TableButton',
   component: TableButton
 };
 

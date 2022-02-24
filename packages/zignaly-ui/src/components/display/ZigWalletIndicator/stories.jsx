@@ -1,6 +1,11 @@
+// Dependencies
 import React from 'react';
 
+// Component
 import ZigWalletIndicator from './';
+
+// Types
+import { rankTypesId } from '@types/ranks';
 
 export default {
   title: 'Display/ZigWalletIndicator',
@@ -8,10 +13,18 @@ export default {
   argTypes: {
     zigs: {
       control: 'text'
+    },
+    rankId: {
+      control: 'select',
+      default: rankTypesId.WHALE,
+      options: [
+        rankTypesId.WHALE,
+        rankTypesId.DOLPHIN
+      ]
     }
   },
   parameters: {
-    jest: ['index.test.js']
+    jest: ['test.js']
   }
 };
 
@@ -21,5 +34,5 @@ const Template = (args) => (
   </ZigWalletIndicator>
 );
 
-export const Default = Template.bind({});
-Default.args = {};
+export const Dolphin = Template.bind({});
+Dolphin.args = {};

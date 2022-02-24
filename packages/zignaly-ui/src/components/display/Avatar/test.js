@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 
 // Component
-import { Image, Metamask } from './index.stories';
+import { Image, Metamask } from './stories';
 import { sizeTypesId } from '@types/sizes';
 
 describe('components/display/Avatar/Image', () => {

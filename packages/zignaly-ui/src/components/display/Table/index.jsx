@@ -6,7 +6,10 @@ import { useTable, useSortBy } from 'react-table';
 import ArrowBottomIcon from '@assets/icons/arrow-bottom-icon.svg';
 
 // Styles
-import * as styled from './index.styles';
+import * as styled from './styles';
+
+// Components
+import Row from './components/Row';
 
 function Table({
   columns = [],
@@ -26,8 +29,9 @@ function Table({
   const firstPageRows = rows.slice(0, 20);
 
   return (
-    <styled.Layout {...getTableProps()}>
-      <thead>
+    <styled.Layout>
+      <styled.Table {...getTableProps()}>
+        <thead>
         {headerGroups.map((headerGroup, index) => (
           <tr
             key={`--table-head-${index.toString()}`}
@@ -42,23 +46,21 @@ function Table({
             ))}
           </tr>
         ))}
-      </thead>
-      <tbody {...getTableBodyProps()}>
-        {firstPageRows.map((row, i) => {
-          prepareRow(row);
-          return (
-            <tr key={`--table-row-${i.toString()}`} {...row.getRowProps()}>
-              {row.cells.map((cell, index) => (
-                <td
-                  key={`--table-row-cell-${index.toString()}`}
-                  {...cell.getCellProps()}>
-                  {cell.render('Cell')}
-                </td>
-              ))}
-            </tr>
-          );
-        })}
-      </tbody>
+        </thead>
+        <tbody {...getTableBodyProps()}>
+          {firstPageRows.map((row, i) => {
+            prepareRow(row);
+
+            return (
+              <Row
+                key={`--table-row-${i.toString()}`}
+                row={row}
+                {...row.getRowProps()}
+              />
+            );
+          })}
+        </tbody>
+      </styled.Table>
     </styled.Layout>
   );
 }

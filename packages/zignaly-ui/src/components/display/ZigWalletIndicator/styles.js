@@ -15,10 +15,17 @@ export const Icon = styled.img`
   height: 48px;
 `;
 
+export const RankIcon = styled.img`
+  width: 16px;
+  height: 16px;
+  margin-right: 6px;
+`;
+
 export const Level = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
   font-size: 13px;
 
   ${({ theme }) => (`

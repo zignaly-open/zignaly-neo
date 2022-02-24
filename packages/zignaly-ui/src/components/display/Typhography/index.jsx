@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 // Styles
-import * as styled from './index.styles';
+import * as styled from './styles';
 
 const componentByVariants = {
   h1: 'h1',
