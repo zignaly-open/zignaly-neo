@@ -8,7 +8,7 @@ import { connectionStateTypesId } from '@components/display/Table/components/Con
 // Types
 
 export default {
-  title: 'Display/Table/ConnectionStateLabel',
+  title: 'Display/Table/Components/ConnectionStateLabel',
   component: ConnectionStateLabel,
   argTypes: {
     size: {

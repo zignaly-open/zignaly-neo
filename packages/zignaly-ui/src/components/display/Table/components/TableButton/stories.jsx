@@ -8,7 +8,7 @@ import EditPenIcon from '@assets/icons/edit-pen-icon.svg';
 import TableButton from './index';
 
 export default {
-  title: 'Display/Table/TableButton',
+  title: 'Display/Table/Components/TableButton',
   component: TableButton
 };
 

@@ -5,7 +5,7 @@ import React from 'react';
 import PriceLabel from './index';
 
 export default {
-  title: 'Display/Table/PriceLabel',
+  title: 'Display/Table/Components/PriceLabel',
   component: PriceLabel,
   argTypes: {
     value: {

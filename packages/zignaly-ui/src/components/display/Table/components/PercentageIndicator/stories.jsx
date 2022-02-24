@@ -5,7 +5,7 @@ import React from 'react';
 import PercentageIndicator from './index';
 
 export default {
-  title: 'Display/Table/PercentageIndicator',
+  title: 'Display/Table/Components/PercentageIndicator',
   component: PercentageIndicator,
   argTypes: {
     size: {

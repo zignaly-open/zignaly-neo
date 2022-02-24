@@ -5,7 +5,7 @@ import React from 'react';
 import DateLabel from './index';
 
 export default {
-  title: 'Display/Table/DateLabel',
+  title: 'Display/Table/Components/DateLabel',
   component: DateLabel,
   argTypes: {
     date: {
