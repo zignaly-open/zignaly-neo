@@ -103,6 +103,9 @@ dist
 # TernJS port file
 .tern-port
 
+# Compiled files
+lib
+
 .idea
 .vscode
 *.zip
