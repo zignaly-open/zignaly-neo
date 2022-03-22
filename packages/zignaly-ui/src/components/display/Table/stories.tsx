@@ -1,6 +1,5 @@
 // Dependencies
 import React from "react";
-import { format } from "date-fns";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 // Assets

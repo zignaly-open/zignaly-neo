@@ -7,7 +7,15 @@
     "strict": true,
     "jsx": "react",
     "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
     "baseUrl": "src",
+    "paths": {
+      "@types/*": ["./src/types/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@components/*": ["./components/*"]
+    }
   },
   "include": [
     "src"

@@ -26,7 +26,6 @@ module.exports = {
     "no-tabs": "off",
     "react/prop-types": "off",
     "no-new": "off",
-    "no-unused-vars": "warn",
     "no-mixed-spaces-and-tabs": "off",
     "react/display-name": "off",
     "space-before-function-paren": ["error", "never"],
@@ -38,5 +37,7 @@ module.exports = {
     "no-async-promise-executor": "off",
     "no-debugger": "off",
     "multiline-ternary": ["error", "never"],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
   },
 };

@@ -8,6 +8,7 @@ module.exports = {
     "@storybook/addon-jest",
     "storybook-addon-styled-component-theme/dist/preset",
     "storybook-dark-mode",
+    "storybook-addon-designs",
   ],
   typescript: {
     check: false,
