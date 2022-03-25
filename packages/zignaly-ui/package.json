@@ -9,8 +9,8 @@
     "build:storybook": "build-storybook -c .storybook -o build/",
     "test:generate-output": "jest --json --outputFile=.jest-test-results.json || true",
     "test": "jest -u",
-    "build": "tsc",
-    "prepare": "husky install",
+    "build": "tsc && tsc-alias && npm run copy-files",
+    "copy-files": "cp -R src/assets lib/assets",
     "lint": "eslint --fix src --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write src --config ./.prettierrc"
   },
@@ -26,7 +26,7 @@
   },
   "homepage": "https://github.com/zignaly-open/react-component-library#readme",
   "files": [
-    "lib /**/*"
+    "lib/**/*"
   ],
   "devDependencies": {
     "@babel/core": "^7.15.8",
@@ -64,8 +64,8 @@
     "lint-staged": "12.3.4",
     "prettier": "^2.5.1",
     "storybook-addon-designs": "^6.2.1",
-    "storybook-addon-styled-component-theme": "^2.0.0",
     "storybook-dark-mode": "^1.0.9",
+    "tsc-alias": "^1.6.4",
     "tsconfig-paths-webpack-plugin": "^3.5.2",
     "typescript": "^4.5.5"
   },
@@ -76,6 +76,7 @@
     "@metamask/jazzicon": "^2.0.0",
     "@mui/icons-material": "^5.4.2",
     "@mui/material": "^5.4.3",
+    "@mui/styled-engine-sc": "^5.5.2",
     "@storybook/theming": "^6.4.19",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
