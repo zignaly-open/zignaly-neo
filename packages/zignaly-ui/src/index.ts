@@ -28,11 +28,11 @@ export default {
   ZigWalletIndicator,
   Loader,
 
+  // Inputs
+  Button,
+
   // Navigation
   Tabs,
   Tab,
   TabPanel,
-
-  // Inputs
-  Button,
 };
