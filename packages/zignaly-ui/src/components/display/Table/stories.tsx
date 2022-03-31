@@ -18,7 +18,6 @@ import { ButtonGroup } from "components/styled";
 
 // Types
 import { connectionStateTypesId } from "components/display/Table/components/ConnectionStateLabel/types";
-import { buttonVariantsId } from "types/buttons";
 
 // Utils
 import { shortenHex } from "utils/web3";
@@ -69,11 +68,6 @@ Investors.args = {
     {
       Header: "Status",
       accessor: "status",
-    },
-    {
-      Header: <IconButton variant={buttonVariantsId.PLACEHOLDER} icon={OptionsDotsIcon} />,
-      accessor: "action",
-      disableSortBy: true,
     },
   ],
   data: [
@@ -133,15 +127,6 @@ ExchangeOrders.args = {
       Header: "Type",
       accessor: "type",
     },
-    {
-      Header: (
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <IconButton variant={buttonVariantsId.PLACEHOLDER} icon={OptionsDotsIcon} />
-        </div>
-      ),
-      accessor: "action",
-      disableSortBy: true,
-    },
   ],
   data: [
     {
@@ -196,15 +181,6 @@ Contracts.args = {
     {
       Header: "Margin",
       accessor: "margin",
-    },
-    {
-      Header: (
-        <div style={{ display: "flex", justifyContent: "flex-end" }}>
-          <IconButton variant={buttonVariantsId.PLACEHOLDER} icon={OptionsDotsIcon} />
-        </div>
-      ),
-      accessor: "action",
-      disableSortBy: true,
     },
   ],
   data: [
