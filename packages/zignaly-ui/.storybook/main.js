@@ -6,7 +6,6 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-jest",
-    "storybook-dark-mode",
     "storybook-addon-designs",
   ],
   typescript: {

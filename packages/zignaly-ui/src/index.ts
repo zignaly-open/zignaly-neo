@@ -11,9 +11,6 @@ import TabPanel from "./components/navigation/Tabs/components/TabPanel";
 // Inputs
 import Button from "./components/inputs/Button";
 
-// Inputs
-import Button from "./components/inputs/Button";
-
 export default {
   /**
    * =-=-=-=-=-=-=-=
