@@ -15,6 +15,7 @@ export enum ButtonSizes {
   SMALL = "small",
   NORMAL = "normal",
   LARGE = "large",
+  XLARGE = "xlarge",
 }
 
 type ButtonProps = {
