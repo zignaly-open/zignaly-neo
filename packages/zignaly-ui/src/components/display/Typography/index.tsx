@@ -19,9 +19,9 @@ export interface TypographyProps {
   variant?: keyof typeof componentByVariants;
   size?: string;
   style?: any;
-  weight?: string;
   component?: any;
   className?: string;
+  color?: string;
   children: React.ReactNode;
 }
 
@@ -30,13 +30,13 @@ const Typography = ({
   variant = "body",
   size = "medium",
   style,
-  weight,
+  color,
   component,
   className,
 }: TypographyProps) => {
   return (
     <styled.Layout
-      weight={weight}
+      color={color}
       className={[variant, size, style && `style-${style}`, className]}
       as={component ?? componentByVariants[variant]}
     >

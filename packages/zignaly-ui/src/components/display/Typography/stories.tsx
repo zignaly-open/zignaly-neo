@@ -11,7 +11,7 @@ export default {
       control: "select",
       options: ["h1", "h2", "h3", "h4", "h5", "body"],
     },
-    weight: {
+    color: {
       control: "text",
     },
     size: {

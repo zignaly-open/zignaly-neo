@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
-export const Layout = styled.h1<{ weight: string }>`
+export const Layout = styled.h1<{ color: string }>`
   font-family: "Avenir Next", "Red Hat Text", sans-serif;
   margin: 0;
 
@@ -63,11 +63,11 @@ export const Layout = styled.h1<{ weight: string }>`
 
   ${(props) => `
     color: inherit;
-       
+
     ${styledIf(
-      props.weight,
+      props.color,
       `
-      font-weight: ${props.weight} !important;
+      color: ${props.color} !important;
     `,
     )}
   `}
