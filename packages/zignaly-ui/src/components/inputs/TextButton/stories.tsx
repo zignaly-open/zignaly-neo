@@ -3,15 +3,15 @@ import * as React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 // Component
-import Button, { ButtonSizes, ButtonVariants } from "./";
+import TextButton from "./";
 
 // Assets
 import CloseIcon from "../../../assets/icons/close-icon.svg";
 import ArrowDown from "../../../assets/icons/arrow-bottom-icon.svg";
 
 export default {
-  title: "Inputs/Button",
-  component: Button,
+  title: "Inputs/TextButton",
+  component: TextButton,
   parameters: {
     design: {
       type: "figma",
@@ -23,14 +23,6 @@ export default {
       options: { Show: ArrowDown, Hide: null },
       control: { type: "radio" },
     },
-    disabled: {
-      options: [true, false],
-      control: { type: "radio" },
-    },
-    icon: {
-      options: { Show: CloseIcon, Hide: null },
-      control: { type: "radio" },
-    },
     leftElement: {
       options: { Show: CloseIcon, Hide: null },
       control: { type: "radio" },
@@ -39,20 +31,22 @@ export default {
       control: { type: "text" },
       label: "Change Caption",
     },
+    underline: {
+      options: [true, false],
+      control: { type: "radio" },
+    },
     onClick: {
       table: {
         disable: true,
       },
     },
   },
-} as ComponentMeta<typeof Button>;
+} as ComponentMeta<typeof TextButton>;
 
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
+const Template: ComponentStory<typeof TextButton> = (args) => <TextButton {...args} />;
 
 /// Normal Buttons
-export const NormalButton = Template.bind({});
-NormalButton.args = {
-  variant: ButtonVariants.PRIMARY,
-  size: ButtonSizes.NORMAL,
+export const NormalTextButton = Template.bind({});
+NormalTextButton.args = {
   leftElement: CloseIcon,
 };

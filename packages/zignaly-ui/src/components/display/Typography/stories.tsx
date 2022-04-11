@@ -9,18 +9,37 @@ export default {
   argTypes: {
     variant: {
       control: "select",
-      options: ["h1", "h2", "h3", "h4", "h5", "body"],
-    },
-    color: {
-      control: "text",
+      options: ["h1", "h2", "h3", "h4", "h5", "body1", "body2"],
     },
     size: {
       control: "select",
-      options: ["medium", "small", "x-small"],
+      options: [
+        "medium",
+        "regular",
+        "demibold",
+        "demiboldUnderlined",
+        "mediumUnderlined",
+        "regularUnderlined",
+      ],
     },
     style: {
       control: "select",
       options: ["text", "number"],
+    },
+    className: {
+      table: {
+        disable: true,
+      },
+    },
+    component: {
+      table: {
+        disable: true,
+      },
+    },
+    weight: {
+      table: {
+        disable: true,
+      },
     },
   },
   parameters: {
