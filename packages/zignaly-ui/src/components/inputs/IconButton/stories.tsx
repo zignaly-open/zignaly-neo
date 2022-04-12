@@ -3,7 +3,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 // Assets
-import OptionDotsIcon from "@assets/icons/option-dots-icon.svg";
+import OptionDotsIcon from "assets/icons/option-dots-icon.svg";
 
 // Component
 import IconButton from "./";

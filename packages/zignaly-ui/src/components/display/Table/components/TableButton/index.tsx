@@ -5,22 +5,26 @@ import React from "react";
 import * as styled from "./styles";
 
 // Types
-import { sizeTypesId } from "types/sizes";
-import { buttonVariantsId } from "types/buttons";
+import { TableButtonSizes } from "./types";
+
+enum ButtonVariants {
+  PRIMARY = "primary",
+  SECONDARY = "secondary",
+}
 
 export interface TableButtonProps {
   caption: string;
-  variant?: buttonVariantsId;
-  size?: sizeTypesId;
+  variant?: ButtonVariants;
+  size?: TableButtonSizes;
   icon?: any;
   onClick?: React.MouseEventHandler<HTMLInputElement>;
 }
 
 const TableButton = ({
   caption,
-  variant,
-  size = sizeTypesId.SMALL,
   icon,
+  variant = ButtonVariants.PRIMARY,
+  size = TableButtonSizes.SMALL,
   onClick = () => {},
 }: TableButtonProps) => {
   return (

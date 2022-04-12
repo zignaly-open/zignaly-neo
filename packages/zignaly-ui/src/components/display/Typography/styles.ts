@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
 export const Layout = styled.h1<{ color: string }>`
-  font-family: "Avenir Next", "Red Hat Text", sans-serif;
+  font-family: "Avenir", sans-serif;
   margin: 0;
 
   &.h1 {
@@ -133,7 +133,7 @@ export const Layout = styled.h1<{ color: string }>`
     }
   }
 
-  ${(props) => `
+  ${(props: any) => `
     color: inherit;
 
     ${styledIf(

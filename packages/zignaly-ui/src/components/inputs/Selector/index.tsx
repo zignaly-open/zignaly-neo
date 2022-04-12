@@ -7,30 +7,10 @@ import { useClickAway } from "react-use";
 import * as styled from "./styles";
 
 // Assets
-import CaretDownIcon from "../../../assets/icons/caret-down-icon.svg";
+import CaretDownIcon from "assets/icons/caret-down-icon.svg";
 
-export enum SelectSizes {
-  SMALL = "small",
-  NORMAL = "normal",
-  LARGE = "large",
-}
-
-type OptionItem = {
-  leftElement: string;
-  caption: string;
-};
-
-type SelectProps = {
-  size?: SelectSizes;
-  options?: OptionItem[];
-  label?: string;
-  name: string;
-  placeholder: string;
-  value?: string | null;
-  disabled?: boolean;
-  initialSelectedIndex: number | null;
-  onSelectItem: any;
-};
+// Types
+import { SelectProps, SelectSizes } from "./types";
 
 function Select({
   size = SelectSizes.NORMAL,
@@ -55,7 +35,7 @@ function Select({
   );
 
   const handleClickItem = useCallback(
-    (index) => {
+    (index: number) => {
       setSelectedIndex(index);
       if (options) {
         onSelectItem(options[index - 1]);

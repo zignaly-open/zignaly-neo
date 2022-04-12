@@ -1,6 +1,6 @@
 // Dependencies
 import styled from "styled-components";
-import { connectionStateTypesId } from "./types";
+import { connectionStateColor } from "./types";
 
 export const Value = styled.span`
   font-weight: 600;
@@ -8,8 +8,12 @@ export const Value = styled.span`
   line-height: 20px;
 `;
 
-export const Layout = styled.div<{ stateId: connectionStateTypesId }>`
-  ${({ theme, stateId }) => `
-    color: ${theme.connectionStateLabel.textColor[stateId]};
+type LayoutTypeProps = {
+  stateId: string;
+};
+
+export const Layout = styled.div<LayoutTypeProps>`
+  ${({ stateId }: any) => `
+    color: ${connectionStateColor[stateId]};
   `}
 `;

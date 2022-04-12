@@ -3,8 +3,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 // Components
-import ConnectionStateLabel from "./index";
-import { connectionStateTypesId } from "components/display/Table/components/ConnectionStateLabel/types";
+import ConnectionStateLabel, { ConnectionStateLabelId } from "./index";
 
 // Types
 
@@ -14,13 +13,13 @@ export default {
   argTypes: {
     size: {
       control: "select",
-      default: connectionStateTypesId.CONNECTED,
+      default: ConnectionStateLabelId.CONNECTED,
       options: [
-        connectionStateTypesId.CONNECTED,
-        connectionStateTypesId.DISCONNECTED,
-        connectionStateTypesId.SOFT_DISCONNECT,
-        connectionStateTypesId.HARD_DISCONNECT,
-        connectionStateTypesId.SUSPENDED,
+        ConnectionStateLabelId.CONNECTED,
+        ConnectionStateLabelId.DISCONNECTED,
+        ConnectionStateLabelId.SOFT_DISCONNECT,
+        ConnectionStateLabelId.HARD_DISCONNECT,
+        ConnectionStateLabelId.SUSPENDED,
       ],
     },
   },
@@ -32,25 +31,25 @@ const Template: ComponentStory<typeof ConnectionStateLabel> = (args) => (
 
 export const Connected = Template.bind({});
 Connected.args = {
-  stateId: connectionStateTypesId.CONNECTED,
+  stateId: ConnectionStateLabelId.CONNECTED,
 };
 
 export const Disconnected = Template.bind({});
 Disconnected.args = {
-  stateId: connectionStateTypesId.DISCONNECTED,
+  stateId: ConnectionStateLabelId.DISCONNECTED,
 };
 
 export const SoftDisconnect = Template.bind({});
 SoftDisconnect.args = {
-  stateId: connectionStateTypesId.SOFT_DISCONNECT,
+  stateId: ConnectionStateLabelId.SOFT_DISCONNECT,
 };
 
 export const HardDisconnect = Template.bind({});
 HardDisconnect.args = {
-  stateId: connectionStateTypesId.HARD_DISCONNECT,
+  stateId: ConnectionStateLabelId.HARD_DISCONNECT,
 };
 
 export const Suspended = Template.bind({});
 Suspended.args = {
-  stateId: connectionStateTypesId.SUSPENDED,
+  stateId: ConnectionStateLabelId.SUSPENDED,
 };

@@ -1,6 +1,6 @@
 // Dependencies
 import styled from "styled-components";
-import { styledIf } from "../../../utils/styled";
+import { styledIf } from "utils/styled";
 
 export const Icon = styled.img`
   width: 10px;
@@ -45,7 +45,7 @@ export const Layout = styled.div<LayoutProps>`
   user-select: none;
   align-items: center;
 
-  ${({ isActive }) => `
+  ${({ isActive }: any) => `
     ${styledIf(
       isActive,
       `

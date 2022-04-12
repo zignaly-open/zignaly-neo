@@ -5,7 +5,7 @@ import React from "react";
 import * as styled from "./styles";
 
 function InputText() {
-  return <styled.Layout>Hola</styled.Layout>;
+  return <styled.Layout>WIP</styled.Layout>;
 }
 
 export default InputText;

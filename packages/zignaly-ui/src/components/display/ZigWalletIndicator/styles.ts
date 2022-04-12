@@ -26,30 +26,21 @@ export const Level = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
-
-  ${({ theme }) => `
-    color: ${theme.zigWalletIndicator.levelTextColor}
-  `}
+  font-size: 16px;
+  color: #706f82;
 `;
 
 export const Token = styled.span`
   text-transform: uppercase;
   padding-left: 4px;
   line-height: 23px;
-
-  ${({ theme }) => `
-    color: ${theme.zigWalletIndicator.tokenTextColor}
-  `}
+  color: #706f82;
 `;
 
 export const Value = styled.div`
   display: flex;
   text-transform: uppercase;
-
-  ${({ theme }) => `
-    color: ${theme.zigWalletIndicator.valueTextColor}
-  `}
+  color: #ffffff;
 `;
 
 export const Data = styled.div`

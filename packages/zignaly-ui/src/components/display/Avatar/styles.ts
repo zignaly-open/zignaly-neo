@@ -1,32 +1,32 @@
 // Dependencies
 import styled from "styled-components";
-import { sizeTypesId } from "types/sizes";
+import { AvatarSizes } from "./types";
 
 export const sizes = {
-  [sizeTypesId.SMALL]: 32,
-  [sizeTypesId.MEDIUM]: 42,
-  [sizeTypesId.LARGE]: 64,
+  [AvatarSizes.SMALL]: 32,
+  [AvatarSizes.MEDIUM]: 42,
+  [AvatarSizes.LARGE]: 64,
 };
 
 export const Layout = styled.div`
   overflow: hidden;
 
-  &.${sizeTypesId.SMALL} {
-    width: ${sizes[sizeTypesId.SMALL]}px;
-    height: ${sizes[sizeTypesId.SMALL]}px;
-    border-radius: ${sizes[sizeTypesId.SMALL]}px;
+  &.${AvatarSizes.SMALL} {
+    width: ${sizes[AvatarSizes.SMALL]}px;
+    height: ${sizes[AvatarSizes.SMALL]}px;
+    border-radius: ${sizes[AvatarSizes.SMALL]}px;
   }
 
-  &.${sizeTypesId.MEDIUM} {
-    width: ${sizes[sizeTypesId.MEDIUM]}px;
-    height: ${sizes[sizeTypesId.MEDIUM]}px;
-    border-radius: ${sizes[sizeTypesId.MEDIUM]}px;
+  &.${AvatarSizes.MEDIUM} {
+    width: ${sizes[AvatarSizes.MEDIUM]}px;
+    height: ${sizes[AvatarSizes.MEDIUM]}px;
+    border-radius: ${sizes[AvatarSizes.MEDIUM]}px;
   }
 
-  &.${sizeTypesId.LARGE} {
-    width: ${sizes[sizeTypesId.LARGE]}px;
-    height: ${sizes[sizeTypesId.LARGE]}px;
-    border-radius: ${sizes[sizeTypesId.LARGE]}px;
+  &.${AvatarSizes.LARGE} {
+    width: ${sizes[AvatarSizes.LARGE]}px;
+    height: ${sizes[AvatarSizes.LARGE]}px;
+    border-radius: ${sizes[AvatarSizes.LARGE]}px;
   }
 `;
 

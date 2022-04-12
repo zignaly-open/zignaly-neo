@@ -1,40 +1,28 @@
 {
   "compilerOptions": {
-    "target": "es2021",
-    "module": "commonjs",
-    "declaration": true,
-    "outDir": "./lib",
-    "strict": true,
     "jsx": "react",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "@types/*": [
-        "./src/types/*"
-      ],
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@utils/*": [
-        "./src/utils/*"
-      ],
-      "@hooks/*": [
-        "./src/hooks/*"
-      ],
-      "@components/*": [
-        "./components/*"
-      ],
-      "@mui/styled-engine": [
-        "./node_modules/@mui/styled-engine-sc"
-      ]
+      "assets/*": ["src/assets/*"],
+      "components/*": ["src/components/*"],
+      "utils/*": ["src/utils/*"],
+      "hooks/*": ["src/hooks/*"]
     },
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2021",
+    "module": "es2021"
   },
-  "include": [
-    "src"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/__tests__/*"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

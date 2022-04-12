@@ -1,12 +1,12 @@
 // Dependencies
 import React from "react";
+import { Row as _Row } from "react-table";
 
 // Assets
-import ExpandedArrowIcon from "@assets/icons/arrow-expansion-icon.svg";
+import ExpandedArrowIcon from "assets/icons/arrow-expansion-icon.svg";
 
 // Styled Components
 import * as styled from "./styles";
-import { Row as _Row } from "react-table";
 
 // @ts-ignore
 const Row = ({ row, ...props }: { row: _Row<Object> }) => {

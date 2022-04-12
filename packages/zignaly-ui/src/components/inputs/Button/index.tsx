@@ -5,29 +5,8 @@ import { ReactElement, useMemo } from "react";
 // Styled Components
 import * as styled from "./styles";
 
-export enum ButtonVariants {
-  PRIMARY = "primary",
-  SECONDARY = "secondary",
-  GHOST = "ghost",
-}
-
-export enum ButtonSizes {
-  SMALL = "small",
-  NORMAL = "normal",
-  LARGE = "large",
-  XLARGE = "xlarge",
-}
-
-type ButtonProps = {
-  variant?: ButtonVariants;
-  size?: ButtonSizes;
-  caption?: string | null;
-  icon?: ReactElement<any> | String | null;
-  leftElement?: ReactElement<any> | String | null;
-  rightElement?: ReactElement<any> | String | null;
-  disabled?: boolean;
-  onClick: React.MouseEventHandler<HTMLButtonElement>;
-};
+// Types
+import { ButtonVariants, ButtonSizes, ButtonProps } from "./types";
 
 function Button({
   variant = ButtonVariants.PRIMARY,
@@ -110,4 +89,5 @@ function Button({
   );
 }
 
+export { ButtonVariants, ButtonSizes };
 export default Button;

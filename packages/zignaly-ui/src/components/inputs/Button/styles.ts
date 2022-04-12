@@ -1,7 +1,7 @@
 // Dependencies
 import styled from "styled-components";
-import { styledIf } from "../../../utils/styled";
-import { ButtonSizes, ButtonVariants } from "./index";
+import { styledIf } from "utils/styled";
+import { ButtonSizes, ButtonVariants } from "./";
 
 const isPrimaryButton = (variant: ButtonVariants) => variant === ButtonVariants.PRIMARY;
 
@@ -93,8 +93,8 @@ export const Layout = styled.button<LayoutProps>`
     cursor: default;
   }
 
-  ${({ size, variant, withElements, onlyIcon }) => `
-  
+  ${({ size, variant, withElements, onlyIcon }: any) => `
+ 
      ${styledIf(
        onlyIcon,
        `

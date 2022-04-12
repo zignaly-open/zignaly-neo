@@ -1,8 +1,8 @@
 // Dependencies
 import styled from "styled-components";
-import { Button } from "components/styled";
+import { Button } from "../../styled";
 import { styledIf } from "utils/styled";
-import { buttonVariantsId } from "types/buttons";
+import { IconButtonVariants } from "./types";
 
 export const Layout = styled(Button)`
   display: flex;
@@ -17,9 +17,9 @@ export const Layout = styled(Button)`
 
   border: none;
 
-  ${(props) => `
+  ${(props: any) => `
     ${styledIf(
-      props.variant !== buttonVariantsId.PLACEHOLDER,
+      props.variant !== IconButtonVariants.FLAT,
       `
       &:hover {
         background: rgba(255, 255, 255, 0.06);

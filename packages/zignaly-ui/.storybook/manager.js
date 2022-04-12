@@ -1,8 +1,8 @@
 import { addons } from "@storybook/addons";
-import zignalyTheme from "./zignalyTheme";
+import theme from "./theme";
 
 addons.setConfig({
-  theme: zignalyTheme,
+  theme,
 
   sidebar: {
     showRoots: false,

@@ -10,17 +10,11 @@ export const Value = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  ${({ theme }) => `
-    color: ${theme.priceLabel.valueTextColor};
-  `}
+  color: #f3f4f6;
 `;
 
 export const Token = styled.span`
-  ${({ theme }) => `
-    color: ${theme.priceLabel.tokenTextColor};
-  `}
-
+  color: #706f82;
   font-weight: 600;
   font-size: 12px;
   line-height: 16px;

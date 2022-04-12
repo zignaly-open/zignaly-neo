@@ -1,11 +1,11 @@
 import { create } from "@storybook/theming";
 
-import ZignalyLogoWhite from "./images/zignaly-white.svg";
+import ZignalyLogoWhite from "../images/zignaly-logo.svg";
 
 export default create({
   base: "dark",
   colorPrimary: "#26C496",
-  colorSecondary: "#9864EF",
+  colorSecondary: "#3f54c1",
 
   // UI
   appBg: "#0D0D28",
@@ -23,7 +23,7 @@ export default create({
 
   // Toolbar default and active colors
   barTextColor: "#fff",
-  barSelectedColor: "#9864EF",
+  barSelectedColor: "#3f54c1",
   barBg: "#22224966",
 
   // Form colors

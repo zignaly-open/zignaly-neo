@@ -1,23 +1,14 @@
 // Dependencies
 import React, { useEffect, useRef } from "react";
-// @ts-ignore
 import Jazzicon from "@metamask/jazzicon";
 
-// Types
-import { sizeTypesId } from "types/sizes";
-
 // Styles
-import * as styled from "./styles";
+import { sizes, Image, JazzIcon, Layout } from "./styles";
 
-const Avatar = ({
-  size = sizeTypesId.MEDIUM,
-  hash,
-  image,
-}: {
-  size: sizeTypesId;
-  hash?: string;
-  image?: string;
-}) => {
+// Types
+import { AvatarSizes, AvatarTypeProps } from "./types";
+
+const Avatar = ({ size = AvatarSizes.MEDIUM, hash, image }: AvatarTypeProps) => {
   // Refs
   const jazzIconRef = useRef(null);
 
@@ -26,21 +17,16 @@ const Avatar = ({
       // @ts-ignore
       jazzIconRef.current.innerHTML = "";
       // @ts-ignore
-      jazzIconRef.current.appendChild(
-        Jazzicon(styled.sizes[size], parseInt(hash.slice(2, 10), 16)),
-      );
+      jazzIconRef.current.appendChild(Jazzicon(sizes[size], parseInt(hash.slice(2, 10), 16)));
     }
   }, [image, hash, size]);
 
   return (
-    <styled.Layout className={size} data-testid="avatar-view">
-      {image ? (
-        <styled.Image src={image} />
-      ) : (
-        <styled.JazzIcon data-testid="icon-input" ref={jazzIconRef} />
-      )}
-    </styled.Layout>
+    <Layout className={size} data-testid="avatar-view">
+      {image ? <Image src={image} /> : <JazzIcon data-testid="icon-input" ref={jazzIconRef} />}
+    </Layout>
   );
 };
 
+export { AvatarSizes };
 export default Avatar;

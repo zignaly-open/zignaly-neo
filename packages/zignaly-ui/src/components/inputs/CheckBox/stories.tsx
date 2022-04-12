@@ -23,7 +23,7 @@ Default.args = {
   label: "Type Something",
   value: true,
   onChange: (isActive: boolean) => {
-    console.log("onChnage: ", isActive);
+    console.log("onChange: ", isActive);
   },
 };
 

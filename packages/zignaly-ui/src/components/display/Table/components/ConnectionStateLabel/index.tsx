@@ -5,14 +5,15 @@ import React from "react";
 import * as styled from "./styles";
 
 // Types
-import { connectionStateName, connectionStateTypesId } from "./types";
+import { ConnectionStateLabelId, ConnectionStateLabelProps, connectionStateName } from "./types";
 
 const ConnectionStateLabel = ({
-  stateId = connectionStateTypesId.CONNECTED,
-}: {
-  stateId: connectionStateTypesId;
-}) => <styled.Layout stateId={stateId}>{connectionStateName[stateId]}</styled.Layout>;
+  stateId = ConnectionStateLabelId.CONNECTED,
+}: ConnectionStateLabelProps) => (
+  <styled.Layout stateId={stateId}>{connectionStateName[stateId]}</styled.Layout>
+);
 
+export { ConnectionStateLabelId };
 export default React.memo(
   ConnectionStateLabel,
   (prevProps, nextProps) => prevProps.stateId === nextProps.stateId,

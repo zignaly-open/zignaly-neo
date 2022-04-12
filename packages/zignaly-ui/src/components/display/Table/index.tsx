@@ -4,9 +4,9 @@ import { useTable, useSortBy, Column } from "react-table";
 import { useClickAway } from "react-use";
 
 // Assets
-import ArrowBottomIcon from "@assets/icons/arrow-bottom-icon.svg";
-import OptionsDotsIcon from "../../../assets/icons/option-dots-icon.svg";
-import CloseIcon from "../../../assets/icons/close-icon.svg";
+import ArrowBottomIcon from "assets/icons/arrow-bottom-icon.svg";
+import OptionsDotsIcon from "assets/icons/option-dots-icon.svg";
+import CloseIcon from "assets/icons/close-icon.svg";
 
 // Styles
 import {
@@ -23,11 +23,8 @@ import {
 
 // Components
 import Row from "./components/Row";
-import IconButton from "@components/inputs/IconButton";
-import CheckBox from "@components/inputs/CheckBox";
-
-// Types
-import { buttonVariantsId } from "../../../types/buttons";
+import IconButton, { IconButtonVariants } from "../../inputs/IconButton";
+import CheckBox from "../../inputs/CheckBox";
 
 const Table = ({ columns = [], data = [] }: { columns: Column<any>[]; data: Object[] }) => {
   const menuRef = useRef(null);
@@ -45,7 +42,7 @@ const Table = ({ columns = [], data = [] }: { columns: Column<any>[]; data: Obje
         Header: (
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <IconButton
-              variant={buttonVariantsId.FLAT}
+              variant={IconButtonVariants.FLAT}
               icon={OptionsDotsIcon}
               onClick={() => {
                 setTableOptionEnabled(true);
@@ -82,9 +79,9 @@ const Table = ({ columns = [], data = [] }: { columns: Column<any>[]; data: Obje
       <View>
         <TableView {...getTableProps()}>
           <thead>
-            {headerGroups.map((headerGroup, index) => (
+            {headerGroups.map((headerGroup: any, index: number) => (
               <tr {...headerGroup.getHeaderGroupProps()} key={`--table-head-${index.toString()}`}>
-                {headerGroup.headers.map((column, index) => (
+                {headerGroup.headers.map((column: any, index: number) => (
                   <th
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                     key={`--table-head-row-${index.toString()}`}
@@ -99,11 +96,10 @@ const Table = ({ columns = [], data = [] }: { columns: Column<any>[]; data: Obje
             ))}
           </thead>
           <tbody {...getTableBodyProps()}>
-            {firstPageRows.map((row) => {
+            {firstPageRows.map((row: any, index: number) => {
               prepareRow(row);
               return (
-                // eslint-disable-next-line react/jsx-key
-                <Row row={row} {...row.getRowProps()} />
+                <Row key={`--firstPageRows-${index.toString()}`} row={row} {...row.getRowProps()} />
               );
             })}
           </tbody>

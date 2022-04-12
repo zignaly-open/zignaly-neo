@@ -33,52 +33,54 @@ export const TableView = styled.table`
   border-spacing: 0;
   overflow: hidden;
   width: 100%;
-  font-family: "Poppings", sans-serif;
 
-  ${({ theme }) => `
-    background: ${theme.table.backgroundColor};
-    
-    thead {
-      border: 1px solid ${theme.table.thead.borderColor};
-      background: ${theme.table.thead.backgroundColor};
-      
-      th {
-        color: ${theme.table.thead.th.textColor};
-        padding: 12px 22px;
-      }
+  font-family: "Avenir", sans-serif;
+  background: #131225;
+
+  thead {
+    border: 1px solid #222249;
+    background: #222249;
+
+    th {
+      color: #f3f4f6;
+      padding: 4px 22px;
+      font-weight: 500;
+      font-size: 13px;
+      line-height: 20px;
+      letter-spacing: 0.55px;
     }
-    
-    tbody {
-      td {
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 20px;
-        letter-spacing: 0px;
-        text-align: center;
-        color: ${theme.table.tbody.textColor};
-        padding: 12px 22px;
-        white-space: nowrap;
-        
-        &.action {
-          display: flex;
-          align-items: center;
-          justify-content: flex-end;
-        }
-      }
-    }
-    
-    th,
+  }
+
+  tbody {
     td {
-      margin: 0;
-      border: 0;
-      border-bottom: 1px solid ${theme.table.tbody.th.borderBottomColor};
-  
-      :last-child {
-        border-right: 0;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 20px;
+      letter-spacing: 0px;
+      text-align: center;
+      color: #f3f4f6;
+      padding: 12px 22px;
+      white-space: nowrap;
+
+      &.action {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
       }
     }
-  `}
+  }
+
+  th,
+  td {
+    margin: 0;
+    border: 0;
+    border-bottom: 1px solid #222249;
+
+    :last-child {
+      border-right: 0;
+    }
+  }
 
   thead {
     user-select: none;
@@ -105,7 +107,7 @@ export const SortIcon = styled.img<{ isSortedDesc?: boolean }>`
   margin-left: 6px;
   transition: all 0.1s linear;
 
-  ${(props) => `
+  ${(props: any) => `
      ${styledIf(
        props.isSortedDesc,
        `

@@ -1,7 +1,7 @@
 // Dependencies
 import styled from "styled-components";
-import { styledIf } from "../../../utils/styled";
-import { SelectSizes } from "@components/inputs/Selector/index";
+import { styledIf } from "utils/styled";
+import { SelectSizes } from "./types";
 
 const isSmallSelect = (size: SelectSizes) => size === SelectSizes.SMALL;
 
@@ -78,7 +78,7 @@ export const Item = styled.li<ItemProps>`
   align-items: center;
   cursor: pointer;
 
-  ${({ empty }) => `
+  ${({ empty }: any) => `
     ${styledIf(
       empty,
       `

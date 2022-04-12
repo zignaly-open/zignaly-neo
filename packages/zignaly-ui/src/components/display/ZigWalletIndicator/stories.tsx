@@ -3,10 +3,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 // Component
-import ZigWalletIndicator from "./";
-
-// Types
-import { rankTypesId } from "types/ranks";
+import ZigWalletIndicator, { RankTypesId } from "./";
 
 export default {
   title: "Display/ZigWalletIndicator",
@@ -17,12 +14,12 @@ export default {
     },
     rankId: {
       control: "select",
-      default: rankTypesId.WHALE,
-      options: [rankTypesId.WHALE, rankTypesId.DOLPHIN],
+      default: RankTypesId.WHALE,
+      options: [RankTypesId.WHALE, RankTypesId.DOLPHIN],
     },
   },
   parameters: {
-    jest: ["test.js"],
+    jest: ["test.ts"],
   },
 } as ComponentMeta<typeof ZigWalletIndicator>;
 

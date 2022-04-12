@@ -10,18 +10,15 @@ import * as styled from "./styles";
 import ZigCoinIcon from "assets/images/zignaly-coin.svg";
 
 // Components
-import Typography from "components/display/Typography";
+import Typography from "../Typography";
 
 // Utils
-import { rankTypes, rankTypesId } from "types/ranks";
+import { RankTypes, RankTypesId, ZigWalletIndicatorProps } from "./types";
 
 const ZigWalletIndicator = ({
   zigs = 0,
-  rankId = rankTypesId.DOLPHIN,
-}: {
-  zigs: number;
-  rankId: rankTypesId;
-}) => {
+  rankId = RankTypesId.DOLPHIN,
+}: ZigWalletIndicatorProps) => {
   const renderZigsCoins = useMemo(
     () => (
       <NumberFormat
@@ -41,8 +38,8 @@ const ZigWalletIndicator = ({
   const renderLevel = useMemo(
     () => (
       <styled.Level>
-        <styled.RankIcon src={rankTypes[rankId].icon} />
-        <Typography variant={"h6"}>{rankTypes[rankId].name}</Typography>
+        <styled.RankIcon src={RankTypes[rankId].icon} />
+        <Typography variant={"h6"}>{RankTypes[rankId].name}</Typography>
       </styled.Level>
     ),
     [rankId],
@@ -59,4 +56,5 @@ const ZigWalletIndicator = ({
   );
 };
 
+export { RankTypes, RankTypesId };
 export default ZigWalletIndicator;

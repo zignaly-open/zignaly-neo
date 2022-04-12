@@ -5,8 +5,7 @@ import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
 // Types
-import { buttonVariantsId } from "types/buttons";
-import { sizeTypesId } from "types/sizes";
+import { ButtonVariants, ButtonSizes } from "./inputs/Button";
 
 export const ButtonGroup = styled.div`
   display: grid;
@@ -17,7 +16,7 @@ export const ButtonGroup = styled.div`
   `}
 `;
 
-export const Button = styled.button<{ size: sizeTypesId; variant: buttonVariantsId }>`
+export const Button = styled.button<{ size: ButtonSizes; variant: ButtonVariants }>`
   /* Auto layout */
   display: flex;
   flex-direction: row;
@@ -31,23 +30,23 @@ export const Button = styled.button<{ size: sizeTypesId; variant: buttonVariants
     cursor: default;
   }
 
-  ${(props) => `
+  ${(props: any) => `
     ${styledIf(
-      props.size === sizeTypesId.SMALL,
+      props.size === ButtonSizes.SMALL,
       `
       padding: 8px 18px;
     `,
     )}
   
     ${styledIf(
-      props.variant === buttonVariantsId.PRIMARY,
+      props.variant === ButtonVariants.PRIMARY,
       `
       background-color: red;
     `,
     )}  
     
     ${styledIf(
-      props.variant !== buttonVariantsId.PLACEHOLDER,
+      props.variant !== ButtonVariants.GHOST,
       `
       cursor: pointer;
     `,

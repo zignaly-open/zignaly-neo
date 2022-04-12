@@ -3,7 +3,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 // Assets
-import EditPenIcon from "@assets/icons/edit-pen-icon.svg";
+import EditPenIcon from "assets/icons/edit-pen-icon.svg";
 
 // Component
 import TableButton from "./index";

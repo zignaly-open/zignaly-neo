@@ -10,8 +10,5 @@ export const Value = styled.span`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  ${({ theme }) => `
-    color: ${theme.dateLabel.textColor};
-  `}
+  color: #f3f4f6;
 `;

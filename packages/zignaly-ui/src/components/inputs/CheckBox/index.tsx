@@ -5,14 +5,10 @@ import React, { useCallback, useState } from "react";
 import { Layout, Box, Label, Icon } from "./styles";
 
 // Assets
-import CheckmarkIcon from "../../../assets/icons/checkmark-icon.svg";
+import CheckmarkIcon from "assets/icons/checkmark-icon.svg";
 
-type CheckBoxProps = {
-  value: boolean;
-  label: string;
-  onChange?: Function;
-  disabled?: boolean;
-};
+// Types
+import { CheckBoxProps } from "./types";
 
 function CheckBox({ value, label, disabled = false, onChange = () => {} }: CheckBoxProps) {
   const [isChecked, setChecked] = useState(value ?? false);

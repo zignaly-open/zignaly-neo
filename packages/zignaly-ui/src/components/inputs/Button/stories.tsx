@@ -6,8 +6,8 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Button, { ButtonSizes, ButtonVariants } from "./";
 
 // Assets
-import CloseIcon from "../../../assets/icons/close-icon.svg";
-import ArrowDown from "../../../assets/icons/arrow-bottom-icon.svg";
+import CloseIcon from "assets/icons/close-icon.svg";
+import ArrowDown from "assets/icons/arrow-bottom-icon.svg";
 
 export default {
   title: "Inputs/Button",
@@ -38,11 +38,6 @@ export default {
     caption: {
       control: { type: "text" },
       label: "Change Caption",
-    },
-    onClick: {
-      table: {
-        disable: true,
-      },
     },
   },
 } as ComponentMeta<typeof Button>;
