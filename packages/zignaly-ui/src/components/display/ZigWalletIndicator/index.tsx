@@ -1,6 +1,6 @@
 // Dependencies
 import React, { useMemo } from "react";
-import { BigNumber, utils } from "ethers";
+import { utils } from "ethers";
 import NumberFormat from "react-number-format";
 
 // Styles
@@ -22,7 +22,7 @@ const ZigWalletIndicator = ({
   const renderZigsCoins = useMemo(
     () => (
       <NumberFormat
-        value={utils.formatUnits(BigNumber.from(zigs))}
+        value={utils.formatUnits((zigs || "0").toString())}
         displayType={"text"}
         thousandSeparator={true}
         renderText={(value) => (

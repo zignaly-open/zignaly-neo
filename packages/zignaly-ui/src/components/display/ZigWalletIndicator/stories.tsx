@@ -11,10 +11,11 @@ export default {
   argTypes: {
     zigs: {
       control: "text",
+      defaultValue: "1000000000000000000",
     },
     rankId: {
       control: "select",
-      default: RankTypesId.WHALE,
+      defaultValue: RankTypesId.WHALE,
       options: [RankTypesId.WHALE, RankTypesId.DOLPHIN],
     },
   },

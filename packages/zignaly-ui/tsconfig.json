@@ -1,15 +1,9 @@
 {
   "compilerOptions": {
     "jsx": "react",
+    "outDir": "./lib",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "src",
-    "paths": {
-      "assets/*": ["./src/assets/*"],
-      "components/*": ["./src/components/*"],
-      "utils/*": ["./src/utils/*"],
-      "hooks/*": ["./src/hooks/*"]
-    },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitReturns": true,
@@ -21,8 +15,18 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "es2021",
-    "module": "es2022"
+    "module": "commonjs",
+    "baseUrl": "src",
+    "paths": {
+      "assets/*": ["./src/assets/*"],
+      "components/*": ["./src/components/*"],
+      "utils/*": ["./src/utils/*"],
+      "hooks/*": ["./src/hooks/*"]
+    },
+    "noEmit": true
   },
-  "include": ["src/**/*"],
+  "include": [
+    "src"
+  ],
   "exclude": ["node_modules"]
 }

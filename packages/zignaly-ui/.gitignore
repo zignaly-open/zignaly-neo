@@ -112,3 +112,4 @@ lib
 *.DS_Store
 
 .jest-test-results.json
+lib/
