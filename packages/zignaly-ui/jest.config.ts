@@ -7,6 +7,8 @@ const config: Config.InitialOptions = {
   testEnvironment: "jsdom",
   transform: {
     "\\.[jt]sx?$": "babel-jest",
+    "\\.ts$": "ts-jest",
+    "^.+\\.svg$": "<rootDir>/svgTransform.js",
   },
   moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json"],
   moduleNameMapper: {
