@@ -12,7 +12,8 @@
     "build": "tsc && tsc-alias && npm run copy-files",
     "copy-files": "cp -R src/assets lib/assets",
     "lint": "eslint --fix src --ext .js,.jsx,.ts,.tsx",
-    "format": "prettier --write src --config ./.prettierrc"
+    "format": "prettier --write src --config ./.prettierrc",
+    "chromatic": "npx chromatic --project-token=e5c345734579"
   },
   "repository": {
     "type": "git",
@@ -47,6 +48,7 @@
     "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.4",
     "babel-plugin-module-resolver": "^4.1.0",
+    "chromatic": "^6.5.4",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.4.0",
