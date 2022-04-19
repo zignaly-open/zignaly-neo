@@ -11,16 +11,13 @@ export default {
       control: "select",
       options: ["h1", "h2", "h3", "h4", "h5", "body1", "body2"],
     },
-    size: {
+    weight: {
       control: "select",
-      options: [
-        "medium",
-        "regular",
-        "demibold",
-        "demiboldUnderlined",
-        "mediumUnderlined",
-        "regularUnderlined",
-      ],
+      options: ["medium", "regular", "demibold"],
+    },
+    underline: {
+      control: "radio",
+      options: [true, false],
     },
     style: {
       control: "select",
@@ -32,11 +29,6 @@ export default {
       },
     },
     component: {
-      table: {
-        disable: true,
-      },
-    },
-    weight: {
       table: {
         disable: true,
       },

@@ -60,30 +60,6 @@ export const Layout = styled.h1<{ color: string }>`
       line-height: 24px;
       letter-spacing: 0.33px;
     }
-
-    &.regularUnderlined {
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 24px;
-      letter-spacing: 0.33px;
-      text-decoration-line: underline;
-    }
-
-    &.mediumUnderlined {
-      font-size: 15px;
-      font-weight: 500;
-      line-height: 24px;
-      letter-spacing: 0.33px;
-      text-decoration-line: underline;
-    }
-
-    &.demiboldUnderlined {
-      font-weight: 600;
-      font-size: 15px;
-      line-height: 24px;
-      letter-spacing: 0.33px;
-      text-decoration-line: underline;
-    }
   }
 
   &.body2 {
@@ -107,30 +83,6 @@ export const Layout = styled.h1<{ color: string }>`
       line-height: 24px;
       letter-spacing: 0.33px;
     }
-
-    &.regularUnderlined {
-      font-size: 13px;
-      font-weight: 400;
-      line-height: 24px;
-      letter-spacing: 0.33px;
-      text-decoration-line: underline;
-    }
-
-    &.mediumUnderlined {
-      font-size: 13px;
-      font-weight: 500;
-      line-height: 24px;
-      letter-spacing: 0.33px;
-      text-decoration-line: underline;
-    }
-
-    &.demiboldUnderlined {
-      font-weight: 600;
-      font-size: 13px;
-      line-height: 24px;
-      letter-spacing: 0.33px;
-      text-decoration-line: underline;
-    }
   }
 
   ${(props: any) => `
@@ -140,6 +92,12 @@ export const Layout = styled.h1<{ color: string }>`
       props.color,
       `
       color: ${props.color};
+    `,
+    )}
+    ${styledIf(
+      props.underline,
+      `
+      text-decoration-line: underline;
     `,
     )}
   `}
