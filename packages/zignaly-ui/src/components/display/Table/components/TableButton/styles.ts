@@ -7,7 +7,6 @@ export const Layout = styled(Button)<React.ComponentProps<typeof Button>>`
   border: 1px dashed #4a4958;
   border-radius: 4px;
   color: #fff;
-
   &:hover {
     background: rgba(17, 19, 45, 0.8);
   }
