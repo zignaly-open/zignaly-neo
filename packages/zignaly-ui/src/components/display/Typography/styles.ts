@@ -139,7 +139,7 @@ export const Layout = styled.h1<{ color: string }>`
     ${styledIf(
       props.color,
       `
-      color: ${props.color} !important;
+      color: ${props.color};
     `,
     )}
   `}
