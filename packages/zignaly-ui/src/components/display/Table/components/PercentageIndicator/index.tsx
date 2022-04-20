@@ -3,8 +3,8 @@ import React from "react";
 import NumberFormat from "react-number-format";
 
 // Assets
-import ArrowChartUpIcon from "../../../../../assets/icons/arrow-chart-up-icon.svg";
-import ArrowChartDownIcon from "../../../../../assets/icons/arrow-chart-down-icon.svg";
+import ArrowChartUpIcon from "assets/icons/arrow-chart-up-icon.svg";
+import ArrowChartDownIcon from "assets/icons/arrow-chart-down-icon.svg";
 
 // Styled Components
 import * as styled from "./styles";

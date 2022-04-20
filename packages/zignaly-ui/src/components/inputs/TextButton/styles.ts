@@ -49,7 +49,7 @@ export const CenterIcon = styled.img<IconProps>`
  */
 interface LayoutProps {
   withElements: Boolean;
-  underline: Boolean;
+  underline?: Boolean;
 }
 
 export const Layout = styled.button<LayoutProps>`
@@ -60,7 +60,7 @@ export const Layout = styled.button<LayoutProps>`
   position: relative;
   user-select: none;
   background: transparent;
-  ${({ withElements, underline }: LayoutProps) => `
+  ${({ withElements, underline }) => `
       
       ${Container} {
         padding: 8px 18px;

@@ -15,6 +15,7 @@ type IconButtonProps = {
 
 const IconButton = ({ variant = IconButtonVariants.PRIMARY, icon, onClick }: IconButtonProps) => {
   return (
+    // @ts-ignore
     <styled.Layout variant={variant} size={IconButtonSizes.MEDIUM} onClick={onClick}>
       <styled.Icon src={icon} />
     </styled.Layout>

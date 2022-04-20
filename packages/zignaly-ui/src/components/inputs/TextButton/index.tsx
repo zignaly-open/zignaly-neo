@@ -6,19 +6,19 @@ import { ReactElement, useMemo } from "react";
 import * as styled from "./styles";
 
 type ButtonProps = {
-  caption?: String | null;
-  icon?: ReactElement<any> | String | null;
-  leftElement?: ReactElement<any> | String | null;
-  rightElement?: ReactElement<any> | String | null;
-  underline?: boolean | null;
+  caption?: String;
+  icon?: ReactElement<any> | String;
+  leftElement?: ReactElement<any> | String;
+  rightElement?: ReactElement<any> | String;
+  underline?: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 function TextButton({
   caption = "Button",
-  leftElement = null,
-  rightElement = null,
-  underline = null,
+  leftElement,
+  rightElement,
+  underline,
   onClick = () => {},
 }: ButtonProps): ReactElement {
   /**
@@ -52,7 +52,6 @@ function TextButton({
   );
   return (
     <styled.Layout
-      caption={caption}
       underline={underline}
       withElements={!!leftElement || !!rightElement}
       onClick={onClick}

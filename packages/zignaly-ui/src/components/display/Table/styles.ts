@@ -107,7 +107,7 @@ export const SortIcon = styled.img<{ isSortedDesc?: boolean }>`
   margin-left: 6px;
   transition: all 0.1s linear;
 
-  ${(props: any) => `
+  ${(props) => `
      ${styledIf(
        props.isSortedDesc,
        `

@@ -8,7 +8,7 @@ export const Value = styled.span<{ isPositive: boolean }>`
   font-size: 12px;
   line-height: 16px;
 
-  ${({ isPositive }: any) => `
+  ${({ isPositive }) => `
     color: ${isPositive ? "#26C4C1" : "#CC3993"};
   `}
 `;

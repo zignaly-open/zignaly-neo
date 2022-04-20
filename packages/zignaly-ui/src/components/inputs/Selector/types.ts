@@ -19,4 +19,6 @@ export type SelectProps = {
   disabled?: boolean;
   initialSelectedIndex: number | null;
   onSelectItem: any;
+  mode?: "default" | "collapsed";
+  className?: string;
 };

@@ -21,6 +21,8 @@ function Select({
   initialSelectedIndex = null,
   options = [],
   onSelectItem = () => {},
+  className,
+  mode,
 }: SelectProps): ReactElement {
   // Ref
   const selectorRef = useRef(null);
@@ -50,28 +52,36 @@ function Select({
   });
 
   return (
-    <styled.Layout size={size} isActiveMenu={isActiveMenu} disabled={disabled} ref={selectorRef}>
+    <styled.Layout
+      className={className}
+      size={size}
+      isActiveMenu={isActiveMenu}
+      disabled={disabled}
+      ref={selectorRef}
+      collapsed={mode === "collapsed" && !isActiveMenu}
+    >
       {label && <styled.Label htmlFor={name}>{label}</styled.Label>}
       <styled.Container onClick={() => setMenuActive(!isActiveMenu)}>
-        {selectedItem ? (
-          <>
-            {selectedItem.leftElement && (
-              <styled.LeftElement>
-                {typeof selectedItem.leftElement === "function" ? (
-                  selectedItem.leftElement
-                ) : (
-                  <styled.LeftElementIcon
-                    src={selectedItem.leftElement}
-                    alt={selectedItem.caption}
-                  />
-                )}
-              </styled.LeftElement>
-            )}
-            <styled.Value>{selectedItem.caption}</styled.Value>
-          </>
-        ) : (
-          <styled.Placeholder>{placeholder}</styled.Placeholder>
-        )}
+        {mode !== "collapsed" &&
+          (selectedItem ? (
+            <>
+              {selectedItem.leftElement && (
+                <styled.LeftElement>
+                  {typeof selectedItem.leftElement === "object" ? (
+                    selectedItem.leftElement
+                  ) : (
+                    <styled.LeftElementIcon
+                      src={selectedItem.leftElement}
+                      alt={selectedItem.caption}
+                    />
+                  )}
+                </styled.LeftElement>
+              )}
+              <styled.Value>{selectedItem.caption}</styled.Value>
+            </>
+          ) : (
+            <styled.Placeholder>{placeholder}</styled.Placeholder>
+          ))}
         <styled.ArrowContainer>
           <styled.Arrow src={CaretDownIcon} alt={label} />
         </styled.ArrowContainer>
@@ -86,7 +96,7 @@ function Select({
             <styled.Item key={`--${index.toString()}`} onClick={() => handleClickItem(index + 1)}>
               {leftElement && (
                 <styled.LeftElement>
-                  {typeof leftElement === "function" ? (
+                  {typeof leftElement === "object" ? (
                     leftElement
                   ) : (
                     <styled.LeftElementIcon src={leftElement} alt={caption} />

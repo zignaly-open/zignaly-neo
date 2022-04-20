@@ -23,8 +23,8 @@ import {
 
 // Components
 import Row from "./components/Row";
-import IconButton, { IconButtonVariants } from "../../inputs/IconButton";
-import CheckBox from "../../inputs/CheckBox";
+import IconButton, { IconButtonVariants } from "components/inputs/IconButton";
+import CheckBox from "components/inputs/CheckBox";
 
 const Table = ({ columns = [], data = [] }: { columns: Column<any>[]; data: Object[] }) => {
   const menuRef = useRef(null);

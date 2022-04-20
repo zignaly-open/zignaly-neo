@@ -44,3 +44,10 @@ Default.args = {
   placeholder: "Select your currency",
   options,
 };
+
+export const Collapsed = Template.bind({});
+Collapsed.args = {
+  label: "",
+  mode: "collapsed",
+  options,
+};

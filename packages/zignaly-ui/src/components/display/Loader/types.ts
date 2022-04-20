@@ -30,4 +30,5 @@ export type LoaderProps = {
   secondaryColor?: string;
   ariaLabel: string;
   strokeWidth?: string;
+  className?: string;
 };

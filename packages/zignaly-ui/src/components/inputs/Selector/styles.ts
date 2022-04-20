@@ -112,6 +112,7 @@ type LayoutProps = {
   size?: SelectSizes;
   disabled?: boolean;
   isActiveMenu: boolean;
+  collapsed: boolean;
 };
 
 export const Layout = styled.div<LayoutProps>`
@@ -201,6 +202,21 @@ export const Layout = styled.div<LayoutProps>`
       ${Container}, ${Item} {
         padding: 10px 13.86px;
       }
+      
+
+    ${styledIf(
+      props.collapsed,
+      `
+      ${Container} {
+        min-width: 0;
+        padding: 2px 9px;
+      }
+
+      ${Arrow}{
+        margin: 0;
+        }
+      `,
+    )}
     `,
     )}
     
