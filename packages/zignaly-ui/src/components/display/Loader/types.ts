@@ -1,3 +1,4 @@
+import { FunctionComponent } from "react";
 import * as LoaderSource from "react-loader-spinner";
 
 export enum LoaderTypes {
@@ -16,10 +17,10 @@ export const componentsByType = {
   [LoaderTypes.BARS]: LoaderSource.Bars,
   [LoaderTypes.CIRCLES]: LoaderSource.Circles,
   [LoaderTypes.FALLING_LINES]: LoaderSource.FallingLines,
-  [LoaderTypes.GRID]: LoaderSource.Grid,
-  [LoaderTypes.OVAL]: LoaderSource.Oval,
-  [LoaderTypes.TAILSPIN]: LoaderSource.TailSpin,
-  [LoaderTypes.THREE_DOTS]: LoaderSource.ThreeDots,
+  [LoaderTypes.GRID]: LoaderSource.Grid as FunctionComponent,
+  [LoaderTypes.OVAL]: LoaderSource.Oval as FunctionComponent,
+  [LoaderTypes.TAILSPIN]: LoaderSource.TailSpin as FunctionComponent,
+  [LoaderTypes.THREE_DOTS]: LoaderSource.ThreeDots as FunctionComponent,
 };
 
 export type LoaderProps = {

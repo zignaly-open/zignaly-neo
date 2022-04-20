@@ -23,6 +23,7 @@ function Loader({
       height={height}
       color={color}
       ariaLabel={ariaLabel}
+      // @ts-ignore
       secondaryColor={secondaryColor}
       strokeWidth={strokeWidth}
       wrapperClass={className}

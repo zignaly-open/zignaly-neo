@@ -10,11 +10,12 @@
     "allowSyntheticDefaultImports": true,
     "baseUrl": "src",
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "plugins": [
       {
         "name": "typescript-styled-plugin"
       }
-    ]
+    ],
   },
   "include": [
     "src"

@@ -75,8 +75,8 @@
     "babel-jest": "^27.5.1",
     "babel-loader": "^8.2.4",
     "babel-plugin-module-resolver": "^4.1.0",
-    "copy-webpack-plugin": "^10.2.4",
     "chromatic": "^6.5.4",
+    "copy-webpack-plugin": "^10.2.4",
     "eslint": "^7.32.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-prettier": "^8.4.0",
@@ -90,10 +90,8 @@
     "eslint-plugin-storybook": "^0.5.7",
     "extract-loader": "^5.1.0",
     "fork-ts-checker-webpack-plugin": "^7.2.3",
-    "husky": "^4.3.8",
     "jest": "^27.5.1",
     "jest-dom": "^4.0.0",
-    "lint-staged": "12.3.4",
     "prettier": "^2.6.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -128,11 +126,5 @@
       "^@utils(.*)$": "<rootDir>/src/utils$1",
       "^@types(.*)$": "<rootDir>/src/types$1"
     }
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
-      "npm run lint",
-      "npm run format"
-    ]
   }
 }
