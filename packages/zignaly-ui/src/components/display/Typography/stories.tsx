@@ -44,5 +44,4 @@ const Template: ComponentStory<typeof Typography> = (args) => <Typography {...ar
 export const Text = Template.bind({});
 Text.args = {
   children: "Example Title",
-  variant: "h1",
 };

@@ -11,12 +11,19 @@ export const componentByVariants = {
   number: "span",
 };
 
+export enum weightByType {
+  medium = "medium",
+  demibold = "demibold",
+  regular = "regular",
+}
+
 export interface TypographyProps {
   variant?: keyof typeof componentByVariants;
-  size?: string;
+  weight?: weightByType;
   style?: any;
-  component?: any;
   className?: string;
+  component?: any;
   color?: string;
+  underline?: boolean;
   children: React.ReactNode;
 }

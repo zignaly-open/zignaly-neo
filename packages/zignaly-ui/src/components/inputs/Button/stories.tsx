@@ -19,6 +19,14 @@ export default {
     },
   },
   argTypes: {
+    size: {
+      options: ["small", "normal", "large", "xlarge"],
+      control: { type: "select" },
+    },
+    variant: {
+      options: ["primary", "secondary"],
+      control: { type: "select" },
+    },
     rightElement: {
       options: { Show: ArrowDown, Hide: null },
       control: { type: "radio" },
@@ -38,6 +46,11 @@ export default {
     caption: {
       control: { type: "text" },
       label: "Change Caption",
+    },
+    onClick: {
+      table: {
+        disable: true,
+      },
     },
   },
 } as ComponentMeta<typeof Button>;

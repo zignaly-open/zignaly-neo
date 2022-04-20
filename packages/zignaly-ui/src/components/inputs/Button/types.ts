@@ -4,7 +4,6 @@ import * as React from "react";
 export enum ButtonVariants {
   PRIMARY = "primary",
   SECONDARY = "secondary",
-  GHOST = "ghost",
 }
 
 export enum ButtonSizes {

@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
-export const Layout = styled.h1<{ color: string }>`
+export const Layout = styled.h1<{ color: string; underline: boolean; weight: string }>`
   font-family: "Avenir", sans-serif;
   margin: 0;
 
@@ -40,49 +40,15 @@ export const Layout = styled.h1<{ color: string }>`
   }
 
   &.body1 {
-    &.regular {
-      font-size: 15px;
-      font-weight: 400;
-      line-height: 24px;
-      letter-spacing: 0.33px;
-    }
-
-    &.medium {
-      font-size: 15px;
-      font-weight: 500;
-      line-height: 24px;
-      letter-spacing: 0.33px;
-    }
-
-    &.demibold {
-      font-weight: 600;
-      font-size: 15px;
-      line-height: 24px;
-      letter-spacing: 0.33px;
-    }
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: 0.33px;
   }
 
   &.body2 {
-    &.regular {
-      font-size: 13px;
-      font-weight: 400;
-      line-height: 24px;
-      letter-spacing: 0.33px;
-    }
-
-    &.medium {
-      font-size: 13px;
-      font-weight: 500;
-      line-height: 24px;
-      letter-spacing: 0.33px;
-    }
-
-    &.demibold {
-      font-weight: 600;
-      font-size: 13px;
-      line-height: 24px;
-      letter-spacing: 0.33px;
-    }
+    font-size: 13px;
+    line-height: 24px;
+    letter-spacing: 0.33px;
   }
 
   ${(props: any) => `
@@ -98,6 +64,24 @@ export const Layout = styled.h1<{ color: string }>`
       props.underline,
       `
       text-decoration-line: underline;
+    `,
+    )}
+    ${styledIf(
+      props.weight === "demibold",
+      `
+      font-weight: 600;
+    `,
+    )}
+    ${styledIf(
+      props.weight === "regular",
+      `
+      font-weight: 400;
+    `,
+    )}
+    ${styledIf(
+      props.weight === "medium",
+      `
+      font-weight: 500;
     `,
     )}
   `}
