@@ -60,4 +60,6 @@ export {
   CloseIcon,
   // Navigation
   Tabs,
+  TabPanel,
+  Tab,
 };
