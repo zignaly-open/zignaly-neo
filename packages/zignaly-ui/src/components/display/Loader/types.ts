@@ -8,8 +8,8 @@ export enum LoaderTypes {
   FALLING_LINES = "falling_lines",
   GRID = "grid",
   OVAL = "oval",
-  TAILSPIN = "tailspin",
-  THREE_DOTS = "three_dots",
+  TAILSPIN = "tail-spin",
+  THREE_DOTS = "three-dots",
 }
 
 export const componentsByType = {

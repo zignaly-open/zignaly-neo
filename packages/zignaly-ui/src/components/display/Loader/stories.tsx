@@ -8,6 +8,9 @@ import Loader, { LoaderTypes } from "./";
 export default {
   title: "Display/Loader",
   component: Loader,
+  parameters: {
+    jest: ["test.tsx"],
+  },
 } as ComponentMeta<typeof Loader>;
 
 const Template: ComponentStory<typeof Loader> = (args) => <Loader {...args} />;

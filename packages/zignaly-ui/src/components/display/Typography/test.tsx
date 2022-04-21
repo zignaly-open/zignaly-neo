@@ -61,6 +61,23 @@ describe("components/display/Typography", () => {
 
     expect(container.firstChild.classList.contains("body")).toBe(true);
   });
+  it("renders the typography with the class body and tag span when no variant is provided", () => {
+    const { container } = render(<Typography>Example Test</Typography>);
+
+    const tag = container.querySelector("span");
+    expect(tag).toBeVisible();
+
+    expect(container.firstChild.classList.contains("body")).toBe(true);
+  });
+
+  it("renders the typography with className provided in style", () => {
+    const { container } = render(<Typography style={"css"}>Example Test</Typography>);
+
+    const tag = container.querySelector("span");
+    expect(tag).toBeVisible();
+
+    expect(container.firstChild.classList.contains("style-css")).toBe(true);
+  });
 
   it("renders the typography with the content in the children.", () => {
     render(<Typography variant={"body"}>Example Test</Typography>);

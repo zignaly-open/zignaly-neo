@@ -21,6 +21,9 @@ export default {
       control: "text",
     },
   },
+  parameters: {
+    jest: ["test.tsx"],
+  },
 } as ComponentMeta<typeof Avatar>;
 
 const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args} />;
