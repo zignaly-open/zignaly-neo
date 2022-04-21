@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
 export const Label = styled.label`
+  font-family: "Avenir", sans-serif;
   font-weight: 500;
   font-size: 15px;
   line-height: 24px;
@@ -11,12 +12,12 @@ export const Label = styled.label`
 `;
 
 export const InputContainer = styled.div`
-  border: 1px solid #413ba0;
-  padding: 12px 18px;
+  border: 1px solid #35334a;
+  padding: 8px 18px;
   border-radius: 5px;
   display: flex;
   align-items: center;
-  background: #0c0d21;
+  background: rgba(16, 18, 37, 0.7);
   margin-top: 4px;
   gap: 22px;
   margin-bottom: 16px;
@@ -33,8 +34,8 @@ export const InputValue = styled.input`
   border: none;
   color: #f3f4f6;
   outline: none;
-  font-weight: 500;
-  font-size: 32px;
+  font-weight: 400;
+  font-size: 15px;
   line-height: 40px;
   letter-spacing: 0.66px;
   width: 100%;

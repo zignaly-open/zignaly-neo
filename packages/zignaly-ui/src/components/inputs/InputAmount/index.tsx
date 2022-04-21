@@ -25,15 +25,18 @@ import ErrorMessage from "components/display/ErrorMessage";
 // Types
 import { InputAmountProps, TokenItem } from "./types";
 
-function InputAmount({
-  onChange,
-  tokens = [],
-  error = null,
-  disabled = false,
-  initialTokenIndex = 0,
-  label = "Amount to Withdraw",
-  value = BigNumber.from(0),
-}: InputAmountProps) {
+function InputAmount(
+  {
+    onChange,
+    tokens = [],
+    error = null,
+    disabled = false,
+    initialTokenIndex = 0,
+    label = "Amount to Withdraw",
+    value = BigNumber.from(0),
+  }: InputAmountProps,
+  inputRef: React.Ref<any>,
+) {
   // Hooks
   const [inputValue, setInputValue] = useState("");
   const [selectedToken, setSelectedToken] = useState(tokens[initialTokenIndex] ?? null);
@@ -130,6 +133,7 @@ function InputAmount({
         <Side>
           {selectedToken && tokens.length < 2 && <TokenImage src={selectedToken.image} />}
           <InputValue
+            ref={inputRef}
             value={inputValue}
             type={"text"}
             placeholder={"0.0"}
@@ -170,4 +174,4 @@ function InputAmount({
   );
 }
 
-export default InputAmount;
+export default React.forwardRef(InputAmount);

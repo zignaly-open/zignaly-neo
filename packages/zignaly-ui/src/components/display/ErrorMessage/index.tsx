@@ -14,7 +14,9 @@ function ErrorMessage({ text }: ErrorMessageProps) {
   return (
     <Layout>
       <Icon width={"18px"} height={"18px"} src={ErrorAlertIcon} alt={text} />
-      <Text>{text}</Text>
+      <Text variant={"h4"} as={"span"}>
+        {text}
+      </Text>
     </Layout>
   );
 }
