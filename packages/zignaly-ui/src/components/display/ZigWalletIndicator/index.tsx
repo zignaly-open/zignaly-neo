@@ -39,7 +39,7 @@ const ZigWalletIndicator = ({
     () => (
       <styled.Level>
         <styled.RankIcon src={RankTypes[rankId].icon} />
-        <Typography variant={"h6"}>{RankTypes[rankId].name}</Typography>
+        <Typography variant={"h5"}>{RankTypes[rankId].name}</Typography>
       </styled.Level>
     ),
     [rankId],

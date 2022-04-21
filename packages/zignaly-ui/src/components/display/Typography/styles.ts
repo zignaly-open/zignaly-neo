@@ -3,20 +3,19 @@ import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
 export const Layout = styled.h1<{ color: string; underline: boolean; weight: string }>`
-  font-family: "Avenir", sans-serif;
+  font-family: "Avenir next","Red Hat Text", sans-serif;
   margin: 0;
+  letter-spacing: 0.55px;
 
   &.h1 {
     font-weight: 500;
     font-size: 22px;
     line-height: 36px;
-    letter-spacing: 1px;
   }
 
   &.h2 {
     font-size: 18px;
     line-height: 28px;
-    letter-spacing: 0.66px;
     font-weight: 500;
   }
 
@@ -24,7 +23,6 @@ export const Layout = styled.h1<{ color: string; underline: boolean; weight: str
     font-size: 15px;
     line-height: 24px;
     font-weight: 500;
-    letter-spacing: 0.33px;
   }
 
   &.h4 {
@@ -38,17 +36,21 @@ export const Layout = styled.h1<{ color: string; underline: boolean; weight: str
     font-size: 11px;
     line-height: 16px;
   }
+  
+  &.bigNumber {
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 40px;
+  }
 
   &.body1 {
     font-size: 15px;
     line-height: 24px;
-    letter-spacing: 0.33px;
   }
 
   &.body2 {
     font-size: 13px;
-    line-height: 24px;
-    letter-spacing: 0.33px;
+    line-height: 20px;
   }
 
   ${(props: any) => `
@@ -85,8 +87,4 @@ export const Layout = styled.h1<{ color: string; underline: boolean; weight: str
     `,
     )}
   `}
-
-  &.style-number {
-    letter-spacing: 1px;
-  }
 `;
