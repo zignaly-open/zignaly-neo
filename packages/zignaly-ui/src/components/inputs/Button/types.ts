@@ -22,4 +22,5 @@ export type ButtonProps = {
   rightElement?: ReactElement<any> | String | null;
   disabled?: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
 };

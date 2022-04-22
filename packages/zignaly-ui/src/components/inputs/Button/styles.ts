@@ -93,7 +93,7 @@ export const Layout = styled.button<LayoutProps>`
     cursor: default;
   }
 
-  ${({ size, variant, withElements, onlyIcon }: any) => `
+  ${({ size, variant, withElements, onlyIcon }) => `
  
      ${styledIf(
        onlyIcon,

@@ -1,4 +1,5 @@
 import { BigNumber } from "ethers";
+import { ChangeEventHandler } from "react";
 
 export type TokenItem = {
   id: string | number;
@@ -7,12 +8,14 @@ export type TokenItem = {
   balance: string | number;
 };
 
-export type InputAmountProps = {
+export interface InputAmountProps {
   label: string;
   value: BigNumber;
   onChange: Function;
+  onBlur?: ChangeEventHandler<HTMLInputElement>;
   disabled: boolean;
   tokens?: TokenItem[];
   error?: string | null;
   initialTokenIndex?: number;
-};
+  name?: string;
+}

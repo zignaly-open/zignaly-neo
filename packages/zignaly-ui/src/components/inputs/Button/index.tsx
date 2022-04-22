@@ -17,6 +17,7 @@ function Button({
   rightElement = null,
   disabled = false,
   onClick = () => {},
+  type,
 }: ButtonProps): ReactElement {
   /**
    * @function renderLeftElement
@@ -79,6 +80,7 @@ function Button({
       variant={variant}
       size={size}
       onClick={onClick}
+      type={type}
     >
       <styled.Container>
         {leftElement && <styled.LeftElement>{renderLeftElement}</styled.LeftElement>}
