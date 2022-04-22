@@ -16,8 +16,8 @@ export const Box = styled.div`
   justify-content: center;
 
   background: #0c0d21;
-  border: 1px solid #413ba0;
-  border-radius: 4px;
+  border: 1px solid #706f82;
+  border-radius: 2.5px;
   position: relative;
 
   width: 18px;
@@ -28,7 +28,7 @@ export const Box = styled.div`
 export const Label = styled.span`
   color: #ffffff;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 13px;
   line-height: 20px;
   letter-spacing: 0.33px;
   margin: 0 12px;
@@ -45,16 +45,18 @@ export const Layout = styled.div<LayoutProps>`
   user-select: none;
   align-items: center;
 
-  ${({ isActive }: any) => `
+  ${({ isActive }) => `
     ${styledIf(
       isActive,
       `
       ${Box} {
-        border-color: #5A51F5;
-        box-shadow: 0 0 0 1px #5A51F5;
+        border-color: #706f82;
+        box-shadow: 0 0 0 1px #706f82;
+        color: #7682f7;
       }
       ${Icon} {
         transform: scale(1);
+        color: #7682f7;
       }
     `,
     )}

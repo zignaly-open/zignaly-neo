@@ -14,6 +14,21 @@ export default {
       url: "https://www.figma.com/file/VaAFxJqlZERpeEHw5S5coY/Buttons?node-id=402%3A963",
     },
   },
+  argTypes: {
+    disabled: {
+      options: [true,false],
+      control: { type: "radio" },
+    },
+    label: {
+      control: "text",
+    },
+    onChange: {
+      disabled: true
+    },
+    value: {
+      disabled: true,
+    }
+  },
 } as ComponentMeta<typeof CheckBox>;
 
 const Template: ComponentStory<typeof CheckBox> = (args) => <CheckBox {...args} />;
@@ -30,8 +45,8 @@ Default.args = {
 export const Disabled = Template.bind({});
 Disabled.args = {
   label: "Type Something",
-  value: true,
   disabled: true,
+  value: false,
   onChange: (isActive: boolean) => {
     console.log("onChnage: ", isActive);
   },

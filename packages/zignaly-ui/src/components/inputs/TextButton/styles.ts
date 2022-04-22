@@ -26,7 +26,6 @@ export const LeftElement = styled.div`
 export const RightElement = styled(LeftElement)`
   padding-right: 0;
   padding-left: 10px;
-  color: #26c4c1;
 `;
 
 /**
@@ -66,11 +65,11 @@ export const Layout = styled.button<LayoutProps>`
         padding: 8px 18px;
         min-width: 88px;  
         font-size: 13px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 20px;
-            letter-spacing: 0px;
-            text-align: center;    
+        font-style: normal;
+        font-weight: 400;
+        line-height: 20px;
+        letter-spacing: 0.55px;
+        text-align: center;    
       }
             
       ${styledIf(
@@ -99,8 +98,8 @@ export const Layout = styled.button<LayoutProps>`
       
       ${LeftElement} {
         img {
-          width: 8px;
-          height: 8px;
+          width: 12px;
+          height: 12px;
         }
       }
       
