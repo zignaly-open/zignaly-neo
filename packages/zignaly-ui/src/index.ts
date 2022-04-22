@@ -28,6 +28,8 @@ import CloseIcon from "./assets/icons/close-icon.svg";
 import Tabs from "components/navigation/Tabs";
 import TabPanel from "components/navigation/Tabs/components/TabPanel";
 import Tab from "components/navigation/Tabs/components/Tab";
+import ThemeProvider from "utils/ThemeProvider";
+import { dark, light} from "theme";
 
 export {
   /**
@@ -62,4 +64,7 @@ export {
   Tabs,
   TabPanel,
   Tab,
+  ThemeProvider,
+  dark, 
+  light,
 };

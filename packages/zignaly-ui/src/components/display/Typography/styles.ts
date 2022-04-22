@@ -2,8 +2,18 @@
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
+const getWeight = (weight: string) => {
+  if (weight === "demibold") {
+    return 600;
+  } else if (weight === "medium") {
+    return 500;
+  } else {
+    return 400;
+  }
+};
+
 export const Layout = styled.h1<{ color: string; underline: boolean; weight: string }>`
-  font-family: "Avenir next","Red Hat Text", sans-serif;
+  font-family: "Avenir next", "Red Hat Text", sans-serif;
   margin: 0;
   letter-spacing: 0.55px;
 
@@ -36,7 +46,7 @@ export const Layout = styled.h1<{ color: string; underline: boolean; weight: str
     font-size: 11px;
     line-height: 16px;
   }
-  
+
   &.bigNumber {
     font-weight: 500;
     font-size: 26px;
@@ -53,13 +63,13 @@ export const Layout = styled.h1<{ color: string; underline: boolean; weight: str
     line-height: 20px;
   }
 
-  ${(props: any) => `
+  ${(props) => `
     color: inherit;
 
     ${styledIf(
       props.color,
       `
-      color: ${props.color};
+      color: ${props.theme[props.color]};    
     `,
     )}
     ${styledIf(
@@ -69,21 +79,9 @@ export const Layout = styled.h1<{ color: string; underline: boolean; weight: str
     `,
     )}
     ${styledIf(
-      props.weight === "demibold",
+      props.weight,
       `
-      font-weight: 600;
-    `,
-    )}
-    ${styledIf(
-      props.weight === "regular",
-      `
-      font-weight: 400;
-    `,
-    )}
-    ${styledIf(
-      props.weight === "medium",
-      `
-      font-weight: 500;
+      font-weight: ${getWeight(props.weight)};
     `,
     )}
   `}

@@ -60,7 +60,7 @@ export const Layout = styled.button<LayoutProps>`
   position: relative;
   user-select: none;
   background: transparent;
-  ${({ withElements, underline }) => `
+  ${(props) => `
       
       ${Container} {
         padding: 8px 18px;
@@ -74,7 +74,7 @@ export const Layout = styled.button<LayoutProps>`
       }
             
       ${styledIf(
-        withElements,
+        props.withElements,
         `
         ${Container} {
           padding: 8px 18px;
@@ -82,7 +82,7 @@ export const Layout = styled.button<LayoutProps>`
       `,
       )}
       ${styledIf(
-        underline,
+        props.underline,
         `
       ${Container} { 
             text-decoration-color: #26C4C1;
@@ -90,7 +90,7 @@ export const Layout = styled.button<LayoutProps>`
          `,
       )}
     ${styledIf(
-      !underline,
+      !props.underline,
       `
       ${Container} { 
         text-decoration-line: none;
