@@ -10,7 +10,20 @@ export default {
   argTypes: {
     variant: {
       control: "select",
-      options: ["h1", "h2", "h3", "h4", "h5", "bigNumber", "body1", "body2"],
+      options: [
+        "h1",
+        "h2",
+        "h3",
+        "h4",
+        "h5",
+        "bigNumber",
+        "body1",
+        "body2",
+        "buttonxl",
+        "buttonl",
+        "buttonm",
+        "buttonsm",
+      ],
     },
     weight: {
       control: "select",

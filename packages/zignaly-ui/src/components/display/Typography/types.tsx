@@ -10,6 +10,10 @@ export const componentByVariants = {
   bigNumber: "span",
   body1: "span",
   body2: "span",
+  buttonxl: "span",
+  buttonl: "span",
+  buttonm: "span",
+  buttonsm: "span",
 };
 
 export enum weightByType {
