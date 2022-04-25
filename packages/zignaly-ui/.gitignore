@@ -113,3 +113,6 @@ lib
 
 .jest-test-results.json
 lib/
+
+# Other locks files
+package-lock.json

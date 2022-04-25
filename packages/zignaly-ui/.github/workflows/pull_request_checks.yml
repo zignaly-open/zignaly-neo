@@ -7,26 +7,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout commit
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Use Node.js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: "12.x"
-
-      - name: Cache NPM # leverage npm cache on repeated workflow runs if package.json didn't change
-        uses: actions/cache@v1
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
+          node-version: "16.14.x"
+          cache: 'yarn'
       - name: Install Dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Run linter
-        run: npm run lint
+        run: yarn lint
 
       - name: Run tsc
         run: tsc
+
+      - name: Run linter
+        run: yarn lint
+
+      - name: Run tsc
+        run: tsc
+
+      - name: Run test unit
+        run: yarn test
