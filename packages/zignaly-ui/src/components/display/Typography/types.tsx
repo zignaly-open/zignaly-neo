@@ -14,6 +14,8 @@ export const componentByVariants = {
   buttonl: "span",
   buttonm: "span",
   buttonsm: "span",
+  inputl: "span",
+  inputm: "span",
 };
 
 export enum weightByType {

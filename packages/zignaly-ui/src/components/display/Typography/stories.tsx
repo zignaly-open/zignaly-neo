@@ -23,6 +23,8 @@ export default {
         "buttonl",
         "buttonm",
         "buttonsm",
+        "inputl",
+        "inputm",
       ],
     },
     weight: {

@@ -98,6 +98,20 @@ export const Layout = styled.h1<{ color: string; underline: boolean; weight: str
     letter-spacing: 1.1px;
   }
 
+  &.inputl {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;
+    letter-spacing: 0.55px;
+  }
+
+  &.inputm {
+    font-size: 13px;
+    line-height: 18px;
+    font-weight: 400;
+    letter-spacing: 0.55px;
+  }
+
   ${(props) => `
     color: inherit;
 
