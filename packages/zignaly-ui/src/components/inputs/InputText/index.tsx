@@ -1,11 +1,58 @@
 // Dependencies
-import React from "react";
+import React, { useCallback, useState } from "react";
 
 // Styled Components
-import * as styled from "./styles";
+import { Layout, InputContainer, InputValue, Side, Label, RightSideElement } from "./styles";
+import { InputTextProps } from "./types";
 
-function InputText() {
-  return <styled.Layout>WIP</styled.Layout>;
+import ErrorMessage from "components/display/ErrorMessage";
+
+function InputText(
+  {
+    onBlur,
+    error = null,
+    disabled = false,
+    placeholder = "Please enter a value",
+    label,
+    onChange,
+    rightSideElement,
+    type,
+  }: InputTextProps,
+  inputRef: React.Ref<any>,
+) {
+  const [inputValue, setInputValue] = useState("");
+
+  const handleTextChange = useCallback((e: any) => {
+    const value = e.target.value;
+
+    setInputValue(value);
+    onChange(e, { value: value });
+    return;
+  }, []);
+  return (
+    <Layout withError={!!error} disabled={disabled}>
+      <Label>{label}</Label>
+      <InputContainer>
+        <Side>
+          <InputValue
+            ref={inputRef}
+            onChange={handleTextChange}
+            placeholder={placeholder}
+            value={inputValue}
+            disabled={disabled}
+            type={type}
+            onBlur={onBlur}
+          />
+        </Side>
+        <Side>
+          <RightSideElement src={rightSideElement} alt= {null} />
+        </Side>
+      </InputContainer>
+
+      {/* Show error Messages */}
+      {error && <ErrorMessage text={error} />}
+    </Layout>
+  );
 }
 
-export default InputText;
+export default React.forwardRef(InputText);
