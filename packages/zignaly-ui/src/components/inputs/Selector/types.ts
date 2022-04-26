@@ -10,15 +10,15 @@ export type OptionItem = {
 };
 
 export type SelectProps = {
-  size?: SelectSizes;
-  options?: OptionItem[];
-  label?: string;
   name: string;
-  placeholder: string;
-  value?: string | null;
+  label?: string;
+  size?: SelectSizes;
   disabled?: boolean;
-  initialSelectedIndex: number | null;
-  onSelectItem: any;
-  mode?: "default" | "collapsed";
   className?: string;
+  placeholder: string;
+  onSelectOption: any;
+  options?: OptionItem[];
+  value?: OptionItem | null;
+  mode?: "default" | "collapsed";
+  initialSelectedIndex: number | null;
 };

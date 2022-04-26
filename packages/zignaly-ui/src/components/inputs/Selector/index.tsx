@@ -1,6 +1,6 @@
 // Dependencies
 import * as React from "react";
-import { ReactElement, useState, useRef, useMemo, useCallback } from "react";
+import { ReactElement, useState, useRef, useCallback } from "react";
 import { useClickAway } from "react-use";
 
 // Styled Components
@@ -10,38 +10,29 @@ import * as styled from "./styles";
 import CaretDownIcon from "assets/icons/caret-down-icon.svg";
 
 // Types
-import { SelectProps, SelectSizes } from "./types";
+import { OptionItem, SelectProps, SelectSizes } from "./types";
 
 function Select({
-  size = SelectSizes.NORMAL,
-  label,
   name,
-  placeholder = "Button",
-  disabled = false,
-  initialSelectedIndex = null,
-  options = [],
-  onSelectItem = () => {},
-  className,
   mode,
+  label,
+  className,
+  value = null,
+  options = [],
+  disabled = false,
+  placeholder = "Button",
+  onSelectOption = () => {},
+  size = SelectSizes.NORMAL,
 }: SelectProps): ReactElement {
   // Ref
   const selectorRef = useRef(null);
 
   // Hooks
   const [isActiveMenu, setMenuActive] = useState(false);
-  const [selectedIndex, setSelectedIndex] = useState(initialSelectedIndex);
-
-  const selectedItem = useMemo(
-    () => (selectedIndex ? options[selectedIndex - 1] : null),
-    [selectedIndex],
-  );
 
   const handleClickItem = useCallback(
-    (index: number) => {
-      setSelectedIndex(index);
-      if (options) {
-        onSelectItem(options[index - 1]);
-      }
+    (value: OptionItem) => {
+      onSelectOption(value);
       setMenuActive(false);
     },
     [options],
@@ -63,21 +54,18 @@ function Select({
       {label && <styled.Label htmlFor={name}>{label}</styled.Label>}
       <styled.Container onClick={() => setMenuActive(!isActiveMenu)}>
         {mode !== "collapsed" &&
-          (selectedItem ? (
+          (value ? (
             <>
-              {selectedItem.leftElement && (
+              {value.leftElement && (
                 <styled.LeftElement>
-                  {typeof selectedItem.leftElement === "object" ? (
-                    selectedItem.leftElement
+                  {typeof value.leftElement === "object" ? (
+                    value.leftElement
                   ) : (
-                    <styled.LeftElementIcon
-                      src={selectedItem.leftElement}
-                      alt={selectedItem.caption}
-                    />
+                    <styled.LeftElementIcon src={value.leftElement} alt={value.caption} />
                   )}
                 </styled.LeftElement>
               )}
-              <styled.Value>{selectedItem.caption}</styled.Value>
+              <styled.Value>{value.caption}</styled.Value>
             </>
           ) : (
             <styled.Placeholder>{placeholder}</styled.Placeholder>
@@ -92,18 +80,18 @@ function Select({
             <styled.ItemCaption>No data available</styled.ItemCaption>
           </styled.Item>
         ) : (
-          options.map(({ caption, leftElement = null }, index) => (
-            <styled.Item key={`--${index.toString()}`} onClick={() => handleClickItem(index + 1)}>
-              {leftElement && (
+          options.map((option: OptionItem, index) => (
+            <styled.Item key={`--${index.toString()}`} onClick={() => handleClickItem(option)}>
+              {option.leftElement && (
                 <styled.LeftElement>
-                  {typeof leftElement === "object" ? (
-                    leftElement
+                  {typeof option.leftElement === "object" ? (
+                    option.leftElement
                   ) : (
-                    <styled.LeftElementIcon src={leftElement} alt={caption} />
+                    <styled.LeftElementIcon src={option.leftElement} alt={option.caption} />
                   )}
                 </styled.LeftElement>
               )}
-              <styled.ItemCaption>{caption}</styled.ItemCaption>
+              <styled.ItemCaption>{option.caption}</styled.ItemCaption>
             </styled.Item>
           ))
         )}

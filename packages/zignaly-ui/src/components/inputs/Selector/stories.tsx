@@ -36,18 +36,14 @@ export default {
   },
 } as ComponentMeta<typeof Select>;
 
-const Template: ComponentStory<typeof Select> = (args) => <Select {...args} />;
+const Template: ComponentStory<typeof Select> = (args) => {
+  const [value, setValue] = React.useState(null);
+  return <Select {...args} value={value} onSelectOption={setValue} />;
+};
 
 export const Default = Template.bind({});
 Default.args = {
   label: "Currencies",
   placeholder: "Select your currency",
-  options,
-};
-
-export const Collapsed = Template.bind({});
-Collapsed.args = {
-  label: "",
-  mode: "collapsed",
   options,
 };
