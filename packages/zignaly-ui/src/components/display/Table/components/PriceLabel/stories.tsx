@@ -13,9 +13,17 @@ export default {
       control: "number",
       default: 50,
     },
-    token: {
-      control: "string",
+    coin: {
+      control: "text",
       default: "USDT",
+    },
+    fiat: {
+      control: "boolean",
+      default: false,
+    },
+    symbol: {
+      control: "text",
+      default: "$",
     },
   },
 } as ComponentMeta<typeof PriceLabel>;
@@ -25,29 +33,50 @@ const Template: ComponentStory<typeof PriceLabel> = (args) => <PriceLabel {...ar
 export const USDT = Template.bind({});
 USDT.args = {
   value: 50,
-  token: "USDT",
+  coin: "USDT",
+  fiat: false,
 };
 
 export const BTC = Template.bind({});
 BTC.args = {
   value: 50,
-  token: "BTC",
+  coin: "BTC",
+  fiat: false,
 };
 
 export const ETH = Template.bind({});
 ETH.args = {
   value: 50,
-  token: "ETH",
+  coin: "ETH",
+  fiat: false,
 };
 
 export const ZIG = Template.bind({});
 ZIG.args = {
   value: 50,
-  token: "ZIG",
+  coin: "ZIG",
+  fiat: false,
 };
 
 export const BNB = Template.bind({});
 BNB.args = {
   value: 50,
-  token: "BNB",
+  coin: "BNB",
+  fiat: false,
+};
+
+export const USD = Template.bind({});
+USD.args = {
+  value: 50,
+  coin: "USD",
+  fiat: true,
+  symbol: "$",
+};
+
+export const EUR = Template.bind({});
+EUR.args = {
+  value: 50,
+  coin: "EUR",
+  fiat: true,
+  symbol: "€",
 };

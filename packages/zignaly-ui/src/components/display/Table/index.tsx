@@ -4,7 +4,7 @@ import { useTable, useSortBy, Column } from "react-table";
 import { useClickAway } from "react-use";
 
 // Assets
-import ArrowBottomIcon from "assets/icons/arrow-bottom-icon.svg";
+import ArrowBottomWhiteIcon from "assets/icons/arrow-bottom-icon-white.svg";
 import OptionsDotsIcon from "assets/icons/option-dots-icon.svg";
 import CloseIcon from "assets/icons/close-icon.svg";
 
@@ -19,6 +19,7 @@ import {
   OptionTitle,
   OptionList,
   OptionItem,
+  ThView,
 } from "./styles";
 
 // Components
@@ -82,15 +83,21 @@ const Table = ({ columns = [], data = [] }: { columns: Column<any>[]; data: Obje
             {headerGroups.map((headerGroup: any, index: number) => (
               <tr {...headerGroup.getHeaderGroupProps()} key={`--table-head-${index.toString()}`}>
                 {headerGroup.headers.map((column: any, index: number) => (
-                  <th
+                  <ThView
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                     key={`--table-head-row-${index.toString()}`}
+                    isSorted={column.isSorted}
+                    isAlignRight={column.isAlignThRight}
                   >
                     {column.render("Header")}
-                    {column.isSorted && (
-                      <SortIcon isSortedDesc={column.isSortedDesc} src={ArrowBottomIcon} />
+                    {index < headerGroup.headers.length - 1 && (
+                      <SortIcon
+                        isSorted={column.isSorted}
+                        isSortedDesc={column.isSortedDesc}
+                        src={ArrowBottomWhiteIcon}
+                      />
                     )}
-                  </th>
+                  </ThView>
                 ))}
               </tr>
             ))}

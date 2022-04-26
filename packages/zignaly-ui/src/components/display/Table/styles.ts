@@ -1,12 +1,13 @@
 // Dependencies
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
+import Typography from "../Typography";
 
 export const Layout = styled.div``;
 
 export const View = styled.div`
   width: 100%;
-  border-radius: 16px;
+  border-radius: 5px 5px 15px 15px;
   overflow: auto;
 
   &::-webkit-scrollbar {
@@ -35,20 +36,14 @@ export const TableView = styled.table`
   width: 100%;
 
   font-family: "Avenir", sans-serif;
-  background: #131225;
-
+  background: rgba(19, 18, 37, 0.4);
   thead {
-    border: 1px solid #222249;
-    background: #222249;
-
-    th {
-      color: #f3f4f6;
-      padding: 4px 22px;
-      font-weight: 500;
-      font-size: 13px;
-      line-height: 20px;
-      letter-spacing: 0.55px;
-    }
+    user-select: none;
+    background: #06061a;
+    box-shadow: 0 0 10px #16192b;
+    border-radius: 0 0 5px 5px;
+    position: relative;
+    z-index: 0;
   }
 
   tbody {
@@ -57,44 +52,34 @@ export const TableView = styled.table`
       font-style: normal;
       font-weight: 600;
       line-height: 20px;
-      letter-spacing: 0px;
+      letter-spacing: 0;
       text-align: center;
       color: #f3f4f6;
       padding: 12px 22px;
       white-space: nowrap;
+      background: transparent;
 
       &.action {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
+        text-align: right;
       }
     }
   }
 
-  th,
   td {
     margin: 0;
     border: 0;
-    border-bottom: 1px solid #222249;
-
+    border-bottom: 1px solid #252339;
+    background: transparent;
+    img {
+      vertical-align: initial;
+    }
     :last-child {
       border-right: 0;
     }
   }
 
-  thead {
-    user-select: none;
-
-    th {
-      font-style: normal;
-      font-weight: 500;
-      font-size: 13px;
-      line-height: 16px;
-      white-space: nowrap;
-    }
-  }
-
   tr {
+    background: transparent;
     :last-child {
       td {
         border-bottom: 0;
@@ -103,11 +88,58 @@ export const TableView = styled.table`
   }
 `;
 
-export const SortIcon = styled.img<{ isSortedDesc?: boolean }>`
+export const ThView = styled.th<{ isSorted?: boolean, isAlignRight?: boolean }>`
+  color: #a9a9ba;
+  padding: 4px 22px;
+  white-space: nowrap;
+  background: transparent;
+  margin: 0;
+  img {
+    vertical-align: initial;
+  }
+  &:first-child {
+    border-radius: 0 0 0 5px;
+  }
+  &:last-child {
+    border-radius: 0 0 5px 0;
+  }
+  ${(props: any) => `
+     ${styledIf(
+       props.isSorted,
+       `
+        border: 1px solid #35334A;
+        border-radius: 5px;
+    `,
+       `
+        border: 1px solid transparent;
+    `,
+     )}
+     ${styledIf(
+        props.isAlignRight,
+          `
+        text-align: right;
+    `,
+          `
+        text-align: center;
+    `,
+  )}
+  `}
+`;
+
+export const SortIcon = styled.img<{ isSorted?: boolean; isSortedDesc?: boolean }>`
   margin-left: 6px;
-  transition: all 0.1s linear;
 
   ${(props) => `
+     ${styledIf(
+       props.isSorted,
+       `
+        transition: all 0.1s linear;
+        visibility: visible;;
+    `,
+       `
+        visibility: hidden;
+    `,
+     )}
      ${styledIf(
        props.isSortedDesc,
        `
@@ -200,4 +232,17 @@ export const OptionList = styled.ul`
 
 export const OptionItem = styled.li`
   padding: 12px 18px;
+`;
+
+export const Actions = styled.div`
+  button {
+    margin-right: 8px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+`;
+
+export const InvestorLabel = styled(Typography)`
+  text-align: center;
 `;

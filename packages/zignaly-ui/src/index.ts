@@ -17,8 +17,6 @@ import IconButton from "components/inputs/IconButton";
 import InputAmount from "components/inputs/InputAmount";
 import InputText from "components/inputs/InputText";
 import Select from "components/inputs/Selector";
-// todo: replace table buttons
-import TableButton from "./components/display/Table/components/TableButton";
 import { ButtonGroup } from "./components/styled";
 
 // Icons
@@ -57,7 +55,6 @@ export {
   InputText,
   Select,
   ButtonGroup,
-  TableButton,
   // Icons
   CloseIcon,
   // Navigation
@@ -65,6 +62,6 @@ export {
   TabPanel,
   Tab,
   ThemeProvider,
-  dark, 
+  dark,
   light,
 };
