@@ -2,11 +2,6 @@
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
-interface IconProps {
-    src: any;
-    alt: any;
-  }
-
 export const InputValue = styled.input`
   padding-right: 22px;
   background: transparent;
@@ -41,8 +36,6 @@ export const Label = styled.label`
   letter-spacing: 0.55px;
   color: #a9a9ba;
 `;
-
-export const RightSideElement = styled.img<IconProps>``;
 
 export const InputContainer = styled.div`
   border: 1px solid #35334a;

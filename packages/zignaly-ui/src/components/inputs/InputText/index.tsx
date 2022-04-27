@@ -2,7 +2,7 @@
 import React, { useCallback, useState } from "react";
 
 // Styled Components
-import { Layout, InputContainer, InputValue, Side, Label, RightSideElement } from "./styles";
+import { Layout, InputContainer, InputValue, Side, Label } from "./styles";
 import { InputTextProps } from "./types";
 
 import ErrorMessage from "components/display/ErrorMessage";
@@ -17,10 +17,12 @@ function InputText(
     onChange,
     rightSideElement,
     type,
+    defaultValue = "",
+    readOnly = false,
   }: InputTextProps,
   inputRef: React.Ref<any>,
 ) {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(defaultValue);
 
   const handleTextChange = useCallback((e: any) => {
     const value = e.target.value;
@@ -35,6 +37,7 @@ function InputText(
       <InputContainer>
         <Side>
           <InputValue
+            readOnly={readOnly}
             ref={inputRef}
             onChange={handleTextChange}
             placeholder={placeholder}
@@ -44,9 +47,7 @@ function InputText(
             onBlur={onBlur}
           />
         </Side>
-        <Side>
-          <RightSideElement src={rightSideElement} alt= {null} />
-        </Side>
+        <Side>{rightSideElement}</Side>
       </InputContainer>
 
       {/* Show error Messages */}

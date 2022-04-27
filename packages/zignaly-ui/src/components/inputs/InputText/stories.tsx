@@ -17,6 +17,13 @@ export default {
       type: "boolean",
       defaultValue: false,
     },
+    defaultValue: {
+      type: "string",
+    },
+    readOnly: {
+      type: "boolean",
+      defaultValue: false,
+    },
     error: {
       type: "string",
       defaultValue: "",
