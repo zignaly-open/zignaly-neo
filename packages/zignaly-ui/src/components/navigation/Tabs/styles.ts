@@ -25,6 +25,14 @@ export const Tabs = styled(TabsMui)`
       font-weight: bold;
       visibility: hidden;
     }
+
+    &:not(:first-child) {
+      margin-left: 16px;
+    }
+
+    &:not(:last-child) {
+      margin-right: 16px;
+    }
   }
 
   .Mui-selected {
