@@ -21,7 +21,7 @@ function Select({
   options = [],
   disabled = false,
   placeholder = "Button",
-  onSelectOption = () => {},
+  onChange = () => {},
   size = SelectSizes.NORMAL,
 }: SelectProps): ReactElement {
   // Ref
@@ -32,7 +32,7 @@ function Select({
 
   const handleClickItem = useCallback(
     (value: OptionItem) => {
-      onSelectOption(value);
+      onChange(value);
       setMenuActive(false);
     },
     [options],

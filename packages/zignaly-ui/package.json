@@ -11,6 +11,7 @@
     "test:generate-output": "jest --json --outputFile=.jest-test-results.json || true",
     "test": "jest -u",
     "build": "npm run clean && webpack --mode=production --node-env=production",
+    "build:dev": "npm run clean && webpack",
     "clean": "rm -rf lib",
     "copy-files": "cp -R src/assets lib/assets",
     "lint": "eslint --fix src --ext .js,.jsx,.ts,.tsx",
