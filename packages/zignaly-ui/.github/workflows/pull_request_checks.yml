@@ -23,11 +23,5 @@ jobs:
       - name: Run tsc
         run: tsc
 
-      - name: Run linter
-        run: yarn lint
-
-      - name: Run tsc
-        run: tsc
-
       - name: Run test unit
         run: yarn test
