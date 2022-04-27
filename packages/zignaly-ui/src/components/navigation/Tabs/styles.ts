@@ -16,7 +16,7 @@ export const Tabs = styled(TabsMui)`
     line-height: 20px;
     padding-left: 0;
     padding-right: 0;
-    margin: 0 16px;
+    margin: 0;
     position: relative;
 
     &:before {

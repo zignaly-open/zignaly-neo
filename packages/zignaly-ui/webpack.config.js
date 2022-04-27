@@ -66,8 +66,6 @@ const config = {
       "styled-components": path.resolve("./node_modules/styled-components"),
     },
   },
-  devtool: "source-map",
-
   // When importing a module whose path matches one of the following, just
   // assume a corresponding global variable exists and use that instead.
   // This is important because it allows us to avoid bundling all of our
@@ -80,6 +78,8 @@ module.exports = () => {
     config.mode = "production";
   } else {
     config.mode = "development";
+    // sourcemap
+    config.devtool = "eval";
   }
   return config;
 };
