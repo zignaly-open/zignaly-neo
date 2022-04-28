@@ -12,12 +12,11 @@ import PriceLabel from "./components/PriceLabel";
 import CoinLabel from "./components/CoinLabel";
 import PercentageIndicator from "./components/PercentageIndicator";
 import ConnectionStateLabel, { ConnectionStateLabelId } from "./components/ConnectionStateLabel";
-import Button, { ButtonVariants } from "components/inputs/Button";
+import Button from "components/inputs/Button";
 import DateLabel from "./components/DateLabel";
 
 // Styles
 import { Actions, InvestorLabel } from "./styles";
-
 
 export default {
   title: "Display/Table",
@@ -75,7 +74,12 @@ MyCoins.args = {
       lockedBalance: <PriceLabel coin={"ETHA"} value={"30.18389589"} />,
       valueInBtc: <PriceLabel coin={"BTC"} value={"0.78232496"} />,
       valueInUsd: <PriceLabel coin={"USD"} value={"3.200"} fiat />,
-      action: <Actions><Button caption={"Deposit"} variant={ButtonVariants.SECONDARY} onClick={() => {}} /><Button caption={"Withdraw"} variant={ButtonVariants.SECONDARY} onClick={() => {}} /></Actions>,
+      action: (
+        <Actions>
+          <Button caption={"Deposit"} variant={"secondary"} onClick={() => {}} />
+          <Button caption={"Withdraw"} variant={"secondary"} onClick={() => {}} />
+        </Actions>
+      ),
     },
     {
       coin: <CoinLabel coin={"BTC"} name={"Bitcoin"} />,
@@ -84,7 +88,12 @@ MyCoins.args = {
       lockedBalance: <PriceLabel coin={"BTC"} value={"30.18389"} />,
       valueInBtc: <PriceLabel coin={"BTC"} value={"0.782324"} />,
       valueInUsd: <PriceLabel coin={"USD"} value={"34,000"} fiat />,
-      action: <Actions><Button caption={"Deposit"} variant={ButtonVariants.SECONDARY} onClick={() => {}} /><Button caption={"Withdraw"} variant={ButtonVariants.SECONDARY} onClick={() => {}} /></Actions>
+      action: (
+        <Actions>
+          <Button caption={"Deposit"} variant={"secondary"} onClick={() => {}} />
+          <Button caption={"Withdraw"} variant={"secondary"} onClick={() => {}} />
+        </Actions>
+      ),
     },
     {
       coin: <CoinLabel coin={"BNB"} name={"Bianance Coin"} />,
@@ -93,7 +102,12 @@ MyCoins.args = {
       lockedBalance: <PriceLabel coin={"BNB"} value={"350"} />,
       valueInBtc: <PriceLabel coin={"BTC"} value={"0.782324"} />,
       valueInUsd: <PriceLabel coin={"EUR"} value={"400"} fiat />,
-      action: <Actions><Button caption={"Deposit"} variant={ButtonVariants.SECONDARY} onClick={() => {}} /><Button caption={"Withdraw"} variant={ButtonVariants.SECONDARY} onClick={() => {}} /></Actions>
+      action: (
+        <Actions>
+          <Button caption={"Deposit"} variant={"secondary"} onClick={() => {}} />
+          <Button caption={"Withdraw"} variant={"secondary"} onClick={() => {}} />
+        </Actions>
+      ),
     },
   ],
 };
@@ -148,8 +162,16 @@ Investors.args = {
   ],
   data: [
     {
-      userId: <InvestorLabel color={"neutral100"} variant={"h3"}>{"5f886d29da8e9666b1684c9a"}</InvestorLabel>,
-      email: <InvestorLabel color={"neutral100"} variant={"h3"}>{"tec**@zig**.com"}</InvestorLabel>,
+      userId: (
+        <InvestorLabel color={"neutral100"} variant={"h3"}>
+          {"5f886d29da8e9666b1684c9a"}
+        </InvestorLabel>
+      ),
+      email: (
+        <InvestorLabel color={"neutral100"} variant={"h3"}>
+          {"tec**@zig**.com"}
+        </InvestorLabel>
+      ),
       investment: <PriceLabel coin={"USDT"} value={"1250"} />,
       pyd: (
         <PriceLabel
@@ -160,7 +182,11 @@ Investors.args = {
       ),
       pydTotal: <PriceLabel coin={"USDT"} value={"145"} />,
       totalFeesPaid: <PriceLabel coin={"USDT"} value={"218"} />,
-      successFee: <InvestorLabel color={"neutral100"} variant={"h3"}>{"10%"}</InvestorLabel>,
+      successFee: (
+        <InvestorLabel color={"neutral100"} variant={"h3"}>
+          {"10%"}
+        </InvestorLabel>
+      ),
       feesInZig: <img src={CheckIcon} />,
       status: <ConnectionStateLabel stateId={ConnectionStateLabelId.CONNECTED} />,
     },
