@@ -16,12 +16,12 @@ jobs:
           cache: 'yarn'
 
       # leverage yarn cache on repeated workflow runs if package.json didn't change
-      - name: Cache NPM
+      - name: Cache yarn
         uses: actions/cache@v2
         with:
           path: '**/node_modules'
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-          
+
       - name: Install Dependencies
         run: yarn install --frozen-lockfile
 
