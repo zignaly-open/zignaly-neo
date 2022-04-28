@@ -44,9 +44,11 @@ const config = {
           // Ignore errors
           transpileOnly: true,
           configFile: __dirname + "/tsconfig.json",
-          // compilerOptions: {
-          //   declaration: true,
-          // },
+          compilerOptions: {
+            // declaration: true,
+            // https://stackoverflow.com/a/61258647/1494428
+            target: "ES2018",
+          },
         },
       },
       {
@@ -76,10 +78,12 @@ const config = {
 module.exports = () => {
   if (isProduction) {
     config.mode = "production";
+    // Separate sourcemap file
     config.devtool = "source-map";
   } else {
     config.mode = "development";
-    config.devtool = "eval";
+    // Better sourcemap for dev
+    config.mode = "eval";
   }
   return config;
 };
