@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import Typography from "./";
 import { dark } from "../../../theme";
+import { weightByType } from "./types";
 
 export default {
   title: "Display/Typography",
@@ -29,7 +30,7 @@ export default {
     },
     weight: {
       control: "select",
-      options: ["medium", "regular", "demibold"],
+      options: Object.keys(weightByType),
     },
     color: {
       options: Object.keys(dark),

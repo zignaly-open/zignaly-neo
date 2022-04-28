@@ -18,15 +18,15 @@ export const componentByVariants = {
   inputm: "span",
 };
 
-export enum weightByType {
-  medium = "medium",
-  demibold = "demibold",
-  regular = "regular",
-}
+export const weightByType = {
+  medium: "medium",
+  demibold: "demibold",
+  regular: "regular",
+};
 
 export interface TypographyProps {
   variant?: keyof typeof componentByVariants;
-  weight?: weightByType;
+  weight?: keyof typeof weightByType;
   style?: any;
   className?: string;
   component?: any;
