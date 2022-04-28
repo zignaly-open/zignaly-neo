@@ -6,13 +6,14 @@ import { ReactElement, useMemo } from "react";
 import * as styled from "./styles";
 
 // Types
-import { ButtonVariants, ButtonSizes, ButtonProps } from "./types";
+import { ButtonVariants, ButtonSizes, ButtonProps, ButtonColors } from "./types";
 
 function Button({
   variant = ButtonVariants.PRIMARY,
-  size = ButtonSizes.NORMAL,
+  size = ButtonSizes.MEDIUM,
   caption = "Button",
   icon = null,
+  color = ButtonColors.GREY,
   leftElement = null,
   rightElement = null,
   disabled = false,
@@ -79,6 +80,7 @@ function Button({
       disabled={disabled}
       variant={variant}
       size={size}
+      color={color}
       onClick={onClick}
       type={type}
     >
