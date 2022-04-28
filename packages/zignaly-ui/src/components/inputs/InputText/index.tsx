@@ -19,6 +19,7 @@ function InputText(
     type,
     defaultValue = "",
     readOnly = false,
+    name,
   }: InputTextProps,
   inputRef: React.Ref<any>,
 ) {
@@ -45,6 +46,7 @@ function InputText(
             disabled={disabled}
             type={type}
             onBlur={onBlur}
+            name={name}
           />
         </Side>
         <Side>{rightSideElement}</Side>

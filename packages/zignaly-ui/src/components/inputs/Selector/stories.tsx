@@ -34,6 +34,11 @@ export default {
       url: "https://www.figma.com/file/ab8A8un5PEQRHyyJgSIt2J/Forms?node-id=307%3A241",
     },
   },
+  argTypes: {
+    fullWidth: {
+      control: { type: "boolean" },
+    },
+  },
 } as ComponentMeta<typeof Select>;
 
 const Template: ComponentStory<typeof Select> = (args) => {

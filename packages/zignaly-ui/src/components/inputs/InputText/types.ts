@@ -10,4 +10,5 @@ export interface InputTextProps {
   readOnly: boolean;
   rightSideElement?: ReactElement | null;
   type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
+  name?: string;
 }

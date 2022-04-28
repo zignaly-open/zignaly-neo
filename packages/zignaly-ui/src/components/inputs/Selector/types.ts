@@ -21,4 +21,5 @@ export type SelectProps = {
   value?: OptionItem | null;
   mode?: "default" | "collapsed";
   initialSelectedIndex: number | null;
+  fullWidth?: boolean;
 };

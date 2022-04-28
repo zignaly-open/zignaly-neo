@@ -10,7 +10,7 @@ const isNormalSelect = (size: SelectSizes) => size === SelectSizes.NORMAL;
 const isLargeSelect = (size: SelectSizes) => size === SelectSizes.LARGE;
 
 export const Label = styled.label`
-  color: #ffffff;
+  color: #a9a9ba;
   font-style: normal;
   font-weight: 400;
   font-size: 16px;
@@ -113,6 +113,8 @@ type LayoutProps = {
   disabled?: boolean;
   isActiveMenu: boolean;
   collapsed: boolean;
+  fullWidth?: boolean;
+  name?: string;
 };
 
 export const Layout = styled.div<LayoutProps>`
@@ -244,6 +246,17 @@ export const Layout = styled.div<LayoutProps>`
         padding: 19.33px 33.77px;
       }
     `,
+    )}
+    
+    ${styledIf(
+      props.fullWidth,
+      `
+      width: 100%;
+
+      ${Container} {
+        width: 100%;
+      }
+      `,
     )}
   `}
 `;

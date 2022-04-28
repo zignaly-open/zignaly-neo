@@ -117,11 +117,16 @@ function InputAmount(
   const onClickMaxValue = useCallback(() => {
     if (!disabled && selectedToken) {
       const newValue = BigNumber.from(selectedToken.balance);
-      setInputValue(utils.formatUnits(newValue));
-      onChange({
-        value: newValue,
-        token: selectedToken,
-      });
+      const number = utils.formatUnits(newValue);
+      setInputValue(number);
+      const e = {
+        target: {
+          value: number,
+          name,
+        },
+        type: "change",
+      };
+      onChange(e, { value: newValue, token: selectedToken });
     }
   }, [disabled, onChange, selectedToken]);
 

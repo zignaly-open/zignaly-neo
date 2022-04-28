@@ -23,6 +23,7 @@ function Select({
   placeholder = "Button",
   onChange = () => {},
   size = SelectSizes.NORMAL,
+  fullWidth,
 }: SelectProps): ReactElement {
   // Ref
   const selectorRef = useRef(null);
@@ -50,6 +51,8 @@ function Select({
       disabled={disabled}
       ref={selectorRef}
       collapsed={mode === "collapsed" && !isActiveMenu}
+      fullWidth={fullWidth}
+      name={name}
     >
       {label && <styled.Label htmlFor={name}>{label}</styled.Label>}
       <styled.Container onClick={() => setMenuActive(!isActiveMenu)}>

@@ -9,7 +9,7 @@ const Typography = ({
   children,
   variant = "body1",
   weight,
-  color = "neutral000",
+  color,
   underline,
   component,
   className,

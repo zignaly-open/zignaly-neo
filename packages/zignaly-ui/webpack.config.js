@@ -83,7 +83,7 @@ module.exports = () => {
   } else {
     config.mode = "development";
     // Better sourcemap for dev
-    config.mode = "eval";
+    config.devtool = "eval";
   }
   return config;
 };
