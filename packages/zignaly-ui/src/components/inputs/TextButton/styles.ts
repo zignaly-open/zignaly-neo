@@ -28,17 +28,8 @@ export const RightElement = styled(LeftElement)`
   padding-left: 10px;
 `;
 
-/**
- * Icons
- */
-interface IconProps {
-  src: any;
-  alt: any;
-}
 
-export const Icon = styled.img<IconProps>``;
-
-export const CenterIcon = styled.img<IconProps>`
+export const CenterIcon = styled.div`
   position: relative;
   top: 1px;
 `;

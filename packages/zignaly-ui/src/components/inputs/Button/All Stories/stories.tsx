@@ -3,8 +3,13 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ButtonVariations } from "./storyLists";
 import Button from "..";
 import { NormalButton } from "../stories";
-import ArrowBottomIcon from "assets/icons/arrow-bottom-icon.svg";
+import ArrowDown from "assets/icons/arrow-bottom-icon.svg";
 import BTC from "assets/icons/coins/btc.svg";
+
+const icons = {
+  arrowDown: <ArrowDown color={"#E1E9F0"} />,
+  btc: <BTC />
+};
 
 export default {
   title: "Inputs/Button/All stories",
@@ -22,15 +27,15 @@ export const MediumButtonIconVariation = Template.bind({});
 MediumButtonIconVariation.args = {
   buttonsRow1: [
     { ...NormalButton.args, variant: "primary" },
-    { ...NormalButton.args, variant: "primary", rightElement: BTC },
-    { ...NormalButton.args, variant: "primary", leftElement: ArrowBottomIcon },
-    { ...NormalButton.args, variant: "primary", leftElement: ArrowBottomIcon, rightElement: BTC },
+    { ...NormalButton.args, variant: "primary", rightElement: icons.btc},
+    { ...NormalButton.args, variant: "primary", leftElement: icons.arrowDown },
+    { ...NormalButton.args, variant: "primary", leftElement: icons.arrowDown, rightElement: icons.btc },
   ],
   buttonsRow2: [
     { ...NormalButton.args, variant: "secondary" },
-    { ...NormalButton.args, variant: "secondary", rightElement: BTC },
-    { ...NormalButton.args, variant: "secondary", leftElement: ArrowBottomIcon },
-    { ...NormalButton.args, variant: "secondary", leftElement: ArrowBottomIcon, rightElement: BTC },
+    { ...NormalButton.args, variant: "secondary", rightElement: icons.btc },
+    { ...NormalButton.args, variant: "secondary", leftElement: icons.arrowDown },
+    { ...NormalButton.args, variant: "secondary", leftElement: icons.arrowDown, rightElement: icons.btc },
   ],
 };
 
@@ -66,7 +71,6 @@ export const MediumButtonTextColors = Template.bind({});
 MediumButtonTextColors.args = {
   buttonsRow1: [
     { ...NormalButton.args, variant: "primary", size: "medium", color: "grey" },
-    { ...NormalButton.args, variant: "primary", size: "medium", color: "green" },
   ],
   buttonsRow2: [
     { ...NormalButton.args, variant: "secondary", size: "medium", color: "grey" },
