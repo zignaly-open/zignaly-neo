@@ -5,8 +5,8 @@ import { useClickAway } from "react-use";
 
 // Assets
 import ArrowBottomWhiteIcon from "assets/icons/arrow-bottom-icon-white.svg?url";
-import OptionsDotsIcon from "assets/icons/option-dots-icon.svg?url";
-import CloseIcon from "assets/icons/close-icon.svg?url";
+import OptionsDotsIcon from "assets/icons/option-dots-icon.svg";
+import CloseIcon from "assets/icons/close-icon.svg";
 
 // Styles
 import {
@@ -44,7 +44,7 @@ const Table = ({ columns = [], data = [] }: { columns: Column<any>[]; data: Obje
           <div style={{ display: "flex", justifyContent: "flex-end" }}>
             <IconButton
               variant={IconButtonVariants.FLAT}
-              icon={OptionsDotsIcon}
+              icon={<OptionsDotsIcon />}
               onClick={() => {
                 setTableOptionEnabled(true);
               }}
@@ -115,7 +115,7 @@ const Table = ({ columns = [], data = [] }: { columns: Column<any>[]; data: Obje
       <OptionsMenu ref={menuRef} disabled={!isTableOptionsEnabled}>
         <OptionHead>
           <OptionTitle>Options</OptionTitle>
-          <IconButton icon={CloseIcon} onClick={() => setTableOptionEnabled(false)} />
+          <IconButton icon={<CloseIcon />} onClick={() => setTableOptionEnabled(false)} />
         </OptionHead>
         <OptionList>
           {columns.map((column: any, index) => (

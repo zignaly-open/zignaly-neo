@@ -6,10 +6,10 @@ import { ReactElement, useMemo } from "react";
 import * as styled from "./styles";
 
 type ButtonProps = {
-  caption?: String;
-  icon?: ReactElement<any> | String;
-  leftElement?: ReactElement<any> | String;
-  rightElement?: ReactElement<any> | String;
+  caption?: string;
+  icon?: ReactElement<any> | string;
+  leftElement?: ReactElement<any> | string;
+  rightElement?: ReactElement<any> | string;
   underline?: boolean;
   onClick: React.MouseEventHandler<HTMLButtonElement>;
 };

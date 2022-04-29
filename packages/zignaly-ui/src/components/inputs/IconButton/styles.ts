@@ -9,6 +9,7 @@ export const Layout = styled(Button)`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 
   width: 38px;
   height: 38px;

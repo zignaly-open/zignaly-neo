@@ -23,6 +23,7 @@ const config = {
       typescript: {
         // build: true,
         mode: "write-dts",
+        // tsconfig: __dirname + "/tsconfig.json",
       },
     }),
     new CopyWebpackPlugin({
@@ -53,14 +54,14 @@ const config = {
       },
       {
         test: /\.svg$/i,
-        type: 'asset',
+        type: "asset",
         resourceQuery: /url/, // *.svg?url
       },
       {
         test: /\.svg$/i,
         issuer: /\.[jt]sx?$/,
         resourceQuery: { not: [/url/] },
-        use: ['@svgr/webpack'],
+        use: ["@svgr/webpack"],
       },
       {
         test: /\.(eot|ttf|woff|woff2|png|jpg|gif)$/i,

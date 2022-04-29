@@ -3,7 +3,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 // Assets
-import OptionDotsIcon from "assets/icons/option-dots-icon.svg?url";
+import OptionDotsIcon from "assets/icons/option-dots-icon.svg";
 
 // Component
 import IconButton from "./";
@@ -17,5 +17,5 @@ const Template: ComponentStory<typeof IconButton> = (args) => <IconButton {...ar
 
 export const Basic = Template.bind({});
 Basic.args = {
-  icon: OptionDotsIcon,
+  icon: <OptionDotsIcon />,
 };
