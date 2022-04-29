@@ -27,11 +27,9 @@ function Button({
    */
   const renderLeftElement = useMemo(
     () =>
-      typeof leftElement === "function" ? (
+      typeof leftElement === "object" ? (
         leftElement
-      ) : (
-        <styled.Icon src={leftElement} alt={caption} />
-      ),
+      ) : null,
     [leftElement],
   );
 
@@ -42,11 +40,9 @@ function Button({
    */
   const renderRightElement = useMemo(
     () =>
-      typeof rightElement === "function" ? (
+      typeof rightElement === "object" ? (
         rightElement
-      ) : (
-        <styled.Icon src={rightElement} alt={caption} />
-      ),
+      ) : null,
     [rightElement],
   );
 
@@ -60,11 +56,9 @@ function Button({
     () => (
       <styled.Caption>
         {icon ? (
-          typeof icon === "function" ? (
-            icon
-          ) : (
-            <styled.CenterIcon src={icon} alt={null} />
-          )
+          typeof icon === "object" ? (
+            <styled.CenterIcon>{icon}</styled.CenterIcon>
+          ) : null
         ) : (
           caption
         )}

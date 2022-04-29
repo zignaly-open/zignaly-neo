@@ -6,9 +6,9 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import InputAmount from "./";
 
 // Assets
-import BTCIcon from "assets/icons/coins/btc.svg";
-import ETHIcon from "assets/icons/coins/eth.svg";
-import DOGEIcon from "assets/icons/coins/doge.svg";
+import BTCIcon from "assets/icons/coins/btc.svg?url";
+import ETHIcon from "assets/icons/coins/eth.svg?url";
+import DOGEIcon from "assets/icons/coins/doge.svg?url";
 
 export default {
   title: "Inputs/InputAmount",

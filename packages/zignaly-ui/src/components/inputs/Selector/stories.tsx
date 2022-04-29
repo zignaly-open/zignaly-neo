@@ -6,9 +6,9 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Select from "./";
 
 // Assets
-import EthereumIcon from "assets/icons/coins/eth.svg";
-import BitcoinIcon from "assets/icons/coins/btc.svg";
-import DogecoinIcon from "assets/icons/coins/doge.svg";
+import EthereumIcon from "assets/icons/coins/eth.svg?url";
+import BitcoinIcon from "assets/icons/coins/btc.svg?url";
+import DogecoinIcon from "assets/icons/coins/doge.svg?url";
 
 const options = [
   {

@@ -54,14 +54,8 @@ export const RightElement = styled(LeftElement)`
 /**
  * Icons
  */
-interface IconProps {
-  src: any;
-  alt: any;
-}
 
-export const Icon = styled.img<IconProps>``;
-
-export const CenterIcon = styled.img<IconProps>`
+export const CenterIcon = styled.div`
   position: relative;
   top: 1px;
 `;
@@ -152,9 +146,6 @@ export const Layout = styled.button<LayoutProps>`
         ${Container} {
           padding: 10px 12px;
         }
-        ${CenterIcon} {
-          width: 10px;
-        }
     `,
       )}
     `,
@@ -200,9 +191,6 @@ export const Layout = styled.button<LayoutProps>`
         ${Container} {
           padding: 13px 16px
         }
-        ${CenterIcon} {
-          width: 10px;
-        }
     `,
       )}
   `,
@@ -244,11 +232,6 @@ export const Layout = styled.button<LayoutProps>`
         `
         ${Container} {
           padding: 18px 20px;
-        }
-        
-        ${CenterIcon} {
-          width: 23px;
-          height: 23px;
         }
       `,
       )}
@@ -293,10 +276,6 @@ export const Layout = styled.button<LayoutProps>`
         `
         ${Container} {
           padding: 20px 36px
-        }
-        ${CenterIcon} {
-          width: 26px;
-          height: 26px
         }
     `,
       )}

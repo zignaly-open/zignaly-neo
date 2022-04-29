@@ -3,7 +3,7 @@ import React from "react";
 import { Row as _Row } from "react-table";
 
 // Assets
-import ExpandedArrowIcon from "assets/icons/arrow-expansion-icon.svg";
+import ExpandedArrowIcon from "assets/icons/arrow-expansion-icon.svg?url";
 
 // Styled Components
 import * as styled from "./styles";

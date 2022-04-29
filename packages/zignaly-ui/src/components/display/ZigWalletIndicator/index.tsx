@@ -7,7 +7,7 @@ import NumberFormat from "react-number-format";
 import * as styled from "./styles";
 
 // Assets
-import ZigCoinIcon from "assets/images/zignaly-coin.svg";
+import ZigCoinIcon from "assets/images/zignaly-coin.svg?url";
 
 // Components
 import Typography from "../Typography";

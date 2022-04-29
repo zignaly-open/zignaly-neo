@@ -1,5 +1,5 @@
 // Assets
-import WhaleIcon from "assets/icons/whale-icon.svg";
+import WhaleIcon from "assets/icons/whale-icon.svg?url";
 
 export enum RankTypesId {
   DOLPHIN = "dolphin",

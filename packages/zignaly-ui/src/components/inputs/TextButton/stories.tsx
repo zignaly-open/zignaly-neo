@@ -6,8 +6,8 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import TextButton from "./";
 
 // Assets
-import CloseIcon from "../../../assets/icons/close-icon.svg";
-import ArrowDown from "../../../assets/icons/arrow-bottom-icon.svg";
+import CloseIcon from "../../../assets/icons/close-icon.svg?url";
+import ArrowDown from "../../../assets/icons/arrow-bottom-icon.svg?url";
 
 export default {
   title: "Inputs/TextButton",

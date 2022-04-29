@@ -17,7 +17,7 @@ import {
 } from "./styles";
 
 // Assets
-import CaretDownIcon from "assets/icons/caret-down-icon.svg";
+import CaretDownIcon from "assets/icons/caret-down-icon.svg?url";
 
 // Types
 import { TokenSelectorProps } from "./types";

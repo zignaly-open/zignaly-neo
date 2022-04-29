@@ -4,9 +4,9 @@ import { useTable, useSortBy, Column } from "react-table";
 import { useClickAway } from "react-use";
 
 // Assets
-import ArrowBottomWhiteIcon from "assets/icons/arrow-bottom-icon-white.svg";
-import OptionsDotsIcon from "assets/icons/option-dots-icon.svg";
-import CloseIcon from "assets/icons/close-icon.svg";
+import ArrowBottomWhiteIcon from "assets/icons/arrow-bottom-icon-white.svg?url";
+import OptionsDotsIcon from "assets/icons/option-dots-icon.svg?url";
+import CloseIcon from "assets/icons/close-icon.svg?url";
 
 // Styles
 import {

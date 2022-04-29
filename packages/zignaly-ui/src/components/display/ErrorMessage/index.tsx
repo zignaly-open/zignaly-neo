@@ -8,7 +8,7 @@ import { Layout, Text, Icon } from "./styles";
 import { ErrorMessageProps } from "./types";
 
 // Assets
-import ErrorAlertIcon from "assets/icons/error-alert-icon.svg";
+import ErrorAlertIcon from "assets/icons/error-alert-icon.svg?url";
 
 function ErrorMessage({ text }: ErrorMessageProps) {
   return (

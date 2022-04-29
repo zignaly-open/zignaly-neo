@@ -3,7 +3,7 @@ import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 // Assets
-import CheckIcon from "../../../assets/icons/check-icon.svg";
+import CheckIcon from "../../../assets/icons/check-icon.svg?url";
 
 // Component
 import Table from "./";
