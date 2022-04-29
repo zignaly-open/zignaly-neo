@@ -5,16 +5,28 @@ import { dark, light } from "../src/theme";
 import { addDecorator } from "@storybook/react";
 import { makeDecorator } from "@storybook/addons";
 import { ThemeProvider } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 // Testing Results
 import { withTests } from "@storybook/addon-jest";
 import results from "../.jest-test-results.json";
+import theme from "./theme";
+
+const GlobalStyle = createGlobalStyle`
+  body {
+    color: ${(props) => (props.darkMode ? "#c1c1c8" : "black")};
+  }
+`;
 
 const withStyledTheme = (storyFn) => {
   const darkMode = useDarkMode();
   const currentTheme = darkMode ? dark : light;
-
-  return <ThemeProvider theme={currentTheme}>{storyFn()}</ThemeProvider>;
+  return (
+    <ThemeProvider theme={currentTheme}>
+      <GlobalStyle darkMode />
+      {storyFn()}
+    </ThemeProvider>
+  );
 };
 
 const styledThemed = makeDecorator({
