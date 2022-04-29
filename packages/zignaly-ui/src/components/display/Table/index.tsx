@@ -1,67 +1,30 @@
 // Dependencies
-import React, { useRef, useState, useMemo } from "react";
-import { useTable, useSortBy, Column } from "react-table";
-import { useClickAway } from "react-use";
+import React, { useRef, useCallback, useState } from "react";
+import { useSortBy, useTable } from "react-table";
 
 // Assets
 import ArrowBottomWhiteIcon from "assets/icons/arrow-bottom-icon-white.svg?url";
-import OptionsDotsIcon from "assets/icons/option-dots-icon.svg";
-import CloseIcon from "assets/icons/close-icon.svg";
+import OptionsDotsIcon from "assets/icons/option-dots-icon.svg?url";
 
 // Styles
-import {
-  Layout,
-  View,
-  TableView,
-  SortIcon,
-  OptionsMenu,
-  OptionHead,
-  OptionTitle,
-  OptionList,
-  OptionItem,
-  ThView,
-} from "./styles";
+import { Layout, OptionItem, OptionList, SortIcon, TableView, View, ThView } from "./styles";
 
 // Components
-import Row from "./components/Row";
-import IconButton, { IconButtonVariants } from "components/inputs/IconButton";
+import IconButton from "components/inputs/IconButton";
 import CheckBox from "components/inputs/CheckBox";
 
-const Table = ({ columns = [], data = [] }: { columns: Column<any>[]; data: Object[] }) => {
-  const menuRef = useRef(null);
-  const [isTableOptionsEnabled, setTableOptionEnabled] = useState(false);
+const Table = ({ columns = [], data = [] }: { columns: any[]; data: Object[] }) => {
+  // Refs
+  const tableRef = useRef(null);
+
+  // States
   const [hiddenColumns, setHiddenColumns] = useState([]);
 
-  /**
-   * @var withOptionsMenu
-   * @description Memorize the columns of the table by adding the menu option.
-   */
-  const withOptionsColumns = useMemo(
-    () => [
-      ...columns,
-      {
-        Header: (
-          <div style={{ display: "flex", justifyContent: "flex-end" }}>
-            <IconButton
-              variant={IconButtonVariants.FLAT}
-              icon={<OptionsDotsIcon />}
-              onClick={() => {
-                setTableOptionEnabled(true);
-              }}
-            />
-          </div>
-        ),
-        accessor: "action",
-        disableSortBy: true,
-      },
-    ],
-    [columns],
-  );
-
+  // Hooks
   const { getTableProps, getTableBodyProps, rows, headerGroups, toggleHideColumn, prepareRow } =
     useTable(
       {
-        columns: withOptionsColumns,
+        columns,
         data,
       },
       useSortBy,
@@ -69,15 +32,27 @@ const Table = ({ columns = [], data = [] }: { columns: Column<any>[]; data: Obje
 
   const firstPageRows = rows.slice(0, 20);
 
-  useClickAway(menuRef, () => {
-    if (isTableOptionsEnabled) {
-      setTableOptionEnabled(false);
-    }
-  });
+  /**
+   * @function renderActionRow():
+   * @description Inject the action row on "column options" column.
+   */
+  const renderActionRow = useCallback(
+    (row: any, index: number) => {
+      if (data.find((e: any) => e.action)) {
+        return (
+          <td className={"action"} key={`--table-row-cell-${index.toString()}`}>
+            {/*@ts-ignore*/}
+            {data[row.index].action}
+          </td>
+        );
+      }
+    },
+    [data],
+  );
 
   return (
     <Layout>
-      <View>
+      <View ref={tableRef}>
         <TableView {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup: any, index: number) => (
@@ -99,6 +74,53 @@ const Table = ({ columns = [], data = [] }: { columns: Column<any>[]; data: Obje
                     )}
                   </ThView>
                 ))}
+                <th role={"row"}>
+                  <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                    <IconButton
+                      variant={"flat"}
+                      icon={OptionsDotsIcon}
+                      dropDownOptions={{
+                        componentOverflowRef: tableRef,
+                        alignment: "right",
+                      }}
+                      renderDropDown={
+                        <OptionList>
+                          {columns.map((column: any, index) => {
+                            const isDisabled =
+                              hiddenColumns.length >= columns.length - 2 &&
+                              !hiddenColumns.find((e) => e === column.accessor);
+
+                            const isActive =
+                              hiddenColumns.find((e) => e === column.accessor) ?? true;
+
+                            return (
+                              <OptionItem key={`--options-container-${index.toString()}`}>
+                                <CheckBox
+                                  value={isActive}
+                                  label={column.Header ?? ""}
+                                  onChange={(isActive: boolean) => {
+                                    toggleHideColumn(column.accessor, !isActive);
+                                    if (!isActive) {
+                                      // @ts-ignore
+                                      setHiddenColumns((prevState: any[]) => {
+                                        return [...prevState, column.accessor];
+                                      });
+                                    } else {
+                                      setHiddenColumns((prevState) =>
+                                        prevState.filter((e) => e !== column.accessor),
+                                      );
+                                    }
+                                  }}
+                                  disabled={isDisabled}
+                                />
+                              </OptionItem>
+                            );
+                          })}
+                        </OptionList>
+                      }
+                    />
+                  </div>
+                </th>
               </tr>
             ))}
           </thead>
@@ -106,43 +128,23 @@ const Table = ({ columns = [], data = [] }: { columns: Column<any>[]; data: Obje
             {firstPageRows.map((row: any, index: number) => {
               prepareRow(row);
               return (
-                <Row key={`--firstPageRows-${index.toString()}`} row={row} {...row.getRowProps()} />
+                <tr key={`--firstPageRows-${index.toString()}`} {...row.getRowProps()}>
+                  {row.cells.map((cell: any, index: number) => (
+                    <td
+                      className={cell.column.id === "action" ? "action" : "row-td"}
+                      {...cell.getCellProps()}
+                      key={`--table-row-cell-${index.toString()}`}
+                    >
+                      {cell.render("Cell")}
+                    </td>
+                  ))}
+                  {renderActionRow(row, index)}
+                </tr>
               );
             })}
           </tbody>
         </TableView>
       </View>
-      <OptionsMenu ref={menuRef} disabled={!isTableOptionsEnabled}>
-        <OptionHead>
-          <OptionTitle>Options</OptionTitle>
-          <IconButton icon={<CloseIcon />} onClick={() => setTableOptionEnabled(false)} />
-        </OptionHead>
-        <OptionList>
-          {columns.map((column: any, index) => (
-            <OptionItem key={`--options-container-${index.toString()}`}>
-              <CheckBox
-                value={hiddenColumns.find((e) => e === column.accessor) ?? true}
-                label={(column.Header ?? "").toString()}
-                onChange={(isActive: boolean) => {
-                  toggleHideColumn(column.accessor, !isActive);
-                  if (!isActive) {
-                    // @ts-ignore
-                    setHiddenColumns((prevState: any[]) => {
-                      return [...prevState, column.accessor];
-                    });
-                  } else {
-                    setHiddenColumns((prevState) => prevState.filter((e) => e !== column.accessor));
-                  }
-                }}
-                disabled={
-                  hiddenColumns.length >= columns.length / 2 &&
-                  !hiddenColumns.find((e) => e === column.accessor)
-                }
-              />
-            </OptionItem>
-          ))}
-        </OptionList>
-      </OptionsMenu>
     </Layout>
   );
 };

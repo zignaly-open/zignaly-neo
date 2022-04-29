@@ -152,54 +152,6 @@ export const SortIcon = styled.img<{ isSorted?: boolean; isSortedDesc?: boolean 
   `}
 `;
 
-type OptionsMenuTypeProps = {
-  disabled: boolean;
-};
-
-export const OptionsMenu = styled.ul<OptionsMenuTypeProps>`
-  background: #202041;
-  min-width: 290px;
-  z-index: 5;
-
-  &[disabled] {
-    opacity: 0;
-    right: -190px;
-    visibility: hidden;
-  }
-
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: 0;
-  padding: 0;
-
-  opacity: 1;
-  visibility: visible;
-  position: fixed;
-  transition: all 0.1s linear;
-  user-select: none;
-`;
-
-export const OptionHead = styled.div`
-  display: flex;
-  flex-direction: row;
-  border-bottom: 1px solid #28284e;
-  justify-content: space-between;
-  align-items: center;
-  padding: 8px 6px;
-  margin: 0 12px;
-`;
-
-export const OptionTitle = styled.h4`
-  padding: 0;
-  margin: 0;
-  font-size: 13px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-weight: 300;
-  color: #8d8db6;
-`;
-
 export const OptionList = styled.ul`
   list-style-type: none;
   display: flex;

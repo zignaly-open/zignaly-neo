@@ -5,7 +5,7 @@ import React, { useCallback, useState } from "react";
 import { Layout, Box, Label, Icon } from "./styles";
 
 // Assets
-import CheckmarkIcon from "assets/icons/checkmark-icon.svg?url";
+import CheckmarkIcon from "assets/icons/checkmark-active-icon.svg?url";
 
 // Types
 import { CheckBoxProps } from "./types";
@@ -20,8 +20,8 @@ function CheckBox({ value, label, disabled = false, onChange = () => {} }: Check
   const handleClickChecked = useCallback(() => {
     if (!disabled) {
       const newValue = !isChecked;
-      onChange(newValue);
       setChecked(newValue);
+      onChange(newValue);
     }
   }, [disabled, isChecked]);
 

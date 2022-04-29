@@ -1,9 +1,9 @@
 // Dependencies
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 // Assets
-import OptionDotsIcon from "assets/icons/option-dots-icon.svg";
+import OptionDotsIcon from "assets/icons/option-dots-icon.svg?url";
 
 // Component
 import IconButton from "./";
@@ -11,11 +11,63 @@ import IconButton from "./";
 export default {
   title: "Inputs/IconButton",
   component: IconButton,
+
+  argTypes: {
+    variant: {
+      options: ["primary", "secondary", "flat"],
+      control: { type: "radio" },
+    },
+    disabled: {
+      type: "boolean",
+      defaultValue: false,
+    },
+    size: {
+      options: ["small", "medium", "large", "xlarge"],
+      control: { type: "radio" },
+    },
+  },
 } as ComponentMeta<typeof IconButton>;
 
-const Template: ComponentStory<typeof IconButton> = (args) => <IconButton {...args} />;
+const templateStyle = {
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
 
-export const Basic = Template.bind({});
-Basic.args = {
-  icon: <OptionDotsIcon />,
+const Template: ComponentStory<typeof IconButton> = (args) => (
+  <div style={templateStyle}>
+    <IconButton {...args} />
+  </div>
+);
+
+export const Simple = Template.bind({});
+Simple.args = {
+  icon: OptionDotsIcon,
+};
+
+export const WithDropdownLeft = Template.bind({});
+WithDropdownLeft.args = {
+  icon: OptionDotsIcon,
+  renderDropDown: <div>Render Dropdown Content</div>,
+  dropDownOptions: {
+    alignment: "left",
+  },
+};
+
+export const WithDropdownRight = Template.bind({});
+WithDropdownRight.args = {
+  icon: OptionDotsIcon,
+  renderDropDown: <div>Render Dropdown Content</div>,
+  dropDownOptions: {
+    alignment: "right",
+  },
+};
+
+export const WithCustomWidth = Template.bind({});
+WithCustomWidth.args = {
+  icon: OptionDotsIcon,
+  renderDropDown: <div>Render Dropdown Content</div>,
+  dropDownOptions: {
+    width: "300px",
+  },
 };

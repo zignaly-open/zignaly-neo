@@ -12,6 +12,7 @@ export const buttonSizes = {
   large: "large",
   xlarge: "xlarge",
 };
+
 export const buttonColors = {
   grey: "grey",
   green: "green",
