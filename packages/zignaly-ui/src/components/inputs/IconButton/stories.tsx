@@ -71,3 +71,12 @@ WithCustomWidth.args = {
     width: "300px",
   },
 };
+
+export const Static = Template.bind({});
+Static.args = {
+  icon: OptionDotsIcon,
+  renderDropDown: <div>Render Dropdown Content</div>,
+  dropDownOptions: {
+    position: "static",
+  },
+};

@@ -18,6 +18,19 @@ export const dropdownAlignment = {
   right: "right",
 };
 
+export const dropdownPosition = {
+  static: "static",
+  absolute: "absolute",
+};
+
+export const defaultDropDownOptions = {
+  width: "auto",
+  componentOverflowRef: null,
+  alignment: "left",
+  position: "absolute",
+  zIndex: 10,
+};
+
 export type IconButtonProps = {
   icon: string | ReactElement;
   variant?: keyof typeof buttonVariants;
@@ -27,6 +40,8 @@ export type IconButtonProps = {
     width?: string;
     alignment?: keyof typeof dropdownAlignment;
     componentOverflowRef?: any;
+    zIndex?: number;
+    position?: keyof typeof dropdownPosition;
   };
   onClick?: React.MouseEventHandler<HTMLButtonElement> | null;
   renderDropDown?: ReactElement<any> | null;

@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useMemo, useEffect, useRef, useState } from "react";
 import { useClickAway, useWindowSize } from "react-use";
 import { Portal } from "react-portal";
 
@@ -7,7 +7,7 @@ import { Portal } from "react-portal";
 import { Layout, ViewPort, Dropdown, Icon, Container } from "./styles";
 
 // Types
-import { IconButtonProps } from "./types";
+import { IconButtonProps, defaultDropDownOptions } from "./types";
 
 const IconButton = ({
   icon,
@@ -15,14 +15,15 @@ const IconButton = ({
   size = "medium",
   variant = "primary",
   onClick = null,
-  dropDownOptions = {
-    width: "auto",
-    componentOverflowRef: null,
-    alignment: "left",
-  },
+  dropDownOptions,
   renderDropDown = null,
 }: IconButtonProps) => {
   // Ref
+  const options = {
+    ...defaultDropDownOptions,
+    ...dropDownOptions,
+  };
+
   const layoutRef = useRef(null);
   const dropdownRef = useRef(null);
 
@@ -49,14 +50,14 @@ const IconButton = ({
   });
 
   useEffect(() => {
-    if (layoutRef && layoutRef.current) {
+    if (layoutRef && layoutRef.current && options.position === "absolute") {
       if (isActiveDropdown) {
         const { offsetTop, clientHeight, offsetLeft, clientWidth } = layoutRef.current;
 
         if (dropdownRef && dropdownRef.current) {
           const container = dropdownRef.current as HTMLElement;
 
-          const { alignment, componentOverflowRef } = dropDownOptions;
+          const { alignment, componentOverflowRef } = options;
           container.style.top = `${offsetTop + clientHeight}px`;
 
           const scrollLeft = componentOverflowRef ? componentOverflowRef.current.scrollLeft : 0;
@@ -76,13 +77,28 @@ const IconButton = ({
         }
       }
     }
-  }, [width, isActiveDropdown, dropDownOptions.componentOverflowRef]);
+  }, [width, options.position, isActiveDropdown, options.componentOverflowRef]);
 
   useEffect(() => {
     if (isActiveDropdown) {
       setDropdownActive(false);
     }
   }, [width]);
+
+  const renderDropDownBase = useMemo(
+    () => (
+      <Dropdown
+        ref={dropdownRef}
+        width={options.width}
+        alignment={options.alignment}
+        position={options.position}
+        zIndex={options.zIndex}
+      >
+        {renderDropDown}
+      </Dropdown>
+    ),
+    [dropdownRef, options],
+  );
 
   return (
     <Layout ref={layoutRef}>
@@ -96,17 +112,12 @@ const IconButton = ({
           <Icon src={icon} />
         </Container>
       </ViewPort>
-      {isActiveDropdown && (
-        <Portal>
-          <Dropdown
-            ref={dropdownRef}
-            width={dropDownOptions.width}
-            alignment={dropDownOptions.alignment}
-          >
-            {renderDropDown}
-          </Dropdown>
-        </Portal>
-      )}
+      {isActiveDropdown &&
+        (options.position === "absolute" ? (
+          <Portal>{renderDropDownBase}</Portal>
+        ) : (
+          renderDropDownBase
+        ))}
     </Layout>
   );
 };
