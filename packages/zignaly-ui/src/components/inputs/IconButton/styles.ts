@@ -19,7 +19,7 @@ const isLargeButton = (size: keyof typeof buttonSizes) => size === buttonSizes.l
 
 const isXLargeButton = (size: keyof typeof buttonSizes) => size === buttonSizes.xlarge;
 
-export const Icon = styled.img<{ src: any }>`
+export const Icon = styled.div`
   z-index: 2;
   position: relative;
   transition: color 0.2s linear;

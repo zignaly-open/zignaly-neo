@@ -44,7 +44,7 @@ Main.args = {
     <IconButton
       key={"menu"}
       variant={"secondary"}
-      icon={ThreeDotsIcon}
+      icon={<ThreeDotsIcon />}
       renderDropDown={<div>DropDown Container</div>}
       dropDownOptions={{
         position: "static",
@@ -56,7 +56,7 @@ Main.args = {
     <IconButton
       key={"user"}
       variant={"flat"}
-      icon={UserIcon}
+      icon={<UserIcon />}
       renderDropDown={<div>DropDown Container</div>}
       dropDownOptions={{
         alignment: "right",

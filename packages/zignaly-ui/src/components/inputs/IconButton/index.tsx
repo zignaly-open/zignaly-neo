@@ -109,7 +109,7 @@ const IconButton = ({
         isActiveDropdown={isActiveDropdown}
       >
         <Container onClick={disabled ? null : renderDropDown ? handleClickButton : onClick}>
-          <Icon src={icon} />
+          <Icon>{icon}</Icon>
         </Container>
       </ViewPort>
       {isActiveDropdown &&

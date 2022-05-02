@@ -23,8 +23,10 @@ import { ButtonGroup } from "./components/styled";
 
 // Icons
 import CloseIcon from "./assets/icons/close-icon.svg";
-import CopyIcon from "./assets/icons/close-icon.svg";
+import CopyIcon from "./assets/icons/copy-icon.svg";
 import OpenArrowIcon from "./assets/icons/open-arrow.svg";
+import EyeOpenIcon from "./assets/icons/eye-open.svg";
+import EyeClosedIcon from "./assets/icons/eye-closed.svg";
 
 // Navigation
 import Tabs from "./components/navigation/Tabs";
@@ -70,6 +72,8 @@ export {
   CloseIcon,
   CopyIcon,
   OpenArrowIcon,
+  EyeOpenIcon,
+  EyeClosedIcon,
   // Navigation
   Tabs,
   TabPanel,

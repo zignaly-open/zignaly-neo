@@ -4,7 +4,7 @@ import { useSortBy, useTable } from "react-table";
 
 // Assets
 import ArrowBottomWhiteIcon from "assets/icons/arrow-bottom-icon-white.svg?url";
-import OptionsDotsIcon from "assets/icons/option-dots-icon.svg?url";
+import OptionsDotsIcon from "assets/icons/option-dots-icon.svg";
 
 // Styles
 import { Layout, OptionItem, OptionList, SortIcon, TableView, View, ThView } from "./styles";
@@ -78,7 +78,7 @@ const Table = ({ columns = [], data = [] }: { columns: any[]; data: Object[] }) 
                   <div style={{ display: "flex", justifyContent: "flex-end" }}>
                     <IconButton
                       variant={"flat"}
-                      icon={OptionsDotsIcon}
+                      icon={<OptionsDotsIcon />}
                       dropDownOptions={{
                         componentOverflowRef: tableRef,
                         alignment: "right",

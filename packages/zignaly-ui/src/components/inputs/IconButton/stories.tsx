@@ -3,7 +3,7 @@ import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 // Assets
-import OptionDotsIcon from "assets/icons/option-dots-icon.svg?url";
+import OptionDotsIcon from "assets/icons/option-dots-icon.svg";
 
 // Component
 import IconButton from "./";
@@ -42,12 +42,12 @@ const Template: ComponentStory<typeof IconButton> = (args) => (
 
 export const Simple = Template.bind({});
 Simple.args = {
-  icon: OptionDotsIcon,
+  icon: <OptionDotsIcon />,
 };
 
 export const WithDropdownLeft = Template.bind({});
 WithDropdownLeft.args = {
-  icon: OptionDotsIcon,
+  icon: <OptionDotsIcon />,
   renderDropDown: <div>Render Dropdown Content</div>,
   dropDownOptions: {
     alignment: "left",
@@ -56,7 +56,7 @@ WithDropdownLeft.args = {
 
 export const WithDropdownRight = Template.bind({});
 WithDropdownRight.args = {
-  icon: OptionDotsIcon,
+  icon: <OptionDotsIcon />,
   renderDropDown: <div>Render Dropdown Content</div>,
   dropDownOptions: {
     alignment: "right",
@@ -65,7 +65,7 @@ WithDropdownRight.args = {
 
 export const WithCustomWidth = Template.bind({});
 WithCustomWidth.args = {
-  icon: OptionDotsIcon,
+  icon: <OptionDotsIcon />,
   renderDropDown: <div>Render Dropdown Content</div>,
   dropDownOptions: {
     width: "300px",
@@ -74,7 +74,7 @@ WithCustomWidth.args = {
 
 export const Static = Template.bind({});
 Static.args = {
-  icon: OptionDotsIcon,
+  icon: <OptionDotsIcon />,
   renderDropDown: <div>Render Dropdown Content</div>,
   dropDownOptions: {
     position: "static",
