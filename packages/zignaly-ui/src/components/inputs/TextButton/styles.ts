@@ -28,7 +28,6 @@ export const RightElement = styled(LeftElement)`
   padding-left: 10px;
 `;
 
-
 export const CenterIcon = styled.div`
   position: relative;
   top: 1px;
@@ -38,8 +37,9 @@ export const CenterIcon = styled.div`
  * Layout
  */
 interface LayoutProps {
-  withElements: Boolean;
-  underline?: Boolean;
+  withElements: boolean;
+  underline?: boolean;
+  href?: string;
 }
 
 export const Layout = styled.button<LayoutProps>`

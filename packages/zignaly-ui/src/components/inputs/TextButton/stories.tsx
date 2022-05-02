@@ -8,6 +8,7 @@ import TextButton from "./";
 // Assets
 import CloseIcon from "assets/icons/close-icon.svg";
 import ArrowDown from "assets/icons/arrow-bottom-icon.svg";
+import OpenArrow from "assets/icons/open-arrow.svg";
 
 const ICONS = {
   ArrowDown: <ArrowDown width={13} height={8} color={"#E1E9F0"} />,
@@ -72,3 +73,10 @@ const Template: ComponentStory<typeof TextButton> = ({ leftElement, rightElement
 /// Normal Buttons
 export const PlainTextButton = Template.bind({});
 PlainTextButton.args = {};
+
+// Link Button
+export const LinkButton = Template.bind({});
+LinkButton.args = {
+  href: "https://zignaly.com",
+  rightElement: <OpenArrow />,
+};
