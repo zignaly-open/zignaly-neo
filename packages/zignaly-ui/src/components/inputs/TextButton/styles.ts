@@ -6,7 +6,7 @@ export const Container = styled.div`
   position: relative;
   transition: all 0.2s linear;
   outline: none;
-  display: flex;
+  display: inline-flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
@@ -39,7 +39,6 @@ export const CenterIcon = styled.div`
 interface LayoutProps {
   withElements: boolean;
   underline?: boolean;
-  href?: string;
 }
 
 export const Layout = styled.button<LayoutProps>`
