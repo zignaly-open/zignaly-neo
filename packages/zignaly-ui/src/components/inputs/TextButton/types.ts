@@ -9,4 +9,5 @@ export type ButtonProps = {
   href?: string;
   rel?: string;
   target?: string;
+  className?: string;
 };

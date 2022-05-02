@@ -8,7 +8,7 @@ import TextButton from "./";
 // Assets
 import CloseIcon from "assets/icons/close-icon.svg";
 import ArrowDown from "assets/icons/arrow-bottom-icon.svg";
-import OpenArrow from "assets/icons/open-arrow.svg";
+import OpenArrow from "assets/icons/open-arrow-icon.svg";
 
 const ICONS = {
   ArrowDown: <ArrowDown width={13} height={8} color={"#E1E9F0"} />,

@@ -15,9 +15,11 @@ function TextButton({
   href,
   rel,
   target,
+  className,
 }: ButtonProps): ReactElement {
   return (
     <styled.Layout
+      className={className}
       underline={underline}
       withElements={!!leftElement || !!rightElement}
       onClick={onClick}
