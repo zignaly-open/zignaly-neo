@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 
 // Styled Components
 import { Layout, InputContainer, InputValue, Side, Label } from "./styles";
@@ -18,26 +18,34 @@ function InputText(
     rightSideElement,
     type,
     defaultValue = "",
+    value,
     readOnly = false,
     name,
+    multiline,
   }: InputTextProps,
   inputRef: React.Ref<any>,
 ) {
-  const [inputValue, setInputValue] = useState(defaultValue);
+  const isControlled = useRef(value !== undefined);
+  const [internalValue, setInternalValue] = useState(defaultValue);
+  const inputValue = isControlled ? value : internalValue;
 
   const handleTextChange = useCallback((e: any) => {
-    const value = e.target.value;
-
-    setInputValue(value);
-    onChange(e, { value: value });
-    return;
+    const newValue = e.target.value;
+    if (isControlled) {
+      setInternalValue(newValue);
+    }
+    if (onChange) {
+      onChange(e, { value: newValue });
+    }
   }, []);
+
   return (
     <Layout withError={!!error} disabled={disabled}>
       <Label>{label}</Label>
       <InputContainer>
         <Side>
           <InputValue
+            as={multiline ? "textarea" : "input"}
             readOnly={readOnly}
             ref={inputRef}
             onChange={handleTextChange}

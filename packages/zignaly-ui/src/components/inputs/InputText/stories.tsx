@@ -44,3 +44,11 @@ export const TextInputer = Template.bind({});
 TextInputer.args = {
   label: "Amount to Withdraw",
 };
+
+export const TextareaInputer = Template.bind({});
+TextareaInputer.args = {
+  value:
+    "https://zignaly.com/api/signals.php?key=YOURSECRETKEY&type=entry&exchange=zignaly&pair=ethusdt&orderType=limit&positionSize=10&signalId=123&limitPrice=3420&takeProfitPercentage1=20&takeProfitAmountPercentage1=100&stopLossPercentage=-5",
+  multiline: true,
+  label: "Label",
+};
