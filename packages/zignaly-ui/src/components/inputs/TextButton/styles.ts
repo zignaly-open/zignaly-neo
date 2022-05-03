@@ -73,18 +73,13 @@ export const Layout = styled.button<LayoutProps>`
       ${styledIf(
         props.underline,
         `
-      ${Container} { 
-            text-decoration-color: #26C4C1;
-            text-decoration-line: underline;
-         `,
+          text-decoration-color: #26C4C1;
+          text-decoration-line: underline;
+        `,
+        `
+          text-decoration-line: none;
+        `,
       )}
-    ${styledIf(
-      !props.underline,
-      `
-      ${Container} { 
-        text-decoration-line: none;
-         `,
-    )}
       
       ${LeftElement} {
         img {
