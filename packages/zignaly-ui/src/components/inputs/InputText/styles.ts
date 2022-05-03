@@ -42,7 +42,7 @@ export const Label = styled.label`
 
 export const InputContainer = styled.div`
   border: 1px solid #35334a;
-  padding-left: 24px;
+  padding: 0 24px;
   min-height: 60px;
   border-radius: 5px;
   display: flex;
