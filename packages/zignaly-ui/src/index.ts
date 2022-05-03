@@ -29,6 +29,8 @@ import EyeOpenIcon from "./assets/icons/eye-open-icon.svg";
 import EyeClosedIcon from "./assets/icons/eye-closed-icon.svg";
 import OptionDotsIcon from "./assets/icons/option-dots-icon.svg";
 import ArrowBottomIcon from "./assets/icons/arrow-bottom-icon.svg";
+import UserIcon from "./assets/icons/user-icon.svg";
+import CheckIcon from "./assets/icons/check-icon.svg";
 
 // Navigation
 import Tabs from "./components/navigation/Tabs";
@@ -78,6 +80,8 @@ export {
   EyeClosedIcon,
   OptionDotsIcon,
   ArrowBottomIcon,
+  UserIcon,
+  CheckIcon,
   // Navigation
   Tabs,
   TabPanel,
