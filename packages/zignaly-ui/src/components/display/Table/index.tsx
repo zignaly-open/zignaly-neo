@@ -110,7 +110,6 @@ const Table = ({
 
                             const isActive = !hiddenColumns.find((e) => e === column.accessor);
 
-                            console.log(isActive, column.accessor);
                             return (
                               <OptionItem key={`--options-container-${index.toString()}`}>
                                 <CheckBox
