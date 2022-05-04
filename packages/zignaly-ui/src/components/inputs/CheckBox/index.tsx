@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useRef, useState } from "react";
 
 // Styled Components
 import { Layout, Box, Label, Icon } from "./styles";
@@ -10,8 +10,16 @@ import CheckmarkIcon from "assets/icons/checkmark-active-icon.svg?url";
 // Types
 import { CheckBoxProps } from "./types";
 
-function CheckBox({ value, label, disabled = false, onChange = () => {} }: CheckBoxProps) {
-  const [isChecked, setChecked] = useState(value ?? false);
+function CheckBox({
+  defaultValue = false,
+  value,
+  label,
+  disabled = false,
+  onChange = () => {},
+}: CheckBoxProps) {
+  const isControlled = useRef(value !== undefined);
+  const [internalValue, setInternalValue] = useState(defaultValue);
+  const isChecked = isControlled.current ? value ?? false : internalValue;
 
   /**
    * @function handleClickChecked
@@ -20,7 +28,7 @@ function CheckBox({ value, label, disabled = false, onChange = () => {} }: Check
   const handleClickChecked = useCallback(() => {
     if (!disabled) {
       const newValue = !isChecked;
-      setChecked(newValue);
+      setInternalValue(newValue);
       onChange(newValue);
     }
   }, [disabled, isChecked]);

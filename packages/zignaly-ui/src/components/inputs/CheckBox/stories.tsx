@@ -16,18 +16,18 @@ export default {
   },
   argTypes: {
     disabled: {
-      options: [true,false],
+      options: [true, false],
       control: { type: "radio" },
     },
     label: {
       control: "text",
     },
     onChange: {
-      disabled: true
+      disabled: true,
     },
     value: {
       disabled: true,
-    }
+    },
   },
 } as ComponentMeta<typeof CheckBox>;
 
@@ -36,7 +36,7 @@ const Template: ComponentStory<typeof CheckBox> = (args) => <CheckBox {...args} 
 export const Default = Template.bind({});
 Default.args = {
   label: "Type Something",
-  value: true,
+  defaultValue: true,
   onChange: (isActive: boolean) => {
     console.log("onChange: ", isActive);
   },
@@ -46,7 +46,7 @@ export const Disabled = Template.bind({});
 Disabled.args = {
   label: "Type Something",
   disabled: true,
-  value: false,
+  defaultValue: false,
   onChange: (isActive: boolean) => {
     console.log("onChnage: ", isActive);
   },

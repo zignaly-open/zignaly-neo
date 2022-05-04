@@ -14,7 +14,7 @@ function InputText(
     disabled = false,
     placeholder = "Please enter a value",
     label,
-    onChange,
+    onChange = () => {},
     rightSideElement,
     type,
     defaultValue = "",
@@ -27,16 +27,14 @@ function InputText(
 ) {
   const isControlled = useRef(value !== undefined);
   const [internalValue, setInternalValue] = useState(defaultValue);
-  const inputValue = isControlled ? value : internalValue;
+  const inputValue = isControlled.current ? value : internalValue;
 
   const handleTextChange = useCallback((e: any) => {
     const newValue = e.target.value;
     if (isControlled) {
       setInternalValue(newValue);
     }
-    if (onChange) {
-      onChange(e, { value: newValue });
-    }
+    onChange(e, { value: newValue });
   }, []);
 
   return (

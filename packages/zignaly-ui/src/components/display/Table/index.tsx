@@ -12,13 +12,19 @@ import { Layout, OptionItem, OptionList, SortIcon, TableView, View, ThView } fro
 // Components
 import IconButton from "components/inputs/IconButton";
 import CheckBox from "components/inputs/CheckBox";
+import { TableProps } from "./types";
 
-const Table = ({ columns = [], data = [] }: { columns: any[]; data: Object[] }) => {
+const Table = ({
+  columns = [],
+  data = [],
+  onColumnHidden = () => {},
+  defaultHiddenColumns,
+}: TableProps) => {
   // Refs
   const tableRef = useRef(null);
 
   // States
-  const [hiddenColumns, setHiddenColumns] = useState([]);
+  const [hiddenColumns, setHiddenColumns] = useState<string[]>(defaultHiddenColumns || []);
 
   // Hooks
   const { getTableProps, getTableBodyProps, rows, headerGroups, toggleHideColumn, prepareRow } =
@@ -49,6 +55,18 @@ const Table = ({ columns = [], data = [] }: { columns: any[]; data: Object[] }) 
     },
     [data],
   );
+
+  const hideColumn = (column: string) => {
+    setHiddenColumns((prevState: any[]) => {
+      return [...prevState, column];
+    });
+    onColumnHidden(column, true);
+  };
+
+  const showColumn = (column: string) => {
+    setHiddenColumns((prevState) => prevState.filter((e) => e !== column));
+    onColumnHidden(column, false);
+  };
 
   return (
     <Layout>
@@ -90,9 +108,9 @@ const Table = ({ columns = [], data = [] }: { columns: any[]; data: Object[] }) 
                               hiddenColumns.length >= columns.length - 2 &&
                               !hiddenColumns.find((e) => e === column.accessor);
 
-                            const isActive =
-                              hiddenColumns.find((e) => e === column.accessor) ?? true;
+                            const isActive = !hiddenColumns.find((e) => e === column.accessor);
 
+                            console.log(isActive, column.accessor);
                             return (
                               <OptionItem key={`--options-container-${index.toString()}`}>
                                 <CheckBox
@@ -101,14 +119,9 @@ const Table = ({ columns = [], data = [] }: { columns: any[]; data: Object[] }) 
                                   onChange={(isActive: boolean) => {
                                     toggleHideColumn(column.accessor, !isActive);
                                     if (!isActive) {
-                                      // @ts-ignore
-                                      setHiddenColumns((prevState: any[]) => {
-                                        return [...prevState, column.accessor];
-                                      });
+                                      hideColumn(column.accessor);
                                     } else {
-                                      setHiddenColumns((prevState) =>
-                                        prevState.filter((e) => e !== column.accessor),
-                                      );
+                                      showColumn(column.accessor);
                                     }
                                   }}
                                   disabled={isDisabled}
