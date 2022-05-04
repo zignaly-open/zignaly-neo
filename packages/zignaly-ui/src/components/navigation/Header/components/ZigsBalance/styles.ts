@@ -1,6 +1,9 @@
 // Dependencies
 import styled from "styled-components";
 
+// Assets
+import WalletIcon from "assets/icons/wallet-icon.svg";
+
 export const Layout = styled.nav`
   display: flex;
   flex-direction: row;
@@ -15,7 +18,7 @@ export const Layout = styled.nav`
   align-items: center;
 `;
 
-export const Icon = styled.img`
+export const StyledWalletIcon = styled(WalletIcon)`
   width: 18px;
   height: 18px;
 `;

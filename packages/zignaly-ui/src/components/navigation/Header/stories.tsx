@@ -8,8 +8,8 @@ import BrandImage from "./components/BrandImage";
 import Navigation from "./components/Navigation";
 import IconButton from "../../inputs/IconButton";
 
-import ThreeDotsIcon from "assets/icons/horizontal-three-dots-icon.svg?url";
-import UserIcon from "assets/icons/user-icon.svg?url";
+import ThreeDotsIcon from "assets/icons/horizontal-three-dots-icon.svg";
+import UserIcon from "assets/icons/user-icon.svg";
 import ZigBalance from "./components/ZigsBalance";
 
 export default {

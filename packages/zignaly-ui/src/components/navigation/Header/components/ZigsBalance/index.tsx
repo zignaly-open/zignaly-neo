@@ -5,11 +5,8 @@ import NumberFormat from "react-number-format";
 // Types
 import { ZigBalanceProps } from "./types";
 
-// Assets
-import WalletIcon from "assets/icons/wallet-icon.svg?url";
-
 // Components
-import { Layout, Icon, Balance } from "./styles";
+import { Layout, StyledWalletIcon, Balance } from "./styles";
 
 // Utils
 import { utils } from "ethers";
@@ -33,7 +30,7 @@ function ZigBalance({ balance }: ZigBalanceProps) {
 
   return (
     <Layout>
-      <Icon src={WalletIcon} />
+      <StyledWalletIcon />
       {renderZigsCoins}
     </Layout>
   );
