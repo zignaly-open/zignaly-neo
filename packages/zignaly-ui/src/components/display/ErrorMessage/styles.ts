@@ -1,6 +1,5 @@
 // Dependencies
 import styled from "styled-components";
-import Typography from "../Typography";
 
 export const Layout = styled.div`
   display: flex;
@@ -8,15 +7,8 @@ export const Layout = styled.div`
   align-items: center;
 `;
 
-export const Icon = styled.img`
+export const Icon = styled.div`
   margin-right: 8px;
-`;
-
-type TextProps = {
-  variant: string;
-  as: string;
-};
-
-export const Text = styled(Typography)<TextProps>`
-  color: #cc3993;
+  display: flex;
+  items-align: center;
 `;

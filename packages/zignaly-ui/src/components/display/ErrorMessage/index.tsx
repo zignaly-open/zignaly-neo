@@ -2,21 +2,25 @@
 import React from "react";
 
 // Styled Components
-import { Layout, Text, Icon } from "./styles";
+import { Layout, Icon } from "./styles";
 
 // Types
 import { ErrorMessageProps } from "./types";
 
 // Assets
-import ErrorAlertIcon from "assets/icons/error-alert-icon.svg?url";
-
+import ErrorAlertIcon from "assets/icons/error-alert-icon.svg";
+import Typography from "../Typography";
+import { dark } from "theme";
+// TODO(Vetle): Refactor usage of Dark theme when light theme is ready
 function ErrorMessage({ text }: ErrorMessageProps) {
   return (
     <Layout>
-      <Icon width={"18px"} height={"18px"} src={ErrorAlertIcon} alt={text} />
-      <Text variant={"h4"} as={"span"}>
+      <Icon>
+        <ErrorAlertIcon height="18px" width="18px" color={dark["redGraphOrError"]} />
+      </Icon>
+      <Typography variant={"body2"} color={"redGraphOrError"} weight="regular">
         {text}
-      </Text>
+      </Typography>
     </Layout>
   );
 }

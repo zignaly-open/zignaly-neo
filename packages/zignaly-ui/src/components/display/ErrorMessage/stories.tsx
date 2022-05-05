@@ -12,7 +12,7 @@ export default {
 
 const Template: ComponentStory<typeof ErrorMessage> = (args) => <ErrorMessage {...args} />;
 
-export const Default = Template.bind({});
-Default.args = {
+export const Error = Template.bind({});
+Error.args = {
   text: "Exceeds available balance",
 };
