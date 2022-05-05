@@ -1,4 +1,6 @@
 // Dependencies
+import { LoaderTypes } from "components/display/Loader";
+import Typography from "components/display/Typography";
 import * as React from "react";
 import { ReactElement } from "react";
 
@@ -13,16 +15,21 @@ function TextButton({
   underline,
   onClick = () => {},
   href,
+  disabled = false,
+  loading = false,
   rel,
   target,
   className,
+  color = "neutral000",
 }: ButtonProps): ReactElement {
   return (
     <styled.Layout
       className={className}
-      underline={underline}
+      color={color}
+      isLoading={loading}
       withElements={!!leftElement || !!rightElement}
       onClick={onClick}
+      disabled={disabled || loading}
       {...(href && {
         href,
         as: "a" as any,
@@ -31,10 +38,22 @@ function TextButton({
       })}
     >
       <styled.Container>
-        {leftElement && <styled.LeftElement>{leftElement}</styled.LeftElement>}
-        {caption}
-        {rightElement && <styled.RightElement>{rightElement}</styled.RightElement>}
+        <styled.ElementsContainer>
+          {leftElement && <styled.LeftElement>{leftElement}</styled.LeftElement>}
+          <Typography color={color} underline={underline}>{caption}</Typography>
+          {rightElement && <styled.RightElement>{rightElement}</styled.RightElement>}
+        </styled.ElementsContainer>
       </styled.Container>
+
+      {loading && (
+        <styled.LoaderContainer>
+          <styled.ButtonLoader
+            type={LoaderTypes.TAILSPIN}
+            color="#9CA3AF"
+            ariaLabel="Loader"
+          ></styled.ButtonLoader>
+        </styled.LoaderContainer>
+      )}
     </styled.Layout>
   );
 }

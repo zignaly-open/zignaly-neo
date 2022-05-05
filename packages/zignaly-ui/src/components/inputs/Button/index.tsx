@@ -1,4 +1,5 @@
 // Dependencies
+import { LoaderTypes } from "components/display/Loader";
 import * as React from "react";
 import { ReactElement, useMemo } from "react";
 
@@ -12,12 +13,12 @@ function Button({
   variant = "primary",
   size = "medium",
   caption = "Button",
-  icon = null,
   color = "grey",
   leftElement = null,
   rightElement = null,
   disabled = false,
   onClick = () => {},
+  loading,
   type,
 }: ButtonProps): ReactElement {
   /**
@@ -26,10 +27,7 @@ function Button({
    * @type {JSX.Element}
    */
   const renderLeftElement = useMemo(
-    () =>
-      typeof leftElement === "object" ? (
-        leftElement
-      ) : null,
+    () => (typeof leftElement === "object" ? leftElement : null),
     [leftElement],
   );
 
@@ -39,39 +37,15 @@ function Button({
    * @type {JSX.Element}
    */
   const renderRightElement = useMemo(
-    () =>
-      typeof rightElement === "object" ? (
-        rightElement
-      ) : null,
+    () => (typeof rightElement === "object" ? rightElement : null),
     [rightElement],
-  );
-
-  /**
-   * @var renderCaptionOrIcon
-   * @description If there is an icon property, check whether it is a react element or an image text.
-   * Otherwise, it displays whatever is in the 'caption' field.
-   * @type {JSX.Element}
-   */
-  const renderCaptionOrIcon = useMemo(
-    () => (
-      <styled.Caption>
-        {icon ? (
-          typeof icon === "object" ? (
-            <styled.CenterIcon>{icon}</styled.CenterIcon>
-          ) : null
-        ) : (
-          caption
-        )}
-      </styled.Caption>
-    ),
-    [icon, caption],
   );
 
   return (
     <styled.Layout
-      onlyIcon={!!icon}
-      withElements={!!leftElement || !!rightElement}
-      disabled={disabled}
+      isLoading={loading}
+      withElements={!!leftElement && !!rightElement && !!caption}
+      disabled={disabled || loading}
       variant={variant}
       size={size}
       color={color}
@@ -79,10 +53,22 @@ function Button({
       type={type}
     >
       <styled.Container>
-        {leftElement && <styled.LeftElement>{renderLeftElement}</styled.LeftElement>}
-        {(caption || icon) && renderCaptionOrIcon}
-        {rightElement && <styled.RightElement>{renderRightElement}</styled.RightElement>}
+        <styled.ElementsContainer>
+          {leftElement && <styled.LeftElement>{renderLeftElement}</styled.LeftElement>}
+          {caption && <styled.Caption>{caption}</styled.Caption>}
+          {rightElement && <styled.RightElement>{renderRightElement}</styled.RightElement>}
+        </styled.ElementsContainer>
       </styled.Container>
+
+      {loading && (
+        <styled.LoaderContainer>
+          <styled.ButtonLoader
+            type={LoaderTypes.TAILSPIN}
+            color="#9CA3AF"
+            ariaLabel="Loader"
+          ></styled.ButtonLoader>
+        </styled.LoaderContainer>
+      )}
     </styled.Layout>
   );
 }

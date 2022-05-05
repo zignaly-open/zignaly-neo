@@ -25,8 +25,8 @@ export const componentsByType = {
 
 export type LoaderProps = {
   type?: LoaderTypes;
-  width: string;
-  height: string;
+  width?: string;
+  height?: string;
   color: string;
   secondaryColor?: string;
   ariaLabel: string;

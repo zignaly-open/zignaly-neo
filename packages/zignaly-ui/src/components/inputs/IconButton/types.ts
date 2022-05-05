@@ -43,6 +43,8 @@ export type IconButtonProps = {
     zIndex?: number;
     position?: keyof typeof dropdownPosition;
   };
+
+  loading?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement> | null;
   renderDropDown?: ReactElement<any> | null;
   className?: string;

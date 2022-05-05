@@ -10,9 +10,9 @@ interface ButtonProps {
   variant?: keyof typeof buttonVariants;
   size?: keyof typeof buttonSizes;
   caption?: string | null;
-  icon?: ReactElement<any> | string | null;
-  leftElement?: ReactElement<any> | string | null;
-  rightElement?: ReactElement<any> | string | null;
+  leftElement?: ReactElement | string | null;
+  rightElement?: ReactElement | string | null;
+  loading?: boolean;
   disabled?: boolean;
   color?: keyof typeof buttonColors;
 }
@@ -41,7 +41,7 @@ export function ButtonVariations({
             variant={button.variant}
             size={button.size}
             caption={button.caption}
-            icon={button.icon}
+            loading={button.loading}
             leftElement={button.leftElement}
             rightElement={button.rightElement}
             disabled={button.disabled}
@@ -58,7 +58,7 @@ export function ButtonVariations({
               variant={button.variant}
               size={button.size}
               caption={button.caption}
-              icon={button.icon}
+              loading={button.loading}
               leftElement={button.leftElement}
               rightElement={button.rightElement}
               disabled={button.disabled}
@@ -78,7 +78,7 @@ export function ButtonVariations({
               variant={button.variant}
               size={button.size}
               caption={button.caption}
-              icon={button.icon}
+              loading={button.loading}
               leftElement={button.leftElement}
               rightElement={button.rightElement}
               disabled={button.disabled}
@@ -98,7 +98,7 @@ export function ButtonVariations({
               variant={button.variant}
               size={button.size}
               caption={button.caption}
-              icon={button.icon}
+              loading={button.loading}
               leftElement={button.leftElement}
               rightElement={button.rightElement}
               disabled={button.disabled}
@@ -118,7 +118,7 @@ export function ButtonVariations({
               variant={button.variant}
               size={button.size}
               caption={button.caption}
-              icon={button.icon}
+              loading={button.loading}
               leftElement={button.leftElement}
               rightElement={button.rightElement}
               disabled={button.disabled}

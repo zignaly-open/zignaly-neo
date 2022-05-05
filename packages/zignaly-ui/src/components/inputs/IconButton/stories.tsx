@@ -21,6 +21,10 @@ export default {
       type: "boolean",
       defaultValue: false,
     },
+    loading: {
+      options: [true, false],
+      control: { type: "radio" },
+    },
     size: {
       options: ["small", "medium", "large", "xlarge"],
       control: { type: "radio" },
@@ -79,4 +83,14 @@ Static.args = {
   dropDownOptions: {
     position: "static",
   },
+};
+
+export const Loading = Template.bind({});
+Loading.args = {
+  icon: <OptionDotsIcon />,
+  renderDropDown: <div>Render Dropdown Content</div>,
+  dropDownOptions: {
+    position: "static",
+  },
+  loading: true,
 };

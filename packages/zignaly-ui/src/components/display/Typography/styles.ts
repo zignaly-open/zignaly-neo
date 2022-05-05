@@ -119,6 +119,7 @@ export const Layout = styled.h1<{ color: string; underline: boolean; weight: str
     ${styledIf(
       props.underline,
       `
+      text-decoration-color: ${props.theme[props.color]};
       text-decoration-line: underline;
     `,
     )}

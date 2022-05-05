@@ -1,4 +1,5 @@
 // Dependencies
+import Loader from "components/display/Loader";
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 import { buttonVariants, buttonSizes, buttonColors } from "./types";
@@ -23,6 +24,24 @@ export const Caption = styled.div`
   z-index: 2;
   position: relative;
   transition: color 0.2s linear;
+`;
+
+export const ElementsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const LoaderContainer = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const Container = styled.div`
@@ -60,6 +79,10 @@ export const CenterIcon = styled.div`
   top: 1px;
 `;
 
+export const ButtonLoader = styled(Loader)`
+  justify-content: center;
+  align-items: center;
+`;
 /**
  * Layout
  */
@@ -67,8 +90,8 @@ interface LayoutProps {
   variant: keyof typeof buttonVariants;
   size: keyof typeof buttonSizes;
   color: keyof typeof buttonColors;
-  withElements: Boolean;
-  onlyIcon: Boolean;
+  withElements: boolean;
+  isLoading?: boolean;
 }
 
 export const Layout = styled.button<LayoutProps>`
@@ -88,37 +111,35 @@ export const Layout = styled.button<LayoutProps>`
     cursor: default;
   }
 
-  ${({ size, variant, withElements, onlyIcon, color }) => `
- 
-     ${styledIf(
-       onlyIcon,
-       `
-        ${Container} {
-          min-width: auto !important; 
-          height: auto !important;
-        }
+  ${({ size, variant, withElements, color, isLoading }) => `
+
+  ${styledIf(
+    isLoading,
+    `
+    ${ElementsContainer}{
+      opacity: 0;
+
+    }
     `,
-     )}
+  )}
       
     ${styledIf(
       isSmallButton(size),
       `
       ${Container} {
-        min-width: 88px; 
         padding: 9px 18px;
-     
+        height: 30px;
       }
-            
+
       ${styledIf(
-        withElements,
+        isLoading,
         `
-        ${Container} {
-          padding: 9px 18px;
-          border-radius: 5px; 
-        }
-      `,
+        ${ButtonLoader} {
+          height: 15px;
+          width: 15px;
+        }`,
       )}
-      
+
       ${Caption} {
         font-size: 11px;
         font-style: normal;
@@ -139,15 +160,6 @@ export const Layout = styled.button<LayoutProps>`
           margin-left: 8px;
           margin-right: 0;
       }
-      
-      ${styledIf(
-        onlyIcon,
-        `
-        ${Container} {
-          padding: 10px 12px;
-        }
-    `,
-      )}
     `,
     )}
     
@@ -159,6 +171,11 @@ export const Layout = styled.button<LayoutProps>`
         min-width: 88px;
         height: 36px; 
         border-radius: 5px; 
+      }
+
+      ${ButtonLoader} {
+        height: 20px;
+        width: 20px;
       }
       
       ${Caption} {
@@ -180,15 +197,6 @@ export const Layout = styled.button<LayoutProps>`
           margin-left: 10px;
           margin-right: 0;
       }
-      
-      ${styledIf(
-        onlyIcon,
-        `
-        ${Container} {
-          padding: 13px 16px
-        }
-    `,
-      )}
   `,
   )}
     
@@ -198,6 +206,12 @@ export const Layout = styled.button<LayoutProps>`
       ${Container} {
         padding: 15px 31px;
         height: 48px;
+        min-width: 120px;
+      }
+
+      ${ButtonLoader} {
+        height: 25px;
+        width: 25px;
       }
             
       ${Caption} {
@@ -217,15 +231,6 @@ export const Layout = styled.button<LayoutProps>`
           margin-left: 14px;
           margin-right: 0;
       }
-      
-      ${styledIf(
-        onlyIcon,
-        `
-        ${Container} {
-          padding: 18px 20px;
-        }
-      `,
-      )}
     `,
   )}
 
@@ -233,8 +238,13 @@ export const Layout = styled.button<LayoutProps>`
     isXLargeButton(size),
     `     
       ${Container} {
-        padding: 20px 36px;       
+        padding: 20px 36px;
         height: 60px;  
+      }
+
+      ${ButtonLoader} {
+        height: 30px;
+        width: 30px;
       }
       
       ${Caption} {
@@ -258,15 +268,6 @@ export const Layout = styled.button<LayoutProps>`
           margin-left: 18px;
           margin-right: 0;
       }
-      
-      ${styledIf(
-        onlyIcon,
-        `
-        ${Container} {
-          padding: 20px 36px
-        }
-    `,
-      )}
   `,
   )}
   
@@ -275,7 +276,6 @@ export const Layout = styled.button<LayoutProps>`
     `
       ${Container} {
         background: linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%);
-
       }
       
       &:enabled:focus:not(:focus-visible) {
@@ -313,16 +313,6 @@ export const Layout = styled.button<LayoutProps>`
             left: 1px;
             padding-right: 0;
           }
-          
-          ${styledIf(
-            onlyIcon,
-            `            
-            ${CenterIcon} {
-              top: 0px;
-              left: -1px;
-            }
-          `,
-          )}
         `,
         )}
         
@@ -349,16 +339,6 @@ export const Layout = styled.button<LayoutProps>`
             left: 1px;
             padding-right: 0;
           }
-          
-          ${styledIf(
-            onlyIcon,
-            `            
-            ${CenterIcon} {
-              top: 0px;
-              left: 0px;
-            }
-          `,
-          )}
         `,
         )}
         
@@ -385,16 +365,6 @@ export const Layout = styled.button<LayoutProps>`
             left: 1px;
             padding-right: 0;
           }
-          
-          ${styledIf(
-            onlyIcon,
-            `            
-            ${CenterIcon} {
-              top: 0px;
-              left: 0px;
-            }
-          `,
-          )}
         `,
         )}
 
@@ -421,23 +391,15 @@ export const Layout = styled.button<LayoutProps>`
             left: 1px;
             padding-right: 0;
           }
-          
-          ${styledIf(
-            onlyIcon,
-            `            
-            ${CenterIcon} {
-              top: 0px;
-              left: 0px;
-            }
-          `,
-          )}
         `,
         )}
       }
             
       &[disabled] {
-        opacity: 0.33;
-      } 
+        ${Container}{
+          opacity: 0.33;
+        }
+      }  
 
       &:enabled {
         ${Container} {
@@ -468,7 +430,7 @@ export const Layout = styled.button<LayoutProps>`
         isGreyColor(color),
         `            
         ${Caption} {
-          color: #E1E9F0;
+          color: #e1e9f0;
         }
       `,
       )}  
@@ -497,7 +459,6 @@ export const Layout = styled.button<LayoutProps>`
           background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
         
           ${Caption} {
-            color: #fff;
             text-shadow: 0px 12px 16px rgba(25, 25, 39, 0.36);
           }
         }
@@ -542,7 +503,9 @@ export const Layout = styled.button<LayoutProps>`
       }
             
       &[disabled] {
-        opacity: 0.33;
+        ${Container}{
+          opacity: 0.33;
+        }
       } 
 
       &:enabled {

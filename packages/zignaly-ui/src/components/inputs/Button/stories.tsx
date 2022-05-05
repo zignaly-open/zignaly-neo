@@ -53,11 +53,9 @@ export default {
       options: [true, false],
       control: { type: "radio" },
     },
-    icon: {
-      control: {
-        type: "select",
-      },
-      options: Object.keys(ICONS),
+    loading: {
+      options: [true, false],
+      control: { type: "radio" },
     },
     leftElement: {
       control: {
@@ -77,10 +75,9 @@ export default {
   },
 } as ComponentMeta<typeof Button>;
 
-const Template: ComponentStory<typeof Button> = ({ icon, leftElement, rightElement, ...args }) => {
+const Template: ComponentStory<typeof Button> = ({ leftElement, rightElement, ...args }) => {
   return (
     <Button
-      icon={renderIcon(icon as keyof Icons)}
       leftElement={renderIcon(leftElement as keyof Icons)}
       rightElement={renderIcon(rightElement as keyof Icons)}
       {...args}

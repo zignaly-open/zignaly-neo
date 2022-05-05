@@ -22,10 +22,10 @@ export type ButtonProps = {
   variant?: keyof typeof buttonVariants;
   size?: keyof typeof buttonSizes;
   caption?: string | null;
-  icon?: ReactElement<any> | string | null;
-  leftElement?: ReactElement<any> | string | null;
-  rightElement?: ReactElement<any> | string | null;
+  leftElement?: ReactElement | string | null;
+  rightElement?: ReactElement | string | null;
   disabled?: boolean;
+  loading?: boolean;
   color?: keyof typeof buttonColors;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];

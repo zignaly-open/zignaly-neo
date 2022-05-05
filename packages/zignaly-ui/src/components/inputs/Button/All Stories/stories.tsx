@@ -8,7 +8,7 @@ import BTC from "assets/icons/coins/btc.svg";
 
 const icons = {
   arrowDown: <ArrowDown color={"#E1E9F0"} />,
-  btc: <BTC />
+  btc: <BTC />,
 };
 
 export default {
@@ -27,15 +27,25 @@ export const MediumButtonIconVariation = Template.bind({});
 MediumButtonIconVariation.args = {
   buttonsRow1: [
     { ...NormalButton.args, variant: "primary" },
-    { ...NormalButton.args, variant: "primary", rightElement: icons.btc},
+    { ...NormalButton.args, variant: "primary", rightElement: icons.btc },
     { ...NormalButton.args, variant: "primary", leftElement: icons.arrowDown },
-    { ...NormalButton.args, variant: "primary", leftElement: icons.arrowDown, rightElement: icons.btc },
+    {
+      ...NormalButton.args,
+      variant: "primary",
+      leftElement: icons.arrowDown,
+      rightElement: icons.btc,
+    },
   ],
   buttonsRow2: [
     { ...NormalButton.args, variant: "secondary" },
     { ...NormalButton.args, variant: "secondary", rightElement: icons.btc },
     { ...NormalButton.args, variant: "secondary", leftElement: icons.arrowDown },
-    { ...NormalButton.args, variant: "secondary", leftElement: icons.arrowDown, rightElement: icons.btc },
+    {
+      ...NormalButton.args,
+      variant: "secondary",
+      leftElement: icons.arrowDown,
+      rightElement: icons.btc,
+    },
   ],
 };
 
@@ -69,11 +79,39 @@ MediumButtonDisabled.args = {
 
 export const MediumButtonTextColors = Template.bind({});
 MediumButtonTextColors.args = {
-  buttonsRow1: [
-    { ...NormalButton.args, variant: "primary", size: "medium", color: "grey" },
-  ],
+  buttonsRow1: [{ ...NormalButton.args, variant: "primary", size: "medium", color: "grey" }],
   buttonsRow2: [
     { ...NormalButton.args, variant: "secondary", size: "medium", color: "grey" },
     { ...NormalButton.args, variant: "secondary", size: "medium", color: "green" },
+  ],
+};
+
+export const MediumButtonLoading = Template.bind({});
+MediumButtonLoading.args = {
+  buttonsRow1: [
+    { ...NormalButton.args, variant: "primary", size: "medium", color: "grey", loading: true },
+    {
+      ...NormalButton.args,
+      variant: "primary",
+      size: "medium",
+      color: "grey",
+      loading: true,
+      caption: "Button",
+      leftElement: icons.arrowDown,
+      rightElement: icons.btc,
+    },
+  ],
+  buttonsRow2: [
+    { ...NormalButton.args, variant: "secondary", size: "medium", color: "grey", loading: true },
+    {
+      ...NormalButton.args,
+      variant: "secondary",
+      size: "medium",
+      color: "grey",
+      loading: true,
+      caption: "Button",
+      leftElement: icons.arrowDown,
+      rightElement: icons.btc,
+    },
   ],
 };
