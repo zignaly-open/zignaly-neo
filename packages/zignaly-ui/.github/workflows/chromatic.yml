@@ -7,6 +7,7 @@ on:
   push:
     branches: [ develop ]
   pull_request:
+    types: [review_requested, ready_for_review]
     # The branches below must be a subset of the branches above
     branches: [ develop ]
 
@@ -22,6 +23,7 @@ jobs:
         run: yarn
         # 👇 Adds Chromatic as a step in the workflow
       - name: Publish to Chromatic
+        if: github.event.pull_request.draft == false
         uses: chromaui/action@v1
         # Chromatic GitHub Action options
         with:
