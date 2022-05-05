@@ -120,8 +120,8 @@
   },
   "peerDependencies": {
     "@mui/material": ">= 5",
+    "next": ">= 12",
     "react": ">= 16.14",
-    "react-dom": ">= 16.14",
-    "next": ">= 12"
+    "react-dom": ">= 16.14"
   }
 }
