@@ -5,12 +5,12 @@ export enum SelectSizes {
 }
 
 export type OptionItem = {
-  leftElement: string;
+  leftElement?: any;
   caption: string;
 };
 
 export type SelectProps = {
-  name: string;
+  name?: string;
   label?: string;
   size?: SelectSizes;
   disabled?: boolean;
@@ -20,6 +20,6 @@ export type SelectProps = {
   options?: OptionItem[];
   value?: OptionItem | null;
   mode?: "default" | "collapsed";
-  initialSelectedIndex: number | null;
+  initialSelectedIndex?: number | null;
   fullWidth?: boolean;
 };
