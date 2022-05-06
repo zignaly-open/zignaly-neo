@@ -34,8 +34,8 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
         width: 26px;
         height: 26px;
       }
-      padding: 12px 24px;
-      min-height: 48px;
+      padding: 11px 24px;
+      height: 48px;
         `,
     )}
 
@@ -47,7 +47,7 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
         height: 24px;
         }
         padding: 4px 18px;
-        min-height: 32px;
+        height: 32px;
           `,
     )}
     

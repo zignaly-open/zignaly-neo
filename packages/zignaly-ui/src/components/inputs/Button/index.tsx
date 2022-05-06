@@ -45,6 +45,8 @@ function Button({
     <styled.Layout
       isLoading={loading}
       withElements={!!leftElement && !!rightElement && !!caption}
+      withLeftElement={!!leftElement && !!caption}
+      withRightElement={!!rightElement && !!caption}
       disabled={disabled || loading}
       variant={variant}
       size={size}
