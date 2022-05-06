@@ -32,35 +32,59 @@ export const MyCoins = Template.bind({});
 MyCoins.args = {
   columns: [
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"Coin"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"Coin"}
+        </Typography>
+      ),
       accessor: "coin",
     },
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"Total Balance"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"Total Balance"}
+        </Typography>
+      ),
       accessor: "totalBalance",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"Available Balance"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"Available Balance"}
+        </Typography>
+      ),
       accessor: "availableBalance",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"Locked Balance"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"Locked Balance"}
+        </Typography>
+      ),
       accessor: "lockedBalance",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"Value BTC"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"Value BTC"}
+        </Typography>
+      ),
       accessor: "valueInBtc",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"Value in USD"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"Value in USD"}
+        </Typography>
+      ),
       accessor: "valueInUsd",
       // @ts-ignore
       isAlignThRight: true,
@@ -116,47 +140,83 @@ export const Investors = Template.bind({});
 Investors.args = {
   columns: [
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"User ID"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"User ID"}
+        </Typography>
+      ),
       accessor: "userId",
     },
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"Email"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"Email"}
+        </Typography>
+      ),
       accessor: "email",
     },
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"Investment"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"Investment"}
+        </Typography>
+      ),
       accessor: "investment",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"P & L"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"P & L"}
+        </Typography>
+      ),
       accessor: "pyd",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"P & L Total"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"P & L Total"}
+        </Typography>
+      ),
       accessor: "pydTotal",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"Total Fees Paid"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"Total Fees Paid"}
+        </Typography>
+      ),
       accessor: "totalFeesPaid",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"Success Fee"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"Success Fee"}
+        </Typography>
+      ),
       accessor: "successFee",
     },
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"Fees in ZIG"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"Fees in ZIG"}
+        </Typography>
+      ),
       accessor: "feesInZig",
     },
     {
-      Header: <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>{"Status"}</Typography>,
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"Status"}
+        </Typography>
+      ),
       accessor: "status",
     },
   ],
@@ -239,56 +299,6 @@ ExchangeOrders.args = {
       entryPrice: "110.20",
       side: "Buy",
       type: "Limit",
-    },
-  ],
-};
-
-export const Contracts = Template.bind({});
-Contracts.args = {
-  columns: [
-    {
-      Header: "Date",
-      accessor: "date",
-    },
-    {
-      Header: "Order ID",
-      accessor: "positionId",
-    },
-    {
-      Header: "Pair",
-      accessor: "pair",
-    },
-    {
-      Header: "Amount",
-      accessor: "amount",
-    },
-    {
-      Header: "Side",
-      accessor: "side",
-    },
-    {
-      Header: "Entry Price",
-      accessor: "entryPrice",
-    },
-    {
-      Header: "Market Price",
-      accessor: "marketPrice",
-    },
-    {
-      Header: "Margin",
-      accessor: "margin",
-    },
-  ],
-  data: [
-    {
-      date: <DateLabel date={new Date()} />,
-      positionId: <div style={{ color: "#706F82" }}>mhAtXCp3BoaWgE5G8JJFD</div>,
-      pair: "XML/USDT",
-      amount: 25,
-      side: "Both",
-      entryPrice: "110.20",
-      marketPrice: "114.20",
-      margin: "Cross",
     },
   ],
 };
