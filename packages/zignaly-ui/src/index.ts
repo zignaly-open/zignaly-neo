@@ -10,6 +10,7 @@ import PriceLabel from "./components/display/Table/components/PriceLabel";
 import Typography from "./components/display/Typography";
 import ZigWalletIndicator from "./components/display/ZigWalletIndicator";
 import CoinLabel from "./components/display/Table/components/CoinLabel";
+import SliderProgress from "./components/display/Slider";
 
 // Inputs
 import Button from "./components/inputs/Button";
@@ -31,13 +32,13 @@ import OptionDotsIcon from "./assets/icons/option-dots-icon.svg";
 import ArrowBottomIcon from "./assets/icons/arrow-bottom-icon.svg";
 import UserIcon from "./assets/icons/user-icon.svg";
 import CheckIcon from "./assets/icons/check-icon.svg";
-import LogoDiscordIcon from './assets/icons/discord-logo-icon.svg';
-import LogoLinkedInIcon from './assets/icons/linkedin-logo-icon.svg';
-import LogoTwitterIcon from './assets/icons/twitter-logo-icon.svg';
-import LogoMediumIcon from './assets/icons/medium-logo-icon.svg';
-import LogoTelegramIcon from './assets/icons/telegram-logo-icon.svg';
-import WalletIcon from './assets/icons/wallet-icon.svg';
-import OptionHorizontalDotsIcon from './assets/icons/horizontal-three-dots-icon.svg';
+import LogoDiscordIcon from "./assets/icons/discord-logo-icon.svg";
+import LogoLinkedInIcon from "./assets/icons/linkedin-logo-icon.svg";
+import LogoTwitterIcon from "./assets/icons/twitter-logo-icon.svg";
+import LogoMediumIcon from "./assets/icons/medium-logo-icon.svg";
+import LogoTelegramIcon from "./assets/icons/telegram-logo-icon.svg";
+import WalletIcon from "./assets/icons/wallet-icon.svg";
+import OptionHorizontalDotsIcon from "./assets/icons/horizontal-three-dots-icon.svg";
 
 // Navigation
 import Tabs from "./components/navigation/Tabs";
@@ -57,8 +58,8 @@ export {
    *   Components
    * =-=-=-=-=-=-=-=
    */
-      // Display
-      Avatar,
+  // Display
+  Avatar,
   Loader,
   Table,
   ConnectionStateLabel,
@@ -69,6 +70,7 @@ export {
   ErrorMessage,
   ZigWalletIndicator,
   CoinLabel,
+  SliderProgress,
   // Inputs
   Button,
   CheckBox,
@@ -85,7 +87,6 @@ export {
   Header,
   BrandImage,
   ZigsBalance,
-
   /**
    * =-=-=-=-=-=-=-=
    *   Assets
@@ -107,7 +108,6 @@ export {
   LogoTwitterIcon,
   WalletIcon,
   OptionHorizontalDotsIcon,
-    
   /**
    * =-=-=-=-=-=-=-=
    *     Utils

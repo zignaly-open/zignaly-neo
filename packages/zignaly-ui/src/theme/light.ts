@@ -20,7 +20,7 @@ const light: Theme = {
   links: "#26C4C1",
   yellow: "#AE9C5B",
   red: "#CC394E",
-  tertiaryButton: "#",
+  tertiaryButton: "# ",
   formInputBack: "#",
   formSelectBack: "#",
   dropDownBackbround: "#12152C",
