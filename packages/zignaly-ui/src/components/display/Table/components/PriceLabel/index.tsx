@@ -16,8 +16,9 @@ const PriceLabel = ({
   fiat = false,
   symbol = "$",
   bottomElement = null,
+  className,
 }: PriceLabelProps) => (
-  <styled.Layout fiat={fiat}>
+  <styled.Layout fiat={fiat} className={className}>
     <styled.Value>
       <NumberFormat
         prefix={fiat ? symbol : ""}

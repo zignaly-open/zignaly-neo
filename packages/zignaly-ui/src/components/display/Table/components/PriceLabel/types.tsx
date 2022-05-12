@@ -6,4 +6,5 @@ export interface PriceLabelProps {
   fiat?: boolean;
   symbol?: string;
   bottomElement?: React.ReactNode;
+  className?: string;
 }
