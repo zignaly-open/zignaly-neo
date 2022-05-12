@@ -7,6 +7,7 @@ export const Layout = styled.div`
   margin-bottom: 12px;
   display: flex;
   align-items: center;
+  width: 100%;
 `;
 
 export const Bar = styled.div`
