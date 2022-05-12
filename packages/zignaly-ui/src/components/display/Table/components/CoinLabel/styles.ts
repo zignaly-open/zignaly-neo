@@ -28,7 +28,7 @@ export const Name = styled(Typography)`
   display: flex;
 `;
 
-export const Coin = styled(Typography)`
+export const Coin = styled.span`
   display: flex;
   text-transform: uppercase;
 `;

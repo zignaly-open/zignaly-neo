@@ -2,20 +2,19 @@
 import React from "react";
 import NumberFormat from "react-number-format";
 
-// Assets
-import ArrowChartUpIcon from "assets/icons/arrow-chart-up-icon.svg?url";
-import ArrowChartDownIcon from "assets/icons/arrow-chart-down-icon.svg?url";
-
 // Styled Components
 import * as styled from "./styles";
 
 //  Utils
 import { isPositive } from "utils/numbers";
+import { PercentageIndicatorProps } from "./types";
 
-const PercentageIndicator = ({ value = 0 }) => (
+const PercentageIndicator = ({ value = 0, theme }: PercentageIndicatorProps) => {
+  const isPositiveValue = isPositive(value);
+  return (
   <styled.Layout>
-    <styled.Indicator src={isPositive(value) ? ArrowChartUpIcon : ArrowChartDownIcon} />
-    <styled.Value isPositive={isPositive(value)}>
+    <styled.Indicator width="5" height="5" isPositive={isPositiveValue} color={isPositiveValue ? theme["greenGraph"] : theme["redGraphOrError"]} />
+    <styled.Value variant="h5" isPositive={isPositiveValue}>
       <NumberFormat
         value={String(value).replaceAll("-", "")}
         displayType={"text"}
@@ -24,6 +23,6 @@ const PercentageIndicator = ({ value = 0 }) => (
       %
     </styled.Value>
   </styled.Layout>
-);
+);};
 
 export default PercentageIndicator;

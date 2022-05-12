@@ -2,12 +2,8 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-// Assets
-import CheckIcon from "../../../assets/icons/check-icon.svg?url";
-
 // Component
 import Table from "./";
-import Typography from "components/display/Typography";
 import PriceLabel from "./components/PriceLabel";
 import CoinLabel from "./components/CoinLabel";
 import PercentageIndicator from "./components/PercentageIndicator";
@@ -16,7 +12,11 @@ import Button from "components/inputs/Button";
 import DateLabel from "./components/DateLabel";
 
 // Styles
-import { Actions, InvestorLabel } from "./styles";
+import { Actions, CheckIconStyled, CloseIconStyled } from "./styles";
+import { dark } from "../../../theme";
+
+// Assets
+import Typography from "../Typography";
 
 export default {
   title: "Display/Table",
@@ -100,8 +100,8 @@ MyCoins.args = {
       valueInUsd: <PriceLabel coin={"USD"} value={"3.200"} fiat />,
       action: (
         <Actions>
-          <Button caption={"Deposit"} variant={"secondary"} onClick={() => {}} />
-          <Button caption={"Withdraw"} variant={"secondary"} onClick={() => {}} />
+          <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
+          <Button caption={"Withdraw"} size={"small"} variant={"secondary"} onClick={() => {}} />
         </Actions>
       ),
     },
@@ -114,8 +114,8 @@ MyCoins.args = {
       valueInUsd: <PriceLabel coin={"USD"} value={"34,000"} fiat />,
       action: (
         <Actions>
-          <Button caption={"Deposit"} variant={"secondary"} onClick={() => {}} />
-          <Button caption={"Withdraw"} variant={"secondary"} onClick={() => {}} />
+          <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
+          <Button caption={"Withdraw"} size={"small"} variant={"secondary"} onClick={() => {}} />
         </Actions>
       ),
     },
@@ -125,11 +125,23 @@ MyCoins.args = {
       availableBalance: <PriceLabel coin={"BNB"} value={"2.1352"} />,
       lockedBalance: <PriceLabel coin={"BNB"} value={"350"} />,
       valueInBtc: <PriceLabel coin={"BTC"} value={"0.782324"} />,
-      valueInUsd: <PriceLabel coin={"EUR"} value={"400"} fiat />,
+      valueInUsd: <PriceLabel symbol={"€"} coin={"EUR"} value={"400"} fiat />,
       action: (
         <Actions>
-          <Button caption={"Deposit"} variant={"secondary"} onClick={() => {}} />
-          <Button caption={"Withdraw"} variant={"secondary"} onClick={() => {}} />
+          <Button
+            caption={"Deposit"}
+            color="grey"
+            variant={"secondary"}
+            size={"small"}
+            onClick={() => {}}
+          />
+          <Button
+            caption={"Withdraw"}
+            color="grey"
+            variant={"secondary"}
+            size={"small"}
+            onClick={() => {}}
+          />
         </Actions>
       ),
     },
@@ -142,18 +154,18 @@ Investors.args = {
     {
       Header: (
         <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"User ID"}
-        </Typography>
-      ),
-      accessor: "userId",
-    },
-    {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
           {"Email"}
         </Typography>
       ),
       accessor: "email",
+    },
+    {
+      Header: (
+        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+          {"User ID"}
+        </Typography>
+      ),
+      accessor: "userId",
     },
     {
       Header: (
@@ -222,33 +234,82 @@ Investors.args = {
   ],
   data: [
     {
-      userId: (
-        <InvestorLabel color={"neutral100"} variant={"h3"}>
-          {"5f886d29da8e9666b1684c9a"}
-        </InvestorLabel>
-      ),
-      email: (
-        <InvestorLabel color={"neutral100"} variant={"h3"}>
-          {"tec**@zig**.com"}
-        </InvestorLabel>
-      ),
+      email: "tec**@zig**.com",
+      userId: "5f886d29da8e9666b1684c9a",
       investment: <PriceLabel coin={"USDT"} value={"1250"} />,
       pyd: (
         <PriceLabel
           coin={"USDT"}
-          value={"37.5"}
-          bottomElement={<PercentageIndicator value={3} />}
+          value={"1.5"}
+          bottomElement={<PercentageIndicator value={3} theme={dark} />}
+        />
+      ),
+      pydTotal: <PriceLabel coin={"USDT"} value={"0.3313383838"} />,
+      totalFeesPaid: <PriceLabel coin={"USDT"} value={"218"} />,
+      successFee: "10%",
+      feesInZig: <CheckIconStyled width="24" height="24" color={dark["neutral300"]} />,
+      status: <ConnectionStateLabel stateId={ConnectionStateLabelId.CONNECTED} />,
+    },
+    {
+      email: "tec**@zig**.com",
+      userId: "5f886d29da8e9666b1684c9a",
+      investment: <PriceLabel coin={"USDT"} value={"1250"} />,
+      pyd: (
+        <PriceLabel
+          coin={"USDT"}
+          value={"0.85"}
+          bottomElement={<PercentageIndicator value={-1} theme={dark} />}
+        />
+      ),
+      pydTotal: <PriceLabel coin={"USDT"} value={"1.58"} />,
+      totalFeesPaid: <PriceLabel coin={"USDT"} value={"218"} />,
+      successFee: "10%",
+      feesInZig: <CloseIconStyled width="24" height="24" color={dark["neutral300"]} />,
+      status: <ConnectionStateLabel stateId={ConnectionStateLabelId.DISCONNECTED} />,
+    },
+
+    {
+      email: "tec**@zig**.com",
+      userId: "5f886d29da8e9666b1684c9a",
+      pydTotal: <PriceLabel coin={"USDT"} value={"145"} />,
+      totalFeesPaid: <PriceLabel coin={"USDT"} value={"218"} />,
+      successFee: "10%",
+      feesInZig: <CloseIconStyled width="24" height="24" color={dark["neutral300"]} />,
+      status: <ConnectionStateLabel stateId={ConnectionStateLabelId.HARD_DISCONNECT} />,
+    },
+    {
+      email: "tec**@zig**.com",
+      userId: "5f886d29da8e9666b1684c9a",
+      investment: <PriceLabel coin={"USDT"} value={"1250"} />,
+      pyd: (
+        <PriceLabel
+          coin={"USDT"}
+          value={"1929292"}
+          bottomElement={<PercentageIndicator value={-87} theme={dark} />}
+        />
+      ),
+      pydTotal: <PriceLabel coin={"USDT"} value={"134581"} />,
+      totalFeesPaid: <PriceLabel coin={"USDT"} value={"218"} />,
+      successFee: "10%",
+      feesInZig: <CloseIconStyled width="24" height="24" color={dark["neutral300"]} />,
+      status: <ConnectionStateLabel stateId={ConnectionStateLabelId.SOFT_DISCONNECT} />,
+    },
+    {
+      email: "tec**@zig**.com",
+      userId: "5f886d29da8e9666b1684c9a",
+      investment: <PriceLabel coin={"USDT"} value={"1250"} />,
+      pyd: (
+        <PriceLabel
+          coin={"USDT"}
+          value={"30.5"}
+          bottomElement={<PercentageIndicator value={-1} theme={dark} />}
         />
       ),
       pydTotal: <PriceLabel coin={"USDT"} value={"145"} />,
       totalFeesPaid: <PriceLabel coin={"USDT"} value={"218"} />,
-      successFee: (
-        <InvestorLabel color={"neutral100"} variant={"h3"}>
-          {"10%"}
-        </InvestorLabel>
-      ),
-      feesInZig: <img src={CheckIcon} />,
-      status: <ConnectionStateLabel stateId={ConnectionStateLabelId.CONNECTED} />,
+      successFee: "10%",
+      feesInZig: <CloseIconStyled width="24" height="24" color={dark["neutral300"]} />,
+      status: <ConnectionStateLabel stateId={ConnectionStateLabelId.SUSPENDED} />,
     },
   ],
 };
@@ -291,7 +352,7 @@ ExchangeOrders.args = {
   ],
   data: [
     {
-      date: <DateLabel date={new Date()} />,
+      date: <DateLabel date={new Date(1651567879191)} />,
       orderId: "138495028471",
       pair: "XML/USDT",
       amount: 25,

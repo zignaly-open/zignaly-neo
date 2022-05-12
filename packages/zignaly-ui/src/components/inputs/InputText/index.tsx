@@ -2,10 +2,11 @@
 import React, { useCallback, useRef, useState } from "react";
 
 // Styled Components
-import { Layout, InputContainer, InputValue, Side, Label } from "./styles";
+import { Layout, InputContainer, InputValue, Side} from "./styles";
 import { InputTextProps } from "./types";
 
 import ErrorMessage from "components/display/ErrorMessage";
+import Typography from "components/display/Typography";
 
 function InputText(
   {
@@ -39,7 +40,9 @@ function InputText(
 
   return (
     <Layout withError={!!error} disabled={disabled}>
-      <Label>{label}</Label>
+      <Typography variant="h3" weight="regular" color="neutral200">
+        {label}
+      </Typography>
       <InputContainer>
         <Side>
           <InputValue

@@ -70,19 +70,21 @@ interface LayoutProps {
 export const Layout = styled.button<LayoutProps>`
   border: none;
   cursor: pointer;
-  padding: 2px;
   outline: none;
   position: relative;
   user-select: none;
   background: transparent;
   text-decoration-line: none;
+  svg {
+    width: 100%;
+    height: 100%;
+  }
   &[disabled] {
     cursor: default;
   }
   ${(props) => `
       ${Container} {
         padding: 8px 18px;
-        min-width: 88px;     
       }
 
       ${styledIf(
@@ -103,13 +105,6 @@ export const Layout = styled.button<LayoutProps>`
         }
       `,
       )}
-      
-      ${LeftElement} {
-        img {
-          width: 12px;
-          height: 12px;
-        }
-      }
       
   `}
 `;

@@ -1,7 +1,10 @@
 // Dependencies
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
-import Typography from "../Typography";
+
+// Assets
+import CheckIcon from "assets/icons/check-icon.svg";
+import CloseIcon from "assets/icons/close-icon.svg";
 
 export const Layout = styled.div``;
 
@@ -58,7 +61,7 @@ export const TableView = styled.table`
       padding: 12px 22px;
       white-space: nowrap;
       background: transparent;
-
+      height: 95px;
       &.action {
         text-align: right;
       }
@@ -103,7 +106,7 @@ export const ThView = styled.th<{ isSorted?: boolean; isAlignRight?: boolean }>`
   &:last-child {
     border-radius: 0 0 5px 0;
   }
-  ${(props: any) => `
+  ${(props) => `
      ${styledIf(
        props.isSorted,
        `
@@ -195,8 +198,12 @@ export const Actions = styled.div`
   }
 `;
 
-export const InvestorLabel = styled(Typography)`
-  text-align: center;
+export const CheckIconStyled = styled(CheckIcon)`
+  vertical-align: middle;
+`;
+
+export const CloseIconStyled = styled(CloseIcon)`
+  vertical-align: middle;
 `;
 
 export const ColumnsSelector = styled.div`

@@ -8,7 +8,6 @@ import { BigNumber, utils } from "ethers";
 import {
   InputContainer,
   InputValue,
-  Label,
   Layout,
   TokenImage,
   BalanceContainer,
@@ -24,6 +23,7 @@ import ErrorMessage from "components/display/ErrorMessage";
 
 // Types
 import { InputAmountProps, TokenItem } from "./types";
+import Typography from "components/display/Typography";
 
 function InputAmount(
   {
@@ -132,7 +132,9 @@ function InputAmount(
 
   return (
     <Layout withError={!!error} disabled={disabled}>
-      <Label>{label}</Label>
+      <Typography variant="h3" weight="regular" color="neutral200">
+        {label}
+      </Typography>
       <InputContainer>
         <Side>
           {selectedToken && tokens.length < 2 && <TokenImage src={selectedToken.image} />}

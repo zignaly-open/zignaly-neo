@@ -1,14 +1,24 @@
 // Dependencies
 import styled from "styled-components";
 
+// Components
+import Typography from "components/display/Typography";
+
+// Utils
+import { styledIf } from "utils/styled";
+
 export const Layout = styled.div``;
 
-export const Value = styled.span`
-  font-weight: 600;
-  font-size: 16px;
-  line-height: 20px;
+export const Value = styled(Typography)<{ hasLowercase?: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #f3f4f6;
+  ${({ hasLowercase }) => `
+      ${styledIf(
+        hasLowercase,
+      `
+        text-transform: lowercase;
+      `,
+     )}
+  `}
 `;

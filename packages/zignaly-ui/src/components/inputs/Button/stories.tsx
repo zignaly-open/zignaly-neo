@@ -10,8 +10,8 @@ import CloseIcon from "assets/icons/close-icon.svg";
 import ArrowDown from "assets/icons/arrow-bottom-icon.svg";
 
 const ICONS = {
-  ArrowDown: <ArrowDown width={13} height={8} color={"#E1E9F0"} />,
-  CloseIcon: <CloseIcon width={13} height={13} color={"#E1E9F0"} />,
+  ArrowDown: <ArrowDown color={"#E1E9F0"} />,
+  CloseIcon: <CloseIcon color={"#E1E9F0"} />,
   NoIcon: null,
 };
 type Icons = typeof ICONS;

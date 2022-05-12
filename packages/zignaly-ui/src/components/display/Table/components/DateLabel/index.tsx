@@ -7,8 +7,8 @@ import * as styled from "./styles";
 
 const DateLabel = ({ date = new Date() }) => (
   <styled.Layout>
-    <styled.Value>{format(date, "p")}</styled.Value>
-    <styled.Value>{format(date, "PP")}</styled.Value>
+    <styled.Value variant={"body2"} weight={"regular"} hasLowercase>{format(date, "p")}</styled.Value>
+    <styled.Value variant={"body2"} weight={"regular"}>{format(date, "PP")}</styled.Value>
   </styled.Layout>
 );
 

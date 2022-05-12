@@ -20,7 +20,7 @@ function TextButton({
   rel,
   target,
   className,
-  color = "neutral000",
+  color = "links",
 }: ButtonProps): ReactElement {
   return (
     <styled.Layout
@@ -40,7 +40,7 @@ function TextButton({
       <styled.Container>
         <styled.ElementsContainer>
           {leftElement && <styled.LeftElement>{leftElement}</styled.LeftElement>}
-          <Typography color={color} underline={underline}>{caption}</Typography>
+          <Typography color={color} variant="h4" underline={underline}>{caption}</Typography>
           {rightElement && <styled.RightElement>{rightElement}</styled.RightElement>}
         </styled.ElementsContainer>
       </styled.Container>

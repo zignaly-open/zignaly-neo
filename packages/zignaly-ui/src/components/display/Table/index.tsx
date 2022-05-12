@@ -21,8 +21,10 @@ import {
 // Components
 import IconButton from "components/inputs/IconButton";
 import CheckBox from "components/inputs/CheckBox";
+import Typography from "components/display/Typography";
+
+// Types
 import { TableProps } from "./types";
-import Typography from "../Typography";
 
 const Table = ({
   columns = [],
@@ -127,7 +129,9 @@ const Table = ({
                     isSorted={column.isSorted}
                     isAlignRight={column.isAlignThRight}
                   >
-                    {column.render("Header")}
+                    <Typography color={"neutral200"} variant={"h4"} weight={"regular"}>
+                      {column.render("Header")}
+                    </Typography>
                     {index < headerGroup.headers.length - 1 && (
                       <SortIcon
                         isSorted={column.isSorted}
@@ -164,7 +168,7 @@ const Table = ({
                       {...cell.getCellProps()}
                       key={`--table-row-cell-${index.toString()}`}
                     >
-                      {cell.render("Cell")}
+                      <Typography color={"neutral100"}>{cell.render("Cell")}</Typography>
                     </td>
                   ))}
                   {renderActionRow(row, index)}

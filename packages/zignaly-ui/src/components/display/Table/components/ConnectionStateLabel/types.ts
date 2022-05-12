@@ -1,3 +1,5 @@
+import Theme from "theme/theme";
+
 export const ConnectionStateLabelId = {
   CONNECTED: "connected",
   DISCONNECTED: "disconnected",
@@ -14,13 +16,13 @@ export const connectionStateName = {
   [ConnectionStateLabelId.SUSPENDED]: "Suspended",
 };
 
-export const connectionStateColor = {
-  [ConnectionStateLabelId.CONNECTED]: "#26C4C1",
-  [ConnectionStateLabelId.DISCONNECTED]: "#706F82",
-  [ConnectionStateLabelId.HARD_DISCONNECT]: "#CC3993",
-  [ConnectionStateLabelId.SOFT_DISCONNECT]: "#F7CF00",
-  [ConnectionStateLabelId.SUSPENDED]: "#E50B5A",
-};
+export const connectionStateColor = (theme: Theme) => ({
+  [ConnectionStateLabelId.CONNECTED]: theme["greenGraph"],
+  [ConnectionStateLabelId.DISCONNECTED]: theme["neutral400"],
+  [ConnectionStateLabelId.HARD_DISCONNECT]: theme["redGraphOrError"],
+  [ConnectionStateLabelId.SOFT_DISCONNECT]: theme["yellow"],
+  [ConnectionStateLabelId.SUSPENDED]: theme["red"],
+});
 
 export type ConnectionStateLabelProps = {
   stateId: string;

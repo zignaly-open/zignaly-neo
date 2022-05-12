@@ -1,15 +1,7 @@
 // Dependencies
 import styled from "styled-components";
+import { dark } from "theme";
 import { styledIf } from "utils/styled";
-
-export const Label = styled.label`
-  font-family: "Avenir", sans-serif;
-  font-weight: 500;
-  font-size: 15px;
-  line-height: 24px;
-  letter-spacing: 0.55px;
-  color: #a9a9ba;
-`;
 
 export const InputContainer = styled.div`
   border: 1px solid #35334a;
@@ -32,14 +24,14 @@ export const InputValue = styled.input`
   padding-right: 22px;
   background: transparent;
   border: none;
-  color: #f3f4f6;
+  color: ${dark["neutral100"]};
   outline: none;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 15px;
-  line-height: 40px;
-  letter-spacing: 0.66px;
+  line-height: 24px;
+  letter-spacing: 0.55px;
   width: 100%;
-  font-family: "Avenir", sans-serif;
+  font-family: "Avenir Next",sans-serif;
 `;
 
 export const BalanceContainer = styled.div`
