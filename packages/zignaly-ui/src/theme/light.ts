@@ -1,6 +1,7 @@
 import Theme from "./theme";
 
 const light: Theme = {
+  white: "#FFFFFF",
   neutral800: "#06061A",
   neutral750: "#101225",
   neutral700: "#252339",

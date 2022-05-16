@@ -1,4 +1,5 @@
 interface Theme {
+  white: string;
   neutral800: string;
   neutral750: string;
   neutral700: string;
