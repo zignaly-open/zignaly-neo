@@ -40,6 +40,8 @@ import LogoTelegramIcon from "./assets/icons/telegram-logo-icon.svg";
 import WalletIcon from "./assets/icons/wallet-icon.svg";
 import OptionHorizontalDotsIcon from "./assets/icons/horizontal-three-dots-icon.svg";
 import EditPenIcon from "./assets/icons/edit-pen-icon.svg";
+import SwapIcon from "./assets/icons/swap-icon.svg";
+import SwapVertIcon from "./assets/icons/swap-vert-icon.svg";
 
 // Navigation
 import Tabs from "./components/navigation/Tabs";
@@ -110,6 +112,8 @@ export {
   WalletIcon,
   OptionHorizontalDotsIcon,
   EditPenIcon,
+  SwapIcon,
+  SwapVertIcon,
   /**
    * =-=-=-=-=-=-=-=
    *     Utils
