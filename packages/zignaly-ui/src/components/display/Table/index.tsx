@@ -132,7 +132,7 @@ const Table = ({
                     <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
                       {column.render("Header")}
                     </Typography>
-                    {index < headerGroup.headers.length - 1 && (
+                    {index < headerGroup.headers.length && (
                       <SortIcon
                         isSorted={column.isSorted}
                         isSortedDesc={column.isSortedDesc}
