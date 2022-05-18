@@ -8,15 +8,14 @@ export const Layout = styled.div<{ fiat: boolean }>`
   ${(props) => `
      ${styledIf(
        props.fiat,
-          `
+       `
       margin-right: 19px;
     `,
-          `
+       `
       margin-right: 0;
     `,
-  )}
+     )}
   `}
-  
 `;
 
 export const Value = styled.span`
