@@ -38,7 +38,6 @@ export const TableView = styled.table`
   overflow: hidden;
   width: 100%;
 
-  font-family: "Avenir", sans-serif;
   background: rgba(19, 18, 37, 0.4);
   thead {
     user-select: none;
@@ -51,10 +50,6 @@ export const TableView = styled.table`
 
   tbody {
     td {
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 20px;
       letter-spacing: 0;
       text-align: center;
       color: #f3f4f6;
@@ -213,6 +208,5 @@ export const ColumnsSelector = styled.div`
   > span {
     justify-content: center;
     display: flex;
-    font-weight: 400;
   }
 `;

@@ -15,9 +15,6 @@ import DateLabel from "./components/DateLabel";
 import { Actions, CheckIconStyled, CloseIconStyled } from "./styles";
 import { dark } from "../../../theme";
 
-// Assets
-import Typography from "../Typography";
-
 export default {
   title: "Display/Table",
   component: Table,
@@ -32,59 +29,35 @@ export const MyCoins = Template.bind({});
 MyCoins.args = {
   columns: [
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"Coin"}
-        </Typography>
-      ),
+      Header: "Coin",
       accessor: "coin",
     },
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"Total Balance"}
-        </Typography>
-      ),
+      Header: "Total Balance",
       accessor: "totalBalance",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"Available Balance"}
-        </Typography>
-      ),
+      Header: "Available Balance",
       accessor: "availableBalance",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"Locked Balance"}
-        </Typography>
-      ),
+      Header: "Locked Balance",
       accessor: "lockedBalance",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"Value BTC"}
-        </Typography>
-      ),
+      Header: "Value in BTC",
       accessor: "valueInBtc",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"Value in USD"}
-        </Typography>
-      ),
+      Header: "Value in USD",
       accessor: "valueInUsd",
       // @ts-ignore
       isAlignThRight: true,
@@ -152,83 +125,47 @@ export const Investors = Template.bind({});
 Investors.args = {
   columns: [
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"Email"}
-        </Typography>
-      ),
+      Header: "Email",
       accessor: "email",
     },
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"User ID"}
-        </Typography>
-      ),
+      Header: "User ID",
       accessor: "userId",
     },
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"Investment"}
-        </Typography>
-      ),
+      Header: "Investment",
       accessor: "investment",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"P & L"}
-        </Typography>
-      ),
+      Header: "P & L",
       accessor: "pyd",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"P & L Total"}
-        </Typography>
-      ),
+      Header: "P & L Total",
       accessor: "pydTotal",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"Total Fees Paid"}
-        </Typography>
-      ),
+      Header: "Total Fees Paid",
       accessor: "totalFeesPaid",
       // @ts-ignore
       isAlignThRight: true,
     },
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"Success Fee"}
-        </Typography>
-      ),
+      Header: "Success Fee",
       accessor: "successFee",
     },
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"Fees in ZIG"}
-        </Typography>
-      ),
+      Header: "Fees in ZIG",
       accessor: "feesInZig",
     },
     {
-      Header: (
-        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-          {"Status"}
-        </Typography>
-      ),
+      Header: "Status",
       accessor: "status",
     },
   ],
@@ -352,7 +289,7 @@ ExchangeOrders.args = {
   ],
   data: [
     {
-      date: <DateLabel date={new Date('December 2, 1997 20:10:00')} />,
+      date: <DateLabel date={new Date("December 2, 1997 20:10:00")} />,
       orderId: "138495028471",
       pair: "XML/USDT",
       amount: 25,
