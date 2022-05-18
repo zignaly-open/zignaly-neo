@@ -62,7 +62,6 @@ export const LoaderContainer = styled.div`
  * Layout
  */
 interface LayoutProps {
-  withElements: boolean;
   isLoading?: boolean;
   color?: string;
 }
@@ -83,27 +82,13 @@ export const Layout = styled.button<LayoutProps>`
     cursor: default;
   }
   ${(props) => `
-      ${Container} {
-        padding: 8px 18px;
-      }
-
       ${styledIf(
         props.isLoading,
         `
         ${ElementsContainer}{
           opacity: 0;
-    
         }
         `,
-      )}
-            
-      ${styledIf(
-        props.withElements,
-        `
-        ${Container} {
-          padding: 8px 18px;
-        }
-      `,
       )}
       
   `}

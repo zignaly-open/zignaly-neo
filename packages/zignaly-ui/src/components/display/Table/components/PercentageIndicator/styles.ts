@@ -19,10 +19,10 @@ export const Container = styled.div`
 
 export const Value = styled(Typography)<{ isPositive: boolean }>`
   display: inline;
-  ${({ isPositive, theme }) => `
+  ${(props) => `
     font-size: 11px;
     font-weight: 500;
-    color: ${isPositive ? theme["greenGraph"] : theme["redGraphOrError"]};
+    color: ${props.isPositive ? props.theme["greenGraph"] : props.theme["redGraphOrError"]};
   `}
 `;
 
