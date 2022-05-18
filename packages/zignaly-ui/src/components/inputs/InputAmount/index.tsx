@@ -24,6 +24,7 @@ import ErrorMessage from "components/display/ErrorMessage";
 // Types
 import { InputAmountProps, TokenItem } from "./types";
 import Typography from "components/display/Typography";
+import { changeEvent } from "utils/event";
 
 function InputAmount(
   {
@@ -36,6 +37,7 @@ function InputAmount(
     label = "Amount to Withdraw",
     value = BigNumber.from(0),
     name,
+    fullWidth,
   }: InputAmountProps,
   inputRef: React.Ref<any>,
 ) {
@@ -67,7 +69,8 @@ function InputAmount(
       const value = e.target.value;
 
       if (value === "") {
-        onChange(BigNumber.from(0));
+        // onChange(BigNumber.from(0));
+        onChange(e, { value, token: selectedToken });
         setInputValue(value);
         return;
       }
@@ -102,7 +105,7 @@ function InputAmount(
     (token: TokenItem) => {
       setSelectedToken(token);
 
-      onChange({
+      onChange(changeEvent(inputValue), {
         value,
         token,
       });
@@ -119,19 +122,12 @@ function InputAmount(
       const newValue = BigNumber.from(selectedToken.balance);
       const number = utils.formatUnits(newValue);
       setInputValue(number);
-      const e = {
-        target: {
-          value: number,
-          name,
-        },
-        type: "change",
-      };
-      onChange(e, { value: newValue, token: selectedToken });
+      onChange(changeEvent(number), { value: newValue, token: selectedToken });
     }
   }, [disabled, onChange, selectedToken]);
 
   return (
-    <Layout withError={!!error} disabled={disabled}>
+    <Layout withError={!!error} disabled={disabled} fullWidth={fullWidth}>
       <Typography variant="h3" weight="regular" color="neutral200">
         {label}
       </Typography>

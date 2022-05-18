@@ -31,7 +31,7 @@ export const InputValue = styled.input`
   line-height: 24px;
   letter-spacing: 0.55px;
   width: 100%;
-  font-family: "Avenir Next",sans-serif;
+  font-family: "Avenir Next", sans-serif;
 `;
 
 export const BalanceContainer = styled.div`
@@ -88,6 +88,7 @@ export const Selector = styled.div``;
 type LayoutProps = {
   withError: boolean;
   disabled: boolean;
+  fullWidth?: boolean;
 };
 
 export const Layout = styled.div`
@@ -120,6 +121,13 @@ export const Layout = styled.div`
         color: #C1C1C8;
       }
     `,
+    )}
+    
+    ${styledIf(
+      props.fullWidth,
+      `
+      width: 100%;
+      `,
     )}
   `}
 `;

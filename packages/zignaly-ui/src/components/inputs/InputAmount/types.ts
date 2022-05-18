@@ -18,4 +18,5 @@ export interface InputAmountProps {
   error?: string | null;
   initialTokenIndex?: number;
   name?: string;
+  fullWidth?: boolean;
 }

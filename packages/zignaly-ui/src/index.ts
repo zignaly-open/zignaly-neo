@@ -11,6 +11,7 @@ import Typography from "./components/display/Typography";
 import ZigWalletIndicator from "./components/display/ZigWalletIndicator";
 import CoinLabel from "./components/display/Table/components/CoinLabel";
 import SliderProgress from "./components/display/Slider";
+import Toaster from "./components/display/Toaster";
 
 // Inputs
 import Button from "./components/inputs/Button";
@@ -74,6 +75,7 @@ export {
   ZigWalletIndicator,
   CoinLabel,
   SliderProgress,
+  Toaster,
   // Inputs
   Button,
   CheckBox,
