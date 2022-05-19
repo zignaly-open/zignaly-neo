@@ -5,6 +5,7 @@ import { styledIf } from "utils/styled";
 // Assets
 import CheckIcon from "assets/icons/check-icon.svg";
 import CloseIcon from "assets/icons/close-icon.svg";
+import ArrowBottomIcon from "assets/icons/arrow-bottom-icon.svg";
 
 export const Layout = styled.div``;
 
@@ -124,8 +125,9 @@ export const ThView = styled.th<{ isSorted?: boolean; isAlignRight?: boolean }>`
   `}
 `;
 
-export const SortIcon = styled.img<{ isSorted?: boolean; isSortedDesc?: boolean }>`
+export const SortIcon = styled(ArrowBottomIcon)<{ isSorted?: boolean; isSortedDesc?: boolean }>`
   margin-left: 6px;
+  color: #f3f4f6;
 
   ${(props) => `
      ${styledIf(
@@ -147,7 +149,7 @@ export const SortIcon = styled.img<{ isSorted?: boolean; isSortedDesc?: boolean 
       transform: rotate(0deg);
     `,
      )}
-  `}
+  `};
 `;
 
 export const OptionList = styled.ul`

@@ -3,7 +3,6 @@ import React, { useRef, useCallback, useState } from "react";
 import { useSortBy, useTable } from "react-table";
 
 // Assets
-import ArrowBottomWhiteIcon from "assets/icons/arrow-bottom-icon-white.svg?url";
 import OptionsDotsIcon from "assets/icons/option-dots-icon.svg";
 
 // Styles
@@ -133,11 +132,7 @@ const Table = ({
                       {column.render("Header")}
                     </Typography>
                     {index < headerGroup.headers.length && (
-                      <SortIcon
-                        isSorted={column.isSorted}
-                        isSortedDesc={column.isSortedDesc}
-                        src={ArrowBottomWhiteIcon}
-                      />
+                      <SortIcon isSorted={column.isSorted} isSortedDesc={column.isSortedDesc} />
                     )}
                   </ThView>
                 ))}
