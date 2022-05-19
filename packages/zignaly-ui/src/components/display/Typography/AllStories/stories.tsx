@@ -5,7 +5,7 @@ import { Text } from "../stories";
 import Typography from "..";
 
 export default {
-  title: "Display/Typography/All Stories",
+  title: "Display/Typography/AllStories",
   component: TextVariations,
   subcomponents: { Typography },
   argTypes: {
@@ -36,7 +36,7 @@ export default {
     }
   },
   parameters: {
-    jest: ["test.tsx"],
+    jest: ["typography"],
   },
   decorators: [(story) => <div style={{ padding: "0.2rem" }}>{story()}</div>],
 } as ComponentMeta<typeof TextVariations>;

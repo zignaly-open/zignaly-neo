@@ -20,6 +20,10 @@ function Button({
   onClick = () => {},
   loading,
   type,
+  testIdLeftElement = null,
+  testIdCaptionElement = null,
+  testIdRightElement = null,
+  testIdLoadingElement = null
 }: ButtonProps): ReactElement {
   /**
    * @function renderLeftElement
@@ -56,14 +60,14 @@ function Button({
     >
       <styled.Container>
         <styled.ElementsContainer>
-          {leftElement && <styled.LeftElement>{renderLeftElement}</styled.LeftElement>}
-          {caption && <styled.Caption>{caption}</styled.Caption>}
-          {rightElement && <styled.RightElement>{renderRightElement}</styled.RightElement>}
+          {leftElement && <styled.LeftElement data-testid={testIdLeftElement ? testIdLeftElement : "button-left-element"}>{renderLeftElement}</styled.LeftElement>}
+          {caption && <styled.Caption data-testid={testIdCaptionElement ? testIdCaptionElement : "button-caption-element"}>{caption}</styled.Caption>}
+          {rightElement && <styled.RightElement data-testid={testIdRightElement ? testIdRightElement : "button-right-element"}>{renderRightElement}</styled.RightElement>}
         </styled.ElementsContainer>
       </styled.Container>
 
       {loading && (
-        <styled.LoaderContainer>
+        <styled.LoaderContainer data-testid={testIdLoadingElement ? testIdLoadingElement : "button-loading-element"}>
           <styled.ButtonLoader
             type={LoaderTypes.TAILSPIN}
             color="#9CA3AF"

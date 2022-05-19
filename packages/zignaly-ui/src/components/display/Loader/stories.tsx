@@ -9,7 +9,7 @@ export default {
   title: "Display/Loader",
   component: Loader,
   parameters: {
-    jest: ["test.tsx"],
+    jest: ["loader"],
   },
 } as ComponentMeta<typeof Loader>;
 

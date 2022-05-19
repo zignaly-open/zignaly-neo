@@ -29,5 +29,9 @@ export type ButtonProps = {
   color?: keyof typeof buttonColors;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
+  testIdLeftElement?: string | null;
+  testIdCaptionElement?: string | null;
+  testIdRightElement?: string | null;
+  testIdLoadingElement?: string | null;
   children?: React.ReactNode;
 };

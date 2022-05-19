@@ -15,6 +15,10 @@ interface ButtonProps {
   loading?: boolean;
   disabled?: boolean;
   color?: keyof typeof buttonColors;
+  testIdLeftElement?: string | null;
+  testIdCaptionElement?: string | null;
+  testIdRightElement?: string | null;
+  testIdLoadingElement?: string | null;
 }
 
 type ButtonVariationsTypes = {
@@ -47,7 +51,11 @@ export function ButtonVariations({
             disabled={button.disabled}
             onClick={() => {}}
             color={button.color}
-          ></Button>
+            testIdLeftElement={button.testIdLeftElement}
+            testIdCaptionElement={button.testIdCaptionElement}
+            testIdRightElement={button.testIdRightElement}
+            testIdLoadingElement={button.testIdLoadingElement}
+          />
         ))}
       </StoryList>
       {buttonsRow2 && (
@@ -64,9 +72,11 @@ export function ButtonVariations({
               disabled={button.disabled}
               onClick={() => {}}
               color={button.color}
-            >
-              Example button
-            </Button>
+              testIdLeftElement={button.testIdLeftElement}
+              testIdCaptionElement={button.testIdCaptionElement}
+              testIdRightElement={button.testIdRightElement}
+              testIdLoadingElement={button.testIdLoadingElement}
+            />
           ))}
         </StoryList>
       )}
@@ -84,9 +94,11 @@ export function ButtonVariations({
               disabled={button.disabled}
               onClick={() => {}}
               color={button.color}
-            >
-              Example button
-            </Button>
+              testIdLeftElement={button.testIdLeftElement}
+              testIdCaptionElement={button.testIdCaptionElement}
+              testIdRightElement={button.testIdRightElement}
+              testIdLoadingElement={button.testIdLoadingElement}
+            />
           ))}
         </StoryList>
       )}
@@ -104,9 +116,11 @@ export function ButtonVariations({
               disabled={button.disabled}
               onClick={() => {}}
               color={button.color}
-            >
-              Example button
-            </Button>
+              testIdLeftElement={button.testIdLeftElement}
+              testIdCaptionElement={button.testIdCaptionElement}
+              testIdRightElement={button.testIdRightElement}
+              testIdLoadingElement={button.testIdLoadingElement}
+            />
           ))}
         </StoryList>
       )}
@@ -124,9 +138,11 @@ export function ButtonVariations({
               disabled={button.disabled}
               onClick={() => {}}
               color={button.color}
-            >
-              Example button
-            </Button>
+              testIdLeftElement={button.testIdLeftElement}
+              testIdCaptionElement={button.testIdCaptionElement}
+              testIdRightElement={button.testIdRightElement}
+              testIdLoadingElement={button.testIdLoadingElement}
+            />
           ))}
         </StoryList>
       )}

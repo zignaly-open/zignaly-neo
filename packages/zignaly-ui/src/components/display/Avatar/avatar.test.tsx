@@ -2,7 +2,6 @@
 // Dependencies
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import "@testing-library/jest-dom/extend-expect";
 
 // Component
 import Avatar from ".";
@@ -40,6 +39,7 @@ describe("components/display/Avatar", () => {
       const tag = container.querySelector("div");
       expect(tag).toBeVisible();
     });
+
 
     it("Avatar with image", () => {
       render(<Avatar image="image">Example Test</Avatar>);

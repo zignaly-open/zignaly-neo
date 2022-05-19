@@ -20,7 +20,7 @@ export default {
     },
   },
   parameters: {
-    jest: ["test.tsx"],
+    jest: ["zigWalletIndicator"],
   },
 } as ComponentMeta<typeof ZigWalletIndicator>;
 

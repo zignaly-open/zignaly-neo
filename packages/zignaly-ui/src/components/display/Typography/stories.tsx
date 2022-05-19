@@ -52,7 +52,7 @@ export default {
     },
   },
   parameters: {
-    jest: ["test.tsx"],
+    jest: ["typography"],
   },
 } as ComponentMeta<typeof Typography>;
 

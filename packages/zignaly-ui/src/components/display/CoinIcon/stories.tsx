@@ -25,9 +25,23 @@ export default {
 
 const Template: ComponentStory<typeof CoinIcon> = (args) => <CoinIcon {...args} />;
 
-export const CoinIconStory = Template.bind({});
-CoinIconStory.args = {
+export const EtherCoinIconStory = Template.bind({});
+EtherCoinIconStory.args = {
   name: "Ethereum",
   size: CoinSizes.MEDIUM,
   coin: "ETH",
+};
+
+export const BitcoinCoinIconStory = Template.bind({});
+BitcoinCoinIconStory.args = {
+  name: "Bitcoin",
+  size: CoinSizes.LARGE,
+  coin: "BTC",
+};
+
+export const TetherCoinIconStory = Template.bind({});
+TetherCoinIconStory.args = {
+  name: "Tether",
+  size: CoinSizes.SMALL,
+  coin: "USDT",
 };

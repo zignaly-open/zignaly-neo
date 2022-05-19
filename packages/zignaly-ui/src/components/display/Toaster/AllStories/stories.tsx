@@ -5,7 +5,7 @@ import { ExampleToaster } from "../stories";
 import { ToasterVariations } from "./storyLists";
 
 export default {
-  title: "Display/Toaster/All stories",
+  title: "Display/Toaster/AllStories",
   component: ToasterVariations,
   subcomponents: { Toaster },
   argTypes: {
