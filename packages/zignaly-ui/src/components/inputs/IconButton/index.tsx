@@ -20,6 +20,7 @@ const IconButton = ({
   dropDownOptions,
   renderDropDown = null,
   className,
+  type,
 }: IconButtonProps) => {
   // Ref
   const options = {
@@ -107,6 +108,7 @@ const IconButton = ({
     <Layout ref={layoutRef} className={className}>
       <ViewPort
         size={size}
+        type={type}
         variant={variant}
         disabled={disabled || loading}
         isActiveDropdown={isActiveDropdown}

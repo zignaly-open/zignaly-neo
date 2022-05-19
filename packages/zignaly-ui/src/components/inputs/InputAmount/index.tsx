@@ -15,6 +15,8 @@ import {
   BalanceValue,
   MaxButton,
   Side,
+  Unit,
+  Wrapper,
 } from "./styles";
 
 // Components
@@ -38,6 +40,7 @@ function InputAmount(
     value = BigNumber.from(0),
     name,
     fullWidth,
+    placeholder,
   }: InputAmountProps,
   inputRef: React.Ref<any>,
 ) {
@@ -131,31 +134,40 @@ function InputAmount(
       <Typography variant="h3" weight="regular" color="neutral200">
         {label}
       </Typography>
-      <InputContainer>
-        <Side>
-          {selectedToken && tokens.length < 2 && <TokenImage src={selectedToken.image} />}
-          <InputValue
-            ref={inputRef}
-            value={inputValue}
-            type={"text"}
-            placeholder={"0.0"}
-            onChange={handleTextChange}
-            onBlur={onBlur}
-            disabled={disabled}
-            name={name}
-          />
-          {selectedToken && tokens && <MaxButton onClick={onClickMaxValue}>Max</MaxButton>}
-        </Side>
-        {tokens && tokens.length > 2 && (
+      <Wrapper>
+        <InputContainer>
           <Side>
-            <TokenSelector
-              value={selectedToken}
-              tokens={tokens}
-              onSelectToken={handleChangeToken}
+            {selectedToken?.image && tokens.length < 2 && <TokenImage src={selectedToken.image} />}
+            <InputValue
+              ref={inputRef}
+              value={inputValue}
+              type={"text"}
+              placeholder={placeholder || "0.0"}
+              onChange={handleTextChange}
+              onBlur={onBlur}
+              disabled={disabled}
+              name={name}
             />
+            {selectedToken && tokens && <MaxButton onClick={onClickMaxValue}>Max</MaxButton>}
           </Side>
+          {tokens?.length > 2 && (
+            <Side>
+              <TokenSelector
+                value={selectedToken}
+                tokens={tokens}
+                onSelectToken={handleChangeToken}
+              />
+            </Side>
+          )}
+        </InputContainer>
+        {tokens?.length === 1 && selectedToken?.name && (
+          <Unit>
+            <Typography color="neutral300" variant="h1">
+              {selectedToken.name}
+            </Typography>
+          </Unit>
         )}
-      </InputContainer>
+      </Wrapper>
 
       {/* Show Balance of the Input */}
       {selectedToken && selectedToken.balance && (

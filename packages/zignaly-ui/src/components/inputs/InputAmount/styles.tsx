@@ -3,6 +3,12 @@ import styled from "styled-components";
 import { dark } from "theme";
 import { styledIf } from "utils/styled";
 
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+`;
+
 export const InputContainer = styled.div`
   border: 1px solid #35334a;
   padding: 8px 18px;
@@ -13,6 +19,7 @@ export const InputContainer = styled.div`
   margin-top: 4px;
   gap: 22px;
   margin-bottom: 16px;
+  width: 100%;
 `;
 
 export const TokenImage = styled.img`
@@ -92,6 +99,9 @@ type LayoutProps = {
 };
 
 export const Layout = styled.div`
+  display: flex;
+  flex-direction: column;
+
   ${(props: LayoutProps) => `
     ${styledIf(
       props.withError,
@@ -130,4 +140,8 @@ export const Layout = styled.div`
       `,
     )}
   `}
+`;
+
+export const Unit = styled.div`
+  margin: 10px 0 0 24px;
 `;

@@ -17,6 +17,9 @@ export default {
     label: {
       type: "string",
     },
+    placeholder: {
+      type: "string",
+    },
     onChange: {
       type: "function",
     },
@@ -56,6 +59,19 @@ OnlyOneToken.args = {
       id: 1,
       name: "BTC",
       image: BTCIcon,
+      balance: "1000000000000000000",
+    },
+  ],
+};
+
+export const OnlyOneTokenWithUnit = Template.bind({});
+OnlyOneTokenWithUnit.args = {
+  label: "Amount to Withdraw",
+  onChange: () => {},
+  tokens: [
+    {
+      id: 1,
+      name: "BTC",
       balance: "1000000000000000000",
     },
   ],
