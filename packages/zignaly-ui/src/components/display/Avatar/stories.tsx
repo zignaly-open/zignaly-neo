@@ -1,9 +1,9 @@
 // Dependencies
 import React from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import {ComponentMeta, ComponentStory} from "@storybook/react";
 
 // Components
-import Avatar, { AvatarSizes } from "./index";
+import Avatar, {AvatarSizes} from "./index";
 
 export default {
   title: "Display/Avatar",
@@ -12,7 +12,7 @@ export default {
     size: {
       control: "select",
       default: AvatarSizes.SMALL,
-      options: [AvatarSizes.SMALL, AvatarSizes.MEDIUM, AvatarSizes.LARGE],
+      options: [AvatarSizes.SMALL, AvatarSizes.MEDIUM, AvatarSizes.LARGE, AvatarSizes.XLARGE, AvatarSizes.XXLARGE],
     },
     hash: {
       control: "text",
@@ -34,7 +34,7 @@ Image.args = {
   hash: "",
   size: AvatarSizes.MEDIUM,
   image:
-    "https://64.media.tumblr.com/1ca5ac368badaea331737f7856d844a8/tumblr_qdawidrDy61rpwm80o1_250.jpg",
+    "https://64.media.tumblr.com/ef4e0c2294d9e304e339f19307953e7f/6c205b8b5946f8a9-7c/s250x400/9d66b8e486071ecabe8db5afdfb879a038cc79d5.png",
 };
 Image.parameters = {
   jest: ["avatar"],

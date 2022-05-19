@@ -2,6 +2,7 @@
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 import { SelectSizes } from "./types";
+import Typography from "../../display/Typography";
 
 const isSmallSelect = (size: SelectSizes) => size === SelectSizes.SMALL;
 
@@ -21,7 +22,6 @@ export const Label = styled.label`
 
 export const Container = styled.div`
   width: 100%;
-  min-width: 404px;
   background: #0c0d21;
   border-radius: 4px;
   user-select: none;
@@ -31,16 +31,24 @@ export const Container = styled.div`
   align-items: center;
   justify-content: space-between;
   transition: all 0.1s linear;
+  overflow: hidden;
 `;
 
-export const Value = styled.div`
+
+export const Value = styled(Typography)`
   font-style: normal;
-  color: #ffffff;
   width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  ${({theme}) => (`
+     color: ${theme['neutral200']};
+  `)}
 `;
 
 export const Placeholder = styled(Value)`
-  color: #919191;
+  ${({theme}) => (`
+     color: ${theme['neutral400']};
+  `)}
 `;
 
 export const Arrow = styled.img`
@@ -54,7 +62,6 @@ export const Menu = styled.ul`
   list-style-type: none;
   margin: 0;
   padding: 0;
-  background: #0c0d21;
   border-radius: 0 0 4px 4px;
   overflow: auto;
   position: absolute;
@@ -64,8 +71,38 @@ export const Menu = styled.ul`
   transition: opacity 0.1s linear;
   visibility: hidden;
   opacity: 0;
-  border: 2px solid #5a51f5;
   border-top: none;
+  z-index: 10;
+  
+  max-height: 250px;
+  overflow-x: hidden;
+  
+  ${({theme}) => (`
+    background: ${theme['neutral750']};
+  `)}
+
+  /* width */
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.10);
+    border-radius: 12px;
+  }
+
+  /* Handle on hover */
+  &::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
 `;
 
 type ItemProps = {
@@ -77,31 +114,31 @@ export const Item = styled.li<ItemProps>`
   margin: 0;
   align-items: center;
   cursor: pointer;
-
-  ${({ empty }: any) => `
-    ${styledIf(
-      empty,
-      `
+  ${({ empty, theme }: any) => `
+    ${styledIf(empty, `
       text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #fff;
+      color: ${theme['neutral500']};
     `,
-      `
-      color: #fff;
+          `
+      color: ${theme['neutral200']};
       
       &:hover {
         background: #15162d;
       }
     `,
-    )}  
+  )}  
   `}
 `;
 
 export const LeftElement = styled.div``;
 
-export const ItemCaption = styled.div``;
+export const ItemCaption = styled(Typography)`
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 
 export const LeftElementIcon = styled.img`
   width: 24px;
@@ -121,21 +158,19 @@ export const Layout = styled.div<LayoutProps>`
   display: inline-flex;
   flex-direction: column;
   position: relative;
-
+  width: 100%;
+  
   &[disabled] {
     ${Container} {
       opacity: 0.5;
       cursor: default;
     }
   }
-
   ${(props: any) => `
-    ${styledIf(
-      props.isActiveMenu,
-      `
+    ${styledIf(props.isActiveMenu, `
       ${Menu} {
         border-radius: 0 0 4px 4px;
-        border: 2px solid #5A51F5;
+        border: 1px solid ${props.theme['highlighted']};;
         border-top: none;        
         visibility: visible;
         opacity: 1;
@@ -143,21 +178,19 @@ export const Layout = styled.div<LayoutProps>`
       
       ${Container} {
         border-radius: 4px 4px 0 0;
-        border: 2px solid #5A51F5;
+        border: 1px solid ${props.theme['highlighted']};
         border-bottom: none;
       }
     `,
-      `
+    `
       ${Container} {
-        border: 2px solid transparent;
-        box-shadow: 0 0 0 1px #413BA0;
+        border: 1px solid transparent;
+        box-shadow: 0 0 0 1px ${props.theme['neutral600']};;
       }
     `,
-    )}
+  )}
   
-    ${styledIf(
-      isSmallSelect(props.size),
-      `
+    ${styledIf(isSmallSelect(props.size), `
       ${Arrow} {
         width: 10px;
         height: 5.84px;
@@ -179,11 +212,9 @@ export const Layout = styled.div<LayoutProps>`
         padding: 7.67px 12.88px;
       }
     `,
-    )}
+  )}
     
-    ${styledIf(
-      isNormalSelect(props.size),
-      `
+    ${styledIf(isNormalSelect(props.size),`
       ${Arrow} {
         width: 12px;
         height: 7px;
@@ -205,26 +236,20 @@ export const Layout = styled.div<LayoutProps>`
         padding: 10px 13.86px;
       }
       
-
-    ${styledIf(
-      props.collapsed,
-      `
+    ${styledIf(props.collapsed, `
       ${Container} {
         min-width: 0;
         padding: 2px 9px;
       }
-
       ${Arrow}{
         margin: 0;
         }
       `,
     )}
     `,
-    )}
+  )}
     
-    ${styledIf(
-      isLargeSelect(props.size),
-      `
+    ${styledIf(isLargeSelect(props.size),`
       ${Arrow} {
         width: 20px;
         height: 12px;
@@ -246,17 +271,24 @@ export const Layout = styled.div<LayoutProps>`
         padding: 19.33px 33.77px;
       }
     `,
-    )}
+  )}
     
-    ${styledIf(
-      props.fullWidth,
-      `
+    ${styledIf(props.fullWidth,
+    `
       width: 100%;
-
       ${Container} {
         width: 100%;
       }
       `,
     )}
   `}
+`;
+
+export const ItemContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  width: 100%;
 `;

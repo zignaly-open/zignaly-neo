@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 // Config
 import { headerConfig } from "./utils";
+import {MarginContainer} from "../../styled";
 
 export const Layout = styled.header`
   background: linear-gradient(269.14deg, #080810 0%, #11122b 100%);
@@ -18,6 +19,13 @@ export const Layout = styled.header`
   right: 0;
   z-index: 12;
   height: ${headerConfig.height};
+`;
+
+export const Container = styled(MarginContainer)`
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const Side = styled.div`

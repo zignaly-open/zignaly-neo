@@ -24,7 +24,7 @@ const dark: Theme = {
   tertiaryButton: "#",
   formInputBack: "#",
   formSelectBack: "#",
-  dropDownBackbround: "#12152C",
+  dropDownBackground: "#12152C",
   darkSpecial: "#0b0d1a",
   avatarBack: "#F3F4F6",
   gradient1: "#",

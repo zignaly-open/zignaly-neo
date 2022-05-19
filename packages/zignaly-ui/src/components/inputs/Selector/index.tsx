@@ -4,7 +4,21 @@ import { ReactElement, useState, useRef, useCallback } from "react";
 import { useClickAway } from "react-use";
 
 // Styled Components
-import * as styled from "./styles";
+import {
+  Layout,
+  Item,
+  ArrowContainer,
+  Menu,
+  Label,
+  Value,
+  Placeholder,
+  Arrow,
+  LeftElement,
+  ItemCaption,
+  LeftElementIcon,
+  Container,
+  ItemContainer
+} from "./styles";
 
 // Assets
 import CaretDownIcon from "assets/icons/caret-down-icon.svg?url";
@@ -16,6 +30,7 @@ function Select({
   name,
   mode,
   label,
+  fullWidth,
   className,
   value = null,
   options = [],
@@ -23,7 +38,6 @@ function Select({
   placeholder = "Button",
   onChange = () => {},
   size = SelectSizes.NORMAL,
-  fullWidth,
 }: SelectProps): ReactElement {
   // Ref
   const selectorRef = useRef(null);
@@ -31,9 +45,13 @@ function Select({
   // Hooks
   const [isActiveMenu, setMenuActive] = useState(false);
 
+  /**
+   * @function handleClickItem():
+   * @description Handle select change form component.
+   */
   const handleClickItem = useCallback(
-    (value: OptionItem) => {
-      onChange(value);
+    (value: OptionItem, index: number) => {
+      onChange({...value, index});
       setMenuActive(false);
     },
     [options],
@@ -44,62 +62,74 @@ function Select({
   });
 
   return (
-    <styled.Layout
-      className={className}
+    <Layout
       size={size}
-      isActiveMenu={isActiveMenu}
-      disabled={disabled}
-      ref={selectorRef}
-      collapsed={mode === "collapsed" && !isActiveMenu}
-      fullWidth={fullWidth}
       name={name}
+      ref={selectorRef}
+      disabled={disabled}
+      className={className}
+      fullWidth={fullWidth}
+      isActiveMenu={isActiveMenu}
+      collapsed={mode === "collapsed" && !isActiveMenu}
     >
-      {label && <styled.Label htmlFor={name}>{label}</styled.Label>}
-      <styled.Container onClick={() => setMenuActive(!isActiveMenu)}>
+      {label && <Label htmlFor={name}>{label}</Label>}
+      <Container onClick={() => setMenuActive(!isActiveMenu)}>
         {mode !== "collapsed" &&
           (value ? (
             <>
               {value.leftElement && (
-                <styled.LeftElement>
+                <LeftElement>
                   {typeof value.leftElement === "object" ? (
                     value.leftElement
                   ) : (
-                    <styled.LeftElementIcon src={value.leftElement} alt={value.caption} />
+                    <LeftElementIcon src={value.leftElement} alt={value.caption} />
                   )}
-                </styled.LeftElement>
+                </LeftElement>
               )}
-              <styled.Value>{value.caption}</styled.Value>
+              <Value variant={'body1'}>{value.caption}</Value>
             </>
           ) : (
-            <styled.Placeholder>{placeholder}</styled.Placeholder>
+            <Placeholder>{placeholder}</Placeholder>
           ))}
-        <styled.ArrowContainer>
-          <styled.Arrow src={CaretDownIcon} alt={label} />
-        </styled.ArrowContainer>
-      </styled.Container>
-      <styled.Menu>
+        <ArrowContainer>
+          <Arrow src={CaretDownIcon} alt={label} />
+        </ArrowContainer>
+      </Container>
+      <Menu>
         {!options.length ? (
-          <styled.Item empty={true}>
-            <styled.ItemCaption>No data available</styled.ItemCaption>
-          </styled.Item>
+          <Item empty={true}>
+            <ItemCaption>No data available</ItemCaption>
+          </Item>
         ) : (
-          options.map((option: OptionItem, index) => (
-            <styled.Item key={`--${index.toString()}`} onClick={() => handleClickItem(option)}>
-              {option.leftElement && (
-                <styled.LeftElement>
-                  {typeof option.leftElement === "object" ? (
-                    option.leftElement
-                  ) : (
-                    <styled.LeftElementIcon src={option.leftElement} alt={option.caption} />
+          options.map((option: OptionItem, index: number) => {
+            const isSelectedOption = !!(value && value.index === index);
+
+            if (isSelectedOption)
+              return null;
+
+            return (
+              <Item
+                key={`--${index.toString()}`}
+                onClick={() => handleClickItem(option, index)}
+              >
+                <ItemContainer>
+                  {option.leftElement && (
+                    <LeftElement>
+                      {typeof option.leftElement === "object" ? (
+                        option.leftElement
+                      ) : (
+                        <LeftElementIcon src={option.leftElement} alt={option.caption} />
+                      )}
+                    </LeftElement>
                   )}
-                </styled.LeftElement>
-              )}
-              <styled.ItemCaption>{option.caption}</styled.ItemCaption>
-            </styled.Item>
-          ))
+                  <ItemCaption variant={'body1'}>{option.caption}</ItemCaption>
+                </ItemContainer>
+              </Item>
+            );
+          })
         )}
-      </styled.Menu>
-    </styled.Layout>
+      </Menu>
+    </Layout>
   );
 }
 

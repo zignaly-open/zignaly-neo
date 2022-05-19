@@ -5,6 +5,7 @@ export enum SelectSizes {
 }
 
 export type OptionItem = {
+  index: number;
   leftElement?: any;
   caption: string;
 };

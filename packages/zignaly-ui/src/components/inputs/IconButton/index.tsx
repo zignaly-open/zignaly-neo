@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useCallback, useMemo, useEffect, useRef, useState } from "react";
+import React, {useCallback, useMemo, useEffect, useRef, useState} from "react";
 import { useClickAway, useWindowSize } from "react-use";
 import { Portal } from "react-portal";
 
@@ -19,8 +19,11 @@ const IconButton = ({
   loading = false,
   dropDownOptions,
   renderDropDown = null,
+  colors = {
+    normal: '#706f82',
+    active: '#fff'
+  },
   className,
-  type,
 }: IconButtonProps) => {
   // Ref
   const options = {
@@ -108,8 +111,8 @@ const IconButton = ({
     <Layout ref={layoutRef} className={className}>
       <ViewPort
         size={size}
-        type={type}
         variant={variant}
+        colors={colors}
         disabled={disabled || loading}
         isActiveDropdown={isActiveDropdown}
       >
@@ -119,7 +122,7 @@ const IconButton = ({
               type={LoaderTypes.TAILSPIN}
               color="#9CA3AF"
               ariaLabel="Loader"
-            ></ButtonLoader>
+            />
           ) : (
             <IconContainer>
               <Icon>{icon}</Icon>

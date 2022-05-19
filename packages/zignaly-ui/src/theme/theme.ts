@@ -22,7 +22,7 @@ interface Theme {
   tertiaryButton: string;
   formInputBack: string;
   formSelectBack: string;
-  dropDownBackbround: string;
+  dropDownBackground: string;
   darkSpecial: string;
   avatarBack: string;
   gradient1: string;

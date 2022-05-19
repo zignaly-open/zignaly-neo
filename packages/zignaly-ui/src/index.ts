@@ -21,7 +21,11 @@ import InputAmount from "./components/inputs/InputAmount";
 import TextButton from "./components/inputs/TextButton";
 import InputText from "./components/inputs/InputText";
 import Select from "./components/inputs/Selector";
+import InputCode from "./components/inputs/InputCode";
 import { ButtonGroup } from "./components/styled";
+
+// Layouts
+import {MarginContainer, PageContainer} from "./components/styled";
 
 // Icons
 import CloseIcon from "./assets/icons/close-icon.svg";
@@ -48,10 +52,8 @@ import SwapIcon from "./assets/icons/swap-icon.svg";
 import SwapVertIcon from "./assets/icons/swap-vert-icon.svg";
 
 // Navigation
-import Tabs from "./components/navigation/Tabs";
-import TabPanel from "./components/navigation/Tabs/components/TabPanel";
-import Tab from "./components/navigation/Tabs/components/Tab";
 import Header from "./components/navigation/Header";
+import MenuDropDown from './components/navigation/MenuDropDown';
 import ZigsBalance from "./components/navigation/Header/components/ZigsBalance";
 import BrandImage from "./components/navigation/Header/components/BrandImage";
 
@@ -88,13 +90,14 @@ export {
   InputText,
   Select,
   ButtonGroup,
+  InputCode,
   // Navigation
-  Tabs,
-  TabPanel,
-  Tab,
   Header,
   BrandImage,
   ZigsBalance,
+  MenuDropDown,
+  PageContainer,
+  MarginContainer,
   /**
    * =-=-=-=-=-=-=-=
    *   Assets
