@@ -29,6 +29,7 @@ export const defaultDropDownOptions = {
   alignment: "left",
   position: "absolute",
   zIndex: 10,
+  maxHeight: null
 };
 
 export type IconButtonProps = {
@@ -43,14 +44,14 @@ export type IconButtonProps = {
     zIndex?: number;
     position?: keyof typeof dropdownPosition;
   };
+  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
 
-  loading?: boolean;
+  loading?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement> | null;
   renderDropDown?: ReactElement<any> | null;
   className?: string;
   colors?: {
     normal: string;
-    active: string;
-  };
-  type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
+    active: string
+  }
 };
