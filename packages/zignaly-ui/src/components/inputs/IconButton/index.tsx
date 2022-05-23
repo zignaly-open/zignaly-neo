@@ -1,5 +1,5 @@
 // Dependencies
-import React, {useCallback, useMemo, useEffect, useRef, useState} from "react";
+import React, { useCallback, useMemo, useEffect, useRef, useState } from "react";
 import { useClickAway, useWindowSize } from "react-use";
 import { Portal } from "react-portal";
 
@@ -20,10 +20,11 @@ const IconButton = ({
   dropDownOptions,
   renderDropDown = null,
   colors = {
-    normal: '#706f82',
-    active: '#fff'
+    normal: "#706f82",
+    active: "#fff",
   },
   className,
+  type,
 }: IconButtonProps) => {
   // Ref
   const options = {
@@ -115,14 +116,11 @@ const IconButton = ({
         colors={colors}
         disabled={disabled || loading}
         isActiveDropdown={isActiveDropdown}
+        type={type}
       >
         <Container onClick={disabled ? null : renderDropDown ? handleClickButton : onClick}>
           {loading ? (
-            <ButtonLoader
-              type={LoaderTypes.TAILSPIN}
-              color="#9CA3AF"
-              ariaLabel="Loader"
-            />
+            <ButtonLoader type={LoaderTypes.TAILSPIN} color="#9CA3AF" ariaLabel="Loader" />
           ) : (
             <IconContainer>
               <Icon>{icon}</Icon>
