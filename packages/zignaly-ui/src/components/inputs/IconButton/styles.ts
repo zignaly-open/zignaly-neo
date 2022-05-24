@@ -25,6 +25,10 @@ export const Icon = styled.div`
   z-index: 2;
   position: relative;
   transition: color 0.2s linear;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const ButtonLoader = styled(Loader)`
@@ -73,7 +77,7 @@ export const Dropdown = styled.div<DropdownProps>`
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 12px;
   }
 
@@ -81,15 +85,18 @@ export const Dropdown = styled.div<DropdownProps>`
   &::-webkit-scrollbar-thumb:hover {
     background: rgba(255, 255, 255, 0.15);
   }
-  
+
   ${({ alignment, width, position, maxHeight, zIndex }) => `
     width: ${width ?? "auto"};
     z-index: ${zIndex ?? 10};
     
-    ${styledIf(maxHeight, `
+    ${styledIf(
+      maxHeight,
+      `
       max-height: ${maxHeight};
       overflow: auto;
-    `)}
+    `,
+    )}
     
     ${styledIf(
       position === "static",
@@ -140,7 +147,8 @@ interface LayoutProps {
   colors: {
     normal: string;
     active: string;
-  }
+  };
+  disabled: boolean;
 }
 
 export const Layout = styled.div`
@@ -167,9 +175,9 @@ export const ViewPort = styled.button<LayoutProps>`
     cursor: default;
   }
 
-  ${({ size, variant, isActiveDropdown, colors }: any) => `
+  ${(props) => `
     ${styledIf(
-      isSmallButton(size),
+      isSmallButton(props.size),
       `
       ${Icon} {
         svg {
@@ -191,7 +199,7 @@ export const ViewPort = styled.button<LayoutProps>`
     )}
     
   ${styledIf(
-    isMediumButton(size),
+    isMediumButton(props.size),
     `     
       ${Icon} {
         svg {
@@ -213,7 +221,7 @@ export const ViewPort = styled.button<LayoutProps>`
   )}
     
   ${styledIf(
-    isLargeButton(size),
+    isLargeButton(props.size),
     `     
       ${Icon} {
         svg {
@@ -235,7 +243,7 @@ export const ViewPort = styled.button<LayoutProps>`
   )}
 
   ${styledIf(
-    isXLargeButton(size),
+    isXLargeButton(props.size),
     `     
       ${Icon} {
         svg {
@@ -257,7 +265,7 @@ export const ViewPort = styled.button<LayoutProps>`
   )}
   
   ${styledIf(
-    isPrimaryButton(variant),
+    isPrimaryButton(props.variant),
     `
       ${Container} {
         background: linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%);
@@ -317,22 +325,50 @@ export const ViewPort = styled.button<LayoutProps>`
   )}
     
   ${styledIf(
-    isSecondaryButton(variant),
+    isSecondaryButton(props.variant),
     `
       ${Container} {
+        background: rgba(16, 18, 37, 0.3);
         transition: all 0.2s linear;
-        border: 1px solid #35334A;
-        background: rgba(12, 13, 33, 0.8);
-             
-        &:enabled:hover {
-          border: 1px dashed #4A4958;
-          background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
-        
-          ${Icon} {
-            color: #fff;
-            text-shadow: 0px 12px 16px rgba(25, 25, 39, 0.36);
-          }
+        &:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 5px;
+          padding: 1px;
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: destination-out;
+          mask-composite: exclude;
         }
+        ${styledIf(
+          props.disabled,
+          `
+          opacity: 0.33;
+          &:before {
+            background: ${props.theme["neutral600"]};
+          }
+          `,
+        )}
+
+        ${styledIf(
+          !props.disabled,
+          `
+          &:before {
+            background: ${props.theme["neutral600"]};
+          }
+          &:hover {
+            background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
+            &:before {
+              background: ${props.theme["neutral500"]};
+            }
+            
+          }
+          
+          `,
+        )}
       }
       
       &:enabled:focus:not(:focus-visible) {
@@ -340,77 +376,41 @@ export const ViewPort = styled.button<LayoutProps>`
         box-shadow: none;
       }
      
-      &:enabled:focus:focus-visible {
-        background: linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%);
       
-        ${Container} {
-          border: 1px solid white;
-          background: #040618;
-                  
-          &:before {
+      &:enabled:focus:focus-visible {
+          ${Container} {
             background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
-            opacity: 1;
+            -webkit-transition:none;
+            -moz-transition:none;
+            -o-transition:none;
+            transition:none;
+            box-shadow: inset 0px 0px 0px 2px #FFFFFF;
+            border-radius: 5px;
+            &:before {
+              background: linear-gradient(rgba(20, 156, 173, 1), rgba(69, 64, 193, 1));
+            }
           }
-        }
-        
-        ${Icon} {
-          color: #fff;
-        }
-      }
-            
-      &[disabled] {
-        ${IconContainer}{
-          opacity: 0.33;
-        }
-      } 
-
-      &:enabled {
-        ${Container} {
-          &:before {
-            border-radius: inherit;
-            background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.48) 0%, rgba(69, 64, 193, 0.48) 100%);
-            content: '';    
-            display: block;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            width: 100%;
-            z-index: 1;
-            transition: all 50ms linear; 
-          }
+          
         }
       }
       
       &:enabled:active {
-        padding: 2px;
-        background: linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%);
-        
         ${Container} {
-          border: none;
-          background: #040618;
-          
+          background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
+          -webkit-transition:none;
+          -moz-transition:none;
+          -o-transition:none;
+          transition:none;
           &:before {
-            opacity: 1;
+            padding: 1px;
+            background: linear-gradient(rgba(134, 113, 247, 1),rgba(126, 201, 249, 1));
           }
-        }
-        
-        ${Icon} {
-          top: 0px;
-          left: 0px;
-        }
-      }
-            
-      ${Icon} {
-        color: #9CA3AF;
-        letter-spacing: 2px;
       }
     `,
   )}
   
   ${styledIf(
-    isFlatButton(variant),
+    isFlatButton(props.variant),
     `
       ${Container} {
         transition: all 0.2s linear;
@@ -435,7 +435,6 @@ export const ViewPort = styled.button<LayoutProps>`
       }
      
       &:enabled:focus:focus-visible {
-        background: linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%);
       
         ${Container} {
           border: 1px solid white;
@@ -478,40 +477,27 @@ export const ViewPort = styled.button<LayoutProps>`
       }
       
       &:enabled:active {
-        padding: 2px;
-        background: linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%);
-        
+        transition: all 0.21 linear;
         ${Container} {
-          border: none;
-          background: #040618;
-          
-          &:before {
-            opacity: 1;
-          }
-        }
-        
-        ${Icon} {
-          top: 0px;
-          left: 0px;
-        }
+          border: 1px solid white;
       }
             
       ${Icon} {
-        color: #9CA3AF;
-        letter-spacing: 2px;
+        top: 0;
+        right: 0;
       }
     `,
   )}  
   
   ${Icon} {
     svg {
-      fill: ${colors.normal};
-      stroke: ${colors.normal};
+      fill: #706f82;
+      stroke: #706f82;
     }
   }
   
   ${styledIf(
-    isActiveDropdown,
+    props.isActiveDropdown,
     ` 
       background: #12152c;      
       padding: 2px;
@@ -524,8 +510,8 @@ export const ViewPort = styled.button<LayoutProps>`
       
       ${Icon} {
         svg {
-          fill: ${colors.active};
-          stroke: ${colors.active};
+          fill: #fff;
+          stroke: #fff;
         }
       }
        
@@ -536,7 +522,7 @@ export const ViewPort = styled.button<LayoutProps>`
           opacity: 0 !important;
         }
       }
-    `
+    `,
   )}
   `}
 `;

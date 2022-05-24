@@ -56,7 +56,7 @@ Main.args = {
     <IconButton
       key={"user"}
       variant={"flat"}
-      icon={<UserIcon />}
+      icon={<UserIcon color="#65647E"/>}
       renderDropDown={<div>DropDown Container</div>}
       dropDownOptions={{
         alignment: "right",

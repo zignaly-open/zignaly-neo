@@ -46,12 +46,12 @@ const Template: ComponentStory<typeof IconButton> = (args) => (
 
 export const Simple = Template.bind({});
 Simple.args = {
-  icon: <OptionDotsIcon color="E1E9F0" />,
+  icon: <OptionDotsIcon color="#E1E9F0" />,
 };
 
 export const WithDropdownLeft = Template.bind({});
 WithDropdownLeft.args = {
-  icon: <OptionDotsIcon color="E1E9F0" />,
+  icon: <OptionDotsIcon color="#E1E9F0" />,
   renderDropDown: <div>Render Dropdown Content</div>,
   dropDownOptions: {
     alignment: "left",
@@ -60,7 +60,7 @@ WithDropdownLeft.args = {
 
 export const WithDropdownRight = Template.bind({});
 WithDropdownRight.args = {
-  icon: <OptionDotsIcon color="E1E9F0" />,
+  icon: <OptionDotsIcon color="#E1E9F0" />,
   renderDropDown: <div>Render Dropdown Content</div>,
   dropDownOptions: {
     alignment: "right",
@@ -69,7 +69,7 @@ WithDropdownRight.args = {
 
 export const WithCustomWidth = Template.bind({});
 WithCustomWidth.args = {
-  icon: <OptionDotsIcon color="E1E9F0" />,
+  icon: <OptionDotsIcon color="#E1E9F0" />,
   renderDropDown: <div>Render Dropdown Content</div>,
   dropDownOptions: {
     width: "300px",
@@ -78,19 +78,21 @@ WithCustomWidth.args = {
 
 export const Static = Template.bind({});
 Static.args = {
-  icon: <OptionDotsIcon color="E1E9F0" />,
+  icon: <OptionDotsIcon color="#E1E9F0" />,
   renderDropDown: <div>Render Dropdown Content</div>,
   dropDownOptions: {
     position: "static",
   },
+  variant: "secondary",
 };
 
 export const Loading = Template.bind({});
 Loading.args = {
-  icon: <OptionDotsIcon color="E1E9F0" />,
+  icon: <OptionDotsIcon color="#E1E9F0" />,
   renderDropDown: <div>Render Dropdown Content</div>,
   dropDownOptions: {
     position: "static",
   },
   loading: true,
 };
+
