@@ -25,7 +25,7 @@ import InputCode from "./components/inputs/InputCode";
 import { ButtonGroup } from "./components/styled";
 
 // Layouts
-import {MarginContainer, PageContainer} from "./components/styled";
+import { MarginContainer, PageContainer } from "./components/styled";
 
 // Icons
 import CloseIcon from "./assets/icons/close-icon.svg";
@@ -53,13 +53,14 @@ import SwapVertIcon from "./assets/icons/swap-vert-icon.svg";
 
 // Navigation
 import Header from "./components/navigation/Header";
-import MenuDropDown from './components/navigation/MenuDropDown';
+import MenuDropDown from "./components/navigation/MenuDropDown";
 import ZigsBalance from "./components/navigation/Header/components/ZigsBalance";
 import BrandImage from "./components/navigation/Header/components/BrandImage";
 
 // Utils
 import ThemeProvider from "./utils/ThemeProvider";
 import { dark, light } from "./theme";
+import { createUserTable } from "components/display/Table/types";
 
 export {
   /**
@@ -71,6 +72,7 @@ export {
   Avatar,
   Loader,
   Table,
+  createUserTable,
   ConnectionStateLabel,
   DateLabel,
   PriceLabel,
