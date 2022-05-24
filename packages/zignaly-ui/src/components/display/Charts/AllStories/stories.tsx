@@ -2,7 +2,6 @@
 import * as React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { AreaChart } from "..";
-import { ChartVariations } from "../types";
 
 export default {
   title: "Display/Charts/AllStories",
@@ -10,26 +9,29 @@ export default {
   argTypes: {
     variant: {
       control: "select",
-      options: [ChartVariations.LARGE, ChartVariations.SMALL],
+      options: ["large", "small"],
     },
   },
 } as ComponentMeta<typeof AreaChart>;
 
 const Template: ComponentStory<typeof AreaChart> = (args) => <AreaChart {...args} />;
 
-
 export const ChartSmallPositive = Template.bind({});
 ChartSmallPositive.args = {
   data: [
     { x: "Jul 1", y: 10 },
     { x: "Jul 2", y: 15 },
-    { x: "Jul 3", y: 23 },
-    { x: "Jul 4", y: 15 },
-    { x: "Jul 5", y: 17 },
-    { x: "Jul 6", y: 20 },
-    { x: "Jul 7", y: 25 },
+    { x: "Jul 3", y: 18 },
+    { x: "Jul 4", y: 19 },
+    { x: "Jul 5", y: 21 },
+    { x: "Jul 6", y: 16 },
+    { x: "Jul 7", y: 18 },
+    { x: "Jul 9", y: 22 },
+    { x: "Jul 10", y: 20 },
+    { x: "Jul 11", y: 22 },
+    { x: "Jul 12", y: 30 },
   ],
-  variant: ChartVariations.SMALL,
+  variant: "small",
 };
 
 export const ChartSmallNegative = Template.bind({});
@@ -42,7 +44,7 @@ ChartSmallNegative.args = {
     { x: "Jul 5", y: 17 },
     { x: "Jul 6", y: 5 },
   ],
-  variant: ChartVariations.SMALL,
+  variant: "small",
 };
 
 export const ChartSmallBreakeven = Template.bind({});
@@ -55,7 +57,7 @@ ChartSmallBreakeven.args = {
     { x: "Jul 5", y: 17 },
     { x: "Jul 6", y: 10 },
   ],
-  variant: ChartVariations.SMALL,
+  variant: "small",
 };
 
 export const ChartLargePositive = Template.bind({});
@@ -69,5 +71,5 @@ ChartLargePositive.args = {
     { x: "Jul 6", y: 20 },
     { x: "Jul 7", y: 25 },
   ],
-  variant: ChartVariations.LARGE,
+  variant: "large",
 };

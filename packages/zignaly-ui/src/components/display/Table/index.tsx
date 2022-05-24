@@ -15,6 +15,9 @@ import {
   View,
   ThView,
   ColumnsSelector,
+  HeaderRow,
+  TextContainer,
+  IconContainer,
 } from "./styles";
 
 // Components
@@ -24,12 +27,15 @@ import Typography from "components/display/Typography";
 
 // Types
 import { TableProps } from "./types";
+import { dark } from "theme";
 
 const Table = ({
   columns = [],
   data = [],
   onColumnHidden = () => {},
   defaultHiddenColumns,
+  hideOptionsButton,
+  isUserTable,
 }: TableProps) => {
   // Refs
   const tableRef = useRef(null);
@@ -113,11 +119,10 @@ const Table = ({
       </ColumnsSelector>
     );
   }, [columns, hiddenColumns]);
-
   return (
     <Layout>
       <View ref={tableRef}>
-        <TableView {...getTableProps()}>
+        <TableView isUserTable={isUserTable} {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup: any, index: number) => (
               <tr {...headerGroup.getHeaderGroupProps()} key={`--table-head-${index.toString()}`}>
@@ -126,27 +131,43 @@ const Table = ({
                     {...column.getHeaderProps(column.getSortByToggleProps())}
                     key={`--table-head-row-${index.toString()}`}
                     isSorted={column.isSorted}
-                    isAlignRight={column.isAlignThRight}
                   >
-                    <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-                      {column.render("Header")}
-                    </Typography>
-                    {index < headerGroup.headers.length && (
-                      <SortIcon isSorted={column.isSorted} isSortedDesc={column.isSortedDesc} />
-                    )}
+                    <HeaderRow>
+                      <TextContainer>
+                        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+                          {column.render("Header")}
+                        </Typography>
+                        <Typography color={"neutral400"} variant={"h5"} weight={"regular"}>
+                          {column.render("Footer")}
+                        </Typography>
+                      </TextContainer>
+                      <IconContainer>
+                        {index < headerGroup.headers.length && (
+                          <SortIcon
+                            color={dark["neutral200"]}
+                            isSorted={column.isSorted}
+                            isSortedDesc={column.isSortedDesc}
+                            width={24}
+                            height={24}
+                          />
+                        )}
+                      </IconContainer>
+                    </HeaderRow>
                   </ThView>
                 ))}
                 <th role={"row"}>
                   <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                    <IconButton
-                      variant={"flat"}
-                      icon={<OptionsDotsIcon />}
-                      dropDownOptions={{
-                        componentOverflowRef: tableRef,
-                        alignment: "right",
-                      }}
-                      renderDropDown={renderColumnsSelector()}
-                    />
+                    {!hideOptionsButton && (
+                      <IconButton
+                        variant={"flat"}
+                        icon={<OptionsDotsIcon color={dark["neutral200"]} />}
+                        dropDownOptions={{
+                          componentOverflowRef: tableRef,
+                          alignment: "right",
+                        }}
+                        renderDropDown={renderColumnsSelector()}
+                      />
+                    )}
                   </div>
                 </th>
               </tr>

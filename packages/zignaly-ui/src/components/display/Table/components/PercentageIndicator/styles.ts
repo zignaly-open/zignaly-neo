@@ -10,7 +10,7 @@ import Typography from "components/display/Typography";
 export const Layout = styled.div`
   display: grid;
   grid-row: auto;
-  justify-content: end;
+  justify-content: center;
 `;
 
 export const Container = styled.div`

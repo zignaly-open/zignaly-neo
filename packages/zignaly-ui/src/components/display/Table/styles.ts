@@ -9,6 +9,28 @@ import ArrowBottomIcon from "assets/icons/arrow-bottom-icon.svg";
 
 export const Layout = styled.div``;
 
+export const TextContainer = styled.div`
+  padding: 4px 24px;
+`;
+
+export const IconContainer = styled.div`
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+
+  right: 4px;
+`;
+
+export const HeaderRow = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: inherit;
+`;
+
 export const View = styled.div`
   width: 100%;
   border-radius: 5px 5px 15px 15px;
@@ -34,13 +56,14 @@ export const View = styled.div`
   }
 `;
 
-export const TableView = styled.table`
+export const TableView = styled.table<{ isUserTable: boolean }>`
   border-spacing: 0;
   overflow: hidden;
   width: 100%;
 
   background: rgba(19, 18, 37, 0.4);
   thead {
+    height: 56px;
     user-select: none;
     background: #06061a;
     box-shadow: 0 0 10px #16192b;
@@ -52,7 +75,6 @@ export const TableView = styled.table`
   tbody {
     td {
       letter-spacing: 0;
-      text-align: center;
       color: #f3f4f6;
       padding: 12px 22px;
       white-space: nowrap;
@@ -69,12 +91,22 @@ export const TableView = styled.table`
     border: 0;
     border-bottom: 1px solid #252339;
     background: transparent;
-    img {
-      vertical-align: initial;
-    }
+    text-align: center;
     :last-child {
       border-right: 0;
     }
+    ${(props) =>
+      `${styledIf(
+        props.isUserTable,
+        `:first-child {
+            border-right: 1px solid #252339;
+          }`,
+      )}
+    `}
+  }
+
+  th {
+    text-align: center;
   }
 
   tr {
@@ -89,13 +121,9 @@ export const TableView = styled.table`
 
 export const ThView = styled.th<{ isSorted?: boolean; isAlignRight?: boolean }>`
   color: #a9a9ba;
-  padding: 4px 22px;
   white-space: nowrap;
   background: transparent;
   margin: 0;
-  img {
-    vertical-align: initial;
-  }
   &:first-child {
     border-radius: 0 0 0 5px;
   }
@@ -113,31 +141,23 @@ export const ThView = styled.th<{ isSorted?: boolean; isAlignRight?: boolean }>`
         border: 1px solid transparent;
     `,
      )}
-     ${styledIf(
-       props.isAlignRight,
-       `
-        text-align: right;
-    `,
-       `
-        text-align: center;
-    `,
-     )}
   `}
 `;
 
 export const SortIcon = styled(ArrowBottomIcon)<{ isSorted?: boolean; isSortedDesc?: boolean }>`
-  margin-left: 6px;
   color: #f3f4f6;
+  padding: 0px;
 
   ${(props) => `
      ${styledIf(
        props.isSorted,
        `
         transition: all 0.1s linear;
-        visibility: visible;;
+        visibility: visible;
     `,
        `
-        visibility: hidden;
+        visibility: none;
+        opacity: 0;
     `,
      )}
      ${styledIf(

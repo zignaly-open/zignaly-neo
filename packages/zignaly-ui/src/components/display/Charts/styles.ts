@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { styledIf } from "utils/styled";
 import { ChartVariations } from "./types";
 
-export const Layout = styled.div<{ variant: ChartVariations }>`
+export const Layout = styled.div<{ variant: keyof typeof ChartVariations }>`
   ${(props) => `
     ${styledIf(
       props.variant === "large",
@@ -14,8 +14,8 @@ export const Layout = styled.div<{ variant: ChartVariations }>`
     ${styledIf(
       props.variant === "small",
       `
-        height: 120px;
-        width: auto;
+      height: 100px;
+      width: auto;
         `,
     )}
     `}

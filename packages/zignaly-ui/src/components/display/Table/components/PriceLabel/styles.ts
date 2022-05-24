@@ -5,6 +5,7 @@ import Typography from "components/display/Typography";
 import { styledIf } from "utils/styled";
 
 export const Layout = styled.div<{ fiat: boolean }>`
+  text-align: center;
   ${(props) => `
      ${styledIf(
        props.fiat,
@@ -21,7 +22,7 @@ export const Layout = styled.div<{ fiat: boolean }>`
 export const Value = styled.span`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
 `;
 
 export const Coin = styled(Typography)`
@@ -31,7 +32,4 @@ export const Coin = styled(Typography)`
   text-align: left;
 `;
 
-export const BottomElementWrap = styled.div`
-  text-align: right;
-  margin-right: 30px;
-`;
+export const BottomElementWrap = styled.div``;

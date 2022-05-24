@@ -2,7 +2,6 @@
 import * as React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { AreaChart } from ".";
-import { ChartVariations } from "./types";
 
 // Component
 export default {
@@ -11,7 +10,7 @@ export default {
   argTypes: {
     variant: {
       control: "select",
-      options: [ChartVariations.LARGE, ChartVariations.SMALL],
+      options: ["large", "small"],
     },
     midLine: {
       control: "radio",
@@ -33,5 +32,5 @@ ExampleChart.args = {
     { x: "Jul 6", y: 20 },
     { x: "Jul 7", y: 25 },
   ],
-  variant: ChartVariations.LARGE,
+  variant: "large",
 };

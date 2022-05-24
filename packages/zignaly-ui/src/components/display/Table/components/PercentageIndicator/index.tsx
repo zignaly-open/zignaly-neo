@@ -33,7 +33,9 @@ const PercentageIndicator = ({
             isPositive={isPositiveValue}
           >
             <NumberFormat
-              value={String(value).replaceAll("-", "")}
+              value={
+                dashboardType === "investor" ? String(value).replaceAll("-", "") : String(value)
+              }
               displayType={"text"}
               thousandSeparator={true}
             />

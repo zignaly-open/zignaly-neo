@@ -17,7 +17,9 @@ import { Actions, CheckIconStyled, CloseIconStyled } from "./styles";
 import { dark } from "../../../theme";
 
 // Utils
-import {sortByPointDecimal} from "../../../utils/numbers";
+import { sortByPointDecimal } from "../../../utils/numbers";
+import { createUserTable } from "./types";
+import Typography from "../Typography";
 
 export default {
   title: "Display/Table",
@@ -34,6 +36,7 @@ const Template: ComponentStory<typeof Table> = (args) => <Table {...args} />;
  */
 export const MyCoins = Template.bind({});
 MyCoins.args = {
+  hideOptionsButton: false,
   columns: [
     {
       Header: "Coin",
@@ -135,6 +138,7 @@ MyCoins.args = {
 
 export const Investors = Template.bind({});
 Investors.args = {
+  hideOptionsButton: false,
   columns: [
     {
       Header: "Email",
@@ -187,8 +191,16 @@ Investors.args = {
   ],
   data: [
     {
-      email: "tec**@zig**.com",
-      userId: "5f886d29da8e9666b1684c9a",
+      email: (
+        <Typography color="neutral100" variant="body2">
+          tec**@zig**.com
+        </Typography>
+      ),
+      userId: (
+        <Typography color="neutral200" variant="h5">
+          5f886d29da8e9666b1684c9a
+        </Typography>
+      ),
       investment: <PriceLabel coin={"USDT"} value={"1250"} />,
       pyd: (
         <PriceLabel
@@ -199,13 +211,25 @@ Investors.args = {
       ),
       pydTotal: <PriceLabel coin={"USDT"} value={"145"} />,
       totalFeesPaid: <PriceLabel coin={"USDT"} value={"218"} />,
-      successFee: "10%",
+      successFee: (
+        <Typography color="neutral100" variant="body1">
+          10%
+        </Typography>
+      ),
       feesInZig: <CheckIconStyled width="24" height="24" color={dark["neutral300"]} />,
       status: <ConnectionStateLabel stateId={ConnectionStateLabelId.CONNECTED} />,
     },
     {
-      email: "tec**@zig**.com",
-      userId: "5f886d29da8e9666b1684c9a",
+      email: (
+        <Typography color="neutral100" variant="body2">
+          tec**@zig**.com
+        </Typography>
+      ),
+      userId: (
+        <Typography color="neutral200" variant="h5">
+          5f886d29da8e9666b1684c9a
+        </Typography>
+      ),
       investment: <PriceLabel coin={"USDT"} value={"1250"} />,
       pyd: (
         <PriceLabel
@@ -216,31 +240,55 @@ Investors.args = {
       ),
       pydTotal: <PriceLabel coin={"USDT"} value={"23.68586856858"} />,
       totalFeesPaid: <PriceLabel coin={"USDT"} value={"71813"} />,
-      successFee: "10%",
+      successFee: (
+        <Typography color="neutral100" variant="body1">
+          10%
+        </Typography>
+      ),
       feesInZig: <CloseIconStyled width="24" height="24" color={dark["neutral300"]} />,
       status: <ConnectionStateLabel stateId={ConnectionStateLabelId.DISCONNECTED} />,
     },
 
     {
-      email: "tec**@zig**.com",
-      userId: "5f886d29da8e9666b1684c9a",
+      email: (
+        <Typography color="neutral100" variant="body2">
+          tec**@zig**.com
+        </Typography>
+      ),
+      userId: (
+        <Typography color="neutral200" variant="h5">
+          5f886d29da8e9666b1684c9a
+        </Typography>
+      ),
       investment: <PriceLabel coin={"USDT"} value={"3468"} />,
       pyd: (
-          <PriceLabel
-              coin={"USDT"}
-              value={"637956.523"}
-              bottomElement={<PercentageIndicator value={-3} theme={dark} />}
-          />
+        <PriceLabel
+          coin={"USDT"}
+          value={"637956.523"}
+          bottomElement={<PercentageIndicator value={-3} theme={dark} />}
+        />
       ),
       pydTotal: <PriceLabel coin={"USDT"} value={"0.347347"} />,
       totalFeesPaid: <PriceLabel coin={"USDT"} value={"09864"} />,
-      successFee: "10%",
+      successFee: (
+        <Typography color="neutral100" variant="body1">
+          10%
+        </Typography>
+      ),
       feesInZig: <CloseIconStyled width="24" height="24" color={dark["neutral300"]} />,
       status: <ConnectionStateLabel stateId={ConnectionStateLabelId.HARD_DISCONNECT} />,
     },
     {
-      email: "tec**@zig**.com",
-      userId: "5f886d29da8e9666b1684c9a",
+      email: (
+        <Typography color="neutral100" variant="body2">
+          tec**@zig**.com
+        </Typography>
+      ),
+      userId: (
+        <Typography color="neutral200" variant="h5">
+          5f886d29da8e9666b1684c9a
+        </Typography>
+      ),
       investment: <PriceLabel coin={"USDT"} value={"1250"} />,
       pyd: (
         <PriceLabel
@@ -251,13 +299,25 @@ Investors.args = {
       ),
       pydTotal: <PriceLabel coin={"USDT"} value={"134581"} />,
       totalFeesPaid: <PriceLabel coin={"USDT"} value={"218"} />,
-      successFee: "10%",
+      successFee: (
+        <Typography color="neutral100" variant="body1">
+          10%
+        </Typography>
+      ),
       feesInZig: <CloseIconStyled width="24" height="24" color={dark["neutral300"]} />,
       status: <ConnectionStateLabel stateId={ConnectionStateLabelId.SOFT_DISCONNECT} />,
     },
     {
-      email: "tec**@zig**.com",
-      userId: "5f886d29da8e9666b1684c9a",
+      email: (
+        <Typography color="neutral100" variant="body2">
+          tec**@zig**.com
+        </Typography>
+      ),
+      userId: (
+        <Typography color="neutral200" variant="h5">
+          5f886d29da8e9666b1684c9a
+        </Typography>
+      ),
       investment: <PriceLabel coin={"USDT"} value={"1250"} />,
       pyd: (
         <PriceLabel
@@ -268,15 +328,47 @@ Investors.args = {
       ),
       pydTotal: <PriceLabel coin={"USDT"} value={"145"} />,
       totalFeesPaid: <PriceLabel coin={"USDT"} value={"218"} />,
-      successFee: "10%",
+      successFee: (
+        <Typography color="neutral100" variant="body1">
+          10%
+        </Typography>
+      ),
       feesInZig: <CloseIconStyled width="24" height="24" color={dark["neutral300"]} />,
       status: <ConnectionStateLabel stateId={ConnectionStateLabelId.SUSPENDED} />,
     },
   ],
 };
 
+export const UserDashBoard = Template.bind({});
+UserDashBoard.args = createUserTable({
+  summary: { profit: 100, totalValue: 10, theme: dark },
+  serviceName: {
+    heading: "The Golden Eagle",
+    subtitle: "by Barry Silvername",
+    cryptoName: "Poly",
+    cryptoAlt: "PolyChain",
+  },
+  chart: {
+    data: [
+      { x: "Jul 1", y: 10 },
+      { x: "Jul 2", y: 15 },
+      { x: "Jul 3", y: 23 },
+      { x: "Jul 4", y: 15 },
+      { x: "Jul 5", y: 17 },
+      { x: "Jul 6", y: 20 },
+      { x: "Jul 7", y: 25 },
+    ],
+    variant: "small",
+  },
+  dailyAvg: { value: -10, theme: dark },
+  oneMonth: { value: 10, theme: dark },
+  threeMonths: { value: 10, theme: dark },
+  all: { value: 10, theme: dark },
+});
+
 export const ExchangeOrders = Template.bind({});
 ExchangeOrders.args = {
+  hideOptionsButton: false,
   columns: [
     {
       Header: "Date",
@@ -318,17 +410,9 @@ ExchangeOrders.args = {
       date: <DateLabel date={new Date("December 2, 1997 20:10:00")} />,
       orderId: "138495028471",
       pair: "XML/USDT",
-      amount: <NumberFormat
-          value={35.978087076}
-          displayType={"text"}
-          thousandSeparator={true}
-      />,
+      amount: <NumberFormat value={35.978087076} displayType={"text"} thousandSeparator={true} />,
       status: "Open",
-      entryPrice: <NumberFormat
-          value={"110.20"}
-          displayType={"text"}
-          thousandSeparator={true}
-      />,
+      entryPrice: <NumberFormat value={"110.20"} displayType={"text"} thousandSeparator={true} />,
       side: "Buy",
       type: "Limit",
     },
@@ -336,17 +420,9 @@ ExchangeOrders.args = {
       date: <DateLabel date={new Date("December 15, 1997 20:10:00")} />,
       orderId: "248495028471",
       pair: "XML/USDT",
-      amount: <NumberFormat
-          value={2352}
-          displayType={"text"}
-          thousandSeparator={true}
-      />,
+      amount: <NumberFormat value={2352} displayType={"text"} thousandSeparator={true} />,
       status: "Open",
-      entryPrice: <NumberFormat
-          value={"21077.20"}
-          displayType={"text"}
-          thousandSeparator={true}
-      />,
+      entryPrice: <NumberFormat value={"21077.20"} displayType={"text"} thousandSeparator={true} />,
       side: "Buy",
       type: "Limit",
     },
@@ -354,17 +430,9 @@ ExchangeOrders.args = {
       date: <DateLabel date={new Date("December 7, 1997 20:10:00")} />,
       orderId: "358495028471",
       pair: "XML/USDT",
-      amount: <NumberFormat
-          value={643745}
-          displayType={"text"}
-          thousandSeparator={true}
-      />,
+      amount: <NumberFormat value={643745} displayType={"text"} thousandSeparator={true} />,
       status: "Open",
-      entryPrice: <NumberFormat
-          value={"3109.60"}
-          displayType={"text"}
-          thousandSeparator={true}
-      />,
+      entryPrice: <NumberFormat value={"3109.60"} displayType={"text"} thousandSeparator={true} />,
       side: "Buy",
       type: "Limit",
     },

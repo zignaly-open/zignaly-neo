@@ -1,5 +1,5 @@
 export interface ChartsProps {
-  readonly variant: ChartVariations;
+  readonly variant: keyof typeof ChartVariations;
   readonly yAxis?: "left" | "right";
   readonly data: AxisFormat[];
   midLine?: boolean | null;
@@ -16,10 +16,10 @@ export interface ChartInput {
   midLine?: boolean | null;
 }
 
-export enum ChartVariations {
-  SMALL = "small",
-  LARGE = "large",
-}
+export const ChartVariations = {
+  small: "small",
+  large: "large",
+};
 
 export const largeStyle = {
   axisLabel: {

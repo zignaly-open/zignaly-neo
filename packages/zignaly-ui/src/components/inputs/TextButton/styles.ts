@@ -74,10 +74,6 @@ export const Layout = styled.button<LayoutProps>`
   user-select: none;
   background: transparent;
   text-decoration-line: none;
-  svg {
-    width: 100%;
-    height: 100%;
-  }
   &[disabled] {
     cursor: default;
   }
