@@ -6,9 +6,9 @@ import { ReactElement } from "react";
 import { Bar, Dot, DotContainer, Label, Layout } from "./styles";
 
 // Types
-import { SliderProgressProps } from "./types";
+import { ProgressSliderProps } from "./types";
 
-function SliderProgress({ className, value, max = 100 }: SliderProgressProps): ReactElement {
+function ProgressSlider({ className, value, max = 100 }: ProgressSliderProps): ReactElement {
   const normalizedValue = (100 * Math.min(value, max)) / max;
   return (
     <Layout className={className}>
@@ -24,4 +24,4 @@ function SliderProgress({ className, value, max = 100 }: SliderProgressProps): R
   );
 }
 
-export default SliderProgress;
+export default ProgressSlider;

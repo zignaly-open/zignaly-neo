@@ -15,7 +15,7 @@ const dark: Theme = {
   neutral100: "#C1C1C8",
   neutral000: "#E1E9F0",
   secondary: "#515AAC",
-  highlighted: "#7682f7",
+  highlighted: "#7682F7",
   redGraphOrError: "#CC3993",
   greenGraph: "#26c496",
   links: "#26C4C1",

@@ -3,7 +3,7 @@ import * as React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 // Component
-import SliderProgress from ".";
+import ProgressSlider from ".";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -11,13 +11,13 @@ const Container = styled.div`
 `;
 
 export default {
-  title: "Display/Slider",
-  component: SliderProgress,
-} as ComponentMeta<typeof SliderProgress>;
+  title: "Display/ProgressSlider",
+  component: ProgressSlider,
+} as ComponentMeta<typeof ProgressSlider>;
 
-const Template: ComponentStory<typeof SliderProgress> = (args) => (
+const Template: ComponentStory<typeof ProgressSlider> = (args) => (
   <Container>
-    <SliderProgress {...args} />
+    <ProgressSlider {...args} />
   </Container>
 );
 
@@ -25,8 +25,8 @@ const defaultProps = {
   value: 25,
 };
 
-export const SliderProgressBar = Template.bind({});
-SliderProgressBar.args = {
+export const ProgressSliderBar = Template.bind({});
+ProgressSliderBar.args = {
   ...defaultProps,
   max: 50,
 };
