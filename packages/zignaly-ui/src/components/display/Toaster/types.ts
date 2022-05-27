@@ -1,5 +1,5 @@
 export interface ToasterProps {
   variant?: "success" | "error";
   size?: "large" | "small";
-  caption?: string;
+  caption?: string | JSX.Element;
 }
