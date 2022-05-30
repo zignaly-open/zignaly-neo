@@ -6,7 +6,7 @@ import { Column, Icon, Row } from "./styles";
 import { AssetsInPoolProps } from "./types";
 import WhaleIcon from "assets/icons/whale-icon.svg";
 
-export const AssetsInPool = ({ assetsValue, numberOfInvestors, icon }: AssetsInPoolProps) => {
+export const AssetsInPool = ({ assetsValue, numberOfInvestors }: AssetsInPoolProps) => {
   return (
     <Row>
       <Column>
