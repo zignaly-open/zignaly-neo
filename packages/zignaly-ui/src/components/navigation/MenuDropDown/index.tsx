@@ -1,5 +1,5 @@
 // Dependencies
-import React, {useCallback, useRef, useState} from "react";
+import React, {useCallback, useImperativeHandle, useRef, useState} from "react";
 import {useClickAway} from "react-use";
 
 // Styles
@@ -29,7 +29,7 @@ const MenuDropDown = ({
   secondaryTitle = null,
   children,
   dropDownOptions,
-}: MenuDropDownProps) => {
+}: MenuDropDownProps, innerRef: any) => {
   // Ref
   const options = {
     ...defaultDropDownOptions,
@@ -51,6 +51,12 @@ const MenuDropDown = ({
   useClickAway(menuRef, () => {
     setActiveDropDown(false);
   });
+
+  useImperativeHandle(innerRef, () => ({
+    setIsDropDownActive: (isActive: boolean) => {
+      setActiveDropDown(isActive);
+    }
+  }));
 
   return (
     <Layout ref={menuRef}>
@@ -79,4 +85,4 @@ const MenuDropDown = ({
   );
 };
 
-export default MenuDropDown;
+export default React.forwardRef(MenuDropDown);

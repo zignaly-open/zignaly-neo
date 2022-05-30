@@ -1,6 +1,7 @@
 // Dependencies
 import React from "react";
 import NumberFormat from "react-number-format";
+import {useTheme} from "styled-components";
 
 // Styled Components
 import * as styled from "./styles";
@@ -12,10 +13,11 @@ import { PercentageIndicatorProps } from "./types";
 const PercentageIndicator = ({
   value = 0,
   subtitle = "",
-  theme,
   dashboardType = "investor",
 }: PercentageIndicatorProps) => {
   const isPositiveValue = isPositive(value);
+  const theme: any = useTheme();
+
   return (
     <styled.Layout>
       <styled.Container>
