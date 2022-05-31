@@ -8,4 +8,10 @@ export type InvestSliderProps = {
   unit?: string;
   initialValue: number;
   onChange: Function;
+  type?: keyof typeof SliderTypes;
+};
+
+export const SliderTypes = {
+  withdraw: "withdraw",
+  deposit: "deposit",
 };

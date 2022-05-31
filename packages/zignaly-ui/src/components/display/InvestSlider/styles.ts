@@ -11,16 +11,28 @@ export const Layout = styled.div`
   width: 100%;
 `;
 
-export const Bar = styled.div`
+export const Bar = styled.div<{ margin: number }>`
   background: #222249;
-  box-shadow: inset 0px 1px 1px -1px #413ba0;
+  box-shadow: inset 0px 1px 1px -1px rgba(73, 9, 123, 0.25);
+  border: 1px solid #413ba0;
   border-radius: 100px;
   height: 12px;
   width: 100%;
   display: flex;
   align-items: center;
   position: relative;
-  margin: 0 7px;
+  margin: 0 ${(props) => props.margin}px;
+`;
+
+export const PercentContainer = styled.div<{ value: number }>`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  left: ${(props) => props.value}%;
+  bottom: 20px;
+  transform: translate(-50%, 0%);
 `;
 
 export const DotContainer = styled.div<{ value: number }>`

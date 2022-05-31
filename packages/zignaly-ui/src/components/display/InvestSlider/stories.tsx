@@ -5,6 +5,7 @@ import InvestSlider from ".";
 
 const Container = styled.div`
   width: 300px;
+  margin: 15px;
 `;
 export default {
   title: "Display/InvestSlider",
@@ -13,8 +14,16 @@ export default {
 
 const Template: ComponentStory<typeof InvestSlider> = (args) => (
   <Container>
-    <InvestSlider {...args}/>
+    <InvestSlider {...args} />
   </Container>
 );
 
-export const Example = Template.bind({});
+export const Deposit = Template.bind({});
+Deposit.args = {
+  type: "deposit",
+};
+
+export const Withdraw = Template.bind({});
+Withdraw.args = {
+  type: "withdraw",
+};
