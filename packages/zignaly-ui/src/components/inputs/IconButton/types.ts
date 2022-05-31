@@ -42,6 +42,7 @@ export type IconButtonProps = {
     alignment?: keyof typeof dropdownAlignment;
     componentOverflowRef?: any;
     zIndex?: number;
+    maxHeight?: string;
     position?: keyof typeof dropdownPosition;
   };
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
