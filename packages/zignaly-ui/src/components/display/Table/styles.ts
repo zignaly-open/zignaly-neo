@@ -56,7 +56,7 @@ export const View = styled.div`
   }
 `;
 
-export const TableView = styled.table<{ isUserTable: boolean }>`
+export const TableView = styled.table<{ isUserTable: boolean, hasFooter?: boolean }>`
   border-spacing: 0;
   overflow: hidden;
   width: 100%;
@@ -85,6 +85,25 @@ export const TableView = styled.table<{ isUserTable: boolean }>`
       }
     }
   }
+  
+  tfoot {
+    tr {
+      &:first-child {
+        height: 0;
+        td {
+          height: 0;
+          border-top: 1px solid #252339;
+          border-bottom: 0;
+        }
+      }
+    }
+    tr:last-child {
+      td {
+        padding: 10px 0;
+        border-bottom: 0;
+      }
+    }
+  }
 
   td {
     margin: 0;
@@ -108,15 +127,17 @@ export const TableView = styled.table<{ isUserTable: boolean }>`
   th {
     text-align: center;
   }
-
-  tr {
-    background: transparent;
-    :last-child {
-      td {
-        border-bottom: 0;
+  tbody {
+    tr {
+      background: transparent;
+      :last-child {
+        td {
+          border-bottom: 0;
+        }
       }
     }
   }
+
 `;
 
 export const ThView = styled.th<{ isSorted?: boolean; isAlignRight?: boolean }>`

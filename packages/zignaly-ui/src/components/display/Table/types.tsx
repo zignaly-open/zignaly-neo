@@ -8,13 +8,26 @@ import { AreaChart } from "../Charts";
 import React from "react";
 import PercentageIndicator from "./components/PercentageIndicator";
 
-export interface TableProps {
+export const tableTypes = {
+  basic: "basic",
+  pagedWithData: "pagedWithData",
+  pagedWithOutData: "pagedWithOutData"
+};
+
+export interface TableBasicProps {
   columns: any[];
   data: Object[];
   defaultHiddenColumns?: string[];
   onColumnHidden?: (column: string, isHidden: boolean) => void;
   hideOptionsButton: boolean;
   isUserTable: boolean;
+  initialState?: object,
+  isPagingWithAllData?: boolean,
+  hasFooter?: boolean,
+}
+
+export interface TableProps extends TableBasicProps{
+  type?: keyof typeof tableTypes
 }
 
 export interface UserTableData {
@@ -43,7 +56,7 @@ export const createUserTable = ({
       {
         Header: "My Current Value",
         accessor: "summary",
-        Footer: (
+        headerWithFooter: (
           <div>
             <div>{"Returns"}</div>
           </div>
@@ -52,7 +65,7 @@ export const createUserTable = ({
       {
         Header: "Service Name",
         accessor: "serviceName",
-        Footer: (
+        headerWithFooter: (
           <div>
             <div>{"Manager"}</div> <div>{"Base currency"}</div>
           </div>
@@ -77,7 +90,7 @@ export const createUserTable = ({
       {
         Header: "All",
         accessor: "all",
-        Footer: (
+        headerWithFooter: (
           <div>
             <div>{"Age"}</div>
           </div>

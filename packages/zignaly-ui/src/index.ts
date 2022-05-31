@@ -65,6 +65,8 @@ import BrandImage from "./components/navigation/Header/components/BrandImage";
 // Utils
 import ThemeProvider from "./utils/ThemeProvider";
 import { dark, light } from "./theme";
+import { sortByPointDecimal } from "./utils/numbers";
+
 
 export {
   /**
@@ -143,4 +145,5 @@ export {
   ThemeProvider,
   dark,
   light,
+  sortByPointDecimal,
 };
