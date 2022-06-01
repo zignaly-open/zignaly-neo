@@ -1,0 +1,38 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-plugin-prettier",
+    "tslint-config-prettier"
+  ],
+  "linterOptions": {
+    "exclude": [
+      "**/node_modules*-",
+      "build"
+    ]
+  },
+  "compilerOptions": {
+    "skipLibCheck": true
+  },
+  "rules": {
+    "object-literal-sort-keys": false,
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
+    "prettier": [
+      true,
+      {
+        "printWidth": 120,
+        "singleQuote": true,
+        "jsxSingleQuote": true,
+        "semi": true,
+        "tabWidth": 2,
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false,
+        "arrowParens": "always",
+        "trailingComma": "all"
+      }
+    ],
+    "no-console": false
+  }
+}
