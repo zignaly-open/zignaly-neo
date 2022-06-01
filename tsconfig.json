@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "outDir": "dist",
     "module": "esnext",
     "moduleResolution": "node",
     "sourceMap": true,
@@ -23,11 +24,5 @@
     "pretty": true,
     "removeComments": true,
     "skipLibCheck": true,
-  },
-
-  "linterOptions": {
-    "exclude": [
-      "**/node_modules/*"
-    ]
   }
 }
