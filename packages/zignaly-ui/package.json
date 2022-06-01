@@ -47,6 +47,7 @@
     "@svgr/webpack": "^6.2.1",
     "date-fns": "^2.28.0",
     "ethers": "^5.5.2",
+    "react-hook-form": "^7.31.3",
     "react-loader-spinner": "^6.0.0-0",
     "react-number-format": "^4.9.1",
     "react-portal": "^4.2.2",

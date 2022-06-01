@@ -8,7 +8,8 @@ export type InvestSliderProps = {
   unit?: string;
   initialValue: number;
   onChange: Function;
-  type?: keyof typeof SliderTypes;
+  type?: keyof typeof SliderTypes | null;
+  label?: string;
 };
 
 export const SliderTypes = {

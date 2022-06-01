@@ -5,15 +5,15 @@ import Typography from "../Typography";
 
 export const Layout = styled.div`
   position: relative;
-  margin-bottom: 12px;
   display: flex;
   align-items: center;
   width: 100%;
+  gap: 22px;
 `;
 
-export const Bar = styled.div<{ margin: number }>`
+export const Bar = styled.div<{ ref: any; margin?: number }>`
   background: #222249;
-  box-shadow: inset 0px 1px 1px -1px rgba(73, 9, 123, 0.25);
+  box-shadow: inset 0 1px 1px -1px rgba(73, 9, 123, 0.25);
   border: 1px solid #413ba0;
   border-radius: 100px;
   height: 12px;
@@ -83,7 +83,7 @@ export const Line = styled.div<{ variant: "left" | "middle" | "right" }>`
 
 export const Dot = styled.div`
   background: #ffffff;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
   border-radius: 100px;
   width: 20px;
   height: 20px;
@@ -93,7 +93,10 @@ export const Label = styled(Typography)``;
 
 export const TextContainer = styled.div`
   text-align: center;
-  margin: 0px 4px;
   display: flex;
   flex-direction: column;
+`;
+
+export const Header = styled.div`
+  margin-bottom: 12px;
 `;

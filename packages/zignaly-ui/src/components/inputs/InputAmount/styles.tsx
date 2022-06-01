@@ -91,6 +91,7 @@ type LayoutProps = {
   withError: boolean;
   disabled: boolean;
   fullWidth?: boolean;
+  children: React.ReactNode[] | React.ReactNode;
 };
 
 export const Layout = styled.div`

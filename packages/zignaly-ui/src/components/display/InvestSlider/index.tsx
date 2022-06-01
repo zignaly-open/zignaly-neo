@@ -1,5 +1,5 @@
 // Dependencies
-import * as React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 
 // Styled Components
@@ -12,26 +12,28 @@ import {
   Line,
   PercentContainer,
   TextContainer,
+  Header,
 } from "./styles";
 import { InvestSliderProps, SliderTypes } from "./types";
+import Typography from "../Typography";
 
 const InvestSlider = ({
+  label,
   className,
   max = 100,
   min = 0,
   style,
   initialValue = 30,
   onChange = () => {},
-  type = "withdraw",
+  type = null,
 }: InvestSliderProps) => {
   const [value, setValue] = useState<number>(
     initialValue ? ((initialValue - min) / (max - min)) * 100 : 0,
   );
   const [enabled, setEnabled] = useState<boolean>(false);
-
   const sliderRef = React.useRef<HTMLDivElement>(null);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const rect = sliderRef.current?.getBoundingClientRect();
     const minPosition = 0;
     const maxPosition = rect?.width;
@@ -50,7 +52,6 @@ const InvestSlider = ({
           }
           absolutePosition = Math.round(absolutePosition * (1 / 5)) / (1 / 5);
           setValue(absolutePosition);
-          onChange(absolutePosition);
         }
         window.onmouseup = () => {
           setEnabled(false);
@@ -58,6 +59,13 @@ const InvestSlider = ({
       }
     };
   }, [enabled]);
+
+  useEffect(() => {
+    onChange({
+      reinvest: value,
+      withdraw: 100 - value,
+    });
+  }, [value]);
 
   const DepositSlider = () => {
     return (
@@ -71,9 +79,9 @@ const InvestSlider = ({
           </Label>
         </TextContainer>
         <Bar margin={7} ref={sliderRef}>
-          <Line variant="left"></Line>
-          <Line variant="middle"></Line>
-          <Line variant="right"></Line>
+          <Line variant="left" />
+          <Line variant="middle" />
+          <Line variant="right" />
           <DotContainer onMouseDown={() => setEnabled(true)} value={value}>
             <Dot />
           </DotContainer>
@@ -104,9 +112,9 @@ const InvestSlider = ({
               {value}%
             </Label>
           </PercentContainer>
-          <Line variant="left"></Line>
-          <Line variant="middle"></Line>
-          <Line variant="right"></Line>
+          <Line variant="left" />
+          <Line variant="middle" />
+          <Line variant="right" />
           <DotContainer onMouseDown={() => setEnabled(true)} value={value}>
             <Dot />
           </DotContainer>
@@ -123,13 +131,49 @@ const InvestSlider = ({
   const Slider = () => {
     switch (type) {
       case SliderTypes.withdraw: {
-        return <WithdrawSlider></WithdrawSlider>;
+        return <WithdrawSlider />;
       }
       case SliderTypes.deposit: {
-        return <DepositSlider></DepositSlider>;
+        return <DepositSlider />;
       }
       default:
-        return <></>;
+        return (
+          <>
+            {label && (
+              <Header>
+                <Typography variant={"inputm"} color={"neutral200"}>
+                  {label}
+                </Typography>
+              </Header>
+            )}
+            <Layout style={style} className={className}>
+              <TextContainer>
+                <Label variant="body2" weight="demibold" color="neutral200">
+                  Reinvest
+                </Label>
+                <Label variant="body2" weight="demibold" color="highlighted">
+                  {value}%
+                </Label>
+              </TextContainer>
+              <Bar ref={sliderRef}>
+                <Line variant="left" />
+                <Line variant="middle" />
+                <Line variant="right" />
+                <DotContainer onMouseDown={() => setEnabled(true)} value={value}>
+                  <Dot />
+                </DotContainer>
+              </Bar>
+              <TextContainer>
+                <Label variant="body2" weight="demibold" color="neutral200">
+                  Withdraw
+                </Label>
+                <Label variant="body2" weight="demibold" color="highlighted">
+                  {100 - value}%
+                </Label>
+              </TextContainer>
+            </Layout>
+          </>
+        );
     }
   };
 
