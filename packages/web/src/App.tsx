@@ -1,15 +1,8 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const [shift] = React.useState(0);
-  useEffect(() => {
-
-
-
-    console.error(shift);
-  }, []);
   return (
     <div className='App'>
       <header className='App-header'>
@@ -17,11 +10,6 @@ function App() {
         <p>
           Edit <code>src/App.tsx</code> and sdfffave to reload.
         </p>
-        {[1, 2, 3, 4, 5].map((x) => (
-          <p>
-            Edit <code>src/App.tsx</code> and save ffto reload.
-          </p>
-        ))}
         <a
           className='App-link'
           href='https://reactjs.org'
