@@ -32,6 +32,9 @@ import { ButtonGroup } from "./components/styled";
 // Layouts
 import { MarginContainer, PageContainer } from "./components/styled";
 
+// Modals
+import EditInvestmentWithModal from "./components/modals/EditInvestmentWithModal";
+
 // Icons
 import CloseIcon from "./assets/icons/close-icon.svg";
 import CopyIcon from "./assets/icons/copy-icon.svg";
@@ -66,7 +69,6 @@ import BrandImage from "./components/navigation/Header/components/BrandImage";
 import ThemeProvider from "./utils/ThemeProvider";
 import { dark, light } from "./theme";
 import { sortByPointDecimal } from "./utils/numbers";
-
 
 export {
   /**
@@ -110,6 +112,8 @@ export {
   MenuDropDown,
   PageContainer,
   MarginContainer,
+  // Modals
+  EditInvestmentWithModal,
   /**
    * =-=-=-=-=-=-=-=
    *   Assets
