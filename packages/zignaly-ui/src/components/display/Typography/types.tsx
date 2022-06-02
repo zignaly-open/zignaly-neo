@@ -16,6 +16,7 @@ export const componentByVariants = {
   buttonsm: "span",
   inputl: "span",
   inputm: "span",
+  labelm: "span",
 };
 
 export const weightByType = {

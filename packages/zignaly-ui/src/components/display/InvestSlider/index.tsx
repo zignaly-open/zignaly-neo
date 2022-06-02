@@ -141,7 +141,7 @@ const InvestSlider = ({
           <>
             {label && (
               <Header>
-                <Typography variant={"inputm"} color={"neutral200"}>
+                <Typography variant={"labelm"} color={"neutral200"}>
                   {label}
                 </Typography>
               </Header>

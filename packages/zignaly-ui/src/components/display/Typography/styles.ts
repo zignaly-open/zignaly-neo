@@ -107,6 +107,13 @@ export const Layout = styled.h1<{ color: string; underline: boolean; weight: str
     letter-spacing: 0.55px;
   }
 
+  &.labelm {
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 24px;
+    letter-spacing: 0.55px;
+  }
+
   ${(props) => `
     color: inherit;
 

@@ -87,6 +87,12 @@ export const Actions = styled.div`
   justify-content: center;
   margin-top: 56px;
   gap: 32px;
+
+  ${({ theme }) => `
+    svg {
+      fill: ${theme["links"]};
+    }
+  `}
 `;
 
 export const Inline = styled.div`

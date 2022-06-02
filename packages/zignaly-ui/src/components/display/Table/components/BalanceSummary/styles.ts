@@ -12,14 +12,15 @@ export const Layout = styled(Typography)<{ isPositive: boolean; isEqual: boolean
   text-align: center;
   display: grid;
   gap: 8px;
-  ${(props) => `
+
+  ${({ isEqual, theme, isPositive }) => `
     ${Profit} {
         color: ${
-          props.isEqual
-            ? props.theme["neutral300"]
-            : props.isPositive
-            ? props.theme["greenGraph"]
-            : props.theme["redGraphOrError"]
+          isEqual
+            ? theme["neutral300"]
+            : isPositive
+            ? theme["greenGraph"]
+            : theme["redGraphOrError"]
         };
     }
   `}

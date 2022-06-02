@@ -1,15 +1,30 @@
 /* eslint-disable multiline-ternary */
-import TextButton from "components/inputs/TextButton";
 import React from "react";
 import NumberFormat from "react-number-format";
-import { isPositive } from "utils/numbers";
-import { Layout, Profit, TotalValue } from "./styles";
-import { BalanceSummaryProps } from "./types";
-import PencileIcon from "assets/icons/pencil-icon.svg";
 
-export const BalanceSummary = ({ totalValue, profit }: BalanceSummaryProps) => {
+// Components
+import TextButton from "components/inputs/TextButton";
+
+// Utils
+import { isPositive } from "utils/numbers";
+
+// Styles
+import { Layout, Profit, TotalValue } from "./styles";
+
+// Types
+import { BalanceSummaryProps } from "./types";
+
+// Icons
+import PencilIcon from "assets/icons/pencil-icon.svg";
+
+export const BalanceSummary = ({
+  totalValue,
+  profit,
+  onClickEdit = () => {},
+}: BalanceSummaryProps) => {
   const isPositiveProfit = isPositive(profit);
-  const isEqual = profit === 0 ? true : false;
+  const isEqual = profit === 0;
+
   return (
     <Layout isPositive={isPositiveProfit} isEqual={isEqual}>
       <TotalValue>
@@ -29,10 +44,11 @@ export const BalanceSummary = ({ totalValue, profit }: BalanceSummaryProps) => {
         />
       </Profit>
       <TextButton
-        leftElement={<PencileIcon color="#65647E" width={16} height={16} />}
+        leftElement={<PencilIcon color="#65647E" width={16} height={16} />}
         caption="Edit"
         color={"links"}
-      ></TextButton>
+        onClick={onClickEdit}
+      />
     </Layout>
   );
 };

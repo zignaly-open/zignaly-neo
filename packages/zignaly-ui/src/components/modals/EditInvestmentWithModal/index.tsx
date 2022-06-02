@@ -159,7 +159,7 @@ function EditInvestmentWithModal({
   );
 
   return (
-    <ModalContainer title={"Edit Investment with"}>
+    <ModalContainer title={"Edit Investment with"} width={784}>
       {/* Investor Details */}
       <Investor>
         <Avatar size={"x-large"} image={investorPictureUrl} />
@@ -180,7 +180,7 @@ function EditInvestmentWithModal({
       <Form onSubmit={handleSubmit(onAmountSubmit)}>
         <Field>
           <Row>
-            <Typography variant={"inputm"}>Amount Invested</Typography>
+            <Typography variant={"labelm"}>Amount Invested</Typography>
             <AmountInvested>
               <TokenImage src={coin.image} />
               <TokenValue>
@@ -238,7 +238,7 @@ function EditInvestmentWithModal({
           {!isInputEnabled && (
             <TextButton
               onClick={() => setInputEnabled(true)}
-              leftElement={<PlusIcon width={"22px"} height={"22px"} color={theme["links"]} />}
+              leftElement={<PlusIcon width={"22px"} height={"22px"} />}
               caption={"Invest more"}
             />
           )}
