@@ -1,6 +1,7 @@
 import { createTheme, ThemeProvider } from '@mui/material';
 import React from 'react';
 import Routes from './Routes';
+import { ApolloClient, InMemoryCache, ApolloProvider } from '@apollo/client';
 
 const theme = createTheme({
   palette: {
@@ -36,22 +37,36 @@ const theme = createTheme({
       '"Segoe UI Emoji"',
       '"Segoe UI Symbol"',
     ].join(','),
+    body2: {
+      fontFamily: [
+        '"IBM Plex Mono"',
+        '"Courier New"',
+        'Monospace',
+        'sans-serif',
+      ].join(','),
+    },
   },
   components: {
     // Name of the component
     MuiButtonBase: {
       defaultProps: {
         // The props to change the default for.
-        disableRipple: true, // No more ripple, on the whole application 💣!
       },
     },
   },
 });
 
+const client = new ApolloClient({
+  uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
+  cache: new InMemoryCache(),
+});
+
 function EntryPoint() {
   return (
     <ThemeProvider theme={theme}>
-      <Routes />
+      <ApolloProvider client={client}>
+        <Routes />
+      </ApolloProvider>
     </ThemeProvider>
   );
 }

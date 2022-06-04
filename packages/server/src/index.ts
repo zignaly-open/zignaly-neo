@@ -13,6 +13,7 @@ import * as auctions from './auctions';
 const typeDef = gql`
     type Query
     type Mutation 
+    type Subscription 
 `;
 
 const port = 4000;

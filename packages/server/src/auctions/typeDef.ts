@@ -8,10 +8,18 @@ export const typeDef = gql`
         date: Date
     }
     
+    type BasketItem {
+        ticker: String!,
+        amount: Int!
+    }
+    
     type Auction {
-        id: Int!
+        id: ID!
         createdAt: Date
         expiresAt: Date
+        image: String
+        description: String
+        basket: [BasketItem]
         title: String!
         bids: [Bid]
     }
@@ -22,11 +30,15 @@ export const typeDef = gql`
     }
     
     extend type Query {
-        auctions: [Auction]
-        auction (id: Int!): Auction
+        auctions(id: ID): [Auction]
+    }    
+
+    extend type Subscription {
+        bidAdded: Auction
+        auctionStatusChanged: Auction
     }    
     
     extend type Mutation {
-        bid (id: Int!, bid: Int!): Auction
+        bid (id: ID!, bid: Int!): Auction
     }
 `;
