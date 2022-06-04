@@ -13,7 +13,11 @@ export default {
 } as ComponentMeta<typeof AuctionCard>;
 
 const Template: ComponentStory<typeof AuctionCard> = (args) => (
-  <AuctionCard {...args} />
+  <div
+    style={{ padding: '50px', maxWidth: '300px', background: 'rgb(7, 7, 26)' }}
+  >
+    <AuctionCard {...args} onBid={() => alert('Bid!')} />
+  </div>
 );
 
 const auctionObject = {
@@ -23,22 +27,47 @@ const auctionObject = {
   createdAt: new Date(),
   expiresAt: new Date(Date.now() + 3600_000),
   status: 'Active',
+  monetaryValue: '$84.52',
   basket: [
     {
       ticker: 'ETH',
-      value: 500,
+      amount: 500,
     },
   ],
-  bids: [
-    {
-      value: 100,
-      date: new Date(),
-    },
-  ],
+  lastBid: {
+    value: 100,
+    date: new Date(),
+  },
 };
 
 export const Basic = Template.bind({});
 
 Basic.args = {
   auction: auctionObject,
+};
+
+export const Complete = Template.bind({});
+
+Complete.args = {
+  auction: {
+    ...auctionObject,
+    expiresAt: new Date(Date.now() - 3600_000),
+    status: 'Complete',
+  },
+};
+
+export const Winning = Template.bind({});
+
+Winning.args = {
+  auction: {
+    ...auctionObject,
+  },
+};
+
+export const Outbid = Template.bind({});
+
+Outbid.args = {
+  auction: {
+    ...auctionObject,
+  },
 };

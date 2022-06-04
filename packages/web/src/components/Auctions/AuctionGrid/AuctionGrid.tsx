@@ -31,7 +31,7 @@ const AuctionGrid: React.FC = () => {
 
   return (
     <>
-      <Masonry columns={4} spacing={2}>
+      <Masonry columns={4} spacing={4}>
         {data.auctions.map((x: AuctionType) => (
           <AuctionCard key={x.id} auction={x} />
         ))}

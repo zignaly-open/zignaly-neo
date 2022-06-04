@@ -35,7 +35,6 @@ supportedLngs.forEach((lang) => {
       n,
       require(`../public/locales/${lang}/${n}.json`),
     );
-    console.error(`../public/locales/${lang}/${n}.json`);
   });
 });
 

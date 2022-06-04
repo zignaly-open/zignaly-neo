@@ -8,12 +8,14 @@ export const GET_AUCTIONS = gql`
       image
       createdAt
       expiresAt
+      status
       description
       basket {
         ticker
         amount
       }
-      bids {
+      monetaryValue
+      lastBid {
         value
       }
     }
@@ -27,7 +29,7 @@ export const BID_AUCTION = gql`
       title
       createdAt
       expiresAt
-      bids {
+      lastBid {
         value
       }
     }

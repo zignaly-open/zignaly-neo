@@ -9,11 +9,9 @@ export default createTheme({
       // contrastText: will be calculated to contrast with palette.primary.main
     },
     secondary: {
-      light: 'rgba(0, 0, 0, 0.05)',
+      light: '#f63f82',
       dark: '#191927',
       main: '#656565',
-      // dark: will be calculated from palette.secondary.main,
-      contrastText: '#f63f82',
     },
     // Used by `getContrastText()` to maximize the contrast between
     // the background and the text.

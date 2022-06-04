@@ -21,7 +21,10 @@ const AuctionCard: React.FC<{
       auction={auction}
       onBid={() =>
         mutate({
-          variables: { id: auction.id, value: auction.bids[0].value + 1 },
+          variables: {
+            id: auction.id,
+            value: (auction.lastBid?.value || 0) + 1,
+          },
         })
       }
     />

@@ -9,7 +9,7 @@ const AuctionBasketItem: React.FC<{ item: BasketItem }> = ({
     <Typography
       color='primary'
       component='span'
-      fontWeight={500}
+      fontWeight={600}
       fontSize={18}
       variant='body2'
     >

@@ -21,15 +21,14 @@ const generateAuctionItem = () => {
     description: 'Blah blah blah!'.repeat(Math.round(Math.random() * 10)),
     image: `/images/${1 + Math.floor(Math.random() * 8)}.jpg`,
     createdAt: new Date(),
+    monetaryValue: '$84.52',
     expiresAt: new Date(Date.now() + 3600_000),
     status: AuctionStatus.Active,
     basket: _sample(basket),
-    bids: [
-      {
-        value: 100,
-        date: new Date(),
-      },
-    ],
+    lastBid: {
+      value: 100,
+      date: new Date(),
+    },
   };
 };
 
@@ -68,9 +67,9 @@ export class Auction {
 
   static bid(auctionId: AuctionType['id'], value: number) {
     const auction = auctions.find((x) => x.id === +auctionId);
-    auction.bids.unshift({
+    auction.lastBid = {
       value,
       date: new Date(),
-    });
+    };
   }
 }

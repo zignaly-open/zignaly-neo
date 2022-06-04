@@ -1,5 +1,10 @@
 {
   "no-auctions": "No active Auctions found",
+  "completed": "Completed!",
   "bid": "Bid!",
+  "what-is-inside": "What's inside?",
+  "remaining-time": "{{h}} h : {{m}} m : {{s}} s",
+  "winning-bid": "Won for <0>{{count}}</0> by <1></1>",
+  "last-bid": "Last bid <0>{{count}}</0> from <1></1>",
   "for-a-total-value-of": "For a total value of"
 }

@@ -14,12 +14,13 @@ export type AuctionType = {
   title: string;
   description: string;
   basket: BasketItem[];
+  monetaryValue?: String;
   createdAt?: Date;
   expiresAt?: Date;
   image?: String;
   status: AuctionStatus;
-  bids: {
+  lastBid: {
     value: number; // TODO: BigInt?
     date: Date;
-  }[];
+  };
 };
