@@ -1,22 +1,44 @@
-// Button.stories.js|jsx
-
 import React from 'react';
+import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import AuctionCard from './AuctionCard';
 
 export default {
-  /* 👇 The title prop is optional.
-   * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
-   * to learn how to generate automatic titles
-   */
-  title: 'Button',
+  title: 'Auction Card',
   component: AuctionCard,
-  //👇 Creates specific parameters for the story
   parameters: {
-    myAddon: {
-      data: 'this data is passed to the addon',
-    },
+    // More on Story layout: https://storybook.js.org/docs/react/configure/story-layout
+    layout: 'fullscreen',
   },
+} as ComponentMeta<typeof AuctionCard>;
+
+const Template: ComponentStory<typeof AuctionCard> = (args) => (
+  <AuctionCard {...args} />
+);
+
+const auctionObject = {
+  id: '4',
+  title: 'Auction #777',
+  description: 'Blah blah blah blhahblah bla blah hh!',
+  createdAt: new Date(),
+  expiresAt: new Date(Date.now() + 3600_000),
+  status: 'Active',
+  basket: [
+    {
+      ticker: 'ETH',
+      value: 500,
+    },
+  ],
+  bids: [
+    {
+      value: 100,
+      date: new Date(),
+    },
+  ],
 };
 
-export const Basic = () => <AuctionCard id={2} />;
+export const Basic = Template.bind({});
+
+Basic.args = {
+  auction: auctionObject,
+};
