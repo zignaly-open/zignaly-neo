@@ -26,11 +26,6 @@ export const typeDef = gql`
     lastBid: Bid
   }
 
-  input AuctionInput {
-    title: String
-    author: String
-  }
-
   extend type Query {
     auctions(id: ID): [Auction]
   }

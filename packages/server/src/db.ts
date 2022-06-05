@@ -1,19 +1,13 @@
 import os from 'os';
 import path from 'path';
-import { Sequelize } from 'sequelize';
-
-import { UserFieldMapping, User } from './models';
+import { Sequelize } from 'sequelize-typescript';
+import { User } from './users/model';
 
 const sequelize = new Sequelize('zigraffle', '', undefined, {
   dialect: 'sqlite',
   storage: path.join(os.tmpdir(), 'db.sqlite'),
   logging: false,
-});
-
-User.init(UserFieldMapping, {
-  modelName: 'user',
-  sequelize,
-  timestamps: false,
+  models: [User],
 });
 
 // persist models to the database
