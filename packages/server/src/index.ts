@@ -18,7 +18,7 @@ const typeDef = gql`
   type Subscription
 `;
 
-const port = 4000;
+const port = process.env.PORT || 4000;
 
 (async () => {
   const app = express();
