@@ -1,4 +1,9 @@
 {
-  "name": "Zignaly",
+  "logo": "Zigraffle",
+  "home": "Home",
+  "how-it-works": "How it works",
+  "view-history": "View History",
+  "log-in": "Authenticate",
+  "moto": "Bid and win thousands of $ worth of crypto for cents!",
   "loading": "Loading..."
 }
