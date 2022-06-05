@@ -8,6 +8,7 @@ import {
 import express from 'express';
 import http from 'http';
 import './db';
+import serveStatic from 'serve-static';
 import * as auctions from './auctions';
 import * as users from './users';
 
@@ -56,6 +57,10 @@ const port = 4000;
   });
   await server.start();
   server.applyMiddleware({ app });
+
+  // TODO: remove self-serving the ui code for heroku
+  app.use(serveStatic(__dirname + '/../../web/build'));
+
   await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
   console.log(
     `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`,
