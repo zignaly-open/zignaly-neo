@@ -11,6 +11,9 @@
     "build": "cd packages/web && yarn && GENERATE_SOURCEMAP=false yarn build && cd ../server && yarn",
     "start": "cd packages/server && yarn start"
   },
+  "engines": {
+    "node": "^14"
+  },
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
   "license": "ISC",
   "devDependencies": {

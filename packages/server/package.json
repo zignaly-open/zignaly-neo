@@ -4,9 +4,6 @@
   "main": "index.js",
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
   "license": "MIT",
-  "engines": {
-    "node": "^14"
-  },
   "scripts": {
     "start": "ts-node src/index.ts",
     "test": "NODE_ENV=test jest",
