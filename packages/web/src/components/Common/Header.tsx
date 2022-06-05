@@ -1,3 +1,4 @@
+import { useMutation } from '@apollo/client';
 import { Button } from '@mui/material';
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
@@ -5,6 +6,8 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { GET_OR_CREATE_USER } from './queries';
+import { getWeb3Address } from './util';
 
 const StyledLogo = styled(Typography)`
   text-transform: uppercase;
@@ -52,6 +55,7 @@ const StyledMoto = styled(Typography)`
 const Header: React.FC = () => {
   const { t } = useTranslation('global');
   const navigate = useNavigate();
+  const [authenticate] = useMutation(GET_OR_CREATE_USER);
   return (
     <>
       <StyledLogo
@@ -91,7 +95,13 @@ const Header: React.FC = () => {
         <Button variant={'text'} onClick={() => navigate('/')}>
           {t('view-history')}
         </Button>
-        <Button variant={'text'} onClick={() => navigate('/')}>
+        <Button
+          variant={'text'}
+          onClick={() => {
+            getWeb3Address().then(alert).catch(alert);
+            0 && authenticate;
+          }}
+        >
           {t('log-in')}
         </Button>
         <Button variant={'text'} onClick={() => navigate('/')}>

@@ -13,6 +13,8 @@ i18n
       loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
     debug: false,
+    supportedLngs: ['en'],
+    defaultNS: 'global',
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false,
