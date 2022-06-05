@@ -13,6 +13,10 @@ export const typeDef = gql`
     accessToken: String!
   }
 
+  extend type Query {
+    me: User
+  }
+
   extend type Mutation {
     getOrCreateUser(publicAddress: String!): User
     authenticate(publicAddress: String!, signature: String!): AccessToken!

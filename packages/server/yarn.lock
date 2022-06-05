@@ -941,6 +941,13 @@
     "@types/qs" "*"
     "@types/range-parser" "*"
 
+"@types/express-unless@^0.5.3":
+  version "0.5.3"
+  resolved "https://registry.yarnpkg.com/@types/express-unless/-/express-unless-0.5.3.tgz#271f8603617445568ed0d6efe25a7d2f338544c1"
+  integrity sha512-TyPLQaF6w8UlWdv4gj8i46B+INBVzURBNRahCozCSXfsK2VTlL1wNyTlMKw817VHygBtlcl5jfnPadlydr06Yw==
+  dependencies:
+    "@types/express" "*"
+
 "@types/express@*", "@types/express@4.17.13", "@types/express@^4.17.13":
   version "4.17.13"
   resolved "https://registry.yarnpkg.com/@types/express/-/express-4.17.13.tgz#a76e2995728999bab51a33fabce1d705a3709034"
@@ -2239,6 +2246,21 @@ expect@^28.1.0:
     jest-matcher-utils "^28.1.0"
     jest-message-util "^28.1.0"
     jest-util "^28.1.0"
+
+express-jwt@^7.7.5:
+  version "7.7.5"
+  resolved "https://registry.yarnpkg.com/express-jwt/-/express-jwt-7.7.5.tgz#5b46e056be33abdfbcbcb3d8ddc79639e6994508"
+  integrity sha512-2CMse20Ex2vbqvsuGAcai7TgQuvmFa1n39PwKLaEszTGhuRzckBERII4PwdZIibtwfYUGSNVQzPpf+QcGo2yHw==
+  dependencies:
+    "@types/express-unless" "^0.5.3"
+    "@types/jsonwebtoken" "^8.5.8"
+    express-unless "^2.0.2"
+    jsonwebtoken "^8.5.1"
+
+express-unless@^2.0.2:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/express-unless/-/express-unless-2.1.0.tgz#090a56de501130e63b8c1aa708cf0bbf4e9c2320"
+  integrity sha512-666xLp2L3eM1hYhabyZq0HTdedDdcM9QdKsQSROl610VMc2f98KKenc8M3XTPuS/4zpa0QoB8gyDh8K1d8jgDw==
 
 express@^4.18.1:
   version "4.18.1"

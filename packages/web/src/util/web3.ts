@@ -1,6 +1,7 @@
 import Web3 from 'web3';
 
-export async function getWeb3Address(): Promise<string> {
+export async function getWeb3(): Promise<Web3> {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { ethereum } = window as any;
   if (!ethereum) {
     // TODO: nice message
@@ -8,8 +9,7 @@ export async function getWeb3Address(): Promise<string> {
   }
   try {
     await ethereum.enable();
-    const web3 = new Web3(ethereum);
-    return (await web3.eth.getCoinbase()).toLowerCase();
+    return new Web3(ethereum);
   } catch (e) {
     // TODO: nice message
     throw new Error(

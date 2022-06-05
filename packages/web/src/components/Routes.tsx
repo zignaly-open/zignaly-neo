@@ -1,9 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Routes as RouterRoutes, Route } from 'react-router-dom';
-import Auctions from '../components/Auctions';
-import HowItWorks from '../components/HowItWorks';
-import Footer from '../components/Common/Footer';
-import Header from '../components/Common/Header';
+import Auctions from './Auctions/Auctions';
+import HowItWorks from './HowItWorks/HowItWorks';
+import Footer from './Footer/Footer';
+import Header from './Header/Header';
 
 function Routes() {
   return (

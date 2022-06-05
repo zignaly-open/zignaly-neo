@@ -8,9 +8,10 @@ import {
 import express from 'express';
 import http from 'http';
 import './db';
-// import serveStatic from 'serve-static';
 import * as auctions from './auctions';
 import * as users from './users';
+import { expressjwt, Request as AuthorizedRequest } from 'express-jwt';
+import { algorithm, secret } from '../config';
 
 const typeDef = gql`
   type Query
@@ -22,28 +23,22 @@ const port = process.env.PORT || 4000;
 
 (async () => {
   const app = express();
+  app.use(
+    expressjwt({
+      secret,
+      algorithms: [algorithm],
+      credentialsRequired: false,
+    }),
+  );
   const httpServer = http.createServer(app);
   const server = new ApolloServer({
     typeDefs: [typeDef, auctions.typeDef, users.typeDef],
     resolvers: [auctions.resolvers, users.resolvers],
     csrfPrevention: true,
-    // context: ({ req }) => {
-    //   // Note: This example uses the `req` argument to access headers,
-    //   // but the arguments received by `context` vary by integration.
-    //   // This means they vary for Express, Koa, Lambda, etc.
-    //   //
-    //   // To find out the correct arguments for a specific integration,
-    //   // see https://www.apollographql.com/docs/apollo-server/api/apollo-server/#middleware-specific-context-fields
-    //
-    //   // Get the user token from the headers.
-    //   const token = req.headers.authorization || '';
-    //
-    //   // Try to retrieve a user with the token
-    //   const user = getUser(token);
-    //
-    //   // Add the user to the context
-    //   return { user };
-    // },
+    context: ({ req }: { req: AuthorizedRequest }) => {
+      const user = req.auth?.payload || null;
+      return { user };
+    },
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
 
@@ -57,9 +52,6 @@ const port = process.env.PORT || 4000;
   });
   await server.start();
   server.applyMiddleware({ app });
-
-  // // TODO: remove self-serving the ui code for heroku
-  // app.use(serveStatic(__dirname + '/../../web/build'));
 
   await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
   console.log(

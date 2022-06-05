@@ -14,13 +14,13 @@ import AuctionCardComponent from './AuctionCard';
 const AuctionCard: React.FC<{
   auction: AuctionType;
 }> = ({ auction }) => {
-  const [mutate] = useMutation(BID_AUCTION);
+  const [bid] = useMutation(BID_AUCTION);
 
   return (
     <AuctionCardComponent
       auction={auction}
       onBid={() =>
-        mutate({
+        bid({
           variables: {
             id: auction.id,
             value: (auction.lastBid?.value || 0) + 1,

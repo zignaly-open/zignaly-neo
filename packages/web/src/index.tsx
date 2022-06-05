@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import './core/Internationalization';
-import EntryPoint from './core/EntryPoint';
+import './util/i18next';
+import EntryPoint from './components/EntryPoint';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(

@@ -5,6 +5,13 @@ const generateNonceSignMessage = (nonce: string | number) =>
   `Please sign this message to verify it's you: ${nonce}`;
 
 export const resolvers = {
+  Query: {
+    // @ts-ignore
+    me: async (_: any, __: any, { user }) => {
+      if (!user) return null;
+      return await User.findByPk(user.id);
+    },
+  },
   Mutation: {
     authenticate: async (
       _: any,

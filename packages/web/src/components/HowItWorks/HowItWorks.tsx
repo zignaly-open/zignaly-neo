@@ -1,7 +1,6 @@
 import { Container } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import './App.css';
 import { useTranslation } from 'react-i18next';
 
 function HowItWorks() {

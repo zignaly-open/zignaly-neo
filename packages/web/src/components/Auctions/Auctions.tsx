@@ -1,6 +1,5 @@
 import React from 'react';
-import './App.css';
-import AuctionGrid from './Auctions/AuctionGrid/AuctionGrid';
+import AuctionGrid from './AuctionGrid/AuctionGrid';
 
 function Auctions() {
   return <AuctionGrid />;
