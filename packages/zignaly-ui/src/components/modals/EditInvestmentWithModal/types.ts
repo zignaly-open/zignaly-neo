@@ -1,28 +1,37 @@
+import React from "react";
 import { BigNumberish } from "ethers";
 
 type CoinProps = {
   id: string;
-  image: string;
-  name: string;
   balance: string | number | BigNumberish;
 };
 
+export type InvestorProps = {
+  name: string;
+  photoUrl: string;
+  successFee: number;
+};
+
+export type PendingTransactionsProps = {
+  date: string | React.ReactElement;
+  amount: React.ReactElement;
+  type: string;
+  status: string;
+  action: any;
+};
+
 export type EditInvestmentWithModalProps = {
-  investorName: String;
-  investorPictureUrl: String;
-  investorSuccessFee: String | Number;
-  pendingTransactions: Number | null | any;
-  amountInvested: number | string | any;
-  reinvestPercentage: string;
-  withdrawPercentage: string;
-  coin?: CoinProps;
+  coin: CoinProps;
+  investor: InvestorProps;
+  profitPercentage: string;
   onAmountSubmit: Function | any;
+  amountInvested: number | string | any;
+  pendingTransactions: PendingTransactionsProps[];
 };
 
 export type EditInvestmentFormProps = {
   moreInvestmentValue: string | number | BigNumberish;
-  reinvestPercentageValue: string;
-  withdrawPercentageValue: string;
+  profitPercentageValue: string | number | BigNumberish;
 };
 
 export const viewsIds = {

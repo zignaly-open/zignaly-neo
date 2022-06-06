@@ -13,7 +13,7 @@ import { ModalContainerProps } from "./types";
 
 function ModalContainer({
   width = "large",
-  onClose,
+  onClickClose,
   children,
   title = null,
   customHeaderAction = null,
@@ -22,7 +22,7 @@ function ModalContainer({
   const renderHeaderAction = useMemo(
     () =>
       !customHeaderAction ? (
-        <HeaderButton onClick={onClose}>
+        <HeaderButton onClick={onClickClose}>
           <CloseIcon />
         </HeaderButton>
       ) : (

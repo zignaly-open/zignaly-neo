@@ -141,3 +141,9 @@ export const Layout = styled.div`
 export const Unit = styled.div`
   margin: 10px 0 0 24px;
 `;
+
+export const InputField = styled.div`
+  display: flex;
+  flex: 1;
+  padding-left: 8px;
+`;

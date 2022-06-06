@@ -18,6 +18,7 @@ import {
   Side,
   Unit,
   Wrapper,
+  InputField,
 } from "./styles";
 
 // Components
@@ -138,17 +139,27 @@ function InputAmount(
       <Wrapper>
         <InputContainer>
           <Side>
-            {selectedToken?.image && tokens.length < 2 && <TokenImage src={selectedToken.image} />}
-            <InputValue
-              ref={inputRef}
-              value={inputValue}
-              type={"text"}
-              placeholder={placeholder || "0.0"}
-              onChange={handleTextChange}
-              onBlur={onBlur}
-              disabled={disabled}
-              name={name}
-            />
+            {selectedToken?.image && tokens.length < 2 && (
+              <>
+                {typeof selectedToken.image !== "string" ? (
+                  selectedToken.image
+                ) : (
+                  <TokenImage src={selectedToken.image} />
+                )}
+              </>
+            )}
+            <InputField>
+              <InputValue
+                ref={inputRef}
+                value={inputValue}
+                type={"text"}
+                placeholder={placeholder || "0.0"}
+                onChange={handleTextChange}
+                onBlur={onBlur}
+                disabled={disabled}
+                name={name}
+              />
+            </InputField>
             {selectedToken && tokens && <MaxButton onClick={onClickMaxValue}>Max</MaxButton>}
           </Side>
           {tokens?.length > 2 && (
