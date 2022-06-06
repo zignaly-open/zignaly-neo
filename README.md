@@ -4,10 +4,10 @@
 
 MVP
 - [x] Sockets
-- [ ] Proper Database connection - Postgres
+- [x] Proper Database connection - Postgres
 - [ ] Balance processing
-- [ ] Auctions -> DB
-- [ ] Proper bidding system
+- [x] Auctions -> DB
+- [x] Bidding system
 
 
 A little bit later
