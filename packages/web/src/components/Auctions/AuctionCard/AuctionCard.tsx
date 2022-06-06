@@ -1,5 +1,4 @@
-import { Avatar, Box, Chip } from '@mui/material';
-import Button from '@mui/material/Button';
+import { Box } from '@mui/material';
 import Paper from '@mui/material/Paper';
 import { css, styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
@@ -8,13 +7,9 @@ import { useTranslation, Trans } from 'react-i18next';
 import { AuctionType, BasketItem } from '../../../../../types/src/Auction';
 import AuctionBasketItem from './AuctionBasketItem';
 import FinalCountdown from './FinalCountdown';
+import { getMinBid } from '../util';
+import { LoadingButton } from '@mui/lab';
 
-// states
-// - winning
-// - inactive
-// - generic
-// - outbid
-//
 const Item = styled(Paper)<{
   isActive: boolean;
   isWinning: boolean;
@@ -50,7 +45,6 @@ const GiftBox = styled(Box)<{ isWinning: boolean; isLosing: boolean }>`
         color: #fff !important;
       }
     `}
-
   &:after,
   &:before {
     content: '';
@@ -71,21 +65,21 @@ const GiftBox = styled(Box)<{ isWinning: boolean; isLosing: boolean }>`
     border-color: transparent transparent #888 #888;
   }
 `;
-//
-// const Item = styled(Paper)(({ theme }) => ({
-//   backgroundColor: '#fff',
-//   padding: theme.spacing(2.5),
-//   color: theme.palette.text.secondary,
-// }));
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
+  currentUserId?: number;
+  isPerformingAction?: boolean;
   onBid: () => void;
-}> = ({ auction, onBid }) => {
+}> = ({ auction, currentUserId, onBid, isPerformingAction }) => {
   const { t } = useTranslation('auction');
   const isActive = auction.status === 'Active'; // need to do it this way, otherwise SB loader problems
-  const isWinning = false;
-  const isLosing = true;
+  const [lastBidId, yourLastBidId] = [
+    auction.bids?.[0]?.id,
+    auction.userBid?.[0]?.id,
+  ];
+  const isWinning = yourLastBidId && yourLastBidId === lastBidId;
+  const isLosing = yourLastBidId && yourLastBidId !== lastBidId;
   return (
     <Item isActive={isActive} isWinning={isWinning} isLosing={isLosing}>
       <Typography gutterBottom variant='h6' component='div'>
@@ -106,7 +100,7 @@ const AuctionCard: React.FC<{
         </Typography>
 
         <Box sx={{ marginBottom: 1 }}>
-          {auction.basket.map((item: BasketItem) => (
+          {auction.basketItems.map((item: BasketItem) => (
             <AuctionBasketItem key={item.ticker} item={item} />
           ))}
         </Box>
@@ -127,8 +121,22 @@ const AuctionCard: React.FC<{
         <FinalCountdown date={auction.expiresAt} />
         <Typography fontSize={18} marginBottom={3}>
           <Trans
-            i18nKey={`auction:${isActive ? 'last' : 'winning'}-bid`}
-            count={auction.lastBid.value}
+            i18nKey={`auction:${
+              isActive
+                ? auction.bids?.length
+                  ? 'last'
+                  : 'starting'
+                : 'winning'
+            }-bid`}
+            values={{
+              name:
+                (auction.bids?.[0]?.user.username ??
+                  `#${auction.bids?.[0]?.user.id}`) +
+                (currentUserId && +currentUserId === +auction.bids?.[0]?.user.id
+                  ? `${t('it-is-you')}`
+                  : ''),
+            }}
+            count={getMinBid(auction)}
           >
             <Typography
               fontSize={20}
@@ -137,14 +145,26 @@ const AuctionCard: React.FC<{
               component='span'
               fontWeight={600}
             />
-            <Chip avatar={<Avatar>M</Avatar>} label='Avatar' />
+            <Typography
+              fontSize={20}
+              variant='body2'
+              color='secondary.light'
+              component='span'
+              fontWeight={600}
+            />
           </Trans>
         </Typography>
 
         {isActive && (
-          <Button variant={'contained'} size='large' onClick={onBid}>
+          <LoadingButton
+            variant={'contained'}
+            loading={isPerformingAction}
+            disabled={isPerformingAction}
+            size='large'
+            onClick={onBid}
+          >
             {t('bid')}
-          </Button>
+          </LoadingButton>
         )}
       </Box>
     </Item>

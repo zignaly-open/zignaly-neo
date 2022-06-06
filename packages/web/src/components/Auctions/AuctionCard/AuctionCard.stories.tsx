@@ -28,16 +28,18 @@ const auctionObject = {
   expiresAt: new Date(Date.now() + 3600_000),
   status: 'Active',
   monetaryValue: '$84.52',
-  basket: [
+  basketItems: [
     {
       ticker: 'ETH',
       amount: 500,
     },
   ],
-  lastBid: {
-    value: 100,
-    date: new Date(),
-  },
+  bids: [
+    {
+      value: 100,
+      date: new Date(),
+    },
+  ],
 };
 
 export const Basic = Template.bind({});

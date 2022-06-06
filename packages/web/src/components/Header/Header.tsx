@@ -5,8 +5,11 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import useAuthenticate, { useLogout } from '../../hooks/useAuthenticate';
-import { gql, useQuery } from '@apollo/client';
+import useAuthenticate, {
+  GET_CURRENT_USER,
+  useLogout,
+} from '../../hooks/useAuthenticate';
+import { useQuery } from '@apollo/client';
 
 const StyledLogo = styled(Typography)`
   text-transform: uppercase;
@@ -49,15 +52,6 @@ const StyledLogo = styled(Typography)`
 const StyledMoto = styled(Typography)`
   text-transform: uppercase;
   text-shadow: 0 0 1px #fff;
-`;
-
-export const GET_CURRENT_USER = gql`
-  query me {
-    me {
-      id
-      username
-    }
-  }
 `;
 
 const Header: React.FC = () => {
@@ -107,7 +101,7 @@ const Header: React.FC = () => {
         {/*  {t('view-history')}*/}
         {/*</Button>*/}
         {!loading &&
-          (currentUser?.data?.me?.id ? (
+          (!currentUser?.me?.id ? (
             <Button variant={'text'} onClick={authenticate}>
               {t('log-in')}
             </Button>

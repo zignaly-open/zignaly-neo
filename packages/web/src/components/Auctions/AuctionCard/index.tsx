@@ -1,8 +1,10 @@
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import React from 'react';
 import { AuctionType } from '../../../../../types/src/Auction';
 import { BID_AUCTION } from '../queries';
 import AuctionCardComponent from './AuctionCard';
+import { GET_CURRENT_USER } from '../../../hooks/useAuthenticate';
+import { getMinBid } from '../util';
 
 // states
 // - winning
@@ -14,19 +16,28 @@ import AuctionCardComponent from './AuctionCard';
 const AuctionCard: React.FC<{
   auction: AuctionType;
 }> = ({ auction }) => {
-  const [bid] = useMutation(BID_AUCTION);
-
+  const [bid, { loading: isBidding }] = useMutation(BID_AUCTION);
+  const { data: currentUser, loading: isGettingUserInfo } =
+    useQuery(GET_CURRENT_USER);
   return (
     <AuctionCardComponent
       auction={auction}
-      onBid={() =>
-        bid({
-          variables: {
-            id: auction.id,
-            value: (auction.lastBid?.value || 0) + 1,
-          },
-        })
-      }
+      currentUserId={currentUser?.me?.id}
+      isPerformingAction={isBidding || isGettingUserInfo}
+      onBid={() => {
+        currentUser?.me?.id
+          ? bid({
+              variables: {
+                id: auction.id,
+                // TODO
+                value: getMinBid(auction) + 1,
+              },
+            }).catch((e) => {
+              // TODO: better alerts
+              alert(e.toString());
+            })
+          : alert('Not logged in');
+      }}
     />
   );
 };

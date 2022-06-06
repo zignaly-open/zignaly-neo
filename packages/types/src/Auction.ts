@@ -6,21 +6,29 @@ export enum AuctionStatus {
 
 export type BasketItem = {
   ticker: string;
-  amount: number;
+  amount: string;
+};
+
+export type AuctionBid = {
+  id: number;
+  value: string; // TODO: BigInt?
+  date: Date;
+  user: {
+    id: number;
+    username: string;
+  };
 };
 
 export type AuctionType = {
   id: number;
   title: string;
   description: string;
-  basket: BasketItem[];
+  basketItems: BasketItem[];
   monetaryValue?: String;
   createdAt?: Date;
   expiresAt?: Date;
-  image?: String;
+  startingBid: string;
   status: AuctionStatus;
-  lastBid: {
-    value: number; // TODO: BigInt?
-    date: Date;
-  };
+  userBid: AuctionBid[]; // we'll be receiving only the last bid
+  bids: AuctionBid[]; // we'll be receiving only the last bid
 };

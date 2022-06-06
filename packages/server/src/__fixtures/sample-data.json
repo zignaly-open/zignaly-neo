@@ -1,0 +1,334 @@
+[
+  {
+    "model": "Auction",
+    "data": {
+      "id": 1,
+      "title": "Best Auction EVER",
+      "description": "Bid now or die regretting",
+      "monetaryValue": "100 BTC!!11",
+      "status": "Active",
+      "startingBid": "1"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "BTC",
+      "amount": 100,
+      "auctionId": 1
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 2,
+      "title": "Elon Musk's giveaway",
+      "description": "Have you ever dreamt of reading the most retarded description ever? Well, continue dreaming",
+      "monetaryValue": "1 Model S",
+      "status": "Active",
+      "startingBid": "1"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "$TSLA",
+      "amount": 1,
+      "auctionId": 2
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 3,
+      "title": "Charity Giveaway",
+      "description": "All proceeds from this auction will go towards the needs of Alex who desperately needs a brand new X5 40d",
+      "monetaryValue": "$1",
+      "status": "Active",
+      "startingBid": "10"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "USDT",
+      "amount": 1,
+      "auctionId": 3
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 4,
+      "title": "Charity Giveaway 2",
+      "description": "All proceeds from this auction will go towards the needs of Alex who would like to have an M4 as well",
+      "monetaryValue": "$1",
+      "status": "Active",
+      "startingBid": "100"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "USDT",
+      "amount": 10,
+      "auctionId": 4
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 5,
+      "title": "Win&Go",
+      "description": "Bid, win, get outbid and go",
+      "monetaryValue": "$4000",
+      "status": "Active",
+      "startingBid": "1"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "ETH",
+      "amount": 2,
+      "auctionId": 5
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 6,
+      "title": "Honest Auction",
+      "description": "Lotteries are for economically illiterate, stop playing one",
+      "monetaryValue": "$30k",
+      "status": "Active",
+      "startingBid": "1"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "BTC",
+      "amount": 1,
+      "auctionId": 6
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 7,
+      "title": "Just go",
+      "description": "Pay me and go",
+      "monetaryValue": "$100",
+      "status": "Active",
+      "startingBid": "1"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "BTC",
+      "amount": "0.001",
+      "auctionId": 7
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "USDT",
+      "amount": "10",
+      "auctionId": 7
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 8,
+      "title": "Diversification",
+      "description": "Win a basket more diverse than a Netflix cast",
+      "monetaryValue": "$1000",
+      "status": "Active",
+      "startingBid": "3"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "BTC",
+      "amount": "0.001",
+      "auctionId": 8
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "ETH",
+      "amount": "0.01",
+      "auctionId": 8
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "XRP",
+      "amount": "10",
+      "auctionId": 8
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "SHT",
+      "amount": "1000",
+      "auctionId": 8
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 9,
+      "title": "Diversification 2",
+      "description": "Win a basket more diverse than a Netflix cast",
+      "monetaryValue": "$1000",
+      "status": "Active",
+      "basketItems": [
+        {
+          "ticker": "SHT",
+          "amount": 100
+        },
+        {
+          "ticker": "ETH",
+          "amount": "0.05"
+        },
+        {
+          "ticker": "BTC",
+          "amount": "0.0001"
+        },
+        {
+          "ticker": "XRP",
+          "amount": 10
+        }
+      ],
+      "startingBid": "3"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "BTC",
+      "amount": "0.002",
+      "auctionId": 9
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "ETH",
+      "amount": "0.02",
+      "auctionId": 9
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "XRP",
+      "amount": "10",
+      "auctionId": 9
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "SHT",
+      "amount": "10000",
+      "auctionId": 9
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 10,
+      "title": "Diversification 3",
+      "description": "Win a basket more diverse than a Netflix cast",
+      "monetaryValue": "$1000",
+      "status": "Active",
+      "startingBid": "3"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "BTC",
+      "amount": "0.001",
+      "auctionId": 10
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "ETH",
+      "amount": "0.01",
+      "auctionId": 10
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "XRP",
+      "amount": "10",
+      "auctionId": 10
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "SHT",
+      "amount": "1000",
+      "auctionId": 10
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 11,
+      "title": "Diversification 4",
+      "description": "Win a basket more diverse than a Netflix cast",
+      "monetaryValue": "$1000",
+      "status": "Active",
+      "startingBid": "3"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "BTC",
+      "amount": "0.001",
+      "auctionId": 11
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "ETH",
+      "amount": "0.01",
+      "auctionId": 11
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "XRP",
+      "amount": "10",
+      "auctionId": 11
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "SHT",
+      "amount": "1000",
+      "auctionId": 11
+    }
+  }
+]
+

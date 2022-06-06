@@ -5,7 +5,7 @@ let accessToken: string =
 
 export function setToken(token: string): void {
   accessToken = token;
-  // localStorage.setItem(localStorageKey, token);
+  localStorage.setItem(localStorageKey, token);
 }
 
 export function getToken(): string {

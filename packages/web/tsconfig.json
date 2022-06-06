@@ -10,10 +10,10 @@
   "compilerOptions": {
     "paths": {
       "crypto": [
-        "node_modules/crypto-browserify"
+        "./node_modules/crypto-browserify"
       ],
       "https": [
-        "node_modules/https-browserify"
+        "./node_modules/https-browserify"
       ]
     }
   }

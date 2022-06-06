@@ -1,78 +1,83 @@
-import {
-  AuctionStatus,
-  AuctionType,
-  BasketItem,
-} from '../../../types/src/Auction';
-import _sample from 'lodash/sampleSize';
+import { AuctionStatus } from '../../../types/src/Auction';
 import pubsub from '../pubsub';
 import { AUCTION_BID_ADDED } from './constants';
+import { Auction, AuctionBasketItem, AuctionBid } from './model';
+import { Includeable } from 'sequelize';
+import { ApolloContext, ContextUser } from '../types';
+import { auctionTtlPerBid } from '../../config';
+import { User } from '../users/model';
 
-const basket = [
-  { ticker: 'ETC', amount: 2 },
-  { ticker: 'BTC', amount: 10 },
-  { ticker: 'XRP', amount: 10 },
-  { ticker: 'NFT', amount: 5 },
-  { ticker: 'DOGE', amount: 100000 },
-] as BasketItem[];
+async function getAuctions(id: number, user: ContextUser) {
+  const lastBidPopulation = {
+    model: AuctionBid,
+    as: 'bids',
+    order: [['id', 'DESC']],
+    limit: 1,
+    include: [User],
+  } as Includeable;
 
-const generateAuctionItem = () => {
-  const id = Math.round(Math.random() * 1000000);
-  return {
-    id,
-    title: 'Auction #' + id,
-    description: 'Blah blah blah!'.repeat(Math.round(Math.random() * 10)),
-    image: `/images/${1 + Math.floor(Math.random() * 8)}.jpg`,
-    createdAt: new Date(),
-    monetaryValue: '$84.52',
-    expiresAt: new Date(Date.now() + 3600_000),
-    status: AuctionStatus.Active,
-    basket: _sample(basket),
-    lastBid: {
-      value: 100,
-      date: new Date(),
-    },
-  };
-};
+  const lastUsersBidPopulation = {
+    model: AuctionBid,
+    order: [['id', 'DESC']],
+    limit: 1,
+    as: 'userBid',
+    where: { userId: user?.id },
+  } as Includeable;
 
-// TODO
-const auctions = [
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-  generateAuctionItem(),
-] as AuctionType[];
+  return await Auction.findAll({
+    where: { ...(id ? { id } : {}) },
+    include: [AuctionBasketItem, lastBidPopulation].concat(
+      user ? lastUsersBidPopulation : [],
+    ),
+  });
+}
 
 export const resolvers = {
   Query: {
-    auctions: async (_: any, { id }: { id: number }) =>
-      id ? auctions.filter((x) => x.id === +id) : auctions,
+    auctions: async (
+      _: any,
+      { id }: { id: number },
+      { user }: ApolloContext,
+    ) => {
+      return getAuctions(id, user);
+    },
   },
   Mutation: {
-    bid: async (_: any, { id, bid }: { id: number; bid: number }) => {
-      const auction = auctions.find((x) => x.id === +id);
-      auction.lastBid = {
+    bid: async (
+      _: any,
+      { id, bid }: { id: number; bid: number },
+      { user }: ApolloContext,
+    ) => {
+      if (!user) {
+        throw new Error('User not found');
+      }
+
+      const auction = await Auction.findByPk(id);
+      if (!auction || auction.status !== AuctionStatus.Active) return null;
+
+      const maxBid = await AuctionBid.findOne({
+        where: { auctionId: id },
+        order: [['value', 'DESC']],
+      });
+
+      if (bid <= (maxBid ? +maxBid.value : +auction.startingBid)) {
+        throw new Error('A greater bid exists');
+      }
+
+      await AuctionBid.create({
+        auctionId: id,
         value: bid,
-        date: new Date(),
-      };
-      pubsub.publish(AUCTION_BID_ADDED, { bidAdded: auction });
-      return auction;
+        userId: user.id,
+      });
+
+      auction.expiresAt = new Date(
+        +new Date(auction.expiresAt) + auctionTtlPerBid,
+      );
+      await auction.save();
+
+      const [updatedAuction] = await getAuctions(auction.id, user);
+      pubsub.publish(AUCTION_BID_ADDED, { bidAdded: updatedAuction });
+      return updatedAuction;
     },
   },
   Subscription: {

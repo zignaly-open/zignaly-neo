@@ -3,27 +3,34 @@ import { gql } from 'apollo-server-express';
 export const typeDef = gql`
   scalar Date
 
+  type UserInfo {
+    id: Int
+    username: String
+  }
   type Bid {
+    id: Int
     value: Int
     date: Date
+    user: UserInfo
   }
 
   type BasketItem {
     ticker: String!
-    amount: Int!
+    amount: String!
   }
 
   type Auction {
     id: ID!
     createdAt: Date
     expiresAt: Date
-    image: String
+    title: String!
     status: String
     monetaryValue: String
+    startingBid: String
     description: String
-    basket: [BasketItem]
-    title: String!
-    lastBid: Bid
+    basketItems: [BasketItem]
+    bids: [Bid]
+    userBid: [Bid]
   }
 
   extend type Query {

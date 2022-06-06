@@ -5,17 +5,27 @@ export const GET_AUCTIONS = gql`
     auctions(id: $id) {
       id
       title
-      image
       createdAt
       expiresAt
       status
       description
-      basket {
+      startingBid
+      basketItems {
         ticker
         amount
       }
       monetaryValue
-      lastBid {
+      bids {
+        id
+        value
+        user {
+          id
+          username
+        }
+      }
+
+      userBid {
+        id
         value
       }
     }
@@ -29,7 +39,17 @@ export const BID_AUCTION = gql`
       title
       createdAt
       expiresAt
-      lastBid {
+      bids {
+        id
+        value
+        user {
+          id
+          username
+        }
+      }
+
+      userBid {
+        id
         value
       }
     }
@@ -48,8 +68,14 @@ export const BIDS_SUBSCRIPTION = gql`
   subscription onBidAdded {
     bidAdded {
       id
-      lastBid {
+      expiresAt
+      bids {
+        id
         value
+        user {
+          id
+          username
+        }
       }
     }
   }

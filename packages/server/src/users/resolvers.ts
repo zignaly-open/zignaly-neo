@@ -1,13 +1,13 @@
 import { User } from './model';
 import { authenticateSignature } from './util';
+import { ApolloContext } from '../types';
 
 const generateNonceSignMessage = (nonce: string | number) =>
   `Please sign this message to verify it's you: ${nonce}`;
 
 export const resolvers = {
   Query: {
-    // @ts-ignore
-    me: async (_: any, __: any, { user }) => {
+    me: async (_: any, __: any, { user }: ApolloContext) => {
       if (!user) return null;
       return await User.findByPk(user.id);
     },

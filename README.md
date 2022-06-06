@@ -17,4 +17,5 @@ A little bit later
 
 Later:
 - [ ] PubSub -> Redis os Kafka
+- [ ] DB Indices
 - [ ] Security Audit
