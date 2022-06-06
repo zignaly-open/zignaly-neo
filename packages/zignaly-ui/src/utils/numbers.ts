@@ -15,7 +15,7 @@ export const formatBalanceUnits = (value: any) => {
 
 
 /**
- * @description Sort the column by picking up the value from the props that you tell it the component has or as a normal value
+ * @description THIS FUNCTION ONLY TEST use in real cases customSort
  *
  * @param propParamNameForValue Prop from which to take the value to order
  * @param useProp if you do not use prop you sort by value
@@ -25,6 +25,28 @@ export const formatBalanceUnits = (value: any) => {
 export const sortByPointDecimal = ({propParamNameForValue = "value", useProp = true}: {propParamNameForValue?: string, useProp?: boolean} = {}) => (rowA: any, rowB: any, columnId: string): number => {
   const a = parseFloat(useProp ? rowA.values[columnId].props[propParamNameForValue] : rowA.values[columnId]);
   const b = parseFloat(useProp ? rowB.values[columnId].props[propParamNameForValue] : rowB.values[columnId]);
+  if (a > b) return 1;
+  if (a < b) return -1;
+  return 0;
+};
+
+/**
+ * @description Sort the column by picking up the value
+ *
+ * @returns {Number} returns the number for sorting
+ * @param a value to compare
+ * @param b value to compare
+ * @param isNecessaryParseFloat if is necessary parse
+ */
+export const customSort = (a: string | number, b: string | number, isNecessaryParseFloat = false) => {
+  if (isNecessaryParseFloat) {
+    if (typeof a === "string") {
+      a = parseFloat(a);
+    }
+    if (typeof b === "string") {
+      b = parseFloat(b);
+    }
+  }
   if (a > b) return 1;
   if (a < b) return -1;
   return 0;
