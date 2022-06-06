@@ -2,10 +2,19 @@
 
 ### Checklist
 
-- [ ] CSRF protection
-- [ ] Database connection
-- [ ] Proper bidding system
+MVP
 - [x] Sockets
-- [ ] Manage Profile
+- [ ] Proper Database connection - Postgres
+- [ ] Balance processing
 - [ ] Auctions -> DB
+- [ ] Proper bidding system
+
+
+A little bit later
+- [ ] Manage Profile
+- [ ] Winner payouts
+- [ ] At least half-decent design
+
+Later:
 - [ ] PubSub -> Redis os Kafka
+- [ ] Security Audit
