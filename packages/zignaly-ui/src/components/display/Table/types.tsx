@@ -7,6 +7,8 @@ import { ServiceName } from "./components/ServiceName";
 import { AreaChart } from "../Charts";
 import React from "react";
 import PercentageIndicator from "./components/PercentageIndicator";
+import AssetsInPool from "./components/AssetsInPool";
+import InvestColumn from "./components/InvestColumn";
 
 export const tableTypes = {
   basic: "basic",
@@ -21,6 +23,7 @@ export interface TableBasicProps {
   onColumnHidden?: (column: string, isHidden: boolean) => void;
   hideOptionsButton: boolean;
   isUserTable: boolean;
+  maxWidth?: number;
   initialState?: object;
   isPagingWithAllData?: boolean;
   hasFooter?: boolean;
@@ -39,6 +42,195 @@ export interface UserTableData {
   threeMonths: PercentageIndicatorProps;
   all: PercentageIndicatorProps;
 }
+
+export const createMarketPlaceTableHeader = () => {
+  return [
+    {
+      Header: "Service Name",
+      Footer: (
+        <div>
+          <div>{"Manager/Base Currency"}</div>
+        </div>
+      ),
+      accessor: "serviceName",
+    },
+    {
+      Header: "Assets In Pool",
+      Footer: (
+        <div>
+          <div>{"# Of Investors"}</div>
+        </div>
+      ),
+      accessor: "assetsInPool",
+    },
+    {
+      Header: "1 year",
+      accessor: "oneYear",
+    },
+    {
+      Header: "1 month",
+      accessor: "chart",
+    },
+    {
+      Header: "",
+      accessor: "invest",
+    },
+  ];
+};
+
+interface MarketPlaceTableProps {
+  serviceName: {
+    heading: string;
+    subtitle: string;
+    cryptoName: string;
+    cryptoAlt: string;
+  };
+  assetsInPool: {
+    assetsValue: number;
+    numberOfInvestors: number;
+  };
+  chart: ChartsProps;
+  oneYear: {
+    value: number;
+    subtitle: string;
+  };
+}
+
+export const createMarketPlaceTableBody = ({
+  serviceName,
+  assetsInPool,
+  chart,
+  oneYear,
+}: MarketPlaceTableProps) => {
+  return [
+    {
+      serviceName: (
+        <ServiceName
+          heading={serviceName.heading}
+          subtitle={serviceName.subtitle}
+          cryptoName={serviceName.cryptoName}
+          cryptoAlt={serviceName.cryptoAlt}
+        />
+      ),
+      assetsInPool: (
+        <AssetsInPool
+          assetsValue={assetsInPool.assetsValue}
+          numberOfInvestors={assetsInPool.numberOfInvestors}
+        />
+      ),
+      chart: <AreaChart variant={chart.variant} data={chart.data} />,
+      oneYear: (
+        <PercentageIndicator
+          dashboardType="marketplace"
+          value={oneYear.value}
+          subtitle="2.2 years"
+          showTrophy={true}
+        />
+      ),
+      invest: <InvestColumn type="invested" />,
+    },
+    {
+      serviceName: (
+        <ServiceName
+          heading={serviceName.heading}
+          subtitle={serviceName.subtitle}
+          cryptoName={serviceName.cryptoName}
+          cryptoAlt={serviceName.cryptoAlt}
+        />
+      ),
+      assetsInPool: (
+        <AssetsInPool
+          assetsValue={assetsInPool.assetsValue}
+          numberOfInvestors={assetsInPool.numberOfInvestors}
+        ></AssetsInPool>
+      ),
+      chart: <AreaChart variant={chart.variant} data={chart.data} />,
+      oneYear: (
+        <PercentageIndicator
+          dashboardType="marketplace"
+          value={oneYear.value}
+          subtitle="2.2 years"
+        />
+      ),
+      invest: <InvestColumn type="liquidated" />,
+    },
+    {
+      serviceName: (
+        <ServiceName
+          heading={serviceName.heading}
+          subtitle={serviceName.subtitle}
+          cryptoName={serviceName.cryptoName}
+          cryptoAlt={serviceName.cryptoAlt}
+        />
+      ),
+      assetsInPool: (
+        <AssetsInPool
+          assetsValue={assetsInPool.assetsValue}
+          numberOfInvestors={assetsInPool.numberOfInvestors}
+        ></AssetsInPool>
+      ),
+      chart: <AreaChart variant={chart.variant} data={chart.data} />,
+      oneYear: (
+        <PercentageIndicator
+          dashboardType="marketplace"
+          value={oneYear.value}
+          subtitle="2.2 years"
+        />
+      ),
+      invest: <InvestColumn type="notInvested" />,
+    },
+    {
+      serviceName: (
+        <ServiceName
+          heading={serviceName.heading}
+          subtitle={serviceName.subtitle}
+          cryptoName={serviceName.cryptoName}
+          cryptoAlt={serviceName.cryptoAlt}
+        />
+      ),
+      assetsInPool: (
+        <AssetsInPool
+          assetsValue={assetsInPool.assetsValue}
+          numberOfInvestors={assetsInPool.numberOfInvestors}
+        ></AssetsInPool>
+      ),
+      chart: <AreaChart variant={chart.variant} data={chart.data} />,
+      oneYear: (
+        <PercentageIndicator
+          dashboardType="marketplace"
+          value={oneYear.value}
+          subtitle="2.2 years"
+        />
+      ),
+      invest: <InvestColumn type="notInvestedAllAccounts" />,
+    },
+    {
+      serviceName: (
+        <ServiceName
+          heading={serviceName.heading}
+          subtitle={serviceName.subtitle}
+          cryptoName={serviceName.cryptoName}
+          cryptoAlt={serviceName.cryptoAlt}
+        />
+      ),
+      assetsInPool: (
+        <AssetsInPool
+          assetsValue={assetsInPool.assetsValue}
+          numberOfInvestors={assetsInPool.numberOfInvestors}
+        ></AssetsInPool>
+      ),
+      chart: <AreaChart variant={chart.variant} data={chart.data} />,
+      oneYear: (
+        <PercentageIndicator
+          dashboardType="marketplace"
+          value={oneYear.value}
+          subtitle="2.2 years"
+        />
+      ),
+      invest: <InvestColumn type="investedSeeAll" />,
+    },
+  ];
+};
 
 export const createUserTable = ({
   summary,

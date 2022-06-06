@@ -40,6 +40,5 @@ export const PositiveUserDashboard = Template.bind({});
 PositiveUserDashboard.args = {
   value: 50,
   subtitle: "2.2 years",
-  withoutIcon: true,
   dashboardType: "user",
 };

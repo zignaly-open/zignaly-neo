@@ -1,5 +1,6 @@
 export interface BalanceSummaryProps {
-  totalValue: number;
+  totalValue?: number;
   profit: number;
   onClickEdit?: any;
+  dashboardType?: "user" | "investor" | "marketplace";
 }

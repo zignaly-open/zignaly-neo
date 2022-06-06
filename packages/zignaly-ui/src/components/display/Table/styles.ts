@@ -7,7 +7,9 @@ import CheckIcon from "assets/icons/check-icon.svg";
 import CloseIcon from "assets/icons/close-icon.svg";
 import ArrowBottomIcon from "assets/icons/arrow-bottom-icon.svg";
 
-export const Layout = styled.div``;
+export const Layout = styled.div<{maxWidth?: number }>`
+  max-width: ${(props) => props.maxWidth}px;
+`;
 
 export const TextContainer = styled.div`
   padding: 4px 24px;
@@ -60,7 +62,6 @@ export const TableView = styled.table<{ isUserTable: boolean; hasFooter?: boolea
   border-spacing: 0;
   overflow: hidden;
   width: 100%;
-
   background: rgba(19, 18, 37, 0.4);
   thead {
     height: 56px;

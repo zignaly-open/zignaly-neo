@@ -16,10 +16,12 @@ import { BalanceSummaryProps } from "./types";
 
 // Icons
 import PencilIcon from "assets/icons/pencil-icon.svg";
+import Typography from "components/display/Typography";
 
 export const BalanceSummary = ({
   totalValue,
   profit,
+  dashboardType = "investor",
   onClickEdit = () => {},
 }: BalanceSummaryProps) => {
   const isPositiveProfit = isPositive(profit);
@@ -27,14 +29,18 @@ export const BalanceSummary = ({
 
   return (
     <Layout isPositive={isPositiveProfit} isEqual={isEqual}>
-      <TotalValue>
-        {"$"}
-        <NumberFormat
-          value={String(totalValue).replaceAll("-", "")}
-          displayType={"text"}
-          thousandSeparator={true}
-        />
-      </TotalValue>
+      {dashboardType === "marketplace" ? (
+        <Typography>Invested</Typography>
+      ) : (
+        <TotalValue>
+          {"$"}
+          <NumberFormat
+            value={String(totalValue).replaceAll("-", "")}
+            displayType={"text"}
+            thousandSeparator={true}
+          />
+        </TotalValue>
+      )}
       <Profit variant="body2">
         {isEqual ? "+" : isPositiveProfit ? "+" : "-"}
         <NumberFormat

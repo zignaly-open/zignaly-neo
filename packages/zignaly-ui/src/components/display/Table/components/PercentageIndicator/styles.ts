@@ -17,6 +17,14 @@ export const Container = styled.div`
   text-align: center;
 `;
 
+export const TropyContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 5px;
+`;
+
 export const Value = styled(Typography)<{ isPositive: boolean }>`
   display: inline;
   ${(props) => `
@@ -24,6 +32,13 @@ export const Value = styled(Typography)<{ isPositive: boolean }>`
     font-weight: 500;
     color: ${props.isPositive ? props.theme["greenGraph"] : props.theme["redGraphOrError"]};
   `}
+`;
+
+export const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Subtitle = styled(Typography)`

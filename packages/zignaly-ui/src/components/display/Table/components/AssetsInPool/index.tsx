@@ -6,9 +6,10 @@ import { Column, Icon, Row } from "./styles";
 import { AssetsInPoolProps } from "./types";
 import WhaleIcon from "assets/icons/whale-icon.svg";
 
-export const AssetsInPool = ({ assetsValue, numberOfInvestors }: AssetsInPoolProps) => {
+const AssetsInPool = ({ assetsValue, numberOfInvestors }: AssetsInPoolProps) => {
   return (
     <Row>
+      <Gap gap={17}></Gap>
       <Column>
         <Gap gap={2.5}></Gap>
         <Typography variant="body1" weight="regular" color="neutral000">
@@ -30,3 +31,5 @@ export const AssetsInPool = ({ assetsValue, numberOfInvestors }: AssetsInPoolPro
     </Row>
   );
 };
+
+export default AssetsInPool;

@@ -18,7 +18,7 @@ import { dark } from "../../../theme";
 
 // Utils
 import { sortByPointDecimal } from "../../../utils/numbers";
-import { createUserTable } from "./types";
+import { createMarketPlaceTableBody, createMarketPlaceTableHeader, createUserTable } from "./types";
 import Typography from "../Typography";
 
 export default {
@@ -1978,6 +1978,35 @@ UserDashBoard.args = createUserTable({
   threeMonths: { value: 10 },
   all: { value: 10 },
 });
+
+export const MarketPlaceTabel = Template.bind({});
+MarketPlaceTabel.args = {
+  hideOptionsButton: true,
+  columns: createMarketPlaceTableHeader(),
+  data: createMarketPlaceTableBody({
+    serviceName: {
+      heading: "The Golden Eagle",
+      subtitle: "by Barry Silvername",
+      cryptoName: "Poly",
+      cryptoAlt: "PolyChain",
+    },
+    assetsInPool: { assetsValue: 1000000, numberOfInvestors: 200 },
+    chart: {
+      data: [
+        { x: "Jul 1", y: 10 },
+        { x: "Jul 2", y: 15 },
+        { x: "Jul 3", y: 23 },
+        { x: "Jul 4", y: 15 },
+        { x: "Jul 5", y: 17 },
+        { x: "Jul 6", y: 15 },
+        { x: "Jul 7", y: 5 },
+      ],
+      variant: "small",
+      midLine: true,
+    },
+    oneYear: { value: 100, subtitle: "Subtitle" },
+  }),
+};
 
 export const ExchangeOrders = Template.bind({});
 ExchangeOrders.args = {

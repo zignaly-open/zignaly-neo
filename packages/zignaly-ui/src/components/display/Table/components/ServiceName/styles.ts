@@ -7,8 +7,10 @@ export const Row = styled.div`
 `;
 
 export const Column = styled.div`
-  display: grid;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: flex-start;
 `;
 
 export const Icon = styled.div`

@@ -1,6 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import { AssetsInPool } from ".";
+import AssetsInPool from ".";
 
 export default {
   title: "Display/Table/Components/AssetsInPool",
