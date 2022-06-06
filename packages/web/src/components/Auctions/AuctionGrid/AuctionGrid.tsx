@@ -1,14 +1,14 @@
 import { Alert, Button, ButtonGroup, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React, { useMemo, useState } from 'react';
-import { useQuery } from '@apollo/client';
+import { useQuery, useSubscription } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Masonry from '@mui/lab/Masonry';
 import { AuctionType } from '../../../../../types/src/Auction';
 import AuctionCard from '../AuctionCard';
-import { GET_AUCTIONS } from '../queries';
+import { BIDS_SUBSCRIPTION, GET_AUCTIONS } from '../queries';
 
 const MasonryWrapper = styled(Box)`
   max-width: 1000px;
@@ -36,7 +36,7 @@ const AuctionGrid: React.FC = () => {
   const { loading, error, data } = useQuery(GET_AUCTIONS);
   const [selectedSort, setSelectedSort] = useState(SortDirection.Expiry);
   const [selectedShowMode, setSelectedShowMode] = useState(ShowOptions.All);
-
+  useSubscription(BIDS_SUBSCRIPTION);
   const sortOptions = useMemo(
     () => [
       { label: t('sort-by-expiry'), value: SortDirection.Expiry },

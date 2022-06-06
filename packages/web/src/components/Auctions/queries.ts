@@ -43,3 +43,14 @@ export const GET_AUCTION_IDS = gql`
     }
   }
 `;
+
+export const BIDS_SUBSCRIPTION = gql`
+  subscription onBidAdded {
+    bidAdded {
+      id
+      lastBid {
+        value
+      }
+    }
+  }
+`;

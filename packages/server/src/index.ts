@@ -12,6 +12,9 @@ import * as auctions from './auctions';
 import * as users from './users';
 import { expressjwt, Request as AuthorizedRequest } from 'express-jwt';
 import { algorithm, secret } from '../config';
+import { makeExecutableSchema } from '@graphql-tools/schema';
+import { WebSocketServer } from 'ws';
+import { useServer } from 'graphql-ws/lib/use/ws';
 
 const typeDef = gql`
   type Query
@@ -31,9 +34,19 @@ const port = process.env.PORT || 4000;
     }),
   );
   const httpServer = http.createServer(app);
-  const server = new ApolloServer({
+
+  const schema = makeExecutableSchema({
     typeDefs: [typeDef, auctions.typeDef, users.typeDef],
     resolvers: [auctions.resolvers, users.resolvers],
+  });
+
+  const wsServer = new WebSocketServer({
+    server: httpServer,
+    path: '/graphql',
+  });
+
+  const server = new ApolloServer({
+    schema,
     csrfPrevention: true,
     context: ({ req }: { req: AuthorizedRequest }) => {
       const user = req.auth?.payload || null;
@@ -41,8 +54,16 @@ const port = process.env.PORT || 4000;
     },
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
-
       // Install a landing page plugin based on NODE_ENV
+      {
+        async serverWillStart() {
+          return {
+            async drainServer() {
+              await serverCleanup.dispose();
+            },
+          };
+        },
+      },
       process.env.NODE_ENV === 'production'
         ? ApolloServerPluginLandingPageProductionDefault({
             footer: false,
@@ -50,6 +71,11 @@ const port = process.env.PORT || 4000;
         : ApolloServerPluginLandingPageGraphQLPlayground(),
     ],
   });
+
+  // Hand in the schema we just created and have the
+  // WebSocketServer start listening.
+  const serverCleanup = useServer({ schema }, wsServer);
+
   await server.start();
   server.applyMiddleware({ app });
 

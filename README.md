@@ -5,6 +5,7 @@
 - [ ] CSRF protection
 - [ ] Database connection
 - [ ] Proper bidding system
-- [ ] Sockets
+- [x] Sockets
 - [ ] Manage Profile
 - [ ] Auctions -> DB
+- [ ] PubSub -> Redis os Kafka

@@ -4,6 +4,8 @@ import {
   BasketItem,
 } from '../../../types/src/Auction';
 import _sample from 'lodash/sampleSize';
+import pubsub from '../pubsub';
+import { AUCTION_BID_ADDED } from './constants';
 
 const basket = [
   { ticker: 'ETC', amount: 2 },
@@ -69,7 +71,13 @@ export const resolvers = {
         value: bid,
         date: new Date(),
       };
+      pubsub.publish(AUCTION_BID_ADDED, { bidAdded: auction });
       return auction;
+    },
+  },
+  Subscription: {
+    bidAdded: {
+      subscribe: () => pubsub.asyncIterator([AUCTION_BID_ADDED]),
     },
   },
 };
