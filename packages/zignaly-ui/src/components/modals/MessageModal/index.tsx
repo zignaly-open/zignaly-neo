@@ -17,10 +17,11 @@ import { MessageModalTypesProps } from "./types";
 function MessageModal({
   title,
   description,
+  width = 400,
   onClickClose,
 }: MessageModalTypesProps): React.ReactElement {
   return (
-    <ModalContainer title={title} width={400} onClickClose={onClickClose}>
+    <ModalContainer title={title} width={width} onClickClose={onClickClose}>
       <Typography variant={"body1"}>{description}</Typography>
       <Actions>
         <Button variant={"primary"} caption={"OK"} size={"large"} onClick={onClickClose} />
