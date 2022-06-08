@@ -34,7 +34,7 @@ import { MarginContainer, PageContainer } from "./components/styled";
 
 // Modals
 import EditInvestmentWithModal from "./components/modals/EditInvestmentWithModal";
-import ErrorModal from "./components/modals/ErrorModal";
+import MessageModal from "./components/modals/MessageModal";
 
 // Icons
 import CloseIcon from "./assets/icons/close-icon.svg";
@@ -115,7 +115,7 @@ export {
   MarginContainer,
   // Modals
   EditInvestmentWithModal,
-  ErrorModal,
+  MessageModal,
   /**
    * =-=-=-=-=-=-=-=
    *   Assets

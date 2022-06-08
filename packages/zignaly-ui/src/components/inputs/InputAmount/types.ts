@@ -18,4 +18,5 @@ export interface InputAmountProps {
   name?: string;
   fullWidth?: boolean;
   placeholder?: string;
+  showUnit?: boolean;
 }

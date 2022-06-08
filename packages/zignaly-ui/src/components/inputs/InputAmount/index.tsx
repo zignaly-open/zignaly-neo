@@ -43,6 +43,7 @@ function InputAmount(
     name,
     fullWidth,
     placeholder,
+    showUnit = false,
   }: InputAmountProps,
   inputRef: React.Ref<any>,
 ) {
@@ -166,10 +167,10 @@ function InputAmount(
             </Side>
           )}
         </InputContainer>
-        {tokens?.length === 1 && (
+        {tokens?.length === 1 && showUnit && (
           <Unit>
             <Typography color="neutral300" variant="h1">
-              {selectedToken.name}
+              {selectedToken.id.toUpperCase()}
             </Typography>
           </Unit>
         )}
