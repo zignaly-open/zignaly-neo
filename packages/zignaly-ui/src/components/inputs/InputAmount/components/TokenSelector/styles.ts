@@ -93,10 +93,6 @@ export const Item = styled.li<ItemProps>`
   }
 `;
 
-export const Image = styled.img`
-  width: 20px;
-`;
-
 type LayoutProps = {
   disabled?: boolean;
   isActiveMenu: boolean;

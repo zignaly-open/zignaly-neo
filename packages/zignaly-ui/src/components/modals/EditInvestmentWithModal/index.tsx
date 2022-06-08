@@ -45,7 +45,8 @@ import CoinIcon from "../../display/CoinIcon";
 
 function EditInvestmentWithModal({
   investor,
-  pendingTransactions = 0,
+  isLoading = false,
+  pendingTransactions = [],
 
   amountInvested = BigNumber.from("0"),
   profitPercentage = "20",
@@ -68,6 +69,30 @@ function EditInvestmentWithModal({
       profitPercentageValue: profitPercentage,
     },
   });
+
+  const renderPendingTransactions = useMemo(
+    () =>
+      pendingTransactions.length > 0 ? (
+        <PendingTransaction>
+          <Inline>
+            <RefreshIcon />
+            <Typography variant={"body1"} color={"yellow"}>
+              You have {pendingTransactions.length} pending transaction
+            </Typography>
+          </Inline>
+          <div>
+            <TextButton
+              rightElement={
+                <ArrowRightIcon width={"22px"} height={"22px"} color={theme["links"]} />
+              }
+              caption={"View"}
+              onClick={() => setCurrentState(viewsIds.PENDING_TRANSACTIONS)}
+            />
+          </div>
+        </PendingTransaction>
+      ) : null,
+    [pendingTransactions],
+  );
 
   if (currentState === viewsIds.PENDING_TRANSACTIONS) {
     return (
@@ -113,32 +138,8 @@ function EditInvestmentWithModal({
     );
   }
 
-  const renderPendingTransactions = useMemo(
-    () =>
-      pendingTransactions.length > 0 ? (
-        <PendingTransaction>
-          <Inline>
-            <RefreshIcon />
-            <Typography variant={"body1"} color={"yellow"}>
-              You have {pendingTransactions.length} pending transaction
-            </Typography>
-          </Inline>
-          <div>
-            <TextButton
-              rightElement={
-                <ArrowRightIcon width={"22px"} height={"22px"} color={theme["links"]} />
-              }
-              caption={"View"}
-              onClick={() => setCurrentState(viewsIds.PENDING_TRANSACTIONS)}
-            />
-          </div>
-        </PendingTransaction>
-      ) : null,
-    [pendingTransactions],
-  );
-
   return (
-    <ModalContainer title={"Edit Investment with"} width={784}>
+    <ModalContainer title={"Edit Investment with"} width={784} onClickClose={onClickClose}>
       {/* Investor Details */}
       <Investor>
         <Avatar size={"x-large"} image={investor.photoUrl} />
@@ -183,8 +184,8 @@ function EditInvestmentWithModal({
           <Row>
             <InvestSlider
               label={"What to do with profits:"}
-              value={Number(getValues("withdrawPercentageValue"))}
-              initialValue={Number(getValues("withdrawPercentageValue"))}
+              value={Number(getValues("profitPercentageValue"))}
+              initialValue={Number(getValues("profitPercentageValue"))}
               onChange={({ withdraw }: { withdraw: string }) => {
                 setValue("profitPercentageValue", withdraw.toString());
               }}
@@ -199,8 +200,6 @@ function EditInvestmentWithModal({
               tokens={[
                 {
                   id: coin.id,
-                  name: coin.id,
-                  image: <CoinIcon name={coin.id} size={"small"} coin={coin.id} />,
                   balance: coin.balance,
                 },
               ]}
@@ -223,6 +222,7 @@ function EditInvestmentWithModal({
           <Button
             size={"large"}
             type={"submit"}
+            loading={isLoading}
             caption={isInputEnabled ? "Add to Investment" : "Save and Close"}
           />
           <TextButton

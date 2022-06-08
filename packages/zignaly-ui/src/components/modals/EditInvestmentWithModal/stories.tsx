@@ -2,10 +2,13 @@
 import * as React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
+// Utils
+import { BigNumber } from "ethers";
+
 // Component
 import EditInvestmentWithModal from "./";
 import { EditInvestmentFormProps } from "./types";
-import { BigNumber } from "ethers";
+
 import DateLabel from "../../display/Table/components/DateLabel";
 import PriceLabel from "../../display/Table/components/PriceLabel";
 import TextButton from "../../inputs/TextButton";
@@ -31,6 +34,8 @@ Default.args = {
     successFee: 20,
     photoUrl: "https://logodix.com/logo/2129091.png",
   },
+  isLoading: false,
+  profitPercentage: 50,
   pendingTransactions: [
     {
       date: <DateLabel date={new Date()} />,

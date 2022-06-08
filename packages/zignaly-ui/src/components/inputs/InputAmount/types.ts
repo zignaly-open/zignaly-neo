@@ -2,9 +2,7 @@ import { BigNumberish } from "ethers";
 import { ChangeEventHandler } from "react";
 
 export type TokenItem = {
-  id: string | number;
-  name: string;
-  image?: string;
+  id: string;
   balance: string | number | BigNumberish;
 };
 

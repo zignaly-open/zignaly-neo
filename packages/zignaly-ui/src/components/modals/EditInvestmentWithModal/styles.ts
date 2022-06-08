@@ -75,11 +75,6 @@ export const TokenValue = styled.div`
   }
 `;
 
-export const TokenImage = styled.img`
-  width: 28px;
-  height: 28px;
-`;
-
 export const Actions = styled.div`
   display: flex;
   flex-direction: column;

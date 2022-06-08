@@ -5,11 +5,6 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 // Component
 import InputAmount from "./";
 
-// Assets
-import BTCIcon from "assets/icons/coins/btc.svg?url";
-import ETHIcon from "assets/icons/coins/eth.svg?url";
-import DOGEIcon from "assets/icons/coins/doge.svg?url";
-
 export default {
   title: "Inputs/InputAmount",
   component: InputAmount,
@@ -56,9 +51,7 @@ OnlyOneToken.args = {
   onChange: () => {},
   tokens: [
     {
-      id: 1,
-      name: "BTC",
-      image: BTCIcon,
+      id: "btc",
       balance: "1000000000000000000",
     },
   ],
@@ -70,8 +63,7 @@ OnlyOneTokenWithUnit.args = {
   onChange: () => {},
   tokens: [
     {
-      id: 1,
-      name: "BTC",
+      id: "btc",
       balance: "1000000000000000000",
     },
   ],
@@ -85,22 +77,16 @@ WithMultipleTokens.args = {
   },
   tokens: [
     {
-      id: 1,
-      name: "BTC",
-      image: BTCIcon,
+      id: "btc",
       balance: "1000000000000000000",
     },
     {
-      id: 2,
-      name: "ETH",
-      image: ETHIcon,
-      balance: "5000000000000000000",
+      id: "eth",
+      balance: "1000000000000000000",
     },
     {
-      id: 3,
-      name: "DOGE",
-      image: DOGEIcon,
-      balance: "23000000000000000000000",
+      id: "doge",
+      balance: "1000000000000000000",
     },
   ],
 };
@@ -113,22 +99,16 @@ WithError.args = {
   },
   tokens: [
     {
-      id: 1,
-      name: "BTC",
-      image: BTCIcon,
+      id: "btc",
       balance: "1000000000000000000",
     },
     {
-      id: 2,
-      name: "ETH",
-      image: ETHIcon,
-      balance: "5000000000000000000",
+      id: "eth",
+      balance: "1000000000000000000",
     },
     {
-      id: 3,
-      name: "DOGE",
-      image: DOGEIcon,
-      balance: "23000000000000000000000",
+      id: "doge",
+      balance: "1000000000000000000",
     },
   ],
   error: "Exceeds available balance",
@@ -140,9 +120,15 @@ Disabled.args = {
   onChange: () => {},
   tokens: [
     {
-      id: 1,
-      name: "BTC",
-      image: BTCIcon,
+      id: "btc",
+      balance: "1000000000000000000",
+    },
+    {
+      id: "eth",
+      balance: "1000000000000000000",
+    },
+    {
+      id: "doge",
       balance: "1000000000000000000",
     },
   ],

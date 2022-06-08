@@ -10,7 +10,6 @@ import {
   InputContainer,
   InputValue,
   Layout,
-  TokenImage,
   BalanceContainer,
   BalanceLabel,
   BalanceValue,
@@ -25,6 +24,7 @@ import {
 import TokenSelector from "./components/TokenSelector";
 import ErrorMessage from "components/display/ErrorMessage";
 import Typography from "components/display/Typography";
+import CoinIcon, { CoinSizes } from "../../display/CoinIcon";
 
 // Types
 import { InputAmountProps, TokenItem } from "./types";
@@ -139,14 +139,8 @@ function InputAmount(
       <Wrapper>
         <InputContainer>
           <Side>
-            {selectedToken?.image && tokens.length < 2 && (
-              <>
-                {typeof selectedToken.image !== "string" ? (
-                  selectedToken.image
-                ) : (
-                  <TokenImage src={selectedToken.image} />
-                )}
-              </>
+            {selectedToken?.id && tokens.length < 2 && (
+              <CoinIcon name={selectedToken.id} size={CoinSizes.SMALL} coin={selectedToken.id} />
             )}
             <InputField>
               <InputValue
@@ -172,7 +166,7 @@ function InputAmount(
             </Side>
           )}
         </InputContainer>
-        {tokens?.length === 1 && !selectedToken?.image && (
+        {tokens?.length === 1 && (
           <Unit>
             <Typography color="neutral300" variant="h1">
               {selectedToken.name}
@@ -188,7 +182,7 @@ function InputAmount(
             <NumberFormat
               value={utils.formatUnits(selectedToken.balance)}
               displayType={"text"}
-              suffix={selectedToken ? ` ${selectedToken.name}` : ""}
+              suffix={selectedToken ? ` ${selectedToken.id.toUpperCase()}` : ""}
               thousandSeparator={true}
             />
           </BalanceValue>
