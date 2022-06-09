@@ -20,11 +20,12 @@ export const InputValue = styled.input`
   resize: none;
 `;
 
-export const Side = styled.div`
+export const Side = styled.div<{ cursor: "auto" | "pointer" }>`
   display: flex;
   flex-direction: row;
   align-items: center;
   flex: 1;
+  cursor: ${(props) => props.cursor};
 
   &:last-child:not(:first-child) {
     flex: 0;

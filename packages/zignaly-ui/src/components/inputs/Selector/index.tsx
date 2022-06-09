@@ -17,7 +17,7 @@ import {
   ItemCaption,
   LeftElementIcon,
   Container,
-  ItemContainer
+  ItemContainer,
 } from "./styles";
 
 // Assets
@@ -38,6 +38,8 @@ function Select({
   placeholder = "Button",
   onChange = () => {},
   size = SelectSizes.NORMAL,
+  maxHeight,
+  transparent,
 }: SelectProps): ReactElement {
   // Ref
   const selectorRef = useRef(null);
@@ -51,7 +53,7 @@ function Select({
    */
   const handleClickItem = useCallback(
     (value: OptionItem, index: number) => {
-      onChange({...value, index});
+      onChange({ ...value, index });
       setMenuActive(false);
     },
     [options],
@@ -71,6 +73,8 @@ function Select({
       fullWidth={fullWidth}
       isActiveMenu={isActiveMenu}
       collapsed={mode === "collapsed" && !isActiveMenu}
+      maxHeight={maxHeight}
+      transparent={transparent}
     >
       {label && <Label htmlFor={name}>{label}</Label>}
       <Container onClick={() => setMenuActive(!isActiveMenu)}>
@@ -86,7 +90,7 @@ function Select({
                   )}
                 </LeftElement>
               )}
-              <Value variant={'body1'}>{value.caption}</Value>
+              <Value variant={"body1"}>{value.caption}</Value>
             </>
           ) : (
             <Placeholder>{placeholder}</Placeholder>
@@ -104,14 +108,10 @@ function Select({
           options.map((option: OptionItem, index: number) => {
             const isSelectedOption = !!(value && value.index === index);
 
-            if (isSelectedOption)
-              return null;
+            if (isSelectedOption) return null;
 
             return (
-              <Item
-                key={`--${index.toString()}`}
-                onClick={() => handleClickItem(option, index)}
-              >
+              <Item key={`--${index.toString()}`} onClick={() => handleClickItem(option, index)}>
                 <ItemContainer>
                   {option.leftElement && (
                     <LeftElement>
@@ -122,7 +122,7 @@ function Select({
                       )}
                     </LeftElement>
                   )}
-                  <ItemCaption variant={'body1'}>{option.caption}</ItemCaption>
+                  <ItemCaption variant={"body1"}>{option.caption}</ItemCaption>
                 </ItemContainer>
               </Item>
             );

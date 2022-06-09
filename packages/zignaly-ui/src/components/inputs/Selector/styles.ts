@@ -34,21 +34,20 @@ export const Container = styled.div`
   overflow: hidden;
 `;
 
-
 export const Value = styled(Typography)`
   font-style: normal;
   width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
-  ${({theme}) => (`
-     color: ${theme['neutral200']};
-  `)}
+  ${({ theme }) => `
+     color: ${theme["neutral200"]};
+  `}
 `;
 
 export const Placeholder = styled(Value)`
-  ${({theme}) => (`
-     color: ${theme['neutral400']};
-  `)}
+  ${({ theme }) => `
+     color: ${theme["neutral400"]};
+  `}
 `;
 
 export const Arrow = styled.img`
@@ -73,13 +72,13 @@ export const Menu = styled.ul`
   opacity: 0;
   border-top: none;
   z-index: 10;
-  
+
   max-height: 250px;
   overflow-x: hidden;
-  
-  ${({theme}) => (`
-    background: ${theme['neutral750']};
-  `)}
+
+  ${({ theme }) => `
+    background: ${theme["neutral750"]};
+  `}
 
   /* width */
 
@@ -95,7 +94,7 @@ export const Menu = styled.ul`
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.10);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 12px;
   }
 
@@ -115,21 +114,23 @@ export const Item = styled.li<ItemProps>`
   align-items: center;
   cursor: pointer;
   ${({ empty, theme }: any) => `
-    ${styledIf(empty, `
+    ${styledIf(
+      empty,
+      `
       text-align: center;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: ${theme['neutral500']};
+      color: ${theme["neutral500"]};
     `,
-          `
-      color: ${theme['neutral200']};
+      `
+      color: ${theme["neutral200"]};
       
       &:hover {
         background: #15162d;
       }
     `,
-  )}  
+    )}  
   `}
 `;
 
@@ -152,6 +153,8 @@ type LayoutProps = {
   collapsed: boolean;
   fullWidth?: boolean;
   name?: string;
+  maxHeight?: number;
+  transparent?: boolean;
 };
 
 export const Layout = styled.div<LayoutProps>`
@@ -159,7 +162,7 @@ export const Layout = styled.div<LayoutProps>`
   flex-direction: column;
   position: relative;
   width: 100%;
-  
+
   &[disabled] {
     ${Container} {
       opacity: 0.5;
@@ -167,10 +170,12 @@ export const Layout = styled.div<LayoutProps>`
     }
   }
   ${(props: any) => `
-    ${styledIf(props.isActiveMenu, `
+    ${styledIf(
+      props.isActiveMenu,
+      `
       ${Menu} {
         border-radius: 0 0 4px 4px;
-        border: 1px solid ${props.theme['highlighted']};;
+        border: 1px solid ${props.theme["highlighted"]};;
         border-top: none;        
         visibility: visible;
         opacity: 1;
@@ -178,19 +183,21 @@ export const Layout = styled.div<LayoutProps>`
       
       ${Container} {
         border-radius: 4px 4px 0 0;
-        border: 1px solid ${props.theme['highlighted']};
+        border: 1px solid ${props.theme["highlighted"]};
         border-bottom: none;
       }
     `,
-    `
+      `
       ${Container} {
         border: 1px solid transparent;
-        box-shadow: 0 0 0 1px ${props.theme['neutral600']};;
+        box-shadow: 0 0 0 1px ${props.theme["neutral600"]};;
       }
     `,
-  )}
+    )}
   
-    ${styledIf(isSmallSelect(props.size), `
+    ${styledIf(
+      isSmallSelect(props.size),
+      `
       ${Arrow} {
         width: 10px;
         height: 5.84px;
@@ -212,9 +219,11 @@ export const Layout = styled.div<LayoutProps>`
         padding: 7.67px 12.88px;
       }
     `,
-  )}
+    )}
     
-    ${styledIf(isNormalSelect(props.size),`
+    ${styledIf(
+      isNormalSelect(props.size),
+      `
       ${Arrow} {
         width: 12px;
         height: 7px;
@@ -236,7 +245,9 @@ export const Layout = styled.div<LayoutProps>`
         padding: 10px 13.86px;
       }
       
-    ${styledIf(props.collapsed, `
+    ${styledIf(
+      props.collapsed,
+      `
       ${Container} {
         min-width: 0;
         padding: 2px 9px;
@@ -247,17 +258,19 @@ export const Layout = styled.div<LayoutProps>`
       `,
     )}
     `,
-  )}
+    )}
     
-    ${styledIf(isLargeSelect(props.size),`
+    ${styledIf(
+      isLargeSelect(props.size),
+      `
       ${Arrow} {
         width: 20px;
         height: 12px;
       }
       
       ${LeftElementIcon} {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
       }
       
       ${Value}, ${ItemCaption} {
@@ -271,15 +284,30 @@ export const Layout = styled.div<LayoutProps>`
         padding: 19.33px 33.77px;
       }
     `,
-  )}
+    )}
     
-    ${styledIf(props.fullWidth,
-    `
+    ${styledIf(
+      props.fullWidth,
+      `
       width: 100%;
       ${Container} {
         width: 100%;
       }
       `,
+    )}
+    ${styledIf(
+      props.maxHeight,
+      `
+      ${Container} {
+        max-height: ${props.maxHeight}px;
+      }`,
+    )}
+    ${styledIf(
+      props.transparent,
+      `
+      ${Container} {
+        background: transparent;
+      }`,
     )}
   `}
 `;

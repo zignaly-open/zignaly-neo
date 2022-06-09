@@ -10,5 +10,5 @@ export const Layout = styled.div`
 export const Icon = styled.div`
   margin-right: 8px;
   display: flex;
-  items-align: center;
+  align-items: center;
 `;

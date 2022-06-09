@@ -23,7 +23,7 @@ export const Layout = styled.div<any>`
 
   ${({ width, padding }: any) => `
     width: ${getWidth(width)}px;
-    padding: ${padding ?? "48px 56px"};
+    padding: ${padding ?? "40px 56px"};
   `};
   user-select: none;
 `;

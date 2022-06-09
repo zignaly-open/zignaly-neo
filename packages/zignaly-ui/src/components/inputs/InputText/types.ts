@@ -19,4 +19,5 @@ export interface InputTextProps {
   type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
   name?: string;
   multiline?: boolean;
+  onClickRightSideElement?: Function | null;
 }
