@@ -114,7 +114,7 @@ const coins = [
 ];
 
 export default {
-  title: "Modals/MyAccountDepositModal",
+  title: "Modals/MyAccount/DepositModal",
   component: MyAccountDepositModal,
 } as ComponentMeta<typeof MyAccountDepositModal>;
 

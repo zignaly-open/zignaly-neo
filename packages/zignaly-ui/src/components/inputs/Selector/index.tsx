@@ -25,6 +25,8 @@ import CaretDownIcon from "assets/icons/caret-down-icon.svg?url";
 
 // Types
 import { OptionItem, SelectProps, SelectSizes } from "./types";
+import { dark } from "theme";
+import Typography from "components/display/Typography";
 
 function Select({
   name,
@@ -76,7 +78,13 @@ function Select({
       maxHeight={maxHeight}
       transparent={transparent}
     >
-      {label && <Label htmlFor={name}>{label}</Label>}
+      {label && (
+        <Label htmlFor={name}>
+          <Typography variant="inputl" color="neutral200">
+            {label}
+          </Typography>
+        </Label>
+      )}
       <Container onClick={() => setMenuActive(!isActiveMenu)}>
         {mode !== "collapsed" &&
           (value ? (
@@ -96,7 +104,7 @@ function Select({
             <Placeholder>{placeholder}</Placeholder>
           ))}
         <ArrowContainer>
-          <Arrow src={CaretDownIcon} alt={label} />
+          <Arrow src={CaretDownIcon} alt={label} color={dark["neutral300"]} />
         </ArrowContainer>
       </Container>
       <Menu>
