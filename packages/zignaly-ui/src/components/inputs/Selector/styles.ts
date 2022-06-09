@@ -22,7 +22,7 @@ export const Label = styled.label`
 
 export const Container = styled.div`
   width: 100%;
-  background: #0c0d21;
+  background: #101225;
   border-radius: 4px;
   user-select: none;
   cursor: pointer;

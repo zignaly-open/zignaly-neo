@@ -149,6 +149,7 @@ interface LayoutProps {
     active: string;
   };
   disabled: boolean;
+  shrinkWrap?: boolean;
 }
 
 export const Layout = styled.div`
@@ -412,21 +413,28 @@ export const ViewPort = styled.button<LayoutProps>`
   ${styledIf(
     isFlatButton(props.variant),
     `
+      ${styledIf(
+        props.shrinkWrap,
+        `
+        padding: 0;
+        ${Container}{
+            padding: 0;
+          margin: 0;
+          width: 100%;
+          height: 100%;
+          }
+        ${IconContainer} {
+          padding: 0;
+          margin: 0;
+          width: 100%;
+          height: 100%;
+        }
+        `,
+      )} 
       ${Container} {
         transition: all 0.2s linear;
-        border: 1px solid transparent;
+        border: none;
         background: transparent;
-             
-        &:enabled:hover {
-          border: 1px dashed #4A4958;
-          background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
-          transition: all 0.1s linear;
-          
-          ${Icon} {
-            color: #fff;
-            text-shadow: 0px 12px 16px rgba(25, 25, 39, 0.36);
-          }
-        }
       }
       
       &:enabled:focus:not(:focus-visible) {
@@ -459,42 +467,18 @@ export const ViewPort = styled.button<LayoutProps>`
 
       &:enabled {
         ${Container} {
-          &:before {
-            border-radius: inherit;
-            background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.48) 0%, rgba(69, 64, 193, 0.48) 100%);
-            content: '';    
-            display: block;
-            height: 100%;
-            position: absolute;
-            top: 0; 
-            left: 0;
-            opacity: 0;
-            width: 100%;
-            z-index: 1;
-            transition: all 0.1s linear;
-          }
+          background: none;
         }
       }
       
       &:enabled:active {
         transition: all 0.21 linear;
         ${Container} {
-          border: 1px solid white;
-      }
-            
-      ${Icon} {
-        top: 0;
-        right: 0;
-      }
+          border: none;
+      } 
     `,
   )}  
   
-  ${Icon} {
-    svg {
-      fill: #706f82;
-      stroke: #706f82;
-    }
-  }
   
   ${styledIf(
     props.isActiveDropdown,

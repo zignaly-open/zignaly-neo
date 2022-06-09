@@ -24,6 +24,7 @@ import Typography from "../Typography";
 export default {
   title: "Display/Table",
   component: Table,
+  decorators: [(story) => <div style={{ paddingBottom: "2rem" }}>{story()}</div>],
 } as ComponentMeta<typeof Table>;
 
 const Template: ComponentStory<typeof Table> = (args) => <Table {...args} />;
@@ -36,6 +37,7 @@ export const MyCoins = Template.bind({});
 MyCoins.args = {
   type: "pagedWithData",
   hideOptionsButton: false,
+  hasFooter: true,
   initialState: {
     sortBy: [
       {

@@ -62,8 +62,8 @@ export const TableView = styled.table<{ isUserTable: boolean; hasFooter?: boolea
   border-spacing: 0;
   overflow: hidden;
   width: 100%;
-  background: rgba(19, 18, 37, 0.4);
   thead {
+    background: rgba(19, 18, 37, 0.4);
     height: 56px;
     user-select: none;
     background: #06061a;
@@ -74,6 +74,7 @@ export const TableView = styled.table<{ isUserTable: boolean; hasFooter?: boolea
   }
 
   tbody {
+    background: rgba(19, 18, 37, 0.4);
     td {
       letter-spacing: 0;
       color: #f3f4f6;

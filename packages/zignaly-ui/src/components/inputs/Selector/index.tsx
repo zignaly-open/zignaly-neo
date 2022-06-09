@@ -106,7 +106,7 @@ function Select({
         <ArrowContainer>
           <Arrow src={CaretDownIcon} alt={label} color={dark["neutral300"]} />
         </ArrowContainer>
-      </Container>
+      </Container>{" "}
       <Menu>
         {!options.length ? (
           <Item empty={true}>

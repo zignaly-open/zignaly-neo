@@ -1,19 +1,21 @@
-import React, {useCallback, useRef, useState} from "react";
-import {usePagination, useSortBy, useTable} from "react-table";
+import React, { useCallback, useRef, useState } from "react";
+import { usePagination, useSortBy, useTable } from "react-table";
 
 // Styles
 import {
-    ColumnsSelector,
-    HeaderRow, IconContainer,
-    Layout,
-    OptionItem,
-    OptionList, SortIcon,
-    TableView,
-    TextContainer,
-    ThView,
-    View
+  ColumnsSelector,
+  HeaderRow,
+  IconContainer,
+  Layout,
+  OptionItem,
+  OptionList,
+  SortIcon,
+  TableView,
+  TextContainer,
+  ThView,
+  View,
 } from "../../styles";
-import {dark} from "../../../../../theme";
+import { dark } from "../../../../../theme";
 
 // Components
 import Typography from "../../../Typography";
@@ -22,250 +24,332 @@ import IconButton from "../../../../inputs/IconButton";
 
 // Assets
 import OptionsDotsIcon from "../../../../../assets/icons/option-dots-icon.svg";
+import SingleChevron from "assets/icons/chevron-small-icon.svg";
+import DoubleChevron from "assets/icons/double-chevron-small-icon.svg";
 
 // Types
-import {TableBasicProps} from "../../types";
+import { TableBasicProps } from "../../types";
+import {
+  FooterContainer,
+  IconButtonContainer,
+  PageNumberContainer,
+  Row,
+  SelectorContainer,
+  SelectorSizing,
+} from "./styles";
+import Selector from "components/inputs/Selector";
 
 export default function PagedWithDataTable({
-    columns = [],
-    data = [],
-    onColumnHidden = () => {},
-    defaultHiddenColumns,
-    hideOptionsButton,
-    isUserTable,
-    initialState = {},
-    hasFooter = false
- }: TableBasicProps) {
-    // Refs
-    const tableRef = useRef(null);
+  columns = [],
+  data = [],
+  onColumnHidden = () => {},
+  defaultHiddenColumns,
+  hideOptionsButton,
+  isUserTable,
+  initialState = {},
+  hasFooter = true,
+}: TableBasicProps) {
+  // Refs
+  const tableRef = useRef(null);
 
-    // States
-    const [hiddenColumns, setHiddenColumns] = useState<string[]>(defaultHiddenColumns || []);
+  // States
+  const [hiddenColumns, setHiddenColumns] = useState<string[]>(defaultHiddenColumns || []);
 
-    // Hooks
+  // Hooks
+  // @ts-ignore
+  const {
+    getTableProps,
+    getTableBodyProps,
     // @ts-ignore
-    const { getTableProps, getTableBodyProps, page, headerGroups, footerGroups, toggleHideColumn, prepareRow, gotoPage, nextPage, previousPage, canNextPage, canPreviousPage, pageOptions, pageCount, setPageSize, state: { pageIndex, pageSize } } = useTable({
-            columns,
-            data,
-            initialState
-        },
-        useSortBy,
-        usePagination
-    );
+    page,
+    headerGroups,
+    toggleHideColumn,
+    prepareRow,
+    // @ts-ignore
+    gotoPage,
+    // @ts-ignore
+    nextPage,
+    // @ts-ignore
+    previousPage,
+    // @ts-ignore
+    canNextPage,
+    // @ts-ignore
+    canPreviousPage,
+    // @ts-ignore
+    pageOptions,
+    // @ts-ignore
+    pageCount,
+    // @ts-ignore
+    setPageSize,
+    // @ts-ignore
+    state: { pageIndex, pageSize },
+  } = useTable(
+    {
+      columns,
+      data,
+      initialState,
+    },
+    useSortBy,
+    usePagination,
+  );
 
-    //const propsBasisUseTable = { getTableProps, getTableBodyProps, headerGroups, prepareRow, toggleHideColumn, page, gotoPage, nextPage, previousPage, canNextPage, canPreviousPage, pageOptions, state: { pageIndex } };
+  //const propsBasisUseTable = { getTableProps, getTableBodyProps, headerGroups, prepareRow, toggleHideColumn, page, gotoPage, nextPage, previousPage, canNextPage, canPreviousPage, pageOptions, state: { pageIndex } };
 
-    //const firstPageRows = rows.slice(0, 20);
+  //const firstPageRows = rows.slice(0, 20);
 
-    /**
-     * @function renderActionRow():
-     * @description Inject the action row on "column options" column.
-     */
-    const renderActionRow = useCallback(
-        (row: any, index: number) => {
-            if (data.find((e: any) => e.action)) {
-                return (
-                    <td className={"action"} key={`--table-row-cell-${index.toString()}`}>
-                        {/*@ts-ignore*/}
-                        {data[row.index].action}
-                    </td>
-                );
-            } else if (!hideOptionsButton) {
-                return (
-                    <td className={"action"} key={`--table-row-cell-${index.toString()}`}>
-                        {/*@ts-ignore*/}
-                        {""}
-                    </td>
-                );
-            }
-        },
-        [data],
-    );
-
-    const hideColumn = (column: string) => {
-        setHiddenColumns((prevState: any[]) => {
-            return [...prevState, column];
-        });
-        onColumnHidden(column, true);
-    };
-
-    const showColumn = (column: string) => {
-        setHiddenColumns((prevState) => prevState.filter((e) => e !== column));
-        onColumnHidden(column, false);
-    };
-
-    const renderColumnsSelector = useCallback(() => {
+  /**
+   * @function renderActionRow():
+   * @description Inject the action row on "column options" column.
+   */
+  const renderActionRow = useCallback(
+    (row: any, index: number) => {
+      if (data.find((e: any) => e.action)) {
         return (
-            <ColumnsSelector>
-                <Typography>Show/Hide Columns</Typography>
-                <OptionList>
-                    {columns.map((column: any, index) => {
-                        const isDisabled =
-                            hiddenColumns.length >= columns.length - 2 &&
-                            !hiddenColumns.find((e) => e === column.accessor);
-
-                        const isActive = !hiddenColumns.find((e) => e === column.accessor);
-
-                        return (
-                            <OptionItem key={`--options-container-${index.toString()}`}>
-                                <CheckBox
-                                    value={isActive}
-                                    label={column.Header ?? ""}
-                                    onChange={(isActive: boolean) => {
-                                        toggleHideColumn(column.accessor, !isActive);
-                                        if (!isActive) {
-                                            hideColumn(column.accessor);
-                                        } else {
-                                            showColumn(column.accessor);
-                                        }
-                                    }}
-                                    disabled={isDisabled}
-                                />
-                            </OptionItem>
-                        );
-                    })}
-                </OptionList>
-            </ColumnsSelector>
+          <td className={"action"} key={`--table-row-cell-${index.toString()}`}>
+            {/*@ts-ignore*/}
+            {data[row.index].action}
+          </td>
         );
-    }, [columns, hiddenColumns]);
-    return (
-        <Layout>
-            <View ref={tableRef}>
-                <TableView isUserTable={isUserTable} {...getTableProps()}>
-                    <thead>
-                    {headerGroups.map((headerGroup: any, index: number) => (
-                        <tr {...headerGroup.getHeaderGroupProps()} key={`--table-head-${index.toString()}`}>
-                            {headerGroup.headers.map((column: any, index: number) => (
-                                <ThView
-                                    {...column.getHeaderProps(column.getSortByToggleProps())}
-                                    key={`--table-head-row-${index.toString()}`}
-                                    isSorted={column.isSorted}
-                                >
-                                    <HeaderRow>
-                                        <TextContainer>
-                                            <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
-                                                {column.render("Header")}
-                                            </Typography>
-                                            <Typography color={"neutral400"} variant={"h5"} weight={"regular"}>
-                                                {column.headerWithFooter}
-                                            </Typography>
-                                        </TextContainer>
-                                        <IconContainer>
-                                            {index < headerGroup.headers.length && (
-                                                <SortIcon
-                                                    color={dark["neutral200"]}
-                                                    isSorted={column.isSorted}
-                                                    isSortedDesc={column.isSortedDesc}
-                                                    width={24}
-                                                    height={24}
-                                                />
-                                            )}
-                                        </IconContainer>
-                                    </HeaderRow>
-                                </ThView>
-                            ))}
-                            <th role={"row"}>
-                                <div style={{ display: "flex", justifyContent: "flex-end" }}>
-                                    {!hideOptionsButton && (
-                                        <IconButton
-                                            variant={"flat"}
-                                            icon={<OptionsDotsIcon color={dark["neutral200"]} />}
-                                            dropDownOptions={{
-                                                componentOverflowRef: tableRef,
-                                                alignment: "right",
-                                            }}
-                                            renderDropDown={renderColumnsSelector()}
-                                        />
-                                    )}
-                                </div>
-                            </th>
-                        </tr>
-                    ))}
-                    </thead>
-                    <tbody {...getTableBodyProps()}>
-                    {page.map((row: any, index: number) => {
-                        prepareRow(row);
-                        return (
-                            <tr key={`--firstPageRows-${index.toString()}`} {...row.getRowProps()}>
-                                {row.cells.map((cell: any, index: number) => (
-                                    <td
-                                        className={cell.column.id === "action" ? "action" : "row-td"}
-                                        {...cell.getCellProps()}
-                                        key={`--table-row-cell-${index.toString()}`}
-                                    >
-                                        <Typography variant="body2" weight="medium" color="neutral200">
-                                            {cell.render("Cell")}
-                                        </Typography>
-                                    </td>
-                                ))}
-                                {renderActionRow(row, index)}
-                            </tr>
-                        );
-                    })}
-                    </tbody>
-                    <tfoot>
-                        {hasFooter && footerGroups.map((group: any, index: number) => (
-                            <tr {...group.getFooterGroupProps()} key={`--table-foot-${index.toString()}`}>
-                                {group.headers.map((column: any, index: number) => (
-                                    <td {...column.getFooterProps()} key={`--table-foot-cell-${index.toString()}`}>{column.render('Footer')}</td>
-                                ))}
-                                <td className={"action"} key={`--table-foot-cell-${group.headers.length.toString()}`}>
-                                    {""}
-                                </td>
-                            </tr>
-                        ))}
-                        { data.length > 10 && (
-                            <tr>
-                                <td colSpan={Object.keys(data[0]).length}>
-                                    <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-                                        {'<<'}
-                                    </button>{' '}
-                                    <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-                                        {'<'}
-                                    </button>{' '}
+      } else if (!hideOptionsButton) {
+        return (
+          <td className={"action"} key={`--table-row-cell-${index.toString()}`}>
+            {/*@ts-ignore*/}
+            {""}
+          </td>
+        );
+      }
+    },
+    [data],
+  );
 
-                                    <button onClick={() => nextPage()} disabled={!canNextPage}>
-                                        {'>'}
-                                    </button>{' '}
-                                    <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-                                        {'>>'}
-                                    </button>{' '}
-                                    <span>
-                                  Page{' '}
-                                        <strong>
-                                    {pageIndex + 1} of {pageOptions.length}
-                                  </strong>{' '}
-                                </span>
-                                    <span>
-                                | Go to page:{' '}
-                                        <input
-                                            type="number"
-                                            defaultValue={pageIndex + 1}
-                                            onChange={e => {
-                                                const page = e.target.value ? Number(e.target.value) - 1 : 0;
-                                                gotoPage(page);
-                                            }}
-                                            style={{ width: '100px' }}
-                                        />
-                                </span>{' '}
-                                    <select
-                                        value={pageSize}
-                                        onChange={e => {
-                                            setPageSize(Number(e.target.value));
-                                        }}
-                                    >
-                                        {[10, 20, 30, 40, 50].map(pageSize => (
-                                            <option key={pageSize} value={pageSize}>
-                                                Show {pageSize}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </td>
-                            </tr>
-                        )}
-                    </tfoot>
-                </TableView>
-            </View>
-        </Layout>
+  const hideColumn = (column: string) => {
+    setHiddenColumns((prevState: any[]) => {
+      return [...prevState, column];
+    });
+    onColumnHidden(column, true);
+  };
+
+  const showColumn = (column: string) => {
+    setHiddenColumns((prevState) => prevState.filter((e) => e !== column));
+    onColumnHidden(column, false);
+  };
+
+  const customOptions = [
+    { index: 0, caption: "10" },
+    { index: 1, caption: "20" },
+    { index: 2, caption: "30" },
+    { index: 3, caption: "40" },
+    { index: 4, caption: "50" },
+  ];
+
+  const renderColumnsSelector = useCallback(() => {
+    return (
+      <ColumnsSelector>
+        <Typography>Show/Hide Columns</Typography>
+        <OptionList>
+          {columns.map((column: any, index) => {
+            const isDisabled =
+              hiddenColumns.length >= columns.length - 2 &&
+              !hiddenColumns.find((e) => e === column.accessor);
+
+            const isActive = !hiddenColumns.find((e) => e === column.accessor);
+
+            return (
+              <OptionItem key={`--options-container-${index.toString()}`}>
+                <CheckBox
+                  value={isActive}
+                  label={column.Header ?? ""}
+                  onChange={(isActive: boolean) => {
+                    toggleHideColumn(column.accessor, !isActive);
+                    if (!isActive) {
+                      hideColumn(column.accessor);
+                    } else {
+                      showColumn(column.accessor);
+                    }
+                  }}
+                  disabled={isDisabled}
+                />
+              </OptionItem>
+            );
+          })}
+        </OptionList>
+      </ColumnsSelector>
     );
+  }, [columns, hiddenColumns]);
+  return (
+    <Layout>
+      <View ref={tableRef}>
+        <TableView isUserTable={isUserTable} {...getTableProps()}>
+          <thead>
+            {headerGroups.map((headerGroup: any, index: number) => (
+              <tr {...headerGroup.getHeaderGroupProps()} key={`--table-head-${index.toString()}`}>
+                {headerGroup.headers.map((column: any, index: number) => (
+                  <ThView
+                    {...column.getHeaderProps(column.getSortByToggleProps())}
+                    key={`--table-head-row-${index.toString()}`}
+                    isSorted={column.isSorted}
+                  >
+                    <HeaderRow>
+                      <TextContainer>
+                        <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
+                          {column.render("Header")}
+                        </Typography>
+                        <Typography color={"neutral400"} variant={"h5"} weight={"regular"}>
+                          {column.headerWithFooter}
+                        </Typography>
+                      </TextContainer>
+                      <IconContainer>
+                        {index < headerGroup.headers.length && (
+                          <SortIcon
+                            color={dark["neutral200"]}
+                            isSorted={column.isSorted}
+                            isSortedDesc={column.isSortedDesc}
+                            width={24}
+                            height={24}
+                          />
+                        )}
+                      </IconContainer>
+                    </HeaderRow>
+                  </ThView>
+                ))}
+                <th role={"row"}>
+                  <div style={{ display: "flex", justifyContent: "flex-end" }}>
+                    {!hideOptionsButton && (
+                      <IconButton
+                        variant={"flat"}
+                        icon={<OptionsDotsIcon color={dark["neutral200"]} />}
+                        dropDownOptions={{
+                          componentOverflowRef: tableRef,
+                          alignment: "right",
+                        }}
+                        renderDropDown={renderColumnsSelector()}
+                      />
+                    )}
+                  </div>
+                </th>
+              </tr>
+            ))}
+          </thead>
+          <tbody {...getTableBodyProps()}>
+            {page.map((row: any, index: number) => {
+              prepareRow(row);
+              return (
+                <tr key={`--firstPageRows-${index.toString()}`} {...row.getRowProps()}>
+                  {row.cells.map((cell: any, index: number) => (
+                    <td
+                      className={cell.column.id === "action" ? "action" : "row-td"}
+                      {...cell.getCellProps()}
+                      key={`--table-row-cell-${index.toString()}`}
+                    >
+                      <Typography variant="body2" weight="medium" color="neutral200">
+                        {cell.render("Cell")}
+                      </Typography>
+                    </td>
+                  ))}
+                  {renderActionRow(row, index)}
+                </tr>
+              );
+            })}
+          </tbody>
+        </TableView>
+        {hasFooter && (
+          <FooterContainer>
+            <Row justifyContent="start">
+              <Typography variant="body1" color="neutral300" weight="regular">
+                Showing
+              </Typography>
+              <Typography variant="body1" color="neutral100">
+                {pageIndex + 1}
+              </Typography>
+              <Typography variant="body1" color="neutral300" weight="regular">
+                out of
+              </Typography>
+              <Typography variant="body1" color="neutral100">
+                {pageOptions.length}
+              </Typography>
+              <Typography variant="body1" color="neutral300" weight="regular">
+                items
+              </Typography>
+            </Row>
+            <Row justifyContent="center">
+              <IconButtonContainer
+                variant="flat"
+                size="xlarge"
+                rotate={true}
+                shrinkWrap={true}
+                icon={<DoubleChevron width={24} height={24} color={dark["neutral300"]} />}
+                onClick={() => gotoPage(0)}
+                disabled={!canPreviousPage}
+              ></IconButtonContainer>
+              <IconButtonContainer
+                variant="flat"
+                size="xlarge"
+                rotate={true}
+                shrinkWrap={true}
+                icon={<SingleChevron width={24} height={24} color={dark["neutral300"]} />}
+                onClick={() => previousPage()}
+                disabled={!canPreviousPage}
+              ></IconButtonContainer>
+              <Typography variant="body1" weight="regular" color="neutral300">
+                Page
+              </Typography>
+              <PageNumberContainer>
+                <Typography variant="h3" color="neutral100">
+                  {pageIndex + 1}
+                </Typography>
+              </PageNumberContainer>
+              <Typography variant="body1" weight="regular" color="neutral300">
+                out of
+              </Typography>
+              <Typography variant="body1" color="neutral100" weight="demibold">
+                {pageOptions.length}
+              </Typography>
+              <IconButtonContainer
+                variant="flat"
+                size="xlarge"
+                shrinkWrap={true}
+                onClick={() => nextPage()}
+                disabled={!canNextPage}
+                icon={<SingleChevron width={24} height={24} color={dark["neutral300"]} />}
+              ></IconButtonContainer>
+              <IconButtonContainer
+                variant="flat"
+                size="xlarge"
+                shrinkWrap={true}
+                onClick={() => gotoPage(pageCount - 1)}
+                disabled={!canNextPage}
+                icon={<DoubleChevron width={24} height={24} color={dark["neutral300"]} />}
+              ></IconButtonContainer>
+            </Row>
+            <Row justifyContent="end">
+              {data.length > 10 && (
+                <SelectorContainer>
+                  <Typography variant="body1" weight="regular" color="neutral300">
+                    Displaying
+                  </Typography>
+                  <SelectorSizing>
+                    <Selector
+                      options={customOptions}
+                      placeholder={
+                        <Typography variant="h3" color="neutral100">
+                          {pageSize}
+                        </Typography>
+                      }
+                      maxHeight={36}
+                      onChange={(e: { caption: string }) => {
+                        setPageSize(Number(e.caption));
+                      }}
+                    />
+                  </SelectorSizing>
+                  <Typography variant="body1" weight="regular" color="neutral300">
+                    items
+                  </Typography>
+                </SelectorContainer>
+              )}
+            </Row>
+          </FooterContainer>
+        )}
+      </View>
+    </Layout>
+  );
 }

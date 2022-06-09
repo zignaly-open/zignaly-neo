@@ -1,5 +1,12 @@
 // Dependencies
-import React, {useCallback, useMemo, useEffect, useRef, useState, useImperativeHandle} from "react";
+import React, {
+  useCallback,
+  useMemo,
+  useEffect,
+  useRef,
+  useState,
+  useImperativeHandle,
+} from "react";
 import { useClickAway, useWindowSize } from "react-use";
 import { Portal } from "react-portal";
 
@@ -10,22 +17,26 @@ import { Layout, ViewPort, Dropdown, Icon, Container, ButtonLoader, IconContaine
 import { IconButtonProps, defaultDropDownOptions } from "./types";
 import { LoaderTypes } from "components/display/Loader";
 
-const IconButton = ({
-  icon,
-  disabled = false,
-  size = "medium",
-  variant = "primary",
-  onClick = null,
-  loading = false,
-  dropDownOptions,
-  renderDropDown = null,
-  colors = {
-    normal: '#706f82',
-    active: '#fff'
-  },
-  className,
-  type,
-}: IconButtonProps, innerRef: any) => {
+const IconButton = (
+  {
+    shrinkWrap,
+    icon,
+    disabled = false,
+    size = "medium",
+    variant = "primary",
+    onClick = null,
+    loading = false,
+    dropDownOptions,
+    renderDropDown = null,
+    colors = {
+      normal: "#706f82",
+      active: "#fff",
+    },
+    className,
+    type,
+  }: IconButtonProps,
+  innerRef: any,
+) => {
   // Ref
   const options = {
     ...defaultDropDownOptions,
@@ -60,7 +71,7 @@ const IconButton = ({
   useImperativeHandle(innerRef, () => ({
     setIsDropDownActive: (isActive: boolean) => {
       setDropdownActive(isActive);
-    }
+    },
   }));
 
   useEffect(() => {
@@ -118,6 +129,7 @@ const IconButton = ({
   return (
     <Layout ref={layoutRef} className={className}>
       <ViewPort
+        shrinkWrap={shrinkWrap}
         type={type}
         size={size}
         variant={variant}
@@ -127,11 +139,7 @@ const IconButton = ({
       >
         <Container onClick={disabled ? null : renderDropDown ? handleClickButton : onClick}>
           {loading ? (
-            <ButtonLoader
-              type={LoaderTypes.TAILSPIN}
-              color="#9CA3AF"
-              ariaLabel="Loader"
-            />
+            <ButtonLoader type={LoaderTypes.TAILSPIN} color="#9CA3AF" ariaLabel="Loader" />
           ) : (
             <IconContainer>
               <Icon>{icon}</Icon>
