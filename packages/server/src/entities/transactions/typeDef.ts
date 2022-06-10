@@ -3,11 +3,11 @@ import { gql } from 'apollo-server-express';
 export const typeDef = gql`
   type UserBalance {
     id: ID!
-    balance: Int!
+    balance: String!
   }
 
   extend type Subscription {
-    balanceChanged: UserBalance
+    balanceChanged(token: String!): UserBalance
   }
 
   extend type Query {

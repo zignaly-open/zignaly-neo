@@ -4,10 +4,10 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import useAuthenticate, { useLogout } from '../../hooks/useAuthenticate';
-import useBalance from '../../hooks/useBalance';
 import useCurrentUser from '../../hooks/useCurrentUser';
+import HeaderBalance from './HeaderBalance';
 
 const StyledLogo = styled(Typography)`
   text-transform: uppercase;
@@ -55,7 +55,6 @@ const StyledMoto = styled(Typography)`
 const Header: React.FC = () => {
   const { t } = useTranslation('global');
   const navigate = useNavigate();
-  const { balance } = useBalance();
   const authenticate = useAuthenticate();
   const logout = useLogout();
   const { user: currentUser, loading } = useCurrentUser();
@@ -118,17 +117,7 @@ const Header: React.FC = () => {
 
       {!loading && !!currentUser?.id && (
         <Box textAlign={'center'} marginBottom={3}>
-          <Typography>
-            <Trans i18nKey={`balance:your-balance`} count={balance}>
-              <Typography
-                fontSize={20}
-                variant='body2'
-                color='secondary.light'
-                component='span'
-                fontWeight={600}
-              />
-            </Trans>
-          </Typography>
+          <HeaderBalance />
         </Box>
       )}
     </>

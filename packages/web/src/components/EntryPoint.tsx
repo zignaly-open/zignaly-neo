@@ -22,6 +22,7 @@ const httpLink = createHttpLink({
 
 const wsLink = new GraphQLWsLink(
   createClient({
+    shouldRetry: () => true,
     url: process.env.REACT_APP_GRAPHQL_WS ?? 'ws://localhost:4000/graphql',
   }),
 );

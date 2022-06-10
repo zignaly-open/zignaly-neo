@@ -3,6 +3,7 @@ import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from './constants';
 import { getUserBalance } from './util';
 import { withFilter } from 'graphql-subscriptions';
+import { getUserIdFromToken } from '../../util/jwt';
 
 export const resolvers = {
   Query: {
@@ -16,8 +17,8 @@ export const resolvers = {
     balanceChanged: {
       subscribe: withFilter(
         () => pubsub.asyncIterator([BALANCE_CHANGED]),
-        (payload, variables, { user }: ApolloContext) =>
-          +payload.id === +user.id,
+        (payload, variables) =>
+          getUserIdFromToken(variables.token) === payload.balanceChanged.id,
       ),
     },
   },

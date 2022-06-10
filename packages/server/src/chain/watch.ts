@@ -70,7 +70,6 @@ const handleEventTransfer = async (event: ChainEvent) => {
     where: { publicAddress: from.toLowerCase() },
     raw: true,
   });
-  console.error(user, from);
   if (!user) return;
   try {
     await Transaction.create({
@@ -79,7 +78,9 @@ const handleEventTransfer = async (event: ChainEvent) => {
       block: event.blockNumber,
       txHash: event.transactionHash,
     });
-    pubsub.publish(BALANCE_CHANGED, await getUserBalance(user.id));
+    pubsub.publish(BALANCE_CHANGED, {
+      balanceChanged: await getUserBalance(user.id),
+    });
     console.log(
       `${from} sent to ${to}: ${web3.utils.fromWei(
         value,
