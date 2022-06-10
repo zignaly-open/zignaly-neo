@@ -5,17 +5,20 @@
 MVP
 - [x] Sockets
 - [x] Proper Database connection - Postgres
-- [ ] Balance processing
+- [x] Balance processing
 - [x] Auctions -> DB
 - [x] Bidding system
+- [ ] Bidding system that withdraws and freezes funds
+- [ ] Multi-winner
 
 
 A little bit later
+- [ ] Server eslint
 - [ ] Manage Profile
 - [ ] Winner payouts
 - [ ] At least half-decent design
 
 Later:
-- [ ] PubSub -> Redis os Kafka
+- [ ] PubSub -> Redis or Kafka
 - [ ] DB Indices
 - [ ] Security Audit
