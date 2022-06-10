@@ -8,6 +8,7 @@ export type TokenItem = {
 
 export interface InputAmountProps {
   label: string;
+  labelBalance?: string;
   value: BigNumberish;
   onChange: Function;
   onBlur?: ChangeEventHandler<HTMLInputElement>;
