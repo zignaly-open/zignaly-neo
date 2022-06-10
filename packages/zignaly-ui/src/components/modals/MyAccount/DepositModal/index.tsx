@@ -5,14 +5,14 @@ import { SelectSizes } from "components/inputs/Selector/types";
 import React, { useCallback, useState } from "react";
 import { Gap } from "utils/gap";
 import ModalContainer from "../../ModalContainer";
-import { Column, QRCodeContainer, SelectorContainer } from "./styles";
+import { Column, SelectorContainer } from "./styles";
 import CloneIcon from "assets/icons/clone-icon.svg";
 import { dark } from "theme";
 import TextButton from "components/inputs/TextButton";
-import { QRCodeCanvas } from "qrcode.react";
 import { CoinOption, MyAccountDepositModalProps, NetworkOption } from "../types";
 import ErrorMessage from "components/display/ErrorMessage";
 import { Row } from "utils/row";
+import ZignalyQRCode from "components/display/ZignalyQRCode";
 
 const MyAccountDepositModal = ({
   coins,
@@ -102,9 +102,7 @@ const MyAccountDepositModal = ({
           </Row>
           <Gap gap={28} />
           <Row justifyContent="center" gap={0}>
-            <QRCodeContainer>
-              <QRCodeCanvas size={160} value={network?.url ?? "www.zignaly.com"} />
-            </QRCodeContainer>
+            <ZignalyQRCode url={network?.url ?? "www.zignaly.com"} />
           </Row>
         </>
       );
