@@ -1,6 +1,6 @@
 {
   "success": "Success! Your balance will be updated as soon as the transaction is confirmed",
-  "your-balance": "Your balance: <0>{{ count }}</0>",
+  "your-balance": "Your balance: <0>{{balance}}</0>",
   "buy-bids": "Buy bids",
   "buy-bids-explainer": "We currently do not have a pricing system and blah-blah-blah",
   "buy-x-bids": "Buy {{count}} bids"

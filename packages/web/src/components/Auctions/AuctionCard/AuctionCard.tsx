@@ -10,7 +10,10 @@ import FinalCountdown from './FinalCountdown';
 import { getMinBid } from '../util';
 import { LoadingButton } from '@mui/lab';
 
-const Item = styled(Paper)<{
+const Item = styled(Paper, {
+  shouldForwardProp: (prop: string) =>
+    !['isActive', 'isWinning', 'isLosing'].includes(prop),
+})<{
   isActive: boolean;
   isWinning: boolean;
   isLosing: boolean;
@@ -73,7 +76,7 @@ const AuctionCard: React.FC<{
   onBid: () => void;
 }> = ({ auction, currentUserId, onBid, isPerformingAction }) => {
   const { t } = useTranslation('auction');
-  const isActive = auction.status === 'Active'; // need to do it this way, otherwise SB loader problems
+  const isActive = +new Date(auction.expiresAt) > Date.now();
   const [lastBidId, yourLastBidId] = [
     auction.bids?.[0]?.id,
     auction.userBid?.[0]?.id,

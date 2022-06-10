@@ -56,6 +56,7 @@ export default function useAuthenticate(): () => Promise<void> {
 
   useAsync(async () => {
     if (!account || !isOkToStart) return;
+    setIsOkToStart(false);
     const {
       data: {
         getOrCreateUser: { messageToSign },

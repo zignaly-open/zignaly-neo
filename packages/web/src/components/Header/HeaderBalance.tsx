@@ -1,14 +1,14 @@
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import { Trans } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import useBalance from '../../hooks/useBalance';
 
 const HeaderBalance: React.FC = () => {
   const { balance } = useBalance();
-
+  useTranslation('balance');
   return (
     <Typography>
-      <Trans i18nKey={`balance:your-balance`} count={balance}>
+      <Trans i18nKey={`balance:your-balance`} values={{ balance }}>
         <Typography
           fontSize={20}
           variant='body2'
