@@ -3,7 +3,7 @@ export enum AvatarSizes {
   MEDIUM = "medium",
   LARGE = "large",
   XLARGE = 'x-large',
-  XXLARGE = 'x-large'
+  XXLARGE = 'xx-large'
 }
 
 export type AvatarTypeProps = {

@@ -7,7 +7,7 @@ export const sizes = {
   [AvatarSizes.MEDIUM]: 26,
   [AvatarSizes.LARGE]: 36,
   [AvatarSizes.XLARGE]: 55,
-  [AvatarSizes.XXLARGE]: 77,
+  [AvatarSizes.XXLARGE]: 80,
 };
 
 export const Layout = styled.div`

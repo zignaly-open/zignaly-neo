@@ -35,8 +35,8 @@ export const InputValue = styled.input`
   color: ${dark["neutral100"]};
   outline: none;
   font-weight: 500;
-  font-size: 15px;
-  line-height: 24px;
+  font-size: 22px;
+  line-height: 36px;
   letter-spacing: 0.55px;
   width: 100%;
   font-family: "Avenir Next", sans-serif;
@@ -54,7 +54,6 @@ export const BalanceLabel = styled(Typography)`
 
 export const BalanceValue = styled(Typography)`
   color: ${({ theme }) => theme.neutral000};
-  font-weight: 600;
 `;
 
 export const MaxButton = styled.div`

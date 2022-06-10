@@ -142,12 +142,12 @@ function EditInvestmentWithModal({
     <ModalContainer title={"Edit Investment with"} width={784} onClickClose={onClickClose}>
       {/* Investor Details */}
       <Investor>
-        <Avatar size={"x-large"} image={investor.photoUrl} />
+        <Avatar size={"xx-large"} image={investor.photoUrl} />
         <InvestorData>
-          <InvestorName variant={"h1"} color={"neutral000"}>
+          <InvestorName variant={"h2"} color={"neutral100"}>
             {investor.name}
           </InvestorName>
-          <InvestorSuccessFee variant={"body2"} color={"neutral300"}>
+          <InvestorSuccessFee variant={"h3"} color={"neutral400"}>
             {investor.successFee}% Success fee
           </InvestorSuccessFee>
         </InvestorData>
@@ -160,15 +160,11 @@ function EditInvestmentWithModal({
       <Form onSubmit={handleSubmit(onAmountSubmit)}>
         <Field>
           <Row>
-            <Typography variant={"labelm"}>Amount Invested</Typography>
+            <Typography variant={"body1"}>Amount Invested</Typography>
             <AmountInvested>
               <CoinIcon name={"Ethereum"} coin={coin.id} />
               <TokenValue>
-                <Typography
-                  variant={"bigNumber"}
-                  className={"investmentAmount"}
-                  color={"neutral100"}
-                >
+                <Typography variant={"bigNumber"} color={"neutral100"}>
                   <NumberFormat
                     value={utils.formatUnits((amountInvested || "0").toString())}
                     displayType={"text"}

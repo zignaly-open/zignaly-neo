@@ -15,6 +15,7 @@ const getWeight = (weight: string) => {
 export const Layout = styled.h1<{ color: string; underline: boolean; weight: string }>`
   font-family: "Avenir next", "Red Hat Text", sans-serif;
   margin: 0;
+  padding: 0;
   font-weight: 500;
 
   &.h1 {

@@ -20,6 +20,10 @@ export const InputValue = styled.input`
   resize: none;
 `;
 
+export const IconContainer = styled.div`
+  margin-right: 16px;
+`;
+
 export const Side = styled.div<{ cursor: "auto" | "pointer" }>`
   display: flex;
   flex-direction: row;
@@ -33,7 +37,7 @@ export const Side = styled.div<{ cursor: "auto" | "pointer" }>`
   }
 `;
 
-export const InputContainer = styled.div`
+export const InputContainer = styled.div<{ withoutBorder?: boolean }>`
   border: 1px solid #35334a;
   padding: 12px 24px;
   min-height: 60px;
@@ -44,6 +48,13 @@ export const InputContainer = styled.div`
   margin-top: 4px;
   gap: 22px;
   margin-bottom: 10px;
+  ${(props) =>
+    `${styledIf(
+      props.withoutBorder,
+      `
+      border: none
+  `,
+    )}`}
 `;
 
 type LayoutProps = {

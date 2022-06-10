@@ -70,9 +70,6 @@ export const TokenValue = styled.div`
   align-items: center;
   gap: 8px;
 
-  .investmentAmount {
-    font-size: 18px;
-  }
 `;
 
 export const Actions = styled.div`

@@ -95,7 +95,7 @@ const MyAccountDepositModal = ({
   const ErrorAndQRCode = () => {
     if (network !== undefined && network.depositEnable === true) {
       return (
-        <div>
+        <>
           <Row gap={14}>
             <ErrorMessage text={"Only send " + network?.name + " tokens to this address"} />
             <TextButton color="links" caption={"Not Sure?"} onClick={() => notSureOnClick()} />
@@ -106,7 +106,7 @@ const MyAccountDepositModal = ({
               <QRCodeCanvas size={160} value={network?.url ?? "www.zignaly.com"} />
             </QRCodeContainer>
           </Row>
-        </div>
+        </>
       );
     } else if (network?.depositEnable === false) {
       return <ErrorMessage text={"Deposit is not avaliable on this network"} />;

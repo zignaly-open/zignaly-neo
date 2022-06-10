@@ -2,7 +2,7 @@
 import React, { useCallback, useRef, useState } from "react";
 
 // Styled Components
-import { Layout, InputContainer, InputValue, Side } from "./styles";
+import { Layout, InputContainer, InputValue, Side, IconContainer } from "./styles";
 import { InputTextProps } from "./types";
 
 import ErrorMessage from "components/display/ErrorMessage";
@@ -24,6 +24,8 @@ function InputText(
     name,
     multiline,
     onClickRightSideElement = null,
+    leftSideElement,
+    withoutBorder = false,
   }: InputTextProps,
   inputRef: React.Ref<any>,
 ) {
@@ -44,8 +46,9 @@ function InputText(
       <Typography variant="h3" weight="regular" color="neutral200">
         {label}
       </Typography>
-      <InputContainer>
+      <InputContainer withoutBorder={withoutBorder}>
         <Side cursor="auto">
+          <IconContainer>{leftSideElement}</IconContainer>
           <InputValue
             as={multiline ? "textarea" : "input"}
             readOnly={readOnly}

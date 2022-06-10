@@ -1,4 +1,4 @@
-import { ChangeEventHandler, ReactElement } from "react";
+import React, { ChangeEventHandler, ReactElement } from "react";
 export interface InputTextProps {
   placeholder?: string;
   onBlur?: ChangeEventHandler<HTMLInputElement>;
@@ -20,4 +20,6 @@ export interface InputTextProps {
   name?: string;
   multiline?: boolean;
   onClickRightSideElement?: Function | null;
+  leftSideElement?: ReactElement | null;
+  withoutBorder?: boolean;
 }

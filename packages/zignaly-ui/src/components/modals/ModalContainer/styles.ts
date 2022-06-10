@@ -54,15 +54,19 @@ export const Header = styled.div`
 
 export const HeaderButton = styled.button<any>`
   border: 0;
+  padding: 0;
+  margin: 0;
+  height: 32px;
+  width: 32px;
   background: transparent;
   border: none;
   cursor: pointer;
 
   ${({ theme }) => `
     svg { 
-      fill: ${theme["neutral500"]};
-      width: 26px;
-      height: 26px;
+      fill: ${theme["neutral300"]};
+      width: 32px;
+      height: 32px;
     }
   `}
 `;
