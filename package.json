@@ -12,7 +12,7 @@
     "start": "cd packages/server && yarn start"
   },
   "engines": {
-    "node": "^14"
+    "node": "^16"
   },
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
   "license": "ISC",

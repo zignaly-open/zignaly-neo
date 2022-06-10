@@ -1,6 +1,8 @@
 import { gql, useLazyQuery, useMutation } from '@apollo/client';
-import { getWeb3 } from '../util/web3';
 import { setToken } from '../util/token';
+import { useEthers } from '@usedapp/core';
+import { useAsync } from 'react-use';
+import { useState } from 'react';
 
 export const GET_CURRENT_USER = gql`
   query me {
@@ -37,7 +39,9 @@ function useRefetchCurrentUser(): () => Promise<unknown> {
 
 export function useLogout(): () => Promise<void> {
   const fetchUser = useRefetchCurrentUser();
+  const { deactivate } = useEthers();
   return async () => {
+    deactivate();
     setToken('');
     await fetchUser();
   };
@@ -46,43 +50,37 @@ export function useLogout(): () => Promise<void> {
 export default function useAuthenticate(): () => Promise<void> {
   const [getOrCreateUser] = useMutation(GET_OR_CREATE_USER);
   const [authenticate] = useMutation(AUTHENTICATE_METAMASK);
+  const [isOkToStart, setIsOkToStart] = useState(false);
   const fetchUser = useRefetchCurrentUser();
+  const { account, activateBrowserWallet, library } = useEthers();
 
+  useAsync(async () => {
+    if (!account || !isOkToStart) return;
+    const {
+      data: {
+        getOrCreateUser: { messageToSign },
+      },
+    } = await getOrCreateUser({
+      variables: { publicAddress: account.toLocaleLowerCase() },
+    });
+
+    const signature = await library.getSigner().signMessage(messageToSign);
+
+    const {
+      data: {
+        authenticate: { accessToken },
+      },
+    } = await authenticate({
+      variables: { publicAddress: account.toLocaleLowerCase(), signature },
+    });
+
+    setToken(accessToken);
+    await fetchUser();
+  }, [account, isOkToStart]);
+
+  // TODO: error handling
   return async () => {
-    try {
-      const web3 = await getWeb3();
-      const publicAddress = (await web3.eth.getCoinbase()).toLowerCase();
-      if (publicAddress) {
-        const {
-          data: {
-            getOrCreateUser: { messageToSign },
-          },
-        } = await getOrCreateUser({
-          variables: { publicAddress },
-        });
-
-        const signature = await web3!.eth.personal.sign(
-          messageToSign,
-          publicAddress,
-          '', // MetaMask will ignore the password argument here
-        );
-
-        const {
-          data: {
-            authenticate: { accessToken },
-          },
-        } = await authenticate({
-          variables: { publicAddress, signature },
-        });
-
-        setToken(accessToken);
-        await fetchUser();
-      }
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.error(e);
-      // TODO: good notifications
-      alert('In order to use the app you need to authenticate with Metamask');
-    }
+    setIsOkToStart(true);
+    !account && activateBrowserWallet();
   };
 }
