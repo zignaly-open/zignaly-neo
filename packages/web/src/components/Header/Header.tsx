@@ -106,9 +106,14 @@ const Header: React.FC = () => {
               {t('log-in')}
             </Button>
           ) : (
-            <Button variant={'text'} onClick={logout}>
-              {t('log-out')}
-            </Button>
+            <>
+              <Button variant={'text'} onClick={() => navigate('/deposit')}>
+                {t('buy-bids')}
+              </Button>
+              <Button variant={'text'} onClick={logout}>
+                {t('log-out')}
+              </Button>
+            </>
           ))}
       </Box>
     </>

@@ -14,6 +14,7 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { setContext } from '@apollo/client/link/context';
 import { getToken } from '../util/token';
+import { DAppProvider, Mainnet, Rinkeby } from '@usedapp/core';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
@@ -54,12 +55,25 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
+const config = {
+  // TODO
+  readOnlyChainId: Rinkeby.chainId,
+  readOnlyUrls: {
+    [Mainnet.chainId]:
+      'https://mainnet.infura.io/v3/' + process.env.REACT_APP_INFURA_PROJECT_ID,
+    [Rinkeby.chainId]:
+      'https://rinkeby.infura.io/v3/' + process.env.REACT_APP_INFURA_PROJECT_ID,
+  },
+};
+
 function EntryPoint() {
   return (
     <ThemeProvider theme={theme}>
-      <ApolloProvider client={client}>
-        <Routes />
-      </ApolloProvider>
+      <DAppProvider config={config}>
+        <ApolloProvider client={client}>
+          <Routes />
+        </ApolloProvider>
+      </DAppProvider>
     </ThemeProvider>
   );
 }

@@ -1,0 +1,6 @@
+{
+  "success": "Success!",
+  "buy-bids": "Buy bids",
+  "buy-bids-explainer": "We currently do not have a pricing system and blah-blah-blah",
+  "buy-x-bids": "Buy {{count}} bids"
+}
