@@ -18,6 +18,7 @@ const sequelize = new Sequelize(postgresUrl, {
 });
 
 // persist models to the database
-sequelize.sync();
+// TODO: maybe alter is not good on prod
+sequelize.sync({ alter: true });
 
 export { sequelize };

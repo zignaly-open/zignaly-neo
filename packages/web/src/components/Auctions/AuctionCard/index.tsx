@@ -1,10 +1,10 @@
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import React from 'react';
 import { AuctionType } from '@zigraffle/shared/types';
 import { BID_AUCTION } from '../queries';
 import AuctionCardComponent from './AuctionCard';
-import { GET_CURRENT_USER } from '../../../hooks/useAuthenticate';
 import { getMinBid } from '../util';
+import useCurrentUser from '../../../hooks/useCurrentUser';
 
 // states
 // - winning
@@ -17,15 +17,14 @@ const AuctionCard: React.FC<{
   auction: AuctionType;
 }> = ({ auction }) => {
   const [bid, { loading: isBidding }] = useMutation(BID_AUCTION);
-  const { data: currentUser, loading: isGettingUserInfo } =
-    useQuery(GET_CURRENT_USER);
+  const { user: currentUser, loading: isGettingUserInfo } = useCurrentUser();
   return (
     <AuctionCardComponent
       auction={auction}
-      currentUserId={currentUser?.me?.id}
+      currentUserId={currentUser?.id}
       isPerformingAction={isBidding || isGettingUserInfo}
       onBid={() => {
-        currentUser?.me?.id
+        currentUser?.id
           ? bid({
               variables: {
                 id: auction.id,

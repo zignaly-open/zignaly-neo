@@ -10,6 +10,8 @@ import http from 'http';
 import './db';
 import * as auctions from './entities/auctions';
 import * as users from './entities/users';
+import * as transactions from './entities/transactions';
+import listenToChain from './chain/watch';
 import { expressjwt, Request as AuthorizedRequest } from 'express-jwt';
 import { algorithm, secret } from '../config';
 import { makeExecutableSchema } from '@graphql-tools/schema';
@@ -36,8 +38,8 @@ const port = process.env.PORT || 4000;
   const httpServer = http.createServer(app);
 
   const schema = makeExecutableSchema({
-    typeDefs: [typeDef, auctions.typeDef, users.typeDef],
-    resolvers: [auctions.resolvers, users.resolvers],
+    typeDefs: [typeDef, auctions.typeDef, users.typeDef, transactions.typeDef],
+    resolvers: [auctions.resolvers, users.resolvers, transactions.resolvers],
   });
 
   const wsServer = new WebSocketServer({
@@ -78,7 +80,7 @@ const port = process.env.PORT || 4000;
 
   await server.start();
   server.applyMiddleware({ app });
-
+  listenToChain();
   await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
   console.log(
     `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`,

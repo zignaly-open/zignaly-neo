@@ -9,6 +9,12 @@ import {
 } from '../../config';
 import { AbiItem } from 'web3-utils';
 import { getLastProcessedBlock, setLastProcessedBlock } from './lastBlock';
+import { Transaction } from '../entities/transactions/model';
+import { User } from '../entities/users/model';
+// TODO: here's the problem and we cant run the watch script separately from the main app
+import pubsub from '../pubsub';
+import { BALANCE_CHANGED } from '../entities/transactions/constants';
+import { getUserBalance } from '../entities/transactions/util';
 
 const web3socket = new Web3(new Web3.providers.WebsocketProvider(rpcSocketUrl));
 const web3 = new Web3(new Web3.providers.HttpProvider(rpcUrl));
@@ -60,16 +66,31 @@ async function checkBlocks(from: number, to?: number) {
 const handleEventTransfer = async (event: ChainEvent) => {
   // Get the event parameters
   const { from, to, value } = event.returnValues;
-  console.error(
-    `${from} sent to ${to}: ${web3.utils.fromWei(
-      value,
-      'ether',
-    )} tokens at block: ${event.blockNumber} in transaction hash: ${
-      event.transactionHash
-    }`,
-  );
-
-  // TODO. implement shit
+  const user = await User.findOne({
+    where: { publicAddress: from.toLowerCase() },
+    raw: true,
+  });
+  console.error(user, from);
+  if (!user) return;
+  try {
+    await Transaction.create({
+      userId: user.id,
+      value: web3.utils.fromWei(value, 'ether'),
+      block: event.blockNumber,
+      txHash: event.transactionHash,
+    });
+    pubsub.publish(BALANCE_CHANGED, await getUserBalance(user.id));
+    console.log(
+      `${from} sent to ${to}: ${web3.utils.fromWei(
+        value,
+        'ether',
+      )} tokens at block: ${event.blockNumber} in transaction hash: ${
+        event.transactionHash
+      }`,
+    );
+  } catch (e) {
+    console.error(e);
+  }
 };
 
 export default async function watchTransactions() {

@@ -30,4 +30,12 @@ export class Transaction extends Model {
   @Default(0)
   @Column(DataType.DECIMAL)
   public value: string;
+
+  @Default(0)
+  @Column(DataType.INTEGER)
+  public block: number;
+
+  @Unique
+  @Column(DataType.STRING)
+  public txHash: string;
 }

@@ -4,12 +4,10 @@ import { styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTranslation } from 'react-i18next';
-import useAuthenticate, {
-  GET_CURRENT_USER,
-  useLogout,
-} from '../../hooks/useAuthenticate';
-import { useQuery } from '@apollo/client';
+import { Trans, useTranslation } from 'react-i18next';
+import useAuthenticate, { useLogout } from '../../hooks/useAuthenticate';
+import useBalance from '../../hooks/useBalance';
+import useCurrentUser from '../../hooks/useCurrentUser';
 
 const StyledLogo = styled(Typography)`
   text-transform: uppercase;
@@ -57,9 +55,10 @@ const StyledMoto = styled(Typography)`
 const Header: React.FC = () => {
   const { t } = useTranslation('global');
   const navigate = useNavigate();
+  const { balance } = useBalance();
   const authenticate = useAuthenticate();
   const logout = useLogout();
-  const { loading, data: currentUser } = useQuery(GET_CURRENT_USER);
+  const { user: currentUser, loading } = useCurrentUser();
 
   return (
     <>
@@ -90,7 +89,7 @@ const Header: React.FC = () => {
         {t('moto')}
       </StyledMoto>
 
-      <Box textAlign={'center'} margin={3}>
+      <Box textAlign={'center'} marginTop={3} marginBottom={1}>
         <Button variant={'text'} onClick={() => navigate('/')}>
           {t('home')}
         </Button>
@@ -101,7 +100,7 @@ const Header: React.FC = () => {
         {/*  {t('view-history')}*/}
         {/*</Button>*/}
         {!loading &&
-          (!currentUser?.me?.id ? (
+          (!currentUser?.id ? (
             <Button variant={'text'} onClick={authenticate}>
               {t('log-in')}
             </Button>
@@ -116,6 +115,22 @@ const Header: React.FC = () => {
             </>
           ))}
       </Box>
+
+      {!loading && !!currentUser?.id && (
+        <Box textAlign={'center'} marginBottom={3}>
+          <Typography>
+            <Trans i18nKey={`balance:your-balance`} count={balance}>
+              <Typography
+                fontSize={20}
+                variant='body2'
+                color='secondary.light'
+                component='span'
+                fontWeight={600}
+              />
+            </Trans>
+          </Typography>
+        </Box>
+      )}
     </>
   );
 };
