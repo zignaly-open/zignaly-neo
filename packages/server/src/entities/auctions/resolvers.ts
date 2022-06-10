@@ -1,4 +1,4 @@
-import { AuctionStatus } from '../../../../types/src/Auction';
+import { AuctionStatus } from '@zigraffle/shared/types';
 import pubsub from '../../pubsub';
 import { AUCTION_BID_ADDED } from './constants';
 import { Auction, AuctionBasketItem, AuctionBid } from './model';

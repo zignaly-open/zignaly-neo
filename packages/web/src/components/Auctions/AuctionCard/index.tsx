@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@apollo/client';
 import React from 'react';
-import { AuctionType } from '../../../../../types/src/Auction';
+import { AuctionType } from '@zigraffle/shared/types';
 import { BID_AUCTION } from '../queries';
 import AuctionCardComponent from './AuctionCard';
 import { GET_CURRENT_USER } from '../../../hooks/useAuthenticate';

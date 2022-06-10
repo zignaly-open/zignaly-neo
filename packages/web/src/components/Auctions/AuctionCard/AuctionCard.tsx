@@ -4,7 +4,7 @@ import { css, styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import React from 'react';
 import { useTranslation, Trans } from 'react-i18next';
-import { AuctionType, BasketItem } from '../../../../../types/src/Auction';
+import { AuctionType, BasketItem } from '@zigraffle/shared/types';
 import AuctionBasketItem from './AuctionBasketItem';
 import FinalCountdown from './FinalCountdown';
 import { getMinBid } from '../util';

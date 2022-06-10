@@ -1,7 +1,7 @@
 // TODO: put in README
 import { Algorithm } from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import erc20Abi from '../abis/abis/IERC20.json';
+import { IERC20 } from '@zigraffle/shared/abis';
 dotenv.config();
 
 export const algorithm = (process.env.ALGORITHM || 'HS256') as Algorithm;
@@ -15,4 +15,4 @@ export const rpcUrl = process.env.RPC_URL as string;
 export const rpcSocketUrl = process.env.RPC_SOCKET_URL as string;
 export const receivingAddress = process.env.RECEIVING_ACCOUNT as string;
 export const contractAddress = process.env.CONTRACT_ADDRESS as string;
-export const abi = erc20Abi;
+export const abi = IERC20;

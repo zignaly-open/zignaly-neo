@@ -1,6 +1,6 @@
 import Typography from '@mui/material/Typography';
 import React from 'react';
-import { BasketItem } from '../../../../../types/src/Auction';
+import { BasketItem } from '@zigraffle/shared/types';
 
 const AuctionBasketItem: React.FC<{ item: BasketItem }> = ({
   item: { ticker, amount },

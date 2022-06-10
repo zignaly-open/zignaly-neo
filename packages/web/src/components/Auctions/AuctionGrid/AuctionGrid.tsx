@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Masonry from '@mui/lab/Masonry';
-import { AuctionType } from '../../../../../types/src/Auction';
+import { AuctionType } from '@zigraffle/shared/types';
 import AuctionCard from '../AuctionCard';
 import { BIDS_SUBSCRIPTION, GET_AUCTIONS } from '../queries';
 
