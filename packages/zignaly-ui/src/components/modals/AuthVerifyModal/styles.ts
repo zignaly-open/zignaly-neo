@@ -7,7 +7,7 @@ export const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 22px;
+  gap: 42px;
 `;
 
 export const Title = styled.div`
@@ -15,5 +15,5 @@ export const Title = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-bottom: 22px;
+  margin-bottom: 42px;
 `;

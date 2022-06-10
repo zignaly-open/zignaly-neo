@@ -1,5 +1,5 @@
 // Dependencies
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Layout = styled.div`
   .input-box {
@@ -9,6 +9,7 @@ export const Layout = styled.div`
       background: #0f1124;
       border-color: #35334a !important;
       color: #fff;
+      font-family: "Avenir Next", "Red Hat Text", sans-serif;
     }
   }
 `;

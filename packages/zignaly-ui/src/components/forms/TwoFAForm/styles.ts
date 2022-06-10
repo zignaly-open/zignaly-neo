@@ -1,5 +1,5 @@
 // Dependencies
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Layout = styled.form`
   display: flex;
@@ -16,5 +16,4 @@ export const Field = styled.fieldset`
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin: 32px 0 0;
 `;

@@ -9,6 +9,7 @@ export type AuthVerifyModalProps = {
 
   // Handlers
   onReSendCode: Function;
+  onClickClose: Function;
   onTwoFactorSubmit: Function;
   onEmailSubmit: Function;
 };

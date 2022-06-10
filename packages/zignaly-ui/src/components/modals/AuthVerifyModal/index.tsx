@@ -22,17 +22,15 @@ function AuthVerifyModal({
   isLoadingTwoFAVerifyInput = false,
 
   // Handlers
+  onClickClose = () => {},
   onReSendCode = () => {},
   onTwoFactorSubmit = () => {},
   onEmailSubmit = () => {},
 }: AuthVerifyModalProps) {
   return (
-    <ModalContainer width={500} onClickClose={null}>
+    <ModalContainer width={500} onClickClose={onClickClose}>
       <Title>
-        {hasEmailVerified ||
-          ((isUnknownDevice || isDisabled) && (
-            <Typography variant={"h1"}>Confirm New Device</Typography>
-          ))}
+        <Typography variant={"h1"}>Confirm New Device</Typography>
       </Title>
       <Container>
         {hasEmailVerified ||
