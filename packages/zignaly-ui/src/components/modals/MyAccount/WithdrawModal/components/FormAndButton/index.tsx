@@ -4,7 +4,7 @@ import InputAmount from "components/inputs/InputAmount";
 import InputText from "components/inputs/InputText";
 import TextButton from "components/inputs/TextButton";
 import { ethers } from "ethers";
-import React from "react";
+import React, { useMemo } from "react";
 import { useCallback, useState } from "react";
 import { Gap } from "utils/gap";
 import { Row } from "utils/row";
@@ -23,44 +23,51 @@ const FormAndButton = ({
   let isValidAddress = false;
   let isValidAmount = false;
 
-  const withAddressChanged = useCallback((e: string) => {
-    setWithdrawAddress(e);
-    validateWithdrawAddress(e);
-    validateInput();
-    inputAddressOnChange(withdrawAddress);
-  }, []);
+  const withAddressChanged = (e: string) =>
+    useMemo(() => {
+      setWithdrawAddress(e);
+      validateWithdrawAddress(e);
+      validateInput();
+      inputAddressOnChange(withdrawAddress);
+    }, [e]);
 
-  const withdrawAmountChanged = useCallback((e: number) => {
-    setWithdrawAmount(e);
-    validateAmount(e);
-    validateInput();
-    inputAmountOnChange(withdrawAmount);
-  }, []);
+  const withdrawAmountChanged = (e: number) =>
+    useMemo(() => {
+      setWithdrawAmount(e);
+      validateAmount(e);
+      validateInput();
+      inputAmountOnChange(withdrawAmount);
+    }, [e]);
 
-  const validateAmount = useCallback((withdrawAmount: number) => {
-    if (withdrawAmount <= 0) {
-      isValidAmount = false;
-    } else {
-      isValidAmount = true;
-    }
-  }, []);
+  const validateAmount = useCallback(
+    (withdrawAmount: number) => {
+      if (withdrawAmount <= 0) {
+        isValidAmount = false;
+      } else {
+        isValidAmount = true;
+      }
+    },
+    [withdrawAmount],
+  );
 
-  const validateWithdrawAddress = useCallback((withdrawAddress: string) => {
-    if (withdrawAddress === "") {
-      isValidAddress = false;
-    } else {
-      isValidAddress = true;
-    }
-  }, []);
+  const validateWithdrawAddress = useCallback(
+    (withdrawAddress: string) => {
+      if (withdrawAddress === "") {
+        isValidAddress = false;
+      } else {
+        isValidAddress = true;
+      }
+    },
+    [withdrawAddress],
+  );
 
-  const validateInput = () => {
-    console.log(isValidAmount);
+  const validateInput = useCallback(() => {
     if (isValidAddress && isValidAmount) {
       setIsValidInput(true);
     } else {
       setIsValidInput(false);
     }
-  };
+  }, [isValidAddress, isValidAmount]);
 
   if (network !== undefined && coin !== undefined) {
     return (
