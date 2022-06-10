@@ -8,8 +8,8 @@ import {
 import express from 'express';
 import http from 'http';
 import './db';
-import * as auctions from './auctions';
-import * as users from './users';
+import * as auctions from './entities/auctions';
+import * as users from './entities/users';
 import { expressjwt, Request as AuthorizedRequest } from 'express-jwt';
 import { algorithm, secret } from '../config';
 import { makeExecutableSchema } from '@graphql-tools/schema';

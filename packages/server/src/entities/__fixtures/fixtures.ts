@@ -1,5 +1,5 @@
 import sequelizeFixtures from 'sequelize-fixtures';
-import '../db';
+import '../../db';
 import { Auction, AuctionBid, AuctionBasketItem } from '../auctions/model';
 
 const models = {

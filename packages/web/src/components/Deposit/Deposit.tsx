@@ -1,19 +1,20 @@
 import Typography from '@mui/material/Typography';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSendTransaction } from '@usedapp/core';
+import { useContractFunction } from '@usedapp/core';
 import { parseEther } from 'ethers/lib/utils';
 import { Alert, LoadingButton } from '@mui/lab';
 import WhiteContainer from '../common/WhiteContainer';
 import { Box } from '@mui/material';
+import contract from '../../contract';
 
 function Deposit() {
   const { t } = useTranslation('balance');
   // send money from
   // TODO: maybe move address to the code for security reasons i.e. so any changes will be visible in git history
-  const address: string = process.env.REACT_APP_RECEIVING_ACCOUNT as string;
-  const { sendTransaction, state } = useSendTransaction();
-  const value = '0.01337'; // TODO: user input
+  const address: string = process.env.REACT_APP_RECEIVING_ADDRESS as string;
+  const { state, send } = useContractFunction(contract, 'transfer');
+  const value = '100'; // TODO: user input
   if (!address) {
     throw new Error('Receiving address not defined');
   }
@@ -40,13 +41,10 @@ function Deposit() {
         variant={'contained'}
         loading={['PendingSignature', 'Mining'].includes(state?.status)}
         onClick={() => {
-          sendTransaction({
-            to: address,
-            value: parseEther(value),
-          });
+          send(address, parseEther(value));
         }}
       >
-        {t('buy-x-bids', { count: 100 })}
+        {t('buy-x-bids', { count: +value })}
       </LoadingButton>
     </WhiteContainer>
   );

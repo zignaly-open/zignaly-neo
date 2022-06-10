@@ -1,6 +1,6 @@
 import { User } from './model';
 import { authenticateSignature } from './util';
-import { ApolloContext } from '../types';
+import { ApolloContext } from '../../types';
 
 const generateNonceSignMessage = (nonce: string | number) =>
   `Please sign this message to verify it's you: ${nonce}`;

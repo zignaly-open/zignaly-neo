@@ -1,6 +1,6 @@
 import { recoverPersonalSignature } from 'eth-sig-util';
 import { bufferToHex } from 'ethereumjs-util';
-import { algorithm, secret } from '../../config';
+import { algorithm, secret } from '../../../config';
 import { generateUserNonce, User } from './model';
 import jwt from 'jsonwebtoken';
 

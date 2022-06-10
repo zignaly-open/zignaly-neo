@@ -1,10 +1,10 @@
-import { AuctionStatus } from '../../../types/src/Auction';
-import pubsub from '../pubsub';
+import { AuctionStatus } from '../../../../types/src/Auction';
+import pubsub from '../../pubsub';
 import { AUCTION_BID_ADDED } from './constants';
 import { Auction, AuctionBasketItem, AuctionBid } from './model';
 import { Includeable } from 'sequelize';
-import { ApolloContext, ContextUser } from '../types';
-import { auctionTtlPerBid } from '../../config';
+import { ApolloContext, ContextUser } from '../../types';
+import { auctionTtlPerBid } from '../../../config';
 import { User } from '../users/model';
 
 async function getAuctions(id: number, user: ContextUser) {

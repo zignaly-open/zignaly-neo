@@ -11,7 +11,7 @@ import {
   HasMany,
   BelongsTo,
 } from 'sequelize-typescript';
-import { AuctionStatus } from '../../../types/src/Auction';
+import { AuctionStatus } from '../../../../types/src/Auction';
 import { User } from '../users/model';
 import { Transaction } from '../transactions/model';
 

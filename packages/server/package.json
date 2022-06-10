@@ -1,17 +1,18 @@
 {
-  "name": "zigraffle-server",
+  "name": "@zigraffle/server",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "fixtures": "ts-node src/__fixtures/fixtures.ts",
+    "fixtures": "ts-node src/entities/__fixtures/fixtures.ts",
     "test": "NODE_ENV=test jest",
     "dev": "nodemon --ext \"ts,json\" --watch \"src/**\" --exec \"ts-node src/index.ts\""
   },
   "dependencies": {
     "@graphql-tools/schema": "^8.3.13",
+    "@slack/webhook": "^6.1.0",
     "apollo-server-core": "^3.8.2",
     "apollo-server-express": "^3.8.1",
     "compression": "^1.7.4",
@@ -42,6 +43,8 @@
     "sqlite3": "^5.0.8",
     "ts-node": "^10.8.0",
     "typescript": "^4.7.2",
+    "web3": "^1.7.3",
+    "web3-utils": "^1.7.3",
     "ws": "^8.7.0"
   },
   "devDependencies": {

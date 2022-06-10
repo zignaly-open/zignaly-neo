@@ -1,5 +1,5 @@
 import { ImportMock } from 'ts-mock-imports';
-import * as config from '../../config';
+import * as config from '../../../config';
 import { User } from './model';
 import { authenticateSignature, signJwtToken } from './util';
 
