@@ -98,7 +98,7 @@ const AuctionCard: React.FC<{
         padding={2}
         marginBottom={3}
       >
-        <Typography variant='body2' marginTop={0} marginBottom={1}>
+        <Typography variant='body2' marginTop={0} marginBottom={0.5}>
           {t('what-is-inside')}
         </Typography>
 
