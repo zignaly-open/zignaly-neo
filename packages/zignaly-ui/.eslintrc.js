@@ -35,7 +35,7 @@ module.exports = {
     "no-throw-literal": "off",
     "no-async-promise-executor": "off",
     "no-debugger": "off",
-    "multiline-ternary": ["error", "never"],
+    "multiline-ternary": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",
   },

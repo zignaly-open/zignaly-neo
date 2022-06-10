@@ -2,7 +2,7 @@ import Typography from "components/display/Typography";
 import InputText from "components/inputs/InputText";
 import Selector from "components/inputs/Selector";
 import { SelectSizes } from "components/inputs/Selector/types";
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Gap } from "utils/gap";
 import ModalContainer from "../../ModalContainer";
 import { Column, QRCodeContainer, SelectorContainer } from "./styles";
@@ -22,7 +22,7 @@ const MyAccountDepositModal = ({
   const [network, setNetwork] = useState<NetworkOption>();
   const [depositAddress, setDepositAddress] = useState<string>("");
 
-  const copyAddress = useMemo(() => {
+  const copyAddress = useCallback(() => {
     navigator.clipboard.writeText(depositAddress);
   }, [depositAddress]);
 

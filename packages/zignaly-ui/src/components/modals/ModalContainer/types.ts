@@ -5,6 +5,6 @@ export type ModalContainerProps = {
   title?: any;
   width?: "fullscreen" | "large" | "small" | number;
   customHeaderAction?: null | React.ReactElement;
-  onClickClose?: () => void;
+  onClickClose?: Function | null;
   onGoBack?: any;
 };

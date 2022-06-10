@@ -12,22 +12,23 @@ import ArrowLeftIcon from "assets/icons/arrow-left-icon.svg";
 import { ModalContainerProps } from "./types";
 
 function ModalContainer({
-  width = "large",
-  onClickClose,
   children,
   title = null,
-  customHeaderAction = null,
+  width = "large",
   onGoBack = null,
+  onClickClose = null,
+  customHeaderAction = null,
 }: ModalContainerProps) {
   const renderHeaderAction = useMemo(
     () =>
-      !customHeaderAction ? (
-        <HeaderButton onClick={onClickClose}>
-          <CloseIcon />
-        </HeaderButton>
-      ) : (
-        customHeaderAction
-      ),
+      !customHeaderAction
+        ? onClickClose &&
+          typeof onClickClose === "function" && (
+            <HeaderButton onClick={onClickClose}>
+              <CloseIcon />
+            </HeaderButton>
+          )
+        : customHeaderAction,
     [customHeaderAction],
   );
 

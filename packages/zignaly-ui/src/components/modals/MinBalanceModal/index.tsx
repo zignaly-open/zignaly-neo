@@ -32,7 +32,7 @@ function MinBalanceModal({
   }, []);
 
   return (
-    <ModalContainer title={"Min Balance"} width="small" onClickClose={onClickClose}>
+    <ModalContainer title={"Minimum balance"} width="small" onClickClose={onClickClose}>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <InputAmount
           label=""

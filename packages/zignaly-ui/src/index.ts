@@ -35,6 +35,10 @@ import { MarginContainer, PageContainer } from "./components/styled";
 // Modals
 import EditInvestmentWithModal from "./components/modals/EditInvestmentWithModal";
 import MessageModal from "./components/modals/MessageModal";
+import AuthVerifyModal from "./components/modals/AuthVerifyModal";
+import MinBalanceModal from "./components/modals/MinBalanceModal";
+import DepositModal from "./components/modals/MyAccount/DepositModal";
+import WithdrawModal from "./components/modals/MyAccount/WithdrawModal";
 
 // Icons
 import CloseIcon from "./assets/icons/close-icon.svg";
@@ -116,6 +120,10 @@ export {
   // Modals
   EditInvestmentWithModal,
   MessageModal,
+  AuthVerifyModal,
+  DepositModal,
+  WithdrawModal,
+  MinBalanceModal,
   /**
    * =-=-=-=-=-=-=-=
    *   Assets
