@@ -13,6 +13,8 @@ MVP
 
 
 A little bit later
+- [ ] Tests for the love of God
+- [ ] Toasts for errors
 - [ ] Server eslint
 - [ ] Manage Profile
 - [ ] Winner payouts

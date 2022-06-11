@@ -27,6 +27,7 @@ export const typeDef = gql`
     imageUrl: String
     status: String
     monetaryValue: String
+    bidFee: String
     startingBid: String
     minimalBid: String
     description: String

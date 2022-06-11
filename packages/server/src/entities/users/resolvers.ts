@@ -38,16 +38,20 @@ export const resolvers = {
     ) => {
       if (!publicAddress) return null;
 
+      let isNew = false;
+
       try {
         let user: User | null = await User.findOne({
           where: { publicAddress },
         });
         if (!user) {
+          isNew = true;
           user = await User.create({ publicAddress });
         }
 
         return {
           ...user.toJSON(),
+          isNew,
           messageToSign: generateNonceSignMessage(user.nonce),
         };
       } catch (e) {

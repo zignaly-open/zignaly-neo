@@ -7,6 +7,7 @@ import { AuctionType, BasketItem } from '@zigraffle/shared/types';
 import AuctionBasketItem from './AuctionBasketItem';
 import FinalCountdown from './FinalCountdown';
 import BidButton from './BidButton';
+import { getWinningLosingStatus } from './util';
 
 const Item = styled(Card, {
   shouldForwardProp: (prop: string) =>
@@ -72,13 +73,7 @@ const AuctionCard: React.FC<{
   currentUserId?: number;
 }> = ({ auction, currentUserId }) => {
   const { t } = useTranslation('auction');
-  const isActive = +new Date(auction.expiresAt) > Date.now();
-  const [lastBidId, yourLastBidId] = [
-    auction.bids?.[0]?.id,
-    auction.userBid?.[0]?.id,
-  ];
-  const isWinning = yourLastBidId && yourLastBidId === lastBidId;
-  const isLosing = yourLastBidId && yourLastBidId !== lastBidId;
+  const { isActive, isWinning, isLosing } = getWinningLosingStatus(auction);
   return (
     <Item isActive={isActive} isWinning={isWinning} isLosing={isLosing}>
       <CardHeader
@@ -155,14 +150,14 @@ const AuctionCard: React.FC<{
               <Typography
                 fontSize={20}
                 variant='body2'
-                color='secondary.light'
+                color='prettyPink.main'
                 component='span'
                 fontWeight={600}
               />
               <Typography
                 fontSize={20}
                 variant='body2'
-                color='secondary.light'
+                color='prettyPink.main'
                 component='span'
                 fontWeight={600}
               />
@@ -171,7 +166,7 @@ const AuctionCard: React.FC<{
             <Typography
               fontSize={20}
               variant='body2'
-              color='secondary.light'
+              color='prettyPink.main'
               component='span'
               fontWeight={600}
             >

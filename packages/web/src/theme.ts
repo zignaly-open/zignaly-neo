@@ -8,10 +8,19 @@ export default createTheme({
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
     },
+    prettyPink: {
+      main: '#f63f82',
+    },
+    greedyGreen: {
+      main: '#62e764',
+    },
     secondary: {
       light: '#f63f82',
       dark: '#191927',
       main: '#656565',
+    },
+    info: {
+      main: '#c2faff',
     },
     // Used by `getContrastText()` to maximize the contrast between
     // the background and the text.

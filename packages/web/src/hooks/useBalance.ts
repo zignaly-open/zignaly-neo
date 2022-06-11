@@ -24,6 +24,13 @@ export default function useBalance(): {
   balance: number | null;
 } {
   const { loading, data } = useQuery(GET_CURRENT_USER_BALANCE);
+  return {
+    loading,
+    balance: data?.balance?.balance || '0',
+  };
+}
+
+export function useBalanceSubscription(): void {
   if (!getToken()) {
     // TODO: error reporting
     // eslint-disable-next-line no-console
@@ -34,9 +41,4 @@ export default function useBalance(): {
       token: getToken(),
     },
   });
-
-  return {
-    loading,
-    balance: data?.balance?.balance,
-  };
 }
