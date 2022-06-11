@@ -57,6 +57,9 @@ export class Auction extends Model {
   @HasMany(() => AuctionBid)
   public bids: AuctionBid[];
 
+  @Column
+  public imageUrl: string;
+
   // OK so this is a crutch
   // Double crutch!
   // first of all, ReturnType<() => AuctionBid> ???

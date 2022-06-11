@@ -3,6 +3,7 @@
     "model": "Auction",
     "data": {
       "id": 1,
+      "imageUrl": "/images/1.jpg",
       "title": "Best Auction EVER",
       "description": "Bid now or die regretting",
       "monetaryValue": "100 BTC!!11",
@@ -22,6 +23,7 @@
     "model": "Auction",
     "data": {
       "id": 2,
+      "imageUrl": "/images/2.jpg",
       "title": "Elon Musk's giveaway",
       "description": "Have you ever dreamt of reading the most retarded description ever? Well, continue dreaming",
       "monetaryValue": "1 Model S",
@@ -41,6 +43,7 @@
     "model": "Auction",
     "data": {
       "id": 3,
+      "imageUrl": "/images/3.jpg",
       "title": "Charity Giveaway",
       "description": "All proceeds from this auction will go towards the needs of Alex who desperately needs a brand new X5 40d",
       "monetaryValue": "$1",
@@ -60,6 +63,7 @@
     "model": "Auction",
     "data": {
       "id": 4,
+      "imageUrl": "/images/4.jpg",
       "title": "Charity Giveaway 2",
       "description": "All proceeds from this auction will go towards the needs of Alex who would like to have an M4 as well",
       "monetaryValue": "$1",
@@ -79,6 +83,7 @@
     "model": "Auction",
     "data": {
       "id": 5,
+      "imageUrl": "/images/5.jpg",
       "title": "Win&Go",
       "description": "Bid, win, get outbid and go",
       "monetaryValue": "$4000",
@@ -98,6 +103,7 @@
     "model": "Auction",
     "data": {
       "id": 6,
+      "imageUrl": "/images/6.jpg",
       "title": "Honest Auction",
       "description": "Lotteries are for economically illiterate, stop playing one",
       "monetaryValue": "$30k",
@@ -117,6 +123,7 @@
     "model": "Auction",
     "data": {
       "id": 7,
+      "imageUrl": "/images/7.jpg",
       "title": "Just go",
       "description": "Pay me and go",
       "monetaryValue": "$100",
@@ -144,6 +151,7 @@
     "model": "Auction",
     "data": {
       "id": 8,
+      "imageUrl": "/images/8.jpg",
       "title": "Diversification",
       "description": "Win a basket more diverse than a Netflix cast",
       "monetaryValue": "$1000",
@@ -187,6 +195,7 @@
     "model": "Auction",
     "data": {
       "id": 9,
+      "imageUrl": "/images/2.jpg",
       "title": "Diversification 2",
       "description": "Win a basket more diverse than a Netflix cast",
       "monetaryValue": "$1000",
@@ -248,6 +257,7 @@
     "model": "Auction",
     "data": {
       "id": 10,
+      "imageUrl": "/images/4.jpg",
       "title": "Diversification 3",
       "description": "Win a basket more diverse than a Netflix cast",
       "monetaryValue": "$1000",
@@ -291,6 +301,7 @@
     "model": "Auction",
     "data": {
       "id": 11,
+      "imageUrl": "/images/1.jpg",
       "title": "Diversification 4",
       "description": "Win a basket more diverse than a Netflix cast",
       "monetaryValue": "$1000",

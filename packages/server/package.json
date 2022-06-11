@@ -11,9 +11,9 @@
     "dev": "nodemon --ext \"ts,json\" --watch \"src/**\" --exec \"ts-node src/index.ts\""
   },
   "dependencies": {
-    "@zigraffle/shared": "../shared",
     "@graphql-tools/schema": "^8.3.13",
     "@slack/webhook": "^6.1.0",
+    "@zigraffle/shared": "../shared",
     "apollo-server-core": "^3.8.2",
     "apollo-server-express": "^3.8.1",
     "compression": "^1.7.4",

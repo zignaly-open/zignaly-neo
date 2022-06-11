@@ -8,6 +8,10 @@ const models = {
   AuctionBasketItem,
 };
 
+Auction.destroy({ where: {} });
+AuctionBid.destroy({ where: {} });
+AuctionBasketItem.destroy({ where: {} });
+
 sequelizeFixtures
   .loadFile(__dirname + '/sample-data.json', models)
   .catch((e) => {

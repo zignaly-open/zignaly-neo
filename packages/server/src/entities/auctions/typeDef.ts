@@ -24,6 +24,7 @@ export const typeDef = gql`
     createdAt: Date
     expiresAt: Date
     title: String!
+    imageUrl: String
     status: String
     monetaryValue: String
     startingBid: String
