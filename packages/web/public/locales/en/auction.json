@@ -1,13 +1,13 @@
 {
   "no-auctions": "No active Auctions found",
   "completed": "Completed!",
-  "bid": "Bid!",
+  "make-bid": "Bid {{bid}}!",
   "it-is-you": "(you)",
   "what-is-inside": "What's inside?",
   "remaining-time": "{{h}} h : {{m}} m : {{s}} s",
-  "winning-bid": "Won for <0>{{count}}</0> by <1>{{name}}</1>",
-  "last-bid": "Last bid <0>{{count}}</0> from <1>{{name}}</1>",
-  "starting-bid": "Starting bid: <0>{{count}}</0>",
+  "winning-bid": "Won for <0>{{bid}}</0> by <1>{{name}}</1>",
+  "last-bid": "Last bid <0>{{bid}}</0> from <1>{{name}}</1>",
+  "starting-bid": "Starting bid: <0>{{bid}}</0>",
   "for-a-total-value-of": "For a total value of",
   "sort-by-expiry": "Sort by expiry",
   "sort-by-value": "Value",
@@ -15,5 +15,7 @@
   "sort-by-yours": "Yours",
   "show-all": "Show all",
   "show-active": "Active",
-  "show-yours": "Yours"
+  "show-yours": "Yours",
+  "no-bids-yet": "No bids yet",
+  "no-bids": "No bids"
 }

@@ -8,6 +8,7 @@ export const GET_AUCTIONS = gql`
       createdAt
       expiresAt
       status
+      minimalBid
       description
       startingBid
       basketItems {
@@ -33,7 +34,7 @@ export const GET_AUCTIONS = gql`
 `;
 
 export const BID_AUCTION = gql`
-  mutation createBid($id: ID!, $value: Int!) {
+  mutation createBid($id: ID!, $value: String!) {
     bid(id: $id, bid: $value) {
       id
       title
@@ -69,6 +70,7 @@ export const BIDS_SUBSCRIPTION = gql`
     bidAdded {
       id
       expiresAt
+      minimalBid
       bids {
         id
         value

@@ -3,15 +3,7 @@ import React from 'react';
 import { AuctionType } from '@zigraffle/shared/types';
 import { BID_AUCTION } from '../queries';
 import AuctionCardComponent from './AuctionCard';
-import { getMinBid } from '../util';
 import useCurrentUser from '../../../hooks/useCurrentUser';
-
-// states
-// - winning
-// - winning
-// - inactive
-// - generic
-// - outbid
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
@@ -23,13 +15,12 @@ const AuctionCard: React.FC<{
       auction={auction}
       currentUserId={currentUser?.id}
       isPerformingAction={isBidding || isGettingUserInfo}
-      onBid={() => {
+      onBid={(amount) => {
         currentUser?.id
           ? bid({
               variables: {
                 id: auction.id,
-                // TODO
-                value: getMinBid(auction) + 1,
+                value: amount,
               },
             }).catch((e) => {
               // TODO: better alerts

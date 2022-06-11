@@ -12,6 +12,7 @@ Scenarios to test:
 * Bid without enough money for bid => fail
 * Bid without enough money for bid + bid fee => fail
 * Bid successfully => success
+* Bid below startingBid or below lastBid+bidStep
 * Bid successfully but without any money left and then bid again or on another auction => fail
 * Bid successfully for 2+fee, then bid for 3+fee, result => 3 frozen, 2*fee withdrawn
 * Bid 1+fee, 1 frozen, 1*fee withdrawn, get outbid => frozen is unfrozen

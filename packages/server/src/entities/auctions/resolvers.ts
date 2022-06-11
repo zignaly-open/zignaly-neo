@@ -6,16 +6,28 @@ import { Includeable } from 'sequelize';
 import { ApolloContext, ContextUser } from '../../types';
 import { auctionTtlPerBid } from '../../../config';
 import { User } from '../users/model';
+import { sequelize } from '../../db';
+import { Transaction, TransactionType } from '../transactions/model';
+import {
+  emitBalanceChanged,
+  getUserBalance,
+  negative,
+} from '../transactions/util';
+import {
+  getMinRequiredBidForAuction,
+  isBidSufficientForAuction,
+  unfreezeLoserFunds,
+} from './util';
+
+const lastBidPopulation = {
+  model: AuctionBid,
+  as: 'bids',
+  order: [['id', 'DESC']],
+  limit: 1,
+  include: [User],
+} as Includeable;
 
 async function getAuctions(id: number, user: ContextUser) {
-  const lastBidPopulation = {
-    model: AuctionBid,
-    as: 'bids',
-    order: [['id', 'DESC']],
-    limit: 1,
-    include: [User],
-  } as Includeable;
-
   const lastUsersBidPopulation = {
     model: AuctionBid,
     order: [['id', 'DESC']],
@@ -24,12 +36,18 @@ async function getAuctions(id: number, user: ContextUser) {
     where: { userId: user?.id },
   } as Includeable;
 
-  return await Auction.findAll({
-    where: { ...(id ? { id } : {}) },
-    include: [AuctionBasketItem, lastBidPopulation].concat(
-      user ? lastUsersBidPopulation : [],
-    ),
-  });
+  const auctions = (
+    await Auction.findAll({
+      where: { ...(id ? { id } : {}) },
+      include: [AuctionBasketItem, lastBidPopulation].concat(
+        user ? lastUsersBidPopulation : [],
+      ),
+    })
+  ).map((x) => x.toJSON());
+  auctions.forEach(
+    (x) => (x.minimalBid = getMinRequiredBidForAuction(x, x.bids[0])),
+  );
+  return auctions;
 }
 
 export const resolvers = {
@@ -45,38 +63,87 @@ export const resolvers = {
   Mutation: {
     bid: async (
       _: any,
-      { id, bid }: { id: number; bid: number },
+      { id, bid }: { id: number; bid: string },
       { user }: ApolloContext,
     ) => {
       if (!user) {
         throw new Error('User not found');
       }
 
-      const auction = await Auction.findByPk(id);
-      if (!auction || auction.status !== AuctionStatus.Active) return null;
+      // which auctions can be bid on?
+      // * active ones
+      // * not expired
+      // * with bid+fee <= balance
 
-      const maxBid = await AuctionBid.findOne({
-        where: { auctionId: id },
-        order: [['value', 'DESC']],
+      const auction = await Auction.findByPk(id, {
+        include: lastBidPopulation,
       });
 
-      if (bid <= (maxBid ? +maxBid.value : +auction.startingBid)) {
-        throw new Error('A greater bid exists');
+      const lastBid = auction.bids[0];
+      if (!isBidSufficientForAuction(bid, auction, lastBid))
+        throw new Error('Bid insufficient');
+      if (!auction || auction.status !== AuctionStatus.Active)
+        throw new Error('Auction inactive');
+      if (+new Date(auction.expiresAt) <= Date.now())
+        throw new Error('Auction expired');
+
+      const transaction = await sequelize.transaction();
+
+      try {
+        await Transaction.create(
+          {
+            userId: user.id,
+            auctionId: auction.id,
+            value: negative(auction.bidFee),
+            type: TransactionType.Fee,
+          },
+          { transaction },
+        );
+
+        await Transaction.create(
+          {
+            userId: user.id,
+            auctionId: auction.id,
+            value: negative(bid),
+            type: TransactionType.Bid,
+          },
+          { transaction },
+        );
+
+        // first transaction, then the bid, but ultimately all inside a pg transaction
+        await AuctionBid.create(
+          {
+            auctionId: id,
+            value: bid,
+            userId: user.id,
+          },
+          { transaction },
+        );
+
+        auction.expiresAt = new Date(
+          +new Date(auction.expiresAt) + auctionTtlPerBid,
+        );
+
+        await auction.save({ transaction });
+
+        if (+(await getUserBalance(user.id)) < 0) {
+          // this means our cowboy somehow managed to become the fastest head on the west
+          // noinspection ExceptionCaughtLocallyJS
+          throw new Error('Ne tak bistro, pidor');
+        }
+        await transaction.commit();
+      } catch (error) {
+        console.error(error);
+        // If the execution reaches this line, an error was thrown.
+        // We rollback the transaction.
+        await transaction.rollback();
+        throw new Error('Count not create a bid');
       }
-
-      await AuctionBid.create({
-        auctionId: id,
-        value: bid,
-        userId: user.id,
-      });
-
-      auction.expiresAt = new Date(
-        +new Date(auction.expiresAt) + auctionTtlPerBid,
-      );
-      await auction.save();
 
       const [updatedAuction] = await getAuctions(auction.id, user);
       pubsub.publish(AUCTION_BID_ADDED, { bidAdded: updatedAuction });
+      await emitBalanceChanged(user.id);
+      await unfreezeLoserFunds();
       return updatedAuction;
     },
   },

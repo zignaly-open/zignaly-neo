@@ -42,9 +42,17 @@ export class Auction extends Model {
   @HasMany(() => AuctionBasketItem)
   basketItems: AuctionBasketItem[];
 
-  @Default(0)
+  @Default('1')
+  @Column(DataType.DECIMAL)
+  public bidFee: string;
+
+  @Default('1')
   @Column(DataType.DECIMAL)
   public startingBid: string;
+
+  @Default('1')
+  @Column(DataType.DECIMAL)
+  public bidStep: string;
 
   @HasMany(() => AuctionBid)
   public bids: AuctionBid[];

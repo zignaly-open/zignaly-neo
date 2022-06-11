@@ -24,7 +24,8 @@ export type AuctionType = {
   title: string;
   description: string;
   basketItems: BasketItem[];
-  monetaryValue?: String;
+  monetaryValue?: string;
+  minimalBid?: string;
   createdAt?: Date;
   expiresAt?: Date;
   startingBid: string;

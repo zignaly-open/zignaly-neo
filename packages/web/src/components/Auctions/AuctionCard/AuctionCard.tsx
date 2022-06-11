@@ -7,7 +7,6 @@ import { useTranslation, Trans } from 'react-i18next';
 import { AuctionType, BasketItem } from '@zigraffle/shared/types';
 import AuctionBasketItem from './AuctionBasketItem';
 import FinalCountdown from './FinalCountdown';
-import { getMinBid } from '../util';
 import { LoadingButton } from '@mui/lab';
 
 const Item = styled(Paper, {
@@ -73,7 +72,7 @@ const AuctionCard: React.FC<{
   auction: AuctionType;
   currentUserId?: number;
   isPerformingAction?: boolean;
-  onBid: () => void;
+  onBid: (amount: string) => void;
 }> = ({ auction, currentUserId, onBid, isPerformingAction }) => {
   const { t } = useTranslation('auction');
   const isActive = +new Date(auction.expiresAt) > Date.now();
@@ -123,39 +122,52 @@ const AuctionCard: React.FC<{
       <Box display={'flex'} textAlign={'center'} flexDirection={'column'}>
         <FinalCountdown date={auction.expiresAt} />
         <Typography fontSize={18} marginBottom={3}>
-          <Trans
-            i18nKey={`auction:${
-              isActive
-                ? auction.bids?.length
-                  ? 'last'
-                  : 'starting'
-                : 'winning'
-            }-bid`}
-            values={{
-              name:
-                (auction.bids?.[0]?.user.username ??
-                  `#${auction.bids?.[0]?.user.id}`) +
-                (currentUserId && +currentUserId === +auction.bids?.[0]?.user.id
-                  ? `${t('it-is-you')}`
-                  : ''),
-            }}
-            count={getMinBid(auction)}
-          >
+          {auction.bids?.length ? (
+            <Trans
+              i18nKey={`auction:${
+                isActive
+                  ? auction.bids?.length
+                    ? 'last'
+                    : 'starting'
+                  : 'winning'
+              }-bid`}
+              values={{
+                bid: auction.bids[0].value,
+                name:
+                  (auction.bids?.[0]?.user.username ??
+                    `#${auction.bids?.[0]?.user.id}`) +
+                  (currentUserId &&
+                  +currentUserId === +auction.bids?.[0]?.user.id
+                    ? `${t('it-is-you')}`
+                    : ''),
+              }}
+            >
+              <Typography
+                fontSize={20}
+                variant='body2'
+                color='secondary.light'
+                component='span'
+                fontWeight={600}
+              />
+              <Typography
+                fontSize={20}
+                variant='body2'
+                color='secondary.light'
+                component='span'
+                fontWeight={600}
+              />
+            </Trans>
+          ) : (
             <Typography
               fontSize={20}
               variant='body2'
               color='secondary.light'
               component='span'
               fontWeight={600}
-            />
-            <Typography
-              fontSize={20}
-              variant='body2'
-              color='secondary.light'
-              component='span'
-              fontWeight={600}
-            />
-          </Trans>
+            >
+              {t('no-bids' + (isActive ? '-yet' : ''))}
+            </Typography>
+          )}
         </Typography>
 
         {isActive && (
@@ -164,9 +176,9 @@ const AuctionCard: React.FC<{
             loading={isPerformingAction}
             disabled={isPerformingAction}
             size='large'
-            onClick={onBid}
+            onClick={() => onBid(auction.minimalBid)}
           >
-            {t('bid')}
+            {t('make-bid', { bid: auction.minimalBid })}
           </LoadingButton>
         )}
       </Box>

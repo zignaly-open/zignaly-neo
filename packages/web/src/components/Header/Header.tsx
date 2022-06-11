@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useAuthenticate, { useLogout } from '../../hooks/useAuthenticate';
 import useCurrentUser from '../../hooks/useCurrentUser';
-import HeaderBalance from './HeaderBalance';
+import UserBalance from './UserBalance';
 
 const StyledLogo = styled(Typography)`
   text-transform: uppercase;
@@ -117,7 +117,7 @@ const Header: React.FC = () => {
 
       {!loading && !!currentUser?.id && (
         <Box textAlign={'center'} marginBottom={3}>
-          <HeaderBalance />
+          <UserBalance />
         </Box>
       )}
     </>

@@ -3,7 +3,7 @@ import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import useBalance from '../../hooks/useBalance';
 
-const HeaderBalance: React.FC = () => {
+const UserBalance: React.FC = () => {
   const { balance } = useBalance();
   useTranslation('balance');
   return (
@@ -21,4 +21,4 @@ const HeaderBalance: React.FC = () => {
   );
 };
 
-export default HeaderBalance;
+export default UserBalance;

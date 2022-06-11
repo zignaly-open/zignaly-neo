@@ -9,12 +9,12 @@ import {
 } from '../../config';
 import { AbiItem } from 'web3-utils';
 import { getLastProcessedBlock, setLastProcessedBlock } from './lastBlock';
-import { Transaction } from '../entities/transactions/model';
+import { Transaction, TransactionType } from '../entities/transactions/model';
 import { User } from '../entities/users/model';
-// TODO: here's the problem and we cant run the watch script separately from the main app
-import pubsub from '../pubsub';
-import { BALANCE_CHANGED } from '../entities/transactions/constants';
-import { getUserBalance } from '../entities/transactions/util';
+import {
+  // TODO: here's the problem and we cant run the watch script separately from the main app
+  emitBalanceChanged,
+} from '../entities/transactions/util';
 
 const web3socket = new Web3(new Web3.providers.WebsocketProvider(rpcSocketUrl));
 const web3 = new Web3(new Web3.providers.HttpProvider(rpcUrl));
@@ -77,10 +77,9 @@ const handleEventTransfer = async (event: ChainEvent) => {
       value: web3.utils.fromWei(value, 'ether'),
       block: event.blockNumber,
       txHash: event.transactionHash,
+      type: TransactionType.Deposit,
     });
-    pubsub.publish(BALANCE_CHANGED, {
-      balanceChanged: await getUserBalance(user.id),
-    });
+    await emitBalanceChanged(user.id);
     console.log(
       `${from} sent to ${to}: ${web3.utils.fromWei(
         value,
@@ -90,7 +89,9 @@ const handleEventTransfer = async (event: ChainEvent) => {
       }`,
     );
   } catch (e) {
-    console.error(e);
+    if (e.name !== 'SequelizeUniqueConstraintError') {
+      console.error(e);
+    }
   }
 };
 

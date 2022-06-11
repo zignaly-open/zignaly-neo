@@ -9,7 +9,7 @@ export const typeDef = gql`
   }
   type Bid {
     id: Int
-    value: Int
+    value: String
     date: Date
     user: UserInfo
   }
@@ -27,6 +27,7 @@ export const typeDef = gql`
     status: String
     monetaryValue: String
     startingBid: String
+    minimalBid: String
     description: String
     basketItems: [BasketItem]
     bids: [Bid]
@@ -42,6 +43,6 @@ export const typeDef = gql`
   }
 
   extend type Mutation {
-    bid(id: ID!, bid: Int!): Auction
+    bid(id: ID!, bid: String!): Auction
   }
 `;
