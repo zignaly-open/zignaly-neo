@@ -1,15 +1,12 @@
-import Typography from '@mui/material/Typography';
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useContractFunction, useEthers } from '@usedapp/core';
 import { parseEther } from 'ethers/lib/utils';
 import { Alert, LoadingButton } from '@mui/lab';
-import WhiteContainer from '../common/WhiteContainer';
 import { Box } from '@mui/material';
 import contract from '../../contract';
-import UserBalance from '../Header/UserBalance';
 
-function Deposit() {
+function DepositInput() {
   const { t } = useTranslation('balance');
   // send money from
   // TODO: maybe move address to the code for security reasons i.e. so any changes will be visible in git history
@@ -25,12 +22,7 @@ function Deposit() {
   }
 
   return (
-    <WhiteContainer maxWidth='sm'>
-      <Typography variant={'h5'}>{t('buy-bids')}</Typography>
-      <Typography marginBottom={2} marginTop={1}>
-        {t('buy-bids-explainer')}
-      </Typography>
-
+    <>
       <Box marginBottom={2}>
         {['Fail', 'Exception'].includes(state?.status) && (
           <Alert color={'error'}>{state.errorMessage}</Alert>
@@ -53,12 +45,8 @@ function Deposit() {
           {t('buy-x-bids', { count: +value })}
         </LoadingButton>
       )}
-
-      <Box marginTop={1.5}>
-        <UserBalance />
-      </Box>
-    </WhiteContainer>
+    </>
   );
 }
 
-export default Deposit;
+export default DepositInput;

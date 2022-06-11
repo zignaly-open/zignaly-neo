@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import useAuthenticate, { useLogout } from '../../hooks/useAuthenticate';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import UserBalance from './UserBalance';
+import UserBalanceListener from './UserBalanceListener';
 
 const StyledLogo = styled(Typography)`
   text-transform: uppercase;
@@ -118,6 +119,7 @@ const Header: React.FC = () => {
       {!loading && !!currentUser?.id && (
         <Box textAlign={'center'} marginBottom={3}>
           <UserBalance />
+          <UserBalanceListener />
         </Box>
       )}
     </>

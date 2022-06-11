@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import Auctions from './Auctions/Auctions';
 import HowItWorks from './HowItWorks/HowItWorks';
-import Deposit from './Deposit/Deposit';
+import DepositPage from './Deposit/DepositPage';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import useCurrentUser from '../hooks/useCurrentUser';
@@ -40,7 +40,7 @@ function Routes() {
             path='deposit'
             element={
               <AuthenticatedRoute>
-                <Deposit />
+                <DepositPage />
               </AuthenticatedRoute>
             }
           />
