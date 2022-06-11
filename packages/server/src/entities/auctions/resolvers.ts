@@ -15,6 +15,7 @@ import {
 } from '../transactions/util';
 import {
   getMinRequiredBidForAuction,
+  isBalanceSufficientForBid,
   isBidSufficientForAuction,
   unfreezeLoserFunds,
 } from './util';
@@ -82,6 +83,14 @@ export const resolvers = {
       const lastBid = auction.bids[0];
       if (!isBidSufficientForAuction(bid, auction, lastBid))
         throw new Error('Bid insufficient');
+      if (
+        !isBalanceSufficientForBid(
+          bid,
+          auction.bidFee,
+          await getUserBalance(user.id),
+        )
+      )
+        throw new Error('Insufficient funds');
       if (!auction || auction.status !== AuctionStatus.Active)
         throw new Error('Auction inactive');
       if (+new Date(auction.expiresAt) <= Date.now())
@@ -125,7 +134,6 @@ export const resolvers = {
         );
 
         await auction.save({ transaction });
-
         if (+(await getUserBalance(user.id)) < 0) {
           // this means our cowboy somehow managed to become the fastest head on the west
           // noinspection ExceptionCaughtLocallyJS

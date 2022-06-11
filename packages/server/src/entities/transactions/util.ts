@@ -3,20 +3,24 @@ import { BN } from 'ethereumjs-util';
 import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from './constants';
 
-export async function getUserBalance(
+export async function getUserBalanceObject(
   id: number,
 ): Promise<{ id: number; balance: string }> {
-  let balance = (await Transaction.sum('value', {
+  return {
+    id,
+    balance: await getUserBalance(id),
+  };
+}
+
+export async function getUserBalance(id: number): Promise<string> {
+  const balance = await Transaction.sum('value', {
     raw: true,
     where: {
       userId: id,
     },
     dataType: 'string',
-  })) as unknown as string; // because decimals
-  return {
-    id,
-    balance: balance || '0',
-  };
+  });
+  return (balance || '0') as string; // because decimals
 }
 
 export function negative(decimalNumber: string): string {
@@ -25,6 +29,6 @@ export function negative(decimalNumber: string): string {
 
 export async function emitBalanceChanged(userId: number) {
   pubsub.publish(BALANCE_CHANGED, {
-    balanceChanged: await getUserBalance(userId),
+    balanceChanged: await getUserBalanceObject(userId),
   });
 }
