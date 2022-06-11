@@ -10,6 +10,7 @@ export const GET_AUCTIONS = gql`
       status
       minimalBid
       description
+      imageUrl
       startingBid
       basketItems {
         ticker

@@ -1,5 +1,4 @@
-import { Box } from '@mui/material';
-import Paper from '@mui/material/Paper';
+import { Box, Card, CardActions, CardHeader, CardMedia } from '@mui/material';
 import { css, styled } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import React from 'react';
@@ -7,9 +6,9 @@ import { useTranslation, Trans } from 'react-i18next';
 import { AuctionType, BasketItem } from '@zigraffle/shared/types';
 import AuctionBasketItem from './AuctionBasketItem';
 import FinalCountdown from './FinalCountdown';
-import { LoadingButton } from '@mui/lab';
+import BidButton from './BidButton';
 
-const Item = styled(Paper, {
+const Item = styled(Card, {
   shouldForwardProp: (prop: string) =>
     !['isActive', 'isWinning', 'isLosing'].includes(prop),
 })<{
@@ -17,6 +16,7 @@ const Item = styled(Paper, {
   isWinning: boolean;
   isLosing: boolean;
 }>(({ theme, isActive, isWinning, isLosing }) => ({
+  overflow: 'visible',
   backgroundColor: isWinning
     ? '#ebffea'
     : isLosing
@@ -24,7 +24,6 @@ const Item = styled(Paper, {
     : isActive
     ? '#fff'
     : '#e5e5e5',
-  padding: theme.spacing(2.5),
   filter: isActive ? 'unset' : 'grayscale(50%)',
   boxShadow: isWinning ? `0 0 0 3px #aaff99 inset` : 'unset',
   color: theme.palette.text.secondary,
@@ -35,8 +34,8 @@ const CURL_SIZE = 0.5;
 const GiftBox = styled(Box)<{ isWinning: boolean; isLosing: boolean }>`
   background: ${(props) =>
     props.isWinning ? '#0f950f' : props.isLosing ? '#950f0f' : '#eee'};
-  margin-left: ${({ theme }) => theme.spacing(-2.5 - 2 * CURL_SIZE)};
-  margin-right: ${({ theme }) => theme.spacing(-2.5 - 2 * CURL_SIZE)};
+  margin-left: ${({ theme }) => theme.spacing(-2 * CURL_SIZE)};
+  margin-right: ${({ theme }) => theme.spacing(-2 * CURL_SIZE)};
   position: relative;
 
   ${(props) =>
@@ -71,9 +70,7 @@ const GiftBox = styled(Box)<{ isWinning: boolean; isLosing: boolean }>`
 const AuctionCard: React.FC<{
   auction: AuctionType;
   currentUserId?: number;
-  isPerformingAction?: boolean;
-  onBid: (amount: string) => void;
-}> = ({ auction, currentUserId, onBid, isPerformingAction }) => {
+}> = ({ auction, currentUserId }) => {
   const { t } = useTranslation('auction');
   const isActive = +new Date(auction.expiresAt) > Date.now();
   const [lastBidId, yourLastBidId] = [
@@ -84,12 +81,25 @@ const AuctionCard: React.FC<{
   const isLosing = yourLastBidId && yourLastBidId !== lastBidId;
   return (
     <Item isActive={isActive} isWinning={isWinning} isLosing={isLosing}>
-      <Typography gutterBottom variant='h6' component='div'>
-        {auction.title}
-      </Typography>
-      <Box sx={{ marginBottom: 2 }}>
-        <Typography color='text.secondary'>{auction.description}</Typography>
-      </Box>
+      <CardHeader
+        title={
+          <Typography gutterBottom variant='h6' component='div'>
+            {auction.title}
+          </Typography>
+        }
+        subheader={
+          <Typography color='text.secondary'>{auction.description}</Typography>
+        }
+      />
+
+      {auction.imageUrl && (
+        <CardMedia
+          component='img'
+          height='220'
+          image={auction.imageUrl}
+          alt={auction.title}
+        />
+      )}
 
       <GiftBox
         isWinning={isWinning}
@@ -171,15 +181,9 @@ const AuctionCard: React.FC<{
         </Typography>
 
         {isActive && (
-          <LoadingButton
-            variant={'contained'}
-            loading={isPerformingAction}
-            disabled={isPerformingAction}
-            size='large'
-            onClick={() => onBid(auction.minimalBid)}
-          >
-            {t('make-bid', { bid: auction.minimalBid })}
-          </LoadingButton>
+          <CardActions>
+            <BidButton auction={auction} />
+          </CardActions>
         )}
       </Box>
     </Item>

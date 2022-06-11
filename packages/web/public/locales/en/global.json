@@ -4,8 +4,8 @@
   "how-it-works": "How it works",
   "buy-bids": "Buy bids",
   "view-history": "View History",
-  "log-out": "Log Out",
-  "log-in": "Authenticate",
+  "log-out": "Disconnect",
+  "log-in": "Connect Wallet",
   "moto": "Bid and win thousands of $ worth of crypto for cents!",
   "loading": "Loading..."
 }

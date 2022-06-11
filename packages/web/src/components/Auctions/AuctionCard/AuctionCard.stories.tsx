@@ -16,7 +16,7 @@ const Template: ComponentStory<typeof AuctionCard> = (args) => (
   <div
     style={{ padding: '50px', maxWidth: '300px', background: 'rgb(7, 7, 26)' }}
   >
-    <AuctionCard {...args} onBid={() => alert('Bid!')} />
+    <AuctionCard {...args} />
   </div>
 );
 
