@@ -10,13 +10,13 @@ MVP
 - [x] Bidding system
 - [ ] Bidding system that withdraws and freezes funds
 - [ ] Multi-winner
-
+- [ ] Polygon net only
 
 A little bit later
 - [ ] Tests for the love of God
 - [ ] Toasts for errors
 - [ ] Server eslint
-- [ ] Manage Profile
+- [x] Manage Profile
 - [ ] Winner payouts
 - [ ] At least half-decent design
 
