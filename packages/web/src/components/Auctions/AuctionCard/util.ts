@@ -3,6 +3,7 @@ import { AuctionType } from '@zigraffle/shared/types';
 export function getWinningLosingStatus(auction: AuctionType): {
   isActive: boolean;
   isWinning: boolean;
+  isUserActive: boolean;
   isLosing: boolean;
 } {
   const [lastBidId, yourLastBidId] = [
@@ -12,5 +13,5 @@ export function getWinningLosingStatus(auction: AuctionType): {
   const isActive = +new Date(auction.expiresAt) > Date.now();
   const isWinning = yourLastBidId && yourLastBidId === lastBidId;
   const isLosing = yourLastBidId && yourLastBidId !== lastBidId;
-  return { isLosing, isWinning, isActive };
+  return { isLosing, isWinning, isActive, isUserActive: isLosing || isWinning };
 }

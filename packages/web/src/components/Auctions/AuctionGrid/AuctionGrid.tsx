@@ -9,6 +9,7 @@ import { AuctionType } from '@zigraffle/shared/types';
 import AuctionCard from '../AuctionCard';
 import { BIDS_SUBSCRIPTION, GET_AUCTIONS } from '../queries';
 import Loader from '../../common/Loader';
+import { getWinningLosingStatus } from '../AuctionCard/util';
 
 const MasonryWrapper = styled(Box)`
   max-width: 1000px;
@@ -40,7 +41,7 @@ const AuctionGrid: React.FC = () => {
   const sortOptions = useMemo(
     () => [
       { label: t('sort-by-expiry'), value: SortDirection.Expiry },
-      { label: t('sort-by-value'), value: SortDirection.Value },
+      // { label: t('sort-by-value'), value: SortDirection.Value },
       { label: t('sort-by-last-bid'), value: SortDirection.LastBid },
       { label: t('sort-by-yours'), value: SortDirection.Yours },
     ],
@@ -55,6 +56,33 @@ const AuctionGrid: React.FC = () => {
     ],
     [],
   );
+
+  const filtered = useMemo(() => {
+    return data?.auctions
+      ?.filter((x: AuctionType) => {
+        const { isActive, isUserActive } = getWinningLosingStatus(x);
+        switch (selectedShowMode) {
+          case ShowOptions.Yours:
+            return isUserActive;
+          case ShowOptions.Active:
+            return isActive;
+          case ShowOptions.All:
+            return true;
+        }
+      })
+      .sort((a: AuctionType, b: AuctionType) => {
+        switch (selectedSort) {
+          case SortDirection.Yours:
+            return (+b.userBid?.[0]?.id || 0) - (+a.userBid?.[0]?.id || 0);
+          case SortDirection.LastBid:
+            return -(+a.bids[0]?.id || 0) + (+b.bids[0]?.id || 0);
+          case SortDirection.Value:
+            return 0;
+          case SortDirection.Expiry:
+            return +new Date(a.expiresAt) - +new Date(b.expiresAt);
+        }
+      });
+  }, [data?.auctions, selectedSort, selectedShowMode]);
 
   if (loading) {
     return <Loader />;
@@ -101,7 +129,7 @@ const AuctionGrid: React.FC = () => {
         </Grid>
       </Box>
       <StyledMasonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={4}>
-        {data.auctions.map((x: AuctionType) => (
+        {filtered.map((x: AuctionType) => (
           <AuctionCard key={x.id} auction={x} />
         ))}
       </StyledMasonry>
