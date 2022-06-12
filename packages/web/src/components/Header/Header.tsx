@@ -60,6 +60,9 @@ const Header: React.FC = () => {
               <Button variant={'text'} onClick={() => navigate('/deposit')}>
                 {t('buy-bids')}
               </Button>
+              <Button variant={'text'} onClick={() => navigate('/profile')}>
+                {t('edit profile')}
+              </Button>
               <Button variant={'text'} onClick={logout}>
                 {t('log-out')}
               </Button>

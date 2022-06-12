@@ -12,6 +12,7 @@ import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import useCurrentUser from './hooks/useCurrentUser';
 import Loader from './components/common/Loader';
+import ProfilePage from './pages/ProfilePage';
 
 const AuthenticatedRoute = ({
   children,
@@ -41,6 +42,14 @@ function Routes() {
             element={
               <AuthenticatedRoute>
                 <DepositPage />
+              </AuthenticatedRoute>
+            }
+          />
+          <Route
+            path='profile'
+            element={
+              <AuthenticatedRoute>
+                <ProfilePage />
               </AuthenticatedRoute>
             }
           />

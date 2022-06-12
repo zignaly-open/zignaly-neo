@@ -134,7 +134,11 @@ export default function Onboarding() {
 
       <Box margin={2}>
         {step === 0 && <HowItWorks />}
-        {step === 1 && <Profile ref={profileFormRef} onSuccess={handleNext} />}
+        {step === 1 && (
+          <Box textAlign={'center'}>
+            <Profile ref={profileFormRef} onSuccess={handleNext} />
+          </Box>
+        )}
         {step === 2 && <Deposit />}
       </Box>
 

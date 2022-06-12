@@ -8,6 +8,7 @@ import Loader from '../common/Loader';
 import Box from '@mui/material/Box';
 import { USERNAME_PATTERN, useValidateUsername } from './util';
 import { gql, useMutation } from '@apollo/client';
+import { LoadingButton } from '@mui/lab';
 
 const CHANGE_PROFILE = gql`
   mutation editProfile($username: String) {
@@ -51,7 +52,7 @@ const ProfileInner: ProfileComponentType = React.forwardRef(
     }));
 
     return (
-      <Box textAlign={'center'}>
+      <Box marginTop={2}>
         <form name='profileForm' onSubmit={handleSubmit(submit)}>
           <Typography marginBottom={1}>{t('why-set-username')}</Typography>
           <Controller
@@ -88,13 +89,25 @@ const ProfileInner: ProfileComponentType = React.forwardRef(
           />
 
           <Typography
-            marginTop={2}
+            marginTop={1}
             marginBottom={1}
             color={'secondary'}
             fontSize={14}
           >
             {t('why-set-username-2')}
           </Typography>
+
+          {!onSuccess && (
+            <Box marginTop={3}>
+              <LoadingButton
+                variant='outlined'
+                type='submit'
+                loading={updatingProfile}
+              >
+                {t('save')}
+              </LoadingButton>
+            </Box>
+          )}
         </form>
       </Box>
     );

@@ -57,11 +57,7 @@ const AuctionGrid: React.FC = () => {
   );
 
   if (loading) {
-    return (
-      <Box sx={{ display: 'flex' }}>
-        <Loader />
-      </Box>
-    );
+    return <Loader />;
   }
 
   if (error) {
