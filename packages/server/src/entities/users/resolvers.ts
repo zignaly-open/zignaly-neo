@@ -1,5 +1,5 @@
 import { User } from './model';
-import { authenticateSignature } from './util';
+import { authenticateSignature, validateUsername } from './util';
 import { ApolloContext } from '../../types';
 
 const generateNonceSignMessage = (nonce: string | number) =>
@@ -10,6 +10,14 @@ export const resolvers = {
     me: async (_: any, __: any, { user }: ApolloContext) => {
       if (!user) return null;
       return await User.findByPk(user.id);
+    },
+    checkUsername: async (
+      _: any,
+      { username }: { username: string },
+      { user }: ApolloContext,
+    ) => {
+      if (!user) return null;
+      return await validateUsername(username, user.id);
     },
   },
   Mutation: {
@@ -32,26 +40,45 @@ export const resolvers = {
       }
     },
 
+    completeOnboarding: async (_: any, __: any, { user }: ApolloContext) => {
+      if (!user) return null;
+      const userInstance = await User.findByPk(user.id);
+      if (!userInstance) return null;
+      userInstance.onboardingCompletedAt = new Date();
+      await userInstance.save();
+      return userInstance.toJSON();
+    },
+
+    updateProfile: async (
+      _: any,
+      { username }: { username: string },
+      { user }: ApolloContext,
+    ) => {
+      if (!user) return null;
+      const userInstance = await User.findByPk(user.id);
+      const usernameValid = await validateUsername(username, user.id);
+      if (!usernameValid) return null;
+      userInstance.username = username;
+      await userInstance.save();
+      return userInstance.toJSON();
+    },
+
     getOrCreateUser: async (
       _: any,
       { publicAddress }: { publicAddress: string },
     ) => {
       if (!publicAddress) return null;
 
-      let isNew = false;
-
       try {
         let user: User | null = await User.findOne({
           where: { publicAddress },
         });
         if (!user) {
-          isNew = true;
           user = await User.create({ publicAddress });
         }
 
         return {
           ...user.toJSON(),
-          isNew,
           messageToSign: generateNonceSignMessage(user.nonce),
         };
       } catch (e) {

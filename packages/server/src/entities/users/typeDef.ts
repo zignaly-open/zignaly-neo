@@ -5,6 +5,7 @@ export const typeDef = gql`
     id: ID!
     publicAddress: String!
     username: String
+    onboardingCompletedAt: Date
   }
 
   type AuthUser {
@@ -13,7 +14,7 @@ export const typeDef = gql`
     publicAddress: String!
     messageToSign: String
     username: String
-    isNew: Boolean
+    onboardingCompletedAt: Date
   }
 
   type AccessToken {
@@ -22,9 +23,12 @@ export const typeDef = gql`
 
   extend type Query {
     me: User
+    checkUsername(username: String!): Boolean
   }
 
   extend type Mutation {
+    completeOnboarding: User
+    updateProfile(username: String): User
     getOrCreateUser(publicAddress: String!): AuthUser
     authenticate(publicAddress: String!, signature: String!): AccessToken!
   }

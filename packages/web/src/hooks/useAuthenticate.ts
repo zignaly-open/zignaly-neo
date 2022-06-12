@@ -10,6 +10,7 @@ export const GET_CURRENT_USER = gql`
     me {
       id
       username
+      onboardingCompletedAt
     }
   }
 `;
@@ -18,7 +19,7 @@ export const GET_OR_CREATE_USER = gql`
   mutation getOrCreateUser($publicAddress: String!) {
     getOrCreateUser(publicAddress: $publicAddress) {
       id
-      isNew
+      onboardingCompletedAt
       messageToSign
     }
   }
@@ -62,7 +63,7 @@ export default function useAuthenticate(): () => Promise<void> {
     setIsOkToStart(false);
     const {
       data: {
-        getOrCreateUser: { messageToSign, isNew },
+        getOrCreateUser: { messageToSign, onboardingCompletedAt },
       },
     } = await getOrCreateUser({
       variables: { publicAddress: account.toLocaleLowerCase() },
@@ -80,7 +81,7 @@ export default function useAuthenticate(): () => Promise<void> {
 
     setToken(accessToken);
     await fetchUser();
-    isNew && startOnboarding();
+    !onboardingCompletedAt && startOnboarding();
   }, [account, isOkToStart]);
 
   // TODO: error handling

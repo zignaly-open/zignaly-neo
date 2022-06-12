@@ -1,0 +1,22 @@
+{
+  "steps": {
+    "info": "How it works",
+    "profile": "Your profile",
+    "deposit": "Deposit"
+  },
+  "why-need-username": "When bidding, ",
+  "username": "Username",
+  "why-set-username": "Please choose a unique username that will be displayed to other users",
+  "why-set-username-2": "Setting username is important because this will let other users see something more personal than \"User #45 wins the Auction\"",
+  "username-explainer": "Name that will be visible to others",
+  "skip": "Skip Onboarding",
+  "back": "Back",
+  "finish": "Finish",
+  "next": "Next",
+  "username-ok": "Great username!",
+  "username-min": "Min 2 characters",
+  "username-max": "Max 20 characters",
+  "username-taken": "Sorry, username \"{{username}}\" is taken",
+  "username-required": "Please specify the username",
+  "username-regex": "Only letters, digits and .-_"
+}

@@ -9,45 +9,8 @@ import useAuthenticate, { useLogout } from '../../hooks/useAuthenticate';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import UserBalance from './UserBalance';
 import UserBalanceListener from './UserBalanceListener';
+import Logo from './Logo';
 
-const StyledLogo = styled(Typography)`
-  text-transform: uppercase;
-  font-weight: bold;
-  text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
-    0.025em 0.04em 0 #fffc00;
-  animation: glitch 725ms infinite;
-
-  @keyframes glitch {
-    0% {
-      text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
-        0.025em 0.04em 0 #fffc00;
-    }
-    15% {
-      text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
-        0.025em 0.04em 0 #fffc00;
-    }
-    16% {
-      text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
-        -0.05em -0.05em 0 #fffc00;
-    }
-    49% {
-      text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
-        -0.05em -0.05em 0 #fffc00;
-    }
-    50% {
-      text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
-        0 -0.04em 0 #fffc00;
-    }
-    99% {
-      text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
-        0 -0.04em 0 #fffc00;
-    }
-    100% {
-      text-shadow: -0.05em 0 0 #00fffc, -0.025em -0.04em 0 #fc00ff,
-        -0.04em -0.025em 0 #fffc00;
-    }
-  }
-`;
 const StyledMoto = styled(Typography)`
   text-transform: uppercase;
   text-shadow: 0 0 1px #fff;
@@ -62,20 +25,8 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <StyledLogo
-        fontSize={{
-          sm: 20,
-          md: 48,
-          lg: 72,
-        }}
-        lineHeight={1}
-        marginTop={2}
-        textAlign='center'
-        fontWeight={600}
-      >
-        {t('logo')}
-        {/*https://codepen.io/cbanlawi/pen/xxRBeMY*/}
-      </StyledLogo>
+      <Logo />
+
       <StyledMoto
         fontSize={{
           sm: 11,

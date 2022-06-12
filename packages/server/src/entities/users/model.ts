@@ -29,6 +29,9 @@ export class User extends Model {
   @Unique
   @Column
   public username?: string;
+
+  @Column
+  public onboardingCompletedAt?: Date;
 }
 
 export function generateUserNonce(): number {

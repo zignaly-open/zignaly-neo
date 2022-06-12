@@ -63,3 +63,13 @@ export const authenticateSignature = async (
   await user.save();
   return await signJwtToken(user);
 };
+
+export async function validateUsername(
+  username: string,
+  userId: number,
+): Promise<boolean> {
+  if (!username) return true;
+  if (!/^[\da-z-._]{2,20}$/.test(username)) return false;
+  const userWithThisUsername = await User.findOne({ where: { username } });
+  return !userWithThisUsername || userWithThisUsername.id === userId;
+}

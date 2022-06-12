@@ -1,7 +1,7 @@
 import { ThemeProvider } from '@mui/material';
 import React from 'react';
 import Routes from './Routes';
-import theme from '../theme';
+import theme from './theme';
 import {
   ApolloClient,
   InMemoryCache,
@@ -13,9 +13,9 @@ import { getMainDefinition } from '@apollo/client/utilities';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { setContext } from '@apollo/client/link/context';
-import { getToken } from '../util/token';
+import { getToken } from './util/token';
 import { DAppProvider, Mainnet, Rinkeby } from '@usedapp/core';
-import { OnboardingProvider } from '../contexts/Onboarding';
+import { OnboardingProvider } from './contexts/Onboarding';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',

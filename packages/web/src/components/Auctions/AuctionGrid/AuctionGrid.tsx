@@ -3,12 +3,12 @@ import { styled } from '@mui/material/styles';
 import React, { useMemo, useState } from 'react';
 import { useQuery, useSubscription } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Masonry from '@mui/lab/Masonry';
 import { AuctionType } from '@zigraffle/shared/types';
 import AuctionCard from '../AuctionCard';
 import { BIDS_SUBSCRIPTION, GET_AUCTIONS } from '../queries';
+import Loader from '../../common/Loader';
 
 const MasonryWrapper = styled(Box)`
   max-width: 1000px;
@@ -59,7 +59,7 @@ const AuctionGrid: React.FC = () => {
   if (loading) {
     return (
       <Box sx={{ display: 'flex' }}>
-        <CircularProgress />
+        <Loader />
       </Box>
     );
   }
