@@ -39,7 +39,6 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  padding: 18px 0;
   color: ${({ theme }) => theme.neutral200};
 `;
 

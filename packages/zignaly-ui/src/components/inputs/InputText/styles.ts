@@ -5,7 +5,7 @@ import { styledIf } from "utils/styled";
 
 export const InputValue = styled.input`
   padding-right: 22px;
-  background: transparent;
+  background: transparent !important;
   border: none;
   color: ${dark["neutral100"]};
   outline: none;
@@ -18,6 +18,17 @@ export const InputValue = styled.input`
 
   // Text Area
   resize: none;
+
+  &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
+  }
+
+  &:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 50px white inset;
+    -webkit-text-fill-color: #333;
+  }
+
+  -webkit-text-fill-color: #838b95 !important;
 `;
 
 export const IconContainer = styled.div`

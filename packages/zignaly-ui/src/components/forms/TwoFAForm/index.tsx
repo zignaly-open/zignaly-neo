@@ -9,12 +9,17 @@ import InputCode from "../../inputs/InputCode";
 // Types
 import { TwoFAFormProps } from "./types";
 
-function TwoFAForm({ onSubmit, isLoading }: TwoFAFormProps) {
+function TwoFAForm({ onSubmit, isLoading, requireAutoFocus }: TwoFAFormProps) {
   return (
     <Layout>
       <Field>
         <Typography variant={"body1"}>Enter your 2 Factor Authentication code</Typography>
-        <InputCode fields={6} loading={isLoading} onComplete={onSubmit} />
+        <InputCode
+          fields={6}
+          loading={isLoading}
+          onComplete={onSubmit}
+          autoFocus={requireAutoFocus}
+        />
       </Field>
     </Layout>
   );

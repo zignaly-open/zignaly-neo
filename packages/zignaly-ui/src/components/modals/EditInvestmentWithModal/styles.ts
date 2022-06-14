@@ -8,6 +8,7 @@ export const Investor = styled.div`
   gap: 22px;
   align-items: center;
   margin-bottom: 32px;
+  margin-top: 18px;
 `;
 
 export const InvestorData = styled.div`
@@ -69,7 +70,6 @@ export const TokenValue = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
-
 `;
 
 export const Actions = styled.div`
