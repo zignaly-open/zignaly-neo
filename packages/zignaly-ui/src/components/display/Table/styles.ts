@@ -185,10 +185,10 @@ export const SortIcon = styled(ArrowBottomIcon)<{ isSorted?: boolean; isSortedDe
      ${styledIf(
        props.isSortedDesc,
        `
-      transform: rotate(180deg);
+      transform: rotate(0deg);
     `,
        `
-      transform: rotate(0deg);
+      transform: rotate(180deg); 
     `,
      )}
   `};

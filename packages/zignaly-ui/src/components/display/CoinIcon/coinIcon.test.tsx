@@ -1,5 +1,5 @@
 import React from 'react';
-import {render} from '@testing-library/react';
+import {render, fireEvent} from '@testing-library/react';
 import {composeStories} from '@storybook/testing-react';
 
 // Info Stories
@@ -16,16 +16,23 @@ describe("components/display/CoinIcon", () => {
             const src = `https://res.cloudinary.com/zignaly/image/upload/c_scale,w_${
                 sizes[CoinSizes.MEDIUM]
             },h_${sizes[CoinSizes.MEDIUM]},r_max/coins-binance/ETH`;
+            const renderEtherCoin = render(<EtherCoinIconStory />);
+            const etherCoinIconImage = renderEtherCoin.getByRole('img');
+            expect(etherCoinIconImage).toHaveAttribute('src', src);
+            expect(etherCoinIconImage).toHaveAttribute('alt', 'Ethereum');
+            expect(etherCoinIconImage).toBeVisible();
+        });
+
+        it('should be rendered image fallback and checks use props', () => {
             const srcFallback = `https://res.cloudinary.com/zignaly/image/upload/c_scale,w_${
                 sizes[CoinSizes.MEDIUM]
             },h_${sizes[CoinSizes.MEDIUM]},r_max/coins-binance/BTC`;
-            const {getByRole, getByTestId} = render(<EtherCoinIconStory />);
-            const etherCoinIconImage = getByRole('img');
-            const etherCoinIconData = getByTestId('coin-icon-object');
-            expect(etherCoinIconData).toHaveAttribute('data', src);
-            expect(etherCoinIconImage).toHaveAttribute('src', srcFallback);
-            expect(etherCoinIconImage).toHaveAttribute('alt', 'Ethereum');
-            expect(etherCoinIconImage).toBeVisible();
+            const renderEtherCoinWithFallBack = render(<EtherCoinIconStory coin={"SCAQQFS"} />);
+            const etherCoinIconImageFallBack = renderEtherCoinWithFallBack.getByRole('img');
+            fireEvent.error(etherCoinIconImageFallBack);
+            expect(etherCoinIconImageFallBack).toHaveAttribute('src', srcFallback);
+            expect(etherCoinIconImageFallBack).toHaveAttribute('alt', 'Ethereum');
+            expect(etherCoinIconImageFallBack).toBeVisible();
         });
         it('should be rendered EtherCoinIconStory', () => {
             const {getByTestId} = render(<EtherCoinIconStory />);
