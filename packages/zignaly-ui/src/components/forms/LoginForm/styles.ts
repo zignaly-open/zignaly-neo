@@ -1,7 +1,7 @@
 // Dependencies
 import styled from "styled-components";
 
-export const Layout = styled.form`
+export const Layout = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,7 +10,7 @@ export const Layout = styled.form`
   max-width: 500px;
 `;
 
-export const Field = styled.fieldset`
+export const Field = styled.div`
   border: 0;
   padding: 0;
 `;
@@ -24,8 +24,10 @@ export const Form = styled.form`
 `;
 
 export const Action = styled.div`
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   gap: 22px;
   margin: 26px 0;
+  align-items: center;
+  justify-content: center;
 `;

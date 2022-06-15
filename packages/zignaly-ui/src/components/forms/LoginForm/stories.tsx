@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof LoginForm> = (args) => <LoginForm {...args
 export const Default = Template.bind({});
 Default.args = {
   isLoading: false,
-  onSubmit: (values: any) => {
-    console.log(values);
+  onSubmit: (e: any) => {
+    console.log(e);
   },
 };
