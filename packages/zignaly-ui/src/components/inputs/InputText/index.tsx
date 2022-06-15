@@ -2,11 +2,12 @@
 import React, { useCallback, useRef, useState } from "react";
 
 // Styled Components
-import { Layout, InputContainer, InputValue, Side, IconContainer } from "./styles";
+import { Layout, InputContainer, InputValue, Side, IconContainer, Label } from "./styles";
 import { InputTextProps } from "./types";
 
 import ErrorMessage from "components/display/ErrorMessage";
 import Typography from "components/display/Typography";
+import TextButton from "../TextButton";
 
 function InputText(
   {
@@ -16,7 +17,6 @@ function InputText(
     placeholder = "Please enter a value",
     label,
     onChange = () => {},
-    rightSideElement,
     type,
     defaultValue = "",
     value,
@@ -24,8 +24,10 @@ function InputText(
     name,
     multiline,
     onClickRightSideElement = null,
-    leftSideElement,
+    leftSideElement = null,
+    rightSideElement = null,
     withoutBorder = false,
+    labelAction = null,
   }: InputTextProps,
   inputRef: React.Ref<any>,
 ) {
@@ -43,12 +45,15 @@ function InputText(
 
   return (
     <Layout withError={!!error} disabled={disabled}>
-      <Typography variant="h3" weight="regular" color="neutral200">
-        {label}
-      </Typography>
+      <Label>
+        <Typography variant="h3" weight="regular" color="neutral200">
+          {label}
+        </Typography>
+        {labelAction && <TextButton href={labelAction.href} caption={labelAction.text} />}
+      </Label>
       <InputContainer withoutBorder={withoutBorder}>
         <Side cursor="auto">
-          <IconContainer>{leftSideElement}</IconContainer>
+          {leftSideElement && <IconContainer>{leftSideElement}</IconContainer>}
           <InputValue
             as={multiline ? "textarea" : "input"}
             readOnly={readOnly}
@@ -62,12 +67,15 @@ function InputText(
             name={name}
           />
         </Side>
-        <Side
-          cursor={onClickRightSideElement === null ? "auto" : "pointer"}
-          onClick={() => onClickRightSideElement}
-        >
-          {rightSideElement}
-        </Side>
+        {rightSideElement && (
+          <Side
+            className={"right"}
+            cursor={onClickRightSideElement === null ? "auto" : "pointer"}
+            onClick={() => onClickRightSideElement}
+          >
+            {rightSideElement}
+          </Side>
+        )}
       </InputContainer>
 
       {/* Show error Messages */}

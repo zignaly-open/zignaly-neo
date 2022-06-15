@@ -4,8 +4,7 @@ import { dark } from "theme";
 import { styledIf } from "utils/styled";
 
 export const InputValue = styled.input`
-  padding-right: 22px;
-  background: transparent !important;
+  background: transparent;
   border: none;
   color: ${dark["neutral100"]};
   outline: none;
@@ -41,6 +40,10 @@ export const Side = styled.div<{ cursor: "auto" | "pointer" }>`
   align-items: center;
   flex: 1;
   cursor: ${(props) => props.cursor};
+
+  &.right {
+    padding-left: 22px;
+  }
 
   &:last-child:not(:first-child) {
     flex: 0;
@@ -99,4 +102,10 @@ export const Layout = styled.div`
     `,
     )}
   `}
+`;
+
+export const Label = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;

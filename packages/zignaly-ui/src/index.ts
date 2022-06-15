@@ -40,6 +40,9 @@ import MinBalanceModal from "./components/modals/MinBalanceModal";
 import DepositModal from "./components/modals/MyAccount/DepositModal";
 import WithdrawModal from "./components/modals/MyAccount/WithdrawModal";
 
+// Forms
+import LoginForm from "./components/forms/LoginForm";
+
 // Icons
 import CloseIcon from "./assets/icons/close-icon.svg";
 import CopyIcon from "./assets/icons/copy-icon.svg";
@@ -124,6 +127,8 @@ export {
   DepositModal,
   WithdrawModal,
   MinBalanceModal,
+  // Forms
+  LoginForm,
   /**
    * =-=-=-=-=-=-=-=
    *   Assets

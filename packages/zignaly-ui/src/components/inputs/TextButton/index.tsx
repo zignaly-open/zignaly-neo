@@ -40,18 +40,16 @@ function TextButton({
       <styled.Container>
         <styled.ElementsContainer>
           {leftElement && <styled.LeftElement>{leftElement}</styled.LeftElement>}
-          <Typography color={color} weight="regular" variant="h4" underline={underline}>{caption}</Typography>
+          <Typography color={color} weight="regular" variant="h4" underline={underline}>
+            {caption}
+          </Typography>
           {rightElement && <styled.RightElement>{rightElement}</styled.RightElement>}
         </styled.ElementsContainer>
       </styled.Container>
 
       {loading && (
         <styled.LoaderContainer>
-          <styled.ButtonLoader
-            type={LoaderTypes.TAILSPIN}
-            color="#9CA3AF"
-            ariaLabel="Loader"
-          ></styled.ButtonLoader>
+          <styled.ButtonLoader type={LoaderTypes.TAILSPIN} color="#9CA3AF" ariaLabel="Loader" />
         </styled.LoaderContainer>
       )}
     </styled.Layout>

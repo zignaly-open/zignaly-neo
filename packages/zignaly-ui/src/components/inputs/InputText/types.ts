@@ -1,4 +1,10 @@
 import React, { ChangeEventHandler, ReactElement } from "react";
+
+type LabelActionProps = {
+  text: string;
+  href: string;
+};
+
 export interface InputTextProps {
   placeholder?: string;
   onBlur?: ChangeEventHandler<HTMLInputElement>;
@@ -15,11 +21,12 @@ export interface InputTextProps {
    */
   value?: string;
   readOnly?: boolean;
-  rightSideElement?: ReactElement | null;
   type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
   name?: string;
   multiline?: boolean;
   onClickRightSideElement?: Function | null;
   leftSideElement?: ReactElement | null;
+  rightSideElement?: ReactElement | null;
+  labelAction?: LabelActionProps | null;
   withoutBorder?: boolean;
 }
