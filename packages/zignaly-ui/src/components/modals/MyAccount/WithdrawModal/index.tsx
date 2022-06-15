@@ -12,6 +12,7 @@ const MyAccountWithdrawModal = ({
   addressOnChange = () => {},
   notSureOnClick = () => {},
   amountOnChange = () => {},
+  onSubmit = () => {},
 }: MyAccountWithdrawModalProps) => {
   const [coin, setCoin] = useState<CoinOption>();
   const [network, setNetwork] = useState<NetworkOption>();
@@ -71,6 +72,7 @@ const MyAccountWithdrawModal = ({
         inputAmountOnChange={amountOnChange}
         notSureOnClick={notSureOnClick}
         inputAddressOnChange={addressOnChange}
+        onSubmit={onSubmit}
       />
     </ModalContainer>
   );

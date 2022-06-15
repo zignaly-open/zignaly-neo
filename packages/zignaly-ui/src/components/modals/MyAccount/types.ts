@@ -30,4 +30,5 @@ export interface MyAccountWithdrawModalProps {
   notSureOnClick?: Function;
   addressOnChange?: Function;
   amountOnChange?: Function;
+  onSubmit?: any;
 }

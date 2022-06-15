@@ -4,7 +4,7 @@ import InputAmount from "components/inputs/InputAmount";
 import InputText from "components/inputs/InputText";
 import TextButton from "components/inputs/TextButton";
 import { ethers } from "ethers";
-import React, { useMemo } from "react";
+import React from "react";
 import { useCallback, useState } from "react";
 import { Gap } from "utils/gap";
 import { Row } from "utils/row";
@@ -15,7 +15,8 @@ const FormAndButton = ({
   coin,
   inputAmountOnChange,
   inputAddressOnChange,
-  notSureOnClick,
+  notSureOnClick = () => {},
+  onSubmit = () => {},
 }: FormAndButtonProps) => {
   const [withdrawAddress, setWithdrawAddress] = useState("");
   const [withdrawAmount, setWithdrawAmount] = useState<Number>(0);
@@ -23,43 +24,39 @@ const FormAndButton = ({
   let isValidAddress = false;
   let isValidAmount = false;
 
-  const withAddressChanged = (e: string) =>
-    useMemo(() => {
-      setWithdrawAddress(e);
-      validateWithdrawAddress(e);
-      validateInput();
-      inputAddressOnChange(withdrawAddress);
-    }, [e]);
+  const handleSubmit = () => {
+    onSubmit(withdrawAddress, withdrawAmount);
+  };
 
-  const withdrawAmountChanged = (e: number) =>
-    useMemo(() => {
-      setWithdrawAmount(e);
-      validateAmount(e);
-      validateInput();
-      inputAmountOnChange(withdrawAmount);
-    }, [e]);
+  const withAddressChanged = useCallback((e: string) => {
+    setWithdrawAddress(e);
+    validateWithdrawAddress(e);
+    validateInput();
+    inputAddressOnChange(withdrawAddress);
+  }, []);
 
-  const validateAmount = useCallback(
-    (withdrawAmount: number) => {
-      if (withdrawAmount <= 0) {
-        isValidAmount = false;
-      } else {
-        isValidAmount = true;
-      }
-    },
-    [withdrawAmount],
-  );
+  const withdrawAmountChanged = useCallback((e: number) => {
+    setWithdrawAmount(e);
+    validateAmount(e);
+    validateInput();
+    inputAmountOnChange(withdrawAmount);
+  }, []);
 
-  const validateWithdrawAddress = useCallback(
-    (withdrawAddress: string) => {
-      if (withdrawAddress === "") {
-        isValidAddress = false;
-      } else {
-        isValidAddress = true;
-      }
-    },
-    [withdrawAddress],
-  );
+  const validateAmount = useCallback((withdrawAmount: number) => {
+    if (withdrawAmount <= 0) {
+      isValidAmount = false;
+    } else {
+      isValidAmount = true;
+    }
+  }, []);
+
+  const validateWithdrawAddress = useCallback((withdrawAddress: string) => {
+    if (withdrawAddress === "") {
+      isValidAddress = false;
+    } else {
+      isValidAddress = true;
+    }
+  }, []);
 
   const validateInput = useCallback(() => {
     if (isValidAddress && isValidAmount) {
@@ -67,7 +64,7 @@ const FormAndButton = ({
     } else {
       setIsValidInput(false);
     }
-  }, [isValidAddress, isValidAmount]);
+  }, [isValidAmount, isValidAddress]);
 
   if (network !== undefined && coin !== undefined) {
     return (
@@ -79,7 +76,7 @@ const FormAndButton = ({
           value={withdrawAddress}
           onChange={(e: any) => {
             withAddressChanged(e.target.value);
-            inputAmountOnChange(e);
+            inputAddressOnChange(e.target.value);
           }}
         />
         <Row gap={14}>
@@ -92,6 +89,7 @@ const FormAndButton = ({
           value={ethers.utils.parseEther(coin.balance.toString())}
           onChange={(e: any) => {
             withdrawAmountChanged(e.target.value);
+            inputAmountOnChange(e.target.value);
           }}
           name={coin.caption}
           tokens={[
@@ -106,7 +104,7 @@ const FormAndButton = ({
           <Button variant="secondary" size="xlarge" caption={"Cancel"} />
           <Button
             disabled={!isValidInput}
-            onClick={() => {}}
+            onClick={() => handleSubmit()}
             size="xlarge"
             caption={"Continue to Confirmation"}
           />

@@ -3,7 +3,6 @@ import * as React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import MyAccountWithdrawModal from ".";
 
-
 // Assets
 import EthereumIcon from "assets/icons/coins/eth.svg?url";
 import BitcoinIcon from "assets/icons/coins/btc.svg?url";
@@ -126,4 +125,9 @@ const Template: ComponentStory<typeof MyAccountWithdrawModal> = (args) => {
 export const Default = Template.bind({});
 Default.args = {
   coins: coins,
+  notSureOnClick: (e: any) => console.log(e),
+  onSubmit: (a: any, b: any) => {
+    console.log("Address is " + a);
+    console.log("Amount is " + b);
+  },
 };

@@ -5,5 +5,6 @@ export interface FormAndButtonProps {
   network: NetworkOption | undefined;
   inputAmountOnChange: Function;
   inputAddressOnChange: Function;
-  notSureOnClick: Function;
+  notSureOnClick?: Function;
+  onSubmit?: any;
 }
