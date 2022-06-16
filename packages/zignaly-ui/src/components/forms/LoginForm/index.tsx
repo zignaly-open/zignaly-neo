@@ -38,7 +38,9 @@ function LoginForm({
 
   return (
     <Layout>
-      <Typography variant={"h2"}>Log In</Typography>
+      <Typography variant={"h2"} color="neutral100">
+        Log In
+      </Typography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Field>
           <Controller

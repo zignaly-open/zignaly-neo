@@ -3,7 +3,11 @@ import { styledIf } from "utils/styled";
 
 export const Container = styled.div``;
 
-export const AmountContainer = styled.div<{ width: string; coloredBorder?: boolean }>`
+export const AmountContainer = styled.div<{
+  width: string;
+  coloredBorder?: boolean;
+  height: string;
+}>`
   position: relative;
   display: flex;
   text-align: center;
@@ -12,7 +16,6 @@ export const AmountContainer = styled.div<{ width: string; coloredBorder?: boole
   background: #101225;
   box-shadow: inset 0px 0px 0px 1px #35334a;
   border-radius: 5px;
-  height: 96px;
   box-sizing: border-box;
 
   &:before {
@@ -33,6 +36,7 @@ export const AmountContainer = styled.div<{ width: string; coloredBorder?: boole
 
   ${(props) => `
     width: ${props.width}px;
+    height: ${props.height}px;
 
     ${styledIf(
       props.coloredBorder,

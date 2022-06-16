@@ -12,6 +12,7 @@ const MyAccountWithdrawModal = ({
   addressOnChange = () => {},
   notSureOnClick = () => {},
   amountOnChange = () => {},
+  onClickClose = () => {},
   onSubmit = () => {},
 }: MyAccountWithdrawModalProps) => {
   const [coin, setCoin] = useState<CoinOption>();
@@ -59,8 +60,8 @@ const MyAccountWithdrawModal = ({
   };
 
   return (
-    <ModalContainer width={784} title="Withdraw Crypto">
-      <Typography variant="body1" color="neutral200">
+    <ModalContainer width={784} title="Withdraw Crypto" onClickClose={onClickClose}>
+      <Typography variant="body1" color="neutral200" weight="regular">
         Withdraw crypto to an external account. To move funds between Zignaly accounts, use a
         transfer instead.
       </Typography>

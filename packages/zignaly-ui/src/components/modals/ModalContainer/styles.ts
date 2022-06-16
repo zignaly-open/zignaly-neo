@@ -23,12 +23,16 @@ export const Layout = styled.div<any>`
 
   ${({ width, padding }: any) => `
     width: ${getWidth(width)}px;
-    padding: ${padding ?? "40px 56px"};
+    padding: ${padding ?? "0"};
   `};
   user-select: none;
 `;
 
-export const Title = styled(Typography).attrs({ variant: "h1", color: "neutral100" })`
+export const Title = styled(Typography).attrs({
+  variant: "h1",
+  color: "neutral100",
+  weight: "medium",
+})`
   display: flex;
   justify-content: space-between;
 `;
@@ -40,6 +44,7 @@ export const Body = styled.div`
   flex-direction: column;
   width: 100%;
   color: ${({ theme }) => theme.neutral200};
+  padding: 0px 56px 56px 56px;
 `;
 
 export const Header = styled.div`
@@ -49,6 +54,7 @@ export const Header = styled.div`
   width: 100%;
   align-items: center;
   margin-bottom: 14px;
+  padding: 40px 40px 0px 56px;
 `;
 
 export const HeaderButton = styled.button<any>`

@@ -11,12 +11,6 @@ const isNormalSelect = (size: SelectSizes) => size === SelectSizes.NORMAL;
 const isLargeSelect = (size: SelectSizes) => size === SelectSizes.LARGE;
 
 export const Label = styled.label`
-  color: #a9a9ba;
-  font-style: normal;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 20px;
-  letter-spacing: 0.5px;
   margin-bottom: 4px;
 `;
 
@@ -50,12 +44,13 @@ export const Placeholder = styled(Value)`
   `}
 `;
 
-export const Arrow = styled.img`
+export const ArrowContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-left: 8px;
   margin-right: 5px;
 `;
-
-export const ArrowContainer = styled.div``;
 
 export const Menu = styled.ul`
   list-style-type: none;
@@ -198,22 +193,11 @@ export const Layout = styled.div<LayoutProps>`
     ${styledIf(
       isSmallSelect(props.size),
       `
-      ${Arrow} {
-        width: 10px;
-        height: 5.84px;
-      }
       
       ${LeftElementIcon} {
         width: 20px;
         height: 20px;
-      }
-      
-      ${Value}, ${ItemCaption} {
-        font-weight: 400;
-        font-size: 12px;
-        line-height: 16px;
-        letter-spacing: 0.5px;
-      }      
+      }     
     
       ${Container}, ${Item} {
         padding: 7.67px 12.88px;
@@ -224,22 +208,12 @@ export const Layout = styled.div<LayoutProps>`
     ${styledIf(
       isNormalSelect(props.size),
       `
-      ${Arrow} {
-        width: 12px;
-        height: 7px;
-      }
       
       ${LeftElementIcon} {
         width: 24px;
         height: 24px;
       }
       
-      ${Value}, ${ItemCaption} {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 20px;
-        letter-spacing: 0.5px;
-      }
     
       ${Container}, ${Item} {
         padding: 10px 13.86px;
@@ -252,7 +226,7 @@ export const Layout = styled.div<LayoutProps>`
         min-width: 0;
         padding: 2px 9px;
       }
-      ${Arrow}{
+      ${ArrowContainer}{
         margin: 0;
         }
       `,
@@ -263,21 +237,10 @@ export const Layout = styled.div<LayoutProps>`
     ${styledIf(
       isLargeSelect(props.size),
       `
-      ${Arrow} {
-        width: 20px;
-        height: 12px;
-      }
       
       ${LeftElementIcon} {
         width: 36px;
         height: 36px;
-      }
-      
-      ${Value}, ${ItemCaption} {
-        font-weight: 400;
-        font-size: 16px;
-        line-height: 24px;
-        letter-spacing: 2px;
       }
       
       ${Container}, ${Item} {

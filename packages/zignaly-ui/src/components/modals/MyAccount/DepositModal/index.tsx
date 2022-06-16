@@ -17,14 +17,35 @@ import ZignalyQRCode from "components/display/ZignalyQRCode";
 const MyAccountDepositModal = ({
   coins,
   notSureOnClick = () => {},
+  onClickClose = () => {},
 }: MyAccountDepositModalProps) => {
   const [coin, setCoin] = useState<CoinOption>();
   const [network, setNetwork] = useState<NetworkOption>();
   const [depositAddress, setDepositAddress] = useState<string>("");
+  const [depositMemo, setDepositMemo] = useState<string>("");
 
   const copyAddress = useCallback(() => {
     navigator.clipboard.writeText(depositAddress);
   }, [depositAddress]);
+
+  const networkChanged = useCallback(
+    (e: NetworkOption) => {
+      setNetwork(e);
+      setDepositAddress(e.depositAddress ?? "");
+      setDepositMemo(e.depositMemo ?? "");
+    },
+    [network],
+  );
+
+  const coinChanged = useCallback(
+    (e: CoinOption) => {
+      setCoin(e);
+      setNetwork(undefined);
+      setDepositAddress("");
+      setDepositMemo("");
+    },
+    [coin],
+  );
 
   const CoinSelector = () => {
     return (
@@ -34,9 +55,7 @@ const MyAccountDepositModal = ({
             label="Coin"
             placeholder={coin?.caption ?? "Select a Coin"}
             onChange={(e: CoinOption) => {
-              setCoin(e);
-              setNetwork(undefined);
-              setDepositAddress("");
+              coinChanged(e);
             }}
             size={SelectSizes.LARGE}
             value={coin}
@@ -79,8 +98,7 @@ const MyAccountDepositModal = ({
           label="Network"
           placeholder={network?.caption ?? "Select a Network"}
           onChange={(e: NetworkOption) => {
-            setNetwork(e);
-            setDepositAddress(e.depositAddress ?? "");
+            networkChanged(e);
           }}
           size={SelectSizes.LARGE}
           value={network !== undefined ? network : undefined}
@@ -92,18 +110,44 @@ const MyAccountDepositModal = ({
     );
   };
 
-  const ErrorAndQRCode = () => {
+  const AddressAndQRCode = () => {
     if (network !== undefined && network.depositEnable === true) {
       return (
         <>
+          <InputText
+            label={"Deposit Address"}
+            readOnly={true}
+            value={depositAddress !== undefined ? depositAddress : undefined}
+            placeholder={"Select a Network and Coin first"}
+            rightSideElement={<CloneIcon width={40} height={40} color={dark["neutral300"]} />}
+            onClickRightSideElement={() => copyAddress}
+          />
+          {depositMemo !== "" && (
+            <>
+              <Gap gap={12} />
+              <InputText
+                label={"Deposit MEMO/Tag:"}
+                readOnly={true}
+                value={depositMemo}
+                placeholder={"Select a Network and Coin first"}
+                rightSideElement={<CloneIcon width={40} height={40} color={dark["neutral300"]} />}
+                onClickRightSideElement={() => copyAddress}
+              />
+            </>
+          )}
           <Row gap={14}>
             <ErrorMessage text={"Only send " + network?.name + " tokens to this address"} />
             <TextButton color="links" caption={"Not Sure?"} onClick={() => notSureOnClick()} />
           </Row>
           <Gap gap={28} />
-          <Row justifyContent="center" gap={0}>
-            <ZignalyQRCode url={network?.url ?? "www.zignaly.com"} />
-          </Row>
+          {depositMemo === "" ? (
+            <ZignalyQRCode url={network?.url} />
+          ) : (
+            <Row justifyContent="center" gap={97}>
+              <ZignalyQRCode label={coin?.caption + " Address"} url={network?.url} />
+              <ZignalyQRCode label={coin?.caption + " Memo/Tag"} url={network?.depositMemo} />
+            </Row>
+          )}
         </>
       );
     } else if (network?.depositEnable === false) {
@@ -114,7 +158,7 @@ const MyAccountDepositModal = ({
   };
 
   return (
-    <ModalContainer width={784} title="Deposit Crypto">
+    <ModalContainer width={784} title="Deposit Crypto" onClickClose={onClickClose}>
       <Typography variant="body1" color="neutral200" weight="regular">
         Deposits may take up to 3 hours to reflect in your balance.
       </Typography>
@@ -123,15 +167,7 @@ const MyAccountDepositModal = ({
       <Gap gap={12}></Gap>
       <NetworkSelector />
       <Gap gap={12}></Gap>
-      <InputText
-        label={"Deposit Address"}
-        readOnly={true}
-        value={depositAddress !== undefined ? depositAddress : undefined}
-        placeholder={"Select a Network and Coin first"}
-        rightSideElement={<CloneIcon width={40} height={40} color={dark["neutral300"]} />}
-        onClickRightSideElement={() => copyAddress}
-      />
-      <ErrorAndQRCode />
+      <AddressAndQRCode />
     </ModalContainer>
   );
 };

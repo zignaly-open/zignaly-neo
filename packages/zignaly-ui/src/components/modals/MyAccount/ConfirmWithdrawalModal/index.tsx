@@ -19,6 +19,7 @@ const ConfirmWithdrawalModal = ({
   onGoBack = () => {},
   withdrawalAmount,
   netWorkFee,
+  onClickClose = () => {},
 }: ConfirmWithdrawalModalProps) => {
   const ZigAmount = ({ amount, marginRight }: { amount: number; marginRight: number }) => {
     return (
@@ -36,8 +37,8 @@ const ConfirmWithdrawalModal = ({
     );
   };
   return (
-    <ModalContainer width={784} title="Confirm Withdrawal">
-      <Typography variant="body1" color="neutral200">
+    <ModalContainer width={784} title="Confirm Withdrawal" onClickClose={onClickClose}>
+      <Typography variant="body1" color="neutral200" weight="regular">
         Please confirm the information is correct and submit your withdrawal.
       </Typography>
       <Gap gap={16} />
@@ -58,7 +59,7 @@ const ConfirmWithdrawalModal = ({
       <InputText label="Withdraw to Address" readOnly={true} value={withdrawAddress} name={"Eth"} />
       <Gap gap={16} />
       <Row justifyContent="center" gap={16} alignItems="center">
-        <AmountContainer width="446">
+        <AmountContainer width="446" height={"96"}>
           <Column justifyContent="center">
             <Typography weight="regular" variant="h3" color="neutral200">
               Withdrawal Amount
@@ -67,7 +68,7 @@ const ConfirmWithdrawalModal = ({
             <ZigAmount amount={withdrawalAmount} marginRight={4} />
           </Column>
         </AmountContainer>
-        <AmountContainer width="210">
+        <AmountContainer width="210" height={"96"}>
           <Column justifyContent="center">
             <Typography variant="body2" weight="medium" color="neutral200">
               Network Fee
@@ -78,7 +79,7 @@ const ConfirmWithdrawalModal = ({
         </AmountContainer>
       </Row>
       <Gap gap={8} />
-      <AmountContainer coloredBorder={true} width="672">
+      <AmountContainer coloredBorder={true} width="672" height="120">
         <Row gap={16} alignItems="center">
           <Typography color="neutral300" variant="h2" weight="medium">
             You’ll Receive:

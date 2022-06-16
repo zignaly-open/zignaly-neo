@@ -30,7 +30,9 @@ function AuthVerifyModal({
   return (
     <ModalContainer width={500} onClickClose={onClickClose}>
       <Title>
-        <Typography variant={"h1"}>Confirm New Device</Typography>
+        <Typography variant={"h1"} color="neutral100">
+          Confirm New Device
+        </Typography>
       </Title>
       <Container>
         {hasEmailVerified ||

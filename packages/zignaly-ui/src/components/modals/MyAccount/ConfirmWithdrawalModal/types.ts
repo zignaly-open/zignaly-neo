@@ -6,4 +6,5 @@ export interface ConfirmWithdrawalModalProps {
   onClickWithdraw?: Function;
   withdrawalAmount: number;
   netWorkFee: number;
+  onClickClose: any;
 }
