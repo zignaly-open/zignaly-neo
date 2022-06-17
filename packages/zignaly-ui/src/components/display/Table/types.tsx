@@ -9,13 +9,14 @@ import React from "react";
 import PercentageIndicator from "./components/PercentageIndicator";
 import AssetsInPool from "./components/AssetsInPool";
 import InvestColumn from "./components/InvestColumn";
+import { Column } from "utils/column";
+import Typography from "../Typography";
 
 export const tableTypes = {
   basic: "basic",
   pagedWithData: "pagedWithData",
   pagedWithOutData: "pagedWithOutData",
 };
-
 export interface TableBasicProps {
   columns: any[];
   data: Object[];
@@ -42,15 +43,35 @@ export interface UserTableData {
   threeMonths: PercentageIndicatorProps;
   all: PercentageIndicatorProps;
 }
+interface MarketPlaceTableProps {
+  serviceName: {
+    heading: string;
+    subtitle: string;
+    cryptoName: string;
+    cryptoAlt: string;
+  };
+  assetsInPool: {
+    assetsValue: number;
+    numberOfInvestors: number;
+  };
+  chart: ChartsProps;
+  oneYear: {
+    value: number;
+    subtitle: string;
+    showTrophy: boolean;
+  };
+}
 
 export const createMarketPlaceTableHeader = () => {
   return [
     {
-      Header: "Service Name",
-      Footer: (
-        <div>
-          <div>{"Manager/Base Currency"}</div>
-        </div>
+      Header: (
+        <Column style={{ position: "absolute", bottom: -15, left: 0, marginLeft: 104 }}>
+          <div>{"ServiceName"}</div>
+          <Typography variant="h5" weight="medium" color="neutral400">
+            {"Manager/Base Currency"}
+          </Typography>
+        </Column>
       ),
       accessor: "serviceName",
     },
@@ -78,161 +99,91 @@ export const createMarketPlaceTableHeader = () => {
   ];
 };
 
-interface MarketPlaceTableProps {
-  serviceName: {
-    heading: string;
-    subtitle: string;
-    cryptoName: string;
-    cryptoAlt: string;
-  };
-  assetsInPool: {
-    assetsValue: number;
-    numberOfInvestors: number;
-  };
-  chart: ChartsProps;
-  oneYear: {
-    value: number;
-    subtitle: string;
-  };
-}
-
-export const createMarketPlaceTableBody = ({
+export const createMarketPlaceTableBodyObject = ({
   serviceName,
   assetsInPool,
   chart,
   oneYear,
 }: MarketPlaceTableProps) => {
+  return {
+    serviceName: (
+      <ServiceName
+        heading={serviceName.heading}
+        subtitle={serviceName.subtitle}
+        cryptoName={serviceName.cryptoName}
+        cryptoAlt={serviceName.cryptoAlt}
+      />
+    ),
+    assetsInPool: (
+      <AssetsInPool
+        assetsValue={assetsInPool.assetsValue}
+        numberOfInvestors={assetsInPool.numberOfInvestors}
+      />
+    ),
+    chart: <AreaChart variant={chart.variant} data={chart.data} />,
+    oneYear: (
+      <PercentageIndicator
+        dashboardType="marketplace"
+        value={oneYear.value}
+        subtitle="2.2 years"
+        showTrophy={oneYear.showTrophy}
+      />
+    ),
+    invest: <InvestColumn type="invested" />,
+  };
+};
+
+export const createUserTableHeader = () => {
   return [
     {
-      serviceName: (
-        <ServiceName
-          heading={serviceName.heading}
-          subtitle={serviceName.subtitle}
-          cryptoName={serviceName.cryptoName}
-          cryptoAlt={serviceName.cryptoAlt}
-        />
+      Header: "My Current Value",
+      accessor: "summary",
+      headerWithFooter: (
+        <div>
+          <div>{"Returns"}</div>
+        </div>
       ),
-      assetsInPool: (
-        <AssetsInPool
-          assetsValue={assetsInPool.assetsValue}
-          numberOfInvestors={assetsInPool.numberOfInvestors}
-        />
-      ),
-      chart: <AreaChart variant={chart.variant} data={chart.data} />,
-      oneYear: (
-        <PercentageIndicator
-          dashboardType="marketplace"
-          value={oneYear.value}
-          subtitle="2.2 years"
-          showTrophy={true}
-        />
-      ),
-      invest: <InvestColumn type="invested" />,
     },
     {
-      serviceName: (
-        <ServiceName
-          heading={serviceName.heading}
-          subtitle={serviceName.subtitle}
-          cryptoName={serviceName.cryptoName}
-          cryptoAlt={serviceName.cryptoAlt}
-        />
+      Header: (
+        <Column style={{ position: "absolute", bottom: -15, left: 0, marginLeft: 108 }}>
+          <div>{"ServiceName"}</div>
+          <Typography variant="h5" weight="medium" color="neutral400">
+            {"Manager/Base Currency"}
+          </Typography>
+        </Column>
       ),
-      assetsInPool: (
-        <AssetsInPool
-          assetsValue={assetsInPool.assetsValue}
-          numberOfInvestors={assetsInPool.numberOfInvestors}
-        ></AssetsInPool>
-      ),
-      chart: <AreaChart variant={chart.variant} data={chart.data} />,
-      oneYear: (
-        <PercentageIndicator
-          dashboardType="marketplace"
-          value={oneYear.value}
-          subtitle="2.2 years"
-        />
-      ),
-      invest: <InvestColumn type="liquidated" />,
+      accessor: "serviceName",
     },
     {
-      serviceName: (
-        <ServiceName
-          heading={serviceName.heading}
-          subtitle={serviceName.subtitle}
-          cryptoName={serviceName.cryptoName}
-          cryptoAlt={serviceName.cryptoAlt}
-        />
-      ),
-      assetsInPool: (
-        <AssetsInPool
-          assetsValue={assetsInPool.assetsValue}
-          numberOfInvestors={assetsInPool.numberOfInvestors}
-        ></AssetsInPool>
-      ),
-      chart: <AreaChart variant={chart.variant} data={chart.data} />,
-      oneYear: (
-        <PercentageIndicator
-          dashboardType="marketplace"
-          value={oneYear.value}
-          subtitle="2.2 years"
-        />
-      ),
-      invest: <InvestColumn type="notInvested" />,
+      Header: "Since Invested",
+      accessor: "chart",
     },
     {
-      serviceName: (
-        <ServiceName
-          heading={serviceName.heading}
-          subtitle={serviceName.subtitle}
-          cryptoName={serviceName.cryptoName}
-          cryptoAlt={serviceName.cryptoAlt}
-        />
-      ),
-      assetsInPool: (
-        <AssetsInPool
-          assetsValue={assetsInPool.assetsValue}
-          numberOfInvestors={assetsInPool.numberOfInvestors}
-        ></AssetsInPool>
-      ),
-      chart: <AreaChart variant={chart.variant} data={chart.data} />,
-      oneYear: (
-        <PercentageIndicator
-          dashboardType="marketplace"
-          value={oneYear.value}
-          subtitle="2.2 years"
-        />
-      ),
-      invest: <InvestColumn type="notInvestedAllAccounts" />,
+      Header: "Daily avg",
+      accessor: "dailyAvg",
     },
     {
-      serviceName: (
-        <ServiceName
-          heading={serviceName.heading}
-          subtitle={serviceName.subtitle}
-          cryptoName={serviceName.cryptoName}
-          cryptoAlt={serviceName.cryptoAlt}
-        />
+      Header: "1 mo.",
+      accessor: "oneMonth",
+    },
+    {
+      Header: "3 mo.",
+      accessor: "threeMonths",
+    },
+    {
+      Header: "All",
+      accessor: "all",
+      headerWithFooter: (
+        <div>
+          <div>{"Age"}</div>
+        </div>
       ),
-      assetsInPool: (
-        <AssetsInPool
-          assetsValue={assetsInPool.assetsValue}
-          numberOfInvestors={assetsInPool.numberOfInvestors}
-        ></AssetsInPool>
-      ),
-      chart: <AreaChart variant={chart.variant} data={chart.data} />,
-      oneYear: (
-        <PercentageIndicator
-          dashboardType="marketplace"
-          value={oneYear.value}
-          subtitle="2.2 years"
-        />
-      ),
-      invest: <InvestColumn type="investedSeeAll" />,
     },
   ];
 };
 
-export const createUserTable = ({
+export const createUserTableDataObject = ({
   summary,
   serviceName,
   chart,
@@ -242,90 +193,20 @@ export const createUserTable = ({
   all,
 }: UserTableData) => {
   return {
-    hideOptionsButton: true,
-    isUserTable: true,
-    columns: [
-      {
-        Header: "My Current Value",
-        accessor: "summary",
-        headerWithFooter: (
-          <div>
-            <div>{"Returns"}</div>
-          </div>
-        ),
-      },
-      {
-        Header: "Service Name",
-        accessor: "serviceName",
-        headerWithFooter: (
-          <div>
-            <div>{"Manager"}</div> <div>{"Base currency"}</div>
-          </div>
-        ),
-      },
-      {
-        Header: "Since Invested",
-        accessor: "chart",
-      },
-      {
-        Header: "Daily avg",
-        accessor: "dailyAvg",
-      },
-      {
-        Header: "1 mo.",
-        accessor: "oneMonth",
-      },
-      {
-        Header: "3 mo.",
-        accessor: "threeMonths",
-      },
-      {
-        Header: "All",
-        accessor: "all",
-        headerWithFooter: (
-          <div>
-            <div>{"Age"}</div>
-          </div>
-        ),
-      },
-    ],
-    data: [
-      {
-        summary: <BalanceSummary totalValue={summary.totalValue} profit={summary.profit} />,
+    summary: <BalanceSummary totalValue={summary.totalValue} profit={summary.profit} />,
+    serviceName: (
+      <ServiceName
+        heading={serviceName.heading}
+        subtitle={serviceName.subtitle}
+        cryptoName={serviceName.cryptoName}
+        cryptoAlt={serviceName.cryptoAlt}
+      />
+    ),
+    chart: <AreaChart variant={chart.variant} data={chart.data} />,
+    dailyAvg: <PercentageIndicator dashboardType="user" value={dailyAvg.value} />,
 
-        serviceName: (
-          <ServiceName
-            heading={serviceName.heading}
-            subtitle={serviceName.subtitle}
-            cryptoName={serviceName.cryptoName}
-            cryptoAlt={serviceName.cryptoAlt}
-          />
-        ),
-        chart: <AreaChart variant={chart.variant} data={chart.data} />,
-        dailyAvg: <PercentageIndicator dashboardType="user" value={dailyAvg.value} />,
-
-        oneMonth: <PercentageIndicator dashboardType="user" value={oneMonth.value} />,
-        threeMonths: <PercentageIndicator dashboardType="user" value={threeMonths.value} />,
-        all: <PercentageIndicator dashboardType="user" value={all.value} subtitle="2.2 years" />,
-      },
-      {
-        summary: <BalanceSummary totalValue={summary.totalValue} profit={summary.profit} />,
-
-        serviceName: (
-          <ServiceName
-            heading={serviceName.heading}
-            subtitle={serviceName.subtitle}
-            cryptoName={serviceName.cryptoName}
-            cryptoAlt={serviceName.cryptoAlt}
-          />
-        ),
-        chart: <AreaChart variant={chart.variant} data={chart.data} />,
-        dailyAvg: <PercentageIndicator dashboardType="user" value={dailyAvg.value} />,
-
-        oneMonth: <PercentageIndicator dashboardType="user" value={oneMonth.value} />,
-        threeMonths: <PercentageIndicator dashboardType="user" value={threeMonths.value} />,
-        all: <PercentageIndicator dashboardType="user" value={all.value} subtitle="2.2 years" />,
-      },
-    ],
+    oneMonth: <PercentageIndicator dashboardType="user" value={oneMonth.value} />,
+    threeMonths: <PercentageIndicator dashboardType="user" value={threeMonths.value} />,
+    all: <PercentageIndicator dashboardType="user" value={all.value} subtitle="2.2 years" />,
   };
 };

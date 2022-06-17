@@ -13,7 +13,6 @@ import CoinLabel from "./components/display/Table/components/CoinLabel";
 import Toaster from "./components/display/Toaster";
 import ProgressSlider from "components/display/ProgressSlider";
 import InvestSlider from "components/display/InvestSlider";
-import { createUserTable } from "components/display/Table/types";
 import { ServiceName } from "components/display/Table/components/ServiceName";
 import { BalanceSummary } from "components/display/Table/components/BalanceSummary";
 import { AreaChart } from "components/display/Charts";
@@ -77,6 +76,12 @@ import BrandImage from "./components/navigation/Header/components/BrandImage";
 import ThemeProvider from "./utils/ThemeProvider";
 import { dark, light } from "./theme";
 import { customSort } from "./utils/numbers";
+import {
+  createMarketPlaceTableBodyObject,
+  createMarketPlaceTableHeader,
+  createUserTableDataObject,
+  createUserTableHeader,
+} from "components/display/Table/types";
 
 export {
   /**
@@ -91,7 +96,10 @@ export {
   Avatar,
   Loader,
   Table,
-  createUserTable,
+  createUserTableHeader,
+  createUserTableDataObject,
+  createMarketPlaceTableBodyObject,
+  createMarketPlaceTableHeader,
   ConnectionStateLabel,
   DateLabel,
   PriceLabel,

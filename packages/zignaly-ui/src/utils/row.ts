@@ -4,10 +4,12 @@ export const Row = styled.div<{
   gap?: number;
   justifyContent?: "center" | "end" | "start";
   alignItems?: "center" | "end" | "start";
-  textAlign?: "end" | "center" | "start";
+  textAlign?: "end" | "center" | "start" | "left";
   height?: string;
   flex?: number;
   width?: string;
+  maxWidth?: string;
+  marginLeft?: string;
 }>`
   display: flex;
   flex-direction: row;
@@ -18,4 +20,6 @@ export const Row = styled.div<{
   text-align: ${(props) => `${props.textAlign}`};
   height: ${(props) => `${props.height}`};
   width: ${(props) => `${props.width}`};
+  max-width: ${(props) => `${props.maxWidth}`};
+  margin-left: ${(props) => `${props.marginLeft}`}px;
 `;
