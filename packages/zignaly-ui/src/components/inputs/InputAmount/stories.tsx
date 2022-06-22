@@ -134,3 +134,26 @@ Disabled.args = {
   ],
   disabled: true,
 };
+
+export const ReadOnly = Template.bind({});
+ReadOnly.args = {
+  label: "Swap to",
+  onChange: () => {},
+  readOnly: true,
+  value: 100,
+  showMaxButton: false,
+  tokens: [
+    {
+      id: "btc",
+      balance: "1000000000000000000",
+    },
+    {
+      id: "eth",
+      balance: "1000000000000000000",
+    },
+    {
+      id: "doge",
+      balance: "1000000000000000000",
+    },
+  ],
+};

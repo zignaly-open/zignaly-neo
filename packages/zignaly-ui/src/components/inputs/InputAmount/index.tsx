@@ -42,14 +42,16 @@ function InputAmount(
     labelBalance = "Balance:",
     value = BigNumber.from(0),
     name,
+    readOnly = false,
     fullWidth,
     placeholder,
     showUnit = false,
+    showMaxButton = true,
   }: InputAmountProps,
   inputRef: React.Ref<any>,
 ) {
   // Hooks
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState(value);
   const [selectedToken, setSelectedToken] = useState(tokens[initialTokenIndex] ?? null);
 
   /** ================= *
@@ -148,6 +150,7 @@ function InputAmount(
               <InputValue
                 ref={inputRef}
                 value={inputValue}
+                readOnly={readOnly}
                 type={"text"}
                 placeholder={placeholder || "0.0"}
                 onChange={handleTextChange}
@@ -156,7 +159,9 @@ function InputAmount(
                 name={name}
               />
             </InputField>
-            {selectedToken && tokens && <MaxButton onClick={onClickMaxValue}>Max</MaxButton>}
+            {selectedToken && tokens && showMaxButton && (
+              <MaxButton onClick={onClickMaxValue}>Max</MaxButton>
+            )}
           </Side>
           {tokens?.length > 2 && (
             <Side>
