@@ -4,9 +4,6 @@ import React, { useCallback, useRef, useState } from "react";
 // Styled Components
 import { Layout, Box, Label, Icon } from "./styles";
 
-// Assets
-import CheckmarkIcon from "assets/icons/checkmark-active-icon.svg?url";
-
 // Types
 import { CheckBoxProps } from "./types";
 
@@ -36,7 +33,7 @@ function CheckBox({
   return (
     <Layout onClick={handleClickChecked} isActive={isChecked} disabled={disabled}>
       <Box>
-        <Icon src={CheckmarkIcon} alt={label} />
+        <Icon />
       </Box>
       <Label>{label}</Label>
     </Layout>
