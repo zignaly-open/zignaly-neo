@@ -10,6 +10,8 @@ export interface AvaliableCoin extends TokenItem {
 export interface Swap {
   token?: AvaliableCoin;
   value?: string | number | BigNumberish;
+  networkFee?: number;
+  swapRate?: number;
 }
 
 export interface InputModalProps {
