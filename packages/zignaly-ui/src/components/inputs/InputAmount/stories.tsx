@@ -72,7 +72,8 @@ OnlyOneTokenWithUnit.args = {
 export const WithMultipleTokens = Template.bind({});
 WithMultipleTokens.args = {
   label: "Amount to Withdraw",
-  onChange: ({ value, token }: any) => {
+  onChange: (e: any, { value, token }: any) => {
+    console.log(e);
     console.log({ value, token });
   },
   tokens: [

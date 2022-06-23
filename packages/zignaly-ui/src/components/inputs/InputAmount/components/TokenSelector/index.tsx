@@ -10,13 +10,12 @@ import {
   Value,
   ArrowContainer,
   ValueContainer,
-  Arrow,
   Menu,
   Item,
 } from "./styles";
 
 // Assets
-import CaretDownIcon from "assets/icons/caret-down-icon.svg?url";
+import ArrowDown from "assets/icons/caret-down-icon.svg";
 
 // Types
 import { TokenSelectorProps } from "./types";
@@ -56,8 +55,8 @@ function TokenSelector({
             <Value>{value.id.toUpperCase()}</Value>
           </ValueContainer>
         )}
-        <ArrowContainer>
-          <Arrow src={CaretDownIcon} alt={"Select a token"} />
+        <ArrowContainer isActiveMenu={isActiveMenu}>
+          <ArrowDown width={28} height={28} color="#89899A" alt={"Select a token"} />
         </ArrowContainer>
       </Container>
       <Menu>

@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
 export const Container = styled.div`
-  background: #0c0d21;
   user-select: none;
   cursor: pointer;
   display: flex;
@@ -43,18 +42,25 @@ export const Placeholder = styled(Value)`
   color: #919191;
 `;
 
-export const Arrow = styled.img`
-  width: 20px;
-  height: 10px;
-`;
-
 export const ValueContainer = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
 `;
 
-export const ArrowContainer = styled.div`
+export const ArrowContainer = styled.div<{ isActiveMenu: boolean }>`
+  ${(props) => `
+  ${styledIf(
+    props.isActiveMenu,
+    `
+    -webkit-transform:rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+    `,
+  )}
+  `}
   flex: 0;
 `;
 

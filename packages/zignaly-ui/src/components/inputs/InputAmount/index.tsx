@@ -79,7 +79,7 @@ function InputAmount(
 
       if (value === "") {
         // onChange(BigNumber.from(0));
-        onChange(e, { value, token: selectedToken });
+        onChange(e, { value: value, token: selectedToken });
         setInputValue(value);
         return;
       }
@@ -149,7 +149,7 @@ function InputAmount(
             <InputField>
               <InputValue
                 ref={inputRef}
-                value={inputValue}
+                value={readOnly ? value : inputValue}
                 readOnly={readOnly}
                 type={"text"}
                 placeholder={placeholder || "0.0"}
@@ -184,7 +184,9 @@ function InputAmount(
 
       {selectedToken && selectedToken.balance && (
         <BalanceContainer>
-          <BalanceLabel variant="body2">{labelBalance}</BalanceLabel>
+          <BalanceLabel variant="body2" weight="medium">
+            {labelBalance}
+          </BalanceLabel>
           <BalanceValue variant="body2" weight="medium">
             <NumberFormat
               value={utils.formatUnits(selectedToken.balance)}
