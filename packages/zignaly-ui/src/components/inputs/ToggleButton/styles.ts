@@ -7,19 +7,7 @@ const ToggleCommonProperties = styled.div`
   justify-content: center;
 `;
 
-export const ToggleCircle = styled.div`
-  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-  position: absolute;
-  top: 10%;
-  bottom: 10%;
-  left: 4px;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: #FFFFFF;
-  box-sizing: border-box;
-  transition: all 0.25s ease;
-`;
+export const ToggleCircle = styled.div``;
 
 export const ToggleInput = styled.input`
   border: 0;
@@ -48,15 +36,9 @@ export const ToggleUncheck = styled(ToggleCommonProperties)`
   bottom: 10%;
 `;
 
-export const ToggleContainer = styled.div`
-  width: 96px;
-  height: 40px;
-  padding: 0;
-  border-radius: 30px;
-  transition: all 0.2s ease;
-`;
+export const ToggleContainer = styled.div``;
 
-export const Toggle = styled.div<{ checked?: boolean }>`
+export const Toggle = styled.div<{ checked?: boolean; size: "small" | "large" | "medium" }>`
   touch-action: pan-x;
   display: inline-block;
   position: relative;
@@ -73,6 +55,83 @@ export const Toggle = styled.div<{ checked?: boolean }>`
 
   ${(props) =>
     `
+
+   
+    ${styledIf(
+      props.size === "large",
+      ` ${ToggleCircle} {
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+      position: absolute;
+      top: 10%;
+      bottom: 10%;
+      left: 4px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      box-sizing: border-box;
+      transition: all 0.25s ease;
+    }
+    ${ToggleContainer} {
+      width: 96px;
+      height: 40px;
+      padding: 0;
+      border-radius: 30px;
+      transition: all 0.2s ease;
+    }
+    `,
+    )}
+
+    ${styledIf(
+      props.size === "small",
+      ` ${ToggleCircle} {
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+      position: absolute;
+      top: 17%;
+      bottom: 10%;
+      left: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      box-sizing: border-box;
+      transition: all 0.25s ease;
+    }
+    ${ToggleContainer} {
+      width: 48px;
+      height: 24px;
+      padding: 0;
+      border-radius: 30px;
+      transition: all 0.2s ease;
+    }
+    `,
+    )}
+
+    ${styledIf(
+      props.size === "medium",
+      ` ${ToggleCircle} {
+      transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1) 0ms;
+      position: absolute;
+      top: 12%;
+      bottom: 10%;
+      left: 4px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background-color: #ffffff;
+      box-sizing: border-box;
+      transition: all 0.25s ease;
+    }
+    ${ToggleContainer} {
+      width: 64px;
+      height: 32px;
+      padding: 0;
+      border-radius: 30px;
+      transition: all 0.2s ease;
+    }
+    `,
+    )}
+
     ${ToggleContainer}
     {
       background-color: #9CA3AF;
@@ -90,9 +149,27 @@ export const Toggle = styled.div<{ checked?: boolean }>`
    ${ToggleUncheck}{
         opacity: 0;
     }
-    ${ToggleCircle}{
-        left: 60px;
-    }
+    ${styledIf(
+      props.size === "large",
+      `
+      ${ToggleCircle}{
+      left: 60px;
+    }`,
+    )}
+    ${styledIf(
+      props.size === "medium",
+      `
+      ${ToggleCircle}{
+      left: 36px;
+    }`,
+    )}
+    ${styledIf(
+      props.size === "small",
+      `
+      ${ToggleCircle}{
+      left: 28px;
+    }`,
+    )}
   `,
     )}`}
 `;

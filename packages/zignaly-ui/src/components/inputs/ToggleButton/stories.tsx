@@ -24,4 +24,14 @@ export default {
 
 const Template: ComponentStory<typeof ToggleButton> = (args) => <ToggleButton {...args} />;
 
-export const ExampleToggleButton = Template.bind({});
+export const LargeToggleButton = Template.bind({});
+
+export const SmallToggleButton = Template.bind({});
+SmallToggleButton.args = {
+  size: "small",
+};
+
+export const MediumToggleButton = Template.bind({});
+MediumToggleButton.args = {
+  size: "medium",
+};

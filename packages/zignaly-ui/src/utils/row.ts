@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Row = styled.div<{
   gap?: number;
-  justifyContent?: "center" | "end" | "start";
-  alignItems?: "center" | "end" | "start";
+  justifyContent?: "center" | "end" | "start" | "space-between";
+  alignItems?: "center" | "end" | "start" | "space-between";
   textAlign?: "end" | "center" | "start" | "left";
   height?: string;
   flex?: number;
