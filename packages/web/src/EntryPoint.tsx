@@ -1,4 +1,5 @@
-import { ThemeProvider } from '@mui/material';
+import { ThemeProvider as ThemeProviderMui } from '@mui/material';
+import { dark, ThemeProvider } from 'zignaly-ui';
 import React from 'react';
 import Routes from './Routes';
 import theme from './theme';
@@ -70,14 +71,16 @@ const config = {
 
 function EntryPoint() {
   return (
-    <ThemeProvider theme={theme}>
-      <DAppProvider config={config}>
-        <ApolloProvider client={client}>
-          <OnboardingProvider>
-            <Routes />
-          </OnboardingProvider>
-        </ApolloProvider>
-      </DAppProvider>
+    <ThemeProvider theme={dark}>
+      <ThemeProviderMui theme={{ ...dark, ...theme }}>
+        <DAppProvider config={config}>
+          <ApolloProvider client={client}>
+            <OnboardingProvider>
+              <Routes />
+            </OnboardingProvider>
+          </ApolloProvider>
+        </DAppProvider>
+      </ThemeProviderMui>
     </ThemeProvider>
   );
 }

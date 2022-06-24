@@ -1,19 +1,24 @@
-import Typography from '@mui/material/Typography';
+import { Typography } from 'zignaly-ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Box } from '@mui/system';
 
 function HowItWorks() {
   const { t } = useTranslation('how-it-works');
   return (
     <>
-      <Typography marginTop={1}>{t('how-it-works-text')}</Typography>
+      <Box marginTop={1}>
+        <Typography>{t('how-it-works-text')}</Typography>
+      </Box>
 
       <ul>
         <li>
-          <Typography marginTop={1}>{t('qna-q1')}</Typography>
-          <Typography color={'secondary'} marginTop={1}>
-            {t('qna-a1')}
-          </Typography>
+          <Box marginTop={1}>
+            <Typography>{t('qna-q1')}</Typography>
+          </Box>
+          <Box marginTop={1}>
+            <Typography color={'secondary'}>{t('qna-a1')}</Typography>
+          </Box>
         </li>
         <li>
           <Typography marginTop={1}>{t('qna-q2')}</Typography>

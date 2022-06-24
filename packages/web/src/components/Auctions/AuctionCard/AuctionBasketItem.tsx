@@ -1,4 +1,4 @@
-import Typography from '@mui/material/Typography';
+import { Typography } from 'zignaly-ui';
 import React from 'react';
 import { BasketItem } from '@zigraffle/shared/types';
 

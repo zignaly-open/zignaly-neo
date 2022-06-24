@@ -1,6 +1,6 @@
 import { Box, Card, CardActions, CardHeader, CardMedia } from '@mui/material';
 import { css, styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+import { Typography } from 'zignaly-ui';
 import React from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import { AuctionType, BasketItem } from '@zigraffle/shared/types';
@@ -78,9 +78,11 @@ const AuctionCard: React.FC<{
     <Item isActive={isActive} isWinning={isWinning} isLosing={isLosing}>
       <CardHeader
         title={
-          <Typography gutterBottom variant='h6' component='div'>
-            {auction.title}
-          </Typography>
+          <Box marginBottom={1}>
+            <Typography variant='h2' component='div'>
+              {auction.title}
+            </Typography>
+          </Box>
         }
         subheader={
           <Typography color='text.secondary'>{auction.description}</Typography>
