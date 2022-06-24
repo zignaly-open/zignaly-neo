@@ -18,12 +18,12 @@ function Auctions() {
 
   return (
     <>
-      <Box textAlign={'center'} marginBottom={1}>
+      <Box textAlign={'center'} marginTop='122px'>
         <HomeTitle variant='h1' color='neutral000'>
-          ZIGRAFFLE
+          ZIGRaffle
         </HomeTitle>
       </Box>
-      <Box textAlign={'center'}>
+      <Box textAlign={'center'} marginBottom='70px'>
         <Typography color='neutral300'>{t('moto')}</Typography>
       </Box>
       <AuctionGrid />
