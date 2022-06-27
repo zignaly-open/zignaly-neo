@@ -4,7 +4,7 @@ import { BigNumberish } from "ethers";
 export interface AvaliableCoin extends TokenItem {
   id: string;
   balance: string | number | BigNumberish;
-  avaliableSwapPairs: TokenItem[];
+  avaliableSwapPairs?: TokenItem[];
 }
 
 export interface Swap {
