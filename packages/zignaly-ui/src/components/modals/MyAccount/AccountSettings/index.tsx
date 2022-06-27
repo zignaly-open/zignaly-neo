@@ -122,16 +122,16 @@ const AccountSettingsModal = ({
     return (
       <ModalContainer width={784} title="Edit Account Settings" onClickClose={onClickClose}>
         <Row>
-          <Typography variant="body1" color="neutral200">
+          <Typography variant="body1" color="neutral200" weight="regular">
             Type:{" "}
-            <Typography variant="body1" color="neutral000">
+            <Typography variant="body1" color="neutral000" weight="regular">
               {type}
             </Typography>
           </Typography>
           <Gap gap={8} />
-          <Typography variant="body1" color="neutral200">
+          <Typography variant="body1" color="neutral200" weight="regular">
             Exchange:{" "}
-            <Typography variant="body1" color="neutral000">
+            <Typography variant="body1" color="neutral000" weight="regular">
               {exchange}
             </Typography>
           </Typography>
@@ -144,7 +144,7 @@ const AccountSettingsModal = ({
             <Typography variant="h2" color="neutral100">
               Enable Leveraged Tokens
             </Typography>
-            <Typography variant="body1" color="neutral200">
+            <Typography variant="body1" color="neutral200" weight="regular">
               (derivate tokens that offer leveraged exposure to the underlying asset)
             </Typography>
           </Column>
@@ -156,7 +156,7 @@ const AccountSettingsModal = ({
             <Typography variant="h2" color="neutral100">
               Zignaly API Key
             </Typography>
-            <Typography variant="body1" color="neutral200">
+            <Typography variant="body1" color="neutral200" weight="regular">
               (to access your data from other software)
             </Typography>
           </Column>
