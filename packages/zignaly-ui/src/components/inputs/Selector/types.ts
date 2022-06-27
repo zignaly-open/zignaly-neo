@@ -25,4 +25,5 @@ export type SelectProps = {
   fullWidth?: boolean;
   maxHeight?: number;
   transparent?: boolean;
+  isMenuActive?: boolean;
 };

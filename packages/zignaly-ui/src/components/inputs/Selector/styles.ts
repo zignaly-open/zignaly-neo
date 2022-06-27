@@ -170,7 +170,6 @@ export const Layout = styled.div<LayoutProps>`
       `
       ${Menu} {
         border-radius: 0 0 4px 4px;
-        border: 1px solid ${props.theme["highlighted"]};;
         border-top: none;        
         visibility: visible;
         opacity: 1;
@@ -178,8 +177,7 @@ export const Layout = styled.div<LayoutProps>`
       
       ${Container} {
         border-radius: 4px 4px 0 0;
-        border: 1px solid ${props.theme["highlighted"]};
-        border-bottom: none;
+        border: 1px solid ${props.theme["neutral600"]};
       }
     `,
       `

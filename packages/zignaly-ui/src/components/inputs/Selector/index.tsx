@@ -41,12 +41,13 @@ function Select({
   size = SelectSizes.NORMAL,
   maxHeight,
   transparent,
+  isMenuActive = false,
 }: SelectProps): ReactElement {
   // Ref
   const selectorRef = useRef(null);
 
   // Hooks
-  const [isActiveMenu, setMenuActive] = useState(false);
+  const [isActiveMenu, setMenuActive] = useState(isMenuActive);
 
   /**
    * @function handleClickItem():

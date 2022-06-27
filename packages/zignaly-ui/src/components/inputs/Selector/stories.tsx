@@ -55,3 +55,11 @@ Default.args = {
   placeholder: "Select your currency",
   options,
 };
+
+export const MenuIsActive = Template.bind({});
+MenuIsActive.args = {
+  label: "Currencies",
+  placeholder: "Select your currency",
+  options,
+  isMenuActive: true,
+};
