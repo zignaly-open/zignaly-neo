@@ -82,6 +82,7 @@ import {
   createUserTableDataObject,
   createUserTableHeader,
 } from "components/display/Table/types";
+import ModalContainer from "components/modals/ModalContainer";
 
 export {
   /**
@@ -111,6 +112,7 @@ export {
   ProgressSlider,
   InvestSlider,
   Toaster,
+  ModalContainer,
   // Inputs
   Button,
   CheckBox,
