@@ -8,7 +8,6 @@ export const algorithm = (process.env.ALGORITHM || 'HS256') as Algorithm;
 export const secret = process.env.SECRET || 'razrazrazetohardbass';
 export const auctionTtlPerBid = +process.env.AUCTION_TTL_PER_BID || 15 * 60_000;
 export const postgresUrl = process.env.POSTGRES_URL;
-export const serverName = process.env.SERVER_NAME || 'Zirgaffle';
 export const numberOfConfirmationsRequired =
   +process.env.NUMBER_OF_CONFIRMATIONS_REQUIRED || 1;
 export const rpcUrl = process.env.RPC_URL as string;
