@@ -5,6 +5,7 @@ import { parseEther } from 'ethers/lib/utils';
 import { Alert, LoadingButton } from '@mui/lab';
 import { Box } from '@mui/material';
 import contract from '../../contract';
+import { useNavigate } from 'react-router-dom';
 
 function DepositInput() {
   const { t } = useTranslation('balance');
@@ -13,6 +14,7 @@ function DepositInput() {
   const address: string = process.env.REACT_APP_RECEIVING_ADDRESS as string;
   const { state, send } = useContractFunction(contract, 'transfer');
   const { account, activateBrowserWallet } = useEthers();
+  const navigate = useNavigate();
   useEffect(() => {
     !account && activateBrowserWallet();
   }, [account]);
@@ -39,10 +41,14 @@ function DepositInput() {
           variant={'contained'}
           loading={['PendingSignature', 'Mining'].includes(state?.status)}
           onClick={() => {
-            send(address, parseEther(value));
+            ['Success'].includes(state?.status)
+              ? () => navigate('/')
+              : send(address, parseEther(value));
           }}
         >
-          {t('buy-x-bids', { count: +value })}
+          {['Success'].includes(state?.status)
+            ? t('exit')
+            : t('buy-x-bids', { count: +value })}
         </LoadingButton>
       )}
     </>
