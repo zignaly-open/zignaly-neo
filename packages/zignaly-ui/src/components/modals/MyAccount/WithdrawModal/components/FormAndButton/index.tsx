@@ -17,6 +17,7 @@ const FormAndButton = ({
   inputAddressOnChange,
   notSureOnClick = () => {},
   onSubmit = () => {},
+  isLoading = false,
 }: FormAndButtonProps) => {
   const [withdrawAddress, setWithdrawAddress] = useState("");
   const [withdrawAmount, setWithdrawAmount] = useState<Number>(0);
@@ -104,6 +105,7 @@ const FormAndButton = ({
           <Button variant="secondary" size="xlarge" caption={"Cancel"} />
           <Button
             disabled={!isValidInput}
+            loading={isLoading}
             onClick={() => handleSubmit()}
             size="xlarge"
             caption={"Continue to Confirmation"}

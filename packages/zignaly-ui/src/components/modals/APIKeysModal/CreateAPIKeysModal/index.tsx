@@ -18,6 +18,9 @@ import { CreateAPIKeysModalProps } from "./types";
 function CreateAPIKeysModal({
   onClickClose = () => {},
   onSubmit = () => {},
+  isLoading = false,
+  apiKey,
+  apiSecret,
 }: CreateAPIKeysModalProps): React.ReactElement {
   // State
   const [name, setName] = useState();
@@ -40,9 +43,13 @@ function CreateAPIKeysModal({
     onSubmit(data);
   }, []);
 
-  const copyAddress = useCallback(() => {
-    navigator.clipboard.writeText("");
-  }, []);
+  const copyApiKey = useCallback(() => {
+    navigator.clipboard.writeText(apiKey);
+  }, [apiKey]);
+
+  const copyApiSecret = useCallback(() => {
+    navigator.clipboard.writeText(apiSecret);
+  }, [apiSecret]);
 
   if (name) {
     return (
@@ -57,16 +64,16 @@ function CreateAPIKeysModal({
             <InputText
               label="API Key:"
               readOnly={true}
-              value="0x..."
+              value={apiKey}
               rightSideElement={<CloneIcon width={40} height={40} color="neutral300" />}
-              onClickRightSideElement={() => copyAddress}
+              onClickRightSideElement={() => copyApiKey}
             />
             <InputText
               label="API Secret:"
               readOnly={true}
-              value="a"
+              value={apiSecret}
               rightSideElement={<CloneIcon width={40} height={40} color="neutral300" />}
-              onClickRightSideElement={() => copyAddress}
+              onClickRightSideElement={() => copyApiSecret}
             />
             <APISettings />
             <Actions>
@@ -92,7 +99,13 @@ function CreateAPIKeysModal({
           })}
         />
         <Actions>
-          <Button caption="Continue" disabled={!isValid} size="xlarge" type="submit" />
+          <Button
+            loading={isLoading}
+            caption="Continue"
+            disabled={!isValid}
+            size="xlarge"
+            type="submit"
+          />
         </Actions>
       </form>
     </ModalContainer>

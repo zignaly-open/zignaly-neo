@@ -21,6 +21,7 @@ function EditAPIKeysModal({
   settings,
   name,
   apikey,
+  isLoading = false,
 }: EditAPIKeysModalProps): React.ReactElement {
   const methods = useForm({
     mode: "onChange",
@@ -66,7 +67,7 @@ function EditAPIKeysModal({
           </Key>
           <APISettings {...settings} />
           <Actions>
-            <Button caption="Save and Close" disabled={!isValid} size="xlarge" type="submit" />
+            <Button caption="Save and Close" loading={isLoading} disabled={!isValid} size="xlarge" type="submit" />
           </Actions>
         </form>
       </FormProvider>

@@ -20,6 +20,7 @@ const ConfirmWithdrawalModal = ({
   onGoBack = () => {},
   withdrawalAmount,
   netWorkFee,
+  isLoading = false,
   onClickClose = () => {},
 }: ConfirmWithdrawalModalProps) => {
   const ZigAmount = ({ amount, marginRight }: { amount: number; marginRight: number }) => {
@@ -96,6 +97,7 @@ const ConfirmWithdrawalModal = ({
           variant="primary"
           size="xlarge"
           caption="Withdraw now!"
+          loading={isLoading}
         />
       </Row>
     </ModalContainer>

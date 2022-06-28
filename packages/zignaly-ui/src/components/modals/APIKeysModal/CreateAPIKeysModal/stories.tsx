@@ -19,4 +19,6 @@ Default.args = {
   onSubmit: (values) => {
     console.log(values);
   },
+  apiKey: "0x9frifnrif34fb",
+  apiSecret: "n91u4chrfrvr",
 };

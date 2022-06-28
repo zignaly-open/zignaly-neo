@@ -9,4 +9,5 @@ export type EditAPIKeysModalProps = {
   onSubmit: (data: Data) => void;
   name: string;
   apikey: string;
+  isLoading: boolean;
 };

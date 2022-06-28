@@ -17,6 +17,7 @@ import { Swap } from "../types";
 const ConfirmSwapModal = ({
   swapFrom,
   swapTo,
+  isLoading = false,
   swapNowOnClick = () => {},
   getSwapRate = () => {},
 }: ConfirmSwapModalProps) => {
@@ -136,7 +137,12 @@ const ConfirmSwapModal = ({
           </Row>
         </AmountContainer>
         <Gap gap={28} />
-        <Button size="xlarge" caption="Swap Now!" onClick={() => swapNowOnClick} />
+        <Button
+          loading={isLoading}
+          size="xlarge"
+          caption="Swap Now!"
+          onClick={() => swapNowOnClick}
+        />
       </Column>
     </ModalContainer>
   );

@@ -7,4 +7,5 @@ export interface FormAndButtonProps {
   inputAddressOnChange: Function;
   notSureOnClick?: Function;
   onSubmit?: any;
+  isLoading: boolean;
 }

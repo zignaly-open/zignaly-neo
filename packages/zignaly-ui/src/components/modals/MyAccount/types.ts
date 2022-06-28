@@ -40,4 +40,5 @@ export interface MyAccountWithdrawModalProps {
   amountOnChange?: Function;
   onClickClose?: Function;
   onSubmit?: any;
+  isLoading: boolean;
 }
