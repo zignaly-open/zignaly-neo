@@ -128,7 +128,7 @@ const AuctionGrid: React.FC = () => {
           </Grid>
         </Grid>
       </Box>
-      <StyledMasonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={4}>
+      <StyledMasonry columns={{ xs: 1, sm: 2, md: 2 }} spacing={4}>
         {filtered.map((x: AuctionType) => (
           <AuctionCard key={x.id} auction={x} />
         ))}
