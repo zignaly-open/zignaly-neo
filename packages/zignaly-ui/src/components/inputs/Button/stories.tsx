@@ -72,6 +72,14 @@ export default {
         disable: true,
       },
     },
+    minWidth: {
+      control: { type: "number" },
+      lable: "Change min width",
+    },
+    maxWidth: {
+      control: { type: "number" },
+      lable: "Change max width",
+    },
   },
 } as ComponentMeta<typeof Button>;
 

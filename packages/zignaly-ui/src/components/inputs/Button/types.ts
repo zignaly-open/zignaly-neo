@@ -34,4 +34,6 @@ export type ButtonProps = {
   testIdRightElement?: string | null;
   testIdLoadingElement?: string | null;
   children?: React.ReactNode;
+  minWidth?: number;
+  maxWidth?: number;
 };
