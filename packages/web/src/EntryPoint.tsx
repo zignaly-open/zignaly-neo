@@ -58,7 +58,7 @@ const client = new ApolloClient({
 });
 
 const config = {
-  // TODO
+  // TODO: Change chain to Polygon ONLY
   readOnlyChainId: Rinkeby.chainId,
   readOnlyUrls: {
     [Mainnet.chainId]:
