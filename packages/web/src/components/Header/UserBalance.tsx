@@ -1,4 +1,4 @@
-import Typography from '@mui/material/Typography';
+import { Typography } from 'zignaly-ui';
 import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import useBalance from '../../hooks/useBalance';

@@ -1,4 +1,4 @@
-import Typography from '@mui/material/Typography';
+import { Typography } from 'zignaly-ui';
 import React, { useCallback } from 'react';
 import Countdown from 'react-countdown';
 import { useTranslation } from 'react-i18next';
