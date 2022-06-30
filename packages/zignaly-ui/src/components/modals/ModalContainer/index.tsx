@@ -17,6 +17,7 @@ function ModalContainer({
   width = "large",
   onGoBack = null,
   onClickClose = null,
+  centerHeaderText = false,
   customHeaderAction = null,
 }: ModalContainerProps) {
   const renderHeaderAction = useMemo(
@@ -35,14 +36,27 @@ function ModalContainer({
   return (
     <Layout width={width}>
       <Header>
-        <Inline>
-          {onGoBack && typeof onGoBack === "function" && (
-            <HeaderButton onClick={onGoBack}>
-              <ArrowLeftIcon color={"#fff"} />
-            </HeaderButton>
-          )}
-          <Title>{title}</Title>
-        </Inline>
+        {centerHeaderText ? (
+          <>
+            <Inline>
+              {onGoBack && typeof onGoBack === "function" && (
+                <HeaderButton onClick={onGoBack}>
+                  <ArrowLeftIcon color={"#fff"} />
+                </HeaderButton>
+              )}
+            </Inline>
+            <Title>{title}</Title>
+          </>
+        ) : (
+          <Inline>
+            {onGoBack && typeof onGoBack === "function" && (
+              <HeaderButton onClick={onGoBack}>
+                <ArrowLeftIcon color={"#fff"} />
+              </HeaderButton>
+            )}
+            <Title>{title}</Title>
+          </Inline>
+        )}
         {renderHeaderAction}
       </Header>
       <Body>{children}</Body>
