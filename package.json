@@ -6,9 +6,9 @@
   "postinstall": "husky install",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "frontend": "cd packages/web && yarn start",
+    "frontend": "cd packages/web && env-cmd -f .env yarn start",
     "backend": "cd packages/server && yarn dev",
-    "build": "cd packages/web && yarn && GENERATE_SOURCEMAP=false yarn build && cd ../server && yarn",
+    "build": "cd packages/web && yarn && env-cmd -f .env.production GENERATE_SOURCEMAP=false yarn build && cd ../server && yarn",
     "start": "cd packages/server && yarn start"
   },
   "engines": {
@@ -43,6 +43,7 @@
     "prettier": "^2.6.2"
   },
   "dependencies": {
+    "env-cmd": "^10.1.0",
     "lodash": "^4.17.21"
   }
 }
