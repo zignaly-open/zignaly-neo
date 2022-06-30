@@ -83,6 +83,7 @@ import {
   createUserTableHeader,
 } from "components/display/Table/types";
 import ModalContainer from "components/modals/ModalContainer";
+import ConnectWalletModal from "components/modals/ZigRaffle/ConnectWallet";
 
 export {
   /**
@@ -137,6 +138,7 @@ export {
   DepositModal,
   WithdrawModal,
   MinBalanceModal,
+  ConnectWalletModal,
   // Forms
   LoginForm,
   /**
