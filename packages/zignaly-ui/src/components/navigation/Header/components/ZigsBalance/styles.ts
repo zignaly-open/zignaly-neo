@@ -9,7 +9,7 @@ export const Layout = styled.nav`
   flex-direction: row;
   gap: 10px;
   user-select: none;
-
+  box-sizing: border-box;
   background: rgba(16, 18, 37, 0.3);
   border: 1px solid #35334a;
   border-radius: 5px;
