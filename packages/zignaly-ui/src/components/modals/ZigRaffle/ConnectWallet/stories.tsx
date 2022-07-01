@@ -6,13 +6,8 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import ConnectWalletModal from "./";
 
 export default {
-  title: "Modals/ConnectWallet",
+  title: "Modals/ZigRaffle/ConnectWallet",
   component: ConnectWalletModal,
-  argTypes: {
-    onSubmit: {
-      type: "function",
-    },
-  },
 } as ComponentMeta<typeof ConnectWalletModal>;
 
 const Template: ComponentStory<typeof ConnectWalletModal> = (args) => (

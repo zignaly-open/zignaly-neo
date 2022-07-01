@@ -38,6 +38,8 @@ import AuthVerifyModal from "./components/modals/AuthVerifyModal";
 import MinBalanceModal from "./components/modals/MinBalanceModal";
 import DepositModal from "./components/modals/MyAccount/DepositModal";
 import WithdrawModal from "./components/modals/MyAccount/WithdrawModal";
+import ModalContainer from "components/modals/ModalContainer";
+import ConnectWalletModal from "components/modals/ZigRaffle/ConnectWallet";
 
 // Forms
 import LoginForm from "./components/forms/LoginForm";
@@ -82,8 +84,6 @@ import {
   createUserTableDataObject,
   createUserTableHeader,
 } from "components/display/Table/types";
-import ModalContainer from "components/modals/ModalContainer";
-import ConnectWalletModal from "components/modals/ZigRaffle/ConnectWallet";
 
 export {
   /**
@@ -132,13 +132,13 @@ export {
   PageContainer,
   MarginContainer,
   // Modals
+  ConnectWalletModal,
   EditInvestmentWithModal,
   MessageModal,
   AuthVerifyModal,
   DepositModal,
   WithdrawModal,
   MinBalanceModal,
-  ConnectWalletModal,
   // Forms
   LoginForm,
   /**
