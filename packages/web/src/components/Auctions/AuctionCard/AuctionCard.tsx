@@ -119,10 +119,10 @@ const AuctionCard: React.FC<{
                 coin='ZIG'
               />
             </Box>
-            <FinalCountdown date={auction.expiresAt} />
+            <FinalCountdown date={auction.expiresAt} started={true} />
           </StyledAmountContainer>
           <CardActions style={{ marginBottom: '30px' }}>
-            <BidButton auction={auction} />
+            <BidButton auction={auction} isActive={isActive} />
           </CardActions>
         </CardColumn>
         <CardColumn></CardColumn>

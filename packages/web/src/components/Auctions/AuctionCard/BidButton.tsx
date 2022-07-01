@@ -21,7 +21,10 @@ enum BidButtonState {
 }
 
 // Smarted button in the history of buttons, maybe ever
-const BidButton: React.FC<{ auction: AuctionType }> = ({ auction }) => {
+const BidButton: React.FC<{ auction: AuctionType; isActive: boolean }> = ({
+  auction,
+  isActive,
+}) => {
   const [bid, { loading: isBidding }] = useMutation(BID_AUCTION);
   const { balance } = useBalance();
   const { user } = useCurrentUser();
@@ -77,11 +80,15 @@ const BidButton: React.FC<{ auction: AuctionType }> = ({ auction }) => {
     <Button
       size='small'
       loading={isBidding}
-      disabled={isBidding}
+      disabled={!isActive}
       // onMouseEnter={() => setShowTrueSelf(true)}
       // onMouseLeave={() => setShowTrueSelf(false)}
       onClick={bidClickHandler}
-      caption={(showTrueSelf && customButtonText) || t('bid-now')}
+      caption={
+        (showTrueSelf && customButtonText) || isActive
+          ? t('bid-now')
+          : t('ended')
+      }
     />
   );
 };

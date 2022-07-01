@@ -3,6 +3,7 @@
   "completed": "Completed!",
   "make-bid": "Bid {{bid}}!",
   "bid-now": "Bid Now!",
+  "ended": "Ended",
   "it-is-you": "(you)",
   "what-is-inside": "What's inside?",
   "remaining-time": "{{h}} h : {{m}} m : {{s}} s",
