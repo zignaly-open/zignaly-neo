@@ -43,7 +43,6 @@
     "prettier": "^2.6.2"
   },
   "dependencies": {
-    "lodash": "^4.17.21",
-    "zignaly-ui": "^0.3.3"
+    "lodash": "^4.17.21"
   }
 }
