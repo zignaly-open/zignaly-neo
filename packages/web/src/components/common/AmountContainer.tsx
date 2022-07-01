@@ -1,18 +1,16 @@
 import { css, styled } from '@mui/material/styles';
 
-export const AmountContainer = styled('div')<{
-  width: string;
-  height: string;
-}>`
+export const AmountContainer = styled('div')`
   position: relative;
   display: flex;
+  flex-direction: column;
   text-align: center;
   align-items: center;
   justify-content: center;
   background: #101225;
   box-shadow: inset 0px 0px 0px 1px #35334a;
-  border-radius: 5px;
   box-sizing: border-box;
+  border-radius: 16px;
 
   &:before {
     content: '';
@@ -21,7 +19,7 @@ export const AmountContainer = styled('div')<{
     left: 0;
     right: 0;
     bottom: 0;
-    border-radius: 5px;
+    border-radius: 16px;
     padding: 2px;
     background: none;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
@@ -31,11 +29,7 @@ export const AmountContainer = styled('div')<{
     mask-composite: exclude;
   }
 
-  ${(props) => `
-    width: ${props.width}px;
-    height: ${props.height}px;
-
-    &:before {
-      background: linear-gradient(#8671F7, #7EC9F9);
-    `}
+  &:before {
+    background: linear-gradient(#8671f7, #7ec9f9);
+  }
 `;

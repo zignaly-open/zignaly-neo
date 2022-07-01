@@ -2,10 +2,11 @@ import { Typography } from 'zignaly-ui';
 import React, { useCallback } from 'react';
 import Countdown from 'react-countdown';
 import { useTranslation } from 'react-i18next';
+import { ReactComponent as TimeIcon } from 'images/time.svg';
+import { Box } from '@mui/system';
 
 // It's the final countdown
 const FinalCountdown: React.FC<{ date: Date }> = ({ date }) => {
-  const { t } = useTranslation('auction');
   const renderer = useCallback(
     ({
       hours,
@@ -20,23 +21,21 @@ const FinalCountdown: React.FC<{ date: Date }> = ({ date }) => {
     }) => {
       if (completed) return null;
       return (
-        <Typography
-          fontSize={24}
-          variant={'body2'}
-          color={'primary'}
-          marginBottom={3}
-        >
-          {t('auction:remaining-time', {
-            h: hours,
-            m: minutes.toString().padStart(2, '0'),
-            s: seconds.toString().padStart(2, '0'),
-          })}
+        <Typography variant={'h1'} color={'greenGraph'}>
+          {hours.toString().padStart(2, '0')}:
+          {minutes.toString().padStart(2, '0')}:
+          {seconds.toString().padStart(2, '0')}
         </Typography>
       );
     },
     [],
   );
-  return <Countdown date={date} renderer={renderer} />;
+  return (
+    <Box display='flex' alignItems='center'>
+      <TimeIcon style={{ marginTop: '-3px' }} />
+      <Countdown date={date} renderer={renderer} />
+    </Box>
+  );
 };
 
 export default FinalCountdown;
