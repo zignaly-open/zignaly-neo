@@ -34,4 +34,8 @@ export interface TypographyProps {
   color?: keyof typeof dark;
   underline?: boolean;
   children: React.ReactNode;
+  marginRight?: number;
+  marginLeft?: number;
+  marginTop?: number;
+  marginBottom?: number;
 }

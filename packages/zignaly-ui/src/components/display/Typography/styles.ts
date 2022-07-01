@@ -12,11 +12,25 @@ const getWeight = (weight: string) => {
   }
 };
 
-export const Layout = styled.h1<{ color: string; underline: boolean; weight: string }>`
+interface LayoutProps {
+  color: string;
+  underline: boolean;
+  weight: string;
+  marginRight?: number;
+  marginLeft?: number;
+  marginTop?: number;
+  marginBottom?: number;
+}
+
+export const Layout = styled.h1<LayoutProps>`
   font-family: "Avenir next", "Red Hat Text", sans-serif;
   margin: 0;
   padding: 0;
   font-weight: 500;
+  margin-left: ${(props) => props.marginLeft}px;
+  margin-top: ${(props) => props.marginTop}px;
+  margin-right: ${(props) => props.marginRight}px;
+  margin-bottom: ${(props) => props.marginBottom}px;
 
   &.h1 {
     font-size: 22px;
