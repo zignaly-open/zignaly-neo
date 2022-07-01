@@ -5,11 +5,13 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import useAuthenticate, { useLogout } from '../../hooks/useAuthenticate';
+import { useLogout } from '../../hooks/useAuthenticate';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import UserBalance from './UserBalance';
 import UserBalanceListener from './UserBalanceListener';
 import Logo from './Logo';
+import useModal from '../../hooks/useModal';
+import SuperModal from '../Modals/SuperModal';
 
 const StyledMoto = styled(Typography)`
   text-transform: uppercase;
@@ -19,14 +21,14 @@ const StyledMoto = styled(Typography)`
 const Header: React.FC = () => {
   const { t } = useTranslation('global');
   const navigate = useNavigate();
-  const authenticate = useAuthenticate();
   const logout = useLogout();
   const { user: currentUser, loading } = useCurrentUser();
+  const { toggle, setModalId, modalId, showModal } = useModal();
 
   return (
     <>
       <Logo />
-
+      <SuperModal toggle={toggle} modalId={modalId} showModal={showModal} />
       <StyledMoto
         fontSize={{
           sm: 11,
@@ -52,7 +54,13 @@ const Header: React.FC = () => {
         {/*</Button>*/}
         {!loading &&
           (!currentUser?.id ? (
-            <Button variant={'text'} onClick={authenticate}>
+            <Button
+              variant={'text'}
+              onClick={() => {
+                setModalId('connectWallet');
+                toggle();
+              }}
+            >
               {t('log-in')}
             </Button>
           ) : (

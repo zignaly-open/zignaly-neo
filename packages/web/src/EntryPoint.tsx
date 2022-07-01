@@ -1,4 +1,3 @@
-import { ThemeProvider } from '@mui/material';
 import React from 'react';
 import Routes from './Routes';
 import theme from './theme';
@@ -16,6 +15,8 @@ import { setContext } from '@apollo/client/link/context';
 import { getToken } from './util/token';
 import { DAppProvider, Mainnet, Rinkeby } from '@usedapp/core';
 import { OnboardingProvider } from './contexts/Onboarding';
+import { dark, ThemeProvider } from 'zignaly-ui';
+import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
@@ -70,14 +71,17 @@ const config = {
 
 function EntryPoint() {
   return (
-    <ThemeProvider theme={theme}>
-      <DAppProvider config={config}>
-        <ApolloProvider client={client}>
-          <OnboardingProvider>
-            <Routes />
-          </OnboardingProvider>
-        </ApolloProvider>
-      </DAppProvider>
+    <ThemeProvider theme={dark}>
+      <ThemeProviderMui theme={{ ...dark, ...theme }}>
+        <DAppProvider config={config}>
+          <ApolloProvider client={client}>
+            <OnboardingProvider>
+              <div id='modal-root'></div>
+              <Routes />
+            </OnboardingProvider>
+          </ApolloProvider>
+        </DAppProvider>
+      </ThemeProviderMui>
     </ThemeProvider>
   );
 }
