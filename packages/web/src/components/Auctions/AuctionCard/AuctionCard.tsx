@@ -12,7 +12,7 @@ import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
 import AuctionRanking from '../AuctionRanking/AuctionRanking';
 
 const Item = styled('div')(({ theme }) => ({
-  background: '#13132b',
+  background: theme.neutral750,
   border: '1px solid #35334A',
   borderRadius: '16px',
   [theme.breakpoints.up('lg')]: {
@@ -20,14 +20,11 @@ const Item = styled('div')(({ theme }) => ({
   },
 }));
 
-const AuctionHeader = styled('div')(({ theme }) => ({
-  background: theme.neutral750,
-  display: 'flex',
-  height: '80px',
-  marginBottom: '20px',
-  borderTopLeftRadius: '16px',
-  borderTopRightRadius: '16px',
-}));
+const AuctionHeader = styled('div')`
+  display: flex;
+  height: 80px;
+  margin-bottom: 20px;
+`;
 
 const AuctionImage = styled('img')`
   width: 100%;
