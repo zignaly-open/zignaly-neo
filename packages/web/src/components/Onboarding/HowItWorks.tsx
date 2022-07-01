@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Typography } from 'zignaly-ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';

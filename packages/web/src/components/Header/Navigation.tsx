@@ -24,11 +24,15 @@ type NavigationProps = {
 };
 
 function Navigation({ routes }: NavigationProps) {
-  return routes.map((route: NavItemProp, index: number) => (
-    <StyledNavLink to={route.path} key={index}>
-      {route.label}
-    </StyledNavLink>
-  ));
+  return (
+    <>
+      {routes.map((route: NavItemProp, index: number) => (
+        <StyledNavLink to={route.path} key={index}>
+          {route.label}
+        </StyledNavLink>
+      ))}
+    </>
+  );
 }
 
 export default Navigation;

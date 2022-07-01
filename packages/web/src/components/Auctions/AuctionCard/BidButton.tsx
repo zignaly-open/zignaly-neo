@@ -4,7 +4,6 @@ import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { AuctionType } from '@zigraffle/shared/types';
 import useCurrentUser from '../../../hooks/useCurrentUser';
 import { useTranslation } from 'react-i18next';
-import { styled } from '@mui/material/styles';
 import useBalance from '../../../hooks/useBalance';
 import { BigNumber } from 'ethers';
 import { getWinningLosingStatus } from './util';
@@ -30,7 +29,7 @@ const BidButton: React.FC<{ auction: AuctionType; isActive: boolean }> = ({
   const { user } = useCurrentUser();
   const { balanceOnboarding } = useContext(onboardingContext);
   const authenticate = useAuthenticate();
-  const [showTrueSelf, setShowTrueSelf] = useState(false);
+  const [showTrueSelf /* setShowTrueSelf */] = useState(false);
   const { t } = useTranslation('auction');
 
   const state = useMemo(() => {
@@ -47,11 +46,11 @@ const BidButton: React.FC<{ auction: AuctionType; isActive: boolean }> = ({
     return BidButtonState.Default;
   }, [user, balance, auction]);
 
-  const buttonColor = useMemo(() => {
-    if (state === BidButtonState.NotLoggedIn) return 'prettyPink';
-    if (state === BidButtonState.NotEnoughFunds) return 'greedyGreen';
-    return 'primary';
-  }, [state]);
+  // const buttonColor = useMemo(() => {
+  //   if (state === BidButtonState.NotLoggedIn) return 'prettyPink';
+  //   if (state === BidButtonState.NotEnoughFunds) return 'greedyGreen';
+  //   return 'primary';
+  // }, [state]);
 
   const customButtonText = useMemo(() => {
     if (state === BidButtonState.NotLoggedIn) return t('global:log-in');

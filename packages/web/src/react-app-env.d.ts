@@ -1,5 +1,7 @@
 /// <reference types="react-scripts" />
 
+import ThemeZig from 'zignaly-ui/lib/theme/theme';
+
 declare module '*.svg' {
   import * as React from 'react';
 
@@ -20,6 +22,10 @@ declare module '@mui/material/styles' {
   }
   interface Palette extends CustomPalette {}
   interface PaletteOptions extends CustomPalette {}
+}
+
+declare module '@mui/material/styles/createTheme' {
+  interface Theme extends ThemeZig {}
 }
 
 declare module '@mui/material/Button' {

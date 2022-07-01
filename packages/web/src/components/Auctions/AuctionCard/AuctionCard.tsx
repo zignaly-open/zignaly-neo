@@ -1,39 +1,23 @@
-import { Box, Card, CardActions, CardHeader, CardMedia } from '@mui/material';
-import { css, styled } from '@mui/material/styles';
+import { Box, CardActions } from '@mui/material';
+import { styled } from '@mui/material/styles';
 import { Typography, PriceLabel } from 'zignaly-ui';
 import React from 'react';
-import { useTranslation, Trans } from 'react-i18next';
-import { AuctionType, BasketItem } from '@zigraffle/shared/types';
-import AuctionBasketItem from './AuctionBasketItem';
+import { useTranslation } from 'react-i18next';
+import { AuctionType } from '@zigraffle/shared/types';
 import FinalCountdown from './FinalCountdown';
 import BidButton from './BidButton';
 import { getWinningLosingStatus } from './util';
 import { AmountContainer } from '../../common/AmountContainer';
 import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
+import AuctionRanking from '../AuctionRanking/AuctionRanking';
 
-const Item = styled('div', {
-  shouldForwardProp: (prop: string) =>
-    !['isActive', 'isWinning', 'isLosing'].includes(prop),
-})<{
-  isActive: boolean;
-  isWinning: boolean;
-  isLosing: boolean;
-}>(({ theme, isActive, isWinning, isLosing }) => ({
+const Item = styled('div')(({ theme }) => ({
   background: '#13132b',
   border: '1px solid #35334A',
   borderRadius: '16px',
-  minWidth: '640px',
-  //   overflow: 'visible',
-  //   backgroundColor: isWinning
-  //     ? '#ebffea'
-  //     : isLosing
-  //     ? '#ffeaea'
-  //     : isActive
-  //     ? '#fff'
-  //     : '#e5e5e5',
-  //   filter: isActive ? 'unset' : 'grayscale(50%)',
-  //   boxShadow: isWinning ? `0 0 0 3px #aaff99 inset` : 'unset',
-  //   color: theme.palette.text.secondary,
+  [theme.breakpoints.up('lg')]: {
+    width: '640px',
+  },
 }));
 
 const AuctionHeader = styled('div')(({ theme }) => ({
@@ -56,24 +40,31 @@ const StyledAmountContainer = styled(AmountContainer)`
   margin: 20px 0 16px;
 `;
 
-const CardColumn = styled('div')`
+const HeaderColumn = styled('div')`
   width: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+`;
+
+const CardColumn = styled('div')`
+  width: 50%;
+  display: flex;
+  align-items: center;
   flex-direction: column;
   margin: 0 30px;
 `;
 
 const StyledPriceLabel = styled(PriceLabel)`
   span > span {
-    &:first-child {
+    &:nth-of-type(1) {
       font-size: 22px !important;
       margin-left: 10px;
       color: ${({ theme }) => theme.neutral100};
     }
 
-    &:nth-child(2) {
+    &:nth-of-type(2) {
       font-size: 15px !important;
     }
   }
@@ -82,25 +73,26 @@ const StyledPriceLabel = styled(PriceLabel)`
 const AuctionCard: React.FC<{
   auction: AuctionType;
   currentUserId?: number;
-}> = ({ auction, currentUserId }) => {
+}> = ({ auction /*, currentUserId */ }) => {
   const { t } = useTranslation('auction');
-  const { isActive, isWinning, isLosing } = getWinningLosingStatus(auction);
+  const { isActive /* isWinning, isLosing */ } =
+    getWinningLosingStatus(auction);
   return (
-    <Item isActive={isActive} isWinning={isWinning} isLosing={isLosing}>
+    <Item>
       <AuctionHeader>
-        <CardColumn>
+        <HeaderColumn>
           <Typography variant='h2' color='neutral100'>
             {auction.title}
           </Typography>
           <Typography color='links' component='div'>
             {t('project-desc')}
           </Typography>
-        </CardColumn>
-        <CardColumn>
+        </HeaderColumn>
+        <HeaderColumn>
           <Typography variant='h2' color='neutral100'>
             {t('ranking')}
           </Typography>
-        </CardColumn>
+        </HeaderColumn>
       </AuctionHeader>
       <Box display='flex'>
         <CardColumn>
@@ -125,7 +117,9 @@ const AuctionCard: React.FC<{
             <BidButton auction={auction} isActive={isActive} />
           </CardActions>
         </CardColumn>
-        <CardColumn></CardColumn>
+        <CardColumn>
+          <AuctionRanking />
+        </CardColumn>
       </Box>
     </Item>
   );

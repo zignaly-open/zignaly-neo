@@ -1,9 +1,7 @@
 import { Typography } from 'zignaly-ui';
 import React, { useCallback } from 'react';
 import Countdown from 'react-countdown';
-import { useTranslation } from 'react-i18next';
 import { ReactComponent as TimeIcon } from 'images/time.svg';
-import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
 
 const CountdownContainer = styled('div')<{ color: string }>`

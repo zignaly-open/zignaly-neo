@@ -1,13 +1,9 @@
 import { Button } from '@mui/material';
-import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
 import { IconButton, BrandImage, UserIcon } from 'zignaly-ui';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import useAuthenticate, { useLogout } from '../../hooks/useAuthenticate';
+import useAuthenticate /*, { useLogout }*/ from '../../hooks/useAuthenticate';
 import useCurrentUser from '../../hooks/useCurrentUser';
-import UserBalance from './UserBalance';
 import UserBalanceListener from './UserBalanceListener';
 import { Header as ZIGHeader, ZigsBalance } from 'zignaly-ui';
 import Navigation from './Navigation';
@@ -15,9 +11,8 @@ import useBalance from '../../hooks/useBalance';
 
 const Header: React.FC = () => {
   const { t } = useTranslation('global');
-  const navigate = useNavigate();
   const authenticate = useAuthenticate();
-  const logout = useLogout();
+  // const logout = useLogout();
   const { user: currentUser, loading } = useCurrentUser();
   const { balance } = useBalance();
 
@@ -25,12 +20,6 @@ const Header: React.FC = () => {
     <>
       <ZIGHeader
         leftElements={[
-          // <BrandImage
-          //   key={'logo'}
-          //   type={'isotype'}
-          //   width={'32px'}
-          //   height={'32px'}
-          // />,
           <BrandImage
             key={'logo2'}
             type={'logotype'}
@@ -63,10 +52,10 @@ const Header: React.FC = () => {
         rightElements={[
           !loading &&
             (currentUser?.id ? (
-              <>
-                <ZigsBalance key={'balance'} balance={balance} />
+              <React.Fragment key={'balance'}>
+                <ZigsBalance balance={balance} />
                 <UserBalanceListener />
-              </>
+              </React.Fragment>
             ) : (
               <Button variant={'text'} onClick={authenticate}>
                 {t('log-in')}
@@ -75,6 +64,7 @@ const Header: React.FC = () => {
           <IconButton
             key={'user'}
             variant={'flat'}
+            // @ts-ignore
             icon={<UserIcon color='#65647E' />}
             renderDropDown={<div>DropDown Container</div>}
             dropDownOptions={{
