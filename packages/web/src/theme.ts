@@ -37,14 +37,6 @@ export default createTheme({
       'Arial',
       'sans-serif',
     ].join(','),
-    // body2: {
-    //   fontFamily: [
-    //     '"IBM Plex Mono"',
-    //     '"Courier New"',
-    //     'Monospace',
-    //     'sans-serif',
-    //   ].join(','),
-    // },
   },
   components: {
     // Name of the component

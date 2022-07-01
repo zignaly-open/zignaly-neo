@@ -44,6 +44,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.21",
-    "zignaly-ui": "^0.1.14"
+    "zignaly-ui": "^0.3.3"
   }
 }
