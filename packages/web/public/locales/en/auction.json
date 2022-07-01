@@ -2,6 +2,7 @@
   "no-auctions": "No active Auctions found",
   "completed": "Completed!",
   "make-bid": "Bid {{bid}}!",
+  "bid-now": "Bid Now!",
   "it-is-you": "(you)",
   "what-is-inside": "What's inside?",
   "remaining-time": "{{h}} h : {{m}} m : {{s}} s",
@@ -18,5 +19,6 @@
   "show-yours": "Yours",
   "no-bids-yet": "No bids yet",
   "no-bids": "No bids",
-  "ranking": "Ranking"
+  "ranking": "Ranking",
+  "project-desc": "Project Description"
 }

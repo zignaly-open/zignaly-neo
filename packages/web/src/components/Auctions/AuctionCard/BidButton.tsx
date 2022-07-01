@@ -1,6 +1,5 @@
 import { useMutation } from '@apollo/client';
 import { BID_AUCTION } from '../queries';
-import { LoadingButton } from '@mui/lab';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { AuctionType } from '@zigraffle/shared/types';
 import useCurrentUser from '../../../hooks/useCurrentUser';
@@ -11,13 +10,7 @@ import { BigNumber } from 'ethers';
 import { getWinningLosingStatus } from './util';
 import useAuthenticate from '../../../hooks/useAuthenticate';
 import { onboardingContext } from '../../../contexts/Onboarding';
-
-const Button = styled(LoadingButton, {
-  shouldForwardProp: (p) => p !== 'state',
-})<{ state: BidButtonState }>`
-  flex: 1;
-  min-height: 50px;
-`;
+import { Button } from 'zignaly-ui';
 
 enum BidButtonState {
   NotLoggedIn,
@@ -82,19 +75,14 @@ const BidButton: React.FC<{ auction: AuctionType }> = ({ auction }) => {
 
   return (
     <Button
-      state={state}
-      variant={'contained'}
+      size='small'
       loading={isBidding}
-      color={showTrueSelf ? buttonColor : 'primary'}
       disabled={isBidding}
-      onMouseEnter={() => setShowTrueSelf(true)}
-      onMouseLeave={() => setShowTrueSelf(false)}
-      size='large'
+      // onMouseEnter={() => setShowTrueSelf(true)}
+      // onMouseLeave={() => setShowTrueSelf(false)}
       onClick={bidClickHandler}
-    >
-      {(showTrueSelf && customButtonText) ||
-        t('make-bid', { bid: auction.minimalBid })}
-    </Button>
+      caption={(showTrueSelf && customButtonText) || t('bid-now')}
+    />
   );
 };
 

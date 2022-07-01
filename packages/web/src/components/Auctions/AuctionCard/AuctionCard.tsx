@@ -19,12 +19,10 @@ const Item = styled('div', {
   isWinning: boolean;
   isLosing: boolean;
 }>(({ theme, isActive, isWinning, isLosing }) => ({
-  // background: theme.neutral700,
   background: '#13132b',
   border: '1px solid #35334A',
   borderRadius: '16px',
   minWidth: '640px',
-
   //   overflow: 'visible',
   //   backgroundColor: isWinning
   //     ? '#ebffea'
@@ -48,7 +46,6 @@ const AuctionHeader = styled('div')(({ theme }) => ({
 }));
 
 const AuctionImage = styled('img')`
-  /* width: 268px; */
   width: 100%;
   height: 209px;
 `;
@@ -56,10 +53,10 @@ const AuctionImage = styled('img')`
 const StyledAmountContainer = styled(AmountContainer)`
   width: 100%;
   padding: 10px 0 5px;
-  margin-top: 20px;
+  margin: 20px 0 16px;
 `;
 
-const CardCol = styled('div')`
+const CardColumn = styled('div')`
   width: 50%;
   display: flex;
   align-items: center;
@@ -67,8 +64,6 @@ const CardCol = styled('div')`
   flex-direction: column;
   margin: 0 30px;
 `;
-
-const CURL_SIZE = 0.5;
 
 const StyledPriceLabel = styled(PriceLabel)`
   span > span {
@@ -84,42 +79,6 @@ const StyledPriceLabel = styled(PriceLabel)`
   }
 `;
 
-const GiftBox = styled(Box)<{ isWinning: boolean; isLosing: boolean }>`
-  background: ${(props) =>
-    props.isWinning ? '#0f950f' : props.isLosing ? '#950f0f' : '#eee'};
-  margin-left: ${({ theme }) => theme.spacing(-2 * CURL_SIZE)};
-  margin-right: ${({ theme }) => theme.spacing(-2 * CURL_SIZE)};
-  position: relative;
-
-  ${(props) =>
-    (props.isWinning || props.isLosing) &&
-    css`
-      p,
-      span {
-        color: #fff !important;
-      }
-    `}
-  &:after,
-  &:before {
-    content: '';
-    border-style: solid;
-    border-width: ${({ theme }) => theme.spacing(CURL_SIZE)};
-    position: absolute;
-  }
-
-  &:after {
-    bottom: ${({ theme }) => theme.spacing(-2 * CURL_SIZE)};
-    left: 0;
-    border-color: #777 #777 transparent transparent;
-  }
-
-  &:before {
-    top: ${({ theme }) => theme.spacing(-2 * CURL_SIZE)};
-    right: 0;
-    border-color: transparent transparent #888 #888;
-  }
-`;
-
 const AuctionCard: React.FC<{
   auction: AuctionType;
   currentUserId?: number;
@@ -129,117 +88,44 @@ const AuctionCard: React.FC<{
   return (
     <Item isActive={isActive} isWinning={isWinning} isLosing={isLosing}>
       <AuctionHeader>
-        <CardCol>
+        <CardColumn>
           <Typography variant='h2' color='neutral100'>
             {auction.title}
           </Typography>
           <Typography color='links' component='div'>
-            Project Description
+            {t('project-desc')}
           </Typography>
-        </CardCol>
-        <CardCol>
+        </CardColumn>
+        <CardColumn>
           <Typography variant='h2' color='neutral100'>
             {t('ranking')}
           </Typography>
-        </CardCol>
+        </CardColumn>
       </AuctionHeader>
       <Box display='flex'>
-        <CardCol>
+        <CardColumn>
           {auction.imageUrl && (
             <AuctionImage src={auction.imageUrl} alt={auction.title} />
           )}
           <StyledAmountContainer>
-            {/* <img src={ZigCoinIcon} width={24} height={24} /> */}
             <Box display='flex'>
               <ZigCoinIcon width={24} height={24} />
-              <StyledPriceLabel value={0} coin='ZIG' />
+              <StyledPriceLabel
+                value={
+                  auction.bids.length
+                    ? auction.bids[0].value
+                    : auction.minimalBid
+                }
+                coin='ZIG'
+              />
             </Box>
             <FinalCountdown date={auction.expiresAt} />
           </StyledAmountContainer>
-          {/* <AmountContainer
-            isWinning={isWinning}
-            isLosing={isLosing}
-            padding={2}
-            marginBottom={3}
-          >
-            <Typography variant='body2' marginTop={0} marginBottom={0.5}>
-              {t('what-is-inside')}
-            </Typography>
-            <Box sx={{ marginBottom: 1 }}>
-              {auction.basketItems.map((item: BasketItem) => (
-                <AuctionBasketItem key={item.ticker} item={item} />
-              ))}
-            </Box>
-            <Typography variant='body2'>
-              {t('for-a-total-value-of')}{' '}
-              <Typography
-                color='primary'
-                component='span'
-                fontWeight={600}
-                variant='body2'
-              >
-                {auction.monetaryValue}
-              </Typography>
-            </Typography>
-          </AmountContainer> */}
-          <Box display={'flex'} textAlign={'center'} flexDirection={'column'}>
-            {/* <FinalCountdown date={auction.expiresAt} /> */}
-            <Typography fontSize={18} marginBottom={3}>
-              {auction.bids?.length ? (
-                <Trans
-                  i18nKey={`auction:${
-                    isActive
-                      ? auction.bids?.length
-                        ? 'last'
-                        : 'starting'
-                      : 'winning'
-                  }-bid`}
-                  values={{
-                    bid: auction.bids[0].value,
-                    name:
-                      (auction.bids?.[0]?.user.username ??
-                        `#${auction.bids?.[0]?.user.id}`) +
-                      (currentUserId &&
-                      +currentUserId === +auction.bids?.[0]?.user.id
-                        ? `${t('it-is-you')}`
-                        : ''),
-                  }}
-                >
-                  <Typography
-                    fontSize={20}
-                    variant='body2'
-                    color='prettyPink.main'
-                    component='span'
-                    fontWeight={600}
-                  />
-                  <Typography
-                    fontSize={20}
-                    variant='body2'
-                    color='prettyPink.main'
-                    component='span'
-                    fontWeight={600}
-                  />
-                </Trans>
-              ) : (
-                <Typography
-                  fontSize={20}
-                  variant='body2'
-                  color='prettyPink.main'
-                  component='span'
-                  fontWeight={600}
-                >
-                  {t('no-bids' + (isActive ? '-yet' : ''))}
-                </Typography>
-              )}
-            </Typography>
-            {isActive && (
-              <CardActions>
-                <BidButton auction={auction} />
-              </CardActions>
-            )}
-          </Box>
-        </CardCol>
-        <CardCol></CardCol>
+          <CardActions style={{ marginBottom: '30px' }}>
+            <BidButton auction={auction} />
+          </CardActions>
+        </CardColumn>
+        <CardColumn></CardColumn>
       </Box>
     </Item>
   );

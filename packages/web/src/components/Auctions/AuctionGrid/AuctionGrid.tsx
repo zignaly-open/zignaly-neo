@@ -12,7 +12,7 @@ import Loader from '../../common/Loader';
 import { getWinningLosingStatus } from '../AuctionCard/util';
 
 const MasonryWrapper = styled(Box)`
-  max-width: 1000px;
+  max-width: 1280px;
   margin: 30px auto;
 `;
 const StyledMasonry = styled(Masonry)`
