@@ -36,4 +36,5 @@ export type ButtonProps = {
   children?: React.ReactNode;
   minWidth?: number;
   maxWidth?: number;
+  maxHeight?: number;
 };

@@ -26,6 +26,7 @@ function Button({
   testIdLoadingElement = null,
   minWidth,
   maxWidth,
+  maxHeight,
 }: ButtonProps): ReactElement {
   /**
    * @function renderLeftElement
@@ -61,6 +62,7 @@ function Button({
       type={type}
       minWidth={minWidth}
       maxWidth={maxWidth}
+      maxHeight={maxHeight}
     >
       <styled.Container>
         <styled.ElementsContainer>

@@ -93,6 +93,7 @@ interface LayoutProps {
   isLoading?: boolean;
   minWidth?: number;
   maxWidth?: number;
+  maxHeight?: number;
 }
 
 export const Layout = styled.button<LayoutProps>`
@@ -611,6 +612,14 @@ export const Layout = styled.button<LayoutProps>`
     `            
     ${Container} {
       max-width: ${props.maxWidth}px;
+    }
+  `,
+  )}
+  ${styledIf(
+    props.maxHeight,
+    `            
+    ${Container} {
+      max-height: ${props.maxHeight}px;
     }
   `,
   )}
