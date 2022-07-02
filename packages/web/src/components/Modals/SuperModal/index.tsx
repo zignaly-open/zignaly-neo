@@ -1,7 +1,9 @@
 import React, { useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { useClickAway } from 'react-use';
-import useAuthenticate from '../../../hooks/useAuthenticate';
+import useAuthenticate, {
+  useWalletConnect,
+} from '../../../hooks/useAuthenticate';
 import ConnectWalletModal from '../ConnectWallet';
 import { Backdrop } from './styles';
 
@@ -16,6 +18,7 @@ const SuperModal = ({
 }) => {
   const modalRef = useRef(null);
   const authenticate = useAuthenticate();
+  const walletConnect = useWalletConnect();
 
   useClickAway(modalRef, () => {
     if (showModal) {
@@ -31,7 +34,7 @@ const SuperModal = ({
               <ConnectWalletModal
                 onClickClose={toggle}
                 metaMaskOnClick={authenticate}
-                walletConnectOnClick={undefined}
+                walletConnectOnClick={walletConnect}
               />
             )}
           </div>
