@@ -1,4 +1,3 @@
-// Dependencies
 import React, { useMemo } from 'react';
 
 // Styled Components
@@ -23,8 +22,7 @@ function ModalContainer({
   const renderHeaderAction = useMemo(
     () =>
       !customHeaderAction
-        ? onClickClose &&
-          typeof onClickClose === 'function' && (
+        ? onClickClose && (
             <HeaderButton onClick={onClickClose}>
               <CloseIcon />
             </HeaderButton>
@@ -39,7 +37,7 @@ function ModalContainer({
         {centerHeaderText ? (
           <>
             <Inline>
-              {onGoBack && typeof onGoBack === 'function' && (
+              {onGoBack && (
                 <HeaderButton onClick={onGoBack}>
                   <ArrowLeftIcon />
                 </HeaderButton>
