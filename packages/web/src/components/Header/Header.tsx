@@ -8,6 +8,7 @@ import UserBalanceListener from './UserBalanceListener';
 import { Header as ZIGHeader, ZigsBalance } from 'zignaly-ui';
 import Navigation from './Navigation';
 import useBalance from '../../hooks/useBalance';
+import { ethers } from 'ethers';
 
 const Header: React.FC = () => {
   const { t } = useTranslation('global');
@@ -53,7 +54,9 @@ const Header: React.FC = () => {
           !loading &&
             (currentUser?.id ? (
               <React.Fragment key={'balance'}>
-                <ZigsBalance balance={balance} />
+                <ZigsBalance
+                  balance={ethers.utils.parseEther(balance.toString())}
+                />
                 <UserBalanceListener />
               </React.Fragment>
             ) : (
