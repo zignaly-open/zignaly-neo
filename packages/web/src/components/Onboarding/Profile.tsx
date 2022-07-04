@@ -1,4 +1,4 @@
-import Typography from '@mui/material/Typography';
+import { Typography } from 'zignaly-ui';
 import React, { Ref, useImperativeHandle } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextField } from '@mui/material';
@@ -54,7 +54,9 @@ const ProfileInner: ProfileComponentType = React.forwardRef(
     return (
       <Box marginTop={2}>
         <form name='profileForm' onSubmit={handleSubmit(submit)}>
-          <Typography marginBottom={1}>{t('why-set-username')}</Typography>
+          <Box marginBottom={1}>
+            <Typography>{t('why-set-username')}</Typography>
+          </Box>
           <Controller
             name='username'
             render={({ field }) => (
@@ -87,15 +89,9 @@ const ProfileInner: ProfileComponentType = React.forwardRef(
             control={control}
             defaultValue=''
           />
-
-          <Typography
-            marginTop={1}
-            marginBottom={1}
-            color={'secondary'}
-            fontSize={14}
-          >
-            {t('why-set-username-2')}
-          </Typography>
+          <Box marginTop={1} marginBottom={1}>
+            <Typography>{t('why-set-username-2')}</Typography>
+          </Box>
 
           {!onSuccess && (
             <Box marginTop={3}>

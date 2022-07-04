@@ -1,6 +1,7 @@
-import Typography from '@mui/material/Typography';
+import { Typography } from 'zignaly-ui';
 import React, { ReactNode } from 'react';
 import WhiteContainer from '../common/WhiteContainer';
+import { Box } from '@mui/system';
 
 const Page: React.FC<{
   children: ReactNode;
@@ -8,9 +9,9 @@ const Page: React.FC<{
 }> = ({ children, title }) => {
   return (
     <WhiteContainer maxWidth='sm'>
-      <Typography variant={'h5'} marginBottom={1}>
-        {title}
-      </Typography>
+      <Box marginBottom={1}>
+        <Typography variant={'h5'}>{title}</Typography>
+      </Box>
 
       {children}
     </WhiteContainer>

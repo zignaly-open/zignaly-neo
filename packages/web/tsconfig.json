@@ -8,6 +8,7 @@
     "build"
   ],
   "compilerOptions": {
+    "baseUrl": "./src",
     "paths": {
       "crypto": [
         "./node_modules/crypto-browserify"

@@ -1,23 +1,15 @@
 import { useMutation } from '@apollo/client';
 import { BID_AUCTION } from '../queries';
-import { LoadingButton } from '@mui/lab';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { AuctionType } from '@zigraffle/shared/types';
 import useCurrentUser from '../../../hooks/useCurrentUser';
 import { useTranslation } from 'react-i18next';
-import { styled } from '@mui/material/styles';
 import useBalance from '../../../hooks/useBalance';
 import { BigNumber } from 'ethers';
 import { getWinningLosingStatus } from './util';
 import useAuthenticate from '../../../hooks/useAuthenticate';
 import { onboardingContext } from '../../../contexts/Onboarding';
-
-const Button = styled(LoadingButton, {
-  shouldForwardProp: (p) => p !== 'state',
-})<{ state: BidButtonState }>`
-  flex: 1;
-  min-height: 50px;
-`;
+import { Button } from 'zignaly-ui';
 
 enum BidButtonState {
   NotLoggedIn,
@@ -28,13 +20,16 @@ enum BidButtonState {
 }
 
 // Smarted button in the history of buttons, maybe ever
-const BidButton: React.FC<{ auction: AuctionType }> = ({ auction }) => {
+const BidButton: React.FC<{ auction: AuctionType; isActive: boolean }> = ({
+  auction,
+  isActive,
+}) => {
   const [bid, { loading: isBidding }] = useMutation(BID_AUCTION);
   const { balance } = useBalance();
   const { user } = useCurrentUser();
   const { balanceOnboarding } = useContext(onboardingContext);
   const authenticate = useAuthenticate();
-  const [showTrueSelf, setShowTrueSelf] = useState(false);
+  const [showTrueSelf /* setShowTrueSelf */] = useState(false);
   const { t } = useTranslation('auction');
 
   const state = useMemo(() => {
@@ -51,11 +46,11 @@ const BidButton: React.FC<{ auction: AuctionType }> = ({ auction }) => {
     return BidButtonState.Default;
   }, [user, balance, auction]);
 
-  const buttonColor = useMemo(() => {
-    if (state === BidButtonState.NotLoggedIn) return 'prettyPink';
-    if (state === BidButtonState.NotEnoughFunds) return 'greedyGreen';
-    return 'primary';
-  }, [state]);
+  // const buttonColor = useMemo(() => {
+  //   if (state === BidButtonState.NotLoggedIn) return 'prettyPink';
+  //   if (state === BidButtonState.NotEnoughFunds) return 'greedyGreen';
+  //   return 'primary';
+  // }, [state]);
 
   const customButtonText = useMemo(() => {
     if (state === BidButtonState.NotLoggedIn) return t('global:log-in');
@@ -82,19 +77,18 @@ const BidButton: React.FC<{ auction: AuctionType }> = ({ auction }) => {
 
   return (
     <Button
-      state={state}
-      variant={'contained'}
+      size='small'
       loading={isBidding}
-      color={showTrueSelf ? buttonColor : 'primary'}
-      disabled={isBidding}
-      onMouseEnter={() => setShowTrueSelf(true)}
-      onMouseLeave={() => setShowTrueSelf(false)}
-      size='large'
+      disabled={!isActive}
+      // onMouseEnter={() => setShowTrueSelf(true)}
+      // onMouseLeave={() => setShowTrueSelf(false)}
       onClick={bidClickHandler}
-    >
-      {(showTrueSelf && customButtonText) ||
-        t('make-bid', { bid: auction.minimalBid })}
-    </Button>
+      caption={
+        (showTrueSelf && customButtonText) || isActive
+          ? t('bid-now')
+          : t('ended')
+      }
+    />
   );
 };
 

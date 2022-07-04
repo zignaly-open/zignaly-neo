@@ -9,7 +9,6 @@ import StepConnector, {
 } from '@mui/material/StepConnector';
 import { StepIconProps } from '@mui/material/StepIcon';
 import { useTranslation } from 'react-i18next';
-import Logo from '../Header/Logo';
 import { Box, Button } from '@mui/material';
 import { useContext, useState } from 'react';
 import HowItWorks from './HowItWorks';
@@ -116,7 +115,6 @@ export default function Onboarding() {
 
   return (
     <Box>
-      <Logo />
       <Stepper
         style={{
           margin: '30px 0',

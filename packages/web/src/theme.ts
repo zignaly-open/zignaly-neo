@@ -31,23 +31,12 @@ export default createTheme({
   },
   typography: {
     fontFamily: [
-      '"IBM Plex Sans"',
-      '"IBM Plex Mono"',
-      '"Helvetica Neue"',
+      'Avenir Next',
+      'Roboto',
+      'Helvetica',
       'Arial',
       'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
     ].join(','),
-    body2: {
-      fontFamily: [
-        '"IBM Plex Mono"',
-        '"Courier New"',
-        'Monospace',
-        'sans-serif',
-      ].join(','),
-    },
   },
   components: {
     // Name of the component
