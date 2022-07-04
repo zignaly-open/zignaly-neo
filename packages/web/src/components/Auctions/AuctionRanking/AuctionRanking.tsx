@@ -52,7 +52,7 @@ const RankingRow = ({
       <Box display='flex' justifyContent='space-between' flex={1}>
         <Name isPlaceholder={!Boolean(name)}>{name ?? '-'}</Name>
         <Amount isPlaceholder={!Boolean(amount)}>
-          {Boolean(amount) ? `${amount} ZIG` : '-'}
+          {amount ? `${amount} ZIG` : '-'}
         </Amount>
       </Box>
     </RankingRowContainer>

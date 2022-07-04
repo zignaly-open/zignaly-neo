@@ -90,13 +90,7 @@ const ProfileInner: ProfileComponentType = React.forwardRef(
             defaultValue=''
           />
           <Box marginTop={1} marginBottom={1}>
-            <Typography
-            // color={'secondary'}
-            // fontSize={14}
-            // variant='body2'
-            >
-              {t('why-set-username-2')}
-            </Typography>
+            <Typography>{t('why-set-username-2')}</Typography>
           </Box>
 
           {!onSuccess && (
