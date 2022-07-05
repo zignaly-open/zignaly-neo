@@ -12,7 +12,7 @@ import Loader from '../../common/Loader';
 import { getWinningLosingStatus } from '../AuctionCard/util';
 
 const MasonryWrapper = styled(Box)`
-  max-width: 1000px;
+  max-width: 1280px;
   margin: 30px auto;
 `;
 const StyledMasonry = styled(Masonry)`
@@ -128,7 +128,7 @@ const AuctionGrid: React.FC = () => {
           </Grid>
         </Grid>
       </Box>
-      <StyledMasonry columns={{ xs: 1, sm: 2, md: 3 }} spacing={4}>
+      <StyledMasonry columns={{ xs: 1, sm: 1, md: 2 }} spacing={4}>
         {filtered.map((x: AuctionType) => (
           <AuctionCard key={x.id} auction={x} />
         ))}

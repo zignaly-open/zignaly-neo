@@ -1,11 +1,20 @@
-import Typography from '@mui/material/Typography';
+import { Typography } from 'zignaly-ui';
 import React, { useCallback } from 'react';
 import Countdown from 'react-countdown';
-import { useTranslation } from 'react-i18next';
+import { ReactComponent as TimeIcon } from 'images/time.svg';
+import { styled } from '@mui/material/styles';
+
+const CountdownContainer = styled('div')<{ color: string }>`
+  display: flex;
+  align-items: center;
+  color: ${({ theme, color }) => theme[color]};
+`;
 
 // It's the final countdown
-const FinalCountdown: React.FC<{ date: Date }> = ({ date }) => {
-  const { t } = useTranslation('auction');
+const FinalCountdown: React.FC<{ date: Date; started: boolean }> = ({
+  date,
+  started,
+}) => {
   const renderer = useCallback(
     ({
       hours,
@@ -18,24 +27,26 @@ const FinalCountdown: React.FC<{ date: Date }> = ({ date }) => {
       seconds: number;
       completed: boolean;
     }) => {
-      if (completed) return null;
+      const color = started
+        ? completed
+          ? 'redGraphOrError'
+          : 'greenGraph'
+        : 'neutral300';
+
       return (
-        <Typography
-          fontSize={24}
-          variant={'body2'}
-          color={'primary'}
-          marginBottom={3}
-        >
-          {t('auction:remaining-time', {
-            h: hours,
-            m: minutes.toString().padStart(2, '0'),
-            s: seconds.toString().padStart(2, '0'),
-          })}
-        </Typography>
+        <CountdownContainer color={color}>
+          <TimeIcon style={{ marginTop: '-4px' }} />
+          <Typography variant={'h1'}>
+            {hours.toString().padStart(2, '0')}:
+            {minutes.toString().padStart(2, '0')}:
+            {seconds.toString().padStart(2, '0')}
+          </Typography>
+        </CountdownContainer>
       );
     },
     [],
   );
+
   return <Countdown date={date} renderer={renderer} />;
 };
 

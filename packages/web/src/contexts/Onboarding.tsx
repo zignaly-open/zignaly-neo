@@ -1,8 +1,8 @@
 import React, { createContext, useCallback, useState } from 'react';
-import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import { Box, Dialog, DialogContent, DialogTitle } from '@mui/material';
 import DepositInput from '../components/Onboarding/DepositInput';
 import { useTranslation } from 'react-i18next';
-import Typography from '@mui/material/Typography';
+import { Typography } from 'zignaly-ui';
 import Onboarding from '../components/Onboarding/Onboarding';
 
 type OnboardingType = {
@@ -41,11 +41,13 @@ export const OnboardingProvider: React.FC<{
         open={isMoneyModalOpen}
         onClose={() => setIsMoneyModalOpen(false)}
       >
-        <DialogTitle>{t('balance:buy-bids')}</DialogTitle>
+        <DialogTitle>
+          <Typography>{t('balance:buy-bids')}</Typography>
+        </DialogTitle>
         <DialogContent>
-          <Typography marginBottom={2}>
-            {t('balance:buy-bids-explainer')}
-          </Typography>
+          <Box marginBottom={2}>
+            <Typography>{t('balance:buy-bids-explainer')}</Typography>
+          </Box>
           <DepositInput />
         </DialogContent>
       </Dialog>

@@ -70,17 +70,19 @@ const config = {
   },
 };
 
+const augmentedTheme = { ...dark, ...theme };
+
 function EntryPoint() {
   return (
     <ThemeProvider theme={dark}>
-      <ThemeProviderMui theme={{ ...dark, ...theme }}>
+      <ThemeProviderMui theme={augmentedTheme}>
         <DAppProvider config={config}>
           <ApolloProvider client={client}>
-            <OnboardingProvider>
-              <ModalProvider>
+            <ModalProvider>
+              <OnboardingProvider>
                 <Routes />
-              </ModalProvider>
-            </OnboardingProvider>
+              </OnboardingProvider>
+            </ModalProvider>
           </ApolloProvider>
         </DAppProvider>
       </ThemeProviderMui>

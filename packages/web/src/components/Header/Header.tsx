@@ -1,95 +1,139 @@
-import { Button } from '@mui/material';
-import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
+import {
+  IconButton,
+  BrandImage,
+  UserIcon,
+  Select,
+  WalletIcon,
+  TextButton,
+} from 'zignaly-ui';
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import useAuthenticate, {
-  useLogout,
-  useWalletConnect,
+  useWalletConnect /*, { useLogout }*/,
 } from '../../hooks/useAuthenticate';
 import useCurrentUser from '../../hooks/useCurrentUser';
-import UserBalance from './UserBalance';
 import UserBalanceListener from './UserBalanceListener';
-import Logo from './Logo';
-import { useModal } from 'mui-modal-provider';
+import { Header as ZIGHeader, ZigsBalance, Button } from 'zignaly-ui';
+import Navigation from './Navigation';
+import useBalance from '../../hooks/useBalance';
+import { ethers } from 'ethers';
+import { Box } from '@mui/system';
+import { styled } from '@mui/material/styles';
 import ConnectWalletModal from '../Modals/ConnectWallet';
+import { useModal } from 'mui-modal-provider';
 
-const StyledMoto = styled(Typography)`
-  text-transform: uppercase;
-  text-shadow: 0 0 1px #fff;
+
+const DepositSelect = styled(Select)`
+  width: auto;
+
+  > div {
+    > span {
+      color: ${({ theme }) => theme.highlighted};
+    }
+    padding: 0 !important;
+  }
 `;
 
 const Header: React.FC = () => {
   const { t } = useTranslation('global');
-  const navigate = useNavigate();
-  const logout = useLogout();
-  const { user: currentUser, loading } = useCurrentUser();
-  const { showModal } = useModal();
   const authenticate = useAuthenticate();
+  // const logout = useLogout();
+  const { user: currentUser, loading } = useCurrentUser();
+  const { balance } = useBalance();
   const walletConnect = useWalletConnect();
+  const { showModal } = useModal();
 
   return (
     <>
-      <Logo />
-      <StyledMoto
-        fontSize={{
-          sm: 11,
-          md: 12,
-          lg: 13,
-        }}
-        textAlign={'center'}
-        variant={'subtitle1'}
-        color={'secondary'}
-      >
-        {t('moto')}
-      </StyledMoto>
-
-      <Box textAlign={'center'} marginTop={3} marginBottom={1}>
-        <Button variant={'text'} onClick={() => navigate('/')}>
-          {t('home')}
-        </Button>
-        <Button variant={'text'} onClick={() => navigate('/how-it-works')}>
-          {t('how-it-works')}
-        </Button>
-        {/*<Button variant={'text'} onClick={() => navigate('/')}>*/}
-        {/*  {t('view-history')}*/}
-        {/*</Button>*/}
-        {!loading &&
-          (!currentUser?.id ? (
-            <Button
-              variant={'text'}
-              onClick={() => {
-                showModal(ConnectWalletModal, {
-                  metaMaskOnClick:authenticate,
-                  walletConnectOnClick:walletConnect,
-                });
-              }}
-            >
-              {t('log-in')}
-            </Button>
-          ) : (
-            <>
-              <Button variant={'text'} onClick={() => navigate('/deposit')}>
-                {t('buy-bids')}
-              </Button>
-              <Button variant={'text'} onClick={() => navigate('/profile')}>
-                {t('edit profile')}
-              </Button>
-              <Button variant={'text'} onClick={logout}>
-                {t('log-out')}
-              </Button>
-            </>
-          ))}
-      </Box>
-
-      {!loading && !!currentUser?.id && (
-        <Box textAlign={'center'} marginBottom={3}>
-          <UserBalance />
-          <UserBalanceListener />
-        </Box>
-      )}
+      <ZIGHeader
+        leftElements={[
+          <BrandImage
+            key={'logo2'}
+            type={'logotype'}
+            width={'140px'}
+            height={'68px'}
+          />,
+          <Navigation
+            key={'navigation'}
+            routes={[
+              {
+                path: '/',
+                label: 'Home',
+                isActive: true,
+              },
+              {
+                path: '/how-it-works',
+                label: t('how-it-works'),
+              },
+              ...(!loading && currentUser?.id
+                ? [
+                    {
+                      path: '/deposit',
+                      label: t('buy-bids'),
+                    },
+                  ]
+                : []),
+            ]}
+          />,
+        ]}
+        rightElements={[
+          !loading &&
+            (currentUser?.id ? (
+              <React.Fragment key={'balance'}>
+                <Button
+                  variant='secondary'
+                  size='small'
+                  caption={t('insert-code')}
+                  // color='highlighted'
+                />
+                <ZigsBalance
+                  balance={ethers.utils.parseEther(balance.toString())}
+                />
+                <UserBalanceListener />
+                <DepositSelect
+                  placeholder={
+                    <Box display='flex' gap='8px' marginLeft='10px'>
+                      <WalletIcon />
+                      {t('deposit')}
+                    </Box>
+                  }
+                  options={[
+                    {
+                      index: 0,
+                      caption: t('deposit'),
+                    },
+                    {
+                      index: 1,
+                      caption: t('disconnect'),
+                    },
+                  ]}
+                  onChange={() => {}}
+                />
+              </React.Fragment>
+            ) : (
+              <TextButton
+                onClick={() => {
+                  showModal(ConnectWalletModal, {
+                    metaMaskOnClick: authenticate,
+                    walletConnectOnClick: walletConnect,
+                  });
+                }}
+                caption={t('log-in')}
+              />
+            )),
+          <IconButton
+            key={'user'}
+            variant={'flat'}
+            // @ts-ignore
+            icon={<UserIcon color='#65647E' />}
+            renderDropDown={<div>{t('settings')}</div>}
+            dropDownOptions={{
+              alignment: 'right',
+              position: 'static',
+            }}
+          />,
+        ]}
+      />
     </>
   );
 };
