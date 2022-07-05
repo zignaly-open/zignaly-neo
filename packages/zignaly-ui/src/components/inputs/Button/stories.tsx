@@ -80,6 +80,10 @@ export default {
       control: { type: "number" },
       lable: "Change max width",
     },
+    maxHeight: {
+      control: { type: "number" },
+      lable: "Change max height",
+    },
   },
 } as ComponentMeta<typeof Button>;
 
