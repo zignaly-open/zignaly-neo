@@ -18335,10 +18335,10 @@ zen-observable@0.8.15:
   resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.15.tgz#96415c512d8e3ffd920afd3889604e30b9eaac15"
   integrity sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==
 
-zignaly-ui@^0.3.5:
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/zignaly-ui/-/zignaly-ui-0.3.5.tgz#2f87839288ed0500524e795f7a7ab7bb74978778"
-  integrity sha512-Wv9NiXA6ta/pOQBxu2XWlJ3wNLvVGg0fZadvyrtN4ZIjoxsH9u4UYqmkDqBtsCF+vbBZzIqymI5SIN/SMAtwUg==
+zignaly-ui@^0.3.6:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/zignaly-ui/-/zignaly-ui-0.3.6.tgz#c818456b0d83b903cfb48751ee883b1926ec5509"
+  integrity sha512-SdBrBjrMUW3SerS4IS8F1wvtIbXf+S+8xfyMGm9f9QmxFPB4ucQpJAaHiZ+Nwx0nLiECmf/2GtEnpglUKhIWRg==
   dependencies:
     "@hookform/resolvers" "2.9.1"
     "@metamask/jazzicon" "2.0.0"

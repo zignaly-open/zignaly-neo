@@ -54,10 +54,6 @@ const Header: React.FC = () => {
                 label: 'Home',
                 isActive: true,
               },
-              {
-                path: '/how-it-works',
-                label: t('how-it-works'),
-              },
               ...(!loading && currentUser?.id
                 ? [
                     {
