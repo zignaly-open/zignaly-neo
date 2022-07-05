@@ -16879,10 +16879,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@4.7.2:
-  version "4.7.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.2.tgz#1f9aa2ceb9af87cca227813b4310fff0b51593c4"
-  integrity sha512-Mamb1iX2FDUpcTRzltPxgWMKy3fhg0TN378ylbktPGPK/99KbDtMQ4W1hwgsbPAsG3a0xKa1vmw4VKZQbkvz5A==
+typescript@4.7.4:
+  version "4.7.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.4.tgz#1a88596d1cf47d59507a1bcdfb5b9dfe4d488235"
+  integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
 
 uglify-js@^3.1.4:
   version "3.15.5"
@@ -18335,10 +18335,10 @@ zen-observable@0.8.15:
   resolved "https://registry.yarnpkg.com/zen-observable/-/zen-observable-0.8.15.tgz#96415c512d8e3ffd920afd3889604e30b9eaac15"
   integrity sha512-PQ2PC7R9rslx84ndNBZB/Dkv8V8fZEpk83RLgXtYd0fwUgEjseMn1Dgajh2x6S8QbZAFa9p2qVCEuYZNgve0dQ==
 
-zignaly-ui@^0.3.3:
-  version "0.3.3"
-  resolved "https://registry.yarnpkg.com/zignaly-ui/-/zignaly-ui-0.3.3.tgz#bb488a9b45399affafb5ff9b0d143310d6ea5af1"
-  integrity sha512-gXHmhP7LNkEoxcwg0uIKXZraP3W+3FFObTRkaLlDKTh1P9MmL4RzzMSWz++c0QIJfByLsBxTKlCNBGF+F5zK+A==
+zignaly-ui@^0.3.5:
+  version "0.3.5"
+  resolved "https://registry.yarnpkg.com/zignaly-ui/-/zignaly-ui-0.3.5.tgz#2f87839288ed0500524e795f7a7ab7bb74978778"
+  integrity sha512-Wv9NiXA6ta/pOQBxu2XWlJ3wNLvVGg0fZadvyrtN4ZIjoxsH9u4UYqmkDqBtsCF+vbBZzIqymI5SIN/SMAtwUg==
   dependencies:
     "@hookform/resolvers" "2.9.1"
     "@metamask/jazzicon" "2.0.0"

@@ -11,11 +11,13 @@ const algorithm = 'HS256';
 ImportMock.mockOther(config, 'secret', secret);
 ImportMock.mockOther(config, 'algorithm', algorithm);
 
-let mockedUser = {
+const mockedUser = {
   id: 5,
   publicAddress: '0xe288ae3acccc630781354da2aa64379a0d4c56db',
   nonce: 5543,
-  save: () => {},
+  save: () => {
+    // Do nothing
+  },
 } as User;
 
 jest
