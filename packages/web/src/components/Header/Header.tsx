@@ -5,13 +5,16 @@ import Typography from '@mui/material/Typography';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { useLogout } from '../../hooks/useAuthenticate';
+import useAuthenticate, {
+  useLogout,
+  useWalletConnect,
+} from '../../hooks/useAuthenticate';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import UserBalance from './UserBalance';
 import UserBalanceListener from './UserBalanceListener';
 import Logo from './Logo';
-import useModal from '../../hooks/useModal';
-import SuperModal from '../Modals/SuperModal';
+import { useModal } from 'mui-modal-provider';
+import ConnectWalletModal from '../Modals/ConnectWallet';
 
 const StyledMoto = styled(Typography)`
   text-transform: uppercase;
@@ -23,12 +26,13 @@ const Header: React.FC = () => {
   const navigate = useNavigate();
   const logout = useLogout();
   const { user: currentUser, loading } = useCurrentUser();
-  const { toggle, setModalId, modalId, showModal } = useModal();
+  const { showModal } = useModal();
+  const authenticate = useAuthenticate();
+  const walletConnect = useWalletConnect();
 
   return (
     <>
       <Logo />
-      <SuperModal toggle={toggle} modalId={modalId} showModal={showModal} />
       <StyledMoto
         fontSize={{
           sm: 11,
@@ -57,8 +61,10 @@ const Header: React.FC = () => {
             <Button
               variant={'text'}
               onClick={() => {
-                setModalId('connectWallet');
-                toggle();
+                showModal(ConnectWalletModal, {
+                  metaMaskOnClick:authenticate,
+                  walletConnectOnClick:walletConnect,
+                });
               }}
             >
               {t('log-in')}

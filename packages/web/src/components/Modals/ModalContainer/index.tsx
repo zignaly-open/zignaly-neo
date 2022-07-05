@@ -1,68 +1,28 @@
-import React, { useMemo } from 'react';
+import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import React from 'react';
+import { Typography } from 'zignaly-ui';
+import { ModalProps } from '../types';
 
-// Styled Components
-import { Layout, Header, Title, Body, HeaderButton, Inline } from './styles';
-
-// Assets
-import { CloseIcon } from 'zignaly-ui';
-import { ArrowLeftIcon } from 'zignaly-ui';
-
-// Types
-import { ModalContainerProps } from './types';
-
-function ModalContainer({
-  children,
-  title = null,
-  width = 800,
-  onGoBack = null,
-  onClickClose = null,
-  centerHeaderText = false,
-  customHeaderAction = null,
-}: ModalContainerProps) {
-  const renderHeaderAction = useMemo(
-    () =>
-      !customHeaderAction
-        ? onClickClose && (
-            <HeaderButton onClick={onClickClose}>
-              <CloseIcon />
-            </HeaderButton>
-          )
-        : customHeaderAction,
-    [customHeaderAction],
-  );
-
+function ModalContainer({ title, children, ...props }: ModalProps) {
   return (
-    <Layout width={width}>
-      <Header width={width}>
-        {centerHeaderText ? (
-          <>
-            <Inline>
-              {onGoBack && (
-                <HeaderButton onClick={onGoBack}>
-                  <ArrowLeftIcon />
-                </HeaderButton>
-              )}
-            </Inline>
-            <Title variant='h1' color='neutral100' weight={'medium'}>
-              {title}
-            </Title>
-          </>
-        ) : (
-          <Inline>
-            {onGoBack && typeof onGoBack === 'function' && (
-              <HeaderButton onClick={onGoBack}>
-                <ArrowLeftIcon />
-              </HeaderButton>
-            )}
-            <Title variant='h1' color='neutral100' weight={'medium'}>
-              {title}
-            </Title>
-          </Inline>
-        )}
-        {renderHeaderAction}
-      </Header>
-      <Body width={width}>{children}</Body>
-    </Layout>
+    <Dialog
+      {...props}
+      PaperProps={{
+        style: {
+          backgroundColor: '#101225',
+          borderRadius: '16px',
+          border: '1px solid #35334a',
+          padding: '40px 56px 56px 56px',
+        },
+      }}
+    >
+      <DialogTitle textAlign='center'>
+        <Typography variant='h1' color='neutral100' weight='medium'>
+          {title}
+        </Typography>
+      </DialogTitle>
+      <DialogContent>{children}</DialogContent>
+    </Dialog>
   );
 }
 

@@ -5,23 +5,19 @@ import ModalContainer from '../ModalContainer';
 import { Button } from 'zignaly-ui';
 import { ReactComponent as MetaMaskLogo } from '../../../assets/icons/metamask-logo.svg';
 import { ReactComponent as WalletConnectLogo } from '../../../assets/icons/walletconnect-logo.svg';
+import { useTranslation } from 'react-i18next';
 
 const ConnectWalletModal = ({
-  onClickClose = () => {},
   metaMaskOnClick = () => {},
   walletConnectOnClick = () => {},
+  ...props
 }: ConnectWalletModalProps) => {
+  const { t } = useTranslation('connect-wallet');
   return (
-    <ModalContainer
-      centerHeaderText={true}
-      title='Connect Wallet'
-      width={800}
-      onClickClose={onClickClose}
-    >
-      <Gap gap={12} />
+    <ModalContainer title={t('title')} {...props}>
+      <Gap gap={8} />
       <Subtitle variant='body1' weight='regular' color='neutral200'>
-        To continue, you need to connect your wallet with one of these
-        providers:
+        {t('subtitle')}
       </Subtitle>
       <Gap gap={20} />
       <ButtonContainer>

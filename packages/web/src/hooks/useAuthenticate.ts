@@ -1,6 +1,6 @@
 import { gql, useLazyQuery, useMutation } from '@apollo/client';
 import { setToken } from '../util/token';
-import { useEthers } from '@usedapp/core';
+import { useEthers,  } from '@usedapp/core';
 import { useAsync } from 'react-use';
 import { useContext, useState } from 'react';
 import { onboardingContext } from '../contexts/Onboarding';
