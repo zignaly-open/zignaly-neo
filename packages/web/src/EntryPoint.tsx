@@ -15,7 +15,7 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { setContext } from '@apollo/client/link/context';
 import { getToken } from './util/token';
-import { DAppProvider, Mainnet, Rinkeby } from '@usedapp/core';
+import { DAppProvider, Mainnet, Polygon, Rinkeby } from '@usedapp/core';
 import { OnboardingProvider } from './contexts/Onboarding';
 
 const httpLink = createHttpLink({
@@ -58,16 +58,30 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const config = {
-  // TODO: Change chain to Polygon ONLY
-  readOnlyChainId: Rinkeby.chainId,
-  readOnlyUrls: {
-    [Mainnet.chainId]:
-      'https://mainnet.infura.io/v3/' + process.env.REACT_APP_INFURA_PROJECT_ID,
-    [Rinkeby.chainId]:
-      'https://rinkeby.infura.io/v3/' + process.env.REACT_APP_INFURA_PROJECT_ID,
-  },
-};
+let config = {};
+
+if (process.env.REACT_APP_ENV === 'production') {
+  config = {
+    readOnlyChainId: Polygon.chainId,
+    readOnlyUrls: {
+      [Polygon.chainId]:
+        'https://mainnet.infura.io/v3/' +
+        process.env.REACT_APP_INFURA_PROJECT_ID,
+    },
+  };
+} else if (process.env.REACT_APP_ENV === 'development') {
+  config = {
+    readOnlyChainId: Mainnet.chainId,
+    readOnlyUrls: {
+      [Mainnet.chainId]:
+        'https://mainnet.infura.io/v3/' +
+        process.env.REACT_APP_INFURA_PROJECT_ID,
+      [Rinkeby.chainId]:
+        'https://rinkeby.infura.io/v3/' +
+        process.env.REACT_APP_INFURA_PROJECT_ID,
+    },
+  };
+}
 
 const augmentedTheme = { ...dark, ...theme };
 
