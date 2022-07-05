@@ -106,6 +106,6 @@
     "prop-types": "^15.8.1",
     "storybook-react-i18next": "^1.0.20",
     "webpack": "^5.73.0",
-    "zignaly-ui": "^0.3.3"
+    "zignaly-ui": "^0.3.5"
   }
 }

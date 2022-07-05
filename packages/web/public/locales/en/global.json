@@ -9,5 +9,9 @@
   "log-out": "Disconnect",
   "log-in": "Connect Wallet",
   "moto": "Bid & Win thousands of $ worth of crypto for cents!",
-  "loading": "Loading..."
+  "loading": "Loading...",
+  "settings": "Settings",
+  "deposit": "Deposit",
+  "insert-code": "Insert Code",
+  "disconnect": "Disconnect"
 }
