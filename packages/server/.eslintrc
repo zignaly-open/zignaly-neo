@@ -1,0 +1,46 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "globals": {
+    "process": true
+  },
+  "rules": {
+    "no-var": "error",
+    "semi": "error",
+    "no-underscore-dangle": [
+      "error",
+      {
+        "allow": [
+          "_id"
+        ]
+      }
+    ],
+    "no-multi-spaces": "error",
+    "space-in-parens": "error",
+    "unicorn/no-process-exit": "off",
+    "no-multiple-empty-lines": "error",
+    "prefer-const": "error",
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-use-before-define": "off",
+    "consistent-return": "off",
+    "unicorn/no-null": "off",
+    "unicorn/no-fn-reference-in-iterator": "off",
+    "no-await-in-loop": "off",
+    "no-process-exit": "off",
+    "no-plusplus": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": ["error"],
+    "func-names": "off",
+    "indent": "off",
+    "no-restricted-syntax": "off",
+    "import/prefer-default-export": "off",
+    "unicorn/no-reduce": "off" // mapreduce forever
+  }
+}
