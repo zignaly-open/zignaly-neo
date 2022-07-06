@@ -73,7 +73,7 @@ const AuctionGrid: React.FC = () => {
       .sort((a: AuctionType, b: AuctionType) => {
         switch (selectedSort) {
           case SortDirection.Yours:
-            return (+b.userBid?.[0]?.id || 0) - (+a.userBid?.[0]?.id || 0);
+            return (+b.userBid?.value || 0) - (+a.userBid?.value || 0);
           case SortDirection.LastBid:
             return -(+a.bids[0]?.id || 0) + (+b.bids[0]?.id || 0);
           case SortDirection.Value:
