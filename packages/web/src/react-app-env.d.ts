@@ -3,14 +3,14 @@
 import ThemeZig from 'zignaly-ui/lib/theme/theme';
 
 declare module '*.svg' {
-  import * as React from 'react';
+  /**
+   * Use `any` to avoid conflicts with
+   * `@svgr/webpack` plugin or
+   * `babel-plugin-inline-react-svg` plugin.
+   */
+  const content: any;
 
-  export const ReactComponent: React.FunctionComponent<
-    React.SVGProps<SVGSVGElement> & { title?: string }
-  >;
-
-  const src: string;
-  export default src;
+  export default content;
 }
 
 import type { PaletteOptions, Palette } from '@mui/material/styles';
