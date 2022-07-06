@@ -24,7 +24,7 @@ const ConnectWalletModal = ({
         <Button
           minWidth={255}
           size='large'
-          caption='METAMASK'
+          caption={t('metamask')}
           onClick={() => metaMaskOnClick()}
           leftElement={<MetaMaskLogo />}
         />
@@ -32,7 +32,7 @@ const ConnectWalletModal = ({
         <Button
           minWidth={255}
           size='large'
-          caption='WALLETCONNECT'
+          caption={t('walletconnect')}
           onClick={() => walletConnectOnClick()}
           leftElement={<WalletConnectLogo />}
         />

@@ -13,11 +13,12 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { setContext } from '@apollo/client/link/context';
 import { getToken } from './util/token';
-import { DAppProvider, Mainnet, Rinkeby } from '@usedapp/core';
+import { DAppProvider, Mainnet, Polygon, Rinkeby } from '@usedapp/core';
 import { OnboardingProvider } from './contexts/Onboarding';
 import { dark, ThemeProvider } from 'zignaly-ui';
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
+import { BrowserRouter } from 'react-router-dom';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
@@ -59,16 +60,30 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const config = {
-  // TODO: Change chain to Polygon ONLY
-  readOnlyChainId: Rinkeby.chainId,
-  readOnlyUrls: {
-    [Mainnet.chainId]:
-      'https://mainnet.infura.io/v3/' + process.env.REACT_APP_INFURA_PROJECT_ID,
-    [Rinkeby.chainId]:
-      'https://rinkeby.infura.io/v3/' + process.env.REACT_APP_INFURA_PROJECT_ID,
-  },
-};
+let config = {};
+
+if (process.env.REACT_APP_ENV === 'production') {
+  config = {
+    readOnlyChainId: Polygon.chainId,
+    readOnlyUrls: {
+      [Polygon.chainId]:
+        'https://mainnet.infura.io/v3/' +
+        process.env.REACT_APP_INFURA_PROJECT_ID,
+    },
+  };
+} else if (process.env.REACT_APP_ENV === 'development') {
+  config = {
+    readOnlyChainId: Mainnet.chainId,
+    readOnlyUrls: {
+      [Mainnet.chainId]:
+        'https://mainnet.infura.io/v3/' +
+        process.env.REACT_APP_INFURA_PROJECT_ID,
+      [Rinkeby.chainId]:
+        'https://rinkeby.infura.io/v3/' +
+        process.env.REACT_APP_INFURA_PROJECT_ID,
+    },
+  };
+}
 
 const augmentedTheme = { ...dark, ...theme };
 
@@ -79,9 +94,11 @@ function EntryPoint() {
         <DAppProvider config={config}>
           <ApolloProvider client={client}>
             <ModalProvider>
-              <OnboardingProvider>
-                <Routes />
-              </OnboardingProvider>
+              <BrowserRouter>
+                <OnboardingProvider>
+                  <Routes />
+                </OnboardingProvider>
+              </BrowserRouter>
             </ModalProvider>
           </ApolloProvider>
         </DAppProvider>
