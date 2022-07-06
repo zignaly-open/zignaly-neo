@@ -86,7 +86,6 @@ const AuctionGrid: React.FC = () => {
           case SortDirection.LastBid:
             return -(+a.bids[0]?.id || 0) + (+b.bids[0]?.id || 0);
           case SortDirection.Bid:
-            console.log(-(+a.bids[0]?.value || 0), a, b.bids[0]?.value, b);
             return -(+a.bids[0]?.value || 0) + (+b.bids[0]?.value || 0);
           case SortDirection.Expiry:
             return +new Date(a.expiresAt) - +new Date(b.expiresAt);
@@ -108,28 +107,26 @@ const AuctionGrid: React.FC = () => {
 
   return (
     <MasonryWrapper>
-      <Box padding={2}>
-        <Grid container spacing={2} justifyContent='center'>
-          <Grid item textAlign='right'>
-            <StyledSelect
-              options={showOptions}
-              value={showOptions.find((o) => o.value === selectedShowMode)}
-              onChange={(option) => setSelectedShowMode(option.value)}
-              fullWidth={false}
-              label={t('show')}
-            />
-          </Grid>
-          <Grid item>
-            <StyledSelect
-              options={sortOptions}
-              value={sortOptions.find((o) => o.value === selectedSort)}
-              onChange={(option) => setSelectedSort(option.value)}
-              fullWidth={false}
-              label={t('sort')}
-            />
-          </Grid>
+      <Grid container marginY={2} columnSpacing={4} justifyContent='center'>
+        <Grid item textAlign='right'>
+          <StyledSelect
+            options={showOptions}
+            value={showOptions.find((o) => o.value === selectedShowMode)}
+            onChange={(option) => setSelectedShowMode(option.value)}
+            fullWidth={false}
+            label={t('show')}
+          />
         </Grid>
-      </Box>
+        <Grid item>
+          <StyledSelect
+            options={sortOptions}
+            value={sortOptions.find((o) => o.value === selectedSort)}
+            onChange={(option) => setSelectedSort(option.value)}
+            fullWidth={false}
+            label={t('sort')}
+          />
+        </Grid>
+      </Grid>
       <StyledMasonry columns={{ xs: 1, sm: 1, md: 2 }} spacing={4}>
         {filtered.map((x: AuctionType) => (
           <AuctionCard key={x.id} auction={x} />
