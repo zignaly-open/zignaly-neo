@@ -36,7 +36,7 @@ const BidButton: React.FC<{ auction: AuctionType; isActive: boolean }> = ({
     if (!user) return BidButtonState.NotLoggedIn;
     if (
       BigNumber.from(balance).lt(
-        BigNumber.from(auction.minimalBid).add(auction.bidFee),
+        BigNumber.from(auction.bidFee),
       )
     )
       return BidButtonState.NotEnoughFunds;
@@ -61,7 +61,7 @@ const BidButton: React.FC<{ auction: AuctionType; isActive: boolean }> = ({
     if (state === BidButtonState.NotLoggedIn) {
       authenticate();
     } else if (state === BidButtonState.NotEnoughFunds) {
-      balanceOnboarding();
+      alert('Not Enough Funds');
     } else {
       bid({
         variables: {
