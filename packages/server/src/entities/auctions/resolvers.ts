@@ -83,8 +83,6 @@ async function getAuctions(
   showAllBids?: boolean,
 ) {
   const bids = await getSortedAuctionBids(id, showAllBids, user);
-  console.error(bids);
-
   const auctions = (await Auction.findAll({
     where: { ...(id ? { id } : {}) },
     include: [AuctionBasketItem],
