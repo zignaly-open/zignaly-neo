@@ -1,5 +1,3 @@
-import { ThemeProvider as ThemeProviderMui } from '@mui/material';
-import { dark, ThemeProvider } from 'zignaly-ui';
 import React from 'react';
 import Routes from './Routes';
 import theme from './theme';
@@ -17,6 +15,9 @@ import { setContext } from '@apollo/client/link/context';
 import { getToken } from './util/token';
 import { DAppProvider, Mainnet, Polygon, Rinkeby } from '@usedapp/core';
 import { OnboardingProvider } from './contexts/Onboarding';
+import { dark, ThemeProvider } from 'zignaly-ui';
+import { ThemeProvider as ThemeProviderMui } from '@mui/material';
+import ModalProvider from 'mui-modal-provider';
 import { BrowserRouter } from 'react-router-dom';
 
 const httpLink = createHttpLink({
@@ -92,11 +93,13 @@ function EntryPoint() {
       <ThemeProviderMui theme={augmentedTheme}>
         <DAppProvider config={config}>
           <ApolloProvider client={client}>
-            <BrowserRouter>
-              <OnboardingProvider>
-                <Routes />
-              </OnboardingProvider>
-            </BrowserRouter>
+            <ModalProvider>
+              <BrowserRouter>
+                <OnboardingProvider>
+                  <Routes />
+                </OnboardingProvider>
+              </BrowserRouter>
+            </ModalProvider>
           </ApolloProvider>
         </DAppProvider>
       </ThemeProviderMui>

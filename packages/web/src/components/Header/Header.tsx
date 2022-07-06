@@ -8,7 +8,9 @@ import {
 } from 'zignaly-ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import useAuthenticate /*, { useLogout }*/ from '../../hooks/useAuthenticate';
+import useAuthenticate, {
+  useWalletConnect /*, { useLogout }*/,
+} from '../../hooks/useAuthenticate';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import UserBalanceListener from './UserBalanceListener';
 import { Header as ZIGHeader, ZigsBalance, Button } from 'zignaly-ui';
@@ -17,6 +19,8 @@ import useBalance from '../../hooks/useBalance';
 import { ethers } from 'ethers';
 import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
+import ConnectWalletModal from '../Modals/ConnectWallet';
+import { useModal } from 'mui-modal-provider';
 
 const DepositSelect = styled(Select)`
   width: auto;
@@ -35,6 +39,8 @@ const Header: React.FC = () => {
   // const logout = useLogout();
   const { user: currentUser, loading } = useCurrentUser();
   const { balance } = useBalance();
+  const walletConnect = useWalletConnect();
+  const { showModal } = useModal();
 
   return (
     <>
@@ -102,7 +108,15 @@ const Header: React.FC = () => {
                 />
               </React.Fragment>
             ) : (
-              <TextButton onClick={authenticate} caption={t('log-in')} />
+              <TextButton
+                onClick={() => {
+                  showModal(ConnectWalletModal, {
+                    metaMaskOnClick: authenticate,
+                    walletConnectOnClick: walletConnect,
+                  });
+                }}
+                caption={t('log-in')}
+              />
             )),
           <IconButton
             key={'user'}

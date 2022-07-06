@@ -1,9 +1,10 @@
 import { gql, useLazyQuery, useMutation } from '@apollo/client';
 import { setToken } from '../util/token';
-import { useEthers } from '@usedapp/core';
+import { useEthers,  } from '@usedapp/core';
 import { useAsync } from 'react-use';
 import { useContext, useState } from 'react';
 import { onboardingContext } from '../contexts/Onboarding';
+import WalletConnectProvider from '@walletconnect/web3-provider';
 
 export const GET_CURRENT_USER = gql`
   query me {
@@ -47,6 +48,26 @@ export function useLogout(): () => Promise<void> {
     deactivate();
     setToken('');
     await fetchUser();
+  };
+}
+// TODO: Implement with backend. As Alex how it works.
+export function useWalletConnect(): () => Promise<void> {
+  const { activate, account } = useEthers();
+  const [isOkToStart, setIsOkToStart] = useState(false);
+
+  const provider = new WalletConnectProvider({
+    infuraId: process.env.REACT_APP_INFURA_PROJECT_ID,
+  });
+
+  useAsync(async () => {
+    if (!account || !isOkToStart) return;
+    setIsOkToStart(false);
+    activate(provider);
+  }, [account, isOkToStart]);
+
+  return async () => {
+    setIsOkToStart(true);
+    !account && (await provider.enable());
   };
 }
 
