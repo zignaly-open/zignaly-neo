@@ -17,6 +17,7 @@ import { setContext } from '@apollo/client/link/context';
 import { getToken } from './util/token';
 import { DAppProvider, Mainnet, Polygon, Rinkeby } from '@usedapp/core';
 import { OnboardingProvider } from './contexts/Onboarding';
+import { BrowserRouter } from 'react-router-dom';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
@@ -91,9 +92,11 @@ function EntryPoint() {
       <ThemeProviderMui theme={augmentedTheme}>
         <DAppProvider config={config}>
           <ApolloProvider client={client}>
-            <OnboardingProvider>
-              <Routes />
-            </OnboardingProvider>
+            <BrowserRouter>
+              <OnboardingProvider>
+                <Routes />
+              </OnboardingProvider>
+            </BrowserRouter>
           </ApolloProvider>
         </DAppProvider>
       </ThemeProviderMui>
