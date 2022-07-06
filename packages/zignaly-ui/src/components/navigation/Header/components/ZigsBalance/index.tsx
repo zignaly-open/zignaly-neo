@@ -11,7 +11,7 @@ import { Layout, StyledWalletIcon, Balance } from "./styles";
 // Utils
 import { utils } from "ethers";
 
-function ZigBalance({ balance }: ZigBalanceProps) {
+function ZigBalance({ balance, className }: ZigBalanceProps) {
   /**
    * @var renderZigsCoins
    * @description Renderize the current balance with format
@@ -29,7 +29,7 @@ function ZigBalance({ balance }: ZigBalanceProps) {
   );
 
   return (
-    <Layout>
+    <Layout className={className}>
       <StyledWalletIcon />
       {renderZigsCoins}
     </Layout>
