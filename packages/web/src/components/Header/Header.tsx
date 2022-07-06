@@ -92,11 +92,9 @@ const Header: React.FC = () => {
                   }
                   options={[
                     {
-                      index: 0,
                       caption: t('deposit'),
                     },
                     {
-                      index: 1,
                       caption: t('disconnect'),
                     },
                   ]}
