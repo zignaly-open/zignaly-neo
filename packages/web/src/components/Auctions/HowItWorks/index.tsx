@@ -1,9 +1,8 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
-import { ArrowDownward } from '@mui/icons-material';
+import { ArrowDownward, Close } from '@mui/icons-material';
+import Box from '@mui/material/Box';
 import React, { useState } from 'react';
-import { Row } from 'util/row';
-import { Button, CloseIcon, Typography } from 'zignaly-ui';
+import { useTranslation } from 'react-i18next';
+import { Button, Typography } from 'zignaly-ui';
 import {
   ButtonContainer,
   HowItWorksContainer,
@@ -13,6 +12,7 @@ import {
 
 const HowItWorks = ({ onClickReadMore }: { onClickReadMore?: () => void }) => {
   const [showDialog, setShowDialog] = useState(true);
+  const { t } = useTranslation('auction');
 
   function ToggleDialog() {
     setShowDialog(!showDialog);
@@ -21,16 +21,16 @@ const HowItWorks = ({ onClickReadMore }: { onClickReadMore?: () => void }) => {
     <>
       {showDialog ? (
         <HowItWorksContainer>
-          <Row justifyContent='center'>
+          <Box display='flex' justifyContent='center'>
             <Inline>
               <Typography variant='h3' weight='medium' color='link'>
-                How it works
+                {t('how-it-works')}
               </Typography>
             </Inline>
             <IconButtonContainer onClick={() => ToggleDialog()}>
-              <CloseIcon width={24} height={24} />
+              <Close />
             </IconButtonContainer>
-          </Row>
+          </Box>
           <ButtonContainer>
             <Typography variant='body1' weight='regular' color='neutral200'>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

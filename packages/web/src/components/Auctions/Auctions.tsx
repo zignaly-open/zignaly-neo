@@ -23,7 +23,7 @@ function Auctions() {
       <AuctionContainer>
         <Box textAlign={'center'} marginTop='122px'>
           <HomeTitle variant='h1' color='neutral000'>
-            ZIGRaffle
+            {t('auction')}
           </HomeTitle>
         </Box>
         <Box textAlign={'center'} marginBottom='23px'>
