@@ -1,8 +1,6 @@
 import { Box } from '@mui/material';
-import { useContractFunction, useEtherBalance, useEthers } from '@usedapp/core';
-import contract from 'contract';
-import { BigNumberish } from 'ethers';
-import { parseEther } from 'ethers/lib/utils';
+import { useEthers, useTokenBalance } from '@usedapp/core';
+import useContract from 'hooks/useContract';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, InputAmount, Loader, Typography } from 'zignaly-ui';
@@ -15,19 +13,30 @@ const TransferZigModal = ({
   transferOnClick,
   ...props
 }: TransferZigModalProps) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [transferAmount, setTransferAmount] = useState('1');
-  const { t } = useTranslation('transfer-zig');
+  // TODO: Optimize performance by extracting methods
+  // State
+  const [transferAmount, setTransferAmount] = useState(
+    '100000000000000000000000000',
+  );
+  // Variables
   const address: string = process.env.REACT_APP_RECEIVING_ADDRESS as string;
-  const { state, send } = useContractFunction(contract, 'transfer');
-  const { account, activateBrowserWallet, chainId } = useEthers();
-  const balance = useEtherBalance(account, { chainId });
+  const token = process.env.REACT_APP_CONTRACT_ADDRESS as string;
+  // Hooks
+  const { t } = useTranslation('transfer-zig');
+  const { account, activateBrowserWallet } = useEthers();
+  const balance = useTokenBalance(token, account);
+  const { isLoading, isError, transfer, isSuccess } = useContract({
+    address: address,
+    transferAmount: transferAmount,
+  });
+
   useEffect(() => {
     !account && activateBrowserWallet();
   }, [account]);
   if (!address) {
     throw new Error('Receiving address not defined');
   }
+
   return (
     <DialogContainer
       fullWidth={true}
@@ -46,29 +55,40 @@ const TransferZigModal = ({
               label={''}
               value={''}
               showMaxButton={true}
-              onChange={(e: any, value: BigNumberish) => {
-                setTransferAmount(value.toString());
+              onChange={(e: any) => {
+                setTransferAmount(e.target.value);
               }}
               tokens={[
                 {
                   id: 'Zig',
-                  balance: balance?.toString() ?? '',
+                  balance: balance?.toString(),
                 },
               ]}
             />
           </InputContainer>
-          <Gap gap={24} />
+          <Gap gap={22} />
           <Button
             size='xlarge'
             caption={t('button')}
             minWidth={350}
-            onClick={() =>
-              ['Success'].includes(state?.status)
-                ? () => {}
-                : send(address, parseEther(transferAmount))
-            }
-            loading={['PendingSignature', 'Mining'].includes(state?.status)}
+            onClick={() => transfer()}
+            loading={isLoading}
           />
+          <Gap gap={6} />
+          {isError && (
+            <Typography
+              variant='body1'
+              weight='regular'
+              color='redGraphOrError'
+            >
+              ERROR: Please try again
+            </Typography>
+          )}
+          {isSuccess && (
+            <Typography variant='body1' weight='regular' color='links'>
+              SUCCESS: You Deposit {transferAmount} ZIG
+            </Typography>
+          )}
         </Container>
       ) : (
         <Box display='flex' alignItems={'center'} justifyContent='center'>
