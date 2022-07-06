@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
 import {
-  BrowserRouter,
   Routes as RouterRoutes,
   Route,
   Navigate,
@@ -31,7 +30,7 @@ const AuthenticatedRoute = ({
 
 function Routes() {
   return (
-    <BrowserRouter>
+    <>
       <Header />
       <RouterRoutes>
         <Route path='/'>
@@ -56,7 +55,7 @@ function Routes() {
         </Route>
       </RouterRoutes>
       <Footer />
-    </BrowserRouter>
+    </>
   );
 }
 
