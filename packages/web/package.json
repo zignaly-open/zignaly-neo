@@ -9,6 +9,7 @@
     "@mui/icons-material": "^5.8.2",
     "@mui/lab": "^5.0.0-alpha.84",
     "@mui/material": "^5.8.2",
+    "@mui/system": "^5.8.7",
     "@storybook/react": "^6.5.6",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
@@ -52,7 +53,7 @@
     "typescript": "4.7.4",
     "url": "^0.11.0",
     "web-vitals": "2.1.4",
-    "zignaly-ui": "^0.3.3"
+    "zignaly-ui": "^0.3.8"
   },
   "scripts": {
     "start": "react-app-rewired start",
@@ -108,7 +109,6 @@
     "npm-run-all": "^4.1.5",
     "prop-types": "^15.8.1",
     "storybook-react-i18next": "^1.0.20",
-    "webpack": "^5.73.0",
-    "zignaly-ui": "^0.3.5"
+    "webpack": "^5.73.0"
   }
 }
