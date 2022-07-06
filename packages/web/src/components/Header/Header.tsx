@@ -22,7 +22,6 @@ import { styled } from '@mui/material/styles';
 import ConnectWalletModal from '../Modals/ConnectWallet';
 import { useModal } from 'mui-modal-provider';
 
-
 const DepositSelect = styled(Select)`
   width: auto;
 
@@ -99,11 +98,9 @@ const Header: React.FC = () => {
                   }
                   options={[
                     {
-                      index: 0,
                       caption: t('deposit'),
                     },
                     {
-                      index: 1,
                       caption: t('disconnect'),
                     },
                   ]}

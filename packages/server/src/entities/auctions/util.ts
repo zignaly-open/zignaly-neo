@@ -21,11 +21,10 @@ export function isBidSufficientForAuction(
 }
 
 export function isBalanceSufficientForBid(
-  bid: string,
   fee: string,
   balance: string,
 ): boolean {
-  return new BN(bid).add(new BN(fee)).lte(new BN(balance));
+  return new BN(fee).lte(new BN(balance));
 }
 
 export async function unfreezeLoserFunds() {

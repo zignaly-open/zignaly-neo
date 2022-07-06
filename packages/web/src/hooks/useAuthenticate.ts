@@ -91,7 +91,6 @@ export default function useAuthenticate(): () => Promise<void> {
     });
 
     const signature = await library.getSigner().signMessage(messageToSign);
-
     const {
       data: {
         authenticate: { accessToken },
