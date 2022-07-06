@@ -116,7 +116,7 @@ function Select({
           </Item>
         ) : (
           options.map((option: OptionItem, index: number) => {
-            const isSelectedOption = !!(value && value.index === index);
+            const isSelectedOption = !!(value === option);
 
             if (isSelectedOption) return null;
 

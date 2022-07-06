@@ -12,17 +12,14 @@ import DogecoinIcon from "assets/icons/coins/doge.svg?url";
 
 const options = [
   {
-    index: 0,
     caption: "Ethereum",
     leftElement: EthereumIcon,
   },
   {
-    index: 1,
     caption: "Bitcoin",
     leftElement: BitcoinIcon,
   },
   {
-    index: 2,
     caption: "Dogecoin",
     leftElement: DogecoinIcon,
   },

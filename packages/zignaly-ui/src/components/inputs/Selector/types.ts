@@ -5,7 +5,6 @@ export enum SelectSizes {
 }
 
 export type OptionItem = {
-  index: number;
   leftElement?: any;
   caption: string;
 };
@@ -16,8 +15,8 @@ export type SelectProps = {
   size?: SelectSizes;
   disabled?: boolean;
   className?: string;
-  placeholder: string | React.ReactElement;
-  onChange: any;
+  placeholder?: string | React.ReactElement;
+  onChange: (item: any) => void;
   options?: OptionItem[];
   value?: OptionItem | null;
   mode?: "default" | "collapsed";

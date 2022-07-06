@@ -156,7 +156,6 @@ export const Layout = styled.div<LayoutProps>`
   display: inline-flex;
   flex-direction: column;
   position: relative;
-  width: 100%;
 
   &[disabled] {
     ${Container} {
