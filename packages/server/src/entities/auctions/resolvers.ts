@@ -16,7 +16,6 @@ import {
 import {
   getMinRequiredBidForAuction,
   isBalanceSufficientForBid,
-  isBidSufficientForAuction,
   unfreezeLoserFunds,
 } from './util';
 
@@ -78,14 +77,9 @@ export const resolvers = {
 
       const auction = await Auction.findByPk(id, {
         include: lastBidPopulation,
-      });
-
-      const lastBid = auction.bids[0];
-      if (!isBidSufficientForAuction(bid, auction, lastBid))
-        throw new Error('Bid insufficient');
+      });      
       if (
         !isBalanceSufficientForBid(
-          bid,
           auction.bidFee,
           await getUserBalance(user.id),
         )
@@ -105,16 +99,6 @@ export const resolvers = {
             auctionId: auction.id,
             value: negative(auction.bidFee),
             type: TransactionType.Fee,
-          },
-          { transaction },
-        );
-
-        await Transaction.create(
-          {
-            userId: user.id,
-            auctionId: auction.id,
-            value: negative(bid),
-            type: TransactionType.Bid,
           },
           { transaction },
         );
