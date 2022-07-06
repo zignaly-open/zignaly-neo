@@ -16,7 +16,6 @@ import {
 import {
   getMinRequiredBidForAuction,
   isBalanceSufficientForBid,
-  unfreezeLoserFunds,
 } from './util';
 
 const lastBidPopulation = {
@@ -63,7 +62,7 @@ export const resolvers = {
   Mutation: {
     bid: async (
       _: any,
-      { id, bid }: { id: number; bid: string },
+      { id }: { id: number; },
       { user }: ApolloContext,
     ) => {
       if (!user) {
@@ -103,11 +102,18 @@ export const resolvers = {
           { transaction },
         );
 
-        // first transaction, then the bid, but ultimately all inside a pg transaction
+        // better re-load from inside the transaction
+        const lastAuctionBid = await AuctionBid.findOne({
+          where: {
+            auctionId: id
+          },
+          order: [['id', 'DESC']]
+        });
+
         await AuctionBid.create(
           {
             auctionId: id,
-            value: bid,
+            value: getMinRequiredBidForAuction(auction, lastAuctionBid),
             userId: user.id,
           },
           { transaction },
@@ -135,7 +141,6 @@ export const resolvers = {
       const [updatedAuction] = await getAuctions(auction.id, user);
       pubsub.publish(AUCTION_BID_ADDED, { bidAdded: updatedAuction });
       await emitBalanceChanged(user.id);
-      await unfreezeLoserFunds();
       return updatedAuction;
     },
   },

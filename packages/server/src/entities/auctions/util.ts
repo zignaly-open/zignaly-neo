@@ -12,22 +12,9 @@ export function getMinRequiredBidForAuction(
   }
 }
 
-export function isBidSufficientForAuction(
-  bid: string,
-  auction: Auction,
-  lastBid: AuctionBid,
-): boolean {
-  return new BN(bid).gte(new BN(getMinRequiredBidForAuction(auction, lastBid)));
-}
-
 export function isBalanceSufficientForBid(
   fee: string,
   balance: string,
 ): boolean {
   return new BN(fee).lte(new BN(balance));
-}
-
-export async function unfreezeLoserFunds() {
-  // once the bid is updated, we need to unfreeze funds of people who were outbid
-  // TODO unfreeze not frozen
 }

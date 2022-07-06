@@ -45,6 +45,6 @@ export const typeDef = gql`
   }
 
   extend type Mutation {
-    bid(id: ID!, bid: String!): Auction
+    bid(id: ID!): Auction
   }
 `;
