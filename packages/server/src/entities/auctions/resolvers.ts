@@ -1,8 +1,12 @@
-import { AuctionStatus } from '@zigraffle/shared/types';
+import {
+  AuctionStatus,
+  AuctionType,
+  AuctionBidType,
+} from '@zigraffle/shared/types';
 import pubsub from '../../pubsub';
 import { AUCTION_BID_ADDED } from './constants';
 import { Auction, AuctionBasketItem, AuctionBid } from './model';
-import { Includeable } from 'sequelize';
+import { Includeable, QueryTypes } from 'sequelize';
 import { ApolloContext, ContextUser } from '../../types';
 import { auctionTtlPerBid } from '../../../config';
 import { User } from '../users/model';
@@ -13,11 +17,7 @@ import {
   getUserBalance,
   negative,
 } from '../transactions/util';
-import {
-  getMinRequiredBidForAuction,
-  isBalanceSufficientForBid,
-  unfreezeLoserFunds,
-} from './util';
+import { getMinRequiredBidForAuction, isBalanceSufficientForBid } from './util';
 
 const lastBidPopulation = {
   model: AuctionBid,
@@ -27,26 +27,75 @@ const lastBidPopulation = {
   include: [User],
 } as Includeable;
 
-async function getAuctions(id: number, user: ContextUser) {
-  const lastUsersBidPopulation = {
-    model: AuctionBid,
-    order: [['id', 'DESC']],
-    limit: 1,
-    as: 'userBid',
-    where: { userId: user?.id },
-  } as Includeable;
-
-  const auctions = (
-    await Auction.findAll({
-      where: { ...(id ? { id } : {}) },
-      include: [AuctionBasketItem, lastBidPopulation].concat(
-        user ? lastUsersBidPopulation : [],
-      ),
-    })
-  ).map((x) => x.toJSON());
-  auctions.forEach(
-    (x) => (x.minimalBid = getMinRequiredBidForAuction(x, x.bids[0])),
+async function getSortedAuctionBids(
+  id: number,
+  showAllBids: boolean,
+  user: ContextUser,
+) {
+  return (
+    await sequelize.query(
+      `
+        SELECT filtered.* FROM (
+            SELECT *, ROW_NUMBER () OVER (PARTITION BY t."auctionId" ORDER BY T."value" DESC) as "position" FROM ( 
+              SELECT MAX(b.value) as value, MAX(b.id) as id, b."auctionId", b."userId", u."username" as "username"
+              FROM "${AuctionBid.tableName}" b
+              INNER JOIN "${User.tableName}" u ON b."userId" = u."id"
+              WHERE "auctionId" ${id ? '=' : '>'} $auctionId
+              GROUP BY "auctionId", "userId", "username"
+           ) t
+        ) filtered
+        INNER JOIN "${Auction.tableName}" a ON a."id" = filtered."auctionId"
+        WHERE 
+            "position" <= a."numberOfWinners" 
+            OR "userId" = $currentUserId 
+            ${showAllBids ? 'OR 1' : ''}
+  `,
+      {
+        type: QueryTypes.SELECT,
+        bind: { auctionId: id || 0, currentUserId: user?.id || 0 },
+      },
+    )
+  ).map(
+    (b: {
+      id: number;
+      position: number;
+      username: string;
+      userId: number;
+      value: string;
+      auctionId: number;
+    }) =>
+      ({
+        position: b.position,
+        id: b.id,
+        auctionId: b.auctionId,
+        value: b.value,
+        user: {
+          id: b.userId,
+          username: b.username,
+        },
+      } as AuctionBidType),
   );
+}
+
+async function getAuctions(
+  id: number,
+  user: ContextUser,
+  showAllBids?: boolean,
+) {
+  const bids = await getSortedAuctionBids(id, showAllBids, user);
+  const auctions = (await Auction.findAll({
+    where: { ...(id ? { id } : {}) },
+    include: [AuctionBasketItem],
+    raw: true,
+  })) as unknown as AuctionType[];
+
+  auctions.forEach((x) => {
+    // here we will match auctions and bids
+    x.bids = bids.filter((b) => x.id === b.auctionId);
+    x.userBid = x.bids.find((b) => b.user.id === user.id);
+    x.minimalBid = getMinRequiredBidForAuction(x, x.bids[0]);
+  });
+
   return auctions;
 }
 
@@ -61,11 +110,7 @@ export const resolvers = {
     },
   },
   Mutation: {
-    bid: async (
-      _: any,
-      { id, bid }: { id: number; bid: string },
-      { user }: ApolloContext,
-    ) => {
+    bid: async (_: any, { id }: { id: number }, { user }: ApolloContext) => {
       if (!user) {
         throw new Error('User not found');
       }
@@ -77,7 +122,7 @@ export const resolvers = {
 
       const auction = await Auction.findByPk(id, {
         include: lastBidPopulation,
-      });      
+      });
       if (
         !isBalanceSufficientForBid(
           auction.bidFee,
@@ -103,11 +148,18 @@ export const resolvers = {
           { transaction },
         );
 
-        // first transaction, then the bid, but ultimately all inside a pg transaction
+        // better re-load from inside the transaction
+        const lastAuctionBid = await AuctionBid.findOne({
+          where: {
+            auctionId: id,
+          },
+          order: [['id', 'DESC']],
+        });
+
         await AuctionBid.create(
           {
             auctionId: id,
-            value: bid,
+            value: getMinRequiredBidForAuction(auction, lastAuctionBid),
             userId: user.id,
           },
           { transaction },
@@ -135,7 +187,6 @@ export const resolvers = {
       const [updatedAuction] = await getAuctions(auction.id, user);
       pubsub.publish(AUCTION_BID_ADDED, { bidAdded: updatedAuction });
       await emitBalanceChanged(user.id);
-      await unfreezeLoserFunds();
       return updatedAuction;
     },
   },

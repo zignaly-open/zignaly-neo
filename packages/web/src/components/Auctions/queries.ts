@@ -36,8 +36,8 @@ export const GET_AUCTIONS = gql`
 `;
 
 export const BID_AUCTION = gql`
-  mutation createBid($id: ID!, $value: String!) {
-    bid(id: $id, bid: $value) {
+  mutation createBid($id: ID!) {
+    bid(id: $id) {
       id
       title
       createdAt

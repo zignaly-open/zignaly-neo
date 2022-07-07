@@ -11,15 +11,18 @@
   "last-bid": "Last bid <0>{{bid}}</0> from <1>{{name}}</1>",
   "starting-bid": "Starting bid: <0>{{bid}}</0>",
   "for-a-total-value-of": "For a total value of",
-  "sort-by-expiry": "Sort by expiry",
-  "sort-by-value": "Value",
+  "sort": "Sort",
+  "sort-by-expiry": "Expiry",
+  "sort-by-bid": "Highest bid",
   "sort-by-last-bid": "Last bid",
-  "sort-by-yours": "Yours",
+  "show": "Show",
   "show-all": "Show all",
   "show-active": "Active",
   "show-yours": "Yours",
   "no-bids-yet": "No bids yet",
   "no-bids": "No bids",
   "ranking": "Ranking",
-  "project-desc": "Project Description"
+  "project-desc": "Project Description",
+  "how-it-works": "How it works",
+  "zig-raffle": "ZigRaffle"
 }

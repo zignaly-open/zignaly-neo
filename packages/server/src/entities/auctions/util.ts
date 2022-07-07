@@ -1,9 +1,10 @@
 import { Auction, AuctionBid } from './model';
 import { BN } from 'ethereumjs-util';
+import { AuctionBidType, AuctionType } from '@zigraffle/shared/types';
 
 export function getMinRequiredBidForAuction(
-  auction: Auction,
-  lastBid: AuctionBid,
+  auction: Auction | AuctionType,
+  lastBid: AuctionBid | AuctionBidType,
 ): string {
   if (lastBid) {
     return new BN(lastBid.value).add(new BN(auction.bidStep)).toString();
@@ -12,22 +13,9 @@ export function getMinRequiredBidForAuction(
   }
 }
 
-export function isBidSufficientForAuction(
-  bid: string,
-  auction: Auction,
-  lastBid: AuctionBid,
-): boolean {
-  return new BN(bid).gte(new BN(getMinRequiredBidForAuction(auction, lastBid)));
-}
-
 export function isBalanceSufficientForBid(
   fee: string,
   balance: string,
 ): boolean {
   return new BN(fee).lte(new BN(balance));
-}
-
-export async function unfreezeLoserFunds() {
-  // once the bid is updated, we need to unfreeze funds of people who were outbid
-  // TODO unfreeze not frozen
 }

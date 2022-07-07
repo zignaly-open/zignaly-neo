@@ -33,7 +33,7 @@ export const typeDef = gql`
     description: String
     basketItems: [BasketItem]
     bids: [Bid]
-    userBid: [Bid]
+    userBid: Bid
   }
 
   extend type Query {
@@ -45,6 +45,6 @@ export const typeDef = gql`
   }
 
   extend type Mutation {
-    bid(id: ID!, bid: String!): Auction
+    bid(id: ID!): Auction
   }
 `;
