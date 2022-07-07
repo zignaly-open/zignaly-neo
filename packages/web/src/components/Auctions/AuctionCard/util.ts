@@ -6,12 +6,8 @@ export function getWinningLosingStatus(auction: AuctionType): {
   isUserActive: boolean;
   isLosing: boolean;
 } {
-  const [lastBidId, yourLastBidId] = [
-    auction.bids?.[0]?.id,
-    auction.userBid?.[0]?.id,
-  ];
   const isActive = +new Date(auction.expiresAt) > Date.now();
-  const isWinning = yourLastBidId && yourLastBidId === lastBidId;
-  const isLosing = yourLastBidId && yourLastBidId !== lastBidId;
+  const isWinning = auction.userBid?.position <= auction.numberOfWinners;
+  const isLosing = auction.userBid?.position > auction.numberOfWinners;
   return { isLosing, isWinning, isActive, isUserActive: isLosing || isWinning };
 }

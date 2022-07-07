@@ -54,21 +54,15 @@ export class Auction extends Model {
   @Column(DataType.DECIMAL)
   public bidStep: string;
 
+  @Default(10)
+  @Column(DataType.INTEGER)
+  public numberOfWinners: string;
+
   @HasMany(() => AuctionBid)
   public bids: AuctionBid[];
 
   @Column
   public imageUrl: string;
-
-  // OK so this is a crutch
-  // Double crutch!
-  // first of all, ReturnType<() => AuctionBid> ???
-  // https://github.com/RobinBuschmann/sequelize-typescript/issues/825#issuecomment-1147027162
-  // actually nevermind, Only HasMany associations support include.separate, so @HasMany it be
-  // second, what the hell is userBid when there's no column?
-  // that's another workaround! https://github.com/RobinBuschmann/sequelize-typescript/issues/825#issuecomment-1147027162
-  @HasMany(() => AuctionBid)
-  public userBid: [AuctionBid];
 }
 
 @Table

@@ -9,10 +9,11 @@ export type BasketItem = {
   amount: string;
 };
 
-export type AuctionBid = {
+export type AuctionBidType = {
   id: number;
-  value: string; // TODO: BigInt?
-  date: Date;
+  auctionId: number;
+  value: string;
+  position: number;
   user: {
     id: number;
     username: string;
@@ -25,13 +26,17 @@ export type AuctionType = {
   description: string;
   basketItems: BasketItem[];
   monetaryValue?: string;
-  minimalBid?: string;
+  numberOfWinners?: number;
+  bidStep?: string;
   bidFee?: string;
   imageUrl?: string;
   createdAt?: Date;
   expiresAt?: Date;
   startingBid: string;
   status: AuctionStatus;
-  userBid: AuctionBid[]; // we'll be receiving only the last bid
-  bids: AuctionBid[]; // we'll be receiving only the last bid
+
+  // new fields we add on the backend
+  minimalBid?: string;
+  userBid?: AuctionBidType;
+  bids: AuctionBidType[];
 };

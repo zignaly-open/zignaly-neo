@@ -34,11 +34,7 @@ const BidButton: React.FC<{ auction: AuctionType; isActive: boolean }> = ({
 
   const state = useMemo(() => {
     if (!user) return BidButtonState.NotLoggedIn;
-    if (
-      BigNumber.from(balance).lt(
-        BigNumber.from(auction.bidFee),
-      )
-    )
+    if (BigNumber.from(balance).lt(BigNumber.from(auction.bidFee)))
       return BidButtonState.NotEnoughFunds;
     const winState = getWinningLosingStatus(auction);
     if (winState.isWinning) return BidButtonState.Winning;
@@ -66,7 +62,6 @@ const BidButton: React.FC<{ auction: AuctionType; isActive: boolean }> = ({
       bid({
         variables: {
           id: auction.id,
-          value: auction.minimalBid,
         },
       }).catch((e) => {
         // TODO: better alerts
