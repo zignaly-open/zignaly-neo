@@ -1,9 +1,5 @@
 import React, { ReactElement } from 'react';
-import {
-  Routes as RouterRoutes,
-  Route,
-  Navigate,
-} from 'react-router-dom';
+import { Routes as RouterRoutes, Route, Navigate } from 'react-router-dom';
 import Auctions from './components/Auctions/Auctions';
 import DepositPage from './pages/DepositPage';
 import Footer from './components/Footer/Footer';
