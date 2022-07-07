@@ -9,3 +9,8 @@ export const Container = styled.div`
 export const InputContainer = styled.div`
   width: 350px;
 `;
+
+export const TextContainer = styled.div`
+  text-align: center;
+  margin-left: 5px;
+`;

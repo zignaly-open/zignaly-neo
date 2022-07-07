@@ -1,3 +1,4 @@
+import { ErrorOutline } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import { useEthers, useTokenBalance } from '@usedapp/core';
 import useContract from 'hooks/useContract';
@@ -15,9 +16,7 @@ const TransferZigModal = ({
 }: TransferZigModalProps) => {
   // TODO: Optimize performance by extracting methods
   // State
-  const [transferAmount, setTransferAmount] = useState(
-    '100000000000000000000000000',
-  );
+  const [transferAmount, setTransferAmount] = useState<string>('');
   // Variables
   const address: string = process.env.REACT_APP_RECEIVING_ADDRESS as string;
   const token = process.env.REACT_APP_CONTRACT_ADDRESS as string;
@@ -66,15 +65,18 @@ const TransferZigModal = ({
               ]}
             />
           </InputContainer>
-          <Gap gap={22} />
+          <Gap gap={8} />
           <Button
             size='xlarge'
             caption={t('button')}
             minWidth={350}
-            onClick={() => transfer()}
+            disabled={transferAmount === '' ? true : false}
+            onClick={() => {
+              transfer();
+            }}
             loading={isLoading}
           />
-          <Gap gap={6} />
+          <Gap gap={8} />
           {isError && (
             <Typography
               variant='body1'
@@ -86,7 +88,7 @@ const TransferZigModal = ({
           )}
           {isSuccess && (
             <Typography variant='body1' weight='regular' color='links'>
-              SUCCESS: You Deposit {transferAmount} ZIG
+              SUCCESS: Your deposit was successful
             </Typography>
           )}
         </Container>
@@ -95,6 +97,16 @@ const TransferZigModal = ({
           <Loader color={'#fff'} ariaLabel={''} />
         </Box>
       )}
+      <Gap gap={isError ? 8 : 16} />
+      <Box display='flex' justifyContent='center' flexDirection='row'>
+        <ErrorOutline color='secondary' />
+        <Box display='flex' flexDirection='row' marginLeft={'5px'} width={350}>
+          <Typography variant='h4' weight='regular' color='neutral300'>
+            Transfers you make in ZIG cannot be withdrawn, they will only be
+            converted into prizes.
+          </Typography>
+        </Box>
+      </Box>
     </DialogContainer>
   );
 };

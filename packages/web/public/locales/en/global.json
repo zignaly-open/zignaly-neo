@@ -13,5 +13,6 @@
   "settings": "Settings",
   "deposit": "Deposit",
   "insert-code": "Insert Code",
-  "disconnect": "Disconnect"
+  "disconnect": "Disconnect",
+  "auction": "ZIGRaffle"
 }
