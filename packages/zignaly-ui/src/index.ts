@@ -67,6 +67,7 @@ import OptionHorizontalDotsIcon from "./assets/icons/horizontal-three-dots-icon.
 import EditPenIcon from "./assets/icons/edit-pen-icon.svg";
 import SwapIcon from "./assets/icons/swap-icon.svg";
 import SwapVertIcon from "./assets/icons/swap-vert-icon.svg";
+import ErrorAlertIcon from "assets/icons/error-alert-icon.svg";
 
 // Navigation
 import Header from "./components/navigation/Header";
@@ -168,6 +169,7 @@ export {
   EditPenIcon,
   SwapIcon,
   SwapVertIcon,
+  ErrorAlertIcon,
   /**
    * =-=-=-=-=-=-=-=
    *     Utils
