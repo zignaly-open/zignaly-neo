@@ -1,4 +1,4 @@
-import { Alert, Button, ButtonGroup, Grid } from '@mui/material';
+import { Alert, Grid } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import React, { useMemo, useState } from 'react';
 import { useQuery, useSubscription } from '@apollo/client';
@@ -10,20 +10,29 @@ import AuctionCard from '../AuctionCard';
 import { BIDS_SUBSCRIPTION, GET_AUCTIONS } from '../queries';
 import Loader from '../../common/Loader';
 import { getWinningLosingStatus } from '../AuctionCard/util';
+import { Select } from 'zignaly-ui';
 
 const MasonryWrapper = styled(Box)`
   max-width: 1280px;
   margin: 30px auto;
 `;
+
 const StyledMasonry = styled(Masonry)`
   margin: 0;
 `;
 
+const StyledSelect = styled(Select)`
+  min-width: 150px;
+
+  > div {
+    text-align: left;
+  }
+`;
+
 enum SortDirection {
   Expiry = 'expiry',
-  Value = 'value',
+  Bid = 'bid',
   LastBid = 'last-bid',
-  Yours = 'yours',
 }
 
 enum ShowOptions {
@@ -40,19 +49,21 @@ const AuctionGrid: React.FC = () => {
   useSubscription(BIDS_SUBSCRIPTION);
   const sortOptions = useMemo(
     () => [
-      { label: t('sort-by-expiry'), value: SortDirection.Expiry },
-      // { label: t('sort-by-value'), value: SortDirection.Value },
-      { label: t('sort-by-last-bid'), value: SortDirection.LastBid },
-      { label: t('sort-by-yours'), value: SortDirection.Yours },
+      { caption: t('sort-by-expiry'), value: SortDirection.Expiry },
+      {
+        caption: t('sort-by-last-bid'),
+        value: SortDirection.LastBid,
+      },
+      { caption: t('sort-by-bid'), value: SortDirection.Bid },
     ],
     [],
   );
 
   const showOptions = useMemo(
     () => [
-      { label: t('show-all'), value: ShowOptions.All },
-      { label: t('show-active'), value: ShowOptions.Active },
-      { label: t('show-yours'), value: ShowOptions.Yours },
+      { caption: t('show-all'), value: ShowOptions.All },
+      { caption: t('show-active'), value: ShowOptions.Active },
+      { caption: t('show-yours'), value: ShowOptions.Yours },
     ],
     [],
   );
@@ -72,12 +83,10 @@ const AuctionGrid: React.FC = () => {
       })
       .sort((a: AuctionType, b: AuctionType) => {
         switch (selectedSort) {
-          case SortDirection.Yours:
-            return (+b.userBid?.value || 0) - (+a.userBid?.value || 0);
           case SortDirection.LastBid:
             return -(+a.bids[0]?.id || 0) + (+b.bids[0]?.id || 0);
-          case SortDirection.Value:
-            return 0;
+          case SortDirection.Bid:
+            return -(+a.bids[0]?.value || 0) + (+b.bids[0]?.value || 0);
           case SortDirection.Expiry:
             return +new Date(a.expiresAt) - +new Date(b.expiresAt);
         }
@@ -98,36 +107,26 @@ const AuctionGrid: React.FC = () => {
 
   return (
     <MasonryWrapper>
-      <Box padding={2}>
-        <Grid container spacing={2}>
-          <Grid item textAlign='left' sm={12} md={6}>
-            <ButtonGroup variant='contained'>
-              {showOptions.map(({ label, value }) => (
-                <Button
-                  key={value}
-                  variant={value !== selectedShowMode ? 'outlined' : undefined}
-                  onClick={() => setSelectedShowMode(value)}
-                >
-                  {label}
-                </Button>
-              ))}
-            </ButtonGroup>
-          </Grid>
-          <Grid item textAlign={{ sm: 'left', md: 'right' }} sm={12} md={6}>
-            <ButtonGroup variant='contained'>
-              {sortOptions.map(({ label, value }) => (
-                <Button
-                  key={value}
-                  variant={value !== selectedSort ? 'outlined' : undefined}
-                  onClick={() => setSelectedSort(value)}
-                >
-                  {label}
-                </Button>
-              ))}
-            </ButtonGroup>
-          </Grid>
+      <Grid container marginY={2} columnSpacing={4} justifyContent='center'>
+        <Grid item textAlign='right'>
+          <StyledSelect
+            options={showOptions}
+            value={showOptions.find((o) => o.value === selectedShowMode)}
+            onChange={(option) => setSelectedShowMode(option.value)}
+            fullWidth={false}
+            label={t('show')}
+          />
         </Grid>
-      </Box>
+        <Grid item>
+          <StyledSelect
+            options={sortOptions}
+            value={sortOptions.find((o) => o.value === selectedSort)}
+            onChange={(option) => setSelectedSort(option.value)}
+            fullWidth={false}
+            label={t('sort')}
+          />
+        </Grid>
+      </Grid>
       <StyledMasonry columns={{ xs: 1, sm: 1, md: 2 }} spacing={4}>
         {filtered.map((x: AuctionType) => (
           <AuctionCard key={x.id} auction={x} />

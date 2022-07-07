@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import { Typography } from 'zignaly-ui';
 import { styled } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
+import { AuctionContainer } from './styles';
+import HowItWorks from './HowItWorks';
 
 const HomeTitle = styled(Typography)`
   && {
@@ -18,14 +20,17 @@ function Auctions() {
 
   return (
     <>
-      <Box textAlign={'center'} marginTop='122px'>
-        <HomeTitle variant='h1' color='neutral000'>
-          ZIGRaffle
-        </HomeTitle>
-      </Box>
-      <Box textAlign={'center'} marginBottom='70px'>
-        <Typography color='neutral300'>{t('moto')}</Typography>
-      </Box>
+      <AuctionContainer>
+        <Box textAlign={'center'} marginTop='122px'>
+          <HomeTitle variant='h1' color='neutral000'>
+            {t('auction')}
+          </HomeTitle>
+        </Box>
+        <Box textAlign={'center'} marginBottom='23px'>
+          <Typography color='neutral300'>{t('moto')}</Typography>
+        </Box>
+        <HowItWorks />
+      </AuctionContainer>
       <AuctionGrid />
     </>
   );
