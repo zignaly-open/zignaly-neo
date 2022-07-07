@@ -33,6 +33,10 @@ const DepositSelect = styled(Select)`
   }
 `;
 
+const Balance = styled(ZigsBalance)`
+  height: 30px;
+`;
+
 const Header: React.FC = () => {
   const { t } = useTranslation('global');
   const authenticate = useAuthenticate();
@@ -83,9 +87,8 @@ const Header: React.FC = () => {
                   variant='secondary'
                   size='small'
                   caption={t('insert-code')}
-                  // color='highlighted'
                 />
-                <ZigsBalance
+                <Balance
                   balance={ethers.utils.parseEther(balance.toString())}
                 />
                 <UserBalanceListener />
