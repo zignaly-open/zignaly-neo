@@ -1,9 +1,9 @@
 import { Dialog, DialogContent, DialogTitle } from '@mui/material';
 import React from 'react';
 import { Typography } from 'zignaly-ui';
-import { ModalProps } from '../types';
+import { DialogContainerProps } from './types';
 
-function ModalContainer({ title, children, ...props }: ModalProps) {
+function DialogContainer({ title, children, ...props }: DialogContainerProps) {
   return (
     <Dialog
       {...props}
@@ -26,4 +26,4 @@ function ModalContainer({ title, children, ...props }: ModalProps) {
   );
 }
 
-export default ModalContainer;
+export default DialogContainer;

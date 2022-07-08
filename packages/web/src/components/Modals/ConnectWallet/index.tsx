@@ -1,7 +1,7 @@
 import React from 'react';
 import { ButtonContainer, Gap, Subtitle } from './styles';
 import { ConnectWalletModalProps } from './types';
-import ModalContainer from '../ModalContainer';
+import DialogContainer from '../DialogContainer';
 import { Button } from 'zignaly-ui';
 import { ReactComponent as MetaMaskLogo } from '../../../assets/icons/metamask-logo.svg';
 import { ReactComponent as WalletConnectLogo } from '../../../assets/icons/walletconnect-logo.svg';
@@ -14,7 +14,7 @@ const ConnectWalletModal = ({
 }: ConnectWalletModalProps) => {
   const { t } = useTranslation('connect-wallet');
   return (
-    <ModalContainer title={t('title')} {...props}>
+    <DialogContainer title={t('title')} {...props}>
       <Gap gap={8} />
       <Subtitle variant='body1' weight='regular' color='neutral200'>
         {t('subtitle')}
@@ -37,7 +37,7 @@ const ConnectWalletModal = ({
           leftElement={<WalletConnectLogo />}
         />
       </ButtonContainer>
-    </ModalContainer>
+    </DialogContainer>
   );
 };
 
