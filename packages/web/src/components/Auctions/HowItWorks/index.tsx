@@ -43,7 +43,7 @@ const HowItWorks = ({ onClickReadMore }: { onClickReadMore?: () => void }) => {
           </ButtonContainer>
           <ButtonContainer>
             <Button
-              caption='Read more'
+              caption={t('read-more')}
               size='small'
               onClick={() => onClickReadMore()}
             />
