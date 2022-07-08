@@ -1,5 +1,5 @@
 // TODO: store last processed block. Maybe not in the env, I do not quite like changing env
-let lastProcessedBlock = 10988242;
+let lastProcessedBlock = 10988384;
 
 export async function setLastProcessedBlock(
   blockNumber: number,
