@@ -1,5 +1,5 @@
 import { DialogProps } from '@mui/material';
 
-export type ModalProps = DialogProps & {
+export type DialogContainerProps = DialogProps & {
   title: string;
 };

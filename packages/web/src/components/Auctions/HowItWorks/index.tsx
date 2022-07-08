@@ -44,7 +44,8 @@ const HowItWorks = ({ onClickReadMore }: { onClickReadMore?: () => void }) => {
           <ButtonContainer>
             <Button
               caption='Read more'
-              size='small'
+              size='medium'
+              minWidth={113}
               onClick={() => onClickReadMore()}
             />
           </ButtonContainer>

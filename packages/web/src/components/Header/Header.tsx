@@ -21,6 +21,7 @@ import { Box } from '@mui/system';
 import { styled } from '@mui/material/styles';
 import ConnectWalletModal from '../Modals/ConnectWallet';
 import { useModal } from 'mui-modal-provider';
+import TransferZigModal from 'components/Modals/TransferZig';
 
 const DepositSelect = styled(Select)`
   width: auto;
@@ -83,6 +84,7 @@ const Header: React.FC = () => {
                   variant='secondary'
                   size='small'
                   caption={t('insert-code')}
+                  onClick={() => showModal(TransferZigModal)}
                 />
                 <Balance
                   balance={ethers.utils.parseEther(balance.toString())}

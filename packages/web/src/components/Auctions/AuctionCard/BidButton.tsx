@@ -72,7 +72,7 @@ const BidButton: React.FC<{ auction: AuctionType; isActive: boolean }> = ({
 
   return (
     <Button
-      size='small'
+      size='large'
       loading={isBidding}
       disabled={!isActive}
       // onMouseEnter={() => setShowTrueSelf(true)}
