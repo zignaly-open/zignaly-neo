@@ -102,7 +102,7 @@ const AuctionCard: React.FC<{
               <StyledPriceLabel
                 value={
                   auction.bids.length
-                    ? auction.bids[0].value
+                    ? auction.bids[auction.bids.length - 1].value
                     : auction.minimalBid
                 }
                 coin='ZIG'
