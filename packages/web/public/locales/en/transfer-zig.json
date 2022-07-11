@@ -1,6 +1,7 @@
 {
     "title": "Transfer ZIG",
     "subtitle": "To continue, you need to transfer ZIG",
-    "button": "Transfer now!"
-
+    "button": "Transfer now!",
+    "wrong-network": "Wrong Network",
+    "wrong-network-info": "The network you are trying to connect to is not available within our services. Please switch to Polygon to continue."
 }

@@ -68,7 +68,7 @@ const Header: React.FC = () => {
         rightElements={[
           !loading &&
             (currentUser?.id ? (
-              <>
+              <React.Fragment key='transfer'>
                 <Button
                   variant='secondary'
                   size='small'
@@ -77,7 +77,7 @@ const Header: React.FC = () => {
                   onClick={() => showModal(TransferZigModal)}
                 />
                 <UserBalance />
-              </>
+              </React.Fragment>
             ) : (
               <TextButton
                 onClick={() => {
@@ -87,6 +87,7 @@ const Header: React.FC = () => {
                   });
                 }}
                 caption={t('log-in')}
+                key='login'
               />
             )),
           <IconButton
