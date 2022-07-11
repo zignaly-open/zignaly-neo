@@ -28,3 +28,7 @@ body {
 svg {
   fill: currentcolor;
 }
+
+* {
+  box-sizing: border-box;
+}
