@@ -20,6 +20,7 @@ import { MenuList } from '@mui/material';
 import UserBalance from './UserBalance';
 import TransferZigModal from 'components/Modals/TransferZig';
 
+// @ts-ignore: fixme
 const StyledWalletIcon = styled(WalletIcon)`
   color: ${({ theme }) => theme.neutral300};
 `;
