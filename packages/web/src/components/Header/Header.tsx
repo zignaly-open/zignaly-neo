@@ -79,7 +79,9 @@ const Header: React.FC = () => {
                 <UserBalance />
               </React.Fragment>
             ) : (
-              <TextButton
+              <Button
+                variant='secondary'
+                size='small'
                 onClick={() => {
                   showModal(ConnectWalletModal, {
                     metaMaskOnClick: authenticate,
@@ -88,6 +90,7 @@ const Header: React.FC = () => {
                 }}
                 caption={t('log-in')}
                 key='login'
+                leftElement={<StyledWalletIcon />}
               />
             )),
           <IconButton
