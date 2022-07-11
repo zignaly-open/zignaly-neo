@@ -1,6 +1,6 @@
 import { Box, CardActions } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Typography, PriceLabel } from 'zignaly-ui';
+import { Typography, PriceLabel, TextButton } from 'zignaly-ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { AuctionType } from '@zigraffle/shared/types';
@@ -10,6 +10,8 @@ import { getWinningLosingStatus } from './util';
 import { AmountContainer } from '../../common/AmountContainer';
 import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
 import AuctionRanking from '../AuctionRanking/AuctionRanking';
+import { useModal } from 'mui-modal-provider';
+import ProjectDetailsModal from 'components/Modals/ProjectDetails';
 
 const Item = styled('div')(({ theme }) => ({
   background: theme.neutral750,
@@ -74,6 +76,7 @@ const AuctionCard: React.FC<{
   const { t } = useTranslation('auction');
   const { isActive /* isWinning, isLosing */ } =
     getWinningLosingStatus(auction);
+  const { showModal } = useModal();
   return (
     <Item>
       <AuctionHeader>
@@ -81,9 +84,19 @@ const AuctionCard: React.FC<{
           <Typography variant='h2' color='neutral100'>
             {auction.title}
           </Typography>
-          <Typography color='links' component='div'>
-            {t('project-desc')}
-          </Typography>
+          <TextButton
+            color='links'
+            caption={t('project-desc')}
+            onClick={() =>
+              showModal(ProjectDetailsModal, {
+                title: auction.title,
+                website: 'www.zignaly.com',
+                twitter: 'https://twitter.com/zignaly',
+                telegram: 'some telegram link',
+                discord: 'discord invite',
+              })
+            }
+          />
         </HeaderColumn>
         <HeaderColumn>
           <Typography variant='h2' color='neutral100'>
