@@ -18,6 +18,7 @@ import ConnectWalletModal from '../Modals/ConnectWallet';
 import { useModal } from 'mui-modal-provider';
 import { MenuList } from '@mui/material';
 import UserBalance from './UserBalance';
+import TransferZigModal from 'components/Modals/TransferZig';
 
 const StyledWalletIcon = styled(WalletIcon)`
   color: ${({ theme }) => theme.neutral300};
@@ -72,6 +73,7 @@ const Header: React.FC = () => {
                   size='small'
                   caption={t('transfer-coin', { coin: 'ZIG' })}
                   leftElement={<StyledWalletIcon />}
+                  onClick={() => showModal(TransferZigModal)}
                 />
                 <UserBalance />
               </>

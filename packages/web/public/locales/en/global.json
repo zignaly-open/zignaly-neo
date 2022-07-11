@@ -13,5 +13,6 @@
   "settings": "Settings",
   "deposit": "Deposit",
   "insert-code": "Insert Code",
-  "transfer-coin": "Transfer {{coin}}"
+  "transfer-coin": "Transfer {{coin}}",
+  "auction": "ZIGRaffle"
 }

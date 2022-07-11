@@ -108,7 +108,6 @@ const AuctionCard: React.FC<{
                 coin='ZIG'
               />
             </Box>
-            
             <FinalCountdown date={auction.expiresAt} started={true} />
           </StyledAmountContainer>
           <CardActions style={{ marginBottom: '30px' }}>
