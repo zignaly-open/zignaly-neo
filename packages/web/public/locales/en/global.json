@@ -6,13 +6,13 @@
   "edit profile": "Edit Profile",
   "buy-bids": "Buy bids",
   "view-history": "View History",
-  "log-out": "Disconnect",
+  "disconnect": "Disconnect",
   "log-in": "Connect Wallet",
   "moto": "Bid & Win thousands of $ worth of crypto for cents!",
   "loading": "Loading...",
   "settings": "Settings",
   "deposit": "Deposit",
   "insert-code": "Insert Code",
-  "disconnect": "Disconnect",
+  "transfer-coin": "Transfer {{coin}}",
   "auction": "ZIGRaffle"
 }

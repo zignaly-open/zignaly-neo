@@ -2,48 +2,55 @@ import {
   IconButton,
   BrandImage,
   UserIcon,
-  Select,
   WalletIcon,
   TextButton,
 } from 'zignaly-ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import useAuthenticate, {
-  useWalletConnect /*, { useLogout }*/,
+  useLogout,
+  useWalletConnect,
 } from '../../hooks/useAuthenticate';
 import useCurrentUser from '../../hooks/useCurrentUser';
-import UserBalanceListener from './UserBalanceListener';
-import { Header as ZIGHeader, ZigsBalance, Button } from 'zignaly-ui';
-import Navigation from './Navigation';
-import useBalance from '../../hooks/useBalance';
-import { ethers } from 'ethers';
-import { Box } from '@mui/system';
+import { Header as ZIGHeader, Button } from 'zignaly-ui';
 import { styled } from '@mui/material/styles';
 import ConnectWalletModal from '../Modals/ConnectWallet';
 import { useModal } from 'mui-modal-provider';
+import { MenuList } from '@mui/material';
+import UserBalance from './UserBalance';
 import TransferZigModal from 'components/Modals/TransferZig';
 
-const DepositSelect = styled(Select)`
-  width: auto;
+// @ts-ignore: fixme
+const StyledWalletIcon = styled(WalletIcon)`
+  color: ${({ theme }) => theme.neutral300};
+`;
 
-  > div {
-    > span {
-      color: ${({ theme }) => theme.highlighted};
-    }
-    padding: 0 !important;
+const MenuItem = styled(TextButton)`
+  padding: 2px 15px;
+  color: ${({ theme }) => theme.neutral200};
+  display: block;
+
+  span {
+    font-size: 15px !important;
   }
 `;
 
-const Balance = styled(ZigsBalance)`
-  height: 30px;
-`;
+const Menu = () => {
+  const { t } = useTranslation('global');
+  const logout = useLogout();
+
+  return (
+    <MenuList>
+      <MenuItem color='neutral200' caption={t('settings')} onClick={() => {}} />
+      <MenuItem color='neutral200' caption={t('disconnect')} onClick={logout} />
+    </MenuList>
+  );
+};
 
 const Header: React.FC = () => {
   const { t } = useTranslation('global');
   const authenticate = useAuthenticate();
-  // const logout = useLogout();
   const { user: currentUser, loading } = useCurrentUser();
-  const { balance } = useBalance();
   const walletConnect = useWalletConnect();
   const { showModal } = useModal();
 
@@ -57,57 +64,20 @@ const Header: React.FC = () => {
             width={'140px'}
             height={'68px'}
           />,
-          <Navigation
-            key={'navigation'}
-            routes={[
-              {
-                path: '/',
-                label: 'Home',
-                isActive: true,
-              },
-              ...(!loading && currentUser?.id
-                ? [
-                    {
-                      path: '/deposit',
-                      label: t('buy-bids'),
-                    },
-                  ]
-                : []),
-            ]}
-          />,
         ]}
         rightElements={[
           !loading &&
             (currentUser?.id ? (
-              <React.Fragment key={'balance'}>
+              <>
                 <Button
                   variant='secondary'
                   size='small'
-                  caption={t('insert-code')}
+                  caption={t('transfer-coin', { coin: 'ZIG' })}
+                  leftElement={<StyledWalletIcon />}
                   onClick={() => showModal(TransferZigModal)}
                 />
-                <Balance
-                  balance={ethers.utils.parseEther(balance.toString())}
-                />
-                <UserBalanceListener />
-                <DepositSelect
-                  placeholder={
-                    <Box display='flex' gap='8px' marginLeft='10px'>
-                      <WalletIcon />
-                      {t('deposit')}
-                    </Box>
-                  }
-                  options={[
-                    {
-                      caption: t('deposit'),
-                    },
-                    {
-                      caption: t('disconnect'),
-                    },
-                  ]}
-                  onChange={() => {}}
-                />
-              </React.Fragment>
+                <UserBalance />
+              </>
             ) : (
               <TextButton
                 onClick={() => {
@@ -124,7 +94,7 @@ const Header: React.FC = () => {
             variant={'flat'}
             // @ts-ignore
             icon={<UserIcon color='#65647E' />}
-            renderDropDown={<div>{t('settings')}</div>}
+            renderDropDown={<Menu />}
             dropDownOptions={{
               alignment: 'right',
               position: 'static',
