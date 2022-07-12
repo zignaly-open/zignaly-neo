@@ -2,6 +2,9 @@
     "title": "Transfer ZIG",
     "subtitle": "To continue, you need to transfer ZIG",
     "button": "Transfer now!",
+    "error": "ERROR: Please Try Again",
+    "success": "SUCCESS: Your deposit was successful",
+    "warning": "Transfers you make in ZIG cannot be withdrawn, they will only be converted into prizes.",
     "wrong-network": "Wrong Network",
     "wrong-network-info": "The network you are trying to connect to is not available within our services. Please switch to Polygon to continue."
 }
