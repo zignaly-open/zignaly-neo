@@ -19,7 +19,7 @@ const TransferZigModal = ({
   const address: string = process.env.REACT_APP_RECEIVING_ADDRESS as string;
   const token = process.env.REACT_APP_CONTRACT_ADDRESS as string;
   const { t } = useTranslation('transfer-zig');
-  const { account, activateBrowserWallet } = useEthers();
+  const { account, activateBrowserWallet, chainId } = useEthers();
   const balance = useTokenBalance(token, account);
   const { isLoading, isError, transfer, isSuccess } = useContract({
     address: address,
@@ -32,6 +32,21 @@ const TransferZigModal = ({
       throw new Error('Receiving address not defined');
     }
   }, [account, address]);
+
+  if (!chainId) {
+    return (
+      <DialogContainer
+        fullWidth={true}
+        maxWidth={'sm'}
+        title={t(chainId ? 'title' : 'wrong-network')}
+        {...props}
+      >
+        <Typography variant='body1' color='neutral200' weight='regular'>
+          {t('wrong-network-info')}
+        </Typography>
+      </DialogContainer>
+    );
+  }
 
   return (
     <DialogContainer

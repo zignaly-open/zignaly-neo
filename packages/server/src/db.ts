@@ -9,12 +9,13 @@ import {
   AuctionBasketItem,
 } from './entities/auctions/model';
 import { postgresUrl } from '../config';
+import { Setting } from './entities/setting/model';
 
 const sequelize = new Sequelize(postgresUrl, {
   dialect: 'postgres',
   storage: path.join(os.tmpdir(), 'db.sqlite'),
   logging: false,
-  models: [User, Transaction, Auction, AuctionBid, AuctionBasketItem],
+  models: [User, Transaction, Auction, AuctionBid, AuctionBasketItem, Setting],
 });
 
 // persist models to the database
