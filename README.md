@@ -51,6 +51,7 @@ In `packages/server` do `cp .env.sample .env`. We have 5 fields there:
 * `CONTRACT_ADDRESS` - same as `REACT_APP_CONTRACT_ADDRESS`. Those two should match.
 * `ALGORITHM` - algorithm for JWT, default `'HS256'`
 * `SECRET` - JWT secret
+* `DEV_ONLY_DISABLE_DEPOSIT_CHECKS` - stop checking chain to avoid unnecessary requests to  
 * `NUMBER_OF_CONFIRMATIONS_REQUIRED` - number of confirmations required to approve a transaction
 
 
