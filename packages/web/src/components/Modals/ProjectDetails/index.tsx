@@ -33,18 +33,16 @@ const ProjectDetailsModal = ({
           culpa qui officia deserunt mollit anim id est laborum.
         </Typography>
         <Gap gap={11} />
+        <Typography variant='h3' color='neutral000'>
+          {t('website')}
+        </Typography>
+        <Gap gap={5} />
         {website && (
-          <>
-            <Typography variant='h3' color='neutral000'>
-              {t('website')}
+          <a href={website} target='_blank' rel='noopener noreferrer'>
+            <Typography variant='h3' color='links' underline={true}>
+              {website}
             </Typography>
-            <Gap gap={5} />
-            <a href={website} target='_blank' rel='noopener noreferrer'>
-              <Typography variant='h3' color='links' underline={true}>
-                {website}
-              </Typography>
-            </a>
-          </>
+          </a>
         )}
         <Gap gap={5} />
         <Typography variant='h3' color='neutral000'>
@@ -52,17 +50,17 @@ const ProjectDetailsModal = ({
         </Typography>
         <Box gap={1.1} display={'flex'} flexDirection='row'>
           {twitter && (
-            <a href={twitter}>
+            <a href={twitter} target='_blank' rel='noopener noreferrer'>
               <Twitter />
             </a>
           )}
           {discord && (
-            <a href={discord}>
+            <a href={discord} target='_blank' rel='noopener noreferrer'>
               <Discord />
             </a>
           )}
           {telegram && (
-            <a href={telegram}>
+            <a href={telegram} target='_blank' rel='noopener noreferrer'>
               <Telegram />
             </a>
           )}
