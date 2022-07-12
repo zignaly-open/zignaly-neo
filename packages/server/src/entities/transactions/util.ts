@@ -1,5 +1,5 @@
 import { Transaction } from './model';
-import { BN } from 'ethereumjs-util';
+import BN from 'bignumber.js';
 import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from './constants';
 
@@ -24,7 +24,7 @@ export async function getUserBalance(id: number): Promise<string> {
 }
 
 export function negative(decimalNumber: string): string {
-  return new BN(decimalNumber).mul(new BN(-1)).toString();
+  return new BN(decimalNumber).times(-1).toString();
 }
 
 export async function emitBalanceChanged(userId: number) {
