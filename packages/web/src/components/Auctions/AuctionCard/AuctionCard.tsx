@@ -14,8 +14,8 @@ import { useModal } from 'mui-modal-provider';
 import ProjectDetailsModal from 'components/Modals/ProjectDetails';
 
 const Item = styled('div')(({ theme }) => ({
-  background: theme.neutral750,
-  border: '1px solid #35334A',
+  background: 'rgba(37, 35, 57, 0.4)',
+  border: '1px solid rgba(53, 51, 74, 0.4)',
   borderRadius: '16px',
   [theme.breakpoints.up('lg')]: {
     width: '640px',
@@ -26,6 +26,8 @@ const AuctionHeader = styled('div')`
   display: flex;
   height: 80px;
   margin-bottom: 20px;
+  background: ${({ theme }) => theme.neutral750};
+  border-radius: 16px;
 `;
 
 const AuctionImage = styled('img')`
