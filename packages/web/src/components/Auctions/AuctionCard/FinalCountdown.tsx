@@ -17,11 +17,13 @@ const FinalCountdown: React.FC<{ date: Date; started: boolean }> = ({
 }) => {
   const renderer = useCallback(
     ({
+      days,
       hours,
       minutes,
       seconds,
       completed,
     }: {
+      days: number;
       hours: number;
       minutes: number;
       seconds: number;
@@ -37,6 +39,7 @@ const FinalCountdown: React.FC<{ date: Date; started: boolean }> = ({
         <CountdownContainer color={color}>
           <TimeIcon style={{ marginTop: '-4px' }} />
           <Typography variant={'h1'}>
+            {Boolean(days) && `${days}:`}
             {hours.toString().padStart(2, '0')}:
             {minutes.toString().padStart(2, '0')}:
             {seconds.toString().padStart(2, '0')}
