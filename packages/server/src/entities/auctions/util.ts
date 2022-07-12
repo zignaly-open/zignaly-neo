@@ -1,5 +1,5 @@
 import { Auction, AuctionBid } from './model';
-import { BN } from 'ethereumjs-util';
+import BN from 'bignumber.js';
 import { AuctionBidType, AuctionType } from '@zigraffle/shared/types';
 
 export function getMinRequiredBidForAuction(
@@ -7,7 +7,7 @@ export function getMinRequiredBidForAuction(
   lastBid: AuctionBid | AuctionBidType,
 ): string {
   if (lastBid) {
-    return new BN(lastBid.value).add(new BN(auction.bidStep)).toString();
+    return new BN(lastBid.value).plus(new BN(auction.bidStep)).toString();
   } else {
     return auction.startingBid;
   }
