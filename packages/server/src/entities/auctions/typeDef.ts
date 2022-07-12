@@ -26,6 +26,10 @@ export const typeDef = gql`
     title: String!
     imageUrl: String
     status: String
+    website: String
+    discord: String
+    telegram: String
+    twitter: String
     monetaryValue: String
     bidFee: String
     startingBid: String

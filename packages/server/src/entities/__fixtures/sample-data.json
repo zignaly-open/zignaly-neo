@@ -8,7 +8,11 @@
       "description": "Bid now or die regretting",
       "monetaryValue": "100 BTC!!11",
       "status": "Active",
-      "startingBid": "1"
+      "startingBid": "1",
+      "website": "https://zignaly.com/",
+      "discord": "https://zignaly.com/",
+      "twitter": "https://zignaly.com/",
+      "telegram": "https://zignaly.com/"
     }
   },
   {
