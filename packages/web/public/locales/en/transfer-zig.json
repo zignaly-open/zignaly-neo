@@ -1,6 +1,8 @@
 {
     "title": "Transfer ZIG",
     "subtitle": "To continue, you need to transfer ZIG",
-    "button": "Transfer now!"
-
+    "button": "Transfer now!",
+    "error": "ERROR: Please Try Again",
+    "success": "SUCCESS: Your deposit was successful",
+    "warning": "Transfers you make in ZIG cannot be withdrawn, they will only be converted into prizes."
 }

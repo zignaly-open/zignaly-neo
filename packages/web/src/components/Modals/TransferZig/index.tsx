@@ -15,12 +15,9 @@ const TransferZigModal = ({
   ...props
 }: TransferZigModalProps) => {
   // TODO: Optimize performance by extracting methods
-  // State
-  const [transferAmount, setTransferAmount] = useState<string>('');
-  // Variables
+  const [transferAmount, setTransferAmount] = useState<string>('1000000');
   const address: string = process.env.REACT_APP_RECEIVING_ADDRESS as string;
   const token = process.env.REACT_APP_CONTRACT_ADDRESS as string;
-  // Hooks
   const { t } = useTranslation('transfer-zig');
   const { account, activateBrowserWallet } = useEthers();
   const balance = useTokenBalance(token, account);
@@ -31,10 +28,10 @@ const TransferZigModal = ({
 
   useEffect(() => {
     !account && activateBrowserWallet();
-  }, [account]);
-  if (!address) {
-    throw new Error('Receiving address not defined');
-  }
+    if (!address) {
+      throw new Error('Receiving address not defined');
+    }
+  }, [account, address]);
 
   return (
     <DialogContainer
@@ -70,7 +67,7 @@ const TransferZigModal = ({
             size='xlarge'
             caption={t('button')}
             minWidth={350}
-            disabled={transferAmount === '' ? true : false}
+            disabled={!transferAmount}
             onClick={() => {
               transfer();
             }}
@@ -83,12 +80,12 @@ const TransferZigModal = ({
               weight='regular'
               color='redGraphOrError'
             >
-              ERROR: Please try again
+              {t('error')}
             </Typography>
           )}
           {isSuccess && (
             <Typography variant='body1' weight='regular' color='links'>
-              SUCCESS: Your deposit was successful
+              {t('success')}
             </Typography>
           )}
         </Container>
@@ -102,8 +99,7 @@ const TransferZigModal = ({
         <ErrorOutline color='secondary' />
         <Box display='flex' flexDirection='row' marginLeft={'5px'} width={350}>
           <Typography variant='h4' weight='regular' color='neutral300'>
-            Transfers you make in ZIG cannot be withdrawn, they will only be
-            converted into prizes.
+            {t('warning')}
           </Typography>
         </Box>
       </Box>
