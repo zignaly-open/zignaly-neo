@@ -65,7 +65,7 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
   // const { loading, error, data } = useQuery(GET_AUCTIONS);
   return (
     <Box width='100%'>
-      {auction.bids === [] ? (
+      {auction.bids !== [] ? (
         auction.bids.map((bid: AuctionBidType) => (
           <RankingRow
             rank={bid.position}

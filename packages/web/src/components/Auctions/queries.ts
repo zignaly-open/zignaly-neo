@@ -20,6 +20,7 @@ export const GET_AUCTIONS = gql`
       monetaryValue
       bids {
         id
+        position
         value
         user {
           id
@@ -75,6 +76,7 @@ export const BIDS_SUBSCRIPTION = gql`
       minimalBid
       bids {
         id
+        position
         value
         user {
           id

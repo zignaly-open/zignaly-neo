@@ -9,6 +9,7 @@ export const typeDef = gql`
   }
   type Bid {
     id: Int
+    position: Int
     value: String
     date: Date
     user: UserInfo
