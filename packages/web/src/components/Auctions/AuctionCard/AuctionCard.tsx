@@ -128,7 +128,7 @@ const AuctionCard: React.FC<{
           </CardActions>
         </CardColumn>
         <CardColumn>
-          <AuctionRanking />
+          <AuctionRanking auction={auction} />
         </CardColumn>
       </Box>
     </Item>

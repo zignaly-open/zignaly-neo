@@ -4,6 +4,7 @@ import { styled } from '@mui/material/styles';
 // import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import { Typography } from 'zignaly-ui';
+import { AuctionBidType, AuctionType } from '@zigraffle/shared/types';
 
 const RankingRowContainer = styled(Box)<{ isMe: boolean }>(
   ({ isMe, theme }) => ({
@@ -41,7 +42,7 @@ const RankingRow = ({
 }: {
   rank: number;
   name: string;
-  amount: number;
+  amount: string;
   isMe: boolean;
 }) => {
   return (
@@ -59,17 +60,24 @@ const RankingRow = ({
   );
 };
 
-const AuctionRanking = () => {
+const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
   // const { t } = useTranslation('auction');
   // const { loading, error, data } = useQuery(GET_AUCTIONS);
-
   return (
     <Box width='100%'>
-      <RankingRow rank={1} name='Test User' amount={100} isMe={false} />
-      <RankingRow rank={2} name={null} amount={null} isMe={false} />
-      <RankingRow rank={3} name={null} amount={null} isMe={false} />
-      <RankingRow rank={4} name={null} amount={null} isMe={false} />
-      <RankingRow rank={5} name={null} amount={null} isMe={false} />
+      {auction.bids === [] ? (
+        auction.bids.map((bid: AuctionBidType) => (
+          <RankingRow
+            rank={bid.position}
+            name={bid.user.username}
+            amount={bid.value}
+            isMe={false}
+            key={bid.id}
+          />
+        ))
+      ) : (
+        <RankingRow rank={0} name={''} amount={''} isMe={false} />
+      )}
     </Box>
   );
 };
