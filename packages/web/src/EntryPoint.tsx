@@ -13,7 +13,7 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { setContext } from '@apollo/client/link/context';
 import { getToken } from './util/token';
-import { DAppProvider, Mainnet, Polygon, Rinkeby } from '@usedapp/core';
+import { DAppProvider, Polygon, Rinkeby } from '@usedapp/core';
 import { OnboardingProvider } from './contexts/Onboarding';
 import { dark, ThemeProvider } from 'zignaly-ui';
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
@@ -64,6 +64,7 @@ let config = {};
 
 if (process.env.REACT_APP_ENV === 'production') {
   config = {
+    networks: [Polygon],
     readOnlyChainId: Polygon.chainId,
     readOnlyUrls: {
       [Polygon.chainId]:
@@ -73,11 +74,9 @@ if (process.env.REACT_APP_ENV === 'production') {
   };
 } else if (process.env.REACT_APP_ENV === 'development') {
   config = {
-    readOnlyChainId: Mainnet.chainId,
+    networks: [Rinkeby],
+    readOnlyChainId: Rinkeby.chainId,
     readOnlyUrls: {
-      [Mainnet.chainId]:
-        'https://mainnet.infura.io/v3/' +
-        process.env.REACT_APP_INFURA_PROJECT_ID,
       [Rinkeby.chainId]:
         'https://rinkeby.infura.io/v3/' +
         process.env.REACT_APP_INFURA_PROJECT_ID,
