@@ -80,7 +80,7 @@ const port = process.env.PORT || 4000;
 
   await server.start();
   server.applyMiddleware({ app });
-  listenToChain();
+  process.env.NODE_ENV !== 'production' && !process.env.DEV_ONLY_DISABLE_DEPOSIT_CHECKS && listenToChain();
   await new Promise<void>((resolve) => httpServer.listen({ port }, resolve));
   console.log(
     `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`,
