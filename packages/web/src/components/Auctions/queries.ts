@@ -13,6 +13,7 @@ export const GET_AUCTIONS = gql`
       description
       imageUrl
       startingBid
+      numberOfWinners
       basketItems {
         ticker
         amount
@@ -30,6 +31,7 @@ export const GET_AUCTIONS = gql`
       userBid {
         id
         value
+        position
       }
     }
   }
