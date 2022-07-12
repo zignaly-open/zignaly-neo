@@ -46,11 +46,11 @@ export class Auction extends Model {
   @Column(DataType.DECIMAL)
   public bidFee: string;
 
-  @Default('1')
+  @Default('0.01')
   @Column(DataType.DECIMAL)
   public startingBid: string;
 
-  @Default('1')
+  @Default('0.01')
   @Column(DataType.DECIMAL)
   public bidStep: string;
 
