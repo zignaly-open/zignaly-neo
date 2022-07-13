@@ -13,7 +13,6 @@ export const typeDef = gql`
     value: String
     date: Date
     user: UserInfo
-    position: String
   }
 
   type BasketItem {

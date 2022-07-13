@@ -73,8 +73,7 @@ const StyledPriceLabel = styled(PriceLabel)`
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
-  currentUserId?: number;
-}> = ({ auction, currentUserId }) => {
+}> = ({ auction }) => {
   const { t } = useTranslation('auction');
   const { isActive /* isWinning, isLosing */ } =
     getWinningLosingStatus(auction);
@@ -130,7 +129,7 @@ const AuctionCard: React.FC<{
           </CardActions>
         </CardColumn>
         <CardColumn>
-          <AuctionRanking auction={auction} currentUserId={currentUserId} />
+          <AuctionRanking auction={auction} />
         </CardColumn>
       </Box>
     </Item>
