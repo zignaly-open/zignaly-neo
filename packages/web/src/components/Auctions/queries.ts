@@ -9,6 +9,10 @@ export const GET_AUCTIONS = gql`
       expiresAt
       status
       minimalBid
+      website
+      twitter
+      telegram
+      discord
       bidFee
       description
       imageUrl

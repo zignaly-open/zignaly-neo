@@ -14,8 +14,8 @@ const Layout = styled('div')`
   border-radius: 5px;
   display: flex;
   gap: 6px;
-  padding: 10px;
-  height: 30px;
+  padding: 0 10px;
+  height: 38px;
   justify-content: center;
   align-items: center;
   font-weight: 600;

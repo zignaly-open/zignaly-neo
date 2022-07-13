@@ -35,6 +35,18 @@ export class Auction extends Model {
   @Column(DataType.STRING)
   public status!: AuctionStatus;
 
+  @Column(DataType.STRING)
+  public website: string;
+
+  @Column(DataType.STRING)
+  public discord: string;
+
+  @Column(DataType.STRING)
+  public telegram: string;
+
+  @Column(DataType.STRING)
+  public twitter: string;
+
   @Default(() => Date.now() + 7 * 24 * 3600_000)
   @Column(DataType.DATE)
   public expiresAt!: Date;

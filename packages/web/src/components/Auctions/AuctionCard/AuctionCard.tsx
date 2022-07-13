@@ -14,8 +14,8 @@ import { useModal } from 'mui-modal-provider';
 import ProjectDetailsModal from 'components/Modals/ProjectDetails';
 
 const Item = styled('div')(({ theme }) => ({
-  background: theme.neutral750,
-  border: '1px solid #35334A',
+  background: 'rgba(37, 35, 57, 0.4)',
+  border: '1px solid rgba(53, 51, 74, 0.4)',
   borderRadius: '16px',
   [theme.breakpoints.up('lg')]: {
     width: '640px',
@@ -26,6 +26,8 @@ const AuctionHeader = styled('div')`
   display: flex;
   height: 80px;
   margin-bottom: 20px;
+  background: ${({ theme }) => theme.neutral750};
+  border-radius: 16px;
 `;
 
 const AuctionImage = styled('img')`
@@ -90,10 +92,10 @@ const AuctionCard: React.FC<{
             onClick={() =>
               showModal(ProjectDetailsModal, {
                 title: auction.title,
-                website: 'www.zignaly.com',
-                twitter: 'https://twitter.com/zignaly',
-                telegram: 'some telegram link',
-                discord: 'discord invite',
+                website: auction?.website ?? '',
+                discord: auction?.discord ?? '',
+                twitter: auction?.twitter ?? '',
+                telegram: auction?.telegram ?? '',
               })
             }
           />
