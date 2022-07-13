@@ -92,7 +92,7 @@ async function getAuctions(
   auctions.forEach((x) => {
     // here we will match auctions and bids
     x.bids = bids.filter((b) => x.id === b.auctionId);
-    x.userBid = x.bids.find((b) => b.user.id === user.id);
+    x.userBid = x.bids.find((b) => b.user.id === user?.id);
     x.minimalBid = getMinRequiredBidForAuction(x, x.bids[0]);
   });
 

@@ -5,7 +5,7 @@ import { AuctionType } from '@zigraffle/shared/types';
 import useCurrentUser from '../../../hooks/useCurrentUser';
 import { useTranslation } from 'react-i18next';
 import useBalance from '../../../hooks/useBalance';
-import { BigNumber } from 'ethers';
+import BN from 'bignumber.js';
 import { getWinningLosingStatus } from './util';
 import useAuthenticate from '../../../hooks/useAuthenticate';
 import { onboardingContext } from '../../../contexts/Onboarding';
@@ -34,7 +34,7 @@ const BidButton: React.FC<{ auction: AuctionType; isActive: boolean }> = ({
 
   const state = useMemo(() => {
     if (!user) return BidButtonState.NotLoggedIn;
-    if (BigNumber.from(balance).lt(BigNumber.from(auction.bidFee)))
+    if (new BN(balance).lt(new BN(auction.bidFee)))
       return BidButtonState.NotEnoughFunds;
     const winState = getWinningLosingStatus(auction);
     if (winState.isWinning) return BidButtonState.Winning;
