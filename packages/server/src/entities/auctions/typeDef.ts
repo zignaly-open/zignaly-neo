@@ -13,6 +13,7 @@ export const typeDef = gql`
     value: String
     date: Date
     user: UserInfo
+    position: String
   }
 
   type BasketItem {
@@ -39,6 +40,7 @@ export const typeDef = gql`
     basketItems: [BasketItem]
     bids: [Bid]
     userBid: Bid
+    numberOfWinners: Int
   }
 
   extend type Query {

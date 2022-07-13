@@ -88,7 +88,12 @@ const AuctionGrid: React.FC = () => {
           case SortDirection.Bid:
             return -(+a.bids[0]?.value || 0) + (+b.bids[0]?.value || 0);
           case SortDirection.Expiry:
-            return +new Date(a.expiresAt) - +new Date(b.expiresAt);
+            let date1 = +new Date(a.expiresAt);
+            let date2 = +new Date(b.expiresAt);
+            if (date1 < +new Date()) {
+              return date2 - date1;
+            }
+            return date1 - date2;
         }
       });
   }, [data?.auctions, selectedSort, selectedShowMode]);
@@ -124,6 +129,7 @@ const AuctionGrid: React.FC = () => {
             onChange={(option) => setSelectedSort(option.value)}
             fullWidth={false}
             label={t('sort')}
+            placeholder=''
           />
         </Grid>
       </Grid>
