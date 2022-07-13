@@ -15,19 +15,23 @@ import ProjectDetailsModal from 'components/Modals/ProjectDetails';
 
 const Item = styled('div')(({ theme }) => ({
   background: 'rgba(37, 35, 57, 0.4)',
-  border: '1px solid rgba(53, 51, 74, 0.4)',
+  border: '1px solid rgba(193, 193, 200, 0.4)',
   borderRadius: '16px',
   [theme.breakpoints.up('lg')]: {
     width: '640px',
   },
 }));
 
+const CardBody = styled('div')`
+  display: flex;
+`;
+
 const AuctionHeader = styled('div')`
   display: flex;
   height: 80px;
   margin-bottom: 20px;
-  background: ${({ theme }) => theme.neutral750};
-  border-radius: 16px;
+  border-bottom: 1px solid rgba(193, 193, 200, 0.4);
+  border-radius: 16px 16px 0px 0px;
 `;
 
 const AuctionImage = styled('img')`
@@ -105,7 +109,7 @@ const AuctionCard: React.FC<{
           </Typography>
         </HeaderColumn>
       </AuctionHeader>
-      <Box display='flex'>
+      <CardBody>
         <CardColumn>
           {auction.imageUrl && (
             <AuctionImage src={auction.imageUrl} alt={auction.title} />
@@ -131,7 +135,7 @@ const AuctionCard: React.FC<{
         <CardColumn>
           <AuctionRanking auction={auction} />
         </CardColumn>
-      </Box>
+      </CardBody>
     </Item>
   );
 };

@@ -9,7 +9,7 @@ import useCurrentUser from 'hooks/useCurrentUser';
 const MAX_WINNERS_DISPLAYED = 7;
 
 const RankingHead = styled('div')`
-  background: ${({ theme }) => theme.neutral750};
+  background: #222249;
   box-shadow: 0px 0px 10px #16192b;
   border-radius: 5px;
   height: 38px;
@@ -78,36 +78,34 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
         <Typography color='neutral200'>{t('user')}</Typography>
         <Typography color='neutral200'>{t('bid')}</Typography>
       </RankingHead>
-      {auction.bids.length ? (
+      {auction.bids
+        .slice(0, isTruncated ? MAX_WINNERS_DISPLAYED - 3 : winnersDisplayed)
+        .map((bid: AuctionBidType) => (
+          <RankingRow bid={bid} key={bid.id} />
+        ))}
+      {isTruncated ? (
         <>
-          {auction.bids
-            .slice(
-              0,
-              isTruncated ? MAX_WINNERS_DISPLAYED - 3 : winnersDisplayed,
-            )
-            .map((bid: AuctionBidType) => (
-              <RankingRow bid={bid} key={bid.id} />
-            ))}
-          {isTruncated && (
-            <>
-              <Ellipsis />
-              <RankingRow
-                bid={auction.bids[auction.userBid.position - 1]}
-                key={auction.bids[auction.userBid.position - 1].id}
-              />
-              <RankingRow
-                bid={auction.bids[auction.userBid.position]}
-                key={auction.bids[auction.userBid.position].id}
-              />
-            </>
-          )}
+          <Ellipsis />
+          <RankingRow
+            bid={auction.bids[auction.userBid.position - 1]}
+            key={auction.bids[auction.userBid.position - 1].id}
+          />
+          <RankingRow
+            bid={auction.bids[auction.userBid.position]}
+            key={auction.bids[auction.userBid.position].id}
+          />
         </>
       ) : (
-        <RankingRowContainer>
-          <Rank>
-            <Typography>1.</Typography>
-          </Rank>
-        </RankingRowContainer>
+        Array.from(
+          { length: winnersDisplayed - auction.bids.length },
+          (_, i) => (
+            <RankingRowContainer>
+              <Rank>
+                <Typography>{auction.bids.length + i + 1}.</Typography>
+              </Rank>
+            </RankingRowContainer>
+          ),
+        )
       )}
     </Box>
   );
