@@ -66,8 +66,8 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
     MAX_WINNERS_DISPLAYED,
   );
 
-  // Current user is winning but it too far in the list to be showed.
-  // We'll hide enough winners above him to show him
+  // Current user is winning but is too far in the list to be showed.
+  // We'll hide enough winners above him to show him.
   const isTruncated =
     auction.bids.length > winnersDisplayed &&
     auction.userBid?.position > MAX_WINNERS_DISPLAYED;
