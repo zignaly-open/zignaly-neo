@@ -8,7 +8,6 @@ import { AUCTION_BID_ADDED } from './constants';
 import { Auction, AuctionBasketItem, AuctionBid } from './model';
 import { Includeable, QueryTypes } from 'sequelize';
 import { ApolloContext, ContextUser } from '../../types';
-import { auctionTtlPerBid } from '../../../config';
 import { User } from '../users/model';
 import { sequelize } from '../../db';
 import { Transaction, TransactionType } from '../transactions/model';
@@ -18,6 +17,7 @@ import {
   negative,
 } from '../transactions/util';
 import { getMinRequiredBidForAuction, isBalanceSufficientForBid } from './util';
+import { random } from 'lodash';
 
 const lastBidPopulation = {
   model: AuctionBid,
@@ -26,6 +26,27 @@ const lastBidPopulation = {
   limit: 1,
   include: [User],
 } as Includeable;
+
+async function calculateNewExpiryDate({ auction }: any) {
+  if (auction.expiresAt < auction.maxExpiryDate) {
+    if (auction.expiresAt.getSeconds() > 36000) {
+      auction.expiresAt = new Date(
+        +new Date(auction.expiresAt) + 60 * random(1, 4) * 60_000,
+      );
+    } else if (
+      auction.expiresAt.getSeconds() < 36000 &&
+      auction.expiresAt.getSeconds() > 600
+    ) {
+      auction.expiresAt = new Date(
+        +new Date(auction.expiresAt) + 10 * random(1, 4) * 60_000,
+      );
+    } else {
+      auction.expiresAt = new Date(
+        +new Date(auction.expiresAt) + random(5, 11) * 60_000,
+      );
+    }
+  }
+}
 
 async function getSortedAuctionBids(
   id: number,
@@ -165,9 +186,7 @@ export const resolvers = {
           { transaction },
         );
 
-        auction.expiresAt = new Date(
-          +new Date(auction.expiresAt) + auctionTtlPerBid,
-        );
+        calculateNewExpiryDate({ auction: auction });
 
         await auction.save({ transaction });
         if (+(await getUserBalance(user.id)) < 0) {
