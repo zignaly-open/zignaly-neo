@@ -60,9 +60,15 @@ const RankingRow = ({
   );
 };
 
-const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
+const AuctionRanking = ({
+  auction,
+  currentUserId,
+}: {
+  auction: AuctionType;
+  currentUserId: number;
+}) => {
   // const { t } = useTranslation('auction');
-  // const { loading, error, data } = useQuery(GET_AUCTIONS);
+
   return (
     <Box width='100%'>
       {auction.bids !== [] ? (
@@ -71,7 +77,7 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
             rank={bid.position}
             name={bid.user.username}
             amount={bid.value}
-            isMe={false}
+            isMe={bid.user.id == currentUserId}
             key={bid.id}
           />
         ))
