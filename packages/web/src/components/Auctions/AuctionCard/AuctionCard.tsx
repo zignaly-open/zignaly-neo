@@ -90,10 +90,10 @@ const AuctionCard: React.FC<{
             onClick={() =>
               showModal(ProjectDetailsModal, {
                 title: auction.title,
-                website: 'www.zignaly.com',
-                twitter: 'https://twitter.com/zignaly',
-                telegram: 'some telegram link',
-                discord: 'discord invite',
+                website: auction?.website ?? '',
+                discord: auction?.discord ?? '',
+                twitter: auction?.twitter ?? '',
+                telegram: auction?.telegram ?? '',
               })
             }
           />
