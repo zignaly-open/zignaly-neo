@@ -88,8 +88,8 @@ const AuctionGrid: React.FC = () => {
           case SortDirection.Bid:
             return -(+a.bids[0]?.value || 0) + (+b.bids[0]?.value || 0);
           case SortDirection.Expiry:
-            let date1 = +new Date(a.expiresAt);
-            let date2 = +new Date(b.expiresAt);
+            const date1 = +new Date(a.expiresAt);
+            const date2 = +new Date(b.expiresAt);
             if (date1 < +new Date()) {
               return date2 - date1;
             }

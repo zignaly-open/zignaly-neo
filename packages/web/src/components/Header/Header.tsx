@@ -19,6 +19,7 @@ import { useModal } from 'mui-modal-provider';
 import { MenuList } from '@mui/material';
 import UserBalance from './UserBalance';
 import TransferZigModal from 'components/Modals/TransferZig';
+import UserSettingsModal from 'components/Modals/UserSettings';
 
 // @ts-ignore: fixme
 const StyledWalletIcon = styled(WalletIcon)`
@@ -35,24 +36,32 @@ const MenuItem = styled(TextButton)`
   }
 `;
 
-const Menu = () => {
-  const { t } = useTranslation('global');
-  const logout = useLogout();
-
-  return (
-    <MenuList>
-      <MenuItem color='neutral200' caption={t('settings')} onClick={() => {}} />
-      <MenuItem color='neutral200' caption={t('disconnect')} onClick={logout} />
-    </MenuList>
-  );
-};
-
 const Header: React.FC = () => {
   const { t } = useTranslation('global');
   const authenticate = useAuthenticate();
   const { user: currentUser, loading } = useCurrentUser();
   const walletConnect = useWalletConnect();
   const { showModal } = useModal();
+  const Menu = () => {
+    const logout = useLogout();
+
+    return (
+      <MenuList>
+        <MenuItem
+          color='neutral200'
+          caption={t('settings')}
+          onClick={() => {
+            showModal(UserSettingsModal, { userName: currentUser.userName });
+          }}
+        />
+        <MenuItem
+          color='neutral200'
+          caption={t('disconnect')}
+          onClick={logout}
+        />
+      </MenuList>
+    );
+  };
 
   return (
     <>
