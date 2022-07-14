@@ -36,6 +36,7 @@ export type AuctionType = {
   imageUrl?: string;
   createdAt?: Date;
   expiresAt?: Date;
+  maxExpiryDate: Date;
   startingBid: string;
   status: AuctionStatus;
 
