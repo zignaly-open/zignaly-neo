@@ -51,7 +51,11 @@ export const Side = styled.div<{ cursor: "auto" | "pointer" }>`
   }
 `;
 
-export const InputContainer = styled.div<{ withoutBorder?: boolean; minHeight?: number }>`
+export const InputContainer = styled.div<{
+  withoutBorder?: boolean;
+  minHeight?: number;
+  maxHeight?: number;
+}>`
   border: 1px solid #35334a;
   padding: 12px 24px;
   min-height: 60px;
@@ -73,6 +77,12 @@ export const InputContainer = styled.div<{ withoutBorder?: boolean; minHeight?: 
         props.minHeight,
         `
         min-height: ${props.minHeight}px;
+    `,
+      )}
+      ${styledIf(
+        props.maxHeight,
+        `
+        max-height: ${props.maxHeight}px;
     `,
       )}
     `}

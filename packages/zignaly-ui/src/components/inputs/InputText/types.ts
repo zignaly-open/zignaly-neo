@@ -30,4 +30,5 @@ export interface InputTextProps {
   labelAction?: LabelActionProps | null;
   withoutBorder?: boolean;
   minHeight?: number;
+  maxHeight?: number;
 }

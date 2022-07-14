@@ -29,6 +29,7 @@ function InputText(
     withoutBorder = false,
     labelAction = null,
     minHeight,
+    maxHeight,
   }: InputTextProps,
   inputRef: React.Ref<any>,
 ) {
@@ -52,7 +53,7 @@ function InputText(
         </Typography>
         {labelAction && <TextButton href={labelAction.href} caption={labelAction.text} />}
       </Label>
-      <InputContainer minHeight={minHeight} withoutBorder={withoutBorder}>
+      <InputContainer maxHeight={maxHeight} minHeight={minHeight} withoutBorder={withoutBorder}>
         <Side cursor="auto">
           {leftSideElement && <IconContainer>{leftSideElement}</IconContainer>}
           <InputValue
