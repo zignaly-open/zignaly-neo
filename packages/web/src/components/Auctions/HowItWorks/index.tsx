@@ -1,63 +1,67 @@
-import { ArrowDownward, Close } from '@mui/icons-material';
-import Box from '@mui/material/Box';
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Button, Typography } from 'zignaly-ui';
-import {
-  ButtonContainer,
-  HowItWorksContainer,
-  IconButtonContainer,
-  Inline,
-} from './styles';
+import { Box } from '@mui/system';
+import React from 'react';
+import { Typography } from 'zignaly-ui';
+import { BulletPointItem, HowItWorksList } from './styles';
 
-const HowItWorks = ({ onClickReadMore }: { onClickReadMore?: () => void }) => {
-  const [showDialog, setShowDialog] = useState(true);
-  const { t } = useTranslation('auction');
-
-  function ToggleDialog() {
-    setShowDialog(!showDialog);
-  }
+const HowItWorks = () => {
   return (
-    <>
-      {showDialog ? (
-        <HowItWorksContainer>
-          <Box display='flex' justifyContent='center'>
-            <Inline>
-              <Typography variant='h3' weight='medium' color='link'>
-                {t('how-it-works')}
-              </Typography>
-            </Inline>
-            <IconButtonContainer onClick={() => ToggleDialog()}>
-              <Close />
-            </IconButtonContainer>
-          </Box>
-          <ButtonContainer>
-            <Typography variant='body1' weight='regular' color='neutral200'>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-              commodo consequat.
-            </Typography>
-          </ButtonContainer>
-          <ButtonContainer>
-            <Button
-              caption='Read more'
-              size='medium'
-              minWidth={113}
-              onClick={() => onClickReadMore()}
-            />
-          </ButtonContainer>
-        </HowItWorksContainer>
-      ) : (
-        <HowItWorksContainer>
-          <IconButtonContainer onClick={() => ToggleDialog()}>
-            <ArrowDownward />
-          </IconButtonContainer>
-        </HowItWorksContainer>
-      )}
-    </>
+    <Box
+      width='65%'
+      marginTop='20px'
+      marginBottom='20px'
+      display='flex'
+      flexDirection='column'
+    >
+      <Typography variant='body1' weight='regular' color='neutral100'>
+        With the ‘ZigRaffle’ we are changing how the raffles on zignaly.com
+        function, adding an array of new features and offerings. Users can now
+        directly connect their wallets and place bids on the different auctions
+        happening on the “Raffles Marketplace”. Be it the whitelist spots to
+        your favorite NFT collection or that basket of tokens going at a deep
+        discount, you can put your ZIG to work and place your bids at ZigRaffle.
+        <br />
+        <br />
+        <Box>
+          <Typography variant='h3' weight='demibold' color='neutral000'>
+            How It Works?
+          </Typography>
+        </Box>
+        <HowItWorksList>
+          <BulletPointItem>
+            Connect your wallet directly to the ZigRaffle site. We will ask for
+            your Discord usernames to share instructions with the auction
+            winners.
+          </BulletPointItem>
+          <br />
+          <BulletPointItem>
+            Deposit ZIG to your wallet and start placing bids on your favorite
+            auctions.
+          </BulletPointItem>
+          <br />
+          <BulletPointItem>
+            Since our model allows having more than one winner, we will be
+            displaying the names of “current winners” in real time under each
+            auction. As a new bid comes up, the “current winners” list will be
+            updated until the auction is over.
+          </BulletPointItem>
+          <br />
+          <BulletPointItem>
+            Once the auction ends, the winner(s) will pay the “Claim” price for
+            the product, directly from the connected wallet.
+          </BulletPointItem>
+          <br />
+          <BulletPointItem>
+            Users may opt to buy the product directly from the auction using the
+            “Buy now” button.
+          </BulletPointItem>
+          <br />
+          <BulletPointItem>
+            We are extending the range of offerings from NFT whitelist spots to
+            Crypto baskets and other items, moving on.{' '}
+          </BulletPointItem>
+        </HowItWorksList>
+      </Typography>
+    </Box>
   );
 };
 
