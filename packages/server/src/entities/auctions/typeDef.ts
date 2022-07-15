@@ -25,6 +25,7 @@ export const typeDef = gql`
     createdAt: Date
     expiresAt: Date
     maxExpiryDate: Date
+    maxClaimDate: Date
     title: String!
     imageUrl: String
     status: String

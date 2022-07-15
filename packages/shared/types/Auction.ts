@@ -37,6 +37,7 @@ export type AuctionType = {
   createdAt?: Date;
   expiresAt?: Date;
   maxExpiryDate: Date;
+  maxClaimDate: Date;
   startingBid: string;
   status: AuctionStatus;
 

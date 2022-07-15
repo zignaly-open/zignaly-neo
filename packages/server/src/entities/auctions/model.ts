@@ -55,6 +55,10 @@ export class Auction extends Model {
   @Column(DataType.DATE)
   public maxExpiryDate!: Date;
 
+  @Default(() => Date.now() + 10 * 24 * 3600_000)
+  @Column(DataType.DATE)
+  public maxClaimDate!: Date;
+
   @HasMany(() => AuctionBasketItem)
   basketItems: AuctionBasketItem[];
 
