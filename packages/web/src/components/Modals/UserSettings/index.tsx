@@ -5,7 +5,6 @@ import { Gap } from '../ConnectWallet/styles';
 import DialogContainer from '../DialogContainer';
 import { Link } from './styles';
 import { UserSettingsModalProps } from './types';
-import useWindowDimensions from 'hooks/useWindowDimensions';
 import SettingsForm from './SettingsForm';
 
 const UserSettingsModal = ({
@@ -13,49 +12,9 @@ const UserSettingsModal = ({
   discordName = '',
   ...props
 }: UserSettingsModalProps) => {
-  const { width } = useWindowDimensions();
-
-  const LargeLayout = () => {
-    return (
-      <Box display='flex' flexDirection='column'>
-        <Gap gap={28} />
-        <SettingsForm
-          variant='large'
-          discordName={discordName}
-          userName={userName}
-        />
-      </Box>
-    );
-  };
-
-  const MediumLayout = () => {
-    return (
-      <Box display='flex' flexDirection='column'>
-        <SettingsForm
-          variant='medium'
-          discordName={discordName}
-          userName={userName}
-        />
-      </Box>
-    );
-  };
-
-  const SmallLayout = () => {
-    return (
-      <Box display='flex' flexDirection='column'>
-        <SettingsForm
-          variant='small'
-          discordName={discordName}
-          userName={userName}
-        />
-      </Box>
-    );
-  };
   return (
     <DialogContainer {...props} title='Settings'>
-      {width >= 840 && <LargeLayout />}
-      {width >= 450 && width < 840 && <MediumLayout />}
-      {width < 450 && <SmallLayout />}
+      <SettingsForm discordName={discordName} userName={userName} />
       <Gap gap={15} />
       <Box display='flex'>
         <Box flex={1} />
