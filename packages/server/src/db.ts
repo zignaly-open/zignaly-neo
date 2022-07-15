@@ -1,5 +1,3 @@
-import os from 'os';
-import path from 'path';
 import { Sequelize } from 'sequelize-typescript';
 import { User } from './entities/users/model';
 import { Transaction } from './entities/transactions/model';
@@ -8,15 +6,29 @@ import {
   AuctionBid,
   AuctionBasketItem,
 } from './entities/auctions/model';
-import { postgresUrl } from '../config';
+import { isTest, postgresUrl } from '../config';
 import { Setting } from './entities/setting/model';
 
-const sequelize = new Sequelize(postgresUrl, {
-  dialect: 'postgres',
-  storage: path.join(os.tmpdir(), 'db.sqlite'),
-  logging: false,
-  models: [User, Transaction, Auction, AuctionBid, AuctionBasketItem, Setting],
-});
+const models = [
+  User,
+  Transaction,
+  Auction,
+  AuctionBid,
+  AuctionBasketItem,
+  Setting,
+];
+
+let sequelize: Sequelize;
+
+if (isTest) {
+  sequelize = new Sequelize('sqlite::memory:', { logging: false, models });
+} else {
+  sequelize = new Sequelize(postgresUrl, {
+    dialect: 'postgres',
+    logging: false,
+    models,
+  });
+}
 
 // persist models to the database
 // TODO: maybe alter is not good on prod

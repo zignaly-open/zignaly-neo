@@ -11,6 +11,10 @@ export async function getConfigValue(
   key: string,
   defaultValue?: string,
 ): Promise<string | null> {
-  const record = await Setting.findByPk(key);
-  return record?.value ?? defaultValue ?? null;
+  try {
+    const record = await Setting.findByPk(key);
+    return record?.value ?? defaultValue ?? null;
+  } catch (e) {
+    return defaultValue;
+  }
 }
