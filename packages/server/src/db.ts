@@ -30,8 +30,9 @@ if (isTest) {
   });
 }
 
+const persistTablesToTheDatabase = () => sequelize.sync({ alter: true });
 // persist models to the database
 // TODO: maybe alter is not good on prod
-const initPromise = sequelize.sync({ alter: true });
+!isTest && persistTablesToTheDatabase();
 
-export { sequelize, initPromise };
+export { sequelize, persistTablesToTheDatabase };

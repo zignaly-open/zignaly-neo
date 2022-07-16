@@ -10,7 +10,7 @@ import {
 import { AuctionStatus, AuctionType } from '@zigraffle/shared/types';
 import { Transaction, TransactionType } from '../entities/transactions/model';
 import { isTest } from '../../config';
-import { initPromise } from '../db';
+import { persistTablesToTheDatabase } from '../db';
 
 const request = supertest(app);
 
@@ -221,5 +221,5 @@ export async function wipeOut() {
 }
 
 export async function waitUntilTablesAreCreated() {
-  await initPromise;
+  await persistTablesToTheDatabase();
 }
