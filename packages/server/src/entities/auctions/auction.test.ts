@@ -7,9 +7,11 @@ import {
   getFirstAuction,
   giveMoney,
   makeBid,
+  wait,
   waitUntilTablesAreCreated,
   wipeOut,
 } from '../../util/test-utils';
+import pubsub from '../../pubsub';
 
 describe('Auctions', () => {
   beforeAll(waitUntilTablesAreCreated);
@@ -85,9 +87,81 @@ describe('Auctions', () => {
     expect(auctionAfter50BidsBob.userBid.position).toBe(52);
   });
 
-  it('should dispatch socket events', async () => {});
+  it('should dispatch socket events', async () => {
+    const [alice, aliceToken] = await createAlice();
+    const auction = await createAuction();
+    const spy = jest.spyOn(pubsub, 'publish');
+    await giveMoney(alice, 300);
+    await makeBid(auction, aliceToken);
+    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenNthCalledWith(
+      1,
+      'AUCTION_BID_ADDED',
+      expect.objectContaining({
+        bidAdded: expect.objectContaining({
+          userBid: expect.objectContaining({
+            position: 1,
+            user: expect.objectContaining({
+              username: 'Alice',
+            }),
+          }),
+        }),
+      }),
+    );
+    expect(spy).toHaveBeenNthCalledWith(
+      2,
+      'BALANCE_CHANGED',
+      expect.objectContaining({
+        balanceChanged: expect.objectContaining({ balance: 299 }),
+      }),
+    );
+  });
+
   it('should users claim their victories only after the expiry', async () => {});
-  it('should change expiry time on bid', async () => {});
-  it("should not change expiry time if it's past max limit", async () => {});
-  it('should change expiry time', async () => {});
+
+  it('should change expiry time on bid', async () => {
+    const [alice, aliceToken] = await createAlice();
+    const auction = await createAuction();
+    await giveMoney(alice, 300);
+    const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
+    await wait(100);
+    const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
+    expect(initialExpiry2).toBe(initialExpiry2);
+    await makeBid(auction, aliceToken);
+    const { expiresAt: updatedExpiry } = await getFirstAuction(aliceToken);
+    expect(+new Date(initialExpiry)).toBeLessThan(+new Date(updatedExpiry));
+  });
+
+  it("should not change expiry time if it's past max limit", async () => {
+    const [alice, aliceToken] = await createAlice();
+    const auction = await createAuction();
+    await giveMoney(alice, 300);
+    const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
+    await wait(100);
+    const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
+    expect(initialExpiry2).toBe(initialExpiry2);
+    await makeBid(auction, aliceToken);
+    const { expiresAt: updatedExpiry } = await getFirstAuction(aliceToken);
+    expect(+new Date(initialExpiry)).toBeLessThan(+new Date(updatedExpiry));
+  });
+
+  it('should not bid on expired auctions', async () => {
+    const [alice, aliceToken] = await createAlice();
+    const [bob, bobToken] = await createBob();
+    const auction = await createAuction();
+    await giveMoney(alice, 300);
+    await giveMoney(bob, 300);
+    const { body } = await makeBid(auction, aliceToken);
+    expect(body.data.bid.userBid.value).toBe('100');
+    auction.expiresAt = new Date(Date.now() - 1000);
+    await auction.save();
+    const {
+      body: { errors },
+    } = await makeBid(auction, bobToken);
+    expect(errors[0].message).toBe('Auction expired');
+    const expiredAuction = await getFirstAuction(bobToken);
+    expect(expiredAuction.bids.length).toBe(1);
+    expect(expiredAuction.bids[0].user.username).toBe(alice.username);
+    expect(expiredAuction.userBid).toBeNull();
+  });
 });

@@ -5,5 +5,5 @@ module.exports = {
   },
   preset: 'ts-jest',
   testEnvironment: 'node',
-  transformIgnorePatterns: ['/node_modules\/(?!@zigraffle)(.*)']
+  transformIgnorePatterns: ['/node_modules\/(?!@zigraffle)(.*)'],
 };

@@ -220,6 +220,14 @@ export async function wipeOut() {
   }
 }
 
+let persisted = false;
+
 export async function waitUntilTablesAreCreated() {
+  if (persisted) return;
   await persistTablesToTheDatabase();
+  persisted = true;
+}
+
+export async function wait(ms: number): Promise<void> {
+  await new Promise((r) => setTimeout(r, ms));
 }
