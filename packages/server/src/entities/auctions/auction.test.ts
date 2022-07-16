@@ -22,7 +22,7 @@ describe('Auctions', () => {
     expect(body.errors[0].message).toBe('Insufficient funds');
   });
 
-  it('Should withdraw money after makign bids', async () => {
+  it('Should withdraw money after making bids', async () => {
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     await giveMoney(alice, 300); // fisting is three hundred bucks

@@ -47,7 +47,7 @@ const RankingRow = ({ bid }: { bid: AuctionBidType }) => {
   const { user: currentUser } = useCurrentUser();
 
   return (
-    <RankingRowContainer isMe={user.id === +currentUser.id}>
+    <RankingRowContainer isMe={user.id === +currentUser?.id}>
       <Rank>
         <Typography>{bid.position}.</Typography>
       </Rank>
