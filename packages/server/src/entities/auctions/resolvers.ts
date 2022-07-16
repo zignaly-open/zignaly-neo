@@ -144,6 +144,8 @@ export const resolvers = {
       const auction = await Auction.findByPk(id, {
         include: lastBidPopulation,
       });
+      if (!auction) return null;
+
       if (
         !isBalanceSufficientForBid(
           auction.bidFee,

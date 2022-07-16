@@ -10,6 +10,7 @@ import {
 import { AuctionStatus, AuctionType } from '@zigraffle/shared/types';
 import { Transaction, TransactionType } from '../entities/transactions/model';
 import { isTest } from '../../config';
+import { initPromise } from '../db';
 
 const request = supertest(app);
 
@@ -26,7 +27,12 @@ export async function createAuction(): Promise<Auction> {
 }
 
 export async function getAuctions(token: string): Promise<AuctionType[]> {
-  return makeRequest(AUCTIONS_QUERY, token);
+  const auctions = await makeRequest(AUCTIONS_QUERY, token);
+  return auctions.body.data.auctions;
+}
+
+export async function getFirstAuction(token: string): Promise<AuctionType> {
+  return (await getAuctions(token))[0];
 }
 
 export async function makeBid(auction: Auction, token: string): Promise<any> {
@@ -45,11 +51,52 @@ export async function makeBid(auction: Auction, token: string): Promise<any> {
       userBid {
         id
         value
+        position
       }
     }
   }`,
     token,
   );
+}
+
+export async function checkUsername(
+  username: string,
+  token: string,
+): Promise<any> {
+  // sure this is not prod way of doing stuff, but this file is called test-utils
+  const {
+    body: {
+      data: { checkUsername: result },
+    },
+  } = await makeRequest(
+    `
+   query {
+    checkUsername(username: "${username.replace(/"/, "''")}")
+  }`,
+    token,
+  );
+  return result;
+}
+
+export async function changeUsername(
+  username: string,
+  token: string,
+): Promise<any> {
+  // sure this is not prod way of doing stuff, but this file is called test-utils
+  const {
+    body: {
+      data: { updateProfile },
+    },
+  } = await makeRequest(
+    `
+   mutation {
+    updateProfile(username: "${username.replace(/"/, "''")}") {
+      username
+    }
+  }`,
+    token,
+  );
+  return updateProfile;
 }
 
 export async function createAlice(): Promise<[User, string]> {
@@ -61,6 +108,32 @@ export async function createAlice(): Promise<[User, string]> {
   return [user, await signJwtToken(user)];
 }
 
+export async function createBob(): Promise<[User, string]> {
+  try {
+    const user = await User.create({
+      username: 'Bob',
+      publicAddress: '0xE288AE3acccc630781354da2AA64379A0d4C56dB'.toLowerCase(),
+      onboardingCompletedAt: Date.now(),
+    });
+    return [user, await signJwtToken(user)];
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function createRandomUser(): Promise<[User, string]> {
+  try {
+    const user = await User.create({
+      username: null,
+      publicAddress: '0xE288AE3acccc630'.toLowerCase() + Math.random(),
+      onboardingCompletedAt: Date.now(),
+    });
+    return [user, await signJwtToken(user)];
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 export async function giveMoney(user: User, money: number | string) {
   await Transaction.create({
     userId: user.id,
@@ -70,15 +143,6 @@ export async function giveMoney(user: User, money: number | string) {
     txHash: 'privet' + Math.random(),
     type: TransactionType.Deposit,
   });
-}
-
-export async function createBob(): Promise<[User, string]> {
-  const user = await User.create({
-    username: 'Alice',
-    publicAddress: '0xE288AE3acccc630781354da2AA64379A0d4C56dB'.toLowerCase(),
-    onboardingCompletedAt: Date.now(),
-  });
-  return [user, await signJwtToken(user)];
 }
 
 export async function makeRequest(gql: string, token: string): Promise<any> {
@@ -135,6 +199,7 @@ export const AUCTIONS_QUERY = `
       userBid {
         id
         value
+        position
       }
     }
   }
@@ -142,10 +207,19 @@ export const AUCTIONS_QUERY = `
 
 export async function wipeOut() {
   if (isTest) {
-    // pls do not run it in prod lol
-    await AuctionBid.destroy({ where: {} });
-    await AuctionBasketItem.destroy({ where: {} });
-    await Auction.destroy({ where: {} });
-    await User.destroy({ where: {} });
+    try {
+      // pls do not run it in prod lol
+      await Transaction.destroy({ where: {} });
+      await AuctionBid.destroy({ where: {} });
+      await AuctionBasketItem.destroy({ where: {} });
+      await Auction.destroy({ where: {} });
+      await User.destroy({ where: {} });
+    } catch (e) {
+      console.error(e);
+    }
   }
+}
+
+export async function waitUntilTablesAreCreated() {
+  await initPromise;
 }

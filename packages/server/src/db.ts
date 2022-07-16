@@ -32,6 +32,6 @@ if (isTest) {
 
 // persist models to the database
 // TODO: maybe alter is not good on prod
-sequelize.sync({ alter: true });
+const initPromise = sequelize.sync({ alter: true });
 
-export { sequelize };
+export { sequelize, initPromise };

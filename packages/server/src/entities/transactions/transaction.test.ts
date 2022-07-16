@@ -1,12 +1,14 @@
 import '../..';
 import { Transaction, TransactionType } from './model';
-import { BALANCE_QUERY, createAlice, makeRequest } from '../../util/test-utils';
+import {
+  BALANCE_QUERY,
+  createAlice,
+  makeRequest,
+  waitUntilTablesAreCreated,
+} from '../../util/test-utils';
 
 describe('Transactions', () => {
-  beforeAll(async () => {
-    // wait for the main app to be initialized
-    await new Promise((r) => setTimeout(r, 2000));
-  });
+  beforeAll(waitUntilTablesAreCreated);
 
   it('Deposit should be reflected in the balance', async () => {
     const [alice, aliceToken] = await createAlice();

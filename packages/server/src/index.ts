@@ -82,8 +82,10 @@ process.env.NODE_ENV !== 'production' &&
 
 server.start().then(() => server.applyMiddleware({ app }));
 
-!isTest && httpServer.listen({ port });
-
-console.log(`🚀 Server ready at http://localhost:${port}${server.graphqlPath}`);
-
+if (!isTest) {
+  httpServer.listen({ port });
+  console.log(
+    `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`,
+  );
+}
 export default app;

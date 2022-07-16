@@ -62,6 +62,7 @@ export const BID_AUCTION = gql`
       userBid {
         id
         value
+        position
       }
     }
   }
