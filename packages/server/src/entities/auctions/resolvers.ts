@@ -1,22 +1,19 @@
-import {
-  AuctionType,
-  AuctionBidType,
-} from '@zigraffle/shared/types';
+import { AuctionType, AuctionBidType } from '@zigraffle/shared/types';
 import pubsub from '../../pubsub';
-import {AUCTION_BID_ADDED} from './constants';
-import {Auction, AuctionBasketItem, AuctionBid} from './model';
-import {Includeable, QueryTypes} from 'sequelize';
-import {ApolloContext, ContextUser} from '../../types';
-import {User} from '../users/model';
-import {sequelize} from '../../db';
-import {Transaction, TransactionType} from '../transactions/model';
+import { AUCTION_BID_ADDED } from './constants';
+import { Auction, AuctionBasketItem, AuctionBid } from './model';
+import { Includeable, QueryTypes } from 'sequelize';
+import { ApolloContext, ContextUser } from '../../types';
+import { User } from '../users/model';
+import { sequelize } from '../../db';
+import { Transaction, TransactionType } from '../transactions/model';
 import {
   emitBalanceChanged,
   getUserBalance,
   negative,
 } from '../transactions/util';
-import {getMinRequiredBidForAuction, isBalanceSufficientForBid} from './util';
-import {random} from 'lodash';
+import { getMinRequiredBidForAuction, isBalanceSufficientForBid } from './util';
+import { random } from 'lodash';
 
 const lastBidPopulation = {
   model: AuctionBid,
@@ -26,7 +23,7 @@ const lastBidPopulation = {
   include: [User],
 } as Includeable;
 
-async function calculateNewExpiryDate({auction}: any) {
+function calculateNewExpiryDate({ auction }: any) {
   if (auction.expiresAt < auction.maxExpiryDate) {
     if (auction.expiresAt.getSeconds() > 36000) {
       auction.expiresAt = new Date(
@@ -72,7 +69,7 @@ async function getSortedAuctionBids(
   `,
       {
         type: QueryTypes.SELECT,
-        bind: {auctionId: id || 0, currentUserId: user?.id || 0},
+        bind: { auctionId: id || 0, currentUserId: user?.id || 0 },
       },
     )
   ).map(
@@ -104,7 +101,7 @@ async function getAuctions(
 ) {
   const bids = await getSortedAuctionBids(id, showAllBids, user);
   const auctions = (await Auction.findAll({
-    where: {...(id ? {id} : {})},
+    where: { ...(id ? { id } : {}) },
     include: [AuctionBasketItem],
     raw: true,
   })) as unknown as AuctionType[];
@@ -123,14 +120,14 @@ export const resolvers = {
   Query: {
     auctions: async (
       _: any,
-      {id}: { id: number },
-      {user}: ApolloContext,
+      { id }: { id: number },
+      { user }: ApolloContext,
     ) => {
       return getAuctions(id, user);
     },
   },
   Mutation: {
-    bid: async (_: any, {id}: { id: number }, {user}: ApolloContext) => {
+    bid: async (_: any, { id }: { id: number }, { user }: ApolloContext) => {
       if (!user) {
         throw new Error('User not found');
       }
@@ -164,7 +161,8 @@ export const resolvers = {
             value: negative(auction.bidFee),
             type: TransactionType.Fee,
           },
-          {transaction},
+
+          { transaction },
         );
 
         // better re-load from inside the transaction
@@ -181,12 +179,12 @@ export const resolvers = {
             value: getMinRequiredBidForAuction(auction, lastAuctionBid),
             userId: user.id,
           },
-          {transaction},
+          { transaction },
         );
 
-        calculateNewExpiryDate({auction: auction});
+        calculateNewExpiryDate({ auction: auction });
 
-        await auction.save({transaction});
+        await auction.save({ transaction });
         if (+(await getUserBalance(user.id)) < 0) {
           // this means our cowboy somehow managed to become the fastest head on the west
           // noinspection ExceptionCaughtLocallyJS
@@ -202,7 +200,7 @@ export const resolvers = {
       }
 
       const [updatedAuction] = await getAuctions(auction.id, user);
-      pubsub.publish(AUCTION_BID_ADDED, {bidAdded: updatedAuction});
+      pubsub.publish(AUCTION_BID_ADDED, { bidAdded: updatedAuction });
       await emitBalanceChanged(user.id);
       return updatedAuction;
     },
