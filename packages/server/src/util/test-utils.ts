@@ -7,7 +7,7 @@ import {
   AuctionBasketItem,
   AuctionBid,
 } from '../entities/auctions/model';
-import { AuctionStatus, AuctionType } from '@zigraffle/shared/types';
+import { AuctionType } from '@zigraffle/shared/types';
 import { Transaction, TransactionType } from '../entities/transactions/model';
 import { isTest } from '../../config';
 import { persistTablesToTheDatabase } from '../db';
@@ -21,7 +21,6 @@ export async function createAuction(): Promise<Auction> {
     monetaryValue: '$100500',
     startingBid: '100',
     bidStep: '2',
-    status: AuctionStatus.Active,
     basketItems: [],
   });
 }
