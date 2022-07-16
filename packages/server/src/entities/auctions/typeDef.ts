@@ -24,6 +24,7 @@ export const typeDef = gql`
     id: ID!
     createdAt: Date
     expiresAt: Date
+    maxExpiryDate: Date
     title: String!
     imageUrl: String
     status: String
@@ -39,6 +40,7 @@ export const typeDef = gql`
     basketItems: [BasketItem]
     bids: [Bid]
     userBid: Bid
+    numberOfWinners: Int
   }
 
   extend type Query {

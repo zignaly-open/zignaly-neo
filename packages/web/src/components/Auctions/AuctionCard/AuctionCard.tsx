@@ -14,18 +14,24 @@ import { useModal } from 'mui-modal-provider';
 import ProjectDetailsModal from 'components/Modals/ProjectDetails';
 
 const Item = styled('div')(({ theme }) => ({
-  background: theme.neutral750,
-  border: '1px solid #35334A',
+  background: 'rgba(37, 35, 57, 0.4)',
+  border: '1px solid rgba(193, 193, 200, 0.4)',
   borderRadius: '16px',
   [theme.breakpoints.up('lg')]: {
     width: '640px',
   },
 }));
 
+const CardBody = styled('div')`
+  display: flex;
+`;
+
 const AuctionHeader = styled('div')`
   display: flex;
   height: 80px;
   margin-bottom: 20px;
+  border-bottom: 1px solid rgba(193, 193, 200, 0.4);
+  border-radius: 16px 16px 0px 0px;
 `;
 
 const AuctionImage = styled('img')`
@@ -71,8 +77,7 @@ const StyledPriceLabel = styled(PriceLabel)`
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
-  currentUserId?: number;
-}> = ({ auction /*, currentUserId */ }) => {
+}> = ({ auction }) => {
   const { t } = useTranslation('auction');
   const { isActive /* isWinning, isLosing */ } =
     getWinningLosingStatus(auction);
@@ -104,7 +109,7 @@ const AuctionCard: React.FC<{
           </Typography>
         </HeaderColumn>
       </AuctionHeader>
-      <Box display='flex'>
+      <CardBody>
         <CardColumn>
           {auction.imageUrl && (
             <AuctionImage src={auction.imageUrl} alt={auction.title} />
@@ -112,14 +117,7 @@ const AuctionCard: React.FC<{
           <StyledAmountContainer>
             <Box display='flex'>
               <ZigCoinIcon width={24} height={24} />
-              <StyledPriceLabel
-                value={
-                  auction.bids.length
-                    ? auction.bids[0].value
-                    : auction.minimalBid
-                }
-                coin='ZIG'
-              />
+              <StyledPriceLabel value={auction.minimalBid} coin='ZIG' />
             </Box>
             <FinalCountdown date={auction.expiresAt} started={true} />
           </StyledAmountContainer>
@@ -130,7 +128,7 @@ const AuctionCard: React.FC<{
         <CardColumn>
           <AuctionRanking auction={auction} />
         </CardColumn>
-      </Box>
+      </CardBody>
     </Item>
   );
 };
