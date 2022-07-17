@@ -30,6 +30,10 @@ export class User extends Model {
   @Column
   public username?: string;
 
+  @Unique
+  @Column
+  public discordName?: string;
+
   @Column
   public onboardingCompletedAt?: Date;
 }
