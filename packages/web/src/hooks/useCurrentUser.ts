@@ -1,14 +1,11 @@
 import { useQuery } from '@apollo/client';
+import { UserType } from '@zigraffle/shared/types';
 import { GET_CURRENT_USER } from './useAuthenticate';
 
-export default function useCurrentUser(): {
-  user: {
-    id: number;
-    username: string;
-    onboardingCompletedAt: Date;
-  };
-  loading: boolean;
-} {
+export default function useCurrentUser(): { user: UserType; loading: boolean } {
   const { loading, data: currentUser } = useQuery(GET_CURRENT_USER);
-  return { user: currentUser?.me, loading };
+  return {
+    user: currentUser?.me,
+    loading,
+  };
 }
