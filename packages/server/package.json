@@ -61,7 +61,6 @@
     "@types/sequelize-fixtures": "^0.6.3",
     "@types/supertest": "^2.0.12",
     "@types/ws": "^8.5.3",
-    "jest-nyancat-reporter": "^2.0.0",
     "sinon": "^14.0.0",
     "supertest": "^6.2.4",
     "ts-jest": "^28.0.4",
