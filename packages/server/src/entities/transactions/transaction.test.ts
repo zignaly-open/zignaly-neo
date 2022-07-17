@@ -1,9 +1,8 @@
 import '../..';
 import { Transaction, TransactionType } from './model';
 import {
-  BALANCE_QUERY,
   createAlice,
-  makeRequest,
+  getBalance,
   waitUntilTablesAreCreated,
 } from '../../util/test-utils';
 
@@ -21,7 +20,6 @@ describe('Transactions', () => {
       type: TransactionType.Deposit,
     });
 
-    const { body } = await makeRequest(BALANCE_QUERY, aliceToken);
-    expect(body.data.balance.balance).toBe('100');
+    expect(await getBalance(aliceToken)).toBe('100');
   });
 });

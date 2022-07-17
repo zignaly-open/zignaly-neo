@@ -10,6 +10,7 @@ import http from 'http';
 import './db';
 import * as auctions from './entities/auctions';
 import * as users from './entities/users';
+import * as payouts from './entities/payouts';
 import * as transactions from './entities/transactions';
 import listenToChain from './chain/watch';
 import { expressjwt, Request as AuthorizedRequest } from 'express-jwt';
@@ -35,8 +36,19 @@ app.use(
 const httpServer = http.createServer(app);
 
 const schema = makeExecutableSchema({
-  typeDefs: [typeDef, auctions.typeDef, users.typeDef, transactions.typeDef],
-  resolvers: [auctions.resolvers, users.resolvers, transactions.resolvers],
+  typeDefs: [
+    typeDef,
+    auctions.typeDef,
+    users.typeDef,
+    payouts.typeDef,
+    transactions.typeDef,
+  ],
+  resolvers: [
+    auctions.resolvers,
+    users.resolvers,
+    payouts.resolvers,
+    transactions.resolvers,
+  ],
 });
 
 const wsServer = new WebSocketServer({

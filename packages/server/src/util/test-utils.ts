@@ -11,6 +11,7 @@ import { AuctionType } from '@zigraffle/shared/types';
 import { Transaction, TransactionType } from '../entities/transactions/model';
 import { isTest } from '../../config';
 import { persistTablesToTheDatabase } from '../db';
+import { Payout } from '../entities/payouts/model';
 
 const request = supertest(app);
 
@@ -21,8 +22,14 @@ export async function createAuction(): Promise<Auction> {
     monetaryValue: '$100500',
     startingBid: '100',
     bidStep: '2',
+    bidFee: '1',
     basketItems: [],
   });
+}
+
+export async function getPayouts(token: string): Promise<Payout[]> {
+  const auctions = await makeRequest(PAYOUTS_QUERY, token);
+  return auctions.body.data.payouts;
 }
 
 export async function getAuctions(token: string): Promise<AuctionType[]> {
@@ -51,6 +58,26 @@ export async function makeBid(auction: Auction, token: string): Promise<any> {
         id
         value
         position
+      }
+    }
+  }`,
+    token,
+  );
+}
+
+export async function claimAuction(
+  auction: Auction,
+  token: string,
+): Promise<any> {
+  return makeRequest(
+    `
+   mutation {
+    claim(id: "${auction.id}") {
+      userBid {
+        id
+        value
+        position
+        isClaimed
       }
     }
   }`,
@@ -154,11 +181,35 @@ export async function makeRequest(gql: string, token: string): Promise<any> {
     .set('Accept', 'application/json');
 }
 
+export async function getBalance(token: string): Promise<string> {
+  const {
+    body: {
+      data: {
+        balance: { balance },
+      },
+    },
+  } = await makeRequest(BALANCE_QUERY, token);
+  return balance;
+}
+
 export const BALANCE_QUERY = `
   query balance {
     balance {
       id
       balance
+    }
+  }
+`;
+
+export const PAYOUTS_QUERY = `
+  query payouts {
+    payouts {
+      id
+      auction {
+        id
+        title
+      }
+      toWallet
     }
   }
 `;
@@ -199,20 +250,27 @@ export const AUCTIONS_QUERY = `
         id
         value
         position
+        isClaimed
       }
     }
   }
 `;
 
+export async function clearMocks() {
+  jest.clearAllMocks();
+}
+
 export async function wipeOut() {
   if (isTest) {
     try {
       // pls do not run it in prod lol
-      await Transaction.destroy({ where: {} });
-      await AuctionBid.destroy({ where: {} });
-      await AuctionBasketItem.destroy({ where: {} });
-      await Auction.destroy({ where: {} });
-      await User.destroy({ where: {} });
+      const options = { where: {}, cascade: true, force: true, truncate: true };
+      await Payout.destroy(options);
+      await AuctionBid.destroy(options);
+      await Transaction.destroy(options);
+      await AuctionBasketItem.destroy(options);
+      await Auction.destroy(options);
+      await User.destroy(options);
     } catch (e) {
       console.error(e);
     }
@@ -229,4 +287,10 @@ export async function waitUntilTablesAreCreated() {
 
 export async function wait(ms: number): Promise<void> {
   await new Promise((r) => setTimeout(r, ms));
+}
+
+export async function expireAuction(auctionId: number) {
+  const auction = await Auction.findByPk(auctionId);
+  auction.expiresAt = new Date(Date.now() - 1000);
+  await auction.save();
 }

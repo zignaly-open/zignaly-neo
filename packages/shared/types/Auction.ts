@@ -12,6 +12,7 @@ export type AuctionBidType = {
     id: number;
     username: string;
   };
+  isClaimed?: boolean;
 };
 
 export type AuctionType = {

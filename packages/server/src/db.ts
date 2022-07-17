@@ -8,6 +8,7 @@ import {
 } from './entities/auctions/model';
 import { isTest, postgresUrl } from '../config';
 import { Setting } from './entities/setting/model';
+import { Payout } from './entities/payouts/model';
 
 const models = [
   User,
@@ -16,6 +17,7 @@ const models = [
   AuctionBid,
   AuctionBasketItem,
   Setting,
+  Payout,
 ];
 
 let sequelize: Sequelize;
