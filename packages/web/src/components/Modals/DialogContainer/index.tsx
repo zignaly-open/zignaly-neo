@@ -12,7 +12,7 @@ function DialogContainer({ title, children, ...props }: DialogContainerProps) {
           backgroundColor: '#101225',
           borderRadius: '16px',
           border: '1px solid #35334a',
-          padding: '40px 56px 56px 56px',
+          padding: '40px 45px 40px 45px',
         },
       }}
     >
