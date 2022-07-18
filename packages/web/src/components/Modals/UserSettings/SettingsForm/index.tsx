@@ -5,6 +5,7 @@ import { Avatar, Button, InputText } from 'zignaly-ui';
 import { InputContainer } from '../styles';
 import Placeholder from '../../../../assets/avatar-placeholder.png';
 import theme from 'theme';
+import { useTranslation } from 'react-i18next';
 
 const SettingsForm = ({
   userName = '',
@@ -17,6 +18,7 @@ const SettingsForm = ({
   const [newUserName, setNewUserName] = useState(userName);
   const [discordUser, setDiscordUser] = useState(discordName);
   const matchesLarge = useMediaQuery(theme.breakpoints.up('lg'));
+  const { t } = useTranslation('UserSettings');
 
   const getFlexDirection = () => {
     if (matchesLarge) {
@@ -55,9 +57,9 @@ const SettingsForm = ({
         <Box>
           <InputContainer width={getInputWidth()}>
             <InputText
-              placeholder='Please enter your username'
+              placeholder={t('please-enter-username')}
               minHeight={23}
-              label='Username:'
+              label={t('username-label')}
               value={newUserName}
               onChange={(e: any) => setNewUserName(e.target.value)}
             />
@@ -65,9 +67,9 @@ const SettingsForm = ({
           <Gap gap={5} />
           <InputContainer width={getInputWidth()}>
             <InputText
-              placeholder='Please enter your discord user'
+              placeholder={t('please-enter-discord-name')}
               minHeight={23}
-              label='Discord User:'
+              label={t('discord-user-label')}
               value={discordUser}
               onChange={(e: any) => setDiscordUser(e.target.value)}
             />
@@ -76,11 +78,11 @@ const SettingsForm = ({
           <Box gap='12px' display='flex' flexDirection={getFlexDirection()}>
             <Button
               minWidth={170}
-              caption='Cancel'
+              caption={t('cancel')}
               variant='secondary'
               size='large'
             />
-            <Button minWidth={170} caption='Save Profile' size='large' />
+            <Button minWidth={170} caption={t('save-profile')} size='large' />
           </Box>
         </Box>
       </Box>

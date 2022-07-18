@@ -6,12 +6,15 @@ import DialogContainer from '../DialogContainer';
 import { Link } from './styles';
 import { UserSettingsModalProps } from './types';
 import SettingsForm from './SettingsForm';
+import { useTranslation } from 'react-i18next';
 
 const UserSettingsModal = ({
   userName = '',
   discordName = '',
   ...props
 }: UserSettingsModalProps) => {
+  const { t } = useTranslation('UserSettings');
+
   return (
     <DialogContainer {...props} title='Settings'>
       <SettingsForm discordName={discordName} userName={userName} />
@@ -19,7 +22,7 @@ const UserSettingsModal = ({
       <Box display='flex'>
         <Box flex={1} />
         <Typography variant='body1' color='neutral300' weight='regular'>
-          *For advanced options (Change password, 2FA...) visit
+          {t('information')}
           <a
             href='https://zignaly.com/'
             target='_blank'
