@@ -1,4 +1,5 @@
 import { MenuList, styled } from '@mui/material';
+import { UserType } from '@zigraffle/shared/types';
 import UserSettingsModal from 'components/Modals/UserSettings';
 import { useLogout } from 'hooks/useAuthenticate';
 import React from 'react';
@@ -19,7 +20,7 @@ const Menu = ({
   currentUser,
   showModal,
 }: {
-  currentUser: any;
+  currentUser: UserType;
   showModal: (...args: any[]) => void;
 }) => {
   const logout = useLogout();
@@ -31,7 +32,7 @@ const Menu = ({
         color='neutral200'
         caption={t('settings')}
         onClick={() => {
-          showModal(UserSettingsModal, { userName: currentUser.userName });
+          showModal(UserSettingsModal, { userName: currentUser.username });
         }}
       />
       <MenuItem color='neutral200' caption={t('disconnect')} onClick={logout} />

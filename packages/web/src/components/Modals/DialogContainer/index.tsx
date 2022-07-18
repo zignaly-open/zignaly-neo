@@ -3,7 +3,12 @@ import React from 'react';
 import { Typography } from 'zignaly-ui';
 import { DialogContainerProps } from './types';
 
-function DialogContainer({ title, children, ...props }: DialogContainerProps) {
+function DialogContainer({
+  paddingVariant = 'large',
+  title,
+  children,
+  ...props
+}: DialogContainerProps) {
   return (
     <Dialog
       {...props}
@@ -12,7 +17,10 @@ function DialogContainer({ title, children, ...props }: DialogContainerProps) {
           backgroundColor: '#101225',
           borderRadius: '16px',
           border: '1px solid #35334a',
-          padding: '40px 45px 40px 45px',
+          padding:
+            paddingVariant === 'large'
+              ? '40px 45px 40px 45px'
+              : '10px 0px 10px 0px',
         },
       }}
     >

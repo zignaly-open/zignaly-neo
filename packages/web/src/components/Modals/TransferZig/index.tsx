@@ -1,9 +1,10 @@
 import { ErrorOutline } from '@mui/icons-material';
-import { Box } from '@mui/material';
+import { Box, useMediaQuery } from '@mui/material';
 import { useEthers, useTokenBalance } from '@usedapp/core';
 import useContract from 'hooks/useContract';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import theme from 'theme';
 import { Button, InputAmount, Loader, Typography } from 'zignaly-ui';
 import { Gap } from '../ConnectWallet/styles';
 import DialogContainer from '../DialogContainer';
@@ -18,6 +19,7 @@ const TransferZigModal = ({
   const [transferAmount, setTransferAmount] = useState<string>('1000000');
   const address: string = process.env.REACT_APP_RECEIVING_ADDRESS as string;
   const token = process.env.REACT_APP_CONTRACT_ADDRESS as string;
+  const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const { t } = useTranslation('transfer-zig');
   const { account, activateBrowserWallet, chainId } = useEthers();
   const balance = useTokenBalance(token, account);
@@ -25,6 +27,22 @@ const TransferZigModal = ({
     address: address,
     transferAmount: transferAmount,
   });
+
+  function getBodyTextSize() {
+    if (matchesSmall) {
+      return 'body1';
+    } else {
+      return 'body2';
+    }
+  }
+
+  function getHeaderTextSize() {
+    if (matchesSmall) {
+      return 'h4';
+    } else {
+      return 'h5';
+    }
+  }
 
   useEffect(() => {
     !account && activateBrowserWallet();
@@ -50,6 +68,7 @@ const TransferZigModal = ({
 
   return (
     <DialogContainer
+      paddingVariant={matchesSmall ? 'large' : 'small'}
       fullWidth={true}
       maxWidth={'sm'}
       title={t('title')}
@@ -57,11 +76,15 @@ const TransferZigModal = ({
     >
       {balance !== undefined ? (
         <Container>
-          <Typography variant='body1' color='neutral200' weight='regular'>
+          <Typography
+            variant={getBodyTextSize()}
+            color='neutral200'
+            weight='regular'
+          >
             {t('subtitle')}
           </Typography>
           <Gap gap={15} />
-          <InputContainer>
+          <InputContainer width={matchesSmall ? 350 : null}>
             <InputAmount
               label={''}
               value={''}
@@ -78,20 +101,22 @@ const TransferZigModal = ({
             />
           </InputContainer>
           <Gap gap={8} />
-          <Button
-            size='xlarge'
-            caption={t('button')}
-            minWidth={350}
-            disabled={!transferAmount}
-            onClick={() => {
-              transfer();
-            }}
-            loading={isLoading}
-          />
+          <Box display='flex' flexDirection='row'>
+            <Button
+              size={matchesSmall ? 'xlarge' : 'large'}
+              caption={t('button')}
+              minWidth={matchesSmall ? 350 : 260}
+              disabled={!transferAmount}
+              onClick={() => {
+                transfer();
+              }}
+              loading={isLoading}
+            />
+          </Box>
           <Gap gap={8} />
           {isError && (
             <Typography
-              variant='body1'
+              variant={getBodyTextSize()}
               weight='regular'
               color='redGraphOrError'
             >
@@ -99,7 +124,11 @@ const TransferZigModal = ({
             </Typography>
           )}
           {isSuccess && (
-            <Typography variant='body1' weight='regular' color='links'>
+            <Typography
+              variant={getBodyTextSize()}
+              weight='regular'
+              color='links'
+            >
               {t('success')}
             </Typography>
           )}
@@ -109,11 +138,15 @@ const TransferZigModal = ({
           <Loader color={'#fff'} ariaLabel={''} />
         </Box>
       )}
-      <Gap gap={isError ? 8 : 16} />
+      <Gap gap={isError ? 8 : 14} />
       <Box display='flex' justifyContent='center' flexDirection='row'>
         <ErrorOutline color='secondary' />
         <Box display='flex' flexDirection='row' marginLeft={'5px'} width={350}>
-          <Typography variant='h4' weight='regular' color='neutral300'>
+          <Typography
+            variant={getHeaderTextSize()}
+            weight='regular'
+            color='neutral300'
+          >
             {t('warning')}
           </Typography>
         </Box>
