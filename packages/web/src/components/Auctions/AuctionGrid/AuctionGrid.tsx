@@ -129,7 +129,7 @@ const AuctionGrid: React.FC = () => {
             onChange={(option) => setSelectedSort(option.value)}
             fullWidth={false}
             label={t('sort')}
-            placeholder=''
+            placeholder='Select Sort'
           />
         </Grid>
       </Grid>
