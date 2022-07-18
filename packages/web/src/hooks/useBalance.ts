@@ -2,7 +2,7 @@ import { gql, useQuery, useSubscription } from '@apollo/client';
 import { getToken } from '../util/token';
 
 export const GET_CURRENT_USER_BALANCE = gql`
-  query balanced {
+  query balance {
     balance {
       id
       balance
