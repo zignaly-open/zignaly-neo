@@ -6,6 +6,7 @@ export const typeDef = gql`
     publicAddress: String!
     username: String
     onboardingCompletedAt: Date
+    discordName: String
   }
 
   type AuthUser {
