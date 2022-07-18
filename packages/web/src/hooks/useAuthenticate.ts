@@ -11,6 +11,7 @@ export const GET_CURRENT_USER = gql`
     me {
       id
       username
+      discordName
       onboardingCompletedAt
     }
   }

@@ -1,88 +1,111 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
-// import { useQuery } from '@apollo/client';
-// import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import { Typography } from 'zignaly-ui';
 import { AuctionBidType, AuctionType } from '@zigraffle/shared/types';
+import { useTranslation } from 'react-i18next';
+import useCurrentUser from 'hooks/useCurrentUser';
 
-const RankingRowContainer = styled(Box)<{ isMe: boolean }>(
+const MAX_WINNERS_DISPLAYED = 7;
+
+const RankingHead = styled('div')`
+  background: #222249;
+  box-shadow: 0px 0px 10px #16192b;
+  border-radius: 5px;
+  height: 38px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 12px;
+`;
+
+const RankingRowContainer = styled(Box)<{ isMe?: boolean }>(
   ({ isMe, theme }) => ({
     display: 'flex',
     color: isMe ? theme.highlighted : theme.neutral100,
-    padding: '10px 0',
+    padding: '6px 0',
     borderBottom: '1px solid #222249',
   }),
 );
 
-const Name = styled(Typography)<{ isPlaceholder: boolean }>`
-  ${({ isPlaceholder }) => isPlaceholder && `margin-left: 25px`}
-`;
-
-const Amount = styled(Typography)<{ isPlaceholder: boolean }>`
-  ${({ isPlaceholder }) => isPlaceholder && `margin-right: 25px`}
-`;
-
 const Rank = styled('div')`
-  background: #272c4c;
-  border: 1px solid ${({ theme }) => theme.neutral600};
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  margin-right: 11px;
+  margin: 0 10px;
 `;
 
-const RankingRow = ({
-  rank,
-  name,
-  amount,
-  isMe,
-}: {
-  rank: number;
-  name: string;
-  amount: string;
-  isMe: boolean;
-}) => {
+const Ellipsis = styled(RankingRowContainer)`
+  align-items: center;
+  height: 24px;
+  padding-left: 10px;
+
+  &:before {
+    content: '...';
+  }
+`;
+
+const RankingRow = ({ bid }: { bid: AuctionBidType }) => {
+  const { user, value } = bid;
+  const { user: currentUser } = useCurrentUser();
+
   return (
-    <RankingRowContainer isMe={isMe}>
+    <RankingRowContainer isMe={user.id === +currentUser.id}>
       <Rank>
-        <Typography>{rank}</Typography>
+        <Typography>{bid.position}.</Typography>
       </Rank>
       <Box display='flex' justifyContent='space-between' flex={1}>
-        <Name isPlaceholder={!Boolean(name)}>{name ?? '-'}</Name>
-        <Amount isPlaceholder={!Boolean(amount)}>
-          {amount ? `${amount} ZIG` : '-'}
-        </Amount>
+        <Typography>{user.username || user.id}</Typography>
+        <Typography>{value} ZIG</Typography>
       </Box>
     </RankingRowContainer>
   );
 };
 
-const AuctionRanking = ({
-  auction,
-  currentUserId,
-}: {
-  auction: AuctionType;
-  currentUserId: number;
-}) => {
-  // const { t } = useTranslation('auction');
+const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
+  const { t } = useTranslation('auction');
+  const winnersDisplayed = Math.min(
+    auction.numberOfWinners,
+    MAX_WINNERS_DISPLAYED,
+  );
+
+  // Current user is winning but is too far in the list to be showed.
+  // We'll hide enough winners above him to show him.
+  const isTruncated =
+    auction.bids.length > winnersDisplayed &&
+    auction.userBid?.position > MAX_WINNERS_DISPLAYED;
 
   return (
     <Box width='100%'>
-      {auction.bids?.length ? (
-        auction.bids.map((bid: AuctionBidType) => (
+      <RankingHead>
+        <Typography color='neutral200'>{t('user')}</Typography>
+        <Typography color='neutral200'>{t('bid')}</Typography>
+      </RankingHead>
+      {auction.bids
+        .slice(0, isTruncated ? MAX_WINNERS_DISPLAYED - 3 : winnersDisplayed)
+        .map((bid: AuctionBidType) => (
+          <RankingRow bid={bid} key={bid.id} />
+        ))}
+      {isTruncated ? (
+        <>
+          <Ellipsis />
           <RankingRow
-            rank={bid.position}
-            name={bid.user.username ?? bid.user.id.toString()}
-            amount={bid.value}
-            isMe={bid.user.id === +currentUserId}
-            key={bid.id}
+            bid={auction.bids[auction.userBid.position - 1]}
+            key={auction.bids[auction.userBid.position - 1].id}
           />
-        ))
+          <RankingRow
+            bid={auction.bids[auction.userBid.position]}
+            key={auction.bids[auction.userBid.position].id}
+          />
+        </>
       ) : (
-        <RankingRow rank={0} name={''} amount={''} isMe={false} />
+        Array.from(
+          { length: winnersDisplayed - auction.bids.length },
+          (_, i) => (
+            <RankingRowContainer>
+              <Rank>
+                <Typography>{auction.bids.length + i + 1}.</Typography>
+              </Rank>
+            </RankingRowContainer>
+          ),
+        )
       )}
     </Box>
   );

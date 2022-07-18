@@ -26,9 +26,6 @@ function Auctions() {
             {t('auction')}
           </HomeTitle>
         </Box>
-        <Box textAlign={'center'} marginBottom='23px'>
-          <Typography color='neutral300'>{t('moto')}</Typography>
-        </Box>
         <HowItWorks />
       </AuctionContainer>
       <AuctionGrid />
