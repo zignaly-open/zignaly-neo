@@ -15,11 +15,35 @@ import {
   wipeOut,
 } from '../../util/test-utils';
 import pubsub from '../../pubsub';
+import { Auction } from './model';
 
 describe('Auctions', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
   afterEach(clearMocks);
+
+  it('should not let bid on non-existing auctions', async () => {
+    const [, aliceToken] = await createAlice();
+    const { body } = await makeBid(
+      { id: -5 } as unknown as Auction,
+      aliceToken,
+    );
+    expect(body.errors[0].message).toBe('Auction not found');
+  });
+
+  it('should not let bid by invalid tokens', async () => {
+    const auction = await createAuction();
+    const { status } = await makeBid(auction, '2121212');
+    // for the 401 response, it's not handled by our endpoints
+    expect(status).toBe(401);
+  });
+
+  it('should not let bid by non-existin users', async () => {
+    const auction = await createAuction();
+    const { body } = await makeBid(auction, '');
+    // for the 401 response, it's not handled by our endpoints
+    expect(body.errors[0].message).toBe('User not found');
+  });
 
   it('should not let bid without money', async () => {
     const [, aliceToken] = await createAlice();

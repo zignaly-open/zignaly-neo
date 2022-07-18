@@ -33,6 +33,7 @@ app.use(
     credentialsRequired: false,
   }),
 );
+
 const httpServer = http.createServer(app);
 
 const schema = makeExecutableSchema({

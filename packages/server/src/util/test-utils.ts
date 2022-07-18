@@ -172,9 +172,9 @@ export async function giveMoney(user: User, money: number | string) {
 }
 
 export async function makeRequest(gql: string, token: string): Promise<any> {
-  return request
-    .post('/graphql')
-    .set('Authorization', 'Bearer ' + token)
+  let r = request.post('/graphql');
+  if (token) r = r.set('Authorization', 'Bearer ' + token);
+  return r
     .send({
       query: gql,
     })

@@ -215,6 +215,8 @@ export const resolvers = {
       if (!auction) throw new Error('Auction not found');
       if (+new Date(auction.expiresAt) > Date.now())
         throw new Error('Auction not expired yet');
+      if (auction.maxClaimDate && +new Date(auction.maxClaimDate) < Date.now())
+        throw new Error('Can not claim after the max claim date');
 
       // here we SPECIFICALLY do not pass the current user to not receive current user's bid
       // TODO: maybe we should refactor it to make this more explicit

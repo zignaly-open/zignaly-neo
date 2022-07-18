@@ -103,6 +103,23 @@ describe('Auction Claims', () => {
     expect(spy).toHaveBeenCalledTimes(0);
   });
 
+  it('should not let claim auctions after max claim', async () => {
+    const spy = jest.spyOn(payout, 'performPayout');
+    const [alice, aliceToken] = await createAlice();
+    const auction = await createAuction();
+    auction.maxClaimDate = new Date(Date.now() - 1);
+    await auction.save();
+    await giveMoney(alice, 300);
+    await makeBid(auction, aliceToken);
+    await claimAuction(auction, aliceToken);
+    const {
+      body: { errors },
+    } = await claimAuction(auction, aliceToken);
+    expect(errors.length).toBe(1);
+    expect(await getBalance(aliceToken)).toBe('299');
+    expect(spy).toHaveBeenCalledTimes(0);
+  });
+
   it('should not let claim without enough money', async () => {
     const spy = jest.spyOn(payout, 'performPayout');
     const [alice, aliceToken] = await createAlice();
