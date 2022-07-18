@@ -1,9 +1,12 @@
 import '../..';
 import {
+  clearMocks,
   createAlice,
   createAuction,
   createBob,
   createRandomUser,
+  expireAuction,
+  getBalance,
   getFirstAuction,
   giveMoney,
   makeBid,
@@ -12,10 +15,35 @@ import {
   wipeOut,
 } from '../../util/test-utils';
 import pubsub from '../../pubsub';
+import { Auction } from './model';
 
 describe('Auctions', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
+  afterEach(clearMocks);
+
+  it('should not let bid on non-existing auctions', async () => {
+    const [, aliceToken] = await createAlice();
+    const { body } = await makeBid(
+      { id: -5 } as unknown as Auction,
+      aliceToken,
+    );
+    expect(body.errors[0].message).toBe('Auction not found');
+  });
+
+  it('should not let bid by invalid tokens', async () => {
+    const auction = await createAuction();
+    const { status } = await makeBid(auction, '2121212');
+    // for the 401 response, it's not handled by our endpoints
+    expect(status).toBe(401);
+  });
+
+  it('should not let bid by non-existin users', async () => {
+    const auction = await createAuction();
+    const { body } = await makeBid(auction, '');
+    // for the 401 response, it's not handled by our endpoints
+    expect(body.errors[0].message).toBe('User not found');
+  });
 
   it('should not let bid without money', async () => {
     const [, aliceToken] = await createAlice();
@@ -32,6 +60,7 @@ describe('Auctions', () => {
     expect(body.data.bid.userBid.value).toBe('100');
     const { body: body2 } = await makeBid(auction, aliceToken);
     expect(body2.data.bid.userBid.value).toBe('102');
+    expect(await getBalance(aliceToken)).toBe('298');
   });
 
   it('should support the main flow', async () => {
@@ -96,9 +125,9 @@ describe('Auctions', () => {
     expect(spy).toHaveBeenCalledTimes(2);
     expect(spy).toHaveBeenNthCalledWith(
       1,
-      'AUCTION_BID_ADDED',
+      'AUCTION_UPDATED',
       expect.objectContaining({
-        bidAdded: expect.objectContaining({
+        auctionUpdated: expect.objectContaining({
           userBid: expect.objectContaining({
             position: 1,
             user: expect.objectContaining({
@@ -116,8 +145,6 @@ describe('Auctions', () => {
       }),
     );
   });
-
-  it('should users claim their victories only after the expiry', async () => {});
 
   it('should change expiry time on bid', async () => {
     const [alice, aliceToken] = await createAlice();
@@ -153,8 +180,7 @@ describe('Auctions', () => {
     await giveMoney(bob, 300);
     const { body } = await makeBid(auction, aliceToken);
     expect(body.data.bid.userBid.value).toBe('100');
-    auction.expiresAt = new Date(Date.now() - 1000);
-    await auction.save();
+    await expireAuction(auction.id);
     const {
       body: { errors },
     } = await makeBid(auction, bobToken);

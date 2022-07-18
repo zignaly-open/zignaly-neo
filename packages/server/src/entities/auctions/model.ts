@@ -121,6 +121,13 @@ export class AuctionBid extends Model {
 
   @ForeignKey(() => Transaction)
   @Column
+  public claimTransactionId: number;
+
+  @BelongsTo(() => Transaction)
+  public claimTransaction: Transaction;
+
+  @ForeignKey(() => Transaction)
+  @Column
   public transactionId: number;
 
   @BelongsTo(() => Transaction)

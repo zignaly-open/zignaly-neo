@@ -69,17 +69,9 @@ export const BID_AUCTION = gql`
   }
 `;
 
-export const GET_AUCTION_IDS = gql`
-  query getIds($id: ID) {
-    auctions(id: $id) {
-      id
-    }
-  }
-`;
-
 export const BIDS_SUBSCRIPTION = gql`
-  subscription onBidAdded {
-    bidAdded {
+  subscription onAuctionUpdated {
+    auctionUpdated {
       id
       expiresAt
       minimalBid
