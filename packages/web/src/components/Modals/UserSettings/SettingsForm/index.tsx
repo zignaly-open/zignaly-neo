@@ -18,7 +18,7 @@ const SettingsForm = ({
   const [newUserName, setNewUserName] = useState(userName);
   const [discordUser, setDiscordUser] = useState(discordName);
   const matchesLarge = useMediaQuery(theme.breakpoints.up('lg'));
-  const { t } = useTranslation('UserSettings');
+  const { t } = useTranslation('user-settings');
 
   const getFlexDirection = () => {
     if (matchesLarge) {
@@ -67,7 +67,7 @@ const SettingsForm = ({
           <Gap gap={5} />
           <InputContainer width={getInputWidth()}>
             <InputText
-              placeholder={t('please-enter-discord-name')}
+              placeholder={t('please-enter-discord-user')}
               minHeight={23}
               label={t('discord-user-label')}
               value={discordUser}
@@ -77,7 +77,7 @@ const SettingsForm = ({
           <Gap gap={matchesLarge ? 46 : 15} />
           <Box gap='12px' display='flex' flexDirection={getFlexDirection()}>
             <Button
-              minWidth={170}
+              minWidth={128}
               caption={t('cancel')}
               variant='secondary'
               size='large'

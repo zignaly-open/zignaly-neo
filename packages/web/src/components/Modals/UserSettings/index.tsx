@@ -13,10 +13,10 @@ const UserSettingsModal = ({
   discordName = '',
   ...props
 }: UserSettingsModalProps) => {
-  const { t } = useTranslation('UserSettings');
+  const { t } = useTranslation('user-settings');
 
   return (
-    <DialogContainer {...props} title='Settings'>
+    <DialogContainer {...props} title={t('settings')}>
       <SettingsForm discordName={discordName} userName={userName} />
       <Gap gap={15} />
       <Box display='flex'>
