@@ -67,11 +67,11 @@ const ProfileInner: ProfileComponentType = React.forwardRef(
                 disabled={updatingProfile}
                 helperText={
                   (formState.errors?.username?.message ||
-                  (!formState.isValidating &&
-                    watch('username') &&
-                    !formState.errors?.username &&
-                    t('username-ok')) ||
-                  ' ') as string
+                    (!formState.isValidating &&
+                      watch('username') &&
+                      !formState.errors?.username &&
+                      t('username-ok')) ||
+                    ' ') as string
                 }
                 placeholder={t('username-explainer')}
               />

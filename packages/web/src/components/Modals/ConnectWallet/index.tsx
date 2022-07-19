@@ -4,12 +4,10 @@ import { ConnectWalletModalProps } from './types';
 import DialogContainer from '../DialogContainer';
 import { Button } from 'zignaly-ui';
 import { ReactComponent as MetaMaskLogo } from '../../../assets/icons/metamask-logo.svg';
-import { ReactComponent as WalletConnectLogo } from '../../../assets/icons/walletconnect-logo.svg';
 import { useTranslation } from 'react-i18next';
 
 const ConnectWalletModal = ({
   metaMaskOnClick = () => {},
-  walletConnectOnClick = () => {},
   ...props
 }: ConnectWalletModalProps) => {
   const { t } = useTranslation('connect-wallet');
@@ -27,14 +25,6 @@ const ConnectWalletModal = ({
           caption={t('metamask')}
           onClick={() => metaMaskOnClick()}
           leftElement={<MetaMaskLogo />}
-        />
-        <Gap gap={8} />
-        <Button
-          minWidth={255}
-          size='large'
-          caption={t('walletconnect')}
-          onClick={() => walletConnectOnClick()}
-          leftElement={<WalletConnectLogo />}
         />
       </ButtonContainer>
     </DialogContainer>
