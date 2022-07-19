@@ -79,7 +79,9 @@ const Header = () => {
           variant={'flat'}
           // @ts-ignore
           icon={<UserIcon color='#65647E' />}
-          renderDropDown={<Menu currentUser={currentUser} />}
+          renderDropDown={
+            <Menu currentUser={currentUser} showModal={showModal} />
+          }
           dropDownOptions={{
             alignment: 'right',
             position: 'static',
