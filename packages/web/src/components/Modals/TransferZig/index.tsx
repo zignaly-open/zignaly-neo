@@ -28,22 +28,6 @@ const TransferZigModal = ({
     transferAmount: transferAmount,
   });
 
-  function getBodyTextSize() {
-    if (matchesSmall) {
-      return 'body1';
-    } else {
-      return 'body2';
-    }
-  }
-
-  function getHeaderTextSize() {
-    if (matchesSmall) {
-      return 'h4';
-    } else {
-      return 'h5';
-    }
-  }
-
   useEffect(() => {
     !account && activateBrowserWallet();
     if (!address) {
@@ -76,11 +60,7 @@ const TransferZigModal = ({
     >
       {balance !== undefined ? (
         <Container>
-          <Typography
-            variant={getBodyTextSize()}
-            color='neutral200'
-            weight='regular'
-          >
+          <Typography variant={'h5'} color='neutral200' weight='regular'>
             {t('subtitle')}
           </Typography>
           <Gap gap={15} />
@@ -116,7 +96,7 @@ const TransferZigModal = ({
           <Gap gap={8} />
           {isError && (
             <Typography
-              variant={getBodyTextSize()}
+              variant={'body1'}
               weight='regular'
               color='redGraphOrError'
             >
@@ -124,11 +104,7 @@ const TransferZigModal = ({
             </Typography>
           )}
           {isSuccess && (
-            <Typography
-              variant={getBodyTextSize()}
-              weight='regular'
-              color='links'
-            >
+            <Typography variant={'body1'} weight='regular' color='links'>
               {t('success')}
             </Typography>
           )}
@@ -142,11 +118,7 @@ const TransferZigModal = ({
       <Box display='flex' justifyContent='center' flexDirection='row'>
         <ErrorOutline color='secondary' />
         <Box display='flex' flexDirection='row' marginLeft={'5px'} width={350}>
-          <Typography
-            variant={getHeaderTextSize()}
-            weight='regular'
-            color='neutral300'
-          >
+          <Typography variant={'h4'} weight='regular' color='neutral300'>
             {t('warning')}
           </Typography>
         </Box>

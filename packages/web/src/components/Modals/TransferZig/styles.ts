@@ -6,8 +6,8 @@ export const Container = styled.div`
   align-items: center;
 `;
 
-export const InputContainer = styled.div<{ width: number }>`
-  width: ${(props) => props.width}px;
+export const InputContainer = styled.div<{ width?: number }>`
+  ${(props) => props.width !== null && `width: ${props.width}px`};
 `;
 
 export const TextContainer = styled.div`
