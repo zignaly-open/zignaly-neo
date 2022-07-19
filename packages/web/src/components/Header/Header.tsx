@@ -17,6 +17,10 @@ const StyledWalletIcon = styled(WalletIcon)`
   color: ${({ theme }) => theme.neutral300};
 `;
 
+const MenuButton = styled(IconButton)`
+  margin-left: -20px;
+`;
+
 const Header = () => {
   const { t } = useTranslation('global');
   const authenticate = useAuthenticate();
@@ -70,7 +74,7 @@ const Header = () => {
               leftElement={<StyledWalletIcon />}
             />
           )),
-        <IconButton
+        <MenuButton
           key={'user'}
           variant={'flat'}
           // @ts-ignore
