@@ -7,10 +7,10 @@ import Box from '@mui/material/Box';
 import Masonry from '@mui/lab/Masonry';
 import { AuctionType } from '@zigraffle/shared/types';
 import AuctionCard from '../AuctionCard';
-import { BIDS_SUBSCRIPTION, GET_AUCTIONS } from '../queries';
 import Loader from '../../common/Loader';
 import { getWinningLosingStatus } from '../AuctionCard/util';
 import { Select } from 'zignaly-ui';
+import { BIDS_SUBSCRIPTION, GET_AUCTIONS } from 'queries/auctions';
 
 const MasonryWrapper = styled(Box)`
   max-width: 1280px;
