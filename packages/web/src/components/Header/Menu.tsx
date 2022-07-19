@@ -5,9 +5,11 @@ import { useLogout } from 'hooks/useAuthenticate';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextButton } from 'zignaly-ui';
+import { Box } from '@mui/system';
+import TransferZigModal from 'components/Modals/TransferZig';
 
 const MenuItem = styled(TextButton)`
-  padding: 2px 15px;
+  padding: 6px 15px;
   color: ${({ theme }) => theme.neutral200};
   display: block;
 
@@ -28,6 +30,13 @@ const Menu = ({
 
   return (
     <MenuList>
+      <Box sx={{ display: { sm: 'none', xs: 'block' } }}>
+        <MenuItem
+          color='neutral200'
+          caption={t('transfer-coin', { coin: 'ZIG' })}
+          onClick={() => showModal(TransferZigModal)}
+        />
+      </Box>
       <MenuItem
         color='neutral200'
         caption={t('settings')}

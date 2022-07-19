@@ -7,7 +7,6 @@
       "title": "Best Auction EVER",
       "description": "Bid now or die regretting",
       "monetaryValue": "100 BTC!!11",
-      "status": "Active",
       "startingBid": "1",
       "website": "https://zignaly.com/",
       "discord": "https://zignaly.com/",
@@ -31,7 +30,6 @@
       "title": "Elon Musk's giveaway",
       "description": "Have you ever dreamt of reading the most retarded description ever? Well, continue dreaming",
       "monetaryValue": "1 Model S",
-      "status": "Active",
       "startingBid": "1"
     }
   },
@@ -59,7 +57,6 @@
       "title": "Charity Giveaway",
       "description": "All proceeds from this auction will go towards the needs of Alex who desperately needs a brand new X5 40d",
       "monetaryValue": "$1",
-      "status": "Active",
       "startingBid": "10"
     }
   },
@@ -79,7 +76,6 @@
       "title": "Charity Giveaway 2",
       "description": "All proceeds from this auction will go towards the needs of Alex who would like to have an M4 as well",
       "monetaryValue": "$1",
-      "status": "Active",
       "startingBid": "100"
     }
   },
@@ -99,7 +95,6 @@
       "title": "Win&Go",
       "description": "Bid, win, get outbid and go",
       "monetaryValue": "$4000",
-      "status": "Active",
       "startingBid": "1"
     }
   },
@@ -119,7 +114,6 @@
       "title": "Honest Auction",
       "description": "Lotteries are for economically illiterate, stop playing one",
       "monetaryValue": "$30k",
-      "status": "Active",
       "startingBid": "1"
     }
   },
@@ -139,7 +133,6 @@
       "title": "Just go",
       "description": "Pay me and go",
       "monetaryValue": "$100",
-      "status": "Active",
       "startingBid": "1"
     }
   },
@@ -167,7 +160,6 @@
       "title": "Diversification",
       "description": "Win a basket more diverse than a Netflix cast",
       "monetaryValue": "$1000",
-      "status": "Active",
       "startingBid": "3"
     }
   },
@@ -211,7 +203,6 @@
       "title": "Diversification 2",
       "description": "Win a basket more diverse than a Netflix cast",
       "monetaryValue": "$1000",
-      "status": "Active",
       "basketItems": [
         {
           "ticker": "SHT",
@@ -273,7 +264,6 @@
       "title": "Diversification 3",
       "description": "Win a basket more diverse than a Netflix cast",
       "monetaryValue": "$1000",
-      "status": "Active",
       "startingBid": "3"
     }
   },
@@ -317,7 +307,6 @@
       "title": "Diversification 4",
       "description": "Win a basket more diverse than a Netflix cast",
       "monetaryValue": "$1000",
-      "status": "Active",
       "startingBid": "3"
     }
   },
