@@ -10,13 +10,14 @@ import { useModal } from 'mui-modal-provider';
 import UserBalance from './UserBalance';
 import TransferZigModal from 'components/Modals/TransferZig';
 import Menu from './Menu';
+import { Box } from '@mui/system';
 
 // @ts-ignore: fixme
 const StyledWalletIcon = styled(WalletIcon)`
   color: ${({ theme }) => theme.neutral300};
 `;
 
-const Header: React.FC = () => {
+const Header = () => {
   const { t } = useTranslation('global');
   const authenticate = useAuthenticate();
   const { user: currentUser, loading } = useCurrentUser();
@@ -24,20 +25,24 @@ const Header: React.FC = () => {
   const { showModal } = useModal();
 
   return (
-    <>
-      <ZIGHeader
-        leftElements={[
-          <BrandImage
-            key={'logo2'}
-            type={'logotype'}
-            width={'140px'}
-            height={'68px'}
-          />,
-        ]}
-        rightElements={[
-          !loading &&
-            (currentUser?.id ? (
-              <React.Fragment key='transfer'>
+    <ZIGHeader
+      leftElements={[
+        <BrandImage
+          key={'logo2'}
+          type={'logotype'}
+          width={'140px'}
+          height={'68px'}
+        />,
+      ]}
+      rightElements={[
+        !loading &&
+          (currentUser?.id ? (
+            <React.Fragment key='transfer'>
+              <Box
+                sx={{
+                  display: { sm: 'block', xs: 'none' },
+                }}
+              >
                 <Button
                   variant='secondary'
                   size='small'
@@ -45,39 +50,39 @@ const Header: React.FC = () => {
                   leftElement={<StyledWalletIcon />}
                   onClick={() => showModal(TransferZigModal)}
                 />
+              </Box>
+              <Box ml={{ sm: 0, xs: 1 }}>
                 <UserBalance />
-              </React.Fragment>
-            ) : (
-              <Button
-                variant='secondary'
-                size='small'
-                onClick={() => {
-                  showModal(ConnectWalletModal, {
-                    metaMaskOnClick: authenticate,
-                    walletConnectOnClick: walletConnect,
-                  });
-                }}
-                caption={t('log-in')}
-                key='login'
-                leftElement={<StyledWalletIcon />}
-              />
-            )),
-          <IconButton
-            key={'user'}
-            variant={'flat'}
-            // @ts-ignore
-            icon={<UserIcon color='#65647E' />}
-            renderDropDown={
-              <Menu showModal={showModal} currentUser={currentUser} />
-            }
-            dropDownOptions={{
-              alignment: 'right',
-              position: 'static',
-            }}
-          />,
-        ]}
-      />
-    </>
+              </Box>
+            </React.Fragment>
+          ) : (
+            <Button
+              variant='secondary'
+              size='small'
+              onClick={() => {
+                showModal(ConnectWalletModal, {
+                  metaMaskOnClick: authenticate,
+                  walletConnectOnClick: walletConnect,
+                });
+              }}
+              caption={t('log-in')}
+              key='login'
+              leftElement={<StyledWalletIcon />}
+            />
+          )),
+        <IconButton
+          key={'user'}
+          variant={'flat'}
+          // @ts-ignore
+          icon={<UserIcon color='#65647E' />}
+          renderDropDown={<Menu currentUser={currentUser} />}
+          dropDownOptions={{
+            alignment: 'right',
+            position: 'static',
+          }}
+        />,
+      ]}
+    />
   );
 };
 
