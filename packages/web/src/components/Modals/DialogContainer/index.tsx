@@ -1,14 +1,17 @@
-import { Dialog, DialogContent, DialogTitle } from '@mui/material';
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  useMediaQuery,
+} from '@mui/material';
 import React from 'react';
+import theme from 'theme';
 import { Typography } from 'zignaly-ui';
 import { DialogContainerProps } from './types';
 
-function DialogContainer({
-  paddingVariant = 'large',
-  title,
-  children,
-  ...props
-}: DialogContainerProps) {
+function DialogContainer({ title, children, ...props }: DialogContainerProps) {
+  const matchesLarge = useMediaQuery(theme.breakpoints.up('lg'));
+
   return (
     <Dialog
       {...props}
@@ -17,10 +20,7 @@ function DialogContainer({
           backgroundColor: '#101225',
           borderRadius: '16px',
           border: '1px solid #35334a',
-          padding:
-            paddingVariant === 'large'
-              ? '40px 45px 40px 45px'
-              : '10px 0px 10px 0px',
+          padding: matchesLarge ? '40px 45px 40px 45px' : '10px 0px 10px 0px',
         },
       }}
     >

@@ -52,7 +52,6 @@ const TransferZigModal = ({
 
   return (
     <DialogContainer
-      paddingVariant={matchesSmall ? 'large' : 'small'}
       fullWidth={true}
       maxWidth={'sm'}
       title={t('title')}
