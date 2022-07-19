@@ -29,23 +29,16 @@ const lastBidPopulation = {
   include: [User],
 } as Includeable;
 
-function calculateNewExpiryDate({ auction }: any) {
+function calculateNewExpiryDate(auction: Auction) {
   if (auction.expiresAt < auction.maxExpiryDate) {
-    if (auction.expiresAt.getSeconds() > 36000) {
-      auction.expiresAt = new Date(
-        +new Date(auction.expiresAt) + 60 * random(1, 4) * 60_000,
-      );
-    } else if (
-      auction.expiresAt.getSeconds() < 36000 &&
-      auction.expiresAt.getSeconds() > 600
-    ) {
-      auction.expiresAt = new Date(
-        +new Date(auction.expiresAt) + 10 * random(1, 4) * 60_000,
-      );
+    const expiryDate = +new Date(auction.expiresAt);
+    const currentDate = Date.now();
+    if (expiryDate - currentDate >= 3600_000 * 10) {
+      return new Date(expiryDate + 60 * random(1, 4) * 60_000);
+    } else if (expiryDate - currentDate > 60_000 * 10) {
+      return new Date(expiryDate + 10 * random(1, 4) * 60_000);
     } else {
-      auction.expiresAt = new Date(
-        +new Date(auction.expiresAt) + random(5, 11) * 60_000,
-      );
+      return new Date(expiryDate + random(5, 11) * 60_000);
     }
   }
 }
@@ -186,7 +179,7 @@ export const resolvers = {
           { transaction },
         );
 
-        calculateNewExpiryDate({ auction: auction });
+        auction.expiresAt = calculateNewExpiryDate(auction);
 
         await auction.save({ transaction });
         await verifyPositiveBalance(user.id);
