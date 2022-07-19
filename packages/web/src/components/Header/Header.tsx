@@ -38,7 +38,11 @@ const Header = () => {
         !loading &&
           (currentUser?.id ? (
             <React.Fragment key='transfer'>
-              <Box sx={{ display: { sm: 'block', xs: 'none' } }}>
+              <Box
+                sx={{
+                  display: { sm: 'block', xs: 'none' },
+                }}
+              >
                 <Button
                   variant='secondary'
                   size='small'
@@ -47,7 +51,9 @@ const Header = () => {
                   onClick={() => showModal(TransferZigModal)}
                 />
               </Box>
-              <UserBalance />
+              <Box ml={{ sm: 0, xs: 1 }}>
+                <UserBalance />
+              </Box>
             </React.Fragment>
           ) : (
             <Button
