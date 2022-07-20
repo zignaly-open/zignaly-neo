@@ -1,38 +1,14 @@
-import { gql, useLazyQuery, useMutation } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 import { setToken } from '../util/token';
 import { useEthers } from '@usedapp/core';
 import { useAsync } from 'react-use';
 import { useContext, useState } from 'react';
 import { onboardingContext } from '../contexts/Onboarding';
-
-export const GET_CURRENT_USER = gql`
-  query me {
-    me {
-      id
-      username
-      discordName
-      onboardingCompletedAt
-    }
-  }
-`;
-
-export const GET_OR_CREATE_USER = gql`
-  mutation getOrCreateUser($publicAddress: String!) {
-    getOrCreateUser(publicAddress: $publicAddress) {
-      id
-      onboardingCompletedAt
-      messageToSign
-    }
-  }
-`;
-
-export const AUTHENTICATE_METAMASK = gql`
-  mutation getOrCreateUser($publicAddress: String!, $signature: String!) {
-    authenticate(publicAddress: $publicAddress, signature: $signature) {
-      accessToken
-    }
-  }
-`;
+import {
+  GET_CURRENT_USER,
+  GET_OR_CREATE_USER,
+  AUTHENTICATE_METAMASK,
+} from 'queries/users';
 
 function useRefetchCurrentUser(): () => Promise<unknown> {
   const [fetchUser] = useLazyQuery(GET_CURRENT_USER, {

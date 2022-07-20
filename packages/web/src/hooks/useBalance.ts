@@ -1,23 +1,6 @@
-import { gql, useQuery, useSubscription } from '@apollo/client';
+import { useQuery, useSubscription } from '@apollo/client';
+import { BALANCE_SUBSCRIPTION, GET_CURRENT_USER_BALANCE } from 'queries/users';
 import { getToken } from '../util/token';
-
-export const GET_CURRENT_USER_BALANCE = gql`
-  query balance {
-    balance {
-      id
-      balance
-    }
-  }
-`;
-
-export const BALANCE_SUBSCRIPTION = gql`
-  subscription onBalanceChanged($token: String!) {
-    balanceChanged(token: $token) {
-      id
-      balance
-    }
-  }
-`;
 
 export default function useBalance(): {
   loading: boolean;

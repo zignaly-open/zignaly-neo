@@ -7,17 +7,9 @@ import useCurrentUser from '../../hooks/useCurrentUser';
 import Loader from '../common/Loader';
 import Box from '@mui/material/Box';
 import { USERNAME_PATTERN, useValidateUsername } from './util';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { LoadingButton } from '@mui/lab';
-
-const CHANGE_PROFILE = gql`
-  mutation editProfile($username: String) {
-    updateProfile(username: $username) {
-      id
-      username
-    }
-  }
-`;
+import { CHANGE_PROFILE } from 'queries/users';
 
 type ProfileComponentType = React.FC<{
   onSuccess?: () => void;

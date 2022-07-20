@@ -1,12 +1,8 @@
-import { gql, useLazyQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
+import { CHECK_USERNAME } from 'queries/users';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
-const CHECK_USERNAME = gql`
-  query checkUsername($username: String!) {
-    checkUsername(username: $username)
-  }
-`;
 export const USERNAME_PATTERN = /^[\da-z-.]{2,20}$/i;
 
 export const useValidateUsername = (): ((
