@@ -14,17 +14,9 @@ import { useContext, useState } from 'react';
 import HowItWorks from './HowItWorks';
 import Deposit from './Deposit';
 import Profile from './Profile';
-import { gql, useMutation } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { onboardingContext } from '../../contexts/Onboarding';
-
-const COMPLETE_ONBOARDING = gql`
-  mutation completeOnboarding {
-    completeOnboarding {
-      id
-      onboardingCompletedAt
-    }
-  }
-`;
+import { COMPLETE_ONBOARDING } from 'queries/onboarding';
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {
