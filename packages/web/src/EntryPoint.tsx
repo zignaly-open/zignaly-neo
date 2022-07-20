@@ -62,23 +62,23 @@ const client = new ApolloClient({
 
 let config = {};
 
-if (process.env.REACT_APP_ENV === 'production') {
-  config = {
-    networks: [Polygon],
-    readOnlyChainId: Polygon.chainId,
-    readOnlyUrls: {
-      [Polygon.chainId]:
-        'https://mainnet.infura.io/v3/' +
-        process.env.REACT_APP_INFURA_PROJECT_ID,
-    },
-  };
-} else if (process.env.REACT_APP_ENV === 'development') {
+if (process.env.REACT_APP_USE_RINKEBY_CHAIN) {
   config = {
     networks: [Rinkeby],
     readOnlyChainId: Rinkeby.chainId,
     readOnlyUrls: {
       [Rinkeby.chainId]:
         'https://rinkeby.infura.io/v3/' +
+        process.env.REACT_APP_INFURA_PROJECT_ID,
+    },
+  };
+} else {
+  config = {
+    networks: [Polygon],
+    readOnlyChainId: Polygon.chainId,
+    readOnlyUrls: {
+      [Polygon.chainId]:
+        'https://mainnet.infura.io/v3/' +
         process.env.REACT_APP_INFURA_PROJECT_ID,
     },
   };
