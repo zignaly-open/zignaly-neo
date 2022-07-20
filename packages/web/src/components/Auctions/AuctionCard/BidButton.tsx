@@ -1,5 +1,4 @@
 import { useMutation } from '@apollo/client';
-import { BID_AUCTION } from '../queries';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { AuctionType } from '@zigraffle/shared/types';
 import useCurrentUser from '../../../hooks/useCurrentUser';
@@ -10,6 +9,7 @@ import { getWinningLosingStatus } from './util';
 import useAuthenticate from '../../../hooks/useAuthenticate';
 import { onboardingContext } from '../../../contexts/Onboarding';
 import { Button } from 'zignaly-ui';
+import { BID_AUCTION } from 'queries/auctions';
 
 enum BidButtonState {
   NotLoggedIn,

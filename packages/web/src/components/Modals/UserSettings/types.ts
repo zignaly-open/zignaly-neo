@@ -1,6 +1,6 @@
 import { DialogProps } from '@mui/material';
 
 export type UserSettingsModalProps = DialogProps & {
-  userName?: string;
+  username?: string;
   discordName?: string;
 };

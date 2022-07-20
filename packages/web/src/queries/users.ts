@@ -30,10 +30,11 @@ export const AUTHENTICATE_METAMASK = gql`
 `;
 
 export const CHANGE_PROFILE = gql`
-  mutation editProfile($username: String) {
-    updateProfile(username: $username) {
+  mutation editProfile($username: String, $discordName: String) {
+    updateProfile(username: $username, discordName: $discordName) {
       id
       username
+      discordName
     }
   }
 `;

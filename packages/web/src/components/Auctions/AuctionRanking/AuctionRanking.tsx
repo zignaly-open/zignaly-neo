@@ -45,7 +45,6 @@ const Ellipsis = styled(RankingRowContainer)`
 const RankingRow = ({ bid }: { bid: AuctionBidType }) => {
   const { user, value } = bid;
   const { user: currentUser } = useCurrentUser();
-
   return (
     <RankingRowContainer isMe={user.id === +currentUser?.id}>
       <Rank>

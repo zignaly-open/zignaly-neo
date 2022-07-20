@@ -51,14 +51,16 @@ export const resolvers = {
 
     updateProfile: async (
       _: any,
-      { username }: { username: string },
+      { username, discordName }: { username: string; discordName: string },
       { user }: ApolloContext,
     ) => {
       if (!user) return null;
       const userInstance = await User.findByPk(user.id);
       const usernameValid = await validateUsername(username, user.id);
-      if (!usernameValid) return null;
-      userInstance.username = username;
+      const discordNameValid = await validateUsername(discordName, user.id);
+      if (!usernameValid && !discordNameValid) return null;
+      if (usernameValid) userInstance.username = username;
+      if (discordNameValid) userInstance.discordName = discordName;
       await userInstance.save();
       return userInstance.toJSON();
     },
