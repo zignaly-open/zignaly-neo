@@ -125,19 +125,70 @@ export async function changeUsername(
   return updateProfile;
 }
 
+export async function changeDiscordName(
+  discordName: string,
+  token: string,
+): Promise<any> {
+  // sure this is not prod way of doing stuff, but this file is called test-utils
+  const {
+    body: {
+      data: { updateProfile },
+    },
+  } = await makeRequest(
+    `
+   mutation {
+    updateProfile(discordName: "${discordName.replace(/"/, "''")}") {
+      discordName
+    }
+  }`,
+    token,
+  );
+  return updateProfile;
+}
+
 export async function createAlice(): Promise<[User, string]> {
-  const user = await User.create({
-    username: 'Alice',
-    publicAddress: '0x6a3B248855bc8a687992CBAb7FD03E1947EAee07'.toLowerCase(),
-    onboardingCompletedAt: Date.now(),
-  });
-  return [user, await signJwtToken(user)];
+  try {
+    const user = await User.create({
+      username: 'Alice',
+      publicAddress: '0x6a3B248855bc8a687992CBAb7FD03E1947EAee07'.toLowerCase(),
+      onboardingCompletedAt: Date.now(),
+    });
+    return [user, await signJwtToken(user)];
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function createAlicesDiscord(): Promise<[User, string]> {
+  try {
+    const user = await User.create({
+      discordName: 'Alice',
+      publicAddress: '0x6a3B248855bc8a687992CBAb7FD03E1947EAee07'.toLowerCase(),
+      onboardingCompletedAt: Date.now(),
+    });
+    return [user, await signJwtToken(user)];
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 export async function createBob(): Promise<[User, string]> {
   try {
     const user = await User.create({
       username: 'Bob',
+      publicAddress: '0xE288AE3acccc630781354da2AA64379A0d4C56dB'.toLowerCase(),
+      onboardingCompletedAt: Date.now(),
+    });
+    return [user, await signJwtToken(user)];
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function createBobDiscord(): Promise<[User, string]> {
+  try {
+    const user = await User.create({
+      discordName: 'Bob',
       publicAddress: '0xE288AE3acccc630781354da2AA64379A0d4C56dB'.toLowerCase(),
       onboardingCompletedAt: Date.now(),
     });
