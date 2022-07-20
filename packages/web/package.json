@@ -19,7 +19,6 @@
     "@types/react": "18.0.10",
     "@types/react-dom": "18.0.5",
     "@usedapp/core": "^1.0.8",
-    "@walletconnect/web3-provider": "^1.7.8",
     "@zigraffle/shared": "../shared",
     "assert": "^2.0.0",
     "bignumber.js": "^9.0.2",
