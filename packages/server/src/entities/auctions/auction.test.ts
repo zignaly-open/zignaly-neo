@@ -3,6 +3,8 @@ import {
   clearMocks,
   createAlice,
   createAuction,
+  createAuctionWithMediumExpiry,
+  createAuctionWithShortExpiry,
   createBob,
   createRandomUser,
   expireAuction,
@@ -170,6 +172,60 @@ describe('Auctions', () => {
     await makeBid(auction, aliceToken);
     const { expiresAt: updatedExpiry } = await getFirstAuction(aliceToken);
     expect(+new Date(initialExpiry)).toBeLessThan(+new Date(updatedExpiry));
+  });
+
+  it('should increase expiry time by 1 to 4 hours when expiry is more then 1 hour', async () => {
+    const [alice, aliceToken] = await createAlice();
+    const auction = await createAuction();
+    await giveMoney(alice, 300);
+    const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
+    await wait(100);
+    const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
+    expect(initialExpiry2).toBe(initialExpiry2);
+    await makeBid(auction, aliceToken);
+    const { expiresAt: updatedExpiry } = await getFirstAuction(aliceToken);
+    expect(
+      +new Date(updatedExpiry) - +new Date(initialExpiry),
+    ).toBeGreaterThanOrEqual(60 * 1 * 60_000);
+    expect(+new Date(updatedExpiry) - +new Date(initialExpiry)).toBeLessThan(
+      60 * 4 * 60_000,
+    );
+  });
+
+  it('should increase expiry time by 10 to 40 minutes when expiry is less then 1 hour and more then 1 minute', async () => {
+    const [alice, aliceToken] = await createAlice();
+    const auction = await createAuctionWithMediumExpiry();
+    await giveMoney(alice, 300);
+    const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
+    await wait(100);
+    const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
+    expect(initialExpiry2).toBe(initialExpiry2);
+    await makeBid(auction, aliceToken);
+    const { expiresAt: updatedExpiry } = await getFirstAuction(aliceToken);
+    expect(
+      +new Date(updatedExpiry) - +new Date(initialExpiry),
+    ).toBeGreaterThanOrEqual(10 * 1 * 60_000);
+    expect(
+      +new Date(updatedExpiry) - +new Date(initialExpiry),
+    ).toBeLessThanOrEqual(10 * 4 * 60_000);
+  });
+
+  it('should increase expiry time by 5 to 11 minutes when expiry is less then 1 minute', async () => {
+    const [alice, aliceToken] = await createAlice();
+    const auction = await createAuctionWithShortExpiry();
+    await giveMoney(alice, 300);
+    const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
+    await wait(100);
+    const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
+    expect(initialExpiry2).toBe(initialExpiry2);
+    await makeBid(auction, aliceToken);
+    const { expiresAt: updatedExpiry } = await getFirstAuction(aliceToken);
+    expect(
+      +new Date(updatedExpiry) - +new Date(initialExpiry),
+    ).toBeGreaterThanOrEqual(60_000);
+    expect(+new Date(updatedExpiry) - +new Date(initialExpiry)).toBeLessThan(
+      10 * 1 * 60_000,
+    );
   });
 
   it('should not bid on expired auctions', async () => {
