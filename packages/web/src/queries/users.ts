@@ -53,6 +53,15 @@ export const GET_CURRENT_USER_BALANCE = gql`
   }
 `;
 
+export const COMPLETE_ONBOARDING = gql`
+  mutation completeOnboarding {
+    completeOnboarding {
+      id
+      onboardingCompletedAt
+    }
+  }
+`;
+
 export const BALANCE_SUBSCRIPTION = gql`
   subscription onBalanceChanged($token: String!) {
     balanceChanged(token: $token) {
