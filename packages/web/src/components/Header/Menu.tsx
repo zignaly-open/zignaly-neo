@@ -1,12 +1,15 @@
 import { MenuList, styled } from '@mui/material';
+import { UserType } from '@zigraffle/shared/types';
 import UserSettingsModal from 'components/Modals/UserSettings';
 import { useLogout } from 'hooks/useAuthenticate';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextButton } from 'zignaly-ui';
+import { Box } from '@mui/system';
+import TransferZigModal from 'components/Modals/TransferZig';
 
 const MenuItem = styled(TextButton)`
-  padding: 2px 15px;
+  padding: 6px 15px;
   color: ${({ theme }) => theme.neutral200};
   display: block;
 
@@ -19,7 +22,7 @@ const Menu = ({
   currentUser,
   showModal,
 }: {
-  currentUser: any;
+  currentUser: UserType;
   showModal: (...args: any[]) => void;
 }) => {
   const logout = useLogout();
@@ -27,11 +30,18 @@ const Menu = ({
 
   return (
     <MenuList>
+      <Box sx={{ display: { sm: 'none', xs: 'block' } }}>
+        <MenuItem
+          color='neutral200'
+          caption={t('transfer-coin', { coin: 'ZIG' })}
+          onClick={() => showModal(TransferZigModal)}
+        />
+      </Box>
       <MenuItem
         color='neutral200'
         caption={t('settings')}
         onClick={() => {
-          showModal(UserSettingsModal, { userName: currentUser.userName });
+          showModal(UserSettingsModal, { userName: currentUser.username });
         }}
       />
       <MenuItem color='neutral200' caption={t('disconnect')} onClick={logout} />

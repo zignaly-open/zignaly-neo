@@ -1,9 +1,3 @@
-export enum AuctionStatus {
-  Draft = 'Draft',
-  Active = 'Active',
-  Complete = 'Complete',
-}
-
 export type BasketItem = {
   ticker: string;
   amount: string;
@@ -18,6 +12,7 @@ export type AuctionBidType = {
     id: number;
     username: string;
   };
+  isClaimed?: boolean;
 };
 
 export type AuctionType = {
@@ -39,7 +34,6 @@ export type AuctionType = {
   maxExpiryDate: Date;
   maxClaimDate: Date;
   startingBid: string;
-  status: AuctionStatus;
 
   // new fields we add on the backend
   minimalBid?: string;

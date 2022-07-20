@@ -1,4 +1,3 @@
-import { Typography } from '@mui/material';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import useBalance from '../../hooks/useBalance';
@@ -6,6 +5,7 @@ import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
 import NumberFormat from 'react-number-format';
 import UserBalanceListener from './UserBalanceListener';
 import { styled } from '@mui/material/styles';
+import { Typography } from 'zignaly-ui';
 
 const Layout = styled('div')`
   color: ${({ theme }) => theme.neutral100};
@@ -22,6 +22,10 @@ const Layout = styled('div')`
   font-size: 11px;
 `;
 
+const Balance = styled(Typography)`
+  white-space: nowrap;
+`;
+
 const UserBalance: React.FC = () => {
   const { balance } = useBalance();
   useTranslation('balance');
@@ -32,7 +36,7 @@ const UserBalance: React.FC = () => {
         value={balance}
         displayType={'text'}
         thousandSeparator={true}
-        renderText={(value) => <Typography>{value} ZIG</Typography>}
+        renderText={(value) => <Balance>{value} ZIG</Balance>}
       />
     ),
     [balance],

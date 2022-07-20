@@ -6,7 +6,11 @@ const lastProcessedBlockDefaultValue = 10988384;
 export async function setLastProcessedBlock(
   blockNumber: number,
 ): Promise<void> {
-  await setConfigValue(CONFIG_LAST_PROCESSED_BLOCK, `${blockNumber}`);
+  try {
+    await setConfigValue(CONFIG_LAST_PROCESSED_BLOCK, `${blockNumber}`);
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 export async function getLastProcessedBlock(): Promise<number> {

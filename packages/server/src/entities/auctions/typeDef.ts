@@ -13,6 +13,7 @@ export const typeDef = gql`
     value: String
     date: Date
     user: UserInfo
+    isClaimed: Boolean
   }
 
   type BasketItem {
@@ -49,10 +50,11 @@ export const typeDef = gql`
   }
 
   extend type Subscription {
-    bidAdded: Auction
+    auctionUpdated: Auction
   }
 
   extend type Mutation {
     bid(id: ID!): Auction
+    claim(id: ID!): Auction
   }
 `;

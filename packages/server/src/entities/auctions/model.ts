@@ -11,7 +11,6 @@ import {
   HasMany,
   BelongsTo,
 } from 'sequelize-typescript';
-import { AuctionStatus } from '@zigraffle/shared/types';
 import { User } from '../users/model';
 import { Transaction } from '../transactions/model';
 
@@ -31,9 +30,6 @@ export class Auction extends Model {
 
   @Column
   public monetaryValue!: string;
-
-  @Column(DataType.STRING)
-  public status!: AuctionStatus;
 
   @Column(DataType.STRING)
   public website: string;
@@ -125,9 +121,16 @@ export class AuctionBid extends Model {
 
   @ForeignKey(() => Transaction)
   @Column
+  public claimTransactionId: number;
+
+  @BelongsTo(() => Transaction)
+  public claimTransaction: Transaction;
+
+  @ForeignKey(() => Transaction)
+  @Column
   public transactionId: number;
 
-  @BelongsTo(() => Transaction, 'auctionId')
+  @BelongsTo(() => Transaction)
   public transaction: Transaction;
 
   @Default(0)
