@@ -3,6 +3,7 @@ import sequelizeFixtures from 'sequelize-fixtures';
 import '../../db';
 import { Auction, AuctionBid, AuctionBasketItem } from '../auctions/model';
 import { Transaction } from '../transactions/model';
+import { Payout } from '../payouts/model';
 
 const models = {
   Auction,
@@ -10,6 +11,8 @@ const models = {
   AuctionBasketItem,
 };
 
+Payout.destroy({ where: {} });
+AuctionBid.destroy({ where: {} });
 Transaction.destroy({
   where: {
     auctionId: {
@@ -17,8 +20,6 @@ Transaction.destroy({
     },
   },
 });
-
-AuctionBid.destroy({ where: {} });
 AuctionBasketItem.destroy({ where: {} });
 Auction.destroy({ where: {} });
 
