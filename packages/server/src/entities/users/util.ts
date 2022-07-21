@@ -73,3 +73,12 @@ export async function validateUsername(
   const userWithThisUsername = await User.findOne({ where: { username } });
   return !userWithThisUsername || userWithThisUsername.id === userId;
 }
+// Regex: At least 3 letters, max 32. Followed by a hashtag of numbers in the real of 0-9.
+// Hashtag number needs to be 4 numbers long.
+export async function validateDiscordName(
+  discordName: string,
+): Promise<boolean> {
+  if (!discordName) return true;
+  if (!/^.{3,32}#[0-9]{4}$/i.test(discordName)) return false;
+  return true;
+}

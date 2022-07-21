@@ -15,6 +15,7 @@ export const typeDef = gql`
     publicAddress: String!
     messageToSign: String
     username: String
+    discordName: String
     onboardingCompletedAt: Date
   }
 

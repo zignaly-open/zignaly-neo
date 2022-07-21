@@ -66,8 +66,8 @@ describe('User', () => {
   it('should let users change discordname', async () => {
     const [alice, aliceToken] = await createAlicesDiscord();
     await createBobDiscord();
-    const valid = await changeDiscordName('Alice1', aliceToken);
-    expect(valid.discordName).toBe('Alice1');
+    const valid = await changeDiscordName('Alice#2484', aliceToken);
+    expect(valid.discordName).toBe('Alice#2484');
     const updatedAlice = await User.findByPk(alice.id);
     expect(updatedAlice.discordName).toBe(valid.discordName);
     const notUpdatedAlice = await User.findByPk(alice.id);

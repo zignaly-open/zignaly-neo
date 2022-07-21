@@ -190,7 +190,7 @@ export async function createAlice(): Promise<[User, string]> {
 export async function createAlicesDiscord(): Promise<[User, string]> {
   try {
     const user = await User.create({
-      discordName: 'Alice',
+      discordName: 'Alicese#3333',
       publicAddress: '0x6a3B248855bc8a687992CBAb7FD03E1947EAee07'.toLowerCase(),
       onboardingCompletedAt: Date.now(),
     });
@@ -216,7 +216,7 @@ export async function createBob(): Promise<[User, string]> {
 export async function createBobDiscord(): Promise<[User, string]> {
   try {
     const user = await User.create({
-      discordName: 'Bob',
+      discordName: 'Bob#3333',
       publicAddress: '0xE288AE3acccc630781354da2AA64379A0d4C56dB'.toLowerCase(),
       onboardingCompletedAt: Date.now(),
     });
