@@ -32,41 +32,40 @@ import { ButtonGroup } from "./components/styled";
 import { MarginContainer, PageContainer } from "./components/styled";
 
 // Modals
-import EditInvestmentWithModal from "./components/modals/EditInvestmentWithModal";
-import MessageModal from "./components/modals/MessageModal";
-import AuthVerifyModal from "./components/modals/AuthVerifyModal";
-import MinBalanceModal from "./components/modals/MinBalanceModal";
-import DepositModal from "./components/modals/MyAccount/DepositModal";
-import WithdrawModal from "./components/modals/MyAccount/WithdrawModal";
-import ModalContainer from "./components/modals/ModalContainer";
-import ConnectWalletModal from "./components/modals/ZigRaffle/ConnectWallet";
+import EditInvestmentWithModal from "components/modals/EditInvestmentWithModal";
+import MessageModal from "components/modals/MessageModal";
+import AuthVerifyModal from "components/modals/AuthVerifyModal";
+import MinBalanceModal from "components/modals/MinBalanceModal";
+import DepositModal from "components/modals/MyAccount/DepositModal";
+import WithdrawModal from "components/modals/MyAccount/WithdrawModal";
+import ConnectWalletModal from "components/modals/ZigRaffle/ConnectWallet";
 
 // Forms
 import LoginForm from "./components/forms/LoginForm";
 
 // Icons
-import CloseIcon from "./assets/icons/close-icon.svg";
-import CopyIcon from "./assets/icons/copy-icon.svg";
-import OpenArrowIcon from "./assets/icons/open-arrow-icon.svg";
-import EyeOpenIcon from "./assets/icons/eye-open-icon.svg";
-import EyeClosedIcon from "./assets/icons/eye-closed-icon.svg";
-import OptionDotsIcon from "./assets/icons/option-dots-icon.svg";
-import ArrowBottomIcon from "./assets/icons/arrow-bottom-icon.svg";
-import ArrowUpIcon from "./assets/icons/arrow-up-icon.svg";
-import ArrowLeftIcon from "./assets/icons/arrow-left-icon.svg";
-import ArrowRightIcon from "./assets/icons/arrow-right-icon.svg";
-import UserIcon from "./assets/icons/user-icon.svg";
-import CheckIcon from "./assets/icons/check-icon.svg";
-import LogoDiscordIcon from "./assets/icons/discord-logo-icon.svg";
-import LogoLinkedInIcon from "./assets/icons/linkedin-logo-icon.svg";
-import LogoTwitterIcon from "./assets/icons/twitter-logo-icon.svg";
-import LogoMediumIcon from "./assets/icons/medium-logo-icon.svg";
-import LogoTelegramIcon from "./assets/icons/telegram-logo-icon.svg";
-import WalletIcon from "./assets/icons/wallet-icon.svg";
-import OptionHorizontalDotsIcon from "./assets/icons/horizontal-three-dots-icon.svg";
-import EditPenIcon from "./assets/icons/edit-pen-icon.svg";
-import SwapIcon from "./assets/icons/swap-icon.svg";
-import SwapVertIcon from "./assets/icons/swap-vert-icon.svg";
+import CloseIcon from "assets/icons/close-icon.svg";
+import CopyIcon from "assets/icons/copy-icon.svg";
+import OpenArrowIcon from "assets/icons/open-arrow-icon.svg";
+import EyeOpenIcon from "assets/icons/eye-open-icon.svg";
+import EyeClosedIcon from "assets/icons/eye-closed-icon.svg";
+import OptionDotsIcon from "assets/icons/option-dots-icon.svg";
+import ArrowBottomIcon from "assets/icons/arrow-bottom-icon.svg";
+import ArrowUpIcon from "assets/icons/arrow-up-icon.svg";
+import ArrowLeftIcon from "assets/icons/arrow-left-icon.svg";
+import ArrowRightIcon from "assets/icons/arrow-right-icon.svg";
+import UserIcon from "assets/icons/user-icon.svg";
+import CheckIcon from "assets/icons/check-icon.svg";
+import LogoDiscordIcon from "assets/icons/discord-logo-icon.svg";
+import LogoLinkedInIcon from "assets/icons/linkedin-logo-icon.svg";
+import LogoTwitterIcon from "assets/icons/twitter-logo-icon.svg";
+import LogoMediumIcon from "assets/icons/medium-logo-icon.svg";
+import LogoTelegramIcon from "assets/icons/telegram-logo-icon.svg";
+import WalletIcon from "assets/icons/wallet-icon.svg";
+import OptionHorizontalDotsIcon from "assets/icons/horizontal-three-dots-icon.svg";
+import EditPenIcon from "assets/icons/edit-pen-icon.svg";
+import SwapIcon from "assets/icons/swap-icon.svg";
+import SwapVertIcon from "assets/icons/swap-vert-icon.svg";
 import ErrorAlertIcon from "assets/icons/error-alert-icon.svg";
 import ZignalyIcon from "assets/icons/coins/zignaly-coin.svg";
 
@@ -115,7 +114,6 @@ export {
   ProgressSlider,
   InvestSlider,
   Toaster,
-  ModalContainer,
   // Inputs
   Button,
   CheckBox,
