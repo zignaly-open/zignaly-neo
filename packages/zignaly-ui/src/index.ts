@@ -68,6 +68,7 @@ import EditPenIcon from "./assets/icons/edit-pen-icon.svg";
 import SwapIcon from "./assets/icons/swap-icon.svg";
 import SwapVertIcon from "./assets/icons/swap-vert-icon.svg";
 import ErrorAlertIcon from "assets/icons/error-alert-icon.svg";
+import ZignalyIcon from "assets/icons/coins/zignaly-coin.svg";
 
 // Navigation
 import Header from "./components/navigation/Header";
@@ -170,6 +171,7 @@ export {
   SwapIcon,
   SwapVertIcon,
   ErrorAlertIcon,
+  ZignalyIcon,
   /**
    * =-=-=-=-=-=-=-=
    *     Utils

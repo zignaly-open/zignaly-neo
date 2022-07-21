@@ -1,5 +1,5 @@
 import { BigNumberish } from "ethers";
-import { ChangeEventHandler } from "react";
+import React, { ChangeEventHandler } from "react";
 
 export type TokenItem = {
   id: string;
@@ -22,4 +22,5 @@ export interface InputAmountProps {
   showUnit?: boolean;
   readOnly?: boolean;
   showMaxButton?: boolean;
+  customCoinIcon?: React.ReactElement;
 }

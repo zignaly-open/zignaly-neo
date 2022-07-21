@@ -1,6 +1,7 @@
 // Dependencies
 import * as React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
+import ZigCoin from "assets/icons/coins/zignaly-coin.svg";
 
 // Component
 import InputAmount from "./";
@@ -157,4 +158,17 @@ ReadOnly.args = {
       balance: "1000000000000000000",
     },
   ],
+};
+
+export const CustomIcon = Template.bind({});
+CustomIcon.args = {
+  label: "Amount to Withdraw",
+  onChange: () => {},
+  tokens: [
+    {
+      id: "Zig",
+      balance: "1000000000000000000",
+    },
+  ],
+  customCoinIcon: <ZigCoin width={32} height={32} />,
 };

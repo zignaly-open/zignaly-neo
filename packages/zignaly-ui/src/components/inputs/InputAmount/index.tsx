@@ -47,6 +47,7 @@ function InputAmount(
     placeholder,
     showUnit = false,
     showMaxButton = true,
+    customCoinIcon,
   }: InputAmountProps,
   inputRef: React.Ref<any>,
 ) {
@@ -144,7 +145,17 @@ function InputAmount(
         <InputContainer>
           <Side>
             {selectedToken?.id && tokens.length < 2 && (
-              <CoinIcon name={selectedToken.id} size={CoinSizes.SMALL} coin={selectedToken.id} />
+              <>
+                {customCoinIcon ? (
+                  customCoinIcon
+                ) : (
+                  <CoinIcon
+                    name={selectedToken.id}
+                    size={CoinSizes.SMALL}
+                    coin={selectedToken.id}
+                  />
+                )}
+              </>
             )}
             <InputField>
               <InputValue
