@@ -1,0 +1,44 @@
+name: Prod Release
+on:
+  push:
+    branches:
+      - "*"
+jobs:
+  build:
+    name: Webapp Prod Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      # - name: Configure deployment folder
+      #   run: |
+      #     sed -i -e 's/{directory}/${{ secrets.PROD_RELEASE_DIR }}/g' appspec.yml
+      #     sed -i -e 's/{directory}/${{ secrets.PROD_RELEASE_DIR }}/g' scripts/configure_app.sh
+      #     sed -i -e 's/{directory}/${{ secrets.PROD_RELEASE_DIR }}/g' scripts/change_permission.sh
+      #     sed -i -e 's/{directory}/${{ secrets.PROD_RELEASE_DIR }}/g' scripts/move_symlink.sh
+      #     sed -i -e 's/{directory}/${{ secrets.PROD_RELEASE_DIR }}/g' scripts/prepare_release.sh
+      #     sed -i -e 's/{directory}/${{ secrets.PROD_RELEASE_DIR }}/g' scripts/delete_old_release.sh
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Build
+        run: |
+          npm install -g yarn
+          yarn
+          yarn build
+      - name: Copy codedeploy config
+        run: cp appspec.yml public/appspec.yml
+      - name: AWS CodeDeploy
+        uses: sourcetoad/aws-codedeploy-action@v1
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          aws_region: ap-northeast-1
+          codedeploy_name: zignaly
+          codedeploy_group: zignaly-raffles-prod-deployment
+          codedeploy_register_only: false
+          s3_bucket: ${{ secrets.AWS_S3_BUCKET }}
+          s3_folder: dev
+          max_polling_iterations: 60
+          directory: public
