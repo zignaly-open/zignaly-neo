@@ -3,9 +3,11 @@ import {
   clearMocks,
   createAlice,
   createAuction,
+  createBasketItem,
   createBob,
   createRandomUser,
   expireAuction,
+  getAuctions,
   getBalance,
   getFirstAuction,
   giveMoney,
@@ -36,6 +38,26 @@ describe('Auctions', () => {
     const { status } = await makeBid(auction, '2121212');
     // for the 401 response, it's not handled by our endpoints
     expect(status).toBe(401);
+  });
+
+  it('should not trigger issues with duplicated auctions because of joins', async () => {
+    const [, aliceToken] = await createAlice();
+    const { id: auctionId } = await createAuction();
+
+    await createBasketItem({
+      ticker: 'SHT',
+      amount: '100',
+      auctionId,
+    });
+    await createBasketItem({
+      ticker: 'BTC',
+      amount: '100',
+      auctionId,
+    });
+
+    const auctions = await getAuctions(aliceToken);
+    expect(auctions.length).toBe(1);
+    expect(auctions[0].basketItems.length).toBe(2);
   });
 
   it('should not let bid by non-existin users', async () => {
@@ -185,9 +207,9 @@ describe('Auctions', () => {
     expect(
       +new Date(updatedExpiry) - +new Date(initialExpiry),
     ).toBeGreaterThanOrEqual(60 * 60_000);
-    expect(+new Date(updatedExpiry) - +new Date(initialExpiry)).toBeLessThan(
-      60 * 4 * 60_000,
-    );
+    expect(
+      +new Date(updatedExpiry) - +new Date(initialExpiry),
+    ).toBeLessThanOrEqual(60 * 4 * 60_000);
   });
 
   it('should increase expiry time by 1 to 4 hours when expiry is more then 1 hour', async () => {
@@ -203,9 +225,9 @@ describe('Auctions', () => {
     expect(
       +new Date(updatedExpiry) - +new Date(initialExpiry),
     ).toBeGreaterThanOrEqual(60 * 60_000);
-    expect(+new Date(updatedExpiry) - +new Date(initialExpiry)).toBeLessThan(
-      60 * 4 * 60_000,
-    );
+    expect(
+      +new Date(updatedExpiry) - +new Date(initialExpiry),
+    ).toBeLessThanOrEqual(60 * 4 * 60_000);
   });
 
   it('should increase expiry time by 10 to 40 minutes when expiry is less then 1 hour and more then 1 minute', async () => {

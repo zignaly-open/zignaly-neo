@@ -30,6 +30,12 @@ export async function createAuction(
   });
 }
 
+export async function createBasketItem(
+  item: Partial<AuctionBasketItem>,
+): Promise<AuctionBasketItem> {
+  return await AuctionBasketItem.create(item);
+}
+
 export async function getPayouts(token: string): Promise<Payout[]> {
   const auctions = await makeRequest(PAYOUTS_QUERY, token);
   return auctions.body.data.payouts;

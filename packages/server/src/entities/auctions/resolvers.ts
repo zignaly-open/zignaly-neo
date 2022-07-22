@@ -104,7 +104,6 @@ async function getAuctions(
   const auctions = (await Auction.findAll({
     where: { ...(id ? { id } : {}) },
     include: [AuctionBasketItem],
-    raw: true,
   })) as unknown as AuctionType[];
 
   auctions.forEach((x) => {
