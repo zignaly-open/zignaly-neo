@@ -1,6 +1,6 @@
-import { Box, CardActions } from '@mui/material';
+import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { Typography, PriceLabel, TextButton } from 'zignaly-ui';
+import { Typography, PriceLabel, TextButton, Button } from 'zignaly-ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { AuctionType } from '@zigraffle/shared/types';
@@ -12,6 +12,7 @@ import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
 import AuctionRanking from '../AuctionRanking/AuctionRanking';
 import { useModal } from 'mui-modal-provider';
 import ProjectDetailsModal from 'components/Modals/ProjectDetails';
+import ClaimModal from 'components/Modals/Claim';
 
 const Item = styled('div')(({ theme }) => ({
   background: 'rgba(37, 35, 57, 0.4)',
@@ -76,12 +77,18 @@ const StyledPriceLabel = styled(PriceLabel)`
   }
 `;
 
+const CardActions = styled('div')`
+  display: flex;
+  align-items: flex-end;
+  flex: 1;
+  padding: 8px 0 30px;
+`;
+
 const AuctionCard: React.FC<{
   auction: AuctionType;
 }> = ({ auction }) => {
   const { t } = useTranslation('auction');
-  const { isActive /* isWinning, isLosing */ } =
-    getWinningLosingStatus(auction);
+  const { isActive, hasWon } = getWinningLosingStatus(auction);
   const { showModal } = useModal();
   return (
     <Item>
@@ -122,12 +129,25 @@ const AuctionCard: React.FC<{
             </Box>
             <FinalCountdown date={auction.expiresAt} started={true} />
           </StyledAmountContainer>
-          <CardActions style={{ marginBottom: '30px' }}>
+          <CardActions>
             <BidButton auction={auction} isActive={isActive} />
           </CardActions>
         </CardColumn>
         <CardColumn>
           <AuctionRanking auction={auction} />
+          <CardActions>
+            {hasWon && (
+              <Button
+                size='large'
+                onClick={() =>
+                  showModal(ClaimModal, {
+                    auction,
+                  })
+                }
+                caption={t('claim-now')}
+              />
+            )}
+          </CardActions>
         </CardColumn>
       </CardBody>
     </Item>
