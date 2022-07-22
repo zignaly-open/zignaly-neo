@@ -9,7 +9,7 @@ import { AuctionType } from '@zigraffle/shared/types';
 import AuctionCard from '../AuctionCard';
 import Loader from '../../common/Loader';
 import { getWinningLosingStatus } from '../AuctionCard/util';
-import { Select } from 'zignaly-ui';
+import { Select, Typography } from 'zignaly-ui';
 import { BIDS_SUBSCRIPTION, GET_AUCTIONS } from 'queries/auctions';
 
 const MasonryWrapper = styled(Box)`
@@ -133,6 +133,11 @@ const AuctionGrid: React.FC = () => {
           />
         </Grid>
       </Grid>
+      <Box padding={'40px 0 10px 40px'}>
+        <Typography variant='h3' weight='medium'>
+          {filtered.length} ZIGRaffle Projects
+        </Typography>
+      </Box>
       <StyledMasonry columns={{ xs: 1, sm: 1, md: 2 }} spacing={4}>
         {filtered.map((x: AuctionType) => (
           <AuctionCard key={x.id} auction={x} />
