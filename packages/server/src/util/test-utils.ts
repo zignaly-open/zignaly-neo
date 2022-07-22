@@ -15,7 +15,9 @@ import { Payout } from '../entities/payouts/model';
 
 const request = supertest(app);
 
-export async function createAuction(): Promise<Auction> {
+export async function createAuction(
+  overrides?: Partial<Auction>,
+): Promise<Auction> {
   return await Auction.create({
     title: 'Test auction',
     description: 'Test auction',
@@ -24,34 +26,7 @@ export async function createAuction(): Promise<Auction> {
     bidStep: '2',
     bidFee: '1',
     basketItems: [],
-  });
-}
-
-export async function createAuctionWithMediumExpiry(): Promise<Auction> {
-  return await Auction.create({
-    title: 'Test auction',
-    description: 'Test auction',
-    monetaryValue: '$100500',
-    startingBid: '100',
-    bidStep: '2',
-    bidFee: '1',
-    // 2 hour increase in miliseconds
-    expiresAt: +new Date(Date.now() + 7200000),
-    basketItems: [],
-  });
-}
-
-export async function createAuctionWithShortExpiry(): Promise<Auction> {
-  return await Auction.create({
-    title: 'Test auction',
-    description: 'Test auction',
-    monetaryValue: '$100500',
-    startingBid: '100',
-    bidStep: '2',
-    bidFee: '1',
-    // Less than 1 hour increase in miliseconds
-    expiresAt: +new Date(Date.now() + 50000),
-    basketItems: [],
+    ...overrides,
   });
 }
 
