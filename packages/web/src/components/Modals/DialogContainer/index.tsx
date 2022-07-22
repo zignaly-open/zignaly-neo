@@ -10,7 +10,7 @@ import { Typography } from 'zignaly-ui';
 import { CloseButton, StyledCloseIcon } from './styles';
 import { DialogContainerProps } from './types';
 
-function DialogContainer ({ title, children, ...props }: DialogContainerProps) {
+function DialogContainer({ title, children, ...props }: DialogContainerProps) {
   const matchesLarge = useMediaQuery(theme.breakpoints.up('lg'));
 
   return (

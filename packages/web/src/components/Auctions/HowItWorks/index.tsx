@@ -1,7 +1,7 @@
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { Typography } from 'zignaly-ui';
-import { BulletPointItem, ClickAbleBox, HowItWorksList } from './styles';
+import { BulletPointItem, ClickAbleText, HowItWorksList } from './styles';
 
 const HowItWorks = () => {
   const [closed, setClosed] = useState(true);
@@ -12,7 +12,6 @@ const HowItWorks = () => {
       marginBottom='20px'
       display='flex'
       flexDirection='column'
-      alignItems='center'
     >
       <Typography variant='body1' weight='regular' color='neutral100'>
         With the ‘ZigRaffle’ we are changing how the raffles on zignaly.com
@@ -21,14 +20,12 @@ const HowItWorks = () => {
         happening on the “Raffles Marketplace”. Be it the whitelist spots to
         your favorite NFT collection or that basket of tokens going at a deep
         discount, you can put your ZIG to work and place your bids at ZigRaffle.
+        <ClickAbleText
+          onClick={() => setClosed(!closed)}
+          caption={closed ? 'Read More' : 'Read Less'}
+          color='links'
+        />
       </Typography>
-      {closed && (
-        <ClickAbleBox onClick={() => setClosed(!closed)}>
-          <Typography variant='body1' color='links'>
-            Read More
-          </Typography>
-        </ClickAbleBox>
-      )}
       {!closed && (
         <>
           <br />
@@ -74,11 +71,6 @@ const HowItWorks = () => {
               </BulletPointItem>
             </Typography>
           </HowItWorksList>
-          <ClickAbleBox paddingTop='20px' onClick={() => setClosed(!closed)}>
-            <Typography variant='body1' color='links'>
-              Read Less
-            </Typography>
-          </ClickAbleBox>
         </>
       )}
     </Box>

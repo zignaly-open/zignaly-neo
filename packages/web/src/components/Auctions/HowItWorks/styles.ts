@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Box } from '@mui/system';
+import { TextButton } from 'zignaly-ui';
 
 export const BulletPointItem = styled.li`
   margin: 3px;
@@ -7,6 +7,4 @@ export const BulletPointItem = styled.li`
 
 export const HowItWorksList = styled.ul``;
 
-export const ClickAbleBox = styled(Box)`
-  cursor: pointer;
-`;
+export const ClickAbleText = styled(TextButton)``;
