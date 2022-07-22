@@ -53,7 +53,7 @@ async function getSortedAuctionBids(
       `
         SELECT filtered.* FROM (
             SELECT *, ROW_NUMBER () OVER (PARTITION BY t."auctionId" ORDER BY T."value" DESC) as "position" FROM ( 
-              SELECT MAX(b.value) as value, MAX(b.id) as id, b."auctionId", b."userId", MAX(b."claimTransactionId"), u."username" as "username"
+              SELECT MAX(b.value) as value, MAX(b.id) as id, b."auctionId", b."userId", MAX(b."claimTransactionId") as claimTransactionId, u."username" as "username"
               FROM "${AuctionBid.tableName}" b
               INNER JOIN "${User.tableName}" u ON b."userId" = u."id"
               WHERE "auctionId" ${id ? '=' : '>'} $auctionId
