@@ -1,4 +1,6 @@
 import styled from '@emotion/styled';
+import { IconButton } from '@mui/material';
+import { CloseIcon } from 'zignaly-ui';
 
 export const Header = styled.div`
   display: flex;
@@ -35,4 +37,15 @@ export const Inline = styled.div`
   justify-content: center;
   align-items: center;
   gap: 12px;
+`;
+
+export const StyledCloseIcon = styled(CloseIcon as any)`
+  width: 17px;
+  height: 17px;
+  color: #65647E;
+`;
+
+export const CloseButton = styled(IconButton)`
+  position: absolute;
+  right: 16px;
 `;

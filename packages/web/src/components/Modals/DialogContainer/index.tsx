@@ -7,9 +7,10 @@ import {
 import React from 'react';
 import theme from 'theme';
 import { Typography } from 'zignaly-ui';
+import { CloseButton, StyledCloseIcon } from './styles';
 import { DialogContainerProps } from './types';
 
-function DialogContainer({ title, children, ...props }: DialogContainerProps) {
+function DialogContainer ({ title, children, ...props }: DialogContainerProps) {
   const matchesLarge = useMediaQuery(theme.breakpoints.up('lg'));
 
   return (
@@ -24,10 +25,17 @@ function DialogContainer({ title, children, ...props }: DialogContainerProps) {
         },
       }}
     >
-      <DialogTitle textAlign='center'>
+      <DialogTitle
+        textAlign='center'
+        marginBottom='24px'
+        style={{ position: 'relative' }}
+      >
         <Typography variant='h1' color='neutral100' weight='medium'>
           {title}
         </Typography>
+        <CloseButton onClick={(e) => props.onClose(e, 'backdropClick')}>
+          <StyledCloseIcon />
+        </CloseButton>
       </DialogTitle>
       <DialogContent>{children}</DialogContent>
     </Dialog>
