@@ -79,6 +79,7 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
       </RankingHead>
       {auction.bids
         .slice(0, isTruncated ? MAX_WINNERS_DISPLAYED - 3 : winnersDisplayed)
+        .sort((a, b) => a.position - b.position)
         .map((bid: AuctionBidType) => (
           <RankingRow bid={bid} key={bid.id} />
         ))}
