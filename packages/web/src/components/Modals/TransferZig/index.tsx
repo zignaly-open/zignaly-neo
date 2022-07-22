@@ -5,7 +5,13 @@ import useContract from 'hooks/useContract';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import theme from 'theme';
-import { Button, InputAmount, Loader, Typography } from 'zignaly-ui';
+import {
+  Button,
+  InputAmount,
+  Loader,
+  Typography,
+  ZignalyIcon,
+} from 'zignaly-ui';
 import { Gap } from '../ConnectWallet/styles';
 import DialogContainer from '../DialogContainer';
 import { Container, InputContainer } from './styles';
@@ -68,6 +74,8 @@ const TransferZigModal = ({
               label={''}
               value={''}
               showMaxButton={true}
+              // @ts-ignore: fixme
+              customCoinIcon={<ZignalyIcon width={32} height={32} />}
               onChange={(e: any) => {
                 setTransferAmount(e.target.value);
               }}
