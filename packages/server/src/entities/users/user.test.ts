@@ -1,9 +1,12 @@
 import '../..';
 import {
+  changeDiscordName,
   changeUsername,
   checkUsername,
   createAlice,
+  createAlicesDiscord,
   createBob,
+  createBobDiscord,
   waitUntilTablesAreCreated,
   wipeOut,
 } from '../../util/test-utils';
@@ -38,10 +41,37 @@ describe('User', () => {
     expect(valid.username).toBe('Alice1');
     const updatedAlice = await User.findByPk(alice.id);
     expect(updatedAlice.username).toBe(valid.username);
-    const invalid = await changeUsername('Bob', aliceToken);
     const notUpdatedAlice = await User.findByPk(alice.id);
     expect(notUpdatedAlice.username).toBe(valid.username);
-    expect(invalid).toBeNull();
+  });
+
+  it('should not change name if userName is invalid', async () => {
+    const [alice, aliceToken] = await createAlice();
+    const valid = await changeUsername('Alice1g+104^<', aliceToken);
+    expect(valid.username).toBe(alice.username);
+  });
+  it('should not change name if discordName is invalid', async () => {
+    const [alice, aliceToken] = await createAlicesDiscord();
+    const valid = await changeDiscordName('Alice1g+104^<', aliceToken);
+    expect(valid.discordName).toBe(alice.discordName);
+  });
+
+  it('should not let two users have the same name', async () => {
+    const [alice, aliceToken] = await createAlice();
+    await createBob();
+    const invalid = await changeUsername('Bob', aliceToken);
+    expect(invalid.username).toBe(alice.username);
+  });
+
+  it('should let users change discordname', async () => {
+    const [alice, aliceToken] = await createAlicesDiscord();
+    await createBobDiscord();
+    const valid = await changeDiscordName('Alice#2484', aliceToken);
+    expect(valid.discordName).toBe('Alice#2484');
+    const updatedAlice = await User.findByPk(alice.id);
+    expect(updatedAlice.discordName).toBe(valid.discordName);
+    const notUpdatedAlice = await User.findByPk(alice.id);
+    expect(notUpdatedAlice.discordName).toBe(valid.discordName);
   });
 
   it('should not let change other users fields', async () => {

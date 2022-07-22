@@ -6,6 +6,7 @@ export const typeDef = gql`
   type UserInfo {
     id: Int
     username: String
+    discordName: String
   }
   type Bid {
     id: Int

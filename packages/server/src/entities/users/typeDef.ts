@@ -15,6 +15,7 @@ export const typeDef = gql`
     publicAddress: String!
     messageToSign: String
     username: String
+    discordName: String
     onboardingCompletedAt: Date
   }
 
@@ -29,7 +30,7 @@ export const typeDef = gql`
 
   extend type Mutation {
     completeOnboarding: User
-    updateProfile(username: String): User
+    updateProfile(username: String, discordName: String): User
     getOrCreateUser(publicAddress: String!): AuthUser
     authenticate(publicAddress: String!, signature: String!): AccessToken!
   }
