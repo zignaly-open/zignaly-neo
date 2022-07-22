@@ -31,12 +31,13 @@ const AuctionHeader = styled('div')`
   height: 80px;
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(193, 193, 200, 0.4);
-  border-radius: 16px 16px 0px 0px;
+  border-radius: 16px 16px 0 0;
 `;
 
 const AuctionImage = styled('img')`
   width: 100%;
   height: 209px;
+  object-fit: contain;
 `;
 
 const StyledAmountContainer = styled(AmountContainer)`
