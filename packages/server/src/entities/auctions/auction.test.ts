@@ -186,7 +186,7 @@ describe('Auctions', () => {
     const { expiresAt: updatedExpiry } = await getFirstAuction(aliceToken);
     expect(
       +new Date(updatedExpiry) - +new Date(initialExpiry),
-    ).toBeGreaterThanOrEqual(60 * 1 * 60_000);
+    ).toBeGreaterThanOrEqual(60 * 60_000);
     expect(+new Date(updatedExpiry) - +new Date(initialExpiry)).toBeLessThan(
       60 * 4 * 60_000,
     );
@@ -204,7 +204,7 @@ describe('Auctions', () => {
     const { expiresAt: updatedExpiry } = await getFirstAuction(aliceToken);
     expect(
       +new Date(updatedExpiry) - +new Date(initialExpiry),
-    ).toBeGreaterThanOrEqual(10 * 1 * 60_000);
+    ).toBeGreaterThanOrEqual(10 * 60_000);
     expect(
       +new Date(updatedExpiry) - +new Date(initialExpiry),
     ).toBeLessThanOrEqual(10 * 4 * 60_000);
@@ -223,9 +223,9 @@ describe('Auctions', () => {
     expect(
       +new Date(updatedExpiry) - +new Date(initialExpiry),
     ).toBeGreaterThanOrEqual(60_000);
-    expect(+new Date(updatedExpiry) - +new Date(initialExpiry)).toBeLessThan(
-      10 * 1 * 60_000,
-    );
+    expect(
+      +new Date(updatedExpiry) - +new Date(initialExpiry),
+    ).toBeLessThanOrEqual(11 * 60_000);
   });
 
   it('should not bid on expired auctions', async () => {
