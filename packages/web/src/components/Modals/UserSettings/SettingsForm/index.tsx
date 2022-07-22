@@ -1,7 +1,7 @@
 import { Box, useMediaQuery } from '@mui/material';
 import { Gap } from 'components/Modals/ConnectWallet/styles';
-import React from 'react';
-import { Avatar, Button, InputText } from 'zignaly-ui';
+import React, { useState } from 'react';
+import { Avatar, Button, ErrorMessage, InputText } from 'zignaly-ui';
 import { InputContainer } from '../styles';
 import Placeholder from '../../../../assets/avatar-placeholder.png';
 import theme from 'theme';
@@ -9,6 +9,9 @@ import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
 import { CHANGE_PROFILE } from 'queries/users';
+import { UserSettingsValidation } from 'util/validation';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Form } from './styles';
 
 const SettingsForm = ({
   username = '',
@@ -19,14 +22,20 @@ const SettingsForm = ({
 }) => {
   // TODO: Add submit of userName and discordName to backend and avatar update
   const matchesLarge = useMediaQuery(theme.breakpoints.up('lg'));
+  const [errorMessage, setErrorMessage] = useState('');
   const [updateUsername, { loading: updatingProfile }] =
     useMutation(CHANGE_PROFILE);
-  const { handleSubmit, control } = useForm({
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm({
     mode: 'onChange',
     defaultValues: {
       username: username || '',
       discordName: discordName || '',
     },
+    resolver: yupResolver(UserSettingsValidation),
   });
 
   const { t } = useTranslation('user-settings');
@@ -48,9 +57,13 @@ const SettingsForm = ({
   };
 
   const submit = async (values: { username: string; discordName: string }) => {
-    await updateUsername({
-      variables: values,
-    });
+    try {
+      await updateUsername({
+        variables: values,
+      });
+    } catch (_) {
+      setErrorMessage('Something went wrong');
+    }
   };
 
   return (
@@ -71,12 +84,13 @@ const SettingsForm = ({
             <Gap gap={15} />
           </Box>
         )}
-        <Box>
+        <Form onSubmit={handleSubmit(submit)}>
           <InputContainer width={getInputWidth()}>
             <Controller
               name='username'
               defaultValue={username}
               control={control}
+              rules={{ required: true }}
               render={({ field }) => (
                 <InputText
                   value={field.value}
@@ -84,6 +98,7 @@ const SettingsForm = ({
                   placeholder={t('please-enter-username')}
                   minHeight={23}
                   label={t('username-label')}
+                  error={errors.username?.message}
                 />
               )}
             />
@@ -94,6 +109,7 @@ const SettingsForm = ({
               name='discordName'
               defaultValue={discordName}
               control={control}
+              rules={{ required: true }}
               render={({ field }) => (
                 <InputText
                   placeholder={t('please-enter-discord-user')}
@@ -101,11 +117,12 @@ const SettingsForm = ({
                   label={t('discord-user-label')}
                   value={field.value}
                   onChange={field.onChange}
+                  error={errors.discordName?.message}
                 />
               )}
-            ></Controller>
+            />
           </InputContainer>
-          <Gap gap={matchesLarge ? 46 : 15} />
+          <Gap gap={matchesLarge ? 40 : 15} />
           <Box gap='12px' display='flex' flexDirection={getFlexDirection()}>
             <Button
               minWidth={128}
@@ -114,14 +131,20 @@ const SettingsForm = ({
               size='large'
             />
             <Button
-              onClick={handleSubmit(submit)}
+              type={'submit'}
               minWidth={170}
               loading={updatingProfile}
               caption={t('save-profile')}
               size='large'
             />
           </Box>
-        </Box>
+          {errorMessage && (
+            <>
+              <Gap gap={7} />
+              <ErrorMessage text={errorMessage} />
+            </>
+          )}
+        </Form>
       </Box>
     </Box>
   );
