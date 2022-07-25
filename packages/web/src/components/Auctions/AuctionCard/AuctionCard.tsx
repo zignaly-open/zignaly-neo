@@ -59,6 +59,7 @@ const StyledAmountContainer = styled(AmountContainer)`
   width: 100%;
   padding: 10px 0 5px;
   margin: 20px 0 16px;
+  max-width: 300px;
 `;
 
 const CardColumn = styled('div')`
