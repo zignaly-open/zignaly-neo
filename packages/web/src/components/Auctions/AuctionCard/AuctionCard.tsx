@@ -50,10 +50,16 @@ const CardHeaderLeft = styled(CardHeader)`
   border-bottom: 1px solid rgba(193, 193, 200, 0.4);
 `;
 
-const AuctionImage = styled('img')`
+const AuctionImage = styled('img')<{ isColumn: boolean }>`
   width: 100%;
   height: 209px;
   object-fit: cover;
+  box-sizing: border-box;
+  ${({ isColumn }) =>
+    !isColumn &&
+    css`
+      padding: 0 30px;
+    `}
 `;
 
 const StyledAmountContainer = styled(AmountContainer)`
@@ -164,9 +170,11 @@ const AuctionCard: React.FC<{
           />
         </CardHeaderLeft>
         {auction.imageUrl && (
-          <Box px='30px'>
-            <AuctionImage src={auction.imageUrl} alt={auction.title} />
-          </Box>
+          <AuctionImage
+            isColumn={isColumn}
+            src={auction.imageUrl}
+            alt={auction.title}
+          />
         )}
         <CardBody>
           <StyledAmountContainer>
