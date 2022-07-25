@@ -69,7 +69,7 @@ export async function validateUsername(
   userId: number,
 ): Promise<boolean> {
   if (!username) return true;
-  if (!/^[a-zA-Z0-9-._]{2,20}$/i.test(username)) return false;
+  if (!/^[a-z0-9-._]{2,20}$/i.test(username)) return false;
   const userWithThisUsername = await User.findOne({ where: { username } });
   return !userWithThisUsername || userWithThisUsername.id === userId;
 }

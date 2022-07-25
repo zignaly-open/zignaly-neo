@@ -5,7 +5,7 @@ export const UserSettingsValidation = yup
     username: yup
       .string()
       .trim()
-      .matches(/^[a-zA-Z0-9-._]{2,20}$/, 'The username is incorrect format'),
+      .matches(/^[a-z0-9-._]{2,20}$/i, 'The username is incorrect format'),
     discordName: yup
       .string()
       .trim()
