@@ -1,7 +1,7 @@
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
-import { Typography } from 'zignaly-ui';
-import { BulletPointItem, ClickAbleText, HowItWorksList } from './styles';
+import { TextButton, Typography } from 'zignaly-ui';
+import { BulletPointItem, HowItWorksList } from './styles';
 
 const HowItWorks = () => {
   const [closed, setClosed] = useState(true);
@@ -20,7 +20,7 @@ const HowItWorks = () => {
         happening on the “Raffles Marketplace”. Be it the whitelist spots to
         your favorite NFT collection or that basket of tokens going at a deep
         discount, you can put your ZIG to work and place your bids at ZigRaffle.
-        <ClickAbleText
+        <TextButton
           onClick={() => setClosed(!closed)}
           caption={closed ? 'Read More' : 'Read Less'}
           color='links'
