@@ -25,11 +25,7 @@ function DialogContainer({ title, children, ...props }: DialogContainerProps) {
         },
       }}
     >
-      <DialogTitle
-        textAlign='center'
-        marginBottom='24px'
-        style={{ position: 'relative' }}
-      >
+      <DialogTitle textAlign='center' style={{ position: 'relative' }}>
         <Typography variant='h1' color='neutral100' weight='medium'>
           {title}
         </Typography>
