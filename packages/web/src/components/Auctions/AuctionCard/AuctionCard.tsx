@@ -67,13 +67,17 @@ const CardColumn = styled('div')`
   align-items: center;
   flex-direction: column;
   flex: 1;
-  min-width: 275px;
+  min-width: 265px;
 `;
 
 const CardBody = styled('div')`
   padding: 0 30px;
   box-sizing: border-box;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  align-items: center;
 `;
 
 const StyledPriceLabel = styled(PriceLabel)`
@@ -96,6 +100,7 @@ const CardActions = styled('div')`
   align-items: flex-end;
   flex: 1;
   padding: 8px 0 30px;
+  justify-content: center;
 
   ${({ theme }) => theme.breakpoints.down('sm')} {
     flex-direction: column;
@@ -145,7 +150,7 @@ const AuctionCard: React.FC<{
             </Box>
             <FinalCountdown date={auction.expiresAt} started={true} />
           </StyledAmountContainer>
-          <Box sx={{ display: { xs: 'none' } }}>
+          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
             <CardActions>
               <BidButton auction={auction} isActive={isActive} />
             </CardActions>
