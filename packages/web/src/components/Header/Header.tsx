@@ -17,11 +17,15 @@ const StyledWalletIcon = styled(WalletIcon)`
   color: ${({ theme }) => theme.neutral300};
 `;
 
-const MenuButton = styled(IconButton)(({ theme }) => ({
-  [theme.breakpoints.down('sm')]: {
-    marginLeft: '-20px',
-  },
-}));
+const MenuButton = styled(IconButton)`
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    margin-left: '-18px';
+  }
+
+  button > div {
+    width: auto !important;
+  }
+`;
 
 const Header = () => {
   const { t } = useTranslation('global');

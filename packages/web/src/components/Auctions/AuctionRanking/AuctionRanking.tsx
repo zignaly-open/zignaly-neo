@@ -5,8 +5,8 @@ import { Typography } from 'zignaly-ui';
 import { AuctionBidType, AuctionType } from '@zigraffle/shared/types';
 import { useTranslation } from 'react-i18next';
 import useCurrentUser from 'hooks/useCurrentUser';
-
-const MAX_WINNERS_DISPLAYED = 7;
+import { useMediaQuery } from '@mui/material';
+import theme from 'theme';
 
 const RankingHead = styled('div')`
   background: #222249;
@@ -17,6 +17,10 @@ const RankingHead = styled('div')`
   justify-content: space-around;
   align-items: center;
   margin-bottom: 12px;
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    display: none;
+  }
 `;
 
 const RankingRowContainer = styled(Box)<{ isMe?: boolean }>(
@@ -59,6 +63,8 @@ const RankingRow = ({ bid }: { bid: AuctionBidType }) => {
 };
 
 const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const MAX_WINNERS_DISPLAYED = isMobile ? 3 : 7;
   const { t } = useTranslation('auction');
   const winnersDisplayed = Math.min(
     auction.numberOfWinners,
