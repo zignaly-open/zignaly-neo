@@ -40,8 +40,8 @@ export const Inline = styled.div`
 `;
 
 export const StyledCloseIcon = styled(CloseIcon as any)`
-  width: 17px;
-  height: 17px;
+  width: 15px;
+  height: 15px;
   color: #65647e;
 `;
 
