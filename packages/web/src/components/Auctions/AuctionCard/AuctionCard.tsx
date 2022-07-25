@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
-import { styled } from '@mui/material/styles';
+import { css, styled } from '@mui/material/styles';
 import { Typography, PriceLabel, TextButton, Button } from 'zignaly-ui';
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AuctionType } from '@zigraffle/shared/types';
 import FinalCountdown from './FinalCountdown';
@@ -18,15 +18,15 @@ const Item = styled('div')(({ theme }) => ({
   background: 'rgba(37, 35, 57, 0.4)',
   border: '1px solid rgba(193, 193, 200, 0.4)',
   borderRadius: '16px',
-  [theme.breakpoints.up('lg')]: {
-    width: '640px',
-  },
   display: 'flex',
   flexDirection: 'row',
   flexWrap: 'wrap',
+  [theme.breakpoints.up('lg')]: {
+    width: '640px',
+  },
 }));
 
-const CardHeader = styled('div')`
+const CardHeader = styled('div')<{ isColumn: boolean }>`
   height: 80px;
   display: flex;
   flex-direction: column;
@@ -35,14 +35,15 @@ const CardHeader = styled('div')`
   box-sizing: border-box;
   width: 100%;
 
-  ${({ theme }) => theme.breakpoints.down('sm')} {
-    height: 64px;
-  }
-
-  ${({ theme }) => theme.breakpoints.up('sm')} {
-    border-bottom: 1px solid rgba(193, 193, 200, 0.4);
-    margin-bottom: 20px;
-  }
+  ${({ isColumn }) =>
+    isColumn
+      ? css`
+          height: 64px;
+        `
+      : css`
+          border-bottom: 1px solid rgba(193, 193, 200, 0.4);
+          margin-bottom: 20px;
+        `}
 `;
 
 const CardHeaderLeft = styled(CardHeader)`
@@ -95,18 +96,26 @@ const StyledPriceLabel = styled(PriceLabel)`
   }
 `;
 
-const CardActions = styled('div')`
+const CardActions = styled('div')<{ isColumn: boolean; hide?: boolean }>`
   display: flex;
   align-items: flex-end;
   flex: 1;
   padding: 8px 0 30px;
   justify-content: center;
 
-  ${({ theme }) => theme.breakpoints.down('sm')} {
-    flex-direction: column;
-    align-items: center;
-    padding-top: 25px;
-  }
+  ${({ isColumn }) =>
+    isColumn &&
+    css`
+      flex-direction: column;
+      align-items: center;
+      padding-top: 25px;
+    `}
+
+  ${({ hide }) =>
+    hide &&
+    css`
+      display: none;
+    `}
 `;
 
 const AuctionCard: React.FC<{
@@ -115,11 +124,28 @@ const AuctionCard: React.FC<{
   const { t } = useTranslation('auction');
   const { isActive, hasWon } = getWinningLosingStatus(auction);
   const { showModal } = useModal();
+  const leftRef = useRef(null);
+  const rightRef = useRef(null);
+  const [isColumn, setIsColumn] = useState(false);
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      // Detect when the right column is wrapped.
+      // (due to the card width being too small for the column min-width)
+      setIsColumn(leftRef.current.offsetTop !== rightRef.current.offsetTop);
+    };
+
+    window.addEventListener('resize', handleWindowResize);
+
+    return () => {
+      window.removeEventListener('resize', handleWindowResize);
+    };
+  }, []);
 
   return (
     <Item>
-      <CardColumn>
-        <CardHeaderLeft>
+      <CardColumn ref={leftRef}>
+        <CardHeaderLeft isColumn={isColumn}>
           <Typography variant='h2' color='neutral100'>
             {auction.title}
           </Typography>
@@ -150,22 +176,20 @@ const AuctionCard: React.FC<{
             </Box>
             <FinalCountdown date={auction.expiresAt} started={true} />
           </StyledAmountContainer>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-            <CardActions>
-              <BidButton auction={auction} isActive={isActive} />
-            </CardActions>
-          </Box>
+          <CardActions isColumn={isColumn} hide={isColumn}>
+            <BidButton auction={auction} isActive={isActive} />
+          </CardActions>
         </CardBody>
       </CardColumn>
-      <CardColumn>
-        <CardHeader>
+      <CardColumn ref={rightRef}>
+        <CardHeader isColumn={isColumn}>
           <Typography variant='h2' color='neutral100'>
             {t('ranking')}
           </Typography>
         </CardHeader>
         <CardBody>
           <AuctionRanking auction={auction} />
-          <CardActions>
+          <CardActions isColumn={isColumn} hide={!hasWon && !isColumn}>
             {hasWon ? (
               <Button
                 size='large'
@@ -177,9 +201,7 @@ const AuctionCard: React.FC<{
                 caption={t('claim-now')}
               />
             ) : (
-              <Box sx={{ display: { xs: 'auto', sm: 'none' } }}>
-                <BidButton auction={auction} isActive={isActive} />
-              </Box>
+              <BidButton auction={auction} isActive={isActive} />
             )}
           </CardActions>
         </CardBody>
