@@ -33,7 +33,7 @@ const RankingRowContainer = styled(Box)<{ isMe?: boolean }>(
 );
 
 const Rank = styled('div')`
-  margin: 0 10px;
+  margin: 0 14px 0 10px;
 `;
 
 const Ellipsis = styled(RankingRowContainer)`
