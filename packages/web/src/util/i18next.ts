@@ -27,6 +27,9 @@ i18n
         return `${value}`;
       },
     },
+    react: {
+      useSuspense: false,
+    },
   });
 
 export default i18n;
