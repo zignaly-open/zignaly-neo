@@ -71,7 +71,11 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
           disabled={true}
           minHeight={1}
         />
-        <Typography color='neutral200'>{t('discord-user')}</Typography>
+        <Typography color='neutral200'>
+          {t('discord-user-label', {
+            ns: 'user-settings',
+          })}
+        </Typography>
         <Box mt='-8px'>
           <Typography color='neutral400' variant='h4'>
             {t('change')}
