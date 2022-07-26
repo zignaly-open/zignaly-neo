@@ -13,7 +13,7 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { setContext } from '@apollo/client/link/context';
 import { getToken } from './util/token';
-import { DAppProvider, Polygon, Rinkeby } from '@usedapp/core';
+import { DAppProvider, Mumbai, Polygon } from '@usedapp/core';
 import { OnboardingProvider } from './contexts/Onboarding';
 import { dark, ThemeProvider } from 'zignaly-ui';
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
@@ -62,13 +62,13 @@ const client = new ApolloClient({
 
 let config = {};
 
-if (process.env.REACT_APP_USE_RINKEBY_CHAIN) {
+if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
   config = {
-    networks: [Rinkeby],
-    readOnlyChainId: Rinkeby.chainId,
+    networks: [Mumbai],
+    readOnlyChainId: Mumbai.chainId,
     readOnlyUrls: {
-      [Rinkeby.chainId]:
-        'https://rinkeby.infura.io/v3/' +
+      [Mumbai.chainId]:
+        'https://polygon-mumbai.g.alchemy.com/v2/' +
         process.env.REACT_APP_INFURA_PROJECT_ID,
     },
   };
@@ -78,14 +78,13 @@ if (process.env.REACT_APP_USE_RINKEBY_CHAIN) {
     readOnlyChainId: Polygon.chainId,
     readOnlyUrls: {
       [Polygon.chainId]:
-        'https://mainnet.infura.io/v3/' +
+        'https://polygon-mainnet.g.alchemy.com/v2/' +
         process.env.REACT_APP_INFURA_PROJECT_ID,
     },
   };
 }
 
 const augmentedTheme = { ...dark, ...theme };
-
 function EntryPoint() {
   return (
     <ThemeProvider theme={dark}>

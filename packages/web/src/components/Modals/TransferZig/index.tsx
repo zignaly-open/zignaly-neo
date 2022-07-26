@@ -33,14 +33,12 @@ const TransferZigModal = ({
     address: address,
     transferAmount: transferAmount,
   });
-
   useEffect(() => {
     !account && activateBrowserWallet();
     if (!address) {
       throw new Error('Receiving address not defined');
     }
   }, [account, address]);
-
   if (!chainId) {
     return (
       <DialogContainer
