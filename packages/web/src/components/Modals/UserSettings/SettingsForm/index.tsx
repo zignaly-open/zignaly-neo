@@ -68,7 +68,7 @@ const SettingsForm = ({
 
   return (
     <Box display='flex' flexDirection='column'>
-      {matchesLarge && <Gap gap={17} />}
+      {matchesLarge && <Gap gap={20} />}
       <Box display='flex' flexDirection={getFlexDirection()}>
         {matchesLarge ? (
           <Box marginRight='71px'>

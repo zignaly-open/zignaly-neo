@@ -65,7 +65,7 @@ const TransferZigModal = ({
     >
       {balance !== undefined ? (
         <Container>
-          <Typography variant={'h5'} color='neutral200' weight='regular'>
+          <Typography variant={'body1'} color='neutral200' weight='regular'>
             {t('subtitle')}
           </Typography>
           <Gap gap={15} />
