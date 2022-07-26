@@ -14,5 +14,6 @@
   "deposit": "Deposit",
   "insert-code": "Insert Code",
   "transfer-coin": "Transfer {{coin}}",
-  "auction": "ZIGRaffle"
+  "auction": "ZIGRaffle",
+  "cancel": "Cancel"
 }
