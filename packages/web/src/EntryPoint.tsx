@@ -92,13 +92,13 @@ function EntryPoint() {
       <ThemeProviderMui theme={augmentedTheme}>
         <DAppProvider config={config}>
           <ApolloProvider client={client}>
-            <ModalProvider>
-              <BrowserRouter>
-                <OnboardingProvider>
+            <BrowserRouter>
+              <OnboardingProvider>
+                <ModalProvider>
                   <Routes />
-                </OnboardingProvider>
-              </BrowserRouter>
-            </ModalProvider>
+                </ModalProvider>
+              </OnboardingProvider>
+            </BrowserRouter>
           </ApolloProvider>
         </DAppProvider>
       </ThemeProviderMui>

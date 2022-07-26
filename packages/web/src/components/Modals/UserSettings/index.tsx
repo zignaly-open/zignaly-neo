@@ -17,7 +17,7 @@ const UserSettingsModal = ({
 
   return (
     <DialogContainer {...props} title={t('settings')}>
-      <SettingsForm discordName={discordName} username={username} />
+      <SettingsForm {...props} discordName={discordName} username={username} />
       <Gap gap={15} />
       <Box display='flex'>
         <Box flex={1} />
