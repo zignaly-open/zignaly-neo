@@ -21,6 +21,7 @@
     "@usedapp/core": "^1.0.8",
     "@zigraffle/shared": "../shared",
     "assert": "^2.0.0",
+    "axios": "^0.27.2",
     "bignumber.js": "^9.0.2",
     "buffer": "^6.0.3",
     "crypto": "^1.0.1",

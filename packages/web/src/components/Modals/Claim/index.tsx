@@ -1,7 +1,6 @@
-import { useMutation } from '@apollo/client';
 import { Box } from '@mui/material';
+import axios from 'axios';
 import useCurrentUser from 'hooks/useCurrentUser';
-import { CLAIM } from 'queries/auctions';
 import React, { FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, ErrorMessage, InputText, Typography } from 'zignaly-ui';
@@ -35,22 +34,32 @@ const CongratulationsModal = ({ auction, ...props }: ClaimModalProps) => {
 const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const { t } = useTranslation(['claim', 'user-settings', 'global']);
   const {
-    user: { discordName, publicAddress },
+    user: { discordName, publicAddress, username, id },
   } = useCurrentUser();
   const [errorMessage, setErrorMessage] = useState('');
   const [success, setSuccess] = useState(false);
-  const [claim, { loading }] = useMutation(CLAIM);
+  const [loading, setLoading] = useState(false);
+  const scriptUrl = process.env.REACT_APP_SHEET_BEST_URL as string;
+  const payload = {
+    discordName: discordName,
+    publicAddress: publicAddress,
+    username: username,
+    id: id,
+  };
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    try {
-      await claim({
-        variables: { id: auction.id },
+    setLoading(true);
+    axios
+      .post(scriptUrl, payload)
+      .then(() => {
+        setLoading(false);
+        setSuccess(true);
+      })
+      .catch(() => {
+        setErrorMessage('Something went wrong');
+        setLoading(false);
       });
-      setSuccess(true);
-    } catch (_) {
-      setErrorMessage('Something went wrong');
-    }
   };
 
   if (success) {
@@ -66,6 +75,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
       <Form onSubmit={submit}>
         <Typography color='neutral200'>{t('connected-wallet')}</Typography>
         <InputText
+          name='publicAddress'
           value={publicAddress}
           placeholder={t('connected-wallet')}
           disabled={true}
@@ -82,6 +92,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
           </Typography>
         </Box>
         <InputText
+          name='discordName'
           value={discordName}
           placeholder={t('please-enter-discord-user', {
             ns: 'user-settings',
