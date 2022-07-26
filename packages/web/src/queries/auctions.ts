@@ -69,6 +69,14 @@ export const BID_AUCTION = gql`
   }
 `;
 
+export const CLAIM = gql`
+  mutation claim($id: ID!) {
+    claim(id: $id) {
+      id
+    }
+  }
+`;
+
 export const BIDS_SUBSCRIPTION = gql`
   subscription onAuctionUpdated {
     auctionUpdated {
