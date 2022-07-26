@@ -10,6 +10,29 @@ import DialogContainer from '../DialogContainer';
 import { Form } from './styles';
 import { ClaimModalProps } from './types';
 
+const CongratulationsModal = ({ auction, ...props }: ClaimModalProps) => {
+  const { t } = useTranslation('claim');
+
+  return (
+    <DialogContainer title={t('congratulations')} {...props}>
+      <Typography color='neutral200'>{t('claim-success')}</Typography>
+      <Box
+        gap='12px'
+        display='flex'
+        justifyContent='center'
+        sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
+        mt='94px'
+      >
+        <Button
+          caption={t('close')}
+          size='large'
+          onClick={(e) => props.onClose(e, 'escapeKeyDown')}
+        />
+      </Box>
+    </DialogContainer>
+  );
+};
+
 const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const { t } = useTranslation(['claim', 'user-settings', 'global']);
   const {
@@ -17,6 +40,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   } = useCurrentUser();
   const { account } = useEthers();
   const [errorMessage, setErrorMessage] = useState('');
+  const [success, setSuccess] = useState(false);
   const [claim, { loading }] = useMutation(CLAIM);
 
   const submit = async (e: FormEvent) => {
@@ -25,14 +49,19 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
       await claim({
         variables: { id: auction.id },
       });
+      setSuccess(true);
     } catch (_) {
       setErrorMessage('Something went wrong');
     }
   };
 
+  if (success) {
+    return <CongratulationsModal auction={auction} {...props} />;
+  }
+
   return (
     <DialogContainer title={t('claim-instructions')} {...props}>
-      <Typography color='neutral200'>{t('congratulations')}</Typography>
+      <Typography color='neutral200'>{t('congratulations-winner')}</Typography>
       <br />
       <br />
       <Typography color='neutral200'>{t('verify')}</Typography>
@@ -40,9 +69,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
         <Typography color='neutral200'>{t('connected-wallet')}</Typography>
         <InputText
           value={account}
-          // onChange={field.onChange}
           placeholder={t('connected-wallet')}
-          // error={errors.username?.message}
           disabled={true}
           minHeight={1}
         />
@@ -54,11 +81,9 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
         </Box>
         <InputText
           value={discordName}
-          // onChange={field.onChange}
           placeholder={t('please-enter-discord-user', {
             ns: 'user-settings',
           })}
-          // error={errors.username?.message}
           disabled={true}
           minHeight={1}
         />

@@ -1,9 +1,12 @@
 {
-  "congratulations": "Congratulations, you are a winner! In order to claim your prize, we will deduct the value offered from your wallet. Make sure you have enough balance to complete the transaction. Remember that you have a time limit to claim the prize.",
+  "congratulations": "Congratulations!",
+  "congratulations-winner": "Congratulations, you are a winner! In order to claim your prize, we will deduct the value offered from your wallet. Make sure you have enough balance to complete the transaction. Remember that you have a time limit to claim the prize.",
   "verify": "We recommend that you verify that your data is correct, otherwise you can change it in the settings tab.",
   "claim-instructions": "Instructions to Claim",
   "connected-wallet": "Connected Wallet:",
   "discord-user": "Discord User",
   "change": "You can change it in the account settings",
-  "claim": "Claim!"
+  "claim": "Claim!",
+  "close": "Close",
+  "claim-success": "You have successfully claimed your prize. If you have any questions, you can contact support or you can contact us on discord."
 }

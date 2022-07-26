@@ -261,7 +261,7 @@ export const resolvers = {
       const payout = await Payout.create({
         auctionId: id,
         userId: user.id,
-        woWallet: user.publicAddress,
+        toWallet: user.publicAddress,
       });
 
       // note that we should not await for the result of this because it can take some time
