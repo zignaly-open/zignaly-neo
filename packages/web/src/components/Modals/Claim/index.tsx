@@ -1,6 +1,5 @@
 import { useMutation } from '@apollo/client';
 import { Box } from '@mui/material';
-import { useEthers } from '@usedapp/core';
 import useCurrentUser from 'hooks/useCurrentUser';
 import { CLAIM } from 'queries/auctions';
 import React, { FormEvent, useState } from 'react';
@@ -36,9 +35,8 @@ const CongratulationsModal = ({ auction, ...props }: ClaimModalProps) => {
 const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const { t } = useTranslation(['claim', 'user-settings', 'global']);
   const {
-    user: { discordName },
+    user: { discordName, publicAddress },
   } = useCurrentUser();
-  const { account } = useEthers();
   const [errorMessage, setErrorMessage] = useState('');
   const [success, setSuccess] = useState(false);
   const [claim, { loading }] = useMutation(CLAIM);
@@ -68,7 +66,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
       <Form onSubmit={submit}>
         <Typography color='neutral200'>{t('connected-wallet')}</Typography>
         <InputText
-          value={account}
+          value={publicAddress}
           placeholder={t('connected-wallet')}
           disabled={true}
           minHeight={1}
