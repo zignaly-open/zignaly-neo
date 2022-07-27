@@ -1,7 +1,6 @@
 import { IconButton, BrandImage, UserIcon, WalletIcon } from 'zignaly-ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import useAuthenticate from '../../hooks/useAuthenticate';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import { Header as ZIGHeader, Button } from 'zignaly-ui';
 import { styled } from '@mui/material/styles';
@@ -29,7 +28,6 @@ const MenuButton = styled(IconButton)`
 
 const Header = () => {
   const { t } = useTranslation('global');
-  const authenticate = useAuthenticate();
   const { user: currentUser, loading } = useCurrentUser();
   const { showModal } = useModal();
 
@@ -69,9 +67,7 @@ const Header = () => {
               variant='secondary'
               size='small'
               onClick={() => {
-                showModal(ConnectWalletModal, {
-                  metaMaskOnClick: authenticate,
-                });
+                showModal(ConnectWalletModal);
               }}
               caption={t('log-in')}
               key='login'
