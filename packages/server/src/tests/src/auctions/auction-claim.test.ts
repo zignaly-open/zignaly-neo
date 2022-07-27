@@ -1,7 +1,6 @@
-import '../..';
+import * as payout from '../../../entities/auctions/functions/performPayout';
 import {
   claimAuction,
-  clearMocks,
   createAlice,
   createAuction,
   createRandomUser,
@@ -10,10 +9,12 @@ import {
   getFirstAuction,
   giveMoney,
   makeBid,
+} from '../../helpers/mocks';
+import {
+  clearMocks,
   waitUntilTablesAreCreated,
   wipeOut,
-} from '../../util/test-utils';
-import * as payout from '../../chain/payout';
+} from '../../helpers/operation';
 
 describe('Auction Claims', () => {
   beforeAll(waitUntilTablesAreCreated);
@@ -21,7 +22,7 @@ describe('Auction Claims', () => {
   afterEach(clearMocks);
 
   it('should let claim auctions and send information to the ui', async () => {
-    const spy = jest.spyOn(payout, 'performPayout');
+    const spy = jest.spyOn(payout, 'default');
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     await giveMoney(alice, 300);
@@ -45,7 +46,7 @@ describe('Auction Claims', () => {
   });
 
   it('should not let claim unwon auctions', async () => {
-    const spy = jest.spyOn(payout, 'performPayout');
+    const spy = jest.spyOn(payout, 'default');
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     await giveMoney(alice, 300);
@@ -73,7 +74,7 @@ describe('Auction Claims', () => {
   });
 
   it('should not let claim multiple times', async () => {
-    const spy = jest.spyOn(payout, 'performPayout');
+    const spy = jest.spyOn(payout, 'default');
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     await giveMoney(alice, 300);
@@ -89,7 +90,7 @@ describe('Auction Claims', () => {
   });
 
   it('should not let claim unfinished auctions', async () => {
-    const spy = jest.spyOn(payout, 'performPayout');
+    const spy = jest.spyOn(payout, 'default');
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     await giveMoney(alice, 300);
@@ -104,7 +105,7 @@ describe('Auction Claims', () => {
   });
 
   it('should not let claim auctions after max claim', async () => {
-    const spy = jest.spyOn(payout, 'performPayout');
+    const spy = jest.spyOn(payout, 'default');
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     auction.maxClaimDate = new Date(Date.now() - 1);
@@ -121,7 +122,7 @@ describe('Auction Claims', () => {
   });
 
   it('should not let claim without enough money', async () => {
-    const spy = jest.spyOn(payout, 'performPayout');
+    const spy = jest.spyOn(payout, 'default');
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     await giveMoney(alice, 100);

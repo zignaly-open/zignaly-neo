@@ -1,6 +1,7 @@
+import { useMutation } from '@apollo/client';
 import { Box } from '@mui/material';
-import axios from 'axios';
 import useCurrentUser from 'hooks/useCurrentUser';
+import { CLAIM } from 'queries/auctions';
 import React, { FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, ErrorMessage, InputText, Typography } from 'zignaly-ui';
@@ -34,32 +35,25 @@ const CongratulationsModal = ({ auction, ...props }: ClaimModalProps) => {
 const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const { t } = useTranslation(['claim', 'user-settings', 'global']);
   const {
-    user: { discordName, publicAddress, username, id },
+    user: { discordName, publicAddress },
   } = useCurrentUser();
+
   const [errorMessage, setErrorMessage] = useState('');
   const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const scriptUrl = process.env.REACT_APP_SHEET_BEST_URL as string;
-  const payload = {
-    discordName: discordName,
-    publicAddress: publicAddress,
-    username: username,
-    id: id,
-  };
+  const [claim, { loading }] = useMutation(CLAIM);
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    axios
-      .post(scriptUrl, payload)
-      .then(() => {
-        setLoading(false);
-        setSuccess(true);
-      })
-      .catch(() => {
-        setErrorMessage('Something went wrong');
-        setLoading(false);
+    try {
+      claim({
+        variables: {
+          id: auction.id,
+        },
       });
+      setSuccess(true);
+    } catch (_) {
+      setErrorMessage('Something went wrong');
+    }
   };
 
   if (success) {

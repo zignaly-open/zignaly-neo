@@ -5,7 +5,6 @@ export const typeDef = gql`
     id: ID!
     auction: Auction!
     toWallet: String
-    txId: String
   }
 
   extend type Query {

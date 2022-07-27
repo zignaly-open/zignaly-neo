@@ -1,10 +1,9 @@
-import '../..';
-import { Transaction, TransactionType } from './model';
 import {
-  createAlice,
-  getBalance,
-  waitUntilTablesAreCreated,
-} from '../../util/test-utils';
+  Transaction,
+  TransactionType,
+} from '../../../entities/transactions/model';
+import { createAlice, getBalance } from '../../helpers/mocks';
+import { waitUntilTablesAreCreated } from '../../helpers/operation';
 
 describe('Transactions', () => {
   beforeAll(waitUntilTablesAreCreated);

@@ -147,7 +147,6 @@ const AuctionCard: React.FC<{
       window.removeEventListener('resize', handleWindowResize);
     };
   }, []);
-
   return (
     <Item>
       <CardColumn ref={leftRef}>
@@ -198,7 +197,7 @@ const AuctionCard: React.FC<{
         <CardBody>
           <AuctionRanking auction={auction} />
           <CardActions isColumn={isColumn} hide={!hasWon && !isColumn}>
-            {hasWon ? (
+            {hasWon && !auction.userBid.isClaimed ? (
               <Button
                 size='large'
                 onClick={() =>

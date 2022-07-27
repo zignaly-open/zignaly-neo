@@ -17,9 +17,9 @@ import {
   isBalanceSufficientForPayment,
   verifyPositiveBalance,
 } from './util';
-import { random } from 'lodash';
-import { performPayout } from '../../chain/payout';
 import { Payout } from '../payouts/model';
+import performPayout from './functions/performPayout';
+import calculateNewExpiryDate from './functions/calculateExpiryDate';
 
 const lastBidPopulation = {
   model: AuctionBid,
@@ -28,20 +28,6 @@ const lastBidPopulation = {
   limit: 1,
   include: [User],
 } as Includeable;
-
-function calculateNewExpiryDate(auction: Auction) {
-  if (auction.expiresAt < auction.maxExpiryDate) {
-    const expiryDate = +new Date(auction.expiresAt);
-    const currentDate = Date.now();
-    if (expiryDate - currentDate >= 3600_000 * 10) {
-      return new Date(expiryDate + 60 * random(1, 4) * 60_000);
-    } else if (expiryDate - currentDate > 60_000 * 10) {
-      return new Date(expiryDate + 10 * random(1, 4) * 60_000);
-    } else {
-      return new Date(expiryDate + random(5, 11) * 60_000);
-    }
-  }
-}
 
 async function getSortedAuctionBids(
   id: number,
@@ -261,14 +247,10 @@ export const resolvers = {
       const payout = await Payout.create({
         auctionId: id,
         userId: user.id,
-        toWallet: user.publicAddress,
+        publicAddress: user.publicAddress,
       });
 
-      // note that we should not await for the result of this because it can take some time
-      performPayout(payout).then((txId) => {
-        payout.txId = txId;
-        payout.save();
-      });
+      await performPayout(payout);
 
       const [updatedAuction] = await getAuctions(auction.id, user);
       // no need to emit updated auctions here

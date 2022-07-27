@@ -39,6 +39,7 @@ export const GET_AUCTIONS = gql`
         id
         value
         position
+        isClaimed
       }
     }
   }
@@ -51,6 +52,7 @@ export const BID_AUCTION = gql`
       title
       createdAt
       expiresAt
+      isClaimed
       bids {
         id
         value
@@ -64,6 +66,7 @@ export const BID_AUCTION = gql`
         id
         value
         position
+        isClaimed
       }
     }
   }
