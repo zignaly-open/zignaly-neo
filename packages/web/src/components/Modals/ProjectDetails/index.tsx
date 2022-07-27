@@ -12,11 +12,7 @@ import { ReactComponent as Twitter } from '../../../assets/icons/twitter-logo.sv
 import { Box } from '@mui/system';
 
 const ProjectDetailsModal = ({
-  title,
-  twitter,
-  website,
-  discord,
-  telegram,
+  auction: { title, website, twitter, telegram, discord },
   ...props
 }: ProjectDetailsModalProps) => {
   const { t } = useTranslation('auction');

@@ -7,5 +7,7 @@
   "change": "You can change it in the account settings",
   "claim": "Claim!",
   "close": "Close",
-  "claim-success": "You have successfully claimed your prize. If you have any questions, you can contact support or you can contact us on discord."
+  "claim-success": "You have successfully claimed your prize. If you have any questions, you can contact support or you can contact us on discord.",
+  "prize": "Prize:",
+  "amount": "Amount:"
 }
