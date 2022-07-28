@@ -5,12 +5,16 @@ import DialogContainer from '../DialogContainer';
 import { Button } from 'zignaly-ui';
 import { ReactComponent as MetaMaskLogo } from '../../../assets/icons/metamask-logo.svg';
 import { useTranslation } from 'react-i18next';
+import useAuthenticate from 'hooks/useAuthenticate';
 
-const ConnectWalletModal = ({
-  metaMaskOnClick = () => {},
-  ...props
-}: ConnectWalletModalProps) => {
+const ConnectWalletModal = (props: ConnectWalletModalProps) => {
+  const authenticate = useAuthenticate();
   const { t } = useTranslation('connect-wallet');
+
+  const connect = (e: React.MouseEvent<HTMLButtonElement>) => {
+    authenticate().then(() => props.onClose(e, 'escapeKeyDown'));
+  };
+
   return (
     <DialogContainer title={t('title')} {...props}>
       <Gap gap={8} />
@@ -23,7 +27,7 @@ const ConnectWalletModal = ({
           minWidth={255}
           size='large'
           caption={t('metamask')}
-          onClick={() => metaMaskOnClick()}
+          onClick={connect}
           leftElement={<MetaMaskLogo />}
         />
       </ButtonContainer>

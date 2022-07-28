@@ -1,5 +1,3 @@
 import { DialogProps } from '@mui/material';
 
-export type ConnectWalletModalProps = DialogProps & {
-  metaMaskOnClick: () => void;
-};
+export type ConnectWalletModalProps = DialogProps;
