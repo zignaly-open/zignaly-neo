@@ -28,7 +28,7 @@ jobs:
     # been found) 'paths_result' outputs an empty object ('{}'). This can be easily intercepted in the if condition of a job
     # by checking the result of the "global" 'should_skip' output first.
     if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).zigraffle_frontend.should_skip
-    name: Make sure code is peachy <3
+    name: Make sure our Zigraffle UI code is great <3
     runs-on: ubuntu-latest
 
     strategy:
@@ -61,7 +61,7 @@ jobs:
   zigraffle_backend:
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).zigraffle_backend.should_skip
-    name: Make sure code is peachy <3
+    name: Make sure our Zigraffle Server code is magnificent <3
     runs-on: ubuntu-latest
 
     strategy:
