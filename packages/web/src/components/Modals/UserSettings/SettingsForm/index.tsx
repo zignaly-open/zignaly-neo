@@ -118,6 +118,7 @@ const SettingsForm = ({
               })}
             </Typography>
             <ErrorAlertIcon
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore: fixme
               color='#89899A'
             />

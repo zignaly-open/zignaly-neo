@@ -22,7 +22,7 @@ const TransferZigModal = ({
   ...props
 }: TransferZigModalProps) => {
   // TODO: Optimize performance by extracting methods
-  const [transferAmount, setTransferAmount] = useState<string>('1000000');
+  const [transferAmount, setTransferAmount] = useState<string>('');
   const address: string = process.env.REACT_APP_RECEIVING_ADDRESS as string;
   const token = process.env.REACT_APP_CONTRACT_ADDRESS as string;
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
