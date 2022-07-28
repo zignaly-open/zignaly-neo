@@ -1,7 +1,7 @@
 import {
   Transaction,
   TransactionType,
-} from '../../../entities/transactions/model';
+} from '../../../src/entities/transactions/model';
 import { createAlice, getBalance } from '../../helpers/mocks';
 import { waitUntilTablesAreCreated } from '../../helpers/operation';
 

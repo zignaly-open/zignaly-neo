@@ -1,15 +1,15 @@
 import supertest from 'supertest';
-import app from '../..';
-import { isTest } from '../../../config';
-import { persistTablesToTheDatabase } from '../../db';
+import app from '../../src';
+import { isTest } from '../../config';
+import { persistTablesToTheDatabase } from '../../src/db';
 import {
   Auction,
   AuctionBasketItem,
   AuctionBid,
-} from '../../entities/auctions/model';
-import { Payout } from '../../entities/payouts/model';
-import { Transaction } from '../../entities/transactions/model';
-import { User } from '../../entities/users/model';
+} from '../../src/entities/auctions/model';
+import { Payout } from '../../src/entities/payouts/model';
+import { Transaction } from '../../src/entities/transactions/model';
+import { User } from '../../src/entities/users/model';
 
 const request = supertest(app);
 

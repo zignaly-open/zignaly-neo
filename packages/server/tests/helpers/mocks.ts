@@ -1,12 +1,12 @@
 import { AuctionType } from '@zigraffle/shared/types';
-import { Auction, AuctionBasketItem } from '../../entities/auctions/model';
-import { Payout } from '../../entities/payouts/model';
+import { Auction, AuctionBasketItem } from '../../src/entities/auctions/model';
+import { Payout } from '../../src/entities/payouts/model';
 import {
   Transaction,
   TransactionType,
-} from '../../entities/transactions/model';
-import { User } from '../../entities/users/model';
-import { signJwtToken } from '../../entities/users/util';
+} from '../../src/entities/transactions/model';
+import { User } from '../../src/entities/users/model';
+import { signJwtToken } from '../../src/entities/users/util';
 import { makeRequest } from './operation';
 import { PAYOUTS_QUERY, AUCTIONS_QUERY, BALANCE_QUERY } from './queries';
 

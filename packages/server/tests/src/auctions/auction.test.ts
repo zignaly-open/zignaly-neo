@@ -1,23 +1,24 @@
-import '../..';
+import { Auction } from '../../../src/entities/auctions/model';
+import pubsub from '../../../src/pubsub';
 import {
-  clearMocks,
   createAlice,
+  makeBid,
   createAuction,
   createBasketItem,
+  getAuctions,
+  giveMoney,
+  getBalance,
   createBob,
+  getFirstAuction,
   createRandomUser,
   expireAuction,
-  getAuctions,
-  getBalance,
-  getFirstAuction,
-  giveMoney,
-  makeBid,
-  wait,
+} from '../../helpers/mocks';
+import {
   waitUntilTablesAreCreated,
   wipeOut,
-} from '../../util/test-utils';
-import pubsub from '../../pubsub';
-import { Auction } from './model';
+  clearMocks,
+  wait,
+} from '../../helpers/operation';
 
 describe('Auctions', () => {
   beforeAll(waitUntilTablesAreCreated);

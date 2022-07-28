@@ -1,4 +1,4 @@
-import * as payout from '../../../entities/auctions/functions/performPayout';
+import * as payout from '../../../src/entities/auctions/functions/performPayout';
 import {
   claimAuction,
   createAlice,

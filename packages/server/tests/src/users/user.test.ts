@@ -1,6 +1,6 @@
-import '../../..';
+import '../../../src';
 
-import { User } from '../../../entities/users/model';
+import { User } from '../../../src/entities/users/model';
 import {
   createAlice,
   createAlicesDiscord,
