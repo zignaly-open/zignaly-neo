@@ -13,12 +13,12 @@ jobs:
           paths_filter: |
             zigraffle_frontend:
               paths:
-                - 'packages/web/**/*'
-                - 'packages/shared/**/*'
+                - 'packages/raffles-client/**/*'
+                - 'packages/raffles-shared/**/*'
             zigraffle_backend:
               paths:
-                - 'packages/server/**/*'
-                - 'packages/shared/**/*'
+                - 'packages/raffles-server/**/*'
+                - 'packages/raffles-shared/**/*'
           # Can be mixed with the "global" 'paths_ignore' / 'paths' options, for example:
           # paths_ignore: '["**/README.md"]'
 
@@ -45,16 +45,16 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-        working-directory: ./packages/web
+        working-directory: ./packages/raffles-client
       - name: Build
         run: yarn build
-        working-directory: ./packages/web
+        working-directory: ./packages/raffles-client
       - name: Lint
         run: yarn lint-ci
-        working-directory: ./packages/web
+        working-directory: ./packages/raffles-client
       - name: Test
         run: CI=true yarn test --passWithNoTests
-        working-directory: ./packages/web
+        working-directory: ./packages/raffles-client
       - name: Headpat
         run: echo "Great job <3"
 
@@ -78,12 +78,12 @@ jobs:
           cache: 'yarn'
       - name: Install dependencies
         run: yarn install --frozen-lockfile
-        working-directory: ./packages/server
+        working-directory: ./packages/raffles-server
       - name: Lint
         run: yarn lint-ci
-        working-directory: ./packages/server
+        working-directory: ./packages/raffles-server
       - name: Test
         run: yarn test
-        working-directory: ./packages/server
+        working-directory: ./packages/raffles-server
       - name: Headpat
         run: echo "Great job <3"
