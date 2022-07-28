@@ -7,10 +7,7 @@ import { ReactComponent as MetaMaskLogo } from '../../../assets/icons/metamask-l
 import { useTranslation } from 'react-i18next';
 import useAuthenticate from 'hooks/useAuthenticate';
 
-const ConnectWalletModal = ({
-  metaMaskOnClick = () => {},
-  ...props
-}: ConnectWalletModalProps) => {
+const ConnectWalletModal = (props: ConnectWalletModalProps) => {
   const authenticate = useAuthenticate();
   const { t } = useTranslation('connect-wallet');
 
