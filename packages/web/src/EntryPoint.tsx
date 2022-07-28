@@ -62,7 +62,7 @@ const client = new ApolloClient({
 
 let config = {};
 
-if (process.env.REACT_APP_USE_RINKEBY_CHAIN) {
+if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
   config = {
     networks: [Rinkeby],
     readOnlyChainId: Rinkeby.chainId,
@@ -78,27 +78,26 @@ if (process.env.REACT_APP_USE_RINKEBY_CHAIN) {
     readOnlyChainId: Polygon.chainId,
     readOnlyUrls: {
       [Polygon.chainId]:
-        'https://mainnet.infura.io/v3/' +
+        'https://polygon-mainnet.g.alchemy.com/v2/' +
         process.env.REACT_APP_INFURA_PROJECT_ID,
     },
   };
 }
 
 const augmentedTheme = { ...dark, ...theme };
-
 function EntryPoint() {
   return (
     <ThemeProvider theme={dark}>
       <ThemeProviderMui theme={augmentedTheme}>
         <DAppProvider config={config}>
           <ApolloProvider client={client}>
-            <ModalProvider>
-              <BrowserRouter>
-                <OnboardingProvider>
+            <BrowserRouter>
+              <OnboardingProvider>
+                <ModalProvider>
                   <Routes />
-                </OnboardingProvider>
-              </BrowserRouter>
-            </ModalProvider>
+                </ModalProvider>
+              </OnboardingProvider>
+            </BrowserRouter>
           </ApolloProvider>
         </DAppProvider>
       </ThemeProviderMui>

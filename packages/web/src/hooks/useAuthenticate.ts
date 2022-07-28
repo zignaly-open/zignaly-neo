@@ -1,4 +1,4 @@
-import { useLazyQuery, useMutation } from '@apollo/client';
+import { useApolloClient, useLazyQuery, useMutation } from '@apollo/client';
 import { setToken } from '../util/token';
 import { useEthers } from '@usedapp/core';
 import { useAsync } from 'react-use';
@@ -14,6 +14,7 @@ function useRefetchCurrentUser(): () => Promise<unknown> {
   const [fetchUser] = useLazyQuery(GET_CURRENT_USER, {
     fetchPolicy: 'network-only',
   });
+
   return fetchUser;
 }
 
@@ -32,7 +33,7 @@ export default function useAuthenticate(): () => Promise<void> {
   const [getOrCreateUser] = useMutation(GET_OR_CREATE_USER);
   const [authenticate] = useMutation(AUTHENTICATE_METAMASK);
   const [isOkToStart, setIsOkToStart] = useState(false);
-  const fetchUser = useRefetchCurrentUser();
+  const client = useApolloClient();
   const { account, activateBrowserWallet, library } = useEthers();
 
   useAsync(async () => {
@@ -56,7 +57,9 @@ export default function useAuthenticate(): () => Promise<void> {
     });
 
     setToken(accessToken);
-    await fetchUser();
+    await client.refetchQueries({
+      include: [GET_CURRENT_USER],
+    });
     !onboardingCompletedAt && startOnboarding();
   }, [account, isOkToStart]);
 

@@ -12,14 +12,13 @@ import { CHANGE_PROFILE } from 'queries/users';
 import { UserSettingsValidation } from 'util/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Form } from './styles';
+import { UserSettingsModalProps } from '../types';
 
 const SettingsForm = ({
   username = '',
   discordName = '',
-}: {
-  username?: string;
-  discordName?: string;
-}) => {
+  ...props
+}: UserSettingsModalProps) => {
   // TODO: Add submit of userName and discordName to backend and avatar update
   const matchesLarge = useMediaQuery(theme.breakpoints.up('lg'));
   const [errorMessage, setErrorMessage] = useState('');
@@ -61,6 +60,7 @@ const SettingsForm = ({
       await updateUsername({
         variables: values,
       });
+      props.onClose({}, 'escapeKeyDown');
     } catch (_) {
       setErrorMessage('Something went wrong');
     }
@@ -125,9 +125,9 @@ const SettingsForm = ({
           <Gap gap={matchesLarge ? 40 : 15} />
           <Box gap='12px' display='flex' flexDirection={getFlexDirection()}>
             <Button
-              minWidth={128}
               caption={t('cancel')}
               variant='secondary'
+              onClick={(e) => props.onClose(e, 'escapeKeyDown')}
               size='large'
             />
             <Button

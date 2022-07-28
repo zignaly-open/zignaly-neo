@@ -5,32 +5,10 @@ import { CLAIM } from 'queries/auctions';
 import React, { FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, ErrorMessage, InputText, Typography } from 'zignaly-ui';
+import CongratulationsModal from '../Congratulations';
 import DialogContainer from '../DialogContainer';
 import { Form } from './styles';
 import { ClaimModalProps } from './types';
-
-const CongratulationsModal = ({ auction, ...props }: ClaimModalProps) => {
-  const { t } = useTranslation('claim');
-
-  return (
-    <DialogContainer title={t('congratulations')} {...props}>
-      <Typography color='neutral200'>{t('claim-success')}</Typography>
-      <Box
-        gap='12px'
-        display='flex'
-        justifyContent='center'
-        sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
-        mt='94px'
-      >
-        <Button
-          caption={t('close')}
-          size='large'
-          onClick={(e) => props.onClose(e, 'escapeKeyDown')}
-        />
-      </Box>
-    </DialogContainer>
-  );
-};
 
 const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const { t } = useTranslation(['claim', 'user-settings', 'global']);
