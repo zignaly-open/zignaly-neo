@@ -28,7 +28,7 @@ export default async function watchTransactions() {
   );
   const web3 = new Web3(new Web3.providers.HttpProvider(rpcUrl));
   const zigCoinContract = new web3.eth.Contract(
-    (abi as unknown) as AbiItem,
+    abi as unknown as AbiItem,
     contractAddress,
   );
 
@@ -59,9 +59,7 @@ export default async function watchTransactions() {
     });
 
     for (let index = 0; index < transferEvents.length; index++) {
-      await handleEventTransfer(
-        (transferEvents[index] as unknown) as ChainEvent,
-      );
+      await handleEventTransfer(transferEvents[index] as unknown as ChainEvent);
     }
 
     setLastProcessedBlock(to);

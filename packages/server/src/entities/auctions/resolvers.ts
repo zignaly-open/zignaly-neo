@@ -101,10 +101,10 @@ async function getAuctions(
   showAllBids?: boolean,
 ) {
   const bids = await getSortedAuctionBids(id, showAllBids, user);
-  const auctions = ((await Auction.findAll({
+  const auctions = (await Auction.findAll({
     where: { ...(id ? { id } : {}) },
     include: [AuctionBasketItem],
-  })) as unknown) as AuctionType[];
+  })) as unknown as AuctionType[];
 
   auctions.forEach((x) => {
     // here we will match auctions and bids
@@ -213,8 +213,9 @@ export const resolvers = {
       // here we SPECIFICALLY do not pass the current user to not receive current user's bid
       // TODO: maybe we should refactor it to make this more explicit
       const winningBids = await getSortedAuctionBids(id, false, undefined);
-      const winningBidId = winningBids.find((bid) => bid.user.id === user.id)
-        ?.id;
+      const winningBidId = winningBids.find(
+        (bid) => bid.user.id === user.id,
+      )?.id;
       if (!winningBidId) throw new Error('Can not find the bid');
       const winningBid = await AuctionBid.findByPk(winningBidId);
 
