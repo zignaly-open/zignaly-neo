@@ -1,6 +1,6 @@
 import { Auction, AuctionBid } from './model';
 import BN from 'bignumber.js';
-import { AuctionBidType, AuctionType } from '@zigraffle/shared/types';
+import { AuctionBidType, AuctionType } from '@zignaly/raffles-shared/types';
 import { getUserBalance } from '../transactions/util';
 
 export function getMinRequiredBidForAuction(

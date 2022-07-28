@@ -1,5 +1,5 @@
 import { MenuList, styled } from '@mui/material';
-import { UserType } from '@zigraffle/shared/types';
+import { UserType } from '@zignaly/raffles-shared/types';
 import UserSettingsModal from 'components/Modals/UserSettings';
 import { useLogout } from 'hooks/useAuthenticate';
 import React from 'react';

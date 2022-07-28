@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { Typography, TextButton, Button } from 'zignaly-ui';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AuctionType } from '@zigraffle/shared/types';
+import { AuctionType } from '@zignaly/raffles-shared/types';
 import FinalCountdown from './FinalCountdown';
 import BidButton from './BidButton';
 import { getWinningLosingStatus } from './util';

@@ -1,11 +1,12 @@
 {
-  "name": "@zignaly-mono",
+  "name": "@zignaly/mono",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "postinstall": "husky install",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "bootstrap": "lerna bootstrap",
+    "test": "lerna run test",
     "frontend": "cd packages/raffles-client && env-cmd -f .env yarn start",
     "backend": "cd packages/raffles-server && yarn dev",
     "build": "cd packages/raffles-client && yarn && env-cmd -f .env.production GENERATE_SOURCEMAP=false yarn build && cd ../server && yarn",

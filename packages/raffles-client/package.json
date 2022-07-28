@@ -1,5 +1,5 @@
 {
-  "name": "@zigraffle/ui",
+  "name": "@zignaly/raffles-client",
   "version": "0.1.0",
   "scripts": {
     "start": "react-app-rewired start",
@@ -60,7 +60,7 @@
     "@types/react": "18.0.10",
     "@types/react-dom": "18.0.5",
     "@usedapp/core": "^1.0.8",
-    "@zigraffle/shared": "../shared",
+    "@zignaly/raffles-shared": "*",
     "assert": "^2.0.0",
     "bignumber.js": "^9.0.2",
     "buffer": "^6.0.3",

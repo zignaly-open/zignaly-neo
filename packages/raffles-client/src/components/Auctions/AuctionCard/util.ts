@@ -1,4 +1,4 @@
-import { AuctionType } from '@zigraffle/shared/types';
+import { AuctionType } from '@zignaly/raffles-shared/types';
 
 export function getWinningLosingStatus(auction: AuctionType): {
   isActive: boolean;

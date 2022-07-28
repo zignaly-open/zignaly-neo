@@ -5,7 +5,7 @@ import { useQuery, useSubscription } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import Masonry from '@mui/lab/Masonry';
-import { AuctionType } from '@zigraffle/shared/types';
+import { AuctionType } from '@zignaly/raffles-shared/types';
 import AuctionCard from '../AuctionCard';
 import Loader from '../../common/Loader';
 import { getWinningLosingStatus } from '../AuctionCard/util';

@@ -1,4 +1,4 @@
-import { AuctionType, AuctionBidType } from '@zigraffle/shared/types';
+import { AuctionType, AuctionBidType } from '@zignaly/raffles-shared/types';
 import pubsub from '../../pubsub';
 import { AUCTION_UPDATED } from './constants';
 import { Auction, AuctionBasketItem, AuctionBid } from './model';

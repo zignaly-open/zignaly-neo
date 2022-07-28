@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
-import { AuctionType } from '@zigraffle/shared/types';
+import { AuctionType } from '@zignaly/raffles-shared/types';
 import useCurrentUser from '../../../hooks/useCurrentUser';
 import { useTranslation } from 'react-i18next';
 import useBalance from '../../../hooks/useBalance';

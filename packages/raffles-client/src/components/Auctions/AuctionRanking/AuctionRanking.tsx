@@ -2,7 +2,7 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { Typography } from 'zignaly-ui';
-import { AuctionBidType, AuctionType } from '@zigraffle/shared/types';
+import { AuctionBidType, AuctionType } from '@zignaly/raffles-shared/types';
 import { useTranslation } from 'react-i18next';
 import useCurrentUser from 'hooks/useCurrentUser';
 import { useMediaQuery } from '@mui/material';
