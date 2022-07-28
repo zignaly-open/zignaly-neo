@@ -131,6 +131,7 @@
     "eslint-plugin-standard": "^5.0.0",
     "eslint-plugin-unicorn": "^42.0.0",
     "npm-run-all": "^4.1.5",
+    "prettier": "^2.7.1",
     "prop-types": "^15.8.1",
     "storybook-react-i18next": "^1.0.20",
     "webpack": "^5.73.0"

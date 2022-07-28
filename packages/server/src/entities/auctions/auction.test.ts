@@ -27,7 +27,7 @@ describe('Auctions', () => {
   it('should not let bid on non-existing auctions', async () => {
     const [, aliceToken] = await createAlice();
     const { body } = await makeBid(
-      { id: -5 } as unknown as Auction,
+      ({ id: -5 } as unknown) as Auction,
       aliceToken,
     );
     expect(body.errors[0].message).toBe('Auction not found');
