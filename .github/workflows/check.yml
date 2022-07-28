@@ -1,0 +1,89 @@
+on: [ pull_request ]
+
+jobs:
+  pre_job:
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+      paths_result: ${{ steps.skip_check.outputs.paths_result }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v4
+        with:
+          paths_filter: |
+            zigraffle_frontend:
+              paths:
+                - 'packages/web/**/*'
+                - 'packages/shared/**/*'
+            zigraffle_backend:
+              paths:
+                - 'packages/server/**/*'
+                - 'packages/shared/**/*'
+          # Can be mixed with the "global" 'paths_ignore' / 'paths' options, for example:
+          # paths_ignore: '["**/README.md"]'
+
+  zigraffle_frontend:
+    needs: pre_job
+    # If 'skip-duplicate-actions' terminates before the paths checks are performed (for example, when a successful duplicate run has
+    # been found) 'paths_result' outputs an empty object ('{}'). This can be easily intercepted in the if condition of a job
+    # by checking the result of the "global" 'should_skip' output first.
+    if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).zigraffle_frontend.should_skip
+    name: Make sure our Zigraffle UI code is great <3
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [ 16.x ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+        working-directory: ./packages/web
+      - name: Build
+        run: yarn build
+        working-directory: ./packages/web
+      - name: Lint
+        run: yarn lint-ci
+        working-directory: ./packages/web
+      - name: Test
+        run: CI=true yarn test --passWithNoTests
+        working-directory: ./packages/web
+      - name: Headpat
+        run: echo "Great job <3"
+
+  zigraffle_backend:
+    needs: pre_job
+    if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).zigraffle_backend.should_skip
+    name: Make sure our Zigraffle Server code is magnificent <3
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [ 16.x ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: 'yarn'
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+        working-directory: ./packages/server
+      - name: Lint
+        run: yarn lint-ci
+        working-directory: ./packages/server
+      - name: Test
+        run: yarn test
+        working-directory: ./packages/server
+      - name: Headpat
+        run: echo "Great job <3"

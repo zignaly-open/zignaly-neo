@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { TextButton } from 'zignaly-ui';
 import { Box } from '@mui/system';
 import TransferZigModal from 'components/Modals/TransferZig';
+import { useModal } from 'mui-modal-provider';
 
 const MenuItem = styled(TextButton)`
   padding: 6px 15px;
@@ -18,14 +19,9 @@ const MenuItem = styled(TextButton)`
   }
 `;
 
-const Menu = ({
-  currentUser,
-  showModal,
-}: {
-  currentUser: UserType;
-  showModal: (...args: any[]) => void;
-}) => {
+const Menu = ({ currentUser }: { currentUser: UserType }) => {
   const logout = useLogout();
+  const { showModal } = useModal();
   const { t } = useTranslation('global');
 
   return (

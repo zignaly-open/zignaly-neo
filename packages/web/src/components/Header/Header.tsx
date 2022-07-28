@@ -12,14 +12,16 @@ import TransferZigModal from 'components/Modals/TransferZig';
 import Menu from './Menu';
 import { Box } from '@mui/system';
 
-// @ts-ignore: fixme
+// TODO: we should fix types in zignaly-ui
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const StyledWalletIcon = styled(WalletIcon)`
   color: ${({ theme }) => theme.neutral300};
 `;
 
 const MenuButton = styled(IconButton)`
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    margin-left: '-18px';
+    margin-left: -18px;
   }
 
   button > div {
@@ -81,11 +83,11 @@ const Header = () => {
         <MenuButton
           key={'user'}
           variant={'flat'}
-          // @ts-ignore
+          // TODO: we should fix svgs in zignaly-ui
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore: fixme
           icon={<UserIcon color='#65647E' />}
-          renderDropDown={
-            <Menu currentUser={currentUser} showModal={showModal} />
-          }
+          renderDropDown={<Menu currentUser={currentUser} />}
           dropDownOptions={{
             alignment: 'right',
             position: 'static',
