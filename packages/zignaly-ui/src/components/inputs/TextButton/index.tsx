@@ -21,6 +21,7 @@ function TextButton({
   target,
   className,
   color = "links",
+  variant = "h4",
 }: ButtonProps): ReactElement {
   return (
     <styled.Layout
@@ -40,7 +41,7 @@ function TextButton({
       <styled.Container>
         <styled.ElementsContainer>
           {leftElement && <styled.LeftElement>{leftElement}</styled.LeftElement>}
-          <Typography color={color} weight="regular" variant="h4" underline={underline}>
+          <Typography color={color} weight="regular" variant={variant} underline={underline}>
             {caption}
           </Typography>
           {rightElement && <styled.RightElement>{rightElement}</styled.RightElement>}
