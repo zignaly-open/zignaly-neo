@@ -1,5 +1,5 @@
-import { styled } from "@mui/system";
-import { TextButton } from "zignaly-ui";
+import { styled } from '@mui/system';
+import { TextButton } from 'zignaly-ui';
 
 export const AuctionImage = styled('img')`
   width: 268px;
