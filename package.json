@@ -1,15 +1,15 @@
 {
-  "name": "zignaly-zigraffle",
+  "name": "@zignaly-mono",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "postinstall": "husky install",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "frontend": "cd packages/web && env-cmd -f .env yarn start",
-    "backend": "cd packages/server && yarn dev",
-    "build": "cd packages/web && yarn && env-cmd -f .env.production GENERATE_SOURCEMAP=false yarn build && cd ../server && yarn",
-    "start": "cd packages/server && yarn start"
+    "frontend": "cd packages/raffles-client && env-cmd -f .env yarn start",
+    "backend": "cd packages/raffles-server && yarn dev",
+    "build": "cd packages/raffles-client && yarn && env-cmd -f .env.production GENERATE_SOURCEMAP=false yarn build && cd ../server && yarn",
+    "start": "cd packages/raffles-server && yarn start"
   },
   "engines": {
     "node": "^16"
@@ -18,6 +18,7 @@
   "license": "ISC",
   "devDependencies": {
     "husky": "^8.0.1",
+    "lerna": "^5.1.2",
     "lint-staged": "^13.0.0",
     "typescript": "4.7.2"
   },
