@@ -64,7 +64,9 @@
     "eject": "react-app-rewired eject",
     "lint:tsc": "tsc --noemit",
     "lint:eslint": "eslint --fix --ignore-path .eslintignore ./src --ext .ts,.tsx",
+    "lint:eslint-ci": "eslint --ignore-path .eslintignore ./src --ext .ts,.tsx",
     "lint": "run-s lint:tsc lint:eslint",
+    "lint-ci": "run-s lint:tsc lint:eslint-ci",
     "storybook": "start-storybook -p 6006 -s public",
     "build-storybook": "build-storybook -s public"
   },

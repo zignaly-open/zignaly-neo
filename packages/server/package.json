@@ -6,8 +6,9 @@
   "license": "MIT",
   "scripts": {
     "start": "ts-node src/index.ts",
-    "fixtures": "ts-node src/entities/__fixtures/fixtures.ts",
     "test": "NODE_ENV=test jest",
+    "lint": "eslint --fix --ignore-path .eslintignore .",
+    "lint-ci": "eslint --ignore-path .eslintignore .",
     "dev": "nodemon --ext \"ts,json\" --watch \"src/**\" --exec \"ts-node src/index.ts\""
   },
   "dependencies": {
