@@ -10,7 +10,7 @@ import {
   AUTHENTICATE_METAMASK,
 } from 'queries/users';
 
-function useRefetchCurrentUser (): () => Promise<unknown> {
+function useRefetchCurrentUser(): () => Promise<unknown> {
   const [fetchUser] = useLazyQuery(GET_CURRENT_USER, {
     fetchPolicy: 'network-only',
   });
@@ -18,7 +18,7 @@ function useRefetchCurrentUser (): () => Promise<unknown> {
   return fetchUser;
 }
 
-export function useLogout (): () => Promise<void> {
+export function useLogout(): () => Promise<void> {
   const fetchUser = useRefetchCurrentUser();
   const { deactivate } = useEthers();
   return async () => {
@@ -28,7 +28,7 @@ export function useLogout (): () => Promise<void> {
   };
 }
 
-export default function useAuthenticate (): () => Promise<void> {
+export default function useAuthenticate(): () => Promise<void> {
   const { startOnboarding } = useContext(onboardingContext);
   const [getOrCreateUser] = useMutation(GET_OR_CREATE_USER);
   const [authenticate] = useMutation(AUTHENTICATE_METAMASK);
