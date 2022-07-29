@@ -85,7 +85,8 @@ export async function makeRequest(gql: string, token: string): Promise<any> {
 }
 
 export async function clearMocks() {
-  jest.clearAllMocks();
+  jest.resetAllMocks();
+  jest.restoreAllMocks();
 }
 
 export async function wipeOut() {
