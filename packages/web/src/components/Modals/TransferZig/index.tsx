@@ -72,8 +72,12 @@ const TransferZigModal = ({
               label={''}
               value={''}
               showMaxButton={true}
+              // TODO: we should fix svgs in zignaly-ui
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore: fixme
               customCoinIcon={<ZignalyIcon width={32} height={32} />}
+              // TODO: we should fix types in zignaly-ui
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               onChange={(e: any) => {
                 setTransferAmount(e.target.value);
               }}

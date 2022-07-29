@@ -1,7 +1,6 @@
 import { IconButton, BrandImage, UserIcon, WalletIcon } from 'zignaly-ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import useAuthenticate from '../../hooks/useAuthenticate';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import { Header as ZIGHeader, Button } from 'zignaly-ui';
 import { styled } from '@mui/material/styles';
@@ -12,14 +11,16 @@ import TransferZigModal from 'components/Modals/TransferZig';
 import Menu from './Menu';
 import { Box } from '@mui/system';
 
-// @ts-ignore: fixme
+// TODO: we should fix types in zignaly-ui
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const StyledWalletIcon = styled(WalletIcon)`
   color: ${({ theme }) => theme.neutral300};
 `;
 
 const MenuButton = styled(IconButton)`
   ${({ theme }) => theme.breakpoints.down('sm')} {
-    margin-left: '-18px';
+    margin-left: -18px;
   }
 
   button > div {
@@ -29,7 +30,6 @@ const MenuButton = styled(IconButton)`
 
 const Header = () => {
   const { t } = useTranslation('global');
-  const authenticate = useAuthenticate();
   const { user: currentUser, loading } = useCurrentUser();
   const { showModal } = useModal();
 
@@ -69,9 +69,7 @@ const Header = () => {
               variant='secondary'
               size='small'
               onClick={() => {
-                showModal(ConnectWalletModal, {
-                  metaMaskOnClick: authenticate,
-                });
+                showModal(ConnectWalletModal);
               }}
               caption={t('log-in')}
               key='login'
@@ -81,11 +79,11 @@ const Header = () => {
         <MenuButton
           key={'user'}
           variant={'flat'}
-          // @ts-ignore
+          // TODO: we should fix svgs in zignaly-ui
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore: fixme
           icon={<UserIcon color='#65647E' />}
-          renderDropDown={
-            <Menu currentUser={currentUser} showModal={showModal} />
-          }
+          renderDropDown={<Menu currentUser={currentUser} />}
           dropDownOptions={{
             alignment: 'right',
             position: 'static',
