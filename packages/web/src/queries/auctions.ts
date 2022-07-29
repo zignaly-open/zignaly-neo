@@ -61,11 +61,15 @@ export const BID_AUCTION = gql`
           username
         }
       }
-
       userBid {
         id
-        value
         position
+        user {
+          id
+          username
+        }
+        value
+        date
         isClaimed
       }
     }
@@ -86,6 +90,17 @@ export const BIDS_SUBSCRIPTION = gql`
       id
       expiresAt
       minimalBid
+      userBid {
+        id
+        position
+        user {
+          id
+          username
+        }
+        value
+        date
+        isClaimed
+      }
       bids {
         id
         position

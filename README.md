@@ -38,7 +38,7 @@ OK what next? in `packages/web` do `cp .env.sample .env`. We have 5 fields there
   with the backend runninn out of the box)
 * `REACT_APP_GRAPHQL_WS` - backend's GraphQL Websocket endpoint. Remove that line altogether to use the default one (
   will work with the backend runninn out of the box)
-* `REACT_APP_INFURA_PROJECT_ID` - surprisingly, it's infura project id
+* `REACT_APP_ALCHEMY_PROJECT_ID` - surprisingly, it's alchemy project id
 * `REACT_APP_RECEIVING_ADDRESS` - this is the address to which the payments will go (all the profits)
 * `REACT_APP_CONTRACT_ADDRESS` - contract address for the token that we accept as a payment
 * `REACT_APP_USE_RINKEBY_CHAIN` - whether or not we should use Rinkeby

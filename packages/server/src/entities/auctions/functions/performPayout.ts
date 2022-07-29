@@ -3,7 +3,7 @@ import { Payout } from '../../payouts/model';
 import { User } from '../../users/model';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-async function performPayout(payout: Payout): Promise<string> {
+async function performPayout(payout: Payout): Promise<void> {
   const scriptUrl = process.env.REACT_APP_SHEET_BEST_URL;
   const { discordName, username } = await User.findByPk(payout.userId);
   const payload = {
@@ -21,7 +21,6 @@ async function performPayout(payout: Payout): Promise<string> {
     .catch((e) => {
       throw e;
     });
-  return 'Tada!';
 }
 
 export default performPayout;

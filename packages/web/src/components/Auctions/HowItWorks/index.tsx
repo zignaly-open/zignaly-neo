@@ -24,6 +24,7 @@ const HowItWorks = () => {
           onClick={() => setClosed(!closed)}
           caption={closed ? 'Read More' : 'Read Less'}
           color='links'
+          variant='body1'
         />
       </Typography>
       {!closed && (
