@@ -25,8 +25,5 @@ export class Payout extends Model {
   public auction: Auction;
 
   @Column
-  public toWallet: string;
-
-  @Column
-  public txId: string;
+  public publicAddress: string;
 }

@@ -69,7 +69,7 @@ if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
     readOnlyUrls: {
       [Mumbai.chainId]:
         'https://polygon-mumbai.g.alchemy.com/v2/' +
-        process.env.REACT_APP_INFURA_PROJECT_ID,
+        process.env.REACT_APP_ALCHEMY_PROJECT_ID,
     },
   };
 } else {
@@ -79,7 +79,7 @@ if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
     readOnlyUrls: {
       [Polygon.chainId]:
         'https://polygon-mainnet.g.alchemy.com/v2/' +
-        process.env.REACT_APP_INFURA_PROJECT_ID,
+        process.env.REACT_APP_ALCHEMY_PROJECT_ID,
     },
   };
 }

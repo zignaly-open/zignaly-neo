@@ -1,7 +1,10 @@
 import { ImportMock } from 'ts-mock-imports';
 import * as config from '../../../config';
-import { User } from './model';
-import { authenticateSignature, signJwtToken } from './util';
+import { User } from '../../../src/entities/users/model';
+import {
+  authenticateSignature,
+  signJwtToken,
+} from '../../../src/entities/users/util';
 
 const secret = 'razrazrazetohardbass';
 const signature =

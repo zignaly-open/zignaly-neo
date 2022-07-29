@@ -14,9 +14,10 @@
   "dependencies": {
     "@graphql-tools/schema": "^8.3.13",
     "@slack/webhook": "^6.1.0",
-    "@zignaly/raffles-shared": "*",
+    "@zignaly/raffles-shared": "../raffles-shared",
     "apollo-server-core": "^3.8.2",
     "apollo-server-express": "^3.8.1",
+    "axios": "^0.27.2",
     "bignumber.js": "^9.0.2",
     "compression": "^1.7.4",
     "cors": "^2.8.5",

@@ -1,7 +1,14 @@
 import { Box, useMediaQuery } from '@mui/material';
 import { Gap } from 'components/Modals/ConnectWallet/styles';
 import React, { useState } from 'react';
-import { Avatar, Button, ErrorMessage, InputText } from 'zignaly-ui';
+import {
+  Avatar,
+  Button,
+  ErrorAlertIcon,
+  ErrorMessage,
+  InputText,
+  Typography,
+} from 'zignaly-ui';
 import { InputContainer } from '../styles';
 import Placeholder from '../../../../assets/avatar-placeholder.png';
 import theme from 'theme';
@@ -104,6 +111,21 @@ const SettingsForm = ({
             />
           </InputContainer>
           <Gap gap={5} />
+          <Box display='flex' alignItems='center' flexDirection='row' gap='2px'>
+            <Typography color='neutral200'>
+              {t('discord-user-label', {
+                ns: 'user-settings',
+              })}
+            </Typography>
+            <ErrorAlertIcon
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore: fixme
+              color='#89899A'
+            />
+          </Box>
+          <Typography variant='h4' weight='medium' color='neutral400'>
+            {t('discordNameInfo')}
+          </Typography>
           <InputContainer width={getInputWidth()}>
             <Controller
               name='discordName'
@@ -114,7 +136,6 @@ const SettingsForm = ({
                 <InputText
                   placeholder={t('please-enter-discord-user')}
                   minHeight={23}
-                  label={t('discord-user-label')}
                   value={field.value}
                   onChange={field.onChange}
                   error={errors.discordName?.message}

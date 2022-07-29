@@ -4,7 +4,8 @@
     "please-enter-discord-user": "Please enter your discord user",
     "cancel": "Cancel",
     "save-profile": "Save Profile",
-    "discord-user-label": "Discord User:",
+    "discord-user-label": "Discord User",
     "username-label": "Username:",
-    "settings": "Settings"
+    "settings": "Settings",
+    "discordNameInfo": "Make sure it has the following format (User#0000)"
 }

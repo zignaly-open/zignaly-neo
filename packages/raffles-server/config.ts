@@ -16,3 +16,4 @@ export const contractAddress = process.env.CONTRACT_ADDRESS as string;
 export const abi = IERC20;
 export const isTest = process.env.NODE_ENV === 'test';
 export const port = process.env.PORT || 4000;
+export const payoutSpreadsheetUrl = process.env.REACT_APP_SHEET_BEST_URL;

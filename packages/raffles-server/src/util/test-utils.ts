@@ -62,7 +62,6 @@ export async function makeBid(auction: Auction, token: string): Promise<any> {
           username
         }
       }
-
       userBid {
         id
         value
@@ -305,7 +304,6 @@ export const AUCTIONS_QUERY = `
           username
         }
       }
-
       userBid {
         id
         value

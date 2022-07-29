@@ -1,19 +1,20 @@
-import '../..';
 import {
-  claimAuction,
+  waitUntilTablesAreCreated,
+  wipeOut,
   clearMocks,
   createAlice,
   createAuction,
-  createRandomUser,
-  expireAuction,
-  getBalance,
-  getFirstAuction,
   giveMoney,
   makeBid,
-  waitUntilTablesAreCreated,
-  wipeOut,
+  expireAuction,
+  getFirstAuction,
+  claimAuction,
+  getBalance,
+  createRandomUser,
 } from '../../util/test-utils';
-import * as payout from '../../chain/payout';
+import payout from './functions/performPayout';
+
+jest.mock('./functions/performPayout.ts', () => jest.fn(() => ({})));
 
 describe('Auction Claims', () => {
   beforeAll(waitUntilTablesAreCreated);
@@ -21,11 +22,11 @@ describe('Auction Claims', () => {
   afterEach(clearMocks);
 
   it('should let claim auctions and send information to the ui', async () => {
-    const spy = jest.spyOn(payout, 'performPayout');
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     await giveMoney(alice, 300);
     await makeBid(auction, aliceToken);
+
     await expireAuction(auction.id);
     const notClaimedAuction = await getFirstAuction(aliceToken);
     expect(notClaimedAuction.userBid.isClaimed).toBe(false);
@@ -41,11 +42,10 @@ describe('Auction Claims', () => {
     expect(claimedAuction.userBid.isClaimed).toBe(true);
     expect(await getBalance(aliceToken)).toBe('199');
 
-    expect(spy).toHaveBeenCalledTimes(1);
+    expect(payout).toHaveBeenCalledTimes(1);
   });
 
   it('should not let claim unwon auctions', async () => {
-    const spy = jest.spyOn(payout, 'performPayout');
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     await giveMoney(alice, 300);
@@ -69,11 +69,10 @@ describe('Auction Claims', () => {
     expect(claimedAuction.userBid.isClaimed).toBe(false);
     expect(await getBalance(aliceToken)).toBe('299');
 
-    expect(spy).toHaveBeenCalledTimes(0);
+    expect(payout).toHaveBeenCalledTimes(0);
   });
 
   it('should not let claim multiple times', async () => {
-    const spy = jest.spyOn(payout, 'performPayout');
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     await giveMoney(alice, 300);
@@ -85,11 +84,10 @@ describe('Auction Claims', () => {
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
     expect(await getBalance(aliceToken)).toBe('199');
-    expect(spy).toHaveBeenCalledTimes(1);
+    expect(payout).toHaveBeenCalledTimes(1);
   });
 
   it('should not let claim unfinished auctions', async () => {
-    const spy = jest.spyOn(payout, 'performPayout');
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     await giveMoney(alice, 300);
@@ -100,11 +98,10 @@ describe('Auction Claims', () => {
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
     expect(await getBalance(aliceToken)).toBe('299');
-    expect(spy).toHaveBeenCalledTimes(0);
+    expect(payout).toHaveBeenCalledTimes(0);
   });
 
   it('should not let claim auctions after max claim', async () => {
-    const spy = jest.spyOn(payout, 'performPayout');
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     auction.maxClaimDate = new Date(Date.now() - 1);
@@ -117,11 +114,10 @@ describe('Auction Claims', () => {
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
     expect(await getBalance(aliceToken)).toBe('299');
-    expect(spy).toHaveBeenCalledTimes(0);
+    expect(payout).toHaveBeenCalledTimes(0);
   });
 
   it('should not let claim without enough money', async () => {
-    const spy = jest.spyOn(payout, 'performPayout');
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     await giveMoney(alice, 100);
@@ -132,6 +128,6 @@ describe('Auction Claims', () => {
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
     expect(await getBalance(aliceToken)).toBe('99');
-    expect(spy).toHaveBeenCalledTimes(0);
+    expect(payout).toHaveBeenCalledTimes(0);
   });
 });
