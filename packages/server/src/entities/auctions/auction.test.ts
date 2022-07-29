@@ -1,6 +1,9 @@
 import { Auction } from '../../../src/entities/auctions/model';
 import pubsub from '../../../src/pubsub';
 import {
+  waitUntilTablesAreCreated,
+  wipeOut,
+  clearMocks,
   createAlice,
   makeBid,
   createAuction,
@@ -11,14 +14,9 @@ import {
   createBob,
   getFirstAuction,
   createRandomUser,
-  expireAuction,
-} from '../../helpers/mocks';
-import {
-  waitUntilTablesAreCreated,
-  wipeOut,
-  clearMocks,
   wait,
-} from '../../helpers/operation';
+  expireAuction,
+} from '../../util/test-utils';
 
 describe('Auctions', () => {
   beforeAll(waitUntilTablesAreCreated);

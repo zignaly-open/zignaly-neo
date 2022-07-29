@@ -1,19 +1,17 @@
-import '../../../src';
-
-import { User } from '../../../src/entities/users/model';
-import {
-  createAlice,
-  createAlicesDiscord,
-  createBob,
-  createBobDiscord,
-} from '../../helpers/mocks';
+import '../..';
 import {
   changeDiscordName,
   changeUsername,
   checkUsername,
+  createAlice,
+  createAlicesDiscord,
+  createBob,
+  createBobDiscord,
   waitUntilTablesAreCreated,
   wipeOut,
-} from '../../helpers/operation';
+} from '../../util/test-utils';
+
+import { User } from './model';
 
 describe('User', () => {
   beforeAll(waitUntilTablesAreCreated);

@@ -1,4 +1,5 @@
 import {
+  waitUntilTablesAreCreated,
   createAlice,
   createAuction,
   giveMoney,
@@ -6,8 +7,7 @@ import {
   expireAuction,
   claimAuction,
   getPayouts,
-} from '../../helpers/mocks';
-import { waitUntilTablesAreCreated } from '../../helpers/operation';
+} from '../../util/test-utils';
 
 describe('Payouts', () => {
   beforeAll(waitUntilTablesAreCreated);

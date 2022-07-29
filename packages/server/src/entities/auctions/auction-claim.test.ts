@@ -1,24 +1,20 @@
-import payout from '../../../src/entities/auctions/functions/performPayout';
 import {
-  claimAuction,
-  createAlice,
-  createAuction,
-  createRandomUser,
-  expireAuction,
-  getBalance,
-  getFirstAuction,
-  giveMoney,
-  makeBid,
-} from '../../helpers/mocks';
-import {
-  clearMocks,
   waitUntilTablesAreCreated,
   wipeOut,
-} from '../../helpers/operation';
+  clearMocks,
+  createAlice,
+  createAuction,
+  giveMoney,
+  makeBid,
+  expireAuction,
+  getFirstAuction,
+  claimAuction,
+  getBalance,
+  createRandomUser,
+} from '../../util/test-utils';
+import payout from './functions/performPayout';
 
-jest.mock(
-    '../../../src/entities/auctions/functions/performPayout.ts',
-    () => jest.fn(() => ({})));
+jest.mock('./functions/performPayout.ts', () => jest.fn(() => ({})));
 
 describe('Auction Claims', () => {
   beforeAll(waitUntilTablesAreCreated);
@@ -37,7 +33,7 @@ describe('Auction Claims', () => {
 
     const {
       body: {
-        data: { claim }
+        data: { claim },
       },
     } = await claimAuction(auction, aliceToken);
 
