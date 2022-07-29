@@ -1,13 +1,12 @@
-import '../..';
 import {
-  claimAuction,
+  waitUntilTablesAreCreated,
   createAlice,
   createAuction,
-  expireAuction,
-  getPayouts,
   giveMoney,
   makeBid,
-  waitUntilTablesAreCreated,
+  expireAuction,
+  claimAuction,
+  getPayouts,
 } from '../../util/test-utils';
 
 describe('Payouts', () => {

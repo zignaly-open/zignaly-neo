@@ -10,6 +10,7 @@ import {
   waitUntilTablesAreCreated,
   wipeOut,
 } from '../../util/test-utils';
+
 import { User } from './model';
 
 describe('User', () => {

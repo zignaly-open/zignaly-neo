@@ -15,6 +15,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const {
     user: { discordName, publicAddress },
   } = useCurrentUser();
+
   const [errorMessage, setErrorMessage] = useState('');
   const [success, setSuccess] = useState(false);
   const [claim, { loading }] = useMutation(CLAIM);
@@ -22,8 +23,10 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     try {
-      await claim({
-        variables: { id: auction.id },
+      claim({
+        variables: {
+          id: auction.id,
+        },
       });
       setSuccess(true);
     } catch (_) {
@@ -44,6 +47,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
       <Form onSubmit={submit}>
         <Typography color='neutral200'>{t('connected-wallet')}</Typography>
         <InputText
+          name='publicAddress'
           value={publicAddress}
           placeholder={t('connected-wallet')}
           disabled={true}
@@ -60,6 +64,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
           </Typography>
         </Box>
         <InputText
+          name='discordName'
           value={discordName}
           placeholder={t('please-enter-discord-user', {
             ns: 'user-settings',

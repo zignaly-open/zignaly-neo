@@ -39,6 +39,7 @@ export const GET_AUCTIONS = gql`
         id
         value
         position
+        isClaimed
       }
     }
   }
@@ -51,6 +52,7 @@ export const BID_AUCTION = gql`
       title
       createdAt
       expiresAt
+      isClaimed
       bids {
         id
         value
@@ -59,11 +61,16 @@ export const BID_AUCTION = gql`
           username
         }
       }
-
       userBid {
         id
-        value
         position
+        user {
+          id
+          username
+        }
+        value
+        date
+        isClaimed
       }
     }
   }
@@ -83,6 +90,17 @@ export const BIDS_SUBSCRIPTION = gql`
       id
       expiresAt
       minimalBid
+      userBid {
+        id
+        position
+        user {
+          id
+          username
+        }
+        value
+        date
+        isClaimed
+      }
       bids {
         id
         position
