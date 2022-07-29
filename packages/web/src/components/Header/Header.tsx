@@ -83,7 +83,9 @@ const Header = () => {
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore: fixme
           icon={<UserIcon color='#65647E' />}
-          renderDropDown={<Menu currentUser={currentUser} />}
+          renderDropDown={
+            <Menu showModal={showModal} currentUser={currentUser} />
+          }
           dropDownOptions={{
             alignment: 'right',
             position: 'static',
