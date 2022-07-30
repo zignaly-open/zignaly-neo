@@ -18,7 +18,7 @@ jobs:
           node-version: 16.x
           cache: 'yarn'
       - name: Install Lerna
-        run: yarn install --global lerna
+        run: yarn global add lerna
       - name: Debug
         uses: crazy-max/ghaction-dump-context@v1
       - name: Bootstrap modified packages
