@@ -1,0 +1,33 @@
+on: [ pull_request ]
+
+jobs:
+  lint_and_test:
+    name: Make sure our Zignaly code is great <3
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [ 16.x ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: 'yarn'
+      - name: Install Lerna
+        run: yarn install --global lerna
+      - name: Debug
+        uses: crazy-max/ghaction-dump-context@v1
+      - name: Bootstrap modified packages
+        run: lerna bootstrap --since=${{ github.event.pull_request.head.sha }}
+      - name: Build modified packages
+        run: lerna run build --since=${{ github.event.pull_request.head.sha }}
+      - name: Lint modified packages
+        run: lerna run lint-ci --since=${{ github.event.pull_request.head.sha }}
+      - name: Lint modified packages
+        run: lerna run test --since=${{ github.event.pull_request.head.sha }}
+      - name: Headpat
+        run: echo "Great job <3"
