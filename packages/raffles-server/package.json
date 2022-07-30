@@ -5,6 +5,7 @@
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
   "main": "index.js",
   "scripts": {
+    "precommit": "echo 'precommit raffles server'; lint-staged",
     "dev": "nodemon --ext \"ts,json\" --watch \"src/**\" --exec \"ts-node src/index.ts\"",
     "lint": "eslint --fix --ignore-path .eslintignore .",
     "lint-ci": "eslint --ignore-path .eslintignore .",
@@ -14,7 +15,7 @@
   "dependencies": {
     "@graphql-tools/schema": "^8.3.13",
     "@slack/webhook": "^6.1.0",
-    "@zignaly/raffles-shared": "../raffles-shared",
+    "@zignaly/raffles-shared": "*",
     "apollo-server-core": "^3.8.2",
     "apollo-server-express": "^3.8.1",
     "axios": "^0.27.2",
@@ -83,6 +84,7 @@
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-standard": "^5.0.0",
     "eslint-plugin-unicorn": "^42.0.0",
+    "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
     "sinon": "^14.0.0",
     "supertest": "^6.2.4",
