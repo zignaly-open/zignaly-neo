@@ -22,12 +22,12 @@ jobs:
       - name: Debug
         uses: crazy-max/ghaction-dump-context@v1
       - name: Bootstrap modified packages
-        run: lerna bootstrap --since=${{ github.event.pull_request.head.sha }}
+        run: lerna bootstrap #--since=${{ github.event.pull_request.head.sha }}
       - name: Build modified packages
-        run: lerna run build --since=${{ github.event.pull_request.head.sha }}
+        run: lerna run build #--since=${{ github.event.pull_request.head.sha }}
       - name: Lint modified packages
-        run: lerna run lint-ci --since=${{ github.event.pull_request.head.sha }}
+        run: lerna run lint-ci #--since=${{ github.event.pull_request.head.sha }}
       - name: Lint modified packages
-        run: lerna run test --since=${{ github.event.pull_request.head.sha }}
+        run: lerna run test #--since=${{ github.event.pull_request.head.sha }}
       - name: Headpat
         run: echo "Great job <3"
