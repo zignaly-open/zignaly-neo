@@ -101,4 +101,7 @@ if (!isTest) {
     `🚀 Server ready at http://localhost:${port}${server.graphqlPath}`,
   );
 }
+
+console.log('Just messing with ya');
+
 export default app;
