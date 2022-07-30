@@ -29,8 +29,9 @@ Some common stuff for Raffles, nothing to write home about.
 
 ## Some guidelines
 
-* Though shalt use *Typescript*
+* Though shalt use **Typescript**
 * Though shalt not use `// @ts-ignore` and, more importantly, `// @ts-nocheck`
 * Though shalt not commit code that does not pass eslint check (we will figure it out anyway in GitHub's CI)
 * Though shalt not commit untranslated literals and preferably use i18next
 * Though shalt add more guidelines here after the team's approval
+* Though shalt have `test` and `lint-ci` jobs in **every single repo** (tip: if N/A, `"exit 0"`)
