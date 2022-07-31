@@ -12,6 +12,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # better fetch all and rebuild part than to fetch part and rebuild all
       - name: Install node
         uses: actions/setup-node@v3
         with:
@@ -19,15 +21,13 @@ jobs:
           cache: 'yarn'
       - name: Install Lerna
         run: yarn global add lerna
-      - name: Debug
-        uses: crazy-max/ghaction-dump-context@v1
       - name: Bootstrap modified packages
-        run: lerna bootstrap #--since=${{ github.event.pull_request.head.sha }}
-      - name: Build packages
-        run: lerna run build #--since=${{ github.event.pull_request.head.sha }}
-      - name: Lint packages
-        run: lerna run lint-ci #--since=${{ github.event.pull_request.head.sha }}
-      - name: Test packages
-        run: lerna run test #--since=${{ github.event.pull_request.head.sha }}
-      - name: Headpat
+        run: lerna bootstrap --since=origin/${{ github.base_ref }} --include-dependencies
+      - name: Build modified packages
+        run: lerna run build --since=origin/${{ github.base_ref }}
+      - name: Lint modified packages
+        run: lerna run lint-ci --since=origin/${{ github.base_ref }}
+      - name: Test modified packages
+        run: lerna run test --since=origin/${{ github.base_ref }}
+      - name: Headpat yourself ^_^
         run: echo "Great job <3"
