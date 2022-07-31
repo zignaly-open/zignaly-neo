@@ -5,7 +5,7 @@
     "precommit": "echo 'precommit raffles client'; yarn lint-staged",
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
+    "test": "react-app-rewired test --passWithNoTests",
     "eject": "react-app-rewired eject",
     "lint:tsc": "tsc --noemit",
     "lint:eslint": "eslint --fix --ignore-path .eslintignore ./src --ext .ts,.tsx",
