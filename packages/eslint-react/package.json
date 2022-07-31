@@ -1,0 +1,45 @@
+{
+  "name": "eslint-config-zignaly-react",
+  "version": "1.0.0",
+  "description": "React-typescript linter config",
+  "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
+  "homepage": "https://github.com/zignaly-open/zigraffle#readme",
+  "license": "ISC",
+  "main": "index.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "eslint": "^8.16.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-config-standard-react": "^11.0.1",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-i18next": "^6.0.0-4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jest": "^26.4.6",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-no-autofix": "^1.2.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "eslint-plugin-unicorn": "^42.0.0",
+    "eslint-plugin-storybook": "^0.6.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zignaly-open/zigraffle.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/zignaly-open/zigraffle/issues"
+  }
+}
