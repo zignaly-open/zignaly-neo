@@ -11,10 +11,9 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "test": "lerna run test",
-    "raffles-client": "cd packages/raffles-client && env-cmd -f .env yarn start",
-    "raffles-server": "cd packages/raffles-server && yarn dev",
-    "build": "cd packages/raffles-client && yarn && env-cmd -f .env.production GENERATE_SOURCEMAP=false yarn build && cd ../server && yarn",
-    "start": "cd packages/raffles-server && yarn start"
+    "raffles-client": "lerna run start --scope=@zignaly/raffles-client --include-dependencies --stream --parallel",
+    "raffles-server": "lerna run dev --scope=@zignaly/raffles-server --include-dependencies --stream",
+    "build": "lerna run build"
   },
   "engines": {
     "node": "^16"

@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "scripts": {
     "precommit": "echo 'precommit raffles client'; yarn lint-staged",
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start": "env-cmd -f .env react-app-rewired start",
+    "build": "env-cmd -f .env.production GENERATE_SOURCEMAP=false react-app-rewired build",
     "test": "react-app-rewired test --passWithNoTests",
     "eject": "react-app-rewired eject",
     "lint:tsc": "tsc --noemit",

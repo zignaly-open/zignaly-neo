@@ -16,7 +16,8 @@ the `.env` file.
 * `REACT_APP_CONTRACT_ADDRESS` - contract address for the token that we accept as a payment
 * `REACT_APP_USE_RINKEBY_CHAIN` - whether or not we should use Rinkeby
 
-Now just run `yarn start` and open [http://localhost:3000](http://localhost:3000).
+If you're feeling particularly playful, feel free to run it with `yarn start`. If you do now want to deal with the
+zignalu-ui rebuilds and all the other issues, follow the instructions from the top-level readme.
 
 This being a CRA app:
 
