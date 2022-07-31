@@ -13,9 +13,9 @@ import CoinLabel from "./components/display/Table/components/CoinLabel";
 import Toaster from "./components/display/Toaster";
 import ProgressSlider from "./components/display/ProgressSlider";
 import InvestSlider from "./components/display/InvestSlider";
-import { ServiceName } from "./components/display/Table/components/ServiceName";
-import { BalanceSummary } from "./components/display/Table/components/BalanceSummary";
-import { AreaChart } from "./components/display/Charts";
+import {ServiceName} from "./components/display/Table/components/ServiceName";
+import {BalanceSummary} from "./components/display/Table/components/BalanceSummary";
+import {AreaChart} from "./components/display/Charts";
 
 // Inputs
 import Button from "./components/inputs/Button";
@@ -26,10 +26,10 @@ import TextButton from "./components/inputs/TextButton";
 import InputText from "./components/inputs/InputText";
 import Select from "./components/inputs/Selector";
 import InputCode from "./components/inputs/InputCode";
-import { ButtonGroup } from "./components/styled";
+import {ButtonGroup} from "./components/styled";
 
 // Layouts
-import { MarginContainer, PageContainer } from "./components/styled";
+import {MarginContainer, PageContainer} from "./components/styled";
 
 // Modals
 import EditInvestmentWithModal from "components/modals/EditInvestmentWithModal";
@@ -76,9 +76,9 @@ import ZigsBalance from "./components/navigation/Header/components/ZigsBalance";
 import BrandImage from "./components/navigation/Header/components/BrandImage";
 
 // Utils
-import { dark, light } from "theme";
+import {dark, light} from "theme";
 import ThemeProvider from "utils/ThemeProvider";
-import { customSort } from "utils/numbers";
+import {customSort} from "utils/numbers";
 import {
   createMarketPlaceTableBodyObject,
   createMarketPlaceTableHeader,
@@ -92,8 +92,8 @@ export {
    *   Components
    * =-=-=-=-=-=-=-=
    */
-  // Display
-  ServiceName,
+    // Display
+    ServiceName,
   BalanceSummary,
   AreaChart,
   Avatar,
@@ -146,7 +146,7 @@ export {
    *   Assets
    * =-=-=-=-=-=-=-=
    */
-  CloseIcon,
+    CloseIcon,
   CopyIcon,
   OpenArrowIcon,
   EyeOpenIcon,
@@ -175,7 +175,7 @@ export {
    *     Utils
    * =-=-=-=-=-=-=-=
    */
-  ThemeProvider,
+    ThemeProvider,
   dark,
   light,
   customSort,
