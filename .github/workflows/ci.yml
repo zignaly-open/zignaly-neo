@@ -24,7 +24,7 @@ jobs:
       - name: Bootstrap modified packages
         run: lerna bootstrap
       - name: Build modified packages
-        run: lerna run build --since refs/remotes/origin/${{ github.base_ref }}
+        run: lerna run build --since d05341b3
       - name: Lint modified packages
         run: lerna run lint-ci --since=origin/${{ github.base_ref }}
       - name: Test modified packages
