@@ -10,6 +10,14 @@ lerna bootstrap
 
 This will install all dependencies and link projects together. Next instructions vary by the repository.
 
+Also, now to install dependenies you should use:
+
+```
+lerna add package-name --scope=zignaly-ui 
+```
+
+I.e. you should be specifying the target package.
+
 #### Zignaly UI
 
 Our mighty and glorious component library.
