@@ -24,12 +24,10 @@ export default {
   },
 } as ComponentMeta<typeof MenuDropDown>;
 
-const Template: ComponentStory<typeof MenuDropDown> = (args) => (
-  <MenuDropDown {...args} />
-);
+const Template: ComponentStory<typeof MenuDropDown> = (args) => <MenuDropDown {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
-  title: 'Barry Scalping Orange Long Orange Orange',
-  secondaryTitle: 'Manage Service'
+  title: "Barry Scalping Orange Long Orange Orange",
+  secondaryTitle: "Manage Service",
 };

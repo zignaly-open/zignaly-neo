@@ -6,7 +6,7 @@ import { styledIf } from "utils/styled";
 export const InputValue = styled.input`
   background: transparent;
   border: none;
-  color: ${dark["neutral100"]};
+  color: ${dark.neutral100};
   outline: none;
   font-weight: 400;
   font-size: 16px;

@@ -349,7 +349,7 @@ export const ViewPort = styled.button<LayoutProps>`
           `
           opacity: 0.33;
           &:before {
-            background: ${props.theme["neutral600"]};
+            background: ${props.theme.neutral600};
           }
           `,
         )}
@@ -358,12 +358,12 @@ export const ViewPort = styled.button<LayoutProps>`
           !props.disabled,
           `
           &:before {
-            background: ${props.theme["neutral600"]};
+            background: ${props.theme.neutral600};
           }
           &:hover {
             background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
             &:before {
-              background: ${props.theme["neutral500"]};
+              background: ${props.theme.neutral500};
             }
             
           }

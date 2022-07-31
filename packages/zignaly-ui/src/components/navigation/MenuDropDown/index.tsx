@@ -1,15 +1,9 @@
 // Dependencies
-import React, {useCallback, useImperativeHandle, useRef, useState} from "react";
-import {useClickAway} from "react-use";
+import React, { useCallback, useImperativeHandle, useRef, useState } from "react";
+import { useClickAway } from "react-use";
 
 // Styles
-import {
-  Layout,
-  Field,
-  Button,
-  ArrowIcon,
-  DropDown
-} from "./styles";
+import { Layout, Field, Button, ArrowIcon, DropDown } from "./styles";
 
 // Assets
 import ArrowBottomIcon from "assets/icons/arrow-bottom-icon.svg";
@@ -21,15 +15,12 @@ import Typography from "components/display/Typography";
 import { MenuDropDownProps } from "./types";
 
 // Types
-import {defaultDropDownOptions} from './types';
+import { defaultDropDownOptions } from "./types";
 
-const MenuDropDown = ({
-  title,
-  focused = false,
-  secondaryTitle = null,
-  children,
-  dropDownOptions,
-}: MenuDropDownProps, innerRef: any) => {
+const MenuDropDown = (
+  { title, focused = false, secondaryTitle = null, children, dropDownOptions }: MenuDropDownProps,
+  innerRef: any,
+) => {
   // Ref
   const options = {
     ...defaultDropDownOptions,
@@ -55,7 +46,7 @@ const MenuDropDown = ({
   useImperativeHandle(innerRef, () => ({
     setIsDropDownActive: (isActive: boolean) => {
       setActiveDropDown(isActive);
-    }
+    },
   }));
 
   return (
@@ -67,20 +58,14 @@ const MenuDropDown = ({
         onClick={handleActiveDropDown}
       >
         <Field>
-          {secondaryTitle && (
-            <Typography variant={'h5'}>{secondaryTitle}</Typography>
-          )}
-          <Typography variant={'h3'}>{title}</Typography>
+          {secondaryTitle && <Typography variant={"h5"}>{secondaryTitle}</Typography>}
+          <Typography variant={"h3"}>{title}</Typography>
         </Field>
         <ArrowIcon>
           <ArrowBottomIcon />
         </ArrowIcon>
       </Button>
-      {isActiveDropDown && (
-        <DropDown maxHeight={options.maxHeight}>
-          {children}
-        </DropDown>
-      )}
+      {isActiveDropDown && <DropDown maxHeight={options.maxHeight}>{children}</DropDown>}
     </Layout>
   );
 };

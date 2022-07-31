@@ -22,7 +22,7 @@ const CoinIcon = ({ size = CoinSizes.MEDIUM, name, coin, className = "" }: CoinT
       },r_max/coins-binance/${coin}`,
     );
   }, [coin]);
-  
+
   return (
     <Layout className={[size, className] as any} data-testid="coin-icon-view">
       <Image src={src} alt={name} onError={onError} />

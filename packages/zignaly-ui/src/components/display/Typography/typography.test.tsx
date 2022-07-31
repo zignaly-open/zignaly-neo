@@ -70,7 +70,7 @@ describe("components/display/Typography", () => {
     expect(container.firstChild.classList.contains("body2")).toBe(true);
   });
 
-  it("renders the typography with the class body and tag span", () => {
+  it("renders the typography with the class body and tag span 1", () => {
     const { container } = render(<Typography variant={"inputl"}>Example Test</Typography>);
 
     const tag = container.querySelector("span");
@@ -79,7 +79,7 @@ describe("components/display/Typography", () => {
     expect(container.firstChild.classList.contains("inputl")).toBe(true);
   });
 
-  it("renders the typography with the class body and tag span", () => {
+  it("renders the typography with the class body and tag span 2", () => {
     const { container } = render(<Typography variant={"inputm"}>Example Test</Typography>);
 
     const tag = container.querySelector("span");

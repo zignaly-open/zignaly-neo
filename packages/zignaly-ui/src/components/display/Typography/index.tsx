@@ -3,17 +3,17 @@ import React from "react";
 
 // Styles
 import * as styled from "./styles";
-import {componentByVariants, TypographyProps} from "./types";
+import { componentByVariants, TypographyProps } from "./types";
 
 const Typography = ({
-                      children,
-                      variant = "body1",
-                      weight,
-                      color,
-                      underline,
-                      component,
-                      className,
-                    }: TypographyProps) => {
+  children,
+  variant = "body1",
+  weight,
+  color,
+  underline,
+  component,
+  className,
+}: TypographyProps) => {
   return (
     <styled.Layout
       color={color}

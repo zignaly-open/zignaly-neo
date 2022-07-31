@@ -34,7 +34,7 @@ const InvestColumn = ({ type }: InvestColumnProps) => {
     <Layout>
       {InvestStatus()}
       <IconContainer>
-        <ArrowLeftIcon width={24} height={24} color={dark["neutral300"]} />
+        <ArrowLeftIcon width={24} height={24} color={dark.neutral300} />
       </IconContainer>
     </Layout>
   );
@@ -64,7 +64,7 @@ const NotInvestedAllAccounts = () => {
         <Button
           variant="secondary"
           caption={"All Accounts (3)"}
-          rightElement={<ArrowLeftIcon height={20} width={20} color={dark["neutral300"]} />}
+          rightElement={<ArrowLeftIcon height={20} width={20} color={dark.neutral300} />}
         />
       </ButtonContainer>
     </Row>
@@ -87,7 +87,7 @@ const InvestedSeeAll = () => {
         <Button
           variant="secondary"
           caption={"See All (4)"}
-          rightElement={<ArrowLeftIcon height={20} width={20} color={dark["neutral300"]} />}
+          rightElement={<ArrowLeftIcon height={20} width={20} color={dark.neutral300} />}
         ></Button>
       </Column>
     </Row>

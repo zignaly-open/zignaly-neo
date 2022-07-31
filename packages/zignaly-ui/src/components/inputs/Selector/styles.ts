@@ -35,13 +35,13 @@ export const Value = styled(Typography)`
   overflow: hidden;
   text-overflow: ellipsis;
   ${({ theme }) => `
-     color: ${theme["neutral200"]};
+     color: ${theme.neutral200};
   `}
 `;
 
 export const Placeholder = styled(Value)`
   ${({ theme }) => `
-     color: ${theme["neutral400"]};
+     color: ${theme.neutral400};
   `}
 `;
 
@@ -73,7 +73,7 @@ export const Menu = styled.ul`
   overflow-x: hidden;
 
   ${({ theme }) => `
-    background: ${theme["neutral750"]};
+    background: ${theme.neutral750};
   `}
 
   /* width */
@@ -117,10 +117,10 @@ export const Item = styled.li<ItemProps>`
       display: flex;
       align-items: center;
       justify-content: center;
-      color: ${theme["neutral500"]};
+      color: ${theme.neutral500};
     `,
       `
-      color: ${theme["neutral200"]};
+      color: ${theme.neutral200};
       
       &:hover {
         background: #15162d;
@@ -177,13 +177,13 @@ export const Layout = styled.div<LayoutProps>`
       
       ${Container} {
         border-radius: 4px 4px 0 0;
-        border: 1px solid ${props.theme["neutral600"]};
+        border: 1px solid ${props.theme.neutral600};
       }
     `,
       `
       ${Container} {
         border: 1px solid transparent;
-        box-shadow: 0 0 0 1px ${props.theme["neutral600"]};;
+        box-shadow: 0 0 0 1px ${props.theme.neutral600};;
       }
     `,
     )}

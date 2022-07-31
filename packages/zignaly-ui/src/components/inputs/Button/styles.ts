@@ -391,7 +391,7 @@ export const Layout = styled.button<LayoutProps>`
     isPrimaryButton(props.variant),
     `
       ${Caption} {
-        color: ${props.theme["neutral000"]}
+        color: ${props.theme.neutral000}
       }
       ${Container} {
         background: linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%);
@@ -480,7 +480,7 @@ export const Layout = styled.button<LayoutProps>`
     isSecondaryButton(props.variant),
     `
       ${Caption} {
-        color: ${props.theme["neutral000"]}
+        color: ${props.theme.neutral000}
       }
       ${Container} {
         background: rgba(16, 18, 37, 0.3);
@@ -503,10 +503,10 @@ export const Layout = styled.button<LayoutProps>`
           `
           opacity: 0.33;
           &:before {
-            background: ${props.theme["neutral600"]};
+            background: ${props.theme.neutral600};
           }
           ${Caption} {
-            color: ${props.theme["neutral300"]};
+            color: ${props.theme.neutral300};
           }
           `,
         )}
@@ -515,19 +515,19 @@ export const Layout = styled.button<LayoutProps>`
           !props.disabled,
           `
           &:before {
-            background: ${props.theme["neutral600"]};
+            background: ${props.theme.neutral600};
           }
           &:hover {
             background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
             &:before {
-              background: ${props.theme["neutral500"]};
+              background: ${props.theme.neutral500};
             }
             ${Caption} {
-              color: ${props.theme["neutral000"]};
+              color: ${props.theme.neutral000};
             }
           }
           ${Caption} {
-              color: ${props.theme["neutral300"]};
+              color: ${props.theme.neutral300};
             }
           `,
         )}
@@ -553,7 +553,7 @@ export const Layout = styled.button<LayoutProps>`
             }
           }
           ${Caption} {
-            color: ${props.theme["neutral000"]};
+            color: ${props.theme.neutral000};
           }
         }
 
@@ -579,7 +579,7 @@ export const Layout = styled.button<LayoutProps>`
             background: linear-gradient(rgba(134, 113, 247, 1),rgba(126, 201, 249, 1));
           }
           ${Caption} {
-            color: ${props.theme["neutral000"]};
+            color: ${props.theme.neutral000};
           }
       }
 

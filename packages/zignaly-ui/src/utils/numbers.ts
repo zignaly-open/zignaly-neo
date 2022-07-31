@@ -13,7 +13,6 @@ export const formatBalanceUnits = (value: any) => {
   return parseFloat(value).toFixed(hasZero ? 2 : 4);
 };
 
-
 /**
  * @description THIS FUNCTION ONLY TEST use in real cases customSort
  *
@@ -22,13 +21,22 @@ export const formatBalanceUnits = (value: any) => {
  *
  * @returns {Number} returns the number for sorting
  */
-export const sortByPointDecimal = ({propParamNameForValue = "value", useProp = true}: {propParamNameForValue?: string, useProp?: boolean} = {}) => (rowA: any, rowB: any, columnId: string): number => {
-  const a = parseFloat(useProp ? rowA.values[columnId].props[propParamNameForValue] : rowA.values[columnId]);
-  const b = parseFloat(useProp ? rowB.values[columnId].props[propParamNameForValue] : rowB.values[columnId]);
-  if (a > b) return 1;
-  if (a < b) return -1;
-  return 0;
-};
+export const sortByPointDecimal =
+  ({
+    propParamNameForValue = "value",
+    useProp = true,
+  }: { propParamNameForValue?: string; useProp?: boolean } = {}) =>
+  (rowA: any, rowB: any, columnId: string): number => {
+    const a = parseFloat(
+      useProp ? rowA.values[columnId].props[propParamNameForValue] : rowA.values[columnId],
+    );
+    const b = parseFloat(
+      useProp ? rowB.values[columnId].props[propParamNameForValue] : rowB.values[columnId],
+    );
+    if (a > b) return 1;
+    if (a < b) return -1;
+    return 0;
+  };
 
 /**
  * @description Sort the column by picking up the value
@@ -38,7 +46,12 @@ export const sortByPointDecimal = ({propParamNameForValue = "value", useProp = t
  * @param b value to compare
  * @param isNecessaryParseFloat if is necessary parse
  */
-export const customSort = (a: string | number, b: string | number, isNecessaryParseFloat = false) => {
+export const customSort = (
+  a: string | number,
+  b: string | number,
+  isNecessaryParseFloat = false,
+) => {
+  /* eslint-disable no-param-reassign */
   if (isNecessaryParseFloat) {
     if (typeof a === "string") {
       a = parseFloat(a);

@@ -55,7 +55,7 @@ const InputModal = ({
         tokens={avaliableCoins}
       />
       <IconContainer>
-        <SwapIcon width={40} height={40} color={dark["neutral300"]} />
+        <SwapIcon width={40} height={40} color={dark.neutral300} />
       </IconContainer>
       <InputAmount
         label={"Swap to"}

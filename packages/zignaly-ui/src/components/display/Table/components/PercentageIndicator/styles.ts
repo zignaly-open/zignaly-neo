@@ -30,7 +30,7 @@ export const Value = styled(Typography)<{ isPositive: boolean }>`
   ${(props) => `
     font-size: 11px;
     font-weight: 500;
-    color: ${props.isPositive ? props.theme["greenGraph"] : props.theme["redGraphOrError"]};
+    color: ${props.isPositive ? props.theme.greenGraph : props.theme.redGraphOrError};
   `}
 `;
 

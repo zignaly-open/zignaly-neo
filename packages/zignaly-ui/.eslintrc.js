@@ -1,42 +1,15 @@
 module.exports = {
-  env: {
-    browser: true,
-    es2021: true,
-    jest: true,
-    node: true,
-  },
-  extends: [
-    "plugin:react/recommended",
-    "plugin:storybook/recommended",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "prettier",
+  "extends": [
+    "zignaly-react"
   ],
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 2021,
-    sourceType: "module",
-  },
-  parser: "@typescript-eslint/parser",
-  plugins: ["react", "@typescript-eslint"],
   rules: {
-    "no-tabs": "off",
-    "react/prop-types": "off",
-    "no-new": "off",
-    "no-mixed-spaces-and-tabs": "off",
-    "react/display-name": "off",
-    "space-before-function-paren": ["error", "never"],
-    semi: ["error", "always"],
-    "space-in-parens": ["error", "never"],
-    "space-before-blocks": ["error", "always"],
-    "no-whitespace-before-property": "off",
-    "no-throw-literal": "off",
-    "no-async-promise-executor": "off",
-    "no-debugger": "off",
-    "multiline-ternary": "off",
-    "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": "error",
+    // The following rules are disabled because there are too many errors
+    // TODO: FIXME
+    "@typescript-eslint/no-shadow": "off", // FIXME
+    "@typescript-eslint/no-explicit-any": "off",  // FIXME
+    "no-console": "off",  // FIXME
+    "jest/valid-expect": "off",  // FIXME
+    "@typescript-eslint/ban-ts-comment": "off",  // FIXME
+    "@typescript-eslint/ban-types": "off",  // FIXME
   },
-};
+}

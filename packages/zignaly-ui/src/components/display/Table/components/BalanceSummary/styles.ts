@@ -16,11 +16,7 @@ export const Layout = styled(Typography)<{ isPositive: boolean; isEqual: boolean
   ${({ isEqual, theme, isPositive }) => `
     ${Profit} {
         color: ${
-          isEqual
-            ? theme["neutral300"]
-            : isPositive
-            ? theme["greenGraph"]
-            : theme["redGraphOrError"]
+          isEqual ? theme.neutral300 : isPositive ? theme.greenGraph : theme.redGraphOrError
         };
     }
   `}

@@ -201,7 +201,7 @@ export default function PagedWithDataTable({
                       <IconContainer>
                         {index < headerGroup.headers.length && (
                           <SortIcon
-                            color={dark["neutral200"]}
+                            color={dark.neutral200}
                             isSorted={column.isSorted}
                             isSortedDesc={column.isSortedDesc}
                             width={24}
@@ -217,7 +217,7 @@ export default function PagedWithDataTable({
                     {!hideOptionsButton && (
                       <IconButton
                         variant={"flat"}
-                        icon={<OptionsDotsIcon color={dark["neutral200"]} />}
+                        icon={<OptionsDotsIcon color={dark.neutral200} />}
                         dropDownOptions={{
                           componentOverflowRef: tableRef,
                           alignment: "right",
@@ -277,7 +277,7 @@ export default function PagedWithDataTable({
                 size="xlarge"
                 rotate={true}
                 shrinkWrap={true}
-                icon={<DoubleChevron width={24} height={24} color={dark["neutral300"]} />}
+                icon={<DoubleChevron width={24} height={24} color={dark.neutral300} />}
                 onClick={() => gotoPage(0)}
                 disabled={!canPreviousPage}
               ></IconButtonContainer>
@@ -286,7 +286,7 @@ export default function PagedWithDataTable({
                 size="xlarge"
                 rotate={true}
                 shrinkWrap={true}
-                icon={<SingleChevron width={24} height={24} color={dark["neutral300"]} />}
+                icon={<SingleChevron width={24} height={24} color={dark.neutral300} />}
                 onClick={() => previousPage()}
                 disabled={!canPreviousPage}
               ></IconButtonContainer>
@@ -310,7 +310,7 @@ export default function PagedWithDataTable({
                 shrinkWrap={true}
                 onClick={() => nextPage()}
                 disabled={!canNextPage}
-                icon={<SingleChevron width={24} height={24} color={dark["neutral300"]} />}
+                icon={<SingleChevron width={24} height={24} color={dark.neutral300} />}
               ></IconButtonContainer>
               <IconButtonContainer
                 variant="flat"
@@ -318,7 +318,7 @@ export default function PagedWithDataTable({
                 shrinkWrap={true}
                 onClick={() => gotoPage(pageCount - 1)}
                 disabled={!canNextPage}
-                icon={<DoubleChevron width={24} height={24} color={dark["neutral300"]} />}
+                icon={<DoubleChevron width={24} height={24} color={dark.neutral300} />}
               ></IconButtonContainer>
             </Row>
             <Row justifyContent="end">

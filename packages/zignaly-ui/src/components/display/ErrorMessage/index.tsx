@@ -16,7 +16,7 @@ function ErrorMessage({ text }: ErrorMessageProps) {
   return (
     <Layout>
       <Icon>
-        <ErrorAlertIcon height="24px" width="24px" color={dark["redGraphOrError"]} />
+        <ErrorAlertIcon height="24px" width="24px" color={dark.redGraphOrError} />
       </Icon>
       <Typography variant={"body2"} color={"redGraphOrError"} weight="regular">
         {text}

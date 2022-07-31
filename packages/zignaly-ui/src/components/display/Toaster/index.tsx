@@ -12,11 +12,11 @@ const Toaster = ({ variant = "error", size = "large", caption = "" }: ToasterPro
     <styled.ToastContainer variant={variant} size={size}>
       {variant === "error" ? (
         <styled.IconContainer>
-          <ErrorAlertIcon color={dark["redGraphOrError"]} />
+          <ErrorAlertIcon color={dark.redGraphOrError} />
         </styled.IconContainer>
       ) : (
         <styled.IconContainer>
-          <SuccessIcon color={dark["greenGraph"]} />
+          <SuccessIcon color={dark.greenGraph} />
         </styled.IconContainer>
       )}
       <styled.Caption>

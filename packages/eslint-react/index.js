@@ -107,7 +107,8 @@ module.exports = {
           "pascalCase": true
         },
         "ignore": [
-          "react-app-env.d.ts"
+          "react-app-env.d.ts",
+          "module-name.d.ts"
         ]
       }
     ],

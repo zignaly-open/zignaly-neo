@@ -16,9 +16,9 @@ export const Value = styled(Typography)<{ hasLowercase?: boolean }>`
   ${({ hasLowercase }) => `
       ${styledIf(
         hasLowercase,
-      `
+        `
         text-transform: lowercase;
       `,
-     )}
+      )}
   `}
 `;

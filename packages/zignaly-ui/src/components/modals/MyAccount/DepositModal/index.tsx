@@ -119,7 +119,7 @@ const MyAccountDepositModal = ({
             readOnly={true}
             value={depositAddress !== undefined ? depositAddress : undefined}
             placeholder={"Select a Network and Coin first"}
-            rightSideElement={<CloneIcon width={40} height={40} color={dark["neutral300"]} />}
+            rightSideElement={<CloneIcon width={40} height={40} color={dark.neutral300} />}
             onClickRightSideElement={() => copyAddress}
           />
           {depositMemo !== "" && (
@@ -130,7 +130,7 @@ const MyAccountDepositModal = ({
                 readOnly={true}
                 value={depositMemo}
                 placeholder={"Select a Network and Coin first"}
-                rightSideElement={<CloneIcon width={40} height={40} color={dark["neutral300"]} />}
+                rightSideElement={<CloneIcon width={40} height={40} color={dark.neutral300} />}
                 onClickRightSideElement={() => copyAddress}
               />
             </>

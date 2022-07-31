@@ -33,7 +33,7 @@ export default {
       table: {
         disable: true,
       },
-    }
+    },
   },
   parameters: {
     jest: ["typography"],
@@ -48,9 +48,9 @@ Heading.args = {
   textsRow1: [
     { ...Text.args, variant: "h1", caption: "H1" },
     { ...Text.args, variant: "h2", caption: "H2" },
-    { ...Text.args, variant: "h3", caption: "H3"},
-    { ...Text.args, variant: "h4",caption: "H4" },
-    { ...Text.args, variant: "h5", caption: "H5"},
+    { ...Text.args, variant: "h3", caption: "H3" },
+    { ...Text.args, variant: "h4", caption: "H4" },
+    { ...Text.args, variant: "h5", caption: "H5" },
   ],
 };
 
@@ -60,13 +60,25 @@ Body.args = {
     { ...Text.args, variant: "body1", weight: "regular", caption: "Body1 Regular" },
     { ...Text.args, variant: "body1", weight: "demibold", caption: "Body1 Demibold" },
     { ...Text.args, variant: "body1", weight: "medium", caption: "Body1 Medium" },
-    { ...Text.args, variant: "body1", weight: "regular", underline: true, caption: "Body1 Underline" },
+    {
+      ...Text.args,
+      variant: "body1",
+      weight: "regular",
+      underline: true,
+      caption: "Body1 Underline",
+    },
   ],
   textsRow2: [
-    { ...Text.args, variant: "body2", weight: "regular", caption: "Body2 Regular"  },
+    { ...Text.args, variant: "body2", weight: "regular", caption: "Body2 Regular" },
     { ...Text.args, variant: "body2", weight: "demibold", caption: "Body2 Demibold" },
     { ...Text.args, variant: "body2", weight: "medium", caption: "Body2 Medium" },
-    { ...Text.args, variant: "body2", weight: "regular", underline: true, caption: "Body2 Underline" },
+    {
+      ...Text.args,
+      variant: "body2",
+      weight: "regular",
+      underline: true,
+      caption: "Body2 Underline",
+    },
   ],
 };
 

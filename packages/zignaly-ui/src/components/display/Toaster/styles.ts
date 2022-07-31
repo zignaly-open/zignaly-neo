@@ -55,10 +55,10 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
       props.variant === "success",
       `
         ${Caption} {
-            color:${props.theme["greenGraph"]};
+            color:${props.theme.greenGraph};
         }
-        border: 1px solid ${props.theme["successToasterBg"]};
-        background: ${props.theme["successToasterBg"]};
+        border: 1px solid ${props.theme.successToasterBg};
+        background: ${props.theme.successToasterBg};
         `,
     )}
 
@@ -66,10 +66,10 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
       props.variant === "error",
       `
       ${Caption} {
-        color:${props.theme["redGraphOrError"]};
+        color:${props.theme.redGraphOrError};
     }
-        border: 1px solid ${props.theme["errorToasterBg"]};
-        background: ${props.theme["errorToasterBg"]};
+        border: 1px solid ${props.theme.errorToasterBg};
+        background: ${props.theme.errorToasterBg};
         `,
     )}
   `}

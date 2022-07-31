@@ -30,14 +30,14 @@ export const PendingTransaction = styled.div`
 
   ${({ theme }) => `
     gap: 22px;
-    border: 1px solid ${theme["yellow"]};
-    background: ${theme["neutral700"]};
+    border: 1px solid ${theme.yellow};
+    background: ${theme.neutral700};
     border-radius: 5px;
     
     svg {
       width: 14px;
       height: 14px;
-      fill: ${theme["yellow"]};
+      fill: ${theme.yellow};
     }
   `}
 `;
@@ -53,7 +53,7 @@ export const Field = styled.div`
 export const Row = styled.div`
   ${({ theme }) => `
     &:first-child {
-      border-right: 1px solid ${theme["neutral500"]};
+      border-right: 1px solid ${theme.neutral500};
     }
   `};
 `;
@@ -82,7 +82,7 @@ export const Actions = styled.div`
 
   ${({ theme }) => `
     svg {
-      fill: ${theme["links"]};
+      fill: ${theme.links};
     }
   `}
 `;

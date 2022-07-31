@@ -14,8 +14,8 @@ export default {
     },
     midLine: {
       control: "radio",
-      options: {on: true, off: false}
-    }
+      options: { on: true, off: false },
+    },
   },
 } as ComponentMeta<typeof AreaChart>;
 

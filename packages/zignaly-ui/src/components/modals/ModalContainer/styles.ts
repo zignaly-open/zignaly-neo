@@ -69,7 +69,7 @@ export const HeaderButton = styled.button<any>`
 
   ${({ theme }) => `
     svg { 
-      fill: ${theme["neutral300"]};
+      fill: ${theme.neutral300};
       width: 32px;
       height: 32px;
     }

@@ -33,7 +33,7 @@ export const InputValue = styled.input`
   padding-right: 22px;
   background: transparent;
   border: none;
-  color: ${dark["neutral100"]};
+  color: ${dark.neutral100};
   outline: none;
   font-weight: 500;
   font-size: 22px;

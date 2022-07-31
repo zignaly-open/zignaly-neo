@@ -85,7 +85,7 @@ const ConfirmSwapModal = ({
               </Row>
             </Column>
             <Column flex={3} alignItems="center" justifyContent="center">
-              <SwapIcon width={40} height={40} color={dark["neutral300"]} />
+              <SwapIcon width={40} height={40} color={dark.neutral300} />
             </Column>
             <Column gap={16} flex={4} alignItems="start">
               <Typography variant="h2">To</Typography>

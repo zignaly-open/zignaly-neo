@@ -22,7 +22,9 @@ function MessageModal({
 }: MessageModalTypesProps): React.ReactElement {
   return (
     <ModalContainer title={title} width={width} onClickClose={onClickClose}>
-      <Typography variant={"body1"} color="neutral200" weight="regular">{description}</Typography>
+      <Typography variant={"body1"} color="neutral200" weight="regular">
+        {description}
+      </Typography>
       <Actions>
         <Button variant={"primary"} caption={"OK"} size={"large"} onClick={onClickClose} />
       </Actions>

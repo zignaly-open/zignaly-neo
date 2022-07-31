@@ -82,9 +82,7 @@ function EditInvestmentWithModal({
           </Inline>
           <div>
             <TextButton
-              rightElement={
-                <ArrowRightIcon width={"22px"} height={"22px"} color={theme["links"]} />
-              }
+              rightElement={<ArrowRightIcon width={"22px"} height={"22px"} color={theme.links} />}
               caption={"View"}
               onClick={() => setCurrentState(viewsIds.PENDING_TRANSACTIONS)}
             />
@@ -222,7 +220,7 @@ function EditInvestmentWithModal({
             caption={isInputEnabled ? "Add to Investment" : "Save and Close"}
           />
           <TextButton
-            rightElement={<ArrowRightIcon width={"22px"} height={"22px"} color={theme["links"]} />}
+            rightElement={<ArrowRightIcon width={"22px"} height={"22px"} color={theme.links} />}
             onClick={onClickWithdrawInvestment}
             caption={"Withdraw Investment"}
           />

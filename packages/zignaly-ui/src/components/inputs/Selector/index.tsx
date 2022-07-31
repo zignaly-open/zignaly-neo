@@ -106,7 +106,7 @@ function Select({
             <Placeholder variant="inputl">{placeholder}</Placeholder>
           ))}
         <ArrowContainer>
-          <Arrow alt={label} width="28" height="28" color={dark["neutral300"]} />
+          <Arrow alt={label} width="28" height="28" color={dark.neutral300} />
         </ArrowContainer>
       </Container>{" "}
       <Menu>

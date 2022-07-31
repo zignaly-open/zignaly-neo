@@ -12,7 +12,7 @@ import { dark } from "theme";
 
 const ICONS = {
   ArrowDown: <ArrowDown height="20" width="20" color={"#E1E9F0"} />,
-  CloseIcon: <CloseIcon height="20" width="20" color={dark["links"]} />,
+  CloseIcon: <CloseIcon height="20" width="20" color={dark.links} />,
   NoIcon: null,
 };
 type Icons = typeof ICONS;

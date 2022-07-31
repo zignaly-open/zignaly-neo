@@ -165,7 +165,7 @@ Investors.args = {
           10%
         </Typography>
       ),
-      feesInZig: <CheckIconStyled width="24" height="24" color={dark["neutral300"]} />,
+      feesInZig: <CheckIconStyled width="24" height="24" color={dark.neutral300} />,
       status: <ConnectionStateLabel stateId={ConnectionStateLabelId.CONNECTED} />,
     },
     {
@@ -194,7 +194,7 @@ Investors.args = {
           10%
         </Typography>
       ),
-      feesInZig: <CloseIconStyled width="24" height="24" color={dark["neutral300"]} />,
+      feesInZig: <CloseIconStyled width="24" height="24" color={dark.neutral300} />,
       status: <ConnectionStateLabel stateId={ConnectionStateLabelId.DISCONNECTED} />,
     },
 
@@ -224,7 +224,7 @@ Investors.args = {
           10%
         </Typography>
       ),
-      feesInZig: <CloseIconStyled width="24" height="24" color={dark["neutral300"]} />,
+      feesInZig: <CloseIconStyled width="24" height="24" color={dark.neutral300} />,
       status: <ConnectionStateLabel stateId={ConnectionStateLabelId.HARD_DISCONNECT} />,
     },
     {
@@ -253,7 +253,7 @@ Investors.args = {
           10%
         </Typography>
       ),
-      feesInZig: <CloseIconStyled width="24" height="24" color={dark["neutral300"]} />,
+      feesInZig: <CloseIconStyled width="24" height="24" color={dark.neutral300} />,
       status: <ConnectionStateLabel stateId={ConnectionStateLabelId.SOFT_DISCONNECT} />,
     },
     {
@@ -282,7 +282,7 @@ Investors.args = {
           10%
         </Typography>
       ),
-      feesInZig: <CloseIconStyled width="24" height="24" color={dark["neutral300"]} />,
+      feesInZig: <CloseIconStyled width="24" height="24" color={dark.neutral300} />,
       status: <ConnectionStateLabel stateId={ConnectionStateLabelId.SUSPENDED} />,
     },
   ],

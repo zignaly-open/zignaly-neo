@@ -3,18 +3,18 @@ import React from "react";
 import NumberFormat from "react-number-format";
 
 // Types
-import {ZigBalanceProps} from "./types";
+import { ZigBalanceProps } from "./types";
 
 // Components
-import {Layout, StyledWalletIcon, Balance} from "./styles";
+import { Layout, StyledWalletIcon, Balance } from "./styles";
 
 // Utils
-import {utils} from "ethers";
+import { utils } from "ethers";
 
-function ZigBalance({balance, className}: ZigBalanceProps) {
+function ZigBalance({ balance, className }: ZigBalanceProps) {
   return (
     <Layout className={className}>
-      <StyledWalletIcon/>
+      <StyledWalletIcon />
       <NumberFormat
         value={utils.formatUnits((balance || "0").toString())}
         displayType={"text"}

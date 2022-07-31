@@ -20,5 +20,5 @@ const Template: ComponentStory<typeof DateLabel> = (args) => <DateLabel {...args
 
 export const Basic = Template.bind({});
 Basic.args = {
-  date: new Date('December 1, 1997 20:10:00'),
+  date: new Date("December 1, 1997 20:10:00"),
 };

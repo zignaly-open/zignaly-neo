@@ -144,7 +144,7 @@ export const Toggle = styled.div<{ checked?: boolean; size: "small" | "large" | 
     }
     ${ToggleContainer}
     {
-        background-color: ${props.theme["greenGraph"]};
+        background-color: ${props.theme.greenGraph};
     }
    ${ToggleUncheck}{
         opacity: 0;

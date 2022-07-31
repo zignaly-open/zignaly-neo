@@ -4,15 +4,7 @@ import { ReactElement, useState, useRef, useMemo } from "react";
 import { useClickAway } from "react-use";
 
 // Styled Components
-import {
-  Layout,
-  Container,
-  Value,
-  ArrowContainer,
-  ValueContainer,
-  Menu,
-  Item,
-} from "./styles";
+import { Layout, Container, Value, ArrowContainer, ValueContainer, Menu, Item } from "./styles";
 
 // Assets
 import ArrowDown from "assets/icons/caret-down-icon.svg";

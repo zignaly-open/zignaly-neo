@@ -1,9 +1,9 @@
 // Dependencies
 import React from "react";
-import {ComponentMeta, ComponentStory} from "@storybook/react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 // Components
-import Avatar, {AvatarSizes} from "./index";
+import Avatar, { AvatarSizes } from "./index";
 
 export default {
   title: "Display/Avatar",
@@ -12,7 +12,13 @@ export default {
     size: {
       control: "select",
       default: AvatarSizes.SMALL,
-      options: [AvatarSizes.SMALL, AvatarSizes.MEDIUM, AvatarSizes.LARGE, AvatarSizes.XLARGE, AvatarSizes.XXLARGE],
+      options: [
+        AvatarSizes.SMALL,
+        AvatarSizes.MEDIUM,
+        AvatarSizes.LARGE,
+        AvatarSizes.XLARGE,
+        AvatarSizes.XXLARGE,
+      ],
     },
     hash: {
       control: "text",

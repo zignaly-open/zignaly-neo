@@ -30,7 +30,7 @@ const PercentageIndicator = ({
               width="5"
               height="5"
               isPositive={isPositiveValue}
-              color={isPositiveValue ? theme["greenGraph"] : theme["redGraphOrError"]}
+              color={isPositiveValue ? theme.greenGraph : theme.redGraphOrError}
             />
           )}
           <styled.Value

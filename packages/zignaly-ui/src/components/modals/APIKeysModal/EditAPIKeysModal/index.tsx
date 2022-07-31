@@ -67,7 +67,13 @@ function EditAPIKeysModal({
           </Key>
           <APISettings {...settings} />
           <Actions>
-            <Button caption="Save and Close" loading={isLoading} disabled={!isValid} size="xlarge" type="submit" />
+            <Button
+              caption="Save and Close"
+              loading={isLoading}
+              disabled={!isValid}
+              size="xlarge"
+              type="submit"
+            />
           </Actions>
         </form>
       </FormProvider>

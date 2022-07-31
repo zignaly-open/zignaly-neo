@@ -13,7 +13,11 @@ const ZignalyQRCode = ({
 }) => {
   return (
     <Column justifyContent="center" alignItems="center" gap={8}>
-      {label && <Typography variant="h2" color="neutral100">{label}</Typography>}
+      {label && (
+        <Typography variant="h2" color="neutral100">
+          {label}
+        </Typography>
+      )}
       <QRCodeContainer>
         <QRCodeSVG size={160} value={url} />
       </QRCodeContainer>
