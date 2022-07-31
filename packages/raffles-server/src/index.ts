@@ -102,6 +102,4 @@ if (!isTest) {
   );
 }
 
-console.log('Just messing with ya');
-
 export default app;
