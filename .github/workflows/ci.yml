@@ -22,7 +22,7 @@ jobs:
       - name: Install Lerna
         run: yarn global add lerna
       - name: Bootstrap modified packages
-        run: lerna bootstrap --since=origin/${{ github.base_ref }}
+        run: lerna bootstrap --since=origin/${{ github.base_ref }} --include-dependencies
       - name: Build modified packages
         run: lerna run build --since=origin/${{ github.base_ref }}
       - name: Lint modified packages
