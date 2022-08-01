@@ -10,7 +10,7 @@ lerna bootstrap
 
 This will install all dependencies and link projects together. Next instructions vary by the repository.
 
-Also, now to install dependenies you should use:
+Also, now to install dependencies you should use:
 
 ```
 lerna add package-name --scope=zignaly-ui 
