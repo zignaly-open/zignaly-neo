@@ -1,6 +1,6 @@
 // Dependencies
 import React from "react";
-import { render, screen } from "@testing-library/react";
+import {render, screen} from "@testing-library/react";
 
 // Component
 import Avatar from ".";
@@ -8,7 +8,7 @@ import Avatar from ".";
 describe("components/display/Avatar", () => {
   describe("renders", () => {
     it("Avatar with small size", () => {
-      const { container } = render(<Avatar size={"small"} />);
+      const {container} = render(<Avatar size={"small"}/>);
 
       const tag = container.querySelector("div");
       expect(tag).toBeVisible();
@@ -16,7 +16,7 @@ describe("components/display/Avatar", () => {
       expect((container!.firstChild as HTMLElement).classList!.contains("small")).toBe(true);
     });
     it("Avatar with medium size", () => {
-      const { container } = render(<Avatar size={"medium"} />);
+      const {container} = render(<Avatar size={"medium"}/>);
 
       const tag = container.querySelector("div");
       expect(tag).toBeVisible();
@@ -24,7 +24,7 @@ describe("components/display/Avatar", () => {
       expect((container!.firstChild as HTMLElement).classList.contains("medium")).toBe(true);
     });
     it("Avatar with large size", () => {
-      const { container } = render(<Avatar size={"large"} />);
+      const {container} = render(<Avatar size={"large"}/>);
 
       const tag = container.querySelector("div");
       expect(tag).toBeVisible();
@@ -33,14 +33,14 @@ describe("components/display/Avatar", () => {
     });
 
     it("Avatar with hash", () => {
-      const { container } = render(<Avatar hash="0xmyHash">Example Test</Avatar>);
+      const {container} = render(<Avatar hash="0xmyHash"/>);
 
       const tag = container.querySelector("div");
       expect(tag).toBeVisible();
     });
 
     it("Avatar with image", () => {
-      render(<Avatar image="image">Example Test</Avatar>);
+      render(<Avatar image="image"/>);
 
       const tag = screen.getByRole("img");
       expect(tag).toBeVisible();

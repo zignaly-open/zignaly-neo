@@ -7,7 +7,7 @@ export enum AvatarSizes {
 }
 
 export type AvatarTypeProps = {
-  size: AvatarSizes | any;
+  size?: AvatarSizes | any;
   hash?: string | any;
   image?: string | any;
 };
