@@ -1,70 +1,37 @@
-# Zigraffle
+# Zignaly Monorepo
 
-### Checklist
+Welcome to Zignaly. You will need node 16, I suggest you use nvm. Just run `nvm use`.
 
-MVP
+## How to run
 
-- [x] Sockets
-- [x] Proper Database connection - Postgres
-- [x] Balance processing
-- [x] Auctions -> DB
-- [x] Bidding system
-- [ ] Winning bid should gove a claim ability
-- [ ] Multi-winner
-- [ ] Polygon net only
+```
+lerna bootstrap
+```
 
-A little bit later
+This will install all dependencies and link projects together.
 
-- [ ] Tests for the love of God
-- [ ] Toasts for errors
-- [ ] Server eslint
-- [x] Manage Profile
-- [ ] Winner payouts
-- [ ] At least half-decent design
+## What's inside?
 
-Later:
+#### Raffles Client
 
-- [ ] PubSub -> Redis or Kafka
-- [ ] DB Indices
-- [ ] Security Audit
+A React-based app for Zignaly Raffles. Please adjust `packages/raffles-client` and run it with `yarn raffles-client` or
+by following the instructions in the Raffles Client readme.
 
-### How to run
+#### Raffles Server
 
-You will need node 16, I suggest you use nvm. Just run `nvm use`.
+An Apollo Gr5aphQL-based app for Zignaly Raffles. Please adjust `packages/raffles-server` and run it
+with `yarn raffles-server` or
+by following the instructions in the Raffles Server readme. You really should because there's info about fixtures.
 
-OK what next? in `packages/web` do `cp .env.sample .env`. We have 5 fields there:
+#### Raffles Shared
 
-* `REACT_APP_GRAPHQL` - backend's GraphQL HTTP endpoint. Remove that line altogether to use the default one (will work
-  with the backend runninn out of the box)
-* `REACT_APP_GRAPHQL_WS` - backend's GraphQL Websocket endpoint. Remove that line altogether to use the default one (
-  will work with the backend runninn out of the box)
-* `REACT_APP_ALCHEMY_PROJECT_ID` - surprisingly, it's alchemy project id
-* `REACT_APP_RECEIVING_ADDRESS` - this is the address to which the payments will go (all the profits)
-* `REACT_APP_CONTRACT_ADDRESS` - contract address for the token that we accept as a payment
-* `REACT_APP_USE_RINKEBY_CHAIN` - whether or not we should use Rinkeby
+Some common stuff for Raffles, nothing to write home about.
 
-You will obviously need to install dependencies with `yarn`.
+## Some guidelines
 
-To run the frontend, from the top-level `package.json` run `yarn run frontend`;
-
-In `packages/server` do `cp .env.sample .env`. We have 5 fields there:
-
-* `POSTGRES_URL` - you can run a simple postgres docker container, that'd
-  do: `docker run --name some-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres`
-* `RPC_URL` - infura HTTP API
-* `RPC_SOCKET_URL` - infura Websocket API
-* `RECEIVING_ACCOUNT` - same as `REACT_APP_RECEIVING_ADDRESS`. Those two should match. TODO: move thayt feom .env to a
-  hardcoded value in `packages/shared` for security purposes
-* `CONTRACT_ADDRESS` - same as `REACT_APP_CONTRACT_ADDRESS`. Those two should match.
-* `ALGORITHM` - algorithm for JWT, default `'HS256'`
-* `SECRET` - JWT secret
-* `DEV_ONLY_DISABLE_DEPOSIT_CHECKS` - stop checking chain to avoid unnecessary requests to
-* `NUMBER_OF_CONFIRMATIONS_REQUIRED` - number of confirmations required to approve a transaction
-
-You will obviously need to install dependencies with `yarn`.
-
-To run the frontend, from the top-level `package.json` run `yarn run backend`.
-
-Looking at an empty list is boring, so do `cd packages/server && npx ts-node src/entities/__fixtures/fixtures.ts`
-
-That's it.
+* Though shalt use **Typescript**
+* Though shalt not use `// @ts-ignore` and, more importantly, `// @ts-nocheck`
+* Though shalt not commit code that does not pass eslint check (we will figure it out anyway in GitHub's CI)
+* Though shalt not commit untranslated literals and preferably use i18next
+* Though shalt add more guidelines here after the team's approval
+* Though shalt have `test` and `lint-ci` jobs in **every single repo** (tip: if N/A, `"exit 0"`)

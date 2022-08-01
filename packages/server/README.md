@@ -1,2 +1,0 @@
-# Zignaly Zigraffle Server
-
