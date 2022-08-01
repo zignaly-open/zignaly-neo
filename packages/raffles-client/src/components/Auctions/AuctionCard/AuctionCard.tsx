@@ -82,7 +82,7 @@ const AuctionCard: React.FC<{
       <CardColumn ref={rightRef}>
         <CardHeader isColumn={isColumn}>
           <Typography variant='h2' color='neutral100'>
-            {t('ranking')}
+            {isActive ? t('ranking') : t('winners')}
           </Typography>
         </CardHeader>
         <CardBody>
