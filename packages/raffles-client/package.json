@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "scripts": {
     "precommit": "echo 'precommit raffles client'; yarn lint-staged",
-    "start": "react-app-rewired start",
-    "build": "react-app-rewired build",
+    "start": "env-cmd -f .env react-app-rewired start",
+    "build": "GENERATE_SOURCEMAP=false react-app-rewired build",
     "test": "react-app-rewired test --passWithNoTests",
     "eject": "react-app-rewired eject",
     "lint:tsc": "tsc --noemit",
@@ -27,39 +27,23 @@
       "last 1 safari version"
     ]
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ],
-    "overrides": [
-      {
-        "files": [
-          "**/*.stories.*"
-        ],
-        "rules": {
-          "import/no-anonymous-default-export": "off"
-        }
-      }
-    ]
-  },
   "dependencies": {
     "@apollo/client": "^3.6.6",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@ethersproject/contracts": "^5.6.2",
-    "@mui/icons-material": "^5.8.2",
+    "@mui/icons-material": "5.8.4",
     "@mui/lab": "^5.0.0-alpha.84",
-    "@mui/material": "^5.8.2",
-    "@mui/system": "^5.8.7",
+    "@mui/material": "5.8.7",
+    "@mui/system": "5.8.7",
     "@storybook/react": "^6.5.6",
     "@testing-library/jest-dom": "5.16.4",
-    "@testing-library/react": "13.3.0",
-    "@testing-library/user-event": "13.5.0",
+    "@testing-library/react": "12.1.5",
+    "@testing-library/user-event": "12.1.5",
     "@types/jest": "27.5.2",
     "@types/node": "16.11.38",
-    "@types/react": "18.0.10",
-    "@types/react-dom": "18.0.5",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2",
     "@usedapp/core": "^1.0.8",
     "@zignaly/raffles-shared": "*",
     "assert": "^2.0.0",
@@ -79,10 +63,10 @@
     "mui-modal-provider": "^2.0.0",
     "os-browserify": "^0.3.0",
     "process": "^0.11.10",
-    "react": "18.1.0",
+    "react": "17.0.2",
     "react-app-rewired": "^2.2.1",
-    "react-countdown": "^2.3.2",
-    "react-dom": "18.1.0",
+    "react-countdown": "2.2.2",
+    "react-dom": "17.0.2",
     "react-hook-form": "^7.32.0",
     "react-i18next": "^11.16.9",
     "react-number-format": "^4.9.3",
@@ -97,7 +81,7 @@
     "url": "^0.11.0",
     "web-vitals": "2.1.4",
     "yup": "^0.32.11",
-    "zignaly-ui": "^0.4.4"
+    "zignaly-ui": "*"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.5.6",
@@ -110,27 +94,11 @@
     "@storybook/preset-create-react-app": "^4.1.2",
     "@storybook/testing-library": "^0.0.11",
     "@types/lodash": "^4.14.182",
+    "@types/react": "^17",
+    "eslint-config-zignaly-react": "*",
     "babel-plugin-named-exports-order": "^0.0.2",
     "eslint": "^8.16.0",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-config-standard-react": "^11.0.1",
     "eslint-loader": "^4.0.2",
-    "eslint-plugin-flowtype": "^8.0.3",
-    "eslint-plugin-i18next": "^6.0.0-4",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jest": "^26.4.6",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-no-autofix": "^1.2.3",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-react": "^7.30.0",
-    "eslint-plugin-react-hooks": "^4.5.0",
-    "eslint-plugin-standard": "^5.0.0",
-    "eslint-plugin-unicorn": "^42.0.0",
     "lint-staged": "^13.0.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",

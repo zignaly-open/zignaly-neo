@@ -24,7 +24,7 @@ Now run `yarn dev` to start a `nodemon`.
 What commands you could need?
 
 * `yarn dev` to launch a dev server, already mentioned it
-* `yarn lint` to launch a dev server
+* `yarn lint` to check lint issues
 * `yarn start` to launch a server, you're supposed to use that in prod
 * `yarn test` to... yes, you guessed it, test
 

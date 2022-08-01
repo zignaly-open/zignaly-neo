@@ -1,0 +1,13 @@
+import styled from "styled-components";
+
+export const SelectorContainer = styled.div<{ width: number }>`
+  width: ${(props) => props.width}px;
+`;
+
+export const Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  margin-top: 20px;
+  gap: 1px;
+`;
