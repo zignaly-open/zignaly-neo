@@ -36,7 +36,7 @@ and open [http://localhost:3000](http://localhost:3000).
 
 #### Raffles Server
 
-An Apollo Gr5aphQL-based app for Zignaly Raffles. Please adjust `packages/raffles-server/.env`, start the PostgreSQL
+An Apollo GraphQL-based app for Zignaly Raffles. Please adjust `packages/raffles-server/.env`, start the PostgreSQL
 server (details in `packages/raffles-server/README.md`) and run it
 with `yarn raffles-server`. Info about the fixtures is also present in that readme file.
 
