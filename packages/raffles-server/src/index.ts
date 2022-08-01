@@ -18,6 +18,7 @@ import { port, isTest, algorithm, secret } from '../config';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
+import api from './api';
 
 const typeDef = gql`
   type Query
@@ -33,6 +34,7 @@ app.use(
     credentialsRequired: false,
   }),
 );
+app.use('/api', api);
 
 const httpServer = http.createServer(app);
 

@@ -25,6 +25,7 @@ export const typeDef = gql`
 
   extend type Query {
     me: User
+    balance: String!
     checkUsername(username: String!): Boolean
   }
 

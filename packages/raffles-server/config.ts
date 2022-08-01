@@ -17,3 +17,6 @@ export const abi = IERC20;
 export const isTest = process.env.NODE_ENV === 'test';
 export const port = process.env.PORT || 4000;
 export const payoutSpreadsheetUrl = process.env.REACT_APP_SHEET_BEST_URL;
+export const zignalyAPI = process.env.ZIGNALY_API;
+export const zignalyAPIPublicKey = process.env.ZIGNALY_API_PUBLIC_KEY;
+export const zignalyAPIPrivateKey = process.env.ZIGNALY_API_PRIVATE_KEY;

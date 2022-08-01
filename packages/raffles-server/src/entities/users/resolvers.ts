@@ -5,6 +5,14 @@ import {
   validateUsername,
 } from './util';
 import { ApolloContext } from '../../types';
+import fetch from 'node-fetch';
+import crypto from 'node:crypto';
+import {
+  zignalyAPI,
+  zignalyAPIPrivateKey,
+  zignalyAPIPublicKey,
+} from '../../../config';
+import { randomHex } from 'web3-utils';
 
 const generateNonceSignMessage = (nonce: string | number) =>
   `Please sign this message to verify it's you: ${nonce}`;
@@ -14,6 +22,30 @@ export const resolvers = {
     me: async (_: any, __: any, { user }: ApolloContext) => {
       if (!user) return null;
       return await User.findByPk(user.id);
+    },
+    balance: async (_: any, __: any, { user }: ApolloContext) => {
+      if (!user) return null;
+
+      try {
+        const rdmString = randomHex(4).slice(2);
+        const timestamp = +new Date();
+        const str = `p=POST_BODY&s=${rdmString}&secret=${zignalyAPIPrivateKey}&t=${timestamp}`;
+        const checksum = crypto.createHash('sha256').update(str).digest('hex');
+
+        const response = await fetch(
+          `${zignalyAPI}/balance/all/${user.publicAddress}?s=${rdmString}&t=${timestamp}`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'X-CODE': zignalyAPIPublicKey,
+              'X-CHECKSUM': checksum,
+            },
+          },
+        );
+        return await response.json();
+      } catch (e) {
+        return null;
+      }
     },
     checkUsername: async (
       _: any,
