@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import { Typography } from 'zignaly-ui';
 import React, { useCallback } from 'react';
 import Countdown from 'react-countdown';
