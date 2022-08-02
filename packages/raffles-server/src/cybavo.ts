@@ -7,6 +7,12 @@ import {
   zignalyAPIPublicKey,
 } from '../config';
 
+export enum TransactionType {
+  Deposit = 'Raffle Deposit',
+  Fee = 'Raffle Fee',
+  Payout = 'Raffle Payout',
+}
+
 const generateChecksum = (body: any) => {
   const rdmString = randomHex(4).slice(2);
   const timestamp = +new Date();
@@ -42,17 +48,22 @@ export const getBalance = async (address: string) => {
   );
 };
 
-export const internalTransfer = async (address: string, amount: string) => {
+export const internalTransfer = async (
+  from: string,
+  to: string,
+  amount: string,
+  type: TransactionType,
+) => {
   return fetchAPI(`/transfer/internal`, {
     method: 'POST',
     body: {
       amount,
       fees: '0',
       currency: 'ZIG',
-      user_id: '617bab4be4ca6a2937666523',
-      to_user_id: address,
+      user_id: from,
+      to_user_id: to,
       locked: 'true',
-      type: 'Raffle Deposit',
+      type,
     },
   });
 };

@@ -6,6 +6,7 @@ import {
   receivingAddress,
   rpcSocketUrl,
   rpcUrl,
+  zignalySystemId,
 } from '../../config';
 import { AbiItem } from 'web3-utils';
 import { getLastProcessedBlock, setLastProcessedBlock } from './lastBlock';
@@ -14,7 +15,7 @@ import {
   // TODO: here's the problem and we cant run the watch script separately from the main app
   emitBalanceChanged,
 } from '../entities/transactions/util';
-import { internalTransfer } from '../cybavo';
+import { internalTransfer, TransactionType } from '../cybavo';
 
 type ChainEvent = {
   blockNumber: number;
@@ -80,14 +81,20 @@ export default async function watchTransactions() {
         }`,
       );
 
-      await internalTransfer(from, web3.utils.fromWei(value, 'ether'));
+      await internalTransfer(
+        zignalySystemId,
+        from,
+        web3.utils.fromWei(value, 'ether'),
+        TransactionType.Deposit,
+      );
 
       const user = await User.findOne({
         where: { publicAddress: from.toLowerCase() },
         raw: true,
       });
       if (!user) return;
-      await emitBalanceChanged(user.publicAddress);
+
+      await emitBalanceChanged(user);
     } catch (e) {
       console.error(e);
     }

@@ -6,6 +6,10 @@ import {
 } from './util';
 import { ApolloContext } from '../../types';
 import { getBalance } from '../../cybavo';
+import pubsub from '../../pubsub';
+import { BALANCE_CHANGED } from './constants';
+import { withFilter } from 'graphql-subscriptions';
+import { getUserIdFromToken } from '../../util/jwt';
 
 const generateNonceSignMessage = (nonce: string | number) =>
   `Please sign this message to verify it's you: ${nonce}`;
@@ -101,6 +105,15 @@ export const resolvers = {
         console.error(e);
         return null;
       }
+    },
+  },
+  Subscription: {
+    balanceChanged: {
+      subscribe: withFilter(
+        () => pubsub.asyncIterator([BALANCE_CHANGED]),
+        (payload, variables) =>
+          getUserIdFromToken(variables.token) === payload.balanceChanged.id,
+      ),
     },
   },
 };

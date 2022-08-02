@@ -126,12 +126,8 @@ export class AuctionBid extends Model {
   @BelongsTo(() => Transaction)
   public claimTransaction: Transaction;
 
-  @ForeignKey(() => Transaction)
   @Column
-  public transactionId: number;
-
-  @BelongsTo(() => Transaction)
-  public transaction: Transaction;
+  public transactionId: string;
 
   @Default(0)
   @Column(DataType.DECIMAL)

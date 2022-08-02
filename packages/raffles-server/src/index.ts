@@ -37,13 +37,7 @@ app.use(
 const httpServer = http.createServer(app);
 
 const schema = makeExecutableSchema({
-  typeDefs: [
-    typeDef,
-    auctions.typeDef,
-    users.typeDef,
-    payouts.typeDef,
-    transactions.typeDef,
-  ],
+  typeDefs: [typeDef, auctions.typeDef, users.typeDef, payouts.typeDef],
   resolvers: [
     auctions.resolvers,
     users.resolvers,

@@ -3,6 +3,7 @@ import BN from 'bignumber.js';
 import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from './constants';
 import { getBalance } from '../../cybavo';
+import { ContextUser } from '../../types';
 
 export async function getUserBalanceObject(
   id: number,
@@ -28,8 +29,11 @@ export function negative(decimalNumber: string): string {
   return new BN(decimalNumber).times(-1).toString();
 }
 
-export async function emitBalanceChanged(address: string) {
+export async function emitBalanceChanged(user: ContextUser) {
   pubsub.publish(BALANCE_CHANGED, {
-    balanceChanged: await getBalance(address),
+    balanceChanged: {
+      id: user.id,
+      balance: await getBalance(user.publicAddress),
+    },
   });
 }

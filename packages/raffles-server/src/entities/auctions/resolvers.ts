@@ -6,12 +6,7 @@ import { Includeable, QueryTypes } from 'sequelize';
 import { ApolloContext, ContextUser } from '../../types';
 import { User } from '../users/model';
 import { sequelize } from '../../db';
-import { Transaction, TransactionType } from '../transactions/model';
-import {
-  emitBalanceChanged,
-  getUserBalance,
-  negative,
-} from '../transactions/util';
+import { emitBalanceChanged, getUserBalance } from '../transactions/util';
 import {
   getMinRequiredBidForAuction,
   isBalanceSufficientForPayment,
@@ -20,6 +15,8 @@ import {
 import { Payout } from '../payouts/model';
 import performPayout from './functions/performPayout';
 import calculateNewExpiryDate from './functions/calculateExpiryDate';
+import { internalTransfer, TransactionType } from '../../cybavo';
+import { zignalySystemId } from '../../../config';
 
 const lastBidPopulation = {
   model: AuctionBid,
@@ -132,18 +129,12 @@ export const resolvers = {
       )
         throw new Error('Insufficient funds');
 
-      const transaction = await sequelize.transaction();
-
       try {
-        const bidFeeTransaction = await Transaction.create(
-          {
-            userId: user.id,
-            auctionId: auction.id,
-            value: negative(auction.bidFee),
-            type: TransactionType.Fee,
-          },
-
-          { transaction },
+        const tx = await internalTransfer(
+          user.publicAddress,
+          zignalySystemId,
+          '1',
+          TransactionType.Fee,
         );
 
         // better re-load from inside the transaction
@@ -154,32 +145,24 @@ export const resolvers = {
           order: [['id', 'DESC']],
         });
 
-        await AuctionBid.create(
-          {
-            auctionId: id,
-            transactionId: bidFeeTransaction.id,
-            value: getMinRequiredBidForAuction(auction, lastAuctionBid),
-            userId: user.id,
-          },
-          { transaction },
-        );
+        await AuctionBid.create({
+          auctionId: id,
+          transactionId: tx.transaction_id,
+          value: getMinRequiredBidForAuction(auction, lastAuctionBid),
+          userId: user.id,
+        });
 
         auction.expiresAt = calculateNewExpiryDate(auction);
 
-        await auction.save({ transaction });
         await verifyPositiveBalance(user.id);
-        await transaction.commit();
       } catch (error) {
         console.error(error);
-        // If the execution reaches this line, an error was thrown.
-        // We rollback the transaction.
-        await transaction.rollback();
         throw new Error('Count not create a bid');
       }
 
       const [updatedAuction] = await getAuctions(auction.id, user);
       pubsub.publish(AUCTION_UPDATED, { auctionUpdated: updatedAuction });
-      await emitBalanceChanged(user.publicAddress);
+      await emitBalanceChanged(user);
       return updatedAuction;
     },
 
@@ -218,29 +201,19 @@ export const resolvers = {
       )
         throw new Error('Insufficient funds');
 
-      const transaction = await sequelize.transaction();
-
       try {
-        const paymentTransaction = await Transaction.create(
-          {
-            userId: user.id,
-            auctionId: auction.id,
-            value: negative(winningBid.value),
-            type: TransactionType.Bid,
-          },
-
-          { transaction },
+        const tx = await internalTransfer(
+          user.publicAddress,
+          zignalySystemId,
+          winningBid.value,
+          TransactionType.Payout,
         );
 
-        winningBid.claimTransactionId = paymentTransaction.id;
-        await winningBid.save({ transaction });
+        winningBid.claimTransactionId = tx.transaction_id;
+        await winningBid.save();
         await verifyPositiveBalance(user.id);
-        await transaction.commit();
       } catch (error) {
         console.error(error);
-        // If the execution reaches this line, an error was thrown.
-        // We rollback the transaction.
-        await transaction.rollback();
         throw new Error('Count not make a claim');
       }
 
@@ -254,7 +227,7 @@ export const resolvers = {
 
       const [updatedAuction] = await getAuctions(auction.id, user);
       // no need to emit updated auctions here
-      await emitBalanceChanged(user.publicAddress);
+      await emitBalanceChanged(user);
       return updatedAuction;
     },
   },
