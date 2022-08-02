@@ -9,7 +9,7 @@ export default function useBalance(): {
   const { loading, data } = useQuery(GET_CURRENT_USER_BALANCE);
   return {
     loading,
-    balance: data?.balance || '0',
+    balance: data?.balance?.balance || '0',
   };
 }
 

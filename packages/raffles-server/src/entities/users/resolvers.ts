@@ -4,7 +4,7 @@ import {
   validateDiscordName,
   validateUsername,
 } from './util';
-import { ApolloContext } from '../../types';
+import { ApolloContext, ContextUser } from '../../types';
 import { getUserBalance } from '../../cybavo';
 import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from './constants';
@@ -13,6 +13,15 @@ import { getUserIdFromToken } from '../../util/jwt';
 
 const generateNonceSignMessage = (nonce: string | number) =>
   `Please sign this message to verify it's you: ${nonce}`;
+
+export async function getUserBalanceObject(
+  user: ContextUser,
+): Promise<{ id: number; balance: string }> {
+  return {
+    id: user.id,
+    balance: await getUserBalance(user.publicAddress),
+  };
+}
 
 export const resolvers = {
   Query: {
@@ -24,7 +33,7 @@ export const resolvers = {
       if (!user) return null;
 
       try {
-        return await getUserBalance(user.publicAddress);
+        return await getUserBalanceObject(user);
       } catch (e) {
         return null;
       }

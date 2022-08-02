@@ -48,7 +48,10 @@ export const CHECK_USERNAME = gql`
 
 export const GET_CURRENT_USER_BALANCE = gql`
   query balance {
-    balance
+    balance {
+      balance
+      id
+    }
   }
 `;
 
