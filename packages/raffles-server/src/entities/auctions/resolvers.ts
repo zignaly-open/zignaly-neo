@@ -179,7 +179,7 @@ export const resolvers = {
 
       const [updatedAuction] = await getAuctions(auction.id, user);
       pubsub.publish(AUCTION_UPDATED, { auctionUpdated: updatedAuction });
-      await emitBalanceChanged(user.id);
+      await emitBalanceChanged(user.publicAddress);
       return updatedAuction;
     },
 
@@ -254,7 +254,7 @@ export const resolvers = {
 
       const [updatedAuction] = await getAuctions(auction.id, user);
       // no need to emit updated auctions here
-      await emitBalanceChanged(user.id);
+      await emitBalanceChanged(user.publicAddress);
       return updatedAuction;
     },
   },

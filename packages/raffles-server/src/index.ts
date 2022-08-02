@@ -18,7 +18,6 @@ import { port, isTest, algorithm, secret } from '../config';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
-import api from './api';
 
 const typeDef = gql`
   type Query
@@ -34,7 +33,6 @@ app.use(
     credentialsRequired: false,
   }),
 );
-app.use('/api', api);
 
 const httpServer = http.createServer(app);
 
@@ -90,10 +88,7 @@ const server = new ApolloServer({
 // WebSocketServer start listening.
 const serverCleanup = useServer({ schema }, wsServer);
 
-process.env.NODE_ENV !== 'production' &&
-  !process.env.DEV_ONLY_DISABLE_DEPOSIT_CHECKS &&
-  !isTest &&
-  listenToChain();
+!process.env.DEV_ONLY_DISABLE_DEPOSIT_CHECKS && !isTest && listenToChain();
 
 server.start().then(() => server.applyMiddleware({ app }));
 

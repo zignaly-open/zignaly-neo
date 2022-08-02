@@ -9,12 +9,12 @@ import {
 } from '../../config';
 import { AbiItem } from 'web3-utils';
 import { getLastProcessedBlock, setLastProcessedBlock } from './lastBlock';
-import { Transaction, TransactionType } from '../entities/transactions/model';
 import { User } from '../entities/users/model';
 import {
   // TODO: here's the problem and we cant run the watch script separately from the main app
   emitBalanceChanged,
 } from '../entities/transactions/util';
+import { internalTransfer } from '../cybavo';
 
 type ChainEvent = {
   blockNumber: number;
@@ -69,20 +69,8 @@ export default async function watchTransactions() {
   const handleEventTransfer = async (event: ChainEvent) => {
     // Get the event parameters
     const { from, to, value } = event.returnValues;
-    const user = await User.findOne({
-      where: { publicAddress: from.toLowerCase() },
-      raw: true,
-    });
-    if (!user) return;
+
     try {
-      await Transaction.create({
-        userId: user.id,
-        value: web3.utils.fromWei(value, 'ether'),
-        block: event.blockNumber,
-        txHash: event.transactionHash,
-        type: TransactionType.Deposit,
-      });
-      await emitBalanceChanged(user.id);
       console.log(
         `${from} sent to ${to}: ${web3.utils.fromWei(
           value,
@@ -91,10 +79,17 @@ export default async function watchTransactions() {
           event.transactionHash
         }`,
       );
+
+      await internalTransfer(from, web3.utils.fromWei(value, 'ether'));
+
+      const user = await User.findOne({
+        where: { publicAddress: from.toLowerCase() },
+        raw: true,
+      });
+      if (!user) return;
+      await emitBalanceChanged(user.publicAddress);
     } catch (e) {
-      if (e.name !== 'SequelizeUniqueConstraintError') {
-        console.error(e);
-      }
+      console.error(e);
     }
   };
 
