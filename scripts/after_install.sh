@@ -1,7 +1,5 @@
 #!/bin/bash
 
-cd /zignaly/packages/raffles-client
+cd /zignaly
 sudo yarn
-sudo yarn build
-cd ../raffles-server
-sudo yarn
+sudo yarn lerna run build
