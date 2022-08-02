@@ -1,15 +1,19 @@
 {
-  "name": "zignaly-zigraffle",
+  "name": "@zignaly/mono",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "postinstall": "husky install",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "frontend": "cd packages/web && env-cmd -f .env yarn start",
-    "backend": "cd packages/server && yarn dev",
-    "build": "cd packages/web && yarn && env-cmd -f .env.production GENERATE_SOURCEMAP=false yarn build && cd ../server && yarn",
-    "start": "cd packages/server && yarn start"
+    "bootstrap": "lerna bootstrap",
+    "test": "lerna run test",
+    "raffles-client": "lerna run start --scope=@zignaly/raffles-client --include-dependencies --stream --parallel",
+    "raffles-server": "lerna run dev --scope=@zignaly/raffles-server --include-dependencies --stream",
+    "build": "lerna run build"
   },
   "engines": {
     "node": "^16"
@@ -17,34 +21,16 @@
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
   "license": "ISC",
   "devDependencies": {
-    "@types/lodash": "^4.14.182",
-    "eslint": "^8.16.0",
-    "eslint-config-airbnb-typescript": "^17.0.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-config-standard-react": "^11.0.1",
-    "eslint-loader": "^4.0.2",
-    "eslint-plugin-flowtype": "^8.0.3",
-    "eslint-plugin-i18next": "^6.0.0-4",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jest": "^26.4.6",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-no-autofix": "^1.2.3",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-promise": "^6.0.0",
-    "eslint-plugin-react": "^7.30.0",
-    "eslint-plugin-react-hooks": "^4.5.0",
-    "eslint-plugin-standard": "^5.0.0",
-    "eslint-plugin-unicorn": "^42.0.0",
     "husky": "^8.0.1",
+    "lerna": "^5.1.2",
     "lint-staged": "^13.0.0",
-    "prettier": "^2.6.2",
     "typescript": "4.7.2"
   },
   "dependencies": {
-    "env-cmd": "^10.1.0",
-    "lodash": "^4.17.21"
+    "env-cmd": "^10.1.0"
+  },
+  "resolutions": {
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2"
   }
 }

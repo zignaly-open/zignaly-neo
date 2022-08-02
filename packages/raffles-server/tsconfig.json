@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "esModuleInterop": true
+  },
+  "exclude": [
+    "build",
+    "node_modules"
+  ],
+  "include": [
+    "src",
+    "node_modules/@zigraffle"
+, "tests"  ],
+  "ts-node": {
+    "ignore": [ "node_modules/(?!@zigraffle)" ]
+  }
+}

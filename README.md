@@ -1,64 +1,54 @@
-# Zigraffle
+# Zignaly Monorepo
 
-### Checklist
+Welcome to Zignaly. You will need node 16, I suggest you use nvm. Just run `nvm use`.
 
-MVP
-- [x] Sockets
-- [x] Proper Database connection - Postgres
-- [x] Balance processing
-- [x] Auctions -> DB
-- [x] Bidding system
-- [ ] Winning bid should gove a claim ability
-- [ ] Multi-winner
-- [ ] Polygon net only
+## How to run
 
-A little bit later
-- [ ] Tests for the love of God
-- [ ] Toasts for errors
-- [ ] Server eslint
-- [x] Manage Profile
-- [ ] Winner payouts
-- [ ] At least half-decent design
+```
+lerna bootstrap
+```
 
-Later:
-- [ ] PubSub -> Redis or Kafka
-- [ ] DB Indices
-- [ ] Security Audit
+This will install all dependencies and link projects together. Next instructions vary by the repository.
 
+Also, now to install dependencies you should use:
 
-### How to run
+```
+lerna add package-name --scope=zignaly-ui 
+```
 
-You will need node 16, I suggest you use nvm. Just run `nvm use`.
+I.e. you should be specifying the target package.
 
-OK what next? in `packages/web` do `cp .env.sample .env`. We have 5 fields there:
+#### Zignaly UI
 
-* `REACT_APP_GRAPHQL` - backend's GraphQL HTTP endpoint. Remove that line altogether to use the default one (will work with the backend runninn out of the box)
-* `REACT_APP_GRAPHQL_WS` - backend's GraphQL Websocket endpoint. Remove that line altogether to use the default one (will work with the backend runninn out of the box)
-* `REACT_APP_INFURA_PROJECT_ID` - surprisingly, it's infura project id
-* `REACT_APP_RECEIVING_ADDRESS` - this is the address to which the payments will go (all the profits)
-* `REACT_APP_CONTRACT_ADDRESS` - contract address for the token that we accept as a payment
+Our mighty and glorious component library.
 
-You will obviously need to install dependencies with `yarn`.
+* TODO: publish
+* TODO: storybook
+* TODO: lint
 
-To run the frontend, from the top-level `package.json` run `yarn run frontend`;
+#### Raffles Client
 
-In `packages/server` do `cp .env.sample .env`. We have 5 fields there:
+A React-based app for Zignaly Raffles. Please adjust `packages/raffles-client/.env` file and run it
+with `yarn raffles-client`. This will start all necessary watchers and you will be able to make changes to Zignaly Ui
+that would be automatically reflected.
 
-* `POSTGRES_URL` - you can run a simple postgres docker container, that'd do: `docker run --name some-postgres -p 5432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres`
-* `RPC_URL` - infura HTTP API
-* `RPC_SOCKET_URL` - infura Websocket API
-* `RECEIVING_ACCOUNT` - same as `REACT_APP_RECEIVING_ADDRESS`. Those two should match. TODO: move thayt feom .env to a hardcoded value in `packages/shared` for security purposes 
-* `CONTRACT_ADDRESS` - same as `REACT_APP_CONTRACT_ADDRESS`. Those two should match.
-* `ALGORITHM` - algorithm for JWT, default `'HS256'`
-* `SECRET` - JWT secret
-* `DEV_ONLY_DISABLE_DEPOSIT_CHECKS` - stop checking chain to avoid unnecessary requests to  
-* `NUMBER_OF_CONFIRMATIONS_REQUIRED` - number of confirmations required to approve a transaction
+and open [http://localhost:3000](http://localhost:3000).
 
+#### Raffles Server
 
-You will obviously need to install dependencies with `yarn`.
+An Apollo GraphQL-based app for Zignaly Raffles. Please adjust `packages/raffles-server/.env`, start the PostgreSQL
+server (details in `packages/raffles-server/README.md`) and run it
+with `yarn raffles-server`. Info about the fixtures is also present in that readme file.
 
-To run the frontend, from the top-level `package.json` run `yarn run backend`.
+#### Raffles Shared
 
-Looking at an empty list is boring, so do `cd packages/server && npx ts-node src/entities/__fixtures/fixtures.ts`
+Some common stuff for Raffles, nothing to write home about.
 
-That's it.
+## Some guidelines
+
+* Though shalt use **Typescript**
+* Though shalt not use `// @ts-ignore` and, more importantly, `// @ts-nocheck`
+* Though shalt not commit code that does not pass eslint check (we will figure it out anyway in GitHub's CI)
+* Though shalt not commit untranslated literals and preferably use i18next
+* Though shalt add more guidelines here after the team's approval
+* Though shalt be very careful and use only one React version across all these repos

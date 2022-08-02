@@ -1,0 +1,19 @@
+{
+  "logo": "Zigraffle",
+  "home": "Home",
+  "how-it-works": "How it works",
+  "get-funds": "Deposit funds",
+  "edit profile": "Edit Profile",
+  "buy-bids": "Buy bids",
+  "view-history": "View History",
+  "disconnect": "Disconnect",
+  "log-in": "Connect Wallet",
+  "moto": "Bid & Win thousands of $ worth of crypto for cents!",
+  "loading": "Loading...",
+  "settings": "Settings",
+  "deposit": "Deposit",
+  "insert-code": "Insert Code",
+  "transfer-coin": "Transfer {{coin}}",
+  "auction": "ZIGRaffle",
+  "cancel": "Cancel"
+}

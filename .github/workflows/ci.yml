@@ -1,0 +1,33 @@
+on: [ pull_request ]
+
+jobs:
+  lint_and_test:
+    name: Make sure our Zignaly code is great <3
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [ 16.x ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # better fetch all and rebuild part than to fetch part and rebuild all
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: 'yarn'
+      - name: Install Lerna
+        run: yarn global add lerna
+      - name: Bootstrap modified packages
+        run: lerna bootstrap --since=origin/${{ github.base_ref }} --include-dependencies
+      - name: Build modified packages
+        run: lerna run build --since=origin/${{ github.base_ref }}
+      - name: Lint modified packages
+        run: lerna run lint-ci --since=origin/${{ github.base_ref }}
+      - name: Test modified packages
+        run: lerna run test --since=origin/${{ github.base_ref }}
+      - name: Headpat yourself ^_^
+        run: echo "Great job <3"
