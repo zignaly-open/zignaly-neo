@@ -5,7 +5,7 @@ import {
   validateUsername,
 } from './util';
 import { ApolloContext } from '../../types';
-import { getBalance } from '../../cybavo';
+import { getUserBalance } from '../../cybavo';
 import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from './constants';
 import { withFilter } from 'graphql-subscriptions';
@@ -24,7 +24,7 @@ export const resolvers = {
       if (!user) return null;
 
       try {
-        return await getBalance(user.publicAddress);
+        return await getUserBalance(user.publicAddress);
       } catch (e) {
         return null;
       }

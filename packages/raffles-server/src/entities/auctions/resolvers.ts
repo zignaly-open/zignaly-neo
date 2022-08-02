@@ -6,7 +6,6 @@ import { Includeable, QueryTypes } from 'sequelize';
 import { ApolloContext, ContextUser } from '../../types';
 import { User } from '../users/model';
 import { sequelize } from '../../db';
-import { emitBalanceChanged, getUserBalance } from '../transactions/util';
 import {
   getMinRequiredBidForAuction,
   isBalanceSufficientForPayment,
@@ -15,8 +14,13 @@ import {
 import { Payout } from '../payouts/model';
 import performPayout from './functions/performPayout';
 import calculateNewExpiryDate from './functions/calculateExpiryDate';
-import { internalTransfer, TransactionType } from '../../cybavo';
+import {
+  getUserBalance,
+  internalTransfer,
+  TransactionType,
+} from '../../cybavo';
 import { zignalySystemId } from '../../../config';
+import { emitBalanceChanged } from '../users/util';
 
 const lastBidPopulation = {
   model: AuctionBid,
@@ -124,7 +128,7 @@ export const resolvers = {
       if (
         !isBalanceSufficientForPayment(
           auction.bidFee,
-          await getUserBalance(user.id),
+          await getUserBalance(user.publicAddress),
         )
       )
         throw new Error('Insufficient funds');
@@ -154,7 +158,7 @@ export const resolvers = {
 
         auction.expiresAt = calculateNewExpiryDate(auction);
 
-        await verifyPositiveBalance(user.id);
+        await verifyPositiveBalance(user.publicAddress);
       } catch (error) {
         console.error(error);
         throw new Error('Count not create a bid');
@@ -196,7 +200,7 @@ export const resolvers = {
       if (
         !isBalanceSufficientForPayment(
           winningBid.value,
-          await getUserBalance(user.id),
+          await getUserBalance(user.publicAddress),
         )
       )
         throw new Error('Insufficient funds');
@@ -211,7 +215,7 @@ export const resolvers = {
 
         winningBid.claimTransactionId = tx.transaction_id;
         await winningBid.save();
-        await verifyPositiveBalance(user.id);
+        await verifyPositiveBalance(user.publicAddress);
       } catch (error) {
         console.error(error);
         throw new Error('Count not make a claim');

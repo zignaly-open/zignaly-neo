@@ -1,1 +1,0 @@
-export const BALANCE_CHANGED = 'BALANCE_CHANGED';

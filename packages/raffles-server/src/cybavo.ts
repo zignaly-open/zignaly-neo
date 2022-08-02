@@ -42,7 +42,7 @@ const fetchAPI = async (url: string, params?: any) => {
   return response.json();
 };
 
-export const getBalance = async (address: string) => {
+export const getUserBalance = async (address: string) => {
   return fetchAPI(`/balance/all/${address}`).then(
     (data) => data.ZIG?.balance || '0',
   );

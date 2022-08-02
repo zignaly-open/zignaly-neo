@@ -14,7 +14,7 @@ import { User } from '../entities/users/model';
 import {
   // TODO: here's the problem and we cant run the watch script separately from the main app
   emitBalanceChanged,
-} from '../entities/transactions/util';
+} from '../entities/users/util';
 import { internalTransfer, TransactionType } from '../cybavo';
 
 type ChainEvent = {
