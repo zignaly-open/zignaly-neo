@@ -24,7 +24,6 @@ const typeDef = gql`
   type Mutation
   type Subscription
 `;
-
 const app = express();
 app.use(
   expressjwt({
