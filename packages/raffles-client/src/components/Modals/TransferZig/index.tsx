@@ -33,6 +33,10 @@ const TransferZigModal = ({
     address: address,
     transferAmount: transferAmount,
   });
+  console.log(chainId);
+  console.log(balance);
+  console.log(token);
+  console.log(account);
   useEffect(() => {
     !account && activateBrowserWallet();
     if (!address) {
