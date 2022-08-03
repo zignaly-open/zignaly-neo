@@ -228,10 +228,9 @@ export async function mockUserBalance(user: User, money: number | string) {
 }
 
 export async function mockTransfer() {
-  console.log('mock');
-  fetchMock.post('path:/transfer/internal', () => ({
+  fetchMock.post('path:/transfer/internal', {
     transaction_id: '12345554452',
-  }));
+  });
 }
 
 export async function makeRequest(gql: string, token: string): Promise<any> {
@@ -242,17 +241,6 @@ export async function makeRequest(gql: string, token: string): Promise<any> {
       query: gql,
     })
     .set('Accept', 'application/json');
-}
-
-export async function getBalance(token: string): Promise<string> {
-  const {
-    body: {
-      data: {
-        balance: { balance },
-      },
-    },
-  } = await makeRequest(BALANCE_QUERY, token);
-  return balance;
 }
 
 export const BALANCE_QUERY = `

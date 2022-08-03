@@ -10,7 +10,6 @@ import {
   createBasketItem,
   getAuctions,
   mockUserBalance,
-  getBalance,
   createBob,
   getFirstAuction,
   createRandomUser,
@@ -25,9 +24,9 @@ describe('Auctions', () => {
   beforeEach(wipeOut);
   beforeEach(() => {
     fetchMock.restore();
+    mockTransfer();
   });
   afterEach(clearMocks);
-  beforeAll(mockTransfer);
 
   it('should not let bid on non-existing auctions', async () => {
     const [alice, aliceToken] = await createAlice();
@@ -89,7 +88,13 @@ describe('Auctions', () => {
     expect(body.data.bid.userBid.value).toBe('100');
     const { body: body2 } = await makeBid(auction, aliceToken);
     expect(body2.data.bid.userBid.value).toBe('102');
-    expect(await getBalance(aliceToken)).toBe('298');
+    expect(fetchMock).toHaveNthFetched(2, 'path:/transfer/internal', {
+      // can't test partial body until this PR is merged: https://github.com/wheresrhys/fetch-mock-jest/pull/32
+      // body: expect.objectContaining({
+      //   amount: 1,
+      // }),
+      method: 'post',
+    });
   });
 
   it('should support the main flow', async () => {

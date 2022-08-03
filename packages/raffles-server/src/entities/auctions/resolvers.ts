@@ -157,6 +157,7 @@ export const resolvers = {
         });
 
         auction.expiresAt = calculateNewExpiryDate(auction);
+        await auction.save();
 
         await verifyPositiveBalance(user.publicAddress);
       } catch (error) {

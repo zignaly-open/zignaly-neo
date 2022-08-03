@@ -54,6 +54,7 @@ export const internalTransfer = async (
   amount: string,
   type: TransactionType,
 ): Promise<CybavoTransfer> => {
+  console.log(from, to);
   return fetchAPI(`/transfer/internal`, {
     method: 'POST',
     body: {

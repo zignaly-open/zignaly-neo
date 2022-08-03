@@ -1,3 +1,4 @@
+// @ts-nocheck
 import {
   waitUntilTablesAreCreated,
   wipeOut,
@@ -9,10 +10,11 @@ import {
   expireAuction,
   getFirstAuction,
   claimAuction,
-  getBalance,
   createRandomUser,
 } from '../../util/test-utils';
 import payout from './functions/performPayout';
+import fetchMock from 'fetch-mock-jest';
+import mockCybavoWallet from '../../util/mock-cybavo-wallet';
 
 jest.mock('./functions/performPayout.ts', () => jest.fn(() => ({})));
 
@@ -20,11 +22,15 @@ describe('Auction Claims', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
   afterEach(clearMocks);
+  afterEach(() => {
+    fetchMock.restore();
+  });
 
   it('should let claim auctions and send information to the ui', async () => {
     const [alice, aliceToken] = await createAlice();
+    const cybavo = mockCybavoWallet(alice, 300);
     const auction = await createAuction();
-    await mockUserBalance(alice, 300);
+
     await makeBid(auction, aliceToken);
 
     await expireAuction(auction.id);
@@ -40,21 +46,21 @@ describe('Auction Claims', () => {
     expect(claim.userBid.isClaimed).toBe(true);
     const claimedAuction = await getFirstAuction(aliceToken);
     expect(claimedAuction.userBid.isClaimed).toBe(true);
-    expect(await getBalance(aliceToken)).toBe('199');
+    expect(cybavo.getBalance()).toBe('199.99');
 
     expect(payout).toHaveBeenCalledTimes(1);
   });
 
   it('should not let claim unwon auctions', async () => {
     const [alice, aliceToken] = await createAlice();
+    const cybavo = mockCybavoWallet(alice, 300);
     const auction = await createAuction();
-    await mockUserBalance(alice, 300);
     await makeBid(auction, aliceToken);
-    expect(await getBalance(aliceToken)).toBe('299');
+    expect(cybavo.getBalance()).toBe('299.99');
 
     for (let i = 0; i < 10; i++) {
       const [randomUser, randomUserToken] = await createRandomUser();
-      await mockUserBalance(randomUser, 10);
+      mockCybavoWallet(randomUser, 10);
       await makeBid(auction, randomUserToken);
     }
 
@@ -67,7 +73,7 @@ describe('Auction Claims', () => {
     expect(errors.length).toBe(1);
     const claimedAuction = await getFirstAuction(aliceToken);
     expect(claimedAuction.userBid.isClaimed).toBe(false);
-    expect(await getBalance(aliceToken)).toBe('299');
+    expect(cybavo.getBalance()).toBe('299.99');
 
     expect(payout).toHaveBeenCalledTimes(0);
   });
