@@ -4,7 +4,7 @@ import {
   clearMocks,
   createAlice,
   createAuction,
-  giveMoney,
+  mockUserBalance,
   makeBid,
   expireAuction,
   getFirstAuction,
@@ -24,7 +24,7 @@ describe('Auction Claims', () => {
   it('should let claim auctions and send information to the ui', async () => {
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
-    await giveMoney(alice, 300);
+    await mockUserBalance(alice, 300);
     await makeBid(auction, aliceToken);
 
     await expireAuction(auction.id);
@@ -48,13 +48,13 @@ describe('Auction Claims', () => {
   it('should not let claim unwon auctions', async () => {
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
-    await giveMoney(alice, 300);
+    await mockUserBalance(alice, 300);
     await makeBid(auction, aliceToken);
     expect(await getBalance(aliceToken)).toBe('299');
 
     for (let i = 0; i < 10; i++) {
       const [randomUser, randomUserToken] = await createRandomUser();
-      await giveMoney(randomUser, 10);
+      await mockUserBalance(randomUser, 10);
       await makeBid(auction, randomUserToken);
     }
 
@@ -75,7 +75,7 @@ describe('Auction Claims', () => {
   it('should not let claim multiple times', async () => {
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
-    await giveMoney(alice, 300);
+    await mockUserBalance(alice, 300);
     await makeBid(auction, aliceToken);
     await expireAuction(auction.id);
     await claimAuction(auction, aliceToken);
@@ -90,7 +90,7 @@ describe('Auction Claims', () => {
   it('should not let claim unfinished auctions', async () => {
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
-    await giveMoney(alice, 300);
+    await mockUserBalance(alice, 300);
     await makeBid(auction, aliceToken);
     await claimAuction(auction, aliceToken);
     const {
@@ -106,7 +106,7 @@ describe('Auction Claims', () => {
     const auction = await createAuction();
     auction.maxClaimDate = new Date(Date.now() - 1);
     await auction.save();
-    await giveMoney(alice, 300);
+    await mockUserBalance(alice, 300);
     await makeBid(auction, aliceToken);
     await claimAuction(auction, aliceToken);
     const {
@@ -120,7 +120,7 @@ describe('Auction Claims', () => {
   it('should not let claim without enough money', async () => {
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
-    await giveMoney(alice, 100);
+    await mockUserBalance(alice, 100);
     await makeBid(auction, aliceToken);
     await claimAuction(auction, aliceToken);
     const {

@@ -5,6 +5,7 @@ import {
   zignalyAPIPrivateKey,
   zignalyAPIPublicKey,
 } from '../config';
+import { CybavoBalance, CybavoTransfer } from './types';
 
 export enum TransactionType {
   Deposit = 'Raffle Deposit',
@@ -27,7 +28,7 @@ const fetchAPI = async (url: string, params?: any) => {
   const fullUrl = new URL(`${zignalyAPI}${url}`);
   fullUrl.searchParams.set('s', rdmString);
   fullUrl.searchParams.set('t', timestamp.toString());
-  console.log(params?.body);
+
   const response = await fetch(fullUrl, {
     method: params?.method,
     headers: {
@@ -43,7 +44,7 @@ const fetchAPI = async (url: string, params?: any) => {
 
 export const getUserBalance = async (address: string) => {
   return fetchAPI(`/balance/all/${address}`).then(
-    (data) => data.ZIG?.balance || '0',
+    (data: CybavoBalance) => data.ZIG?.balance || '0',
   );
 };
 
@@ -52,7 +53,7 @@ export const internalTransfer = async (
   to: string,
   amount: string,
   type: TransactionType,
-) => {
+): Promise<CybavoTransfer> => {
   return fetchAPI(`/transfer/internal`, {
     method: 'POST',
     body: {

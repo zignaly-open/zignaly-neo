@@ -219,12 +219,19 @@ export async function createRandomUser(): Promise<[User, string]> {
   }
 }
 
-export async function giveMoney(user: User, money: number | string) {
+export async function mockUserBalance(user: User, money: number | string) {
   fetchMock.get(`path:/balance/all/${user.publicAddress}`, {
     ZIG: {
       balance: money.toString(),
     },
   });
+}
+
+export async function mockTransfer() {
+  console.log('mock');
+  fetchMock.post('path:/transfer/internal', () => ({
+    transaction_id: '12345554452',
+  }));
 }
 
 export async function makeRequest(gql: string, token: string): Promise<any> {
