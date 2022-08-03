@@ -8,10 +8,10 @@ import {
   AuctionBid,
 } from '../entities/auctions/model';
 import { AuctionType } from '@zignaly/raffles-shared/types';
-import { Transaction, TransactionType } from '../entities/transactions/model';
 import { isTest } from '../../config';
 import { persistTablesToTheDatabase } from '../db';
 import { Payout } from '../entities/payouts/model';
+import fetchMock from 'fetch-mock-jest';
 
 const request = supertest(app);
 
@@ -220,13 +220,10 @@ export async function createRandomUser(): Promise<[User, string]> {
 }
 
 export async function giveMoney(user: User, money: number | string) {
-  await Transaction.create({
-    userId: user.id,
-    value: money.toString(),
-    block: 1,
-    auctionId: null,
-    txHash: 'privet' + Math.random(),
-    type: TransactionType.Deposit,
+  fetchMock.get(`path:/balance/all/${user.publicAddress}`, {
+    ZIG: {
+      balance: money.toString(),
+    },
   });
 }
 
@@ -325,7 +322,6 @@ export async function wipeOut() {
       const options = { where: {}, cascade: true, force: true, truncate: true };
       await Payout.destroy(options);
       await AuctionBid.destroy(options);
-      await Transaction.destroy(options);
       await AuctionBasketItem.destroy(options);
       await Auction.destroy(options);
       await User.destroy(options);

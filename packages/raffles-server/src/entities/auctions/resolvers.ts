@@ -137,7 +137,7 @@ export const resolvers = {
         const tx = await internalTransfer(
           user.publicAddress,
           zignalySystemId,
-          '1',
+          '0.01',
           TransactionType.Fee,
         );
 

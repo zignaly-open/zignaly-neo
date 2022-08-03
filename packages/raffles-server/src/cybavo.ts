@@ -1,4 +1,3 @@
-import fetch from 'node-fetch';
 import crypto from 'node:crypto';
 import { randomHex } from 'web3-utils';
 import {
@@ -28,7 +27,7 @@ const fetchAPI = async (url: string, params?: any) => {
   const fullUrl = new URL(`${zignalyAPI}${url}`);
   fullUrl.searchParams.set('s', rdmString);
   fullUrl.searchParams.set('t', timestamp.toString());
-
+  console.log(params?.body);
   const response = await fetch(fullUrl, {
     method: params?.method,
     headers: {
