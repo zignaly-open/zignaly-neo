@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-zignaly-react",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React-typescript linter config",
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
   "homepage": "https://github.com/zignaly-open/zigraffle#readme",
@@ -29,8 +29,8 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-react-hooks": "^4.5.0",
     "eslint-plugin-standard": "^5.0.0",
-    "eslint-plugin-unicorn": "^42.0.0",
-    "eslint-plugin-storybook": "^0.6.1"
+    "eslint-plugin-storybook": "^0.6.1",
+    "eslint-plugin-unicorn": "^42.0.0"
   },
   "repository": {
     "type": "git",
