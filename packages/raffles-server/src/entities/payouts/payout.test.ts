@@ -7,15 +7,14 @@ import {
   claimAuction,
   getPayouts,
 } from '../../util/test-utils';
-import fetchMock from 'fetch-mock-jest';
-import mockCybavoWallet from '../../util/mock-cybavo-wallet';
+import mockCybavoWallet, { mock } from '../../util/mock-cybavo-wallet';
 import { zignalySystemId } from '../../../config';
 import { TransactionType } from '../../cybavo';
 
 describe('Payouts', () => {
   beforeAll(waitUntilTablesAreCreated);
-  beforeEach(() => {
-    fetchMock.restore();
+  afterEach(() => {
+    mock.reset();
   });
 
   it('should show payouts after some auctions are won', async () => {
@@ -31,12 +30,8 @@ describe('Payouts', () => {
     await claimAuction(auction1, aliceToken);
     await claimAuction(auction2, aliceToken);
 
-    expect(fetchMock).toHaveFetched('path:/transfer/internal', {
-      // can't test partial body until this PR is merged: https://github.com/wheresrhys/fetch-mock-jest/pull/32
-      // body: expect.objectContaining({
-      //   amount: '100',
-      // }),
-      body: {
+    expect(mock.history.post[2].data).toBe(
+      JSON.stringify({
         amount: '100',
         fees: '0',
         currency: 'ZIG',
@@ -44,9 +39,8 @@ describe('Payouts', () => {
         to_user_id: zignalySystemId,
         locked: 'true',
         type: TransactionType.Payout,
-      },
-      method: 'post',
-    });
+      }),
+    );
 
     const payouts = await getPayouts(aliceToken);
     expect(payouts.length).toBe(2);

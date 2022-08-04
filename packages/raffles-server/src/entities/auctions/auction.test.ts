@@ -15,16 +15,14 @@ import {
   wait,
   expireAuction,
 } from '../../util/test-utils';
-import fetchMock from 'fetch-mock-jest';
-import mockCybavoWallet from '../../util/mock-cybavo-wallet';
+import mockCybavoWallet, { mock } from '../../util/mock-cybavo-wallet';
 import { TransactionType } from '../../cybavo';
 import { zignalySystemId } from '../../../config';
-
 describe('Auctions', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
-  beforeEach(() => {
-    fetchMock.restore();
+  afterEach(() => {
+    mock.reset();
   });
   afterEach(clearMocks);
 
@@ -88,12 +86,8 @@ describe('Auctions', () => {
     expect(body.data.bid.userBid.value).toBe('100');
     const { body: body2 } = await makeBid(auction, aliceToken);
     expect(body2.data.bid.userBid.value).toBe('102');
-    expect(fetchMock).toHaveNthFetched(2, 'path:/transfer/internal', {
-      // can't test partial body until this PR is merged: https://github.com/wheresrhys/fetch-mock-jest/pull/32
-      // body: expect.objectContaining({
-      //   amount: '0.01',
-      // }),
-      body: {
+    expect(mock.history.post[1].data).toBe(
+      JSON.stringify({
         amount: '0.01',
         fees: '0',
         currency: 'ZIG',
@@ -101,9 +95,8 @@ describe('Auctions', () => {
         to_user_id: zignalySystemId,
         locked: 'true',
         type: TransactionType.Fee,
-      },
-      method: 'post',
-    });
+      }),
+    );
   });
 
   it('should support the main flow', async () => {
@@ -184,7 +177,7 @@ describe('Auctions', () => {
       2,
       'BALANCE_CHANGED',
       expect.objectContaining({
-        balanceChanged: expect.objectContaining({ balance: '300' }),
+        balanceChanged: expect.objectContaining({ balance: '299.99' }),
       }),
     );
   });
@@ -215,25 +208,7 @@ describe('Auctions', () => {
     expect(+new Date(initialExpiry)).toBeLessThan(+new Date(updatedExpiry));
   });
 
-  it('should increase expiry time by 1 to 4 hours when expiry is more then 1 hour', async () => {
-    const [alice, aliceToken] = await createAlice();
-    const auction = await createAuction();
-    mockCybavoWallet(alice, 300);
-    const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
-    await wait(100);
-    const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
-    expect(initialExpiry2).toBe(initialExpiry2);
-    await makeBid(auction, aliceToken);
-    const { expiresAt: updatedExpiry } = await getFirstAuction(aliceToken);
-    expect(
-      +new Date(updatedExpiry) - +new Date(initialExpiry),
-    ).toBeGreaterThanOrEqual(60 * 60_000);
-    expect(
-      +new Date(updatedExpiry) - +new Date(initialExpiry),
-    ).toBeLessThanOrEqual(60 * 4 * 60_000);
-  });
-
-  it('should increase expiry time by 1 to 4 hours when expiry is more then 1 hour', async () => {
+  it('should increase expiry time by 1 to 4 hours when expiry is more than 1 hour', async () => {
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     mockCybavoWallet(alice, 300);

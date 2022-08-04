@@ -11,8 +11,8 @@ import {
   createRandomUser,
 } from '../../util/test-utils';
 import payout from './functions/performPayout';
-import fetchMock from 'fetch-mock-jest';
-import mockCybavoWallet from '../../util/mock-cybavo-wallet';
+import mockCybavoWallet, { mock } from '../../util/mock-cybavo-wallet';
+import { getUserBalance } from '../../cybavo';
 
 jest.mock('./functions/performPayout.ts', () => jest.fn(() => ({})));
 
@@ -21,7 +21,7 @@ describe('Auction Claims', () => {
   beforeEach(wipeOut);
   afterEach(clearMocks);
   afterEach(() => {
-    fetchMock.restore();
+    mock.reset();
   });
 
   it('should let claim auctions and send information to the ui', async () => {
@@ -51,10 +51,10 @@ describe('Auction Claims', () => {
 
   it('should not let claim unwon auctions', async () => {
     const [alice, aliceToken] = await createAlice();
-    const cybavo = mockCybavoWallet(alice, 300);
+    mockCybavoWallet(alice, 300);
     const auction = await createAuction();
     await makeBid(auction, aliceToken);
-    expect(cybavo.getBalance()).toBe('299.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
 
     for (let i = 0; i < 10; i++) {
       const [randomUser, randomUserToken] = await createRandomUser();
@@ -71,7 +71,7 @@ describe('Auction Claims', () => {
     expect(errors.length).toBe(1);
     const claimedAuction = await getFirstAuction(aliceToken);
     expect(claimedAuction.userBid.isClaimed).toBe(false);
-    expect(cybavo.getBalance()).toBe('299.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
 
     expect(payout).toHaveBeenCalledTimes(0);
   });

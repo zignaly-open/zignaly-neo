@@ -162,7 +162,7 @@ export const resolvers = {
         await verifyPositiveBalance(user.publicAddress);
       } catch (error) {
         console.error(error);
-        throw new Error('Count not create a bid');
+        throw new Error('Could not create a bid');
       }
 
       const [updatedAuction] = await getAuctions(auction.id, user);
