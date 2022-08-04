@@ -1,6 +1,6 @@
 {
   "name": "@zignaly-open/eslint-config-zignaly-react",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "React-typescript linter config",
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
   "homepage": "https://github.com/zignaly-open/zigraffle#readme",
