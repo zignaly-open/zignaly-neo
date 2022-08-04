@@ -13,10 +13,19 @@ This will install all dependencies and link projects together. Next instructions
 Also, now to install dependencies you should use:
 
 ```
-lerna add package-name --scope=zignaly-ui 
+lerna add package-name --scope=@zignaly-open/ui 
 ```
 
 I.e. you should be specifying the target package.
+
+_"But wait"_, one could say. _"There is a pandemic, an ongoing war and an overall geopolitical instability that can
+result in WW3. I have outdoor activities top participate in, shows to watch and sexual activities to indulge in. The
+mathematical expectation of the length of my life is TOO SHORT to type out `@zignaly-open` when defining scope"_. Well,
+this makes two of us:
+
+```
+lerna add package-name --scope=*/ui 
+```
 
 #### Conventional commits
 
