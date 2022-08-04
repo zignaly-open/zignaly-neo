@@ -24,7 +24,7 @@ AuctionBasketItem.destroy({ where: {} });
 Auction.destroy({ where: {} });
 
 sequelizeFixtures
-  .loadFile(__dirname + '/sample-data.json', models)
+  .loadFile(__dirname + '/sample-data-short-expiry.json', models)
   .catch((e) => {
     console.error(e);
   });
