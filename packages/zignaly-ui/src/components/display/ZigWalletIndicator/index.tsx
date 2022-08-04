@@ -27,7 +27,8 @@ const ZigWalletIndicator = ({
         thousandSeparator={true}
         renderText={(value) => (
           <styled.Value>
-            <Typography>{value}</Typography> <styled.Token>ZIG</styled.Token>
+            <Typography>{value}</Typography>
+            <styled.Token>ZIG</styled.Token>
           </styled.Value>
         )}
       />

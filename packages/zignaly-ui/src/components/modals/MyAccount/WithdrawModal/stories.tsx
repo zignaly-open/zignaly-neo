@@ -4,9 +4,9 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import MyAccountWithdrawModal from ".";
 
 // Assets
-import EthereumIcon from "assets/icons/coins/eth.svg?url";
-import BitcoinIcon from "assets/icons/coins/btc.svg?url";
-import DogecoinIcon from "assets/icons/coins/doge.svg?url";
+import { ReactComponent as EthereumIcon } from "assets/icons/coins/eth.svg?url";
+import { ReactComponent as BitcoinIcon } from "assets/icons/coins/btc.svg?url";
+import { ReactComponent as DogecoinIcon } from "assets/icons/coins/doge.svg?url";
 
 const coins = [
   {

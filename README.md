@@ -66,3 +66,7 @@ Some common stuff for Raffles, nothing to write home about.
 * Though shalt not commit untranslated literals and preferably use i18next
 * Though shalt add more guidelines here after the team's approval
 * Though shalt be very careful and use only one React version across all these repos
+
+#### Todos
+
+* Deploy storybook to Gihub Pages

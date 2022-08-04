@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import InputText from "./index";
-import CopyIcon from "assets/icons/copy-icon.svg?url";
+import { ReactComponent as CopyIcon } from "assets/icons/copy-icon.svg?url";
 
 export default {
   title: "Inputs/InputText",

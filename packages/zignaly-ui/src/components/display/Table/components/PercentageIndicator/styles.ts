@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 // Assets
-import CaretTriangleIcon from "assets/icons/caret-triangle-icon.svg";
+import { ReactComponent as CaretTriangleIcon } from "assets/icons/caret-triangle-icon.svg";
 
 // Component
 import Typography from "components/display/Typography";

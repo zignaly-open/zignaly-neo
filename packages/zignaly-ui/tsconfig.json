@@ -18,12 +18,13 @@
     ],
     "allowJs": true,
     "declaration": true,
-    "emitDeclarationOnly": true,
     "outDir": "lib",
     "declarationMap": true
   },
-  "include": ["src/**/*"],
+  "include": [
+    "src/**/*"
+  ],
   "exclude": [
     "node_modules"
-  ],
+  ]
 }

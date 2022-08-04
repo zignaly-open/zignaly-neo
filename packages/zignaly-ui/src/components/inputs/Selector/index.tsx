@@ -20,7 +20,7 @@ import {
 } from "./styles";
 
 // Assets
-import Arrow from "assets/icons/caret-down-icon.svg";
+import { ReactComponent as Arrow } from "assets/icons/caret-down-icon.svg";
 
 // Types
 import { OptionItem, SelectProps, SelectSizes } from "./types";

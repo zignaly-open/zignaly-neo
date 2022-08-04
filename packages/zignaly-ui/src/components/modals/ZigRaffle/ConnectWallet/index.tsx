@@ -4,8 +4,8 @@ import ModalContainer from "components/modals/ModalContainer";
 import React from "react";
 import { ButtonContainer, Gap } from "./styles";
 import { ConnectWalletModalProps } from "./types";
-import MetaMaskLogo from "assets/icons/metamask-logo.svg";
-import WalletConnectLogo from "assets/icons/walletconnect-logo.svg";
+import { ReactComponent as MetaMaskLogo } from "assets/icons/metamask-logo.svg";
+import { ReactComponent as WalletConnectLogo } from "assets/icons/walletconnect-logo.svg";
 
 const ConnectWalletModal = ({
   onClickClose = () => {},

@@ -1,7 +1,7 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 import TransferCoinsModal from ".";
-import AvatarIcon from "assets/icons/avatar-icon.svg?url";
+import { ReactComponent as AvatarIcon } from "assets/icons/avatar-icon.svg?url";
 import { CoinTransfer } from "./types";
 import { AccountOption } from "../types";
 

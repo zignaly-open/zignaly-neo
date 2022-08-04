@@ -4,7 +4,7 @@ import NumberFormat from "react-number-format";
 import { Gap } from "utils/gap";
 import { Icon } from "./styles";
 import { AssetsInPoolProps } from "./types";
-import WhaleIcon from "assets/icons/whale-icon.svg";
+import { ReactComponent as WhaleIcon } from "assets/icons/whale-icon.svg";
 import { Column } from "utils/column";
 import { Row } from "utils/row";
 

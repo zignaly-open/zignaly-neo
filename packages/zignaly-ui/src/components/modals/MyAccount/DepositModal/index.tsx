@@ -6,7 +6,7 @@ import React, { useCallback, useState } from "react";
 import { Gap } from "utils/gap";
 import ModalContainer from "../../ModalContainer";
 import { Column, SelectorContainer } from "./styles";
-import CloneIcon from "assets/icons/clone-icon.svg";
+import { ReactComponent as CloneIcon } from "assets/icons/clone-icon.svg";
 import { dark } from "theme";
 import TextButton from "components/inputs/TextButton";
 import { CoinOption, MyAccountDepositModalProps, NetworkOption } from "../types";
