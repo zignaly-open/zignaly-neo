@@ -18,18 +18,18 @@ export const axiosInstance = axios.create({
   baseURL: zignalyAPI,
 });
 
-const generateChecksum = (body: any) => {
+const generateChecksum = (data: any) => {
   const rdmString = randomHex(4).slice(2);
   const timestamp = +new Date();
   const str = `p=${JSON.stringify(
-    body,
+    data,
   )}&s=${rdmString}&secret=${zignalyAPIPrivateKey}&t=${timestamp}`;
   const checksum = crypto.createHash('sha256').update(str).digest('hex');
   return { rdmString, timestamp, checksum };
 };
 
 const fetchAPI = async (url: string, params?: any): Promise<AxiosResponse> => {
-  const { rdmString, timestamp, checksum } = generateChecksum(params?.body);
+  const { rdmString, timestamp, checksum } = generateChecksum(params?.data);
 
   return axiosInstance({
     url: url,
