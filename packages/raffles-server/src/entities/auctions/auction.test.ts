@@ -9,28 +9,28 @@ import {
   createAuction,
   createBasketItem,
   getAuctions,
-  mockUserBalance,
   createBob,
   getFirstAuction,
   createRandomUser,
   wait,
   expireAuction,
-  mockTransfer,
 } from '../../util/test-utils';
 import fetchMock from 'fetch-mock-jest';
+import mockCybavoWallet from '../../util/mock-cybavo-wallet';
+import { TransactionType } from '../../cybavo';
+import { zignalySystemId } from '../../../config';
 
 describe('Auctions', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
   beforeEach(() => {
     fetchMock.restore();
-    mockTransfer();
   });
   afterEach(clearMocks);
 
   it('should not let bid on non-existing auctions', async () => {
     const [alice, aliceToken] = await createAlice();
-    mockUserBalance(alice, 1000);
+    mockCybavoWallet(alice, 1000);
     const { body } = await makeBid(
       { id: -5 } as unknown as Auction,
       aliceToken,
@@ -74,7 +74,7 @@ describe('Auctions', () => {
 
   it('should not let bid without money', async () => {
     const [alice, aliceToken] = await createAlice();
-    mockUserBalance(alice, 0);
+    mockCybavoWallet(alice, 0);
     const auction = await createAuction();
     const { body } = await makeBid(auction, aliceToken);
     expect(body.errors[0].message).toBe('Insufficient funds');
@@ -83,7 +83,7 @@ describe('Auctions', () => {
   it('should withdraw money after making bids', async () => {
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
-    await mockUserBalance(alice, 300); // fisting is three hundred bucks
+    mockCybavoWallet(alice, 300);
     const { body } = await makeBid(auction, aliceToken);
     expect(body.data.bid.userBid.value).toBe('100');
     const { body: body2 } = await makeBid(auction, aliceToken);
@@ -91,8 +91,17 @@ describe('Auctions', () => {
     expect(fetchMock).toHaveNthFetched(2, 'path:/transfer/internal', {
       // can't test partial body until this PR is merged: https://github.com/wheresrhys/fetch-mock-jest/pull/32
       // body: expect.objectContaining({
-      //   amount: 1,
+      //   amount: '0.01',
       // }),
+      body: {
+        amount: '0.01',
+        fees: '0',
+        currency: 'ZIG',
+        user_id: alice.publicAddress,
+        to_user_id: zignalySystemId,
+        locked: 'true',
+        type: TransactionType.Fee,
+      },
       method: 'post',
     });
   });
@@ -101,8 +110,8 @@ describe('Auctions', () => {
     const [alice, aliceToken] = await createAlice();
     const [bob, bobToken] = await createBob();
     const auction = await createAuction();
-    await mockUserBalance(alice, 300);
-    await mockUserBalance(bob, 300);
+    mockCybavoWallet(alice, 300);
+    mockCybavoWallet(bob, 300);
     const auctionBeforeBids = await getFirstAuction(aliceToken);
     expect(auctionBeforeBids.minimalBid).toBe(auctionBeforeBids.startingBid);
     expect(auctionBeforeBids.minimalBid).toBe('100');
@@ -129,7 +138,7 @@ describe('Auctions', () => {
 
     for (let i = 0; i < 50; i++) {
       const [randomUser, randomUserToken] = await createRandomUser();
-      await mockUserBalance(randomUser, 300);
+      mockCybavoWallet(randomUser, 300);
       await makeBid(auction, randomUserToken);
     }
 
@@ -154,7 +163,7 @@ describe('Auctions', () => {
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
     const spy = jest.spyOn(pubsub, 'publish');
-    await mockUserBalance(alice, 300);
+    mockCybavoWallet(alice, 300);
     await makeBid(auction, aliceToken);
     expect(spy).toHaveBeenCalledTimes(2);
     expect(spy).toHaveBeenNthCalledWith(
@@ -175,7 +184,7 @@ describe('Auctions', () => {
       2,
       'BALANCE_CHANGED',
       expect.objectContaining({
-        balanceChanged: expect.objectContaining({ balance: 299 }),
+        balanceChanged: expect.objectContaining({ balance: '300' }),
       }),
     );
   });
@@ -183,7 +192,7 @@ describe('Auctions', () => {
   it('should change expiry time on bid', async () => {
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
-    await mockUserBalance(alice, 300);
+    mockCybavoWallet(alice, 300);
     const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
     await wait(100);
     const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
@@ -196,7 +205,7 @@ describe('Auctions', () => {
   it("should not change expiry time if it's past max limit", async () => {
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
-    await mockUserBalance(alice, 300);
+    mockCybavoWallet(alice, 300);
     const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
     await wait(100);
     const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
@@ -209,7 +218,7 @@ describe('Auctions', () => {
   it('should increase expiry time by 1 to 4 hours when expiry is more then 1 hour', async () => {
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
-    await mockUserBalance(alice, 300);
+    mockCybavoWallet(alice, 300);
     const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
     await wait(100);
     const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
@@ -227,7 +236,7 @@ describe('Auctions', () => {
   it('should increase expiry time by 1 to 4 hours when expiry is more then 1 hour', async () => {
     const [alice, aliceToken] = await createAlice();
     const auction = await createAuction();
-    await mockUserBalance(alice, 300);
+    mockCybavoWallet(alice, 300);
     const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
     await wait(100);
     const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
@@ -247,7 +256,7 @@ describe('Auctions', () => {
     const auction = await createAuction({
       expiresAt: new Date(Date.now() + 7200000),
     });
-    await mockUserBalance(alice, 300);
+    mockCybavoWallet(alice, 300);
     const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
     await wait(100);
     const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
@@ -267,7 +276,7 @@ describe('Auctions', () => {
     const auction = await createAuction({
       expiresAt: new Date(Date.now() + 50000),
     });
-    await mockUserBalance(alice, 300);
+    mockCybavoWallet(alice, 300);
     const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
     await wait(100);
     const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
@@ -286,8 +295,8 @@ describe('Auctions', () => {
     const [alice, aliceToken] = await createAlice();
     const [bob, bobToken] = await createBob();
     const auction = await createAuction();
-    await mockUserBalance(alice, 300);
-    await mockUserBalance(bob, 300);
+    mockCybavoWallet(alice, 300);
+    mockCybavoWallet(bob, 300);
     const { body } = await makeBid(auction, aliceToken);
     expect(body.data.bid.userBid.value).toBe('100');
     await expireAuction(auction.id);

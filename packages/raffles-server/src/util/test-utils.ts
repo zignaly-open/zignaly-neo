@@ -11,7 +11,6 @@ import { AuctionType } from '@zignaly/raffles-shared/types';
 import { isTest } from '../../config';
 import { persistTablesToTheDatabase } from '../db';
 import { Payout } from '../entities/payouts/model';
-import fetchMock from 'fetch-mock-jest';
 
 const request = supertest(app);
 
@@ -217,20 +216,6 @@ export async function createRandomUser(): Promise<[User, string]> {
   } catch (e) {
     console.error(e);
   }
-}
-
-export async function mockUserBalance(user: User, money: number | string) {
-  fetchMock.get(`path:/balance/all/${user.publicAddress}`, {
-    ZIG: {
-      balance: money.toString(),
-    },
-  });
-}
-
-export async function mockTransfer() {
-  fetchMock.post('path:/transfer/internal', {
-    transaction_id: '12345554452',
-  });
 }
 
 export async function makeRequest(gql: string, token: string): Promise<any> {

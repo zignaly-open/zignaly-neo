@@ -6,10 +6,11 @@ import {
   expireAuction,
   claimAuction,
   getPayouts,
-  mockUserBalance,
-  clearMocks,
 } from '../../util/test-utils';
 import fetchMock from 'fetch-mock-jest';
+import mockCybavoWallet from '../../util/mock-cybavo-wallet';
+import { zignalySystemId } from '../../../config';
+import { TransactionType } from '../../cybavo';
 
 describe('Payouts', () => {
   beforeAll(waitUntilTablesAreCreated);
@@ -18,14 +19,10 @@ describe('Payouts', () => {
   });
 
   it('should show payouts after some auctions are won', async () => {
-    fetchMock.post('path:/transfer/internal', () => ({
-      transaction_id: '12345554452',
-    }));
-
     const [alice, aliceToken] = await createAlice();
     const auction1 = await createAuction();
     const auction2 = await createAuction();
-    await mockUserBalance(alice, 300);
+    mockCybavoWallet(alice, 300);
 
     await makeBid(auction1, aliceToken);
     await makeBid(auction2, aliceToken);
@@ -37,8 +34,17 @@ describe('Payouts', () => {
     expect(fetchMock).toHaveFetched('path:/transfer/internal', {
       // can't test partial body until this PR is merged: https://github.com/wheresrhys/fetch-mock-jest/pull/32
       // body: expect.objectContaining({
-      //   amount: 100,
+      //   amount: '100',
       // }),
+      body: {
+        amount: '100',
+        fees: '0',
+        currency: 'ZIG',
+        user_id: alice.publicAddress,
+        to_user_id: zignalySystemId,
+        locked: 'true',
+        type: TransactionType.Payout,
+      },
       method: 'post',
     });
 
