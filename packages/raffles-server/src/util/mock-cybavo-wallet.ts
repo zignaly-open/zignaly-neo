@@ -19,7 +19,7 @@ const mockCybavoWallet = (user: User, initialBalance = 0) => {
       200,
       {
         ZIG: {
-          balance: getBalance(),
+          balance: balance.toString(),
         },
       },
     ];
@@ -46,10 +46,6 @@ const mockCybavoWallet = (user: User, initialBalance = 0) => {
       balance += parseFloat(amount);
       return [200, { transaction_id: randomString(8) }];
     });
-
-  const getBalance = () => balance.toString();
-
-  return { getBalance };
 };
 
 export default mockCybavoWallet;
