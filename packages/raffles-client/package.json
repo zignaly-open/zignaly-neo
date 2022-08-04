@@ -4,7 +4,7 @@
   "scripts": {
     "precommit": "echo 'precommit raffles client'; yarn lint-staged",
     "start": "env-cmd -f .env react-app-rewired start",
-    "build": "env-cmd -f .env.production GENERATE_SOURCEMAP=false react-app-rewired build",
+    "build": "GENERATE_SOURCEMAP=false react-app-rewired build",
     "test": "react-app-rewired test --passWithNoTests",
     "eject": "react-app-rewired eject",
     "lint:tsc": "tsc --noemit",
@@ -52,7 +52,7 @@
     "crypto": "^1.0.1",
     "crypto-browserify": "^3.12.0",
     "date-fns": "^2.28.0",
-    "ethers": "^5.6.8",
+    "ethers": "^5.6.9",
     "graphql": "^16.5.0",
     "graphql-ws": "^5.8.2",
     "https-browserify": "^1.0.0",
