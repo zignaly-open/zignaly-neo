@@ -35,7 +35,6 @@ export type AuctionType = {
   maxExpiryDate: Date;
   maxClaimDate: Date;
   startingBid: string;
-
   // new fields we add on the backend
   minimalBid?: string;
   userBid?: AuctionBidType;
