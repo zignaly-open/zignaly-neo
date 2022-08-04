@@ -3,7 +3,7 @@ import pubsub from '../../pubsub';
 import { AUCTION_UPDATED } from './constants';
 import { Auction, AuctionBasketItem, AuctionBid } from './model';
 import { Includeable, QueryTypes } from 'sequelize';
-import { ApolloContext, ContextUser } from '../../types';
+import { ApolloContext, ContextUser, TransactionType } from '../../types';
 import { User } from '../users/model';
 import { sequelize } from '../../db';
 import {
@@ -14,11 +14,7 @@ import {
 import { Payout } from '../payouts/model';
 import performPayout from './functions/performPayout';
 import calculateNewExpiryDate from './functions/calculateExpiryDate';
-import {
-  getUserBalance,
-  internalTransfer,
-  TransactionType,
-} from '../../cybavo';
+import { getUserBalance, internalTransfer } from '../../cybavo';
 import { zignalySystemId } from '../../../config';
 import { emitBalanceChanged } from '../users/util';
 

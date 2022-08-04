@@ -9,7 +9,7 @@ import {
 } from '../../util/test-utils';
 import mockCybavoWallet, { mock } from '../../util/mock-cybavo-wallet';
 import { zignalySystemId } from '../../../config';
-import { TransactionType } from '../../cybavo';
+import { TransactionType } from '../../types';
 
 describe('Payouts', () => {
   beforeAll(waitUntilTablesAreCreated);

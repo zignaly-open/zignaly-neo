@@ -16,8 +16,8 @@ import {
   expireAuction,
 } from '../../util/test-utils';
 import mockCybavoWallet, { mock } from '../../util/mock-cybavo-wallet';
-import { TransactionType } from '../../cybavo';
 import { zignalySystemId } from '../../../config';
+import { TransactionType } from '../../types';
 describe('Auctions', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);

@@ -6,13 +6,7 @@ import {
   zignalyAPIPrivateKey,
   zignalyAPIPublicKey,
 } from '../config';
-import { CybavoBalance, CybavoTransfer } from './types';
-
-export enum TransactionType {
-  Deposit = 'Raffle Deposit',
-  Fee = 'Raffle Fee',
-  Payout = 'Raffle Payout',
-}
+import { CybavoBalance, CybavoTransfer, TransactionType } from './types';
 
 export const axiosInstance = axios.create({
   baseURL: zignalyAPI,
