@@ -2,11 +2,15 @@
   "name": "@zignaly-open/mono",
   "version": "1.0.0",
   "description": "",
+  "scope": "@zignaly-open",
   "main": "index.js",
   "private": true,
   "workspaces": [
     "packages/*"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "postinstall": "husky install",
   "scripts": {
     "bootstrap": "lerna bootstrap",

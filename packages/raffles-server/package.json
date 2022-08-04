@@ -4,6 +4,9 @@
   "license": "MIT",
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
   "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "precommit": "echo 'precommit raffles server'; lint-staged",
     "dev": "nodemon --ext \"ts,json\" --watch \"src/**\" --exec \"ts-node src/index.ts\"",
