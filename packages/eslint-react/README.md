@@ -1,11 +1,13 @@
-# `@zignaly-open/react-lint`
+# Zignaly Eslint React
 
-> TODO: description
+A eslint preset for Zignaly react packages.
 
-## Usage
+In order to use it in your app, install it with `npm i @zignaly-open/react-lint` and in `.eslintrc` put:
 
 ```
-const reactLint = require('@zignaly-open/react-lint');
-
-// TODO: DEMONSTRATE API
+{
+  "extends": [
+    "@zignaly-open/zignaly-react"
+  ]
+}
 ```
