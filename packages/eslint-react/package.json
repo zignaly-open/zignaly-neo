@@ -1,5 +1,5 @@
 {
-  "name": "eslint-config-zignaly-react",
+  "name": "@zignaly-open/eslint-config-zignaly-react",
   "version": "0.1.1",
   "description": "React-typescript linter config",
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",

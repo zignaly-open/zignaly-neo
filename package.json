@@ -1,5 +1,5 @@
 {
-  "name": "@zignaly/mono",
+  "name": "@zignaly-open/mono",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,8 +11,8 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "test": "lerna run test",
-    "raffles-client": "lerna run start --scope=@zignaly/raffles-client --include-dependencies --stream --parallel",
-    "raffles-server": "lerna run dev --scope=@zignaly/raffles-server --include-dependencies --stream",
+    "raffles-client": "lerna run start --scope=@zignaly-open/raffles-client --include-dependencies --stream --parallel",
+    "raffles-server": "lerna run dev --scope=@zignaly-open/raffles-server --include-dependencies --stream",
     "build": "lerna run build"
   },
   "engines": {

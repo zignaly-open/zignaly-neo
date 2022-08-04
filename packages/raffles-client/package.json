@@ -1,5 +1,5 @@
 {
-  "name": "@zignaly/raffles-client",
+  "name": "@zignaly-open/raffles-client",
   "version": "0.1.1",
   "scripts": {
     "precommit": "echo 'precommit raffles client'; yarn lint-staged",
@@ -45,7 +45,7 @@
     "@types/react": "17.0.2",
     "@types/react-dom": "17.0.2",
     "@usedapp/core": "^1.0.8",
-    "@zignaly/raffles-shared": "^1.0.1",
+    "@zignaly-open/raffles-shared": "^1.0.1",
     "assert": "^2.0.0",
     "bignumber.js": "^9.0.2",
     "buffer": "^6.0.3",
@@ -81,7 +81,7 @@
     "url": "^0.11.0",
     "web-vitals": "2.1.4",
     "yup": "^0.32.11",
-    "zignaly-ui": "^0.5.0"
+    "@zignaly-open/ui": "^0.5.0"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.5.6",
@@ -97,7 +97,7 @@
     "@types/react": "^17",
     "babel-plugin-named-exports-order": "^0.0.2",
     "eslint": "^8.16.0",
-    "eslint-config-zignaly-react": "^0.1.1",
+    "@zignaly-open/eslint-config-zignaly-react": "^0.1.1",
     "eslint-loader": "^4.0.2",
     "lint-staged": "^13.0.3",
     "npm-run-all": "^4.1.5",

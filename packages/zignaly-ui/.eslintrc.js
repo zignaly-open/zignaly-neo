@@ -1,6 +1,6 @@
 module.exports = {
   "extends": [
-    "zignaly-react"
+    "@zignaly-open/zignaly-react"
   ],
   rules: {
     // The following rules are disabled because there are too many errors

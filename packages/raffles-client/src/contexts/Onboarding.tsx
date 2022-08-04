@@ -2,7 +2,7 @@ import React, { createContext, useCallback, useState } from 'react';
 import { Box, Dialog, DialogContent, DialogTitle } from '@mui/material';
 import DepositInput from '../components/Onboarding/DepositInput';
 import { useTranslation } from 'react-i18next';
-import { Typography } from 'zignaly-ui';
+import { Typography } from '@zignaly-open/ui';
 import Onboarding from '../components/Onboarding/Onboarding';
 
 type OnboardingType = {

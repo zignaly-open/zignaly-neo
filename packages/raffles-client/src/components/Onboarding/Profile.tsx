@@ -1,4 +1,4 @@
-import { Typography } from 'zignaly-ui';
+import { Typography } from '@zignaly-open/ui';
 import React, { Ref, useImperativeHandle } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextField } from '@mui/material';

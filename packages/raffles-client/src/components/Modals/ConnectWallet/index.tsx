@@ -2,7 +2,7 @@ import React from 'react';
 import { ButtonContainer, Gap, Subtitle } from './styles';
 import { ConnectWalletModalProps } from './types';
 import DialogContainer from '../DialogContainer';
-import { Button } from 'zignaly-ui';
+import { Button } from '@zignaly-open/ui';
 import { ReactComponent as MetaMaskLogo } from '../../../assets/icons/metamask-logo.svg';
 import { useTranslation } from 'react-i18next';
 import useAuthenticate from 'hooks/useAuthenticate';

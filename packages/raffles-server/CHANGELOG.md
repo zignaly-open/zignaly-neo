@@ -5,4 +5,4 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 ## 0.1.1 (2022-08-04)
 
-**Note:** Version bump only for package @zignaly/raffles-server
+**Note:** Version bump only for package @zignaly-open/raffles-server

@@ -1,5 +1,5 @@
 {
-  "name": "@zignaly/raffles-shared",
+  "name": "@zignaly-open/raffles-shared",
   "version": "1.0.1",
   "main": "index.ts",
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",

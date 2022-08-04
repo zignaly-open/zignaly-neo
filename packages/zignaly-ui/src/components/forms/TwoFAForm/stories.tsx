@@ -1,6 +1,6 @@
 // Dependencies
 import * as React from "react";
-import {ComponentStory, ComponentMeta} from "@storybook/react";
+import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 // Component
 import TwoFAForm from "./";
@@ -23,5 +23,5 @@ Default.args = {
   isLoading: false,
   onSubmit: (values: any) => {
     console.log(values);
-  }
+  },
 };

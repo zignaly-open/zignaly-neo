@@ -15,7 +15,7 @@ import { setContext } from '@apollo/client/link/context';
 import { getToken } from './util/token';
 import { DAppProvider, Mumbai, Polygon } from '@usedapp/core';
 import { OnboardingProvider } from './contexts/Onboarding';
-import { dark, ThemeProvider } from 'zignaly-ui';
+import { dark, ThemeProvider } from '@zignaly-open/ui';
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
 import { BrowserRouter } from 'react-router-dom';
@@ -85,6 +85,7 @@ if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
 }
 
 const augmentedTheme = { ...dark, ...theme };
+
 function EntryPoint() {
   return (
     <ThemeProvider theme={dark}>

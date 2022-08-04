@@ -1,5 +1,5 @@
 {
   "extends": [
-    "zignaly-react"
+    "@zignaly-open/zignaly-react"
   ]
 }
