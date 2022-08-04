@@ -18,6 +18,11 @@ lerna add package-name --scope=zignaly-ui
 
 I.e. you should be specifying the target package.
 
+#### Conventional commits
+
+We use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) and commit-lint. I suggest you
+install the Conventional Commits plugin for Webstorm.
+
 #### Zignaly UI
 
 Our mighty and glorious component library.
