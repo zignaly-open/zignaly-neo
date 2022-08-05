@@ -14,7 +14,7 @@ import * as payouts from './entities/payouts';
 import * as transactions from './entities/transactions';
 import listenToChain from './chain/watch';
 import { expressjwt, Request as AuthorizedRequest } from 'express-jwt';
-import { port, isTest, algorithm, secret } from '../config';
+import { port, isTest, algorithm, secret, graphqlPath } from '../config';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
@@ -53,7 +53,7 @@ const schema = makeExecutableSchema({
 
 const wsServer = new WebSocketServer({
   server: httpServer,
-  path: '/graphql',
+  path: graphqlPath,
 });
 
 const server = new ApolloServer({
@@ -82,6 +82,8 @@ const server = new ApolloServer({
       : ApolloServerPluginLandingPageGraphQLPlayground(),
   ],
 });
+
+server.applyMiddleware({ app, path: graphqlPath });
 
 // Hand in the schema we just created and have the
 // WebSocketServer start listening.
