@@ -77,7 +77,6 @@ function InputAmount(
   const handleTextChange = useCallback(
     (e: any) => {
       const value = e.target.value;
-      console.log(value);
       if (value === "") {
         // onChange(BigNumber.from(0));
         onChange(e, { value: value, token: selectedToken });
