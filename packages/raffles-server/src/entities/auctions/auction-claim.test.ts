@@ -127,4 +127,20 @@ describe('Auction Claims', () => {
     expect(await getUserBalance(alice.publicAddress)).toBe('99.99');
     expect(payout).toHaveBeenCalledTimes(0);
   });
+
+  it('should not claim if cybavo transfer fails', async () => {
+    const [, aliceToken] = await createAlice(300);
+    const auction = await createAuction();
+    await makeBid(auction, aliceToken);
+    await claimAuction(auction, aliceToken);
+    mock['handlers' as any].post[0] = mock
+      .onPost('/transfer/internal')
+      // No transaction id
+      .reply(200, {});
+    const {
+      body: { errors },
+    } = await claimAuction(auction, aliceToken);
+    expect(errors.length).toBe(1);
+    expect(payout).toHaveBeenCalledTimes(0);
+  });
 });

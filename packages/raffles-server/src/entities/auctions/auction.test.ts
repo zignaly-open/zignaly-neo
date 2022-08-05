@@ -271,4 +271,17 @@ describe('Auctions', () => {
     expect(expiredAuction.bids[0].user.username).toBe(alice.username);
     expect(expiredAuction.userBid).toBeNull();
   });
+
+  it('should not bid if cybavo transfer fails', async () => {
+    const [, aliceToken] = await createAlice(300);
+    const auction = await createAuction();
+    mock['handlers' as any].post[0] = mock
+      .onPost('/transfer/internal')
+      // No transaction id
+      .reply(200, {});
+    const {
+      body: { errors },
+    } = await makeBid(auction, aliceToken);
+    expect(errors[0].message).toBe('Could not create a bid');
+  });
 });
