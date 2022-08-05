@@ -2,8 +2,7 @@ import { useApolloClient, useLazyQuery, useMutation } from '@apollo/client';
 import { setToken } from '../util/token';
 import { useEthers } from '@usedapp/core';
 import { useAsync } from 'react-use';
-import { useContext, useState } from 'react';
-import { onboardingContext } from '../contexts/Onboarding';
+import { useState } from 'react';
 import {
   GET_CURRENT_USER,
   GET_OR_CREATE_USER,
@@ -29,7 +28,6 @@ export function useLogout(): () => Promise<void> {
 }
 
 export default function useAuthenticate(): () => Promise<void> {
-  const { startOnboarding } = useContext(onboardingContext);
   const [getOrCreateUser] = useMutation(GET_OR_CREATE_USER);
   const [authenticate] = useMutation(AUTHENTICATE_METAMASK);
   const [isOkToStart, setIsOkToStart] = useState(false);
@@ -41,7 +39,7 @@ export default function useAuthenticate(): () => Promise<void> {
     setIsOkToStart(false);
     const {
       data: {
-        getOrCreateUser: { messageToSign, onboardingCompletedAt },
+        getOrCreateUser: { messageToSign },
       },
     } = await getOrCreateUser({
       variables: { publicAddress: account.toLocaleLowerCase() },
@@ -60,7 +58,6 @@ export default function useAuthenticate(): () => Promise<void> {
     await client.refetchQueries({
       include: [GET_CURRENT_USER],
     });
-    !onboardingCompletedAt && startOnboarding();
   }, [account, isOkToStart]);
 
   // TODO: error handling

@@ -35,7 +35,7 @@ const UserSettingsModal = ({
               color='links'
               weight='regular'
             >
-              www.zignaly.com
+              {t('www.zignaly.com')}
             </Link>
           </a>
         </Typography>

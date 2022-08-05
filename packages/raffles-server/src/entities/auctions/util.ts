@@ -1,7 +1,7 @@
 import { Auction, AuctionBid } from './model';
 import BN from 'bignumber.js';
 import { AuctionBidType, AuctionType } from '@zignaly/raffles-shared/types';
-import { getUserBalance } from '../transactions/util';
+import { getUserBalance } from '../../cybavo';
 
 export function getMinRequiredBidForAuction(
   auction: Auction | AuctionType,
@@ -21,8 +21,8 @@ export function isBalanceSufficientForPayment(
   return new BN(payment).lte(new BN(balance));
 }
 
-export async function verifyPositiveBalance(userId: number) {
-  if (+(await getUserBalance(userId)) < 0) {
+export async function verifyPositiveBalance(address: string) {
+  if (+(await getUserBalance(address)) < 0) {
     // this means our cowboy somehow managed to become the fastest head on the west
     // noinspection ExceptionCaughtLocallyJS
     throw new Error('Ne tak bistro, pidor');
