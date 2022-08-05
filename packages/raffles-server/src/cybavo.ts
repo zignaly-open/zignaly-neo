@@ -17,7 +17,7 @@ const generateChecksum = (data: any) => {
   const timestamp = +new Date();
   const str = `p=${JSON.stringify(
     data,
-  )}&s=${rdmString}&secret=${zignalyAPIPrivateKey}&t=${timestamp}`;
+  )}&s=${rdmString}&secret=${zignalyAPIPrivateKey}&a=${timestamp}`;
   const checksum = crypto.createHash('sha256').update(str).digest('hex');
   return { rdmString, timestamp, checksum };
 };

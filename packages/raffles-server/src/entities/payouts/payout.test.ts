@@ -7,9 +7,9 @@ import {
   claimAuction,
   getPayouts,
 } from '../../util/test-utils';
-import mockCybavoWallet, { mock } from '../../util/mock-cybavo-wallet';
 import { zignalySystemId } from '../../../config';
 import { TransactionType } from '../../types';
+import { mock } from '../../util/mock-cybavo-wallet';
 
 describe('Payouts', () => {
   beforeAll(waitUntilTablesAreCreated);
@@ -18,10 +18,9 @@ describe('Payouts', () => {
   });
 
   it('should show payouts after some auctions are won', async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [alice, aliceToken] = await createAlice(300);
     const auction1 = await createAuction();
     const auction2 = await createAuction();
-    mockCybavoWallet(alice, 300);
 
     await makeBid(auction1, aliceToken);
     await makeBid(auction2, aliceToken);

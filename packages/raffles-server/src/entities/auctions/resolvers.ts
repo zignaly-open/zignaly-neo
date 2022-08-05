@@ -137,6 +137,8 @@ export const resolvers = {
           TransactionType.Fee,
         );
 
+        if (!tx.transaction_id) throw new Error('Transaction error');
+
         // better re-load from inside the transaction
         const lastAuctionBid = await AuctionBid.findOne({
           where: {
@@ -209,6 +211,8 @@ export const resolvers = {
           winningBid.value,
           TransactionType.Payout,
         );
+
+        if (!tx.transaction_id) throw new Error('Transaction error');
 
         winningBid.claimTransactionId = tx.transaction_id;
         await winningBid.save();

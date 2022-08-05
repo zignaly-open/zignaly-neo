@@ -11,7 +11,7 @@ import {
   createRandomUser,
 } from '../../util/test-utils';
 import payout from './functions/performPayout';
-import mockCybavoWallet, { mock } from '../../util/mock-cybavo-wallet';
+import { mock } from '../../util/mock-cybavo-wallet';
 import { getUserBalance } from '../../cybavo';
 
 jest.mock('./functions/performPayout.ts', () => jest.fn(() => ({})));
@@ -25,8 +25,7 @@ describe('Auction Claims', () => {
   });
 
   it('should let claim auctions and send information to the ui', async () => {
-    const [alice, aliceToken] = await createAlice();
-    mockCybavoWallet(alice, 300);
+    const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
 
     await makeBid(auction, aliceToken);
@@ -50,15 +49,13 @@ describe('Auction Claims', () => {
   });
 
   it('should not let claim unwon auctions', async () => {
-    const [alice, aliceToken] = await createAlice();
-    mockCybavoWallet(alice, 300);
+    const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
     await makeBid(auction, aliceToken);
     expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
 
     for (let i = 0; i < 10; i++) {
-      const [randomUser, randomUserToken] = await createRandomUser();
-      mockCybavoWallet(randomUser, 10);
+      const [, randomUserToken] = await createRandomUser(10);
       await makeBid(auction, randomUserToken);
     }
 
@@ -77,8 +74,7 @@ describe('Auction Claims', () => {
   });
 
   it('should not let claim multiple times', async () => {
-    const [alice, aliceToken] = await createAlice();
-    mockCybavoWallet(alice, 300);
+    const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
     await makeBid(auction, aliceToken);
     await expireAuction(auction.id);
@@ -92,8 +88,7 @@ describe('Auction Claims', () => {
   });
 
   it('should not let claim unfinished auctions', async () => {
-    const [alice, aliceToken] = await createAlice();
-    mockCybavoWallet(alice, 300);
+    const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
     await makeBid(auction, aliceToken);
     await claimAuction(auction, aliceToken);
@@ -106,8 +101,7 @@ describe('Auction Claims', () => {
   });
 
   it('should not let claim auctions after max claim', async () => {
-    const [alice, aliceToken] = await createAlice();
-    mockCybavoWallet(alice, 300);
+    const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
     auction.maxClaimDate = new Date(Date.now() - 1);
     await auction.save();
@@ -122,8 +116,7 @@ describe('Auction Claims', () => {
   });
 
   it('should not let claim without enough money', async () => {
-    const [alice, aliceToken] = await createAlice();
-    mockCybavoWallet(alice, 100);
+    const [alice, aliceToken] = await createAlice(100);
     const auction = await createAuction();
     await makeBid(auction, aliceToken);
     await claimAuction(auction, aliceToken);
