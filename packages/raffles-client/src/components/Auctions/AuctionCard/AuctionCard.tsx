@@ -88,7 +88,7 @@ const AuctionCard: React.FC<{
         <CardBody>
           <AuctionRanking auction={auction} />
           <CardActions isColumn={isColumn} hide={!hasWon && !isColumn}>
-            {hasWon && auction.userBid.isClaimed === false ? (
+            {hasWon ? (
               <Button
                 size='large'
                 onClick={() =>
@@ -96,7 +96,8 @@ const AuctionCard: React.FC<{
                     auction,
                   })
                 }
-                caption={t('claim-now')}
+                disabled={auction.userBid.isClaimed}
+                caption={t(auction.userBid.isClaimed ? 'claimed' : 'claim-now')}
               />
             ) : (
               <BidButton auction={auction} isActive={isActive} />
