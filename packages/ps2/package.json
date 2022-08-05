@@ -1,32 +1,18 @@
 {
-  "name": "@zignaly-open/webapp2",
+  "name": "@zignaly-open/ps2",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^5.16.5",
-    "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
-    "@types/jest": "^27.5.2",
-    "@types/node": "^16.11.47",
-    "@types/react": "^18.0.17",
-    "@types/react-dom": "^18.0.6",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "^4.7.4",
-    "web-vitals": "^2.1.4"
-  },
   "scripts": {
+    "precommit": "yarn lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "eject": "react-scripts eject",
+    "lint:tsc": "tsc --noemit",
+    "lint:eslint": "eslint --fix --ignore-path .eslintignore ./src --ext .ts,.tsx",
+    "lint:eslint-ci": "eslint --ignore-path .eslintignore ./src --ext .ts,.tsx",
+    "lint": "run-s lint:tsc lint:eslint",
+    "lint-ci": "run-s lint:tsc lint:eslint-ci"
   },
   "browserslist": {
     "production": [
@@ -39,5 +25,46 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "5.8.4",
+    "@mui/lab": "^5.0.0-alpha.84",
+    "@mui/material": "5.8.7",
+    "@mui/system": "5.8.7",
+    "@testing-library/jest-dom": "5.16.4",
+    "@testing-library/react": "12.1.5",
+    "@testing-library/user-event": "12.1.5",
+    "@types/jest": "27.5.2",
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2",
+    "date-fns": "^2.28.0",
+    "i18next": "^21.8.14",
+    "i18next-browser-languagedetector": "^6.1.4",
+    "i18next-http-backend": "^1.4.1",
+    "lodash": "^4.17.21",
+    "mui-modal-provider": "^2.0.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-hook-form": "^7.32.0",
+    "react-i18next": "^11.16.9",
+    "react-router-dom": "6",
+    "react-scripts": "5.0.1",
+    "react-use": "^17.4.0",
+    "typescript": "4.7.4",
+    "web-vitals": "2.1.4",
+    "yup": "^0.32.11",
+    "zignaly-ui": "*"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.182",
+    "@types/react": "^17",
+    "eslint": "^8.16.0",
+    "eslint-config-zignaly-react": "*",
+    "eslint-loader": "^4.0.2",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "webpack": "^5.73.0"
   }
 }

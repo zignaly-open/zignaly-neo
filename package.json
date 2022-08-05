@@ -11,6 +11,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "test": "lerna run test",
+    "ps2": "lerna run start --scope=@zignaly-open/ps2 --include-dependencies --stream --parallel",
     "raffles-client": "lerna run start --scope=@zignaly/raffles-client --include-dependencies --stream --parallel",
     "raffles-server": "lerna run dev --scope=@zignaly/raffles-server --include-dependencies --stream",
     "build": "lerna run build"
