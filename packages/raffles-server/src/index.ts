@@ -83,8 +83,6 @@ const server = new ApolloServer({
   ],
 });
 
-server.applyMiddleware({ app, path: graphqlPath });
-
 // Hand in the schema we just created and have the
 // WebSocketServer start listening.
 const serverCleanup = useServer({ schema }, wsServer);
@@ -94,7 +92,7 @@ process.env.NODE_ENV !== 'production' &&
   !isTest &&
   listenToChain();
 
-server.start().then(() => server.applyMiddleware({ app }));
+server.start().then(() => server.applyMiddleware({ app, path: graphqlPath }));
 
 if (!isTest) {
   httpServer.listen({ port });
