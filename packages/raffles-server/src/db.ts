@@ -1,6 +1,5 @@
 import { Sequelize } from 'sequelize-typescript';
 import { User } from './entities/users/model';
-import { Transaction } from './entities/transactions/model';
 import {
   Auction,
   AuctionBid,
@@ -10,15 +9,7 @@ import { isTest, postgresUrl } from '../config';
 import { Setting } from './entities/setting/model';
 import { Payout } from './entities/payouts/model';
 
-const models = [
-  User,
-  Transaction,
-  Auction,
-  AuctionBid,
-  AuctionBasketItem,
-  Setting,
-  Payout,
-];
+const models = [User, Auction, AuctionBid, AuctionBasketItem, Setting, Payout];
 
 let sequelize: Sequelize;
 

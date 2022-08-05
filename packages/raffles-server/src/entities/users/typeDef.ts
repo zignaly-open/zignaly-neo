@@ -23,8 +23,14 @@ export const typeDef = gql`
     accessToken: String!
   }
 
+  type UserBalance {
+    id: ID!
+    balance: String!
+  }
+
   extend type Query {
     me: User
+    balance: UserBalance!
     checkUsername(username: String!): Boolean
   }
 
@@ -33,5 +39,9 @@ export const typeDef = gql`
     updateProfile(username: String, discordName: String): User
     getOrCreateUser(publicAddress: String!): AuthUser
     authenticate(publicAddress: String!, signature: String!): AccessToken!
+  }
+
+  extend type Subscription {
+    balanceChanged(token: String!): UserBalance
   }
 `;
