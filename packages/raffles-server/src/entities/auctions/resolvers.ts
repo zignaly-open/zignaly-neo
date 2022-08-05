@@ -1,6 +1,6 @@
 import { AuctionType, AuctionBidType } from '@zignaly/raffles-shared/types';
 import pubsub from '../../pubsub';
-import { AUCTION_UPDATED } from './constants';
+import { AUCTION_FEE, AUCTION_UPDATED } from './constants';
 import { Auction, AuctionBasketItem, AuctionBid } from './model';
 import { Includeable, QueryTypes } from 'sequelize';
 import { ApolloContext, ContextUser, TransactionType } from '../../types';
@@ -133,7 +133,7 @@ export const resolvers = {
         const tx = await internalTransfer(
           user.publicAddress,
           zignalySystemId,
-          '0.01',
+          AUCTION_FEE,
           TransactionType.Fee,
         );
 
