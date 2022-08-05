@@ -2,7 +2,7 @@ import { ErrorOutline } from '@mui/icons-material';
 import { Box, useMediaQuery } from '@mui/material';
 import { useEthers, useTokenBalance } from '@usedapp/core';
 import useContract from 'hooks/useContract';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import theme from 'theme';
 import {
@@ -22,7 +22,7 @@ const TransferZigModal = ({
   ...props
 }: TransferZigModalProps) => {
   // TODO: Optimize performance by extracting methods
-  const [transferAmount, setTransferAmount] = useState<string>('');
+  const [transferAmount, setTransferAmount] = useState<string>();
   const address: string = process.env.REACT_APP_RECEIVING_ADDRESS as string;
   const token = process.env.REACT_APP_CONTRACT_ADDRESS as string;
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
@@ -31,8 +31,11 @@ const TransferZigModal = ({
   const balance = useTokenBalance(token, account);
   const { isLoading, isError, transfer, isSuccess } = useContract({
     address: address,
-    transferAmount: transferAmount,
   });
+  const sendTransfer = useCallback(
+    () => transfer(transferAmount),
+    [transferAmount],
+  );
   useEffect(() => {
     !account && activateBrowserWallet();
     if (!address) {
@@ -96,9 +99,7 @@ const TransferZigModal = ({
               caption={t('button')}
               minWidth={matchesSmall ? 350 : 260}
               disabled={!transferAmount}
-              onClick={() => {
-                transfer();
-              }}
+              onClick={() => sendTransfer()}
               loading={isLoading}
             />
           </Box>

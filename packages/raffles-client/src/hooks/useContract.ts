@@ -3,13 +3,7 @@ import { useCallback } from 'react';
 import contract from 'contract';
 import { parseEther } from 'ethers/lib/utils';
 
-export default function useContract({
-  transferAmount,
-  address,
-}: {
-  transferAmount: string;
-  address: string;
-}) {
+export default function useContract({ address }: { address: string }) {
   const { state, send } = useContractFunction(contract, 'transfer');
 
   const isLoading = ['PendingSignature', 'Mining'].includes(state?.status);
@@ -19,7 +13,7 @@ export default function useContract({
   const isSuccess = ['Success'].includes(state?.status);
 
   const transfer = useCallback(
-    () =>
+    (transferAmount: string) =>
       ['Success'].includes(state?.status)
         ? () => {}
         : send(address, parseEther(transferAmount)),
