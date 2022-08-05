@@ -8,10 +8,10 @@ import {
   AuctionBid,
 } from '../entities/auctions/model';
 import { AuctionType } from '@zignaly/raffles-shared/types';
-import { Transaction, TransactionType } from '../entities/transactions/model';
 import { isTest } from '../../config';
 import { persistTablesToTheDatabase } from '../db';
 import { Payout } from '../entities/payouts/model';
+import { Transaction, TransactionType } from '../entities/transactions/model';
 
 const request = supertest(app);
 

@@ -1,12 +1,10 @@
 {
-  "how-it-works": "How does Zigrafle work?",
-  "how-it-works-text": "Paraphrasing Julius Caesar, we come, we auth, we bid. And then we lose. And then we bid again. And then we lose. And then we bid again. And then we lose. And then we bid again. And then we lose. And then we bid again. And then we lose. And then we bid again.",
-  "qna-q1": "Do only economically illiterate play lotteries?",
-  "qna-a1": "Yes, except for cases when a person has an edge",
-  "qna-q2": "To be or not to be?",
-  "qna-a2": "That is a very good the question! Whether 'tis nobler in the mind to suffer The slings and arrows of outrageous fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep",
-  "qna-q3": "Ass or tits?",
-  "qna-a3": "Ass",
-  "qna-q4": "What's the intrinsic value of money?",
-  "qna-a4": "Intrinsic value measures the value of an investment based on its cash flows. Where market value tells you the price other people are willing to pay for an asset, intrinsic value shows you the asset's value based on an analysis of its actual financial performance."
+  "how-it-works": "How It Works?",
+  "info": "With the ‘ZigRaffle’ we are changing how the raffles on zignaly.com function, adding an array of new features and offerings. Users can now directly connect their wallets and place bids on the different auctions happening on the “Raffles Marketplace”. Be it the whitelist spots to your favorite NFT collection or that basket of tokens going at a deep discount, you can put your ZIG to work and place your bids at ZigRaffle.",
+  "qna1": " Connect your wallet directly to the ZigRaffle site. We will ask for your Discord usernames to share instructions with the auction winners.",
+  "qna2": "Deposit ZIG to your wallet and start placing bids on your favorite auctions.",
+  "qna3": "Since our model allows having more than one winner, we will be displaying the names of “current winners” in real time under each auction. As a new bid comes up, the “current winners” list will be updated until the auction is over.",
+  "qna4": "Once the auction ends, the winner(s) will pay the “Claim” price for the product, directly from the connected wallet.",
+  "qna5": "Users may opt to buy the product directly from the auction using the “Buy now” button.",
+  "qna6": "We are extending the range of offerings from NFT whitelist spots to Crypto baskets and other items, moving on."
 }
