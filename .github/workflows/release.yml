@@ -2,7 +2,7 @@ name: Prod Release
 on:
   push:
     branches:
-      - master
+      - ft/codedeploy
 jobs:
   build:
     name: Webapp Prod Release
