@@ -11,5 +11,6 @@ module.exports = {
     "jest/valid-expect": "off",  // FIXME
     "@typescript-eslint/ban-ts-comment": "off",  // FIXME
     "@typescript-eslint/ban-types": "off",  // FIXME
+    "i18next/no-literal-string": "off"
   },
 }
