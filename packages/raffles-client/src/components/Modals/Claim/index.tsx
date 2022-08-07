@@ -27,6 +27,9 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
         variables: {
           id: auction.id,
         },
+      }).catch((err) => {
+        // TODO: better alerts
+        alert(err.toString());
       });
       setSuccess(true);
     } catch (_) {
