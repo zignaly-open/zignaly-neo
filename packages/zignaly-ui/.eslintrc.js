@@ -1,6 +1,6 @@
 module.exports = {
   "extends": [
-    "zignaly-react"
+    "@zignaly-open/zignaly-react"
   ],
   rules: {
     // The following rules are disabled because there are too many errors
@@ -11,5 +11,6 @@ module.exports = {
     "jest/valid-expect": "off",  // FIXME
     "@typescript-eslint/ban-ts-comment": "off",  // FIXME
     "@typescript-eslint/ban-types": "off",  // FIXME
+    "i18next/no-literal-string": "off"
   },
 }

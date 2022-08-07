@@ -7,7 +7,7 @@ import {
   AuctionBasketItem,
   AuctionBid,
 } from '../entities/auctions/model';
-import { AuctionType } from '@zignaly/raffles-shared/types';
+import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import { isTest } from '../../config';
 import { persistTablesToTheDatabase } from '../db';
 import { Payout } from '../entities/payouts/model';

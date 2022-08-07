@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { Typography } from 'zignaly-ui';
+import { Typography } from '@zignaly-open/ui';
 
 export const Gap = styled.div<{ gap: number }>`
   ${(props) => `

@@ -8,7 +8,7 @@ import {
   ErrorMessage,
   InputText,
   Typography,
-} from 'zignaly-ui';
+} from '@zignaly-open/ui';
 import { InputContainer } from '../styles';
 import Placeholder from '../../../../assets/avatar-placeholder.png';
 import theme from 'theme';

@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client';
-import { UserType } from '@zignaly/raffles-shared/types';
+import { UserType } from '@zignaly-open/raffles-shared/types';
 import { GET_CURRENT_USER } from 'queries/users';
 
 export default function useCurrentUser(): { user: UserType; loading: boolean } {
