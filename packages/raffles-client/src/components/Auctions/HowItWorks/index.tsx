@@ -1,7 +1,7 @@
 import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TextButton, Typography } from 'zignaly-ui';
+import { TextButton, Typography } from '@zignaly-open/ui';
 import { BulletPointItem, HowItWorksList } from './styles';
 
 const HowItWorks = () => {

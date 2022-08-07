@@ -1,5 +1,5 @@
 /* eslint-disable i18next/no-literal-string */
-import { Typography } from 'zignaly-ui';
+import { Typography } from '@zignaly-open/ui';
 import React, { useCallback } from 'react';
 import Countdown from 'react-countdown';
 import { ReactComponent as TimeIcon } from 'images/time.svg';

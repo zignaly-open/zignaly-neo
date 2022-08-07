@@ -4,7 +4,7 @@ import useCurrentUser from 'hooks/useCurrentUser';
 import { CLAIM } from 'queries/auctions';
 import React, { FormEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, ErrorMessage, InputText, Typography } from 'zignaly-ui';
+import { Button, ErrorMessage, InputText, Typography } from '@zignaly-open/ui';
 import CongratulationsModal from '../Congratulations';
 import DialogContainer from '../DialogContainer';
 import { Form } from './styles';

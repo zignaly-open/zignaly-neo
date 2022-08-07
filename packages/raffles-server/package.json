@@ -1,9 +1,12 @@
 {
-  "name": "@zignaly/raffles-server",
-  "version": "1.0.0",
+  "name": "@zignaly-open/raffles-server",
+  "version": "0.1.3",
   "license": "MIT",
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
   "main": "index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "precommit": "echo 'precommit raffles server'; lint-staged",
     "dev": "nodemon --ext \"ts,json\" --watch \"src/**\" --exec \"ts-node src/index.ts\"",
@@ -15,7 +18,7 @@
   "dependencies": {
     "@graphql-tools/schema": "^8.3.13",
     "@slack/webhook": "^6.1.0",
-    "@zignaly/raffles-shared": "*",
+    "@zignaly-open/raffles-shared": "^1.0.2",
     "apollo-server-core": "^3.8.2",
     "apollo-server-express": "^3.8.1",
     "axios": "^0.27.2",

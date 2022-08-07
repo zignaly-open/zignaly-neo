@@ -1,18 +1,22 @@
 {
-  "name": "@zignaly/mono",
+  "name": "@zignaly-open/mono",
   "version": "1.0.0",
   "description": "",
+  "scope": "@zignaly-open",
   "main": "index.js",
   "private": true,
   "workspaces": [
     "packages/*"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "postinstall": "husky install",
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "test": "lerna run test",
-    "raffles-client": "lerna run start --scope=@zignaly/raffles-client --include-dependencies --stream --parallel",
-    "raffles-server": "lerna run dev --scope=@zignaly/raffles-server --include-dependencies --stream",
+    "raffles-client": "lerna run start --scope=@zignaly-open/raffles-client --include-dependencies --stream --parallel",
+    "raffles-server": "lerna run dev --scope=@zignaly-open/raffles-server --include-dependencies --stream",
     "build": "lerna run build"
   },
   "engines": {
@@ -27,6 +31,8 @@
     "typescript": "4.7.2"
   },
   "dependencies": {
+    "@commitlint/cli": "^17.0.3",
+    "@commitlint/config-conventional": "^17.0.3",
     "env-cmd": "^10.1.0"
   },
   "resolutions": {
