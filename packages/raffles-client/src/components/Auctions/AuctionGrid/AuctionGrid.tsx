@@ -103,7 +103,11 @@ const AuctionGrid: React.FC = () => {
   }
 
   if (error) {
-    return <Alert severity='error'>Error! {error.message}</Alert>;
+    return (
+      <Alert severity='error'>
+        {t('error')} {error.message}
+      </Alert>
+    );
   }
 
   if (!data?.auctions?.length) {
@@ -135,7 +139,7 @@ const AuctionGrid: React.FC = () => {
       </Grid>
       <Box padding={'40px 0 10px 40px'}>
         <Typography variant='h3' weight='medium'>
-          {filtered.length} ZIGRaffle Projects
+          {filtered.length} {t('zigraffle-projects')}
         </Typography>
       </Box>
       <StyledMasonry columns={{ xs: 1, sm: 1, md: 2 }} spacing={4}>

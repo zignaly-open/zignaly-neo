@@ -12,7 +12,7 @@ import { ReactComponent as Twitter } from '../../../assets/icons/twitter-logo.sv
 import { Box } from '@mui/system';
 
 const ProjectDetailsModal = ({
-  auction: { title, website, twitter, telegram, discord },
+  auction: { title, website, twitter, telegram, discord, description },
   ...props
 }: ProjectDetailsModalProps) => {
   const { t } = useTranslation('auction');
@@ -20,13 +20,7 @@ const ProjectDetailsModal = ({
     <DialogContainer title={title} {...props}>
       <Column>
         <Typography variant='body1' marginTop={18} color='neutral200'>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
+          {description}
         </Typography>
         <Gap gap={11} />
         <Typography variant='h3' color='neutral000'>

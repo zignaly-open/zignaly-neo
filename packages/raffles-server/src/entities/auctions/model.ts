@@ -12,7 +12,6 @@ import {
   BelongsTo,
 } from 'sequelize-typescript';
 import { User } from '../users/model';
-import { Transaction } from '../transactions/model';
 
 @Table
 export class Auction extends Model {
@@ -119,19 +118,11 @@ export class AuctionBid extends Model {
   @BelongsTo(() => Auction, 'auctionId')
   public auction: Auction;
 
-  @ForeignKey(() => Transaction)
   @Column
-  public claimTransactionId: number;
+  public claimTransactionId: string;
 
-  @BelongsTo(() => Transaction)
-  public claimTransaction: Transaction;
-
-  @ForeignKey(() => Transaction)
   @Column
-  public transactionId: number;
-
-  @BelongsTo(() => Transaction)
-  public transaction: Transaction;
+  public transactionId: string;
 
   @Default(0)
   @Column(DataType.DECIMAL)

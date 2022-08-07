@@ -67,6 +67,7 @@
     "@types/sequelize-fixtures": "^0.6.3",
     "@types/supertest": "^2.0.12",
     "@types/ws": "^8.5.3",
+    "axios-mock-adapter": "^1.21.1",
     "eslint": "^8.16.0",
     "eslint-config-airbnb-typescript": "^17.0.0",
     "eslint-config-prettier": "^8.5.0",

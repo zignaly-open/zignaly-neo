@@ -4,16 +4,39 @@ import {
   validateDiscordName,
   validateUsername,
 } from './util';
-import { ApolloContext } from '../../types';
+import { ApolloContext, ContextUser } from '../../types';
+import { getUserBalance } from '../../cybavo';
+import pubsub from '../../pubsub';
+import { BALANCE_CHANGED } from './constants';
+import { withFilter } from 'graphql-subscriptions';
+import { getUserIdFromToken } from '../../util/jwt';
 
 const generateNonceSignMessage = (nonce: string | number) =>
   `Please sign this message to verify it's you: ${nonce}`;
+
+export async function getUserBalanceObject(
+  user: ContextUser,
+): Promise<{ id: number; balance: string }> {
+  return {
+    id: user.id,
+    balance: await getUserBalance(user.publicAddress),
+  };
+}
 
 export const resolvers = {
   Query: {
     me: async (_: any, __: any, { user }: ApolloContext) => {
       if (!user) return null;
       return await User.findByPk(user.id);
+    },
+    balance: async (_: any, __: any, { user }: ApolloContext) => {
+      if (!user) return null;
+
+      try {
+        return await getUserBalanceObject(user);
+      } catch (e) {
+        return null;
+      }
     },
     checkUsername: async (
       _: any,
@@ -91,6 +114,15 @@ export const resolvers = {
         console.error(e);
         return null;
       }
+    },
+  },
+  Subscription: {
+    balanceChanged: {
+      subscribe: withFilter(
+        () => pubsub.asyncIterator([BALANCE_CHANGED]),
+        (payload, variables) =>
+          getUserIdFromToken(variables.token) === payload.balanceChanged.id,
+      ),
     },
   },
 };

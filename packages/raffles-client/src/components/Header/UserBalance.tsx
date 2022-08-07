@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import useBalance from '../../hooks/useBalance';
