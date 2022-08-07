@@ -3,6 +3,10 @@ import { bufferToHex } from 'ethereumjs-util';
 import { algorithm, secret } from '../../../config';
 import { generateUserNonce, User } from './model';
 import jwt from 'jsonwebtoken';
+import pubsub from '../../pubsub';
+import { BALANCE_CHANGED } from './constants';
+import { getUserBalance } from '../../cybavo';
+import { ContextUser } from '../../types';
 
 export function signJwtToken(user: User) {
   return new Promise<string>((resolve, reject) =>
@@ -81,4 +85,13 @@ export async function validateDiscordName(
   if (!discordName) return true;
   if (!/^.{3,32}#[0-9]{4}$/i.test(discordName)) return false;
   return true;
+}
+
+export async function emitBalanceChanged(user: ContextUser) {
+  pubsub.publish(BALANCE_CHANGED, {
+    balanceChanged: {
+      id: user.id,
+      balance: await getUserBalance(user.publicAddress),
+    },
+  });
 }

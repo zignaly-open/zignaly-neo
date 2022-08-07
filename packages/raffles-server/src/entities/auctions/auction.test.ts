@@ -9,22 +9,26 @@ import {
   createAuction,
   createBasketItem,
   getAuctions,
-  giveMoney,
-  getBalance,
   createBob,
   getFirstAuction,
   createRandomUser,
   wait,
   expireAuction,
 } from '../../util/test-utils';
-
+import { mock } from '../../util/mock-cybavo-wallet';
+import { zignalySystemId } from '../../../config';
+import { TransactionType } from '../../types';
+import { AUCTION_FEE } from './constants';
 describe('Auctions', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
+  afterEach(() => {
+    mock.reset();
+  });
   afterEach(clearMocks);
 
   it('should not let bid on non-existing auctions', async () => {
-    const [, aliceToken] = await createAlice();
+    const [, aliceToken] = await createAlice(1000);
     const { body } = await makeBid(
       { id: -5 } as unknown as Auction,
       aliceToken,
@@ -67,29 +71,36 @@ describe('Auctions', () => {
   });
 
   it('should not let bid without money', async () => {
-    const [, aliceToken] = await createAlice();
+    const [, aliceToken] = await createAlice(0);
     const auction = await createAuction();
     const { body } = await makeBid(auction, aliceToken);
     expect(body.errors[0].message).toBe('Insufficient funds');
   });
 
   it('should withdraw money after making bids', async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
-    await giveMoney(alice, 300); // fisting is three hundred bucks
     const { body } = await makeBid(auction, aliceToken);
     expect(body.data.bid.userBid.value).toBe('100');
     const { body: body2 } = await makeBid(auction, aliceToken);
     expect(body2.data.bid.userBid.value).toBe('102');
-    expect(await getBalance(aliceToken)).toBe('298');
+    expect(mock.history.post[1].data).toBe(
+      JSON.stringify({
+        amount: AUCTION_FEE,
+        fees: '0',
+        currency: 'ZIG',
+        user_id: alice.publicAddress,
+        to_user_id: zignalySystemId,
+        locked: 'true',
+        type: TransactionType.Fee,
+      }),
+    );
   });
 
   it('should support the main flow', async () => {
-    const [alice, aliceToken] = await createAlice();
-    const [bob, bobToken] = await createBob();
+    const [, aliceToken] = await createAlice(300);
+    const [, bobToken] = await createBob(300);
     const auction = await createAuction();
-    await giveMoney(alice, 300);
-    await giveMoney(bob, 300);
     const auctionBeforeBids = await getFirstAuction(aliceToken);
     expect(auctionBeforeBids.minimalBid).toBe(auctionBeforeBids.startingBid);
     expect(auctionBeforeBids.minimalBid).toBe('100');
@@ -115,8 +126,7 @@ describe('Auctions', () => {
     expect(auctionAfter2BidsAlice.userBid.position).toBe(2);
 
     for (let i = 0; i < 50; i++) {
-      const [randomUser, randomUserToken] = await createRandomUser();
-      await giveMoney(randomUser, 300);
+      const [, randomUserToken] = await createRandomUser(300);
       await makeBid(auction, randomUserToken);
     }
 
@@ -138,10 +148,9 @@ describe('Auctions', () => {
   });
 
   it('should dispatch socket events', async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [, aliceToken] = await createAlice(300);
     const auction = await createAuction();
     const spy = jest.spyOn(pubsub, 'publish');
-    await giveMoney(alice, 300);
     await makeBid(auction, aliceToken);
     expect(spy).toHaveBeenCalledTimes(2);
     expect(spy).toHaveBeenNthCalledWith(
@@ -162,15 +171,14 @@ describe('Auctions', () => {
       2,
       'BALANCE_CHANGED',
       expect.objectContaining({
-        balanceChanged: expect.objectContaining({ balance: 299 }),
+        balanceChanged: expect.objectContaining({ balance: '299.99' }),
       }),
     );
   });
 
   it('should change expiry time on bid', async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [, aliceToken] = await createAlice(300);
     const auction = await createAuction();
-    await giveMoney(alice, 300);
     const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
     await wait(100);
     const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
@@ -181,9 +189,8 @@ describe('Auctions', () => {
   });
 
   it("should not change expiry time if it's past max limit", async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [, aliceToken] = await createAlice(300);
     const auction = await createAuction();
-    await giveMoney(alice, 300);
     const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
     await wait(100);
     const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
@@ -193,28 +200,9 @@ describe('Auctions', () => {
     expect(+new Date(initialExpiry)).toBeLessThan(+new Date(updatedExpiry));
   });
 
-  it('should increase expiry time by 1 to 4 hours when expiry is more then 1 hour', async () => {
-    const [alice, aliceToken] = await createAlice();
+  it('should increase expiry time by 1 to 4 hours when expiry is more than 1 hour', async () => {
+    const [, aliceToken] = await createAlice(300);
     const auction = await createAuction();
-    await giveMoney(alice, 300);
-    const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
-    await wait(100);
-    const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
-    expect(initialExpiry2).toBe(initialExpiry2);
-    await makeBid(auction, aliceToken);
-    const { expiresAt: updatedExpiry } = await getFirstAuction(aliceToken);
-    expect(
-      +new Date(updatedExpiry) - +new Date(initialExpiry),
-    ).toBeGreaterThanOrEqual(60 * 60_000);
-    expect(
-      +new Date(updatedExpiry) - +new Date(initialExpiry),
-    ).toBeLessThanOrEqual(60 * 4 * 60_000);
-  });
-
-  it('should increase expiry time by 1 to 4 hours when expiry is more then 1 hour', async () => {
-    const [alice, aliceToken] = await createAlice();
-    const auction = await createAuction();
-    await giveMoney(alice, 300);
     const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
     await wait(100);
     const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
@@ -230,11 +218,10 @@ describe('Auctions', () => {
   });
 
   it('should increase expiry time by 10 to 40 minutes when expiry is less then 1 hour and more then 1 minute', async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [, aliceToken] = await createAlice(300);
     const auction = await createAuction({
       expiresAt: new Date(Date.now() + 7200000),
     });
-    await giveMoney(alice, 300);
     const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
     await wait(100);
     const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
@@ -250,11 +237,10 @@ describe('Auctions', () => {
   });
 
   it('should increase expiry time by 5 to 11 minutes when expiry is less then 1 minute', async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [, aliceToken] = await createAlice(300);
     const auction = await createAuction({
       expiresAt: new Date(Date.now() + 50000),
     });
-    await giveMoney(alice, 300);
     const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
     await wait(100);
     const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
@@ -270,11 +256,9 @@ describe('Auctions', () => {
   });
 
   it('should not bid on expired auctions', async () => {
-    const [alice, aliceToken] = await createAlice();
-    const [bob, bobToken] = await createBob();
+    const [alice, aliceToken] = await createAlice(300);
+    const [, bobToken] = await createBob(300);
     const auction = await createAuction();
-    await giveMoney(alice, 300);
-    await giveMoney(bob, 300);
     const { body } = await makeBid(auction, aliceToken);
     expect(body.data.bid.userBid.value).toBe('100');
     await expireAuction(auction.id);
@@ -286,5 +270,18 @@ describe('Auctions', () => {
     expect(expiredAuction.bids.length).toBe(1);
     expect(expiredAuction.bids[0].user.username).toBe(alice.username);
     expect(expiredAuction.userBid).toBeNull();
+  });
+
+  it('should not bid if cybavo transfer fails', async () => {
+    const [, aliceToken] = await createAlice(300);
+    const auction = await createAuction();
+    mock['handlers' as any].post[0] = mock
+      .onPost('/transfer/internal')
+      // No transaction id
+      .reply(200, {});
+    const {
+      body: { errors },
+    } = await makeBid(auction, aliceToken);
+    expect(errors[0].message).toBe('Could not create a bid');
   });
 });

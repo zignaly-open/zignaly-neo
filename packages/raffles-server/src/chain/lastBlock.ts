@@ -1,7 +1,7 @@
 import { getConfigValue, setConfigValue } from '../entities/setting/util';
 import { CONFIG_LAST_PROCESSED_BLOCK } from '../entities/setting/constants';
 
-const lastProcessedBlockDefaultValue = 10988384;
+const lastProcessedBlockDefaultValue = 27426522;
 
 export async function setLastProcessedBlock(
   blockNumber: number,

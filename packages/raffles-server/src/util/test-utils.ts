@@ -8,10 +8,10 @@ import {
   AuctionBid,
 } from '../entities/auctions/model';
 import { AuctionType } from '@zignaly/raffles-shared/types';
-import { Transaction, TransactionType } from '../entities/transactions/model';
 import { isTest } from '../../config';
 import { persistTablesToTheDatabase } from '../db';
 import { Payout } from '../entities/payouts/model';
+import mockCybavoWallet from './mock-cybavo-wallet';
 
 const request = supertest(app);
 
@@ -154,13 +154,14 @@ export async function changeDiscordName(
   return updateProfile;
 }
 
-export async function createAlice(): Promise<[User, string]> {
+export async function createAlice(balance = 0): Promise<[User, string]> {
   try {
     const user = await User.create({
       username: 'Alice',
       publicAddress: '0x6a3B248855bc8a687992CBAb7FD03E1947EAee07'.toLowerCase(),
       onboardingCompletedAt: Date.now(),
     });
+    mockCybavoWallet(user, balance);
     return [user, await signJwtToken(user)];
   } catch (e) {
     console.error(e);
@@ -180,13 +181,14 @@ export async function createAlicesDiscord(): Promise<[User, string]> {
   }
 }
 
-export async function createBob(): Promise<[User, string]> {
+export async function createBob(balance = 0): Promise<[User, string]> {
   try {
     const user = await User.create({
       username: 'Bob',
       publicAddress: '0xE288AE3acccc630781354da2AA64379A0d4C56dB'.toLowerCase(),
       onboardingCompletedAt: Date.now(),
     });
+    mockCybavoWallet(user, balance);
     return [user, await signJwtToken(user)];
   } catch (e) {
     console.error(e);
@@ -206,28 +208,18 @@ export async function createBobDiscord(): Promise<[User, string]> {
   }
 }
 
-export async function createRandomUser(): Promise<[User, string]> {
+export async function createRandomUser(balance = 0): Promise<[User, string]> {
   try {
     const user = await User.create({
       username: null,
       publicAddress: '0xE288AE3acccc630'.toLowerCase() + Math.random(),
       onboardingCompletedAt: Date.now(),
     });
+    mockCybavoWallet(user, balance);
     return [user, await signJwtToken(user)];
   } catch (e) {
     console.error(e);
   }
-}
-
-export async function giveMoney(user: User, money: number | string) {
-  await Transaction.create({
-    userId: user.id,
-    value: money.toString(),
-    block: 1,
-    auctionId: null,
-    txHash: 'privet' + Math.random(),
-    type: TransactionType.Deposit,
-  });
 }
 
 export async function makeRequest(gql: string, token: string): Promise<any> {
@@ -238,17 +230,6 @@ export async function makeRequest(gql: string, token: string): Promise<any> {
       query: gql,
     })
     .set('Accept', 'application/json');
-}
-
-export async function getBalance(token: string): Promise<string> {
-  const {
-    body: {
-      data: {
-        balance: { balance },
-      },
-    },
-  } = await makeRequest(BALANCE_QUERY, token);
-  return balance;
 }
 
 export const BALANCE_QUERY = `
@@ -325,7 +306,6 @@ export async function wipeOut() {
       const options = { where: {}, cascade: true, force: true, truncate: true };
       await Payout.destroy(options);
       await AuctionBid.destroy(options);
-      await Transaction.destroy(options);
       await AuctionBasketItem.destroy(options);
       await Auction.destroy(options);
       await User.destroy(options);

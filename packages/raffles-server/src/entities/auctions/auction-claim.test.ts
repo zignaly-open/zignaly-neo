@@ -4,15 +4,15 @@ import {
   clearMocks,
   createAlice,
   createAuction,
-  giveMoney,
   makeBid,
   expireAuction,
   getFirstAuction,
   claimAuction,
-  getBalance,
   createRandomUser,
 } from '../../util/test-utils';
 import payout from './functions/performPayout';
+import { mock } from '../../util/mock-cybavo-wallet';
+import { getUserBalance } from '../../cybavo';
 
 jest.mock('./functions/performPayout.ts', () => jest.fn(() => ({})));
 
@@ -20,11 +20,14 @@ describe('Auction Claims', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
   afterEach(clearMocks);
+  afterEach(() => {
+    mock.reset();
+  });
 
   it('should let claim auctions and send information to the ui', async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
-    await giveMoney(alice, 300);
+
     await makeBid(auction, aliceToken);
 
     await expireAuction(auction.id);
@@ -40,21 +43,19 @@ describe('Auction Claims', () => {
     expect(claim.userBid.isClaimed).toBe(true);
     const claimedAuction = await getFirstAuction(aliceToken);
     expect(claimedAuction.userBid.isClaimed).toBe(true);
-    expect(await getBalance(aliceToken)).toBe('199');
+    expect(await getUserBalance(alice.publicAddress)).toBe('199.99');
 
     expect(payout).toHaveBeenCalledTimes(1);
   });
 
   it('should not let claim unwon auctions', async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
-    await giveMoney(alice, 300);
     await makeBid(auction, aliceToken);
-    expect(await getBalance(aliceToken)).toBe('299');
+    expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
 
     for (let i = 0; i < 10; i++) {
-      const [randomUser, randomUserToken] = await createRandomUser();
-      await giveMoney(randomUser, 10);
+      const [, randomUserToken] = await createRandomUser(10);
       await makeBid(auction, randomUserToken);
     }
 
@@ -67,15 +68,14 @@ describe('Auction Claims', () => {
     expect(errors.length).toBe(1);
     const claimedAuction = await getFirstAuction(aliceToken);
     expect(claimedAuction.userBid.isClaimed).toBe(false);
-    expect(await getBalance(aliceToken)).toBe('299');
+    expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
 
     expect(payout).toHaveBeenCalledTimes(0);
   });
 
   it('should not let claim multiple times', async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
-    await giveMoney(alice, 300);
     await makeBid(auction, aliceToken);
     await expireAuction(auction.id);
     await claimAuction(auction, aliceToken);
@@ -83,51 +83,64 @@ describe('Auction Claims', () => {
       body: { errors },
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
-    expect(await getBalance(aliceToken)).toBe('199');
+    expect(await getUserBalance(alice.publicAddress)).toBe('199.99');
     expect(payout).toHaveBeenCalledTimes(1);
   });
 
   it('should not let claim unfinished auctions', async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
-    await giveMoney(alice, 300);
     await makeBid(auction, aliceToken);
     await claimAuction(auction, aliceToken);
     const {
       body: { errors },
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
-    expect(await getBalance(aliceToken)).toBe('299');
+    expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
     expect(payout).toHaveBeenCalledTimes(0);
   });
 
   it('should not let claim auctions after max claim', async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
     auction.maxClaimDate = new Date(Date.now() - 1);
     await auction.save();
-    await giveMoney(alice, 300);
     await makeBid(auction, aliceToken);
     await claimAuction(auction, aliceToken);
     const {
       body: { errors },
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
-    expect(await getBalance(aliceToken)).toBe('299');
+    expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
     expect(payout).toHaveBeenCalledTimes(0);
   });
 
   it('should not let claim without enough money', async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [alice, aliceToken] = await createAlice(100);
     const auction = await createAuction();
-    await giveMoney(alice, 100);
     await makeBid(auction, aliceToken);
     await claimAuction(auction, aliceToken);
     const {
       body: { errors },
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
-    expect(await getBalance(aliceToken)).toBe('99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('99.99');
+    expect(payout).toHaveBeenCalledTimes(0);
+  });
+
+  it('should not claim if cybavo transfer fails', async () => {
+    const [, aliceToken] = await createAlice(300);
+    const auction = await createAuction();
+    await makeBid(auction, aliceToken);
+    await claimAuction(auction, aliceToken);
+    mock['handlers' as any].post[0] = mock
+      .onPost('/transfer/internal')
+      // No transaction id
+      .reply(200, {});
+    const {
+      body: { errors },
+    } = await claimAuction(auction, aliceToken);
+    expect(errors.length).toBe(1);
     expect(payout).toHaveBeenCalledTimes(0);
   });
 });
