@@ -171,7 +171,7 @@ describe('Auctions', () => {
       2,
       'BALANCE_CHANGED',
       expect.objectContaining({
-        balanceChanged: expect.objectContaining({ balance: '299.99' }),
+        balanceChanged: expect.objectContaining({ balance: '299' }),
       }),
     );
   });

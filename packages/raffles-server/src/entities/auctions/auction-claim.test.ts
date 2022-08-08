@@ -43,7 +43,7 @@ describe('Auction Claims', () => {
     expect(claim.userBid.isClaimed).toBe(true);
     const claimedAuction = await getFirstAuction(aliceToken);
     expect(claimedAuction.userBid.isClaimed).toBe(true);
-    expect(await getUserBalance(alice.publicAddress)).toBe('199.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('199');
 
     expect(payout).toHaveBeenCalledTimes(1);
   });
@@ -52,7 +52,7 @@ describe('Auction Claims', () => {
     const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
     await makeBid(auction, aliceToken);
-    expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('299');
 
     for (let i = 0; i < 10; i++) {
       const [, randomUserToken] = await createRandomUser(10);
@@ -68,7 +68,7 @@ describe('Auction Claims', () => {
     expect(errors.length).toBe(1);
     const claimedAuction = await getFirstAuction(aliceToken);
     expect(claimedAuction.userBid.isClaimed).toBe(false);
-    expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('299');
 
     expect(payout).toHaveBeenCalledTimes(0);
   });
@@ -83,7 +83,7 @@ describe('Auction Claims', () => {
       body: { errors },
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
-    expect(await getUserBalance(alice.publicAddress)).toBe('199.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('199');
     expect(payout).toHaveBeenCalledTimes(1);
   });
 
@@ -96,7 +96,7 @@ describe('Auction Claims', () => {
       body: { errors },
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
-    expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('299');
     expect(payout).toHaveBeenCalledTimes(0);
   });
 
@@ -111,7 +111,7 @@ describe('Auction Claims', () => {
       body: { errors },
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
-    expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('299');
     expect(payout).toHaveBeenCalledTimes(0);
   });
 
@@ -124,7 +124,7 @@ describe('Auction Claims', () => {
       body: { errors },
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
-    expect(await getUserBalance(alice.publicAddress)).toBe('99.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('99');
     expect(payout).toHaveBeenCalledTimes(0);
   });
 
