@@ -6,8 +6,8 @@ import { CloseIcon } from '@zignaly-open/ui';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore: fixme
 export const StyledCloseIcon = styled(CloseIcon)`
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   color: #65647e;
 `;
 
