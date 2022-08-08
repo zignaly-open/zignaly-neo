@@ -4,12 +4,31 @@ on:
   push:
     branches:
       - master
-      - feat/gh-pages
-
-# TODO: run only on certain paths
 
 jobs:
-  deploy:
+  pre_job:
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+      paths_result: ${{ steps.skip_check.outputs.paths_result }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v4
+        with:
+          paths_filter: |
+            ui_repos:
+              paths:
+                - 'packages/zignaly-ui/**/*'
+                - 'packages/raffles-client/**/*'
+          # Can be mixed with the "global" 'paths_ignore' / 'paths' options, for example:
+          # paths_ignore: '["**/README.md"]'
+
+  deploy_gh_pages:
+    needs: pre_job
+    # If 'skip-duplicate-actions' terminates before the paths checks are performed (for example, when a successful duplicate run has
+    # been found) 'paths_result' outputs an empty object ('{}'). This can be easily intercepted in the if condition of a job
+    # by checking the result of the "global" 'should_skip' output first.
+    if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).ui_repos.should_skip
     runs-on: ubuntu-20.04
     permissions:
       contents: write
@@ -20,6 +39,15 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0 # better fetch all and rebuild part than to fetch part and rebuild all
+      - name: Restore Lerna cache
+        uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            */*/node_modules
+          key: ${{ runner.os }}-lerna-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-lerna-
       - name: Install node
         uses: actions/setup-node@v3
         with:
