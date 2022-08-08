@@ -8,9 +8,10 @@ import { Layout, Icon } from "./styles";
 import { ErrorMessageProps } from "./types";
 
 // Assets
-import ErrorAlertIcon from "assets/icons/error-alert-icon.svg";
+import { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.svg";
 import Typography from "../Typography";
 import { dark } from "theme";
+
 // TODO(Vetle): Refactor usage of Dark theme when light theme is ready
 function ErrorMessage({ text }: ErrorMessageProps) {
   return (

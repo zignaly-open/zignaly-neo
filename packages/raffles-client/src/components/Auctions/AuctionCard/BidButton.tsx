@@ -1,6 +1,6 @@
 import { useMutation } from '@apollo/client';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
-import { AuctionType } from '@zignaly/raffles-shared/types';
+import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import useCurrentUser from '../../../hooks/useCurrentUser';
 import { useTranslation } from 'react-i18next';
 import useBalance from '../../../hooks/useBalance';
@@ -8,7 +8,7 @@ import BN from 'bignumber.js';
 import { getWinningLosingStatus } from './util';
 import useAuthenticate from '../../../hooks/useAuthenticate';
 import { onboardingContext } from '../../../contexts/Onboarding';
-import { Button } from 'zignaly-ui';
+import { Button } from '@zignaly-open/ui';
 import { BID_AUCTION } from 'queries/auctions';
 
 enum BidButtonState {

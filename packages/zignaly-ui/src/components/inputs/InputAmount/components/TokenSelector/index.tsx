@@ -7,7 +7,7 @@ import { useClickAway } from "react-use";
 import { Layout, Container, Value, ArrowContainer, ValueContainer, Menu, Item } from "./styles";
 
 // Assets
-import ArrowDown from "assets/icons/caret-down-icon.svg";
+import { ReactComponent as ArrowDown } from "assets/icons/caret-down-icon.svg";
 
 // Types
 import { TokenSelectorProps } from "./types";

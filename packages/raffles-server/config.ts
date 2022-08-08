@@ -1,6 +1,6 @@
 import { Algorithm } from 'jsonwebtoken';
 import dotenv from 'dotenv';
-import { IERC20 } from '@zignaly/raffles-shared/abis';
+import { IERC20 } from '@zignaly-open/raffles-shared/abis';
 
 dotenv.config();
 

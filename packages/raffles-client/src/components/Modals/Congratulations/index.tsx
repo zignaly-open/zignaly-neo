@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import { PriceLabel } from 'components/Auctions/AuctionCard/styles';
 import { useModal } from 'mui-modal-provider';
 import { useTranslation } from 'react-i18next';
-import { Button, Typography } from 'zignaly-ui';
+import { Button, Typography } from '@zignaly-open/ui';
 import DialogContainer from '../DialogContainer';
 import ProjectDetailsModal from '../ProjectDetails';
 import { CongratulationsModalProps } from './types';

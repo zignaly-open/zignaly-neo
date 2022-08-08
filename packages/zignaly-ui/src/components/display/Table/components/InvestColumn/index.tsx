@@ -4,7 +4,7 @@ import React from "react";
 import { dark } from "theme";
 import { BalanceSummary } from "../BalanceSummary";
 import { ButtonContainer, Column, IconContainer, Layout, LiquidateButton, Row } from "./styles";
-import ArrowLeftIcon from "assets/icons/arrow-right-icon.svg";
+import { ReactComponent as ArrowLeftIcon } from "assets/icons/arrow-right-icon.svg";
 import { InvestColumnProps, InvestTypes } from "./types";
 
 const InvestColumn = ({ type }: InvestColumnProps) => {

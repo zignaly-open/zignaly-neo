@@ -1,10 +1,10 @@
 import { MenuList, styled } from '@mui/material';
-import { UserType } from '@zignaly/raffles-shared/types';
+import { UserType } from '@zignaly-open/raffles-shared/types';
 import UserSettingsModal from 'components/Modals/UserSettings';
 import { useLogout } from 'hooks/useAuthenticate';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { TextButton } from 'zignaly-ui';
+import { TextButton } from '@zignaly-open/ui';
 import { Box } from '@mui/system';
 import TransferZigModal from 'components/Modals/TransferZig';
 

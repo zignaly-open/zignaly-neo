@@ -1,8 +1,8 @@
 import { Box } from '@mui/material';
-import { Typography, TextButton, Button } from 'zignaly-ui';
+import { Typography, TextButton, Button } from '@zignaly-open/ui';
 import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { AuctionType } from '@zignaly/raffles-shared/types';
+import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import FinalCountdown from './FinalCountdown';
 import BidButton from './BidButton';
 import { getWinningLosingStatus } from './util';
@@ -88,7 +88,7 @@ const AuctionCard: React.FC<{
         <CardBody>
           <AuctionRanking auction={auction} />
           <CardActions isColumn={isColumn} hide={!hasWon && !isColumn}>
-            {hasWon && auction.userBid.isClaimed === false ? (
+            {hasWon ? (
               <Button
                 size='large'
                 onClick={() =>
@@ -96,7 +96,8 @@ const AuctionCard: React.FC<{
                     auction,
                   })
                 }
-                caption={t('claim-now')}
+                disabled={auction.userBid.isClaimed}
+                caption={t(auction.userBid.isClaimed ? 'claimed' : 'claim-now')}
               />
             ) : (
               <BidButton auction={auction} isActive={isActive} />
