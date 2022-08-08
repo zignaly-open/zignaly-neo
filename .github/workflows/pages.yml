@@ -26,7 +26,7 @@ jobs:
       - name: Install Lerna
         run: yarn global add lerna
       - name: Bootstrap modified packages
-        run: lerna bootstrap --since=origin/${{ github.base_ref }} --include-dependencies
+        run: lerna bootstrap --scope=*/ui
       - name: Build modified packages
         run: lerna run build-storybook --scope=zignaly-ui
       - name: Deploy
