@@ -3,8 +3,8 @@ import { IconButton } from '@mui/material';
 import { CloseIcon } from '@zignaly-open/ui';
 
 export const StyledCloseIcon = styled(CloseIcon)`
-  width: 15px;
-  height: 15px;
+  width: 16px;
+  height: 16px;
   color: #65647e;
 `;
 

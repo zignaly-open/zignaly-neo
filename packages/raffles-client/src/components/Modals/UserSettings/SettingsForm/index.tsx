@@ -2,7 +2,6 @@ import { Box, useMediaQuery } from '@mui/material';
 import { Gap } from 'components/Modals/ConnectWallet/styles';
 import React, { useState } from 'react';
 import {
-  Avatar,
   Button,
   ErrorAlertIcon,
   ErrorMessage,
@@ -10,7 +9,6 @@ import {
   Typography,
 } from '@zignaly-open/ui';
 import { InputContainer } from '../styles';
-import Placeholder from '../../../../assets/avatar-placeholder.png';
 import theme from 'theme';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
@@ -27,7 +25,7 @@ const SettingsForm = ({
   ...props
 }: UserSettingsModalProps) => {
   // TODO: Add submit of userName and discordName to backend and avatar update
-  const matchesLarge = useMediaQuery(theme.breakpoints.up('lg'));
+  const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const [errorMessage, setErrorMessage] = useState('');
   const [updateUsername, { loading: updatingProfile }] =
     useMutation(CHANGE_PROFILE);
@@ -47,7 +45,7 @@ const SettingsForm = ({
   const { t } = useTranslation('user-settings');
 
   const getFlexDirection = () => {
-    if (matchesLarge) {
+    if (matchesSmall) {
       return 'row';
     } else {
       return 'column';
@@ -55,7 +53,7 @@ const SettingsForm = ({
   };
 
   const getInputWidth = () => {
-    if (matchesLarge) {
+    if (matchesSmall) {
       return 404;
     } else {
       return null;
@@ -75,22 +73,13 @@ const SettingsForm = ({
 
   return (
     <Box display='flex' flexDirection='column'>
-      {matchesLarge && <Gap gap={20} />}
-      <Box display='flex' flexDirection={getFlexDirection()}>
-        {matchesLarge ? (
-          <Box marginRight='71px'>
-            <Avatar image={Placeholder} size='xx-large' />
-          </Box>
-        ) : (
-          <Box>
-            <Box display='flex'>
-              <Box flex={1} />
-              <Avatar image={Placeholder} size='xx-large' />
-              <Box flex={1} />
-            </Box>
-            <Gap gap={15} />
-          </Box>
-        )}
+      {matchesSmall && <Gap gap={20} />}
+      <Box
+        display='flex'
+        flexDirection={getFlexDirection()}
+        justifyContent='center'
+        alignItems='center'
+      >
         <Form onSubmit={handleSubmit(submit)}>
           <InputContainer width={getInputWidth()}>
             <Controller
@@ -139,14 +128,16 @@ const SettingsForm = ({
               )}
             />
           </InputContainer>
-          <Gap gap={matchesLarge ? 40 : 15} />
+          <Gap gap={matchesSmall ? 30 : 15} />
           <Box gap='12px' display='flex' flexDirection={getFlexDirection()}>
-            <Button
-              caption={t('cancel')}
-              variant='secondary'
-              onClick={(e) => props.onClose(e, 'escapeKeyDown')}
-              size='large'
-            />
+            {matchesSmall && (
+              <Button
+                caption={t('cancel')}
+                variant='secondary'
+                onClick={(e) => props.onClose(e, 'escapeKeyDown')}
+                size='large'
+              />
+            )}
             <Button
               type={'submit'}
               minWidth={170}
