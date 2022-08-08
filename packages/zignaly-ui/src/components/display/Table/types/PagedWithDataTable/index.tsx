@@ -23,9 +23,9 @@ import CheckBox from "../../../../inputs/CheckBox";
 import IconButton from "../../../../inputs/IconButton";
 
 // Assets
-import OptionsDotsIcon from "../../../../../assets/icons/option-dots-icon.svg";
-import SingleChevron from "assets/icons/chevron-small-icon.svg";
-import DoubleChevron from "assets/icons/double-chevron-small-icon.svg";
+import { ReactComponent as OptionsDotsIcon } from "../../../../../assets/icons/option-dots-icon.svg";
+import { ReactComponent as SingleChevron } from "assets/icons/chevron-small-icon.svg";
+import { ReactComponent as DoubleChevron } from "assets/icons/double-chevron-small-icon.svg";
 
 // Types
 import { TableBasicProps } from "../../types";

@@ -23,10 +23,11 @@ import CheckBox from "../../../../inputs/CheckBox";
 import IconButton from "../../../../inputs/IconButton";
 
 // Assets
-import OptionsDotsIcon from "../../../../../assets/icons/option-dots-icon.svg";
+import { ReactComponent as OptionsDotsIcon } from "../../../../../assets/icons/option-dots-icon.svg";
 
 // Types
 import { TableBasicProps } from "../../types";
+
 export default function BasicTable({
   columns = [],
   data = [],

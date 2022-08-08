@@ -3,8 +3,8 @@ import React from "react";
 import { ToasterProps } from "./types";
 import * as styled from "./styles";
 import Typography from "../Typography";
-import SuccessIcon from "assets/icons/check-icon.svg";
-import ErrorAlertIcon from "assets/icons/error-alert-icon.svg";
+import { ReactComponent as SuccessIcon } from "assets/icons/check-icon.svg";
+import { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.svg";
 import { dark } from "theme";
 
 const Toaster = ({ variant = "error", size = "large", caption = "" }: ToasterProps) => {

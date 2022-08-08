@@ -8,10 +8,10 @@ import { Column } from "utils/column";
 import { Gap } from "utils/gap";
 import { Row } from "utils/row";
 import { AccountSettingsModalProps, accountSettingsViewsId } from "./types";
-import TrashIcon from "assets/icons/trash-icon.svg";
+import { ReactComponent as TrashIcon } from "assets/icons/trash-icon.svg";
 import Button from "components/inputs/Button";
 import { ButtonContainer } from "./styles";
-import CopyIcon from "assets/icons/copy-icon.svg";
+import { ReactComponent as CopyIcon } from "assets/icons/copy-icon.svg";
 
 const AccountSettingsModal = ({
   type = "Spot",

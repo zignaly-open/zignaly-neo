@@ -11,7 +11,7 @@ import { Row } from "utils/row";
 import { AccountOption } from "../types";
 import { SelectorContainer } from "./styles";
 import { CoinTransfer, TransferCoinsModalProps } from "./types";
-import ListIcon from "assets/icons/list-icon.svg";
+import { ReactComponent as ListIcon } from "assets/icons/list-icon.svg";
 
 const TransferCoinsModal = ({
   onClickClose = () => {},

@@ -6,7 +6,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import ModalContainer from "../../ModalContainer";
 import Button from "../../../inputs/Button";
 import { Actions } from "../../styles";
-import CloneIcon from "assets/icons/clone-icon.svg";
+import { ReactComponent as CloneIcon } from "assets/icons/clone-icon.svg";
 import Typography from "components/display/Typography";
 import { Gap } from "utils/gap";
 import InputText from "components/inputs/InputText";

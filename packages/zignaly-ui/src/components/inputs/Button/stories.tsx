@@ -6,8 +6,8 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import Button from "./";
 
 // Assets
-import CloseIcon from "assets/icons/close-icon.svg";
-import ArrowDown from "assets/icons/arrow-bottom-icon.svg";
+import { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
+import { ReactComponent as ArrowDown } from "assets/icons/arrow-bottom-icon.svg";
 
 const ICONS = {
   ArrowDown: <ArrowDown color={"#E1E9F0"} />,
