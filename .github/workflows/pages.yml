@@ -1,0 +1,36 @@
+name: Storybook to Github pages
+
+on:
+  push:
+    branches:
+      - master
+      - feat/gh-pages
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: write
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0 # better fetch all and rebuild part than to fetch part and rebuild all
+      - name: Install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.x
+          cache: 'yarn'
+      - name: Install Lerna
+        run: yarn global add lerna
+      - name: Bootstrap modified packages
+        run: lerna bootstrap --since=origin/${{ github.base_ref }} --include-dependencies
+      - name: Build modified packages
+        run: lerna run build-storybook --scope=zignaly-ui
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./packages/zignaly-ui/build
