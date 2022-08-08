@@ -1,5 +1,4 @@
 // Dependencies
-// @ts-nocheck
 import React, { useCallback, useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
 import { parseUnits } from "@ethersproject/units";
@@ -59,8 +58,10 @@ function InputAmount(
    *   Layout Effects
    *  ================= */
   useEffect(() => {
+    // @ts-ignore
     if (selectedToken && inputValue.length) {
       const tokenBalance = BigNumber.from(selectedToken.balance);
+      // @ts-ignore
       const number = BigNumber.from(parseUnits(inputValue === "" ? "0.0" : inputValue, 18));
       const currentValue = BigNumber.from(number);
 
@@ -100,6 +101,7 @@ function InputAmount(
       if (decimals <= 18) {
         const number = BigNumber.from(parseUnits(value === "" ? "0.0" : value, 18));
         setInputValue(value);
+        // @ts-ignore
         onChange(e, { value: number, token: selectedToken });
       }
     },
@@ -114,6 +116,7 @@ function InputAmount(
     (token: TokenItem) => {
       setSelectedToken(token);
 
+      // @ts-ignore
       onChange(changeEvent(name, inputValue), {
         value,
         token,
@@ -131,10 +134,12 @@ function InputAmount(
       const newValue = BigNumber.from(selectedToken.balance);
       const number = utils.formatUnits(newValue);
       setInputValue(number);
+      // @ts-ignore
       onChange(changeEvent(name, number), { value: newValue, token: selectedToken });
     }
   }, [disabled, onChange, selectedToken]);
 
+  // @ts-ignore
   return (
     <Layout withError={!!error} disabled={disabled} fullWidth={fullWidth}>
       <Typography weight="regular" color="neutral200">
@@ -159,6 +164,7 @@ function InputAmount(
             <InputField>
               <InputValue
                 ref={inputRef}
+                // @ts-ignore
                 value={readOnly ? value : inputValue}
                 readOnly={readOnly}
                 type={"text"}
