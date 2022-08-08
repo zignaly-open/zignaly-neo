@@ -6,6 +6,8 @@ on:
       - master
       - feat/gh-pages
 
+# TODO: run only on certain paths
+
 jobs:
   deploy:
     runs-on: ubuntu-20.04
@@ -25,10 +27,10 @@ jobs:
           cache: 'yarn'
       - name: Install Lerna
         run: yarn global add lerna
-      - name: Bootstrap modified packages
+      - name: Bootstrap
         run: lerna bootstrap --scope=*/ui
       - name: Build modified packages
-        run: lerna run build-storybook --scope=zignaly-ui
+        run: lerna run build-storybook --scope=*/ui
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
