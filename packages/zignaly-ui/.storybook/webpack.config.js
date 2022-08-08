@@ -1,7 +1,7 @@
 const path = require("path");
 const resolve = (dir) => path.resolve(__dirname, dir);
 
-module.exports = async ({ config }) => {
+module.exports = async ({config}) => {
   config.resolve = Object.assign(config.resolve, {
     alias: {
       assets: resolve("../src/assets"),
@@ -22,8 +22,11 @@ module.exports = async ({ config }) => {
   config.module.rules.push({
     test: /\.svg$/i,
     issuer: /\.[jt]sx?$/,
-    resourceQuery: { not: [/url/] },
-    use: ["@svgr/webpack"],
+    resourceQuery: {not: [/url/]},
+    use: [{
+      loader: '@svgr/webpack',
+      options: {exportType: 'named'}
+    }],
   });
   return config;
 };

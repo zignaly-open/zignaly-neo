@@ -117,11 +117,7 @@ const SettingsForm = ({
                 ns: 'user-settings',
               })}
             </Typography>
-            <ErrorAlertIcon
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore: fixme
-              color='#89899A'
-            />
+            <ErrorAlertIcon color='#89899A' />
           </Box>
           <Typography variant='h4' weight='medium' color='neutral400'>
             {t('discordNameInfo')}

@@ -2,7 +2,7 @@
 import styled from "styled-components";
 
 // Assets
-import WalletIcon from "assets/icons/wallet-icon.svg";
+import { ReactComponent as WalletIcon } from "assets/icons/wallet-icon.svg";
 
 export const Layout = styled.nav`
   display: flex;

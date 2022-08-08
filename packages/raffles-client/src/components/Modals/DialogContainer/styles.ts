@@ -2,9 +2,6 @@ import styled from '@emotion/styled';
 import { IconButton } from '@mui/material';
 import { CloseIcon } from '@zignaly-open/ui';
 
-// TODO: we should fix types in @zignaly-open/ui
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore: fixme
 export const StyledCloseIcon = styled(CloseIcon)`
   width: 15px;
   height: 15px;

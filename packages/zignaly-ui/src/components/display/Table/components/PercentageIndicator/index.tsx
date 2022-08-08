@@ -9,7 +9,7 @@ import * as styled from "./styles";
 //  Utils
 import { isPositive } from "utils/numbers";
 import { PercentageIndicatorProps } from "./types";
-import Trophy from "assets/icons/trophy-icon.svg";
+import { ReactComponent as Trophy } from "assets/icons/trophy-icon.svg";
 import { Gap } from "utils/gap";
 
 const PercentageIndicator = ({

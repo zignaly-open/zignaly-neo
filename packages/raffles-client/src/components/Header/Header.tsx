@@ -11,9 +11,6 @@ import TransferZigModal from 'components/Modals/TransferZig';
 import Menu from './Menu';
 import { Box } from '@mui/system';
 
-// TODO: we should fix types in @zignaly-open/ui
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 const StyledWalletIcon = styled(WalletIcon)`
   color: ${({ theme }) => theme.neutral300};
 `;
@@ -79,9 +76,6 @@ const Header = () => {
         <MenuButton
           key={'user'}
           variant={'flat'}
-          // TODO: we should fix svgs in @zignaly-open/ui
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore: fixme
           icon={<UserIcon color='#65647E' />}
           renderDropDown={
             <Menu showModal={showModal} currentUser={currentUser} />

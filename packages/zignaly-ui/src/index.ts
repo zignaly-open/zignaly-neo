@@ -44,30 +44,30 @@ import ConnectWalletModal from "components/modals/ZigRaffle/ConnectWallet";
 import LoginForm from "./components/forms/LoginForm";
 
 // Icons
-import CloseIcon from "assets/icons/close-icon.svg";
-import CopyIcon from "assets/icons/copy-icon.svg";
-import OpenArrowIcon from "assets/icons/open-arrow-icon.svg";
-import EyeOpenIcon from "assets/icons/eye-open-icon.svg";
-import EyeClosedIcon from "assets/icons/eye-closed-icon.svg";
-import OptionDotsIcon from "assets/icons/option-dots-icon.svg";
-import ArrowBottomIcon from "assets/icons/arrow-bottom-icon.svg";
-import ArrowUpIcon from "assets/icons/arrow-up-icon.svg";
-import ArrowLeftIcon from "assets/icons/arrow-left-icon.svg";
-import ArrowRightIcon from "assets/icons/arrow-right-icon.svg";
-import UserIcon from "assets/icons/user-icon.svg";
-import CheckIcon from "assets/icons/check-icon.svg";
-import LogoDiscordIcon from "assets/icons/discord-logo-icon.svg";
-import LogoLinkedInIcon from "assets/icons/linkedin-logo-icon.svg";
-import LogoTwitterIcon from "assets/icons/twitter-logo-icon.svg";
-import LogoMediumIcon from "assets/icons/medium-logo-icon.svg";
-import LogoTelegramIcon from "assets/icons/telegram-logo-icon.svg";
-import WalletIcon from "assets/icons/wallet-icon.svg";
-import OptionHorizontalDotsIcon from "assets/icons/horizontal-three-dots-icon.svg";
-import EditPenIcon from "assets/icons/edit-pen-icon.svg";
-import SwapIcon from "assets/icons/swap-icon.svg";
-import SwapVertIcon from "assets/icons/swap-vert-icon.svg";
-import ErrorAlertIcon from "assets/icons/error-alert-icon.svg";
-import ZignalyIcon from "assets/icons/coins/zignaly-coin.svg";
+export { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
+export { ReactComponent as CopyIcon } from "assets/icons/copy-icon.svg";
+export { ReactComponent as OpenArrowIcon } from "assets/icons/open-arrow-icon.svg";
+export { ReactComponent as EyeOpenIcon } from "assets/icons/eye-open-icon.svg";
+export { ReactComponent as EyeClosedIcon } from "assets/icons/eye-closed-icon.svg";
+export { ReactComponent as OptionDotsIcon } from "assets/icons/option-dots-icon.svg";
+export { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";
+export { ReactComponent as ArrowUpIcon } from "assets/icons/arrow-up-icon.svg";
+export { ReactComponent as ArrowLeftIcon } from "assets/icons/arrow-left-icon.svg";
+export { ReactComponent as ArrowRightIcon } from "assets/icons/arrow-right-icon.svg";
+export { ReactComponent as UserIcon } from "assets/icons/user-icon.svg";
+export { ReactComponent as CheckIcon } from "assets/icons/check-icon.svg";
+export { ReactComponent as LogoDiscordIcon } from "assets/icons/discord-logo-icon.svg";
+export { ReactComponent as LogoLinkedInIcon } from "assets/icons/linkedin-logo-icon.svg";
+export { ReactComponent as LogoTwitterIcon } from "assets/icons/twitter-logo-icon.svg";
+export { ReactComponent as LogoMediumIcon } from "assets/icons/medium-logo-icon.svg";
+export { ReactComponent as LogoTelegramIcon } from "assets/icons/telegram-logo-icon.svg";
+export { ReactComponent as WalletIcon } from "assets/icons/wallet-icon.svg";
+export { ReactComponent as OptionHorizontalDotsIcon } from "assets/icons/horizontal-three-dots-icon.svg";
+export { ReactComponent as EditPenIcon } from "assets/icons/edit-pen-icon.svg";
+export { ReactComponent as SwapIcon } from "assets/icons/swap-icon.svg";
+export { ReactComponent as SwapVertIcon } from "assets/icons/swap-vert-icon.svg";
+export { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.svg";
+export { ReactComponent as ZignalyIcon } from "assets/icons/coins/zignaly-coin.svg";
 
 // Navigation
 import Header from "./components/navigation/Header";
@@ -141,35 +141,6 @@ export {
   MinBalanceModal,
   // Forms
   LoginForm,
-  /**
-   * =-=-=-=-=-=-=-=
-   *   Assets
-   * =-=-=-=-=-=-=-=
-   */
-  CloseIcon,
-  CopyIcon,
-  OpenArrowIcon,
-  EyeOpenIcon,
-  EyeClosedIcon,
-  OptionDotsIcon,
-  ArrowBottomIcon,
-  ArrowUpIcon,
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  UserIcon,
-  CheckIcon,
-  LogoDiscordIcon,
-  LogoLinkedInIcon,
-  LogoMediumIcon,
-  LogoTelegramIcon,
-  LogoTwitterIcon,
-  WalletIcon,
-  OptionHorizontalDotsIcon,
-  EditPenIcon,
-  SwapIcon,
-  SwapVertIcon,
-  ErrorAlertIcon,
-  ZignalyIcon,
   /**
    * =-=-=-=-=-=-=-=
    *     Utils
