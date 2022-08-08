@@ -76,9 +76,6 @@ const Header = () => {
         <MenuButton
           key={'user'}
           variant={'flat'}
-          // TODO: we should fix svgs in @zignaly-open/ui
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore: fixme
           icon={<UserIcon color='#65647E' />}
           renderDropDown={
             <Menu showModal={showModal} currentUser={currentUser} />

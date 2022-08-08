@@ -1,5 +1,5 @@
 import { BigNumberish } from "ethers";
-import React, { ChangeEventHandler } from "react";
+import React, { ChangeEvent, ChangeEventHandler } from "react";
 
 export type TokenItem = {
   id: string;
@@ -10,7 +10,7 @@ export interface InputAmountProps {
   label: string;
   labelBalance?: string;
   value: BigNumberish;
-  onChange: Function;
+  onChange: (e: ChangeEvent, { value, token }: { value: string; token: string }) => void;
   onBlur?: ChangeEventHandler<HTMLInputElement>;
   disabled?: boolean;
   tokens?: TokenItem[];
