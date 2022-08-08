@@ -10,13 +10,11 @@ import { AvatarSizes, AvatarTypeProps } from "./types";
 
 const Avatar = ({ size = AvatarSizes.MEDIUM, hash, image }: AvatarTypeProps) => {
   // Refs
-  const jazzIconRef = useRef(null);
+  const jazzIconRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!image && jazzIconRef.current && hash) {
-      // @ts-ignore
       jazzIconRef.current.innerHTML = "";
-      // @ts-ignore
       jazzIconRef.current.appendChild(Jazzicon(sizes[size], parseInt(hash.slice(2, 10), 16)));
     }
   }, [image, hash, size]);

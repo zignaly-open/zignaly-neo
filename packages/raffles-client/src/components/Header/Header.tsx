@@ -11,9 +11,6 @@ import TransferZigModal from 'components/Modals/TransferZig';
 import Menu from './Menu';
 import { Box } from '@mui/system';
 
-// TODO: we should fix types in @zignaly-open/ui
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
 const StyledWalletIcon = styled(WalletIcon)`
   color: ${({ theme }) => theme.neutral300};
 `;
