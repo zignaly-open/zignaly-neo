@@ -3,7 +3,7 @@ import {
   AuctionBidType,
 } from '@zignaly-open/raffles-shared/types';
 import pubsub from '../../pubsub';
-import { AUCTION_FEE, AUCTION_UPDATED } from './constants';
+import { AUCTION_UPDATED } from './constants';
 import { Auction, AuctionBasketItem, AuctionBid } from './model';
 import { Includeable, QueryTypes } from 'sequelize';
 import { ApolloContext, ContextUser, TransactionType } from '../../types';
@@ -16,12 +16,13 @@ import {
 } from './util';
 import { Payout } from '../payouts/model';
 import performPayout from './functions/performPayout';
-import calculateNewExpiryDate from './functions/calculateExpiryDate';
 import { getUserBalance, internalTransfer } from '../../cybavo';
 import { zignalySystemId } from '../../../config';
 import { emitBalanceChanged } from '../users/util';
+import findAuction from './functions/findAuction';
+import createAuctionBid from './functions/createAuctionBid';
 
-const lastBidPopulation = {
+export const lastBidPopulation = {
   model: AuctionBid,
   as: 'bids',
   order: [['id', 'DESC']],
@@ -117,58 +118,22 @@ export const resolvers = {
       if (!user) {
         throw new Error('User not found');
       }
+      const auction = await findAuction(user, id);
+      const createAuctionBidPromise = createAuctionBid(user, auction, id);
+      const getAuctionsPromise = getAuctions(auction.id, user);
+      const [updatedAuction] = await Promise.all([
+        createAuctionBidPromise,
+        getAuctionsPromise,
+      ]);
 
-      const auction = await Auction.findByPk(id, {
-        include: lastBidPopulation,
+      console.log(updatedAuction);
+
+      const subPromise = pubsub.publish(AUCTION_UPDATED, {
+        auctionUpdated: updatedAuction,
       });
-      if (!auction) throw new Error('Auction not found');
-      if (+new Date(auction.expiresAt) <= Date.now())
-        throw new Error('Auction expired');
-      if (
-        !isBalanceSufficientForPayment(
-          auction.bidFee,
-          await getUserBalance(user.publicAddress),
-        )
-      )
-        throw new Error('Insufficient funds');
+      const balanceChangedPromise = emitBalanceChanged(user);
 
-      try {
-        const tx = await internalTransfer(
-          user.publicAddress,
-          zignalySystemId,
-          AUCTION_FEE,
-          TransactionType.Fee,
-        );
-
-        if (!tx.transaction_id) throw new Error('Transaction error');
-
-        // better re-load from inside the transaction
-        const lastAuctionBid = await AuctionBid.findOne({
-          where: {
-            auctionId: id,
-          },
-          order: [['id', 'DESC']],
-        });
-
-        await AuctionBid.create({
-          auctionId: id,
-          transactionId: tx.transaction_id,
-          value: getMinRequiredBidForAuction(auction, lastAuctionBid),
-          userId: user.id,
-        });
-
-        auction.expiresAt = calculateNewExpiryDate(auction);
-        await auction.save();
-
-        await verifyPositiveBalance(user.publicAddress);
-      } catch (error) {
-        console.error(error);
-        throw new Error('Could not create a bid');
-      }
-
-      const [updatedAuction] = await getAuctions(auction.id, user);
-      pubsub.publish(AUCTION_UPDATED, { auctionUpdated: updatedAuction });
-      await emitBalanceChanged(user);
+      await Promise.all([subPromise, balanceChangedPromise]);
       return updatedAuction;
     },
 
