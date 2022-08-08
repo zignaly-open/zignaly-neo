@@ -10,7 +10,7 @@ export interface InputAmountProps {
   label: string;
   labelBalance?: string;
   value: BigNumberish;
-  onChange: (e: ChangeEvent, { value, token }: { value: string; token: string }) => void;
+  onChange: (e: ChangeEvent, { value, token }: { value: string; token: TokenItem }) => void;
   onBlur?: ChangeEventHandler<HTMLInputElement>;
   disabled?: boolean;
   tokens?: TokenItem[];

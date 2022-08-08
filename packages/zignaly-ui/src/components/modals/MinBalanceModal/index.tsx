@@ -17,6 +17,7 @@ function MinBalanceModal({
   onClickClose = () => {},
 }: MinBalanceModalProps): React.ReactElement {
   // State
+  // Fuck me sideways, what is this
   const [, setAmount] = useState(initialValue);
 
   const {
@@ -37,7 +38,7 @@ function MinBalanceModal({
         <InputAmount
           label=""
           value={ethers.utils.parseEther(initialValue.toString())}
-          onChange={(v: never) => setAmount(v)}
+          onChange={(_, { value }) => setAmount(value)}
         />
         <Actions>
           <Button caption={"Save"} disabled={!isValid} size="xlarge" type="submit" />

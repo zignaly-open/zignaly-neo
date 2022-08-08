@@ -58,7 +58,7 @@ const TransferCoinsModal = ({
         placeholder="Amount"
         label={"Amount To Transfer:"}
         value={transferCoin?.value ?? ""}
-        onChange={(e: any, { value, token }: CoinTransfer) =>
+        onChange={(_, { value, token }: CoinTransfer) =>
           setTransferCoin({ token: token, value: value })
         }
         tokens={avaliableCoins}
