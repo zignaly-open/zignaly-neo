@@ -1,5 +1,5 @@
 import React from 'react';
-import { AuctionType } from '@zignaly/raffles-shared/types';
+import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import AuctionCardComponent from './AuctionCard';
 
 const AuctionCard: React.FC<{

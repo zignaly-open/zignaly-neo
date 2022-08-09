@@ -4,5 +4,16 @@
   ],
   "useWorkspaces": true,
   "npmClient": "yarn",
-  "version": "0.0.0"
+  "version": "independent",
+  "command": {
+    "publish": {
+      "conventionalCommits": true,
+      "message": "chore: release"
+    }
+  },
+  "ignoreChanges": [
+    "**/node_modules/**",
+    "**/package.json",
+    "**/*.md"
+  ]
 }

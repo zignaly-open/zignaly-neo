@@ -1,4 +1,4 @@
-import { Typography } from 'zignaly-ui';
+import { Typography } from '@zignaly-open/ui';
 import React, { ReactNode } from 'react';
 import WhiteContainer from '../common/WhiteContainer';
 import { Box } from '@mui/system';

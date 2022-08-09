@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import useBalance from '../../hooks/useBalance';
@@ -5,7 +6,7 @@ import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
 import NumberFormat from 'react-number-format';
 import UserBalanceListener from './UserBalanceListener';
 import { styled } from '@mui/material/styles';
-import { Typography } from 'zignaly-ui';
+import { Typography } from '@zignaly-open/ui';
 
 const Layout = styled('div')`
   color: ${({ theme }) => theme.neutral100};

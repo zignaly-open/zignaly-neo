@@ -1,9 +1,12 @@
-import { AuctionType, AuctionBidType } from '@zignaly/raffles-shared/types';
+import {
+  AuctionType,
+  AuctionBidType,
+} from '@zignaly-open/raffles-shared/types';
 import pubsub from '../../pubsub';
-import { AUCTION_UPDATED } from './constants';
+import { AUCTION_FEE, AUCTION_UPDATED } from './constants';
 import { Auction, AuctionBasketItem, AuctionBid } from './model';
 import { Includeable, QueryTypes } from 'sequelize';
-import { ApolloContext, ContextUser } from '../../types';
+import { ApolloContext, ContextUser, TransactionType } from '../../types';
 import { User } from '../users/model';
 import { sequelize } from '../../db';
 import {
@@ -14,11 +17,7 @@ import {
 import { Payout } from '../payouts/model';
 import performPayout from './functions/performPayout';
 import calculateNewExpiryDate from './functions/calculateExpiryDate';
-import {
-  getUserBalance,
-  internalTransfer,
-  TransactionType,
-} from '../../cybavo';
+import { getUserBalance, internalTransfer } from '../../cybavo';
 import { zignalySystemId } from '../../../config';
 import { emitBalanceChanged } from '../users/util';
 
@@ -137,9 +136,11 @@ export const resolvers = {
         const tx = await internalTransfer(
           user.publicAddress,
           zignalySystemId,
-          '0.01',
+          AUCTION_FEE,
           TransactionType.Fee,
         );
+
+        if (!tx.transaction_id) throw new Error('Transaction error');
 
         // better re-load from inside the transaction
         const lastAuctionBid = await AuctionBid.findOne({
@@ -162,7 +163,7 @@ export const resolvers = {
         await verifyPositiveBalance(user.publicAddress);
       } catch (error) {
         console.error(error);
-        throw new Error('Count not create a bid');
+        throw new Error('Could not create a bid');
       }
 
       const [updatedAuction] = await getAuctions(auction.id, user);
@@ -213,6 +214,8 @@ export const resolvers = {
           winningBid.value,
           TransactionType.Payout,
         );
+
+        if (!tx.transaction_id) throw new Error('Transaction error');
 
         winningBid.claimTransactionId = tx.transaction_id;
         await winningBid.save();

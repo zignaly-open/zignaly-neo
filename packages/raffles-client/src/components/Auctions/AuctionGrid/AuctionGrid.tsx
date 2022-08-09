@@ -5,11 +5,11 @@ import { useQuery, useSubscription } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
 import Masonry from '@mui/lab/Masonry';
-import { AuctionType } from '@zignaly/raffles-shared/types';
+import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import AuctionCard from '../AuctionCard';
 import Loader from '../../common/Loader';
 import { getWinningLosingStatus } from '../AuctionCard/util';
-import { Select, Typography } from 'zignaly-ui';
+import { Select, Typography } from '@zignaly-open/ui';
 import { BIDS_SUBSCRIPTION, GET_AUCTIONS } from 'queries/auctions';
 
 const MasonryWrapper = styled(Box)`
@@ -103,7 +103,11 @@ const AuctionGrid: React.FC = () => {
   }
 
   if (error) {
-    return <Alert severity='error'>Error! {error.message}</Alert>;
+    return (
+      <Alert severity='error'>
+        {t('error')} {error.message}
+      </Alert>
+    );
   }
 
   if (!data?.auctions?.length) {
@@ -135,7 +139,7 @@ const AuctionGrid: React.FC = () => {
       </Grid>
       <Box padding={'40px 0 10px 40px'}>
         <Typography variant='h3' weight='medium'>
-          {filtered.length} ZIGRaffle Projects
+          {filtered.length} {t('zigraffle-projects')}
         </Typography>
       </Box>
       <StyledMasonry columns={{ xs: 1, sm: 1, md: 2 }} spacing={4}>

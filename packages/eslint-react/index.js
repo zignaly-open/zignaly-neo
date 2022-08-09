@@ -85,8 +85,7 @@ module.exports = {
     "unicorn/explicit-length-check": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "i18next/no-literal-string": [
-      // FIXME
-      "off",
+      "error",
       {
         "markupOnly": true
       }

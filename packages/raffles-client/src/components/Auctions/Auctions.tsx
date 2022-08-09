@@ -1,7 +1,7 @@
 import React from 'react';
 import AuctionGrid from './AuctionGrid/AuctionGrid';
 import Box from '@mui/material/Box';
-import { Typography } from 'zignaly-ui';
+import { Typography } from '@zignaly-open/ui';
 import { styled } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
 import { AuctionContainer } from './styles';

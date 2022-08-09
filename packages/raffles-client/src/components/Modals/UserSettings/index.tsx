@@ -1,6 +1,6 @@
 import { Box } from '@mui/system';
 import React from 'react';
-import { Typography } from 'zignaly-ui';
+import { Typography } from '@zignaly-open/ui';
 import { Gap } from '../ConnectWallet/styles';
 import DialogContainer from '../DialogContainer';
 import { Link } from './styles';
@@ -35,7 +35,7 @@ const UserSettingsModal = ({
               color='links'
               weight='regular'
             >
-              www.zignaly.com
+              {t('www.zignaly.com')}
             </Link>
           </a>
         </Typography>

@@ -55,13 +55,13 @@
     "typescript": "4.7.4",
     "web-vitals": "2.1.4",
     "yup": "^0.32.11",
-    "zignaly-ui": "*"
+    "@zignaly-open/ui": "^0.6.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.182",
     "@types/react": "^17",
     "eslint": "^8.16.0",
-    "eslint-config-zignaly-react": "*",
+    "@zignaly-open/eslint-config-zignaly-react": "^0.1.2",
     "eslint-loader": "^4.0.2",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",

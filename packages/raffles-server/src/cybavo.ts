@@ -1,50 +1,51 @@
 import crypto from 'node:crypto';
+import axios, { AxiosResponse } from 'axios';
 import { randomHex } from 'web3-utils';
 import {
   zignalyAPI,
   zignalyAPIPrivateKey,
   zignalyAPIPublicKey,
 } from '../config';
-import { CybavoBalance, CybavoTransfer } from './types';
+import { CybavoBalance, CybavoTransfer, TransactionType } from './types';
 
-export enum TransactionType {
-  Deposit = 'Raffle Deposit',
-  Fee = 'Raffle Fee',
-  Payout = 'Raffle Payout',
-}
+export const axiosInstance = axios.create({
+  baseURL: zignalyAPI,
+});
 
-const generateChecksum = (body: any) => {
+const generateChecksum = (data: any) => {
   const rdmString = randomHex(4).slice(2);
   const timestamp = +new Date();
   const str = `p=${JSON.stringify(
-    body,
+    data,
   )}&s=${rdmString}&secret=${zignalyAPIPrivateKey}&t=${timestamp}`;
   const checksum = crypto.createHash('sha256').update(str).digest('hex');
   return { rdmString, timestamp, checksum };
 };
 
-const fetchAPI = async (url: string, params?: any) => {
-  const { rdmString, timestamp, checksum } = generateChecksum(params?.body);
-  const fullUrl = new URL(`${zignalyAPI}${url}`);
-  fullUrl.searchParams.set('s', rdmString);
-  fullUrl.searchParams.set('t', timestamp.toString());
+const fetchAPI = async (url: string, params?: any): Promise<AxiosResponse> => {
+  const { rdmString, timestamp, checksum } = generateChecksum(params?.data);
 
-  const response = await fetch(fullUrl, {
+  return axiosInstance({
+    url: url,
     method: params?.method,
     headers: {
       'Content-Type': 'application/json',
       'X-CODE': zignalyAPIPublicKey,
       'X-CHECKSUM': checksum,
     },
-    body: JSON.stringify(params?.body),
+    params: {
+      s: rdmString,
+      t: timestamp,
+    },
+    data: params?.data,
   });
-
-  return response.json();
 };
 
 export const getUserBalance = async (address: string) => {
   return fetchAPI(`/balance/all/${address}`).then(
-    (data: CybavoBalance) => data.ZIG?.balance || '0',
+    ({ data }: { data: CybavoBalance }) => {
+      return data.ZIG?.balance || '0';
+    },
   );
 };
 
@@ -56,7 +57,7 @@ export const internalTransfer = async (
 ): Promise<CybavoTransfer> => {
   return fetchAPI(`/transfer/internal`, {
     method: 'POST',
-    body: {
+    data: {
       amount: amount.toString(),
       fees: '0',
       currency: 'ZIG',
@@ -65,5 +66,5 @@ export const internalTransfer = async (
       locked: 'true',
       type,
     },
-  });
+  }).then(({ data }) => data);
 };

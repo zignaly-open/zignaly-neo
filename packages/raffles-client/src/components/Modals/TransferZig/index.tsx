@@ -11,7 +11,7 @@ import {
   Loader,
   Typography,
   ZignalyIcon,
-} from 'zignaly-ui';
+} from '@zignaly-open/ui';
 import { Gap } from '../ConnectWallet/styles';
 import DialogContainer from '../DialogContainer';
 import { Container, InputContainer } from './styles';
@@ -75,11 +75,11 @@ const TransferZigModal = ({
               label={''}
               value={''}
               showMaxButton={true}
-              // TODO: we should fix svgs in zignaly-ui
+              // TODO: we should fix svgs in @zignaly-open/ui
               // eslint-disable-next-line @typescript-eslint/ban-ts-comment
               // @ts-ignore: fixme
               customCoinIcon={<ZignalyIcon width={32} height={32} />}
-              // TODO: we should fix types in zignaly-ui
+              // TODO: we should fix types in @zignaly-open/ui
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               onChange={(e: any) => {
                 setTransferAmount(e.target.value);

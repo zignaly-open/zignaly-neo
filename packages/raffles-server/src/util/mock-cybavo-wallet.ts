@@ -1,6 +1,9 @@
-import fetchMock from 'fetch-mock-jest';
-fetchMock.config.overwriteRoutes = false;
 import { User } from '../entities/users/model';
+import MockAdapter from 'axios-mock-adapter';
+import { axiosInstance } from '../cybavo';
+export const mock = new MockAdapter(axiosInstance, {
+  onNoMatch: 'throwException',
+});
 
 const randomString = (len: number) =>
   Math.random()
@@ -11,42 +14,38 @@ const mockCybavoWallet = (user: User, initialBalance = 0) => {
   let balance = initialBalance;
 
   // Mock balance
-  fetchMock.get(`path:/balance/all/${user.publicAddress}`, {
-    ZIG: {
-      balance: balance.toString(),
-    },
+  mock.onGet(`/balance/all/${user.publicAddress}`).reply(() => {
+    return [
+      200,
+      {
+        ZIG: {
+          balance: balance.toString(),
+        },
+      },
+    ];
   });
 
   // Mock internal transfers
-  fetchMock.post(
-    {
-      url: 'path:/transfer/internal',
-      body: { user_id: user.publicAddress },
-      matchPartialBody: true,
-    },
-    (_, options: any) => {
-      const { amount } = JSON.parse(options.body);
+  mock
+    .onPost('/transfer/internal', {
+      asymmetricMatch: (actual: any) => actual.user_id === user.publicAddress,
+    })
+    .reply((config) => {
+      const { amount } = JSON.parse(config.data);
       balance -= parseFloat(amount);
-      return { transaction_id: randomString(8) };
-    },
-  );
+      return [200, { transaction_id: randomString(8) }];
+    });
 
-  fetchMock.post(
-    {
-      url: 'path:/transfer/internal',
-      body: { to_user_id: user.publicAddress },
-      matchPartialBody: true,
-    },
-    (_, options: any) => {
-      const { amount } = JSON.parse(options.body);
+  mock
+    .onPost('/transfer/internal', {
+      asymmetricMatch: (actual: any) =>
+        actual.to_user_id === user.publicAddress,
+    })
+    .reply((config) => {
+      const { amount } = JSON.parse(config.data);
       balance += parseFloat(amount);
-      return { transaction_id: randomString(8) };
-    },
-  );
-
-  const getBalance = () => balance.toString();
-
-  return { getBalance };
+      return [200, { transaction_id: randomString(8) }];
+    });
 };
 
 export default mockCybavoWallet;
