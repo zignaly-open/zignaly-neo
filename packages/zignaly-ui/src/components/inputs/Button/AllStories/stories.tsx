@@ -3,8 +3,8 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ButtonVariations } from "./storyLists";
 import Button from "..";
 import { NormalButton } from "../stories";
-import ArrowDown from "assets/icons/arrow-bottom-icon.svg";
-import BTC from "assets/icons/coins/btc.svg";
+import { ReactComponent as ArrowDown } from "assets/icons/arrow-bottom-icon.svg";
+import { ReactComponent as BTC } from "assets/icons/coins/btc.svg";
 
 const icons = {
   arrowDown: <ArrowDown color={"#E1E9F0"} />,

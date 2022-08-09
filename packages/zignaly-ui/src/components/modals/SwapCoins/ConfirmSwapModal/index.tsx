@@ -4,7 +4,7 @@ import ModalContainer from "components/modals/ModalContainer";
 import React, { useCallback, useEffect, useState } from "react";
 import { Column } from "utils/column";
 import { Row } from "utils/row";
-import SwapIcon from "assets/icons/swap-icon.svg";
+import { ReactComponent as SwapIcon } from "assets/icons/swap-icon.svg";
 import { dark } from "theme";
 import { Gap } from "utils/gap";
 import { IconContainer, Line } from "./styles";

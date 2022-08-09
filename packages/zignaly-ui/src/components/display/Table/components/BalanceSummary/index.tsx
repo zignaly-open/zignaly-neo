@@ -15,7 +15,7 @@ import { Layout, Profit, TotalValue } from "./styles";
 import { BalanceSummaryProps } from "./types";
 
 // Icons
-import PencilIcon from "assets/icons/pencil-icon.svg";
+import { ReactComponent as PencilIcon } from "assets/icons/pencil-icon.svg";
 import Typography from "components/display/Typography";
 
 export const BalanceSummary = ({

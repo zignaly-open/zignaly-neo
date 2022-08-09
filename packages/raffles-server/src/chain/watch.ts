@@ -46,7 +46,7 @@ export default async function watchTransactions() {
   }
 
   async function checkBlocks(from: number, to?: number) {
-    if (to && from > to) return;
+    if (!from || (to && from > to)) return;
     const lastBlockToCheck =
       (await web3.eth.getBlockNumber()) - numberOfConfirmationsRequired;
     to = Math.min(lastBlockToCheck, to || Number.MAX_SAFE_INTEGER);

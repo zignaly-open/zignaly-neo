@@ -56,7 +56,7 @@ const AuctionGrid: React.FC = () => {
       },
       { caption: t('sort-by-bid'), value: SortDirection.Bid },
     ],
-    [],
+    [t],
   );
 
   const showOptions = useMemo(
@@ -65,7 +65,7 @@ const AuctionGrid: React.FC = () => {
       { caption: t('show-active'), value: ShowOptions.Active },
       { caption: t('show-yours'), value: ShowOptions.Yours },
     ],
-    [],
+    [t],
   );
 
   const filtered = useMemo(() => {

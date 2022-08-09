@@ -30,10 +30,10 @@ import Table from "../../display/Table";
 import InputAmount from "../../inputs/InputAmount";
 
 // Assets
-import RefreshIcon from "assets/icons/refresh-icon.svg";
-import PlusIcon from "assets/icons/plus-icon.svg";
-import ArrowRightIcon from "assets/icons/arrow-right-icon.svg";
-import ArrowLeftIcon from "assets/icons/arrow-left-icon.svg";
+import { ReactComponent as RefreshIcon } from "assets/icons/refresh-icon.svg";
+import { ReactComponent as PlusIcon } from "assets/icons/plus-icon.svg";
+import { ReactComponent as ArrowRightIcon } from "assets/icons/arrow-right-icon.svg";
+import { ReactComponent as ArrowLeftIcon } from "assets/icons/arrow-left-icon.svg";
 import InvestSlider from "../../display/InvestSlider";
 
 // Utils

@@ -39,7 +39,7 @@ async function getSortedAuctionBids(
       `
         SELECT filtered.* FROM (
             SELECT *, ROW_NUMBER () OVER (PARTITION BY t."auctionId" ORDER BY T."value" DESC) as "position" FROM ( 
-              SELECT MAX(b.value) as value, MAX(b.id) as id, b."auctionId", b."userId", MAX(b."claimTransactionId") as claimTransactionId, u."username" as "username"
+              SELECT MAX(b.value) as value, MAX(b.id) as id, b."auctionId", b."userId", MAX(b."claimTransactionId") as "claimTransactionId", u."username" as "username"
               FROM "${AuctionBid.tableName}" b
               INNER JOIN "${User.tableName}" u ON b."userId" = u."id"
               WHERE "auctionId" ${id ? '=' : '>'} $auctionId
@@ -124,13 +124,6 @@ export const resolvers = {
       if (!auction) throw new Error('Auction not found');
       if (+new Date(auction.expiresAt) <= Date.now())
         throw new Error('Auction expired');
-      if (
-        !isBalanceSufficientForPayment(
-          auction.bidFee,
-          await getUserBalance(user.publicAddress),
-        )
-      )
-        throw new Error('Insufficient funds');
 
       try {
         const tx = await internalTransfer(
@@ -222,7 +215,7 @@ export const resolvers = {
         await verifyPositiveBalance(user.publicAddress);
       } catch (error) {
         console.error(error);
-        throw new Error('Count not make a claim');
+        throw new Error('Could not make a claim');
       }
 
       const payout = await Payout.create({

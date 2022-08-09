@@ -19,5 +19,5 @@ export const RankTypes = {
 
 export type ZigWalletIndicatorProps = {
   zigs: number;
-  rankId: RankTypesId;
+  rankId?: RankTypesId;
 };

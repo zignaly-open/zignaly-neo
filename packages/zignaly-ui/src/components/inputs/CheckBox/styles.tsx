@@ -4,7 +4,7 @@ import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
 // Assets
-import CheckmarkIcon from "assets/icons/checkmark-active-icon.svg";
+import { ReactComponent as CheckmarkIcon } from "assets/icons/checkmark-active-icon.svg";
 
 export const Icon = styled(CheckmarkIcon)`
   width: 10px;

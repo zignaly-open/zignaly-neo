@@ -11,7 +11,7 @@ import { CloseButton, StyledCloseIcon } from './styles';
 import { DialogContainerProps } from './types';
 
 function DialogContainer({ title, children, ...props }: DialogContainerProps) {
-  const matchesLarge = useMediaQuery(theme.breakpoints.up('lg'));
+  const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
 
   return (
     <Dialog
@@ -21,7 +21,7 @@ function DialogContainer({ title, children, ...props }: DialogContainerProps) {
           backgroundColor: '#101225',
           borderRadius: '16px',
           border: '1px solid #35334a',
-          padding: matchesLarge ? '40px 45px 40px 45px' : '10px 0px 10px 0px',
+          padding: matchesSmall ? '30px 30px 30px 30px' : '10px 0px 10px 0px',
         },
       }}
     >

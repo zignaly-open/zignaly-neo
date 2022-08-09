@@ -18,7 +18,6 @@ const config = {
     globalObject: "this",
   },
   plugins: [
-    // new CleanWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin({
       typescript: {
         // build: true,
@@ -60,8 +59,11 @@ const config = {
       {
         test: /\.svg$/i,
         issuer: /\.[jt]sx?$/,
-        resourceQuery: { not: [/url/] },
-        use: ["@svgr/webpack"],
+        resourceQuery: {not: [/url/]},
+        use: [{
+          loader: '@svgr/webpack',
+          options: {exportType: 'named'}
+        }],
       },
       {
         test: /\.(eot|ttf|woff|woff2|png|jpg|gif)$/i,

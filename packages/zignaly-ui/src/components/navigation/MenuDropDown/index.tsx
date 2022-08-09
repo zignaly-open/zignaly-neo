@@ -6,7 +6,7 @@ import { useClickAway } from "react-use";
 import { Layout, Field, Button, ArrowIcon, DropDown } from "./styles";
 
 // Assets
-import ArrowBottomIcon from "assets/icons/arrow-bottom-icon.svg";
+import { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";
 
 // Components
 import Typography from "components/display/Typography";

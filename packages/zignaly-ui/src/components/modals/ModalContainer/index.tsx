@@ -5,8 +5,8 @@ import React, { useMemo } from "react";
 import { Layout, Header, Title, Body, HeaderButton, Inline } from "./styles";
 
 // Assets
-import CloseIcon from "assets/icons/close-icon.svg";
-import ArrowLeftIcon from "assets/icons/arrow-left-icon.svg";
+import { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
+import { ReactComponent as ArrowLeftIcon } from "assets/icons/arrow-left-icon.svg";
 
 // Types
 import { ModalContainerProps } from "./types";

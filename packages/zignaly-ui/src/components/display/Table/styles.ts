@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
 // Assets
-import CheckIcon from "assets/icons/check-icon.svg";
-import CloseIcon from "assets/icons/close-icon.svg";
-import ArrowBottomIcon from "assets/icons/arrow-bottom-icon.svg";
+import { ReactComponent as CheckIcon } from "assets/icons/check-icon.svg";
+import { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
+import { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";
 
 export const Layout = styled.div<{ maxWidth?: number }>`
   max-width: ${(props) => props.maxWidth}px;
@@ -76,6 +76,7 @@ export const TableView = styled.table<{ isUserTable: boolean; hasFooter?: boolea
 
   tbody {
     background: rgba(19, 18, 37, 0.4);
+
     td {
       letter-spacing: 0;
       color: #f3f4f6;
@@ -83,6 +84,7 @@ export const TableView = styled.table<{ isUserTable: boolean; hasFooter?: boolea
       white-space: nowrap;
       background: transparent;
       height: 95px;
+
       &.action {
         text-align: right;
       }
@@ -93,6 +95,7 @@ export const TableView = styled.table<{ isUserTable: boolean; hasFooter?: boolea
     tr {
       &:first-child {
         height: 0;
+
         td {
           height: 0;
           border-top: 1px solid #252339;
@@ -100,6 +103,7 @@ export const TableView = styled.table<{ isUserTable: boolean; hasFooter?: boolea
         }
       }
     }
+
     tr:last-child {
       td {
         padding: 10px 0;
@@ -114,9 +118,11 @@ export const TableView = styled.table<{ isUserTable: boolean; hasFooter?: boolea
     border-bottom: 1px solid #252339;
     background: transparent;
     text-align: center;
+
     :last-child {
       border-right: 0;
     }
+
     ${(props) =>
       `${styledIf(
         props.isUserTable,
@@ -130,9 +136,11 @@ export const TableView = styled.table<{ isUserTable: boolean; hasFooter?: boolea
   th {
     text-align: center;
   }
+
   tbody {
     tr {
       background: transparent;
+
       :last-child {
         td {
           border-bottom: 0;
@@ -147,12 +155,15 @@ export const ThView = styled.th<{ isSorted?: boolean; isAlignRight?: boolean }>`
   white-space: nowrap;
   background: transparent;
   margin: 0;
+
   &:first-child {
     border-radius: 0 0 0 5px;
   }
+
   &:last-child {
     border-radius: 0 0 5px 0;
   }
+
   ${(props) => `
      ${styledIf(
        props.isSorted,
@@ -232,6 +243,7 @@ export const OptionItem = styled.li`
 export const Actions = styled.div`
   button {
     margin-right: 8px;
+
     &:last-child {
       margin-right: 0;
     }
