@@ -24,7 +24,7 @@ const BidButton: React.FC<{ auction: AuctionType; isActive: boolean }> = ({
   auction,
   isActive,
 }) => {
-  const [bid] = useMutation(BID_AUCTION);
+  const [bid, { loading: isBidding }] = useMutation(BID_AUCTION);
   const { balance } = useBalance();
   const { user } = useCurrentUser();
   const { balanceOnboarding } = useContext(onboardingContext);
@@ -73,6 +73,7 @@ const BidButton: React.FC<{ auction: AuctionType; isActive: boolean }> = ({
   return (
     <Button
       size='large'
+      loading={isBidding}
       disabled={!isActive}
       // onMouseEnter={() => setShowTrueSelf(true)}
       // onMouseLeave={() => setShowTrueSelf(false)}
