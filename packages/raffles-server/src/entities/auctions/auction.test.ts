@@ -74,7 +74,7 @@ describe('Auctions', () => {
     const [, aliceToken] = await createAlice(0);
     const auction = await createAuction();
     const { body } = await makeBid(auction, aliceToken);
-    expect(body.errors[0].message).toBe('Insufficient funds');
+    expect(body.errors[0].message).toBe('Could not create a bid');
   });
 
   it('should withdraw money after making bids', async () => {
