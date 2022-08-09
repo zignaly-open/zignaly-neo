@@ -11,6 +11,7 @@ import {
   HasMany,
   BelongsTo,
 } from 'sequelize-typescript';
+import { Includeable } from 'sequelize/types/model';
 import { User } from '../users/model';
 
 @Table
@@ -128,3 +129,11 @@ export class AuctionBid extends Model {
   @Column(DataType.DECIMAL)
   public value: string;
 }
+
+export const lastBidPopulation = {
+  model: AuctionBid,
+  as: 'bids',
+  order: [['id', 'DESC']],
+  limit: 1,
+  include: [User],
+} as Includeable;

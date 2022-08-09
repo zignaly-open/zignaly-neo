@@ -1,19 +1,8 @@
-import {
-  AuctionType,
-  AuctionBidType,
-} from '@zignaly-open/raffles-shared/types';
 import pubsub from '../../pubsub';
 import { AUCTION_UPDATED } from './constants';
-import { Auction, AuctionBasketItem, AuctionBid } from './model';
-import { Includeable, QueryTypes } from 'sequelize';
-import { ApolloContext, ContextUser, TransactionType } from '../../types';
-import { User } from '../users/model';
-import { sequelize } from '../../db';
-import {
-  getMinRequiredBidForAuction,
-  isBalanceSufficientForPayment,
-  verifyPositiveBalance,
-} from './util';
+import { Auction, AuctionBid, lastBidPopulation } from './model';
+import { ApolloContext, TransactionType } from '../../types';
+import { isBalanceSufficientForPayment, verifyPositiveBalance } from './util';
 import { Payout } from '../payouts/model';
 import performPayout from './functions/performPayout';
 import { getUserBalance, internalTransfer } from '../../cybavo';
@@ -21,87 +10,8 @@ import { zignalySystemId } from '../../../config';
 import { emitBalanceChanged } from '../users/util';
 import findAuction from './functions/findAuction';
 import createAuctionBid from './functions/createAuctionBid';
-
-export const lastBidPopulation = {
-  model: AuctionBid,
-  as: 'bids',
-  order: [['id', 'DESC']],
-  limit: 1,
-  include: [User],
-} as Includeable;
-
-async function getSortedAuctionBids(
-  id: number,
-  showAllBids?: boolean,
-  user?: ContextUser,
-) {
-  return (
-    await sequelize.query(
-      `
-        SELECT filtered.* FROM (
-            SELECT *, ROW_NUMBER () OVER (PARTITION BY t."auctionId" ORDER BY T."value" DESC) as "position" FROM ( 
-              SELECT MAX(b.value) as value, MAX(b.id) as id, b."auctionId", b."userId", MAX(b."claimTransactionId") as "claimTransactionId", u."username" as "username"
-              FROM "${AuctionBid.tableName}" b
-              INNER JOIN "${User.tableName}" u ON b."userId" = u."id"
-              WHERE "auctionId" ${id ? '=' : '>'} $auctionId
-              GROUP BY "auctionId", "userId", "username"
-           ) t
-        ) filtered
-        INNER JOIN "${Auction.tableName}" a ON a."id" = filtered."auctionId"
-        WHERE 
-            "position" <= a."numberOfWinners" 
-            OR "userId" = $currentUserId 
-            ${showAllBids ? 'OR 1' : ''}
-  `,
-      {
-        type: QueryTypes.SELECT,
-        bind: { auctionId: id || 0, currentUserId: user?.id || 0 },
-      },
-    )
-  ).map(
-    (b: {
-      id: number;
-      claimTransactionId: number;
-      position: number;
-      username: string;
-      userId: number;
-      value: string;
-      auctionId: number;
-    }) =>
-      ({
-        position: b.position,
-        id: b.id,
-        auctionId: b.auctionId,
-        isClaimed: !!b.claimTransactionId,
-        value: b.value,
-        user: {
-          id: b.userId,
-          username: b.username,
-        },
-      } as AuctionBidType),
-  );
-}
-
-async function getAuctions(
-  id: number,
-  user: ContextUser,
-  showAllBids?: boolean,
-) {
-  const bids = await getSortedAuctionBids(id, showAllBids, user);
-  const auctions = (await Auction.findAll({
-    where: { ...(id ? { id } : {}) },
-    include: [AuctionBasketItem],
-  })) as unknown as AuctionType[];
-
-  auctions.forEach((x) => {
-    // here we will match auctions and bids
-    x.bids = bids.filter((b) => x.id === b.auctionId);
-    x.userBid = x.bids.find((b) => b.user.id === user?.id);
-    x.minimalBid = getMinRequiredBidForAuction(x, x.bids[0]);
-  });
-
-  return auctions;
-}
+import getAuctions from './functions/getAuctions';
+import getSortedAuctionBids from './functions/getSortedAuctionBids';
 
 export const resolvers = {
   Query: {
@@ -121,7 +31,7 @@ export const resolvers = {
       const auction = await findAuction(user, id);
       const createAuctionBidPromise = createAuctionBid(user, auction, id);
       const getAuctionsPromise = getAuctions(auction.id, user);
-      const [updatedAuction] = await Promise.all([
+      const [, [updatedAuction]] = await Promise.all([
         createAuctionBidPromise,
         getAuctionsPromise,
       ]);
