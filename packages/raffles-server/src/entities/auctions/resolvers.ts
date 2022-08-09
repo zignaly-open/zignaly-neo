@@ -124,13 +124,6 @@ export const resolvers = {
       if (!auction) throw new Error('Auction not found');
       if (+new Date(auction.expiresAt) <= Date.now())
         throw new Error('Auction expired');
-      if (
-        !isBalanceSufficientForPayment(
-          auction.bidFee,
-          await getUserBalance(user.publicAddress),
-        )
-      )
-        throw new Error('Insufficient funds');
 
       try {
         const tx = await internalTransfer(
