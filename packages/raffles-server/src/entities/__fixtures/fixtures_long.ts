@@ -23,7 +23,7 @@ const models = {
   await transaction.commit();
 
   sequelizeFixtures
-    .loadFile(__dirname + '/sample-data.json', models)
+    .loadFile(__dirname + '/sample-data-long-expiry.json', models)
     .catch((e) => {
       console.error(e);
     });
