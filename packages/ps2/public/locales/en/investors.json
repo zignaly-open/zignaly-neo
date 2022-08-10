@@ -1,0 +1,17 @@
+{
+  "investors": {
+    "title": "Investors",
+    "tableHeader": {
+      "email": "Email",
+      "userId": "User ID",
+      "investment": "Investment",
+      "P&L": "P&L",
+      "P&LTotal": "P&L Total",
+      "totalFeesPaid": "Total Fees Paid",
+      "successFee": "Success Fee",
+      "feesZIG": "Fees in ZIG",
+      "status": "Status"
+    },
+    "loading-arialLabel": "Loading investors"
+  }
+}

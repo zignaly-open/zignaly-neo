@@ -1,0 +1,34 @@
+{
+  "my-dashboard": {
+    "title": "My Dashboard",
+    "tableHeader": {
+      "summary": {
+        "title": "My Current Value",
+        "subtitle": "Returns"
+      },
+      "serviceName": {
+        "title": "Service Name",
+        "subtitle": "Manager/Base currency"
+      },
+      "1-mo": {
+        "title": "1 mo.",
+        "no-data": "No data to show yet"
+      },
+      "dailyAvg-title": "Daily avg.",
+      "3-mos-title": "3 mos.",
+      "6-mos-title": "6 mos.",
+      "all": {
+        "title": "All",
+        "subtitle": "Age"
+      }
+    },
+    "table-search-emptyMessage": "You are not connected to any service yet.",
+    "loading-arialLabel": "Loading my dashboard",
+    "slider-input": {
+      "labels": {
+        "left": "Reinvest",
+        "right": "Withdraw"
+      }
+    }
+  }
+}

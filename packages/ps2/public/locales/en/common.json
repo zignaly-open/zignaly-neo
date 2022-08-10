@@ -1,0 +1,31 @@
+{
+  "coming-soon": {
+    "title": "Coming Soon",
+    "description": "This section is under development, you will see it available at a later date."
+  },
+  "main-menu": {
+    "dropdown-link-forTrading": "For Trading Services",
+    "dropdown-link-helpDocs": "Help Docs"
+  },
+  "account-menu": {
+    "isAuth-button-logIn": "Log in",
+    "isAuth-button-signUp": "SIGN UP",
+    "notAuth-dropdown-link-dashboard": "My Dashboard",
+    "notAuth-dropdown-link-balances": "My Balances",
+    "notAuth-button-logOut": "Logout"
+  },
+  "account-selector": {
+    "type": {
+      "title": "Type:",
+      "futures": "Spot",
+      "spot": "Futures"
+    }
+  },
+  "navigation-menu": {
+    "profit-sharing": "Profit Sharing",
+    "staking": "Staking",
+    "zigpad": "ZIGpad"
+  },
+  "amount": "Amount",
+  "new-version": "New version, click me to update"
+}

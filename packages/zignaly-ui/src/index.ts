@@ -85,6 +85,7 @@ import {
   createUserTableDataObject,
   createUserTableHeader,
 } from "./components/display/Table/types";
+import { HeaderLinksContainer } from "components/navigation/Header/styles";
 
 export {
   /**
@@ -128,6 +129,7 @@ export {
   Header,
   BrandImage,
   ZigsBalance,
+  HeaderLinksContainer,
   MenuDropDown,
   PageContainer,
   MarginContainer,
