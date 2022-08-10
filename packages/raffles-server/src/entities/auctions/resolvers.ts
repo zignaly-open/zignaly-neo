@@ -1,6 +1,6 @@
 import pubsub from '../../pubsub';
 import { AUCTION_UPDATED } from './constants';
-import { Auction, AuctionBid, lastBidPopulation } from './model';
+import { Auction, AuctionBid } from './model';
 import { ApolloContext, TransactionType } from '../../types';
 import { isBalanceSufficientForPayment, verifyPositiveBalance } from './util';
 import { Payout } from '../payouts/model';
@@ -9,8 +9,6 @@ import { zignalySystemId } from '../../../config';
 import { emitBalanceChanged } from '../users/util';
 import AuctionsRepository from './repository';
 
-const auctionsRepository = new AuctionsRepository();
-
 export const resolvers = {
   Query: {
     auctions: async (
@@ -18,7 +16,7 @@ export const resolvers = {
       { id }: { id: number },
       { user }: ApolloContext,
     ) => {
-      return auctionsRepository.getAuctions(id, user);
+      return AuctionsRepository.getAuctions(id, user);
     },
   },
   Mutation: {
@@ -26,13 +24,13 @@ export const resolvers = {
       if (!user) {
         throw new Error('User not found');
       }
-      const auction = await auctionsRepository.findAuction(user, id);
-      const createAuctionBidPromise = auctionsRepository.createAuctionBid(
+      const auction = await AuctionsRepository.findAuction(user, id);
+      const createAuctionBidPromise = AuctionsRepository.createAuctionBid(
         user,
         auction,
         id,
       );
-      const getAuctionsPromise = auctionsRepository.getAuctions(
+      const getAuctionsPromise = AuctionsRepository.getAuctions(
         auction.id,
         user,
       );
@@ -41,13 +39,10 @@ export const resolvers = {
         getAuctionsPromise,
       ]);
 
-      console.log(updatedAuction);
-
       const subPromise = pubsub.publish(AUCTION_UPDATED, {
         auctionUpdated: updatedAuction,
       });
       const balanceChangedPromise = emitBalanceChanged(user);
-
       await Promise.all([subPromise, balanceChangedPromise]);
       return updatedAuction;
     },
@@ -57,7 +52,7 @@ export const resolvers = {
         throw new Error('User not found');
       }
       const auction = await Auction.findByPk(id, {
-        include: lastBidPopulation,
+        include: AuctionsRepository.lastBidPopulation,
       });
       if (!auction) throw new Error('Auction not found');
       if (+new Date(auction.expiresAt) > Date.now())
@@ -67,7 +62,7 @@ export const resolvers = {
 
       // here we SPECIFICALLY do not pass the current user to not receive current user's bid
       // TODO: maybe we should refactor it to make this more explicit
-      const winningBids = await auctionsRepository.getSortedAuctionBids(
+      const winningBids = await AuctionsRepository.getSortedAuctionBids(
         id,
         false,
         undefined,
@@ -115,9 +110,9 @@ export const resolvers = {
         publicAddress: user.publicAddress,
       });
 
-      await auctionsRepository.performPayout(payout);
+      await AuctionsRepository.performPayout(payout);
 
-      const [updatedAuction] = await auctionsRepository.getAuctions(
+      const [updatedAuction] = await AuctionsRepository.getAuctions(
         auction.id,
         user,
       );

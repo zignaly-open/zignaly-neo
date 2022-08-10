@@ -11,7 +11,6 @@ import {
   HasMany,
   BelongsTo,
 } from 'sequelize-typescript';
-import { Includeable } from 'sequelize/types/model';
 import { User } from '../users/model';
 
 @Table
@@ -43,7 +42,7 @@ export class Auction extends Model {
   @Column(DataType.STRING)
   public twitter: string;
 
-  @Default(() => Date.now() + 7 * 24 * 3600_000)
+  @Default(() => Date.now() + 1 * 1 * 3600_0)
   @Column(DataType.DATE)
   public expiresAt!: Date;
 
@@ -129,11 +128,3 @@ export class AuctionBid extends Model {
   @Column(DataType.DECIMAL)
   public value: string;
 }
-
-export const lastBidPopulation = {
-  model: AuctionBid,
-  as: 'bids',
-  order: [['id', 'DESC']],
-  limit: 1,
-  include: [User],
-} as Includeable;

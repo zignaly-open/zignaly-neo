@@ -5,23 +5,26 @@ import {
 import axios from 'axios';
 import { random } from 'lodash';
 import { sequelize } from '../../db';
-import { QueryTypes } from 'sequelize';
+import { Includeable, QueryTypes } from 'sequelize';
 import { zignalySystemId, payoutSpreadsheetUrl } from '../../../config';
 import { internalTransfer } from '../../cybavo';
 import { ContextUser, TransactionType } from '../../types';
 import { Payout } from '../payouts/model';
 import { User } from '../users/model';
 import { AUCTION_FEE } from './constants';
-import {
-  Auction,
-  AuctionBid,
-  AuctionBasketItem,
-  lastBidPopulation,
-} from './model';
+import { Auction, AuctionBid, AuctionBasketItem } from './model';
 import { getMinRequiredBidForAuction, verifyPositiveBalance } from './util';
 
-class AuctionsRepository {
-  public calculateNewExpiryDate(auction: Auction): Date {
+const AuctionsRepository = () => {
+  const lastBidPopulation = {
+    model: AuctionBid,
+    as: 'bids',
+    order: [['id', 'DESC']],
+    limit: 1,
+    include: [User],
+  } as Includeable;
+
+  function calculateNewExpiryDate(auction: Auction): Date {
     if (auction.expiresAt < auction.maxExpiryDate) {
       const expiryDate = +new Date(auction.expiresAt);
       const currentDate = Date.now();
@@ -35,7 +38,7 @@ class AuctionsRepository {
     }
   }
 
-  public async createAuctionBid(
+  async function createAuctionBid(
     user: ContextUser,
     auction: Auction,
     id: number,
@@ -85,7 +88,7 @@ class AuctionsRepository {
     }
   }
 
-  public async findAuction(user: ContextUser, id: number): Promise<Auction> {
+  async function findAuction(user: ContextUser, id: number): Promise<Auction> {
     return await Auction.findByPk(id, {
       include: lastBidPopulation,
     }).then(async (auction) => {
@@ -94,7 +97,7 @@ class AuctionsRepository {
     });
   }
 
-  public async getSortedAuctionBids(
+  async function getSortedAuctionBids(
     id: number,
     showAllBids?: boolean,
     user?: ContextUser,
@@ -102,21 +105,23 @@ class AuctionsRepository {
     return (
       await sequelize.query(
         `
-            SELECT filtered.* FROM (
-                SELECT *, ROW_NUMBER () OVER (PARTITION BY t."auctionId" ORDER BY T."value" DESC) as "position" FROM ( 
-                  SELECT MAX(b.value) as value, MAX(b.id) as id, b."auctionId", b."userId", MAX(b."claimTransactionId") as "claimTransactionId", u."username" as "username"
-                  FROM "${AuctionBid.tableName}" b
-                  INNER JOIN "${User.tableName}" u ON b."userId" = u."id"
-                  WHERE "auctionId" ${id ? '=' : '>'} $auctionId
-                  GROUP BY "auctionId", "userId", "username"
-               ) t
-            ) filtered
-            INNER JOIN "${Auction.tableName}" a ON a."id" = filtered."auctionId"
-            WHERE 
-                "position" <= a."numberOfWinners" 
-                OR "userId" = $currentUserId 
-                ${showAllBids ? 'OR 1' : ''}
-      `,
+                  SELECT filtered.* FROM (
+                      SELECT *, ROW_NUMBER () OVER (PARTITION BY t."auctionId" ORDER BY T."value" DESC) as "position" FROM ( 
+                        SELECT MAX(b.value) as value, MAX(b.id) as id, b."auctionId", b."userId", MAX(b."claimTransactionId") as "claimTransactionId", u."username" as "username"
+                        FROM "${AuctionBid.tableName}" b
+                        INNER JOIN "${User.tableName}" u ON b."userId" = u."id"
+                        WHERE "auctionId" ${id ? '=' : '>'} $auctionId
+                        GROUP BY "auctionId", "userId", "username"
+                     ) t
+                  ) filtered
+                  INNER JOIN "${
+                    Auction.tableName
+                  }" a ON a."id" = filtered."auctionId"
+                  WHERE 
+                      "position" <= a."numberOfWinners" 
+                      OR "userId" = $currentUserId 
+                      ${showAllBids ? 'OR 1' : ''}
+            `,
         {
           type: QueryTypes.SELECT,
           bind: { auctionId: id || 0, currentUserId: user?.id || 0 },
@@ -146,7 +151,7 @@ class AuctionsRepository {
     );
   }
 
-  public async getAuctions(
+  async function getAuctions(
     id: number,
     user: ContextUser,
     showAllBids?: boolean,
@@ -167,7 +172,7 @@ class AuctionsRepository {
     return auctions;
   }
 
-  public async performPayout(payout: Payout): Promise<void> {
+  async function performPayout(payout: Payout): Promise<void> {
     const { discordName, username } = await User.findByPk(payout.userId);
     const payload = {
       discordName,
@@ -185,6 +190,16 @@ class AuctionsRepository {
         throw e;
       });
   }
-}
 
-export default AuctionsRepository;
+  return {
+    performPayout,
+    getAuctions,
+    getSortedAuctionBids,
+    findAuction,
+    createAuctionBid,
+    calculateNewExpiryDate,
+    lastBidPopulation,
+  };
+};
+
+export default AuctionsRepository();

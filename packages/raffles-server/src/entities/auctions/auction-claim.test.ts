@@ -16,10 +16,7 @@ import { getUserBalance } from '../../cybavo';
 import AuctionsRepository from './repository';
 
 describe('Auction Claims', () => {
-  const mockPerformPayout = jest.spyOn(
-    new AuctionsRepository(),
-    'performPayout',
-  );
+  const mockPerformPayout = jest.spyOn(AuctionsRepository, 'performPayout');
 
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
