@@ -1,25 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Routes from './Routes';
+import theme from './theme';
+import { dark, ThemeProvider } from '@zignaly-open/ui';
+import { ThemeProvider as ThemeProviderMui } from '@mui/material';
+import ModalProvider from 'mui-modal-provider';
+import { BrowserRouter } from 'react-router-dom';
+
+const augmentedTheme = { ...dark, ...theme };
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ThemeProvider theme={dark}>
+      <ThemeProviderMui theme={augmentedTheme}>
+        <BrowserRouter>
+          <ModalProvider>
+            <Routes />
+          </ModalProvider>
+        </BrowserRouter>
+      </ThemeProviderMui>
+    </ThemeProvider>
   );
 }
 

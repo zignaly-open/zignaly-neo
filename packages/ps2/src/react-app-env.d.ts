@@ -1,6 +1,6 @@
 /// <reference types="react-scripts" />
 
-import ThemeZig from 'zignaly-ui/lib/theme/theme';
+import ThemeZig from '@zignaly-open/ui/lib/theme/theme';
 
 declare module '*.svg' {
   /**

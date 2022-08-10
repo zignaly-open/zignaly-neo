@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './util/i18next';
-import EntryPoint from './EntryPoint';
+import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
     <>
       <React.Suspense fallback={null}>
-        <EntryPoint />
+        <App />
       </React.Suspense>
     </>
   </React.StrictMode>,

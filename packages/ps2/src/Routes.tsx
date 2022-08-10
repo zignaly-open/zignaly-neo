@@ -1,5 +1,22 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import Header from './components/Header';
+import { Routes as RouterRoutes, Route } from 'react-router-dom';
+import ProfitSharing from './views/ProfitSharing';
+import Dashboard from './views/Dashboard';
+import Staking from './views/Staking';
+import Login from './views/Auth/Login';
+import Signup from './views/Auth/Signup';
+import TradingServices from './views/Help/TradingServices';
+import {
+  ROUTE_DASHBOARD,
+  ROUTE_HELP,
+  ROUTE_LOGIN,
+  ROUTE_PROFIT_SHARING,
+  ROUTE_SIGNUP,
+  ROUTE_STAKING,
+  ROUTE_ZIGPAD,
+} from './routes';
+
 // import { Routes as RouterRoutes, Route, Navigate } from 'react-router-dom';
 // import Auctions from './components/Auctions/Auctions';
 // import DepositPage from './pages/DepositPage';
@@ -25,33 +42,26 @@ import { useTranslation } from 'react-i18next';
 // };
 
 function Routes() {
-  const { t } = useTranslation('global');
   return (
     <>
-      {t('name')}
-      {/*<Header />*/}
-      {/*<RouterRoutes>*/}
-      {/*  <Route path='/'>*/}
-      {/*    <Route index element={<Auctions />} />*/}
-      {/*    <Route*/}
-      {/*      path='deposit'*/}
-      {/*      element={*/}
-      {/*        <AuthenticatedRoute>*/}
-      {/*          <DepositPage />*/}
-      {/*        </AuthenticatedRoute>*/}
-      {/*      }*/}
-      {/*    />*/}
-      {/*    <Route*/}
-      {/*      path='profile'*/}
-      {/*      element={*/}
-      {/*        <AuthenticatedRoute>*/}
-      {/*          <ProfilePage />*/}
-      {/*        </AuthenticatedRoute>*/}
-      {/*      }*/}
-      {/*    />*/}
-      {/*  </Route>*/}
-      {/*</RouterRoutes>*/}
-      {/*<Footer />*/}
+      <Header />
+      <RouterRoutes>
+        <Route path={ROUTE_DASHBOARD}>
+          <Route index element={<Dashboard />} />
+        </Route>
+        <Route path={ROUTE_PROFIT_SHARING}>
+          <Route index element={<ProfitSharing />} />
+        </Route>
+        <Route path={ROUTE_STAKING}>
+          <Route index element={<Staking />} />
+        </Route>
+        <Route path={ROUTE_ZIGPAD}>
+          <Route index element={<ProfitSharing />} />
+        </Route>
+        <Route path={ROUTE_HELP} element={<TradingServices />} />
+        <Route path={ROUTE_LOGIN} element={<Login />} />
+        <Route path={ROUTE_SIGNUP} element={<Signup />} />
+      </RouterRoutes>
     </>
   );
 }
