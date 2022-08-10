@@ -17,6 +17,11 @@ import { port, isTest, algorithm, secret, graphqlPath } from '../config';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
+import { persistTablesToTheDatabase } from './db';
+
+// persist models to the database
+// TODO: maybe alter is not good on prod
+!isTest && persistTablesToTheDatabase();
 
 const typeDef = gql`
   type Query
