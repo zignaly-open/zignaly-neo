@@ -1,4 +1,3 @@
-import { Op } from 'sequelize';
 import sequelizeFixtures from 'sequelize-fixtures';
 import '../../db';
 import { Auction, AuctionBid, AuctionBasketItem } from '../auctions/model';
@@ -12,13 +11,6 @@ const models = {
 
 Payout.destroy({ where: {} });
 AuctionBid.destroy({ where: {} });
-Transaction.destroy({
-  where: {
-    auctionId: {
-      [Op.ne]: null,
-    },
-  },
-});
 AuctionBasketItem.destroy({ where: {} });
 Auction.destroy({ where: {} });
 

@@ -4,14 +4,12 @@ import { Auction, AuctionBid, lastBidPopulation } from './model';
 import { ApolloContext, TransactionType } from '../../types';
 import { isBalanceSufficientForPayment, verifyPositiveBalance } from './util';
 import { Payout } from '../payouts/model';
-import performPayout from './functions/performPayout';
 import { getUserBalance, internalTransfer } from '../../cybavo';
 import { zignalySystemId } from '../../../config';
 import { emitBalanceChanged } from '../users/util';
-import findAuction from './functions/findAuction';
-import createAuctionBid from './functions/createAuctionBid';
-import getAuctions from './functions/getAuctions';
-import getSortedAuctionBids from './functions/getSortedAuctionBids';
+import AuctionsRepository from './repository';
+
+const auctionsRepository = new AuctionsRepository();
 
 export const resolvers = {
   Query: {
@@ -20,7 +18,7 @@ export const resolvers = {
       { id }: { id: number },
       { user }: ApolloContext,
     ) => {
-      return getAuctions(id, user);
+      return auctionsRepository.getAuctions(id, user);
     },
   },
   Mutation: {
@@ -28,9 +26,16 @@ export const resolvers = {
       if (!user) {
         throw new Error('User not found');
       }
-      const auction = await findAuction(user, id);
-      const createAuctionBidPromise = createAuctionBid(user, auction, id);
-      const getAuctionsPromise = getAuctions(auction.id, user);
+      const auction = await auctionsRepository.findAuction(user, id);
+      const createAuctionBidPromise = auctionsRepository.createAuctionBid(
+        user,
+        auction,
+        id,
+      );
+      const getAuctionsPromise = auctionsRepository.getAuctions(
+        auction.id,
+        user,
+      );
       const [, [updatedAuction]] = await Promise.all([
         createAuctionBidPromise,
         getAuctionsPromise,
@@ -62,7 +67,11 @@ export const resolvers = {
 
       // here we SPECIFICALLY do not pass the current user to not receive current user's bid
       // TODO: maybe we should refactor it to make this more explicit
-      const winningBids = await getSortedAuctionBids(id, false, undefined);
+      const winningBids = await auctionsRepository.getSortedAuctionBids(
+        id,
+        false,
+        undefined,
+      );
       const winningBidId = winningBids.find(
         (bid) => bid.user.id === user.id,
       )?.id;
@@ -106,9 +115,12 @@ export const resolvers = {
         publicAddress: user.publicAddress,
       });
 
-      await performPayout(payout);
+      await auctionsRepository.performPayout(payout);
 
-      const [updatedAuction] = await getAuctions(auction.id, user);
+      const [updatedAuction] = await auctionsRepository.getAuctions(
+        auction.id,
+        user,
+      );
       // no need to emit updated auctions here
       await emitBalanceChanged(user);
       return updatedAuction;
