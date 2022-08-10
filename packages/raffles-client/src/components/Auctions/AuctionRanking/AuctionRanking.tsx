@@ -109,7 +109,7 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
         Array.from(
           { length: winnersDisplayed - auction.bids.length },
           (_, i) => (
-            <RankingRowContainer>
+            <RankingRowContainer key={i}>
               <Rank>
                 <Typography>{auction.bids.length + i + 1}.</Typography>
               </Rank>
