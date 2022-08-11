@@ -24,12 +24,8 @@ const TransferZigModal = (props: TransferZigModalProps) => {
   const token = process.env.REACT_APP_CONTRACT_ADDRESS as string;
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const { t } = useTranslation('transfer-zig');
-  const {
-    account,
-    activateBrowserWallet,
-    chainId,
-    switchNetwork,
-  } = useEthers();
+  const { account, activateBrowserWallet, chainId, switchNetwork } =
+    useEthers();
 
   const balance = useTokenBalance(token, account);
   const { isLoading, isError, transfer, isSuccess } = useContract({
