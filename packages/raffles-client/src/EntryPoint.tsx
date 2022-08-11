@@ -91,7 +91,7 @@ if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
 
 const augmentedTheme = { ...dark, ...theme };
 
-function EntryPoint () {
+function EntryPoint() {
   return (
     <ThemeProvider theme={dark}>
       <ThemeProviderMui theme={augmentedTheme}>

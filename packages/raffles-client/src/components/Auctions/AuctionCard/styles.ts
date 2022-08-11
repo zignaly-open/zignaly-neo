@@ -1,7 +1,6 @@
-import { css } from '@mui/material/styles';
+import { css, styled } from '@mui/material/styles';
 import { AmountContainer } from 'components/common/AmountContainer';
 import { PriceLabel as PriceLabelZig } from '@zignaly-open/ui';
-import { styled } from '@mui/system';
 
 export const Item = styled('div')(({ theme }) => ({
   background: 'rgba(37, 35, 57, 0.4)',
@@ -15,7 +14,11 @@ export const Item = styled('div')(({ theme }) => ({
   },
 }));
 
-export const CardHeader = styled('div')<{ isColumn: boolean }>`
+export const CardHeader = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'isColumn',
+})<{
+  isColumn: boolean;
+}>`
   height: 80px;
   display: flex;
   flex-direction: column;
@@ -39,7 +42,11 @@ export const CardHeaderLeft = styled(CardHeader)`
   border-bottom: 1px solid rgba(193, 193, 200, 0.4);
 `;
 
-export const AuctionImage = styled('img')<{ isColumn: boolean }>`
+export const AuctionImage = styled('img', {
+  shouldForwardProp: (prop) => prop !== 'isColumn',
+})<{
+  isColumn: boolean;
+}>`
   width: 100%;
   height: 209px;
   object-fit: cover;
@@ -91,7 +98,12 @@ export const PriceLabel = styled(PriceLabelZig)`
   }
 `;
 
-export const CardActions = styled('div')<{ isColumn: boolean; hide?: boolean }>`
+export const CardActions = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'isColumn' && prop !== 'hide',
+})<{
+  isColumn: boolean;
+  hide?: boolean;
+}>`
   display: flex;
   align-items: flex-end;
   flex: 1;
