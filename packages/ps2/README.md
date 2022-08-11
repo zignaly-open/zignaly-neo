@@ -1,46 +1,68 @@
-# Getting Started with Create React App
+# Zignaly Webapp Neo<sup>2</sup>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the implementation of Profit Sharing 2.0 done anew using
+Typescript, [CRA](https://github.com/facebook/create-react-app)
+, [Zignaly UI](https://www.npmjs.com/package/@zignaly-open/ui)
+and [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) for State management. I assume you are familiar with
+[React](https://facebook.github.io/create-react-app/docs/getting-started) and CRA so the auto-generated CRA Readme is
+too boring to not be removed.
 
-## Available Scripts
+### How to run
 
-In the project directory, you can run:
+You will need node 16, I suggest you use nvm. Just run `nvm use` on the root level.
 
-### `npm start`
+I assume you already have all dependencies installed from the `lerna bootstrap` step. What next? Next we configure
+the `.env` file. Feel free to copy data from the `.env.sample`. I feel pretty comfortable putting it to the repo because
+it has
+already been published in the neo2 (do not confuse with neo<sup>2</sup>) but primarily because any person with a half
+functioning brain and basic dev skills can reverse-engineer the code to get this value.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+* `REACT_APP_BASE_API` - base API, as you may have guessed from the name lol
+* `REACT_APP_GOOGLE_CAPTCHA_TOKEN` - captcha key
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+⚠️ **WARNING!** Unless you want to spend time trying to figure out why the hell the backend responds with a captcha
+error, you _**have**_ to run the app on a `*.zignaly.com` domain. To do that, modify `sudo vim /etc/hosts` (or whatever
+in the System32 the path is on Windows) and add:
 
-### `npm test`
+```
+127.0.0.1 local.zignaly.com
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Now open [http://local.zignaly.com:3000](http://local.zignaly.com:3000) and good luck using it.
 
-### `npm run build`
+### Scripts
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Unless you want to deal with linking issues and zignaly-ui rebuilds, follow the instructions from the top-level
+readme. `yarn run ps2`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+This being a CRA app, in `packages/ps2` you can run:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+* `yarn test` - [runs tests](https://facebook.github.io/create-react-app/docs/running-tests)
+* `yarn build` - builds the app for production to the `build` folder
+* `yarn eject` - if you do not know what this is do not run it
 
-### `npm run eject`
+### Folder Structure
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
+src
+├── components                      # Shared components used across the app
+│   └── ComponentName 
+│       ├── index.tsx               # actual component with export default
+│       ├── styles.tsx              # styled components
+│       ├── types.tsx               # type definitions
+│       └── atoms.tsx               # some tiny react components unworthy to be placed in src*=/components
+├── fetures                         # store-management done like RTK wants you to (I guess)
+│   ├── featureName
+│   │   ├── store.ts                # store slice (RTKQ terminology without RTKQ folder structure)
+│   │   ├── api.ts                  # api slice
+│   │   ├── types.ts                # types
+│   │   └── use.ts                  # hooks to use reducers and action-creators. 
+│   │                               # I want to do it with a sufficient abstraction layer 
+│   └── store.ts                    # redux store 
+├── util                            # common-use helper functions
+├── views                           # high-level components aka routes
+└── App.tsx                         # entry point with 100500 providers around it
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Please follow the existing codestyle. Good luck on your journey.

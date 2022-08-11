@@ -2,7 +2,11 @@ import React, { ReactElement } from 'react';
 import type { LinkProps } from 'react-router-dom';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
 
-function Index({ children, to, ...props }: LinkProps): ReactElement {
+export function NavigationLink({
+  children,
+  to,
+  ...props
+}: LinkProps): ReactElement {
   const resolved = useResolvedPath(to);
   const match = useMatch({ path: resolved.pathname, end: true });
 
@@ -12,5 +16,3 @@ function Index({ children, to, ...props }: LinkProps): ReactElement {
     </Link>
   );
 }
-
-export default Index;

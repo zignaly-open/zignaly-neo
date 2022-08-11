@@ -7,7 +7,7 @@ import {
 } from '@zignaly-open/ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import NavigationLink from './NavigationLink';
+import { NavigationLink } from './atoms';
 import {
   ROUTE_DASHBOARD,
   ROUTE_PROFIT_SHARING,
