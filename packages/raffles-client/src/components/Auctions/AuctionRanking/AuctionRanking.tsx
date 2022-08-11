@@ -85,7 +85,7 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
   // Current user is winning but is too far in the list to be showed.
   // We'll hide enough winners above him to show him.
   // If we also already need to truncate the list to show the last winners,
-  // then we need to substract an addional line.
+  // then we need to substract an additional line.
   const isUserTruncated =
     // user winning
     auction.userBid?.position <= auction.numberOfWinners &&
