@@ -11,7 +11,6 @@ export type AuctionBidType = {
   user: {
     id: number;
     username: string;
-    discordName: string;
   };
   isClaimed?: boolean;
 };

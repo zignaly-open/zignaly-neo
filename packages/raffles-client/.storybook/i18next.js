@@ -26,6 +26,9 @@ i18n
     defaultNS: 'common',
     ns,
     supportedLngs,
+    react: {
+      useSuspense: false,
+    },
   });
 
 supportedLngs.forEach((lang) => {

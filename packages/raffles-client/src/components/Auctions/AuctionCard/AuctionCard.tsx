@@ -39,6 +39,7 @@ const AuctionCard: React.FC<{
       // (due to the card width being too small for the column min-width)
       setIsColumn(leftRef.current.offsetTop !== rightRef.current.offsetTop);
     };
+    handleWindowResize();
 
     window.addEventListener('resize', handleWindowResize);
 
