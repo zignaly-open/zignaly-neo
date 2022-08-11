@@ -42,7 +42,7 @@ lerna add package-name --scope=@zignaly-open/ui
 I.e. you should be specifying the target package.
 
 _"But wait"_, one could say. _"There is a pandemic, an ongoing war and an overall geopolitical instability that can
-result in WW3. I have outdoor activities top participate in, shows to watch, women to sleep with and games to play. The
+result in WW3. I have outdoor activities top participate in, shows to watch, people to sleep with and games to play. The
 mathematical expectation of the length of my life is TOO SHORT to type out `@zignaly-open` when defining scope"_. Well,
 this makes two of us:
 
