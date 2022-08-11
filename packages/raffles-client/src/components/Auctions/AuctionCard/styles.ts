@@ -1,7 +1,7 @@
 import { css } from '@mui/material/styles';
 import { AmountContainer } from 'components/common/AmountContainer';
 import { PriceLabel as PriceLabelZig } from '@zignaly-open/ui';
-import styled from '@emotion/styled';
+import { styled } from '@mui/system';
 
 export const Item = styled('div')(({ theme }) => ({
   background: 'rgba(37, 35, 57, 0.4)',
