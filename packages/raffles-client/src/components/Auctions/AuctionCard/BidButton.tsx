@@ -8,8 +8,21 @@ import BN from 'bignumber.js';
 import { getWinningLosingStatus } from './util';
 import useAuthenticate from '../../../hooks/useAuthenticate';
 import { onboardingContext } from '../../../contexts/Onboarding';
-import { Button } from '@zignaly-open/ui';
+import { Button, Toaster } from '@zignaly-open/ui';
 import { BID_AUCTION } from 'queries/auctions';
+import toast from 'react-hot-toast';
+import { ToasterProps } from '@zignaly-open/ui/lib/components/display/Toaster/types';
+
+export const ShowToast = async ({ variant, caption, size }: ToasterProps) => {
+  toast.custom(<Toaster variant={variant} caption={caption} size={size} />, {
+    id: 'toast',
+  });
+
+  const interval = setInterval(() => {
+    toast.remove('toast');
+    clearInterval(interval);
+  }, 4000);
+};
 
 enum BidButtonState {
   NotLoggedIn,
@@ -57,15 +70,18 @@ const BidButton: React.FC<{ auction: AuctionType; isActive: boolean }> = ({
     if (state === BidButtonState.NotLoggedIn) {
       authenticate();
     } else if (state === BidButtonState.NotEnoughFunds) {
-      alert('Not Enough Funds');
+      ShowToast({
+        size: 'large',
+        variant: 'error',
+        caption: 'Not Enough Funds!',
+      });
     } else {
       bid({
         variables: {
           id: auction.id,
         },
       }).catch((e) => {
-        // TODO: better alerts
-        alert(e.toString());
+        ShowToast({ size: 'large', variant: 'error', caption: e });
       });
     }
   }, [state, authenticate, balanceOnboarding]);
