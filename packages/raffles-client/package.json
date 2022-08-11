@@ -98,14 +98,15 @@
     "@storybook/testing-library": "^0.0.11",
     "@types/lodash": "^4.14.182",
     "@types/react": "^17",
+    "@zignaly-open/eslint-config-zignaly-react": "^0.1.2",
     "babel-plugin-named-exports-order": "^0.0.2",
     "eslint": "^8.16.0",
-    "@zignaly-open/eslint-config-zignaly-react": "^0.1.2",
     "eslint-loader": "^4.0.2",
     "lint-staged": "^13.0.3",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
     "prop-types": "^15.8.1",
+    "storybook-addon-apollo-client": "^4.0.12",
     "storybook-react-i18next": "^1.0.20",
     "webpack": "^5.73.0"
   }

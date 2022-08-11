@@ -75,13 +75,25 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
     MAX_WINNERS_DISPLAYED,
   );
 
+  const bids = auction.bids
+    .filter((b) => b.position <= auction.numberOfWinners)
+    .sort((a, b) => a.position - b.position);
+
   // Current user is winning but is too far in the list to be showed.
   // We'll hide enough winners above him to show him.
-  const isTruncated =
+  const isUserTruncated =
     // user winning
     auction.userBid?.position <= auction.numberOfWinners &&
     // outside of visible list
     auction.userBid?.position > MAX_WINNERS_DISPLAYED;
+
+  const isTruncated = bids.length > MAX_WINNERS_DISPLAYED;
+  const userBid = bids.find((b) => b.id === auction.userBid?.id);
+  const linesAdded =
+    2 +
+    (isTruncated && isUserTruncated && userBid?.position !== bids.length
+      ? 1
+      : 0);
 
   return (
     <Box width='100%'>
@@ -89,22 +101,28 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
         <Typography color='neutral200'>{t('user')}</Typography>
         <Typography color='neutral200'>{t('bid')}</Typography>
       </RankingHead>
-      {auction.bids
+      {bids
         .filter(
           (b) =>
             b.position <=
-            (isTruncated ? MAX_WINNERS_DISPLAYED - 2 : winnersDisplayed),
+            (isTruncated
+              ? MAX_WINNERS_DISPLAYED - linesAdded
+              : winnersDisplayed),
         )
-        .sort((a, b) => a.position - b.position)
         .map((bid: AuctionBidType) => (
           <RankingRow bid={bid} key={bid.id} />
         ))}
       {isTruncated ? (
         <>
           <Ellipsis />
+          {/* Current user */}
+          {isUserTruncated && userBid?.position !== auction.bids.length && (
+            <RankingRow bid={userBid} key={userBid.id} />
+          )}
+          {/* Last winner */}
           <RankingRow
-            bid={auction.bids[auction.bids.length - 1]}
-            key={auction.bids[auction.bids.length - 1].id}
+            bid={bids[bids.length - 1]}
+            key={bids[bids.length - 1].id}
           />
         </>
       ) : (
