@@ -53,7 +53,10 @@ const AuctionsRepository = () => {
         zignalySystemId,
         AUCTION_FEE,
         TransactionType.Fee,
-      );
+      ).then((tx) => {
+        if (!tx.transaction_id) throw new Error('Transaction error');
+        return tx;
+      });
 
       // better re-load from inside the transaction
       const lastAuctionBidPromise = AuctionBid.findOne({
@@ -68,8 +71,6 @@ const AuctionsRepository = () => {
         lastAuctionBidPromise,
       ]);
 
-      if (!tx.transaction_id) throw new Error('Transaction error');
-
       auction.expiresAt = this.calculateNewExpiryDate(auction);
 
       await AuctionBid.create({
@@ -79,9 +80,10 @@ const AuctionsRepository = () => {
         userId: user.id,
       });
 
-      await auction.save();
-
-      await verifyPositiveBalance(user.publicAddress);
+      await Promise.all([
+        auction.save(),
+        verifyPositiveBalance(user.publicAddress),
+      ]);
     } catch (error) {
       console.error(error);
       throw new Error('Could not create a bid');

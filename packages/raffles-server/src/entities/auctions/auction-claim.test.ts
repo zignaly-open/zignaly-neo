@@ -1,4 +1,3 @@
-/* eslint-disable prefer-const */
 import {
   waitUntilTablesAreCreated,
   wipeOut,
@@ -16,7 +15,7 @@ import { getUserBalance } from '../../cybavo';
 import AuctionsRepository from './repository';
 
 describe('Auction Claims', () => {
-  const mockPerformPayout = jest.spyOn(AuctionsRepository, 'performPayout');
+  const performPayout = jest.spyOn(AuctionsRepository, 'performPayout');
 
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
@@ -46,7 +45,7 @@ describe('Auction Claims', () => {
     expect(claimedAuction.userBid.isClaimed).toBe(true);
     expect(await getUserBalance(alice.publicAddress)).toBe('199.99');
 
-    expect(mockPerformPayout).toHaveBeenCalledTimes(1);
+    expect(performPayout).toHaveBeenCalledTimes(1);
   });
 
   it('should not let claim unwon auctions', async () => {
@@ -71,7 +70,7 @@ describe('Auction Claims', () => {
     expect(claimedAuction.userBid.isClaimed).toBe(false);
     expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
 
-    expect(mockPerformPayout).toHaveBeenCalledTimes(0);
+    expect(performPayout).toHaveBeenCalledTimes(0);
   });
 
   it('should not let claim multiple times', async () => {
@@ -85,7 +84,7 @@ describe('Auction Claims', () => {
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
     expect(await getUserBalance(alice.publicAddress)).toBe('199.99');
-    expect(mockPerformPayout).toHaveBeenCalledTimes(1);
+    expect(performPayout).toHaveBeenCalledTimes(1);
   });
 
   it('should not let claim unfinished auctions', async () => {
@@ -98,7 +97,7 @@ describe('Auction Claims', () => {
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
     expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
-    expect(mockPerformPayout).toHaveBeenCalledTimes(0);
+    expect(performPayout).toHaveBeenCalledTimes(0);
   });
 
   it('should not let claim auctions after max claim', async () => {
@@ -113,7 +112,7 @@ describe('Auction Claims', () => {
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
     expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
-    expect(mockPerformPayout).toHaveBeenCalledTimes(0);
+    expect(performPayout).toHaveBeenCalledTimes(0);
   });
 
   it('should not let claim without enough money', async () => {
@@ -126,7 +125,7 @@ describe('Auction Claims', () => {
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
     expect(await getUserBalance(alice.publicAddress)).toBe('99.99');
-    expect(mockPerformPayout).toHaveBeenCalledTimes(0);
+    expect(performPayout).toHaveBeenCalledTimes(0);
   });
 
   it('should not claim if cybavo transfer fails', async () => {
@@ -142,6 +141,6 @@ describe('Auction Claims', () => {
       body: { errors },
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
-    expect(mockPerformPayout).toHaveBeenCalledTimes(0);
+    expect(performPayout).toHaveBeenCalledTimes(0);
   });
 });

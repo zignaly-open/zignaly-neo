@@ -42,7 +42,7 @@ export class Auction extends Model {
   @Column(DataType.STRING)
   public twitter: string;
 
-  @Default(() => Date.now() + 1 * 1 * 3600_0)
+  @Default(() => Date.now() + 7 * 24 * 3600_000)
   @Column(DataType.DATE)
   public expiresAt!: Date;
 

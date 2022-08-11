@@ -1,6 +1,6 @@
 import pubsub from '../../pubsub';
 import { AUCTION_UPDATED } from './constants';
-import { Auction, AuctionBid } from './model';
+import { AuctionBid } from './model';
 import { ApolloContext, TransactionType } from '../../types';
 import { isBalanceSufficientForPayment, verifyPositiveBalance } from './util';
 import { Payout } from '../payouts/model';
@@ -25,25 +25,19 @@ export const resolvers = {
         throw new Error('User not found');
       }
       const auction = await AuctionsRepository.findAuction(user, id);
-      const createAuctionBidPromise = AuctionsRepository.createAuctionBid(
-        user,
-        auction,
-        id,
-      );
-      const getAuctionsPromise = AuctionsRepository.getAuctions(
+      await AuctionsRepository.createAuctionBid(user, auction, id);
+
+      const [updatedAuction] = await AuctionsRepository.getAuctions(
         auction.id,
         user,
       );
-      const [, [updatedAuction]] = await Promise.all([
-        createAuctionBidPromise,
-        getAuctionsPromise,
-      ]);
 
-      const subPromise = pubsub.publish(AUCTION_UPDATED, {
-        auctionUpdated: updatedAuction,
-      });
-      const balanceChangedPromise = emitBalanceChanged(user);
-      await Promise.all([subPromise, balanceChangedPromise]);
+      await Promise.all([
+        pubsub.publish(AUCTION_UPDATED, {
+          auctionUpdated: updatedAuction,
+        }),
+        emitBalanceChanged(user),
+      ]);
       return updatedAuction;
     },
 
@@ -51,54 +45,68 @@ export const resolvers = {
       if (!user) {
         throw new Error('User not found');
       }
-      const auction = await Auction.findByPk(id, {
-        include: AuctionsRepository.lastBidPopulation,
-      });
-      if (!auction) throw new Error('Auction not found');
-      if (+new Date(auction.expiresAt) > Date.now())
-        throw new Error('Auction not expired yet');
-      if (auction.maxClaimDate && +new Date(auction.maxClaimDate) < Date.now())
-        throw new Error('Can not claim after the max claim date');
+      const auction = await AuctionsRepository.findAuction(user, id).then(
+        (auction) => {
+          if (+new Date(auction.expiresAt) > Date.now())
+            throw new Error('Auction not expired yet');
+          if (
+            auction.maxClaimDate &&
+            +new Date(auction.maxClaimDate) < Date.now()
+          )
+            throw new Error('Can not claim after the max claim date');
+          return auction;
+        },
+      );
 
       // here we SPECIFICALLY do not pass the current user to not receive current user's bid
       // TODO: maybe we should refactor it to make this more explicit
-      const winningBids = await AuctionsRepository.getSortedAuctionBids(
+      const winningBidId = await AuctionsRepository.getSortedAuctionBids(
         id,
         false,
         undefined,
+      ).then(async (winningBids) => {
+        const winningBidId = winningBids.find(
+          (bid) => bid.user.id === user.id,
+        )?.id;
+        if (!winningBidId) {
+          throw new Error('Can not find the bid');
+        }
+        return winningBidId;
+      });
+
+      const winningBid = await AuctionBid.findByPk(winningBidId).then(
+        async (winningBid) => {
+          if (winningBid.claimTransactionId) {
+            // cheeky bastard
+            throw new Error('Already claimed');
+          }
+          if (
+            !isBalanceSufficientForPayment(
+              winningBid.value,
+              await getUserBalance(user.publicAddress),
+            )
+          ) {
+            throw new Error('Insufficient funds');
+          }
+          return winningBid;
+        },
       );
-      const winningBidId = winningBids.find(
-        (bid) => bid.user.id === user.id,
-      )?.id;
-      if (!winningBidId) throw new Error('Can not find the bid');
-      const winningBid = await AuctionBid.findByPk(winningBidId);
-
-      if (winningBid.claimTransactionId) {
-        // cheeky bastard
-        throw new Error('Already claimed');
-      }
-
-      if (
-        !isBalanceSufficientForPayment(
-          winningBid.value,
-          await getUserBalance(user.publicAddress),
-        )
-      )
-        throw new Error('Insufficient funds');
 
       try {
-        const tx = await internalTransfer(
+        await internalTransfer(
           user.publicAddress,
           zignalySystemId,
           winningBid.value,
           TransactionType.Payout,
-        );
+        ).then((tx) => {
+          if (!tx.transaction_id) throw new Error('Transaction error');
+          winningBid.claimTransactionId = tx.transaction_id;
+        });
 
-        if (!tx.transaction_id) throw new Error('Transaction error');
-
-        winningBid.claimTransactionId = tx.transaction_id;
-        await winningBid.save();
-        await verifyPositiveBalance(user.publicAddress);
+        await Promise.all([
+          winningBid.save(),
+          verifyPositiveBalance(user.publicAddress),
+        ]);
       } catch (error) {
         console.error(error);
         throw new Error('Could not make a claim');
@@ -110,14 +118,11 @@ export const resolvers = {
         publicAddress: user.publicAddress,
       });
 
-      await AuctionsRepository.performPayout(payout);
-
-      const [updatedAuction] = await AuctionsRepository.getAuctions(
-        auction.id,
-        user,
-      );
-      // no need to emit updated auctions here
-      await emitBalanceChanged(user);
+      const [, [updatedAuction]] = await Promise.all([
+        AuctionsRepository.performPayout(payout),
+        AuctionsRepository.getAuctions(auction.id, user),
+        emitBalanceChanged(user),
+      ]);
       return updatedAuction;
     },
   },
