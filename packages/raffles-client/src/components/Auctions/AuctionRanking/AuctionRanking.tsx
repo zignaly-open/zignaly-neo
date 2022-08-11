@@ -76,6 +76,7 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
   );
 
   const bids = auction.bids
+    // Remove user bid
     .filter((b) => b.position <= auction.numberOfWinners)
     .sort((a, b) => a.position - b.position);
 
@@ -89,11 +90,11 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
 
   const isTruncated = bids.length > MAX_WINNERS_DISPLAYED;
   const userBid = bids.find((b) => b.id === auction.userBid?.id);
+
+  // If we truncate the list to show the last winner or current user, that's 2 added lines. (counting the elipsis)
+  // If we need to show both of them, that's 3 lines.
   const linesAdded =
-    2 +
-    (isTruncated && isUserTruncated && userBid?.position !== bids.length
-      ? 1
-      : 0);
+    isTruncated && isUserTruncated && userBid?.position !== bids.length ? 3 : 2;
 
   return (
     <Box width='100%'>
