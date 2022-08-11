@@ -13,7 +13,7 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { setContext } from '@apollo/client/link/context';
 import { getToken } from './util/token';
-import { DAppProvider, Mumbai, Polygon } from '@usedapp/core';
+import { Config, DAppProvider, Mumbai, Polygon } from '@usedapp/core';
 import { OnboardingProvider } from './contexts/Onboarding';
 import { dark, ThemeProvider } from '@zignaly-open/ui';
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
@@ -60,10 +60,14 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-let config = {};
+let config: Config = {
+  // https://github.com/TrueFiEng/useDApp/issues/699
+  noMetamaskDeactivate: true,
+};
 
 if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
   config = {
+    ...config,
     networks: [Mumbai],
     readOnlyChainId: Mumbai.chainId,
     readOnlyUrls: {
@@ -74,6 +78,7 @@ if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
   };
 } else {
   config = {
+    ...config,
     networks: [Polygon],
     readOnlyChainId: Polygon.chainId,
     readOnlyUrls: {
@@ -86,7 +91,7 @@ if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
 
 const augmentedTheme = { ...dark, ...theme };
 
-function EntryPoint() {
+function EntryPoint () {
   return (
     <ThemeProvider theme={dark}>
       <ThemeProviderMui theme={augmentedTheme}>
