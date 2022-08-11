@@ -80,15 +80,17 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
     .filter((b) => b.position <= auction.numberOfWinners)
     .sort((a, b) => a.position - b.position);
 
+  const isTruncated = bids.length > MAX_WINNERS_DISPLAYED;
+
   // Current user is winning but is too far in the list to be showed.
   // We'll hide enough winners above him to show him.
+  // If we also already need to truncate the list to show the last winners,
+  // then we need to substract an addional line.
   const isUserTruncated =
     // user winning
     auction.userBid?.position <= auction.numberOfWinners &&
     // outside of visible list
-    auction.userBid?.position > MAX_WINNERS_DISPLAYED;
-
-  const isTruncated = bids.length > MAX_WINNERS_DISPLAYED;
+    auction.userBid?.position > MAX_WINNERS_DISPLAYED - (isTruncated ? 1 : 0);
   const userBid = bids.find((b) => b.id === auction.userBid?.id);
 
   // If we truncate the list to show the last winner or current user, that's 2 added lines. (counting the elipsis)

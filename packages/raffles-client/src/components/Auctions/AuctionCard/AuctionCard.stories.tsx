@@ -753,8 +753,8 @@ WinningWithManyWinnersTop.args = {
       },
     ],
     userBid: {
-      id: 4,
-      position: 4,
+      id: 3,
+      position: 3,
       value: '1.45',
     },
   },
