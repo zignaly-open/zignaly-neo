@@ -40,9 +40,6 @@ import DepositModal from "components/modals/MyAccount/DepositModal";
 import WithdrawModal from "components/modals/MyAccount/WithdrawModal";
 import ConnectWalletModal from "components/modals/ZigRaffle/ConnectWallet";
 
-// Forms
-import LoginForm from "./components/forms/LoginForm";
-
 // Icons
 export { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
 export { ReactComponent as CopyIcon } from "assets/icons/copy-icon.svg";
@@ -141,8 +138,6 @@ export {
   DepositModal,
   WithdrawModal,
   MinBalanceModal,
-  // Forms
-  LoginForm,
   /**
    * =-=-=-=-=-=-=-=
    *     Utils
