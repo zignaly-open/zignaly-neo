@@ -1,6 +1,7 @@
 import React from 'react';
 import Routes from './Routes';
 import theme from './theme';
+import * as Sentry from '@sentry/browser';
 import { dark, ThemeProvider } from '@zignaly-open/ui';
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
@@ -12,6 +13,18 @@ import { Provider } from 'react-redux';
 import GlobalStyle from './styles';
 
 const augmentedTheme = { ...dark, ...theme };
+
+if (
+  process.env.NODE_ENV === 'production' &&
+  process.env.REACT_APP_SENTRY_RELEASE &&
+  process.env.REACT_APP_SENTRY_DNS
+) {
+  Sentry.init({
+    dsn: process.env.REACT_APP_SENTRY_DNS,
+    debug: false,
+    release: process.env.REACT_APP_SENTRY_RELEASE,
+  });
+}
 
 function App() {
   return (
