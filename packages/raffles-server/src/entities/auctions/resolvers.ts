@@ -64,7 +64,7 @@ export const resolvers = {
         id,
         false,
         undefined,
-      ).then(async (winningBids) => {
+      ).then((winningBids) => {
         const winningBidId = winningBids.find(
           (bid) => bid.user.id === user.id,
         )?.id;
