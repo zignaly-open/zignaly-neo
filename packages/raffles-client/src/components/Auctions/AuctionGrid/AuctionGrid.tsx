@@ -4,21 +4,17 @@ import React, { useMemo, useState } from 'react';
 import { useQuery, useSubscription } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import Box from '@mui/material/Box';
-import Masonry from '@mui/lab/Masonry';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
-import AuctionCard from '../AuctionCard';
 import Loader from '../../common/Loader';
 import { getWinningLosingStatus } from '../AuctionCard/util';
 import { Select, Typography } from '@zignaly-open/ui';
 import { BIDS_SUBSCRIPTION, GET_AUCTIONS } from 'queries/auctions';
+import AuctionCard from '../AuctionCard/AuctionCard';
 
 const MasonryWrapper = styled(Box)`
   max-width: 1280px;
   margin: 30px auto;
-`;
-
-const StyledMasonry = styled(Masonry)`
-  margin: 0;
+  padding: 0 8px;
 `;
 
 const StyledSelect = styled(Select)`
@@ -137,16 +133,25 @@ const AuctionGrid: React.FC = () => {
           />
         </Grid>
       </Grid>
-      <Box padding={'40px 0 10px 40px'}>
+      <Box padding='40px 0 33px 28px'>
         <Typography variant='h3' weight='medium'>
           {filtered.length} {t('zigraffle-projects')}
         </Typography>
       </Box>
-      <StyledMasonry columns={{ xs: 1, sm: 1, md: 2 }} spacing={4}>
+      <Grid justifyContent='center' container spacing={4}>
         {filtered.map((x: AuctionType) => (
-          <AuctionCard key={x.id} auction={x} />
+          <Grid
+            item
+            key={x.id}
+            xs={12}
+            md={6}
+            display='flex'
+            justifyContent='center'
+          >
+            <AuctionCard auction={x} />
+          </Grid>
         ))}
-      </StyledMasonry>
+      </Grid>
     </MasonryWrapper>
   );
 };
