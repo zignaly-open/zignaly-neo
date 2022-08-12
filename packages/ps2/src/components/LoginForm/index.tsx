@@ -6,9 +6,14 @@ import { Form, Action } from './styles';
 import { LoginValidation } from './validations';
 import { useAuthenticate } from '../../features/auth/use';
 import { useNavigate } from 'react-router-dom';
-import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../routes';
+import {
+  ROUTE_DASHBOARD,
+  ROUTE_FORGOT_PASSWORD,
+  ROUTE_SIGNUP,
+} from '../../routes';
 import { Button, InputText, TextButton, Typography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
+import { LoginPayload } from '../../features/auth/types';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -16,7 +21,7 @@ const LoginForm: React.FC = () => {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm({
+  } = useForm<LoginPayload>({
     mode: 'onTouched',
     reValidateMode: 'onBlur',
     defaultValues: {
@@ -29,10 +34,14 @@ const LoginForm: React.FC = () => {
   const [{ loading: loggingIn }, authenticate] = useAuthenticate();
   const navigate = useNavigate();
 
+  const submit = (data: LoginPayload) => {
+    authenticate(data).then(() => navigate(ROUTE_DASHBOARD));
+  };
+
   return (
     <Box sx={{ width: '100%', maxWidth: 'sm' }}>
       <Typography variant={'h2'}>{t('log-in-title')}</Typography>
-      <Form onSubmit={handleSubmit(authenticate)}>
+      <Form onSubmit={handleSubmit(submit)}>
         <Controller
           name='email'
           control={control}
