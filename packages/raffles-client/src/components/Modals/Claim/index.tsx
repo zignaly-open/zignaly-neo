@@ -9,7 +9,7 @@ import CongratulationsModal from '../Congratulations';
 import DialogContainer from '../DialogContainer';
 import { Form } from './styles';
 import { ClaimModalProps } from './types';
-import { ShowToast } from 'components/Auctions/AuctionCard/BidButton';
+import { ShowToast } from 'util/showToast';
 
 const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const { t } = useTranslation(['claim', 'user-settings', 'global']);

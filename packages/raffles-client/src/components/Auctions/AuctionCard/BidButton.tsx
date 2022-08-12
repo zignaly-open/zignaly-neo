@@ -8,21 +8,9 @@ import BN from 'bignumber.js';
 import { getWinningLosingStatus } from './util';
 import useAuthenticate from '../../../hooks/useAuthenticate';
 import { onboardingContext } from '../../../contexts/Onboarding';
-import { Button, Toaster } from '@zignaly-open/ui';
+import { Button } from '@zignaly-open/ui';
 import { BID_AUCTION } from 'queries/auctions';
-import toast from 'react-hot-toast';
-import { ToasterProps } from '@zignaly-open/ui/lib/components/display/Toaster/types';
-
-export const ShowToast = async ({ variant, caption, size }: ToasterProps) => {
-  toast.custom(<Toaster variant={variant} caption={caption} size={size} />, {
-    id: 'toast',
-  });
-
-  const interval = setInterval(() => {
-    toast.remove('toast');
-    clearInterval(interval);
-  }, 4000);
-};
+import { ShowToast } from 'util/showToast';
 
 enum BidButtonState {
   NotLoggedIn,
