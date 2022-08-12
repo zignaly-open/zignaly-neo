@@ -43,11 +43,10 @@ const AuctionsRepository = () => {
     auction: Auction,
     id: number,
   ): Promise<void> {
+    if (+new Date(auction.expiresAt) <= Date.now()) {
+      throw new Error('Auction expired');
+    }
     try {
-      if (+new Date(auction.expiresAt) <= Date.now()) {
-        throw new Error('Auction expired');
-      }
-
       const txPromise = internalTransfer(
         user.publicAddress,
         zignalySystemId,

@@ -265,7 +265,7 @@ describe('Auctions', () => {
     const {
       body: { errors },
     } = await makeBid(auction, bobToken);
-    expect(errors[0].message).toBe('Could not create a bid');
+    expect(errors[0].message).toBe('Auction expired');
     const expiredAuction = await getFirstAuction(bobToken);
     expect(expiredAuction.bids.length).toBe(1);
     expect(expiredAuction.bids[0].user.username).toBe(alice.username);
