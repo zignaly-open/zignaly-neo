@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
 import Header from './components/Header';
-import { Routes as RouterRoutes, Route } from 'react-router-dom';
+import { Routes as RouterRoutes, Route, Navigate } from 'react-router-dom';
 import ProfitSharing from './views/ProfitSharing';
 import Dashboard from './views/Dashboard';
 import Staking from './views/Staking';
@@ -18,39 +18,36 @@ import {
   ROUTE_STAKING,
   ROUTE_ZIGPAD,
 } from './routes';
+import { useIsAuthenticated } from './features/auth/use';
 
-// import { Routes as RouterRoutes, Route, Navigate } from 'react-router-dom';
-// import Auctions from './components/Auctions/Auctions';
-// import DepositPage from './pages/DepositPage';
-// import Footer from './components/Footer/Footer';
-// import Header from './components/Header/Header';
-// import useCurrentUser from './hooks/useCurrentUser';
-// import Loader from './components/common/Loader';
-// import ProfilePage from './pages/ProfilePage';
-//
-// const AuthenticatedRoute = ({
-//   children,
-// }: {
-//   children: ReactElement;
-// }): JSX.Element => {
-//   const { user: currentUser, loading } = useCurrentUser();
-//   return (
-//     <>
-//       {loading && <Loader />}
-//       {!!currentUser?.id && <>{children}</>}
-//       {!loading && !currentUser?.id && <Navigate to='/' replace />}
-//     </>
-//   );
-// };
+const AuthenticatedWall: React.FC<{ children: ReactElement }> = ({
+  children,
+}) => {
+  const isAuthenticated = useIsAuthenticated();
+  return isAuthenticated ? children : <Navigate to={ROUTE_LOGIN} replace />;
+};
+
+const UnauthenticatedWall: React.FC<{ children: ReactElement }> = ({
+  children,
+}) => {
+  const isAuthenticated = useIsAuthenticated();
+  return isAuthenticated ? <Navigate to={ROUTE_DASHBOARD} replace /> : children;
+};
 
 function Routes() {
   return (
     <>
       <Header />
       <RouterRoutes>
-        <Route path={ROUTE_DASHBOARD}>
-          <Route index element={<Dashboard />} />
-        </Route>
+        <Route
+          path={ROUTE_DASHBOARD}
+          element={
+            <AuthenticatedWall>
+              <Dashboard />
+            </AuthenticatedWall>
+          }
+        />
+
         <Route path={ROUTE_PROFIT_SHARING}>
           <Route index element={<ProfitSharing />} />
         </Route>
@@ -60,10 +57,33 @@ function Routes() {
         <Route path={ROUTE_ZIGPAD}>
           <Route index element={<ProfitSharing />} />
         </Route>
+
         <Route path={ROUTE_HELP} element={<TradingServices />} />
-        <Route path={ROUTE_LOGIN} element={<Login />} />
-        <Route path={ROUTE_SIGNUP} element={<Signup />} />
-        <Route path={ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />
+
+        <Route
+          path={ROUTE_LOGIN}
+          element={
+            <UnauthenticatedWall>
+              <Login />
+            </UnauthenticatedWall>
+          }
+        />
+        <Route
+          path={ROUTE_SIGNUP}
+          element={
+            <UnauthenticatedWall>
+              <Signup />
+            </UnauthenticatedWall>
+          }
+        />
+        <Route
+          path={ROUTE_FORGOT_PASSWORD}
+          element={
+            <UnauthenticatedWall>
+              <ForgotPassword />
+            </UnauthenticatedWall>
+          }
+        />
       </RouterRoutes>
     </>
   );

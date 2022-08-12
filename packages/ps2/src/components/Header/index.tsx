@@ -15,9 +15,11 @@ import {
   ROUTE_ZIGPAD,
 } from '../../routes';
 import { Link } from 'react-router-dom';
+import { useIsAuthenticated } from '../../features/auth/use';
 
 const Header: React.FC = () => {
   const { t } = useTranslation('common');
+  const isLoggedIn = useIsAuthenticated();
   return (
     <ZigHeader
       leftElements={[
@@ -37,6 +39,7 @@ const Header: React.FC = () => {
         </HeaderLinksContainer>,
       ]}
       rightElements={[
+        <>{isLoggedIn ? 1 : 0}</>,
         <IconButton
           key='user'
           dropDownOptions={{ alignment: 'right', position: 'static' }}
