@@ -17,7 +17,7 @@ const ProjectDetailsModal = ({
 }: ProjectDetailsModalProps) => {
   const { t } = useTranslation('auction');
   return (
-    <DialogContainer title={title} {...props}>
+    <DialogContainer title={title} maxWidth='sm' fullWidth={true} {...props}>
       <Column>
         <Typography variant='body1' marginTop={18} color='neutral200'>
           {description}
