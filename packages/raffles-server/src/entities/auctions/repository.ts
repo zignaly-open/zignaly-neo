@@ -6,7 +6,7 @@ import axios from 'axios';
 import { random } from 'lodash';
 import { sequelize } from '../../db';
 import { Includeable, QueryTypes } from 'sequelize';
-import { zignalySystemId, payoutSpreadsheetUrl } from '../../../config';
+import { zignalySystemId, payoutSpreadsheetUrl, isTest } from '../../../config';
 import { internalTransfer } from '../../cybavo';
 import { ContextUser, TransactionType } from '../../types';
 import { Payout } from '../payouts/model';
@@ -182,6 +182,7 @@ const AuctionsRepository = () => {
       publicAddress: payout.publicAddress,
       id: payout.userId,
     };
+    if (isTest) return;
     // TODO: implement error handling. There should be some enum for possible error/success states
     await axios
       .post(payoutSpreadsheetUrl, payload)
