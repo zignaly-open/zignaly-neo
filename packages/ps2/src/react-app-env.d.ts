@@ -2,6 +2,14 @@
 
 import ThemeZig from '@zignaly-open/ui/lib/theme/theme';
 
+declare global {
+  interface Window {
+    dataLayer: {
+      push: (payload: unknown) => void
+    }
+  }
+}
+
 declare module '*.svg' {
   /**
    * Use `any` to avoid conflicts with

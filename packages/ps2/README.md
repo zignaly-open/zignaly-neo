@@ -17,7 +17,14 @@ it has
 already been published in the neo2 (do not confuse with neo<sup>2</sup>) but primarily because any person with a half
 functioning brain and basic dev skills can reverse-engineer the code to get this value.
 
+* `REACT_APP_SENTRY_DNS` - Sentry DNS
+* `REACT_APP_ENABLE_TRACKING` - Enables tracking, but individual keys need to be configured anyways. Omit it from the
+  .env to disable
+* `REACT_APP_SEGMENT_KEY` - Segment write key
+* `REACT_APP_SEGMENT_NAME` - Segment app name
+* `REACT_APP_LIVE_SESSION_TRACK_ID` - Live session track ID
 * `REACT_APP_BASE_API` - base API, as you may have guessed from the name lol
+* `REACT_APP_GTM_ID` - Google Tag Manager id
 * `REACT_APP_GOOGLE_CAPTCHA_TOKEN` - captcha key
 
 ⚠️ **WARNING!** Unless you want to spend time trying to figure out why the hell the backend responds with a captcha
