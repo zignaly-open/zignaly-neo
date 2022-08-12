@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { trackEndSession, trackNewSession } from '../../util/analytics';
 import { endLiveSession, startLiveSession } from '../../util/liveSession';
 import { RootState } from '../store';
+import { useTranslation } from 'react-i18next';
 
 export const useAuthenticate = (): AsyncFnReturn<
   (payload: LoginPayload) => Promise<void>
@@ -17,6 +18,7 @@ export const useAuthenticate = (): AsyncFnReturn<
   const performLogout = useLogout();
   const [loadSession] = useLazySessionQuery();
   const [loadUser] = useLazyUserQuery();
+  const { i18n } = useTranslation();
 
   const { executeRecaptcha } = useGoogleReCaptcha();
 
@@ -77,6 +79,7 @@ export const useAuthenticate = (): AsyncFnReturn<
         dispatch(setUser(userData));
         startLiveSession(userData);
         trackNewSession(userData, SessionsTypes.Login);
+        i18n.changeLanguage(userData.locale);
 
         // fetch toggles const togglesAndData = yield select(recomposeTogglesAndData);
         // setLocale  state.userProfileSettings.data?.locale

@@ -13,13 +13,12 @@ import {
   ROUTE_PROFIT_SHARING,
   ROUTE_STAKING,
   ROUTE_ZIGPAD,
-} from '../../routes';
+} from '../../../routes';
 import { Link } from 'react-router-dom';
-import { useIsAuthenticated } from '../../features/auth/use';
+import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
 
 const Header: React.FC = () => {
   const { t } = useTranslation('common');
-  const isLoggedIn = useIsAuthenticated();
   return (
     <ZigHeader
       leftElements={[
@@ -37,9 +36,9 @@ const Header: React.FC = () => {
             {t('navigation-menu.zigpad')}
           </NavigationLink>
         </HeaderLinksContainer>,
+        <ExtraNavigationDropdown key={'extra-nav'} />,
       ]}
       rightElements={[
-        <>{isLoggedIn ? 1 : 0}</>,
         <IconButton
           key='user'
           dropDownOptions={{ alignment: 'right', position: 'static' }}
