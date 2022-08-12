@@ -27,12 +27,16 @@ const RankingHead = styled('div')`
   }
 `;
 
-const RankingRowContainer = styled(Box)<{ isMe?: boolean }>(
-  ({ isMe, theme }) => ({
+const RankingRowContainer = styled(Box)<{ isMe?: boolean; hide?: boolean }>(
+  ({ isMe, hide, theme }) => ({
     display: 'flex',
     color: isMe ? theme.highlighted : theme.neutral100,
     padding: '6px 0',
     borderBottom: '1px solid #222249',
+    [theme.breakpoints.up('md')]: {
+      // Placeholder row to keep cards the same height, when 2 side by side, 1 having less than 7 rows.
+      visibility: hide ? 'hidden' : 'visible',
+    },
   }),
 );
 
@@ -130,9 +134,9 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
         </>
       ) : (
         Array.from(
-          { length: winnersDisplayed - auction.bids.length },
+          { length: MAX_WINNERS_DISPLAYED - auction.bids.length },
           (_, i) => (
-            <RankingRowContainer key={i}>
+            <RankingRowContainer key={i} hide={i > auction.numberOfWinners}>
               <Rank>
                 <Typography>{auction.bids.length + i + 1}.</Typography>
               </Rank>
