@@ -1,9 +1,7 @@
 import {
   Header as ZigHeader,
   HeaderLinksContainer,
-  IconButton,
   BrandImage,
-  UserIcon,
 } from '@zignaly-open/ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -16,6 +14,7 @@ import {
 } from '../../../routes';
 import { Link } from 'react-router-dom';
 import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
+import AccountMenu from '../AccountMenu';
 
 const Header: React.FC = () => {
   const { t } = useTranslation('common');
@@ -38,16 +37,7 @@ const Header: React.FC = () => {
         </HeaderLinksContainer>,
         <ExtraNavigationDropdown key={'extra-nav'} />,
       ]}
-      rightElements={[
-        <IconButton
-          key='user'
-          dropDownOptions={{ alignment: 'right', position: 'static' }}
-          icon={<UserIcon color='#65647E' />}
-          // eslint-disable-next-line i18next/no-literal-string
-          renderDropDown={<div>DropDown Container</div>}
-          variant='flat'
-        />,
-      ]}
+      rightElements={[<AccountMenu key={'account'} />]}
     />
   );
 };

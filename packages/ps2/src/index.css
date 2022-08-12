@@ -6,9 +6,11 @@ body {
     background-image: url("/background-dark.png");
     background-repeat: no-repeat;
     background-size: cover;
+    background-position: center center;
     font-family: 'Avenir Next', sans-serif;
     font-size: 100%;
     color: #fff;
+    min-height: 100vh;
 }
 
 ::-webkit-scrollbar {

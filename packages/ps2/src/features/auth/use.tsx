@@ -1,4 +1,4 @@
-import { LoginPayload, SessionsTypes } from './types';
+import { LoginPayload, SessionsTypes, UserData } from './types';
 import { useLazySessionQuery, useLazyUserQuery, useLoginMutation } from './api';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { useAsyncFn } from 'react-use';
@@ -105,4 +105,10 @@ export function useLogout(): () => void {
 export function useIsAuthenticated(): boolean {
   const user = useSelector((state: RootState) => state.auth)?.user;
   return !!user;
+}
+
+export function useUser(): UserData | Partial<UserData> {
+  return (
+    useSelector((state: RootState) => state.auth)?.user || ({} as UserData)
+  );
 }
