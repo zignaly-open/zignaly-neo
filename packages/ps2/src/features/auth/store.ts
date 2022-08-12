@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { AuthState, LoginPayload } from './types';
+import { AuthState, UserData } from './types';
 
-const initialState: AuthState = {
-  isLoggedIn: false,
-};
+const initialState: AuthState = {};
 
 // Redux Toolkit allows us to write "mutating" logic in reducers. It
 // doesn't actually mutate the state because it uses the Immer library,
@@ -17,13 +15,20 @@ export const authSlice = createSlice({
     logout: () => {
       return initialState;
     },
-    authenticate: (state, action: PayloadAction<LoginPayload>) => {
-      state.isLoggedIn = !!action.payload.email;
+    setAccessToken: (state, action: PayloadAction<string>) => {
+      state.accessToken = action.payload;
+    },
+    setSessionExpiryDate: (state, action: PayloadAction<number>) => {
+      state.sessionExpiryDate = new Date(action.payload * 1000);
+    },
+    setUser: (state, action: PayloadAction<UserData>) => {
+      state.user = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { logout, authenticate } = authSlice.actions;
+export const { logout, setAccessToken, setUser, setSessionExpiryDate } =
+  authSlice.actions;
 
 export default authSlice.reducer;

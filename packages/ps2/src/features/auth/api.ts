@@ -1,20 +1,14 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-// import { RootState } from '../store';
-import { LoginFullPayload, LoginResponse } from './types';
+import { createApi } from '@reduxjs/toolkit/query/react';
+import {
+  LoginFullPayload,
+  LoginResponse,
+  SessionResponse,
+  UserData,
+} from './types';
+import baseQuery from '../baseQuery';
 
 export const api = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: process.env.REACT_APP_BASE_API,
-    // prepareHeaders: (headers, { getState }) => {
-    //   // By default, if we have a token in the store, let's use that for authenticated requests
-    //   // TODO
-    //   const token = (getState() as RootState).auth.isLoggedIn;
-    //   if (token) {
-    //     headers.set('authorization', `Bearer ${token}`);
-    //   }
-    //   return headers;
-    // },
-  }),
+  baseQuery,
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, LoginFullPayload>({
       query: (credentials) => ({
@@ -23,7 +17,30 @@ export const api = createApi({
         body: credentials,
       }),
     }),
+
+    verifyCode: builder.mutation<
+      LoginResponse,
+      { reason: string; code: string }
+    >({
+      query: ({ code, reason }) => ({
+        url: `/user/verify_code/${reason}`,
+        method: 'POST',
+        body: { code },
+      }),
+    }),
+
+    user: builder.query<UserData, void>({
+      query: () => ({
+        url: 'user',
+      }),
+    }),
+
+    session: builder.query<SessionResponse, void>({
+      query: () => ({
+        url: 'user/session',
+      }),
+    }),
   }),
 });
 
-export const { useLoginMutation } = api;
+export const { useLoginMutation, useLazyUserQuery, useLazySessionQuery } = api;
