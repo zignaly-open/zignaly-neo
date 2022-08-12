@@ -1,4 +1,5 @@
 import Analytics, { AnalyticsInstance } from 'analytics';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore missing typedefs
 import segmentPlugin from '@analytics/segment';
 import * as Sentry from '@sentry/browser';
