@@ -51,7 +51,13 @@ function InputText(
         <Typography variant="h3" weight="regular" color="neutral200">
           {label}
         </Typography>
-        {labelAction && <TextButton href={labelAction.href} caption={labelAction.text} />}
+        {labelAction && (
+          <TextButton
+            href={labelAction.href}
+            onClick={labelAction.onClick}
+            caption={labelAction.text}
+          />
+        )}
       </Label>
       <InputContainer maxHeight={maxHeight} minHeight={minHeight} withoutBorder={withoutBorder}>
         <Side cursor="auto">

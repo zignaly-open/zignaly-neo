@@ -2,7 +2,9 @@
   "error": {
     "9000": "Missing exchange account in your account, please contact with support.",
     "9001": "This field is required",
+    "required": "This field is required",
     "9002": "Please enter a valid email",
+    "email-invalid": "Please enter a valid email",
     "9003": "This field is required",
     "occured": "Error Occured",
     "noidea": "Something went wrong!",

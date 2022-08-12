@@ -48,6 +48,7 @@ src
 ├── components                      # Shared components used across the app
 │   └── ComponentName 
 │       ├── index.tsx               # actual component with export default
+│       ├── validations.ts          # if it's a form, yup resolvers
 │       ├── styles.tsx              # styled components
 │       ├── types.tsx               # type definitions
 │       └── atoms.tsx               # some tiny react components unworthy to be placed in src*=/components

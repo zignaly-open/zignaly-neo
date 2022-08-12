@@ -1,11 +1,12 @@
 import React from 'react';
-import ComingSoon from '../../components/ComingSoon';
+import CenteredContainer from '../../components/CenteredContainer';
+import LoginForm from '../../components/LoginForm';
 
 const Login: React.FC = () => {
   return (
-    <>
-      <ComingSoon />
-    </>
+    <CenteredContainer>
+      <LoginForm />
+    </CenteredContainer>
   );
 };
 

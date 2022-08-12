@@ -6,9 +6,11 @@ import Dashboard from './views/Dashboard';
 import Staking from './views/Staking';
 import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
+import ForgotPassword from './views/Auth/ForgotPassword';
 import TradingServices from './views/Help/TradingServices';
 import {
   ROUTE_DASHBOARD,
+  ROUTE_FORGOT_PASSWORD,
   ROUTE_HELP,
   ROUTE_LOGIN,
   ROUTE_PROFIT_SHARING,
@@ -61,6 +63,7 @@ function Routes() {
         <Route path={ROUTE_HELP} element={<TradingServices />} />
         <Route path={ROUTE_LOGIN} element={<Login />} />
         <Route path={ROUTE_SIGNUP} element={<Signup />} />
+        <Route path={ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />
       </RouterRoutes>
     </>
   );
