@@ -2,7 +2,7 @@ import { useMutation } from '@apollo/client';
 import { Box } from '@mui/material';
 import useCurrentUser from 'hooks/useCurrentUser';
 import { CLAIM } from 'queries/auctions';
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, ErrorMessage, InputText, Typography } from '@zignaly-open/ui';
 import CongratulationsModal from '../Congratulations';
@@ -20,22 +20,25 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const [success, setSuccess] = useState(false);
   const [claim, { loading }] = useMutation(CLAIM);
 
-  const submit = async (e: FormEvent) => {
-    e.preventDefault();
-    try {
-      claim({
-        variables: {
-          id: auction.id,
-        },
-      }).catch((err) => {
-        // TODO: better alerts
-        alert(err.toString());
-      });
-      setSuccess(true);
-    } catch (_) {
-      setErrorMessage('Something went wrong');
-    }
-  };
+  const submit = useCallback(
+    async (e: FormEvent) => {
+      e.preventDefault();
+
+      try {
+        await claim({
+          variables: {
+            id: auction.id,
+          },
+        }).catch((err) => {
+          throw err;
+        });
+        setSuccess(true);
+      } catch (err) {
+        setErrorMessage(err.toString());
+      }
+    },
+    [auction],
+  );
 
   if (success) {
     return <CongratulationsModal auction={auction} {...props} />;
@@ -100,7 +103,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
           />
         </Box>
         {errorMessage && (
-          <Box mt='9px'>
+          <Box mt='9px' display='flex' justifyContent='center'>
             <ErrorMessage text={errorMessage} />
           </Box>
         )}

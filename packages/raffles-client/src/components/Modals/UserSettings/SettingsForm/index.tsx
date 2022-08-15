@@ -18,6 +18,7 @@ import { UserSettingsValidation } from 'util/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Form } from './styles';
 import { UserSettingsModalProps } from '../types';
+import { GET_AUCTIONS } from 'queries/auctions';
 
 const SettingsForm = ({
   username = '',
@@ -27,8 +28,12 @@ const SettingsForm = ({
   // TODO: Add submit of userName and discordName to backend and avatar update
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const [errorMessage, setErrorMessage] = useState('');
-  const [updateUsername, { loading: updatingProfile }] =
-    useMutation(CHANGE_PROFILE);
+  const [updateUsername, { loading: updatingProfile }] = useMutation(
+    CHANGE_PROFILE,
+    {
+      refetchQueries: [{ query: GET_AUCTIONS }],
+    },
+  );
   const {
     handleSubmit,
     control,

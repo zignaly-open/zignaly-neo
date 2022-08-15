@@ -2,17 +2,16 @@ import { css, styled } from '@mui/material/styles';
 import { AmountContainer } from 'components/common/AmountContainer';
 import { PriceLabel as PriceLabelZig } from '@zignaly-open/ui';
 
-export const Item = styled('div')(({ theme }) => ({
-  background: 'rgba(37, 35, 57, 0.4)',
-  border: '1px solid rgba(193, 193, 200, 0.4)',
-  borderRadius: '16px',
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  [theme.breakpoints.up('lg')]: {
-    width: '640px',
-  },
-}));
+export const Item = styled('div')`
+  background: rgba(37, 35, 57, 0.4);
+  border: 1px solid rgba(193, 193, 200, 0.4);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 640px;
+`;
 
 export const CardHeader = styled('div', {
   shouldForwardProp: (prop) => prop !== 'isColumn',
@@ -70,7 +69,7 @@ export const CardColumn = styled('div')`
   align-items: center;
   flex-direction: column;
   flex: 1;
-  min-width: 265px;
+  min-width: 292px;
 `;
 
 export const CardBody = styled('div')`

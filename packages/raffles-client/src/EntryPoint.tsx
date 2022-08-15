@@ -19,6 +19,7 @@ import { dark, ThemeProvider } from '@zignaly-open/ui';
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
 import { BrowserRouter } from 'react-router-dom';
+import { Toaster as ToastProvider } from 'react-hot-toast';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
@@ -101,6 +102,7 @@ function EntryPoint() {
               <OnboardingProvider>
                 <ModalProvider>
                   <Routes />
+                  <ToastProvider position='top-right' />
                 </ModalProvider>
               </OnboardingProvider>
             </BrowserRouter>

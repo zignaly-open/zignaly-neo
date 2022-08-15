@@ -22,6 +22,7 @@ import {
   CardActions,
   CardHeader,
 } from './styles';
+import { useTimeout } from 'react-use';
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
@@ -31,7 +32,12 @@ const AuctionCard: React.FC<{
   const { showModal } = useModal();
   const leftRef = useRef(null);
   const rightRef = useRef(null);
+  const renderDate = useRef(+new Date());
   const [isColumn, setIsColumn] = useState(false);
+
+  const [hasJustExpired] = useTimeout(
+    +new Date(auction.expiresAt) - renderDate.current,
+  );
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -101,7 +107,10 @@ const AuctionCard: React.FC<{
                 caption={t(auction.userBid.isClaimed ? 'claimed' : 'claim-now')}
               />
             ) : (
-              <BidButton auction={auction} isActive={isActive} />
+              <BidButton
+                auction={auction}
+                isActive={isActive && !hasJustExpired}
+              />
             )}
           </CardActions>
         </CardBody>
