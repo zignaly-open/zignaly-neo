@@ -4,6 +4,7 @@
     "data": {
       "id": 1,
       "imageUrl": "/images/4.jpg",
+      "expiresAt": "2022-10-05T13:30:00.511Z",
       "title": "Best Auction EVER",
       "description": "Bid now or die regretting",
       "monetaryValue": "100 BTC!!11",
