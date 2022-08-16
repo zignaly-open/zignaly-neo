@@ -27,7 +27,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
   const { account, activateBrowserWallet, chainId, switchNetwork } =
     useEthers();
 
-  const balance = useTokenBalance(token, account);
+  const balance = useTokenBalance(token, account, { refresh: 'everyBlock' });
   const { isLoading, isError, transfer, isSuccess } = useContract({
     address: address,
   });
