@@ -1,4 +1,10 @@
 import { gql } from '@apollo/client';
+import { UserType } from '@zignaly-open/raffles-shared/types';
+
+export interface GetCurrentUserResponseModel {
+  loading: boolean;
+  data?: { me: UserType };
+}
 
 export const GET_AUCTIONS = gql`
   query singleAuction($id: ID) {
