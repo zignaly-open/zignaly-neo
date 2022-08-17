@@ -21,10 +21,10 @@ enum BidButtonState {
 }
 
 // Smarted button in the history of buttons, maybe ever
-const BidButton: React.FC<{ auction: AuctionType; isActive: boolean }> = ({
-  auction,
-  isActive,
-}) => {
+const BidButton: React.FC<{
+  auction: AuctionType;
+  isActive: boolean;
+}> = ({ auction, isActive }) => {
   const [bid, { loading: isBidding }] = useMutation(BID_AUCTION);
   const { balance } = useBalance();
   const { user } = useCurrentUser();

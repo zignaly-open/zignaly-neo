@@ -32,6 +32,13 @@ export const ElementsContainer = styled.div`
   padding: 0;
 `;
 
+export const CaptionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+`;
+
 export const LoaderContainer = styled.div`
   position: absolute;
   left: 0;
