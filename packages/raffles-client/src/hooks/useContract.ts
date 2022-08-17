@@ -1,6 +1,6 @@
 import { useContractFunction } from '@usedapp/core';
 import { useCallback } from 'react';
-import contract from 'contract';
+import contract from '../contract';
 import { parseEther } from 'ethers/lib/utils';
 
 export default function useContract({ address }: { address: string }) {
