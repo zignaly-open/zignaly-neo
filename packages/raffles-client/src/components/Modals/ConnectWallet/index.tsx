@@ -11,7 +11,7 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
   const authenticate = useAuthenticate();
   const { t } = useTranslation('connect-wallet');
 
-  const connect = (e: React.MouseEvent<HTMLButtonElement>) => {
+  const connect = async (e: React.MouseEvent<HTMLButtonElement>) => {
     authenticate().then(() => props.onClose(e, 'escapeKeyDown'));
   };
 
@@ -27,7 +27,7 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
           minWidth={255}
           size='large'
           caption={t('metamask')}
-          onClick={connect}
+          onClick={(e) => connect(e)}
           leftElement={<MetaMaskLogo />}
         />
       </ButtonContainer>
