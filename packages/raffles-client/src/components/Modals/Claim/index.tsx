@@ -2,14 +2,14 @@ import { useMutation } from '@apollo/client';
 import { Box } from '@mui/material';
 import useCurrentUser from 'hooks/useCurrentUser';
 import { CLAIM } from 'queries/auctions';
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, ErrorMessage, InputText, Typography } from '@zignaly-open/ui';
+import { Button, InputText, Typography } from '@zignaly-open/ui';
 import CongratulationsModal from '../Congratulations';
 import DialogContainer from '../DialogContainer';
 import { Form } from './styles';
 import { ClaimModalProps } from './types';
-import { ShowToast } from 'util/showToast';
+import { showToast } from 'util/showToast';
 
 const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const { t } = useTranslation(['claim', 'user-settings', 'global']);
@@ -17,25 +17,28 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
     user: { discordName, publicAddress },
   } = useCurrentUser();
 
-  const [errorMessage, setErrorMessage] = useState('');
   const [success, setSuccess] = useState(false);
   const [claim, { loading }] = useMutation(CLAIM);
 
-  const submit = async (e: FormEvent) => {
-    e.preventDefault();
-    try {
-      claim({
-        variables: {
-          id: auction.id,
-        },
-      }).catch((err) => {
-        ShowToast({ size: 'large', variant: 'error', caption: err });
-      });
-      setSuccess(true);
-    } catch (_) {
-      setErrorMessage('Something went wrong');
-    }
-  };
+  const submit = useCallback(
+    async (e: FormEvent) => {
+      e.preventDefault();
+
+      try {
+        await claim({
+          variables: {
+            id: auction.id,
+          },
+        }).catch((err) => {
+          throw err;
+        });
+        setSuccess(true);
+      } catch (err) {
+        showToast({ size: 'large', variant: 'error', caption: err.message });
+      }
+    },
+    [auction],
+  );
 
   if (success) {
     return <CongratulationsModal auction={auction} {...props} />;
@@ -99,11 +102,6 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
             disabled={!discordName}
           />
         </Box>
-        {errorMessage && (
-          <Box mt='9px'>
-            <ErrorMessage text={errorMessage} />
-          </Box>
-        )}
       </Form>
     </DialogContainer>
   );
