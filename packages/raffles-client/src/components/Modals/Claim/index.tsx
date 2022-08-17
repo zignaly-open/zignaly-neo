@@ -9,7 +9,7 @@ import CongratulationsModal from '../Congratulations';
 import DialogContainer from '../DialogContainer';
 import { Form } from './styles';
 import { ClaimModalProps } from './types';
-import { ShowToast } from 'util/showToast';
+import { showToast } from 'util/showToast';
 
 const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const { t } = useTranslation(['claim', 'user-settings', 'global']);
@@ -29,7 +29,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
           id: auction.id,
         },
       }).catch((err) => {
-        ShowToast({ size: 'large', variant: 'error', caption: err });
+        showToast({ size: 'large', variant: 'error', caption: err });
       });
       setSuccess(true);
     } catch (_) {

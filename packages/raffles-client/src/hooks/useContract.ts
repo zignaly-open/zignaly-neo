@@ -14,9 +14,7 @@ export default function useContract({ address }: { address: string }) {
 
   const transfer = useCallback(
     (transferAmount: string) =>
-      ['Success'].includes(state?.status)
-        ? () => {}
-        : send(address, parseEther(transferAmount)),
+      isSuccess ? () => {} : send(address, parseEther(transferAmount)),
     [state?.status, address],
   );
 

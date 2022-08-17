@@ -69,7 +69,19 @@ let config: Config = {
 if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
   config = {
     ...config,
-    networks: [Mumbai],
+    networks: [
+      {
+        ...Mumbai,
+        // rpcUrl: 'https://rpc-mumbai.matic.today/',
+        rpcUrl: 'https://matic-mumbai.chainstacklabs.com',
+        blockExplorerUrl: 'https://mumbai.polygonscan.com',
+        nativeCurrency: {
+          name: 'MATIC Token',
+          symbol: 'MATIC',
+          decimals: 18,
+        },
+      },
+    ],
     readOnlyChainId: Mumbai.chainId,
     readOnlyUrls: {
       [Mumbai.chainId]:
@@ -80,7 +92,19 @@ if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
 } else {
   config = {
     ...config,
-    networks: [Polygon],
+    networks: [
+      {
+        ...Polygon,
+        chainName: 'Polygon Mainnet',
+        rpcUrl: 'https://polygon-rpc.com/',
+        blockExplorerUrl: 'https://polygonscan.com',
+        nativeCurrency: {
+          name: 'MATIC Token',
+          symbol: 'MATIC',
+          decimals: 18,
+        },
+      },
+    ],
     readOnlyChainId: Polygon.chainId,
     readOnlyUrls: {
       [Polygon.chainId]:

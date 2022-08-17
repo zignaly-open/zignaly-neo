@@ -1,41 +1,20 @@
-import { TransactionStatus, useContractFunction } from '@usedapp/core';
-import { BigNumber } from 'ethers';
 import useContract from './useContract';
-
-interface TransactionReceipt {
-  to: string;
-  from: string;
-  contractAddress: string;
-  transactionIndex: number;
-  root?: string;
-  gasUsed: BigNumber;
-  logsBloom: string;
-  blockHash: string;
-  transactionHash: string;
-  blockNumber: number;
-  confirmations: number;
-  cumulativeGasUsed: BigNumber;
-  effectiveGasPrice: BigNumber;
-  byzantium: boolean;
-  type: number;
-  status?: number;
-}
-
-jest.mock('@usedapp/core', () => ({
-  useContractFunction: jest.fn(),
-}));
+import { renderHook } from '@testing-library/react-hooks';
 
 jest.mock('../contract', () => jest.fn());
+jest.mock('@usedapp/core/src/hooks/useContractFunction', () => ({}));
 
 describe('useContract', () => {
-  const status: TransactionStatus = { status: 'Fail' };
-  status.status = 'Success';
   describe('transfer', () => {
-    it('return successfully', () => {
-      (useContractFunction as jest.Mock).mockReturnValueOnce(status);
-      expect(useContract({ address: '' }).transfer('')).toEqual(
-        new Promise<TransactionReceipt>(jest.fn()),
-      );
+    it('returns promise', () => {
+      const { result } = renderHook(() => useContract({ address: 'abc' }));
+      expect(result.current.transfer('10')).toEqual(new Promise(jest.fn()));
+    });
+
+    it('return successfully with on status.success', async () => {
+      const { result } = renderHook(() => useContract({ address: 'abc' }));
+      await result.current.transfer('10');
+      expect(result.current.isLoading).toEqual(true);
     });
   });
 });
