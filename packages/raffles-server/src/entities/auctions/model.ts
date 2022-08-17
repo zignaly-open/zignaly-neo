@@ -78,6 +78,9 @@ export class Auction extends Model {
 
   @Column
   public imageUrl: string;
+
+  @Column
+  public comingSoon: boolean;
 }
 
 @Table
