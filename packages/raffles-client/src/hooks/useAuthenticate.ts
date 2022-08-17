@@ -55,34 +55,24 @@ export default function useAuthenticate(): () => Promise<void> {
 
     const signature = await library.getSigner().signMessage(messageToSign);
     if (!chainId) {
-      try {
-        await switchNetwork(
-          process.env.REACT_APP_USE_MUMBAI_CHAIN
-            ? Mumbai.chainId
-            : Polygon.chainId,
-        );
-      } catch (_) {
-        throw new Error(
-          'You need to be connected to the Polygon network to continue',
-        );
-      }
+      await switchNetwork(
+        process.env.REACT_APP_USE_MUMBAI_CHAIN
+          ? Mumbai.chainId
+          : Polygon.chainId,
+      );
     }
     if (chainId) {
-      try {
-        const {
-          data: {
-            authenticate: { accessToken },
-          },
-        } = await authenticate({
-          variables: {
-            publicAddress: account.toLocaleLowerCase(),
-            signature,
-          },
-        });
-        setToken(accessToken);
-      } catch (e) {
-        throw e;
-      }
+      const {
+        data: {
+          authenticate: { accessToken },
+        },
+      } = await authenticate({
+        variables: {
+          publicAddress: account.toLocaleLowerCase(),
+          signature,
+        },
+      });
+      setToken(accessToken);
     } else {
       deactivate();
     }
