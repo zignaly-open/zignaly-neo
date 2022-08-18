@@ -7,6 +7,7 @@ import { EmailVerifyFormProps } from './types';
 function EmailVerifyForm({
   onSubmit,
   onReSendCode,
+  clearOnError,
   isLoading,
   error = null,
   isReSendLoading = false,
@@ -22,6 +23,7 @@ function EmailVerifyForm({
           fields={6}
           error={error}
           loading={isLoading}
+          clearOnError={clearOnError}
           onComplete={onSubmit}
           autoFocus={false}
         />

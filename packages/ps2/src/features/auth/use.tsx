@@ -1,6 +1,15 @@
 import { useCallback, useState } from 'react';
 import { LoginPayload, SessionsTypes, UserData } from './types';
-import { useLazySessionQuery, useLazyUserQuery, useLoginMutation } from './api';
+import {
+  useLazySessionQuery,
+  useLazyUserQuery,
+  useLoginMutation,
+  useResendCodeMutation,
+  useResendKnownDeviceCodeMutation,
+  useVerify2FAMutation,
+  useVerifyCodeMutation,
+  useVerifyKnownDeviceMutation,
+} from './api';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import { logout, setAccessToken, setSessionExpiryDate, setUser } from './store';
 import { useDispatch, useSelector } from 'react-redux';
@@ -8,18 +17,31 @@ import { trackEndSession, trackNewSession } from '../../util/analytics';
 import { endLiveSession, startLiveSession } from '../../util/liveSession';
 import { RootState } from '../store';
 import { useTranslation } from 'react-i18next';
-import { useModal } from 'mui-modal-provider';
+import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import AuthVerifyModal from '../../components/auth/AuthVerifyModal';
+
+const throwBackendErrorInOurFormat = async <T,>(
+  promise: Promise<T>,
+): Promise<T> => {
+  try {
+    return await promise;
+  } catch (e) {
+    throw { message: (e.data?.error as { msg: string }).msg };
+  }
+};
 
 export const useAuthenticate = (): [
   { loading: boolean },
-  (payload: LoginPayload) => Promise<boolean>,
+  (payload: LoginPayload) => Promise<void>,
 ] => {
   const [login] = useLoginMutation();
   const performLogout = useLogout();
   const { showModal } = useModal();
+  const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
-  const [, complete] = useCompleteAuthentication();
+  const [loadSession] = useLazySessionQuery();
+  const [loadUser] = useLazyUserQuery();
+  const { i18n } = useTranslation();
   const { executeRecaptcha } = useGoogleReCaptcha();
 
   // can't use useAsyncFn because https://github.com/streamich/react-use/issues/1768
@@ -31,11 +53,15 @@ export const useAuthenticate = (): [
         const gRecaptchaResponse = await executeRecaptcha('login');
 
         try {
-          const user = await login({
-            ...payload,
-            gRecaptchaResponse,
-            cVersionRecaptcha: 2,
-          }).unwrap();
+          const user = await throwBackendErrorInOurFormat(
+            login({
+              ...payload,
+              gRecaptchaResponse,
+              cVersionRecaptcha: 2,
+            }).unwrap(),
+          );
+
+          dispatch(setAccessToken(user.token));
 
           const needsModal =
             user.ask2FA ||
@@ -44,45 +70,16 @@ export const useAuthenticate = (): [
             user.emailUnconfirmed;
 
           if (needsModal) {
-            showModal(AuthVerifyModal, { token: user.token });
-          } else {
-            await complete(user.token);
+            let modal: ShowFnOutput<void>;
+            await new Promise<void>((resolve, reject) => {
+              modal = showModal(AuthVerifyModal, {
+                user,
+                onSuccess: resolve,
+                onFailure: reject,
+                close: () => modal.hide(),
+              });
+            });
           }
-
-          return !needsModal;
-        } catch (e) {
-          const message = 'data' in e && (e.data?.error as { msg: string }).msg;
-          performLogout();
-          setLoading(false);
-          throw message ? new Error(message) : e;
-        }
-      },
-      [executeRecaptcha],
-    ),
-  ];
-};
-
-export const useCompleteAuthentication = (): [
-  { loading: boolean },
-  (token: string) => Promise<void>,
-] => {
-  const dispatch = useDispatch();
-  const performLogout = useLogout();
-  const [loadSession] = useLazySessionQuery();
-  const [loadUser] = useLazyUserQuery();
-  const { i18n } = useTranslation();
-  const [loading, setLoading] = useState(false);
-  const { executeRecaptcha } = useGoogleReCaptcha();
-
-  // can't use useAsyncFn because https://github.com/streamich/react-use/issues/1768
-
-  return [
-    { loading },
-    useCallback(
-      async (token: string) => {
-        try {
-          setLoading(true);
-          dispatch(setAccessToken(token));
 
           const [, userData] = await Promise.all([
             loadSession()
@@ -123,11 +120,11 @@ export const useCompleteAuthentication = (): [
 
           // fetch toggles const togglesAndData = yield select(recomposeTogglesAndData);
           // setLocale  state.userProfileSettings.data?.locale
-          // TODO: clean on failure
+
           setLoading(false);
         } catch (e) {
-          performLogout();
           setLoading(false);
+          performLogout();
           throw e;
         }
       },
@@ -155,3 +152,13 @@ export function useUser(): UserData | Partial<UserData> {
     useSelector((state: RootState) => state.auth)?.user || ({} as UserData)
   );
 }
+
+export const useVerify2FA: typeof useVerify2FAMutation = useVerify2FAMutation;
+export const useVerifyEmail: typeof useVerifyCodeMutation =
+  useVerifyCodeMutation;
+export const useVerifyEmailKnownDevice: typeof useVerifyKnownDeviceMutation =
+  useVerifyKnownDeviceMutation;
+export const useResendCode: typeof useResendCodeMutation =
+  useResendCodeMutation;
+export const useResendKnownDeviceCode: typeof useResendKnownDeviceCodeMutation =
+  useResendKnownDeviceCodeMutation;

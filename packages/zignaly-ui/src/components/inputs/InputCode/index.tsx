@@ -9,10 +9,11 @@ function InputCode({
   loading,
   onComplete,
   autoFocus = false,
+  clearOnError = false,
   error = null,
 }: InputCodeProps) {
   // Hooks
-  const inputRef = useRef(null);
+  const inputRef = useRef<ReactCodeInput>(null);
 
   useEffect(() => {
     if (inputRef.current) {
@@ -24,8 +25,18 @@ function InputCode({
       }
     }
   }, [inputRef]);
+
+  useEffect(() => {
+    if (error) {
+      // means we just received an error
+      // erroneous code => type again
+      // private methods, you say? sorry, ya vas ne ponimat, lol
+      clearOnError && inputRef.current?.__clearvalues__();
+    }
+  }, [error, clearOnError]);
+
   return (
-    <Layout>
+    <Layout error={error || undefined}>
       <ReactCodeInput
         ref={inputRef}
         className={"input-box"}

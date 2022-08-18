@@ -4,7 +4,12 @@ import { Layout, Field } from './styles';
 import { TwoFAFormProps } from './types';
 import { InputCode, Typography } from '@zignaly-open/ui';
 
-function TwoFAForm({ onSubmit, isLoading, error = null }: TwoFAFormProps) {
+function TwoFAForm({
+  onSubmit,
+  isLoading,
+  clearOnError,
+  error = null,
+}: TwoFAFormProps) {
   const { t } = useTranslation('auth');
   return (
     <Layout>
@@ -14,6 +19,7 @@ function TwoFAForm({ onSubmit, isLoading, error = null }: TwoFAFormProps) {
           fields={6}
           error={error}
           loading={isLoading}
+          clearOnError={clearOnError}
           onComplete={onSubmit}
           autoFocus={true}
         />

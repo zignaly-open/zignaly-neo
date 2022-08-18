@@ -22,10 +22,40 @@ export const api = createApi({
       LoginResponse,
       { reason: string; code: string }
     >({
-      query: ({ code, reason }) => ({
-        url: `/user/verify_code/${reason}`,
+      query: ({ code }) => ({
+        url: `/user/verify_code/enable_user`,
         method: 'POST',
         body: { code },
+      }),
+    }),
+
+    resendCode: builder.mutation<LoginResponse, void>({
+      query: () => ({
+        url: `/user/resend_code/enable_user`,
+        method: 'POST',
+      }),
+    }),
+
+    verify2FA: builder.mutation<LoginResponse, { code: string }>({
+      query: ({ code }) => ({
+        url: `/user/verify_2fa`,
+        method: 'POST',
+        body: { code },
+      }),
+    }),
+
+    verifyKnownDevice: builder.mutation<LoginResponse, { code: string }>({
+      query: ({ code }) => ({
+        url: `/known_device/verify`,
+        method: 'POST',
+        body: { code },
+      }),
+    }),
+
+    resendKnownDeviceCode: builder.mutation<LoginResponse, void>({
+      query: () => ({
+        url: `/known_device/resend`,
+        method: 'POST',
       }),
     }),
 
@@ -43,4 +73,13 @@ export const api = createApi({
   }),
 });
 
-export const { useLoginMutation, useLazyUserQuery, useLazySessionQuery } = api;
+export const {
+  useLoginMutation,
+  useLazyUserQuery,
+  useLazySessionQuery,
+  useVerify2FAMutation,
+  useVerifyCodeMutation,
+  useVerifyKnownDeviceMutation,
+  useResendCodeMutation,
+  useResendKnownDeviceCodeMutation,
+} = api;

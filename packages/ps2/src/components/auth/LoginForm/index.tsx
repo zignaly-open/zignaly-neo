@@ -6,11 +6,7 @@ import { Form, Action } from './styles';
 import { LoginValidation } from './validations';
 import { useAuthenticate } from '../../../features/auth/use';
 import { useNavigate } from 'react-router-dom';
-import {
-  ROUTE_DASHBOARD,
-  ROUTE_FORGOT_PASSWORD,
-  ROUTE_SIGNUP,
-} from '../../../routes';
+import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../routes';
 import { Button, InputText, TextButton, Typography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { LoginPayload } from '../../../features/auth/types';
@@ -35,14 +31,10 @@ const LoginForm: React.FC = () => {
   const navigate = useNavigate();
 
   const submit = (data: LoginPayload) => {
-    authenticate(data)
-      .then((success) => {
-        success && navigate(ROUTE_DASHBOARD);
-      })
-      .catch((e) => {
-        setError('email', { type: 'server', message: e.toString() });
-        setError('password', { type: 'server', message: e.toString() });
-      });
+    authenticate(data).catch((e) => {
+      setError('email', { type: 'server', message: e.message });
+      setError('password', { type: 'server', message: e.message });
+    });
   };
 
   return (
