@@ -18,7 +18,7 @@ export const NavList = styled.div`
   }
 `;
 
-export const LoginButton = styled.a`
+export const LoginButton = styled.span`
   display: flex;
   flex-direction: column;
   align-items: center;
