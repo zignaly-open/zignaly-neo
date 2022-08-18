@@ -3,7 +3,7 @@ import { ToasterProps } from '@zignaly-open/ui/lib/components/display/Toaster/ty
 import React from 'react';
 import toast from 'react-hot-toast';
 
-export const ShowToast = async ({ variant, caption, size }: ToasterProps) => {
+export const showToast = async ({ variant, caption, size }: ToasterProps) => {
   toast.custom(<Toaster variant={variant} caption={caption} size={size} />, {
     id: 'toast',
   });
