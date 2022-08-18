@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import Header from './components/navigation/Header';
+import Header from './features/navigation/Header';
 import { Routes as RouterRoutes, Route, Navigate } from 'react-router-dom';
 import ProfitSharing from './views/ProfitSharing';
 import Dashboard from './views/Dashboard';

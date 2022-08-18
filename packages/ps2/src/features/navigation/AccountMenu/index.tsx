@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { NavList, LoginButton } from './styles';
 import { DropDownContainer, NavLink } from '../ExtraNavigationDropdown/styles';
 import { useTheme } from 'styled-components';
-import { useIsAuthenticated, useLogout } from '../../../features/auth/use';
+import { useIsAuthenticated, useLogout } from '../../auth/use';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import {
   Avatar,

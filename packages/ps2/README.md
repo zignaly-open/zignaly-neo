@@ -61,6 +61,12 @@ src
 │       └── atoms.tsx               # some tiny react components unworthy to be placed in src*=/components
 ├── fetures                         # store-management done like RTK wants you to (I guess)
 │   ├── featureName
+│   │   ├── components              # components used by this feature 
+│   │   │   ├── index.tsx           # actual component with export default
+│   │   │   ├── validations.ts      # if it's a form, yup resolvers
+│   │   │   ├── styles.tsx          # styled components
+│   │   │   ├── types.tsx           # type definitions
+│   │   │   └── atoms.tsx           # some tiny react components unworthy to be placed in src*=/components
 │   │   ├── store.ts                # store slice (RTKQ terminology without RTKQ folder structure)
 │   │   ├── api.ts                  # api slice
 │   │   ├── types.ts                # types

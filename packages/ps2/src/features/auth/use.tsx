@@ -18,7 +18,7 @@ import { endLiveSession, startLiveSession } from '../../util/liveSession';
 import { RootState } from '../store';
 import { useTranslation } from 'react-i18next';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
-import AuthVerifyModal from '../../components/auth/AuthVerifyModal';
+import AuthVerifyModal from './components/AuthVerifyModal';
 
 const throwBackendErrorInOurFormat = async <T,>(
   promise: Promise<T>,

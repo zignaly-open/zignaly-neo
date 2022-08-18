@@ -4,12 +4,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { Form, Action } from './styles';
 import { LoginValidation } from './validations';
-import { useAuthenticate } from '../../../features/auth/use';
+import { useAuthenticate } from '../../use';
 import { useNavigate } from 'react-router-dom';
-import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../routes';
+import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
 import { Button, InputText, TextButton, Typography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import { LoginPayload } from '../../../features/auth/types';
+import { LoginPayload } from '../../types';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
