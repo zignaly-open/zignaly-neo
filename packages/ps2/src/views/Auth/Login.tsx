@@ -1,6 +1,6 @@
 import React from 'react';
 import CenteredContainer from '../../components/CenteredContainer';
-import LoginForm from '../../components/LoginForm';
+import LoginForm from '../../components/auth/LoginForm';
 
 const Login: React.FC = () => {
   return (
