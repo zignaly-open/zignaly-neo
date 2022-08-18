@@ -18,10 +18,7 @@ export const api = createApi({
       }),
     }),
 
-    verifyCode: builder.mutation<
-      LoginResponse,
-      { reason: string; code: string }
-    >({
+    verifyCode: builder.mutation<void, { reason: string; code: string }>({
       query: ({ code }) => ({
         url: `/user/verify_code/enable_user`,
         method: 'POST',
@@ -29,14 +26,14 @@ export const api = createApi({
       }),
     }),
 
-    resendCode: builder.mutation<LoginResponse, void>({
+    resendCode: builder.mutation<void, void>({
       query: () => ({
         url: `/user/resend_code/enable_user`,
         method: 'POST',
       }),
     }),
 
-    verify2FA: builder.mutation<LoginResponse, { code: string }>({
+    verify2FA: builder.mutation<void, { code: string }>({
       query: ({ code }) => ({
         url: `/user/verify_2fa`,
         method: 'POST',
@@ -44,7 +41,7 @@ export const api = createApi({
       }),
     }),
 
-    verifyKnownDevice: builder.mutation<LoginResponse, { code: string }>({
+    verifyKnownDevice: builder.mutation<void, { code: string }>({
       query: ({ code }) => ({
         url: `/known_device/verify`,
         method: 'POST',
@@ -56,6 +53,14 @@ export const api = createApi({
       query: () => ({
         url: `/known_device/resend`,
         method: 'POST',
+      }),
+    }),
+
+    setLocale: builder.mutation<void, { locale: string }>({
+      query: ({ locale }) => ({
+        url: `/user/save_locale`,
+        method: 'POST',
+        body: { locale },
       }),
     }),
 
@@ -80,6 +85,7 @@ export const {
   useVerify2FAMutation,
   useVerifyCodeMutation,
   useVerifyKnownDeviceMutation,
+  useSetLocaleMutation,
   useResendCodeMutation,
   useResendKnownDeviceCodeMutation,
 } = api;

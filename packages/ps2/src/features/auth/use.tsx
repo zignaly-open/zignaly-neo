@@ -6,6 +6,7 @@ import {
   useLoginMutation,
   useResendCodeMutation,
   useResendKnownDeviceCodeMutation,
+  useSetLocaleMutation,
   useVerify2FAMutation,
   useVerifyCodeMutation,
   useVerifyKnownDeviceMutation,
@@ -162,3 +163,14 @@ export const useResendCode: typeof useResendCodeMutation =
   useResendCodeMutation;
 export const useResendKnownDeviceCode: typeof useResendKnownDeviceCodeMutation =
   useResendKnownDeviceCodeMutation;
+
+export function useChangeLocale(): (locale: string) => void {
+  const [save] = useSetLocaleMutation();
+  const { i18n } = useTranslation();
+  const isAuthenticated = useIsAuthenticated();
+
+  return (locale: string) => {
+    i18n.changeLanguage(locale);
+    isAuthenticated && save({ locale });
+  };
+}

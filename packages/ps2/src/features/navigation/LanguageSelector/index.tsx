@@ -32,7 +32,6 @@ function LanguageSelector({
   const handleSelectLanguage = (locale: string) => {
     setIsExpanded(false);
     onSelectLocale(locale);
-    // TODO: change language
   };
 
   if (languageMap.length === 1) return null;
@@ -50,7 +49,7 @@ function LanguageSelector({
             height={'26px'}
           />
           <LabelButton variant={'body1'} color={'neutral400'}>
-            {LocalizationLanguages[selectedLocale]?.label}
+            {LocalizationLanguages[selectedLocale?.split('_')[0]]?.label}
           </LabelButton>
         </Field>
         {languageMap.length > 1 && (

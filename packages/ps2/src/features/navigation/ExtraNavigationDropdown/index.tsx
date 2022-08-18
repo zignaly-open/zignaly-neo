@@ -7,6 +7,7 @@ import LanguageSelector from '../LanguageSelector';
 import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
 import { supportedLanguages } from '../../../util/i18next';
+import { useChangeLocale } from '../../auth/use';
 
 const dropDownOptions = {
   alignment: 'right' as const,
@@ -23,11 +24,13 @@ const ExtraNavigationDropdown: React.FC = () => {
     dropDownRef.current?.setIsDropDownActive(false);
   }, [dropDownRef]);
 
+  const changeLocale = useChangeLocale();
+
   const onSelectLocale = (locale: string) => {
-    i18n.changeLanguage(locale);
-    // TODO: persist locale choice into the db
+    changeLocale(locale);
     onClose();
   };
+
   return (
     <IconButton
       ref={dropDownRef}
