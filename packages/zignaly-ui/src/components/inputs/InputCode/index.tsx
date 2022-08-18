@@ -1,14 +1,16 @@
-// Dependencies
 import React, { useEffect, useRef } from "react";
-import ReactCodeInput from "react-verification-code-input";
-
-// Types
+import ReactCodeInput from "@zignaly-open/react-verification-code-input";
 import { InputCodeProps } from "./types";
-
-// Styled Components
 import { Layout } from "./styles";
+import ErrorMessage from "components/display/ErrorMessage";
 
-function InputCode({ fields, loading, onComplete, autoFocus = false }: InputCodeProps) {
+function InputCode({
+  fields,
+  loading,
+  onComplete,
+  autoFocus = false,
+  error = null,
+}: InputCodeProps) {
   // Hooks
   const inputRef = useRef(null);
 
@@ -16,11 +18,12 @@ function InputCode({ fields, loading, onComplete, autoFocus = false }: InputCode
     if (inputRef.current) {
       const input = inputRef.current as any;
       if (input.iRefs.length && autoFocus) {
-        input.iRefs[0].current.focus();
+        setTimeout(() => {
+          input.iRefs[0].current?.focus();
+        }, 300); // TODO: figure out why
       }
     }
   }, [inputRef]);
-
   return (
     <Layout>
       <ReactCodeInput
@@ -31,6 +34,7 @@ function InputCode({ fields, loading, onComplete, autoFocus = false }: InputCode
         autoFocus={autoFocus}
         onComplete={onComplete}
       />
+      {error && <ErrorMessage text={error} />}
     </Layout>
   );
 }
