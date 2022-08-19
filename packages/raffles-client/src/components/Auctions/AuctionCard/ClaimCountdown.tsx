@@ -3,7 +3,7 @@ import { Typography } from '@zignaly-open/ui';
 import React, { useCallback } from 'react';
 import Countdown from 'react-countdown';
 
-const BidButtonCountdown: React.FC<{ date: Date; started: boolean }> = ({
+const ClaimCountdown: React.FC<{ date: Date; started: boolean }> = ({
   date,
   started,
 }) => {
@@ -34,4 +34,4 @@ const BidButtonCountdown: React.FC<{ date: Date; started: boolean }> = ({
   return <Countdown date={date} renderer={renderer} />;
 };
 
-export default BidButtonCountdown;
+export default ClaimCountdown;

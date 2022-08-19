@@ -23,7 +23,7 @@ import {
   CardHeader,
 } from './styles';
 import { useTimeout } from 'react-use';
-import BidButtonCountdown from './BidButtonCountdown';
+import ClaimCountdown from './ClaimCountdown';
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
@@ -36,7 +36,8 @@ const AuctionCard: React.FC<{
   const renderDate = useRef(+new Date());
   const [isColumn, setIsColumn] = useState(false);
 
-  const claimButtonIsActive = auction.maxClaimDate > new Date(Date.now());
+  const claimButtonIsActive =
+    auction.userBid?.isClaimed || auction.maxClaimDate > new Date(Date.now());
 
   const [hasJustExpired] = useTimeout(
     +new Date(auction.expiresAt) - renderDate.current,
@@ -113,10 +114,7 @@ const AuctionCard: React.FC<{
                 disabled={claimButtonIsActive}
                 caption={t(claimButtonIsActive ? 'claimed' : 'claim-now')}
                 bottomElement={
-                  <BidButtonCountdown
-                    date={auction.maxClaimDate}
-                    started={true}
-                  />
+                  <ClaimCountdown date={auction.maxClaimDate} started={true} />
                 }
                 leftElement={<TimeIcon height={21} width={21} />}
               />
