@@ -43,6 +43,9 @@ const AuctionsRepository = () => {
     auction: Auction,
     id: number,
   ): Promise<void> {
+    if (auction.comingSoon === true) {
+      throw new Error('Auction is not active yet');
+    }
     if (+new Date(auction.expiresAt) <= Date.now()) {
       throw new Error('Auction expired');
     }
