@@ -10,7 +10,7 @@ import useAuthenticate from '../../../hooks/useAuthenticate';
 import { onboardingContext } from '../../../contexts/Onboarding';
 import { Button } from '@zignaly-open/ui';
 import { BID_AUCTION } from 'queries/auctions';
-import { ShowToast } from 'util/showToast';
+import { showToast } from 'util/showToast';
 
 enum BidButtonState {
   NotLoggedIn,
@@ -58,7 +58,7 @@ const BidButton: React.FC<{
     if (state === BidButtonState.NotLoggedIn) {
       authenticate();
     } else if (state === BidButtonState.NotEnoughFunds) {
-      ShowToast({
+      showToast({
         size: 'large',
         variant: 'error',
         caption: 'Not Enough Funds!',
@@ -69,7 +69,7 @@ const BidButton: React.FC<{
           id: auction.id,
         },
       }).catch((e) => {
-        ShowToast({ size: 'large', variant: 'error', caption: e });
+        showToast({ size: 'large', variant: 'error', caption: e });
       });
     }
   }, [state, authenticate, balanceOnboarding]);
