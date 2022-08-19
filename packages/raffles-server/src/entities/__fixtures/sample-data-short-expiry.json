@@ -1,0 +1,207 @@
+[
+  {
+    "model": "Auction",
+    "data": {
+      "id": 1,
+      "expiresAt": "2022-19-05T12:30:00.511Z",
+      "imageUrl": "/images/4.jpg",
+      "title": "Best Auction EVER",
+      "description": "Bid now or die regretting",
+      "monetaryValue": "100 BTC!!11",
+      "startingBid": "0.01",
+      "website": "https://zignaly.com/",
+      "discord": "https://zignaly.com/",
+      "twitter": "https://zignaly.com/",
+      "telegram": "https://zignaly.com/"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "BTC",
+      "amount": 100,
+      "auctionId": 1
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 2,
+      "expiresAt": "2022-19-05T12:30:00.511Z",
+      "imageUrl": "/images/11.jpg",
+      "title": "Elon Musk's giveaway",
+      "description": "Have you ever dreamt of reading the most retarded description ever? Well, continue dreaming",
+      "monetaryValue": "1 Model S",
+      "startingBid": "0.01"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "$TSLA",
+      "amount": 1,
+      "auctionId": 2
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "Genetically Engineered Catgirl",
+      "amount": 1,
+      "auctionId": 2
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 3,
+      "expiresAt": "2022-08-05T18:43:00.511Z",
+      "imageUrl": "/images/9.jpg",
+      "title": "Charity Giveaway",
+      "description": "All proceeds from this auction will go towards the needs of Alex who desperately needs a brand new X5 40d",
+      "monetaryValue": "$1",
+      "startingBid": "0.01"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "USDT",
+      "amount": 1,
+      "auctionId": 3
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 4,
+      "expiresAt": "2022-08-05T19:00:00.511Z",
+      "imageUrl": "/images/10.jpg",
+      "title": "Charity Giveaway 2",
+      "description": "All proceeds from this auction will go towards the needs of Alex who would like to have an M4 as well",
+      "monetaryValue": "$1",
+      "startingBid": "0.01"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "USDT",
+      "amount": 10,
+      "auctionId": 4
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 5,
+      "expiresAt": "2022-08-05T18:20:00.511Z",
+      "imageUrl": "/images/5.jpg",
+      "title": "Win&Go",
+      "description": "Bid, win, get outbid and go",
+      "monetaryValue": "$4000",
+      "startingBid": "0.01"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "ETH",
+      "amount": 2,
+      "auctionId": 5
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 6,
+      "expiresAt": "2022-08-05T19:15:00.511Z",
+      "imageUrl": "/images/6.jpg",
+      "title": "Honest Auction",
+      "description": "Lotteries are for economically illiterate, stop playing one",
+      "monetaryValue": "$30k",
+      "startingBid": "0.01"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "BTC",
+      "amount": 1,
+      "auctionId": 6
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 7,
+      "expiresAt": "2022-08-06T11:10:00.511Z",
+      "imageUrl": "/images/7.jpg",
+      "title": "Just go",
+      "description": "Pay me and go",
+      "monetaryValue": "$100",
+      "startingBid": "0.01"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "BTC",
+      "amount": "0.001",
+      "auctionId": 7
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "USDT",
+      "amount": "10",
+      "auctionId": 7
+    }
+  },
+  {
+    "model": "Auction",
+    "data": {
+      "id": 8,
+      "expiresAt": "2022-08-06T09:20:00.511Z",
+      "imageUrl": "/images/8.jpg",
+      "title": "Diversification",
+      "description": "Win a basket more diverse than a Netflix cast",
+      "monetaryValue": "$1000",
+      "startingBid": "0.01"
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "BTC",
+      "amount": "0.001",
+      "auctionId": 8
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "ETH",
+      "amount": "0.01",
+      "auctionId": 8
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "XRP",
+      "amount": "10",
+      "auctionId": 8
+    }
+  },
+  {
+    "model": "AuctionBasketItem",
+    "data": {
+      "ticker": "SHT",
+      "amount": "1000",
+      "auctionId": 8
+    }
+  }
+]
+

@@ -10,7 +10,6 @@ const models = {
 };
 
 const initDB = async (fileName: string) => {
-  await sequelize.sync({ force: true });
   const transaction = await sequelize.transaction();
   const options = { raw: true, transaction };
   await AuctionBid.destroy({ where: {}, ...options });
