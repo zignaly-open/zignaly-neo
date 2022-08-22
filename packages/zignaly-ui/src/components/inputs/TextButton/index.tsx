@@ -20,6 +20,7 @@ function TextButton({
   rel,
   target,
   className,
+  tabIndex,
   color = "links",
   variant = "h4",
 }: ButtonProps): ReactElement {
@@ -31,6 +32,7 @@ function TextButton({
       withElements={!!leftElement || !!rightElement}
       onClick={onClick}
       disabled={disabled || loading}
+      tabIndex={tabIndex}
       {...(href && {
         href,
         as: "a" as any,

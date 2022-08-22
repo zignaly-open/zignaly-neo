@@ -53,6 +53,7 @@ function InputText(
         </Typography>
         {labelAction && (
           <TextButton
+            tabIndex={labelAction.tabIndex}
             href={labelAction.href}
             onClick={labelAction.onClick}
             caption={labelAction.text}
