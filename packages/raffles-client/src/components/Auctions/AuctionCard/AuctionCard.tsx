@@ -36,8 +36,8 @@ const AuctionCard: React.FC<{
   const renderDate = useRef(+new Date());
   const [isColumn, setIsColumn] = useState(false);
 
-  const claimButtonIsActive =
-    auction.userBid?.isClaimed || auction.maxClaimDate > new Date(Date.now());
+  const claimButtonInactive =
+    auction.userBid?.isClaimed || auction.maxClaimDate > new Date();
 
   const [hasJustExpired] = useTimeout(
     +new Date(auction.expiresAt) - renderDate.current,
@@ -111,8 +111,8 @@ const AuctionCard: React.FC<{
                     auction,
                   })
                 }
-                disabled={claimButtonIsActive}
-                caption={t(claimButtonIsActive ? 'claimed' : 'claim-now')}
+                disabled={claimButtonInactive}
+                caption={t(claimButtonInactive ? 'claimed' : 'claim-now')}
                 bottomElement={
                   <ClaimCountdown date={auction.maxClaimDate} started={true} />
                 }
