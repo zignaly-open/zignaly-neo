@@ -60,6 +60,18 @@ const Header = () => {
               <Box ml={{ sm: 0, xs: 1 }}>
                 <UserBalance />
               </Box>
+              <MenuButton
+                key={'user'}
+                variant={'flat'}
+                icon={<UserIcon color='#65647E' />}
+                renderDropDown={
+                  <Menu showModal={showModal} currentUser={currentUser} />
+                }
+                dropDownOptions={{
+                  alignment: 'right',
+                  position: 'static',
+                }}
+              />
             </React.Fragment>
           ) : (
             <Button
@@ -73,18 +85,6 @@ const Header = () => {
               leftElement={<StyledWalletIcon />}
             />
           )),
-        <MenuButton
-          key={'user'}
-          variant={'flat'}
-          icon={<UserIcon color='#65647E' />}
-          renderDropDown={
-            <Menu showModal={showModal} currentUser={currentUser} />
-          }
-          dropDownOptions={{
-            alignment: 'right',
-            position: 'static',
-          }}
-        />,
       ]}
     />
   );

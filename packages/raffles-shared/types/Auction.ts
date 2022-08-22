@@ -11,7 +11,6 @@ export type AuctionBidType = {
   user: {
     id: number;
     username: string;
-    discordName: string;
   };
   isClaimed?: boolean;
 };
@@ -23,6 +22,7 @@ export type AuctionType = {
   basketItems: BasketItem[];
   monetaryValue?: string;
   numberOfWinners?: number;
+  comingSoon?: boolean;
   website?: string;
   discord?: string;
   telegram?: string;

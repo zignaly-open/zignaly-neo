@@ -13,12 +13,13 @@ import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { setContext } from '@apollo/client/link/context';
 import { getToken } from './util/token';
-import { DAppProvider, Mumbai, Polygon } from '@usedapp/core';
+import { Config, DAppProvider, Mumbai, Polygon } from '@usedapp/core';
 import { OnboardingProvider } from './contexts/Onboarding';
 import { dark, ThemeProvider } from '@zignaly-open/ui';
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
 import { BrowserRouter } from 'react-router-dom';
+import { Toaster as ToastProvider } from 'react-hot-toast';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
@@ -60,11 +61,27 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-let config = {};
+let config: Config = {
+  // https://github.com/TrueFiEng/useDApp/issues/699
+  noMetamaskDeactivate: true,
+};
 
 if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
   config = {
-    networks: [Mumbai],
+    ...config,
+    networks: [
+      {
+        ...Mumbai,
+        // rpcUrl: 'https://rpc-mumbai.matic.today/',
+        rpcUrl: 'https://matic-mumbai.chainstacklabs.com',
+        blockExplorerUrl: 'https://mumbai.polygonscan.com',
+        nativeCurrency: {
+          name: 'MATIC Token',
+          symbol: 'MATIC',
+          decimals: 18,
+        },
+      },
+    ],
     readOnlyChainId: Mumbai.chainId,
     readOnlyUrls: {
       [Mumbai.chainId]:
@@ -74,7 +91,20 @@ if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
   };
 } else {
   config = {
-    networks: [Polygon],
+    ...config,
+    networks: [
+      {
+        ...Polygon,
+        chainName: 'Polygon Mainnet',
+        rpcUrl: 'https://polygon-rpc.com/',
+        blockExplorerUrl: 'https://polygonscan.com',
+        nativeCurrency: {
+          name: 'MATIC Token',
+          symbol: 'MATIC',
+          decimals: 18,
+        },
+      },
+    ],
     readOnlyChainId: Polygon.chainId,
     readOnlyUrls: {
       [Polygon.chainId]:
@@ -96,6 +126,7 @@ function EntryPoint() {
               <OnboardingProvider>
                 <ModalProvider>
                   <Routes />
+                  <ToastProvider position='top-right' />
                 </ModalProvider>
               </OnboardingProvider>
             </BrowserRouter>

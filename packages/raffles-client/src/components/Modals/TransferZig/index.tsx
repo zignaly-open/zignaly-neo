@@ -1,8 +1,8 @@
 import { ErrorOutline } from '@mui/icons-material';
 import { Box, useMediaQuery } from '@mui/material';
-import { useEthers, useTokenBalance } from '@usedapp/core';
+import { Mumbai, Polygon, useEthers, useTokenBalance } from '@usedapp/core';
 import useContract from 'hooks/useContract';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import theme from 'theme';
 import {
@@ -17,31 +17,28 @@ import DialogContainer from '../DialogContainer';
 import { Container, InputContainer } from './styles';
 import { TransferZigModalProps } from './types';
 
-const TransferZigModal = ({
-  transferOnClick,
-  ...props
-}: TransferZigModalProps) => {
+const TransferZigModal = (props: TransferZigModalProps) => {
   // TODO: Optimize performance by extracting methods
   const [transferAmount, setTransferAmount] = useState<string>();
   const address: string = process.env.REACT_APP_RECEIVING_ADDRESS as string;
   const token = process.env.REACT_APP_CONTRACT_ADDRESS as string;
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const { t } = useTranslation('transfer-zig');
-  const { account, activateBrowserWallet, chainId } = useEthers();
+  const { account, activateBrowserWallet, chainId, switchNetwork } =
+    useEthers();
+
   const balance = useTokenBalance(token, account);
   const { isLoading, isError, transfer, isSuccess } = useContract({
     address: address,
   });
-  const sendTransfer = useCallback(
-    () => transfer(transferAmount),
-    [transferAmount],
-  );
+
   useEffect(() => {
     !account && activateBrowserWallet();
     if (!address) {
       throw new Error('Receiving address not defined');
     }
   }, [account, address]);
+
   if (!chainId) {
     return (
       <DialogContainer
@@ -50,9 +47,25 @@ const TransferZigModal = ({
         title={t(chainId ? 'title' : 'wrong-network')}
         {...props}
       >
-        <Typography variant='body1' color='neutral200' weight='regular'>
-          {t('wrong-network-info')}
-        </Typography>
+        <Box textAlign='center'>
+          <Typography variant='body1' color='neutral200' weight='regular'>
+            {t('wrong-network-info')}
+          </Typography>
+        </Box>
+        <Box display='flex' mt='24px' justifyContent='center'>
+          <Button
+            size='large'
+            caption={t('switch-network')}
+            onClick={() =>
+              switchNetwork(
+                process.env.REACT_APP_USE_MUMBAI_CHAIN
+                  ? Mumbai.chainId
+                  : Polygon.chainId,
+              )
+            }
+            minWidth={200}
+          />
+        </Box>
       </DialogContainer>
     );
   }
@@ -96,7 +109,7 @@ const TransferZigModal = ({
               caption={t('button')}
               minWidth={matchesSmall ? 350 : 260}
               disabled={!transferAmount}
-              onClick={() => sendTransfer()}
+              onClick={() => transfer(transferAmount)}
               loading={isLoading}
             />
           </Box>
