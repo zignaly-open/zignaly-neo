@@ -1,6 +1,6 @@
 import { useApolloClient, useLazyQuery, useMutation } from '@apollo/client';
 import { setToken } from '../util/token';
-import { useEthers } from '@usedapp/core';
+import { Mumbai, Polygon, useEthers } from '@usedapp/core';
 import { useAsync } from 'react-use';
 import { useState } from 'react';
 import {
@@ -32,11 +32,19 @@ export default function useAuthenticate(): () => Promise<void> {
   const [authenticate] = useMutation(AUTHENTICATE_METAMASK);
   const [isOkToStart, setIsOkToStart] = useState(false);
   const client = useApolloClient();
-  const { account, activateBrowserWallet, library } = useEthers();
+  const {
+    account,
+    activateBrowserWallet,
+    library,
+    switchNetwork,
+    chainId,
+    deactivate,
+  } = useEthers();
 
   useAsync(async () => {
     if (!account || !isOkToStart) return;
     setIsOkToStart(false);
+
     const {
       data: {
         getOrCreateUser: { messageToSign },
@@ -46,15 +54,28 @@ export default function useAuthenticate(): () => Promise<void> {
     });
 
     const signature = await library.getSigner().signMessage(messageToSign);
-    const {
-      data: {
-        authenticate: { accessToken },
-      },
-    } = await authenticate({
-      variables: { publicAddress: account.toLocaleLowerCase(), signature },
-    });
-
-    setToken(accessToken);
+    if (!chainId) {
+      await switchNetwork(
+        process.env.REACT_APP_USE_MUMBAI_CHAIN
+          ? Mumbai.chainId
+          : Polygon.chainId,
+      );
+    }
+    if (chainId) {
+      const {
+        data: {
+          authenticate: { accessToken },
+        },
+      } = await authenticate({
+        variables: {
+          publicAddress: account.toLocaleLowerCase(),
+          signature,
+        },
+      });
+      setToken(accessToken);
+    } else {
+      deactivate();
+    }
     await client.refetchQueries({
       include: [GET_CURRENT_USER],
     });
