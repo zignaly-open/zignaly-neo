@@ -1,4 +1,10 @@
 import { gql } from '@apollo/client';
+import { UserType } from '@zignaly-open/raffles-shared/types';
+
+export interface GetCurrentUserResponseModel {
+  loading: boolean;
+  data?: { me: UserType };
+}
 
 export const GET_AUCTIONS = gql`
   query singleAuction($id: ID) {
@@ -10,6 +16,7 @@ export const GET_AUCTIONS = gql`
       maxExpiryDate
       maxClaimDate
       status
+      comingSoon
       minimalBid
       website
       twitter
@@ -88,6 +95,7 @@ export const BIDS_SUBSCRIPTION = gql`
       id
       expiresAt
       minimalBid
+      comingSoon
       userBid {
         id
         position

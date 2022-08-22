@@ -40,15 +40,14 @@ const FinalCountdown: React.FC<{ date: Date; started: boolean }> = ({
         <CountdownContainer color={color}>
           <TimeIcon style={{ marginTop: '-4px' }} />
           <Typography variant={'h1'}>
-            {Boolean(days) && `${days}:`}
-            {hours.toString().padStart(2, '0')}:
+            {(days * 24 + hours).toString().padStart(2, '0')}:
             {minutes.toString().padStart(2, '0')}:
             {seconds.toString().padStart(2, '0')}
           </Typography>
         </CountdownContainer>
       );
     },
-    [],
+    [date, started],
   );
 
   return <Countdown date={date} renderer={renderer} />;
