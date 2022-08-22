@@ -100,5 +100,6 @@ const Template: ComponentStory<typeof Button> = ({ leftElement, rightElement, ..
 export const NormalButton = Template.bind({});
 NormalButton.args = {
   variant: "primary",
-  size: "medium",
+  size: "large",
+  bottomElement: <div>Hello</div>,
 };

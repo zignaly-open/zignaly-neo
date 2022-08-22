@@ -1,0 +1,9 @@
+{
+  "withdraw": {
+    "button": "Withdraw",
+    "form": {
+      "label": "Amount to withdraw:",
+      "labelBalance": "Available:"
+    }
+  }
+}

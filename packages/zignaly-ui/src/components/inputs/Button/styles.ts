@@ -32,6 +32,13 @@ export const ElementsContainer = styled.div`
   padding: 0;
 `;
 
+export const CaptionContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+`;
+
 export const LoaderContainer = styled.div`
   position: absolute;
   left: 0;
@@ -145,7 +152,7 @@ export const Layout = styled.button<LayoutProps>`
         props.withLeftElement,
         `
         ${Container} {
-          padding: 5px 18px 5px 12px;
+          padding: 0px 18px 0px 12px;
         }
         `,
       )}
@@ -154,7 +161,7 @@ export const Layout = styled.button<LayoutProps>`
         props.withRightElement,
         `
         ${Container} {
-          padding: 5px 12px 5px 18px;
+          padding: 0px 12px 0px 18px;
         }
         `,
       )}
@@ -163,7 +170,7 @@ export const Layout = styled.button<LayoutProps>`
         props.withElements,
         `
         ${Container} {
-          padding: 5px 12px;        
+          padding: 0px 12px;        
         }
         `,
       )}
@@ -210,7 +217,7 @@ export const Layout = styled.button<LayoutProps>`
         props.withLeftElement,
         `
         ${Container} {
-          padding: 8px 16px 8px 12px;
+          padding: 0px 16px 0px 12px;
         }
         `,
       )}
@@ -219,7 +226,7 @@ export const Layout = styled.button<LayoutProps>`
         props.withRightElement,
         `
         ${Container} {
-          padding: 8px 12px 8px 16px;
+          padding: 0px 12px 0px 16px;
         }
         `,
       )}
@@ -228,7 +235,7 @@ export const Layout = styled.button<LayoutProps>`
         props.withElements,
         `
         ${Container} {
-          padding: 8px 12px;
+          padding: 0px 12px;
         }
         `,
       )}
@@ -274,7 +281,7 @@ export const Layout = styled.button<LayoutProps>`
         props.withLeftElement,
         `
         ${Container} {
-          padding: 14px 32px 14px 24px;
+          padding: 0px 22px 0px 14px;
         }
         `,
       )}
@@ -283,7 +290,7 @@ export const Layout = styled.button<LayoutProps>`
         props.withRightElement,
         `
         ${Container} {
-          padding: 14px 24px 14px 32px;
+          padding: 0px 14px 0px 22px;
         }
         `,
       )}
@@ -292,7 +299,7 @@ export const Layout = styled.button<LayoutProps>`
         props.withElements,
         `
         ${Container} {
-          padding: 14px 24px;
+          padding: 0px 22px;
         }
         `,
       )}
@@ -335,7 +342,7 @@ export const Layout = styled.button<LayoutProps>`
         props.withLeftElement,
         `
         ${Container} {
-          padding: 18px 36px 18px 28px;
+          padding: 0px 36px 0px 28px;
         }
         `,
       )}
@@ -344,7 +351,7 @@ export const Layout = styled.button<LayoutProps>`
         props.withRightElement,
         `
         ${Container} {
-          padding: 18px 28px 18px 36px;
+          padding: 0px 28px 0px 36px;
         }
         `,
       )}
@@ -353,7 +360,7 @@ export const Layout = styled.button<LayoutProps>`
         props.withElements,
         `
         ${Container} {
-          padding: 18px 28px;
+          padding: 0px 28px;
         }
         `,
       )}

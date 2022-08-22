@@ -41,7 +41,6 @@ export const GET_AUCTIONS = gql`
           username
         }
       }
-
       userBid {
         id
         value
@@ -75,6 +74,7 @@ export const BID_AUCTION = gql`
           username
         }
         value
+        isClaimed
         date
       }
     }

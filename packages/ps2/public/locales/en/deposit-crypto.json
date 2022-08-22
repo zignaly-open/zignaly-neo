@@ -1,0 +1,33 @@
+{
+  "deposit-crypto": {
+    "title": "Deposit Crypto",
+    "description": "Deposits may take up to 3 hours to reflect in your balance.",
+    "coinSelector": {
+      "label": "Coin:",
+      "placeholder": "Search a coin"
+    },
+    "balances": {
+      "loadingAriaLabel": "Loading coin balances",
+      "total": "Balance:",
+      "balanceLocked": "In Orders:",
+      "balanceFree": "Available:"
+    },
+    "networkSelector": {
+      "label": "Network:",
+      "placeholder": "Choose the network"
+    },
+    "depositAddress": {
+      "label": "Deposit Address:",
+      "loading": "Loading deposit address...",
+      "placeholder": "Choose the currency and the network first.",
+      "warning": "Only send {{network}} {{coin}} tokens to this address"
+    },
+    "depositMemo": {
+      "label": "Deposit MEMO/Tag:"
+    },
+    "depositQR": {
+      "address": "{{coin}} Address",
+      "memo": "{{coin}} MEMO/Tag"
+    }
+  }
+}

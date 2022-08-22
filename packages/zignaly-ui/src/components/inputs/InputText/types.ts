@@ -2,7 +2,9 @@ import React, { ChangeEventHandler, ReactElement } from "react";
 
 type LabelActionProps = {
   text: string;
-  href: string;
+  href?: string;
+  tabIndex?: number;
+  onClick?: () => void;
 };
 
 export interface InputTextProps {
