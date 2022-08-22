@@ -1,6 +1,5 @@
 /* eslint-disable i18next/no-literal-string */
 import React from 'react';
-import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { Typography } from '@zignaly-open/ui';
 import {
@@ -11,48 +10,7 @@ import { useTranslation } from 'react-i18next';
 import useCurrentUser from 'hooks/useCurrentUser';
 import { useMediaQuery } from '@mui/material';
 import muiTheme from 'theme';
-
-const RankingHead = styled('div')`
-  background: #222249;
-  box-shadow: 0 0 10px #16192b;
-  border-radius: 5px;
-  height: 38px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-bottom: 12px;
-
-  ${({ theme }) => theme.breakpoints.down('sm')} {
-    display: none;
-  }
-`;
-
-const RankingRowContainer = styled(Box)<{ isMe?: boolean; hide?: boolean }>(
-  ({ isMe, hide, theme }) => ({
-    display: 'flex',
-    color: isMe ? theme.highlighted : theme.neutral100,
-    padding: '6px 0',
-    borderBottom: '1px solid #222249',
-    [theme.breakpoints.up('md')]: {
-      // Placeholder row to keep cards the same height, when 2 side by side, 1 having less than 7 rows.
-      visibility: hide ? 'hidden' : 'visible',
-    },
-  }),
-);
-
-const Rank = styled('div')`
-  margin: 0 14px 0 10px;
-`;
-
-const Ellipsis = styled(RankingRowContainer)`
-  align-items: center;
-  height: 24px;
-  padding-left: 10px;
-
-  &:before {
-    content: '...';
-  }
-`;
+import { Ellipsis, Rank, RankingHead, RankingRowContainer } from './styles';
 
 const RankingRow = ({ bid }: { bid: AuctionBidType }) => {
   const { user, value, position } = bid;
@@ -74,13 +32,15 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('sm'));
   const MAX_WINNERS_DISPLAYED = isMobile ? 3 : 7;
   const { t } = useTranslation('auction');
+
+  // number of winners we can display
   const winnersDisplayed = Math.min(
     auction.numberOfWinners,
     MAX_WINNERS_DISPLAYED,
   );
 
+  // Bids cleared from the user bid
   const bids = auction.bids
-    // Remove user bid
     .filter((b) => b.position <= auction.numberOfWinners)
     .sort((a, b) => a.position - b.position);
 
@@ -110,7 +70,7 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
     : 0;
 
   // Number of placeholder rows when there is not enough bids.
-  const numberOfPlacehoders = winnersDisplayed - bids.length - linesAdded;
+  // const numberOfPlacehoders = winnersDisplayed - bids.length - linesAdded;
 
   return (
     <Box width='100%'>
@@ -126,12 +86,19 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
               ? MAX_WINNERS_DISPLAYED - linesAdded
               : winnersDisplayed),
         )
-        .map((bid: AuctionBidType, i) => (
+        .map((bid: AuctionBidType) => (
           <RankingRow bid={bid} key={bid.id} />
         ))}
-      {Array.from({ length: numberOfPlacehoders }, (_, i) => (
-        <PlaceHolderRow key={i} index={i + bids.length} auction={auction} />
-      ))}
+      {Array.from(
+        { length: MAX_WINNERS_DISPLAYED - bids.length - linesAdded },
+        (_, i) => (
+          <PlaceHolderRow
+            hide={i >= winnersDisplayed - bids.length - linesAdded}
+            key={i}
+            index={i + bids.length}
+          />
+        ),
+      )}
       {isTruncated && (
         <>
           <Ellipsis />
@@ -147,10 +114,7 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
             />
           ) : (
             // Last placeholder rank
-            <PlaceHolderRow
-              index={auction.numberOfWinners - 1}
-              auction={auction}
-            />
+            <PlaceHolderRow index={auction.numberOfWinners - 1} />
           )}
         </>
       )}
@@ -158,15 +122,9 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
   );
 };
 
-const PlaceHolderRow = ({
-  index,
-  auction,
-}: {
-  index: number;
-  auction: AuctionType;
-}) => {
+const PlaceHolderRow = ({ index, hide }: { index: number; hide?: boolean }) => {
   return (
-    <RankingRowContainer hide={index > auction.numberOfWinners}>
+    <RankingRowContainer hide={hide}>
       <Rank>
         <Typography>{index + 1}.</Typography>
       </Rank>
