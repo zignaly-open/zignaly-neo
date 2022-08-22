@@ -123,7 +123,7 @@ function AuthVerifyModal({
               clearOnError
               onSubmit={(code) => verify({ code })}
               onReSendCode={() => resend()}
-              error={resendStatus.isError ? t('error:error.wrong-code') : null}
+              error={verifyStatus.isError ? t('error:error.wrong-code') : null}
               isReSendLoading={resendStatus.isLoading}
               isLoading={verifyStatus.isLoading}
             />
