@@ -1,0 +1,37 @@
+{
+  "table": {
+    "footer": {
+      "elements": {
+        "show": "Showing",
+        "out": "out of",
+        "items": "items"
+      },
+      "page": {
+        "items": "Page",
+        "out": "out of"
+      },
+      "selector": {
+        "display": "Displaying",
+        "items": "items"
+      }
+    },
+    "assetsInPool-investors": "investors",
+    "balanceSummary-invested": "Invested",
+    "selector-validation-notData": "No data available",
+    "investColumn": {
+      "successFess": "10% Success Fee",
+      "liquidated": "LIQUIDATED"
+    },
+    "tooltip-columnHeader": "Toggle SortBy",
+    "serviceName-by": "by",
+    "status": {
+      "connected": "Connected",
+      "pending": "Pending",
+      "soft-disconnect": "Soft-Disconnect",
+      "hard-disconnect": "Hard-Disconnect",
+      "suspended": "Suspended",
+      "disconnected": "Disconnected",
+      "owner": "Owner"
+    }
+  }
+}

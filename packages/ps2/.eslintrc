@@ -1,0 +1,8 @@
+{
+  "extends": [
+    "@zignaly-open/zignaly-react"
+  ],
+  "rules": {
+    "no-param-reassign": "off" // rtk expects you to re-assign states
+  }
+}

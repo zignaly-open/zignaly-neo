@@ -1,0 +1,27 @@
+{
+  "pages": {
+    "404": "404 / Page not found - Zignaly",
+    "dashboard": "Closed Positions",
+    "my-balances": "My Balances - Zignaly",
+    "login": "Log in - Zignaly",
+    "signup": "Sign Up - Zignaly",
+    "staking": "Staking - Zignaly",
+    "trading-services": "Trading Services - Zignaly",
+    "zigpad": "ZIGpad - Zignaly",
+    "profit-sharing": {
+      "title": "Profit Sharing - Zignaly",
+      "service": "Profit Sharing / Service - Zignaly",
+      "api": "API Trading - Zignaly",
+      "coins": "Coins - Zignaly",
+      "investors": "Profit Sharing / Investors - Zignaly",
+      "manual": "Manual Trading - Zignaly",
+      "positions": "My Positions - Zignaly",
+      "signals": "Signals Trading - Zignaly",
+      "managements": "Profit Sharing / Management - Zignaly",
+      "profile": {
+        "title": "View Profile - Zignaly",
+        "edit": "Edit Profile - Zignaly"
+      }
+    }
+  }
+}

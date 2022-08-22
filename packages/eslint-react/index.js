@@ -84,6 +84,7 @@ module.exports = {
     "react/jsx-key": "error",
     "unicorn/explicit-length-check": "off",
     "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-throw-literal": "off",
     "i18next/no-literal-string": [
       "error",
       {

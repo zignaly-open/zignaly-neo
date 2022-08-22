@@ -8,21 +8,12 @@ import { headerConfig } from "./utils";
 // Styled Components
 import { Container, Layout, Side } from "./styles";
 
-function Header({ leftElements = [], rightElements = [] }: HeaderProps) {
+function Header({ leftElements = [], rightElements = [] }: HeaderProps): ReactElement {
   return (
     <Layout>
       <Container>
-        <Side>
-          {leftElements &&
-            leftElements.length > 0 &&
-            leftElements.map((element: ReactElement) => element)}
-        </Side>
-
-        <Side>
-          {rightElements &&
-            rightElements.length > 0 &&
-            rightElements.map((element: ReactElement) => element)}
-        </Side>
+        <Side>{leftElements?.length > 0 && leftElements}</Side>
+        <Side>{rightElements?.length > 0 && rightElements}</Side>
       </Container>
     </Layout>
   );

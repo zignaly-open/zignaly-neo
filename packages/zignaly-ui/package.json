@@ -61,7 +61,7 @@
     "react-spring": "9.4.4",
     "react-table": "7.8.0",
     "react-use": "17.3.2",
-    "react-verification-code-input": "1.2.9",
+    "@zignaly-open/react-verification-code-input": "1.2.10",
     "styled-components": "5.3.5",
     "victory": "36.4.0",
     "yup": "0.32.11"
@@ -116,7 +116,6 @@
   "peerDependencies": {
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.2",
-    "next": ">= 12",
     "react": "^17",
     "react-dom": "^17"
   }

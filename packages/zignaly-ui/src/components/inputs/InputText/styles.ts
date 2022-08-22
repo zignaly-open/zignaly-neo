@@ -14,16 +14,14 @@ export const InputValue = styled.input`
   letter-spacing: 0.55px;
   width: 100%;
   font-family: "Avenir Next", sans-serif;
-
-  // Text Area
+  box-shadow: none !important;
   resize: none;
 
   &:-webkit-autofill {
-    -webkit-box-shadow: 0 0 0 1000px white inset;
+    -webkit-background-clip: text;
   }
 
   &:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0 50px white inset;
     -webkit-text-fill-color: #333;
   }
 
