@@ -69,8 +69,6 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
       : 2
     : 0;
 
-  console.log(MAX_WINNERS_DISPLAYED, bids.length, linesAdded);
-
   return (
     <Box width='100%'>
       <RankingHead>
