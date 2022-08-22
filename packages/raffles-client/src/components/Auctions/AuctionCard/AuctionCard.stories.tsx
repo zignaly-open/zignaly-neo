@@ -72,6 +72,16 @@ Basic.args = {
   auction: auctionObject,
 };
 
+export const Basic5Winners = Template.bind({});
+
+Basic5Winners.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 5,
+    bids: [],
+  },
+};
+
 export const Complete = Template.bind({});
 
 Complete.args = {
@@ -757,5 +767,35 @@ WinningWithManyWinnersTop.args = {
       position: 3,
       value: '1.45',
     },
+  },
+};
+
+export const ManyWinnersWithBid = Template.bind({});
+
+ManyWinnersWithBid.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 10,
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 13,
+          username: 'cemsun',
+        },
+      },
+    ],
+  },
+};
+
+export const ManyWinnersWithoutBid = Template.bind({});
+
+ManyWinnersWithoutBid.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 10,
+    bids: [],
   },
 };

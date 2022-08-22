@@ -84,7 +84,11 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
     .filter((b) => b.position <= auction.numberOfWinners)
     .sort((a, b) => a.position - b.position);
 
-  const isTruncated = bids.length > MAX_WINNERS_DISPLAYED;
+  const isTruncated =
+    // Too many bids
+    bids.length > MAX_WINNERS_DISPLAYED ||
+    // Too many winning spots
+    auction.numberOfWinners > MAX_WINNERS_DISPLAYED;
 
   // Current user is winning but is too far in the list to be showed.
   // We'll hide enough winners above him to show him.
@@ -99,8 +103,14 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
 
   // If we truncate the list to show the last winner or current user, that's 2 added lines. (counting the elipsis)
   // If we need to show both of them, that's 3 lines.
-  const linesAdded =
-    isTruncated && isUserTruncated && userBid?.position !== bids.length ? 3 : 2;
+  const linesAdded = isTruncated
+    ? isUserTruncated && userBid?.position !== bids.length
+      ? 3
+      : 2
+    : 0;
+
+  // Number of placeholder rows when there is not enough bids.
+  const numberOfPlacehoders = winnersDisplayed - bids.length - linesAdded;
 
   return (
     <Box width='100%'>
@@ -116,35 +126,51 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
               ? MAX_WINNERS_DISPLAYED - linesAdded
               : winnersDisplayed),
         )
-        .map((bid: AuctionBidType) => (
+        .map((bid: AuctionBidType, i) => (
           <RankingRow bid={bid} key={bid.id} />
         ))}
-      {isTruncated ? (
+      {Array.from({ length: numberOfPlacehoders }, (_, i) => (
+        <PlaceHolderRow key={i} index={i + bids.length} auction={auction} />
+      ))}
+      {isTruncated && (
         <>
           <Ellipsis />
           {/* Current user */}
           {isUserTruncated && userBid?.position !== auction.bids.length && (
             <RankingRow bid={userBid} key={userBid.id} />
           )}
-          {/* Last winner */}
-          <RankingRow
-            bid={bids[bids.length - 1]}
-            key={bids[bids.length - 1].id}
-          />
+          {bids[auction.numberOfWinners - 1] ? (
+            // Last winner
+            <RankingRow
+              bid={bids[auction.numberOfWinners - 1]}
+              key={bids[auction.numberOfWinners - 1].id}
+            />
+          ) : (
+            // Last placeholder rank
+            <PlaceHolderRow
+              index={auction.numberOfWinners - 1}
+              auction={auction}
+            />
+          )}
         </>
-      ) : (
-        Array.from(
-          { length: MAX_WINNERS_DISPLAYED - auction.bids.length },
-          (_, i) => (
-            <RankingRowContainer key={i} hide={i > auction.numberOfWinners}>
-              <Rank>
-                <Typography>{auction.bids.length + i + 1}.</Typography>
-              </Rank>
-            </RankingRowContainer>
-          ),
-        )
       )}
     </Box>
+  );
+};
+
+const PlaceHolderRow = ({
+  index,
+  auction,
+}: {
+  index: number;
+  auction: AuctionType;
+}) => {
+  return (
+    <RankingRowContainer hide={index > auction.numberOfWinners}>
+      <Rank>
+        <Typography>{index + 1}.</Typography>
+      </Rank>
+    </RankingRowContainer>
   );
 };
 
