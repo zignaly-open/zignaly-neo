@@ -29,7 +29,7 @@ export type ButtonProps = {
   rel?: string;
   target?: string;
   loading?: boolean;
-  tabIndex?: boolean;
+  tabIndex?: number;
   disabled?: boolean;
   className?: string;
   color?: keyof typeof dark;
