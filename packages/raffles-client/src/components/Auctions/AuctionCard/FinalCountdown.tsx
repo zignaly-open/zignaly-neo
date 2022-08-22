@@ -42,7 +42,7 @@ const renderer = ({
 const FinalCountdown: React.FC<{ date: Date; started: boolean }> = ({
   date,
 }) => {
-  return <Countdown date={date} renderer={renderer} />;
+  return <Countdown key={date.toString()} date={date} renderer={renderer} />;
 };
 
 export default FinalCountdown;
