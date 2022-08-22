@@ -23,10 +23,8 @@ export const RankingRowContainer = styled(Box)<{
   color: isMe ? theme.highlighted : theme.neutral100,
   padding: '6px 0',
   borderBottom: '1px solid #222249',
-  [theme.breakpoints.up('md')]: {
-    // Placeholder row to keep cards the same height, when 2 side by side, 1 having less than 7 rows.
-    visibility: hide ? 'hidden' : 'visible',
-  },
+  // Placeholder row to keep cards the same height, when 2 side by side, 1 having less than 7 rows, on medium screens.
+  visibility: hide ? 'hidden' : 'visible',
 }));
 
 export const Rank = styled('div')`

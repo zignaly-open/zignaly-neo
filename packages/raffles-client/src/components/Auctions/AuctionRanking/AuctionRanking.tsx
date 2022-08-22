@@ -33,7 +33,7 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
   const MAX_WINNERS_DISPLAYED = isMobile ? 3 : 7;
   const { t } = useTranslation('auction');
 
-  // number of winners we can display
+  // Number of winners we can display
   const winnersDisplayed = Math.min(
     auction.numberOfWinners,
     MAX_WINNERS_DISPLAYED,
@@ -69,8 +69,7 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
       : 2
     : 0;
 
-  // Number of placeholder rows when there is not enough bids.
-  // const numberOfPlacehoders = winnersDisplayed - bids.length - linesAdded;
+  console.log(MAX_WINNERS_DISPLAYED, bids.length, linesAdded);
 
   return (
     <Box width='100%'>
@@ -90,10 +89,11 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
           <RankingRow bid={bid} key={bid.id} />
         ))}
       {Array.from(
+        // Placeholder rows
         { length: MAX_WINNERS_DISPLAYED - bids.length - linesAdded },
         (_, i) => (
           <PlaceHolderRow
-            hide={i >= winnersDisplayed - bids.length - linesAdded}
+            hide={i >= auction.numberOfWinners - bids.length}
             key={i}
             index={i + bids.length}
           />
