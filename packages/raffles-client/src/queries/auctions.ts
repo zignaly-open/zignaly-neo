@@ -39,6 +39,7 @@ export const GET_AUCTIONS = gql`
         id
         value
         position
+        isClaimed
       }
     }
   }
