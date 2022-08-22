@@ -49,7 +49,7 @@
     "@types/react-dom": "17.0.2",
     "@usedapp/core": "1.1.5",
     "@zignaly-open/raffles-shared": "^1.0.2",
-    "@zignaly-open/ui": "^0.6.1",
+    "@zignaly-open/ui": "^0.6.18",
     "assert": "^2.0.0",
     "bignumber.js": "^9.0.2",
     "buffer": "^6.0.3",

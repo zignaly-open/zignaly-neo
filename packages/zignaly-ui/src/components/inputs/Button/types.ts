@@ -24,6 +24,7 @@ export type ButtonProps = {
   caption?: string | null;
   leftElement?: ReactElement | string | null;
   rightElement?: ReactElement | string | null;
+  bottomElement?: ReactElement | string | null;
   disabled?: boolean;
   loading?: boolean;
   color?: keyof typeof buttonColors;

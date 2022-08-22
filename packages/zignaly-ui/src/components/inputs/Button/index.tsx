@@ -27,6 +27,7 @@ function Button({
   minWidth,
   maxWidth,
   maxHeight,
+  bottomElement,
 }: ButtonProps): ReactElement {
   /**
    * @function renderLeftElement
@@ -73,13 +74,16 @@ function Button({
               {renderLeftElement}
             </styled.LeftElement>
           )}
-          {caption && (
-            <styled.Caption
-              data-testid={testIdCaptionElement ? testIdCaptionElement : "button-caption-element"}
-            >
-              {caption}
-            </styled.Caption>
-          )}
+          <styled.CaptionContainer>
+            {caption && (
+              <styled.Caption
+                data-testid={testIdCaptionElement ? testIdCaptionElement : "button-caption-element"}
+              >
+                {caption}
+              </styled.Caption>
+            )}
+            {bottomElement && bottomElement}
+          </styled.CaptionContainer>
           {rightElement && (
             <styled.RightElement
               data-testid={testIdRightElement ? testIdRightElement : "button-right-element"}

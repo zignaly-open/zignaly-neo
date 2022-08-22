@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
 import { Box } from '@mui/material';
 import useCurrentUser from 'hooks/useCurrentUser';
-import { CLAIM } from 'queries/auctions';
+import { CLAIM, GET_AUCTIONS } from 'queries/auctions';
 import React, { FormEvent, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, InputText, Typography } from '@zignaly-open/ui';
@@ -18,7 +18,9 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   } = useCurrentUser();
 
   const [success, setSuccess] = useState(false);
-  const [claim, { loading }] = useMutation(CLAIM);
+  const [claim, { loading }] = useMutation(CLAIM, {
+    refetchQueries: [{ query: GET_AUCTIONS }],
+  });
 
   const submit = useCallback(
     async (e: FormEvent) => {
