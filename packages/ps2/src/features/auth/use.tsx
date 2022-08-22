@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { LoginPayload, SessionsTypes, UserData } from './types';
+import { Exchange, LoginPayload, SessionsTypes, UserData } from './types';
 import {
   useLazySessionQuery,
   useLazyUserQuery,
@@ -12,7 +12,13 @@ import {
   useVerifyKnownDeviceMutation,
 } from './api';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
-import { logout, setAccessToken, setSessionExpiryDate, setUser } from './store';
+import {
+  logout,
+  setAccessToken,
+  setActiveExchangeId,
+  setSessionExpiryDate,
+  setUser,
+} from './store';
 import { useDispatch, useSelector } from 'react-redux';
 import { trackEndSession, trackNewSession } from '../../util/analytics';
 import { endLiveSession, startLiveSession } from '../../util/liveSession';
@@ -20,6 +26,7 @@ import { RootState } from '../store';
 import { useTranslation } from 'react-i18next';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import AuthVerifyModal from './components/AuthVerifyModal';
+import { getImageOfAccount } from '../navigation/AccountMenu/util';
 
 const throwBackendErrorInOurFormat = async <T,>(
   promise: Promise<T>,
@@ -169,5 +176,32 @@ export function useChangeLocale(): (locale: string) => void {
   return (locale: string) => {
     i18n.changeLanguage(locale);
     isAuthenticated && save({ locale });
+  };
+}
+
+export function useActiveExchange():
+  | (Exchange & { image: string })
+  | undefined {
+  const { user, activeExchangeId } = useSelector(
+    (state: RootState) => state.auth,
+  );
+  if (!user?.exchanges) return undefined;
+  const exchange =
+    (activeExchangeId &&
+      user.exchanges?.find(
+        (x: Exchange) => x.exchangeId === activeExchangeId,
+      )) ||
+    user.exchanges[0];
+
+  return {
+    ...exchange,
+    image: getImageOfAccount(user.exchanges.indexOf(exchange)),
+  };
+}
+
+export function useSelectExchange(): (exchangeId: string) => void {
+  const dispatch = useDispatch();
+  return (exchangeId) => {
+    dispatch(setActiveExchangeId(exchangeId));
   };
 }

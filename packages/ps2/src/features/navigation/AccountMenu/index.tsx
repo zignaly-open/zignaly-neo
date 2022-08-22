@@ -3,7 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { NavList, LoginButton } from './styles';
 import { DropDownContainer, NavLink } from '../ExtraNavigationDropdown/styles';
 import { useTheme } from 'styled-components';
-import { useIsAuthenticated, useLogout } from '../../auth/use';
+import {
+  useActiveExchange,
+  useIsAuthenticated,
+  useLogout,
+} from '../../auth/use';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import {
   Avatar,
@@ -14,36 +18,20 @@ import {
 } from '@zignaly-open/ui';
 import { ROUTE_DASHBOARD, ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../routes';
 import { Link } from 'react-router-dom';
-import { getImageOfAccount } from './util';
+import AccountSelector from '../../auth/components/AccountSelector';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme() as Theme;
   const logout = useLogout();
   const { t } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
+  const activeExchange = useActiveExchange();
   const dropDownRef =
     useRef<{ setIsDropDownActive: (isActive: boolean) => void }>(null);
 
   const closeDropdown = useCallback(() => {
     dropDownRef.current?.setIsDropDownActive(false);
   }, [dropDownRef]);
-
-  // const { exchanges: exchangesOfAccount } = useUser();
-  //
-  // const currentExchangeId = exchangesOfAccount[0].exchangeId;
-  //
-  // const currentExchange = useMemo(() => {
-  //   if (!currentExchangeId || !exchangesOfAccount) return null;
-  //
-  //   const index = exchangesOfAccount
-  //     .map((e: any) => e.internalId)
-  //     .indexOf(currentExchangeId);
-  //
-  //   return {
-  //     index,
-  //     ...exchangesOfAccount[index],
-  //   };
-  // }, [currentExchangeId, exchangesOfAccount]);
 
   if (!isAuthenticated) {
     return (
@@ -72,13 +60,11 @@ function AccountMenu(): React.ReactElement | null {
         zIndex: 9999,
         width: '220px',
       }}
-      icon={<Avatar size={'medium'} image={getImageOfAccount(0)} />}
+      icon={<Avatar size={'medium'} image={activeExchange?.image} />}
       key={'user'}
       renderDropDown={
         <>
-          {/*{currentExchange && (*/}
-          {/*  <AccountSelector onSelectAccount={closeDropdown} />*/}
-          {/*)}*/}
+          <AccountSelector onExchangeSelected={() => closeDropdown()} />
           <DropDownContainer>
             <NavList>
               <Link to={ROUTE_DASHBOARD}>

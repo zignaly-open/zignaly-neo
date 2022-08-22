@@ -18,6 +18,9 @@ export const authSlice = createSlice({
     setAccessToken: (state, action: PayloadAction<string>) => {
       state.accessToken = action.payload;
     },
+    setActiveExchangeId: (state, action: PayloadAction<string>) => {
+      state.activeExchangeId = action.payload;
+    },
     setSessionExpiryDate: (state, action: PayloadAction<number>) => {
       state.sessionExpiryDate = new Date(action.payload * 1000);
     },
@@ -28,7 +31,12 @@ export const authSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { logout, setAccessToken, setUser, setSessionExpiryDate } =
-  authSlice.actions;
+export const {
+  logout,
+  setAccessToken,
+  setUser,
+  setSessionExpiryDate,
+  setActiveExchangeId,
+} = authSlice.actions;
 
 export default authSlice.reducer;
