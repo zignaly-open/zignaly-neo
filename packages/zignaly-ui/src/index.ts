@@ -40,9 +40,6 @@ import DepositModal from "components/modals/MyAccount/DepositModal";
 import WithdrawModal from "components/modals/MyAccount/WithdrawModal";
 import ConnectWalletModal from "components/modals/ZigRaffle/ConnectWallet";
 
-// Forms
-import LoginForm from "./components/forms/LoginForm";
-
 // Icons
 export { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
 export { ReactComponent as CopyIcon } from "assets/icons/copy-icon.svg";
@@ -68,6 +65,7 @@ export { ReactComponent as SwapIcon } from "assets/icons/swap-icon.svg";
 export { ReactComponent as SwapVertIcon } from "assets/icons/swap-vert-icon.svg";
 export { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.svg";
 export { ReactComponent as ZignalyIcon } from "assets/icons/coins/zignaly-coin.svg";
+export { ReactComponent as GlobeLanguages } from "assets/icons/globe-languages.svg";
 export { ReactComponent as TimeIcon } from "assets/icons/time-icon.svg";
 
 // Navigation
@@ -86,6 +84,8 @@ import {
   createUserTableDataObject,
   createUserTableHeader,
 } from "./components/display/Table/types";
+import { HeaderLinksContainer } from "components/navigation/Header/styles";
+import { styledIf } from "utils/styled";
 
 export {
   /**
@@ -129,6 +129,7 @@ export {
   Header,
   BrandImage,
   ZigsBalance,
+  HeaderLinksContainer,
   MenuDropDown,
   PageContainer,
   MarginContainer,
@@ -140,8 +141,6 @@ export {
   DepositModal,
   WithdrawModal,
   MinBalanceModal,
-  // Forms
-  LoginForm,
   /**
    * =-=-=-=-=-=-=-=
    *     Utils
@@ -151,4 +150,5 @@ export {
   dark,
   light,
   customSort,
+  styledIf,
 };

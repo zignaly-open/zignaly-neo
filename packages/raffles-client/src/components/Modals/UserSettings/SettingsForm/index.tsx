@@ -134,15 +134,18 @@ const SettingsForm = ({
             />
           </InputContainer>
           <Gap gap={matchesSmall ? 30 : 15} />
-          <Box gap='12px' display='flex' flexDirection={getFlexDirection()}>
-            {matchesSmall && (
-              <Button
-                caption={t('cancel')}
-                variant='secondary'
-                onClick={(e) => props.onClose(e, 'escapeKeyDown')}
-                size='large'
-              />
-            )}
+          <Box
+            gap='12px'
+            display='flex'
+            justifyContent='center'
+            flexDirection={getFlexDirection()}
+          >
+            <Button
+              caption={t('cancel')}
+              variant='secondary'
+              onClick={(e) => props.onClose(e, 'escapeKeyDown')}
+              size='large'
+            />
             <Button
               type={'submit'}
               minWidth={170}

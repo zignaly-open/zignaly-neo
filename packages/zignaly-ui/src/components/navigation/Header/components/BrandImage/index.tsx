@@ -1,16 +1,8 @@
-// Dependencies
-import React, { useMemo } from "react";
-
-// Types
+import React from "react";
 import { LogoProps, iconsByType } from "./types";
 
-function BrandImage({ type, width, height }: LogoProps) {
-  const renderImage = useMemo(() => {
-    const Icon = iconsByType[type];
-    return Icon ? <Icon width={width} height={height} /> : null;
-  }, [type, width, height]);
-
-  return renderImage;
+// TODO: fix types to logo and iso and add default variables
+export default function BrandImage({ type, width, height }: LogoProps) {
+  const Icon = iconsByType[type];
+  return Icon ? <Icon width={width} height={height} /> : null;
 }
-
-export default BrandImage;

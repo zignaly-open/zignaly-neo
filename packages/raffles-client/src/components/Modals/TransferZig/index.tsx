@@ -1,6 +1,6 @@
 import { ErrorOutline } from '@mui/icons-material';
 import { Box, useMediaQuery } from '@mui/material';
-import { Mumbai, Polygon, useEthers, useTokenBalance } from '@usedapp/core';
+import { useEthers, useTokenBalance } from '@usedapp/core';
 import useContract from 'hooks/useContract';
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -16,16 +16,16 @@ import { Gap } from '../ConnectWallet/styles';
 import DialogContainer from '../DialogContainer';
 import { Container, InputContainer } from './styles';
 import { TransferZigModalProps } from './types';
+import SwitchNetworkModal from '../SwitchNetwork';
 
 const TransferZigModal = (props: TransferZigModalProps) => {
+  const { t } = useTranslation('transfer-zig');
   // TODO: Optimize performance by extracting methods
   const [transferAmount, setTransferAmount] = useState<string>();
   const address: string = process.env.REACT_APP_RECEIVING_ADDRESS as string;
   const token = process.env.REACT_APP_CONTRACT_ADDRESS as string;
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
-  const { t } = useTranslation('transfer-zig');
-  const { account, activateBrowserWallet, chainId, switchNetwork } =
-    useEthers();
+  const { account, activateBrowserWallet, chainId } = useEthers();
 
   const balance = useTokenBalance(token, account);
   const { isLoading, isError, transfer, isSuccess } = useContract({
@@ -40,34 +40,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
   }, [account, address]);
 
   if (!chainId) {
-    return (
-      <DialogContainer
-        fullWidth={true}
-        maxWidth={'sm'}
-        title={t(chainId ? 'title' : 'wrong-network')}
-        {...props}
-      >
-        <Box textAlign='center'>
-          <Typography variant='body1' color='neutral200' weight='regular'>
-            {t('wrong-network-info')}
-          </Typography>
-        </Box>
-        <Box display='flex' mt='24px' justifyContent='center'>
-          <Button
-            size='large'
-            caption={t('switch-network')}
-            onClick={() =>
-              switchNetwork(
-                process.env.REACT_APP_USE_MUMBAI_CHAIN
-                  ? Mumbai.chainId
-                  : Polygon.chainId,
-              )
-            }
-            minWidth={200}
-          />
-        </Box>
-      </DialogContainer>
-    );
+    return <SwitchNetworkModal chainId={chainId} {...props} />;
   }
 
   return (

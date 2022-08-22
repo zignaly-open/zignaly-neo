@@ -1,0 +1,26 @@
+{
+  "service-header": {
+    "managements-label": "Manage Funds",
+    "investors-label": "Investors",
+    "coins-label": "Coins",
+    "dropdown": {
+      "manageServices": "Manage Service",
+      "trade": {
+        "title": "Trade",
+        "links": {
+          "positions": "My Positions",
+          "manual": "Manual trading",
+          "signals": "Signals Trading",
+          "api": "API Trading"
+        }
+      },
+      "profile": {
+        "title": "Profile",
+        "links": {
+          "profile": "View Profile",
+          "profile-edit": "Edit Profile"
+        }
+      }
+    }
+  }
+}

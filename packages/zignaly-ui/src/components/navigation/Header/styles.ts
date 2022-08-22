@@ -38,3 +38,31 @@ export const Side = styled.div`
   align-items: center;
   gap: 28px;
 `;
+
+export const HeaderLinksContainer = styled.nav`
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+  user-select: none;
+
+  a {
+    color: #706f82;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 28px;
+    letter-spacing: 0.55px;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: #fff;
+    }
+
+    &.active {
+      &,
+      &:hover {
+        color: #7682f7;
+      }
+    }
+  }
+`;
