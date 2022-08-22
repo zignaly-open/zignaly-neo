@@ -22,6 +22,7 @@ export type AuctionType = {
   basketItems: BasketItem[];
   monetaryValue?: string;
   numberOfWinners?: number;
+  comingSoon?: boolean;
   website?: string;
   discord?: string;
   telegram?: string;

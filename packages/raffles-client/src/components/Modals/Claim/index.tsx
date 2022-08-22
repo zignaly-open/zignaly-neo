@@ -4,11 +4,12 @@ import useCurrentUser from 'hooks/useCurrentUser';
 import { CLAIM } from 'queries/auctions';
 import React, { FormEvent, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, ErrorMessage, InputText, Typography } from '@zignaly-open/ui';
+import { Button, InputText, Typography } from '@zignaly-open/ui';
 import CongratulationsModal from '../Congratulations';
 import DialogContainer from '../DialogContainer';
 import { Form } from './styles';
 import { ClaimModalProps } from './types';
+import { showToast } from 'util/showToast';
 
 const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const { t } = useTranslation(['claim', 'user-settings', 'global']);
@@ -16,7 +17,6 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
     user: { discordName, publicAddress },
   } = useCurrentUser();
 
-  const [errorMessage, setErrorMessage] = useState('');
   const [success, setSuccess] = useState(false);
   const [claim, { loading }] = useMutation(CLAIM);
 
@@ -34,7 +34,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
         });
         setSuccess(true);
       } catch (err) {
-        setErrorMessage(err.toString());
+        showToast({ size: 'large', variant: 'error', caption: err.message });
       }
     },
     [auction],
@@ -102,11 +102,6 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
             disabled={!discordName}
           />
         </Box>
-        {errorMessage && (
-          <Box mt='9px' display='flex' justifyContent='center'>
-            <ErrorMessage text={errorMessage} />
-          </Box>
-        )}
       </Form>
     </DialogContainer>
   );
