@@ -62,7 +62,7 @@ const BidButton: React.FC<{
           id: auction.id,
         },
       }).catch((e) => {
-        showToast({ size: 'large', variant: 'error', caption: e });
+        showToast({ size: 'large', variant: 'error', caption: e.message });
       });
     }
   }, [state, authenticate, balanceOnboarding]);
