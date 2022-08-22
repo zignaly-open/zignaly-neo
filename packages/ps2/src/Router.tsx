@@ -18,6 +18,7 @@ import {
   ROUTE_STAKING,
   ROUTE_ZIGPAD,
 } from './routes';
+
 import { useIsAuthenticated } from './features/auth/use';
 
 const AuthenticatedWall: React.FC<{ children: ReactElement }> = ({
@@ -34,7 +35,7 @@ const UnauthenticatedWall: React.FC<{ children: ReactElement }> = ({
   return isAuthenticated ? <Navigate to={ROUTE_DASHBOARD} replace /> : children;
 };
 
-function Routes() {
+function Router() {
   return (
     <>
       <Header />
@@ -89,4 +90,4 @@ function Routes() {
   );
 }
 
-export default Routes;
+export default Router;

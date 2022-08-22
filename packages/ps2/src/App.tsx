@@ -1,5 +1,5 @@
 import React from 'react';
-import Routes from './Routes';
+import Router from './Router';
 import theme from './theme';
 import * as Sentry from '@sentry/browser';
 import { dark, ThemeProvider } from '@zignaly-open/ui';
@@ -52,7 +52,7 @@ function App() {
           <ThemeProviderMui theme={augmentedTheme}>
             <BrowserRouter>
               <ModalProvider>
-                <Routes />
+                <Router />
               </ModalProvider>
             </BrowserRouter>
           </ThemeProviderMui>
