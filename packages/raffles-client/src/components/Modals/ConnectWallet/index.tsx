@@ -31,8 +31,9 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
       <Gap gap={20} />
       <ButtonContainer>
         <Button
-          minWidth={255}
+          variant='primary'
           size='large'
+          minWidth={255}
           caption={t('metamask')}
           onClick={(e) => connect(e)}
           leftElement={<MetaMaskLogo />}
