@@ -1,65 +1,113 @@
-// Dependencies
 import React from "react";
 import NumberFormat from "react-number-format";
 import { useTheme } from "styled-components";
-
-// Styled Components
-import * as styled from "./styles";
-
-//  Utils
-import { isPositive } from "utils/numbers";
+import BigNumber from "bignumber.js";
+import { Layout, Row, Container, Indicator, Subtitle, Inline } from "./styles";
+import { ValueIndicator } from "components/styled";
 import { PercentageIndicatorProps } from "./types";
-import { ReactComponent as Trophy } from "assets/icons/trophy-icon.svg";
-import { Gap } from "utils/gap";
+import Typography from "components/display/Typography";
 
 const PercentageIndicator = ({
-  value = 0,
-  subtitle = "",
-  dashboardType = "investor",
-  showTrophy,
+  value = "0",
+  label,
+  type = "graph",
+  stableCoinOperative = false,
 }: PercentageIndicatorProps) => {
-  const isPositiveValue = isPositive(value);
+  const bigNumberValue = new BigNumber(value);
+  const isPositiveValue = bigNumberValue.isPositive();
   const theme: any = useTheme();
 
+  const renderIndicator = () => {
+    const isZero = bigNumberValue.isZero();
+    const indicatorClassName = isZero ? "zero" : isPositiveValue ? "positive" : "negative";
+
+    switch (type) {
+      case "graph": {
+        return (
+          <Inline>
+            <ValueIndicator variant={"body2"} className={indicatorClassName}>
+              <NumberFormat
+                value={bigNumberValue.toFixed()}
+                displayType={"text"}
+                suffix={"%"}
+                decimalScale={2}
+                thousandSeparator={","}
+              />
+            </ValueIndicator>
+            {!isZero && (
+              <Indicator
+                className={`${type} ${indicatorClassName}`}
+                width="5"
+                height="5"
+                isPositive={isPositiveValue}
+                color={
+                  isZero
+                    ? theme.neutral300
+                    : isPositiveValue
+                    ? theme.greenGraph
+                    : theme.redGraphOrError
+                }
+              />
+            )}
+          </Inline>
+        );
+      }
+
+      case "only_number":
+        return (
+          <Inline>
+            <ValueIndicator variant={"body1"} className={indicatorClassName}>
+              <NumberFormat
+                value={bigNumberValue.toFixed()}
+                displayType={"text"}
+                thousandSeparator={","}
+                decimalScale={stableCoinOperative ? 2 : 8}
+                fixedDecimalScale={stableCoinOperative}
+              />
+            </ValueIndicator>
+          </Inline>
+        );
+
+      default: {
+        return (
+          <Inline>
+            <ValueIndicator variant={"body1"} className={indicatorClassName}>
+              <NumberFormat
+                value={bigNumberValue.toFixed()}
+                displayType={"text"}
+                suffix={"%"}
+                thousandSeparator={","}
+                decimalScale={stableCoinOperative ? 2 : 8}
+                fixedDecimalScale={stableCoinOperative}
+              />
+            </ValueIndicator>
+          </Inline>
+        );
+      }
+    }
+  };
+
   return (
-    <styled.Layout>
-      <styled.Container>
-        <styled.Row>
-          {dashboardType === "investor" && (
-            <styled.Indicator
-              width="5"
-              height="5"
-              isPositive={isPositiveValue}
-              color={isPositiveValue ? theme.greenGraph : theme.redGraphOrError}
-            />
+    <Layout>
+      <Container>
+        <Row>
+          {!isNaN(+value) ? (
+            <>
+              {renderIndicator()}
+              {label && (
+                <Subtitle variant="body2" color="neutral400">
+                  {label}
+                </Subtitle>
+              )}
+            </>
+          ) : (
+            <Typography variant={"body2"} color={"neutral400"}>
+              -
+            </Typography>
           )}
-          <styled.Value
-            variant={dashboardType === "investor" ? "h5" : "body1"}
-            isPositive={isPositiveValue}
-          >
-            <NumberFormat
-              value={
-                dashboardType === "investor" ? String(value).replaceAll("-", "") : String(value)
-              }
-              displayType={"text"}
-              thousandSeparator={true}
-            />
-            %
-          </styled.Value>
-          {showTrophy && (
-            <styled.TropyContainer>
-              <Trophy width={24} height={24}></Trophy>
-              <Gap gap={2}></Gap>
-            </styled.TropyContainer>
-          )}
-        </styled.Row>
-        {dashboardType !== "investor" && (
-          <styled.Subtitle variant="body2" color="neutral400">
-            {subtitle}
-          </styled.Subtitle>
-        )}
-      </styled.Container>
-    </styled.Layout>
+        </Row>
+      </Container>
+    </Layout>
   );
 };
 

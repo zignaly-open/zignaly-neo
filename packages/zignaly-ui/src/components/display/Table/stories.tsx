@@ -1,29 +1,184 @@
-// Dependencies
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import NumberFormat from "react-number-format";
-
-// Component
 import Table from "./";
 import PriceLabel from "./components/PriceLabel";
 import PercentageIndicator from "./components/PercentageIndicator";
 import ConnectionStateLabel, { ConnectionStateLabelId } from "./components/ConnectionStateLabel";
 import DateLabel from "./components/DateLabel";
-
-// Styles
 import { CheckIconStyled, CloseIconStyled } from "./styles";
 import { dark } from "../../../theme";
-
-// Utils
 import { sortByPointDecimal } from "../../../utils/numbers";
-import {
-  createMarketPlaceTableBodyObject,
-  createMarketPlaceTableHeader,
-  createUserTableDataObject,
-  createUserTableHeader,
-} from "./types";
 import Typography from "../Typography";
 import { MockMyCoinsData } from "./mockData";
+import { Column } from "../../../utils/column";
+import { ServiceName } from "./components/ServiceName";
+import AssetsInPool from "./components/AssetsInPool";
+import { AreaChart } from "../Charts";
+import InvestColumn from "./components/InvestColumn";
+import { BalanceSummary } from "./components/BalanceSummary";
+import { UserTableData } from "./types";
+import { ChartsProps } from "../Charts/types";
+
+const createMarketPlaceTableHeader = () => {
+  return [
+    {
+      Header: (
+        <Column style={{ position: "absolute", bottom: -15, left: 0, marginLeft: 104 }}>
+          <div>{"ServiceName"}</div>
+          <Typography variant="h5" weight="medium" color="neutral400">
+            {"Manager/Base Currency"}
+          </Typography>
+        </Column>
+      ),
+      accessor: "serviceName",
+    },
+    {
+      Header: "Assets In Pool",
+      Footer: (
+        <div>
+          <div>{"# Of Investors"}</div>
+        </div>
+      ),
+      accessor: "assetsInPool",
+    },
+    {
+      Header: "1 year",
+      accessor: "oneYear",
+    },
+    {
+      Header: "1 month",
+      accessor: "chart",
+    },
+    {
+      Header: "",
+      accessor: "invest",
+    },
+  ];
+};
+
+interface MarketPlaceTableProps {
+  serviceName: {
+    heading: string;
+    subtitle: string;
+    cryptoName: string;
+    cryptoAlt: string;
+  };
+  assetsInPool: {
+    assetsValue: number;
+    numberOfInvestors: number;
+  };
+  chart: ChartsProps;
+  oneYear: {
+    value: number;
+    subtitle: string;
+    showTrophy: boolean;
+  };
+}
+
+const createMarketPlaceTableBodyObject = ({
+  serviceName,
+  assetsInPool,
+  chart,
+  oneYear,
+}: MarketPlaceTableProps) => {
+  return {
+    serviceName: (
+      <ServiceName
+        heading={serviceName.heading}
+        subtitle={serviceName.subtitle}
+        cryptoName={serviceName.cryptoName}
+        cryptoAlt={serviceName.cryptoAlt}
+      />
+    ),
+    assetsInPool: (
+      <AssetsInPool
+        assetsValue={assetsInPool.assetsValue}
+        numberOfInvestors={assetsInPool.numberOfInvestors}
+      />
+    ),
+    chart: <AreaChart variant={chart.variant} data={chart.data} />,
+    oneYear: <PercentageIndicator value={oneYear.value} />,
+    invest: <InvestColumn type="invested" />,
+  };
+};
+
+const createUserTableHeader = () => {
+  return [
+    {
+      Header: "My Current Value",
+      accessor: "summary",
+      headerWithFooter: (
+        <div>
+          <div>{"Returns"}</div>
+        </div>
+      ),
+    },
+    {
+      Header: (
+        <Column style={{ position: "absolute", bottom: -15, left: 0, marginLeft: 108 }}>
+          <div>{"ServiceName"}</div>
+          <Typography variant="h5" weight="medium" color="neutral400">
+            {"Manager/Base Currency"}
+          </Typography>
+        </Column>
+      ),
+      accessor: "serviceName",
+    },
+    {
+      Header: "Since Invested",
+      accessor: "chart",
+    },
+    {
+      Header: "Daily avg",
+      accessor: "dailyAvg",
+    },
+    {
+      Header: "1 mo.",
+      accessor: "oneMonth",
+    },
+    {
+      Header: "3 mo.",
+      accessor: "threeMonths",
+    },
+    {
+      Header: "All",
+      accessor: "all",
+      headerWithFooter: (
+        <div>
+          <div>{"Age"}</div>
+        </div>
+      ),
+    },
+  ];
+};
+
+const createUserTableDataObject = ({
+  summary,
+  serviceName,
+  chart,
+  dailyAvg,
+  oneMonth,
+  threeMonths,
+  all,
+}: UserTableData) => {
+  return {
+    summary: <BalanceSummary totalValue={summary.totalValue} profit={summary.profit} />,
+    serviceName: (
+      <ServiceName
+        heading={serviceName.heading}
+        subtitle={serviceName.subtitle}
+        cryptoName={serviceName.cryptoName}
+        cryptoAlt={serviceName.cryptoAlt}
+      />
+    ),
+    chart: <AreaChart variant={chart.variant} data={chart.data} />,
+    dailyAvg: <PercentageIndicator value={dailyAvg.value} />,
+    oneMonth: <PercentageIndicator value={oneMonth.value} />,
+    threeMonths: <PercentageIndicator value={threeMonths.value} />,
+    all: <PercentageIndicator value={all.value} />,
+  };
+};
 
 export default {
   title: "Display/Table",
