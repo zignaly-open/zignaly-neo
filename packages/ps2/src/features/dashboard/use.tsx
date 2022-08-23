@@ -3,17 +3,13 @@ import { useDispatch } from 'react-redux';
 import { useInvestmentsQuery } from './api';
 import { useActiveExchange } from '../auth/use';
 import { useEffect } from 'react';
-import { Investment } from './types';
 
-export function useInvestments(): {
-  isLoading: boolean;
-  data: Investment[] | undefined;
-} {
+export function useInvestments(): ReturnType<typeof useInvestmentsQuery> {
   const dispatch = useDispatch();
   const exchange = useActiveExchange();
-  const { isLoading, data } = useInvestmentsQuery(exchange?.internalId);
+  const result = useInvestmentsQuery(exchange?.internalId);
   useEffect(() => {
-    dispatch(setInvestments(data || undefined));
-  }, [data]);
-  return { isLoading, data };
+    dispatch(setInvestments(result.data || undefined));
+  }, [result.data]);
+  return result;
 }
