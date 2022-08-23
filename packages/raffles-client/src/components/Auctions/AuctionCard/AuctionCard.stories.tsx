@@ -72,6 +72,16 @@ Basic.args = {
   auction: auctionObject,
 };
 
+export const Basic5Winners = Template.bind({});
+
+Basic5Winners.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 5,
+    bids: [],
+  },
+};
+
 export const Complete = Template.bind({});
 
 Complete.args = {
@@ -87,94 +97,6 @@ export const Winning = Template.bind({});
 Winning.args = {
   auction: {
     ...auctionObject,
-  },
-};
-
-export const Outbid7Winners = Template.bind({});
-
-Outbid7Winners.args = {
-  auction: {
-    ...auctionObject,
-    numberOfWinners: 7,
-    bids: [
-      {
-        id: 1,
-        position: 1,
-        value: '1.47',
-        user: {
-          id: 13,
-          username: 'cemsun',
-        },
-      },
-      {
-        id: 2,
-        position: 2,
-        value: '1.46',
-        user: {
-          id: 12,
-          username: 'abc',
-        },
-      },
-      {
-        id: 3,
-        position: 3,
-        value: '1.45',
-        user: {
-          id: 11,
-          username: 'akiek',
-        },
-      },
-      {
-        id: 4,
-        position: 4,
-        value: '1.45',
-        user: {
-          id: 10,
-          username: 'cemsil',
-        },
-      },
-      {
-        id: 5,
-        position: 5,
-        value: '1.44',
-        user: {
-          id: 9,
-          username: 'llan',
-        },
-      },
-      {
-        id: 6,
-        position: 6,
-        value: '1.43',
-        user: {
-          id: 8,
-          username: 'lleeil',
-        },
-      },
-      {
-        id: 7,
-        position: 7,
-        value: '1.42',
-        user: {
-          id: 7,
-          username: 'eeeqal',
-        },
-      },
-      {
-        id: 8,
-        position: 8,
-        value: '1.41',
-        user: {
-          id: 7,
-          username: 'chrwoo',
-        },
-      },
-    ],
-    userBid: {
-      id: 8,
-      value: '1.41',
-      position: 8,
-    },
   },
 };
 
@@ -275,6 +197,94 @@ Outbid8Winners.args = {
   },
 };
 
+export const Outbid7Winners = Template.bind({});
+
+Outbid7Winners.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 7,
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 13,
+          username: 'cemsun',
+        },
+      },
+      {
+        id: 2,
+        position: 2,
+        value: '1.46',
+        user: {
+          id: 12,
+          username: 'abc',
+        },
+      },
+      {
+        id: 3,
+        position: 3,
+        value: '1.45',
+        user: {
+          id: 11,
+          username: 'akiek',
+        },
+      },
+      {
+        id: 4,
+        position: 4,
+        value: '1.45',
+        user: {
+          id: 10,
+          username: 'cemsil',
+        },
+      },
+      {
+        id: 5,
+        position: 5,
+        value: '1.44',
+        user: {
+          id: 9,
+          username: 'llan',
+        },
+      },
+      {
+        id: 6,
+        position: 6,
+        value: '1.43',
+        user: {
+          id: 8,
+          username: 'lleeil',
+        },
+      },
+      {
+        id: 7,
+        position: 7,
+        value: '1.42',
+        user: {
+          id: 7,
+          username: 'eeeqal',
+        },
+      },
+      {
+        id: 8,
+        position: 8,
+        value: '1.41',
+        user: {
+          id: 7,
+          username: 'chrwoo',
+        },
+      },
+    ],
+    userBid: {
+      id: 8,
+      value: '1.41',
+      position: 8,
+    },
+  },
+};
+
 export const Outbid5Winners = Template.bind({});
 
 Outbid5Winners.args = {
@@ -333,6 +343,55 @@ Outbid5Winners.args = {
       value: '1.41',
       position: 8,
     },
+  },
+};
+
+export const Outbid2Winners = Template.bind({});
+
+Outbid2Winners.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 2,
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 13,
+          username: 'cemsun',
+        },
+      },
+      {
+        id: 2,
+        position: 2,
+        value: '1.46',
+        user: {
+          id: 12,
+          username: 'abc',
+        },
+      },
+    ],
+  },
+};
+
+export const Outbid1Winner = Template.bind({});
+
+Outbid1Winner.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 1,
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 13,
+          username: 'cemsun',
+        },
+      },
+    ],
   },
 };
 
@@ -757,5 +816,35 @@ WinningWithManyWinnersTop.args = {
       position: 3,
       value: '1.45',
     },
+  },
+};
+
+export const ManyWinnersWithBid = Template.bind({});
+
+ManyWinnersWithBid.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 10,
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 13,
+          username: 'cemsun',
+        },
+      },
+    ],
+  },
+};
+
+export const ManyWinnersWithoutBid = Template.bind({});
+
+ManyWinnersWithoutBid.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 10,
+    bids: [],
   },
 };
