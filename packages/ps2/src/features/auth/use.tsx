@@ -26,7 +26,7 @@ import { RootState } from '../store';
 import { useTranslation } from 'react-i18next';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import AuthVerifyModal from './components/AuthVerifyModal';
-import { getImageOfAccount } from '../navigation/AccountMenu/util';
+import { getImageOfAccount } from '../../util/images';
 
 const throwBackendErrorInOurFormat = async <T,>(
   promise: Promise<T>,

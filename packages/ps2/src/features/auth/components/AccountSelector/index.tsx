@@ -3,7 +3,7 @@ import { useTheme } from 'styled-components';
 import { Layout, Field, Button, Container, Item } from './styles';
 import { Typography, Avatar, ArrowBottomIcon } from '@zignaly-open/ui';
 import { Exchange } from '../../types';
-import { getImageOfAccount } from '../../../navigation/AccountMenu/util';
+import { getImageOfAccount } from '../../../../util/images';
 import { useActiveExchange, useSelectExchange, useUser } from '../../use';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { AccountSelectorProps } from './types';
