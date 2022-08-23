@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { LoginPayload, SessionsTypes, UserData } from './types';
 import {
   useLazySessionQuery,
@@ -48,89 +48,86 @@ export const useAuthenticate = (): [
   // can't use useAsyncFn because https://github.com/streamich/react-use/issues/1768
   return [
     { loading },
-    useCallback(
-      async (payload: LoginPayload) => {
-        setLoading(true);
-        const gRecaptchaResponse = await executeRecaptcha('login');
+    async (payload: LoginPayload) => {
+      setLoading(true);
+      const gRecaptchaResponse = await executeRecaptcha('login');
 
-        try {
-          const user = await throwBackendErrorInOurFormat(
-            login({
-              ...payload,
-              gRecaptchaResponse,
-              cVersionRecaptcha: 2,
-            }).unwrap(),
-          );
+      try {
+        const user = await throwBackendErrorInOurFormat(
+          login({
+            ...payload,
+            gRecaptchaResponse,
+            cVersionRecaptcha: 2,
+          }).unwrap(),
+        );
 
-          dispatch(setAccessToken(user.token));
+        dispatch(setAccessToken(user.token));
 
-          const needsModal =
-            user.ask2FA ||
-            user.isUnknownDevice ||
-            user.disabled ||
-            user.emailUnconfirmed;
+        const needsModal =
+          user.ask2FA ||
+          user.isUnknownDevice ||
+          user.disabled ||
+          user.emailUnconfirmed;
 
-          if (needsModal) {
-            let modal: ShowFnOutput<void>;
-            await new Promise<void>((resolve, reject) => {
-              modal = showModal(AuthVerifyModal, {
-                user,
-                onSuccess: resolve,
-                onFailure: reject,
-                close: () => modal.hide(),
-              });
+        if (needsModal) {
+          let modal: ShowFnOutput<void>;
+          await new Promise<void>((resolve, reject) => {
+            modal = showModal(AuthVerifyModal, {
+              user,
+              onSuccess: resolve,
+              onFailure: reject,
+              close: () => modal.hide(),
             });
-          }
-
-          const [, userData] = await Promise.all([
-            loadSession()
-              .unwrap()
-              .then(({ validUntil }) =>
-                dispatch(setSessionExpiryDate(validUntil)),
-              ),
-            loadUser().unwrap(),
-            // TODO: we used to load services here from `/services/list`
-          ]);
-
-          // TODO: finish migrating all this:
-          //     // 3. Set Profile
-          //     yield put(setAuthValidUntil(sessionDataValidUntilTransform(session.validUntil)));
-          //     const togglesAndData = yield call(selectTogglesAndData, dataProfile);
-          //     yield put(setProfileToggles(togglesAndData.toggles));
-          //     yield put(setProfileData(togglesAndData.data));
-          //     yield put(setProfileExchanges(dataProfile.exchanges));
-          //
-          //     // 4. Set User Sentry
-          //     yield call(Sentry.setUser, { email: dataProfile.email, id: dataProfile.userId });
-          //
-          //     // 5. InputSelect exchange Id
-          //     const selectedExchange = yield call(initSelectedExchange, dataProfile.exchanges);
-          //     yield put(setSelectedExchangeId(selectedExchange.id));
-          //     yield put(setSelectedExchangeType(selectedExchange.type));
-          //
-          //     // 6. Exchange Types
-          //     yield put(setExchangeTypes());
-          //
-          //     // 7. Set My Services List
-          //     yield put(setServiceServices(dataServices));
-
-          dispatch(setUser(userData));
-          startLiveSession(userData);
-          trackNewSession(userData, SessionsTypes.Login);
-          i18n.changeLanguage(userData.locale);
-
-          // fetch toggles const togglesAndData = yield select(recomposeTogglesAndData);
-          // setLocale  state.userProfileSettings.data?.locale
-
-          setLoading(false);
-        } catch (e) {
-          setLoading(false);
-          performLogout();
-          throw e;
+          });
         }
-      },
-      [executeRecaptcha],
-    ),
+
+        const [, userData] = await Promise.all([
+          loadSession()
+            .unwrap()
+            .then(({ validUntil }) =>
+              dispatch(setSessionExpiryDate(validUntil)),
+            ),
+          loadUser().unwrap(),
+          // TODO: we used to load services here from `/services/list`
+        ]);
+
+        // TODO: finish migrating all this:
+        //     // 3. Set Profile
+        //     yield put(setAuthValidUntil(sessionDataValidUntilTransform(session.validUntil)));
+        //     const togglesAndData = yield call(selectTogglesAndData, dataProfile);
+        //     yield put(setProfileToggles(togglesAndData.toggles));
+        //     yield put(setProfileData(togglesAndData.data));
+        //     yield put(setProfileExchanges(dataProfile.exchanges));
+        //
+        //     // 4. Set User Sentry
+        //     yield call(Sentry.setUser, { email: dataProfile.email, id: dataProfile.userId });
+        //
+        //     // 5. InputSelect exchange Id
+        //     const selectedExchange = yield call(initSelectedExchange, dataProfile.exchanges);
+        //     yield put(setSelectedExchangeId(selectedExchange.id));
+        //     yield put(setSelectedExchangeType(selectedExchange.type));
+        //
+        //     // 6. Exchange Types
+        //     yield put(setExchangeTypes());
+        //
+        //     // 7. Set My Services List
+        //     yield put(setServiceServices(dataServices));
+
+        dispatch(setUser(userData));
+        startLiveSession(userData);
+        trackNewSession(userData, SessionsTypes.Login);
+        i18n.changeLanguage(userData.locale);
+
+        // fetch toggles const togglesAndData = yield select(recomposeTogglesAndData);
+        // setLocale  state.userProfileSettings.data?.locale
+
+        setLoading(false);
+      } catch (e) {
+        setLoading(false);
+        performLogout();
+        throw e;
+      }
+    },
   ];
 };
 
