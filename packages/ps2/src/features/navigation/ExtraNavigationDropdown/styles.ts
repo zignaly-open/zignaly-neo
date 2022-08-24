@@ -6,7 +6,7 @@ export const DropDownContainer = styled.div`
   padding: 18px;
 `;
 
-export const NavLink = styled.a<{ active?: boolean; disabled?: boolean }>`
+export const NavLink = styled.span<{ active?: boolean; disabled?: boolean }>`
   color: #706f82;
   font-weight: 500;
   font-size: 14px;
