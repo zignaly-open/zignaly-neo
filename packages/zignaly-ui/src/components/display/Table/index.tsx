@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import { TableProps, tableTypes } from "./types";
 import BasicTable from "./types/BasicTable";
 import PagedWithDataTable from "./types/PagedWithDataTable";
-import PercentageIndicator from "./components/PercentageIndicator";
 
 const Table = ({
   columns = [],

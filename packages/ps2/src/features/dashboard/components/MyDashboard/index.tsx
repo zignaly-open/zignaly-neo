@@ -1,6 +1,5 @@
 import {
   AreaChart,
-  BalanceSummary,
   Loader,
   PercentageIndicator,
   PriceLabel,
@@ -11,22 +10,20 @@ import {
 import React, { useCallback, useMemo } from 'react';
 import { Center, Heading, Inline, Layout } from './styles';
 import { useTranslation } from 'react-i18next';
-import { useTheme } from 'styled-components';
 import { useInvestments } from '../../use';
 import BigNumber from 'bignumber.js';
 import { formatDateFromDays } from './util';
 import { Investment } from '../../types';
 import { sortBigNumbers, stringSort } from '../../../../util/numbers';
 import { coinsToOperateServices } from 'util/coins';
-import Theme from '@zignaly-open/ui/lib/theme/theme';
+import { getServiceLogo } from '../../../../util/images';
+import { BalanceSummary } from '../BalanceSummary';
 
 const MyDashboard: React.FC = () => {
-  const { t } = useTranslation('my-dashboard');
-  const theme = useTheme() as Theme;
+  const { t } = useTranslation(['my-dashboard', 'table']);
   const { isLoading, data: services, error } = useInvestments();
 
-  // @ts-ignore
-  const onClickEditInvestment = (value) => alert();
+  const onClickEditInvestment = () => alert();
 
   const tableColumns = useMemo(
     () => [
@@ -76,12 +73,17 @@ const MyDashboard: React.FC = () => {
         headerWithFooter: (
           <Inline>{t('my-dashboard.tableHeader.serviceName.subtitle')}</Inline>
         ),
-        Cell: ({ cell: { value } }: any) => (
+        Cell: ({ cell: { value } }: { cell: { value: Investment } }) => (
           <ServiceName
-            name={value.name}
-            owner={value.owner}
-            currency={value.currency}
-            image={value.image}
+            heading={value.serviceName}
+            subtitle={
+              <>
+                {t('table:table.serviceName-by')} {value.ownerName}
+                {value.serviceLogo}
+              </>
+            }
+            cryptoName={value.ssc}
+            image={getServiceLogo(value.serviceLogo)}
           />
         ),
         sortType: (
@@ -119,7 +121,7 @@ const MyDashboard: React.FC = () => {
           };
         }) => (
           <PriceLabel
-            textColor={theme.greenGraph}
+            green
             coin={value.currency}
             value={value.dailyAvgPnl}
             stableCoinOperative={coinsToOperateServices.stableCoins.includes(
@@ -231,12 +233,7 @@ const MyDashboard: React.FC = () => {
         profit: new BigNumber(service.pnlSumLc).toFixed(),
         service,
       },
-      serviceName: {
-        name: service.serviceName,
-        owner: service.ownerName,
-        currency: service.ssc,
-        image: service.serviceLogo,
-      },
+      serviceName: service,
       chart: {
         data: service.sparklines,
         last30Pnl: new BigNumber(service.pnl30dPct).toFixed(),
@@ -260,8 +257,6 @@ const MyDashboard: React.FC = () => {
     };
   }, []);
 
-  console.error(error);
-
   return (
     <Layout>
       <Heading>
@@ -283,7 +278,7 @@ const MyDashboard: React.FC = () => {
           columns={tableColumns}
           data={services?.map(createUserTableBodyMemoized)}
           emptyMessage={
-            error
+            !error
               ? t('my-dashboard.table-search-emptyMessage')
               : t('my-dashboard.something-went-wrong')
           }

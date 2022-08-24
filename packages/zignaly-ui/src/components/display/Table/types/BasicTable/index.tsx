@@ -2,6 +2,7 @@ import React, { useCallback, useRef, useState } from "react";
 import { useSortBy, useTable } from "react-table";
 import {
   ColumnsSelector,
+  EmptyMessage,
   HeaderRow,
   IconContainer,
   Layout,
@@ -28,6 +29,7 @@ export default function BasicTable({
   hideOptionsButton,
   isUserTable,
   initialState = {},
+  emptyMessage,
   hasFooter = false,
 }: TableBasicProps) {
   // Refs
@@ -222,6 +224,7 @@ export default function BasicTable({
             </tfoot>
           )}
         </TableView>
+        {!data.length && <EmptyMessage>{emptyMessage}</EmptyMessage>}
       </View>
     </Layout>
   );
