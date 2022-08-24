@@ -42,10 +42,6 @@ const AuctionCard: React.FC<{
   const [hasJustExpired] = useTimeout(
     +new Date(auction.expiresAt) - renderDate.current,
   );
-  const bidButtonActive = useMemo(
-    () => isActive && !hasJustExpired,
-    [isActive, hasJustExpired, auction.comingSoon],
-  );
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -119,7 +115,10 @@ const AuctionCard: React.FC<{
                 leftElement={<TimeIcon height={21} width={21} />}
               />
             ) : (
-              <BidButton auction={auction} isActive={bidButtonActive} />
+              <BidButton
+                auction={auction}
+                isActive={isActive && !hasJustExpired()}
+              />
             )}
           </CardActions>
         </CardBody>
