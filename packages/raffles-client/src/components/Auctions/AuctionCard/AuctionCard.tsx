@@ -42,7 +42,6 @@ const AuctionCard: React.FC<{
   const [hasJustExpired] = useTimeout(
     +new Date(auction.expiresAt) - renderDate.current,
   );
-  console.log(hasJustExpired());
 
   useEffect(() => {
     const handleWindowResize = () => {
