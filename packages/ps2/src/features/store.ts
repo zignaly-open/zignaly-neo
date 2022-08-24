@@ -1,8 +1,16 @@
+// Dependencies
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import authReducer from './auth/store';
-import { api as authApi } from './auth/api';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
+
+// Reducers
+import authReducer from './auth/store';
+import coinsReducer from './coins/store';
+import balancesReducer from './balances/store';
+
+// API Reducers Paths
+import { api as authApi } from './auth/api';
+import { api as balancesApi } from './balances/api';
 
 const persistConfig = {
   key: 'root',
@@ -16,7 +24,10 @@ export const store = configureStore({
     persistConfig,
     combineReducers({
       [authApi.reducerPath]: authApi.reducer,
+      [balancesApi.reducerPath]: balancesApi.reducer,
       auth: authReducer,
+      coins: coinsReducer,
+      balances: balancesReducer,
     }),
   ),
   middleware: (getDefaultMiddleware) =>

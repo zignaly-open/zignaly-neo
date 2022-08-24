@@ -16,7 +16,12 @@ import {
   Typography,
   UserIcon,
 } from '@zignaly-open/ui';
-import { ROUTE_DASHBOARD, ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../routes';
+import {
+  ROUTE_DASHBOARD,
+  ROUTE_LOGIN,
+  ROUTE_SIGNUP,
+  ROUTE_MY_BALANCES,
+} from '../../../routes';
 import { Link } from 'react-router-dom';
 import AccountSelector from '../../auth/components/AccountSelector';
 
@@ -72,7 +77,7 @@ function AccountMenu(): React.ReactElement | null {
                   {t('account-menu.notAuth-dropdown-link-dashboard')}
                 </NavLink>
               </Link>
-              <Link to={ROUTE_DASHBOARD}>
+              <Link to={ROUTE_MY_BALANCES}>
                 <NavLink onClick={closeDropdown}>
                   {t('account-menu.notAuth-dropdown-link-balances')}
                 </NavLink>

@@ -8,6 +8,7 @@ import {
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
+  reducerPath: 'authApi',
   baseQuery,
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, LoginFullPayload>({
