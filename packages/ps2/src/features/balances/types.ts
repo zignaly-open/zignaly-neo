@@ -1,21 +1,7 @@
-type NetworkData = {
-  addressRegex: string;
-  coin: string;
-  depositDesc: string;
-  depositEnable: boolean;
-  integerMultiple: string;
-  isDefault: boolean;
-  memoRegex: boolean;
-  name: string;
-  network: string;
-  resetAddressStatus: boolean;
-  specialTips: string;
-  withdrawDesc: string;
-  withdrawFee: string;
-  withdrawMin: string;
-};
-
-export type BalancesData = {
-  name: string;
-  networks: NetworkData[];
+export type BalancesResponse = {
+  token: string;
+  ask2FA: boolean;
+  isUnknownDevice: boolean;
+  disabled: boolean;
+  emailUnconfirmed: boolean;
 };

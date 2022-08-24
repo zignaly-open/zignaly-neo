@@ -6,7 +6,7 @@ export const api = createApi({
   baseQuery,
   endpoints: (builder) => ({
     /* Get the balances with a reduced data */
-    reducedBalances: builder.query<any, any>({
+    reducedBalances: builder.query<object[], void>({
       query: (internalId) => ({
         url: `user/exchanges/${internalId}/assets`,
         params: {
@@ -15,8 +15,8 @@ export const api = createApi({
       }),
     }),
 
-    /* Get all coins of a exchange */
-    allCoins: builder.query<any, any>({
+    /* Get all coins of an exchange */
+    allCoins: builder.query<object[], void>({
       query: (exchangeType) => ({
         url: `coins/zgly_${exchangeType}`,
       }),
