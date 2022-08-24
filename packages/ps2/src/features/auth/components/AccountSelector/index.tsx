@@ -4,7 +4,11 @@ import { Layout, Field, Button, Container, Item } from './styles';
 import { Typography, Avatar, ArrowBottomIcon } from '@zignaly-open/ui';
 import { Exchange } from '../../types';
 import { getImageOfAccount } from '../../../../util/images';
-import { useActiveExchange, useSelectExchange, useUser } from '../../use';
+import {
+  useActiveExchange,
+  useSelectExchange,
+  useCurrentUser,
+} from '../../use';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { AccountSelectorProps } from './types';
 
@@ -12,7 +16,7 @@ const AccountSelector: React.FC<AccountSelectorProps> = ({
   onExchangeSelected,
 }) => {
   const theme = useTheme() as Theme;
-  const { exchanges } = useUser();
+  const { exchanges } = useCurrentUser();
   const activeExchange = useActiveExchange();
   const selectExchange = useSelectExchange();
   const [isDropdownShown, setIsDropdownShown] = useState(false);

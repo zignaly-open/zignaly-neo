@@ -152,7 +152,7 @@ export function useIsAuthenticated(): boolean {
   return !!user;
 }
 
-export function useUser(): UserData | Partial<UserData> {
+export function useCurrentUser(): UserData | Partial<UserData> {
   return (
     useSelector((state: RootState) => state.auth)?.user || ({} as UserData)
   );

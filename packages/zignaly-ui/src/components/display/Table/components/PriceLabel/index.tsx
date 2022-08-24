@@ -25,7 +25,7 @@ const PriceLabel = ({
 }: PriceLabelProps) => {
   const theme = useTheme() as Theme;
   return (
-    <styled.Layout fiat={stableCoinOperative} className={className}>
+    <styled.Layout className={className}>
       <styled.Value>
         <NumberFormat
           prefix={stableCoinOperative ? symbol : ""}
