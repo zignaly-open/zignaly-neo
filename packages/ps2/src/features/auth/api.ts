@@ -68,6 +68,7 @@ export const api = createApi({
     user: builder.query<UserData, void>({
       query: () => ({
         url: 'user',
+        headers: { 'Accept-version': '2' },
       }),
     }),
 

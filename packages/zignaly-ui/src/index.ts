@@ -40,6 +40,7 @@ import WithdrawModal from "components/modals/MyAccount/WithdrawModal";
 import ConnectWalletModal from "components/modals/ZigRaffle/ConnectWallet";
 
 // Icons
+export { ReactComponent as RefreshIcon } from "assets/icons/refresh-icon.svg";
 export { ReactComponent as PencilIcon } from "assets/icons/pencil-icon.svg";
 export { ReactComponent as WhaleIcon } from "assets/icons/whale-icon.svg";
 export { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";

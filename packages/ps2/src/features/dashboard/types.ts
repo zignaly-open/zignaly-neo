@@ -1,6 +1,45 @@
 export interface DashboardState {
   investments?: Investment[];
+  selectedInvestment?: Investment;
+  selectedInvestmentDetails?: InvestmentDetails;
+  coins?: Coins;
 }
+
+export type Coin = {
+  balanceFree: string;
+  balanceFreeBTC: string;
+  balanceFreeUSDT: string;
+  balanceLocked: string;
+  balanceLockedBTC: string;
+  balanceLockedUSDT: string;
+  balanceTotal: string;
+  balanceTotalBTC: string;
+  balanceTotalExchCoin: string;
+  balanceTotalUSDT: string;
+  exchCoin: string;
+  maxWithdrawAmount: string;
+  name: string;
+};
+
+export type Coins = Record<string, Coin>;
+
+export type InvestmentDetails = {
+  invested: number;
+  pending: number;
+  percentage: number;
+  hwm: number;
+  serviceId: string;
+  accountId: string;
+  accountType: string;
+  profitPercentage: number;
+  dfaMqDebt: number;
+  transferOutAll: boolean;
+  transferOut: number;
+  transferOutTs: number;
+  profitOut: number;
+  backAmounts: number[];
+  createdAt: string;
+};
 
 export type Investment = {
   serviceName: string;

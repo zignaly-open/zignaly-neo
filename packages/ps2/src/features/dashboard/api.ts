@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { Investment } from './types';
+import { Coins, Investment, InvestmentDetails } from './types';
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
@@ -11,7 +11,25 @@ export const api = createApi({
         url: 'user/exchanges/' + exchangeInternalId + '/investments',
       }),
     }),
+    coins: builder.query<Coins, string>({
+      query: (exchangeInternalId) => ({
+        url: `user/exchanges/${exchangeInternalId}/assets?reduced=true`,
+      }),
+    }),
+    investmentDetails: builder.query<
+      InvestmentDetails,
+      { exchangeInternalId: string; serviceId: string }
+    >({
+      query: ({ exchangeInternalId, serviceId }) => ({
+        url: `user/exchanges/${exchangeInternalId}/${serviceId}`,
+      }),
+    }),
   }),
 });
 
-export const { useLazyInvestmentsQuery, useInvestmentsQuery } = api;
+export const {
+  useLazyInvestmentsQuery,
+  useInvestmentsQuery,
+  useCoinsQuery,
+  useInvestmentDetailsQuery,
+} = api;
