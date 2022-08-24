@@ -18,8 +18,8 @@ export const authSlice = createSlice({
     setAccessToken: (state, action: PayloadAction<string>) => {
       state.accessToken = action.payload;
     },
-    setActiveExchangeId: (state, action: PayloadAction<string>) => {
-      state.activeExchangeId = action.payload;
+    setActiveExchangeInternalId: (state, action: PayloadAction<string>) => {
+      state.activeExchangeInternalId = action.payload;
     },
     setSessionExpiryDate: (state, action: PayloadAction<number>) => {
       state.sessionExpiryDate = new Date(action.payload * 1000);
@@ -36,7 +36,7 @@ export const {
   setAccessToken,
   setUser,
   setSessionExpiryDate,
-  setActiveExchangeId,
+  setActiveExchangeInternalId,
 } = authSlice.actions;
 
 export default authSlice.reducer;

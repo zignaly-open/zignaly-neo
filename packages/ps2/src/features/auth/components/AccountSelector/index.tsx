@@ -17,8 +17,8 @@ const AccountSelector: React.FC<AccountSelectorProps> = ({
   const selectExchange = useSelectExchange();
   const [isDropdownShown, setIsDropdownShown] = useState(false);
 
-  const setActiveExchange = (exchangeId: string) => {
-    selectExchange(exchangeId);
+  const setActiveExchange = (exchangeInternalId: string) => {
+    selectExchange(exchangeInternalId);
     setIsDropdownShown(false);
     onExchangeSelected();
   };
@@ -53,8 +53,8 @@ const AccountSelector: React.FC<AccountSelectorProps> = ({
         <Container>
           {exchanges.map((exchange: Exchange, index) => (
             <Item
-              key={exchange.exchangeId}
-              onClick={() => setActiveExchange(exchange.exchangeId)}
+              key={exchange.internalId}
+              onClick={() => setActiveExchange(exchange.internalId)}
             >
               <Avatar size={'medium'} image={getImageOfAccount(index)} />
               <Typography

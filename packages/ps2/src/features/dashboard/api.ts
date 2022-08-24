@@ -7,8 +7,8 @@ export const api = createApi({
   reducerPath: 'dashboardApi',
   endpoints: (builder) => ({
     investments: builder.query<Investment[], string>({
-      query: (exchangeId) => ({
-        url: 'user/exchanges/' + exchangeId + '/investments',
+      query: (exchangeInternalId) => ({
+        url: 'user/exchanges/' + exchangeInternalId + '/investments',
       }),
     }),
   }),
