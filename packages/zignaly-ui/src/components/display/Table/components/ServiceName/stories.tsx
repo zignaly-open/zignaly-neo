@@ -14,5 +14,4 @@ Service.args = {
   heading: "The Golden Eagle",
   subtitle: "by Barry Silverman",
   cryptoName: "Matic",
-  cryptoAlt: "Polygon",
 };

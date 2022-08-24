@@ -62,7 +62,7 @@ interface MarketPlaceTableProps {
     heading: string;
     subtitle: string;
     cryptoName: string;
-    cryptoAlt: string;
+    image?: string;
   };
   assetsInPool: {
     assetsValue: number;
@@ -88,7 +88,6 @@ const createMarketPlaceTableBodyObject = ({
         heading={serviceName.heading}
         subtitle={serviceName.subtitle}
         cryptoName={serviceName.cryptoName}
-        cryptoAlt={serviceName.cryptoAlt}
       />
     ),
     assetsInPool: (
@@ -169,7 +168,6 @@ const createUserTableDataObject = ({
         heading={serviceName.heading}
         subtitle={serviceName.subtitle}
         cryptoName={serviceName.cryptoName}
-        cryptoAlt={serviceName.cryptoAlt}
       />
     ),
     chart: <AreaChart variant={chart.variant} data={chart.data} />,
@@ -455,7 +453,6 @@ UserDashBoard.args = {
         heading: "The Golden Eagle",
         subtitle: "by Barry Silvername",
         cryptoName: "Poly",
-        cryptoAlt: "PolyChain",
       },
       chart: {
         data: [
@@ -480,7 +477,6 @@ UserDashBoard.args = {
         heading: "Unkown",
         subtitle: "",
         cryptoName: "Poly",
-        cryptoAlt: "PolyChain",
       },
       chart: {
         data: [
@@ -512,7 +508,6 @@ MarketPlaceTabel.args = {
         heading: "The Golden Eagle",
         subtitle: "by Barry Silvername",
         cryptoName: "Poly",
-        cryptoAlt: "PolyChain",
       },
       assetsInPool: { assetsValue: 1000000, numberOfInvestors: 200 },
       chart: {
@@ -535,7 +530,6 @@ MarketPlaceTabel.args = {
         heading: "Unkown",
         subtitle: "",
         cryptoName: "Poly",
-        cryptoAlt: "PolyChain",
       },
       assetsInPool: { assetsValue: 0, numberOfInvestors: 200 },
       chart: {

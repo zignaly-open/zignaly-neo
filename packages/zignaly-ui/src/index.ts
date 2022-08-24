@@ -79,12 +79,6 @@ import BrandImage from "./components/navigation/Header/components/BrandImage";
 import { dark, light } from "theme";
 import ThemeProvider from "utils/ThemeProvider";
 import { customSort } from "utils/numbers";
-import {
-  createMarketPlaceTableBodyObject,
-  createMarketPlaceTableHeader,
-  createUserTableDataObject,
-  createUserTableHeader,
-} from "./components/display/Table/types";
 import { HeaderLinksContainer } from "components/navigation/Header/styles";
 import { styledIf } from "utils/styled";
 
@@ -101,10 +95,6 @@ export {
   Avatar,
   Loader,
   Table,
-  createUserTableHeader,
-  createUserTableDataObject,
-  createMarketPlaceTableBodyObject,
-  createMarketPlaceTableHeader,
   ConnectionStateLabel,
   DateLabel,
   PriceLabel,

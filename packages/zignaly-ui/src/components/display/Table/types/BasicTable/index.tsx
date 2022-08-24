@@ -1,7 +1,5 @@
 import React, { useCallback, useRef, useState } from "react";
 import { useSortBy, useTable } from "react-table";
-
-// Styles
 import {
   ColumnsSelector,
   HeaderRow,
@@ -16,16 +14,10 @@ import {
   View,
 } from "../../styles";
 import { dark } from "../../../../../theme";
-
-// Components
 import Typography from "../../../Typography";
 import CheckBox from "../../../../inputs/CheckBox";
 import IconButton from "../../../../inputs/IconButton";
-
-// Assets
 import { ReactComponent as OptionsDotsIcon } from "../../../../../assets/icons/option-dots-icon.svg";
-
-// Types
 import { TableBasicProps } from "../../types";
 
 export default function BasicTable({

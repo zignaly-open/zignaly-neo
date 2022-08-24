@@ -1,5 +1,6 @@
 // Dependencies
 import styled from "styled-components";
+import Typography from "./display/Typography";
 
 export const ButtonGroup = styled.div`
   display: grid;
@@ -23,4 +24,24 @@ export const PageContainer = styled(MarginContainer)`
   &.withSubHeader {
     padding-top: 110px;
   }
+`;
+
+export const ValueIndicator = styled(Typography)<any>`
+  display: inline;
+  ${(props: any) => `
+    font-size: 11px;
+    font-weight: 500;
+    
+    &.zero {
+      color: ${props.theme.neutral300}
+    }
+    
+    &.positive {
+      color: ${props.theme.greenGraph};
+    }
+    
+    &.negative {
+      color: ${props.theme.redGraphOrError};
+    }
+  `}
 `;
