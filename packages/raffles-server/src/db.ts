@@ -24,8 +24,5 @@ if (isTest) {
 }
 
 const persistTablesToTheDatabase = () => sequelize.sync({ alter: true });
-// persist models to the database
-// TODO: maybe alter is not good on prod
-!isTest && persistTablesToTheDatabase();
 
 export { sequelize, persistTablesToTheDatabase };

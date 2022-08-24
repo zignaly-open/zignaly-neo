@@ -1,0 +1,29 @@
+name: Prod Release
+on:
+  push:
+    branches:
+      - release
+jobs:
+  build:
+    name: Webapp Prod Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: AWS CodeDeploy
+        uses: sourcetoad/aws-codedeploy-action@v1
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          aws_region: ap-northeast-1
+          codedeploy_name: zignaly
+          codedeploy_group: zignaly-raffles-prod
+          codedeploy_register_only: false
+          s3_bucket: ${{ secrets.AWS_S3_BUCKET }}
+          s3_folder: dev
+          max_polling_iterations: 60
+          directory: .

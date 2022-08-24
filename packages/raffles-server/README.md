@@ -29,4 +29,4 @@ What commands you could need?
 * `yarn test` to... yes, you guessed it, test
 
 By the way, looking at an empty list is boring, so
-do `cd packages/server && npx ts-node src/entities/__fixtures/fixtures.ts`
+do `cd packages/raffles-server && npx ts-node src/entities/__fixtures/fixtures_short.ts`
