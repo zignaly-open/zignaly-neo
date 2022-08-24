@@ -105,6 +105,7 @@ export const BIDS_SUBSCRIPTION = gql`
         }
         value
         date
+        isClaimed
       }
       bids {
         id
