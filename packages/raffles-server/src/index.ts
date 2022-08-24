@@ -13,17 +13,21 @@ import * as users from './entities/users';
 import * as payouts from './entities/payouts';
 import listenToChain from './chain/watch';
 import { expressjwt, Request as AuthorizedRequest } from 'express-jwt';
-import { port, isTest, algorithm, secret } from '../config';
+import { port, isTest, algorithm, secret, graphqlPath } from '../config';
 import { makeExecutableSchema } from '@graphql-tools/schema';
 import { WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
+import { persistTablesToTheDatabase } from './db';
+
+// persist models to the database
+// TODO: maybe alter is not good on prod
+!isTest && persistTablesToTheDatabase();
 
 const typeDef = gql`
   type Query
   type Mutation
   type Subscription
 `;
-
 const app = express();
 app.use(
   expressjwt({
@@ -42,7 +46,7 @@ const schema = makeExecutableSchema({
 
 const wsServer = new WebSocketServer({
   server: httpServer,
-  path: '/graphql',
+  path: graphqlPath,
 });
 
 const server = new ApolloServer({
@@ -78,7 +82,7 @@ const serverCleanup = useServer({ schema }, wsServer);
 
 !process.env.DEV_ONLY_DISABLE_DEPOSIT_CHECKS && !isTest && listenToChain();
 
-server.start().then(() => server.applyMiddleware({ app }));
+server.start().then(() => server.applyMiddleware({ app, path: graphqlPath }));
 
 if (!isTest) {
   httpServer.listen({ port });

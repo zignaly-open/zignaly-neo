@@ -1,0 +1,11 @@
+version: 0.0
+os: linux
+files:
+    - source: /
+      destination: /zignaly
+
+hooks:
+    AfterInstall:
+        - location: scripts/after_install.sh
+          runas: root
+          timeout: 300

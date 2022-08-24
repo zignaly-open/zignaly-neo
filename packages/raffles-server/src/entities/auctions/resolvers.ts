@@ -93,7 +93,7 @@ export const resolvers = {
       );
 
       try {
-        await internalTransfer(
+        const internalTransferPromise = internalTransfer(
           user.publicAddress,
           zignalySystemId,
           winningBid.value,
@@ -103,23 +103,22 @@ export const resolvers = {
           winningBid.claimTransactionId = tx.transaction_id;
         });
 
+        const payout = await Payout.create({
+          auctionId: id,
+          userId: user.id,
+          publicAddress: user.publicAddress,
+        });
         await Promise.all([
+          AuctionsRepository.performPayout(payout),
+          internalTransferPromise,
           winningBid.save(),
           verifyPositiveBalance(user.publicAddress),
         ]);
       } catch (error) {
-        console.error(error);
         throw new Error('Could not make a claim');
       }
 
-      const payout = await Payout.create({
-        auctionId: id,
-        userId: user.id,
-        publicAddress: user.publicAddress,
-      });
-
-      const [, [updatedAuction]] = await Promise.all([
-        AuctionsRepository.performPayout(payout),
+      const [[updatedAuction]] = await Promise.all([
         AuctionsRepository.getAuctions(auction.id, user),
         emitBalanceChanged(user),
       ]);
