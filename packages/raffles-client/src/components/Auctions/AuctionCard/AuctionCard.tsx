@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { Typography, TextButton, Button, TimeIcon } from '@zignaly-open/ui';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import FinalCountdown from './FinalCountdown';
@@ -41,10 +41,6 @@ const AuctionCard: React.FC<{
 
   const [hasJustExpired] = useTimeout(
     +new Date(auction.expiresAt) - renderDate.current,
-  );
-  const bidButtonActive = useMemo(
-    () => isActive && !hasJustExpired,
-    [isActive, hasJustExpired, auction.comingSoon],
   );
 
   useEffect(() => {
@@ -119,7 +115,10 @@ const AuctionCard: React.FC<{
                 leftElement={<TimeIcon height={21} width={21} />}
               />
             ) : (
-              <BidButton auction={auction} isActive={bidButtonActive} />
+              <BidButton
+                auction={auction}
+                isActive={isActive && !hasJustExpired()}
+              />
             )}
           </CardActions>
         </CardBody>

@@ -14,6 +14,7 @@ export const rpcSocketUrl = process.env.RPC_SOCKET_URL as string;
 export const receivingAddress = process.env.RECEIVING_ACCOUNT as string;
 export const contractAddress = process.env.CONTRACT_ADDRESS as string;
 export const abi = IERC20;
+export const graphqlPath = process.env.GRAPHQL_PATH || '/graphql';
 export const isTest = process.env.NODE_ENV === 'test';
 export const port = process.env.PORT || 4000;
 export const payoutSpreadsheetUrl = process.env.REACT_APP_SHEET_BEST_URL;
