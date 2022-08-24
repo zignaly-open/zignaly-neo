@@ -23,7 +23,7 @@ const Menu = ({
   showModal,
 }: {
   currentUser: UserType;
-  showModal: (...args: any[]) => void;
+  showModal: (...args: unknown[]) => void;
 }) => {
   const logout = useLogout();
   const { t } = useTranslation('global');
