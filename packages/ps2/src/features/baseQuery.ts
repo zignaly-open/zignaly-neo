@@ -8,6 +8,7 @@ export default fetchBaseQuery({
     if (token) {
       headers.set('authorization', `Bearer ${token}`);
     }
+    headers.set('content-type', 'application/json');
     return headers;
   },
 });
