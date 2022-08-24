@@ -1,22 +1,19 @@
-// Dependencies
 import React, { useCallback } from "react";
-
-// Types
 import { TableProps, tableTypes } from "./types";
-
-// Components
 import BasicTable from "./types/BasicTable";
 import PagedWithDataTable from "./types/PagedWithDataTable";
+import PercentageIndicator from "./components/PercentageIndicator";
 
 const Table = ({
-  type = "basic",
   columns = [],
   data = [],
-  onColumnHidden = () => {},
   defaultHiddenColumns = [],
   hideOptionsButton,
-  isUserTable,
   initialState = {},
+  isUserTable,
+  onColumnHidden = () => null,
+  type = "basic",
+  emptyMessage, // TODO: default
 }: TableProps) => {
   const renderTable = useCallback(() => {
     switch (type) {
@@ -30,6 +27,7 @@ const Table = ({
             hideOptionsButton={hideOptionsButton}
             isUserTable={isUserTable}
             initialState={initialState}
+            emptyMessage={emptyMessage}
           />
         );
       case tableTypes.basic:
@@ -43,6 +41,7 @@ const Table = ({
             hideOptionsButton={hideOptionsButton}
             isUserTable={isUserTable}
             initialState={initialState}
+            emptyMessage={emptyMessage}
           />
         );
     }

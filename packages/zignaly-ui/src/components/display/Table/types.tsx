@@ -2,15 +2,6 @@ import { ChartsProps } from "../Charts/types";
 import { BalanceSummaryProps } from "./components/BalanceSummary/types";
 import { PercentageIndicatorProps } from "./components/PercentageIndicator/types";
 import { ServiceNameProps } from "./components/ServiceName/types";
-import { BalanceSummary } from "./components/BalanceSummary";
-import { ServiceName } from "./components/ServiceName";
-import { AreaChart } from "../Charts";
-import React from "react";
-import PercentageIndicator from "./components/PercentageIndicator";
-import AssetsInPool from "./components/AssetsInPool";
-import InvestColumn from "./components/InvestColumn";
-import { Column } from "utils/column";
-import Typography from "../Typography";
 
 export const tableTypes = {
   basic: "basic",
@@ -26,6 +17,7 @@ export interface TableBasicProps {
   isUserTable: boolean;
   maxWidth?: number;
   initialState?: object;
+  emptyMessage?: string | JSX.Element;
   isPagingWithAllData?: boolean;
   hasFooter?: boolean;
 }

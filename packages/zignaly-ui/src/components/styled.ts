@@ -26,6 +26,7 @@ export const PageContainer = styled(MarginContainer)`
   }
 `;
 
+// TODO: replace with proper styled comp usages instead of classes
 export const ValueIndicator = styled(Typography)<any>`
   display: inline;
   ${(props: any) => `

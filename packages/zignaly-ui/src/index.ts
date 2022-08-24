@@ -25,7 +25,7 @@ import TextButton from "./components/inputs/TextButton";
 import InputText from "./components/inputs/InputText";
 import Select from "./components/inputs/Selector";
 import InputCode from "./components/inputs/InputCode";
-import { ButtonGroup } from "./components/styled";
+import { ButtonGroup, ValueIndicator } from "./components/styled";
 
 // Layouts
 import { MarginContainer, PageContainer } from "./components/styled";
@@ -90,7 +90,6 @@ export {
    */
   // Display
   ServiceName,
-  BalanceSummary,
   AreaChart,
   Avatar,
   Loader,
@@ -98,6 +97,7 @@ export {
   ConnectionStateLabel,
   DateLabel,
   PriceLabel,
+  ValueIndicator,
   PercentageIndicator,
   Typography,
   ErrorMessage,
