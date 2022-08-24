@@ -48,6 +48,7 @@ const ExtraNavigationDropdown: React.FC = () => {
         <DropDownContainer>
           <NavList>
             <NavLink
+              as={'a'}
               href={'https://help.zignaly.com/hc/en-us'}
               target={'_blank'}
               onClick={onClose}
@@ -70,6 +71,7 @@ const ExtraNavigationDropdown: React.FC = () => {
               const IconComponent = socialNetwork.image;
               return (
                 <NavLink
+                  as={'a'}
                   onClick={onClose}
                   href={socialNetwork.path}
                   key={`--social-network-nav-link-${index.toString()}`}
