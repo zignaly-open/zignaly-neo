@@ -8,11 +8,14 @@ import { useTranslation } from 'react-i18next';
 import useAuthenticate from 'hooks/useAuthenticate';
 import { useEthers } from '@usedapp/core';
 import SwitchNetworkModal from '../SwitchNetwork';
+import { useMediaQuery } from '@mui/material';
+import theme from 'theme';
 
 const ConnectWalletModal = (props: ConnectWalletModalProps) => {
   const { chainId } = useEthers();
   const authenticate = useAuthenticate();
   const { t } = useTranslation('connect-wallet');
+  const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
 
   const connect = (e: React.MouseEvent<HTMLButtonElement>) => {
     authenticate().then(() => props.onClose(e, 'escapeKeyDown'));
@@ -31,8 +34,9 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
       <Gap gap={20} />
       <ButtonContainer>
         <Button
-          minWidth={255}
-          size='large'
+          variant='primary'
+          minWidth={matchesSmall ? 255 : 180}
+          size={matchesSmall ? 'xlarge' : 'large'}
           caption={t('metamask')}
           onClick={(e) => connect(e)}
           leftElement={<MetaMaskLogo />}
