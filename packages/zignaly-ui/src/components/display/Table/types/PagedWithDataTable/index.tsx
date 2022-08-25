@@ -56,32 +56,21 @@ export default function PagedWithDataTable({
   const [hiddenColumns, setHiddenColumns] = useState<string[]>(defaultHiddenColumns || []);
 
   // Hooks
-  // @ts-ignore
   const {
     getTableProps,
     getTableBodyProps,
-    // @ts-ignore
     page,
     headerGroups,
     toggleHideColumn,
     prepareRow,
-    // @ts-ignore
     gotoPage,
-    // @ts-ignore
     nextPage,
-    // @ts-ignore
     previousPage,
-    // @ts-ignore
     canNextPage,
-    // @ts-ignore
     canPreviousPage,
-    // @ts-ignore
     pageOptions,
-    // @ts-ignore
     pageCount,
-    // @ts-ignore
     setPageSize,
-    // @ts-ignore
     state: { pageIndex, pageSize },
   } = useTable(
     {
@@ -93,30 +82,20 @@ export default function PagedWithDataTable({
     usePagination,
   );
 
-  //const propsBasisUseTable = { getTableProps, getTableBodyProps, headerGroups, prepareRow, toggleHideColumn, page, gotoPage, nextPage, previousPage, canNextPage, canPreviousPage, pageOptions, state: { pageIndex } };
-
-  //const firstPageRows = rows.slice(0, 20);
-
   /**
    * @function renderActionRow():
    * @description Inject the action row on "column options" column.
    */
   const renderActionRow = useCallback(
-    (row: any, index: number) => {
+    (row: { index: number }, index: number) => {
       if (data.find((e: any) => e.action)) {
         return (
           <td className={"action"} key={`--table-row-cell-${index.toString()}`}>
-            {/*@ts-ignore*/}
             {data[row.index].action}
           </td>
         );
       } else if (!hideOptionsButton) {
-        return (
-          <td className={"action"} key={`--table-row-cell-${index.toString()}`}>
-            {/*@ts-ignore*/}
-            {""}
-          </td>
-        );
+        return <td className={"action"} key={`--table-row-cell-${index.toString()}`} />;
       }
     },
     [data],
@@ -176,6 +155,7 @@ export default function PagedWithDataTable({
       </ColumnsSelector>
     );
   }, [columns, hiddenColumns]);
+
   return (
     <Layout>
       <View ref={tableRef}>
@@ -219,7 +199,6 @@ export default function PagedWithDataTable({
                         variant={"flat"}
                         icon={<OptionsDotsIcon color={dark.neutral200} />}
                         dropDownOptions={{
-                          componentOverflowRef: tableRef,
                           alignment: "right",
                         }}
                         renderDropDown={renderColumnsSelector()}
@@ -280,7 +259,7 @@ export default function PagedWithDataTable({
                 icon={<DoubleChevron width={24} height={24} color={dark.neutral300} />}
                 onClick={() => gotoPage(0)}
                 disabled={!canPreviousPage}
-              ></IconButtonContainer>
+              />
               <IconButtonContainer
                 variant="flat"
                 size="xlarge"
@@ -289,7 +268,7 @@ export default function PagedWithDataTable({
                 icon={<SingleChevron width={24} height={24} color={dark.neutral300} />}
                 onClick={() => previousPage()}
                 disabled={!canPreviousPage}
-              ></IconButtonContainer>
+              />
               <Typography variant="body1" weight="regular" color="neutral300">
                 Page
               </Typography>
@@ -311,7 +290,7 @@ export default function PagedWithDataTable({
                 onClick={() => nextPage()}
                 disabled={!canNextPage}
                 icon={<SingleChevron width={24} height={24} color={dark.neutral300} />}
-              ></IconButtonContainer>
+              />
               <IconButtonContainer
                 variant="flat"
                 size="xlarge"
@@ -319,7 +298,7 @@ export default function PagedWithDataTable({
                 onClick={() => gotoPage(pageCount - 1)}
                 disabled={!canNextPage}
                 icon={<DoubleChevron width={24} height={24} color={dark.neutral300} />}
-              ></IconButtonContainer>
+              />
             </Row>
             <Row justifyContent="end">
               {data.length > 10 && (

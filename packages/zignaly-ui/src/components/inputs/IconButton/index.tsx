@@ -1,17 +1,10 @@
 // Dependencies
-import React, {
-  useCallback,
-  useMemo,
-  useEffect,
-  useRef,
-  useState,
-  useImperativeHandle,
-} from "react";
-import { useClickAway, useWindowSize } from "react-use";
-import { Portal } from "react-portal";
+import React, { useCallback, useRef, useState, useImperativeHandle, useEffect } from "react";
+import { useClickAway } from "react-use";
 
 // Styled Components
 import { Layout, ViewPort, Dropdown, Icon, Container, ButtonLoader, IconContainer } from "./styles";
+import Portal from "./components/Portal";
 
 // Types
 import { IconButtonProps, defaultDropDownOptions } from "./types";
@@ -43,22 +36,16 @@ const IconButton = (
     ...dropDownOptions,
   };
 
-  const layoutRef = useRef(null);
+  const requestAniRef = useRef<any>();
+
+  const btnRef = useRef(null);
   const dropdownRef = useRef(null);
 
-  // Hooks
-  const { width } = useWindowSize();
+  // State
   const [isActiveDropdown, setDropdownActive] = useState(false);
+  const [coords, setCoords] = useState({});
 
-  /**
-   * @function handleClickButton:
-   * @description Function in charge of indicating the logic when pressing the button.
-   */
-  const handleClickButton = useCallback(() => {
-    setDropdownActive((current) => !current);
-  }, []);
-
-  useClickAway(layoutRef, (event: Event) => {
+  useClickAway(btnRef, (event: Event) => {
     if (event && event.target && dropdownRef) {
       const container = dropdownRef.current as unknown as HTMLElement;
 
@@ -74,60 +61,55 @@ const IconButton = (
     },
   }));
 
-  useEffect(() => {
-    if (layoutRef && layoutRef.current && options.position === "absolute") {
-      if (isActiveDropdown) {
-        const { offsetTop, clientHeight, offsetLeft, clientWidth } = layoutRef.current;
+  const updateDropdownCoords = () => {
+    if (btnRef && btnRef.current) {
+      const button = btnRef.current as HTMLElement;
+      const dropdown = dropdownRef.current as unknown as HTMLElement;
 
-        if (dropdownRef && dropdownRef.current) {
-          const container = dropdownRef.current as HTMLElement;
+      if (button && dropdown) {
+        const btnRect = button.getBoundingClientRect();
+        const dropdownRect = dropdown.getBoundingClientRect();
 
-          const { alignment, componentOverflowRef } = options;
-          container.style.top = `${offsetTop + clientHeight}px`;
+        const top = btnRect.height + btnRect.y + window.scrollY;
+        let left = 0;
 
-          const scrollLeft = componentOverflowRef ? componentOverflowRef.current.scrollLeft : 0;
-
-          if (alignment === "right") {
-            container.style.left = `${
-              offsetLeft - (container.clientWidth - clientWidth) - scrollLeft
-            }px`;
-          } else {
-            container.style.left = `${offsetLeft - scrollLeft}px`;
-          }
-          container.style.opacity = "1";
+        if (options.alignment === "right") {
+          left = btnRect.x - dropdownRect.width + btnRect.width;
+        } else {
+          left = btnRect.x;
         }
-      } else {
-        if (dropdownRef && dropdownRef.current) {
-          setDropdownActive(true);
-        }
+
+        setCoords({
+          left,
+          top,
+          opacity: 1,
+        });
+        requestAniRef.current = requestAnimationFrame(updateDropdownCoords);
       }
     }
-  }, [width, options.position, isActiveDropdown, options.componentOverflowRef]);
+  };
 
   useEffect(() => {
     if (isActiveDropdown) {
-      setDropdownActive(false);
+      requestAniRef.current = requestAnimationFrame(updateDropdownCoords);
+    } else {
+      setCoords({
+        opacity: 0,
+      });
+      cancelAnimationFrame(requestAniRef.current);
     }
-  }, [width]);
+  }, [isActiveDropdown]);
 
-  const renderDropDownBase = useMemo(
-    () => (
-      <Dropdown
-        ref={dropdownRef}
-        width={options.width}
-        alignment={options.alignment}
-        position={options.position}
-        zIndex={options.zIndex}
-        maxHeight={options.maxHeight}
-      >
-        {renderDropDown}
-      </Dropdown>
-    ),
-    [dropdownRef, options],
-  );
+  /**
+   * @function handleClickButton:
+   * @description Function in charge of indicating the logic when pressing the button.
+   */
+  const handleClickButton = useCallback(() => {
+    setDropdownActive((current) => !current);
+  }, [btnRef, dropdownRef]);
 
   return (
-    <Layout ref={layoutRef} className={className}>
+    <Layout className={className}>
       <ViewPort
         shrinkWrap={shrinkWrap}
         type={type}
@@ -135,6 +117,7 @@ const IconButton = (
         variant={variant}
         colors={colors}
         disabled={disabled || loading}
+        ref={btnRef}
         isActiveDropdown={isActiveDropdown}
       >
         <Container onClick={disabled ? null : renderDropDown ? handleClickButton : onClick}>
@@ -147,12 +130,20 @@ const IconButton = (
           )}
         </Container>
       </ViewPort>
-      {isActiveDropdown &&
-        (options.position === "absolute" ? (
-          <Portal>{renderDropDownBase}</Portal>
-        ) : (
-          renderDropDownBase
-        ))}
+      {isActiveDropdown && (
+        <Portal>
+          <Dropdown
+            ref={dropdownRef}
+            style={{ ...coords }}
+            width={options.width}
+            maxHeight={options.maxHeight}
+            alignment={options.alignment}
+            zIndex={options.zIndex}
+          >
+            {renderDropDown}
+          </Dropdown>
+        </Portal>
+      )}
     </Layout>
   );
 };

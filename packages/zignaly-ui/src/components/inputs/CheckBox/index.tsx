@@ -1,5 +1,6 @@
 // Dependencies
 import React, { useCallback, useRef, useState } from "react";
+import { useTheme } from "styled-components";
 
 // Styled Components
 import { Layout, Box, Label, Icon } from "./styles";
@@ -12,8 +13,9 @@ function CheckBox({
   value,
   label,
   disabled = false,
-  onChange = () => {},
+  onChange = () => null,
 }: CheckBoxProps) {
+  const theme: any = useTheme();
   const isControlled = useRef(value !== undefined);
   const [internalValue, setInternalValue] = useState(defaultValue);
   const isChecked = isControlled.current ? value ?? false : internalValue;
@@ -32,9 +34,7 @@ function CheckBox({
 
   return (
     <Layout onClick={handleClickChecked} isActive={isChecked} disabled={disabled}>
-      <Box>
-        <Icon />
-      </Box>
+      <Box>{isChecked && <Icon color={theme.neutral300} />}</Box>
       <Label>{label}</Label>
     </Layout>
   );

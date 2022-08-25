@@ -19,7 +19,9 @@ export const tableTypes = {
 };
 export interface TableBasicProps {
   columns: any[];
-  data: Object[];
+  data: {
+    action?: React.ReactNode;
+  }[];
   defaultHiddenColumns?: string[];
   onColumnHidden?: (column: string, isHidden: boolean) => void;
   hideOptionsButton: boolean;

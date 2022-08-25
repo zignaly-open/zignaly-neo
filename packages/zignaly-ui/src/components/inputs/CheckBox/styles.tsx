@@ -19,7 +19,7 @@ export const Box = styled.div`
   align-items: center;
   justify-content: center;
 
-  background: #0c0d21;
+  background: #101427;
   border: 1px solid #706f82;
   border-radius: 2.5px;
   position: relative;
@@ -29,7 +29,7 @@ export const Box = styled.div`
   overflow: hidden;
 `;
 
-export const Label = styled(Typography).attrs({ color: "neutral300" })`
+export const Label = styled(Typography).attrs({ variant: "body2", color: "neutral300" })`
   font-weight: 400;
   margin: 0 12px;
 `;
