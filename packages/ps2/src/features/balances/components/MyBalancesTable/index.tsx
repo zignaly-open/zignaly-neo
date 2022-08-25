@@ -14,7 +14,6 @@ import {
   PriceLabel,
   CoinLabel,
   customSort,
-  customSortBigNumbers,
   Loader,
 } from '@zignaly-open/ui';
 
@@ -64,10 +63,7 @@ function MyBalancesTable() {
           <PriceLabel coin={value.symbol} value={value.balanceTotal} />
         ),
         sortType: (a, b) =>
-          customSortBigNumbers(
-            a.values.total.balanceTotal,
-            b.values.total.balanceTotal,
-          ),
+          customSort(a.values.total.balanceTotal, b.values.total.balanceTotal),
       },
       {
         Header: t('my-balances.tableHeader.availableBalance'),
@@ -76,7 +72,7 @@ function MyBalancesTable() {
           <PriceLabel coin={value.symbol} value={value.balanceFree} />
         ),
         sortType: (a, b) =>
-          customSortBigNumbers(
+          customSort(
             a.values.available.balanceFree,
             b.values.available.balanceFree,
           ),
@@ -88,7 +84,7 @@ function MyBalancesTable() {
           <PriceLabel coin={value.symbol} value={value.balanceLocked} />
         ),
         sortType: (a, b) =>
-          customSortBigNumbers(a.values.balanceLocked, b.values.balanceLocked),
+          customSort(a.values.balanceLocked, b.values.balanceLocked),
       },
       {
         Header: t('my-balances.tableHeader.valueBTC'),
@@ -97,7 +93,7 @@ function MyBalancesTable() {
           <PriceLabel coin={'btc'} value={value.balanceTotalBTC} />
         ),
         sortType: (a, b) =>
-          customSortBigNumbers(
+          customSort(
             a.values.valueBTC.balanceTotalBTC,
             b.values.valueBTC.balanceTotalBTC,
           ),
@@ -113,7 +109,7 @@ function MyBalancesTable() {
           />
         ),
         sortType: (a, b) =>
-          customSortBigNumbers(
+          customSort(
             a.values.valueUSD.balanceTotalUSDT,
             b.values.valueUSD.balanceTotalUSDT,
           ),

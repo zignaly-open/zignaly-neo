@@ -1,5 +1,4 @@
 // Dependencies
-import BigNumber from "bignumber.js";
 export const isPositive = (number: number) => 1 / (number * 0) === 1 / 0;
 
 export const formatBalanceUnits = (value: any) => {
@@ -64,20 +63,5 @@ export const customSort = (
   }
   if (a > b) return 1;
   if (a < b) return -1;
-  return 0;
-};
-
-/**
- * @description Sort the column by picking up the value
- *
- * @returns {Number} returns the number for sorting
- * @param a value to compare
- * @param b value to compare
- */
-export const customSortBigNumbers = (a: string | BigNumber, b: string | BigNumber) => {
-  a = new BigNumber(a);
-  b = new BigNumber(b);
-  if (a.isGreaterThan(b)) return 1;
-  if (a.isLessThan(b)) return -1;
   return 0;
 };

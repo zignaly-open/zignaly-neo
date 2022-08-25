@@ -77,7 +77,7 @@ import BrandImage from "./components/navigation/Header/components/BrandImage";
 // Utils
 import { dark, light } from "theme";
 import ThemeProvider from "utils/ThemeProvider";
-export { customSort, customSortBigNumbers } from "utils/numbers";
+export { customSort } from "utils/numbers";
 export { isEmpty } from "utils/strings";
 import {
   createMarketPlaceTableBodyObject,
