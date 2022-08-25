@@ -5,12 +5,11 @@ import { persistReducer, persistStore } from 'redux-persist';
 
 // Reducers
 import authReducer from './auth/store';
-import coinsReducer from './coins/store';
-import balancesReducer from './balances/store';
+import myBalancesReducer from './myBalances/store';
 
 // API Reducers Paths
 import { api as authApi } from './auth/api';
-import { api as balancesApi } from './balances/api';
+import { api as balancesApi } from './myBalances/api';
 
 const persistConfig = {
   key: 'root',
@@ -26,8 +25,7 @@ export const store = configureStore({
       [authApi.reducerPath]: authApi.reducer,
       [balancesApi.reducerPath]: balancesApi.reducer,
       auth: authReducer,
-      coins: coinsReducer,
-      balances: balancesReducer,
+      myBalances: myBalancesReducer,
     }),
   ),
   middleware: (getDefaultMiddleware) =>

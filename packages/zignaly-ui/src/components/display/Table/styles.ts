@@ -237,7 +237,7 @@ export const OptionList = styled.ul`
 `;
 
 export const OptionItem = styled.li`
-  padding: 12px 18px;
+  padding: 5px 18px;
 `;
 
 export const Actions = styled.div`

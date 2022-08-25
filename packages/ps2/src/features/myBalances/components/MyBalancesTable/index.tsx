@@ -1,14 +1,9 @@
-// Dependencies
 import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { Column } from 'react-table';
-
-// Hooks
 import { useActiveExchange } from '../../../auth/use';
-import { useFetchBalances, useSelectBalances } from '../../use';
-
-// Components
+import { useFetchMyBalances, useSelectMyBalances } from '../../use';
 import {
   Table,
   PriceLabel,
@@ -16,25 +11,20 @@ import {
   customSort,
   Loader,
 } from '@zignaly-open/ui';
-
-// Theme
 import Theme from '@zignaly-open/ui/lib/theme/theme';
-
-// Types
 import { Data } from './types';
 
-function MyBalancesTable() {
-  // Hooks
+const MyBalancesTable = (): JSX.Element => {
   const theme = useTheme() as Theme;
   const { t } = useTranslation('my-balances');
 
   const currentExchange = useActiveExchange();
 
-  const balances = useSelectBalances();
-  const [{ loading }, fetchBalances] = useFetchBalances();
+  const balances = useSelectMyBalances();
+  const [{ isLoading }, fetchBalances] = useFetchMyBalances();
 
   /**
-   * Fetch the balances of the user.
+   * Fetch the myBalances of the user.
    */
   useEffect(() => {
     if (currentExchange) {
@@ -163,8 +153,8 @@ function MyBalancesTable() {
     ],
   };
 
-  if (loading) {
-    return <Loader color={theme.neutral300} ariaLabel={'Loading balances'} />;
+  if (isLoading) {
+    return <Loader color={theme.neutral300} ariaLabel={'Loading myBalances'} />;
   }
 
   return (
@@ -177,6 +167,6 @@ function MyBalancesTable() {
       isUserTable={false}
     />
   );
-}
+};
 
 export default MyBalancesTable;

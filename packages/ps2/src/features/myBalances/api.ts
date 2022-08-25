@@ -2,10 +2,10 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
-  reducerPath: 'balancesApi',
+  reducerPath: 'myBalancesApi',
   baseQuery,
   endpoints: (builder) => ({
-    /* Get the balances with a reduced data */
+    /* Get the myBalances with a reduced data */
     reducedBalances: builder.query<object[], string>({
       query: (internalId) => ({
         url: `user/exchanges/${internalId}/assets`,
