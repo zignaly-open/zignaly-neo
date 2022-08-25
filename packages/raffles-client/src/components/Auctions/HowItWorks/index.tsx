@@ -1,19 +1,13 @@
-import { Box } from '@mui/system';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { TextButton, Typography } from '@zignaly-open/ui';
-import { BulletPointItem, HowItWorksList } from './styles';
+import { BulletPointItem, HowItWorksList, ContainerBox } from './styles';
 
 const HowItWorks = () => {
   const [closed, setClosed] = useState(true);
   const { t } = useTranslation('how-it-works');
   return (
-    <Box
-      width='85%'
-      marginTop='100px'
-      display='flex'
-      flexDirection='column'
-    >
+    <ContainerBox>
       <Typography variant='body1' weight='regular' color='neutral100'>
         {t('info')}
         <TextButton
@@ -26,12 +20,9 @@ const HowItWorks = () => {
       {!closed && (
         <>
           <br />
-          <br />
-          <Box>
-            <Typography variant='h3' weight='demibold' color='neutral000'>
-              {t('how-it-works')}
-            </Typography>
-          </Box>
+          <Typography variant='h3' weight='demibold' color='neutral000'>
+            {t('how-it-works')}
+          </Typography>
           <HowItWorksList>
             <Typography variant='body1' weight='regular' color='neutral100'>
               <BulletPointItem>{t('qna1')}</BulletPointItem>
@@ -39,6 +30,7 @@ const HowItWorks = () => {
               <BulletPointItem>{t('qna2')}</BulletPointItem>
               <br />
               <BulletPointItem>{t('qna3')}</BulletPointItem>
+              <br />
             </Typography>
             <Typography variant='body1' weight='regular' color='neutral100'>
               <BulletPointItem>{t('qna4')}</BulletPointItem>
@@ -46,11 +38,12 @@ const HowItWorks = () => {
               <BulletPointItem>{t('qna5')}</BulletPointItem>
               <br />
               <BulletPointItem>{t('qna6')}</BulletPointItem>
+              <br />
             </Typography>
           </HowItWorksList>
         </>
       )}
-    </Box>
+    </ContainerBox>
   );
 };
 
