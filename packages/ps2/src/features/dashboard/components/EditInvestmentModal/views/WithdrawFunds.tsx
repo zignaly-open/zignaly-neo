@@ -7,12 +7,14 @@ import {
 } from '../styles';
 import InvestorDetails from './InvestorDetails';
 import { useTranslation } from 'react-i18next';
-import { Grid, useMediaQuery } from '@mui/material';
-import theme from '@zignaly-open/ui/lib/theme/theme';
+import { Grid } from '@mui/material';
+// import { useTheme } from 'styled-components';
 
 const WithdrawFunds: React.FC = () => {
+  // const theme = useTheme();
   const { t } = useTranslation('edit-investment');
-  const matchesSmall = useMediaQuery(theme.breakpoints.up('md'));
+  // const matchesSmall = useMediaQuery(theme.breakpoints.up('md'));
+  const matchesSmall = false;
   return (
     <>
       <InvestorDetails />
