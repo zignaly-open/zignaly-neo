@@ -9,9 +9,8 @@ const HowItWorks = () => {
   const { t } = useTranslation('how-it-works');
   return (
     <Box
-      width='65%'
-      marginTop='20px'
-      marginBottom='20px'
+      width='85%'
+      marginTop='100px'
       display='flex'
       flexDirection='column'
     >
@@ -40,7 +39,8 @@ const HowItWorks = () => {
               <BulletPointItem>{t('qna2')}</BulletPointItem>
               <br />
               <BulletPointItem>{t('qna3')}</BulletPointItem>
-              <br />
+            </Typography>
+            <Typography variant='body1' weight='regular' color='neutral100'>
               <BulletPointItem>{t('qna4')}</BulletPointItem>
               <br />
               <BulletPointItem>{t('qna5')}</BulletPointItem>

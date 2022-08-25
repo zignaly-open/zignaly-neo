@@ -1,7 +1,11 @@
 import styled from '@emotion/styled';
 
 export const BulletPointItem = styled.li`
-  margin: 3px;
+  max-width: 550px;
 `;
 
-export const HowItWorksList = styled.ul``;
+export const HowItWorksList = styled.ul`
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+`;
