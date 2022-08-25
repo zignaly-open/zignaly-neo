@@ -10,7 +10,7 @@ import {
 import React, { useCallback, useMemo } from 'react';
 import { Center, Heading, Inline, Layout } from './styles';
 import { useTranslation } from 'react-i18next';
-import { useInvestments } from '../../use';
+import { useCoins, useInvestments, useSetSelectedInvestment } from '../../use';
 import BigNumber from 'bignumber.js';
 import { formatDateFromDays } from './util';
 import { Investment } from '../../types';
@@ -18,12 +18,22 @@ import { sortBigNumbers, stringSort } from '../../../../util/numbers';
 import { coinsToOperateServices } from 'util/coins';
 import { getServiceLogo } from '../../../../util/images';
 import { BalanceSummary } from '../BalanceSummary';
+import { ShowFnOutput, useModal } from 'mui-modal-provider';
+import EditInvestmentModal from '../EditInvestmentModal';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
   const { isLoading, data: services, error } = useInvestments();
+  const selectInvestment = useSetSelectedInvestment();
+  useCoins();
+  const { showModal } = useModal();
 
-  const onClickEditInvestment = () => alert();
+  const onClickEditInvestment = (service: Investment) => {
+    selectInvestment(service);
+    const modal: ShowFnOutput<void> = showModal(EditInvestmentModal, {
+      close: () => modal.hide(),
+    });
+  };
 
   const tableColumns = useMemo(
     () => [
@@ -79,7 +89,6 @@ const MyDashboard: React.FC = () => {
             subtitle={
               <>
                 {t('table:table.serviceName-by')} {value.ownerName}
-                {value.serviceLogo}
               </>
             }
             cryptoName={value.ssc}
