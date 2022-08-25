@@ -2,11 +2,10 @@ import {
   AuctionType,
   AuctionBidType,
 } from '@zignaly-open/raffles-shared/types';
-import axios from 'axios';
 import { random } from 'lodash';
 import { sequelize } from '../../db';
 import { Includeable, QueryTypes } from 'sequelize';
-import { zignalySystemId, payoutSpreadsheetUrl, isTest } from '../../../config';
+import { zignalySystemId, isTest } from '../../../config';
 import { internalTransfer } from '../../cybavo';
 import { ContextUser, TransactionType } from '../../types';
 import { Payout } from '../payouts/model';
@@ -173,23 +172,9 @@ const AuctionsRepository = () => {
   }
 
   async function performPayout(payout: Payout): Promise<void> {
-    const { discordName, username } = await User.findByPk(payout.userId);
-    const payload = {
-      discordName,
-      username,
-      publicAddress: payout.publicAddress,
-      id: payout.userId,
-    };
+    console.log(payout);
     if (isTest) return;
     // TODO: implement error handling. There should be some enum for possible error/success states
-    await axios
-      .post(payoutSpreadsheetUrl, payload)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((e) => {
-        throw e;
-      });
   }
 
   return {

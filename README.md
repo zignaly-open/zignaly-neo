@@ -47,8 +47,7 @@ mathematical expectation of the length of my life is TOO SHORT to type out `@zig
 this makes two of us:
 
 ```
-lerna add package-name --scope=*/ui 
-```
+ ```
 
 ### Conventional commits
 
