@@ -8,6 +8,7 @@ import {
   GET_OR_CREATE_USER,
   AUTHENTICATE_METAMASK,
 } from 'queries/users';
+import { GET_AUCTIONS } from 'queries/auctions';
 
 function useRefetchCurrentUser(): () => Promise<unknown> {
   const [fetchUser] = useLazyQuery(GET_CURRENT_USER, {
@@ -20,10 +21,16 @@ function useRefetchCurrentUser(): () => Promise<unknown> {
 export function useLogout(): () => Promise<void> {
   const fetchUser = useRefetchCurrentUser();
   const { deactivate } = useEthers();
+  const client = useApolloClient();
   return async () => {
     deactivate();
     setToken('');
-    await fetchUser();
+    await Promise.all([
+      fetchUser(),
+      client.refetchQueries({
+        include: [GET_AUCTIONS],
+      }),
+    ]);
   };
 }
 
@@ -77,9 +84,9 @@ export default function useAuthenticate(): () => Promise<void> {
       deactivate();
     }
     await client.refetchQueries({
-      include: [GET_CURRENT_USER],
+      include: [GET_CURRENT_USER, GET_AUCTIONS],
     });
-  }, [account, isOkToStart]);
+  }, [account, isOkToStart, chainId]);
 
   // TODO: error handling
   return async () => {
