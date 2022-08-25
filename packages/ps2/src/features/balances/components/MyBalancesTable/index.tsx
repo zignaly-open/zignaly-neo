@@ -23,7 +23,7 @@ import Theme from '@zignaly-open/ui/lib/theme/theme';
 // Types
 import { Data } from './types';
 
-function MyBalancesTable() {
+function MyBalancesTable(): React.FC {
   // Hooks
   const theme = useTheme() as Theme;
   const { t } = useTranslation('my-balances');
