@@ -13,7 +13,11 @@ import { Payout } from '../payouts/model';
 import { User } from '../users/model';
 import { AUCTION_FEE } from './constants';
 import { Auction, AuctionBid, AuctionBasketItem } from './model';
-import { getMinRequiredBidForAuction, verifyPositiveBalance } from './util';
+import {
+  getMinRequiredBidForAuction,
+  getPayoutPrizeForAuction,
+  verifyPositiveBalance,
+} from './util';
 
 const AuctionsRepository = () => {
   const lastBidPopulation = {
@@ -166,7 +170,7 @@ const AuctionsRepository = () => {
       // here we will match auctions and bids
       x.bids = bids.filter((b: AuctionBidType) => x.id === b.auctionId);
       x.userBid = x.bids.find((b) => b.user.id === user?.id);
-      x.minimalBid = getMinRequiredBidForAuction(x, x.bids[0]);
+      x.minimalBid = getPayoutPrizeForAuction(x, x.bids[0]);
     });
 
     return auctions;
