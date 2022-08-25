@@ -21,7 +21,7 @@ import IconButton from "../../../../inputs/IconButton";
 import { ReactComponent as OptionsDotsIcon } from "../../../../../assets/icons/option-dots-icon.svg";
 import { TableBasicProps } from "../../types";
 
-export default function BasicTable({
+export default function BasicTable<T extends object>({
   columns = [],
   data = [],
   onColumnHidden = () => {},
@@ -31,7 +31,7 @@ export default function BasicTable({
   initialState = {},
   emptyMessage,
   hasFooter = false,
-}: TableBasicProps) {
+}: TableBasicProps<T>) {
   // Refs
   const tableRef = useRef(null);
 

@@ -1,3 +1,5 @@
+import { AxisFormat } from '@zignaly-open/ui/lib/components/display/Charts/types';
+
 export interface DashboardState {
   investments?: Investment[];
   selectedInvestment?: Investment;
@@ -51,7 +53,7 @@ export type Investment = {
   ssc: string;
   serviceId: string;
   accountId: string;
-  sparklines: [number, number];
+  sparklines: AxisFormat[];
   createdAt: string;
   updatedAt: string;
   periodsLc: string;

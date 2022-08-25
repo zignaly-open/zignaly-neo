@@ -3,7 +3,7 @@ import { TableProps, tableTypes } from "./types";
 import BasicTable from "./types/BasicTable";
 import PagedWithDataTable from "./types/PagedWithDataTable";
 
-const Table = ({
+const Table = <T extends object>({
   columns = [],
   data = [],
   defaultHiddenColumns = [],
@@ -13,7 +13,7 @@ const Table = ({
   onColumnHidden = () => null,
   type = "basic",
   emptyMessage, // TODO: default
-}: TableProps) => {
+}: TableProps<T>) => {
   const renderTable = useCallback(() => {
     switch (type) {
       case tableTypes.pagedWithData:

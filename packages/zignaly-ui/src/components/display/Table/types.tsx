@@ -2,15 +2,17 @@ import { ChartsProps } from "../Charts/types";
 import { BalanceSummaryProps } from "./components/BalanceSummary/types";
 import { PercentageIndicatorProps } from "./components/PercentageIndicator/types";
 import { ServiceNameProps } from "./components/ServiceName/types";
+import { Column } from "react-table";
 
 export const tableTypes = {
   basic: "basic",
   pagedWithData: "pagedWithData",
   pagedWithOutData: "pagedWithOutData",
 };
-export interface TableBasicProps {
-  columns: any[];
-  data: Object[];
+
+export interface TableBasicProps<T extends object> {
+  columns: Array<Column<T>>;
+  data: T[];
   defaultHiddenColumns?: string[];
   onColumnHidden?: (column: string, isHidden: boolean) => void;
   hideOptionsButton: boolean;
@@ -22,7 +24,7 @@ export interface TableBasicProps {
   hasFooter?: boolean;
 }
 
-export interface TableProps extends TableBasicProps {
+export interface TableProps<T extends object> extends TableBasicProps<T> {
   type?: keyof typeof tableTypes;
 }
 

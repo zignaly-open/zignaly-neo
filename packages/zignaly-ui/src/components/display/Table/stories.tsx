@@ -211,32 +211,22 @@ MyCoins.args = {
     {
       Header: "Total Balance",
       accessor: "totalBalance",
-      // IS ONLY FOR TEST PURPOSES, use this function in real cases customSort as implemented in NEO
-      sortType: sortByPointDecimal(),
     },
     {
       Header: "Available Balance",
       accessor: "availableBalance",
-      // IS ONLY FOR TEST PURPOSES, use this function in real cases customSort as implemented in NEO
-      sortType: sortByPointDecimal(),
     },
     {
       Header: "Locked Balance",
       accessor: "lockedBalance",
-      // IS ONLY FOR TEST PURPOSES, use this function in real cases customSort as implemented in NEO
-      sortType: sortByPointDecimal(),
     },
     {
       Header: "Value in BTC",
       accessor: "valueInBtc",
-      // IS ONLY FOR TEST PURPOSES, use this function in real cases customSort as implemented in NEO
-      sortType: sortByPointDecimal(),
     },
     {
       Header: "Value in USD",
       accessor: "valueInUsd",
-      // IS ONLY FOR TEST PURPOSES, use this function in real cases customSort as implemented in NEO
-      sortType: sortByPointDecimal(),
     },
   ],
   data: MockMyCoinsData,
@@ -257,26 +247,18 @@ Investors.args = {
     {
       Header: "Investment",
       accessor: "investment",
-      // IS ONLY FOR TEST PURPOSES, use this function in real cases customSort as implemented in NEO
-      sortType: sortByPointDecimal(),
     },
     {
       Header: "P & L",
       accessor: "pyd",
-      // IS ONLY FOR TEST PURPOSES, use this function in real cases customSort as implemented in NEO
-      sortType: sortByPointDecimal(),
     },
     {
       Header: "P & L Total",
       accessor: "pydTotal",
-      // IS ONLY FOR TEST PURPOSES, use this function in real cases customSort as implemented in NEO
-      sortType: sortByPointDecimal(),
     },
     {
       Header: "Total Fees Paid",
       accessor: "totalFeesPaid",
-      // IS ONLY FOR TEST PURPOSES, use this function in real cases customSort as implemented in NEO
-      sortType: sortByPointDecimal(),
     },
     {
       Header: "Success Fee",
@@ -569,8 +551,6 @@ ExchangeOrders.args = {
     {
       Header: "Amount",
       accessor: "amount",
-      // IS ONLY FOR TEST PURPOSES, use this function in real cases customSort as implemented in NEO
-      sortType: sortByPointDecimal(),
     },
     {
       Header: "Status",
@@ -579,8 +559,6 @@ ExchangeOrders.args = {
     {
       Header: "Entry Price",
       accessor: "entryPrice",
-      // IS ONLY FOR TEST PURPOSES, use this function in real cases customSort as implemented in NEO
-      sortType: sortByPointDecimal(),
     },
     {
       Header: "Side",

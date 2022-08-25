@@ -40,7 +40,7 @@ import {
 } from "./styles";
 import Selector from "components/inputs/Selector";
 
-export default function PagedWithDataTable({
+export default function PagedWithDataTable<T extends object>({
   columns = [],
   data = [],
   onColumnHidden = () => {},
@@ -50,7 +50,7 @@ export default function PagedWithDataTable({
   emptyMessage,
   initialState = {},
   hasFooter = true,
-}: TableBasicProps) {
+}: TableBasicProps<T>) {
   // Refs
   const tableRef = useRef(null);
 
