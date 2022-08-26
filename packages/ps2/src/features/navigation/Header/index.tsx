@@ -25,13 +25,25 @@ const Header: React.FC = () => {
           <BrandImage height='32px' type='isotype' width='32px' />
         </Link>,
         <HeaderLinksContainer key='links'>
-          <NavigationLink to={ROUTE_PROFIT_SHARING} key='--route-ps'>
+          <NavigationLink
+            id='menu__profit-sharing'
+            to={ROUTE_PROFIT_SHARING}
+            key='--route-ps'
+          >
             {t('navigation-menu.profit-sharing')}
           </NavigationLink>
-          <NavigationLink to={ROUTE_STAKING} key='--route-staking'>
+          <NavigationLink
+            id='menu__staking'
+            to={ROUTE_STAKING}
+            key='--route-staking'
+          >
             {t('navigation-menu.staking')}
           </NavigationLink>
-          <NavigationLink to={ROUTE_ZIGPAD} key='--route-zigpad'>
+          <NavigationLink
+            id='menu__staking'
+            to={ROUTE_ZIGPAD}
+            key='--route-zigpad'
+          >
             {t('navigation-menu.zigpad')}
           </NavigationLink>
         </HeaderLinksContainer>,
