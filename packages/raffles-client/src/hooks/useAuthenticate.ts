@@ -39,14 +39,8 @@ export default function useAuthenticate(): () => Promise<void> {
   const [authenticate] = useMutation(AUTHENTICATE_METAMASK);
   const [isOkToStart, setIsOkToStart] = useState(false);
   const client = useApolloClient();
-  const {
-    account,
-    activateBrowserWallet,
-    library,
-    switchNetwork,
-    chainId,
-    deactivate,
-  } = useEthers();
+  const { account, activateBrowserWallet, library, switchNetwork } =
+    useEthers();
 
   async function createUserAndSign() {
     const {
@@ -57,30 +51,23 @@ export default function useAuthenticate(): () => Promise<void> {
       variables: { publicAddress: account.toLocaleLowerCase() },
     });
 
+    await switchNetwork(
+      process.env.REACT_APP_USE_MUMBAI_CHAIN ? Mumbai.chainId : Polygon.chainId,
+    );
+
     const signature = await library.getSigner().signMessage(messageToSign);
 
-    if (!chainId) {
-      await switchNetwork(
-        process.env.REACT_APP_USE_MUMBAI_CHAIN
-          ? Mumbai.chainId
-          : Polygon.chainId,
-      );
-    }
-    if (chainId) {
-      const {
-        data: {
-          authenticate: { accessToken },
-        },
-      } = await authenticate({
-        variables: {
-          publicAddress: account.toLocaleLowerCase(),
-          signature,
-        },
-      });
-      setToken(accessToken);
-    } else {
-      deactivate();
-    }
+    const {
+      data: {
+        authenticate: { accessToken },
+      },
+    } = await authenticate({
+      variables: {
+        publicAddress: account.toLocaleLowerCase(),
+        signature,
+      },
+    });
+    setToken(accessToken);
     await client.refetchQueries({
       include: [GET_CURRENT_USER, GET_AUCTIONS],
     });
@@ -90,12 +77,15 @@ export default function useAuthenticate(): () => Promise<void> {
     if (!account || !isOkToStart) return;
     setIsOkToStart(false);
     createUserAndSign();
-  }, [account, isOkToStart, chainId]);
+  }, [account, isOkToStart]);
 
   // TODO: error handling
   return async () => {
+    // Ready to connect
     setIsOkToStart(true);
+
     if (!account) {
+      // Init account
       await activateBrowserWallet();
     }
   };
