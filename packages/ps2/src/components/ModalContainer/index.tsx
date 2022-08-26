@@ -10,13 +10,14 @@ function ModalContainer({
   title = null,
   titleAlign = 'left',
   onGoBack = null,
+  width,
   onClickClose = null,
   customHeaderAction = null,
 }: ModalContainerProps) {
   const theme = useTheme() as Theme;
 
   return (
-    <Layout>
+    <Layout width={width}>
       <Header>
         <Inline align={titleAlign}>
           {onGoBack && typeof onGoBack === 'function' && (

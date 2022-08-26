@@ -1,21 +1,18 @@
-// Dependencies
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import authReducer from './auth/store';
+import { api as authApi } from './auth/api';
+import dashboardReducer from './dashboard/store';
+import { api as dashboardApi } from './dashboard/api';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
-
-// Reducers
-import authReducer from './auth/store';
-import myBalancesReducer from './myBalances/store';
-
-// API Reducers Paths
-import { api as authApi } from './auth/api';
 import { api as balancesApi } from './myBalances/api';
+import myBalancesReducer from './myBalances/store';
 
 const persistConfig = {
   key: 'root',
   storage,
-  // whitelist: [],
-  blacklist: ['api'] as string[],
+  // TODO: maybe we should actually leverage cache
+  blacklist: ['authApi', 'dashboardApi', 'balancesApi'] as string[],
 };
 
 export const store = configureStore({
@@ -23,15 +20,19 @@ export const store = configureStore({
     persistConfig,
     combineReducers({
       [authApi.reducerPath]: authApi.reducer,
+      [dashboardApi.reducerPath]: dashboardApi.reducer,
       [balancesApi.reducerPath]: balancesApi.reducer,
       auth: authReducer,
+      dashboard: dashboardReducer,
       myBalances: myBalancesReducer,
     }),
   ),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(authApi.middleware),
+    })
+      .concat(authApi.middleware)
+      .concat(dashboardApi.middleware),
 });
 
 export const persistor = persistStore(store);

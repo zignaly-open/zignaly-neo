@@ -749,9 +749,9 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
-  //.grecaptcha-badge {
-  //  visibility: hidden;
-  //}
+  .grecaptcha-badge {
+    visibility: hidden;
+  }
 
 `;
 

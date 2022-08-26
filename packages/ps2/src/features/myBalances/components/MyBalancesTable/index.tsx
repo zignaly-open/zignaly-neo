@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
-import { Column } from 'react-table';
 import { useActiveExchange } from '../../../auth/use';
 import { useFetchMyBalances, useSelectMyBalances } from '../../use';
 import {
@@ -12,7 +11,8 @@ import {
   Loader,
 } from '@zignaly-open/ui';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
-import { Data } from './types';
+import { MyBalancesTableDataType } from './types';
+import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 
 const MyBalancesTable = (): JSX.Element => {
   const theme = useTheme() as Theme;
@@ -36,7 +36,7 @@ const MyBalancesTable = (): JSX.Element => {
    * @name columns
    * @description Set the columns for balance table.
    */
-  const columns: Column<Data>[] = useMemo(
+  const columns: TableProps<MyBalancesTableDataType>['columns'] = useMemo(
     () => [
       {
         Header: t('my-balances.tableHeader.coin'),
@@ -92,11 +92,7 @@ const MyBalancesTable = (): JSX.Element => {
         Header: t('my-balances.tableHeader.valueUSD'),
         accessor: 'valueUSD',
         Cell: ({ cell: { value } }) => (
-          <PriceLabel
-            fiat={true}
-            coin={value.symbol}
-            value={value.balanceTotalUSDT}
-          />
+          <PriceLabel coin={value.symbol} value={value.balanceTotalUSDT} />
         ),
         sortType: (a, b) =>
           customSort(
@@ -112,7 +108,7 @@ const MyBalancesTable = (): JSX.Element => {
    * @name data
    * @description Format and serialize data for the balances table columns.
    */
-  const data: Data[] = useMemo(
+  const data = useMemo(
     () =>
       Object.entries(balances).map(([coin, balance]) => ({
         coin: { symbol: coin, name: balance.name },

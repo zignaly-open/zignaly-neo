@@ -23,6 +23,7 @@
       }
     },
     "table-search-emptyMessage": "You are not connected to any service yet.",
+    "something-went-wrong": "Something went wrong",
     "loading-arialLabel": "Loading my dashboard",
     "slider-input": {
       "labels": {

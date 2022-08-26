@@ -1,23 +1,19 @@
-// Dependencies
 import React, { useCallback } from "react";
-
-// Types
 import { TableProps, tableTypes } from "./types";
-
-// Components
 import BasicTable from "./types/BasicTable";
 import PagedWithDataTable from "./types/PagedWithDataTable";
 
-const Table = ({
-  type = "basic",
+const Table = <T extends object>({
   columns = [],
   data = [],
-  onColumnHidden = () => {},
   defaultHiddenColumns = [],
   hideOptionsButton,
-  isUserTable,
   initialState = {},
-}: TableProps) => {
+  isUserTable,
+  onColumnHidden = () => null,
+  type = "basic",
+  emptyMessage, // TODO: default
+}: TableProps<T>) => {
   const renderTable = useCallback(() => {
     switch (type) {
       case tableTypes.pagedWithData:
@@ -30,6 +26,7 @@ const Table = ({
             hideOptionsButton={hideOptionsButton}
             isUserTable={isUserTable}
             initialState={initialState}
+            emptyMessage={emptyMessage}
           />
         );
       case tableTypes.basic:
@@ -43,6 +40,7 @@ const Table = ({
             hideOptionsButton={hideOptionsButton}
             isUserTable={isUserTable}
             initialState={initialState}
+            emptyMessage={emptyMessage}
           />
         );
     }

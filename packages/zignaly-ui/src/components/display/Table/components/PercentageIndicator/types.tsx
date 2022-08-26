@@ -1,7 +1,6 @@
 export interface PercentageIndicatorProps {
-  value: number;
-  withoutIcon?: boolean;
-  dashboardType?: "user" | "investor" | "marketplace";
-  subtitle?: string;
-  showTrophy?: boolean;
+  value: string | number;
+  type?: "default" | "graph" | "only_number";
+  label?: string;
+  stableCoinOperative?: boolean;
 }

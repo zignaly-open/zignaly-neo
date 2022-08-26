@@ -62,7 +62,7 @@ src
 ├── fetures                         # store-management done like RTK wants you to (I guess)
 │   ├── featureName
 │   │   ├── components              # components used by this feature 
-│   │   │   ├── index.tsx           # actual component with export default
+│   │   │   ├── InvestorDetails.tsx           # actual component with export default
 │   │   │   ├── validations.ts      # if it's a form, yup resolvers
 │   │   │   ├── styles.tsx          # styled components
 │   │   │   ├── types.tsx           # type definitions

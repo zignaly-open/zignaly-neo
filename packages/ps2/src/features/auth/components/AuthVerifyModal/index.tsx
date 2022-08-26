@@ -105,7 +105,6 @@ function AuthVerifyModal({
       }}
     >
       <ModalContainer
-        width='small'
         title={texts.title}
         titleAlign={'center'}
         onClickClose={onClickClose}

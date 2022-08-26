@@ -2,7 +2,7 @@ export interface AuthState {
   accessToken?: string;
   sessionExpiryDate?: Date;
   user?: UserData;
-  activeExchangeId?: string;
+  activeExchangeInternalId?: string;
 }
 
 export type UserData = {

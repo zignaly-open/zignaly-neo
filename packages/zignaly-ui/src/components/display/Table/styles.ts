@@ -6,6 +6,7 @@ import { styledIf } from "utils/styled";
 import { ReactComponent as CheckIcon } from "assets/icons/check-icon.svg";
 import { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
 import { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";
+import Typography from "../Typography";
 
 export const Layout = styled.div<{ maxWidth?: number }>`
   max-width: ${(props) => props.maxWidth}px;
@@ -266,4 +267,15 @@ export const ColumnsSelector = styled.div`
     justify-content: center;
     display: flex;
   }
+`;
+
+export const EmptyMessage = styled(Typography).attrs({
+  variant: "body2",
+  color: "neutral400",
+})`
+  text-align: center;
+  display: flex;
+  padding: 36px;
+  align-items: center;
+  justify-content: center;
 `;

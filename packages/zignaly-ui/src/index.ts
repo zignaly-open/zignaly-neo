@@ -1,4 +1,3 @@
-// Display
 import Avatar from "./components/display/Avatar";
 import ErrorMessage from "./components/display/ErrorMessage";
 import Loader from "./components/display/Loader";
@@ -26,7 +25,7 @@ import TextButton from "./components/inputs/TextButton";
 import InputText from "./components/inputs/InputText";
 import Select from "./components/inputs/Selector";
 import InputCode from "./components/inputs/InputCode";
-import { ButtonGroup } from "./components/styled";
+import { ButtonGroup, ValueIndicator } from "./components/styled";
 
 // Layouts
 import { MarginContainer, PageContainer } from "./components/styled";
@@ -41,6 +40,9 @@ import WithdrawModal from "components/modals/MyAccount/WithdrawModal";
 import ConnectWalletModal from "components/modals/ZigRaffle/ConnectWallet";
 
 // Icons
+export { ReactComponent as RefreshIcon } from "assets/icons/refresh-icon.svg";
+export { ReactComponent as PencilIcon } from "assets/icons/pencil-icon.svg";
+export { ReactComponent as WhaleIcon } from "assets/icons/whale-icon.svg";
 export { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
 export { ReactComponent as CopyIcon } from "assets/icons/copy-icon.svg";
 export { ReactComponent as OpenArrowIcon } from "assets/icons/open-arrow-icon.svg";
@@ -77,14 +79,7 @@ import BrandImage from "./components/navigation/Header/components/BrandImage";
 // Utils
 import { dark, light } from "theme";
 import ThemeProvider from "utils/ThemeProvider";
-export { customSort } from "utils/numbers";
-export { isEmpty } from "utils/strings";
-import {
-  createMarketPlaceTableBodyObject,
-  createMarketPlaceTableHeader,
-  createUserTableDataObject,
-  createUserTableHeader,
-} from "./components/display/Table/types";
+import { customSort } from "utils/numbers";
 import { HeaderLinksContainer } from "components/navigation/Header/styles";
 import { styledIf } from "utils/styled";
 
@@ -96,18 +91,14 @@ export {
    */
   // Display
   ServiceName,
-  BalanceSummary,
   AreaChart,
   Avatar,
   Loader,
   Table,
-  createUserTableHeader,
-  createUserTableDataObject,
-  createMarketPlaceTableBodyObject,
-  createMarketPlaceTableHeader,
   ConnectionStateLabel,
   DateLabel,
   PriceLabel,
+  ValueIndicator,
   PercentageIndicator,
   Typography,
   ErrorMessage,
@@ -150,5 +141,6 @@ export {
   ThemeProvider,
   dark,
   light,
+  customSort,
   styledIf,
 };

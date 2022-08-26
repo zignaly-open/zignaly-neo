@@ -15,7 +15,7 @@ import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import {
   logout,
   setAccessToken,
-  setActiveExchangeId,
+  setActiveExchangeInternalId,
   setSessionExpiryDate,
   setUser,
 } from './store';
@@ -26,7 +26,7 @@ import { RootState } from '../store';
 import { useTranslation } from 'react-i18next';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import AuthVerifyModal from './components/AuthVerifyModal';
-import { getImageOfAccount } from '../navigation/AccountMenu/util';
+import { getImageOfAccount } from '../../util/images';
 
 const throwBackendErrorInOurFormat = async <T,>(
   promise: Promise<T>,
@@ -152,7 +152,7 @@ export function useIsAuthenticated(): boolean {
   return !!user;
 }
 
-export function useUser(): UserData | Partial<UserData> {
+export function useCurrentUser(): UserData | Partial<UserData> {
   return (
     useSelector((state: RootState) => state.auth)?.user || ({} as UserData)
   );
@@ -182,14 +182,14 @@ export function useChangeLocale(): (locale: string) => void {
 export function useActiveExchange():
   | (Exchange & { image: string })
   | undefined {
-  const { user, activeExchangeId } = useSelector(
+  const { user, activeExchangeInternalId } = useSelector(
     (state: RootState) => state.auth,
   );
   if (!user?.exchanges) return undefined;
   const exchange =
-    (activeExchangeId &&
+    (activeExchangeInternalId &&
       user.exchanges?.find(
-        (x: Exchange) => x.exchangeId === activeExchangeId,
+        (x: Exchange) => x.internalId === activeExchangeInternalId,
       )) ||
     user.exchanges[0];
 
@@ -199,9 +199,9 @@ export function useActiveExchange():
   };
 }
 
-export function useSelectExchange(): (exchangeId: string) => void {
+export function useSelectExchange(): (exchangeInternalId: string) => void {
   const dispatch = useDispatch();
-  return (exchangeId) => {
-    dispatch(setActiveExchangeId(exchangeId));
+  return (exchangeInternalId) => {
+    dispatch(setActiveExchangeInternalId(exchangeInternalId));
   };
 }

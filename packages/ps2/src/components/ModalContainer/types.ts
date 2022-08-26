@@ -4,7 +4,7 @@ export type ModalContainerProps = {
   children: React.ReactElement[] | React.ReactElement;
   title?: ReactElement | string;
   titleAlign?: 'center' | 'left';
-  width?: 'fullscreen' | 'large' | 'small' | number;
+  width?: number;
   padding?: number;
   customHeaderAction?: null | React.ReactElement;
   onClickClose?: () => void;

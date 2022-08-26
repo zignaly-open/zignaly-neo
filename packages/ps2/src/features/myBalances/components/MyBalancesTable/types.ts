@@ -1,4 +1,4 @@
-export interface Data {
+export type MyBalancesTableDataType = {
   coin: {
     symbol: string;
     name: string;
@@ -23,4 +23,4 @@ export interface Data {
     symbol: string;
     balanceTotalUSDT: string;
   };
-}
+};
