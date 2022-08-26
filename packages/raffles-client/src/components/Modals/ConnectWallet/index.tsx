@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ButtonContainer, Gap, Subtitle } from './styles';
 import { ConnectWalletModalProps } from './types';
 import DialogContainer from '../DialogContainer';
@@ -6,24 +6,22 @@ import { Button } from '@zignaly-open/ui';
 import { ReactComponent as MetaMaskLogo } from '../../../assets/icons/metamask-logo.svg';
 import { useTranslation } from 'react-i18next';
 import useAuthenticate from 'hooks/useAuthenticate';
-import { useEthers } from '@usedapp/core';
-import SwitchNetworkModal from '../SwitchNetwork';
 import { useMediaQuery } from '@mui/material';
 import theme from 'theme';
+import useCurrentUser from 'hooks/useCurrentUser';
 
 const ConnectWalletModal = (props: ConnectWalletModalProps) => {
-  const { chainId } = useEthers();
   const authenticate = useAuthenticate();
   const { t } = useTranslation('connect-wallet');
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
+  const { user } = useCurrentUser();
 
-  const connect = (e: React.MouseEvent<HTMLButtonElement>) => {
-    authenticate().then(() => props.onClose(e, 'escapeKeyDown'));
-  };
-
-  if (!chainId) {
-    return <SwitchNetworkModal chainId={chainId} {...props} />;
-  }
+  useEffect(() => {
+    if (user) {
+      // Close modal once user is connected
+      props.onClose(null, 'escapeKeyDown');
+    }
+  }, [user]);
 
   return (
     <DialogContainer title={t('title')} {...props}>
@@ -38,7 +36,7 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
           minWidth={matchesSmall ? 255 : 180}
           size={matchesSmall ? 'xlarge' : 'large'}
           caption={t('metamask')}
-          onClick={(e) => connect(e)}
+          onClick={authenticate}
           leftElement={<MetaMaskLogo />}
         />
       </ButtonContainer>
