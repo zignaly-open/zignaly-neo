@@ -57,7 +57,7 @@ function TokenSelector({
             <Item
               key={`--${index.toString()}`}
               onClick={() => {
-                onSelectToken(token, index);
+                onSelectToken(token);
                 setMenuActive(false);
               }}
             >

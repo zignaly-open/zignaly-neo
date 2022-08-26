@@ -114,14 +114,14 @@ function InputAmount(
    * @description Function invoked when a token is changed.
    */
   const handleChangeToken = useCallback(
-    (token: TokenItem, index: number) => {
-      const t = tokens[index];
+    (token: TokenItem) => {
+      const index = tokens.findIndex((t) => t === token);
       setSelectedTokenId(index);
 
       // @ts-ignore
       onChange(changeEvent(name, inputValue), {
         value,
-        t,
+        token,
       });
     },
     [value],
