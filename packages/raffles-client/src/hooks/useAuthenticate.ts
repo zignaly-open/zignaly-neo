@@ -97,7 +97,6 @@ export default function useAuthenticate(): () => Promise<void> {
     setIsOkToStart(true);
     if (!account) {
       await activateBrowserWallet();
-      createUserAndSign();
     }
   };
 }
