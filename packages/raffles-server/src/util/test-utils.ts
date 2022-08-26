@@ -23,7 +23,7 @@ export async function createAuction(
     description: 'Test auction',
     monetaryValue: '$100500',
     startingBid: '100',
-    bidStep: '2',
+    bidStep: '1',
     bidFee: '1',
     basketItems: [],
     ...overrides,

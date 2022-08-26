@@ -17,17 +17,6 @@ export function getMinRequiredBidForAuction(
   }
 }
 
-export function getPayoutPrizeForAuction(
-  auction: Auction | AuctionType,
-  lastBid: AuctionBid | AuctionBidType,
-): string {
-  if (lastBid) {
-    return new BN(lastBid.value).toString();
-  } else {
-    return auction.startingBid;
-  }
-}
-
 export function isBalanceSufficientForPayment(
   payment: string,
   balance: string,
