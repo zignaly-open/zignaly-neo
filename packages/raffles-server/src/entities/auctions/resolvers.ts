@@ -119,7 +119,7 @@ export const resolvers = {
       });
 
       const [, [updatedAuction]] = await Promise.all([
-        AuctionsRepository.performPayout(payout),
+        AuctionsRepository.performPayout(payout, auction.title),
         AuctionsRepository.getAuctions(auction.id, user),
         emitBalanceChanged(user),
       ]);

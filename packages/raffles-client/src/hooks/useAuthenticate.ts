@@ -48,10 +48,7 @@ export default function useAuthenticate(): () => Promise<void> {
     deactivate,
   } = useEthers();
 
-  useAsync(async () => {
-    if (!account || !isOkToStart) return;
-    setIsOkToStart(false);
-
+  async function createUserAndSign() {
     const {
       data: {
         getOrCreateUser: { messageToSign },
@@ -61,6 +58,7 @@ export default function useAuthenticate(): () => Promise<void> {
     });
 
     const signature = await library.getSigner().signMessage(messageToSign);
+
     if (!chainId) {
       await switchNetwork(
         process.env.REACT_APP_USE_MUMBAI_CHAIN
@@ -86,11 +84,19 @@ export default function useAuthenticate(): () => Promise<void> {
     await client.refetchQueries({
       include: [GET_CURRENT_USER, GET_AUCTIONS],
     });
+  }
+
+  useAsync(async () => {
+    if (!account || !isOkToStart) return;
+    setIsOkToStart(false);
+    createUserAndSign();
   }, [account, isOkToStart, chainId]);
 
   // TODO: error handling
   return async () => {
     setIsOkToStart(true);
-    !account && activateBrowserWallet();
+    if (!account) {
+      await activateBrowserWallet();
+    }
   };
 }
