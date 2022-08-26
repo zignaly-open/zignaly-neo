@@ -115,6 +115,7 @@ export const resolvers = {
         auctionId: id,
         userId: user.id,
         publicAddress: user.publicAddress,
+        auction: auction,
       });
 
       const [, [updatedAuction]] = await Promise.all([

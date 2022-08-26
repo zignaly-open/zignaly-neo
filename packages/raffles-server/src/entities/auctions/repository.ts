@@ -181,6 +181,7 @@ const AuctionsRepository = () => {
     const payload = {
       discordName,
       username,
+      projectName: payout.auction.title,
       publicAddress: payout.publicAddress,
       id: payout.userId,
     };
