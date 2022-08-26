@@ -13,7 +13,6 @@ import Toaster from "./components/display/Toaster";
 import ProgressSlider from "./components/display/ProgressSlider";
 import InvestSlider from "./components/display/InvestSlider";
 import { ServiceName } from "./components/display/Table/components/ServiceName";
-import { BalanceSummary } from "./components/display/Table/components/BalanceSummary";
 import { AreaChart } from "./components/display/Charts";
 
 // Inputs
@@ -25,6 +24,7 @@ import TextButton from "./components/inputs/TextButton";
 import InputText from "./components/inputs/InputText";
 import Select from "./components/inputs/Selector";
 import InputCode from "./components/inputs/InputCode";
+import ExpandableInput from "./components/inputs/ExpandableInput";
 import { ButtonGroup, ValueIndicator } from "./components/styled";
 
 // Layouts
@@ -69,6 +69,7 @@ export { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.
 export { ReactComponent as ZignalyIcon } from "assets/icons/coins/zignaly-coin.svg";
 export { ReactComponent as GlobeLanguages } from "assets/icons/globe-languages.svg";
 export { ReactComponent as TimeIcon } from "assets/icons/time-icon.svg";
+export { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
 
 // Navigation
 import Header from "./components/navigation/Header";
@@ -117,6 +118,7 @@ export {
   Select,
   ButtonGroup,
   InputCode,
+  ExpandableInput,
   // Navigation
   Header,
   BrandImage,

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { useActiveExchange } from '../../../auth/use';
@@ -9,10 +9,13 @@ import {
   CoinLabel,
   customSort,
   Loader,
+  ExpandableInput,
+  SearchIcon,
 } from '@zignaly-open/ui';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { MyBalancesTableDataType } from './types';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
+import { TableHead } from './styles';
 
 const MyBalancesTable = (): JSX.Element => {
   const theme = useTheme() as Theme;
@@ -22,6 +25,8 @@ const MyBalancesTable = (): JSX.Element => {
 
   const balances = useSelectMyBalances();
   const [{ isLoading }, fetchBalances] = useFetchMyBalances();
+
+  const [searchBy, setSearchBy] = useState('');
 
   /**
    * Fetch the myBalances of the user.
@@ -110,30 +115,44 @@ const MyBalancesTable = (): JSX.Element => {
    */
   const data = useMemo(
     () =>
-      Object.entries(balances).map(([coin, balance]) => ({
-        coin: { symbol: coin, name: balance.name },
-        total: {
-          symbol: coin,
-          balanceTotal: balance.balanceTotal,
-        },
-        available: {
-          symbol: coin,
-          balanceFree: balance.balanceFree,
-        },
-        locked: {
-          symbol: coin,
-          balanceLocked: balance.balanceLocked,
-        },
-        valueBTC: {
-          symbol: coin,
-          balanceTotalBTC: balance.balanceTotalBTC,
-        },
-        valueUSD: {
-          symbol: coin,
-          balanceTotalUSDT: balance.balanceTotalUSDT,
-        },
-      })),
-    [balances],
+      Object.entries(balances)
+        .filter((coin) => {
+          const symbol = String(coin[0]);
+          const { name } = coin[1];
+
+          if (
+            searchBy.trim().length &&
+            !(symbol.toLowerCase().indexOf(searchBy.toLowerCase()) > -1) &&
+            !(String(name.toLowerCase()).indexOf(searchBy.toLowerCase()) > -1)
+          ) {
+            return null;
+          }
+          return coin;
+        })
+        .map(([coin, balance]) => ({
+          coin: { symbol: coin, name: balance.name },
+          total: {
+            symbol: coin,
+            balanceTotal: balance.balanceTotal,
+          },
+          available: {
+            symbol: coin,
+            balanceFree: balance.balanceFree,
+          },
+          locked: {
+            symbol: coin,
+            balanceLocked: balance.balanceLocked,
+          },
+          valueBTC: {
+            symbol: coin,
+            balanceTotalBTC: balance.balanceTotalBTC,
+          },
+          valueUSD: {
+            symbol: coin,
+            balanceTotalUSDT: balance.balanceTotalUSDT,
+          },
+        })),
+    [balances, searchBy],
   );
 
   /**
@@ -149,19 +168,33 @@ const MyBalancesTable = (): JSX.Element => {
     ],
   };
 
+  const handleSearchCoin = useCallback((value) => {
+    setSearchBy(value);
+  }, []);
+
   if (isLoading) {
     return <Loader color={theme.neutral300} ariaLabel={'Loading myBalances'} />;
   }
 
   return (
-    <Table
-      type={'pagedWithData'}
-      columns={columns}
-      data={data}
-      initialState={initialStateTable}
-      hideOptionsButton={false}
-      isUserTable={false}
-    />
+    <>
+      <TableHead>
+        <ExpandableInput
+          icon={<SearchIcon width={14} height={14} color={theme.neutral300} />}
+          value={searchBy}
+          onChange={handleSearchCoin}
+          placeholder={t('my-balances.table-search-placeholder')}
+        />
+      </TableHead>
+      <Table
+        type={'pagedWithData'}
+        columns={columns}
+        data={data}
+        initialState={initialStateTable}
+        hideOptionsButton={false}
+        isUserTable={false}
+      />
+    </>
   );
 };
 

@@ -52,7 +52,6 @@ export const customSort = (
   b: string | number,
   isNecessaryParseFloat = false,
 ) => {
-  /* eslint-disable no-param-reassign */
   if (isNecessaryParseFloat) {
     if (typeof a === "string") {
       a = parseFloat(a);
