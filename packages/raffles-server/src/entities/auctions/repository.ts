@@ -176,12 +176,12 @@ const AuctionsRepository = () => {
     return auctions;
   }
 
-  async function performPayout(payout: Payout): Promise<void> {
+  async function performPayout(payout: Payout, title: string): Promise<void> {
     const { discordName, username } = await User.findByPk(payout.userId);
     const payload = {
       discordName,
       username,
-      projectName: payout.auction.title,
+      projectName: title,
       publicAddress: payout.publicAddress,
       id: payout.userId,
     };

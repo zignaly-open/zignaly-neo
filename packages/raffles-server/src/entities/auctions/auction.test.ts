@@ -108,22 +108,32 @@ describe('Auctions', () => {
 
     await makeBid(auction, aliceToken);
     const auctionAfter1BidAlice = await getFirstAuction(aliceToken);
-    expect(auctionAfter1BidAlice.minimalBid).toBe('102');
+    expect(auctionAfter1BidAlice.minimalBid).toBe('100');
     expect(auctionAfter1BidAlice.bids[0].value).toBe('100');
     expect(auctionAfter1BidAlice.userBid.value).toBe('100');
     expect(auctionAfter1BidAlice.userBid.position).toBe(1);
     const auctionAfter1BidBob = await getFirstAuction(bobToken);
     expect(auctionAfter1BidBob.userBid).toBeFalsy();
-    expect(auctionAfter1BidBob.minimalBid).toBe('102');
+    expect(auctionAfter1BidBob.minimalBid).toBe('100');
+
+    await makeBid(auction, aliceToken);
+    const auctionAfter2BidAlice = await getFirstAuction(aliceToken);
+    expect(auctionAfter2BidAlice.minimalBid).toBe('102');
+    expect(auctionAfter2BidAlice.bids[0].value).toBe('102');
+    expect(auctionAfter2BidAlice.userBid.value).toBe('102');
+    expect(auctionAfter2BidAlice.userBid.position).toBe(1);
+    const auctionAfter2BidBob = await getFirstAuction(bobToken);
+    expect(auctionAfter2BidBob.userBid).toBeFalsy();
+    expect(auctionAfter2BidBob.minimalBid).toBe('102');
 
     await makeBid(auction, bobToken);
-    const auctionAfter2BidsAlice = await getFirstAuction(aliceToken);
-    expect(auctionAfter2BidsAlice.minimalBid).toBe('104');
-    expect(auctionAfter2BidsAlice.bids[0].position).toBe(1);
-    expect(auctionAfter2BidsAlice.bids[1].position).toBe(2);
-    expect(auctionAfter2BidsAlice.bids[0].user.username).toBe('Bob');
-    expect(auctionAfter2BidsAlice.bids[1].user.username).toBe('Alice');
-    expect(auctionAfter2BidsAlice.userBid.position).toBe(2);
+    const auctionAfter3BidsAlice = await getFirstAuction(aliceToken);
+    expect(auctionAfter3BidsAlice.minimalBid).toBe('104');
+    expect(auctionAfter3BidsAlice.bids[0].position).toBe(1);
+    expect(auctionAfter3BidsAlice.bids[1].position).toBe(2);
+    expect(auctionAfter3BidsAlice.bids[0].user.username).toBe('Bob');
+    expect(auctionAfter3BidsAlice.bids[1].user.username).toBe('Alice');
+    expect(auctionAfter3BidsAlice.userBid.position).toBe(2);
 
     for (let i = 0; i < 50; i++) {
       const [, randomUserToken] = await createRandomUser(300);
