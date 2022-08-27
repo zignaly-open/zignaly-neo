@@ -9,6 +9,8 @@ import ProjectDetailsModal from '../ProjectDetails';
 import { CongratulationsModalProps } from './types';
 import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
 import { AuctionImage, Description } from './styles';
+import { ReactComponent as DiscordIconButton } from '../../../assets/icons/discord-minimalist.svg';
+import { ReactComponent as SupportIconButton } from '../../../assets/icons/support-minimalist.svg';
 
 const CongratulationsModal = ({
   auction,
@@ -61,6 +63,18 @@ const CongratulationsModal = ({
         sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
         mt='94px'
       >
+        <Button
+          variant='secondary'
+          size='large'
+          caption={t('Discord')}
+          leftElement={<DiscordIconButton />}
+        />
+        <Button
+          variant='secondary'
+          size='large'
+          caption={t('Support')}
+          leftElement={<SupportIconButton />}
+        />
         <Button
           caption={t('close')}
           size='large'
