@@ -83,7 +83,7 @@ import BrandImage from "./components/navigation/Header/components/BrandImage";
 // Utils
 import { dark, light } from "theme";
 import ThemeProvider from "utils/ThemeProvider";
-import { customSort } from "utils/numbers";
+import { sortByValue } from "utils/numbers";
 import { HeaderLinksContainer } from "components/navigation/Header/styles";
 import { styledIf } from "utils/styled";
 import CoinIcon from "components/display/CoinIcon";
@@ -149,6 +149,6 @@ export {
   ThemeProvider,
   dark,
   light,
-  customSort,
+  sortByValue,
   styledIf,
 };

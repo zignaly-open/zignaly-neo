@@ -15,7 +15,7 @@ export const formatBalanceUnits = (value: any) => {
 };
 
 /**
- * @description THIS FUNCTION ONLY TEST use in real cases customSort
+ * @description THIS FUNCTION ONLY TEST use in real cases sortByValue
  *
  * @param propParamNameForValue Prop from which to take the value to order
  * @param useProp if you do not use prop you sort by value
@@ -47,7 +47,7 @@ export const sortByPointDecimal =
  * @param b value to compare
  * @param isNecessaryParseFloat if is necessary parse
  */
-export const customSort = (
+export const sortByValue = (
   a: string | number,
   b: string | number,
   isNecessaryParseFloat = false,

@@ -7,7 +7,7 @@ import {
   Table,
   PriceLabel,
   CoinLabel,
-  customSort,
+  sortByValue,
   Loader,
   ExpandableInput,
   SearchIcon,
@@ -53,7 +53,7 @@ const MyBalancesTable = (): JSX.Element => {
         Cell: ({ cell: { value } }) => (
           <CoinLabel coin={value.symbol} name={value.name} />
         ),
-        sortType: (a, b) => customSort(a.values.symbol, b.values.symbol),
+        sortType: (a, b) => sortByValue(a.values.symbol, b.values.symbol),
       },
       {
         Header: t('my-balances.tableHeader.totalBalance'),
@@ -62,7 +62,7 @@ const MyBalancesTable = (): JSX.Element => {
           <PriceLabel coin={value.symbol} value={value.balanceTotal} />
         ),
         sortType: (a, b) =>
-          customSort(a.values.total.balanceTotal, b.values.total.balanceTotal),
+          sortByValue(a.values.total.balanceTotal, b.values.total.balanceTotal),
       },
       {
         Header: t('my-balances.tableHeader.availableBalance'),
@@ -71,7 +71,7 @@ const MyBalancesTable = (): JSX.Element => {
           <PriceLabel coin={value.symbol} value={value.balanceFree} />
         ),
         sortType: (a, b) =>
-          customSort(
+          sortByValue(
             a.values.available.balanceFree,
             b.values.available.balanceFree,
           ),
@@ -83,7 +83,7 @@ const MyBalancesTable = (): JSX.Element => {
           <PriceLabel coin={value.symbol} value={value.balanceLocked} />
         ),
         sortType: (a, b) =>
-          customSort(a.values.balanceLocked, b.values.balanceLocked),
+          sortByValue(a.values.balanceLocked, b.values.balanceLocked),
       },
       {
         Header: t('my-balances.tableHeader.valueBTC'),
@@ -92,7 +92,7 @@ const MyBalancesTable = (): JSX.Element => {
           <PriceLabel coin={'btc'} value={value.balanceTotalBTC} />
         ),
         sortType: (a, b) =>
-          customSort(
+          sortByValue(
             a.values.valueBTC.balanceTotalBTC,
             b.values.valueBTC.balanceTotalBTC,
           ),
@@ -104,7 +104,7 @@ const MyBalancesTable = (): JSX.Element => {
           <PriceLabel coin={value.symbol} value={value.balanceTotalUSDT} />
         ),
         sortType: (a, b) =>
-          customSort(
+          sortByValue(
             a.values.valueUSD.balanceTotalUSDT,
             b.values.valueUSD.balanceTotalUSDT,
           ),
