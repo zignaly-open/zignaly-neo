@@ -18,6 +18,7 @@ import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types'
 import { TableHead } from './styles';
 import _ from 'lodash';
 import { Coin } from '../../../dashboard/types';
+import { Center } from '../../../dashboard/components/MyDashboard/styles';
 
 const MyBalancesTable = (): JSX.Element => {
   const theme = useTheme() as Theme;
@@ -26,7 +27,8 @@ const MyBalancesTable = (): JSX.Element => {
   const currentExchange = useActiveExchange();
 
   const balances = useSelectMyBalances();
-  const [{ isLoading }, fetchBalances] = useFetchMyBalances();
+  const [{ isLoadingReducedBalances, isLoadingAllCoins }, fetchBalances] =
+    useFetchMyBalances();
 
   const [searchBy, setSearchBy] = useState('');
 
@@ -118,7 +120,8 @@ const MyBalancesTable = (): JSX.Element => {
   const data = _.filter(
     Object.entries(balances),
     ([symbol, balance]: [string, Coin]) =>
-      symbol.toLowerCase().indexOf(searchBy.toLowerCase()) > -1,
+      symbol.toLowerCase().indexOf(searchBy.toLowerCase()) > -1 ||
+      balance.name.toLowerCase().indexOf(searchBy.toLowerCase()) > -1,
   ).map(([coin, balance]) => ({
     coin: { symbol: coin, name: balance.name },
     total: {
@@ -142,8 +145,6 @@ const MyBalancesTable = (): JSX.Element => {
       balanceTotalUSDT: balance.balanceTotalUSDT,
     },
   }));
-  // [balances, searchBy],
-  // );
 
   /**
    * @name initialStateTable
@@ -162,11 +163,16 @@ const MyBalancesTable = (): JSX.Element => {
     setSearchBy(value);
   }, []);
 
-  if (isLoading) {
-    return <Loader color={theme.neutral300} ariaLabel={'Loading myBalances'} />;
-  }
-
-  return (
+  return isLoadingAllCoins || isLoadingReducedBalances ? (
+    <Center>
+      <Loader
+        color={'#fff'}
+        width={'40px'}
+        height={'40px'}
+        ariaLabel={t('my-dashboard.loading-arialLabel')}
+      />
+    </Center>
+  ) : (
     <>
       <TableHead>
         <ExpandableInput

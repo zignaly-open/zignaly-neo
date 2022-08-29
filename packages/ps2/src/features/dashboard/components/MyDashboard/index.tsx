@@ -58,10 +58,7 @@ const MyDashboard: React.FC = () => {
             onClickEdit={() => onClickEditInvestment(value.service)}
           />
         ),
-        sortType: (
-          a: { values: DashboardTableDataType },
-          b: { values: DashboardTableDataType },
-        ) =>
+        sortType: (a, b) =>
           sortBigNumbers(
             a.values.summary.totalValue,
             b.values.summary.totalValue,
@@ -87,10 +84,7 @@ const MyDashboard: React.FC = () => {
             image={getServiceLogo(value.serviceLogo)}
           />
         ),
-        sortType: (
-          a: { values: DashboardTableDataType },
-          b: { values: DashboardTableDataType },
-        ) =>
+        sortType: (a, b) =>
           stringSort(
             a.values.service.serviceName,
             b.values.service.serviceName,
@@ -124,10 +118,7 @@ const MyDashboard: React.FC = () => {
             )}
           />
         ),
-        sortType: (
-          a: { values: DashboardTableDataType },
-          b: { values: DashboardTableDataType },
-        ) =>
+        sortType: (a, b) =>
           sortBigNumbers(
             a.values.dailyAvg.dailyAvgPnl,
             b.values.dailyAvg.dailyAvgPnl,
@@ -145,10 +136,7 @@ const MyDashboard: React.FC = () => {
             )}
           />
         ),
-        sortType: (
-          a: { values: DashboardTableDataType },
-          b: { values: DashboardTableDataType },
-        ) =>
+        sortType: (a, b) =>
           sortBigNumbers(
             a.values.threeMonths.pnl90dPct,
             b.values.threeMonths.pnl90dPct,
@@ -166,10 +154,7 @@ const MyDashboard: React.FC = () => {
             )}
           />
         ),
-        sortType: (
-          a: { values: DashboardTableDataType },
-          b: { values: DashboardTableDataType },
-        ) =>
+        sortType: (a, b) =>
           sortBigNumbers(
             a.values.sixMonths.pnl180dPct,
             b.values.sixMonths.pnl180dPct,
@@ -190,10 +175,8 @@ const MyDashboard: React.FC = () => {
             label={formatDateFromDays(value.periodsLc)}
           />
         ),
-        sortType: (
-          a: { values: DashboardTableDataType },
-          b: { values: DashboardTableDataType },
-        ) => sortBigNumbers(a.values.all.pnlPctLc, b.values.all.pnlPctLc),
+        sortType: (a, b) =>
+          sortBigNumbers(a.values.all.pnlPctLc, b.values.all.pnlPctLc),
       },
     ],
     [],

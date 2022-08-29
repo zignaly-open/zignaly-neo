@@ -20,7 +20,10 @@ export const myBalancesSlice = createSlice({
     builder.addMatcher(
       api.endpoints.allCoins.matchFulfilled,
       (state, { payload }) => {
-        state.coins = payload;
+        state.coins = {
+          ...state.coins,
+          ...payload,
+        };
       },
     );
   },
