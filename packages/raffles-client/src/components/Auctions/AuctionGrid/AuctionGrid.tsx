@@ -135,7 +135,7 @@ const AuctionGrid: React.FC = () => {
       </Grid>
       <Box padding='40px 0 33px 28px'>
         <Typography variant='h3' weight='medium'>
-          {filtered.length} {t('zigraffle-projects')}
+          {filtered.length} {t('zauctions-projects')}
         </Typography>
       </Box>
       <Grid justifyContent='center' container spacing={4}>

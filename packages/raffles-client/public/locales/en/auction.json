@@ -25,7 +25,6 @@
   "winners": "Winners",
   "project-desc": "Project Description",
   "how-it-works": "How it works",
-  "zig-raffle": "ZigRaffle",
   "website": "Website",
   "social-links": "Social Links",
   "user": "User",
@@ -33,6 +32,6 @@
   "claim-now": "Claim Now!",
   "claimed": "Claimed",
   "error": "Error!",
-  "zigraffle-projects": "ZIGRaffle Projects",
+  "zauctions-projects": "Z-Auction Projects",
   "coming-soon": "Soon"
 }
