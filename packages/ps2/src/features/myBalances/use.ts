@@ -28,15 +28,13 @@ export const useFetchMyBalances = (): [
 ] => {
   const [loadReducedBalances, { isFetching: isLoadingReducedBalances }] =
     useLazyReducedBalancesQuery();
-  const [loadAllCoins, { isFetching: isLoadingAllCoins }] =
-    useLazyAllCoinsQuery();
+  const [, { isFetching: isLoadingAllCoins }] = useLazyAllCoinsQuery();
 
   return [
     { isLoadingAllCoins, isLoadingReducedBalances },
     async (currentExchange: Exchange) => {
       await Promise.all([
         loadReducedBalances(currentExchange.internalId).unwrap(),
-        loadAllCoins(currentExchange.exchangeType).unwrap(),
       ]);
     },
   ];
