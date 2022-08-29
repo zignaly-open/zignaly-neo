@@ -26,6 +26,7 @@ export type ButtonProps = {
   underline?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   href?: string;
+  id?: string;
   rel?: string;
   target?: string;
   loading?: boolean;
