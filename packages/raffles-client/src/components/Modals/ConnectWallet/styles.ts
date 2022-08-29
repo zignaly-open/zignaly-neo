@@ -10,6 +10,7 @@ export const Subtitle = styled(Typography)`
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
 `;
 
 export const ButtonContainer = styled.div`

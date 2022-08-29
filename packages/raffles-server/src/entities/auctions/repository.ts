@@ -2,11 +2,10 @@ import {
   AuctionType,
   AuctionBidType,
 } from '@zignaly-open/raffles-shared/types';
-import axios from 'axios';
 import { random } from 'lodash';
 import { sequelize } from '../../db';
 import { Includeable, QueryTypes } from 'sequelize';
-import { zignalySystemId, payoutSpreadsheetUrl, isTest } from '../../../config';
+import { zignalySystemId, isTest, payoutSpreadsheetUrl } from '../../../config';
 import { internalTransfer } from '../../cybavo';
 import { ContextUser, TransactionType } from '../../types';
 import { Payout } from '../payouts/model';
@@ -14,6 +13,7 @@ import { User } from '../users/model';
 import { AUCTION_FEE } from './constants';
 import { Auction, AuctionBid, AuctionBasketItem } from './model';
 import { getMinRequiredBidForAuction, verifyPositiveBalance } from './util';
+import axios from 'axios';
 
 const AuctionsRepository = () => {
   const lastBidPopulation = {
@@ -28,12 +28,8 @@ const AuctionsRepository = () => {
     if (auction.expiresAt < auction.maxExpiryDate) {
       const expiryDate = +new Date(auction.expiresAt);
       const currentDate = Date.now();
-      if (expiryDate - currentDate >= 3600_000 * 10) {
-        return new Date(expiryDate + 60 * random(1, 4) * 60_000);
-      } else if (expiryDate - currentDate > 60_000 * 10) {
-        return new Date(expiryDate + 10 * random(1, 4) * 60_000);
-      } else {
-        return new Date(expiryDate + random(5, 11) * 60_000);
+      if (expiryDate - currentDate <= 10_000) {
+        return new Date(expiryDate + random(5, 12) * 1_000);
       }
     }
   }
@@ -176,11 +172,12 @@ const AuctionsRepository = () => {
     return auctions;
   }
 
-  async function performPayout(payout: Payout): Promise<void> {
+  async function performPayout(payout: Payout, title: string): Promise<void> {
     const { discordName, username } = await User.findByPk(payout.userId);
     const payload = {
       discordName,
       username,
+      projectName: title,
       publicAddress: payout.publicAddress,
       id: payout.userId,
     };

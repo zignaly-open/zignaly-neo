@@ -108,7 +108,6 @@ export const resolvers = {
           verifyPositiveBalance(user.publicAddress),
         ]);
       } catch (error) {
-        console.error(error);
         throw new Error('Could not make a claim');
       }
 
@@ -119,7 +118,7 @@ export const resolvers = {
       });
 
       const [, [updatedAuction]] = await Promise.all([
-        AuctionsRepository.performPayout(payout),
+        AuctionsRepository.performPayout(payout, auction.title),
         AuctionsRepository.getAuctions(auction.id, user),
         emitBalanceChanged(user),
       ]);

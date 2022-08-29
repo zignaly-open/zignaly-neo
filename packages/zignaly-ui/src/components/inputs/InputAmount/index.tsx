@@ -52,7 +52,8 @@ function InputAmount(
 ) {
   // Hooks
   const [inputValue, setInputValue] = useState(value);
-  const [selectedToken, setSelectedToken] = useState(tokens[initialTokenIndex] ?? null);
+  const [selectedTokenId, setSelectedTokenId] = useState(initialTokenIndex);
+  const selectedToken = tokens[selectedTokenId];
 
   /** ================= *
    *   Layout Effects
@@ -114,7 +115,8 @@ function InputAmount(
    */
   const handleChangeToken = useCallback(
     (token: TokenItem) => {
-      setSelectedToken(token);
+      const index = tokens.findIndex((t) => t === token);
+      setSelectedTokenId(index);
 
       // @ts-ignore
       onChange(changeEvent(name, inputValue), {

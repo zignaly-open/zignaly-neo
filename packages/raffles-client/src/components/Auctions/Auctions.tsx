@@ -1,19 +1,8 @@
 import React from 'react';
 import AuctionGrid from './AuctionGrid/AuctionGrid';
-import Box from '@mui/material/Box';
-import { Typography } from '@zignaly-open/ui';
-import { styled } from '@mui/material/styles';
 import { useTranslation } from 'react-i18next';
-import { AuctionContainer } from './styles';
+import { AuctionContainer, HomeTitle } from './styles';
 import HowItWorks from './HowItWorks';
-
-const HomeTitle = styled(Typography)`
-  && {
-    font-weight: 500;
-    font-size: 26px;
-    line-height: 40px;
-  }
-`;
 
 function Auctions() {
   const { t } = useTranslation('global');
@@ -21,11 +10,9 @@ function Auctions() {
   return (
     <>
       <AuctionContainer>
-        <Box textAlign={'center'} marginTop='122px'>
-          <HomeTitle variant='h1' color='neutral000'>
-            {t('auction')}
-          </HomeTitle>
-        </Box>
+        <HomeTitle variant='h1' color='neutral000'>
+          {t('auction')}
+        </HomeTitle>
         <HowItWorks />
       </AuctionContainer>
       <AuctionGrid />
