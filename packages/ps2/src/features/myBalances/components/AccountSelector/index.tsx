@@ -1,5 +1,5 @@
 // Dependencies
-import React, { useCallback, useMemo, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { Layout, Data, Inline, TypeText, List, Item } from './styles';
@@ -32,46 +32,13 @@ const AccountSelector = () => {
    * @description It is invoked when the user selects a new account.
    */
   const handleSelectAccount = useCallback(
-    (exchange) => {
-      selectExchange(exchange);
+    (exchange: Exchange) => {
+      selectExchange(exchange.internalId);
       if (dropDownRef.current) {
         dropDownRef.current?.setIsDropDownActive(false);
       }
     },
     [dropDownRef, selectExchange],
-  );
-
-  /**
-   * @var renderAccountsList:
-   * @description Render the list of accounts available
-   */
-  const renderAccountsList = useMemo(
-    () => (
-      <List>
-        {exchanges &&
-          activeExchange &&
-          exchanges.map((exchange: Exchange, index: number) => (
-            <Item
-              key={`--exchange-key-${index.toString()}`}
-              onClick={() => handleSelectAccount(exchange)}
-            >
-              <Avatar size={'medium'} image={getImageOfAccount(index)} />
-              <Typography
-                variant={'body1'}
-                color={
-                  activeExchange.internalId === exchange.internalId
-                    ? 'highlighted'
-                    : 'neutral200'
-                }
-                className={'internalName'}
-              >
-                {exchange.internalName}
-              </Typography>
-            </Item>
-          ))}
-      </List>
-    ),
-    [exchanges, activeExchange],
   );
 
   if (!activeExchange) {
@@ -80,7 +47,7 @@ const AccountSelector = () => {
 
   return (
     <Layout>
-      <Avatar size={'xxlarge'} image={getImageOfAccount(0)} />
+      <Avatar size={'xxlarge'} image={activeExchange.image} />
       <Data>
         <Inline>
           <Typography variant={'h1'} color={'neutral200'}>
@@ -103,7 +70,34 @@ const AccountSelector = () => {
                 alignment: 'right',
                 maxHeight: '330px',
               }}
-              renderDropDown={renderAccountsList}
+              renderDropDown={
+                <List>
+                  {exchanges &&
+                    activeExchange &&
+                    exchanges.map((exchange: Exchange, index: number) => (
+                      <Item
+                        key={`--exchange-key-${index.toString()}`}
+                        onClick={() => handleSelectAccount(exchange)}
+                      >
+                        <Avatar
+                          size={'medium'}
+                          image={getImageOfAccount(index)}
+                        />
+                        <Typography
+                          variant={'body1'}
+                          color={
+                            activeExchange.internalId === exchange.internalId
+                              ? 'highlighted'
+                              : 'neutral200'
+                          }
+                          className={'internalName'}
+                        >
+                          {exchange.internalName}
+                        </Typography>
+                      </Item>
+                    ))}
+                </List>
+              }
             />
           )}
         </Inline>

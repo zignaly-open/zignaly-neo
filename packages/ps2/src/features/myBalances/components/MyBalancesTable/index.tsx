@@ -16,6 +16,8 @@ import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { MyBalancesTableDataType } from './types';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { TableHead } from './styles';
+import _ from 'lodash';
+import { Coin } from '../../../dashboard/types';
 
 const MyBalancesTable = (): JSX.Element => {
   const theme = useTheme() as Theme;
@@ -113,47 +115,35 @@ const MyBalancesTable = (): JSX.Element => {
    * @name data
    * @description Format and serialize data for the balances table columns.
    */
-  const data = useMemo(
-    () =>
-      Object.entries(balances)
-        .filter((coin) => {
-          const symbol = String(coin[0]);
-          const { name } = coin[1];
-
-          if (
-            searchBy.trim().length &&
-            !(symbol.toLowerCase().indexOf(searchBy.toLowerCase()) > -1) &&
-            !(String(name.toLowerCase()).indexOf(searchBy.toLowerCase()) > -1)
-          ) {
-            return null;
-          }
-          return coin;
-        })
-        .map(([coin, balance]) => ({
-          coin: { symbol: coin, name: balance.name },
-          total: {
-            symbol: coin,
-            balanceTotal: balance.balanceTotal,
-          },
-          available: {
-            symbol: coin,
-            balanceFree: balance.balanceFree,
-          },
-          locked: {
-            symbol: coin,
-            balanceLocked: balance.balanceLocked,
-          },
-          valueBTC: {
-            symbol: coin,
-            balanceTotalBTC: balance.balanceTotalBTC,
-          },
-          valueUSD: {
-            symbol: coin,
-            balanceTotalUSDT: balance.balanceTotalUSDT,
-          },
-        })),
-    [balances, searchBy],
-  );
+  const data = _.filter(
+    Object.entries(balances),
+    ([symbol, balance]: [string, Coin]) =>
+      symbol.toLowerCase().indexOf(searchBy.toLowerCase()) > -1,
+  ).map(([coin, balance]) => ({
+    coin: { symbol: coin, name: balance.name },
+    total: {
+      symbol: coin,
+      balanceTotal: balance.balanceTotal,
+    },
+    available: {
+      symbol: coin,
+      balanceFree: balance.balanceFree,
+    },
+    locked: {
+      symbol: coin,
+      balanceLocked: balance.balanceLocked,
+    },
+    valueBTC: {
+      symbol: coin,
+      balanceTotalBTC: balance.balanceTotalBTC,
+    },
+    valueUSD: {
+      symbol: coin,
+      balanceTotalUSDT: balance.balanceTotalUSDT,
+    },
+  }));
+  // [balances, searchBy],
+  // );
 
   /**
    * @name initialStateTable
