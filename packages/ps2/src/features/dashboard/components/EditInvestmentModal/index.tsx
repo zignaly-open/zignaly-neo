@@ -27,7 +27,7 @@ function EditInvestmentModal({
   const { isLoading: isLoadingCoins } = useStoredCoins();
 
   const [view, setView] = useState<EditInvestmentViews>(
-    EditInvestmentViews.WithdrawInvestment,
+    EditInvestmentViews.EditInvestment,
   );
 
   const { t } = useTranslation(['edit-investment', 'withdraw-your-investment']);

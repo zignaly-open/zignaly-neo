@@ -31,7 +31,6 @@ import { ButtonGroup, ValueIndicator } from "./components/styled";
 import { MarginContainer, PageContainer } from "./components/styled";
 
 // Modals
-import EditInvestmentWithModal from "components/modals/EditInvestmentWithModal";
 import MessageModal from "components/modals/MessageModal";
 import AuthVerifyModal from "components/modals/AuthVerifyModal";
 import MinBalanceModal from "components/modals/MinBalanceModal";
@@ -56,6 +55,7 @@ export { ReactComponent as ArrowRightIcon } from "assets/icons/arrow-right-icon.
 export { ReactComponent as UserIcon } from "assets/icons/user-icon.svg";
 export { ReactComponent as CheckIcon } from "assets/icons/check-icon.svg";
 export { ReactComponent as LogoDiscordIcon } from "assets/icons/discord-logo-icon.svg";
+export { ReactComponent as PlusIcon } from "assets/icons/plus-icon.svg";
 export { ReactComponent as LogoLinkedInIcon } from "assets/icons/linkedin-logo-icon.svg";
 export { ReactComponent as LogoTwitterIcon } from "assets/icons/twitter-logo-icon.svg";
 export { ReactComponent as LogoMediumIcon } from "assets/icons/medium-logo-icon.svg";
@@ -71,6 +71,9 @@ export { ReactComponent as GlobeLanguages } from "assets/icons/globe-languages.s
 export { ReactComponent as TimeIcon } from "assets/icons/time-icon.svg";
 export { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
 
+SliderInput;
+CoinIcon;
+
 // Navigation
 import Header from "./components/navigation/Header";
 import MenuDropDown from "./components/navigation/MenuDropDown";
@@ -83,6 +86,8 @@ import ThemeProvider from "utils/ThemeProvider";
 import { customSort } from "utils/numbers";
 import { HeaderLinksContainer } from "components/navigation/Header/styles";
 import { styledIf } from "utils/styled";
+import CoinIcon from "components/display/CoinIcon";
+import SliderInput from "components/inputs/SliderInput";
 
 export {
   /**
@@ -102,6 +107,8 @@ export {
   ValueIndicator,
   PercentageIndicator,
   Typography,
+  SliderInput,
+  CoinIcon,
   ErrorMessage,
   ZigWalletIndicator,
   CoinLabel,
@@ -129,7 +136,6 @@ export {
   MarginContainer,
   // Modals
   ConnectWalletModal,
-  EditInvestmentWithModal,
   MessageModal,
   AuthVerifyModal,
   DepositModal,

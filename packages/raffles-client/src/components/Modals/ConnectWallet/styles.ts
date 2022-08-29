@@ -11,7 +11,6 @@ export const Subtitle = styled(Typography)`
   justify-content: center;
   align-items: center;
   text-align: center;
-  max-width: 350px;
 `;
 
 export const ButtonContainer = styled.div`

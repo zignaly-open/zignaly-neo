@@ -30,7 +30,7 @@ function TextButton({
       color={color}
       isLoading={loading}
       withElements={!!leftElement || !!rightElement}
-      onClick={onClick}
+      onClick={!disabled && onClick}
       disabled={disabled || loading}
       tabIndex={tabIndex}
       {...(href && {
