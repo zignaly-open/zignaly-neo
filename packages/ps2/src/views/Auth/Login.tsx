@@ -1,8 +1,13 @@
 import React from 'react';
 import LoginForm from '../../features/auth/components/LoginForm';
 import { PageContainer } from '@zignaly-open/ui';
+import { useTitle } from 'react-use';
+import { useTranslation } from 'react-i18next';
 
 const Login: React.FC = () => {
+  const { t } = useTranslation('pages');
+  useTitle(t('pages.login'));
+
   return (
     <PageContainer
       style={{
