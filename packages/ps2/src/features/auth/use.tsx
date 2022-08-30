@@ -186,27 +186,29 @@ export function useChangeLocale(): (locale: string) => void {
   };
 }
 
-export const useGetExchangeByInternalId = (
+export const useGetExchangeByInternalId = (): ((
   internalId?: string,
-): ExtendedExchange | undefined => {
+) => ExtendedExchange | undefined) => {
   const { user, activeExchangeInternalId } = useSelector(
     (state: RootState) => state.auth,
   );
-  if (!user?.exchanges) return undefined;
-  const id = internalId || activeExchangeInternalId;
-  const exchange =
-    (id && user.exchanges?.find((x: Exchange) => x.internalId === id)) ||
-    user.exchanges[0];
+  return (internalId) => {
+    if (!user?.exchanges) return undefined;
+    const id = internalId || activeExchangeInternalId;
+    const exchange =
+      (id && user.exchanges?.find((x: Exchange) => x.internalId === id)) ||
+      user.exchanges[0];
 
-  return {
-    ...exchange,
-    image: getImageOfAccount(user.exchanges.indexOf(exchange)),
+    return {
+      ...exchange,
+      image: getImageOfAccount(user.exchanges.indexOf(exchange)),
+    };
   };
 };
 
 export function useActiveExchange(): ExtendedExchange | undefined {
-  const getExchangeByInternalId = useGetExchangeByInternalId();
-  return getExchangeByInternalId;
+  const getExchange = useGetExchangeByInternalId();
+  return getExchange();
 }
 
 export function useSelectExchange(): (exchangeInternalId: string) => void {
@@ -215,10 +217,12 @@ export function useSelectExchange(): (exchangeInternalId: string) => void {
   const getExchangeByInternalId = useGetExchangeByInternalId();
   const [loadAllCoins] = useLazyAllCoinsQuery();
   return (exchangeInternalId) => {
-    const newSelectedExchange = getExchangeByInternalId;
+    const newSelectedExchange = getExchangeByInternalId(exchangeInternalId);
     const needsCoinsReFetched =
       activeExchange?.exchangeType !== newSelectedExchange?.exchangeType;
     dispatch(setActiveExchangeInternalId(exchangeInternalId));
-    if (needsCoinsReFetched) loadAllCoins(newSelectedExchange?.exchangeType);
+    if (needsCoinsReFetched) {
+      loadAllCoins(newSelectedExchange?.exchangeType);
+    }
   };
 }
