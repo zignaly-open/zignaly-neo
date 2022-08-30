@@ -1,94 +1,157 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { useTheme } from 'styled-components';
-import { useForm, Controller } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-// import { toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
-import BigNumber from 'bignumber.js';
-
-// import ToasterCompose from 'utils/ToasterCompose';
 import {
-  Field,
-  Row,
-  AmountInvested,
-  TokenValue,
   Actions,
+  AmountInvested,
+  Field,
   Form,
   InputContainer,
+  Row,
+  TokenValue,
 } from './styles';
 
 import {
   ArrowRightIcon,
-  PlusIcon,
-  CoinIcon,
-  SliderInput,
-  InputAmount,
   Button,
+  CoinIcon,
+  InputAmountAdvanced,
+  PlusIcon,
+  SliderInput,
   TextButton,
+  Toaster,
   Typography,
 } from '@zignaly-open/ui';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { EditInvestmentValidation } from './validations';
+import {
+  useCurrentBalance,
+  useInvestmentDetails,
+  useSelectedInvestment,
+  useUpdateTakeProfitAndInvestMore,
+  useUpdateTakeProfitPercentage,
+} from '../../../../use';
+import { EditFormData, EditInvestmentFormProps } from './types';
+import { EditInvestmentViews } from '../../types';
 
-type CoinProps = {
-  id: string;
-  balance: string | number | BigNumber;
-};
-
-type EditInvestmentFormProps = {
-  coin: CoinProps | null;
-  // isLoading?: boolean;
-  profitPercentage: string | number;
-  // onSubmit: () => void;
-  onClickWithdrawInvestment: () => void;
-  transferOutAll?: boolean;
-  amountInvested: number | string;
-};
+const invertPercent = (v: number | string): number => 100 - +v;
 
 function EditInvestmentForm({
-  profitPercentage = '20',
-  amountInvested,
-  coin = null,
-  transferOutAll = false,
   onClickWithdrawInvestment,
+  close,
+  setView,
 }: EditInvestmentFormProps) {
-  // Hooks
+  const coin = useCurrentBalance();
   const theme = useTheme() as Theme;
   const { t } = useTranslation('edit-investment');
   const [isInputEnabled, setInputEnabled] = useState(false);
+  const { isLoading: isEditingPercent, edit: editPercent } =
+    useUpdateTakeProfitPercentage();
+  const { isLoading: isEditingInvestment, edit: editInvestment } =
+    useUpdateTakeProfitAndInvestMore();
+  const { serviceId, serviceName } = useSelectedInvestment();
+  const { refetch: refetchDetails } = useInvestmentDetails(serviceId);
+  const { data: details } = useInvestmentDetails(serviceId);
 
-  // Form
+  const transferOutAll = details?.transferOutAll;
+  const amountInvested = details?.invested;
+  const profitPercentage = details?.profitPercentage;
+
+  const tokens = useMemo(
+    () => [
+      {
+        id: coin.id,
+        balance: coin.balance,
+      },
+    ],
+    [coin],
+  );
+
   const {
     handleSubmit,
     control,
-    // clearErrors,
-    // setError,
     formState: { isValid, isDirty, errors },
-  } = useForm({
+  } = useForm<EditFormData>({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {
-      amountTransfer: '',
-      profitPercent: 100 - +profitPercentage,
+      amountTransfer: {
+        value: '',
+        token: tokens[0],
+      },
+      profitPercentage: invertPercent(profitPercentage),
     },
     resolver: isInputEnabled ? yupResolver(EditInvestmentValidation) : null,
   });
 
-  const canSubmit = isValid && Object.keys(errors).length === 0;
-
   const openBlockedToast = useCallback(() => {
-    // toast(
-    //   ...ToasterCompose({
-    //     type: 'error',
-    //     caption: t('edit-investment.error-blockedInvestment'),
-    //   }),
-    // );
+    toast(
+      <Toaster
+        variant={'error'}
+        caption={t('edit-investment.error-blockedInvestment')}
+      />,
+      {
+        type: 'error',
+        icon: false,
+      },
+    );
   }, []);
 
-  const isLoading = false;
-  // eslint-disable-next-line
-  const onSubmit = console.error;
+  const isLoading = isEditingPercent || isEditingInvestment;
+  const canSubmit = isValid && Object.keys(errors).length === 0;
+
+  const onSubmit = async (values: EditFormData) => {
+    if (isInputEnabled) {
+      await editInvestment({
+        profitPercentage: invertPercent(values.profitPercentage),
+        serviceId,
+        amount: values?.amountTransfer?.value,
+      });
+      toast(
+        <Toaster
+          variant={'success'}
+          caption={t(
+            'edit-investment:edit-investment.addMoreInvestmentSuccess',
+            {
+              amount: values?.amountTransfer?.value,
+              currency: values?.amountTransfer?.token?.id,
+              serviceName,
+            },
+          )}
+        />,
+        {
+          type: 'error',
+          icon: false,
+        },
+      );
+      refetchDetails();
+      setView(EditInvestmentViews.EditInvestmentSuccess);
+    } else {
+      await editPercent({
+        profitPercentage: invertPercent(values.profitPercentage),
+        serviceId,
+      });
+      toast(
+        <Toaster
+          variant={'success'}
+          caption={t(
+            'edit-investment:edit-investment.percentageChangedSuccess',
+          )}
+        />,
+        {
+          type: 'error',
+          icon: false,
+        },
+      );
+      refetchDetails();
+      close();
+    }
+    // TODO: hadle error
+  };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -115,7 +178,7 @@ function EditInvestmentForm({
         </Row>
         <Row>
           <Controller
-            name='profitPercent'
+            name='profitPercentage'
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
@@ -137,40 +200,15 @@ function EditInvestmentForm({
 
       {isInputEnabled && coin && (
         <InputContainer>
-          <Controller
-            name='amountTransfer'
+          <InputAmountAdvanced
+            name={'amountTransfer'}
             control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <InputAmount
-                name={'amountTransfer'}
-                {...field}
-                label={t('edit-investment.form.inputAmount.label')}
-                labelBalance={t(
-                  'edit-investment.form.inputAmount.labelBalance',
-                )}
-                showUnit={true}
-                placeholder={'0.0'}
-                // tokens={[
-                //   {
-                //     id: coin.id,
-                //     balance: coin.balance,
-                //   },
-                // ]}
-                error={isDirty && errors?.amountTransfer?.message}
-                // onInsufficientFundsError={(error) => {
-                //   if (!error) {
-                //     clearErrors();
-                //   } else {
-                //     clearErrors();
-                //     setError('amountTransfer', {
-                //       type: 'custom',
-                //       message: 'input-amount.validation-insufficientFunds',
-                //     });
-                //   }
-                // }}
-              />
-            )}
+            label={t('edit-investment.form.inputAmount.label')}
+            labelBalance={t('edit-investment.form.inputAmount.labelBalance')}
+            showUnit={true}
+            placeholder={'0.0'}
+            tokens={tokens}
+            error={isDirty && t(errors?.amountTransfer?.value?.message)}
           />
         </InputContainer>
       )}
@@ -189,7 +227,6 @@ function EditInvestmentForm({
               />
             }
             caption={t('edit-investment.form.link.investMore')}
-            disabled={transferOutAll}
           />
         )}
         <Button
@@ -215,7 +252,6 @@ function EditInvestmentForm({
             transferOutAll ? openBlockedToast : onClickWithdrawInvestment
           }
           caption={t('edit-investment.form.link.withdraw')}
-          disabled={transferOutAll}
         />
       </Actions>
     </Form>

@@ -156,3 +156,9 @@ export const WithdrawActions = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const Highline = styled.span`
+  ${({ theme }) => `
+    color: ${theme.links};
+  `}
+`;

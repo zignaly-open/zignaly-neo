@@ -27,5 +27,9 @@
     "zigpad": "ZIGpad"
   },
   "amount": "Amount",
-  "new-version": "New version, click me to update"
+  "new-version": "New version, click me to update",
+  "validation": {
+    "insufficient-amount": "Insufficient funds",
+    "invalid-value": "Invalid value"
+  }
 }
