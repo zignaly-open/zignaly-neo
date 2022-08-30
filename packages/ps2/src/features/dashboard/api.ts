@@ -16,6 +16,44 @@ export const api = createApi({
         url: `user/exchanges/${exchangeInternalId}/assets?reduced=true`,
       }),
     }),
+    updateTakeProfit: builder.mutation<
+      void,
+      {
+        serviceId: string;
+        profitPercentage: number | string;
+        exchangeInternalId: string;
+      }
+    >({
+      query: ({ serviceId, profitPercentage, exchangeInternalId }) => ({
+        url: `services/${serviceId}/investments/percentage`,
+        method: 'POST',
+        body: {
+          exchangeInternalId,
+          profitPercent: profitPercentage,
+        },
+      }),
+    }),
+
+    updateTakeProfitAndInvestMore: builder.mutation<
+      void,
+      {
+        serviceId: string;
+        profitPercentage: number | string;
+        exchangeInternalId: string;
+        amount: string;
+      }
+    >({
+      query: ({ serviceId, profitPercentage, exchangeInternalId, amount }) => ({
+        url: `services/${serviceId}/investments/in`,
+        method: 'POST',
+        body: {
+          exchangeInternalId,
+          profitPercent: profitPercentage,
+          amount,
+        },
+      }),
+    }),
+
     investmentDetails: builder.query<
       InvestmentDetails,
       { exchangeInternalId: string; serviceId: string }
@@ -31,5 +69,7 @@ export const {
   useLazyInvestmentsQuery,
   useInvestmentsQuery,
   useCoinsQuery,
+  useUpdateTakeProfitAndInvestMoreMutation,
+  useUpdateTakeProfitMutation,
   useInvestmentDetailsQuery,
 } = api;

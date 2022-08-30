@@ -3,12 +3,15 @@ import {
   useInvestmentsQuery,
   useCoinsQuery,
   useInvestmentDetailsQuery,
+  useUpdateTakeProfitMutation,
+  useUpdateTakeProfitAndInvestMoreMutation,
 } from './api';
 import { useActiveExchange } from '../auth/use';
 import { Coins, Investment, InvestmentDetails } from './types';
 import { RootState } from '../store';
 import { setSelectedInvestment } from './store';
 import { useMemo } from 'react';
+import BigNumber from 'bignumber.js';
 
 export function useInvestments(): ReturnType<typeof useInvestmentsQuery> {
   const exchange = useActiveExchange();
@@ -67,4 +70,55 @@ export function useCurrentBalance(): { id: string; balance: string } {
     }),
     [service.ssc, coins],
   );
+}
+
+export function useUpdateTakeProfitPercentage(): {
+  isLoading: boolean;
+  edit: ({
+    profitPercentage,
+    serviceId,
+  }: {
+    serviceId: string;
+    profitPercentage: number | string;
+  }) => Promise<void>;
+} {
+  const [update, { isLoading }] = useUpdateTakeProfitMutation();
+  const exchange = useActiveExchange();
+  return {
+    isLoading,
+    edit: async ({ profitPercentage, serviceId }) => {
+      await update({
+        profitPercentage,
+        serviceId,
+        exchangeInternalId: exchange.internalId,
+      });
+    },
+  };
+}
+
+export function useUpdateTakeProfitAndInvestMore(): {
+  isLoading: boolean;
+  edit: ({
+    profitPercentage,
+    serviceId,
+    amount,
+  }: {
+    serviceId: string;
+    amount: BigNumber | number | string;
+    profitPercentage: number | string;
+  }) => Promise<void>;
+} {
+  const [update, { isLoading }] = useUpdateTakeProfitAndInvestMoreMutation();
+  const exchange = useActiveExchange();
+  return {
+    isLoading,
+    edit: async ({ profitPercentage, serviceId, amount }) => {
+      await update({
+        profitPercentage,
+        serviceId,
+        exchangeInternalId: exchange.internalId,
+        amount: amount.toString(),
+      });
+    },
+  };
 }

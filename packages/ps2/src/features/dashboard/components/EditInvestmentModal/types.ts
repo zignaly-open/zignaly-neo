@@ -1,5 +1,6 @@
 export enum EditInvestmentViews {
   EditInvestment = 'edit-investment',
+  EditInvestmentSuccess = 'edit-investment-success',
   PendingTransactions = 'pending-transactions',
   WithdrawInvestment = 'withdraw-investment',
   WithdrawPerform = 'withdraw-investment-perform',

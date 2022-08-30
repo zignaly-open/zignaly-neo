@@ -88,6 +88,7 @@ import { HeaderLinksContainer } from "components/navigation/Header/styles";
 import { styledIf } from "utils/styled";
 import CoinIcon from "components/display/CoinIcon";
 import SliderInput from "components/inputs/SliderInput";
+import InputAmountAdvanced from "components/inputs/InputAmountAdvanced";
 
 export {
   /**
@@ -120,6 +121,7 @@ export {
   CheckBox,
   IconButton,
   InputAmount,
+  InputAmountAdvanced,
   TextButton,
   InputText,
   Select,

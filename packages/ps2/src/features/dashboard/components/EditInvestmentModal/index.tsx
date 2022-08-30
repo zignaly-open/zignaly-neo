@@ -15,6 +15,7 @@ import {
   useStoredCoins,
 } from '../../use';
 import WithdrawPerform from './views/WithdrawPerform';
+import EditInvestmentSuccess from './views/EditInvestmentSuccess';
 
 function EditInvestmentModal({
   close,
@@ -47,7 +48,11 @@ function EditInvestmentModal({
     },
     [EditInvestmentViews.EditInvestment]: {
       title: t('edit-investment.modal.editInvestments.title'),
-      component: () => <EditInvestment setView={setView} />,
+      component: () => <EditInvestment setView={setView} close={close} />,
+    },
+    [EditInvestmentViews.EditInvestmentSuccess]: {
+      title: t('edit-investment.modalSuccess.title'),
+      component: () => <EditInvestmentSuccess close={close} />,
     },
   };
 
@@ -69,7 +74,10 @@ function EditInvestmentModal({
         title={title}
         onClickClose={close}
         onGoBack={
-          view !== EditInvestmentViews.EditInvestment
+          ![
+            EditInvestmentViews.EditInvestment,
+            EditInvestmentViews.EditInvestmentSuccess,
+          ].includes(view)
             ? () => setView(EditInvestmentViews.EditInvestment)
             : undefined
         }
