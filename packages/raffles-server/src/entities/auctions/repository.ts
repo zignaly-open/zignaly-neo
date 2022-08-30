@@ -189,7 +189,8 @@ const AuctionsRepository = () => {
         console.log(res);
       })
       .catch((e) => {
-        throw e;
+        console.error(e.response);
+        throw new Error('Error saving data');
       });
   }
 
