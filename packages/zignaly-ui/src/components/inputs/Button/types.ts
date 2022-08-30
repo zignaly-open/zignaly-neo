@@ -27,6 +27,7 @@ export type ButtonProps = {
   bottomElement?: ReactElement | string | null;
   disabled?: boolean;
   loading?: boolean;
+  id?: string;
   color?: keyof typeof buttonColors;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];

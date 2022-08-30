@@ -8,6 +8,7 @@ import {
   GET_OR_CREATE_USER,
   AUTHENTICATE_METAMASK,
 } from 'queries/users';
+import { GET_AUCTIONS } from 'queries/auctions';
 
 function useRefetchCurrentUser(): () => Promise<unknown> {
   const [fetchUser] = useLazyQuery(GET_CURRENT_USER, {
@@ -20,10 +21,16 @@ function useRefetchCurrentUser(): () => Promise<unknown> {
 export function useLogout(): () => Promise<void> {
   const fetchUser = useRefetchCurrentUser();
   const { deactivate } = useEthers();
+  const client = useApolloClient();
   return async () => {
     deactivate();
     setToken('');
-    await fetchUser();
+    await Promise.all([
+      fetchUser(),
+      client.refetchQueries({
+        include: [GET_AUCTIONS],
+      }),
+    ]);
   };
 }
 
@@ -32,19 +39,10 @@ export default function useAuthenticate(): () => Promise<void> {
   const [authenticate] = useMutation(AUTHENTICATE_METAMASK);
   const [isOkToStart, setIsOkToStart] = useState(false);
   const client = useApolloClient();
-  const {
-    account,
-    activateBrowserWallet,
-    library,
-    switchNetwork,
-    chainId,
-    deactivate,
-  } = useEthers();
+  const { account, activateBrowserWallet, library, switchNetwork } =
+    useEthers();
 
-  useAsync(async () => {
-    if (!account || !isOkToStart) return;
-    setIsOkToStart(false);
-
+  async function createUserAndSign() {
     const {
       data: {
         getOrCreateUser: { messageToSign },
@@ -53,37 +51,42 @@ export default function useAuthenticate(): () => Promise<void> {
       variables: { publicAddress: account.toLocaleLowerCase() },
     });
 
+    await switchNetwork(
+      process.env.REACT_APP_USE_MUMBAI_CHAIN ? Mumbai.chainId : Polygon.chainId,
+    );
+
     const signature = await library.getSigner().signMessage(messageToSign);
-    if (!chainId) {
-      await switchNetwork(
-        process.env.REACT_APP_USE_MUMBAI_CHAIN
-          ? Mumbai.chainId
-          : Polygon.chainId,
-      );
-    }
-    if (chainId) {
-      const {
-        data: {
-          authenticate: { accessToken },
-        },
-      } = await authenticate({
-        variables: {
-          publicAddress: account.toLocaleLowerCase(),
-          signature,
-        },
-      });
-      setToken(accessToken);
-    } else {
-      deactivate();
-    }
-    await client.refetchQueries({
-      include: [GET_CURRENT_USER],
+
+    const {
+      data: {
+        authenticate: { accessToken },
+      },
+    } = await authenticate({
+      variables: {
+        publicAddress: account.toLocaleLowerCase(),
+        signature,
+      },
     });
+    setToken(accessToken);
+    await client.refetchQueries({
+      include: [GET_CURRENT_USER, GET_AUCTIONS],
+    });
+  }
+
+  useAsync(async () => {
+    if (!account || !isOkToStart) return;
+    setIsOkToStart(false);
+    createUserAndSign();
   }, [account, isOkToStart]);
 
   // TODO: error handling
   return async () => {
+    // Ready to connect
     setIsOkToStart(true);
-    !account && activateBrowserWallet();
+
+    if (!account) {
+      // Init account
+      await activateBrowserWallet();
+    }
   };
 }

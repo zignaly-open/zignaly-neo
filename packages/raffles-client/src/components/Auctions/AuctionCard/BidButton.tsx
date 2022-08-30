@@ -34,7 +34,10 @@ const BidButton: React.FC<{
   const state = useMemo(() => {
     if (auction.comingSoon) {
       return BidButtonState.ComingSoon;
-    } else if (!isActive && !auction.comingSoon) return BidButtonState.Ended;
+    } else if (!isActive && !auction.comingSoon) {
+      return BidButtonState.Ended;
+    }
+
     if (!user) return BidButtonState.NotLoggedIn;
     if (new BN(balance).lt(new BN(auction.bidFee)))
       return BidButtonState.NotEnoughFunds;

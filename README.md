@@ -50,6 +50,7 @@ this makes two of us:
 lerna add package-name --scope=*/ui 
 ```
 
+
 ### Conventional commits
 
 We use [conventional commits](https://www.conventionalcommits.org/en/v1.0.0/#summary) and commit-lint. I suggest you
@@ -127,3 +128,4 @@ Some common stuff for Raffles, nothing to write home about.
 * Though shalt not commit untranslated literals and preferably use i18next
 * Though shalt add more guidelines here after the team's approval
 * Though shalt be very careful and use only one React version across all these repos
+* Though shalt add ids to lionks and buttons for easier automation and conversion tracking

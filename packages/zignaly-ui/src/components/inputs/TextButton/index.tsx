@@ -18,6 +18,7 @@ function TextButton({
   disabled = false,
   loading = false,
   rel,
+  id,
   target,
   className,
   tabIndex,
@@ -28,6 +29,7 @@ function TextButton({
     <styled.Layout
       className={className}
       color={color}
+      id={id}
       isLoading={loading}
       withElements={!!leftElement || !!rightElement}
       onClick={onClick}
