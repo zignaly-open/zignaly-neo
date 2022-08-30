@@ -8,6 +8,7 @@ import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
 import ForgotPassword from './views/Auth/ForgotPassword';
 import TradingServices from './views/Help/TradingServices';
+import Zigpad from './views/Zigpad';
 import {
   ROUTE_DASHBOARD,
   ROUTE_FORGOT_PASSWORD,
@@ -56,7 +57,7 @@ function Router() {
           <Route index element={<Staking />} />
         </Route>
         <Route path={ROUTE_ZIGPAD}>
-          <Route index element={<ProfitSharing />} />
+          <Route index element={<Zigpad />} />
         </Route>
 
         <Route path={ROUTE_HELP} element={<TradingServices />} />
