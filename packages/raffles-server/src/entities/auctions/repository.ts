@@ -12,7 +12,11 @@ import { Payout } from '../payouts/model';
 import { User } from '../users/model';
 import { AUCTION_FEE } from './constants';
 import { Auction, AuctionBid, AuctionBasketItem } from './model';
-import { getMinRequiredBidForAuction, verifyPositiveBalance } from './util';
+import {
+  getMinRequiredBidForAuction,
+  getPayoutPrizeForAuction,
+  verifyPositiveBalance,
+} from './util';
 import axios from 'axios';
 
 const AuctionsRepository = () => {
@@ -105,22 +109,21 @@ const AuctionsRepository = () => {
     return (
       await sequelize.query(
         `
-                  SELECT filtered.* FROM (
-                      SELECT *, ROW_NUMBER () OVER (PARTITION BY t."auctionId" ORDER BY T."value" DESC) as "position" FROM ( 
-                        SELECT MAX(b.value) as value, MAX(b.id) as id, b."auctionId", b."userId", MAX(b."claimTransactionId") as "claimTransactionId", u."username" as "username"
-                        FROM "${AuctionBid.tableName}" b
-                        INNER JOIN "${User.tableName}" u ON b."userId" = u."id"
-                        WHERE "auctionId" ${id ? '=' : '>'} $auctionId
-                        GROUP BY "auctionId", "userId", "username"
-                     ) t
-                  ) filtered
-                  INNER JOIN "${
-                    Auction.tableName
-                  }" a ON a."id" = filtered."auctionId"
-                  WHERE 
-                      "position" <= a."numberOfWinners" 
-                      OR "userId" = $currentUserId 
-                      ${showAllBids ? 'OR 1' : ''}
+          SELECT filtered.* FROM (
+              SELECT *, ROW_NUMBER () OVER (PARTITION BY t."auctionId" ORDER BY T."value" DESC) as "position" FROM ( 
+                SELECT MAX(b.value) as value, MAX(b.id) as id, b."auctionId", b."userId", MAX(b."claimTransactionId") as "claimTransactionId", u."username" as "username"
+                FROM "${AuctionBid.tableName}" b
+                INNER JOIN "${User.tableName}" u ON b."userId" = u."id"
+                WHERE "auctionId" ${id ? '=' : '>'} $auctionId
+                GROUP BY "auctionId", "userId", "username"
+              ) t
+          ) filtered
+          INNER JOIN "${Auction.tableName}" a ON a."id" = filtered."auctionId"
+          WHERE 
+              "position" <= a."numberOfWinners" 
+              OR "userId" = $currentUserId 
+              ${showAllBids ? 'OR 1' : ''}
+              ORDER BY filtered."id" DESC
             `,
         {
           type: QueryTypes.SELECT,
@@ -156,17 +159,17 @@ const AuctionsRepository = () => {
     user: ContextUser,
     showAllBids?: boolean,
   ) {
-    const bids = await this.getSortedAuctionBids(id, showAllBids, user);
+    const bids = await getSortedAuctionBids(id, showAllBids, user);
     const auctions = (await Auction.findAll({
       where: { ...(id ? { id } : {}) },
       include: [AuctionBasketItem],
     })) as unknown as AuctionType[];
 
-    auctions.forEach((x) => {
+    auctions.forEach((a) => {
       // here we will match auctions and bids
-      x.bids = bids.filter((b: AuctionBidType) => x.id === b.auctionId);
-      x.userBid = x.bids.find((b) => b.user.id === user?.id);
-      x.minimalBid = getMinRequiredBidForAuction(x, x.bids[0]);
+      a.bids = bids.filter((b: AuctionBidType) => a.id === b.auctionId);
+      a.userBid = a.bids.find((b) => b.user.id === user?.id);
+      a.currentBid = getPayoutPrizeForAuction(a, a.bids[0]);
     });
 
     return auctions;

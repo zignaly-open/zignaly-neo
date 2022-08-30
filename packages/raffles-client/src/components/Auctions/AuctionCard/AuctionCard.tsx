@@ -38,10 +38,6 @@ const AuctionCard: React.FC<{
 
   const claimButtonInactive =
     auction.userBid?.isClaimed || auction.maxClaimDate > new Date();
-  const bidAmountOrPayoutAmount =
-    +new Date(auction.expiresAt) < Date.now()
-      ? auction.bids[0]?.value ?? auction.minimalBid
-      : auction.minimalBid;
 
   const [hasJustExpired] = useTimeout(
     +new Date(auction.expiresAt) - renderDate.current,
@@ -85,7 +81,7 @@ const AuctionCard: React.FC<{
           <StyledAmountContainer>
             <Box display='flex'>
               <ZigCoinIcon width={24} height={24} />
-              <PriceLabel value={bidAmountOrPayoutAmount} coin='ZIG' />
+              <PriceLabel value={auction.currentBid} coin='ZIG' />
             </Box>
             <FinalCountdown date={auction.expiresAt} started={true} />
           </StyledAmountContainer>
