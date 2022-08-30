@@ -13,7 +13,6 @@ export const GET_AUCTIONS = gql`
       title
       createdAt
       expiresAt
-      maxExpiryDate
       maxClaimDate
       status
       comingSoon

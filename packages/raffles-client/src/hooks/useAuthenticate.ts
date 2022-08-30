@@ -1,8 +1,7 @@
 import { useApolloClient, useLazyQuery, useMutation } from '@apollo/client';
 import { setToken } from '../util/token';
 import { Mumbai, Polygon, useEthers } from '@usedapp/core';
-import { useAsync } from 'react-use';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   GET_CURRENT_USER,
   GET_OR_CREATE_USER,
@@ -73,7 +72,7 @@ export default function useAuthenticate(): () => Promise<void> {
     });
   }
 
-  useAsync(async () => {
+  useEffect(() => {
     if (!account || !isOkToStart) return;
     setIsOkToStart(false);
     createUserAndSign();

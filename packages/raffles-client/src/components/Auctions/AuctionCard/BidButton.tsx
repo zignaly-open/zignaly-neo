@@ -1,12 +1,11 @@
 import { useMutation } from '@apollo/client';
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import useCurrentUser from '../../../hooks/useCurrentUser';
 import { useTranslation } from 'react-i18next';
 import useBalance from '../../../hooks/useBalance';
 import BN from 'bignumber.js';
 import useAuthenticate from '../../../hooks/useAuthenticate';
-import { onboardingContext } from '../../../contexts/Onboarding';
 import { Button } from '@zignaly-open/ui';
 import { BID_AUCTION } from 'queries/auctions';
 import { showToast } from 'util/showToast';
@@ -27,7 +26,6 @@ const BidButton: React.FC<{
   const [bid, { loading: isBidding }] = useMutation(BID_AUCTION);
   const { balance } = useBalance();
   const { user } = useCurrentUser();
-  const { balanceOnboarding } = useContext(onboardingContext);
   const authenticate = useAuthenticate();
   const { t } = useTranslation('auction');
 
@@ -68,7 +66,7 @@ const BidButton: React.FC<{
         showToast({ size: 'large', variant: 'error', caption: e.message });
       });
     }
-  }, [state, authenticate, balanceOnboarding]);
+  }, [state, authenticate]);
 
   return (
     <Button
