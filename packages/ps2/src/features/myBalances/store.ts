@@ -1,10 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { api } from './api';
+import { MyBalancesState } from './types';
 
-const initialState = {
-  balances: {},
-  coins: {},
-};
+const initialState: MyBalancesState = {};
 
 export const myBalancesSlice = createSlice({
   name: 'myBalances',
