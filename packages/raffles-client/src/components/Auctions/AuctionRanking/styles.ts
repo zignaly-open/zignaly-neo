@@ -1,20 +1,5 @@
 import { Box, styled } from '@mui/material';
 
-export const RankingHead = styled('div')`
-  background: #222249;
-  box-shadow: 0 0 10px #16192b;
-  border-radius: 5px;
-  height: 38px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  margin-bottom: 12px;
-
-  ${({ theme }) => theme.breakpoints.down('sm')} {
-    display: none;
-  }
-`;
-
 export const RankingRowContainer = styled(Box)<{
   isMe?: boolean;
   hide?: boolean;
@@ -28,7 +13,7 @@ export const RankingRowContainer = styled(Box)<{
 }));
 
 export const Rank = styled('div')`
-  margin: 0 14px 0 10px;
+  margin: 0 18px 0 10px;
 `;
 
 export const Ellipsis = styled(RankingRowContainer)`
