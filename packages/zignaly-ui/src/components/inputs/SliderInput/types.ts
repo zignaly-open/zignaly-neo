@@ -9,7 +9,7 @@ export type SliderInputProps = {
   max?: number;
   unit?: string;
   initialValue: number;
-  onChange: any;
+  onChange: (value: number) => void;
   mode?: keyof typeof SliderModes | null;
   labels?: {
     top: string | null;
