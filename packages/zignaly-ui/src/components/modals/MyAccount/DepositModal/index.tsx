@@ -12,7 +12,7 @@ import TextButton from "components/inputs/TextButton";
 import { CoinOption, MyAccountDepositModalProps, NetworkOption } from "../types";
 import ErrorMessage from "components/display/ErrorMessage";
 import { Row } from "utils/row";
-import ZignalyQRCode from "components/display/ZignalyQRCode";
+import ZignalyQRCode from "components/display/QRCode";
 
 const MyAccountDepositModal = ({
   coins,

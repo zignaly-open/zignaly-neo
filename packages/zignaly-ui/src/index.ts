@@ -14,6 +14,7 @@ import ProgressSlider from "./components/display/ProgressSlider";
 import InvestSlider from "./components/display/InvestSlider";
 import { ServiceName } from "./components/display/Table/components/ServiceName";
 import { AreaChart } from "./components/display/Charts";
+import QRCode from "./components/display/QRCode";
 
 // Inputs
 import Button from "./components/inputs/Button";
@@ -24,6 +25,7 @@ import TextButton from "./components/inputs/TextButton";
 import InputText from "./components/inputs/InputText";
 import Select from "./components/inputs/Selector";
 import InputCode from "./components/inputs/InputCode";
+import InputSelect, { formatInputSelectItem } from "./components/inputs/InputSelect";
 import ExpandableInput from "./components/inputs/ExpandableInput";
 import { ButtonGroup, ValueIndicator } from "./components/styled";
 
@@ -116,6 +118,7 @@ export {
   ProgressSlider,
   InvestSlider,
   Toaster,
+  QRCode,
   // Inputs
   Button,
   CheckBox,
@@ -128,6 +131,8 @@ export {
   ButtonGroup,
   InputCode,
   ExpandableInput,
+  InputSelect,
+  formatInputSelectItem,
   // Navigation
   Header,
   BrandImage,

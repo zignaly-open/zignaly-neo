@@ -3,7 +3,7 @@ import React from "react";
 import ZignalyQRCode from ".";
 
 export default {
-  title: "Display/ZignalyQRCode",
+  title: "Display/QRCode",
   component: ZignalyQRCode,
 } as ComponentMeta<typeof ZignalyQRCode>;
 
