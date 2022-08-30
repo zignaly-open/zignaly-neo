@@ -38,8 +38,13 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <Box sx={{ width: '100%', maxWidth: 'sm' }}>
-      <Typography variant={'h2'}>{t('log-in-title')}</Typography>
+    <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
+      <Typography
+        variant={'h2'}
+        style={{ display: 'block', textAlign: 'center' }}
+      >
+        {t('log-in-title')}
+      </Typography>
       <Form onSubmit={handleSubmit(submit)}>
         <Controller
           name='email'
