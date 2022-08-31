@@ -2,8 +2,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { useLazyReducedBalancesQuery, useLazyAllCoinsQuery } from './api';
 import { Exchange } from '../auth/types';
+import { ShowFnOutput, useModal } from 'mui-modal-provider';
+import DepositModal from './components/DepositModal';
 
-export function useSelectMyBalances(): object {
+export const useSelectMyBalances = (): object => {
   const balances = useSelector((state: RootState) => state.myBalances.balances);
   const coins = useSelector((state: RootState) => state.myBalances.coins);
 
@@ -20,7 +22,26 @@ export function useSelectMyBalances(): object {
     },
     {},
   );
-}
+};
+
+export const useSelectedMyBalancesCoins = (): object => {
+  return useSelector((state: RootState) => state.myBalances.coins);
+};
+
+export const useDeposit = () => {
+  const { showModal } = useModal();
+
+  return [
+    async () => {
+      let modal: ShowFnOutput<void>;
+      await new Promise<void>(() => {
+        modal = showModal(DepositModal, {
+          close: () => modal.hide(),
+        });
+      });
+    },
+  ];
+};
 
 export const useFetchMyBalances = (): [
   { isLoadingAllCoins: boolean; isLoadingReducedBalances: boolean },

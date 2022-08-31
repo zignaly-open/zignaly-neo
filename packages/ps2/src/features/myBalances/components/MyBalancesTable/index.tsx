@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { useActiveExchange } from '../../../auth/use';
-import { useFetchMyBalances, useSelectMyBalances } from '../../use';
+import { useDeposit, useFetchMyBalances, useSelectMyBalances } from '../../use';
 import {
   Table,
   PriceLabel,
@@ -11,6 +11,9 @@ import {
   Loader,
   ExpandableInput,
   SearchIcon,
+  ButtonGroup,
+  IconButton,
+  PlusIcon,
 } from '@zignaly-open/ui';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { MyBalancesTableDataType } from './types';
@@ -27,6 +30,7 @@ const MyBalancesTable = (): JSX.Element => {
   const currentExchange = useActiveExchange();
 
   const balances = useSelectMyBalances();
+  const [openDepositModal] = useDeposit();
   const [{ isLoadingReducedBalances, isLoadingAllCoins }, fetchBalances] =
     useFetchMyBalances();
 
@@ -144,6 +148,17 @@ const MyBalancesTable = (): JSX.Element => {
       symbol: coin,
       balanceTotalUSDT: balance.balanceTotalUSDT,
     },
+    action: (
+      <ButtonGroup>
+        <IconButton
+          icon={
+            <PlusIcon width={'26px'} height={'26px'} color={theme.neutral300} />
+          }
+          onClick={openDepositModal}
+          variant='secondary'
+        />
+      </ButtonGroup>
+    ),
   }));
 
   /**

@@ -1,6 +1,6 @@
 // Dependencies
-import styled from "styled-components";
-import Typography from "components/display/Typography";
+import styled from 'styled-components';
+import { Typography } from '@zignaly-open/ui';
 
 export const Layout = styled.div`
   margin-top: 32px;
