@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
-import { Form, Action } from './styles';
+import { Form, Action, TitleHead } from './styles';
 import { LoginValidation } from './validations';
 import { useAuthenticate } from '../../use';
 import { useNavigate } from 'react-router-dom';
@@ -38,8 +38,10 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <Box sx={{ width: '100%', maxWidth: 'sm' }}>
-      <Typography variant={'h2'}>{t('log-in-title')}</Typography>
+    <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
+      <TitleHead>
+        <Typography variant={'h2'}>{t('log-in-title')}</Typography>
+      </TitleHead>
       <Form onSubmit={handleSubmit(submit)}>
         <Controller
           name='email'
