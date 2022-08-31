@@ -10,8 +10,17 @@ export function getMinRequiredBidForAuction(
   auction: Auction | AuctionType,
   lastBid: AuctionBid | AuctionBidType,
 ): string {
+  return new BN(lastBid?.value || auction.startingBid)
+    .plus(new BN(auction.bidStep))
+    .toString();
+}
+
+export function getPayoutPrizeForAuction(
+  auction: Auction | AuctionType,
+  lastBid: AuctionBid | AuctionBidType,
+): string {
   if (lastBid) {
-    return new BN(lastBid.value).plus(new BN(auction.bidStep)).toString();
+    return new BN(lastBid.value).toString();
   } else {
     return auction.startingBid;
   }

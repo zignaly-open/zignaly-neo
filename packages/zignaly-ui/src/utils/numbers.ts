@@ -43,24 +43,26 @@ export const sortByPointDecimal =
  * @description Sort the column by picking up the value
  *
  * @returns {Number} returns the number for sorting
- * @param a value to compare
- * @param b value to compare
+ * @param firstNumber value to compare
+ * @param secondNumber value to compare
  * @param isNecessaryParseFloat if is necessary parse
  */
 export const sortByValue = (
-  a: string | number,
-  b: string | number,
+  firstNumber: string | number,
+  secondNumber: string | number,
   isNecessaryParseFloat = false,
 ) => {
+  let number1 = firstNumber,
+    number2 = secondNumber;
   if (isNecessaryParseFloat) {
-    if (typeof a === "string") {
-      a = parseFloat(a);
+    if (typeof number1 === "string") {
+      number1 = parseFloat(number1);
     }
-    if (typeof b === "string") {
-      b = parseFloat(b);
+    if (typeof number2 === "string") {
+      number2 = parseFloat(number2);
     }
   }
-  if (a > b) return 1;
-  if (a < b) return -1;
+  if (number2 > number2) return 1;
+  if (number1 < number2) return -1;
   return 0;
 };

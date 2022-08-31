@@ -17,7 +17,7 @@ export const GET_AUCTIONS = gql`
       maxClaimDate
       status
       comingSoon
-      minimalBid
+      currentBid
       website
       twitter
       telegram
@@ -94,7 +94,7 @@ export const BIDS_SUBSCRIPTION = gql`
     auctionUpdated {
       id
       expiresAt
-      minimalBid
+      currentBid
       comingSoon
       userBid {
         id

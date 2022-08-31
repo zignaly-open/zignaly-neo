@@ -81,9 +81,9 @@ describe('Auctions', () => {
     const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
     const { body } = await makeBid(auction, aliceToken);
-    expect(body.data.bid.userBid.value).toBe('100');
+    expect(body.data.bid.userBid.value).toBe('101');
     const { body: body2 } = await makeBid(auction, aliceToken);
-    expect(body2.data.bid.userBid.value).toBe('101');
+    expect(body2.data.bid.userBid.value).toBe('102');
     expect(mock.history.post[1].data).toBe(
       JSON.stringify({
         amount: AUCTION_FEE,
@@ -102,33 +102,33 @@ describe('Auctions', () => {
     const [, bobToken] = await createBob(300);
     const auction = await createAuction();
     const auctionBeforeBids = await getFirstAuction(aliceToken);
-    expect(auctionBeforeBids.minimalBid).toBe(auctionBeforeBids.startingBid);
-    expect(auctionBeforeBids.minimalBid).toBe('100');
+    expect(auctionBeforeBids.currentBid).toBe(auctionBeforeBids.startingBid);
+    expect(auctionBeforeBids.currentBid).toBe('100');
     expect(auctionBeforeBids.bids.length).toBe(0);
 
     await makeBid(auction, aliceToken);
     const auctionAfter1BidAlice = await getFirstAuction(aliceToken);
-    expect(auctionAfter1BidAlice.minimalBid).toBe('101');
-    expect(auctionAfter1BidAlice.bids[0].value).toBe('100');
-    expect(auctionAfter1BidAlice.userBid.value).toBe('100');
+    expect(auctionAfter1BidAlice.currentBid).toBe('101');
+    expect(auctionAfter1BidAlice.bids[0].value).toBe('101');
+    expect(auctionAfter1BidAlice.userBid.value).toBe('101');
     expect(auctionAfter1BidAlice.userBid.position).toBe(1);
     const auctionAfter1BidBob = await getFirstAuction(bobToken);
     expect(auctionAfter1BidBob.userBid).toBeFalsy();
-    expect(auctionAfter1BidBob.minimalBid).toBe('101');
+    expect(auctionAfter1BidBob.currentBid).toBe('101');
 
     await makeBid(auction, aliceToken);
     const auctionAfter2BidAlice = await getFirstAuction(aliceToken);
-    expect(auctionAfter2BidAlice.minimalBid).toBe('102');
-    expect(auctionAfter2BidAlice.bids[0].value).toBe('101');
-    expect(auctionAfter2BidAlice.userBid.value).toBe('101');
+    expect(auctionAfter2BidAlice.currentBid).toBe('102');
+    expect(auctionAfter2BidAlice.bids[0].value).toBe('102');
+    expect(auctionAfter2BidAlice.userBid.value).toBe('102');
     expect(auctionAfter2BidAlice.userBid.position).toBe(1);
     const auctionAfter2BidBob = await getFirstAuction(bobToken);
     expect(auctionAfter2BidBob.userBid).toBeFalsy();
-    expect(auctionAfter2BidBob.minimalBid).toBe('102');
+    expect(auctionAfter2BidBob.currentBid).toBe('102');
 
     await makeBid(auction, bobToken);
     const auctionAfter3BidsAlice = await getFirstAuction(aliceToken);
-    expect(auctionAfter3BidsAlice.minimalBid).toBe('103');
+    expect(auctionAfter3BidsAlice.currentBid).toBe('103');
     expect(auctionAfter3BidsAlice.bids[0].position).toBe(1);
     expect(auctionAfter3BidsAlice.bids[1].position).toBe(2);
     expect(auctionAfter3BidsAlice.bids[0].user.username).toBe('Bob');
@@ -222,7 +222,7 @@ describe('Auctions', () => {
     const [, bobToken] = await createBob(300);
     const auction = await createAuction();
     const { body } = await makeBid(auction, aliceToken);
-    expect(body.data.bid.userBid.value).toBe('100');
+    expect(body.data.bid.userBid.value).toBe('101');
     await expireAuction(auction.id);
     const {
       body: { errors },

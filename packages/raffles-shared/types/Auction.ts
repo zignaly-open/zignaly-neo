@@ -36,7 +36,7 @@ export type AuctionType = {
   maxClaimDate: Date;
   startingBid: string;
   // new fields we add on the backend
-  minimalBid?: string;
+  currentBid?: string;
   userBid?: AuctionBidType;
   bids: AuctionBidType[];
 };
