@@ -4,17 +4,28 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Grid } from '@mui/material';
 import { WithdrawActions } from '../../styles';
-import { Button, InputAmountAdvanced, SliderInput } from '@zignaly-open/ui';
+import {
+  Button,
+  InputAmountAdvanced,
+  SliderInput,
+  Toaster,
+} from '@zignaly-open/ui';
 import BigNumber from 'bignumber.js';
-import { useCurrentBalance } from '../../../../use';
+import {
+  useCurrentBalance,
+  useSelectedInvestment,
+  useWithdrawInvestment,
+} from '../../../../use';
 import { EditInvestmentValidation } from './validations';
 import { WithdrawFormData } from './types';
+import { ChangeViewFn, EditInvestmentViews } from '../../types';
+import { toast } from 'react-toastify';
 
-const WithdrawPerform: React.FC = () => {
+const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   const coin = useCurrentBalance();
+  const { isLoading, withdraw } = useWithdrawInvestment();
+  const { serviceId } = useSelectedInvestment();
   const { t } = useTranslation('withdraw');
-
-  // Form
   const {
     handleSubmit,
     control,
@@ -34,12 +45,29 @@ const WithdrawPerform: React.FC = () => {
     resolver: yupResolver(EditInvestmentValidation),
   });
 
-  const isLoading = false;
   const watchAmountTransfer = watch(
     'amountTransfer',
   ) as WithdrawFormData['amountTransfer'];
 
-  const onSubmit = () => {};
+  const onSubmit = async (values: WithdrawFormData) => {
+    await withdraw({
+      amount: values.amountTransfer?.value,
+      serviceId,
+    });
+
+    // TODO: error handling
+    toast(
+      <Toaster
+        variant={'success'}
+        caption={t('edit-investment:edit-investment.withdrawInvestmentSuccess')}
+      />,
+      {
+        type: 'error',
+        icon: false,
+      },
+    );
+    setView(EditInvestmentViews.WithdrawSuccess);
+  };
   const tokenBalance = new BigNumber(coin.balance);
   const amount = new BigNumber(watchAmountTransfer?.value);
 
@@ -95,4 +123,4 @@ const WithdrawPerform: React.FC = () => {
   );
 };
 
-export default WithdrawPerform;
+export default WithdrawForm;

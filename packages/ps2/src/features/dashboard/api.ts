@@ -16,6 +16,25 @@ export const api = createApi({
         url: `user/exchanges/${exchangeInternalId}/assets?reduced=true`,
       }),
     }),
+
+    withdrawInvestment: builder.mutation<
+      void,
+      {
+        serviceId: string;
+        amount: number | string;
+        exchangeInternalId: string;
+      }
+    >({
+      query: ({ serviceId, amount, exchangeInternalId }) => ({
+        url: `services/${serviceId}/investments/out`,
+        method: 'POST',
+        body: {
+          exchangeInternalId,
+          amount,
+        },
+      }),
+    }),
+
     updateTakeProfit: builder.mutation<
       void,
       {
@@ -71,5 +90,6 @@ export const {
   useCoinsQuery,
   useUpdateTakeProfitAndInvestMoreMutation,
   useUpdateTakeProfitMutation,
+  useWithdrawInvestmentMutation,
   useInvestmentDetailsQuery,
 } = api;

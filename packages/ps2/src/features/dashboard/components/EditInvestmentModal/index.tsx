@@ -16,6 +16,7 @@ import {
 } from '../../use';
 import WithdrawPerform from './views/WithdrawPerform';
 import EditInvestmentSuccess from './views/EditInvestmentSuccess';
+import WithdrawModalSuccess from './views/WithdrawSuccess';
 
 function EditInvestmentModal({
   close,
@@ -35,12 +36,18 @@ function EditInvestmentModal({
 
   const views = {
     [EditInvestmentViews.WithdrawInvestment]: {
+      title: t(
+        'withdraw-your-investment:withdraw-your-investment.success.title',
+      ),
+      component: () => <WithdrawFunds setView={setView} />,
+    },
+    [EditInvestmentViews.WithdrawSuccess]: {
       title: t('edit-investment.modal.withdrawInvestment.title'),
-      component: () => <WithdrawFunds />,
+      component: () => <WithdrawModalSuccess close={close} />,
     },
     [EditInvestmentViews.WithdrawPerform]: {
       title: t('withdraw-your-investment:withdraw-your-investment.title'),
-      component: () => <WithdrawPerform />,
+      component: () => <WithdrawPerform setView={setView} />,
     },
     [EditInvestmentViews.PendingTransactions]: {
       title: t('edit-investment.modal.pendingTransaction.title'),
@@ -77,6 +84,7 @@ function EditInvestmentModal({
           ![
             EditInvestmentViews.EditInvestment,
             EditInvestmentViews.EditInvestmentSuccess,
+            EditInvestmentViews.WithdrawSuccess,
           ].includes(view)
             ? () => setView(EditInvestmentViews.EditInvestment)
             : undefined

@@ -37,6 +37,8 @@ export const Body = styled.div`
 
 export const Header = styled.div`
   display: flex;
+  z-index: 999;
+  position: relative;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
