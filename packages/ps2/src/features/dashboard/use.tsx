@@ -5,6 +5,7 @@ import {
   useInvestmentDetailsQuery,
   useUpdateTakeProfitMutation,
   useUpdateTakeProfitAndInvestMoreMutation,
+  useWithdrawInvestmentMutation,
 } from './api';
 import { useActiveExchange } from '../auth/use';
 import { Coins, Investment, InvestmentDetails } from './types';
@@ -115,6 +116,30 @@ export function useUpdateTakeProfitAndInvestMore(): {
     edit: async ({ profitPercentage, serviceId, amount }) => {
       await update({
         profitPercentage,
+        serviceId,
+        exchangeInternalId: exchange.internalId,
+        amount: amount.toString(),
+      });
+    },
+  };
+}
+
+export function useWithdrawInvestment(): {
+  isLoading: boolean;
+  withdraw: ({
+    serviceId,
+    amount,
+  }: {
+    serviceId: string;
+    amount: BigNumber | number | string;
+  }) => Promise<void>;
+} {
+  const [withdraw, { isLoading }] = useWithdrawInvestmentMutation();
+  const exchange = useActiveExchange();
+  return {
+    isLoading,
+    withdraw: async ({ serviceId, amount }) => {
+      await withdraw({
         serviceId,
         exchangeInternalId: exchange.internalId,
         amount: amount.toString(),

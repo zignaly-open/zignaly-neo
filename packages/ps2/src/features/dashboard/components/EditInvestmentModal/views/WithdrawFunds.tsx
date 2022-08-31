@@ -8,12 +8,10 @@ import {
 import InvestorDetails from './InvestorDetails';
 import { useTranslation } from 'react-i18next';
 import { Grid } from '@mui/material';
-// import { useTheme } from 'styled-components';
+import { ChangeViewFn, EditInvestmentViews } from '../types';
 
-const WithdrawFunds: React.FC = () => {
-  // const theme = useTheme();
+const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   const { t } = useTranslation('edit-investment');
-  // const matchesSmall = useMediaQuery(theme.breakpoints.up('md'));
   const matchesSmall = false;
   return (
     <>
@@ -57,9 +55,7 @@ const WithdrawFunds: React.FC = () => {
                   </MultilineButton>
                 }
                 size={'xlarge'}
-                onClick={() => {
-                  // dispatch(openModal(modalsIds.WITHDRAW_INVESTMENT, { service }))
-                }}
+                onClick={() => setView(EditInvestmentViews.WithdrawPerform)}
               />
             </WithdrawFundsButtonWrapper>
           </WithdrawFundsOptionWrapper>
