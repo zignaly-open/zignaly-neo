@@ -262,7 +262,7 @@ export const AUCTIONS_QUERY = `
       createdAt
       expiresAt
       status
-      minimalBid
+      currentBid
       website
       twitter
       telegram
