@@ -8,7 +8,6 @@ import ConnectionStateLabel, { ConnectionStateLabelId } from "./components/Conne
 import DateLabel from "./components/DateLabel";
 import { CheckIconStyled, CloseIconStyled } from "./styles";
 import { dark } from "../../../theme";
-import { sortByPointDecimal } from "../../../utils/numbers";
 import Typography from "../Typography";
 import { MockMyCoinsData } from "./mockData";
 import { Column } from "../../../utils/column";
