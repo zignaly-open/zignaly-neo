@@ -42,7 +42,11 @@ export default async function watchTransactions() {
   }
 
   async function checkBlock(blockNumber: number) {
-    return checkBlocks(blockNumber, blockNumber);
+    try {
+      checkBlocks(blockNumber, blockNumber);
+    } catch (e) {
+      console.error(e);
+    }
   }
 
   async function checkBlocks(from: number, to?: number) {
