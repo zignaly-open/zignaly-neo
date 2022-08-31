@@ -13,5 +13,16 @@ export const AuctionImage = styled('img')`
 `;
 
 export const Description = styled(TextButton)`
-  padding-left: 0;
+  display: flex;
+`;
+
+export const ContainerDescription = styled('div')`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 15px;
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    width: 100%;
+    padding: 15px 0 0 0;
+  }
 `;

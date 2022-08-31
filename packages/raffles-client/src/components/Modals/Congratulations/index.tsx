@@ -8,7 +8,9 @@ import DialogContainer from '../DialogContainer';
 import ProjectDetailsModal from '../ProjectDetails';
 import { CongratulationsModalProps } from './types';
 import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
-import { AuctionImage, Description } from './styles';
+import { AuctionImage, Description, ContainerDescription } from './styles';
+import { ReactComponent as DiscordIconButton } from '../../../assets/icons/discord-minimalist.svg';
+import { ReactComponent as SupportIconButton } from '../../../assets/icons/support-minimalist.svg';
 
 const CongratulationsModal = ({
   auction,
@@ -24,13 +26,7 @@ const CongratulationsModal = ({
       </Box>
       <Box mt='62px' display='flex' justifyContent='center' flexWrap='wrap'>
         <AuctionImage src={auction.imageUrl} alt={auction.title} />
-        <Box
-          m='34px 0 0 21px'
-          display='flex'
-          justifyContent='flex-start'
-          alignItems='flex-start'
-          flexDirection='column'
-        >
+        <ContainerDescription>
           <Typography component='div' color='neutral300'>
             {t('prize')}
           </Typography>
@@ -52,15 +48,27 @@ const CongratulationsModal = ({
             <ZigCoinIcon width={24} height={24} />
             <PriceLabel value={auction.currentBid} coin='ZIG' />
           </Box>
-        </Box>
+        </ContainerDescription>
       </Box>
       <Box
         gap='12px'
         display='flex'
         justifyContent='center'
         sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
-        mt='94px'
+        mt='25px'
       >
+        <Button
+          variant='secondary'
+          size='large'
+          caption={t('Discord')}
+          leftElement={<DiscordIconButton />}
+        />
+        <Button
+          variant='secondary'
+          size='large'
+          caption={t('Support')}
+          leftElement={<SupportIconButton />}
+        />
         <Button
           caption={t('close')}
           size='large'
