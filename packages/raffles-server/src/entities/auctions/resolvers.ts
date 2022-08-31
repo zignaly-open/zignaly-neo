@@ -80,7 +80,6 @@ export const resolvers = {
             // cheeky bastard
             throw new Error('Already claimed');
           }
-          console.log(winningBid);
           if (
             !isBalanceSufficientForPayment(
               winningBid.value,
