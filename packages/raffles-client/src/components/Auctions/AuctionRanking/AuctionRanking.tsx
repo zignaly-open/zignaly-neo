@@ -10,19 +10,20 @@ import { useTranslation } from 'react-i18next';
 import useCurrentUser from 'hooks/useCurrentUser';
 import { useMediaQuery } from '@mui/material';
 import muiTheme from 'theme';
-import { Ellipsis, Rank, RankingHead, RankingRowContainer } from './styles';
+import { Ellipsis, Rank, RankingRowContainer } from './styles';
 
 const RankingRow = ({ bid }: { bid: AuctionBidType }) => {
-  const { user, value, position } = bid;
+  const { user, position } = bid;
   const { user: currentUser } = useCurrentUser();
+  const { t } = useTranslation('auction');
+
   return (
     <RankingRowContainer isMe={user.id === +currentUser?.id}>
       <Rank>
         <Typography>{position}.</Typography>
       </Rank>
       <Box display='flex' justifyContent='space-between' flex={1}>
-        <Typography>{user.username || user.id}</Typography>
-        <Typography>{value} ZIG</Typography>
+        <Typography>{user.username || `${t('user')} ${user.id}`}</Typography>
       </Box>
     </RankingRowContainer>
   );
@@ -31,7 +32,6 @@ const RankingRow = ({ bid }: { bid: AuctionBidType }) => {
 const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('sm'));
   const MAX_WINNERS_DISPLAYED = isMobile ? 3 : 7;
-  const { t } = useTranslation('auction');
 
   // Number of winners we can display
   const winnersDisplayed = Math.min(
@@ -71,10 +71,6 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
 
   return (
     <Box width='100%'>
-      <RankingHead>
-        <Typography color='neutral200'>{t('user')}</Typography>
-        <Typography color='neutral200'>{t('bid')}</Typography>
-      </RankingHead>
       {bids
         .filter(
           (b) =>

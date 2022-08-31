@@ -25,6 +25,7 @@ export interface InputTextProps {
   readOnly?: boolean;
   type?: React.InputHTMLAttributes<HTMLInputElement>["type"];
   name?: string;
+  id?: string;
   multiline?: boolean;
   onClickRightSideElement?: Function | null;
   leftSideElement?: ReactElement | null;

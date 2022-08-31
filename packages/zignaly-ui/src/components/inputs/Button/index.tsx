@@ -18,6 +18,7 @@ function Button({
   rightElement = null,
   disabled = false,
   onClick = () => {},
+  id,
   loading,
   type,
   testIdLeftElement = null,
@@ -52,6 +53,7 @@ function Button({
   return (
     <styled.Layout
       isLoading={loading}
+      id={id}
       withElements={!!leftElement && !!rightElement && !!caption}
       withLeftElement={!!leftElement && !!caption}
       withRightElement={!!rightElement && !!caption}

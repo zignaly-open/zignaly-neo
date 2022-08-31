@@ -20,6 +20,7 @@ function InputText(
     type,
     defaultValue = "",
     value,
+    id,
     readOnly = false,
     name,
     multiline,
@@ -64,6 +65,7 @@ function InputText(
         <Side cursor="auto">
           {leftSideElement && <IconContainer>{leftSideElement}</IconContainer>}
           <InputValue
+            id={id}
             as={multiline ? "textarea" : "input"}
             readOnly={readOnly}
             ref={inputRef}

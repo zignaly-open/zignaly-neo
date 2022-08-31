@@ -50,7 +50,7 @@ const CongratulationsModal = ({
           </Typography>
           <Box display='flex' mt='2px'>
             <ZigCoinIcon width={24} height={24} />
-            <PriceLabel value={auction.minimalBid} coin='ZIG' />
+            <PriceLabel value={auction.currentBid} coin='ZIG' />
           </Box>
         </Box>
       </Box>

@@ -47,6 +47,7 @@ const LoginForm: React.FC = () => {
           rules={{ required: true }}
           render={({ field }) => (
             <InputText
+              id={'login__username'}
               label={t('login-form.inputText.email.label') + ':'}
               placeholder={''}
               disabled={loggingIn}
@@ -62,6 +63,7 @@ const LoginForm: React.FC = () => {
           rules={{ required: true }}
           render={({ field }) => (
             <InputText
+              id={'login__password'}
               label={t('login-form.inputText.password.label') + ':'}
               type={'password'}
               labelAction={{
@@ -81,12 +83,14 @@ const LoginForm: React.FC = () => {
           <Button
             type={'submit'}
             variant={'primary'}
+            id={'login__submit'}
             caption={t('login-form.submit')}
             size={'xlarge'}
             loading={loggingIn}
           />
 
           <TextButton
+            id={'login__signup'}
             onClick={() => navigate(ROUTE_SIGNUP)}
             caption={t('login-form.link.signup')}
           />
