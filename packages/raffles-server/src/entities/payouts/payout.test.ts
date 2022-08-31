@@ -31,7 +31,7 @@ describe('Payouts', () => {
 
     expect(mock.history.post[2].data).toBe(
       JSON.stringify({
-        amount: '100',
+        amount: '101',
         fees: '0',
         currency: 'ZIG',
         user_id: alice.publicAddress,
