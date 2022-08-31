@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { useTheme } from 'styled-components';
 import { Controller, useForm } from 'react-hook-form';
@@ -61,16 +61,6 @@ function EditInvestmentForm({
   const amountInvested = details?.invested;
   const profitPercentage = details?.profitPercentage;
 
-  const tokens = useMemo(
-    () => [
-      {
-        id: coin.id,
-        balance: coin.balance,
-      },
-    ],
-    [coin],
-  );
-
   const {
     handleSubmit,
     control,
@@ -81,7 +71,7 @@ function EditInvestmentForm({
     defaultValues: {
       amountTransfer: {
         value: '',
-        token: tokens[0],
+        token: coin,
       },
       profitPercentage: invertPercent(profitPercentage),
     },
@@ -161,7 +151,7 @@ function EditInvestmentForm({
             {t('edit-investment.form.title')}
           </Typography>
           <AmountInvested>
-            <CoinIcon name={'Ethereum'} coin={coin.id} />
+            <CoinIcon coin={coin.id} />
             <TokenValue>
               <Typography variant={'bigNumber'} color={'neutral100'}>
                 <NumberFormat
@@ -207,7 +197,7 @@ function EditInvestmentForm({
             labelBalance={t('edit-investment.form.inputAmount.labelBalance')}
             showUnit={true}
             placeholder={'0.0'}
-            tokens={tokens}
+            tokens={[coin]}
             error={isDirty && t(errors?.amountTransfer?.value?.message)}
           />
         </InputContainer>
