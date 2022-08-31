@@ -199,7 +199,7 @@ const MyDashboard: React.FC = () => {
     [],
   );
 
-  const createUserTableBodyMemoized = useCallback(
+  const bodyMapper = useCallback(
     (service: Investment): DashboardTableDataType => {
       const bigNumberInvestment = new BigNumber(service.invested);
       const bigNumberPending = new BigNumber(service.pending);
@@ -256,7 +256,7 @@ const MyDashboard: React.FC = () => {
       ) : (
         <Table
           columns={tableColumns}
-          data={services?.map(createUserTableBodyMemoized)}
+          data={services?.map(bodyMapper)}
           emptyMessage={
             !error
               ? t('my-dashboard.table-search-emptyMessage')
