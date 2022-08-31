@@ -42,33 +42,34 @@ export default async function watchTransactions() {
   }
 
   async function checkBlock(blockNumber: number) {
-    try {
-      checkBlocks(blockNumber, blockNumber);
-    } catch (e) {
-      console.error(e);
-    }
+    checkBlocks(blockNumber, blockNumber);
   }
 
   async function checkBlocks(from: number, to?: number) {
-    if (!from || (to && from > to)) return;
-    const lastBlockToCheck =
-      (await web3.eth.getBlockNumber()) - numberOfConfirmationsRequired;
-    to = Math.min(lastBlockToCheck, to || Number.MAX_SAFE_INTEGER);
-    if (from > to) return;
+    try {
+      if (!from || (to && from > to)) return;
+      const lastBlockToCheck =
+        (await web3.eth.getBlockNumber()) - numberOfConfirmationsRequired;
+      to = Math.min(lastBlockToCheck, to || Number.MAX_SAFE_INTEGER);
+      if (from > to) return;
 
-    const transferEvents = await zigCoinContract.getPastEvents('Transfer', {
-      fromBlock: from,
-      toBlock: to,
-      filter: {
-        to: receivingAddress,
-      },
-    });
+      const transferEvents = await zigCoinContract.getPastEvents('Transfer', {
+        fromBlock: from,
+        toBlock: to,
+        filter: {
+          to: receivingAddress,
+        },
+      });
 
-    for (let index = 0; index < transferEvents.length; index++) {
-      await handleEventTransfer(transferEvents[index] as unknown as ChainEvent);
+      for (let index = 0; index < transferEvents.length; index++) {
+        await handleEventTransfer(
+          transferEvents[index] as unknown as ChainEvent,
+        );
+      }
+      setLastProcessedBlock(to);
+    } catch (e) {
+      console.error(e);
     }
-
-    setLastProcessedBlock(to);
   }
 
   // Called to process each event
