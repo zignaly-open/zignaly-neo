@@ -819,6 +819,40 @@ WinningWithManyWinnersTop.args = {
   },
 };
 
+export const WinningWithFewWinners = Template.bind({});
+
+WinningWithFewWinners.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 10,
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 13,
+          username: 'cemsun',
+        },
+      },
+      {
+        id: 2,
+        position: 2,
+        value: '1.46',
+        user: {
+          id: 12,
+          username: 'abc',
+        },
+      },
+    ],
+    userBid: {
+      id: 12,
+      position: 2,
+      value: '1.46',
+    },
+  },
+};
+
 export const ManyWinnersWithBid = Template.bind({});
 
 ManyWinnersWithBid.args = {
