@@ -1,6 +1,4 @@
-// Dependencies
 import styled from 'styled-components';
-import { Typography } from '@zignaly-open/ui';
 
 export const Layout = styled.div`
   margin-top: 32px;
@@ -39,11 +37,3 @@ export const Data = styled.div`
   flex-direction: column;
   width: 100%;
 `;
-
-export const Balance = styled(Typography)``;
-
-export const Value = styled(Typography)`
-  margin: 0 6px;
-`;
-
-export const Currency = styled(Typography)``;

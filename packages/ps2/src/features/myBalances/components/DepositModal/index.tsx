@@ -1,6 +1,5 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import NumberFormat from 'react-number-format';
-import { Data, Field, Layout, Balance, Currency, Value } from './styles';
+import React, { useMemo, useState } from 'react';
+import { Data, Field, Layout } from './styles';
 import { useTranslation } from 'react-i18next';
 import {
   CoinIcon,
@@ -17,6 +16,9 @@ import ModalContainer from '../../../../components/ModalContainer';
 import { DialogProps } from '@mui/material/Dialog';
 import { Modal } from '@mui/material';
 import { useSelectedMyBalancesCoins } from '../../use';
+import DepositBalance from './components/DepositBalance';
+import { SelectorItemFormat } from '@zignaly-open/ui/lib/components/inputs/InputSelect/types';
+import { CoinDetail } from '../../types';
 
 function DepositModal({
   close,
@@ -25,66 +27,27 @@ function DepositModal({
   close: () => void;
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation('deposit-crypto');
-  const [coin, setCoin] = useState(null) as any;
-  const [network, setNetwork] = useState(null) as any;
+  const [coin, setCoin] = useState(null);
+  const [network, setNetwork] = useState(null);
   const coins = useSelectedMyBalancesCoins();
-  const balances = null;
-  const depositInfo = null;
   const depositTag = 'DEPOSIT_TAG';
 
-  const isLoadingCoinsBalances = true;
-  const isLoadingDepositAddress = true;
-
-  /**
-   * @name renderBalanceInfo()
-   * @description Render the balance field
-   */
-  const renderBalanceInfo = useCallback(
-    (label, value) =>
-      coin && (
-        <Balance variant={'body2'} color={'neutral200'}>
-          {label}
-          <Value variant={'body2'} color={'neutral000'}>
-            <NumberFormat
-              value={value}
-              displayType={'text'}
-              thousandSeparator={true}
-              decimalScale={9}
-            />
-          </Value>
-          <Currency variant={'body2'}>
-            {String(coin?.ref?.id).toUpperCase()}
-          </Currency>
-        </Balance>
-      ),
-    [coin],
-  );
+  const isLoadingDepositAddress = false;
+  const depositInfo = false;
 
   const onClickClose = () => {
     close();
   };
 
   /**
-   * @name balance
-   * @description Get the current Balances of the token.
-   */
-  const balance = useMemo(() => {
-    if (!balances || !Object.keys(balances).length || !coin) {
-      return null;
-    }
-    const id = coin?.ref?.id as string;
-    return balances[id];
-  }, [coin, balances]);
-
-  /**
-   * @name coinList
+   * @name coinsList
    * @description Un-normalized state and format to coin selector.
    */
-  const coinList = useMemo(
+  const coinsList: CoinDetail[] = useMemo(
     () =>
-      Object.keys(coins).map((key: any) => ({
+      Object.keys(coins).map((key: string) => ({
         id: key,
-        balance: coins[key],
+        ...coins[key],
       })),
     [coins],
   );
@@ -115,15 +78,13 @@ function DepositModal({
               variant={'primary'}
               placeholder={t('deposit-crypto.coinSelector.placeholder')}
               selected={coin}
-              onSelectItem={(coin: any) => {
-                setCoin(coin);
+              onSelectItem={(item: SelectorItemFormat) => {
+                setCoin(item);
                 setNetwork(null);
               }}
-              options={coinList
-                .sort((a: { id: string }, b: { id: string }) =>
-                  a.id.localeCompare(b.id),
-                )
-                .map((item: any) =>
+              options={coinsList
+                .sort((a, b) => a.id.localeCompare(b.id))
+                .map((item: CoinDetail) =>
                   formatInputSelectItem(
                     {
                       id: item.id,
@@ -137,41 +98,11 @@ function DepositModal({
                       ),
                       caption: item.id,
                     },
-                    {
-                      coin: item.id,
-                      balance: item.balance,
-                    },
+                    item,
                   ),
                 )}
             />
-            <Data>
-              {isLoadingCoinsBalances
-                ? coin && (
-                    <Loader
-                      color={'#fff'}
-                      ariaLabel={t('deposit-crypto.balances.loadingAriaLabel')}
-                      width={'22px'}
-                      height={'22px'}
-                    />
-                  )
-                : coin &&
-                  balance && (
-                    <>
-                      {renderBalanceInfo(
-                        t('deposit-crypto.balances.total'),
-                        balance.balanceTotal,
-                      )}
-                      {renderBalanceInfo(
-                        t('deposit-crypto.balances.balanceLocked'),
-                        balance.balanceLocked,
-                      )}
-                      {renderBalanceInfo(
-                        t('deposit-crypto.balances.balanceFree'),
-                        balance.balanceFree,
-                      )}
-                    </>
-                  )}
-            </Data>
+            <Data>{coin && <DepositBalance coin={coin.data} />}</Data>
           </Field>
 
           {/* Select Network */}
@@ -198,9 +129,7 @@ function DepositModal({
                   : []
               }
               value={network}
-              minHeight={54}
               maxHeight={54}
-              isFooterTable={true}
               onChange={setNetwork}
             />
           </Field>
@@ -223,7 +152,6 @@ function DepositModal({
                       ? t('deposit-crypto.depositAddress.loading')
                       : t('deposit-crypto.depositAddress.placeholder')
                   }
-                  copyToClipboard={true}
                 />
                 {!isLoadingDepositAddress &&
                   depositInfo?.address &&
@@ -255,7 +183,6 @@ function DepositModal({
                         label={t('deposit-crypto.depositMemo.label')}
                         value={depositTag}
                         readOnly={true}
-                        copyToClipboard={true}
                       />
                     </Field>
                   )}

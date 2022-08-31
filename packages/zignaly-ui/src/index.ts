@@ -73,9 +73,6 @@ export { ReactComponent as GlobeLanguages } from "assets/icons/globe-languages.s
 export { ReactComponent as TimeIcon } from "assets/icons/time-icon.svg";
 export { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
 
-SliderInput;
-CoinIcon;
-
 // Navigation
 import Header from "./components/navigation/Header";
 import MenuDropDown from "./components/navigation/MenuDropDown";

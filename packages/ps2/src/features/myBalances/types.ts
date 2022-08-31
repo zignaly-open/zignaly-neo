@@ -33,6 +33,7 @@ export type CoinNetwork = {
 };
 
 export type CoinDetail = {
+  id?: string;
   name: string;
   network: CoinNetwork[];
 };

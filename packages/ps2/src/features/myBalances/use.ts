@@ -4,6 +4,7 @@ import { useLazyReducedBalancesQuery, useLazyAllCoinsQuery } from './api';
 import { Exchange } from '../auth/types';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import DepositModal from './components/DepositModal';
+import { CoinBalance, Coins } from './types';
 
 export const useSelectMyBalances = (): object => {
   const balances = useSelector((state: RootState) => state.myBalances.balances);
@@ -26,6 +27,10 @@ export const useSelectMyBalances = (): object => {
 
 export const useSelectedMyBalancesCoins = (): object => {
   return useSelector((state: RootState) => state.myBalances.coins);
+};
+
+export const useSelectedMyBalancesByCoin = (coinId: string): CoinBalance => {
+  return useSelector((state: RootState) => state.myBalances.balances[coinId]);
 };
 
 export const useDeposit = () => {
