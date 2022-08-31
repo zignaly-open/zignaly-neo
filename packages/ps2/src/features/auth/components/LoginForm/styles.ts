@@ -16,3 +16,9 @@ export const Action = styled.div`
   align-items: center;
   justify-content: center;
 `;
+
+export const TitleHead = styled.div`
+  display: flex;
+  align-content: center;
+  justify-content: center;
+`;

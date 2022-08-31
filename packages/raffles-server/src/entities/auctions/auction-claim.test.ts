@@ -9,6 +9,7 @@ import {
   getFirstAuction,
   claimAuction,
   createRandomUser,
+  createBob,
 } from '../../util/test-utils';
 import { mock } from '../../util/mock-cybavo-wallet';
 import { getUserBalance } from '../../cybavo';
@@ -46,6 +47,35 @@ describe('Auction Claims', () => {
     expect(await getUserBalance(alice.publicAddress)).toBe('198.99');
 
     expect(performPayout).toHaveBeenCalledTimes(1);
+  });
+
+  it('should make all winners pay final bid price', async () => {
+    const [alice, aliceToken] = await createAlice(300);
+    const [bob, bobToken] = await createBob(300);
+    const auction = await createAuction();
+
+    await makeBid(auction, aliceToken);
+    await makeBid(auction, bobToken);
+
+    await expireAuction(auction.id);
+    const notClaimedAuction = await getFirstAuction(aliceToken);
+    expect(notClaimedAuction.userBid.isClaimed).toBe(false);
+
+    const {
+      body: {
+        data: { claim },
+      },
+    } = await claimAuction(auction, aliceToken);
+
+    expect(claim.userBid.isClaimed).toBe(true);
+    const claimedAuction = await getFirstAuction(aliceToken);
+    expect(claimedAuction.userBid.isClaimed).toBe(true);
+    expect(await getUserBalance(alice.publicAddress)).toBe('197.99');
+
+    await claimAuction(auction, bobToken);
+    expect(await getUserBalance(bob.publicAddress)).toBe('197.99');
+
+    expect(performPayout).toHaveBeenCalledTimes(2);
   });
 
   it('should not let claim unwon auctions', async () => {
