@@ -3,6 +3,8 @@ os: linux
 files:
     - source: /
       destination: /zignaly
+      overwrite: true
+file_exists_behavior: OVERWRITE
 
 hooks:
     AfterInstall:
