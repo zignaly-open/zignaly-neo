@@ -43,7 +43,7 @@ describe('Auction Claims', () => {
     expect(claim.userBid.isClaimed).toBe(true);
     const claimedAuction = await getFirstAuction(aliceToken);
     expect(claimedAuction.userBid.isClaimed).toBe(true);
-    expect(await getUserBalance(alice.publicAddress)).toBe('199.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('198.99');
 
     expect(performPayout).toHaveBeenCalledTimes(1);
   });
@@ -83,7 +83,7 @@ describe('Auction Claims', () => {
       body: { errors },
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
-    expect(await getUserBalance(alice.publicAddress)).toBe('199.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('198.99');
     expect(performPayout).toHaveBeenCalledTimes(1);
   });
 
