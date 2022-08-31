@@ -13,11 +13,9 @@ const Typography = ({
   underline,
   component,
   className,
-  style = {},
 }: TypographyProps) => {
   return (
     <styled.Layout
-      style={style}
       color={color}
       underline={underline}
       weight={weight}
