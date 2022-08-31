@@ -1,4 +1,3 @@
-import CoinIcon from "components/display/CoinIcon";
 import Typography from "components/display/Typography";
 import React from "react";
 import { Column } from "utils/column";
