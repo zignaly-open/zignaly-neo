@@ -819,9 +819,149 @@ WinningWithManyWinnersTop.args = {
   },
 };
 
-export const WinningWithFewWinners = Template.bind({});
+export const WinningWithManyWinners1st = Template.bind({});
 
-WinningWithFewWinners.args = {
+WinningWithManyWinners1st.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 10,
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 1,
+          username: 'cemsun',
+        },
+      },
+      {
+        id: 2,
+        position: 2,
+        value: '1.46',
+        user: {
+          id: 12,
+          username: 'abc',
+        },
+      },
+      {
+        id: 3,
+        position: 3,
+        value: '1.45',
+        user: {
+          id: 12,
+          username: 'test',
+        },
+      },
+      {
+        id: 4,
+        position: 4,
+        value: '1.45',
+        user: {
+          id: 10,
+          username: 'cemsil',
+        },
+      },
+      {
+        id: 5,
+        position: 5,
+        value: '1.44',
+        user: {
+          id: 9,
+          username: 'llan',
+        },
+      },
+      {
+        id: 6,
+        position: 6,
+        value: '1.43',
+        user: {
+          id: 8,
+          username: 'lleeil',
+        },
+      },
+      {
+        id: 7,
+        position: 7,
+        value: '1.42',
+        user: {
+          id: 7,
+          username: 'eeeqal',
+        },
+      },
+      {
+        id: 8,
+        position: 8,
+        value: '1.41',
+        user: {
+          id: 1,
+          username: 'dqls',
+        },
+      },
+      {
+        id: 9,
+        position: 9,
+        value: '1.40',
+        user: {
+          id: 5,
+          username: 'oiiia',
+        },
+      },
+      {
+        id: 10,
+        position: 10,
+        value: '1.39',
+        user: {
+          id: 4,
+          username: 'ma8adk',
+        },
+      },
+    ],
+    userBid: {
+      id: 1,
+      position: 1,
+      value: '1.47',
+    },
+  },
+};
+
+export const WinningWithFewWinners1st = Template.bind({});
+
+WinningWithFewWinners1st.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 10,
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 1,
+          username: 'cemsun',
+        },
+      },
+      {
+        id: 2,
+        position: 2,
+        value: '1.46',
+        user: {
+          id: 18,
+          username: 'abc',
+        },
+      },
+    ],
+    userBid: {
+      id: 1,
+      position: 1,
+      value: '1.47',
+    },
+  },
+};
+
+export const WinningWithFewWinners2nd = Template.bind({});
+
+WinningWithFewWinners2nd.args = {
   auction: {
     ...auctionObject,
     numberOfWinners: 10,
@@ -840,14 +980,57 @@ WinningWithFewWinners.args = {
         position: 2,
         value: '1.46',
         user: {
-          id: 12,
+          id: 1,
           username: 'abc',
         },
       },
     ],
     userBid: {
-      id: 12,
+      id: 2,
       position: 2,
+      value: '1.46',
+    },
+  },
+};
+
+export const WinningWithFewWinners3rd = Template.bind({});
+
+WinningWithFewWinners3rd.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 10,
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 13,
+          username: 'cemsun',
+        },
+      },
+      {
+        id: 2,
+        position: 2,
+        value: '1.46',
+        user: {
+          id: 19,
+          username: 'abc',
+        },
+      },
+      {
+        id: 3,
+        position: 3,
+        value: '1.45',
+        user: {
+          id: 1,
+          username: 'test',
+        },
+      },
+    ],
+    userBid: {
+      id: 3,
+      position: 3,
       value: '1.46',
     },
   },
