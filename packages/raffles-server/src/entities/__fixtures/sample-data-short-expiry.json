@@ -3,7 +3,7 @@
     "model": "Auction",
     "data": {
       "id": 1,
-      "expiresAt": "2022-19-05T12:30:00.511Z",
+      "expiresAt": "2022-09-10T12:30:00.511Z",
       "imageUrl": "/images/4.jpg",
       "title": "Best Auction EVER",
       "description": "Bid now or die regretting",
@@ -27,7 +27,7 @@
     "model": "Auction",
     "data": {
       "id": 2,
-      "expiresAt": "2022-19-05T12:30:00.511Z",
+      "expiresAt": "2022-09-10T12:30:00.511Z",
       "imageUrl": "/images/11.jpg",
       "title": "Elon Musk's giveaway",
       "description": "Have you ever dreamt of reading the most retarded description ever? Well, continue dreaming",
@@ -55,7 +55,7 @@
     "model": "Auction",
     "data": {
       "id": 3,
-      "expiresAt": "2022-08-05T18:43:00.511Z",
+      "expiresAt": "2022-09-10T18:43:00.511Z",
       "imageUrl": "/images/9.jpg",
       "title": "Charity Giveaway",
       "description": "All proceeds from this auction will go towards the needs of Alex who desperately needs a brand new X5 40d",
@@ -75,7 +75,7 @@
     "model": "Auction",
     "data": {
       "id": 4,
-      "expiresAt": "2022-08-05T19:00:00.511Z",
+      "expiresAt": "2022-09-03T19:00:00.511Z",
       "imageUrl": "/images/10.jpg",
       "title": "Charity Giveaway 2",
       "description": "All proceeds from this auction will go towards the needs of Alex who would like to have an M4 as well",
@@ -204,4 +204,3 @@
     }
   }
 ]
-

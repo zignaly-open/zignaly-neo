@@ -1,7 +1,7 @@
 import sequelizeFixtures from 'sequelize-fixtures';
+import { sequelize, persistTablesToTheDatabase } from '../../db';
 import { Payout } from '../payouts/model';
-import { sequelize } from '../../db';
-import { Auction, AuctionBid, AuctionBasketItem } from '../auctions/model';
+import { Auction, AuctionBasketItem, AuctionBid } from '../auctions/model';
 
 const models = {
   Auction,
@@ -10,6 +10,7 @@ const models = {
 };
 
 const initDB = async (fileName: string) => {
+  await persistTablesToTheDatabase();
   const transaction = await sequelize.transaction();
   const options = { raw: true, transaction };
   await AuctionBid.destroy({ where: {}, ...options });

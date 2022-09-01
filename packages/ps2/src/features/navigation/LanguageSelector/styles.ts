@@ -3,6 +3,7 @@ import {
   styledIf,
   Typography,
   ArrowBottomIcon,
+  NiceScrollbar,
   GlobeLanguages,
 } from '@zignaly-open/ui';
 
@@ -67,31 +68,7 @@ export const Container = styled.div`
   overflow: auto;
   border-radius: 0 0 6px 6px;
 
-  /* width */
-
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  /* Track */
-
-  &::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-  }
-
-  /* Handle */
-
-  &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-  }
-
-  /* Handle on hover */
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
+  ${NiceScrollbar};
 `;
 
 export const Item = styled.div`
