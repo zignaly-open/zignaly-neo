@@ -16,29 +16,38 @@ const Template: ComponentStory<typeof PercentageIndicator> = (args) => (
   </div>
 );
 
-export const Positive = Template.bind({});
-Positive.args = {
+export const PositiveGraph = Template.bind({});
+PositiveGraph.args = {
   value: 50,
-  dashboardType: "investor",
+  type: "graph",
 };
 
-export const Negative = Template.bind({});
-Negative.args = {
+export const NegativeGraph = Template.bind({});
+NegativeGraph.args = {
   value: -50,
-  dashboardType: "investor",
+  type: "graph",
 };
 
-export const NegativeUserDashboard = Template.bind({});
-NegativeUserDashboard.args = {
+export const NegativeDefault = Template.bind({});
+NegativeDefault.args = {
   value: -50,
-  subtitle: "2.2 years",
-  withoutIcon: true,
-  dashboardType: "user",
+  type: "default",
 };
 
-export const PositiveUserDashboard = Template.bind({});
-PositiveUserDashboard.args = {
+export const PositiveDefault = Template.bind({});
+PositiveDefault.args = {
   value: 50,
-  subtitle: "2.2 years",
-  dashboardType: "user",
+  type: "default",
+};
+
+export const NegativeNumber = Template.bind({});
+NegativeNumber.args = {
+  value: 50,
+  type: "only_number",
+};
+
+export const PositiveNumber = Template.bind({});
+PositiveNumber.args = {
+  value: 50,
+  type: "only_number",
 };

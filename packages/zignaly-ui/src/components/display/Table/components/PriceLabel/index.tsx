@@ -9,37 +9,50 @@ import * as styled from "./styles";
 import { PriceLabelProps } from "./types";
 import { BottomElementWrap } from "./styles";
 import Typography from "components/display/Typography";
+import { useTheme } from "styled-components";
+import Theme from "../../../../../theme/theme";
 
 const PriceLabel = ({
   value = 0,
   coin = "USDT",
-  fiat = false,
   symbol = "$",
   bottomElement = null,
+  // TODO: this is utter bs we should not compute such things outside
+  stableCoinOperative = false,
+  green,
+  red,
   className,
-}: PriceLabelProps) => (
-  <styled.Layout fiat={fiat} className={className}>
-    <styled.Value>
-      <NumberFormat
-        prefix={fiat ? symbol : ""}
-        value={value}
-        style={{ fontWeight: "500", fontSize: "15px" }}
-        displayType={"text"}
-        thousandSeparator={true}
-        decimalScale={fiat ? 2 : undefined}
-      />
-      {!fiat && (
-        <styled.Coin weight="medium" variant={"body2"} color={"neutral400"}>
-          {coin}
-        </styled.Coin>
+}: PriceLabelProps) => {
+  const theme = useTheme() as Theme;
+  return (
+    <styled.Layout className={className}>
+      <styled.Value>
+        <NumberFormat
+          prefix={stableCoinOperative ? symbol : ""}
+          value={value}
+          style={{
+            fontWeight: "500",
+            fontSize: "15px",
+            lineHeight: "24px",
+            color: green ? theme.greenGraph : red ? theme.redGraphOrError : theme.neutral300,
+          }}
+          displayType={"text"}
+          thousandSeparator={true}
+          decimalScale={stableCoinOperative ? 2 : undefined}
+        />
+        {!stableCoinOperative && (
+          <styled.Coin weight="medium" variant={"body2"} color={"neutral400"}>
+            {coin}
+          </styled.Coin>
+        )}
+      </styled.Value>
+      {bottomElement && (
+        <BottomElementWrap>
+          <Typography variant="body1">{bottomElement}</Typography>
+        </BottomElementWrap>
       )}
-    </styled.Value>
-    {bottomElement && (
-      <BottomElementWrap>
-        <Typography variant="body1">{bottomElement}</Typography>
-      </BottomElementWrap>
-    )}
-  </styled.Layout>
-);
+    </styled.Layout>
+  );
+};
 
 export default PriceLabel;

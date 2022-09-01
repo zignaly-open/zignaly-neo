@@ -4,6 +4,7 @@ import { usePagination, useSortBy, useTable } from "react-table";
 // Styles
 import {
   ColumnsSelector,
+  EmptyMessage,
   HeaderRow,
   IconContainer,
   Layout,
@@ -39,16 +40,17 @@ import {
 } from "./styles";
 import Selector from "components/inputs/Selector";
 
-export default function PagedWithDataTable({
+export default function PagedWithDataTable<T extends object>({
   columns = [],
   data = [],
   onColumnHidden = () => {},
   defaultHiddenColumns,
   hideOptionsButton,
   isUserTable,
+  emptyMessage,
   initialState = {},
   hasFooter = true,
-}: TableBasicProps) {
+}: TableBasicProps<T>) {
   // Refs
   const tableRef = useRef(null);
 
@@ -252,6 +254,7 @@ export default function PagedWithDataTable({
             })}
           </tbody>
         </TableView>
+        {!data.length && <EmptyMessage>{emptyMessage}</EmptyMessage>}
         {hasFooter && (
           <FooterContainer>
             <Row justifyContent="start">

@@ -21,7 +21,7 @@ export const buttonColors = {
 export type ButtonProps = {
   variant?: keyof typeof buttonVariants;
   size?: keyof typeof buttonSizes;
-  caption?: string | null;
+  caption?: string | null | JSX.Element;
   leftElement?: ReactElement | string | null;
   rightElement?: ReactElement | string | null;
   bottomElement?: ReactElement | string | null;

@@ -18,12 +18,16 @@ import { BalanceSummaryProps } from "./types";
 import { ReactComponent as PencilIcon } from "assets/icons/pencil-icon.svg";
 import Typography from "components/display/Typography";
 
-export const BalanceSummary = ({
+// TODO: do not use, the correct version is in the ps2, not deleting this one because of storybook
+/**
+ * @deprecated
+ */
+export function BalanceSummary({
   totalValue,
   profit,
   dashboardType = "investor",
   onClickEdit = () => {},
-}: BalanceSummaryProps) => {
+}: BalanceSummaryProps) {
   const isPositiveProfit = isPositive(profit);
   const isEqual = profit === 0;
 
@@ -57,4 +61,4 @@ export const BalanceSummary = ({
       />
     </Layout>
   );
-};
+}

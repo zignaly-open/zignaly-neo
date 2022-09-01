@@ -17,7 +17,9 @@
     "test": "lerna run test",
     "storybook": "lerna run storybook --scope=*/ui",
     "ps2": "lerna run start --scope=@zignaly-open/ps2 --include-dependencies --stream --parallel",
+    "ps2-build": "lerna run build --scope=@zignaly-open/ps2 --include-dependencies",
     "raffles-client": "lerna run start --scope=@zignaly-open/raffles-client --include-dependencies --stream --parallel",
+    "raffles-client-build": "lerna run build --scope=@zignaly-open/raffles-client --include-dependencies",
     "raffles-server": "lerna run dev --scope=@zignaly-open/raffles-server --include-dependencies --stream",
     "build": "lerna run build"
   },

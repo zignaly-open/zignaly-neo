@@ -34,42 +34,42 @@ export const USDT = Template.bind({});
 USDT.args = {
   value: 50,
   coin: "USDT",
-  fiat: false,
+  stableCoinOperative: false,
 };
 
 export const BTC = Template.bind({});
 BTC.args = {
   value: 50,
   coin: "BTC",
-  fiat: false,
+  stableCoinOperative: false,
 };
 
 export const ETH = Template.bind({});
 ETH.args = {
   value: 50,
   coin: "ETH",
-  fiat: false,
+  stableCoinOperative: false,
 };
 
 export const ZIG = Template.bind({});
 ZIG.args = {
   value: 50,
   coin: "ZIG",
-  fiat: false,
+  stableCoinOperative: false,
 };
 
 export const BNB = Template.bind({});
 BNB.args = {
   value: 50,
   coin: "BNB",
-  fiat: false,
+  stableCoinOperative: false,
 };
 
 export const USD = Template.bind({});
 USD.args = {
   value: 50,
   coin: "USD",
-  fiat: true,
+  stableCoinOperative: true,
   symbol: "$",
 };
 
@@ -77,6 +77,6 @@ export const EUR = Template.bind({});
 EUR.args = {
   value: 50,
   coin: "EUR",
-  fiat: true,
+  stableCoinOperative: true,
   symbol: "€",
 };

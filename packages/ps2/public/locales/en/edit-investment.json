@@ -74,7 +74,7 @@
         "button": "Back"
       },
       "editInvestments": {
-        "title": "Edit Investment with",
+        "title": "Edit Investment",
         "loading": "Loading edit investment"
       }
     },

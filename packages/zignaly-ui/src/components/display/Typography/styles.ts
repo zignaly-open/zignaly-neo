@@ -27,10 +27,6 @@ export const Layout = styled.h1<LayoutProps>`
   margin: 0;
   padding: 0;
   font-weight: 500;
-  margin-left: ${(props) => props.marginLeft}px;
-  margin-top: ${(props) => props.marginTop}px;
-  margin-right: ${(props) => props.marginRight}px;
-  margin-bottom: ${(props) => props.marginBottom}px;
 
   &.h1 {
     font-size: 22px;

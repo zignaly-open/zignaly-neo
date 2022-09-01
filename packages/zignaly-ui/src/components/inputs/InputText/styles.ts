@@ -18,8 +18,16 @@ export const InputValue = styled.input`
   resize: none;
 
   &:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px white inset;
     -webkit-background-clip: text;
   }
+
+  &:-webkit-autofill:focus {
+    -webkit-box-shadow: 0 0 0 50px white inset;
+    -webkit-text-fill-color: #333;
+  }
+
+  -webkit-text-fill-color: #838b95 !important;
 
   &:-webkit-autofill:focus {
     -webkit-text-fill-color: #333;

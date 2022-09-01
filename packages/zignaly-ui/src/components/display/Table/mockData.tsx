@@ -11,7 +11,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"ETHAS"} value={"2.13521254"} />,
     lockedBalance: <PriceLabel coin={"ETHA"} value={"30.18389589"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"0.78232496"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"3.200"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"3.200"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -25,7 +25,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -39,7 +39,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -53,7 +53,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -67,7 +67,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -81,7 +81,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -95,7 +95,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -109,7 +109,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -123,7 +123,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -137,7 +137,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -151,7 +151,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -165,7 +165,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -179,7 +179,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -193,7 +193,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -207,7 +207,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -221,7 +221,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -235,7 +235,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -249,7 +249,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -263,7 +263,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -277,7 +277,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -291,7 +291,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -305,7 +305,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -319,7 +319,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -333,7 +333,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -347,7 +347,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -361,7 +361,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -375,7 +375,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -389,7 +389,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -403,7 +403,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -417,7 +417,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -431,7 +431,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -445,7 +445,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -459,7 +459,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -473,7 +473,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -487,7 +487,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -501,7 +501,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -515,7 +515,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -529,7 +529,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -543,7 +543,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -557,7 +557,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -571,7 +571,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -585,7 +585,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -599,7 +599,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -613,7 +613,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -627,7 +627,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -641,7 +641,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -655,7 +655,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -669,7 +669,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -683,7 +683,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -697,7 +697,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -711,7 +711,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -725,7 +725,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -739,7 +739,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -753,7 +753,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -767,7 +767,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -781,7 +781,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -795,7 +795,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -809,7 +809,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -823,7 +823,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -837,7 +837,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -851,7 +851,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -865,7 +865,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -879,7 +879,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -893,7 +893,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -907,7 +907,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -921,7 +921,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -935,7 +935,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -949,7 +949,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -963,7 +963,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -977,7 +977,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -991,7 +991,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1005,7 +1005,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1019,7 +1019,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1033,7 +1033,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1047,7 +1047,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1061,7 +1061,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1075,7 +1075,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1089,7 +1089,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1103,7 +1103,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1117,7 +1117,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1131,7 +1131,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1145,7 +1145,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1159,7 +1159,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1173,7 +1173,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1187,7 +1187,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1201,7 +1201,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1215,7 +1215,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1229,7 +1229,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1243,7 +1243,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1257,7 +1257,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1271,7 +1271,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1285,7 +1285,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1299,7 +1299,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1313,7 +1313,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1327,7 +1327,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1341,7 +1341,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1355,7 +1355,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1369,7 +1369,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1383,7 +1383,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1397,7 +1397,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1411,7 +1411,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1425,7 +1425,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1439,7 +1439,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1453,7 +1453,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1467,7 +1467,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1481,7 +1481,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1495,7 +1495,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1509,7 +1509,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1523,7 +1523,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1537,7 +1537,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1551,7 +1551,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1565,7 +1565,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1579,7 +1579,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1593,7 +1593,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1607,7 +1607,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1621,7 +1621,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1635,7 +1635,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1649,7 +1649,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BTC"} value={"6.7352"} />,
     lockedBalance: <PriceLabel coin={"BTC"} value={"50.18389"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"7.382324"} />,
-    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} fiat />,
+    valueInUsd: <PriceLabel coin={"USD"} value={"54000"} stableCoinOperative />,
     action: (
       <Actions>
         <Button caption={"Deposit"} size={"small"} variant={"secondary"} onClick={() => {}} />
@@ -1663,7 +1663,7 @@ export const MockMyCoinsData = [
     availableBalance: <PriceLabel coin={"BNB"} value={"5.1352"} />,
     lockedBalance: <PriceLabel coin={"BNB"} value={"1220"} />,
     valueInBtc: <PriceLabel coin={"BTC"} value={"21.782324"} />,
-    valueInUsd: <PriceLabel symbol={"€"} coin={"EUR"} value={"400.50"} fiat />,
+    valueInUsd: <PriceLabel symbol={"€"} coin={"EUR"} value={"400.50"} stableCoinOperative />,
     action: (
       <Actions>
         <Button
