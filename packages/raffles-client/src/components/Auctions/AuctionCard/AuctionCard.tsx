@@ -36,7 +36,8 @@ const AuctionCard: React.FC<{
   const [updatedAt, setUpdatedAt] = useState(null);
 
   const canClaim =
-    !auction.userBid?.isClaimed && new Date(auction.maxClaimDate) > new Date();
+    !auction.userBid?.isClaimed &&
+    (!auction.maxClaimDate || new Date(auction.maxClaimDate) > new Date());
 
   useEffect(() => {
     const timeout = +new Date(auction.expiresAt) - +new Date();
@@ -118,14 +119,15 @@ const AuctionCard: React.FC<{
                 }
                 disabled={!canClaim}
                 caption={t(
-                  new Date(auction.maxClaimDate) < new Date()
+                  auction.maxClaimDate &&
+                    new Date(auction.maxClaimDate) < new Date()
                     ? 'ended'
                     : auction.userBid?.isClaimed
                     ? 'claimed'
                     : 'claim-now',
                 )}
                 bottomElement={
-                  canClaim ? (
+                  canClaim && auction.maxClaimDate ? (
                     <ClaimCountdown
                       date={auction.maxClaimDate}
                       started={true}
@@ -133,7 +135,9 @@ const AuctionCard: React.FC<{
                   ) : null
                 }
                 leftElement={
-                  canClaim ? <TimeIcon height={21} width={21} /> : null
+                  canClaim && auction.maxClaimDate ? (
+                    <TimeIcon height={21} width={21} />
+                  ) : null
                 }
               />
             )}
