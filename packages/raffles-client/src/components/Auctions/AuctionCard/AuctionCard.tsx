@@ -33,11 +33,11 @@ const AuctionCard: React.FC<{
   const leftRef = useRef(null);
   const rightRef = useRef(null);
   const [isColumn, setIsColumn] = useState(false);
-
-  const claimButtonInactive =
-    auction.userBid?.isClaimed || auction.maxClaimDate > new Date();
-
   const [updatedAt, setUpdatedAt] = useState(null);
+
+  const canClaim =
+    !auction.userBid?.isClaimed &&
+    (!auction.maxClaimDate || new Date(auction.maxClaimDate) > new Date());
 
   useEffect(() => {
     const timeout = +new Date(auction.expiresAt) - +new Date();
@@ -108,8 +108,8 @@ const AuctionCard: React.FC<{
         </CardHeader>
         <CardBody>
           <AuctionRanking auction={auction} />
-          <CardActions isColumn={isColumn} hide={!hasWon && !isColumn}>
-            {(!updatedAt || +new Date() - updatedAt > 1000) && hasWon ? (
+          <CardActions isColumn={isColumn}>
+            {(!updatedAt || +new Date() - updatedAt > 1000) && hasWon && (
               <Button
                 size='large'
                 onClick={() =>
@@ -117,15 +117,29 @@ const AuctionCard: React.FC<{
                     auction,
                   })
                 }
-                disabled={claimButtonInactive}
-                caption={t(claimButtonInactive ? 'claimed' : 'claim-now')}
+                disabled={!canClaim}
+                caption={t(
+                  auction.maxClaimDate &&
+                    new Date(auction.maxClaimDate) < new Date()
+                    ? 'ended'
+                    : auction.userBid?.isClaimed
+                    ? 'claimed'
+                    : 'claim-now',
+                )}
                 bottomElement={
-                  <ClaimCountdown date={auction.maxClaimDate} started={true} />
+                  canClaim && auction.maxClaimDate ? (
+                    <ClaimCountdown
+                      date={auction.maxClaimDate}
+                      started={true}
+                    />
+                  ) : null
                 }
-                leftElement={<TimeIcon height={21} width={21} />}
+                leftElement={
+                  canClaim && auction.maxClaimDate ? (
+                    <TimeIcon height={21} width={21} />
+                  ) : null
+                }
               />
-            ) : (
-              <BidButton auction={auction} isActive={isActive} />
             )}
           </CardActions>
         </CardBody>
