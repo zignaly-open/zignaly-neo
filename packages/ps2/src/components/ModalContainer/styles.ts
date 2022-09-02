@@ -1,11 +1,20 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { styledIf, Typography } from '@zignaly-open/ui';
 
-export const Layout = styled.div`
+export const Layout = styled.div<{ width: number }>`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
   background: #101225;
   border: 1px solid #35334a;
   border-radius: 16px;
   padding: 40px 56px;
+  ${({ width }) =>
+    width &&
+    css`
+      width: ${width}px;
+    `};
   user-select: none;
 `;
 
@@ -28,6 +37,8 @@ export const Body = styled.div`
 
 export const Header = styled.div`
   display: flex;
+  z-index: 999;
+  position: relative;
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
@@ -47,8 +58,6 @@ export const HeaderButton = styled.button`
   ${({ theme }) => `
     svg { 
       fill: ${theme.neutral300};
-      width: 18px;
-      height: 18px;
     }
   `}
 `;

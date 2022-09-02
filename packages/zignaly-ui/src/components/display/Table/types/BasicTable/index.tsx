@@ -1,9 +1,8 @@
 import React, { useCallback, useRef, useState } from "react";
 import { useSortBy, useTable } from "react-table";
-
-// Styles
 import {
   ColumnsSelector,
+  EmptyMessage,
   HeaderRow,
   IconContainer,
   Layout,
@@ -16,19 +15,13 @@ import {
   View,
 } from "../../styles";
 import { dark } from "../../../../../theme";
-
-// Components
 import Typography from "../../../Typography";
 import CheckBox from "../../../../inputs/CheckBox";
 import IconButton from "../../../../inputs/IconButton";
-
-// Assets
 import { ReactComponent as OptionsDotsIcon } from "../../../../../assets/icons/option-dots-icon.svg";
-
-// Types
 import { TableBasicProps } from "../../types";
 
-export default function BasicTable({
+export default function BasicTable<T extends object>({
   columns = [],
   data = [],
   onColumnHidden = () => {},
@@ -36,8 +29,9 @@ export default function BasicTable({
   hideOptionsButton,
   isUserTable,
   initialState = {},
+  emptyMessage,
   hasFooter = false,
-}: TableBasicProps) {
+}: TableBasicProps<T>) {
   // Refs
   const tableRef = useRef(null);
 
@@ -230,6 +224,7 @@ export default function BasicTable({
             </tfoot>
           )}
         </TableView>
+        {!data.length && <EmptyMessage>{emptyMessage}</EmptyMessage>}
       </View>
     </Layout>
   );

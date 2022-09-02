@@ -73,7 +73,7 @@ const AuctionsRepository = () => {
         lastAuctionBidPromise,
       ]);
 
-      auction.expiresAt = this.calculateNewExpiryDate(auction);
+      auction.expiresAt = calculateNewExpiryDate(auction);
 
       await AuctionBid.create({
         auctionId: id,

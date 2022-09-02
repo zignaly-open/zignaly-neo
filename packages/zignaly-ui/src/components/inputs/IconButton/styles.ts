@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { styledIf } from "utils/styled";
 import { buttonSizes, buttonVariants, dropdownAlignment, dropdownPosition } from "./types";
 import React from "react";
+import { NiceScrollbar } from "../../../utils/css";
 
 const isPrimaryButton = (variant: keyof typeof buttonVariants) =>
   variant === buttonVariants.primary;
@@ -65,26 +66,10 @@ export const Dropdown = styled.div<DropdownProps>`
   position: absolute;
 
   &::-webkit-scrollbar {
-    width: 6px;
     height: 6px;
   }
 
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-  }
-
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-  }
-
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
+  ${NiceScrollbar};
 
   ${({ alignment, width, position, maxHeight, zIndex }) => `
     width: ${width ?? "auto"};

@@ -22,7 +22,6 @@ import {
   CardActions,
   CardHeader,
 } from './styles';
-import { useTimeout } from 'react-use';
 import ClaimCountdown from './ClaimCountdown';
 
 const AuctionCard: React.FC<{
@@ -33,15 +32,25 @@ const AuctionCard: React.FC<{
   const { showModal } = useModal();
   const leftRef = useRef(null);
   const rightRef = useRef(null);
-  const renderDate = useRef(+new Date());
   const [isColumn, setIsColumn] = useState(false);
 
   const claimButtonInactive =
     auction.userBid?.isClaimed || auction.maxClaimDate > new Date();
 
-  const [hasJustExpired] = useTimeout(
-    +new Date(auction.expiresAt) - renderDate.current,
-  );
+  const [updatedAt, setUpdatedAt] = useState(null);
+
+  useEffect(() => {
+    const timeout = +new Date(auction.expiresAt) - +new Date();
+    const timeoutId = setTimeout(() => {
+      if (timeout > 0) {
+        setUpdatedAt(+new Date());
+      }
+    }, timeout);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [auction.expiresAt]);
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -57,6 +66,7 @@ const AuctionCard: React.FC<{
       window.removeEventListener('resize', handleWindowResize);
     };
   }, []);
+
   return (
     <Item>
       <CardColumn ref={leftRef}>
@@ -99,7 +109,7 @@ const AuctionCard: React.FC<{
         <CardBody>
           <AuctionRanking auction={auction} />
           <CardActions isColumn={isColumn} hide={!hasWon && !isColumn}>
-            {hasWon ? (
+            {(!updatedAt || +new Date() - updatedAt > 1000) && hasWon ? (
               <Button
                 size='large'
                 onClick={() =>
@@ -115,10 +125,7 @@ const AuctionCard: React.FC<{
                 leftElement={<TimeIcon height={21} width={21} />}
               />
             ) : (
-              <BidButton
-                auction={auction}
-                isActive={isActive && !hasJustExpired()}
-              />
+              <BidButton auction={auction} isActive={isActive} />
             )}
           </CardActions>
         </CardBody>

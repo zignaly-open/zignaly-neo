@@ -9,6 +9,7 @@ import baseQuery from '../baseQuery';
 
 export const api = createApi({
   baseQuery,
+  reducerPath: 'authApi',
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, LoginFullPayload>({
       query: (credentials) => ({
@@ -67,6 +68,7 @@ export const api = createApi({
     user: builder.query<UserData, void>({
       query: () => ({
         url: 'user',
+        headers: { 'Accept-version': '2' },
       }),
     }),
 

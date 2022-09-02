@@ -275,6 +275,7 @@ export const Layout = styled.button<LayoutProps>`
       ${Container} {
         height: 48px;
         min-width: 110px;
+        padding: 15px 32px;
       }
 
       ${styledIf(

@@ -1,22 +1,8 @@
-// Dependencies
 import styled from "styled-components";
-
 import Typography from "components/display/Typography";
-import { styledIf } from "utils/styled";
 
-export const Layout = styled.div<{ fiat: boolean }>`
+export const Layout = styled.div`
   text-align: center;
-  ${(props) => `
-     ${styledIf(
-       props.fiat,
-       `
-      margin-right: 19px;
-    `,
-       `
-      margin-right: 0;
-    `,
-     )}
-  `}
 `;
 
 export const Value = styled.span`

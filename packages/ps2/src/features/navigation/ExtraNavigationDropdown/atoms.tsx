@@ -45,6 +45,7 @@ export function HeaderDropdown({
       </NavList>
       <NavList>
         <NavLink
+          as={'a'}
           href={'https://help.zignaly.com/hc/en-us'}
           target={'_blank'}
           onClick={onClose}

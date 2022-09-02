@@ -1,4 +1,3 @@
-// Display
 import Avatar from "./components/display/Avatar";
 import ErrorMessage from "./components/display/ErrorMessage";
 import Loader from "./components/display/Loader";
@@ -14,7 +13,6 @@ import Toaster from "./components/display/Toaster";
 import ProgressSlider from "./components/display/ProgressSlider";
 import InvestSlider from "./components/display/InvestSlider";
 import { ServiceName } from "./components/display/Table/components/ServiceName";
-import { BalanceSummary } from "./components/display/Table/components/BalanceSummary";
 import { AreaChart } from "./components/display/Charts";
 
 // Inputs
@@ -26,13 +24,12 @@ import TextButton from "./components/inputs/TextButton";
 import InputText from "./components/inputs/InputText";
 import Select from "./components/inputs/Selector";
 import InputCode from "./components/inputs/InputCode";
-import { ButtonGroup } from "./components/styled";
+import { ButtonGroup, ValueIndicator } from "./components/styled";
 
 // Layouts
 import { MarginContainer, PageContainer } from "./components/styled";
 
 // Modals
-import EditInvestmentWithModal from "components/modals/EditInvestmentWithModal";
 import MessageModal from "components/modals/MessageModal";
 import AuthVerifyModal from "components/modals/AuthVerifyModal";
 import MinBalanceModal from "components/modals/MinBalanceModal";
@@ -41,6 +38,9 @@ import WithdrawModal from "components/modals/MyAccount/WithdrawModal";
 import ConnectWalletModal from "components/modals/ZigRaffle/ConnectWallet";
 
 // Icons
+export { ReactComponent as RefreshIcon } from "assets/icons/refresh-icon.svg";
+export { ReactComponent as PencilIcon } from "assets/icons/pencil-icon.svg";
+export { ReactComponent as WhaleIcon } from "assets/icons/whale-icon.svg";
 export { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
 export { ReactComponent as CopyIcon } from "assets/icons/copy-icon.svg";
 export { ReactComponent as OpenArrowIcon } from "assets/icons/open-arrow-icon.svg";
@@ -54,6 +54,7 @@ export { ReactComponent as ArrowRightIcon } from "assets/icons/arrow-right-icon.
 export { ReactComponent as UserIcon } from "assets/icons/user-icon.svg";
 export { ReactComponent as CheckIcon } from "assets/icons/check-icon.svg";
 export { ReactComponent as LogoDiscordIcon } from "assets/icons/discord-logo-icon.svg";
+export { ReactComponent as PlusIcon } from "assets/icons/plus-icon.svg";
 export { ReactComponent as LogoLinkedInIcon } from "assets/icons/linkedin-logo-icon.svg";
 export { ReactComponent as LogoTwitterIcon } from "assets/icons/twitter-logo-icon.svg";
 export { ReactComponent as LogoMediumIcon } from "assets/icons/medium-logo-icon.svg";
@@ -68,6 +69,9 @@ export { ReactComponent as ZignalyIcon } from "assets/icons/coins/zignaly-coin.s
 export { ReactComponent as GlobeLanguages } from "assets/icons/globe-languages.svg";
 export { ReactComponent as TimeIcon } from "assets/icons/time-icon.svg";
 
+SliderInput;
+CoinIcon;
+
 // Navigation
 import Header from "./components/navigation/Header";
 import MenuDropDown from "./components/navigation/MenuDropDown";
@@ -78,14 +82,12 @@ import BrandImage from "./components/navigation/Header/components/BrandImage";
 import { dark, light } from "theme";
 import ThemeProvider from "utils/ThemeProvider";
 import { customSort } from "utils/numbers";
-import {
-  createMarketPlaceTableBodyObject,
-  createMarketPlaceTableHeader,
-  createUserTableDataObject,
-  createUserTableHeader,
-} from "./components/display/Table/types";
 import { HeaderLinksContainer } from "components/navigation/Header/styles";
 import { styledIf } from "utils/styled";
+import CoinIcon from "components/display/CoinIcon";
+import SliderInput from "components/inputs/SliderInput";
+import InputAmountAdvanced from "components/inputs/InputAmountAdvanced";
+import { NiceScrollbar } from "utils/css";
 
 export {
   /**
@@ -95,20 +97,19 @@ export {
    */
   // Display
   ServiceName,
-  BalanceSummary,
   AreaChart,
   Avatar,
   Loader,
   Table,
-  createUserTableHeader,
-  createUserTableDataObject,
-  createMarketPlaceTableBodyObject,
-  createMarketPlaceTableHeader,
   ConnectionStateLabel,
   DateLabel,
   PriceLabel,
+  ValueIndicator,
   PercentageIndicator,
+  NiceScrollbar,
   Typography,
+  SliderInput,
+  CoinIcon,
   ErrorMessage,
   ZigWalletIndicator,
   CoinLabel,
@@ -120,6 +121,7 @@ export {
   CheckBox,
   IconButton,
   InputAmount,
+  InputAmountAdvanced,
   TextButton,
   InputText,
   Select,
@@ -135,7 +137,6 @@ export {
   MarginContainer,
   // Modals
   ConnectWalletModal,
-  EditInvestmentWithModal,
   MessageModal,
   AuthVerifyModal,
   DepositModal,
