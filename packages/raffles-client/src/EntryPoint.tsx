@@ -58,7 +58,21 @@ const authLink = setContext((_, { headers }) => {
 
 const client = new ApolloClient({
   link: authLink.concat(splitLink),
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({
+    typePolicies: {
+      Auction: {
+        fields: {
+          userBid: {
+            // Avoid overwritting userBid received from subscription since it's
+            // for the bidder, not the current user
+            merge(existing, incoming) {
+              return incoming || existing;
+            },
+          },
+        },
+      },
+    },
+  }),
 });
 
 let config: Config = {
