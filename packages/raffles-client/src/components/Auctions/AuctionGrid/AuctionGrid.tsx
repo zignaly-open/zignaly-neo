@@ -40,6 +40,7 @@ enum ShowOptions {
 const AuctionGrid: React.FC = () => {
   const { t } = useTranslation('auction');
   const { loading, error, data } = useQuery(GET_AUCTIONS);
+
   const [selectedSort, setSelectedSort] = useState();
   const [selectedShowMode, setSelectedShowMode] = useState(ShowOptions.All);
   useSubscription(BIDS_SUBSCRIPTION);
@@ -86,7 +87,7 @@ const AuctionGrid: React.FC = () => {
           case SortDirection.Expiry:
             const date1 = +new Date(a.expiresAt);
             const date2 = +new Date(b.expiresAt);
-            if (date1 < +new Date()) {
+            if (date1 < +new Date() || date2 < +new Date()) {
               return date2 - date1;
             }
             return date1 - date2;
