@@ -22,7 +22,6 @@ import {
   CardActions,
   CardHeader,
 } from './styles';
-import { useTimeout } from 'react-use';
 import ClaimCountdown from './ClaimCountdown';
 
 const AuctionCard: React.FC<{
@@ -33,15 +32,25 @@ const AuctionCard: React.FC<{
   const { showModal } = useModal();
   const leftRef = useRef(null);
   const rightRef = useRef(null);
-  const renderDate = useRef(+new Date());
   const [isColumn, setIsColumn] = useState(false);
 
   const claimButtonInactive =
     auction.userBid?.isClaimed || auction.maxClaimDate > new Date();
 
-  const [hasJustExpired] = useTimeout(
-    +new Date(auction.expiresAt) - renderDate.current,
-  );
+  const [hasJustExpired, setHasJustExpired] = useState(false);
+
+  useEffect(() => {
+    const timeout = +new Date(auction.expiresAt) - +new Date();
+    const timeoutId = setTimeout(() => {
+      if (timeout) {
+        setHasJustExpired(true);
+      }
+    }, timeout);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [auction.expiresAt]);
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -57,6 +66,7 @@ const AuctionCard: React.FC<{
       window.removeEventListener('resize', handleWindowResize);
     };
   }, []);
+
   return (
     <Item>
       <CardColumn ref={leftRef}>
@@ -117,7 +127,7 @@ const AuctionCard: React.FC<{
             ) : (
               <BidButton
                 auction={auction}
-                isActive={isActive && !hasJustExpired()}
+                isActive={isActive && !hasJustExpired}
               />
             )}
           </CardActions>
