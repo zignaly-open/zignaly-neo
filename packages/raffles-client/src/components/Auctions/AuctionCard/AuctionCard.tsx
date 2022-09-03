@@ -45,7 +45,7 @@ const AuctionCard: React.FC<{
       if (timeout > 0) {
         setUpdatedAt(+new Date());
       }
-    }, timeout);
+    }, timeout + 1000);
 
     return () => {
       clearTimeout(timeoutId);
@@ -109,7 +109,7 @@ const AuctionCard: React.FC<{
         <CardBody>
           <AuctionRanking auction={auction} />
           <CardActions isColumn={isColumn}>
-            {(!updatedAt || +new Date() - updatedAt > 1000) && hasWon ? (
+            {(!updatedAt || +new Date() - updatedAt) && hasWon ? (
               <Button
                 size='large'
                 onClick={() =>
