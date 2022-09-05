@@ -76,7 +76,7 @@ const client = new ApolloClient({
                 readField('user', incoming),
               );
 
-              // Only update userId if it's current user because the subscription sends other users id.
+              // Only update userBid if it's current user because the subscription sends other users id.
               if (me?.id.toString() === incomingUserId.toString()) {
                 return incoming;
               }
