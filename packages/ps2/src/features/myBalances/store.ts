@@ -5,6 +5,7 @@ import { MyBalancesState } from './types';
 const initialState: MyBalancesState = {
   balances: {},
   coins: {},
+  depositInfo: null,
 };
 
 export const myBalancesSlice = createSlice({
@@ -22,6 +23,12 @@ export const myBalancesSlice = createSlice({
       api.endpoints.allCoins.matchFulfilled,
       (state, { payload }) => {
         state.coins = payload;
+      },
+    );
+    builder.addMatcher(
+      api.endpoints.depositInfo.matchFulfilled,
+      (state, { payload }) => {
+        state.depositInfo = payload;
       },
     );
   },

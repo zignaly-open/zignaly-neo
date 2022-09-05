@@ -6,7 +6,6 @@ import { useSelectedMyBalancesByCoin } from '../../../../use';
 import { CoinBalance, CoinDetail } from '../../../../types';
 
 const DepositBalance = ({ coin }: { coin: CoinDetail }): React.ReactElement => {
-  console.log(coin);
   const { t } = useTranslation('deposit-crypto');
   const balance = useSelectedMyBalancesByCoin(coin.id) as CoinBalance;
 

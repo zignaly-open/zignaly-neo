@@ -2,15 +2,11 @@ import React, { useMemo, useState } from 'react';
 import { Data, Field, Layout } from './styles';
 import { useTranslation } from 'react-i18next';
 import {
+  Select,
   CoinIcon,
-  ErrorMessage,
   InputSelect,
   formatInputSelectItem,
-  InputText,
-  Loader,
-  Select,
   Typography,
-  QRCode,
 } from '@zignaly-open/ui';
 import ModalContainer from '../../../../components/ModalContainer';
 import { DialogProps } from '@mui/material/Dialog';
@@ -18,7 +14,8 @@ import { Modal } from '@mui/material';
 import { useSelectedMyBalancesCoins } from '../../use';
 import DepositBalance from './components/DepositBalance';
 import { SelectorItemFormat } from '@zignaly-open/ui/lib/components/inputs/InputSelect/types';
-import { CoinDetail } from '../../types';
+import { CoinDetail, CoinNetwork } from '../../types';
+import DepositInfo from './components/DepositInfo';
 
 function DepositModal({
   close,
@@ -30,10 +27,6 @@ function DepositModal({
   const [coin, setCoin] = useState(null);
   const [network, setNetwork] = useState(null);
   const coins = useSelectedMyBalancesCoins();
-  const depositTag = 'DEPOSIT_TAG';
-
-  const isLoadingDepositAddress = false;
-  const depositInfo = false;
 
   const onClickClose = () => {
     close();
@@ -51,6 +44,8 @@ function DepositModal({
       })),
     [coins],
   );
+
+  console.log({ coin, network });
 
   return (
     <Modal
@@ -106,14 +101,14 @@ function DepositModal({
           </Field>
 
           {/* Select Network */}
-          <Field>
+          <Field className={'column'}>
             <Select
               label={t('deposit-crypto.networkSelector.label')}
               placeholder={t('deposit-crypto.networkSelector.placeholder')}
               disabled={!coin}
               options={
                 coin
-                  ? (coin?.data?.balance?.networks ?? []).map((item: any) => ({
+                  ? (coin?.data?.networks ?? []).map((item: CoinNetwork) => ({
                       id: item.network,
                       caption: item.name,
                       leftElement: (
@@ -130,91 +125,13 @@ function DepositModal({
               }
               value={network}
               maxHeight={54}
+              fullWidth={true}
               onChange={setNetwork}
             />
           </Field>
 
-          {network && !network.data.depositEnable ? (
-            <ErrorMessage text={network.data.depositDesc} />
-          ) : (
-            <>
-              <Field className={'column'}>
-                <InputText
-                  label={t('deposit-crypto.depositAddress.label')}
-                  value={
-                    isLoadingDepositAddress || !network
-                      ? ''
-                      : depositInfo?.address ?? ''
-                  }
-                  readOnly={true}
-                  placeholder={
-                    isLoadingDepositAddress
-                      ? t('deposit-crypto.depositAddress.loading')
-                      : t('deposit-crypto.depositAddress.placeholder')
-                  }
-                />
-                {!isLoadingDepositAddress &&
-                  depositInfo?.address &&
-                  network &&
-                  coin && (
-                    <ErrorMessage
-                      text={t('deposit-crypto.depositAddress.warning', {
-                        network: network.caption,
-                        coin: coin.ref.id,
-                      })}
-                    />
-                  )}
-              </Field>
-
-              {isLoadingDepositAddress ? (
-                <Field className={'loader'}>
-                  <Loader
-                    color={'#fff'}
-                    ariaLabel={t('deposit-crypto.depositAddress.loading')}
-                    width={'32px'}
-                    height={'32px'}
-                  />
-                </Field>
-              ) : (
-                <>
-                  {depositTag && coin && network && (
-                    <Field className={'column'}>
-                      <InputText
-                        label={t('deposit-crypto.depositMemo.label')}
-                        value={depositTag}
-                        readOnly={true}
-                      />
-                    </Field>
-                  )}
-                  {depositInfo?.address && coin && network && (
-                    <Field className={'qrCode'}>
-                      <QRCode
-                        label={
-                          depositTag &&
-                          t('deposit-crypto.depositQR.address', {
-                            coin: coin.ref.id,
-                          })
-                        }
-                        includeMargin={true}
-                        size={200}
-                        value={depositInfo.address}
-                      />
-
-                      {depositTag && coin && (
-                        <QRCode
-                          label={t('deposit-crypto.depositQR.memo', {
-                            coin: coin.ref.id,
-                          })}
-                          includeMargin={true}
-                          size={200}
-                          value={depositTag}
-                        />
-                      )}
-                    </Field>
-                  )}
-                </>
-              )}
-            </>
+          {coin && network && (
+            <DepositInfo coin={coin.data} network={network.data} />
           )}
         </Layout>
       </ModalContainer>

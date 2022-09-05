@@ -27,6 +27,7 @@ export const Container = styled.div`
   transition: all 0.1s linear;
   overflow: hidden;
   box-sizing: border-box;
+  gap: 16px;
 `;
 
 export const Value = styled(Typography)`
@@ -109,6 +110,8 @@ export const Item = styled.li<ItemProps>`
   margin: 0;
   align-items: center;
   cursor: pointer;
+  gap: 16px;
+
   ${({ empty, theme }: any) => `
     ${styledIf(
       empty,

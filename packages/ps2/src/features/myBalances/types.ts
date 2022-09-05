@@ -38,10 +38,23 @@ export type CoinDetail = {
   network: CoinNetwork[];
 };
 
+export type DepositInfo = {
+  currency: string;
+  address: string;
+  tag: string;
+  info: {
+    coin: string;
+    address: string;
+    tag: string;
+    url: string;
+  };
+};
+
 export type Balances = Record<string, CoinBalance>;
 export type Coins = Record<string, CoinDetail>;
 
 export interface MyBalancesState {
   balances?: Balances;
   coins?: Coins;
+  depositInfo?: DepositInfo | null;
 }

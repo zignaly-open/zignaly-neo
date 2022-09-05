@@ -1,10 +1,15 @@
 import { useSelector } from 'react-redux';
 import { RootState } from '../store';
-import { useLazyReducedBalancesQuery, useLazyAllCoinsQuery } from './api';
+import {
+  useLazyReducedBalancesQuery,
+  useLazyAllCoinsQuery,
+  useDepositInfoQuery,
+} from './api';
 import { Exchange } from '../auth/types';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import DepositModal from './components/DepositModal';
-import { CoinBalance, Coins } from './types';
+import { CoinBalance, DepositInfo } from './types';
+import { useActiveExchange } from '../auth/use';
 
 export const useSelectMyBalances = (): object => {
   const balances = useSelector((state: RootState) => state.myBalances.balances);
@@ -64,4 +69,22 @@ export const useFetchMyBalances = (): [
       ]);
     },
   ];
+};
+
+export const useDepositInfo = (
+  coinId: string,
+  networkId: string,
+): {
+  data: DepositInfo;
+  isLoading: boolean;
+} => {
+  const activeExchange = useActiveExchange();
+
+  const { data, isFetching: isLoadingDepositInfo } = useDepositInfoQuery({
+    coinId,
+    networkId,
+    exchangeId: activeExchange.internalId,
+  });
+
+  return { data, isLoading: isLoadingDepositInfo };
 };

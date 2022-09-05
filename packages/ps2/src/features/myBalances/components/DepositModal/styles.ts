@@ -18,6 +18,7 @@ export const Field = styled.div`
     flex-direction: column;
     gap: 0;
     align-items: flex-start;
+    width: 100%;
   }
 
   &.qrCode {

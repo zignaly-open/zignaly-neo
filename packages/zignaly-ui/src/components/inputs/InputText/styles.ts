@@ -100,6 +100,7 @@ type LayoutProps = {
 };
 
 export const Layout = styled.div`
+  width: 100%;
   ${(props: LayoutProps) => `
     ${styledIf(
       props.withError,
