@@ -50,20 +50,20 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
     // Too many winning spots
     auction.numberOfWinners > MAX_WINNERS_DISPLAYED;
 
+  const userBid = bids.find((b) => b.id === auction.userBid?.id);
+
   // Current user is winning but is too far in the list to be showed.
   // We'll hide enough winners above him to show him.
   // If we also already need to truncate the list to show the last winners,
   // then we need to substract an additional line.
   const isUserTruncated =
     // user winning
-    auction.userBid?.position < auction.numberOfWinners &&
+    userBid?.position < auction.numberOfWinners &&
     // outside of visible list
-    auction.userBid?.position >
+    userBid?.position >
       MAX_WINNERS_DISPLAYED -
         // Minus 1 line if ellipsis is shown
         (isTruncated ? 1 : 0);
-
-  const userBid = bids.find((b) => b.id === auction.userBid?.id);
 
   // On mobile we need to replace the ellipsis by the user if it's in the 2nd position
   const mobileForceUser = isMobile && userBid?.position === 2;

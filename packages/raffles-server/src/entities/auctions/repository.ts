@@ -163,7 +163,7 @@ const AuctionsRepository = () => {
     const auctions = (await Auction.findAll({
       where: { ...(id ? { id } : {}) },
       include: [AuctionBasketItem],
-      order: [['updatedAt', 'DESC']],
+      order: [['id', 'DESC']],
     })) as unknown as AuctionType[];
 
     auctions.forEach((a) => {
