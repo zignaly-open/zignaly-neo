@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { styledIf } from "utils/styled";
 import { SelectSizes } from "./types";
 import Typography from "../../display/Typography";
+import { NiceScrollbar } from "utils/css";
 
 const isSmallSelect = (size: SelectSizes) => size === SelectSizes.SMALL;
 
@@ -77,28 +78,7 @@ export const Menu = styled.ul`
     background: ${theme.neutral750};
   `}
 
-  /* width */
-
-  &::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-  }
-
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-  }
-
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
+  ${NiceScrollbar}
 `;
 
 type ItemProps = {

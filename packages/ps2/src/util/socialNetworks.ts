@@ -20,7 +20,7 @@ const socialNetworksLinks = [
   {
     name: 'Discord',
     image: LogoDiscordIcon,
-    path: 'https://discord.gg/r5qRXDJ',
+    path: 'https://discord.gg/9H6cEa9uRN',
   },
   {
     name: 'Medium',

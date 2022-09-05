@@ -22,7 +22,6 @@ import {
   CardActions,
   CardHeader,
 } from './styles';
-import { useTimeout } from 'react-use';
 import ClaimCountdown from './ClaimCountdown';
 
 const AuctionCard: React.FC<{
@@ -33,15 +32,25 @@ const AuctionCard: React.FC<{
   const { showModal } = useModal();
   const leftRef = useRef(null);
   const rightRef = useRef(null);
-  const renderDate = useRef(+new Date());
   const [isColumn, setIsColumn] = useState(false);
+  const [updatedAt, setUpdatedAt] = useState(null);
 
-  const claimButtonInactive =
-    auction.userBid?.isClaimed || auction.maxClaimDate > new Date();
+  const canClaim =
+    !auction.userBid?.isClaimed &&
+    (!auction.maxClaimDate || new Date(auction.maxClaimDate) > new Date());
 
-  const [hasJustExpired] = useTimeout(
-    +new Date(auction.expiresAt) - renderDate.current,
-  );
+  useEffect(() => {
+    const timeout = +new Date(auction.expiresAt) - +new Date();
+    const timeoutId = setTimeout(() => {
+      if (timeout > 0) {
+        setUpdatedAt(+new Date());
+      }
+    }, timeout + 1000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [auction.expiresAt]);
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -57,6 +66,7 @@ const AuctionCard: React.FC<{
       window.removeEventListener('resize', handleWindowResize);
     };
   }, []);
+
   return (
     <Item>
       <CardColumn ref={leftRef}>
@@ -98,8 +108,8 @@ const AuctionCard: React.FC<{
         </CardHeader>
         <CardBody>
           <AuctionRanking auction={auction} />
-          <CardActions isColumn={isColumn} hide={!hasWon && !isColumn}>
-            {hasWon ? (
+          <CardActions isColumn={isColumn}>
+            {(!updatedAt || +new Date() - updatedAt) && hasWon ? (
               <Button
                 size='large'
                 onClick={() =>
@@ -107,18 +117,31 @@ const AuctionCard: React.FC<{
                     auction,
                   })
                 }
-                disabled={claimButtonInactive}
-                caption={t(claimButtonInactive ? 'claimed' : 'claim-now')}
+                disabled={!canClaim}
+                caption={t(
+                  auction.maxClaimDate &&
+                    new Date(auction.maxClaimDate) < new Date()
+                    ? 'ended'
+                    : auction.userBid?.isClaimed
+                    ? 'claimed'
+                    : 'claim-now',
+                )}
                 bottomElement={
-                  <ClaimCountdown date={auction.maxClaimDate} started={true} />
+                  canClaim && auction.maxClaimDate ? (
+                    <ClaimCountdown
+                      date={auction.maxClaimDate}
+                      started={true}
+                    />
+                  ) : null
                 }
-                leftElement={<TimeIcon height={21} width={21} />}
+                leftElement={
+                  canClaim && auction.maxClaimDate ? (
+                    <TimeIcon height={21} width={21} />
+                  ) : null
+                }
               />
             ) : (
-              <BidButton
-                auction={auction}
-                isActive={isActive && !hasJustExpired()}
-              />
+              isColumn && <BidButton auction={auction} isActive={isActive} />
             )}
           </CardActions>
         </CardBody>

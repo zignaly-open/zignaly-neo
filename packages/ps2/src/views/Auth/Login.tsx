@@ -1,12 +1,24 @@
 import React from 'react';
-import CenteredContainer from '../../components/CenteredContainer';
 import LoginForm from '../../features/auth/components/LoginForm';
+import { PageContainer } from '@zignaly-open/ui';
+import { useTitle } from 'react-use';
+import { useTranslation } from 'react-i18next';
 
 const Login: React.FC = () => {
+  const { t } = useTranslation('pages');
+  useTitle(t('pages.login'));
+
   return (
-    <CenteredContainer>
+    <PageContainer
+      style={{
+        marginTop: '32px',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
       <LoginForm />
-    </CenteredContainer>
+    </PageContainer>
   );
 };
 

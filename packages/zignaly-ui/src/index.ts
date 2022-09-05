@@ -88,6 +88,7 @@ import { styledIf } from "utils/styled";
 import CoinIcon from "components/display/CoinIcon";
 import SliderInput from "components/inputs/SliderInput";
 import InputAmountAdvanced from "components/inputs/InputAmountAdvanced";
+import { NiceScrollbar } from "utils/css";
 
 export {
   /**
@@ -106,6 +107,7 @@ export {
   PriceLabel,
   ValueIndicator,
   PercentageIndicator,
+  NiceScrollbar,
   Typography,
   SliderInput,
   CoinIcon,

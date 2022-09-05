@@ -56,15 +56,22 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
   // then we need to substract an additional line.
   const isUserTruncated =
     // user winning
-    auction.userBid?.position <= auction.numberOfWinners &&
+    auction.userBid?.position < auction.numberOfWinners &&
     // outside of visible list
-    auction.userBid?.position > MAX_WINNERS_DISPLAYED - (isTruncated ? 1 : 0);
+    auction.userBid?.position >
+      MAX_WINNERS_DISPLAYED -
+        // Minus 1 line if ellipsis is shown
+        (isTruncated ? 1 : 0);
+
   const userBid = bids.find((b) => b.id === auction.userBid?.id);
+
+  // On mobile we need to replace the ellipsis by the user if it's in the 2nd position
+  const mobileForceUser = isMobile && userBid?.position === 2;
 
   // If we truncate the list to show the last winner or current user, that's 2 added lines. (counting the elipsis)
   // If we need to show both of them, that's 3 lines.
   const linesAdded = isTruncated
-    ? isUserTruncated && userBid?.position !== bids.length
+    ? isUserTruncated && userBid?.position !== bids.length && !isMobile
       ? 3
       : 2
     : 0;
@@ -95,11 +102,14 @@ const AuctionRanking = ({ auction }: { auction: AuctionType }) => {
       )}
       {isTruncated && (
         <>
-          <Ellipsis />
-          {/* Current user */}
-          {isUserTruncated && userBid?.position !== auction.bids.length && (
-            <RankingRow bid={userBid} key={userBid.id} />
+          {(!isMobile || (!isUserTruncated && !mobileForceUser)) && (
+            <Ellipsis />
           )}
+          {/* Current user */}
+          {(isUserTruncated || mobileForceUser) &&
+            userBid?.position !== auction.numberOfWinners && (
+              <RankingRow bid={userBid} key={userBid.id} />
+            )}
           {bids[auction.numberOfWinners - 1] ? (
             // Last winner
             <RankingRow

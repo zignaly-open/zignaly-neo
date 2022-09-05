@@ -1,9 +1,10 @@
 // Dependencies
-import React from "react";
+import Loader from "components/display/Loader";
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 import { buttonSizes, buttonVariants, dropdownAlignment, dropdownPosition } from "./types";
-import Loader from "components/display/Loader";
+import React from "react";
+import { NiceScrollbar } from "../../../utils/css";
 
 const isPrimaryButton = (variant: keyof typeof buttonVariants) =>
   variant === buttonVariants.primary;
@@ -65,28 +66,12 @@ export const Dropdown = styled.div<DropdownProps>`
   position: absolute;
 
   &::-webkit-scrollbar {
-    width: 6px;
     height: 6px;
   }
 
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-  }
+  ${NiceScrollbar};
 
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-  }
-
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
-
-  ${({ alignment, width, zIndex, maxHeight }) => `
+  ${({ alignment, width, position, maxHeight, zIndex }) => `
     width: ${width ?? "auto"};
     z-index: ${zIndex ?? 10};
     
@@ -95,6 +80,28 @@ export const Dropdown = styled.div<DropdownProps>`
       `
       max-height: ${maxHeight};
       overflow: auto;
+    `,
+    )}
+    
+    ${styledIf(
+      position === "static",
+      `
+      top: 100%;
+      opacity: 1;
+      
+      ${styledIf(
+        alignment === "left",
+        `
+        left: 0;
+      `,
+      )}
+      
+      ${styledIf(
+        alignment === "right",
+        `
+        right: 0;
+      `,
+      )}
     `,
     )}
   
@@ -137,273 +144,6 @@ export const Layout = styled.div`
 
 export const IconContainer = styled.div``;
 
-const renderSizeProps = (props: any) => `
-  ${styledIf(
-    isSmallButton(props.size),
-    `  
-       ${Icon} {
-          svg {
-            width: 14px;
-          }
-        }
-  
-        ${ButtonLoader}{
-          height: 15px;
-          width: 15px;
-        }
-  
-        ${Container} {
-          width: 34px;
-          height: 30px;
-        }
-     `,
-  )}
-     
-  ${styledIf(
-    isMediumButton(props.size),
-    `
-      ${Icon} {
-        svg {
-          width: 18px;
-        }
-      }
-
-      ${ButtonLoader}{
-        height: 20px;
-        width: 20px;
-      }
-
-      ${Container} {
-        width: 42px;
-        height: 36px;
-      }
-    `,
-  )}
-
-  ${styledIf(
-    isLargeButton(props.size),
-    `
-      ${Icon} {
-        svg {
-          width: 18px;
-        }
-      }
-
-      ${ButtonLoader}{
-        height: 25px;
-        width: 25px;
-      }
-
-      ${Container} {
-        width: 56px;
-        height: 48px;
-      }
-    `,
-  )}
-
-  ${styledIf(
-    isXLargeButton(props.size),
-    `
-      ${Icon} {
-        svg {
-          width: 24px;
-        }
-      }
-
-      ${ButtonLoader}{
-        height: 30px;
-        width: 30px;
-      }
-
-      ${Container} {
-        width: 68px;
-        height: 60px;
-      }
-    `,
-  )}
-`;
-
-const renderPrimaryProps = (props: any) => `
-  ${styledIf(
-    isPrimaryButton(props.variant),
-    `
-      ${Container} {
-        background: linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%);
-      }
-
-      &:enabled:focus:not(:focus-visible) {
-        outline: 0;
-        box-shadow: none;
-      }
-
-      &:enabled:focus:focus-visible {
-        background: linear-gradient(121.21deg, #A600FB 10.7%, #6F06FC 31.3%, #4959F5 60.13%, #2E8DDF 76.19%, #12C1C9 89.78%);
-
-        ${Container} {
-          border: 1px solid white;
-          background: linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%);
-        }
-      }
-
-      &[disabled] {
-        ${IconContainer}{
-          opacity: 0.33;
-        }
-      }
-
-      &:enabled {
-        ${Container} {
-          &:before {
-            border-radius: inherit;
-            background: linear-gradient(312.12deg, #8671F7 14.16%, #7EC9F9 83.59%);
-            content: '';
-            display: block;
-            height: 100%;
-            position: absolute;
-            top: 0;
-            left: 0;
-            opacity: 0;
-            width: 100%;
-            z-index: 1;
-            transition: all 100ms linear;
-          }
-        }
-      }
-
-      &:enabled:active {
-        ${Container} {
-          &:before {
-            opacity: 1;
-          }
-        }
-      }
-    `,
-  )}
-`;
-
-const renderSecondaryProps = (props: any) => `
-  ${styledIf(
-    isSecondaryButton(props.variant),
-    `
-      ${Container} {
-        background: rgba(16, 18, 37, 0.3);
-        transition: all 0.2s linear;
-        border: 1px ${props.theme.neutral600} solid;
-
-      ${styledIf(
-        props.disabled,
-        `
-          opacity: 0.33;
-        `,
-        `
-          &:hover {
-            background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
-            border-color: ${props.theme.neutral500};
-          }
-        `,
-      )}
-
-      ${Icon} {
-        color: ${props.theme.neutral200};
-      }
-
-      &:enabled:focus:not(:focus-visible) {
-        outline: 0;
-        box-shadow: none;
-      }
-
-      &:enabled:focus:focus-visible {
-          ${Container} {
-            background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
-            -webkit-transition:none;
-            -moz-transition:none;
-            -o-transition:none;
-            transition:none;
-            box-shadow: inset 0px 0px 0px 2px #FFFFFF;
-            border-radius: 5px;
-            border-color: ${props.theme.highlighted};
-          }
-        }
-      }
-
-      &:enabled:active {
-        ${Container} {
-          background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
-          -webkit-transition:none;
-          -moz-transition:none;
-          -o-transition:none;
-          transition:none;
-          border-color: ${props.theme.highlighted};
-      }
-    `,
-  )}
-`;
-
-const renderFlatProps = (props: any) => `
-  ${styledIf(
-    isFlatButton(props.variant),
-    `
-      ${styledIf(
-        props.shrinkWrap,
-        `
-          padding: 0;
-          ${Container}{
-            padding: 0;
-            margin: 0;
-            width: 100%;
-            height: 100%;
-          }
-          ${IconContainer} {
-            padding: 0;
-            margin: 0;
-            width: 100%;
-            height: 100%;
-          }
-        `,
-      )}
-      
-      ${Container} {
-        transition: all 0.2s linear;
-        border: none;
-        background: transparent;
-      }
-
-      &:enabled:focus:not(:focus-visible) {
-        outline: 0;
-        box-shadow: none;
-      }
-
-      &:enabled:focus:focus-visible {
-        ${Container} {
-          border: 1px solid ${props.theme.neutral000};
-          background: #040618;
-
-          &:before {
-            background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
-            opacity: 1;
-          }
-        }
-
-        ${Icon} {
-          color: ${props.theme.neutral000};
-        }
-      }
-
-      &[disabled] {
-        ${IconContainer}{
-          opacity: 0.33;
-        }
-      }
-
-      &:enabled {
-        ${Container} {
-          background: none;
-        }
-      }
-    `,
-  )}
-`;
-
 export const ViewPort = styled.button<LayoutProps>`
   border-radius: 4px;
   border: none;
@@ -422,40 +162,336 @@ export const ViewPort = styled.button<LayoutProps>`
   }
 
   ${(props) => `
-     ${renderSizeProps(props)}
-     
-     ${styledIf(
-       props.isActiveDropdown,
-       `
-        background: #12152c !important;
-        padding: 2px !important;
-        border-radius: 4px 4px 0 0 !important;
-  
-        &:enabled:active {
-          padding: 2px !important;
-          background: #12152c !important;
+    ${styledIf(
+      isSmallButton(props.size),
+      `
+      ${Icon} {
+        svg {
+          width: 14px;
+          height: 14px;
         }
-  
-        ${Icon} {
-          svg {
-            fill: ${props.theme.neutral200};
-            color: ${props.theme.neutral200};
-          }
+      }
+
+      ${ButtonLoader}{
+        height: 15px;
+        width: 15px;
+      }
+      
+      ${Container} {
+        width: 34px;
+        height: 30px;
+      }
+    `,
+    )}
+    
+  ${styledIf(
+    isMediumButton(props.size),
+    `     
+      ${Icon} {
+        svg {
+          width: 14px;
+          height: 14px;
         }
+      }
+
+      ${ButtonLoader}{
+        height: 20px;
+        width: 20px;
+      }
+      
+      ${Container} {
+        width: 42px;
+        height: 36px;
+      }
+    `,
+  )}
+    
+  ${styledIf(
+    isLargeButton(props.size),
+    `     
+      ${Icon} {
+        svg {
+          width: 18px;
+          height: 18px;
+        }
+      }
+
+      ${ButtonLoader}{
+        height: 25px;
+        width: 25px;
+      }
+      
+      ${Container} {
+        width: 56px;
+        height: 48px;
+      }
+    `,
+  )}
+
+  ${styledIf(
+    isXLargeButton(props.size),
+    `     
+      ${Icon} {
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      ${ButtonLoader}{
+        height: 30px;
+        width: 30px;
+      }
+      
+      ${Container} {
+        width: 68px;
+        height: 60px;
+      }
+    `,
+  )}
   
+  ${styledIf(
+    isPrimaryButton(props.variant),
+    `
+      ${Container} {
+        background: linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%);
+      }
+      
+      &:enabled:focus:not(:focus-visible) {
+        outline: 0;
+        box-shadow: none;
+      }
+      
+      &:enabled:focus:focus-visible {
+        background: linear-gradient(121.21deg, #A600FB 10.7%, #6F06FC 31.3%, #4959F5 60.13%, #2E8DDF 76.19%, #12C1C9 89.78%);
+      
         ${Container} {
-          background: #12152c !important;
-  
+          border: 1px solid white;
+          background: linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%);
+        }
+      }
+            
+      &[disabled] {
+        ${IconContainer}{
+          opacity: 0.33;
+        }
+      } 
+
+      &:enabled {
+        ${Container} {
           &:before {
-            opacity: 0 !important;
+            border-radius: inherit;
+            background: linear-gradient(312.12deg, #8671F7 14.16%, #7EC9F9 83.59%);
+            content: '';    
+            display: block;
+            height: 100%;
+            position: absolute;
+            top: 0; 
+            left: 0;
+            opacity: 0;
+            width: 100%;
+            z-index: 1;
+            transition: all 100ms linear; 
           }
         }
-     `,
-       `
-        ${renderPrimaryProps(props)}  
-        ${renderSecondaryProps(props)}
-        ${renderFlatProps(props)}
-     `,
-     )}
+      }
+      
+      &:enabled:active {
+        ${Container} {
+          &:before {
+            opacity: 1;
+          }
+        }
+      }
+            
+      ${Icon} {
+        color: #F3F4F6;
+      }
+    `,
+  )}
+    
+  ${styledIf(
+    isSecondaryButton(props.variant),
+    `
+      ${Container} {
+        background: rgba(16, 18, 37, 0.3);
+        transition: all 0.2s linear;
+        &:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          border-radius: 5px;
+          padding: 1px;
+          -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+          -webkit-mask-composite: destination-out;
+          mask-composite: exclude;
+        }
+        ${styledIf(
+          props.disabled,
+          `
+          opacity: 0.33;
+          &:before {
+            background: ${props.theme.neutral600};
+          }
+          `,
+        )}
+
+        ${styledIf(
+          !props.disabled,
+          `
+          &:before {
+            background: ${props.theme.neutral600};
+          }
+          &:hover {
+            background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
+            &:before {
+              background: ${props.theme.neutral500};
+            }
+            
+          }
+          
+          `,
+        )}
+      }
+      
+      &:enabled:focus:not(:focus-visible) {
+        outline: 0;
+        box-shadow: none;
+      }
+     
+      
+      &:enabled:focus:focus-visible {
+          ${Container} {
+            background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
+            -webkit-transition:none;
+            -moz-transition:none;
+            -o-transition:none;
+            transition:none;
+            box-shadow: inset 0px 0px 0px 2px #FFFFFF;
+            border-radius: 5px;
+            &:before {
+              background: linear-gradient(rgba(20, 156, 173, 1), rgba(69, 64, 193, 1));
+            }
+          }
+          
+        }
+      }
+      
+      &:enabled:active {
+        ${Container} {
+          background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
+          -webkit-transition:none;
+          -moz-transition:none;
+          -o-transition:none;
+          transition:none;
+          &:before {
+            padding: 1px;
+            background: linear-gradient(rgba(134, 113, 247, 1),rgba(126, 201, 249, 1));
+          }
+      }
+    `,
+  )}
+  
+  ${styledIf(
+    isFlatButton(props.variant),
+    `
+      ${styledIf(
+        props.shrinkWrap,
+        `
+        padding: 0;
+        ${Container}{
+            padding: 0;
+          margin: 0;
+          width: 100%;
+          height: 100%;
+          }
+        ${IconContainer} {
+          padding: 0;
+          margin: 0;
+          width: 100%;
+          height: 100%;
+        }
+        `,
+      )} 
+      ${Container} {
+        transition: all 0.2s linear;
+        border: none;
+        background: transparent;
+      }
+      
+      &:enabled:focus:not(:focus-visible) {
+        outline: 0;
+        box-shadow: none;
+      }
+     
+      &:enabled:focus:focus-visible {
+      
+        ${Container} {
+          border: 1px solid white;
+          background: #040618;
+                  
+          &:before {
+            background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
+            opacity: 1;
+          }
+        }
+        
+        ${Icon} {
+          color: #fff;
+        }
+      }
+            
+      &[disabled] {
+        ${IconContainer}{
+          opacity: 0.33;
+        }
+      } 
+
+      &:enabled {
+        ${Container} {
+          background: none;
+        }
+      }
+      
+      &:enabled:active {
+        transition: all 0.21 linear;
+        ${Container} {
+          border: none;
+      } 
+    `,
+  )}  
+  
+  
+  ${styledIf(
+    props.isActiveDropdown,
+    ` 
+      background: #12152c;      
+      padding: 2px;
+      border-radius: 4px 4px 0 0;
+             
+      &:enabled:active {
+        padding: 2px;
+        background: #12152c;
+      }
+      
+      ${Icon} {
+        svg {
+          fill: #fff;
+          stroke: #fff;
+        }
+      }
+       
+      ${Container} {
+        background: #12152c;
+        
+        &:before {
+          opacity: 0 !important;
+        }
+      }
+    `,
+  )}
   `}
 `;

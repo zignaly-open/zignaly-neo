@@ -73,7 +73,7 @@ const AuctionsRepository = () => {
         lastAuctionBidPromise,
       ]);
 
-      auction.expiresAt = this.calculateNewExpiryDate(auction);
+      auction.expiresAt = calculateNewExpiryDate(auction);
 
       await AuctionBid.create({
         auctionId: id,
@@ -110,7 +110,7 @@ const AuctionsRepository = () => {
       await sequelize.query(
         `
           SELECT filtered.* FROM (
-              SELECT *, ROW_NUMBER () OVER (PARTITION BY t."auctionId" ORDER BY T."value" DESC) as "position" FROM ( 
+              SELECT *, ROW_NUMBER () OVER (PARTITION BY t."auctionId" ORDER BY t."value" DESC) as "position" FROM ( 
                 SELECT MAX(b.value) as value, MAX(b.id) as id, b."auctionId", b."userId", MAX(b."claimTransactionId") as "claimTransactionId", u."username" as "username"
                 FROM "${AuctionBid.tableName}" b
                 INNER JOIN "${User.tableName}" u ON b."userId" = u."id"
@@ -123,8 +123,8 @@ const AuctionsRepository = () => {
               "position" <= a."numberOfWinners" 
               OR "userId" = $currentUserId 
               ${showAllBids ? 'OR 1' : ''}
-              ORDER BY filtered."id" DESC
-            `,
+          ORDER BY filtered."id" DESC
+        `,
         {
           type: QueryTypes.SELECT,
           bind: { auctionId: id || 0, currentUserId: user?.id || 0 },
@@ -163,6 +163,7 @@ const AuctionsRepository = () => {
     const auctions = (await Auction.findAll({
       where: { ...(id ? { id } : {}) },
       include: [AuctionBasketItem],
+      order: [['updatedAt', 'DESC']],
     })) as unknown as AuctionType[];
 
     auctions.forEach((a) => {

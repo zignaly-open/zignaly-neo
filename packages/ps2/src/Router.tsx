@@ -8,13 +8,12 @@ import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
 import ForgotPassword from './views/Auth/ForgotPassword';
 import TradingServices from './views/Help/TradingServices';
-import MyBalances from './views/MyBalances';
+import Zigpad from './views/Zigpad';
 import {
   ROUTE_DASHBOARD,
   ROUTE_FORGOT_PASSWORD,
   ROUTE_HELP,
   ROUTE_LOGIN,
-  ROUTE_MY_BALANCES,
   ROUTE_PROFIT_SHARING,
   ROUTE_SIGNUP,
   ROUTE_STAKING,
@@ -51,10 +50,6 @@ function Router() {
           }
         />
 
-        <Route path={ROUTE_MY_BALANCES}>
-          <Route index element={<MyBalances />} />
-        </Route>
-
         <Route path={ROUTE_PROFIT_SHARING}>
           <Route index element={<ProfitSharing />} />
         </Route>
@@ -62,7 +57,7 @@ function Router() {
           <Route index element={<Staking />} />
         </Route>
         <Route path={ROUTE_ZIGPAD}>
-          <Route index element={<ProfitSharing />} />
+          <Route index element={<Zigpad />} />
         </Route>
 
         <Route path={ROUTE_HELP} element={<TradingServices />} />
