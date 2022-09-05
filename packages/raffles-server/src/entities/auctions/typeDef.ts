@@ -40,7 +40,7 @@ export const typeDef = gql`
     bidFee: String
     startingBid: String
     currentBid: String
-    description: String
+    description: Text
     basketItems: [BasketItem]
     bids: [Bid]
     userBid: Bid
