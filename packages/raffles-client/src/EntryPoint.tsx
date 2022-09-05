@@ -20,6 +20,8 @@ import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster as ToastProvider } from 'react-hot-toast';
+import { GET_CURRENT_USER } from 'queries/users';
+import { UserType } from '@zignaly-open/raffles-shared/types';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
@@ -63,10 +65,22 @@ const client = new ApolloClient({
       Auction: {
         fields: {
           userBid: {
-            // Avoid overwritting userBid received from subscription since it's
-            // for the bidder, not the current user
-            merge(existing, incoming) {
-              return incoming || existing;
+            merge(existing, incoming, { cache, readField }) {
+              if (!incoming) return incoming;
+
+              const { me }: { me: UserType } = cache.readQuery({
+                query: GET_CURRENT_USER,
+              });
+              const incomingUserId = readField<number>(
+                'id',
+                readField('user', incoming),
+              );
+
+              // Only update userId if it's current user because the subscription sends other users id.
+              if (me?.id.toString() === incomingUserId.toString()) {
+                return incoming;
+              }
+              return existing;
             },
           },
         },
