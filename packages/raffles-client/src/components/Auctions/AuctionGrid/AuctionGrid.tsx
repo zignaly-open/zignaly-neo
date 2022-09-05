@@ -26,6 +26,7 @@ const StyledSelect = styled(Select)`
 `;
 
 enum SortDirection {
+  Default = 'default',
   Expiry = 'expiry',
   Bid = 'bid',
   LastBid = 'last-bid',
@@ -41,11 +42,17 @@ const AuctionGrid: React.FC = () => {
   const { t } = useTranslation('auction');
   const { loading, error, data } = useQuery(GET_AUCTIONS);
 
-  const [selectedSort, setSelectedSort] = useState();
-  const [selectedShowMode, setSelectedShowMode] = useState(ShowOptions.All);
+  const [selectedSort, setSelectedSort] = useState(
+    localStorage.getItem('sort') || SortDirection.Default,
+  );
+  const [selectedShowMode, setSelectedShowMode] = useState(
+    localStorage.getItem('show') || ShowOptions.All,
+  );
+
   useSubscription(BIDS_SUBSCRIPTION);
   const sortOptions = useMemo(
     () => [
+      { caption: t('sort-by-default'), value: SortDirection.Default },
       { caption: t('sort-by-expiry'), value: SortDirection.Expiry },
       {
         caption: t('sort-by-last-bid'),
@@ -118,7 +125,10 @@ const AuctionGrid: React.FC = () => {
           <StyledSelect
             options={showOptions}
             value={showOptions.find((o) => o.value === selectedShowMode)}
-            onChange={(option) => setSelectedShowMode(option.value)}
+            onChange={(option) => {
+              localStorage.setItem('show', option.value);
+              setSelectedShowMode(option.value);
+            }}
             fullWidth={false}
             label={t('show')}
           />
@@ -127,10 +137,12 @@ const AuctionGrid: React.FC = () => {
           <StyledSelect
             options={sortOptions}
             value={sortOptions.find((o) => o.value === selectedSort)}
-            onChange={(option) => setSelectedSort(option.value)}
+            onChange={(option) => {
+              localStorage.setItem('sort', option.value);
+              setSelectedSort(option.value);
+            }}
             fullWidth={false}
             label={t('sort')}
-            placeholder='Select Sort'
           />
         </Grid>
       </Grid>
