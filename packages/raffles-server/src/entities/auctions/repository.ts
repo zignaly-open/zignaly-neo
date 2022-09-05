@@ -163,7 +163,7 @@ const AuctionsRepository = () => {
     const auctions = (await Auction.findAll({
       where: { ...(id ? { id } : {}) },
       include: [AuctionBasketItem],
-      order: sequelize.literal('Auction.id DESC'),
+      order: [['updatedAt', 'DESC']],
     })) as unknown as AuctionType[];
 
     auctions.forEach((a) => {
