@@ -13,7 +13,7 @@ export function getWinningLosingStatus(auction: AuctionType): {
     ? auction.bids.find((b) => b.id === userBidId)
     : null;
   const isWinning = userBid?.position <= auction.numberOfWinners;
-  const isLosing = userBid?.position > auction.numberOfWinners;
+  const isLosing = !isWinning && Boolean(userBid);
   return {
     isLosing,
     isWinning,
