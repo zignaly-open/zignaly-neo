@@ -74,6 +74,7 @@
     "react-hook-form": "^7.32.0",
     "react-hot-toast": "^2.3.0",
     "react-i18next": "^11.16.9",
+    "react-markdown": "^8.0.3",
     "react-number-format": "^4.9.3",
     "react-router-dom": "6",
     "react-scripts": "5.0.1",
