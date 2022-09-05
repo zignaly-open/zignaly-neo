@@ -12,6 +12,7 @@
   "starting-bid": "Starting bid: <0>{{bid}}</0>",
   "for-a-total-value-of": "For a total value of",
   "sort": "Sort",
+  "sort-by-default": "Default",
   "sort-by-expiry": "Expiry",
   "sort-by-bid": "Highest bid",
   "sort-by-last-bid": "Last bid",
