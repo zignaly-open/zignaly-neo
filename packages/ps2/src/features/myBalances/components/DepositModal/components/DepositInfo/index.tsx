@@ -36,6 +36,7 @@ const DepositInfo = ({
               label={t('deposit-crypto.depositAddress.label')}
               value={isLoading || !network ? '' : data?.address ?? ''}
               readOnly={true}
+              copyToClipboard={true}
               placeholder={
                 isLoading
                   ? t('deposit-crypto.depositAddress.loading')
@@ -58,6 +59,7 @@ const DepositInfo = ({
                 label={t('deposit-crypto.depositMemo.label')}
                 value={depositTag}
                 readOnly={true}
+                copyToClipboard={true}
               />
             </Field>
           )}

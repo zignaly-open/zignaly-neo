@@ -34,4 +34,6 @@ export interface InputTextProps {
   withoutBorder?: boolean;
   minHeight?: number;
   maxHeight?: number;
+  copyToClipboard?: boolean;
+  onTextCopied?: (value: string) => void;
 }

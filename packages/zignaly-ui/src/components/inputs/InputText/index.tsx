@@ -1,13 +1,21 @@
-// Dependencies
 import React, { useCallback, useRef, useState } from "react";
-
-// Styled Components
-import { Layout, InputContainer, InputValue, Side, IconContainer, Label } from "./styles";
+import {
+  Layout,
+  InputContainer,
+  InputValue,
+  Side,
+  IconContainer,
+  Label,
+  ActionButton,
+} from "./styles";
 import { InputTextProps } from "./types";
-
 import ErrorMessage from "components/display/ErrorMessage";
 import Typography from "components/display/Typography";
 import TextButton from "../TextButton";
+import { ReactComponent as CheckIcon } from "assets/icons/check-icon.svg";
+import { ReactComponent as CopyIcon } from "assets/icons/copy-icon.svg";
+import { useTheme } from "styled-components";
+import Theme from "../../../theme/theme";
 
 function InputText(
   {
@@ -31,12 +39,17 @@ function InputText(
     labelAction = null,
     minHeight,
     maxHeight,
+    copyToClipboard = false,
+    onTextCopied = () => null,
   }: InputTextProps,
-  inputRef: React.Ref<any>,
+  inputRef: React.Ref<HTMLInputElement>,
 ) {
   const isControlled = useRef(value !== undefined);
   const [internalValue, setInternalValue] = useState(defaultValue);
   const inputValue = isControlled.current ? value : internalValue;
+  const copyToClipboardTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [isTextCopied, setIsTextCopied] = useState(false);
+  const theme = useTheme() as Theme;
 
   const handleTextChange = useCallback((e: any) => {
     const newValue = e.target.value;
@@ -45,6 +58,33 @@ function InputText(
     }
     onChange(e, { value: newValue });
   }, []);
+
+  /**
+   * @function handleCopyToClipboard():
+   * @description Invoke when the user wants to copy the input value to the clipboard.
+   */
+  const handleCopyToClipboard = useCallback(async () => {
+    let value = "";
+    if ("clipboard" in navigator) {
+      value = value as string;
+      await navigator.clipboard.writeText(value);
+    } else {
+      document.execCommand("copy", true, value);
+    }
+
+    if (!isTextCopied) {
+      onTextCopied(value);
+    }
+
+    if (copyToClipboardTimer.current) {
+      clearTimeout(copyToClipboardTimer.current);
+    } else {
+      setIsTextCopied(true);
+      copyToClipboardTimer.current = setTimeout(() => {
+        setIsTextCopied(false);
+      }, 2000);
+    }
+  }, [value, isTextCopied, copyToClipboardTimer]);
 
   return (
     <Layout withError={!!error} disabled={disabled}>
@@ -78,14 +118,24 @@ function InputText(
             name={name}
           />
         </Side>
-        {rightSideElement && (
-          <Side
-            className={"right"}
-            cursor={onClickRightSideElement === null ? "auto" : "pointer"}
-            onClick={() => onClickRightSideElement}
-          >
-            {rightSideElement}
-          </Side>
+        {copyToClipboard && !String(inputValue).trim().length ? (
+          <ActionButton onClick={handleCopyToClipboard}>
+            {isTextCopied ? (
+              <CheckIcon width={"18px"} height={"18px"} color={theme.neutral300} />
+            ) : (
+              <CopyIcon width={"22px"} height={"22px"} color={theme.neutral300} />
+            )}
+          </ActionButton>
+        ) : (
+          rightSideElement && (
+            <Side
+              className={"right"}
+              cursor={onClickRightSideElement === null ? "auto" : "pointer"}
+              onClick={() => onClickRightSideElement}
+            >
+              {rightSideElement}
+            </Side>
+          )
         )}
       </InputContainer>
 

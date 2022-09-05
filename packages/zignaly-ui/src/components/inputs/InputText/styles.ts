@@ -133,3 +133,7 @@ export const Label = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
+
+export const ActionButton = styled.div`
+  cursor: pointer;
+`;

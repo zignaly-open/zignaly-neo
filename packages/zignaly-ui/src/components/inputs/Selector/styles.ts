@@ -111,7 +111,7 @@ export const Item = styled.li<ItemProps>`
   align-items: center;
   cursor: pointer;
 
-  ${({ empty, theme }: any) => `
+  ${({ empty, theme }) => `
     ${styledIf(
       empty,
       `
