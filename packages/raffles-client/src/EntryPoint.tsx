@@ -68,18 +68,21 @@ const client = new ApolloClient({
             merge(existing, incoming, { cache, readField }) {
               if (!incoming) return incoming;
 
-              const { me }: { me: UserType } = cache.readQuery({
+              const res = cache.readQuery({
                 query: GET_CURRENT_USER,
-              });
+              }) as { me: UserType };
+
               const incomingUserId = readField<number>(
                 'id',
                 readField('user', incoming),
               );
 
-              // Only update userBid if it's current user because the subscription sends other users id.
-              if (me?.id.toString() === incomingUserId.toString()) {
+              // Only update userBid if it's the current user because the subscription sends other users id.
+              if (res?.me.id.toString() === incomingUserId.toString()) {
                 return incoming;
               }
+              // Keep the previous userBid although an user outbid the current user, so userBid.position is
+              // outdated, but the rest is good.
               return existing;
             },
           },
