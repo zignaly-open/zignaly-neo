@@ -110,7 +110,6 @@ export const Item = styled.li<ItemProps>`
   margin: 0;
   align-items: center;
   cursor: pointer;
-  gap: 16px;
 
   ${({ empty, theme }: any) => `
     ${styledIf(
@@ -133,7 +132,9 @@ export const Item = styled.li<ItemProps>`
   `}
 `;
 
-export const LeftElement = styled.div``;
+export const LeftElement = styled.div`
+  margin-right: 16px;
+`;
 
 export const ItemCaption = styled(Typography)`
   overflow: hidden;
@@ -142,7 +143,6 @@ export const ItemCaption = styled(Typography)`
 
 export const LeftElementIcon = styled.img`
   width: 24px;
-  margin-right: 16px;
 `;
 
 type LayoutProps = {

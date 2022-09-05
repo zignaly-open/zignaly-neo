@@ -20,6 +20,7 @@ import Typography from "../../../components/display/Typography";
 import { ReactComponent as ArrowIcon } from "../../../assets/icons/caret-down-icon.svg";
 import { ReactComponent as SearchIcon } from "../../../assets/icons/search-icon.svg";
 import { SelectorItemFormat, SelectProps, SelectSizes } from "./types";
+import _ from "lodash";
 
 /**
  * @function formatSelectorItem
@@ -141,22 +142,14 @@ function InputSelect({
     }
     if (!searchText || searchText === "") return newOptions;
 
-    return newOptions.filter((option) => {
-      const captionSearch = String(option.ref.caption);
+    if (isSelected) {
+      return newOptions;
+    }
 
-      if (isSelected) {
-        return option;
-      }
-
-      if (
-        !searchText.trim().length &&
-        !(captionSearch.toLowerCase().indexOf(searchText.toLowerCase()) > -1) &&
-        !(String(name.toLowerCase()).indexOf(searchText.toLowerCase()) > -1)
-      ) {
-        return null;
-      }
-      return option;
-    });
+    return _.filter(
+      newOptions,
+      (option) => option.ref.caption.toLowerCase().indexOf(searchText.toLowerCase()) > -1,
+    );
   }, [options, isSelected, showingCount, searchText]);
 
   /**

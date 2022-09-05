@@ -45,8 +45,6 @@ function DepositModal({
     [coins],
   );
 
-  console.log({ coin, network });
-
   return (
     <Modal
       {...props}
