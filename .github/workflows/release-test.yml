@@ -12,8 +12,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Configure deployment folder
         run: |
-          sed -i -e 's/{directory}/${{ secrets.TEST_RELEASE_DIR }}/g' appspec.yml
-          sed -i -e 's/{directory}/${{ secrets.TEST_RELEASE_DIR }}/g' scripts/after_install.sh
+          sed -i -e 's/{directory}/test/g' appspec.yml
+          sed -i -e 's/{directory}/test/g' scripts/after_install.sh
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
