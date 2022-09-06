@@ -1,11 +1,11 @@
-name: Preprod Release
+name: Test Release
 on:
   push:
     branches:
-      - master
+      - prod-preparation
 jobs:
   build:
-    name: Webapp Proprod Release
+    name: Webapp Test Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

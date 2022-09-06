@@ -2,7 +2,7 @@ name: Prod Release
 on:
   push:
     branches:
-      - prod-preparation
+      - release
 jobs:
   build:
     name: Webapp Prod Release
