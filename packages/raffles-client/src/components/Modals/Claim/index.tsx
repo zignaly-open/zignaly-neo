@@ -17,7 +17,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
     user: { discordName, publicAddress },
   } = useCurrentUser();
 
-  const [success, setSuccess] = useState(false);
+  const [success, setSuccess] = useState(auction.userBid?.isClaimed);
   const [claim, { loading }] = useMutation(CLAIM, {
     refetchQueries: [{ query: GET_AUCTIONS }],
   });
