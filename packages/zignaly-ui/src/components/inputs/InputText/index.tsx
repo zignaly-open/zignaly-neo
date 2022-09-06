@@ -64,27 +64,27 @@ function InputText(
    * @description Invoke when the user wants to copy the input value to the clipboard.
    */
   const handleCopyToClipboard = useCallback(async () => {
-    let value = "";
+    const value = inputValue;
+
     if ("clipboard" in navigator) {
-      value = value as string;
-      await navigator.clipboard.writeText(value);
+      await navigator.clipboard.writeText(String(value));
     } else {
       document.execCommand("copy", true, value);
     }
 
     if (!isTextCopied) {
-      onTextCopied(value);
+      onTextCopied(internalValue);
     }
 
     if (copyToClipboardTimer.current) {
       clearTimeout(copyToClipboardTimer.current);
-    } else {
-      setIsTextCopied(true);
-      copyToClipboardTimer.current = setTimeout(() => {
-        setIsTextCopied(false);
-      }, 2000);
     }
-  }, [value, isTextCopied, copyToClipboardTimer]);
+
+    setIsTextCopied(true);
+    copyToClipboardTimer.current = setTimeout(() => {
+      setIsTextCopied(false);
+    }, 2000);
+  }, [inputValue, isTextCopied, copyToClipboardTimer]);
 
   return (
     <Layout withError={!!error} disabled={disabled}>
@@ -118,7 +118,7 @@ function InputText(
             name={name}
           />
         </Side>
-        {copyToClipboard && !String(inputValue).trim().length ? (
+        {copyToClipboard && String(inputValue).trim().length ? (
           <ActionButton onClick={handleCopyToClipboard}>
             {isTextCopied ? (
               <CheckIcon width={"18px"} height={"18px"} color={theme.neutral300} />
