@@ -1,5 +1,5 @@
 {
-  "logo": "Z-Auctions",
+  "logo": "ZIGBids",
   "home": "Home",
   "how-it-works": "How it works",
   "get-funds": "Deposit funds",
@@ -14,6 +14,6 @@
   "deposit": "Deposit",
   "insert-code": "Insert Code",
   "transfer-coin": "Transfer {{coin}}",
-  "auction": "Z-Auctions",
+  "auction": "ZIGBids",
   "cancel": "Cancel"
 }
