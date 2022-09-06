@@ -1,9 +1,0 @@
-config:
-  target: 'https://zauctions-test.zignaly.com' # default target
-  phases:
-    - arrivalRate: 50
-      duration: 600
-scenarios:
-  - flow:
-      - get:
-          url: '/'
