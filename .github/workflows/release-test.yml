@@ -2,7 +2,7 @@ name: Test Release
 on:
   push:
     branches:
-      - prod-preparation
+      - master
 jobs:
   build:
     name: Webapp Test Release
