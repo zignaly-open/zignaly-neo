@@ -18,7 +18,6 @@ import {
 import { mock } from '../../util/mock-cybavo-wallet';
 import { zignalySystemId } from '../../../config';
 import { TransactionType } from '../../types';
-import { AUCTION_FEE } from './constants';
 describe('Auctions', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
@@ -86,7 +85,7 @@ describe('Auctions', () => {
     expect(body2.data.bid.userBid.value).toBe('102');
     expect(mock.history.post[1].data).toBe(
       JSON.stringify({
-        amount: AUCTION_FEE,
+        amount: auction.bidFee,
         fees: '0',
         currency: 'ZIG',
         user_id: alice.publicAddress,
@@ -181,7 +180,7 @@ describe('Auctions', () => {
       2,
       'BALANCE_CHANGED',
       expect.objectContaining({
-        balanceChanged: expect.objectContaining({ balance: '299.99' }),
+        balanceChanged: expect.objectContaining({ balance: '299' }),
       }),
     );
   });
