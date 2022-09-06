@@ -3,11 +3,8 @@ os: linux
 files:
     - source: /
       destination: /zignaly/{directory}/deploy
+file_exists_behavior: OVERWRITE
 hooks:
-    BeforeInstall:
-        - location: scripts/prepare_release.sh
-          timeout: 300
-          runas: root
     AfterInstall:
         - location: scripts/after_install.sh
           runas: root
