@@ -54,7 +54,7 @@ const LoginForm: React.FC = () => {
             <InputText
               id={'login__username'}
               label={t('login-form.inputText.email.label') + ':'}
-              placeholder={''}
+              placeholder={t('login-form.inputText.email.label')}
               disabled={loggingIn}
               error={t(errors.email?.message)}
               {...field}
@@ -76,7 +76,7 @@ const LoginForm: React.FC = () => {
                 text: t('login-form.inputText.password.labelForgot'),
                 onClick: () => navigate(ROUTE_FORGOT_PASSWORD),
               }}
-              placeholder={''}
+              placeholder={t('login-form.inputText.password.label')}
               disabled={loggingIn}
               error={t(errors.password?.message)}
               {...field}
