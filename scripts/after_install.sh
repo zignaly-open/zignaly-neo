@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEPLOYMENTPATH="{directory}"
+DEPLOYMENTPATH="/zignaly/{directory}"
 
 cd $DEPLOYMENTPATH
 sudo yarn --scope=@zignaly-open/raffles-client --include-dependencies
