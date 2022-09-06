@@ -18,9 +18,11 @@ import {
   ROUTE_SIGNUP,
   ROUTE_STAKING,
   ROUTE_ZIGPAD,
+  ROUTE_MY_BALANCES,
 } from './routes';
 
 import { useIsAuthenticated } from './features/auth/use';
+import MyBalances from './views/MyBalances';
 
 const AuthenticatedWall: React.FC<{ children: ReactElement }> = ({
   children,
@@ -58,6 +60,9 @@ function Router() {
         </Route>
         <Route path={ROUTE_ZIGPAD}>
           <Route index element={<Zigpad />} />
+        </Route>
+        <Route path={ROUTE_MY_BALANCES}>
+          <Route index element={<MyBalances />} />
         </Route>
 
         <Route path={ROUTE_HELP} element={<TradingServices />} />

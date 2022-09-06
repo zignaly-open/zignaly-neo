@@ -12,7 +12,7 @@ import TextButton from "components/inputs/TextButton";
 import { CoinOption, MyAccountDepositModalProps, NetworkOption } from "../types";
 import ErrorMessage from "components/display/ErrorMessage";
 import { Row } from "utils/row";
-import ZignalyQRCode from "components/display/QRCode";
+import QRCode from "components/display/QRCode";
 
 const MyAccountDepositModal = ({
   coins,
@@ -141,11 +141,11 @@ const MyAccountDepositModal = ({
           </Row>
           <Gap gap={28} />
           {depositMemo === "" ? (
-            <ZignalyQRCode url={network?.url} />
+            <QRCode value={network?.url} />
           ) : (
             <Row justifyContent="center" gap={97}>
-              <ZignalyQRCode label={coin?.caption + " Address"} url={network?.url} />
-              <ZignalyQRCode label={coin?.caption + " Memo/Tag"} url={network?.depositMemo} />
+              <QRCode label={coin?.caption + " Address"} value={network?.url} />
+              <QRCode label={coin?.caption + " Memo/Tag"} value={network?.depositMemo} />
             </Row>
           )}
         </>

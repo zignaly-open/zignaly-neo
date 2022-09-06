@@ -7,7 +7,7 @@ export enum LevelEnum {
 
 export type QRCodeProps = {
   label?: string | null;
-  value: string;
+  value?: string;
   bgColor?: string;
   fgColor?: string;
   size?: number;

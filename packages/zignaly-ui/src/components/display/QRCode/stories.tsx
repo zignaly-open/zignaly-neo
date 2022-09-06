@@ -1,15 +1,15 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
-import ZignalyQRCode from ".";
+import QRCode from ".";
 
 export default {
   title: "Display/QRCode",
-  component: ZignalyQRCode,
-} as ComponentMeta<typeof ZignalyQRCode>;
+  component: QRCode,
+} as ComponentMeta<typeof QRCode>;
 
-const Template: ComponentStory<typeof ZignalyQRCode> = (args) => <ZignalyQRCode {...args} />;
+const Template: ComponentStory<typeof QRCode> = (args) => <QRCode {...args} />;
 
 export const QRCodeExample = Template.bind({});
 QRCodeExample.args = {
-  url: "www.zignaly.com",
+  value: "www.zignaly.com",
 };
