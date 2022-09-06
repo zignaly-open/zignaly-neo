@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
     - source: /
-      destination: /zignaly
+      destination: {directory}
 
 hooks:
     AfterInstall:
