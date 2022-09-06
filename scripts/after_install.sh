@@ -6,5 +6,6 @@ cd $DEPLOYMENTPATH/deploy
 sudo yarn --scope=@zignaly-open/raffles-client --include-dependencies
 sudo yarn lerna run build --scope=@zignaly-open/raffles-client --include-dependencies
 
+cd ..
 sudo cp -r $DEPLOYMENTPATH/deploy $DEPLOYMENTPATH/temp
 sudo mv -f $DEPLOYMENTPATH/temp $DEPLOYMENTPATH/release
