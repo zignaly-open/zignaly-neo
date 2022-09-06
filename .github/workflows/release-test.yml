@@ -14,6 +14,7 @@ jobs:
         run: |
           sed -i -e 's/{directory}/test/g' appspec.yml
           sed -i -e 's/{directory}/test/g' scripts/after_install.sh
+          sed -i -e 's/{directory}/prod/g' scripts/prepare_release.sh
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
