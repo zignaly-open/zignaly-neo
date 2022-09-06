@@ -117,7 +117,11 @@ const AuctionCard: React.FC<{
                     auction,
                   })
                 }
-                disabled={!canClaim}
+                disabled={
+                  !auction.userBid?.isClaimed &&
+                  auction.maxClaimDate &&
+                  new Date(auction.maxClaimDate) < new Date()
+                }
                 caption={t(
                   auction.maxClaimDate &&
                     new Date(auction.maxClaimDate) < new Date()
