@@ -5,10 +5,9 @@ import {
 import { random } from 'lodash';
 import { sequelize } from '../../db';
 import { Includeable, QueryTypes } from 'sequelize';
-import { zignalySystemId, isTest, payoutSpreadsheetUrl } from '../../../config';
+import { zignalySystemId } from '../../../config';
 import { internalTransfer } from '../../cybavo';
 import { ContextUser, TransactionType } from '../../types';
-import { Payout } from '../payouts/model';
 import { User } from '../users/model';
 import { AUCTION_FEE } from './constants';
 import { Auction, AuctionBid, AuctionBasketItem } from './model';
@@ -17,7 +16,6 @@ import {
   getPayoutPrizeForAuction,
   verifyPositiveBalance,
 } from './util';
-import axios from 'axios';
 
 const AuctionsRepository = () => {
   const lastBidPopulation = {
@@ -176,30 +174,7 @@ const AuctionsRepository = () => {
     return auctions;
   }
 
-  async function performPayout(payout: Payout, title: string): Promise<void> {
-    const { discordName, username } = await User.findByPk(payout.userId);
-    const payload = {
-      discordName,
-      username,
-      projectName: title,
-      publicAddress: payout.publicAddress,
-      id: payout.userId,
-    };
-    if (isTest) return;
-    // TODO: implement error handling. There should be some enum for possible error/success states
-    await axios
-      .post(payoutSpreadsheetUrl, payload)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((e) => {
-        console.error(e.response);
-        throw new Error('Error saving data');
-      });
-  }
-
   return {
-    performPayout,
     getAuctions,
     getSortedAuctionBids,
     findAuction,

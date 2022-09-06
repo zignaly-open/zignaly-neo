@@ -17,7 +17,6 @@ export const abi = IERC20;
 export const graphqlPath = process.env.GRAPHQL_PATH || '/graphql';
 export const isTest = process.env.NODE_ENV === 'test';
 export const port = process.env.PORT || 4000;
-export const payoutSpreadsheetUrl = process.env.REACT_APP_SHEET_BEST_URL;
 export const zignalyAPI = process.env.ZIGNALY_API || 'http://test.local';
 export const zignalyAPIPublicKey =
   process.env.ZIGNALY_API_PUBLIC_KEY || '123abc';
