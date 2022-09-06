@@ -19,6 +19,7 @@ export type AuctionType = {
   id: number;
   title: string;
   description: string;
+  claimSuccess: string;
   basketItems: BasketItem[];
   monetaryValue?: string;
   numberOfWinners?: number;

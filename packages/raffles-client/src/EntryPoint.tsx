@@ -81,7 +81,7 @@ const client = new ApolloClient({
               if (res?.me.id.toString() === incomingUserId.toString()) {
                 return incoming;
               }
-              // Keep the previous userBid although an user outbid the current user, so userBid.position is
+              // Keep the previous userBid although a user outbid the current user, so userBid.position is
               // outdated, but the rest is good.
               return existing;
             },

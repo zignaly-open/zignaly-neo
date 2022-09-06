@@ -24,6 +24,7 @@ export const GET_AUCTIONS = gql`
       discord
       bidFee
       description
+      claimSuccess
       imageUrl
       startingBid
       numberOfWinners
