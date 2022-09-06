@@ -28,7 +28,6 @@ function AuthVerifyModal({
   onSuccess: () => void;
   onFailure: ({ message }: { message: string }) => void;
 } & DialogProps): React.ReactElement {
-  // Hooks
   const { t } = useTranslation(['auth', 'error']);
   const { ask2FA, disabled, emailUnconfirmed, isUnknownDevice } = user;
   const [submit2FA, status2FA] = useVerify2FA();
@@ -37,8 +36,8 @@ function AuthVerifyModal({
   const verifyUnknown = useVerifyEmail();
   const verifyKnown = useVerifyEmailKnownDevice();
 
-  const [verify, verifyStatus] = isUnknownDevice ? verifyUnknown : verifyKnown;
-  const [resend, resendStatus] = isUnknownDevice ? resendUnknown : resendKnown;
+  const [verify, verifyStatus] = disabled ? verifyUnknown : verifyKnown;
+  const [resend, resendStatus] = disabled ? resendUnknown : resendKnown;
 
   const texts = useMemo(() => {
     let title = '';
