@@ -127,7 +127,7 @@ const AuctionCard: React.FC<{
                     new Date(auction.maxClaimDate) < new Date()
                     ? 'ended'
                     : auction.userBid?.isClaimed
-                    ? 'claimed'
+                    ? 'instructions'
                     : 'claim-now',
                 )}
                 bottomElement={
