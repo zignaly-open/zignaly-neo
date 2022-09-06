@@ -1,9 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import NumberFormat from 'react-number-format';
 import { useTheme } from 'styled-components';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
 import {
   Actions,
@@ -23,7 +22,6 @@ import {
   PlusIcon,
   SliderInput,
   TextButton,
-  Toaster,
   Typography,
 } from '@zignaly-open/ui';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
@@ -37,6 +35,7 @@ import {
 } from '../../../../use';
 import { EditFormData, EditInvestmentFormProps } from './types';
 import { EditInvestmentViews } from '../../types';
+import { useToast } from '../../../../../../util/hooks/useToast';
 
 const invertPercent = (v: number | string): number => 100 - +v;
 
@@ -78,18 +77,9 @@ function EditInvestmentForm({
     resolver: isInputEnabled ? yupResolver(EditInvestmentValidation) : null,
   });
 
-  const openBlockedToast = useCallback(() => {
-    toast(
-      <Toaster
-        variant={'error'}
-        caption={t('edit-investment.error-blockedInvestment')}
-      />,
-      {
-        type: 'error',
-        icon: false,
-      },
-    );
-  }, []);
+  const toast = useToast();
+  const openBlockedToast = () =>
+    toast.error(t('edit-investment.error-blockedInvestment'));
 
   const isLoading = isEditingPercent || isEditingInvestment;
   const canSubmit = isValid && Object.keys(errors).length === 0;
@@ -101,22 +91,12 @@ function EditInvestmentForm({
         serviceId,
         amount: values?.amountTransfer?.value,
       });
-      toast(
-        <Toaster
-          variant={'success'}
-          caption={t(
-            'edit-investment:edit-investment.addMoreInvestmentSuccess',
-            {
-              amount: values?.amountTransfer?.value,
-              currency: values?.amountTransfer?.token?.id,
-              serviceName,
-            },
-          )}
-        />,
-        {
-          type: 'error',
-          icon: false,
-        },
+      toast.success(
+        t('edit-investment:edit-investment.addMoreInvestmentSuccess', {
+          amount: values?.amountTransfer?.value,
+          currency: values?.amountTransfer?.token?.id,
+          serviceName,
+        }),
       );
       refetchDetails();
       setView(EditInvestmentViews.EditInvestmentSuccess);
@@ -125,17 +105,8 @@ function EditInvestmentForm({
         profitPercentage: invertPercent(values.profitPercentage),
         serviceId,
       });
-      toast(
-        <Toaster
-          variant={'success'}
-          caption={t(
-            'edit-investment:edit-investment.percentageChangedSuccess',
-          )}
-        />,
-        {
-          type: 'error',
-          icon: false,
-        },
+      toast.success(
+        t('edit-investment:edit-investment.percentageChangedSuccess'),
       );
       refetchDetails();
       close();

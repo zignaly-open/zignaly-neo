@@ -4,12 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Grid } from '@mui/material';
 import { WithdrawActions } from '../../styles';
-import {
-  Button,
-  InputAmountAdvanced,
-  SliderInput,
-  Toaster,
-} from '@zignaly-open/ui';
+import { Button, InputAmountAdvanced, SliderInput } from '@zignaly-open/ui';
 import BigNumber from 'bignumber.js';
 import {
   useCurrentBalance,
@@ -19,13 +14,14 @@ import {
 import { EditInvestmentValidation } from './validations';
 import { WithdrawFormData } from './types';
 import { ChangeViewFn, EditInvestmentViews } from '../../types';
-import { toast } from 'react-toastify';
+import { useToast } from '../../../../../../util/hooks/useToast';
 
 const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   const coin = useCurrentBalance();
   const { isLoading, withdraw } = useWithdrawInvestment();
   const { serviceId } = useSelectedInvestment();
   const { t } = useTranslation('withdraw');
+  const toast = useToast();
   const {
     handleSubmit,
     control,
@@ -54,17 +50,8 @@ const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
       amount: values.amountTransfer?.value,
       serviceId,
     });
-
-    // TODO: error handling
-    toast(
-      <Toaster
-        variant={'success'}
-        caption={t('edit-investment:edit-investment.withdrawInvestmentSuccess')}
-      />,
-      {
-        type: 'error',
-        icon: false,
-      },
+    toast.success(
+      t('edit-investment:edit-investment.withdrawInvestmentSuccess'),
     );
     setView(EditInvestmentViews.WithdrawSuccess);
   };
