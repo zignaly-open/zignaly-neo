@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { CoinDetail, CoinNetwork } from '../../../../types';
-import { ErrorMessage, InputText, Loader, QRCode } from '@zignaly-open/ui';
+import {
+  ErrorMessage,
+  InputText,
+  Loader,
+  QRCode,
+  Toaster,
+} from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { Field } from '../../styles';
 import { useDepositInfo } from '../../../../use';
+import { toast } from 'react-toastify';
 
 const DepositInfo = ({
   coin,
@@ -15,6 +22,19 @@ const DepositInfo = ({
   const { t } = useTranslation('deposit-crypto');
   const { data, isLoading } = useDepositInfo(coin.id, network.network);
   const depositTag = data && data.tag.trim().length ? data.tag : null;
+
+  const handleCopiedText = useCallback(() => {
+    toast(
+      <Toaster
+        variant={'success'}
+        caption={t('deposit-crypto.copy-to-clipboard.address')}
+      />,
+      {
+        type: 'error',
+        icon: false,
+      },
+    );
+  }, [t]);
 
   return network && !network.depositEnable ? (
     <ErrorMessage text={network.depositDesc} />
@@ -37,6 +57,7 @@ const DepositInfo = ({
               value={isLoading || !network ? '' : data?.address ?? ''}
               readOnly={true}
               copyToClipboard={true}
+              onTextCopied={handleCopiedText}
               placeholder={
                 isLoading
                   ? t('deposit-crypto.depositAddress.loading')

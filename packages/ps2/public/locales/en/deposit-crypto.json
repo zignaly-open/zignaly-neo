@@ -28,6 +28,9 @@
     "depositQR": {
       "address": "{{coin}} Address",
       "memo": "{{coin}} MEMO/Tag"
+    },
+    "copy-to-clipboard": {
+      "address": "Address copied to the clipboard."
     }
   }
 }
