@@ -60,6 +60,7 @@ export const Container = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  box-sizing: border-box;
 `;
 
 export const LeftElement = styled.div`

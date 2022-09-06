@@ -112,17 +112,18 @@ export const resolvers = {
         throw new Error('Could not make a claim');
       }
 
-      const payout = await Payout.create({
+      await Payout.create({
         auctionId: id,
         userId: user.id,
         publicAddress: user.publicAddress,
       });
 
-      const [, [updatedAuction]] = await Promise.all([
-        AuctionsRepository.performPayout(payout, auction.title),
-        AuctionsRepository.getAuctions(auction.id, user),
-        emitBalanceChanged(user),
-      ]);
+      const [updatedAuction] = await AuctionsRepository.getAuctions(
+        auction.id,
+        user,
+      );
+      emitBalanceChanged(user);
+
       return updatedAuction;
     },
   },
