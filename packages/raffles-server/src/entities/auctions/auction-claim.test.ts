@@ -41,7 +41,7 @@ describe('Auction Claims', () => {
     expect(claim.userBid.isClaimed).toBe(true);
     const claimedAuction = await getFirstAuction(aliceToken);
     expect(claimedAuction.userBid.isClaimed).toBe(true);
-    expect(await getUserBalance(alice.publicAddress)).toBe('198.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('198');
   });
 
   it('should make all winners pay final bid price', async () => {
@@ -65,17 +65,17 @@ describe('Auction Claims', () => {
     expect(claim.userBid.isClaimed).toBe(true);
     const claimedAuction = await getFirstAuction(aliceToken);
     expect(claimedAuction.userBid.isClaimed).toBe(true);
-    expect(await getUserBalance(alice.publicAddress)).toBe('197.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('197');
 
     await claimAuction(auction, bobToken);
-    expect(await getUserBalance(bob.publicAddress)).toBe('197.99');
+    expect(await getUserBalance(bob.publicAddress)).toBe('197');
   });
 
   it('should not let claim unwon auctions', async () => {
     const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
     await makeBid(auction, aliceToken);
-    expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('299');
 
     for (let i = 0; i < 10; i++) {
       const [, randomUserToken] = await createRandomUser(10);
@@ -91,7 +91,7 @@ describe('Auction Claims', () => {
     expect(errors.length).toBe(1);
     const claimedAuction = await getFirstAuction(aliceToken);
     expect(claimedAuction.userBid.isClaimed).toBe(false);
-    expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('299');
   });
 
   it('should not let claim multiple times', async () => {
@@ -104,7 +104,7 @@ describe('Auction Claims', () => {
       body: { errors },
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
-    expect(await getUserBalance(alice.publicAddress)).toBe('198.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('198');
   });
 
   it('should not let claim unfinished auctions', async () => {
@@ -116,7 +116,7 @@ describe('Auction Claims', () => {
       body: { errors },
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
-    expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('299');
   });
 
   it('should not let claim auctions after max claim', async () => {
@@ -130,7 +130,7 @@ describe('Auction Claims', () => {
       body: { errors },
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
-    expect(await getUserBalance(alice.publicAddress)).toBe('299.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('299');
   });
 
   it('should not let claim without enough money', async () => {
@@ -142,7 +142,7 @@ describe('Auction Claims', () => {
       body: { errors },
     } = await claimAuction(auction, aliceToken);
     expect(errors.length).toBe(1);
-    expect(await getUserBalance(alice.publicAddress)).toBe('99.99');
+    expect(await getUserBalance(alice.publicAddress)).toBe('99');
   });
 
   it('should not claim if cybavo transfer fails', async () => {
