@@ -2,10 +2,8 @@ version: 0.0
 os: linux
 files:
     - source: /
-      destination: /zignaly
-      overwrite: true
+      destination: {directory}
 file_exists_behavior: OVERWRITE
-
 hooks:
     AfterInstall:
         - location: scripts/after_install.sh

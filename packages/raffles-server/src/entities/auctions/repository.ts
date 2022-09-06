@@ -9,7 +9,6 @@ import { zignalySystemId } from '../../../config';
 import { internalTransfer } from '../../cybavo';
 import { ContextUser, TransactionType } from '../../types';
 import { User } from '../users/model';
-import { AUCTION_FEE } from './constants';
 import { Auction, AuctionBid, AuctionBasketItem } from './model';
 import {
   getMinRequiredBidForAuction,
@@ -51,7 +50,7 @@ const AuctionsRepository = () => {
       const txPromise = internalTransfer(
         user.publicAddress,
         zignalySystemId,
-        AUCTION_FEE,
+        auction.bidFee,
         TransactionType.Fee,
       ).then((tx) => {
         if (!tx.transaction_id) throw new Error('Transaction error');
