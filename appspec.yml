@@ -3,8 +3,7 @@ os: linux
 files:
     - source: /
       destination: {directory}
-      overwrite: true
-      file_exists_behavior: OVERWRITE
+file_exists_behavior: OVERWRITE
 hooks:
     AfterInstall:
         - location: scripts/after_install.sh
