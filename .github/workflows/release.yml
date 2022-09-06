@@ -28,6 +28,6 @@ jobs:
           codedeploy_group: zignaly-raffles-prod
           codedeploy_register_only: false
           s3_bucket: ${{ secrets.AWS_S3_BUCKET }}
-          s3_folder: dev
+          s3_folder: prod
           max_polling_iterations: 60
           directory: .
