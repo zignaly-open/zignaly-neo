@@ -28,6 +28,7 @@ export type ButtonProps = {
   href?: string;
   id?: string;
   rel?: string;
+  type?: "button" | "submit";
   target?: string;
   loading?: boolean;
   tabIndex?: number;
