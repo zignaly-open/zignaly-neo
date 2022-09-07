@@ -72,9 +72,6 @@ function AuthVerifyModal({
         );
       } else {
         title = t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-title');
-        description = t(
-          'auth-verify-modal.isNotDisabled.ask2FA.twoFA-description',
-        );
       }
     } else {
       if (emailUnconfirmed) {

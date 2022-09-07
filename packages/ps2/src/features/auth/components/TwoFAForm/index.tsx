@@ -14,7 +14,9 @@ function TwoFAForm({
   return (
     <Layout>
       <Field>
-        <Typography variant={'body1'}>{t('login-form.twoFA-title')}</Typography>
+        <Typography variant={'body1'}>
+          {t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-description')}
+        </Typography>
         <InputCode
           fields={6}
           error={error}
