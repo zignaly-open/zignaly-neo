@@ -47,11 +47,11 @@ function AuthVerifyModal({
 
   useEffect(() => {
     status2FA.isError && toast.error(t('error:error.wrong-code'));
-  }, [status2FA.isError]);
+  }, [!!status2FA.isError]);
 
   useEffect(() => {
     verifyStatus.isError && toast.error(t('error:error.wrong-code'));
-  }, [verifyStatus.isError]);
+  }, [!!verifyStatus.isError]);
 
   const texts = useMemo(() => {
     let title = '';
