@@ -23,6 +23,7 @@ function TextButton({
   className,
   tabIndex,
   color = "links",
+  type = "button",
   variant = "h4",
 }: ButtonProps): ReactElement {
   return (
@@ -30,6 +31,7 @@ function TextButton({
       className={className}
       color={color}
       id={id}
+      type={type}
       isLoading={loading}
       withElements={!!leftElement || !!rightElement}
       onClick={!disabled && onClick}

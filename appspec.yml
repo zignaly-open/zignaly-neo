@@ -7,5 +7,5 @@ file_exists_behavior: OVERWRITE
 hooks:
     AfterInstall:
         - location: scripts/after_install.sh
-          runas: root
+          runas: admin
           timeout: 1200

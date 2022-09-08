@@ -15,6 +15,7 @@ import {
   useVerifyEmail,
   useVerifyEmailKnownDevice,
 } from '../../use';
+import { useToast } from '../../../../util/hooks/useToast';
 
 function AuthVerifyModal({
   user,
@@ -30,14 +31,27 @@ function AuthVerifyModal({
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation(['auth', 'error']);
   const { ask2FA, disabled, emailUnconfirmed, isUnknownDevice } = user;
-  const [submit2FA, status2FA] = useVerify2FA();
   const resendUnknown = useResendCode();
   const resendKnown = useResendKnownDeviceCode();
   const verifyUnknown = useVerifyEmail();
   const verifyKnown = useVerifyEmailKnownDevice();
+  const [submit2FA, status2FA] = useVerify2FA();
+  const toast = useToast();
 
   const [verify, verifyStatus] = disabled ? verifyUnknown : verifyKnown;
   const [resend, resendStatus] = disabled ? resendUnknown : resendKnown;
+
+  const performResend = () => {
+    resend().then(() => toast.success(t('auth:resend-code')));
+  };
+
+  useEffect(() => {
+    status2FA.isError && toast.error(t('error:error.wrong-code'));
+  }, [!!status2FA.isError]);
+
+  useEffect(() => {
+    verifyStatus.isError && toast.error(t('error:error.wrong-code'));
+  }, [!!verifyStatus.isError]);
 
   const texts = useMemo(() => {
     let title = '';
@@ -57,7 +71,7 @@ function AuthVerifyModal({
           'auth-verify-modal.isNotDisabled.ask2FA.isUnknownDevice-title',
         );
       } else {
-        title = t('auth-verify-modal.isNotDisabled.ask2FA.else-title');
+        title = t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-title');
       }
     } else {
       if (emailUnconfirmed) {
@@ -120,7 +134,7 @@ function AuthVerifyModal({
             <EmailVerifyForm
               clearOnError
               onSubmit={(code) => verify({ code })}
-              onReSendCode={() => resend()}
+              onReSendCode={performResend}
               error={verifyStatus.isError ? t('error:error.wrong-code') : null}
               isReSendLoading={resendStatus.isLoading}
               isLoading={verifyStatus.isLoading}

@@ -7,6 +7,7 @@ import {
   GET_CURRENT_USER,
   GET_OR_CREATE_USER,
   AUTHENTICATE_METAMASK,
+  GET_CURRENT_USER_BALANCE,
 } from 'queries/users';
 import { GET_AUCTIONS } from 'queries/auctions';
 
@@ -69,7 +70,7 @@ export default function useAuthenticate(): () => Promise<void> {
     });
     setToken(accessToken);
     await client.refetchQueries({
-      include: [GET_CURRENT_USER, GET_AUCTIONS],
+      include: [GET_CURRENT_USER, GET_CURRENT_USER_BALANCE, GET_AUCTIONS],
     });
   }
 

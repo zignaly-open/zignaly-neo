@@ -1,5 +1,5 @@
 import { IconButton, BrandImage, UserIcon, WalletIcon } from '@zignaly-open/ui';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import { Header as ZIGHeader, Button } from '@zignaly-open/ui';
@@ -8,8 +8,10 @@ import ConnectWalletModal from '../Modals/ConnectWallet';
 import { useModal } from 'mui-modal-provider';
 import UserBalance from './UserBalance';
 import TransferZigModal from 'components/Modals/TransferZig';
+import SwitchAccountModal from 'components/Modals/SwitchAccount';
 import Menu from './Menu';
 import { Box } from '@mui/system';
+import { useEthers } from '@usedapp/core';
 
 const StyledWalletIcon = styled(WalletIcon)`
   color: ${({ theme }) => theme.neutral300};
@@ -29,6 +31,18 @@ const Header = () => {
   const { t } = useTranslation('global');
   const { user: currentUser, loading } = useCurrentUser();
   const { showModal } = useModal();
+  const { account } = useEthers();
+
+  useEffect(() => {
+    if (
+      account &&
+      currentUser &&
+      account.toLowerCase() !== currentUser.publicAddress.toLowerCase()
+    ) {
+      // User changed MM account, ask to disconnect
+      showModal(SwitchAccountModal);
+    }
+  }, [account]);
 
   return (
     <ZIGHeader
