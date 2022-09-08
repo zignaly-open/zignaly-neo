@@ -1,5 +1,10 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { TraderService } from './types';
+import {
+  Investor,
+  TraderService,
+  TraderServiceFull,
+  TraderServiceManagement,
+} from './types';
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
@@ -11,16 +16,29 @@ export const api = createApi({
         url: 'services/list',
       }),
     }),
-    traderService: builder.query<TraderService, string>({
+    traderServiceDetails: builder.query<TraderServiceFull, string>({
       query: (id) => ({
         url: `services/${id}`,
+      }),
+    }),
+    traderServiceManagement: builder.query<TraderServiceManagement, string>({
+      query: (id) => ({
+        url: `services/${id}/management`,
+      }),
+    }),
+    traderServiceInvestors: builder.query<Investor[], string>({
+      query: (id) => ({
+        url: `services/${id}/investors`,
       }),
     }),
   }),
 });
 
 export const {
-  useTraderServiceQuery,
+  useTraderServiceInvestorsQuery,
+  useLazyTraderServiceInvestorsQuery,
+  useTraderServiceDetailsQuery,
+  useTraderServiceManagementQuery,
   useLazyTraderServicesQuery,
   useTraderServicesQuery,
 } = api;

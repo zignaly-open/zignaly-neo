@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
 import { supportedLanguages } from '../../../util/i18next';
 import { useChangeLocale } from '../../auth/use';
-import { useActiveTradingService } from '../../trader/use';
+import { useTraderServices } from '../../trader/use';
 import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_HELP, ROUTE_TRADING_SERVICE_MANAGE } from '../../../routes';
 
@@ -28,7 +28,7 @@ const ExtraNavigationDropdown: React.FC = () => {
   }, [dropDownRef]);
 
   const changeLocale = useChangeLocale();
-  const { service } = useActiveTradingService();
+  const { data } = useTraderServices();
 
   const onSelectLocale = (locale: string) => {
     changeLocale(locale);
@@ -54,9 +54,9 @@ const ExtraNavigationDropdown: React.FC = () => {
             <Link
               onClick={onClose}
               to={
-                service
+                data?.[0]
                   ? generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-                      serviceId: service?.serviceId?.toString(),
+                      serviceId: data[0].serviceId?.toString(),
                     })
                   : ROUTE_HELP
               }

@@ -1,11 +1,10 @@
 import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLocation } from 'react-router';
 import { MarginContainer, MenuDropDown, Typography } from '@zignaly-open/ui';
 import { Layout, Container, Options, Option } from './styles';
-import { useActiveTradingService, useTraderServices } from '../../use';
+import { useTraderServices } from '../../use';
 import { TraderService } from '../../types';
-import { generatePath, Link, useParams } from 'react-router-dom';
+import { generatePath, Link, useParams, useLocation } from 'react-router-dom';
 import { RouteDropdown, RouteGroup } from './atoms';
 import {
   ROUTE_TRADING_SERVICE_API,
@@ -26,7 +25,9 @@ function ServiceHeader() {
   const currentPath = useLocation()?.pathname;
 
   const { data: myServicesList } = useTraderServices();
-  const { service: activeService } = useActiveTradingService();
+  const activeService = myServicesList?.find(
+    (s: TraderService) => s.serviceId === serviceId,
+  );
 
   useEffect(() => {
     if (menuDropDownRef && menuDropDownRef.current) {

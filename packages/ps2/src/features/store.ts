@@ -12,7 +12,7 @@ const persistConfig = {
   key: 'root',
   storage,
   // TODO: maybe we should actually leverage cache
-  blacklist: ['authApi', 'dashboardApi'] as string[],
+  blacklist: ['authApi', 'dashboardApi', 'traderApi'] as string[],
 };
 
 export const store = configureStore({

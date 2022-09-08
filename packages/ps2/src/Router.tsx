@@ -87,7 +87,10 @@ function Router() {
           <Route index element={<TradingServicesInfo />} />
           <Route path={ROUTE_TRADING_SERVICE_MANAGE} element={<Management />} />
           <Route
-            path={ROUTE_TRADING_SERVICE_INVESTORS}
+            path={ROUTE_TRADING_SERVICE_INVESTORS.replace(
+              ROUTE_TRADING_SERVICE + '/',
+              '',
+            )}
             element={<Investors />}
           />
           <Route
