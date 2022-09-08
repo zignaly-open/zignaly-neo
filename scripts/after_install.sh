@@ -6,7 +6,7 @@ DEPLOYMENTPATH="/zignaly/{directory}"
 # mv $DEPLOYMENTPATH/deploy $DEPLOYMENTPATH/temp
 
 # Build
-# cd $DEPLOYMENTPATH/temp
+cd $DEPLOYMENTPATH
 yarn --scope=@zignaly-open/raffles-client --include-dependencies
 yarn run build --scope=@zignaly-open/raffles-client --include-dependencies
 
