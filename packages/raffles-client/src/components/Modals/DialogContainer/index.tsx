@@ -29,9 +29,11 @@ function DialogContainer({ title, children, ...props }: DialogContainerProps) {
         <Typography variant='h1' color='neutral100' weight='medium'>
           {title}
         </Typography>
-        <CloseButton onClick={(e) => props.onClose(e, 'backdropClick')}>
-          <StyledCloseIcon />
-        </CloseButton>
+        {props.onClose && (
+          <CloseButton onClick={(e) => props.onClose(e, 'backdropClick')}>
+            <StyledCloseIcon />
+          </CloseButton>
+        )}
       </DialogTitle>
       <DialogContent>{children}</DialogContent>
     </Dialog>
