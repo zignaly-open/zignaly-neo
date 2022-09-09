@@ -37,6 +37,6 @@ export const BulletPointItem = styled('li')`
   }
 `;
 
-export const LinkBox = styled.a`
+export const LinkBox = styled('a')`
   padding: 10px;
 `;
