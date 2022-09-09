@@ -16,10 +16,9 @@ const SwitchAccount = (props: SwitchAccountProps) => {
 
   useEffect(() => {
     if (
+      !account ||
       !user ||
-      (account &&
-        user &&
-        account.toLowerCase() === user.publicAddress.toLowerCase())
+      account.toLowerCase() === user.publicAddress.toLowerCase()
     ) {
       // Close once disconnected or switched back to correct address
       props.onClose(null, 'escapeKeyDown');

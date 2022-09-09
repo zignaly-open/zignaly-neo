@@ -12,9 +12,15 @@ import SwitchAccountModal from 'components/Modals/SwitchAccount';
 import Menu from './Menu';
 import { Box } from '@mui/system';
 import { useEthers } from '@usedapp/core';
+import { useLogout } from 'hooks/useAuthenticate';
 
 const StyledWalletIcon = styled(WalletIcon)`
   color: ${({ theme }) => theme.neutral300};
+`;
+
+const StickyHeader = styled(ZIGHeader)`
+  position: sticky !important;
+  margin: -8px;
 `;
 
 const MenuButton = styled(IconButton)`
@@ -32,9 +38,13 @@ const Header = () => {
   const { user: currentUser, loading } = useCurrentUser();
   const { showModal } = useModal();
   const { account } = useEthers();
+  const logout = useLogout();
 
   useEffect(() => {
-    if (
+    if (!account && currentUser) {
+      // Disconnected from MM
+      logout();
+    } else if (
       account &&
       currentUser &&
       account.toLowerCase() !== currentUser.publicAddress.toLowerCase()
@@ -45,7 +55,7 @@ const Header = () => {
   }, [account]);
 
   return (
-    <ZIGHeader
+    <StickyHeader
       leftElements={[
         <BrandImage
           key={'logo2'}

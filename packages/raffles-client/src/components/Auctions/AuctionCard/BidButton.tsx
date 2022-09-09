@@ -10,6 +10,8 @@ import { onboardingContext } from '../../../contexts/Onboarding';
 import { Button } from '@zignaly-open/ui';
 import { BID_AUCTION } from 'queries/auctions';
 import { showToast } from 'util/showToast';
+import { useModal } from 'mui-modal-provider';
+import NotEnoughZIGModal from 'components/Modals/NotEnoughZIG';
 
 enum BidButtonState {
   NotLoggedIn,
@@ -30,6 +32,7 @@ const BidButton: React.FC<{
   const { balanceOnboarding } = useContext(onboardingContext);
   const authenticate = useAuthenticate();
   const { t } = useTranslation('auction');
+  const { showModal } = useModal();
 
   const state = useMemo(() => {
     if (auction.comingSoon) {
@@ -59,6 +62,7 @@ const BidButton: React.FC<{
         variant: 'error',
         caption: 'Not Enough Funds!',
       });
+      showModal(NotEnoughZIGModal);
     } else {
       bid({
         variables: {
@@ -72,6 +76,7 @@ const BidButton: React.FC<{
 
   return (
     <Button
+      variant={state === BidButtonState.Ended ? 'secondary' : 'primary'}
       size='large'
       loading={isBidding}
       disabled={!isActive}

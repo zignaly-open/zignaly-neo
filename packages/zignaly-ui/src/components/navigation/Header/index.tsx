@@ -8,9 +8,9 @@ import { headerConfig } from "./utils";
 // Styled Components
 import { Container, Layout, Side } from "./styles";
 
-function Header({ leftElements = [], rightElements = [] }: HeaderProps): ReactElement {
+function Header({ leftElements = [], rightElements = [], className }: HeaderProps): ReactElement {
   return (
-    <Layout>
+    <Layout className={className}>
       <Container>
         <Side>{leftElements?.length > 0 && leftElements}</Side>
         <Side>{rightElements?.length > 0 && rightElements}</Side>

@@ -16,11 +16,16 @@ const Layout = styled('div')`
   display: flex;
   gap: 6px;
   padding: 0 10px;
-  height: 38px;
+  height: 28px;
   justify-content: center;
   align-items: center;
   font-weight: 600;
   font-size: 11px;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
 `;
 
 const Balance = styled(Typography)`
