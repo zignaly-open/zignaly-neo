@@ -1,14 +1,25 @@
 import {
+  useLazyTraderServicesQuery,
   useTraderServiceDetailsQuery,
   useTraderServiceInvestorsQuery,
   useTraderServiceManagementQuery,
-  useTraderServicesQuery,
 } from './api';
 import { useDispatch } from 'react-redux';
 import { setActiveServiceId } from './store';
+import { TraderService } from './types';
+import { useCurrentUser } from '../auth/use';
+import { useEffect } from 'react';
 
-export function useTraderServices(): ReturnType<typeof useTraderServicesQuery> {
-  return useTraderServicesQuery();
+export function useTraderServices(): {
+  data: TraderService[];
+  isLoading: boolean;
+} {
+  const [load, { data, isLoading }] = useLazyTraderServicesQuery();
+  const user = useCurrentUser();
+  useEffect(() => {
+    user?.userId && load();
+  }, [user?.userId]);
+  return { data, isLoading };
 }
 
 export function useSetActiveTradingService(): (serviceId: string) => void {
