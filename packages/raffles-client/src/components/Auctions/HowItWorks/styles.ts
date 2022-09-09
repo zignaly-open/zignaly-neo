@@ -22,3 +22,7 @@ export const BulletPointItem = styled.li`
   max-width: 600px;
   margin-right: 25px;
 `;
+
+export const LinkBox = styled.a`
+  padding: 10px;
+`;
