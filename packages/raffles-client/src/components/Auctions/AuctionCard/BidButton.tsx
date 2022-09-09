@@ -72,6 +72,7 @@ const BidButton: React.FC<{
 
   return (
     <Button
+      variant={BidButtonState.Ended ? 'secondary' : 'primary'}
       size='large'
       loading={isBidding}
       disabled={!isActive}
