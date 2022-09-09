@@ -45,6 +45,13 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: "16"
+          cache: 'yarn'
+      - name: Install Lerna
+        run: yarn global add lerna
+      - name: Bootstrap packages
+        run: lerna bootstrap --scope=@zignaly-open/raffles-client
+      - name: Build client
+        run: yarn run build --scope=@zignaly-open/raffles-client --include-dependencies
       - name: AWS CodeDeploy
         uses: sourcetoad/aws-codedeploy-action@v1
         with:
@@ -57,4 +64,5 @@ jobs:
           s3_bucket: ${{ secrets.AWS_S3_BUCKET }}
           s3_folder: dev
           max_polling_iterations: 60
+          excluded_files: '.git/* *node_modules/* packages/ps2/*'
           directory: .
