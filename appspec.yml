@@ -1,12 +1,8 @@
 version: 0.0
 os: linux
 files:
-    - source: /packages/raffles-server
-      destination: /zignaly/{directory}/deploy/packages/server
-    - source: /packages/raffles-client/build
-      destination: /zignaly/{directory}/deploy/packages/client
-    - source: /package.json
-      destination: /zignaly/{directory}/deploy
+    - source: /
+    destination: /zignaly/{directory}/deploy
 file_exists_behavior: OVERWRITE
 hooks:
     AfterInstall:
