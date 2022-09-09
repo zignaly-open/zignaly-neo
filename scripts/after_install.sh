@@ -7,7 +7,7 @@ cd $DEPLOYMENTPATH/deploy/raffles-server
 yarn
 
 # Move client
-rm -rf $DEPLOYMENTPATH/client
+sudo rm -rf $DEPLOYMENTPATH/client
 sudo mv $DEPLOYMENTPATH/deploy/build $DEPLOYMENTPATH/client
 
 # Restart server
