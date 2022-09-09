@@ -1,0 +1,13 @@
+{
+  "input-amount": {
+    "internal-error": {
+      "insufficient-amount": "CHInsufficient funds.",
+      "min-amount": "CHThe minimum amount is {{amount}} {{coin}}"
+    },
+    "button-max": "CHMax",
+    "default": {
+      "label": "CHAmount to Withdraw",
+      "labelBalance": "CHBalance:"
+    }
+  }
+}

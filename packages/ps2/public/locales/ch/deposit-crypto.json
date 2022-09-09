@@ -1,0 +1,33 @@
+{
+  "deposit-crypto": {
+    "title": "CHDeposit Crypto",
+    "description": "CHDeposits may take up to 3 hours to reflect in your balance.",
+    "coinSelector": {
+      "label": "CHCoin:",
+      "placeholder": "CHSearch a coin"
+    },
+    "balances": {
+      "loadingAriaLabel": "CHLoading coin balances",
+      "total": "CHBalance:",
+      "balanceLocked": "CHIn Orders:",
+      "balanceFree": "CHAvailable:"
+    },
+    "networkSelector": {
+      "label": "CHNetwork:",
+      "placeholder": "CHChoose the network"
+    },
+    "depositAddress": {
+      "label": "CHDeposit Address:",
+      "loading": "CHLoading deposit address...",
+      "placeholder": "CHChoose the currency and the network first.",
+      "warning": "CHOnly send {{network}} {{coin}} tokens to this address"
+    },
+    "depositMemo": {
+      "label": "CHDeposit MEMO/Tag:"
+    },
+    "depositQR": {
+      "address": "CH{{coin}} Address",
+      "memo": "CH{{coin}} MEMO/Tag"
+    }
+  }
+}

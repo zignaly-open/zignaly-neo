@@ -1,0 +1,35 @@
+{
+  "coming-soon": {
+    "title": "CHComing Soon",
+    "description": "CHThis section is under development, you will see it available at a later date."
+  },
+  "main-menu": {
+    "dropdown-link-forTrading": "CHFor Trading Services",
+    "dropdown-link-helpDocs": "CHHelp Docs"
+  },
+  "account-menu": {
+    "isAuth-button-logIn": "CHLog in",
+    "isAuth-button-signUp": "CHSIGN UP",
+    "notAuth-dropdown-link-dashboard": "CHMy Dashboard",
+    "notAuth-dropdown-link-balances": "CHMy Balances",
+    "notAuth-button-logOut": "CHLogout"
+  },
+  "account-selector": {
+    "type": {
+      "title": "CHType:",
+      "futures": "CHSpot",
+      "spot": "CHFutures"
+    }
+  },
+  "navigation-menu": {
+    "profit-sharing": "CHProfit Sharing",
+    "staking": "CHStaking",
+    "zigpad": "CHZIGPad"
+  },
+  "amount": "CHAmount",
+  "new-version": "CHNew version, click me to update",
+  "validation": {
+    "insufficient-amount": "CHInsufficient funds",
+    "invalid-value": "CHInvalid value"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "pages": {
+    "404": "CH404 / Page not found - Zignaly",
+    "dashboard": "CHClosed Positions",
+    "my-balances": "CHMy Balances - Zignaly",
+    "login": "CHLog in - Zignaly",
+    "signup": "CHSign Up - Zignaly",
+    "staking": "CHStaking - Zignaly",
+    "trading-services": "CHTrading Services - Zignaly",
+    "zigpad": "CHZIGPad - Zignaly",
+    "profit-sharing": {
+      "title": "CHProfit Sharing - Zignaly",
+      "service": "CHProfit Sharing / Service - Zignaly",
+      "api": "CHAPI Trading - Zignaly",
+      "coins": "CHCoins - Zignaly",
+      "investors": "CHProfit Sharing / Investors - Zignaly",
+      "manual": "CHManual Trading - Zignaly",
+      "positions": "CHMy Positions - Zignaly",
+      "signals": "CHSignals Trading - Zignaly",
+      "managements": "CHProfit Sharing / Management - Zignaly",
+      "profile": {
+        "title": "CHView Profile - Zignaly",
+        "edit": "CHEdit Profile - Zignaly"
+      }
+    }
+  }
+}

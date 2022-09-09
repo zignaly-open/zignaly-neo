@@ -1,0 +1,35 @@
+{
+  "my-dashboard": {
+    "title": "CHMy Dashboard",
+    "tableHeader": {
+      "summary": {
+        "title": "CHMy Current Value",
+        "subtitle": "CHReturns"
+      },
+      "serviceName": {
+        "title": "CHService Name",
+        "subtitle": "CHManager/Base currency"
+      },
+      "1-mo": {
+        "title": "CH1 mo.",
+        "no-data": "CHNo data to show yet"
+      },
+      "dailyAvg-title": "CHDaily avg.",
+      "3-mos-title": "CH3 mos.",
+      "6-mos-title": "CH6 mos.",
+      "all": {
+        "title": "CHAll",
+        "subtitle": "CHAge"
+      }
+    },
+    "table-search-emptyMessage": "CHYou are not connected to any service yet.",
+    "something-went-wrong": "CHSomething went wrong",
+    "loading-arialLabel": "CHLoading my dashboard",
+    "slider-input": {
+      "labels": {
+        "left": "CHReinvest",
+        "right": "CHWithdraw"
+      }
+    }
+  }
+}

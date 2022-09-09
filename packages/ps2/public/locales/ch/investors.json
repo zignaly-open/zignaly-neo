@@ -1,0 +1,17 @@
+{
+  "investors": {
+    "title": "CHInvestors",
+    "tableHeader": {
+      "email": "CHEmail",
+      "userId": "CHUser ID",
+      "investment": "CHInvestment",
+      "P&L": "CHP&L",
+      "P&LTotal": "CHP&L Total",
+      "totalFeesPaid": "CHTotal Fees Paid",
+      "successFee": "CHSuccess Fee",
+      "feesZIG": "CHFees in ZIG",
+      "status": "CHStatus"
+    },
+    "loading-arialLabel": "CHLoading investors"
+  }
+}

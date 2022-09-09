@@ -1,0 +1,19 @@
+{
+  "logo": "CHZIGBids",
+  "home": "CHHome",
+  "how-it-works": "CHHow it works",
+  "get-funds": "CHDeposit funds",
+  "edit profile": "CHEdit Profile",
+  "buy-bids": "CHBuy bids",
+  "view-history": "CHView History",
+  "disconnect": "CHDisconnect",
+  "log-in": "CHConnect Wallet",
+  "moto": "CHBid & Win thousands of $ worth of crypto for cents!",
+  "loading": "CHLoading...",
+  "settings": "CHSettings",
+  "deposit": "CHDeposit",
+  "insert-code": "CHInsert Code",
+  "transfer-coin": "CHTransfer {{coin}}",
+  "auction": "CHZIGBids",
+  "cancel": "CHCancel"
+}
