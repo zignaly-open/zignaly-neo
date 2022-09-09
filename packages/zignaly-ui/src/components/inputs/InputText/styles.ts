@@ -29,11 +29,9 @@ export const InputValue = styled.input`
 
   -webkit-text-fill-color: #838b95 !important;
 
-  &:-webkit-autofill:focus {
-    -webkit-text-fill-color: #333;
+  &::placeholder {
+    -webkit-text-fill-color: ${dark.neutral400} !important;
   }
-
-  -webkit-text-fill-color: #838b95 !important;
 `;
 
 export const IconContainer = styled.div`
