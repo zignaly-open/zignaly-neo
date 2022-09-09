@@ -6,7 +6,7 @@ body {
   background-attachment: fixed;
   font-family: 'Avenir Next', sans-serif;
   color: #fff;
-  min-height: 100vh;
+  margin: 8px;
 }
 /** Fonts **/
 @font-face {

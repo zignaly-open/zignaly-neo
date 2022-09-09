@@ -18,6 +18,11 @@ const StyledWalletIcon = styled(WalletIcon)`
   color: ${({ theme }) => theme.neutral300};
 `;
 
+const StickyHeader = styled(ZIGHeader)`
+  position: sticky !important;
+  margin: -8px;
+`;
+
 const MenuButton = styled(IconButton)`
   ${({ theme }) => theme.breakpoints.down('sm')} {
     margin-left: -18px;
@@ -50,7 +55,7 @@ const Header = () => {
   }, [account]);
 
   return (
-    <ZIGHeader
+    <StickyHeader
       leftElements={[
         <BrandImage
           key={'logo2'}
