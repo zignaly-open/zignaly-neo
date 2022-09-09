@@ -3,6 +3,7 @@ body {
   background-image: url('../public/background-dark.png');
   background-repeat: no-repeat;
   background-size: cover;
+  background-attachment: fixed;
   font-family: 'Avenir Next', sans-serif;
   color: #fff;
   min-height: 100vh;
