@@ -9,5 +9,7 @@
     "wrong-address-info": "You're currently using a different address from the one you logged in, please change back to continue.",
     "wrong-network": "Wrong Network",
     "wrong-network-info": "The network you are trying to connect to is not available within our services. Please switch to Polygon to continue.",
-    "switch-network": "Switch Network"
+    "switch-network": "Switch Network",
+    "not-enough": "Not Enough ZIGs",
+    "not-enough-info": "You don't have enough ZIGs to bid!"
 }

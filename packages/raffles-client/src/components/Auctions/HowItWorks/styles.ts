@@ -1,26 +1,40 @@
-import styled from '@emotion/styled';
-export const ContainerBox = styled.div`
+import { styled } from '@mui/material';
+
+export const ContainerBox = styled('div')`
   position: relative;
-  top: 90px;
   display: flex;
   flex-direction: column;
-  width: 80%;
-  margin-bottom: 80px;
+  margin: 0 auto 17px;
+  padding: 0 16px;
+  max-width: 1200px;
   text-align: justify;
 `;
 
-export const HowItWorksList = styled.ul`
-  width: 100%;
+export const HowItWorksList = styled('ul')`
+  /* width: 100%; */
   display: flex;
-  justify-content: space-evenly;
-  @media (max-width: 800px) {
+  /* justify-content: space-evenly; */
+  justify-content: space-between;
+  padding-inline-start: 28px;
+
+  > span {
+    max-width: 46%;
+  }
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
     flex-wrap: wrap;
+    padding-inline-start: 11px;
+
+    > span {
+      max-width: 100%;
+    }
   }
 `;
 
-export const BulletPointItem = styled.li`
-  max-width: 600px;
-  margin-right: 25px;
+export const BulletPointItem = styled('li')`
+  &::marker {
+    font-size: 30px;
+  }
 `;
 
 export const LinkBox = styled.a`

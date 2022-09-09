@@ -28,8 +28,11 @@ i18n
       },
     },
     react: {
-      useSuspense: false,
+      useSuspense: true,
     },
   });
+
+// Force preloading translations of the modals
+i18n.loadNamespaces(['transfer-zig', 'connect-wallet', 'user-settings']);
 
 export default i18n;

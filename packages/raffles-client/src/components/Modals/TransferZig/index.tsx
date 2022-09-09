@@ -1,4 +1,3 @@
-import { ErrorOutline } from '@mui/icons-material';
 import { Box, useMediaQuery } from '@mui/material';
 import { useEthers, useTokenBalance } from '@usedapp/core';
 import useContract from 'hooks/useContract';
@@ -14,7 +13,7 @@ import {
 } from '@zignaly-open/ui';
 import { Gap } from '../ConnectWallet/styles';
 import DialogContainer from '../DialogContainer';
-import { Container, InputContainer } from './styles';
+import { Container, InputContainer, StyledErrorOutline } from './styles';
 import { TransferZigModalProps } from './types';
 import SwitchNetworkModal from '../SwitchNetwork';
 
@@ -109,9 +108,9 @@ const TransferZigModal = (props: TransferZigModalProps) => {
       )}
       <Gap gap={isError ? 8 : 14} />
       <Box display='flex' justifyContent='center' flexDirection='row'>
-        <ErrorOutline color='secondary' />
+        <StyledErrorOutline />
         <Box display='flex' flexDirection='row' marginLeft={'5px'} width={350}>
-          <Typography variant={'h4'} weight='regular' color='neutral300'>
+          <Typography variant={'h4'} weight='regular' color='yellow'>
             {t('warning')}
           </Typography>
         </Box>

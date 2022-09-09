@@ -1,29 +1,18 @@
 import { Alert, Grid } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import React, { useMemo, useState } from 'react';
 import { useQuery, useSubscription } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import Box from '@mui/material/Box';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import Loader from '../../common/Loader';
 import { getWinningLosingStatus } from '../AuctionCard/util';
-import { Select, Typography } from '@zignaly-open/ui';
 import { BIDS_SUBSCRIPTION, GET_AUCTIONS } from 'queries/auctions';
 import AuctionCard from '../AuctionCard/AuctionCard';
-
-const MasonryWrapper = styled(Box)`
-  max-width: 1280px;
-  margin: 30px auto;
-  padding: 0 8px;
-`;
-
-const StyledSelect = styled(Select)`
-  min-width: 150px;
-
-  > div {
-    text-align: left;
-  }
-`;
+import {
+  FiltersContainer,
+  LayoutContainer,
+  ProjectsTypography,
+  StyledSelect,
+} from './styles';
 
 enum SortDirection {
   Default = 'default',
@@ -119,38 +108,38 @@ const AuctionGrid: React.FC = () => {
   }
 
   return (
-    <MasonryWrapper>
-      <Grid container marginY={2} columnSpacing={4} justifyContent='center'>
-        <Grid item textAlign='right'>
-          <StyledSelect
-            options={showOptions}
-            value={showOptions.find((o) => o.value === selectedShowMode)}
-            onChange={(option) => {
-              localStorage.setItem('show', option.value);
-              setSelectedShowMode(option.value);
-            }}
-            fullWidth={false}
-            label={t('show')}
-          />
-        </Grid>
-        <Grid item>
-          <StyledSelect
-            options={sortOptions}
-            value={sortOptions.find((o) => o.value === selectedSort)}
-            onChange={(option) => {
-              localStorage.setItem('sort', option.value);
-              setSelectedSort(option.value);
-            }}
-            fullWidth={false}
-            label={t('sort')}
-          />
-        </Grid>
-      </Grid>
-      <Box padding='40px 0 33px 28px'>
-        <Typography variant='h3' weight='medium'>
+    <LayoutContainer>
+      <FiltersContainer>
+        <ProjectsTypography>
           {filtered.length} {t('zauctions-projects')}
-        </Typography>
-      </Box>
+        </ProjectsTypography>
+        <Grid container marginY={2} columnSpacing={4} justifyContent='center'>
+          <Grid item textAlign='right'>
+            <StyledSelect
+              options={showOptions}
+              value={showOptions.find((o) => o.value === selectedShowMode)}
+              onChange={(option) => {
+                localStorage.setItem('show', option.value);
+                setSelectedShowMode(option.value);
+              }}
+              fullWidth={false}
+              label={t('show')}
+            />
+          </Grid>
+          <Grid item>
+            <StyledSelect
+              options={sortOptions}
+              value={sortOptions.find((o) => o.value === selectedSort)}
+              onChange={(option) => {
+                localStorage.setItem('sort', option.value);
+                setSelectedSort(option.value);
+              }}
+              fullWidth={false}
+              label={t('sort')}
+            />
+          </Grid>
+        </Grid>
+      </FiltersContainer>
       <Grid justifyContent='center' container spacing={4}>
         {filtered.map((x: AuctionType) => (
           <Grid
@@ -165,7 +154,7 @@ const AuctionGrid: React.FC = () => {
           </Grid>
         ))}
       </Grid>
-    </MasonryWrapper>
+    </LayoutContainer>
   );
 };
 
