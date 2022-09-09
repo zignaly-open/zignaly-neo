@@ -14,6 +14,7 @@ export const FiltersContainer = styled('div')`
 
   ${({ theme }) => theme.breakpoints.down('md')} {
     flex-direction: column-reverse;
+    margin-top: 0;
   }
 `;
 
