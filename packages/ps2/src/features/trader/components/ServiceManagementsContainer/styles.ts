@@ -36,15 +36,12 @@ export const BottomContainer = styled.div`
 `;
 
 export const MainPriceLabel = styled(PriceLabel)`
-  > span {
-    color: #f3f4f6 !important;
-    font-weight: 500;
+  & > span {
     margin-top: 16px;
     justify-content: center;
-    font-size: 26px !important;
-    line-height: 40px !important;
 
     > span:nth-of-type(1) {
+      color: #f3f4f6 !important;
       font-weight: 500 !important;
       font-size: 26px !important;
     }
@@ -135,7 +132,7 @@ export const TradingFunds = styled.div`
   }
 
   span > span:nth-of-type(1) {
-    color: ${({ theme }) => theme.neutral100};
+    color: ${({ theme }) => theme.neutral100} !important;
     margin-left: 16px;
   }
 `;
