@@ -1,5 +1,6 @@
 import {
   useLazyTraderServicesQuery,
+  useTraderServiceBalanceQuery,
   useTraderServiceDetailsQuery,
   useTraderServiceInvestorsQuery,
   useTraderServiceManagementQuery,
@@ -22,7 +23,7 @@ export function useTraderServices(): {
   return { data, isLoading };
 }
 
-export function useSetActiveTradingService(): (serviceId: string) => void {
+export function useSetActiveTraderService(): (serviceId: string) => void {
   const dispatch = useDispatch();
   return (serviceId) => dispatch(setActiveServiceId(serviceId));
 }
@@ -33,14 +34,20 @@ export const useTraderServiceInvestors = (
   return useTraderServiceInvestorsQuery(serviceId);
 };
 
-export function useTradingServiceManagement(
+export function useTraderServiceManagement(
   serviceId: string,
 ): ReturnType<typeof useTraderServiceManagementQuery> {
   return useTraderServiceManagementQuery(serviceId);
 }
 
-export function useTradingServiceDetails(
+export function useTraderServiceDetails(
   serviceId: string,
 ): ReturnType<typeof useTraderServiceDetailsQuery> {
   return useTraderServiceDetailsQuery(serviceId);
+}
+
+export function useTraderServiceBalance(
+  serviceId: string,
+): ReturnType<typeof useTraderServiceBalanceQuery> {
+  return useTraderServiceBalanceQuery(serviceId);
 }

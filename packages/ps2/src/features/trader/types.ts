@@ -57,6 +57,15 @@ export type TraderServiceManagement = {
   zglyZigDisc: string;
 };
 
+export type TraderServiceBalance = {
+  sbt: string;
+  staSscFree: string;
+  staSscSum: string;
+  scaSscSum: string;
+  dfa: string;
+  debt: string;
+};
+
 export type Investor = {
   accountType: string;
   email: string;

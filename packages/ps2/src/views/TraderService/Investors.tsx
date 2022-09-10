@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import ServiceHeader from '../../features/trader/components/ServiceHeader';
 import { useParams } from 'react-router-dom';
+import { TraderServicePageContainer } from '../../features/trader/components/styles';
 
 const Investors: React.FC = () => {
   const { t } = useTranslation('pages');
@@ -12,7 +13,9 @@ const Investors: React.FC = () => {
   return (
     <>
       <ServiceHeader />
-      <ServiceInvestorsContainer serviceId={serviceId} />
+      <TraderServicePageContainer>
+        <ServiceInvestorsContainer serviceId={serviceId} />
+      </TraderServicePageContainer>
     </>
   );
 };

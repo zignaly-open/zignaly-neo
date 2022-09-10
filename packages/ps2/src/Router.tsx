@@ -7,7 +7,7 @@ import Staking from './views/Staking';
 import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
 import ForgotPassword from './views/Auth/ForgotPassword';
-import TradingServices from './views/Help/TradingServices';
+import TraderServices from './views/Help/TraderServices';
 import Zigpad from './views/Zigpad';
 import {
   ROUTE_DASHBOARD,
@@ -31,16 +31,16 @@ import {
 } from './routes';
 
 import { useIsAuthenticated } from './features/auth/use';
-import TradingServicesInfo from './views/TradignService';
-import Management from './views/TradignService/Management';
-import Investors from './views/TradignService/Investors';
-import Positions from './views/TradignService/Positions';
-import Coins from './views/TradignService/Coins';
-import ServiceProfile from './views/TradignService/ServiceProfile';
-import ServiceApi from './views/TradignService/ServiceApi';
-import Manual from 'views/TradignService/Manual';
-import Signals from './views/TradignService/Signals';
-import EditServiceProfile from 'views/TradignService/EditServiceProfile';
+import TraderServicesInfo from './views/TraderService';
+import Management from './views/TraderService/Management';
+import Investors from './views/TraderService/Investors';
+import Positions from './views/TraderService/Positions';
+import Coins from './views/TraderService/Coins';
+import ServiceProfile from './views/TraderService/ServiceProfile';
+import ServiceApi from './views/TraderService/ServiceApi';
+import Manual from 'views/TraderService/Manual';
+import Signals from './views/TraderService/Signals';
+import EditServiceProfile from 'views/TraderService/EditServiceProfile';
 
 const AuthenticatedWall: React.FC<{ children: ReactElement }> = ({
   children,
@@ -80,11 +80,11 @@ function Router() {
           <Route index element={<Zigpad />} />
         </Route>
 
-        <Route path={ROUTE_HELP} element={<TradingServices />} />
+        <Route path={ROUTE_HELP} element={<TraderServices />} />
 
         {/* TODO: wall */}
         <Route path={ROUTE_TRADING_SERVICE}>
-          <Route index element={<TradingServicesInfo />} />
+          <Route index element={<TraderServicesInfo />} />
           <Route path={ROUTE_TRADING_SERVICE_MANAGE} element={<Management />} />
           <Route
             path={ROUTE_TRADING_SERVICE_INVESTORS.replace(

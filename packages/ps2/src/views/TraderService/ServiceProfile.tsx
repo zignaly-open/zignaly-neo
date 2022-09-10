@@ -3,6 +3,7 @@ import ComingSoon from '../../components/ComingSoon';
 import { useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import ServiceHeader from '../../features/trader/components/ServiceHeader';
+import { TraderServicePageContainer } from '../../features/trader/components/styles';
 
 const ServiceProfile: React.FC = () => {
   const { t } = useTranslation('pages');
@@ -10,7 +11,9 @@ const ServiceProfile: React.FC = () => {
   return (
     <>
       <ServiceHeader />
-      <ComingSoon />
+      <TraderServicePageContainer>
+        <ComingSoon />
+      </TraderServicePageContainer>
     </>
   );
 };

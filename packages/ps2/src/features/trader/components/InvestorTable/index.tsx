@@ -17,8 +17,8 @@ import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types'
 import { InvestorTableDataType } from './types';
 import {
   useTraderServiceInvestors,
-  useTradingServiceDetails,
-  useTradingServiceManagement,
+  useTraderServiceDetails,
+  useTraderServiceManagement,
 } from '../../use';
 import { Investor } from '../../types';
 import ConnectionStateLabel from '../ConnectionStateLabel';
@@ -32,9 +32,9 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
     isError,
   } = useTraderServiceInvestors(serviceId);
   const { isLoading: isLoadingService, data: service } =
-    useTradingServiceDetails(serviceId);
+    useTraderServiceDetails(serviceId);
   const { isLoading: isLoadingManagement, data: management } =
-    useTradingServiceManagement(serviceId);
+    useTraderServiceManagement(serviceId);
 
   const { t } = useTranslation('investors');
 

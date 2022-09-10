@@ -37,7 +37,7 @@ export const BottomContainer = styled.div`
 
 export const MainPriceLabel = styled(PriceLabel)`
   > span {
-    color: #f3f4f6;
+    color: #f3f4f6 !important;
     font-weight: 500;
     margin-top: 16px;
     justify-content: center;
