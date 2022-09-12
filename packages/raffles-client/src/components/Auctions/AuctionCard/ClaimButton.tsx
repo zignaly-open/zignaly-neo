@@ -33,7 +33,7 @@ const ClaimButton = ({
       canClaim: !auction.userBid?.isClaimed && !maxClaimDateExpired,
       missClaim: !auction.userBid?.isClaimed && maxClaimDateExpired,
     };
-  }, [updatedAt]);
+  }, [updatedAt, auction]);
 
   return (
     <Button
