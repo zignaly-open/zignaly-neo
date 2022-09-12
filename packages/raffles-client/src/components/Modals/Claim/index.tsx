@@ -10,6 +10,7 @@ import DialogContainer from '../DialogContainer';
 import { Form } from './styles';
 import { ClaimModalProps } from './types';
 import { showToast } from 'util/showToast';
+import ClaimButton from 'components/Auctions/AuctionCard/ClaimButton';
 
 const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const { t } = useTranslation(['claim', 'user-settings', 'global']);
@@ -101,6 +102,13 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
             loading={loading}
             caption={t('claim')}
             size='large'
+            disabled={!discordName}
+          />
+          <ClaimButton
+            loading={loading}
+            type='submit'
+            auction={auction}
+            claimCaption={t('claim')}
             disabled={!discordName}
           />
         </Box>

@@ -25,7 +25,8 @@ enum BidButtonState {
 const BidButton: React.FC<{
   auction: AuctionType;
   isActive: boolean;
-}> = ({ auction, isActive }) => {
+  updatedAt: Date;
+}> = ({ auction, isActive, updatedAt }) => {
   const [bid, { loading: isBidding }] = useMutation(BID_AUCTION);
   const { balance } = useBalance();
   const { user } = useCurrentUser();
@@ -45,7 +46,7 @@ const BidButton: React.FC<{
     if (new BN(balance).lt(new BN(auction.bidFee)))
       return BidButtonState.NotEnoughFunds;
     return BidButtonState.BidNow;
-  }, [user, balance, auction, BidButtonState, isActive]);
+  }, [user, balance, auction, BidButtonState, isActive, updatedAt]);
 
   const customButtonText = useMemo(() => {
     if (state === BidButtonState.Ended) return t('ended');
