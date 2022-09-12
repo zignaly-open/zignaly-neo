@@ -109,7 +109,7 @@ const AuctionCard: React.FC<{
         <CardBody>
           <AuctionRanking auction={auction} isActive={isActive} />
           <CardActions isColumn={isColumn}>
-            {(!updatedAt || +new Date() - updatedAt) && hasWon ? (
+            {(!updatedAt || +new Date() - updatedAt > 0) && hasWon ? (
               <Button
                 size='large'
                 onClick={() =>
