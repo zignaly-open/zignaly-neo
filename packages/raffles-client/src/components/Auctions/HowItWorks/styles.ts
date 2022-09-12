@@ -36,3 +36,7 @@ export const BulletPointItem = styled('li')`
     font-size: 30px;
   }
 `;
+
+export const LinkBox = styled('a')`
+  padding: 10px;
+`;
