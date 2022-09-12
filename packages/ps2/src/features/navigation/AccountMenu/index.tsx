@@ -31,11 +31,10 @@ function AccountMenu(): React.ReactElement | null {
   const { t } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
   const activeExchange = useActiveExchange();
-  const dropDownRef =
-    useRef<{ setIsDropDownActive: (isActive: boolean) => void }>(null);
+  const dropDownRef = useRef(null);
 
   const closeDropdown = useCallback(() => {
-    dropDownRef.current?.setIsDropDownActive(false);
+    dropDownRef.current?.closeDropDown();
   }, [dropDownRef]);
 
   if (!isAuthenticated) {
@@ -60,11 +59,6 @@ function AccountMenu(): React.ReactElement | null {
     <IconButton
       ref={dropDownRef}
       variant={'flat'}
-      dropDownOptions={{
-        alignment: 'right',
-        zIndex: 9999,
-        width: '220px',
-      }}
       icon={<Avatar size={'medium'} image={activeExchange?.image} />}
       key={'user'}
       renderDropDown={

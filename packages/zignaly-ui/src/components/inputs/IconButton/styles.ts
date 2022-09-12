@@ -1,9 +1,10 @@
 // Dependencies
-import React from "react";
+import React, { MouseEventHandler } from "react";
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
-import { buttonSizes, buttonVariants, dropdownAlignment, dropdownPosition } from "./types";
+import { buttonSizes, buttonVariants } from "./types";
 import Loader from "components/display/Loader";
+import Theme from "../../../theme/theme";
 
 const isPrimaryButton = (variant: keyof typeof buttonVariants) =>
   variant === buttonVariants.primary;
@@ -36,7 +37,9 @@ export const ButtonLoader = styled(Loader)`
   align-items: center;
 `;
 
-export const Container = styled.div<any>`
+export const Container = styled.div<{
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+}>`
   position: relative;
   border-radius: 4px;
   transition: all 0.2s linear;
@@ -48,75 +51,6 @@ export const Container = styled.div<any>`
   align-items: center;
 `;
 
-type DropdownProps = {
-  alignment: keyof typeof dropdownAlignment | any;
-  width?: number | string | any;
-  position?: keyof typeof dropdownPosition | any;
-  zIndex?: number;
-  maxHeight?: string | number | any;
-};
-
-export const Dropdown = styled.div<DropdownProps>`
-  background: #12152c;
-  white-space: nowrap;
-  color: #fff;
-  box-shadow: 0 4px 6px -2px #00000061;
-  opacity: 0;
-  position: absolute;
-
-  &::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-  }
-
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-  }
-
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-  }
-
-  /* Handle on hover */
-  &::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.15);
-  }
-
-  ${({ alignment, width, zIndex, maxHeight }) => `
-    width: ${width ?? "auto"};
-    z-index: ${zIndex ?? 10};
-    
-    ${styledIf(
-      maxHeight,
-      `
-      max-height: ${maxHeight};
-      overflow: auto;
-    `,
-    )}
-  
-    ${styledIf(
-      alignment === dropdownAlignment.left,
-      `
-        border-radius: 0 4px 4px 4px;
-      `,
-    )}
-    
-    ${styledIf(
-      alignment === dropdownAlignment.right,
-      `
-        border-radius: 4px 0px 4px 4px;
-      `,
-    )}
-  `}
-`;
-
-/**
- * Layout
- */
 interface LayoutProps {
   size: keyof typeof buttonSizes;
   variant: keyof typeof buttonVariants;
@@ -128,6 +62,7 @@ interface LayoutProps {
   };
   disabled: boolean;
   shrinkWrap?: boolean;
+  theme: Theme;
 }
 
 export const Layout = styled.div`
@@ -137,7 +72,7 @@ export const Layout = styled.div`
 
 export const IconContainer = styled.div``;
 
-const renderSizeProps = (props: any) => `
+const renderSizeProps = (props: { size: keyof typeof buttonSizes }) => `
   ${styledIf(
     isSmallButton(props.size),
     `  
@@ -223,7 +158,7 @@ const renderSizeProps = (props: any) => `
   )}
 `;
 
-const renderPrimaryProps = (props: any) => `
+const renderPrimaryProps = (props: LayoutProps) => `
   ${styledIf(
     isPrimaryButton(props.variant),
     `
@@ -281,7 +216,7 @@ const renderPrimaryProps = (props: any) => `
   )}
 `;
 
-const renderSecondaryProps = (props: any) => `
+const renderSecondaryProps = (props: LayoutProps) => `
   ${styledIf(
     isSecondaryButton(props.variant),
     `
@@ -339,7 +274,7 @@ const renderSecondaryProps = (props: any) => `
   )}
 `;
 
-const renderFlatProps = (props: any) => `
+const renderFlatProps = (props: LayoutProps) => `
   ${styledIf(
     isFlatButton(props.variant),
     `
@@ -428,7 +363,6 @@ export const ViewPort = styled.button<LayoutProps>`
        props.isActiveDropdown,
        `
         background: #12152c !important;
-        padding: 2px !important;
         border-radius: 4px 4px 0 0 !important;
   
         &:enabled:active {

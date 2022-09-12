@@ -171,10 +171,6 @@ export default function BasicTable<T extends object>({
                       <IconButton
                         variant={"flat"}
                         icon={<OptionsDotsIcon color={dark.neutral200} />}
-                        dropDownOptions={{
-                          componentOverflowRef: tableRef,
-                          alignment: "right",
-                        }}
                         renderDropDown={renderColumnsSelector()}
                       />
                     )}

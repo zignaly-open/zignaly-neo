@@ -221,10 +221,6 @@ export default function PagedWithDataTable<T extends object>({
                       <IconButton
                         variant={"flat"}
                         icon={<OptionsDotsIcon color={dark.neutral200} />}
-                        dropDownOptions={{
-                          componentOverflowRef: tableRef,
-                          alignment: "right",
-                        }}
                         renderDropDown={renderColumnsSelector()}
                       />
                     )}

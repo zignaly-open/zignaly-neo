@@ -41,9 +41,6 @@ Main.args = {
       variant={"secondary"}
       icon={<ThreeDotsIcon />}
       renderDropDown={<div>DropDown Container</div>}
-      dropDownOptions={{
-        position: "static",
-      }}
     />,
   ],
   rightElements: [
@@ -53,10 +50,6 @@ Main.args = {
       variant={"flat"}
       icon={<UserIcon color="#65647E" />}
       renderDropDown={<div>DropDown Container</div>}
-      dropDownOptions={{
-        alignment: "right",
-        position: "static",
-      }}
     />,
   ],
 };

@@ -24,8 +24,7 @@ const AccountSelector = () => {
   const { exchanges } = useCurrentUser();
   const activeExchange = useActiveExchange();
   const selectExchange = useSelectExchange();
-  const dropDownRef =
-    useRef<{ setIsDropDownActive: (value: boolean) => void }>(null);
+  const dropDownRef = useRef(null);
 
   /**
    * @function handleSelectAccount:
@@ -35,7 +34,7 @@ const AccountSelector = () => {
     (exchange: Exchange) => {
       selectExchange(exchange.internalId);
       if (dropDownRef.current) {
-        dropDownRef.current?.setIsDropDownActive(false);
+        dropDownRef.current?.closeDropDown();
       }
     },
     [dropDownRef, selectExchange],
@@ -65,11 +64,6 @@ const AccountSelector = () => {
                   height={20}
                 />
               }
-              dropDownOptions={{
-                width: '280px',
-                alignment: 'right',
-                maxHeight: '330px',
-              }}
               renderDropDown={
                 <List>
                   {exchanges &&

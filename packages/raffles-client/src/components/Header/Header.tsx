@@ -67,10 +67,6 @@ const Header = () => {
                 renderDropDown={
                   <Menu showModal={showModal} currentUser={currentUser} />
                 }
-                dropDownOptions={{
-                  alignment: 'right',
-                  position: 'static',
-                }}
               />
             </React.Fragment>
           ) : (

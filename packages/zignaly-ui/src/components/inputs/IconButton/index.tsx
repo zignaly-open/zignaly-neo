@@ -1,16 +1,10 @@
-// Dependencies
-import React, { useCallback, useRef, useState, useImperativeHandle, useEffect } from "react";
-import { useClickAway } from "react-use";
-
-// Styled Components
-import { Layout, ViewPort, Dropdown, Icon, Container, ButtonLoader, IconContainer } from "./styles";
-import Portal from "./components/Portal";
-
-// Types
-import { IconButtonProps, defaultDropDownOptions } from "./types";
+import Menu from "@mui/material/Menu";
+import React, { useImperativeHandle } from "react";
+import { Layout, ViewPort, Icon, Container, ButtonLoader, IconContainer } from "./styles";
+import { DropdownHandle, DropdownProps } from "./types";
 import { LoaderTypes } from "components/display/Loader";
 
-const IconButton = (
+const IconButton: (props: DropdownProps, innerRef: React.Ref<DropdownHandle>) => JSX.Element = (
   {
     shrinkWrap,
     icon,
@@ -19,7 +13,6 @@ const IconButton = (
     variant = "primary",
     onClick = null,
     loading = false,
-    dropDownOptions,
     renderDropDown = null,
     colors = {
       normal: "#706f82",
@@ -27,86 +20,26 @@ const IconButton = (
     },
     className,
     type,
-  }: IconButtonProps,
-  innerRef: any,
+  }: DropdownProps,
+  innerRef: React.Ref<DropdownHandle>,
 ) => {
-  // Ref
-  const options = {
-    ...defaultDropDownOptions,
-    ...dropDownOptions,
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+    return disabled ? () => {} : renderDropDown ? handleClick : onClick;
   };
 
-  const requestAniRef = useRef<any>();
-
-  const btnRef = useRef(null);
-  const dropdownRef = useRef(null);
-
-  // State
-  const [isActiveDropdown, setDropdownActive] = useState(false);
-  const [coords, setCoords] = useState({});
-
-  useClickAway(btnRef, (event: Event) => {
-    if (event && event.target && dropdownRef) {
-      const container = dropdownRef.current as unknown as HTMLElement;
-
-      if (container && !container.contains(event.target as Node) && isActiveDropdown) {
-        handleClickButton();
-      }
-    }
-  });
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   useImperativeHandle(innerRef, () => ({
-    setIsDropDownActive: (isActive: boolean) => {
-      setDropdownActive(isActive);
+    closeDropDown: () => {
+      handleClose();
     },
   }));
-
-  const updateDropdownCoords = () => {
-    if (btnRef && btnRef.current) {
-      const button = btnRef.current as HTMLElement;
-      const dropdown = dropdownRef.current as unknown as HTMLElement;
-
-      if (button && dropdown) {
-        const btnRect = button.getBoundingClientRect();
-        const dropdownRect = dropdown.getBoundingClientRect();
-
-        const top = btnRect.height + btnRect.y + window.scrollY;
-        let left = 0;
-
-        if (options.alignment === "right") {
-          left = btnRect.x - dropdownRect.width + btnRect.width;
-        } else {
-          left = btnRect.x;
-        }
-
-        setCoords({
-          left,
-          top,
-          opacity: 1,
-        });
-        requestAniRef.current = requestAnimationFrame(updateDropdownCoords);
-      }
-    }
-  };
-
-  useEffect(() => {
-    if (isActiveDropdown) {
-      requestAniRef.current = requestAnimationFrame(updateDropdownCoords);
-    } else {
-      setCoords({
-        opacity: 0,
-      });
-      cancelAnimationFrame(requestAniRef.current);
-    }
-  }, [isActiveDropdown]);
-
-  /**
-   * @function handleClickButton:
-   * @description Function in charge of indicating the logic when pressing the button.
-   */
-  const handleClickButton = useCallback(() => {
-    setDropdownActive((current) => !current);
-  }, [btnRef, dropdownRef]);
 
   return (
     <Layout className={className}>
@@ -117,10 +50,9 @@ const IconButton = (
         variant={variant}
         colors={colors}
         disabled={disabled || loading}
-        ref={btnRef}
-        isActiveDropdown={isActiveDropdown}
+        isActiveDropdown={!!anchorEl}
       >
-        <Container onClick={disabled ? null : renderDropDown ? handleClickButton : onClick}>
+        <Container onClick={handleClick}>
           {loading ? (
             <ButtonLoader type={LoaderTypes.TAILSPIN} color="#9CA3AF" ariaLabel="Loader" />
           ) : (
@@ -130,20 +62,25 @@ const IconButton = (
           )}
         </Container>
       </ViewPort>
-      {isActiveDropdown && (
-        <Portal>
-          <Dropdown
-            ref={dropdownRef}
-            style={{ ...coords }}
-            width={options.width}
-            maxHeight={options.maxHeight}
-            alignment={options.alignment}
-            zIndex={options.zIndex}
-          >
-            {renderDropDown}
-          </Dropdown>
-        </Portal>
-      )}
+      <Menu
+        anchorEl={anchorEl}
+        id="account-menu"
+        open={open}
+        PaperProps={{
+          sx: {
+            backgroundColor: "#12152c",
+            whiteSpace: "nowrap",
+            color: "#fff",
+            boxShadow: "0 4px 6px -2px #00000061",
+            borderRadius: "4px 0 4px 4px",
+          },
+        }}
+        onClose={handleClose}
+        transformOrigin={{ horizontal: "right", vertical: "top" }}
+        anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
+      >
+        {renderDropDown}
+      </Menu>
     </Layout>
   );
 };
