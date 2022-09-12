@@ -2,6 +2,6 @@ export type CheckBoxProps = {
   value?: boolean;
   defaultValue?: boolean;
   label: string;
-  onChange?: Function;
+  onChange?: (value: boolean) => void;
   disabled?: boolean;
 };

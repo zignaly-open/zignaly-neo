@@ -1,6 +1,8 @@
+import React from "react";
+
 export type ExpandableInputProps = {
-  icon: any;
+  icon: React.ReactElement;
   placeholder?: string;
   value?: string;
-  onChange: any;
+  onChange: (e: string) => void;
 };

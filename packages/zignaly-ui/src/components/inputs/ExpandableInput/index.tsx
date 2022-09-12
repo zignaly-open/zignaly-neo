@@ -1,14 +1,11 @@
-import React, { useCallback, useRef, useState, useEffect } from "react";
+import React, { useCallback, useRef, useState, useEffect, RefObject } from "react";
 import { useClickAway } from "react-use";
 import { Layout, Field, Input, Icon } from "./styles";
 import { ExpandableInputProps } from "./types";
 
 function ExpandableInput({ icon, placeholder = "", value = "", onChange }: ExpandableInputProps) {
-  // Refs
-  const innerRef: any = useRef(null);
-  const inputRef: any = useRef(null);
-
-  // State
+  const innerRef = useRef(null);
+  const inputRef = useRef(null) as RefObject<HTMLInputElement>;
   const [isActive, setActive] = useState(false);
 
   /**
@@ -28,9 +25,11 @@ function ExpandableInput({ icon, placeholder = "", value = "", onChange }: Expan
   });
 
   useEffect(() => {
-    if (isActive && inputRef && inputRef.current) {
+    if (isActive) {
       setTimeout(() => {
-        inputRef.current.focus();
+        if (inputRef && inputRef.current) {
+          inputRef.current.focus();
+        }
       }, 200);
     }
   }, [isActive]);

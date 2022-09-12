@@ -1,4 +1,3 @@
-// Dependencies
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
@@ -44,7 +43,7 @@ export const Layout = styled.div<any>`
        cursor: text;
        
        ${Icon} svg {
-        color: ${theme["neutral100"]};
+        color: ${theme.neutral100};
        }
           
        ${Input} {
@@ -52,18 +51,18 @@ export const Layout = styled.div<any>`
         width: 200px;
         opacity: 1;
         visibility: visible;
-        color: ${theme["neutral100"]};
+        color: ${theme.neutral100};
        }
     `,
       `
        cursor: pointer;
        
       ${Icon} svg {
-        color: ${theme["neutral300"]};
+        color: ${theme.neutral300};
        }
        
       ${Input} {
-        color: ${theme["neutral300"]};
+        color: ${theme.neutral300};
       }
     `,
     )}
