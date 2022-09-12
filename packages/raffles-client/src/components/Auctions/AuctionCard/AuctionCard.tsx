@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { Typography, TextButton, Button, TimeIcon } from '@zignaly-open/ui';
+import { Typography, TextButton } from '@zignaly-open/ui';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
@@ -10,7 +10,6 @@ import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
 import AuctionRanking from '../AuctionRanking/AuctionRanking';
 import { useModal } from 'mui-modal-provider';
 import ProjectDetailsModal from 'components/Modals/ProjectDetails';
-import ClaimModal from 'components/Modals/Claim';
 import {
   AuctionImage,
   CardBody,
@@ -22,7 +21,8 @@ import {
   CardActions,
   CardHeader,
 } from './styles';
-import ClaimCountdown from './ClaimCountdown';
+import ClaimButton from './ClaimButton';
+import useUpdatedAt from 'hooks/useUpdatedAt';
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
@@ -33,46 +33,15 @@ const AuctionCard: React.FC<{
   const leftRef = useRef(null);
   const rightRef = useRef(null);
   const [isColumn, setIsColumn] = useState(false);
-  const [updatedAt, setUpdatedAt] = useState(null);
 
-  const maxClaimDateExpired =
-    auction.maxClaimDate && new Date(auction.maxClaimDate) < new Date();
-  const canClaim = !auction.userBid?.isClaimed && !maxClaimDateExpired;
-  const missClaim = !auction.userBid?.isClaimed && maxClaimDateExpired;
+  // Update ui when expiration date is reached
+  // Add delay in case of last ms bid event
+  const updatedAt = useUpdatedAt(auction.expiresAt, 100);
 
   const showClaim = useMemo(
     () => (!updatedAt || +new Date() - updatedAt > 0) && hasWon,
-    [updatedAt],
+    [hasWon, updatedAt],
   );
-
-  useEffect(() => {
-    // Update ui when expiration date is reached
-    const timeout = +new Date(auction.expiresAt) - +new Date();
-    const timeoutId = setTimeout(() => {
-      if (timeout > 0) {
-        setUpdatedAt(+new Date());
-      }
-      // Delay in case of last ms bid event
-    }, timeout + 1000);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [auction.expiresAt]);
-
-  useEffect(() => {
-    // Update ui when max claim date is reached
-    const timeout = +new Date(auction.maxClaimDate) - +new Date();
-    const timeoutId = setTimeout(() => {
-      if (timeout > 0) {
-        setUpdatedAt(+new Date());
-      }
-    }, timeout);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [auction.maxClaimDate]);
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -136,36 +105,7 @@ const AuctionCard: React.FC<{
           <AuctionRanking auction={auction} isActive={isActive} />
           <CardActions isColumn={isColumn}>
             {showClaim ? (
-              <Button
-                variant={missClaim ? 'secondary' : 'primary'}
-                size='large'
-                onClick={() =>
-                  showModal(ClaimModal, {
-                    auction,
-                  })
-                }
-                disabled={missClaim}
-                caption={t(
-                  missClaim
-                    ? 'ended'
-                    : auction.userBid?.isClaimed
-                    ? 'instructions'
-                    : 'claim-now',
-                )}
-                bottomElement={
-                  canClaim && auction.maxClaimDate ? (
-                    <ClaimCountdown
-                      date={auction.maxClaimDate}
-                      started={true}
-                    />
-                  ) : null
-                }
-                leftElement={
-                  canClaim && auction.maxClaimDate ? (
-                    <TimeIcon height={21} width={21} />
-                  ) : null
-                }
-              />
+              <ClaimButton auction={auction} />
             ) : (
               isColumn && (
                 <BidButton
