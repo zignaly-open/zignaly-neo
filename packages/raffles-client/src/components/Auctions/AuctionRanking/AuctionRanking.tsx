@@ -66,7 +66,7 @@ const AuctionRanking = ({
     // user winning
     userBid?.position < auction.numberOfWinners &&
     // outside of visible list
-    userBid?.position >
+    userBid?.position >=
       MAX_WINNERS_DISPLAYED -
         // Minus 1 line if ellipsis is shown
         (isTruncated ? 1 : 0);
@@ -76,11 +76,7 @@ const AuctionRanking = ({
 
   // If we truncate the list to show the last winner or current user, that's 2 added lines. (counting the elipsis)
   // If we need to show both of them, that's 3 lines.
-  const linesAdded = isTruncated
-    ? isUserTruncated && userBid?.position !== bids.length && !isMobile
-      ? 3
-      : 2
-    : 0;
+  const linesAdded = isTruncated ? (isUserTruncated && !isMobile ? 3 : 2) : 0;
 
   return (
     <>
