@@ -62,10 +62,7 @@ function InputAmount({
       value: value?.value,
     });
   };
-  /**
-   * @function onClickMaxValue:
-   * @description Changes the input value to the maximum value declared in the balance.
-   */
+
   const onClickMaxValue = useCallback(() => {
     if (!disabled && value?.token?.balance) {
       onValueChange(changeEvent(name, value?.token.balance));

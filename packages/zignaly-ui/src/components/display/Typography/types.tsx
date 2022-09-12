@@ -28,7 +28,6 @@ export const weightByType = {
 export interface TypographyProps {
   variant?: keyof typeof componentByVariants;
   weight?: keyof typeof weightByType;
-  style?: any;
   className?: string;
   component?: any;
   color?: keyof typeof dark;

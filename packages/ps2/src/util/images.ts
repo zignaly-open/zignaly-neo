@@ -4,4 +4,4 @@ export function getImageOfAccount(index: number) {
 }
 
 export const getServiceLogo = (serviceLogo: string | null) =>
-  serviceLogo === '' || !serviceLogo ? '/images/coin-broken.svg' : serviceLogo;
+  serviceLogo || '/images/coin-broken.svg';
