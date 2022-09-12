@@ -44,6 +44,7 @@ const auctionObject = {
   description: 'Blah blah blah blhahblah bla blah hh!',
   createdAt: new Date(),
   expiresAt: new Date(Date.now() + 3600_000),
+  maxClaimDate: new Date(Date.now() + 10_000),
   monetaryValue: '$84.52',
   imageUrl: '/images/11.jpg',
   basketItems: [
@@ -89,6 +90,110 @@ Complete.args = {
     ...auctionObject,
     expiresAt: new Date(Date.now() - 3600_000),
     status: 'Complete',
+  },
+};
+
+export const Won = Template.bind({});
+
+Won.args = {
+  auction: {
+    ...auctionObject,
+    expiresAt: new Date(Date.now() - 3600_000),
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 1,
+          username: 'cemsun',
+        },
+      },
+    ],
+    userBid: {
+      id: 1,
+      value: '1.47',
+      position: 1,
+    },
+  },
+};
+
+export const Claimed = Template.bind({});
+
+Claimed.args = {
+  auction: {
+    ...auctionObject,
+    expiresAt: new Date(Date.now() - 3600_000),
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 1,
+          username: 'cemsun',
+        },
+      },
+    ],
+    userBid: {
+      id: 1,
+      value: '1.47',
+      position: 1,
+      isClaimed: true,
+    },
+  },
+};
+
+export const ClaimMissed = Template.bind({});
+
+ClaimMissed.args = {
+  auction: {
+    ...auctionObject,
+    expiresAt: new Date(Date.now() - 3600_000),
+    maxClaimDate: new Date(Date.now() - 3600_000),
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 1,
+          username: 'cemsun',
+        },
+      },
+    ],
+    userBid: {
+      id: 1,
+      value: '1.47',
+      position: 1,
+      isClaimed: false,
+    },
+  },
+};
+
+export const Expiring = Template.bind({});
+
+Expiring.args = {
+  auction: {
+    ...auctionObject,
+    expiresAt: new Date(Date.now() + 10_000),
+    maxClaimDate: new Date(Date.now() + 20_000),
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 1,
+          username: 'cemsun',
+        },
+      },
+    ],
+    userBid: {
+      id: 1,
+      value: '1.47',
+      position: 1,
+    },
   },
 };
 

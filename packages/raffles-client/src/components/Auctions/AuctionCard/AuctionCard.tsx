@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import { Typography, TextButton, Button, TimeIcon } from '@zignaly-open/ui';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import FinalCountdown from './FinalCountdown';
@@ -35,22 +35,44 @@ const AuctionCard: React.FC<{
   const [isColumn, setIsColumn] = useState(false);
   const [updatedAt, setUpdatedAt] = useState(null);
 
-  const canClaim =
-    !auction.userBid?.isClaimed &&
-    (!auction.maxClaimDate || new Date(auction.maxClaimDate) > new Date());
+  const maxClaimDateExpired =
+    auction.maxClaimDate && new Date(auction.maxClaimDate) < new Date();
+  const canClaim = !auction.userBid?.isClaimed && !maxClaimDateExpired;
+  const missClaim = !auction.userBid?.isClaimed && maxClaimDateExpired;
+
+  const showClaim = useMemo(
+    () => (!updatedAt || +new Date() - updatedAt > 0) && hasWon,
+    [updatedAt],
+  );
 
   useEffect(() => {
+    // Update ui when expiration date is reached
     const timeout = +new Date(auction.expiresAt) - +new Date();
     const timeoutId = setTimeout(() => {
       if (timeout > 0) {
         setUpdatedAt(+new Date());
       }
+      // Delay in case of last ms bid event
     }, timeout + 1000);
 
     return () => {
       clearTimeout(timeoutId);
     };
   }, [auction.expiresAt]);
+
+  useEffect(() => {
+    // Update ui when max claim date is reached
+    const timeout = +new Date(auction.maxClaimDate) - +new Date();
+    const timeoutId = setTimeout(() => {
+      if (timeout > 0) {
+        setUpdatedAt(+new Date());
+      }
+    }, timeout);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [auction.maxClaimDate]);
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -96,7 +118,11 @@ const AuctionCard: React.FC<{
             <FinalCountdown date={auction.expiresAt} started={true} />
           </StyledAmountContainer>
           <CardActions isColumn={isColumn} hide={isColumn}>
-            <BidButton auction={auction} isActive={isActive} />
+            <BidButton
+              auction={auction}
+              isActive={isActive}
+              updatedAt={updatedAt}
+            />
           </CardActions>
         </CardBody>
       </CardColumn>
@@ -109,22 +135,18 @@ const AuctionCard: React.FC<{
         <CardBody>
           <AuctionRanking auction={auction} isActive={isActive} />
           <CardActions isColumn={isColumn}>
-            {(!updatedAt || +new Date() - updatedAt > 0) && hasWon ? (
+            {showClaim ? (
               <Button
+                variant={missClaim ? 'secondary' : 'primary'}
                 size='large'
                 onClick={() =>
                   showModal(ClaimModal, {
                     auction,
                   })
                 }
-                disabled={
-                  !auction.userBid?.isClaimed &&
-                  auction.maxClaimDate &&
-                  new Date(auction.maxClaimDate) < new Date()
-                }
+                disabled={missClaim}
                 caption={t(
-                  auction.maxClaimDate &&
-                    new Date(auction.maxClaimDate) < new Date()
+                  missClaim
                     ? 'ended'
                     : auction.userBid?.isClaimed
                     ? 'instructions'
@@ -145,7 +167,13 @@ const AuctionCard: React.FC<{
                 }
               />
             ) : (
-              isColumn && <BidButton auction={auction} isActive={isActive} />
+              isColumn && (
+                <BidButton
+                  auction={auction}
+                  isActive={isActive}
+                  updatedAt={updatedAt}
+                />
+              )
             )}
           </CardActions>
         </CardBody>
