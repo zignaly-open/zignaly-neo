@@ -1,12 +1,7 @@
 import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { TextButton, Typography } from '@zignaly-open/ui';
-import {
-  BulletPointItem,
-  HowItWorksList,
-  ContainerBox,
-  LinkBox,
-} from './styles';
+import { BulletPointItem, HowItWorksList, ContainerBox } from './styles';
 
 const HowItWorks = () => {
   const [closed, setClosed] = useState(true);
@@ -14,16 +9,13 @@ const HowItWorks = () => {
   return (
     <ContainerBox>
       <Typography variant='body1' weight='regular' color='neutral100'>
-        {t('info')}
-        <LinkBox>
+        <Trans i18nKey='info' t={t}>
           <TextButton
             href='https://zignaly.com'
-            caption={t('infolink')}
-            color='links'
+            caption='zignaly.com'
             variant='body1'
           />
-        </LinkBox>
-        {t('info2')}
+        </Trans>
         <TextButton
           onClick={() => setClosed(!closed)}
           caption={closed ? 'Read More' : 'Read Less'}
