@@ -5,6 +5,7 @@ import {
   TraderServiceBalance,
   TraderServiceFull,
   TraderServiceManagement,
+  TransferPayload,
 } from './types';
 import baseQuery from '../baseQuery';
 
@@ -47,6 +48,16 @@ export const api = createApi({
         body: { minimum },
       }),
     }),
+    traderServiceTransferFunds: builder.mutation<
+      void,
+      { serviceId: string } & TransferPayload
+    >({
+      query: ({ serviceId, ...payload }) => ({
+        url: `services/${serviceId}/transfer`,
+        method: 'POST',
+        body: payload,
+      }),
+    }),
   }),
 });
 
@@ -58,5 +69,6 @@ export const {
   useTraderServiceManagementQuery,
   useTraderServiceUpdateScaMinimumMutation,
   useLazyTraderServicesQuery,
+  useTraderServiceTransferFundsMutation,
   useTraderServicesQuery,
 } = api;

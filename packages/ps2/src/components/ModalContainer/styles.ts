@@ -13,7 +13,7 @@ export const Layout = styled.div<{ width: number }>`
   ${({ width }) =>
     width &&
     css`
-      width: ${width}px;
+      width: ${width}px; // TODO: responsiveness
     `};
   user-select: none;
 `;

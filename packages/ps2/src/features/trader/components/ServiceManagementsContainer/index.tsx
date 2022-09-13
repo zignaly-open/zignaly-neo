@@ -38,24 +38,24 @@ import {
 } from '../../use';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import EditMinimumBalanceModal from '../EditMinimumBalanceModal';
+import TransferFundsModal from '../TransferFundsModal';
 
 function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   const theme = useTheme() as Theme;
-  const { data: service, isLoading: isLoadingService } =
+  const { data: service, isFetching: isLoadingService } =
     useTraderServiceDetails(serviceId);
   const { data: management, isFetching: isLoadingManagement } =
     useTraderServiceManagement(serviceId);
-  const { data: balance, isLoading: isLoadingBalance } =
+  const { data: balance, isFetching: isLoadingBalance } =
     useTraderServiceBalance(serviceId);
   const { t } = useTranslation(['management', 'action']);
   const { showModal } = useModal();
 
   const onClickTransfers = useCallback(() => {
-    // dispatch(
-    //   openModal(modalsIds.TRANSFER_OWNER_MANAGE_FUND, {
-    //     serviceId,
-    //   }),
-    // );
+    const modal: ShowFnOutput<void> = showModal(TransferFundsModal, {
+      serviceId,
+      close: () => modal.hide(),
+    });
   }, [serviceId]);
 
   const onClickMinBalance = () => {

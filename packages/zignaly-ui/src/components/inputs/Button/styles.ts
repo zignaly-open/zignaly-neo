@@ -88,6 +88,7 @@ export const ButtonLoader = styled(Loader)`
   justify-content: center;
   align-items: center;
 `;
+
 /**
  * Layout
  */
@@ -110,10 +111,12 @@ export const Layout = styled.button<LayoutProps>`
   padding: 0;
   cursor: pointer;
   outline: none;
+
   svg {
     width: 100%;
     height: 100%;
   }
+
   position: relative;
   user-select: none;
   background: transparent;
@@ -338,6 +341,7 @@ export const Layout = styled.button<LayoutProps>`
       ${Container} {
         height: 60px;  
         min-width: 127px;
+        padding: 0 36px;
       }
 
       ${styledIf(

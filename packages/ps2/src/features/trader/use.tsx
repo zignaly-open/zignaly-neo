@@ -4,11 +4,12 @@ import {
   useTraderServiceDetailsQuery,
   useTraderServiceInvestorsQuery,
   useTraderServiceManagementQuery,
+  useTraderServiceTransferFundsMutation,
   useTraderServiceUpdateScaMinimumMutation,
 } from './api';
 import { useDispatch } from 'react-redux';
 import { setActiveServiceId } from './store';
-import { TraderService } from './types';
+import { TraderService, TransferPayload } from './types';
 import { useCurrentUser } from '../auth/use';
 import { useEffect } from 'react';
 
@@ -62,6 +63,21 @@ export function useTraderServiceUpdateMinimum(
   return [
     async (minimum) => {
       await update({ minimum, serviceId });
+      await refetch();
+    },
+    { isLoading: isLoading || isLoadingManagement },
+  ];
+}
+
+export function useTraderServiceTransferFunds(
+  serviceId: string,
+): [(payload: TransferPayload) => Promise<void>, { isLoading: boolean }] {
+  const [update, { isLoading }] = useTraderServiceTransferFundsMutation();
+  const { isFetching: isLoadingManagement, refetch } =
+    useTraderServiceBalance(serviceId);
+  return [
+    async (payload) => {
+      await update({ ...payload, serviceId });
       await refetch();
     },
     { isLoading: isLoading || isLoadingManagement },

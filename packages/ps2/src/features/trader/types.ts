@@ -79,3 +79,11 @@ export type Investor = {
   sfOwnerLc: string;
   userId: string;
 };
+
+export type InternalAccountType = 'STA' | 'SCA';
+
+export type TransferPayload = {
+  from: InternalAccountType;
+  to: InternalAccountType;
+  amount: string;
+};
