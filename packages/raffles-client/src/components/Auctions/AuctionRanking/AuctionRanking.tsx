@@ -37,7 +37,7 @@ const AuctionRanking = ({
   isActive: boolean;
 }) => {
   const isMobile = useMediaQuery(muiTheme.breakpoints.down('sm'));
-  const MAX_WINNERS_DISPLAYED = isMobile ? 3 : 7;
+  const MAX_WINNERS_DISPLAYED = isMobile ? 3 : 8;
 
   // Number of winners we can display
   const winnersDisplayed = Math.min(
