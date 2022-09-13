@@ -7,12 +7,33 @@ export const Step = styled(Box)`
   display: flex;
   text-align: center;
   flex: 1;
+  flex-direction: column;
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 24px;
+  }
+`;
+
+export const StepDetails = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    padding: 0 24px;
+  }
 `;
 
 export const StepIcon = styled(WalletIcon)`
-  width: 82px;
-  height: 82px;
+  min-width: 82px;
+  min-height: 82px;
   margin-bottom: 18px;
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    margin-bottom: 0;
+  }
 `;
 
 export const TypographyTitle = styled(Typography)`

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '@zignaly-open/ui';
-import { Step, StepIcon, TypographyTitle, Layout } from './styles';
+import { Step, StepIcon, TypographyTitle, Layout, StepDetails } from './styles';
 import { Stack } from '@mui/material';
 
 const HowItWorks = () => {
@@ -12,7 +12,7 @@ const HowItWorks = () => {
       flexDirection='column'
       alignItems='center'
       mt={3}
-      mb={{ xs: 2, md: 1 }}
+      mb={{ xs: 5, md: 1 }}
     >
       <Typography variant='h2' color='neutral100'>
         {t('how-it-works')}
@@ -24,39 +24,47 @@ const HowItWorks = () => {
       >
         <Step>
           <StepIcon />
-          <TypographyTitle variant='h2' color='neutral100' component='h2'>
-            {t('step1')}
-          </TypographyTitle>
-          <Typography variant='h4' color='neutral200' component='h4'>
-            {t('step1-info')}
-          </Typography>
+          <StepDetails>
+            <TypographyTitle variant='h2' color='neutral100' component='h2'>
+              {t('step1')}
+            </TypographyTitle>
+            <Typography variant='h4' color='neutral200' component='h4'>
+              {t('step1-info')}
+            </Typography>
+          </StepDetails>
         </Step>
         <Step>
           <StepIcon />
-          <TypographyTitle variant='h2' color='neutral100' component='h2'>
-            {t('step2')}
-          </TypographyTitle>
-          <Typography variant='h4' color='neutral200' component='h4'>
-            {t('step2-info')}
-          </Typography>
+          <StepDetails>
+            <TypographyTitle variant='h2' color='neutral100' component='h2'>
+              {t('step2')}
+            </TypographyTitle>
+            <Typography variant='h4' color='neutral200' component='h4'>
+              {t('step2-info')}
+            </Typography>
+          </StepDetails>
         </Step>
         <Step>
           <StepIcon />
-          <TypographyTitle variant='h2' color='neutral100' component='h2'>
-            {t('step3')}
-          </TypographyTitle>
-          <Typography variant='h4' color='neutral200' component='h4'>
-            {t('step3-info')}
-          </Typography>
+          <StepDetails>
+            <TypographyTitle variant='h2' color='neutral100' component='h2'>
+              {t('step3')}
+            </TypographyTitle>
+            <Typography variant='h4' color='neutral200' component='h4'>
+              {t('step3-info')}
+            </Typography>
+          </StepDetails>
         </Step>
         <Step>
           <StepIcon />
-          <TypographyTitle variant='h2' color='neutral100' component='h2'>
-            {t('step4')}
-          </TypographyTitle>
-          <Typography variant='h4' color='neutral200' component='h4'>
-            {t('step4-info')}
-          </Typography>
+          <StepDetails>
+            <TypographyTitle variant='h2' color='neutral100' component='h2'>
+              {t('step4')}
+            </TypographyTitle>
+            <Typography variant='h4' color='neutral200' component='h4'>
+              {t('step4-info')}
+            </Typography>
+          </StepDetails>
         </Step>
       </Stack>
     </Layout>
