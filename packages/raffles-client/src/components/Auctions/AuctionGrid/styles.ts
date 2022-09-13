@@ -3,7 +3,7 @@ import { Select, Typography } from '@zignaly-open/ui';
 
 export const LayoutContainer = styled(Box)`
   max-width: 1280px;
-  margin: 30px auto;
+  margin: 0 auto 30px;
   padding: 0 8px;
 `;
 

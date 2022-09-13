@@ -1,38 +1,24 @@
-import { styled } from '@mui/material';
+import { Box, styled } from '@mui/material';
+import { Typography, WalletIcon } from '@zignaly-open/ui';
 
-export const ContainerBox = styled('div')`
-  position: relative;
-  display: flex;
+export const Step = styled(Box)`
   flex-direction: column;
-  margin: 0 auto 17px;
-  padding: 0 16px;
-  max-width: 1200px;
-  text-align: justify;
-`;
-
-export const HowItWorksList = styled('ul')`
-  /* width: 100%; */
+  align-items: center;
   display: flex;
-  /* justify-content: space-evenly; */
-  justify-content: space-between;
-  padding-inline-start: 28px;
-
-  > span {
-    max-width: 46%;
-  }
-
-  ${({ theme }) => theme.breakpoints.down('sm')} {
-    flex-wrap: wrap;
-    padding-inline-start: 11px;
-
-    > span {
-      max-width: 100%;
-    }
-  }
+  text-align: center;
+  flex: 1;
 `;
 
-export const BulletPointItem = styled('li')`
-  &::marker {
-    font-size: 30px;
-  }
+export const StepIcon = styled(WalletIcon)`
+  width: 82px;
+  height: 82px;
+  margin-bottom: 18px;
+`;
+
+export const TypographyTitle = styled(Typography)`
+  margin-bottom: 6px !important;
+`;
+
+export const Layout = styled(Box)`
+  max-width: 1280px;
 `;
