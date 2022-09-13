@@ -102,9 +102,9 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         accessor: 'feesInZig',
         Cell: ({ cell: { value } }) =>
           value ? (
-            <CheckIcon width={'18px'} height={'18px'} color={'#fff'} />
+            <CheckIcon width={'22px'} height={'19px'} color={'#fff'} />
           ) : (
-            <CloseIcon width={'18px'} height={'18px'} color={'#fff'} />
+            <CloseIcon width={'11px'} height={'11px'} color={'#fff'} />
           ),
       },
       {
