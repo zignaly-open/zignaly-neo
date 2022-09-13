@@ -30,6 +30,8 @@
   "new-version": "New version, click me to update",
   "validation": {
     "insufficient-amount": "Insufficient funds",
-    "invalid-value": "Invalid value"
+    "invalid-value": "Invalid value",
+    "negative-amount": "Should be >= 0",
+    "invalid-amount": "You must indicate an amount"
   }
 }

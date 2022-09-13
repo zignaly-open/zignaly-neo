@@ -1,6 +1,6 @@
 import * as yup from 'yup';
-import { maxAmountValidation } from '../../util';
+import { inputAmountTokenMaxValidation } from '../../../../../../util/validation';
 
 export const EditInvestmentValidation = yup.object().shape({
-  amountTransfer: maxAmountValidation,
+  amountTransfer: inputAmountTokenMaxValidation,
 });

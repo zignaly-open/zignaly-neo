@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch } from 'react-redux';
 import { useTheme } from 'styled-components';
 import {
   ArrowLeftIcon,
@@ -37,17 +36,19 @@ import {
   useTraderServiceDetails,
   useTraderServiceManagement,
 } from '../../use';
+import { ShowFnOutput, useModal } from 'mui-modal-provider';
+import EditMinimumBalanceModal from '../EditMinimumBalanceModal';
 
 function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   const theme = useTheme() as Theme;
   const { data: service, isLoading: isLoadingService } =
     useTraderServiceDetails(serviceId);
-  const { data: management, isLoading: isLoadingManagement } =
+  const { data: management, isFetching: isLoadingManagement } =
     useTraderServiceManagement(serviceId);
   const { data: balance, isLoading: isLoadingBalance } =
     useTraderServiceBalance(serviceId);
   const { t } = useTranslation(['management', 'action']);
-  const dispatch = useDispatch();
+  const { showModal } = useModal();
 
   const onClickTransfers = useCallback(() => {
     // dispatch(
@@ -55,15 +56,14 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
     //     serviceId,
     //   }),
     // );
-  }, [dispatch, serviceId]);
+  }, [serviceId]);
 
-  const onClickMinBalance = useCallback(() => {
-    // dispatch(
-    //   openModal(modalsIds.MIN_BALANCE_MODAL, {
-    //     serviceId,
-    //   }),
-    // );
-  }, [dispatch, serviceId]);
+  const onClickMinBalance = () => {
+    const modal: ShowFnOutput<void> = showModal(EditMinimumBalanceModal, {
+      serviceId,
+      close: () => modal.hide(),
+    });
+  };
 
   const checkStableCoinOperate = useMemo(
     () => coinsToOperateServices.stableCoins.includes(service?.ssc ?? 'USDT'),

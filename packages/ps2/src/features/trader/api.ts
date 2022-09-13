@@ -37,6 +37,16 @@ export const api = createApi({
         url: `services/${id}/investors`,
       }),
     }),
+    traderServiceUpdateScaMinimum: builder.mutation<
+      void,
+      { minimum: string; serviceId: string }
+    >({
+      query: ({ serviceId, minimum }) => ({
+        url: `services/${serviceId}/sca`,
+        method: 'PUT',
+        body: { minimum },
+      }),
+    }),
   }),
 });
 
@@ -46,6 +56,7 @@ export const {
   useTraderServiceDetailsQuery,
   useTraderServiceBalanceQuery,
   useTraderServiceManagementQuery,
+  useTraderServiceUpdateScaMinimumMutation,
   useLazyTraderServicesQuery,
   useTraderServicesQuery,
 } = api;

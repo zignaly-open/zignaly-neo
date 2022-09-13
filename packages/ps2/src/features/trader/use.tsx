@@ -4,6 +4,7 @@ import {
   useTraderServiceDetailsQuery,
   useTraderServiceInvestorsQuery,
   useTraderServiceManagementQuery,
+  useTraderServiceUpdateScaMinimumMutation,
 } from './api';
 import { useDispatch } from 'react-redux';
 import { setActiveServiceId } from './store';
@@ -50,4 +51,19 @@ export function useTraderServiceBalance(
   serviceId: string,
 ): ReturnType<typeof useTraderServiceBalanceQuery> {
   return useTraderServiceBalanceQuery(serviceId);
+}
+
+export function useTraderServiceUpdateMinimum(
+  serviceId: string,
+): [(minimum: string) => Promise<void>, { isLoading: boolean }] {
+  const [update, { isLoading }] = useTraderServiceUpdateScaMinimumMutation();
+  const { isFetching: isLoadingManagement, refetch } =
+    useTraderServiceManagement(serviceId);
+  return [
+    async (minimum) => {
+      await update({ minimum, serviceId });
+      await refetch();
+    },
+    { isLoading: isLoading || isLoadingManagement },
+  ];
 }
