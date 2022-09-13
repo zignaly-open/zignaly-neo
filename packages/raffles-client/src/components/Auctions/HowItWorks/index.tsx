@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import { TextButton, Typography, WalletIcon } from '@zignaly-open/ui';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
+import { Typography } from '@zignaly-open/ui';
 import { Step, StepIcon, TypographyTitle, Layout } from './styles';
-import { Box, Stack } from '@mui/material';
+import { Stack } from '@mui/material';
 
 const HowItWorks = () => {
   const { t } = useTranslation('how-it-works');
