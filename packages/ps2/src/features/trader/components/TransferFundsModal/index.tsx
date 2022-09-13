@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import NumberFormat from 'react-number-format';
@@ -41,7 +41,7 @@ function TransferModal({
   ...props
 }: TransferModalProps): React.ReactElement {
   const { t } = useTranslation('management');
-  const { data: balance, refetch } = useTraderServiceBalance(serviceId);
+  const { data: balance } = useTraderServiceBalance(serviceId);
   const { data: service } = useTraderServiceDetails(serviceId);
   const [fromTradingAccount, setFromTradingAccount] = useState(true);
   const toast = useToast();
@@ -55,8 +55,7 @@ function TransferModal({
   const balanceFrom = fromTradingAccount ? freeBalance : disconnectBalance;
   const balanceTo = !fromTradingAccount ? freeBalance : disconnectBalance;
 
-  // make sure the user is seeing the latest balance
-  useEffect(refetch, []);
+  // TODO: maybe refetch useTraderServiceBalance just in case?
 
   const {
     watch,
