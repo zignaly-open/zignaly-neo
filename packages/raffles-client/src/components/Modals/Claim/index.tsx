@@ -67,6 +67,8 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
         }
       } catch (err) {
         showToast({ size: 'large', variant: 'error', caption: err.message });
+      } finally {
+        setLoading(false);
       }
     },
     [auction],
