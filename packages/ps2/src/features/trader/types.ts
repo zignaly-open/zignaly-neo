@@ -11,6 +11,12 @@ export type TraderService = {
   serviceName: string;
 };
 
+export enum TraderServiceAccessLevel {
+  Solo = 0,
+  Private = 100,
+  Public = 200,
+}
+
 export type TraderServiceFull = {
   createdAt: string;
   description: string;
