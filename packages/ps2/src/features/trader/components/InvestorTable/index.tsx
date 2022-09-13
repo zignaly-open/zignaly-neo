@@ -5,8 +5,6 @@ import { Layout, Center, InvestorCounts } from './styles';
 import {
   Loader,
   UserIcon,
-  CheckIcon,
-  CloseIcon,
   Typography,
   Table,
   PriceLabel,
@@ -22,6 +20,7 @@ import {
 } from '../../use';
 import { Investor } from '../../types';
 import ConnectionStateLabel from '../ConnectionStateLabel';
+import { YesNo } from './atoms';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -100,12 +99,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       {
         Header: t('investors.tableHeader.feesZIG'),
         accessor: 'feesInZig',
-        Cell: ({ cell: { value } }) =>
-          value ? (
-            <CheckIcon width={'22px'} height={'19px'} color={'#fff'} />
-          ) : (
-            <CloseIcon width={'11px'} height={'11px'} color={'#fff'} />
-          ),
+        Cell: ({ cell: { value } }) => <YesNo value={value} />,
       },
       {
         Header: t('investors.tableHeader.status'),

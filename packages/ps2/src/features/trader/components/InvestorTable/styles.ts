@@ -5,7 +5,6 @@ export const Layout = styled(PageContainer)`
   width: 100%;
   margin: 0 auto;
   max-width: 1700px;
-  padding: 194px 50px 0;
 `;
 
 export const InvestorCounts = styled.div`
