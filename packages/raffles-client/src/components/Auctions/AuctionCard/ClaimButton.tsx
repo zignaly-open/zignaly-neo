@@ -13,12 +13,14 @@ const ClaimButton = ({
   claimCaption = 'claim-now',
   type,
   loading,
+  onClick,
 }: {
   auction: AuctionType;
   disabled?: boolean;
   loading?: boolean;
   claimCaption?: string;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>['type'];
+  onClick?: () => void;
 }) => {
   const { showModal } = useModal();
   const { t } = useTranslation('auction');
@@ -41,10 +43,13 @@ const ClaimButton = ({
       type={type}
       variant={missClaim ? 'secondary' : 'primary'}
       size='large'
-      onClick={() =>
-        showModal(ClaimModal, {
-          auction,
-        })
+      onClick={
+        onClick
+          ? onClick
+          : () =>
+              showModal(ClaimModal, {
+                auction,
+              })
       }
       disabled={disabled || missClaim}
       caption={t(

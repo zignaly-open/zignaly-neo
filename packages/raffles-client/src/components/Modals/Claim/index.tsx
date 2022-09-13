@@ -2,40 +2,69 @@ import { useMutation } from '@apollo/client';
 import { Box } from '@mui/material';
 import useCurrentUser from 'hooks/useCurrentUser';
 import { CLAIM, GET_AUCTIONS } from 'queries/auctions';
-import React, { FormEvent, useCallback, useState } from 'react';
+import React, { FormEvent, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, InputText, Typography } from '@zignaly-open/ui';
+import { Button, Typography } from '@zignaly-open/ui';
 import CongratulationsModal from '../Congratulations';
 import DialogContainer from '../DialogContainer';
-import { Form } from './styles';
+import { Form, Separator } from './styles';
 import { ClaimModalProps } from './types';
 import { showToast } from 'util/showToast';
 import ClaimButton from 'components/Auctions/AuctionCard/ClaimButton';
+import useBalance from 'hooks/useBalance';
+import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
+import { PriceLabel } from 'components/Auctions/AuctionCard/styles';
+import { useModal } from 'mui-modal-provider';
+import UserSettingsModal from '../UserSettings';
+import TransferZigModal from '../TransferZig';
+
+enum ClaimState {
+  NoDiscord,
+  NotEnoughFunds,
+  Claimed,
+  NotClaimed,
+}
 
 const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const { t } = useTranslation(['claim', 'user-settings', 'global']);
   const {
     user: { discordName, publicAddress },
   } = useCurrentUser();
-
-  const [success, setSuccess] = useState(auction.userBid?.isClaimed);
-  const [claim] = useMutation(CLAIM, {
+  const { balance, loading: balanceLoading } = useBalance();
+  const { showModal } = useModal();
+  const [claim, { data: claimResponse }] = useMutation(CLAIM, {
     refetchQueries: [{ query: GET_AUCTIONS }],
   });
   const [loading, setLoading] = useState(false);
 
+  const claimState = useMemo(() => {
+    if (auction.userBid?.isClaimed || claimResponse?.claim) {
+      return ClaimState.Claimed;
+    } else if (!discordName) {
+      return ClaimState.NoDiscord;
+    } else if (!balanceLoading && balance < parseFloat(auction.currentBid)) {
+      return ClaimState.NotEnoughFunds;
+    } else {
+      return ClaimState.NotClaimed;
+    }
+  }, [discordName, balance, balanceLoading, auction, claimResponse]);
+
   const submit = useCallback(
     async (e: FormEvent) => {
-      e.preventDefault();
-
       try {
-        setLoading(true);
-        await claim({
-          variables: {
-            id: auction.id,
-          },
-        });
-        setSuccess(true);
+        e.preventDefault();
+        if (claimState === ClaimState.NoDiscord) {
+          showModal(UserSettingsModal);
+        } else if (claimState === ClaimState.NotEnoughFunds) {
+          showModal(TransferZigModal);
+        } else {
+          setLoading(true);
+          await claim({
+            variables: {
+              id: auction.id,
+            },
+          });
+        }
       } catch (err) {
         showToast({ size: 'large', variant: 'error', caption: err.message });
       }
@@ -43,7 +72,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
     [auction],
   );
 
-  if (success) {
+  if (claimState === ClaimState.Claimed) {
     return <CongratulationsModal auction={auction} {...props} />;
   }
 
@@ -51,42 +80,51 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
     <DialogContainer title={t('claim-instructions')} {...props}>
       <Typography color='neutral200'>{t('congratulations-winner')}</Typography>
       <br />
-      <br />
-      <Typography color='neutral200'>{t('verify')}</Typography>
+      {/* <br /> */}
+      {/* <Typography color='neutral200'>{t('verify')}</Typography> */}
       <Form onSubmit={submit}>
-        <Typography color='neutral200'>{t('connected-wallet')}</Typography>
-        <InputText
-          name='publicAddress'
-          value={publicAddress}
-          placeholder={t('connected-wallet')}
-          disabled={true}
-          minHeight={1}
-        />
-        <Typography color='neutral200'>
-          {t('discord-user-label', {
-            ns: 'user-settings',
-          })}
-        </Typography>
-        <Box mt='-8px'>
-          <Typography color='neutral400' variant='h4'>
-            {t('change')}
+        <Typography color='neutral300'>{t('connected-wallet')}</Typography>
+        <Typography color='neutral200'>{publicAddress}</Typography>
+        {discordName && (
+          <>
+            <Typography color='neutral300'>{t('discord-user')}</Typography>
+            <Typography color='neutral200'>{discordName}</Typography>
+            <Typography color='neutral400' variant='h4'>
+              {t('change')}
+            </Typography>
+          </>
+        )}
+        <Separator />
+        <Box display='flex' justifyContent='space-evenly'>
+          <Box display='flex' flexDirection='column' mr={2}>
+            <Typography color='neutral300'>{t('prize')}</Typography>
+            <Typography color='neutral200'>{auction.title}</Typography>
+          </Box>
+          <Box display='flex' flexDirection='column'>
+            <Typography color='neutral300'>{t('amount')}</Typography>
+            <Box display='flex'>
+              <ZigCoinIcon width={24} height={24} />
+              <PriceLabel value={auction.currentBid} coin='ZIG' />
+            </Box>
+          </Box>
+        </Box>
+        <Box mt={3} textAlign='center'>
+          <Typography component='div' color='neutral200'>
+            {t(
+              claimState === ClaimState.NoDiscord
+                ? 'set-discord-info'
+                : claimState === ClaimState.NotEnoughFunds
+                ? 'transfer-zig-info'
+                : 'agree',
+            )}
           </Typography>
         </Box>
-        <InputText
-          name='discordName'
-          value={discordName}
-          placeholder={t('please-enter-discord-user', {
-            ns: 'user-settings',
-          })}
-          disabled={true}
-          minHeight={1}
-        />
         <Box
           gap='12px'
           display='flex'
           justifyContent='center'
-          sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
-          mt='40px'
+          sx={{ flexDirection: { xs: 'column-reverse', sm: 'row' } }}
+          mt={2}
         >
           <Button
             caption={t('cancel', {
@@ -101,8 +139,14 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
             loading={loading}
             type='submit'
             auction={auction}
-            claimCaption={t('claim')}
-            disabled={!discordName}
+            onClick={() => {}}
+            claimCaption={t(
+              claimState === ClaimState.NoDiscord
+                ? 'set-discord'
+                : claimState === ClaimState.NotEnoughFunds
+                ? 'transfer-zig'
+                : 'claim',
+            )}
           />
         </Box>
       </Form>
