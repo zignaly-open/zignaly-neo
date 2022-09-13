@@ -1,5 +1,4 @@
 import {
-  useLazyTraderServicesQuery,
   useTraderServiceBalanceQuery,
   useTraderServiceDetailsQuery,
   useTraderServiceInvestorsQuery,
@@ -7,27 +6,22 @@ import {
   useTraderServiceTransferFundsMutation,
   useTraderServiceUpdateScaMinimumMutation,
 } from './api';
-import { useDispatch } from 'react-redux';
-import { setActiveServiceId } from './store';
+import { useSelector } from 'react-redux';
 import { TraderService, TransferPayload } from './types';
-import { useCurrentUser } from '../auth/use';
-import { useEffect } from 'react';
+import { RootState } from '../store';
+import { useIsAuthenticated } from '../auth/use';
 
-export function useTraderServices(): {
-  data: TraderService[];
-  isLoading: boolean;
-} {
-  const [load, { data, isLoading }] = useLazyTraderServicesQuery();
-  const user = useCurrentUser();
-  useEffect(() => {
-    user?.userId && load();
-  }, [user?.userId]);
-  return { data, isLoading };
+export function useTraderServices(): TraderService[] | undefined {
+  return useSelector((store: RootState) => store.trader.traderServices);
 }
 
-export function useSetActiveTraderService(): (serviceId: string) => void {
-  const dispatch = useDispatch();
-  return (serviceId) => dispatch(setActiveServiceId(serviceId));
+export function useIsServiceOwner(serviceId: string) {
+  const traderServices = useTraderServices();
+  const isAuthenticated = useIsAuthenticated();
+  return (
+    isAuthenticated &&
+    traderServices?.some((s: TraderService) => s.serviceId === serviceId)
+  );
 }
 
 export const useTraderServiceInvestors = (

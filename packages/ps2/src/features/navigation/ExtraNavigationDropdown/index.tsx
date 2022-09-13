@@ -28,7 +28,7 @@ const ExtraNavigationDropdown: React.FC = () => {
   }, [dropDownRef]);
 
   const changeLocale = useChangeLocale();
-  const { data } = useTraderServices();
+  const services = useTraderServices();
 
   const onSelectLocale = (locale: string) => {
     changeLocale(locale);
@@ -54,9 +54,9 @@ const ExtraNavigationDropdown: React.FC = () => {
             <Link
               onClick={onClose}
               to={
-                data?.[0]
+                services?.[0]
                   ? generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-                      serviceId: data[0].serviceId?.toString(),
+                      serviceId: services[0].serviceId?.toString(),
                     })
                   : ROUTE_HELP
               }

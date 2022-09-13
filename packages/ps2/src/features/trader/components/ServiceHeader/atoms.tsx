@@ -41,7 +41,7 @@ export const RouteDropdown: React.FC<{
         dropDownOptions={{
           maxHeight: '300px',
         }}
-        focused={routes.some((x) => activePath.includes(x.path))}
+        focused={routes.some((x) => activePath === x.path)}
       >
         <RouteGroup routes={routes} />
       </MenuDropDown>

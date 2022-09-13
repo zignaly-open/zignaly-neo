@@ -2,18 +2,18 @@ import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MarginContainer, MenuDropDown, Typography } from '@zignaly-open/ui';
 import { Layout, Container, Options, Option } from './styles';
-import { useTraderServices } from '../../use';
+import { useIsServiceOwner, useTraderServices } from '../../use';
 import { TraderService } from '../../types';
 import { generatePath, Link, useParams, useLocation } from 'react-router-dom';
 import { RouteDropdown, RouteGroup } from './atoms';
 import {
+  ROUTE_TRADING_SERVICE,
   ROUTE_TRADING_SERVICE_API,
   ROUTE_TRADING_SERVICE_COINS,
   ROUTE_TRADING_SERVICE_INVESTORS,
   ROUTE_TRADING_SERVICE_MANAGE,
   ROUTE_TRADING_SERVICE_MANUAL,
   ROUTE_TRADING_SERVICE_POSITIONS,
-  ROUTE_TRADING_SERVICE_PROFILE,
   ROUTE_TRADING_SERVICE_PROFILE_EDIT,
   ROUTE_TRADING_SERVICE_SIGNALS,
 } from '../../../../routes';
@@ -23,8 +23,9 @@ function ServiceHeader() {
   const { t } = useTranslation('service-header');
   const { serviceId } = useParams();
   const currentPath = useLocation()?.pathname;
+  const isOwner = useIsServiceOwner(serviceId);
 
-  const { data: myServicesList } = useTraderServices();
+  const myServicesList = useTraderServices();
   const activeService = myServicesList?.find(
     (s: TraderService) => s.serviceId === serviceId,
   );
@@ -35,41 +36,46 @@ function ServiceHeader() {
     }
   }, [serviceId]);
 
+  if (!isOwner) {
+    // Show nothing for non-service owners
+    return <></>;
+  }
+
   return (
     <Layout>
       <MarginContainer>
         <Container>
-          {activeService && (
-            <MenuDropDown
-              ref={menuDropDownRef}
-              title={activeService.serviceName}
-              secondaryTitle={t('service-header.dropdown.manageServices')}
-              dropDownOptions={{
-                maxHeight: '300px',
-              }}
-            >
-              <Options>
-                {myServicesList.map((service: TraderService) => (
-                  <Link
-                    to={currentPath.replace(serviceId, service?.serviceId)}
-                    key={`--route-key-${service?.serviceId}`}
-                  >
-                    <Option active={serviceId === service?.serviceId}>
-                      <Typography variant={'body1'}>
-                        {service?.serviceName}
-                      </Typography>
-                    </Option>
-                  </Link>
-                ))}
-              </Options>
-            </MenuDropDown>
-          )}
+          <MenuDropDown
+            ref={menuDropDownRef}
+            title={activeService?.serviceName}
+            secondaryTitle={t('service-header.dropdown.manageServices')}
+            dropDownOptions={{
+              maxHeight: '300px',
+            }}
+          >
+            <Options>
+              {myServicesList?.map((service: TraderService) => (
+                <Link
+                  to={currentPath.replace(serviceId, service?.serviceId)}
+                  key={`--route-key-${service?.serviceId}`}
+                >
+                  <Option active={serviceId === service?.serviceId}>
+                    <Typography variant={'body1'}>
+                      {service?.serviceName}
+                    </Typography>
+                  </Option>
+                </Link>
+              ))}
+            </Options>
+          </MenuDropDown>
 
           <RouteGroup
             routes={[
               {
                 name: t('service-header.managements-label'),
-                path: generatePath(ROUTE_TRADING_SERVICE_MANAGE, { serviceId }),
+                path: generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+                  serviceId,
+                }),
               },
             ]}
           />
@@ -85,7 +91,9 @@ function ServiceHeader() {
               },
               {
                 name: t('service-header.dropdown.trade.links.manual'),
-                path: generatePath(ROUTE_TRADING_SERVICE_MANUAL, { serviceId }),
+                path: generatePath(ROUTE_TRADING_SERVICE_MANUAL, {
+                  serviceId,
+                }),
               },
               {
                 name: t('service-header.dropdown.trade.links.signals'),
@@ -120,7 +128,7 @@ function ServiceHeader() {
             routes={[
               {
                 name: t('service-header.dropdown.profile.links.profile'),
-                path: generatePath(ROUTE_TRADING_SERVICE_PROFILE, {
+                path: generatePath(ROUTE_TRADING_SERVICE, {
                   serviceId,
                 }),
               },
