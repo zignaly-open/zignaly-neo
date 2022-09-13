@@ -7,6 +7,7 @@ import {
   useParams,
   generatePath,
 } from 'react-router-dom';
+import styled from 'styled-components';
 import ProfitSharing from './views/ProfitSharing';
 import Dashboard from './views/Dashboard';
 import Staking from './views/Staking';
@@ -79,9 +80,17 @@ const ServiceOwnerWall: React.FC<{ children: ReactElement }> = ({
   );
 };
 
+const RouterContainer = styled.div`
+  height: 100vh;
+  width: 100%;
+  padding: 0;
+  flex-direction: column;
+  display: flex;
+`;
+
 function Router() {
   return (
-    <>
+    <RouterContainer>
       <Header />
       <RouterRoutes>
         <Route
@@ -198,7 +207,7 @@ function Router() {
           }
         />
       </RouterRoutes>
-    </>
+    </RouterContainer>
   );
 }
 

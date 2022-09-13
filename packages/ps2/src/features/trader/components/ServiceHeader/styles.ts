@@ -3,8 +3,7 @@ import { styledIf } from '@zignaly-open/ui';
 
 export const Layout = styled.div`
   flex-direction: row;
-  position: fixed;
-  top: 52px;
+  flex: 0 0 56px;
   width: 100%;
   right: 0;
   left: 0;
