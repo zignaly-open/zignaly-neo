@@ -23,7 +23,7 @@ const RankingRow = ({ bid }: { bid: AuctionBidType }) => {
         <Typography>{position}.</Typography>
       </Rank>
       <Box display='flex' justifyContent='space-between' flex={1}>
-        <Typography>{user.username || `${t('user')} ${user.id}`}</Typography>
+        <Typography>{user.username || `${t('user')}#${user.id}`}</Typography>
       </Box>
     </RankingRowContainer>
   );
