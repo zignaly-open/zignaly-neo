@@ -25,8 +25,28 @@ type ChainEvent = {
 };
 
 export default async function watchTransactions() {
+  const options = {
+    timeout: 30000, // ms
+
+    clientConfig: {
+      // Useful if requests are large
+      maxReceivedFrameSize: 100000000, // bytes - default: 1MiB
+      maxReceivedMessageSize: 100000000, // bytes - default: 8MiB
+
+      // Useful to keep a connection alive
+      keepalive: true,
+      keepaliveInterval: -1, // ms
+    },
+    reconnect: {
+      auto: true,
+      delay: 5000, // ms
+      maxAttempts: 5,
+      onTimeout: false,
+    },
+  };
+
   const web3socket = new Web3(
-    new Web3.providers.WebsocketProvider(rpcSocketUrl),
+    new Web3.providers.WebsocketProvider(rpcSocketUrl, options),
   );
   const web3 = new Web3(new Web3.providers.HttpProvider(rpcUrl));
   const zigCoinContract = new web3.eth.Contract(
@@ -35,10 +55,15 @@ export default async function watchTransactions() {
   );
 
   function watchTokenTransfers() {
-    return web3socket.eth.subscribe('newBlockHeaders').on('data', (block) =>
-      // TODO: check arithmetics here, maybe need +1
-      checkBlock(block.number - numberOfConfirmationsRequired),
-    );
+    return web3socket.eth
+      .subscribe('newBlockHeaders')
+      .on('data', (block) => {
+        // TODO: check arithmetics here, maybe need +1
+        checkBlock(block.number - numberOfConfirmationsRequired);
+      })
+      .on('error', (err) => {
+        throw err;
+      });
   }
 
   async function checkBlock(blockNumber: number) {

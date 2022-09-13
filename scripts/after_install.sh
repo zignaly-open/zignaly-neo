@@ -2,13 +2,16 @@
 
 DEPLOYMENTPATH="/zignaly/{directory}"
 
-sudo rm -rf $DEPLOYMENTPATH/temp
-sudo mv $DEPLOYMENTPATH/deploy $DEPLOYMENTPATH/temp
-cd $DEPLOYMENTPATH/temp
-# Build
-sudo yarn --scope=@zignaly-open/raffles-client --include-dependencies
-sudo yarn run build --scope=@zignaly-open/raffles-client --include-dependencies
+# Change permissions
+sudo chown -R admin:admin $DEPLOYMENTPATH/deploy
 
-# Replace release
-sudo rm -rf $DEPLOYMENTPATH/release
-sudo mv $DEPLOYMENTPATH/temp $DEPLOYMENTPATH/release
+# Install server
+cd $DEPLOYMENTPATH/deploy/packages/raffles-server
+yarn
+
+# Move client
+rm -rf $DEPLOYMENTPATH/client
+mv $DEPLOYMENTPATH/deploy/packages/raffles-client/build $DEPLOYMENTPATH/client
+
+# Restart server
+pm2 restart zigbids-api-{directory}

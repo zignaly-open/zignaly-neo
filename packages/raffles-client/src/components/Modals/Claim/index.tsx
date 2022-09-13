@@ -10,6 +10,7 @@ import DialogContainer from '../DialogContainer';
 import { Form } from './styles';
 import { ClaimModalProps } from './types';
 import { showToast } from 'util/showToast';
+import ClaimButton from 'components/Auctions/AuctionCard/ClaimButton';
 
 const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const { t } = useTranslation(['claim', 'user-settings', 'global']);
@@ -18,21 +19,21 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   } = useCurrentUser();
 
   const [success, setSuccess] = useState(auction.userBid?.isClaimed);
-  const [claim, { loading }] = useMutation(CLAIM, {
+  const [claim] = useMutation(CLAIM, {
     refetchQueries: [{ query: GET_AUCTIONS }],
   });
+  const [loading, setLoading] = useState(false);
 
   const submit = useCallback(
     async (e: FormEvent) => {
       e.preventDefault();
 
       try {
+        setLoading(true);
         await claim({
           variables: {
             id: auction.id,
           },
-        }).catch((err) => {
-          throw err;
         });
         setSuccess(true);
       } catch (err) {
@@ -96,11 +97,11 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
             onClick={(e) => props.onClose(e, 'escapeKeyDown')}
             type='button'
           />
-          <Button
-            type='submit'
+          <ClaimButton
             loading={loading}
-            caption={t('claim')}
-            size='large'
+            type='submit'
+            auction={auction}
+            claimCaption={t('claim')}
             disabled={!discordName}
           />
         </Box>

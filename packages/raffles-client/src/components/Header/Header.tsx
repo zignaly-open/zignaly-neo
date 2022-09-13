@@ -1,5 +1,5 @@
 import { IconButton, BrandImage, UserIcon, WalletIcon } from '@zignaly-open/ui';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import { Header as ZIGHeader, Button } from '@zignaly-open/ui';
@@ -8,11 +8,19 @@ import ConnectWalletModal from '../Modals/ConnectWallet';
 import { useModal } from 'mui-modal-provider';
 import UserBalance from './UserBalance';
 import TransferZigModal from 'components/Modals/TransferZig';
+import SwitchAccountModal from 'components/Modals/SwitchAccount';
 import Menu from './Menu';
 import { Box } from '@mui/system';
+import { useEthers } from '@usedapp/core';
+import { useLogout } from 'hooks/useAuthenticate';
 
 const StyledWalletIcon = styled(WalletIcon)`
   color: ${({ theme }) => theme.neutral300};
+`;
+
+const StickyHeader = styled(ZIGHeader)`
+  position: sticky !important;
+  margin: -8px;
 `;
 
 const MenuButton = styled(IconButton)`
@@ -29,9 +37,25 @@ const Header = () => {
   const { t } = useTranslation('global');
   const { user: currentUser, loading } = useCurrentUser();
   const { showModal } = useModal();
+  const { account } = useEthers();
+  const logout = useLogout();
+
+  useEffect(() => {
+    if (!account && currentUser) {
+      // Disconnected from MM
+      logout();
+    } else if (
+      account &&
+      currentUser &&
+      account.toLowerCase() !== currentUser.publicAddress.toLowerCase()
+    ) {
+      // User changed MM account, ask to disconnect
+      showModal(SwitchAccountModal);
+    }
+  }, [account]);
 
   return (
-    <ZIGHeader
+    <StickyHeader
       leftElements={[
         <BrandImage
           key={'logo2'}

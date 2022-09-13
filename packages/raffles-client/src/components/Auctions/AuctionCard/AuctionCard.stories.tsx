@@ -44,6 +44,7 @@ const auctionObject = {
   description: 'Blah blah blah blhahblah bla blah hh!',
   createdAt: new Date(),
   expiresAt: new Date(Date.now() + 3600_000),
+  maxClaimDate: new Date(Date.now() + 10_000),
   monetaryValue: '$84.52',
   imageUrl: '/images/11.jpg',
   basketItems: [
@@ -89,6 +90,110 @@ Complete.args = {
     ...auctionObject,
     expiresAt: new Date(Date.now() - 3600_000),
     status: 'Complete',
+  },
+};
+
+export const Won = Template.bind({});
+
+Won.args = {
+  auction: {
+    ...auctionObject,
+    expiresAt: new Date(Date.now() - 3600_000),
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 1,
+          username: 'cemsun',
+        },
+      },
+    ],
+    userBid: {
+      id: 1,
+      value: '1.47',
+      position: 1,
+    },
+  },
+};
+
+export const Claimed = Template.bind({});
+
+Claimed.args = {
+  auction: {
+    ...auctionObject,
+    expiresAt: new Date(Date.now() - 3600_000),
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 1,
+          username: 'cemsun',
+        },
+      },
+    ],
+    userBid: {
+      id: 1,
+      value: '1.47',
+      position: 1,
+      isClaimed: true,
+    },
+  },
+};
+
+export const ClaimMissed = Template.bind({});
+
+ClaimMissed.args = {
+  auction: {
+    ...auctionObject,
+    expiresAt: new Date(Date.now() - 3600_000),
+    maxClaimDate: new Date(Date.now() - 3600_000),
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 1,
+          username: 'cemsun',
+        },
+      },
+    ],
+    userBid: {
+      id: 1,
+      value: '1.47',
+      position: 1,
+      isClaimed: false,
+    },
+  },
+};
+
+export const Expiring = Template.bind({});
+
+Expiring.args = {
+  auction: {
+    ...auctionObject,
+    expiresAt: new Date(Date.now() + 10_000),
+    maxClaimDate: new Date(Date.now() + 20_000),
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 1,
+          username: 'cemsun',
+        },
+      },
+    ],
+    userBid: {
+      id: 1,
+      value: '1.47',
+      position: 1,
+    },
   },
 };
 
@@ -1032,6 +1137,155 @@ WinningWithFewWinners3rd.args = {
       id: 3,
       position: 3,
       value: '1.46',
+    },
+  },
+};
+
+export const WinningWithFewWinners6th = Template.bind({});
+
+WinningWithFewWinners6th.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 10,
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 13,
+          username: 'cemsun',
+        },
+      },
+      {
+        id: 2,
+        position: 2,
+        value: '1.46',
+        user: {
+          id: 12,
+          username: 'abc',
+        },
+      },
+      {
+        id: 3,
+        position: 3,
+        value: '1.45',
+        user: {
+          id: 11,
+          username: 'akiek',
+        },
+      },
+      {
+        id: 4,
+        position: 4,
+        value: '1.45',
+        user: {
+          id: 10,
+          username: 'cemsil',
+        },
+      },
+      {
+        id: 5,
+        position: 5,
+        value: '1.44',
+        user: {
+          id: 9,
+          username: 'llan',
+        },
+      },
+      {
+        id: 6,
+        position: 6,
+        value: '1.43',
+        user: {
+          id: 1,
+          username: 'lleeil',
+        },
+      },
+    ],
+    userBid: {
+      id: 6,
+      value: '1.40',
+      position: 6,
+    },
+  },
+};
+
+export const WinningWithFewWinners7th = Template.bind({});
+
+WinningWithFewWinners7th.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 10,
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 13,
+          username: 'cemsun',
+        },
+      },
+      {
+        id: 2,
+        position: 2,
+        value: '1.46',
+        user: {
+          id: 12,
+          username: 'abc',
+        },
+      },
+      {
+        id: 3,
+        position: 3,
+        value: '1.45',
+        user: {
+          id: 11,
+          username: 'akiek',
+        },
+      },
+      {
+        id: 4,
+        position: 4,
+        value: '1.45',
+        user: {
+          id: 10,
+          username: 'cemsil',
+        },
+      },
+      {
+        id: 5,
+        position: 5,
+        value: '1.44',
+        user: {
+          id: 9,
+          username: 'llan',
+        },
+      },
+      {
+        id: 6,
+        position: 6,
+        value: '1.43',
+        user: {
+          id: 8,
+          username: 'lleeil',
+        },
+      },
+      {
+        id: 7,
+        position: 7,
+        value: '1.42',
+        user: {
+          id: 1,
+          username: 'lleeil',
+        },
+      },
+    ],
+    userBid: {
+      id: 7,
+      value: '1.39',
+      position: 7,
     },
   },
 };
