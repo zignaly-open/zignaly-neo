@@ -5,7 +5,7 @@ import { useTitle } from 'react-use';
 import ServiceHeader from '../../features/trader/components/ServiceHeader';
 import { TraderServicePageContainer } from 'features/trader/components/styles';
 
-const EditServiceProfile: React.FC = () => {
+const EditService: React.FC = () => {
   const { t } = useTranslation('pages');
   useTitle(t('pages.trading-services'));
   return (
@@ -18,4 +18,4 @@ const EditServiceProfile: React.FC = () => {
   );
 };
 
-export default EditServiceProfile;
+export default EditService;

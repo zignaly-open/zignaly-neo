@@ -14,7 +14,7 @@ import {
   ROUTE_TRADING_SERVICE_MANAGE,
   ROUTE_TRADING_SERVICE_MANUAL,
   ROUTE_TRADING_SERVICE_POSITIONS,
-  ROUTE_TRADING_SERVICE_PROFILE_EDIT,
+  ROUTE_TRADING_SERVICE_EDIT,
   ROUTE_TRADING_SERVICE_SIGNALS,
 } from '../../../../routes';
 
@@ -134,7 +134,7 @@ function ServiceHeader() {
               },
               {
                 name: t('service-header.dropdown.profile.links.profile-edit'),
-                path: generatePath(ROUTE_TRADING_SERVICE_PROFILE_EDIT, {
+                path: generatePath(ROUTE_TRADING_SERVICE_EDIT, {
                   serviceId,
                 }),
               },
