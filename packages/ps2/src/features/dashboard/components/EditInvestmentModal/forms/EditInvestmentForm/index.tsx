@@ -5,7 +5,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import {
-  Actions,
   AmountInvested,
   Field,
   Form,
@@ -36,6 +35,7 @@ import {
 import { EditFormData, EditInvestmentFormProps } from './types';
 import { EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
+import { ModalActions } from 'components/ModalContainer/styles';
 
 const invertPercent = (v: number | string): number => 100 - +v;
 
@@ -174,7 +174,7 @@ function EditInvestmentForm({
         </InputContainer>
       )}
 
-      <Actions>
+      <ModalActions>
         {!isInputEnabled && (
           <TextButton
             onClick={() =>
@@ -214,7 +214,7 @@ function EditInvestmentForm({
           }
           caption={t('edit-investment.form.link.withdraw')}
         />
-      </Actions>
+      </ModalActions>
     </Form>
   );
 }
