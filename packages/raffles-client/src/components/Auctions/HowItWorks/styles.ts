@@ -9,7 +9,7 @@ export const Step = styled(Box)`
   flex: 1;
   flex-direction: column;
 
-  ${({ theme }) => theme.breakpoints.down('sm')} {
+  ${({ theme }) => theme.breakpoints.down('md')} {
     flex-direction: row;
     justify-content: space-between;
     padding: 0 24px;
@@ -21,7 +21,7 @@ export const StepDetails = styled(Box)`
   flex-direction: column;
   flex: 1;
 
-  ${({ theme }) => theme.breakpoints.down('sm')} {
+  ${({ theme }) => theme.breakpoints.down('md')} {
     padding: 0 24px;
   }
 `;
@@ -31,7 +31,7 @@ export const StepIcon = styled(WalletIcon)`
   min-height: 82px;
   margin-bottom: 18px;
 
-  ${({ theme }) => theme.breakpoints.down('sm')} {
+  ${({ theme }) => theme.breakpoints.down('md')} {
     margin-bottom: 0;
   }
 `;
