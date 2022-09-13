@@ -345,6 +345,7 @@ export default function PagedWithDataTable<T extends object>({
                     />
                   </SelectorSizing>
                   <Typography variant="body1" weight="regular" color="neutral300">
+                    {" "}
                     items
                   </Typography>
                 </SelectorContainer>
