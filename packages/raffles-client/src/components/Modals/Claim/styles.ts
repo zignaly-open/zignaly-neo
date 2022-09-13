@@ -6,3 +6,9 @@ export const Form = styled('form')`
   gap: 9px;
   margin-top: 29px;
 `;
+
+export const Separator = styled('div')`
+  height: 1px;
+  background: #222249;
+  margin: 22px 46px 12px;
+`;
