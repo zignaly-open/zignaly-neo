@@ -9,5 +9,11 @@
   "close": "Close",
   "claim-success": "You have successfully claimed your prize. If you have any questions, you can contact support or you can contact us on discord.",
   "prize": "Prize:",
-  "amount": "Amount:"
+  "amount": "Amount:",
+  "discord-user": "Discord User:",
+  "set-discord-info": "Please set your discord username so we can contact you.",
+  "set-discord": "Set Discord Username",
+  "transfer-zig": "Transfer ZIG",
+  "transfer-zig-info": "You don't have enough ZIGs to pay the final item price.",
+  "agree": "You agree to pay the final item price from your ZIG balance. We'll contact you on Discord once you're whitelisted."
 }

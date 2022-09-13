@@ -54,7 +54,7 @@ const SettingsForm = ({
     if (matchesSmall) {
       return 'row';
     } else {
-      return 'column';
+      return 'column-reverse';
     }
   };
 
