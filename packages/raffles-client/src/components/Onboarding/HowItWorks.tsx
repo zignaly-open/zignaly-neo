@@ -7,10 +7,6 @@ function HowItWorks() {
   const { t } = useTranslation('how-it-works');
   return (
     <>
-      <Box marginTop={1}>
-        <Typography>{t('how-it-works-text')}</Typography>
-      </Box>
-
       <ul>
         <li>
           <Box marginTop={1}>
