@@ -5,6 +5,13 @@ files:
       destination: /zignaly/{directory}/deploy
 file_exists_behavior: OVERWRITE
 hooks:
+    BeforeInstall:
+        - location: scripts/prepare_release.sh
+          timeout: 300
+          runas: admin
+        - location: scripts/delete_old_release.sh
+          timeout: 300
+          runas: admin
     AfterInstall:
         - location: scripts/after_install.sh
           runas: admin
