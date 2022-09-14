@@ -1,13 +1,10 @@
-// Dependencies
 import React from "react";
 
-// Styled Components
 import { Layout, Field } from "./styles";
 import Typography from "../../display/Typography";
 import InputCode from "../../inputs/InputCode";
 import Button from "../../inputs/Button";
 
-// Types
 import { EmailVerifyFormProps } from "./types";
 
 function EmailVerifyForm({ onSubmit, onReSendCode, isLoading }: EmailVerifyFormProps) {

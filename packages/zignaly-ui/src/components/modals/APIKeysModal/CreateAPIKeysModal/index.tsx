@@ -1,8 +1,6 @@
-// Dependencies
 import React, { useCallback, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-// Components
 import ModalContainer from "../../ModalContainer";
 import Button from "../../../inputs/Button";
 import { Actions } from "../../styles";
@@ -12,7 +10,6 @@ import { Gap } from "utils/gap";
 import InputText from "components/inputs/InputText";
 import APISettings from "../components/APISettings";
 
-// Types
 import { CreateAPIKeysModalProps } from "./types";
 
 function CreateAPIKeysModal({

@@ -2,16 +2,13 @@
 import React from "react";
 import NumberFormat from "react-number-format";
 
-// Components
 import TextButton from "components/inputs/TextButton";
 
-// Utils
 import { isPositive } from "utils/numbers";
 
 // Styles
 import { Layout, Profit, TotalValue } from "./styles";
 
-// Types
 import { BalanceSummaryProps } from "./types";
 
 // Icons

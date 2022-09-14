@@ -1,7 +1,5 @@
-// Dependencies
 import React from "react";
 
-// Components
 import { Container, Title } from "./styles";
 import ModalContainer from "../ModalContainer";
 import Typography from "../../display/Typography";

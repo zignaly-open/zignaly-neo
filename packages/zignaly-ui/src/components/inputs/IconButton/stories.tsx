@@ -1,11 +1,8 @@
-// Dependencies
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-// Assets
 import { ReactComponent as OptionDotsIcon } from "assets/icons/option-dots-icon.svg";
 
-// Component
 import IconButton from "./";
 
 export default {

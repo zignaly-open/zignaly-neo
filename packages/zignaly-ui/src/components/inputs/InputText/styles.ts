@@ -1,4 +1,3 @@
-// Dependencies
 import styled from "styled-components";
 import { dark } from "theme";
 import { styledIf } from "utils/styled";

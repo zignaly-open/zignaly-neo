@@ -18,17 +18,14 @@ import {
 } from "../../styles";
 import { dark } from "../../../../../theme";
 
-// Components
 import Typography from "../../../Typography";
 import CheckBox from "../../../../inputs/CheckBox";
 import IconButton from "../../../../inputs/IconButton";
 
-// Assets
 import { ReactComponent as OptionsDotsIcon } from "../../../../../assets/icons/option-dots-icon.svg";
 import { ReactComponent as SingleChevron } from "assets/icons/chevron-small-icon.svg";
 import { ReactComponent as DoubleChevron } from "assets/icons/double-chevron-small-icon.svg";
 
-// Types
 import { TableBasicProps } from "../../types";
 import {
   FooterContainer,
@@ -51,13 +48,11 @@ export default function PagedWithDataTable<T extends object>({
   initialState = {},
   hasFooter = true,
 }: TableBasicProps<T>) {
-  // Refs
   const tableRef = useRef(null);
 
   // States
   const [hiddenColumns, setHiddenColumns] = useState<string[]>(defaultHiddenColumns || []);
 
-  // Hooks
   // @ts-ignore
   const {
     getTableProps,

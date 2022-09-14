@@ -1,8 +1,6 @@
-// Dependencies
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-// Components
 import Header from "./";
 import BrandImage from "./components/BrandImage";
 import IconButton from "../../inputs/IconButton";

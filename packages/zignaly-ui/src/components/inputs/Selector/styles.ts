@@ -1,4 +1,3 @@
-// Dependencies
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 import { SelectSizes } from "./types";
@@ -144,6 +143,7 @@ export const Layout = styled.div<LayoutProps>`
       cursor: default;
     }
   }
+
   ${(props: any) => `
     ${styledIf(
       props.isActiveMenu,

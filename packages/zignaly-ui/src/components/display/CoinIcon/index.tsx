@@ -1,10 +1,8 @@
-// Dependencies
 import React, { useCallback, useEffect, useState } from "react";
 
 // Styles
 import { sizes, Image, Layout } from "./styles";
 
-// Types
 import { CoinSizes, CoinTypeProps } from "./types";
 
 const CoinIcon = ({ size = CoinSizes.MEDIUM, name, coin, className = "" }: CoinTypeProps) => {

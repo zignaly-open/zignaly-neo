@@ -1,14 +1,10 @@
-// Dependencies
 import React from "react";
 import NumberFormat from "react-number-format";
 
-// Types
 import { ZigBalanceProps } from "./types";
 
-// Components
 import { Layout, StyledWalletIcon, Balance } from "./styles";
 
-// Utils
 import { utils } from "ethers";
 
 function ZigBalance({ balance, className }: ZigBalanceProps) {
