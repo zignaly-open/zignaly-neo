@@ -7,7 +7,7 @@ import { MinBalanceModalValidation } from './validation';
 import BigNumber from 'bignumber.js';
 import { Button, InputAmountAdvanced, Typography } from '@zignaly-open/ui';
 import {
-  useTraderServiceDetails,
+  useServiceDetails,
   useTraderServiceManagement,
   useTraderServiceUpdateMinimum,
 } from '../../use';
@@ -22,7 +22,7 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
   const { isLoading: isLoadingManagement, data: management } =
     useTraderServiceManagement(serviceId);
   const { isLoading: isLoadingService, data: service } =
-    useTraderServiceDetails(serviceId);
+    useServiceDetails(serviceId);
   const toast = useToast();
 
   const minimumBalance = management?.minimumSca;

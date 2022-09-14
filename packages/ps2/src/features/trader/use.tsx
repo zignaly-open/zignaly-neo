@@ -36,7 +36,7 @@ export function useTraderServiceManagement(
   return useTraderServiceManagementQuery(serviceId);
 }
 
-export function useTraderServiceDetails(
+export function useServiceDetails(
   serviceId: string,
 ): ReturnType<typeof useTraderServiceDetailsQuery> {
   return useTraderServiceDetailsQuery(serviceId);

@@ -29,7 +29,7 @@ import { Box } from '@mui/system';
 import { Modal } from '@mui/material';
 import {
   useTraderServiceBalance,
-  useTraderServiceDetails,
+  useServiceDetails,
   useTraderServiceTransferFunds,
 } from '../../use';
 import { LoaderContainer } from '../../../dashboard/components/EditInvestmentModal/styles';
@@ -42,7 +42,7 @@ function TransferModal({
 }: TransferModalProps): React.ReactElement {
   const { t } = useTranslation('management');
   const { data: balance } = useTraderServiceBalance(serviceId);
-  const { data: service } = useTraderServiceDetails(serviceId);
+  const { data: service } = useServiceDetails(serviceId);
   const [fromTradingAccount, setFromTradingAccount] = useState(true);
   const toast = useToast();
   const [transfer, { isLoading: isTransferring }] =

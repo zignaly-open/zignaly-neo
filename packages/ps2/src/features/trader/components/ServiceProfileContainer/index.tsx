@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import { Loader } from '@zignaly-open/ui';
-import { useIsServiceOwner, useTraderServiceDetails } from '../../use';
+import { useIsServiceOwner, useServiceDetails } from '../../use';
 import { Center } from '../ServiceManagementsContainer/styles';
 import ComingSoon from '../../../../components/ComingSoon';
 import { useIsAuthenticated } from '../../../auth/use';
@@ -16,7 +16,7 @@ const ServiceProfileContainer: React.FC<{ serviceId: string }> = ({
   const { t } = useTranslation('pages');
   useTitle(t('pages.trading-services'));
   const { isLoading: isLoadingService, data: service } =
-    useTraderServiceDetails(serviceId);
+    useServiceDetails(serviceId);
   const isAuthenticated = useIsAuthenticated();
   const navigate = useNavigate();
   const isOwner = useIsServiceOwner(serviceId);
