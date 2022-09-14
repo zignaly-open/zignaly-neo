@@ -1,11 +1,15 @@
 // Assets
 import { ReactComponent as ZignalyIsotype } from "assets/images/zignaly-isotype.svg";
 import { ReactComponent as ZignalyLogotype } from "assets/images/zignaly-logotype.svg";
+import { ReactComponent as DiscordIcon } from "assets/icons/social-icons/discord-minimalist.svg";
+import { ReactComponent as ZigbidsLogotype } from "assets/images/zigbids-logotype.svg";
 
 // Icons
 export const iconsByType = {
   isotype: ZignalyIsotype,
   logotype: ZignalyLogotype,
+  discord: DiscordIcon,
+  bidslogotype: ZigbidsLogotype,
 };
 
 export type LogoProps = {
