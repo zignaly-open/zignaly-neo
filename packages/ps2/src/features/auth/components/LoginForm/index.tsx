@@ -10,6 +10,7 @@ import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
 import { Button, InputText, TextButton, Typography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { LoginPayload } from '../../types';
+import { useToast } from '../../../../util/hooks/useToast';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -22,16 +23,18 @@ const LoginForm: React.FC = () => {
     mode: 'onTouched',
     reValidateMode: 'onBlur',
     defaultValues: {
-      email: '',
-      password: '',
+      email: process.env.REACT_APP_TESTING_DEFAULT_EMAIL || '',
+      password: process.env.REACT_APP_TESTING_DEFAULT_PASSWORD || '',
     },
     resolver: yupResolver(LoginValidation),
   });
   const [{ loading: loggingIn }, authenticate] = useAuthenticate();
+  const toast = useToast();
   const navigate = useNavigate();
 
   const submit = (data: LoginPayload) => {
     authenticate(data).catch((e) => {
+      toast.error(e.message);
       setError('email', { type: 'server', message: e.message });
       setError('password', { type: 'server', message: e.message });
     });
@@ -51,7 +54,7 @@ const LoginForm: React.FC = () => {
             <InputText
               id={'login__username'}
               label={t('login-form.inputText.email.label') + ':'}
-              placeholder={''}
+              placeholder={t('login-form.inputText.email.label')}
               disabled={loggingIn}
               error={t(errors.email?.message)}
               {...field}
@@ -73,7 +76,7 @@ const LoginForm: React.FC = () => {
                 text: t('login-form.inputText.password.labelForgot'),
                 onClick: () => navigate(ROUTE_FORGOT_PASSWORD),
               }}
-              placeholder={''}
+              placeholder={t('login-form.inputText.password.label')}
               disabled={loggingIn}
               error={t(errors.password?.message)}
               {...field}

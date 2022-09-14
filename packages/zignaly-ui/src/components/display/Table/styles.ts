@@ -37,7 +37,6 @@ export const HeaderRow = styled.div`
 export const View = styled.div`
   width: 100%;
   border-radius: 5px 5px 15px 15px;
-  overflow: auto;
 
   &::-webkit-scrollbar {
     width: 2px;

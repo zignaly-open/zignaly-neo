@@ -23,7 +23,7 @@ i18n
         return `${value}`;
       },
     },
-    defaultNS: 'common',
+    defaultNS: 'global',
     ns,
     supportedLngs,
     react: {

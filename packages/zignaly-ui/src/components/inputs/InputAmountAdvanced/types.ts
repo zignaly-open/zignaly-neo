@@ -7,9 +7,13 @@ export type TokenItem = {
 };
 
 export type InputAmountAdvancedValue = {
-  value: string | number;
-  token: TokenItem;
+  value: string | number | BigNumber;
+  token: {
+    id: string;
+    balance: string | number | BigNumber;
+  };
 };
+
 export interface InputAmountProps {
   name?: string;
   control: Control;

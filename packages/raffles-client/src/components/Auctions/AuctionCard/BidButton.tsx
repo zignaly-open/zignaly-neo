@@ -10,6 +10,8 @@ import { onboardingContext } from '../../../contexts/Onboarding';
 import { Button } from '@zignaly-open/ui';
 import { BID_AUCTION } from 'queries/auctions';
 import { showToast } from 'util/showToast';
+import { useModal } from 'mui-modal-provider';
+import NotEnoughZIGModal from 'components/Modals/NotEnoughZIG';
 
 enum BidButtonState {
   NotLoggedIn,
@@ -23,13 +25,15 @@ enum BidButtonState {
 const BidButton: React.FC<{
   auction: AuctionType;
   isActive: boolean;
-}> = ({ auction, isActive }) => {
+  updatedAt: Date;
+}> = ({ auction, isActive, updatedAt }) => {
   const [bid, { loading: isBidding }] = useMutation(BID_AUCTION);
   const { balance } = useBalance();
   const { user } = useCurrentUser();
   const { balanceOnboarding } = useContext(onboardingContext);
   const authenticate = useAuthenticate();
   const { t } = useTranslation('auction');
+  const { showModal } = useModal();
 
   const state = useMemo(() => {
     if (auction.comingSoon) {
@@ -42,7 +46,7 @@ const BidButton: React.FC<{
     if (new BN(balance).lt(new BN(auction.bidFee)))
       return BidButtonState.NotEnoughFunds;
     return BidButtonState.BidNow;
-  }, [user, balance, auction, BidButtonState, isActive]);
+  }, [user, balance, auction, BidButtonState, isActive, updatedAt]);
 
   const customButtonText = useMemo(() => {
     if (state === BidButtonState.Ended) return t('ended');
@@ -59,6 +63,7 @@ const BidButton: React.FC<{
         variant: 'error',
         caption: 'Not Enough Funds!',
       });
+      showModal(NotEnoughZIGModal);
     } else {
       bid({
         variables: {
@@ -72,6 +77,7 @@ const BidButton: React.FC<{
 
   return (
     <Button
+      variant={state === BidButtonState.Ended ? 'secondary' : 'primary'}
       size='large'
       loading={isBidding}
       disabled={!isActive}

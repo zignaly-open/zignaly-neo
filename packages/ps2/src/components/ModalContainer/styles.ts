@@ -13,7 +13,7 @@ export const Layout = styled.div<{ width: number }>`
   ${({ width }) =>
     width &&
     css`
-      width: ${width}px;
+      width: ${width}px; // TODO: responsiveness
     `};
   user-select: none;
 `;
@@ -76,4 +76,19 @@ export const Inline = styled.div<{ align?: string }>`
   justify-content: center;
   align-items: center;
   gap: 12px;
+`;
+
+export const ModalActions = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 56px;
+  gap: 32px;
+
+  ${({ theme }) => `
+    svg {
+      fill: ${theme.links};
+    }
+  `}
 `;

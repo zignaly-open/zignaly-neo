@@ -3,6 +3,16 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 
+const ns = [
+  'global',
+  'auction',
+  'transfer-zig',
+  'connect-wallet',
+  'user-settings',
+  'claim',
+];
+const supportedLngs = ['en'];
+
 i18n
   .use(Backend)
   .use(LanguageDetector)
@@ -13,9 +23,10 @@ i18n
       loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
     debug: false,
-    supportedLngs: ['en'],
     defaultNS: 'global',
     fallbackLng: 'en',
+    ns,
+    supportedLngs,
     interpolation: {
       escapeValue: false,
       format: (value: string | number, format?: string): string => {
@@ -28,8 +39,27 @@ i18n
       },
     },
     react: {
-      useSuspense: false,
+      useSuspense: true,
     },
   });
+
+// Force preloading translations of the modals
+// i18n.loadNamespaces([
+//   'transfer-zig',
+//   'connect-wallet',
+//   'user-settings',
+//   'claim',
+// ]);
+
+supportedLngs.forEach((lang) => {
+  ns.forEach((n) => {
+    i18n.addResourceBundle(
+      lang,
+      n,
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      require(`../../public/locales/${lang}/${n}.json`),
+    );
+  });
+});
 
 export default i18n;

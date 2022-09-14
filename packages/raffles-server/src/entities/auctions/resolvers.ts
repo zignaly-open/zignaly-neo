@@ -60,21 +60,22 @@ export const resolvers = {
 
       // here we SPECIFICALLY do not pass the current user to not receive current user's bid
       // TODO: maybe we should refactor it to make this more explicit
-      const winningBidId = await AuctionsRepository.getSortedAuctionBids(
-        id,
-        false,
-        undefined,
-      ).then((winningBids) => {
-        const winningBidId = winningBids.find(
-          (bid) => bid.user.id === user.id,
-        )?.id;
-        if (!winningBidId) {
-          throw new Error('Can not find the bid');
-        }
-        return winningBidId;
-      });
+      const [userWinningBidId, price] =
+        await AuctionsRepository.getSortedAuctionBids(
+          id,
+          false,
+          undefined,
+        ).then((winningBids) => {
+          const userWinningBidId = winningBids.find(
+            (bid) => bid.user.id === user.id,
+          )?.id;
+          if (!userWinningBidId) {
+            throw new Error('Can not find the bid');
+          }
+          return [userWinningBidId, winningBids[0].value];
+        });
 
-      const winningBid = await AuctionBid.findByPk(winningBidId).then(
+      const userWinningBid = await AuctionBid.findByPk(userWinningBidId).then(
         async (winningBid) => {
           if (winningBid.claimTransactionId) {
             // cheeky bastard
@@ -96,32 +97,33 @@ export const resolvers = {
         await internalTransfer(
           user.publicAddress,
           zignalySystemId,
-          winningBid.value,
+          price.toString(),
           TransactionType.Payout,
         ).then((tx) => {
           if (!tx.transaction_id) throw new Error('Transaction error');
-          winningBid.claimTransactionId = tx.transaction_id;
+          userWinningBid.claimTransactionId = tx.transaction_id;
         });
 
         await Promise.all([
-          winningBid.save(),
+          userWinningBid.save(),
           verifyPositiveBalance(user.publicAddress),
         ]);
       } catch (error) {
         throw new Error('Could not make a claim');
       }
 
-      const payout = await Payout.create({
+      await Payout.create({
         auctionId: id,
         userId: user.id,
         publicAddress: user.publicAddress,
       });
 
-      const [, [updatedAuction]] = await Promise.all([
-        AuctionsRepository.performPayout(payout, auction.title),
-        AuctionsRepository.getAuctions(auction.id, user),
-        emitBalanceChanged(user),
-      ]);
+      const [updatedAuction] = await AuctionsRepository.getAuctions(
+        auction.id,
+        user,
+      );
+      emitBalanceChanged(user);
+
       return updatedAuction;
     },
   },

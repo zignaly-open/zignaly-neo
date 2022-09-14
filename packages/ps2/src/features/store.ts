@@ -3,6 +3,8 @@ import authReducer from './auth/store';
 import { api as authApi } from './auth/api';
 import dashboardReducer from './dashboard/store';
 import { api as dashboardApi } from './dashboard/api';
+import traderReducer from './trader/store';
+import { api as traderApi } from './trader/api';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { api as myBalancesApi } from './myBalances/api';
@@ -12,7 +14,12 @@ const persistConfig = {
   key: 'root',
   storage,
   // TODO: maybe we should actually leverage cache
-  blacklist: ['authApi', 'dashboardApi', 'myBalancesApi'] as string[],
+  blacklist: [
+    'authApi',
+    'dashboardApi',
+    'myBalancesApi',
+    'traderApi',
+  ] as string[],
 };
 
 export const store = configureStore({
@@ -22,9 +29,11 @@ export const store = configureStore({
       [authApi.reducerPath]: authApi.reducer,
       [dashboardApi.reducerPath]: dashboardApi.reducer,
       [myBalancesApi.reducerPath]: myBalancesApi.reducer,
+      [traderApi.reducerPath]: traderApi.reducer,
       auth: authReducer,
       dashboard: dashboardReducer,
       myBalances: myBalancesReducer,
+      trader: traderReducer,
     }),
   ),
   middleware: (getDefaultMiddleware) =>
@@ -33,6 +42,7 @@ export const store = configureStore({
     })
       .concat(authApi.middleware)
       .concat(myBalancesApi.middleware)
+      .concat(traderApi.middleware)
       .concat(dashboardApi.middleware),
 });
 

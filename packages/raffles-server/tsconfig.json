@@ -11,9 +11,12 @@
   ],
   "include": [
     "src",
-    "node_modules/@zigraffle"
-, "tests"  ],
+    "node_modules/@zigraffle",
+    "tests"
+  ],
   "ts-node": {
-    "ignore": [ "node_modules/(?!@zigraffle)" ]
+    "ignore": [
+      "node_modules/(?!@zigraffle)"
+    ]
   }
 }

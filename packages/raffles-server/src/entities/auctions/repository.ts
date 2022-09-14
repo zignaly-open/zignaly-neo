@@ -5,19 +5,16 @@ import {
 import { random } from 'lodash';
 import { sequelize } from '../../db';
 import { Includeable, QueryTypes } from 'sequelize';
-import { zignalySystemId, isTest, payoutSpreadsheetUrl } from '../../../config';
+import { zignalySystemId } from '../../../config';
 import { internalTransfer } from '../../cybavo';
 import { ContextUser, TransactionType } from '../../types';
-import { Payout } from '../payouts/model';
 import { User } from '../users/model';
-import { AUCTION_FEE } from './constants';
 import { Auction, AuctionBid, AuctionBasketItem } from './model';
 import {
   getMinRequiredBidForAuction,
   getPayoutPrizeForAuction,
   verifyPositiveBalance,
 } from './util';
-import axios from 'axios';
 
 const AuctionsRepository = () => {
   const lastBidPopulation = {
@@ -53,7 +50,7 @@ const AuctionsRepository = () => {
       const txPromise = internalTransfer(
         user.publicAddress,
         zignalySystemId,
-        AUCTION_FEE,
+        auction.bidFee,
         TransactionType.Fee,
       ).then((tx) => {
         if (!tx.transaction_id) throw new Error('Transaction error');
@@ -73,7 +70,7 @@ const AuctionsRepository = () => {
         lastAuctionBidPromise,
       ]);
 
-      auction.expiresAt = this.calculateNewExpiryDate(auction);
+      auction.expiresAt = calculateNewExpiryDate(auction);
 
       await AuctionBid.create({
         auctionId: id,
@@ -110,7 +107,7 @@ const AuctionsRepository = () => {
       await sequelize.query(
         `
           SELECT filtered.* FROM (
-              SELECT *, ROW_NUMBER () OVER (PARTITION BY t."auctionId" ORDER BY T."value" DESC) as "position" FROM ( 
+              SELECT *, ROW_NUMBER () OVER (PARTITION BY t."auctionId" ORDER BY t."value" DESC) as "position" FROM ( 
                 SELECT MAX(b.value) as value, MAX(b.id) as id, b."auctionId", b."userId", MAX(b."claimTransactionId") as "claimTransactionId", u."username" as "username"
                 FROM "${AuctionBid.tableName}" b
                 INNER JOIN "${User.tableName}" u ON b."userId" = u."id"
@@ -123,8 +120,8 @@ const AuctionsRepository = () => {
               "position" <= a."numberOfWinners" 
               OR "userId" = $currentUserId 
               ${showAllBids ? 'OR 1' : ''}
-              ORDER BY filtered."id" DESC
-            `,
+          ORDER BY filtered."id" DESC
+        `,
         {
           type: QueryTypes.SELECT,
           bind: { auctionId: id || 0, currentUserId: user?.id || 0 },
@@ -163,6 +160,7 @@ const AuctionsRepository = () => {
     const auctions = (await Auction.findAll({
       where: { ...(id ? { id } : {}) },
       include: [AuctionBasketItem],
+      order: [['id', 'DESC']],
     })) as unknown as AuctionType[];
 
     auctions.forEach((a) => {
@@ -175,30 +173,7 @@ const AuctionsRepository = () => {
     return auctions;
   }
 
-  async function performPayout(payout: Payout, title: string): Promise<void> {
-    const { discordName, username } = await User.findByPk(payout.userId);
-    const payload = {
-      discordName,
-      username,
-      projectName: title,
-      publicAddress: payout.publicAddress,
-      id: payout.userId,
-    };
-    if (isTest) return;
-    // TODO: implement error handling. There should be some enum for possible error/success states
-    await axios
-      .post(payoutSpreadsheetUrl, payload)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((e) => {
-        console.error(e.response);
-        throw new Error('Error saving data');
-      });
-  }
-
   return {
-    performPayout,
     getAuctions,
     getSortedAuctionBids,
     findAuction,

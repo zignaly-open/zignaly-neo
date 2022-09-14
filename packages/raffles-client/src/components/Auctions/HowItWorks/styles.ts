@@ -1,24 +1,45 @@
-import styled from '@emotion/styled';
-export const ContainerBox = styled.div`
-  position: relative;
-  top: 90px;
-  display: flex;
-  flex-direction: column;
-  width: 80%;
-  margin-bottom: 80px;
-  text-align: justify;
-`;
+import { Box, styled } from '@mui/material';
+import { Typography, WalletIcon } from '@zignaly-open/ui';
 
-export const HowItWorksList = styled.ul`
-  width: 100%;
+export const Step = styled(Box)`
+  flex-direction: column;
+  align-items: center;
   display: flex;
-  justify-content: space-evenly;
-  @media (max-width: 800px) {
-    flex-wrap: wrap;
+  text-align: center;
+  flex: 1;
+  flex-direction: column;
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 24px;
   }
 `;
 
-export const BulletPointItem = styled.li`
-  max-width: 600px;
-  margin-right: 25px;
+export const StepDetails = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    padding: 0 24px;
+  }
+`;
+
+export const StepIcon = styled(WalletIcon)`
+  min-width: 82px;
+  min-height: 82px;
+  margin-bottom: 18px;
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    margin-bottom: 0;
+  }
+`;
+
+export const TypographyTitle = styled(Typography)`
+  margin-bottom: 6px !important;
+`;
+
+export const Layout = styled(Box)`
+  max-width: 1280px;
 `;
