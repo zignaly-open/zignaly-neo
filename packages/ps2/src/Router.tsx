@@ -54,7 +54,14 @@ function Router() {
         />
 
         <Route path={ROUTE_MY_BALANCES}>
-          <Route index element={<MyBalances />} />
+          <Route
+            index
+            element={
+              <AuthenticatedWall>
+                <MyBalances />
+              </AuthenticatedWall>
+            }
+          />
         </Route>
 
         <Route path={ROUTE_PROFIT_SHARING}>

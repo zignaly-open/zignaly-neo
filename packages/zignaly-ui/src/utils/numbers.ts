@@ -64,5 +64,5 @@ export const sortByValue = (
   }
   if (number2 > number2) return 1;
   if (number1 < number2) return -1;
-  return 0;
+  return +number2 - +number1;
 };

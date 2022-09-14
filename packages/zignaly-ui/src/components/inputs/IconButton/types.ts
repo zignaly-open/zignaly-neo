@@ -13,7 +13,7 @@ export const buttonSizes = {
   xlarge: "xlarge",
 };
 
-export type DropdownProps = {
+export type IconButtonProps = {
   icon?: string | ReactElement;
   shrinkWrap?: boolean;
   variant?: keyof typeof buttonVariants;
@@ -22,7 +22,7 @@ export type DropdownProps = {
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
 
   loading?: boolean;
-  onClick?: React.MouseEventHandler<HTMLButtonElement> | null;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
   renderDropDown?: ReactElement<any> | null;
   className?: string;
   colors?: {
@@ -31,6 +31,6 @@ export type DropdownProps = {
   };
 };
 
-export type DropdownHandle = {
+export type IconButtonHandle = {
   closeDropDown?: () => void;
 };

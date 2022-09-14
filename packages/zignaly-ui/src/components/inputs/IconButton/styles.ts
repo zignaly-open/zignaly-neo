@@ -37,9 +37,7 @@ export const ButtonLoader = styled(Loader)`
   align-items: center;
 `;
 
-export const Container = styled.div<{
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-}>`
+export const Container = styled.div`
   position: relative;
   border-radius: 4px;
   transition: all 0.2s linear;
@@ -54,7 +52,6 @@ export const Container = styled.div<{
 interface LayoutProps {
   size: keyof typeof buttonSizes;
   variant: keyof typeof buttonVariants;
-  isActiveDropdown: boolean;
   type?: React.ButtonHTMLAttributes<HTMLButtonElement>["type"];
   colors: {
     normal: string;
@@ -356,40 +353,10 @@ export const ViewPort = styled.button<LayoutProps>`
     cursor: default;
   }
 
-  ${(props) => `
-     ${renderSizeProps(props)}
-     
-     ${styledIf(
-       props.isActiveDropdown,
-       `
-        background: #12152c !important;
-        border-radius: 4px 4px 0 0 !important;
-  
-        &:enabled:active {
-          padding: 2px !important;
-          background: #12152c !important;
-        }
-  
-        ${Icon} {
-          svg {
-            fill: ${props.theme.neutral200};
-            color: ${props.theme.neutral200};
-          }
-        }
-  
-        ${Container} {
-          background: #12152c !important;
-  
-          &:before {
-            opacity: 0 !important;
-          }
-        }
-     `,
-       `
-        ${renderPrimaryProps(props)}  
-        ${renderSecondaryProps(props)}
-        ${renderFlatProps(props)}
-     `,
-     )}
+  ${() => `
+    ${renderSizeProps}
+    ${renderPrimaryProps}  
+    ${renderSecondaryProps}
+    ${renderFlatProps}
   `}
 `;
