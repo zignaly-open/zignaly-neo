@@ -16,7 +16,7 @@ export const resolvers = {
       { id }: { id: number },
       { user }: ApolloContext,
     ) => {
-      return AuctionsRepository.getAuctions(id, user);
+      return AuctionsRepository.getAuctions(id, user, true);
     },
   },
   Mutation: {
