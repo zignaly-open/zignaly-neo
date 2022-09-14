@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
-import { Typography, TextButton, Button, TimeIcon } from '@zignaly-open/ui';
-import React, { useEffect, useRef, useState } from 'react';
+import { Typography, TextButton } from '@zignaly-open/ui';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import FinalCountdown from './FinalCountdown';
@@ -10,7 +10,6 @@ import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
 import AuctionRanking from '../AuctionRanking/AuctionRanking';
 import { useModal } from 'mui-modal-provider';
 import ProjectDetailsModal from 'components/Modals/ProjectDetails';
-import ClaimModal from 'components/Modals/Claim';
 import {
   AuctionImage,
   CardBody,
@@ -22,8 +21,8 @@ import {
   CardActions,
   CardHeader,
 } from './styles';
-import { useTimeout } from 'react-use';
-import ClaimCountdown from './ClaimCountdown';
+import ClaimButton from './ClaimButton';
+import useUpdatedAt from 'hooks/useUpdatedAt';
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
@@ -33,14 +32,15 @@ const AuctionCard: React.FC<{
   const { showModal } = useModal();
   const leftRef = useRef(null);
   const rightRef = useRef(null);
-  const renderDate = useRef(+new Date());
   const [isColumn, setIsColumn] = useState(false);
 
-  const claimButtonInactive =
-    auction.userBid?.isClaimed || auction.maxClaimDate > new Date();
+  // Update ui when expiration date is reached
+  // Add delay in case of last ms bid event
+  const updatedAt = useUpdatedAt(auction.expiresAt, 100);
 
-  const [hasJustExpired] = useTimeout(
-    +new Date(auction.expiresAt) - renderDate.current,
+  const showClaim = useMemo(
+    () => (!updatedAt || +new Date() - updatedAt > 0) && hasWon,
+    [hasWon, updatedAt],
   );
 
   useEffect(() => {
@@ -57,6 +57,7 @@ const AuctionCard: React.FC<{
       window.removeEventListener('resize', handleWindowResize);
     };
   }, []);
+
   return (
     <Item>
       <CardColumn ref={leftRef}>
@@ -86,7 +87,11 @@ const AuctionCard: React.FC<{
             <FinalCountdown date={auction.expiresAt} started={true} />
           </StyledAmountContainer>
           <CardActions isColumn={isColumn} hide={isColumn}>
-            <BidButton auction={auction} isActive={isActive} />
+            <BidButton
+              auction={auction}
+              isActive={isActive}
+              updatedAt={updatedAt}
+            />
           </CardActions>
         </CardBody>
       </CardColumn>
@@ -97,28 +102,18 @@ const AuctionCard: React.FC<{
           </Typography>
         </CardHeader>
         <CardBody>
-          <AuctionRanking auction={auction} />
-          <CardActions isColumn={isColumn} hide={!hasWon && !isColumn}>
-            {hasWon ? (
-              <Button
-                size='large'
-                onClick={() =>
-                  showModal(ClaimModal, {
-                    auction,
-                  })
-                }
-                disabled={claimButtonInactive}
-                caption={t(claimButtonInactive ? 'claimed' : 'claim-now')}
-                bottomElement={
-                  <ClaimCountdown date={auction.maxClaimDate} started={true} />
-                }
-                leftElement={<TimeIcon height={21} width={21} />}
-              />
+          <AuctionRanking auction={auction} isActive={isActive} />
+          <CardActions isColumn={isColumn}>
+            {showClaim ? (
+              <ClaimButton auction={auction} />
             ) : (
-              <BidButton
-                auction={auction}
-                isActive={isActive && !hasJustExpired()}
-              />
+              isColumn && (
+                <BidButton
+                  auction={auction}
+                  isActive={isActive}
+                  updatedAt={updatedAt}
+                />
+              )
             )}
           </CardActions>
         </CardBody>

@@ -19,13 +19,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Form } from './styles';
 import { UserSettingsModalProps } from '../types';
 import { GET_AUCTIONS } from 'queries/auctions';
+import useCurrentUser from 'hooks/useCurrentUser';
 
 const SettingsForm = ({
   username = '',
   discordName = '',
   ...props
 }: UserSettingsModalProps) => {
-  // TODO: Add submit of userName and discordName to backend and avatar update
+  const { user } = useCurrentUser();
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const [errorMessage, setErrorMessage] = useState('');
   const [updateUsername, { loading: updatingProfile }] = useMutation(
@@ -53,7 +54,7 @@ const SettingsForm = ({
     if (matchesSmall) {
       return 'row';
     } else {
-      return 'column';
+      return 'column-reverse';
     }
   };
 
@@ -96,7 +97,7 @@ const SettingsForm = ({
                 <InputText
                   value={field.value}
                   onChange={field.onChange}
-                  placeholder={t('please-enter-username')}
+                  placeholder={`${t('user')}#${user.id}`}
                   minHeight={23}
                   label={t('username-label')}
                   error={errors.username?.message}

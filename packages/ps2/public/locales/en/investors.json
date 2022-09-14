@@ -1,6 +1,9 @@
 {
   "investors": {
+    "failed-to-load": "Failed to load the data",
     "title": "Investors",
+    "number-of-investors": "{{count}} Investor",
+    "number-of-investors_plural": "{{count}} Investors",
     "tableHeader": {
       "email": "Email",
       "userId": "User ID",

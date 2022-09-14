@@ -11,6 +11,7 @@ import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
 import { AuctionImage, Description, ContainerDescription } from './styles';
 import { ReactComponent as DiscordIconButton } from '../../../assets/icons/discord-minimalist.svg';
 import { ReactComponent as SupportIconButton } from '../../../assets/icons/support-minimalist.svg';
+import ReactMarkdown from 'react-markdown';
 
 const CongratulationsModal = ({
   auction,
@@ -22,7 +23,11 @@ const CongratulationsModal = ({
   return (
     <DialogContainer title={t('congratulations')} {...props}>
       <Box textAlign='center'>
-        <Typography color='neutral200'>{t('claim-success')}</Typography>
+        <Typography color='neutral200'>
+          <ReactMarkdown>
+            {auction.claimSuccess || t('claim-success')}
+          </ReactMarkdown>
+        </Typography>
       </Box>
       <Box mt='62px' display='flex' justifyContent='center' flexWrap='wrap'>
         <AuctionImage src={auction.imageUrl} alt={auction.title} />

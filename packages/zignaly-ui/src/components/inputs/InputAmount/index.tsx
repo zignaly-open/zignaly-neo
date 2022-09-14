@@ -29,6 +29,7 @@ import CoinIcon, { CoinSizes } from "../../display/CoinIcon";
 import { InputAmountProps, TokenItem } from "./types";
 import { changeEvent } from "utils/event";
 
+// TODO: remove
 function InputAmount(
   {
     onChange,

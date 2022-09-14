@@ -1,49 +1,73 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { TextButton, Typography } from '@zignaly-open/ui';
-import { BulletPointItem, HowItWorksList, ContainerBox } from './styles';
+import { Typography } from '@zignaly-open/ui';
+import { Step, StepIcon, TypographyTitle, Layout, StepDetails } from './styles';
+import { Stack } from '@mui/material';
 
 const HowItWorks = () => {
-  const [closed, setClosed] = useState(true);
   const { t } = useTranslation('how-it-works');
   return (
-    <ContainerBox>
-      <Typography variant='body1' weight='regular' color='neutral100'>
-        {t('info')}
-        <TextButton
-          onClick={() => setClosed(!closed)}
-          caption={closed ? 'Read More' : 'Read Less'}
-          color='links'
-          variant='body1'
-        />
+    <Layout
+      display='flex'
+      flexDirection='column'
+      alignItems='center'
+      mt={3}
+      mb={{ xs: 5, md: 1 }}
+    >
+      <Typography variant='h2' color='neutral100'>
+        {t('how-it-works')}
       </Typography>
-      {!closed && (
-        <>
-          <br />
-          <Typography variant='h3' weight='demibold' color='neutral000'>
-            {t('how-it-works')}
-          </Typography>
-          <HowItWorksList>
-            <Typography variant='body1' weight='regular' color='neutral100'>
-              <BulletPointItem>{t('qna1')}</BulletPointItem>
-              <br />
-              <BulletPointItem>{t('qna2')}</BulletPointItem>
-              <br />
-              <BulletPointItem>{t('qna3')}</BulletPointItem>
-              <br />
+      <Stack
+        direction={{ xs: 'column', md: 'row' }}
+        mt={4}
+        gap={{ xs: 4, md: 6 }}
+      >
+        <Step>
+          <StepIcon />
+          <StepDetails>
+            <TypographyTitle variant='h2' color='neutral100' component='h2'>
+              {t('step1')}
+            </TypographyTitle>
+            <Typography variant='h4' color='neutral200' component='h4'>
+              {t('step1-info')}
             </Typography>
-            <Typography variant='body1' weight='regular' color='neutral100'>
-              <BulletPointItem>{t('qna4')}</BulletPointItem>
-              <br />
-              <BulletPointItem>{t('qna5')}</BulletPointItem>
-              <br />
-              <BulletPointItem>{t('qna6')}</BulletPointItem>
-              <br />
+          </StepDetails>
+        </Step>
+        <Step>
+          <StepIcon />
+          <StepDetails>
+            <TypographyTitle variant='h2' color='neutral100' component='h2'>
+              {t('step2')}
+            </TypographyTitle>
+            <Typography variant='h4' color='neutral200' component='h4'>
+              {t('step2-info')}
             </Typography>
-          </HowItWorksList>
-        </>
-      )}
-    </ContainerBox>
+          </StepDetails>
+        </Step>
+        <Step>
+          <StepIcon />
+          <StepDetails>
+            <TypographyTitle variant='h2' color='neutral100' component='h2'>
+              {t('step3')}
+            </TypographyTitle>
+            <Typography variant='h4' color='neutral200' component='h4'>
+              {t('step3-info')}
+            </Typography>
+          </StepDetails>
+        </Step>
+        <Step>
+          <StepIcon />
+          <StepDetails>
+            <TypographyTitle variant='h2' color='neutral100' component='h2'>
+              {t('step4')}
+            </TypographyTitle>
+            <Typography variant='h4' color='neutral200' component='h4'>
+              {t('step4-info')}
+            </Typography>
+          </StepDetails>
+        </Step>
+      </Stack>
+    </Layout>
   );
 };
 

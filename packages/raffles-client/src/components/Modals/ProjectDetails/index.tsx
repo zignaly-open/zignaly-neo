@@ -8,6 +8,7 @@ import { ProjectDetailsModalProps } from './types';
 import { ReactComponent as Discord } from '../../../assets/icons/discord-logo.svg';
 import { ReactComponent as Telegram } from '../../../assets/icons/telegram-logo.svg';
 import { ReactComponent as Twitter } from '../../../assets/icons/twitter-logo.svg';
+import ReactMarkdown from 'react-markdown';
 
 import { Box } from '@mui/system';
 
@@ -20,7 +21,7 @@ const ProjectDetailsModal = ({
     <DialogContainer title={title} maxWidth='sm' fullWidth={true} {...props}>
       <Column>
         <Typography variant='body1' marginTop={18} color='neutral200'>
-          {description}
+          <ReactMarkdown>{description}</ReactMarkdown>
         </Typography>
         <Gap gap={11} />
         <Typography variant='h3' color='neutral000'>

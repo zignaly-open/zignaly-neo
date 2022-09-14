@@ -24,7 +24,7 @@ const renderer = ({
   seconds: number;
   completed: boolean;
 }) => {
-  const color = completed ? 'redGraphOrError' : 'greenGraph';
+  const color = completed ? 'neutral500' : 'greenGraph';
 
   return (
     <CountdownContainer color={color}>

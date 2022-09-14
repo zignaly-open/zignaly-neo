@@ -1,7 +1,7 @@
 import React from 'react';
 import ComingSoon from '../../components/ComingSoon';
 
-const TradingServices: React.FC = () => {
+const TraderServices: React.FC = () => {
   return (
     <>
       <ComingSoon />
@@ -9,4 +9,4 @@ const TradingServices: React.FC = () => {
   );
 };
 
-export default TradingServices;
+export default TraderServices;

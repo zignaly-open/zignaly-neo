@@ -6,9 +6,9 @@ export const AuctionContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-top: 35px;
 `;
 
 export const HomeTitle = styled(Typography)`
-  position: relative;
-  top: 70px;
+  margin-bottom: 17px !important;
 `;

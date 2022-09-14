@@ -1,31 +1,21 @@
 import { Alert, Grid } from '@mui/material';
-import { styled } from '@mui/material/styles';
 import React, { useMemo, useState } from 'react';
 import { useQuery, useSubscription } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
-import Box from '@mui/material/Box';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import Loader from '../../common/Loader';
 import { getWinningLosingStatus } from '../AuctionCard/util';
-import { Select, Typography } from '@zignaly-open/ui';
 import { BIDS_SUBSCRIPTION, GET_AUCTIONS } from 'queries/auctions';
 import AuctionCard from '../AuctionCard/AuctionCard';
-
-const MasonryWrapper = styled(Box)`
-  max-width: 1280px;
-  margin: 30px auto;
-  padding: 0 8px;
-`;
-
-const StyledSelect = styled(Select)`
-  min-width: 150px;
-
-  > div {
-    text-align: left;
-  }
-`;
+import {
+  FiltersContainer,
+  LayoutContainer,
+  ProjectsTypography,
+  StyledSelect,
+} from './styles';
 
 enum SortDirection {
+  Default = 'default',
   Expiry = 'expiry',
   Bid = 'bid',
   LastBid = 'last-bid',
@@ -40,11 +30,18 @@ enum ShowOptions {
 const AuctionGrid: React.FC = () => {
   const { t } = useTranslation('auction');
   const { loading, error, data } = useQuery(GET_AUCTIONS);
-  const [selectedSort, setSelectedSort] = useState();
-  const [selectedShowMode, setSelectedShowMode] = useState(ShowOptions.All);
+
+  const [selectedSort, setSelectedSort] = useState(
+    localStorage.getItem('sort') || SortDirection.Default,
+  );
+  const [selectedShowMode, setSelectedShowMode] = useState(
+    localStorage.getItem('show') || ShowOptions.All,
+  );
+
   useSubscription(BIDS_SUBSCRIPTION);
   const sortOptions = useMemo(
     () => [
+      { caption: t('sort-by-default'), value: SortDirection.Default },
       { caption: t('sort-by-expiry'), value: SortDirection.Expiry },
       {
         caption: t('sort-by-last-bid'),
@@ -86,7 +83,7 @@ const AuctionGrid: React.FC = () => {
           case SortDirection.Expiry:
             const date1 = +new Date(a.expiresAt);
             const date2 = +new Date(b.expiresAt);
-            if (date1 < +new Date()) {
+            if (date1 < +new Date() || date2 < +new Date()) {
               return date2 - date1;
             }
             return date1 - date2;
@@ -111,33 +108,38 @@ const AuctionGrid: React.FC = () => {
   }
 
   return (
-    <MasonryWrapper>
-      <Grid container marginY={2} columnSpacing={4} justifyContent='center'>
-        <Grid item textAlign='right'>
-          <StyledSelect
-            options={showOptions}
-            value={showOptions.find((o) => o.value === selectedShowMode)}
-            onChange={(option) => setSelectedShowMode(option.value)}
-            fullWidth={false}
-            label={t('show')}
-          />
-        </Grid>
-        <Grid item>
-          <StyledSelect
-            options={sortOptions}
-            value={sortOptions.find((o) => o.value === selectedSort)}
-            onChange={(option) => setSelectedSort(option.value)}
-            fullWidth={false}
-            label={t('sort')}
-            placeholder='Select Sort'
-          />
-        </Grid>
-      </Grid>
-      <Box padding='40px 0 33px 28px'>
-        <Typography variant='h3' weight='medium'>
+    <LayoutContainer>
+      <FiltersContainer>
+        <ProjectsTypography>
           {filtered.length} {t('zauctions-projects')}
-        </Typography>
-      </Box>
+        </ProjectsTypography>
+        <Grid container marginY={2} columnSpacing={4} justifyContent='center'>
+          <Grid item textAlign='right'>
+            <StyledSelect
+              options={showOptions}
+              value={showOptions.find((o) => o.value === selectedShowMode)}
+              onChange={(option) => {
+                localStorage.setItem('show', option.value);
+                setSelectedShowMode(option.value);
+              }}
+              fullWidth={false}
+              label={t('show')}
+            />
+          </Grid>
+          <Grid item>
+            <StyledSelect
+              options={sortOptions}
+              value={sortOptions.find((o) => o.value === selectedSort)}
+              onChange={(option) => {
+                localStorage.setItem('sort', option.value);
+                setSelectedSort(option.value);
+              }}
+              fullWidth={false}
+              label={t('sort')}
+            />
+          </Grid>
+        </Grid>
+      </FiltersContainer>
       <Grid justifyContent='center' container spacing={4}>
         {filtered.map((x: AuctionType) => (
           <Grid
@@ -152,7 +154,7 @@ const AuctionGrid: React.FC = () => {
           </Grid>
         ))}
       </Grid>
-    </MasonryWrapper>
+    </LayoutContainer>
   );
 };
 
