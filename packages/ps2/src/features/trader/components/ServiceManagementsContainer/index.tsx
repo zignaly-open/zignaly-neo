@@ -33,7 +33,7 @@ import BigNumber from 'bignumber.js';
 import { coinsToOperateServices } from '../../../../util/coins';
 import {
   useTraderServiceBalance,
-  useTraderServiceDetails,
+  useServiceDetails,
   useTraderServiceManagement,
 } from '../../use';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
@@ -43,7 +43,7 @@ import TransferFundsModal from '../TransferFundsModal';
 function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   const theme = useTheme() as Theme;
   const { data: service, isFetching: isLoadingService } =
-    useTraderServiceDetails(serviceId);
+    useServiceDetails(serviceId);
   const { data: management, isFetching: isLoadingManagement } =
     useTraderServiceManagement(serviceId);
   const { data: balance, isFetching: isLoadingBalance } =

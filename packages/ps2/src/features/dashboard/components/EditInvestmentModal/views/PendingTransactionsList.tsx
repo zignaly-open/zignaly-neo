@@ -7,13 +7,18 @@ import {
   PendingTransactionListItemType,
 } from '../types';
 import { useTranslation } from 'react-i18next';
-import { useCurrentBalance, useStoredInvestmentDetails } from '../../../use';
+import {
+  useCurrentBalance,
+  useInvestmentDetails,
+  useSelectedInvestment,
+} from '../../../use';
 import { ModalActions } from 'components/ModalContainer/styles';
 
 const PendingTransactionsList: React.FC<{
   setView: ChangeViewFn;
 }> = ({ setView }) => {
-  const { data: details } = useStoredInvestmentDetails();
+  const { serviceId } = useSelectedInvestment();
+  const { data: details } = useInvestmentDetails(serviceId);
   const { t } = useTranslation('edit-investment');
   const coin = useCurrentBalance();
 

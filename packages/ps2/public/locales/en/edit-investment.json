@@ -43,7 +43,7 @@
       "status_other": "You have {{count}} pending transactions",
       "link-label": "View"
     },
-    "investorDetail-successFee": "% Success fee",
+    "investorDetail-successFee": "{{fee}}% Success fee",
     "modal": {
       "withdrawInvestment": {
         "title": "Withdraw Investment with",

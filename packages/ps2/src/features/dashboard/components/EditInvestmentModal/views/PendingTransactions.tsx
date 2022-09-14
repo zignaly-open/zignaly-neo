@@ -10,13 +10,14 @@ import { ChangeViewFn, EditInvestmentViews } from '../types';
 import { useTheme } from 'styled-components';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { useTranslation } from 'react-i18next';
-import { useStoredInvestmentDetails } from '../../../use';
+import { useInvestmentDetails, useSelectedInvestment } from '../../../use';
 
 const PendingTransactions: React.FC<{
   setView: ChangeViewFn;
 }> = ({ setView }) => {
   const theme = useTheme() as Theme;
-  const { data: details } = useStoredInvestmentDetails();
+  const { serviceId } = useSelectedInvestment();
+  const { data: details } = useInvestmentDetails(serviceId);
   const { t } = useTranslation('edit-investment');
 
   const pendingTransactionsCount = [
