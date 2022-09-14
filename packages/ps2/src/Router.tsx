@@ -50,7 +50,6 @@ import { useIsServiceOwner } from './features/trader/use';
 
 const AuthenticatedWall: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
-  return <Outlet />;
   return isAuthenticated ? <Outlet /> : <Navigate to={ROUTE_LOGIN} replace />;
 };
 
