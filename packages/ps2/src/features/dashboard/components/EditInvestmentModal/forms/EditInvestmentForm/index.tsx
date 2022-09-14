@@ -37,8 +37,6 @@ import { EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { ModalActions } from 'components/ModalContainer/styles';
 
-const invertPercent = (v: number | string): number => 100 - +v;
-
 function EditInvestmentForm({
   onClickWithdrawInvestment,
   close,
@@ -55,10 +53,7 @@ function EditInvestmentForm({
   const { serviceId, serviceName } = useSelectedInvestment();
   const { refetch: refetchDetails } = useInvestmentDetails(serviceId);
   const { data: details } = useInvestmentDetails(serviceId);
-
   const transferOutAll = details?.transferOutAll;
-  const amountInvested = details?.invested;
-  const profitPercentage = details?.profitPercentage;
 
   const {
     handleSubmit,
@@ -72,7 +67,7 @@ function EditInvestmentForm({
         value: '',
         token: coin,
       },
-      profitPercentage: invertPercent(profitPercentage),
+      profitPercentage: details?.profitPercentage,
     },
     resolver: isInputEnabled ? yupResolver(EditInvestmentValidation) : null,
   });
@@ -87,7 +82,7 @@ function EditInvestmentForm({
   const onSubmit = async (values: EditFormData) => {
     if (isInputEnabled) {
       await editInvestment({
-        profitPercentage: invertPercent(values.profitPercentage),
+        profitPercentage: values.profitPercentage,
         serviceId,
         amount: values?.amountTransfer?.value,
       });
@@ -102,7 +97,7 @@ function EditInvestmentForm({
       setView(EditInvestmentViews.EditInvestmentSuccess);
     } else {
       await editPercent({
-        profitPercentage: invertPercent(values.profitPercentage),
+        profitPercentage: values.profitPercentage,
         serviceId,
       });
       toast.success(
@@ -111,7 +106,7 @@ function EditInvestmentForm({
       refetchDetails();
       close();
     }
-    // TODO: hadle error
+    // TODO: handle error
   };
 
   return (
@@ -126,7 +121,7 @@ function EditInvestmentForm({
             <TokenValue>
               <Typography variant={'bigNumber'} color={'neutral100'}>
                 <NumberFormat
-                  value={amountInvested}
+                  value={details?.invested}
                   displayType={'text'}
                   thousandSeparator={true}
                 />
