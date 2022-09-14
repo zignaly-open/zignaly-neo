@@ -103,7 +103,7 @@ const SliderInput = ({
             weight="demibold"
             color={labels.left ? "highlighted" : "neutral200"}
           >
-            {isRangeMode ? value : 0}%
+            {isRangeMode ? 100 - value : 0}%
           </Label>
         </TextContainer>
         <Bar ref={sliderRef}>
@@ -132,7 +132,7 @@ const SliderInput = ({
             className={"value"}
             color={labels.right ? "highlighted" : "neutral200"}
           >
-            {isRangeMode ? 100 - value : 100}%
+            {isRangeMode ? value : 100}%
           </Label>
         </TextContainer>
       </Layout>

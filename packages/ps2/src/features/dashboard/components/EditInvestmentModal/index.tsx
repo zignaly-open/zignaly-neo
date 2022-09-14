@@ -10,13 +10,14 @@ import WithdrawFunds from './views/WithdrawFunds';
 import PendingTransactionsList from './views/PendingTransactionsList';
 import ModalContainer from 'components/ModalContainer';
 import {
+  useCoins,
   useInvestmentDetails,
   useSelectedInvestment,
-  useStoredCoins,
 } from '../../use';
 import WithdrawPerform from './views/WithdrawPerform';
 import EditInvestmentSuccess from './views/EditInvestmentSuccess';
 import WithdrawModalSuccess from './views/WithdrawSuccess';
+import { useServiceDetails } from '../../../trader/use';
 
 function EditInvestmentModal({
   close,
@@ -25,8 +26,11 @@ function EditInvestmentModal({
   close: () => void;
 } & DialogProps): React.ReactElement {
   const service = useSelectedInvestment();
-  const { isLoading } = useInvestmentDetails(service.serviceId);
-  const { isLoading: isLoadingCoins } = useStoredCoins();
+  const { isLoading: isLoadingInvestment } = useInvestmentDetails(
+    service.serviceId,
+  );
+  const { isLoading: isLoadingService } = useServiceDetails(service.serviceId);
+  const { isLoading: isLoadingCoins } = useCoins();
 
   const [view, setView] = useState<EditInvestmentViews>(
     EditInvestmentViews.EditInvestment,
@@ -90,7 +94,7 @@ function EditInvestmentModal({
             : undefined
         }
       >
-        {isLoading || isLoadingCoins ? (
+        {isLoadingInvestment || isLoadingService || isLoadingCoins ? (
           <LoaderContainer>
             <Loader
               color={'#fff'}
