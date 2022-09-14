@@ -3,6 +3,8 @@ import authReducer from './auth/store';
 import { api as authApi } from './auth/api';
 import dashboardReducer from './dashboard/store';
 import { api as dashboardApi } from './dashboard/api';
+import traderReducer from './trader/store';
+import { api as traderApi } from './trader/api';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 
@@ -10,7 +12,7 @@ const persistConfig = {
   key: 'root',
   storage,
   // TODO: maybe we should actually leverage cache
-  blacklist: ['authApi', 'dashboardApi'] as string[],
+  blacklist: ['authApi', 'dashboardApi', 'traderApi'] as string[],
 };
 
 export const store = configureStore({
@@ -19,6 +21,8 @@ export const store = configureStore({
     combineReducers({
       [authApi.reducerPath]: authApi.reducer,
       [dashboardApi.reducerPath]: dashboardApi.reducer,
+      [traderApi.reducerPath]: traderApi.reducer,
+      trader: traderReducer,
       auth: authReducer,
       dashboard: dashboardReducer,
     }),
@@ -28,6 +32,7 @@ export const store = configureStore({
       serializableCheck: false,
     })
       .concat(authApi.middleware)
+      .concat(traderApi.middleware)
       .concat(dashboardApi.middleware),
 });
 

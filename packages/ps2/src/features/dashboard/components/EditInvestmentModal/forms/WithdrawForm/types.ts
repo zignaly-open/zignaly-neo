@@ -1,11 +1,5 @@
-import BigNumber from 'bignumber.js';
+import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
 
 export type WithdrawFormData = {
-  amountTransfer?: {
-    value: string | number | BigNumber;
-    token: {
-      id: string;
-      balance: string | number | BigNumber;
-    };
-  };
+  amountTransfer?: InputAmountAdvancedValue;
 };

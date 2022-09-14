@@ -27,6 +27,7 @@ import { OptionItem, SelectProps, SelectSizes } from "./types";
 import { dark } from "theme";
 import Typography from "components/display/Typography";
 
+// TODO: get rid of this and use a normal select library
 function Select({
   name,
   mode,

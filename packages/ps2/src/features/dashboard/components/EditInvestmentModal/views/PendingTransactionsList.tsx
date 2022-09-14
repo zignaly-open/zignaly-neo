@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { Actions, TransactionContainer } from '../styles';
+import { TransactionContainer } from '../styles';
 import { ArrowLeftIcon, Button, PriceLabel, Table } from '@zignaly-open/ui';
 import {
   ChangeViewFn,
@@ -8,6 +8,7 @@ import {
 } from '../types';
 import { useTranslation } from 'react-i18next';
 import { useCurrentBalance, useStoredInvestmentDetails } from '../../../use';
+import { ModalActions } from 'components/ModalContainer/styles';
 
 const PendingTransactionsList: React.FC<{
   setView: ChangeViewFn;
@@ -79,7 +80,7 @@ const PendingTransactionsList: React.FC<{
         />
       </TransactionContainer>
 
-      <Actions>
+      <ModalActions>
         <Button
           leftElement={
             <ArrowLeftIcon color={'#fff'} width={'20px'} height={'20px'} />
@@ -88,7 +89,7 @@ const PendingTransactionsList: React.FC<{
           size={'large'}
           caption={t('edit-investment.modal.pendingTransaction.button')}
         />
-      </Actions>
+      </ModalActions>
     </>
   );
 };

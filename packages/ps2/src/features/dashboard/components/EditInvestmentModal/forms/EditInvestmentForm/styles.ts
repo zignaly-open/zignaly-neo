@@ -31,21 +31,6 @@ export const TokenValue = styled.div`
   gap: 8px;
 `;
 
-export const Actions = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 56px;
-  gap: 32px;
-
-  ${({ theme }) => `
-    svg {
-      color: ${theme.links};
-    }
-  `}
-`;
-
 export const InputContainer = styled.div`
   margin-top: 68px;
 `;

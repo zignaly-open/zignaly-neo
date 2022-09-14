@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import { Button, Typography } from '@zignaly-open/ui';
 import { Highline } from '../styles';
-import { Actions } from '../forms/EditInvestmentForm/styles';
 import { useCoins, useInvestments } from '../../../use';
+import { ModalActions } from 'components/ModalContainer/styles';
 
 function EditInvestmentSuccessModal({ close }: { close: () => void }) {
   const { t } = useTranslation('edit-investment');
@@ -22,13 +22,13 @@ function EditInvestmentSuccessModal({ close }: { close: () => void }) {
           components={[<Highline key={'highline'} />]}
         />
       </Typography>
-      <Actions>
+      <ModalActions>
         <Button
           onClick={close}
           size={'large'}
           caption={t('edit-investment.modalSuccess.button')}
         />
-      </Actions>
+      </ModalActions>
     </>
   );
 }

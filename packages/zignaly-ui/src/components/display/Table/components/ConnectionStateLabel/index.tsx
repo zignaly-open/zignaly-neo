@@ -14,6 +14,8 @@ const ConnectionStateLabel = ({
 );
 
 export { ConnectionStateLabelId };
+// TODO: remove
+// @deprecated
 export default React.memo(
   ConnectionStateLabel,
   (prevProps, nextProps) => prevProps.stateId === nextProps.stateId,
