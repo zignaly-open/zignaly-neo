@@ -4,7 +4,7 @@ import { TraderState } from './types';
 
 const initialState: TraderState = {};
 
-export const dashboardSlice = createSlice({
+export const traderSlice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
@@ -23,6 +23,6 @@ export const dashboardSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setActiveServiceId } = dashboardSlice.actions;
+export const { setActiveServiceId } = traderSlice.actions;
 
-export default dashboardSlice.reducer;
+export default traderSlice.reducer;
