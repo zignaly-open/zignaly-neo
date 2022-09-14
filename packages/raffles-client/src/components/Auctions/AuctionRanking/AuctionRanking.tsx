@@ -107,7 +107,7 @@ const AuctionRanking = ({
 
 const PlaceHolderRow = ({ index, hide }: { index: number; hide?: boolean }) => {
   return (
-    <RankingRowContainer hide={hide}>
+    <RankingRowContainer hide={hide} isWinning={true}>
       <Rank>
         <Typography>{index + 1}.</Typography>
       </Rank>
