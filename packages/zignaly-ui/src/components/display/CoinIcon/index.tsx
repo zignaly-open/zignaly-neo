@@ -1,6 +1,4 @@
 import React, { useCallback, useEffect, useState } from "react";
-
-// Styles
 import { sizes, Image, Layout } from "./styles";
 
 import { CoinSizes, CoinTypeProps } from "./types";

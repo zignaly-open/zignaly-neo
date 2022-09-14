@@ -1,7 +1,5 @@
 import React, { useCallback, useRef, useState } from "react";
 import { usePagination, useSortBy, useTable } from "react-table";
-
-// Styles
 import {
   ColumnsSelector,
   EmptyMessage,

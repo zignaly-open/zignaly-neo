@@ -5,8 +5,6 @@ import NumberFormat from "react-number-format";
 import TextButton from "components/inputs/TextButton";
 
 import { isPositive } from "utils/numbers";
-
-// Styles
 import { Layout, Profit, TotalValue } from "./styles";
 
 import { BalanceSummaryProps } from "./types";

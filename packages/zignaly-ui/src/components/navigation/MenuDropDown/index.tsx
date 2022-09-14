@@ -1,7 +1,5 @@
 import React, { useCallback, useImperativeHandle, useRef, useState } from "react";
 import { useClickAway } from "react-use";
-
-// Styles
 import { Layout, Field, Button, ArrowIcon, DropDown } from "./styles";
 
 import { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";

@@ -1,8 +1,6 @@
 import React, { useMemo } from "react";
 import { utils } from "ethers";
 import NumberFormat from "react-number-format";
-
-// Styles
 import * as styled from "./styles";
 
 import ZigCoinIcon from "assets/images/zignaly-coin.svg?url";
