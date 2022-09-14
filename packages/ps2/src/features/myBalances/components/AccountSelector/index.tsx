@@ -1,4 +1,3 @@
-// Dependencies
 import React, { useCallback, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
@@ -8,6 +7,7 @@ import {
   IconButton,
   Typography,
   ArrowBottomIcon,
+  DropDown,
 } from '@zignaly-open/ui';
 import {
   useActiveExchange,
@@ -16,20 +16,17 @@ import {
 } from '../../../auth/use';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { getImageOfAccount } from '../../../../util/images';
-import { Exchange } from '../../../auth/types';
+import { Exchange, ExtendedExchange } from '../../../auth/types';
+import { DropDownHandle } from '@zignaly-open/ui/lib/components/display/DropDown/types';
 
 const AccountSelector = () => {
   const theme = useTheme() as Theme;
   const { t } = useTranslation('common');
   const { exchanges } = useCurrentUser();
-  const activeExchange = useActiveExchange();
+  const activeExchange: ExtendedExchange = useActiveExchange();
   const selectExchange = useSelectExchange();
-  const dropDownRef = useRef(null);
+  const dropDownRef: React.Ref<DropDownHandle> = useRef(null);
 
-  /**
-   * @function handleSelectAccount:
-   * @description It is invoked when the user selects a new account.
-   */
   const handleSelectAccount = useCallback(
     (exchange: Exchange) => {
       selectExchange(exchange.internalId);
@@ -53,18 +50,30 @@ const AccountSelector = () => {
             {activeExchange.internalName}
           </Typography>
           {exchanges.length > 1 && (
-            <IconButton
+            <DropDown
               ref={dropDownRef}
-              variant={'secondary'}
-              size={'medium'}
-              icon={
-                <ArrowBottomIcon
-                  color={theme.neutral300}
-                  width={22}
-                  height={20}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+              component={
+                <IconButton
+                  variant={'secondary'}
+                  size={'medium'}
+                  icon={
+                    <ArrowBottomIcon
+                      color={theme.neutral300}
+                      width={22}
+                      height={20}
+                    />
+                  }
                 />
               }
-              renderDropDown={
+              content={
                 <List>
                   {exchanges &&
                     activeExchange &&

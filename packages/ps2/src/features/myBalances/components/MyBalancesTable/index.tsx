@@ -101,7 +101,7 @@ const MyBalancesTable = (): JSX.Element => {
         Header: t('my-balances.tableHeader.valueUSD'),
         accessor: 'valueUSD',
         Cell: ({ cell: { value } }) => (
-          <PriceLabel coin={value.symbol} value={value.balanceTotalUSDT} />
+          <PriceLabel coin={'usd'} value={value.balanceTotalUSDT} />
         ),
         sortType: (a, b) =>
           sortByValue(
@@ -137,11 +137,9 @@ const MyBalancesTable = (): JSX.Element => {
       balanceLocked: balance.balanceLocked,
     },
     valueBTC: {
-      symbol: coin,
       balanceTotalBTC: balance.balanceTotalBTC,
     },
     valueUSD: {
-      symbol: coin,
       balanceTotalUSDT: balance.balanceTotalUSDT,
     },
   }));

@@ -5,13 +5,9 @@ import { ExpandableInputProps } from "./types";
 
 function ExpandableInput({ icon, placeholder = "", value = "", onChange }: ExpandableInputProps) {
   const innerRef = useRef(null);
-  const inputRef = useRef(null) as RefObject<HTMLInputElement>;
+  const inputRef: RefObject<HTMLInputElement> = useRef(null);
   const [isActive, setActive] = useState(false);
 
-  /**
-   * @function handleClickIcon():
-   * @description Trigger the click of the button.
-   */
   const handleClickIcon = useCallback(() => {
     if (!isActive) {
       setActive(true);

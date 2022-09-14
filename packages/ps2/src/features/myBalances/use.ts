@@ -33,9 +33,7 @@ export const useFetchMyBalances = (): [
   return [
     { isLoadingAllCoins, isLoadingReducedBalances },
     async (currentExchange: Exchange) => {
-      await Promise.all([
-        loadReducedBalances(currentExchange.internalId).unwrap(),
-      ]);
+      await loadReducedBalances(currentExchange.internalId).unwrap();
     },
   ];
 };
