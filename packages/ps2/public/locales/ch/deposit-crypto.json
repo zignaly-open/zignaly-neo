@@ -1,33 +1,33 @@
 {
   "deposit-crypto": {
-    "title": "CHDeposit Crypto",
-    "description": "CHDeposits may take up to 3 hours to reflect in your balance.",
+    "title": "CH-Ḋëṗöŝïṫ Ĉѓyṗṫö",
+    "description": "CH-Ḋëṗöŝïṫŝ ṁáy ṫákë üṗ ṫö 3 ĥöüѓŝ ṫö ѓëḟlëĉṫ ïń yöüѓ báláńĉë.",
     "coinSelector": {
-      "label": "CHCoin:",
-      "placeholder": "CHSearch a coin"
+      "label": "CH-Ĉöïń:",
+      "placeholder": "CH-Ŝëáѓĉĥ á ĉöïń"
     },
     "balances": {
-      "loadingAriaLabel": "CHLoading coin balances",
-      "total": "CHBalance:",
-      "balanceLocked": "CHIn Orders:",
-      "balanceFree": "CHAvailable:"
+      "loadingAriaLabel": "CH-Löáḋïńĝ ĉöïń báláńĉëŝ",
+      "total": "CH-Báláńĉë:",
+      "balanceLocked": "CH-Ïń Öѓḋëѓŝ:",
+      "balanceFree": "CH-Áváïláblë:"
     },
     "networkSelector": {
-      "label": "CHNetwork:",
-      "placeholder": "CHChoose the network"
+      "label": "CH-Ńëṫwöѓk:",
+      "placeholder": "CH-Ĉĥööŝë ṫĥë ńëṫwöѓk"
     },
     "depositAddress": {
-      "label": "CHDeposit Address:",
-      "loading": "CHLoading deposit address...",
-      "placeholder": "CHChoose the currency and the network first.",
-      "warning": "CHOnly send {{network}} {{coin}} tokens to this address"
+      "label": "CH-Ḋëṗöŝïṫ Áḋḋѓëŝŝ:",
+      "loading": "CH-Löáḋïńĝ ḋëṗöŝïṫ áḋḋѓëŝŝ...",
+      "placeholder": "CH-Ĉĥööŝë ṫĥë ĉüѓѓëńĉy áńḋ ṫĥë ńëṫwöѓk ḟïѓŝṫ.",
+      "warning": "CH-Öńly ŝëńḋ {{ńëṫwöѓk}} {{ĉöïń}} ṫökëńŝ ṫö ṫĥïŝ áḋḋѓëŝŝ"
     },
     "depositMemo": {
-      "label": "CHDeposit MEMO/Tag:"
+      "label": "CH-Ḋëṗöŝïṫ ṀËṀÖ/Ṫáĝ:"
     },
     "depositQR": {
-      "address": "CH{{coin}} Address",
-      "memo": "CH{{coin}} MEMO/Tag"
+      "address": "CH-{{ĉöïń}} Áḋḋѓëŝŝ",
+      "memo": "CH-{{ĉöïń}} ṀËṀÖ/Ṫáĝ"
     }
   }
 }

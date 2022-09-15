@@ -1,24 +1,24 @@
 {
   "service-header": {
-    "managements-label": "CHManage Funds",
-    "investors-label": "CHInvestors",
-    "coins-label": "CHCoins",
+    "managements-label": "CH-Ṁáńáĝë Ḟüńḋŝ",
+    "investors-label": "CH-Ïńvëŝṫöѓŝ",
+    "coins-label": "CH-Ĉöïńŝ",
     "dropdown": {
-      "manageServices": "CHManage Service",
+      "manageServices": "CH-Ṁáńáĝë Ŝëѓvïĉë",
       "trade": {
-        "title": "CHTrade",
+        "title": "CH-Ṫѓáḋë",
         "links": {
-          "positions": "CHMy Positions",
-          "manual": "CHManual trading",
-          "signals": "CHSignals Trading",
-          "api": "CHAPI Trading"
+          "positions": "CH-Ṁy Ṗöŝïṫïöńŝ",
+          "manual": "CH-Ṁáńüál ṫѓáḋïńĝ",
+          "signals": "CH-Ŝïĝńálŝ Ṫѓáḋïńĝ",
+          "api": "CH-ÁṖÏ Ṫѓáḋïńĝ"
         }
       },
       "profile": {
-        "title": "CHProfile",
+        "title": "CH-Ṗѓöḟïlë",
         "links": {
-          "profile": "CHView Profile",
-          "profile-edit": "CHEdit Profile"
+          "profile": "CH-Vïëw Ṗѓöḟïlë",
+          "profile-edit": "CH-Ëḋïṫ Ṗѓöḟïlë"
         }
       }
     }

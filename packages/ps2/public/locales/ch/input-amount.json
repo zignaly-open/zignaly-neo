@@ -1,13 +1,13 @@
 {
   "input-amount": {
     "internal-error": {
-      "insufficient-amount": "CHInsufficient funds.",
-      "min-amount": "CHThe minimum amount is {{amount}} {{coin}}"
+      "insufficient-amount": "CH-Ïńŝüḟḟïĉïëńṫ ḟüńḋŝ.",
+      "min-amount": "CH-Ṫĥë ṁïńïṁüṁ áṁöüńṫ ïŝ {{áṁöüńṫ}} {{ĉöïń}}"
     },
-    "button-max": "CHMax",
+    "button-max": "CH-Ṁáx",
     "default": {
-      "label": "CHAmount to Withdraw",
-      "labelBalance": "CHBalance:"
+      "label": "CH-Áṁöüńṫ ṫö Wïṫĥḋѓáw",
+      "labelBalance": "CH-Báláńĉë:"
     }
   }
 }

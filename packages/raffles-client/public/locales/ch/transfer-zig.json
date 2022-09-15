@@ -1,11 +1,15 @@
 {
-  "title": "CHTransfer ZIG",
-  "subtitle": "CHTo continue, you need to transfer ZIG",
-  "button": "CHTransfer now!",
-  "error": "CHERROR: Please Try Again",
-  "success": "CHSUCCESS: Your deposit was successful",
-  "warning": "CHTransfers you make in ZIG cannot be withdrawn, they will only be converted into prizes.",
-  "wrong-network": "CHWrong Network",
-  "wrong-network-info": "CHThe network you are trying to connect to is not available within our services. Please switch to Polygon to continue.",
-  "switch-network": "CHSwitch Network"
+  "title": "CH-Ṫѓáńŝḟëѓ ŽÏĜ",
+  "subtitle": "CH-Ṫö ĉöńṫïńüë, yöü ńëëḋ ṫö ṫѓáńŝḟëѓ ŽÏĜ",
+  "button": "CH-Ṫѓáńŝḟëѓ ńöw!",
+  "error": "CH-ËЃЃÖЃ: Ṗlëáŝë Ṫѓy Áĝáïń",
+  "success": "CH-ŜÜĈĈËŜŜ: Yöüѓ ḋëṗöŝïṫ wáŝ ŝüĉĉëŝŝḟül",
+  "warning": "CH-Ṫѓáńŝḟëѓŝ yöü ṁákë ïń ŽÏĜ ĉáńńöṫ bë wïṫĥḋѓáwń, ṫĥëy wïll öńly bë ĉöńvëѓṫëḋ ïńṫö ṗѓïžëŝ.",
+  "wrong-address": "CH-Wѓöńĝ Áḋḋѓëŝŝ",
+  "wrong-address-info": "CH-Yöü'ѓë ĉüѓѓëńṫly üŝïńĝ á ḋïḟḟëѓëńṫ áḋḋѓëŝŝ ḟѓöṁ ṫĥë öńë yöü löĝĝëḋ ïń, ṗlëáŝë ĉĥáńĝë báĉk ṫö ĉöńṫïńüë.",
+  "wrong-network": "CH-Wѓöńĝ Ńëṫwöѓk",
+  "wrong-network-info": "CH-Ṫĥë ńëṫwöѓk yöü áѓë ṫѓyïńĝ ṫö ĉöńńëĉṫ ṫö ïŝ ńöṫ áváïláblë wïṫĥïń öüѓ ŝëѓvïĉëŝ. Ṗlëáŝë ŝwïṫĉĥ ṫö Ṗölyĝöń ṫö ĉöńṫïńüë.",
+  "switch-network": "CH-Ŝwïṫĉĥ Ńëṫwöѓk",
+  "not-enough": "CH-Ńöṫ Ëńöüĝĥ ŽÏĜŝ",
+  "not-enough-info": "CH-Yöü ḋöń'ṫ ĥávë ëńöüĝĥ ŽÏĜŝ ṫö bïḋ!"
 }

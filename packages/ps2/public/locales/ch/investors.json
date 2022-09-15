@@ -1,17 +1,20 @@
 {
   "investors": {
-    "title": "CHInvestors",
+    "failed-to-load": "CH-Ḟáïlëḋ ṫö löáḋ ṫĥë ḋáṫá",
+    "title": "CH-Ïńvëŝṫöѓŝ",
+    "number-of-investors": "CH-{{ĉöüńṫ}} Ïńvëŝṫöѓ",
+    "number-of-investors_plural": "CH-{{ĉöüńṫ}} Ïńvëŝṫöѓŝ",
     "tableHeader": {
-      "email": "CHEmail",
-      "userId": "CHUser ID",
-      "investment": "CHInvestment",
-      "P&L": "CHP&L",
-      "P&LTotal": "CHP&L Total",
-      "totalFeesPaid": "CHTotal Fees Paid",
-      "successFee": "CHSuccess Fee",
-      "feesZIG": "CHFees in ZIG",
-      "status": "CHStatus"
+      "email": "CH-Ëṁáïl",
+      "userId": "CH-Üŝëѓ ÏḊ",
+      "investment": "CH-Ïńvëŝṫṁëńṫ",
+      "P&L": "CH-Ṗ&L",
+      "P&LTotal": "CH-Ṗ&L Ṫöṫál",
+      "totalFeesPaid": "CH-Ṫöṫál Ḟëëŝ Ṗáïḋ",
+      "successFee": "CH-Ŝüĉĉëŝŝ Ḟëë",
+      "feesZIG": "CH-Ḟëëŝ ïń ŽÏĜ",
+      "status": "CH-Ŝṫáṫüŝ"
     },
-    "loading-arialLabel": "CHLoading investors"
+    "loading-arialLabel": "CH-Löáḋïńĝ ïńvëŝṫöѓŝ"
   }
 }

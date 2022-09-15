@@ -2,37 +2,37 @@
   "table": {
     "footer": {
       "elements": {
-        "show": "CHShowing",
-        "out": "CHout of",
-        "items": "CHitems"
+        "show": "CH-Ŝĥöwïńĝ",
+        "out": "CH-öüṫ öḟ",
+        "items": "CH-ïṫëṁŝ"
       },
       "page": {
-        "items": "CHPage",
-        "out": "CHout of"
+        "items": "CH-Ṗáĝë",
+        "out": "CH-öüṫ öḟ"
       },
       "selector": {
-        "display": "CHDisplaying",
-        "items": "CHitems"
+        "display": "CH-Ḋïŝṗláyïńĝ",
+        "items": "CH-ïṫëṁŝ"
       }
     },
-    "assetsInPool-investors": "CH{{count}} investor",
-    "assetsInPool-investors_plural": "CH{{count}} investors",
-    "balanceSummary-invested": "CHInvested",
-    "selector-validation-notData": "CHNo data available",
+    "assetsInPool-investors": "CH-{{ĉöüńṫ}} ïńvëŝṫöѓ",
+    "assetsInPool-investors_plural": "CH-{{ĉöüńṫ}} ïńvëŝṫöѓŝ",
+    "balanceSummary-invested": "CH-Ïńvëŝṫëḋ",
+    "selector-validation-notData": "CH-Ńö ḋáṫá áváïláblë",
     "investColumn": {
-      "successFess": "CH10% Success Fee",
-      "liquidated": "CHLIQUIDATED"
+      "successFess": "CH-10% Ŝüĉĉëŝŝ Ḟëë",
+      "liquidated": "CH-LÏQÜÏḊÁṪËḊ"
     },
-    "tooltip-columnHeader": "CHToggle SortBy",
-    "serviceName-by": "CHby",
+    "tooltip-columnHeader": "CH-Ṫöĝĝlë ŜöѓṫBy",
+    "serviceName-by": "CH-by",
     "status": {
-      "connected": "CHConnected",
-      "pending": "CHPending",
-      "soft-disconnect": "CHSoft-Disconnect",
-      "hard-disconnect": "CHHard-Disconnect",
-      "suspended": "CHSuspended",
-      "disconnected": "CHDisconnected",
-      "owner": "CHOwner"
+      "connected": "CH-Ĉöńńëĉṫëḋ",
+      "pending": "CH-Ṗëńḋïńĝ",
+      "soft-disconnect": "CH-Ŝöḟṫ-Ḋïŝĉöńńëĉṫ",
+      "hard-disconnect": "CH-Ĥáѓḋ-Ḋïŝĉöńńëĉṫ",
+      "suspended": "CH-Ŝüŝṗëńḋëḋ",
+      "disconnected": "CH-Ḋïŝĉöńńëĉṫëḋ",
+      "owner": "CH-Öwńëѓ"
     }
   }
 }

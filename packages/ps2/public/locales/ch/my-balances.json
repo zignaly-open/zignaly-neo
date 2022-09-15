@@ -1,14 +1,14 @@
 {
   "my-balances": {
     "tableHeader": {
-      "coin": "CHCoin",
-      "totalBalance": "CHTotal Balance",
-      "availableBalance": "CHAvailable Balance",
-      "lockedBalance": "CHLocked Balance",
-      "valueBTC": "CHValue in BTC",
-      "valueUSD": "CHValue in USD"
+      "coin": "CH-Ĉöïń",
+      "totalBalance": "CH-Ṫöṫál Báláńĉë",
+      "availableBalance": "CH-Áváïláblë Báláńĉë",
+      "lockedBalance": "CH-Löĉkëḋ Báláńĉë",
+      "valueBTC": "CH-Válüë ïń BṪĈ",
+      "valueUSD": "CH-Válüë ïń ÜŜḊ"
     },
-    "table-search-placeholder": "CHType to search for coins.",
-    "loading-arialLabel": "CHLoading my dashboard"
+    "table-search-placeholder": "CH-Ṫyṗë ṫö ŝëáѓĉĥ ḟöѓ ĉöïńŝ.",
+    "loading-arialLabel": "CH-Löáḋïńĝ ṁy ḋáŝĥböáѓḋ"
   }
 }

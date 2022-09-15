@@ -1,87 +1,87 @@
 {
   "edit-investment": {
-    "percentageChangedSuccess": "CHProfit percentage updated successfully.",
-    "addMoreInvestmentSuccess": "CHYou invested {{amount}} {{currency}} successfully in service {{serviceName}}.",
-    "withdrawInvestmentSuccess": "CHWithdrawal requested successfully.",
-    "validation-indicateAnAmount": "CHYou must indicate an amount.",
-    "error-blockedInvestment": "CHAll your funds are pending to be transferred out of the service.",
+    "percentageChangedSuccess": "CH-Ṗѓöḟïṫ ṗëѓĉëńṫáĝë üṗḋáṫëḋ ŝüĉĉëŝŝḟülly.",
+    "addMoreInvestmentSuccess": "CH-Yöü ïńvëŝṫëḋ {{áṁöüńṫ}} {{ĉüѓѓëńĉy}} ŝüĉĉëŝŝḟülly ïń ŝëѓvïĉë {{ŝëѓvïĉëŃáṁë}}.",
+    "withdrawInvestmentSuccess": "CH-Wïṫĥḋѓáwál ѓëqüëŝṫëḋ ŝüĉĉëŝŝḟülly.",
+    "validation-indicateAnAmount": "CH-Yöü ṁüŝṫ ïńḋïĉáṫë áń áṁöüńṫ.",
+    "error-blockedInvestment": "CH-Áll yöüѓ ḟüńḋŝ áѓë ṗëńḋïńĝ ṫö bë ṫѓáńŝḟëѓѓëḋ öüṫ öḟ ṫĥë ŝëѓvïĉë.",
     "form": {
-      "title": "CHAmount Invested:",
+      "title": "CH-Áṁöüńṫ Ïńvëŝṫëḋ:",
       "profits": {
-        "title": "CHWhat to do with profits:",
-        "left": "CHReinvest",
-        "right": "CHWithdraw"
+        "title": "CH-Wĥáṫ ṫö ḋö wïṫĥ ṗѓöḟïṫŝ:",
+        "left": "CH-Ѓëïńvëŝṫ",
+        "right": "CH-Wïṫĥḋѓáw"
       },
       "inputAmount": {
-        "label": "CHAmount to Invest:",
-        "labelBalance": "CHAvailable:"
+        "label": "CH-Áṁöüńṫ ṫö Ïńvëŝṫ:",
+        "labelBalance": "CH-Áváïláblë:"
       },
       "link": {
-        "investMore": "CHInvest more",
-        "withdraw": "CHWithdraw Investment"
+        "investMore": "CH-Ïńvëŝṫ ṁöѓë",
+        "withdraw": "CH-Wïṫĥḋѓáw Ïńvëŝṫṁëńṫ"
       },
       "button": {
-        "saveAndClose": "CHSave and Close",
-        "saveAndInvestment": "CHSave and Add to Investment"
+        "saveAndClose": "CH-Ŝávë áńḋ Ĉlöŝë",
+        "saveAndInvestment": "CH-Ŝávë áńḋ Áḋḋ ṫö Ïńvëŝṫṁëńṫ"
       }
     },
     "pendingMajorThan": {
-      "type": "CHNew investment",
-      "status": "CHProcessing in 24 hrs"
+      "type": "CH-Ńëw ïńvëŝṫṁëńṫ",
+      "status": "CH-Ṗѓöĉëŝŝïńĝ ïń 24 ĥѓŝ"
     },
     "profitOutMajorThan": {
-      "type": "CHProfits",
-      "status": "CHWaiting for next accounting"
+      "type": "CH-Ṗѓöḟïṫŝ",
+      "status": "CH-Wáïṫïńĝ ḟöѓ ńëxṫ áĉĉöüńṫïńĝ"
     },
     "transferOutMajorThan": {
-      "type": "CHTransfer Out",
-      "status": "CHWaiting for next accounting"
+      "type": "CH-Ṫѓáńŝḟëѓ Öüṫ",
+      "status": "CH-Wáïṫïńĝ ḟöѓ ńëxṫ áĉĉöüńṫïńĝ"
     },
     "pendingTransactions": {
-      "status_zero": "CHYou have no item",
-      "status_one": "CHYou have 1 pending transaction",
-      "status_other": "CHYou have {{count}} pending transactions",
-      "link-label": "CHView"
+      "status_zero": "CH-Yöü ĥávë ńö ïṫëṁ",
+      "status_one": "CH-Yöü ĥávë 1 ṗëńḋïńĝ ṫѓáńŝáĉṫïöń",
+      "status_other": "CH-Yöü ĥávë {{ĉöüńṫ}} ṗëńḋïńĝ ṫѓáńŝáĉṫïöńŝ",
+      "link-label": "CH-Vïëw"
     },
-    "investorDetail-successFee": "CH% Success fee",
+    "investorDetail-successFee": "CH-{{ḟëë}}% Ŝüĉĉëŝŝ ḟëë",
     "modal": {
       "withdrawInvestment": {
-        "title": "CHWithdraw Investment with",
+        "title": "CH-Wïṫĥḋѓáw Ïńvëŝṫṁëńṫ wïṫĥ",
         "afterPosition": {
-          "title": "CHWithdraw After Positions Close",
-          "description": "CHYou will receive your funds after the trader free them. Take into account that your investment is at risk until is transferred to you. This usually takes a few days, but could take more. It is up to them.",
+          "title": "CH-Wïṫĥḋѓáw Áḟṫëѓ Ṗöŝïṫïöńŝ Ĉlöŝë",
+          "description": "CH-Yöü wïll ѓëĉëïvë yöüѓ ḟüńḋŝ áḟṫëѓ ṫĥë ṫѓáḋëѓ ḟѓëë ṫĥëṁ. Ṫákë ïńṫö áĉĉöüńṫ ṫĥáṫ yöüѓ ïńvëŝṫṁëńṫ ïŝ áṫ ѓïŝk üńṫïl ïŝ ṫѓáńŝḟëѓѓëḋ ṫö yöü. Ṫĥïŝ üŝüálly ṫákëŝ á ḟëw ḋáyŝ, büṫ ĉöülḋ ṫákë ṁöѓë. Ïṫ ïŝ üṗ ṫö ṫĥëṁ.",
           "button": {
-            "subtitle": "CHWithdraw on free funds",
-            "title": "CHNo Fee"
+            "subtitle": "CH-Wïṫĥḋѓáw öń ḟѓëë ḟüńḋŝ",
+            "title": "CH-Ńö Ḟëë"
           }
         },
         "instant": {
-          "title": "CHInstant Withdrawal",
-          "description": "CHInstant withdrawals incur a 5% fee because the trader has open positions and could be liquidated. To avoid this, Zignaly must cover your funds and inherit your risk, hence the fee.",
+          "title": "CH-Ïńŝṫáńṫ Wïṫĥḋѓáwál",
+          "description": "CH-Ïńŝṫáńṫ wïṫĥḋѓáwálŝ ïńĉüѓ á 5% ḟëë bëĉáüŝë ṫĥë ṫѓáḋëѓ ĥáŝ öṗëń ṗöŝïṫïöńŝ áńḋ ĉöülḋ bë lïqüïḋáṫëḋ. Ṫö ávöïḋ ṫĥïŝ, Žïĝńály ṁüŝṫ ĉövëѓ yöüѓ ḟüńḋŝ áńḋ ïńĥëѓïṫ yöüѓ ѓïŝk, ĥëńĉë ṫĥë ḟëë.",
           "button": {
-            "subtitle": "CHWithdraw instantly",
-            "title": "CH5% Fee"
+            "subtitle": "CH-Wïṫĥḋѓáw ïńŝṫáńṫly",
+            "title": "CH-5% Ḟëë"
           }
         }
       },
       "pendingTransaction": {
-        "title": "CHPending Transactions",
+        "title": "CH-Ṗëńḋïńĝ Ṫѓáńŝáĉṫïöńŝ",
         "tableHeader": {
-          "amount": "CHAmount",
-          "type": "CHType",
-          "status": "CHStatus"
+          "amount": "CH-Áṁöüńṫ",
+          "type": "CH-Ṫyṗë",
+          "status": "CH-Ŝṫáṫüŝ"
         },
-        "button": "CHBack"
+        "button": "CH-Báĉk"
       },
       "editInvestments": {
-        "title": "CHEdit Investment",
-        "loading": "CHLoading edit investment"
+        "title": "CH-Ëḋïṫ Ïńvëŝṫṁëńṫ",
+        "loading": "CH-Löáḋïńĝ ëḋïṫ ïńvëŝṫṁëńṫ"
       }
     },
     "modalSuccess": {
-      "title": "CHInvestment Processing (Up to 24h)",
-      "description": "CHYour funds will be transferred into the service’s account within 24 hours. You may withdraw your funds anytime before this transfer is made. Once funds are transferred, you’ll be able to withdraw via a <0>soft</0> or <0>hard disconnection.</0>",
-      "button": "CHClose"
+      "title": "CH-Ïńvëŝṫṁëńṫ Ṗѓöĉëŝŝïńĝ (Üṗ ṫö 24ĥ)",
+      "description": "CH-Yöüѓ ḟüńḋŝ wïll bë ṫѓáńŝḟëѓѓëḋ ïńṫö ṫĥë ŝëѓvïĉë’ŝ áĉĉöüńṫ wïṫĥïń 24 ĥöüѓŝ. Yöü ṁáy wïṫĥḋѓáw yöüѓ ḟüńḋŝ áńyṫïṁë bëḟöѓë ṫĥïŝ ṫѓáńŝḟëѓ ïŝ ṁáḋë. Öńĉë ḟüńḋŝ áѓë ṫѓáńŝḟëѓѓëḋ, yöü’ll bë áblë ṫö wïṫĥḋѓáw vïá á <0>ŝöḟṫ</0> öѓ <0>ĥáѓḋ ḋïŝĉöńńëĉṫïöń.</0>",
+      "button": "CH-Ĉlöŝë"
     }
   }
 }

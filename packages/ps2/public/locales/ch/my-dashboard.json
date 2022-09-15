@@ -1,34 +1,34 @@
 {
   "my-dashboard": {
-    "title": "CHMy Dashboard",
+    "title": "CH-Ṁy Ḋáŝĥböáѓḋ",
     "tableHeader": {
       "summary": {
-        "title": "CHMy Current Value",
-        "subtitle": "CHReturns"
+        "title": "CH-Ṁy Ĉüѓѓëńṫ Válüë",
+        "subtitle": "CH-Ѓëṫüѓńŝ"
       },
       "serviceName": {
-        "title": "CHService Name",
-        "subtitle": "CHManager/Base currency"
+        "title": "CH-Ŝëѓvïĉë Ńáṁë",
+        "subtitle": "CH-Ṁáńáĝëѓ/Báŝë ĉüѓѓëńĉy"
       },
       "1-mo": {
-        "title": "CH1 mo.",
-        "no-data": "CHNo data to show yet"
+        "title": "CH-1 ṁö.",
+        "no-data": "CH-Ńö ḋáṫá ṫö ŝĥöw yëṫ"
       },
-      "dailyAvg-title": "CHDaily avg.",
-      "3-mos-title": "CH3 mos.",
-      "6-mos-title": "CH6 mos.",
+      "dailyAvg-title": "CH-Ḋáïly ávĝ.",
+      "3-mos-title": "CH-3 ṁöŝ.",
+      "6-mos-title": "CH-6 ṁöŝ.",
       "all": {
-        "title": "CHAll",
-        "subtitle": "CHAge"
+        "title": "CH-Áll",
+        "subtitle": "CH-Áĝë"
       }
     },
-    "table-search-emptyMessage": "CHYou are not connected to any service yet.",
-    "something-went-wrong": "CHSomething went wrong",
-    "loading-arialLabel": "CHLoading my dashboard",
+    "table-search-emptyMessage": "CH-Yöü áѓë ńöṫ ĉöńńëĉṫëḋ ṫö áńy ŝëѓvïĉë yëṫ.",
+    "something-went-wrong": "CH-Ŝöṁëṫĥïńĝ wëńṫ wѓöńĝ",
+    "loading-arialLabel": "CH-Löáḋïńĝ ṁy ḋáŝĥböáѓḋ",
     "slider-input": {
       "labels": {
-        "left": "CHReinvest",
-        "right": "CHWithdraw"
+        "left": "CH-Ѓëïńvëŝṫ",
+        "right": "CH-Wïṫĥḋѓáw"
       }
     }
   }

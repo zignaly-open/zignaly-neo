@@ -1,35 +1,39 @@
 {
+  "yes": "CH-Yëŝ",
+  "no": "CH-Ńö",
   "coming-soon": {
-    "title": "CHComing Soon",
-    "description": "CHThis section is under development, you will see it available at a later date."
+    "title": "CH-Ĉöṁïńĝ Ŝööń",
+    "description": "CH-Ṫĥïŝ ŝëĉṫïöń ïŝ üńḋëѓ ḋëvëlöṗṁëńṫ, yöü wïll ŝëë ïṫ áváïláblë áṫ á láṫëѓ ḋáṫë."
   },
   "main-menu": {
-    "dropdown-link-forTrading": "CHFor Trading Services",
-    "dropdown-link-helpDocs": "CHHelp Docs"
+    "dropdown-link-forTrading": "CH-Ḟöѓ Ṫѓáḋïńĝ Ŝëѓvïĉëŝ",
+    "dropdown-link-helpDocs": "CH-Ĥëlṗ Ḋöĉŝ"
   },
   "account-menu": {
-    "isAuth-button-logIn": "CHLog in",
-    "isAuth-button-signUp": "CHSIGN UP",
-    "notAuth-dropdown-link-dashboard": "CHMy Dashboard",
-    "notAuth-dropdown-link-balances": "CHMy Balances",
-    "notAuth-button-logOut": "CHLogout"
+    "isAuth-button-logIn": "CH-Löĝ ïń",
+    "isAuth-button-signUp": "CH-ŜÏĜŃ ÜṖ",
+    "notAuth-dropdown-link-dashboard": "CH-Ṁy Ḋáŝĥböáѓḋ",
+    "notAuth-dropdown-link-balances": "CH-Ṁy Báláńĉëŝ",
+    "notAuth-button-logOut": "CH-Löĝöüṫ"
   },
   "account-selector": {
     "type": {
-      "title": "CHType:",
-      "futures": "CHSpot",
-      "spot": "CHFutures"
+      "title": "CH-Ṫyṗë:",
+      "futures": "CH-Ŝṗöṫ",
+      "spot": "CH-Ḟüṫüѓëŝ"
     }
   },
   "navigation-menu": {
-    "profit-sharing": "CHProfit Sharing",
-    "staking": "CHStaking",
-    "zigpad": "CHZIGPad"
+    "profit-sharing": "CH-Ṗѓöḟïṫ Ŝĥáѓïńĝ",
+    "staking": "CH-Ŝṫákïńĝ",
+    "zigpad": "CH-ŽÏĜṖáḋ"
   },
-  "amount": "CHAmount",
-  "new-version": "CHNew version, click me to update",
+  "amount": "CH-Áṁöüńṫ",
+  "new-version": "CH-Ńëw vëѓŝïöń, ĉlïĉk ṁë ṫö üṗḋáṫë",
   "validation": {
-    "insufficient-amount": "CHInsufficient funds",
-    "invalid-value": "CHInvalid value"
+    "insufficient-amount": "CH-Ïńŝüḟḟïĉïëńṫ ḟüńḋŝ",
+    "invalid-value": "CH-Ïńválïḋ válüë",
+    "negative-amount": "CH-Ŝĥöülḋ bë >= 0",
+    "invalid-amount": "CH-Yöü ṁüŝṫ ïńḋïĉáṫë áń áṁöüńṫ"
   }
 }

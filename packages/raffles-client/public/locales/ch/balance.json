@@ -1,7 +1,7 @@
 {
-  "success": "CHSuccess! Your balance will be updated as soon as the transaction is confirmed",
-  "your-balance": "CHYour balance: <0>{{balance}}</0>",
-  "buy-bids": "CHBuy bids",
-  "buy-x-bids": "CHBuy {{count}} bids",
-  "exit": "CHexit"
+  "success": "CH-Ŝüĉĉëŝŝ! Yöüѓ báláńĉë wïll bë üṗḋáṫëḋ áŝ ŝööń áŝ ṫĥë ṫѓáńŝáĉṫïöń ïŝ ĉöńḟïѓṁëḋ",
+  "your-balance": "CH-Yöüѓ báláńĉë: <0>{{báláńĉë}}</0>",
+  "buy-bids": "CH-Büy bïḋŝ",
+  "buy-x-bids": "CH-Büy {{ĉöüńṫ}} bïḋŝ",
+  "exit": "CH-ëxïṫ"
 }

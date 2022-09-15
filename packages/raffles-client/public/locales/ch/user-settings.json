@@ -1,12 +1,15 @@
 {
-  "information": "CH*For advanced options (Change password, 2FA...) visit",
-  "please-enter-username": "CHPlease enter your username",
-  "please-enter-discord-user": "CHPlease enter your discord user",
-  "cancel": "CHCancel",
-  "save-profile": "CHSave Profile",
-  "discord-user-label": "CHDiscord User",
-  "username-label": "CHUsername:",
-  "settings": "CHSettings",
-  "discordNameInfo": "CHMake sure it has the following format (User#0000)",
-  "www.zignaly.com": "CHwww.zignaly.com"
+  "information": "CH-*Ḟöѓ áḋváńĉëḋ öṗṫïöńŝ (Ĉĥáńĝë ṗáŝŝwöѓḋ, 2ḞÁ...) vïŝïṫ",
+  "username-label": "CH-Üŝëѓńáṁë:",
+  "username-info": "CH-Ṫö ïḋëńṫïḟy yöüѓŝëlḟ ëáŝïly öń ṫĥë Bïḋŝ.",
+  "please-enter-discord-user": "CH-üŝëѓńáṁë#1234",
+  "cancel": "CH-Ĉáńĉël",
+  "save-profile": "CH-Ŝávë Ṗѓöḟïlë",
+  "discord-user-label": "CH-Ḋïŝĉöѓḋ Üŝëѓ:",
+  "email-label": "CH-Ëṁáïl:",
+  "email-info": "CH-Ëńṫëѓ yöüѓ ëṁáïl ïḟ yöü wáńṫ ṫö ѓëĉëïvë üṗḋáṫë áböüṫ ńëw áüĉṫïöńŝ.",
+  "email-placeholder": "CH-Ṗlëáŝë ëńṫëѓ yöüѓ ëṁáïl (öṗṫïöńál)",
+  "settings": "CH-Ŝëṫṫïńĝŝ",
+  "discordNameInfo": "CH-Ëńṫëѓ yöüѓ ḋïŝĉöѓḋ ṫö ĝëṫ yöüѓ ѓëwáѓḋ.",
+  "www.zignaly.com": "CH-www.žïĝńály.ĉöṁ"
 }
