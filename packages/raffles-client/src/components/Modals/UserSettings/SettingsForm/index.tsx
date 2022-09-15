@@ -110,28 +110,6 @@ const SettingsForm = (props: UserSettingsModalProps) => {
               )}
             />
           </InputContainer>
-          <Box display='flex' alignItems='center' flexDirection='row' gap='2px'>
-            <Typography color='neutral200'>{t('email-label')}</Typography>
-          </Box>
-          <Typography variant='h4' weight='medium' color='neutral400'>
-            {t('email-info')}
-          </Typography>
-          <Gap gap={5} />
-          <InputContainer width={getInputWidth()}>
-            <Controller
-              name='email'
-              control={control}
-              render={({ field }) => (
-                <InputText
-                  placeholder={t('email-placeholder')}
-                  minHeight={23}
-                  value={field.value}
-                  onChange={field.onChange}
-                  error={errors.email?.message}
-                />
-              )}
-            />
-          </InputContainer>
           <Gap gap={5} />
           <Box display='flex' alignItems='center' flexDirection='row' gap='2px'>
             <Typography color='neutral200'>
@@ -146,7 +124,6 @@ const SettingsForm = (props: UserSettingsModalProps) => {
             <Controller
               name='discordName'
               control={control}
-              rules={{ required: true }}
               render={({ field }) => (
                 <InputText
                   placeholder='user#0000'
@@ -154,6 +131,28 @@ const SettingsForm = (props: UserSettingsModalProps) => {
                   value={field.value}
                   onChange={field.onChange}
                   error={errors.discordName?.message}
+                />
+              )}
+            />
+          </InputContainer>
+          <Gap gap={5} />
+          <Box display='flex' alignItems='center' flexDirection='row' gap='2px'>
+            <Typography color='neutral200'>{t('email-label')}</Typography>
+          </Box>
+          <Typography variant='h4' weight='medium' color='neutral400'>
+            {t('email-info')}
+          </Typography>
+          <InputContainer width={getInputWidth()}>
+            <Controller
+              name='email'
+              control={control}
+              render={({ field }) => (
+                <InputText
+                  placeholder={t('email-placeholder')}
+                  minHeight={23}
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={errors.email?.message}
                 />
               )}
             />
