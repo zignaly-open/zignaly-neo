@@ -7,6 +7,42 @@ function getFiles(dir) {
   return fs.readdirSync(dir).map((x) => path.join(dir, x));
 }
 
+let letterMapping = {
+  a: 'á',
+  c: 'ĉ',
+  d: 'ḋ',
+  e: 'ë',
+  f: 'ḟ',
+  g: 'ĝ',
+  h: 'ĥ',
+  i: 'ï',
+  m: 'ṁ',
+  n: 'ń',
+  o: 'ö',
+  p: 'ṗ',
+  q: '',
+  r: 'ѓ',
+  s: 'ŝ',
+  t: 'ṫ',
+  u: 'ü',
+  z: 'ž',
+};
+
+letterMapping = {
+  ...letterMapping,
+  ...Object.fromEntries(
+    Object.entries(letterMapping).map((x) =>
+      x.map((x) => x.toLocaleUpperCase()),
+    ),
+  ),
+};
+
+const messWithString = (string) =>
+  string
+    .split('')
+    .map((x) => letterMapping[x] || x)
+    .join('');
+
 function recursivelyReplace(v) {
   if (typeof v === 'object') {
     return Object.keys(v).reduce(
@@ -14,7 +50,7 @@ function recursivelyReplace(v) {
       {},
     );
   } else {
-    return 'CH-' + v;
+    return 'CH-' + messWithString(v);
   }
 }
 
