@@ -36,7 +36,10 @@ const AuctionCard: React.FC<{
 
   // Update ui when expiration date is reached
   // Add delay in case of last ms bid event
-  const updatedAt = useUpdatedAt(auction.expiresAt, 100);
+  const updatedAt = useUpdatedAt(
+    isActive || !auction.startDate ? auction.expiresAt : auction.startDate,
+    100,
+  );
 
   const showClaim = useMemo(
     () => (!updatedAt || +new Date() - updatedAt > 0) && hasWon,
