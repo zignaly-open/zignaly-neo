@@ -31,7 +31,9 @@ const Footer: React.FC = () => {
           {t('zigbids_faqs')}
         </a>
         <a
-          href={'https://zignaly.com/'}
+          href={
+            'https://help.zignaly.com/en/articles/6203524-contact-our-support-team'
+          }
           target='_blank'
           rel='noopener noreferrer'
         >
