@@ -52,7 +52,7 @@ const Header = () => {
       // User changed MM account, ask to disconnect
       showModal(SwitchAccountModal);
     }
-  }, [account]);
+  }, [account, currentUser]);
 
   return (
     <StickyHeader
