@@ -23,6 +23,7 @@ function setReactInputValue(input: HTMLInputElement, value: string) {
   // eslint-disable-next-line no-param-reassign
   input.value = value;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const tracker = (input as any)._valueTracker;
   if (tracker) {
     tracker.setValue(previousValue);
