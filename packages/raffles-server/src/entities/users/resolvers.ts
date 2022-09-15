@@ -94,9 +94,14 @@ export const resolvers = {
       }
       const emailValid = await validateEmail(email);
       const discordNameValid = await validateDiscordName(discordName);
+      console.log(discordNameValid);
 
-      if (!usernameValid || !emailValid || !discordNameValid)
+      if (!usernameValid || !emailValid || !discordNameValid) {
+        console.log('f');
         throw new Error('Invalid data');
+      }
+
+      console.log('a');
       userInstance.username = username;
       userInstance.email = email;
       userInstance.discordName = discordName;

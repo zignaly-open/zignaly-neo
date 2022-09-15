@@ -1,14 +1,14 @@
 {
     "information": "*For advanced options (Change password, 2FA...) visit",
-    "username-label": "Username: (required)",
+    "username-label": "Username:",
     "username-info": "To identify yourself easily on the Bids.",
     "please-enter-discord-user": "username#1234",
     "cancel": "Cancel",
     "save-profile": "Save Profile",
     "discord-user-label": "Discord User:",
     "email-label": "Email:",
-    "email-info": "Enter your email to receive update about new auctions.",
-    "email-placeholder": "Please enter your email",
+    "email-info": "Enter your email if you want to receive update about new auctions.",
+    "email-placeholder": "Please enter your email (optional)",
     "settings": "Settings",
     "discordNameInfo": "Enter your discord to get your reward.",
     "www.zignaly.com": "www.zignaly.com"

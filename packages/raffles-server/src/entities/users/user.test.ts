@@ -52,9 +52,9 @@ describe('User', () => {
     expect(valid.username).toBe(alice.username);
   });
   it('should not change name if discordName is invalid', async () => {
-    const [alice, aliceToken] = await createAlicesDiscord();
+    const [, aliceToken] = await createAlicesDiscord();
     const valid = await changeDiscordName('Alice1g+104^<', aliceToken);
-    expect(valid.discordName).toBe(alice.discordName);
+    expect(valid).toBeNull();
   });
 
   it('should not let two users have the same name', async () => {

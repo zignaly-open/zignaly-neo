@@ -34,7 +34,7 @@ const SettingsForm = (props: UserSettingsModalProps) => {
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
     defaultValues: {
@@ -98,7 +98,6 @@ const SettingsForm = (props: UserSettingsModalProps) => {
             <Controller
               name='username'
               control={control}
-              rules={{ required: true }}
               render={({ field }) => (
                 <InputText
                   value={field.value}
@@ -176,6 +175,7 @@ const SettingsForm = (props: UserSettingsModalProps) => {
               loading={updatingProfile}
               caption={t('save-profile')}
               size='large'
+              disabled={!isValid}
             />
           </Box>
           {errorMessage && (

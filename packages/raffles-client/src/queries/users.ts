@@ -33,7 +33,7 @@ export const AUTHENTICATE_METAMASK = gql`
 
 export const CHANGE_PROFILE = gql`
   mutation editProfile(
-    $username: String!
+    $username: String
     $email: String
     $discordName: String
   ) {
