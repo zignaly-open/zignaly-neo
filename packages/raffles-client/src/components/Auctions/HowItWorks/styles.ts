@@ -1,38 +1,45 @@
-import { styled } from '@mui/material';
+import { Box, styled } from '@mui/material';
+import { Typography, WalletIcon } from '@zignaly-open/ui';
 
-export const ContainerBox = styled('div')`
-  position: relative;
+export const Step = styled(Box)`
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+  text-align: center;
+  flex: 1;
+  flex-direction: column;
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 24px;
+  }
+`;
+
+export const StepDetails = styled(Box)`
   display: flex;
   flex-direction: column;
-  margin: 0 auto 17px;
-  padding: 0 16px;
-  max-width: 1200px;
-  text-align: justify;
-`;
+  flex: 1;
 
-export const HowItWorksList = styled('ul')`
-  /* width: 100%; */
-  display: flex;
-  /* justify-content: space-evenly; */
-  justify-content: space-between;
-  padding-inline-start: 28px;
-
-  > span {
-    max-width: 46%;
-  }
-
-  ${({ theme }) => theme.breakpoints.down('sm')} {
-    flex-wrap: wrap;
-    padding-inline-start: 11px;
-
-    > span {
-      max-width: 100%;
-    }
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    padding: 0 24px;
   }
 `;
 
-export const BulletPointItem = styled('li')`
-  &::marker {
-    font-size: 30px;
+export const StepIcon = styled(WalletIcon)`
+  min-width: 82px;
+  min-height: 82px;
+  margin-bottom: 18px;
+
+  ${({ theme }) => theme.breakpoints.down('md')} {
+    margin-bottom: 0;
   }
+`;
+
+export const TypographyTitle = styled(Typography)`
+  margin-bottom: 6px !important;
+`;
+
+export const Layout = styled(Box)`
+  max-width: 1280px;
 `;

@@ -8,7 +8,7 @@ import {
   useWithdrawInvestmentMutation,
 } from './api';
 import { useActiveExchange } from '../auth/use';
-import { Coins, Investment, InvestmentDetails } from './types';
+import { Investment } from './types';
 import { RootState } from '../store';
 import { setSelectedInvestment } from './store';
 import { useMemo } from 'react';
@@ -20,6 +20,7 @@ export function useInvestments(): ReturnType<typeof useInvestmentsQuery> {
 }
 
 export function useCoins(): ReturnType<typeof useCoinsQuery> {
+  // TODO: once German's changes are in, merge them
   const exchange = useActiveExchange();
   return useCoinsQuery(exchange?.internalId);
 }
@@ -34,23 +35,6 @@ export function useInvestmentDetails(
   });
 }
 
-// TODO: should be done with caching
-export function useStoredCoins(): { isLoading: boolean; data: Coins } {
-  const data = useSelector((state: RootState) => state.dashboard)?.coins;
-  return { isLoading: !data, data };
-}
-
-// TODO: should be done with caching
-export function useStoredInvestmentDetails(): {
-  isLoading: boolean;
-  data: InvestmentDetails;
-} {
-  const data = useSelector(
-    (state: RootState) => state.dashboard,
-  )?.selectedInvestmentDetails;
-  return { isLoading: !data, data };
-}
-
 export function useSetSelectedInvestment(): (service: Investment) => void {
   const dispatch = useDispatch();
   return (service) => dispatch(setSelectedInvestment(service));
@@ -62,7 +46,7 @@ export function useSelectedInvestment(): Investment {
 
 export function useCurrentBalance(): { id: string; balance: string } {
   const service = useSelectedInvestment();
-  const { data: coins } = useStoredCoins();
+  const { data: coins } = useCoins();
 
   return useMemo(
     () => ({

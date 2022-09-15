@@ -55,8 +55,8 @@ export const Layout = styled.div<LayoutProps>`
         color: #7682f7;
       }
       ${Icon} {
-        transform: scale(1);
-        color: #7682f7;
+        transform: scale(1) !important;
+        fill: #7682f7;
       }
     `,
     )}

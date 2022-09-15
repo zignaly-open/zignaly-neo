@@ -31,7 +31,7 @@ export const SelectorContainer = styled.div`
 
 export const SelectorSizing = styled.div`
   height: 36px;
-  width: 80px;
+  width: 90px;
 `;
 
 export const FooterContainer = styled.div`

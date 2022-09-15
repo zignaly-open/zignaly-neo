@@ -1,5 +1,5 @@
-import BigNumber from 'bignumber.js';
 import { ChangeViewFn } from '../../types';
+import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
 
 export type EditInvestmentFormProps = {
   onClickWithdrawInvestment: () => void;
@@ -9,11 +9,5 @@ export type EditInvestmentFormProps = {
 
 export type EditFormData = {
   profitPercentage: string | number;
-  amountTransfer?: {
-    value: string | number | BigNumber;
-    token: {
-      id: string;
-      balance: string | number | BigNumber;
-    };
-  };
+  amountTransfer?: InputAmountAdvancedValue;
 };

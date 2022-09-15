@@ -1,11 +1,15 @@
 import React from 'react';
-import { Avatar } from '@zignaly-open/ui';
+import { Avatar, Typography } from '@zignaly-open/ui';
 import { Investor, InvestorData, InvestorName } from '../styles';
 import { getServiceLogo } from 'util/images';
 import { useSelectedInvestment } from '../../../use';
+import { useServiceDetails } from '../../../../trader/use';
+import { useTranslation } from 'react-i18next';
 
 const InvestorDetails: React.FC = () => {
   const service = useSelectedInvestment();
+  const { data } = useServiceDetails(service.serviceId);
+  const { t } = useTranslation('edit-investment');
   return (
     <Investor>
       <Avatar size={'xx-large'} image={getServiceLogo(service.serviceLogo)} />
@@ -14,13 +18,13 @@ const InvestorDetails: React.FC = () => {
           {service.serviceName}
         </InvestorName>
 
-        {/*TODO: figure out why the hell do we have fields that are missing from the model here  */}
-        {/*{service.successFee && (*/}
-        {/*  <InvestorSuccessFee variant={'h3'} color={'neutral400'}>*/}
-        {/*    {service.successFee}*/}
-        {/*    {t('edit-investment.investorDetail-successFee')}*/}
-        {/*  </InvestorSuccessFee>*/}
-        {/*)}*/}
+        {data.successFee && (
+          <Typography variant={'h3'} color={'neutral400'}>
+            {t('edit-investment.investorDetail-successFee', {
+              fee: data.successFee,
+            })}
+          </Typography>
+        )}
       </InvestorData>
     </Investor>
   );

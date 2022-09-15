@@ -27,6 +27,7 @@ import { useTranslation } from 'react-i18next';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import AuthVerifyModal from './components/AuthVerifyModal';
 import { getImageOfAccount } from '../../util/images';
+import { useLazyTraderServicesQuery } from '../trader/api';
 
 const throwBackendErrorInOurFormat = async <T,>(
   promise: Promise<T>,
@@ -48,6 +49,7 @@ export const useAuthenticate = (): [
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const [loadSession] = useLazySessionQuery();
+  const [loadTraderServices] = useLazyTraderServicesQuery();
   const [loadUser] = useLazyUserQuery();
   const { i18n } = useTranslation();
   const { executeRecaptcha } = useGoogleReCaptcha();
@@ -95,39 +97,13 @@ export const useAuthenticate = (): [
               dispatch(setSessionExpiryDate(validUntil)),
             ),
           loadUser().unwrap(),
-          // TODO: we used to load services here from `/services/list`
+          loadTraderServices().unwrap(),
         ]);
-
-        // TODO: finish migrating all this:
-        //     // 3. Set Profile
-        //     yield put(setAuthValidUntil(sessionDataValidUntilTransform(session.validUntil)));
-        //     const togglesAndData = yield call(selectTogglesAndData, dataProfile);
-        //     yield put(setProfileToggles(togglesAndData.toggles));
-        //     yield put(setProfileData(togglesAndData.data));
-        //     yield put(setProfileExchanges(dataProfile.exchanges));
-        //
-        //     // 4. Set User Sentry
-        //     yield call(Sentry.setUser, { email: dataProfile.email, id: dataProfile.userId });
-        //
-        //     // 5. InputSelect exchange Id
-        //     const selectedExchange = yield call(initSelectedExchange, dataProfile.exchanges);
-        //     yield put(setSelectedExchangeId(selectedExchange.id));
-        //     yield put(setSelectedExchangeType(selectedExchange.type));
-        //
-        //     // 6. Exchange Types
-        //     yield put(setExchangeTypes());
-        //
-        //     // 7. Set My Services List
-        //     yield put(setServiceServices(dataServices));
 
         dispatch(setUser(userData));
         startLiveSession(userData);
         trackNewSession(userData, SessionsTypes.Login);
         i18n.changeLanguage(userData.locale);
-
-        // fetch toggles const togglesAndData = yield select(recomposeTogglesAndData);
-        // setLocale  state.userProfileSettings.data?.locale
-
         setLoading(false);
       } catch (e) {
         setLoading(false);

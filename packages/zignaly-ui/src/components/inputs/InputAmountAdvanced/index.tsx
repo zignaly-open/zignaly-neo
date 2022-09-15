@@ -44,7 +44,7 @@ function InputAmount({
     name,
     control,
     defaultValue: {
-      value: 0,
+      value: "",
       token: tokens[0],
     },
   });
@@ -82,6 +82,7 @@ function InputAmount({
             )}
             <InputField>
               <InputValue
+                autoComplete={"off"}
                 name={name}
                 ref={ref}
                 value={value?.value}

@@ -85,7 +85,6 @@ export const api = createApi({
 });
 
 export const {
-  useLazyInvestmentsQuery,
   useInvestmentsQuery,
   useCoinsQuery,
   useUpdateTakeProfitAndInvestMoreMutation,

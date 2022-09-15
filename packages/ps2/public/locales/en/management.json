@@ -11,7 +11,7 @@
     "disconnectionFunds-desc": "Funds available to return to investors who want to disconnect",
     "availableDisconnection": "Available for disconnections:",
     "neededSnapshot": "Needed for daily snapshot:",
-    "minBalance":{
+    "minBalance": {
       "title": "Minimum balance:",
       "success": "You edited minimum balance successfully."
     },
@@ -35,7 +35,7 @@
       "fromDiscAccount": "From Disconnection Account",
       "toDiscAccount": "To Disconnection Account:",
       "now": "Transfer Now",
-      "success": "You have successfully transfered the amount."
+      "success": "You have successfully transferred {{amount}}."
     },
     "transferFunds": {
       "title": "Transfer Funds",
