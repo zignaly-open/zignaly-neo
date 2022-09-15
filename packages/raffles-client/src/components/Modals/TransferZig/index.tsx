@@ -1,7 +1,7 @@
 import { Box, useMediaQuery } from '@mui/material';
 import { useEthers, useTokenBalance } from '@usedapp/core';
 import useContract from 'hooks/useContract';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import theme from 'theme';
 import {
@@ -17,14 +17,29 @@ import { Container, InputContainer, StyledErrorOutline } from './styles';
 import { TransferZigModalProps } from './types';
 import SwitchNetworkModal from '../SwitchNetwork';
 
+function setReactInputValue(input: HTMLInputElement, value: string) {
+  const previousValue = input.value;
+
+  // eslint-disable-next-line no-param-reassign
+  input.value = value;
+
+  const tracker = (input as any)._valueTracker;
+  if (tracker) {
+    tracker.setValue(previousValue);
+  }
+
+  // 'change' instead of 'input', see https://github.com/facebook/react/issues/11488#issuecomment-381590324
+  input.dispatchEvent(new Event('change', { bubbles: true }));
+}
+
 const TransferZigModal = (props: TransferZigModalProps) => {
   const { t } = useTranslation('transfer-zig');
-  // TODO: Optimize performance by extracting methods
-  const [transferAmount, setTransferAmount] = useState<string>();
+  const [transferAmount, setTransferAmount] = useState('');
   const address: string = process.env.REACT_APP_RECEIVING_ADDRESS as string;
   const token = process.env.REACT_APP_CONTRACT_ADDRESS as string;
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const { account, activateBrowserWallet, chainId } = useEthers();
+  const inputRef = useRef<HTMLInputElement>();
 
   const balance = useTokenBalance(token, account);
   const { isLoading, isError, transfer, isSuccess } = useContract({
@@ -37,6 +52,13 @@ const TransferZigModal = (props: TransferZigModalProps) => {
       throw new Error('Receiving address not defined');
     }
   }, [account, address]);
+
+  const handleTransfer = async () => {
+    await transfer(transferAmount);
+    // Temporary Hack to clear the input since it's not controlled...
+    setReactInputValue(inputRef.current, '');
+    setTransferAmount('');
+  };
 
   if (!chainId) {
     return <SwitchNetworkModal chainId={chainId} {...props} />;
@@ -57,8 +79,9 @@ const TransferZigModal = (props: TransferZigModalProps) => {
           <Gap gap={15} />
           <InputContainer width={matchesSmall ? 350 : null}>
             <InputAmount
+              ref={inputRef}
               label={''}
-              value={''}
+              value={transferAmount}
               showMaxButton={true}
               customCoinIcon={<ZignalyIcon width={32} height={32} />}
               // TODO: we should fix types in @zignaly-open/ui
@@ -81,7 +104,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
               caption={t('button')}
               minWidth={matchesSmall ? 350 : 260}
               disabled={!transferAmount}
-              onClick={() => transfer(transferAmount)}
+              onClick={handleTransfer}
               loading={isLoading}
             />
           </Box>
