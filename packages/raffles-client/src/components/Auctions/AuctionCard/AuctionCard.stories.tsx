@@ -287,9 +287,9 @@ Outbid8Winners.args = {
       {
         id: 9,
         position: 9,
-        value: '1.4',
+        value: '1.40',
         user: {
-          id: 6,
+          id: 1,
           username: 'test',
         },
       },
@@ -506,6 +506,7 @@ WinningWithManyWinners.args = {
   auction: {
     ...auctionObject,
     numberOfWinners: 10,
+    expiresAt: new Date(Date.now() - 3600_000),
     bids: [
       {
         id: 1,
@@ -602,6 +603,7 @@ WinningWithManyWinners.args = {
       id: 8,
       value: '1.41',
       position: 8,
+      isClaimed: true,
     },
   },
 };
@@ -787,7 +789,7 @@ WinningWithManyWinnersLast.args = {
         position: 8,
         value: '1.41',
         user: {
-          id: 1,
+          id: 10,
           username: 'aaeew',
         },
       },
@@ -1317,5 +1319,217 @@ ManyWinnersWithoutBid.args = {
     ...auctionObject,
     numberOfWinners: 10,
     bids: [],
+  },
+};
+
+export const WinningWithManyBidders = Template.bind({});
+
+WinningWithManyBidders.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 5,
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 13,
+          username: 'cemsun',
+        },
+      },
+      {
+        id: 2,
+        position: 2,
+        value: '1.46',
+        user: {
+          id: 1,
+          username: 'abc',
+        },
+      },
+      {
+        id: 3,
+        position: 3,
+        value: '1.45',
+        user: {
+          id: 11,
+          username: 'akiek',
+        },
+      },
+      {
+        id: 4,
+        position: 4,
+        value: '1.45',
+        user: {
+          id: 10,
+          username: 'cemsil',
+        },
+      },
+      {
+        id: 5,
+        position: 5,
+        value: '1.44',
+        user: {
+          id: 9,
+          username: 'llan',
+        },
+      },
+      {
+        id: 6,
+        position: 6,
+        value: '1.43',
+        user: {
+          id: 8,
+          username: 'lleeil',
+        },
+      },
+      {
+        id: 7,
+        position: 7,
+        value: '1.42',
+        user: {
+          id: 18,
+          username: 'ableeil',
+        },
+      },
+      {
+        id: 8,
+        position: 8,
+        value: '1.41',
+        user: {
+          id: 19,
+          username: 'aiqll',
+        },
+      },
+      {
+        id: 9,
+        position: 9,
+        value: '1.40',
+        user: {
+          id: 20,
+          username: 'megaman81',
+        },
+      },
+      {
+        id: 10,
+        position: 10,
+        value: '1.39',
+        user: {
+          id: 21,
+          username: 'ultraman82',
+        },
+      },
+    ],
+    userBid: {
+      id: 2,
+      value: '1.39',
+      position: 2,
+    },
+  },
+};
+
+export const OutbidWithManyBidders = Template.bind({});
+
+OutbidWithManyBidders.args = {
+  auction: {
+    ...auctionObject,
+    numberOfWinners: 5,
+    bids: [
+      {
+        id: 1,
+        position: 1,
+        value: '1.47',
+        user: {
+          id: 13,
+          username: 'cemsun',
+        },
+      },
+      {
+        id: 2,
+        position: 2,
+        value: '1.46',
+        user: {
+          id: 10,
+          username: 'abc',
+        },
+      },
+      {
+        id: 3,
+        position: 3,
+        value: '1.45',
+        user: {
+          id: 11,
+          username: 'akiek',
+        },
+      },
+      {
+        id: 4,
+        position: 4,
+        value: '1.45',
+        user: {
+          id: 10,
+          username: 'cemsil',
+        },
+      },
+      {
+        id: 5,
+        position: 5,
+        value: '1.44',
+        user: {
+          id: 9,
+          username: 'llan',
+        },
+      },
+      {
+        id: 6,
+        position: 6,
+        value: '1.43',
+        user: {
+          id: 8,
+          username: 'lleeil',
+        },
+      },
+      {
+        id: 7,
+        position: 7,
+        value: '1.42',
+        user: {
+          id: 18,
+          username: 'ableeil',
+        },
+      },
+      {
+        id: 8,
+        position: 8,
+        value: '1.41',
+        user: {
+          id: 1,
+          username: 'aiqll',
+        },
+      },
+      {
+        id: 9,
+        position: 9,
+        value: '1.40',
+        user: {
+          id: 20,
+          username: 'megaman81',
+        },
+      },
+      {
+        id: 10,
+        position: 10,
+        value: '1.39',
+        user: {
+          id: 21,
+          username: 'ultraman82',
+        },
+      },
+    ],
+    userBid: {
+      id: 8,
+      value: '1.41',
+      position: 8,
+    },
   },
 };
