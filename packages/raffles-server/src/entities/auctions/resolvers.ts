@@ -30,6 +30,7 @@ export const resolvers = {
       const [updatedAuction] = await AuctionsRepository.getAuctions(
         auction.id,
         user,
+        true,
       );
 
       await Promise.all([
