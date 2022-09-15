@@ -57,9 +57,11 @@ const UserRank = ({
 const AuctionRanking = ({
   auction,
   isActive,
+  isStarted,
 }: {
   auction: AuctionType;
   isActive: boolean;
+  isStarted: boolean;
 }) => {
   const { t } = useTranslation('auction');
   const bids = auction.bids.slice().sort((a, b) => a.position - b.position);
@@ -69,7 +71,14 @@ const AuctionRanking = ({
     <RankingContainer>
       <Box textAlign='center' mb={2}>
         <Typography color='neutral200'>
-          {t(userBid ? 'your-position' : 'bid-participate')}&nbsp;
+          {t(
+            userBid
+              ? 'your-position'
+              : isStarted
+              ? 'bid-participate'
+              : 'get-ready',
+          )}
+          &nbsp;
         </Typography>
         <Typography color='neutral100'>
           {userBid && (
@@ -94,7 +103,10 @@ const AuctionRanking = ({
         {Array.from(
           // Placeholder rows
           {
-            length: isActive ? auction.numberOfWinners - bids.length : 0,
+            length:
+              isActive || !isStarted
+                ? auction.numberOfWinners - bids.length
+                : 0,
           },
           (_, i) => (
             <PlaceHolderRow key={i} index={i + bids.length} />
