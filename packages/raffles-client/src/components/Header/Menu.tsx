@@ -41,10 +41,7 @@ const Menu = ({
         color='neutral200'
         caption={t('settings')}
         onClick={() => {
-          showModal(UserSettingsModal, {
-            username: currentUser.username,
-            discordName: currentUser.discordName,
-          });
+          showModal(UserSettingsModal);
         }}
       />
       <MenuItem color='neutral200' caption={t('disconnect')} onClick={logout} />

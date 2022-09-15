@@ -2,6 +2,7 @@ import { User } from './model';
 import {
   authenticateSignature,
   validateDiscordName,
+  validateEmail,
   validateUsername,
 } from './util';
 import { ApolloContext, ContextUser } from '../../types';
@@ -78,16 +79,27 @@ export const resolvers = {
 
     updateProfile: async (
       _: any,
-      { username, discordName }: { username: string; discordName: string },
+      {
+        username,
+        discordName,
+        email,
+      }: { username: string; discordName: string; email: string },
       { user }: ApolloContext,
     ) => {
       if (!user) return null;
       const userInstance = await User.findByPk(user.id);
       const usernameValid = await validateUsername(username, user.id);
+      if (typeof usernameValid === 'string') {
+        throw new Error(usernameValid);
+      }
+      const emailValid = await validateEmail(email);
       const discordNameValid = await validateDiscordName(discordName);
-      if (!usernameValid && !discordNameValid) return null;
-      if (usernameValid) userInstance.username = username;
-      if (discordNameValid) userInstance.discordName = discordName;
+
+      if (!usernameValid || !emailValid || !discordNameValid)
+        throw new Error('Invalid data');
+      userInstance.username = username;
+      userInstance.email = email;
+      userInstance.discordName = discordName;
       await userInstance.save();
       return userInstance.toJSON();
     },

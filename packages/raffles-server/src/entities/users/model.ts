@@ -30,7 +30,9 @@ export class User extends Model {
   @Column
   public username?: string;
 
-  @Unique
+  @Column
+  public email?: string;
+
   @Column
   public discordName?: string;
 
