@@ -84,7 +84,7 @@ export async function validateUsername(
 
 export async function validateEmail(email: string): Promise<boolean> {
   if (!email) return true;
-  const regex = /^\w+([\.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  const regex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
   return regex.test(email);
 }
 
