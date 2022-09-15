@@ -17,7 +17,6 @@ const NotEnoughZIG = (props: NotEnoughZIGsProps) => {
       maxWidth={'sm'}
       title={t('not-enough')}
       {...props}
-      onClose={null}
     >
       <Box textAlign='center'>
         <Typography variant='body1' color='neutral200' weight='regular'>

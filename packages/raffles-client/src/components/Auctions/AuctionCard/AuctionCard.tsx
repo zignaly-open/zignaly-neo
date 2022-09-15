@@ -84,7 +84,14 @@ const AuctionCard: React.FC<{
               <ZigCoinIcon width={24} height={24} />
               <PriceLabel value={auction.currentBid} coin='ZIG' />
             </Box>
-            <FinalCountdown date={auction.expiresAt} started={true} />
+            <FinalCountdown
+              date={
+                isActive || !auction.startDate
+                  ? auction.expiresAt
+                  : auction.startDate
+              }
+              started={true}
+            />
           </StyledAmountContainer>
           <CardActions isColumn={isColumn} hide={isColumn}>
             <BidButton

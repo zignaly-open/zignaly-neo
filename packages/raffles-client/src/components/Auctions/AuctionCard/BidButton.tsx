@@ -36,9 +36,9 @@ const BidButton: React.FC<{
   const { showModal } = useModal();
 
   const state = useMemo(() => {
-    if (auction.comingSoon) {
+    if (new Date(auction.startDate) > new Date()) {
       return BidButtonState.ComingSoon;
-    } else if (!isActive && !auction.comingSoon) {
+    } else if (!isActive) {
       return BidButtonState.Ended;
     }
 
@@ -58,11 +58,6 @@ const BidButton: React.FC<{
     if (state === BidButtonState.NotLoggedIn) {
       authenticate();
     } else if (state === BidButtonState.NotEnoughFunds) {
-      showToast({
-        size: 'large',
-        variant: 'error',
-        caption: 'Not Enough Funds!',
-      });
       showModal(NotEnoughZIGModal);
     } else {
       bid({

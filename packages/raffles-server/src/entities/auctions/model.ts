@@ -82,9 +82,9 @@ export class Auction extends Model {
   @Column
   public imageUrl: string;
 
-  @Default(false)
+  @Default(() => Date.now())
   @Column
-  public comingSoon: boolean;
+  public startDate: Date;
 }
 
 @Table
