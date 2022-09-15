@@ -19,7 +19,7 @@ export const RankingRowContainer = styled(Typography)<{
 
 export const Rank = styled('span')<{ position?: number }>`
   ${({ position = 0 }) => `
-    margin-right: ${position < 10 ? 18 : 10}px;
+    margin-right: ${position < 10 ? 18 : 9}px;
   `}
 `;
 

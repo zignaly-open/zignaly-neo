@@ -118,11 +118,14 @@ const AuctionRanking = ({
 };
 
 const PlaceHolderRow = ({ index, hide }: { index: number; hide?: boolean }) => {
+  const { t } = useTranslation('auction');
+
   return (
     <RankingRowContainer hide={hide} isWinning={true}>
-      <Rank>
+      <Rank position={index + 1}>
         <Typography>{index + 1}.</Typography>
       </Rank>
+      <i>{t('empty')}</i>
     </RankingRowContainer>
   );
 };
