@@ -12,6 +12,7 @@ const ns = [
   'claim',
   'balance',
   'how-it-works',
+  'footer',
 ];
 const supportedLngs = ['en'];
 
