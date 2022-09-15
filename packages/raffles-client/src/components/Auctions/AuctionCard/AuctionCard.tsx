@@ -28,7 +28,7 @@ const AuctionCard: React.FC<{
   auction: AuctionType;
 }> = ({ auction }) => {
   const { t } = useTranslation('auction');
-  const { isActive, hasWon } = getWinningLosingStatus(auction);
+  const { isActive, hasWon, isStarted } = getWinningLosingStatus(auction);
   const { showModal } = useModal();
   const leftRef = useRef(null);
   const rightRef = useRef(null);
@@ -108,11 +108,15 @@ const AuctionCard: React.FC<{
       <CardColumn ref={rightRef}>
         <CardHeader isColumn={isColumn}>
           <Typography variant='h2' color='neutral100'>
-            {isActive ? t('ranking') : t('winners')}
+            {isActive || !isStarted ? t('ranking') : t('winners')}
           </Typography>
         </CardHeader>
         <CardBody>
-          <AuctionRanking auction={auction} isActive={isActive} />
+          <AuctionRanking
+            auction={auction}
+            isActive={isActive}
+            isStarted={isStarted}
+          />
           <CardActions isColumn={isColumn}>
             {showClaim ? (
               <ClaimButton auction={auction} />
