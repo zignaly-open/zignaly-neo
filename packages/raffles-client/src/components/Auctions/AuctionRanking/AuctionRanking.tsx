@@ -8,24 +8,49 @@ import {
 } from '@zignaly-open/raffles-shared/types';
 import { useTranslation } from 'react-i18next';
 import useCurrentUser from 'hooks/useCurrentUser';
-import { useMediaQuery } from '@mui/material';
-import muiTheme from 'theme';
-import { Ellipsis, Rank, RankingRowContainer } from './styles';
 
-const RankingRow = ({ bid }: { bid: AuctionBidType }) => {
+import {
+  Rank,
+  RankingContainer,
+  RankingList,
+  RankingRowContainer,
+} from './styles';
+
+const RankingRow = ({
+  bid,
+  isWinning,
+}: {
+  bid: AuctionBidType;
+  isWinning: boolean;
+}) => {
   const { user, position } = bid;
   const { user: currentUser } = useCurrentUser();
+
+  return (
+    <RankingRowContainer
+      isMe={user.id === +currentUser?.id}
+      isWinning={isWinning}
+    >
+      <Rank position={position}>{position}.</Rank>
+      <UserRank bid={bid} isWinning={isWinning} />
+    </RankingRowContainer>
+  );
+};
+
+const UserRank = ({
+  bid,
+  isWinning,
+}: {
+  bid: AuctionBidType;
+  isWinning: boolean;
+}) => {
+  const { user } = bid;
   const { t } = useTranslation('auction');
 
   return (
-    <RankingRowContainer isMe={user.id === +currentUser?.id}>
-      <Rank>
-        <Typography>{position}.</Typography>
-      </Rank>
-      <Box display='flex' justifyContent='space-between' flex={1}>
-        <Typography>{user.username || `${t('user')}#${user.id}`}</Typography>
-      </Box>
-    </RankingRowContainer>
+    <>
+      {user.username || `${t('user')}#${user.id}`} {isWinning && '🏆'}
+    </>
   );
 };
 
@@ -36,107 +61,53 @@ const AuctionRanking = ({
   auction: AuctionType;
   isActive: boolean;
 }) => {
-  const isMobile = useMediaQuery(muiTheme.breakpoints.down('sm'));
-  const MAX_WINNERS_DISPLAYED = isMobile ? 3 : 8;
-
-  // Number of winners we can display
-  const winnersDisplayed = Math.min(
-    auction.numberOfWinners,
-    MAX_WINNERS_DISPLAYED,
-  );
-
-  // Bids cleared from the user bid
-  const bids = auction.bids
-    .filter((b) => b.position <= auction.numberOfWinners)
-    .sort((a, b) => a.position - b.position);
-
-  const isTruncated =
-    // Too many bids
-    bids.length > MAX_WINNERS_DISPLAYED ||
-    // Too many winning spots
-    (isActive && auction.numberOfWinners > MAX_WINNERS_DISPLAYED);
-
+  const { t } = useTranslation('auction');
+  const bids = auction.bids.slice().sort((a, b) => a.position - b.position);
   const userBid = bids.find((b) => b.id === auction.userBid?.id);
 
-  // Current user is winning but is too far in the list to be showed.
-  // We'll hide enough winners above him to show him.
-  // If we also already need to truncate the list to show the last winners,
-  // then we need to substract an additional line.
-  const isUserTruncated =
-    // user winning
-    userBid?.position < auction.numberOfWinners &&
-    // outside of visible list
-    userBid?.position >=
-      MAX_WINNERS_DISPLAYED -
-        // Minus 1 line if ellipsis is shown
-        (isTruncated ? 1 : 0);
-
-  // On mobile we need to replace the ellipsis by the user if it's in the 2nd position
-  const mobileForceUser = isMobile && userBid?.position === 2;
-
-  // If we truncate the list to show the last winner or current user, that's 2 added lines. (counting the elipsis)
-  // If we need to show both of them, that's 3 lines.
-  const linesAdded = isTruncated ? (isUserTruncated && !isMobile ? 3 : 2) : 0;
-
   return (
-    <>
-      <Box width='100%'>
-        {bids
-          .filter(
-            (b) =>
-              b.position <=
-              (isTruncated
-                ? MAX_WINNERS_DISPLAYED - linesAdded
-                : winnersDisplayed),
-          )
-          .map((bid: AuctionBidType) => (
-            <RankingRow bid={bid} key={bid.id} />
-          ))}
+    <RankingContainer>
+      <Box textAlign='center' mb={2}>
+        <Typography color='neutral200'>
+          {t(userBid ? 'your-position' : 'bid-participate')}&nbsp;
+        </Typography>
+        <Typography color='neutral100'>
+          {userBid && (
+            <span style={{ fontWeight: 600 }}>
+              {userBid.position}.&nbsp;
+              <UserRank
+                bid={userBid}
+                isWinning={userBid.position <= auction.numberOfWinners}
+              />
+            </span>
+          )}
+        </Typography>
+      </Box>
+      <RankingList>
+        {bids.map((bid) => (
+          <RankingRow
+            bid={bid}
+            key={bid.id}
+            isWinning={bid.position <= auction.numberOfWinners}
+          />
+        ))}
         {Array.from(
           // Placeholder rows
           {
-            length: isActive
-              ? MAX_WINNERS_DISPLAYED - bids.length - linesAdded
-              : 0,
+            length: isActive ? auction.numberOfWinners - bids.length : 0,
           },
           (_, i) => (
-            <PlaceHolderRow
-              hide={i >= auction.numberOfWinners - bids.length}
-              key={i}
-              index={i + bids.length}
-            />
+            <PlaceHolderRow key={i} index={i + bids.length} />
           ),
         )}
-        {isTruncated && (
-          <>
-            {(!isMobile || (!isUserTruncated && !mobileForceUser)) && (
-              <Ellipsis />
-            )}
-            {/* Current user */}
-            {(isUserTruncated || mobileForceUser) &&
-              userBid?.position !== auction.numberOfWinners && (
-                <RankingRow bid={userBid} key={userBid.id} />
-              )}
-            {bids[auction.numberOfWinners - 1] ? (
-              // Last winner
-              <RankingRow
-                bid={bids[auction.numberOfWinners - 1]}
-                key={bids[auction.numberOfWinners - 1].id}
-              />
-            ) : (
-              // Last placeholder rank
-              <PlaceHolderRow index={auction.numberOfWinners - 1} />
-            )}
-          </>
-        )}
-      </Box>
-    </>
+      </RankingList>
+    </RankingContainer>
   );
 };
 
 const PlaceHolderRow = ({ index, hide }: { index: number; hide?: boolean }) => {
   return (
-    <RankingRowContainer hide={hide}>
+    <RankingRowContainer hide={hide} isWinning={true}>
       <Rank>
         <Typography>{index + 1}.</Typography>
       </Rank>

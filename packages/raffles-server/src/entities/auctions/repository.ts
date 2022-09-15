@@ -119,7 +119,7 @@ const AuctionsRepository = () => {
           WHERE 
               "position" <= a."numberOfWinners" 
               OR "userId" = $currentUserId 
-              ${showAllBids ? 'OR 1' : ''}
+              ${showAllBids ? 'OR true' : ''}
           ORDER BY filtered."id" DESC
         `,
         {

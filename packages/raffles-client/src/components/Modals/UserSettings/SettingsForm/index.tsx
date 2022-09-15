@@ -1,13 +1,7 @@
 import { Box, useMediaQuery } from '@mui/material';
 import { Gap } from 'components/Modals/ConnectWallet/styles';
 import React, { useState } from 'react';
-import {
-  Button,
-  ErrorAlertIcon,
-  ErrorMessage,
-  InputText,
-  Typography,
-} from '@zignaly-open/ui';
+import { Button, ErrorMessage, InputText, Typography } from '@zignaly-open/ui';
 import { InputContainer } from '../styles';
 import theme from 'theme';
 import { useTranslation } from 'react-i18next';
@@ -21,11 +15,7 @@ import { UserSettingsModalProps } from '../types';
 import { GET_AUCTIONS } from 'queries/auctions';
 import useCurrentUser from 'hooks/useCurrentUser';
 
-const SettingsForm = ({
-  username = '',
-  discordName = '',
-  ...props
-}: UserSettingsModalProps) => {
+const SettingsForm = (props: UserSettingsModalProps) => {
   const { user } = useCurrentUser();
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const [errorMessage, setErrorMessage] = useState('');
@@ -38,12 +28,13 @@ const SettingsForm = ({
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     mode: 'onChange',
     defaultValues: {
-      username: username || '',
-      discordName: discordName || '',
+      username: user.username || '',
+      discordName: user.discordName || '',
+      email: user.email || '',
     },
     resolver: yupResolver(UserSettingsValidation),
   });
@@ -66,14 +57,18 @@ const SettingsForm = ({
     }
   };
 
-  const submit = async (values: { username: string; discordName: string }) => {
+  const submit = async (values: {
+    username: string;
+    email: string;
+    discordName: string;
+  }) => {
     try {
       await updateUsername({
         variables: values,
       });
       props.onClose({}, 'escapeKeyDown');
-    } catch (_) {
-      setErrorMessage('Something went wrong');
+    } catch (e) {
+      setErrorMessage(e.message || 'Something went wrong');
     }
   };
 
@@ -87,19 +82,22 @@ const SettingsForm = ({
         alignItems='center'
       >
         <Form onSubmit={handleSubmit(submit)}>
+          <Box display='flex' alignItems='center' flexDirection='row' gap='2px'>
+            <Typography color='neutral200'>{t('username-label')}</Typography>
+          </Box>
+          <Typography variant='h4' weight='medium' color='neutral400'>
+            {t('username-info')}
+          </Typography>
           <InputContainer width={getInputWidth()}>
             <Controller
               name='username'
-              defaultValue={username}
               control={control}
-              rules={{ required: true }}
               render={({ field }) => (
                 <InputText
                   value={field.value}
                   onChange={field.onChange}
                   placeholder={`${t('user')}#${user.id}`}
                   minHeight={23}
-                  label={t('username-label')}
                   error={errors.username?.message}
                 />
               )}
@@ -108,11 +106,9 @@ const SettingsForm = ({
           <Gap gap={5} />
           <Box display='flex' alignItems='center' flexDirection='row' gap='2px'>
             <Typography color='neutral200'>
-              {t('discord-user-label', {
-                ns: 'user-settings',
-              })}
+              {t('discord-user-label')}
             </Typography>
-            <ErrorAlertIcon color='#89899A' />
+            {/* <ErrorAlertIcon color='#89899A' /> */}
           </Box>
           <Typography variant='h4' weight='medium' color='neutral400'>
             {t('discordNameInfo')}
@@ -120,16 +116,36 @@ const SettingsForm = ({
           <InputContainer width={getInputWidth()}>
             <Controller
               name='discordName'
-              defaultValue={discordName}
               control={control}
-              rules={{ required: true }}
               render={({ field }) => (
                 <InputText
-                  placeholder={t('please-enter-discord-user')}
+                  placeholder='user#0000'
                   minHeight={23}
                   value={field.value}
                   onChange={field.onChange}
                   error={errors.discordName?.message}
+                />
+              )}
+            />
+          </InputContainer>
+          <Gap gap={5} />
+          <Box display='flex' alignItems='center' flexDirection='row' gap='2px'>
+            <Typography color='neutral200'>{t('email-label')}</Typography>
+          </Box>
+          <Typography variant='h4' weight='medium' color='neutral400'>
+            {t('email-info')}
+          </Typography>
+          <InputContainer width={getInputWidth()}>
+            <Controller
+              name='email'
+              control={control}
+              render={({ field }) => (
+                <InputText
+                  placeholder={t('email-placeholder')}
+                  minHeight={23}
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={errors.email?.message}
                 />
               )}
             />
@@ -153,11 +169,12 @@ const SettingsForm = ({
               loading={updatingProfile}
               caption={t('save-profile')}
               size='large'
+              disabled={!isValid}
             />
           </Box>
           {errorMessage && (
             <>
-              <Gap gap={7} />
+              <Gap gap={13} />
               <ErrorMessage text={errorMessage} />
             </>
           )}
