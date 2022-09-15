@@ -1,0 +1,14 @@
+{
+  "my-balances": {
+    "tableHeader": {
+      "coin": "CHCoin",
+      "totalBalance": "CHTotal Balance",
+      "availableBalance": "CHAvailable Balance",
+      "lockedBalance": "CHLocked Balance",
+      "valueBTC": "CHValue in BTC",
+      "valueUSD": "CHValue in USD"
+    },
+    "table-search-placeholder": "CHType to search for coins.",
+    "loading-arialLabel": "CHLoading my dashboard"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "steps": {
+    "info": "CHHow it works",
+    "profile": "CHYour profile",
+    "deposit": "CHDeposit"
+  },
+  "why-need-username": "CHWhen bidding, ",
+  "username": "CHUsername",
+  "why-set-username": "CHPlease choose a unique username that will be displayed to other users",
+  "why-set-username-2": "CHSetting username is important because this will let other users see something more personal than \"User #45 wins the Auction\"",
+  "username-explainer": "CHName that will be visible to others",
+  "skip": "CHSkip Onboarding",
+  "back": "CHBack",
+  "finish": "CHFinish",
+  "next": "CHNext",
+  "save": "CHSave",
+  "username-ok": "CHGreat username!",
+  "username-min": "CHMin 2 characters",
+  "username-max": "CHMax 20 characters",
+  "username-taken": "CHSorry, username \"{{username}}\" is taken",
+  "username-required": "CHPlease specify the username",
+  "username-regex": "CHOnly letters, digits and .-_"
+}

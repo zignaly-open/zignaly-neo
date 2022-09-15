@@ -1,0 +1,9 @@
+{
+  "withdraw": {
+    "button": "CHWithdraw",
+    "form": {
+      "label": "CHAmount to withdraw:",
+      "labelBalance": "CHAvailable:"
+    }
+  }
+}

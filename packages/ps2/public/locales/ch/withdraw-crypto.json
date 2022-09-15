@@ -1,0 +1,27 @@
+{
+  "withdraw-crypto": {
+    "title": "CHWithdraw Crypto",
+    "description": "CHWithdraw crypto to an external account. To move funds between Zignaly accounts, use a transfer instead.",
+    "coinSelector": {
+      "label": "CHCoin:",
+      "placeholder": "CHSearch a coin"
+    },
+    "networkSelector": {
+      "label": "CHNetwork:",
+      "placeholder": "CHChoose the network"
+    },
+    "withdrawAddress": {
+      "label": "CHWithdraw to Address:",
+      "placeholder": "CHPaste wallet address here",
+      "warning": "CHOnly send {{network}} {{coin}} tokens to this address"
+    },
+    "amountToWithdraw": {
+      "label": "CHAmount to Withdraw:"
+    },
+    "validation": {
+      "indicateAnAddress": "CHYou must indicate an valid address.",
+      "indicateAnAmount": "CHYou must indicate an amount.",
+      "minimumToWithdrawal": "CHThe minimum withdrawal amount is {{value}} {{coin}}"
+    }
+  }
+}

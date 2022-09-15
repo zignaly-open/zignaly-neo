@@ -1,0 +1,87 @@
+{
+  "edit-investment": {
+    "percentageChangedSuccess": "CHProfit percentage updated successfully.",
+    "addMoreInvestmentSuccess": "CHYou invested {{amount}} {{currency}} successfully in service {{serviceName}}.",
+    "withdrawInvestmentSuccess": "CHWithdrawal requested successfully.",
+    "validation-indicateAnAmount": "CHYou must indicate an amount.",
+    "error-blockedInvestment": "CHAll your funds are pending to be transferred out of the service.",
+    "form": {
+      "title": "CHAmount Invested:",
+      "profits": {
+        "title": "CHWhat to do with profits:",
+        "left": "CHReinvest",
+        "right": "CHWithdraw"
+      },
+      "inputAmount": {
+        "label": "CHAmount to Invest:",
+        "labelBalance": "CHAvailable:"
+      },
+      "link": {
+        "investMore": "CHInvest more",
+        "withdraw": "CHWithdraw Investment"
+      },
+      "button": {
+        "saveAndClose": "CHSave and Close",
+        "saveAndInvestment": "CHSave and Add to Investment"
+      }
+    },
+    "pendingMajorThan": {
+      "type": "CHNew investment",
+      "status": "CHProcessing in 24 hrs"
+    },
+    "profitOutMajorThan": {
+      "type": "CHProfits",
+      "status": "CHWaiting for next accounting"
+    },
+    "transferOutMajorThan": {
+      "type": "CHTransfer Out",
+      "status": "CHWaiting for next accounting"
+    },
+    "pendingTransactions": {
+      "status_zero": "CHYou have no item",
+      "status_one": "CHYou have 1 pending transaction",
+      "status_other": "CHYou have {{count}} pending transactions",
+      "link-label": "CHView"
+    },
+    "investorDetail-successFee": "CH% Success fee",
+    "modal": {
+      "withdrawInvestment": {
+        "title": "CHWithdraw Investment with",
+        "afterPosition": {
+          "title": "CHWithdraw After Positions Close",
+          "description": "CHYou will receive your funds after the trader free them. Take into account that your investment is at risk until is transferred to you. This usually takes a few days, but could take more. It is up to them.",
+          "button": {
+            "subtitle": "CHWithdraw on free funds",
+            "title": "CHNo Fee"
+          }
+        },
+        "instant": {
+          "title": "CHInstant Withdrawal",
+          "description": "CHInstant withdrawals incur a 5% fee because the trader has open positions and could be liquidated. To avoid this, Zignaly must cover your funds and inherit your risk, hence the fee.",
+          "button": {
+            "subtitle": "CHWithdraw instantly",
+            "title": "CH5% Fee"
+          }
+        }
+      },
+      "pendingTransaction": {
+        "title": "CHPending Transactions",
+        "tableHeader": {
+          "amount": "CHAmount",
+          "type": "CHType",
+          "status": "CHStatus"
+        },
+        "button": "CHBack"
+      },
+      "editInvestments": {
+        "title": "CHEdit Investment",
+        "loading": "CHLoading edit investment"
+      }
+    },
+    "modalSuccess": {
+      "title": "CHInvestment Processing (Up to 24h)",
+      "description": "CHYour funds will be transferred into the service’s account within 24 hours. You may withdraw your funds anytime before this transfer is made. Once funds are transferred, you’ll be able to withdraw via a <0>soft</0> or <0>hard disconnection.</0>",
+      "button": "CHClose"
+    }
+  }
+}

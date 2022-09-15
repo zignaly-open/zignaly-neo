@@ -1,0 +1,38 @@
+{
+  "table": {
+    "footer": {
+      "elements": {
+        "show": "CHShowing",
+        "out": "CHout of",
+        "items": "CHitems"
+      },
+      "page": {
+        "items": "CHPage",
+        "out": "CHout of"
+      },
+      "selector": {
+        "display": "CHDisplaying",
+        "items": "CHitems"
+      }
+    },
+    "assetsInPool-investors": "CH{{count}} investor",
+    "assetsInPool-investors_plural": "CH{{count}} investors",
+    "balanceSummary-invested": "CHInvested",
+    "selector-validation-notData": "CHNo data available",
+    "investColumn": {
+      "successFess": "CH10% Success Fee",
+      "liquidated": "CHLIQUIDATED"
+    },
+    "tooltip-columnHeader": "CHToggle SortBy",
+    "serviceName-by": "CHby",
+    "status": {
+      "connected": "CHConnected",
+      "pending": "CHPending",
+      "soft-disconnect": "CHSoft-Disconnect",
+      "hard-disconnect": "CHHard-Disconnect",
+      "suspended": "CHSuspended",
+      "disconnected": "CHDisconnected",
+      "owner": "CHOwner"
+    }
+  }
+}

@@ -1,0 +1,48 @@
+{
+  "management": {
+    "manage": "CHManage",
+    "totalFunds": "CHTotal Funds in Service",
+    "tradingFunds": "CHTrading Funds",
+    "tradingFunds-desc": "CHFunds available for trading and used in positions",
+    "availableTrading": "CHAvailable for trading:",
+    "allocatedTrading": "CHAllocated for trading:",
+    "hardDisconnected": "CHHard-disconnected Funds:",
+    "disconnectionFunds": "CHDisconnection Funds",
+    "disconnectionFunds-desc": "CHFunds available to return to investors who want to disconnect",
+    "availableDisconnection": "CHAvailable for disconnections:",
+    "neededSnapshot": "CHNeeded for daily snapshot:",
+    "minBalance": {
+      "title": "CHMinimum balance:",
+      "success": "CHYou edited minimum balance successfully."
+    },
+    "minBalanceModal": {
+      "title": "CHEdit Minimum Balance",
+      "desc": "CHSet up the minimum balance that you would like to keep in the Disconnection Funds Account.",
+      "placeholder": "CH0.0",
+      "labelBalance": "CHCurrent Minimum Balance",
+      "save": "CHSave"
+    },
+    "heldHardDisc": "CHHeld for hard-disconnections:",
+    "controlledZignaly": "CHControlled by Zignaly",
+    "transfer": {
+      "title": "CHTransfer",
+      "loading": "CHLoading",
+      "placeholder": "CH0.0",
+      "labelBalance": "CHAvailable Balance:",
+      "deposit-available": "CHAvailable Balance:",
+      "fromTradingAccount": "CHFrom Trading Account",
+      "toTradingAccount": "CHTo Trading Account:",
+      "fromDiscAccount": "CHFrom Disconnection Account",
+      "toDiscAccount": "CHTo Disconnection Account:",
+      "now": "CHTransfer Now",
+      "success": "CHYou have successfully transfered the amount."
+    },
+    "transferFunds": {
+      "title": "CHTransfer Funds",
+      "desc": "CHTransfer coins between my profit sharing accounts."
+    },
+    "hardDiconnectWarning": "CHYour hard disconnects have reached {perc}%. If hard-disconnects reaches {maxPerc}% of the service funds, Zignaly will take control of your service.",
+    "previousValue": "CHPrevious Value:",
+    "loading-arialLabel": "CHLoading management"
+  }
+}

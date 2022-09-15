@@ -1,0 +1,26 @@
+{
+  "service-header": {
+    "managements-label": "CHManage Funds",
+    "investors-label": "CHInvestors",
+    "coins-label": "CHCoins",
+    "dropdown": {
+      "manageServices": "CHManage Service",
+      "trade": {
+        "title": "CHTrade",
+        "links": {
+          "positions": "CHMy Positions",
+          "manual": "CHManual trading",
+          "signals": "CHSignals Trading",
+          "api": "CHAPI Trading"
+        }
+      },
+      "profile": {
+        "title": "CHProfile",
+        "links": {
+          "profile": "CHView Profile",
+          "profile-edit": "CHEdit Profile"
+        }
+      }
+    }
+  }
+}
