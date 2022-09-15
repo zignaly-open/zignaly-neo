@@ -14,6 +14,7 @@ import {
   createRandomUser,
   wait,
   expireAuction,
+  startAuction,
 } from '../../util/test-utils';
 import { mock } from '../../util/mock-cybavo-wallet';
 import { zignalySystemId } from '../../../config';
@@ -244,5 +245,26 @@ describe('Auctions', () => {
       body: { errors },
     } = await makeBid(auction, aliceToken);
     expect(errors[0].message).toBe('Could not create a bid');
+  });
+
+  it('should not bid if auction not started', async () => {
+    const [alice, aliceToken] = await createAlice(300);
+    const [, bobToken] = await createBob(300);
+    const auction = await createAuction({
+      startDate: new Date(Date.now() + 1000),
+    });
+    const {
+      body: { errors },
+    } = await makeBid(auction, bobToken);
+    expect(errors[0].message).toBe('Auction is not active yet');
+
+    await startAuction(auction.id);
+    const { body } = await makeBid(auction, aliceToken);
+    expect(body.data.bid.userBid.value).toBe('101');
+
+    const startedAuction = await getFirstAuction(bobToken);
+    expect(startedAuction.bids.length).toBe(1);
+    expect(startedAuction.bids[0].user.username).toBe(alice.username);
+    expect(startedAuction.userBid).toBeNull();
   });
 });
