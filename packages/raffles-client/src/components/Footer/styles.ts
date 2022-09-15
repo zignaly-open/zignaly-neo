@@ -1,5 +1,6 @@
 import { styled } from '@mui/material';
 import { Typography } from '@zignaly-open/ui';
+
 export const FooterContainer = styled('div')`
   background: #101225;
   padding: 30px;
@@ -11,7 +12,6 @@ export const FooterContainer = styled('div')`
     &:visited {
       color: ${({ theme }) => theme.neutral000};
     }
-  }
   }
 `;
 
@@ -51,6 +51,7 @@ export const TopNav = styled(Typography)`
   flex-wrap: wrap;
   a {
     margin: 30px;
+  }
 `;
 
 export const BottomNav = styled(Typography)`

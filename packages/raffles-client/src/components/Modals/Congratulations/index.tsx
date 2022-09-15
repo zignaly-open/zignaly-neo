@@ -62,18 +62,28 @@ const CongratulationsModal = ({
         sx={{ flexDirection: { xs: 'column', sm: 'row' } }}
         mt='25px'
       >
-        <Button
-          variant='secondary'
-          size='large'
-          caption={t('Discord')}
-          leftElement={<DiscordIconButton />}
-        />
-        <Button
-          variant='secondary'
-          size='large'
-          caption={t('Support')}
-          leftElement={<SupportIconButton />}
-        />
+        {auction.discord && (
+          <a href={auction.discord} target='_blank' rel='noopener noreferrer'>
+            <Button
+              variant='secondary'
+              size='large'
+              caption={t('Discord')}
+              leftElement={<DiscordIconButton />}
+            />
+          </a>
+        )}
+        <a
+          href={'https://zignaly.com/'}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <Button
+            variant='secondary'
+            size='large'
+            caption={t('Support')}
+            leftElement={<SupportIconButton />}
+          />
+        </a>
         <Button
           caption={t('close')}
           size='large'
