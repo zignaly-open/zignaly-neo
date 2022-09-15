@@ -19,7 +19,6 @@ const MenuItem = styled(TextButton)`
 `;
 
 const Menu = ({
-  currentUser,
   showModal,
 }: {
   currentUser: UserType;
