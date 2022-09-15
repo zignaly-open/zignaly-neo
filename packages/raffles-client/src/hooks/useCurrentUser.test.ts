@@ -15,6 +15,7 @@ describe('useCurrentUser', () => {
     nonce: 1,
     publicAddress: '',
     username: '',
+    email: '',
     discordName: '',
     onBoardingCompleted: new Date(Date.now()),
   };
