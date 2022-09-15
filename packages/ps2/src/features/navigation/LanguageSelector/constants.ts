@@ -39,4 +39,8 @@ export const LocalizationLanguages = {
     locale: 'cs',
     label: 'Čeština',
   },
+  ch: {
+    locale: 'ch',
+    label: 'CH л̑àńğůàğё',
+  },
 };

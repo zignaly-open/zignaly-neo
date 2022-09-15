@@ -14,7 +14,7 @@ function recursivelyReplace(v) {
       {},
     );
   } else {
-    return 'CH' + v;
+    return 'CH-' + v;
   }
 }
 
