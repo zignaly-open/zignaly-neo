@@ -1,0 +1,27 @@
+{
+  "pages": {
+    "404": "CH-404 / Ṗáĝë ńöṫ ḟöüńḋ - Žïĝńály",
+    "dashboard": "CH-Ĉlöŝëḋ Ṗöŝïṫïöńŝ",
+    "my-balances": "CH-Ṁy Báláńĉëŝ - Žïĝńály",
+    "login": "CH-Löĝ ïń - Žïĝńály",
+    "signup": "CH-Ŝïĝń Üṗ - Žïĝńály",
+    "staking": "CH-Ŝṫákïńĝ - Žïĝńály",
+    "trading-services": "CH-Ṫѓáḋïńĝ Ŝëѓvïĉëŝ - Žïĝńály",
+    "zigpad": "CH-ŽÏĜṖáḋ - Žïĝńály",
+    "profit-sharing": {
+      "title": "CH-Ṗѓöḟïṫ Ŝĥáѓïńĝ - Žïĝńály",
+      "service": "CH-Ṗѓöḟïṫ Ŝĥáѓïńĝ / Ŝëѓvïĉë - Žïĝńály",
+      "api": "CH-ÁṖÏ Ṫѓáḋïńĝ - Žïĝńály",
+      "coins": "CH-Ĉöïńŝ - Žïĝńály",
+      "investors": "CH-Ṗѓöḟïṫ Ŝĥáѓïńĝ / Ïńvëŝṫöѓŝ - Žïĝńály",
+      "manual": "CH-Ṁáńüál Ṫѓáḋïńĝ - Žïĝńály",
+      "positions": "CH-Ṁy Ṗöŝïṫïöńŝ - Žïĝńály",
+      "signals": "CH-Ŝïĝńálŝ Ṫѓáḋïńĝ - Žïĝńály",
+      "managements": "CH-Ṗѓöḟïṫ Ŝĥáѓïńĝ / Ṁáńáĝëṁëńṫ - Žïĝńály",
+      "profile": {
+        "title": "CH-Vïëw Ṗѓöḟïlë - Žïĝńály",
+        "edit": "CH-Ëḋïṫ Ṗѓöḟïlë - Žïĝńály"
+      }
+    }
+  }
+}
