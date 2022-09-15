@@ -5,11 +5,7 @@ import { UserSettingsModalProps } from './types';
 import SettingsForm from './SettingsForm';
 import { useTranslation } from 'react-i18next';
 
-const UserSettingsModal = ({
-  username = '',
-  discordName = '',
-  ...props
-}: UserSettingsModalProps) => {
+const UserSettingsModal = (props: UserSettingsModalProps) => {
   const { t } = useTranslation('user-settings');
 
   return (
@@ -19,7 +15,7 @@ const UserSettingsModal = ({
       {...props}
       title={t('settings')}
     >
-      <SettingsForm {...props} discordName={discordName} username={username} />
+      <SettingsForm {...props} />
       <Gap gap={8} />
     </DialogContainer>
   );
