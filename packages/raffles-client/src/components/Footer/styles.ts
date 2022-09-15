@@ -5,38 +5,82 @@ export const FooterContainer = styled('div')`
   padding: 30px;
   a {
     text-decoration: none;
-    margin-right: 30px;
     &:link {
-      color: ${({ theme }) => theme.neutral300};
+      color: ${({ theme }) => theme.neutral000};
     }
+    &:visited {
+      color: ${({ theme }) => theme.neutral000};
+    }
+  }
   }
 `;
 
-export const FooterTop = styled('div')`
+export const FooterTopContainer = styled('div')`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   flex-wrap: wrap;
   text-align: center;
+  @media (max-width: 800px) {
+    justify-content: center;
+  }
 `;
 
-export const IconsContainer = styled('div')``;
+export const CopyrightContainer = styled(Typography)`
+  position: relative;
+  left: 65px;
+  @media (max-width: 800px) {
+    left: 0;
+  }
+`;
+export const IconsContainer = styled('div')`
+  width: 20%;
+  display: flex;
+  justify-content: space-evenly;
+  @media (max-width: 800px) {
+    width: 100%;
+    margin-top: 20px;
+  }
+`;
 
 export const TopNav = styled(Typography)`
   width: 100%;
-  margin: 50px;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
+  a {
+    margin: 30px;
 `;
 
 export const BottomNav = styled(Typography)`
   border-top: 1px solid #303042;
   width: 100%;
-  margin: 50px;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   a {
-    margin-top: 32px;
+    margin: 30px;
   }
 `;
+
+export const DisclaimerContainer = styled(Typography)`
+  width: 100%;
+  text-align: justify;
+  display: flex;
+  justify-content: center;
+  & div {
+    width: 50%;
+  }
+  @media (max-width: 800px) {
+    flex-wrap: wrap;
+    & div {
+      width: 100%;
+    }
+  }
+`;
+export const DisclaimerLeft = styled('div')`
+  margin-right: 10px;
+`;
+
+export const DisclaimerRight = styled('div')``;

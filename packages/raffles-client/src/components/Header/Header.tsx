@@ -59,7 +59,7 @@ const Header = () => {
       leftElements={[
         <BrandImage
           key={'logo2'}
-          type={'bidslogotype'}
+          type={'zigbidslogotype'}
           width={'140px'}
           height={'68px'}
         />,

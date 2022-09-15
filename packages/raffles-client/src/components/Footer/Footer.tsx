@@ -1,62 +1,84 @@
 import React from 'react';
 import {
   FooterContainer,
-  FooterTop,
-  IconsContainer,
   TopNav,
   BottomNav,
+  DisclaimerContainer,
+  DisclaimerLeft,
+  DisclaimerRight,
 } from './styles';
-import { BrandImage, TextButton, Typography } from '@zignaly-open/ui';
-import { Trans, useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import FooterTop from './FooterTop';
 
 const Footer: React.FC = () => {
   const { t } = useTranslation('footer');
   return (
     <FooterContainer>
-      <FooterTop>
-        <BrandImage
-          key={'logo1'}
-          type={'logotype'}
-          width={'140px'}
-          height={'68px'}
-        />
-        <Typography variant='h4' color='neutral300'>
-          {t('copyright')}
-          <br />
-          <Trans i18nKey='metamask_message' t={t}>
-            <TextButton
-              href='https://metamask.io/download/'
-              caption='Download it here'
-              variant='body1'
-            />
-          </Trans>
-        </Typography>
-        <IconsContainer>
-          <BrandImage type={'discord'} width={'20px'} height={'20px'} />
-          <BrandImage type={'discord'} width={'20px'} height={'20px'} />
-          <BrandImage type={'discord'} width={'20px'} height={'20px'} />
-          <BrandImage type={'discord'} width={'20px'} height={'20px'} />
-          <BrandImage type={'discord'} width={'20px'} height={'20px'} />
-          <BrandImage type={'discord'} width={'20px'} height={'20px'} />
-        </IconsContainer>
-      </FooterTop>
-      <TopNav variant='h4' color='neutral000'>
-        <Link to={'www.zignaly.com'}>{t('blog')}</Link>
-        <Link to={'www.zignaly.com'}>{t('blog')}</Link>
-        <Link to={'www.zignaly.com'}>{t('blog')}</Link>
-        <Link to={'www.zignaly.com'}>{t('blog')}</Link>
+      <FooterTop />
+      <TopNav>
+        <a
+          href={'https://zignaly.com/'}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          {t('how_it_works')}
+        </a>
+        <a
+          href={'https://zignaly.com/'}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          {t('zigbids_faqs')}
+        </a>
+        <a
+          href={'https://zignaly.com/'}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          {t('support')}
+        </a>
+        <a
+          href={'https://zignaly.com/'}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          {t('Zignaly.com')}
+        </a>
       </TopNav>
       <BottomNav variant='h5' color='neutral000'>
-        <Link to={'www.zignaly.com'}>{t('blog')}</Link>
-        <Link to={'www.zignaly.com'}>{t('blog')}</Link>
-        <Link to={'www.zignaly.com'}>{t('blog')}</Link>
-        <Link to={'www.zignaly.com'}>{t('blog')}</Link>
+        <a
+          href={'https://zignaly.com/legal/terms'}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          {t('terms_of_service')}
+        </a>
+        <a
+          href={'https://zignaly.com/legal/privacy'}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          {t('privacy_policy')}
+        </a>
+        <a
+          href={'https://zignaly.com/legal/risks'}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          {t('risk_warning')}
+        </a>
+        <a
+          href={'https://zignaly.com/legal/api-agreement'}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          {t('api_license')}
+        </a>
       </BottomNav>
-      <Typography variant='h5' color='neutral400'>
-        {t('disclaimer')}
-        <br />
-      </Typography>
+      <DisclaimerContainer variant='h5' color='neutral400'>
+        <DisclaimerLeft>{t('disclaimer1')}</DisclaimerLeft>
+        <DisclaimerRight>{t('disclaimer2')}</DisclaimerRight>
+      </DisclaimerContainer>
     </FooterContainer>
   );
 };

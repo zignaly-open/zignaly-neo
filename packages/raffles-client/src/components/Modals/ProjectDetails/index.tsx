@@ -1,13 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Typography } from '@zignaly-open/ui';
+import { Typography, BrandImage } from '@zignaly-open/ui';
 import { Gap } from '../ConnectWallet/styles';
 import DialogContainer from '../DialogContainer';
 import { Column } from './styles';
 import { ProjectDetailsModalProps } from './types';
-import { ReactComponent as Discord } from '../../../assets/icons/discord-logo.svg';
-import { ReactComponent as Telegram } from '../../../assets/icons/telegram-logo.svg';
-import { ReactComponent as Twitter } from '../../../assets/icons/twitter-logo.svg';
 import ReactMarkdown from 'react-markdown';
 
 import { Box } from '@mui/system';
@@ -42,17 +39,29 @@ const ProjectDetailsModal = ({
         <Box gap={1.1} display={'flex'} flexDirection='row'>
           {twitter && (
             <a href={twitter} target='_blank' rel='noopener noreferrer'>
-              <Twitter />
+              <BrandImage
+                type={'twitterlogoype'}
+                width={'32px'}
+                height={'32px'}
+              />
             </a>
           )}
           {discord && (
             <a href={discord} target='_blank' rel='noopener noreferrer'>
-              <Discord />
+              <BrandImage
+                type={'discordlogotype'}
+                width={'32px'}
+                height={'32px'}
+              />
             </a>
           )}
           {telegram && (
             <a href={telegram} target='_blank' rel='noopener noreferrer'>
-              <Telegram />
+              <BrandImage
+                type={'telegramlogotype'}
+                width={'32px'}
+                height={'32px'}
+              />
             </a>
           )}
         </Box>
