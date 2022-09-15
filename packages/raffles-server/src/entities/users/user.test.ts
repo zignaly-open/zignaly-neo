@@ -29,8 +29,8 @@ describe('User', () => {
       aliceToken,
     );
     expect(invalid2).toBe(false);
-    const taken = await checkUsername('Bob', aliceToken);
-    expect(taken).toBe(false);
+    const res = await checkUsername('Bob', aliceToken);
+    expect(res).toBeNull();
     const valid = await checkUsername('Alex', aliceToken);
     expect(valid).toBe(true);
   });
@@ -47,21 +47,21 @@ describe('User', () => {
   });
 
   it('should not change name if userName is invalid', async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [, aliceToken] = await createAlice();
     const valid = await changeUsername('Alice1g+104^<', aliceToken);
-    expect(valid.username).toBe(alice.username);
+    expect(valid).toBeNull();
   });
   it('should not change name if discordName is invalid', async () => {
     const [, aliceToken] = await createAlicesDiscord();
-    const valid = await changeDiscordName('Alice1g+104^<', aliceToken);
-    expect(valid).toBeNull();
+    const res = await changeDiscordName('Alice1g+104^<', aliceToken);
+    expect(res).toBeNull();
   });
 
   it('should not let two users have the same name', async () => {
-    const [alice, aliceToken] = await createAlice();
+    const [, aliceToken] = await createAlice();
     await createBob();
-    const invalid = await changeUsername('Bob', aliceToken);
-    expect(invalid.username).toBe(alice.username);
+    const res = await changeUsername('Bob', aliceToken);
+    expect(res).toBeNull();
   });
 
   it('should let users change discordname', async () => {
