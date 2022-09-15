@@ -3,12 +3,14 @@ import { Box } from '@mui/material';
 import { PriceLabel } from 'components/Auctions/AuctionCard/styles';
 import { useModal } from 'mui-modal-provider';
 import { useTranslation } from 'react-i18next';
-import { Button, Typography, BrandImage } from '@zignaly-open/ui';
+import { Button, Typography } from '@zignaly-open/ui';
 import DialogContainer from '../DialogContainer';
 import ProjectDetailsModal from '../ProjectDetails';
 import { CongratulationsModalProps } from './types';
 import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
 import { AuctionImage, Description, ContainerDescription } from './styles';
+import { ReactComponent as DiscordIconButton } from '../../../assets/icons/discord-minimalist.svg';
+import { ReactComponent as SupportIconButton } from '../../../assets/icons/support-minimalist.svg';
 import ReactMarkdown from 'react-markdown';
 
 const CongratulationsModal = ({
@@ -64,37 +66,13 @@ const CongratulationsModal = ({
           variant='secondary'
           size='large'
           caption={t('Discord')}
-          leftElement={
-            <a
-              href={'https://discord.com/invite/r5qRXDJ'}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <BrandImage
-                type={'discordiconbutton'}
-                width={'32px'}
-                height={'32px'}
-              />
-            </a>
-          }
+          leftElement={<DiscordIconButton />}
         />
         <Button
           variant='secondary'
           size='large'
           caption={t('Support')}
-          leftElement={
-            <a
-              href={'https://discord.com/invite/r5qRXDJ'}
-              target='_blank'
-              rel='noopener noreferrer'
-            >
-              <BrandImage
-                type={'supporticonbutton'}
-                width={'32px'}
-                height={'32px'}
-              />
-            </a>
-          }
+          leftElement={<SupportIconButton />}
         />
         <Button
           caption={t('close')}

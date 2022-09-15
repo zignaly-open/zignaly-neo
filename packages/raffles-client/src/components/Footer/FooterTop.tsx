@@ -6,6 +6,11 @@ import {
 } from './styles';
 import { BrandImage, TextButton } from '@zignaly-open/ui';
 import { Trans, useTranslation } from 'react-i18next';
+import { ReactComponent as Facebook } from '../../assets/icons/discord.svg';
+import { ReactComponent as Twitter } from '../../assets/icons/twitter.svg';
+import { ReactComponent as Youtube } from '../../assets/icons/youtube.svg';
+import { ReactComponent as Discord } from '../../assets/icons/discord.svg';
+import { ReactComponent as Telegram } from '../../assets/icons/telegram.svg';
 
 const FooterTop: React.FC = () => {
   const { t } = useTranslation('footer');
@@ -29,43 +34,35 @@ const FooterTop: React.FC = () => {
           target='_blank'
           rel='noopener noreferrer'
         >
-          <BrandImage
-            type={'facebooklogotype'}
-            width={'32px'}
-            height={'32px'}
-          />
+          <Facebook />
         </a>
         <a
           href={'https://twitter.com/zignaly'}
           target='_blank'
           rel='noopener noreferrer'
         >
-          <BrandImage type={'twitterlogoype'} width={'32px'} height={'32px'} />
+          <Twitter />
         </a>
         <a
           href={'https://www.youtube.com/zignaly'}
           target='_blank'
           rel='noopener noreferrer'
         >
-          <BrandImage type={'youtubelogotype'} width={'32px'} height={'32px'} />
+          <Youtube />
         </a>
         <a
           href={'https://discord.com/invite/r5qRXDJ'}
           target='_blank'
           rel='noopener noreferrer'
         >
-          <BrandImage type={'discordlogotype'} width={'32px'} height={'32px'} />
+          <Discord />
         </a>
         <a
           href={'https://t.me/ZignalyHQ'}
           target='_blank'
           rel='noopener noreferrer'
         >
-          <BrandImage
-            type={'telegramlogotype'}
-            width={'32px'}
-            height={'32px'}
-          />
+          <Telegram />
         </a>
       </IconsContainer>
     </FooterTopContainer>
