@@ -1,4 +1,4 @@
-import { useApolloClient, useLazyQuery, useMutation } from '@apollo/client';
+import { useApolloClient, useMutation } from '@apollo/client';
 import { setToken } from '../util/token';
 import { Mumbai, Polygon, useEthers } from '@usedapp/core';
 import { useAsync } from 'react-use';
