@@ -21,19 +21,10 @@ const Footer: React.FC = () => {
           target='_blank'
           rel='noopener noreferrer'
         >
-          {t('how_it_works')}
-        </a>
-        <a
-          href={'https://zignaly.com/'}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
           {t('zigbids_faqs')}
         </a>
         <a
-          href={
-            'https://help.zignaly.com/en/articles/6203524-contact-our-support-team'
-          }
+          href={'https://help.zignaly.com/en/'}
           target='_blank'
           rel='noopener noreferrer'
         >
@@ -44,7 +35,14 @@ const Footer: React.FC = () => {
           target='_blank'
           rel='noopener noreferrer'
         >
-          {t('Zignaly.com')}
+          {t('zignaly_web')}
+        </a>
+        <a
+          href={'https://bridge.zignaly.com/'}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          {t('zignaly_bridge')}
         </a>
       </TopNav>
       <BottomNav variant='h5' color='neutral000'>
