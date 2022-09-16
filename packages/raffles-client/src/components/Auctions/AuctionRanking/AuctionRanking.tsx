@@ -75,7 +75,9 @@ const AuctionRanking = ({
             userBid
               ? 'your-position'
               : isStarted
-              ? 'bid-participate'
+              ? isActive
+                ? 'bid-participate'
+                : 'over'
               : 'get-ready',
           )}
           &nbsp;
