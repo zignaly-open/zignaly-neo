@@ -29,7 +29,7 @@ const ClaimButton = ({
 
   const { canClaim, missClaim } = useMemo(() => {
     const maxClaimDateExpired =
-      auction.maxClaimDate && new Date(auction.maxClaimDate) < new Date();
+      auction.maxClaimDate && new Date(auction.maxClaimDate) <= new Date();
 
     return {
       canClaim: !auction.userBid?.isClaimed && !maxClaimDateExpired,
