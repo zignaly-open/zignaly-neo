@@ -1,7 +1,8 @@
 {
   "pages": {
     "404": "404 / Page not found - Zignaly",
-    "dashboard": "Closed Positions",
+    "dashboard": "Closed Positions - Zignaly",
+    "become-trader": "Become Trader - Zignaly",
     "my-balances": "My Balances - Zignaly",
     "login": "Log in - Zignaly",
     "signup": "Sign Up - Zignaly",

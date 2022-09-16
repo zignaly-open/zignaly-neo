@@ -1,0 +1,13 @@
+{
+  "input-amount": {
+    "internal-error": {
+      "insufficient-amount": "CH-Ïńŝüḟḟïĉïëńṫ ḟüńḋŝ.",
+      "min-amount": "CH-Ṫĥë ṁïńïṁüṁ áṁöüńṫ ïŝ {{áṁöüńṫ}} {{ĉöïń}}"
+    },
+    "button-max": "CH-Ṁáx",
+    "default": {
+      "label": "CH-Áṁöüńṫ ṫö Wïṫĥḋѓáw",
+      "labelBalance": "CH-Báláńĉë:"
+    }
+  }
+}

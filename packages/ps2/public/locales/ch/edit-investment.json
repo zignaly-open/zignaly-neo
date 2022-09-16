@@ -1,0 +1,87 @@
+{
+  "edit-investment": {
+    "percentageChangedSuccess": "CH-Ṗѓöḟïṫ ṗëѓĉëńṫáĝë üṗḋáṫëḋ ŝüĉĉëŝŝḟülly.",
+    "addMoreInvestmentSuccess": "CH-Yöü ïńvëŝṫëḋ {{áṁöüńṫ}} {{ĉüѓѓëńĉy}} ŝüĉĉëŝŝḟülly ïń ŝëѓvïĉë {{ŝëѓvïĉëŃáṁë}}.",
+    "withdrawInvestmentSuccess": "CH-Wïṫĥḋѓáwál ѓëqüëŝṫëḋ ŝüĉĉëŝŝḟülly.",
+    "validation-indicateAnAmount": "CH-Yöü ṁüŝṫ ïńḋïĉáṫë áń áṁöüńṫ.",
+    "error-blockedInvestment": "CH-Áll yöüѓ ḟüńḋŝ áѓë ṗëńḋïńĝ ṫö bë ṫѓáńŝḟëѓѓëḋ öüṫ öḟ ṫĥë ŝëѓvïĉë.",
+    "form": {
+      "title": "CH-Áṁöüńṫ Ïńvëŝṫëḋ:",
+      "profits": {
+        "title": "CH-Wĥáṫ ṫö ḋö wïṫĥ ṗѓöḟïṫŝ:",
+        "left": "CH-Ѓëïńvëŝṫ",
+        "right": "CH-Wïṫĥḋѓáw"
+      },
+      "inputAmount": {
+        "label": "CH-Áṁöüńṫ ṫö Ïńvëŝṫ:",
+        "labelBalance": "CH-Áváïláblë:"
+      },
+      "link": {
+        "investMore": "CH-Ïńvëŝṫ ṁöѓë",
+        "withdraw": "CH-Wïṫĥḋѓáw Ïńvëŝṫṁëńṫ"
+      },
+      "button": {
+        "saveAndClose": "CH-Ŝávë áńḋ Ĉlöŝë",
+        "saveAndInvestment": "CH-Ŝávë áńḋ Áḋḋ ṫö Ïńvëŝṫṁëńṫ"
+      }
+    },
+    "pendingMajorThan": {
+      "type": "CH-Ńëw ïńvëŝṫṁëńṫ",
+      "status": "CH-Ṗѓöĉëŝŝïńĝ ïń 24 ĥѓŝ"
+    },
+    "profitOutMajorThan": {
+      "type": "CH-Ṗѓöḟïṫŝ",
+      "status": "CH-Wáïṫïńĝ ḟöѓ ńëxṫ áĉĉöüńṫïńĝ"
+    },
+    "transferOutMajorThan": {
+      "type": "CH-Ṫѓáńŝḟëѓ Öüṫ",
+      "status": "CH-Wáïṫïńĝ ḟöѓ ńëxṫ áĉĉöüńṫïńĝ"
+    },
+    "pendingTransactions": {
+      "status_zero": "CH-Yöü ĥávë ńö ïṫëṁ",
+      "status_one": "CH-Yöü ĥávë 1 ṗëńḋïńĝ ṫѓáńŝáĉṫïöń",
+      "status_other": "CH-Yöü ĥávë {{ĉöüńṫ}} ṗëńḋïńĝ ṫѓáńŝáĉṫïöńŝ",
+      "link-label": "CH-Vïëw"
+    },
+    "investorDetail-successFee": "CH-{{ḟëë}}% Ŝüĉĉëŝŝ ḟëë",
+    "modal": {
+      "withdrawInvestment": {
+        "title": "CH-Wïṫĥḋѓáw Ïńvëŝṫṁëńṫ wïṫĥ",
+        "afterPosition": {
+          "title": "CH-Wïṫĥḋѓáw Áḟṫëѓ Ṗöŝïṫïöńŝ Ĉlöŝë",
+          "description": "CH-Yöü wïll ѓëĉëïvë yöüѓ ḟüńḋŝ áḟṫëѓ ṫĥë ṫѓáḋëѓ ḟѓëë ṫĥëṁ. Ṫákë ïńṫö áĉĉöüńṫ ṫĥáṫ yöüѓ ïńvëŝṫṁëńṫ ïŝ áṫ ѓïŝk üńṫïl ïŝ ṫѓáńŝḟëѓѓëḋ ṫö yöü. Ṫĥïŝ üŝüálly ṫákëŝ á ḟëw ḋáyŝ, büṫ ĉöülḋ ṫákë ṁöѓë. Ïṫ ïŝ üṗ ṫö ṫĥëṁ.",
+          "button": {
+            "subtitle": "CH-Wïṫĥḋѓáw öń ḟѓëë ḟüńḋŝ",
+            "title": "CH-Ńö Ḟëë"
+          }
+        },
+        "instant": {
+          "title": "CH-Ïńŝṫáńṫ Wïṫĥḋѓáwál",
+          "description": "CH-Ïńŝṫáńṫ wïṫĥḋѓáwálŝ ïńĉüѓ á 5% ḟëë bëĉáüŝë ṫĥë ṫѓáḋëѓ ĥáŝ öṗëń ṗöŝïṫïöńŝ áńḋ ĉöülḋ bë lïqüïḋáṫëḋ. Ṫö ávöïḋ ṫĥïŝ, Žïĝńály ṁüŝṫ ĉövëѓ yöüѓ ḟüńḋŝ áńḋ ïńĥëѓïṫ yöüѓ ѓïŝk, ĥëńĉë ṫĥë ḟëë.",
+          "button": {
+            "subtitle": "CH-Wïṫĥḋѓáw ïńŝṫáńṫly",
+            "title": "CH-5% Ḟëë"
+          }
+        }
+      },
+      "pendingTransaction": {
+        "title": "CH-Ṗëńḋïńĝ Ṫѓáńŝáĉṫïöńŝ",
+        "tableHeader": {
+          "amount": "CH-Áṁöüńṫ",
+          "type": "CH-Ṫyṗë",
+          "status": "CH-Ŝṫáṫüŝ"
+        },
+        "button": "CH-Báĉk"
+      },
+      "editInvestments": {
+        "title": "CH-Ëḋïṫ Ïńvëŝṫṁëńṫ",
+        "loading": "CH-Löáḋïńĝ ëḋïṫ ïńvëŝṫṁëńṫ"
+      }
+    },
+    "modalSuccess": {
+      "title": "CH-Ïńvëŝṫṁëńṫ Ṗѓöĉëŝŝïńĝ (Üṗ ṫö 24ĥ)",
+      "description": "CH-Yöüѓ ḟüńḋŝ wïll bë ṫѓáńŝḟëѓѓëḋ ïńṫö ṫĥë ŝëѓvïĉë’ŝ áĉĉöüńṫ wïṫĥïń 24 ĥöüѓŝ. Yöü ṁáy wïṫĥḋѓáw yöüѓ ḟüńḋŝ áńyṫïṁë bëḟöѓë ṫĥïŝ ṫѓáńŝḟëѓ ïŝ ṁáḋë. Öńĉë ḟüńḋŝ áѓë ṫѓáńŝḟëѓѓëḋ, yöü’ll bë áblë ṫö wïṫĥḋѓáw vïá á <0>ŝöḟṫ</0> öѓ <0>ĥáѓḋ ḋïŝĉöńńëĉṫïöń.</0>",
+      "button": "CH-Ĉlöŝë"
+    }
+  }
+}
