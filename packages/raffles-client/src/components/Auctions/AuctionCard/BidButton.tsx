@@ -27,7 +27,7 @@ const BidButton: React.FC<{
   isActive: boolean;
   updatedAt: Date;
 }> = ({ auction, isActive, updatedAt }) => {
-  const [bid, { loading: isBidding }] = useMutation(BID_AUCTION);
+  const [bid] = useMutation(BID_AUCTION);
   const { balance } = useBalance();
   const { user } = useCurrentUser();
   const { balanceOnboarding } = useContext(onboardingContext);
@@ -74,7 +74,6 @@ const BidButton: React.FC<{
     <Button
       variant={state === BidButtonState.Ended ? 'secondary' : 'primary'}
       size='large'
-      loading={isBidding}
       disabled={!isActive}
       onClick={bidClickHandler}
       caption={customButtonText}

@@ -40,13 +40,13 @@ function EditInvestmentModal({
 
   const views = {
     [EditInvestmentViews.WithdrawInvestment]: {
-      title: t(
-        'withdraw-your-investment:withdraw-your-investment.success.title',
-      ),
+      title: t('withdraw-your-investment:withdraw-your-investment.title'),
       component: () => <WithdrawFunds setView={setView} />,
     },
     [EditInvestmentViews.WithdrawSuccess]: {
-      title: t('edit-investment.modal.withdrawInvestment.title'),
+      title: t(
+        'withdraw-your-investment:withdraw-your-investment.success.title',
+      ),
       component: () => <WithdrawModalSuccess close={close} />,
     },
     [EditInvestmentViews.WithdrawPerform]: {

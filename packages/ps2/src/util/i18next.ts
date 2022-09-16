@@ -5,6 +5,8 @@ import Backend from 'i18next-http-backend';
 
 export const supportedLanguages = ['en', 'ru'];
 
+if (process.env.REACT_APP_ENABLE_TEST_LANGUAGE) supportedLanguages.push('ch');
+
 i18n
   .use(Backend)
   .use(LanguageDetector)

@@ -10,11 +10,7 @@ import { internalTransfer } from '../../cybavo';
 import { ContextUser, TransactionType } from '../../types';
 import { User } from '../users/model';
 import { Auction, AuctionBid, AuctionBasketItem } from './model';
-import {
-  getMinRequiredBidForAuction,
-  getPayoutPrizeForAuction,
-  verifyPositiveBalance,
-} from './util';
+import { getMinRequiredBidForAuction, getPayoutPrizeForAuction } from './util';
 
 const AuctionsRepository = () => {
   const lastBidPopulation = {
@@ -79,10 +75,7 @@ const AuctionsRepository = () => {
         userId: user.id,
       });
 
-      await Promise.all([
-        auction.save(),
-        verifyPositiveBalance(user.publicAddress),
-      ]);
+      await auction.save();
     } catch (error) {
       console.error(error);
       throw new Error('Could not create a bid');

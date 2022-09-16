@@ -4,6 +4,9 @@ import { Typography } from '@zignaly-open/ui';
 export const FooterContainer = styled('div')`
   background: #101225;
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   a {
     text-decoration: none;
     &:link {
@@ -19,7 +22,7 @@ export const FooterTopContainer = styled('div')`
   width: 100%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   text-align: center;
   @media (max-width: 800px) {
@@ -27,15 +30,9 @@ export const FooterTopContainer = styled('div')`
   }
 `;
 
-export const CopyrightContainer = styled(Typography)`
-  position: relative;
-  left: 65px;
-  @media (max-width: 800px) {
-    left: 0;
-  }
-`;
+export const CopyrightContainer = styled(Typography)``;
 export const IconsContainer = styled('div')`
-  width: 20%;
+  width: 15%;
   display: flex;
   justify-content: space-evenly;
   @media (max-width: 800px) {
@@ -50,7 +47,12 @@ export const TopNav = styled(Typography)`
   justify-content: center;
   flex-wrap: wrap;
   a {
-    margin: 30px;
+    margin: 20px 75px 30px 0;
+  }
+  @media (max-width: 800px) {
+    a {
+      margin: 20px 10px 30px 0;
+    }
   }
 `;
 
@@ -61,12 +63,17 @@ export const BottomNav = styled(Typography)`
   justify-content: center;
   flex-wrap: wrap;
   a {
-    margin: 30px;
+    margin: 30px 40px 30px 0;
+  }
+  @media (max-width: 800px) {
+    a {
+      margin: 20px 10px 30px 0;
+    }
   }
 `;
 
 export const DisclaimerContainer = styled(Typography)`
-  width: 100%;
+  width: 80%;
   text-align: justify;
   display: flex;
   justify-content: center;

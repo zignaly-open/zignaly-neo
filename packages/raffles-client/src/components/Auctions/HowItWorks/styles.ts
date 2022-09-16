@@ -1,5 +1,5 @@
 import { Box, styled } from '@mui/material';
-import { Typography, WalletIcon } from '@zignaly-open/ui';
+import { Typography } from '@zignaly-open/ui';
 
 export const Step = styled(Box)`
   flex-direction: column;
@@ -23,16 +23,6 @@ export const StepDetails = styled(Box)`
 
   ${({ theme }) => theme.breakpoints.down('md')} {
     padding: 0 24px;
-  }
-`;
-
-export const StepIcon = styled(WalletIcon)`
-  min-width: 82px;
-  min-height: 82px;
-  margin-bottom: 18px;
-
-  ${({ theme }) => theme.breakpoints.down('md')} {
-    margin-bottom: 0;
   }
 `;
 
