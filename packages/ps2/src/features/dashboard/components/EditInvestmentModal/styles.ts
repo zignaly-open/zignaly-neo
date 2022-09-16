@@ -91,8 +91,9 @@ export const Content = styled.div`
   flex: 1;
 `;
 
-export const Block = styled.div`
-  padding: 4px 32px;
+export const WithdrawFundsSpaceTaker = styled(Typography)`
+  flex: 1;
+  text-align: justify;
 `;
 
 export const WithdrawFundsOptionWrapper = styled.div<{ border?: boolean }>`
@@ -101,7 +102,6 @@ export const WithdrawFundsOptionWrapper = styled.div<{ border?: boolean }>`
   display: flex;
 
   height: 100%;
-  justify-content: space-between;
 
   ${(props) =>
     props.border
