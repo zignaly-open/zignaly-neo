@@ -63,7 +63,7 @@ export const Dropdown = styled.div<DropdownProps>`
   color: #fff;
   box-shadow: 0 4px 6px -2px #00000061;
   opacity: 0;
-  position: absolute;
+  position: fixed; // TODO: needs to be reverted to absolute once we go to the flex layout
 
   &::-webkit-scrollbar {
     height: 6px;
