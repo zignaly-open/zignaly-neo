@@ -16,11 +16,9 @@ export type MyBalancesTableDataType = {
     balanceLocked: string;
   };
   valueBTC: {
-    symbol: string;
     balanceTotalBTC: string;
   };
   valueUSD: {
-    symbol: string;
     balanceTotalUSDT: string;
   };
 };

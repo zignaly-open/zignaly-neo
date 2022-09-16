@@ -22,4 +22,4 @@ export const api = createApi({
   }),
 });
 
-export const { useLazyReducedBalancesQuery, useLazyAllCoinsQuery } = api;
+export const { useReducedBalancesQuery, useLazyAllCoinsQuery } = api;
