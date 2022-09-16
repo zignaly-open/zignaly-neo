@@ -12,6 +12,7 @@ import { BID_AUCTION } from 'queries/auctions';
 import { showToast } from 'util/showToast';
 import { useModal } from 'mui-modal-provider';
 import NotEnoughZIGModal from 'components/Modals/NotEnoughZIG';
+import { LoaderTypes } from '@zignaly-open/ui/lib/components/display/Loader';
 
 enum BidButtonState {
   NotLoggedIn,
@@ -80,8 +81,11 @@ const BidButton: React.FC<{
       leftElement={
         // Don't use loading prop because it disables the button
         isBidding && (
-          // @ts-ignore
-          <Loader type='tail-spin' color='#9CA3AF' ariaLabel='Loader' />
+          <Loader
+            type={LoaderTypes.TAILSPIN}
+            color='#9CA3AF'
+            ariaLabel='Loader'
+          />
         )
       }
     />
