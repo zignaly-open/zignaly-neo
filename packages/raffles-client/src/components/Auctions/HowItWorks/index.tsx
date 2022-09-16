@@ -1,7 +1,13 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
-import { Typography } from '@zignaly-open/ui';
-import { Step, TypographyTitle, Layout, StepDetails } from './styles';
+import { Trans, useTranslation } from 'react-i18next';
+import { Typography, TextButton } from '@zignaly-open/ui';
+import {
+  Step,
+  TypographyTitle,
+  Layout,
+  StepDetails,
+  TypographyStep,
+} from './styles';
 import { Stack } from '@mui/material';
 import { ReactComponent as BidIcon } from '../../../assets/icons/bid_gradient.svg';
 import { ReactComponent as TrophyIcon } from '../../../assets/icons/trophy_gradient.svg';
@@ -39,9 +45,15 @@ const HowItWorks = () => {
             <TypographyTitle variant='h2' color='neutral100' component='h2'>
               {t('step2')}
             </TypographyTitle>
-            <Typography variant='h4' color='neutral200' component='h4'>
-              {t('step2-info')}
-            </Typography>
+            <TypographyStep variant='h4' color='neutral200' component='h4'>
+              <Trans i18nKey='step2-info' t={t}>
+                <TextButton
+                  href='https://www.zignaly.com'
+                  caption='this article.'
+                  variant='h4'
+                />
+              </Trans>
+            </TypographyStep>
           </StepDetails>
         </Step>
         <Step>
