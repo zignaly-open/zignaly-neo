@@ -44,3 +44,5 @@ export interface MyBalancesState {
   balances?: Balances;
   coins?: Coins;
 }
+
+export type AggregatedBalances = Record<string, CoinBalance & CoinDetail>;

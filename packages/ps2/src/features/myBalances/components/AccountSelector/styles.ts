@@ -22,6 +22,7 @@ export const Inline = styled.div`
 export const TypeText = styled(Typography).attrs({ variant: 'h4' })`
   display: flex;
   gap: 4px;
+
   span:nth-of-type(1) {
     color: ${({ theme }) => theme.neutral300};
   }
@@ -46,9 +47,9 @@ export const Item = styled.li`
   &:hover {
     background: #ffffff0a;
   }
+`;
 
-  .internalName {
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
+export const InternalName = styled(Typography)`
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;

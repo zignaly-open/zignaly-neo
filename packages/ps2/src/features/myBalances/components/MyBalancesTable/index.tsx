@@ -1,8 +1,7 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
-import { useActiveExchange } from '../../../auth/use';
-import { useFetchMyBalances, useSelectMyBalances } from '../../use';
+import { useMyBalances } from '../../use';
 import {
   Table,
   PriceLabel,
@@ -15,35 +14,24 @@ import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { MyBalancesTableDataType } from './types';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { TableHead } from './styles';
-import _ from 'lodash';
-import { Coin } from '../../../dashboard/types';
 import CenteredLoader from '../../../../components/CenteredLoader';
+
+const initialStateTable = {
+  sortBy: [
+    {
+      id: 'totalBalance',
+      desc: false,
+    },
+  ],
+};
 
 const MyBalancesTable = (): JSX.Element => {
   const theme = useTheme() as Theme;
   const { t } = useTranslation('my-balances');
-
-  const currentExchange = useActiveExchange();
-
-  const balances = useSelectMyBalances();
-  const [{ isLoadingReducedBalances, isLoadingAllCoins }, fetchBalances] =
-    useFetchMyBalances();
+  const { data: balances, isLoading } = useMyBalances();
 
   const [searchBy, setSearchBy] = useState('');
 
-  /**
-   * Fetch the myBalances of the user.
-   */
-  useEffect(() => {
-    if (currentExchange) {
-      fetchBalances(currentExchange);
-    }
-  }, [currentExchange?.internalId, currentExchange?.exchangeType]);
-
-  /**
-   * @name columns
-   * @description Set the columns for balance table.
-   */
   const columns: TableProps<MyBalancesTableDataType>['columns'] = useMemo(
     () => [
       {
@@ -112,55 +100,35 @@ const MyBalancesTable = (): JSX.Element => {
     [t],
   );
 
-  /**
-   * @name data
-   * @description Format and serialize data for the balances table columns.
-   */
-  const data = _.filter(
-    Object.entries(balances),
-    ([symbol, balance]: [string, Coin]) =>
-      symbol.toLowerCase().indexOf(searchBy.toLowerCase()) > -1 ||
-      balance.name.toLowerCase().indexOf(searchBy.toLowerCase()) > -1,
-  ).map(([coin, balance]) => ({
-    coin: { symbol: coin, name: balance.name },
-    total: {
-      symbol: coin,
-      balanceTotal: balance.balanceTotal,
-    },
-    available: {
-      symbol: coin,
-      balanceFree: balance.balanceFree,
-    },
-    locked: {
-      symbol: coin,
-      balanceLocked: balance.balanceLocked,
-    },
-    valueBTC: {
-      balanceTotalBTC: balance.balanceTotalBTC,
-    },
-    valueUSD: {
-      balanceTotalUSDT: balance.balanceTotalUSDT,
-    },
-  }));
-
-  /**
-   * @name initialStateTable
-   * @description Set the default configuration for the table component.
-   */
-  const initialStateTable = {
-    sortBy: [
-      {
-        id: 'totalBalance',
-        desc: false,
+  const data = Object.entries(balances)
+    .filter(
+      ([symbol, balance]) =>
+        symbol.toLowerCase().includes(searchBy.toLowerCase()) ||
+        balance.name.toLowerCase().includes(searchBy.toLowerCase()),
+    )
+    .map(([coin, balance]) => ({
+      coin: { symbol: coin, name: balance.name },
+      total: {
+        symbol: coin,
+        balanceTotal: balance.balanceTotal,
       },
-    ],
-  };
+      available: {
+        symbol: coin,
+        balanceFree: balance.balanceFree,
+      },
+      locked: {
+        symbol: coin,
+        balanceLocked: balance.balanceLocked,
+      },
+      valueBTC: {
+        balanceTotalBTC: balance.balanceTotalBTC,
+      },
+      valueUSD: {
+        balanceTotalUSDT: balance.balanceTotalUSDT,
+      },
+    }));
 
-  const handleSearchCoin = useCallback((value) => {
-    setSearchBy(value);
-  }, []);
-
-  return isLoadingAllCoins || isLoadingReducedBalances ? (
+  return isLoading ? (
     <CenteredLoader />
   ) : (
     <>
@@ -168,7 +136,7 @@ const MyBalancesTable = (): JSX.Element => {
         <ExpandableInput
           icon={<SearchIcon width={14} height={14} color={theme.neutral300} />}
           value={searchBy}
-          onChange={handleSearchCoin}
+          onChange={setSearchBy}
           placeholder={t('my-balances.table-search-placeholder')}
         />
       </TableHead>
