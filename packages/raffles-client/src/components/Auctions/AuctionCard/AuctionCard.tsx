@@ -42,7 +42,7 @@ const AuctionCard: React.FC<{
   );
 
   const showClaim = useMemo(
-    () => (!updatedAt || +new Date() - updatedAt > 0) && hasWon,
+    () => (!updatedAt || +new Date() >= updatedAt) && hasWon,
     [hasWon, updatedAt],
   );
 
