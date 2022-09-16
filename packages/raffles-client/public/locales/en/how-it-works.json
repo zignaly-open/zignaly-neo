@@ -1,11 +1,11 @@
 {
   "how-it-works": "How It Works?",
   "step1": "1. Connect Wallet",
-  "step1-info": "Click on the connect button and approve the connection to ZIGBids.",
+  "step1-info": "Connect your wallet through the Polygon network to ZIGBids.",
   "step2": "2. Transfer ZIGs",
-  "step2-info": "Click in the Transfer ZIG button and add as many ZIGs as you want.",
+  "step2-info": "If you don’t know how to get ZIGs in Polygon, check this article.",
   "step3": "3. Bid",
-  "step3-info": "heck current auctions and bid for those you like.",
+  "step3-info": "Each time that you bid, you spend 1 ZIG, the last who bids wins. Last seconds bids could increase the countdown randomly for a short time.",
   "step4": "4. Claim",
-  "step4-info": "You won! Now is time to claim your prize."
+  "step4-info": "Once the auction is over, if you are in the ranking with trophy, you will have the option to claim the item."
 }
