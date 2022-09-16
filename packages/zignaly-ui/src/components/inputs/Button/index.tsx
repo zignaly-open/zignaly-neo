@@ -57,7 +57,7 @@ function Button({
       withElements={!!leftElement && !!rightElement && !!caption}
       withLeftElement={!!leftElement && !!caption}
       withRightElement={!!rightElement && !!caption}
-      disabled={disabled}
+      disabled={disabled || loading}
       variant={variant}
       size={size}
       color={color}
