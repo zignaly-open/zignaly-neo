@@ -32,7 +32,7 @@ export const FooterTopContainer = styled('div')`
 
 export const CopyrightContainer = styled(Typography)``;
 export const IconsContainer = styled('div')`
-  width: 20%;
+  width: 15%;
   display: flex;
   justify-content: space-evenly;
   @media (max-width: 800px) {
