@@ -7,7 +7,7 @@ import useBalance from '../../../hooks/useBalance';
 import BN from 'bignumber.js';
 import useAuthenticate from '../../../hooks/useAuthenticate';
 import { onboardingContext } from '../../../contexts/Onboarding';
-import { Button, Loader } from '@zignaly-open/ui';
+import { Button } from '@zignaly-open/ui';
 import { BID_AUCTION } from 'queries/auctions';
 import { showToast } from 'util/showToast';
 import { useModal } from 'mui-modal-provider';
@@ -27,7 +27,7 @@ const BidButton: React.FC<{
   isActive: boolean;
   updatedAt: Date;
 }> = ({ auction, isActive, updatedAt }) => {
-  const [bid, { loading: isBidding }] = useMutation(BID_AUCTION);
+  const [bid] = useMutation(BID_AUCTION);
   const { balance } = useBalance();
   const { user } = useCurrentUser();
   const { balanceOnboarding } = useContext(onboardingContext);
@@ -77,14 +77,6 @@ const BidButton: React.FC<{
       disabled={!isActive}
       onClick={bidClickHandler}
       caption={customButtonText}
-      leftElement={
-        // Don't use loading prop because it disables the button
-        isBidding && (
-          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-          // @ts-ignore
-          <Loader type='tail-spin' color='#9CA3AF' ariaLabel='Loader' />
-        )
-      }
     />
   );
 };
