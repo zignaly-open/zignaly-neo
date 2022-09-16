@@ -1,32 +1,27 @@
 /* eslint-disable multiline-ternary */
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useMemo } from "react";
 import { VictoryArea, VictoryAxis, VictoryChart, VictoryGroup, VictoryLine } from "victory";
 import { Layout } from "./styles";
-import { ChartInput, ChartsProps, largeStyle } from "./types";
+import { AxisFormat, ChartInput, ChartsProps, largeStyle } from "./types";
 
 export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
-  const [gradientColor, setGradientColor] = useState<boolean>(false);
-  const firstTimestamp = data[0].y;
-  const lastTimeStamp = data[data.length - 1].y;
-
-  const positiveOrNegative = useCallback(() => {
-    if (firstTimestamp > lastTimeStamp) {
-      setGradientColor(false);
-    } else if (firstTimestamp <= lastTimeStamp) {
-      setGradientColor(true);
+  const processedData = useMemo<AxisFormat[]>(() => {
+    if (typeof data?.[0] === "number") {
+      return data.map((value, index) => ({ x: index, y: value as number }));
     }
-  }, [gradientColor]);
-
-  useEffect(() => {
-    positiveOrNegative();
+    return data as AxisFormat[];
   }, [data]);
+
+  const firstTimestamp = processedData[0].y;
+  const lastTimeStamp = processedData[data.length - 1].y;
+  const isGrowth = firstTimestamp <= lastTimeStamp;
   return (
     <div>
       <Layout variant={variant}>
         {variant === "large"
-          ? LargeChart({ data: data, isGreen: gradientColor, midLine: midLine })
-          : SmallChart({ data: data, isGreen: gradientColor, midLine: midLine })}
-        {GraphColor({ isGreen: gradientColor })}
+          ? LargeChart({ data: processedData, isGreen: isGrowth, midLine: midLine })
+          : SmallChart({ data: processedData, isGreen: isGrowth, midLine: midLine })}
+        {GraphColor({ isGreen: isGrowth })}
       </Layout>
     </div>
   );

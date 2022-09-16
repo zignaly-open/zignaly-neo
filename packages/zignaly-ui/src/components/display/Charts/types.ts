@@ -1,7 +1,7 @@
 export interface ChartsProps {
   readonly variant: keyof typeof ChartVariations;
   readonly yAxis?: "left" | "right";
-  readonly data: AxisFormat[];
+  readonly data: AxisFormat[] | number[];
   midLine?: boolean | null;
 }
 
