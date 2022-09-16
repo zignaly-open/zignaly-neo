@@ -14,12 +14,10 @@ import Staking from './views/Staking';
 import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
 import ForgotPassword from './views/Auth/ForgotPassword';
-import TraderServices from './views/Help/TraderServices';
 import Zigpad from './views/Zigpad';
 import {
   ROUTE_DASHBOARD,
   ROUTE_FORGOT_PASSWORD,
-  ROUTE_HELP,
   ROUTE_LOGIN,
   ROUTE_PROFIT_SHARING,
   ROUTE_SIGNUP,
@@ -34,11 +32,13 @@ import {
   ROUTE_TRADING_SERVICE_EDIT,
   ROUTE_TRADING_SERVICE_SIGNALS,
   ROUTE_ZIGPAD,
+  ROUTE_BECOME_TRADER,
 } from './routes';
 
 import { useIsAuthenticated } from './features/auth/use';
 import Management from './views/TraderService/Management';
 import Investors from './views/TraderService/Investors';
+import BecomeTrader from './views/TraderService/BecomeTrader';
 import Positions from './views/TraderService/Positions';
 import Coins from './views/TraderService/Coins';
 import ServiceProfile from './views/TraderService/ServiceProfile';
@@ -47,6 +47,7 @@ import Manual from 'views/TraderService/Manual';
 import Signals from './views/TraderService/Signals';
 import EditService from 'views/TraderService/EditService';
 import { useIsServiceOwner } from './features/trader/use';
+import NotATraderWall from './util/walls/NotATraderWall';
 
 const AuthenticatedWall: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
@@ -102,7 +103,9 @@ const Router: React.FC = () => (
       </Route>
     </Route>
 
-    <Route path={ROUTE_HELP} element={<TraderServices />} />
+    <Route element={<NotATraderWall />}>
+      <Route path={ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
+    </Route>
 
     <Route element={<UnauthenticatedWall />}>
       <Route path={ROUTE_LOGIN} element={<Login />} />

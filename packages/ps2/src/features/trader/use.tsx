@@ -24,6 +24,12 @@ export function useIsServiceOwner(serviceId: string) {
   );
 }
 
+export function useFirstOwnedService(): TraderService | null {
+  const traderServices = useTraderServices();
+  const isAuthenticated = useIsAuthenticated();
+  return (isAuthenticated && traderServices[0]) || null;
+}
+
 export const useTraderServiceInvestors = (
   serviceId: string,
 ): ReturnType<typeof useTraderServiceInvestorsQuery> => {
