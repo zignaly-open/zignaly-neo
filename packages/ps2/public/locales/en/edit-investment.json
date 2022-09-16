@@ -46,7 +46,7 @@
     "investorDetail-successFee": "{{fee}}% Success fee",
     "modal": {
       "withdrawInvestment": {
-        "title": "Withdraw Investment with",
+        "title": "Withdrawal Request",
         "afterPosition": {
           "title": "Withdraw After Positions Close",
           "description": "You will receive your funds after the trader free them. Take into account that your investment is at risk until is transferred to you. This usually takes a few days, but could take more. It is up to them.",

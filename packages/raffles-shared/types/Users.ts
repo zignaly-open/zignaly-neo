@@ -3,6 +3,7 @@ export type UserType = {
   nonce: number;
   publicAddress: string;
   username: string;
+  email: string;
   discordName: string;
   onBoardingCompleted: Date;
 };

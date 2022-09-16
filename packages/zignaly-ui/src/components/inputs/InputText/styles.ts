@@ -15,6 +15,7 @@ export const InputValue = styled.input`
   font-family: "Avenir Next", sans-serif;
   box-shadow: none !important;
   resize: none;
+  background: linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%);
 
   &:-webkit-autofill {
     -webkit-box-shadow: 0 0 0 1000px white inset;

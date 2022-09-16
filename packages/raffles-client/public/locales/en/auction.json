@@ -34,5 +34,9 @@
   "instructions": "Instructions",
   "error": "Error!",
   "zauctions-projects": "ZIGBids Projects",
-  "coming-soon": "Soon"
+  "coming-soon": "Soon",
+  "your-position": "Your position:",
+  "bid-participate": "Bid to participate",
+  "get-ready": "Get Ready",
+  "empty": "Empty"
 }

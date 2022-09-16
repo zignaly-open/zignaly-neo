@@ -1,0 +1,23 @@
+{
+  "steps": {
+    "info": "CH-Ĥöw ïṫ wöѓkŝ",
+    "profile": "CH-Yöüѓ ṗѓöḟïlë",
+    "deposit": "CH-Ḋëṗöŝïṫ"
+  },
+  "why-need-username": "CH-Wĥëń bïḋḋïńĝ, ",
+  "username": "CH-Üŝëѓńáṁë",
+  "why-set-username": "CH-Ṗlëáŝë ĉĥööŝë á üńïqüë üŝëѓńáṁë ṫĥáṫ wïll bë ḋïŝṗláyëḋ ṫö öṫĥëѓ üŝëѓŝ",
+  "why-set-username-2": "CH-Ŝëṫṫïńĝ üŝëѓńáṁë ïŝ ïṁṗöѓṫáńṫ bëĉáüŝë ṫĥïŝ wïll lëṫ öṫĥëѓ üŝëѓŝ ŝëë ŝöṁëṫĥïńĝ ṁöѓë ṗëѓŝöńál ṫĥáń \"Üŝëѓ #45 wïńŝ ṫĥë Áüĉṫïöń\"",
+  "username-explainer": "CH-Ńáṁë ṫĥáṫ wïll bë vïŝïblë ṫö öṫĥëѓŝ",
+  "skip": "CH-Ŝkïṗ Öńböáѓḋïńĝ",
+  "back": "CH-Báĉk",
+  "finish": "CH-Ḟïńïŝĥ",
+  "next": "CH-Ńëxṫ",
+  "save": "CH-Ŝávë",
+  "username-ok": "CH-Ĝѓëáṫ üŝëѓńáṁë!",
+  "username-min": "CH-Ṁïń 2 ĉĥáѓáĉṫëѓŝ",
+  "username-max": "CH-Ṁáx 20 ĉĥáѓáĉṫëѓŝ",
+  "username-taken": "CH-Ŝöѓѓy, üŝëѓńáṁë \"{{üŝëѓńáṁë}}\" ïŝ ṫákëń",
+  "username-required": "CH-Ṗlëáŝë ŝṗëĉïḟy ṫĥë üŝëѓńáṁë",
+  "username-regex": "CH-Öńly lëṫṫëѓŝ, ḋïĝïṫŝ áńḋ .-_"
+}

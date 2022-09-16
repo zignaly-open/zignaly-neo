@@ -332,3 +332,9 @@ export async function expireAuction(auctionId: number) {
   auction.expiresAt = new Date(Date.now() - 1000);
   await auction.save();
 }
+
+export async function startAuction(auctionId: number) {
+  const auction = await Auction.findByPk(auctionId);
+  auction.startDate = new Date(Date.now() - 1000);
+  await auction.save();
+}

@@ -3,32 +3,39 @@ import React from 'react';
 import {
   WithdrawFundsOptionWrapper,
   MultilineButton,
+  WithdrawFundsSpaceTaker,
   WithdrawFundsButtonWrapper,
 } from '../styles';
 import InvestorDetails from './InvestorDetails';
 import { useTranslation } from 'react-i18next';
-import { Grid } from '@mui/material';
+import { Grid, useMediaQuery } from '@mui/material';
 import { ChangeViewFn, EditInvestmentViews } from '../types';
+import theme from '../../../../../theme';
 
 const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   const { t } = useTranslation('edit-investment');
-  const matchesSmall = false;
+  const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   return (
     <>
       <InvestorDetails />
       <Grid container marginBottom={3} rowSpacing={6}>
-        <Grid item xs={12} md={6}>
+        <Grid item sm={12} md={6}>
           <WithdrawFundsOptionWrapper border={matchesSmall}>
             <Typography component={'p'} variant={'h2'} color={'neutral100'}>
               {t(
                 'edit-investment.modal.withdrawInvestment.afterPosition.title',
               )}
             </Typography>
-            <Typography component={'p'} variant={'body1'} color={'neutral200'}>
+            <WithdrawFundsSpaceTaker
+              component={'p'}
+              variant={'body1'}
+              color={'neutral200'}
+              weight={'regular'}
+            >
               {t(
                 'edit-investment.modal.withdrawInvestment.afterPosition.description',
               )}
-            </Typography>
+            </WithdrawFundsSpaceTaker>
 
             <WithdrawFundsButtonWrapper>
               <Button
@@ -60,16 +67,21 @@ const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
             </WithdrawFundsButtonWrapper>
           </WithdrawFundsOptionWrapper>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid item sm={12} md={6}>
           <WithdrawFundsOptionWrapper>
             <Typography component={'p'} variant={'h2'} color={'neutral100'}>
               {t('edit-investment.modal.withdrawInvestment.instant.title')}
             </Typography>
-            <Typography component={'p'} variant={'body1'} color={'neutral200'}>
+            <WithdrawFundsSpaceTaker
+              component={'p'}
+              variant={'body1'}
+              color={'neutral200'}
+              weight={'regular'}
+            >
               {t(
                 'edit-investment.modal.withdrawInvestment.instant.description',
               )}
-            </Typography>
+            </WithdrawFundsSpaceTaker>
             <WithdrawFundsButtonWrapper>
               <Button
                 caption={

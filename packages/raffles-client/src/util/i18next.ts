@@ -10,6 +10,9 @@ const ns = [
   'connect-wallet',
   'user-settings',
   'claim',
+  'balance',
+  'how-it-works',
+  'footer',
 ];
 const supportedLngs = ['en'];
 

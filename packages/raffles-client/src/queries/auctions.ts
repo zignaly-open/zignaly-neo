@@ -16,7 +16,7 @@ export const GET_AUCTIONS = gql`
       maxExpiryDate
       maxClaimDate
       status
-      comingSoon
+      startDate
       currentBid
       website
       twitter
@@ -96,7 +96,7 @@ export const BIDS_SUBSCRIPTION = gql`
       id
       expiresAt
       currentBid
-      comingSoon
+      startDate
       userBid {
         id
         position

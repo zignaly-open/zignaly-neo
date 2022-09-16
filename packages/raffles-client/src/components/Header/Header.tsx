@@ -52,14 +52,14 @@ const Header = () => {
       // User changed MM account, ask to disconnect
       showModal(SwitchAccountModal);
     }
-  }, [account]);
+  }, [account, currentUser]);
 
   return (
     <StickyHeader
       leftElements={[
         <BrandImage
           key={'logo2'}
-          type={'logotype'}
+          type={'zigbidslogotype'}
           width={'140px'}
           height={'68px'}
         />,
