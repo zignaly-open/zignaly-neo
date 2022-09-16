@@ -352,10 +352,8 @@ export const ViewPort = styled.button<LayoutProps>`
     cursor: default;
   }
 
-  ${() => `
-    ${renderSizeProps}
-    ${renderPrimaryProps}  
-    ${renderSecondaryProps}
-    ${renderFlatProps}
-  `}
+  ${renderSizeProps}
+  ${renderPrimaryProps}
+  ${renderSecondaryProps}
+  ${renderFlatProps}
 `;
