@@ -120,6 +120,8 @@ export function useWithdrawInvestment(): {
 } {
   const [withdraw, { isLoading }] = useWithdrawInvestmentMutation();
   const exchange = useActiveExchange();
+  const service = useSelectedInvestment();
+  const { refetch } = useInvestmentDetails(service.serviceId);
   return {
     isLoading,
     withdraw: async ({ serviceId, amount }) => {
@@ -128,6 +130,7 @@ export function useWithdrawInvestment(): {
         exchangeInternalId: exchange.internalId,
         amount: amount.toString(),
       });
+      await refetch();
     },
   };
 }

@@ -25,6 +25,8 @@ functioning brain and basic dev skills can reverse-engineer the code to get this
 * `REACT_APP_LIVE_SESSION_TRACK_ID` - Live session track ID
 * `REACT_APP_BASE_API` - base API, as you may have guessed from the name lol
 * `REACT_APP_GTM_ID` - Google Tag Manager id
+* `REACT_APP_ENABLE_TEST_LANGUAGE` - pass truthy value to enable the test language to verify that all strings are
+  externalized
 * `REACT_APP_GOOGLE_CAPTCHA_TOKEN` - captcha key
 
 ⚠️ **WARNING!** Unless you want to spend time trying to figure out why the hell the backend responds with a captcha
