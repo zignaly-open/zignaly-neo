@@ -1,4 +1,4 @@
-import { useApolloClient, useLazyQuery, useMutation } from '@apollo/client';
+import { useApolloClient, useMutation } from '@apollo/client';
 import { setToken } from '../util/token';
 import { Mumbai, Polygon, useEthers } from '@usedapp/core';
 import { useAsync } from 'react-use';
@@ -11,27 +11,15 @@ import {
 } from 'queries/users';
 import { GET_AUCTIONS } from 'queries/auctions';
 
-function useRefetchCurrentUser(): () => Promise<unknown> {
-  const [fetchUser] = useLazyQuery(GET_CURRENT_USER, {
-    fetchPolicy: 'network-only',
-  });
-
-  return fetchUser;
-}
-
 export function useLogout(): () => Promise<void> {
-  const fetchUser = useRefetchCurrentUser();
   const { deactivate } = useEthers();
   const client = useApolloClient();
   return async () => {
     deactivate();
     setToken('');
-    await Promise.all([
-      fetchUser(),
-      client.refetchQueries({
-        include: [GET_AUCTIONS],
-      }),
-    ]);
+    client.refetchQueries({
+      include: [GET_AUCTIONS, GET_CURRENT_USER],
+    });
   };
 }
 
