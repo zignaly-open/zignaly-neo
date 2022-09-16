@@ -9,6 +9,10 @@ jest.mock('@apollo/client', () => ({
   gql: jest.fn(),
 }));
 
+jest.mock('@usedapp/core', () => ({
+  useEthers: () => ({ account: '0xabc' }),
+}));
+
 describe('useCurrentUser', () => {
   const user: UserType = {
     id: 1,

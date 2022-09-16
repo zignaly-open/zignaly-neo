@@ -1,5 +1,5 @@
 import { IconButton, BrandImage, UserIcon, WalletIcon } from '@zignaly-open/ui';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import { Header as ZIGHeader, Button } from '@zignaly-open/ui';
@@ -13,6 +13,7 @@ import Menu from './Menu';
 import { Box } from '@mui/system';
 import { useEthers } from '@usedapp/core';
 import { useLogout } from 'hooks/useAuthenticate';
+import { UserType } from '@zignaly-open/raffles-shared/types';
 
 const StyledWalletIcon = styled(WalletIcon)`
   color: ${({ theme }) => theme.neutral300};
@@ -39,19 +40,24 @@ const Header = () => {
   const { showModal } = useModal();
   const { account } = useEthers();
   const logout = useLogout();
+  const userRef = useRef<UserType>();
 
   useEffect(() => {
-    if (!account && currentUser) {
-      // Disconnected from MM
+    if (currentUser) {
+      if (
+        account &&
+        account.toLowerCase() !== currentUser.publicAddress.toLowerCase()
+      ) {
+        // User changed MM account, ask to disconnect.
+        showModal(SwitchAccountModal);
+      }
+    } else if (userRef.current) {
+      // Disconnected manually from MM.
       logout();
-    } else if (
-      account &&
-      currentUser &&
-      account.toLowerCase() !== currentUser.publicAddress.toLowerCase()
-    ) {
-      // User changed MM account, ask to disconnect
-      showModal(SwitchAccountModal);
     }
+
+    // Save user to avoid detecting false disconnection because "account" wasn't yet loaded at page load.
+    userRef.current = currentUser;
   }, [account, currentUser]);
 
   return (
