@@ -1,11 +1,11 @@
 {
   "how-it-works": "How It Works?",
-  "step1": "Connect Wallet",
+  "step1": "1. Connect Wallet",
   "step1-info": "Click on the connect button and approve the connection to ZIGBids.",
-  "step2": "Transfer ZIGs",
+  "step2": "2. Transfer ZIGs",
   "step2-info": "Click in the Transfer ZIG button and add as many ZIGs as you want.",
-  "step3": "Bid",
-  "step3-info": "Check current auctions and bid for those you like.",
-  "step4": "Claim",
+  "step3": "3. Bid",
+  "step3-info": "heck current auctions and bid for those you like.",
+  "step4": "4. Claim",
   "step4-info": "You won! Now is time to claim your prize."
 }

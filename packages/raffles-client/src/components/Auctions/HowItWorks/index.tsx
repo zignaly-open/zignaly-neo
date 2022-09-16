@@ -1,8 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '@zignaly-open/ui';
-import { Step, StepIcon, TypographyTitle, Layout, StepDetails } from './styles';
+import { Step, TypographyTitle, Layout, StepDetails } from './styles';
 import { Stack } from '@mui/material';
+import { ReactComponent as BidIcon } from '../../../assets/icons/bid_gradient.svg';
+import { ReactComponent as TrophyIcon } from '../../../assets/icons/trophy_gradient.svg';
+import { ReactComponent as WalletIcon } from '../../../assets/icons/wallet_gradient.svg';
+import { ReactComponent as ZigcoinIcon } from '../../../assets/icons/zigcoin_gradient.svg';
 
 const HowItWorks = () => {
   const { t } = useTranslation('how-it-works');
@@ -11,19 +15,15 @@ const HowItWorks = () => {
       display='flex'
       flexDirection='column'
       alignItems='center'
-      mt={3}
       mb={{ xs: 5, md: 1 }}
     >
-      <Typography variant='h2' color='neutral100'>
-        {t('how-it-works')}
-      </Typography>
       <Stack
         direction={{ xs: 'column', md: 'row' }}
         mt={4}
         gap={{ xs: 4, md: 6 }}
       >
         <Step>
-          <StepIcon />
+          <WalletIcon width={130} height={130} />
           <StepDetails>
             <TypographyTitle variant='h2' color='neutral100' component='h2'>
               {t('step1')}
@@ -34,7 +34,7 @@ const HowItWorks = () => {
           </StepDetails>
         </Step>
         <Step>
-          <StepIcon />
+          <ZigcoinIcon width={130} height={130} />
           <StepDetails>
             <TypographyTitle variant='h2' color='neutral100' component='h2'>
               {t('step2')}
@@ -45,7 +45,7 @@ const HowItWorks = () => {
           </StepDetails>
         </Step>
         <Step>
-          <StepIcon />
+          <BidIcon width={130} height={130} />
           <StepDetails>
             <TypographyTitle variant='h2' color='neutral100' component='h2'>
               {t('step3')}
@@ -56,7 +56,7 @@ const HowItWorks = () => {
           </StepDetails>
         </Step>
         <Step>
-          <StepIcon />
+          <TrophyIcon width={130} height={130} />
           <StepDetails>
             <TypographyTitle variant='h2' color='neutral100' component='h2'>
               {t('step4')}
