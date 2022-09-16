@@ -3,7 +3,7 @@
   "step1": "1. Connect Wallet",
   "step1-info": "Connect your wallet through the Polygon network to ZIGBids.",
   "step2": "2. Transfer ZIGs",
-  "step2-info": "If you don’t know how to get ZIGs in Polygon, check this article.",
+  "step2-info": "If you don’t know how to get ZIGs in Polygon, check <0>this article.<0>",
   "step3": "3. Bid",
   "step3-info": "Each time that you bid, you spend 1 ZIG, the last who bids wins. Last seconds bids could increase the countdown randomly for a short time.",
   "step4": "4. Claim",
