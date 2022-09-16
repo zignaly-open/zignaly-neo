@@ -8,9 +8,12 @@ import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
 import { supportedLanguages } from '../../../util/i18next';
 import { useChangeLocale } from '../../auth/use';
-import { useTraderServices } from '../../trader/use';
+import { useFirstOwnedService } from '../../trader/use';
 import { generatePath, Link } from 'react-router-dom';
-import { ROUTE_HELP, ROUTE_TRADING_SERVICE_MANAGE } from '../../../routes';
+import {
+  ROUTE_BECOME_TRADER,
+  ROUTE_TRADING_SERVICE_MANAGE,
+} from '../../../routes';
 
 const dropDownOptions = {
   alignment: 'right' as const,
@@ -21,14 +24,16 @@ const dropDownOptions = {
 const ExtraNavigationDropdown: React.FC = () => {
   const theme = useTheme() as Theme;
   const dropDownRef =
-    useRef<{ setIsDropDownActive: (isActive: boolean) => void }>(null);
+    useRef<{
+      setIsDropDownActive: (isActive: boolean) => void;
+    }>(null);
   const { t, i18n } = useTranslation('common');
   const onClose = useCallback(() => {
     dropDownRef.current?.setIsDropDownActive(false);
   }, [dropDownRef]);
 
   const changeLocale = useChangeLocale();
-  const services = useTraderServices();
+  const service = useFirstOwnedService();
 
   const onSelectLocale = (locale: string) => {
     changeLocale(locale);
@@ -54,11 +59,11 @@ const ExtraNavigationDropdown: React.FC = () => {
             <Link
               onClick={onClose}
               to={
-                services?.[0]
+                service
                   ? generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-                      serviceId: services[0].serviceId?.toString(),
+                      serviceId: service.serviceId?.toString(),
                     })
-                  : ROUTE_HELP
+                  : ROUTE_BECOME_TRADER
               }
             >
               <NavLink>{t('main-menu.dropdown-link-forTrading')}</NavLink>
