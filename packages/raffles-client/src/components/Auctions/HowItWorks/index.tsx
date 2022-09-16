@@ -23,7 +23,7 @@ const HowItWorks = () => {
         gap={{ xs: 4, md: 6 }}
       >
         <Step>
-          <WalletIcon width={100} height={100} />
+          <WalletIcon width={130} height={130} />
           <StepDetails>
             <TypographyTitle variant='h2' color='neutral100' component='h2'>
               {t('step1')}
@@ -34,7 +34,7 @@ const HowItWorks = () => {
           </StepDetails>
         </Step>
         <Step>
-          <ZigcoinIcon width={100} height={100} />
+          <ZigcoinIcon width={130} height={130} />
           <StepDetails>
             <TypographyTitle variant='h2' color='neutral100' component='h2'>
               {t('step2')}
@@ -45,7 +45,7 @@ const HowItWorks = () => {
           </StepDetails>
         </Step>
         <Step>
-          <BidIcon width={100} height={100} />
+          <BidIcon width={130} height={130} />
           <StepDetails>
             <TypographyTitle variant='h2' color='neutral100' component='h2'>
               {t('step3')}
@@ -56,7 +56,7 @@ const HowItWorks = () => {
           </StepDetails>
         </Step>
         <Step>
-          <TrophyIcon width={100} height={100} />
+          <TrophyIcon width={130} height={130} />
           <StepDetails>
             <TypographyTitle variant='h2' color='neutral100' component='h2'>
               {t('step4')}
