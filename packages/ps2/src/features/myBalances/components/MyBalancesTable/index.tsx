@@ -15,6 +15,7 @@ import { MyBalancesTableDataType } from './types';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { TableHead } from './styles';
 import CenteredLoader from '../../../../components/CenteredLoader';
+import { CoinBalance, CoinDetail } from '../../types';
 
 const initialStateTable = {
   sortBy: [
@@ -100,7 +101,7 @@ const MyBalancesTable = (): JSX.Element => {
     [t],
   );
 
-  const data = Object.entries(balances)
+  const data = Object.entries<CoinBalance & CoinDetail>(balances || {})
     .filter(
       ([symbol, balance]) =>
         symbol.toLowerCase().includes(searchBy.toLowerCase()) ||
