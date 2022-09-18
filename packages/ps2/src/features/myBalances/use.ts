@@ -11,7 +11,7 @@ export const useMyBalances = (): {
   const currentExchange = useActiveExchange();
   const coins = useSelector((state: RootState) => state.myBalances.coins);
   const { isFetching: isLoadingReducedBalances, data: balances } =
-    useReducedBalancesQuery(currentExchange?.exchangeId, {
+    useReducedBalancesQuery(currentExchange?.internalId, {
       skip: !currentExchange,
     });
   const [, { isFetching: isLoadingAllCoins }] = useLazyAllCoinsQuery();
