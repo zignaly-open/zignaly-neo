@@ -33,6 +33,7 @@
       "suspended": "Suspended",
       "disconnected": "Disconnected",
       "owner": "Owner"
-    }
+    },
+    "columns-hideOrShow": "Show/Hide Columns"
   }
 }

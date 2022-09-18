@@ -19,8 +19,8 @@
   "account-selector": {
     "type": {
       "title": "Type:",
-      "futures": "Spot",
-      "spot": "Futures"
+      "futures": "Futures",
+      "spot": "Spot"
     }
   },
   "navigation-menu": {

@@ -1,7 +1,5 @@
 import React, { useCallback, useRef, useState } from "react";
 import { usePagination, useSortBy, useTable } from "react-table";
-
-// Styles
 import {
   ColumnsSelector,
   EmptyMessage,
@@ -18,17 +16,14 @@ import {
 } from "../../styles";
 import { dark } from "../../../../../theme";
 
-// Components
 import Typography from "../../../Typography";
 import CheckBox from "../../../../inputs/CheckBox";
 import IconButton from "../../../../inputs/IconButton";
 
-// Assets
 import { ReactComponent as OptionsDotsIcon } from "../../../../../assets/icons/option-dots-icon.svg";
 import { ReactComponent as SingleChevron } from "assets/icons/chevron-small-icon.svg";
 import { ReactComponent as DoubleChevron } from "assets/icons/double-chevron-small-icon.svg";
 
-// Types
 import { TableBasicProps } from "../../types";
 import {
   FooterContainer,
@@ -51,13 +46,11 @@ export default function PagedWithDataTable<T extends object>({
   initialState = {},
   hasFooter = true,
 }: TableBasicProps<T>) {
-  // Refs
   const tableRef = useRef(null);
 
   // States
   const [hiddenColumns, setHiddenColumns] = useState<string[]>(defaultHiddenColumns || []);
 
-  // Hooks
   // @ts-ignore
   const {
     getTableProps,
@@ -178,6 +171,7 @@ export default function PagedWithDataTable<T extends object>({
       </ColumnsSelector>
     );
   }, [columns, hiddenColumns]);
+
   return (
     <Layout>
       <View ref={tableRef}>
@@ -220,10 +214,6 @@ export default function PagedWithDataTable<T extends object>({
                       <IconButton
                         variant={"flat"}
                         icon={<OptionsDotsIcon color={dark.neutral200} />}
-                        dropDownOptions={{
-                          componentOverflowRef: tableRef,
-                          alignment: "right",
-                        }}
                         renderDropDown={renderColumnsSelector()}
                       />
                     )}
@@ -255,105 +245,105 @@ export default function PagedWithDataTable<T extends object>({
           </tbody>
         </TableView>
         {!data.length && <EmptyMessage>{emptyMessage}</EmptyMessage>}
-        {hasFooter && (
-          <FooterContainer>
-            <Row justifyContent="start">
-              <Typography variant="body1" color="neutral300" weight="regular">
-                Showing
-              </Typography>
-              <Typography variant="body1" color="neutral100">
+      </View>
+      {hasFooter && (
+        <FooterContainer>
+          <Row justifyContent="start">
+            <Typography variant="body1" color="neutral300" weight="regular">
+              Showing
+            </Typography>
+            <Typography variant="body1" color="neutral100">
+              {pageIndex + 1}
+            </Typography>
+            <Typography variant="body1" color="neutral300" weight="regular">
+              out of
+            </Typography>
+            <Typography variant="body1" color="neutral100">
+              {pageOptions.length}
+            </Typography>
+            <Typography variant="body1" color="neutral300" weight="regular">
+              items
+            </Typography>
+          </Row>
+          <Row justifyContent="center">
+            <IconButtonContainer
+              variant="flat"
+              size="xlarge"
+              rotate={true}
+              shrinkWrap={true}
+              icon={<DoubleChevron width={24} height={24} color={dark.neutral300} />}
+              onClick={() => gotoPage(0)}
+              disabled={!canPreviousPage}
+            />
+            <IconButtonContainer
+              variant="flat"
+              size="xlarge"
+              rotate={true}
+              shrinkWrap={true}
+              icon={<SingleChevron width={24} height={24} color={dark.neutral300} />}
+              onClick={() => previousPage()}
+              disabled={!canPreviousPage}
+            />
+            <Typography variant="body1" weight="regular" color="neutral300">
+              Page
+            </Typography>
+            <PageNumberContainer>
+              <Typography variant="h3" color="neutral100">
                 {pageIndex + 1}
               </Typography>
-              <Typography variant="body1" color="neutral300" weight="regular">
-                out of
-              </Typography>
-              <Typography variant="body1" color="neutral100">
-                {pageOptions.length}
-              </Typography>
-              <Typography variant="body1" color="neutral300" weight="regular">
-                items
-              </Typography>
-            </Row>
-            <Row justifyContent="center">
-              <IconButtonContainer
-                variant="flat"
-                size="xlarge"
-                rotate={true}
-                shrinkWrap={true}
-                icon={<DoubleChevron width={24} height={24} color={dark.neutral300} />}
-                onClick={() => gotoPage(0)}
-                disabled={!canPreviousPage}
-              ></IconButtonContainer>
-              <IconButtonContainer
-                variant="flat"
-                size="xlarge"
-                rotate={true}
-                shrinkWrap={true}
-                icon={<SingleChevron width={24} height={24} color={dark.neutral300} />}
-                onClick={() => previousPage()}
-                disabled={!canPreviousPage}
-              ></IconButtonContainer>
-              <Typography variant="body1" weight="regular" color="neutral300">
-                Page
-              </Typography>
-              <PageNumberContainer>
-                <Typography variant="h3" color="neutral100">
-                  {pageIndex + 1}
+            </PageNumberContainer>
+            <Typography variant="body1" weight="regular" color="neutral300">
+              out of
+            </Typography>
+            <Typography variant="body1" color="neutral100" weight="demibold">
+              {pageOptions.length}
+            </Typography>
+            <IconButtonContainer
+              variant="flat"
+              size="xlarge"
+              shrinkWrap={true}
+              onClick={() => nextPage()}
+              disabled={!canNextPage}
+              icon={<SingleChevron width={24} height={24} color={dark.neutral300} />}
+            />
+            <IconButtonContainer
+              variant="flat"
+              size="xlarge"
+              shrinkWrap={true}
+              onClick={() => gotoPage(pageCount - 1)}
+              disabled={!canNextPage}
+              icon={<DoubleChevron width={24} height={24} color={dark.neutral300} />}
+            />
+          </Row>
+          <Row justifyContent="end">
+            {data.length > 10 && (
+              <SelectorContainer>
+                <Typography variant="body1" weight="regular" color="neutral300">
+                  Displaying
                 </Typography>
-              </PageNumberContainer>
-              <Typography variant="body1" weight="regular" color="neutral300">
-                out of
-              </Typography>
-              <Typography variant="body1" color="neutral100" weight="demibold">
-                {pageOptions.length}
-              </Typography>
-              <IconButtonContainer
-                variant="flat"
-                size="xlarge"
-                shrinkWrap={true}
-                onClick={() => nextPage()}
-                disabled={!canNextPage}
-                icon={<SingleChevron width={24} height={24} color={dark.neutral300} />}
-              ></IconButtonContainer>
-              <IconButtonContainer
-                variant="flat"
-                size="xlarge"
-                shrinkWrap={true}
-                onClick={() => gotoPage(pageCount - 1)}
-                disabled={!canNextPage}
-                icon={<DoubleChevron width={24} height={24} color={dark.neutral300} />}
-              ></IconButtonContainer>
-            </Row>
-            <Row justifyContent="end">
-              {data.length > 10 && (
-                <SelectorContainer>
-                  <Typography variant="body1" weight="regular" color="neutral300">
-                    Displaying
-                  </Typography>
-                  <SelectorSizing>
-                    <Selector
-                      options={customOptions}
-                      placeholder={
-                        <Typography variant="h3" color="neutral100">
-                          {pageSize}
-                        </Typography>
-                      }
-                      maxHeight={36}
-                      onChange={(e: { caption: string }) => {
-                        setPageSize(Number(e.caption));
-                      }}
-                    />
-                  </SelectorSizing>
-                  <Typography variant="body1" weight="regular" color="neutral300">
-                    {" "}
-                    items
-                  </Typography>
-                </SelectorContainer>
-              )}
-            </Row>
-          </FooterContainer>
-        )}
-      </View>
+                <SelectorSizing>
+                  <Selector
+                    options={customOptions}
+                    placeholder={
+                      <Typography variant="h3" color="neutral100">
+                        {pageSize}
+                      </Typography>
+                    }
+                    maxHeight={36}
+                    onChange={(e: { caption: string }) => {
+                      setPageSize(Number(e.caption));
+                    }}
+                  />
+                </SelectorSizing>
+                <Typography variant="body1" weight="regular" color="neutral300">
+                  {" "}
+                  items
+                </Typography>
+              </SelectorContainer>
+            )}
+          </Row>
+        </FooterContainer>
+      )}
     </Layout>
   );
 }

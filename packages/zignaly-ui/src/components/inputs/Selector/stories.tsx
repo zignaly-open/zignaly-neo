@@ -1,11 +1,8 @@
-// Dependencies
 import * as React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-// Component
 import Select from "./";
 
-// Assets
 import EthereumIcon from "assets/icons/coins/eth.svg?url";
 import BitcoinIcon from "assets/icons/coins/btc.svg?url";
 import DogecoinIcon from "assets/icons/coins/doge.svg?url";

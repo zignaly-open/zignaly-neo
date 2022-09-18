@@ -1,7 +1,5 @@
-// Dependencies
 import React, { useCallback, useRef, useState } from "react";
 
-// Styled Components
 import { Layout, InputContainer, InputValue, Side, IconContainer, Label } from "./styles";
 import { InputTextProps } from "./types";
 

@@ -1,15 +1,10 @@
-// Dependencies
 import React, { useEffect, useRef } from "react";
 import Jazzicon from "@metamask/jazzicon";
-
-// Styles
 import { sizes, Image, JazzIcon, Layout } from "./styles";
 
-// Types
 import { AvatarSizes, AvatarTypeProps } from "./types";
 
 const Avatar = ({ size = AvatarSizes.MEDIUM, hash, image }: AvatarTypeProps) => {
-  // Refs
   const jazzIconRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {

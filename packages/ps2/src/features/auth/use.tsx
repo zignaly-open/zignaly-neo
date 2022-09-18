@@ -1,5 +1,11 @@
 import { useState } from 'react';
-import { Exchange, LoginPayload, SessionsTypes, UserData } from './types';
+import {
+  Exchange,
+  ExtendedExchange,
+  LoginPayload,
+  SessionsTypes,
+  UserData,
+} from './types';
 import {
   useLazySessionQuery,
   useLazyUserQuery,
@@ -28,6 +34,7 @@ import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import AuthVerifyModal from './components/AuthVerifyModal';
 import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../trader/api';
+import { useLazyAllCoinsQuery } from '../myBalances/api';
 
 const throwBackendErrorInOurFormat = async <T,>(
   promise: Promise<T>,
@@ -155,29 +162,43 @@ export function useChangeLocale(): (locale: string) => void {
   };
 }
 
-export function useActiveExchange():
-  | (Exchange & { image: string })
-  | undefined {
+export const useGetExchangeByInternalId = (): ((
+  internalId?: string,
+) => ExtendedExchange | undefined) => {
   const { user, activeExchangeInternalId } = useSelector(
     (state: RootState) => state.auth,
   );
-  if (!user?.exchanges) return undefined;
-  const exchange =
-    (activeExchangeInternalId &&
-      user.exchanges?.find(
-        (x: Exchange) => x.internalId === activeExchangeInternalId,
-      )) ||
-    user.exchanges[0];
+  return (internalId) => {
+    if (!user?.exchanges) return undefined;
+    const id = internalId || activeExchangeInternalId;
+    const exchange =
+      (id && user.exchanges?.find((x: Exchange) => x.internalId === id)) ||
+      user.exchanges[0];
 
-  return {
-    ...exchange,
-    image: getImageOfAccount(user.exchanges.indexOf(exchange)),
+    return {
+      ...exchange,
+      image: getImageOfAccount(user.exchanges.indexOf(exchange)),
+    };
   };
+};
+
+export function useActiveExchange(): ExtendedExchange | undefined {
+  const getExchange = useGetExchangeByInternalId();
+  return getExchange();
 }
 
 export function useSelectExchange(): (exchangeInternalId: string) => void {
   const dispatch = useDispatch();
+  const activeExchange = useActiveExchange();
+  const getExchangeByInternalId = useGetExchangeByInternalId();
+  const [loadAllCoins] = useLazyAllCoinsQuery();
   return (exchangeInternalId) => {
+    const newSelectedExchange = getExchangeByInternalId(exchangeInternalId);
+    const needsCoinsReFetched =
+      activeExchange?.exchangeType !== newSelectedExchange?.exchangeType;
     dispatch(setActiveExchangeInternalId(exchangeInternalId));
+    if (needsCoinsReFetched) {
+      loadAllCoins(newSelectedExchange?.exchangeType);
+    }
   };
 }

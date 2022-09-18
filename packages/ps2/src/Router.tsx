@@ -7,11 +7,14 @@ import Staking from './views/Staking';
 import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
 import ForgotPassword from './views/Auth/ForgotPassword';
+import MyBalances from './views/MyBalances';
 import Zigpad from './views/Zigpad';
+
 import {
   ROUTE_DASHBOARD,
   ROUTE_FORGOT_PASSWORD,
   ROUTE_LOGIN,
+  ROUTE_MY_BALANCES,
   ROUTE_PROFIT_SHARING,
   ROUTE_SIGNUP,
   ROUTE_STAKING,
@@ -50,6 +53,7 @@ const Router: React.FC = () => (
       <Route path={ROUTE_PROFIT_SHARING} element={<ProfitSharing />} />
       <Route path={ROUTE_STAKING} element={<Staking />} />
       <Route path={ROUTE_ZIGPAD} element={<Zigpad />} />
+      <Route path={ROUTE_MY_BALANCES} element={<MyBalances />} />
     </Route>
 
     <Route path={ROUTE_TRADING_SERVICE}>

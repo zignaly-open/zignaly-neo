@@ -1,8 +1,6 @@
-// Dependencies
 import * as React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-// Component
 import CheckBox from "./";
 
 export default {

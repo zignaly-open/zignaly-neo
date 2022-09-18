@@ -1,10 +1,8 @@
-// Dependencies
 import { LoaderTypes } from "components/display/Loader";
 import Typography from "components/display/Typography";
 import * as React from "react";
 import { ReactElement } from "react";
 
-// Styled Components
 import * as styled from "./styles";
 import { ButtonProps } from "./types";
 

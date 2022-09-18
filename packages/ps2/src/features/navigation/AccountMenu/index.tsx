@@ -12,11 +12,17 @@ import Theme from '@zignaly-open/ui/lib/theme/theme';
 import {
   Avatar,
   Button,
+  DropDown,
   IconButton,
   Typography,
   UserIcon,
 } from '@zignaly-open/ui';
-import { ROUTE_DASHBOARD, ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../routes';
+import {
+  ROUTE_DASHBOARD,
+  ROUTE_LOGIN,
+  ROUTE_SIGNUP,
+  ROUTE_MY_BALANCES,
+} from '../../../routes';
 import { Link } from 'react-router-dom';
 import AccountSelector from '../../auth/components/AccountSelector';
 
@@ -26,11 +32,10 @@ function AccountMenu(): React.ReactElement | null {
   const { t } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
   const activeExchange = useActiveExchange();
-  const dropDownRef =
-    useRef<{ setIsDropDownActive: (isActive: boolean) => void }>(null);
+  const dropDownRef = useRef(null);
 
   const closeDropdown = useCallback(() => {
-    dropDownRef.current?.setIsDropDownActive(false);
+    dropDownRef.current?.closeDropDown();
   }, [dropDownRef]);
 
   if (!isAuthenticated) {
@@ -52,17 +57,15 @@ function AccountMenu(): React.ReactElement | null {
   }
 
   return (
-    <IconButton
-      ref={dropDownRef}
-      variant={'flat'}
-      dropDownOptions={{
-        alignment: 'right',
-        zIndex: 9999,
-        width: '220px',
-      }}
-      icon={<Avatar size={'medium'} image={activeExchange?.image} />}
-      key={'user'}
-      renderDropDown={
+    <DropDown
+      component={
+        <IconButton
+          variant={'flat'}
+          icon={<Avatar size={'medium'} image={activeExchange?.image} />}
+          key={'user'}
+        />
+      }
+      content={
         <>
           <AccountSelector onExchangeSelected={() => closeDropdown()} />
           <DropDownContainer>
@@ -72,7 +75,7 @@ function AccountMenu(): React.ReactElement | null {
                   {t('account-menu.notAuth-dropdown-link-dashboard')}
                 </NavLink>
               </Link>
-              <Link to={ROUTE_DASHBOARD}>
+              <Link to={ROUTE_MY_BALANCES}>
                 <NavLink onClick={closeDropdown}>
                   {t('account-menu.notAuth-dropdown-link-balances')}
                 </NavLink>

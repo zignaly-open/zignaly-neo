@@ -15,12 +15,6 @@ import {
   ROUTE_TRADING_SERVICE_MANAGE,
 } from '../../../routes';
 
-const dropDownOptions = {
-  alignment: 'right' as const,
-  width: '200px',
-  zIndex: 999999,
-};
-
 const ExtraNavigationDropdown: React.FC = () => {
   const theme = useTheme() as Theme;
   const dropDownRef =
@@ -29,7 +23,7 @@ const ExtraNavigationDropdown: React.FC = () => {
     }>(null);
   const { t, i18n } = useTranslation('common');
   const onClose = useCallback(() => {
-    dropDownRef.current?.setIsDropDownActive(false);
+    dropDownRef.current?.closeDropDown();
   }, [dropDownRef]);
 
   const changeLocale = useChangeLocale();
@@ -44,7 +38,6 @@ const ExtraNavigationDropdown: React.FC = () => {
     <IconButton
       ref={dropDownRef}
       variant={'flat'}
-      dropDownOptions={dropDownOptions}
       icon={
         <OptionHorizontalDotsIcon
           width={14}

@@ -1,8 +1,6 @@
-// Dependencies
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-// Components
 import Header from "./";
 import BrandImage from "./components/BrandImage";
 import IconButton from "../../inputs/IconButton";
@@ -41,9 +39,6 @@ Main.args = {
       variant={"secondary"}
       icon={<ThreeDotsIcon />}
       renderDropDown={<div>DropDown Container</div>}
-      dropDownOptions={{
-        position: "static",
-      }}
     />,
   ],
   rightElements: [
@@ -53,10 +48,6 @@ Main.args = {
       variant={"flat"}
       icon={<UserIcon color="#65647E" />}
       renderDropDown={<div>DropDown Container</div>}
-      dropDownOptions={{
-        alignment: "right",
-        position: "static",
-      }}
     />,
   ],
 };

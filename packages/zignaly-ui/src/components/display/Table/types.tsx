@@ -2,7 +2,9 @@ import { ChartsProps } from "../Charts/types";
 import { BalanceSummaryProps } from "./components/BalanceSummary/types";
 import { PercentageIndicatorProps } from "./components/PercentageIndicator/types";
 import { ServiceNameProps } from "./components/ServiceName/types";
-import { Column } from "react-table";
+import { Column, UseSortByColumnOptions } from "react-table";
+
+type ExtendedColumn<T extends object> = Column<T> & UseSortByColumnOptions<T>;
 
 export const tableTypes = {
   basic: "basic",
@@ -11,7 +13,7 @@ export const tableTypes = {
 };
 
 export interface TableBasicProps<T extends object> {
-  columns: Array<Column<T>>;
+  columns: Array<ExtendedColumn<T>>;
   data: T[];
   defaultHiddenColumns?: string[];
   onColumnHidden?: (column: string, isHidden: boolean) => void;

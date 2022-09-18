@@ -1,8 +1,6 @@
-// Dependencies
 import * as React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-// Component
 import Loader, { LoaderTypes } from "./";
 
 export default {

@@ -1,3 +1,4 @@
+// TODO: wtf is this
 export const isPositive = (number: number) => 1 / (number * 0) === 1 / 0;
 
 export const formatBalanceUnits = (value: any) => {
@@ -14,7 +15,7 @@ export const formatBalanceUnits = (value: any) => {
 };
 
 /**
- * @description THIS FUNCTION ONLY TEST use in real cases customSort
+ * @description THIS FUNCTION ONLY TEST use in real cases sortByValue
  *
  * @param propParamNameForValue Prop from which to take the value to order
  * @param useProp if you do not use prop you sort by value
@@ -46,21 +47,22 @@ export const sortByPointDecimal =
  * @param b value to compare
  * @param isNecessaryParseFloat if is necessary parse
  */
-export const customSort = (
+export const sortByValue = (
   a: string | number,
   b: string | number,
   isNecessaryParseFloat = false,
 ) => {
-  /* eslint-disable no-param-reassign */
+  let number1 = a,
+    number2 = b;
   if (isNecessaryParseFloat) {
-    if (typeof a === "string") {
-      a = parseFloat(a);
+    if (typeof number1 === "string") {
+      number1 = parseFloat(number1);
     }
-    if (typeof b === "string") {
-      b = parseFloat(b);
+    if (typeof number2 === "string") {
+      number2 = parseFloat(number2);
     }
   }
-  if (a > b) return 1;
-  if (a < b) return -1;
-  return 0;
+  if (number2 > number2) return 1;
+  if (number1 < number2) return -1;
+  return +number2 - +number1;
 };

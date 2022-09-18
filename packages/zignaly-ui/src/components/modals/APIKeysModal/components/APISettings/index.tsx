@@ -1,7 +1,5 @@
-// Dependencies
 import React, { useState } from "react";
 
-// Components
 import Typography from "components/display/Typography";
 import CheckBox from "components/inputs/CheckBox";
 import InputText from "components/inputs/InputText";
@@ -9,7 +7,6 @@ import { Controller, useFormContext } from "react-hook-form";
 import { Gap } from "utils/gap";
 import { CheckBoxContainer, Layout } from "./styles";
 
-// Types
 import { APISettingsProps } from "./types";
 
 const APISettings = ({

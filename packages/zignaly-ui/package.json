@@ -67,7 +67,10 @@
     "react-use": "17.3.2",
     "styled-components": "5.3.5",
     "victory": "36.4.0",
-    "yup": "0.32.11"
+    "yup": "0.32.11",
+    "@mui/lab": "^5.0.0-alpha.84",
+    "@mui/material": "5.8.7",
+    "@mui/system": "5.8.7"
   },
   "devDependencies": {
     "@babel/core": "7.17.9",

@@ -1,4 +1,3 @@
-// Dependencies
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 import Typography from "components/display/Typography";
