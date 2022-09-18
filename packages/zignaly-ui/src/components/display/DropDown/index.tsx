@@ -20,29 +20,31 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
   }));
 
   return (
-    <>
-      {component}
-      <Popover
-        id="popover-menu"
-        anchorEl={anchorEl}
-        open={open}
-        PaperProps={{
-          sx: {
-            backgroundColor: "#12152c",
-            whiteSpace: "nowrap",
-            color: "#fff",
-            boxShadow: "0 4px 6px -2px #00000061",
-            borderRadius: "4px 0 4px 4px",
-          },
-        }}
-        onClose={handleClose}
-        anchorPosition={anchorPosition}
-        transformOrigin={transformOrigin}
-        anchorOrigin={anchorOrigin}
-      >
-        {content}
-      </Popover>
-    </>
+    <div>
+      <div>{component}</div>
+      {content && (
+        <Popover
+          id="popover-menu"
+          anchorEl={anchorEl}
+          open={open}
+          PaperProps={{
+            sx: {
+              backgroundColor: "#12152c",
+              whiteSpace: "nowrap",
+              color: "#fff",
+              boxShadow: "0 4px 6px -2px #00000061",
+              borderRadius: "4px 0 4px 4px",
+            },
+          }}
+          onClose={handleClose}
+          anchorPosition={anchorPosition}
+          transformOrigin={transformOrigin}
+          anchorOrigin={anchorOrigin}
+        >
+          {content}
+        </Popover>
+      )}
+    </div>
   );
 };
 

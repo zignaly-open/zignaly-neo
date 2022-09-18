@@ -1,4 +1,8 @@
-import { IconButton, OptionHorizontalDotsIcon } from '@zignaly-open/ui';
+import {
+  IconButton,
+  DropDown,
+  OptionHorizontalDotsIcon,
+} from '@zignaly-open/ui';
 import React, { useCallback, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
@@ -11,11 +15,13 @@ import { useChangeLocale } from '../../auth/use';
 import { useTraderServices } from '../../trader/use';
 import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_HELP, ROUTE_TRADING_SERVICE_MANAGE } from '../../../routes';
+import { DropDownHandle } from '@zignaly-open/ui/lib/components/display/DropDown/types';
 
 const ExtraNavigationDropdown: React.FC = () => {
   const theme = useTheme() as Theme;
-  const dropDownRef = useRef(null);
+  const dropDownRef: React.Ref<DropDownHandle> = useRef(null);
   const { t, i18n } = useTranslation('common');
+
   const onClose = useCallback(() => {
     dropDownRef.current?.closeDropDown();
   }, [dropDownRef]);
@@ -29,18 +35,22 @@ const ExtraNavigationDropdown: React.FC = () => {
   };
 
   return (
-    <IconButton
+    <DropDown
       ref={dropDownRef}
-      variant={'flat'}
-      icon={
-        <OptionHorizontalDotsIcon
-          width={14}
-          height={4}
-          color={theme.neutral300}
+      component={
+        <IconButton
+          variant={'flat'}
+          icon={
+            <OptionHorizontalDotsIcon
+              width={14}
+              height={4}
+              color={theme.neutral300}
+            />
+          }
+          key={'user'}
         />
       }
-      key={'user'}
-      renderDropDown={
+      content={
         <DropDownContainer>
           <NavList>
             <Link

@@ -12,6 +12,7 @@ import Theme from '@zignaly-open/ui/lib/theme/theme';
 import {
   Avatar,
   Button,
+  DropDown,
   IconButton,
   Typography,
   UserIcon,
@@ -56,12 +57,15 @@ function AccountMenu(): React.ReactElement | null {
   }
 
   return (
-    <IconButton
-      ref={dropDownRef}
-      variant={'flat'}
-      icon={<Avatar size={'medium'} image={activeExchange?.image} />}
-      key={'user'}
-      renderDropDown={
+    <DropDown
+      component={
+        <IconButton
+          variant={'flat'}
+          icon={<Avatar size={'medium'} image={activeExchange?.image} />}
+          key={'user'}
+        />
+      }
+      content={
         <>
           <AccountSelector onExchangeSelected={() => closeDropdown()} />
           <DropDownContainer>
