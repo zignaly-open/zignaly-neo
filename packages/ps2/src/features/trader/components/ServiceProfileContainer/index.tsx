@@ -1,14 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
-import { Loader } from '@zignaly-open/ui';
 import { useIsServiceOwner, useServiceDetails } from '../../use';
-import { Center } from '../ServiceManagementsContainer/styles';
 import ComingSoon from '../../../../components/ComingSoon';
 import { useIsAuthenticated } from '../../../auth/use';
 import { TraderServiceAccessLevel } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_DASHBOARD, ROUTE_PROFIT_SHARING } from '../../../../routes';
+import CenteredLoader from '../../../../components/CenteredLoader';
 
 const ServiceProfileContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -33,22 +32,7 @@ const ServiceProfileContainer: React.FC<{ serviceId: string }> = ({
     // Do nothing
   }
 
-  return (
-    <>
-      {isLoadingService ? (
-        <Center>
-          <Loader
-            color={'#fff'}
-            width={'40px'}
-            height={'40px'}
-            ariaLabel={t('investors.loading-arialLabel')}
-          />
-        </Center>
-      ) : (
-        <ComingSoon />
-      )}
-    </>
-  );
+  return isLoadingService ? <CenteredLoader /> : <ComingSoon />;
 };
 
 export default ServiceProfileContainer;

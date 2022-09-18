@@ -6,7 +6,6 @@ import {
   ArrowRightIcon,
   Button,
   EditPenIcon,
-  Loader,
   ProgressSlider,
   TextButton,
   Typography,
@@ -15,7 +14,6 @@ import Theme from '@zignaly-open/ui/lib/theme/theme';
 import {
   BottomContainer,
   Box,
-  Center,
   Circle,
   HorizontalConnection,
   InlinePriceLabel,
@@ -39,6 +37,7 @@ import {
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import EditMinimumBalanceModal from '../EditMinimumBalanceModal';
 import TransferFundsModal from '../TransferFundsModal';
+import CenteredLoader from '../../../../components/CenteredLoader';
 
 function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   const theme = useTheme() as Theme;
@@ -73,14 +72,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   return (
     <Layout>
       {isLoadingManagement || isLoadingService || isLoadingBalance ? (
-        <Center>
-          <Loader
-            color={'#fff'}
-            width={'40px'}
-            height={'40px'}
-            ariaLabel={'Loading Profile'}
-          />
-        </Center>
+        <CenteredLoader />
       ) : (
         <>
           <Box>

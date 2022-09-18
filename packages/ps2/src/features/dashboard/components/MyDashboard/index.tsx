@@ -1,6 +1,5 @@
 import {
   AreaChart,
-  Loader,
   PercentageIndicator,
   PriceLabel,
   ServiceName,
@@ -8,7 +7,7 @@ import {
   Typography,
 } from '@zignaly-open/ui';
 import React, { useCallback, useMemo } from 'react';
-import { Center, Heading, Inline, Layout } from './styles';
+import { Heading, Inline, Layout } from './styles';
 import { useTranslation } from 'react-i18next';
 import { useCoins, useInvestments, useSetSelectedInvestment } from '../../use';
 import BigNumber from 'bignumber.js';
@@ -22,6 +21,7 @@ import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import EditInvestmentModal from '../EditInvestmentModal';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { DashboardTableDataType } from './types';
+import CenteredLoader from '../../../../components/CenteredLoader';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -228,14 +228,7 @@ const MyDashboard: React.FC = () => {
         </Typography>
       </Heading>
       {isLoading && !services ? (
-        <Center>
-          <Loader
-            color={'#fff'}
-            width={'40px'}
-            height={'40px'}
-            ariaLabel={t('my-dashboard.loading-arialLabel')}
-          />
-        </Center>
+        <CenteredLoader />
       ) : (
         <Table
           columns={tableColumns}

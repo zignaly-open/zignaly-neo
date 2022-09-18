@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
-import { Layout, Center, InvestorCounts } from './styles';
+import { Layout, InvestorCounts } from './styles';
 import {
-  Loader,
   UserIcon,
   Typography,
   Table,
@@ -21,6 +20,7 @@ import {
 import { Investor } from '../../types';
 import ConnectionStateLabel from '../ConnectionStateLabel';
 import { YesNo } from './atoms';
+import CenteredLoader from '../../../../components/CenteredLoader';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -127,14 +127,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       )}
 
       {isLoadingInvestors || isLoadingService || isLoadingManagement ? (
-        <Center>
-          <Loader
-            color={'#fff'}
-            width={'40px'}
-            height={'40px'}
-            ariaLabel={t('investors.loading-arialLabel')}
-          />
-        </Center>
+        <CenteredLoader />
       ) : (
         <Table
           type={'pagedWithData'}

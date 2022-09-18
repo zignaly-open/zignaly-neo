@@ -4,12 +4,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Grid } from '@mui/material';
 import { WithdrawActions } from '../../styles';
-import {
-  Button,
-  InputAmountAdvanced,
-  Loader,
-  SliderInput,
-} from '@zignaly-open/ui';
+import { Button, InputAmountAdvanced, SliderInput } from '@zignaly-open/ui';
 import BigNumber from 'bignumber.js';
 import {
   useInvestmentDetails,
@@ -20,7 +15,7 @@ import { EditInvestmentValidation } from './validations';
 import { WithdrawFormData } from './types';
 import { ChangeViewFn, EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import { Center } from '../../../../../trader/components/InvestorTable/styles';
+import CenteredLoader from '../../../../../../components/CenteredLoader';
 
 const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   const { isLoading, withdraw } = useWithdrawInvestment();
@@ -84,16 +79,7 @@ const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   sliderValue = Math.min(sliderValue, 100);
 
   if (isLoadingDetails) {
-    return (
-      <Center>
-        <Loader
-          color={'#fff'}
-          width={'40px'}
-          height={'40px'}
-          ariaLabel={t('investors.loading-arialLabel')}
-        />
-      </Center>
-    );
+    return <CenteredLoader />;
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

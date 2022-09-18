@@ -8,7 +8,6 @@ import {
   PriceLabel,
   CoinLabel,
   sortByValue,
-  Loader,
   ExpandableInput,
   SearchIcon,
 } from '@zignaly-open/ui';
@@ -18,7 +17,7 @@ import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types'
 import { TableHead } from './styles';
 import _ from 'lodash';
 import { Coin } from '../../../dashboard/types';
-import { Center } from '../../../dashboard/components/MyDashboard/styles';
+import CenteredLoader from '../../../../components/CenteredLoader';
 
 const MyBalancesTable = (): JSX.Element => {
   const theme = useTheme() as Theme;
@@ -162,14 +161,7 @@ const MyBalancesTable = (): JSX.Element => {
   }, []);
 
   return isLoadingAllCoins || isLoadingReducedBalances ? (
-    <Center>
-      <Loader
-        color={'#fff'}
-        width={'40px'}
-        height={'40px'}
-        ariaLabel={t('my-dashboard.loading-arialLabel')}
-      />
-    </Center>
+    <CenteredLoader />
   ) : (
     <>
       <TableHead>
