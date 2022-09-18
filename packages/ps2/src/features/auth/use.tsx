@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Exchange,
   ExtendedExchange,
@@ -172,8 +172,8 @@ export const useGetExchangeByInternalId = (): ((
     if (!user?.exchanges) return undefined;
     const id = internalId || activeExchangeInternalId;
     const exchange =
-      (id && user.exchanges?.find((x: Exchange) => x.internalId === id)) ||
-      user.exchanges[0];
+      id && user.exchanges?.find((x: Exchange) => x.internalId === id);
+    if (!exchange) return undefined;
 
     return {
       ...exchange,
@@ -183,7 +183,18 @@ export const useGetExchangeByInternalId = (): ((
 };
 
 export function useActiveExchange(): ExtendedExchange | undefined {
+  const user = useSelector((state: RootState) => state.auth)?.user as UserData;
   const getExchange = useGetExchangeByInternalId();
+  const dispatch = useDispatch();
+  const [loadAllCoins] = useLazyAllCoinsQuery();
+  const activeExchange = getExchange();
+  useEffect(() => {
+    const defaultExchange = user?.exchanges?.[0];
+    if (!activeExchange && defaultExchange) {
+      dispatch(setActiveExchangeInternalId(defaultExchange.internalId));
+      loadAllCoins(defaultExchange?.exchangeType);
+    }
+  }, [activeExchange]);
   return getExchange();
 }
 
