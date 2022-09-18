@@ -32,13 +32,11 @@ export default function BasicTable<T extends object>({
   emptyMessage,
   hasFooter = false,
 }: TableBasicProps<T>) {
-  // Refs
   const tableRef = useRef(null);
 
   // States
   const [hiddenColumns, setHiddenColumns] = useState<string[]>(defaultHiddenColumns || []);
 
-  // Hooks
   const {
     getTableProps,
     getTableBodyProps,

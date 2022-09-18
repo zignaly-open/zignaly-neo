@@ -1,7 +1,4 @@
-// Dependencies
 import React from "react";
-
-// Styles
 import * as styled from "./styles";
 import { componentByVariants, TypographyProps } from "./types";
 

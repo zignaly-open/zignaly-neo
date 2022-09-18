@@ -1,4 +1,3 @@
-// Dependencies
 import React from "react";
 import styled from "styled-components";
 import { styledIf } from "utils/styled";

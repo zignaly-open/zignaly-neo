@@ -4,6 +4,7 @@ export const GET_CURRENT_USER = gql`
   query me {
     me {
       id
+      email
       username
       discordName
       onboardingCompletedAt
@@ -31,10 +32,19 @@ export const AUTHENTICATE_METAMASK = gql`
 `;
 
 export const CHANGE_PROFILE = gql`
-  mutation editProfile($username: String, $discordName: String) {
-    updateProfile(username: $username, discordName: $discordName) {
+  mutation editProfile(
+    $username: String
+    $email: String
+    $discordName: String
+  ) {
+    updateProfile(
+      username: $username
+      email: $email
+      discordName: $discordName
+    ) {
       id
       username
+      email
       discordName
     }
   }

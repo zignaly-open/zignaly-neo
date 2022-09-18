@@ -31,7 +31,7 @@ export const typeDef = gql`
     title: String!
     imageUrl: String
     status: String
-    comingSoon: Boolean
+    startDate: Date
     website: String
     discord: String
     telegram: String

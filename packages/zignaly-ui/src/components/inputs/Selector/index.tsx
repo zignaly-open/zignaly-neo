@@ -1,9 +1,7 @@
-// Dependencies
 import * as React from "react";
 import { ReactElement, useState, useRef, useCallback } from "react";
 import { useClickAway } from "react-use";
 
-// Styled Components
 import {
   Layout,
   Item,
@@ -19,10 +17,8 @@ import {
   ItemContainer,
 } from "./styles";
 
-// Assets
 import { ReactComponent as Arrow } from "assets/icons/caret-down-icon.svg";
 
-// Types
 import { OptionItem, SelectProps, SelectSizes } from "./types";
 import { dark } from "theme";
 import Typography from "components/display/Typography";
@@ -47,7 +43,6 @@ function Select({
   // Ref
   const selectorRef = useRef(null);
 
-  // Hooks
   const [isActiveMenu, setMenuActive] = useState(isMenuActive);
 
   /**

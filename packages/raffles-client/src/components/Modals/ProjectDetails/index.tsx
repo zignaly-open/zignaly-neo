@@ -5,9 +5,9 @@ import { Gap } from '../ConnectWallet/styles';
 import DialogContainer from '../DialogContainer';
 import { Column } from './styles';
 import { ProjectDetailsModalProps } from './types';
-import { ReactComponent as Discord } from '../../../assets/icons/discord-logo.svg';
-import { ReactComponent as Telegram } from '../../../assets/icons/telegram-logo.svg';
-import { ReactComponent as Twitter } from '../../../assets/icons/twitter-logo.svg';
+import { ReactComponent as Discord } from '../../../assets/icons/discord.svg';
+import { ReactComponent as Telegram } from '../../../assets/icons/telegram.svg';
+import { ReactComponent as Twitter } from '../../../assets/icons/twitter.svg';
 import ReactMarkdown from 'react-markdown';
 
 import { Box } from '@mui/system';
@@ -41,7 +41,7 @@ const ProjectDetailsModal = ({
         </Typography>
         <Box gap={1.1} display={'flex'} flexDirection='row'>
           {twitter && (
-            <a href={twitter} target='_blank' rel='noopener noreferrer'>
+            <a href={discord} target='_blank' rel='noopener noreferrer'>
               <Twitter />
             </a>
           )}
@@ -51,7 +51,7 @@ const ProjectDetailsModal = ({
             </a>
           )}
           {telegram && (
-            <a href={telegram} target='_blank' rel='noopener noreferrer'>
+            <a href={discord} target='_blank' rel='noopener noreferrer'>
               <Telegram />
             </a>
           )}

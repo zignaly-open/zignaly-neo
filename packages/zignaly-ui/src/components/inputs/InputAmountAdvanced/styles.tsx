@@ -127,6 +127,7 @@ export const Layout = styled.div`
 
 export const Unit = styled.div<{ widthCharacters: number }>`
   position: absolute;
+  pointer-events: none;
   z-index: 1;
   left: calc(20px + 32px + 13.31px + 13.31px * ${({ widthCharacters }) => widthCharacters});
 `;

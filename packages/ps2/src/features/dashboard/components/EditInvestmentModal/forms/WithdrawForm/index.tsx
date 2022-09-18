@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Grid } from '@mui/material';
 import { WithdrawActions } from '../../styles';
-import { Button, InputAmountAdvanced, SliderInput } from '@zignaly-open/ui';
+import {
+  Button,
+  InputAmountAdvanced,
+  Loader,
+  SliderInput,
+} from '@zignaly-open/ui';
 import BigNumber from 'bignumber.js';
 import {
-  useCurrentBalance,
+  useInvestmentDetails,
   useSelectedInvestment,
   useWithdrawInvestment,
 } from '../../../../use';
@@ -15,11 +20,24 @@ import { EditInvestmentValidation } from './validations';
 import { WithdrawFormData } from './types';
 import { ChangeViewFn, EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
+import { Center } from '../../../../../trader/components/InvestorTable/styles';
 
 const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
-  const coin = useCurrentBalance();
   const { isLoading, withdraw } = useWithdrawInvestment();
-  const { serviceId } = useSelectedInvestment();
+  const { serviceId, ssc } = useSelectedInvestment();
+  const { isLoading: isLoadingDetails, data: service } =
+    useInvestmentDetails(serviceId);
+
+  const coin = useMemo(
+    () => ({
+      id: ssc,
+      balance: new BigNumber(service.invested)
+        .plus(new BigNumber(service.pending))
+        .toString(),
+    }),
+    [service],
+  );
+
   const { t } = useTranslation('withdraw');
   const toast = useToast();
   const {
@@ -65,6 +83,18 @@ const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   if (isNaN(sliderValue)) sliderValue = 0;
   sliderValue = Math.min(sliderValue, 100);
 
+  if (isLoadingDetails) {
+    return (
+      <Center>
+        <Loader
+          color={'#fff'}
+          width={'40px'}
+          height={'40px'}
+          ariaLabel={t('investors.loading-arialLabel')}
+        />
+      </Center>
+    );
+  }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Grid container spacing={5}>

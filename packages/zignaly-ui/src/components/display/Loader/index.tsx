@@ -1,8 +1,6 @@
-// Dependencies
 import * as React from "react";
 import { ReactElement } from "react";
 
-// Types
 import { LoaderTypes, LoaderProps, componentsByType } from "./types";
 
 function Loader({

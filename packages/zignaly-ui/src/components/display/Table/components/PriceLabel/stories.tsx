@@ -1,8 +1,6 @@
-// Dependencies
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-// Components
 import PriceLabel from "./index";
 
 export default {

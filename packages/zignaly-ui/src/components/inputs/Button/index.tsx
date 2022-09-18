@@ -1,12 +1,9 @@
-// Dependencies
 import { LoaderTypes } from "components/display/Loader";
 import * as React from "react";
 import { ReactElement, useMemo } from "react";
 
-// Styled Components
 import * as styled from "./styles";
 
-// Types
 import { ButtonProps } from "./types";
 
 function Button({

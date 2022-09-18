@@ -1,4 +1,4 @@
-// Dependencies
+// TODO: wtf is this
 export const isPositive = (number: number) => 1 / (number * 0) === 1 / 0;
 
 export const formatBalanceUnits = (value: any) => {

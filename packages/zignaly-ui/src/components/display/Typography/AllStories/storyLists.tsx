@@ -1,8 +1,6 @@
-// Dependencies
 import React from "react";
 import Typography from "..";
 
-// Types
 import { componentByVariants, weightByType } from "../types";
 import { Layout, StoryList } from "./styles";
 

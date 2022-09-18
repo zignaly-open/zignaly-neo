@@ -1,8 +1,6 @@
-// Dependencies
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
-// Assets
 import { ReactComponent as CheckIcon } from "assets/icons/check-icon.svg";
 import { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
 import { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";

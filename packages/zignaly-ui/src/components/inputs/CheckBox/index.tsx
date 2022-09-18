@@ -1,10 +1,7 @@
-// Dependencies
 import React, { useCallback, useRef, useState } from "react";
 
-// Styled Components
 import { Layout, Box, Label, Icon } from "./styles";
 
-// Types
 import { CheckBoxProps } from "./types";
 
 function CheckBox({

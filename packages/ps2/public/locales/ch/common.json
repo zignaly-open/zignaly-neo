@@ -1,0 +1,39 @@
+{
+  "yes": "CH-Yëŝ",
+  "no": "CH-Ńö",
+  "coming-soon": {
+    "title": "CH-Ĉöṁïńĝ Ŝööń",
+    "description": "CH-Ṫĥïŝ ŝëĉṫïöń ïŝ üńḋëѓ ḋëvëlöṗṁëńṫ, yöü wïll ŝëë ïṫ áváïláblë áṫ á láṫëѓ ḋáṫë."
+  },
+  "main-menu": {
+    "dropdown-link-forTrading": "CH-Ḟöѓ Ṫѓáḋïńĝ Ŝëѓvïĉëŝ",
+    "dropdown-link-helpDocs": "CH-Ĥëlṗ Ḋöĉŝ"
+  },
+  "account-menu": {
+    "isAuth-button-logIn": "CH-Löĝ ïń",
+    "isAuth-button-signUp": "CH-ŜÏĜŃ ÜṖ",
+    "notAuth-dropdown-link-dashboard": "CH-Ṁy Ḋáŝĥböáѓḋ",
+    "notAuth-dropdown-link-balances": "CH-Ṁy Báláńĉëŝ",
+    "notAuth-button-logOut": "CH-Löĝöüṫ"
+  },
+  "account-selector": {
+    "type": {
+      "title": "CH-Ṫyṗë:",
+      "futures": "CH-Ŝṗöṫ",
+      "spot": "CH-Ḟüṫüѓëŝ"
+    }
+  },
+  "navigation-menu": {
+    "profit-sharing": "CH-Ṗѓöḟïṫ Ŝĥáѓïńĝ",
+    "staking": "CH-Ŝṫákïńĝ",
+    "zigpad": "CH-ŽÏĜṖáḋ"
+  },
+  "amount": "CH-Áṁöüńṫ",
+  "new-version": "CH-Ńëw vëѓŝïöń, ĉlïĉk ṁë ṫö üṗḋáṫë",
+  "validation": {
+    "insufficient-amount": "CH-Ïńŝüḟḟïĉïëńṫ ḟüńḋŝ",
+    "invalid-value": "CH-Ïńválïḋ válüë",
+    "negative-amount": "CH-Ŝĥöülḋ bë >= 0",
+    "invalid-amount": "CH-Yöü ṁüŝṫ ïńḋïĉáṫë áń áṁöüńṫ"
+  }
+}

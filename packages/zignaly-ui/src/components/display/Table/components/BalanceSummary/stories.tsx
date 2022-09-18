@@ -1,4 +1,3 @@
-// Dependencies
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { BalanceSummary } from ".";
