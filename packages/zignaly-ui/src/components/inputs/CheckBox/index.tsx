@@ -9,7 +9,7 @@ function CheckBox({
   value,
   label,
   disabled = false,
-  onChange = () => null,
+  onChange,
 }: CheckBoxProps) {
   const isControlled = useRef(value !== undefined);
   const [internalValue, setInternalValue] = useState(defaultValue);
@@ -23,7 +23,7 @@ function CheckBox({
     if (!disabled) {
       const newValue = !isChecked;
       setInternalValue(newValue);
-      onChange(newValue);
+      onChange?.(newValue);
     }
   }, [disabled, isChecked]);
 
