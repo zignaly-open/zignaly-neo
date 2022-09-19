@@ -2,12 +2,13 @@ import { Box, useMediaQuery } from '@mui/material';
 import { useEthers, useTokenBalance } from '@usedapp/core';
 import useContract from 'hooks/useContract';
 import React, { useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import theme from 'theme';
 import {
   Button,
   InputAmount,
   Loader,
+  TextButton,
   Typography,
   ZignalyIcon,
 } from '@zignaly-open/ui';
@@ -74,8 +75,15 @@ const TransferZigModal = (props: TransferZigModalProps) => {
     >
       {balance !== undefined ? (
         <Container>
-          <Typography variant={'body1'} color='neutral200' weight='regular'>
-            {t('subtitle')}
+          <Typography color='neutral200'>{t('subtitle')}</Typography>
+          <Typography color='neutral200'>
+            <Trans i18nKey='buy-info' t={t}>
+              <TextButton
+                href='https://help.zignaly.com/en/articles/6564060-transfer-your-zig-coin-to-polygon'
+                caption='this article.'
+                variant='body1'
+              />
+            </Trans>
           </Typography>
           <Gap gap={15} />
           <InputContainer width={matchesSmall ? 350 : null}>
