@@ -30,7 +30,3 @@ export type IconButtonProps = {
     active: string;
   };
 };
-
-export type IconButtonHandle = {
-  closeDropDown?: () => void;
-};

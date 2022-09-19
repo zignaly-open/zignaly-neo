@@ -1,6 +1,7 @@
 import Popover from "@mui/material/Popover";
 import React, { useImperativeHandle } from "react";
 import { DropDownProps, DropDownHandle } from "./types";
+import { Component } from "./styles";
 
 const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => JSX.Element = (
   { component, content, anchorOrigin, anchorPosition, transformOrigin }: DropDownProps,
@@ -8,6 +9,14 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
 ) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  const handleToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
+    if (open) {
+      setAnchorEl(null);
+    } else {
+      setAnchorEl(event.currentTarget);
+    }
+  };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -20,8 +29,8 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
   }));
 
   return (
-    <div>
-      <div>{component}</div>
+    <>
+      <Component onClick={handleToggle}>{component}</Component>
       {content && (
         <Popover
           id="popover-menu"
@@ -34,6 +43,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
               color: "#fff",
               boxShadow: "0 4px 6px -2px #00000061",
               borderRadius: "4px 0 4px 4px",
+              overflow: "hidden",
             },
           }}
           onClose={handleClose}
@@ -44,7 +54,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
           {content}
         </Popover>
       )}
-    </div>
+    </>
   );
 };
 

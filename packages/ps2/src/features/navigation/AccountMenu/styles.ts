@@ -32,3 +32,7 @@ export const LoginButton = styled.span`
     }
   `}
 `;
+
+export const AccountDropDown = styled.div`
+  min-width: 220px;
+`;

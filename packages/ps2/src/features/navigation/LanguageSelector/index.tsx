@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useTheme } from 'styled-components';
-import { Typography } from '@zignaly-open/ui';
+import { DropDown, Typography } from '@zignaly-open/ui';
 import {
-  Layout,
   Field,
   Button,
   Container,
@@ -21,8 +20,6 @@ function LanguageSelector({
   selectedLocale,
   onSelectLocale,
 }: LanguageSelectorProps) {
-  const [isExpanded, setIsExpanded] = useState(false);
-
   const theme = useTheme() as Theme;
 
   const languageMap = supportedLocales
@@ -30,37 +27,22 @@ function LanguageSelector({
     : Object.values(LocalizationLanguages);
 
   const handleSelectLanguage = (locale: string) => {
-    setIsExpanded(false);
     onSelectLocale(locale);
   };
 
   if (languageMap.length === 1) return null;
 
   return (
-    <Layout isActive={isExpanded}>
-      <Button
-        isMenu={languageMap.length > 1}
-        onClick={() => setIsExpanded((x) => !x)}
-      >
-        <Field>
-          <GlobeLanguagesStyled
-            color={theme.neutral300}
-            width={'26px'}
-            height={'26px'}
-          />
-          <LabelButton variant={'body1'} color={'neutral400'}>
-            {LocalizationLanguages[selectedLocale?.split('_')[0]]?.label}
-          </LabelButton>
-        </Field>
-        {languageMap.length > 1 && (
-          <ArrowBottomIconStyled
-            color={theme.neutral300}
-            width={'22px'}
-            height={'22px'}
-          />
-        )}
-      </Button>
-      {isExpanded && (
+    <DropDown
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'center',
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'center',
+      }}
+      content={
         <Container>
           {languageMap.map((language) => (
             <Item
@@ -80,8 +62,29 @@ function LanguageSelector({
             </Item>
           ))}
         </Container>
-      )}
-    </Layout>
+      }
+      component={
+        <Button isMenu={languageMap.length > 1}>
+          <Field>
+            <GlobeLanguagesStyled
+              color={theme.neutral300}
+              width={'26px'}
+              height={'26px'}
+            />
+            <LabelButton variant={'body1'} color={'neutral400'}>
+              {LocalizationLanguages[selectedLocale?.split('_')[0]]?.label}
+            </LabelButton>
+          </Field>
+          {languageMap.length > 1 && (
+            <ArrowBottomIconStyled
+              color={theme.neutral300}
+              width={'22px'}
+              height={'22px'}
+            />
+          )}
+        </Button>
+      }
+    />
   );
 }
 

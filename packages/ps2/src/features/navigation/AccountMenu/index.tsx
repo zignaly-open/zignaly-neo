@@ -1,6 +1,6 @@
 import React, { useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavList, LoginButton } from './styles';
+import { NavList, LoginButton, AccountDropDown } from './styles';
 import { DropDownContainer, NavLink } from '../ExtraNavigationDropdown/styles';
 import { useTheme } from 'styled-components';
 import {
@@ -25,6 +25,7 @@ import {
 } from '../../../routes';
 import { Link } from 'react-router-dom';
 import AccountSelector from '../../auth/components/AccountSelector';
+import { DropDownHandle } from '@zignaly-open/ui/lib/components/display/DropDown/types';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme() as Theme;
@@ -32,7 +33,7 @@ function AccountMenu(): React.ReactElement | null {
   const { t } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
   const activeExchange = useActiveExchange();
-  const dropDownRef = useRef(null);
+  const dropDownRef = useRef<DropDownHandle>(null);
 
   const closeDropdown = useCallback(() => {
     dropDownRef.current?.closeDropDown();
@@ -58,6 +59,15 @@ function AccountMenu(): React.ReactElement | null {
 
   return (
     <DropDown
+      ref={dropDownRef}
+      anchorOrigin={{
+        vertical: 'bottom',
+        horizontal: 'right',
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
+      }}
       component={
         <IconButton
           variant={'flat'}
@@ -66,7 +76,7 @@ function AccountMenu(): React.ReactElement | null {
         />
       }
       content={
-        <>
+        <AccountDropDown>
           <AccountSelector onExchangeSelected={() => closeDropdown()} />
           <DropDownContainer>
             <NavList>
@@ -88,7 +98,7 @@ function AccountMenu(): React.ReactElement | null {
               />
             </NavList>
           </DropDownContainer>
-        </>
+        </AccountDropDown>
       }
     />
   );

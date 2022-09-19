@@ -62,10 +62,6 @@ const AccountSelector: React.FC = () => {
                 vertical: 'bottom',
                 horizontal: 'left',
               }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
               component={
                 <IconButton
                   variant={'secondary'}
