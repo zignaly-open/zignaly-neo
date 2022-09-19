@@ -17,6 +17,13 @@ const Footer: React.FC = () => {
       <FooterTop />
       <TopNav>
         <a
+          href='https://help.zignaly.com/en/articles/6555802-zigbids-step-by-step-guide'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          {t('how_it_works')}
+        </a>
+        <a
           href='https://help.zignaly.com/en/articles/6564326-faqs-and-troubleshooting-tips-for-zigbids'
           target='_blank'
           rel='noopener noreferrer'
