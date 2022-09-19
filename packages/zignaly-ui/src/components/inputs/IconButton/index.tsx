@@ -15,6 +15,7 @@ const IconButton = ({
     normal: "#706f82",
     active: "#fff",
   },
+  isFocused = false,
   className,
   type,
 }: IconButtonProps): JSX.Element => {
@@ -28,6 +29,7 @@ const IconButton = ({
         colors={colors}
         onClick={onClick}
         disabled={disabled || loading}
+        isFocused={isFocused}
       >
         <Container>
           {loading ? (

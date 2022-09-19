@@ -25,6 +25,7 @@ export type IconButtonProps = {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
   renderDropDown?: ReactElement<any> | null;
   className?: string;
+  isFocused?: boolean;
   colors?: {
     normal: string;
     active: string;

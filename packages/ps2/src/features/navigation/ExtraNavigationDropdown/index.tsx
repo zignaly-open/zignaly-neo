@@ -38,22 +38,26 @@ const ExtraNavigationDropdown: React.FC = () => {
 
   return (
     <DropDown
-      component={
+      component={({ open }) => (
         <IconButton
           variant={'flat'}
           icon={
             <OptionHorizontalDotsIcon
               width={14}
               height={4}
-              color={theme.neutral300}
+              color={open ? theme.neutral100 : theme.neutral300}
             />
           }
-          key={'user'}
+          isFocused={open}
         />
-      }
+      )}
       anchorOrigin={{
         vertical: 'bottom',
-        horizontal: 'left',
+        horizontal: 'right',
+      }}
+      transformOrigin={{
+        vertical: 'top',
+        horizontal: 'right',
       }}
       content={
         <DropDownContainer>

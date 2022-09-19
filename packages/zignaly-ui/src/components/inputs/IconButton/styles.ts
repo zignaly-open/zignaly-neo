@@ -56,6 +56,7 @@ interface LayoutProps {
     normal: string;
     active: string;
   };
+  isFocused: boolean;
   disabled: boolean;
   shrinkWrap?: boolean;
   theme: Theme;
@@ -335,6 +336,31 @@ const renderFlatProps = (props: LayoutProps) => `
   )}
 `;
 
+const renderFocusedProps = (props: LayoutProps) => `
+    ${styledIf(
+      props.isFocused,
+      ` 
+      background: ${props.theme.dropDownBackground};      
+      padding: 2px;
+      border-radius: 4px 4px 0 0;
+             
+      &:enabled:active {
+        padding: 2px;
+        background: #12152c;
+      }
+             
+      ${Container} {
+        background: ${props.theme.dropDownBackground};
+        border: 1px solid ${props.theme.dropDownBackground} !important;
+              
+        &:before {
+          opacity: 0 !important;
+        }
+      }
+    `,
+    )}
+`;
+
 export const ViewPort = styled.button<LayoutProps>`
   border-radius: 4px;
   border: none;
@@ -356,4 +382,5 @@ export const ViewPort = styled.button<LayoutProps>`
   ${renderPrimaryProps}
   ${renderSecondaryProps}
   ${renderFlatProps}
+  ${renderFocusedProps}
 `;

@@ -63,8 +63,8 @@ function LanguageSelector({
           ))}
         </Container>
       }
-      component={
-        <Button isMenu={languageMap.length > 1}>
+      component={({ open }) => (
+        <Button isFocused={open} isMenu={languageMap.length > 1}>
           <Field>
             <GlobeLanguagesStyled
               color={theme.neutral300}
@@ -83,7 +83,7 @@ function LanguageSelector({
             />
           )}
         </Button>
-      }
+      )}
     />
   );
 }

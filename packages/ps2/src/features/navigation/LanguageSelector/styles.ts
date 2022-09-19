@@ -19,7 +19,7 @@ export const GlobeLanguagesStyled = styled(GlobeLanguages)`
   transition: 0.15s linear;
 `;
 
-export const Button = styled.button<{ isMenu: boolean }>`
+export const Button = styled.button<{ isMenu: boolean; isFocused: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -31,7 +31,7 @@ export const Button = styled.button<{ isMenu: boolean }>`
   user-select: none;
   border-radius: 8px 0 0 0;
 
-  ${({ isMenu }) => `
+  ${({ isMenu, theme }) => `
     ${styledIf(
       isMenu,
       `
@@ -39,6 +39,9 @@ export const Button = styled.button<{ isMenu: boolean }>`
        svg {
           transition: 0.15s linear;
        }
+       
+      background-color: ${theme.dropDownBackground};
+      
       &:hover {
         ${LabelButton} {
           color: #fff;

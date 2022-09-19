@@ -3,7 +3,7 @@ import { PopoverOrigin, PopoverPosition } from "@mui/material/Popover/Popover";
 
 export type DropDownProps = {
   content: React.ReactElement;
-  component: React.ReactElement;
+  component: ({ open }: { open: boolean }) => JSX.Element;
   anchorOrigin?: PopoverOrigin;
   anchorPosition?: PopoverPosition;
   transformOrigin?: PopoverOrigin;

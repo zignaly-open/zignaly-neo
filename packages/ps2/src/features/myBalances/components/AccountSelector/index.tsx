@@ -60,21 +60,26 @@ const AccountSelector: React.FC = () => {
               ref={dropDownRef}
               anchorOrigin={{
                 vertical: 'bottom',
-                horizontal: 'left',
+                horizontal: 'right',
               }}
-              component={
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              component={({ open }) => (
                 <IconButton
                   variant={'secondary'}
                   size={'medium'}
+                  isFocused={open}
                   icon={
                     <ArrowBottomIcon
-                      color={theme.neutral300}
+                      color={open ? theme.neutral100 : theme.neutral300}
                       width={22}
                       height={20}
                     />
                   }
                 />
-              }
+              )}
               content={
                 <List>
                   {(exchanges || []).map((exchange, index) => (

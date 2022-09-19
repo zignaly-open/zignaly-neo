@@ -22,15 +22,20 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
     setAnchorEl(null);
   };
 
-  useImperativeHandle(innerRef, () => ({
-    closeDropDown: () => {
-      handleClose();
-    },
-  }));
+  useImperativeHandle(
+    innerRef,
+    () => ({
+      closeDropDown: () => {
+        handleClose();
+      },
+      open,
+    }),
+    [anchorEl, open],
+  );
 
   return (
     <>
-      <Component onClick={handleToggle}>{component}</Component>
+      <Component onClick={handleToggle}>{component({ open })}</Component>
       {content && (
         <Popover
           id="popover-menu"

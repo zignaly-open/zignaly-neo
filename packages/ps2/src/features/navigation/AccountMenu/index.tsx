@@ -68,13 +68,14 @@ function AccountMenu(): React.ReactElement | null {
         vertical: 'top',
         horizontal: 'right',
       }}
-      component={
+      component={({ open }) => (
         <IconButton
           variant={'flat'}
           icon={<Avatar size={'medium'} image={activeExchange?.image} />}
           key={'user'}
+          isFocused={open}
         />
-      }
+      )}
       content={
         <AccountDropDown>
           <AccountSelector onExchangeSelected={() => closeDropdown()} />
