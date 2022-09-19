@@ -17,14 +17,14 @@ const Footer: React.FC = () => {
       <FooterTop />
       <TopNav>
         <a
-          href={'https://zignaly.com/'}
+          href='https://help.zignaly.com/en/articles/6564326-faqs-and-troubleshooting-tips-for-zigbids'
           target='_blank'
           rel='noopener noreferrer'
         >
           {t('zigbids_faqs')}
         </a>
         <a
-          href={'https://help.zignaly.com/en/'}
+          href='https://help.zignaly.com/en/articles/6203524-contact-our-support-team'
           target='_blank'
           rel='noopener noreferrer'
         >

@@ -48,7 +48,7 @@ const HowItWorks = () => {
             <TypographyStep variant='h4' color='neutral200' component='h4'>
               <Trans i18nKey='step2-info' t={t}>
                 <TextButton
-                  href='https://help.zignaly.com/en/articles/6564060-transfer-your-zig-coin-to-polygon'
+                  href='https://help.zignaly.com/en/articles/6555802-zigbids-step-by-step-guide'
                   caption='this article.'
                   variant='h4'
                 />

@@ -73,9 +73,7 @@ const CongratulationsModal = ({
           </a>
         )}
         <a
-          href={
-            'https://help.zignaly.com/en/articles/6203524-contact-our-support-team'
-          }
+          href='https://help.zignaly.com/en/articles/6203524-contact-our-support-team'
           target='_blank'
           rel='noopener noreferrer'
         >
