@@ -25,9 +25,9 @@ import { DashboardTableDataType } from './types';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
-  const { isLoading, data: services, error } = useInvestments();
+  const { isFetching: isLoading, data: services, error } = useInvestments();
   const selectInvestment = useSetSelectedInvestment();
-  useCoins();
+  const { isFetching: isLoadingCoins } = useCoins();
   const { showModal } = useModal();
 
   const onClickEditInvestment = (service: Investment) => {
@@ -244,7 +244,7 @@ const MyDashboard: React.FC = () => {
           {t('my-dashboard.title')}
         </Typography>
       </Heading>
-      {isLoading && !services ? (
+      {isLoading || isLoadingCoins ? (
         <Center>
           <Loader
             color={'#fff'}
