@@ -1,13 +1,6 @@
 import React from 'react';
 import Header from './features/navigation/Header';
-import {
-  Routes,
-  Route,
-  Navigate,
-  Outlet,
-  useParams,
-  generatePath,
-} from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import ProfitSharing from './views/ProfitSharing';
 import Dashboard from './views/Dashboard';
 import Staking from './views/Staking';
@@ -35,7 +28,6 @@ import {
   ROUTE_BECOME_TRADER,
 } from './routes';
 
-import { useIsAuthenticated } from './features/auth/use';
 import Management from './views/TraderService/Management';
 import Investors from './views/TraderService/Investors';
 import BecomeTrader from './views/TraderService/BecomeTrader';
@@ -46,38 +38,10 @@ import ServiceApi from './views/TraderService/ServiceApi';
 import Manual from 'views/TraderService/Manual';
 import Signals from './views/TraderService/Signals';
 import EditService from 'views/TraderService/EditService';
-import { useIsServiceOwner } from './features/trader/use';
 import NotATraderWall from './util/walls/NotATraderWall';
-
-const AuthenticatedWall: React.FC = () => {
-  const isAuthenticated = useIsAuthenticated();
-  return isAuthenticated ? <Outlet /> : <Navigate to={ROUTE_LOGIN} replace />;
-};
-
-const UnauthenticatedWall: React.FC = () => {
-  const isAuthenticated = useIsAuthenticated();
-  return isAuthenticated ? (
-    <Navigate to={ROUTE_DASHBOARD} replace />
-  ) : (
-    <Outlet />
-  );
-};
-
-const ServiceOwnerWall: React.FC = () => {
-  const { serviceId } = useParams();
-  const isOwner = useIsServiceOwner(serviceId);
-
-  return !isOwner ? (
-    <Navigate
-      to={generatePath(ROUTE_TRADING_SERVICE, {
-        serviceId,
-      })}
-      replace
-    />
-  ) : (
-    <Outlet />
-  );
-};
+import AuthenticatedWall from 'util/walls/AuthenticatedWall.tsx';
+import UnauthenticatedWall from './util/walls/UnauthenticatedWall';
+import ServiceOwnerWall from './util/walls/ServiceOwnerWall';
 
 const Router: React.FC = () => (
   <Routes>
