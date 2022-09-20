@@ -21,7 +21,7 @@ const ProjectDetailsModal = ({
     <DialogContainer title={title} maxWidth='sm' fullWidth={true} {...props}>
       <Column>
         <Typography variant='body1' marginTop={18} color='neutral200'>
-          <ReactMarkdown>{description}</ReactMarkdown>
+          <ReactMarkdown linkTarget='_blank'>{description}</ReactMarkdown>
         </Typography>
         <Gap gap={11} />
         <Typography variant='h3' color='neutral000'>
