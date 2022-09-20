@@ -41,7 +41,7 @@ const ProjectDetailsModal = ({
         </Typography>
         <Box gap={1.1} display={'flex'} flexDirection='row'>
           {twitter && (
-            <a href={discord} target='_blank' rel='noopener noreferrer'>
+            <a href={twitter} target='_blank' rel='noopener noreferrer'>
               <Twitter />
             </a>
           )}
@@ -51,7 +51,7 @@ const ProjectDetailsModal = ({
             </a>
           )}
           {telegram && (
-            <a href={discord} target='_blank' rel='noopener noreferrer'>
+            <a href={telegram} target='_blank' rel='noopener noreferrer'>
               <Telegram />
             </a>
           )}
