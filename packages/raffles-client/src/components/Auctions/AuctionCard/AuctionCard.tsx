@@ -66,10 +66,8 @@ const AuctionCard: React.FC<{
     <Item>
       <CardColumn ref={leftRef}>
         <CardHeaderLeft isColumn={isColumn}>
-          <Box display='flex' alignItems='center'>
-            <Box pr={1}>
-              <ChainIcon chain={auction.chain} />
-            </Box>
+          <Box display='flex' alignItems='center' gap={1}>
+            <ChainIcon chain={auction.chain} />
             <Box display='flex' flexDirection='column'>
               <Typography variant='h2' color='neutral100'>
                 {auction.title}
