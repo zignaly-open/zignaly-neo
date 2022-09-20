@@ -1,9 +1,20 @@
 import styled from 'styled-components';
-import { Typography, ValueIndicator } from '@zignaly-open/ui';
+import { PriceLabel, Typography } from '@zignaly-open/ui';
 
-export const TotalValue = styled(Typography)``;
+export const TotalValue = styled(PriceLabel)`
+  span,
+  span span {
+    color: #c1c1c8 !important;
+  }
+`;
 
-export const Profit = styled(ValueIndicator)``;
+export const Profit = styled(PriceLabel)`
+  letter-spacing: 0.3px;
+
+  & > span > span {
+    line-height: 16px;
+  }
+`;
 
 export const Layout = styled(Typography)`
   text-align: center;
