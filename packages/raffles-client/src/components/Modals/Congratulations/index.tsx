@@ -7,7 +7,7 @@ import { Button, Typography } from '@zignaly-open/ui';
 import DialogContainer from '../DialogContainer';
 import ProjectDetailsModal from '../ProjectDetails';
 import { CongratulationsModalProps } from './types';
-import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
+import { ReactComponent as ZigCoinIcon } from 'assets/icons/zig-coin.svg';
 import { AuctionImage, Description, ContainerDescription } from './styles';
 import { ReactComponent as DiscordIconButton } from '../../../assets/icons/discord-minimalist.svg';
 import { ReactComponent as SupportIconButton } from '../../../assets/icons/support-minimalist.svg';

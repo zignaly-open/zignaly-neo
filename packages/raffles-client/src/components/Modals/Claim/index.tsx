@@ -12,7 +12,7 @@ import { ClaimModalProps } from './types';
 import { showToast } from 'util/showToast';
 import ClaimButton from 'components/Auctions/AuctionCard/ClaimButton';
 import useBalance from 'hooks/useBalance';
-import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
+import { ReactComponent as ZigCoinIcon } from 'assets/icons/zig-coin.svg';
 import { PriceLabel } from 'components/Auctions/AuctionCard/styles';
 import { useModal } from 'mui-modal-provider';
 import UserSettingsModal from '../UserSettings';
