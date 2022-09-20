@@ -8,5 +8,5 @@ export const ChainIcon = ({ chain }: { chain: string }) => {
   }
 
   const Icon = chainData.icon;
-  return <Icon title={chainData.name} width={24} height={24} />;
+  return <Icon title={chainData.name} width={18} height={18} />;
 };

@@ -31,15 +31,14 @@ const ProjectDetailsModal = ({
         <Typography variant='h3' color='neutral000'>
           {t('blockchain')}
         </Typography>
-        <Box gap={1.1} display={'flex'} flexDirection='row'>
+        <Box gap={1.1} display={'flex'} flexDirection='row' alignItems='center'>
           <ChainIcon chain={chain} />
-          <Typography color='neutral000'>{chainData.name}</Typography>
+          <Typography color='neutral000'>{chainData?.name}</Typography>
         </Box>
         <Gap gap={5} />
         <Typography variant='h3' color='neutral000'>
           {t('website')}
         </Typography>
-        <Gap gap={5} />
         {website && (
           <a href={website} target='_blank' rel='noopener noreferrer'>
             <Typography variant='h3' color='links' underline={true}>
