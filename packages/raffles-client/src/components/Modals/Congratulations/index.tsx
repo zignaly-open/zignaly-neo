@@ -63,7 +63,7 @@ const CongratulationsModal = ({
         mt='25px'
       >
         {auction.discord && (
-          <a href={auction.discord} target='_blank' rel='noopener noreferrer'>
+          <a href={auction.discord} target='_blank' rel='noopener'>
             <Button
               variant='secondary'
               size='large'
@@ -75,7 +75,7 @@ const CongratulationsModal = ({
         <a
           href='https://help.zignaly.com/en/articles/6203524-contact-our-support-team'
           target='_blank'
-          rel='noopener noreferrer'
+          rel='noopener'
         >
           <Button
             variant='secondary'
