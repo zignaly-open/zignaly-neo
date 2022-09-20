@@ -5,7 +5,7 @@ import { useTitle } from 'react-use';
 
 const ProfitSharing: React.FC = () => {
   const { t } = useTranslation('pages');
-  useTitle(t('pages.profit-sharing.title'));
+  useTitle(t('profit-sharing.title'));
   return (
     <>
       <ComingSoon />

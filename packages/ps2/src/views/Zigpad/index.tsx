@@ -5,7 +5,7 @@ import { useTitle } from 'react-use';
 
 const Zigpad: React.FC = () => {
   const { t } = useTranslation('pages');
-  useTitle(t('pages.zigpad'));
+  useTitle(t('zigpad'));
   return (
     <>
       <ComingSoon />

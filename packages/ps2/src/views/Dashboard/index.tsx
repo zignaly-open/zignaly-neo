@@ -5,7 +5,7 @@ import { useTitle } from 'react-use';
 
 const Dashboard: React.FC = () => {
   const { t } = useTranslation('pages');
-  useTitle(t('pages.dashboard'));
+  useTitle(t('dashboard'));
   return (
     <>
       <DashboardComponent />
