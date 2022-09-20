@@ -51,7 +51,7 @@ const FooterTop: React.FC = () => {
           <Youtube />
         </a>
         <a
-          href={'https://discord.com/invite/r5qRXDJ'}
+          href={'https://discord.gg/9H6cEa9uRN'}
           target='_blank'
           rel='noopener noreferrer'
         >
