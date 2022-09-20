@@ -11,19 +11,31 @@ import { ReactComponent as Twitter } from '../../../assets/icons/twitter.svg';
 import ReactMarkdown from 'react-markdown';
 
 import { Box } from '@mui/system';
+import { ChainIcon } from 'components/common/ChainIcon';
+import { chains } from 'util/chain';
 
 const ProjectDetailsModal = ({
-  auction: { title, website, twitter, telegram, discord, description },
+  auction: { title, website, twitter, telegram, discord, description, chain },
   ...props
 }: ProjectDetailsModalProps) => {
   const { t } = useTranslation('auction');
+  const chainData = chains[chain];
+
   return (
     <DialogContainer title={title} maxWidth='sm' fullWidth={true} {...props}>
       <Column>
         <Typography variant='body1' marginTop={18} color='neutral200'>
-          <ReactMarkdown>{description}</ReactMarkdown>
+          <ReactMarkdown linkTarget='_blank'>{description}</ReactMarkdown>
         </Typography>
         <Gap gap={11} />
+        <Typography variant='h3' color='neutral000'>
+          {t('blockchain')}
+        </Typography>
+        <Box gap={1.1} display={'flex'} flexDirection='row'>
+          <ChainIcon chain={chain} />
+          <Typography color='neutral000'>{chainData.name}</Typography>
+        </Box>
+        <Gap gap={5} />
         <Typography variant='h3' color='neutral000'>
           {t('website')}
         </Typography>

@@ -6,7 +6,7 @@ import {
 } from './styles';
 import { BrandImage, TextButton } from '@zignaly-open/ui';
 import { Trans, useTranslation } from 'react-i18next';
-import { ReactComponent as Facebook } from '../../assets/icons/discord.svg';
+import { ReactComponent as Facebook } from '../../assets/icons/facebook.svg';
 import { ReactComponent as Twitter } from '../../assets/icons/twitter.svg';
 import { ReactComponent as Youtube } from '../../assets/icons/youtube.svg';
 import { ReactComponent as Discord } from '../../assets/icons/discord.svg';

@@ -6,7 +6,7 @@ import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import FinalCountdown from './FinalCountdown';
 import BidButton from './BidButton';
 import { getWinningLosingStatus } from './util';
-import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
+import { ReactComponent as ZigCoinIcon } from 'assets/icons/zig-coin.svg';
 import AuctionRanking from '../AuctionRanking/AuctionRanking';
 import { useModal } from 'mui-modal-provider';
 import ProjectDetailsModal from 'components/Modals/ProjectDetails';
@@ -23,6 +23,7 @@ import {
 } from './styles';
 import ClaimButton from './ClaimButton';
 import useUpdatedAt from 'hooks/useUpdatedAt';
+import { ChainIcon } from 'components/common/ChainIcon';
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
@@ -65,14 +66,19 @@ const AuctionCard: React.FC<{
     <Item>
       <CardColumn ref={leftRef}>
         <CardHeaderLeft isColumn={isColumn}>
-          <Typography variant='h2' color='neutral100'>
-            {auction.title}
-          </Typography>
-          <TextButton
-            color='links'
-            caption={t('project-desc')}
-            onClick={() => showModal(ProjectDetailsModal, { auction })}
-          />
+          <Box display='flex' alignItems='center' gap={1}>
+            <ChainIcon chain={auction.chain} />
+            <Box display='flex' flexDirection='column'>
+              <Typography variant='h2' color='neutral100'>
+                {auction.title}
+              </Typography>
+              <TextButton
+                color='links'
+                caption={t('project-desc')}
+                onClick={() => showModal(ProjectDetailsModal, { auction })}
+              />
+            </Box>
+          </Box>
         </CardHeaderLeft>
         {auction.imageUrl && (
           <AuctionImage

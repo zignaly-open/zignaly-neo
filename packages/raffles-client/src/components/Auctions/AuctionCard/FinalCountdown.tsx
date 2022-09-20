@@ -2,7 +2,7 @@
 import { Typography } from '@zignaly-open/ui';
 import React from 'react';
 import Countdown from 'react-countdown';
-import { ReactComponent as TimeIcon } from 'images/time.svg';
+import { ReactComponent as TimeIcon } from 'assets/icons/time.svg';
 import { styled } from '@mui/material/styles';
 
 const CountdownContainer = styled('div')<{ color: string }>`

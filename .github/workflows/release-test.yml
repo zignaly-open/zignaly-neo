@@ -29,6 +29,7 @@ jobs:
           envkey_ZIGNALY_API_PUBLIC_KEY: ${{ secrets.ZIGNALY_API_PUBLIC_KEY }}
           envkey_ZIGNALY_API_PRIVATE_KEY: ${{ secrets.ZIGNALY_API_PRIVATE_KEY }}
           envkey_ZIGNALY_SYSTEM_ID: ${{ secrets.ZIGNALY_SYSTEM_ID }}
+          envkey_REACT_APP_ENABLE_TRACKING: ${{ secrets.REACT_APP_ENABLE_TRACKING }}
           envkey_PORT: ${{ secrets.PORT }}
           directory: packages/raffles-server
           file_name: .env
