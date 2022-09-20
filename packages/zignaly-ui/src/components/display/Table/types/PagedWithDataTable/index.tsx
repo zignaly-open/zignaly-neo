@@ -19,6 +19,7 @@ import { dark } from "../../../../../theme";
 import Typography from "../../../Typography";
 import CheckBox from "../../../../inputs/CheckBox";
 import IconButton from "../../../../inputs/IconButton";
+import Selector from "components/inputs/Selector";
 
 import { ReactComponent as OptionsDotsIcon } from "../../../../../assets/icons/option-dots-icon.svg";
 import { ReactComponent as SingleChevron } from "assets/icons/chevron-small-icon.svg";
@@ -33,7 +34,7 @@ import {
   SelectorContainer,
   SelectorSizing,
 } from "./styles";
-import Selector from "components/inputs/Selector";
+import DropDown from "../../../DropDown";
 
 export default function PagedWithDataTable<T extends object>({
   columns = [],
@@ -211,10 +212,23 @@ export default function PagedWithDataTable<T extends object>({
                 <th role={"row"}>
                   <div style={{ display: "flex", justifyContent: "flex-end" }}>
                     {!hideOptionsButton && (
-                      <IconButton
-                        variant={"flat"}
-                        icon={<OptionsDotsIcon color={dark.neutral200} />}
-                        renderDropDown={renderColumnsSelector()}
+                      <DropDown
+                        anchorOrigin={{
+                          vertical: "bottom",
+                          horizontal: "right",
+                        }}
+                        transformOrigin={{
+                          vertical: "top",
+                          horizontal: "right",
+                        }}
+                        component={({ open }) => (
+                          <IconButton
+                            variant={"flat"}
+                            isFocused={open}
+                            icon={<OptionsDotsIcon color={dark.neutral200} />}
+                          />
+                        )}
+                        content={renderColumnsSelector()}
                       />
                     )}
                   </div>
@@ -336,7 +350,6 @@ export default function PagedWithDataTable<T extends object>({
                   />
                 </SelectorSizing>
                 <Typography variant="body1" weight="regular" color="neutral300">
-                  {" "}
                   items
                 </Typography>
               </SelectorContainer>
