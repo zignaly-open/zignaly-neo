@@ -21,7 +21,7 @@ const ProjectDetailsModal = ({
     <DialogContainer title={title} maxWidth='sm' fullWidth={true} {...props}>
       <Column>
         <Typography variant='body1' marginTop={18} color='neutral200'>
-          <ReactMarkdown>{description}</ReactMarkdown>
+          <ReactMarkdown linkTarget='_blank'>{description}</ReactMarkdown>
         </Typography>
         <Gap gap={11} />
         <Typography variant='h3' color='neutral000'>
@@ -41,7 +41,7 @@ const ProjectDetailsModal = ({
         </Typography>
         <Box gap={1.1} display={'flex'} flexDirection='row'>
           {twitter && (
-            <a href={twitter} target='_blank' rel='noopener noreferrer'>
+            <a href={discord} target='_blank' rel='noopener noreferrer'>
               <Twitter />
             </a>
           )}
@@ -51,7 +51,7 @@ const ProjectDetailsModal = ({
             </a>
           )}
           {telegram && (
-            <a href={telegram} target='_blank' rel='noopener noreferrer'>
+            <a href={discord} target='_blank' rel='noopener noreferrer'>
               <Telegram />
             </a>
           )}
