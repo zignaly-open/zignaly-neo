@@ -10,6 +10,7 @@ import TextButton from "../TextButton";
 function InputText(
   {
     onBlur,
+    onFocus,
     error = null,
     disabled = false,
     placeholder = "Please enter a value",
@@ -74,6 +75,7 @@ function InputText(
             type={type}
             onBlur={onBlur}
             name={name}
+            onFocus={onFocus}
           />
         </Side>
         {rightSideElement && (

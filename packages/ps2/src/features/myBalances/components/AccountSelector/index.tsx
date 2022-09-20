@@ -24,14 +24,14 @@ import {
 } from '../../../auth/use';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { getImageOfAccount } from '../../../../util/images';
-import { Exchange } from '../../../auth/types';
+import { Exchange, ExtendedExchange, UserData } from '../../../auth/types';
 import { DropDownHandle } from '@zignaly-open/ui/lib/components/display/DropDown/types';
 
 const AccountSelector: React.FC = () => {
   const theme = useTheme() as Theme;
   const { t } = useTranslation('common');
-  const { exchanges } = useCurrentUser();
-  const activeExchange = useActiveExchange();
+  const user: UserData | Partial<UserData> = useCurrentUser();
+  const activeExchange: ExtendedExchange | undefined = useActiveExchange();
   const selectExchange = useSelectExchange();
   const dropDownRef = useRef<DropDownHandle>(null);
 
@@ -55,7 +55,7 @@ const AccountSelector: React.FC = () => {
           <Typography variant={'h1'} color={'neutral200'}>
             {activeExchange.internalName}
           </Typography>
-          {exchanges.length > 1 && (
+          {user.exchanges.length > 1 && (
             <DropDown
               ref={dropDownRef}
               anchorOrigin={{
@@ -82,8 +82,9 @@ const AccountSelector: React.FC = () => {
               )}
               content={
                 <List>
-                  {(exchanges || []).map((exchange, index) => (
+                  {(user.exchanges || []).map((exchange, index) => (
                     <Item
+                      id={`account-exchangeId-${exchange.internalId}`}
                       key={`--exchange-key-${index.toString()}`}
                       onClick={() => handleSelectAccount(exchange)}
                     >

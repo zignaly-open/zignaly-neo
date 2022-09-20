@@ -7,7 +7,8 @@ import {
   PriceLabel,
   CoinLabel,
   sortByValue,
-  ExpandableInput,
+  Expandable,
+  InputText,
   SearchIcon,
 } from '@zignaly-open/ui';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
@@ -134,12 +135,23 @@ const MyBalancesTable = (): JSX.Element => {
   ) : (
     <>
       <TableHead>
-        <ExpandableInput
-          icon={<SearchIcon width={14} height={14} color={theme.neutral300} />}
-          value={searchBy}
-          onChange={setSearchBy}
-          placeholder={t('my-balances.table-search-placeholder')}
-        />
+        <Expandable value={searchBy}>
+          {({ setExpanded }) => (
+            <InputText
+              leftSideElement={
+                <SearchIcon width={14} height={14} color={theme.neutral300} />
+              }
+              minHeight={44}
+              value={searchBy}
+              onBlur={() => setExpanded(false)}
+              onFocus={() => setExpanded(true)}
+              onChange={(e: React.FormEvent<HTMLInputElement>) =>
+                setSearchBy(e.currentTarget.value)
+              }
+              placeholder={t('my-balances.table-search-placeholder')}
+            />
+          )}
+        </Expandable>
       </TableHead>
       <Table
         type={'pagedWithData'}
