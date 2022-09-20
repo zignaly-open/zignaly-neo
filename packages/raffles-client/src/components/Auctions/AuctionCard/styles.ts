@@ -123,14 +123,3 @@ export const CardActions = styled('div', {
       display: none;
     `}
 `;
-
-export const ContainerChainIcon = styled('div')`
-  border-radius: 50px;
-  border: 1px solid rgba(193, 193, 200, 0.4);
-  padding: 12px;
-  position: absolute;
-  left: -60px;
-  top: 8px;
-  display: flex;
-  justify-content: center;
-`;

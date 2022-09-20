@@ -90,7 +90,7 @@ const Header = () => {
                 <UserBalance />
               </Box>
               <MenuButton
-                size={'xlarge'}
+                size={'large'}
                 key={'user'}
                 variant={'flat'}
                 icon={<UserIcon color='#65647E' />}
