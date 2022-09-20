@@ -40,4 +40,5 @@ export type AuctionType = {
   userBid?: AuctionBidType;
   bids: AuctionBidType[];
   startDate: Date;
+  chain: string;
 };

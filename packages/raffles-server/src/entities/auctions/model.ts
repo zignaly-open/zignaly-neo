@@ -85,6 +85,9 @@ export class Auction extends Model {
   @Default(() => Date.now())
   @Column
   public startDate: Date;
+
+  @Column
+  public chain: string;
 }
 
 @Table
