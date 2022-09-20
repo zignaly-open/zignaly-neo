@@ -31,7 +31,7 @@ const ProjectDetailsModal = ({
         <Typography variant='h3' color='neutral000'>
           {t('blockchain')}
         </Typography>
-        <Box gap={1.1} display={'flex'} flexDirection='row'>
+        <Box gap={1.1} display={'flex'} flexDirection='row' alignItems='center'>
           <ChainIcon chain={chain} />
           <Typography color='neutral000'>{chainData?.name}</Typography>
         </Box>
