@@ -13,24 +13,18 @@ import {
 export const BalanceSummary = ({
   totalValue,
   profit,
-  stableCoinOperative = false,
-  symbol = '$',
+  coin = 'USDT',
   dashboardType = 'investor',
   onClickEdit = () => null,
 }: BalanceSummaryProps) => {
   const { t } = useTranslation(['table', 'action']);
-
   return (
     <Layout>
       {dashboardType === 'marketplace' ? (
         <Typography>{t('table.balanceSummary.invested')}</Typography>
       ) : (
         <TotalValue>
-          <PriceLabel
-            value={new BigNumber(totalValue).toFixed()}
-            coin={symbol}
-            stableCoinOperative={stableCoinOperative}
-          />
+          <PriceLabel value={new BigNumber(totalValue).toFixed()} coin={coin} />
         </TotalValue>
       )}
       {isNaN(+profit) || profit === '' ? (
@@ -42,8 +36,7 @@ export const BalanceSummary = ({
         <Profit variant='body2'>
           <PriceLabel
             value={profit}
-            coin={symbol}
-            stableCoinOperative={stableCoinOperative}
+            coin={coin}
             green={+profit > 0}
             red={+profit < 0}
           />
