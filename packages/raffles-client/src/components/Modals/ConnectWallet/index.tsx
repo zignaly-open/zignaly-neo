@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ButtonContainer, Gap, Subtitle } from './styles';
 import { ConnectWalletModalProps } from './types';
 import DialogContainer from '../DialogContainer';
@@ -9,12 +9,18 @@ import useAuthenticate from 'hooks/useAuthenticate';
 import { useMediaQuery } from '@mui/material';
 import theme from 'theme';
 import useCurrentUser from 'hooks/useCurrentUser';
+import { useEthers } from '@usedapp/core';
+import { useTimeout } from 'react-use';
+import UnlockMetamask from '../UnlockMetamask';
 
 const ConnectWalletModal = (props: ConnectWalletModalProps) => {
   const authenticate = useAuthenticate();
   const { t } = useTranslation('connect-wallet');
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const { user } = useCurrentUser();
+  const { active, account, error } = useEthers();
+  const [showUnlock, setShowUnlock] = useState(false);
+  console.log(active, error);
 
   useEffect(() => {
     if (user) {
@@ -22,6 +28,18 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
       props.onClose(null, 'escapeKeyDown');
     }
   }, [user]);
+
+  const isMMReady = useTimeout(1000);
+
+  useEffect(() => {
+    if ((isMMReady && !account) || error) {
+      setShowUnlock(true);
+    }
+  }, [isMMReady, error]);
+
+  if (setShowUnlock) {
+    return <UnlockMetamask {...props} />;
+  }
 
   return (
     <DialogContainer title={t('title')} {...props}>
