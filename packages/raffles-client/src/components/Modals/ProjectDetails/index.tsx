@@ -40,7 +40,7 @@ const ProjectDetailsModal = ({
           {t('website')}
         </Typography>
         {website && (
-          <a href={website} target='_blank' rel='noopener noreferrer'>
+          <a href={website} target='_blank' rel='noopener'>
             <Typography variant='h3' color='links' underline={true}>
               {website}
             </Typography>
@@ -52,17 +52,17 @@ const ProjectDetailsModal = ({
         </Typography>
         <Box gap={1.1} display={'flex'} flexDirection='row'>
           {twitter && (
-            <a href={twitter} target='_blank' rel='noopener noreferrer'>
+            <a href={twitter} target='_blank' rel='noopener'>
               <Twitter />
             </a>
           )}
           {discord && (
-            <a href={discord} target='_blank' rel='noopener noreferrer'>
+            <a href={discord} target='_blank' rel='noopener'>
               <Discord />
             </a>
           )}
           {telegram && (
-            <a href={telegram} target='_blank' rel='noopener noreferrer'>
+            <a href={telegram} target='_blank' rel='noopener'>
               <Telegram />
             </a>
           )}
