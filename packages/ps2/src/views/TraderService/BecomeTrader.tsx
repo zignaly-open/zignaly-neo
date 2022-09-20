@@ -5,7 +5,7 @@ import ComingSoon from '../../components/ComingSoon';
 
 const BecomeTrader: React.FC = () => {
   const { t } = useTranslation('pages');
-  useTitle(t('pages.become-trader'));
+  useTitle(t('become-trader'));
   return <ComingSoon />;
 };
 

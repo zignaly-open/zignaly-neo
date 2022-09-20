@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 const Login: React.FC = () => {
   const { t } = useTranslation('pages');
-  useTitle(t('pages.login'));
+  useTitle(t('login'));
 
   return (
     <PageContainer
