@@ -20,6 +20,7 @@ import {
   PriceLabel,
   CardActions,
   CardHeader,
+  ContainerChainIcon,
 } from './styles';
 import ClaimButton from './ClaimButton';
 import useUpdatedAt from 'hooks/useUpdatedAt';
@@ -72,8 +73,10 @@ const AuctionCard: React.FC<{
             gap={1}
             flexDirection='column'
           >
-            <Box display='flex' gap={1} alignItems='center'>
-              <ChainIcon chain={auction.chain} />
+            <Box display='flex' gap={1} alignItems='center' position='relative'>
+              <ContainerChainIcon>
+                <ChainIcon chain={auction.chain} />
+              </ContainerChainIcon>
               <Typography variant='h2' color='neutral100'>
                 {auction.title}
               </Typography>
