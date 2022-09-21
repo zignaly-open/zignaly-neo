@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux';
 import { TraderService, TransferPayload } from './types';
 import { RootState } from '../store';
 import { useIsAuthenticated } from '../auth/use';
+import { useTitle } from 'react-use';
+import { useTranslation } from 'react-i18next';
 
 export function useTraderServices(): TraderService[] | undefined {
   return useSelector((store: RootState) => store.trader.traderServices);
@@ -82,4 +84,18 @@ export function useTraderServiceTransferFunds(
     },
     { isLoading: isLoading || isLoadingManagement },
   ];
+}
+
+export function useTraderServiceTitle(
+  translationKey: string,
+  serviceId: string,
+): void {
+  const { data: service } = useServiceDetails(serviceId);
+  const { t } = useTranslation('pages');
+
+  useTitle(
+    service
+      ? t(translationKey, { serviceName: service.name })
+      : t('trading-services'),
+  );
 }
