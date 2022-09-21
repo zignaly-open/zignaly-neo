@@ -2,7 +2,6 @@ import {
   AreaChart,
   PercentageIndicator,
   PriceLabel,
-  ServiceName,
   Table,
   Typography,
 } from '@zignaly-open/ui';
@@ -14,12 +13,12 @@ import BigNumber from 'bignumber.js';
 import { formatDateFromDays } from './util';
 import { Investment } from '../../types';
 import { sortBigNumbers, stringSort } from '../../../../util/numbers';
-import { getServiceLogo } from '../../../../util/images';
 import { BalanceSummary } from '../BalanceSummary';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import EditInvestmentModal from '../EditInvestmentModal';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { DashboardTableDataType } from './types';
+import { ServiceName } from '../ServiceName';
 import CenteredLoader from '../../../../components/CenteredLoader';
 
 const MyDashboard: React.FC = () => {
@@ -68,18 +67,7 @@ const MyDashboard: React.FC = () => {
         headerWithFooter: (
           <Inline>{t('my-dashboard.tableHeader.serviceName.subtitle')}</Inline>
         ),
-        Cell: ({ cell: { value } }) => (
-          <ServiceName
-            heading={value.serviceName}
-            subtitle={
-              <>
-                {t('table:table.serviceName-by')} {value.ownerName}
-              </>
-            }
-            cryptoName={value.ssc}
-            image={getServiceLogo(value.serviceLogo)}
-          />
-        ),
+        Cell: ({ cell: { value } }) => <ServiceName service={value} />,
         sortType: (a, b) =>
           stringSort(
             a.values.service.serviceName,

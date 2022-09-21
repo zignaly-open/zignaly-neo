@@ -1,7 +1,5 @@
 import { ChartsProps } from "../Charts/types";
-import { BalanceSummaryProps } from "./components/BalanceSummary/types";
 import { PercentageIndicatorProps } from "./components/PercentageIndicator/types";
-import { ServiceNameProps } from "./components/ServiceName/types";
 import { Column, UseSortByColumnOptions } from "react-table";
 
 type ExtendedColumn<T extends object> = Column<T> & UseSortByColumnOptions<T>;
@@ -31,8 +29,6 @@ export interface TableProps<T extends object> extends TableBasicProps<T> {
 }
 
 export interface UserTableData {
-  summary: BalanceSummaryProps;
-  serviceName: ServiceNameProps;
   chart: ChartsProps;
   dailyAvg: PercentageIndicatorProps;
   oneMonth: PercentageIndicatorProps;

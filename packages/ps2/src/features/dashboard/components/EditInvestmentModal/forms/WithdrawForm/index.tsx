@@ -4,7 +4,12 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Grid } from '@mui/material';
 import { WithdrawActions } from '../../styles';
-import { Button, InputAmountAdvanced, SliderInput } from '@zignaly-open/ui';
+import {
+  Button,
+  InputAmountAdvanced,
+  SliderInput,
+  Typography,
+} from '@zignaly-open/ui';
 import BigNumber from 'bignumber.js';
 import {
   useInvestmentDetails,
@@ -83,6 +88,9 @@ const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <Box sx={{ mt: 1, mb: 2 }}>
+        <Typography>{t('withdraw.replace-existing-amount')}</Typography>
+      </Box>
       <Grid container spacing={5}>
         <Grid item xs={12} md={6}>
           <InputAmountAdvanced
