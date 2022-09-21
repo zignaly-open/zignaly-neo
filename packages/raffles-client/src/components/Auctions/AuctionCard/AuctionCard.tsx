@@ -21,6 +21,7 @@ import {
   CardActions,
   CardHeader,
   ContainerChainIcon,
+  ContainerLeft,
 } from './styles';
 import ClaimButton from './ClaimButton';
 import useUpdatedAt from 'hooks/useUpdatedAt';
@@ -67,25 +68,20 @@ const AuctionCard: React.FC<{
     <Item>
       <CardColumn ref={leftRef}>
         <CardHeaderLeft isColumn={isColumn}>
-          <Box
-            display='flex'
-            alignItems='center'
-            gap={1}
-            flexDirection='column'
-          >
-            <Box display='flex' gap={1} alignItems='center' position='relative'>
-              <ContainerChainIcon>
-                <ChainIcon chain={auction.chain} />
-              </ContainerChainIcon>
+          <Box display='flex' alignItems='center' gap={2}>
+            <ContainerChainIcon>
+              <ChainIcon chain={auction.chain} />
+            </ContainerChainIcon>
+            <ContainerLeft>
               <Typography variant='h2' color='neutral100'>
                 {auction.title}
               </Typography>
-            </Box>
-            <TextButton
-              color='links'
-              caption={t('project-desc')}
-              onClick={() => showModal(ProjectDetailsModal, { auction })}
-            />
+              <TextButton
+                color='links'
+                caption={t('project-desc')}
+                onClick={() => showModal(ProjectDetailsModal, { auction })}
+              />
+            </ContainerLeft>
           </Box>
         </CardHeaderLeft>
         {auction.imageUrl && (
