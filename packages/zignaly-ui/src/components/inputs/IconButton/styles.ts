@@ -5,6 +5,9 @@ import { buttonSizes, buttonVariants } from "./types";
 import Loader from "components/display/Loader";
 import Theme from "../../../theme/theme";
 
+// TODO: an icon button component should not take 500 LOC
+// TODO: Simplify this
+
 const isPrimaryButton = (variant: keyof typeof buttonVariants) =>
   variant === buttonVariants.primary;
 
