@@ -68,7 +68,13 @@ const AuctionCard: React.FC<{
     <Item>
       <CardColumn ref={leftRef}>
         <CardHeaderLeft isColumn={isColumn}>
-          <Box display='flex' alignItems='center' gap={2}>
+          <Box
+            display='flex'
+            alignItems='center'
+            gap={2}
+            marginLeft={5}
+            minWidth={300}
+          >
             <ContainerChainIcon>
               <ChainIcon chain={auction.chain} />
             </ContainerChainIcon>
