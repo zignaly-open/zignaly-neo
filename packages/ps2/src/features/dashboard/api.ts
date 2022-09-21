@@ -13,7 +13,11 @@ export const api = createApi({
     }),
     coins: builder.query<Coins, string>({
       query: (exchangeInternalId) => ({
-        url: `user/exchanges/${exchangeInternalId}/assets?reduced=true`,
+        url: `user/exchanges/${exchangeInternalId}/assets`,
+        params: {
+          view: 'reduced',
+          convert: false,
+        },
       }),
     }),
 

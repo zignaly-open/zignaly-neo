@@ -10,7 +10,6 @@ import {
   PriceLabel,
   PercentageIndicator,
 } from '@zignaly-open/ui';
-import { coinsToOperateServices } from '../../../../util/coins';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { InvestorTableDataType } from './types';
 import {
@@ -51,11 +50,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         Header: t('investors.tableHeader.investment'),
         accessor: 'investment',
         Cell: ({ cell: { value } }) => (
-          <PriceLabel
-            stableCoinOperative={checkStableCoinOperate}
-            coin={service?.ssc ?? 'USDT'}
-            value={value.toFixed()}
-          />
+          <PriceLabel coin={service?.ssc ?? 'USDT'} value={value.toFixed()} />
         ),
       },
       {
@@ -63,7 +58,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         accessor: 'pnl',
         Cell: ({ cell: { value } }) => (
           <PriceLabel
-            stableCoinOperative={checkStableCoinOperate}
             coin={service?.ssc ?? 'USDT'}
             value={parseFloat(value.pnlNetLc)}
             bottomElement={<PercentageIndicator value={value.pnlPctLc} />}
@@ -74,22 +68,14 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         Header: t('investors.tableHeader.P&LTotal'),
         accessor: 'pnlTotal',
         Cell: ({ cell: { value } }) => (
-          <PriceLabel
-            stableCoinOperative={checkStableCoinOperate}
-            coin={service?.ssc ?? 'USDT'}
-            value={parseFloat(value)}
-          />
+          <PriceLabel coin={service?.ssc ?? 'USDT'} value={parseFloat(value)} />
         ),
       },
       {
         Header: t('investors.tableHeader.totalFeesPaid'),
         accessor: 'totalFeesPaid',
         Cell: ({ cell: { value } }) => (
-          <PriceLabel
-            stableCoinOperative={checkStableCoinOperate}
-            coin={service?.ssc ?? 'USDT'}
-            value={parseFloat(value)}
-          />
+          <PriceLabel coin={service?.ssc ?? 'USDT'} value={parseFloat(value)} />
         ),
       },
       {
@@ -108,11 +94,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       },
     ],
     [],
-  );
-
-  const checkStableCoinOperate = useMemo(
-    () => coinsToOperateServices.stableCoins.includes(service?.ssc ?? 'USDT'),
-    [service?.ssc],
   );
 
   return (
