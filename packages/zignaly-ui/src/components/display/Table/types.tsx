@@ -1,7 +1,5 @@
 import { ChartsProps } from "../Charts/types";
-import { BalanceSummaryProps } from "./components/BalanceSummary/types";
 import { PercentageIndicatorProps } from "./components/PercentageIndicator/types";
-import { ServiceNameProps } from "./components/ServiceName/types";
 import { Column } from "react-table";
 
 export const tableTypes = {
@@ -29,8 +27,6 @@ export interface TableProps<T extends object> extends TableBasicProps<T> {
 }
 
 export interface UserTableData {
-  summary: BalanceSummaryProps;
-  serviceName: ServiceNameProps;
   chart: ChartsProps;
   dailyAvg: PercentageIndicatorProps;
   oneMonth: PercentageIndicatorProps;

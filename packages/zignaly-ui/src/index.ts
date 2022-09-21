@@ -11,7 +11,6 @@ import CoinLabel from "./components/display/Table/components/CoinLabel";
 import Toaster from "./components/display/Toaster";
 import ProgressSlider from "./components/display/ProgressSlider";
 import InvestSlider from "./components/display/InvestSlider";
-import { ServiceName } from "./components/display/Table/components/ServiceName";
 import { AreaChart } from "./components/display/Charts";
 
 // Inputs
@@ -94,8 +93,6 @@ export {
    *   Components
    * =-=-=-=-=-=-=-=
    */
-  // Display
-  ServiceName,
   AreaChart,
   Avatar,
   Loader,
