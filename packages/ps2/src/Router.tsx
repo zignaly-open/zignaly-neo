@@ -38,7 +38,6 @@ import ServiceApi from './views/TraderService/ServiceApi';
 import Manual from 'views/TraderService/Manual';
 import Signals from './views/TraderService/Signals';
 import EditService from 'views/TraderService/EditService';
-import NotATraderWall from './util/walls/NotATraderWall';
 import AuthenticatedWall from 'util/walls/AuthenticatedWall.tsx';
 import UnauthenticatedWall from './util/walls/UnauthenticatedWall';
 import ServiceOwnerWall from './util/walls/ServiceOwnerWall';
@@ -67,9 +66,7 @@ const Router: React.FC = () => (
       </Route>
     </Route>
 
-    <Route element={<NotATraderWall />}>
-      <Route path={ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
-    </Route>
+    <Route path={ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
 
     <Route element={<UnauthenticatedWall />}>
       <Route path={ROUTE_LOGIN} element={<Login />} />
