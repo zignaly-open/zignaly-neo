@@ -28,6 +28,7 @@ export const GET_AUCTIONS = gql`
       imageUrl
       startingBid
       numberOfWinners
+      chain
       basketItems {
         ticker
         amount

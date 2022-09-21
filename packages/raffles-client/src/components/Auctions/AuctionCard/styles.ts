@@ -29,7 +29,7 @@ export const CardHeader = styled('div', {
   ${({ isColumn }) =>
     isColumn
       ? css`
-          height: 64px;
+          height: 75px;
         `
       : css`
           border-bottom: 1px solid rgba(193, 193, 200, 0.4);
@@ -122,4 +122,19 @@ export const CardActions = styled('div', {
     css`
       display: none;
     `}
+`;
+
+export const ContainerChainIcon = styled('div')`
+  border: 1px solid rgba(193, 193, 200, 0.4);
+  border-radius: 100px;
+  padding: 15px 17px;
+`;
+
+export const ContainerLeft = styled('div')`
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  & button {
+    padding: 0;
+  }
 `;

@@ -14,7 +14,6 @@ import BigNumber from 'bignumber.js';
 import { formatDateFromDays } from './util';
 import { Investment } from '../../types';
 import { sortBigNumbers, stringSort } from '../../../../util/numbers';
-import { coinsToOperateServices } from 'util/coins';
 import { getServiceLogo } from '../../../../util/images';
 import { BalanceSummary } from '../BalanceSummary';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
@@ -25,9 +24,9 @@ import CenteredLoader from '../../../../components/CenteredLoader';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
-  const { isLoading, data: services, error } = useInvestments();
+  const { isFetching: isLoading, data: services, error } = useInvestments();
   const selectInvestment = useSetSelectedInvestment();
-  useCoins();
+  const { isFetching: isLoadingCoins } = useCoins();
   const { showModal } = useModal();
 
   const onClickEditInvestment = (service: Investment) => {
@@ -49,11 +48,8 @@ const MyDashboard: React.FC = () => {
         ),
         Cell: ({ cell: { value } }) => (
           <BalanceSummary
-            stableCoinOperative={coinsToOperateServices.stableCoins.includes(
-              value.service.ssc,
-            )}
             totalValue={value.totalValue}
-            symbol={value.service.ssc}
+            coin={value.service.ssc}
             profit={value.profit}
             onClickEdit={() => onClickEditInvestment(value.service)}
           />
@@ -110,12 +106,10 @@ const MyDashboard: React.FC = () => {
         accessor: 'dailyAvg',
         Cell: ({ cell: { value } }) => (
           <PriceLabel
-            green
+            green={+value.dailyAvgPnl > 0}
+            red={+value.dailyAvgPnl < 0}
             coin={value.currency}
             value={value.dailyAvgPnl}
-            stableCoinOperative={coinsToOperateServices.stableCoins.includes(
-              value.currency,
-            )}
           />
         ),
         sortType: (a, b) =>
@@ -128,13 +122,7 @@ const MyDashboard: React.FC = () => {
         Header: t('my-dashboard.tableHeader.3-mos-title'),
         accessor: 'threeMonths',
         Cell: ({ cell: { value } }) => (
-          <PercentageIndicator
-            type='default'
-            value={value.pnl90dPct}
-            stableCoinOperative={coinsToOperateServices.stableCoins.includes(
-              value.currency,
-            )}
-          />
+          <PercentageIndicator type='default' value={value.pnl90dPct} />
         ),
         sortType: (a, b) =>
           sortBigNumbers(
@@ -146,13 +134,7 @@ const MyDashboard: React.FC = () => {
         Header: t('my-dashboard.tableHeader.6-mos-title'),
         accessor: 'sixMonths',
         Cell: ({ cell: { value } }) => (
-          <PercentageIndicator
-            type='default'
-            value={value.pnl180dPct}
-            stableCoinOperative={coinsToOperateServices.stableCoins.includes(
-              value.currency,
-            )}
-          />
+          <PercentageIndicator type='default' value={value.pnl180dPct} />
         ),
         sortType: (a, b) =>
           sortBigNumbers(
@@ -227,7 +209,7 @@ const MyDashboard: React.FC = () => {
           {t('my-dashboard.title')}
         </Typography>
       </Heading>
-      {isLoading && !services ? (
+      {isLoading || isLoadingCoins ? (
         <CenteredLoader />
       ) : (
         <Table

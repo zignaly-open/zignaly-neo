@@ -66,7 +66,7 @@ export const InputContainer = styled.div<{
   border-radius: 5px;
   display: flex;
   align-items: center;
-  background: rgba(16, 18, 37, 0.7);
+  background: rgba(16, 18, 37);
   margin-top: 4px;
   gap: 22px;
   margin-bottom: 10px;

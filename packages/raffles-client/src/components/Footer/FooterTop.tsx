@@ -6,7 +6,7 @@ import {
 } from './styles';
 import { BrandImage, TextButton } from '@zignaly-open/ui';
 import { Trans, useTranslation } from 'react-i18next';
-import { ReactComponent as Facebook } from '../../assets/icons/discord.svg';
+import { ReactComponent as Facebook } from '../../assets/icons/facebook.svg';
 import { ReactComponent as Twitter } from '../../assets/icons/twitter.svg';
 import { ReactComponent as Youtube } from '../../assets/icons/youtube.svg';
 import { ReactComponent as Discord } from '../../assets/icons/discord.svg';
@@ -32,36 +32,28 @@ const FooterTop: React.FC = () => {
         <a
           href={'https://www.facebook.com/zignaly'}
           target='_blank'
-          rel='noopener noreferrer'
+          rel='noopener'
         >
           <Facebook />
         </a>
-        <a
-          href={'https://twitter.com/zignaly'}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
+        <a href={'https://twitter.com/zignaly'} target='_blank' rel='noopener'>
           <Twitter />
         </a>
         <a
           href={'https://www.youtube.com/zignaly'}
           target='_blank'
-          rel='noopener noreferrer'
+          rel='noopener'
         >
           <Youtube />
         </a>
         <a
-          href={'https://discord.com/invite/r5qRXDJ'}
+          href={'https://discord.gg/9H6cEa9uRN'}
           target='_blank'
-          rel='noopener noreferrer'
+          rel='noopener'
         >
           <Discord />
         </a>
-        <a
-          href={'https://t.me/ZignalyHQ'}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
+        <a href={'https://t.me/ZignalyHQ'} target='_blank' rel='noopener'>
           <Telegram />
         </a>
       </IconsContainer>

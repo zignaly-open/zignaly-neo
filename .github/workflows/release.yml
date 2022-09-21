@@ -41,6 +41,7 @@ jobs:
           envkey_REACT_APP_RECEIVING_ADDRESS: ${{ secrets.REACT_APP_RECEIVING_ADDRESS }}
           envkey_REACT_APP_CONTRACT_ADDRESS: ${{ secrets.REACT_APP_CONTRACT_ADDRESS }}
           envkey_REACT_APP_USE_MUMBAI_CHAIN: ${{ secrets.REACT_APP_USE_MUMBAI_CHAIN }}
+          envkey_REACT_APP_ENABLE_TRACKING: ${{ secrets.REACT_APP_ENABLE_TRACKING }}
           directory: packages/raffles-client
           file_name: .env.production.local
       - name: Setup Node.js

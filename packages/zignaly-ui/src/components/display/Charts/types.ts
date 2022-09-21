@@ -10,12 +10,6 @@ export interface AxisFormat {
   y: number;
 }
 
-export interface ChartInput {
-  data: AxisFormat[];
-  isGreen: boolean;
-  midLine?: boolean | null;
-}
-
 export const ChartVariations = {
   small: "small",
   large: "large",

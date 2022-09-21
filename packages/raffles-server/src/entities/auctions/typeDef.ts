@@ -46,6 +46,7 @@ export const typeDef = gql`
     bids: [Bid]
     userBid: Bid
     numberOfWinners: Int
+    chain: String
   }
 
   extend type Query {

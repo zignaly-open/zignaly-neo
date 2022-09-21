@@ -7,7 +7,7 @@ import { Button, Typography } from '@zignaly-open/ui';
 import DialogContainer from '../DialogContainer';
 import ProjectDetailsModal from '../ProjectDetails';
 import { CongratulationsModalProps } from './types';
-import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
+import { ReactComponent as ZigCoinIcon } from 'assets/icons/zig-coin.svg';
 import { AuctionImage, Description, ContainerDescription } from './styles';
 import { ReactComponent as DiscordIconButton } from '../../../assets/icons/discord-minimalist.svg';
 import { ReactComponent as SupportIconButton } from '../../../assets/icons/support-minimalist.svg';
@@ -63,7 +63,7 @@ const CongratulationsModal = ({
         mt='25px'
       >
         {auction.discord && (
-          <a href={auction.discord} target='_blank' rel='noopener noreferrer'>
+          <a href={auction.discord} target='_blank' rel='noopener'>
             <Button
               variant='secondary'
               size='large'
@@ -73,11 +73,9 @@ const CongratulationsModal = ({
           </a>
         )}
         <a
-          href={
-            'https://help.zignaly.com/en/articles/6203524-contact-our-support-team'
-          }
+          href='https://help.zignaly.com/en/articles/6203524-contact-our-support-team'
           target='_blank'
-          rel='noopener noreferrer'
+          rel='noopener'
         >
           <Button
             variant='secondary'

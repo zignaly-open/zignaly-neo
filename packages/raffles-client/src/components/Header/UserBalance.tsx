@@ -2,7 +2,7 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import useBalance, { useBalanceSubscription } from '../../hooks/useBalance';
-import { ReactComponent as ZigCoinIcon } from 'images/zig-coin.svg';
+import { ReactComponent as ZigCoinIcon } from 'assets/icons/zig-coin.svg';
 import NumberFormat from 'react-number-format';
 import { styled } from '@mui/material/styles';
 import { Typography } from '@zignaly-open/ui';

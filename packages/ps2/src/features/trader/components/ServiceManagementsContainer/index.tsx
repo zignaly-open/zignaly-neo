@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import {
@@ -28,7 +28,6 @@ import {
 } from './styles';
 
 import BigNumber from 'bignumber.js';
-import { coinsToOperateServices } from '../../../../util/coins';
 import {
   useTraderServiceBalance,
   useServiceDetails,
@@ -64,11 +63,6 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
     });
   };
 
-  const checkStableCoinOperate = useMemo(
-    () => coinsToOperateServices.stableCoins.includes(service?.ssc ?? 'USDT'),
-    [service?.ssc],
-  );
-
   return (
     <Layout>
       {isLoadingManagement || isLoadingService || isLoadingBalance ? (
@@ -80,7 +74,6 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
               {t('management.totalFunds')}
             </Typography>
             <MainPriceLabel
-              stableCoinOperative={checkStableCoinOperate}
               value={parseFloat(balance.sbt)}
               coin={service?.ssc ?? 'USDT'}
             />
@@ -100,7 +93,6 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 <Typography color='neutral400' variant='body2'>
                   {t('management.availableTrading')}
                   <InlinePriceLabel
-                    stableCoinOperative={checkStableCoinOperate}
                     value={parseFloat(balance.staSscFree)}
                     coin={service?.ssc ?? 'USDT'}
                   />
@@ -108,7 +100,6 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 <Typography color='neutral400' variant='body2'>
                   {t('management.allocatedTrading')}
                   <InlinePriceLabel
-                    stableCoinOperative={checkStableCoinOperate}
                     value={parseFloat(balance.staSscSum)}
                     coin={service?.ssc ?? 'USDT'}
                   />
@@ -148,7 +139,6 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 <Typography color='neutral400' variant='body2'>
                   {t('management.availableDisconnection')}
                   <InlinePriceLabel
-                    stableCoinOperative={checkStableCoinOperate}
                     value={parseFloat(balance.scaSscSum)}
                     coin={service?.ssc ?? 'USDT'}
                   />
@@ -156,7 +146,6 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 <Typography color='neutral400' variant='body2'>
                   {t('management.neededSnapshot')}
                   <InlinePriceLabel
-                    stableCoinOperative={checkStableCoinOperate}
                     value={parseFloat(management.transferOut)}
                     coin={service?.ssc ?? 'USDT'}
                   />
@@ -164,7 +153,6 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 <Typography color='neutral400' variant='body2'>
                   {t('management.minBalance.title')}
                   <InlinePriceLabel
-                    stableCoinOperative={checkStableCoinOperate}
                     value={parseFloat(management.minimumSca)}
                     coin={service?.ssc ?? 'USDT'}
                   />
@@ -184,7 +172,6 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 <Typography color='neutral400' variant='body2'>
                   {t('management.heldHardDisc')}
                   <InlinePriceLabel
-                    stableCoinOperative={checkStableCoinOperate}
                     value={parseFloat(balance.dfa)}
                     coin={service?.ssc ?? 'USDT'}
                   />

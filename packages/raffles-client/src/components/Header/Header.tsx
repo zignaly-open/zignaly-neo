@@ -28,7 +28,6 @@ const MenuButton = styled(IconButton)`
   ${({ theme }) => theme.breakpoints.down('sm')} {
     margin-left: -18px;
   }
-
   button > div {
     width: auto !important;
   }
@@ -91,6 +90,7 @@ const Header = () => {
                 <UserBalance />
               </Box>
               <MenuButton
+                size={'xlarge'}
                 key={'user'}
                 variant={'flat'}
                 icon={<UserIcon color='#65647E' />}

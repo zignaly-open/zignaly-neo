@@ -17,31 +17,30 @@ const Footer: React.FC = () => {
       <FooterTop />
       <TopNav>
         <a
-          href={'https://zignaly.com/'}
+          href='https://help.zignaly.com/en/articles/6555802-zigbids-step-by-step-guide'
           target='_blank'
-          rel='noopener noreferrer'
+          rel='noopener'
+        >
+          {t('how_it_works')}
+        </a>
+        <a
+          href='https://help.zignaly.com/en/articles/6564326-faqs-and-troubleshooting-tips-for-zigbids'
+          target='_blank'
+          rel='noopener'
         >
           {t('zigbids_faqs')}
         </a>
         <a
-          href={'https://help.zignaly.com/en/'}
+          href='https://help.zignaly.com/en/articles/6203524-contact-our-support-team'
           target='_blank'
-          rel='noopener noreferrer'
+          rel='noopener'
         >
           {t('support')}
         </a>
-        <a
-          href={'https://zignaly.com/'}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
+        <a href={'https://zignaly.com/'} target='_blank' rel='noopener'>
           {t('zignaly_web')}
         </a>
-        <a
-          href={'https://bridge.zignaly.com/'}
-          target='_blank'
-          rel='noopener noreferrer'
-        >
+        <a href={'https://bridge.zignaly.com/'} target='_blank' rel='noopener'>
           {t('zignaly_bridge')}
         </a>
       </TopNav>
@@ -49,28 +48,28 @@ const Footer: React.FC = () => {
         <a
           href={'https://zignaly.com/legal/terms'}
           target='_blank'
-          rel='noopener noreferrer'
+          rel='noopener'
         >
           {t('terms_of_service')}
         </a>
         <a
           href={'https://zignaly.com/legal/privacy'}
           target='_blank'
-          rel='noopener noreferrer'
+          rel='noopener'
         >
           {t('privacy_policy')}
         </a>
         <a
           href={'https://zignaly.com/legal/risks'}
           target='_blank'
-          rel='noopener noreferrer'
+          rel='noopener'
         >
           {t('risk_warning')}
         </a>
         <a
           href={'https://zignaly.com/legal/api-agreement'}
           target='_blank'
-          rel='noopener noreferrer'
+          rel='noopener'
         >
           {t('api_license')}
         </a>

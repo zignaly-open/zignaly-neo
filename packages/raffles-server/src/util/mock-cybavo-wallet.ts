@@ -32,6 +32,14 @@ const mockCybavoWallet = (user: User, initialBalance = 0) => {
     })
     .reply((config) => {
       const { amount } = JSON.parse(config.data);
+      if (balance - parseFloat(amount) < 0) {
+        return [
+          400,
+          {
+            error: 'Balance is not enough',
+          },
+        ];
+      }
       balance -= parseFloat(amount);
       return [200, { transaction_id: randomString(8) }];
     });
