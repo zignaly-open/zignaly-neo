@@ -16,23 +16,19 @@ import {
   useServiceDetails,
   useTraderServiceManagement,
 } from '../../use';
-import { Investor } from '../../types';
+import { Investor, TraderServiceManagement } from '../../types';
 import ConnectionStateLabel from '../ConnectionStateLabel';
 import { YesNo } from './atoms';
-import CenteredLoader from '../../../../components/CenteredLoader';
+import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
 }) => {
-  const {
-    isLoading: isLoadingInvestors,
-    data: investors,
-    isError,
-  } = useTraderServiceInvestors(serviceId);
-  const { isLoading: isLoadingService, data: service } =
-    useServiceDetails(serviceId);
-  const { isLoading: isLoadingManagement, data: management } =
-    useTraderServiceManagement(serviceId);
+  const investorsEndpoint = useTraderServiceInvestors(serviceId);
+  const serviceDetailsEndpoint = useServiceDetails(serviceId);
+  const managementEndpoint = useTraderServiceManagement(serviceId);
+
+  const { data: service } = serviceDetailsEndpoint;
 
   const { t } = useTranslation('investors');
 
@@ -98,42 +94,52 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
 
   return (
     <Layout>
-      {investors && (
-        <InvestorCounts>
-          <UserIcon width={'17px'} height={'20px'} color={'#65647E'} />
-          <Typography variant={'h3'} color={'avatarBack'}>
-            {t('investors.number-of-investors', { count: investors?.length })}
-          </Typography>
-        </InvestorCounts>
-      )}
+      <LayoutContentWrapper
+        endpoint={[
+          investorsEndpoint,
+          managementEndpoint,
+          serviceDetailsEndpoint,
+        ]}
+        content={([investors, management]: [
+          Investor[],
+          TraderServiceManagement,
+        ]) => (
+          <>
+            <InvestorCounts>
+              <UserIcon width={'17px'} height={'20px'} color={'#65647E'} />
+              <Typography variant={'h3'} color={'avatarBack'}>
+                {t('investors.number-of-investors', {
+                  count: investors?.length,
+                })}
+              </Typography>
+            </InvestorCounts>
 
-      {isLoadingInvestors || isLoadingService || isLoadingManagement ? (
-        <CenteredLoader />
-      ) : (
-        <Table
-          type={'pagedWithData'}
-          columns={columns}
-          data={investors?.map((investor: Investor) => ({
-            email: investor.email,
-            userId: investor.userId,
-            investment: new BigNumber(investor.invested).plus(
-              new BigNumber(investor.pending),
-            ),
-            pnl: {
-              pnlNetLc: investor.pnlNetLc,
-              pnlPctLc: investor.pnlPctLc,
-            },
-            pnlTotal: investor.pnlNetAt,
-            totalFeesPaid: investor.sfOwnerAt,
-            successFee: `${management.successFee}%`,
-            feesInZig: investor.payZig,
-            status: investor.accountType,
-          }))}
-          hideOptionsButton={false}
-          emptyMessage={isError ? t('investors.failed-to-load') : undefined}
-          isUserTable={false}
-        />
-      )}
+            <Table
+              type={'pagedWithData'}
+              columns={columns}
+              data={investors?.map((investor: Investor) => ({
+                email: investor.email,
+                userId: investor.userId,
+                investment: new BigNumber(investor.invested).plus(
+                  new BigNumber(investor.pending),
+                ),
+                pnl: {
+                  pnlNetLc: investor.pnlNetLc,
+                  pnlPctLc: investor.pnlPctLc,
+                },
+                pnlTotal: investor.pnlNetAt,
+                totalFeesPaid: investor.sfOwnerAt,
+                successFee: `${management.successFee}%`,
+                feesInZig: investor.payZig,
+                status: investor.accountType,
+              }))}
+              hideOptionsButton={false}
+              emptyMessage={t('investors.no-investors')}
+              isUserTable={false}
+            />
+          </>
+        )}
+      />
     </Layout>
   );
 };

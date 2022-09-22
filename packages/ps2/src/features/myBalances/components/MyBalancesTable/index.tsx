@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from 'styled-components';
 import { useMyBalances } from '../../use';
@@ -15,8 +15,8 @@ import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { MyBalancesTableDataType } from './types';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { TableHead } from './styles';
-import CenteredLoader from '../../../../components/CenteredLoader';
-import { CoinBalance, CoinDetail } from '../../types';
+import { AggregatedBalances, CoinBalance, CoinDetail } from '../../types';
+import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 
 const initialStateTable = {
   sortBy: [
@@ -30,7 +30,7 @@ const initialStateTable = {
 const MyBalancesTable = (): JSX.Element => {
   const theme = useTheme() as Theme;
   const { t } = useTranslation('my-balances');
-  const { data: balances, isLoading } = useMyBalances();
+  const balancesEndpoint = useMyBalances();
 
   const [searchBy, setSearchBy] = useState('');
 
@@ -102,66 +102,77 @@ const MyBalancesTable = (): JSX.Element => {
     [t],
   );
 
-  const data = Object.entries<CoinBalance & CoinDetail>(balances || {})
-    .filter(
-      ([symbol, balance]) =>
-        symbol.toLowerCase().includes(searchBy.toLowerCase()) ||
-        balance.name.toLowerCase().includes(searchBy.toLowerCase()),
-    )
-    .map(([coin, balance]) => ({
-      coin: { symbol: coin, name: balance.name },
-      total: {
-        symbol: coin,
-        balanceTotal: balance.balanceTotal,
-      },
-      available: {
-        symbol: coin,
-        balanceFree: balance.balanceFree,
-      },
-      locked: {
-        symbol: coin,
-        balanceLocked: balance.balanceLocked,
-      },
-      valueBTC: {
-        balanceTotalBTC: balance.balanceTotalBTC,
-      },
-      valueUSD: {
-        balanceTotalUSDT: balance.balanceTotalUSDT,
-      },
-    }));
+  const getFilteredData = useCallback(
+    (balances: AggregatedBalances) =>
+      Object.entries<CoinBalance & CoinDetail>(balances || {})
+        .filter(
+          ([symbol, balance]) =>
+            symbol.toLowerCase().includes(searchBy.toLowerCase()) ||
+            balance.name.toLowerCase().includes(searchBy.toLowerCase()),
+        )
+        .map(([coin, balance]) => ({
+          coin: { symbol: coin, name: balance.name },
+          total: {
+            symbol: coin,
+            balanceTotal: balance.balanceTotal,
+          },
+          available: {
+            symbol: coin,
+            balanceFree: balance.balanceFree,
+          },
+          locked: {
+            symbol: coin,
+            balanceLocked: balance.balanceLocked,
+          },
+          valueBTC: {
+            balanceTotalBTC: balance.balanceTotalBTC,
+          },
+          valueUSD: {
+            balanceTotalUSDT: balance.balanceTotalUSDT,
+          },
+        })),
+    [],
+  );
 
-  return isLoading ? (
-    <CenteredLoader />
-  ) : (
-    <>
-      <TableHead>
-        <Expandable value={searchBy}>
-          {({ setExpanded }) => (
-            <InputText
-              leftSideElement={
-                <SearchIcon width={14} height={14} color={theme.neutral300} />
-              }
-              minHeight={44}
-              value={searchBy}
-              onBlur={() => setExpanded(false)}
-              onFocus={() => setExpanded(true)}
-              onChange={(e: React.FormEvent<HTMLInputElement>) =>
-                setSearchBy(e.currentTarget.value)
-              }
-              placeholder={t('my-balances.table-search-placeholder')}
-            />
-          )}
-        </Expandable>
-      </TableHead>
-      <Table
-        type={'pagedWithData'}
-        columns={columns}
-        data={data}
-        initialState={initialStateTable}
-        hideOptionsButton={false}
-        isUserTable={false}
-      />
-    </>
+  return (
+    <LayoutContentWrapper
+      endpoint={[balancesEndpoint]}
+      content={(balances: AggregatedBalances) => (
+        <>
+          <TableHead>
+            <Expandable value={searchBy}>
+              {({ setExpanded }) => (
+                <InputText
+                  leftSideElement={
+                    <SearchIcon
+                      width={14}
+                      height={14}
+                      color={theme.neutral300}
+                    />
+                  }
+                  minHeight={44}
+                  value={searchBy}
+                  onBlur={() => setExpanded(false)}
+                  onFocus={() => setExpanded(true)}
+                  onChange={(e: React.FormEvent<HTMLInputElement>) =>
+                    setSearchBy(e.currentTarget.value)
+                  }
+                  placeholder={t('my-balances.table-search-placeholder')}
+                />
+              )}
+            </Expandable>
+          </TableHead>
+          <Table
+            type={'pagedWithData'}
+            columns={columns}
+            data={getFilteredData(balances)}
+            initialState={initialStateTable}
+            hideOptionsButton={false}
+            isUserTable={false}
+          />
+        </>
+      )}
+    />
   );
 };
 

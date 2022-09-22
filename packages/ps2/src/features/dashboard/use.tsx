@@ -14,10 +14,7 @@ import { setSelectedInvestment } from './store';
 import { useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 
-export function useInvestments(): ReturnType<typeof useInvestmentsQuery> {
-  const exchange = useActiveExchange();
-  return useInvestmentsQuery(exchange?.internalId);
-}
+export const useInvestments = useInvestmentsQuery;
 
 export function useCoins(): ReturnType<typeof useCoinsQuery> {
   // TODO: once German's changes are in, merge them

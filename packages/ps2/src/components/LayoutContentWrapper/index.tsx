@@ -4,7 +4,7 @@ import CriticalError from '../Stub/CriticalError';
 import NoData from '../Stub/NoData';
 
 type EndpointEsque = {
-  isFetching: boolean;
+  isFetching?: boolean;
   isLoading: boolean;
   error?: unknown;
   data?: unknown;

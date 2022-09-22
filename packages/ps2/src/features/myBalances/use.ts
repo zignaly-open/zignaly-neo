@@ -14,6 +14,7 @@ export const useMyBalances = (): {
     useReducedBalancesQuery(currentExchange?.internalId, {
       skip: !currentExchange,
     });
+  // FIXME: make consistent
   const [, { isFetching: isLoadingAllCoins }] = useLazyAllCoinsQuery();
   const isLoading = isLoadingAllCoins || isLoadingReducedBalances;
 

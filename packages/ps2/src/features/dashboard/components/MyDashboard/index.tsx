@@ -19,13 +19,16 @@ import EditInvestmentModal from '../EditInvestmentModal';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { DashboardTableDataType } from './types';
 import { ServiceName } from '../ServiceName';
-import CenteredLoader from '../../../../components/CenteredLoader';
+import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
+import { useActiveExchange } from '../../../auth/use';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
-  const { isFetching: isLoading, data: services, error } = useInvestments();
+  const exchange = useActiveExchange();
+  const investmentsEdnpoint = useInvestments(exchange?.internalId);
   const selectInvestment = useSetSelectedInvestment();
-  const { isFetching: isLoadingCoins } = useCoins();
+  // we do not use the results of this till before the modal
+  useCoins();
   const { showModal } = useModal();
 
   const onClickEditInvestment = (service: Investment) => {
@@ -197,21 +200,18 @@ const MyDashboard: React.FC = () => {
           {t('my-dashboard.title')}
         </Typography>
       </Heading>
-      {isLoading || isLoadingCoins ? (
-        <CenteredLoader />
-      ) : (
-        <Table
-          columns={tableColumns}
-          data={services?.map(bodyMapper)}
-          emptyMessage={
-            !error
-              ? t('my-dashboard.table-search-emptyMessage')
-              : t('my-dashboard.something-went-wrong')
-          }
-          hideOptionsButton={true}
-          isUserTable={true}
-        />
-      )}
+      <LayoutContentWrapper
+        endpoint={investmentsEdnpoint}
+        content={(services: Investment[]) => (
+          <Table
+            columns={tableColumns}
+            data={services?.map(bodyMapper)}
+            emptyMessage={t('my-dashboard.table-search-emptyMessage')}
+            hideOptionsButton={true}
+            isUserTable={true}
+          />
+        )}
+      />
     </Layout>
   );
 };

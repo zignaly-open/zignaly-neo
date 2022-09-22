@@ -4,10 +4,12 @@ import { Button, Typography } from '@zignaly-open/ui';
 import { Highline } from '../styles';
 import { useCoins, useInvestments } from '../../../use';
 import { ModalActions } from 'components/ModalContainer/styles';
+import { useActiveExchange } from '../../../../auth/use';
 
 function EditInvestmentSuccessModal({ close }: { close: () => void }) {
   const { t } = useTranslation('edit-investment');
-  const { refetch: refetchInvestments } = useInvestments();
+  const exchange = useActiveExchange();
+  const { refetch: refetchInvestments } = useInvestments(exchange?.internalId);
   const { refetch: refetchCoins } = useCoins();
   useEffect(() => {
     refetchInvestments();

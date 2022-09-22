@@ -32,11 +32,7 @@ export function useFirstOwnedService(): TraderService | null {
   return (isAuthenticated && traderServices[0]) || null;
 }
 
-export const useTraderServiceInvestors = (
-  serviceId: string,
-): ReturnType<typeof useTraderServiceInvestorsQuery> => {
-  return useTraderServiceInvestorsQuery(serviceId);
-};
+export const useTraderServiceInvestors = useTraderServiceInvestorsQuery;
 
 export const useTraderServiceManagement = useTraderServiceManagementQuery;
 
