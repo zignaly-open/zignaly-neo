@@ -8,6 +8,7 @@ export const Layout = styled.div`
   align-items: center;
   padding: 8em 2em;
   max-width: 680px;
+  margin: 0 auto;
   text-align: center;
 
   * {
