@@ -129,8 +129,8 @@ export const CardActions = styled('div', {
 export const ContainerChainIcon = styled('div')`
   border: 1px solid rgba(193, 193, 200, 0.4);
   border-radius: 50%;
-  width: 53px;
-  height: 53px;
+  min-width: 53px;
+  min-height: 53px;
   display: flex;
   justify-content: center;
   align-items: center;
