@@ -1,6 +1,6 @@
 import { css, styled } from '@mui/material/styles';
 import { AmountContainer } from 'components/common/AmountContainer';
-import { PriceLabel as PriceLabelZig } from '@zignaly-open/ui';
+import { PriceLabel as PriceLabelZig, TextButton } from '@zignaly-open/ui';
 
 export const Item = styled('div')`
   background: rgba(37, 35, 57, 0.4);
@@ -39,6 +39,8 @@ export const CardHeader = styled('div', {
 
 export const CardHeaderLeft = styled(CardHeader)`
   border-bottom: 1px solid rgba(193, 193, 200, 0.4);
+  align-items: flex-start;
+  padding-left: 30px;
 `;
 
 export const AuctionImage = styled('img', {
@@ -126,15 +128,14 @@ export const CardActions = styled('div', {
 
 export const ContainerChainIcon = styled('div')`
   border: 1px solid rgba(193, 193, 200, 0.4);
-  border-radius: 100px;
-  padding: 15px 17px;
+  border-radius: 50%;
+  width: 53px;
+  height: 53px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-export const ContainerLeft = styled('div')`
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  & button {
-    padding: 0;
-  }
+export const StyledTextButton = styled(TextButton)`
+  padding: 0;
 `;

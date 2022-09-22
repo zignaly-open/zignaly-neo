@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { Typography, TextButton } from '@zignaly-open/ui';
+import { Typography } from '@zignaly-open/ui';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
@@ -21,7 +21,7 @@ import {
   CardActions,
   CardHeader,
   ContainerChainIcon,
-  ContainerLeft,
+  StyledTextButton,
 } from './styles';
 import ClaimButton from './ClaimButton';
 import useUpdatedAt from 'hooks/useUpdatedAt';
@@ -68,20 +68,33 @@ const AuctionCard: React.FC<{
     <Item>
       <CardColumn ref={leftRef}>
         <CardHeaderLeft isColumn={isColumn}>
-          <Box display='flex' alignItems='center' gap={2}>
+          <Box
+            width={1}
+            display='flex'
+            alignItems='center'
+            gap={2}
+            justifyContent={{ xs: 'center', sm: 'flex-start' }}
+          >
             <ContainerChainIcon>
               <ChainIcon chain={auction.chain} />
             </ContainerChainIcon>
-            <ContainerLeft>
-              <Typography variant='h2' color='neutral100'>
-                {auction.title}
-              </Typography>
-              <TextButton
+            <Box
+              display='flex'
+              flexDirection='column'
+              justifyContent='center'
+              alignItems='flex-start'
+            >
+              <Box display='flex' gap={1} whiteSpace='nowrap'>
+                <Typography variant='h2' color='neutral100'>
+                  {auction.title}
+                </Typography>
+              </Box>
+              <StyledTextButton
                 color='links'
                 caption={t('project-desc')}
                 onClick={() => showModal(ProjectDetailsModal, { auction })}
               />
-            </ContainerLeft>
+            </Box>
           </Box>
         </CardHeaderLeft>
         {auction.imageUrl && (
