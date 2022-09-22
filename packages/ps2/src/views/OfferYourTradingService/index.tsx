@@ -39,75 +39,59 @@ const OfferYourTradingService: React.FC = () => {
 
   const infoBarItems: InfoBarItem[] = [
     {
-      title: t('offer-your-trading-service.infoBar.item1.title'),
-      description: t('offer-your-trading-service.infoBar.item1.description'),
+      title: t('infoBar.item1.title'),
+      description: t('infoBar.item1.description'),
     },
     {
-      title: t('offer-your-trading-service.infoBar.item2.title'),
-      description: t('offer-your-trading-service.infoBar.item2.description'),
+      title: t('infoBar.item2.title'),
+      description: t('infoBar.item2.description'),
     },
     {
-      title: t('offer-your-trading-service.infoBar.item3.title'),
-      description: t('offer-your-trading-service.infoBar.item3.description'),
+      title: t('infoBar.item3.title'),
+      description: t('infoBar.item3.description'),
     },
   ];
 
   const featuresItems: FeatureItem[] = [
     {
-      title: t('offer-your-trading-service.features.list.item1.title'),
-      description: t(
-        'offer-your-trading-service.features.list.item1.description',
-      ),
+      title: t('features.list.item1.title'),
+      description: t('features.list.item1.description'),
     },
     {
-      title: t('offer-your-trading-service.features.list.item2.title'),
-      description: t(
-        'offer-your-trading-service.features.list.item2.description',
-      ),
+      title: t('features.list.item2.title'),
+      description: t('features.list.item2.description'),
     },
     {
-      title: t('offer-your-trading-service.features.list.item3.title'),
-      description: t(
-        'offer-your-trading-service.features.list.item3.description',
-      ),
+      title: t('features.list.item3.title'),
+      description: t('features.list.item3.description'),
     },
     {
-      title: t('offer-your-trading-service.features.list.item4.title'),
-      description: t(
-        'offer-your-trading-service.features.list.item4.description',
-      ),
+      title: t('features.list.item4.title'),
+      description: t('features.list.item4.description'),
     },
   ];
 
   const howWorksItems: HowWorksItem[] = [
     {
-      title: t('offer-your-trading-service.howWorks.list.item1.title'),
-      description: t(
-        'offer-your-trading-service.howWorks.list.item1.description',
-      ),
+      title: t('howWorks.list.item1.title'),
+      description: t('howWorks.list.item1.description'),
     },
     {
-      title: t('offer-your-trading-service.howWorks.list.item2.title'),
-      description: t(
-        'offer-your-trading-service.howWorks.list.item2.description',
-      ),
+      title: t('howWorks.list.item2.title'),
+      description: t('howWorks.list.item2.description'),
     },
     {
-      title: t('offer-your-trading-service.howWorks.list.item3.title'),
-      description: t(
-        'offer-your-trading-service.howWorks.list.item3.description',
-      ),
+      title: t('howWorks.list.item3.title'),
+      description: t('howWorks.list.item3.description'),
     },
   ];
 
   return (
     <Layout>
       <Header>
-        <Typography variant={'h1'}>
-          {t('offer-your-trading-service.header.title')}
-        </Typography>
+        <Typography variant={'h1'}>{t('header.title')}</Typography>
         <Typography variant={'body1'} color={'neutral400'}>
-          {t('offer-your-trading-service.header.description')}
+          {t('header.description')}
         </Typography>
       </Header>
 
@@ -115,31 +99,26 @@ const OfferYourTradingService: React.FC = () => {
         <Section>
           <Wrapper>
             <Side>
-              <Typography variant={'h2'}>
-                {t('offer-your-trading-service.wrapper.title')}
-              </Typography>
+              <Typography variant={'h2'}>{t('wrapper.title')}</Typography>
               <WrapperList>
                 <WrapperItem>
                   <Typography variant={'body1'} color={'neutral300'}>
-                    {t('offer-your-trading-service.wrapper.list.item1')}
+                    {t('wrapper.list.item1')}
                   </Typography>
                 </WrapperItem>
                 <WrapperItem>
                   <Typography variant={'body1'} color={'neutral300'}>
-                    {t('offer-your-trading-service.wrapper.list.item2')}
+                    {t('wrapper.list.item2')}
                   </Typography>
                 </WrapperItem>
                 <WrapperItem>
                   <Typography variant={'body1'} color={'neutral300'}>
-                    {t('offer-your-trading-service.wrapper.list.item3')}
+                    {t('wrapper.list.item3')}
                   </Typography>
                 </WrapperItem>
               </WrapperList>
               <WrapperAction>
-                <Button
-                  size={'large'}
-                  caption={t('offer-your-trading-service.wrapper.action')}
-                />
+                <Button size={'large'} caption={t('wrapper.action')} />
               </WrapperAction>
             </Side>
             <Side>{/* Put image here */}</Side>
@@ -151,7 +130,7 @@ const OfferYourTradingService: React.FC = () => {
             <InfoBarList itemsLength={infoBarItems.length}>
               {infoBarItems.map((item, index) => (
                 <InfoBarListItem key={`--info-bar-item-${index.toString()}`}>
-                  <Typography variant={'h1'} color={'neutral100'}>
+                  <Typography variant={'bigNumber'} color={'neutral100'}>
                     {item.title}
                   </Typography>
                   <Typography variant={'body1'} color={'neutral400'}>
@@ -165,7 +144,7 @@ const OfferYourTradingService: React.FC = () => {
 
         <Section>
           <Typography variant={'h2'} color={'neutral100'}>
-            {t('offer-your-trading-service.features.title')}
+            {t('features.title')}
           </Typography>
 
           <FeaturesList itemsLength={featuresItems.length}>
@@ -191,7 +170,7 @@ const OfferYourTradingService: React.FC = () => {
 
         <Section>
           <Typography variant={'h2'} color={'neutral100'}>
-            {t('offer-your-trading-service.howWorks.title')}
+            {t('howWorks.title')}
           </Typography>
 
           <StepList itemsLength={howWorksItems.length}>
@@ -230,7 +209,7 @@ const OfferYourTradingService: React.FC = () => {
 
         <Section>
           <Typography variant={'h2'} color={'neutral100'}>
-            {t('offer-your-trading-service.testimonials.title')}
+            {t('testimonials.title')}
           </Typography>
         </Section>
       </Sections>
