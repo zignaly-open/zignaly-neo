@@ -68,33 +68,25 @@ const AuctionCard: React.FC<{
     <Item>
       <CardColumn ref={leftRef}>
         <CardHeaderLeft isColumn={isColumn}>
+          <ContainerChainIcon>
+            <ChainIcon chain={auction.chain} />
+          </ContainerChainIcon>
           <Box
-            width={1}
             display='flex'
-            alignItems='center'
-            gap={2}
-            justifyContent={{ xs: 'center', sm: 'flex-start' }}
+            flexDirection='column'
+            justifyContent='center'
+            alignItems='flex-start'
           >
-            <ContainerChainIcon>
-              <ChainIcon chain={auction.chain} />
-            </ContainerChainIcon>
-            <Box
-              display='flex'
-              flexDirection='column'
-              justifyContent='center'
-              alignItems='flex-start'
-            >
-              <Box display='flex' gap={1} whiteSpace='nowrap'>
-                <Typography variant='h2' color='neutral100'>
-                  {auction.title}
-                </Typography>
-              </Box>
-              <StyledTextButton
-                color='links'
-                caption={t('project-desc')}
-                onClick={() => showModal(ProjectDetailsModal, { auction })}
-              />
+            <Box display='flex' gap={1} whiteSpace='nowrap'>
+              <Typography variant='h2' color='neutral100'>
+                {auction.title}
+              </Typography>
             </Box>
+            <StyledTextButton
+              color='links'
+              caption={t('project-desc')}
+              onClick={() => showModal(ProjectDetailsModal, { auction })}
+            />
           </Box>
         </CardHeaderLeft>
         {auction.imageUrl && (

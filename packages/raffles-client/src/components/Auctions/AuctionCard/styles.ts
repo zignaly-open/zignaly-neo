@@ -39,8 +39,19 @@ export const CardHeader = styled('div', {
 
 export const CardHeaderLeft = styled(CardHeader)`
   border-bottom: 1px solid rgba(193, 193, 200, 0.4);
-  align-items: flex-start;
-  padding-left: 30px;
+  justify-content: flex-start;
+  padding: 0 30px;
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-direction: row;
+
+  ${({ isColumn }) =>
+    isColumn &&
+    css`
+      justify-content: center;
+    `}
 `;
 
 export const AuctionImage = styled('img', {
