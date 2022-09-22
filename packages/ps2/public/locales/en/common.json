@@ -6,6 +6,14 @@
     "title": "Coming Soon",
     "description": "This section is under development, you will see it available at a later date."
   },
+  "no-data": {
+    "title": "No Data",
+    "description": "No data available. If you believe it is an issue, please contact support."
+  },
+  "critical-error": {
+    "title": "Error Occurred",
+    "description": "Something went wrong. Please try again later or contact support. Or abandon the industrial society and build a cabin in the woods."
+  },
   "main-menu": {
     "dropdown-link-forTrading": "For Trading Services",
     "dropdown-link-helpDocs": "Help Docs"

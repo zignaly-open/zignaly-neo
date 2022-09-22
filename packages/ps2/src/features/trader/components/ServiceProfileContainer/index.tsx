@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import { useIsServiceOwner, useServiceDetails } from '../../use';
-import ComingSoon from '../../../../components/ComingSoon';
+import ComingSoon from '../../../../components/Stub/ComingSoon';
 import { useIsAuthenticated } from '../../../auth/use';
 import { TraderServiceAccessLevel } from '../../types';
 import { useNavigate } from 'react-router-dom';
@@ -13,7 +13,7 @@ const ServiceProfileContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
 }) => {
   const { t } = useTranslation('pages');
-  useTitle(t('pages.trading-services'));
+  useTitle(t('trading-services'));
   const { isLoading: isLoadingService, data: service } =
     useServiceDetails(serviceId);
   const isAuthenticated = useIsAuthenticated();

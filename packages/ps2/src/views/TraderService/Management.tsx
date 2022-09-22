@@ -4,7 +4,6 @@ import ServiceManagementsContainer from '../../features/trader/components/Servic
 import { useParams } from 'react-router-dom';
 import { TraderServicePageContainer } from '../../features/trader/components/styles';
 import { useTraderServiceTitle } from '../../features/trader/use';
-import ManagementHelper from '../../features/trader/components/ManagementHelper';
 
 const Management: React.FC = () => {
   const { serviceId } = useParams();
@@ -14,7 +13,6 @@ const Management: React.FC = () => {
       <ServiceHeader />
       <TraderServicePageContainer>
         <ServiceManagementsContainer serviceId={serviceId} />
-        <ManagementHelper />
       </TraderServicePageContainer>
     </>
   );

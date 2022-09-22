@@ -7,4 +7,10 @@ export const Layout = styled.div`
   justify-content: center;
   align-items: center;
   padding: 8em 2em;
+  max-width: 680px;
+  text-align: center;
+
+  * {
+    line-height: 1.8 !important;
+  }
 `;

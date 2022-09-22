@@ -38,23 +38,11 @@ export const useTraderServiceInvestors = (
   return useTraderServiceInvestorsQuery(serviceId);
 };
 
-export function useTraderServiceManagement(
-  serviceId: string,
-): ReturnType<typeof useTraderServiceManagementQuery> {
-  return useTraderServiceManagementQuery(serviceId);
-}
+export const useTraderServiceManagement = useTraderServiceManagementQuery;
 
-export function useServiceDetails(
-  serviceId: string,
-): ReturnType<typeof useTraderServiceDetailsQuery> {
-  return useTraderServiceDetailsQuery(serviceId);
-}
+export const useServiceDetails = useTraderServiceDetailsQuery;
 
-export function useTraderServiceBalance(
-  serviceId: string,
-): ReturnType<typeof useTraderServiceBalanceQuery> {
-  return useTraderServiceBalanceQuery(serviceId);
-}
+export const useTraderServiceBalance = useTraderServiceBalanceQuery;
 
 export function useTraderServiceUpdateMinimum(
   serviceId: string,
