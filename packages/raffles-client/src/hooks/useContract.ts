@@ -1,4 +1,4 @@
-import { useContractFunction } from '@usedapp/core';
+import { useContractFunction, useGasPrice } from '@usedapp/core';
 import contract from 'contract';
 import { parseEther } from 'ethers/lib/utils';
 
@@ -10,9 +10,14 @@ export default function useContract({ address }: { address: string }) {
   const isError = ['Fail', 'Exception'].includes(state?.status);
 
   const isSuccess = ['Success'].includes(state?.status);
+  const gasPrice = useGasPrice();
 
-  const transfer = (transferAmount: string) =>
-    send(address, parseEther(transferAmount));
+  const transfer = (transferAmount: string) => {
+    return send(address, parseEther(transferAmount), {
+      // Need gasPrice to avoid mobile issue: https://github.com/MetaMask/metamask-mobile/issues/3999
+      gasPrice,
+    });
+  };
 
   return {
     isSuccess,
