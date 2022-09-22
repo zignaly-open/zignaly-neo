@@ -68,17 +68,17 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
     >
       <ModalContainer
         width={784}
-        title={t('management.minBalanceModal.title')}
+        title={t('minBalanceModal.title')}
         onClickClose={close}
       >
         <Box sx={{ marginBottom: 3 }}>
-          <Typography>{t('management.minBalanceModal.desc')}</Typography>
+          <Typography>{t('minBalanceModal.desc')}</Typography>
         </Box>
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
           <InputAmountAdvanced
             label={t('common:amount') + ':'}
-            placeholder={t('management.minBalanceModal.placeholder')}
-            labelBalance={t('management.minBalanceModal.labelBalance')}
+            placeholder={t('minBalanceModal.placeholder')}
+            labelBalance={t('minBalanceModal.labelBalance')}
             control={control}
             name={'amountValue'}
             fullWidth={true}
@@ -92,7 +92,7 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
           <ModalActions>
             <Button
               loading={isLoadingManagement || isLoadingService || isUpdating}
-              caption={t('management.minBalanceModal.save')}
+              caption={t('minBalanceModal.save')}
               disabled={!isValid}
               size='xlarge'
               type='submit'

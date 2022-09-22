@@ -71,7 +71,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
         <>
           <Box>
             <Typography variant='h2' color='neutral100'>
-              {t('management.totalFunds')}
+              {t('totalFunds')}
             </Typography>
             <MainPriceLabel
               value={parseFloat(balance.sbt)}
@@ -84,21 +84,21 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
             <Box>
               <Circle />
               <Typography variant='h2' color='neutral100'>
-                {t('management.tradingFunds')}
+                {t('tradingFunds')}
               </Typography>
               <Typography color='neutral200'>
-                {t('management.tradingFunds-desc')}
+                {t('tradingFunds-desc')}
               </Typography>
               <TradingFunds>
                 <Typography color='neutral400' variant='body2'>
-                  {t('management.availableTrading')}
+                  {t('availableTrading')}
                   <InlinePriceLabel
                     value={parseFloat(balance.staSscFree)}
                     coin={service?.ssc ?? 'USDT'}
                   />
                 </Typography>
                 <Typography color='neutral400' variant='body2'>
-                  {t('management.allocatedTrading')}
+                  {t('allocatedTrading')}
                   <InlinePriceLabel
                     value={parseFloat(balance.staSscSum)}
                     coin={service?.ssc ?? 'USDT'}
@@ -106,7 +106,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 </Typography>
               </TradingFunds>
               <LabelHardDisc color='neutral200'>
-                {t('management.hardDisconnected')}
+                {t('hardDisconnected')}
               </LabelHardDisc>
               <ProgressSlider
                 value={new BigNumber(balance.debt.toString())
@@ -121,7 +121,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
               <Button
                 variant='secondary'
                 size='large'
-                caption={t('management.transfer.title')}
+                caption={t('transfer.title')}
                 onClick={onClickTransfers}
               />
               <HorizontalConnection />
@@ -130,28 +130,28 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
             <Box>
               <Circle />
               <Typography variant='h2' color='neutral100'>
-                {t('management.disconnectionFunds')}
+                {t('disconnectionFunds')}
               </Typography>
               <Typography color='neutral200'>
-                {t('management.disconnectionFunds-desc')}
+                {t('disconnectionFunds-desc')}
               </Typography>
               <TradingFunds>
                 <Typography color='neutral400' variant='body2'>
-                  {t('management.availableDisconnection')}
+                  {t('availableDisconnection')}
                   <InlinePriceLabel
                     value={parseFloat(balance.scaSscSum)}
                     coin={service?.ssc ?? 'USDT'}
                   />
                 </Typography>
                 <Typography color='neutral400' variant='body2'>
-                  {t('management.neededSnapshot')}
+                  {t('neededSnapshot')}
                   <InlinePriceLabel
                     value={parseFloat(management.transferOut)}
                     coin={service?.ssc ?? 'USDT'}
                   />
                 </Typography>
                 <Typography color='neutral400' variant='body2'>
-                  {t('management.minBalance.title')}
+                  {t('minBalance.title')}
                   <InlinePriceLabel
                     value={parseFloat(management.minimumSca)}
                     coin={service?.ssc ?? 'USDT'}
@@ -170,7 +170,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 </Typography>
                 <LineSeparator />
                 <Typography color='neutral400' variant='body2'>
-                  {t('management.heldHardDisc')}
+                  {t('heldHardDisc')}
                   <InlinePriceLabel
                     value={parseFloat(balance.dfa)}
                     coin={service?.ssc ?? 'USDT'}

@@ -1,48 +1,47 @@
 {
-  "management": {
-    "manage": "Manage",
-    "totalFunds": "Total Funds in Service",
-    "tradingFunds": "Trading Funds",
-    "tradingFunds-desc": "Funds available for trading and used in positions",
-    "availableTrading": "Available for trading:",
-    "allocatedTrading": "Allocated for trading:",
-    "hardDisconnected": "Hard-disconnected Funds:",
-    "disconnectionFunds": "Disconnection Funds",
-    "disconnectionFunds-desc": "Funds available to return to investors who want to disconnect",
-    "availableDisconnection": "Available for disconnections:",
-    "neededSnapshot": "Needed for daily snapshot:",
-    "minBalance": {
-      "title": "Minimum balance:",
-      "success": "You edited minimum balance successfully."
-    },
-    "minBalanceModal": {
-      "title": "Edit Minimum Balance",
-      "desc": "Set up the minimum balance that you would like to keep in the Disconnection Funds Account.",
-      "placeholder": "0.0",
-      "labelBalance": "Current Minimum Balance",
-      "save": "Save"
-    },
-    "heldHardDisc": "Held for hard-disconnections:",
-    "controlledZignaly": "Controlled by Zignaly",
-    "transfer": {
-      "title": "Transfer",
-      "loading": "Loading",
-      "placeholder": "0.0",
-      "labelBalance": "Available Balance:",
-      "deposit-available": "Available Balance:",
-      "fromTradingAccount": "From Trading Account",
-      "toTradingAccount": "To Trading Account:",
-      "fromDiscAccount": "From Disconnection Account",
-      "toDiscAccount": "To Disconnection Account:",
-      "now": "Transfer Now",
-      "success": "You have successfully transferred {{amount}}."
-    },
-    "transferFunds": {
-      "title": "Transfer Funds",
-      "desc": "Transfer coins between my profit sharing accounts."
-    },
-    "hardDiconnectWarning": "Your hard disconnects have reached {perc}%. If hard-disconnects reaches {maxPerc}% of the service funds, Zignaly will take control of your service.",
-    "previousValue": "Previous Value:",
-    "loading-arialLabel": "Loading management"
-  }
+  "manage": "Manage",
+  "totalFunds": "Total Funds in Service",
+  "tradingFunds": "Trading Funds",
+  "tradingFunds-desc": "Funds available for trading and used in positions",
+  "availableTrading": "Available for trading:",
+  "allocatedTrading": "Allocated for trading:",
+  "hardDisconnected": "Hard-disconnected Funds:",
+  "disconnectionFunds": "Disconnection Funds",
+  "disconnectionFunds-desc": "Funds available to return to investors who want to disconnect",
+  "availableDisconnection": "Available for disconnections:",
+  "neededSnapshot": "Needed for daily snapshot:",
+  "helper": "Need help with these numbers? Please check out our <0>how profit sharing balances work</0>.",
+  "minBalance": {
+    "title": "Minimum balance:",
+    "success": "You edited minimum balance successfully."
+  },
+  "minBalanceModal": {
+    "title": "Edit Minimum Balance",
+    "desc": "Set up the minimum balance that you would like to keep in the Disconnection Funds Account.",
+    "placeholder": "0.0",
+    "labelBalance": "Current Minimum Balance",
+    "save": "Save"
+  },
+  "heldHardDisc": "Held for hard-disconnections:",
+  "controlledZignaly": "Controlled by Zignaly",
+  "transfer": {
+    "title": "Transfer",
+    "loading": "Loading",
+    "placeholder": "0.0",
+    "labelBalance": "Available Balance:",
+    "deposit-available": "Available Balance:",
+    "fromTradingAccount": "From Trading Account",
+    "toTradingAccount": "To Trading Account:",
+    "fromDiscAccount": "From Disconnection Account",
+    "toDiscAccount": "To Disconnection Account:",
+    "now": "Transfer Now",
+    "success": "You have successfully transferred {{amount}}."
+  },
+  "transferFunds": {
+    "title": "Transfer Funds",
+    "desc": "Transfer coins between my profit sharing accounts."
+  },
+  "hardDiconnectWarning": "Your hard disconnects have reached {perc}%. If hard-disconnects reaches {maxPerc}% of the service funds, Zignaly will take control of your service.",
+  "previousValue": "Previous Value:",
+  "loading-arialLabel": "Loading management"
 }

@@ -29,6 +29,8 @@ import {
   ROUTE_TRADING_SERVICE_SIGNALS,
   ROUTE_ZIGPAD,
   ROUTE_BECOME_TRADER,
+  ROUTE_HELP_TRADER,
+  ROUTE_HELP_INVESTOR,
 } from './routes';
 
 import Management from './views/TraderService/Management';
@@ -44,6 +46,8 @@ import EditService from 'views/TraderService/EditService';
 import AuthenticatedWall from 'util/walls/AuthenticatedWall.tsx';
 import UnauthenticatedWall from './util/walls/UnauthenticatedWall';
 import ServiceOwnerWall from './util/walls/ServiceOwnerWall';
+import HelpInvestor from './views/Help/HelpInvestor';
+import HelpTrader from './views/Help/HelpTrader';
 
 const Router: React.FC = () => (
   <Routes>
@@ -57,7 +61,6 @@ const Router: React.FC = () => (
 
     <Route path={ROUTE_TRADING_SERVICE}>
       <Route index element={<ServiceProfile />} />
-
       <Route element={<ServiceOwnerWall />}>
         <Route path={ROUTE_TRADING_SERVICE_MANAGE} element={<Management />} />
         <Route path={ROUTE_TRADING_SERVICE_INVESTORS} element={<Investors />} />
@@ -71,6 +74,8 @@ const Router: React.FC = () => (
     </Route>
 
     <Route path={ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
+    <Route path={ROUTE_HELP_TRADER} element={<HelpTrader />} />
+    <Route path={ROUTE_HELP_INVESTOR} element={<HelpInvestor />} />
 
     <Route element={<UnauthenticatedWall />}>
       <Route path={ROUTE_LOGIN} element={<Login />} />
