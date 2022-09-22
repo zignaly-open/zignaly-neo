@@ -3,35 +3,22 @@ import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
 import { Layout, Profit, TotalValue } from './styles';
 import { BalanceSummaryProps } from './types';
-import {
-  PencilIcon,
-  PriceLabel,
-  TextButton,
-  Typography,
-} from '@zignaly-open/ui';
+import { PencilIcon, TextButton, Typography } from '@zignaly-open/ui';
 
 export const BalanceSummary = ({
   totalValue,
   profit,
-  stableCoinOperative = false,
-  symbol = '$',
+  coin = 'USDT',
   dashboardType = 'investor',
   onClickEdit = () => null,
 }: BalanceSummaryProps) => {
   const { t } = useTranslation(['table', 'action']);
-
   return (
     <Layout>
       {dashboardType === 'marketplace' ? (
         <Typography>{t('table.balanceSummary.invested')}</Typography>
       ) : (
-        <TotalValue>
-          <PriceLabel
-            value={new BigNumber(totalValue).toFixed()}
-            coin={symbol}
-            stableCoinOperative={stableCoinOperative}
-          />
-        </TotalValue>
+        <TotalValue value={new BigNumber(totalValue).toFixed()} coin={coin} />
       )}
       {isNaN(+profit) || profit === '' ? (
         // eslint-disable-next-line i18next/no-literal-string
@@ -39,15 +26,13 @@ export const BalanceSummary = ({
           -
         </Typography>
       ) : (
-        <Profit variant='body2'>
-          <PriceLabel
-            value={profit}
-            coin={symbol}
-            stableCoinOperative={stableCoinOperative}
-            green={+profit > 0}
-            red={+profit < 0}
-          />
-        </Profit>
+        <Profit
+          value={profit}
+          coin={coin}
+          hideCoinName
+          green={+profit > 0}
+          red={+profit < 0}
+        />
       )}
       <TextButton
         leftElement={<PencilIcon color='#65647E' width={16} height={16} />}

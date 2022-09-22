@@ -8,9 +8,10 @@ import ModalProvider from 'mui-modal-provider';
 import { ToastContainer } from 'react-toastify';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { BrowserRouter } from 'react-router-dom';
-import { store } from './features/store';
+import { persistor, store } from './features/store';
 import { Provider } from 'react-redux';
 import GlobalStyle from './styles';
+import { PersistGate } from 'redux-persist/integration/react';
 
 const augmentedTheme = { ...dark, ...theme };
 
@@ -36,25 +37,26 @@ function App() {
     >
       <Provider store={store}>
         <ThemeProvider theme={dark}>
-          <GlobalStyle />
-          <ToastContainer
-            position='top-right'
-            autoClose={5000}
-            hideProgressBar
-            closeOnClick
-            pauseOnFocusLoss
-            draggable
-            closeButton={false}
-            pauseOnHover
-            theme='dark'
-          />
-
           <ThemeProviderMui theme={augmentedTheme}>
-            <BrowserRouter>
-              <ModalProvider>
-                <Router />
-              </ModalProvider>
-            </BrowserRouter>
+            <GlobalStyle />
+            <ToastContainer
+              position='top-right'
+              autoClose={5000}
+              hideProgressBar
+              closeOnClick
+              pauseOnFocusLoss
+              draggable
+              closeButton={false}
+              pauseOnHover
+              theme='dark'
+            />
+            <PersistGate persistor={persistor} loading={null}>
+              <BrowserRouter>
+                <ModalProvider>
+                  <Router />
+                </ModalProvider>
+              </BrowserRouter>
+            </PersistGate>
           </ThemeProviderMui>
         </ThemeProvider>
       </Provider>

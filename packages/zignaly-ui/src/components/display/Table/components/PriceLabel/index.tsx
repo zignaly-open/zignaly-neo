@@ -11,14 +11,14 @@ import { BottomElementWrap } from "./styles";
 import Typography from "components/display/Typography";
 import { useTheme } from "styled-components";
 import Theme from "../../../../../theme/theme";
+import { coinPrecisions } from "./constants";
 
 const PriceLabel = ({
   value = 0,
   coin = "USDT",
-  symbol = "$",
   bottomElement = null,
-  // TODO: this is utter bs we should not compute such things outside
-  stableCoinOperative = false,
+  suffixElement = null,
+  hideCoinName = false,
   green,
   red,
   className,
@@ -28,7 +28,7 @@ const PriceLabel = ({
     <styled.Layout className={className}>
       <styled.Value>
         <NumberFormat
-          prefix={stableCoinOperative ? symbol : ""}
+          prefix={""}
           value={value}
           style={{
             fontWeight: "500",
@@ -38,14 +38,16 @@ const PriceLabel = ({
           }}
           displayType={"text"}
           thousandSeparator={true}
-          decimalScale={stableCoinOperative ? 2 : undefined}
+          decimalScale={coinPrecisions[coin] || undefined}
         />
-        {!stableCoinOperative && (
+        {!hideCoinName && (
           <styled.Coin weight="medium" variant={"body2"} color={"neutral400"}>
             {coin}
           </styled.Coin>
         )}
+        {suffixElement}
       </styled.Value>
+
       {bottomElement && (
         <BottomElementWrap>
           <Typography variant="body1">{bottomElement}</Typography>

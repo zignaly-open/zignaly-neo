@@ -5,7 +5,7 @@ import { useTitle } from 'react-use';
 
 const Staking: React.FC = () => {
   const { t } = useTranslation('pages');
-  useTitle(t('pages.staking'));
+  useTitle(t('staking'));
   return (
     <>
       <ComingSoon />

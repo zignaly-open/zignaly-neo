@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { Typography, TextButton } from '@zignaly-open/ui';
+import { Typography } from '@zignaly-open/ui';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
@@ -20,6 +20,8 @@ import {
   PriceLabel,
   CardActions,
   CardHeader,
+  ContainerChainIcon,
+  StyledTextButton,
 } from './styles';
 import ClaimButton from './ClaimButton';
 import useUpdatedAt from 'hooks/useUpdatedAt';
@@ -67,22 +69,32 @@ const AuctionCard: React.FC<{
       <CardColumn ref={leftRef}>
         <CardHeaderLeft isColumn={isColumn}>
           <Box
+            width={1}
             display='flex'
             alignItems='center'
-            gap={1}
-            flexDirection='column'
+            gap={2}
+            justifyContent={{ xs: 'center', sm: 'flex-start' }}
           >
-            <Box display='flex' gap={1} alignItems='center'>
+            <ContainerChainIcon>
               <ChainIcon chain={auction.chain} />
-              <Typography variant='h2' color='neutral100'>
-                {auction.title}
-              </Typography>
+            </ContainerChainIcon>
+            <Box
+              display='flex'
+              flexDirection='column'
+              justifyContent='center'
+              alignItems='flex-start'
+            >
+              <Box display='flex' gap={1} whiteSpace='nowrap'>
+                <Typography variant='h2' color='neutral100'>
+                  {auction.title}
+                </Typography>
+              </Box>
+              <StyledTextButton
+                color='links'
+                caption={t('project-desc')}
+                onClick={() => showModal(ProjectDetailsModal, { auction })}
+              />
             </Box>
-            <TextButton
-              color='links'
-              caption={t('project-desc')}
-              onClick={() => showModal(ProjectDetailsModal, { auction })}
-            />
           </Box>
         </CardHeaderLeft>
         {auction.imageUrl && (
