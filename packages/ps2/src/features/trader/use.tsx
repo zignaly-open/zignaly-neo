@@ -48,7 +48,7 @@ export function useTraderServiceUpdateMinimum(
     useTraderServiceManagement(serviceId);
   return [
     async (minimum) => {
-      await update({ minimum, serviceId });
+      await update({ minimum, serviceId }).unwrap();
       await refetch();
     },
     { isLoading: isLoading || isLoadingManagement },
@@ -63,7 +63,7 @@ export function useTraderServiceTransferFunds(
     useTraderServiceBalance(serviceId);
   return [
     async (payload) => {
-      await update({ ...payload, serviceId });
+      await update({ ...payload, serviceId }).unwrap();
       await refetch();
     },
     { isLoading: isLoading || isLoadingManagement },

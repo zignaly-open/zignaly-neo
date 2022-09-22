@@ -73,7 +73,7 @@ export function useUpdateTakeProfitPercentage(): {
         profitPercentage,
         serviceId,
         exchangeInternalId: exchange.internalId,
-      });
+      }).unwrap();
     },
   };
 }
@@ -100,7 +100,7 @@ export function useUpdateTakeProfitAndInvestMore(): {
         serviceId,
         exchangeInternalId: exchange.internalId,
         amount: amount.toString(),
-      });
+      }).unwrap();
     },
   };
 }
@@ -126,7 +126,7 @@ export function useWithdrawInvestment(): {
         serviceId,
         exchangeInternalId: exchange.internalId,
         amount: amount.toString(),
-      });
+      }).unwrap();
       await refetch();
     },
   };

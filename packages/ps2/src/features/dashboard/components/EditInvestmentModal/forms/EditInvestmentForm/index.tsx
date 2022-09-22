@@ -80,33 +80,36 @@ function EditInvestmentForm({
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
   const onSubmit = async (values: EditFormData) => {
-    if (isInputEnabled) {
-      await editInvestment({
-        profitPercentage: values.profitPercentage,
-        serviceId,
-        amount: values?.amountTransfer?.value,
-      });
-      toast.success(
-        t('edit-investment:edit-investment.addMoreInvestmentSuccess', {
+    try {
+      if (isInputEnabled) {
+        await editInvestment({
+          profitPercentage: values.profitPercentage,
+          serviceId,
           amount: values?.amountTransfer?.value,
-          currency: values?.amountTransfer?.token?.id,
-          serviceName,
-        }),
-      );
-      refetchDetails();
-      setView(EditInvestmentViews.EditInvestmentSuccess);
-    } else {
-      await editPercent({
-        profitPercentage: values.profitPercentage,
-        serviceId,
-      });
-      toast.success(
-        t('edit-investment:edit-investment.percentageChangedSuccess'),
-      );
-      refetchDetails();
-      close();
+        });
+        toast.success(
+          t('edit-investment:edit-investment.addMoreInvestmentSuccess', {
+            amount: values?.amountTransfer?.value,
+            currency: values?.amountTransfer?.token?.id,
+            serviceName,
+          }),
+        );
+        refetchDetails();
+        setView(EditInvestmentViews.EditInvestmentSuccess);
+      } else {
+        await editPercent({
+          profitPercentage: values.profitPercentage,
+          serviceId,
+        });
+        toast.success(
+          t('edit-investment:edit-investment.percentageChangedSuccess'),
+        );
+        refetchDetails();
+        close();
+      }
+    } catch (e) {
+      toast.backendError(e);
     }
-    // TODO: handle error
   };
 
   return (

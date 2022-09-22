@@ -50,10 +50,12 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
     useTraderServiceUpdateMinimum(serviceId);
 
   const onSubmit = useCallback(({ amountValue }) => {
-    update(amountValue.value?.toString()).then(() => {
-      toast.success(t('management:management.minBalance.success'));
-      close();
-    });
+    update(amountValue.value?.toString())
+      .then(() => {
+        toast.success(t('management:management.minBalance.success'));
+        close();
+      })
+      .catch((e) => toast.backendError(e));
   }, []);
 
   return (

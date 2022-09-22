@@ -144,6 +144,7 @@
     "10000": "Too many requests, please try again later",
     "XX": "Transaction error. Please try again."
   },
+  "something-went-wrong": "Something went wrong",
   "404": {
     "title": "Page not found",
     "subtitle": "This page is not available or does not exist.",
