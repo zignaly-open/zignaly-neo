@@ -1,0 +1,73 @@
+{
+  "offer-your-trading-service": {
+    "header": {
+      "title": "Offer Your Trading Service",
+      "description": "List your service in our marketplace and enjoy the benefits of pooled trading funds"
+    },
+    "wrapper": {
+      "title": "Profit Sharing Service Benefits",
+      "list": {
+        "item1": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate nulla cursus faucibus suscipit. Vivamus faucibus at metus nec auctor.",
+        "item2": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate nulla cursus faucibus suscipit. Vivamus faucibus at metus nec auctor.",
+        "item3": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate nulla cursus faucibus suscipit. Vivamus faucibus at metus nec auctor."
+      },
+      "action": "Create my service"
+    },
+    "infoBar": {
+      "item1": {
+        "title": "$5 MILLION",
+        "description": "Pooled Assets"
+      },
+      "item2": {
+        "title": "20,000",
+        "description": "Profit Sharing Investors"
+      },
+      "item3": {
+        "title": "1300",
+        "description": "Active Services"
+      }
+    },
+    "features": {
+      "title": "Profit Sharing Service Feature",
+      "list": {
+        "item1": {
+          "title": "Advanced Analytics",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate nulla cursus faucibus suscipit. Vivamus faucibus at metus nec auctor."
+        },
+        "item2": {
+          "title": "Fund Management Tools",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate nulla cursus faucibus suscipit. Vivamus faucibus at metus nec auctor."
+        },
+        "item3": {
+          "title": "Daily Payouts",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate nulla cursus faucibus suscipit. Vivamus faucibus at metus nec auctor."
+        },
+        "item4": {
+          "title": "Marketplace Listing",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate nulla cursus faucibus suscipit. Vivamus faucibus at metus nec auctor."
+        }
+      }
+    },
+    "howWorks": {
+      "title": "How Profit Sharing Works",
+      "list": {
+        "item1": {
+          "title": "Pool Funds",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate nulla cursus faucibus suscipit. Vivamus faucibus at metus nec auctor."
+
+        },
+        "item2": {
+          "title": "Trade",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate nulla cursus faucibus suscipit. Vivamus faucibus at metus nec auctor."
+        },
+        "item3": {
+          "title": "Split Profits",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vulputate nulla cursus faucibus suscipit. Vivamus faucibus at metus nec auctor."
+        }
+      }
+    },
+    "testimonials": {
+      "title": "Testimonials"
+    }
+  }
+}

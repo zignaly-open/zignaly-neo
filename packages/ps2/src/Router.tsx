@@ -26,6 +26,7 @@ import {
   ROUTE_TRADING_SERVICE_SIGNALS,
   ROUTE_ZIGPAD,
   ROUTE_BECOME_TRADER,
+  ROUTE_OFFER_YOUR_TRADING_SERVICE,
 } from './routes';
 
 import Management from './views/TraderService/Management';
@@ -42,6 +43,7 @@ import NotATraderWall from './util/walls/NotATraderWall';
 import AuthenticatedWall from 'util/walls/AuthenticatedWall.tsx';
 import UnauthenticatedWall from './util/walls/UnauthenticatedWall';
 import ServiceOwnerWall from './util/walls/ServiceOwnerWall';
+import OfferYourTradingService from './views/OfferYourTradingService';
 
 const Router: React.FC = () => (
   <Routes>
@@ -76,6 +78,11 @@ const Router: React.FC = () => (
       <Route path={ROUTE_SIGNUP} element={<Signup />} />
       <Route path={ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />
     </Route>
+
+    <Route
+      path={ROUTE_OFFER_YOUR_TRADING_SERVICE}
+      element={<OfferYourTradingService />}
+    />
   </Routes>
 );
 
