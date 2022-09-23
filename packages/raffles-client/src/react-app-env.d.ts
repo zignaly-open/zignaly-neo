@@ -1,6 +1,7 @@
 /// <reference types="react-scripts" />
 
 import ThemeZig from '@zignaly-open/ui/lib/theme/theme';
+import { MetaMaskInpageProvider } from "@metamask/providers";
 
 declare module '*.svg' {
   /**
@@ -33,4 +34,10 @@ declare module '@mui/material/Button' {
     prettyPink: true;
     greedyGreen: true;
   }
+}
+
+declare global {
+    interface Window{
+        ethereum?:MetaMaskInpageProvider
+    }
 }

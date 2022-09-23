@@ -88,6 +88,10 @@ export class Auction extends Model {
 
   @Column
   public chain: string;
+
+  @Default(false)
+  @Column
+  public isExclusiveToKuCoin: boolean;
 }
 
 @Table

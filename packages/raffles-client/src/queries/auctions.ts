@@ -34,6 +34,7 @@ export const GET_AUCTIONS = gql`
         amount
       }
       monetaryValue
+      isExclusiveToKuCoin
       bids {
         id
         position

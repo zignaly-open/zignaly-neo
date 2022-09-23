@@ -57,6 +57,11 @@ const BidButton: React.FC<{
   const bidClickHandler = useCallback(() => {
     if (state === BidButtonState.NotLoggedIn) {
       authenticate();
+    } else if (
+      auction.isExclusiveToKuCoin &&
+      !window.ethereum.hasOwnProperty('isKuCoinWallet')
+    ) {
+      /* Show modal here */
     } else if (state === BidButtonState.NotEnoughFunds) {
       showModal(NotEnoughZIGModal);
     } else {

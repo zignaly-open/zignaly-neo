@@ -41,4 +41,5 @@ export type AuctionType = {
   bids: AuctionBidType[];
   startDate: Date;
   chain: string;
+  isExclusiveToKuCoin: boolean;
 };
