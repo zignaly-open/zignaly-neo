@@ -1,10 +1,10 @@
 import Popover from "@mui/material/Popover";
 import React, { useImperativeHandle } from "react";
-import { DropDownProps, DropDownHandle } from "./types";
-import { Component } from "./styles";
+import { DropDownProps, DropDownHandle, DropDownOption } from "./types";
+import { Component, DropDownContainer, NavLink, NavList } from "./styles";
 
 const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => JSX.Element = (
-  { component, content, anchorOrigin, anchorPosition, transformOrigin }: DropDownProps,
+  { component, options, anchorOrigin, anchorPosition, transformOrigin }: DropDownProps,
   innerRef: React.Ref<DropDownHandle>,
 ) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -36,11 +36,12 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
   return (
     <>
       <Component onClick={handleToggle}>{component({ open })}</Component>
-      {content && (
+      {options && (
         <Popover
           id="popover-menu"
           anchorEl={anchorEl}
           open={open}
+          disableScrollLock={true}
           PaperProps={{
             sx: {
               backgroundColor: "#12152c",
@@ -48,7 +49,6 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
               color: "#fff",
               boxShadow: "0 4px 6px -2px #00000061",
               borderRadius: "4px 0 4px 4px",
-              overflow: "hidden",
             },
           }}
           onClose={handleClose}
@@ -56,7 +56,32 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
           transformOrigin={transformOrigin}
           anchorOrigin={anchorOrigin}
         >
-          {content}
+          <DropDownContainer>
+            <NavList>
+              {options.map((x) => {
+                if (React.isValidElement(x)) return x;
+                const option = x as DropDownOption;
+                if (option.href)
+                  return (
+                    <NavLink active={options?.active} as={"a"} href={option.href}>
+                      {option.label}
+                    </NavLink>
+                  );
+                if (option.onClick)
+                  return (
+                    <NavLink
+                      active={options?.active}
+                      onClick={() => {
+                        handleClose();
+                        option.onClick!();
+                      }}
+                    >
+                      {option.label}
+                    </NavLink>
+                  );
+              })}
+            </NavList>
+          </DropDownContainer>
         </Popover>
       )}
     </>
