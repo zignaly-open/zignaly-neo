@@ -102,7 +102,6 @@ describe('Auctions', () => {
     const [, bobToken] = await createBob(300);
     const auction = await createAuction();
     const auctionBeforeBids = await getFirstAuction(aliceToken);
-    expect(auctionBeforeBids.currentBid).toBe(auctionBeforeBids.startingBid);
     expect(auctionBeforeBids.currentBid).toBe('100');
     expect(auctionBeforeBids.bids.length).toBe(0);
 
@@ -260,6 +259,7 @@ describe('Auctions', () => {
 
     await startAuction(auction.id);
     const { body } = await makeBid(auction, aliceToken);
+    console.log(body);
     expect(body.data.bid.userBid.value).toBe('101');
 
     const startedAuction = await getFirstAuction(bobToken);

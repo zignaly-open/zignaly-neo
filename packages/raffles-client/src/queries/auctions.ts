@@ -26,7 +26,6 @@ export const GET_AUCTIONS = gql`
       description
       claimSuccess
       imageUrl
-      startingBid
       numberOfWinners
       chain
       basketItems {

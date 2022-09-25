@@ -5,12 +5,12 @@ import {
 import { random } from 'lodash';
 import { sequelize } from '../../db';
 import { Includeable, QueryTypes } from 'sequelize';
-import { zignalySystemId } from '../../../config';
-import { internalTransfer } from '../../cybavo';
 import { ContextUser, TransactionType } from '../../types';
 import { User } from '../users/model';
 import { Auction, AuctionBid, AuctionBasketItem } from './model';
-import { getMinRequiredBidForAuction, getPayoutPrizeForAuction } from './util';
+import { getMinRequiredBidForAuction } from './util';
+import { internalTransfer } from '../../cybavo';
+import { zignalySystemId } from '../../../config';
 
 const AuctionsRepository = () => {
   const lastBidPopulation = {
@@ -20,16 +20,6 @@ const AuctionsRepository = () => {
     limit: 1,
     include: [User],
   } as Includeable;
-
-  function calculateNewExpiryDate(auction: Auction): Date {
-    if (auction.expiresAt < auction.maxExpiryDate) {
-      const expiryDate = +new Date(auction.expiresAt);
-      const currentDate = Date.now();
-      if (expiryDate - currentDate <= 10_000) {
-        return new Date(expiryDate + random(5, 12) * 1_000);
-      }
-    }
-  }
 
   async function createAuctionBid(
     user: ContextUser,
@@ -43,39 +33,23 @@ const AuctionsRepository = () => {
       throw new Error('Auction expired');
     }
     try {
-      const txPromise = internalTransfer(
+      const tx = await internalTransfer(
         user.publicAddress,
         zignalySystemId,
         auction.bidFee,
         TransactionType.Fee,
-      ).then((tx) => {
-        if (!tx.transaction_id) throw new Error('Transaction error');
-        return tx;
-      });
+      );
+      if (!tx.transaction_id) throw new Error('Transaction error');
 
-      // better re-load from inside the transaction
-      const lastAuctionBidPromise = AuctionBid.findOne({
-        where: {
+      await Promise.all([
+        AuctionBid.create({
           auctionId: id,
-        },
-        order: [['id', 'DESC']],
-      });
-
-      const [tx, lastAuctionBid] = await Promise.all([
-        txPromise,
-        lastAuctionBidPromise,
+          transactionId: tx.transaction_id,
+          value: getMinRequiredBidForAuction(auction),
+          userId: user.id,
+        }),
+        incrementBidPrice(auction.id),
       ]);
-
-      auction.expiresAt = calculateNewExpiryDate(auction);
-
-      await AuctionBid.create({
-        auctionId: id,
-        transactionId: tx.transaction_id,
-        value: getMinRequiredBidForAuction(auction, lastAuctionBid),
-        userId: user.id,
-      });
-
-      await auction.save();
     } catch (error) {
       console.error(error);
       throw new Error('Could not create a bid');
@@ -100,7 +74,7 @@ const AuctionsRepository = () => {
       await sequelize.query(
         `
           SELECT filtered.* FROM (
-              SELECT *, ROW_NUMBER () OVER (PARTITION BY t."auctionId" ORDER BY t."value" DESC) as "position" FROM ( 
+              SELECT *, ROW_NUMBER () OVER (PARTITION BY t."auctionId" ORDER BY t."id" DESC) as "position" FROM ( 
                 SELECT MAX(b.value) as value, MAX(b.id) as id, b."auctionId", b."userId", MAX(b."claimTransactionId") as "claimTransactionId", u."username" as "username"
                 FROM "${AuctionBid.tableName}" b
                 INNER JOIN "${User.tableName}" u ON b."userId" = u."id"
@@ -144,6 +118,21 @@ const AuctionsRepository = () => {
     );
   }
 
+  async function incrementBidPrice(auctionId: number) {
+    return await sequelize.query(`
+      UPDATE "${Auction.tableName}"
+      SET "currentBid" = "currentBid" + "bidStep",
+          "expiresAt" = 
+              CASE
+              WHEN "expiresAt" < "maxExpiryDate" 
+              AND "expiresAt" - NOW() <= interval '10 seconds')
+              THEN "expiresAt" + (${random(5, 12)} * interval '1 seconds')
+              ELSE "expiresAt"
+              END
+      WHERE id = ${auctionId}
+  `);
+  }
+
   async function getAuctions(
     id: number,
     user: ContextUser,
@@ -160,7 +149,6 @@ const AuctionsRepository = () => {
       // here we will match auctions and bids
       a.bids = bids.filter((b: AuctionBidType) => a.id === b.auctionId);
       a.userBid = a.bids.find((b) => b.user.id === user?.id);
-      a.currentBid = getPayoutPrizeForAuction(a, a.bids[0]);
     });
 
     return auctions;
@@ -171,7 +159,6 @@ const AuctionsRepository = () => {
     getSortedAuctionBids,
     findAuction,
     createAuctionBid,
-    calculateNewExpiryDate,
     lastBidPopulation,
   };
 };
