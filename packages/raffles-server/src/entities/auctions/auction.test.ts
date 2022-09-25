@@ -191,7 +191,7 @@ describe('Auctions', () => {
     const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
     await wait(100);
     const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
-    expect(initialExpiry2).toBe(initialExpiry2);
+    expect(initialExpiry2).toBe(initialExpiry);
     await makeBid(auction, aliceToken);
     const { expiresAt: updatedExpiry } = await getFirstAuction(aliceToken);
     expect(+new Date(initialExpiry)).toEqual(+new Date(updatedExpiry));
@@ -259,7 +259,6 @@ describe('Auctions', () => {
 
     await startAuction(auction.id);
     const { body } = await makeBid(auction, aliceToken);
-    console.log(body);
     expect(body.data.bid.userBid.value).toBe('101');
 
     const startedAuction = await getFirstAuction(bobToken);
