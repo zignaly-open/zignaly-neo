@@ -38,7 +38,6 @@ export const typeDef = gql`
     twitter: String
     monetaryValue: String
     bidFee: String
-    startingBid: String
     currentBid: String
     description: String
     claimSuccess: String
