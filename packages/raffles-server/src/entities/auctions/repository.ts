@@ -119,6 +119,9 @@ const AuctionsRepository = () => {
   }
 
   async function incrementBidPrice(auctionId: number) {
+    const rdm = random(5, 12);
+    const maxSecs = 10;
+
     return await sequelize.query(`
       UPDATE "${Auction.tableName}"
       SET "currentBid" = "currentBid" + "bidStep",
@@ -127,11 +130,11 @@ const AuctionsRepository = () => {
               WHEN "expiresAt" < "maxExpiryDate"
               ${
                 !isTest
-                  ? `AND "expiresAt" - NOW() <= interval '10 seconds')
-                  THEN "expiresAt" + (${random(5, 12)} * interval '1 seconds')`
+                  ? `AND "expiresAt" - NOW() <= interval '${maxSecs} seconds')
+                  THEN "expiresAt" + (${rdm} * interval '1 seconds')`
                   : //sqlite syntax for tests
-                    `AND (JULIANDAY("expiresAt") - JULIANDAY(CURRENT_TIMESTAMP)) * 86400.0 <= 10
-                  THEN DATETIME(expiresAt, '+${random(5, 12)} seconds')`
+                    `AND (JULIANDAY("expiresAt") - JULIANDAY(CURRENT_TIMESTAMP)) * 86400.0 <= ${maxSecs}
+                  THEN DATETIME(expiresAt, '+${rdm} seconds')`
               }
               ELSE "expiresAt"
               END
