@@ -34,3 +34,9 @@ declare module '@mui/material/Button' {
     greedyGreen: true;
   }
 }
+
+declare global {
+  interface Window {
+    ethereum: any;
+  }
+}

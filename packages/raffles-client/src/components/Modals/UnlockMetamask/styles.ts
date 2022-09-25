@@ -1,20 +1,16 @@
-import { Replay } from '@mui/icons-material';
+import { RefreshOutlined } from '@mui/icons-material';
+import { IconButton } from '@mui/material';
 import { css, styled } from '@mui/material/styles';
 
 export const Video = styled('video')`
-  box-shadow: 0 0 10px 2px #092234;
   border-radius: 8px;
 `;
 
-export const RefreshButton = styled(Replay)`
-  position: absolute;
-  right: 14px;
-  bottom: 14px;
-  
-  transition: all 0.1s;
-`;
-
-export const Preview = styled('div')<{ isVideoEnded: boolean }>`
+export const Preview = styled('div', {
+  shouldForwardProp: (prop) => prop !== 'isVideoEnded',
+})<{
+  isVideoEnded: boolean;
+}>`
   position: relative;
 
   &:before {
@@ -24,46 +20,29 @@ export const Preview = styled('div')<{ isVideoEnded: boolean }>`
     right: 0;
     bottom: 0;
     position: absolute;
-    background: #0f223f87;
-
+    background: #1a25369c;
     transition: all 0.1s;
     opacity: 0;
     visibility: hidden;
   }
 
-    ${({ isVideoEnded }) =>
+  ${({ isVideoEnded }) =>
     isVideoEnded &&
     css`
-       &:before {
+      &:before {
         opacity: 1;
         visibility: visible;
-       }
-
-              ${RefreshButton} {
-          opacity: 1;
-          visibility: visible;
-       }
+      }
     `}
+`;
 
-  ${({ isVideoEnded }) => `
-    ${isVideoEnded &&
-      `
-       &:before {
-        opacity: 1;
-        visibility: visible;
-       }
-       
-       ${RefreshButton} {
-          opacity: 1;
-          visibility: visible;
-       }
-    `,
-      `
-        ${RefreshButton} {
-          opacity: 0;
-          visibility: hidden;
-       }
-    `,
-    )}
-  `}
+export const RefreshIcon = styled(RefreshOutlined)`
+  color: #fff;
+`;
+
+export const RefreshIconButton = styled(IconButton)`
+  position: absolute;
+  transition: all 0.1s;
+  right: 6px;
+  bottom: 12px;
 `;
