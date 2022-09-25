@@ -10,7 +10,7 @@ import { User } from '../users/model';
 import { Auction, AuctionBid, AuctionBasketItem } from './model';
 import { getMinRequiredBidForAuction } from './util';
 import { internalTransfer } from '../../cybavo';
-import { zignalySystemId } from '../../../config';
+import { isTest, zignalySystemId } from '../../../config';
 
 const AuctionsRepository = () => {
   const lastBidPopulation = {
@@ -124,9 +124,15 @@ const AuctionsRepository = () => {
       SET "currentBid" = "currentBid" + "bidStep",
           "expiresAt" = 
               CASE
-              WHEN "expiresAt" < "maxExpiryDate" 
-              AND "expiresAt" - NOW() <= interval '10 seconds')
-              THEN "expiresAt" + (${random(5, 12)} * interval '1 seconds')
+              WHEN "expiresAt" < "maxExpiryDate"
+              ${
+                !isTest
+                  ? `AND "expiresAt" - NOW() <= interval '10 seconds')
+                  THEN "expiresAt" + (${random(5, 12)} * interval '1 seconds')`
+                  : //sqlite syntax for tests
+                    `AND (JULIANDAY("expiresAt") - JULIANDAY(CURRENT_TIMESTAMP)) * 86400.0 <= 10
+                  THEN DATETIME(expiresAt, '+${random(5, 12)} seconds')`
+              }
               ELSE "expiresAt"
               END
       WHERE id = ${auctionId}
