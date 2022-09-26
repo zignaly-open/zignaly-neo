@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - ft/cloudfront
 jobs:
   build:
     name: Webapp Test Release
@@ -16,7 +17,6 @@ jobs:
           sed -i -e 's/{directory}/test/g' appspec.yml
           sed -i -e 's/{directory}/test/g' scripts/prepare_release.sh
           sed -i -e 's/{directory}/test/g' scripts/after_install.sh
-          sed -i -e 's/{directory}/test/g' scripts/delete_old_release.sh
       - name: Create server .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
@@ -67,5 +67,22 @@ jobs:
           s3_bucket: ${{ secrets.AWS_S3_BUCKET }}
           s3_folder: dev
           max_polling_iterations: 60
-          excluded_files: '.git/* *node_modules/* packages/ps2/*'
+          excluded_files: '.git/* *node_modules/* packages/raffles-client/* packages/ps2/*'
           directory: .
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_REGION: 'us-east-1'
+          SOURCE_DIR: 'packages/raffles-client/build'
+      - name: Invalidate CloudFront
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION }}
+          PATHS: '/'
+          AWS_REGION: 'us-east-1'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
