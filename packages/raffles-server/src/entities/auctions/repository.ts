@@ -130,7 +130,7 @@ const AuctionsRepository = () => {
               WHEN "expiresAt" < "maxExpiryDate"
               ${
                 !isTest
-                  ? `AND "expiresAt" - NOW() <= interval '${maxSecs} seconds')
+                  ? `AND "expiresAt" - NOW() <= interval '${maxSecs} seconds'
                   THEN "expiresAt" + (${rdm} * interval '1 seconds')`
                   : //sqlite syntax for tests
                     `AND (JULIANDAY("expiresAt") - JULIANDAY(CURRENT_TIMESTAMP)) * 86400.0 <= ${maxSecs}
