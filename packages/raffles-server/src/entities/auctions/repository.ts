@@ -154,10 +154,14 @@ const AuctionsRepository = () => {
       order: [['id', 'DESC']],
     })) as unknown as AuctionType[];
 
-    auctions.forEach((a) => {
+    auctions.forEach((a: AuctionType & { dataValues: AuctionType }) => {
       // here we will match auctions and bids
       a.bids = bids.filter((b: AuctionBidType) => a.id === b.auctionId);
       a.userBid = a.bids.find((b) => b.user.id === user?.id);
+
+      // Add these new fields to dataValues so they are sent to ws via graphql subscriptions
+      a.dataValues.userBid = a.userBid;
+      a.dataValues.bids = a.bids;
     });
 
     return auctions;

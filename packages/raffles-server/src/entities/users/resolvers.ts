@@ -7,10 +7,10 @@ import {
 } from './util';
 import { ApolloContext, ContextUser } from '../../types';
 import { getUserBalance } from '../../cybavo';
-import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from './constants';
 import { withFilter } from 'graphql-subscriptions';
 import { getUserIdFromToken } from '../../util/jwt';
+import pubsub from '../../pubsub';
 
 const generateNonceSignMessage = (nonce: string | number) =>
   `Please sign this message to verify it's you: ${nonce}`;

@@ -3,10 +3,10 @@ import { bufferToHex } from 'ethereumjs-util';
 import { algorithm, secret } from '../../../config';
 import { generateUserNonce, User } from './model';
 import jwt from 'jsonwebtoken';
-import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from './constants';
 import { getUserBalance } from '../../cybavo';
 import { ContextUser } from '../../types';
+import pubsub from '../../pubsub';
 
 export function signJwtToken(user: User) {
   return new Promise<string>((resolve, reject) =>
