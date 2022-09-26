@@ -2,6 +2,14 @@ import styled, { css } from "styled-components";
 import { styledIf } from "utils/styled";
 import { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";
 
+const withSeparator = (props: WithSeparator) =>
+  props.separator &&
+  css`
+    border-top: 1px solid rgb(44, 45, 89);
+  `;
+
+type WithSeparator = { separator?: boolean };
+
 export const DropDownContainer = styled.div`
   user-select: none;
 `;
@@ -16,11 +24,14 @@ export const Component = styled.button`
   outline: inherit;
 `;
 
-export const ComponentWrapper = styled.div`
+export const ComponentWrapper = styled.div<WithSeparator>`
   padding: 12px 18px;
+  ${withSeparator}
 `;
 
-export const NavLink = styled.span<{ active?: boolean; disabled?: boolean }>`
+export const NavLink = styled.span<
+  { notClickable?: boolean; active?: boolean; disabled?: boolean } & WithSeparator
+>`
   color: #706f82;
   font-weight: 500;
   font-size: 14px;
@@ -62,6 +73,13 @@ export const NavLink = styled.span<{ active?: boolean; disabled?: boolean }>`
     `,
     )}
   `}
+
+  ${(props) =>
+    props.notClickable &&
+    css`
+      cursor: default !important;
+    `}
+  ${withSeparator};
 `;
 
 export const NavList = styled.div`
@@ -69,12 +87,14 @@ export const NavList = styled.div`
   flex-direction: column;
 `;
 
-export const ChildContainer = styled.div<{ active: boolean }>`
+export const ChildContainer = styled.div<{ active: boolean } & WithSeparator>`
   ${(props) =>
     props.active &&
     css`
       background: rgb(25, 26, 48);
     `}
+
+  ${withSeparator}
 `;
 
 export const SpaceTaker = styled.span`

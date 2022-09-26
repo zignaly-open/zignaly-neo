@@ -88,6 +88,7 @@ const ExtraNavigationDropdown: React.FC = () => {
           href: 'https://help.zignaly.com/hc/en-us',
         },
         {
+          separator: true,
           label: (
             <>
               <GlobeLanguagesStyled
@@ -106,22 +107,26 @@ const ExtraNavigationDropdown: React.FC = () => {
             onClick: () => handleSelectLanguage(language.locale),
           })),
         },
-        <Networks key={'--social-networks'}>
-          {socialNetworksLinks.map((socialNetwork, index) => {
-            const IconComponent = socialNetwork.image;
-            return (
-              <NavLink
-                as={'a'}
-                onClick={onClose}
-                href={socialNetwork.path}
-                key={`--social-network-nav-link-${index.toString()}`}
-                target={'_blank'}
-              >
-                <IconComponent height={'22px'} width={'22px'} />
-              </NavLink>
-            );
-          })}
-        </Networks>,
+        {
+          element: (
+            <Networks key={'--social-networks'}>
+              {socialNetworksLinks.map((socialNetwork, index) => {
+                const IconComponent = socialNetwork.image;
+                return (
+                  <NavLink
+                    as={'a'}
+                    onClick={onClose}
+                    href={socialNetwork.path}
+                    key={`--social-network-nav-link-${index.toString()}`}
+                    target={'_blank'}
+                  >
+                    <IconComponent height={'22px'} width={'22px'} />
+                  </NavLink>
+                );
+              })}
+            </Networks>
+          ),
+        },
       ]}
     />
   );

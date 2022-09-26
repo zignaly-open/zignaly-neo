@@ -15,7 +15,19 @@ import { useTheme } from "styled-components";
 import Theme from "theme/theme";
 
 const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => JSX.Element = (
-  { component, options, anchorOrigin, anchorPosition, transformOrigin }: DropDownProps,
+  {
+    component,
+    options,
+    anchorOrigin = {
+      vertical: "bottom",
+      horizontal: "right",
+    },
+    anchorPosition,
+    transformOrigin = {
+      vertical: "top",
+      horizontal: "right",
+    },
+  }: DropDownProps,
   innerRef: React.Ref<DropDownHandle>,
 ) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -31,6 +43,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
   };
 
   const handleClose = () => {
+    setChildDropdownShown(null);
     setAnchorEl(null);
   };
 
@@ -46,7 +59,6 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
   );
 
   const onClick = (f: () => void) => () => {
-    setChildDropdownShown(null);
     handleClose();
     f();
   };
@@ -78,40 +90,68 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
           <DropDownContainer>
             <NavList>
               {options.map((x, i) => {
+                // this is a design requirement
+                if (childDropdownShow && options.indexOf(childDropdownShow) < i) return null;
+
                 const key =
                   x && "label" in x && typeof x.label === "string"
                     ? x.label
                     : Math.random().toString();
-                if (childDropdownShow && options.indexOf(childDropdownShow) < i) return null;
-                if (React.isValidElement(x))
-                  return <ComponentWrapper key={key}>{x}</ComponentWrapper>;
+
+                if (x.element)
+                  return (
+                    <ComponentWrapper separator={x.separator} key={key}>
+                      {x.element}
+                    </ComponentWrapper>
+                  );
                 const option = x as DropDownOption;
                 if (option.href)
                   return (
-                    <NavLink key={key} active={option?.active} as={"a"} href={option.href}>
+                    <NavLink
+                      key={key}
+                      separator={x.separator}
+                      active={option?.active}
+                      as={"a"}
+                      href={option.href}
+                    >
                       {option.label}
                     </NavLink>
                   );
                 if (option.onClick)
                   return (
-                    <NavLink key={key} active={option?.active} onClick={onClick(option.onClick)}>
+                    <NavLink
+                      key={key}
+                      separator={x.separator}
+                      active={option?.active}
+                      onClick={onClick(option.onClick)}
+                    >
                       {option.label}
                     </NavLink>
                   );
                 if (option.children)
                   return (
-                    <ChildContainer key={key} active={childDropdownShow === option}>
+                    <ChildContainer
+                      separator={x.separator}
+                      key={key}
+                      active={childDropdownShow === option}
+                    >
                       <NavLink
                         active={option?.active}
-                        onClick={() => setChildDropdownShown((v) => (v ? null : option))}
+                        notClickable={!option.children?.length}
+                        onClick={() =>
+                          option.children?.length &&
+                          setChildDropdownShown((v) => (v ? null : option))
+                        }
                       >
                         {option.label}
                         <SpaceTaker />
-                        <ArrowBottomIconStyled
-                          color={theme.neutral300}
-                          width={"22px"}
-                          height={"22px"}
-                        />
+                        {option.children?.length && (
+                          <ArrowBottomIconStyled
+                            color={theme.neutral300}
+                            width={"22px"}
+                            height={"22px"}
+                          />
+                        )}
                       </NavLink>
                       {childDropdownShow === option &&
                         option.children.map((c) => (

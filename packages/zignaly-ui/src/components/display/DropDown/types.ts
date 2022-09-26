@@ -10,10 +10,12 @@ type Option = {
 
 export type DropDownOption = Option & {
   children?: Option[];
+  element?: ReturnType<React.FC>;
+  separator?: boolean;
 };
 
 export type DropDownProps = {
-  options: (ReturnType<React.FC> | DropDownOption)[];
+  options: DropDownOption[];
   component: ({ open }: { open: boolean }) => JSX.Element;
   anchorOrigin?: PopoverOrigin;
   anchorPosition?: PopoverPosition;
