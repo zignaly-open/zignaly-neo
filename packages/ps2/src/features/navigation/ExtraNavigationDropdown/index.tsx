@@ -2,13 +2,11 @@ import {
   DropDown,
   IconButton,
   OptionHorizontalDotsIcon,
-  Typography,
 } from '@zignaly-open/ui';
 import React, { useCallback, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { NavLink, Networks } from './styles';
-import LanguageSelector from '../LanguageSelector';
 import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
 import { supportedLanguages } from '../../../util/i18next';
@@ -20,8 +18,8 @@ import {
   ROUTE_TRADING_SERVICE_MANAGE,
 } from '../../../routes';
 import { DropDownHandle } from '@zignaly-open/ui/lib/components/display/DropDown/types';
-import { GlobeLanguagesStyled, LabelButton } from '../LanguageSelector/styles';
-import { LocalizationLanguages } from '../LanguageSelector/constants';
+import { GlobeLanguagesStyled, LabelButton } from './styles';
+import { LocalizationLanguages } from '../../../util/languages';
 
 const ExtraNavigationDropdown: React.FC = () => {
   const theme = useTheme() as Theme;
@@ -102,20 +100,11 @@ const ExtraNavigationDropdown: React.FC = () => {
               </LabelButton>
             </>
           ),
-          children: [
-            languageMap.map((language) => (
-              <Typography
-                variant={'body1'}
-                color={
-                  i18n.language === language.locale
-                    ? 'highlighted'
-                    : 'neutral200'
-                }
-              >
-                {language.label}
-              </Typography>
-            )),
-          ],
+          children: languageMap.map((language) => ({
+            active: i18n.language === language.locale,
+            label: language.label,
+            onClick: () => handleSelectLanguage(language.locale),
+          })),
         },
         <Networks key={'--social-networks'}>
           {socialNetworksLinks.map((socialNetwork, index) => {
