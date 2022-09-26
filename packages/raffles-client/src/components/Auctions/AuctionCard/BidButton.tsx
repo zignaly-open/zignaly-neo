@@ -12,6 +12,7 @@ import { BID_AUCTION } from 'queries/auctions';
 import { showToast } from 'util/showToast';
 import { useModal } from 'mui-modal-provider';
 import NotEnoughZIGModal from 'components/Modals/NotEnoughZIG';
+import ExclusiveWallet from '../../Modals/ExclusiveWallet';
 
 enum BidButtonState {
   NotLoggedIn,
@@ -62,6 +63,7 @@ const BidButton: React.FC<{
       !window.ethereum.hasOwnProperty('isKuCoinWallet')
     ) {
       /* Show modal here */
+      showModal(ExclusiveWallet, { wallet: 'kucoin' });
     } else if (state === BidButtonState.NotEnoughFunds) {
       showModal(NotEnoughZIGModal);
     } else {
