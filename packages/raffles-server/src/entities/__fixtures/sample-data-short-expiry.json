@@ -8,7 +8,7 @@
       "title": "Best Auction EVER",
       "description": "Bid now or die regretting",
       "monetaryValue": "100 BTC!!11",
-      "startingBid": "0.01",
+      "currentBid": "0.01",
       "website": "https://zignaly.com/",
       "discord": "https://zignaly.com/",
       "twitter": "https://zignaly.com/",
@@ -32,7 +32,7 @@
       "title": "Elon Musk's giveaway",
       "description": "Have you ever dreamt of reading the most retarded description ever? Well, continue dreaming",
       "monetaryValue": "1 Model S",
-      "startingBid": "0.01"
+      "currentBid": "0.01"
     }
   },
   {
@@ -60,7 +60,7 @@
       "title": "Charity Giveaway",
       "description": "All proceeds from this auction will go towards the needs of Alex who desperately needs a brand new X5 40d",
       "monetaryValue": "$1",
-      "startingBid": "0.01"
+      "currentBid": "0.01"
     }
   },
   {
@@ -80,7 +80,7 @@
       "title": "Charity Giveaway 2",
       "description": "All proceeds from this auction will go towards the needs of Alex who would like to have an M4 as well",
       "monetaryValue": "$1",
-      "startingBid": "0.01"
+      "currentBid": "0.01"
     }
   },
   {
@@ -100,7 +100,7 @@
       "title": "Win&Go",
       "description": "Bid, win, get outbid and go",
       "monetaryValue": "$4000",
-      "startingBid": "0.01"
+      "currentBid": "0.01"
     }
   },
   {
@@ -120,7 +120,7 @@
       "title": "Honest Auction",
       "description": "Lotteries are for economically illiterate, stop playing one",
       "monetaryValue": "$30k",
-      "startingBid": "0.01"
+      "currentBid": "0.01"
     }
   },
   {
@@ -140,7 +140,7 @@
       "title": "Just go",
       "description": "Pay me and go",
       "monetaryValue": "$100",
-      "startingBid": "0.01"
+      "currentBid": "0.01"
     }
   },
   {
@@ -168,7 +168,7 @@
       "title": "Diversification",
       "description": "Win a basket more diverse than a Netflix cast",
       "monetaryValue": "$1000",
-      "startingBid": "0.01"
+      "currentBid": "0.01"
     }
   },
   {
