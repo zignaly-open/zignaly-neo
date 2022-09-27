@@ -16,7 +16,7 @@ export const BalanceSummary = ({
   return (
     <Layout>
       {dashboardType === 'marketplace' ? (
-        <Typography>{t('table.balanceSummary.invested')}</Typography>
+        <Typography>{t('balanceSummary.invested')}</Typography>
       ) : (
         <TotalValue value={new BigNumber(totalValue).toFixed()} coin={coin} />
       )}
@@ -36,7 +36,7 @@ export const BalanceSummary = ({
       )}
       <TextButton
         leftElement={<PencilIcon color='#65647E' width={16} height={16} />}
-        caption={t('action:action.edit')}
+        caption={t('action:edit')}
         color={'links'}
         onClick={onClickEdit}
       />

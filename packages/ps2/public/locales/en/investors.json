@@ -1,5 +1,4 @@
 {
-  "investors": {
     "no-investors": "This service does not have any investors yet",
     "failed-to-load": "Failed to load the data",
     "title": "Investors",
@@ -17,5 +16,4 @@
       "status": "Status"
     },
     "loading-arialLabel": "Loading investors"
-  }
 }

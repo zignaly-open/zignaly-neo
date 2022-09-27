@@ -35,22 +35,22 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   const columns: TableProps<InvestorTableDataType>['columns'] = useMemo(
     () => [
       {
-        Header: t('investors.tableHeader.email'),
+        Header: t('tableHeader.email'),
         accessor: 'email',
       },
       {
-        Header: t('investors.tableHeader.userId'),
+        Header: t('tableHeader.userId'),
         accessor: 'userId',
       },
       {
-        Header: t('investors.tableHeader.investment'),
+        Header: t('tableHeader.investment'),
         accessor: 'investment',
         Cell: ({ cell: { value } }) => (
           <PriceLabel coin={service?.ssc ?? 'USDT'} value={value.toFixed()} />
         ),
       },
       {
-        Header: t('investors.tableHeader.P&L'),
+        Header: t('tableHeader.P&L'),
         accessor: 'pnl',
         Cell: ({ cell: { value } }) => (
           <PriceLabel
@@ -61,30 +61,30 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         ),
       },
       {
-        Header: t('investors.tableHeader.P&LTotal'),
+        Header: t('tableHeader.P&LTotal'),
         accessor: 'pnlTotal',
         Cell: ({ cell: { value } }) => (
           <PriceLabel coin={service?.ssc ?? 'USDT'} value={parseFloat(value)} />
         ),
       },
       {
-        Header: t('investors.tableHeader.totalFeesPaid'),
+        Header: t('tableHeader.totalFeesPaid'),
         accessor: 'totalFeesPaid',
         Cell: ({ cell: { value } }) => (
           <PriceLabel coin={service?.ssc ?? 'USDT'} value={parseFloat(value)} />
         ),
       },
       {
-        Header: t('investors.tableHeader.successFee'),
+        Header: t('tableHeader.successFee'),
         accessor: 'successFee',
       },
       {
-        Header: t('investors.tableHeader.feesZIG'),
+        Header: t('tableHeader.feesZIG'),
         accessor: 'feesInZig',
         Cell: ({ cell: { value } }) => <YesNo value={value} />,
       },
       {
-        Header: t('investors.tableHeader.status'),
+        Header: t('tableHeader.status'),
         accessor: 'status',
         Cell: ({ cell: { value } }) => <ConnectionStateLabel stateId={value} />,
       },
@@ -108,7 +108,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             <InvestorCounts>
               <UserIcon width={'17px'} height={'20px'} color={'#65647E'} />
               <Typography variant={'h3'} color={'avatarBack'}>
-                {t('investors.number-of-investors', {
+                {t('number-of-investors', {
                   count: investors?.length,
                 })}
               </Typography>
@@ -134,7 +134,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                 status: investor.accountType,
               }))}
               hideOptionsButton={false}
-              emptyMessage={t('investors.no-investors')}
+              emptyMessage={t('no-investors')}
               isUserTable={false}
             />
           </>

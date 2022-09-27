@@ -1,5 +1,4 @@
 {
-  "my-dashboard": {
     "title": "My Dashboard",
     "tableHeader": {
       "summary": {
@@ -31,5 +30,4 @@
         "right": "Withdraw"
       }
     }
-  }
 }

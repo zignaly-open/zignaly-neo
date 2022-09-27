@@ -1,5 +1,4 @@
 {
-  "service-header": {
     "managements-label": "Manage Funds",
     "investors-label": "Investors",
     "coins-label": "Coins",
@@ -22,5 +21,4 @@
         }
       }
     }
-  }
 }

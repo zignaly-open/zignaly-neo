@@ -182,7 +182,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                           color={theme.neutral300}
                         />
                       }
-                      caption={t('action:action.edit')}
+                      caption={t('action:edit')}
                       onClick={onClickMinBalance}
                     />
                   </Typography>

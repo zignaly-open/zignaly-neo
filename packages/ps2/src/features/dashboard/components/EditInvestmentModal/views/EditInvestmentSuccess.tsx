@@ -19,7 +19,7 @@ function EditInvestmentSuccessModal({ close }: { close: () => void }) {
     <>
       <Typography variant={'body1'} color={'neutral200'}>
         <Trans
-          i18nKey={'edit-investment.modalSuccess.description'}
+          i18nKey={'modalSuccess.description'}
           t={t}
           components={[<Highline key={'highline'} />]}
         />
@@ -28,7 +28,7 @@ function EditInvestmentSuccessModal({ close }: { close: () => void }) {
         <Button
           onClick={close}
           size={'large'}
-          caption={t('edit-investment.modalSuccess.button')}
+          caption={t('modalSuccess.button')}
         />
       </ModalActions>
     </>

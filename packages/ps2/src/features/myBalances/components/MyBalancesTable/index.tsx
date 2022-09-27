@@ -23,7 +23,7 @@ const MyBalancesTable = (): JSX.Element => {
   const columns: TableProps<MyBalancesTableDataType>['columns'] = useMemo(
     () => [
       {
-        Header: t('my-balances.tableHeader.coin'),
+        Header: t('tableHeader.coin'),
         accessor: 'coin',
         Cell: ({ cell: { value } }) => (
           <CoinLabel coin={value.symbol} name={value.name} />
@@ -31,7 +31,7 @@ const MyBalancesTable = (): JSX.Element => {
         sortType: (a, b) => sortByValue(a.values.symbol, b.values.symbol),
       },
       {
-        Header: t('my-balances.tableHeader.totalBalance'),
+        Header: t('tableHeader.totalBalance'),
         accessor: 'total',
         Cell: ({ cell: { value } }) => (
           <PriceLabel coin={value.symbol} value={value.balanceTotal} />
@@ -40,7 +40,7 @@ const MyBalancesTable = (): JSX.Element => {
           sortByValue(a.values.total.balanceTotal, b.values.total.balanceTotal),
       },
       {
-        Header: t('my-balances.tableHeader.availableBalance'),
+        Header: t('tableHeader.availableBalance'),
         accessor: 'available',
         Cell: ({ cell: { value } }) => (
           <PriceLabel coin={value.symbol} value={value.balanceFree} />
@@ -52,7 +52,7 @@ const MyBalancesTable = (): JSX.Element => {
           ),
       },
       {
-        Header: t('my-balances.tableHeader.lockedBalance'),
+        Header: t('tableHeader.lockedBalance'),
         accessor: 'locked',
         Cell: ({ cell: { value } }) => (
           <PriceLabel coin={value.symbol} value={value.balanceLocked} />
@@ -61,7 +61,7 @@ const MyBalancesTable = (): JSX.Element => {
           sortByValue(a.values.balanceLocked, b.values.balanceLocked),
       },
       {
-        Header: t('my-balances.tableHeader.valueBTC'),
+        Header: t('tableHeader.valueBTC'),
         accessor: 'valueBTC',
         Cell: ({ cell: { value } }) => (
           <PriceLabel coin={'btc'} value={value.balanceTotalBTC} />
@@ -73,7 +73,7 @@ const MyBalancesTable = (): JSX.Element => {
           ),
       },
       {
-        Header: t('my-balances.tableHeader.valueUSD'),
+        Header: t('tableHeader.valueUSD'),
         accessor: 'valueUSD',
         Cell: ({ cell: { value } }) => (
           <PriceLabel coin={'usd'} value={value.balanceTotalUSDT} />

@@ -1,10 +1,8 @@
 {
-  "withdraw": {
     "replace-existing-amount": "This amount will replace any previous withdrawal request.",
     "button": "Withdraw",
     "form": {
       "label": "Amount to withdraw:",
       "labelBalance": "Available:"
     }
-  }
 }

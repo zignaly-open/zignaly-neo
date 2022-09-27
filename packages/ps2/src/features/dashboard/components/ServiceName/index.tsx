@@ -43,7 +43,7 @@ export const ServiceName = ({ service }: ServiceNameProps) => {
           {service.serviceName}
         </Typography>
         <Typography variant='body2' weight='medium' color='neutral400'>
-          {t('table.serviceName-by')} {service.ownerName}
+          {t('serviceName-by')} {service.ownerName}
         </Typography>
         <Typography variant='body2' weight='medium' color='neutral400'>
           {service.ssc}

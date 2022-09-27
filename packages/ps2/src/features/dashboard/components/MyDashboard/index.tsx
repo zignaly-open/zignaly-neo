@@ -41,11 +41,11 @@ const MyDashboard: React.FC = () => {
   const tableColumns: TableProps<DashboardTableDataType>['columns'] = useMemo(
     () => [
       {
-        Header: t('my-dashboard.tableHeader.summary.title'),
+        Header: t('tableHeader.summary.title'),
         accessor: 'summary',
         headerWithFooter: (
           <div>
-            <div>{t('my-dashboard.tableHeader.summary.subtitle')}</div>
+            <div>{t('tableHeader.summary.subtitle')}</div>
           </div>
         ),
         Cell: ({ cell: { value } }) => (
@@ -63,12 +63,10 @@ const MyDashboard: React.FC = () => {
           ),
       },
       {
-        Header: () => (
-          <Inline>{t('my-dashboard.tableHeader.serviceName.title')}</Inline>
-        ),
+        Header: () => <Inline>{t('tableHeader.serviceName.title')}</Inline>,
         accessor: 'service',
         headerWithFooter: (
-          <Inline>{t('my-dashboard.tableHeader.serviceName.subtitle')}</Inline>
+          <Inline>{t('tableHeader.serviceName.subtitle')}</Inline>
         ),
         Cell: ({ cell: { value } }) => <ServiceName service={value} />,
         sortType: (a, b) =>
@@ -78,7 +76,7 @@ const MyDashboard: React.FC = () => {
           ),
       },
       {
-        Header: t('my-dashboard.tableHeader.1-mo.title'),
+        Header: t('tableHeader.1-mo.title'),
         accessor: 'chart',
         Cell: ({ cell: { value } }) =>
           parseFloat(value.last30Pnl) || Object.keys(value.data).length > 1 ? (
@@ -88,12 +86,12 @@ const MyDashboard: React.FC = () => {
             </>
           ) : (
             <Typography variant={'body2'} color={'neutral400'}>
-              {t('my-dashboard.tableHeader.1-mo.no-data')}
+              {t('tableHeader.1-mo.no-data')}
             </Typography>
           ),
       },
       {
-        Header: t('my-dashboard.tableHeader.dailyAvg-title'),
+        Header: t('tableHeader.dailyAvg-title'),
         accessor: 'dailyAvg',
         Cell: ({ cell: { value } }) => (
           <PriceLabel
@@ -110,7 +108,7 @@ const MyDashboard: React.FC = () => {
           ),
       },
       {
-        Header: t('my-dashboard.tableHeader.3-mos-title'),
+        Header: t('tableHeader.3-mos-title'),
         accessor: 'threeMonths',
         Cell: ({ cell: { value } }) => (
           <PercentageIndicator type='default' value={value.pnl90dPct} />
@@ -122,7 +120,7 @@ const MyDashboard: React.FC = () => {
           ),
       },
       {
-        Header: t('my-dashboard.tableHeader.6-mos-title'),
+        Header: t('tableHeader.6-mos-title'),
         accessor: 'sixMonths',
         Cell: ({ cell: { value } }) => (
           <PercentageIndicator type='default' value={value.pnl180dPct} />
@@ -134,11 +132,11 @@ const MyDashboard: React.FC = () => {
           ),
       },
       {
-        Header: t('my-dashboard.tableHeader.all.title'),
+        Header: t('tableHeader.all.title'),
         accessor: 'all',
         headerWithFooter: (
           <div>
-            <div>{t('my-dashboard.tableHeader.all.subtitle')}</div>
+            <div>{t('tableHeader.all.subtitle')}</div>
           </div>
         ),
         Cell: ({ cell: { value } }) => (
@@ -197,7 +195,7 @@ const MyDashboard: React.FC = () => {
     <Layout>
       <Heading>
         <Typography variant='h1' color={'neutral000'}>
-          {t('my-dashboard.title')}
+          {t('title')}
         </Typography>
       </Heading>
       <LayoutContentWrapper
@@ -206,7 +204,7 @@ const MyDashboard: React.FC = () => {
           <Table
             columns={tableColumns}
             data={services?.map(bodyMapper)}
-            emptyMessage={t('my-dashboard.table-search-emptyMessage')}
+            emptyMessage={t('table-search-emptyMessage')}
             hideOptionsButton={true}
             isUserTable={true}
           />

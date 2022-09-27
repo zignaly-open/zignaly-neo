@@ -1,5 +1,4 @@
 {
-  "withdraw-crypto": {
     "title": "Withdraw Crypto",
     "description": "Withdraw crypto to an external account. To move funds between Zignaly accounts, use a transfer instead.",
     "coinSelector": {
@@ -23,7 +22,7 @@
       "indicateAnAmount": "You must indicate an amount.",
       "minimumToWithdrawal": "The minimum withdrawal amount is {{value}} {{coin}}"
     }
-  }
+
 }
 
 

@@ -1,5 +1,4 @@
 {
-  "table": {
     "footer": {
       "elements": {
         "show": "Showing",
@@ -35,5 +34,4 @@
       "owner": "Owner"
     },
     "columns-hideOrShow": "Show/Hide Columns"
-  }
 }

@@ -52,7 +52,7 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
   const onSubmit = useCallback(({ amountValue }) => {
     update(amountValue.value?.toString())
       .then(() => {
-        toast.success(t('management:management.minBalance.success'));
+        toast.success(t('management:minBalance.success'));
         close();
       })
       .catch((e) => toast.backendError(e));

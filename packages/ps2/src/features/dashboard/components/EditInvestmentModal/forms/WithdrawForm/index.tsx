@@ -69,9 +69,7 @@ const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
         amount: values.amountTransfer?.value,
         serviceId,
       });
-      toast.success(
-        t('edit-investment:edit-investment.withdrawInvestmentSuccess'),
-      );
+      toast.success(t('edit-investment:withdrawInvestmentSuccess'));
       setView(EditInvestmentViews.WithdrawSuccess);
     } catch (e) {
       toast.backendError(e);
@@ -93,15 +91,15 @@ const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box sx={{ mt: 1, mb: 2 }}>
-        <Typography>{t('withdraw.replace-existing-amount')}</Typography>
+        <Typography>{t('replace-existing-amount')}</Typography>
       </Box>
       <Grid container spacing={5}>
         <Grid item xs={12} md={6}>
           <InputAmountAdvanced
             name={'amountTransfer'}
             control={control}
-            label={t('withdraw.form.label')}
-            labelBalance={t('withdraw.form.labelBalance')}
+            label={t('form.label')}
+            labelBalance={t('form.labelBalance')}
             showUnit={true}
             placeholder={'0.0'}
             tokens={[coin]}
@@ -130,7 +128,7 @@ const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
         <Button
           size={'xlarge'}
           disabled={!isValid}
-          caption={t('withdraw.button')}
+          caption={t('button')}
           loading={isLoading}
         />
       </WithdrawActions>

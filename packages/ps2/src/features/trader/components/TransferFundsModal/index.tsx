@@ -93,7 +93,7 @@ function TransferModal({
       })
         .then(() => {
           toast.success(
-            t('management:management.transfer.success', {
+            t('management:transfer.success', {
               amount: `${new BigNumber(amountValue?.value).toFixed()} ${
                 amountValue?.token.id
               }`,
@@ -160,7 +160,7 @@ function TransferModal({
                 <ToOutline>
                   <Typography variant='h2'>
                     {t(
-                      `management.transfer.${
+                      `transfer.${
                         fromTradingAccount
                           ? 'toDiscAccount'
                           : 'toTradingAccount'
