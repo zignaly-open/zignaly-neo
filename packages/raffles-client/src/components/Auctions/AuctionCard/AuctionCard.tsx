@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { Typography, TextButton } from '@zignaly-open/ui';
+import { Typography } from '@zignaly-open/ui';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
@@ -21,16 +21,23 @@ import {
   CardActions,
   CardHeader,
   ContainerChainIcon,
-  ContainerLeft,
+  StyledTextButton,
 } from './styles';
 import ClaimButton from './ClaimButton';
 import useUpdatedAt from 'hooks/useUpdatedAt';
 import { ChainIcon } from 'components/common/ChainIcon';
+import { GET_AUCTIONS } from 'queries/auctions';
+import { useLazyQuery } from '@apollo/client';
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
 }> = ({ auction }) => {
   const { t } = useTranslation('auction');
+  const [fetchAuction] = useLazyQuery(GET_AUCTIONS, {
+    variables: {
+      id: auction.id,
+    },
+  });
   const { isActive, hasWon, isStarted } = getWinningLosingStatus(auction);
   const { showModal } = useModal();
   const leftRef = useRef(null);
@@ -41,13 +48,20 @@ const AuctionCard: React.FC<{
   // Add delay in case of last ms bid event
   const updatedAt = useUpdatedAt(
     isActive || !auction.startDate ? auction.expiresAt : auction.startDate,
-    100,
+    1000,
   );
 
   const showClaim = useMemo(
     () => (!updatedAt || +new Date() >= updatedAt) && hasWon,
     [hasWon, updatedAt],
   );
+
+  useEffect(() => {
+    if (updatedAt && new Date() >= new Date(auction.expiresAt)) {
+      // Force refreshing the auction once expired to be sure we display up to date data
+      fetchAuction();
+    }
+  }, [updatedAt]);
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -68,20 +82,33 @@ const AuctionCard: React.FC<{
     <Item>
       <CardColumn ref={leftRef}>
         <CardHeaderLeft isColumn={isColumn}>
-          <Box display='flex' alignItems='center' gap={2}>
+          <Box
+            width={1}
+            display='flex'
+            alignItems='center'
+            gap={2}
+            justifyContent={{ xs: 'center', sm: 'flex-start' }}
+          >
             <ContainerChainIcon>
               <ChainIcon chain={auction.chain} />
             </ContainerChainIcon>
-            <ContainerLeft>
-              <Typography variant='h2' color='neutral100'>
-                {auction.title}
-              </Typography>
-              <TextButton
+            <Box
+              display='flex'
+              flexDirection='column'
+              justifyContent='center'
+              alignItems='flex-start'
+            >
+              <Box display='flex' gap={1} whiteSpace='nowrap'>
+                <Typography variant='h2' color='neutral100'>
+                  {auction.title}
+                </Typography>
+              </Box>
+              <StyledTextButton
                 color='links'
                 caption={t('project-desc')}
                 onClick={() => showModal(ProjectDetailsModal, { auction })}
               />
-            </ContainerLeft>
+            </Box>
           </Box>
         </CardHeaderLeft>
         {auction.imageUrl && (

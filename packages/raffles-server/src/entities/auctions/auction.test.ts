@@ -102,7 +102,6 @@ describe('Auctions', () => {
     const [, bobToken] = await createBob(300);
     const auction = await createAuction();
     const auctionBeforeBids = await getFirstAuction(aliceToken);
-    expect(auctionBeforeBids.currentBid).toBe(auctionBeforeBids.startingBid);
     expect(auctionBeforeBids.currentBid).toBe('100');
     expect(auctionBeforeBids.bids.length).toBe(0);
 
@@ -192,7 +191,7 @@ describe('Auctions', () => {
     const { expiresAt: initialExpiry } = await getFirstAuction(aliceToken);
     await wait(100);
     const { expiresAt: initialExpiry2 } = await getFirstAuction(aliceToken);
-    expect(initialExpiry2).toBe(initialExpiry2);
+    expect(initialExpiry2).toBe(initialExpiry);
     await makeBid(auction, aliceToken);
     const { expiresAt: updatedExpiry } = await getFirstAuction(aliceToken);
     expect(+new Date(initialExpiry)).toEqual(+new Date(updatedExpiry));

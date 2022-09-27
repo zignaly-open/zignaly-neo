@@ -38,6 +38,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with:
+          token: ${{ secrets.ROBOZIGNALY_PAT }}
           fetch-depth: 0 # better fetch all and rebuild part than to fetch part and rebuild all
       - name: Install node
         uses: actions/setup-node@v3
