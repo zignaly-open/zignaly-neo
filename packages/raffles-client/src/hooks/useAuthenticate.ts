@@ -26,6 +26,7 @@ export function useLogout(): () => Promise<void> {
 export default function useAuthenticate(): {
   authenticate: () => void;
   isSigning: boolean;
+  error: Error & { code: number };
 } {
   const [getOrCreateUser] = useMutation(GET_OR_CREATE_USER);
   const [authenticate] = useMutation(AUTHENTICATE_METAMASK);
@@ -34,6 +35,7 @@ export default function useAuthenticate(): {
   const client = useApolloClient();
   const { account, activateBrowserWallet, library, switchNetwork } =
     useEthers();
+  const [error, setError] = useState(null);
 
   async function createUserAndSign() {
     const {
@@ -66,6 +68,8 @@ export default function useAuthenticate(): {
       client.refetchQueries({
         include: [GET_CURRENT_USER_BALANCE, GET_CURRENT_USER, GET_AUCTIONS],
       });
+    } catch (e) {
+      setError(e);
     } finally {
       setIsSigning(false);
     }
@@ -77,21 +81,25 @@ export default function useAuthenticate(): {
     createUserAndSign();
   }, [account, isOkToStart]);
 
-  // TODO: error handling
+  const startAuthenticate = () => {
+    setError(null);
+
+    // In case there is an old token saved, that will trigger useCurrentUser fetching
+    // as soon as account connected, but new message not signed yet.
+    setToken('');
+
+    // Ready to connect
+    setIsOkToStart(true);
+
+    if (!account) {
+      // Init account
+      activateBrowserWallet();
+    }
+  };
+
   return {
-    authenticate: () => {
-      // In case there is an old token saved, that will trigger useCurrentUser fetching
-      // as soon as account connected, but new message not signed yet.
-      setToken('');
-
-      // Ready to connect
-      setIsOkToStart(true);
-
-      if (!account) {
-        // Init account
-        activateBrowserWallet();
-      }
-    },
+    authenticate: startAuthenticate,
     isSigning,
+    error,
   };
 }
