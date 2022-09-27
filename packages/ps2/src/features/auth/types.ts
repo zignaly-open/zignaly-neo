@@ -101,3 +101,5 @@ export enum SessionsTypes {
   Login = 'login',
   Signup = 'signup',
 }
+
+export type ExtendedExchange = Exchange & { image: string };

@@ -145,10 +145,3 @@ export const Circle = styled.div`
   border-radius: 50%;
   background: ${({ theme }) => theme.neutral600};
 `;
-
-export const Center = styled.div`
-  display: flex;
-  padding: 8em 0;
-  align-items: center;
-  justify-content: center;
-`;

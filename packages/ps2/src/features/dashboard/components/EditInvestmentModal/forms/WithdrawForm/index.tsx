@@ -7,7 +7,6 @@ import { WithdrawActions } from '../../styles';
 import {
   Button,
   InputAmountAdvanced,
-  Loader,
   SliderInput,
   Typography,
 } from '@zignaly-open/ui';
@@ -21,7 +20,7 @@ import { EditInvestmentValidation } from './validations';
 import { WithdrawFormData } from './types';
 import { ChangeViewFn, EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import { Center } from '../../../../../trader/components/InvestorTable/styles';
+import CenteredLoader from '../../../../../../components/CenteredLoader';
 
 const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   const { isLoading, withdraw } = useWithdrawInvestment();
@@ -65,14 +64,16 @@ const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   ) as WithdrawFormData['amountTransfer'];
 
   const onSubmit = async (values: WithdrawFormData) => {
-    await withdraw({
-      amount: values.amountTransfer?.value,
-      serviceId,
-    });
-    toast.success(
-      t('edit-investment:edit-investment.withdrawInvestmentSuccess'),
-    );
-    setView(EditInvestmentViews.WithdrawSuccess);
+    try {
+      await withdraw({
+        amount: values.amountTransfer?.value,
+        serviceId,
+      });
+      toast.success(t('edit-investment:withdrawInvestmentSuccess'));
+      setView(EditInvestmentViews.WithdrawSuccess);
+    } catch (e) {
+      toast.backendError(e);
+    }
   };
   const tokenBalance = new BigNumber(coin.balance);
   const amount = new BigNumber(watchAmountTransfer?.value);
@@ -85,29 +86,20 @@ const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   sliderValue = Math.min(sliderValue, 100);
 
   if (isLoadingDetails) {
-    return (
-      <Center>
-        <Loader
-          color={'#fff'}
-          width={'40px'}
-          height={'40px'}
-          ariaLabel={t('investors.loading-arialLabel')}
-        />
-      </Center>
-    );
+    return <CenteredLoader />;
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box sx={{ mt: 1, mb: 2 }}>
-        <Typography>{t('withdraw.replace-existing-amount')}</Typography>
+        <Typography>{t('replace-existing-amount')}</Typography>
       </Box>
       <Grid container spacing={5}>
         <Grid item xs={12} md={6}>
           <InputAmountAdvanced
             name={'amountTransfer'}
             control={control}
-            label={t('withdraw.form.label')}
-            labelBalance={t('withdraw.form.labelBalance')}
+            label={t('form.label')}
+            labelBalance={t('form.labelBalance')}
             showUnit={true}
             placeholder={'0.0'}
             tokens={[coin]}
@@ -136,7 +128,7 @@ const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
         <Button
           size={'xlarge'}
           disabled={!isValid}
-          caption={t('withdraw.button')}
+          caption={t('button')}
           loading={isLoading}
         />
       </WithdrawActions>

@@ -1,8 +1,6 @@
-// Dependencies
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-// Component
 import ZigWalletIndicator, { RankTypesId } from "./";
 
 export default {

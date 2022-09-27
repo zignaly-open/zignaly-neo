@@ -1,4 +1,3 @@
-// Dependencies
 import styled from "styled-components";
 import { connectionStateColor } from "./types";
 

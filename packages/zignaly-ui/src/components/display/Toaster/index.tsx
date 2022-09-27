@@ -1,4 +1,3 @@
-// Dependencies
 import React from "react";
 import { ToasterProps } from "./types";
 import * as styled from "./styles";

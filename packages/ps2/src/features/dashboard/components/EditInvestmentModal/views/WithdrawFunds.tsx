@@ -22,9 +22,7 @@ const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
         <Grid item sm={12} md={6}>
           <WithdrawFundsOptionWrapper border={matchesSmall}>
             <Typography component={'p'} variant={'h2'} color={'neutral100'}>
-              {t(
-                'edit-investment.modal.withdrawInvestment.afterPosition.title',
-              )}
+              {t('modal.withdrawInvestment.afterPosition.title')}
             </Typography>
             <WithdrawFundsSpaceTaker
               component={'p'}
@@ -32,9 +30,7 @@ const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
               color={'neutral200'}
               weight={'regular'}
             >
-              {t(
-                'edit-investment.modal.withdrawInvestment.afterPosition.description',
-              )}
+              {t('modal.withdrawInvestment.afterPosition.description')}
             </WithdrawFundsSpaceTaker>
 
             <WithdrawFundsButtonWrapper>
@@ -47,7 +43,7 @@ const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
                       color={'neutral150'}
                     >
                       {t(
-                        'edit-investment.modal.withdrawInvestment.afterPosition.button.subtitle',
+                        'modal.withdrawInvestment.afterPosition.button.subtitle',
                       )}
                     </Typography>
                     <Typography
@@ -55,9 +51,7 @@ const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
                       variant={'h3'}
                       color={'neutral000'}
                     >
-                      {t(
-                        'edit-investment.modal.withdrawInvestment.afterPosition.button.title',
-                      )}
+                      {t('modal.withdrawInvestment.afterPosition.button.title')}
                     </Typography>
                   </MultilineButton>
                 }
@@ -70,7 +64,7 @@ const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
         <Grid item sm={12} md={6}>
           <WithdrawFundsOptionWrapper>
             <Typography component={'p'} variant={'h2'} color={'neutral100'}>
-              {t('edit-investment.modal.withdrawInvestment.instant.title')}
+              {t('modal.withdrawInvestment.instant.title')}
             </Typography>
             <WithdrawFundsSpaceTaker
               component={'p'}
@@ -78,23 +72,17 @@ const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
               color={'neutral200'}
               weight={'regular'}
             >
-              {t(
-                'edit-investment.modal.withdrawInvestment.instant.description',
-              )}
+              {t('modal.withdrawInvestment.instant.description')}
             </WithdrawFundsSpaceTaker>
             <WithdrawFundsButtonWrapper>
               <Button
                 caption={
                   <MultilineButton>
                     <Typography variant={'h5'} color={'neutral150'}>
-                      {t(
-                        'edit-investment.modal.withdrawInvestment.instant.button.subtitle',
-                      )}
+                      {t('modal.withdrawInvestment.instant.button.subtitle')}
                     </Typography>
                     <Typography variant={'h3'} color={'neutral000'}>
-                      {t(
-                        'edit-investment.modal.withdrawInvestment.instant.button.title',
-                      )}
+                      {t('modal.withdrawInvestment.instant.button.title')}
                     </Typography>
                   </MultilineButton>
                 }

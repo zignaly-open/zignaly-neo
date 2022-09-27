@@ -1,5 +1,4 @@
 {
-  "deposit-crypto": {
     "title": "Deposit Crypto",
     "description": "Deposits may take up to 3 hours to reflect in your balance.",
     "coinSelector": {
@@ -29,5 +28,4 @@
       "address": "{{coin}} Address",
       "memo": "{{coin}} MEMO/Tag"
     }
-  }
 }

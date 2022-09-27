@@ -11,15 +11,13 @@ export const ConnectionStateLabelId = {
 };
 
 export const connectionStateName = {
-  [ConnectionStateLabelId.CONNECTED]: 'table.status.connected',
-  [ConnectionStateLabelId.PENDING]: 'table.status.pending',
-  [ConnectionStateLabelId.SOFT_DISCONNECT]:
-    'table:table.status.soft-disconnect',
-  [ConnectionStateLabelId.HARD_DISCONNECT]:
-    'table:table.status.hard-disconnect',
-  [ConnectionStateLabelId.SUSPENDED]: 'table:table.status.suspended',
-  [ConnectionStateLabelId.DISCONNECTED]: 'table:table.status.disconnected',
-  [ConnectionStateLabelId.OWNER]: 'table:table.status.owner',
+  [ConnectionStateLabelId.CONNECTED]: 'status.connected',
+  [ConnectionStateLabelId.PENDING]: 'status.pending',
+  [ConnectionStateLabelId.SOFT_DISCONNECT]: 'status.soft-disconnect',
+  [ConnectionStateLabelId.HARD_DISCONNECT]: 'status.hard-disconnect',
+  [ConnectionStateLabelId.SUSPENDED]: 'status.suspended',
+  [ConnectionStateLabelId.DISCONNECTED]: 'status.disconnected',
+  [ConnectionStateLabelId.OWNER]: 'status.owner',
 };
 
 export const connectionStateColor = (theme: Theme) => ({

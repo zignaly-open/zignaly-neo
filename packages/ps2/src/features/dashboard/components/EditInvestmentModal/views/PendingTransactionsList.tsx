@@ -32,23 +32,23 @@ const PendingTransactionsList: React.FC<{
     if (details.pending > 0) {
       fields.push({
         amount: <PriceLabel coin={coin.id} value={details.pending} />,
-        type: t('edit-investment.pendingMajorThan.type'),
-        status: t('edit-investment.pendingMajorThan.status'),
+        type: t('pendingMajorThan.type'),
+        status: t('pendingMajorThan.status'),
       });
     }
     if (details.profitOut > 0) {
       fields.push({
         amount: <PriceLabel coin={coin.id} value={details.profitOut} />,
-        type: t('edit-investment.profitOutMajorThan.type'),
-        status: t('edit-investment.profitOutMajorThan.status'),
+        type: t('profitOutMajorThan.type'),
+        status: t('profitOutMajorThan.status'),
       });
     }
 
     if (details.transferOut > 0) {
       fields.push({
         amount: <PriceLabel coin={coin.id} value={details.transferOut} />,
-        type: t('edit-investment.transferOutMajorThan.type'),
-        status: t('edit-investment.transferOutMajorThan.status'),
+        type: t('transferOutMajorThan.type'),
+        status: t('transferOutMajorThan.status'),
       });
     }
 
@@ -61,21 +61,15 @@ const PendingTransactionsList: React.FC<{
         <Table
           columns={[
             {
-              Header: t(
-                'edit-investment.modal.pendingTransaction.tableHeader.amount',
-              ),
+              Header: t('modal.pendingTransaction.tableHeader.amount'),
               accessor: 'amount',
             },
             {
-              Header: t(
-                'edit-investment.modal.pendingTransaction.tableHeader.type',
-              ),
+              Header: t('modal.pendingTransaction.tableHeader.type'),
               accessor: 'type',
             },
             {
-              Header: t(
-                'edit-investment.modal.pendingTransaction.tableHeader.status',
-              ),
+              Header: t('modal.pendingTransaction.tableHeader.status'),
               accessor: 'status',
             },
           ]}
@@ -92,7 +86,7 @@ const PendingTransactionsList: React.FC<{
           }
           onClick={() => setView(EditInvestmentViews.EditInvestment)}
           size={'large'}
-          caption={t('edit-investment.modal.pendingTransaction.button')}
+          caption={t('modal.pendingTransaction.button')}
         />
       </ModalActions>
     </>

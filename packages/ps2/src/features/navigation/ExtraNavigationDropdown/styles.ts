@@ -1,10 +1,5 @@
 import styled from 'styled-components';
-import { styledIf } from '@zignaly-open/ui';
-
-export const DropDownContainer = styled.div`
-  user-select: none;
-  padding: 18px;
-`;
+import { GlobeLanguages, styledIf, Typography } from '@zignaly-open/ui';
 
 export const NavLink = styled.span<{ active?: boolean; disabled?: boolean }>`
   color: #706f82;
@@ -68,7 +63,7 @@ export const Networks = styled.div`
   justify-content: center;
   align-items: center;
   gap: 16px;
-  padding-top: 22px;
+  padding-top: 8px;
 
   span svg {
     fill: #707185;
@@ -82,4 +77,12 @@ export const Networks = styled.div`
       color: #fff;
     }
   }
+`;
+
+export const GlobeLanguagesStyled = styled(GlobeLanguages)`
+  transition: 0.15s linear;
+`;
+
+export const LabelButton = styled(Typography)`
+  transition: 0.15s linear;
 `;

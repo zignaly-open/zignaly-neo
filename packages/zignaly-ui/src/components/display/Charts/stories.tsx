@@ -1,9 +1,7 @@
-// Dependencies
 import * as React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { AreaChart } from ".";
 
-// Component
 export default {
   title: "Display/Charts",
   component: AreaChart,

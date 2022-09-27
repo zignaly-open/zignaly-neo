@@ -1,4 +1,10 @@
-import { IconButton, BrandImage, UserIcon, WalletIcon } from '@zignaly-open/ui';
+import {
+  IconButton,
+  BrandImage,
+  UserIcon,
+  WalletIcon,
+  DropDown,
+} from '@zignaly-open/ui';
 import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import useCurrentUser from '../../hooks/useCurrentUser';
@@ -9,14 +15,16 @@ import { useModal } from 'mui-modal-provider';
 import UserBalance from './UserBalance';
 import TransferZigModal from 'components/Modals/TransferZig';
 import SwitchAccountModal from 'components/Modals/SwitchAccount';
-import Menu from './Menu';
 import { Box } from '@mui/system';
 import { useEthers } from '@usedapp/core';
 import { useLogout } from 'hooks/useAuthenticate';
 import { UserType } from '@zignaly-open/raffles-shared/types';
+import UserSettingsModal from '../Modals/UserSettings';
+import { useMediaQuery } from '@mui/material';
+import theme from 'theme';
 
 const StyledWalletIcon = styled(WalletIcon)`
-  color: ${({ theme }) => theme.neutral300};
+  color: ${(props) => props.theme.neutral300};
 `;
 
 const StickyHeader = styled(ZIGHeader)`
@@ -25,7 +33,7 @@ const StickyHeader = styled(ZIGHeader)`
 `;
 
 const MenuButton = styled(IconButton)`
-  ${({ theme }) => theme.breakpoints.down('sm')} {
+  ${(props) => props.theme.breakpoints.down('sm')} {
     margin-left: -18px;
   }
   button > div {
@@ -40,6 +48,7 @@ const Header = () => {
   const { account } = useEthers();
   const logout = useLogout();
   const userRef = useRef<UserType>();
+  const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     if (currentUser) {
@@ -89,18 +98,30 @@ const Header = () => {
               <Box ml={{ sm: 0, xs: 1 }}>
                 <UserBalance />
               </Box>
-              <MenuButton
-                size={'xlarge'}
-                key={'user'}
-                variant={'flat'}
-                icon={<UserIcon color='#65647E' />}
-                renderDropDown={
-                  <Menu showModal={showModal} currentUser={currentUser} />
-                }
-                dropDownOptions={{
-                  alignment: 'right',
-                  position: 'static',
-                }}
+              <DropDown
+                options={[
+                  {
+                    show: matchesSmall,
+                    label: t('transfer-coin', { coin: 'ZIG' }),
+                    onClick: () => showModal(TransferZigModal),
+                  },
+                  {
+                    label: t('settings'),
+                    onClick: () => showModal(UserSettingsModal),
+                  },
+                  {
+                    label: t('disconnect'),
+                    onClick: logout,
+                  },
+                ].filter((x) => x.show !== false)}
+                component={() => (
+                  <MenuButton
+                    size={'xlarge'}
+                    key={'user'}
+                    variant={'flat'}
+                    icon={<UserIcon color='#65647E' />}
+                  />
+                )}
               />
             </React.Fragment>
           ) : (

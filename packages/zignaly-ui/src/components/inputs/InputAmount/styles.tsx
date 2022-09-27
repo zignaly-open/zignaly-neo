@@ -1,4 +1,3 @@
-// Dependencies
 import Typography from "components/display/Typography";
 import styled from "styled-components";
 import { dark } from "theme";

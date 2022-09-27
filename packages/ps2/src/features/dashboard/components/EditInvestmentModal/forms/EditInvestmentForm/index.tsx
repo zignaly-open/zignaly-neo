@@ -73,49 +73,47 @@ function EditInvestmentForm({
   });
 
   const toast = useToast();
-  const openBlockedToast = () =>
-    toast.error(t('edit-investment.error-blockedInvestment'));
+  const openBlockedToast = () => toast.error(t('error-blockedInvestment'));
 
   const isLoading = isEditingPercent || isEditingInvestment;
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
   const onSubmit = async (values: EditFormData) => {
-    if (isInputEnabled) {
-      await editInvestment({
-        profitPercentage: values.profitPercentage,
-        serviceId,
-        amount: values?.amountTransfer?.value,
-      });
-      toast.success(
-        t('edit-investment:edit-investment.addMoreInvestmentSuccess', {
+    try {
+      if (isInputEnabled) {
+        await editInvestment({
+          profitPercentage: values.profitPercentage,
+          serviceId,
           amount: values?.amountTransfer?.value,
-          currency: values?.amountTransfer?.token?.id,
-          serviceName,
-        }),
-      );
-      refetchDetails();
-      setView(EditInvestmentViews.EditInvestmentSuccess);
-    } else {
-      await editPercent({
-        profitPercentage: values.profitPercentage,
-        serviceId,
-      });
-      toast.success(
-        t('edit-investment:edit-investment.percentageChangedSuccess'),
-      );
-      refetchDetails();
-      close();
+        });
+        toast.success(
+          t('edit-investment:addMoreInvestmentSuccess', {
+            amount: values?.amountTransfer?.value,
+            currency: values?.amountTransfer?.token?.id,
+            serviceName,
+          }),
+        );
+        refetchDetails();
+        setView(EditInvestmentViews.EditInvestmentSuccess);
+      } else {
+        await editPercent({
+          profitPercentage: values.profitPercentage,
+          serviceId,
+        });
+        toast.success(t('edit-investment:percentageChangedSuccess'));
+        refetchDetails();
+        close();
+      }
+    } catch (e) {
+      toast.backendError(e);
     }
-    // TODO: handle error
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Field>
         <Row>
-          <Typography variant={'body1'}>
-            {t('edit-investment.form.title')}
-          </Typography>
+          <Typography variant={'body1'}>{t('form.title')}</Typography>
           <AmountInvested>
             <CoinIcon coin={coin.id} />
             <TokenValue>
@@ -141,9 +139,9 @@ function EditInvestmentForm({
               <SliderInput
                 mode={'range'}
                 labels={{
-                  top: t('edit-investment.form.profits.title'),
-                  left: t('edit-investment.form.profits.left'),
-                  right: t('edit-investment.form.profits.right'),
+                  top: t('form.profits.title'),
+                  left: t('form.profits.left'),
+                  right: t('form.profits.right'),
                 }}
                 value={field.value}
                 initialValue={field.value}
@@ -159,8 +157,8 @@ function EditInvestmentForm({
           <InputAmountAdvanced
             name={'amountTransfer'}
             control={control}
-            label={t('edit-investment.form.inputAmount.label')}
-            labelBalance={t('edit-investment.form.inputAmount.labelBalance')}
+            label={t('form.inputAmount.label')}
+            labelBalance={t('form.inputAmount.labelBalance')}
             showUnit={true}
             placeholder={'0.0'}
             tokens={[coin]}
@@ -182,7 +180,7 @@ function EditInvestmentForm({
                 height={'22px'}
               />
             }
-            caption={t('edit-investment.form.link.investMore')}
+            caption={t('form.link.investMore')}
           />
         )}
         <Button
@@ -191,8 +189,8 @@ function EditInvestmentForm({
           loading={isLoading}
           caption={
             isInputEnabled
-              ? t('edit-investment.form.button.saveAndInvestment')
-              : t('edit-investment.form.button.saveAndClose')
+              ? t('form.button.saveAndInvestment')
+              : t('form.button.saveAndClose')
           }
           disabled={isInputEnabled ? !canSubmit : false}
         />
@@ -207,7 +205,7 @@ function EditInvestmentForm({
           onClick={
             transferOutAll ? openBlockedToast : onClickWithdrawInvestment
           }
-          caption={t('edit-investment.form.link.withdraw')}
+          caption={t('form.link.withdraw')}
         />
       </ModalActions>
     </Form>

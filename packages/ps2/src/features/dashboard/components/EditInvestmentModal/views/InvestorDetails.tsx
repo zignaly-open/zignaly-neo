@@ -20,7 +20,7 @@ const InvestorDetails: React.FC = () => {
 
         {data.successFee && (
           <Typography variant={'h3'} color={'neutral400'}>
-            {t('edit-investment.investorDetail-successFee', {
+            {t('investorDetail-successFee', {
               fee: data.successFee,
             })}
           </Typography>

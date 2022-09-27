@@ -1,4 +1,3 @@
-// Dependencies
 import styled from "styled-components";
 import { styledIf } from "../../../utils/styled";
 import Loader from "components/display/Loader";
@@ -74,9 +73,11 @@ export const Layout = styled.button<LayoutProps>`
   user-select: none;
   background: transparent;
   text-decoration-line: none;
+
   &[disabled] {
     cursor: default;
   }
+
   ${(props) => `
       ${styledIf(
         props.isLoading,

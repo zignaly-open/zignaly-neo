@@ -1,12 +1,9 @@
-// Dependencies
 import React from "react";
 
-// Styled Components
 import { Layout, Field } from "./styles";
 import Typography from "../../display/Typography";
 import InputCode from "../../inputs/InputCode";
 
-// Types
 import { TwoFAFormProps } from "./types";
 
 function TwoFAForm({ onSubmit, isLoading, requireAutoFocus }: TwoFAFormProps) {

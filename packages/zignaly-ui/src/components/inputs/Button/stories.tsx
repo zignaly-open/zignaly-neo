@@ -1,11 +1,8 @@
-// Dependencies
 import * as React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-// Component
 import Button from "./";
 
-// Assets
 import { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
 import { ReactComponent as ArrowDown } from "assets/icons/arrow-bottom-icon.svg";
 

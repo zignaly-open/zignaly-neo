@@ -1,8 +1,6 @@
-// Dependencies
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
-// Assets
 import { ReactComponent as CheckIcon } from "assets/icons/check-icon.svg";
 import { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
 import { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";
@@ -206,40 +204,6 @@ export const SortIcon = styled(ArrowBottomIcon)<{ isSorted?: boolean; isSortedDe
   `};
 `;
 
-export const OptionList = styled.ul`
-  list-style-type: none;
-  display: flex;
-  flex-direction: column;
-  padding: 0;
-  margin: 8px 0 0;
-  overflow: auto;
-  position: relative;
-  height: 100%;
-
-  &::-webkit-scrollbar {
-    width: 8px;
-    height: 10px;
-  }
-
-  &::-webkit-scrollbar-track {
-    border: 2px solid transparent;
-    background-clip: content-box;
-    background: #131225;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #2f2f66;
-
-    &:hover {
-      background: #363670;
-    }
-  }
-`;
-
-export const OptionItem = styled.li`
-  padding: 12px 18px;
-`;
-
 export const Actions = styled.div`
   button {
     margin-right: 8px;
@@ -256,16 +220,6 @@ export const CheckIconStyled = styled(CheckIcon)`
 
 export const CloseIconStyled = styled(CloseIcon)`
   vertical-align: middle;
-`;
-
-export const ColumnsSelector = styled.div`
-  padding: 20px 0 10px;
-  color: ${(props) => props.theme.neutral200};
-
-  > span {
-    justify-content: center;
-    display: flex;
-  }
 `;
 
 export const EmptyMessage = styled(Typography).attrs({

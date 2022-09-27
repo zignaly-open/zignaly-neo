@@ -1,15 +1,11 @@
-// Dependencies
 import * as React from "react";
 import { ReactElement, useState, useRef, useMemo } from "react";
 import { useClickAway } from "react-use";
 
-// Styled Components
 import { Layout, Container, Value, ArrowContainer, ValueContainer, Menu, Item } from "./styles";
 
-// Assets
 import { ReactComponent as ArrowDown } from "assets/icons/caret-down-icon.svg";
 
-// Types
 import { TokenSelectorProps } from "./types";
 import { TokenItem } from "../../types";
 import CoinIcon from "../../../../display/CoinIcon";
@@ -22,7 +18,6 @@ function TokenSelector({
   // Ref
   const selectorRef = useRef(null);
 
-  // Hooks
   const [isActiveMenu, setMenuActive] = useState(false);
 
   useClickAway(selectorRef, () => {

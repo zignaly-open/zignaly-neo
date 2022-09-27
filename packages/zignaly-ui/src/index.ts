@@ -12,6 +12,7 @@ import Toaster from "./components/display/Toaster";
 import ProgressSlider from "./components/display/ProgressSlider";
 import InvestSlider from "./components/display/InvestSlider";
 import { AreaChart } from "./components/display/Charts";
+import DropDown from "./components/display/DropDown";
 
 // Inputs
 import Button from "./components/inputs/Button";
@@ -66,6 +67,7 @@ export { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.
 export { ReactComponent as ZignalyIcon } from "assets/icons/coins/zignaly-coin.svg";
 export { ReactComponent as GlobeLanguages } from "assets/icons/globe-languages.svg";
 export { ReactComponent as TimeIcon } from "assets/icons/time-icon.svg";
+export { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
 
 SliderInput;
 CoinIcon;
@@ -76,10 +78,9 @@ import MenuDropDown from "./components/navigation/MenuDropDown";
 import ZigsBalance from "./components/navigation/Header/components/ZigsBalance";
 import BrandImage from "./components/navigation/Header/components/BrandImage";
 
-// Utils
 import { dark, light } from "theme";
 import ThemeProvider from "utils/ThemeProvider";
-import { customSort } from "utils/numbers";
+import { sortByValue } from "utils/numbers";
 import { HeaderLinksContainer } from "components/navigation/Header/styles";
 import { styledIf } from "utils/styled";
 import CoinIcon from "components/display/CoinIcon";
@@ -111,6 +112,7 @@ export {
   ProgressSlider,
   InvestSlider,
   Toaster,
+  DropDown,
   // Inputs
   Button,
   CheckBox,
@@ -145,6 +147,6 @@ export {
   ThemeProvider,
   dark,
   light,
-  customSort,
+  sortByValue,
   styledIf,
 };

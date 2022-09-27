@@ -1,35 +1,33 @@
 {
-  "my-dashboard": {
-    "title": "CH-Ṁy Ḋáŝĥböáѓḋ",
-    "tableHeader": {
-      "summary": {
-        "title": "CH-Ṁy Ĉüѓѓëńṫ Válüë",
-        "subtitle": "CH-Ѓëṫüѓńŝ"
-      },
-      "serviceName": {
-        "title": "CH-Ŝëѓvïĉë Ńáṁë",
-        "subtitle": "CH-Ṁáńáĝëѓ/Báŝë ĉüѓѓëńĉy"
-      },
-      "1-mo": {
-        "title": "CH-1 ṁö.",
-        "no-data": "CH-Ńö ḋáṫá ṫö ŝĥöw yëṫ"
-      },
-      "dailyAvg-title": "CH-Ḋáïly ávĝ.",
-      "3-mos-title": "CH-3 ṁöŝ.",
-      "6-mos-title": "CH-6 ṁöŝ.",
-      "all": {
-        "title": "CH-Áll",
-        "subtitle": "CH-Áĝë"
-      }
+  "title": "CH-Ṁy Ḋáŝĥböáѓḋ",
+  "tableHeader": {
+    "summary": {
+      "title": "CH-Ṁy Ĉüѓѓëńṫ Válüë",
+      "subtitle": "CH-Ѓëṫüѓńŝ"
     },
-    "table-search-emptyMessage": "CH-Yöü áѓë ńöṫ ĉöńńëĉṫëḋ ṫö áńy ŝëѓvïĉë yëṫ.",
-    "something-went-wrong": "CH-Ŝöṁëṫĥïńĝ wëńṫ wѓöńĝ",
-    "loading-arialLabel": "CH-Löáḋïńĝ ṁy ḋáŝĥböáѓḋ",
-    "slider-input": {
-      "labels": {
-        "left": "CH-Ѓëïńvëŝṫ",
-        "right": "CH-Wïṫĥḋѓáw"
-      }
+    "serviceName": {
+      "title": "CH-Ŝëѓvïĉë Ńáṁë",
+      "subtitle": "CH-Ṁáńáĝëѓ/Báŝë ĉüѓѓëńĉy"
+    },
+    "1-mo": {
+      "title": "CH-1 ṁö.",
+      "no-data": "CH-Ńö ḋáṫá ṫö ŝĥöw yëṫ"
+    },
+    "dailyAvg-title": "CH-Ḋáïly ávĝ.",
+    "3-mos-title": "CH-3 ṁöŝ.",
+    "6-mos-title": "CH-6 ṁöŝ.",
+    "all": {
+      "title": "CH-Áll",
+      "subtitle": "CH-Áĝë"
+    }
+  },
+  "table-search-emptyMessage": "CH-Yöü áѓë ńöṫ ĉöńńëĉṫëḋ ṫö áńy ŝëѓvïĉë yëṫ.",
+  "something-went-wrong": "CH-Ŝöṁëṫĥïńĝ wëńṫ wѓöńĝ",
+  "loading-arialLabel": "CH-Löáḋïńĝ ṁy ḋáŝĥböáѓḋ",
+  "slider-input": {
+    "labels": {
+      "left": "CH-Ѓëïńvëŝṫ",
+      "right": "CH-Wïṫĥḋѓáw"
     }
   }
 }
