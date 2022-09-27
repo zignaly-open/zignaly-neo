@@ -14,7 +14,7 @@ export const DropDownContainer = styled.div`
   user-select: none;
 `;
 
-export const Component = styled.button`
+export const Component = styled.div`
   background: none;
   color: inherit;
   border: none;

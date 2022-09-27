@@ -22,6 +22,7 @@ export const useMyBalances = (): {
     isLoading,
     data:
       balances &&
+      !isLoading &&
       Object.entries(balances).reduce(
         (acc, [coin, balance]: [string, CoinBalance]) => {
           acc = {

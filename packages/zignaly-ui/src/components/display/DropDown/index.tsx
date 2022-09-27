@@ -34,7 +34,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
   const [childDropdownShow, setChildDropdownShown] = React.useState<null | DropDownOption>(null);
   const open = Boolean(anchorEl);
   const theme = useTheme() as Theme;
-  const handleToggle = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleToggle = (event: React.MouseEvent<HTMLElement>) => {
     if (open) {
       setAnchorEl(null);
     } else {
@@ -65,7 +65,9 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
 
   return (
     <>
-      <Component onClick={handleToggle}>{component({ open })}</Component>
+      <Component role="button" onClick={handleToggle}>
+        {component({ open })}
+      </Component>
       {options && (
         <Popover
           id="popover-menu"
