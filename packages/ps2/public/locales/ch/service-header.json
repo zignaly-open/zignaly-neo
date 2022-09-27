@@ -1,25 +1,23 @@
 {
-  "service-header": {
-    "managements-label": "CH-Ṁáńáĝë Ḟüńḋŝ",
-    "investors-label": "CH-Ïńvëŝṫöѓŝ",
-    "coins-label": "CH-Ĉöïńŝ",
-    "dropdown": {
-      "manageServices": "CH-Ṁáńáĝë Ŝëѓvïĉë",
-      "trade": {
-        "title": "CH-Ṫѓáḋë",
-        "links": {
-          "positions": "CH-Ṁy Ṗöŝïṫïöńŝ",
-          "manual": "CH-Ṁáńüál ṫѓáḋïńĝ",
-          "signals": "CH-Ŝïĝńálŝ Ṫѓáḋïńĝ",
-          "api": "CH-ÁṖÏ Ṫѓáḋïńĝ"
-        }
-      },
-      "profile": {
-        "title": "CH-Ṗѓöḟïlë",
-        "links": {
-          "profile": "CH-Vïëw Ṗѓöḟïlë",
-          "profile-edit": "CH-Ëḋïṫ Ṗѓöḟïlë"
-        }
+  "managements-label": "CH-Ṁáńáĝë Ḟüńḋŝ",
+  "investors-label": "CH-Ïńvëŝṫöѓŝ",
+  "coins-label": "CH-Ĉöïńŝ",
+  "dropdown": {
+    "manageServices": "CH-Ṁáńáĝë Ŝëѓvïĉë",
+    "trade": {
+      "title": "CH-Ṫѓáḋë",
+      "links": {
+        "positions": "CH-Ṁy Ṗöŝïṫïöńŝ",
+        "manual": "CH-Ṁáńüál ṫѓáḋïńĝ",
+        "signals": "CH-Ŝïĝńálŝ Ṫѓáḋïńĝ",
+        "api": "CH-ÁṖÏ Ṫѓáḋïńĝ"
+      }
+    },
+    "profile": {
+      "title": "CH-Ṗѓöḟïlë",
+      "links": {
+        "profile": "CH-Vïëw Ṗѓöḟïlë",
+        "profile-edit": "CH-Ëḋïṫ Ṗѓöḟïlë"
       }
     }
   }

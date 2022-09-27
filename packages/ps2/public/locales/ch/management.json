@@ -1,48 +1,47 @@
 {
-  "management": {
-    "manage": "CH-Ṁáńáĝë",
-    "totalFunds": "CH-Ṫöṫál Ḟüńḋŝ ïń Ŝëѓvïĉë",
-    "tradingFunds": "CH-Ṫѓáḋïńĝ Ḟüńḋŝ",
-    "tradingFunds-desc": "CH-Ḟüńḋŝ áváïláblë ḟöѓ ṫѓáḋïńĝ áńḋ üŝëḋ ïń ṗöŝïṫïöńŝ",
-    "availableTrading": "CH-Áváïláblë ḟöѓ ṫѓáḋïńĝ:",
-    "allocatedTrading": "CH-Állöĉáṫëḋ ḟöѓ ṫѓáḋïńĝ:",
-    "hardDisconnected": "CH-Ĥáѓḋ-ḋïŝĉöńńëĉṫëḋ Ḟüńḋŝ:",
-    "disconnectionFunds": "CH-Ḋïŝĉöńńëĉṫïöń Ḟüńḋŝ",
-    "disconnectionFunds-desc": "CH-Ḟüńḋŝ áváïláblë ṫö ѓëṫüѓń ṫö ïńvëŝṫöѓŝ wĥö wáńṫ ṫö ḋïŝĉöńńëĉṫ",
-    "availableDisconnection": "CH-Áváïláblë ḟöѓ ḋïŝĉöńńëĉṫïöńŝ:",
-    "neededSnapshot": "CH-Ńëëḋëḋ ḟöѓ ḋáïly ŝńáṗŝĥöṫ:",
-    "minBalance": {
-      "title": "CH-Ṁïńïṁüṁ báláńĉë:",
-      "success": "CH-Yöü ëḋïṫëḋ ṁïńïṁüṁ báláńĉë ŝüĉĉëŝŝḟülly."
-    },
-    "minBalanceModal": {
-      "title": "CH-Ëḋïṫ Ṁïńïṁüṁ Báláńĉë",
-      "desc": "CH-Ŝëṫ üṗ ṫĥë ṁïńïṁüṁ báláńĉë ṫĥáṫ yöü wöülḋ lïkë ṫö këëṗ ïń ṫĥë Ḋïŝĉöńńëĉṫïöń Ḟüńḋŝ Áĉĉöüńṫ.",
-      "placeholder": "CH-0.0",
-      "labelBalance": "CH-Ĉüѓѓëńṫ Ṁïńïṁüṁ Báláńĉë",
-      "save": "CH-Ŝávë"
-    },
-    "heldHardDisc": "CH-Ĥëlḋ ḟöѓ ĥáѓḋ-ḋïŝĉöńńëĉṫïöńŝ:",
-    "controlledZignaly": "CH-Ĉöńṫѓöllëḋ by Žïĝńály",
-    "transfer": {
-      "title": "CH-Ṫѓáńŝḟëѓ",
-      "loading": "CH-Löáḋïńĝ",
-      "placeholder": "CH-0.0",
-      "labelBalance": "CH-Áváïláblë Báláńĉë:",
-      "deposit-available": "CH-Áváïláblë Báláńĉë:",
-      "fromTradingAccount": "CH-Ḟѓöṁ Ṫѓáḋïńĝ Áĉĉöüńṫ",
-      "toTradingAccount": "CH-Ṫö Ṫѓáḋïńĝ Áĉĉöüńṫ:",
-      "fromDiscAccount": "CH-Ḟѓöṁ Ḋïŝĉöńńëĉṫïöń Áĉĉöüńṫ",
-      "toDiscAccount": "CH-Ṫö Ḋïŝĉöńńëĉṫïöń Áĉĉöüńṫ:",
-      "now": "CH-Ṫѓáńŝḟëѓ Ńöw",
-      "success": "CH-Yöü ĥávë ŝüĉĉëŝŝḟülly ṫѓáńŝḟëѓѓëḋ {{áṁöüńṫ}}."
-    },
-    "transferFunds": {
-      "title": "CH-Ṫѓáńŝḟëѓ Ḟüńḋŝ",
-      "desc": "CH-Ṫѓáńŝḟëѓ ĉöïńŝ bëṫwëëń ṁy ṗѓöḟïṫ ŝĥáѓïńĝ áĉĉöüńṫŝ."
-    },
-    "hardDiconnectWarning": "CH-Yöüѓ ĥáѓḋ ḋïŝĉöńńëĉṫŝ ĥávë ѓëáĉĥëḋ {ṗëѓĉ}%. Ïḟ ĥáѓḋ-ḋïŝĉöńńëĉṫŝ ѓëáĉĥëŝ {ṁáxṖëѓĉ}% öḟ ṫĥë ŝëѓvïĉë ḟüńḋŝ, Žïĝńály wïll ṫákë ĉöńṫѓöl öḟ yöüѓ ŝëѓvïĉë.",
-    "previousValue": "CH-Ṗѓëvïöüŝ Válüë:",
-    "loading-arialLabel": "CH-Löáḋïńĝ ṁáńáĝëṁëńṫ"
-  }
+  "manage": "CH-Ṁáńáĝë",
+  "totalFunds": "CH-Ṫöṫál Ḟüńḋŝ ïń Ŝëѓvïĉë",
+  "tradingFunds": "CH-Ṫѓáḋïńĝ Ḟüńḋŝ",
+  "tradingFunds-desc": "CH-Ḟüńḋŝ áváïláblë ḟöѓ ṫѓáḋïńĝ áńḋ üŝëḋ ïń ṗöŝïṫïöńŝ",
+  "availableTrading": "CH-Áváïláblë ḟöѓ ṫѓáḋïńĝ:",
+  "allocatedTrading": "CH-Állöĉáṫëḋ ḟöѓ ṫѓáḋïńĝ:",
+  "hardDisconnected": "CH-Ĥáѓḋ-ḋïŝĉöńńëĉṫëḋ Ḟüńḋŝ:",
+  "disconnectionFunds": "CH-Ḋïŝĉöńńëĉṫïöń Ḟüńḋŝ",
+  "disconnectionFunds-desc": "CH-Ḟüńḋŝ áváïláblë ṫö ѓëṫüѓń ṫö ïńvëŝṫöѓŝ wĥö wáńṫ ṫö ḋïŝĉöńńëĉṫ",
+  "availableDisconnection": "CH-Áváïláblë ḟöѓ ḋïŝĉöńńëĉṫïöńŝ:",
+  "neededSnapshot": "CH-Ńëëḋëḋ ḟöѓ ḋáïly ŝńáṗŝĥöṫ:",
+  "helper": "CH-Ńëëḋ ĥëlṗ wïṫĥ ṫĥëŝë ńüṁbëѓŝ? Ṗlëáŝë ĉĥëĉk öüṫ öüѓ <0>ĥöw ṗѓöḟïṫ ŝĥáѓïńĝ báláńĉëŝ wöѓk</0>.",
+  "minBalance": {
+    "title": "CH-Ṁïńïṁüṁ báláńĉë:",
+    "success": "CH-Yöü ëḋïṫëḋ ṁïńïṁüṁ báláńĉë ŝüĉĉëŝŝḟülly."
+  },
+  "minBalanceModal": {
+    "title": "CH-Ëḋïṫ Ṁïńïṁüṁ Báláńĉë",
+    "desc": "CH-Ŝëṫ üṗ ṫĥë ṁïńïṁüṁ báláńĉë ṫĥáṫ yöü wöülḋ lïkë ṫö këëṗ ïń ṫĥë Ḋïŝĉöńńëĉṫïöń Ḟüńḋŝ Áĉĉöüńṫ.",
+    "placeholder": "CH-0.0",
+    "labelBalance": "CH-Ĉüѓѓëńṫ Ṁïńïṁüṁ Báláńĉë",
+    "save": "CH-Ŝávë"
+  },
+  "heldHardDisc": "CH-Ĥëlḋ ḟöѓ ĥáѓḋ-ḋïŝĉöńńëĉṫïöńŝ:",
+  "controlledZignaly": "CH-Ĉöńṫѓöllëḋ by Žïĝńály",
+  "transfer": {
+    "title": "CH-Ṫѓáńŝḟëѓ",
+    "loading": "CH-Löáḋïńĝ",
+    "placeholder": "CH-0.0",
+    "labelBalance": "CH-Áváïláblë Báláńĉë:",
+    "deposit-available": "CH-Áváïláblë Báláńĉë:",
+    "fromTradingAccount": "CH-Ḟѓöṁ Ṫѓáḋïńĝ Áĉĉöüńṫ",
+    "toTradingAccount": "CH-Ṫö Ṫѓáḋïńĝ Áĉĉöüńṫ:",
+    "fromDiscAccount": "CH-Ḟѓöṁ Ḋïŝĉöńńëĉṫïöń Áĉĉöüńṫ",
+    "toDiscAccount": "CH-Ṫö Ḋïŝĉöńńëĉṫïöń Áĉĉöüńṫ:",
+    "now": "CH-Ṫѓáńŝḟëѓ Ńöw",
+    "success": "CH-Yöü ĥávë ŝüĉĉëŝŝḟülly ṫѓáńŝḟëѓѓëḋ {{áṁöüńṫ}}."
+  },
+  "transferFunds": {
+    "title": "CH-Ṫѓáńŝḟëѓ Ḟüńḋŝ",
+    "desc": "CH-Ṫѓáńŝḟëѓ ĉöïńŝ bëṫwëëń ṁy ṗѓöḟïṫ ŝĥáѓïńĝ áĉĉöüńṫŝ."
+  },
+  "hardDiconnectWarning": "CH-Yöüѓ ĥáѓḋ ḋïŝĉöńńëĉṫŝ ĥávë ѓëáĉĥëḋ {ṗëѓĉ}%. Ïḟ ĥáѓḋ-ḋïŝĉöńńëĉṫŝ ѓëáĉĥëŝ {ṁáxṖëѓĉ}% öḟ ṫĥë ŝëѓvïĉë ḟüńḋŝ, Žïĝńály wïll ṫákë ĉöńṫѓöl öḟ yöüѓ ŝëѓvïĉë.",
+  "previousValue": "CH-Ṗѓëvïöüŝ Válüë:",
+  "loading-arialLabel": "CH-Löáḋïńĝ ṁáńáĝëṁëńṫ"
 }

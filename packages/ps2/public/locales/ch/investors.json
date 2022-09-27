@@ -1,20 +1,19 @@
 {
-  "investors": {
-    "failed-to-load": "CH-Ḟáïlëḋ ṫö löáḋ ṫĥë ḋáṫá",
-    "title": "CH-Ïńvëŝṫöѓŝ",
-    "number-of-investors": "CH-{{ĉöüńṫ}} Ïńvëŝṫöѓ",
-    "number-of-investors_plural": "CH-{{ĉöüńṫ}} Ïńvëŝṫöѓŝ",
-    "tableHeader": {
-      "email": "CH-Ëṁáïl",
-      "userId": "CH-Üŝëѓ ÏḊ",
-      "investment": "CH-Ïńvëŝṫṁëńṫ",
-      "P&L": "CH-Ṗ&L",
-      "P&LTotal": "CH-Ṗ&L Ṫöṫál",
-      "totalFeesPaid": "CH-Ṫöṫál Ḟëëŝ Ṗáïḋ",
-      "successFee": "CH-Ŝüĉĉëŝŝ Ḟëë",
-      "feesZIG": "CH-Ḟëëŝ ïń ŽÏĜ",
-      "status": "CH-Ŝṫáṫüŝ"
-    },
-    "loading-arialLabel": "CH-Löáḋïńĝ ïńvëŝṫöѓŝ"
-  }
+  "no-investors": "CH-Ṫĥïŝ ŝëѓvïĉë ḋöëŝ ńöṫ ĥávë áńy ïńvëŝṫöѓŝ yëṫ",
+  "failed-to-load": "CH-Ḟáïlëḋ ṫö löáḋ ṫĥë ḋáṫá",
+  "title": "CH-Ïńvëŝṫöѓŝ",
+  "number-of-investors": "CH-{{ĉöüńṫ}} Ïńvëŝṫöѓ",
+  "number-of-investors_plural": "CH-{{ĉöüńṫ}} Ïńvëŝṫöѓŝ",
+  "tableHeader": {
+    "email": "CH-Ëṁáïl",
+    "userId": "CH-Üŝëѓ ÏḊ",
+    "investment": "CH-Ïńvëŝṫṁëńṫ",
+    "P&L": "CH-Ṗ&L",
+    "P&LTotal": "CH-Ṗ&L Ṫöṫál",
+    "totalFeesPaid": "CH-Ṫöṫál Ḟëëŝ Ṗáïḋ",
+    "successFee": "CH-Ŝüĉĉëŝŝ Ḟëë",
+    "feesZIG": "CH-Ḟëëŝ ïń ŽÏĜ",
+    "status": "CH-Ŝṫáṫüŝ"
+  },
+  "loading-arialLabel": "CH-Löáḋïńĝ ïńvëŝṫöѓŝ"
 }
