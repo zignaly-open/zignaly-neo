@@ -32,15 +32,10 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
 ) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [childDropdownShow, setChildDropdownShown] = React.useState<null | DropDownOption>(null);
-  const open = Boolean(anchorEl);
+  const isOpen = !!anchorEl;
   const theme = useTheme() as Theme;
-  const handleToggle = (event: React.MouseEvent<HTMLElement>) => {
-    if (open) {
-      setAnchorEl(null);
-    } else {
-      setAnchorEl(event.currentTarget);
-    }
-  };
+  const handleToggle = (event: React.MouseEvent<HTMLElement>) =>
+    setAnchorEl((v) => (v ? null : event.currentTarget));
 
   const handleClose = () => {
     setChildDropdownShown(null);
@@ -53,9 +48,9 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
       closeDropDown: () => {
         handleClose();
       },
-      open,
+      open: isOpen,
     }),
-    [anchorEl, open],
+    [anchorEl, isOpen],
   );
 
   const onClick = (f: () => void) => () => {
@@ -66,13 +61,13 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
   return (
     <>
       <Component role="button" onClick={handleToggle}>
-        {component({ open })}
+        {component({ open: isOpen })}
       </Component>
       {options && (
         <Popover
           id="popover-menu"
           anchorEl={anchorEl}
-          open={open}
+          open={isOpen}
           disableScrollLock={true}
           PaperProps={{
             sx: {
@@ -91,27 +86,27 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
         >
           <DropDownContainer>
             <NavList>
-              {options.map((x, i) => {
+              {options.map((option, i) => {
                 // this is a design requirement
                 if (childDropdownShow && options.indexOf(childDropdownShow) < i) return null;
 
                 const key =
-                  x && "label" in x && typeof x.label === "string"
-                    ? x.label
+                  option && "label" in option && typeof option.label === "string"
+                    ? option.label
                     : Math.random().toString();
 
-                if (x.element)
+                if (option.element)
                   return (
-                    <ComponentWrapper separator={x.separator} key={key}>
-                      {x.element}
+                    <ComponentWrapper separator={option.separator} key={key}>
+                      {option.element}
                     </ComponentWrapper>
                   );
-                const option = x as DropDownOption;
+
                 if (option.href)
                   return (
                     <NavLink
                       key={key}
-                      separator={x.separator}
+                      separator={option.separator}
                       active={option?.active}
                       as={"a"}
                       href={option.href}
@@ -123,7 +118,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
                   return (
                     <NavLink
                       key={key}
-                      separator={x.separator}
+                      separator={option.separator}
                       active={option?.active}
                       onClick={onClick(option.onClick)}
                     >
@@ -133,7 +128,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
                 if (option.children)
                   return (
                     <ChildContainer
-                      separator={x.separator}
+                      separator={option.separator}
                       key={key}
                       active={childDropdownShow === option}
                     >
