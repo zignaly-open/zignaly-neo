@@ -1,6 +1,6 @@
 {
   "percentageChangedSuccess": "CH-Ṗѓöḟïṫ ṗëѓĉëńṫáĝë üṗḋáṫëḋ ŝüĉĉëŝŝḟülly.",
-  "addMoreInvestmentSuccess": "CH-Yöü ïńvëŝṫëḋ {{áṁöüńṫ}} {{ĉüѓѓëńĉy}} ŝüĉĉëŝŝḟülly ïń ŝëѓvïĉë {{ŝëѓvïĉëŃáṁë}}.",
+  "addMoreInvestmentSuccess": "CH-Yöü ïńvëŝṫëḋ {{amount}} {{currency}} ŝüĉĉëŝŝḟülly ïń ŝëѓvïĉë {{serviceName}}.",
   "withdrawInvestmentSuccess": "CH-Wïṫĥḋѓáwál ѓëqüëŝṫëḋ ŝüĉĉëŝŝḟülly.",
   "validation-indicateAnAmount": "CH-Yöü ṁüŝṫ ïńḋïĉáṫë áń áṁöüńṫ.",
   "error-blockedInvestment": "CH-Áll yöüѓ ḟüńḋŝ áѓë ṗëńḋïńĝ ṫö bë ṫѓáńŝḟëѓѓëḋ öüṫ öḟ ṫĥë ŝëѓvïĉë.",
@@ -39,10 +39,10 @@
   "pendingTransactions": {
     "status_zero": "CH-Yöü ĥávë ńö ïṫëṁ",
     "status_one": "CH-Yöü ĥávë 1 ṗëńḋïńĝ ṫѓáńŝáĉṫïöń",
-    "status_other": "CH-Yöü ĥávë {{ĉöüńṫ}} ṗëńḋïńĝ ṫѓáńŝáĉṫïöńŝ",
+    "status_other": "CH-Yöü ĥávë {{count}} ṗëńḋïńĝ ṫѓáńŝáĉṫïöńŝ",
     "link-label": "CH-Vïëw"
   },
-  "investorDetail-successFee": "CH-{{ḟëë}}% Ŝüĉĉëŝŝ ḟëë",
+  "investorDetail-successFee": "CH-{{fee}}% Ŝüĉĉëŝŝ ḟëë",
   "modal": {
     "withdrawInvestment": {
       "title": "CH-Wïṫĥḋѓáwál Ѓëqüëŝṫ",
