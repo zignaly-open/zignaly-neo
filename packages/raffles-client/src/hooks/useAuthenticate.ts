@@ -63,8 +63,8 @@ export default function useAuthenticate(): {
         },
       });
       setToken(accessToken);
-      await client.refetchQueries({
-        include: [GET_CURRENT_USER, GET_CURRENT_USER_BALANCE, GET_AUCTIONS],
+      client.refetchQueries({
+        include: [GET_CURRENT_USER_BALANCE, GET_CURRENT_USER, GET_AUCTIONS],
       });
     } finally {
       setIsSigning(false);
