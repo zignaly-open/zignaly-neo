@@ -52,7 +52,7 @@ const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
     reValidateMode: 'onChange',
     defaultValues: {
       amountTransfer: {
-        value: 0,
+        value: '',
         token: coin,
       },
     },
@@ -62,7 +62,6 @@ const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   const watchAmountTransfer = watch(
     'amountTransfer',
   ) as WithdrawFormData['amountTransfer'];
-
   const onSubmit = async (values: WithdrawFormData) => {
     try {
       await withdraw({
@@ -112,6 +111,10 @@ const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
               value={sliderValue}
               initialValue={0}
               onChange={(value: number) => {
+                if (!watch('amountTransfer')?.value && !value) {
+                  // means first render
+                  return;
+                }
                 setValue('amountTransfer', {
                   ...watchAmountTransfer,
                   value: new BigNumber(coin.balance)
