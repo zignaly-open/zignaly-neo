@@ -13,7 +13,6 @@ import ProgressSlider from "./components/display/ProgressSlider";
 import InvestSlider from "./components/display/InvestSlider";
 import { AreaChart } from "./components/display/Charts";
 import DropDown from "./components/display/DropDown";
-import Expandable from "./components/display/Expandable";
 
 // Inputs
 import Button from "./components/inputs/Button";
@@ -114,7 +113,6 @@ export {
   InvestSlider,
   Toaster,
   DropDown,
-  Expandable,
   // Inputs
   Button,
   CheckBox,
