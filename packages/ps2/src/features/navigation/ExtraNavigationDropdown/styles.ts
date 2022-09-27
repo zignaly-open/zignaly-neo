@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import { GlobeLanguages, styledIf, Typography } from '@zignaly-open/ui';
 
-export const DropDownContainer = styled.div`
-  user-select: none;
-  padding: 18px;
-`;
-
 export const NavLink = styled.span<{ active?: boolean; disabled?: boolean }>`
   color: #706f82;
   font-weight: 500;

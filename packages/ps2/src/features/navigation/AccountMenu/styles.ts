@@ -34,10 +34,6 @@ export const LoginButton = styled.span`
   `}
 `;
 
-export const AccountDropDown = styled.div`
-  min-width: 220px;
-`;
-
 export const AccountName = styled(Typography)`
   max-width: 155px;
   overflow: hidden;
