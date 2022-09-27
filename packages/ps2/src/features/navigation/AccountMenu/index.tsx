@@ -116,7 +116,6 @@ function AccountMenu(): React.ReactElement | null {
           element: (
             <LogoutButtonWrap>
               <Button
-                minWidth={'100%'}
                 caption={t('account-menu.notAuth-button-logOut')}
                 onClick={logout}
               />
