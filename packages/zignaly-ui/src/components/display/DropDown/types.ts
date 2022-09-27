@@ -1,8 +1,7 @@
-import React, { ReactElement } from "react";
 import { PopoverOrigin, PopoverPosition } from "@mui/material/Popover/Popover";
 
 type Option = {
-  label: string | ReturnType<React.FC>;
+  label?: string | JSX.Element;
   onClick?: () => void;
   href?: string;
   active?: boolean;
@@ -10,7 +9,7 @@ type Option = {
 
 export type DropDownOption = Option & {
   children?: Option[];
-  element?: ReturnType<React.FC>;
+  element?: JSX.Element;
   separator?: boolean;
 };
 

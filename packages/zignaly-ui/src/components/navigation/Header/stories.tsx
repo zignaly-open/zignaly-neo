@@ -34,20 +34,10 @@ Main.args = {
         Menu 3
       </a>
     </HeaderLinksContainer>,
-    <IconButton
-      key={"menu"}
-      variant={"secondary"}
-      icon={<ThreeDotsIcon />}
-      renderDropDown={<div>DropDown Container</div>}
-    />,
+    <IconButton key={"menu"} variant={"secondary"} icon={<ThreeDotsIcon />} />,
   ],
   rightElements: [
     <ZigBalance key={"balance"} balance={0} />,
-    <IconButton
-      key={"user"}
-      variant={"flat"}
-      icon={<UserIcon color="#65647E" />}
-      renderDropDown={<div>DropDown Container</div>}
-    />,
+    <IconButton key={"user"} variant={"flat"} icon={<UserIcon color="#65647E" />} />,
   ],
 };

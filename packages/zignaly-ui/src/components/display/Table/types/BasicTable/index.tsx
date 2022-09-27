@@ -20,6 +20,7 @@ import CheckBox from "../../../../inputs/CheckBox";
 import IconButton from "../../../../inputs/IconButton";
 import { ReactComponent as OptionsDotsIcon } from "../../../../../assets/icons/option-dots-icon.svg";
 import { TableBasicProps } from "../../types";
+import DropDown from "../../../DropDown";
 
 export default function BasicTable<T extends object>({
   columns = [],
@@ -166,10 +167,39 @@ export default function BasicTable<T extends object>({
                 <th role={"row"}>
                   <div style={{ display: "flex", justifyContent: "flex-end" }}>
                     {!hideOptionsButton && (
-                      <IconButton
-                        variant={"flat"}
-                        icon={<OptionsDotsIcon color={dark.neutral200} />}
-                        renderDropDown={renderColumnsSelector()}
+                      <DropDown
+                        component={({ open }) => (
+                          <IconButton
+                            variant={"flat"}
+                            isFocused={open}
+                            icon={<OptionsDotsIcon color={dark.neutral200} />}
+                          />
+                        )}
+                        options={columns.map((column: any) => {
+                          const isDisabled =
+                            hiddenColumns.length >= columns.length - 2 &&
+                            !hiddenColumns.find((e) => e === column.accessor);
+
+                          const isActive = !hiddenColumns.find((e) => e === column.accessor);
+
+                          return {
+                            element: (
+                              <CheckBox
+                                value={isActive}
+                                label={column.Header ?? ""}
+                                onChange={(isActive: boolean) => {
+                                  toggleHideColumn(column.accessor, !isActive);
+                                  if (!isActive) {
+                                    hideColumn(column.accessor);
+                                  } else {
+                                    showColumn(column.accessor);
+                                  }
+                                }}
+                                disabled={isDisabled}
+                              />
+                            ),
+                          };
+                        })}
                       />
                     )}
                   </div>

@@ -1,15 +1,7 @@
-import React, { useCallback, useRef } from 'react';
+import React from 'react';
 import { useTheme } from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import {
-  Layout,
-  Data,
-  Inline,
-  TypeText,
-  List,
-  Item,
-  InternalName,
-} from './styles';
+import { Layout, Data, Inline, TypeText, Item, InternalName } from './styles';
 import {
   Avatar,
   IconButton,
@@ -24,8 +16,7 @@ import {
 } from '../../../auth/use';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { getImageOfAccount } from '../../../../util/images';
-import { Exchange, ExtendedExchange, UserData } from '../../../auth/types';
-import { DropDownHandle } from '@zignaly-open/ui/lib/components/display/DropDown/types';
+import { ExtendedExchange, UserData } from '../../../auth/types';
 
 const AccountSelector: React.FC = () => {
   const theme = useTheme() as Theme;
@@ -33,15 +24,6 @@ const AccountSelector: React.FC = () => {
   const user: UserData | Partial<UserData> = useCurrentUser();
   const activeExchange: ExtendedExchange | undefined = useActiveExchange();
   const selectExchange = useSelectExchange();
-  const dropDownRef = useRef<DropDownHandle>(null);
-
-  const handleSelectAccount = useCallback(
-    (exchange: Exchange) => {
-      selectExchange(exchange.internalId);
-      dropDownRef.current?.closeDropDown();
-    },
-    [dropDownRef, selectExchange],
-  );
 
   if (!activeExchange) {
     return null;
@@ -57,15 +39,6 @@ const AccountSelector: React.FC = () => {
           </Typography>
           {user.exchanges.length > 1 && (
             <DropDown
-              ref={dropDownRef}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'right',
-              }}
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
               component={({ open }) => (
                 <IconButton
                   variant={'secondary'}
@@ -80,32 +53,27 @@ const AccountSelector: React.FC = () => {
                   }
                 />
               )}
-              content={
-                <List>
-                  {(user.exchanges || []).map((exchange, index) => (
-                    <Item
-                      id={`account-exchangeId-${exchange.internalId}`}
-                      key={`--exchange-key-${index.toString()}`}
-                      onClick={() => handleSelectAccount(exchange)}
+              options={(user.exchanges || []).map((exchange, index) => ({
+                onClick: () => selectExchange(exchange.internalId),
+                label: (
+                  <Item
+                    id={`account-exchangeId-${exchange.internalId}`}
+                    key={`--exchange-key-${index.toString()}`}
+                  >
+                    <Avatar size={'medium'} image={getImageOfAccount(index)} />
+                    <InternalName
+                      variant={'body1'}
+                      color={
+                        activeExchange.internalId === exchange.internalId
+                          ? 'highlighted'
+                          : 'neutral200'
+                      }
                     >
-                      <Avatar
-                        size={'medium'}
-                        image={getImageOfAccount(index)}
-                      />
-                      <InternalName
-                        variant={'body1'}
-                        color={
-                          activeExchange.internalId === exchange.internalId
-                            ? 'highlighted'
-                            : 'neutral200'
-                        }
-                      >
-                        {exchange.internalName}
-                      </InternalName>
-                    </Item>
-                  ))}
-                </List>
-              }
+                      {exchange.internalName}
+                    </InternalName>
+                  </Item>
+                ),
+              }))}
             />
           )}
         </Inline>

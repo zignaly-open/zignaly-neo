@@ -213,14 +213,6 @@ export default function PagedWithDataTable<T extends object>({
                   <div style={{ display: "flex", justifyContent: "flex-end" }}>
                     {!hideOptionsButton && (
                       <DropDown
-                        anchorOrigin={{
-                          vertical: "bottom",
-                          horizontal: "right",
-                        }}
-                        transformOrigin={{
-                          vertical: "top",
-                          horizontal: "right",
-                        }}
                         component={({ open }) => (
                           <IconButton
                             variant={"flat"}
@@ -228,7 +220,31 @@ export default function PagedWithDataTable<T extends object>({
                             icon={<OptionsDotsIcon color={dark.neutral200} />}
                           />
                         )}
-                        content={renderColumnsSelector()}
+                        options={columns.map((column: any) => {
+                          const isDisabled =
+                            hiddenColumns.length >= columns.length - 2 &&
+                            !hiddenColumns.find((e) => e === column.accessor);
+
+                          const isActive = !hiddenColumns.find((e) => e === column.accessor);
+
+                          return {
+                            element: (
+                              <CheckBox
+                                value={isActive}
+                                label={column.Header ?? ""}
+                                onChange={(isActive: boolean) => {
+                                  toggleHideColumn(column.accessor, !isActive);
+                                  if (!isActive) {
+                                    hideColumn(column.accessor);
+                                  } else {
+                                    showColumn(column.accessor);
+                                  }
+                                }}
+                                disabled={isDisabled}
+                              />
+                            ),
+                          };
+                        })}
                       />
                     )}
                   </div>

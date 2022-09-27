@@ -1,14 +1,11 @@
-import React, { useCallback, useRef } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  NavList,
   LoginButton,
-  AccountDropDown,
   AccountDropdown,
   LogoutButtonWrap,
   AccountName,
 } from './styles';
-import { DropDownContainer, NavLink } from '../ExtraNavigationDropdown/styles';
 import { useTheme } from 'styled-components';
 import {
   useActiveExchange,
@@ -33,7 +30,6 @@ import {
   ROUTE_MY_BALANCES,
 } from '../../../routes';
 import { Link, useNavigate } from 'react-router-dom';
-import { DropDownHandle } from '@zignaly-open/ui/lib/components/display/DropDown/types';
 import { getImageOfAccount } from '../../../util/images';
 
 function AccountMenu(): React.ReactElement | null {
@@ -43,18 +39,12 @@ function AccountMenu(): React.ReactElement | null {
   const isAuthenticated = useIsAuthenticated();
   const activeExchange = useActiveExchange();
   const navigate = useNavigate();
-  const dropDownRef = useRef<DropDownHandle>(null);
-
   const { exchanges } = useCurrentUser();
   const selectExchange = useSelectExchange();
 
   const setActiveExchange = (exchangeInternalId: string) => {
     selectExchange(exchangeInternalId);
   };
-
-  const closeDropdown = useCallback(() => {
-    dropDownRef.current?.closeDropDown();
-  }, [dropDownRef]);
 
   if (!isAuthenticated) {
     return (
@@ -76,7 +66,6 @@ function AccountMenu(): React.ReactElement | null {
 
   return (
     <DropDown
-      ref={dropDownRef}
       component={({ open }) => (
         <IconButton
           variant={'flat'}
@@ -135,31 +124,6 @@ function AccountMenu(): React.ReactElement | null {
           ),
         },
       ]}
-      content={
-        <AccountDropDown>
-          <DropDownContainer>
-            <NavList>
-              <Link to={ROUTE_DASHBOARD}>
-                <NavLink onClick={closeDropdown}>
-                  {t('account-menu.notAuth-dropdown-link-dashboard')}
-                </NavLink>
-              </Link>
-              <Link to={ROUTE_MY_BALANCES}>
-                <NavLink onClick={closeDropdown}>
-                  {t('account-menu.notAuth-dropdown-link-balances')}
-                </NavLink>
-              </Link>
-            </NavList>
-            <NavList className={'last'}>
-              <Button
-                minWidth={'100%'}
-                caption={t('account-menu.notAuth-button-logOut')}
-                onClick={logout}
-              />
-            </NavList>
-          </DropDownContainer>
-        </AccountDropDown>
-      }
     />
   );
 }

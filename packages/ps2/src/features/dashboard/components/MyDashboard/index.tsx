@@ -25,7 +25,7 @@ import { useActiveExchange } from '../../../auth/use';
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
   const exchange = useActiveExchange();
-  const investmentsEdnpoint = useInvestments(exchange?.internalId);
+  const investmentsEndpoint = useInvestments(exchange?.internalId);
   const selectInvestment = useSetSelectedInvestment();
   // we do not use the results of this till before the modal
   useCoins();
@@ -201,7 +201,7 @@ const MyDashboard: React.FC = () => {
         </Typography>
       </Heading>
       <LayoutContentWrapper
-        endpoint={investmentsEdnpoint}
+        endpoint={investmentsEndpoint}
         content={(services: Investment[]) => (
           <Table
             columns={tableColumns}

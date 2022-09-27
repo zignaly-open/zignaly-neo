@@ -63,14 +63,6 @@ const ExtraNavigationDropdown: React.FC = () => {
           isFocused={open}
         />
       )}
-      anchorOrigin={{
-        vertical: 'bottom',
-        horizontal: 'right',
-      }}
-      transformOrigin={{
-        vertical: 'top',
-        horizontal: 'right',
-      }}
       options={[
         {
           label: t('main-menu.dropdown-link-forTrading'),

@@ -36,16 +36,15 @@ export const List = styled.ul`
   user-select: none;
 `;
 
-export const Item = styled.li`
+export const Item = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 18px;
-  padding: 12px;
+  padding: 5px;
   cursor: pointer;
 
-  &:hover {
-    background: #ffffff0a;
+  & > :first-child {
+    margin-right: 12px;
   }
 `;
 
