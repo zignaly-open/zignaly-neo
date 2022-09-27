@@ -22,7 +22,6 @@ export const Inline = styled.div`
 export const TypeText = styled(Typography).attrs({ variant: 'h4' })`
   display: flex;
   gap: 4px;
-  padding-right: 30px; // account fort he potential dropdown
 
   span:nth-of-type(1) {
     color: ${({ theme }) => theme.neutral300};

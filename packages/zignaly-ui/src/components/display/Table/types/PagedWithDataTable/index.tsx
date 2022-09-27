@@ -1,13 +1,10 @@
 import React, { useCallback, useRef, useState } from "react";
 import { usePagination, useSortBy, useTable } from "react-table";
 import {
-  ColumnsSelector,
   EmptyMessage,
   HeaderRow,
   IconContainer,
   Layout,
-  OptionItem,
-  OptionList,
   SortIcon,
   TableView,
   TextContainer,
@@ -137,41 +134,6 @@ export default function PagedWithDataTable<T extends object>({
     { index: 3, caption: "40" },
     { index: 4, caption: "50" },
   ];
-
-  const renderColumnsSelector = useCallback(() => {
-    return (
-      <ColumnsSelector>
-        <Typography>Show/Hide Columns</Typography>
-        <OptionList>
-          {columns.map((column: any, index) => {
-            const isDisabled =
-              hiddenColumns.length >= columns.length - 2 &&
-              !hiddenColumns.find((e) => e === column.accessor);
-
-            const isActive = !hiddenColumns.find((e) => e === column.accessor);
-
-            return (
-              <OptionItem key={`--options-container-${index.toString()}`}>
-                <CheckBox
-                  value={isActive}
-                  label={column.Header ?? ""}
-                  onChange={(isActive: boolean) => {
-                    toggleHideColumn(column.accessor, !isActive);
-                    if (!isActive) {
-                      hideColumn(column.accessor);
-                    } else {
-                      showColumn(column.accessor);
-                    }
-                  }}
-                  disabled={isDisabled}
-                />
-              </OptionItem>
-            );
-          })}
-        </OptionList>
-      </ColumnsSelector>
-    );
-  }, [columns, hiddenColumns]);
 
   return (
     <Layout>
