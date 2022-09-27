@@ -1,13 +1,9 @@
-// Dependencies
 import React from "react";
 
-// Styled Components
 import { Layout, Icon } from "./styles";
 
-// Types
 import { ErrorMessageProps } from "./types";
 
-// Assets
 import { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.svg";
 import Typography from "../Typography";
 import { dark } from "theme";

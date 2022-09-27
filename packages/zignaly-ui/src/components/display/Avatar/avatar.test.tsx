@@ -1,8 +1,6 @@
-// Dependencies
 import React from "react";
 import { render, screen } from "@testing-library/react";
 
-// Component
 import Avatar from ".";
 
 describe("components/display/Avatar", () => {

@@ -1,32 +1,34 @@
 import {
   AreaChart,
-  Loader,
   PercentageIndicator,
   PriceLabel,
-  ServiceName,
   Table,
   Typography,
 } from '@zignaly-open/ui';
 import React, { useCallback, useMemo } from 'react';
-import { Center, Heading, Inline, Layout } from './styles';
+import { Heading, Inline, Layout } from './styles';
 import { useTranslation } from 'react-i18next';
 import { useCoins, useInvestments, useSetSelectedInvestment } from '../../use';
 import BigNumber from 'bignumber.js';
 import { formatDateFromDays } from './util';
 import { Investment } from '../../types';
 import { sortBigNumbers, stringSort } from '../../../../util/numbers';
-import { getServiceLogo } from '../../../../util/images';
 import { BalanceSummary } from '../BalanceSummary';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import EditInvestmentModal from '../EditInvestmentModal';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { DashboardTableDataType } from './types';
+import { ServiceName } from '../ServiceName';
+import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
+import { useActiveExchange } from '../../../auth/use';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
-  const { isFetching: isLoading, data: services, error } = useInvestments();
+  const exchange = useActiveExchange();
+  const investmentsEndpoint = useInvestments(exchange?.internalId);
   const selectInvestment = useSetSelectedInvestment();
-  const { isFetching: isLoadingCoins } = useCoins();
+  // we do not use the results of this till before the modal
+  useCoins();
   const { showModal } = useModal();
 
   const onClickEditInvestment = (service: Investment) => {
@@ -39,11 +41,11 @@ const MyDashboard: React.FC = () => {
   const tableColumns: TableProps<DashboardTableDataType>['columns'] = useMemo(
     () => [
       {
-        Header: t('my-dashboard.tableHeader.summary.title'),
+        Header: t('tableHeader.summary.title'),
         accessor: 'summary',
         headerWithFooter: (
           <div>
-            <div>{t('my-dashboard.tableHeader.summary.subtitle')}</div>
+            <div>{t('tableHeader.summary.subtitle')}</div>
           </div>
         ),
         Cell: ({ cell: { value } }) => (
@@ -54,46 +56,27 @@ const MyDashboard: React.FC = () => {
             onClickEdit={() => onClickEditInvestment(value.service)}
           />
         ),
-        sortType: (
-          a: { values: DashboardTableDataType },
-          b: { values: DashboardTableDataType },
-        ) =>
+        sortType: (a, b) =>
           sortBigNumbers(
             a.values.summary.totalValue,
             b.values.summary.totalValue,
           ),
       },
       {
-        Header: () => (
-          <Inline>{t('my-dashboard.tableHeader.serviceName.title')}</Inline>
-        ),
+        Header: () => <Inline>{t('tableHeader.serviceName.title')}</Inline>,
         accessor: 'service',
         headerWithFooter: (
-          <Inline>{t('my-dashboard.tableHeader.serviceName.subtitle')}</Inline>
+          <Inline>{t('tableHeader.serviceName.subtitle')}</Inline>
         ),
-        Cell: ({ cell: { value } }) => (
-          <ServiceName
-            heading={value.serviceName}
-            subtitle={
-              <>
-                {t('table:table.serviceName-by')} {value.ownerName}
-              </>
-            }
-            cryptoName={value.ssc}
-            image={getServiceLogo(value.serviceLogo)}
-          />
-        ),
-        sortType: (
-          a: { values: DashboardTableDataType },
-          b: { values: DashboardTableDataType },
-        ) =>
+        Cell: ({ cell: { value } }) => <ServiceName service={value} />,
+        sortType: (a, b) =>
           stringSort(
             a.values.service.serviceName,
             b.values.service.serviceName,
           ),
       },
       {
-        Header: t('my-dashboard.tableHeader.1-mo.title'),
+        Header: t('tableHeader.1-mo.title'),
         accessor: 'chart',
         Cell: ({ cell: { value } }) =>
           parseFloat(value.last30Pnl) || Object.keys(value.data).length > 1 ? (
@@ -103,12 +86,12 @@ const MyDashboard: React.FC = () => {
             </>
           ) : (
             <Typography variant={'body2'} color={'neutral400'}>
-              {t('my-dashboard.tableHeader.1-mo.no-data')}
+              {t('tableHeader.1-mo.no-data')}
             </Typography>
           ),
       },
       {
-        Header: t('my-dashboard.tableHeader.dailyAvg-title'),
+        Header: t('tableHeader.dailyAvg-title'),
         accessor: 'dailyAvg',
         Cell: ({ cell: { value } }) => (
           <PriceLabel
@@ -118,51 +101,42 @@ const MyDashboard: React.FC = () => {
             value={value.dailyAvgPnl}
           />
         ),
-        sortType: (
-          a: { values: DashboardTableDataType },
-          b: { values: DashboardTableDataType },
-        ) =>
+        sortType: (a, b) =>
           sortBigNumbers(
             a.values.dailyAvg.dailyAvgPnl,
             b.values.dailyAvg.dailyAvgPnl,
           ),
       },
       {
-        Header: t('my-dashboard.tableHeader.3-mos-title'),
+        Header: t('tableHeader.3-mos-title'),
         accessor: 'threeMonths',
         Cell: ({ cell: { value } }) => (
           <PercentageIndicator type='default' value={value.pnl90dPct} />
         ),
-        sortType: (
-          a: { values: DashboardTableDataType },
-          b: { values: DashboardTableDataType },
-        ) =>
+        sortType: (a, b) =>
           sortBigNumbers(
             a.values.threeMonths.pnl90dPct,
             b.values.threeMonths.pnl90dPct,
           ),
       },
       {
-        Header: t('my-dashboard.tableHeader.6-mos-title'),
+        Header: t('tableHeader.6-mos-title'),
         accessor: 'sixMonths',
         Cell: ({ cell: { value } }) => (
           <PercentageIndicator type='default' value={value.pnl180dPct} />
         ),
-        sortType: (
-          a: { values: DashboardTableDataType },
-          b: { values: DashboardTableDataType },
-        ) =>
+        sortType: (a, b) =>
           sortBigNumbers(
             a.values.sixMonths.pnl180dPct,
             b.values.sixMonths.pnl180dPct,
           ),
       },
       {
-        Header: t('my-dashboard.tableHeader.all.title'),
+        Header: t('tableHeader.all.title'),
         accessor: 'all',
         headerWithFooter: (
           <div>
-            <div>{t('my-dashboard.tableHeader.all.subtitle')}</div>
+            <div>{t('tableHeader.all.subtitle')}</div>
           </div>
         ),
         Cell: ({ cell: { value } }) => (
@@ -172,10 +146,8 @@ const MyDashboard: React.FC = () => {
             label={formatDateFromDays(value.periodsLc)}
           />
         ),
-        sortType: (
-          a: { values: DashboardTableDataType },
-          b: { values: DashboardTableDataType },
-        ) => sortBigNumbers(a.values.all.pnlPctLc, b.values.all.pnlPctLc),
+        sortType: (a, b) =>
+          sortBigNumbers(a.values.all.pnlPctLc, b.values.all.pnlPctLc),
       },
     ],
     [],
@@ -223,31 +195,21 @@ const MyDashboard: React.FC = () => {
     <Layout>
       <Heading>
         <Typography variant='h1' color={'neutral000'}>
-          {t('my-dashboard.title')}
+          {t('title')}
         </Typography>
       </Heading>
-      {isLoading || isLoadingCoins ? (
-        <Center>
-          <Loader
-            color={'#fff'}
-            width={'40px'}
-            height={'40px'}
-            ariaLabel={t('my-dashboard.loading-arialLabel')}
+      <LayoutContentWrapper
+        endpoint={investmentsEndpoint}
+        content={(services: Investment[]) => (
+          <Table
+            columns={tableColumns}
+            data={services?.map(bodyMapper)}
+            emptyMessage={t('table-search-emptyMessage')}
+            hideOptionsButton={true}
+            isUserTable={true}
           />
-        </Center>
-      ) : (
-        <Table
-          columns={tableColumns}
-          data={services?.map(bodyMapper)}
-          emptyMessage={
-            !error
-              ? t('my-dashboard.table-search-emptyMessage')
-              : t('my-dashboard.something-went-wrong')
-          }
-          hideOptionsButton={true}
-          isUserTable={true}
-        />
-      )}
+        )}
+      />
     </Layout>
   );
 };

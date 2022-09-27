@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
-import { Layout, Center, InvestorCounts } from './styles';
+import { Layout, InvestorCounts } from './styles';
 import {
-  Loader,
   UserIcon,
   Typography,
   Table,
@@ -17,44 +16,41 @@ import {
   useServiceDetails,
   useTraderServiceManagement,
 } from '../../use';
-import { Investor } from '../../types';
+import { Investor, TraderServiceManagement } from '../../types';
 import ConnectionStateLabel from '../ConnectionStateLabel';
 import { YesNo } from './atoms';
+import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
 }) => {
-  const {
-    isLoading: isLoadingInvestors,
-    data: investors,
-    isError,
-  } = useTraderServiceInvestors(serviceId);
-  const { isLoading: isLoadingService, data: service } =
-    useServiceDetails(serviceId);
-  const { isLoading: isLoadingManagement, data: management } =
-    useTraderServiceManagement(serviceId);
+  const investorsEndpoint = useTraderServiceInvestors(serviceId);
+  const serviceDetailsEndpoint = useServiceDetails(serviceId);
+  const managementEndpoint = useTraderServiceManagement(serviceId);
+
+  const { data: service } = serviceDetailsEndpoint;
 
   const { t } = useTranslation('investors');
 
   const columns: TableProps<InvestorTableDataType>['columns'] = useMemo(
     () => [
       {
-        Header: t('investors.tableHeader.email'),
+        Header: t('tableHeader.email'),
         accessor: 'email',
       },
       {
-        Header: t('investors.tableHeader.userId'),
+        Header: t('tableHeader.userId'),
         accessor: 'userId',
       },
       {
-        Header: t('investors.tableHeader.investment'),
+        Header: t('tableHeader.investment'),
         accessor: 'investment',
         Cell: ({ cell: { value } }) => (
           <PriceLabel coin={service?.ssc ?? 'USDT'} value={value.toFixed()} />
         ),
       },
       {
-        Header: t('investors.tableHeader.P&L'),
+        Header: t('tableHeader.P&L'),
         accessor: 'pnl',
         Cell: ({ cell: { value } }) => (
           <PriceLabel
@@ -65,30 +61,30 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         ),
       },
       {
-        Header: t('investors.tableHeader.P&LTotal'),
+        Header: t('tableHeader.P&LTotal'),
         accessor: 'pnlTotal',
         Cell: ({ cell: { value } }) => (
           <PriceLabel coin={service?.ssc ?? 'USDT'} value={parseFloat(value)} />
         ),
       },
       {
-        Header: t('investors.tableHeader.totalFeesPaid'),
+        Header: t('tableHeader.totalFeesPaid'),
         accessor: 'totalFeesPaid',
         Cell: ({ cell: { value } }) => (
           <PriceLabel coin={service?.ssc ?? 'USDT'} value={parseFloat(value)} />
         ),
       },
       {
-        Header: t('investors.tableHeader.successFee'),
+        Header: t('tableHeader.successFee'),
         accessor: 'successFee',
       },
       {
-        Header: t('investors.tableHeader.feesZIG'),
+        Header: t('tableHeader.feesZIG'),
         accessor: 'feesInZig',
         Cell: ({ cell: { value } }) => <YesNo value={value} />,
       },
       {
-        Header: t('investors.tableHeader.status'),
+        Header: t('tableHeader.status'),
         accessor: 'status',
         Cell: ({ cell: { value } }) => <ConnectionStateLabel stateId={value} />,
       },
@@ -98,49 +94,52 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
 
   return (
     <Layout>
-      {investors && (
-        <InvestorCounts>
-          <UserIcon width={'17px'} height={'20px'} color={'#65647E'} />
-          <Typography variant={'h3'} color={'avatarBack'}>
-            {t('investors.number-of-investors', { count: investors?.length })}
-          </Typography>
-        </InvestorCounts>
-      )}
+      <LayoutContentWrapper
+        endpoint={[
+          investorsEndpoint,
+          managementEndpoint,
+          serviceDetailsEndpoint,
+        ]}
+        content={([investors, management]: [
+          Investor[],
+          TraderServiceManagement,
+        ]) => (
+          <>
+            <InvestorCounts>
+              <UserIcon width={'17px'} height={'20px'} color={'#65647E'} />
+              <Typography variant={'h3'} color={'avatarBack'}>
+                {t('number-of-investors', {
+                  count: investors?.length,
+                })}
+              </Typography>
+            </InvestorCounts>
 
-      {isLoadingInvestors || isLoadingService || isLoadingManagement ? (
-        <Center>
-          <Loader
-            color={'#fff'}
-            width={'40px'}
-            height={'40px'}
-            ariaLabel={t('investors.loading-arialLabel')}
-          />
-        </Center>
-      ) : (
-        <Table
-          type={'pagedWithData'}
-          columns={columns}
-          data={investors?.map((investor: Investor) => ({
-            email: investor.email,
-            userId: investor.userId,
-            investment: new BigNumber(investor.invested).plus(
-              new BigNumber(investor.pending),
-            ),
-            pnl: {
-              pnlNetLc: investor.pnlNetLc,
-              pnlPctLc: investor.pnlPctLc,
-            },
-            pnlTotal: investor.pnlNetAt,
-            totalFeesPaid: investor.sfOwnerAt,
-            successFee: `${management.successFee}%`,
-            feesInZig: investor.payZig,
-            status: investor.accountType,
-          }))}
-          hideOptionsButton={false}
-          emptyMessage={isError ? t('investors.failed-to-load') : undefined}
-          isUserTable={false}
-        />
-      )}
+            <Table
+              type={'pagedWithData'}
+              columns={columns}
+              data={investors?.map((investor: Investor) => ({
+                email: investor.email,
+                userId: investor.userId,
+                investment: new BigNumber(investor.invested).plus(
+                  new BigNumber(investor.pending),
+                ),
+                pnl: {
+                  pnlNetLc: investor.pnlNetLc,
+                  pnlPctLc: investor.pnlPctLc,
+                },
+                pnlTotal: investor.pnlNetAt,
+                totalFeesPaid: investor.sfOwnerAt,
+                successFee: `${management.successFee}%`,
+                feesInZig: investor.payZig,
+                status: investor.accountType,
+              }))}
+              hideOptionsButton={false}
+              emptyMessage={t('no-investors')}
+              isUserTable={false}
+            />
+          </>
+        )}
+      />
     </Layout>
   );
 };

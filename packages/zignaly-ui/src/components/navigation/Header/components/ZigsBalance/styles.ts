@@ -1,7 +1,5 @@
-// Dependencies
 import styled from "styled-components";
 
-// Assets
 import { ReactComponent as WalletIcon } from "assets/icons/wallet-icon.svg";
 
 export const Layout = styled.nav`

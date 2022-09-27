@@ -1,11 +1,8 @@
-// Dependencies
 import * as React from "react";
 import { ReactElement } from "react";
 
-// Styled Components
-import { Bar, Dot, DotContainer, Label, Layout } from "./styles";
+import { Bar, Dot, DotContainer, Label, LabelTooltip, Layout } from "./styles";
 
-// Types
 import { ProgressSliderProps } from "./types";
 
 function ProgressSlider({ className, value, max = 100 }: ProgressSliderProps): ReactElement {
@@ -16,7 +13,10 @@ function ProgressSlider({ className, value, max = 100 }: ProgressSliderProps): R
       <Bar>
         <DotContainer value={normalizedValue}>
           <Dot />
-          <Label>{value}%</Label>
+          <LabelTooltip value={normalizedValue}>
+            {value}
+            <small>%</small>
+          </LabelTooltip>
         </DotContainer>
       </Bar>
       <Label>{max}%</Label>

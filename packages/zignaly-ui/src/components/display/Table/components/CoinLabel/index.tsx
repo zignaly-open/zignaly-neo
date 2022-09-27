@@ -1,10 +1,7 @@
-// Dependencies
 import React from "react";
 
-// Styled Components
 import { Layout, WrapCoin, Coin, Name, Icon } from "./styles";
 
-// Types
 import { CoinLabelProps } from "./types";
 
 const CoinLabel = ({ name = "TEATHER", coin = "USDT" }: CoinLabelProps) => (

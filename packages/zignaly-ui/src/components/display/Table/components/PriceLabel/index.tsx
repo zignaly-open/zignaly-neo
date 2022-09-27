@@ -1,11 +1,8 @@
-// Dependencies
 import React from "react";
 import NumberFormat from "react-number-format";
 
-// Styled Components
 import * as styled from "./styles";
 
-// Types
 import { PriceLabelProps } from "./types";
 import { BottomElementWrap } from "./styles";
 import Typography from "components/display/Typography";

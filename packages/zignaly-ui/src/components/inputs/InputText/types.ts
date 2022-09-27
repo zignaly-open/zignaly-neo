@@ -10,6 +10,7 @@ type LabelActionProps = {
 export interface InputTextProps {
   placeholder?: string;
   onBlur?: ChangeEventHandler<HTMLInputElement>;
+  onFocus?: ChangeEventHandler<HTMLInputElement>;
   onChange?: Function;
   disabled?: boolean;
   error?: string | null;

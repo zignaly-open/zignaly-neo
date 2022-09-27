@@ -1,7 +1,5 @@
-// Dependencies
 import React, { useCallback, useRef, useState } from "react";
 
-// Styled Components
 import { Layout, InputContainer, InputValue, Side, IconContainer, Label } from "./styles";
 import { InputTextProps } from "./types";
 
@@ -12,6 +10,7 @@ import TextButton from "../TextButton";
 function InputText(
   {
     onBlur,
+    onFocus,
     error = null,
     disabled = false,
     placeholder = "Please enter a value",
@@ -76,6 +75,7 @@ function InputText(
             type={type}
             onBlur={onBlur}
             name={name}
+            onFocus={onFocus}
           />
         </Side>
         {rightSideElement && (

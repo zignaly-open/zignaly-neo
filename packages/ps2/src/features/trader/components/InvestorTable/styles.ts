@@ -14,10 +14,3 @@ export const InvestorCounts = styled.div`
   flex-direction: row;
   margin-bottom: 26px;
 `;
-
-export const Center = styled.div`
-  display: flex;
-  padding: 8em 0;
-  align-items: center;
-  justify-content: center;
-`;

@@ -90,16 +90,18 @@ function TransferModal({
         amount: amountValue?.value?.toString(),
         from: fromTradingAccount ? 'STA' : 'SCA',
         to: fromTradingAccount ? 'SCA' : 'STA',
-      }).then(() => {
-        toast.success(
-          t('management:management.transfer.success', {
-            amount: `${new BigNumber(amountValue?.value).toFixed()} ${
-              amountValue?.token.id
-            }`,
-          }),
-        );
-        close();
-      });
+      })
+        .then(() => {
+          toast.success(
+            t('management:transfer.success', {
+              amount: `${new BigNumber(amountValue?.value).toFixed()} ${
+                amountValue?.token.id
+              }`,
+            }),
+          );
+          close();
+        })
+        .catch((e) => toast.backendError(e));
     },
     [serviceId, fromTradingAccount],
   );
@@ -116,11 +118,11 @@ function TransferModal({
     >
       <ModalContainer
         width={784}
-        title={t('management.transferFunds.title')}
+        title={t('transferFunds.title')}
         onClickClose={close}
       >
         <Box sx={{ marginBottom: 3 }}>
-          <Typography>{t('management.transferFunds.title')}</Typography>
+          <Typography>{t('transferFunds.title')}</Typography>
         </Box>
 
         {balance && !isTransferring ? (
@@ -128,17 +130,17 @@ function TransferModal({
             <Body>
               <InputAmountAdvanced
                 control={control}
-                placeholder={t('management.transfer.placeholder')}
+                placeholder={t('transfer.placeholder')}
                 fullWidth={true}
                 maxLength={26}
                 error={isDirty && t(errors?.amountValue?.value?.message)}
                 name={'amountValue'}
                 label={t(
                   fromTradingAccount
-                    ? 'management.transfer.fromTradingAccount'
-                    : 'management.transfer.fromDiscAccount',
+                    ? 'transfer.fromTradingAccount'
+                    : 'transfer.fromDiscAccount',
                 )}
-                labelBalance={t('management.transfer.labelBalance')}
+                labelBalance={t('transfer.labelBalance')}
                 tokens={[
                   {
                     id: service?.ssc ?? 'USDT',
@@ -158,7 +160,7 @@ function TransferModal({
                 <ToOutline>
                   <Typography variant='h2'>
                     {t(
-                      `management.transfer.${
+                      `transfer.${
                         fromTradingAccount
                           ? 'toDiscAccount'
                           : 'toTradingAccount'
@@ -180,7 +182,7 @@ function TransferModal({
                   </Inline>
                 </ToOutline>
                 <Typography variant='body2' color='neutral200'>
-                  {t('management.transfer.deposit-available')}
+                  {t('transfer.deposit-available')}
                   <TypographyBalance variant='body2' color='neutral000'>
                     <NumberFormat
                       value={balanceTo}
@@ -195,7 +197,7 @@ function TransferModal({
 
             <Actions>
               <Button
-                caption={t('management.transfer.now')}
+                caption={t('transfer.now')}
                 disabled={!isValid}
                 size='xlarge'
                 type='submit'
@@ -204,10 +206,7 @@ function TransferModal({
           </form>
         ) : (
           <LoaderContainer>
-            <Loader
-              color={'#fff'}
-              ariaLabel={t('management.transfer.loading')}
-            />
+            <Loader color={'#fff'} ariaLabel={t('transfer.loading')} />
           </LoaderContainer>
         )}
       </ModalContainer>

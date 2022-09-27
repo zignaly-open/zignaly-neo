@@ -28,12 +28,10 @@ export const Button = styled.button<{ isMenu: boolean }>`
 `;
 
 export const Container = styled.div`
-  position: absolute;
-  left: 0;
-  right: 0;
   top: 100%;
   z-index: 10;
   background: #191a30;
+  width: 220px;
   max-height: 300px;
   overflow: auto;
   border-radius: 0 0 6px 6px;

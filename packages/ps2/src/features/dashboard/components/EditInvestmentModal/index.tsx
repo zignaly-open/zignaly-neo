@@ -40,29 +40,27 @@ function EditInvestmentModal({
 
   const views = {
     [EditInvestmentViews.WithdrawInvestment]: {
-      title: t('withdraw-your-investment:withdraw-your-investment.title'),
+      title: t('withdraw-your-investment:title'),
       component: () => <WithdrawFunds setView={setView} />,
     },
     [EditInvestmentViews.WithdrawSuccess]: {
-      title: t(
-        'withdraw-your-investment:withdraw-your-investment.success.title',
-      ),
+      title: t('withdraw-your-investment:success.title'),
       component: () => <WithdrawModalSuccess close={close} />,
     },
     [EditInvestmentViews.WithdrawPerform]: {
-      title: t('withdraw-your-investment:withdraw-your-investment.title'),
+      title: t('withdraw-your-investment:title'),
       component: () => <WithdrawPerform setView={setView} />,
     },
     [EditInvestmentViews.PendingTransactions]: {
-      title: t('edit-investment.modal.pendingTransaction.title'),
+      title: t('modal.pendingTransaction.title'),
       component: () => <PendingTransactionsList setView={setView} />,
     },
     [EditInvestmentViews.EditInvestment]: {
-      title: t('edit-investment.modal.editInvestments.title'),
+      title: t('modal.editInvestments.title'),
       component: () => <EditInvestment setView={setView} close={close} />,
     },
     [EditInvestmentViews.EditInvestmentSuccess]: {
-      title: t('edit-investment.modalSuccess.title'),
+      title: t('modalSuccess.title'),
       component: () => <EditInvestmentSuccess close={close} />,
     },
   };
@@ -98,7 +96,7 @@ function EditInvestmentModal({
           <LoaderContainer>
             <Loader
               color={'#fff'}
-              ariaLabel={t('edit-investment.modal.editInvestments.loading')}
+              ariaLabel={t('modal.editInvestments.loading')}
             />
           </LoaderContainer>
         ) : (

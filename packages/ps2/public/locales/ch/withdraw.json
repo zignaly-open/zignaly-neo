@@ -1,9 +1,8 @@
 {
-  "withdraw": {
-    "button": "CH-Wïṫĥḋѓáw",
-    "form": {
-      "label": "CH-Áṁöüńṫ ṫö wïṫĥḋѓáw:",
-      "labelBalance": "CH-Áváïláblë:"
-    }
+  "replace-existing-amount": "CH-Ṫĥïŝ áṁöüńṫ wïll ѓëṗláĉë áńy ṗѓëvïöüŝ wïṫĥḋѓáwál ѓëqüëŝṫ.",
+  "button": "CH-Wïṫĥḋѓáw",
+  "form": {
+    "label": "CH-Áṁöüńṫ ṫö wïṫĥḋѓáw:",
+    "labelBalance": "CH-Áváïláblë:"
   }
 }

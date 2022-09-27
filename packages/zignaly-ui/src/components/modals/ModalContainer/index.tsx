@@ -1,14 +1,10 @@
-// Dependencies
 import React, { useMemo } from "react";
 
-// Styled Components
 import { Layout, Header, Title, Body, HeaderButton, Inline } from "./styles";
 
-// Assets
 import { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
 import { ReactComponent as ArrowLeftIcon } from "assets/icons/arrow-left-icon.svg";
 
-// Types
 import { ModalContainerProps } from "./types";
 
 function ModalContainer({

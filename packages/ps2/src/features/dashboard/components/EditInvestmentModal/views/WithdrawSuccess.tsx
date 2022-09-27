@@ -8,14 +8,10 @@ function WithdrawSuccess({ close }: { close: () => void }) {
   return (
     <>
       <Typography variant={'body1'} color={'neutral200'}>
-        {t('withdraw-your-investment.success.description')}
+        {t('success.description')}
       </Typography>
       <ModalActions>
-        <Button
-          onClick={close}
-          size={'large'}
-          caption={t('withdraw-your-investment.success.button')}
-        />
+        <Button onClick={close} size={'large'} caption={t('success.button')} />
       </ModalActions>
     </>
   );

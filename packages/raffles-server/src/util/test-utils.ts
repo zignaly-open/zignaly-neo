@@ -22,7 +22,7 @@ export async function createAuction(
     title: 'Test auction',
     description: 'Test auction',
     monetaryValue: '$100500',
-    startingBid: '100',
+    currentBid: '100',
     bidStep: '1',
     bidFee: '1',
     basketItems: [],
@@ -270,7 +270,6 @@ export const AUCTIONS_QUERY = `
       bidFee
       description
       imageUrl
-      startingBid
       basketItems {
         ticker
         amount
