@@ -7,7 +7,6 @@ import theme from 'theme';
 import {
   Button,
   InputAmount,
-  Loader,
   TextButton,
   Typography,
   ZignalyIcon,
@@ -134,9 +133,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
           )}
         </Container>
       ) : (
-        <Box display='flex' alignItems={'center'} justifyContent='center'>
-          <Loader color={'#fff'} ariaLabel={''} />
-        </Box>
+        <Box display='flex' alignItems={'center'} justifyContent='center'></Box>
       )}
       <Gap gap={isError ? 8 : 14} />
       <Box display='flex' justifyContent='center' flexDirection='row'>

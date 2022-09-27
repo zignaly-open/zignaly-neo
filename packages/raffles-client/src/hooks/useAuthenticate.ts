@@ -18,18 +18,24 @@ export function useLogout(): () => Promise<void> {
     deactivate();
     setToken('');
     client.refetchQueries({
-      include: [GET_AUCTIONS, GET_CURRENT_USER],
+      include: [GET_AUCTIONS],
     });
   };
 }
 
-export default function useAuthenticate(): () => Promise<void> {
+export default function useAuthenticate(): {
+  authenticate: () => void;
+  isSigning: boolean;
+  error: Error & { code: number };
+} {
   const [getOrCreateUser] = useMutation(GET_OR_CREATE_USER);
   const [authenticate] = useMutation(AUTHENTICATE_METAMASK);
   const [isOkToStart, setIsOkToStart] = useState(false);
+  const [isSigning, setIsSigning] = useState(false);
   const client = useApolloClient();
   const { account, activateBrowserWallet, library, switchNetwork } =
     useEthers();
+  const [error, setError] = useState(null);
 
   async function createUserAndSign() {
     const {
@@ -44,22 +50,29 @@ export default function useAuthenticate(): () => Promise<void> {
       process.env.REACT_APP_USE_MUMBAI_CHAIN ? Mumbai.chainId : Polygon.chainId,
     );
 
-    const signature = await library.getSigner().signMessage(messageToSign);
+    setIsSigning(true);
+    try {
+      const signature = await library.getSigner().signMessage(messageToSign);
 
-    const {
-      data: {
-        authenticate: { accessToken },
-      },
-    } = await authenticate({
-      variables: {
-        publicAddress: account.toLocaleLowerCase(),
-        signature,
-      },
-    });
-    setToken(accessToken);
-    await client.refetchQueries({
-      include: [GET_CURRENT_USER, GET_CURRENT_USER_BALANCE, GET_AUCTIONS],
-    });
+      const {
+        data: {
+          authenticate: { accessToken },
+        },
+      } = await authenticate({
+        variables: {
+          publicAddress: account.toLocaleLowerCase(),
+          signature,
+        },
+      });
+      setToken(accessToken);
+      client.refetchQueries({
+        include: [GET_CURRENT_USER_BALANCE, GET_CURRENT_USER, GET_AUCTIONS],
+      });
+    } catch (e) {
+      setError(e);
+    } finally {
+      setIsSigning(false);
+    }
   }
 
   useAsync(async () => {
@@ -68,14 +81,25 @@ export default function useAuthenticate(): () => Promise<void> {
     createUserAndSign();
   }, [account, isOkToStart]);
 
-  // TODO: error handling
-  return async () => {
+  const startAuthenticate = () => {
+    setError(null);
+
+    // In case there is an old token saved, that will trigger useCurrentUser fetching
+    // as soon as account connected, but new message not signed yet.
+    setToken('');
+
     // Ready to connect
     setIsOkToStart(true);
 
     if (!account) {
       // Init account
-      await activateBrowserWallet();
+      activateBrowserWallet();
     }
+  };
+
+  return {
+    authenticate: startAuthenticate,
+    isSigning,
+    error,
   };
 }
