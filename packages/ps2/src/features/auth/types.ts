@@ -42,7 +42,7 @@ export type UserData = {
 };
 
 // TODO: move somewhere
-export type ExchangeType = 'futures';
+export type ExchangeType = 'futures' | 'spot';
 
 // TODO: move somewhere
 export type Exchange = {
