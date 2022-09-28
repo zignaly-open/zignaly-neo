@@ -73,7 +73,7 @@ export const useAuthenticate = (): [
           login({
             ...payload,
             gRecaptchaResponse,
-            cVersionRecaptcha: 2,
+            c: 3,
           }).unwrap(),
         );
 

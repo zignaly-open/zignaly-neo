@@ -86,7 +86,7 @@ export type LoginPayload = {
 
 export type LoginFullPayload = LoginPayload & {
   gRecaptchaResponse: string;
-  cVersionRecaptcha: number;
+  c: number;
 };
 
 export type SessionResponse = {
