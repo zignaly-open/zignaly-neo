@@ -1,7 +1,13 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMyBalances } from '../../use';
-import { Table, PriceLabel, CoinLabel, sortByValue } from '@zignaly-open/ui';
+import {
+  Table,
+  PriceLabel,
+  CoinLabel,
+  sortByValue,
+  UsdPriceLabel,
+} from '@zignaly-open/ui';
 import { MyBalancesTableDataType } from './types';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { AggregatedBalances, CoinBalance, CoinDetail } from '../../types';
@@ -76,7 +82,7 @@ const MyBalancesTable = (): JSX.Element => {
         Header: t('tableHeader.valueUSD'),
         accessor: 'valueUSD',
         Cell: ({ cell: { value } }) => (
-          <PriceLabel coin={'usd'} value={value.balanceTotalUSDT} />
+          <UsdPriceLabel value={value.balanceTotalUSDT} />
         ),
         sortType: (a, b) =>
           sortByValue(

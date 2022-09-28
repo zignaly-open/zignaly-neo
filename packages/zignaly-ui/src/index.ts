@@ -4,7 +4,7 @@ import Loader from "./components/display/Loader";
 import Table from "./components/display/Table";
 import DateLabel from "./components/display/Table/components/DateLabel";
 import PercentageIndicator from "./components/display/Table/components/PercentageIndicator";
-import PriceLabel from "./components/display/Table/components/PriceLabel";
+import PriceLabel, { UsdPriceLabel } from "./components/display/Table/components/PriceLabel";
 import Typography from "./components/display/Typography";
 import ZigWalletIndicator from "./components/display/ZigWalletIndicator";
 import CoinLabel from "./components/display/Table/components/CoinLabel";
@@ -100,6 +100,7 @@ export {
   Table,
   DateLabel,
   PriceLabel,
+  UsdPriceLabel,
   ValueIndicator,
   PercentageIndicator,
   NiceScrollbar,
