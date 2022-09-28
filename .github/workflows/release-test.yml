@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - master
-      - ft/cloudfront
 jobs:
   build:
     name: Webapp Test Release
