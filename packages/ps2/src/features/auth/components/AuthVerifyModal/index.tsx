@@ -45,14 +45,6 @@ function AuthVerifyModal({
     resend().then(() => toast.success(t('auth:resend-code')));
   };
 
-  useEffect(() => {
-    status2FA.isError && toast.error(t('error:error.wrong-code'));
-  }, [!!status2FA.isError]);
-
-  useEffect(() => {
-    verifyStatus.isError && toast.error(t('error:error.wrong-code'));
-  }, [!!verifyStatus.isError]);
-
   const texts = useMemo(() => {
     let title = '';
     let description = '';

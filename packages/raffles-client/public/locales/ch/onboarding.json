@@ -17,7 +17,7 @@
   "username-ok": "CH-Ĝѓëáṫ üŝëѓńáṁë!",
   "username-min": "CH-Ṁïń 2 ĉĥáѓáĉṫëѓŝ",
   "username-max": "CH-Ṁáx 20 ĉĥáѓáĉṫëѓŝ",
-  "username-taken": "CH-Ŝöѓѓy, üŝëѓńáṁë \"{{üŝëѓńáṁë}}\" ïŝ ṫákëń",
+  "username-taken": "CH-Ŝöѓѓy, üŝëѓńáṁë \"{{username}}\" ïŝ ṫákëń",
   "username-required": "CH-Ṗlëáŝë ŝṗëĉïḟy ṫĥë üŝëѓńáṁë",
   "username-regex": "CH-Öńly lëṫṫëѓŝ, ḋïĝïṫŝ áńḋ .-_"
 }
