@@ -142,6 +142,7 @@ const renderSizeProps = (props: { size: keyof typeof buttonSizes }) => `
       ${Icon} {
         svg {
           width: 24px;
+          height: 24px;
         }
       }
 
