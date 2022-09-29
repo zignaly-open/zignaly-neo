@@ -35,6 +35,7 @@ export const HeaderRow = styled.div`
 export const View = styled.div`
   width: 100%;
   border-radius: 5px 5px 15px 15px;
+  overflow: auto;
 
   &::-webkit-scrollbar {
     width: 2px;
@@ -58,7 +59,6 @@ export const View = styled.div`
 
 export const TableView = styled.table<{ isUserTable: boolean; hasFooter?: boolean }>`
   border-spacing: 0;
-  overflow: hidden;
   width: 100%;
 
   thead {
