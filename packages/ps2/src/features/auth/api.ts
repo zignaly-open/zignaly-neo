@@ -21,7 +21,7 @@ export const api = createApi({
 
     verifyCode: builder.mutation<void, { reason: string; code: string }>({
       query: ({ code }) => ({
-        url: `/user/verify_code/enable_user`,
+        url: `user/verify_code/enable_user`,
         method: 'POST',
         body: { code },
       }),
@@ -29,14 +29,14 @@ export const api = createApi({
 
     resendCode: builder.mutation<void, void>({
       query: () => ({
-        url: `/user/resend_code/enable_user`,
+        url: `user/resend_code/enable_user`,
         method: 'POST',
       }),
     }),
 
     verify2FA: builder.mutation<void, { code: string }>({
       query: ({ code }) => ({
-        url: `/user/verify_2fa`,
+        url: `user/verify_2fa`,
         method: 'POST',
         body: { code },
       }),
@@ -44,7 +44,7 @@ export const api = createApi({
 
     verifyKnownDevice: builder.mutation<void, { code: string }>({
       query: ({ code }) => ({
-        url: `/known_device/verify`,
+        url: `known_device/verify`,
         method: 'POST',
         body: { code },
       }),
