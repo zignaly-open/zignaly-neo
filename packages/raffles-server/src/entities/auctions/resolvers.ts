@@ -8,7 +8,7 @@ import { getUserBalance, internalTransfer } from '../../cybavo';
 import { zignalySystemId } from '../../../config';
 import { emitBalanceChanged } from '../users/util';
 import AuctionsRepository from './repository';
-import redisService from '../../redis';
+import redisService from '../../redisService';
 
 export const resolvers = {
   Query: {
@@ -25,8 +25,7 @@ export const resolvers = {
       if (!user) {
         throw new Error('User not found');
       }
-      const res = await redisService.bid(user.id, id);
-      console.log(res);
+      await redisService.bid(user.id, id);
       // const auction = await AuctionsRepository.findAuction(user, id);
       // await AuctionsRepository.createAuctionBid(user, auction, id);
 

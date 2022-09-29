@@ -7,10 +7,11 @@ import { sequelize } from '../../db';
 import { Includeable, QueryTypes } from 'sequelize';
 import { ContextUser, TransactionType } from '../../types';
 import { User } from '../users/model';
-import { Auction, AuctionBid, AuctionBasketItem } from './model';
+import { Auction, AuctionBid } from './model';
 import { getMinRequiredBidForAuction } from './util';
 import { internalTransfer } from '../../cybavo';
 import { isTest, zignalySystemId } from '../../../config';
+import redisService from '../../redisService';
 
 const AuctionsRepository = () => {
   const lastBidPopulation = {
@@ -65,11 +66,16 @@ const AuctionsRepository = () => {
     });
   }
 
+  async function findUsers(ids: number[]): Promise<User[]> {
+    return await User.findAll({ where: { id: ids } });
+  }
+
   async function getSortedAuctionBids(
     id: number,
     showAllBids?: boolean,
     user?: ContextUser,
   ) {
+    // todo: use data migrated from redis
     return (
       await sequelize.query(
         `
@@ -150,15 +156,27 @@ const AuctionsRepository = () => {
     const bids = await getSortedAuctionBids(id, showAllBids, user);
     const auctions = (await Auction.findAll({
       where: { ...(id ? { id } : {}) },
-      include: [AuctionBasketItem],
       order: [['id', 'DESC']],
     })) as unknown as AuctionType[];
 
-    auctions.forEach((a) => {
+    for await (const a of auctions) {
       // here we will match auctions and bids
       a.bids = bids.filter((b: AuctionBidType) => a.id === b.auctionId);
       a.userBid = a.bids.find((b) => b.user.id === user?.id);
-    });
+      a.redisStarted = true; // todo: for now
+      if (a.redisStarted && !a.redisDone) {
+        const redisData = await redisService.getAuctionData(a.id);
+        a.currentBid = redisData.price;
+        a.expiresAt = new Date(redisData.expire);
+        // todo: improve perfs
+        const users = await findUsers(redisData.ranking);
+        a.bids = redisData.ranking.map((r, i) => ({
+          id: 1,
+          position: i + 1,
+          user: { id: r, username: users.find((u) => u.id === +r)?.username },
+        }));
+      }
+    }
 
     return auctions;
   }
@@ -169,6 +187,7 @@ const AuctionsRepository = () => {
     findAuction,
     createAuctionBid,
     lastBidPopulation,
+    findUsers,
   };
 };
 

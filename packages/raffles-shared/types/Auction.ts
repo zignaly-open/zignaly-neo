@@ -5,8 +5,8 @@ export type BasketItem = {
 
 export type AuctionBidType = {
   id: number;
-  auctionId: number;
-  value: string;
+  auctionId?: number;
+  value?: string;
   position: number;
   user: {
     id: number;
@@ -41,4 +41,6 @@ export type AuctionType = {
   bids: AuctionBidType[];
   startDate: Date;
   chain: string;
+  redisStarted: boolean;
+  redisDone: boolean;
 };

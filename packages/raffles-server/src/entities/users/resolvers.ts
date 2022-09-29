@@ -11,7 +11,7 @@ import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from './constants';
 import { withFilter } from 'graphql-subscriptions';
 import { getUserIdFromToken } from '../../util/jwt';
-import redisService from '../../redis';
+import redisService from '../../redisService';
 
 const generateNonceSignMessage = (nonce: string | number) =>
   `Please sign this message to verify it's you: ${nonce}`;

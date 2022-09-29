@@ -88,6 +88,12 @@ export class Auction extends Model {
 
   @Column
   public chain: string;
+
+  @Column
+  public redisStarted: boolean;
+
+  @Column
+  public redisDone: boolean;
 }
 
 @Table

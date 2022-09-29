@@ -12,13 +12,15 @@ import { isTest } from '../../config';
 import { persistTablesToTheDatabase } from '../db';
 import { Payout } from '../entities/payouts/model';
 import mockCybavoWallet, { MockedCybavo } from './mock-cybavo-wallet';
+import redisService from '../redisService';
 
 const request = supertest(app);
 
 export async function createAuction(
   overrides?: Partial<Auction>,
+  saveToRedis = true,
 ): Promise<Auction> {
-  return await Auction.create({
+  const auction = await Auction.create({
     title: 'Test auction',
     description: 'Test auction',
     monetaryValue: '$100500',
@@ -28,6 +30,10 @@ export async function createAuction(
     basketItems: [],
     ...overrides,
   });
+  if (saveToRedis) {
+    await redisService.prepareAuction(auction);
+  }
+  return auction;
 }
 
 export async function createBasketItem(
@@ -168,7 +174,7 @@ export async function createAlice(
       publicAddress: '0x6a3B248855bc8a687992CBAb7FD03E1947EAee07'.toLowerCase(),
       onboardingCompletedAt: Date.now(),
     });
-    const cybavoMock = mockCybavoWallet(user, balance);
+    const cybavoMock = await mockCybavoWallet(user, balance);
     return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
     console.error(e);
@@ -197,7 +203,7 @@ export async function createBob(
       publicAddress: '0xE288AE3acccc630781354da2AA64379A0d4C56dB'.toLowerCase(),
       onboardingCompletedAt: Date.now(),
     });
-    const cybavoMock = mockCybavoWallet(user, balance);
+    const cybavoMock = await mockCybavoWallet(user, balance);
     return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
     console.error(e);
@@ -226,7 +232,7 @@ export async function createRandomUser(
       publicAddress: '0xE288AE3acccc630'.toLowerCase() + Math.random(),
       onboardingCompletedAt: Date.now(),
     });
-    const cybavoMock = mockCybavoWallet(user, balance);
+    const cybavoMock = await mockCybavoWallet(user, balance);
     return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
     console.error(e);
@@ -341,10 +347,20 @@ export async function expireAuction(auctionId: number) {
   const auction = await Auction.findByPk(auctionId);
   auction.expiresAt = new Date(Date.now() - 1000);
   await auction.save();
+  await redisService.redis.hset(
+    `AUCTION:${auctionId}`,
+    'expire',
+    +auction.expiresAt * 1000,
+  );
 }
 
 export async function startAuction(auctionId: number) {
   const auction = await Auction.findByPk(auctionId);
   auction.startDate = new Date(Date.now() - 1000);
   await auction.save();
+  await redisService.redis.hset(
+    `AUCTION:${auctionId}`,
+    'start',
+    +auction.startDate * 1000,
+  );
 }
