@@ -65,11 +65,19 @@ export default function useAuthenticate(): {
         },
       });
       setToken(accessToken);
+
       await client.refetchQueries({
         include: [GET_CURRENT_USER],
+        updateCache(cache) {
+          cache.evict({ fieldName: 'me' });
+        },
       });
+
       client.refetchQueries({
         include: [GET_CURRENT_USER_BALANCE, GET_AUCTIONS],
+        updateCache(cache) {
+          cache.evict({ fieldName: 'balance' });
+        },
       });
     } catch (e) {
       setError(e);
