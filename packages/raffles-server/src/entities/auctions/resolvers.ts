@@ -8,6 +8,7 @@ import { getUserBalance, internalTransfer } from '../../cybavo';
 import { zignalySystemId } from '../../../config';
 import { emitBalanceChanged } from '../users/util';
 import AuctionsRepository from './repository';
+import redisService from '../../redis';
 
 export const resolvers = {
   Query: {
@@ -24,22 +25,24 @@ export const resolvers = {
       if (!user) {
         throw new Error('User not found');
       }
-      const auction = await AuctionsRepository.findAuction(user, id);
-      await AuctionsRepository.createAuctionBid(user, auction, id);
+      const res = await redisService.bid(user.id, id);
+      console.log(res);
+      // const auction = await AuctionsRepository.findAuction(user, id);
+      // await AuctionsRepository.createAuctionBid(user, auction, id);
 
-      const [updatedAuction] = await AuctionsRepository.getAuctions(
-        auction.id,
-        user,
-        true,
-      );
+      // const [updatedAuction] = await AuctionsRepository.getAuctions(
+      //   auction.id,
+      //   user,
+      //   true,
+      // );
 
-      await Promise.all([
-        pubsub.publish(AUCTION_UPDATED, {
-          auctionUpdated: updatedAuction,
-        }),
-        emitBalanceChanged(user),
-      ]);
-      return updatedAuction;
+      // await Promise.all([
+      //   pubsub.publish(AUCTION_UPDATED, {
+      //     auctionUpdated: updatedAuction,
+      //   }),
+      //   emitBalanceChanged(user),
+      // ]);
+      // return updatedAuction;
     },
 
     claim: async (_: any, { id }: { id: number }, { user }: ApolloContext) => {
