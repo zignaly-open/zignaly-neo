@@ -6,8 +6,9 @@ const processBalance = async (balance: string, id: number): Promise<string> => {
   const res = (await redis.fcall(
     'update_balance',
     2,
-    `USER-${id}:CYBAVO_BALANCE`,
-    `USER-${id}:CURRENT_BALANCE`,
+    `USER_CYBAVO_BALANCE`,
+    `USER_CURRENT_BALANCE`,
+    id,
     Math.floor(+balance * 100),
   )) as string;
   return (+res / 100).toString();

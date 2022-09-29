@@ -91,11 +91,11 @@ describe('User', () => {
   });
 
   describe('fetching balance => redis', () => {
-    it('should update USER:CYBAVO_BALANCE on empty store', async () => {
+    it('should update USER_CYBAVO_BALANCE on empty store', async () => {
       const [alice, aliceToken] = await createAlice(300);
       const { balance } = await getBalance(aliceToken);
       expect(balance).toBe('300');
-      const res = await redis.get(`USER-${alice.id}:CYBAVO_BALANCE`);
+      const res = await redis.hget(`USER_CYBAVO_BALANCE`, alice.id.toString());
       expect(res).toBe('30000');
     });
 
@@ -104,15 +104,15 @@ describe('User', () => {
       await redis.set(`USER-${alice.id}:CYBAVO_BALANCE`, 200);
       const { balance } = await getBalance(aliceToken);
       expect(balance).toBe('300');
-      const res = await redis.get(`USER-${alice.id}:CYBAVO_BALANCE`);
+      const res = await redis.hget(`USER_CYBAVO_BALANCE`, alice.id.toString());
       expect(res).toBe('30000');
     });
 
     it('should update USER:CURRENT_BALANCE if different cybavo balance', async () => {
       const [alice, aliceToken, cybavoMock] = await createAlice(300.33);
-      await redis.set(`USER-${alice.id}:CYBAVO_BALANCE`, 300.33 * 100);
+      await redis.hset(`USER_CYBAVO_BALANCE`, alice.id, 300.33 * 100);
       // User is bidding 50 ZIGS
-      await redis.set(`USER-${alice.id}:CURRENT_BALANCE`, 250.33 * 100);
+      await redis.hset(`USER_CURRENT_BALANCE`, alice.id, 250.33 * 100);
       // User has received 100.11009 ZIGS
       cybavoMock.setBalance(400.44009);
 
@@ -120,8 +120,12 @@ describe('User', () => {
       const { balance } = await getBalance(aliceToken);
       expect(balance).toBe('350.44');
 
-      expect(await redis.get(`USER-${alice.id}:CYBAVO_BALANCE`)).toBe('40044');
-      expect(await redis.get(`USER-${alice.id}:CURRENT_BALANCE`)).toBe('35044');
+      expect(await redis.hget(`USER_CYBAVO_BALANCE`, alice.id.toString())).toBe(
+        '40044',
+      );
+      expect(
+        await redis.hget(`USER_CURRENT_BALANCE`, alice.id.toString()),
+      ).toBe('35044');
     });
   });
 });

@@ -19,13 +19,19 @@ const generateNonceSignMessage = (nonce: string | number) =>
 export async function getUserBalanceObject(
   user: ContextUser,
 ): Promise<{ id: number; balance: string }> {
-  const balance = await getUserBalance(user.publicAddress);
-  const currentBalance = await redisService.processBalance(balance, user.id);
+  try {
+    const balance = await getUserBalance(user.publicAddress);
+    const currentBalance = await redisService.processBalance(balance, user.id);
+    console.log(currentBalance);
 
-  return {
-    id: user.id,
-    balance: currentBalance,
-  };
+    return {
+      id: user.id,
+      balance: currentBalance,
+    };
+  } catch (e) {
+    console.error(e);
+    throw new Error(e);
+  }
 }
 
 export const resolvers = {
