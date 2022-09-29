@@ -48,6 +48,7 @@ import UnauthenticatedWall from './util/walls/UnauthenticatedWall';
 import ServiceOwnerWall from './util/walls/ServiceOwnerWall';
 import HelpInvestor from './views/Help/HelpInvestor';
 import HelpTrader from './views/Help/HelpTrader';
+import NotFound from 'views/404';
 
 const Router: React.FC = () => (
   <Routes>
@@ -82,6 +83,8 @@ const Router: React.FC = () => (
       <Route path={ROUTE_SIGNUP} element={<Signup />} />
       <Route path={ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />
     </Route>
+
+    <Route path='*' element={<NotFound />} />
   </Routes>
 );
 
