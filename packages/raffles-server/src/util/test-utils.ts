@@ -11,7 +11,7 @@ import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import { isTest } from '../../config';
 import { persistTablesToTheDatabase } from '../db';
 import { Payout } from '../entities/payouts/model';
-import mockCybavoWallet from './mock-cybavo-wallet';
+import mockCybavoWallet, { MockedCybavo } from './mock-cybavo-wallet';
 
 const request = supertest(app);
 
@@ -44,6 +44,11 @@ export async function getPayouts(token: string): Promise<Payout[]> {
 export async function getAuctions(token: string): Promise<AuctionType[]> {
   const auctions = await makeRequest(AUCTIONS_QUERY, token);
   return auctions.body.data.auctions;
+}
+
+export async function getBalance(token: string): Promise<any> {
+  const balance = await makeRequest(BALANCE_QUERY, token);
+  return balance.body.data.balance;
 }
 
 export async function getFirstAuction(token: string): Promise<AuctionType> {
@@ -154,15 +159,17 @@ export async function changeDiscordName(
   return updateProfile;
 }
 
-export async function createAlice(balance = 0): Promise<[User, string]> {
+export async function createAlice(
+  balance = 0,
+): Promise<[User, string, MockedCybavo]> {
   try {
     const user = await User.create({
       username: 'Alice',
       publicAddress: '0x6a3B248855bc8a687992CBAb7FD03E1947EAee07'.toLowerCase(),
       onboardingCompletedAt: Date.now(),
     });
-    mockCybavoWallet(user, balance);
-    return [user, await signJwtToken(user)];
+    const cybavoMock = mockCybavoWallet(user, balance);
+    return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
     console.error(e);
   }
@@ -181,15 +188,17 @@ export async function createAlicesDiscord(): Promise<[User, string]> {
   }
 }
 
-export async function createBob(balance = 0): Promise<[User, string]> {
+export async function createBob(
+  balance = 0,
+): Promise<[User, string, MockedCybavo]> {
   try {
     const user = await User.create({
       username: 'Bob',
       publicAddress: '0xE288AE3acccc630781354da2AA64379A0d4C56dB'.toLowerCase(),
       onboardingCompletedAt: Date.now(),
     });
-    mockCybavoWallet(user, balance);
-    return [user, await signJwtToken(user)];
+    const cybavoMock = mockCybavoWallet(user, balance);
+    return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
     console.error(e);
   }
@@ -208,15 +217,17 @@ export async function createBobDiscord(): Promise<[User, string]> {
   }
 }
 
-export async function createRandomUser(balance = 0): Promise<[User, string]> {
+export async function createRandomUser(
+  balance = 0,
+): Promise<[User, string, MockedCybavo]> {
   try {
     const user = await User.create({
       username: null,
       publicAddress: '0xE288AE3acccc630'.toLowerCase() + Math.random(),
       onboardingCompletedAt: Date.now(),
     });
-    mockCybavoWallet(user, balance);
-    return [user, await signJwtToken(user)];
+    const cybavoMock = mockCybavoWallet(user, balance);
+    return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
     console.error(e);
   }

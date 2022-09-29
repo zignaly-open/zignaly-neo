@@ -11,6 +11,7 @@ import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from './constants';
 import { withFilter } from 'graphql-subscriptions';
 import { getUserIdFromToken } from '../../util/jwt';
+import redisService from '../../redis';
 
 const generateNonceSignMessage = (nonce: string | number) =>
   `Please sign this message to verify it's you: ${nonce}`;
@@ -18,9 +19,12 @@ const generateNonceSignMessage = (nonce: string | number) =>
 export async function getUserBalanceObject(
   user: ContextUser,
 ): Promise<{ id: number; balance: string }> {
+  const balance = await getUserBalance(user.publicAddress);
+  const currentBalance = await redisService.processBalance(balance, user.id);
+
   return {
     id: user.id,
-    balance: await getUserBalance(user.publicAddress),
+    balance: currentBalance,
   };
 }
 
