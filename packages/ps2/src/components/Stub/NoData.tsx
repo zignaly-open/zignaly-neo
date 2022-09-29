@@ -5,10 +5,7 @@ import Stub from './index';
 const NoData: React.FC = () => {
   const { t } = useTranslation('common');
   return (
-    <Stub
-      title={t('coming-soon.title')}
-      description={t('coming-soon.description')}
-    />
+    <Stub title={t('no-data.title')} description={t('no-data.description')} />
   );
 };
 
