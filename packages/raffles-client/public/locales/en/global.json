@@ -15,5 +15,6 @@
   "insert-code": "Insert Code",
   "transfer-coin": "Transfer {{coin}}",
   "auction": "ZIGBids",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "ok": "OK"
 }

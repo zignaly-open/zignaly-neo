@@ -1,11 +1,19 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useMyBalances } from '../../use';
-import { Table, PriceLabel, CoinLabel, sortByValue } from '@zignaly-open/ui';
+import {
+  Table,
+  PriceLabel,
+  CoinLabel,
+  sortByValue,
+  UsdPriceLabel,
+} from '@zignaly-open/ui';
 import { MyBalancesTableDataType } from './types';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { AggregatedBalances, CoinBalance, CoinDetail } from '../../types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
+import { useActiveExchange } from '../../../auth/use';
+import { allowedDeposits } from 'util/coins';
 
 const initialStateTable = {
   sortBy: [
@@ -19,6 +27,7 @@ const initialStateTable = {
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
   const balancesEndpoint = useMyBalances();
+  const { exchangeType } = useActiveExchange();
 
   const columns: TableProps<MyBalancesTableDataType>['columns'] = useMemo(
     () => [
@@ -76,7 +85,7 @@ const MyBalancesTable = (): JSX.Element => {
         Header: t('tableHeader.valueUSD'),
         accessor: 'valueUSD',
         Cell: ({ cell: { value } }) => (
-          <PriceLabel coin={'usd'} value={value.balanceTotalUSDT} />
+          <UsdPriceLabel value={value.balanceTotalUSDT} />
         ),
         sortType: (a, b) =>
           sortByValue(
@@ -91,7 +100,11 @@ const MyBalancesTable = (): JSX.Element => {
   const getFilteredData = useCallback(
     (balances: AggregatedBalances) =>
       Object.entries<CoinBalance & CoinDetail>(balances || {})
-        // TODO: filter lol
+        .filter(
+          ([coin, balance]) =>
+            allowedDeposits[exchangeType]?.includes(coin) ||
+            +balance.balanceTotal > 0,
+        )
         .map(([coin, balance]) => ({
           coin: { symbol: coin, name: balance.name },
           total: {
@@ -113,7 +126,7 @@ const MyBalancesTable = (): JSX.Element => {
             balanceTotalUSDT: balance.balanceTotalUSDT,
           },
         })),
-    [],
+    [exchangeType],
   );
 
   return (

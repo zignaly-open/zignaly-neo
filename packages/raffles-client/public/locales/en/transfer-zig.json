@@ -12,5 +12,7 @@
     "switch-network": "Switch Network",
     "not-enough": "Not Enough ZIGs",
     "not-enough-info": "You don't have enough ZIGs to bid!",
-    "buy-info": "To see where to buy ZIGs, check <0>this article.<0>"
+    "buy-info": "To see where to buy ZIGs, check <0>this article.<0>",
+    "unlock": "Unlock MetaMask to continue",
+    "unlock-info": "Check the MetaMask extension icon in your browser to unlock your wallet."
 }
