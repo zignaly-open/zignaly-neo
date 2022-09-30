@@ -70,20 +70,19 @@ export const resolvers = {
 
       // here we SPECIFICALLY do not pass the current user to not receive current user's bid
       // TODO: maybe we should refactor it to make this more explicit
-      const [userWinningBidId, price] =
-        await AuctionsRepository.getSortedAuctionBids(
-          id,
-          false,
-          undefined,
-        ).then((winningBids) => {
-          const userWinningBidId = winningBids.find(
-            (bid) => bid.user.id === user.id,
-          )?.id;
-          if (!userWinningBidId) {
-            throw new Error('Can not find the bid');
-          }
-          return [userWinningBidId, winningBids[0].value];
-        });
+      const userWinningBidId = await AuctionsRepository.getSortedAuctionBids(
+        id,
+        false,
+        undefined,
+      ).then((winningBids) => {
+        const userWinningBidId = winningBids.find(
+          (bid) => bid.user.id === user.id,
+        )?.id;
+        if (!userWinningBidId) {
+          throw new Error('Can not find the bid');
+        }
+        return userWinningBidId;
+      });
 
       const userWinningBid = await AuctionBid.findByPk(userWinningBidId).then(
         async (winningBid) => {
@@ -107,7 +106,7 @@ export const resolvers = {
         await internalTransfer(
           user.publicAddress,
           zignalySystemId,
-          price.toString(),
+          auction.currentBid,
           TransactionType.Payout,
         ).then((tx) => {
           if (!tx.transaction_id) throw new Error('Transaction error');

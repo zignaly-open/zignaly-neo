@@ -13,7 +13,8 @@
     "lint": "eslint --fix --ignore-path .eslintignore .",
     "lint-ci": "eslint --ignore-path .eslintignore .",
     "start": "ts-node src/index.ts",
-    "extract-redis": "ts-node src/redisExtract.ts",
+    "extract-redis": "ts-node scripts/redis-extract.ts",
+    "stress-test": "ts-node scripts/redis-stress-test.ts",
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {

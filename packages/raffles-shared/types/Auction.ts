@@ -4,9 +4,8 @@ export type BasketItem = {
 };
 
 export type AuctionBidType = {
-  id: number;
+  id?: number;
   auctionId?: number;
-  value?: string;
   position: number;
   user: {
     id: number;

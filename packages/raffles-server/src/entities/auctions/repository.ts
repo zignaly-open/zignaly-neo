@@ -169,7 +169,6 @@ const AuctionsRepository = () => {
         a.expiresAt = redisData.expire;
         const users = await findUsers(redisData.ranking);
         a.bids = redisData.ranking.map((r, i) => ({
-          id: 1,
           position: i + 1,
           user: { id: r, username: users.find((u) => u.id === +r)?.username },
         }));

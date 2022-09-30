@@ -28,25 +28,12 @@ export const GET_AUCTIONS = gql`
       imageUrl
       numberOfWinners
       chain
-      basketItems {
-        ticker
-        amount
-      }
-      monetaryValue
       bids {
-        id
         position
-        value
         user {
           id
           username
         }
-      }
-      userBid {
-        id
-        value
-        position
-        isClaimed
       }
     }
   }
@@ -67,17 +54,6 @@ export const BID_AUCTION = gql`
           username
         }
       }
-      userBid {
-        id
-        position
-        user {
-          id
-          username
-        }
-        value
-        isClaimed
-        date
-      }
     }
   }
 `;
@@ -97,17 +73,6 @@ export const BIDS_SUBSCRIPTION = gql`
       expiresAt
       currentBid
       startDate
-      userBid {
-        id
-        position
-        user {
-          id
-          username
-        }
-        value
-        date
-        isClaimed
-      }
       bids {
         id
         position
