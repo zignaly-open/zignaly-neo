@@ -20,8 +20,6 @@ import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster as ToastProvider } from 'react-hot-toast';
-import { GET_CURRENT_USER } from 'queries/users';
-import { UserType } from '@zignaly-open/raffles-shared/types';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
