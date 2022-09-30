@@ -1,6 +1,6 @@
-import { PubSub } from 'graphql-subscriptions';
+import { RedisPubSub } from 'graphql-redis-subscriptions';
+import { redisURL } from '../config';
 
-// TODO: redis or smth
-const pubsub = new PubSub();
+const pubsub = new RedisPubSub({ connection: redisURL });
 
 export default pubsub;

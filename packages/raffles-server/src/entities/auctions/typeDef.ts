@@ -9,10 +9,7 @@ export const typeDef = gql`
     discordName: String
   }
   type Bid {
-    id: Int
     position: Int
-    value: String
-    date: Date
     user: UserInfo
     isClaimed: Boolean
   }
@@ -57,7 +54,7 @@ export const typeDef = gql`
   }
 
   extend type Mutation {
-    bid(id: ID!): Auction
+    bid(id: ID!): String
     claim(id: ID!): Auction
   }
 `;

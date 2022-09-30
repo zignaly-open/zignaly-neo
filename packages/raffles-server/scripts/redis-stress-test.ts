@@ -8,37 +8,28 @@ const httpAgent = new http.Agent({
 });
 
 const bid = (auctionId: string, token: string) => {
-  return axios.post(
-    `http://localhost:${port}/graphql`,
-    {
-      operationName: 'createBid',
-      query: `
+  return axios
+    .post(
+      `http://localhost:${port}/graphql`,
+      {
+        operationName: 'createBid',
+        query: `
           mutation createBid($id: ID!) {
-            bid(id: $id) {
-              id
-              title
-              createdAt
-              expiresAt
-              bids {
-                id
-                value
-                user {
-                  id
-                  username
-                }
-              }
-            }
+            bid(id: $id)
           }
         `,
-      variables: { id: auctionId },
-    },
-    {
-      headers: {
-        authorization: 'Bearer ' + token,
+        variables: { id: auctionId },
       },
-      httpAgent,
-    },
-  );
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+        httpAgent,
+      },
+    )
+    .catch((e) => {
+      console.error(e.response.data);
+    });
 };
 
 (async () => {

@@ -157,7 +157,7 @@ const AuctionsRepository = () => {
     const auctions = (await Auction.findAll({
       where: { ...(id ? { id } : {}) },
       order: [['id', 'DESC']],
-    })) as unknown as AuctionType[];
+    })) as unknown as (AuctionType & { dataValues: AuctionType })[];
 
     for await (const a of auctions) {
       // here we will match auctions and bids
@@ -172,6 +172,8 @@ const AuctionsRepository = () => {
           position: i + 1,
           user: { id: r, username: users.find((u) => u.id === +r)?.username },
         }));
+        // Update dataValues so custom fields are sent to ws via graphql subscriptions
+        a.dataValues.bids = a.bids;
       }
     }
 

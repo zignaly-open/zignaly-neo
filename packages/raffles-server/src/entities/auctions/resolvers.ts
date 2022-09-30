@@ -18,6 +18,7 @@ const broadcastAuctionChange = async (auctionId: number) => {
     null,
     true,
   );
+
   pubsub.publish(AUCTION_UPDATED, {
     auctionUpdated,
   });
@@ -49,6 +50,8 @@ export const resolvers = {
           balance,
         },
       });
+
+      return 'ok';
     },
 
     claim: async (_: any, { id }: { id: number }, { user }: ApolloContext) => {

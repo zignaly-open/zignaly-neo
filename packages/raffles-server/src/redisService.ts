@@ -1,8 +1,9 @@
 import Redis from 'ioredis';
+import { redisURL } from '../config';
 import { Auction } from './entities/auctions/model';
 import { RedisAuctionData } from './types';
 
-const redis = new Redis(process.env.REDIS_URL);
+const redis = new Redis(redisURL);
 const BASE_UNIT = 10 ** 3;
 const strToUnit = (value: string) => Math.floor(parseFloat(value) * BASE_UNIT);
 const unitToStr = (value: string, decimals = 2) =>
@@ -88,11 +89,15 @@ const getAuctionData = async (auctionId: number): Promise<RedisAuctionData> => {
       `AUCTION:${auctionId}`,
       `AUCTION_LEADERBOARD:${auctionId}`,
     )) as any;
+
+    if (!price || !expire) {
+      throw new Error('Redis auction not found');
+    }
+
     return {
       expire: new Date(Math.round(expire / 1000)),
       price: unitToStr(price),
-      // price,
-      ranking: ranking.reverse(),
+      ranking: ranking ? ranking.reverse() : [],
     };
   } catch (e) {
     console.error(e);

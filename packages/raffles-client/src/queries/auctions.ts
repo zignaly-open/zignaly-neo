@@ -41,18 +41,7 @@ export const GET_AUCTIONS = gql`
 
 export const BID_AUCTION = gql`
   mutation createBid($id: ID!) {
-    bid(id: $id) {
-      id
-      title
-      createdAt
-      expiresAt
-      bids {
-        user {
-          id
-          username
-        }
-      }
-    }
+    bid(id: $id)
   }
 `;
 
