@@ -12,7 +12,8 @@
   "include": [
     "src",
     "node_modules/@zigraffle",
-    "tests"
+    "tests",
+    "scripts/redisExtract.ts"
   ],
   "ts-node": {
     "ignore": [
