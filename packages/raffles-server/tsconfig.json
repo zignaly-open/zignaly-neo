@@ -13,7 +13,7 @@
     "src",
     "node_modules/@zigraffle",
     "tests",
-    "scripts/redisExtract.ts"
+    "scripts",
   ],
   "ts-node": {
     "ignore": [
