@@ -47,8 +47,6 @@ export const BID_AUCTION = gql`
       createdAt
       expiresAt
       bids {
-        id
-        value
         user {
           id
           username
@@ -74,9 +72,7 @@ export const BIDS_SUBSCRIPTION = gql`
       currentBid
       startDate
       bids {
-        id
         position
-        value
         user {
           id
           username
