@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - refactor/balance-redis
 jobs:
   build:
     name: Webapp Test Release

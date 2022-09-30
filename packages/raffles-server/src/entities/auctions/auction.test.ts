@@ -165,6 +165,7 @@ describe('Auctions', () => {
     const [, aliceToken] = await createAlice(300);
     const auction = await createAuction();
     const spy = jest.spyOn(pubsub, 'publish');
+
     await makeBid(auction, aliceToken);
     expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenNthCalledWith(
@@ -173,7 +174,7 @@ describe('Auctions', () => {
       expect.objectContaining({
         balanceChanged: expect.objectContaining({
           balance: '299.00',
-          id: 1,
+          id: auction.id,
         }),
       }),
     );
@@ -181,14 +182,14 @@ describe('Auctions', () => {
     for (let i = 0; i < 50; i++) {
       await makeBid(auction, aliceToken);
     }
-    await wait(150);
+    await wait(200);
     expect(spy).toHaveBeenNthCalledWith(
       52,
       'AUCTION_UPDATED',
       expect.objectContaining({
         auctionUpdated: expect.objectContaining({
           id: auction.id,
-          currentBid: 100,
+          currentBid: '151.00',
         }),
       }),
     );

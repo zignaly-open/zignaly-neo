@@ -49,8 +49,9 @@ const processBalance = async (
 };
 
 const bid = async (userId: number, auctionId: number): Promise<string> => {
+  let res;
   try {
-    const res = (await redis.fcall(
+    res = (await redis.fcall(
       'bid',
       3,
       `USER_CURRENT_BALANCE`,
@@ -59,25 +60,25 @@ const bid = async (userId: number, auctionId: number): Promise<string> => {
       userId,
       auctionId,
     )) as any;
-
-    if (res === -1) {
-      throw new Error('Balance not found');
-    } else if (res === -2) {
-      throw new Error('Insufficient balance');
-    } else if (res === -3) {
-      throw new Error('Auction not found');
-    } else if (res === -4) {
-      throw new Error('Auction expired');
-    } else if (res === -5) {
-      throw new Error('Auction is not active yet');
-    } else if (!res || res < 0) {
-      throw new Error('Unknown error');
-    }
-    return unitToStr(res);
   } catch (e) {
     console.error(e);
     throw new Error('Could not bid');
   }
+
+  if (res === -1) {
+    throw new Error('Balance not found');
+  } else if (res === -2) {
+    throw new Error('Insufficient balance');
+  } else if (res === -3) {
+    throw new Error('Auction not found');
+  } else if (res === -4) {
+    throw new Error('Auction expired');
+  } else if (res === -5) {
+    throw new Error('Auction is not active yet');
+  } else if (!res || res < 0) {
+    throw new Error('Unknown error');
+  }
+  return unitToStr(res);
 };
 
 const getAuctionData = async (auctionId: number): Promise<RedisAuctionData> => {

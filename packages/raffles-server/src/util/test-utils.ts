@@ -32,6 +32,7 @@ export async function createAuction(
   });
   if (saveToRedis) {
     await redisService.prepareAuction(auction);
+    await auction.update({ inRedis: true });
   }
   return auction;
 }
