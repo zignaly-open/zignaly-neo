@@ -18,17 +18,17 @@ import {
 import { mock } from '../../util/mock-cybavo-wallet';
 import Redis from 'ioredis';
 import redisService from '../../redisService';
-
-let redis: Redis;
-beforeAll(async () => {
-  redis = new Redis(process.env.REDIS_URL);
-});
-
-afterAll(async () => {
-  await redis.disconnect();
-});
+import pubsub from '../../pubsub';
 
 describe('Auctions', () => {
+  let redis: Redis;
+  beforeAll(async () => {
+    redis = new Redis(process.env.REDIS_URL);
+  });
+  afterAll(async () => {
+    await redis.disconnect();
+  });
+
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
   afterEach(() => {
@@ -100,16 +100,16 @@ describe('Auctions', () => {
 
   it('should support the main flow', async () => {
     const [alice, aliceToken] = await createAlice(300);
-    const [, bobToken] = await createBob(300);
+    const [bob, bobToken] = await createBob(300);
     const auction = await createAuction();
     const auctionBeforeBids = await getFirstAuction(aliceToken);
     expect(auctionBeforeBids.currentBid).toBe('100');
     expect(auctionBeforeBids.bids.length).toBe(0);
 
-    await makeBid(auction, aliceToken);
+    const { body } = await makeBid(auction, aliceToken);
     const auctionAfter1BidAlice = await getFirstAuction(aliceToken);
     expect(auctionAfter1BidAlice.currentBid).toBe('101');
-    expect(auctionAfter1BidAlice.bids[0].user.id).toBe(alice.id);
+    expect(body.data.bid.bids[0].user.id).toBe(alice.id);
     // expect(auctionAfter1BidAlice.userBid.value).toBe('101');
     // expect(auctionAfter1BidAlice.userBid.position).toBe(1);
     // const auctionAfter1BidBob = await getFirstAuction(bobToken);
@@ -142,49 +142,53 @@ describe('Auctions', () => {
 
     await makeBid(auction, aliceToken);
     const auctionAfter50BidsAlice = await getFirstAuction(aliceToken);
-    // const auctionAfter50BidsBob = await getFirstAuction(bobToken);
+    const auctionAfter50BidsBob = await getFirstAuction(bobToken);
     expect(auctionAfter50BidsAlice.bids.length).toBe(52);
     expect(auctionAfter50BidsAlice.bids[0].position).toBe(1);
     expect(auctionAfter50BidsAlice.bids[0].user.username).toBe('Alice');
-    // const npcBids = auctionAfter50BidsAlice.bids.slice(1);
-    // expect(npcBids.every((x) => !x.user.username)).toBeTruthy();
-    // expect(auctionAfter50BidsAlice.userBid.position).toBe(1);
+    const npcBids = auctionAfter50BidsAlice.bids.slice(1, -1);
+    expect(npcBids.every((x) => !x.user.username)).toBeTruthy();
+    expect(
+      auctionAfter50BidsAlice.bids.find((b) => b.user.id === alice.id).position,
+    ).toBe(1);
 
-    // expect(auctionAfter50BidsBob.bids.length).toBe(11);
-    // expect(auctionAfter50BidsBob.bids[0].user.username).toBe('Alice');
-    // expect(auctionAfter50BidsBob.bids[10].user.username).toBe('Bob');
-    // expect(auctionAfter50BidsBob.bids[10].position).toBe(52);
-    // expect(auctionAfter50BidsBob.userBid.position).toBe(52);
+    expect(auctionAfter50BidsBob.bids.length).toBe(52);
+    expect(auctionAfter50BidsBob.bids[0].user.username).toBe('Alice');
+    expect(auctionAfter50BidsBob.bids[51].user.username).toBe('Bob');
+    expect(auctionAfter50BidsBob.bids[10].position).toBe(11);
+    expect(
+      auctionAfter50BidsBob.bids.findIndex((b) => b.user.id === bob.id),
+    ).toBe(51);
   });
 
-  // it('should dispatch socket events', async () => {
-  //   const [, aliceToken] = await createAlice(300);
-  //   const auction = await createAuction();
-  //   const spy = jest.spyOn(pubsub, 'publish');
-  //   await makeBid(auction, aliceToken);
-  //   expect(spy).toHaveBeenCalledTimes(2);
-  //   expect(spy).toHaveBeenNthCalledWith(
-  //     1,
-  //     'AUCTION_UPDATED',
-  //     expect.objectContaining({
-  //       auctionUpdated: expect.objectContaining({
-  //         userBid: expect.objectContaining({
-  //           position: 1,
-  //           user: expect.objectContaining({
-  //             username: 'Alice',
-  //           }),
-  //         }),
-  //       }),
-  //     }),
-  //   );
-  //   expect(spy).toHaveBeenNthCalledWith(
-  //     2,
-  //     'BALANCE_CHANGED',
-  //     expect.objectContaining({
-  //       balanceChanged: expect.objectContaining({ balance: '299' }),
-  //     }),
-  //   );
-  // });
+  it('should dispatch socket events', async () => {
+    const [, aliceToken] = await createAlice(300);
+    const auction = await createAuction();
+    const spy = jest.spyOn(pubsub, 'publish');
+    await makeBid(auction, aliceToken);
+    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenNthCalledWith(
+      1,
+      'AUCTION_UPDATED',
+      expect.objectContaining({
+        auctionUpdated: expect.objectContaining({
+          userBid: expect.objectContaining({
+            position: 1,
+            user: expect.objectContaining({
+              username: 'Alice',
+            }),
+          }),
+        }),
+      }),
+    );
+    expect(spy).toHaveBeenNthCalledWith(
+      2,
+      'BALANCE_CHANGED',
+      expect.objectContaining({
+        balanceChanged: expect.objectContaining({ balance: '299' }),
+      }),
+    );
+  });
 
   it("should not change expiry time if it's past max limit", async () => {
     const [, aliceToken] = await createAlice(300);

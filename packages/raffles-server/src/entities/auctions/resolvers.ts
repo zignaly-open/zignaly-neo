@@ -9,6 +9,7 @@ import { zignalySystemId } from '../../../config';
 import { emitBalanceChanged } from '../users/util';
 import AuctionsRepository from './repository';
 import redisService from '../../redisService';
+import { BALANCE_CHANGED } from '../users/constants';
 
 export const resolvers = {
   Query: {
@@ -25,23 +26,29 @@ export const resolvers = {
       if (!user) {
         throw new Error('User not found');
       }
-      await redisService.bid(user.id, id);
+      const { balance, ...auctionData } = await redisService.bid(user.id, id);
       // const auction = await AuctionsRepository.findAuction(user, id);
       // await AuctionsRepository.createAuctionBid(user, auction, id);
 
-      // const [updatedAuction] = await AuctionsRepository.getAuctions(
-      //   auction.id,
-      //   user,
-      //   true,
-      // );
+      // todo: pass redis data?
+      const [updatedAuction] = await AuctionsRepository.getAuctions(
+        id,
+        user,
+        true,
+      );
 
-      // await Promise.all([
-      //   pubsub.publish(AUCTION_UPDATED, {
-      //     auctionUpdated: updatedAuction,
-      //   }),
-      //   emitBalanceChanged(user),
-      // ]);
-      // return updatedAuction;
+      await Promise.all([
+        pubsub.publish(AUCTION_UPDATED, {
+          auctionUpdated: auctionData,
+        }),
+        pubsub.publish(BALANCE_CHANGED, {
+          balanceChanged: {
+            id: user.id,
+            balance,
+          },
+        }),
+      ]);
+      return updatedAuction;
     },
 
     claim: async (_: any, { id }: { id: number }, { user }: ApolloContext) => {

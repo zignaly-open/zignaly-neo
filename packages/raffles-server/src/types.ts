@@ -21,3 +21,5 @@ export type RedisAuctionData = {
   expire: Date;
   ranking: number[];
 };
+
+export type RedisBidAuctionData = RedisAuctionData & { balance: string };

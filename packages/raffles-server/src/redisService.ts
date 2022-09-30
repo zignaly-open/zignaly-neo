@@ -1,6 +1,6 @@
 import Redis from 'ioredis';
 import { Auction } from './entities/auctions/model';
-import { RedisAuctionData } from './types';
+import { RedisAuctionData, RedisBidAuctionData } from './types';
 const redis = new Redis(process.env.REDIS_URL);
 
 const prepareAuction = async (auction: Auction) => {
@@ -13,7 +13,9 @@ const prepareAuction = async (auction: Auction) => {
     'maxExpire',
     +auction.maxExpiryDate * 1000,
     'bidStep',
-    auction.bidStep,
+    parseFloat(auction.bidStep) * 100,
+    'bidFee',
+    parseFloat(auction.bidFee) * 100,
     'price',
     parseFloat(auction.currentBid) * 100,
   );
@@ -31,19 +33,21 @@ const processBalance = async (
       `USER_CURRENT_BALANCE`,
       userId,
       Math.floor(+balance * 100),
+      // Math.trunc(+balance * 100) / 100,
     )) as string;
-    return (+res / 100).toString();
+    return res;
   } catch (e) {
     console.error(e);
     throw new Error('Could not update balance');
   }
 };
 
-const bid = async (userId: number, auctionId: number): Promise<void> => {
-  let res = 0;
-
+const bid = async (
+  userId: number,
+  auctionId: number,
+): Promise<RedisBidAuctionData> => {
   try {
-    res = (await redis.fcall(
+    const res = (await redis.fcall(
       'bid',
       3,
       `USER_CURRENT_BALANCE`,
@@ -51,26 +55,38 @@ const bid = async (userId: number, auctionId: number): Promise<void> => {
       `AUCTION_LEADERBOARD:${auctionId}`,
       userId,
       auctionId,
-    )) as number;
+    )) as any;
+
+    if (res === -1) {
+      throw new Error('Balance not found');
+    } else if (res === -2) {
+      throw new Error('Insufficient balance');
+    } else if (res === -3) {
+      throw new Error('Auction not found');
+    } else if (res === -4) {
+      throw new Error('Auction expired');
+    } else if (res === -5) {
+      throw new Error('Auction is not active yet');
+    } else if (!res || res < 0) {
+      throw new Error('Unknown error');
+    }
+    const [expire, price, ranking, balance] = res;
+    return {
+      ...formatAuctionData({ expire, price, ranking }),
+      balance: balance,
+    };
   } catch (e) {
     console.error(e);
     throw new Error('Could not bid');
   }
-
-  if (res === -1) {
-    throw new Error('Balance not found');
-  } else if (res === -2) {
-    throw new Error('Insufficient balance');
-  } else if (res === -3) {
-    throw new Error('Auction not found');
-  } else if (res === -4) {
-    throw new Error('Auction expired');
-  } else if (res === -5) {
-    throw new Error('Auction is not active yet');
-  } else if (!res || res < 0) {
-    throw new Error('Unknown error');
-  }
 };
+
+const formatAuctionData = (data: any): RedisAuctionData => ({
+  expire: new Date(Math.round(data.expire / 1000)),
+  price: (+data.price / 100).toString(),
+  // price,
+  ranking: data.ranking.reverse(),
+});
 
 const getAuctionData = async (auctionId: number): Promise<RedisAuctionData> => {
   try {
@@ -79,13 +95,8 @@ const getAuctionData = async (auctionId: number): Promise<RedisAuctionData> => {
       2,
       `AUCTION:${auctionId}`,
       `AUCTION_LEADERBOARD:${auctionId}`,
-      auctionId,
     )) as any;
-    return {
-      expire: new Date(Math.round(expire / 1000)),
-      price: (+price / 100).toString(),
-      ranking: ranking.reverse(),
-    };
+    return formatAuctionData({ expire, price, ranking });
   } catch (e) {
     console.error(e);
     throw new Error('Could not get auction data');

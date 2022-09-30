@@ -10,8 +10,17 @@ import {
 import { zignalySystemId } from '../../../config';
 import { TransactionType } from '../../types';
 import { mock } from '../../util/mock-cybavo-wallet';
+import Redis from 'ioredis';
 
 describe('Payouts', () => {
+  let redis: Redis;
+  beforeAll(async () => {
+    redis = new Redis(process.env.REDIS_URL);
+  });
+  afterAll(async () => {
+    await redis.disconnect();
+  });
+
   beforeAll(waitUntilTablesAreCreated);
   afterEach(() => {
     mock.reset();

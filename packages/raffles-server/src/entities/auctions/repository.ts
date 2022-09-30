@@ -167,7 +167,7 @@ const AuctionsRepository = () => {
       if (a.redisStarted && !a.redisDone) {
         const redisData = await redisService.getAuctionData(a.id);
         a.currentBid = redisData.price;
-        a.expiresAt = new Date(redisData.expire);
+        a.expiresAt = redisData.expire;
         // todo: improve perfs
         const users = await findUsers(redisData.ranking);
         a.bids = redisData.ranking.map((r, i) => ({
