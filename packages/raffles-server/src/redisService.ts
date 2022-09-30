@@ -1,13 +1,12 @@
 import Redis from 'ioredis';
 import { Auction } from './entities/auctions/model';
 import { RedisAuctionData } from './types';
+
 const redis = new Redis(process.env.REDIS_URL);
-
-const GWEI_UNIT = 10 ** 3;
-
-const strToUnit = (value: string) => Math.floor(parseFloat(value) * GWEI_UNIT);
+const BASE_UNIT = 10 ** 3;
+const strToUnit = (value: string) => Math.floor(parseFloat(value) * BASE_UNIT);
 const unitToStr = (value: string, decimals = 2) =>
-  (parseFloat(value) / GWEI_UNIT).toFixed(decimals);
+  (parseFloat(value) / BASE_UNIT).toFixed(decimals);
 
 const prepareAuction = async (auction: Auction) => {
   return redis.hset(
