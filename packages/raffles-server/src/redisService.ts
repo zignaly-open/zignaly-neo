@@ -1,6 +1,6 @@
 import Redis from 'ioredis';
 import { Auction } from './entities/auctions/model';
-import { RedisAuctionData, RedisBidAuctionData } from './types';
+import { RedisAuctionData } from './types';
 const redis = new Redis(process.env.REDIS_URL);
 
 const GWEI_UNIT = 10 ** 3;
@@ -48,10 +48,7 @@ const processBalance = async (
   }
 };
 
-const bid = async (
-  userId: number,
-  auctionId: number,
-): Promise<RedisBidAuctionData> => {
+const bid = async (userId: number, auctionId: number): Promise<string> => {
   try {
     const res = (await redis.fcall(
       'bid',
@@ -76,23 +73,12 @@ const bid = async (
     } else if (!res || res < 0) {
       throw new Error('Unknown error');
     }
-    const [expire, price, ranking, balance] = res;
-    return {
-      ...formatAuctionData({ expire, price, ranking }),
-      balance: unitToStr(balance),
-    };
+    return unitToStr(res);
   } catch (e) {
     console.error(e);
     throw new Error('Could not bid');
   }
 };
-
-const formatAuctionData = (data: any): RedisAuctionData => ({
-  expire: new Date(Math.round(data.expire / 1000)),
-  price: unitToStr(data.price),
-  // price,
-  ranking: data.ranking.reverse(),
-});
 
 const getAuctionData = async (auctionId: number): Promise<RedisAuctionData> => {
   try {
@@ -102,7 +88,12 @@ const getAuctionData = async (auctionId: number): Promise<RedisAuctionData> => {
       `AUCTION:${auctionId}`,
       `AUCTION_LEADERBOARD:${auctionId}`,
     )) as any;
-    return formatAuctionData({ expire, price, ranking });
+    return {
+      expire: new Date(Math.round(expire / 1000)),
+      price: unitToStr(price),
+      // price,
+      ranking: ranking.reverse(),
+    };
   } catch (e) {
     console.error(e);
     throw new Error('Could not get auction data');

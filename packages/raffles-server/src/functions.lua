@@ -85,11 +85,8 @@ local function bid(keys, args)
       redis.call('HSET', keyAuction, 'expire', expire + randomSecs * 1000000)
     end
 
-    -- Get updated auction
-    local res = get_auction_data({keyAuction, keyRank})
-    -- Add user balance
-    table.insert(res, balance - bidFee)
-    return res
+    -- Return new balance
+    return balance - bidFee
   end
   return -4
 end

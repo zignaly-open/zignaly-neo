@@ -39,7 +39,7 @@ export const resolvers = {
       if (!user) {
         throw new Error('User not found');
       }
-      const { balance } = await redisService.bid(user.id, id);
+      const balance = await redisService.bid(user.id, id);
 
       debounceBroadcastAuction(id);
 
