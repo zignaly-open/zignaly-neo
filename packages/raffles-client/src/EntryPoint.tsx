@@ -64,31 +64,28 @@ const client = new ApolloClient({
     typePolicies: {
       Auction: {
         fields: {
-          userBid: {
-            merge(existing, incoming, { cache, readField }) {
-              if (!incoming) return incoming;
-
-              const res = cache.readQuery({
-                query: GET_CURRENT_USER,
-              }) as { me: UserType };
-
-              const incomingUserId = readField<number>(
-                'id',
-                readField('user', incoming),
-              );
-
-              // Only update userBid if it's the current user because the subscription sends other users id.
-              if (
-                res?.me &&
-                res?.me.id.toString() === incomingUserId.toString()
-              ) {
-                return incoming;
-              }
-              // Keep the previous userBid although a user outbid the current user, so userBid.position is
-              // outdated, but the rest is good.
-              return existing;
-            },
-          },
+          // userBid: {
+          //   merge(existing, incoming, { cache, readField }) {
+          //     if (!incoming) return incoming;
+          //     const res = cache.readQuery({
+          //       query: GET_CURRENT_USER,
+          //     }) as { me: UserType };
+          //     const incomingUserId = readField<number>(
+          //       'id',
+          //       readField('user', incoming),
+          //     );
+          //     // Only update userBid if it's the current user because the subscription sends other users id.
+          //     if (
+          //       res?.me &&
+          //       res?.me.id.toString() === incomingUserId.toString()
+          //     ) {
+          //       return incoming;
+          //     }
+          //     // Keep the previous userBid although a user outbid the current user, so userBid.position is
+          //     // outdated, but the rest is good.
+          //     return existing;
+          //   },
+          // },
         },
       },
     },

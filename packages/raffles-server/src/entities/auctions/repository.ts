@@ -162,9 +162,8 @@ const AuctionsRepository = () => {
     for await (const a of auctions) {
       // here we will match auctions and bids
       a.bids = bids.filter((b: AuctionBidType) => a.id === b.auctionId);
-      a.userBid = a.bids.find((b) => b.user.id === user?.id);
-      a.redisStarted = true; // todo: for now
-      if (a.redisStarted && !a.redisDone) {
+      // a.userBid = a.bids.find((b) => b.user.id === user?.id);
+      if (a.inRedis) {
         const redisData = await redisService.getAuctionData(a.id);
         a.currentBid = redisData.price;
         a.expiresAt = redisData.expire;

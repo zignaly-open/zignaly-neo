@@ -3,6 +3,12 @@ import { Auction } from './entities/auctions/model';
 import { RedisAuctionData, RedisBidAuctionData } from './types';
 const redis = new Redis(process.env.REDIS_URL);
 
+const GWEI_UNIT = 10 ** 3;
+
+const strToUnit = (value: string) => Math.floor(parseFloat(value) * GWEI_UNIT);
+const unitToStr = (value: string, decimals = 2) =>
+  (parseFloat(value) / GWEI_UNIT).toFixed(decimals);
+
 const prepareAuction = async (auction: Auction) => {
   return redis.hset(
     `AUCTION:${auction.id}`,
@@ -13,11 +19,11 @@ const prepareAuction = async (auction: Auction) => {
     'maxExpire',
     +auction.maxExpiryDate * 1000,
     'bidStep',
-    parseFloat(auction.bidStep) * 100,
+    strToUnit(auction.bidStep),
     'bidFee',
-    parseFloat(auction.bidFee) * 100,
+    strToUnit(auction.bidFee),
     'price',
-    parseFloat(auction.currentBid) * 100,
+    strToUnit(auction.currentBid),
   );
 };
 
@@ -32,10 +38,10 @@ const processBalance = async (
       `USER_CYBAVO_BALANCE`,
       `USER_CURRENT_BALANCE`,
       userId,
-      Math.floor(+balance * 100),
+      strToUnit(balance),
       // Math.trunc(+balance * 100) / 100,
     )) as string;
-    return res;
+    return unitToStr(res);
   } catch (e) {
     console.error(e);
     throw new Error('Could not update balance');
@@ -73,7 +79,7 @@ const bid = async (
     const [expire, price, ranking, balance] = res;
     return {
       ...formatAuctionData({ expire, price, ranking }),
-      balance: balance,
+      balance: unitToStr(balance),
     };
   } catch (e) {
     console.error(e);
@@ -83,7 +89,7 @@ const bid = async (
 
 const formatAuctionData = (data: any): RedisAuctionData => ({
   expire: new Date(Math.round(data.expire / 1000)),
-  price: (+data.price / 100).toString(),
+  price: unitToStr(data.price),
   // price,
   ranking: data.ranking.reverse(),
 });

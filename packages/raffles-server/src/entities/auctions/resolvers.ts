@@ -10,6 +10,19 @@ import { emitBalanceChanged } from '../users/util';
 import AuctionsRepository from './repository';
 import redisService from '../../redisService';
 import { BALANCE_CHANGED } from '../users/constants';
+import { debounce } from 'lodash';
+
+const broadcastAuctionChange = async (auctionId: number) => {
+  const [auctionUpdated] = await AuctionsRepository.getAuctions(
+    auctionId,
+    null,
+    true,
+  );
+  pubsub.publish(AUCTION_UPDATED, {
+    auctionUpdated,
+  });
+};
+const debounceBroadcastAuction = debounce(broadcastAuctionChange, 100);
 
 export const resolvers = {
   Query: {
@@ -26,29 +39,16 @@ export const resolvers = {
       if (!user) {
         throw new Error('User not found');
       }
-      const { balance, ...auctionData } = await redisService.bid(user.id, id);
-      // const auction = await AuctionsRepository.findAuction(user, id);
-      // await AuctionsRepository.createAuctionBid(user, auction, id);
+      const { balance } = await redisService.bid(user.id, id);
 
-      // todo: pass redis data?
-      const [updatedAuction] = await AuctionsRepository.getAuctions(
-        id,
-        user,
-        true,
-      );
+      debounceBroadcastAuction(id);
 
-      await Promise.all([
-        pubsub.publish(AUCTION_UPDATED, {
-          auctionUpdated: auctionData,
-        }),
-        pubsub.publish(BALANCE_CHANGED, {
-          balanceChanged: {
-            id: user.id,
-            balance,
-          },
-        }),
-      ]);
-      return updatedAuction;
+      pubsub.publish(BALANCE_CHANGED, {
+        balanceChanged: {
+          id: user.id,
+          balance,
+        },
+      });
     },
 
     claim: async (_: any, { id }: { id: number }, { user }: ApolloContext) => {

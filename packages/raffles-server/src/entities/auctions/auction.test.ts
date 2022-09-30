@@ -166,26 +166,30 @@ describe('Auctions', () => {
     const auction = await createAuction();
     const spy = jest.spyOn(pubsub, 'publish');
     await makeBid(auction, aliceToken);
-    expect(spy).toHaveBeenCalledTimes(2);
+    expect(spy).toHaveBeenCalledTimes(1);
     expect(spy).toHaveBeenNthCalledWith(
       1,
-      'AUCTION_UPDATED',
+      'BALANCE_CHANGED',
       expect.objectContaining({
-        auctionUpdated: expect.objectContaining({
-          userBid: expect.objectContaining({
-            position: 1,
-            user: expect.objectContaining({
-              username: 'Alice',
-            }),
-          }),
+        balanceChanged: expect.objectContaining({
+          balance: '299.00',
+          id: 1,
         }),
       }),
     );
+
+    for (let i = 0; i < 50; i++) {
+      await makeBid(auction, aliceToken);
+    }
+    await wait(150);
     expect(spy).toHaveBeenNthCalledWith(
-      2,
-      'BALANCE_CHANGED',
+      52,
+      'AUCTION_UPDATED',
       expect.objectContaining({
-        balanceChanged: expect.objectContaining({ balance: '299' }),
+        auctionUpdated: expect.objectContaining({
+          id: auction.id,
+          currentBid: 100,
+        }),
       }),
     );
   });

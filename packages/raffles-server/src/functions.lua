@@ -4,8 +4,8 @@ local function update_balance(keys, args)
   local cybavoBalanceKey = keys[1]
   local currentBalanceKey = keys[2]
   local id = args[1]
-  local cybavoBalance = args[2]
-  local balance = redis.call('HGET', id, cybavoBalanceKey)
+  local cybavoBalance = tonumber(args[2])
+  local balance = tonumber(redis.call('HGET', cybavoBalanceKey, id))
   -- Don't do anything if cached cybavo balance is up to date
   if balance == cybavoBalance then
     return cybavoBalance

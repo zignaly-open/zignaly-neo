@@ -41,6 +41,5 @@ export type AuctionType = {
   bids: AuctionBidType[];
   startDate: Date;
   chain: string;
-  redisStarted: boolean;
-  redisDone: boolean;
+  inRedis: boolean;
 };
