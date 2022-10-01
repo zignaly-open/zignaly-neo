@@ -1,5 +1,5 @@
 import Redis from 'ioredis';
-import { redisURL } from '../config';
+import { isTest, redisURL } from '../config';
 import { Auction, AuctionBid } from './entities/auctions/model';
 import { RedisAuctionData } from './types';
 
@@ -100,7 +100,10 @@ const getAuctionData = async (auctionId: number): Promise<RedisAuctionData> => {
       ranking: ranking ? ranking.reverse() : [],
     };
   } catch (e) {
-    console.error(e);
+    // Ignore error from running test when debounced subscriptions publish event after finished.
+    if (!isTest || e.message !== 'Connection is closed.') {
+      console.error(e);
+    }
     throw new Error('Could not get auction data');
   }
 };
