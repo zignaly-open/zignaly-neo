@@ -10,20 +10,15 @@ import {
 import { zignalySystemId } from '../../../config';
 import { TransactionType } from '../../types';
 import { mock } from '../../util/mock-cybavo-wallet';
-import Redis from 'ioredis';
+import redisService from '../../redisService';
 
 describe('Payouts', () => {
-  let redis: Redis;
-  beforeAll(async () => {
-    redis = new Redis(process.env.REDIS_URL);
-  });
-  afterAll(async () => {
-    await redis.disconnect();
-  });
-
   beforeAll(waitUntilTablesAreCreated);
   afterEach(() => {
     mock.reset();
+  });
+  afterAll(async () => {
+    await redisService.redis.quit();
   });
 
   it('should show payouts after some auctions are won', async () => {
@@ -38,7 +33,7 @@ describe('Payouts', () => {
     await claimAuction(auction1, aliceToken);
     await claimAuction(auction2, aliceToken);
 
-    expect(mock.history.post[2].data).toBe(
+    expect(mock.history.post[1].data).toBe(
       JSON.stringify({
         amount: '101',
         fees: '0',

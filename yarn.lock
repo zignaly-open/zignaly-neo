@@ -3322,7 +3322,7 @@
     slash "^3.0.0"
     strip-ansi "^6.0.0"
 
-"@jest/core@^28.1.3":
+"@jest/core@^28.1.0", "@jest/core@^28.1.3":
   version "28.1.3"
   resolved "https://registry.npmjs.org/@jest/core/-/core-28.1.3.tgz"
   integrity sha512-CIKBrlaKOzA7YG19BEqCw3SLIsEwjZkeJzf5bdooVnW4bH5cktqe3JX+G2YV1aK5vP8N9na1IGWFzYaTp6k6NA==
@@ -18428,7 +18428,7 @@ jest-cli@^27.5.1:
     prompts "^2.0.1"
     yargs "^16.2.0"
 
-jest-cli@^28.1.3:
+jest-cli@^28.1.0, jest-cli@^28.1.3:
   version "28.1.3"
   resolved "https://registry.npmjs.org/jest-cli/-/jest-cli-28.1.3.tgz"
   integrity sha512-roY3kvrv57Azn1yPgdTebPAXvdR2xfezaKKYzVxZ6It/5NCxzJym6tUI5P1zkdWhfUYkxEI9uZWcQdaFLo8mJQ==
@@ -18979,15 +18979,6 @@ jest-process-manager@^0.3.1:
     spawnd "^5.0.0"
     tree-kill "^1.2.2"
     wait-on "^5.3.0"
-
-jest-redis@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/jest-redis/-/jest-redis-0.1.0.tgz#cdf92a8543d02c0ecd1359c781c679f6f06f5f85"
-  integrity sha512-C8P6Xkl9dc5/Vews1zHsY72ae7vTlJL9xOxG4LX2yzytBiWruF5gly0MrWQzRMyv+Mp6eaOcrX+WWvSsBC50HA==
-  dependencies:
-    debug "^4.3.2"
-    redis-memory-server "^0.5.0"
-    uuid "^8.3.2"
 
 jest-regex-util@^26.0.0:
   version "26.0.0"
@@ -19542,6 +19533,15 @@ jest-worker@^29.0.3:
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
 
+jest@28.1.0:
+  version "28.1.0"
+  resolved "https://registry.yarnpkg.com/jest/-/jest-28.1.0.tgz#f420e41c8f2395b9a30445a97189ebb57593d831"
+  integrity sha512-TZR+tHxopPhzw3c3560IJXZWLNHgpcz1Zh0w5A65vynLGNcg/5pZ+VildAd7+XGOu6jd58XMY/HNn0IkZIXVXg==
+  dependencies:
+    "@jest/core" "^28.1.0"
+    import-local "^3.0.2"
+    jest-cli "^28.1.0"
+
 jest@^27.4.3:
   version "27.5.1"
   resolved "https://registry.npmjs.org/jest/-/jest-27.5.1.tgz"
@@ -19551,7 +19551,7 @@ jest@^27.4.3:
     import-local "^3.0.2"
     jest-cli "^27.5.1"
 
-jest@^28.0.0, jest@^28.1.0:
+jest@^28.0.0:
   version "28.1.3"
   resolved "https://registry.npmjs.org/jest/-/jest-28.1.3.tgz"
   integrity sha512-N4GT5on8UkZgH0O5LUavMRV1EDEhNTL0KEfRmDIeZHSV7p2XgLoY9t9VDUgL6o+yfdgYHVxuz81G8oB9VG5uyA==
@@ -24548,28 +24548,6 @@ redis-errors@^1.0.0, redis-errors@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/redis-errors/-/redis-errors-1.2.0.tgz#eb62d2adb15e4eaf4610c04afe1529384250abad"
   integrity sha512-1qny3OExCf0UvUV/5wpYKf2YwPcOqXzkwKKSmKHiE6ZMQs5heeE/c8eXK+PNllPvmjgAbfnsbpkGZWy8cBpn9w==
-
-redis-memory-server@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/redis-memory-server/-/redis-memory-server-0.5.0.tgz#692a18414fe90260025677c66495331bca33b038"
-  integrity sha512-MoqPXeB9pqUa/Klry6HZw94aaOSE8CAB+1Zo1hXvGu/b+k/u79e2u1/CVGsqJ0xJMSkQMPa9duzzdmXll0PCSg==
-  dependencies:
-    camelcase "^6.0.0"
-    cross-spawn "^7.0.3"
-    debug "^4.2.0"
-    extract-zip "^2.0.1"
-    find-cache-dir "^3.3.1"
-    find-package-json "^1.2.0"
-    get-port "^5.1.1"
-    https-proxy-agent "^5.0.0"
-    lockfile "^1.0.4"
-    lodash.defaultsdeep "^4.6.1"
-    mkdirp "^1.0.4"
-    rimraf "^3.0.2"
-    semver "^7.3.2"
-    tar "^6.1.0"
-    tmp "^0.2.1"
-    uuid "8.3.0"
 
 redis-memory-server@^0.6.0:
   version "0.6.0"

@@ -28,6 +28,7 @@ export const GET_AUCTIONS = gql`
       imageUrl
       numberOfWinners
       chain
+      isClaimed
       bids {
         position
         user {
@@ -49,6 +50,7 @@ export const CLAIM = gql`
   mutation claim($id: ID!) {
     claim(id: $id) {
       id
+      isClaimed
     }
   }
 `;

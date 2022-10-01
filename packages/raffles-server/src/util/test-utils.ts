@@ -66,20 +66,7 @@ export async function makeBid(auction: Auction, token: string): Promise<any> {
   return makeRequest(
     `
    mutation {
-    bid(id: "${auction.id}") {
-      bids {
-        value
-        user {
-          id
-          username
-        }
-      }
-      userBid {
-        id
-        value
-        position
-      }
-    }
+    bid(id: "${auction.id}")
   }`,
     token,
   );
@@ -93,12 +80,8 @@ export async function claimAuction(
     `
    mutation {
     claim(id: "${auction.id}") {
-      userBid {
-        id
-        value
-        position
-        isClaimed
-      }
+      id
+      isClaimed
     }
   }`,
     token,
@@ -288,25 +271,14 @@ export const AUCTIONS_QUERY = `
       bidFee
       description
       imageUrl
-      basketItems {
-        ticker
-        amount
-      }
-      monetaryValue
+      claimSuccess
+      isClaimed
       bids {
-        id
         position
-        value
         user {
           id
           username
         }
-      }
-      userBid {
-        id
-        value
-        position
-        isClaimed
       }
     }
   }
@@ -344,7 +316,7 @@ export async function wait(ms: number): Promise<void> {
   await new Promise((r) => setTimeout(r, ms));
 }
 
-export async function expireAuction(auctionId: number) {
+export async function expireAuction(auctionId: number, finalize = true) {
   const auction = await Auction.findByPk(auctionId);
   auction.expiresAt = new Date(Date.now() - 1000);
   await auction.save();
@@ -353,6 +325,10 @@ export async function expireAuction(auctionId: number) {
     'expire',
     +auction.expiresAt * 1000,
   );
+
+  if (finalize) {
+    redisService.finalizeAuction(auctionId);
+  }
 }
 
 export async function startAuction(auctionId: number) {

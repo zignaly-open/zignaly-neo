@@ -91,6 +91,9 @@ export class Auction extends Model {
 
   @Column
   public inRedis: boolean;
+
+  @Column
+  public isFinalized: boolean;
 }
 
 @Table
@@ -135,9 +138,5 @@ export class AuctionBid extends Model {
   public claimTransactionId: string;
 
   @Column
-  public transactionId: string;
-
-  @Default(0)
-  @Column(DataType.DECIMAL)
-  public value: string;
+  public position: number;
 }

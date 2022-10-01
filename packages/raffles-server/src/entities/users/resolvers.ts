@@ -21,7 +21,6 @@ export async function getUserBalanceObject(
 ): Promise<{ id: number; balance: string }> {
   const balance = await getUserBalance(user.publicAddress);
   const currentBalance = await redisService.processBalance(balance, user.id);
-
   return {
     id: user.id,
     balance: currentBalance,

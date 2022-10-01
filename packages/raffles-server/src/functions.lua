@@ -4,23 +4,27 @@ local function update_balance(keys, args)
   local cybavoBalanceKey = keys[1]
   local currentBalanceKey = keys[2]
   local id = args[1]
-  local cybavoBalance = tonumber(args[2])
-  local balance = tonumber(redis.call('HGET', cybavoBalanceKey, id))
+  local newCybavoBalance = tonumber(args[2])
+  local cybavoBalance = tonumber(redis.call('HGET', cybavoBalanceKey, id))
+  local currentBalance = tonumber(redis.call('HGET', currentBalanceKey, id))
+
   -- Don't do anything if cached cybavo balance is up to date
-  if balance == cybavoBalance then
-    return cybavoBalance
+  if newCybavoBalance == cybavoBalance then
+    return currentBalance or cybavoBalance
   end
 
   -- Update cached cybavo balance
-  redis.call('HSET', cybavoBalanceKey, id, cybavoBalance)
-  -- Update cached current balance, if it doesn't exist
-  local res = redis.call('HSETNX', currentBalanceKey, id, cybavoBalance)
-  if res == 0 then
-    -- Otherwise increase the current balance by the difference
-    local diff = cybavoBalance - balance
-    return redis.call('HINCRBY', currentBalanceKey, id, diff)
+  redis.call('HSET', cybavoBalanceKey, id, newCybavoBalance)
+
+  local newCurrentBalance = newCybavoBalance
+  if currentBalance then
+    -- Increase the current balance by the difference fo cybavo balances
+    newCurrentBalance = currentBalance + (newCybavoBalance - cybavoBalance)
   end
-  return cybavoBalance
+  -- Set cached current balance
+  redis.call('HSET', currentBalanceKey, id, newCurrentBalance)
+  
+  return newCurrentBalance
 end
 
 local function get_auction_data(keys, args)

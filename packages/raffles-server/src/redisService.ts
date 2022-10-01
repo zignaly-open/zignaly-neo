@@ -1,6 +1,6 @@
 import Redis from 'ioredis';
-import { redisURL } from '../config';
-import { Auction } from './entities/auctions/model';
+import { isTest, redisURL } from '../config';
+import { Auction, AuctionBid } from './entities/auctions/model';
 import { RedisAuctionData } from './types';
 
 const redis = new Redis(redisURL);
@@ -100,6 +100,8 @@ const getAuctionData = async (auctionId: number): Promise<RedisAuctionData> => {
       ranking: ranking ? ranking.reverse() : [],
     };
   } catch (e) {
+    // Ignore error from running test when debounced subscriptions publish event after finished.
+    if (isTest && e.message === 'Connection is closed.') return;
     console.error(e);
     throw new Error('Could not get auction data');
   }
@@ -109,6 +111,21 @@ const getAuctionRanking = async (auctionId: number) => {
   return redis.zrange(`AUCTION_LEADERBOARD:${auctionId}`, 0, -1);
 };
 
+const finalizeAuction = async (auctionId: number) => {
+  const { price, expire, ranking } = await getAuctionData(auctionId);
+  await Auction.update(
+    { inRedis: false, isFinalized: true, currentBid: price, expireAt: expire },
+    { where: { id: auctionId } },
+  );
+  await AuctionBid.bulkCreate(
+    ranking.map((r, i) => ({
+      userId: r,
+      position: i + 1,
+      auctionId,
+    })),
+  );
+};
+
 export default {
   redis,
   processBalance,
@@ -116,4 +133,5 @@ export default {
   prepareAuction,
   getAuctionData,
   getAuctionRanking,
+  finalizeAuction,
 };

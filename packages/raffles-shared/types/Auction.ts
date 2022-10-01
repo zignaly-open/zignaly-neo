@@ -12,6 +12,7 @@ export type AuctionBidType = {
     username: string;
   };
   isClaimed?: boolean;
+  claimTransactionId?: string;
 };
 
 export type AuctionType = {
@@ -19,8 +20,6 @@ export type AuctionType = {
   title: string;
   description: string;
   claimSuccess: string;
-  basketItems: BasketItem[];
-  monetaryValue?: string;
   numberOfWinners?: number;
   website?: string;
   discord?: string;
@@ -34,11 +33,12 @@ export type AuctionType = {
   maxExpiryDate: Date;
   maxClaimDate: Date;
   startingBid: string;
-  // new fields we add on the backend
   currentBid?: string;
   userBid?: AuctionBidType;
   bids: AuctionBidType[];
   startDate: Date;
   chain: string;
+  isClaimed: boolean;
   inRedis: boolean;
+  isFinalized: boolean;
 };

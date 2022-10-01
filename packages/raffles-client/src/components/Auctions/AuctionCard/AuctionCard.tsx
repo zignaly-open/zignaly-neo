@@ -28,6 +28,7 @@ import useUpdatedAt from 'hooks/useUpdatedAt';
 import { ChainIcon } from 'components/common/ChainIcon';
 import { GET_AUCTIONS } from 'queries/auctions';
 import { useLazyQuery } from '@apollo/client';
+import useCurrentUser from 'hooks/useCurrentUser';
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
@@ -38,7 +39,11 @@ const AuctionCard: React.FC<{
       id: auction.id,
     },
   });
-  const { isActive, hasWon, isStarted } = getWinningLosingStatus(auction);
+  const { user } = useCurrentUser();
+  const { isActive, hasWon, isStarted } = getWinningLosingStatus(
+    auction,
+    user?.id,
+  );
   const { showModal } = useModal();
   const leftRef = useRef(null);
   const rightRef = useRef(null);

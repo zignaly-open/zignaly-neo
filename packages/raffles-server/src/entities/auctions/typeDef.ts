@@ -38,9 +38,8 @@ export const typeDef = gql`
     currentBid: String
     description: String
     claimSuccess: String
-    basketItems: [BasketItem]
+    isClaimed: Boolean
     bids: [Bid]
-    userBid: Bid
     numberOfWinners: Int
     chain: String
   }
