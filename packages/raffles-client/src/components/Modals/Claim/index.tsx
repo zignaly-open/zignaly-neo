@@ -38,7 +38,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
   const [loading, setLoading] = useState(false);
 
   const claimState = useMemo(() => {
-    if (auction.userBid?.isClaimed || claimResponse?.claim) {
+    if (auction.isClaimed || claimResponse?.claim) {
       return ClaimState.Claimed;
     } else if (!discordName) {
       return ClaimState.NoDiscord;

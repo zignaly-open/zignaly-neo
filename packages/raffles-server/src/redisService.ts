@@ -117,7 +117,7 @@ const finalizeAuction = async (auctionId: number) => {
   );
   await AuctionBid.bulkCreate(
     ranking.map((r, i) => ({
-      userId: r,
+      userId: +r,
       position: i + 1,
       auctionId,
     })),

@@ -34,7 +34,6 @@ export type AuctionType = {
   maxClaimDate: Date;
   startingBid: string;
   currentBid?: string;
-  userBid?: AuctionBidType;
   bids: AuctionBidType[];
   startDate: Date;
   chain: string;
