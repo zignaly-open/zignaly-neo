@@ -5,7 +5,7 @@ import { ApolloContext, TransactionType } from '../../types';
 import { isBalanceSufficientForPayment } from './util';
 import { Payout } from '../payouts/model';
 import { getUserBalance, internalTransfer } from '../../cybavo';
-import { isTest, zignalySystemId } from '../../../config';
+import { zignalySystemId } from '../../../config';
 import { emitBalanceChanged } from '../users/util';
 import AuctionsRepository from './repository';
 import redisService from '../../redisService';
@@ -23,9 +23,7 @@ const broadcastAuctionChange = async (auctionId: number) => {
       auctionUpdated,
     });
   } catch (e) {
-    if (!isTest) {
-      console.error(e);
-    }
+    console.error(e);
   }
 };
 const debounceBroadcastAuction = debounce(broadcastAuctionChange, 100);

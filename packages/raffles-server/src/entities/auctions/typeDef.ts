@@ -11,7 +11,6 @@ export const typeDef = gql`
   type Bid {
     position: Int
     user: UserInfo
-    isClaimed: Boolean
   }
 
   type BasketItem {

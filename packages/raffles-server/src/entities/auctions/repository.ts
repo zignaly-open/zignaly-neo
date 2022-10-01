@@ -4,7 +4,6 @@ import { ContextUser } from '../../types';
 import { User } from '../users/model';
 import { Auction, AuctionBid } from './model';
 import redisService from '../../redisService';
-import { isTest } from '../../../config';
 
 const AuctionsRepository = () => {
   const lastBidPopulation = {
@@ -44,11 +43,6 @@ const AuctionsRepository = () => {
       // Apply redis data
       if (a.inRedis) {
         const redisData = await redisService.getAuctionData(a.id);
-        if (!redisData) {
-          !isTest && console.error('Auction not found in redis');
-          continue;
-        }
-
         a.currentBid = redisData.price;
         a.expiresAt = redisData.expire;
         // todo: store usernames in redis to avoid querying db for users
