@@ -21,3 +21,8 @@ export type RedisAuctionData = {
   expire: Date;
   ranking: number[];
 };
+
+declare global {
+  // eslint-disable-next-line no-var
+  var redisServer: any;
+}

@@ -7,4 +7,5 @@ module.exports = {
   testEnvironment: 'node',
   transformIgnorePatterns: ['/node_modules\/(?!@zigraffle)(.*)'],
   setupFiles: ['./setupTests.ts'],
+  setupFilesAfterEnv: ['./teardown.ts'],
 };

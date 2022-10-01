@@ -11,4 +11,5 @@ module.exports = async () => {
   const host = await redisServer.getHost();
   const port = await redisServer.getPort();
   process.env.REDIS_URL = `redis://${host}:${port}`;
+  global.redisServer = redisServer;
 };
