@@ -29,12 +29,16 @@ const AuctionsRepository = () => {
   }
 
   async function getAuctionsWithBids(auctionId?: number, user?: ContextUser) {
-    const auctions = await (Auction.findAll({
+    const auctions = (await Auction.findAll({
       where: {
         ...(auctionId && { id: auctionId }),
       },
       include: [{ model: AuctionBid, include: [User] }],
-    }) as unknown as (AuctionType & { dataValues: AuctionType })[]);
+      order: [
+        ['id', 'DESC'],
+        [{ model: AuctionBid, as: 'bids' }, 'position', 'ASC'],
+      ],
+    })) as unknown as (AuctionType & { dataValues: AuctionType })[];
 
     for await (const a of auctions) {
       // Apply redis data
