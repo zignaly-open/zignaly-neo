@@ -48,6 +48,7 @@
     "nodemon": "^2.0.16",
     "pg": "^8.7.3",
     "pg-hstore": "^2.3.4",
+    "pg-listen": "^1.7.0",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.20.1",
     "sequelize-fixtures": "^1.2.0",

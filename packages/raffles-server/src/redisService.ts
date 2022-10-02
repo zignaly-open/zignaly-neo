@@ -112,6 +112,11 @@ const getAuctionRanking = async (auctionId: number) => {
   return redis.zrange(`AUCTION_LEADERBOARD:${auctionId}`, 0, -1);
 };
 
+const getAuctionExpiration = async (auctionId: number) => {
+  const value = await redis.hget(`AUCTION:${auctionId}`, 'expire');
+  return +value;
+};
+
 const finalizeAuction = async (auctionId: number) => {
   const { price, expire, ranking } = await getAuctionData(auctionId);
   await Auction.update(
@@ -134,5 +139,6 @@ export default {
   prepareAuction,
   getAuctionData,
   getAuctionRanking,
+  getAuctionExpiration,
   finalizeAuction,
 };
