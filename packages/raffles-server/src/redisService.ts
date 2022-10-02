@@ -5,7 +5,7 @@ import AuctionsRepository from './entities/auctions/repository';
 import { Auction, AuctionBid } from './entities/auctions/model';
 import pubsub from './pubsub';
 import { RedisAuctionData, TransactionType } from './types';
-import { internalTransfer } from './cybavo';
+import { getUserBalance, internalTransfer } from './cybavo';
 import { User } from './entities/users/model';
 import { mapLimit } from 'modern-async';
 import BN from 'bignumber.js';
@@ -128,21 +128,26 @@ const finalizeAuction = async (auctionId: number) => {
   const auction = await Auction.findByPk(auctionId);
   const { price, expire, ranking } = await getAuctionData(auctionId);
   const usersData = await User.findAll({ where: { id: ranking } });
+
+  let transfersSuccess = 0;
+
   const bids = await mapLimit(
     usersData,
     async (user, i) => {
       let txId: string;
       try {
-        const cybavoBalance = new BN(
-          unitToStr(
-            await redis.hget('USER_CYBAVO_BALANCE', user.id.toString()),
+        const [cybavoBalance, currentBalance] = await Promise.all([
+          new BN(
+            unitToStr(
+              await redis.hget('USER_CYBAVO_BALANCE', user.id.toString()),
+            ),
           ),
-        );
-        const currentBalance = new BN(
-          unitToStr(
-            await redis.hget('USER_CURRENT_BALANCE', user.id.toString()),
+          new BN(
+            unitToStr(
+              await redis.hget('USER_CURRENT_BALANCE', user.id.toString()),
+            ),
           ),
-        );
+        ]);
 
         // Shouldn't be possible
         if (currentBalance.gte(cybavoBalance)) return;
@@ -162,6 +167,9 @@ const finalizeAuction = async (auctionId: number) => {
           throw new Error('Transaction error');
         }
         txId = tx.transaction_id;
+        transfersSuccess++;
+        const balance = await getUserBalance(user.publicAddress);
+        await processBalance(balance, user.id);
       } catch (e) {
         console.error(`Transaction error for user ${user.id}`, e);
       }
@@ -177,7 +185,9 @@ const finalizeAuction = async (auctionId: number) => {
     50,
   );
 
-  console.log(`${usersData.length} user bids transferred successfully`);
+  console.log(
+    `${transfersSuccess}/${usersData.length} user bids transferred successfully`,
+  );
 
   await AuctionBid.bulkCreate(bids);
 
