@@ -38,6 +38,7 @@ export const typeDef = gql`
     description: String
     claimSuccess: String
     isClaimed: Boolean
+    isFinalized: Boolean
     bids: [Bid]
     numberOfWinners: Int
     chain: String

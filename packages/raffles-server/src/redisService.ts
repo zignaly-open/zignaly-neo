@@ -1,6 +1,9 @@
 import Redis from 'ioredis';
 import { isTest, redisURL } from '../config';
+import { AUCTION_UPDATED } from './entities/auctions/constants';
+import AuctionsRepository from './entities/auctions/repository';
 import { Auction, AuctionBid } from './entities/auctions/model';
+import pubsub from './pubsub';
 import { RedisAuctionData } from './types';
 
 const redis = new Redis(redisURL);
@@ -130,6 +133,13 @@ const finalizeAuction = async (auctionId: number) => {
       auctionId,
     })),
   );
+
+  const [auctionUpdated] = await AuctionsRepository.getAuctionsWithBids(
+    auctionId,
+  );
+  pubsub.publish(AUCTION_UPDATED, {
+    auctionUpdated,
+  });
 };
 
 export default {

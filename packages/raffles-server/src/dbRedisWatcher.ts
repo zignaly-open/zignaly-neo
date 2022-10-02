@@ -44,26 +44,16 @@ const redisImport = async (auctionId: string) => {
 
 const watchForAuctionExpiration = async (auctionId: string) => {
   try {
-    let expire = await redisService.getAuctionExpiration(+auctionId);
-    const diff = Math.floor(+expire / 1000) - +new Date();
+    const expire = await redisService.getAuctionExpiration(+auctionId);
+    const diff = Math.floor(+expire / 1000) - +new Date() + 1000;
 
     if (isNaN(diff)) {
       throw new Error('expire is not valid');
     }
 
     if (diff <= 0) {
-      // Small delay in case of overload
-      await wait(1500);
-      // Update expiration and confirm expiration
-      expire = await redisService.getAuctionExpiration(+auctionId);
-      if (expire / 1000 <= +new Date()) {
-        await redisService.finalizeAuction(+auctionId);
-        console.log(`Auction ${auctionId} exported to db!`);
-      } else {
-        // Auction not expired anymore, should not be possible
-        await wait(1500);
-        watchForAuctionExpiration(auctionId);
-      }
+      await redisService.finalizeAuction(+auctionId);
+      console.log(`Auction ${auctionId} exported to db!`);
     } else {
       await wait(diff);
       watchForAuctionExpiration(auctionId);

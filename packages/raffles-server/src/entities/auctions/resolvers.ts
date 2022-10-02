@@ -1,6 +1,5 @@
 import pubsub from '../../pubsub';
 import { AUCTION_UPDATED } from './constants';
-// import { AuctionBid } from './model';
 import { ApolloContext, TransactionType } from '../../types';
 import { isBalanceSufficientForPayment } from './util';
 import { Payout } from '../payouts/model';
