@@ -15,6 +15,7 @@ const BASE_UNIT = 10 ** 3;
 const strToUnit = (value: string) => Math.floor(parseFloat(value) * BASE_UNIT);
 const unitToStr = (value: string, decimals = 2) =>
   (parseFloat(value) / BASE_UNIT).toFixed(decimals);
+const unitToBN = (value: string) => new BN(parseFloat(value) / BASE_UNIT);
 
 const prepareAuction = async (auction: Auction) => {
   return redis.hset(
@@ -137,15 +138,9 @@ const finalizeAuction = async (auctionId: number) => {
       let txId: string;
       try {
         const [cybavoBalance, currentBalance] = await Promise.all([
-          new BN(
-            unitToStr(
-              await redis.hget('USER_CYBAVO_BALANCE', user.id.toString()),
-            ),
-          ),
-          new BN(
-            unitToStr(
-              await redis.hget('USER_CURRENT_BALANCE', user.id.toString()),
-            ),
+          unitToBN(await redis.hget('USER_CYBAVO_BALANCE', user.id.toString())),
+          unitToBN(
+            await redis.hget('USER_CURRENT_BALANCE', user.id.toString()),
           ),
         ]);
 
@@ -185,9 +180,7 @@ const finalizeAuction = async (auctionId: number) => {
     50,
   );
 
-  console.log(
-    `${transfersSuccess}/${usersData.length} user bids transferred successfully`,
-  );
+  console.log(`${transfersSuccess}/${usersData.length} transfers success`);
 
   await AuctionBid.bulkCreate(bids);
 
