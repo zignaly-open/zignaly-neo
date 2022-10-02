@@ -142,4 +142,7 @@ export class AuctionBid extends Model {
 
   @Column
   public position: number;
+
+  @Column
+  public isWinner: boolean;
 }

@@ -77,9 +77,9 @@ const bid = async (userId: number, auctionId: number): Promise<string> => {
     throw new Error('Balance not found');
   } else if (res === -2) {
     throw new Error('Insufficient balance');
-  } else if (res === -3) {
-    throw new Error('Auction not found');
-  } else if (res === -4) {
+    // } else if (res === -3) {
+    // throw new Error('Auction not found');
+  } else if (res === -3 || res === -4) {
     throw new Error('Auction expired');
   } else if (res === -5) {
     throw new Error('Auction is not active yet');
@@ -125,6 +125,38 @@ const getAuctionExpiration = async (auctionId: number) => {
   return +value;
 };
 
+const makeTransfer = async (auctionId: number, user: User) => {
+  const [cybavoBalance, currentBalance] = await Promise.all([
+    unitToBN(await redis.hget('USER_CYBAVO_BALANCE', user.id.toString())),
+    unitToBN(await redis.hget('USER_CURRENT_BALANCE', user.id.toString())),
+  ]);
+
+  // Shouldn't be possible
+  if (currentBalance.gte(cybavoBalance)) return;
+
+  const amount = cybavoBalance.minus(
+    // No reason why current balance would be less than cybavo but just in case
+    cybavoBalance.lt(currentBalance) ? cybavoBalance : currentBalance,
+  );
+
+  const tx = await internalTransfer(
+    user.publicAddress,
+    zignalySystemId,
+    amount.toString(),
+    TransactionType.Fee,
+  );
+  if (!tx.transaction_id) {
+    throw new Error('Transaction error');
+  }
+  // Set balance
+  const balance = await getUserBalance(user.publicAddress);
+  await Promise.all([
+    redis.hset('USER_CYBAVO_BALANCE', user.id.toString(), strToUnit(balance)),
+    redis.hset('USER_CURRENT_BALANCE', user.id.toString(), strToUnit(balance)),
+  ]);
+  return tx.transaction_id;
+};
+
 const finalizeAuction = async (auctionId: number) => {
   const auction = await Auction.findByPk(auctionId);
   const { price, expire, ranking } = await getAuctionData(auctionId);
@@ -134,53 +166,34 @@ const finalizeAuction = async (auctionId: number) => {
 
   const bids = await mapLimit(
     usersData,
-    async (user, i) => {
+    async (user) => {
       let txId: string;
       try {
-        const [cybavoBalance, currentBalance] = await Promise.all([
-          unitToBN(await redis.hget('USER_CYBAVO_BALANCE', user.id.toString())),
-          unitToBN(
-            await redis.hget('USER_CURRENT_BALANCE', user.id.toString()),
-          ),
-        ]);
-
-        // Shouldn't be possible
-        if (currentBalance.gte(cybavoBalance)) return;
-
-        const amount = cybavoBalance.minus(
-          // No reason why current balance would be less than cybavo but just in case
-          cybavoBalance.lt(currentBalance) ? cybavoBalance : currentBalance,
-        );
-
-        const tx = await internalTransfer(
-          user.publicAddress,
-          zignalySystemId,
-          amount.toString(),
-          TransactionType.Fee,
-        );
-        if (!tx.transaction_id) {
-          throw new Error('Transaction error');
+        txId = await makeTransfer(auctionId, user);
+        if (!txId) {
+          throw new Error('No transfer to do!');
         }
-        txId = tx.transaction_id;
         transfersSuccess++;
-        const balance = await getUserBalance(user.publicAddress);
-        await processBalance(balance, user.id);
       } catch (e) {
         console.error(`Transaction error for user ${user.id}`, e);
       }
 
+      const position = ranking.findIndex((id) => +id === +user.id) + 1;
+
       return {
         userId: user.id,
-        position: i + 1,
+        position,
         auctionId,
-        isWinner: i <= auction.numberOfWinners,
+        isWinner: position <= auction.numberOfWinners,
         transactionId: txId,
       };
     },
     50,
   );
 
-  console.log(`${transfersSuccess}/${usersData.length} transfers success`);
+  if (!isTest) {
+    console.log(`${transfersSuccess}/${usersData.length} transfers success`);
+  }
 
   await AuctionBid.bulkCreate(bids);
 

@@ -36,7 +36,7 @@ describe('Auctions', () => {
       { id: -5 } as unknown as Auction,
       aliceToken,
     );
-    expect(body.errors[0].message).toBe('Auction not found');
+    expect(body.errors[0].message).toBe('Auction expired');
   });
 
   it('should not let bid by invalid tokens', async () => {

@@ -22,10 +22,9 @@ if (isTest) {
     logging: false,
     models,
   });
+  // pg NOTIFY listener
+  connect();
 }
-
-// pg NOTIFY listener
-connect();
 
 const persistTablesToTheDatabase = () => sequelize.sync({ alter: true });
 
