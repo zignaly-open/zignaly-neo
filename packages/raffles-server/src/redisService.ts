@@ -1,10 +1,14 @@
 import Redis from 'ioredis';
-import { isTest, redisURL } from '../config';
+import { isTest, redisURL, zignalySystemId } from '../config';
 import { AUCTION_UPDATED } from './entities/auctions/constants';
 import AuctionsRepository from './entities/auctions/repository';
 import { Auction, AuctionBid } from './entities/auctions/model';
 import pubsub from './pubsub';
-import { RedisAuctionData } from './types';
+import { RedisAuctionData, TransactionType } from './types';
+import { internalTransfer } from './cybavo';
+import { User } from './entities/users/model';
+import { mapLimit } from 'modern-async';
+import BN from 'bignumber.js';
 
 const redis = new Redis(redisURL);
 const BASE_UNIT = 10 ** 3;
@@ -121,18 +125,74 @@ const getAuctionExpiration = async (auctionId: number) => {
 };
 
 const finalizeAuction = async (auctionId: number) => {
+  const auction = await Auction.findByPk(auctionId);
   const { price, expire, ranking } = await getAuctionData(auctionId);
+  const usersData = await User.findAll({ where: { id: ranking } });
+  const bids = await mapLimit(
+    usersData,
+    async (user, i) => {
+      let txId: string;
+      try {
+        const cybavoBalance = new BN(
+          unitToStr(
+            await redis.hget('USER_CYBAVO_BALANCE', user.id.toString()),
+          ),
+        );
+        const currentBalance = new BN(
+          unitToStr(
+            await redis.hget('USER_CURRENT_BALANCE', user.id.toString()),
+          ),
+        );
+
+        // Shouldn't be possible
+        if (currentBalance.gte(cybavoBalance)) return;
+
+        const amount = cybavoBalance.minus(
+          // No reason why current balance would be less than cybavo but just in case
+          cybavoBalance.lt(currentBalance) ? cybavoBalance : currentBalance,
+        );
+
+        const tx = await internalTransfer(
+          user.publicAddress,
+          zignalySystemId,
+          amount.toString(),
+          TransactionType.Fee,
+        );
+        if (!tx.transaction_id) {
+          throw new Error('Transaction error');
+        }
+        txId = tx.transaction_id;
+      } catch (e) {
+        console.error(`Transaction error for user ${user.id}`, e);
+      }
+
+      return {
+        userId: user.id,
+        position: i + 1,
+        auctionId,
+        isWinner: i <= auction.numberOfWinners,
+        transactionId: txId,
+      };
+    },
+    50,
+  );
+
+  console.log(`${usersData.length} user bids transferred successfully`);
+
+  await AuctionBid.bulkCreate(bids);
+
   await Auction.update(
-    { inRedis: false, isFinalized: true, currentBid: price, expireAt: expire },
+    {
+      inRedis: false,
+      isFinalized: true,
+      currentBid: price,
+      expireAt: expire,
+    },
     { where: { id: auctionId } },
   );
-  await AuctionBid.bulkCreate(
-    ranking.map((r, i) => ({
-      userId: +r,
-      position: i + 1,
-      auctionId,
-    })),
-  );
+
+  await redis.del(`AUCTION:${auctionId}`);
+  await redis.del(`AUCTION_LEADERBOARD:${auctionId}`);
 
   const [auctionUpdated] = await AuctionsRepository.getAuctionsWithBids(
     auctionId,

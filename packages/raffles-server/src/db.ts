@@ -8,7 +8,7 @@ import {
 import { isTest, postgresUrl } from '../config';
 import { Setting } from './entities/setting/model';
 import { Payout } from './entities/payouts/model';
-import { connect } from './dbRedisWatcher';
+import { connect } from './redisAuctionWatcher';
 
 const models = [User, Auction, AuctionBid, AuctionBasketItem, Setting, Payout];
 
