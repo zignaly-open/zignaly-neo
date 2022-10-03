@@ -142,7 +142,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
                       >
                         {option.label}
                         <SpaceTaker />
-                        {option.children?.length && (
+                        {!!option.children?.length && (
                           <ArrowBottomIconStyled
                             color={theme.neutral300}
                             width={"22px"}

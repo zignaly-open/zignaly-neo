@@ -84,24 +84,26 @@ function AccountMenu(): React.ReactElement | null {
               </AccountName>
             </AccountDropdown>
           ),
-          children: exchanges.map((exchange, index) => ({
-            onClick: () => setActiveExchange(exchange.internalId),
-            label: (
-              <>
-                <Avatar size={'medium'} image={getImageOfAccount(index)} />
-                <AccountName
-                  variant={'body1'}
-                  color={
-                    activeExchange?.internalId === exchange.internalId
-                      ? 'highlighted'
-                      : 'neutral200'
-                  }
-                >
-                  {exchange.internalName}
-                </AccountName>
-              </>
-            ),
-          })),
+          children: (exchanges?.length > 1 ? exchanges : []).map(
+            (exchange, index) => ({
+              onClick: () => setActiveExchange(exchange.internalId),
+              label: (
+                <>
+                  <Avatar size={'medium'} image={getImageOfAccount(index)} />
+                  <AccountName
+                    variant={'body1'}
+                    color={
+                      activeExchange?.internalId === exchange.internalId
+                        ? 'highlighted'
+                        : 'neutral200'
+                    }
+                  >
+                    {exchange.internalName}
+                  </AccountName>
+                </>
+              ),
+            }),
+          ),
         },
         {
           label: t('account-menu.notAuth-dropdown-link-dashboard'),
