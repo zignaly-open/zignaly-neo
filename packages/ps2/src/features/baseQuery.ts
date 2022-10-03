@@ -38,6 +38,7 @@ const customFetchBase: BaseQueryFn<
   const result = await baseQuery(args, api, extraOptions);
   if (
     result?.error?.status === 401 &&
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     !endpointsWhitelistedFor401.includes(args.url)
   ) {
