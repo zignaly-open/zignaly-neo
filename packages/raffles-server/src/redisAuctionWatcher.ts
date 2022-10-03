@@ -1,5 +1,5 @@
-import createSubscriber from 'pg-listen';
-import { postgresUrl } from '../config';
+import createSubscriber, { Subscriber } from 'pg-listen';
+import { isTest, postgresUrl } from '../config';
 import { Auction } from './entities/auctions/model';
 import redisService from './redisService';
 
@@ -9,25 +9,27 @@ export async function wait(ms: number): Promise<void> {
 
 const NOTIFY_CHANNEL = 'auction_channel';
 
-const subscriber = createSubscriber({ connectionString: postgresUrl });
+let subscriber: Subscriber;
+if (!isTest) {
+  createSubscriber({ connectionString: postgresUrl });
+  subscriber.events.on('connected', () => {
+    console.log(`Listening to channel ${NOTIFY_CHANNEL}`);
+  });
 
-subscriber.events.on('connected', () => {
-  console.log(`Listening to channel ${NOTIFY_CHANNEL}`);
-});
+  subscriber.notifications.on(NOTIFY_CHANNEL, async (auctionId: string) => {
+    console.log(`Received notification of new auction ${auctionId} ready!`);
+    redisImport(auctionId);
+  });
 
-subscriber.notifications.on(NOTIFY_CHANNEL, async (auctionId: string) => {
-  console.log(`Received notification of new auction ${auctionId} ready!`);
-  redisImport(auctionId);
-});
+  subscriber.events.on('error', (error: any) => {
+    console.error('Fatal database connection error:', error);
+    process.exit(1);
+  });
 
-subscriber.events.on('error', (error: any) => {
-  console.error('Fatal database connection error:', error);
-  process.exit(1);
-});
-
-process.on('exit', () => {
-  subscriber.close();
-});
+  process.on('exit', () => {
+    subscriber.close();
+  });
+}
 
 export async function connect() {
   await subscriber.connect();
