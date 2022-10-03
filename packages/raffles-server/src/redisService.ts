@@ -114,10 +114,7 @@ const getAuctionData = async (auctionId: number): Promise<RedisAuctionData> => {
       ranking: ranking ? ranking.reverse() : [],
     };
   } catch (e) {
-    // Ignore error from running test when debounced subscriptions publish event after finished.
-    if (!isTest || e.message !== 'Connection is closed.') {
-      console.error(e);
-    }
+    console.error(e);
     throw new Error('Could not get auction data');
   }
 };

@@ -22,10 +22,7 @@ const broadcastAuctionChange = async (auctionId: number) => {
       auctionUpdated,
     });
   } catch (e) {
-    // Ignore async debounce after tests finished
-    if (!isTest) {
-      console.error(e);
-    }
+    console.error(e);
   }
 };
 const debounceBroadcastAuction = debounce(broadcastAuctionChange, 100);
@@ -47,7 +44,9 @@ export const resolvers = {
       }
       const balance = await redisService.bid(user.id, id);
 
-      debounceBroadcastAuction(id);
+      if (!isTest) {
+        debounceBroadcastAuction(id);
+      }
 
       pubsub.publish(BALANCE_CHANGED, {
         balanceChanged: {
