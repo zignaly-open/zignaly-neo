@@ -9,8 +9,14 @@ import { getUserBalance, internalTransfer } from './cybavo';
 import { User } from './entities/users/model';
 import { mapLimit } from 'modern-async';
 import BN from 'bignumber.js';
+import fs from 'fs';
+import path from 'path';
 
 const redis = new Redis(redisURL);
+// Load lua functions
+const content = fs.readFileSync(path.resolve(__dirname, 'functions.lua'));
+redis.function('LOAD', 'REPLACE', content);
+
 const BASE_UNIT = 10 ** 3;
 const strToUnit = (value: string) => Math.floor(parseFloat(value) * BASE_UNIT);
 const unitToStr = (value: string, decimals = 2) =>
