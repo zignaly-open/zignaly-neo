@@ -165,8 +165,9 @@ const finalizeAuction = async (auctionId: number) => {
   let transfersSuccess = 0;
 
   const bids = await mapLimit(
-    usersData,
-    async (user) => {
+    ranking,
+    async (userId, i) => {
+      const user = usersData.find((u) => u.id === +userId);
       let txId: string;
       try {
         txId = await makeTransfer(auctionId, user);
@@ -178,10 +179,10 @@ const finalizeAuction = async (auctionId: number) => {
         console.error(`Transaction error for user ${user.id}`, e);
       }
 
-      const position = ranking.findIndex((id) => +id === +user.id) + 1;
+      const position = i + 1;
 
       return {
-        userId: user.id,
+        userId,
         position,
         auctionId,
         isWinner: position <= auction.numberOfWinners,
