@@ -59,6 +59,7 @@ export const NavList = styled.div`
 
 export const Networks = styled.div`
   display: grid;
+  max-width: 185px;
   grid-template-columns: repeat(5, minmax(0%, 100%));
   justify-content: center;
   align-items: center;

@@ -82,7 +82,11 @@ const MyDashboard: React.FC = () => {
           parseFloat(value.last30Pnl) || Object.keys(value.data).length > 1 ? (
             <>
               <AreaChart variant='small' data={value.data} />
-              <PercentageIndicator value={value.last30Pnl} type={'graph'} />
+              <PercentageIndicator
+                normalized
+                value={value.last30Pnl}
+                type={'graph'}
+              />
             </>
           ) : (
             <Typography variant={'body2'} color={'neutral400'}>
@@ -111,7 +115,11 @@ const MyDashboard: React.FC = () => {
         Header: t('tableHeader.3-mos-title'),
         accessor: 'threeMonths',
         Cell: ({ cell: { value } }) => (
-          <PercentageIndicator type='default' value={value.pnl90dPct} />
+          <PercentageIndicator
+            normalized
+            type='default'
+            value={value.pnl90dPct}
+          />
         ),
         sortType: (a, b) =>
           sortBigNumbers(
@@ -123,7 +131,11 @@ const MyDashboard: React.FC = () => {
         Header: t('tableHeader.6-mos-title'),
         accessor: 'sixMonths',
         Cell: ({ cell: { value } }) => (
-          <PercentageIndicator type='default' value={value.pnl180dPct} />
+          <PercentageIndicator
+            normalized
+            type='default'
+            value={value.pnl180dPct}
+          />
         ),
         sortType: (a, b) =>
           sortBigNumbers(
@@ -142,6 +154,7 @@ const MyDashboard: React.FC = () => {
         Cell: ({ cell: { value } }) => (
           <PercentageIndicator
             type={'default'}
+            normalized
             value={value.pnlPctLc}
             label={formatDateFromDays(value.periodsLc)}
           />
