@@ -23,10 +23,7 @@
     "dropdown-link-helpDocs": "Help Docs"
   },
   "refresh": {
-    "short": "New version available, click here to refresh",
-    "title": "New version available",
-    "description": "There's a newer version available. Please click ther button below to refresh the page and start using the latest or use the outdated version at your own risk",
-    "action": "Use latest"
+    "short": "New version available, click here to refresh"
   },
   "account-menu": {
     "isAuth-button-logIn": "Log in",
