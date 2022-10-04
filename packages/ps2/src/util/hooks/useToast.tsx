@@ -2,16 +2,9 @@ import { toast, ToastOptions } from 'react-toastify';
 import { Toaster } from '@zignaly-open/ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { BackendError } from '../errors';
 
 type ToastFn = (text: string, extraOptions?: ToastOptions) => void;
-
-type BackendError = {
-  data?: {
-    error?: {
-      code?: number;
-    };
-  };
-};
 
 export function useToast(): {
   success: ToastFn;
