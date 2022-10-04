@@ -47,13 +47,17 @@ export const NavLink = styled.span<
   gap: 12px;
   overflow: hidden;
 
-  &:hover {
-    background: rgb(28, 29, 53);
-  }
-
   svg {
     transition: 0.15s linear;
   }
+
+  ${({ notClickable }) =>
+    !notClickable &&
+    css`
+      &:hover {
+        background: rgb(28, 29, 53);
+      }
+    `}
 
   ${({ active }) => `
     ${styledIf(
