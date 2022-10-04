@@ -1,9 +1,15 @@
-import { toast } from 'react-toastify';
+import { toast, ToastOptions } from 'react-toastify';
 import { Toaster } from '@zignaly-open/ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-type ToastFn = (text: string) => void;
+type Options = {
+  autoClose?: number | boolean;
+  onClick?: () => void;
+};
+
+type ToastFn = (text: string, extraOptions?: Options) => void;
+
 type BackendError = {
   data?: {
     error?: {
@@ -14,26 +20,30 @@ type BackendError = {
 
 export function useToast(): {
   success: ToastFn;
+  info: ToastFn;
   error: ToastFn;
   backendError: (error?: BackendError) => void;
 } {
   const { t } = useTranslation('error');
-  const showToast = (message: string, type: 'success' | 'error') =>
-    toast(<Toaster variant={type} caption={message} />, {
-      type: type,
-      icon: false,
-    });
+  const showToast =
+    (type: 'success' | 'error' | 'info') =>
+    (message: string, options?: Options) =>
+      toast(<Toaster variant={type} caption={message} />, {
+        type: type,
+        icon: false,
+        ...options,
+      } as unknown as ToastOptions<Options>);
   return {
-    success: (message) => showToast(message, 'success'),
-    error: (message) => showToast(message, 'error'),
+    success: showToast('success'),
+    error: showToast('error'),
+    info: showToast('info'),
     backendError: (error: BackendError) => {
       const code = error?.data?.error?.code;
       const translationKey = 'error.' + code;
-      showToast(
+      showToast('error')(
         code && t(translationKey) !== translationKey
           ? t(translationKey)
           : t('something-went-wrong'),
-        'error',
       );
     },
   };
