@@ -15,3 +15,14 @@ export enum TransactionType {
   Fee = 'Raffle Fee',
   Payout = 'Raffle Payout',
 }
+
+export type RedisAuctionData = {
+  price: string;
+  expire: Date;
+  ranking: number[];
+};
+
+declare global {
+  // eslint-disable-next-line no-var
+  var redisServer: any;
+}

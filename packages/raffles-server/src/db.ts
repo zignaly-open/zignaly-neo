@@ -8,6 +8,7 @@ import {
 import { isTest, postgresUrl } from '../config';
 import { Setting } from './entities/setting/model';
 import { Payout } from './entities/payouts/model';
+import { connect } from './redisAuctionWatcher';
 
 const models = [User, Auction, AuctionBid, AuctionBasketItem, Setting, Payout];
 
@@ -21,6 +22,8 @@ if (isTest) {
     logging: false,
     models,
   });
+  // pg NOTIFY listener
+  connect();
 }
 
 const persistTablesToTheDatabase = () => sequelize.sync({ alter: true });
