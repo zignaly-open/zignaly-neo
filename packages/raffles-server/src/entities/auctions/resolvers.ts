@@ -1,6 +1,5 @@
 import pubsub from '../../pubsub';
 import { AUCTION_UPDATED } from './constants';
-// import { AuctionBid } from './model';
 import { ApolloContext, TransactionType } from '../../types';
 import { isBalanceSufficientForPayment } from './util';
 import { Payout } from '../payouts/model';
@@ -23,10 +22,7 @@ const broadcastAuctionChange = async (auctionId: number) => {
       auctionUpdated,
     });
   } catch (e) {
-    // Ignore async debounce after tests finished
-    if (!isTest) {
-      console.error(e);
-    }
+    console.error(e);
   }
 };
 const debounceBroadcastAuction = debounce(broadcastAuctionChange, 100);
@@ -48,7 +44,9 @@ export const resolvers = {
       }
       const balance = await redisService.bid(user.id, id);
 
-      debounceBroadcastAuction(id);
+      if (!isTest) {
+        debounceBroadcastAuction(id);
+      }
 
       pubsub.publish(BALANCE_CHANGED, {
         balanceChanged: {

@@ -4,9 +4,9 @@ let redisServer: RedisMemoryServer;
 
 module.exports = async () => {
   redisServer = new RedisMemoryServer({
-    instance: {
-      args: ['--dbfilename', 'rdb'],
-    },
+    // instance: {
+    //   args: ['--dbfilename', 'rdb'],
+    // },
   });
   const host = await redisServer.getHost();
   const port = await redisServer.getPort();

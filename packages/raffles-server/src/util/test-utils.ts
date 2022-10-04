@@ -327,7 +327,7 @@ export async function expireAuction(auctionId: number, finalize = true) {
   );
 
   if (finalize) {
-    redisService.finalizeAuction(auctionId);
+    await redisService.finalizeAuction(auctionId);
   }
 }
 

@@ -29,6 +29,7 @@ export const GET_AUCTIONS = gql`
       numberOfWinners
       chain
       isClaimed
+      isFinalized
       bids {
         position
         user {
@@ -62,6 +63,7 @@ export const BIDS_SUBSCRIPTION = gql`
       expiresAt
       currentBid
       startDate
+      isFinalized
       bids {
         position
         user {

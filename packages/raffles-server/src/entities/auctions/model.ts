@@ -74,7 +74,7 @@ export class Auction extends Model {
 
   @Default(10)
   @Column(DataType.INTEGER)
-  public numberOfWinners: string;
+  public numberOfWinners: number;
 
   @HasMany(() => AuctionBid)
   public bids: AuctionBid[];
@@ -138,5 +138,11 @@ export class AuctionBid extends Model {
   public claimTransactionId: string;
 
   @Column
+  public transactionId: string;
+
+  @Column
   public position: number;
+
+  @Column
+  public isWinner: boolean;
 }

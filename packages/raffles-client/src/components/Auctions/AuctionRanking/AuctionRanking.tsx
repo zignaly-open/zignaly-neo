@@ -65,7 +65,7 @@ const AuctionRanking = ({
 }) => {
   const { t } = useTranslation('auction');
   const { user } = useCurrentUser();
-  const userBid = auction.bids.find((b) => b.user.id === user?.id);
+  const userBid = auction.bids.find((b) => b.user.id === +user?.id);
 
   return (
     <RankingContainer>

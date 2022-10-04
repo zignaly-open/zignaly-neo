@@ -12,6 +12,8 @@ export type AuctionBidType = {
     username: string;
   };
   isClaimed?: boolean;
+  isWinner?: boolean;
+  transactionId?: string;
   claimTransactionId?: string;
 };
 
