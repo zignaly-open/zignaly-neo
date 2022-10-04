@@ -1,1 +1,1 @@
-export const VERSION_CHECK_INTERVAL = 30_000;
+export const VERSION_CHECK_INTERVAL = 10 * 60_000;
