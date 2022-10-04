@@ -3,12 +3,7 @@ import { Toaster } from '@zignaly-open/ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-type Options = {
-  autoClose?: number | boolean;
-  onClick?: () => void;
-};
-
-type ToastFn = (text: string, extraOptions?: Options) => void;
+type ToastFn = (text: string, extraOptions?: ToastOptions) => void;
 
 type BackendError = {
   data?: {
@@ -27,12 +22,12 @@ export function useToast(): {
   const { t } = useTranslation('error');
   const showToast =
     (type: 'success' | 'error' | 'info') =>
-    (message: string, options?: Options) =>
+    (message: string, options?: ToastOptions) =>
       toast(<Toaster variant={type} caption={message} />, {
         type: type,
         icon: false,
         ...options,
-      } as unknown as ToastOptions<Options>);
+      } as ToastOptions);
   return {
     success: showToast('success'),
     error: showToast('error'),
