@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - master
-      - ft/redis-transfer
 jobs:
   build:
     name: Webapp Test Release

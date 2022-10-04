@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - release
+      - prod-deploy
 jobs:
   build:
     name: Webapp Prod Release
@@ -16,7 +17,6 @@ jobs:
           sed -i -e 's/{directory}/prod/g' appspec.yml
           sed -i -e 's/{directory}/prod/g' scripts/prepare_release.sh
           sed -i -e 's/{directory}/prod/g' scripts/after_install.sh
-          sed -i -e 's/{directory}/prod/g' scripts/delete_old_release.sh
       - name: Create server .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
@@ -30,6 +30,7 @@ jobs:
           envkey_ZIGNALY_API_PRIVATE_KEY: ${{ secrets.ZIGNALY_API_PRIVATE_KEY }}
           envkey_ZIGNALY_SYSTEM_ID: ${{ secrets.ZIGNALY_SYSTEM_ID }}
           envkey_GRAPHQL_PATH: ${{ secrets.GRAPHQL_PATH }}
+          envkey_REDIS_URL: ${{ secrets.process.env.REDIS_URL }}
           envkey_PORT: ${{ secrets.PORT }}
           directory: packages/raffles-server
           file_name: .env
