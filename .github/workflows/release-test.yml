@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - ft/redis-transfer
 jobs:
   build:
     name: Webapp Test Release
@@ -29,6 +30,7 @@ jobs:
           envkey_ZIGNALY_API_PRIVATE_KEY: ${{ secrets.ZIGNALY_API_PRIVATE_KEY }}
           envkey_ZIGNALY_SYSTEM_ID: ${{ secrets.ZIGNALY_SYSTEM_ID }}
           envkey_GRAPHQL_PATH: ${{ secrets.GRAPHQL_PATH }}
+          envkey_REDIS_URL: ${{ secrets.process.env.REDIS_URL }}
           envkey_PORT: ${{ secrets.PORT }}
           directory: packages/raffles-server
           file_name: .env
@@ -62,7 +64,7 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
           aws_region: ap-northeast-1
           codedeploy_name: zignaly
-          codedeploy_group: zignaly-raffles-prod
+          codedeploy_group: zignaly-raffles-dev
           codedeploy_register_only: false
           s3_bucket: ${{ secrets.AWS_S3_BUCKET }}
           s3_folder: dev

@@ -13,6 +13,7 @@ import {
   ProjectsTypography,
   StyledSelect,
 } from './styles';
+import useCurrentUser from 'hooks/useCurrentUser';
 
 enum SortDirection {
   Default = 'default',
@@ -30,6 +31,7 @@ enum ShowOptions {
 const AuctionGrid: React.FC = () => {
   const { t } = useTranslation('auction');
   const { loading, error, data } = useQuery(GET_AUCTIONS);
+  const { user } = useCurrentUser();
 
   const [selectedSort, setSelectedSort] = useState(
     localStorage.getItem('sort') || SortDirection.Default,
@@ -64,7 +66,7 @@ const AuctionGrid: React.FC = () => {
   const filtered = useMemo(() => {
     return data?.auctions
       ?.filter((x: AuctionType) => {
-        const { isActive, isUserActive } = getWinningLosingStatus(x);
+        const { isActive, isUserActive } = getWinningLosingStatus(x, user?.id);
         switch (selectedShowMode) {
           case ShowOptions.Yours:
             return isUserActive;
@@ -79,7 +81,7 @@ const AuctionGrid: React.FC = () => {
           case SortDirection.LastBid:
             return -(+a.bids[0]?.id || 0) + (+b.bids[0]?.id || 0);
           case SortDirection.Bid:
-            return -(+a.bids[0]?.value || 0) + (+b.bids[0]?.value || 0);
+            return -a.currentBid + b.currentBid;
           case SortDirection.Expiry:
             const date1 = +new Date(a.expiresAt);
             const date2 = +new Date(b.expiresAt);

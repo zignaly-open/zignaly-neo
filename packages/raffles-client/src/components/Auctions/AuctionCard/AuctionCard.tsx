@@ -28,17 +28,23 @@ import useUpdatedAt from 'hooks/useUpdatedAt';
 import { ChainIcon } from 'components/common/ChainIcon';
 import { GET_AUCTIONS } from 'queries/auctions';
 import { useLazyQuery } from '@apollo/client';
+import useCurrentUser from 'hooks/useCurrentUser';
+import Loader from 'components/common/Loader';
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
 }> = ({ auction }) => {
   const { t } = useTranslation('auction');
-  const [fetchAuction] = useLazyQuery(GET_AUCTIONS, {
+  useLazyQuery(GET_AUCTIONS, {
     variables: {
       id: auction.id,
     },
   });
-  const { isActive, hasWon, isStarted } = getWinningLosingStatus(auction);
+  const { user } = useCurrentUser();
+  const { isActive, hasWon, isStarted } = getWinningLosingStatus(
+    auction,
+    user?.id,
+  );
   const { showModal } = useModal();
   const leftRef = useRef(null);
   const rightRef = useRef(null);
@@ -53,15 +59,8 @@ const AuctionCard: React.FC<{
 
   const showClaim = useMemo(
     () => (!updatedAt || +new Date() >= updatedAt) && hasWon,
-    [hasWon, updatedAt],
+    [hasWon, updatedAt, auction.isFinalized],
   );
-
-  useEffect(() => {
-    if (updatedAt && new Date() >= new Date(auction.expiresAt)) {
-      // Force refreshing the auction once expired to be sure we display up to date data
-      fetchAuction();
-    }
-  }, [updatedAt]);
 
   useEffect(() => {
     const handleWindowResize = () => {
@@ -156,7 +155,11 @@ const AuctionCard: React.FC<{
           />
           <CardActions isColumn={isColumn}>
             {showClaim ? (
-              <ClaimButton auction={auction} />
+              auction.isFinalized ? (
+                <ClaimButton auction={auction} />
+              ) : (
+                <Loader />
+              )
             ) : (
               isColumn && (
                 <BidButton
