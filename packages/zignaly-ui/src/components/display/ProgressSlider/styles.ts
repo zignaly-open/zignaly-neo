@@ -1,9 +1,10 @@
-// Dependencies
+import croma from "chroma-js";
 import styled from "styled-components";
 import Typography from "../Typography";
 
 export const Layout = styled.div`
   position: relative;
+  padding-top: 10px;
   margin-bottom: 12px;
   display: flex;
   align-items: center;
@@ -34,16 +35,55 @@ export const DotContainer = styled.div<{ value: number }>`
 `;
 
 export const Dot = styled.div`
-  background: #ffffff;
-  border: 2px solid ${(props) => props.theme.neutral300};
-  box-shadow: 0px 0px 0px 2px #191927;
-  border-radius: 100px;
-  width: 12px;
-  height: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  height: 7px;
+  margin-top: 3px;
+  width: 2px;
 `;
 
 export const Label = styled(Typography)`
+  color: RGB(193, 193, 200);
+
   &.body1 {
     font-size: 13px;
+  }
+`;
+
+const gradient = croma.scale(["#567734", "#948d23", "#8e3b24", "#8c1954"]);
+
+export const LabelTooltip = styled(Label)<{ value: number }>`
+  border-radius: 3px;
+  pointer-events: none;
+  background: ${(props) =>
+    gradient(props.value / 100)
+      .brighten(1)
+      .toString()};
+
+  top: -38px;
+  line-height: 1 !important;
+  padding: 5px 6px;
+  position: relative;
+  display: block;
+  color: ${(props) =>
+    gradient(props.value / 100)
+      .darken(1.5)
+      .toString()};
+
+  &:before {
+    content: "";
+    border: 4px solid transparent;
+    border-top-color: ${(props) =>
+      gradient(props.value / 100)
+        .brighten(1)
+        .toString()};
+    position: absolute;
+    top: 100%;
+    left: calc(50% - 4px);
+  }
+
+  small {
+    font-size: 10px;
+    bottom: 2px;
+    position: relative;
   }
 `;

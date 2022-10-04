@@ -1,20 +1,13 @@
-// Dependencies
 import React, { useCallback, useImperativeHandle, useRef, useState } from "react";
 import { useClickAway } from "react-use";
-
-// Styles
 import { Layout, Field, Button, ArrowIcon, DropDown } from "./styles";
 
-// Assets
 import { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";
 
-// Components
 import Typography from "components/display/Typography";
 
-// Utils
 import { MenuDropDownProps } from "./types";
 
-// Types
 import { defaultDropDownOptions } from "./types";
 
 const MenuDropDown = (
@@ -28,7 +21,6 @@ const MenuDropDown = (
   };
   const menuRef = useRef(null);
 
-  // Hooks
   const [isActiveDropDown, setActiveDropDown] = useState(false);
 
   /**

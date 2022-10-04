@@ -10,28 +10,13 @@ import { CheckIconStyled, CloseIconStyled } from "./styles";
 import { dark } from "../../../theme";
 import Typography from "../Typography";
 import { MockMyCoinsData } from "./mockData";
-import { Column } from "../../../utils/column";
-import { ServiceName } from "./components/ServiceName";
 import AssetsInPool from "./components/AssetsInPool";
 import { AreaChart } from "../Charts";
-import InvestColumn from "./components/InvestColumn";
-import { BalanceSummary } from "./components/BalanceSummary";
 import { UserTableData } from "./types";
 import { ChartsProps } from "../Charts/types";
 
 const createMarketPlaceTableHeader = () => {
   return [
-    {
-      Header: (
-        <Column style={{ position: "absolute", bottom: -15, left: 0, marginLeft: 104 }}>
-          <div>{"ServiceName"}</div>
-          <Typography variant="h5" weight="medium" color="neutral400">
-            {"Manager/Base Currency"}
-          </Typography>
-        </Column>
-      ),
-      accessor: "serviceName",
-    },
     {
       Header: "Assets In Pool",
       Footer: (
@@ -57,12 +42,6 @@ const createMarketPlaceTableHeader = () => {
 };
 
 interface MarketPlaceTableProps {
-  serviceName: {
-    heading: string;
-    subtitle: string;
-    cryptoName: string;
-    image?: string;
-  };
   assetsInPool: {
     assetsValue: number;
     numberOfInvestors: number;
@@ -76,19 +55,11 @@ interface MarketPlaceTableProps {
 }
 
 const createMarketPlaceTableBodyObject = ({
-  serviceName,
   assetsInPool,
   chart,
   oneYear,
 }: MarketPlaceTableProps) => {
   return {
-    serviceName: (
-      <ServiceName
-        heading={serviceName.heading}
-        subtitle={serviceName.subtitle}
-        cryptoName={serviceName.cryptoName}
-      />
-    ),
     assetsInPool: (
       <AssetsInPool
         assetsValue={assetsInPool.assetsValue}
@@ -97,7 +68,6 @@ const createMarketPlaceTableBodyObject = ({
     ),
     chart: <AreaChart variant={chart.variant} data={chart.data} />,
     oneYear: <PercentageIndicator value={oneYear.value} />,
-    invest: <InvestColumn type="invested" />,
   };
 };
 
@@ -111,17 +81,6 @@ const createUserTableHeader = () => {
           <div>{"Returns"}</div>
         </div>
       ),
-    },
-    {
-      Header: (
-        <Column style={{ position: "absolute", bottom: -15, left: 0, marginLeft: 108 }}>
-          <div>{"ServiceName"}</div>
-          <Typography variant="h5" weight="medium" color="neutral400">
-            {"Manager/Base Currency"}
-          </Typography>
-        </Column>
-      ),
-      accessor: "serviceName",
     },
     {
       Header: "Since Invested",
@@ -152,8 +111,6 @@ const createUserTableHeader = () => {
 };
 
 const createUserTableDataObject = ({
-  summary,
-  serviceName,
   chart,
   dailyAvg,
   oneMonth,
@@ -161,14 +118,6 @@ const createUserTableDataObject = ({
   all,
 }: UserTableData) => {
   return {
-    summary: <BalanceSummary totalValue={summary.totalValue} profit={summary.profit} />,
-    serviceName: (
-      <ServiceName
-        heading={serviceName.heading}
-        subtitle={serviceName.subtitle}
-        cryptoName={serviceName.cryptoName}
-      />
-    ),
     chart: <AreaChart variant={chart.variant} data={chart.data} />,
     dailyAvg: <PercentageIndicator value={dailyAvg.value} />,
     oneMonth: <PercentageIndicator value={oneMonth.value} />,
@@ -429,12 +378,6 @@ UserDashBoard.args = {
   columns: createUserTableHeader(),
   data: [
     createUserTableDataObject({
-      summary: { profit: 100, totalValue: 10 },
-      serviceName: {
-        heading: "The Golden Eagle",
-        subtitle: "by Barry Silvername",
-        cryptoName: "Poly",
-      },
       chart: {
         data: [
           { x: "Jul 1", y: 10 },
@@ -453,12 +396,6 @@ UserDashBoard.args = {
       all: { value: 10 },
     }),
     createUserTableDataObject({
-      summary: { profit: 100, totalValue: 10 },
-      serviceName: {
-        heading: "Unkown",
-        subtitle: "",
-        cryptoName: "Poly",
-      },
       chart: {
         data: [
           { x: "Jul 1", y: 10 },
@@ -485,11 +422,6 @@ MarketPlaceTabel.args = {
   columns: createMarketPlaceTableHeader(),
   data: [
     createMarketPlaceTableBodyObject({
-      serviceName: {
-        heading: "The Golden Eagle",
-        subtitle: "by Barry Silvername",
-        cryptoName: "Poly",
-      },
       assetsInPool: { assetsValue: 1000000, numberOfInvestors: 200 },
       chart: {
         data: [
@@ -507,11 +439,6 @@ MarketPlaceTabel.args = {
       oneYear: { value: 100, subtitle: "Subtitle", showTrophy: true },
     }),
     createMarketPlaceTableBodyObject({
-      serviceName: {
-        heading: "Unkown",
-        subtitle: "",
-        cryptoName: "Poly",
-      },
       assetsInPool: { assetsValue: 0, numberOfInvestors: 200 },
       chart: {
         data: [

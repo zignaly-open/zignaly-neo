@@ -12,13 +12,6 @@ export const Heading = styled.div`
   margin-bottom: 64px;
 `;
 
-export const Center = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 8em 0;
-`;
-
 export const Inline = styled.div`
   text-align: left;
   padding: 0 22px;

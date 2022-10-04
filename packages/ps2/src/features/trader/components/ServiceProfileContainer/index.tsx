@@ -1,31 +1,38 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Loader } from '@zignaly-open/ui';
-import { useServiceDetails } from '../../use';
-import { Center } from '../ServiceManagementsContainer/styles';
-import ComingSoon from '../../../../components/ComingSoon';
+import { useTitle } from 'react-use';
+import { useIsServiceOwner, useServiceDetails } from '../../use';
+import ComingSoon from '../../../../components/Stub/ComingSoon';
+import { useIsAuthenticated } from '../../../auth/use';
+import { TraderServiceAccessLevel } from '../../types';
+import { useNavigate } from 'react-router-dom';
+import { ROUTE_DASHBOARD, ROUTE_PROFIT_SHARING } from '../../../../routes';
+import CenteredLoader from '../../../../components/CenteredLoader';
 
 const ServiceProfileContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
 }) => {
   const { t } = useTranslation('pages');
-  const { isLoading: isLoadingService } = useServiceDetails(serviceId);
-  return (
-    <>
-      {isLoadingService ? (
-        <Center>
-          <Loader
-            color={'#fff'}
-            width={'40px'}
-            height={'40px'}
-            ariaLabel={t('investors.loading-arialLabel')}
-          />
-        </Center>
-      ) : (
-        <ComingSoon />
-      )}
-    </>
-  );
+  useTitle(t('trading-services'));
+  const { isLoading: isLoadingService, data: service } =
+    useServiceDetails(serviceId);
+  const isAuthenticated = useIsAuthenticated();
+  const navigate = useNavigate();
+  const isOwner = useIsServiceOwner(serviceId);
+
+  switch (service?.level) {
+    case TraderServiceAccessLevel.Solo:
+      !isOwner && navigate(ROUTE_PROFIT_SHARING);
+      break;
+    case TraderServiceAccessLevel.Private:
+      !isAuthenticated && navigate(ROUTE_DASHBOARD);
+      break;
+    case TraderServiceAccessLevel.Public:
+    default:
+    // Do nothing
+  }
+
+  return isLoadingService ? <CenteredLoader /> : <ComingSoon />;
 };
 
 export default ServiceProfileContainer;

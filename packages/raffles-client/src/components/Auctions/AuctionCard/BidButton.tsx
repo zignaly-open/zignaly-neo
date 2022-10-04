@@ -12,6 +12,7 @@ import { BID_AUCTION } from 'queries/auctions';
 import { showToast } from 'util/showToast';
 import { useModal } from 'mui-modal-provider';
 import NotEnoughZIGModal from 'components/Modals/NotEnoughZIG';
+import ConnectWalletModal from 'components/Modals/ConnectWallet';
 
 enum BidButtonState {
   NotLoggedIn,
@@ -56,7 +57,7 @@ const BidButton: React.FC<{
 
   const bidClickHandler = useCallback(() => {
     if (state === BidButtonState.NotLoggedIn) {
-      authenticate();
+      showModal(ConnectWalletModal);
     } else if (state === BidButtonState.NotEnoughFunds) {
       showModal(NotEnoughZIGModal);
     } else {

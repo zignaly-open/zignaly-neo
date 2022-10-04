@@ -1,10 +1,8 @@
 {
-  "withdraw-your-investment": {
     "title": "Withdrawal Request",
     "success":{
       "title": "Withdrawal Requested",
       "description": "Your funds will be available as soon as the trader frees funds from any open position. This can take a few days or more to complete. Zignaly does not control this time frame, so please be patient.",
       "button": "Close"
     }
-  }
 }

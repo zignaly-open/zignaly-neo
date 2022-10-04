@@ -64,8 +64,8 @@ const AuctionRanking = ({
   isStarted: boolean;
 }) => {
   const { t } = useTranslation('auction');
-  const bids = auction.bids.slice().sort((a, b) => a.position - b.position);
-  const userBid = bids.find((b) => b.id === auction.userBid?.id);
+  const { user } = useCurrentUser();
+  const userBid = auction.bids.find((b) => b.user.id === +user?.id);
 
   return (
     <RankingContainer>
@@ -95,10 +95,10 @@ const AuctionRanking = ({
         </Typography>
       </Box>
       <RankingList>
-        {bids.map((bid) => (
+        {auction.bids.map((bid) => (
           <RankingRow
             bid={bid}
-            key={bid.id}
+            key={bid.user.id}
             isWinning={bid.position <= auction.numberOfWinners}
           />
         ))}
@@ -107,11 +107,11 @@ const AuctionRanking = ({
           {
             length:
               isActive || !isStarted
-                ? auction.numberOfWinners - bids.length
+                ? auction.numberOfWinners - auction.bids.length
                 : 0,
           },
           (_, i) => (
-            <PlaceHolderRow key={i} index={i + bids.length} />
+            <PlaceHolderRow key={i} index={i + auction.bids.length} />
           ),
         )}
       </RankingList>

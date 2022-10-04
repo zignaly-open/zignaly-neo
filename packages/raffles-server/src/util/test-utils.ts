@@ -11,14 +11,16 @@ import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import { isTest } from '../../config';
 import { persistTablesToTheDatabase } from '../db';
 import { Payout } from '../entities/payouts/model';
-import mockCybavoWallet from './mock-cybavo-wallet';
+import mockCybavoWallet, { MockedCybavo } from './mock-cybavo-wallet';
+import redisService from '../redisService';
 
 const request = supertest(app);
 
 export async function createAuction(
   overrides?: Partial<Auction>,
+  saveToRedis = true,
 ): Promise<Auction> {
-  return await Auction.create({
+  const auction = await Auction.create({
     title: 'Test auction',
     description: 'Test auction',
     monetaryValue: '$100500',
@@ -28,6 +30,11 @@ export async function createAuction(
     basketItems: [],
     ...overrides,
   });
+  if (saveToRedis) {
+    await redisService.prepareAuction(auction);
+    await auction.update({ inRedis: true });
+  }
+  return auction;
 }
 
 export async function createBasketItem(
@@ -46,6 +53,11 @@ export async function getAuctions(token: string): Promise<AuctionType[]> {
   return auctions.body.data.auctions;
 }
 
+export async function getBalance(token: string): Promise<any> {
+  const balance = await makeRequest(BALANCE_QUERY, token);
+  return balance.body.data.balance;
+}
+
 export async function getFirstAuction(token: string): Promise<AuctionType> {
   return (await getAuctions(token))[0];
 }
@@ -54,20 +66,7 @@ export async function makeBid(auction: Auction, token: string): Promise<any> {
   return makeRequest(
     `
    mutation {
-    bid(id: "${auction.id}") {
-      bids {
-        value
-        user {
-          id
-          username
-        }
-      }
-      userBid {
-        id
-        value
-        position
-      }
-    }
+    bid(id: "${auction.id}")
   }`,
     token,
   );
@@ -81,12 +80,8 @@ export async function claimAuction(
     `
    mutation {
     claim(id: "${auction.id}") {
-      userBid {
-        id
-        value
-        position
-        isClaimed
-      }
+      id
+      isClaimed
     }
   }`,
     token,
@@ -154,15 +149,17 @@ export async function changeDiscordName(
   return updateProfile;
 }
 
-export async function createAlice(balance = 0): Promise<[User, string]> {
+export async function createAlice(
+  balance = 0,
+): Promise<[User, string, MockedCybavo]> {
   try {
     const user = await User.create({
       username: 'Alice',
       publicAddress: '0x6a3B248855bc8a687992CBAb7FD03E1947EAee07'.toLowerCase(),
       onboardingCompletedAt: Date.now(),
     });
-    mockCybavoWallet(user, balance);
-    return [user, await signJwtToken(user)];
+    const cybavoMock = await mockCybavoWallet(user, balance);
+    return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
     console.error(e);
   }
@@ -181,15 +178,17 @@ export async function createAlicesDiscord(): Promise<[User, string]> {
   }
 }
 
-export async function createBob(balance = 0): Promise<[User, string]> {
+export async function createBob(
+  balance = 0,
+): Promise<[User, string, MockedCybavo]> {
   try {
     const user = await User.create({
       username: 'Bob',
       publicAddress: '0xE288AE3acccc630781354da2AA64379A0d4C56dB'.toLowerCase(),
       onboardingCompletedAt: Date.now(),
     });
-    mockCybavoWallet(user, balance);
-    return [user, await signJwtToken(user)];
+    const cybavoMock = await mockCybavoWallet(user, balance);
+    return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
     console.error(e);
   }
@@ -208,15 +207,17 @@ export async function createBobDiscord(): Promise<[User, string]> {
   }
 }
 
-export async function createRandomUser(balance = 0): Promise<[User, string]> {
+export async function createRandomUser(
+  balance = 0,
+): Promise<[User, string, MockedCybavo]> {
   try {
     const user = await User.create({
       username: null,
       publicAddress: '0xE288AE3acccc630'.toLowerCase() + Math.random(),
       onboardingCompletedAt: Date.now(),
     });
-    mockCybavoWallet(user, balance);
-    return [user, await signJwtToken(user)];
+    const cybavoMock = await mockCybavoWallet(user, balance);
+    return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
     console.error(e);
   }
@@ -270,25 +271,14 @@ export const AUCTIONS_QUERY = `
       bidFee
       description
       imageUrl
-      basketItems {
-        ticker
-        amount
-      }
-      monetaryValue
+      claimSuccess
+      isClaimed
       bids {
-        id
         position
-        value
         user {
           id
           username
         }
-      }
-      userBid {
-        id
-        value
-        position
-        isClaimed
       }
     }
   }
@@ -326,14 +316,28 @@ export async function wait(ms: number): Promise<void> {
   await new Promise((r) => setTimeout(r, ms));
 }
 
-export async function expireAuction(auctionId: number) {
+export async function expireAuction(auctionId: number, finalize = true) {
   const auction = await Auction.findByPk(auctionId);
   auction.expiresAt = new Date(Date.now() - 1000);
   await auction.save();
+  await redisService.redis.hset(
+    `AUCTION:${auctionId}`,
+    'expire',
+    +auction.expiresAt * 1000,
+  );
+
+  if (finalize) {
+    await redisService.finalizeAuction(auctionId);
+  }
 }
 
 export async function startAuction(auctionId: number) {
   const auction = await Auction.findByPk(auctionId);
   auction.startDate = new Date(Date.now() - 1000);
   await auction.save();
+  await redisService.redis.hset(
+    `AUCTION:${auctionId}`,
+    'start',
+    +auction.startDate * 1000,
+  );
 }

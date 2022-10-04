@@ -38,10 +38,16 @@ letterMapping = {
 };
 
 const messWithString = (string) =>
-  string
-    .split('')
-    .map((x) => letterMapping[x] || x)
-    .join('');
+  string.replace(
+    /(^|\}\})(.*?)(\{\{|$)/gi,
+    (_, open, match, close) =>
+      open +
+      match
+        .split('')
+        .map((x) => letterMapping[x] || x)
+        .join('') +
+      close,
+  );
 
 function recursivelyReplace(v) {
   if (typeof v === 'object') {

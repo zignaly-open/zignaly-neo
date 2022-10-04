@@ -1,6 +1,8 @@
 import { User } from '../entities/users/model';
 import MockAdapter from 'axios-mock-adapter';
 import { axiosInstance } from '../cybavo';
+import redisService from '../redisService';
+
 export const mock = new MockAdapter(axiosInstance, {
   onNoMatch: 'throwException',
 });
@@ -10,8 +12,22 @@ const randomString = (len: number) =>
     .toString(36)
     .substring(2, len + 2);
 
-const mockCybavoWallet = (user: User, initialBalance = 0) => {
+export type MockedCybavo = {
+  balance: number;
+  setBalance: (b: number) => void;
+};
+
+const mockCybavoWallet = async (
+  user: User,
+  initialBalance = 0,
+): Promise<MockedCybavo> => {
   let balance = initialBalance;
+
+  await redisService.processBalance(initialBalance.toString(), user.id);
+
+  const setBalance = (b: number) => {
+    balance = b;
+  };
 
   // Mock balance
   mock.onGet(`/balance/all/${user.publicAddress}`).reply(() => {
@@ -54,6 +70,8 @@ const mockCybavoWallet = (user: User, initialBalance = 0) => {
       balance += parseFloat(amount);
       return [200, { transaction_id: randomString(8) }];
     });
+
+  return { balance, setBalance };
 };
 
 export default mockCybavoWallet;

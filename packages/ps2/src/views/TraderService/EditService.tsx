@@ -1,5 +1,5 @@
 import React from 'react';
-import ComingSoon from '../../components/ComingSoon';
+import ComingSoon from '../../components/Stub/ComingSoon';
 import ServiceHeader from '../../features/trader/components/ServiceHeader';
 import { TraderServicePageContainer } from 'features/trader/components/styles';
 import { useParams } from 'react-router-dom';

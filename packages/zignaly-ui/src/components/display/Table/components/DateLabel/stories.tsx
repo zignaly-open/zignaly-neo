@@ -1,8 +1,6 @@
-// Dependencies
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-// Components
 import DateLabel from "./index";
 
 export default {

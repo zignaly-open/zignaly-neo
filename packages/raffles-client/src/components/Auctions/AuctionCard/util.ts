@@ -1,6 +1,9 @@
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 
-export function getWinningLosingStatus(auction: AuctionType): {
+export function getWinningLosingStatus(
+  auction: AuctionType,
+  userId: number,
+): {
   isActive: boolean;
   isStarted: boolean;
   isWinning: boolean;
@@ -11,10 +14,7 @@ export function getWinningLosingStatus(auction: AuctionType): {
   const isStarted =
     !auction.startDate || new Date(auction.startDate) <= new Date();
   const isActive = +new Date(auction.expiresAt) > Date.now() && isStarted;
-  const userBidId = auction.userBid?.id;
-  const userBid = userBidId
-    ? auction.bids.find((b) => b.id === userBidId)
-    : null;
+  const userBid = userId && auction.bids.find((b) => b.user.id === +userId);
   const isWinning = userBid?.position <= auction.numberOfWinners;
   const isLosing = !isWinning && Boolean(userBid);
 

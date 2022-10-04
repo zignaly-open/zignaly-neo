@@ -1,9 +1,18 @@
 {
   "yes": "CH-Yëŝ",
   "no": "CH-Ńö",
+  "loading": "CH-Löáḋïńĝ...",
   "coming-soon": {
     "title": "CH-Ĉöṁïńĝ Ŝööń",
     "description": "CH-Ṫĥïŝ ŝëĉṫïöń ïŝ üńḋëѓ ḋëvëlöṗṁëńṫ, yöü wïll ŝëë ïṫ áváïláblë áṫ á láṫëѓ ḋáṫë."
+  },
+  "no-data": {
+    "title": "CH-Ńö Ḋáṫá",
+    "description": "CH-Ńö ḋáṫá áváïláblë. Ïḟ yöü bëlïëvë ïṫ ïŝ áń ïŝŝüë, ṗlëáŝë ĉöńṫáĉṫ ŝüṗṗöѓṫ."
+  },
+  "critical-error": {
+    "title": "CH-Ëѓѓöѓ Öĉĉüѓѓëḋ",
+    "description": "CH-Ŝöṁëṫĥïńĝ wëńṫ wѓöńĝ. Ṗlëáŝë ṫѓy áĝáïń láṫëѓ öѓ ĉöńṫáĉṫ ŝüṗṗöѓṫ. Öѓ ábáńḋöń ṫĥë ïńḋüŝṫѓïál ŝöĉïëṫy áńḋ büïlḋ á ĉábïń ïń ṫĥë wööḋŝ."
   },
   "main-menu": {
     "dropdown-link-forTrading": "CH-Ḟöѓ Ṫѓáḋïńĝ Ŝëѓvïĉëŝ",
@@ -19,8 +28,8 @@
   "account-selector": {
     "type": {
       "title": "CH-Ṫyṗë:",
-      "futures": "CH-Ŝṗöṫ",
-      "spot": "CH-Ḟüṫüѓëŝ"
+      "futures": "CH-Ḟüṫüѓëŝ",
+      "spot": "CH-Ŝṗöṫ"
     }
   },
   "navigation-menu": {

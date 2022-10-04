@@ -1,12 +1,9 @@
-// Dependencies
 import React from "react";
 import NumberFormat from "react-number-format";
 
-// Styled Components
 import * as styled from "./styles";
 
-// Types
-import { PriceLabelProps } from "./types";
+import { PriceLabelProps, UsdPriceLabelProps } from "./types";
 import { BottomElementWrap } from "./styles";
 import Typography from "components/display/Typography";
 import { useTheme } from "styled-components";
@@ -20,6 +17,8 @@ const PriceLabel = ({
   suffixElement = null,
   hideCoinName = false,
   green,
+  precision,
+  valuePrefix,
   red,
   className,
 }: PriceLabelProps) => {
@@ -28,7 +27,7 @@ const PriceLabel = ({
     <styled.Layout className={className}>
       <styled.Value>
         <NumberFormat
-          prefix={""}
+          prefix={valuePrefix || ""}
           value={value}
           style={{
             fontWeight: "500",
@@ -38,7 +37,7 @@ const PriceLabel = ({
           }}
           displayType={"text"}
           thousandSeparator={true}
-          decimalScale={coinPrecisions[coin] || undefined}
+          decimalScale={precision || coinPrecisions[coin] || undefined}
         />
         {!hideCoinName && (
           <styled.Coin weight="medium" variant={"body2"} color={"neutral400"}>
@@ -58,3 +57,15 @@ const PriceLabel = ({
 };
 
 export default PriceLabel;
+
+export const UsdPriceLabel: React.FC<UsdPriceLabelProps> = ({ value, green, red }) => (
+  <PriceLabel
+    value={value}
+    green={green}
+    red={red}
+    precision={2}
+    valuePrefix={"$"}
+    hideCoinName
+    coin={""}
+  />
+);

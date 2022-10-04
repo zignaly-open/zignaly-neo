@@ -31,7 +31,7 @@ const PendingTransactions: React.FC<{
       <Inline>
         <RefreshIcon />
         <Typography variant={'body1'} color={'yellow'}>
-          {t('edit-investment.pendingTransactions.status', {
+          {t('pendingTransactions.status', {
             count: pendingTransactionsCount,
           })}
         </Typography>
@@ -45,7 +45,7 @@ const PendingTransactions: React.FC<{
               color={theme.links}
             />
           }
-          caption={t('edit-investment.pendingTransactions.link-label')}
+          caption={t('pendingTransactions.link-label')}
           onClick={() => setView(EditInvestmentViews.PendingTransactions)}
         />
       </div>

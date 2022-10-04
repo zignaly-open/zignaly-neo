@@ -1,10 +1,7 @@
-// Dependencies
 import React, { useCallback, useRef, useState } from "react";
 
-// Styled Components
 import { Layout, Box, Label, Icon } from "./styles";
 
-// Types
 import { CheckBoxProps } from "./types";
 
 function CheckBox({
@@ -12,7 +9,7 @@ function CheckBox({
   value,
   label,
   disabled = false,
-  onChange = () => {},
+  onChange,
 }: CheckBoxProps) {
   const isControlled = useRef(value !== undefined);
   const [internalValue, setInternalValue] = useState(defaultValue);
@@ -26,15 +23,13 @@ function CheckBox({
     if (!disabled) {
       const newValue = !isChecked;
       setInternalValue(newValue);
-      onChange(newValue);
+      onChange?.(newValue);
     }
   }, [disabled, isChecked]);
 
   return (
     <Layout onClick={handleClickChecked} isActive={isChecked} disabled={disabled}>
-      <Box>
-        <Icon />
-      </Box>
+      <Box>{isChecked && <Icon />}</Box>
       <Label>{label}</Label>
     </Layout>
   );

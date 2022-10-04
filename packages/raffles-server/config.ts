@@ -23,3 +23,4 @@ export const zignalyAPIPublicKey =
 export const zignalyAPIPrivateKey =
   process.env.ZIGNALY_API_PRIVATE_KEY || '456def';
 export const zignalySystemId = process.env.ZIGNALY_SYSTEM_ID || '7333addian28';
+export const redisURL = process.env.REDIS_URL;

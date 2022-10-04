@@ -1,4 +1,3 @@
-// Dependencies
 import Loader from "components/display/Loader";
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
