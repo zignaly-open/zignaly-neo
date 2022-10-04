@@ -1,8 +1,7 @@
-import styled from "styled-components";
-import { styledIf } from "utils/styled";
+import styled, { css } from "styled-components";
 
 export const Caption = styled.div`
-  margin: 0px 8px;
+  margin: 0 8px;
 `;
 
 export const IconContainer = styled.div`
@@ -27,63 +26,61 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
   border-radius: 5px;
   position: absolute;
 
-  ${(props) => `
-    ${styledIf(
-      props.size === "large",
-      `
-      ${IconContainer}{
+  ${(props) =>
+    props.size === "large" &&
+    css`
+      ${IconContainer} {
         width: 26px;
         height: 26px;
       }
+
       padding: 11px 24px;
       height: 48px;
-        `,
-    )}
+    `}
 
-    ${styledIf(
-      props.size === "small",
-      `
-        ${IconContainer}{
+  ${(props) =>
+    props.size === "small" &&
+    css`
+      ${IconContainer} {
         width: 24px;
         height: 24px;
-        }
-        padding: 4px 18px;
-        height: 32px;
-          `,
-    )}
-    
-    ${styledIf(
-      props.variant === "success",
-      `
-        ${Caption} {
-            color:${props.theme.greenGraph};
-        }
-        border: 1px solid ${props.theme.successToasterBg};
-        background: ${props.theme.successToasterBg};
-        `,
-    )}
+      }
 
+      padding: 4px 18px;
+      height: 32px;
+    `}
 
-    ${styledIf(
-      props.variant === "info",
-      `
-        ${Caption} {
-            color:${props.theme.neutral200};
-        }
-        border: 1px solid ${props.theme.neutral600};
-        background: ${props.theme.neutral600};
-        `,
-    )}
-
-    ${styledIf(
-      props.variant === "error",
-      `
+  ${(props) =>
+    props.variant === "success" &&
+    css`
       ${Caption} {
-        color:${props.theme.redGraphOrError};
-    }
-        border: 1px solid ${props.theme.errorToasterBg};
-        background: ${props.theme.errorToasterBg};
-        `,
-    )}
-  `}
+        color: ${props.theme.greenGraph};
+      }
+
+      border: 1px solid ${props.theme.successToasterBg};
+      background: ${props.theme.successToasterBg};
+    `}
+
+
+  ${(props) =>
+    props.variant === "info" &&
+    css`
+      ${Caption} {
+        color: ${props.theme.neutral200};
+      }
+
+      border: 1px solid ${props.theme.neutral600};
+      background: ${props.theme.neutral600};
+    `}
+
+  ${(props) =>
+    props.variant === "error" &&
+    css`
+      ${Caption} {
+        color: ${props.theme.redGraphOrError};
+      }
+
+      border: 1px solid ${props.theme.errorToasterBg};
+      background: ${props.theme.errorToasterBg};
+    `}
 `;
