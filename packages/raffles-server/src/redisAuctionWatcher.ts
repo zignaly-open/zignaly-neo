@@ -11,7 +11,7 @@ const NOTIFY_CHANNEL = 'auction_channel';
 
 let subscriber: Subscriber;
 if (!isTest) {
-  createSubscriber({ connectionString: postgresUrl });
+  subscriber = createSubscriber({ connectionString: postgresUrl });
   subscriber.events.on('connected', () => {
     console.log(`Listening to channel ${NOTIFY_CHANNEL}`);
   });
