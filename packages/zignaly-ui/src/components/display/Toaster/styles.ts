@@ -10,6 +10,7 @@ export const IconContainer = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
+
   svg {
     width: 100%;
     height: 100%;
@@ -59,6 +60,18 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
         }
         border: 1px solid ${props.theme.successToasterBg};
         background: ${props.theme.successToasterBg};
+        `,
+    )}
+
+
+    ${styledIf(
+      props.variant === "info",
+      `
+        ${Caption} {
+            color:${props.theme.neutral200};
+        }
+        border: 1px solid ${props.theme.neutral600};
+        background: ${props.theme.neutral600};
         `,
     )}
 

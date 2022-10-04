@@ -1,5 +1,4 @@
 import React from 'react';
-import Header from './features/navigation/Header';
 import { Routes, Route } from 'react-router-dom';
 import ProfitSharing from './views/ProfitSharing';
 import Dashboard from './views/Dashboard';
@@ -88,9 +87,4 @@ const Router: React.FC = () => (
   </Routes>
 );
 
-export default () => (
-  <>
-    <Header />
-    <Router />
-  </>
-);
+export default Router;
