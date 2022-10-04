@@ -16,7 +16,6 @@ jobs:
           sed -i -e 's/{directory}/prod/g' appspec.yml
           sed -i -e 's/{directory}/prod/g' scripts/prepare_release.sh
           sed -i -e 's/{directory}/prod/g' scripts/after_install.sh
-          sed -i -e 's/{directory}/prod/g' scripts/delete_old_release.sh
       - name: Create server .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
