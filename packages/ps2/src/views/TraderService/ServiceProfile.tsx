@@ -1,42 +1,48 @@
 import React from 'react';
 import ServiceHeader from '../../features/trader/components/ServiceHeader';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Navigate, useParams } from 'react-router-dom';
 import ServiceProfileContainer from '../../features/trader/components/ServiceProfileContainer';
 import { TraderServicePageContainer } from 'features/trader/components/styles';
 import {
-  useIsServiceOwner,
   useServiceDetails,
   useTraderServiceTitle,
 } from '../../features/trader/use';
 import { useIsAuthenticated } from '../../features/auth/use';
-import { TraderServiceAccessLevel } from '../../features/trader/types';
-import { ROUTE_DASHBOARD, ROUTE_PROFIT_SHARING } from '../../routes';
+import { ROUTE_404, ROUTE_LOGIN, ROUTE_PROFIT_SHARING } from '../../routes';
+import { Investment } from '../../features/dashboard/types';
+import LayoutContentWrapper from '../../components/LayoutContentWrapper';
+import { BackendError, ErrorCodes } from '../../util/errors';
+import CriticalError from '../../components/Stub/CriticalError';
 
 const ServiceProfile: React.FC = () => {
   const { serviceId } = useParams();
   useTraderServiceTitle('profit-sharing.service', serviceId);
-  const { data: service } = useServiceDetails(serviceId);
+  const serviceDetailsEndpoint = useServiceDetails(serviceId);
   const isAuthenticated = useIsAuthenticated();
-  const navigate = useNavigate();
-  const isOwner = useIsServiceOwner(serviceId);
-
-  switch (service?.level) {
-    case TraderServiceAccessLevel.Solo:
-      !isOwner && navigate(ROUTE_PROFIT_SHARING);
-      break;
-    case TraderServiceAccessLevel.Private:
-      !isAuthenticated && navigate(ROUTE_DASHBOARD);
-      break;
-    case TraderServiceAccessLevel.Public:
-    default:
-    // Do nothing
-  }
 
   return (
     <>
       <ServiceHeader />
       <TraderServicePageContainer>
-        <ServiceProfileContainer serviceId={serviceId} />
+        <LayoutContentWrapper
+          endpoint={serviceDetailsEndpoint}
+          error={(error: BackendError) => {
+            if (error?.data?.error.code === ErrorCodes.SoloService)
+              return <Navigate to={ROUTE_PROFIT_SHARING} />;
+            if (error?.data?.error.code === ErrorCodes.NoSuchService)
+              return <Navigate to={ROUTE_404} />;
+            if (
+              !isAuthenticated &&
+              error?.data?.error.code === ErrorCodes.PrivateService
+            )
+              return <Navigate to={ROUTE_LOGIN} />;
+
+            return <CriticalError />;
+          }}
+          content={([service]: Investment[]) => (
+            <ServiceProfileContainer service={service} />
+          )}
+        />
       </TraderServicePageContainer>
     </>
   );

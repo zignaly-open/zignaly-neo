@@ -17,6 +17,7 @@ const UpdateChecker: React.FC = () => {
     if (status === UpdateStatus.available) {
       toast.info(t('refresh.short'), {
         autoClose: false,
+        position: 'bottom-left',
         onClick: reloadPage,
       });
     }

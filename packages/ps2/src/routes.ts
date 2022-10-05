@@ -1,4 +1,4 @@
-export const ROUTE_DASHBOARD = '/';
+export const ROUTE_DASHBOARD = '/my-dashboard';
 export const ROUTE_PROFIT_SHARING = '/profit-sharing';
 export const ROUTE_STAKING = '/staking';
 export const ROUTE_ZIGPAD = '/zigpad';
@@ -21,3 +21,4 @@ export const ROUTE_TRADING_SERVICE_EDIT = ROUTE_TRADING_SERVICE + '/edit';
 export const ROUTE_MY_BALANCES = '/my-balances';
 export const ROUTE_HELP_TRADER = '/help/trader';
 export const ROUTE_HELP_INVESTOR = '/help/investor';
+export const ROUTE_404 = '/404';
