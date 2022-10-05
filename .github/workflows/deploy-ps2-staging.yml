@@ -1,0 +1,68 @@
+name: PS2 Staging deploy
+on:
+  push:
+    branches:
+      - master
+      - feat/ps2-deploy
+jobs:
+  pre_job:
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+      paths_result: ${{ steps.skip_check.outputs.paths_result }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v4
+        with:
+          paths_filter: |
+            ui_repos:
+              paths:
+                - 'packages/ps2/**/*'
+                - 'packages/zignaly-ui/**/*'
+
+  build:
+    name: PS2 Staging deploy
+    needs: pre_job
+    if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).ui_repos.should_skip
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Create client .env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_REACT_APP_LIVE_SESSION_TRACK_ID: ${{ secrets.PS2_LIVE_SESSION_TRACK_ID }}
+          envkey_REACT_APP_SEGMENT_KEY: ${{ secrets.PS2_SEGMENT_KEY }}
+          envkey_REACT_APP_ENABLE_TRACKING: ${{ secrets.REACT_APP_ENABLE_TRACKING }}
+          envkey_REACT_APP_ENABLE_TEST_LANGUAGE: 1
+          directory: packages/ps2
+          file_name: .env.sample
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: 'yarn'
+      - name: Install Lerna
+        run: yarn global add lerna
+      - name: Bootstrap packages
+        run: lerna bootstrap --scope=@zignaly-open/ps2
+      - name: Build client
+        run: yarn run build --scope=@zignaly-open/ps2 --include-dependencies
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_PS2_TEST_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_REGION: 'us-east-1'
+          SOURCE_DIR: 'packages/ps2/build'
+      - name: Invalidate CloudFront
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.AWS_PS2_TEST_DISTRIBUTION }}
+          PATHS: '/'
+          AWS_REGION: 'us-east-1'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
