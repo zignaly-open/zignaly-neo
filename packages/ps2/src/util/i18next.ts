@@ -19,6 +19,7 @@ i18n
     debug: false,
     supportedLngs: supportedLanguages,
     defaultNS: 'common',
+    fallbackNS: 'common',
     fallbackLng: 'en',
     interpolation: {
       escapeValue: false,

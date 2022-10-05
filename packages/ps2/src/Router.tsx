@@ -1,6 +1,5 @@
 import React from 'react';
-import Header from './features/navigation/Header';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import ProfitSharing from './views/ProfitSharing';
 import Dashboard from './views/Dashboard';
 import Staking from './views/Staking';
@@ -31,6 +30,7 @@ import {
   ROUTE_BECOME_TRADER,
   ROUTE_HELP_TRADER,
   ROUTE_HELP_INVESTOR,
+  ROUTE_404,
 } from './routes';
 
 import Management from './views/TraderService/Management';
@@ -54,9 +54,6 @@ const Router: React.FC = () => (
   <Routes>
     <Route element={<AuthenticatedWall />}>
       <Route path={ROUTE_DASHBOARD} element={<Dashboard />} />
-      <Route path={ROUTE_PROFIT_SHARING} element={<ProfitSharing />} />
-      <Route path={ROUTE_STAKING} element={<Staking />} />
-      <Route path={ROUTE_ZIGPAD} element={<Zigpad />} />
       <Route path={ROUTE_MY_BALANCES} element={<MyBalances />} />
     </Route>
 
@@ -84,13 +81,14 @@ const Router: React.FC = () => (
       <Route path={ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />
     </Route>
 
-    <Route path='*' element={<NotFound />} />
+    <Route path={ROUTE_PROFIT_SHARING} element={<ProfitSharing />} />
+    <Route path={ROUTE_STAKING} element={<Staking />} />
+    <Route path={ROUTE_ZIGPAD} element={<Zigpad />} />
+    <Route path={ROUTE_404} element={<NotFound />} />
+
+    <Route path='/' element={<Navigate to={ROUTE_PROFIT_SHARING} replace />} />
+    <Route path='*' element={<Navigate to={ROUTE_404} replace />} />
   </Routes>
 );
 
-export default () => (
-  <>
-    <Header />
-    <Router />
-  </>
-);
+export default Router;

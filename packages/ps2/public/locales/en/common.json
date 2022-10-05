@@ -22,6 +22,9 @@
     "dropdown-link-forTrading": "For Trading Services",
     "dropdown-link-helpDocs": "Help Docs"
   },
+  "refresh": {
+    "short": "New version available, click here to refresh"
+  },
   "account-menu": {
     "isAuth-button-logIn": "Log in",
     "isAuth-button-signUp": "SIGN UP",
