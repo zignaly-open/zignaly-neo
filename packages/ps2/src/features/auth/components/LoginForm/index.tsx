@@ -34,6 +34,8 @@ const LoginForm: React.FC = () => {
 
   const submit = (data: LoginPayload) => {
     authenticate(data).catch((e) => {
+      // eslint-disable-next-line no-console
+      console.error(e);
       toast.error(e.message);
       setError('email', { type: 'server', message: e.message });
       setError('password', { type: 'server', message: e.message });

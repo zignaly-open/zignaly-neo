@@ -29,12 +29,17 @@ export const trackNewSession = (
   userData: UserData,
   eventType: SessionsTypes,
 ) => {
-  pushGtmEvent({ event: eventType, ...userData });
-  const { email, userId } = userData;
-  analytics?.identify(userId, { email });
-  Sentry.setUser({ email, id: userId });
-  if (eventType === SessionsTypes.Signup) {
-    analytics?.track('newUser', { userId });
+  try {
+    pushGtmEvent({ event: eventType, ...userData });
+    const { email, userId } = userData;
+    analytics?.identify(userId, { email });
+    Sentry.setUser({ email, id: userId });
+    if (eventType === SessionsTypes.Signup) {
+      analytics?.track('newUser', { userId });
+    }
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error(e);
   }
 };
 
