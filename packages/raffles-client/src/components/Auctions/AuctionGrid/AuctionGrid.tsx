@@ -143,20 +143,18 @@ const AuctionGrid: React.FC = () => {
         </Grid>
       </FiltersContainer>
       <Grid justifyContent='center' container spacing={4}>
-        {filtered
-          .filter((a: AuctionType) => a.id !== 1)
-          .map((x: AuctionType) => (
-            <Grid
-              item
-              key={x.id}
-              xs={12}
-              md={6}
-              display='flex'
-              justifyContent='center'
-            >
-              <AuctionCard auction={x} />
-            </Grid>
-          ))}
+        {filtered.map((x: AuctionType) => (
+          <Grid
+            item
+            key={x.id}
+            xs={12}
+            md={6}
+            display='flex'
+            justifyContent='center'
+          >
+            <AuctionCard auction={x} />
+          </Grid>
+        ))}
       </Grid>
     </LayoutContainer>
   );
