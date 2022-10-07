@@ -9,6 +9,9 @@ export const GreySubHeader = styled(Typography)`
   font-size: 13px !important;
   line-height: 20px !important;
   color: ${(props) => props.theme.neutral200} !important;
+  margin-top: 4px;
+  white-space: nowrap;
+  margin-bottom: 4px;
 `;
 
 export const GreySubHeaderHighlight = styled(GreySubHeader)`
@@ -52,4 +55,29 @@ export const Separator = styled.span`
   margin-left: 13px;
   border-right: 1px solid ${(props) => props.theme.neutral200};
   margin-right: 13px;
+  flex: 0 0 1px;
+  height: 15px;
+`;
+
+export const InvestButtonContainer = styled.div`
+  text-align: center;
+
+  & > div span {
+    font-weight: 500;
+    font-size: 22px !important;
+    line-height: 36px !important;
+  }
+`;
+
+export const BigNumberWrapper = styled.div`
+  & > div span {
+    font-weight: 500;
+    font-size: 22px !important;
+    line-height: 36px !important;
+  }
+`;
+
+export const InvestButtonSubtext = styled(Typography)`
+  font-size: 11px;
+  line-height: 16px;
 `;

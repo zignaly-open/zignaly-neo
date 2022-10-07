@@ -1,5 +1,11 @@
 {
   "service-by": "by <0>{{name}}</0>",
   "service-age": "Started <0>{{date}}</0> ago",
-  "link-copied": "Link copied to clipboard!"
+  "link-copied": "Link copied to clipboard!",
+  "invested-label": "Invested",
+  "copy-link": "Copy link",
+  "invest-button": {
+    "invest-now": "Invest now!",
+    "x-success-fee": "{{fee}}% Success fee"
+  }
 }
