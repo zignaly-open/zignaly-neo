@@ -19,15 +19,9 @@ interface Theme {
   links: string;
   yellow: string;
   red: string;
-  tertiaryButton: string;
-  formInputBack: string;
-  formSelectBack: string;
   dropDownBackground: string;
   darkSpecial: string;
   almostWhite: string;
-  gradient1: string;
-  gradient2: string;
-  gradient3: string;
   errorToasterBg: string;
   errorToasterBorder: string;
   successToasterBg: string;
