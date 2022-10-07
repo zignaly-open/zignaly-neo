@@ -29,7 +29,9 @@ import { useActiveExchange } from '../../../../apis/user/use';
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
   const exchange = useActiveExchange();
-  const investmentsEndpoint = useInvestments(exchange?.internalId);
+  const investmentsEndpoint = useInvestments(exchange?.internalId, {
+    skip: !exchange?.internalId,
+  });
   const selectInvestment = useSetSelectedInvestment();
   // we do not use the results of this till before the modal
   useCoins();

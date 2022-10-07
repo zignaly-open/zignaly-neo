@@ -8,7 +8,7 @@ export const api = createApi({
   endpoints: (builder) => ({
     investments: builder.query<Investment[], string>({
       query: (exchangeInternalId) => ({
-        url: 'user/exchanges/' + exchangeInternalId + '/investments',
+        url: `user/exchanges/${exchangeInternalId}/investments`,
       }),
     }),
     coins: builder.query<Coins, string>({
