@@ -1,26 +1,24 @@
 import { createTheme } from '@mui/material';
+import { dark } from '@zignaly-open/ui';
+import Theme from '@zignaly-open/ui/lib/theme/theme';
 
 export default createTheme({
   palette: {
+    ...(Object.fromEntries(
+      Object.entries(dark).map(([k, v]) => [k, { main: v }]),
+    ) as Record<keyof Theme, { main: string }>),
+
     primary: {
       // light: will be calculated from palette.primary.main,
       main: '#770fc8',
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
     },
-    prettyPink: {
-      main: '#f63f82',
-    },
-    greedyGreen: {
-      main: '#62e764',
-    },
     secondary: {
       dark: '#191927',
       main: '#656565',
     },
-    info: {
-      main: '#c2faff',
-    },
+
     // Used by `getContrastText()` to maximize the contrast between
     // the background and the text.
     contrastThreshold: 3,
