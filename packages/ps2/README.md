@@ -61,14 +61,8 @@ src
 │       ├── styles.tsx              # styled components
 │       ├── types.tsx               # type definitions
 │       └── atoms.tsx               # some tiny react components unworthy to be placed in src*=/components
-├── fetures                         # store-management done like RTK wants you to (I guess)
-│   ├── featureName
-│   │   ├── components              # components used by this feature 
-│   │   │   ├── index.tsx           # actual component with export default
-│   │   │   ├── validations.ts      # if it's a form, yup resolvers
-│   │   │   ├── styles.tsx          # styled components
-│   │   │   ├── types.tsx           # type definitions
-│   │   │   └── atoms.tsx           # some tiny react components unworthy to be placed in src*=/components
+├── apis                            # store-management by entity
+│   ├── apiName
 │   │   ├── store.ts                # store slice (RTKQ terminology without RTKQ folder structure)
 │   │   ├── api.ts                  # api slice
 │   │   ├── types.ts                # types
@@ -76,7 +70,14 @@ src
 │   │                               # I want to do it with a sufficient abstraction layer 
 │   └── store.ts                    # redux store 
 ├── util                            # common-use helper functions
-├── views                           # high-level components aka routes
+├── views                           # high-level components aka pages
+│   ├── ViewName                    # Page name or a group of pages
+│   │   ├── components              # components used only by this page - if used by multiple, put it in src/components 
+│   │   │   ├── index.tsx           # actual component with export default
+│   │   │   ├── validations.ts      # if it's a form, yup resolvers
+│   │   │   ├── styles.tsx          # styled components
+│   │   │   ├── types.tsx           # type definitions
+│   │   │   └── atoms.tsx           # some tiny react components unworthy to be placed in src*=/components
 └── App.tsx                         # entry point with 100500 providers around it
 
 ```
