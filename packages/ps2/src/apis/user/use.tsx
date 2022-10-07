@@ -131,13 +131,13 @@ export function useLogout(): () => void {
 }
 
 export function useIsAuthenticated(): boolean {
-  const user = useSelector((state: RootState) => state.auth)?.user;
+  const user = useSelector((state: RootState) => state.user)?.user;
   return !!user;
 }
 
 export function useCurrentUser(): UserData | Partial<UserData> {
   return (
-    useSelector((state: RootState) => state.auth)?.user || ({} as UserData)
+    useSelector((state: RootState) => state.user)?.user || ({} as UserData)
   );
 }
 
@@ -166,7 +166,7 @@ export const useGetExchangeByInternalId = (): ((
   internalId?: string,
 ) => ExtendedExchange | undefined) => {
   const { user, activeExchangeInternalId } = useSelector(
-    (state: RootState) => state.auth,
+    (state: RootState) => state.user,
   );
   return (internalId) => {
     if (!user?.exchanges) return undefined;
@@ -183,7 +183,7 @@ export const useGetExchangeByInternalId = (): ((
 };
 
 export function useActiveExchange(): ExtendedExchange | undefined {
-  const user = useSelector((state: RootState) => state.auth)?.user as UserData;
+  const user = useSelector((state: RootState) => state.user)?.user as UserData;
   const getExchange = useGetExchangeByInternalId();
   const dispatch = useDispatch();
   const [loadAllCoins] = useLazyAllCoinsQuery();

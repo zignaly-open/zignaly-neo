@@ -1,4 +1,4 @@
-export interface AuthState {
+export interface UserState {
   accessToken?: string;
   sessionExpiryDate?: Date;
   user?: UserData;

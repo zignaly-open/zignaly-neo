@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { PayloadAction } from '@reduxjs/toolkit';
-import { AuthState, UserData } from './types';
+import { UserState, UserData } from './types';
 
-const initialState: AuthState = {};
+const initialState: UserState = {};
 
 // Redux Toolkit allows us to write "mutating" logic in reducers. It
 // doesn't actually mutate the state because it uses the Immer library,
 // which detects changes to a "draft state" and produces a brand new
 // immutable state based off those changes
-export const authSlice = createSlice({
-  name: 'auth',
+export const userSlice = createSlice({
+  name: 'user',
   initialState,
   reducers: {
     logout: () => {
@@ -37,6 +37,6 @@ export const {
   setUser,
   setSessionExpiryDate,
   setActiveExchangeInternalId,
-} = authSlice.actions;
+} = userSlice.actions;
 
-export default authSlice.reducer;
+export default userSlice.reducer;

@@ -5,7 +5,7 @@ import { TraderState } from './types';
 const initialState: TraderState = {};
 
 export const traderSlice = createSlice({
-  name: 'auth',
+  name: 'trader',
   initialState,
   reducers: {
     setActiveServiceId: (state, action: PayloadAction<string>) => {

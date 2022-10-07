@@ -7,7 +7,7 @@ import {
 import { RootState } from './store';
 import { Mutex } from 'async-mutex';
 import { logout, setSessionExpiryDate } from './user/store';
-import { AuthState, SessionResponse } from './user/types';
+import { SessionResponse } from './user/types';
 import { TIME_TO_START_REFRESHING_TOKEN } from '../util/constants';
 
 const mutex = new Mutex();
@@ -15,7 +15,7 @@ const mutex = new Mutex();
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_BASE_API,
   prepareHeaders: (headers, { getState }) => {
-    const token = (getState() as RootState).auth.accessToken;
+    const token = (getState() as RootState).user.accessToken;
     if (token) {
       headers.set('authorization', `Bearer ${token}`);
     }
@@ -44,7 +44,7 @@ const customFetchBase: BaseQueryFn<
   ) {
     api.dispatch(logout());
   } else if (
-    +(api.getState() as { auth: AuthState }).auth.sessionExpiryDate -
+    +(api.getState() as RootState).user.sessionExpiryDate -
       TIME_TO_START_REFRESHING_TOKEN >
     Date.now()
   ) {

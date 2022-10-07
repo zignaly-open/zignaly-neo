@@ -5,7 +5,7 @@ import { api } from './api';
 const initialState: DashboardState = {};
 
 export const dashboardSlice = createSlice({
-  name: 'auth',
+  name: 'dashboard',
   initialState,
   reducers: {
     setSelectedInvestment: (state, action: PayloadAction<Investment>) => {
