@@ -13,7 +13,7 @@ import {
   useIsAuthenticated,
   useLogout,
   useSelectExchange,
-} from '../../../features/user/use';
+} from '../../../apis/user/use';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import {
   Avatar,

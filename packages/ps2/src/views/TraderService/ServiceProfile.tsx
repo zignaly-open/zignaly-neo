@@ -1,15 +1,15 @@
 import React from 'react';
-import ServiceHeader from '../../features/trader/components/ServiceHeader';
+import ServiceHeader from './components/ServiceHeader';
 import { Navigate, useParams } from 'react-router-dom';
-import ServiceProfileContainer from '../../features/trader/components/ServiceProfileContainer';
-import { TraderServicePageContainer } from 'features/trader/components/styles';
+import ServiceProfileContainer from './components/ServiceProfileContainer';
+import { TraderServicePageContainer } from 'views/TraderService/components/styles';
 import {
   useServiceDetails,
   useTraderServiceTitle,
-} from '../../features/trader/use';
-import { useIsAuthenticated } from '../../features/user/use';
+} from '../../apis/trader/use';
+import { useIsAuthenticated } from '../../apis/user/use';
 import { ROUTE_404, ROUTE_LOGIN, ROUTE_PROFIT_SHARING } from '../../routes';
-import { Service } from '../../features/dashboard/types';
+import { Service } from '../../apis/dashboard/types';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { BackendError, ErrorCodes } from '../../util/errors';
 import CriticalError from '../../components/Stub/CriticalError';

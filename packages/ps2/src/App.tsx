@@ -8,7 +8,7 @@ import ModalProvider from 'mui-modal-provider';
 import { ToastContainer } from 'react-toastify';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { BrowserRouter } from 'react-router-dom';
-import { persistor, store } from './features/store';
+import { persistor, store } from './apis/store';
 import { Provider } from 'react-redux';
 import GlobalStyle from './styles';
 import { PersistGate } from 'redux-persist/integration/react';

@@ -6,7 +6,7 @@ import Staking from './views/Staking';
 import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
 import ForgotPassword from './views/Auth/ForgotPassword';
-import MyBalances from './views/MyBalances';
+import MyBalances from './views/Balance';
 import Zigpad from './views/Zigpad';
 
 import {

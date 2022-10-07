@@ -3,7 +3,7 @@ import Analytics, { AnalyticsInstance } from 'analytics';
 // @ts-ignore missing typedefs
 import segmentPlugin from '@analytics/segment';
 import * as Sentry from '@sentry/browser';
-import { SessionsTypes, UserData } from '../features/user/types';
+import { SessionsTypes, UserData } from '../apis/user/types';
 
 let analytics: AnalyticsInstance | null = null;
 
