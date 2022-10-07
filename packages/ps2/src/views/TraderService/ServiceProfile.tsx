@@ -9,7 +9,7 @@ import {
 } from '../../features/trader/use';
 import { useIsAuthenticated } from '../../features/auth/use';
 import { ROUTE_404, ROUTE_LOGIN, ROUTE_PROFIT_SHARING } from '../../routes';
-import { Investment } from '../../features/dashboard/types';
+import { Service } from '../../features/dashboard/types';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { BackendError, ErrorCodes } from '../../util/errors';
 import CriticalError from '../../components/Stub/CriticalError';
@@ -39,7 +39,7 @@ const ServiceProfile: React.FC = () => {
 
             return <CriticalError />;
           }}
-          content={([service]: Investment[]) => (
+          content={(service: Service) => (
             <ServiceProfileContainer service={service} />
           )}
         />

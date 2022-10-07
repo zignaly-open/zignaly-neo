@@ -107,7 +107,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           <>
             <InvestorCounts>
               <UserIcon width={'17px'} height={'20px'} color={'#65647E'} />
-              <Typography variant={'h3'} color={'avatarBack'}>
+              <Typography variant={'h3'} color={'almostWhite'}>
                 {t('number-of-investors', {
                   count: investors?.length,
                 })}

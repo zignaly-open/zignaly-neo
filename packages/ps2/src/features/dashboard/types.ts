@@ -67,3 +67,28 @@ export type Investment = {
   pnl180dSum: string;
   pnl180dPct: string;
 };
+
+export type Service = {
+  createdAt: string;
+  description: string;
+  exchangeInternalId: string;
+  fundsAllocated: string;
+  id: string;
+  invested: string;
+  investors: number;
+  level: number;
+  logo: string;
+  name: string;
+  ownerCountry: string;
+  ownerCreatedAt: string;
+  ownerDescription: string;
+  ownerName: string;
+  ownerVerified: boolean;
+  solo: boolean;
+  ssc: string;
+  successFee: string;
+  tags: string[];
+  type: string;
+  usdtInvested: string;
+  userId: string;
+};

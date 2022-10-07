@@ -26,7 +26,7 @@ const dark: Theme = {
   formSelectBack: "#",
   dropDownBackground: "#12152C",
   darkSpecial: "#0b0d1a",
-  avatarBack: "#F3F4F6",
+  almostWhite: "#F3F4F6",
   gradient1: "#",
   gradient2: "linear-gradient(312.12deg, #8671F7 14.16%, #7EC9F9 83.59%)",
   gradient3: "#",

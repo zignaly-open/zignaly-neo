@@ -24,7 +24,7 @@ interface Theme {
   formSelectBack: string;
   dropDownBackground: string;
   darkSpecial: string;
-  avatarBack: string;
+  almostWhite: string;
   gradient1: string;
   gradient2: string;
   gradient3: string;

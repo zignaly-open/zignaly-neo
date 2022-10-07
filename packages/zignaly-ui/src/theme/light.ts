@@ -26,7 +26,7 @@ const light: Theme = {
   formSelectBack: "#",
   dropDownBackground: "#12152C",
   darkSpecial: "#0b0d1a",
-  avatarBack: "#F3F4F6",
+  almostWhite: "#F3F4F6",
   gradient1: "#",
   gradient2: "#",
   gradient3: "#",
