@@ -4,12 +4,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { Form, Action, TitleHead } from './styles';
 import { LoginValidation } from './validations';
-import { useAuthenticate } from '../../use';
+import { useAuthenticate } from '../../../../features/user/use';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
 import { Button, InputText, TextButton, Typography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import { LoginPayload } from '../../types';
+import { LoginPayload } from '../../../../features/user/types';
 import { useToast } from '../../../../util/hooks/useToast';
 
 const LoginForm: React.FC = () => {

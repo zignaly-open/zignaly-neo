@@ -7,7 +7,7 @@ import {
   useUpdateTakeProfitAndInvestMoreMutation,
   useWithdrawInvestmentMutation,
 } from './api';
-import { useActiveExchange } from '../auth/use';
+import { useActiveExchange } from '../user/use';
 import { Investment } from './types';
 import { RootState } from '../store';
 import { setSelectedInvestment } from './store';

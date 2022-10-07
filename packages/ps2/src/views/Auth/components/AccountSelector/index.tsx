@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useTheme } from 'styled-components';
 import { Layout, Field, Button, Container, Item } from './styles';
 import { Typography, Avatar, ArrowBottomIcon } from '@zignaly-open/ui';
-import { Exchange } from '../../types';
+import { Exchange } from '../../../../features/user/types';
 import { getImageOfAccount } from '../../../../util/images';
 import {
   useActiveExchange,
   useSelectExchange,
   useCurrentUser,
-} from '../../use';
+} from '../../../../features/user/use';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { AccountSelectorProps } from './types';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginForm from '../../features/auth/components/LoginForm';
+import LoginForm from './components/LoginForm';
 import { PageContainer } from '@zignaly-open/ui';
 import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';

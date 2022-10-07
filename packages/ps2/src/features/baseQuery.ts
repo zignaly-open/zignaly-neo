@@ -6,8 +6,8 @@ import {
 } from '@reduxjs/toolkit/dist/query/react';
 import { RootState } from './store';
 import { Mutex } from 'async-mutex';
-import { logout, setSessionExpiryDate } from './auth/store';
-import { AuthState, SessionResponse } from './auth/types';
+import { logout, setSessionExpiryDate } from './user/store';
+import { AuthState, SessionResponse } from './user/types';
 import { TIME_TO_START_REFRESHING_TOKEN } from '../util/constants';
 
 const mutex = new Mutex();

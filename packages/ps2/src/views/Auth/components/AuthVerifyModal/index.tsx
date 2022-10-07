@@ -4,7 +4,7 @@ import ModalContainer from 'components/ModalContainer';
 import { Modal } from '@mui/material';
 import EmailVerifyForm from '../EmailVerifyForm';
 import TwoFAForm from '../TwoFAForm';
-import { LoginResponse } from '../../types';
+import { LoginResponse } from '../../../../features/user/types';
 import { useTranslation } from 'react-i18next';
 import { Typography } from '@zignaly-open/ui';
 import { Container, Title } from './styles';
@@ -14,7 +14,7 @@ import {
   useResendCode,
   useVerifyEmail,
   useVerifyEmailKnownDevice,
-} from '../../use';
+} from '../../../../features/user/use';
 import { useToast } from '../../../../util/hooks/useToast';
 
 function AuthVerifyModal({

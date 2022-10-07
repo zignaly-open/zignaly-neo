@@ -1,5 +1,5 @@
 import React from 'react';
-import { useIsAuthenticated } from '../../features/auth/use';
+import { useIsAuthenticated } from '../../features/user/use';
 import { Navigate, Outlet } from 'react-router-dom';
 import { ROUTE_LOGIN } from '../../routes';
 

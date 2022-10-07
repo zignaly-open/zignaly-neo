@@ -12,7 +12,7 @@ import { MyBalancesTableDataType } from './types';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { AggregatedBalances, CoinBalance, CoinDetail } from '../../types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
-import { useActiveExchange } from '../../../auth/use';
+import { useActiveExchange } from '../../../user/use';
 import { allowedDeposits } from 'util/coins';
 
 const initialStateTable = {

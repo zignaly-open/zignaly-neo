@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import authReducer from './auth/store';
-import { api as authApi } from './auth/api';
+import authReducer from './user/store';
+import { api as userApi } from './user/api';
 import dashboardReducer from './dashboard/store';
 import { api as dashboardApi } from './dashboard/api';
 import traderReducer from './trader/store';
@@ -15,7 +15,7 @@ const persistConfig = {
   storage,
   // TODO: maybe we should actually leverage cache
   blacklist: [
-    'authApi',
+    'userApi',
     'dashboardApi',
     'myBalancesApi',
     'traderApi',
@@ -26,7 +26,7 @@ export const store = configureStore({
   reducer: persistReducer(
     persistConfig,
     combineReducers({
-      [authApi.reducerPath]: authApi.reducer,
+      [userApi.reducerPath]: userApi.reducer,
       [dashboardApi.reducerPath]: dashboardApi.reducer,
       [myBalancesApi.reducerPath]: myBalancesApi.reducer,
       [traderApi.reducerPath]: traderApi.reducer,
@@ -40,7 +40,7 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
     })
-      .concat(authApi.middleware)
+      .concat(userApi.middleware)
       .concat(myBalancesApi.middleware)
       .concat(traderApi.middleware)
       .concat(dashboardApi.middleware),

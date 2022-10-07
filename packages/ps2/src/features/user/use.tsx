@@ -31,7 +31,7 @@ import { endLiveSession, startLiveSession } from '../../util/liveSession';
 import { RootState } from '../store';
 import { useTranslation } from 'react-i18next';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
-import AuthVerifyModal from './components/AuthVerifyModal';
+import AuthVerifyModal from '../../views/Auth/components/AuthVerifyModal';
 import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../trader/api';
 import { useLazyAllCoinsQuery } from '../myBalances/api';

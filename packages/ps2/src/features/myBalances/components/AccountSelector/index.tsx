@@ -13,10 +13,10 @@ import {
   useActiveExchange,
   useCurrentUser,
   useSelectExchange,
-} from '../../../auth/use';
+} from '../../../user/use';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { getImageOfAccount } from '../../../../util/images';
-import { ExtendedExchange, UserData } from '../../../auth/types';
+import { ExtendedExchange, UserData } from '../../../user/types';
 
 const AccountSelector: React.FC = () => {
   const theme = useTheme() as Theme;

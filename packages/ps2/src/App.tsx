@@ -13,8 +13,8 @@ import { Provider } from 'react-redux';
 import GlobalStyle from './styles';
 import { PersistGate } from 'redux-persist/integration/react';
 import CenteredLoader from './components/CenteredLoader';
-import Header from './features/navigation/Header';
-import UpdateChecker from './features/navigation/UpdateChecker';
+import Header from './components/Navigation/Header';
+import UpdateChecker from './components/Navigation/UpdateChecker';
 
 const augmentedTheme = { ...dark, ...theme };
 

@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { RootState } from '../store';
 import { useReducedBalancesQuery, useLazyAllCoinsQuery } from './api';
 import { AggregatedBalances, CoinBalance } from './types';
-import { useActiveExchange } from '../auth/use';
+import { useActiveExchange } from '../user/use';
 
 export const useMyBalances = (): {
   isLoading: boolean;

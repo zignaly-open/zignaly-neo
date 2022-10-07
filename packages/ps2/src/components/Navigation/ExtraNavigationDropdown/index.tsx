@@ -10,8 +10,8 @@ import { NavLink, Networks } from './styles';
 import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
 import { supportedLanguages } from '../../../util/i18next';
-import { useChangeLocale } from '../../auth/use';
-import { useFirstOwnedService } from '../../trader/use';
+import { useChangeLocale } from '../../../features/user/use';
+import { useFirstOwnedService } from '../../../features/trader/use';
 import { generatePath, useNavigate } from 'react-router-dom';
 import {
   ROUTE_BECOME_TRADER,

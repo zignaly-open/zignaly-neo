@@ -7,7 +7,7 @@ import {
   useServiceDetails,
   useTraderServiceTitle,
 } from '../../features/trader/use';
-import { useIsAuthenticated } from '../../features/auth/use';
+import { useIsAuthenticated } from '../../features/user/use';
 import { ROUTE_404, ROUTE_LOGIN, ROUTE_PROFIT_SHARING } from '../../routes';
 import { Service } from '../../features/dashboard/types';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';

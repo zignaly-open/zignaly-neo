@@ -9,7 +9,7 @@ import {
 import { useSelector } from 'react-redux';
 import { TraderService, TransferPayload } from './types';
 import { RootState } from '../store';
-import { useIsAuthenticated } from '../auth/use';
+import { useIsAuthenticated } from '../user/use';
 import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
 

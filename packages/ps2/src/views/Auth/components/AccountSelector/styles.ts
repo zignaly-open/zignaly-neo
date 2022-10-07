@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { styledIf } from '@zignaly-open/ui';
-import { NiceScrollbar } from '@zignaly-open/ui/src/utils/css';
+import { NiceScrollbar } from '@zignaly-open/ui/lib/utils/css';
 
 export const Button = styled.button<{ isMenu: boolean }>`
   display: flex;

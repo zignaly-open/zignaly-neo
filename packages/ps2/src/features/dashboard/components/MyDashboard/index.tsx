@@ -20,7 +20,7 @@ import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types'
 import { DashboardTableDataType } from './types';
 import { ServiceName } from '../ServiceName';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
-import { useActiveExchange } from '../../../auth/use';
+import { useActiveExchange } from '../../../user/use';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
