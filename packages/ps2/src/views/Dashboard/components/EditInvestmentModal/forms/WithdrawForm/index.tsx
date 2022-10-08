@@ -15,7 +15,7 @@ import {
   useInvestmentDetails,
   useSelectedInvestment,
   useWithdrawInvestment,
-} from '../../../../../../apis/dashboard/use';
+} from '../../../../../../apis/investment/use';
 import { EditInvestmentValidation } from './validations';
 import { WithdrawFormData } from './types';
 import { ChangeViewFn, EditInvestmentViews } from '../../types';

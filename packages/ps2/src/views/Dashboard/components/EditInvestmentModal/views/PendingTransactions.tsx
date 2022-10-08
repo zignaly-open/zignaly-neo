@@ -13,7 +13,7 @@ import { useTranslation } from 'react-i18next';
 import {
   useInvestmentDetails,
   useSelectedInvestment,
-} from '../../../../../apis/dashboard/use';
+} from '../../../../../apis/investment/use';
 
 const PendingTransactions: React.FC<{
   setView: ChangeViewFn;

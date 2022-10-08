@@ -2,15 +2,16 @@ import React, { useEffect } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import { Button, Typography } from '@zignaly-open/ui';
 import { Highline } from '../styles';
-import { useCoins, useInvestments } from '../../../../../apis/dashboard/use';
+import { useInvestments } from '../../../../../apis/investment/use';
 import { ModalActions } from 'components/ModalContainer/styles';
 import { useActiveExchange } from '../../../../../apis/user/use';
+import { useActiveExchangeCoins } from '../../../../../apis/coin/use';
 
 function EditInvestmentSuccessModal({ close }: { close: () => void }) {
   const { t } = useTranslation('edit-investment');
   const exchange = useActiveExchange();
   const { refetch: refetchInvestments } = useInvestments(exchange?.internalId);
-  const { refetch: refetchCoins } = useCoins();
+  const { refetch: refetchCoins } = useActiveExchangeCoins();
   useEffect(() => {
     refetchInvestments();
     refetchCoins();

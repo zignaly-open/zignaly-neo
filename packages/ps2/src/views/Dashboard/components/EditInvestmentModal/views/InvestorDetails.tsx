@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar, Typography } from '@zignaly-open/ui';
 import { Investor, InvestorData, InvestorName } from '../styles';
 import { getServiceLogo } from 'util/images';
-import { useSelectedInvestment } from '../../../../../apis/dashboard/use';
+import { useSelectedInvestment } from '../../../../../apis/investment/use';
 import { useServiceDetails } from '../../../../../apis/trader/use';
 import { useTranslation } from 'react-i18next';
 

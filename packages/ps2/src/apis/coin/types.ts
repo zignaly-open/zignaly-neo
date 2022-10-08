@@ -1,4 +1,4 @@
-export interface CoinsState {
+export interface CoinState {
   coins?: Coins;
 }
 

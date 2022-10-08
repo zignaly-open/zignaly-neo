@@ -4,7 +4,7 @@ import baseQuery from '../baseQuery';
 
 export const api = createApi({
   baseQuery,
-  reducerPath: 'dashboardApi',
+  reducerPath: 'coinApi',
   endpoints: (builder) => ({
     coins: builder.query<Coins, string>({
       query: (exchangeInternalId) => ({

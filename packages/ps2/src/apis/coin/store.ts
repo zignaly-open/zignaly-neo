@@ -1,8 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { CoinsState } from './types';
+import { CoinState } from './types';
 import { api } from './api';
 
-const initialState: CoinsState = {};
+const initialState: CoinState = {};
 
 export const coinsSlice = createSlice({
   name: 'coins',

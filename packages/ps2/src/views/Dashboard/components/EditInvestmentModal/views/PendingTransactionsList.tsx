@@ -11,7 +11,7 @@ import {
   useCurrentBalance,
   useInvestmentDetails,
   useSelectedInvestment,
-} from '../../../../../apis/dashboard/use';
+} from '../../../../../apis/investment/use';
 import { ModalActions } from 'components/ModalContainer/styles';
 
 const PendingTransactionsList: React.FC<{

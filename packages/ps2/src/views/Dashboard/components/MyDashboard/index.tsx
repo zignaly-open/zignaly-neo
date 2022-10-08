@@ -9,13 +9,12 @@ import React, { useCallback, useMemo } from 'react';
 import { Heading, Inline, Layout } from './styles';
 import { useTranslation } from 'react-i18next';
 import {
-  useCoins,
   useInvestments,
   useSetSelectedInvestment,
-} from '../../../../apis/dashboard/use';
+} from '../../../../apis/investment/use';
 import BigNumber from 'bignumber.js';
 import { formatDateFromDays } from './util';
-import { Investment } from '../../../../apis/dashboard/types';
+import { Investment } from '../../../../apis/investment/types';
 import { sortBigNumbers, stringSort } from '../../../../util/numbers';
 import { BalanceSummary } from '../BalanceSummary';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
@@ -25,6 +24,7 @@ import { DashboardTableDataType } from './types';
 import { ServiceName } from '../ServiceName';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
+import { useActiveExchangeCoins } from '../../../../apis/coin/use';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -34,7 +34,7 @@ const MyDashboard: React.FC = () => {
   });
   const selectInvestment = useSetSelectedInvestment();
   // we do not use the results of this till before the modal
-  useCoins();
+  useActiveExchangeCoins();
   const { showModal } = useModal();
 
   const onClickEditInvestment = (service: Investment) => {

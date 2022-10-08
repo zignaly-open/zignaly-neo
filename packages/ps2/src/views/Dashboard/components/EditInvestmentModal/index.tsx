@@ -10,14 +10,14 @@ import WithdrawFunds from './views/WithdrawFunds';
 import PendingTransactionsList from './views/PendingTransactionsList';
 import ModalContainer from 'components/ModalContainer';
 import {
-  useCoins,
   useInvestmentDetails,
   useSelectedInvestment,
-} from '../../../../apis/dashboard/use';
+} from '../../../../apis/investment/use';
 import WithdrawPerform from './views/WithdrawPerform';
 import EditInvestmentSuccess from './views/EditInvestmentSuccess';
 import WithdrawModalSuccess from './views/WithdrawSuccess';
 import { useServiceDetails } from '../../../../apis/trader/use';
+import { useActiveExchangeCoins } from '../../../../apis/coin/use';
 
 function EditInvestmentModal({
   close,
@@ -30,7 +30,7 @@ function EditInvestmentModal({
     service.serviceId,
   );
   const { isLoading: isLoadingService } = useServiceDetails(service.serviceId);
-  const { isLoading: isLoadingCoins } = useCoins();
+  const { isLoading: isLoadingCoins } = useActiveExchangeCoins();
 
   const [view, setView] = useState<EditInvestmentViews>(
     EditInvestmentViews.EditInvestment,

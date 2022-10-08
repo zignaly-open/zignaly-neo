@@ -31,7 +31,7 @@ import {
   useSelectedInvestment,
   useUpdateTakeProfitAndInvestMore,
   useUpdateTakeProfitPercentage,
-} from '../../../../../../apis/dashboard/use';
+} from '../../../../../../apis/investment/use';
 import { EditFormData, EditInvestmentFormProps } from './types';
 import { EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
