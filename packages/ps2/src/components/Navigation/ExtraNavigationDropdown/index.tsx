@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
 import { supportedLanguages } from '../../../util/i18next';
 import { useChangeLocale } from '../../../apis/user/use';
-import { useFirstOwnedService } from '../../../apis/trader/use';
+import { useFirstOwnedService } from '../../../apis/service/use';
 import { generatePath, useNavigate } from 'react-router-dom';
 import {
   ROUTE_BECOME_TRADER,

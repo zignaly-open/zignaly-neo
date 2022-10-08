@@ -5,13 +5,13 @@ import investmentReducer from './investment/store';
 import { api as investmentApi } from './investment/api';
 import coinReducer from './coin/store';
 import { api as coinApi } from './coin/api';
-import traderReducer from './trader/store';
-import { api as traderApi } from './trader/api';
+import serviceReducer from './service/store';
+import { api as serviceApi } from './service/api';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { UserState } from './user/types';
 import { InvestmentState } from './investment/types';
-import { TraderState } from './trader/types';
+import { ServiceState } from './service/types';
 import { CoinState } from './coin/types';
 
 const persistConfig = {
@@ -23,7 +23,7 @@ const persistConfig = {
     'coinApi',
     'investmentApi',
     'dashboardApi',
-    'traderApi',
+    'serviceApi',
   ] as string[],
 };
 
@@ -32,13 +32,13 @@ export const store = configureStore({
     persistConfig,
     combineReducers({
       [userApi.reducerPath]: userApi.reducer,
-      [traderApi.reducerPath]: traderApi.reducer,
+      [serviceApi.reducerPath]: serviceApi.reducer,
       [investmentApi.reducerPath]: investmentApi.reducer,
       [coinApi.reducerPath]: coinApi.reducer,
       user: userReducer,
       coin: coinReducer,
       investment: investmentReducer,
-      trader: traderReducer,
+      service: serviceReducer,
     }),
   ),
   middleware: (getDefaultMiddleware) =>
@@ -46,7 +46,7 @@ export const store = configureStore({
       serializableCheck: false,
     })
       .concat(userApi.middleware)
-      .concat(traderApi.middleware)
+      .concat(serviceApi.middleware)
       .concat(coinApi.middleware)
       .concat(investmentApi.middleware),
 });
@@ -58,7 +58,7 @@ export type RootState = {
   user: UserState;
   coin: CoinState;
   investment: InvestmentState;
-  trader: TraderState;
+  service: ServiceState;
 };
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;

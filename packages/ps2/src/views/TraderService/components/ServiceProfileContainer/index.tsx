@@ -1,6 +1,6 @@
 import React from 'react';
 import { Service } from '../../../../apis/dashboard/types';
-import { useIsServiceOwner } from '../../../../apis/trader/use';
+import { useIsServiceOwner } from '../../../../apis/service/use';
 import { Box } from '@mui/system';
 import { getServiceLogo } from '../../../../util/images';
 import { Avatar } from '@zignaly-open/ui';

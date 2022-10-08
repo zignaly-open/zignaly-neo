@@ -32,7 +32,7 @@ import {
   useServiceDetails,
   useTraderServiceBalance,
   useTraderServiceManagement,
-} from '../../../../apis/trader/use';
+} from '../../../../apis/service/use';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import EditMinimumBalanceModal from '../EditMinimumBalanceModal';
 import TransferFundsModal from '../TransferFundsModal';
@@ -42,7 +42,7 @@ import {
   TraderServiceBalance,
   TraderServiceFull,
   TraderServiceManagement,
-} from '../../../../apis/trader/types';
+} from '../../../../apis/service/types';
 
 function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   const theme = useTheme() as Theme;

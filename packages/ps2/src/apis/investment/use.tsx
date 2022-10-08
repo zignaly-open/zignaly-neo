@@ -7,18 +7,19 @@ import {
   useWithdrawInvestmentMutation,
 } from './api';
 import { useActiveExchange } from '../user/use';
-import { Investment } from './types';
+import { Investment, InvestmentDetails } from './types';
 import { RootState } from '../store';
 import { setSelectedInvestment } from './store';
 import { useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { useCoinBalances } from '../coin/use';
+import { QueryReturnType } from '../../util/queryReturnType';
 
 export const useInvestments = useInvestmentsQuery;
 
 export function useInvestmentDetails(
   serviceId: string,
-): ReturnType<typeof useInvestmentsQuery> {
+): QueryReturnType<InvestmentDetails> {
   const exchange = useActiveExchange();
   return useInvestmentDetailsQuery({
     exchangeInternalId: exchange?.internalId,

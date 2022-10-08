@@ -33,7 +33,7 @@ import { useTranslation } from 'react-i18next';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import AuthVerifyModal from '../../views/Auth/components/AuthVerifyModal';
 import { getImageOfAccount } from '../../util/images';
-import { useLazyTraderServicesQuery } from '../trader/api';
+import { useLazyTraderServicesQuery } from '../service/api';
 
 const throwBackendErrorInOurFormat = async <T,>(
   promise: Promise<T>,

@@ -14,7 +14,7 @@ import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
 
 export function useTraderServices(): TraderService[] | undefined {
-  return useSelector((store: RootState) => store.trader.traderServices);
+  return useSelector((store: RootState) => store.service.traderServices);
 }
 
 export function useIsServiceOwner(serviceId: string) {

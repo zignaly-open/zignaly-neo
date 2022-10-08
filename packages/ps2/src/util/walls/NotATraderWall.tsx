@@ -1,6 +1,6 @@
 import React from 'react';
 import { generatePath, Navigate, Outlet } from 'react-router-dom';
-import { useFirstOwnedService } from '../../apis/trader/use';
+import { useFirstOwnedService } from '../../apis/service/use';
 import { ROUTE_TRADING_SERVICE } from '../../routes';
 
 const NotATraderWall: React.FC = () => {

@@ -3,7 +3,7 @@ import { Avatar, Typography } from '@zignaly-open/ui';
 import { Investor, InvestorData, InvestorName } from '../styles';
 import { getServiceLogo } from 'util/images';
 import { useSelectedInvestment } from '../../../../../apis/investment/use';
-import { useServiceDetails } from '../../../../../apis/trader/use';
+import { useServiceDetails } from '../../../../../apis/service/use';
 import { useTranslation } from 'react-i18next';
 
 const InvestorDetails: React.FC = () => {

@@ -6,7 +6,7 @@ import { TraderServicePageContainer } from 'views/TraderService/components/style
 import {
   useServiceDetails,
   useTraderServiceTitle,
-} from '../../apis/trader/use';
+} from '../../apis/service/use';
 import { useIsAuthenticated } from '../../apis/user/use';
 import { ROUTE_404, ROUTE_LOGIN, ROUTE_PROFIT_SHARING } from '../../routes';
 import { Service } from '../../apis/dashboard/types';

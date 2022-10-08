@@ -16,7 +16,7 @@ import {
 import WithdrawPerform from './views/WithdrawPerform';
 import EditInvestmentSuccess from './views/EditInvestmentSuccess';
 import WithdrawModalSuccess from './views/WithdrawSuccess';
-import { useServiceDetails } from '../../../../apis/trader/use';
+import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 
 function EditInvestmentModal({

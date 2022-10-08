@@ -10,7 +10,7 @@ import {
   useServiceDetails,
   useTraderServiceManagement,
   useTraderServiceUpdateMinimum,
-} from '../../../../apis/trader/use';
+} from '../../../../apis/service/use';
 import ModalContainer from '../../../../components/ModalContainer';
 import { ModalActions } from '../../../../components/ModalContainer/styles';
 import { Box, Modal } from '@mui/material';

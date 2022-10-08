@@ -31,7 +31,7 @@ import {
   useTraderServiceBalance,
   useServiceDetails,
   useTraderServiceTransferFunds,
-} from '../../../../apis/trader/use';
+} from '../../../../apis/service/use';
 import { LoaderContainer } from '../../../Dashboard/components/EditInvestmentModal/styles';
 import { useToast } from '../../../../util/hooks/useToast';
 

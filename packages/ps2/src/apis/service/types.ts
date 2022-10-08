@@ -1,6 +1,6 @@
 type TraderServiceStatus = 'FULL' | string;
 
-export type TraderState = {
+export type ServiceState = {
   traderServices?: TraderService[];
   activeServiceId?: string;
 };
