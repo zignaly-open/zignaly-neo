@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { InvestmentState, Investment } from './types';
-import { api } from './api';
+import { InvestmentState, InvestmentServiceDetails } from './types';
 
 const initialState: InvestmentState = {};
 
@@ -8,17 +7,12 @@ export const dashboardSlice = createSlice({
   name: 'dashboard',
   initialState,
   reducers: {
-    setSelectedInvestment: (state, action: PayloadAction<Investment>) => {
+    setSelectedInvestment: (
+      state,
+      action: PayloadAction<InvestmentServiceDetails>,
+    ) => {
       state.selectedInvestment = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      api.endpoints.investments.matchFulfilled,
-      (state, { payload }) => {
-        state.investments = payload;
-      },
-    );
   },
 });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Service } from '../../../../apis/dashboard/types';
+import { Service } from '../../../../apis/service/types';
 import {
   Button,
   PencilIcon,
@@ -20,6 +20,7 @@ import {
   ServiceHeader,
   StyledCalendarMonthIcon,
   StyledPersonIcon,
+  InvestButtonWrap,
   StyledVerifiedIcon,
 } from './styles';
 import { formatDistance } from 'date-fns';
@@ -36,19 +37,25 @@ export const InvestButton: React.FC<{
 }> = ({ service, onClick }) => {
   const { t } = useTranslation('service');
   return (
-    <Button
-      onClick={onClick}
-      caption={t('invest-button.invest-now')}
-      bottomElement={
-        <InvestButtonSubtext variant={'h5'} color='neutral150' weight='regular'>
-          {t('invest-button.x-success-fee', {
-            fee: service.successFee,
-          })}
-        </InvestButtonSubtext>
-      }
-      variant={'primary'}
-      size={'xlarge'}
-    />
+    <InvestButtonWrap>
+      <Button
+        onClick={onClick}
+        caption={t('invest-button.invest-now')}
+        bottomElement={
+          <InvestButtonSubtext
+            variant={'h5'}
+            color='neutral150'
+            weight='regular'
+          >
+            {t('invest-button.x-success-fee', {
+              fee: service.successFee,
+            })}
+          </InvestButtonSubtext>
+        }
+        variant={'primary'}
+        size={'xlarge'}
+      />
+    </InvestButtonWrap>
   );
 };
 
@@ -59,7 +66,9 @@ export const InvestedButton: React.FC<{
   const { t } = useTranslation(['service', 'action']);
   return (
     <InvestButtonContainer>
-      <Typography color='neutral200'>{t('invested-label')}</Typography>
+      <Typography variant={'body2'} color='neutral200'>
+        {t('invested-label')}
+      </Typography>
       <BigNumber ssc={service.ssc} value={service.invested} green />
       <TextButton
         leftElement={<PencilIcon color='#65647E' width={16} height={16} />}

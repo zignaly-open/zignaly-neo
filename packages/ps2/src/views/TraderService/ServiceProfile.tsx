@@ -9,7 +9,7 @@ import {
 } from '../../apis/service/use';
 import { useIsAuthenticated } from '../../apis/user/use';
 import { ROUTE_404, ROUTE_LOGIN, ROUTE_PROFIT_SHARING } from '../../routes';
-import { Service } from '../../apis/dashboard/types';
+import { Service } from '../../apis/service/types';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { BackendError, ErrorCodes } from '../../util/errors';
 import CriticalError from '../../components/Stub/CriticalError';

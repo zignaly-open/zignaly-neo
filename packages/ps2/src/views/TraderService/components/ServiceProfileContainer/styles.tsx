@@ -61,11 +61,21 @@ export const Separator = styled.span`
 
 export const InvestButtonContainer = styled.div`
   text-align: center;
+  height: 88px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   & > div span {
     font-weight: 500;
     font-size: 22px !important;
     line-height: 36px !important;
+  }
+`;
+
+export const InvestButtonWrap = styled.div`
+  button > div {
+    height: 83px !important;
   }
 `;
 
@@ -78,6 +88,6 @@ export const BigNumberWrapper = styled.div`
 `;
 
 export const InvestButtonSubtext = styled(Typography)`
-  font-size: 11px;
+  font-size: 12px;
   line-height: 16px;
 `;

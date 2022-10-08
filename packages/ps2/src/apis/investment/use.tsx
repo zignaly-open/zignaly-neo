@@ -7,7 +7,7 @@ import {
   useWithdrawInvestmentMutation,
 } from './api';
 import { useActiveExchange } from '../user/use';
-import { Investment, InvestmentDetails } from './types';
+import { InvestmentDetails, InvestmentServiceDetails } from './types';
 import { RootState } from '../store';
 import { setSelectedInvestment } from './store';
 import { useMemo } from 'react';
@@ -27,12 +27,14 @@ export function useInvestmentDetails(
   });
 }
 
-export function useSetSelectedInvestment(): (service: Investment) => void {
+export function useSetSelectedInvestment(): (
+  service: InvestmentServiceDetails,
+) => void {
   const dispatch = useDispatch();
   return (service) => dispatch(setSelectedInvestment(service));
 }
 
-export function useSelectedInvestment(): Investment {
+export function useSelectedInvestment(): InvestmentServiceDetails {
   return useSelector((state: RootState) => state.investment)
     ?.selectedInvestment;
 }
