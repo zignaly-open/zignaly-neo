@@ -36,6 +36,7 @@ const customFetchBase: BaseQueryFn<
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   const result = await baseQuery(args, api, extraOptions);
+
   if (
     result?.error?.status === 401 &&
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -44,7 +45,7 @@ const customFetchBase: BaseQueryFn<
   ) {
     api.dispatch(logout());
   } else if (
-    +(api.getState() as RootState).user.sessionExpiryDate -
+    +new Date((api.getState() as RootState).user.sessionExpiryDate) -
       TIME_TO_START_REFRESHING_TOKEN >
     Date.now()
   ) {
