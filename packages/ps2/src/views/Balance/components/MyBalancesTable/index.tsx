@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useMyBalances } from '../../../../apis/myBalances/use';
 import {
   Table,
   PriceLabel,
@@ -10,14 +9,20 @@ import {
 } from '@zignaly-open/ui';
 import { MyBalancesTableDataType } from './types';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
-import {
-  AggregatedBalances,
-  CoinBalance,
-  CoinDetail,
-} from '../../../../apis/myBalances/types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { allowedDeposits } from 'util/coins';
+import {
+  useCoinBalances,
+  useExchangeCoinsList,
+} from '../../../../apis/coin/use';
+import {
+  CoinBalance,
+  CoinDetail,
+  CoinBalances,
+  CoinDetails,
+} from '../../../../apis/coin/types';
+import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
 
 const initialStateTable = {
   sortBy: [
@@ -30,7 +35,8 @@ const initialStateTable = {
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
-  const balancesEndpoint = useMyBalances();
+  const balancesEndpoint = useCoinBalances(true);
+  const coinsEndpoint = useExchangeCoinsList();
   const { exchangeType } = useActiveExchange();
 
   const columns: TableProps<MyBalancesTableDataType>['columns'] = useMemo(
@@ -102,8 +108,10 @@ const MyBalancesTable = (): JSX.Element => {
   );
 
   const getFilteredData = useCallback(
-    (balances: AggregatedBalances) =>
-      Object.entries<CoinBalance & CoinDetail>(balances || {})
+    (coins: CoinDetails, balances: CoinBalances) => {
+      return Object.entries<CoinBalance & CoinDetail>(
+        mergeCoinsAndBalances(coins, balances),
+      )
         .filter(
           ([coin, balance]) =>
             allowedDeposits[exchangeType]?.includes(coin) ||
@@ -129,18 +137,19 @@ const MyBalancesTable = (): JSX.Element => {
           valueUSD: {
             balanceTotalUSDT: balance.balanceTotalUSDT,
           },
-        })),
+        }));
+    },
     [exchangeType],
   );
 
   return (
     <LayoutContentWrapper
-      endpoint={[balancesEndpoint]}
-      content={([balances]: [AggregatedBalances]) => (
+      endpoint={[coinsEndpoint, balancesEndpoint]}
+      content={([coins, balances]: [CoinDetails, CoinBalances]) => (
         <Table
           type={'pagedWithData'}
           columns={columns}
-          data={getFilteredData(balances)}
+          data={getFilteredData(coins, balances)}
           initialState={initialStateTable}
           hideOptionsButton={false}
           isUserTable={false}

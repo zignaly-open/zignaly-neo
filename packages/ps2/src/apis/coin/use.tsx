@@ -1,9 +1,24 @@
-import { useCoinsQuery } from './api';
+import { useAllCoinsQuery, useCoinsQuery } from './api';
 import { useActiveExchange } from '../user/use';
-import { Coins } from './types';
+import { CoinBalances, CoinDetails } from './types';
 import { QueryReturnType } from '../../util/queryReturnType';
 
-export function useActiveExchangeCoins(): QueryReturnType<Coins> {
+export function useCoinBalances(
+  convert = false,
+): QueryReturnType<CoinBalances> {
   const exchange = useActiveExchange();
-  return useCoinsQuery(exchange?.internalId, { skip: !!exchange?.internalId });
+  return useCoinsQuery(
+    {
+      exchangeInternalId: exchange?.internalId,
+      convert,
+    },
+    { skip: !exchange?.internalId },
+  );
+}
+
+export function useExchangeCoinsList(): QueryReturnType<CoinDetails> {
+  const exchange = useActiveExchange();
+  return useAllCoinsQuery(exchange?.exchangeType, {
+    skip: !exchange?.exchangeType,
+  });
 }

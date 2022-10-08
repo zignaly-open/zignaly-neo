@@ -24,7 +24,7 @@ import { DashboardTableDataType } from './types';
 import { ServiceName } from '../ServiceName';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
-import { useActiveExchangeCoins } from '../../../../apis/coin/use';
+import { useCoinBalances } from '../../../../apis/coin/use';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -34,7 +34,7 @@ const MyDashboard: React.FC = () => {
   });
   const selectInvestment = useSetSelectedInvestment();
   // we do not use the results of this till before the modal
-  useActiveExchangeCoins();
+  useCoinBalances();
   const { showModal } = useModal();
 
   const onClickEditInvestment = (service: Investment) => {

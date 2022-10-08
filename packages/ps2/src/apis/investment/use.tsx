@@ -12,7 +12,7 @@ import { RootState } from '../store';
 import { setSelectedInvestment } from './store';
 import { useMemo } from 'react';
 import BigNumber from 'bignumber.js';
-import { useActiveExchangeCoins } from '../coin/use';
+import { useCoinBalances } from '../coin/use';
 
 export const useInvestments = useInvestmentsQuery;
 
@@ -38,7 +38,7 @@ export function useSelectedInvestment(): Investment {
 
 export function useCurrentBalance(): { id: string; balance: string } {
   const service = useSelectedInvestment();
-  const { data: coins } = useActiveExchangeCoins();
+  const { data: coins } = useCoinBalances();
 
   return useMemo(
     () => ({

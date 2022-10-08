@@ -9,11 +9,8 @@ import traderReducer from './trader/store';
 import { api as traderApi } from './trader/api';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
-import { api as myBalancesApi } from './myBalances/api';
-import myBalancesReducer from './myBalances/store';
 import { UserState } from './user/types';
 import { InvestmentState } from './investment/types';
-import { MyBalancesState } from './myBalances/types';
 import { TraderState } from './trader/types';
 import { CoinState } from './coin/types';
 
@@ -26,7 +23,6 @@ const persistConfig = {
     'coinApi',
     'investmentApi',
     'dashboardApi',
-    'myBalancesApi',
     'traderApi',
   ] as string[],
 };
@@ -36,14 +32,12 @@ export const store = configureStore({
     persistConfig,
     combineReducers({
       [userApi.reducerPath]: userApi.reducer,
-      [myBalancesApi.reducerPath]: myBalancesApi.reducer,
       [traderApi.reducerPath]: traderApi.reducer,
       [investmentApi.reducerPath]: investmentApi.reducer,
       [coinApi.reducerPath]: coinApi.reducer,
       user: userReducer,
       coin: coinReducer,
       investment: investmentReducer,
-      myBalances: myBalancesReducer,
       trader: traderReducer,
     }),
   ),
@@ -52,7 +46,6 @@ export const store = configureStore({
       serializableCheck: false,
     })
       .concat(userApi.middleware)
-      .concat(myBalancesApi.middleware)
       .concat(traderApi.middleware)
       .concat(coinApi.middleware)
       .concat(investmentApi.middleware),
@@ -65,7 +58,6 @@ export type RootState = {
   user: UserState;
   coin: CoinState;
   investment: InvestmentState;
-  myBalances: MyBalancesState;
   trader: TraderState;
 };
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}

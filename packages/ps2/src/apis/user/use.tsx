@@ -34,7 +34,6 @@ import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import AuthVerifyModal from '../../views/Auth/components/AuthVerifyModal';
 import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../trader/api';
-import { useLazyAllCoinsQuery } from '../myBalances/api';
 
 const throwBackendErrorInOurFormat = async <T,>(
   promise: Promise<T>,
@@ -183,33 +182,31 @@ export const useGetExchangeByInternalId = (): ((
 };
 
 export function useActiveExchange(): ExtendedExchange | undefined {
-  const user = useSelector((state: RootState) => state.user)?.user as UserData;
-  const getExchange = useGetExchangeByInternalId();
+  const { user, activeExchangeInternalId: internalId } = useSelector(
+    (state: RootState) => state.user,
+  );
   const dispatch = useDispatch();
-  const [loadAllCoins] = useLazyAllCoinsQuery();
-  const activeExchange = getExchange();
+
+  const defaultExchange = user?.exchanges?.[0];
+  const exchange = user?.exchanges?.find((x) => x.internalId === internalId);
+
   useEffect(() => {
-    const defaultExchange = user?.exchanges?.[0];
-    if (!activeExchange && defaultExchange) {
+    if (!exchange && defaultExchange) {
       dispatch(setActiveExchangeInternalId(defaultExchange.internalId));
-      loadAllCoins(defaultExchange?.exchangeType);
     }
-  }, [activeExchange]);
-  return getExchange();
+  }, [exchange]);
+
+  const result = exchange || defaultExchange || undefined;
+  return (
+    result && {
+      ...result,
+      image: getImageOfAccount(user.exchanges.indexOf(result)),
+    }
+  );
 }
 
 export function useSelectExchange(): (exchangeInternalId: string) => void {
   const dispatch = useDispatch();
-  const activeExchange = useActiveExchange();
-  const getExchangeByInternalId = useGetExchangeByInternalId();
-  const [loadAllCoins] = useLazyAllCoinsQuery();
-  return (exchangeInternalId) => {
-    const newSelectedExchange = getExchangeByInternalId(exchangeInternalId);
-    const needsCoinsReFetched =
-      activeExchange?.exchangeType !== newSelectedExchange?.exchangeType;
+  return (exchangeInternalId) =>
     dispatch(setActiveExchangeInternalId(exchangeInternalId));
-    if (needsCoinsReFetched) {
-      loadAllCoins(newSelectedExchange?.exchangeType);
-    }
-  };
 }

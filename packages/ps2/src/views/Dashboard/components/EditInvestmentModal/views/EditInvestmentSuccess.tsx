@@ -5,13 +5,13 @@ import { Highline } from '../styles';
 import { useInvestments } from '../../../../../apis/investment/use';
 import { ModalActions } from 'components/ModalContainer/styles';
 import { useActiveExchange } from '../../../../../apis/user/use';
-import { useActiveExchangeCoins } from '../../../../../apis/coin/use';
+import { useCoinBalances } from '../../../../../apis/coin/use';
 
 function EditInvestmentSuccessModal({ close }: { close: () => void }) {
   const { t } = useTranslation('edit-investment');
   const exchange = useActiveExchange();
   const { refetch: refetchInvestments } = useInvestments(exchange?.internalId);
-  const { refetch: refetchCoins } = useActiveExchangeCoins();
+  const { refetch: refetchCoins } = useCoinBalances();
   useEffect(() => {
     refetchInvestments();
     refetchCoins();
