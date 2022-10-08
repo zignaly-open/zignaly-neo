@@ -27,8 +27,8 @@ import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
 const initialStateTable = {
   sortBy: [
     {
-      id: 'totalBalance',
-      desc: false,
+      id: 'valueBTC',
+      desc: true,
     },
   ],
 };
