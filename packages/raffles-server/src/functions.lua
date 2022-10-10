@@ -47,14 +47,6 @@ local function bid(keys, args)
   local userId = args[1]
   local auctionId = args[2]
 
-  -- Check balance
-  local balance = redis.call('HGET', keyBalance, userId)
-  if not balance then
-    return -1
-  elseif tonumber(balance) < 1 then
-    return -2
-  end
-
   -- Get auction
   local auction = redis.call('HGETALL', keyAuction)
   local start = tonumber(auction[2])
@@ -65,6 +57,14 @@ local function bid(keys, args)
 
   if not expire or not maxExpire or not bidStep then
     return -3
+  end
+
+  -- Check balance
+  local balance = redis.call('HGET', keyBalance, userId)
+  if not balance then
+    return -1
+  elseif tonumber(balance) < bidFee then
+    return -2
   end
 
   -- Get time in microseconds

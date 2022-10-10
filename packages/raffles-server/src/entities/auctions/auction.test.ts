@@ -80,6 +80,13 @@ describe('Auctions', () => {
     expect(body.errors[0].message).toBe('Insufficient balance');
   });
 
+  it('should not let bid with money than bidFee', async () => {
+    const [, aliceToken] = await createAlice(0.001);
+    const auction = await createAuction();
+    const { body } = await makeBid(auction, aliceToken);
+    expect(body.errors[0].message).toBe('Insufficient balance');
+  });
+
   it('should withdraw money after making bids', async () => {
     const [alice, aliceToken] = await createAlice(300);
     const auction = await createAuction();
