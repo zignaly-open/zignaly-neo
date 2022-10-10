@@ -36,11 +36,7 @@ export const resolvers = {
     balance: async (_: any, __: any, { user }: ApolloContext) => {
       if (!user) return null;
 
-      try {
-        return await getUserBalanceObject(user);
-      } catch (e) {
-        return null;
-      }
+      return await getUserBalanceObject(user);
     },
     checkUsername: async (
       _: any,

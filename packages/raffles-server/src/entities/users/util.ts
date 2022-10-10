@@ -7,6 +7,7 @@ import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from './constants';
 import { getUserBalance } from '../../cybavo';
 import { ContextUser } from '../../types';
+import redisService from '../../redisService';
 
 export function signJwtToken(user: User) {
   return new Promise<string>((resolve, reject) =>
@@ -98,10 +99,14 @@ export async function validateDiscordName(
 }
 
 export async function emitBalanceChanged(user: ContextUser) {
+  const balance = await getUserBalance(user.publicAddress);
+  // Update redis balance data and get actual balance
+  const currentBalance = await redisService.processBalance(balance, user.id);
+
   pubsub.publish(BALANCE_CHANGED, {
     balanceChanged: {
       id: user.id,
-      balance: await getUserBalance(user.publicAddress),
+      balance: currentBalance,
     },
   });
 }
