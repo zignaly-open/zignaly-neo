@@ -47,7 +47,8 @@ const MyBalancesTable = (): JSX.Element => {
         Cell: ({ cell: { value } }) => (
           <CoinLabel coin={value.symbol} name={value.name} />
         ),
-        sortType: (a, b) => sortByValue(a.values.symbol, b.values.symbol),
+        sortType: (a, b) =>
+          a.values.coin?.symbol?.localeCompare(b.values.coin?.symbol),
       },
       {
         Header: t('tableHeader.totalBalance'),
