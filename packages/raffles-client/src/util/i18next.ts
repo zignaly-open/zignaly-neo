@@ -13,6 +13,7 @@ const ns = [
   'balance',
   'how-it-works',
   'footer',
+  'exclusive-wallets',
 ];
 const supportedLngs = ['en'];
 

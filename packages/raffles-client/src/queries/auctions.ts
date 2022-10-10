@@ -30,6 +30,7 @@ export const GET_AUCTIONS = gql`
       chain
       isClaimed
       isFinalized
+      isExclusiveToKuCoin
       bids {
         position
         user {

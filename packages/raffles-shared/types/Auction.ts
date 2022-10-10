@@ -42,4 +42,5 @@ export type AuctionType = {
   isClaimed: boolean;
   inRedis: boolean;
   isFinalized: boolean;
+  isExclusiveToKuCoin: boolean;
 };

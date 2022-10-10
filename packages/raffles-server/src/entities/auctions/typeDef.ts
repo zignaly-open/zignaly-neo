@@ -42,6 +42,7 @@ export const typeDef = gql`
     bids: [Bid]
     numberOfWinners: Int
     chain: String
+    isExclusiveToKuCoin: Boolean
   }
 
   extend type Query {

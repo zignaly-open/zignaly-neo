@@ -13,6 +13,7 @@ import { showToast } from 'util/showToast';
 import { useModal } from 'mui-modal-provider';
 import NotEnoughZIGModal from 'components/Modals/NotEnoughZIG';
 import ConnectWalletModal from 'components/Modals/ConnectWallet';
+import ExclusiveWallet from 'components/Modals/ExclusiveWallet';
 
 enum BidButtonState {
   NotLoggedIn,
@@ -58,6 +59,8 @@ const BidButton: React.FC<{
   const bidClickHandler = useCallback(() => {
     if (state === BidButtonState.NotLoggedIn) {
       showModal(ConnectWalletModal);
+    } else if (auction.isExclusiveToKuCoin && !window.ethereum.isKuCoinWallet) {
+      showModal(ExclusiveWallet, { wallet: 'kucoin' });
     } else if (state === BidButtonState.NotEnoughFunds) {
       showModal(NotEnoughZIGModal);
     } else {

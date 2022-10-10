@@ -1,0 +1,6 @@
+{
+  "kucoin": {
+    "title": "Auction only for KuCoin Wallet",
+    "description": "This auction is restricted to KuCoin wallets only. In order to participate you have to connect from that wallet."
+  }
+}
