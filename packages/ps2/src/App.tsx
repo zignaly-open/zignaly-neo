@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Router from './Router';
 import theme from './theme';
 import * as Sentry from '@sentry/browser';
@@ -58,7 +58,9 @@ function App() {
                 <ModalProvider>
                   <Header />
                   <UpdateChecker />
-                  <Router />
+                  <Suspense fallback={null}>
+                    <Router />
+                  </Suspense>
                 </ModalProvider>
               </BrowserRouter>
             </PersistGate>
