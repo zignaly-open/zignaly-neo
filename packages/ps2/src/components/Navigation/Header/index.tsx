@@ -22,7 +22,12 @@ const Header: React.FC = () => {
     <ZigHeader
       leftElements={[
         <Link to={ROUTE_DASHBOARD} key='logo'>
-          <BrandImage height='32px' type='isotype' width='32px' />
+          <BrandImage
+            id='menu__logo'
+            height='32px'
+            type='isotype'
+            width='32px'
+          />
         </Link>,
         <HeaderLinksContainer key='links'>
           <NavigationLink

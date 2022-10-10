@@ -66,6 +66,7 @@ const ExtraNavigationDropdown: React.FC = () => {
       options={[
         {
           label: t('main-menu.dropdown-link-forTrading'),
+          id: 'menu__for-trading',
           onClick: () =>
             navigate(
               service
@@ -77,10 +78,12 @@ const ExtraNavigationDropdown: React.FC = () => {
         },
         {
           label: t('main-menu.dropdown-link-helpDocs'),
+          id: 'menu__help-docs',
           href: 'https://help.zignaly.com/hc/en-us',
         },
         {
           separator: true,
+          id: 'menu__language-switcher',
           label: (
             <>
               <GlobeLanguagesStyled

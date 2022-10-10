@@ -50,10 +50,13 @@ function AccountMenu(): React.ReactElement | null {
     return (
       <>
         <Link to={ROUTE_SIGNUP}>
-          <Button caption={t('account-menu.isAuth-button-signUp')} />
+          <Button
+            id={'menu-signup'}
+            caption={t('account-menu.isAuth-button-signUp')}
+          />
         </Link>
         <Link to={ROUTE_LOGIN}>
-          <LoginButton>
+          <LoginButton id={'menu-login'}>
             <UserIcon color={theme.neutral300} width={'16px'} height={'16px'} />
             <Typography variant={'buttonsm'} color={'neutral300'}>
               {t('account-menu.isAuth-button-logIn')}
@@ -84,6 +87,7 @@ function AccountMenu(): React.ReactElement | null {
               </AccountName>
             </AccountDropdown>
           ),
+          id: 'menu__account-switcher',
           children: (exchanges?.length > 1 ? exchanges : []).map(
             (exchange, index) => ({
               onClick: () => setActiveExchange(exchange.internalId),
@@ -107,14 +111,17 @@ function AccountMenu(): React.ReactElement | null {
         },
         {
           label: t('account-menu.notAuth-dropdown-link-dashboard'),
+          id: 'menu__dashboard',
           onClick: () => navigate(ROUTE_DASHBOARD),
         },
         {
           label: t('account-menu.notAuth-dropdown-link-balances'),
+          id: 'menu__my-balance',
           onClick: () => navigate(ROUTE_MY_BALANCES),
         },
         {
           separator: true,
+          id: 'menu__log-out',
           element: (
             <LogoutButtonWrap>
               <Button
