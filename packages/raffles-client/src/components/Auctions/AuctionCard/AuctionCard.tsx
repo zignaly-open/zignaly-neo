@@ -26,12 +26,25 @@ import {
 import ClaimButton from './ClaimButton';
 import useUpdatedAt from 'hooks/useUpdatedAt';
 import { ChainIcon } from 'components/common/ChainIcon';
+import { GET_AUCTIONS } from 'queries/auctions';
+import { useLazyQuery } from '@apollo/client';
+import useCurrentUser from 'hooks/useCurrentUser';
+import Loader from 'components/common/Loader';
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
 }> = ({ auction }) => {
   const { t } = useTranslation('auction');
-  const { isActive, hasWon, isStarted } = getWinningLosingStatus(auction);
+  useLazyQuery(GET_AUCTIONS, {
+    variables: {
+      id: auction.id,
+    },
+  });
+  const { user } = useCurrentUser();
+  const { isActive, hasWon, isStarted } = getWinningLosingStatus(
+    auction,
+    user?.id,
+  );
   const { showModal } = useModal();
   const leftRef = useRef(null);
   const rightRef = useRef(null);
@@ -41,12 +54,12 @@ const AuctionCard: React.FC<{
   // Add delay in case of last ms bid event
   const updatedAt = useUpdatedAt(
     isActive || !auction.startDate ? auction.expiresAt : auction.startDate,
-    100,
+    1000,
   );
 
   const showClaim = useMemo(
     () => (!updatedAt || +new Date() >= updatedAt) && hasWon,
-    [hasWon, updatedAt],
+    [hasWon, updatedAt, auction.isFinalized],
   );
 
   useEffect(() => {
@@ -68,33 +81,25 @@ const AuctionCard: React.FC<{
     <Item>
       <CardColumn ref={leftRef}>
         <CardHeaderLeft isColumn={isColumn}>
+          <ContainerChainIcon>
+            <ChainIcon chain={auction.chain} />
+          </ContainerChainIcon>
           <Box
-            width={1}
             display='flex'
-            alignItems='center'
-            gap={2}
-            justifyContent={{ xs: 'center', sm: 'flex-start' }}
+            flexDirection='column'
+            justifyContent='center'
+            alignItems='flex-start'
           >
-            <ContainerChainIcon>
-              <ChainIcon chain={auction.chain} />
-            </ContainerChainIcon>
-            <Box
-              display='flex'
-              flexDirection='column'
-              justifyContent='center'
-              alignItems='flex-start'
-            >
-              <Box display='flex' gap={1} whiteSpace='nowrap'>
-                <Typography variant='h2' color='neutral100'>
-                  {auction.title}
-                </Typography>
-              </Box>
-              <StyledTextButton
-                color='links'
-                caption={t('project-desc')}
-                onClick={() => showModal(ProjectDetailsModal, { auction })}
-              />
+            <Box display='flex' gap={1} whiteSpace='nowrap'>
+              <Typography variant='h2' color='neutral100'>
+                {auction.title}
+              </Typography>
             </Box>
+            <StyledTextButton
+              color='links'
+              caption={t('project-desc')}
+              onClick={() => showModal(ProjectDetailsModal, { auction })}
+            />
           </Box>
         </CardHeaderLeft>
         {auction.imageUrl && (
@@ -142,7 +147,11 @@ const AuctionCard: React.FC<{
           />
           <CardActions isColumn={isColumn}>
             {showClaim ? (
-              <ClaimButton auction={auction} />
+              auction.isFinalized ? (
+                <ClaimButton auction={auction} />
+              ) : (
+                <Loader />
+              )
             ) : (
               isColumn && (
                 <BidButton

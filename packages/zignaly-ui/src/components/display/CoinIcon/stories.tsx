@@ -1,8 +1,6 @@
-// Dependencies
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-// Components
 import CoinIcon, { CoinSizes } from "./index";
 
 export default {

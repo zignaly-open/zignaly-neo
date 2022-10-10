@@ -1,8 +1,6 @@
-// Dependencies
 import React, { useCallback } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
-// Components
 import ModalContainer from "../../ModalContainer";
 import Button from "../../../inputs/Button";
 import { Actions } from "../../styles";
@@ -10,7 +8,6 @@ import Typography from "components/display/Typography";
 import { Gap } from "utils/gap";
 import InputText from "components/inputs/InputText";
 
-// Types
 import { EditAPIKeysModalProps } from "./types";
 import { Key } from "./styles";
 import APISettings from "../components/APISettings";

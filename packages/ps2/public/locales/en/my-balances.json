@@ -1,5 +1,4 @@
 {
-  "my-balances": {
     "tableHeader": {
       "coin": "Coin",
       "totalBalance": "Total Balance",
@@ -10,5 +9,4 @@
     },
     "table-search-placeholder": "Type to search for coins.",
     "loading-arialLabel": "Loading my dashboard"
-  }
 }

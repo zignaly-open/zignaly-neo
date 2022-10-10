@@ -42,7 +42,7 @@ export type UserData = {
 };
 
 // TODO: move somewhere
-export type ExchangeType = 'futures';
+export type ExchangeType = 'futures' | 'spot';
 
 // TODO: move somewhere
 export type Exchange = {
@@ -86,7 +86,7 @@ export type LoginPayload = {
 
 export type LoginFullPayload = LoginPayload & {
   gRecaptchaResponse: string;
-  cVersionRecaptcha: number;
+  c: number;
 };
 
 export type SessionResponse = {
@@ -101,3 +101,5 @@ export enum SessionsTypes {
   Login = 'login',
   Signup = 'signup',
 }
+
+export type ExtendedExchange = Exchange & { image: string };

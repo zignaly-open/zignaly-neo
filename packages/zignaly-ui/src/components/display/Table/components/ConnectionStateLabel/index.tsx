@@ -1,10 +1,7 @@
-// Dependencies
 import React from "react";
 
-// Styled Components
 import * as styled from "./styles";
 
-// Types
 import { ConnectionStateLabelId, ConnectionStateLabelProps, connectionStateName } from "./types";
 
 const ConnectionStateLabel = ({

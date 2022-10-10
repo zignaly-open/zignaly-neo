@@ -1,13 +1,10 @@
 import React, { useCallback, useRef, useState } from "react";
 import { useSortBy, useTable } from "react-table";
 import {
-  ColumnsSelector,
   EmptyMessage,
   HeaderRow,
   IconContainer,
   Layout,
-  OptionItem,
-  OptionList,
   SortIcon,
   TableView,
   TextContainer,
@@ -20,6 +17,7 @@ import CheckBox from "../../../../inputs/CheckBox";
 import IconButton from "../../../../inputs/IconButton";
 import { ReactComponent as OptionsDotsIcon } from "../../../../../assets/icons/option-dots-icon.svg";
 import { TableBasicProps } from "../../types";
+import DropDown from "../../../DropDown";
 
 export default function BasicTable<T extends object>({
   columns = [],
@@ -32,13 +30,11 @@ export default function BasicTable<T extends object>({
   emptyMessage,
   hasFooter = false,
 }: TableBasicProps<T>) {
-  // Refs
   const tableRef = useRef(null);
 
   // States
   const [hiddenColumns, setHiddenColumns] = useState<string[]>(defaultHiddenColumns || []);
 
-  // Hooks
   const {
     getTableProps,
     getTableBodyProps,
@@ -95,40 +91,6 @@ export default function BasicTable<T extends object>({
     onColumnHidden(column, false);
   };
 
-  const renderColumnsSelector = useCallback(() => {
-    return (
-      <ColumnsSelector>
-        <Typography>Show/Hide Columns</Typography>
-        <OptionList>
-          {columns.map((column: any, index) => {
-            const isDisabled =
-              hiddenColumns.length >= columns.length - 2 &&
-              !hiddenColumns.find((e) => e === column.accessor);
-
-            const isActive = !hiddenColumns.find((e) => e === column.accessor);
-
-            return (
-              <OptionItem key={`--options-container-${index.toString()}`}>
-                <CheckBox
-                  value={isActive}
-                  label={column.Header ?? ""}
-                  onChange={(isActive: boolean) => {
-                    toggleHideColumn(column.accessor, !isActive);
-                    if (!isActive) {
-                      hideColumn(column.accessor);
-                    } else {
-                      showColumn(column.accessor);
-                    }
-                  }}
-                  disabled={isDisabled}
-                />
-              </OptionItem>
-            );
-          })}
-        </OptionList>
-      </ColumnsSelector>
-    );
-  }, [columns, hiddenColumns]);
   return (
     <Layout>
       <View ref={tableRef}>
@@ -168,14 +130,39 @@ export default function BasicTable<T extends object>({
                 <th role={"row"}>
                   <div style={{ display: "flex", justifyContent: "flex-end" }}>
                     {!hideOptionsButton && (
-                      <IconButton
-                        variant={"flat"}
-                        icon={<OptionsDotsIcon color={dark.neutral200} />}
-                        dropDownOptions={{
-                          componentOverflowRef: tableRef,
-                          alignment: "right",
-                        }}
-                        renderDropDown={renderColumnsSelector()}
+                      <DropDown
+                        component={({ open }) => (
+                          <IconButton
+                            variant={"flat"}
+                            isFocused={open}
+                            icon={<OptionsDotsIcon color={dark.neutral200} />}
+                          />
+                        )}
+                        options={columns.map((column: any) => {
+                          const isDisabled =
+                            hiddenColumns.length >= columns.length - 2 &&
+                            !hiddenColumns.find((e) => e === column.accessor);
+
+                          const isActive = !hiddenColumns.find((e) => e === column.accessor);
+
+                          return {
+                            element: (
+                              <CheckBox
+                                value={isActive}
+                                label={column.Header ?? ""}
+                                onChange={(isActive: boolean) => {
+                                  toggleHideColumn(column.accessor, !isActive);
+                                  if (!isActive) {
+                                    hideColumn(column.accessor);
+                                  } else {
+                                    showColumn(column.accessor);
+                                  }
+                                }}
+                                disabled={isDisabled}
+                              />
+                            ),
+                          };
+                        })}
                       />
                     )}
                   </div>

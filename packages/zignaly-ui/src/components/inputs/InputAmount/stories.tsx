@@ -1,9 +1,7 @@
-// Dependencies
 import * as React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 import { ReactComponent as ZigCoin } from "assets/icons/coins/zignaly-coin.svg";
 
-// Component
 import InputAmount from "./";
 
 export default {

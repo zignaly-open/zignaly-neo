@@ -12,6 +12,9 @@ import { persistor, store } from './features/store';
 import { Provider } from 'react-redux';
 import GlobalStyle from './styles';
 import { PersistGate } from 'redux-persist/integration/react';
+import CenteredLoader from './components/CenteredLoader';
+import Header from './features/navigation/Header';
+import UpdateChecker from './features/navigation/UpdateChecker';
 
 const augmentedTheme = { ...dark, ...theme };
 
@@ -50,9 +53,11 @@ function App() {
               pauseOnHover
               theme='dark'
             />
-            <PersistGate persistor={persistor} loading={null}>
+            <PersistGate persistor={persistor} loading={<CenteredLoader />}>
               <BrowserRouter>
                 <ModalProvider>
+                  <Header />
+                  <UpdateChecker />
                   <Router />
                 </ModalProvider>
               </BrowserRouter>

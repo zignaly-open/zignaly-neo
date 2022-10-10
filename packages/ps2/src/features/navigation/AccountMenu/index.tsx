@@ -1,24 +1,36 @@
-import React, { useCallback, useRef } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavList, LoginButton } from './styles';
-import { DropDownContainer, NavLink } from '../ExtraNavigationDropdown/styles';
+import {
+  LoginButton,
+  AccountDropdown,
+  LogoutButtonWrap,
+  AccountName,
+} from './styles';
 import { useTheme } from 'styled-components';
 import {
   useActiveExchange,
+  useCurrentUser,
   useIsAuthenticated,
   useLogout,
+  useSelectExchange,
 } from '../../auth/use';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import {
   Avatar,
   Button,
+  DropDown,
   IconButton,
   Typography,
   UserIcon,
 } from '@zignaly-open/ui';
-import { ROUTE_DASHBOARD, ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../routes';
-import { Link } from 'react-router-dom';
-import AccountSelector from '../../auth/components/AccountSelector';
+import {
+  ROUTE_DASHBOARD,
+  ROUTE_LOGIN,
+  ROUTE_SIGNUP,
+  ROUTE_MY_BALANCES,
+} from '../../../routes';
+import { Link, useNavigate } from 'react-router-dom';
+import { getImageOfAccount } from '../../../util/images';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme() as Theme;
@@ -26,12 +38,13 @@ function AccountMenu(): React.ReactElement | null {
   const { t } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
   const activeExchange = useActiveExchange();
-  const dropDownRef =
-    useRef<{ setIsDropDownActive: (isActive: boolean) => void }>(null);
+  const navigate = useNavigate();
+  const { exchanges } = useCurrentUser();
+  const selectExchange = useSelectExchange();
 
-  const closeDropdown = useCallback(() => {
-    dropDownRef.current?.setIsDropDownActive(false);
-  }, [dropDownRef]);
+  const setActiveExchange = (exchangeInternalId: string) => {
+    selectExchange(exchangeInternalId);
+  };
 
   if (!isAuthenticated) {
     return (
@@ -52,41 +65,66 @@ function AccountMenu(): React.ReactElement | null {
   }
 
   return (
-    <IconButton
-      ref={dropDownRef}
-      variant={'flat'}
-      dropDownOptions={{
-        alignment: 'right',
-        zIndex: 9999,
-        width: '220px',
-      }}
-      icon={<Avatar size={'medium'} image={activeExchange?.image} />}
-      key={'user'}
-      renderDropDown={
-        <>
-          <AccountSelector onExchangeSelected={() => closeDropdown()} />
-          <DropDownContainer>
-            <NavList>
-              <Link to={ROUTE_DASHBOARD}>
-                <NavLink onClick={closeDropdown}>
-                  {t('account-menu.notAuth-dropdown-link-dashboard')}
-                </NavLink>
-              </Link>
-              <Link to={ROUTE_DASHBOARD}>
-                <NavLink onClick={closeDropdown}>
-                  {t('account-menu.notAuth-dropdown-link-balances')}
-                </NavLink>
-              </Link>
-            </NavList>
-            <NavList className={'last'}>
+    <DropDown
+      component={({ open }) => (
+        <IconButton
+          variant={'flat'}
+          icon={<Avatar size={'medium'} image={activeExchange?.image} />}
+          key={'user'}
+          isFocused={open}
+        />
+      )}
+      options={[
+        {
+          label: (
+            <AccountDropdown>
+              <Avatar size={'medium'} image={activeExchange?.image} />
+              <AccountName variant={'body1'} color={'neutral100'}>
+                {activeExchange?.internalName}
+              </AccountName>
+            </AccountDropdown>
+          ),
+          children: (exchanges?.length > 1 ? exchanges : []).map(
+            (exchange, index) => ({
+              onClick: () => setActiveExchange(exchange.internalId),
+              label: (
+                <>
+                  <Avatar size={'medium'} image={getImageOfAccount(index)} />
+                  <AccountName
+                    variant={'body1'}
+                    color={
+                      activeExchange?.internalId === exchange.internalId
+                        ? 'highlighted'
+                        : 'neutral200'
+                    }
+                  >
+                    {exchange.internalName}
+                  </AccountName>
+                </>
+              ),
+            }),
+          ),
+        },
+        {
+          label: t('account-menu.notAuth-dropdown-link-dashboard'),
+          onClick: () => navigate(ROUTE_DASHBOARD),
+        },
+        {
+          label: t('account-menu.notAuth-dropdown-link-balances'),
+          onClick: () => navigate(ROUTE_MY_BALANCES),
+        },
+        {
+          separator: true,
+          element: (
+            <LogoutButtonWrap>
               <Button
                 caption={t('account-menu.notAuth-button-logOut')}
                 onClick={logout}
               />
-            </NavList>
-          </DropDownContainer>
-        </>
-      }
+            </LogoutButtonWrap>
+          ),
+        },
+      ]}
     />
   );
 }

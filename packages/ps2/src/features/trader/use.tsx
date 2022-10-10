@@ -32,29 +32,13 @@ export function useFirstOwnedService(): TraderService | null {
   return (isAuthenticated && traderServices[0]) || null;
 }
 
-export const useTraderServiceInvestors = (
-  serviceId: string,
-): ReturnType<typeof useTraderServiceInvestorsQuery> => {
-  return useTraderServiceInvestorsQuery(serviceId);
-};
+export const useTraderServiceInvestors = useTraderServiceInvestorsQuery;
 
-export function useTraderServiceManagement(
-  serviceId: string,
-): ReturnType<typeof useTraderServiceManagementQuery> {
-  return useTraderServiceManagementQuery(serviceId);
-}
+export const useTraderServiceManagement = useTraderServiceManagementQuery;
 
-export function useServiceDetails(
-  serviceId: string,
-): ReturnType<typeof useTraderServiceDetailsQuery> {
-  return useTraderServiceDetailsQuery(serviceId);
-}
+export const useServiceDetails = useTraderServiceDetailsQuery;
 
-export function useTraderServiceBalance(
-  serviceId: string,
-): ReturnType<typeof useTraderServiceBalanceQuery> {
-  return useTraderServiceBalanceQuery(serviceId);
-}
+export const useTraderServiceBalance = useTraderServiceBalanceQuery;
 
 export function useTraderServiceUpdateMinimum(
   serviceId: string,
@@ -64,7 +48,7 @@ export function useTraderServiceUpdateMinimum(
     useTraderServiceManagement(serviceId);
   return [
     async (minimum) => {
-      await update({ minimum, serviceId });
+      await update({ minimum, serviceId }).unwrap();
       await refetch();
     },
     { isLoading: isLoading || isLoadingManagement },
@@ -79,7 +63,7 @@ export function useTraderServiceTransferFunds(
     useTraderServiceBalance(serviceId);
   return [
     async (payload) => {
-      await update({ ...payload, serviceId });
+      await update({ ...payload, serviceId }).unwrap();
       await refetch();
     },
     { isLoading: isLoading || isLoadingManagement },

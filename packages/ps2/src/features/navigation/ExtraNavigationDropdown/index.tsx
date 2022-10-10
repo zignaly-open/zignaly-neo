@@ -1,39 +1,47 @@
-import { IconButton, OptionHorizontalDotsIcon } from '@zignaly-open/ui';
+import {
+  DropDown,
+  IconButton,
+  OptionHorizontalDotsIcon,
+} from '@zignaly-open/ui';
 import React, { useCallback, useRef } from 'react';
 import { useTheme } from 'styled-components';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
-import { DropDownContainer, NavLink, NavList, Networks } from './styles';
-import LanguageSelector from '../LanguageSelector';
+import { NavLink, Networks } from './styles';
 import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
 import { supportedLanguages } from '../../../util/i18next';
 import { useChangeLocale } from '../../auth/use';
 import { useFirstOwnedService } from '../../trader/use';
-import { generatePath, Link } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 import {
   ROUTE_BECOME_TRADER,
   ROUTE_TRADING_SERVICE_MANAGE,
 } from '../../../routes';
-
-const dropDownOptions = {
-  alignment: 'right' as const,
-  width: '200px',
-  zIndex: 999999,
-};
+import { DropDownHandle } from '@zignaly-open/ui/lib/components/display/DropDown/types';
+import { GlobeLanguagesStyled, LabelButton } from './styles';
+import { LocalizationLanguages } from '../../../util/languages';
 
 const ExtraNavigationDropdown: React.FC = () => {
   const theme = useTheme() as Theme;
-  const dropDownRef =
-    useRef<{
-      setIsDropDownActive: (isActive: boolean) => void;
-    }>(null);
+  const navigate = useNavigate();
+  const dropDownRef = useRef<DropDownHandle>(null);
   const { t, i18n } = useTranslation('common');
-  const onClose = useCallback(() => {
-    dropDownRef.current?.setIsDropDownActive(false);
-  }, [dropDownRef]);
-
   const changeLocale = useChangeLocale();
   const service = useFirstOwnedService();
+
+  const onClose = useCallback(() => {
+    dropDownRef.current?.closeDropDown();
+  }, [dropDownRef]);
+
+  const languageMap = supportedLanguages
+    ? supportedLanguages.map((x) => LocalizationLanguages[x])
+    : Object.values(LocalizationLanguages);
+
+  const handleSelectLanguage = (locale: string) => {
+    onSelectLocale(locale);
+  };
+
+  if (languageMap.length === 1) return null;
 
   const onSelectLocale = (locale: string) => {
     changeLocale(locale);
@@ -41,73 +49,77 @@ const ExtraNavigationDropdown: React.FC = () => {
   };
 
   return (
-    <IconButton
-      ref={dropDownRef}
-      variant={'flat'}
-      dropDownOptions={dropDownOptions}
-      icon={
-        <OptionHorizontalDotsIcon
-          width={14}
-          height={4}
-          color={theme.neutral300}
-        />
-      }
-      key={'user'}
-      renderDropDown={
-        <DropDownContainer>
-          <NavList>
-            <Link
-              onClick={onClose}
-              to={
-                service
-                  ? generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-                      serviceId: service.serviceId?.toString(),
-                    })
-                  : ROUTE_BECOME_TRADER
-              }
-            >
-              <NavLink>{t('main-menu.dropdown-link-forTrading')}</NavLink>
-            </Link>
-          </NavList>
-
-          <NavList>
-            <NavLink
-              as={'a'}
-              href={'https://help.zignaly.com/hc/en-us'}
-              target={'_blank'}
-              onClick={onClose}
-            >
-              {t('main-menu.dropdown-link-helpDocs')}
-            </NavLink>
-            {/* <NavLink disabled={true}>
-                    <Bold>ZIG</Bold> $0.0514
-                  </NavLink> */}
-          </NavList>
-          <NavList className={'last'}>
-            <LanguageSelector
-              selectedLocale={i18n.language}
-              supportedLocales={supportedLanguages}
-              onSelectLocale={onSelectLocale}
+    <DropDown
+      component={({ open }) => (
+        <IconButton
+          variant={'flat'}
+          icon={
+            <OptionHorizontalDotsIcon
+              width={14}
+              height={4}
+              color={open ? theme.neutral100 : theme.neutral300}
             />
-          </NavList>
-          <Networks>
-            {socialNetworksLinks.map((socialNetwork, index) => {
-              const IconComponent = socialNetwork.image;
-              return (
-                <NavLink
-                  as={'a'}
-                  onClick={onClose}
-                  href={socialNetwork.path}
-                  key={`--social-network-nav-link-${index.toString()}`}
-                  target={'_blank'}
-                >
-                  <IconComponent height={'22px'} width={'22px'} />
-                </NavLink>
-              );
-            })}
-          </Networks>
-        </DropDownContainer>
-      }
+          }
+          isFocused={open}
+        />
+      )}
+      options={[
+        {
+          label: t('main-menu.dropdown-link-forTrading'),
+          onClick: () =>
+            navigate(
+              service
+                ? generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+                    serviceId: service.serviceId?.toString(),
+                  })
+                : ROUTE_BECOME_TRADER,
+            ),
+        },
+        {
+          label: t('main-menu.dropdown-link-helpDocs'),
+          href: 'https://help.zignaly.com/hc/en-us',
+        },
+        {
+          separator: true,
+          label: (
+            <>
+              <GlobeLanguagesStyled
+                color={theme.neutral300}
+                width={'26px'}
+                height={'26px'}
+              />
+              <LabelButton variant={'body1'} color={'neutral400'}>
+                {LocalizationLanguages[i18n.language?.split('_')[0]]?.label}
+              </LabelButton>
+            </>
+          ),
+          children: languageMap.map((language) => ({
+            active: i18n.language === language.locale,
+            label: language.label,
+            onClick: () => handleSelectLanguage(language.locale),
+          })),
+        },
+        {
+          element: (
+            <Networks key={'--social-networks'}>
+              {socialNetworksLinks.map((socialNetwork, index) => {
+                const IconComponent = socialNetwork.image;
+                return (
+                  <NavLink
+                    as={'a'}
+                    onClick={onClose}
+                    href={socialNetwork.path}
+                    key={`--social-network-nav-link-${index.toString()}`}
+                    target={'_blank'}
+                  >
+                    <IconComponent height={'22px'} width={'22px'} />
+                  </NavLink>
+                );
+              })}
+            </Networks>
+          ),
+        },
+      ]}
     />
   );
 };

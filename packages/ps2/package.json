@@ -5,7 +5,7 @@
   "scripts": {
     "precommit": "yarn lint-staged",
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && generate-version",
     "test": "react-scripts test --passWithNoTests",
     "release": "export REACT_APP_SENTRY_RELEASE=$(git rev-parse --short HEAD); react-scripts build && node scripts/sentry.js",
     "eject": "react-scripts eject",
@@ -69,6 +69,7 @@
     "react-scripts": "5.0.1",
     "react-spring": "^9.5.2",
     "react-toastify": "^9.0.8",
+    "react-update-notification": "^1.1.1",
     "react-use": "^17.4.0",
     "redux-persist": "^6.0.0",
     "styled-components": "^5.3.5",

@@ -1,33 +1,31 @@
 {
-  "deposit-crypto": {
-    "title": "CH-Ḋëṗöŝïṫ Ĉѓyṗṫö",
-    "description": "CH-Ḋëṗöŝïṫŝ ṁáy ṫákë üṗ ṫö 3 ĥöüѓŝ ṫö ѓëḟlëĉṫ ïń yöüѓ báláńĉë.",
-    "coinSelector": {
-      "label": "CH-Ĉöïń:",
-      "placeholder": "CH-Ŝëáѓĉĥ á ĉöïń"
-    },
-    "balances": {
-      "loadingAriaLabel": "CH-Löáḋïńĝ ĉöïń báláńĉëŝ",
-      "total": "CH-Báláńĉë:",
-      "balanceLocked": "CH-Ïń Öѓḋëѓŝ:",
-      "balanceFree": "CH-Áváïláblë:"
-    },
-    "networkSelector": {
-      "label": "CH-Ńëṫwöѓk:",
-      "placeholder": "CH-Ĉĥööŝë ṫĥë ńëṫwöѓk"
-    },
-    "depositAddress": {
-      "label": "CH-Ḋëṗöŝïṫ Áḋḋѓëŝŝ:",
-      "loading": "CH-Löáḋïńĝ ḋëṗöŝïṫ áḋḋѓëŝŝ...",
-      "placeholder": "CH-Ĉĥööŝë ṫĥë ĉüѓѓëńĉy áńḋ ṫĥë ńëṫwöѓk ḟïѓŝṫ.",
-      "warning": "CH-Öńly ŝëńḋ {{ńëṫwöѓk}} {{ĉöïń}} ṫökëńŝ ṫö ṫĥïŝ áḋḋѓëŝŝ"
-    },
-    "depositMemo": {
-      "label": "CH-Ḋëṗöŝïṫ ṀËṀÖ/Ṫáĝ:"
-    },
-    "depositQR": {
-      "address": "CH-{{ĉöïń}} Áḋḋѓëŝŝ",
-      "memo": "CH-{{ĉöïń}} ṀËṀÖ/Ṫáĝ"
-    }
+  "title": "CH-Ḋëṗöŝïṫ Ĉѓyṗṫö",
+  "description": "CH-Ḋëṗöŝïṫŝ ṁáy ṫákë üṗ ṫö 3 ĥöüѓŝ ṫö ѓëḟlëĉṫ ïń yöüѓ báláńĉë.",
+  "coinSelector": {
+    "label": "CH-Ĉöïń:",
+    "placeholder": "CH-Ŝëáѓĉĥ á ĉöïń"
+  },
+  "balances": {
+    "loadingAriaLabel": "CH-Löáḋïńĝ ĉöïń báláńĉëŝ",
+    "total": "CH-Báláńĉë:",
+    "balanceLocked": "CH-Ïń Öѓḋëѓŝ:",
+    "balanceFree": "CH-Áváïláblë:"
+  },
+  "networkSelector": {
+    "label": "CH-Ńëṫwöѓk:",
+    "placeholder": "CH-Ĉĥööŝë ṫĥë ńëṫwöѓk"
+  },
+  "depositAddress": {
+    "label": "CH-Ḋëṗöŝïṫ Áḋḋѓëŝŝ:",
+    "loading": "CH-Löáḋïńĝ ḋëṗöŝïṫ áḋḋѓëŝŝ...",
+    "placeholder": "CH-Ĉĥööŝë ṫĥë ĉüѓѓëńĉy áńḋ ṫĥë ńëṫwöѓk ḟïѓŝṫ.",
+    "warning": "CH-Öńly ŝëńḋ {{network}} {{coin}} ṫökëńŝ ṫö ṫĥïŝ áḋḋѓëŝŝ"
+  },
+  "depositMemo": {
+    "label": "CH-Ḋëṗöŝïṫ ṀËṀÖ/Ṫáĝ:"
+  },
+  "depositQR": {
+    "address": "CH-{{coin}} Áḋḋѓëŝŝ",
+    "memo": "CH-{{coin}} ṀËṀÖ/Ṫáĝ"
   }
 }

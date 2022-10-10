@@ -1,10 +1,7 @@
-// Dependencies
 import React, { ReactElement } from "react";
 import Button from "..";
 import { buttonSizes, buttonVariants, buttonColors } from "../types";
 import { Layout, StoryList } from "./styles";
-
-// Types
 
 interface ButtonProps {
   variant?: keyof typeof buttonVariants;

@@ -66,7 +66,7 @@ export class Auction extends Model {
 
   @Default('0.01')
   @Column(DataType.DECIMAL)
-  public startingBid: string;
+  public currentBid: string;
 
   @Default('0.01')
   @Column(DataType.DECIMAL)
@@ -74,7 +74,7 @@ export class Auction extends Model {
 
   @Default(10)
   @Column(DataType.INTEGER)
-  public numberOfWinners: string;
+  public numberOfWinners: number;
 
   @HasMany(() => AuctionBid)
   public bids: AuctionBid[];
@@ -88,6 +88,14 @@ export class Auction extends Model {
 
   @Column
   public chain: string;
+
+  @Default(false)
+  @Column
+  public inRedis: boolean;
+
+  @Default(false)
+  @Column
+  public isFinalized: boolean;
 
   @Default(false)
   @Column
@@ -138,7 +146,9 @@ export class AuctionBid extends Model {
   @Column
   public transactionId: string;
 
-  @Default(0)
-  @Column(DataType.DECIMAL)
-  public value: string;
+  @Column
+  public position: number;
+
+  @Column
+  public isWinner: boolean;
 }

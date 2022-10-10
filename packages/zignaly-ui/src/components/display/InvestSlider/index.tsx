@@ -1,8 +1,6 @@
-// Dependencies
 import React, { useEffect } from "react";
 import { useState } from "react";
 
-// Styled Components
 import {
   Bar,
   Dot,

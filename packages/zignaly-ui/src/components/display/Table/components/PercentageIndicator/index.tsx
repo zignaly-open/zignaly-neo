@@ -11,9 +11,11 @@ const PercentageIndicator = ({
   value = "0",
   label,
   type = "graph",
+  normalized = false,
   stableCoinOperative = false,
 }: PercentageIndicatorProps) => {
-  const bigNumberValue = new BigNumber(value);
+  let bigNumberValue = new BigNumber(value);
+  if (normalized) bigNumberValue = bigNumberValue.multipliedBy(100);
   const isPositiveValue = bigNumberValue.isPositive();
   const theme: any = useTheme();
 

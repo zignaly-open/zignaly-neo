@@ -16,7 +16,6 @@ jobs:
           sed -i -e 's/{directory}/test/g' appspec.yml
           sed -i -e 's/{directory}/test/g' scripts/prepare_release.sh
           sed -i -e 's/{directory}/test/g' scripts/after_install.sh
-          sed -i -e 's/{directory}/test/g' scripts/delete_old_release.sh
       - name: Create server .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
@@ -29,7 +28,8 @@ jobs:
           envkey_ZIGNALY_API_PUBLIC_KEY: ${{ secrets.ZIGNALY_API_PUBLIC_KEY }}
           envkey_ZIGNALY_API_PRIVATE_KEY: ${{ secrets.ZIGNALY_API_PRIVATE_KEY }}
           envkey_ZIGNALY_SYSTEM_ID: ${{ secrets.ZIGNALY_SYSTEM_ID }}
-          envkey_REACT_APP_ENABLE_TRACKING: ${{ secrets.REACT_APP_ENABLE_TRACKING }}
+          envkey_GRAPHQL_PATH: ${{ secrets.GRAPHQL_PATH }}
+          envkey_REDIS_URL: ${{ secrets.process.env.REDIS_URL }}
           envkey_PORT: ${{ secrets.PORT }}
           directory: packages/raffles-server
           file_name: .env
@@ -42,6 +42,7 @@ jobs:
           envkey_REACT_APP_RECEIVING_ADDRESS: ${{ secrets.REACT_APP_RECEIVING_ADDRESS }}
           envkey_REACT_APP_CONTRACT_ADDRESS: ${{ secrets.REACT_APP_CONTRACT_ADDRESS }}
           envkey_REACT_APP_USE_MUMBAI_CHAIN: ${{ secrets.REACT_APP_USE_MUMBAI_CHAIN }}
+          envkey_REACT_APP_ENABLE_TRACKING: ${{ secrets.REACT_APP_ENABLE_TRACKING }}
           directory: packages/raffles-client
           file_name: .env.production.local
       - name: Setup Node.js
@@ -62,10 +63,27 @@ jobs:
           aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
           aws_region: ap-northeast-1
           codedeploy_name: zignaly
-          codedeploy_group: zignaly-raffles-prod
+          codedeploy_group: zignaly-raffles-dev
           codedeploy_register_only: false
           s3_bucket: ${{ secrets.AWS_S3_BUCKET }}
           s3_folder: dev
           max_polling_iterations: 60
-          excluded_files: '.git/* *node_modules/* packages/ps2/*'
+          excluded_files: '.git/* *node_modules/* packages/raffles-client/* packages/ps2/*'
           directory: .
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_WEBAPP_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_REGION: 'us-east-1'
+          SOURCE_DIR: 'packages/raffles-client/build'
+      - name: Invalidate CloudFront
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION }}
+          PATHS: '/'
+          AWS_REGION: 'us-east-1'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}

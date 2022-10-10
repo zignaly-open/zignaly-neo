@@ -1,8 +1,6 @@
-// Dependencies
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-// Components
 import Avatar, { AvatarSizes } from "./index";
 
 export default {

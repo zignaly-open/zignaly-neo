@@ -48,7 +48,7 @@ function ServiceHeader() {
           <MenuDropDown
             ref={menuDropDownRef}
             title={activeService?.serviceName}
-            secondaryTitle={t('service-header.dropdown.manageServices')}
+            secondaryTitle={t('dropdown.manageServices')}
             dropDownOptions={{
               maxHeight: '300px',
             }}
@@ -72,7 +72,7 @@ function ServiceHeader() {
           <RouteGroup
             routes={[
               {
-                name: t('service-header.managements-label'),
+                name: t('managements-label'),
                 path: generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
                   serviceId,
                 }),
@@ -81,28 +81,28 @@ function ServiceHeader() {
           />
 
           <RouteDropdown
-            title={t('service-header.dropdown.trade.title')}
+            title={t('dropdown.trade.title')}
             routes={[
               {
-                name: t('service-header.dropdown.trade.links.positions'),
+                name: t('dropdown.trade.links.positions'),
                 path: generatePath(ROUTE_TRADING_SERVICE_POSITIONS, {
                   serviceId,
                 }),
               },
               {
-                name: t('service-header.dropdown.trade.links.manual'),
+                name: t('dropdown.trade.links.manual'),
                 path: generatePath(ROUTE_TRADING_SERVICE_MANUAL, {
                   serviceId,
                 }),
               },
               {
-                name: t('service-header.dropdown.trade.links.signals'),
+                name: t('dropdown.trade.links.signals'),
                 path: generatePath(ROUTE_TRADING_SERVICE_SIGNALS, {
                   serviceId,
                 }),
               },
               {
-                name: t('service-header.dropdown.trade.links.api'),
+                name: t('dropdown.trade.links.api'),
                 path: generatePath(ROUTE_TRADING_SERVICE_API, { serviceId }),
               },
             ]}
@@ -111,11 +111,11 @@ function ServiceHeader() {
           <RouteGroup
             routes={[
               {
-                name: t('service-header.coins-label'),
+                name: t('coins-label'),
                 path: generatePath(ROUTE_TRADING_SERVICE_COINS, { serviceId }),
               },
               {
-                name: t('service-header.investors-label'),
+                name: t('investors-label'),
                 path: generatePath(ROUTE_TRADING_SERVICE_INVESTORS, {
                   serviceId,
                 }),
@@ -124,16 +124,16 @@ function ServiceHeader() {
           />
 
           <RouteDropdown
-            title={t('service-header.dropdown.profile.title')}
+            title={t('dropdown.profile.title')}
             routes={[
               {
-                name: t('service-header.dropdown.profile.links.profile'),
+                name: t('dropdown.profile.links.profile'),
                 path: generatePath(ROUTE_TRADING_SERVICE, {
                   serviceId,
                 }),
               },
               {
-                name: t('service-header.dropdown.profile.links.profile-edit'),
+                name: t('dropdown.profile.links.profile-edit'),
                 path: generatePath(ROUTE_TRADING_SERVICE_EDIT, {
                   serviceId,
                 }),

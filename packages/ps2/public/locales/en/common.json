@@ -1,13 +1,29 @@
 {
   "yes": "Yes",
   "no": "No",
+  "loading": "Loading...",
   "coming-soon": {
     "title": "Coming Soon",
     "description": "This section is under development, you will see it available at a later date."
   },
+  "no-data": {
+    "title": "No Data",
+    "description": "No data available. If you believe it is an issue, please contact support."
+  },
+  "404": {
+    "title": "Not found",
+    "description": "Check the URL or your life choices."
+  },
+  "critical-error": {
+    "title": "Error Occurred",
+    "description": "Something went wrong. Please try again later or contact support. Or abandon the industrial society and build a cabin in the woods."
+  },
   "main-menu": {
     "dropdown-link-forTrading": "For Trading Services",
     "dropdown-link-helpDocs": "Help Docs"
+  },
+  "refresh": {
+    "short": "New version available, click here to refresh"
   },
   "account-menu": {
     "isAuth-button-logIn": "Log in",
@@ -19,8 +35,8 @@
   "account-selector": {
     "type": {
       "title": "Type:",
-      "futures": "Spot",
-      "spot": "Futures"
+      "futures": "Futures",
+      "spot": "Spot"
     }
   },
   "navigation-menu": {

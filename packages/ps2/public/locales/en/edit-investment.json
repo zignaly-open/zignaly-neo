@@ -1,5 +1,4 @@
 {
-  "edit-investment": {
     "percentageChangedSuccess": "Profit percentage updated successfully.",
     "addMoreInvestmentSuccess": "You invested {{amount}} {{currency}} successfully in service {{serviceName}}.",
     "withdrawInvestmentSuccess": "Withdrawal requested successfully.",
@@ -83,5 +82,4 @@
       "description": "Your funds will be transferred into the service’s account within 24 hours. You may withdraw your funds anytime before this transfer is made. Once funds are transferred, you’ll be able to withdraw via a <0>soft</0> or <0>hard disconnection.</0>",
       "button": "Close"
     }
-  }
 }

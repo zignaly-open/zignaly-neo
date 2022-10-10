@@ -32,8 +32,8 @@ const ClaimButton = ({
       auction.maxClaimDate && new Date(auction.maxClaimDate) <= new Date();
 
     return {
-      canClaim: !auction.userBid?.isClaimed && !maxClaimDateExpired,
-      missClaim: !auction.userBid?.isClaimed && maxClaimDateExpired,
+      canClaim: !auction.isClaimed && !maxClaimDateExpired,
+      missClaim: !auction.isClaimed && maxClaimDateExpired,
     };
   }, [updatedAt, auction]);
 
@@ -53,11 +53,7 @@ const ClaimButton = ({
       }
       disabled={disabled || missClaim}
       caption={t(
-        missClaim
-          ? 'ended'
-          : auction.userBid?.isClaimed
-          ? 'instructions'
-          : claimCaption,
+        missClaim ? 'ended' : auction.isClaimed ? 'instructions' : claimCaption,
       )}
       bottomElement={
         canClaim && auction.maxClaimDate ? (

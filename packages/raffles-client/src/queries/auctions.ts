@@ -26,29 +26,17 @@ export const GET_AUCTIONS = gql`
       description
       claimSuccess
       imageUrl
-      startingBid
       numberOfWinners
       chain
-      basketItems {
-        ticker
-        amount
-      }
-      monetaryValue
+      isClaimed
+      isFinalized
       isExclusiveToKuCoin
       bids {
-        id
         position
-        value
         user {
           id
           username
         }
-      }
-      userBid {
-        id
-        value
-        position
-        isClaimed
       }
     }
   }
@@ -56,31 +44,7 @@ export const GET_AUCTIONS = gql`
 
 export const BID_AUCTION = gql`
   mutation createBid($id: ID!) {
-    bid(id: $id) {
-      id
-      title
-      createdAt
-      expiresAt
-      bids {
-        id
-        value
-        user {
-          id
-          username
-        }
-      }
-      userBid {
-        id
-        position
-        user {
-          id
-          username
-        }
-        value
-        isClaimed
-        date
-      }
-    }
+    bid(id: $id)
   }
 `;
 
@@ -88,6 +52,7 @@ export const CLAIM = gql`
   mutation claim($id: ID!) {
     claim(id: $id) {
       id
+      isClaimed
     }
   }
 `;
@@ -99,21 +64,9 @@ export const BIDS_SUBSCRIPTION = gql`
       expiresAt
       currentBid
       startDate
-      userBid {
-        id
-        position
-        user {
-          id
-          username
-        }
-        value
-        date
-        isClaimed
-      }
+      isFinalized
       bids {
-        id
         position
-        value
         user {
           id
           username

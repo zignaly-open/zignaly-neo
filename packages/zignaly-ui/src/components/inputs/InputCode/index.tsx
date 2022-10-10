@@ -12,7 +12,6 @@ function InputCode({
   clearOnError = false,
   error = null,
 }: InputCodeProps) {
-  // Hooks
   const inputRef = useRef<ReactCodeInput>(null);
 
   useEffect(() => {

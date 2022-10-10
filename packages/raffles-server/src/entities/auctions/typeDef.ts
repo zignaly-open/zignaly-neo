@@ -9,12 +9,8 @@ export const typeDef = gql`
     discordName: String
   }
   type Bid {
-    id: Int
     position: Int
-    value: String
-    date: Date
     user: UserInfo
-    isClaimed: Boolean
   }
 
   type BasketItem {
@@ -38,13 +34,12 @@ export const typeDef = gql`
     twitter: String
     monetaryValue: String
     bidFee: String
-    startingBid: String
     currentBid: String
     description: String
     claimSuccess: String
-    basketItems: [BasketItem]
+    isClaimed: Boolean
+    isFinalized: Boolean
     bids: [Bid]
-    userBid: Bid
     numberOfWinners: Int
     chain: String
     isExclusiveToKuCoin: Boolean
@@ -59,7 +54,7 @@ export const typeDef = gql`
   }
 
   extend type Mutation {
-    bid(id: ID!): Auction
+    bid(id: ID!): String
     claim(id: ID!): Auction
   }
 `;

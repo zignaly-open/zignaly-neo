@@ -1,5 +1,4 @@
 {
-  "table": {
     "footer": {
       "elements": {
         "show": "Showing",
@@ -33,6 +32,6 @@
       "suspended": "Suspended",
       "disconnected": "Disconnected",
       "owner": "Owner"
-    }
-  }
+    },
+    "columns-hideOrShow": "Show/Hide Columns"
 }

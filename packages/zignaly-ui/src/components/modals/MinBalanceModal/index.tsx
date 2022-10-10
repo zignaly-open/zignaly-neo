@@ -1,15 +1,12 @@
-// Dependencies
 import React, { useCallback, useState } from "react";
 import { ethers } from "ethers";
 import { useForm } from "react-hook-form";
 
-// Components
 import ModalContainer from "../ModalContainer";
 import InputAmount from "../../inputs/InputAmount";
 import Button from "../../inputs/Button";
 import { Actions } from "../styles";
 
-// Types
 import { MinBalanceModalProps } from "./types";
 
 function MinBalanceModal({

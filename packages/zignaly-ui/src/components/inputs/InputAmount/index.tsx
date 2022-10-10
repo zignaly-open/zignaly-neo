@@ -1,10 +1,8 @@
-// Dependencies
 import React, { useCallback, useState, useEffect } from "react";
 import NumberFormat from "react-number-format";
 import { parseUnits } from "@ethersproject/units";
 import { BigNumber, utils } from "ethers";
 
-// Styled Components
 import {
   InputContainer,
   InputValue,
@@ -19,13 +17,11 @@ import {
   InputField,
 } from "./styles";
 
-// Components
 import TokenSelector from "./components/TokenSelector";
 import ErrorMessage from "components/display/ErrorMessage";
 import Typography from "components/display/Typography";
 import CoinIcon, { CoinSizes } from "../../display/CoinIcon";
 
-// Types
 import { InputAmountProps, TokenItem } from "./types";
 import { changeEvent } from "utils/event";
 
@@ -51,7 +47,6 @@ function InputAmount(
   }: InputAmountProps,
   inputRef: React.Ref<any>,
 ) {
-  // Hooks
   const [inputValue, setInputValue] = useState(value);
   const [selectedTokenId, setSelectedTokenId] = useState(initialTokenIndex);
   const selectedToken = tokens[selectedTokenId];

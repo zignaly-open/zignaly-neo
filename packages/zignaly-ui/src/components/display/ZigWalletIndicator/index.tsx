@@ -1,18 +1,12 @@
-// Dependencies
 import React, { useMemo } from "react";
 import { utils } from "ethers";
 import NumberFormat from "react-number-format";
-
-// Styles
 import * as styled from "./styles";
 
-// Assets
 import ZigCoinIcon from "assets/images/zignaly-coin.svg?url";
 
-// Components
 import Typography from "../Typography";
 
-// Utils
 import { RankTypes, RankTypesId, ZigWalletIndicatorProps } from "./types";
 
 const ZigWalletIndicator = ({
@@ -27,7 +21,8 @@ const ZigWalletIndicator = ({
         thousandSeparator={true}
         renderText={(value) => (
           <styled.Value>
-            <Typography>{value}</Typography> <styled.Token>ZIG</styled.Token>
+            <Typography>{value}</Typography>
+            <styled.Token>ZIG</styled.Token>
           </styled.Value>
         )}
       />
