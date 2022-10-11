@@ -51,12 +51,12 @@ function AccountMenu(): React.ReactElement | null {
       <>
         <Link to={ROUTE_SIGNUP}>
           <Button
-            id={'menu-signup'}
+            id={'menu__signup'}
             caption={t('account-menu.isAuth-button-signUp')}
           />
         </Link>
         <Link to={ROUTE_LOGIN}>
-          <LoginButton id={'menu-login'}>
+          <LoginButton id={'menu__login'}>
             <UserIcon color={theme.neutral300} width={'16px'} height={'16px'} />
             <Typography variant={'buttonsm'} color={'neutral300'}>
               {t('account-menu.isAuth-button-logIn')}

@@ -45,7 +45,7 @@ const Header: React.FC = () => {
             {t('navigation-menu.staking')}
           </NavigationLink>
           <NavigationLink
-            id='menu__staking'
+            id='menu__zigpad'
             to={ROUTE_ZIGPAD}
             key='--route-zigpad'
           >
