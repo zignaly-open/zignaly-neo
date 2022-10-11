@@ -13,7 +13,7 @@ import { persistTablesToTheDatabase } from '../db';
 import { Payout } from '../entities/payouts/model';
 import mockCybavoWallet, { MockedCybavo } from './mock-cybavo-wallet';
 import redisService from '../redisService';
-import { Code } from '../entities/codes/model';
+import { Code, CodeRedemption } from '../entities/codes/model';
 
 const request = supertest(app);
 
@@ -334,6 +334,9 @@ export async function wipeOut() {
       await AuctionBid.destroy(options);
       await AuctionBasketItem.destroy(options);
       await Auction.destroy(options);
+      await Code.findAll();
+      await CodeRedemption.destroy(options);
+      await Code.destroy(options);
       await User.destroy(options);
     } catch (e) {
       console.error(e);

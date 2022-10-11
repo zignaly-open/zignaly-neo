@@ -17,6 +17,6 @@ export const typeDef = gql`
   }
 
   extend type Mutation {
-    redeemCode(code: String!): Boolean
+    redeemCode(code: String!): Float
   }
 `;

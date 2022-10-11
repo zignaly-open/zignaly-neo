@@ -40,7 +40,7 @@ describe('Payouts', () => {
         currency: 'ZIG',
         user_id: alice.publicAddress,
         to_user_id: zignalySystemId,
-        // locked: 'true',
+        locked: 'false',
         type: TransactionType.Payout,
       }),
     );

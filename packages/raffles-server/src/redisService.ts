@@ -153,6 +153,7 @@ const makeTransfer = async (auctionId: number, user: User) => {
     zignalySystemId,
     amount.toString(),
     TransactionType.Fee,
+    false,
   );
   if (!tx.transaction_id) {
     throw new Error('Transaction error');

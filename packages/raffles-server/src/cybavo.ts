@@ -6,7 +6,12 @@ import {
   zignalyAPIPrivateKey,
   zignalyAPIPublicKey,
 } from '../config';
-import { CybavoBalance, CybavoTransfer, TransactionType } from './types';
+import {
+  CybavoBalance,
+  CybavoOperations,
+  CybavoTransfer,
+  TransactionType,
+} from './types';
 
 export const axiosInstance = axios.create({
   baseURL: zignalyAPI,
@@ -49,11 +54,20 @@ export const getUserBalance = async (address: string) => {
   );
 };
 
+export const getUserDeposits = async (address: string) => {
+  return fetchAPI(`/operations/all/${address}`).then(
+    ({ data }: { data: CybavoOperations }) => {
+      return data.filter((d) => d.internal_type === TransactionType.Deposit);
+    },
+  );
+};
+
 export const internalTransfer = async (
   from: string,
   to: string,
   amount: string,
   type: TransactionType,
+  locked: boolean,
 ): Promise<CybavoTransfer> => {
   return fetchAPI(`/transfer/internal`, {
     method: 'POST',
@@ -63,7 +77,7 @@ export const internalTransfer = async (
       currency: 'ZIG',
       user_id: from,
       to_user_id: to,
-      // locked: 'true',
+      locked: locked.toString(),
       type,
     },
   }).then(({ data }) => data);

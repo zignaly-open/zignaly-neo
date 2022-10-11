@@ -38,7 +38,7 @@ export class Code extends Model {
 
   @ForeignKey(() => User)
   @Column
-  public userId: number;
+  public userId?: number;
 
   @BelongsTo(() => User, 'userId')
   public user: User;

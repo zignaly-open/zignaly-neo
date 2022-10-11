@@ -117,6 +117,7 @@ export default async function watchTransactions() {
         from,
         web3.utils.fromWei(value, 'ether'),
         TransactionType.Deposit,
+        false,
       );
 
       const user = await User.findOne({

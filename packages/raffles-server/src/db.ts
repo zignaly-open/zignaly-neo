@@ -36,9 +36,14 @@ if (isTest) {
   connect();
 }
 
-User.beforeCreate(async (user) => {
-  // user.referralCode = await generateCode();
-  Code.create({ name: user.referralCode, welcomeType: true, userId: user.id });
+User.afterCreate(async (user) => {
+  Code.create({
+    name: user.referralCode,
+    welcomeType: true,
+    userId: user.id,
+    benefitDirect: 10,
+    rewardDirect: 10,
+  });
 });
 
 const persistTablesToTheDatabase = () => sequelize.sync({ alter: true });
