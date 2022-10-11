@@ -3,18 +3,21 @@ import { ButtonContainer, Gap, Subtitle } from './styles';
 import { ConnectWalletModalProps } from './types';
 import DialogContainer from '../DialogContainer';
 import { Button } from '@zignaly-open/ui';
-import { ReactComponent as MetaMaskLogo } from '../../../assets/icons/metamask-logo.svg';
+import { ReactComponent as MetaMaskLogo } from 'assets/icons/metamask-logo.svg';
+import { ReactComponent as KuCoinLogo } from 'assets/icons/kucoin.svg';
+import { ReactComponent as WalletConnectLogo } from 'assets/icons/walletconnect-logo.svg';
 import { useTranslation } from 'react-i18next';
 import useAuthenticate from 'hooks/useAuthenticate';
 import { Box, CircularProgress, useMediaQuery } from '@mui/material';
 import theme from 'theme';
 import useCurrentUser from 'hooks/useCurrentUser';
-import { useEthers } from '@usedapp/core';
+import { useConfig, useEthers } from '@usedapp/core';
 import { useAsync } from 'react-use';
 import UnlockMetamaskModal from '../UnlockMetamask';
 import { useModal } from 'mui-modal-provider';
 import NoMetaMask from '../NoMetaMask';
 import ConnectionCanceledModal from '../ConnectionCanceledModal';
+import WalletConnectProvider from '@walletconnect/web3-provider';
 
 const ConnectWalletModal = (props: ConnectWalletModalProps) => {
   const {
@@ -29,6 +32,7 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
   const [showUnlock, setShowUnlock] = useState(false);
   const [showCanceled, setShowCanceled] = useState(false);
   const { showModal } = useModal();
+  const config = useConfig();
 
   useEffect(() => {
     if (user) {
@@ -81,6 +85,19 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
     }
   };
 
+  const handleWalletConnect = async () => {
+    const provider = new WalletConnectProvider({
+      rpc: config.readOnlyUrls as { [chainId: number]: string },
+      chainId: config.readOnlyChainId,
+      // todo: it doesn't work without
+      infuraId: 'b5b4216a2e7e4fcea49c3bd93777ab95',
+    });
+    //  Enable session (triggers QR Code modal)
+    await provider.enable();
+
+    authenticate(provider);
+  };
+
   if (showUnlock) {
     return <UnlockMetamaskModal {...props} />;
   } else if (showCanceled) {
@@ -120,11 +137,27 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
           <ButtonContainer>
             <Button
               variant='primary'
-              minWidth={matchesSmall ? 255 : 180}
+              minWidth={270}
               size={matchesSmall ? 'xlarge' : 'large'}
-              caption={t('metamask')}
+              caption='METAMASK'
               onClick={handleMetaMaskConnect}
               leftElement={<MetaMaskLogo />}
+            />
+            <Button
+              variant='primary'
+              minWidth={270}
+              size={matchesSmall ? 'xlarge' : 'large'}
+              caption='KUCOIN WALLET'
+              onClick={handleMetaMaskConnect}
+              leftElement={<KuCoinLogo />}
+            />
+            <Button
+              variant='primary'
+              minWidth={270}
+              size={matchesSmall ? 'xlarge' : 'large'}
+              caption='WALLETCONNECT'
+              onClick={handleWalletConnect}
+              leftElement={<WalletConnectLogo />}
             />
           </ButtonContainer>
         </>

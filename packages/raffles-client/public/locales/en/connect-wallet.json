@@ -1,7 +1,6 @@
 {
     "title": "Connect Wallet",
     "subtitle": "To continue, you need to connect your wallet with one of these providers:",
-    "metamask": "METAMASK",
     "waiting-signature": "Please sign the message to connect your account.",
     "no-wallet": "A wallet has not been found.",
     "no-wallet-info": "No Ethereum browser extension detected, install MetaMask on desktop or visit from a dApp browser on mobile.",

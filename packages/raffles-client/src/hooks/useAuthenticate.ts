@@ -10,6 +10,7 @@ import {
   GET_CURRENT_USER_BALANCE,
 } from 'queries/users';
 import { GET_AUCTIONS } from 'queries/auctions';
+import WalletConnectProvider from '@walletconnect/web3-provider';
 
 export function useLogout(): () => Promise<void> {
   const { deactivate } = useEthers();
@@ -24,7 +25,7 @@ export function useLogout(): () => Promise<void> {
 }
 
 export default function useAuthenticate(): {
-  authenticate: () => void;
+  authenticate: (prov?: object) => void;
   isSigning: boolean;
   error: Error & { code: number };
 } {
@@ -33,9 +34,10 @@ export default function useAuthenticate(): {
   const [isOkToStart, setIsOkToStart] = useState(false);
   const [isSigning, setIsSigning] = useState(false);
   const client = useApolloClient();
-  const { account, activateBrowserWallet, library, switchNetwork } =
+  const { account, activateBrowserWallet, activate, library, switchNetwork } =
     useEthers();
   const [error, setError] = useState(null);
+  const [provider, setProvider] = useState(null);
 
   async function createUserAndSign() {
     const {
@@ -46,9 +48,13 @@ export default function useAuthenticate(): {
       variables: { publicAddress: account.toLocaleLowerCase() },
     });
 
-    await switchNetwork(
-      process.env.REACT_APP_USE_MUMBAI_CHAIN ? Mumbai.chainId : Polygon.chainId,
-    );
+    if (!provider) {
+      await switchNetwork(
+        process.env.REACT_APP_USE_MUMBAI_CHAIN
+          ? Mumbai.chainId
+          : Polygon.chainId,
+      );
+    }
 
     setIsSigning(true);
     try {
@@ -92,8 +98,9 @@ export default function useAuthenticate(): {
     createUserAndSign();
   }, [account, isOkToStart]);
 
-  const startAuthenticate = () => {
+  const startAuthenticate = (prov?: WalletConnectProvider) => {
     setError(null);
+    setProvider(prov);
 
     // In case there is an old token saved, that will trigger useCurrentUser fetching
     // as soon as account connected, but new message not signed yet.
@@ -104,7 +111,13 @@ export default function useAuthenticate(): {
 
     if (!account) {
       // Init account
-      activateBrowserWallet();
+      if (prov) {
+        // WalletConnect
+        activate(prov);
+      } else {
+        // Metamask
+        activateBrowserWallet();
+      }
     }
   };
 
