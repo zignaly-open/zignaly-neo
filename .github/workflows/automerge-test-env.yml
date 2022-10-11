@@ -1,0 +1,20 @@
+name: Auto-merge into the test environment
+
+on:
+  pull_request_review:
+    types: [submitted]
+
+jobs:
+  merge-ephemeral:
+    if: ${{ github.event.review.state == 'approved' && github.event.pull_request.head.ref == 'master' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Merge the PR branch to origin/test
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          target_branch: test
+          message: Merging ${{ github.event.pull_request.head.ref }}
+          from_branch: ${{ github.event.pull_request.head.ref }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
