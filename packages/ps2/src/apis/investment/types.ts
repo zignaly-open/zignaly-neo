@@ -29,6 +29,12 @@ export type InvestmentServiceDetails = {
   serviceId: string;
 };
 
+export type InvestedInService = {
+  name: string;
+  invested: number;
+  pending: number;
+}[];
+
 export type Investment = InvestmentServiceDetails & {
   ownerName: string;
   invested: string;

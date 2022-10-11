@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { Investment, InvestmentDetails } from './types';
+import { InvestedInService, Investment, InvestmentDetails } from './types';
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
@@ -27,6 +27,13 @@ export const api = createApi({
           exchangeInternalId,
           amount,
         },
+      }),
+    }),
+
+    investedAmount: builder.query<InvestedInService, string>({
+      query: (serviceId) => ({
+        url: `user/exchanges/${serviceId}/invested`,
+        method: 'GET',
       }),
     }),
 
@@ -81,6 +88,7 @@ export const api = createApi({
 
 export const {
   useInvestmentsQuery,
+  useInvestedAmountQuery,
   useUpdateTakeProfitAndInvestMoreMutation,
   useUpdateTakeProfitMutation,
   useWithdrawInvestmentMutation,

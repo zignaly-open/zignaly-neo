@@ -5,8 +5,9 @@ import {
   useUpdateTakeProfitMutation,
   useUpdateTakeProfitAndInvestMoreMutation,
   useWithdrawInvestmentMutation,
+  useInvestedAmountQuery,
 } from './api';
-import { useActiveExchange } from '../user/use';
+import { useActiveExchange, useIsAuthenticated } from '../user/use';
 import { InvestmentDetails, InvestmentServiceDetails } from './types';
 import { RootState } from '../store';
 import { setSelectedInvestment } from './store';
@@ -37,6 +38,22 @@ export function useSetSelectedInvestment(): (
 export function useSelectedInvestment(): InvestmentServiceDetails {
   return useSelector((state: RootState) => state.investment)
     ?.selectedInvestment;
+}
+
+export function useIsInvestedInService(serviceId: string): {
+  isLoading: boolean;
+  value: boolean;
+} {
+  const isAuthenticated = useIsAuthenticated();
+  const { isLoading, data } = useInvestedAmountQuery(serviceId, {
+    skip: !isAuthenticated,
+  });
+  return {
+    isLoading,
+    value:
+      !!data &&
+      Object.values(data).some((x) => x.invested > 0 || x.pending > 0),
+  };
 }
 
 export function useCurrentBalance(): { id: string; balance: string } {

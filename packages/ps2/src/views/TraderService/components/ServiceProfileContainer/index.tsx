@@ -7,18 +7,31 @@ import { Avatar } from '@zignaly-open/ui';
 import { InvestButton, InvestedButton, ServiceInformation } from './atoms';
 import { useMediaQuery } from '@mui/material';
 import theme from 'theme';
-import { useSetSelectedInvestment } from '../../../../apis/investment/use';
+import {
+  useIsInvestedInService,
+  useSetSelectedInvestment,
+} from '../../../../apis/investment/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import EditInvestmentModal from '../../../Dashboard/components/EditInvestmentModal';
 import { serviceToInvestmentServiceDetail } from '../../../../apis/investment/util';
+import {
+  useIsAuthenticated,
+  useSetMissedRoute,
+} from '../../../../apis/user/use';
+import { useNavigate } from 'react-router-dom';
+import { ROUTE_LOGIN } from '../../../../routes';
 
 const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
 }) => {
   const isOwner = useIsServiceOwner(service.id);
+  const isInvested = useIsInvestedInService(service.id);
   const md = useMediaQuery(theme.breakpoints.up('sm'));
   const selectInvestment = useSetSelectedInvestment();
+  const navigate = useNavigate();
+  const setMissedRoute = useSetMissedRoute();
+  const isAuthenticated = useIsAuthenticated();
   // we do not use the results of this till before the modal
   useCoinBalances();
   const { showModal } = useModal();
@@ -30,7 +43,17 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
     });
   };
 
-  // TODO: not logged in
+  const onClickMakeInvestment = () => {
+    if (isAuthenticated) {
+      selectInvestment(serviceToInvestmentServiceDetail(service));
+      const modal: ShowFnOutput<void> = showModal(EditInvestmentModal, {
+        close: () => modal.hide(),
+      });
+    } else {
+      setMissedRoute();
+      navigate(ROUTE_LOGIN);
+    }
+  };
 
   return (
     <Box
@@ -67,15 +90,15 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
         >
           <ServiceInformation service={service} />
         </Box>
-        {!isOwner && (
+        {!(isOwner || isInvested.isLoading) && (
           <Box sx={{ mt: md ? 0 : 3 }}>
-            {+service.invested ? (
+            {isInvested.value ? (
               <InvestedButton
                 service={service}
                 onClick={onClickEditInvestment}
               />
             ) : (
-              <InvestButton service={service} onClick={() => alert()} />
+              <InvestButton service={service} onClick={onClickMakeInvestment} />
             )}
           </Box>
         )}
