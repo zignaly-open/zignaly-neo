@@ -129,11 +129,11 @@ describe('Codes', () => {
 
     const { body } = await redeemCode(alice.referralCode, bobToken);
 
-    expect(body.data.redeemCode).toEqual(10);
+    expect(body.data.redeemCode).toEqual(500);
 
     expect(mock.history.post[0].data).toBe(
       JSON.stringify({
-        amount: '10',
+        amount: '500',
         fees: '0',
         currency: 'ZIG',
         user_id: zignalySystemId,
@@ -145,7 +145,7 @@ describe('Codes', () => {
 
     expect(mock.history.post[1].data).toBe(
       JSON.stringify({
-        amount: '10',
+        amount: '100',
         fees: '0',
         currency: 'ZIG',
         user_id: zignalySystemId,

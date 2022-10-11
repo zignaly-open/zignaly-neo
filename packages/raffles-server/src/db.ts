@@ -41,8 +41,11 @@ User.afterCreate(async (user) => {
     name: user.referralCode,
     welcomeType: true,
     userId: user.id,
-    benefitDirect: 10,
-    rewardDirect: 10,
+    benefitDirect: 500,
+    rewardDirect: 500,
+    reqMinimumDeposit: 500,
+    maxTotalBenefits: 500,
+    maxTotalRewards: 100,
   });
 });
 
