@@ -1,4 +1,8 @@
 {
+  "404": {
+    "title": "CH-Ńöṫ ḟöüńḋ",
+    "description": "CH-Ĉĥëĉk ṫĥë ÜЃL öѓ yöüѓ lïḟë ĉĥöïĉëŝ."
+  },
   "yes": "CH-Yëŝ",
   "no": "CH-Ńö",
   "loading": "CH-Löáḋïńĝ...",
@@ -17,6 +21,9 @@
   "main-menu": {
     "dropdown-link-forTrading": "CH-Ḟöѓ Ṫѓáḋïńĝ Ŝëѓvïĉëŝ",
     "dropdown-link-helpDocs": "CH-Ĥëlṗ Ḋöĉŝ"
+  },
+  "refresh": {
+    "short": "CH-Ńëw vëѓŝïöń áváïláblë, ĉlïĉk ĥëѓë ṫö ѓëḟѓëŝĥ"
   },
   "account-menu": {
     "isAuth-button-logIn": "CH-Löĝ ïń",
