@@ -12,6 +12,7 @@ import { BALANCE_CHANGED } from './constants';
 import { withFilter } from 'graphql-subscriptions';
 import { getUserIdFromToken } from '../../util/jwt';
 import redisService from '../../redisService';
+import { WalletType } from '@zignaly-open/raffles-shared/types';
 
 const generateNonceSignMessage = (nonce: string | number) =>
   `Please sign this message to verify it's you: ${nonce}`;
@@ -107,7 +108,10 @@ export const resolvers = {
 
     getOrCreateUser: async (
       _: any,
-      { publicAddress }: { publicAddress: string },
+      {
+        walletType,
+        publicAddress,
+      }: { walletType: WalletType; publicAddress: string },
     ) => {
       if (!publicAddress) return null;
 
@@ -116,7 +120,7 @@ export const resolvers = {
           where: { publicAddress },
         });
         if (!user) {
-          user = await User.create({ publicAddress });
+          user = await User.create({ walletType, publicAddress });
         }
 
         return {

@@ -48,28 +48,27 @@ describe('Codes', () => {
   });
 
   it('should return code data', async () => {
-    const [user] = await createRandomUser(1000);
+    const code = await createCode();
     const [, aliceToken] = await createAlice(1000);
 
     const {
       body: {
         data: { checkCode: res },
       },
-    } = await checkCode(user.referralCode, aliceToken);
-    console.log(res);
-    expect(res).toEqual(expect.objectContaining({ name: user.referralCode }));
+    } = await checkCode(code.name, aliceToken);
+    expect(res).toEqual(expect.objectContaining({ name: code.name }));
   });
 
   it('should error if already redeemed a welcome code', async () => {
+    const code = await createCode({ welcomeType: true });
     const [user] = await createRandomUser(1000);
-    const [user2] = await createRandomUser(1000);
     const [, aliceToken] = await createAlice(1000);
 
     // Redeem welcome code
-    await redeemCode(user.referralCode, aliceToken);
+    await redeemCode(code.name, aliceToken);
 
     // Redeem another welcome code
-    const { body } = await redeemCode(user2.referralCode, aliceToken);
+    const { body } = await redeemCode(user.referralCode, aliceToken);
 
     expect(body.errors[0].message).toEqual(
       'You have already redeemed a welcome code.',
@@ -217,6 +216,20 @@ describe('Codes', () => {
     const [alice] = await createAlice(1000);
     const [bob, bobToken] = await createBob(1000);
 
+    // Mock deposit
+    mock.onGet(`/operations/all/${bob.publicAddress}`).reply(() => {
+      return [
+        200,
+        [
+          {
+            amount: 500,
+            created_at: '2022-09-09T16:09:56',
+            internal_type: TransactionType.Deposit,
+          },
+        ],
+      ];
+    });
+
     const { body } = await redeemCode(alice.referralCode, bobToken);
 
     expect(body.data.redeemCode).toEqual(DEFAULT_BENEFIT_DIRECT);
@@ -278,12 +291,12 @@ describe('Codes', () => {
           {
             amount: 500,
             created_at: '2022-09-09T16:09:56',
-            internal_type: 'ZigBids Deposit',
+            internal_type: TransactionType.Deposit,
           },
           {
             amount: 500,
             created_at: new Date(Date.now() - 12 * 60 * 60 * 1000),
-            internal_type: 'ZigBids Deposit',
+            internal_type: TransactionType.Deposit,
           },
         ],
       ];

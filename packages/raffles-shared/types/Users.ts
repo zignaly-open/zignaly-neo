@@ -8,3 +8,5 @@ export type UserType = {
   onBoardingCompleted: Date;
   referralCode: string;
 };
+
+export type WalletType = 'metamask' | 'kucoin' | 'walletconnect';

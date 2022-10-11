@@ -15,8 +15,8 @@ export const GET_CURRENT_USER = gql`
 `;
 
 export const GET_OR_CREATE_USER = gql`
-  mutation getOrCreateUser($publicAddress: String!) {
-    getOrCreateUser(publicAddress: $publicAddress) {
+  mutation getOrCreateUser($walletType: String!, $publicAddress: String!) {
+    getOrCreateUser(walletType: $walletType, publicAddress: $publicAddress) {
       id
       onboardingCompletedAt
       messageToSign

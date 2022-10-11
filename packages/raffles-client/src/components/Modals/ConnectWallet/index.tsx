@@ -18,6 +18,7 @@ import { useModal } from 'mui-modal-provider';
 import NoMetaMask from '../NoMetaMask';
 import ConnectionCanceledModal from '../ConnectionCanceledModal';
 import WalletConnectProvider from '@walletconnect/web3-provider';
+import { WalletType } from '@zignaly-open/raffles-shared/types';
 
 const ConnectWalletModal = (props: ConnectWalletModalProps) => {
   const {
@@ -77,10 +78,10 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
     };
   }, []);
 
-  const handleMetaMaskConnect = () => {
+  const handleMetaMaskConnect = (walletType: WalletType) => {
     if (window.ethereum) {
-      authenticate();
-    } else {
+      authenticate(walletType);
+    } else if (walletType === 'metamask') {
       showModal(NoMetaMask);
     }
   };
@@ -95,7 +96,7 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
     //  Enable session (triggers QR Code modal)
     await provider.enable();
 
-    authenticate(provider);
+    authenticate('walletconnect', provider);
   };
 
   if (showUnlock) {
@@ -140,7 +141,7 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
               minWidth={270}
               size={matchesSmall ? 'xlarge' : 'large'}
               caption='METAMASK'
-              onClick={handleMetaMaskConnect}
+              onClick={() => handleMetaMaskConnect('metamask')}
               leftElement={<MetaMaskLogo />}
             />
             <Button
@@ -148,7 +149,7 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
               minWidth={270}
               size={matchesSmall ? 'xlarge' : 'large'}
               caption='KUCOIN WALLET'
-              onClick={handleMetaMaskConnect}
+              onClick={() => handleMetaMaskConnect('kucoin')}
               leftElement={<KuCoinLogo />}
             />
             <Button
