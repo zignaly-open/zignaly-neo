@@ -15,6 +15,9 @@ export const userSlice = createSlice({
     logout: () => {
       return initialState;
     },
+    setMissedRoute: (state, action: PayloadAction<string>) => {
+      state.missedRoute = action.payload;
+    },
     setAccessToken: (state, action: PayloadAction<string>) => {
       state.accessToken = action.payload;
     },
@@ -36,6 +39,7 @@ export const {
   setAccessToken,
   setUser,
   setSessionExpiryDate,
+  setMissedRoute,
   setActiveExchangeInternalId,
 } = userSlice.actions;
 

@@ -22,6 +22,7 @@ import {
   logout,
   setAccessToken,
   setActiveExchangeInternalId,
+  setMissedRoute,
   setSessionExpiryDate,
   setUser,
 } from './store';
@@ -34,6 +35,7 @@ import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import AuthVerifyModal from '../../views/Auth/components/AuthVerifyModal';
 import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../service/api';
+import { useLocation } from 'react-router-dom';
 
 const throwBackendErrorInOurFormat = async <T,>(
   promise: Promise<T>,
@@ -59,7 +61,6 @@ export const useAuthenticate = (): [
   const [loadUser] = useLazyUserQuery();
   const { i18n } = useTranslation();
   const { executeRecaptcha } = useGoogleReCaptcha();
-
   // can't use useAsyncFn because https://github.com/streamich/react-use/issues/1768
   return [
     { loading },
@@ -158,6 +159,21 @@ export function useChangeLocale(): (locale: string) => void {
   return (locale: string) => {
     i18n.changeLanguage(locale);
     isAuthenticated && save({ locale });
+  };
+}
+
+export function useSetMissedRoute(): () => void {
+  const dispatch = useDispatch();
+  const location = useLocation();
+  return () => dispatch(setMissedRoute(location.pathname));
+}
+
+export function usePopMissedRoute(): () => string {
+  const dispatch = useDispatch();
+  const { missedRoute } = useSelector((state: RootState) => state.user);
+  return () => {
+    missedRoute && setTimeout(() => dispatch(setMissedRoute('')));
+    return missedRoute;
   };
 }
 

@@ -1,5 +1,6 @@
 export interface UserState {
   accessToken?: string;
+  missedRoute?: string;
   sessionExpiryDate?: Date;
   user?: UserData;
   activeExchangeInternalId?: string;
