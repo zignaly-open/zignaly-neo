@@ -13,6 +13,10 @@ import {
   waitUntilTablesAreCreated,
   wipeOut,
 } from '../../util/test-utils';
+import {
+  DEFAULT_BENEFIT_DIRECT,
+  DEFAULT_MAX_TOTAL_REWARDS,
+} from '../users/constants';
 
 describe('Codes', () => {
   beforeAll(waitUntilTablesAreCreated);
@@ -129,11 +133,11 @@ describe('Codes', () => {
 
     const { body } = await redeemCode(alice.referralCode, bobToken);
 
-    expect(body.data.redeemCode).toEqual(500);
+    expect(body.data.redeemCode).toEqual(DEFAULT_BENEFIT_DIRECT);
 
     expect(mock.history.post[0].data).toBe(
       JSON.stringify({
-        amount: '500',
+        amount: DEFAULT_BENEFIT_DIRECT.toString(),
         fees: '0',
         currency: 'ZIG',
         user_id: zignalySystemId,
@@ -145,7 +149,7 @@ describe('Codes', () => {
 
     expect(mock.history.post[1].data).toBe(
       JSON.stringify({
-        amount: '100',
+        amount: DEFAULT_MAX_TOTAL_REWARDS.toString(),
         fees: '0',
         currency: 'ZIG',
         user_id: zignalySystemId,

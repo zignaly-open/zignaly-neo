@@ -10,6 +10,13 @@ import { Setting } from './entities/setting/model';
 import { Payout } from './entities/payouts/model';
 import { connect } from './redisAuctionWatcher';
 import { Code, CodeRedemption } from './entities/codes/model';
+import {
+  DEFAULT_BENEFIT_DIRECT,
+  DEFAULT_MAX_TOTAL_BENEFITS,
+  DEFAULT_MAX_TOTAL_REWARDS,
+  DEFAULT_REQ_MINIMUM_DEPOSIT,
+  DEFAULT_REWARD_DIRECT,
+} from './entities/users/constants';
 
 const models = [
   User,
@@ -41,11 +48,11 @@ User.afterCreate(async (user) => {
     name: user.referralCode,
     welcomeType: true,
     userId: user.id,
-    benefitDirect: 500,
-    rewardDirect: 500,
-    reqMinimumDeposit: 500,
-    maxTotalBenefits: 500,
-    maxTotalRewards: 100,
+    benefitDirect: DEFAULT_BENEFIT_DIRECT,
+    rewardDirect: DEFAULT_REWARD_DIRECT,
+    reqMinimumDeposit: DEFAULT_REQ_MINIMUM_DEPOSIT,
+    maxTotalBenefits: DEFAULT_MAX_TOTAL_BENEFITS,
+    maxTotalRewards: DEFAULT_MAX_TOTAL_REWARDS,
   });
 });
 

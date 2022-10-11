@@ -4,7 +4,7 @@ import { algorithm, secret } from '../../../config';
 import { generateUserNonce, User } from './model';
 import jwt from 'jsonwebtoken';
 import pubsub from '../../pubsub';
-import { BALANCE_CHANGED } from './constants';
+import { BALANCE_CHANGED, CODE_LENGTH } from './constants';
 import { getUserBalance } from '../../cybavo';
 import { ContextUser } from '../../types';
 import redisService from '../../redisService';
@@ -112,7 +112,6 @@ export async function emitBalanceChanged(user: ContextUser) {
 }
 
 export function generateCode() {
-  const CODE_LENGTH = 8;
   return Math.random()
     .toString(36)
     .substring(2, CODE_LENGTH + 2)
