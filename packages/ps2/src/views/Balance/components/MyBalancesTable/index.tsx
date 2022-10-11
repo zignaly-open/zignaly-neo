@@ -109,8 +109,8 @@ const MyBalancesTable = (): JSX.Element => {
   );
 
   const getFilteredData = useCallback(
-    (coins: CoinDetails, balances: CoinBalances) => {
-      return Object.entries<CoinBalance & CoinDetail>(
+    (coins: CoinDetails, balances: CoinBalances) =>
+      Object.entries<CoinBalance & CoinDetail>(
         mergeCoinsAndBalances(coins, balances),
       )
         .filter(
@@ -138,8 +138,7 @@ const MyBalancesTable = (): JSX.Element => {
           valueUSD: {
             balanceTotalUSDT: balance.balanceTotalUSDT,
           },
-        }));
-    },
+        })),
     [exchangeType],
   );
 
