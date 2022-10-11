@@ -9,6 +9,7 @@ export const GET_CURRENT_USER = gql`
       discordName
       onboardingCompletedAt
       publicAddress
+      referralCode
     }
   }
 `;

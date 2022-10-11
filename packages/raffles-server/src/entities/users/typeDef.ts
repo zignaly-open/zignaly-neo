@@ -8,6 +8,7 @@ export const typeDef = gql`
     onboardingCompletedAt: Date
     discordName: String
     email: String
+    referralCode: String
   }
 
   type AuthUser {

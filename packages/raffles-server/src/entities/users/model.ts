@@ -8,6 +8,7 @@ import {
   Default,
   Validate,
 } from 'sequelize-typescript';
+import { generateCode } from './util';
 
 @Table
 export class User extends Model {
@@ -38,6 +39,10 @@ export class User extends Model {
 
   @Column
   public onboardingCompletedAt?: Date;
+
+  @Default(generateCode)
+  @Column
+  public referralCode: string;
 }
 
 export function generateUserNonce(): number {

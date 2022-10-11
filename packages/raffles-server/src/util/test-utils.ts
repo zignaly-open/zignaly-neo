@@ -1,7 +1,7 @@
 import supertest from 'supertest';
 import { User } from '../entities/users/model';
 import app from '../index';
-import { signJwtToken } from '../entities/users/util';
+import { generateCode, signJwtToken } from '../entities/users/util';
 import {
   Auction,
   AuctionBasketItem,
@@ -13,6 +13,7 @@ import { persistTablesToTheDatabase } from '../db';
 import { Payout } from '../entities/payouts/model';
 import mockCybavoWallet, { MockedCybavo } from './mock-cybavo-wallet';
 import redisService from '../redisService';
+import { Code } from '../entities/codes/model';
 
 const request = supertest(app);
 
@@ -209,12 +210,14 @@ export async function createBobDiscord(): Promise<[User, string]> {
 
 export async function createRandomUser(
   balance = 0,
+  overrides?: Partial<User>,
 ): Promise<[User, string, MockedCybavo]> {
   try {
     const user = await User.create({
       username: null,
       publicAddress: '0xE288AE3acccc630'.toLowerCase() + Math.random(),
       onboardingCompletedAt: Date.now(),
+      ...overrides,
     });
     const cybavoMock = await mockCybavoWallet(user, balance);
     return [user, await signJwtToken(user), cybavoMock];
@@ -283,6 +286,40 @@ export const AUCTIONS_QUERY = `
     }
   }
 `;
+
+export async function checkCode(code: string, token: string): Promise<any> {
+  return makeRequest(
+    `
+   query {
+    checkCode(code: "${code}") { 
+      name
+      reqMinimumBalance
+      reqMinimumDeposit
+      reqDepositFrom
+      reqMinAuctions
+      reqWalletType
+     }
+  }`,
+    token,
+  );
+}
+
+export async function redeemCode(code: string, token: string): Promise<any> {
+  return makeRequest(
+    `
+   mutation {
+    redeemCode(code: "${code}")
+  }`,
+    token,
+  );
+}
+
+export async function createCode(overrides?: Partial<Code>) {
+  return Code.create({
+    name: generateCode(),
+    ...overrides,
+  });
+}
 
 export async function clearMocks() {
   jest.clearAllMocks();

@@ -14,6 +14,8 @@ import ConnectWalletModal from '../Modals/ConnectWallet';
 import { useModal } from 'mui-modal-provider';
 import UserBalance from './UserBalance';
 import TransferZigModal from 'components/Modals/TransferZig';
+import ShareCodeModal from 'components/Modals/ShareCode';
+import RedeemCodeModal from 'components/Modals/RedeemCode';
 import SwitchAccountModal from 'components/Modals/SwitchAccount';
 import { Box } from '@mui/system';
 import { useEthers } from '@usedapp/core';
@@ -87,6 +89,20 @@ const Header = () => {
                   display: { sm: 'block', xs: 'none' },
                 }}
               >
+                <Button
+                  variant='secondary'
+                  size='small'
+                  caption={t('share-earn')}
+                  leftElement={<StyledWalletIcon />}
+                  onClick={() => showModal(ShareCodeModal)}
+                />
+                <Button
+                  variant='secondary'
+                  size='small'
+                  caption={t('redeem-code')}
+                  leftElement={<StyledWalletIcon />}
+                  onClick={() => showModal(RedeemCodeModal)}
+                />
                 <Button
                   variant='secondary'
                   size='small'

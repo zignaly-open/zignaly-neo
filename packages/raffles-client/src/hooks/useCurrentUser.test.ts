@@ -22,6 +22,7 @@ describe('useCurrentUser', () => {
     email: '',
     discordName: '',
     onBoardingCompleted: new Date(Date.now()),
+    referralCode: '',
   };
 
   const mockResponse: GetCurrentUserResponseModel = {

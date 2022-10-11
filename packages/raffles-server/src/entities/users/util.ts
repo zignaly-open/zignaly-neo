@@ -110,3 +110,10 @@ export async function emitBalanceChanged(user: ContextUser) {
     },
   });
 }
+
+export function generateCode() {
+  const CODE_LENGTH = 8;
+  return Math.random()
+    .toString(36)
+    .substring(2, CODE_LENGTH + 2);
+}

@@ -6,4 +6,5 @@ export type UserType = {
   email: string;
   discordName: string;
   onBoardingCompleted: Date;
+  referralCode: string;
 };
