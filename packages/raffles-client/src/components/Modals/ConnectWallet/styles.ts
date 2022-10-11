@@ -15,6 +15,7 @@ export const Subtitle = styled(Typography)`
 `;
 
 export const ButtonContainer = styled.div`
+  gap: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;

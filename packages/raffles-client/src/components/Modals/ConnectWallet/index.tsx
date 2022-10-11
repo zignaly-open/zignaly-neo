@@ -3,7 +3,8 @@ import { ButtonContainer, Gap, Subtitle } from './styles';
 import { ConnectWalletModalProps } from './types';
 import DialogContainer from '../DialogContainer';
 import { Button } from '@zignaly-open/ui';
-import { ReactComponent as MetaMaskLogo } from '../../../assets/icons/metamask-logo.svg';
+import { ReactComponent as MetaMaskLogo } from 'assets/icons/metamask-logo.svg';
+import { ReactComponent as KuCoinLogo } from 'assets/icons/kucoin.svg';
 import { useTranslation } from 'react-i18next';
 import useAuthenticate from 'hooks/useAuthenticate';
 import { Box, CircularProgress, useMediaQuery } from '@mui/material';
@@ -122,9 +123,17 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
               variant='primary'
               minWidth={matchesSmall ? 255 : 180}
               size={matchesSmall ? 'xlarge' : 'large'}
-              caption={t('metamask')}
+              caption='METAMASK'
               onClick={handleMetaMaskConnect}
               leftElement={<MetaMaskLogo />}
+            />
+            <Button
+              variant='primary'
+              minWidth={matchesSmall ? 255 : 180}
+              size={matchesSmall ? 'xlarge' : 'large'}
+              caption='KUCOIN WALLET'
+              onClick={handleMetaMaskConnect}
+              leftElement={<KuCoinLogo />}
             />
           </ButtonContainer>
         </>
