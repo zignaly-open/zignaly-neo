@@ -63,7 +63,7 @@ export const internalTransfer = async (
       currency: 'ZIG',
       user_id: from,
       to_user_id: to,
-      locked: 'true',
+      // locked: 'true',
       type,
     },
   }).then(({ data }) => data);

@@ -89,11 +89,17 @@ export class Auction extends Model {
   @Column
   public chain: string;
 
+  @Default(false)
   @Column
   public inRedis: boolean;
 
+  @Default(false)
   @Column
   public isFinalized: boolean;
+
+  @Default(false)
+  @Column
+  public isExclusiveToKuCoin: boolean;
 }
 
 @Table
