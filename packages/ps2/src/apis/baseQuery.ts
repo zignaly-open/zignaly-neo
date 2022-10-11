@@ -46,7 +46,7 @@ const customFetchBase: BaseQueryFn<
     api.dispatch(logout());
   } else if (
     +new Date((api.getState() as RootState).user.sessionExpiryDate) -
-      TIME_TO_START_REFRESHING_TOKEN >
+      TIME_TO_START_REFRESHING_TOKEN <
     Date.now()
   ) {
     if (!mutex.isLocked()) {
