@@ -5,7 +5,7 @@ on:
     types: [submitted]
 
 jobs:
-  merge-ephemeral:
+  merge-to-test:
     if: ${{ github.event.review.state == 'approved' && github.event.pull_request.head.ref == 'master' }}
     runs-on: ubuntu-latest
     steps:
