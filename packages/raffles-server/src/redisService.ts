@@ -12,7 +12,13 @@ import BN from 'bignumber.js';
 import fs from 'fs';
 import path from 'path';
 
-const redis = new Redis(redisURL);
+const redis = new Redis(redisURL, {
+  ...(isTest && {
+    retryStrategy() {
+      return null;
+    },
+  }),
+});
 // Load lua functions
 const content = fs.readFileSync(path.resolve(__dirname, 'functions.lua'));
 redis.function('LOAD', 'REPLACE', content);
