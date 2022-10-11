@@ -8,7 +8,8 @@ export const resolvers = {
       { code }: { code: string },
       { user }: ApolloContext,
     ) => {
-      return check(code, user);
+      const { code: codeInfo } = await check(code, user);
+      return codeInfo;
     },
   },
   Mutation: {

@@ -6,9 +6,12 @@ import {
   checkCode,
   clearMocks,
   createAlice,
+  createAuction,
   createBob,
   createCode,
   createRandomUser,
+  expireAuction,
+  makeBid,
   redeemCode,
   waitUntilTablesAreCreated,
   wipeOut,
@@ -111,19 +114,102 @@ describe('Codes', () => {
     expect(body.errors[0].message).toEqual('The code is expired');
   });
 
-  it('should error if already redeemed a welcome code', async () => {
-    const [user] = await createRandomUser(1000);
-    const [user2] = await createRandomUser(1000);
-    const [, aliceToken] = await createAlice(1000);
+  it('should error if reqMinimumBalance not reached', async () => {
+    const code = await createCode({ reqMinimumBalance: 1000 });
+    const [, aliceToken] = await createAlice(100);
 
-    // Redeem welcome code
-    await redeemCode(user.referralCode, aliceToken);
-
-    // Redeem another welcome code
-    const { body } = await redeemCode(user2.referralCode, aliceToken);
+    const { body } = await checkCode(code.name, aliceToken);
 
     expect(body.errors[0].message).toEqual(
-      'You have already redeemed a welcome code.',
+      `You need a balance of at least ${code.reqMinimumBalance}.`,
+    );
+  });
+
+  it('should error if reqMinimumDeposit not reached', async () => {
+    const code = await createCode({ reqMinimumDeposit: 1000 });
+    const [, aliceToken] = await createAlice(100);
+
+    const { body } = await checkCode(code.name, aliceToken);
+
+    expect(body.errors[0].message).toEqual(
+      `You need to deposit at least ${code.reqMinimumDeposit}ZIGs.`,
+    );
+  });
+
+  it('should work if reqMinimumDeposit reached', async () => {
+    const code = await createCode({ reqMinimumDeposit: 100 });
+    const [alice, aliceToken] = await createAlice(100);
+
+    // Mock deposits
+    mock.onGet(`/operations/all/${alice.publicAddress}`).reply(() => {
+      return [
+        200,
+        [
+          {
+            amount: 100,
+            created_at: new Date(Date.now() - 12 * 60 * 60 * 1000),
+            internal_type: 'ZigBids Deposit',
+          },
+        ],
+      ];
+    });
+
+    const { body } = await checkCode(code.name, aliceToken);
+
+    expect(body.data.checkCode).toEqual(
+      expect.objectContaining({ name: code.name }),
+    );
+  });
+
+  it('should error if reqMinAuctions not reached', async () => {
+    const code = await createCode({ reqMinAuctions: 1 });
+    const [, aliceToken] = await createAlice(100);
+
+    const { body } = await checkCode(code.name, aliceToken);
+
+    expect(body.errors[0].message).toEqual(
+      `You need to participate in at least ${code.reqMinAuctions} auctions.`,
+    );
+  });
+
+  it('should work if reqMinAuctions reached', async () => {
+    const code = await createCode({ reqMinAuctions: 1 });
+    const [, aliceToken] = await createAlice(100);
+
+    const auction = await createAuction();
+    await makeBid(auction, aliceToken);
+    await expireAuction(auction.id);
+
+    const { body } = await checkCode(code.name, aliceToken);
+
+    expect(body.data.checkCode).toEqual(
+      expect.objectContaining({ name: code.name }),
+    );
+  });
+
+  it('should error if reqWalletType not equal', async () => {
+    const code = await createCode({ reqWalletType: 'kucoin' });
+    const [, aliceToken] = await createRandomUser(100, {
+      walletType: 'metamask',
+    });
+
+    const { body } = await checkCode(code.name, aliceToken);
+
+    expect(body.errors[0].message).toEqual(
+      `You need a ${code.reqWalletType} wallet.`,
+    );
+  });
+
+  it('should work if reqWalletType matches', async () => {
+    const code = await createCode({ reqWalletType: 'kucoin' });
+    const [, aliceToken] = await createRandomUser(100, {
+      walletType: 'kucoin',
+    });
+
+    const { body } = await checkCode(code.name, aliceToken);
+
+    expect(body.data.checkCode).toEqual(
+      expect.objectContaining({ name: code.name }),
     );
   });
 

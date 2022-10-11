@@ -41,6 +41,11 @@ const mockCybavoWallet = async (
     ];
   });
 
+  // Mock operations
+  mock.onGet(`/operations/all/${user.publicAddress}`).reply(() => {
+    return [200, []];
+  });
+
   // Mock internal transfers
   mock
     .onPost('/transfer/internal', {

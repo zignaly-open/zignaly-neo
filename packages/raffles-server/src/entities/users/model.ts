@@ -43,6 +43,10 @@ export class User extends Model {
   @Default(generateCode)
   @Column
   public referralCode: string;
+
+  @Default('metamask')
+  @Column
+  public walletType: string;
 }
 
 export function generateUserNonce(): number {

@@ -6,6 +6,7 @@ import {
   internalTransfer,
 } from '../../cybavo';
 import { ContextUser, TransactionType } from '../../types';
+import { AuctionBid } from '../auctions/model';
 import { User } from '../users/model';
 import { Code, CodeRedemption } from './model';
 
@@ -29,24 +30,37 @@ export const check = async (codeName: string, user: ContextUser) => {
       throw new Error('You have already redeemed a welcome code.');
     }
   }
+  const balance = parseFloat(await getUserBalance(user.publicAddress));
+  const deposits = await getDepositsTotal(code, user);
 
-  if (code.reqMinimumBalance > 0) {
-    // todo
+  if (code.reqMinimumBalance > 0 && balance < code.reqMinimumBalance) {
+    throw new Error(
+      `You need a balance of at least ${code.reqMinimumBalance}.`,
+    );
   }
 
-  if (code.reqMinimumDeposit > 0) {
-    // todo
-    // Check deposits
-    if (code.reqDepositFrom) {
-    }
+  if (code.reqMinimumDeposit > 0 && deposits < code.reqMinimumDeposit) {
+    throw new Error(
+      `You need to deposit at least ${code.reqMinimumDeposit}ZIGs.`,
+    );
   }
 
   if (code.reqMinAuctions > 0) {
-    // todo
+    const auctionsCount = await AuctionBid.count({
+      where: { userId: user.id },
+    });
+    if (auctionsCount < code.reqMinAuctions) {
+      throw new Error(
+        `You need to participate in at least ${code.reqMinAuctions} auctions.`,
+      );
+    }
   }
 
   if (code.reqWalletType) {
-    // todo
+    const userInfo = await User.findByPk(user.id);
+    if (userInfo.walletType !== code.reqWalletType) {
+      throw new Error(`You need a ${code.reqWalletType} wallet.`);
+    }
   }
 
   if (code.maxRedemptions > 0) {
@@ -63,26 +77,32 @@ export const check = async (codeName: string, user: ContextUser) => {
     throw new Error('The code is expired');
   }
 
-  return code;
+  return { code, balance, deposits };
 };
 
-const calculateInvitedBenefit = async (code: Code, user: ContextUser) => {
+const getDepositsTotal = async (code: Code, user: ContextUser) => {
+  return (await getUserDeposits(user.publicAddress)).reduce(
+    (total, d) =>
+      total +
+      (!code.reqDepositFrom || new Date(d.created_at) > code.reqDepositFrom
+        ? d.amount
+        : 0),
+    0,
+  );
+};
+
+const calculateInvitedBenefit = async (
+  code: Code,
+  balance: number,
+  deposits: number,
+) => {
   let invitedBenefit = code.benefitDirect;
 
   if (code.benefitBalanceFactor) {
-    const balance = await getUserBalance(user.publicAddress);
-    invitedBenefit += code.benefitBalanceFactor * parseFloat(balance);
+    invitedBenefit += code.benefitBalanceFactor * balance;
   }
 
   if (code.benefitDepositFactor) {
-    const deposits = (await getUserDeposits(user.publicAddress)).reduce(
-      (total, d) =>
-        total +
-        (!code.reqDepositFrom || new Date(d.created_at) > code.reqDepositFrom
-          ? d.amount
-          : 0),
-      0,
-    );
     invitedBenefit += code.benefitDepositFactor * deposits;
   }
 
@@ -103,9 +123,13 @@ const calculateInviterBenefit = (code: Code, invitedBenefit: number) => {
 };
 
 export const redeem = async (codeName: string, user: ContextUser) => {
-  const code = await check(codeName, user);
+  const { code, balance, deposits } = await check(codeName, user);
   try {
-    const invitedBenefit = await calculateInvitedBenefit(code, user);
+    const invitedBenefit = await calculateInvitedBenefit(
+      code,
+      balance,
+      deposits,
+    );
     const inviterBenefit = calculateInviterBenefit(code, invitedBenefit);
 
     if (invitedBenefit > 0) {
