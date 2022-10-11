@@ -2,7 +2,7 @@ name: PS2 Staging deploy
 on:
   push:
     branches:
-      - staging
+      - master
 
 jobs:
   pre_job:
@@ -64,7 +64,7 @@ jobs:
         with:
           args: --delete
         env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_PS2_STAGING_S3_BUCKET }}
+          AWS_S3_BUCKET: ${{ secrets.AWS_PS2_TEST_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PS2_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PS2_SECRET_KEY }}
           AWS_REGION: 'us-east-1'
@@ -72,7 +72,7 @@ jobs:
       - name: Invalidate CloudFront
         uses: chetan/invalidate-cloudfront-action@v2
         env:
-          DISTRIBUTION: ${{ secrets.AWS_PS2_STAGING_DISTRIBUTION }}
+          DISTRIBUTION: ${{ secrets.AWS_PS2_TEST_DISTRIBUTION }}
           PATHS: '/'
           AWS_REGION: 'us-east-1'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PS2_ACCESS_KEY }}
