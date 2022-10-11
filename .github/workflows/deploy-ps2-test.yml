@@ -1,4 +1,4 @@
-name: PS2 Staging deploy
+name: PS2 Test deploy
 on:
   push:
     branches:
