@@ -1,7 +1,7 @@
 import React from 'react';
 import { MarginContainer, PageContainer } from '@zignaly-open/ui';
 import MyBalancesTable from './components/MyBalancesTable';
-import AccountSelector from './components/AccountSelector';
+import BalanceAccountSelector from './components/BalanceAccountSelector';
 import { Header } from './styles';
 
 const MyBalances: React.FC = () => {
@@ -9,7 +9,7 @@ const MyBalances: React.FC = () => {
     <PageContainer className={'withSubHeader'}>
       <MarginContainer>
         <Header>
-          <AccountSelector />
+          <BalanceAccountSelector />
         </Header>
         <MyBalancesTable />
       </MarginContainer>

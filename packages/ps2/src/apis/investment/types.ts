@@ -29,11 +29,14 @@ export type InvestmentServiceDetails = {
   serviceId: string;
 };
 
-export type InvestedInService = {
-  name: string;
-  invested: number;
-  pending: number;
-}[];
+export type InvestedInService = Record<
+  string,
+  {
+    name: string;
+    invested: string;
+    pending: string;
+  }
+>;
 
 export type Investment = InvestmentServiceDetails & {
   ownerName: string;

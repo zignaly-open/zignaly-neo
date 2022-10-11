@@ -4,7 +4,12 @@ import { useIsServiceOwner } from '../../../../apis/service/use';
 import { Box } from '@mui/system';
 import { getServiceLogo } from '../../../../util/images';
 import { Avatar } from '@zignaly-open/ui';
-import { InvestButton, InvestedButton, ServiceInformation } from './atoms';
+import {
+  InvestButton,
+  InvestedButton,
+  OtherAccountsButton,
+  ServiceInformation,
+} from './atoms';
 import { useMediaQuery } from '@mui/material';
 import theme from 'theme';
 import {
@@ -16,11 +21,13 @@ import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import EditInvestmentModal from '../../../Dashboard/components/EditInvestmentModal';
 import { serviceToInvestmentServiceDetail } from '../../../../apis/investment/util';
 import {
+  useActiveExchange,
   useIsAuthenticated,
   useSetMissedRoute,
 } from '../../../../apis/user/use';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN } from '../../../../routes';
+import { useUpdateEffect } from 'react-use';
 
 const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
@@ -28,13 +35,19 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   const isOwner = useIsServiceOwner(service.id);
   const isInvested = useIsInvestedInService(service.id);
   const md = useMediaQuery(theme.breakpoints.up('sm'));
+  const activeExchange = useActiveExchange();
   const selectInvestment = useSetSelectedInvestment();
+
   const navigate = useNavigate();
   const setMissedRoute = useSetMissedRoute();
   const isAuthenticated = useIsAuthenticated();
   // we do not use the results of this till before the modal
   useCoinBalances();
   const { showModal } = useModal();
+
+  useUpdateEffect(() => {
+    activeExchange?.internalId && isInvested.refetch();
+  }, [activeExchange?.internalId]);
 
   const onClickEditInvestment = () => {
     selectInvestment(serviceToInvestmentServiceDetail(service));
@@ -77,7 +90,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
           flexDirection: md ? 'row' : 'column',
           display: 'flex',
           flex: 1,
-          alignItems: 'center',
+          alignItems: md ? 'flex-start' : 'center',
         }}
       >
         <Box sx={{ width: '55px', marginBottom: md ? 0 : 2 }}>
@@ -90,9 +103,10 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
         >
           <ServiceInformation service={service} />
         </Box>
-        {!(isOwner || isInvested.isLoading) && (
-          <Box sx={{ mt: md ? 0 : 3 }}>
-            {isInvested.value ? (
+
+        {!isInvested.isLoading && (
+          <Box sx={{ mt: md ? -1.5 : 3 }}>
+            {isInvested.thisAccount ? (
               <InvestedButton
                 service={service}
                 onClick={onClickEditInvestment}
@@ -100,6 +114,8 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
             ) : (
               <InvestButton service={service} onClick={onClickMakeInvestment} />
             )}
+
+            <OtherAccountsButton otherAccounts={isInvested.otherAccounts} />
           </Box>
         )}
       </Box>

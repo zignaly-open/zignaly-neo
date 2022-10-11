@@ -11,7 +11,7 @@ import baseQuery from '../baseQuery';
 
 export const api = createApi({
   baseQuery,
-  reducerPath: 'traderApi',
+  reducerPath: 'serviceApi',
   endpoints: (builder) => ({
     traderServices: builder.query<TraderService[], void>({
       query: () => ({

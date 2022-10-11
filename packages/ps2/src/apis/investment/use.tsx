@@ -42,17 +42,28 @@ export function useSelectedInvestment(): InvestmentServiceDetails {
 
 export function useIsInvestedInService(serviceId: string): {
   isLoading: boolean;
-  value: boolean;
+  thisAccount: boolean;
+  otherAccounts?: string[];
+  refetch: () => void;
+  investedAmount: string;
 } {
   const isAuthenticated = useIsAuthenticated();
-  const { isLoading, data } = useInvestedAmountQuery(serviceId, {
-    skip: !isAuthenticated,
-  });
+  const exchange = useActiveExchange();
+  const { isLoading, data, refetch, isFetching } = useInvestedAmountQuery(
+    serviceId,
+    {
+      skip: !isAuthenticated,
+    },
+  );
+
+  const invested = data?.[exchange.internalId];
+
   return {
-    isLoading,
-    value:
-      !!data &&
-      Object.values(data).some((x) => x.invested > 0 || x.pending > 0),
+    isLoading: isLoading || isFetching,
+    refetch,
+    thisAccount: !!invested,
+    otherAccounts: data && Object.keys(data),
+    investedAmount: invested?.invested || '0',
   };
 }
 

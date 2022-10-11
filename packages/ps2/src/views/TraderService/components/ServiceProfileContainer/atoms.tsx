@@ -30,6 +30,9 @@ import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import LinkIcon from '@mui/icons-material/Link';
 import { useToast } from '../../../../util/hooks/useToast';
 import { Box, useMediaQuery } from '@mui/material';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import AccountSelector from '../../../../components/AccountSelector';
+import { useIsInvestedInService } from '../../../../apis/investment/use';
 
 export const InvestButton: React.FC<{
   service: Service;
@@ -59,17 +62,40 @@ export const InvestButton: React.FC<{
   );
 };
 
+export const OtherAccountsButton: React.FC<{
+  otherAccounts: string[];
+}> = ({ otherAccounts }) => {
+  const { t } = useTranslation('service');
+  return (
+    <Box mt={2} textAlign={'center'}>
+      <AccountSelector
+        exchangeFilter={({ internalId }) => otherAccounts?.includes(internalId)}
+        component={() => (
+          <Button
+            caption={t('invest-button.all-accounts', {
+              count: otherAccounts?.length,
+            })}
+            variant={'secondary'}
+            rightElement={<ChevronRightIcon color={'neutral300'} />}
+          />
+        )}
+      />
+    </Box>
+  );
+};
+
 export const InvestedButton: React.FC<{
   service: Service;
   onClick: () => void;
 }> = ({ service, onClick }) => {
+  const { investedAmount } = useIsInvestedInService(service.id);
   const { t } = useTranslation(['service', 'action']);
   return (
     <InvestButtonContainer>
       <Typography variant={'body2'} color='neutral200'>
         {t('invested-label')}
       </Typography>
-      <BigNumber ssc={service.ssc} value={service.invested} green />
+      <BigNumber ssc={service.ssc} value={investedAmount} green />
       <TextButton
         leftElement={<PencilIcon color='#65647E' width={16} height={16} />}
         caption={t('action:edit')}
