@@ -1,7 +1,5 @@
 import React, { useEffect, useMemo } from 'react';
 import { DialogProps } from '@mui/material/Dialog';
-import ModalContainer from 'components/ModalContainer';
-import { Modal } from '@mui/material';
 import EmailVerifyForm from '../EmailVerifyForm';
 import TwoFAForm from '../TwoFAForm';
 import { LoginResponse } from '../../../../apis/user/types';
@@ -16,6 +14,7 @@ import {
   useVerifyEmailKnownDevice,
 } from '../../../../apis/user/use';
 import { useToast } from '../../../../util/hooks/useToast';
+import ZModal from '../../../../components/ZModal';
 
 function AuthVerifyModal({
   user,
@@ -100,50 +99,36 @@ function AuthVerifyModal({
   }, [allGood]);
 
   return (
-    <Modal
-      {...props}
-      onClose={onClickClose}
-      style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        display: 'flex',
-      }}
-    >
-      <ModalContainer
-        title={texts.title}
-        titleAlign={'center'}
-        onClickClose={onClickClose}
-      >
-        <Title>
-          {texts.description && (
-            <Typography variant={'body1'} className={'description'}>
-              {texts.description}
-            </Typography>
-          )}
-        </Title>
-        <Container>
-          {(isUnknownDevice || disabled || emailUnconfirmed) && (
-            <EmailVerifyForm
-              clearOnError
-              onSubmit={(code) => verify({ code })}
-              onReSendCode={performResend}
-              error={verifyStatus.isError ? t('error:error.wrong-code') : null}
-              isReSendLoading={resendStatus.isLoading}
-              isLoading={verifyStatus.isLoading}
-            />
-          )}
+    <ZModal {...props} close={onClickClose} title={texts.title}>
+      <Title>
+        {texts.description && (
+          <Typography variant={'body1'} className={'description'}>
+            {texts.description}
+          </Typography>
+        )}
+      </Title>
+      <Container>
+        {(isUnknownDevice || disabled || emailUnconfirmed) && (
+          <EmailVerifyForm
+            clearOnError
+            onSubmit={(code) => verify({ code })}
+            onReSendCode={performResend}
+            error={verifyStatus.isError ? t('error:error.wrong-code') : null}
+            isReSendLoading={resendStatus.isLoading}
+            isLoading={verifyStatus.isLoading}
+          />
+        )}
 
-          {ask2FA && !status2FA.isSuccess && (
-            <TwoFAForm
-              clearOnError
-              onSubmit={(code) => submit2FA({ code })}
-              isLoading={status2FA.isLoading}
-              error={status2FA.isError ? t('error:error.wrong-code') : null}
-            />
-          )}
-        </Container>
-      </ModalContainer>
-    </Modal>
+        {ask2FA && !status2FA.isSuccess && (
+          <TwoFAForm
+            clearOnError
+            onSubmit={(code) => submit2FA({ code })}
+            isLoading={status2FA.isLoading}
+            error={status2FA.isError ? t('error:error.wrong-code') : null}
+          />
+        )}
+      </Container>
+    </ZModal>
   );
 }
 

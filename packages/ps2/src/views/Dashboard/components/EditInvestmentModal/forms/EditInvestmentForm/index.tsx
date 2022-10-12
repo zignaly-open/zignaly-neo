@@ -35,7 +35,7 @@ import {
 import { EditFormData, EditInvestmentFormProps } from './types';
 import { EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import { ModalActions } from 'components/ModalContainer/styles';
+import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 function EditInvestmentForm({
   onClickWithdrawInvestment,

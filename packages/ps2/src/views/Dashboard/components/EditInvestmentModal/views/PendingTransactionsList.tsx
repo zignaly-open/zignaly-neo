@@ -12,7 +12,7 @@ import {
   useInvestmentDetails,
   useSelectedInvestment,
 } from '../../../../../apis/investment/use';
-import { ModalActions } from 'components/ModalContainer/styles';
+import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 const PendingTransactionsList: React.FC<{
   setView: ChangeViewFn;
