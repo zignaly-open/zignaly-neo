@@ -8,14 +8,28 @@ export const resolvers = {
       { code }: { code: string },
       { user }: ApolloContext,
     ) => {
-      const { code: codeInfo } = await check(code, user);
-      return codeInfo;
+      try {
+        return await check(code, user);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
     },
     userCodes: async (_: any, __: any, { user }: ApolloContext) => {
-      return userCodes(user);
+      try {
+        return userCodes(user);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
     },
     userCodesRedemptions: async (_: any, __: any, { user }: ApolloContext) => {
-      return userCodesRedemptions(user);
+      try {
+        return userCodesRedemptions(user);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
     },
   },
   Mutation: {
@@ -24,7 +38,12 @@ export const resolvers = {
       { code }: { code: string },
       { user }: ApolloContext,
     ) => {
-      return redeem(code, user);
+      try {
+        return redeem(code, user);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
     },
   },
 };

@@ -11,6 +11,20 @@ export const typeDef = gql`
     reqMinAuctions: Int
     reqWalletType: String
     benefitDirect: Float
+    benefitBalanceFactor: Float
+    benefitDepositFactor: Float
+    maxTotalBenefits: Int
+  }
+
+  type CodeCheckInfo {
+    code: CodeInfo
+    balance: Float
+    deposits: Float
+  }
+
+  type UserCodeInfo {
+    code: String
+    benefitDirect: Float
     rewardDirect: Float
     maxRedemptions: Int
     currentRedemptions: Int
@@ -31,8 +45,8 @@ export const typeDef = gql`
   }
 
   extend type Query {
-    checkCode(code: String!): CodeInfo
-    userCodes: [CodeInfo]
+    checkCode(code: String!): CodeCheckInfo
+    userCodes: [UserCodeInfo]
     userCodesRedemptions: [CodeRedemptionInfo]
   }
 

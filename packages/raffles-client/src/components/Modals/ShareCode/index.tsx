@@ -1,36 +1,35 @@
 import { useQuery } from '@apollo/client';
 import { Box } from '@mui/system';
-import { InputText, Table, Typography } from '@zignaly-open/ui';
+import { InputText, PriceLabel, Table, Typography } from '@zignaly-open/ui';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import useCurrentUser from 'hooks/useCurrentUser';
-import { GET_USER_CODES } from 'queries/codes';
+import { GET_USER_CODES, GET_USER_CODES_REDEMPTIONS } from 'queries/codes';
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import DialogContainer from '../DialogContainer';
-import { ShareCodeProps } from './types';
+import { ShareCodeProps, UserCodes, UserCodesRedemptions } from './types';
 
 const ShareCode = (props: ShareCodeProps) => {
   const { t } = useTranslation('referral');
   const { user } = useCurrentUser();
-  const { data } = useQuery(GET_USER_CODES);
-  console.log(data);
+  const { data: dataCodes } = useQuery(GET_USER_CODES);
+  const { data: dataCodesRedemptions } = useQuery(GET_USER_CODES_REDEMPTIONS);
+  console.log(dataCodes, dataCodesRedemptions);
 
-  type Test = {
-    coin: string;
-  };
-
-  const columns: TableProps<Test>['columns'] = [
+  const columnsCodes: TableProps<UserCodes>['columns'] = [
     {
       Header: t('code'),
       accessor: 'code',
     },
     {
-      Header: t('benefits-inviter'),
+      Header: t('benefits-you'),
       accessor: 'rewardDirect',
+      Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {
       Header: t('benefits-invited'),
       accessor: 'benefitDirect',
+      Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {
       Header: t('current-redemptions'),
@@ -39,14 +38,16 @@ const ShareCode = (props: ShareCodeProps) => {
     {
       Header: t('maximum-redemptions'),
       accessor: 'maximumRedemptions',
+      Cell: ({ cell: { value } }) => value || 'N/A',
     },
     {
       Header: t('expiration-date'),
       accessor: 'expirationDate',
+      Cell: ({ cell: { value } }) => value || 'N/A',
     },
   ];
 
-  const columns2: TableProps<Test>['columns'] = [
+  const columnsCodesRedemptions: TableProps<UserCodesRedemptions>['columns'] = [
     {
       Header: t('code'),
       accessor: 'code',
@@ -78,19 +79,37 @@ const ShareCode = (props: ShareCodeProps) => {
   return (
     <DialogContainer
       fullWidth={true}
-      maxWidth={'sm'}
+      maxWidth={'lg'}
       title={t('share-code')}
       {...props}
     >
       <Box textAlign='center'>
         <Typography variant='body1' color='neutral200' weight='regular'>
-          {t('not-enough-info')}
+          {t('share-code-info')}
         </Typography>
       </Box>
-      {data && (
+      <Box my={3}>
+        <Typography variant='h3' color='neutral200' weight='regular'>
+          {t('your-codes')}
+        </Typography>
+      </Box>
+      {dataCodes && (
         <Table
-          columns={columns}
-          data={data.userCodes}
+          columns={columnsCodes}
+          data={dataCodes.userCodes}
+          isUserTable={false}
+          hideOptionsButton={false}
+        />
+      )}
+      <Box my={3}>
+        <Typography variant='h3' color='neutral200' weight='regular'>
+          {t('your-codes-redemptions')}
+        </Typography>
+      </Box>
+      {dataCodesRedemptions && (
+        <Table
+          columns={columnsCodesRedemptions}
+          data={dataCodesRedemptions.userCodesRedemptions}
           isUserTable={false}
           hideOptionsButton={false}
         />

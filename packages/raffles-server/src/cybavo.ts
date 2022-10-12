@@ -20,9 +20,9 @@ export const axiosInstance = axios.create({
 const generateChecksum = (data: any) => {
   const rdmString = randomHex(4).slice(2);
   const timestamp = +new Date();
-  const str = `p=${JSON.stringify(
-    data,
-  )}&s=${rdmString}&secret=${zignalyAPIPrivateKey}&t=${timestamp}`;
+  const str = `p=${
+    data ? JSON.stringify(data) : ''
+  }&s=${rdmString}&secret=${zignalyAPIPrivateKey}&t=${timestamp}`;
   const checksum = crypto.createHash('sha256').update(str).digest('hex');
   return { rdmString, timestamp, checksum };
 };

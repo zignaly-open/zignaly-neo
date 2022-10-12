@@ -15,6 +15,13 @@ import mockCybavoWallet, { MockedCybavo } from './mock-cybavo-wallet';
 import redisService from '../redisService';
 import { Code, CodeRedemption } from '../entities/codes/model';
 import { generateCode } from '../entities/codes/util';
+import {
+  DEFAULT_BENEFIT_DIRECT,
+  DEFAULT_MAX_TOTAL_BENEFITS,
+  DEFAULT_MAX_TOTAL_REWARDS,
+  DEFAULT_REQ_MINIMUM_DEPOSIT,
+  DEFAULT_REWARD_DIRECT,
+} from '../entities/codes/constants';
 
 const request = supertest(app);
 
@@ -306,6 +313,10 @@ export async function checkCode(code: string, token: string): Promise<any> {
       reqDepositFrom
       reqMinAuctions
       reqWalletType
+      benefitDirect
+      benefitBalanceFactor
+      benefitDepositFactor
+      maxTotalBenefits
      }
   }`,
     token,
@@ -361,6 +372,11 @@ export async function userCodesRedemptions(token: string): Promise<any> {
 export async function createCode(overrides?: Partial<Code>) {
   return Code.create({
     code: generateCode(),
+    benefitDirect: DEFAULT_BENEFIT_DIRECT,
+    rewardDirect: DEFAULT_REWARD_DIRECT,
+    reqMinimumDeposit: DEFAULT_REQ_MINIMUM_DEPOSIT,
+    maxTotalBenefits: DEFAULT_MAX_TOTAL_BENEFITS,
+    maxTotalRewards: DEFAULT_MAX_TOTAL_REWARDS,
     ...overrides,
   });
 }

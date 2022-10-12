@@ -30,6 +30,7 @@ export const check = async (codeName: string, user: ContextUser) => {
       throw new Error('You have already redeemed a welcome code.');
     }
   }
+
   const balance = parseFloat(await getUserBalance(user.publicAddress));
   const deposits = await getDepositsTotal(code, user);
 
@@ -124,53 +125,44 @@ const calculateInviterBenefit = (code: Code, invitedBenefit: number) => {
 
 export const redeem = async (codeName: string, user: ContextUser) => {
   const { code, balance, deposits } = await check(codeName, user);
-  try {
-    const invitedBenefit = await calculateInvitedBenefit(
-      code,
-      balance,
-      deposits,
+  const invitedBenefit = await calculateInvitedBenefit(code, balance, deposits);
+  const inviterBenefit = calculateInviterBenefit(code, invitedBenefit);
+
+  if (invitedBenefit > 0) {
+    await internalTransfer(
+      zignalySystemId,
+      user.publicAddress,
+      invitedBenefit.toString(),
+      TransactionType.RedeemCode,
+      true,
     );
-    const inviterBenefit = calculateInviterBenefit(code, invitedBenefit);
-
-    if (invitedBenefit > 0) {
-      await internalTransfer(
-        zignalySystemId,
-        user.publicAddress,
-        invitedBenefit.toString(),
-        TransactionType.RedeemCode,
-        true,
-      );
-    }
-
-    if (inviterBenefit > 0) {
-      const inviter = await User.findByPk(code.userId);
-      await internalTransfer(
-        zignalySystemId,
-        inviter.publicAddress,
-        inviterBenefit.toString(),
-        TransactionType.ReferralCode,
-        true,
-      );
-    }
-
-    await CodeRedemption.create({
-      code: codeName,
-      invitedId: user.id,
-      inviterId: code.userId,
-      invitedBenefit,
-      inviterBenefit,
-    });
-
-    await Code.update(
-      { currentRedemptions: sequelize.literal('currentRedemptions + 1') },
-      { where: { code: code.code } },
-    );
-
-    return invitedBenefit;
-  } catch (e) {
-    console.error(e);
-    throw e;
   }
+
+  if (inviterBenefit > 0) {
+    const inviter = await User.findByPk(code.userId);
+    await internalTransfer(
+      zignalySystemId,
+      inviter.publicAddress,
+      inviterBenefit.toString(),
+      TransactionType.ReferralCode,
+      true,
+    );
+  }
+
+  await CodeRedemption.create({
+    code: codeName,
+    invitedId: user.id,
+    inviterId: code.userId,
+    invitedBenefit,
+    inviterBenefit,
+  });
+
+  await Code.update(
+    { currentRedemptions: sequelize.literal('currentRedemptions + 1') },
+    { where: { code: code.code } },
+  );
+
+  return invitedBenefit;
 };
 
 export const userCodes = async (user: ContextUser) => {

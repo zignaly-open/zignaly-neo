@@ -55,7 +55,12 @@ describe('Codes', () => {
         data: { checkCode: res },
       },
     } = await checkCode(code.code, aliceToken);
-    expect(res).toEqual(expect.objectContaining({ name: code.code }));
+    expect(res).toEqual(
+      expect.objectContaining({
+        code: code.code,
+        benefitDirect: expect.any(Number),
+      }),
+    );
   });
 
   it('should error if already redeemed a welcome code', async () => {
