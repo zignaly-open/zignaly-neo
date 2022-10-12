@@ -27,11 +27,6 @@ export class WalletType extends Model {
 
 @Table
 export class Code extends Model {
-  // @PrimaryKey
-  // @AutoIncrement
-  // @Unique
-  // @Column
-  // public id!: number;
   @PrimaryKey
   @Column
   public name!: string;

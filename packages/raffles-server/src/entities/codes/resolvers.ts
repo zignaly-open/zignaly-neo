@@ -1,5 +1,5 @@
 import { ApolloContext } from '../../types';
-import { check, redeem } from './service';
+import { check, redeem, userCodes, userCodesRedemptions } from './service';
 
 export const resolvers = {
   Query: {
@@ -10,6 +10,12 @@ export const resolvers = {
     ) => {
       const { code: codeInfo } = await check(code, user);
       return codeInfo;
+    },
+    userCodes: async (_: any, __: any, { user }: ApolloContext) => {
+      return userCodes(user);
+    },
+    userCodesRedemptions: async (_: any, __: any, { user }: ApolloContext) => {
+      return userCodesRedemptions(user);
     },
   },
   Mutation: {

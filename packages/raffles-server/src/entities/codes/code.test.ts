@@ -13,13 +13,12 @@ import {
   expireAuction,
   makeBid,
   redeemCode,
+  userCodes,
+  userCodesRedemptions,
   waitUntilTablesAreCreated,
   wipeOut,
 } from '../../util/test-utils';
-import {
-  DEFAULT_BENEFIT_DIRECT,
-  DEFAULT_MAX_TOTAL_REWARDS,
-} from '../users/constants';
+import { DEFAULT_BENEFIT_DIRECT, DEFAULT_MAX_TOTAL_REWARDS } from './constants';
 
 describe('Codes', () => {
   beforeAll(waitUntilTablesAreCreated);
@@ -43,7 +42,7 @@ describe('Codes', () => {
 
   it('should handle own code check', async () => {
     const [user, token] = await createRandomUser(1000);
-    const { body } = await checkCode(user.referralCode, token);
+    const { body } = await checkCode(user.codes[0].name, token);
     expect(body.errors[0].message).toEqual('Not allowed');
   });
 
@@ -68,7 +67,7 @@ describe('Codes', () => {
     await redeemCode(code.name, aliceToken);
 
     // Redeem another welcome code
-    const { body } = await redeemCode(user.referralCode, aliceToken);
+    const { body } = await redeemCode(user.codes[0].name, aliceToken);
 
     expect(body.errors[0].message).toEqual(
       'You have already redeemed a welcome code.',
@@ -137,21 +136,7 @@ describe('Codes', () => {
 
   it('should work if reqMinimumDeposit reached', async () => {
     const code = await createCode({ reqMinimumDeposit: 100 });
-    const [alice, aliceToken] = await createAlice(100);
-
-    // Mock deposits
-    mock.onGet(`/operations/all/${alice.publicAddress}`).reply(() => {
-      return [
-        200,
-        [
-          {
-            amount: 100,
-            created_at: new Date(Date.now() - 12 * 60 * 60 * 1000),
-            internal_type: 'ZigBids Deposit',
-          },
-        ],
-      ];
-    });
+    const [, aliceToken] = await createAlice(100);
 
     const { body } = await checkCode(code.name, aliceToken);
 
@@ -230,7 +215,7 @@ describe('Codes', () => {
       ];
     });
 
-    const { body } = await redeemCode(alice.referralCode, bobToken);
+    const { body } = await redeemCode(alice.codes[0].name, bobToken);
 
     expect(body.data.redeemCode).toEqual(DEFAULT_BENEFIT_DIRECT);
 
@@ -348,5 +333,32 @@ describe('Codes', () => {
         type: TransactionType.ReferralCode,
       }),
     );
+  });
+
+  it('should return user code', async () => {
+    const [alice, aliceToken] = await createAlice(100);
+    const { body } = await userCodes(aliceToken);
+    expect(body.data.userCodes).toHaveLength(1);
+    expect(body.data.userCodes).toEqual([{ name: alice.codes[0].name }]);
+  });
+
+  it('should return code redemptions', async () => {
+    const [alice, aliceToken] = await createAlice(1000);
+    const [bob, bobToken] = await createBob(1000);
+    await redeemCode(alice.codes[0].name, bobToken);
+    const { body } = await userCodesRedemptions(aliceToken);
+    expect(body.data.userCodesRedemptions).toHaveLength(1);
+    expect(body.data.userCodesRedemptions).toEqual([
+      expect.objectContaining({
+        code: alice.codes[0].name,
+        inviterBenefit: expect.any(Number),
+        invitedBenefit: expect.any(Number),
+        redemptionDate: expect.any(String),
+        invited: {
+          shortAddress: expect.any(String),
+          username: bob.username,
+        },
+      }),
+    ]);
   });
 });

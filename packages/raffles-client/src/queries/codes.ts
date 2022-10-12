@@ -5,3 +5,31 @@ export const CHECK_CODE = gql`
     checkCode(code: $code)
   }
 `;
+
+export const GET_USER_CODES = gql`
+  query userCodes {
+    userCodes {
+      name
+      benefitDirect
+      rewardDirect
+      maxRedemptions
+      currentRedemptions
+      endDate
+    }
+  }
+`;
+
+export const GET_USER_CODES_REDEMPTIONS = gql`
+  query userCodesRedemptions {
+    userCodesRedemptions {
+      code
+      redemptionDate
+      inviterBenefit
+      invitedBenefit
+      invited {
+        shortAddress
+        username
+      }
+    }
+  }
+`;

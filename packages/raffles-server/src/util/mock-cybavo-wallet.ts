@@ -2,6 +2,7 @@ import { User } from '../entities/users/model';
 import MockAdapter from 'axios-mock-adapter';
 import { axiosInstance } from '../cybavo';
 import redisService from '../redisService';
+import { TransactionType } from '../types';
 
 export const mock = new MockAdapter(axiosInstance, {
   onNoMatch: 'throwException',
@@ -43,7 +44,18 @@ const mockCybavoWallet = async (
 
   // Mock operations
   mock.onGet(`/operations/all/${user.publicAddress}`).reply(() => {
-    return [200, []];
+    return [
+      200,
+      balance
+        ? [
+            {
+              amount: balance,
+              created_at: new Date(Date.now() - 12 * 60 * 60 * 1000),
+              internal_type: TransactionType.Deposit,
+            },
+          ]
+        : [],
+    ];
   });
 
   // Mock internal transfers

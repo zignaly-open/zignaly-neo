@@ -15,6 +15,7 @@
     "start": "ts-node src/index.ts",
     "redis-import": "ts-node scripts/redis-import.ts",
     "redis-export": "ts-node scripts/redis-export.ts",
+    "generate-codes": "ts-node scripts/generate-codes.ts",
     "stress-test": "ts-node scripts/redis-stress-test.ts",
     "test": "NODE_ENV=test jest"
   },

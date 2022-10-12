@@ -1,7 +1,7 @@
 import supertest from 'supertest';
 import { User } from '../entities/users/model';
 import app from '../index';
-import { generateCode, signJwtToken } from '../entities/users/util';
+import { signJwtToken } from '../entities/users/util';
 import {
   Auction,
   AuctionBasketItem,
@@ -14,6 +14,7 @@ import { Payout } from '../entities/payouts/model';
 import mockCybavoWallet, { MockedCybavo } from './mock-cybavo-wallet';
 import redisService from '../redisService';
 import { Code, CodeRedemption } from '../entities/codes/model';
+import { generateCode } from '../entities/codes/util';
 
 const request = supertest(app);
 
@@ -154,11 +155,18 @@ export async function createAlice(
   balance = 0,
 ): Promise<[User, string, MockedCybavo]> {
   try {
-    const user = await User.create({
-      username: 'Alice',
-      publicAddress: '0x6a3B248855bc8a687992CBAb7FD03E1947EAee07'.toLowerCase(),
-      onboardingCompletedAt: Date.now(),
-    });
+    const user = await User.create(
+      {
+        username: 'Alice',
+        publicAddress:
+          '0x6a3B248855bc8a687992CBAb7FD03E1947EAee07'.toLowerCase(),
+        onboardingCompletedAt: Date.now(),
+      },
+      { include: Code },
+    );
+    // Load associations
+    await user.reload();
+
     const cybavoMock = await mockCybavoWallet(user, balance);
     return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
@@ -309,6 +317,42 @@ export async function redeemCode(code: string, token: string): Promise<any> {
     `
    mutation {
     redeemCode(code: "${code}")
+  }`,
+    token,
+  );
+}
+
+export async function userCodes(token: string): Promise<any> {
+  return makeRequest(
+    `
+   query {
+    userCodes {
+      name
+      benefitDirect
+      rewardDirect
+      maxRedemptions
+      currentRedemptions
+      endDate
+    }
+  }`,
+    token,
+  );
+}
+
+export async function userCodesRedemptions(token: string): Promise<any> {
+  return makeRequest(
+    `
+   query {
+    userCodesRedemptions {
+      code
+      redemptionDate
+      inviterBenefit
+      invitedBenefit
+      invited {
+        shortAddress
+        username
+      }
+    }
   }`,
     token,
   );

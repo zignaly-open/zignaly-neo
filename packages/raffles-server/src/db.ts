@@ -16,7 +16,8 @@ import {
   DEFAULT_MAX_TOTAL_REWARDS,
   DEFAULT_REQ_MINIMUM_DEPOSIT,
   DEFAULT_REWARD_DIRECT,
-} from './entities/users/constants';
+} from './entities/codes/constants';
+import { generateCode } from './entities/codes/util';
 
 const models = [
   User,
@@ -44,8 +45,8 @@ if (isTest) {
 }
 
 User.afterCreate(async (user) => {
-  Code.create({
-    name: user.referralCode,
+  await Code.create({
+    name: generateCode(),
     welcomeType: true,
     userId: user.id,
     benefitDirect: DEFAULT_BENEFIT_DIRECT,
