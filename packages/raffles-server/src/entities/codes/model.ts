@@ -29,7 +29,7 @@ export class WalletType extends Model {
 export class Code extends Model {
   @PrimaryKey
   @Column
-  public name!: string;
+  public code!: string;
 
   @ForeignKey(() => User)
   @Column

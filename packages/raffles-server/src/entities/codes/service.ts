@@ -163,7 +163,7 @@ export const redeem = async (codeName: string, user: ContextUser) => {
 
     await Code.update(
       { currentRedemptions: sequelize.literal('currentRedemptions + 1') },
-      { where: { name: code.name } },
+      { where: { code: code.code } },
     );
 
     return invitedBenefit;
@@ -178,16 +178,8 @@ export const userCodes = async (user: ContextUser) => {
 };
 
 export const userCodesRedemptions = async (user: ContextUser) => {
-  const redemptions = await CodeRedemption.findAll({
+  return CodeRedemption.findAll({
     where: { inviterId: user.id },
     include: { model: User, as: 'invited' },
   });
-  for (const r of redemptions) {
-    // r.setDataValue('wallet', 'a');
-    // @ts-ignore
-    r.wallet = 'a';
-    r.setDataValue('username', 'aa');
-  }
-  console.log(redemptions);
-  return redemptions;
 };

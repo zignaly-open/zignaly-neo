@@ -300,7 +300,7 @@ export async function checkCode(code: string, token: string): Promise<any> {
     `
    query {
     checkCode(code: "${code}") { 
-      name
+      code
       reqMinimumBalance
       reqMinimumDeposit
       reqDepositFrom
@@ -327,7 +327,7 @@ export async function userCodes(token: string): Promise<any> {
     `
    query {
     userCodes {
-      name
+      code
       benefitDirect
       rewardDirect
       maxRedemptions
@@ -360,7 +360,7 @@ export async function userCodesRedemptions(token: string): Promise<any> {
 
 export async function createCode(overrides?: Partial<Code>) {
   return Code.create({
-    name: generateCode(),
+    code: generateCode(),
     ...overrides,
   });
 }

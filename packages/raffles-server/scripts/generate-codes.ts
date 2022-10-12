@@ -14,7 +14,7 @@ import { User } from '../src/entities/users/model';
   const users = await User.findAll();
   for (const user of users) {
     await Code.create({
-      name: generateCode(),
+      code: generateCode(),
       welcomeType: true,
       userId: user.id,
       benefitDirect: DEFAULT_BENEFIT_DIRECT,

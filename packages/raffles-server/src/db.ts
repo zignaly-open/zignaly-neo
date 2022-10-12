@@ -46,7 +46,7 @@ if (isTest) {
 
 User.afterCreate(async (user) => {
   await Code.create({
-    name: generateCode(),
+    code: generateCode(),
     welcomeType: true,
     userId: user.id,
     benefitDirect: DEFAULT_BENEFIT_DIRECT,

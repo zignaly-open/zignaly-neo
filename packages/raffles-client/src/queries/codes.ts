@@ -9,7 +9,7 @@ export const CHECK_CODE = gql`
 export const GET_USER_CODES = gql`
   query userCodes {
     userCodes {
-      name
+      code
       benefitDirect
       rewardDirect
       maxRedemptions

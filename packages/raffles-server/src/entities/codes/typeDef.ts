@@ -4,7 +4,7 @@ export const typeDef = gql`
   scalar Date
 
   type CodeInfo {
-    name: String
+    code: String
     reqMinimumBalance: Int
     reqMinimumDeposit: Float
     reqDepositFrom: Date

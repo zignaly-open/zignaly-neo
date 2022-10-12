@@ -42,7 +42,7 @@ describe('Codes', () => {
 
   it('should handle own code check', async () => {
     const [user, token] = await createRandomUser(1000);
-    const { body } = await checkCode(user.codes[0].name, token);
+    const { body } = await checkCode(user.codes[0].code, token);
     expect(body.errors[0].message).toEqual('Not allowed');
   });
 
@@ -54,8 +54,8 @@ describe('Codes', () => {
       body: {
         data: { checkCode: res },
       },
-    } = await checkCode(code.name, aliceToken);
-    expect(res).toEqual(expect.objectContaining({ name: code.name }));
+    } = await checkCode(code.code, aliceToken);
+    expect(res).toEqual(expect.objectContaining({ name: code.code }));
   });
 
   it('should error if already redeemed a welcome code', async () => {
@@ -64,10 +64,10 @@ describe('Codes', () => {
     const [, aliceToken] = await createAlice(1000);
 
     // Redeem welcome code
-    await redeemCode(code.name, aliceToken);
+    await redeemCode(code.code, aliceToken);
 
     // Redeem another welcome code
-    const { body } = await redeemCode(user.codes[0].name, aliceToken);
+    const { body } = await redeemCode(user.codes[0].code, aliceToken);
 
     expect(body.errors[0].message).toEqual(
       'You have already redeemed a welcome code.',
@@ -80,10 +80,10 @@ describe('Codes', () => {
     const [, bobToken] = await createBob(1000);
 
     // Redeem code
-    await redeemCode(code.name, aliceToken);
+    await redeemCode(code.code, aliceToken);
 
     // Another user try to redeem code
-    const { body } = await redeemCode(code.name, bobToken);
+    const { body } = await redeemCode(code.code, bobToken);
 
     expect(body.errors[0].message).toEqual('Maximum redemptions reached');
   });
@@ -94,7 +94,7 @@ describe('Codes', () => {
     });
     const [, aliceToken] = await createAlice(1000);
 
-    const { body } = await redeemCode(code.name, aliceToken);
+    const { body } = await redeemCode(code.code, aliceToken);
 
     expect(body.errors[0].message).toEqual(
       `The code will start working on ${code.startDate}`,
@@ -107,7 +107,7 @@ describe('Codes', () => {
     });
     const [, aliceToken] = await createAlice(1000);
 
-    const { body } = await redeemCode(code.name, aliceToken);
+    const { body } = await redeemCode(code.code, aliceToken);
 
     expect(body.errors[0].message).toEqual('The code is expired');
   });
@@ -116,7 +116,7 @@ describe('Codes', () => {
     const code = await createCode({ reqMinimumBalance: 1000 });
     const [, aliceToken] = await createAlice(100);
 
-    const { body } = await checkCode(code.name, aliceToken);
+    const { body } = await checkCode(code.code, aliceToken);
 
     expect(body.errors[0].message).toEqual(
       `You need a balance of at least ${code.reqMinimumBalance}.`,
@@ -127,7 +127,7 @@ describe('Codes', () => {
     const code = await createCode({ reqMinimumDeposit: 1000 });
     const [, aliceToken] = await createAlice(100);
 
-    const { body } = await checkCode(code.name, aliceToken);
+    const { body } = await checkCode(code.code, aliceToken);
 
     expect(body.errors[0].message).toEqual(
       `You need to deposit at least ${code.reqMinimumDeposit}ZIGs.`,
@@ -138,10 +138,10 @@ describe('Codes', () => {
     const code = await createCode({ reqMinimumDeposit: 100 });
     const [, aliceToken] = await createAlice(100);
 
-    const { body } = await checkCode(code.name, aliceToken);
+    const { body } = await checkCode(code.code, aliceToken);
 
     expect(body.data.checkCode).toEqual(
-      expect.objectContaining({ name: code.name }),
+      expect.objectContaining({ name: code.code }),
     );
   });
 
@@ -149,7 +149,7 @@ describe('Codes', () => {
     const code = await createCode({ reqMinAuctions: 1 });
     const [, aliceToken] = await createAlice(100);
 
-    const { body } = await checkCode(code.name, aliceToken);
+    const { body } = await checkCode(code.code, aliceToken);
 
     expect(body.errors[0].message).toEqual(
       `You need to participate in at least ${code.reqMinAuctions} auctions.`,
@@ -164,10 +164,10 @@ describe('Codes', () => {
     await makeBid(auction, aliceToken);
     await expireAuction(auction.id);
 
-    const { body } = await checkCode(code.name, aliceToken);
+    const { body } = await checkCode(code.code, aliceToken);
 
     expect(body.data.checkCode).toEqual(
-      expect.objectContaining({ name: code.name }),
+      expect.objectContaining({ name: code.code }),
     );
   });
 
@@ -177,7 +177,7 @@ describe('Codes', () => {
       walletType: 'metamask',
     });
 
-    const { body } = await checkCode(code.name, aliceToken);
+    const { body } = await checkCode(code.code, aliceToken);
 
     expect(body.errors[0].message).toEqual(
       `You need a ${code.reqWalletType} wallet.`,
@@ -190,10 +190,10 @@ describe('Codes', () => {
       walletType: 'kucoin',
     });
 
-    const { body } = await checkCode(code.name, aliceToken);
+    const { body } = await checkCode(code.code, aliceToken);
 
     expect(body.data.checkCode).toEqual(
-      expect.objectContaining({ name: code.name }),
+      expect.objectContaining({ name: code.code }),
     );
   });
 
@@ -215,7 +215,7 @@ describe('Codes', () => {
       ];
     });
 
-    const { body } = await redeemCode(alice.codes[0].name, bobToken);
+    const { body } = await redeemCode(alice.codes[0].code, bobToken);
 
     expect(body.data.redeemCode).toEqual(DEFAULT_BENEFIT_DIRECT);
 
@@ -251,7 +251,7 @@ describe('Codes', () => {
     });
     const [, aliceToken] = await createAlice(1000);
 
-    const { body } = await redeemCode(code.name, aliceToken);
+    const { body } = await redeemCode(code.code, aliceToken);
 
     expect(body.data.redeemCode).toEqual(600);
   });
@@ -287,7 +287,7 @@ describe('Codes', () => {
       ];
     });
 
-    const { body } = await redeemCode(code.name, aliceToken);
+    const { body } = await redeemCode(code.code, aliceToken);
     expect(body.data.redeemCode).toEqual(150);
 
     // Check inviterBenefit
@@ -318,7 +318,7 @@ describe('Codes', () => {
     });
     const [, aliceToken] = await createAlice(1000);
 
-    const { body } = await redeemCode(code.name, aliceToken);
+    const { body } = await redeemCode(code.code, aliceToken);
     expect(body.data.redeemCode).toEqual(120);
 
     // Check inviterBenefit
@@ -339,18 +339,18 @@ describe('Codes', () => {
     const [alice, aliceToken] = await createAlice(100);
     const { body } = await userCodes(aliceToken);
     expect(body.data.userCodes).toHaveLength(1);
-    expect(body.data.userCodes).toEqual([{ name: alice.codes[0].name }]);
+    expect(body.data.userCodes).toEqual([{ name: alice.codes[0].code }]);
   });
 
   it('should return code redemptions', async () => {
     const [alice, aliceToken] = await createAlice(1000);
     const [bob, bobToken] = await createBob(1000);
-    await redeemCode(alice.codes[0].name, bobToken);
+    await redeemCode(alice.codes[0].code, bobToken);
     const { body } = await userCodesRedemptions(aliceToken);
     expect(body.data.userCodesRedemptions).toHaveLength(1);
     expect(body.data.userCodesRedemptions).toEqual([
       expect.objectContaining({
-        code: alice.codes[0].name,
+        code: alice.codes[0].code,
         inviterBenefit: expect.any(Number),
         invitedBenefit: expect.any(Number),
         redemptionDate: expect.any(String),
