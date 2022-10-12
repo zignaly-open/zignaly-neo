@@ -6,6 +6,7 @@
   "copy-link": "CH-Ĉöṗy lïńk",
   "invest-button": {
     "invest-now": "CH-Ïńvëŝṫ ńöw!",
+    "all-accounts": "CH-Ŝëë áll ({{count}})",
     "x-success-fee": "CH-{{fee}}% Ŝüĉĉëŝŝ ḟëë"
   }
 }
