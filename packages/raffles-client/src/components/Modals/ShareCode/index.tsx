@@ -1,20 +1,17 @@
 import { useQuery } from '@apollo/client';
 import { Box } from '@mui/system';
-import { InputText, PriceLabel, Table, Typography } from '@zignaly-open/ui';
+import { PriceLabel, Table, Typography } from '@zignaly-open/ui';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
-import useCurrentUser from 'hooks/useCurrentUser';
 import { GET_USER_CODES, GET_USER_CODES_REDEMPTIONS } from 'queries/codes';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import DialogContainer from '../DialogContainer';
 import { ShareCodeProps, UserCodes, UserCodesRedemptions } from './types';
 
 const ShareCode = (props: ShareCodeProps) => {
-  const { t } = useTranslation('referral');
-  const { user } = useCurrentUser();
+  const { t } = useTranslation('share-code');
   const { data: dataCodes } = useQuery(GET_USER_CODES);
   const { data: dataCodesRedemptions } = useQuery(GET_USER_CODES_REDEMPTIONS);
-  console.log(dataCodes, dataCodesRedemptions);
 
   const columnsCodes: TableProps<UserCodes>['columns'] = [
     {
@@ -53,28 +50,30 @@ const ShareCode = (props: ShareCodeProps) => {
       accessor: 'code',
     },
     {
-      Header: t('benefits-inviter'),
-      accessor: 'benefitsInviter',
+      Header: t('benefits-you'),
+      accessor: 'invitedBenefit',
+      Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {
       Header: t('benefits-invited'),
-      accessor: 'benefitsInvited',
+      accessor: 'inviterBenefit',
+      Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {
-      Header: t('current-redemptions'),
-      accessor: 'currentRedemptions',
+      Header: t('user'),
+      accessor: 'invited.username',
+      Cell: ({ cell: { value }, data, row }) =>
+        value || `${t('user')}#${data[row.index].invited.id}`,
     },
     {
-      Header: t('maximum-redemptions'),
-      accessor: 'maximumRedemptions',
+      Header: t('address'),
+      accessor: 'invited.shortAddress',
     },
     {
-      Header: t('expiration-date'),
-      accessor: 'expirationDate',
+      Header: t('date'),
+      accessor: 'redemptionDate',
     },
   ];
-
-  // const data = useMemo(() => codes.map((c) => ({})), [codes]);
 
   return (
     <DialogContainer

@@ -34,6 +34,7 @@ export const typeDef = gql`
   type InvitedInfo {
     shortAddress: String
     username: String
+    id: ID
   }
 
   type CodeRedemptionInfo {

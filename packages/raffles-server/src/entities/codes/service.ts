@@ -99,13 +99,18 @@ const calculateInvitedBenefit = async (
   balance: number,
   deposits: number,
 ) => {
-  const balanceBenefit = new BN(balance).times(code.benefitBalanceFactor);
-  const depositsBenefit = new BN(deposits).times(code.benefitDepositFactor);
+  const balanceBenefit = new BN(balance).times(code.benefitBalanceFactor || 0);
+  const depositsBenefit = new BN(deposits).times(
+    code.benefitDepositFactor || 0,
+  );
   let invitedBenefit = new BN(code.benefitDirect)
     .plus(balanceBenefit)
     .plus(depositsBenefit);
 
-  if (code.maxTotalBenefits && invitedBenefit > new BN(code.maxTotalBenefits)) {
+  if (
+    code.maxTotalBenefits &&
+    invitedBenefit.gt(new BN(code.maxTotalBenefits))
+  ) {
     invitedBenefit = new BN(code.maxTotalBenefits);
   }
 

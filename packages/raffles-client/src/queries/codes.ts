@@ -44,6 +44,7 @@ export const GET_USER_CODES_REDEMPTIONS = gql`
       invited {
         shortAddress
         username
+        id
       }
     }
   }

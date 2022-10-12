@@ -12,10 +12,12 @@ const RedeemCodeConfirmation = ({
   code,
   balance,
   deposits,
+  onClose,
 }: {
   code: CodeInfo;
   balance: number;
   deposits: number;
+  onClose: () => void;
 }) => {
   const { t } = useTranslation(['redeem-code', 'global']);
   const [redeemCode, { error, loading, data }] = useMutation(REDEEM_CODE);
@@ -53,7 +55,7 @@ const RedeemCodeConfirmation = ({
             size='large'
             caption={t('ok', { ns: 'global' })}
             minWidth={200}
-            onClick={() => redeemCode({ variables: { code: code.code } })}
+            onClick={onClose}
           />
         </Box>
       </>

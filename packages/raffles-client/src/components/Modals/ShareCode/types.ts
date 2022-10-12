@@ -12,10 +12,16 @@ export type UserCodes = {
 };
 
 export type UserCodesRedemptions = {
+  id: string;
   code: string;
-  rewardDirect: number;
-  benefitDirect: number;
-  currentRedemptions: number;
-  maximumRedemptions: number;
-  expirationDate: string;
+  inviterBenefit: number;
+  invitedBenefit: number;
+  'invited.shortAddress': string;
+  'invited.username': string;
+  invited: {
+    shortAddress: string;
+    username: string;
+    id: string;
+  };
+  redemptionDate: string;
 };

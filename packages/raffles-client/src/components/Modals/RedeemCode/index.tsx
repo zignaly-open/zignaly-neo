@@ -46,6 +46,7 @@ const RedeemCode = (props: RedeemCodeProps) => {
           code={data.checkCode.code}
           balance={data.checkCode.balance}
           deposits={data.checkCode.deposits}
+          onClose={() => props.onClose(null, 'escapeKeyDown')}
         />
       ) : (
         <form onSubmit={handleSubmit(submit)}>
