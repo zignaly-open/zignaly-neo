@@ -8,7 +8,9 @@ import {
 import { ContextUser, TransactionType } from '../../types';
 import { AuctionBid } from '../auctions/model';
 import { User } from '../users/model';
+import { emitBalanceChanged } from '../users/util';
 import { Code, CodeRedemption } from './model';
+import BN from 'bignumber.js';
 
 export const check = async (codeName: string, user: ContextUser) => {
   const code = await Code.findByPk(codeName);
@@ -97,30 +99,29 @@ const calculateInvitedBenefit = async (
   balance: number,
   deposits: number,
 ) => {
-  let invitedBenefit = code.benefitDirect;
+  const balanceBenefit = new BN(balance).times(code.benefitBalanceFactor);
+  const depositsBenefit = new BN(deposits).times(code.benefitDepositFactor);
+  let invitedBenefit = new BN(code.benefitDirect)
+    .plus(balanceBenefit)
+    .plus(depositsBenefit);
 
-  if (code.benefitBalanceFactor) {
-    invitedBenefit += code.benefitBalanceFactor * balance;
+  if (code.maxTotalBenefits && invitedBenefit > new BN(code.maxTotalBenefits)) {
+    invitedBenefit = new BN(code.maxTotalBenefits);
   }
 
-  if (code.benefitDepositFactor) {
-    invitedBenefit += code.benefitDepositFactor * deposits;
-  }
-
-  if (code.maxTotalBenefits && invitedBenefit > code.maxTotalBenefits) {
-    invitedBenefit = code.maxTotalBenefits;
-  }
-  return invitedBenefit;
+  return invitedBenefit.toString();
 };
 
-const calculateInviterBenefit = (code: Code, invitedBenefit: number) => {
-  if (!code.userId) return 0; // system code
+const calculateInviterBenefit = (code: Code, invitedBenefit: string) => {
+  if (!code.userId) return '0'; // system code
 
-  let inviterBenefit = code.rewardDirect + invitedBenefit * code.rewardFactor;
-  if (code.maxTotalRewards && inviterBenefit > code.maxTotalRewards) {
-    inviterBenefit = code.maxTotalRewards;
+  let inviterBenefit = new BN(code.rewardDirect).plus(
+    new BN(invitedBenefit).times(code.rewardFactor),
+  );
+  if (code.maxTotalRewards && inviterBenefit > new BN(code.maxTotalRewards)) {
+    inviterBenefit = new BN(code.maxTotalRewards);
   }
-  return inviterBenefit;
+  return inviterBenefit.toString();
 };
 
 export const redeem = async (codeName: string, user: ContextUser) => {
@@ -128,25 +129,35 @@ export const redeem = async (codeName: string, user: ContextUser) => {
   const invitedBenefit = await calculateInvitedBenefit(code, balance, deposits);
   const inviterBenefit = calculateInviterBenefit(code, invitedBenefit);
 
-  if (invitedBenefit > 0) {
+  if (parseFloat(invitedBenefit) > 0) {
     await internalTransfer(
       zignalySystemId,
       user.publicAddress,
-      invitedBenefit.toString(),
+      invitedBenefit,
       TransactionType.RedeemCode,
       true,
     );
+    console.log(`User ${user.id} redeemed ${invitedBenefit} ZIGs`);
+    await emitBalanceChanged(user);
   }
 
-  if (inviterBenefit > 0) {
-    const inviter = await User.findByPk(code.userId);
-    await internalTransfer(
-      zignalySystemId,
-      inviter.publicAddress,
-      inviterBenefit.toString(),
-      TransactionType.ReferralCode,
-      true,
-    );
+  if (parseFloat(inviterBenefit) > 0) {
+    try {
+      const inviter = await User.findByPk(code.userId);
+      await internalTransfer(
+        zignalySystemId,
+        inviter.publicAddress,
+        inviterBenefit,
+        TransactionType.ReferralCode,
+        true,
+      );
+      console.log(`User ${inviter.id} got rewarded ${inviterBenefit} ZIGs`);
+      await emitBalanceChanged(inviter);
+    } catch (e) {
+      console.error(
+        `Couldn't transfer ${inviterBenefit} to ${code.userId}, ${e}`,
+      );
+    }
   }
 
   await CodeRedemption.create({
@@ -158,7 +169,7 @@ export const redeem = async (codeName: string, user: ContextUser) => {
   });
 
   await Code.update(
-    { currentRedemptions: sequelize.literal('currentRedemptions + 1') },
+    { currentRedemptions: sequelize.literal('"currentRedemptions" + 1') },
     { where: { code: code.code } },
   );
 

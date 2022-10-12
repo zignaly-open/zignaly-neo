@@ -48,3 +48,9 @@ export const GET_USER_CODES_REDEMPTIONS = gql`
     }
   }
 `;
+
+export const REDEEM_CODE = gql`
+  mutation redeemCode($code: String!) {
+    redeemCode(code: $code)
+  }
+`;

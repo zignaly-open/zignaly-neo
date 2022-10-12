@@ -1,25 +1,19 @@
+import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box } from '@mui/system';
 import { Button, InputText, Typography } from '@zignaly-open/ui';
-import { useModal } from 'mui-modal-provider';
-import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import DialogContainer from '../DialogContainer';
-import TransferZigModal from '../TransferZig';
 import { RedeemCodeProps } from './types';
 import * as yup from 'yup';
 import { CHECK_CODE } from 'queries/codes';
-import { useLazyQuery, useQuery } from '@apollo/client';
-import { Alert } from '@mui/material';
-import RedeemCodeConfirmation from './RedeemCodeConfirmation';
+import { useLazyQuery } from '@apollo/client';
+import RedeemCodeConfirmation from '../RedeemCodeConfirmation';
 
 const RedeemCode = (props: RedeemCodeProps) => {
   const { t } = useTranslation('redeem-code');
-  const { showModal } = useModal();
-  const [checkCode, { error, loading }] = useLazyQuery(CHECK_CODE);
-  const [codeInfo, setCodeInfo] = useState();
-  console.log(codeInfo);
+  const [checkCode, { error, loading, data }] = useLazyQuery(CHECK_CODE);
 
   const validationSchema = yup.object({
     code: yup.string().matches(/^[a-z0-9_]{3,20}$/i, t('invalid-code')),
@@ -37,8 +31,7 @@ const RedeemCode = (props: RedeemCodeProps) => {
   });
 
   const submit = async ({ code }: { code: string }) => {
-    const { data } = await checkCode({ variables: { code } });
-    setCodeInfo(data.checkCode);
+    await checkCode({ variables: { code } });
   };
 
   return (
@@ -48,11 +41,11 @@ const RedeemCode = (props: RedeemCodeProps) => {
       title={t('redeem-code')}
       {...props}
     >
-      {codeInfo ? (
+      {data ? (
         <RedeemCodeConfirmation
-          code={codeInfo.code}
-          balance={codeInfo.balance}
-          deposits={codeInfo.deposits}
+          code={data.checkCode.code}
+          balance={data.checkCode.balance}
+          deposits={data.checkCode.deposits}
         />
       ) : (
         <form onSubmit={handleSubmit(submit)}>
@@ -63,24 +56,38 @@ const RedeemCode = (props: RedeemCodeProps) => {
           </Box>
           <Box
             display='flex'
-            mt='24px'
+            my='24px'
             justifyContent='center'
             flexDirection='column'
+            textAlign='center'
           >
-            <Controller
-              name='code'
-              control={control}
-              render={({ field }) => (
-                <InputText
-                  value={field.value}
-                  onChange={field.onChange}
-                  placeholder={t('enter-code')}
-                  minHeight={23}
-                  error={errors.code?.message}
-                />
-              )}
-            />
-            {error && <Alert color={'error'}>{error.message}</Alert>}
+            <Box
+              display='flex'
+              mx='auto'
+              mb={1}
+              justifyContent='center'
+              flexDirection='column'
+              maxWidth={220}
+            >
+              <Controller
+                name='code'
+                control={control}
+                render={({ field }) => (
+                  <InputText
+                    value={field.value}
+                    onChange={field.onChange}
+                    placeholder={t('enter-code')}
+                    minHeight={23}
+                    error={errors.code?.message}
+                  />
+                )}
+              />
+            </Box>
+            {error && (
+              <Typography variant={'body1'} color='redGraphOrError'>
+                {error.message}
+              </Typography>
+            )}
           </Box>
           <Box display='flex' mt='24px' justifyContent='center'>
             <Button

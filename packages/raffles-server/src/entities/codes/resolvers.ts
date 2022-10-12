@@ -17,7 +17,7 @@ export const resolvers = {
     },
     userCodes: async (_: any, __: any, { user }: ApolloContext) => {
       try {
-        return userCodes(user);
+        return await userCodes(user);
       } catch (e) {
         console.error(e);
         throw e;
@@ -25,7 +25,7 @@ export const resolvers = {
     },
     userCodesRedemptions: async (_: any, __: any, { user }: ApolloContext) => {
       try {
-        return userCodesRedemptions(user);
+        return await userCodesRedemptions(user);
       } catch (e) {
         console.error(e);
         throw e;
@@ -39,7 +39,7 @@ export const resolvers = {
       { user }: ApolloContext,
     ) => {
       try {
-        return redeem(code, user);
+        return await redeem(code, user);
       } catch (e) {
         console.error(e);
         throw e;

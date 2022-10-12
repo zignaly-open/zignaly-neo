@@ -12,5 +12,6 @@
     "bonus-perc-value": "{{perc}}% of <0>{{amount}}</0> = ",
     "total": "Total:",
     "max-bonus": "Maximum Bonus:",
-    "redeem-code-bonus": "Redeem code (<0>{bonus}</0>)"
+    "redeem-code-bonus": "Redeem code & Get <0>{bonus}</0>",
+    "redeem-success": "Congratulations, you have successfully redeemed the code, and received <0>{{ammount}}</0>!"
 }
