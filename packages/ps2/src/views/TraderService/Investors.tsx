@@ -1,9 +1,9 @@
-import ServiceInvestorsContainer from 'features/trader/components/InvestorTable';
+import ServiceInvestorsContainer from 'views/TraderService/components/InvestorTable';
 import React from 'react';
-import ServiceHeader from '../../features/trader/components/ServiceHeader';
+import ServiceHeader from './components/ServiceHeader';
 import { useParams } from 'react-router-dom';
-import { TraderServicePageContainer } from '../../features/trader/components/styles';
-import { useTraderServiceTitle } from '../../features/trader/use';
+import { TraderServicePageContainer } from './components/styles';
+import { useTraderServiceTitle } from '../../apis/service/use';
 
 const Investors: React.FC = () => {
   const { serviceId } = useParams();

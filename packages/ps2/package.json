@@ -51,6 +51,7 @@
     "analytics": "^0.8.1",
     "async-mutex": "^0.3.2",
     "bignumber.js": "^9.1.0",
+    "copy-to-clipboard": "^3.3.2",
     "date-fns": "^2.28.0",
     "i18next": "^21.8.14",
     "i18next-browser-languagedetector": "^6.1.4",

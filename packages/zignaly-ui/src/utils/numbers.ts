@@ -39,30 +39,6 @@ export const sortByPointDecimal =
     return 0;
   };
 
-/**
- * @description Sort the column by picking up the value
- *
- * @returns {Number} returns the number for sorting
- * @param a value to compare
- * @param b value to compare
- * @param isNecessaryParseFloat if is necessary parse
- */
-export const sortByValue = (
-  a: string | number,
-  b: string | number,
-  isNecessaryParseFloat = false,
-) => {
-  let number1 = a,
-    number2 = b;
-  if (isNecessaryParseFloat) {
-    if (typeof number1 === "string") {
-      number1 = parseFloat(number1);
-    }
-    if (typeof number2 === "string") {
-      number2 = parseFloat(number2);
-    }
-  }
-  if (number2 > number2) return 1;
-  if (number1 < number2) return -1;
-  return +number2 - +number1;
+export const sortByValue = (number1: string | number, number2: string | number) => {
+  return +number1 - +number2;
 };

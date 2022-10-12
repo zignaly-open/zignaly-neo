@@ -37,7 +37,7 @@ const PriceLabel = ({
           }}
           displayType={"text"}
           thousandSeparator={true}
-          decimalScale={precision || coinPrecisions[coin] || undefined}
+          decimalScale={precision || (+value === 0 && 2) || coinPrecisions[coin] || 8}
         />
         {!hideCoinName && (
           <styled.Coin weight="medium" variant={"body2"} color={"neutral400"}>

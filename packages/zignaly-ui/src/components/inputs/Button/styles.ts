@@ -7,6 +7,8 @@ const isPrimaryButton = (variant: keyof typeof buttonVariants) => variant === "p
 
 const isSecondaryButton = (variant: keyof typeof buttonVariants) => variant === "secondary";
 
+const isXSmallButton = (size: keyof typeof buttonSizes) => size === "xsmall";
+
 const isSmallButton = (size: keyof typeof buttonSizes) => size === "small";
 
 const isMediumButton = (size: keyof typeof buttonSizes) => size === "medium";
@@ -139,7 +141,7 @@ export const Layout = styled.button<LayoutProps>`
   )}
       
     ${styledIf(
-      isSmallButton(props.size),
+      isSmallButton(props.size) || isXSmallButton(props.size),
       `
       ${Caption}{
         &.buttonsm{
@@ -203,6 +205,15 @@ export const Layout = styled.button<LayoutProps>`
           height: 20px;
           margin-left: 4px;
 
+      }
+    `,
+    )}
+    
+    ${styledIf(
+      isXSmallButton(props.size),
+      `
+      ${Container} {
+        min-width: 30px;
       }
     `,
     )}

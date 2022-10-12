@@ -1,9 +1,9 @@
 import React from 'react';
-import ServiceHeader from '../../features/trader/components/ServiceHeader';
-import ServiceManagementsContainer from '../../features/trader/components/ServiceManagementsContainer';
+import ServiceHeader from './components/ServiceHeader';
+import ServiceManagementsContainer from './components/ServiceManagementsContainer';
 import { useParams } from 'react-router-dom';
-import { TraderServicePageContainer } from '../../features/trader/components/styles';
-import { useTraderServiceTitle } from '../../features/trader/use';
+import { TraderServicePageContainer } from './components/styles';
+import { useTraderServiceTitle } from '../../apis/service/use';
 
 const Management: React.FC = () => {
   const { serviceId } = useParams();
