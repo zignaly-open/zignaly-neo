@@ -1,12 +1,14 @@
+import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Box } from '@mui/system';
 import { PriceLabel, Table, Typography } from '@zignaly-open/ui';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { GET_USER_CODES, GET_USER_CODES_REDEMPTIONS } from 'queries/codes';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import DialogContainer from '../DialogContainer';
 import { ShareCodeProps, UserCodes, UserCodesRedemptions } from './types';
+import { StyledTable } from './styles';
+import { format } from 'date-fns';
 
 const ShareCode = (props: ShareCodeProps) => {
   const { t } = useTranslation('share-code');
@@ -46,6 +48,11 @@ const ShareCode = (props: ShareCodeProps) => {
 
   const columnsCodesRedemptions: TableProps<UserCodesRedemptions>['columns'] = [
     {
+      Header: t('date'),
+      accessor: 'redemptionDate',
+      Cell: ({ cell: { value } }) => format(new Date(value), 'PP'),
+    },
+    {
       Header: t('code'),
       accessor: 'code',
     },
@@ -69,10 +76,6 @@ const ShareCode = (props: ShareCodeProps) => {
       Header: t('address'),
       accessor: 'invited.shortAddress',
     },
-    {
-      Header: t('date'),
-      accessor: 'redemptionDate',
-    },
   ];
 
   return (
@@ -93,25 +96,29 @@ const ShareCode = (props: ShareCodeProps) => {
         </Typography>
       </Box>
       {dataCodes && (
-        <Table
-          columns={columnsCodes}
-          data={dataCodes.userCodes}
-          isUserTable={false}
-          hideOptionsButton={false}
-        />
+        <StyledTable>
+          <Table
+            columns={columnsCodes}
+            data={dataCodes.userCodes}
+            isUserTable={false}
+            hideOptionsButton={false}
+          />
+        </StyledTable>
       )}
-      <Box my={3}>
+      <Box mt={4} mb={3}>
         <Typography variant='h3' color='neutral200' weight='regular'>
           {t('your-codes-redemptions')}
         </Typography>
       </Box>
       {dataCodesRedemptions && (
-        <Table
-          columns={columnsCodesRedemptions}
-          data={dataCodesRedemptions.userCodesRedemptions}
-          isUserTable={false}
-          hideOptionsButton={false}
-        />
+        <StyledTable>
+          <Table
+            columns={columnsCodesRedemptions}
+            data={dataCodesRedemptions.userCodesRedemptions}
+            isUserTable={false}
+            hideOptionsButton={false}
+          />
+        </StyledTable>
       )}
     </DialogContainer>
   );

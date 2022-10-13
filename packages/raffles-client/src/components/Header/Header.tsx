@@ -24,9 +24,20 @@ import { UserType } from '@zignaly-open/raffles-shared/types';
 import UserSettingsModal from '../Modals/UserSettings';
 import { useMediaQuery } from '@mui/material';
 import theme from 'theme';
+import { Redeem } from '@mui/icons-material';
 
 const StyledWalletIcon = styled(WalletIcon)`
   color: ${(props) => props.theme.neutral300};
+`;
+
+const StyledRedeemIcon = styled(Redeem)`
+  color: ${(props) => props.theme.neutral300};
+`;
+
+const ButtonFix = styled('div')`
+  button > div {
+    padding: 0 12px;
+  }
 `;
 
 const StickyHeader = styled(ZIGHeader)`
@@ -86,21 +97,23 @@ const Header = () => {
             <React.Fragment key='transfer'>
               <Box
                 sx={{
-                  display: { sm: 'block', xs: 'none' },
+                  display: { sm: 'flex', xs: 'none' },
                 }}
+                gap='28px'
               >
-                <Button
-                  variant='secondary'
-                  size='small'
-                  caption={t('share-earn')}
-                  leftElement={<StyledWalletIcon />}
-                  onClick={() => showModal(ShareCodeModal)}
-                />
+                <ButtonFix>
+                  <Button
+                    variant='secondary'
+                    size='small'
+                    caption={t('share-earn')}
+                    onClick={() => showModal(ShareCodeModal)}
+                  />
+                </ButtonFix>
                 <Button
                   variant='secondary'
                   size='small'
                   caption={t('redeem-code')}
-                  leftElement={<StyledWalletIcon />}
+                  leftElement={<StyledRedeemIcon />}
                   onClick={() => showModal(RedeemCodeModal)}
                 />
                 <Button
@@ -124,6 +137,16 @@ const Header = () => {
                   {
                     label: t('settings'),
                     onClick: () => showModal(UserSettingsModal),
+                  },
+                  {
+                    show: matchesSmall,
+                    label: t('redeem-code'),
+                    onClick: () => showModal(RedeemCodeModal),
+                  },
+                  {
+                    show: matchesSmall,
+                    label: t('share-earn'),
+                    onClick: () => showModal(ShareCodeModal),
                   },
                   {
                     label: t('disconnect'),
