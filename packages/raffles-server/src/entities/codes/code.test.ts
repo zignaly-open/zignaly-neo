@@ -31,14 +31,11 @@ describe('Codes', () => {
     await redisService.redis.quit();
   });
 
-  // it('should handle not found code', async () => {
-  //   const [, token] = await createRandomUser(1000, {
-  //     referralCode: 'TEST',
-  //   });
-  //   const { body } = await checkCode('TESTTT', token);
-  //   console.log(body);
-  //   // expect(res).toEqual(expect.objectContaining({ name: 'TEST' }));
-  // });
+  it('should handle not found code', async () => {
+    const [, token] = await createRandomUser(1000, {});
+    const { body } = await checkCode('TESTTT', token);
+    expect(body.errors[0].message).toEqual('Code not found');
+  });
 
   it('should handle own code check', async () => {
     const [user, token] = await createRandomUser(1000);
