@@ -128,7 +128,7 @@ const calculateInvitedBenefit = async (
 const calculateInviterBenefit = (code: Code, invitedBenefit: string) => {
   if (!code.userId) return '0'; // system code
 
-  let inviterBenefit = new BN(code.rewardDirect).plus(
+  let inviterBenefit = new BN(code.rewardDirect || 0).plus(
     new BN(invitedBenefit).times(code.rewardFactor || 0),
   );
 
