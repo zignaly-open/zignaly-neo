@@ -33,8 +33,7 @@ const ShareCode = (props: ShareCodeProps) => {
     {
       Header: t('rewardFactor'),
       accessor: 'rewardFactor',
-      Cell: ({ cell: { value } }) =>
-        value ? `${parseFloat(value) * 100}%` : 'N/A',
+      Cell: ({ cell: { value } }) => (value ? `${value * 100}%` : 'N/A'),
     },
     {
       Header: t('maxRewards'),
