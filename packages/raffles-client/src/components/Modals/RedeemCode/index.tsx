@@ -13,7 +13,9 @@ import RedeemCodeConfirmation from '../RedeemCodeConfirmation';
 
 const RedeemCode = (props: RedeemCodeProps) => {
   const { t } = useTranslation('redeem-code');
-  const [checkCode, { error, loading, data }] = useLazyQuery(CHECK_CODE);
+  const [checkCode, { error, loading, data }] = useLazyQuery(CHECK_CODE, {
+    fetchPolicy: 'network-only',
+  });
 
   const validationSchema = yup.object({
     code: yup.string().matches(/^[a-z0-9_]{3,20}$/i, t('invalid-code')),
