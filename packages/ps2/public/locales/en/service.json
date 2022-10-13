@@ -12,6 +12,7 @@
   "other-accounts": {
     "title": "Invested Across all Accounts",
     "account": "Account",
+    "active": "Active",
     "invested": "Invested",
     "switch-action": "Switch"
   }
