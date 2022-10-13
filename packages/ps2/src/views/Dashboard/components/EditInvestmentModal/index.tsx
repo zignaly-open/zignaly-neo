@@ -68,6 +68,7 @@ function EditInvestmentModal({
   const isLoading = isLoadingInvestment || isLoadingService || isLoadingCoins;
   return (
     <ZModal
+      wide
       {...props}
       close={close}
       title={title}

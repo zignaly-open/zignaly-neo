@@ -12,7 +12,8 @@ const ZModal: React.FC<ZModalProps> = ({
   children,
   onGoBack,
   title,
-  width = 784,
+  width,
+  wide,
   ...props
 }): React.ReactElement => {
   return (
@@ -26,7 +27,7 @@ const ZModal: React.FC<ZModalProps> = ({
       }}
     >
       <ModalContainer
-        width={width}
+        width={(wide && 784) || width}
         title={title}
         onClickClose={close}
         onGoBack={onGoBack}

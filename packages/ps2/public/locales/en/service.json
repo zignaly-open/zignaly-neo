@@ -8,5 +8,8 @@
     "invest-now": "Invest now!",
     "all-accounts": "See all ({{count}})",
     "x-success-fee": "{{fee}}% Success fee"
+  },
+  "other-accounts": {
+    "title": "Invested Across all Accounts"
   }
 }

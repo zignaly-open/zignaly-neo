@@ -59,7 +59,7 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
   }, []);
 
   return (
-    <ZModal {...props} title={t('minBalanceModal.title')} close={close}>
+    <ZModal wide {...props} title={t('minBalanceModal.title')} close={close}>
       <Box sx={{ marginBottom: 3 }}>
         <Typography>{t('minBalanceModal.desc')}</Typography>
       </Box>

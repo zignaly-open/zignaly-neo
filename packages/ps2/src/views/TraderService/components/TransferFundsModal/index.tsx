@@ -105,6 +105,7 @@ function TransferModal({
 
   return (
     <ZModal
+      wide
       {...props}
       close={close}
       title={t('transferFunds.title')}
