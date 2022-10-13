@@ -36,13 +36,14 @@ const ShareCode = (props: ShareCodeProps) => {
     },
     {
       Header: t('maximum-redemptions'),
-      accessor: 'maximumRedemptions',
+      accessor: 'maxRedemptions',
       Cell: ({ cell: { value } }) => value || 'N/A',
     },
     {
       Header: t('expiration-date'),
       accessor: 'expirationDate',
-      Cell: ({ cell: { value } }) => value || 'N/A',
+      Cell: ({ cell: { value } }) =>
+        value ? format(new Date(value), 'PP') : 'N/A',
     },
   ];
 
@@ -58,12 +59,12 @@ const ShareCode = (props: ShareCodeProps) => {
     },
     {
       Header: t('benefits-you'),
-      accessor: 'invitedBenefit',
+      accessor: 'inviterBenefit',
       Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {
       Header: t('benefits-invited'),
-      accessor: 'inviterBenefit',
+      accessor: 'invitedBenefit',
       Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {

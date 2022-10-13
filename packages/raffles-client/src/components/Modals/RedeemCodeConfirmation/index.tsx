@@ -5,7 +5,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { REDEEM_CODE } from 'queries/codes';
 import { useMutation } from '@apollo/client';
 import NumberFormat from 'react-number-format';
-import { Table } from './styles';
+import { StyledErrorOutline, Table } from './styles';
 import { CodeInfo } from '../RedeemCode/types';
 
 const RedeemCodeConfirmation = ({
@@ -125,7 +125,7 @@ const RedeemCodeConfirmation = ({
               </td>
             </tr>
           )}
-          {code.benefitBalanceFactor && (
+          {code.benefitDepositFactor && (
             <tr>
               <td>
                 <Typography variant='body1' color='neutral200'>
@@ -229,6 +229,14 @@ const RedeemCodeConfirmation = ({
           minWidth={200}
           onClick={() => redeemCode({ variables: { code: code.code } })}
         />
+      </Box>
+      <Box display='flex' justifyContent='center' flexDirection='row' mt={5}>
+        <StyledErrorOutline />
+        <Box display='flex' flexDirection='row' marginLeft={'5px'} width={350}>
+          <Typography variant={'h4'} weight='regular' color='neutral300'>
+            {t('cannot-withdraw')}
+          </Typography>
+        </Box>
       </Box>
     </>
   );

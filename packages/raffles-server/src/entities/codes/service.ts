@@ -31,6 +31,14 @@ export const check = async (codeName: string, user: ContextUser) => {
     if (redeemed > 0) {
       throw new Error('You have already redeemed a welcome code.');
     }
+  } else {
+    const redeemed = await CodeRedemption.count({
+      where: { invitedId: user.id, code: code.code },
+    });
+
+    if (redeemed > 0) {
+      throw new Error('You have already redeemed this code.');
+    }
   }
 
   const balance = parseFloat(await getUserBalance(user.publicAddress));

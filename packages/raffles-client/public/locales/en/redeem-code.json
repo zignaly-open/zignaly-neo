@@ -13,5 +13,6 @@
     "total": "Total:",
     "max-bonus": "Maximum Bonus:",
     "redeem-code-bonus": "Redeem code & Get <0>{bonus}</0>",
-    "redeem-success": "Congratulations, you have successfully redeemed the code, and received <0>{{ammount}}</0>!"
+    "redeem-success": "Congratulations, you have successfully redeemed the code, and received <0>{{amount}}</0>!",
+    "cannot-withdraw": "Redeemed ZIGs cannot be withdrawn, they will only be converted into prizes."
 }

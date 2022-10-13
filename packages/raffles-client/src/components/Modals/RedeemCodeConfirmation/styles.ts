@@ -1,4 +1,5 @@
-import styled from '@emotion/styled';
+import { styled } from '@mui/material';
+import { ErrorOutline } from '@mui/icons-material';
 
 export const Table = styled('table')`
   margin: 0 auto;
@@ -13,4 +14,8 @@ export const Table = styled('table')`
     text-align: left;
     min-width: 127px;
   }
+`;
+
+export const StyledErrorOutline = styled(ErrorOutline)`
+  ${(props) => `color: ${props.theme.neutral300}`};
 `;

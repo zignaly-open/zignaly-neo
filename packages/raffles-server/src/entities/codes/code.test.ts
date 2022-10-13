@@ -81,6 +81,18 @@ describe('Codes', () => {
     );
   });
 
+  it('should error if already redeemed that code', async () => {
+    const code = await createCode({ welcomeType: false });
+    const [, aliceToken] = await createAlice(1000);
+
+    await redeemCode(code.code, aliceToken);
+    const { body } = await redeemCode(code.code, aliceToken);
+
+    expect(body.errors[0].message).toEqual(
+      'You have already redeemed this code.',
+    );
+  });
+
   it('should error if maxRedemptions reached', async () => {
     const code = await createCode({ maxRedemptions: 1 });
     const [, aliceToken] = await createAlice(1000);

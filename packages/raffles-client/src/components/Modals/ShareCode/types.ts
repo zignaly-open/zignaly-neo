@@ -7,7 +7,7 @@ export type UserCodes = {
   rewardDirect: number;
   benefitDirect: number;
   currentRedemptions: number;
-  maximumRedemptions: number;
+  maxRedemptions: number;
   expirationDate: string;
 };
 
