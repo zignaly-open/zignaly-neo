@@ -13,7 +13,7 @@ import { Code, CodeRedemption } from './model';
 import BN from 'bignumber.js';
 
 export const check = async (codeName: string, user: ContextUser) => {
-  const code = await Code.findByPk(codeName);
+  const code = await Code.findByPk(codeName?.toUpperCase());
   if (!code) {
     throw new Error('Code not found');
   }
@@ -129,8 +129,9 @@ const calculateInviterBenefit = (code: Code, invitedBenefit: string) => {
   if (!code.userId) return '0'; // system code
 
   let inviterBenefit = new BN(code.rewardDirect).plus(
-    new BN(invitedBenefit).times(code.rewardFactor),
+    new BN(invitedBenefit).times(code.rewardFactor || 0),
   );
+
   if (code.maxTotalRewards && inviterBenefit > new BN(code.maxTotalRewards)) {
     inviterBenefit = new BN(code.maxTotalRewards);
   }

@@ -213,7 +213,7 @@ const finalizeAuction = async (auctionId: number) => {
       inRedis: false,
       isFinalized: true,
       currentBid: price,
-      expireAt: expire,
+      expiresAt: expire,
     },
     { where: { id: auctionId } },
   );

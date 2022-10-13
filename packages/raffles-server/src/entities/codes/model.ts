@@ -9,6 +9,7 @@ import {
   Default,
   DataType,
   ForeignKey,
+  IsUppercase,
 } from 'sequelize-typescript';
 import { User } from '../users/model';
 
@@ -28,6 +29,7 @@ export class WalletType extends Model {
 @Table
 export class Code extends Model {
   @PrimaryKey
+  @IsUppercase
   @Column
   public code!: string;
 
@@ -41,10 +43,6 @@ export class Code extends Model {
   @Default(false)
   @Column
   public welcomeType: boolean;
-
-  @Default(false)
-  @Column
-  public systemCode: boolean;
 
   @Column({
     type: DataType.DECIMAL,
@@ -160,7 +158,4 @@ export class CodeRedemption extends Model {
     type: DataType.DECIMAL,
   })
   public inviterBenefit: number;
-
-  // @Column
-  // public welcomeType: boolean;
 }
