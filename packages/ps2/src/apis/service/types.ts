@@ -100,6 +100,7 @@ export type Service = {
   exchangeInternalId: string;
   fundsAllocated: string;
   id: string;
+  liquidated: boolean;
   invested: string;
   investors: number;
   level: number;

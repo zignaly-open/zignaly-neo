@@ -7,6 +7,7 @@ import { Avatar } from '@zignaly-open/ui';
 import {
   InvestButton,
   InvestedButton,
+  LiquidatedLabel,
   OtherAccountsButton,
   ServiceInformation,
 } from './atoms';
@@ -104,7 +105,13 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
           <ServiceInformation service={service} />
         </Box>
 
-        {!isInvested.isLoading && (
+        {service.liquidated && (
+          <Box sx={{ mt: -0.5 }}>
+            <LiquidatedLabel />
+          </Box>
+        )}
+
+        {!isInvested.isLoading && !service.liquidated && (
           <Box sx={{ mt: md ? -1.5 : 3 }}>
             {isInvested.thisAccount ? (
               <InvestedButton

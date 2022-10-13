@@ -1,8 +1,10 @@
 import styled, { css } from 'styled-components';
+import muiStyled from '@emotion/styled';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { Typography } from '@zignaly-open/ui';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PersonIcon from '@mui/icons-material/Person';
+import { Box } from '@mui/material';
 
 export const GreySubHeader = styled(Typography)`
   font-weight: 500 !important;
@@ -23,6 +25,15 @@ export const ServiceHeader = styled(Typography)`
   font-size: 18px !important;
   line-height: 28px !important;
   color: ${(props) => props.theme.almostWhite} !important;
+`;
+
+export const LiquidatedLabel = muiStyled(Box)`
+  border: 1px solid ${(props) => props.theme.redGraphOrError};
+  border-radius: 5px;
+  
+  span {
+    text-transform: uppercase
+  }
 `;
 
 export const StyledVerifiedIcon = styled(VerifiedIcon)`

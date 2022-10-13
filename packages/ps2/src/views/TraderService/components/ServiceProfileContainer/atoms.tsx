@@ -20,6 +20,7 @@ import {
   ServiceHeader,
   StyledCalendarMonthIcon,
   StyledPersonIcon,
+  LiquidatedLabel as LiquidatedLabelElement,
   InvestButtonWrap,
   StyledVerifiedIcon,
 } from './styles';
@@ -110,6 +111,21 @@ export const InvestedButton: React.FC<{
         onClick={onClick}
       />
     </InvestButtonContainer>
+  );
+};
+
+export const LiquidatedLabel: React.FC = () => {
+  const { t } = useTranslation('service');
+  return (
+    <LiquidatedLabelElement sx={{ p: 2.5 }}>
+      <Typography
+        weight={'demibold'}
+        variant={'buttonxl'}
+        color='redGraphOrError'
+      >
+        {t('liquidated')}
+      </Typography>
+    </LiquidatedLabelElement>
   );
 };
 
