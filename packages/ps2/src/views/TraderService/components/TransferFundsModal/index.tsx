@@ -87,18 +87,16 @@ function TransferModal({
         amount: amountValue?.value?.toString(),
         from: fromTradingAccount ? 'STA' : 'SCA',
         to: fromTradingAccount ? 'SCA' : 'STA',
-      })
-        .then(() => {
-          toast.success(
-            t('management:transfer.success', {
-              amount: `${new BigNumber(amountValue?.value).toFixed()} ${
-                amountValue?.token.id
-              }`,
-            }),
-          );
-          close();
-        })
-        .catch((e) => toast.backendError(e));
+      }).then(() => {
+        toast.success(
+          t('management:transfer.success', {
+            amount: `${new BigNumber(amountValue?.value).toFixed()} ${
+              amountValue?.token.id
+            }`,
+          }),
+        );
+        close();
+      });
     },
     [serviceId, fromTradingAccount],
   );
