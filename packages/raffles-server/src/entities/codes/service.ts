@@ -111,7 +111,7 @@ const calculateInvitedBenefit = async (
   const depositsBenefit = new BN(deposits).times(
     code.benefitDepositFactor || 0,
   );
-  let invitedBenefit = new BN(code.benefitDirect)
+  let invitedBenefit = new BN(code.benefitDirect || 0)
     .plus(balanceBenefit)
     .plus(depositsBenefit);
 

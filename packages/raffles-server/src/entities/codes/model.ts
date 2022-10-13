@@ -60,8 +60,6 @@ export class Code extends Model {
   @Column
   public reqMinAuctions: number;
 
-  // @BelongsTo(() => WalletType, 'reqWalletTypeId')
-  // public reqWalletType!: WalletType;
   @Column
   public reqWalletType: string;
 
@@ -116,18 +114,10 @@ export class Code extends Model {
 
 @Table
 export class CodeRedemption extends Model {
-  // @PrimaryKey
-  // @AutoIncrement
-  // @Unique
-  // @Column
-  // public id!: number;
-
   @ForeignKey(() => Code)
   @Column
   public code: string;
 
-  // or code name to get the name
-  // @BelongsTo(() => Code, 'codeId')
   @BelongsTo(() => Code, 'code')
   public codeInfo!: Code;
 
