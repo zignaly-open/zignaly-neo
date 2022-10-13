@@ -8,7 +8,11 @@ import {
   useInvestedAmountQuery,
 } from './api';
 import { useActiveExchange, useIsAuthenticated } from '../user/use';
-import { InvestmentDetails, InvestmentServiceDetails } from './types';
+import {
+  InvestedInService,
+  InvestmentDetails,
+  InvestmentServiceDetails,
+} from './types';
 import { RootState } from '../store';
 import { setSelectedInvestment } from './store';
 import { useMemo } from 'react';
@@ -43,7 +47,7 @@ export function useSelectedInvestment(): InvestmentServiceDetails {
 export function useIsInvestedInService(serviceId: string): {
   isLoading: boolean;
   thisAccount: boolean;
-  otherAccounts?: string[];
+  accounts?: InvestedInService;
   refetch: () => void;
   investedAmount: string;
 } {
@@ -62,7 +66,7 @@ export function useIsInvestedInService(serviceId: string): {
     isLoading: isLoading || isFetching,
     refetch,
     thisAccount: !!invested,
-    otherAccounts: data && Object.keys(data),
+    accounts: data,
     investedAmount: invested?.invested || '0',
   };
 }

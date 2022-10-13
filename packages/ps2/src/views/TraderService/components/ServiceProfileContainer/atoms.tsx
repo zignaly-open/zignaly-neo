@@ -31,8 +31,9 @@ import LinkIcon from '@mui/icons-material/Link';
 import { useToast } from '../../../../util/hooks/useToast';
 import { Box, useMediaQuery } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import AccountSelector from '../../../../components/AccountSelector';
 import { useIsInvestedInService } from '../../../../apis/investment/use';
+import { ShowFnOutput, useModal } from 'mui-modal-provider';
+import InvestedFromOtherAccounts from '../InvestedFromOtherAccounts';
 
 export const InvestButton: React.FC<{
   service: Service;
@@ -63,22 +64,28 @@ export const InvestButton: React.FC<{
 };
 
 export const OtherAccountsButton: React.FC<{
-  otherAccounts: string[];
-}> = ({ otherAccounts }) => {
+  service: Service;
+}> = ({ service }) => {
   const { t } = useTranslation('service');
+  const { showModal } = useModal();
+  const isInvested = useIsInvestedInService(service.id);
+
+  const onClickViewOther = () => {
+    const modal: ShowFnOutput<void> = showModal(InvestedFromOtherAccounts, {
+      close: () => modal.hide(),
+      service,
+    });
+  };
+
   return (
     <Box mt={2} textAlign={'center'}>
-      <AccountSelector
-        exchangeFilter={({ internalId }) => otherAccounts?.includes(internalId)}
-        component={() => (
-          <Button
-            caption={t('invest-button.all-accounts', {
-              count: otherAccounts?.length,
-            })}
-            variant={'secondary'}
-            rightElement={<ChevronRightIcon color={'neutral300'} />}
-          />
-        )}
+      <Button
+        caption={t('invest-button.all-accounts', {
+          count: Object.values(isInvested.accounts || {})?.length,
+        })}
+        variant={'secondary'}
+        onClick={onClickViewOther}
+        rightElement={<ChevronRightIcon color={'neutral300'} />}
       />
     </Box>
   );

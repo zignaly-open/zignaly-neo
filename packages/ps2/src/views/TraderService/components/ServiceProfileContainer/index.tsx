@@ -115,7 +115,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
               <InvestButton service={service} onClick={onClickMakeInvestment} />
             )}
 
-            <OtherAccountsButton otherAccounts={isInvested.otherAccounts} />
+            <OtherAccountsButton service={service} />
           </Box>
         )}
       </Box>

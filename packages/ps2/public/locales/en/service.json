@@ -10,6 +10,9 @@
     "x-success-fee": "{{fee}}% Success fee"
   },
   "other-accounts": {
-    "title": "Invested Across all Accounts"
+    "title": "Invested Across all Accounts",
+    "account": "Account",
+    "invested": "Invested",
+    "switch-action": "Switch"
   }
 }
