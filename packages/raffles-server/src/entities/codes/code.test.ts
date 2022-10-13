@@ -55,12 +55,14 @@ describe('Codes', () => {
         data: { checkCode: res },
       },
     } = await checkCode(code.code, aliceToken);
-    expect(res).toEqual(
-      expect.objectContaining({
+    expect(res).toEqual({
+      code: expect.objectContaining({
         code: code.code,
         benefitDirect: expect.any(Number),
       }),
-    );
+      balance: 1000,
+      deposits: 1000,
+    });
   });
 
   it('should error if already redeemed a welcome code', async () => {
@@ -145,14 +147,14 @@ describe('Codes', () => {
 
     const { body } = await checkCode(code.code, aliceToken);
 
-    expect(body.data.checkCode).toEqual(
-      expect.objectContaining({ name: code.code }),
+    expect(body.data.checkCode.code).toEqual(
+      expect.objectContaining({ code: code.code }),
     );
   });
 
   it('should error if reqMinAuctions not reached', async () => {
     const code = await createCode({ reqMinAuctions: 1 });
-    const [, aliceToken] = await createAlice(100);
+    const [, aliceToken] = await createAlice(500);
 
     const { body } = await checkCode(code.code, aliceToken);
 
@@ -163,22 +165,21 @@ describe('Codes', () => {
 
   it('should work if reqMinAuctions reached', async () => {
     const code = await createCode({ reqMinAuctions: 1 });
-    const [, aliceToken] = await createAlice(100);
+    const [, aliceToken] = await createAlice(501);
 
     const auction = await createAuction();
     await makeBid(auction, aliceToken);
     await expireAuction(auction.id);
 
     const { body } = await checkCode(code.code, aliceToken);
-
-    expect(body.data.checkCode).toEqual(
-      expect.objectContaining({ name: code.code }),
+    expect(body.data.checkCode.code).toEqual(
+      expect.objectContaining({ code: code.code }),
     );
   });
 
   it('should error if reqWalletType not equal', async () => {
     const code = await createCode({ reqWalletType: 'kucoin' });
-    const [, aliceToken] = await createRandomUser(100, {
+    const [, aliceToken] = await createRandomUser(500, {
       walletType: 'metamask',
     });
 
@@ -191,14 +192,14 @@ describe('Codes', () => {
 
   it('should work if reqWalletType matches', async () => {
     const code = await createCode({ reqWalletType: 'kucoin' });
-    const [, aliceToken] = await createRandomUser(100, {
+    const [, aliceToken] = await createRandomUser(500, {
       walletType: 'kucoin',
     });
 
     const { body } = await checkCode(code.code, aliceToken);
 
-    expect(body.data.checkCode).toEqual(
-      expect.objectContaining({ name: code.code }),
+    expect(body.data.checkCode.code).toEqual(
+      expect.objectContaining({ code: code.code }),
     );
   });
 
@@ -253,6 +254,7 @@ describe('Codes', () => {
     const code = await createCode({
       benefitDirect: 100,
       benefitBalanceFactor: 0.5,
+      maxTotalBenefits: 1000,
     });
     const [, aliceToken] = await createAlice(1000);
 
@@ -270,6 +272,8 @@ describe('Codes', () => {
       rewardDirect: 100,
       rewardFactor: 0.2,
       userId: bob.id,
+      maxTotalBenefits: 200,
+      maxTotalRewards: 200,
     });
     const [alice, aliceToken] = await createAlice(1000);
 
@@ -344,7 +348,14 @@ describe('Codes', () => {
     const [alice, aliceToken] = await createAlice(100);
     const { body } = await userCodes(aliceToken);
     expect(body.data.userCodes).toHaveLength(1);
-    expect(body.data.userCodes).toEqual([{ name: alice.codes[0].code }]);
+    expect(body.data.userCodes).toEqual([
+      expect.objectContaining({
+        code: alice.codes[0].code,
+        benefitDirect: expect.any(Number),
+        rewardDirect: expect.any(Number),
+        currentRedemptions: expect.any(Number),
+      }),
+    ]);
   });
 
   it('should return code redemptions', async () => {

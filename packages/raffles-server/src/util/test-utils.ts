@@ -198,11 +198,17 @@ export async function createBob(
   balance = 0,
 ): Promise<[User, string, MockedCybavo]> {
   try {
-    const user = await User.create({
-      username: 'Bob',
-      publicAddress: '0xE288AE3acccc630781354da2AA64379A0d4C56dB'.toLowerCase(),
-      onboardingCompletedAt: Date.now(),
-    });
+    const user = await User.create(
+      {
+        username: 'Bob',
+        publicAddress:
+          '0xE288AE3acccc630781354da2AA64379A0d4C56dB'.toLowerCase(),
+        onboardingCompletedAt: Date.now(),
+      },
+      { include: Code },
+    );
+    // Load associations
+    await user.reload();
     const cybavoMock = await mockCybavoWallet(user, balance);
     return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
@@ -228,12 +234,17 @@ export async function createRandomUser(
   overrides?: Partial<User>,
 ): Promise<[User, string, MockedCybavo]> {
   try {
-    const user = await User.create({
-      username: null,
-      publicAddress: '0xE288AE3acccc630'.toLowerCase() + Math.random(),
-      onboardingCompletedAt: Date.now(),
-      ...overrides,
-    });
+    const user = await User.create(
+      {
+        username: null,
+        publicAddress: '0xE288AE3acccc630'.toLowerCase() + Math.random(),
+        onboardingCompletedAt: Date.now(),
+        ...overrides,
+      },
+      { include: Code },
+    );
+    // Load associations
+    await user.reload();
     const cybavoMock = await mockCybavoWallet(user, balance);
     return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
@@ -307,16 +318,20 @@ export async function checkCode(code: string, token: string): Promise<any> {
     `
    query {
     checkCode(code: "${code}") { 
-      code
-      reqMinimumBalance
-      reqMinimumDeposit
-      reqDepositFrom
-      reqMinAuctions
-      reqWalletType
-      benefitDirect
-      benefitBalanceFactor
-      benefitDepositFactor
-      maxTotalBenefits
+      code {
+        code
+        reqMinimumBalance
+        reqMinimumDeposit
+        reqDepositFrom
+        reqMinAuctions
+        reqWalletType
+        benefitDirect
+        benefitBalanceFactor
+        benefitDepositFactor
+        maxTotalBenefits
+      }
+      balance
+      deposits
      }
   }`,
     token,
