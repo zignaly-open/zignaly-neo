@@ -30,6 +30,8 @@ export const GET_USER_CODES = gql`
       maxRedemptions
       currentRedemptions
       endDate
+      rewardFactor
+      maxTotalRewards
     }
   }
 `;

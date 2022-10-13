@@ -359,6 +359,8 @@ export async function userCodes(token: string): Promise<any> {
       maxRedemptions
       currentRedemptions
       endDate
+      rewardFactor
+      maxTotalRewards
     }
   }`,
     token,

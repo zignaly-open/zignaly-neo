@@ -31,6 +31,17 @@ const ShareCode = (props: ShareCodeProps) => {
       Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {
+      Header: t('rewardFactor'),
+      accessor: 'rewardFactor',
+      Cell: ({ cell: { value } }) => (value ? `${value}%` : 'N/A'),
+    },
+    {
+      Header: t('maxRewards'),
+      accessor: 'maxTotalRewards',
+      Cell: ({ cell: { value } }) =>
+        value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
+    },
+    {
       Header: t('current-redemptions'),
       accessor: 'currentRedemptions',
     },

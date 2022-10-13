@@ -29,6 +29,8 @@ export const typeDef = gql`
     maxRedemptions: Int
     currentRedemptions: Int
     endDate: Date
+    rewardFactor: Float
+    maxTotalRewards: Int
   }
 
   type InvitedInfo {

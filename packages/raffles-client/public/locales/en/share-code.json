@@ -13,5 +13,7 @@
     "redeem-code-info": "Do you have a code? Enter it below to check your rewards!",
     "user": "User",
     "address": "Address",
-    "date": "Date"
+    "date": "Date",
+    "rewardFactor": "User rewards %",
+    "maxRewards": "Max Rewards"
 }
