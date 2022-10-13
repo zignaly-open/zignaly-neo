@@ -11,6 +11,7 @@ export const iconsByType = {
 
 export type LogoProps = {
   type: keyof typeof iconsByType;
+  id?: string;
   width?: string;
   height?: string;
 };

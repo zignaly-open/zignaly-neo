@@ -1,4 +1,4 @@
-import DashboardComponent from 'features/dashboard/components/MyDashboard';
+import DashboardComponent from 'views/Dashboard/components/MyDashboard';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';

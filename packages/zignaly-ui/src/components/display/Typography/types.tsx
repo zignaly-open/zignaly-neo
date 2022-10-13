@@ -32,7 +32,7 @@ export interface TypographyProps {
   component?: any;
   color?: keyof typeof dark;
   underline?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode; // optional to support <Trans />
   marginRight?: number;
   marginLeft?: number;
   marginTop?: number;

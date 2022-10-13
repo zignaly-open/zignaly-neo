@@ -7,6 +7,7 @@ export const buttonVariants = {
 };
 
 export const buttonSizes = {
+  xsmall: "xsmall",
   small: "small",
   medium: "medium",
   large: "large",

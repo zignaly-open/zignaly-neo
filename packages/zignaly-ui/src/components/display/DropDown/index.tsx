@@ -97,7 +97,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
 
                 if (option.element)
                   return (
-                    <ComponentWrapper separator={option.separator} key={key}>
+                    <ComponentWrapper id={option.id} separator={option.separator} key={key}>
                       {option.element}
                     </ComponentWrapper>
                   );
@@ -105,6 +105,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
                 if (option.href)
                   return (
                     <NavLink
+                      id={option.id}
                       key={key}
                       separator={option.separator}
                       active={option?.active}
@@ -117,6 +118,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
                 if (option.onClick)
                   return (
                     <NavLink
+                      id={option.id}
                       key={key}
                       separator={option.separator}
                       active={option?.active}
@@ -134,6 +136,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
                     >
                       <NavLink
                         active={option?.active}
+                        id={option.id}
                         notClickable={!option.children?.length}
                         onClick={() =>
                           option.children?.length &&
@@ -154,7 +157,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
                         option.children.map((c) => (
                           <NavLink
                             active={c?.active}
-                            key={"--language-" + c.label}
+                            key={"--sub-" + key + "--" + c.label}
                             onClick={onClick(c.onClick!)}
                           >
                             {c.label}

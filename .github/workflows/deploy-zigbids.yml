@@ -1,0 +1,107 @@
+name: Zigbids Production deploy
+on:
+  push:
+    branches:
+      - release
+jobs:
+  pre_job:
+    runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+      paths_result: ${{ steps.skip_check.outputs.paths_result }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v4
+        with:
+          paths_filter: |
+            ui_repos:
+              paths:
+                - 'packages/raffles-shared/**/*'
+                - 'packages/raffles-server/**/*'
+                - 'packages/raffles-client/**/*'
+                - 'packages/zignaly-ui/**/*'
+  build:
+    name: Zigbids Prod deploy
+    needs: pre_job
+    if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).ui_repos.should_skip
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Configure deployment folder
+        run: |
+          sed -i -e 's/{directory}/prod/g' appspec.yml
+          sed -i -e 's/{directory}/prod/g' scripts/prepare_release.sh
+          sed -i -e 's/{directory}/prod/g' scripts/after_install.sh
+      - name: Create server .env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_POSTGRES_URL: ${{ secrets.POSTGRES_URL }}
+          envkey_RPC_URL: ${{ secrets.RPC_URL }}
+          envkey_RPC_SOCKET_URL: ${{ secrets.RPC_SOCKET_URL }}
+          envkey_RECEIVING_ACCOUNT: ${{ secrets.RECEIVING_ACCOUNT }}
+          envkey_CONTRACT_ADDRESS: ${{ secrets.CONTRACT_ADDRESS }}
+          envkey_ZIGNALY_API: ${{ secrets.ZIGNALY_API }}
+          envkey_ZIGNALY_API_PUBLIC_KEY: ${{ secrets.ZIGNALY_API_PUBLIC_KEY }}
+          envkey_ZIGNALY_API_PRIVATE_KEY: ${{ secrets.ZIGNALY_API_PRIVATE_KEY }}
+          envkey_ZIGNALY_SYSTEM_ID: ${{ secrets.ZIGNALY_SYSTEM_ID }}
+          envkey_GRAPHQL_PATH: ${{ secrets.GRAPHQL_PATH }}
+          envkey_REDIS_URL: ${{ secrets.REDIS_URL }}
+          envkey_PORT: ${{ secrets.PORT }}
+          directory: packages/raffles-server
+          file_name: .env
+      - name: Create client .env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_REACT_APP_GRAPHQL: ${{ secrets.REACT_APP_GRAPHQL }}
+          envkey_REACT_APP_GRAPHQL_WS: ${{ secrets.REACT_APP_GRAPHQL_WS }}
+          envkey_REACT_APP_ALCHEMY_PROJECT_ID: ${{ secrets.REACT_APP_ALCHEMY_PROJECT_ID }}
+          envkey_REACT_APP_RECEIVING_ADDRESS: ${{ secrets.REACT_APP_RECEIVING_ADDRESS }}
+          envkey_REACT_APP_CONTRACT_ADDRESS: ${{ secrets.REACT_APP_CONTRACT_ADDRESS }}
+          envkey_REACT_APP_USE_MUMBAI_CHAIN: ${{ secrets.REACT_APP_USE_MUMBAI_CHAIN }}
+          envkey_REACT_APP_ENABLE_TRACKING: ${{ secrets.REACT_APP_ENABLE_TRACKING }}
+          directory: packages/raffles-client
+          file_name: .env.production.local
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+          cache: 'yarn'
+      - name: Install Lerna
+        run: yarn global add lerna
+      - name: Bootstrap packages
+        run: lerna bootstrap --scope=@zignaly-open/raffles-client
+      - name: Build client
+        run: yarn run build --scope=@zignaly-open/raffles-client --include-dependencies
+      - name: AWS CodeDeploy
+        uses: sourcetoad/aws-codedeploy-action@v1
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_KEY }}
+          aws_region: ap-northeast-1
+          codedeploy_name: zignaly
+          codedeploy_group: zignaly-raffles-prod
+          codedeploy_register_only: false
+          s3_bucket: ${{ secrets.AWS_S3_BUCKET }}
+          s3_folder: prod
+          max_polling_iterations: 60
+          excluded_files: '.git/* *node_modules/* packages/raffles-client/* packages/ps2/*'
+          directory: .
+      - uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.AWS_WEBAPP_S3_BUCKET }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}
+          AWS_REGION: 'us-east-1'
+          SOURCE_DIR: 'packages/raffles-client/build'
+      - name: Invalidate CloudFront
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          DISTRIBUTION: ${{ secrets.AWS_DISTRIBUTION }}
+          PATHS: '/'
+          AWS_REGION: 'us-east-1'
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_KEY }}

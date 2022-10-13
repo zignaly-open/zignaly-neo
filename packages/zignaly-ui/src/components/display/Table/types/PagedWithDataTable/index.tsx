@@ -148,7 +148,7 @@ export default function PagedWithDataTable<T extends object>({
                     key={`--table-head-row-${index.toString()}`}
                     isSorted={column.isSorted}
                   >
-                    <HeaderRow>
+                    <HeaderRow align={column.align}>
                       <TextContainer>
                         <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
                           {column.render("Header")}

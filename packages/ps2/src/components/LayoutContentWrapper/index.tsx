@@ -2,13 +2,9 @@ import React, { ReactElement } from 'react';
 import CenteredLoader from '../CenteredLoader';
 import CriticalError from '../Stub/CriticalError';
 import NoData from '../Stub/NoData';
+import { QueryReturnTypeBasic } from '../../util/queryReturnType';
 
-type EndpointEsque = {
-  isFetching?: boolean;
-  isLoading: boolean;
-  error?: unknown;
-  data?: unknown;
-};
+type EndpointEsque = QueryReturnTypeBasic<unknown>;
 
 /**
  * As you may have noticed, this has quite a similar notation to all the api hooks from RTK.

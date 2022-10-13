@@ -8,6 +8,7 @@ type Option = {
 };
 
 export type DropDownOption = Option & {
+  id?: string;
   children?: Option[];
   element?: JSX.Element;
   separator?: boolean;

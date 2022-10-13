@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import Router from './Router';
 import theme from './theme';
 import * as Sentry from '@sentry/browser';
@@ -8,13 +8,13 @@ import ModalProvider from 'mui-modal-provider';
 import { ToastContainer } from 'react-toastify';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
 import { BrowserRouter } from 'react-router-dom';
-import { persistor, store } from './features/store';
+import { persistor, store } from './apis/store';
 import { Provider } from 'react-redux';
 import GlobalStyle from './styles';
 import { PersistGate } from 'redux-persist/integration/react';
 import CenteredLoader from './components/CenteredLoader';
-import Header from './features/navigation/Header';
-import UpdateChecker from './features/navigation/UpdateChecker';
+import Header from './components/Navigation/Header';
+import UpdateChecker from './components/Navigation/UpdateChecker';
 
 const augmentedTheme = { ...dark, ...theme };
 
@@ -58,7 +58,9 @@ function App() {
                 <ModalProvider>
                   <Header />
                   <UpdateChecker />
-                  <Router />
+                  <Suspense fallback={null}>
+                    <Router />
+                  </Suspense>
                 </ModalProvider>
               </BrowserRouter>
             </PersistGate>
