@@ -4,6 +4,7 @@ type Option = {
   label?: string | JSX.Element;
   onClick?: () => void;
   href?: string;
+  target?: "_blank";
   active?: boolean;
 };
 
