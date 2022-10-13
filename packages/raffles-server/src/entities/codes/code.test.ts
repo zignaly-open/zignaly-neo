@@ -215,23 +215,34 @@ describe('Codes', () => {
     );
   });
 
+  it('should transfer rewardDirect', async () => {
+    const [alice] = await createAlice(1000);
+    const code = await createCode({
+      maxTotalRewards: null,
+      rewardDirect: 10,
+      userId: alice.id,
+    });
+    const [, bobToken] = await createBob(1000);
+
+    const { body } = await redeemCode(code.code, bobToken);
+    expect(body.data.redeemCode).toEqual(code.benefitDirect);
+
+    expect(mock.history.post[1].data).toBe(
+      JSON.stringify({
+        amount: code.rewardDirect.toString(),
+        fees: '0',
+        currency: 'ZIG',
+        user_id: zignalySystemId,
+        to_user_id: alice.publicAddress,
+        locked: 'true',
+        type: TransactionType.ReferralCode,
+      }),
+    );
+  });
+
   it('should transfer to both users', async () => {
     const [alice] = await createAlice(1000);
     const [bob, bobToken] = await createBob(1000);
-
-    // Mock deposit
-    mock.onGet(`/operations/all/${bob.publicAddress}`).reply(() => {
-      return [
-        200,
-        [
-          {
-            amount: 500,
-            created_at: '2022-09-09T16:09:56',
-            internal_type: TransactionType.Deposit,
-          },
-        ],
-      ];
-    });
 
     const { body } = await redeemCode(alice.codes[0].code, bobToken);
 
