@@ -11,15 +11,13 @@ import { useTranslation } from 'react-i18next';
 import { Grid, useMediaQuery } from '@mui/material';
 import { ChangeViewFn, EditInvestmentViews } from '../types';
 import theme from '../../../../../theme';
-import { useSelectedInvestment } from 'apis/investment/use';
 
 const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   const { t } = useTranslation('edit-investment');
-  const service = useSelectedInvestment();
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   return (
     <>
-      <InvestorDetails service={service} />
+      <InvestorDetails />
 
       <Grid container marginBottom={3} rowSpacing={6}>
         <Grid item sm={12} md={6}>

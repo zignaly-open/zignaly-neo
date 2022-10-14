@@ -6,6 +6,7 @@ import {
   useUpdateTakeProfitAndInvestMoreMutation,
   useWithdrawInvestmentMutation,
   useInvestedAmountQuery,
+  useInvestInServiceMutation,
 } from './api';
 import { useActiveExchange, useIsAuthenticated } from '../user/use';
 import {
@@ -102,6 +103,33 @@ export function useUpdateTakeProfitPercentage(): {
       await update({
         profitPercentage,
         serviceId,
+        exchangeInternalId: exchange.internalId,
+      }).unwrap();
+    },
+  };
+}
+
+export function useInvestInService(): {
+  isLoading: boolean;
+  invest: ({
+    profitPercentage,
+    amount,
+    serviceId,
+  }: {
+    serviceId: string;
+    profitPercentage: number | string;
+    amount: string;
+  }) => Promise<void>;
+} {
+  const [update, { isLoading }] = useInvestInServiceMutation();
+  const exchange = useActiveExchange();
+  return {
+    isLoading,
+    invest: async ({ profitPercentage, serviceId, amount }) => {
+      await update({
+        profitPercentage,
+        serviceId,
+        amount,
         exchangeInternalId: exchange.internalId,
       }).unwrap();
     },

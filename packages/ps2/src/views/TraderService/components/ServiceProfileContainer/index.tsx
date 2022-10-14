@@ -29,6 +29,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN } from '../../../../routes';
 import { useUpdateEffect } from 'react-use';
+import InvestModal from 'views/Dashboard/components/ManageInvestmentModals/InvestModal';
 
 const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
@@ -60,7 +61,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   const onClickMakeInvestment = () => {
     if (isAuthenticated) {
       selectInvestment(serviceToInvestmentServiceDetail(service));
-      const modal: ShowFnOutput<void> = showModal(EditInvestmentModal, {
+      const modal: ShowFnOutput<void> = showModal(InvestModal, {
         close: () => modal.hide(),
       });
     } else {

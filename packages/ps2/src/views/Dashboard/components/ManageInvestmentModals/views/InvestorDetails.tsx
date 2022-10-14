@@ -4,11 +4,10 @@ import { Investor, InvestorData, InvestorName } from '../styles';
 import { getServiceLogo } from 'util/images';
 import { useServiceDetails } from '../../../../../apis/service/use';
 import { useTranslation } from 'react-i18next';
-import { InvestmentServiceDetails } from '../../../../../apis/investment/types';
+import { useSelectedInvestment } from '../../../../../apis/investment/use';
 
-const InvestorDetails: React.FC<{ service: InvestmentServiceDetails }> = ({
-  service,
-}) => {
+const InvestorDetails: React.FC = () => {
+  const service = useSelectedInvestment();
   const { data } = useServiceDetails(service.serviceId);
   const { t } = useTranslation('edit-investment');
   return (

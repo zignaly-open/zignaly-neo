@@ -1,6 +1,8 @@
 {
   "yes": "Yes",
   "no": "No",
+  "back": "Back",
+  "close": "Close",
   "loading": "Loading...",
   "coming-soon": {
     "title": "Coming Soon",

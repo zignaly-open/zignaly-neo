@@ -1,4 +1,3 @@
-import { useSelectedInvestment } from 'apis/investment/use';
 import React from 'react';
 import EditInvestmentForm from '../forms/EditInvestmentForm';
 import { ChangeViewFn, EditInvestmentViews } from '../types';
@@ -7,10 +6,9 @@ import PendingTransactions from './PendingTransactions';
 
 const EditInvestment: React.FC<{ setView: ChangeViewFn; close: () => void }> =
   ({ setView, close }) => {
-    const service = useSelectedInvestment();
     return (
       <>
-        <InvestorDetails service={service} />
+        <InvestorDetails />
         <PendingTransactions setView={setView} />
         <EditInvestmentForm
           close={close}
