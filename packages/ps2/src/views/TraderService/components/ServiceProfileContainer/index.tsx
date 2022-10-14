@@ -19,7 +19,7 @@ import {
 } from '../../../../apis/investment/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
-import EditInvestmentModal from '../../../Dashboard/components/EditInvestmentModal';
+import EditInvestmentModal from '../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
 import { serviceToInvestmentServiceDetail } from '../../../../apis/investment/util';
 import {
   useActiveExchange,
