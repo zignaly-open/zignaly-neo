@@ -21,6 +21,7 @@ import Typography from "components/display/Typography";
 import CoinIcon, { CoinSizes } from "../../display/CoinIcon";
 import { InputAmountProps, TokenItem } from "./types";
 import { changeEvent } from "utils/event";
+import { getPrecisionForCoin } from "components/display/Table/components/PriceLabel/util";
 
 // FIXME this component still needs Jesus
 function InputAmount({
@@ -127,6 +128,7 @@ function InputAmount({
           </BalanceLabel>
           <Typography variant="body2" color="neutral000">
             <NumberFormat
+              decimalScale={getPrecisionForCoin(value?.token?.id, value)}
               value={value?.token.balance as string}
               displayType={"text"}
               suffix={value?.token ? ` ${value?.token?.id?.toUpperCase() ?? ""}` : ""}
