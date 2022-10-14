@@ -2,12 +2,13 @@ import React from 'react';
 import { Avatar, Typography } from '@zignaly-open/ui';
 import { Investor, InvestorData, InvestorName } from '../styles';
 import { getServiceLogo } from 'util/images';
-import { useSelectedInvestment } from '../../../../../apis/investment/use';
 import { useServiceDetails } from '../../../../../apis/service/use';
 import { useTranslation } from 'react-i18next';
+import { InvestmentServiceDetails } from '../../../../../apis/investment/types';
 
-const InvestorDetails: React.FC = () => {
-  const service = useSelectedInvestment();
+const InvestorDetails: React.FC<{ service: InvestmentServiceDetails }> = ({
+  service,
+}) => {
   const { data } = useServiceDetails(service.serviceId);
   const { t } = useTranslation('edit-investment');
   return (
