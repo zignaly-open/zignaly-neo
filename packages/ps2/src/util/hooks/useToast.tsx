@@ -16,11 +16,11 @@ const showToast =
     } as ToastOptions);
 
 const backendErrorText = (t: TFunction, error: BackendError) => {
-  const code = error?.data?.error?.code;
+  const { code, msg } = error?.data?.error || {};
   const translationKey = 'error:error.' + code;
-  return code && t(translationKey) !== translationKey
+  return code && t(translationKey) !== translationKey.replace(/^error:/, '')
     ? t(translationKey)
-    : t('error:something-went-wrong');
+    : msg || t('error:something-went-wrong');
 };
 
 const lastShownBackendError = { error: '', time: 0, expiry: 10_000 };
