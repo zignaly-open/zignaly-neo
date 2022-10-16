@@ -24,6 +24,7 @@ import ConnectionStateLabel from '../ConnectionStateLabel';
 import { YesNo } from './atoms';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { sortBigNumbers } from '../../../../util/numbers';
+import { connectionStateName } from '../ConnectionStateLabel/types';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -100,6 +101,10 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         Header: t('tableHeader.status'),
         accessor: 'status',
         Cell: ({ cell: { value } }) => <ConnectionStateLabel stateId={value} />,
+        sortType: (a, b) =>
+          t(connectionStateName[a.values.status])?.localeCompare(
+            t(connectionStateName[b.values.status]),
+          ),
       },
     ],
     [],

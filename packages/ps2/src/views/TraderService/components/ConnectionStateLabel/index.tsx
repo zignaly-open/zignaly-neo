@@ -11,7 +11,7 @@ import {
 const ConnectionStateLabel = ({
   stateId = ConnectionStateLabelId.CONNECTED,
 }: ConnectionStateLabelProps) => {
-  const { t } = useTranslation('table');
+  const { t } = useTranslation('investors');
   return (
     <styled.Layout stateId={stateId}>
       {t(connectionStateName[stateId])}
