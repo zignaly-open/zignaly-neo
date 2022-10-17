@@ -30,6 +30,7 @@ export const typeDef = gql`
     currentRedemptions: Int
     endDate: Date
     rewardFactor: Float
+    rewardsDepositsFactor: Float
     maxTotalRewards: Int
   }
 

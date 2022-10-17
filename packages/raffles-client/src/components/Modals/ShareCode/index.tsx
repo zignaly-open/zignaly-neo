@@ -31,12 +31,17 @@ const ShareCode = (props: ShareCodeProps) => {
       Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {
-      Header: t('rewardFactor'),
+      Header: t('reward-factor'),
       accessor: 'rewardFactor',
       Cell: ({ cell: { value } }) => (value ? `${value * 100}%` : 'N/A'),
     },
     {
-      Header: t('maxRewards'),
+      Header: t('reward-deposit-factor'),
+      accessor: 'rewardsDepositsFactor',
+      Cell: ({ cell: { value } }) => (value ? `${value * 100}%` : 'N/A'),
+    },
+    {
+      Header: t('max-rewards'),
       accessor: 'maxTotalRewards',
       Cell: ({ cell: { value } }) =>
         value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',

@@ -364,6 +364,33 @@ describe('Codes', () => {
     );
   });
 
+  it('should apply rewardsDepositsFactor', async () => {
+    const [bob] = await createBob(1000);
+    const code = await createCode({
+      userId: bob.id,
+      rewardFactor: 0,
+      maxTotalRewards: 10000,
+      rewardsDepositsFactor: 0.1,
+    });
+    const [, aliceToken] = await createAlice(1000);
+
+    const { body } = await redeemCode(code.code, aliceToken);
+    expect(body.data.redeemCode).toEqual(500);
+
+    // Check inviterBenefit
+    expect(mock.history.post[1].data).toBe(
+      JSON.stringify({
+        amount: '600',
+        fees: '0',
+        currency: 'ZIG',
+        user_id: zignalySystemId,
+        to_user_id: bob.publicAddress,
+        locked: 'true',
+        type: TransactionType.ReferralCode,
+      }),
+    );
+  });
+
   it('should return user code', async () => {
     const [alice, aliceToken] = await createAlice(100);
     const { body } = await userCodes(aliceToken);

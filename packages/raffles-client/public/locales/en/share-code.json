@@ -14,6 +14,7 @@
     "user": "User",
     "address": "Address",
     "date": "Date",
-    "rewardFactor": "User rewards %",
-    "maxRewards": "Max Rewards"
+    "reward-factor": "User rewards %",
+    "reward-deposit-factor": "User deposit %",
+    "max-rewards": "Max Rewards"
 }

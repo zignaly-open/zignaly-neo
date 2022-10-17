@@ -9,6 +9,7 @@ export type UserCodes = {
   currentRedemptions: number;
   maxRedemptions: number;
   rewardFactor: number;
+  rewardsDepositsFactor: number;
   maxTotalRewards: number;
   expirationDate: string;
 };

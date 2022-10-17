@@ -125,14 +125,22 @@ const calculateInvitedBenefit = async (
   return invitedBenefit.toString();
 };
 
-const calculateInviterBenefit = (code: Code, invitedBenefit: string) => {
+const calculateInviterBenefit = (
+  code: Code,
+  invitedBenefit: string,
+  deposits: number,
+) => {
   if (!code.userId) return '0'; // system code
 
-  let inviterBenefit = new BN(code.rewardDirect || 0).plus(
-    new BN(invitedBenefit).times(code.rewardFactor || 0),
+  const depositsBenefit = new BN(deposits).times(
+    code.rewardsDepositsFactor || 0,
   );
 
-  if (code.maxTotalRewards && inviterBenefit > new BN(code.maxTotalRewards)) {
+  let inviterBenefit = new BN(code.rewardDirect || 0)
+    .plus(new BN(invitedBenefit).times(code.rewardFactor || 0))
+    .plus(depositsBenefit);
+
+  if (code.maxTotalRewards && inviterBenefit.gt(new BN(code.maxTotalRewards))) {
     inviterBenefit = new BN(code.maxTotalRewards);
   }
   return inviterBenefit.toString();
@@ -141,7 +149,11 @@ const calculateInviterBenefit = (code: Code, invitedBenefit: string) => {
 export const redeem = async (codeName: string, user: ContextUser) => {
   const { code, balance, deposits } = await check(codeName, user);
   const invitedBenefit = await calculateInvitedBenefit(code, balance, deposits);
-  const inviterBenefit = calculateInviterBenefit(code, invitedBenefit);
+  const inviterBenefit = calculateInviterBenefit(
+    code,
+    invitedBenefit,
+    deposits,
+  );
 
   if (parseFloat(invitedBenefit) > 0) {
     await internalTransfer(

@@ -103,6 +103,11 @@ export class Code extends Model {
   @Column({
     type: DataType.DECIMAL,
   })
+  public rewardsDepositsFactor: number;
+
+  @Column({
+    type: DataType.DECIMAL,
+  })
   public maxTotalRewards: number;
 
   @Column
