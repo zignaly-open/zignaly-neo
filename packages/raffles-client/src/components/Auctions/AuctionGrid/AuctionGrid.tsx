@@ -30,7 +30,15 @@ enum ShowOptions {
 
 const AuctionGrid: React.FC = () => {
   const { t } = useTranslation('auction');
-  const { loading, error, data } = useQuery(GET_AUCTIONS);
+  const { showUnannounced, privateCode } = Object.fromEntries(
+    new URLSearchParams(location.search),
+  );
+  const { loading, error, data } = useQuery(GET_AUCTIONS, {
+    variables: {
+      unannounced: showUnannounced === 'true',
+      privateCode,
+    },
+  });
   const { user } = useCurrentUser();
 
   const [selectedSort, setSelectedSort] = useState(

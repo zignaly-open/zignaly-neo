@@ -31,10 +31,19 @@ export const resolvers = {
   Query: {
     auctions: async (
       _: any,
-      { id }: { id: number },
+      {
+        id,
+        unannounced,
+        privateCode,
+      }: { id: number; unannounced: boolean; privateCode: string },
       { user }: ApolloContext,
     ) => {
-      return await AuctionsRepository.getAuctionsWithBids(id, user);
+      return await AuctionsRepository.getAuctionsWithBids(
+        id,
+        user,
+        unannounced,
+        privateCode,
+      );
     },
   },
   Mutation: {

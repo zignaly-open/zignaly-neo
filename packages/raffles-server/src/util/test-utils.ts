@@ -57,7 +57,38 @@ export async function getPayouts(token: string): Promise<Payout[]> {
   return auctions.body.data.payouts;
 }
 
-export async function getAuctions(token: string): Promise<AuctionType[]> {
+export async function getAuctions(
+  token: string,
+  unannounced = false,
+  privateCode = '',
+): Promise<AuctionType[]> {
+  const AUCTIONS_QUERY = `
+  query {
+    auctions(id: null, unannounced: ${unannounced}, privateCode: "${privateCode}") {
+      id
+      title
+      createdAt
+      expiresAt
+      status
+      currentBid
+      website
+      twitter
+      telegram
+      discord
+      bidFee
+      description
+      imageUrl
+      claimSuccess
+      isClaimed
+      bids {
+        position
+        user {
+          id
+          username
+        }
+      }
+    }
+  }`;
   const auctions = await makeRequest(AUCTIONS_QUERY, token);
   return auctions.body.data.auctions;
 }
@@ -280,35 +311,6 @@ export const PAYOUTS_QUERY = `
         title
       }
       toWallet
-    }
-  }
-`;
-
-export const AUCTIONS_QUERY = `
-  query {
-    auctions {
-      id
-      title
-      createdAt
-      expiresAt
-      status
-      currentBid
-      website
-      twitter
-      telegram
-      discord
-      bidFee
-      description
-      imageUrl
-      claimSuccess
-      isClaimed
-      bids {
-        position
-        user {
-          id
-          username
-        }
-      }
     }
   }
 `;

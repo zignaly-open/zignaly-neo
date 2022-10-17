@@ -87,6 +87,9 @@ export class Auction extends Model {
   public startDate: Date;
 
   @Column
+  public announcementDate: Date;
+
+  @Column
   public chain: string;
 
   @Default(false)
@@ -100,6 +103,9 @@ export class Auction extends Model {
   @Default(false)
   @Column
   public isExclusiveToKuCoin: boolean;
+
+  @Column
+  public privateCode: string;
 }
 
 @Table
