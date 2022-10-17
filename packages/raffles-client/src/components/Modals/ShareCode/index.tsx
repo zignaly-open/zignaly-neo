@@ -79,7 +79,7 @@ const ShareCode = (props: ShareCodeProps) => {
       Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {
-      Header: t('benefits-invited'),
+      Header: t('benefits-user'),
       accessor: 'invitedBenefit',
       Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
