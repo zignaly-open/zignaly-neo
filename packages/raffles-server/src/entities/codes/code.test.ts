@@ -18,7 +18,12 @@ import {
   waitUntilTablesAreCreated,
   wipeOut,
 } from '../../util/test-utils';
-import { DEFAULT_BENEFIT_DIRECT, DEFAULT_MAX_TOTAL_REWARDS } from './constants';
+import {
+  DEFAULT_BENEFIT_DEPOSIT_FACTOR,
+  DEFAULT_BENEFIT_DIRECT,
+  DEFAULT_MAX_TOTAL_REWARDS,
+  DEFAULT_REWARD_DIRECT,
+} from './constants';
 
 describe('Codes', () => {
   beforeAll(waitUntilTablesAreCreated);
@@ -241,11 +246,13 @@ describe('Codes', () => {
 
     const { body } = await redeemCode(alice.codes[0].code, bobToken);
 
-    expect(body.data.redeemCode).toEqual(DEFAULT_BENEFIT_DIRECT);
+    expect(body.data.redeemCode).toEqual(
+      DEFAULT_BENEFIT_DIRECT + DEFAULT_BENEFIT_DEPOSIT_FACTOR * 1000,
+    );
 
     expect(mock.history.post[0].data).toBe(
       JSON.stringify({
-        amount: DEFAULT_BENEFIT_DIRECT.toString(),
+        amount: '5100',
         fees: '0',
         currency: 'ZIG',
         user_id: zignalySystemId,
@@ -369,16 +376,18 @@ describe('Codes', () => {
       rewardFactor: 0,
       maxTotalRewards: 10000,
       rewardDepositFactor: 0.1,
+      benefitBalanceFactor: 0,
+      benefitDepositFactor: 0,
     });
     const [, aliceToken] = await createAlice(1000);
 
     const { body } = await redeemCode(code.code, aliceToken);
-    expect(body.data.redeemCode).toEqual(500);
+    expect(body.data.redeemCode).toEqual(DEFAULT_BENEFIT_DIRECT);
 
     // Check inviterBenefit
     expect(mock.history.post[1].data).toBe(
       JSON.stringify({
-        amount: '600',
+        amount: (DEFAULT_REWARD_DIRECT + 100).toString(),
         fees: '0',
         currency: 'ZIG',
         user_id: zignalySystemId,
