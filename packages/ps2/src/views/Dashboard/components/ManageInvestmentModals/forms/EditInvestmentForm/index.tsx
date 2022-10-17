@@ -169,6 +169,9 @@ function EditInvestmentForm({
             onClick={() =>
               transferOutAll ? openBlockedToast() : setInputEnabled(true)
             }
+            disabled={transferOutAll}
+            allowClickOnDisabled
+            as={'span'}
             leftElement={
               <PlusIcon
                 color={theme[transferOutAll ? 'neutral300' : 'links']}
@@ -198,6 +201,9 @@ function EditInvestmentForm({
               color={theme[transferOutAll ? 'neutral300' : 'links']}
             />
           }
+          allowClickOnDisabled
+          as={'span'}
+          disabled={transferOutAll}
           onClick={
             transferOutAll ? openBlockedToast : onClickWithdrawInvestment
           }

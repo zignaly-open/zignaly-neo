@@ -74,10 +74,6 @@ export const Layout = styled.button<LayoutProps>`
   background: transparent;
   text-decoration-line: none;
 
-  &[disabled] {
-    cursor: default;
-  }
-
   ${(props) => `
       ${styledIf(
         props.isLoading,
@@ -85,6 +81,15 @@ export const Layout = styled.button<LayoutProps>`
         ${ElementsContainer}{
           opacity: 0;
         }
+        `,
+      )}
+      
+  `}
+  ${(props) => `
+      ${styledIf(
+        props.disabled,
+        `
+        cursor: not-allowed;
         `,
       )}
       
