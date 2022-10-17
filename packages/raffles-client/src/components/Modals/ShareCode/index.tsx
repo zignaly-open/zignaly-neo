@@ -134,6 +134,14 @@ const ShareCode = (props: ShareCodeProps) => {
             data={dataCodesRedemptions.userCodesRedemptions}
             isUserTable={false}
             hideOptionsButton={false}
+            initialState={{
+              sortBy: [
+                {
+                  id: 'redemptionDate',
+                  desc: true,
+                },
+              ],
+            }}
           />
         </StyledTable>
       )}

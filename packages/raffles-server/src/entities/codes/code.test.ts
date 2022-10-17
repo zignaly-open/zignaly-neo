@@ -34,13 +34,13 @@ describe('Codes', () => {
   it('should handle not found code', async () => {
     const [, token] = await createRandomUser(1000, {});
     const { body } = await checkCode('TESTTT', token);
-    expect(body.errors[0].message).toEqual('Code not found');
+    expect(body.errors[0].message).toEqual('Code not found.');
   });
 
   it('should handle own code check', async () => {
     const [user, token] = await createRandomUser(1000);
     const { body } = await checkCode(user.codes[0].code, token);
-    expect(body.errors[0].message).toEqual('Not allowed');
+    expect(body.errors[0].message).toEqual('Not allowed.');
   });
 
   it('should return code data', async () => {
@@ -101,7 +101,7 @@ describe('Codes', () => {
     // Another user try to redeem code
     const { body } = await redeemCode(code.code, bobToken);
 
-    expect(body.errors[0].message).toEqual('Maximum redemptions reached');
+    expect(body.errors[0].message).toEqual('Maximum redemptions reached.');
   });
 
   it('should error if not started yet', async () => {
@@ -112,9 +112,7 @@ describe('Codes', () => {
 
     const { body } = await redeemCode(code.code, aliceToken);
 
-    expect(body.errors[0].message).toEqual(
-      `The code will start working on ${code.startDate}`,
-    );
+    expect(body.errors[0].message).toMatch(/The code will start working on \d/);
   });
 
   it('should error if expired', async () => {
@@ -125,7 +123,7 @@ describe('Codes', () => {
 
     const { body } = await redeemCode(code.code, aliceToken);
 
-    expect(body.errors[0].message).toEqual('The code is expired');
+    expect(body.errors[0].message).toEqual('The code is expired.');
   });
 
   it('should error if reqMinimumBalance not reached', async () => {
