@@ -20,7 +20,12 @@ import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster as ToastProvider } from 'react-hot-toast';
-import useScript from 'hooks/useScript';
+
+if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/scripts/firebase-messaging-sw.js');
+  });
+}
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
@@ -147,12 +152,6 @@ if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
 const augmentedTheme = { ...dark, ...theme };
 
 function EntryPoint() {
-  useScript(
-    process.env.NODE_ENV === 'production'
-      ? '/scripts/firebase-messaging-sw.js'
-      : null,
-  );
-
   return (
     <ThemeProvider theme={dark}>
       <ThemeProviderMui theme={augmentedTheme}>
