@@ -127,12 +127,6 @@ const calculateInvitedBenefit = async (
   let invitedBenefit = new BN(code.benefitDirect || 0)
     .plus(balanceBenefit)
     .plus(depositsBenefit);
-  console.log(
-    invitedBenefit.toString(),
-    code.benefitDirect,
-    code.benefitBalanceFactor,
-    code.benefitDepositFactor,
-  );
   if (
     code.maxTotalBenefits &&
     invitedBenefit.gt(new BN(code.maxTotalBenefits))
