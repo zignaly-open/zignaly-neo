@@ -21,13 +21,13 @@ const ShareCode = (props: ShareCodeProps) => {
       accessor: 'code',
     },
     {
-      Header: t('benefits-you'),
-      accessor: 'rewardDirect',
+      Header: t('benefits-user'),
+      accessor: 'benefitDirect',
       Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {
-      Header: t('benefits-invited'),
-      accessor: 'benefitDirect',
+      Header: t('benefits-you'),
+      accessor: 'rewardDirect',
       Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {
