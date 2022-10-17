@@ -149,7 +149,7 @@ describe('Codes', () => {
     const { body } = await checkCode(code.code, aliceToken);
 
     expect(body.errors[0].message).toEqual(
-      `You need to deposit at least ${code.reqMinimumDeposit}ZIGs.`,
+      `You need to deposit at least ${code.reqMinimumDeposit} ZIG.`,
     );
   });
 

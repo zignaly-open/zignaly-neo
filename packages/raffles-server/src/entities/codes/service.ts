@@ -53,7 +53,7 @@ export const check = async (codeName: string, user: ContextUser) => {
 
   if (code.reqMinimumDeposit > 0 && deposits < code.reqMinimumDeposit) {
     throw new Error(
-      `You need to deposit at least ${code.reqMinimumDeposit}ZIGs.${
+      `You need to deposit at least ${code.reqMinimumDeposit} ZIG.${
         code.reqDepositFrom
           ? `\nOnly deposits after ${format(
               code.reqDepositFrom,
