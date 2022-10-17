@@ -9,8 +9,17 @@ export type UserCodes = {
   currentRedemptions: number;
   maxRedemptions: number;
   rewardFactor: number;
-  rewardsDepositsFactor: number;
+  rewardDepositFactor: number;
   maxTotalRewards: number;
+  maxTotalBenefits: number;
+  benefitBalanceFactor: number;
+  benefitDepositFactor: number;
+  reqMinimumBalance: number;
+  reqMinimumDeposit: number;
+  reqDepositFrom: string;
+  reqMinAuctions: number;
+  reqWalletType: string;
+  reqAuctionBids: number;
   endDate: string;
 };
 

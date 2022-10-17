@@ -10,6 +10,10 @@ import { ShareCodeProps, UserCodes, UserCodesRedemptions } from './types';
 import { StyledTable } from './styles';
 import { format } from 'date-fns';
 
+const formatPerc = (value: number) => (value ? `${value * 100}%` : 'N/A');
+const formatDate = (value: string) =>
+  value ? `${format(new Date(value), 'yyyy-MM-dd hh:mma')} UTC` : 'N/A';
+
 const ShareCode = (props: ShareCodeProps) => {
   const { t } = useTranslation('share-code');
   const { data: dataCodes } = useQuery(GET_USER_CODES);
@@ -21,28 +25,44 @@ const ShareCode = (props: ShareCodeProps) => {
       accessor: 'code',
     },
     {
-      Header: t('benefits-user'),
-      accessor: 'benefitDirect',
-      Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
-    },
-    {
-      Header: t('benefits-you'),
+      Header: t('direct-reward'),
       accessor: 'rewardDirect',
       Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {
-      Header: t('reward-factor'),
+      Header: t('reward-benefits'),
       accessor: 'rewardFactor',
-      Cell: ({ cell: { value } }) => (value ? `${value * 100}%` : 'N/A'),
+      Cell: ({ cell: { value } }) => formatPerc(value),
     },
     {
-      Header: t('reward-deposit-factor'),
-      accessor: 'rewardsDepositsFactor',
-      Cell: ({ cell: { value } }) => (value ? `${value * 100}%` : 'N/A'),
+      Header: t('reward-deposits'),
+      accessor: 'rewardDepositFactor',
+      Cell: ({ cell: { value } }) => formatPerc(value),
     },
     {
       Header: t('max-rewards'),
       accessor: 'maxTotalRewards',
+      Cell: ({ cell: { value } }) =>
+        value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
+    },
+    {
+      Header: t('direct-benefits'),
+      accessor: 'benefitDirect',
+      Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
+    },
+    {
+      Header: t('balance-benefits'),
+      accessor: 'benefitBalanceFactor',
+      Cell: ({ cell: { value } }) => formatPerc(value),
+    },
+    {
+      Header: t('deposit-benefits'),
+      accessor: 'benefitDepositFactor',
+      Cell: ({ cell: { value } }) => formatPerc(value),
+    },
+    {
+      Header: t('max-benefit'),
+      accessor: 'maxTotalBenefits',
       Cell: ({ cell: { value } }) =>
         value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
     },
@@ -56,10 +76,37 @@ const ShareCode = (props: ShareCodeProps) => {
       Cell: ({ cell: { value } }) => value || 'N/A',
     },
     {
+      Header: t('min-balance'),
+      accessor: 'reqMinimumBalance',
+      Cell: ({ cell: { value } }) =>
+        value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
+    },
+    {
+      Header: t('min-deposit'),
+      accessor: 'reqMinimumDeposit',
+      Cell: ({ cell: { value } }) =>
+        value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
+    },
+    {
+      Header: t('only-deposit-from'),
+      accessor: 'reqDepositFrom',
+      Cell: ({ cell: { value } }) => formatDate(value),
+    },
+    {
+      Header: t('min-auction-bids'),
+      accessor: 'reqAuctionBids',
+      Cell: ({ cell: { value } }) => value || 'N/A',
+    },
+    {
+      Header: t('wallet'),
+      accessor: 'reqWalletType',
+      Cell: ({ cell: { value } }) =>
+        value ? value.charAt(0).toUpperCase() + value.slice(1) : 'N/A',
+    },
+    {
       Header: t('expiration-date'),
       accessor: 'endDate',
-      Cell: ({ cell: { value } }) =>
-        value ? format(new Date(value), 'PP') : 'N/A',
+      Cell: ({ cell: { value } }) => formatDate(value),
     },
   ];
 
@@ -74,12 +121,12 @@ const ShareCode = (props: ShareCodeProps) => {
       accessor: 'code',
     },
     {
-      Header: t('benefits-you'),
+      Header: t('your-reward'),
       accessor: 'inviterBenefit',
       Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {
-      Header: t('benefits-user'),
+      Header: t('your-friend-benefits'),
       accessor: 'invitedBenefit',
       Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
@@ -119,10 +166,22 @@ const ShareCode = (props: ShareCodeProps) => {
             data={dataCodes.userCodes}
             isUserTable={false}
             hideOptionsButton={false}
+            defaultHiddenColumns={[
+              'rewardFactor',
+              'maxTotalRewards',
+              'benefitBalanceFactor',
+              'maxTotalBenefits',
+              'reqMinimumBalance',
+              'reqMinimumDeposit',
+              'reqDepositFrom',
+              'reqAuctionBids',
+              'reqWalletType',
+              'endDate',
+            ]}
           />
         </StyledTable>
       )}
-      <Box mt={4} mb={3}>
+      <Box mt={5} mb={3}>
         <Typography variant='h3' color='neutral200' weight='regular'>
           {t('your-codes-redemptions')}
         </Typography>

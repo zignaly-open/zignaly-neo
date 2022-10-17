@@ -362,13 +362,13 @@ describe('Codes', () => {
     );
   });
 
-  it('should apply rewardsDepositsFactor', async () => {
+  it('should apply rewardDepositFactor', async () => {
     const [bob] = await createBob(1000);
     const code = await createCode({
       userId: bob.id,
       rewardFactor: 0,
       maxTotalRewards: 10000,
-      rewardsDepositsFactor: 0.1,
+      rewardDepositFactor: 0.1,
     });
     const [, aliceToken] = await createAlice(1000);
 

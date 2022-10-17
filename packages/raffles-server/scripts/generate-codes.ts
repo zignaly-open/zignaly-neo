@@ -1,9 +1,11 @@
 import '../src/db';
 import {
+  DEFAULT_BENEFIT_DEPOSIT_FACTOR,
   DEFAULT_BENEFIT_DIRECT,
   DEFAULT_MAX_TOTAL_BENEFITS,
   DEFAULT_MAX_TOTAL_REWARDS,
   DEFAULT_REQ_MINIMUM_DEPOSIT,
+  DEFAULT_REWARD_DEPOSIT_FACTOR,
   DEFAULT_REWARD_DIRECT,
 } from '../src/entities/codes/constants';
 import { Code } from '../src/entities/codes/model';
@@ -22,6 +24,8 @@ import { User } from '../src/entities/users/model';
       reqMinimumDeposit: DEFAULT_REQ_MINIMUM_DEPOSIT,
       maxTotalBenefits: DEFAULT_MAX_TOTAL_BENEFITS,
       maxTotalRewards: DEFAULT_MAX_TOTAL_REWARDS,
+      benefitDepositFactor: DEFAULT_BENEFIT_DEPOSIT_FACTOR,
+      rewardDepositFactor: DEFAULT_REWARD_DEPOSIT_FACTOR,
     });
   }
   process.exit();

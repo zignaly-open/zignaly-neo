@@ -145,9 +145,7 @@ const calculateInviterBenefit = (
 ) => {
   if (!code.userId) return '0'; // system code
 
-  const depositsBenefit = new BN(deposits).times(
-    code.rewardsDepositsFactor || 0,
-  );
+  const depositsBenefit = new BN(deposits).times(code.rewardDepositFactor || 0);
 
   let inviterBenefit = new BN(code.rewardDirect || 0)
     .plus(new BN(invitedBenefit).times(code.rewardFactor || 0))
