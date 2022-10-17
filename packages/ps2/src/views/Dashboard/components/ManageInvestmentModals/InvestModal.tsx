@@ -1,10 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
-import {
-  useInvestmentDetails,
-  useSelectedInvestment,
-} from '../../../../apis/investment/use';
+import { useSelectedInvestment } from '../../../../apis/investment/use';
 import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import ZModal from '../../../../components/ZModal';
@@ -17,13 +14,10 @@ function InvestModal({
   close: () => void;
 } & DialogProps): React.ReactElement {
   const service = useSelectedInvestment();
-  const { isLoading: isLoadingInvestment } = useInvestmentDetails(
-    service.serviceId,
-  );
   const { isLoading: isLoadingService } = useServiceDetails(service.serviceId);
   const { isLoading: isLoadingCoins } = useCoinBalances();
   const { t } = useTranslation(['edit-investment', 'withdraw-your-investment']);
-  const isLoading = isLoadingInvestment || isLoadingService || isLoadingCoins;
+  const isLoading = isLoadingService || isLoadingCoins;
 
   return (
     <ZModal

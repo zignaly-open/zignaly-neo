@@ -15,7 +15,6 @@ import { EditInvestmentValidation } from './validations';
 import {
   useCurrentBalance,
   useInvestInService,
-  useInvestmentDetails,
   useSelectedInvestment,
 } from '../../../../../../apis/investment/use';
 import { InvestFormData, InvestFormProps } from './types';
@@ -31,7 +30,6 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
   const { t } = useTranslation('edit-investment');
   const { isLoading, invest } = useInvestInService();
   const service = useSelectedInvestment();
-  const { data: details } = useInvestmentDetails(service.serviceId);
   const toast = useToast();
 
   const {
@@ -50,7 +48,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
         token: coin,
       },
       transferConfirm: '',
-      profitPercentage: details?.profitPercentage,
+      profitPercentage: 30,
       step: 1,
     },
     resolver: yupResolver(EditInvestmentValidation),
