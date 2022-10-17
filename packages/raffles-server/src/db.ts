@@ -48,6 +48,7 @@ if (isTest) {
 
 User.afterCreate(async (user) => {
   await Code.create({
+    isDefault: true,
     code: generateCode(),
     welcomeType: true,
     userId: user.id,

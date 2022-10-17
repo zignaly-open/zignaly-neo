@@ -16,6 +16,7 @@ import { User } from '../src/entities/users/model';
   const users = await User.findAll();
   for (const user of users) {
     await Code.create({
+      isDefault: true,
       code: generateCode(),
       welcomeType: true,
       userId: user.id,
