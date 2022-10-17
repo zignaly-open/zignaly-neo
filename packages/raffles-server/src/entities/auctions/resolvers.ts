@@ -42,20 +42,25 @@ export const resolvers = {
       if (!user) {
         throw new Error('User not found');
       }
-      const balance = await redisService.bid(user.id, id);
+      try {
+        const balance = await redisService.bid(user.id, id);
 
-      if (!isTest) {
-        debounceBroadcastAuction(id);
+        if (!isTest) {
+          debounceBroadcastAuction(id);
+        }
+
+        pubsub.publish(BALANCE_CHANGED, {
+          balanceChanged: {
+            id: user.id,
+            balance,
+          },
+        });
+
+        return 'ok';
+      } catch (e) {
+        console.error(e);
+        throw e;
       }
-
-      pubsub.publish(BALANCE_CHANGED, {
-        balanceChanged: {
-          id: user.id,
-          balance,
-        },
-      });
-
-      return 'ok';
     },
 
     claim: async (_: any, { id }: { id: number }, { user }: ApolloContext) => {
