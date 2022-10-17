@@ -11,7 +11,7 @@ export type UserCodes = {
   rewardFactor: number;
   rewardsDepositsFactor: number;
   maxTotalRewards: number;
-  expirationDate: string;
+  endDate: string;
 };
 
 export type UserCodesRedemptions = {

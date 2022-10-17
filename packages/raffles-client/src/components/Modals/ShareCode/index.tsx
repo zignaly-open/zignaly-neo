@@ -57,7 +57,7 @@ const ShareCode = (props: ShareCodeProps) => {
     },
     {
       Header: t('expiration-date'),
-      accessor: 'expirationDate',
+      accessor: 'endDate',
       Cell: ({ cell: { value } }) =>
         value ? format(new Date(value), 'PP') : 'N/A',
     },
