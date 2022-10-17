@@ -7,3 +7,5 @@ export type UserType = {
   discordName: string;
   onBoardingCompleted: Date;
 };
+
+export type WalletType = 'metamask' | 'kucoin' | 'walletconnect';

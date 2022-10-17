@@ -13,6 +13,15 @@ import { persistTablesToTheDatabase } from '../db';
 import { Payout } from '../entities/payouts/model';
 import mockCybavoWallet, { MockedCybavo } from './mock-cybavo-wallet';
 import redisService from '../redisService';
+import { Code, CodeRedemption } from '../entities/codes/model';
+import { generateCode } from '../entities/codes/util';
+import {
+  DEFAULT_BENEFIT_DIRECT,
+  DEFAULT_MAX_TOTAL_BENEFITS,
+  DEFAULT_MAX_TOTAL_REWARDS,
+  DEFAULT_REQ_MINIMUM_DEPOSIT,
+  DEFAULT_REWARD_DIRECT,
+} from '../entities/codes/constants';
 
 const request = supertest(app);
 
@@ -153,11 +162,18 @@ export async function createAlice(
   balance = 0,
 ): Promise<[User, string, MockedCybavo]> {
   try {
-    const user = await User.create({
-      username: 'Alice',
-      publicAddress: '0x6a3B248855bc8a687992CBAb7FD03E1947EAee07'.toLowerCase(),
-      onboardingCompletedAt: Date.now(),
-    });
+    const user = await User.create(
+      {
+        username: 'Alice',
+        publicAddress:
+          '0x6a3B248855bc8a687992CBAb7FD03E1947EAee07'.toLowerCase(),
+        onboardingCompletedAt: Date.now(),
+      },
+      { include: Code },
+    );
+    // Load associations
+    await user.reload();
+
     const cybavoMock = await mockCybavoWallet(user, balance);
     return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
@@ -182,11 +198,17 @@ export async function createBob(
   balance = 0,
 ): Promise<[User, string, MockedCybavo]> {
   try {
-    const user = await User.create({
-      username: 'Bob',
-      publicAddress: '0xE288AE3acccc630781354da2AA64379A0d4C56dB'.toLowerCase(),
-      onboardingCompletedAt: Date.now(),
-    });
+    const user = await User.create(
+      {
+        username: 'Bob',
+        publicAddress:
+          '0xE288AE3acccc630781354da2AA64379A0d4C56dB'.toLowerCase(),
+        onboardingCompletedAt: Date.now(),
+      },
+      { include: Code },
+    );
+    // Load associations
+    await user.reload();
     const cybavoMock = await mockCybavoWallet(user, balance);
     return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
@@ -209,13 +231,20 @@ export async function createBobDiscord(): Promise<[User, string]> {
 
 export async function createRandomUser(
   balance = 0,
+  overrides?: Partial<User>,
 ): Promise<[User, string, MockedCybavo]> {
   try {
-    const user = await User.create({
-      username: null,
-      publicAddress: '0xE288AE3acccc630'.toLowerCase() + Math.random(),
-      onboardingCompletedAt: Date.now(),
-    });
+    const user = await User.create(
+      {
+        username: null,
+        publicAddress: '0xE288AE3acccc630'.toLowerCase() + Math.random(),
+        onboardingCompletedAt: Date.now(),
+        ...overrides,
+      },
+      { include: Code },
+    );
+    // Load associations
+    await user.reload();
     const cybavoMock = await mockCybavoWallet(user, balance);
     return [user, await signJwtToken(user), cybavoMock];
   } catch (e) {
@@ -284,6 +313,92 @@ export const AUCTIONS_QUERY = `
   }
 `;
 
+export async function checkCode(code: string, token: string): Promise<any> {
+  return makeRequest(
+    `
+   query {
+    checkCode(code: "${code}") { 
+      code {
+        code
+        reqMinimumBalance
+        reqMinimumDeposit
+        reqDepositFrom
+        reqMinAuctions
+        reqWalletType
+        benefitDirect
+        benefitBalanceFactor
+        benefitDepositFactor
+        maxTotalBenefits
+      }
+      balance
+      deposits
+     }
+  }`,
+    token,
+  );
+}
+
+export async function redeemCode(code: string, token: string): Promise<any> {
+  return makeRequest(
+    `
+   mutation {
+    redeemCode(code: "${code}")
+  }`,
+    token,
+  );
+}
+
+export async function userCodes(token: string): Promise<any> {
+  return makeRequest(
+    `
+   query {
+    userCodes {
+      code
+      benefitDirect
+      rewardDirect
+      maxRedemptions
+      currentRedemptions
+      endDate
+      rewardFactor
+      rewardsDepositsFactor
+      maxTotalRewards
+    }
+  }`,
+    token,
+  );
+}
+
+export async function userCodesRedemptions(token: string): Promise<any> {
+  return makeRequest(
+    `
+   query {
+    userCodesRedemptions {
+      code
+      redemptionDate
+      inviterBenefit
+      invitedBenefit
+      invited {
+        shortAddress
+        username
+      }
+    }
+  }`,
+    token,
+  );
+}
+
+export async function createCode(overrides?: Partial<Code>) {
+  return Code.create({
+    code: generateCode(),
+    benefitDirect: DEFAULT_BENEFIT_DIRECT,
+    rewardDirect: DEFAULT_REWARD_DIRECT,
+    reqMinimumDeposit: DEFAULT_REQ_MINIMUM_DEPOSIT,
+    maxTotalBenefits: DEFAULT_MAX_TOTAL_BENEFITS,
+    maxTotalRewards: DEFAULT_MAX_TOTAL_REWARDS,
+    ...overrides,
+  });
+}
+
 export async function clearMocks() {
   jest.clearAllMocks();
 }
@@ -297,6 +412,9 @@ export async function wipeOut() {
       await AuctionBid.destroy(options);
       await AuctionBasketItem.destroy(options);
       await Auction.destroy(options);
+      await Code.findAll();
+      await CodeRedemption.destroy(options);
+      await Code.destroy(options);
       await User.destroy(options);
     } catch (e) {
       console.error(e);

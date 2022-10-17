@@ -153,6 +153,7 @@ const makeTransfer = async (auctionId: number, user: User) => {
     zignalySystemId,
     amount.toString(),
     TransactionType.Fee,
+    false,
   );
   if (!tx.transaction_id) {
     throw new Error('Transaction error');
@@ -212,7 +213,7 @@ const finalizeAuction = async (auctionId: number) => {
       inRedis: false,
       isFinalized: true,
       currentBid: price,
-      expireAt: expire,
+      expiresAt: expire,
     },
     { where: { id: auctionId } },
   );

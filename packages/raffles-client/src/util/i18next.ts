@@ -14,6 +14,8 @@ const ns = [
   'how-it-works',
   'footer',
   'exclusive-wallets',
+  'redeem-code',
+  'share-code',
 ];
 const supportedLngs = ['en'];
 

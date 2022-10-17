@@ -9,8 +9,26 @@ import { isTest, postgresUrl } from '../config';
 import { Setting } from './entities/setting/model';
 import { Payout } from './entities/payouts/model';
 import { connect } from './redisAuctionWatcher';
+import { Code, CodeRedemption } from './entities/codes/model';
+import {
+  DEFAULT_BENEFIT_DIRECT,
+  DEFAULT_MAX_TOTAL_BENEFITS,
+  DEFAULT_MAX_TOTAL_REWARDS,
+  DEFAULT_REQ_MINIMUM_DEPOSIT,
+  DEFAULT_REWARD_DIRECT,
+} from './entities/codes/constants';
+import { generateCode } from './entities/codes/util';
 
-const models = [User, Auction, AuctionBid, AuctionBasketItem, Setting, Payout];
+const models = [
+  User,
+  Auction,
+  AuctionBid,
+  AuctionBasketItem,
+  Setting,
+  Payout,
+  Code,
+  CodeRedemption,
+];
 
 let sequelize: Sequelize;
 
@@ -25,6 +43,19 @@ if (isTest) {
   // pg NOTIFY listener
   connect();
 }
+
+User.afterCreate(async (user) => {
+  await Code.create({
+    code: generateCode(),
+    welcomeType: true,
+    userId: user.id,
+    benefitDirect: DEFAULT_BENEFIT_DIRECT,
+    rewardDirect: DEFAULT_REWARD_DIRECT,
+    reqMinimumDeposit: DEFAULT_REQ_MINIMUM_DEPOSIT,
+    maxTotalBenefits: DEFAULT_MAX_TOTAL_BENEFITS,
+    maxTotalRewards: DEFAULT_MAX_TOTAL_REWARDS,
+  });
+});
 
 const persistTablesToTheDatabase = () => sequelize.sync({ alter: true });
 

@@ -94,6 +94,7 @@ export const resolvers = {
           zignalySystemId,
           auction.currentBid,
           TransactionType.Payout,
+          false,
         ).then((tx) => {
           if (!tx.transaction_id) throw new Error('Transaction error');
           userBid.claimTransactionId = tx.transaction_id;

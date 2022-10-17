@@ -7,7 +7,10 @@ import {
   AutoIncrement,
   Default,
   Validate,
+  HasMany,
+  DataType,
 } from 'sequelize-typescript';
+import { Code } from '../codes/model';
 
 @Table
 export class User extends Model {
@@ -26,6 +29,18 @@ export class User extends Model {
   @Column
   public publicAddress!: string;
 
+  @Column({
+    type: DataType.VIRTUAL,
+    get(): string {
+      const address = this.getDataValue('publicAddress');
+      return `${address.slice(0, 6)}..${address.slice(
+        address.length - 5,
+        address.length - 1,
+      )}`;
+    },
+  })
+  public shortAddress: string;
+
   @Unique
   @Column
   public username?: string;
@@ -38,6 +53,13 @@ export class User extends Model {
 
   @Column
   public onboardingCompletedAt?: Date;
+
+  @HasMany(() => Code)
+  public codes: Code[];
+
+  @Default('metamask')
+  @Column
+  public walletType: string;
 }
 
 export function generateUserNonce(): number {

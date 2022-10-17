@@ -11,6 +11,7 @@ import {
 } from 'queries/users';
 import { GET_AUCTIONS } from 'queries/auctions';
 import WalletConnectProvider from '@walletconnect/web3-provider';
+import { WalletType } from '@zignaly-open/raffles-shared/types';
 
 export function useLogout(): () => Promise<void> {
   const { deactivate } = useEthers();
@@ -25,7 +26,7 @@ export function useLogout(): () => Promise<void> {
 }
 
 export default function useAuthenticate(): {
-  authenticate: (prov?: object) => void;
+  authenticate: (walletType: WalletType, prov?: object) => void;
   isSigning: boolean;
   error: Error & { code: number };
 } {
@@ -38,6 +39,7 @@ export default function useAuthenticate(): {
     useEthers();
   const [error, setError] = useState(null);
   const [provider, setProvider] = useState(null);
+  const [walletType, setWalletType] = useState(null);
 
   async function createUserAndSign() {
     const {
@@ -45,7 +47,7 @@ export default function useAuthenticate(): {
         getOrCreateUser: { messageToSign },
       },
     } = await getOrCreateUser({
-      variables: { publicAddress: account.toLocaleLowerCase() },
+      variables: { publicAddress: account.toLocaleLowerCase(), walletType },
     });
 
     if (!provider) {
@@ -98,9 +100,13 @@ export default function useAuthenticate(): {
     createUserAndSign();
   }, [account, isOkToStart]);
 
-  const startAuthenticate = (prov?: WalletConnectProvider) => {
+  const startAuthenticate = (
+    wallType: WalletType,
+    prov?: WalletConnectProvider,
+  ) => {
     setError(null);
     setProvider(prov);
+    setWalletType(wallType);
 
     // In case there is an old token saved, that will trigger useCurrentUser fetching
     // as soon as account connected, but new message not signed yet.
