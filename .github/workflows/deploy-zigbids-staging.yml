@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - master
-      - ft/referral
 jobs:
   pre_job:
     runs-on: ubuntu-latest
