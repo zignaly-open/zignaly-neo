@@ -23,9 +23,7 @@ import { Toaster as ToastProvider } from 'react-hot-toast';
 
 if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/scripts/firebase-messaging-sw.js', {
-      scope: '/',
-    });
+    navigator.serviceWorker.register('/firebase-messaging-sw.js');
   });
 }
 
