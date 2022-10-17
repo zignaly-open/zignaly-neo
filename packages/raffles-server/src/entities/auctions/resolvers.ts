@@ -58,7 +58,9 @@ export const resolvers = {
 
         return 'ok';
       } catch (e) {
-        console.error(e);
+        if (!isTest) {
+          console.error(e);
+        }
         throw e;
       }
     },
