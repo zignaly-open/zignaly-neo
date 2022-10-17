@@ -31,8 +31,17 @@ export const GET_USER_CODES = gql`
       currentRedemptions
       endDate
       rewardFactor
-      rewardsDepositsFactor
+      rewardDepositFactor
       maxTotalRewards
+      maxTotalBenefits
+      benefitBalanceFactor
+      benefitDepositFactor
+      reqMinimumBalance
+      reqMinimumDeposit
+      reqDepositFrom
+      reqMinAuctions
+      reqWalletType
+      reqAuctionBids
     }
   }
 `;

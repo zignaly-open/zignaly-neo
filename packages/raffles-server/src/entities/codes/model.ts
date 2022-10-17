@@ -64,6 +64,9 @@ export class Code extends Model {
   public reqWalletType: string;
 
   @Column
+  public reqAuctionBids: number;
+
+  @Column
   public maxRedemptions: number;
 
   @Default(0)
@@ -103,7 +106,7 @@ export class Code extends Model {
   @Column({
     type: DataType.DECIMAL,
   })
-  public rewardsDepositsFactor: number;
+  public rewardDepositFactor: number;
 
   @Column({
     type: DataType.DECIMAL,

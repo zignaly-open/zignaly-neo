@@ -18,7 +18,12 @@ import {
   waitUntilTablesAreCreated,
   wipeOut,
 } from '../../util/test-utils';
-import { DEFAULT_BENEFIT_DIRECT, DEFAULT_MAX_TOTAL_REWARDS } from './constants';
+import {
+  DEFAULT_BENEFIT_DEPOSIT_FACTOR,
+  DEFAULT_BENEFIT_DIRECT,
+  DEFAULT_MAX_TOTAL_REWARDS,
+  DEFAULT_REWARD_DIRECT,
+} from './constants';
 
 describe('Codes', () => {
   beforeAll(waitUntilTablesAreCreated);
@@ -34,13 +39,13 @@ describe('Codes', () => {
   it('should handle not found code', async () => {
     const [, token] = await createRandomUser(1000, {});
     const { body } = await checkCode('TESTTT', token);
-    expect(body.errors[0].message).toEqual('Code not found');
+    expect(body.errors[0].message).toEqual('Code not found.');
   });
 
   it('should handle own code check', async () => {
     const [user, token] = await createRandomUser(1000);
     const { body } = await checkCode(user.codes[0].code, token);
-    expect(body.errors[0].message).toEqual('Not allowed');
+    expect(body.errors[0].message).toEqual('Not allowed.');
   });
 
   it('should return code data', async () => {
@@ -101,7 +106,7 @@ describe('Codes', () => {
     // Another user try to redeem code
     const { body } = await redeemCode(code.code, bobToken);
 
-    expect(body.errors[0].message).toEqual('Maximum redemptions reached');
+    expect(body.errors[0].message).toEqual('Maximum redemptions reached.');
   });
 
   it('should error if not started yet', async () => {
@@ -112,9 +117,7 @@ describe('Codes', () => {
 
     const { body } = await redeemCode(code.code, aliceToken);
 
-    expect(body.errors[0].message).toEqual(
-      `The code will start working on ${code.startDate}`,
-    );
+    expect(body.errors[0].message).toMatch(/The code will start working on \d/);
   });
 
   it('should error if expired', async () => {
@@ -125,7 +128,7 @@ describe('Codes', () => {
 
     const { body } = await redeemCode(code.code, aliceToken);
 
-    expect(body.errors[0].message).toEqual('The code is expired');
+    expect(body.errors[0].message).toEqual('The code is expired.');
   });
 
   it('should error if reqMinimumBalance not reached', async () => {
@@ -243,11 +246,13 @@ describe('Codes', () => {
 
     const { body } = await redeemCode(alice.codes[0].code, bobToken);
 
-    expect(body.data.redeemCode).toEqual(DEFAULT_BENEFIT_DIRECT);
+    expect(body.data.redeemCode).toEqual(
+      DEFAULT_BENEFIT_DIRECT + DEFAULT_BENEFIT_DEPOSIT_FACTOR * 1000,
+    );
 
     expect(mock.history.post[0].data).toBe(
       JSON.stringify({
-        amount: DEFAULT_BENEFIT_DIRECT.toString(),
+        amount: '5100',
         fees: '0',
         currency: 'ZIG',
         user_id: zignalySystemId,
@@ -364,23 +369,25 @@ describe('Codes', () => {
     );
   });
 
-  it('should apply rewardsDepositsFactor', async () => {
+  it('should apply rewardDepositFactor', async () => {
     const [bob] = await createBob(1000);
     const code = await createCode({
       userId: bob.id,
       rewardFactor: 0,
       maxTotalRewards: 10000,
-      rewardsDepositsFactor: 0.1,
+      rewardDepositFactor: 0.1,
+      benefitBalanceFactor: 0,
+      benefitDepositFactor: 0,
     });
     const [, aliceToken] = await createAlice(1000);
 
     const { body } = await redeemCode(code.code, aliceToken);
-    expect(body.data.redeemCode).toEqual(500);
+    expect(body.data.redeemCode).toEqual(DEFAULT_BENEFIT_DIRECT);
 
     // Check inviterBenefit
     expect(mock.history.post[1].data).toBe(
       JSON.stringify({
-        amount: '600',
+        amount: (DEFAULT_REWARD_DIRECT + 100).toString(),
         fees: '0',
         currency: 'ZIG',
         user_id: zignalySystemId,

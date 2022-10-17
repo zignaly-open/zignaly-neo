@@ -362,7 +362,7 @@ export async function userCodes(token: string): Promise<any> {
       currentRedemptions
       endDate
       rewardFactor
-      rewardsDepositsFactor
+      rewardDepositFactor
       maxTotalRewards
     }
   }`,

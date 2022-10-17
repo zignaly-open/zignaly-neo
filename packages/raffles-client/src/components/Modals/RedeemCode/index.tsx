@@ -10,6 +10,7 @@ import * as yup from 'yup';
 import { CHECK_CODE } from 'queries/codes';
 import { useLazyQuery } from '@apollo/client';
 import RedeemCodeConfirmation from '../RedeemCodeConfirmation';
+import { ErrorTypography } from './styles';
 
 const RedeemCode = (props: RedeemCodeProps) => {
   const { t } = useTranslation('redeem-code');
@@ -87,9 +88,9 @@ const RedeemCode = (props: RedeemCodeProps) => {
               />
             </Box>
             {error && (
-              <Typography variant={'body1'} color='redGraphOrError'>
+              <ErrorTypography variant={'body1'} color='redGraphOrError'>
                 {error.message}
-              </Typography>
+              </ErrorTypography>
             )}
           </Box>
           <Box display='flex' mt='24px' justifyContent='center'>

@@ -11,15 +11,16 @@ import { User } from '../users/model';
 import { emitBalanceChanged } from '../users/util';
 import { Code, CodeRedemption } from './model';
 import BN from 'bignumber.js';
+import { format } from 'date-fns';
 
 export const check = async (codeName: string, user: ContextUser) => {
   const code = await Code.findByPk(codeName?.toUpperCase());
   if (!code) {
-    throw new Error('Code not found');
+    throw new Error('Code not found.');
   }
 
   if (code.userId === user.id) {
-    throw new Error('Not allowed');
+    throw new Error('Not allowed.');
   }
 
   if (code.welcomeType) {
@@ -52,7 +53,14 @@ export const check = async (codeName: string, user: ContextUser) => {
 
   if (code.reqMinimumDeposit > 0 && deposits < code.reqMinimumDeposit) {
     throw new Error(
-      `You need to deposit at least ${code.reqMinimumDeposit}ZIGs.`,
+      `You need to deposit at least ${code.reqMinimumDeposit}ZIGs.${
+        code.reqDepositFrom
+          ? `\nOnly deposits after ${format(
+              code.reqDepositFrom,
+              'yyyy-MM-dd hh:mmaaa',
+            )} UTC are valid.`
+          : ''
+      }`,
     );
   }
 
@@ -76,16 +84,21 @@ export const check = async (codeName: string, user: ContextUser) => {
 
   if (code.maxRedemptions > 0) {
     if (code.currentRedemptions >= code.maxRedemptions) {
-      throw new Error('Maximum redemptions reached');
+      throw new Error('Maximum redemptions reached.');
     }
   }
 
   if (code.startDate && new Date() < code.startDate) {
-    throw new Error(`The code will start working on ${code.startDate}`);
+    throw new Error(
+      `The code will start working on ${format(
+        code.startDate,
+        'yyyy-MM-dd hh:mmaaa',
+      )} UTC.`,
+    );
   }
 
   if (code.endDate && new Date() > code.endDate) {
-    throw new Error('The code is expired');
+    throw new Error('The code is expired.');
   }
 
   return { code, balance, deposits };
@@ -114,7 +127,12 @@ const calculateInvitedBenefit = async (
   let invitedBenefit = new BN(code.benefitDirect || 0)
     .plus(balanceBenefit)
     .plus(depositsBenefit);
-
+  console.log(
+    invitedBenefit.toString(),
+    code.benefitDirect,
+    code.benefitBalanceFactor,
+    code.benefitDepositFactor,
+  );
   if (
     code.maxTotalBenefits &&
     invitedBenefit.gt(new BN(code.maxTotalBenefits))
@@ -132,9 +150,7 @@ const calculateInviterBenefit = (
 ) => {
   if (!code.userId) return '0'; // system code
 
-  const depositsBenefit = new BN(deposits).times(
-    code.rewardsDepositsFactor || 0,
-  );
+  const depositsBenefit = new BN(deposits).times(code.rewardDepositFactor || 0);
 
   let inviterBenefit = new BN(code.rewardDirect || 0)
     .plus(new BN(invitedBenefit).times(code.rewardFactor || 0))

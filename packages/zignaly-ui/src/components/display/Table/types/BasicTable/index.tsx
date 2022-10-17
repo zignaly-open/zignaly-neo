@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useSortBy, useTable } from "react-table";
 import {
   EmptyMessage,
@@ -51,6 +51,10 @@ export default function BasicTable<T extends object>({
     },
     useSortBy,
   );
+
+  useEffect(() => {
+    defaultHiddenColumns?.forEach((c) => toggleHideColumn(c, true));
+  }, []);
 
   const firstPageRows = rows.slice(0, 20);
 

@@ -30,8 +30,17 @@ export const typeDef = gql`
     currentRedemptions: Int
     endDate: Date
     rewardFactor: Float
-    rewardsDepositsFactor: Float
+    rewardDepositFactor: Float
     maxTotalRewards: Int
+    maxTotalBenefits: Int
+    benefitBalanceFactor: Float
+    benefitDepositFactor: Float
+    reqMinimumBalance: Float
+    reqMinimumDeposit: Float
+    reqDepositFrom: Date
+    reqMinAuctions: Int
+    reqWalletType: String
+    reqAuctionBids: Int
   }
 
   type InvitedInfo {
