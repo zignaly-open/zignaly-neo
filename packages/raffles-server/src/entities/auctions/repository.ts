@@ -4,6 +4,7 @@ import { ContextUser } from '../../types';
 import { User } from '../users/model';
 import { Auction, AuctionBid } from './model';
 import redisService from '../../redisService';
+import { Op } from 'sequelize';
 
 const AuctionsRepository = () => {
   const lastBidPopulation = {
@@ -27,10 +28,28 @@ const AuctionsRepository = () => {
     return await User.findAll({ where: { id: ids } });
   }
 
-  async function getAuctionsWithBids(auctionId?: number, user?: ContextUser) {
+  async function getAuctionsWithBids(
+    auctionId?: number,
+    user?: ContextUser,
+    unannounced?: boolean,
+    privateCode: string = null,
+  ) {
     const auctions = (await Auction.findAll({
       where: {
+        ...(!unannounced && {
+          announcementDate: {
+            [Op.or]: [
+              null,
+              {
+                [Op.lte]: new Date(),
+              },
+            ],
+          },
+        }),
         ...(auctionId && { id: auctionId }),
+        privateCode: {
+          [Op.or]: [null, privateCode],
+        },
       },
       include: [{ model: AuctionBid, include: [User] }],
       order: [

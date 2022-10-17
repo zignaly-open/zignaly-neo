@@ -274,4 +274,57 @@ describe('Auctions', () => {
     expect(startedAuction.bids.length).toBe(1);
     expect(startedAuction.bids[0].user.username).toBe(alice.username);
   });
+
+  it('should not return unannounced auctions', async () => {
+    const [, aliceToken] = await createAlice();
+    await createAuction({
+      announcementDate: new Date(Date.now() + 1000),
+    });
+
+    const auctions = await getAuctions(aliceToken);
+    expect(auctions.length).toBe(0);
+  });
+
+  it('should return unannounced auctions when bypassing', async () => {
+    const [, aliceToken] = await createAlice();
+    await createAuction({
+      announcementDate: new Date(Date.now() + 1000),
+    });
+
+    const auctions = await getAuctions(aliceToken, true);
+    expect(auctions.length).toBe(1);
+  });
+
+  it('should return auctions when announced', async () => {
+    const [, aliceToken] = await createAlice();
+    await createAuction({
+      announcementDate: new Date(Date.now() - 1000),
+    });
+
+    const auctions = await getAuctions(aliceToken);
+    expect(auctions.length).toBe(1);
+  });
+
+  it('should not return private auctions', async () => {
+    const [, aliceToken] = await createAlice();
+    await createAuction({
+      privateCode: 'aa',
+    });
+
+    const auctions = await getAuctions(aliceToken);
+    expect(auctions.length).toBe(0);
+
+    const auctions2 = await getAuctions(aliceToken, false, 'bb');
+    expect(auctions2.length).toBe(0);
+  });
+
+  it('should return private auctions if bypassing', async () => {
+    const [, aliceToken] = await createAlice();
+    await createAuction({
+      privateCode: 'aa',
+    });
+
+    const auctions = await getAuctions(aliceToken, false, 'aa');
+    expect(auctions.length).toBe(1);
+  });
 });
