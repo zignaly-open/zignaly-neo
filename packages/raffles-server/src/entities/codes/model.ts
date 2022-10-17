@@ -118,6 +118,10 @@ export class Code extends Model {
 
   @Column
   public endDate: Date;
+
+  @Default(false)
+  @Column
+  public isDefault: boolean;
 }
 
 @Table
