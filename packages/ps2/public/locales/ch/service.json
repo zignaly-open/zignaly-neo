@@ -2,11 +2,19 @@
   "service-by": "CH-by <0>{{name}}</0>",
   "service-age": "CH-Ŝṫáѓṫëḋ <0>{{date}}</0> áĝö",
   "link-copied": "CH-Lïńk ĉöṗïëḋ ṫö ĉlïṗböáѓḋ!",
+  "liquidated": "CH-Lïqüïḋáṫëḋ",
   "invested-label": "CH-Ïńvëŝṫëḋ",
   "copy-link": "CH-Ĉöṗy lïńk",
   "invest-button": {
     "invest-now": "CH-Ïńvëŝṫ ńöw!",
     "all-accounts": "CH-Ŝëë áll ({{count}})",
     "x-success-fee": "CH-{{fee}}% Ŝüĉĉëŝŝ ḟëë"
+  },
+  "other-accounts": {
+    "title": "CH-Ïńvëŝṫëḋ Áĉѓöŝŝ áll Áĉĉöüńṫŝ",
+    "account": "CH-Áĉĉöüńṫ",
+    "active": "CH-Áĉṫïvë",
+    "invested": "CH-Ïńvëŝṫëḋ",
+    "switch-action": "CH-Ŝwïṫĉĥ"
   }
 }

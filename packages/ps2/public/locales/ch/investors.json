@@ -15,5 +15,14 @@
     "feesZIG": "CH-Ḟëëŝ ïń ŽÏĜ",
     "status": "CH-Ŝṫáṫüŝ"
   },
-  "loading-arialLabel": "CH-Löáḋïńĝ ïńvëŝṫöѓŝ"
+  "loading-arialLabel": "CH-Löáḋïńĝ ïńvëŝṫöѓŝ",
+  "status": {
+    "connected": "CH-Ĉöńńëĉṫëḋ",
+    "pending": "CH-Ṗëńḋïńĝ",
+    "soft-disconnect": "CH-Ŝöḟṫ-Ḋïŝĉöńńëĉṫ",
+    "hard-disconnect": "CH-Ĥáѓḋ-Ḋïŝĉöńńëĉṫ",
+    "suspended": "CH-Ŝüŝṗëńḋëḋ",
+    "disconnected": "CH-Ḋïŝĉöńńëĉṫëḋ",
+    "owner": "CH-Öwńëѓ"
+  }
 }
