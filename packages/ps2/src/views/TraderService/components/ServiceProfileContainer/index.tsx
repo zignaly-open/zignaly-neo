@@ -96,7 +96,11 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
         }}
       >
         <Box sx={{ width: '55px', marginBottom: md ? 0 : 2 }}>
-          <Avatar size={'x-large'} image={getServiceLogo(service.logo)} />
+          <Avatar
+            size={'x-large'}
+            alt={service.name}
+            image={getServiceLogo(service.logo)}
+          />
         </Box>
         <Box
           ml={md ? 2 : 0}
