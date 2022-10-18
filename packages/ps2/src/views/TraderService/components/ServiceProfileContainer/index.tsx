@@ -123,7 +123,9 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
               <InvestButton service={service} onClick={onClickMakeInvestment} />
             )}
 
-            <OtherAccountsButton service={service} />
+            {Object.keys(isInvested.accounts || {}).length > 1 && (
+              <OtherAccountsButton service={service} />
+            )}
           </Box>
         )}
       </Box>
