@@ -7,6 +7,7 @@ import { Avatar } from '@zignaly-open/ui';
 import {
   InvestButton,
   InvestedButton,
+  LiquidatedLabel,
   OtherAccountsButton,
   ServiceInformation,
 } from './atoms';
@@ -18,7 +19,7 @@ import {
 } from '../../../../apis/investment/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
-import EditInvestmentModal from '../../../Dashboard/components/EditInvestmentModal';
+import EditInvestmentModal from '../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
 import { serviceToInvestmentServiceDetail } from '../../../../apis/investment/util';
 import {
   useActiveExchange,
@@ -28,6 +29,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN } from '../../../../routes';
 import { useUpdateEffect } from 'react-use';
+import InvestModal from 'views/Dashboard/components/ManageInvestmentModals/InvestModal';
 
 const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
@@ -59,7 +61,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   const onClickMakeInvestment = () => {
     if (isAuthenticated) {
       selectInvestment(serviceToInvestmentServiceDetail(service));
-      const modal: ShowFnOutput<void> = showModal(EditInvestmentModal, {
+      const modal: ShowFnOutput<void> = showModal(InvestModal, {
         close: () => modal.hide(),
       });
     } else {
@@ -94,7 +96,11 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
         }}
       >
         <Box sx={{ width: '55px', marginBottom: md ? 0 : 2 }}>
-          <Avatar size={'x-large'} image={getServiceLogo(service.logo)} />
+          <Avatar
+            size={'x-large'}
+            alt={service.name}
+            image={getServiceLogo(service.logo)}
+          />
         </Box>
         <Box
           ml={md ? 2 : 0}
@@ -104,7 +110,13 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
           <ServiceInformation service={service} />
         </Box>
 
-        {!isInvested.isLoading && (
+        {service.liquidated && (
+          <Box sx={{ mt: -0.5 }}>
+            <LiquidatedLabel />
+          </Box>
+        )}
+
+        {!isInvested.isLoading && !service.liquidated && (
           <Box sx={{ mt: md ? -1.5 : 3 }}>
             {isInvested.thisAccount ? (
               <InvestedButton
@@ -115,7 +127,9 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
               <InvestButton service={service} onClick={onClickMakeInvestment} />
             )}
 
-            <OtherAccountsButton otherAccounts={isInvested.otherAccounts} />
+            {Object.keys(isInvested.accounts || {}).length > 1 && (
+              <OtherAccountsButton service={service} />
+            )}
           </Box>
         )}
       </Box>

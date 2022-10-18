@@ -63,16 +63,12 @@ const WithdrawForm: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
     'amountTransfer',
   ) as WithdrawFormData['amountTransfer'];
   const onSubmit = async (values: WithdrawFormData) => {
-    try {
-      await withdraw({
-        amount: values.amountTransfer?.value,
-        serviceId,
-      });
-      toast.success(t('edit-investment:withdrawInvestmentSuccess'));
-      setView(EditInvestmentViews.WithdrawSuccess);
-    } catch (e) {
-      toast.backendError(e);
-    }
+    await withdraw({
+      amount: values.amountTransfer?.value,
+      serviceId,
+    });
+    toast.success(t('edit-investment:withdrawInvestmentSuccess'));
+    setView(EditInvestmentViews.WithdrawSuccess);
   };
   const tokenBalance = new BigNumber(coin.balance);
   const amount = new BigNumber(watchAmountTransfer?.value);

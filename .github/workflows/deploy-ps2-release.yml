@@ -1,8 +1,8 @@
 name: PS2 Staging deploy
 on:
   push:
-    branches:
-      - release
+    tags:
+      - release-ps2
 
 jobs:
   pre_job:

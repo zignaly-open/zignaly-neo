@@ -25,11 +25,13 @@ export type ButtonProps = {
   rightElement?: ReactElement<any> | string | null;
   underline?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  as?: string;
   href?: string;
   id?: string;
   rel?: string;
   type?: "button" | "submit";
   target?: string;
+  allowClickOnDisabled?: boolean;
   loading?: boolean;
   tabIndex?: number;
   disabled?: boolean;

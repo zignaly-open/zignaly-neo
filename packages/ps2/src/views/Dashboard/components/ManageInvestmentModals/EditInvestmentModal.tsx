@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Modal } from '@mui/material';
-import { LoaderContainer } from './styles';
-import { Loader } from '@zignaly-open/ui';
 import { EditInvestmentViews } from './types';
 import { DialogProps } from '@mui/material/Dialog';
 import EditInvestment from './views/EditInvestment';
 import WithdrawFunds from './views/WithdrawFunds';
 import PendingTransactionsList from './views/PendingTransactionsList';
-import ModalContainer from 'components/ModalContainer';
 import {
   useInvestmentDetails,
   useSelectedInvestment,
@@ -18,6 +14,7 @@ import EditInvestmentSuccess from './views/EditInvestmentSuccess';
 import WithdrawModalSuccess from './views/WithdrawSuccess';
 import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
+import ZModal from '../../../../components/ZModal';
 
 function EditInvestmentModal({
   close,
@@ -68,42 +65,26 @@ function EditInvestmentModal({
   const { title, component } =
     views[view in views ? view : EditInvestmentViews.EditInvestment];
 
+  const isLoading = isLoadingInvestment || isLoadingService || isLoadingCoins;
   return (
-    <Modal
+    <ZModal
+      wide
       {...props}
-      onClose={close}
-      style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        display: 'flex',
-      }}
+      close={close}
+      title={title}
+      onGoBack={
+        ![
+          EditInvestmentViews.EditInvestment,
+          EditInvestmentViews.EditInvestmentSuccess,
+          EditInvestmentViews.WithdrawSuccess,
+        ].includes(view)
+          ? () => setView(EditInvestmentViews.EditInvestment)
+          : undefined
+      }
+      isLoading={isLoading}
     >
-      <ModalContainer
-        width={784}
-        title={title}
-        onClickClose={close}
-        onGoBack={
-          ![
-            EditInvestmentViews.EditInvestment,
-            EditInvestmentViews.EditInvestmentSuccess,
-            EditInvestmentViews.WithdrawSuccess,
-          ].includes(view)
-            ? () => setView(EditInvestmentViews.EditInvestment)
-            : undefined
-        }
-      >
-        {isLoadingInvestment || isLoadingService || isLoadingCoins ? (
-          <LoaderContainer>
-            <Loader
-              color={'#fff'}
-              ariaLabel={t('modal.editInvestments.loading')}
-            />
-          </LoaderContainer>
-        ) : (
-          component()
-        )}
-      </ModalContainer>
-    </Modal>
+      {!isLoading && component()}
+    </ZModal>
   );
 }
 

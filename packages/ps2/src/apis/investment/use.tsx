@@ -6,9 +6,14 @@ import {
   useUpdateTakeProfitAndInvestMoreMutation,
   useWithdrawInvestmentMutation,
   useInvestedAmountQuery,
+  useInvestInServiceMutation,
 } from './api';
 import { useActiveExchange, useIsAuthenticated } from '../user/use';
-import { InvestmentDetails, InvestmentServiceDetails } from './types';
+import {
+  InvestedInService,
+  InvestmentDetails,
+  InvestmentServiceDetails,
+} from './types';
 import { RootState } from '../store';
 import { setSelectedInvestment } from './store';
 import { useMemo } from 'react';
@@ -43,7 +48,7 @@ export function useSelectedInvestment(): InvestmentServiceDetails {
 export function useIsInvestedInService(serviceId: string): {
   isLoading: boolean;
   thisAccount: boolean;
-  otherAccounts?: string[];
+  accounts?: InvestedInService;
   refetch: () => void;
   investedAmount: string;
 } {
@@ -62,7 +67,7 @@ export function useIsInvestedInService(serviceId: string): {
     isLoading: isLoading || isFetching,
     refetch,
     thisAccount: !!invested,
-    otherAccounts: data && Object.keys(data),
+    accounts: data,
     investedAmount: invested?.invested || '0',
   };
 }
@@ -98,6 +103,33 @@ export function useUpdateTakeProfitPercentage(): {
       await update({
         profitPercentage,
         serviceId,
+        exchangeInternalId: exchange.internalId,
+      }).unwrap();
+    },
+  };
+}
+
+export function useInvestInService(): {
+  isLoading: boolean;
+  invest: ({
+    profitPercentage,
+    amount,
+    serviceId,
+  }: {
+    serviceId: string;
+    profitPercentage: number | string;
+    amount: string;
+  }) => Promise<void>;
+} {
+  const [update, { isLoading }] = useInvestInServiceMutation();
+  const exchange = useActiveExchange();
+  return {
+    isLoading,
+    invest: async ({ profitPercentage, serviceId, amount }) => {
+      await update({
+        profitPercentage,
+        serviceId,
+        amount,
         exchangeInternalId: exchange.internalId,
       }).unwrap();
     },

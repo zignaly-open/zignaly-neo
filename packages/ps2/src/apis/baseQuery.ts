@@ -9,6 +9,9 @@ import { Mutex } from 'async-mutex';
 import { logout, setSessionExpiryDate } from './user/store';
 import { SessionResponse } from './user/types';
 import { TIME_TO_START_REFRESHING_TOKEN } from '../util/constants';
+import i18next from '../util/i18next';
+import { backendError } from 'util/hooks/useToast';
+import { BackendError } from '../util/errors';
 
 const mutex = new Mutex();
 
@@ -30,12 +33,19 @@ const endpointsWhitelistedFor401 = [
   `known_device/verify`,
 ];
 
+const maybeReportError = (error: FetchBaseQueryError) => {
+  if (!error) return;
+  backendError(i18next.t, error as unknown as BackendError);
+};
+
 const customFetchBase: BaseQueryFn<
   string | FetchArgs,
   unknown,
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   const result = await baseQuery(args, api, extraOptions);
+
+  maybeReportError(result?.error);
 
   if (
     result?.error?.status === 401 &&

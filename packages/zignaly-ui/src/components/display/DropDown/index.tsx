@@ -108,6 +108,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
                       id={option.id}
                       key={key}
                       separator={option.separator}
+                      target={option?.target}
                       active={option?.active}
                       as={"a"}
                       href={option.href}

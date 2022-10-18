@@ -2,6 +2,7 @@ import {
   AreaChart,
   PercentageIndicator,
   PriceLabel,
+  sortByValue,
   Table,
   Typography,
 } from '@zignaly-open/ui';
@@ -18,7 +19,7 @@ import { Investment } from '../../../../apis/investment/types';
 import { sortBigNumbers, stringSort } from '../../../../util/numbers';
 import { BalanceSummary } from '../BalanceSummary';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
-import EditInvestmentModal from '../EditInvestmentModal';
+import EditInvestmentModal from '../ManageInvestmentModals/EditInvestmentModal';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { DashboardTableDataType } from './types';
 import { ServiceName } from '../ServiceName';
@@ -98,6 +99,11 @@ const MyDashboard: React.FC = () => {
             <Typography variant={'body2'} color={'neutral400'}>
               {t('tableHeader.1-mo.no-data')}
             </Typography>
+          ),
+        sortType: (a, b) =>
+          sortByValue(
+            a.values.service.pnl30dSum || 0,
+            b.values.service.pnl30dSum || 0,
           ),
       },
       {

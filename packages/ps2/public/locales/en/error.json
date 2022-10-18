@@ -1,5 +1,6 @@
 {
   "error": {
+    "invalid-value": "Invalid value",
     "9000": "Missing exchange account in your account, please contact with support.",
     "9001": "This field is required",
     "required": "This field is required",

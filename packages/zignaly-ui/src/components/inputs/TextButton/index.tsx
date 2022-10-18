@@ -13,9 +13,11 @@ function TextButton({
   underline,
   onClick = () => {},
   href,
+  allowClickOnDisabled = false, // sorry
   disabled = false,
   loading = false,
   rel,
+  as,
   id,
   target,
   className,
@@ -32,9 +34,10 @@ function TextButton({
       type={type}
       isLoading={loading}
       withElements={!!leftElement || !!rightElement}
-      onClick={!disabled && onClick}
+      onClick={(allowClickOnDisabled || !disabled) && onClick}
       disabled={disabled || loading}
       tabIndex={tabIndex}
+      as={as}
       {...(href && {
         href,
         as: "a" as any,
@@ -45,7 +48,12 @@ function TextButton({
       <styled.Container>
         <styled.ElementsContainer>
           {leftElement && <styled.LeftElement>{leftElement}</styled.LeftElement>}
-          <Typography color={color} weight="regular" variant={variant} underline={underline}>
+          <Typography
+            color={disabled ? "neutral300" : color}
+            weight="regular"
+            variant={variant}
+            underline={underline}
+          >
             {caption}
           </Typography>
           {rightElement && <styled.RightElement>{rightElement}</styled.RightElement>}

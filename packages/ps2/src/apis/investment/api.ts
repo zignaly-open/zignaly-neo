@@ -55,6 +55,26 @@ export const api = createApi({
       }),
     }),
 
+    investInService: builder.mutation<
+      void,
+      {
+        serviceId: string;
+        profitPercentage: number | string;
+        amount: string;
+        exchangeInternalId: string;
+      }
+    >({
+      query: ({ serviceId, profitPercentage, exchangeInternalId, amount }) => ({
+        url: `services/${serviceId}/investments/in`,
+        method: 'POST',
+        body: {
+          exchangeInternalId,
+          profitPercent: profitPercentage,
+          amount,
+        },
+      }),
+    }),
+
     updateTakeProfitAndInvestMore: builder.mutation<
       void,
       {
@@ -91,6 +111,7 @@ export const {
   useInvestedAmountQuery,
   useUpdateTakeProfitAndInvestMoreMutation,
   useUpdateTakeProfitMutation,
+  useInvestInServiceMutation,
   useWithdrawInvestmentMutation,
   useInvestmentDetailsQuery,
 } = api;

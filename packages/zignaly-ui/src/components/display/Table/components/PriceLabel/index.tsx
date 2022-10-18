@@ -8,7 +8,7 @@ import { BottomElementWrap } from "./styles";
 import Typography from "components/display/Typography";
 import { useTheme } from "styled-components";
 import Theme from "../../../../../theme/theme";
-import { coinPrecisions } from "./constants";
+import { getPrecisionForCoin } from "./util";
 
 const PriceLabel = ({
   value = 0,
@@ -37,7 +37,7 @@ const PriceLabel = ({
           }}
           displayType={"text"}
           thousandSeparator={true}
-          decimalScale={precision || (+value === 0 && 2) || coinPrecisions[coin] || 8}
+          decimalScale={precision || getPrecisionForCoin(coin, value)}
         />
         {!hideCoinName && (
           <styled.Coin weight="medium" variant={"body2"} color={"neutral400"}>

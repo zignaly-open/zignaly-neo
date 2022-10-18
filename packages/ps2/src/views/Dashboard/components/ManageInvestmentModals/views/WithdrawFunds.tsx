@@ -18,6 +18,7 @@ const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   return (
     <>
       <InvestorDetails />
+
       <Grid container marginBottom={3} rowSpacing={6}>
         <Grid item sm={12} md={6}>
           <WithdrawFundsOptionWrapper border={matchesSmall}>

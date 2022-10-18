@@ -79,6 +79,7 @@ const ExtraNavigationDropdown: React.FC = () => {
         {
           label: t('main-menu.dropdown-link-helpDocs'),
           id: 'menu__help-docs',
+          target: '_blank',
           href: 'https://help.zignaly.com/hc/en-us',
         },
         {

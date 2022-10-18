@@ -15,7 +15,6 @@ import {
 } from './styles';
 import {
   Typography,
-  Loader,
   SwapVertIcon,
   Button,
   InputAmountAdvanced,
@@ -23,17 +22,15 @@ import {
 } from '@zignaly-open/ui';
 import { TransferFormData, TransferModalProps } from './types';
 import { TransferModalValidation } from './validation';
-import ModalContainer from '../../../../components/ModalContainer';
 
 import { Box } from '@mui/system';
-import { Modal } from '@mui/material';
 import {
   useTraderServiceBalance,
   useServiceDetails,
   useTraderServiceTransferFunds,
 } from '../../../../apis/service/use';
-import { LoaderContainer } from '../../../Dashboard/components/EditInvestmentModal/styles';
 import { useToast } from '../../../../util/hooks/useToast';
+import ZModal from 'components/ZModal';
 
 function TransferModal({
   serviceId,
@@ -90,127 +87,111 @@ function TransferModal({
         amount: amountValue?.value?.toString(),
         from: fromTradingAccount ? 'STA' : 'SCA',
         to: fromTradingAccount ? 'SCA' : 'STA',
-      })
-        .then(() => {
-          toast.success(
-            t('management:transfer.success', {
-              amount: `${new BigNumber(amountValue?.value).toFixed()} ${
-                amountValue?.token.id
-              }`,
-            }),
-          );
-          close();
-        })
-        .catch((e) => toast.backendError(e));
+      }).then(() => {
+        toast.success(
+          t('management:transfer.success', {
+            amount: `${new BigNumber(amountValue?.value).toFixed()} ${
+              amountValue?.token.id
+            }`,
+          }),
+        );
+        close();
+      });
     },
     [serviceId, fromTradingAccount],
   );
 
   return (
-    <Modal
+    <ZModal
+      wide
       {...props}
-      onClose={close}
-      style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        display: 'flex',
-      }}
+      close={close}
+      title={t('transferFunds.title')}
+      isLoading={!balance || isTransferring}
     >
-      <ModalContainer
-        width={784}
-        title={t('transferFunds.title')}
-        onClickClose={close}
-      >
-        <Box sx={{ marginBottom: 3 }}>
-          <Typography>{t('transferFunds.title')}</Typography>
-        </Box>
+      <Box sx={{ marginBottom: 3 }}>
+        <Typography>{t('transferFunds.title')}</Typography>
+      </Box>
 
-        {balance && !isTransferring ? (
-          <form noValidate onSubmit={handleSubmit(onSubmit)}>
-            <Body>
-              <InputAmountAdvanced
-                control={control}
-                placeholder={t('transfer.placeholder')}
-                fullWidth={true}
-                maxLength={26}
-                error={isDirty && t(errors?.amountValue?.value?.message)}
-                name={'amountValue'}
-                label={t(
-                  fromTradingAccount
-                    ? 'transfer.fromTradingAccount'
-                    : 'transfer.fromDiscAccount',
-                )}
-                labelBalance={t('transfer.labelBalance')}
-                tokens={[
-                  {
-                    id: service?.ssc ?? 'USDT',
-                    balance: balanceFrom,
-                  },
-                ]}
-                showUnit
-              />
-              <IconButton
-                size='xlarge'
-                icon={<SwapVertIcon color={'#65647E'} />}
-                variant='secondary'
-                onClick={toggleDestination}
-                type='button'
-              />
-              <ToContainer>
-                <ToOutline>
-                  <Typography variant='h2'>
-                    {t(
-                      `transfer.${
-                        fromTradingAccount
-                          ? 'toDiscAccount'
-                          : 'toTradingAccount'
-                      }`,
-                    )}
-                  </Typography>
-                  <Inline>
-                    <TypographyNumberResult
-                      variant='bigNumber'
-                      color='neutral100'
-                    >
-                      {amountTransferValue
-                        ? new BigNumber(amountTransferValue).toString()
-                        : '--'}{' '}
-                    </TypographyNumberResult>
-                    <Typography variant='h3' color='neutral400'>
-                      {service?.ssc ?? 'USDT'}
-                    </Typography>
-                  </Inline>
-                </ToOutline>
-                <Typography variant='body2' color='neutral200'>
-                  {t('transfer.deposit-available')}
-                  <TypographyBalance variant='body2' color='neutral000'>
-                    <NumberFormat
-                      value={balanceTo}
-                      displayType={'text'}
-                      suffix={` ${service?.ssc ?? 'USDT'}`}
-                      thousandSeparator={true}
-                    />
-                  </TypographyBalance>
+      {balance && !isTransferring && (
+        <form noValidate onSubmit={handleSubmit(onSubmit)}>
+          <Body>
+            <InputAmountAdvanced
+              control={control}
+              placeholder={t('transfer.placeholder')}
+              fullWidth={true}
+              maxLength={26}
+              error={isDirty && t(errors?.amountValue?.value?.message)}
+              name={'amountValue'}
+              label={t(
+                fromTradingAccount
+                  ? 'transfer.fromTradingAccount'
+                  : 'transfer.fromDiscAccount',
+              )}
+              labelBalance={t('transfer.labelBalance')}
+              tokens={[
+                {
+                  id: service?.ssc ?? 'USDT',
+                  balance: balanceFrom,
+                },
+              ]}
+              showUnit
+            />
+            <IconButton
+              size='xlarge'
+              icon={<SwapVertIcon color={'#65647E'} />}
+              variant='secondary'
+              onClick={toggleDestination}
+              type='button'
+            />
+            <ToContainer>
+              <ToOutline>
+                <Typography variant='h2'>
+                  {t(
+                    `transfer.${
+                      fromTradingAccount ? 'toDiscAccount' : 'toTradingAccount'
+                    }`,
+                  )}
                 </Typography>
-              </ToContainer>
-            </Body>
+                <Inline>
+                  <TypographyNumberResult
+                    variant='bigNumber'
+                    color='neutral100'
+                  >
+                    {amountTransferValue
+                      ? new BigNumber(amountTransferValue).toString()
+                      : '--'}{' '}
+                  </TypographyNumberResult>
+                  <Typography variant='h3' color='neutral400'>
+                    {service?.ssc ?? 'USDT'}
+                  </Typography>
+                </Inline>
+              </ToOutline>
+              <Typography variant='body2' color='neutral200'>
+                {t('transfer.deposit-available')}
+                <TypographyBalance variant='body2' color='neutral000'>
+                  <NumberFormat
+                    value={balanceTo}
+                    displayType={'text'}
+                    suffix={` ${service?.ssc ?? 'USDT'}`}
+                    thousandSeparator={true}
+                  />
+                </TypographyBalance>
+              </Typography>
+            </ToContainer>
+          </Body>
 
-            <Actions>
-              <Button
-                caption={t('transfer.now')}
-                disabled={!isValid}
-                size='xlarge'
-                type='submit'
-              />
-            </Actions>
-          </form>
-        ) : (
-          <LoaderContainer>
-            <Loader color={'#fff'} ariaLabel={t('transfer.loading')} />
-          </LoaderContainer>
-        )}
-      </ModalContainer>
-    </Modal>
+          <Actions>
+            <Button
+              caption={t('transfer.now')}
+              disabled={!isValid}
+              size='xlarge'
+              type='submit'
+            />
+          </Actions>
+        </form>
+      )}
+    </ZModal>
   );
 }
 

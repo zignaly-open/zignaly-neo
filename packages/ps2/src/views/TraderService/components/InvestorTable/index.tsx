@@ -23,6 +23,8 @@ import {
 import ConnectionStateLabel from '../ConnectionStateLabel';
 import { YesNo } from './atoms';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
+import { sortBigNumbers } from '../../../../util/numbers';
+import { connectionStateName } from '../ConnectionStateLabel/types';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -51,6 +53,8 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         Cell: ({ cell: { value } }) => (
           <PriceLabel coin={service?.ssc ?? 'USDT'} value={value.toFixed()} />
         ),
+        sortType: (a, b) =>
+          sortBigNumbers(a.values.investment, b.values.investment),
       },
       {
         Header: t('tableHeader.P&L'),
@@ -62,6 +66,8 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             bottomElement={<PercentageIndicator value={value.pnlPctLc} />}
           />
         ),
+        sortType: (a, b) =>
+          sortBigNumbers(a.values.pnlPctLc, b.values.pnlPctLc),
       },
       {
         Header: t('tableHeader.P&LTotal'),
@@ -69,6 +75,8 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         Cell: ({ cell: { value } }) => (
           <PriceLabel coin={service?.ssc ?? 'USDT'} value={parseFloat(value)} />
         ),
+        sortType: (a, b) =>
+          sortBigNumbers(a.values.pnlTotal, b.values.pnlTotal),
       },
       {
         Header: t('tableHeader.totalFeesPaid'),
@@ -76,6 +84,8 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         Cell: ({ cell: { value } }) => (
           <PriceLabel coin={service?.ssc ?? 'USDT'} value={parseFloat(value)} />
         ),
+        sortType: (a, b) =>
+          sortBigNumbers(a.values.totalFeesPaid, b.values.totalFeesPaid),
       },
       {
         Header: t('tableHeader.successFee'),
@@ -85,11 +95,16 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         Header: t('tableHeader.feesZIG'),
         accessor: 'feesInZig',
         Cell: ({ cell: { value } }) => <YesNo value={value} />,
+        sortType: (a, b) => +a.values.feesInZig - +b.values.feesInZig,
       },
       {
         Header: t('tableHeader.status'),
         accessor: 'status',
         Cell: ({ cell: { value } }) => <ConnectionStateLabel stateId={value} />,
+        sortType: (a, b) =>
+          t(connectionStateName[a.values.status])?.localeCompare(
+            t(connectionStateName[b.values.status]),
+          ),
       },
     ],
     [],

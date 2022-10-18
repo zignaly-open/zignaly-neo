@@ -4,7 +4,7 @@ import { sizes, Image, JazzIcon, Layout } from "./styles";
 
 import { AvatarSizes, AvatarTypeProps } from "./types";
 
-const Avatar = ({ size = AvatarSizes.MEDIUM, hash, image }: AvatarTypeProps) => {
+const Avatar = ({ size = AvatarSizes.MEDIUM, hash, image, alt }: AvatarTypeProps) => {
   const jazzIconRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -18,7 +18,11 @@ const Avatar = ({ size = AvatarSizes.MEDIUM, hash, image }: AvatarTypeProps) => 
 
   return (
     <Layout className={size as string} data-testid="avatar-view">
-      {image ? <Image src={image} /> : <JazzIcon data-testid="icon-input" ref={jazzIconRef} />}
+      {image ? (
+        <Image src={image} alt={alt} />
+      ) : (
+        <JazzIcon data-testid="icon-input" ref={jazzIconRef} />
+      )}
     </Layout>
   );
 };

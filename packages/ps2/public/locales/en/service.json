@@ -2,11 +2,19 @@
   "service-by": "by <0>{{name}}</0>",
   "service-age": "Started <0>{{date}}</0> ago",
   "link-copied": "Link copied to clipboard!",
+  "liquidated": "Liquidated",
   "invested-label": "Invested",
   "copy-link": "Copy link",
   "invest-button": {
     "invest-now": "Invest now!",
     "all-accounts": "See all ({{count}})",
     "x-success-fee": "{{fee}}% Success fee"
+  },
+  "other-accounts": {
+    "title": "Invested Across all Accounts",
+    "account": "Account",
+    "active": "Active",
+    "invested": "Invested",
+    "switch-action": "Switch"
   }
 }

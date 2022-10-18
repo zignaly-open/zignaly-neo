@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { useTranslation, Trans } from 'react-i18next';
 import { Button, Typography } from '@zignaly-open/ui';
+import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { Highline } from '../styles';
 import { useInvestments } from '../../../../../apis/investment/use';
-import { ModalActions } from 'components/ModalContainer/styles';
 import { useActiveExchange } from '../../../../../apis/user/use';
 import { useCoinBalances } from '../../../../../apis/coin/use';
 

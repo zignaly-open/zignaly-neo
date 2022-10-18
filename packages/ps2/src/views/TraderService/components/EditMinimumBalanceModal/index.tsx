@@ -11,11 +11,11 @@ import {
   useTraderServiceManagement,
   useTraderServiceUpdateMinimum,
 } from '../../../../apis/service/use';
-import ModalContainer from '../../../../components/ModalContainer';
-import { ModalActions } from '../../../../components/ModalContainer/styles';
-import { Box, Modal } from '@mui/material';
+import { Box } from '@mui/material';
 import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
 import { useToast } from '../../../../util/hooks/useToast';
+import ZModal from 'components/ZModal';
+import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
   const { t } = useTranslation(['management', 'common']);
@@ -50,59 +50,43 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
     useTraderServiceUpdateMinimum(serviceId);
 
   const onSubmit = useCallback(({ amountValue }) => {
-    update(amountValue.value?.toString())
-      .then(() => {
-        toast.success(t('management:minBalance.success'));
-        close();
-      })
-      .catch((e) => toast.backendError(e));
+    update(amountValue.value?.toString()).then(() => {
+      toast.success(t('management:minBalance.success'));
+      close();
+    });
   }, []);
 
   return (
-    <Modal
-      {...props}
-      onClose={close}
-      style={{
-        alignItems: 'center',
-        justifyContent: 'center',
-        display: 'flex',
-      }}
-    >
-      <ModalContainer
-        width={784}
-        title={t('minBalanceModal.title')}
-        onClickClose={close}
-      >
-        <Box sx={{ marginBottom: 3 }}>
-          <Typography>{t('minBalanceModal.desc')}</Typography>
-        </Box>
-        <form noValidate onSubmit={handleSubmit(onSubmit)}>
-          <InputAmountAdvanced
-            label={t('common:amount') + ':'}
-            placeholder={t('minBalanceModal.placeholder')}
-            labelBalance={t('minBalanceModal.labelBalance')}
-            control={control}
-            name={'amountValue'}
-            fullWidth={true}
-            showMaxButton={false}
-            error={isDirty && t(errors?.amountValue?.value?.message)}
-            enableMaxAmountMessage={false}
-            tokens={[coin]}
-            showUnit
-          />
+    <ZModal wide {...props} title={t('minBalanceModal.title')} close={close}>
+      <Box sx={{ marginBottom: 3 }}>
+        <Typography>{t('minBalanceModal.desc')}</Typography>
+      </Box>
+      <form noValidate onSubmit={handleSubmit(onSubmit)}>
+        <InputAmountAdvanced
+          label={t('common:amount') + ':'}
+          placeholder={t('minBalanceModal.placeholder')}
+          labelBalance={t('minBalanceModal.labelBalance')}
+          control={control}
+          name={'amountValue'}
+          fullWidth={true}
+          showMaxButton={false}
+          error={isDirty && t(errors?.amountValue?.value?.message)}
+          enableMaxAmountMessage={false}
+          tokens={[coin]}
+          showUnit
+        />
 
-          <ModalActions>
-            <Button
-              loading={isLoadingManagement || isLoadingService || isUpdating}
-              caption={t('minBalanceModal.save')}
-              disabled={!isValid}
-              size='xlarge'
-              type='submit'
-            />
-          </ModalActions>
-        </form>
-      </ModalContainer>
-    </Modal>
+        <ModalActions>
+          <Button
+            loading={isLoadingManagement || isLoadingService || isUpdating}
+            caption={t('minBalanceModal.save')}
+            disabled={!isValid}
+            size='xlarge'
+            type='submit'
+          />
+        </ModalActions>
+      </form>
+    </ZModal>
   );
 }
 
