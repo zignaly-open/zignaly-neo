@@ -24,20 +24,18 @@ import { UserType } from '@zignaly-open/raffles-shared/types';
 import UserSettingsModal from '../Modals/UserSettings';
 import { useMediaQuery } from '@mui/material';
 import theme from 'theme';
-import { Redeem } from '@mui/icons-material';
+import { People, Redeem } from '@mui/icons-material';
+
+const StyledPeopleIcon = styled(People)`
+  color: ${(props) => props.theme.neutral200};
+`;
 
 const StyledWalletIcon = styled(WalletIcon)`
-  color: ${(props) => props.theme.neutral300};
+  color: ${(props) => props.theme.neutral200};
 `;
 
 const StyledRedeemIcon = styled(Redeem)`
-  color: ${(props) => props.theme.neutral300};
-`;
-
-const ButtonFix = styled('div')`
-  button > div {
-    padding: 0 12px;
-  }
+  color: ${(props) => props.theme.neutral200};
 `;
 
 const StickyHeader = styled(ZIGHeader)`
@@ -101,14 +99,13 @@ const Header = () => {
                 }}
                 gap='28px'
               >
-                <ButtonFix>
-                  <Button
-                    variant='secondary'
-                    size='small'
-                    caption={t('share-earn')}
-                    onClick={() => showModal(ShareCodeModal)}
-                  />
-                </ButtonFix>
+                <Button
+                  variant='secondary'
+                  size='small'
+                  caption={t('share-earn')}
+                  leftElement={<StyledPeopleIcon />}
+                  onClick={() => showModal(ShareCodeModal)}
+                />
                 <Button
                   variant='secondary'
                   size='small'
