@@ -46,11 +46,11 @@ function EditInvestmentForm({
   const theme = useTheme() as Theme;
   const { t } = useTranslation('edit-investment');
   const [isInputEnabled, setInputEnabled] = useState(false);
-  const { isLoading: isEditingPercent, edit: editPercent } =
-    useUpdateTakeProfitPercentage();
-  const { isLoading: isEditingInvestment, edit: editInvestment } =
-    useUpdateTakeProfitAndInvestMore();
   const { serviceId, serviceName } = useSelectedInvestment();
+  const { isLoading: isEditingPercent, edit: editPercent } =
+    useUpdateTakeProfitPercentage(serviceId);
+  const { isLoading: isEditingInvestment, edit: editInvestment } =
+    useUpdateTakeProfitAndInvestMore(serviceId);
   const { refetch: refetchDetails } = useInvestmentDetails(serviceId);
   const { data: details } = useInvestmentDetails(serviceId);
   const transferOutAll = details?.transferOutAll;
@@ -82,7 +82,6 @@ function EditInvestmentForm({
     if (isInputEnabled) {
       await editInvestment({
         profitPercentage: values.profitPercentage,
-        serviceId,
         amount: values?.amountTransfer?.value,
       });
       toast.success(
@@ -97,7 +96,6 @@ function EditInvestmentForm({
     } else {
       await editPercent({
         profitPercentage: values.profitPercentage,
-        serviceId,
       });
       toast.success(t('edit-investment:percentageChangedSuccess'));
       refetchDetails();

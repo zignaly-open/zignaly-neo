@@ -210,7 +210,14 @@ export const ServiceInformation: React.FC<{
             toast.success(t('link-copied'));
           }}
           leftElement={
-            md ? null : <LinkIcon color='neutral300' width={13} height={13} />
+            md ? null : (
+              <LinkIcon
+                style={{ width: '13px', height: '13px' }}
+                color='neutral300'
+                width={13}
+                height={13}
+              />
+            )
           }
           size={'xsmall'}
           variant={'secondary'}

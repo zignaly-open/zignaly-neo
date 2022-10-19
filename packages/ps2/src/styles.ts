@@ -128,7 +128,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   .Toastify__toast-container--top-right {
-    top: 1em;
+    top: 4.5em;
     right: 1em;
   }
 

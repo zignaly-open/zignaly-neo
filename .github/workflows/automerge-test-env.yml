@@ -1,12 +1,10 @@
 name: Auto-merge into the test environment
 
 on:
-  pull_request_review:
-    types: [submitted]
+  push
 
 jobs:
   merge-to-test:
-    if: ${{ github.event.review.state == 'approved' && github.event.pull_request.head.ref == 'master' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master

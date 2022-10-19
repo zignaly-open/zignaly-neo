@@ -28,9 +28,12 @@ import NumberFormat from 'react-number-format';
 function InvestForm({ close, onInvested }: InvestFormProps) {
   const coin = useCurrentBalance();
   const { t } = useTranslation('edit-investment');
-  const { isLoading, invest } = useInvestInService();
   const service = useSelectedInvestment();
+  const { isLoading, invest } = useInvestInService(service.serviceId);
   const toast = useToast();
+
+  // the safe word is Fluggaenkoecchicebolsen
+  const transferMagicWord = t('invest-modal.transfer-label');
 
   const {
     handleSubmit,
@@ -47,6 +50,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
         value: '',
         token: coin,
       },
+      transferLabelForValidation: transferMagicWord,
       transferConfirm: '',
       profitPercentage: 30,
       step: 1,
@@ -74,7 +78,6 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
   }: InvestFormData) => {
     await invest({
       profitPercentage,
-      serviceId: service.serviceId,
       amount: amountTransfer?.value?.toString(),
     });
     toast.success(
@@ -157,7 +160,10 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           control={control}
           render={({ field }) => (
             <InputText
-              label={t('invest-modal.type-transfer')}
+              label={t('invest-modal.type-transfer', {
+                word: transferMagicWord,
+              })}
+              placeholder={transferMagicWord}
               disabled={isLoading}
               error={t(errors.transferConfirm?.message)}
               // weird issue with the default value, likely some react form shenanigan

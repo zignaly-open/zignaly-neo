@@ -1,92 +1,94 @@
 {
-    "percentageChangedSuccess": "Profit percentage updated successfully.",
-    "addMoreInvestmentSuccess": "You invested {{amount}} {{currency}} successfully in service {{serviceName}}.",
-    "withdrawInvestmentSuccess": "Withdrawal requested successfully.",
-    "validation-indicateAnAmount": "You must indicate an amount.",
-    "error-blockedInvestment": "All your funds are pending to be transferred out of the service.",
-    "form": {
-      "title": "Amount Invested:",
-      "profits": {
-        "title": "What to do with profits:",
-        "left": "Reinvest",
-        "right": "Withdraw"
-      },
-      "inputAmount": {
-        "label": "Amount to Invest:",
-        "labelBalance": "Available:"
-      },
-      "link": {
-        "investMore": "Invest more",
-        "withdraw": "Withdraw Investment"
-      },
-      "button": {
-        "saveAndClose": "Save and Close",
-        "saveAndInvestment": "Save and Add to Investment",
-        "continue-to-confirmation": "Continue to Confirmation"
-      }
+  "percentageChangedSuccess": "Profit percentage updated successfully.",
+  "addMoreInvestmentSuccess": "You invested {{amount}} {{currency}} successfully in service {{serviceName}}.",
+  "withdrawInvestmentSuccess": "Withdrawal requested successfully.",
+  "validation-indicateAnAmount": "You must indicate an amount.",
+  "error-blockedInvestment": "All your funds are pending to be transferred out of the service.",
+  "form": {
+    "title": "Amount Invested:",
+    "profits": {
+      "title": "What to do with profits:",
+      "left": "Reinvest",
+      "right": "Withdraw"
     },
-    "pendingMajorThan": {
-      "type": "New investment",
-      "status": "Processing in 24 hrs"
+    "inputAmount": {
+      "label": "Amount to Invest:",
+      "labelBalance": "Available:"
     },
-    "profitOutMajorThan": {
-      "type": "Profits",
-      "status": "Waiting for next accounting"
+    "link": {
+      "investMore": "Invest more",
+      "withdraw": "Withdraw Investment"
     },
-    "transferOutMajorThan": {
-      "type": "Transfer Out",
-      "status": "Waiting for next accounting"
-    },
-    "pendingTransactions": {
-      "status_zero": "You have no item",
-      "status_one": "You have 1 pending transaction",
-      "status_other": "You have {{count}} pending transactions",
-      "link-label": "View"
-    },
-    "investorDetail-successFee": "{{fee}}% Success fee",
-    "modal": {
-      "withdrawInvestment": {
-        "title": "Withdrawal Request",
-        "afterPosition": {
-          "title": "Withdraw After Positions Close",
-          "description": "You will receive your funds after the trader free them. Take into account that your investment is at risk until is transferred to you. This usually takes a few days, but could take more. It is up to them.",
-          "button": {
-            "subtitle": "Withdraw on free funds",
-            "title": "No Fee"
-          }
-        },
-        "instant": {
-          "title": "Instant Withdrawal",
-          "description": "Instant withdrawals incur a 5% fee because the trader has open positions and could be liquidated. To avoid this, Zignaly must cover your funds and inherit your risk, hence the fee.",
-          "button": {
-            "subtitle": "Withdraw instantly",
-            "title": "5% Fee"
-          }
+    "button": {
+      "saveAndClose": "Save and Close",
+      "saveAndInvestment": "Save and Add to Investment",
+      "continue-to-confirmation": "Continue to Confirmation"
+    }
+  },
+  "pendingMajorThan": {
+    "type": "New investment",
+    "status": "Processing in 24 hrs"
+  },
+  "profitOutMajorThan": {
+    "type": "Profits",
+    "status": "Waiting for next accounting"
+  },
+  "transferOutMajorThan": {
+    "type": "Transfer Out",
+    "status": "Waiting for next accounting"
+  },
+  "pendingTransactions": {
+    "status_zero": "You have no item",
+    "status_one": "You have 1 pending transaction",
+    "status_other": "You have {{count}} pending transactions",
+    "link-label": "View"
+  },
+  "investorDetail-successFee": "{{fee}}% Success fee",
+  "modal": {
+    "withdrawInvestment": {
+      "title": "Withdrawal Request",
+      "afterPosition": {
+        "title": "Withdraw After Positions Close",
+        "description": "You will receive your funds after the trader free them. Take into account that your investment is at risk until is transferred to you. This usually takes a few days, but could take more. It is up to them.",
+        "button": {
+          "subtitle": "Withdraw on free funds",
+          "title": "No Fee"
         }
       },
-      "pendingTransaction": {
-        "title": "Pending Transactions",
-        "tableHeader": {
-          "amount": "Amount",
-          "type": "Type",
-          "status": "Status"
-        },
-        "button": "Back"
-      },
-      "editInvestments": {
-        "title": "Edit Investment",
-        "loading": "Loading edit investment"
+      "instant": {
+        "title": "Instant Withdrawal",
+        "description": "Instant withdrawals incur a 5% fee because the trader has open positions and could be liquidated. To avoid this, Zignaly must cover your funds and inherit your risk, hence the fee.",
+        "button": {
+          "subtitle": "Withdraw instantly",
+          "title": "5% Fee"
+        }
       }
     },
-    "modalSuccess": {
-      "title": "Investment Processing (Up to 24h)",
-      "description": "Your funds will be transferred into the service’s account within 24 hours. You may withdraw your funds anytime before this transfer is made. Once funds are transferred, you’ll be able to withdraw via a <0>soft</0> or <0>hard disconnection.</0>",
-      "button": "Close"
+    "pendingTransaction": {
+      "title": "Pending Transactions",
+      "tableHeader": {
+        "amount": "Amount",
+        "type": "Type",
+        "status": "Status"
+      },
+      "button": "Back"
     },
+    "editInvestments": {
+      "title": "Edit Investment",
+      "loading": "Loading edit investment"
+    }
+  },
+  "modalSuccess": {
+    "title": "Investment Processing (Up to 24h)",
+    "description": "Your funds will be transferred into the service’s account within 24 hours. You may withdraw your funds anytime before this transfer is made. Once funds are transferred, you’ll be able to withdraw via a <0>soft</0> or <0>hard disconnection.</0>",
+    "button": "Close"
+  },
   "invest-modal": {
     "invest-with": "Invest with",
     "amount-to-invest": "Amount to Invest",
-    "type-transfer": "Type the word “Transfer” in the field below to complete the transfer:",
+    "type-transfer": "Type the word “{{word}}” in the field below to complete the transfer:",
+    "transfer-error": "Invalid value. Please type the correct word.",
+    "transfer-label": "Transfer",
     "i-understand-margin": "I understand my whole {{coin}} balance is now part of the margin and at risk",
     "i-understand-money-transferred": "I understand my funds will be transferred to the trader's pool and will no longer appear in my available balance"
   }

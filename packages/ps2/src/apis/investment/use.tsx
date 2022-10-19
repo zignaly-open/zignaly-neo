@@ -61,10 +61,10 @@ export function useIsInvestedInService(serviceId: string): {
     },
   );
 
-  const invested = data?.[exchange.internalId];
+  const invested = isAuthenticated && data?.[exchange?.internalId];
 
   return {
-    isLoading: isLoading || isFetching,
+    isLoading: isAuthenticated && (isLoading || isFetching),
     refetch,
     thisAccount: !!invested,
     accounts: data,
@@ -85,13 +85,11 @@ export function useCurrentBalance(): { id: string; balance: string } {
   );
 }
 
-export function useUpdateTakeProfitPercentage(): {
+export function useUpdateTakeProfitPercentage(serviceId: string): {
   isLoading: boolean;
   edit: ({
     profitPercentage,
-    serviceId,
   }: {
-    serviceId: string;
     profitPercentage: number | string;
   }) => Promise<void>;
 } {
@@ -99,7 +97,7 @@ export function useUpdateTakeProfitPercentage(): {
   const exchange = useActiveExchange();
   return {
     isLoading,
-    edit: async ({ profitPercentage, serviceId }) => {
+    edit: async ({ profitPercentage }) => {
       await update({
         profitPercentage,
         serviceId,
@@ -109,56 +107,61 @@ export function useUpdateTakeProfitPercentage(): {
   };
 }
 
-export function useInvestInService(): {
+export function useInvestInService(serviceId: string): {
   isLoading: boolean;
   invest: ({
     profitPercentage,
     amount,
-    serviceId,
   }: {
-    serviceId: string;
     profitPercentage: number | string;
     amount: string;
   }) => Promise<void>;
 } {
   const [update, { isLoading }] = useInvestInServiceMutation();
+  const { refetch } = useCoinBalances();
+  const { refetch: refetchInvestedState } = useIsInvestedInService(serviceId);
   const exchange = useActiveExchange();
+
   return {
     isLoading,
-    invest: async ({ profitPercentage, serviceId, amount }) => {
+    invest: async ({ profitPercentage, amount }) => {
       await update({
         profitPercentage,
         serviceId,
         amount,
         exchangeInternalId: exchange.internalId,
       }).unwrap();
+      refetchInvestedState();
+      refetch(); // TODO: proper cache invalidation
     },
   };
 }
 
-export function useUpdateTakeProfitAndInvestMore(): {
+export function useUpdateTakeProfitAndInvestMore(serviceId: string): {
   isLoading: boolean;
   edit: ({
     profitPercentage,
-    serviceId,
     amount,
   }: {
-    serviceId: string;
     amount: BigNumber | number | string;
     profitPercentage: number | string;
   }) => Promise<void>;
 } {
   const [update, { isLoading }] = useUpdateTakeProfitAndInvestMoreMutation();
   const exchange = useActiveExchange();
+  const { refetch } = useCoinBalances();
+  const { refetch: refetchInvestedState } = useIsInvestedInService(serviceId);
   return {
     isLoading,
-    edit: async ({ profitPercentage, serviceId, amount }) => {
+    edit: async ({ profitPercentage, amount }) => {
       await update({
         profitPercentage,
         serviceId,
         exchangeInternalId: exchange.internalId,
         amount: amount.toString(),
       }).unwrap();
+      refetchInvestedState();
+      refetch(); // TODO: proper cache invalidation
     },
   };
 }
