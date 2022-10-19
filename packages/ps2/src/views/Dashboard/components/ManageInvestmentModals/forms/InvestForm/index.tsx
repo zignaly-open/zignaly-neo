@@ -158,6 +158,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           render={({ field }) => (
             <InputText
               label={t('invest-modal.type-transfer')}
+              placeholder={t('invest-modal.transfer-label')}
               disabled={isLoading}
               error={t(errors.transferConfirm?.message)}
               // weird issue with the default value, likely some react form shenanigan

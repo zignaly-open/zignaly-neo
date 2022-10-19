@@ -6,9 +6,15 @@ export const EditInvestmentValidation = yup.object().shape({
   understandMargin: yup.boolean().oneOf([true], 'error:error.required'),
   transferConfirm: yup
     .string()
-    .test('text-matches', 'error:error.invalid-value', function (value) {
-      return value === 'Transfer' || this.parent.step === 1;
-    }),
+    .test(
+      'text-matches',
+      'edit-investment:invest-modal.transfer-error',
+      function (value) {
+        return (
+          value.toLocaleLowerCase() === 'transfer' || this.parent.step === 1
+        );
+      },
+    ),
   understandMoneyTransferred: yup
     .boolean()
     .oneOf([true], 'error:error.required'),
