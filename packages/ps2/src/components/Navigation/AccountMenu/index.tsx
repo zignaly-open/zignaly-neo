@@ -29,7 +29,7 @@ import {
   ROUTE_SIGNUP,
   ROUTE_MY_BALANCES,
 } from '../../../routes';
-import { Link, useNavigate } from 'react-router-dom';
+import { generatePath, Link, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
 
 function AccountMenu(): React.ReactElement | null {
@@ -112,11 +112,13 @@ function AccountMenu(): React.ReactElement | null {
         {
           label: t('account-menu.notAuth-dropdown-link-dashboard'),
           id: 'menu__dashboard',
+          href: generatePath(ROUTE_DASHBOARD),
           onClick: () => navigate(ROUTE_DASHBOARD),
         },
         {
           label: t('account-menu.notAuth-dropdown-link-balances'),
           id: 'menu__my-balance',
+          href: generatePath(ROUTE_MY_BALANCES),
           onClick: () => navigate(ROUTE_MY_BALANCES),
         },
         {

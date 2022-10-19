@@ -1,5 +1,5 @@
 import Popover from "@mui/material/Popover";
-import React, { useImperativeHandle } from "react";
+import React, { MouseEvent, useImperativeHandle } from "react";
 import { DropDownProps, DropDownHandle, DropDownOption } from "./types";
 import {
   ArrowBottomIconStyled,
@@ -52,8 +52,8 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
     }),
     [anchorEl, isOpen],
   );
-
-  const onClick = (f: () => void) => () => {
+  const onClick = (f: () => void) => (e: MouseEvent) => {
+    e.preventDefault();
     handleClose();
     f();
   };
@@ -102,7 +102,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
                     </ComponentWrapper>
                   );
 
-                if (option.href)
+                if (option.href || option.onClick)
                   return (
                     <NavLink
                       id={option.id}
@@ -112,22 +112,12 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
                       active={option?.active}
                       as={"a"}
                       href={option.href}
+                      onClick={option.onClick && onClick(option.onClick)}
                     >
                       {option.label}
                     </NavLink>
                   );
-                if (option.onClick)
-                  return (
-                    <NavLink
-                      id={option.id}
-                      key={key}
-                      separator={option.separator}
-                      active={option?.active}
-                      onClick={onClick(option.onClick)}
-                    >
-                      {option.label}
-                    </NavLink>
-                  );
+
                 if (option.children)
                   return (
                     <ChildContainer

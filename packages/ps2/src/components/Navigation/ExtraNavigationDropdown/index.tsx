@@ -67,6 +67,11 @@ const ExtraNavigationDropdown: React.FC = () => {
         {
           label: t('main-menu.dropdown-link-forTrading'),
           id: 'menu__for-trading',
+          href:
+            service &&
+            generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+              serviceId: service.serviceId?.toString(),
+            }),
           onClick: () =>
             navigate(
               service
