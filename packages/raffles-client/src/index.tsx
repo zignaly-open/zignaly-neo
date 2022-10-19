@@ -6,6 +6,8 @@ import EntryPoint from './EntryPoint';
 import reportWebVitals from './reportWebVitals';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
+window.subscribersSiteId = '753b0b7b-368a-4b7b-8cb6-eb210047b5db';
+
 ReactDOM.render(
   <React.StrictMode>
     <React.Suspense fallback={null}>
@@ -14,7 +16,7 @@ ReactDOM.render(
           <Helmet>
             <script
               type='text/javascript'
-              src='scripts/firebase-messaging-sw.js'
+              src='https://cdn.subscribers.com/assets/subscribers.js'
               defer
             ></script>
           </Helmet>

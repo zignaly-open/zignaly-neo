@@ -39,5 +39,6 @@ declare module '@mui/material/Button' {
 declare global {
   interface Window {
     ethereum?: MetaMaskInpageProvider;
+    subscribersSiteId: string;
   }
 }
