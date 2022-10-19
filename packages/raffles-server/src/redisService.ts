@@ -199,7 +199,7 @@ const finalizeAuction = async (auctionId: number) => {
         transactionId: txId,
       };
     },
-    50,
+    25,
   );
 
   if (!isTest) {
