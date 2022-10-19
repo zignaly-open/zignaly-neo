@@ -11,7 +11,10 @@ export const EditInvestmentValidation = yup.object().shape({
       'edit-investment:invest-modal.transfer-error',
       function (value) {
         return (
-          value.toLocaleLowerCase() === 'transfer' || this.parent.step === 1
+          value.toLocaleLowerCase() === 'transfer' ||
+          value.toLocaleLowerCase() ===
+            this.parent.transferLabelForValidation?.toLocaleLowerCase() ||
+          this.parent.step === 1
         );
       },
     ),

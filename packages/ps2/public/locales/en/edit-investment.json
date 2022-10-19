@@ -86,7 +86,7 @@
   "invest-modal": {
     "invest-with": "Invest with",
     "amount-to-invest": "Amount to Invest",
-    "type-transfer": "Type the word “Transfer” in the field below to complete the transfer:",
+    "type-transfer": "Type the word “{{word}}” in the field below to complete the transfer:",
     "transfer-error": "Invalid value. You need to type the word \"transfer\"",
     "transfer-label": "Transfer",
     "i-understand-margin": "I understand my whole {{coin}} balance is now part of the margin and at risk",

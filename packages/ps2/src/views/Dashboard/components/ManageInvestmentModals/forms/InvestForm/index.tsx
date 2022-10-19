@@ -32,6 +32,9 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
   const service = useSelectedInvestment();
   const toast = useToast();
 
+  // the safe word is Fluggaenkoecchicebolsen
+  const transferMagicWord = t('invest-modal.transfer-label');
+
   const {
     handleSubmit,
     control,
@@ -47,6 +50,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
         value: '',
         token: coin,
       },
+      transferLabelForValidation: transferMagicWord,
       transferConfirm: '',
       profitPercentage: 30,
       step: 1,
@@ -157,8 +161,10 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           control={control}
           render={({ field }) => (
             <InputText
-              label={t('invest-modal.type-transfer')}
-              placeholder={t('invest-modal.transfer-label')}
+              label={t('invest-modal.type-transfer', {
+                word: transferMagicWord,
+              })}
+              placeholder={transferMagicWord}
               disabled={isLoading}
               error={t(errors.transferConfirm?.message)}
               // weird issue with the default value, likely some react form shenanigan
