@@ -28,8 +28,8 @@ import NumberFormat from 'react-number-format';
 function InvestForm({ close, onInvested }: InvestFormProps) {
   const coin = useCurrentBalance();
   const { t } = useTranslation('edit-investment');
-  const { isLoading, invest } = useInvestInService();
   const service = useSelectedInvestment();
+  const { isLoading, invest } = useInvestInService(service.serviceId);
   const toast = useToast();
 
   // the safe word is Fluggaenkoecchicebolsen
@@ -78,7 +78,6 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
   }: InvestFormData) => {
     await invest({
       profitPercentage,
-      serviceId: service.serviceId,
       amount: amountTransfer?.value?.toString(),
     });
     toast.success(
