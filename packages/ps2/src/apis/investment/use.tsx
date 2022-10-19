@@ -61,10 +61,10 @@ export function useIsInvestedInService(serviceId: string): {
     },
   );
 
-  const invested = data?.[exchange.internalId];
+  const invested = isAuthenticated && data?.[exchange?.internalId];
 
   return {
-    isLoading: isLoading || isFetching,
+    isLoading: isAuthenticated && (isLoading || isFetching),
     refetch,
     thisAccount: !!invested,
     accounts: data,
