@@ -10,13 +10,15 @@ ReactDOM.render(
   <React.StrictMode>
     <React.Suspense fallback={null}>
       <HelmetProvider>
-        <Helmet>
-          <script
-            type='text/javascript'
-            src='scripts/firebase-messaging-sw.js'
-            defer
-          ></script>
-        </Helmet>
+        {process.env.NODE_ENV === 'production' && (
+          <Helmet>
+            <script
+              type='text/javascript'
+              src='scripts/firebase-messaging-sw.js'
+              defer
+            ></script>
+          </Helmet>
+        )}
         <EntryPoint />
       </HelmetProvider>
     </React.Suspense>
