@@ -86,7 +86,9 @@
   "invest-modal": {
     "invest-with": "CH-Ïńvëŝṫ wïṫĥ",
     "amount-to-invest": "CH-Áṁöüńṫ ṫö Ïńvëŝṫ",
-    "type-transfer": "CH-Ṫyṗë ṫĥë wöѓḋ “Ṫѓáńŝḟëѓ” ïń ṫĥë ḟïëlḋ bëlöw ṫö ĉöṁṗlëṫë ṫĥë ṫѓáńŝḟëѓ:",
+    "type-transfer": "CH-Ṫyṗë ṫĥë wöѓḋ “{{word}}” ïń ṫĥë ḟïëlḋ bëlöw ṫö ĉöṁṗlëṫë ṫĥë ṫѓáńŝḟëѓ:",
+    "transfer-error": "CH-Ïńválïḋ válüë. Ṗlëáŝë ṫyṗë ṫĥë ĉöѓѓëĉṫ wöѓḋ.",
+    "transfer-label": "CH-Ṫѓáńŝḟëѓ",
     "i-understand-margin": "CH-Ï üńḋëѓŝṫáńḋ ṁy wĥölë {{coin}} báláńĉë ïŝ ńöw ṗáѓṫ öḟ ṫĥë ṁáѓĝïń áńḋ áṫ ѓïŝk",
     "i-understand-money-transferred": "CH-Ï üńḋëѓŝṫáńḋ ṁy ḟüńḋŝ wïll bë ṫѓáńŝḟëѓѓëḋ ṫö ṫĥë ṫѓáḋëѓ'ŝ ṗööl áńḋ wïll ńö löńĝëѓ áṗṗëáѓ ïń ṁy áváïláblë báláńĉë"
   }
