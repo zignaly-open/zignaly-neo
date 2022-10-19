@@ -87,7 +87,7 @@
     "invest-with": "Invest with",
     "amount-to-invest": "Amount to Invest",
     "type-transfer": "Type the word “{{word}}” in the field below to complete the transfer:",
-    "transfer-error": "Invalid value. You need to type the word \"transfer\"",
+    "transfer-error": "Invalid value. Please type the correct word.",
     "transfer-label": "Transfer",
     "i-understand-margin": "I understand my whole {{coin}} balance is now part of the margin and at risk",
     "i-understand-money-transferred": "I understand my funds will be transferred to the trader's pool and will no longer appear in my available balance"
