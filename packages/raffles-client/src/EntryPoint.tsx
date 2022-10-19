@@ -21,12 +21,6 @@ import ModalProvider from 'mui-modal-provider';
 import { BrowserRouter } from 'react-router-dom';
 import { Toaster as ToastProvider } from 'react-hot-toast';
 
-if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/firebase-messaging-sw.js');
-  });
-}
-
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
 });

@@ -4,11 +4,23 @@ import './index.css';
 import './util/i18next';
 import EntryPoint from './EntryPoint';
 import reportWebVitals from './reportWebVitals';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 ReactDOM.render(
   <React.StrictMode>
     <React.Suspense fallback={null}>
-      <EntryPoint />
+      <HelmetProvider>
+        {process.env.NODE_ENV === 'production' && (
+          <Helmet>
+            <script
+              type='text/javascript'
+              src='scripts/firebase-messaging-sw.js'
+              defer
+            ></script>
+          </Helmet>
+        )}
+        <EntryPoint />
+      </HelmetProvider>
     </React.Suspense>
   </React.StrictMode>,
   document.querySelector('#root') as HTMLElement,
