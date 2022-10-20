@@ -25,6 +25,8 @@ import UserSettingsModal from '../Modals/UserSettings';
 import { useMediaQuery } from '@mui/material';
 import theme from 'theme';
 import { People, Redeem } from '@mui/icons-material';
+import { triggerTz } from 'util/tz';
+import { getToken } from 'util/token';
 
 const StyledPeopleIcon = styled(People)`
   color: ${(props) => props.theme.neutral200};
@@ -60,6 +62,18 @@ const Header = () => {
   const logout = useLogout();
   const userRef = useRef<UserType>();
   const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const href = window.location.href;
+
+  // Url tracking
+  // Todo: extract to separate hook
+  const token = getToken();
+  useEffect(() => {
+    // Avoid making an unnecessary request if user id is loading
+    if (!token || currentUser?.id) {
+      triggerTz(href, null, currentUser?.id);
+    }
+  }, [href, currentUser, token]);
 
   useEffect(() => {
     if (currentUser) {
