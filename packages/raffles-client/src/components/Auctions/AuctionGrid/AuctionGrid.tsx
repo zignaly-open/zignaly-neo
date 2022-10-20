@@ -49,6 +49,7 @@ const AuctionGrid: React.FC = () => {
             md={6}
             display='flex'
             justifyContent='center'
+            mt='54px'
           >
             <AuctionCard auction={x} />
           </Grid>
