@@ -2,7 +2,7 @@ type tzData = {
   action: string;
   urlReferer?: string;
   urlDestination?: string;
-  userId?: string;
+  userId?: string | number;
   tzid?: string;
 };
 
@@ -24,13 +24,18 @@ const sendTz = (data: tzData) => {
 /**
  * Trigger internal tracking event.
  */
-export const triggerTz = async (location: string, prevLocation?: string) => {
+export const triggerTz = async (
+  location: string,
+  prevLocation?: string,
+  userId?: number,
+) => {
   if (process.env.REACT_APP_ENABLE_TRACKING !== 'true') return;
 
   const data = {
     action: 'sData',
     urlReferer: prevLocation || document.referrer,
     urlDestination: location,
+    userId,
     tid: localStorage.getItem('tid'),
   };
 
