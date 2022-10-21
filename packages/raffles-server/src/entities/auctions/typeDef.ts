@@ -47,6 +47,7 @@ export const typeDef = gql`
 
   extend type Query {
     auctions(id: ID, unannounced: Boolean, privateCode: String): [Auction]
+    auctions_by_pk(id: ID): Auction
   }
 
   extend type Subscription {

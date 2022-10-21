@@ -2,9 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './util/i18next';
-import EntryPoint from './EntryPoint';
+// import EntryPoint from './EntryPoint';
 import reportWebVitals from './reportWebVitals';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
+import AdminEntryPoint from './admin/AdminEntryPoint';
 
 window.subscribersSiteId = '753b0b7b-368a-4b7b-8cb6-eb210047b5db';
 
@@ -21,7 +22,8 @@ ReactDOM.render(
             ></script>
           </Helmet>
         )}
-        <EntryPoint />
+        {/* <EntryPoint /> */}
+        <AdminEntryPoint />
       </HelmetProvider>
     </React.Suspense>
   </React.StrictMode>,
