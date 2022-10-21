@@ -1,5 +1,5 @@
 import { EventNote } from '@mui/icons-material';
-import { Box, Card, CardMedia } from '@mui/material';
+import { Box, Card, CardMedia, Typography } from '@mui/material';
 import MarkdownInput from './MarkdownInput';
 import React from 'react';
 import {
@@ -17,7 +17,11 @@ import {
   BooleanInput,
   DateTimeInput,
   NumberInput,
+  SelectField,
+  SelectInput,
 } from 'react-admin';
+import { formatDate, parseDate } from './util';
+import { chains } from 'util/chain';
 export const AuctionIcon = EventNote;
 
 export const AuctionList = () => (
@@ -68,55 +72,106 @@ const Poster = () => {
   );
 };
 
+const dateFormatRegex = /^\d{4}-\d{2}-\d{2}$/;
+const dateParseRegex = /(\d{4})-(\d{2})-(\d{2})/;
+
+const convertDateToString = (value) => {
+  // value is a `Date` object
+  if (!(value instanceof Date) || isNaN(value.getDate())) return '';
+  const pad = '00';
+  const yyyy = value.getFullYear().toString();
+  const MM = (value.getMonth() + 1).toString();
+  const dd = value.getDate().toString();
+  return `${yyyy}-${(pad + MM).slice(-2)}-${(pad + dd).slice(-2)}`;
+};
+
+const dateFormatter = (value) => {
+  // null, undefined and empty string values should not go through dateFormatter
+  // otherwise, it returns undefined and will make the input an uncontrolled one.
+  if (value == null || value === '') return '';
+  console.log(convertDateToString(value));
+  if (value instanceof Date) return convertDateToString(value);
+  // Valid dates should not be converted
+  if (dateFormatRegex.test(value)) return value;
+
+  return convertDateToString(new Date(value));
+};
+
+const dateParser = (value) => {
+  //value is a string of "YYYY-MM-DD" format
+  const match = dateParseRegex.exec(value);
+  if (match === null) return;
+  const d = new Date(match[1], parseInt(match[2], 10) - 1, match[3]);
+  if (isNaN(d.getDate())) return;
+  console.log(d);
+  return d;
+};
+
+const AuctionForm = () => (
+  <SimpleForm>
+    <Typography variant='h6' gutterBottom>
+      Auction
+    </Typography>
+    <TextInput source='title' sx={{ minWidth: '300px' }} required />
+    <Poster />
+    <TextInput source='imageUrl' sx={{ minWidth: '300px' }} />
+    <SelectInput
+      required
+      source='chain'
+      choices={Object.keys(chains).map((c) => ({
+        id: c,
+        name: chains[c].name,
+      }))}
+    />
+    <MarkdownInput source='description' label='Description' required />
+    <MarkdownInput source='claimSuccess' label='Claim success' />
+    <Typography variant='h6' gutterBottom mt={1}>
+      Socials
+    </Typography>
+    <Box display='flex' gap={2}>
+      <TextInput source='website' />
+      <TextInput source='discord' />
+      <TextInput source='telegram' />
+      <TextInput source='twitter' />
+    </Box>
+    <Typography variant='h6' gutterBottom mt={1}>
+      Dates (UTC)
+    </Typography>
+    <DateTimeInput source='announcementDate' />
+    <Box display='flex' gap='1em'>
+      <DateInput
+        source='startDate'
+        required
+        format={dateFormatter}
+        parse={dateParser}
+        options={{ onBlur: () => {} }}
+      />
+      <DateTimeInput label='Expiration' source='expiresAt' required />
+      <DateTimeInput label='Max Expiration' source='maxExpiryDate' required />
+    </Box>
+    <DateTimeInput label='Max Claim Date' source='maxClaimDate' />
+    <Typography variant='h6' gutterBottom mt={1}>
+      Params
+    </Typography>
+    <Box display='flex' gap='1em'>
+      <NumberInput source='currentBid' defaultValue={0.01} />
+      <NumberInput source='bidFee' defaultValue={1} />
+      <NumberInput source='bidStep' defaultValue={0.01} />
+    </Box>
+    <NumberInput source='numberOfWinners' required />
+    <TextInput source='privateCode' />
+    <BooleanInput source='isExclusiveToKuCoin' label='KuCoin Only' />
+  </SimpleForm>
+);
+
 export const AuctionEdit = () => (
   <Edit title={<AuctionTitle />}>
-    <SimpleForm>
-      <TextInput source='title' sx={{ minWidth: '300px' }} />
-      {/* <TextInput disabled source='id' /> */}
-      {/* <DateTimeInput disabled label='Creation Date' source='createdAt' /> */}
-      <Poster />
-      <TextInput source='imageUrl' sx={{ minWidth: '300px' }} />
-      <Box display='flex' gap={2}>
-        <DateTimeInput source='announcementDate' />
-        <DateTimeInput source='startDate' />
-      </Box>
-      <Box display='flex' gap='1em'>
-        <DateTimeInput label='Expiration' source='expiresAt' />
-        <DateTimeInput label='Max Expiration' source='maxExpiryDate' />
-      </Box>
-      <DateTimeInput label='Max Claim Date' source='maxClaimDate' />
-      <MarkdownInput source='description' label='Description' />
-      <MarkdownInput source='claimSuccess' label='Claim success' />
-      <Box display='flex' gap={2}>
-        <TextInput source='website' />
-        <TextInput source='discord' />
-        <TextInput source='telegram' />
-        <TextInput source='twitter' />
-      </Box>
-      <TextInput source='chain' />
-      <Box display='flex' gap='1em'>
-        <NumberInput source='currentBid' />
-        <NumberInput source='bidFee' />
-        <NumberInput source='bidStep' />
-      </Box>
-      <NumberInput source='numberOfWinners' />
-      <TextInput source='privateCode' />
-      <BooleanInput source='isExclusiveToKuCoin' label='KuCoin Only' />
-      {/* <TextInput source='title' />
-      <TextInput source='teaser' options={{ multiline: true }} />
-      <TextInput multiline source='body' />
-      <DateInput label='Publication date' source='published_at' />
-      <TextInput source='average_note' />
-      <TextInput disabled label='Nb views' source='views' /> */}
-    </SimpleForm>
+    <AuctionForm />
   </Edit>
 );
 
 export const AuctionCreate = () => (
   <Create title='Create an Auction'>
-    <SimpleForm>
-      <MarkdownInput source='description' label='Description' />
-      <MarkdownInput source='claimSuccess' label='Claim success' />
-    </SimpleForm>
+    <AuctionForm />
   </Create>
 );

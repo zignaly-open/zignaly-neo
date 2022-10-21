@@ -26,7 +26,6 @@ export const typeDef = gql`
     maxClaimDate: Date
     title: String!
     imageUrl: String
-    status: String
     startDate: Date
     website: String
     discord: String
@@ -45,9 +44,30 @@ export const typeDef = gql`
     isExclusiveToKuCoin: Boolean
   }
 
+  input auctions_set_input {
+    expiresAt: Date
+    maxExpiryDate: Date
+    maxClaimDate: Date
+    title: String!
+    imageUrl: String
+    startDate: Date
+    website: String
+    discord: String
+    telegram: String
+    twitter: String
+    bidFee: String
+    currentBid: String
+    description: String
+    claimSuccess: String
+    isFinalized: Boolean
+    numberOfWinners: Int
+    chain: String
+    isExclusiveToKuCoin: Boolean
+    bidStep: Float
+  }
+
   extend type Query {
     auctions(id: ID, unannounced: Boolean, privateCode: String): [Auction]
-    auctions_by_pk(id: ID): Auction
   }
 
   extend type Subscription {
@@ -57,5 +77,6 @@ export const typeDef = gql`
   extend type Mutation {
     bid(id: ID!): String
     claim(id: ID!): Auction
+    update_auctions_by_pk(id: ID!, data: auctions_set_input!): Auction
   }
 `;

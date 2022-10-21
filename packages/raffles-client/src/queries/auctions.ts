@@ -15,7 +15,6 @@ export const GET_AUCTIONS = gql`
       expiresAt
       maxExpiryDate
       maxClaimDate
-      status
       startDate
       currentBid
       website
@@ -28,7 +27,6 @@ export const GET_AUCTIONS = gql`
       imageUrl
       numberOfWinners
       chain
-      isClaimed
       isFinalized
       isExclusiveToKuCoin
       bids {

@@ -10,7 +10,8 @@ import AuctionsRepository from './repository';
 import redisService from '../../redisService';
 import { BALANCE_CHANGED } from '../users/constants';
 import { debounce } from 'lodash';
-import { AuctionBid } from './model';
+import { Auction, AuctionBid } from './model';
+import { User } from '../users/model';
 
 const broadcastAuctionChange = async (auctionId: number) => {
   try {
@@ -47,6 +48,22 @@ export const resolvers = {
     },
   },
   Mutation: {
+    update_auctions_by_pk: async (
+      _: any,
+      { id, data }: { id: number; data: Partial<Auction> },
+      { user }: ApolloContext,
+    ) => {
+      const fullUser = await User.findByPk(user?.id);
+      if (!fullUser?.isAdmin) throw new Error('Not authorized');
+
+      const [, [res]] = await Auction.update(data, {
+        where: { id },
+        returning: true,
+      });
+      if (!res) throw new Error('Auction Not Found');
+
+      return res;
+    },
     bid: async (_: any, { id }: { id: number }, { user }: ApolloContext) => {
       if (!user) {
         throw new Error('User not found');

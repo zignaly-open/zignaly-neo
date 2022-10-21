@@ -13,11 +13,12 @@ import {
   InputHelperText,
   Labeled,
   InputProps,
+  TextInputProps,
 } from 'react-admin';
 import ReactMarkdown from 'react-markdown';
 import MDEditor from '@uiw/react-md-editor';
 
-const MarkdownInput = (props: InputProps) => {
+const MarkdownInput = (props: TextInputProps) => {
   const { onChange, onBlur, ...rest } = props;
   const {
     field,
