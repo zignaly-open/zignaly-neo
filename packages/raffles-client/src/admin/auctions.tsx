@@ -25,7 +25,7 @@ import { chains } from 'util/chain';
 export const AuctionIcon = EventNote;
 
 export const AuctionList = () => (
-  <List>
+  <List sort={{ field: 'id', order: 'desc' }}>
     <Datagrid>
       <TextField source='id' />
       <TextField source='title' />
@@ -34,19 +34,6 @@ export const AuctionList = () => (
       <DateField source='startDate' />
       <TextField source='numberOfWinners' />
       <TextField source='currentBid' />
-      <EditButton />
-    </Datagrid>
-  </List>
-);
-
-export const PostList = () => (
-  <List>
-    <Datagrid>
-      <TextField source='id' />
-      <TextField source='title' />
-      <TextField source='description' />
-      <TextField source='average_note' />
-      <TextField source='views' />
       <EditButton />
     </Datagrid>
   </List>

@@ -5,6 +5,7 @@ import { User } from '../users/model';
 import { Auction, AuctionBid } from './model';
 import redisService from '../../redisService';
 import { Op } from 'sequelize';
+import { checkAdmin } from '../../util/admin';
 
 const AuctionsRepository = () => {
   const lastBidPopulation = {
@@ -101,11 +102,6 @@ const AuctionsRepository = () => {
       where: auctionsFilter(null, filter),
     });
     return { count };
-  }
-
-  async function checkAdmin(id: number) {
-    const fullUser = await User.findByPk(id);
-    if (!fullUser?.isAdmin) throw new Error('Not authorized');
   }
 
   async function updateAuction(user: ContextUser, data: Partial<Auction>) {

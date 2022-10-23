@@ -1,6 +1,6 @@
 import pubsub from '../../pubsub';
 import { AUCTION_UPDATED } from './constants';
-import { ApolloContext, TransactionType } from '../../types';
+import { ApolloContext, ResourceOptions, TransactionType } from '../../types';
 import { isBalanceSufficientForPayment } from './util';
 import { Payout } from '../payouts/model';
 import { getUserBalance, internalTransfer } from '../../cybavo';
@@ -26,14 +26,6 @@ const broadcastAuctionChange = async (auctionId: number) => {
   }
 };
 const debounceBroadcastAuction = debounce(broadcastAuctionChange, 50);
-
-type ResourceOptions = {
-  sortField: string;
-  sortOrder: 'desc' | 'asc';
-  page: number;
-  perPage: number;
-  filter: { [key: string]: string };
-};
 
 export const resolvers = {
   Query: {

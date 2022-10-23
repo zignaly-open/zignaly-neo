@@ -8,6 +8,7 @@ export const typeDef = gql`
     onboardingCompletedAt: Date
     discordName: String
     email: String
+    createdAt: Date
   }
 
   type AuthUser {
@@ -29,10 +30,26 @@ export const typeDef = gql`
     balance: String!
   }
 
+  input UserFilter {
+    id: ID
+  }
+
   extend type Query {
     me: User
     balance: UserBalance!
     checkUsername(username: String!): Boolean
+    allUsers(
+      page: Int
+      perPage: Int
+      sortField: String
+      sortOrder: String
+      filter: UserFilter
+    ): [User]
+    _allUsersMeta(filter: UserFilter, page: Int, perPage: Int): ListMetadata
+  }
+
+  type ListMetadata {
+    count: Int!
   }
 
   extend type Mutation {
