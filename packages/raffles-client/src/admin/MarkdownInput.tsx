@@ -52,7 +52,7 @@ const MarkdownInput = (props: TextInputProps) => {
       flexDirection='column'
       gap='4px'
     >
-      <Labeled label={props.label}>
+      <Labeled label={props.label} isRequired={rest.required}>
         <MDEditor height={300} {...field} />
       </Labeled>
       <InputHelperText

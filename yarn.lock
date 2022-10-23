@@ -79,7 +79,7 @@
     jsonpointer "^5.0.0"
     leven "^3.1.0"
 
-"@apollo/client@^3.6.9":
+"@apollo/client@^3.3.19", "@apollo/client@^3.6.9":
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.7.0.tgz#1c26a04488f45b3a4779fa2562e4b706402cb876"
   integrity sha512-hp4OvrH1ZIQACRYcIrh/C0WFnY7IM7G6nlTpC8DSTEWxfZQ2kvpvDY0I/hYmCs0oAVrg26g3ANEdOzGWTcYbPg==
@@ -16973,6 +16973,11 @@ grapheme-splitter@^1.0.4:
   resolved "https://registry.yarnpkg.com/grapheme-splitter/-/grapheme-splitter-1.0.4.tgz#9cf3a665c6247479896834af35cf1dbb4400767e"
   integrity sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==
 
+graphql-ast-types-browser@~1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/graphql-ast-types-browser/-/graphql-ast-types-browser-1.0.2.tgz#474305af7e76f9692df6e50a88fb668ce258c4a4"
+  integrity sha512-QuKZ+Et3dE7SyO5c41eNPlJc7+HwQxOzHfmIhqzj4cUgAGyhSwVkKb7K24zom8y6y0VnG7Xb3RRypjIVvfIevQ==
+
 graphql-redis-subscriptions@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/graphql-redis-subscriptions/-/graphql-redis-subscriptions-2.5.0.tgz#edc50d46122bc1491e37cd29b484f15c73653764"
@@ -23637,6 +23642,11 @@ pluralize@^8.0.0:
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-8.0.0.tgz#1a6fa16a38d12a1901e0320fa017051c539ce3b1"
   integrity sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==
 
+pluralize@~7.0.0:
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-7.0.0.tgz#298b89df8b93b0221dbf421ad2b1b1ea23fc6777"
+  integrity sha512-ARhBOdzS3e41FbkW/XWrTEtukqqLoK5+Z/4UeDaLuSW+39JPeFgs4gCGqsrJHVZX0fUrx//4OF0K1CUGwlIFow==
+
 pngjs@^3.3.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-3.4.0.tgz#99ca7d725965fb655814eaf65f38f12bbdbf555f"
@@ -24744,6 +24754,26 @@ ra-core@^4.4.3:
     query-string "^7.1.1"
     react-is "^17.0.2"
     react-query "^3.32.1"
+
+ra-data-graphql-simple@^4.4.3:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql-simple/-/ra-data-graphql-simple-4.4.3.tgz#bee2e0c8a619c5715d1ddb120309312242415ae9"
+  integrity sha512-yI15513ScSN+O9URAG/ALPnAiR3imTQIc6+SWd81tzCAAK5bkRVjR+ZEtuWauAqslIlpki4eejLMyANnHD5jqA==
+  dependencies:
+    "@apollo/client" "^3.3.19"
+    graphql-ast-types-browser "~1.0.2"
+    lodash "~4.17.5"
+    pluralize "~7.0.0"
+    ra-data-graphql "^4.4.3"
+
+ra-data-graphql@^4.4.3:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/ra-data-graphql/-/ra-data-graphql-4.4.3.tgz#f1c94d44365758e9eccdb91c45355a56f5ac2ef5"
+  integrity sha512-r/fsOd9eEmrvBuWBwx7DbWRdZIYP02meHnmfbRL3//VKjWhHqySYEAwd0EUrwFL8MutzWXHocXjVtIAwtuBBfw==
+  dependencies:
+    "@apollo/client" "^3.3.19"
+    lodash "~4.17.5"
+    pluralize "~7.0.0"
 
 ra-i18n-polyglot@^4.4.3:
   version "4.4.3"

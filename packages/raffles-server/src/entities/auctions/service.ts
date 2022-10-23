@@ -28,35 +28,47 @@ const AuctionsRepository = () => {
     return await User.findAll({ where: { id: ids } });
   }
 
+  type AuctionFilter = {
+    unannounced?: boolean;
+    privateCode?: string;
+  };
+
+  const auctionsFilter = (auctionId?: number, filter: AuctionFilter = {}) => ({
+    ...(!filter.unannounced && {
+      announcementDate: {
+        [Op.or]: [
+          null,
+          {
+            [Op.lte]: new Date(),
+          },
+        ],
+      },
+    }),
+    ...(auctionId && { id: auctionId }),
+    privateCode: {
+      [Op.or]: [null, filter.privateCode ?? null],
+    },
+  });
+
   async function getAuctionsWithBids(
     auctionId?: number,
     user?: ContextUser,
-    unannounced?: boolean,
-    privateCode: string = null,
+    sortField = 'id',
+    sortOrder = 'desc',
+    page = 0,
+    perPage = 25,
+    filter?: AuctionFilter,
   ) {
     const auctions = (await Auction.findAll({
-      where: {
-        ...(!unannounced && {
-          announcementDate: {
-            [Op.or]: [
-              null,
-              {
-                [Op.lte]: new Date(),
-              },
-            ],
-          },
-        }),
-        ...(auctionId && { id: auctionId }),
-        privateCode: {
-          [Op.or]: [null, privateCode],
-        },
-      },
+      where: auctionsFilter(auctionId, filter),
       include: [{ model: AuctionBid, include: [User] }],
       order: [
-        ['id', 'DESC'],
+        [sortField, sortOrder],
         [{ model: AuctionBid, as: 'bids' }, 'position', 'ASC'],
       ],
-    })) as unknown as (AuctionType & { dataValues: AuctionType })[];
+      limit: perPage,
+      offset: page * perPage,
+    })) as unknown as AuctionType[];
 
     for await (const a of auctions) {
       // Apply redis data
@@ -84,11 +96,47 @@ const AuctionsRepository = () => {
     return auctions;
   }
 
+  async function countAuctions(filter?: AuctionFilter) {
+    const count = await Auction.count({
+      where: auctionsFilter(null, filter),
+    });
+    return { count };
+  }
+
+  async function checkAdmin(id: number) {
+    const fullUser = await User.findByPk(id);
+    if (!fullUser?.isAdmin) throw new Error('Not authorized');
+  }
+
+  async function updateAuction(user: ContextUser, data: Partial<Auction>) {
+    await checkAdmin(user?.id);
+
+    const [, [auction]] = await Auction.update(data, {
+      where: { id: data.id },
+      returning: true,
+    });
+    if (!auction) throw new Error('Auction Not Found');
+
+    return auction;
+  }
+
+  async function createAuction(user: ContextUser, data: Partial<Auction>) {
+    await checkAdmin(user?.id);
+
+    const auction = await Auction.create(data, { returning: true });
+    if (!auction) throw new Error("Can't create auction");
+
+    return auction;
+  }
+
   return {
     getAuctionsWithBids,
+    countAuctions,
     findAuction,
     lastBidPopulation,
     findUsers,
+    updateAuction,
+    createAuction,
   };
 };
 

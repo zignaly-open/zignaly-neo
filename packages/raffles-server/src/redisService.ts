@@ -1,7 +1,7 @@
 import Redis from 'ioredis';
 import { isTest, redisURL, zignalySystemId } from '../config';
 import { AUCTION_UPDATED } from './entities/auctions/constants';
-import AuctionsRepository from './entities/auctions/repository';
+import AuctionsService from './entities/auctions/service';
 import { Auction, AuctionBid } from './entities/auctions/model';
 import pubsub from './pubsub';
 import { RedisAuctionData, TransactionType } from './types';
@@ -221,9 +221,7 @@ const finalizeAuction = async (auctionId: number) => {
   await redis.del(`AUCTION:${auctionId}`);
   await redis.del(`AUCTION_LEADERBOARD:${auctionId}`);
 
-  const [auctionUpdated] = await AuctionsRepository.getAuctionsWithBids(
-    auctionId,
-  );
+  const [auctionUpdated] = await AuctionsService.getAuctionsWithBids(auctionId);
   pubsub.publish(AUCTION_UPDATED, {
     auctionUpdated,
   });

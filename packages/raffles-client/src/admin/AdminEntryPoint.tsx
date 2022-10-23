@@ -1,4 +1,3 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
 import React, { useEffect, useState } from 'react';
 import { Admin, defaultTheme, Resource } from 'react-admin';
 import {
@@ -7,7 +6,7 @@ import {
   AuctionList,
   AuctionCreate,
 } from './auctions';
-import { dataProvider } from './dataProvider';
+import buildGraphQLProvider from './dataProvider';
 
 const theme = {
   ...defaultTheme,
@@ -17,6 +16,14 @@ const theme = {
 };
 
 const AdminEntryPoint = () => {
+  const [dataProvider, setDataProvider] = useState(null);
+
+  useEffect(() => {
+    buildGraphQLProvider().then((graphQlDataProvider) =>
+      setDataProvider(() => graphQlDataProvider),
+    );
+  }, []);
+
   if (!dataProvider) {
     return <div>Loading</div>;
   }
@@ -24,7 +31,7 @@ const AdminEntryPoint = () => {
   return (
     <Admin theme={theme} dataProvider={dataProvider}>
       <Resource
-        name='auctions'
+        name='Auction'
         list={AuctionList}
         edit={AuctionEdit}
         create={AuctionCreate}

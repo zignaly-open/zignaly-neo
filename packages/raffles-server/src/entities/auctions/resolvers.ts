@@ -6,16 +6,15 @@ import { Payout } from '../payouts/model';
 import { getUserBalance, internalTransfer } from '../../cybavo';
 import { isTest, zignalySystemId } from '../../../config';
 import { emitBalanceChanged } from '../users/util';
-import AuctionsRepository from './repository';
+import AuctionsService from './service';
 import redisService from '../../redisService';
 import { BALANCE_CHANGED } from '../users/constants';
 import { debounce } from 'lodash';
 import { Auction, AuctionBid } from './model';
-import { User } from '../users/model';
 
 const broadcastAuctionChange = async (auctionId: number) => {
   try {
-    const [auctionUpdated] = await AuctionsRepository.getAuctionsWithBids(
+    const [auctionUpdated] = await AuctionsService.getAuctionsWithBids(
       auctionId,
     );
 
@@ -28,41 +27,69 @@ const broadcastAuctionChange = async (auctionId: number) => {
 };
 const debounceBroadcastAuction = debounce(broadcastAuctionChange, 50);
 
+type ResourceOptions = {
+  sortField: string;
+  sortOrder: 'desc' | 'asc';
+  page: number;
+  perPage: number;
+  filter: { [key: string]: string };
+};
+
 export const resolvers = {
   Query: {
-    auctions: async (
+    Auction: async (_: any, { id }: { id: number }) => {
+      return Auction.findByPk(id);
+    },
+    allAuctions: async (
       _: any,
-      {
-        id,
-        unannounced,
-        privateCode,
-      }: { id: number; unannounced: boolean; privateCode: string },
+      data: ResourceOptions,
       { user }: ApolloContext,
     ) => {
-      return await AuctionsRepository.getAuctionsWithBids(
-        id,
+      return await AuctionsService.getAuctionsWithBids(
+        null,
         user,
-        unannounced,
-        privateCode,
+        data.sortField,
+        data.sortOrder,
+        data.page,
+        data.perPage,
+        data.filter,
       );
+    },
+    _allAuctionsMeta: async (
+      _: any,
+      {
+        filter,
+      }: {
+        filter: ResourceOptions['filter'];
+      },
+    ) => {
+      return AuctionsService.countAuctions(filter);
     },
   },
   Mutation: {
-    update_auctions_by_pk: async (
+    updateAuction: async (
       _: any,
-      { id, data }: { id: number; data: Partial<Auction> },
+      data: Partial<Auction>,
       { user }: ApolloContext,
     ) => {
-      const fullUser = await User.findByPk(user?.id);
-      if (!fullUser?.isAdmin) throw new Error('Not authorized');
-
-      const [, [res]] = await Auction.update(data, {
-        where: { id },
-        returning: true,
-      });
-      if (!res) throw new Error('Auction Not Found');
-
-      return res;
+      try {
+        return AuctionsService.updateAuction(user, data);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+    },
+    createAuction: async (
+      _: any,
+      data: Partial<Auction>,
+      { user }: ApolloContext,
+    ) => {
+      try {
+        return AuctionsService.createAuction(user, data);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
     },
     bid: async (_: any, { id }: { id: number }, { user }: ApolloContext) => {
       if (!user) {
@@ -90,12 +117,11 @@ export const resolvers = {
         throw e;
       }
     },
-
     claim: async (_: any, { id }: { id: number }, { user }: ApolloContext) => {
       if (!user) {
         throw new Error('User not found');
       }
-      const [auction] = await AuctionsRepository.getAuctionsWithBids(id);
+      const [auction] = await AuctionsService.getAuctionsWithBids(id);
 
       if (!auction.isFinalized) throw new Error('Auction not finalized');
       if (auction.maxClaimDate && +new Date(auction.maxClaimDate) < Date.now())
