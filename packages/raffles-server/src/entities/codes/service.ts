@@ -16,7 +16,7 @@ import { checkAdmin } from '../../util/admin';
 
 export const getCodes = async (
   user?: ContextUser,
-  sortField = 'id',
+  sortField = 'createdAt',
   sortOrder = 'desc',
   page = 0,
   perPage = 25,

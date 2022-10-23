@@ -37,6 +37,7 @@ export const typeDef = gql`
     maxTotalRewards: Int
     startDate: Date
     endDate: Date
+    isDefault: Boolean
   }
 
   type CodeCheckInfo {
@@ -82,6 +83,7 @@ export const typeDef = gql`
 
   input CodeFilter {
     id: ID
+    code: String
   }
 
   extend type Query {

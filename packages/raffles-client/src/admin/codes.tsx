@@ -22,15 +22,26 @@ import {
   BooleanField,
   NumberField,
   Datetime,
+  SearchInput,
 } from 'react-admin';
 import { formatDate, parseDate } from './util';
 import { chains } from 'util/chain';
 
 export const CodeIcon = Redeem;
 
+const codeFilters = [<SearchInput source='code' alwaysOn />];
+
 export const CodeList = () => (
-  <List sort={{ field: 'createdAt', order: 'desc' }}>
-    <Datagrid>
+  <List sort={{ field: 'createdAt', order: 'desc' }} filters={codeFilters}>
+    <Datagrid
+      rowClick='edit'
+      sx={{
+        '& .RaDatagrid-tableWrapper': {
+          maxWidth: 'calc(100vw - 150px)',
+          overflowX: 'scroll',
+        },
+      }}
+    >
       <TextField source='code' />
       <TextField source='user.id' label='UserId' />
       <TextField source='user.username' label='Username' />
