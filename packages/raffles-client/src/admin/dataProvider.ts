@@ -20,33 +20,24 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const myBuildQuery = (introspection) => (fetchType, resource, params) => {
-  console.log('a');
   const builtQuery = buildQuery(introspection)(fetchType, resource, params);
 
-  console.log('q', builtQuery);
-
-  if (fetchType === 'UPDATE') {
-    console.log(builtQuery);
-  }
-  if (resource === 'Command' && fetchType === 'GET_ONE') {
-    return {
-      // Use the default query variables and parseResponse
-      ...builtQuery,
-      // Override the query
-      query: gql`
-        query Command($id: ID!) {
-          data: Command(id: $id) {
-            id
-            reference
-            customer {
-              id
-              firstName
-              lastName
-            }
-          }
-        }
-      `,
-    };
+  if (resource === 'Code') {
+    if (fetchType === 'GET_LIST') {
+      return {
+        ...builtQuery,
+        parseResponse: (response: ApolloQueryResult<any>) => {
+          const r = builtQuery.parseResponse(response);
+          return {
+            ...r,
+            data: r.data.map((d) => ({
+              ...d,
+              id: d.code,
+            })),
+          };
+        },
+      };
+    }
   }
 
   return builtQuery;
@@ -57,8 +48,8 @@ export default () =>
     clientOptions: {
       link: authLink.concat(httpLink),
     },
-    introspection: {
-      include: ['Auction'],
-    },
+    // introspection: {
+    //   include: ['Auction', 'User', 'Code'],
+    // },
     buildQuery: myBuildQuery,
   });

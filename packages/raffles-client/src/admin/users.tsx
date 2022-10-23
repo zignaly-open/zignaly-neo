@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Datagrid, DateField, TextField } from 'react-admin';
+import { List, Datagrid, DateField, TextField, EmailField } from 'react-admin';
 import { Person } from '@mui/icons-material';
 export const UserIcon = Person;
 
@@ -9,7 +9,7 @@ export const UserList = () => (
       <TextField source='id' />
       <TextField source='username' />
       <TextField source='discordName' />
-      <TextField source='email' />
+      <EmailField source='email' />
       <DateField source='createdAt' />
       <TextField source='publicAddress' />
     </Datagrid>

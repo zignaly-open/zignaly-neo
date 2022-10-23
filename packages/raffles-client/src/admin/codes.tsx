@@ -1,4 +1,4 @@
-import { EventNote } from '@mui/icons-material';
+import { EventNote, Redeem } from '@mui/icons-material';
 import { Box, Card, CardMedia, Typography } from '@mui/material';
 import MarkdownInput from './MarkdownInput';
 import React from 'react';
@@ -19,22 +19,39 @@ import {
   NumberInput,
   SelectField,
   SelectInput,
+  BooleanField,
   NumberField,
+  Datetime,
 } from 'react-admin';
 import { formatDate, parseDate } from './util';
 import { chains } from 'util/chain';
-export const AuctionIcon = EventNote;
 
-export const AuctionList = () => (
-  <List sort={{ field: 'id', order: 'desc' }}>
+export const CodeIcon = Redeem;
+
+export const CodeList = () => (
+  <List sort={{ field: 'createdAt', order: 'desc' }}>
     <Datagrid>
-      <TextField source='id' />
-      <TextField source='title' />
-      <TextField source='chain' />
-      <DateField source='createdAt' />
-      <DateField source='startDate' />
-      <NumberField source='numberOfWinners' />
-      <TextField source='currentBid' />
+      <TextField source='code' />
+      <TextField source='user.id' label='UserId' />
+      <TextField source='user.username' label='Username' />
+      <BooleanField source='welcomeType' />
+      <TextField source='reqMinimumBalance' />
+      <TextField source='reqMinimumDeposit' />
+      <DateField source='reqDepositFrom' showTime={true} />
+      <TextField source='reqMinAuctions' />
+      <TextField source='reqWalletType' />
+      <NumberField source='maxRedemptions' />
+      <NumberField source='currentRedemptions' />
+      <NumberField source='benefitDirect' />
+      <NumberField source='benefitBalanceFactor' />
+      <NumberField source='benefitDepositFactor' />
+      <NumberField source='maxTotalBenefits' />
+      <NumberField source='rewardDirect' />
+      <NumberField source='rewardFactor' />
+      <NumberField source='rewardDepositFactor' />
+      <NumberField source='maxTotalRewards' />
+      <DateField source='startDate' showTime={true} />
+      <DateField source='endDate' showTime={true} />
       <EditButton />
     </Datagrid>
   </List>
@@ -43,56 +60,6 @@ export const AuctionList = () => (
 const AuctionTitle = () => {
   const record = useRecordContext();
   return <span>Edit Auction {record ? `"${record.title}"` : ''}</span>;
-};
-
-const Poster = () => {
-  const record = useRecordContext<Product>();
-  if (!record) return null;
-  return (
-    <Card sx={{ display: 'inline-block' }}>
-      <CardMedia
-        component='img'
-        image={record.imageUrl}
-        alt=''
-        sx={{ maxWidth: '42em', maxHeight: '15em' }}
-      />
-    </Card>
-  );
-};
-
-const dateFormatRegex = /^\d{4}-\d{2}-\d{2}$/;
-const dateParseRegex = /(\d{4})-(\d{2})-(\d{2})/;
-
-const convertDateToString = (value) => {
-  // value is a `Date` object
-  if (!(value instanceof Date) || isNaN(value.getDate())) return '';
-  const pad = '00';
-  const yyyy = value.getFullYear().toString();
-  const MM = (value.getMonth() + 1).toString();
-  const dd = value.getDate().toString();
-  return `${yyyy}-${(pad + MM).slice(-2)}-${(pad + dd).slice(-2)}`;
-};
-
-const dateFormatter = (value) => {
-  // null, undefined and empty string values should not go through dateFormatter
-  // otherwise, it returns undefined and will make the input an uncontrolled one.
-  if (value == null || value === '') return '';
-  console.log(convertDateToString(value));
-  if (value instanceof Date) return convertDateToString(value);
-  // Valid dates should not be converted
-  if (dateFormatRegex.test(value)) return value;
-
-  return convertDateToString(new Date(value));
-};
-
-const dateParser = (value) => {
-  //value is a string of "YYYY-MM-DD" format
-  const match = dateParseRegex.exec(value);
-  if (match === null) return;
-  const d = new Date(match[1], parseInt(match[2], 10) - 1, match[3]);
-  if (isNaN(d.getDate())) return;
-  console.log(d);
-  return d;
 };
 
 const AuctionForm = () => (
@@ -152,13 +119,13 @@ const AuctionForm = () => (
   </SimpleForm>
 );
 
-export const AuctionEdit = () => (
+export const CodeEdit = () => (
   <Edit title={<AuctionTitle />}>
     <AuctionForm />
   </Edit>
 );
 
-export const AuctionCreate = () => (
+export const CodeCreate = () => (
   <Create title='Create an Auction'>
     <AuctionForm />
   </Create>

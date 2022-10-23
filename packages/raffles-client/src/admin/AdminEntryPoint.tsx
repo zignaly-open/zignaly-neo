@@ -7,6 +7,7 @@ import {
   AuctionCreate,
 } from './auctions';
 import { UserList, UserIcon } from './users';
+import { CodeCreate, CodeEdit, CodeList, CodeIcon } from './codes';
 import buildGraphQLProvider from './dataProvider';
 
 const theme = {
@@ -39,6 +40,13 @@ const AdminEntryPoint = () => {
         icon={AuctionIcon}
       />
       <Resource name='User' list={UserList} icon={UserIcon} />
+      <Resource
+        name='Code'
+        list={CodeList}
+        edit={CodeEdit}
+        create={CodeCreate}
+        icon={CodeIcon}
+      />
     </Admin>
   );
 };

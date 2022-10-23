@@ -2,7 +2,7 @@ import { ContextUser, ResourceOptions } from '../../types';
 import { checkAdmin } from '../../util/admin';
 import { User } from './model';
 
-export const getUsers = (
+export const getUsers = async (
   user?: ContextUser,
   sortField = 'id',
   sortOrder = 'desc',
@@ -10,7 +10,7 @@ export const getUsers = (
   perPage = 25,
   filter: ResourceOptions['filter'] = {},
 ) => {
-  checkAdmin(user?.id);
+  await checkAdmin(user?.id);
 
   return User.findAll({
     where: filter,
@@ -20,7 +20,12 @@ export const getUsers = (
   });
 };
 
-export const countUsers = async (filter: ResourceOptions['filter'] = {}) => {
+export const countUsers = async (
+  user?: ContextUser,
+  filter: ResourceOptions['filter'] = {},
+) => {
+  await checkAdmin(user?.id);
+
   const count = await User.count({
     where: filter,
   });

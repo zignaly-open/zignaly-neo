@@ -5,13 +5,45 @@ import {
   getUserDeposits,
   internalTransfer,
 } from '../../cybavo';
-import { ContextUser, TransactionType } from '../../types';
+import { ContextUser, ResourceOptions, TransactionType } from '../../types';
 import { AuctionBid } from '../auctions/model';
 import { User } from '../users/model';
 import { emitBalanceChanged } from '../users/util';
 import { Code, CodeRedemption } from './model';
 import BN from 'bignumber.js';
 import { format } from 'date-fns';
+import { checkAdmin } from '../../util/admin';
+
+export const getCodes = async (
+  user?: ContextUser,
+  sortField = 'id',
+  sortOrder = 'desc',
+  page = 0,
+  perPage = 25,
+  filter: ResourceOptions['filter'] = {},
+) => {
+  await checkAdmin(user?.id);
+
+  return Code.findAll({
+    where: filter,
+    order: [[sortField, sortOrder]],
+    include: [User],
+    limit: perPage,
+    offset: page * perPage,
+  });
+};
+
+export const countCodes = async (
+  user?: ContextUser,
+  filter: ResourceOptions['filter'] = {},
+) => {
+  await checkAdmin(user?.id);
+
+  const count = await Code.count({
+    where: filter,
+  });
+  return { count };
+};
 
 export const check = async (codeName: string, user: ContextUser) => {
   const code = await Code.findByPk(codeName?.toUpperCase());

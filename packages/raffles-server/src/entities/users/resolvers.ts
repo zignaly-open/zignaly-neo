@@ -69,8 +69,9 @@ export const resolvers = {
       }: {
         filter: ResourceOptions['filter'];
       },
+      { user }: ApolloContext,
     ) => {
-      return countUsers(filter);
+      return countUsers(user, filter);
     },
   },
   Mutation: {
