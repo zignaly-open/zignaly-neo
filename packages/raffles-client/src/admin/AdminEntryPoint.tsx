@@ -9,6 +9,7 @@ import {
 import { UserList, UserIcon } from './users';
 import { CodeCreate, CodeEdit, CodeList, CodeIcon } from './codes';
 import buildGraphQLProvider from './dataProvider';
+import MyLayout from './Layout';
 
 const theme = {
   ...defaultTheme,
@@ -31,7 +32,7 @@ const AdminEntryPoint = () => {
   }
 
   return (
-    <Admin theme={theme} dataProvider={dataProvider}>
+    <Admin theme={theme} dataProvider={dataProvider} layout={MyLayout}>
       <Resource
         name='Auction'
         list={AuctionList}
@@ -42,6 +43,13 @@ const AdminEntryPoint = () => {
       <Resource name='User' list={UserList} icon={UserIcon} />
       <Resource
         name='Code'
+        list={CodeList}
+        edit={CodeEdit}
+        create={CodeCreate}
+        icon={CodeIcon}
+      />
+      <Resource
+        name='user-codes'
         list={CodeList}
         edit={CodeEdit}
         create={CodeCreate}

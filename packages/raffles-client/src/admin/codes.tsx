@@ -1,5 +1,5 @@
 import { EventNote, Redeem } from '@mui/icons-material';
-import { Box, Card, CardMedia, Typography } from '@mui/material';
+import { Box, Card, CardMedia, Stack, Typography } from '@mui/material';
 import MarkdownInput from './MarkdownInput';
 import React from 'react';
 import {
@@ -23,6 +23,10 @@ import {
   NumberField,
   Datetime,
   SearchInput,
+  FilterForm,
+  FilterButton,
+  CreateButton,
+  ListBase,
 } from 'react-admin';
 import { formatDate, parseDate } from './util';
 import { chains } from 'util/chain';
@@ -30,11 +34,24 @@ import { chains } from 'util/chain';
 export const CodeIcon = Redeem;
 
 const codeFilters = [<SearchInput source='code' alwaysOn />];
+const postFilters = [
+  <TextInput label='Search' source='q' alwaysOn />,
+  <TextInput label='Title' source='title' defaultValue='Hello, World!' />,
+];
+
+const ListToolbar = () => (
+  <Stack direction='row' justifyContent='space-between'>
+    <FilterForm filters={postFilters} />
+    <div>
+      <FilterButton filters={postFilters} />
+      <CreateButton />
+    </div>
+  </Stack>
+);
 
 export const CodeList = () => (
-  <List
+  <ListBase
     sort={{ field: 'createdAt', order: 'desc' }}
-    filters={codeFilters}
     sx={{
       '& .RaList-main': {
         maxWidth: { sm: 'calc(100vw - 90px)' },
@@ -42,6 +59,7 @@ export const CodeList = () => (
       },
     }}
   >
+    <ListToolbar />
     <Datagrid rowClick='edit'>
       <TextField source='code' />
       <TextField source='user.id' label='UserId' />
@@ -66,7 +84,7 @@ export const CodeList = () => (
       <DateField source='endDate' showTime={true} />
       <EditButton />
     </Datagrid>
-  </List>
+  </ListBase>
 );
 
 const CodeTitle = () => {
