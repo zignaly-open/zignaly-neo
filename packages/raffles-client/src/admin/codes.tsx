@@ -30,70 +30,54 @@ export const CodeIcon = Redeem;
 
 const codeFilters = [<SearchInput source='q' alwaysOn />];
 
-const CodeDatagrid = ({ systemCode }: { systemCode: boolean }) => {
+const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
   return (
-    <Datagrid rowClick='edit'>
-      <TextField source='code' />
-      {!systemCode && <TextField source='user.id' label='UserId' />}
-      {!systemCode && <TextField source='user.username' label='Username' />}
-      {systemCode && <BooleanField source='welcomeType' />}
-      <NumberField source='reqMinimumBalance' />
-      <NumberField source='reqMinimumDeposit' />
-      <DateField source='reqDepositFrom' showTime={true} />
-      <NumberField source='reqMinAuctions' />
-      <TextField source='reqWalletType' />
-      <NumberField source='currentRedemptions' />
-      <NumberField source='maxRedemptions' />
-      <NumberField source='benefitDirect' />
-      <NumberField source='benefitBalanceFactor' />
-      <NumberField source='benefitDepositFactor' />
-      <NumberField source='maxTotalBenefits' />
-      <NumberField source='rewardDirect' />
-      <NumberField source='rewardFactor' />
-      <NumberField source='rewardDepositFactor' />
-      <NumberField source='maxTotalRewards' />
-      {systemCode && <DateField source='startDate' showTime={true} />}
-      {systemCode && <DateField source='endDate' showTime={true} />}
-      <EditButton />
-    </Datagrid>
+    <List
+      hasCreate={systemCode}
+      resource='Code'
+      sort={{ field: 'createdAt', order: 'desc' }}
+      filters={codeFilters}
+      filter={{ isDefault: !systemCode }}
+      title={systemCode ? 'System Codes' : 'User Codes'}
+      sx={{
+        '& .RaList-main': {
+          maxWidth: { sm: 'calc(100vw - 90px)' },
+        },
+        '& .RaDatagrid-tableWrapper': {
+          overflowX: 'scroll',
+        },
+      }}
+    >
+      <Datagrid rowClick='edit'>
+        <TextField source='code' />
+        {!systemCode && <TextField source='user.id' label='UserId' />}
+        {!systemCode && <TextField source='user.username' label='Username' />}
+        {systemCode && <BooleanField source='welcomeType' />}
+        <NumberField source='reqMinimumBalance' />
+        <NumberField source='reqMinimumDeposit' />
+        <DateField source='reqDepositFrom' showTime={true} />
+        <NumberField source='reqMinAuctions' />
+        <TextField source='reqWalletType' />
+        <NumberField source='currentRedemptions' />
+        <NumberField source='maxRedemptions' />
+        <NumberField source='benefitDirect' />
+        <NumberField source='benefitBalanceFactor' />
+        <NumberField source='benefitDepositFactor' />
+        <NumberField source='maxTotalBenefits' />
+        <NumberField source='rewardDirect' />
+        <NumberField source='rewardFactor' />
+        <NumberField source='rewardDepositFactor' />
+        <NumberField source='maxTotalRewards' />
+        {systemCode && <DateField source='startDate' showTime={true} />}
+        {systemCode && <DateField source='endDate' showTime={true} />}
+        <EditButton />
+      </Datagrid>
+    </List>
   );
 };
 
-export const CodeList = () => (
-  <List
-    sort={{ field: 'createdAt', order: 'desc' }}
-    filters={codeFilters}
-    filter={{ isDefault: false }}
-    title='System Codes'
-    sx={{
-      '& .RaList-main': {
-        maxWidth: { sm: 'calc(100vw - 90px)' },
-        overflowX: 'scroll',
-      },
-    }}
-  >
-    <CodeDatagrid systemCode={true} />
-  </List>
-);
-
-export const UserCodeList = () => (
-  <List
-    hasCreate={false}
-    resource='Code'
-    sort={{ field: 'createdAt', order: 'desc' }}
-    filters={codeFilters}
-    filter={{ isDefault: true }}
-    title='User Codes'
-    sx={{
-      '& .RaList-main': {
-        maxWidth: { sm: 'calc(100vw - 90px)' },
-        overflowX: 'scroll',
-      },
-    }}
-  >
-    <CodeDatagrid systemCode={false} />
-  </List>
-);
+export const CodeList = () => <CodeListBase systemCode={true} />;
+export const UserCodeList = () => <CodeListBase systemCode={false} />;
 
 const CodeTitle = () => {
   const record = useRecordContext();
@@ -105,7 +89,7 @@ const CodeForm = () => (
     <Typography variant='h6' gutterBottom>
       Code
     </Typography>
-    <TextInput source='code' />
+    <TextInput source='code' required />
     <BooleanInput source='welcomeType' />
     <Typography variant='h6' gutterBottom mt={1}>
       Requirements
@@ -139,7 +123,7 @@ const CodeForm = () => (
     <Typography variant='h6' gutterBottom mt={1}>
       Redemptions
     </Typography>
-    <NumberInput source='currentRedemptions' />
+    <NumberInput source='currentRedemptions' defaultValue={0} />
     <NumberInput source='maxRedemptions' />
     <Typography variant='h6' gutterBottom mt={1}>
       Dates

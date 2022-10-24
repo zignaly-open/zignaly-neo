@@ -122,5 +122,6 @@ export const typeDef = gql`
       endDate: Date
     ): Code
     createCode(${code}): Code
+    deleteCode(id: ID): Boolean
   }
 `;

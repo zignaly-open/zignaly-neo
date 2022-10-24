@@ -1,9 +1,4 @@
-import {
-  ApolloClient,
-  ApolloQueryResult,
-  createHttpLink,
-  InMemoryCache,
-} from '@apollo/client';
+import { ApolloQueryResult, createHttpLink, gql } from '@apollo/client';
 import buildGraphQLProvider, { buildQuery } from 'ra-data-graphql-simple';
 import { setContext } from '@apollo/client/link/context';
 import { getToken } from 'util/token';
@@ -42,7 +37,11 @@ const myBuildQuery = (introspection) => (fetchType, resource, params) => {
           };
         },
       };
-    } else if (fetchType === 'GET_ONE' || fetchType === 'UPDATE') {
+    } else if (
+      fetchType === 'GET_ONE' ||
+      fetchType === 'UPDATE' ||
+      fetchType === 'CREATE'
+    ) {
       return {
         ...builtQuery,
         parseResponse: (response: ApolloQueryResult<any>) => {
@@ -54,6 +53,23 @@ const myBuildQuery = (introspection) => (fetchType, resource, params) => {
         },
       };
     }
+  }
+
+  if (fetchType === 'DELETE') {
+    return {
+      ...builtQuery,
+      query: gql`
+        mutation ($id: ID!) {
+          delete${resource}(id: $id)
+        }`,
+      variables: {
+        id: params.id,
+      },
+      parseResponse: (response: ApolloQueryResult<any>) => {
+        // return response.data[`delete${resource}`];
+        return { data: { id: params.id } };
+      },
+    };
   }
 
   return builtQuery;

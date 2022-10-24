@@ -71,6 +71,17 @@ export const createCode = async (user: ContextUser, data: Partial<Code>) => {
   return code;
 };
 
+export const deleteCode = async (user: ContextUser, code: string) => {
+  await checkAdmin(user?.id);
+  return Boolean(
+    await Code.destroy({
+      where: {
+        code,
+      },
+    }),
+  );
+};
+
 export const check = async (codeName: string, user: ContextUser) => {
   const code = await Code.findByPk(codeName?.toUpperCase());
   if (!code) {

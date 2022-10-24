@@ -4,6 +4,7 @@ import {
   check,
   countCodes,
   createCode,
+  deleteCode,
   getCode,
   getCodes,
   redeem,
@@ -103,6 +104,18 @@ export const resolvers = {
     ) => {
       try {
         return createCode(user, data);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+    },
+    deleteCode: async (
+      _: any,
+      { id }: { id: string },
+      { user }: ApolloContext,
+    ) => {
+      try {
+        return deleteCode(user, id);
       } catch (e) {
         console.error(e);
         throw e;
