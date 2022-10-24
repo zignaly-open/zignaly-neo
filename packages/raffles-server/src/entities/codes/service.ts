@@ -14,6 +14,11 @@ import BN from 'bignumber.js';
 import { format } from 'date-fns';
 import { checkAdmin } from '../../util/admin';
 
+export const getCode = async (user: ContextUser, code: string) => {
+  await checkAdmin(user?.id);
+  return Code.findByPk(code);
+};
+
 export const getCodes = async (
   user?: ContextUser,
   sortField = 'createdAt',
@@ -43,6 +48,27 @@ export const countCodes = async (
     where: filter,
   });
   return { count };
+};
+
+export const updateCode = async (user: ContextUser, data: Partial<Code>) => {
+  await checkAdmin(user?.id);
+
+  const [, [code]] = await Code.update(data, {
+    where: { code: data.id },
+    returning: true,
+  });
+  if (!code) throw new Error('Code Not Found');
+
+  return code;
+};
+
+export const createCode = async (user: ContextUser, data: Partial<Code>) => {
+  await checkAdmin(user?.id);
+
+  const code = await Code.create(data, { returning: true });
+  if (!code) throw new Error("Can't create code");
+
+  return code;
 };
 
 export const check = async (codeName: string, user: ContextUser) => {

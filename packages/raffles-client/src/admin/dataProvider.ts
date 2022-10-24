@@ -1,4 +1,9 @@
-import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
+import {
+  ApolloClient,
+  ApolloQueryResult,
+  createHttpLink,
+  InMemoryCache,
+} from '@apollo/client';
 import buildGraphQLProvider, { buildQuery } from 'ra-data-graphql-simple';
 import { setContext } from '@apollo/client/link/context';
 import { getToken } from 'util/token';
@@ -34,6 +39,17 @@ const myBuildQuery = (introspection) => (fetchType, resource, params) => {
               ...d,
               id: d.code,
             })),
+          };
+        },
+      };
+    } else if (fetchType === 'GET_ONE' || fetchType === 'UPDATE') {
+      return {
+        ...builtQuery,
+        parseResponse: (response: ApolloQueryResult<any>) => {
+          const r = builtQuery.parseResponse(response);
+          return {
+            ...r,
+            data: { ...r.data, id: r.data.code },
           };
         },
       };

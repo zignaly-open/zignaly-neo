@@ -32,27 +32,28 @@ export const CodeIcon = Redeem;
 const codeFilters = [<SearchInput source='code' alwaysOn />];
 
 export const CodeList = () => (
-  <List sort={{ field: 'createdAt', order: 'desc' }} filters={codeFilters}>
-    <Datagrid
-      rowClick='edit'
-      sx={{
-        '& .RaDatagrid-tableWrapper': {
-          maxWidth: 'calc(100vw - 150px)',
-          overflowX: 'scroll',
-        },
-      }}
-    >
+  <List
+    sort={{ field: 'createdAt', order: 'desc' }}
+    filters={codeFilters}
+    sx={{
+      '& .RaList-main': {
+        maxWidth: { sm: 'calc(100vw - 90px)' },
+        overflowX: 'scroll',
+      },
+    }}
+  >
+    <Datagrid rowClick='edit'>
       <TextField source='code' />
       <TextField source='user.id' label='UserId' />
       <TextField source='user.username' label='Username' />
       <BooleanField source='welcomeType' />
-      <TextField source='reqMinimumBalance' />
-      <TextField source='reqMinimumDeposit' />
+      <NumberField source='reqMinimumBalance' />
+      <NumberField source='reqMinimumDeposit' />
       <DateField source='reqDepositFrom' showTime={true} />
-      <TextField source='reqMinAuctions' />
+      <NumberField source='reqMinAuctions' />
       <TextField source='reqWalletType' />
-      <NumberField source='maxRedemptions' />
       <NumberField source='currentRedemptions' />
+      <NumberField source='maxRedemptions' />
       <NumberField source='benefitDirect' />
       <NumberField source='benefitBalanceFactor' />
       <NumberField source='benefitDepositFactor' />
@@ -68,76 +69,68 @@ export const CodeList = () => (
   </List>
 );
 
-const AuctionTitle = () => {
+const CodeTitle = () => {
   const record = useRecordContext();
-  return <span>Edit Auction {record ? `"${record.title}"` : ''}</span>;
+  return <span>Edit Code {record ? `"${record.code}"` : ''}</span>;
 };
 
-const AuctionForm = () => (
+const CodeForm = () => (
   <SimpleForm>
     <Typography variant='h6' gutterBottom>
-      Auction
+      Code
     </Typography>
-    <TextInput source='title' sx={{ minWidth: '300px' }} required />
-    <Poster />
-    <TextInput source='imageUrl' sx={{ minWidth: '300px' }} />
+    <TextInput source='code' />
+    <BooleanInput source='welcomeType' />
+    <Typography variant='h6' gutterBottom mt={1}>
+      Requirements
+    </Typography>
+    <NumberInput source='reqMinimumBalance' />
+    <NumberInput source='reqMinimumDeposit' />
+    <NumberInput source='reqMinimumBalance' />
+    <DateTimeInput source='reqDepositFrom' />
+    <NumberInput source='reqMinAuctions' />
     <SelectInput
-      required
-      source='chain'
-      choices={Object.keys(chains).map((c) => ({
-        id: c,
-        name: chains[c].name,
-      }))}
+      source='reqWalletType'
+      choices={[
+        { id: 'metamask', name: 'MetaMask' },
+        { id: 'kucoin', name: 'KuCoin' },
+      ]}
     />
-    <MarkdownInput source='description' label='Description' required />
-    <MarkdownInput source='claimSuccess' label='Claim success' />
     <Typography variant='h6' gutterBottom mt={1}>
-      Socials
+      Benefit
     </Typography>
-    <Box display='flex' gap={2}>
-      <TextInput source='website' />
-      <TextInput source='discord' />
-      <TextInput source='telegram' />
-      <TextInput source='twitter' />
-    </Box>
+    <NumberInput source='benefitDirect' />
+    <NumberInput source='benefitBalanceFactor' />
+    <NumberInput source='benefitDepositFactor' />
+    <NumberInput source='maxTotalBenefits' />
     <Typography variant='h6' gutterBottom mt={1}>
-      Dates (UTC)
+      Reward
     </Typography>
-    <DateTimeInput source='announcementDate' />
-    <Box display='flex' gap='1em'>
-      <DateInput
-        source='startDate'
-        required
-        format={dateFormatter}
-        parse={dateParser}
-        options={{ onBlur: () => {} }}
-      />
-      <DateTimeInput label='Expiration' source='expiresAt' required />
-      <DateTimeInput label='Max Expiration' source='maxExpiryDate' required />
-    </Box>
-    <DateTimeInput label='Max Claim Date' source='maxClaimDate' />
+    <NumberInput source='rewardDirect' />
+    <NumberInput source='rewardFactor' />
+    <NumberInput source='rewardDepositFactor' />
+    <NumberInput source='maxTotalRewards' />
     <Typography variant='h6' gutterBottom mt={1}>
-      Params
+      Redemptions
     </Typography>
-    <Box display='flex' gap='1em'>
-      <NumberInput source='currentBid' defaultValue={0.01} />
-      <NumberInput source='bidFee' defaultValue={1} />
-      <NumberInput source='bidStep' defaultValue={0.01} />
-    </Box>
-    <NumberInput source='numberOfWinners' required />
-    <TextInput source='privateCode' />
-    <BooleanInput source='isExclusiveToKuCoin' label='KuCoin Only' />
+    <NumberInput source='currentRedemptions' />
+    <NumberInput source='maxRedemptions' />
+    <Typography variant='h6' gutterBottom mt={1}>
+      Dates
+    </Typography>
+    <DateTimeInput source='startDate' />
+    <DateTimeInput source='endDate' />
   </SimpleForm>
 );
 
 export const CodeEdit = () => (
-  <Edit title={<AuctionTitle />}>
-    <AuctionForm />
+  <Edit title={<CodeTitle />}>
+    <CodeForm />
   </Edit>
 );
 
 export const CodeCreate = () => (
-  <Create title='Create an Auction'>
-    <AuctionForm />
+  <Create title='Create a Code'>
+    <CodeForm />
   </Create>
 );

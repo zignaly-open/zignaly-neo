@@ -1,9 +1,13 @@
 import { ApolloContext, ResourceOptions } from '../../types';
+import { Code } from './model';
 import {
   check,
   countCodes,
+  createCode,
+  getCode,
   getCodes,
   redeem,
+  updateCode,
   userCodes,
   userCodesRedemptions,
 } from './service';
@@ -37,6 +41,9 @@ export const resolvers = {
         console.error(e);
         throw e;
       }
+    },
+    Code: async (_: any, { id }: { id: string }, { user }: ApolloContext) => {
+      return getCode(user, id);
     },
     allCodes: async (
       _: any,
@@ -72,6 +79,30 @@ export const resolvers = {
     ) => {
       try {
         return await redeem(code, user);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+    },
+    updateCode: async (
+      _: any,
+      data: Partial<Code>,
+      { user }: ApolloContext,
+    ) => {
+      try {
+        return updateCode(user, data);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+    },
+    createCode: async (
+      _: any,
+      data: Partial<Code>,
+      { user }: ApolloContext,
+    ) => {
+      try {
+        return createCode(user, data);
       } catch (e) {
         console.error(e);
         throw e;

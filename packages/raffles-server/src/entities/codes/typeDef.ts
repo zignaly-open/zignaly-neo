@@ -87,6 +87,7 @@ export const typeDef = gql`
   }
 
   extend type Query {
+    Code(id: ID!): Code
     checkCode(code: String!): CodeCheckInfo
     userCodes: [UserCodeInfo]
     userCodesRedemptions: [CodeRedemptionInfo]
@@ -106,5 +107,19 @@ export const typeDef = gql`
 
   extend type Mutation {
     redeemCode(code: String!): Float
+    updateCode(
+      id: ID
+      ${code}
+      welcomeType: Boolean
+      maxRedemptions: Int
+      currentRedemptions: Int
+      rewardDirect: Float
+      rewardFactor: Float
+      rewardDepositFactor: Float
+      maxTotalRewards: Int
+      startDate: Date
+      endDate: Date
+    ): Code
+    createCode(${code}): Code
   }
 `;

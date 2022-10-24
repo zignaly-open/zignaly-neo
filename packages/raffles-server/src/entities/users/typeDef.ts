@@ -32,6 +32,7 @@ export const typeDef = gql`
 
   input UserFilter {
     id: ID
+    q: String
   }
 
   extend type Query {
