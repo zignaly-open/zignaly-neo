@@ -52,10 +52,15 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
     }),
     [anchorEl, isOpen],
   );
-  const onClick = (f: () => void) => (e: MouseEvent) => {
+  const onClick = (f: () => void) => (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     handleClose();
-    f();
+    if (e.button === 1) {
+      // middle button fix for Safari
+      window.open(e.currentTarget.href);
+    } else {
+      f();
+    }
   };
 
   return (
