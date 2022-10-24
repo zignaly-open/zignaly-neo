@@ -20,17 +20,21 @@ import {
   SelectField,
   SelectInput,
   NumberField,
+  SearchInput,
+  ChipField,
 } from 'react-admin';
 import { formatDate, parseDate } from './util';
 import { chains } from 'util/chain';
 export const AuctionIcon = EventNote;
 
+const auctionFilters = [<SearchInput source='title' alwaysOn key={0} />];
+
 export const AuctionList = () => (
-  <List sort={{ field: 'id', order: 'desc' }}>
+  <List sort={{ field: 'id', order: 'desc' }} filters={auctionFilters}>
     <Datagrid>
       <TextField source='id' />
       <TextField source='title' />
-      <TextField source='chain' />
+      <ChipField source='chain' />
       <DateField source='createdAt' />
       <DateField source='startDate' />
       <NumberField source='numberOfWinners' />

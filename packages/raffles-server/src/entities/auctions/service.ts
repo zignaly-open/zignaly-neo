@@ -32,24 +32,30 @@ const AuctionsRepository = () => {
   type AuctionFilter = {
     unannounced?: boolean;
     privateCode?: string;
+    title?: string;
   };
 
-  const auctionsFilter = (auctionId?: number, filter: AuctionFilter = {}) => ({
-    ...(!filter.unannounced && {
-      announcementDate: {
-        [Op.or]: [
-          null,
-          {
-            [Op.lte]: new Date(),
-          },
-        ],
+  const auctionsFilter = (auctionId?: number, filter: AuctionFilter = {}) => {
+    const { unannounced, privateCode, title, ...restFilters } = filter;
+    return {
+      ...restFilters,
+      ...(title && { title: { [Op.iLike]: `%${title}%` } }),
+      ...(!unannounced && {
+        announcementDate: {
+          [Op.or]: [
+            null,
+            {
+              [Op.lte]: new Date(),
+            },
+          ],
+        },
+      }),
+      ...(auctionId && { id: auctionId }),
+      privateCode: {
+        [Op.or]: [null, privateCode ?? null],
       },
-    }),
-    ...(auctionId && { id: auctionId }),
-    privateCode: {
-      [Op.or]: [null, filter.privateCode ?? null],
-    },
-  });
+    };
+  };
 
   async function getAuctionsWithBids(
     auctionId?: number,
