@@ -1,0 +1,19 @@
+{
+    "no-investors": "Este servicio aún no tiene inversores",
+    "failed-to-load": "No se han podido cargar los datos",
+    "title": "Inversores",
+    "number-of-investors": "{{count}} Inversor",
+    "number-of-investors_plural": "{{count}} Inversores",
+    "tableHeader": {
+        "email": "Email",
+        "userId": "ID de usuario",
+        "investment": "Inversión",
+        "P&L": "P&L",
+        "P&LTotal": "P&L Totales",
+        "totalFeesPaid": "Total de Comisiones Pagadas",
+        "successFee": "Comisión por Beneficios",
+        "feesZIG": "Comisiones en ZIG",
+        "status": "Estatus"
+    },
+    "loading-arialLabel": "Cargando inversores"
+}

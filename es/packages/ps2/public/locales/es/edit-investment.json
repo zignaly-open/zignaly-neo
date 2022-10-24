@@ -1,0 +1,85 @@
+{
+    "percentageChangedSuccess": "Porcentaje de ganancia actualizado con éxito.",
+    "addMoreInvestmentSuccess": "Invirtió {{amount}} {{currency}} con éxito en el servicio {{serviceName}}.",
+    "withdrawInvestmentSuccess": "Retirada solicitada con éxito.",
+    "validation-indicateAnAmount": "Debe indicar una cantidad.",
+    "error-blockedInvestment": "Todos sus fondos están pendientes de ser transferidos desde del servicio.",
+    "form": {
+        "title": "Monto Invertido:",
+        "profits": {
+            "title": "Qué hacer con las ganancias:",
+            "left": "Reinvertir",
+            "right": "Retirar"
+        },
+        "inputAmount": {
+            "label": "Monto a Invertir:",
+            "labelBalance": "Disponible:"
+        },
+        "link": {
+            "investMore": "Invertir más",
+            "withdraw": "Retirar la inversión"
+        },
+        "button": {
+            "saveAndClose": "Guardar y Cerrar",
+            "saveAndInvestment": "Ahorre y Añada a la Inversión"
+        }
+    },
+    "pendingMajorThan": {
+        "type": "Nuevas inversiones",
+        "status": "Procesamiento en 24 horas"
+    },
+    "profitOutMajorThan": {
+        "type": "Beneficios",
+        "status": "Esperando la próxima contabilidad"
+    },
+    "transferOutMajorThan": {
+        "type": "Trasferencia",
+        "status": "Esperando la próxima contabilidad"
+    },
+    "pendingTransactions": {
+        "status_zero": "No tienes ninguno",
+        "status_one": "Tiene 1 transacción pendiente",
+        "status_other": "Tienes {{count}} transacciones pendientes",
+        "link-label": "Ver"
+    },
+    "investorDetail-successFee": "{{fee}}% Tasa de éxito",
+    "modal": {
+        "withdrawInvestment": {
+            "title": "Solicitud de desistimiento",
+            "afterPosition": {
+                "title": "Retirada tras el cierre de posiciones",
+                "description": "Recibirá sus fondos después de que el trader los libere. Tenga en cuenta que su inversión está en riesgo hasta que sea transferida a usted. Esto suele tardar unos días, pero podría tardar más. Depende de ellos.",
+                "button": {
+                    "subtitle": "Retirada de fondos libres",
+                    "title": "Sin Comisión"
+                }
+            },
+            "instant": {
+                "title": "Retiro Instantáneo",
+                "description": "Los retiros instantáneos incurren en una tarifa del 5% porque el trader tiene posiciones abiertas y podría liquidarse. Para evitar esto, Zignaly debe cubrir sus fondos y cubrir su riesgo, de ahí la tarifa.",
+                "button": {
+                    "subtitle": "Retirada instantánea",
+                    "title": "Comisión 5%"
+                }
+            }
+        },
+        "pendingTransaction": {
+            "title": "Transacciones Pendientes",
+            "tableHeader": {
+                "amount": "Cantidad",
+                "type": "Tipo",
+                "status": "Estatus"
+            },
+            "button": "Volver"
+        },
+        "editInvestments": {
+            "title": "Editar la inversión",
+            "loading": "Carga de la inversión de la edición"
+        }
+    },
+    "modalSuccess": {
+        "title": "Inversión en Proceso (Hasta 24h)",
+        "description": "Sus fondos serán transferidos a la cuenta del servicio dentro de las 24 horas. Puede retirar sus fondos en cualquier momento antes de que se realice esta transferencia. Una vez que se transfieran los fondos, podrá retirarlos a través de una desconexión < 0 > progresiva < \/0 > o < 0 > forzosa. < \/0 >",
+        "button": "Cerrar"
+    }
+}

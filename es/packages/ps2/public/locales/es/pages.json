@@ -1,0 +1,28 @@
+{
+    "404": "404 \/ Page not found - Zignaly",
+    "dashboard": "Mi panel de control - Zignaly",
+    "become-trader": "Convertirse en comerciante - Zignaly",
+    "my-balances": "Mis Saldos - Zignaly",
+    "login": "Iniciar Sesión - Zignaly",
+    "help": "Ayuda - Zignaly",
+    "signup": "Registrarse - Zignaly",
+    "staking": "Staking - Zignaly",
+    "trading-services": "Servicios de Trading - Zignaly",
+    "zigpad": "ZIGPad - Zignaly",
+    "profit-sharing": {
+        "title": "Profit Sharing - Zignaly",
+        "service": "{{serviceName}} - Zignaly",
+        "investors": "{{serviceName}} | Inversores - Zignaly",
+        "api-trading": "{{serviceName}} | API Trading - Zignaly",
+        "coins": "{{serviceName}} | Monedas - Zignaly",
+        "manual": "{{serviceName}} | Comercio manual - Zignaly",
+        "positions": "{{serviceName}} | Mis Posiciones - Zignaly",
+        "signals": "{{serviceName}} | Señales - Zignaly",
+        "management": "{{serviceName}} | Gestión - Zignaly",
+        "edit": "{{serviceName}} | Editar Servicio - Zignaly",
+        "profile": {
+            "title": "Ver Perfil - Zignaly",
+            "edit": "Editar Perfil - Zignaly"
+        }
+    }
+}
