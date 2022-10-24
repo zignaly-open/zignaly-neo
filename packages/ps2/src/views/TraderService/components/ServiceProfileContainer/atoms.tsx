@@ -23,12 +23,12 @@ import {
   LiquidatedLabel as LiquidatedLabelElement,
   InvestButtonWrap,
   StyledVerifiedIcon,
+  LinkIconWithSafariFix,
 } from './styles';
 import { formatDistance } from 'date-fns';
 import copy from 'copy-to-clipboard';
 import { generatePath } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
-import LinkIcon from '@mui/icons-material/Link';
 import { useToast } from '../../../../util/hooks/useToast';
 import { Box, useMediaQuery } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
@@ -211,7 +211,7 @@ export const ServiceInformation: React.FC<{
           }}
           leftElement={
             md ? null : (
-              <LinkIcon
+              <LinkIconWithSafariFix
                 style={{ width: '13px', height: '13px' }}
                 color='neutral300'
                 width={13}
@@ -223,7 +223,11 @@ export const ServiceInformation: React.FC<{
           variant={'secondary'}
           caption={
             md ? (
-              <LinkIcon color='neutral300' width={13} height={13} />
+              <LinkIconWithSafariFix
+                color='neutral300'
+                width={13}
+                height={13}
+              />
             ) : (
               t('copy-link')
             )

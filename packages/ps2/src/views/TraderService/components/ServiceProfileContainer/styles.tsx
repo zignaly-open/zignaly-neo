@@ -5,6 +5,12 @@ import { Typography } from '@zignaly-open/ui';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PersonIcon from '@mui/icons-material/Person';
 import { Box } from '@mui/material';
+import LinkIcon from '@mui/icons-material/Link';
+
+export const LinkIconWithSafariFix = muiStyled(LinkIcon)`
+  width: 13px !important;
+  height: 13px !important; 
+`;
 
 export const GreySubHeader = styled(Typography)`
   font-weight: 500 !important;
