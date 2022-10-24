@@ -1,0 +1,12 @@
+{
+	"tableHeader": {
+		"coin": "Moneda",
+		"totalBalance": "Saldo Total",
+		"availableBalance": "Saldo Disponible",
+		"lockedBalance": "Saldo Bloqueado",
+		"valueBTC": "Valor en BTC",
+		"valueUSD": "Valor en USD"
+	},
+	"table-search-placeholder": "Escriba para buscar monedas.",
+	"loading-arialLabel": "Cargando mi panel principal"
+}
