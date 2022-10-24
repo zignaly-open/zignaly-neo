@@ -18,6 +18,7 @@ import {
 import buildGraphQLProvider from './dataProvider';
 import MyLayout from './Layout';
 import { Route } from 'react-router-dom';
+import i18nProvider from './i18nProvider';
 
 const theme = {
   ...defaultTheme,
@@ -40,7 +41,12 @@ const AdminEntryPoint = () => {
   }
 
   return (
-    <Admin theme={theme} dataProvider={dataProvider} layout={MyLayout}>
+    <Admin
+      theme={theme}
+      i18nProvider={i18nProvider}
+      dataProvider={dataProvider}
+      layout={MyLayout}
+    >
       <Resource
         name='Auction'
         list={AuctionList}
