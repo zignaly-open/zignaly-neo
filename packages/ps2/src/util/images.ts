@@ -1,6 +1,6 @@
 export function getImageOfAccount(index: number) {
-  const id = index % 7;
-  return `/images/avatars/avatar-${id}.svg`;
+  const id = (index % 6) + 1;
+  return `/images/avatars/bg-${id}.png`;
 }
 
 export const getServiceLogo = (serviceLogo: string | null) =>
