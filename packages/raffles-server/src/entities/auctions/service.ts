@@ -33,10 +33,40 @@ const AuctionsRepository = () => {
     unannounced?: boolean;
     privateCode?: string;
     title?: string;
+    q?: string;
+    startDateLte?: Date;
+    startDateGte?: Date;
   };
 
   const auctionsFilter = (auctionId?: number, filter: AuctionFilter = {}) => {
-    const { unannounced, privateCode, title, ...restFilters } = filter;
+    const {
+      unannounced,
+      privateCode,
+      title,
+      q,
+      startDateLte,
+      startDateGte,
+      ...restFilters
+    } = filter;
+    const startDateFilters =
+      startDateLte && startDateGte
+        ? {
+            [Op.and]: [
+              {
+                [Op.lte]: startDateLte,
+              },
+              {
+                [Op.gte]: startDateGte,
+              },
+            ],
+          }
+        : startDateLte
+        ? { [Op.lte]: startDateLte }
+        : startDateGte
+        ? { [Op.gte]: startDateGte }
+        : null;
+    console.log(q);
+
     return {
       ...restFilters,
       ...(title && { title: { [Op.iLike]: `%${title}%` } }),
@@ -51,6 +81,7 @@ const AuctionsRepository = () => {
         },
       }),
       ...(auctionId && { id: auctionId }),
+      ...(startDateFilters && { startDate: startDateFilters }),
       privateCode: {
         [Op.or]: [null, privateCode ?? null],
       },

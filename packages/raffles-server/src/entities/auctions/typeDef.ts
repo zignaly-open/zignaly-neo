@@ -94,6 +94,9 @@ export const typeDef = gql`
     userId: ID
     unannounced: Boolean
     privateCode: String
+    q: String
+    startDateGte: Date
+    startDateLte: Date
   }
 
   extend type Query {

@@ -1,5 +1,12 @@
-import { EventNote } from '@mui/icons-material';
-import { Box, Card, CardMedia, Typography } from '@mui/material';
+import { AccessTime, CalendarMonth, Dns, EventNote } from '@mui/icons-material';
+import {
+  Box,
+  Card,
+  CardContent,
+  CardMedia,
+  Chip,
+  Typography,
+} from '@mui/material';
 import MarkdownInput from './MarkdownInput';
 import React from 'react';
 import {
@@ -22,23 +29,120 @@ import {
   NumberField,
   SearchInput,
   ChipField,
+  SavedQueriesList,
+  FilterLiveSearch,
+  FilterList,
+  FilterListItem,
+  Filter,
+  FunctionField,
 } from 'react-admin';
 import { formatDate, parseDate } from './util';
 import { chains } from 'util/chain';
+import MailIcon from '@mui/icons-material/MailOutline';
+import CategoryIcon from '@mui/icons-material/LocalOffer';
+import { AuctionType } from '@zignaly-open/raffles-shared/types';
+import {
+  endOfYesterday,
+  startOfWeek,
+  subWeeks,
+  startOfMonth,
+  subMonths,
+} from 'date-fns';
+
 export const AuctionIcon = EventNote;
 
 const auctionFilters = [<SearchInput source='title' alwaysOn key={0} />];
 
+export const AuctionFilterSidebar = () => (
+  <Card
+    sx={{
+      order: -1,
+      flex: '0 0 15em',
+      mr: 2,
+      mt: 9.5,
+    }}
+  >
+    <CardContent>
+      <FilterLiveSearch source='title' />
+      <FilterList label='resources.auctions.fields.chain' icon={<Dns />}>
+        {Object.keys(chains).map((c) => (
+          <FilterListItem label={chains[c].name} value={{ chain: c }} key={c} />
+        ))}
+      </FilterList>
+      <FilterList
+        label='resources.auctions.filters.last_visited'
+        icon={<AccessTime />}
+      >
+        <FilterListItem
+          label='resources.auctions.filters.today'
+          value={{
+            startDateGte: endOfYesterday().toISOString(),
+            startDateLte: undefined,
+          }}
+        />
+        <FilterListItem
+          label='resources.auctions.filters.this_week'
+          value={{
+            startDateGte: startOfWeek(new Date()).toISOString(),
+            startDateLte: undefined,
+          }}
+        />
+        <FilterListItem
+          label='resources.auctions.filters.last_week'
+          value={{
+            startDateGte: subWeeks(startOfWeek(new Date()), 1).toISOString(),
+            startDateLte: startOfWeek(new Date()).toISOString(),
+          }}
+        />
+        <FilterListItem
+          label='resources.auctions.filters.this_month'
+          value={{
+            startDateGte: startOfMonth(new Date()).toISOString(),
+            startDateLte: undefined,
+          }}
+        />
+        <FilterListItem
+          label='resources.auctions.filters.last_month'
+          value={{
+            startDateGte: subMonths(startOfMonth(new Date()), 1).toISOString(),
+            startDateLte: startOfMonth(new Date()).toISOString(),
+          }}
+        />
+        <FilterListItem
+          label='resources.auctions.filters.earlier'
+          value={{
+            startDateGte: undefined,
+            startDateLte: subMonths(startOfMonth(new Date()), 1).toISOString(),
+          }}
+        />
+      </FilterList>
+    </CardContent>
+  </Card>
+);
+
 export const AuctionList = () => (
-  <List sort={{ field: 'id', order: 'desc' }} filters={auctionFilters}>
-    <Datagrid>
+  <List sort={{ field: 'id', order: 'desc' }} aside={<AuctionFilterSidebar />}>
+    <Datagrid rowClick='edit'>
       <TextField source='id' />
       <TextField source='title' />
-      <ChipField source='chain' />
-      <DateField source='createdAt' />
       <DateField source='startDate' />
+      <DateField source='expiresAt' label='Expiry date' />
+      <DateField source='maxExpiryDate' />
+      <NumberField source='bidFee' />
+      <NumberField source='bidStep' />
       <NumberField source='numberOfWinners' />
-      <TextField source='currentBid' />
+      <ChipField source='chain' />
+      <NumberField source='currentBid' />
+      <FunctionField
+        label='Status'
+        sortBy='author.last_name'
+        render={(record: AuctionType) => (
+          <Chip
+            color={record.isFinalized ? 'success' : 'primary'}
+            label={record.isFinalized ? 'Done' : 'Ready'}
+          />
+        )}
+      />
       <EditButton />
     </Datagrid>
   </List>
