@@ -84,6 +84,7 @@ export const typeDef = gql`
   input CodeFilter {
     id: ID
     code: String
+    isDefault: Boolean
   }
 
   extend type Query {

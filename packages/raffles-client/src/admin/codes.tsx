@@ -1,6 +1,5 @@
 import { EventNote, Redeem } from '@mui/icons-material';
-import { Box, Card, CardMedia, Stack, Typography } from '@mui/material';
-import MarkdownInput from './MarkdownInput';
+import { Box, Card, CardMedia, Typography } from '@mui/material';
 import React from 'react';
 import {
   List,
@@ -23,48 +22,21 @@ import {
   NumberField,
   Datetime,
   SearchInput,
-  FilterForm,
-  FilterButton,
-  CreateButton,
-  ListBase,
 } from 'react-admin';
 import { formatDate, parseDate } from './util';
 import { chains } from 'util/chain';
 
 export const CodeIcon = Redeem;
 
-const codeFilters = [<SearchInput source='code' alwaysOn />];
-const postFilters = [
-  <TextInput label='Search' source='q' alwaysOn />,
-  <TextInput label='Title' source='title' defaultValue='Hello, World!' />,
-];
+const codeFilters = [<SearchInput source='q' alwaysOn />];
 
-const ListToolbar = () => (
-  <Stack direction='row' justifyContent='space-between'>
-    <FilterForm filters={postFilters} />
-    <div>
-      <FilterButton filters={postFilters} />
-      <CreateButton />
-    </div>
-  </Stack>
-);
-
-export const CodeList = () => (
-  <ListBase
-    sort={{ field: 'createdAt', order: 'desc' }}
-    sx={{
-      '& .RaList-main': {
-        maxWidth: { sm: 'calc(100vw - 90px)' },
-        overflowX: 'scroll',
-      },
-    }}
-  >
-    <ListToolbar />
+const CodeDatagrid = ({ systemCode }: { systemCode: boolean }) => {
+  return (
     <Datagrid rowClick='edit'>
       <TextField source='code' />
-      <TextField source='user.id' label='UserId' />
-      <TextField source='user.username' label='Username' />
-      <BooleanField source='welcomeType' />
+      {!systemCode && <TextField source='user.id' label='UserId' />}
+      {!systemCode && <TextField source='user.username' label='Username' />}
+      {systemCode && <BooleanField source='welcomeType' />}
       <NumberField source='reqMinimumBalance' />
       <NumberField source='reqMinimumDeposit' />
       <DateField source='reqDepositFrom' showTime={true} />
@@ -80,11 +52,47 @@ export const CodeList = () => (
       <NumberField source='rewardFactor' />
       <NumberField source='rewardDepositFactor' />
       <NumberField source='maxTotalRewards' />
-      <DateField source='startDate' showTime={true} />
-      <DateField source='endDate' showTime={true} />
+      {systemCode && <DateField source='startDate' showTime={true} />}
+      {systemCode && <DateField source='endDate' showTime={true} />}
       <EditButton />
     </Datagrid>
-  </ListBase>
+  );
+};
+
+export const CodeList = () => (
+  <List
+    sort={{ field: 'createdAt', order: 'desc' }}
+    filters={codeFilters}
+    filter={{ isDefault: false }}
+    title='System Codes'
+    sx={{
+      '& .RaList-main': {
+        maxWidth: { sm: 'calc(100vw - 90px)' },
+        overflowX: 'scroll',
+      },
+    }}
+  >
+    <CodeDatagrid systemCode={true} />
+  </List>
+);
+
+export const UserCodeList = () => (
+  <List
+    hasCreate={false}
+    resource='Code'
+    sort={{ field: 'createdAt', order: 'desc' }}
+    filters={codeFilters}
+    filter={{ isDefault: true }}
+    title='User Codes'
+    sx={{
+      '& .RaList-main': {
+        maxWidth: { sm: 'calc(100vw - 90px)' },
+        overflowX: 'scroll',
+      },
+    }}
+  >
+    <CodeDatagrid systemCode={false} />
+  </List>
 );
 
 const CodeTitle = () => {
@@ -151,4 +159,10 @@ export const CodeCreate = () => (
   <Create title='Create a Code'>
     <CodeForm />
   </Create>
+);
+
+export const CodeSettings = () => (
+  <Edit title='Edit Default Code Settings'>
+    <CodeForm />
+  </Edit>
 );

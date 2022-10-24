@@ -1,26 +1,29 @@
 import * as React from 'react';
 import { Layout } from 'react-admin';
 import { Menu } from 'react-admin';
-
-import BookIcon from '@mui/icons-material/Book';
-import PeopleIcon from '@mui/icons-material/People';
-import LabelIcon from '@mui/icons-material/Label';
 import SubMenu from './SubMenu';
-import { Abc, EventNote, Person, Redeem, Settings } from '@mui/icons-material';
+import {
+  Abc,
+  EventNote,
+  Person,
+  Redeem,
+  Settings,
+  People,
+} from '@mui/icons-material';
 
 export const MainMenu = () => (
   <Menu>
     <Menu.Item to='/Auction' primaryText='Auctions' leftIcon={<EventNote />} />
-    <Menu.Item to='/User' primaryText='Users' leftIcon={<Person />} />
+    <Menu.Item to='/User' primaryText='Users' leftIcon={<People />} />
     <SubMenu primaryText='Codes' leftIcon={<Redeem />}>
       <Menu.Item to='/Code' primaryText='System Codes' leftIcon={<Abc />} />
       <Menu.Item
-        to='/admin/articles'
+        to='/user-codes'
         primaryText='User Codes'
-        leftIcon={<PeopleIcon />}
+        leftIcon={<Person />}
       />
       <Menu.Item
-        to='/admin/articles'
+        to='/admin/code-settings'
         primaryText='Default Settings'
         leftIcon={<Settings />}
       />

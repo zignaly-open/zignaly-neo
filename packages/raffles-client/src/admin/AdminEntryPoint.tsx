@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Admin, defaultTheme, Resource } from 'react-admin';
+import { Admin, CustomRoutes, defaultTheme, Resource } from 'react-admin';
 import {
   AuctionEdit,
   AuctionIcon,
@@ -7,9 +7,17 @@ import {
   AuctionCreate,
 } from './auctions';
 import { UserList, UserIcon } from './users';
-import { CodeCreate, CodeEdit, CodeList, CodeIcon } from './codes';
+import {
+  CodeCreate,
+  CodeEdit,
+  CodeList,
+  CodeIcon,
+  UserCodeList,
+  CodeSettings,
+} from './codes';
 import buildGraphQLProvider from './dataProvider';
 import MyLayout from './Layout';
+import { Route } from 'react-router-dom';
 
 const theme = {
   ...defaultTheme,
@@ -48,13 +56,18 @@ const AdminEntryPoint = () => {
         create={CodeCreate}
         icon={CodeIcon}
       />
-      <Resource
-        name='user-codes'
-        list={CodeList}
-        edit={CodeEdit}
-        create={CodeCreate}
-        icon={CodeIcon}
-      />
+      <CustomRoutes>
+        {/* <Route path='/user-codes' element={<Settings />} /> */}
+        <Route path='/user-codes' element={<UserCodeList />} />
+        <Route path='/code-settings' element={<CodeSettings />} />
+        {/* <Resource
+          name='user-codes'
+          list={UserCodeList}
+          edit={CodeEdit}
+          create={CodeCreate}
+          icon={CodeIcon}
+        /> */}
+      </CustomRoutes>
     </Admin>
   );
 };

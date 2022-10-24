@@ -10,7 +10,7 @@ import {
 import { Person } from '@mui/icons-material';
 export const UserIcon = Person;
 
-const userFilters = [<SearchInput source='q' alwaysOn />];
+const userFilters = [<SearchInput source='q' alwaysOn key={0} />];
 
 export const UserList = () => (
   <List sort={{ field: 'id', order: 'desc' }} filters={userFilters}>
