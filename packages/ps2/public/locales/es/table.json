@@ -1,0 +1,28 @@
+{
+	"footer": {
+		"elements": {
+			"show": "Mostrando",
+			"out": "fuera de",
+			"items": "elementos"
+		},
+		"page": {
+			"items": "Página",
+			"out": "fuera de"
+		},
+		"selector": {
+			"display": "Mostrando",
+			"items": "elementos"
+		}
+	},
+	"assetsInPool-investors": "{{cuenta}} inversor",
+	"assetsInPool-investors_plural": "{{count}} inversores",
+	"balanceSummary-invested": "Invertido",
+	"selector-validation-notData": "Datos no disponibles",
+	"investColumn": {
+		"successFess": "10% de Comisión por Beneficios",
+		"liquidated": "LIQUIDADO"
+	},
+	"tooltip-columnHeader": "Alternar SortBy",
+	"serviceName-by": "por",
+	"columns-hideOrShow": "Mostrar\/Ocultar columnas"
+}
