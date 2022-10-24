@@ -4,8 +4,8 @@ import { CoinBalances, CoinDetails } from './types';
 import { QueryReturnType } from '../../util/queryReturnType';
 
 export function useCoinBalances(options?: {
-  convert: boolean;
-  refetch: boolean;
+  convert?: boolean;
+  refetch?: boolean;
 }): QueryReturnType<CoinBalances> {
   const { convert = false, refetch = false } = options || {};
   const exchange = useActiveExchange();
@@ -14,7 +14,7 @@ export function useCoinBalances(options?: {
       exchangeInternalId: exchange?.internalId,
       convert,
     },
-    { skip: !exchange?.internalId, refetchOnMountOrArgChange: refetch },
+    { skip: !exchange?.internalId, refetchOnMountOrArgChange: refetch || 30 },
   );
 }
 
