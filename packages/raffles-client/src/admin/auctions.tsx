@@ -120,8 +120,33 @@ export const AuctionFilterSidebar = () => (
   </Card>
 );
 
+const postFilters = [
+  <SearchInput source='title' alwaysOn placeholder='Search' key={0} />,
+  <SelectInput
+    key={1}
+    source='chain'
+    choices={Object.keys(chains).map((c) => ({
+      id: c,
+      name: chains[c].name,
+    }))}
+    alwaysOn
+  />,
+  <SelectInput
+    key={1}
+    source='test'
+    label='Date'
+    choices={[
+      {
+        id: 'today',
+        name: 'resources.auctions.filters.today',
+      },
+    ]}
+    alwaysOn
+  />,
+];
+
 export const AuctionList = () => (
-  <List sort={{ field: 'id', order: 'desc' }} aside={<AuctionFilterSidebar />}>
+  <List sort={{ field: 'id', order: 'desc' }} filters={postFilters}>
     <Datagrid rowClick='edit'>
       <TextField source='id' />
       <TextField source='title' />
