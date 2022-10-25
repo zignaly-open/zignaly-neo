@@ -260,7 +260,14 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
             size={'large'}
             type={'submit'}
             loading={isLoading}
-            caption={t('form.button.continue-to-confirmation')}
+            caption={
+              isConfirmation
+                ? t('form.button.invest-now', {
+                    amount: watch('amountTransfer')!.value.toString(),
+                    coin: coin.id,
+                  })
+                : t('form.button.continue-to-confirmation')
+            }
             disabled={!canSubmit}
           />
         </Box>
