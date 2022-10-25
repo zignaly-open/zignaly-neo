@@ -39,7 +39,7 @@ const initialStateTable = {
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
-  const balancesEndpoint = useCoinBalances(true);
+  const balancesEndpoint = useCoinBalances({ convert: true, refetch: true });
   const coinsEndpoint = useExchangeCoinsList();
   const { exchangeType } = useActiveExchange();
   const { showModal } = useModal();

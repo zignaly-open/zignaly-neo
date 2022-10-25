@@ -1,0 +1,33 @@
+{
+	"title": "Mi Panel Principal",
+	"tableHeader": {
+		"summary": {
+			"title": "Mi Valor Actual",
+			"subtitle": "Rentabilidad"
+		},
+		"serviceName": {
+			"title": "Nombre del Servicio",
+			"subtitle": "Gestor\/Moneda base"
+		},
+		"1-mo": {
+			"title": "1 mes",
+			"no-data": "Todavía no hay datos que mostrar"
+		},
+		"dailyAvg-title": "Promedio diario.",
+		"3-mos-title": "3 meses",
+		"6-mos-title": "6 meses",
+		"all": {
+			"title": "Todo",
+			"subtitle": "Tiempo"
+		}
+	},
+	"table-search-emptyMessage": "Aún no estás conectado a ningún servicio.",
+	"something-went-wrong": "Algo salió mal",
+	"loading-arialLabel": "Cargando mi panel principal",
+	"slider-input": {
+		"labels": {
+			"left": "Reinvertir",
+			"right": "Retirar"
+		}
+	}
+}

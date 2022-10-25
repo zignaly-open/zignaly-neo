@@ -2,6 +2,7 @@
   "service-by": "by <0>{{name}}</0>",
   "service-age": "Started <0>{{date}}</0> ago",
   "link-copied": "Link copied to clipboard!",
+  "logo-alt": "Zignaly - Profit Sharing / Copy Trading Service Profile Logo of {{name}}",
   "liquidated": "Liquidated",
   "invested-label": "Invested",
   "copy-link": "Copy link",

@@ -1,0 +1,47 @@
+{
+	"manage": "Gestionar",
+	"totalFunds": "Total de Fondos en el Servicio",
+	"tradingFunds": "Fondos de Trading",
+	"tradingFunds-desc": "Fondos disponibles para trading y utilizados en posiciones",
+	"availableTrading": "Disponible para trading:",
+	"allocatedTrading": "Asignado para trading:",
+	"hardDisconnected": "Fondos de Desconexión Forzosa:",
+	"disconnectionFunds": "Fondos de Desconexión",
+	"disconnectionFunds-desc": "Fondos disponibles para devolver a los inversores que quieran desconectarse",
+	"availableDisconnection": "Disponible para desconexiones:",
+	"neededSnapshot": "Necesario para la instantánea diaria:",
+	"helper": "¿Necesita ayuda con estas cifras? Consulte nuestro apartado sobre <0>el funcionamiento de los saldos de la participación en los beneficios<\/0>.",
+	"minBalance": {
+		"title": "Saldo mínimo:",
+		"success": "Has editado el saldo mínimo con éxito."
+	},
+	"minBalanceModal": {
+		"title": "Editar Saldo Mínimo",
+		"desc": "Establezca el saldo mínimo que desea mantener en la Cuenta de Fondos de Desconexión.",
+		"placeholder": "0.0",
+		"labelBalance": "Saldo Mínimo Actual",
+		"save": "Guardar"
+	},
+	"heldHardDisc": "Retenido para desconexiones forzosas:",
+	"controlledZignaly": "Controlado por Zignaly",
+	"transfer": {
+		"title": "Transferir",
+		"loading": "Cargando",
+		"placeholder": "0.0",
+		"labelBalance": "Saldo Disponible:",
+		"deposit-available": "Saldo Disponible:",
+		"fromTradingAccount": "Desde la Cuenta de Trading",
+		"toTradingAccount": "A la Cuenta de Trading:",
+		"fromDiscAccount": "Desde Cuenta de Desconexión",
+		"toDiscAccount": "A la Cuenta de Desconexión:",
+		"now": "Transferir Ahora",
+		"success": "Has transferido con éxito {{amount}}."
+	},
+	"transferFunds": {
+		"title": "Transferir Fondos",
+		"desc": "Transferir monedas entre mis cuentas de profit sharing."
+	},
+	"hardDiconnectWarning": "Tus desconexiones forzosas han alcanzado el {perc}%. Si las desconexiones forzosas alcanzan el {maxPerc}% de los fondos del servicio, Zignaly tomará el control de su servicio.",
+	"previousValue": "Valor Anterior:",
+	"loading-arialLabel": "Cargando Gestión"
+}

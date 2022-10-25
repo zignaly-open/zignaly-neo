@@ -68,7 +68,10 @@ export function useIsInvestedInService(serviceId: string): {
     refetch,
     thisAccount: !!invested,
     accounts: data,
-    investedAmount: invested?.invested || '0',
+    investedAmount:
+      new BigNumber(invested?.invested || 0)
+        .plus(invested?.pending || 0)
+        .toString() || '0',
   };
 }
 

@@ -43,7 +43,7 @@ const throwBackendErrorInOurFormat = async <T,>(
   try {
     return await promise;
   } catch (e) {
-    throw { message: (e.data?.error as { msg: string }).msg };
+    throw { message: (e.data?.error as { msg: string })?.msg };
   }
 };
 

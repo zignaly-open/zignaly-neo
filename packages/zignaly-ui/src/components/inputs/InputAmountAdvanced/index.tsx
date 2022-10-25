@@ -66,7 +66,15 @@ function InputAmount({
 
   const onClickMaxValue = useCallback(() => {
     if (!disabled && value?.token?.balance) {
-      onValueChange(changeEvent(name, value?.token.balance));
+      onValueChange(
+        changeEvent(
+          name,
+          value?.token.balance
+            ?.toString()
+            .replace(/([^1-9])0+$/, "$1")
+            .replace(/\.0*$/, ""),
+        ),
+      );
     }
   }, [disabled, onChange, value?.token]);
 

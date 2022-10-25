@@ -13,23 +13,11 @@ import {
 } from './atoms';
 import { useMediaQuery } from '@mui/material';
 import theme from 'theme';
-import {
-  useIsInvestedInService,
-  useSetSelectedInvestment,
-} from '../../../../apis/investment/use';
+import { useIsInvestedInService } from '../../../../apis/investment/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
-import { ShowFnOutput, useModal } from 'mui-modal-provider';
-import EditInvestmentModal from '../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
-import { serviceToInvestmentServiceDetail } from '../../../../apis/investment/util';
-import {
-  useActiveExchange,
-  useIsAuthenticated,
-  useSetMissedRoute,
-} from '../../../../apis/user/use';
-import { useNavigate } from 'react-router-dom';
-import { ROUTE_LOGIN } from '../../../../routes';
+import { useActiveExchange } from '../../../../apis/user/use';
 import { useUpdateEffect } from 'react-use';
-import InvestModal from 'views/Dashboard/components/ManageInvestmentModals/InvestModal';
+import { useTranslation } from 'react-i18next';
 
 const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
@@ -37,38 +25,15 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   const isOwner = useIsServiceOwner(service.id);
   const isInvested = useIsInvestedInService(service.id);
   const md = useMediaQuery(theme.breakpoints.up('sm'));
+  const { t } = useTranslation('service');
   const activeExchange = useActiveExchange();
-  const selectInvestment = useSetSelectedInvestment();
 
-  const navigate = useNavigate();
-  const setMissedRoute = useSetMissedRoute();
-  const isAuthenticated = useIsAuthenticated();
   // we do not use the results of this till before the modal
   useCoinBalances();
-  const { showModal } = useModal();
 
   useUpdateEffect(() => {
     activeExchange?.internalId && isInvested.refetch();
   }, [activeExchange?.internalId]);
-
-  const onClickEditInvestment = () => {
-    selectInvestment(serviceToInvestmentServiceDetail(service));
-    const modal: ShowFnOutput<void> = showModal(EditInvestmentModal, {
-      close: () => modal.hide(),
-    });
-  };
-
-  const onClickMakeInvestment = () => {
-    if (isAuthenticated) {
-      selectInvestment(serviceToInvestmentServiceDetail(service));
-      const modal: ShowFnOutput<void> = showModal(InvestModal, {
-        close: () => modal.hide(),
-      });
-    } else {
-      setMissedRoute();
-      navigate(ROUTE_LOGIN);
-    }
-  };
 
   return (
     <Box
@@ -98,7 +63,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
         <Box sx={{ width: '55px', marginBottom: md ? 0 : 2 }}>
           <Avatar
             size={'x-large'}
-            alt={service.name}
+            alt={t('logo-alt', { name: service.name })}
             image={getServiceLogo(service.logo)}
           />
         </Box>
@@ -119,12 +84,9 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
         {!isInvested.isLoading && !service.liquidated && (
           <Box sx={{ mt: md ? -1.5 : 3 }}>
             {isInvested.thisAccount ? (
-              <InvestedButton
-                service={service}
-                onClick={onClickEditInvestment}
-              />
+              <InvestedButton service={service} />
             ) : (
-              <InvestButton service={service} onClick={onClickMakeInvestment} />
+              <InvestButton service={service} />
             )}
 
             {Object.keys(isInvested.accounts || {}).length > 1 && (
