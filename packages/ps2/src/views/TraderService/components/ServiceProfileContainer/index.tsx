@@ -17,6 +17,7 @@ import { useIsInvestedInService } from '../../../../apis/investment/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { useUpdateEffect } from 'react-use';
+import { useTranslation } from 'react-i18next';
 
 const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
@@ -24,6 +25,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   const isOwner = useIsServiceOwner(service.id);
   const isInvested = useIsInvestedInService(service.id);
   const md = useMediaQuery(theme.breakpoints.up('sm'));
+  const { t } = useTranslation('service');
   const activeExchange = useActiveExchange();
 
   // we do not use the results of this till before the modal
@@ -61,7 +63,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
         <Box sx={{ width: '55px', marginBottom: md ? 0 : 2 }}>
           <Avatar
             size={'x-large'}
-            alt={service.name}
+            alt={t('logo-alt', { name: service.name })}
             image={getServiceLogo(service.logo)}
           />
         </Box>
