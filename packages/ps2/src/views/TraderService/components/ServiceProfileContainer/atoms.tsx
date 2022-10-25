@@ -33,6 +33,7 @@ import { useToast } from '../../../../util/hooks/useToast';
 import { Box, useMediaQuery } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
+  useCurrentBalance,
   useIsInvestedInService,
   useSetSelectedInvestment,
 } from '../../../../apis/investment/use';
@@ -45,6 +46,7 @@ import {
   useIsAuthenticated,
   useSetMissedRoute,
 } from '../../../../apis/user/use';
+import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 
 export const InvestButton: React.FC<{
   service: Service;
@@ -55,13 +57,23 @@ export const InvestButton: React.FC<{
   const selectInvestment = useSetSelectedInvestment();
   const navigate = useNavigate();
   const setMissedRoute = useSetMissedRoute();
+  const { balance } = useCurrentBalance(service.ssc);
 
   const onClickMakeInvestment = () => {
     if (isAuthenticated) {
       selectInvestment(serviceToInvestmentServiceDetail(service));
-      const modal: ShowFnOutput<void> = showModal(InvestModal, {
-        close: () => modal.hide(),
-      });
+      const showDeposit = +balance > 0;
+      const modal: ShowFnOutput<void> = showModal(
+        showDeposit ? DepositModal : InvestModal,
+        {
+          close: () => modal.hide(),
+          ...(showDeposit
+            ? {
+                allowedCoins: [service.ssc],
+              }
+            : {}),
+        },
+      );
     } else {
       setMissedRoute();
       navigate(ROUTE_LOGIN);

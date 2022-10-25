@@ -8,7 +8,7 @@ import CenteredLoader from '../../../../../components/CenteredLoader';
 import { DepositModalProps } from '../types';
 
 const DepositView: React.FC<DepositModalProps> = (props) => {
-  const { isFetching: isFetchingBalances } = useCoinBalances(true);
+  const { isFetching: isFetchingBalances } = useCoinBalances({ convert: true });
   const { isFetching: isFetchingCoins } = useExchangeCoinsList();
   return isFetchingCoins || isFetchingBalances ? (
     <CenteredLoader />

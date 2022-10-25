@@ -29,7 +29,7 @@ import { DepositModalProps } from '../../types';
 
 function DepositForm({ selectedCoin }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
-  const { data: balances } = useCoinBalances(true);
+  const { data: balances } = useCoinBalances({ convert: true });
   const { data: coins } = useExchangeCoinsList();
   const toast = useToast();
 
@@ -72,7 +72,7 @@ function DepositForm({ selectedCoin }: DepositModalProps) {
             ...n,
           })),
         }))
-        .sort((a, b) => a.caption.localeCompare(b.caption)),
+        .sort((a, b) => a.caption?.localeCompare(b.caption)),
     [coins],
   );
 

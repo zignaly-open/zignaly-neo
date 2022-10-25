@@ -5,7 +5,7 @@ import ZModal from '../../../../components/ZModal';
 import DepositView from './views/Deposit';
 import { DepositModalProps } from './types';
 
-function InvestModal({
+function DepositModal({
   close,
   selectedCoin,
   allowedCoins,
@@ -23,4 +23,4 @@ function InvestModal({
   );
 }
 
-export default InvestModal;
+export default DepositModal;
