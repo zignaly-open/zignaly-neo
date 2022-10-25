@@ -6,7 +6,7 @@ import {
   AuctionBasketItem,
 } from './entities/auctions/model';
 import { isTest, postgresUrl } from '../config';
-import { Setting } from './entities/setting/model';
+import { Setting } from './entities/settings/model';
 import { Payout } from './entities/payouts/model';
 import { connect } from './redisAuctionWatcher';
 import { Code, CodeRedemption } from './entities/codes/model';

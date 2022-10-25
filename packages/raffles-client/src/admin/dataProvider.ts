@@ -53,6 +53,24 @@ const myBuildQuery = (introspection) => (fetchType, resource, params) => {
         },
       };
     }
+  } else if (resource === 'Setting') {
+    return {
+      query: gql`
+        query {
+          allSettings {
+            key
+            value
+          }
+        }
+      `,
+      parseResponse: (response: ApolloQueryResult<any>) => {
+        const res = response.data.allSettings;
+        return {
+          data: res.map((r) => ({ ...r, id: r.key })),
+          total: res.length,
+        };
+      },
+    };
   }
 
   if (fetchType === 'DELETE') {

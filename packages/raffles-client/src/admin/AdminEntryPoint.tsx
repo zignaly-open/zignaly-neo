@@ -19,6 +19,8 @@ import buildGraphQLProvider from './dataProvider';
 import MyLayout from './Layout';
 import { Route } from 'react-router-dom';
 import i18nProvider from './i18nProvider';
+import { Settings } from '@mui/icons-material';
+import { SettingEdit, SettingList } from './settings';
 
 const theme = {
   ...defaultTheme,
@@ -45,7 +47,7 @@ const AdminEntryPoint = () => {
       theme={theme}
       i18nProvider={i18nProvider}
       dataProvider={dataProvider}
-      layout={MyLayout}
+      // layout={MyLayout}
     >
       <Resource
         name='Auction'
@@ -74,6 +76,12 @@ const AdminEntryPoint = () => {
           icon={CodeIcon}
         /> */}
       </CustomRoutes>
+      <Resource
+        name='Setting'
+        list={SettingList}
+        edit={SettingEdit}
+        icon={Settings}
+      />
     </Admin>
   );
 };

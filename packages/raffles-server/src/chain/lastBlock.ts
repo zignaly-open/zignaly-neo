@@ -1,5 +1,5 @@
-import { getConfigValue, setConfigValue } from '../entities/setting/util';
-import { CONFIG_LAST_PROCESSED_BLOCK } from '../entities/setting/constants';
+import { getConfigValue, setConfigValue } from '../entities/settings/util';
+import { CONFIG_LAST_PROCESSED_BLOCK } from '../entities/settings/constants';
 
 export async function setLastProcessedBlock(
   blockNumber: number,

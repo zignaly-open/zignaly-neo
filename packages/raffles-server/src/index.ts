@@ -12,6 +12,7 @@ import * as auctions from './entities/auctions';
 import * as users from './entities/users';
 import * as payouts from './entities/payouts';
 import * as codes from './entities/codes';
+import * as settings from './entities/settings';
 import listenToChain from './chain/watch';
 import { expressjwt, Request as AuthorizedRequest } from 'express-jwt';
 import { port, isTest, algorithm, secret, graphqlPath } from '../config';
@@ -47,12 +48,14 @@ const schema = makeExecutableSchema({
     users.typeDef,
     payouts.typeDef,
     codes.typeDef,
+    settings.typeDef,
   ],
   resolvers: [
     auctions.resolvers,
     users.resolvers,
     payouts.resolvers,
     codes.resolvers,
+    settings.resolvers,
   ],
 });
 
