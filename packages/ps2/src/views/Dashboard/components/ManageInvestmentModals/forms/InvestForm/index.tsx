@@ -2,7 +2,7 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
-import { Field, Form } from './styles';
+import { Field, Form, Row } from './styles';
 import {
   Button,
   CoinIcon,
@@ -97,7 +97,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
       )}
     >
       <Field>
-        <Box sx={{ minHeight: '110px' }}>
+        <Row>
           {isConfirmation ? (
             <>
               <Typography variant={'body1'}>
@@ -131,27 +131,50 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
               error={isDirty && t(errors?.amountTransfer?.value?.message)}
             />
           )}
-        </Box>
-        <Box>
-          <Controller
-            name='profitPercentage'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <SliderInput
-                mode={'range'}
-                labels={{
-                  top: t('form.profits.title'),
-                  left: t('form.profits.left'),
-                  right: t('form.profits.right'),
-                }}
-                value={field.value}
-                initialValue={field.value}
-                onChange={field.onChange}
-              />
-            )}
-          />
-        </Box>
+        </Row>
+        <Row>
+          {isConfirmation ? (
+            <>
+              <Typography variant={'body1'}>
+                {t('form.profits.title')}
+              </Typography>
+              <AmountInvested>
+                <TokenValue>
+                  <Typography variant={'bigNumber'} color={'neutral100'}>
+                    <NumberFormat
+                      value={watch('profitPercentage').toString()}
+                      displayType={'text'}
+                      suffix={'%'}
+                      thousandSeparator={true}
+                    />
+                  </Typography>
+                  <Typography variant={'h3'} color={'neutral400'}>
+                    {String(coin.id).toUpperCase()}
+                  </Typography>
+                </TokenValue>
+              </AmountInvested>
+            </>
+          ) : (
+            <Controller
+              name='profitPercentage'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <SliderInput
+                  mode={'range'}
+                  labels={{
+                    top: t('form.profits.title'),
+                    left: t('form.profits.left'),
+                    right: t('form.profits.right'),
+                  }}
+                  value={field.value}
+                  initialValue={field.value}
+                  onChange={field.onChange}
+                />
+              )}
+            />
+          )}
+        </Row>
       </Field>
 
       <Box sx={{ mt: 4, display: isConfirmation ? 'block' : 'none' }}>
