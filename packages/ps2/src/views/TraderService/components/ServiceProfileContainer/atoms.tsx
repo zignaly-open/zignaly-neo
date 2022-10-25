@@ -62,7 +62,7 @@ export const InvestButton: React.FC<{
   const onClickMakeInvestment = () => {
     if (isAuthenticated) {
       selectInvestment(serviceToInvestmentServiceDetail(service));
-      const showDeposit = +balance > 0;
+      const showDeposit = +balance === 0;
       const modal: ShowFnOutput<void> = showModal(
         showDeposit ? DepositModal : InvestModal,
         {
