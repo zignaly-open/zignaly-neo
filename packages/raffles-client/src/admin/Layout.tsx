@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Layout } from 'react-admin';
+import { AppBar, defaultTheme, Layout, ToggleThemeButton } from 'react-admin';
 import { Menu } from 'react-admin';
 import SubMenu from './SubMenu';
 import {
@@ -10,6 +10,18 @@ import {
   Settings,
   People,
 } from '@mui/icons-material';
+import { Typography } from '@mui/material';
+
+const darkTheme = {
+  palette: { mode: 'dark' },
+};
+
+export const MyAppBar = (props) => (
+  <AppBar {...props}>
+    <Typography flex='1' variant='h6' id='react-admin-title'></Typography>
+    <ToggleThemeButton lightTheme={defaultTheme} darkTheme={darkTheme} />
+  </AppBar>
+);
 
 export const MainMenu = () => (
   <Menu>
@@ -25,6 +37,8 @@ export const MainMenu = () => (
   </Menu>
 );
 
-const MyLayout = (props) => <Layout {...props} menu={MainMenu} />;
+const MyLayout = (props) => (
+  <Layout {...props} appBar={MyAppBar} menu={MainMenu} />
+);
 
 export default MyLayout;

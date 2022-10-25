@@ -3,30 +3,18 @@ import React from 'react';
 import {
   List,
   Datagrid,
-  DateField,
   TextField,
-  EmailField,
-  SearchInput,
   Edit,
   SimpleForm,
   TextInput,
   FunctionField,
-  Labeled,
-  ListContextProvider,
   Title,
   NumberInput,
-  ListBase,
-  useSaveContext,
   SaveContextProvider,
-  EditContextProvider,
-  Loading,
   useGetOne,
-  useDataProvider,
-  useList,
-  useGetList,
   useUpdate,
+  useRecordContext,
 } from 'react-admin';
-// import { useQuery } from 'react-query';
 
 export const SettingList = () => (
   <List
@@ -83,18 +71,18 @@ export const SettingsPage = (p) => {
         >
           <SimpleForm record={data} sx={{ width: '400px' }}>
             <Typography variant='h6' gutterBottom>
-              Code Benefit
+              Default User Code Benefit
             </Typography>
             <NumberInput source='benefitDirect' fullWidth />
+            <NumberInput source='benefitDepositFactor' fullWidth />
+            <NumberInput source='maxTotalBenefits' fullWidth />
             <NumberInput
               source='reqMinimumDeposit'
               label='Min deposit required'
               fullWidth
             />
-            <NumberInput source='benefitDepositFactor' fullWidth />
-            <NumberInput source='maxTotalBenefits' fullWidth />
             <Typography variant='h6' gutterBottom>
-              Code Reward
+              Default User Code Reward
             </Typography>
             <NumberInput source='rewardDirect' fullWidth />
             <NumberInput source='rewardDepositFactor' fullWidth />

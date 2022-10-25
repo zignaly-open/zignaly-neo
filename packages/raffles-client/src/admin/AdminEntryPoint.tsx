@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Admin, CustomRoutes, defaultTheme, Resource } from 'react-admin';
+import {
+  Admin,
+  CustomRoutes,
+  defaultTheme,
+  Loading,
+  Resource,
+} from 'react-admin';
 import {
   AuctionEdit,
   AuctionIcon,
@@ -39,7 +45,7 @@ const AdminEntryPoint = () => {
   }, []);
 
   if (!dataProvider) {
-    return <div>Loading</div>;
+    return <Loading />;
   }
 
   return (
@@ -65,25 +71,10 @@ const AdminEntryPoint = () => {
         icon={CodeIcon}
       />
       <CustomRoutes>
-        {/* <Route path='/user-codes' element={<Settings />} /> */}
         <Route path='/user-codes' element={<UserCodeList />} />
         <Route path='/code-settings' element={<CodeSettings />} />
         <Route path='/settings' element={<SettingsPage />} />
-        {/* <Resource
-          name='user-codes'
-          list={UserCodeList}
-          edit={CodeEdit}
-          create={CodeCreate}
-          icon={CodeIcon}
-        /> */}
       </CustomRoutes>
-      <Resource
-        name='Settings'
-        // list={SettingList}
-        edit={SettingEdit}
-        icon={Settings}
-      />
-      {/* <Resource name='settingss' list={SettingsPage} icon={CodeIcon} /> */}
     </Admin>
   );
 };

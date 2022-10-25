@@ -1,12 +1,5 @@
-import { AccessTime, CalendarMonth, Dns, EventNote } from '@mui/icons-material';
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  Chip,
-  Typography,
-} from '@mui/material';
+import { EventNote } from '@mui/icons-material';
+import { Box, Card, CardMedia, Chip, Typography } from '@mui/material';
 import MarkdownInput from './MarkdownInput';
 import React from 'react';
 import {
@@ -24,103 +17,19 @@ import {
   BooleanInput,
   DateTimeInput,
   NumberInput,
-  SelectField,
   SelectInput,
   NumberField,
   SearchInput,
   ChipField,
-  SavedQueriesList,
-  FilterLiveSearch,
-  FilterList,
-  FilterListItem,
-  Filter,
   FunctionField,
 } from 'react-admin';
 import { formatDate, parseDate } from './util';
 import { chains } from 'util/chain';
-import MailIcon from '@mui/icons-material/MailOutline';
-import CategoryIcon from '@mui/icons-material/LocalOffer';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
-import {
-  endOfYesterday,
-  startOfWeek,
-  subWeeks,
-  startOfMonth,
-  subMonths,
-} from 'date-fns';
 
 export const AuctionIcon = EventNote;
 
-const auctionFilters = [<SearchInput source='title' alwaysOn key={0} />];
-
-export const AuctionFilterSidebar = () => (
-  <Card
-    sx={{
-      order: -1,
-      flex: '0 0 15em',
-      mr: 2,
-      mt: 9.5,
-    }}
-  >
-    <CardContent>
-      <FilterLiveSearch source='title' />
-      <FilterList label='resources.auctions.fields.chain' icon={<Dns />}>
-        {Object.keys(chains).map((c) => (
-          <FilterListItem label={chains[c].name} value={{ chain: c }} key={c} />
-        ))}
-      </FilterList>
-      <FilterList
-        label='resources.auctions.filters.last_visited'
-        icon={<AccessTime />}
-      >
-        <FilterListItem
-          label='resources.auctions.filters.today'
-          value={{
-            startDateGte: endOfYesterday().toISOString(),
-            startDateLte: undefined,
-          }}
-        />
-        <FilterListItem
-          label='resources.auctions.filters.this_week'
-          value={{
-            startDateGte: startOfWeek(new Date()).toISOString(),
-            startDateLte: undefined,
-          }}
-        />
-        <FilterListItem
-          label='resources.auctions.filters.last_week'
-          value={{
-            startDateGte: subWeeks(startOfWeek(new Date()), 1).toISOString(),
-            startDateLte: startOfWeek(new Date()).toISOString(),
-          }}
-        />
-        <FilterListItem
-          label='resources.auctions.filters.this_month'
-          value={{
-            startDateGte: startOfMonth(new Date()).toISOString(),
-            startDateLte: undefined,
-          }}
-        />
-        <FilterListItem
-          label='resources.auctions.filters.last_month'
-          value={{
-            startDateGte: subMonths(startOfMonth(new Date()), 1).toISOString(),
-            startDateLte: startOfMonth(new Date()).toISOString(),
-          }}
-        />
-        <FilterListItem
-          label='resources.auctions.filters.earlier'
-          value={{
-            startDateGte: undefined,
-            startDateLte: subMonths(startOfMonth(new Date()), 1).toISOString(),
-          }}
-        />
-      </FilterList>
-    </CardContent>
-  </Card>
-);
-
-const postFilters = [
+const auctionFilters = [
   <SearchInput source='title' alwaysOn placeholder='Search' key={0} />,
   <SelectInput
     key={1}
@@ -131,22 +40,10 @@ const postFilters = [
     }))}
     alwaysOn
   />,
-  <SelectInput
-    key={1}
-    source='test'
-    label='Date'
-    choices={[
-      {
-        id: 'today',
-        name: 'resources.auctions.filters.today',
-      },
-    ]}
-    alwaysOn
-  />,
 ];
 
 export const AuctionList = () => (
-  <List sort={{ field: 'id', order: 'desc' }} filters={postFilters}>
+  <List sort={{ field: 'id', order: 'desc' }} filters={auctionFilters}>
     <Datagrid rowClick='edit'>
       <TextField source='id' />
       <TextField source='title' />
