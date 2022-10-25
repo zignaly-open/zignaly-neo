@@ -27,24 +27,51 @@ import {
 } from './styles';
 import { formatDistance } from 'date-fns';
 import copy from 'copy-to-clipboard';
-import { generatePath } from 'react-router-dom';
-import { ROUTE_TRADING_SERVICE } from '../../../../routes';
+import { generatePath, useNavigate } from 'react-router-dom';
+import { ROUTE_LOGIN, ROUTE_TRADING_SERVICE } from '../../../../routes';
 import { useToast } from '../../../../util/hooks/useToast';
 import { Box, useMediaQuery } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { useIsInvestedInService } from '../../../../apis/investment/use';
+import {
+  useIsInvestedInService,
+  useSetSelectedInvestment,
+} from '../../../../apis/investment/use';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import InvestedFromOtherAccounts from '../InvestedFromOtherAccounts';
+import { serviceToInvestmentServiceDetail } from '../../../../apis/investment/util';
+import EditInvestmentModal from '../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
+import InvestModal from '../../../Dashboard/components/ManageInvestmentModals/InvestModal';
+import {
+  useIsAuthenticated,
+  useSetMissedRoute,
+} from '../../../../apis/user/use';
 
 export const InvestButton: React.FC<{
   service: Service;
-  onClick: () => void;
-}> = ({ service, onClick }) => {
+}> = ({ service }) => {
   const { t } = useTranslation('service');
+  const isAuthenticated = useIsAuthenticated();
+  const { showModal } = useModal();
+  const selectInvestment = useSetSelectedInvestment();
+  const navigate = useNavigate();
+  const setMissedRoute = useSetMissedRoute();
+
+  const onClickMakeInvestment = () => {
+    if (isAuthenticated) {
+      selectInvestment(serviceToInvestmentServiceDetail(service));
+      const modal: ShowFnOutput<void> = showModal(InvestModal, {
+        close: () => modal.hide(),
+      });
+    } else {
+      setMissedRoute();
+      navigate(ROUTE_LOGIN);
+    }
+  };
+
   return (
     <InvestButtonWrap>
       <Button
-        onClick={onClick}
+        onClick={onClickMakeInvestment}
         caption={t('invest-button.invest-now')}
         bottomElement={
           <InvestButtonSubtext
@@ -94,8 +121,19 @@ export const OtherAccountsButton: React.FC<{
 
 export const InvestedButton: React.FC<{
   service: Service;
-  onClick: () => void;
-}> = ({ service, onClick }) => {
+}> = ({ service }) => {
+  const { showModal } = useModal();
+  const selectInvestment = useSetSelectedInvestment();
+
+  const onClickEditInvestment = () => {
+    selectInvestment(serviceToInvestmentServiceDetail(service));
+    const modal: ShowFnOutput<void> = showModal(EditInvestmentModal, {
+      close: () => {
+        modal.hide();
+      },
+    });
+  };
+
   const { investedAmount } = useIsInvestedInService(service.id);
   const { t } = useTranslation(['service', 'action']);
   return (
@@ -108,7 +146,7 @@ export const InvestedButton: React.FC<{
         leftElement={<PencilIcon color='#65647E' width={16} height={16} />}
         caption={t('action:edit')}
         color={'links'}
-        onClick={onClick}
+        onClick={onClickEditInvestment}
       />
     </InvestButtonContainer>
   );
