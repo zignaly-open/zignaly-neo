@@ -47,7 +47,7 @@ const AdminEntryPoint = () => {
       theme={theme}
       i18nProvider={i18nProvider}
       dataProvider={dataProvider}
-      // layout={MyLayout}
+      layout={MyLayout}
     >
       <Resource
         name='Auction'
@@ -78,12 +78,12 @@ const AdminEntryPoint = () => {
         /> */}
       </CustomRoutes>
       <Resource
-        name='Setting'
-        list={SettingList}
+        name='Settings'
+        // list={SettingList}
         edit={SettingEdit}
         icon={Settings}
       />
-      <Resource name='settingss' list={SettingsPage} icon={CodeIcon} />
+      {/* <Resource name='settingss' list={SettingsPage} icon={CodeIcon} /> */}
     </Admin>
   );
 };

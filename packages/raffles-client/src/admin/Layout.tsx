@@ -15,7 +15,7 @@ export const MainMenu = () => (
   <Menu>
     <Menu.Item to='/Auction' primaryText='Auctions' leftIcon={<EventNote />} />
     <Menu.Item to='/User' primaryText='Users' leftIcon={<People />} />
-    <SubMenu primaryText='Codes' leftIcon={<Redeem />}>
+    {/* <SubMenu primaryText='Codes' leftIcon={<Redeem />}>
       <Menu.Item to='/Code' primaryText='System Codes' leftIcon={<Abc />} />
       <Menu.Item
         to='/user-codes'
@@ -27,7 +27,8 @@ export const MainMenu = () => (
         primaryText='Default Settings'
         leftIcon={<Settings />}
       />
-    </SubMenu>
+    </SubMenu> */}
+    <Menu.Item to='/settings' primaryText='Settings' leftIcon={<Settings />} />
   </Menu>
 );
 

@@ -1,16 +1,26 @@
 import { gql } from 'apollo-server-express';
 
+const settings = `
+  benefitDirect: String
+  reqMinimumDeposit: String
+  benefitDepositFactor: String
+  maxTotalBenefits: String
+  rewardDirect: String
+  rewardDepositFactor: String
+  maxTotalRewards: String
+`;
+
 export const typeDef = gql`
-  type Setting {
-    key: ID
-    value: String
+  type Settings {
+    ${settings}
   }
 
   extend type Query {
-    allSettings: [Setting]
+    allSettings: Settings
+    Settings: Settings
   }
 
   extend type Mutation {
-    updateSetting(id: ID, value: String): Setting
+    updateSettings(${settings}): Settings
   }
 `;

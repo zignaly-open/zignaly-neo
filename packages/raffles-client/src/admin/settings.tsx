@@ -18,8 +18,15 @@ import {
   ListBase,
   useSaveContext,
   SaveContextProvider,
+  EditContextProvider,
+  Loading,
+  useGetOne,
+  useDataProvider,
+  useList,
+  useGetList,
+  useUpdate,
 } from 'react-admin';
-import { useList } from 'react-use';
+// import { useQuery } from 'react-query';
 
 export const SettingList = () => (
   <List
@@ -52,64 +59,52 @@ export const SettingEdit = () => (
   </Edit>
 );
 
-export const SettingsPage = () => {
-  // const {
-  //   // save, // the create or update callback, which receives the form data and calls the dataProvider
-  //   saving, //  boolean that becomes true when the dataProvider is called
-  //   mutationMode, // the current mutation mode, either 'undoable', 'optimistic', or 'pessimistic'
-  // } = useSaveContext();
-  const saving = false;
+export const SettingsPage = (p) => {
+  const { data, isLoading, error } = useGetOne('Settings', { id: undefined });
 
-  const save = (data) => {
-    console.log(data);
-  };
+  const [update, { isLoading: isSubmitting }] = useUpdate();
+  const onSubmit = (data) => update('Settings', { data, id: undefined });
+
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (error) {
+    return <p>ERROR</p>;
+  }
 
   return (
     <Card>
-      <Title title='My Page' />
-      <ListBase resource='Setting'>
-        <CardContent>
-          <SaveContextProvider
-            value={{ save, saving, mutationMode: 'undoable' }}
-          >
-            <SimpleForm sx={{ width: '400px' }}>
-              <Typography variant='h6' gutterBottom>
-                Benefit
-              </Typography>
-              <NumberInput source='benefitDirect' fullWidth />
-              <NumberInput
-                source='reqMinimumDeposit'
-                label='Min deposit required'
-                fullWidth
-              />
-              <NumberInput source='benefitDepositFactor' fullWidth />
-              <NumberInput source='maxTotalBenefits' fullWidth />
-              <Typography variant='h6' gutterBottom>
-                Reward
-              </Typography>
-              <NumberInput source='rewardDirect' fullWidth />
-              <NumberInput source='rewardDepositFactor' fullWidth />
-              <NumberInput source='maxTotalRewards' fullWidth />
-            </SimpleForm>
-          </SaveContextProvider>
-        </CardContent>
-      </ListBase>
+      <Title title='Settings' />
+      <CardContent>
+        <EditContextProvider
+          value={{
+            record: data,
+            isLoading,
+            save: onSubmit,
+            saving: isSubmitting,
+          }}
+        >
+          <SimpleForm sx={{ width: '400px' }}>
+            <Typography variant='h6' gutterBottom>
+              Benefit
+            </Typography>
+            <NumberInput source='benefitDirect' fullWidth />
+            <NumberInput
+              source='reqMinimumDeposit'
+              label='Min deposit required'
+              fullWidth
+            />
+            <NumberInput source='benefitDepositFactor' fullWidth />
+            <NumberInput source='maxTotalBenefits' fullWidth />
+            <Typography variant='h6' gutterBottom>
+              Reward
+            </Typography>
+            <NumberInput source='rewardDirect' fullWidth />
+            <NumberInput source='rewardDepositFactor' fullWidth />
+            <NumberInput source='maxTotalRewards' fullWidth />
+          </SimpleForm>
+        </EditContextProvider>
+      </CardContent>
     </Card>
   );
 };
-
-// export const SettingList = (p) => {
-//   console.log(p);
-//   const listContext = useList({ data });
-//   console.log(data);
-
-//   return (
-//     <ListContextProvider value={listContext}>
-//       <Edit>
-//         <SimpleForm>
-//           <TextInput source='' label='defaultRenefitDirect' value={'a'} />
-//         </SimpleForm>
-//       </Edit>
-//     </ListContextProvider>
-//   );
-// };

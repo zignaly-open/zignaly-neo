@@ -21,6 +21,7 @@ const authLink = setContext((_, { headers }) => {
 
 const myBuildQuery = (introspection) => (fetchType, resource, params) => {
   const builtQuery = buildQuery(introspection)(fetchType, resource, params);
+  console.log(builtQuery);
 
   if (resource === 'Code') {
     if (fetchType === 'GET_LIST') {
@@ -53,24 +54,30 @@ const myBuildQuery = (introspection) => (fetchType, resource, params) => {
         },
       };
     }
-  } else if (resource === 'Setting') {
+  } else if (resource === 'Settings') {
+    // if (fetchType === 'GET_ONE') {
+    builtQuery.query.definitions[0].selectionSet.selections.splice(1);
+
     return {
-      query: gql`
-        query {
-          allSettings {
-            key
-            value
-          }
-        }
-      `,
+      // query: gql`
+      //   query {
+      //     allSettings {
+
+      //     }
+      //   }
+      // `,
+      ...builtQuery,
       parseResponse: (response: ApolloQueryResult<any>) => {
-        const res = response.data.allSettings;
+        const { data } = response.data;
         return {
-          data: res.map((r) => ({ ...r, id: r.key })),
-          total: res.length,
+          // data: res.map((r) => ({ ...r, id: r.key })),
+          data: { ...data, id: undefined },
+          // total: 2,
         };
       },
     };
+    // } else if (fetchType === 'UPDATE') {
+    // }
   }
 
   if (fetchType === 'DELETE') {

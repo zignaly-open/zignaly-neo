@@ -8,20 +8,31 @@ const blackList = ['last block'];
 export const getSettings = async (user?: ContextUser) => {
   await checkAdmin(user?.id);
 
-  return Setting.findAll({ where: { key: { [Op.notIn]: blackList } } });
+  const settings = await Setting.findAll({
+    where: { key: { [Op.notIn]: blackList } },
+  });
+  return settings.reduce((acc, s) => {
+    return { ...acc, [s.key]: s.value };
+  }, {});
 };
 
-export const updateSetting = async (
+export const updateSettings = async (
   user: ContextUser,
   data: Partial<Setting>,
 ) => {
   await checkAdmin(user?.id);
 
-  const [, [setting]] = await Setting.update(data, {
-    where: { key: data.key },
-    returning: true,
-  });
-  if (!setting) throw new Error('Setting Not Found');
+  await Setting.bulkCreate(
+    Object.keys(data)
+      .filter((key) => !blackList.includes(key))
+      .map((key) => ({
+        key,
+        value: data[key],
+      })),
+    {
+      updateOnDuplicate: ['value'],
+    },
+  );
 
-  return setting;
+  return getSettings(user);
 };
