@@ -13,7 +13,7 @@ import {
   Typography,
 } from '@zignaly-open/ui';
 import copy from 'copy-to-clipboard';
-import { DepositFormData, DepositFormProps } from './types';
+import { DepositFormData } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { Box, Grid } from '@mui/material';
 import NumberFormat from 'react-number-format';
@@ -25,8 +25,9 @@ import {
 import { CoinBalance, CoinDetail } from '../../../../../../apis/coin/types';
 import { mergeCoinsAndBalances } from '../../../../../../apis/coin/util';
 import CenteredLoader from '../../../../../../components/CenteredLoader';
+import { DepositModalProps } from '../../types';
 
-function DepositForm({}: DepositFormProps) {
+function DepositForm({ selectedCoin }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
   const { data: balances } = useCoinBalances(true);
   const { data: coins } = useExchangeCoinsList();
@@ -82,6 +83,13 @@ function DepositForm({}: DepositFormProps) {
       setValue('coin', coinOptions[0]);
     }
   }, [coin]);
+
+  useEffect(() => {
+    if (!coin && coinOptions && selectedCoin) {
+      const match = coinOptions.find((x) => x.id === selectedCoin);
+      match && setValue('coin', match);
+    }
+  }, []);
 
   return (
     <Form onSubmit={handleSubmit(() => {})}>

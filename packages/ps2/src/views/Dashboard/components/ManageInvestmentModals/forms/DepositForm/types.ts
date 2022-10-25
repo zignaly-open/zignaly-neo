@@ -1,11 +1,6 @@
 import { ReactElement } from 'react';
 import { CoinNetwork } from '../../../../../../apis/coin/types';
 
-export type DepositFormProps = {
-  close: () => void;
-  allowedCoins?: string[];
-};
-
 export type CoinNetworkValue = CoinNetwork & {
   caption: string;
 };
