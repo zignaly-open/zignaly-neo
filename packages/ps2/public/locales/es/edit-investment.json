@@ -84,12 +84,9 @@
 		"button": "Cerrar"
 	},
 	"invest-modal": {
-		"invest-with": "",
-		"amount-to-invest": "",
 		"type-transfer": "Escriba la palabra \" {{word}} \" en el campo a continuación para completar la transferencia:",
 		"transfer-error": "Texto introducido incorrecto. Por favor, introduzca la palabra correcta",
 		"transfer-label": "Transferencia",
-		"i-understand-margin": "Entiendo que todo mi saldo de {{coin}} ahora es parte del colateral y está en riesgo",
-		"i-understand-money-transferred": ""
+		"i-understand-margin": "Entiendo que todo mi saldo de {{coin}} ahora es parte del colateral y está en riesgo"
 	}
 }
