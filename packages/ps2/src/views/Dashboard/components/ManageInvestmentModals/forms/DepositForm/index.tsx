@@ -27,7 +27,7 @@ import { mergeCoinsAndBalances } from '../../../../../../apis/coin/util';
 import CenteredLoader from '../../../../../../components/CenteredLoader';
 import { DepositModalProps } from '../../types';
 
-function DepositForm({ selectedCoin }: DepositModalProps) {
+function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
   const { data: balances } = useCoinBalances({ convert: true });
   const { data: coins } = useExchangeCoinsList();
@@ -72,8 +72,9 @@ function DepositForm({ selectedCoin }: DepositModalProps) {
             ...n,
           })),
         }))
-        .sort((a, b) => a.caption?.localeCompare(b.caption)),
-    [coins],
+        .sort((a, b) => a.caption?.localeCompare(b.caption))
+        .filter((x) => !allowedCoins || allowedCoins?.includes(x.id)),
+    [coins, allowedCoins],
   );
 
   useEffect(() => {
