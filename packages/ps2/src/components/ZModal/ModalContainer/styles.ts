@@ -31,8 +31,16 @@ export const Body = styled.div`
   text-align: left;
   display: flex;
   flex-direction: column;
-  width: 100%;
   color: ${({ theme }) => theme.neutral200};
+  max-height: calc(100vh - 150px);
+  overflow-y: auto;
+  overflow-x: visible;
+  margin-left: -40px;
+  margin-right: -40px;
+  width: calc(100% + 80px);
+  padding-left: 40px;
+  padding-right: 40px;
+}
 `;
 
 export const Header = styled.div`
