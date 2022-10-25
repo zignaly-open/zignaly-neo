@@ -20,7 +20,7 @@ import MyLayout from './Layout';
 import { Route } from 'react-router-dom';
 import i18nProvider from './i18nProvider';
 import { Settings } from '@mui/icons-material';
-import { SettingEdit, SettingList } from './settings';
+import { SettingEdit, SettingList, SettingsPage } from './settings';
 
 const theme = {
   ...defaultTheme,
@@ -68,6 +68,7 @@ const AdminEntryPoint = () => {
         {/* <Route path='/user-codes' element={<Settings />} /> */}
         <Route path='/user-codes' element={<UserCodeList />} />
         <Route path='/code-settings' element={<CodeSettings />} />
+        <Route path='/settings' element={<SettingsPage />} />
         {/* <Resource
           name='user-codes'
           list={UserCodeList}
@@ -82,6 +83,7 @@ const AdminEntryPoint = () => {
         edit={SettingEdit}
         icon={Settings}
       />
+      <Resource name='settingss' list={SettingsPage} icon={CodeIcon} />
     </Admin>
   );
 };
