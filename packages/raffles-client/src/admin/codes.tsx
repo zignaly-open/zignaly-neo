@@ -28,7 +28,7 @@ import { chains } from 'util/chain';
 
 export const CodeIcon = Redeem;
 
-const codeFilters = [<SearchInput source='q' alwaysOn />];
+const codeFilters = [<SearchInput source='q' alwaysOn placeholder='Code' />];
 
 const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
   return (

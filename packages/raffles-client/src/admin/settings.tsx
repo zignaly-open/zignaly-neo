@@ -65,18 +65,15 @@ export const SettingsPage = (p) => {
   const [update, { isLoading: isSubmitting }] = useUpdate();
   const onSubmit = (data) => update('Settings', { data, id: undefined });
 
-  if (isLoading) {
-    return <Loading />;
-  }
   if (error) {
-    return <p>ERROR</p>;
+    return <p>{error}</p>;
   }
 
   return (
     <Card>
       <Title title='Settings' />
       <CardContent>
-        <EditContextProvider
+        <SaveContextProvider
           value={{
             record: data,
             isLoading,
@@ -84,9 +81,9 @@ export const SettingsPage = (p) => {
             saving: isSubmitting,
           }}
         >
-          <SimpleForm sx={{ width: '400px' }}>
+          <SimpleForm record={data} sx={{ width: '400px' }}>
             <Typography variant='h6' gutterBottom>
-              Benefit
+              Code Benefit
             </Typography>
             <NumberInput source='benefitDirect' fullWidth />
             <NumberInput
@@ -97,13 +94,13 @@ export const SettingsPage = (p) => {
             <NumberInput source='benefitDepositFactor' fullWidth />
             <NumberInput source='maxTotalBenefits' fullWidth />
             <Typography variant='h6' gutterBottom>
-              Reward
+              Code Reward
             </Typography>
             <NumberInput source='rewardDirect' fullWidth />
             <NumberInput source='rewardDepositFactor' fullWidth />
             <NumberInput source='maxTotalRewards' fullWidth />
           </SimpleForm>
-        </EditContextProvider>
+        </SaveContextProvider>
       </CardContent>
     </Card>
   );

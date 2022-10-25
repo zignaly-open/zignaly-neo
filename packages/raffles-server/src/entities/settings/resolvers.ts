@@ -1,38 +1,18 @@
 import { ApolloContext, ResourceOptions } from '../../types';
+import { checkAdmin } from '../../util/admin';
 import { Setting } from './model';
-import { getSettings, updateSettings } from './service';
+import { getCodeSettings, updateCodeSettings } from './service';
 
 export const resolvers = {
   Query: {
-    // Setting: async (_: any, __: any, { user }: ApolloContext) => {
-    //   return getSettings(user);
-    // },
     Settings: async (
       _: any,
       data: ResourceOptions,
       { user }: ApolloContext,
     ) => {
-      return getSettings(user);
+      await checkAdmin(user?.id);
+      return getCodeSettings();
     },
-    allSettings: async (
-      _: any,
-      data: ResourceOptions,
-      { user }: ApolloContext,
-    ) => {
-      return getSettings(user);
-    },
-    // _allSettingsMeta: async (
-    //   _: any,
-    //   {
-    //     filter,
-    //   }: {
-    //     filter: ResourceOptions['filter'];
-    //   },
-    //   { user }: ApolloContext,
-    // ) => {
-    //   // return countCodes(user, filter);
-    //   return 10;
-    // },
   },
   Mutation: {
     updateSettings: async (
@@ -40,8 +20,9 @@ export const resolvers = {
       data: Partial<Setting>,
       { user }: ApolloContext,
     ) => {
+      await checkAdmin(user?.id);
       try {
-        return updateSettings(user, data);
+        return updateCodeSettings(data);
       } catch (e) {
         console.error(e);
         throw e;
