@@ -1,0 +1,57 @@
+{
+	"yes": "Sí",
+	"no": "No",
+	"loading": "Cargando...",
+	"coming-soon": {
+		"title": "Próximamente",
+		"description": "Esta sección está en desarrollo, la verás disponible próximamente."
+	},
+	"no-data": {
+		"title": "Sin datos",
+		"description": "No hay datos disponibles. Si cree que es un problema, póngase en contacto con el servicio de asistencia."
+	},
+	"critical-error": {
+		"title": "Se ha producido un error",
+		"description": "Algo ha ido mal. Vuelve a intentarlo más tarde o ponte en contacto con el servicio de asistencia. O abandonar la sociedad industrial y construir una cabaña en el bosque."
+	},
+	"main-menu": {
+		"dropdown-link-forTrading": "Para Servicios de Trading",
+		"dropdown-link-helpDocs": "Documentos de Ayuda"
+	},
+	"account-menu": {
+		"isAuth-button-logIn": "Entrar en el sistema",
+		"isAuth-button-signUp": "REGISTRARSE",
+		"notAuth-dropdown-link-dashboard": "Mi Panel Principal",
+		"notAuth-dropdown-link-balances": "Mi Saldo",
+		"notAuth-button-logOut": "Cierre de sesión"
+	},
+	"account-selector": {
+		"type": {
+			"title": "Tipo:",
+			"futures": "Futuros",
+			"spot": "Spot"
+		}
+	},
+	"navigation-menu": {
+		"profit-sharing": "Profit Sharing",
+		"staking": "Staking",
+		"zigpad": "ZIGPad"
+	},
+	"amount": "Cantidad",
+	"new-version": "Nueva versión, haz clic para actualizar",
+	"validation": {
+		"insufficient-amount": "Fondos insuficientes",
+		"invalid-value": "Valor no válido",
+		"negative-amount": "Debe ser >= 0",
+		"invalid-amount": "Debe indicar una cantidad"
+	},
+	"back": "Volver",
+	"close": "Cerrar",
+	"404": {
+		"title": "",
+		"description": ""
+	},
+	"refresh": {
+		"short": ""
+	}
+}

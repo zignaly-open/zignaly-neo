@@ -1,0 +1,31 @@
+{
+	"title": "Depositar Criptomonedas",
+	"description": "Los depósitos pueden tardar hasta 3 horas en reflejarse en su saldo.",
+	"coinSelector": {
+		"label": "La moneda:",
+		"placeholder": "Buscar una moneda"
+	},
+	"balances": {
+		"loadingAriaLabel": "Carga de saldos de monedas",
+		"total": "Saldo:",
+		"balanceLocked": "En Órdenes:",
+		"balanceFree": "Disponible:"
+	},
+	"networkSelector": {
+		"label": "Red:",
+		"placeholder": "Elija la red"
+	},
+	"depositAddress": {
+		"label": "Dirección de Depósito:",
+		"loading": "Cargando la dirección del depósito...",
+		"placeholder": "Elija primero la moneda y la red.",
+		"warning": "Solo envíe {{network}} {{coin}} tokens a esta dirección"
+	},
+	"depositMemo": {
+		"label": "Depositar MEMO\/Tag:"
+	},
+	"depositQR": {
+		"address": "{{coin}} Dirección",
+		"memo": "{{coin}} MEMO\/Tag"
+	}
+}

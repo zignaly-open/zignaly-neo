@@ -3,7 +3,7 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 
-export const supportedLanguages = ['en', 'ru'];
+export const supportedLanguages = ['en', 'ru', 'es'];
 
 if (process.env.REACT_APP_ENABLE_TEST_LANGUAGE) supportedLanguages.push('ch');
 
