@@ -15,7 +15,10 @@ import { useMediaQuery } from '@mui/material';
 import theme from 'theme';
 import { useIsInvestedInService } from '../../../../apis/investment/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
-import { useActiveExchange } from '../../../../apis/user/use';
+import {
+  useActiveExchange,
+  useIsAuthenticated,
+} from '../../../../apis/user/use';
 import { useUpdateEffect } from 'react-use';
 import { useTranslation } from 'react-i18next';
 
@@ -24,6 +27,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
 }) => {
   const isOwner = useIsServiceOwner(service.id);
   const isInvested = useIsInvestedInService(service.id);
+  const isAuthenticated = useIsAuthenticated();
   const md = useMediaQuery(theme.breakpoints.up('sm'));
   const { t } = useTranslation('service');
   const activeExchange = useActiveExchange();
@@ -83,15 +87,16 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
 
         {!isInvested.isLoading && !service.liquidated && (
           <Box sx={{ mt: md ? -1.5 : 3 }}>
-            {isInvested.thisAccount ? (
+            {isAuthenticated && isInvested.thisAccount ? (
               <InvestedButton service={service} />
             ) : (
               <InvestButton service={service} />
             )}
 
-            {Object.keys(isInvested.accounts || {}).length > 1 && (
-              <OtherAccountsButton service={service} />
-            )}
+            {isAuthenticated &&
+              Object.keys(isInvested.accounts || {}).length > 1 && (
+                <OtherAccountsButton service={service} />
+              )}
           </Box>
         )}
       </Box>
