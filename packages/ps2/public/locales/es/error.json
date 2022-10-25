@@ -142,8 +142,7 @@
 		"2001": "Billetera no encontrada",
 		"2004": "Error al retirar datos",
 		"10000": "Demasiadas solicitudes, por favor inténtelo más tarde",
-		"XX": "Error de transacción. Por favor, inténtelo de nuevo.",
-		"invalid-value": ""
+		"XX": "Error de transacción. Por favor, inténtelo de nuevo."
 	},
 	"something-went-wrong": "Algo salió mal",
 	"404": {
