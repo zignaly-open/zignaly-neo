@@ -3,7 +3,6 @@ import englishMessages from 'ra-language-english';
 import * as domainMessages from './i18n';
 
 const messages = {
-  // fr: { ...frenchMessages, ...domainMessages.fr },
   en: { ...englishMessages, ...domainMessages.en },
 };
 

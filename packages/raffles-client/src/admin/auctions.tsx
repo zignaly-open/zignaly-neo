@@ -19,6 +19,7 @@ import {
   SearchInput,
   ChipField,
   FunctionField,
+  useTranslate,
 } from 'react-admin';
 import { chains } from 'util/chain';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
@@ -68,13 +69,8 @@ export const AuctionList = () => (
   </List>
 );
 
-const AuctionTitle = () => {
-  const record = useRecordContext();
-  return <span>Edit Auction {record ? `"${record.title}"` : ''}</span>;
-};
-
 const Poster = () => {
-  const record = useRecordContext<Product>();
+  const record = useRecordContext<AuctionType>();
   if (!record) return null;
   return (
     <Card sx={{ display: 'inline-block' }}>
@@ -88,59 +84,66 @@ const Poster = () => {
   );
 };
 
-const AuctionForm = () => (
-  <SimpleForm>
-    <Typography variant='h6' gutterBottom>
-      Auction
-    </Typography>
-    <TextInput source='title' sx={{ minWidth: '300px' }} required />
-    <Poster />
-    <TextInput source='imageUrl' sx={{ minWidth: '300px' }} />
-    <SelectInput
-      required
-      source='chain'
-      choices={Object.keys(chains).map((c) => ({
-        id: c,
-        name: chains[c].name,
-      }))}
-    />
-    <MarkdownInput source='description' label='Description' required />
-    <MarkdownInput source='claimSuccess' label='Claim success' />
-    <Typography variant='h6' gutterBottom mt={1}>
-      Socials
-    </Typography>
-    <Box display='flex' gap={2}>
-      <TextInput source='website' />
-      <TextInput source='discord' />
-      <TextInput source='telegram' />
-      <TextInput source='twitter' />
-    </Box>
-    <Typography variant='h6' gutterBottom mt={1}>
-      Dates (UTC)
-    </Typography>
-    <DateTimeInput source='announcementDate' label='Announcement date' />
-    <Box display='flex' gap='1em'>
-      <DateTimeInput source='startDate' label='Start date*' required />
-      <DateTimeInput label='Expiration date*' source='expiresAt' required />
-      <DateTimeInput label='Max expiration*' source='maxExpiryDate' required />
-    </Box>
-    <DateTimeInput label='Max claim date' source='maxClaimDate' />
-    <Typography variant='h6' gutterBottom mt={1}>
-      Params
-    </Typography>
-    <Box display='flex' gap='1em'>
-      <NumberInput source='currentBid' defaultValue={0.01} />
-      <NumberInput source='bidFee' defaultValue={1} />
-      <NumberInput source='bidStep' defaultValue={0.01} />
-    </Box>
-    <NumberInput source='numberOfWinners' required />
-    <TextInput source='privateCode' />
-    <BooleanInput source='isExclusiveToKuCoin' label='KuCoin Only' />
-  </SimpleForm>
-);
+const AuctionForm = () => {
+  const translate = useTranslate();
+  return (
+    <SimpleForm>
+      <Typography variant='h6' gutterBottom>
+        {translate('resources.auctions.name')}
+      </Typography>
+      <TextInput source='title' sx={{ minWidth: '300px' }} required />
+      <Poster />
+      <TextInput source='imageUrl' sx={{ minWidth: '300px' }} />
+      <SelectInput
+        required
+        source='chain'
+        choices={Object.keys(chains).map((c) => ({
+          id: c,
+          name: chains[c].name,
+        }))}
+      />
+      <MarkdownInput source='description' label='Description' required />
+      <MarkdownInput source='claimSuccess' label='Claim success' />
+      <Typography variant='h6' gutterBottom mt={1}>
+        {translate('resources.auctions.socials')}
+      </Typography>
+      <Box display='flex' gap={2}>
+        <TextInput source='website' />
+        <TextInput source='discord' />
+        <TextInput source='telegram' />
+        <TextInput source='twitter' />
+      </Box>
+      <Typography variant='h6' gutterBottom mt={1}>
+        {translate('resources.auctions.dates')}
+      </Typography>
+      <DateTimeInput source='announcementDate' label='Announcement date' />
+      <Box display='flex' gap='1em'>
+        <DateTimeInput source='startDate' label='Start date*' required />
+        <DateTimeInput label='Expiration date*' source='expiresAt' required />
+        <DateTimeInput
+          label='Max expiration*'
+          source='maxExpiryDate'
+          required
+        />
+      </Box>
+      <DateTimeInput label='Max claim date' source='maxClaimDate' />
+      <Typography variant='h6' gutterBottom mt={1}>
+        {translate('resources.auctions.params')}
+      </Typography>
+      <Box display='flex' gap='1em'>
+        <NumberInput source='currentBid' defaultValue={0.01} />
+        <NumberInput source='bidFee' defaultValue={1} />
+        <NumberInput source='bidStep' defaultValue={0.01} />
+      </Box>
+      <NumberInput source='numberOfWinners' required />
+      <TextInput source='privateCode' />
+      <BooleanInput source='isExclusiveToKuCoin' label='KuCoin Only' />
+    </SimpleForm>
+  );
+};
 
 export const AuctionEdit = () => (
-  <Edit title={<AuctionTitle />}>
+  <Edit>
     <AuctionForm />
   </Edit>
 );

@@ -1,5 +1,5 @@
-import { EventNote, Redeem } from '@mui/icons-material';
-import { Box, Card, CardMedia, Typography } from '@mui/material';
+import { Redeem } from '@mui/icons-material';
+import { Typography } from '@mui/material';
 import React from 'react';
 import {
   List,
@@ -10,7 +10,6 @@ import {
   TextField,
   EditButton,
   TextInput,
-  useRecordContext,
   BooleanInput,
   DateTimeInput,
   NumberInput,
@@ -18,12 +17,15 @@ import {
   BooleanField,
   NumberField,
   SearchInput,
+  useTranslate,
 } from 'react-admin';
 import DateField from './DateField';
 
 export const CodeIcon = Redeem;
 
-const codeFilters = [<SearchInput source='q' alwaysOn placeholder='Code' />];
+const codeFilters = [
+  <SearchInput source='q' alwaysOn placeholder='Code' key={0} />,
+];
 
 const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
   return (
@@ -74,62 +76,61 @@ const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
 export const CodeList = () => <CodeListBase systemCode={true} />;
 export const UserCodeList = () => <CodeListBase systemCode={false} />;
 
-const CodeTitle = () => {
-  const record = useRecordContext();
-  return <span>Edit Code {record ? `"${record.code}"` : ''}</span>;
+const CodeForm = () => {
+  const translate = useTranslate();
+
+  return (
+    <SimpleForm>
+      <Typography variant='h6' gutterBottom>
+        {translate('resources.codes.name')}
+      </Typography>
+      <TextInput source='code' required />
+      <BooleanInput source='welcomeType' />
+      <Typography variant='h6' gutterBottom mt={1}>
+        {translate('resources.codes.requirements')}
+      </Typography>
+      <NumberInput source='reqMinimumBalance' />
+      <NumberInput source='reqMinimumDeposit' />
+      <NumberInput source='reqMinimumBalance' />
+      <DateTimeInput source='reqDepositFrom' />
+      <NumberInput source='reqMinAuctions' />
+      <SelectInput
+        source='reqWalletType'
+        choices={[
+          { id: 'metamask', name: 'MetaMask' },
+          { id: 'kucoin', name: 'KuCoin' },
+        ]}
+      />
+      <Typography variant='h6' gutterBottom mt={1}>
+        {translate('resources.codes.benefit')}
+      </Typography>
+      <NumberInput source='benefitDirect' />
+      <NumberInput source='benefitBalanceFactor' />
+      <NumberInput source='benefitDepositFactor' />
+      <NumberInput source='maxTotalBenefits' />
+      <Typography variant='h6' gutterBottom mt={1}>
+        {translate('resources.codes.reward')}
+      </Typography>
+      <NumberInput source='rewardDirect' />
+      <NumberInput source='rewardFactor' />
+      <NumberInput source='rewardDepositFactor' />
+      <NumberInput source='maxTotalRewards' />
+      <Typography variant='h6' gutterBottom mt={1}>
+        {translate('resources.codes.redemptions')}
+      </Typography>
+      <NumberInput source='currentRedemptions' defaultValue={0} />
+      <NumberInput source='maxRedemptions' />
+      <Typography variant='h6' gutterBottom mt={1}>
+        {translate('resources.codes.dates')}
+      </Typography>
+      <DateTimeInput source='startDate' />
+      <DateTimeInput source='endDate' />
+    </SimpleForm>
+  );
 };
 
-const CodeForm = () => (
-  <SimpleForm>
-    <Typography variant='h6' gutterBottom>
-      Code
-    </Typography>
-    <TextInput source='code' required />
-    <BooleanInput source='welcomeType' />
-    <Typography variant='h6' gutterBottom mt={1}>
-      Requirements
-    </Typography>
-    <NumberInput source='reqMinimumBalance' />
-    <NumberInput source='reqMinimumDeposit' />
-    <NumberInput source='reqMinimumBalance' />
-    <DateTimeInput source='reqDepositFrom' />
-    <NumberInput source='reqMinAuctions' />
-    <SelectInput
-      source='reqWalletType'
-      choices={[
-        { id: 'metamask', name: 'MetaMask' },
-        { id: 'kucoin', name: 'KuCoin' },
-      ]}
-    />
-    <Typography variant='h6' gutterBottom mt={1}>
-      Benefit
-    </Typography>
-    <NumberInput source='benefitDirect' />
-    <NumberInput source='benefitBalanceFactor' />
-    <NumberInput source='benefitDepositFactor' />
-    <NumberInput source='maxTotalBenefits' />
-    <Typography variant='h6' gutterBottom mt={1}>
-      Reward
-    </Typography>
-    <NumberInput source='rewardDirect' />
-    <NumberInput source='rewardFactor' />
-    <NumberInput source='rewardDepositFactor' />
-    <NumberInput source='maxTotalRewards' />
-    <Typography variant='h6' gutterBottom mt={1}>
-      Redemptions
-    </Typography>
-    <NumberInput source='currentRedemptions' defaultValue={0} />
-    <NumberInput source='maxRedemptions' />
-    <Typography variant='h6' gutterBottom mt={1}>
-      Dates
-    </Typography>
-    <DateTimeInput source='startDate' />
-    <DateTimeInput source='endDate' />
-  </SimpleForm>
-);
-
 export const CodeEdit = () => (
-  <Edit title={<CodeTitle />}>
+  <Edit>
     <CodeForm />
   </Edit>
 );

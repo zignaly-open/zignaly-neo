@@ -1,57 +1,32 @@
 import { Card, CardContent, Typography } from '@mui/material';
 import React from 'react';
 import {
-  List,
-  Datagrid,
-  TextField,
   Edit,
   SimpleForm,
   TextInput,
-  FunctionField,
   Title,
   NumberInput,
   SaveContextProvider,
   useGetOne,
   useUpdate,
-  useRecordContext,
+  useTranslate,
 } from 'react-admin';
 
-export const SettingList = () => (
-  <List
-    pagination={false}
-    sx={{ maxWidth: '700px' }}
-    actions={null}
-    hasEdit={true}
-  >
-    <Datagrid bulkActionButtons={false}>
-      <FunctionField
-        label='Property'
-        sortBy='key'
-        render={(record) => `${record.key}`}
-      />
-      <TextField source='value' />
-    </Datagrid>
-  </List>
-);
-
-const CodeTitle = () => {
-  const record = useRecordContext();
-  return <span>Edit Code {record ? `"${record.code}"` : ''}</span>;
-};
-
 export const SettingEdit = () => (
-  <Edit title={<CodeTitle />}>
+  <Edit>
     <SimpleForm>
       <TextInput source='value' required />
     </SimpleForm>
   </Edit>
 );
 
-export const SettingsPage = (p) => {
+export const SettingsPage = () => {
+  const translate = useTranslate();
   const { data, isLoading, error } = useGetOne('Settings', { id: undefined });
 
   const [update, { isLoading: isSubmitting }] = useUpdate();
-  const onSubmit = (data) => update('Settings', { data, id: undefined });
+  const onSubmit = (newData: object) =>
+    update('Settings', { data: newData, id: undefined });
 
   if (error) {
     return <p>{error}</p>;
@@ -71,7 +46,7 @@ export const SettingsPage = (p) => {
         >
           <SimpleForm record={data} sx={{ width: '400px' }}>
             <Typography variant='h6' gutterBottom>
-              Default User Code Benefit
+              {translate('resources.settings.defaultCodeBenefit')}
             </Typography>
             <NumberInput source='benefitDirect' fullWidth />
             <NumberInput source='benefitDepositFactor' fullWidth />
@@ -82,7 +57,7 @@ export const SettingsPage = (p) => {
               fullWidth
             />
             <Typography variant='h6' gutterBottom>
-              Default User Code Reward
+              {translate('resources.settings.defaultCodeReward')}
             </Typography>
             <NumberInput source='rewardDirect' fullWidth />
             <NumberInput source='rewardDepositFactor' fullWidth />

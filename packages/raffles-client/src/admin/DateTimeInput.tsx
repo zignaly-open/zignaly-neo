@@ -2,7 +2,6 @@ import React from 'react';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { useController } from 'react-hook-form';
 import { Box, TextField } from '@mui/material';
 import { InputHelperText, TextInputProps, useInput } from 'react-admin';
 

@@ -2,15 +2,14 @@ import {
   Table,
   Column,
   Model,
-  Unique,
   PrimaryKey,
-  AutoIncrement,
   BelongsTo,
   Default,
   DataType,
   ForeignKey,
   IsUppercase,
 } from 'sequelize-typescript';
+import { Code } from '../codes/model';
 import { User } from '../users/model';
 
 @Table

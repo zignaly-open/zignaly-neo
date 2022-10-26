@@ -1,7 +1,10 @@
 export default {
   resources: {
     auctions: {
-      name: 'Customer |||| Customers',
+      name: 'Auction',
+      socials: 'Socials',
+      dates: 'Dates (UTC)',
+      params: 'Params',
       fields: {
         chain: 'Chain',
       },
@@ -14,6 +17,18 @@ export default {
         last_month: 'Last month',
         earlier: 'Earlier',
       },
+    },
+    codes: {
+      name: 'Code',
+      requirements: 'Requirements',
+      benefit: 'Benefit',
+      reward: 'Reward',
+      redemptions: 'Redemptions',
+      dates: 'Dates',
+    },
+    settings: {
+      defaultCodeBenefit: 'Default User Code Benefit',
+      defaultCodeReward: 'Default User Code Reward',
     },
   },
 };
