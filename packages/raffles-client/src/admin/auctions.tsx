@@ -8,7 +8,6 @@ import {
   Edit,
   Create,
   SimpleForm,
-  DateField,
   TextField,
   EditButton,
   TextInput,
@@ -24,6 +23,7 @@ import {
 import { chains } from 'util/chain';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import DateTimeInput from './DateTimeInput';
+import DateField from './DateField';
 
 export const AuctionIcon = EventNote;
 
@@ -45,7 +45,7 @@ export const AuctionList = () => (
     <Datagrid rowClick='edit'>
       <TextField source='id' />
       <TextField source='title' />
-      <DateField source='startDate' showTime={true} />
+      <DateField source='startDate' />
       <DateField source='expiresAt' label='Expiry date' />
       <DateField source='maxExpiryDate' />
       <NumberField source='bidFee' />

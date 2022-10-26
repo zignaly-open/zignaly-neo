@@ -4,7 +4,7 @@ import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { useController } from 'react-hook-form';
 import { Box, TextField } from '@mui/material';
-import { InputHelperText } from 'react-admin';
+import { InputHelperText, TextInputProps, useInput } from 'react-admin';
 
 const getTimezoneOffset = (value: Date) => value.getTimezoneOffset() * 60000;
 
@@ -23,26 +23,14 @@ const localToUTC = (dateTime: Date) => {
   return utcFromLocal;
 };
 
-const DateTimeInput = ({
-  source,
-  required = false,
-  label,
-}: {
-  source: string;
-  label: string;
-  required?: boolean;
-}) => {
-  const { field, fieldState } = useController({
-    name: source,
-    defaultValue: '',
-    rules: { required },
-  });
+const DateTimeInput = (props: TextInputProps) => {
+  const { field, fieldState } = useInput(props);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDateFns}>
       <Box display='flex' flexDirection='column'>
         <DateTimePicker
-          label={label}
+          label={props.label}
           inputFormat='yyyy/MM/dd hh:mm:ss'
           renderInput={(params) => (
             <TextField

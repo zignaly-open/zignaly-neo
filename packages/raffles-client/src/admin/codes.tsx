@@ -7,24 +7,19 @@ import {
   Edit,
   Create,
   SimpleForm,
-  DateField,
   TextField,
   EditButton,
   TextInput,
-  DateInput,
   useRecordContext,
   BooleanInput,
   DateTimeInput,
   NumberInput,
-  SelectField,
   SelectInput,
   BooleanField,
   NumberField,
-  Datetime,
   SearchInput,
 } from 'react-admin';
-import { formatDate, parseDate } from './util';
-import { chains } from 'util/chain';
+import DateField from './DateField';
 
 export const CodeIcon = Redeem;
 
@@ -55,7 +50,7 @@ const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
         {systemCode && <BooleanField source='welcomeType' />}
         <NumberField source='reqMinimumBalance' />
         <NumberField source='reqMinimumDeposit' />
-        <DateField source='reqDepositFrom' showTime={true} />
+        <DateField source='reqDepositFrom' />
         <NumberField source='reqMinAuctions' />
         <TextField source='reqWalletType' />
         <NumberField source='currentRedemptions' />
@@ -68,8 +63,8 @@ const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
         <NumberField source='rewardFactor' />
         <NumberField source='rewardDepositFactor' />
         <NumberField source='maxTotalRewards' />
-        {systemCode && <DateField source='startDate' showTime={true} />}
-        {systemCode && <DateField source='endDate' showTime={true} />}
+        {systemCode && <DateField source='startDate' />}
+        {systemCode && <DateField source='endDate' />}
         <EditButton />
       </Datagrid>
     </List>

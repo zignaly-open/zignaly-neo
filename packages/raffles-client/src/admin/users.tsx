@@ -2,12 +2,12 @@ import React from 'react';
 import {
   List,
   Datagrid,
-  DateField,
   TextField,
   EmailField,
   SearchInput,
 } from 'react-admin';
 import { Person } from '@mui/icons-material';
+import DateField from './DateField';
 export const UserIcon = Person;
 
 const userFilters = [<SearchInput source='q' alwaysOn key={0} />];
