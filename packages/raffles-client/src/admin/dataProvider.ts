@@ -54,7 +54,11 @@ const myBuildQuery =
   (introspection: IntrospectionResult) =>
   (fetchType: string, resourceId: string, params: { id: string }) => {
     // Get actual resource name instead of the name we use in urls
-    const resource = resourcesMap[resourceId] ?? resourceId;
+    let resource = resourcesMap[resourceId] ?? resourceId;
+    if (resource === 'Auction' && fetchType === 'GET_LIST') {
+      // Special resource name for GET Auction admin endpoint, different than regular one
+      resource = 'AdmAuction';
+    }
 
     const builtQuery = buildQuery(introspection)(fetchType, resource, params);
 
@@ -134,8 +138,8 @@ export default () =>
     clientOptions: {
       link: ApolloLink.from([authLink, errorLink, httpLink]),
     },
-    introspection: {
-      include: ['auctions'],
-    },
+    // introspection: {
+    //   include: ['AuctionAdmin'],
+    // },
     buildQuery: myBuildQuery,
   });

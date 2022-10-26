@@ -42,6 +42,21 @@ export const resolvers = {
       await checkAdmin(user?.id);
       return Auction.findByPk(id);
     },
+    allAdmAuctions: async (
+      _: any,
+      data: ResourceOptions,
+      { user }: ApolloContext,
+    ) => {
+      return await AuctionsService.getAuctionsWithBids(
+        null,
+        user,
+        data.sortField,
+        data.sortOrder,
+        data.page,
+        data.perPage,
+        data.filter,
+      );
+    },
     allAuctions: async (
       _: any,
       data: ResourceOptions,
@@ -64,9 +79,19 @@ export const resolvers = {
       }: {
         filter: ResourceOptions['filter'];
       },
+    ) => {
+      return AuctionsService.countAuctions(filter);
+    },
+    _allAdmAuctionsMeta: async (
+      _: any,
+      {
+        filter,
+      }: {
+        filter: ResourceOptions['filter'];
+      },
       { user }: ApolloContext,
     ) => {
-      return AuctionsService.countAuctions(user, filter);
+      return AuctionsService.countAdmAuctions(user, filter);
     },
   },
   Mutation: {
@@ -89,6 +114,18 @@ export const resolvers = {
     ) => {
       try {
         return AuctionsService.createAuction(user, data);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+    },
+    deleteAuction: async (
+      _: any,
+      { id }: { id: string },
+      { user }: ApolloContext,
+    ) => {
+      try {
+        return AuctionsService.deleteAuction(user, id);
       } catch (e) {
         console.error(e);
         throw e;

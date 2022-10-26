@@ -40,17 +40,16 @@ export const typeDef = gql`
     user: UserInfo
   }
 
-  type AuctionLite {
+  type Auction {
     id: ID
     bids: [Bid]
     isClaimed: Boolean
     ${fields}
   }
 
-  type Auction {
+  type AdmAuction {
     id: ID
     bids: [Bid]
-    isClaimed: Boolean
     ${fields}
     ${privateFields}
   }
@@ -68,7 +67,7 @@ export const typeDef = gql`
   }
 
   extend type Query {
-    Auction(id: ID): Auction
+    Auction(id: ID): AdmAuction
     allAuctions(
       page: Int
       perPage: Int
@@ -76,7 +75,17 @@ export const typeDef = gql`
       sortOrder: String
       filter: AuctionFilter
     ): [Auction]
+    allAdmAuctions(
+      page: Int
+      perPage: Int
+      sortField: String
+      sortOrder: String
+      filter: AuctionFilter
+    ): [AdmAuction]
     _allAuctionsMeta(
+      filter: AuctionFilter
+    ): ListMetadata
+    _allAdmAuctionsMeta(
       filter: AuctionFilter
       page: Int
       perPage: Int
@@ -88,20 +97,21 @@ export const typeDef = gql`
   }
 
   extend type Subscription {
-    auctionUpdated: AuctionLite
+    auctionUpdated: Auction
   }
 
   extend type Mutation {
     bid(id: ID!): String
-    claim(id: ID!): AuctionLite
+    claim(id: ID!): Auction
     updateAuction(
       id: ID!
       ${fields}
       ${privateFields}
-    ): Auction
+    ): AdmAuction
     createAuction(
       ${fields}
       ${privateFields}
-    ): Auction
+    ): AdmAuction
+    deleteAuction(id: ID): Boolean
   }
 `;

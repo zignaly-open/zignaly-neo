@@ -151,10 +151,17 @@ const AuctionsRepository = () => {
     return auctions;
   }
 
-  async function countAuctions(user: ContextUser, filter?: AuctionFilter) {
-    const isAdmin = user?.id && (await User.findByPk(user?.id)).isAdmin;
+  async function countAuctions(filter?: AuctionFilter) {
     const count = await Auction.count({
-      where: auctionsFilter(null, filter, isAdmin),
+      where: auctionsFilter(null, filter),
+    });
+    return { count };
+  }
+
+  async function countAdmAuctions(user: ContextUser, filter?: AuctionFilter) {
+    await checkAdmin(user.id);
+    const count = await Auction.count({
+      where: auctionsFilter(null, filter, true),
     });
     return { count };
   }
@@ -182,14 +189,26 @@ const AuctionsRepository = () => {
     return auction;
   }
 
+  async function deleteAuction(user: ContextUser, id: string) {
+    await checkAdmin(user?.id);
+    return Boolean(
+      await Auction.destroy({
+        where: {
+          id,
+        },
+      }),
+    );
+  }
+
   return {
     getAuctionsWithBids,
     countAuctions,
+    countAdmAuctions,
     findAuction,
-    lastBidPopulation,
     findUsers,
     updateAuction,
     createAuction,
+    deleteAuction,
   };
 };
 
