@@ -55,7 +55,7 @@ const myBuildQuery =
   (fetchType: string, resourceId: string, params: { id: string }) => {
     // Get actual resource name instead of the name we use in urls
     let resource = resourcesMap[resourceId] ?? resourceId;
-    if (resource === 'Auction' && fetchType === 'GET_LIST') {
+    if (resource === 'Auction' && ['GET_LIST', 'GET_ONE'].includes(fetchType)) {
       // Special resource name for GET Auction admin endpoint, different than regular one
       resource = 'AdmAuction';
     }

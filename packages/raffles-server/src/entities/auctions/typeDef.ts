@@ -69,7 +69,7 @@ export const typeDef = gql`
   }
 
   extend type Query {
-    Auction(id: ID): AdmAuction
+    AdmAuction(id: ID): AdmAuction
     allAuctions(
       page: Int
       perPage: Int

@@ -33,7 +33,7 @@ const debounceBroadcastAuction = debounce(broadcastAuctionChange, 50, {
 
 export const resolvers = {
   Query: {
-    Auction: async (
+    AdmAuction: async (
       _: any,
       { id }: { id: number },
       { user }: ApolloContext,
