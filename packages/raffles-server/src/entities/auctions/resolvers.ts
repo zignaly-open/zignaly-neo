@@ -17,6 +17,7 @@ const broadcastAuctionChange = async (auctionId: number) => {
   try {
     const [auctionUpdated] = await AuctionsService.getAuctionsWithBids(
       auctionId,
+      true,
     );
 
     pubsub.publish(AUCTION_UPDATED, {

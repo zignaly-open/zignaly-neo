@@ -221,7 +221,10 @@ const finalizeAuction = async (auctionId: number) => {
   await redis.del(`AUCTION:${auctionId}`);
   await redis.del(`AUCTION_LEADERBOARD:${auctionId}`);
 
-  const [auctionUpdated] = await AuctionsService.getAuctionsWithBids(auctionId);
+  const [auctionUpdated] = await AuctionsService.getAuctionsWithBids(
+    auctionId,
+    true,
+  );
   pubsub.publish(AUCTION_UPDATED, {
     auctionUpdated,
   });
