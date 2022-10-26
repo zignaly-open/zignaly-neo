@@ -27,8 +27,8 @@ const broadcastAuctionChange = async (auctionId: number) => {
     console.error(e);
   }
 };
-const debounceBroadcastAuction = debounce(broadcastAuctionChange, 30, {
-  maxWait: 60,
+const debounceBroadcastAuction = debounce(broadcastAuctionChange, 50, {
+  maxWait: 150,
 });
 
 export const resolvers = {
