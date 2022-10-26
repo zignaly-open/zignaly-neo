@@ -7,8 +7,20 @@ export interface GetCurrentUserResponseModel {
 }
 
 export const GET_AUCTIONS = gql`
-  query singleAuction($id: ID, $unannounced: Boolean, $privateCode: String) {
-    auctions(id: $id, unannounced: $unannounced, privateCode: $privateCode) {
+  query (
+    $page: Int
+    $perPage: Int
+    $sortField: String
+    $sortOrder: String
+    $filter: AuctionFilter
+  ) {
+    allAuctions(
+      page: $page
+      perPage: $perPage
+      sortField: $sortField
+      sortOrder: $sortOrder
+      filter: $filter
+    ) {
       id
       title
       createdAt

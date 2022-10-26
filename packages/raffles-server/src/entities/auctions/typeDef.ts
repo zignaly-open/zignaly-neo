@@ -42,11 +42,13 @@ export const typeDef = gql`
 
   type AuctionLite {
     id: ID
+    bids: [Bid]
     ${fields}
   }
 
   type Auction {
     id: ID
+    bids: [Bid]
     ${fields}
     ${privateFields}
   }
@@ -64,8 +66,6 @@ export const typeDef = gql`
   }
 
   extend type Query {
-    auctions(id: ID, unannounced: Boolean, privateCode: String): [AuctionLite]
-
     Auction(id: ID): Auction
     allAuctions(
       page: Int
