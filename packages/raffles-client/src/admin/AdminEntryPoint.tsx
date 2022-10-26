@@ -58,7 +58,7 @@ const AdminEntryPoint = () => {
       <CustomRoutes>
         <Route path='/user-codes' element={<UserCodeList />} />
         <Route path='/code-settings' element={<CodeSettings />} />
-        <Route path='/settings' element={<SettingsPage />} />
+        <Route path='/admin/settings' element={<SettingsPage />} />
       </CustomRoutes>
     </Admin>
   );
