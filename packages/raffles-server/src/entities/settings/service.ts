@@ -8,6 +8,7 @@ import {
   DEFAULT_REWARD_DEPOSIT_FACTOR,
   DEFAULT_REWARD_DIRECT,
 } from '../codes/constants';
+import { Code } from '../codes/model';
 import { CONFIG_LAST_PROCESSED_BLOCK } from './constants';
 import { Setting } from './model';
 import { CodeSettings } from './types';
@@ -34,16 +35,30 @@ export const getCodeSettings = async (): Promise<CodeSettings> => {
   );
 };
 
-export const updateCodeSettings = async (data: Partial<Setting>) => {
-  await Setting.bulkCreate(
-    Object.keys(data)
-      .filter((key) => !blackList.includes(key))
-      .map((key) => ({
-        key,
-        value: data[key],
-      })),
+export const updateCodeSettings = async (data: CodeSettings) => {
+  const settings = Object.keys(data)
+    .filter((key) => !blackList.includes(key))
+    .map((key) => ({
+      key,
+      value: data[key],
+    }));
+  await Setting.bulkCreate(settings, {
+    updateOnDuplicate: ['value'],
+  });
+
+  // Update existing user default codes
+  await Code.update(
     {
-      updateOnDuplicate: ['value'],
+      benefitDirect: data.benefitDirect,
+      rewardDirect: data.rewardDirect,
+      reqMinimumDeposit: data.reqMinimumDeposit,
+      maxTotalBenefits: data.maxTotalBenefits,
+      maxTotalRewards: data.maxTotalRewards,
+      benefitDepositFactor: data.benefitDepositFactor,
+      rewardDepositFactor: data.rewardDepositFactor,
+    },
+    {
+      where: { isDefault: true },
     },
   );
 

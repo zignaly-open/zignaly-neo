@@ -1,7 +1,7 @@
 import { ApolloContext, ResourceOptions } from '../../types';
 import { checkAdmin } from '../../util/admin';
-import { Setting } from './model';
 import { getCodeSettings, updateCodeSettings } from './service';
+import { CodeSettings } from './types';
 
 export const resolvers = {
   Query: {
@@ -17,7 +17,7 @@ export const resolvers = {
   Mutation: {
     updateSettings: async (
       _: any,
-      data: Partial<Setting>,
+      data: CodeSettings,
       { user }: ApolloContext,
     ) => {
       await checkAdmin(user?.id);
