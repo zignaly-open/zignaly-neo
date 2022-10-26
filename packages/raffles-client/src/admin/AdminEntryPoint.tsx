@@ -17,14 +17,18 @@ import {
 } from './codes';
 import buildGraphQLProvider from './dataProvider';
 import MyLayout from './Layout';
-import { Route } from 'react-router-dom';
+import { Route, useNavigate } from 'react-router-dom';
 import i18nProvider from './i18nProvider';
 import { SettingsPage } from './settings';
+import { getToken } from 'util/token';
 
 const AdminEntryPoint = () => {
   const [dataProvider, setDataProvider] = useState(null);
-
+  const navigate = useNavigate();
   useEffect(() => {
+    if (!getToken()) {
+      return navigate('/');
+    }
     buildGraphQLProvider().then((graphQlDataProvider) =>
       setDataProvider(() => graphQlDataProvider),
     );

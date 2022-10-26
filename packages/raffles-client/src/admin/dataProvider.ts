@@ -1,9 +1,15 @@
-import { ApolloQueryResult, createHttpLink, gql } from '@apollo/client';
+import {
+  ApolloLink,
+  ApolloQueryResult,
+  createHttpLink,
+  gql,
+} from '@apollo/client';
 import buildGraphQLProvider, { buildQuery } from 'ra-data-graphql-simple';
 import { setContext } from '@apollo/client/link/context';
 import { getToken } from 'util/token';
 import { IntrospectionResult } from 'ra-data-graphql';
 import { CodeInfo } from 'components/Modals/RedeemCode/types';
+import { onError } from '@apollo/client/link/error';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
@@ -18,6 +24,25 @@ const authLink = setContext((_, { headers }) => {
     },
   };
 });
+
+const errorLink = onError(
+  (
+    {
+      /* response, networkError, graphQLErrors */
+    },
+  ) => {
+    // todo: redirect if 401?
+    // console.log(response, networkError, graphQLErrors);
+    // if (networkError.statusCode < 200 || networkError.statusCode >= 300) {
+    //   networkError.status = networkError.statusCode;
+    //   this.setState({
+    //     dataProvider: function () {
+    //       throw networkError;
+    //     },
+    //   });
+    // }
+  },
+);
 
 const myBuildQuery =
   (introspection: IntrospectionResult) =>
@@ -88,7 +113,7 @@ const myBuildQuery =
 export default () =>
   buildGraphQLProvider({
     clientOptions: {
-      link: authLink.concat(httpLink),
+      link: ApolloLink.from([authLink, errorLink, httpLink]),
     },
     // introspection: {
     //   include: ['Auction', 'User', 'Code'],
