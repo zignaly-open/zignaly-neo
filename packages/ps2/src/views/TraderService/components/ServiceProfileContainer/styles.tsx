@@ -92,7 +92,7 @@ export const InvestButtonContainer = styled.div`
 
 export const InvestButtonWrap = styled.div`
   button > div {
-    height: 83px !important;
+    height: 60px !important;
   }
 `;
 
