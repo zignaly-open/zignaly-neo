@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - master
+      - ft/admin-panel
 jobs:
   pre_job:
     runs-on: ubuntu-latest
