@@ -62,8 +62,6 @@ const AuctionGrid: React.FC = () => {
   return (
     <LayoutContainer>
       <InfiniteScroll
-        style={{ width: '100%' }}
-        pageStart={0}
         loadMore={onLoadMore}
         hasMore={data.items.length < data.total.count}
         loader={

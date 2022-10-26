@@ -105,7 +105,7 @@ const AuctionsRepository = () => {
     // Calling directly this method and passing user=true is considered as admin
     // (e.g when being called from bidding notifications)
     let isAdmin = user === true;
-    if (typeof user === 'object' && user.id) {
+    if (typeof user === 'object' && user?.id) {
       const fullUser = await User.findByPk(user.id);
       isAdmin = fullUser.isAdmin;
     }
@@ -151,9 +151,9 @@ const AuctionsRepository = () => {
   }
 
   async function countAuctions(user: ContextUser, filter?: AuctionFilter) {
-    const fullUser = await User.findByPk(user.id);
+    const isAdmin = user?.id && (await User.findByPk(user?.id)).isAdmin;
     const count = await Auction.count({
-      where: auctionsFilter(null, filter, fullUser.isAdmin),
+      where: auctionsFilter(null, filter, isAdmin),
     });
     return { count };
   }
