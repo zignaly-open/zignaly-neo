@@ -5,20 +5,20 @@ import {
   AuctionIcon,
   AuctionList,
   AuctionCreate,
-} from './auctions';
-import { UserList, UserIcon } from './users';
+} from './resources/auctions';
+import { UserList, UserIcon } from './resources/users';
 import {
   CodeCreate,
   CodeEdit,
   CodeList,
   CodeIcon,
   UserCodeList,
-} from './codes';
+} from './resources/codes';
 import buildGraphQLProvider from './dataProvider';
-import MyLayout from './Layout';
+import MyLayout from './components/Layout';
 import { Route, useNavigate } from 'react-router-dom';
 import i18nProvider from './i18nProvider';
-import { SettingsPage } from './settings';
+import { SettingsPage } from './resources/settings';
 import { getToken } from 'util/token';
 
 const AdminEntryPoint = () => {

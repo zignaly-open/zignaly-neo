@@ -18,8 +18,8 @@ import {
   SearchInput,
   useTranslate,
 } from 'react-admin';
-import DateField from './DateField';
-import DateTimeInput from './DateTimeInput';
+import DateField from '../components/DateField';
+import DateTimeInput from '../components/DateTimeInput';
 
 export const CodeIcon = Redeem;
 

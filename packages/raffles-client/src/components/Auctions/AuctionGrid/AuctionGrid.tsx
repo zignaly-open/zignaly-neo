@@ -9,7 +9,7 @@ import AuctionCard from '../AuctionCard/AuctionCard';
 import { LayoutContainer } from './styles';
 import InfiniteScroll from 'react-infinite-scroller';
 
-const PER_PAGE = 10;
+const PER_PAGE = 20;
 
 const AuctionGrid: React.FC = () => {
   const { t } = useTranslation('auction');

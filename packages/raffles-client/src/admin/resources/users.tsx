@@ -7,7 +7,7 @@ import {
   SearchInput,
 } from 'react-admin';
 import { Person } from '@mui/icons-material';
-import DateField from './DateField';
+import DateField from '../components/DateField';
 export const UserIcon = Person;
 
 const userFilters = [<SearchInput source='q' alwaysOn key={0} />];

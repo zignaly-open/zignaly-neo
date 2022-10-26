@@ -1,6 +1,6 @@
 import { EventNote } from '@mui/icons-material';
 import { Box, Card, CardMedia, Chip, Typography } from '@mui/material';
-import MarkdownInput from './MarkdownInput';
+import MarkdownInput from '../components/MarkdownInput';
 import React from 'react';
 import {
   List,
@@ -23,8 +23,8 @@ import {
 } from 'react-admin';
 import { chains } from 'util/chain';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
-import DateTimeInput from './DateTimeInput';
-import DateField from './DateField';
+import DateTimeInput from '../components/DateTimeInput';
+import DateField from '../components/DateField';
 
 export const AuctionIcon = EventNote;
 
