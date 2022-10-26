@@ -41,6 +41,7 @@
     "@mui/lab": "^5.0.0-alpha.84",
     "@mui/material": "5.8.7",
     "@mui/system": "5.8.7",
+    "@mui/x-date-pickers": "^5.0.5",
     "@storybook/react": "^6.5.6",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "12.1.5",

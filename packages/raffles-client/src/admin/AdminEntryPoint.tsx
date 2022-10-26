@@ -25,8 +25,7 @@ import buildGraphQLProvider from './dataProvider';
 import MyLayout from './Layout';
 import { Route } from 'react-router-dom';
 import i18nProvider from './i18nProvider';
-import { Settings } from '@mui/icons-material';
-import { SettingEdit, SettingList, SettingsPage } from './settings';
+import { SettingsPage } from './settings';
 
 const theme = {
   ...defaultTheme,

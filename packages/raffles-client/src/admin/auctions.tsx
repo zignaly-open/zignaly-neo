@@ -12,10 +12,8 @@ import {
   TextField,
   EditButton,
   TextInput,
-  DateInput,
   useRecordContext,
   BooleanInput,
-  DateTimeInput,
   NumberInput,
   SelectInput,
   NumberField,
@@ -23,9 +21,9 @@ import {
   ChipField,
   FunctionField,
 } from 'react-admin';
-import { formatDate, parseDate } from './util';
 import { chains } from 'util/chain';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
+import DateTimeInput from './DateTimeInput';
 
 export const AuctionIcon = EventNote;
 
@@ -90,41 +88,6 @@ const Poster = () => {
   );
 };
 
-const dateFormatRegex = /^\d{4}-\d{2}-\d{2}$/;
-const dateParseRegex = /(\d{4})-(\d{2})-(\d{2})/;
-
-const convertDateToString = (value) => {
-  // value is a `Date` object
-  if (!(value instanceof Date) || isNaN(value.getDate())) return '';
-  const pad = '00';
-  const yyyy = value.getFullYear().toString();
-  const MM = (value.getMonth() + 1).toString();
-  const dd = value.getDate().toString();
-  return `${yyyy}-${(pad + MM).slice(-2)}-${(pad + dd).slice(-2)}`;
-};
-
-const dateFormatter = (value) => {
-  // null, undefined and empty string values should not go through dateFormatter
-  // otherwise, it returns undefined and will make the input an uncontrolled one.
-  if (value == null || value === '') return '';
-  console.log(convertDateToString(value));
-  if (value instanceof Date) return convertDateToString(value);
-  // Valid dates should not be converted
-  if (dateFormatRegex.test(value)) return value;
-
-  return convertDateToString(new Date(value));
-};
-
-const dateParser = (value) => {
-  //value is a string of "YYYY-MM-DD" format
-  const match = dateParseRegex.exec(value);
-  if (match === null) return;
-  const d = new Date(match[1], parseInt(match[2], 10) - 1, match[3]);
-  if (isNaN(d.getDate())) return;
-  console.log(d);
-  return d;
-};
-
 const AuctionForm = () => (
   <SimpleForm>
     <Typography variant='h6' gutterBottom>
@@ -155,19 +118,13 @@ const AuctionForm = () => (
     <Typography variant='h6' gutterBottom mt={1}>
       Dates (UTC)
     </Typography>
-    <DateTimeInput source='announcementDate' />
+    <DateTimeInput source='announcementDate' label='Announcement date' />
     <Box display='flex' gap='1em'>
-      <DateInput
-        source='startDate'
-        required
-        format={dateFormatter}
-        parse={dateParser}
-        options={{ onBlur: () => {} }}
-      />
-      <DateTimeInput label='Expiration' source='expiresAt' required />
-      <DateTimeInput label='Max Expiration' source='maxExpiryDate' required />
+      <DateTimeInput source='startDate' label='Start date' required />
+      <DateTimeInput label='Expiration date' source='expiresAt' required />
+      <DateTimeInput label='Max expiration' source='maxExpiryDate' required />
     </Box>
-    <DateTimeInput label='Max Claim Date' source='maxClaimDate' />
+    <DateTimeInput label='Max claim date' source='maxClaimDate' />
     <Typography variant='h6' gutterBottom mt={1}>
       Params
     </Typography>

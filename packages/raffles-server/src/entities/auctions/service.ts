@@ -38,12 +38,15 @@ const AuctionsRepository = () => {
     startDateGte?: Date;
   };
 
-  const auctionsFilter = (auctionId?: number, filter: AuctionFilter = {}) => {
+  const auctionsFilter = (
+    auctionId?: number,
+    filter: AuctionFilter = {},
+    bypassChecks = false,
+  ) => {
     const {
       unannounced,
       privateCode,
       title,
-      q,
       startDateLte,
       startDateGte,
       ...restFilters
@@ -65,7 +68,6 @@ const AuctionsRepository = () => {
         : startDateGte
         ? { [Op.gte]: startDateGte }
         : null;
-    console.log(q);
 
     return {
       ...restFilters,
@@ -82,23 +84,34 @@ const AuctionsRepository = () => {
       }),
       ...(auctionId && { id: auctionId }),
       ...(startDateFilters && { startDate: startDateFilters }),
-      privateCode: {
-        [Op.or]: [null, privateCode ?? null],
-      },
+      ...(!bypassChecks && {
+        privateCode: {
+          [Op.or]: [null, privateCode ?? null],
+        },
+      }),
     };
   };
 
   async function getAuctionsWithBids(
     auctionId?: number,
-    user?: ContextUser,
+    user?: ContextUser | boolean,
     sortField = 'id',
     sortOrder = 'desc',
     page = 0,
     perPage = 25,
     filter?: AuctionFilter,
   ) {
+    // Check for admin to return addional fields and private auctions.
+    // Calling directly this method and passing user=true is considered as admin
+    // (e.g when being called from bidding notifications)
+    let isAdmin = user === true;
+    if (typeof user === 'object' && user.id) {
+      const fullUser = await User.findByPk(user.id);
+      isAdmin = fullUser.isAdmin;
+    }
+
     const auctions = (await Auction.findAll({
-      where: auctionsFilter(auctionId, filter),
+      where: auctionsFilter(auctionId, filter, isAdmin),
       include: [{ model: AuctionBid, include: [User] }],
       order: [
         [sortField, sortOrder],
@@ -106,6 +119,8 @@ const AuctionsRepository = () => {
       ],
       limit: perPage,
       offset: page * perPage,
+      // Exclude private fields when not admin
+      attributes: { exclude: [!isAdmin ? 'maxExpiryDate' : ''] },
     })) as unknown as AuctionType[];
 
     for await (const a of auctions) {
@@ -125,7 +140,8 @@ const AuctionsRepository = () => {
         }));
       } else {
         a.isClaimed = Boolean(
-          user &&
+          typeof user === 'object' &&
+            user &&
             a.bids.find((b) => b.user.id === user.id && b.claimTransactionId),
         );
       }
@@ -134,9 +150,10 @@ const AuctionsRepository = () => {
     return auctions;
   }
 
-  async function countAuctions(filter?: AuctionFilter) {
+  async function countAuctions(user: ContextUser, filter?: AuctionFilter) {
+    const fullUser = await User.findByPk(user.id);
     const count = await Auction.count({
-      where: auctionsFilter(null, filter),
+      where: auctionsFilter(null, filter, fullUser.isAdmin),
     });
     return { count };
   }

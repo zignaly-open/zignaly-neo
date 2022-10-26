@@ -1,10 +1,8 @@
 import { gql } from 'apollo-server-express';
 
 const fields = `
-  id: ID!
   createdAt: Date
   expiresAt: Date
-  maxExpiryDate: Date
   maxClaimDate: Date
   title: String!
   imageUrl: String
@@ -24,6 +22,11 @@ const fields = `
   bidStep: Float
 `;
 
+const privateFields = `
+  announcementDate: Date
+  maxExpiryDate: Date
+`;
+
 export const typeDef = gql`
   scalar Date
 
@@ -37,8 +40,15 @@ export const typeDef = gql`
     user: UserInfo
   }
 
-  type Auction {
+  type AuctionLite {
+    id: ID
     ${fields}
+  }
+
+  type Auction {
+    id: ID
+    ${fields}
+    ${privateFields}
   }
 
   input AuctionFilter {
@@ -54,7 +64,7 @@ export const typeDef = gql`
   }
 
   extend type Query {
-    auctions(id: ID, unannounced: Boolean, privateCode: String): [Auction]
+    auctions(id: ID, unannounced: Boolean, privateCode: String): [AuctionLite]
 
     Auction(id: ID): Auction
     allAuctions(
@@ -76,15 +86,20 @@ export const typeDef = gql`
   }
 
   extend type Subscription {
-    auctionUpdated: Auction
+    auctionUpdated: AuctionLite
   }
 
   extend type Mutation {
     bid(id: ID!): String
-    claim(id: ID!): Auction
+    claim(id: ID!): AuctionLite
     updateAuction(
+      id: ID!
       ${fields}
+      ${privateFields}
     ): Auction
-    createAuction(${fields}): Auction
+    createAuction(
+      ${fields}
+      ${privateFields}
+    ): Auction
   }
 `;

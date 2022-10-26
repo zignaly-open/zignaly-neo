@@ -11,6 +11,7 @@ import redisService from '../../redisService';
 import { BALANCE_CHANGED } from '../users/constants';
 import { debounce } from 'lodash';
 import { Auction, AuctionBid } from './model';
+import { checkAdmin } from '../../util/admin';
 
 const broadcastAuctionChange = async (auctionId: number) => {
   try {
@@ -29,7 +30,13 @@ const debounceBroadcastAuction = debounce(broadcastAuctionChange, 50);
 
 export const resolvers = {
   Query: {
-    Auction: async (_: any, { id }: { id: number }) => {
+    Auction: async (
+      _: any,
+      { id }: { id: number },
+      { user }: ApolloContext,
+    ) => {
+      //  todo: call getAuctionsWithBids
+      await checkAdmin(user?.id);
       return Auction.findByPk(id);
     },
     allAuctions: async (
@@ -54,8 +61,9 @@ export const resolvers = {
       }: {
         filter: ResourceOptions['filter'];
       },
+      { user }: ApolloContext,
     ) => {
-      return AuctionsService.countAuctions(filter);
+      return AuctionsService.countAuctions(user, filter);
     },
   },
   Mutation: {
@@ -113,7 +121,7 @@ export const resolvers = {
       if (!user) {
         throw new Error('User not found');
       }
-      const [auction] = await AuctionsService.getAuctionsWithBids(id);
+      const [auction] = await AuctionsService.getAuctionsWithBids(id, user);
 
       if (!auction.isFinalized) throw new Error('Auction not finalized');
       if (auction.maxClaimDate && +new Date(auction.maxClaimDate) < Date.now())
