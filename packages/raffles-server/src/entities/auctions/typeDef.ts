@@ -106,10 +106,12 @@ export const typeDef = gql`
     claim(id: ID!): Auction
     updateAuction(
       id: ID!
+      privateCode: String      
       ${fields}
       ${privateFields}
     ): AdmAuction
     createAuction(
+      privateCode: String
       ${fields}
       ${privateFields}
     ): AdmAuction
