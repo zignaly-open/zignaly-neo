@@ -45,7 +45,7 @@ export const AuctionList = () => (
     <Datagrid rowClick='edit'>
       <TextField source='id' />
       <TextField source='title' />
-      <DateField source='startDate' />
+      <DateField source='startDate' showTime={true} />
       <DateField source='expiresAt' label='Expiry date' />
       <DateField source='maxExpiryDate' />
       <NumberField source='bidFee' />
@@ -55,7 +55,7 @@ export const AuctionList = () => (
       <NumberField source='currentBid' />
       <FunctionField
         label='Status'
-        sortBy='author.last_name'
+        sortBy='isFinalized'
         render={(record: AuctionType) => (
           <Chip
             color={record.isFinalized ? 'success' : 'primary'}
@@ -120,9 +120,9 @@ const AuctionForm = () => (
     </Typography>
     <DateTimeInput source='announcementDate' label='Announcement date' />
     <Box display='flex' gap='1em'>
-      <DateTimeInput source='startDate' label='Start date' required />
-      <DateTimeInput label='Expiration date' source='expiresAt' required />
-      <DateTimeInput label='Max expiration' source='maxExpiryDate' required />
+      <DateTimeInput source='startDate' label='Start date*' required />
+      <DateTimeInput label='Expiration date*' source='expiresAt' required />
+      <DateTimeInput label='Max expiration*' source='maxExpiryDate' required />
     </Box>
     <DateTimeInput label='Max claim date' source='maxClaimDate' />
     <Typography variant='h6' gutterBottom mt={1}>

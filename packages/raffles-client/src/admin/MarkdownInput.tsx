@@ -32,15 +32,6 @@ const MarkdownInput = (props: TextInputProps) => {
     onBlur,
     ...props,
   });
-  // return (
-  //   <FormControl>
-  //     {/* <InputLabel htmlFor='my-input'>Email address</InputLabel> */}
-  //     {/* <MDEditor height={300} {...field} /> */}
-  //     <FormHelperText id='my-helper-text'>
-  //       We'll never share your email.
-  //     </FormHelperText>
-  //   </FormControl>
-  // );
 
   return (
     <Box
@@ -55,34 +46,7 @@ const MarkdownInput = (props: TextInputProps) => {
       <Labeled label={props.label} isRequired={rest.required}>
         <MDEditor height={300} {...field} />
       </Labeled>
-      <InputHelperText
-        touched={isTouched}
-        // error={error} helperText='a'
-      />
-    </Box>
-  );
-
-  return (
-    <Box display='flex'>
-      <TextInput
-        source={field.value}
-        {...rest}
-        sx={{
-          minWidth: '50%',
-        }}
-        multiline
-      />
-      {/* <TextField
-        {...field}
-        label={props.label}
-        error={(isTouched || isSubmitted) && invalid}
-        helperText={(isTouched || isSubmitted) && invalid ? error : ''}
-        required={isRequired}
-        {...rest}
-      /> */}
-      <div>
-        <ReactMarkdown children={field.value} />
-      </div>
+      <InputHelperText touched={isTouched} error={error?.message} />
     </Box>
   );
 };
