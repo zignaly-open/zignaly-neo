@@ -1,7 +1,7 @@
 export default {
   resources: {
     auctions: {
-      name: 'Auction',
+      name: 'Auctions',
       socials: 'Socials',
       dates: 'Dates (UTC)',
       params: 'Params',
