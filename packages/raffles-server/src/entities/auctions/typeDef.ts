@@ -43,12 +43,14 @@ export const typeDef = gql`
   type AuctionLite {
     id: ID
     bids: [Bid]
+    isClaimed: Boolean
     ${fields}
   }
 
   type Auction {
     id: ID
     bids: [Bid]
+    isClaimed: Boolean
     ${fields}
     ${privateFields}
   }
