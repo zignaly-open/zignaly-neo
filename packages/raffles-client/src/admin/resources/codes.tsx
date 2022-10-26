@@ -50,11 +50,11 @@ const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
         {!systemCode && <TextField source='user.id' label='UserId' />}
         {!systemCode && <TextField source='user.username' label='Username' />}
         {systemCode && <BooleanField source='welcomeType' />}
-        <NumberField source='reqMinimumBalance' />
-        <NumberField source='reqMinimumDeposit' />
-        <DateField source='reqDepositFrom' />
-        <NumberField source='reqMinAuctions' />
-        <TextField source='reqWalletType' />
+        <NumberField source='reqMinimumBalance' label='Min balance' />
+        <NumberField source='reqMinimumDeposit' label='Min deposit' />
+        <DateField source='reqDepositFrom' label='Deposit from' />
+        <NumberField source='reqMinAuctions' label='Min auctions' />
+        <TextField source='reqWalletType' label='Wallet type' />
         <NumberField source='currentRedemptions' />
         <NumberField source='maxRedemptions' />
         <NumberField source='benefitDirect' />
@@ -89,13 +89,13 @@ const CodeForm = () => {
       <Typography variant='h6' gutterBottom mt={1}>
         {translate('resources.codes.requirements')}
       </Typography>
-      <NumberInput source='reqMinimumBalance' />
-      <NumberInput source='reqMinimumDeposit' />
-      <NumberInput source='reqMinimumBalance' />
-      <DateTimeInput source='reqDepositFrom' label='Req deposit from' />
-      <NumberInput source='reqMinAuctions' />
+      <NumberInput source='reqMinimumBalance' label='Min balance' />
+      <NumberInput source='reqMinimumDeposit' label='Min deposit' />
+      <DateTimeInput source='reqDepositFrom' label='Deposit from' />
+      <NumberInput source='reqMinAuctions' label='Min auctions' />
       <SelectInput
         source='reqWalletType'
+        label='Wallet type'
         choices={[
           { id: 'metamask', name: 'MetaMask' },
           { id: 'kucoin', name: 'KuCoin' },
