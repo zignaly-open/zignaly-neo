@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import {
   useInput,
   InputHelperText,
@@ -9,6 +9,7 @@ import {
 import MDEditor from '@uiw/react-md-editor';
 
 const MarkdownInput = (props: TextInputProps) => {
+  const theme = useTheme();
   const { onChange, onBlur, ...rest } = props;
   const {
     field,
@@ -24,7 +25,7 @@ const MarkdownInput = (props: TextInputProps) => {
       mt='8px'
       mb='4px'
       width='100%'
-      data-color-mode='light'
+      data-color-mode={theme.palette.mode}
       display='flex'
       flexDirection='column'
       gap='4px'

@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {
-  Admin,
-  CustomRoutes,
-  defaultTheme,
-  Loading,
-  Resource,
-} from 'react-admin';
+import { Admin, CustomRoutes, Loading, Resource } from 'react-admin';
 import {
   AuctionEdit,
   AuctionIcon,
@@ -27,13 +21,6 @@ import { Route } from 'react-router-dom';
 import i18nProvider from './i18nProvider';
 import { SettingsPage } from './settings';
 
-const theme = {
-  ...defaultTheme,
-  // palette: {
-  //   mode: 'dark', // Switching the dark mode on is a single property value change.
-  // },
-};
-
 const AdminEntryPoint = () => {
   const [dataProvider, setDataProvider] = useState(null);
 
@@ -49,7 +36,6 @@ const AdminEntryPoint = () => {
 
   return (
     <Admin
-      theme={theme}
       i18nProvider={i18nProvider}
       dataProvider={dataProvider}
       layout={MyLayout}

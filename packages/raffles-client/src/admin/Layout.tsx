@@ -37,8 +37,8 @@ export const MainMenu = () => (
   </Menu>
 );
 
-const MyLayout = (props: LayoutProps) => (
-  <Layout {...props} appBar={MyAppBar} menu={MainMenu} />
-);
+const MyLayout = (props: LayoutProps) => {
+  return <Layout {...props} appBar={MyAppBar} menu={MainMenu} />;
+};
 
 export default MyLayout;
