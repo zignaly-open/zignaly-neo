@@ -25,6 +25,7 @@ const privateFields = `
   announcementDate: Date
   maxExpiryDate: Date
   createdAt: Date
+  privateCode: String
 `;
 
 export const typeDef = gql`
@@ -106,12 +107,10 @@ export const typeDef = gql`
     claim(id: ID!): Auction
     updateAuction(
       id: ID!
-      privateCode: String      
       ${fields}
       ${privateFields}
     ): AdmAuction
     createAuction(
-      privateCode: String
       ${fields}
       ${privateFields}
     ): AdmAuction
