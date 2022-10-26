@@ -26,12 +26,16 @@ export const MyAppBar = (props: AppBarProps) => (
 export const MainMenu = () => (
   <Menu>
     <Menu.Item
-      to='/admin/Auction'
+      to='/admin/auctions'
       primaryText='Auctions'
       leftIcon={<EventNote />}
     />
-    <Menu.Item to='/admin/User' primaryText='Users' leftIcon={<People />} />
-    <Menu.Item to='/admin/Code' primaryText='System Codes' leftIcon={<Abc />} />
+    <Menu.Item to='/admin/users' primaryText='Users' leftIcon={<People />} />
+    <Menu.Item
+      to='/admin/codes'
+      primaryText='System Codes'
+      leftIcon={<Abc />}
+    />
     <Menu.Item
       to='/admin/user-codes'
       primaryText='User Codes'

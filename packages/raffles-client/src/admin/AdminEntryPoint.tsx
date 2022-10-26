@@ -46,15 +46,15 @@ const AdminEntryPoint = () => {
       basename='/admin'
     >
       <Resource
-        name='Auction'
+        name='auctions'
         list={AuctionList}
         edit={AuctionEdit}
         create={AuctionCreate}
         icon={AuctionIcon}
       />
-      <Resource name='User' list={UserList} icon={UserIcon} />
+      <Resource name='users' list={UserList} icon={UserIcon} />
       <Resource
-        name='Code'
+        name='codes'
         list={CodeList}
         edit={CodeEdit}
         create={CodeCreate}

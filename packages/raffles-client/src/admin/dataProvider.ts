@@ -44,12 +44,23 @@ const errorLink = onError(
   },
 );
 
+const resourcesMap = {
+  auctions: 'Auction',
+  codes: 'Code',
+  users: 'User',
+};
+
 const myBuildQuery =
   (introspection: IntrospectionResult) =>
-  (fetchType: string, resource: string, params: { id: string }) => {
+  (fetchType: string, resourceId: string, params: { id: string }) => {
+    // Get actual resource name instead of the name we use in urls
+    const resource = resourcesMap[resourceId] ?? resourceId;
+
     const builtQuery = buildQuery(introspection)(fetchType, resource, params);
+
     if (resource === 'Code') {
       if (fetchType === 'GET_LIST') {
+        // Add code as id to response
         return {
           ...builtQuery,
           parseResponse: (response: ApolloQueryResult<CodeInfo[]>) => {
@@ -63,11 +74,14 @@ const myBuildQuery =
             };
           },
         };
-      } else if (
+      }
+
+      if (
         fetchType === 'GET_ONE' ||
         fetchType === 'UPDATE' ||
         fetchType === 'CREATE'
       ) {
+        // Add code as id to response
         return {
           ...builtQuery,
           parseResponse: (response: ApolloQueryResult<CodeInfo>) => {
@@ -79,7 +93,10 @@ const myBuildQuery =
           },
         };
       }
-    } else if (resource === 'Settings') {
+    }
+
+    if (resource === 'Settings') {
+      // Add id to settings reply
       return {
         ...builtQuery,
         parseResponse: (response: ApolloQueryResult<{ data: object }>) => {
@@ -91,13 +108,15 @@ const myBuildQuery =
       };
     }
 
+    // Mutation for deletion
     if (fetchType === 'DELETE') {
       return {
         ...builtQuery,
         query: gql`
-        mutation ($id: ID!) {
-          delete${resource}(id: $id)
-        }`,
+          mutation ($id: ID!) {
+            delete${resource}(id: $id)
+          }
+        `,
         variables: {
           id: params.id,
         },
@@ -115,8 +134,8 @@ export default () =>
     clientOptions: {
       link: ApolloLink.from([authLink, errorLink, httpLink]),
     },
-    // introspection: {
-    //   include: ['Auction', 'User', 'Code'],
-    // },
+    introspection: {
+      include: ['auctions'],
+    },
     buildQuery: myBuildQuery,
   });
