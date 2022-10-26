@@ -149,7 +149,7 @@ export const AuctionEdit = () => (
 );
 
 export const AuctionCreate = () => (
-  <Create title='Create an Auction'>
+  <Create title='Create an Auction' redirect='list'>
     <AuctionForm />
   </Create>
 );

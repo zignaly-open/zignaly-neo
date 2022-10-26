@@ -18,7 +18,7 @@ if (!isTest) {
 
   subscriber.notifications.on(NOTIFY_CHANNEL, async (auctionId: string) => {
     console.log(`Received notification of new auction ${auctionId} ready!`);
-    redisImport(auctionId);
+    redisImport(parseInt(auctionId));
   });
 
   subscriber.events.on('error', (error: any) => {
@@ -36,17 +36,26 @@ export async function connect() {
   await subscriber.listenTo(NOTIFY_CHANNEL);
 }
 
-const redisImport = async (auctionId: string) => {
+export const redisImport = async (auctionId: number) => {
   const auction = (await Auction.findByPk(auctionId)) as Auction;
+  if (!auction) {
+    throw new Error('Auction not found');
+  }
   await redisService.prepareAuction(auction);
   await auction.update({ inRedis: true });
   console.log(`Auction ${auction.id} imported to redis!`);
   watchForAuctionExpiration(auctionId);
 };
 
-const watchForAuctionExpiration = async (auctionId: string) => {
+const watchingAuctions = {};
+
+const watchForAuctionExpiration = async (auctionId: number) => {
   try {
-    const expire = await redisService.getAuctionExpiration(+auctionId);
+    if (watchingAuctions[auctionId]) {
+      clearInterval(watchingAuctions[auctionId]);
+    }
+
+    const expire = await redisService.getAuctionExpiration(auctionId);
     const diff = Math.floor(+expire / 1000) - +new Date() + 1000;
 
     if (isNaN(diff)) {
@@ -54,8 +63,9 @@ const watchForAuctionExpiration = async (auctionId: string) => {
     }
 
     if (diff <= 0) {
-      await redisService.finalizeAuction(+auctionId);
+      await redisService.finalizeAuction(auctionId);
       console.log(`Auction ${auctionId} exported to db!`);
+      clearInterval(watchingAuctions[auctionId]);
     } else {
       await wait(diff);
       watchForAuctionExpiration(auctionId);

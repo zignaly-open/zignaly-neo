@@ -6,6 +6,7 @@ import { Auction, AuctionBid } from './model';
 import redisService from '../../redisService';
 import { Op } from 'sequelize';
 import { checkAdmin } from '../../util/admin';
+import { redisImport } from '../../redisAuctionWatcher';
 
 const AuctionsRepository = () => {
   const lastBidPopulation = {
@@ -175,6 +176,8 @@ const AuctionsRepository = () => {
 
     const auction = await Auction.create(data, { returning: true });
     if (!auction) throw new Error("Can't create auction");
+
+    await redisImport(auction.id);
 
     return auction;
   }
