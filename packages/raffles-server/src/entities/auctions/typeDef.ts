@@ -50,6 +50,7 @@ export const typeDef = gql`
   type AdmAuction {
     id: ID
     bids: [Bid]
+    isClaimed: Boolean
     ${fields}
     ${privateFields}
   }

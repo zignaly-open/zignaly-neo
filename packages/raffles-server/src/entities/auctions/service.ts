@@ -8,6 +8,10 @@ import { Op } from 'sequelize';
 import { checkAdmin } from '../../util/admin';
 import { redisImport } from '../../redisAuctionWatcher';
 
+const omitPrivateFields = {
+  attributes: { exclude: ['announcementDate', 'maxExpiryDate'] },
+};
+
 const AuctionsRepository = () => {
   const lastBidPopulation = {
     model: AuctionBid,
@@ -102,17 +106,11 @@ const AuctionsRepository = () => {
     perPage = 25,
     filter?: AuctionFilter,
   ) {
-    // Check for admin to return addional fields and private auctions.
-    // Calling directly this method and passing user=true is considered as admin
-    // (e.g when being called from bidding notifications)
-    let isAdmin = user === true;
-    if (typeof user === 'object' && user?.id) {
-      const fullUser = await User.findByPk(user.id);
-      isAdmin = fullUser.isAdmin;
-    }
+    // User = true when called from admin endpoint to return additional fields and private auctions.
+    // Aso when called from system places such as bidding notification.
 
     const auctions = (await Auction.findAll({
-      where: auctionsFilter(auctionId, filter, isAdmin),
+      where: auctionsFilter(auctionId, filter, user === true),
       include: [{ model: AuctionBid, include: [User] }],
       order: [
         [sortField, sortOrder],
@@ -120,8 +118,7 @@ const AuctionsRepository = () => {
       ],
       limit: perPage,
       offset: page * perPage,
-      // Exclude private fields when not admin
-      attributes: { exclude: [!isAdmin ? 'maxExpiryDate' : ''] },
+      ...(user !== true && omitPrivateFields),
     })) as unknown as AuctionType[];
 
     for await (const a of auctions) {
