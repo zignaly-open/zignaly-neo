@@ -67,7 +67,6 @@ export async function getAuctions(
     items: allAuctions(filter: $filter) {
       id
       title
-      createdAt
       expiresAt
       currentBid
       website

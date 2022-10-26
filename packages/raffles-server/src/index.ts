@@ -20,10 +20,14 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 import { WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import { persistTablesToTheDatabase } from './db';
+import { initAuctionsWatchers } from './redisService';
 
 // persist models to the database
 // TODO: maybe alter is not good on prod
 !isTest && persistTablesToTheDatabase();
+
+// Watch for auctions in redis
+!isTest && initAuctionsWatchers();
 
 const typeDef = gql`
   type Query
