@@ -39,6 +39,7 @@ const AdminEntryPoint = () => {
       i18nProvider={i18nProvider}
       dataProvider={dataProvider}
       layout={MyLayout}
+      basename='/admin'
     >
       <Resource
         name='Auction'
@@ -56,8 +57,8 @@ const AdminEntryPoint = () => {
         icon={CodeIcon}
       />
       <CustomRoutes>
-        <Route path='/user-codes' element={<UserCodeList />} />
-        <Route path='/code-settings' element={<CodeSettings />} />
+        <Route path='/admin/user-codes' element={<UserCodeList />} />
+        <Route path='/admin/code-settings' element={<CodeSettings />} />
         <Route path='/admin/settings' element={<SettingsPage />} />
       </CustomRoutes>
     </Admin>

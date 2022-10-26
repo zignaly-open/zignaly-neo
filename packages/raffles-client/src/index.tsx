@@ -5,7 +5,7 @@ import './util/i18next';
 import reportWebVitals from './reportWebVitals';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-const EntryPoint = React.lazy(() => import('./EntryPoint'));
+import EntryPoint from './EntryPoint';
 const AdminEntryPoint = React.lazy(() => import('./admin/AdminEntryPoint'));
 
 window.subscribersSiteId = '753b0b7b-368a-4b7b-8cb6-eb210047b5db';
@@ -25,16 +25,9 @@ ReactDOM.render(
         )}
         <BrowserRouter>
           <Routes>
+            <Route path='/' element={<EntryPoint />} />
             <Route
-              path='/'
-              element={
-                <React.Suspense fallback={null}>
-                  <EntryPoint />
-                </React.Suspense>
-              }
-            />
-            <Route
-              path='/admin'
+              path='/admin/*'
               element={
                 <React.Suspense fallback={null}>
                   <AdminEntryPoint />
