@@ -1,7 +1,6 @@
 import { gql } from 'apollo-server-express';
 
 const fields = `
-  createdAt: Date
   expiresAt: Date
   maxClaimDate: Date
   title: String!
@@ -25,6 +24,7 @@ const fields = `
 const privateFields = `
   announcementDate: Date
   maxExpiryDate: Date
+  createdAt: Date
 `;
 
 export const typeDef = gql`

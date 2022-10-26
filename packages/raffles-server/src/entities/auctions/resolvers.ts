@@ -117,7 +117,7 @@ export const resolvers = {
     },
     deleteAuction: async (
       _: any,
-      { id }: { id: string },
+      { id }: { id: number },
       { user }: ApolloContext,
     ) => {
       try {

@@ -30,7 +30,7 @@ const DateTimeInput = (props: TextInputProps) => {
       <Box display='flex' flexDirection='column'>
         <DateTimePicker
           label={props.label}
-          inputFormat='yyyy/MM/dd hh:mm:ss'
+          inputFormat='yyyy-MM-dd HH:mm:ss'
           renderInput={(params) => (
             <TextField
               size='small'

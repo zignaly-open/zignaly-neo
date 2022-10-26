@@ -8,7 +8,7 @@ const DateField = (props: TextFieldProps) => {
       {...props}
       render={(record: RaRecord) =>
         record[props.source]
-          ? format(new Date(record[props.source]), 'yyyy‑MM‑dd hh:mmaaa')
+          ? format(new Date(record[props.source]), 'yyyy‑MM‑dd HH:mm')
           : ''
       }
     />

@@ -23,9 +23,7 @@ export const GET_AUCTIONS = gql`
     ) {
       id
       title
-      createdAt
       expiresAt
-      maxExpiryDate
       maxClaimDate
       startDate
       currentBid

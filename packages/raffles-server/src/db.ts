@@ -8,10 +8,10 @@ import {
 import { isTest, postgresUrl } from '../config';
 import { Setting } from './entities/settings/model';
 import { Payout } from './entities/payouts/model';
-import { connect } from './redisAuctionWatcher';
 import { Code, CodeRedemption } from './entities/codes/model';
 import { generateCode } from './entities/codes/util';
 import { getCodeSettings } from './entities/settings/service';
+import { initAuctionsWatchers } from './redisService';
 
 const models = [
   User,
@@ -34,9 +34,8 @@ if (isTest) {
     logging: false,
     models,
   });
-  // pg NOTIFY listener
-  connect();
 }
+initAuctionsWatchers();
 
 User.afterCreate(async (user) => {
   const {

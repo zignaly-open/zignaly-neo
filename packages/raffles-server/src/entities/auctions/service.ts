@@ -6,7 +6,6 @@ import { Auction, AuctionBid } from './model';
 import redisService from '../../redisService';
 import { Op } from 'sequelize';
 import { checkAdmin } from '../../util/admin';
-import { redisImport } from '../../redisAuctionWatcher';
 
 const omitPrivateFields = {
   attributes: { exclude: ['announcementDate', 'maxExpiryDate'] },
@@ -172,6 +171,8 @@ const AuctionsRepository = () => {
     });
     if (!auction) throw new Error('Auction Not Found');
 
+    await redisService.redisImport(auction.id);
+
     return auction;
   }
 
@@ -181,13 +182,14 @@ const AuctionsRepository = () => {
     const auction = await Auction.create(data, { returning: true });
     if (!auction) throw new Error("Can't create auction");
 
-    await redisImport(auction.id);
+    await redisService.redisImport(auction.id);
 
     return auction;
   }
 
-  async function deleteAuction(user: ContextUser, id: string) {
+  async function deleteAuction(user: ContextUser, id: number) {
     await checkAdmin(user?.id);
+    await redisService.deleteAuctionFromRedis(id);
     return Boolean(
       await Auction.destroy({
         where: {
