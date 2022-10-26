@@ -46,9 +46,9 @@ export const AuctionList = () => (
     <Datagrid rowClick='edit'>
       <TextField source='id' />
       <TextField source='title' />
-      <DateField source='startDate' />
-      <DateField source='expiresAt' label='Expiry date' />
-      <DateField source='maxExpiryDate' />
+      <DateField source='startDate' multiline={true} />
+      <DateField source='expiresAt' label='Expiry date' multiline={true} />
+      <DateField source='maxExpiryDate' multiline={true} />
       <NumberField source='bidFee' />
       <NumberField source='bidStep' />
       <NumberField source='numberOfWinners' />
