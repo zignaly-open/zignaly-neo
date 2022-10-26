@@ -48,10 +48,10 @@ export const AuctionList = () => (
       <TextField source='title' />
       <DateField source='startDate' multiline={true} />
       <DateField source='expiresAt' label='Expiry date' multiline={true} />
-      <DateField source='maxExpiryDate' multiline={true} />
+      <DateField source='maxExpiryDate' multiline={true} label='Max expiry' />
       <NumberField source='bidFee' />
       <NumberField source='bidStep' />
-      <NumberField source='numberOfWinners' />
+      <NumberField source='numberOfWinners' label='No. of winners' />
       <ChipField source='chain' />
       <NumberField source='currentBid' />
       <FunctionField
