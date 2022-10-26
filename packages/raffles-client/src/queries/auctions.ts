@@ -14,7 +14,7 @@ export const GET_AUCTIONS = gql`
     $sortOrder: String
     $filter: AuctionFilter
   ) {
-    allAuctions(
+    items: allAuctions(
       page: $page
       perPage: $perPage
       sortField: $sortField
@@ -48,6 +48,9 @@ export const GET_AUCTIONS = gql`
           username
         }
       }
+    }
+    total: _allAuctionsMeta(filter: $filter) {
+      count
     }
   }
 `;
