@@ -11,7 +11,6 @@ import {
   EditButton,
   TextInput,
   BooleanInput,
-  DateTimeInput,
   NumberInput,
   SelectInput,
   BooleanField,
@@ -20,6 +19,7 @@ import {
   useTranslate,
 } from 'react-admin';
 import DateField from './DateField';
+import DateTimeInput from './DateTimeInput';
 
 export const CodeIcon = Redeem;
 
@@ -31,7 +31,7 @@ const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
   return (
     <List
       hasCreate={systemCode}
-      resource='Code'
+      resource='codes'
       sort={{ field: 'createdAt', order: 'desc' }}
       filters={codeFilters}
       filter={{ isDefault: !systemCode }}
@@ -92,7 +92,7 @@ const CodeForm = () => {
       <NumberInput source='reqMinimumBalance' />
       <NumberInput source='reqMinimumDeposit' />
       <NumberInput source='reqMinimumBalance' />
-      <DateTimeInput source='reqDepositFrom' />
+      <DateTimeInput source='reqDepositFrom' label='Req deposit from' />
       <NumberInput source='reqMinAuctions' />
       <SelectInput
         source='reqWalletType'
@@ -123,8 +123,8 @@ const CodeForm = () => {
       <Typography variant='h6' gutterBottom mt={1}>
         {translate('resources.codes.dates')}
       </Typography>
-      <DateTimeInput source='startDate' />
-      <DateTimeInput source='endDate' />
+      <DateTimeInput source='startDate' label='Start date' />
+      <DateTimeInput source='endDate' label='End date' />
     </SimpleForm>
   );
 };
@@ -139,10 +139,4 @@ export const CodeCreate = () => (
   <Create title='Create a Code'>
     <CodeForm />
   </Create>
-);
-
-export const CodeSettings = () => (
-  <Edit title='Edit Default Code Settings'>
-    <CodeForm />
-  </Edit>
 );

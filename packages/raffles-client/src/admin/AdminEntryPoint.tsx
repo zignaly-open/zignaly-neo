@@ -13,7 +13,6 @@ import {
   CodeList,
   CodeIcon,
   UserCodeList,
-  CodeSettings,
 } from './codes';
 import buildGraphQLProvider from './dataProvider';
 import MyLayout from './Layout';
@@ -61,9 +60,8 @@ const AdminEntryPoint = () => {
         icon={CodeIcon}
       />
       <CustomRoutes>
-        <Route path='/admin/user-codes' element={<UserCodeList />} />
-        <Route path='/admin/code-settings' element={<CodeSettings />} />
-        <Route path='/admin/settings' element={<SettingsPage />} />
+        <Route path='/user-codes' element={<UserCodeList />} />
+        <Route path='/settings' element={<SettingsPage />} />
       </CustomRoutes>
     </Admin>
   );
