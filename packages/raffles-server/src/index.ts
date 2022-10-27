@@ -3,6 +3,7 @@ import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageProductionDefault,
   ApolloServerPluginLandingPageGraphQLPlayground,
+  GraphQLResponse,
   // ApolloServerPluginLandingPageLocalDefault
 } from 'apollo-server-core';
 import express from 'express';
@@ -68,6 +69,18 @@ const wsServer = new WebSocketServer({
   path: graphqlPath,
 });
 
+const setHttpPlugin = {
+  async requestDidStart() {
+    return {
+      async willSendResponse({ response }: { response: GraphQLResponse }) {
+        if (response?.errors?.[0]?.extensions?.code === 'UNAUTHENTICATED') {
+          response.http.status = 401;
+        }
+      },
+    };
+  },
+};
+
 const server = new ApolloServer({
   schema,
   csrfPrevention: true,
@@ -76,6 +89,7 @@ const server = new ApolloServer({
     return { user };
   },
   plugins: [
+    setHttpPlugin,
     ApolloServerPluginDrainHttpServer({ httpServer }),
     // Install a landing page plugin based on NODE_ENV
     {

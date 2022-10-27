@@ -42,7 +42,12 @@ export const resolvers = {
       await checkAdmin(user?.id);
       return Auction.findByPk(id);
     },
-    allAdmAuctions: async (_: any, data: ResourceOptions) => {
+    allAdmAuctions: async (
+      _: any,
+      data: ResourceOptions,
+      { user }: ApolloContext,
+    ) => {
+      await checkAdmin(user?.id);
       return await AuctionsService.getAuctionsWithBids(
         null,
         true,

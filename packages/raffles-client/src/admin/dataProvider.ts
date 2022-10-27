@@ -25,24 +25,11 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const errorLink = onError(
-  (
-    {
-      /* response, networkError, graphQLErrors */
-    },
-  ) => {
-    // todo: redirect if 401?
-    // console.log(response, networkError, graphQLErrors);
-    // if (networkError.statusCode < 200 || networkError.statusCode >= 300) {
-    //   networkError.status = networkError.statusCode;
-    //   this.setState({
-    //     dataProvider: function () {
-    //       throw networkError;
-    //     },
-    //   });
-    // }
-  },
-);
+const errorLink = onError(({ networkError }: any) => {
+  if (networkError.statusCode === 401) {
+    window.location.assign('/');
+  }
+});
 
 const resourcesMap = {
   auctions: 'Auction',
