@@ -245,7 +245,7 @@ export const redisImport = async (auctionId: number, checkStarted = true) => {
   }
   await prepareAuction(auction);
   await auction.update({ inRedis: true });
-  console.log(`Auction ${auction.id} imported to redis`);
+  console.log(`Auction ${auction.id} imported to redis, starting watcher.`);
   watchForAuctionExpiration(auctionId);
 };
 
@@ -289,6 +289,7 @@ export const initAuctionsWatchers = async () => {
     },
   });
   auctions.forEach((a) => {
+    console.log(`Starting watcher for auction ${a.id}.`);
     watchForAuctionExpiration(a.id);
   });
 };
