@@ -31,12 +31,10 @@ import {
   ROUTE_HELP_TRADER,
   ROUTE_HELP_INVESTOR,
   ROUTE_404,
-  ROUTE_OFFER_YOUR_TRADING_SERVICE,
 } from './routes';
 
 import Management from './views/TraderService/Management';
 import Investors from './views/TraderService/Investors';
-import BecomeTrader from './views/TraderService/BecomeTrader';
 import Positions from './views/TraderService/Positions';
 import Coins from './views/TraderService/Coins';
 import ServiceProfile from './views/TraderService/ServiceProfile';
@@ -73,7 +71,6 @@ const Router: React.FC = () => (
       </Route>
     </Route>
 
-    <Route path={ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
     <Route path={ROUTE_HELP_TRADER} element={<HelpTrader />} />
     <Route path={ROUTE_HELP_INVESTOR} element={<HelpInvestor />} />
 
@@ -83,10 +80,7 @@ const Router: React.FC = () => (
       <Route path={ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />
     </Route>
 
-    <Route
-      path={ROUTE_OFFER_YOUR_TRADING_SERVICE}
-      element={<OfferYourTradingService />}
-    />
+    <Route path={ROUTE_BECOME_TRADER} element={<OfferYourTradingService />} />
     <Route path={ROUTE_PROFIT_SHARING} element={<ProfitSharing />} />
     <Route path={ROUTE_STAKING} element={<Staking />} />
     <Route path={ROUTE_ZIGPAD} element={<Zigpad />} />
