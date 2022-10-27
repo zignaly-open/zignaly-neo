@@ -3,6 +3,7 @@ import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageProductionDefault,
   ApolloServerPluginLandingPageGraphQLPlayground,
+  GraphQLResponse,
   // ApolloServerPluginLandingPageLocalDefault
 } from 'apollo-server-core';
 import express from 'express';
@@ -12,6 +13,7 @@ import * as auctions from './entities/auctions';
 import * as users from './entities/users';
 import * as payouts from './entities/payouts';
 import * as codes from './entities/codes';
+import * as settings from './entities/settings';
 import listenToChain from './chain/watch';
 import { expressjwt, Request as AuthorizedRequest } from 'express-jwt';
 import { port, isTest, algorithm, secret, graphqlPath } from '../config';
@@ -19,10 +21,14 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 import { WebSocketServer } from 'ws';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import { persistTablesToTheDatabase } from './db';
+import { initAuctionsWatchers } from './redisService';
 
 // persist models to the database
 // TODO: maybe alter is not good on prod
 !isTest && persistTablesToTheDatabase();
+
+// Watch for auctions in redis
+!isTest && initAuctionsWatchers();
 
 const typeDef = gql`
   type Query
@@ -47,12 +53,14 @@ const schema = makeExecutableSchema({
     users.typeDef,
     payouts.typeDef,
     codes.typeDef,
+    settings.typeDef,
   ],
   resolvers: [
     auctions.resolvers,
     users.resolvers,
     payouts.resolvers,
     codes.resolvers,
+    settings.resolvers,
   ],
 });
 
@@ -60,6 +68,18 @@ const wsServer = new WebSocketServer({
   server: httpServer,
   path: graphqlPath,
 });
+
+const setHttpPlugin = {
+  async requestDidStart() {
+    return {
+      async willSendResponse({ response }: { response: GraphQLResponse }) {
+        if (response?.errors?.[0]?.extensions?.code === 'UNAUTHENTICATED') {
+          response.http.status = 401;
+        }
+      },
+    };
+  },
+};
 
 const server = new ApolloServer({
   schema,
@@ -69,6 +89,7 @@ const server = new ApolloServer({
     return { user };
   },
   plugins: [
+    setHttpPlugin,
     ApolloServerPluginDrainHttpServer({ httpServer }),
     // Install a landing page plugin based on NODE_ENV
     {

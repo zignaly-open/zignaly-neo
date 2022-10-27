@@ -1,5 +1,17 @@
-import { ApolloContext } from '../../types';
-import { check, redeem, userCodes, userCodesRedemptions } from './service';
+import { ApolloContext, ResourceOptions } from '../../types';
+import { Code } from './model';
+import {
+  check,
+  countCodes,
+  createCode,
+  deleteCode,
+  getCode,
+  getCodes,
+  redeem,
+  updateCode,
+  userCodes,
+  userCodesRedemptions,
+} from './service';
 
 export const resolvers = {
   Query: {
@@ -31,6 +43,34 @@ export const resolvers = {
         throw e;
       }
     },
+    Code: async (_: any, { id }: { id: string }, { user }: ApolloContext) => {
+      return getCode(user, id);
+    },
+    allCodes: async (
+      _: any,
+      data: ResourceOptions,
+      { user }: ApolloContext,
+    ) => {
+      return getCodes(
+        user,
+        data.sortField,
+        data.sortOrder,
+        data.page,
+        data.perPage,
+        data.filter,
+      );
+    },
+    _allCodesMeta: async (
+      _: any,
+      {
+        filter,
+      }: {
+        filter: ResourceOptions['filter'];
+      },
+      { user }: ApolloContext,
+    ) => {
+      return countCodes(user, filter);
+    },
   },
   Mutation: {
     redeemCode: async (
@@ -40,6 +80,42 @@ export const resolvers = {
     ) => {
       try {
         return await redeem(code, user);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+    },
+    updateCode: async (
+      _: any,
+      data: Partial<Code>,
+      { user }: ApolloContext,
+    ) => {
+      try {
+        return updateCode(user, data);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+    },
+    createCode: async (
+      _: any,
+      data: Partial<Code>,
+      { user }: ApolloContext,
+    ) => {
+      try {
+        return createCode(user, data);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+    },
+    deleteCode: async (
+      _: any,
+      { id }: { id: string },
+      { user }: ApolloContext,
+    ) => {
+      try {
+        return deleteCode(user, id);
       } catch (e) {
         console.error(e);
         throw e;

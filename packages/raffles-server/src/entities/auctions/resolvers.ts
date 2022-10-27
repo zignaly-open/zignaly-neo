@@ -1,21 +1,23 @@
 import pubsub from '../../pubsub';
 import { AUCTION_UPDATED } from './constants';
-import { ApolloContext, TransactionType } from '../../types';
+import { ApolloContext, ResourceOptions, TransactionType } from '../../types';
 import { isBalanceSufficientForPayment } from './util';
 import { Payout } from '../payouts/model';
 import { getUserBalance, internalTransfer } from '../../cybavo';
 import { isTest, zignalySystemId } from '../../../config';
 import { emitBalanceChanged } from '../users/util';
-import AuctionsRepository from './repository';
+import AuctionsService from './service';
 import redisService from '../../redisService';
 import { BALANCE_CHANGED } from '../users/constants';
 import { debounce } from 'lodash';
-import { AuctionBid } from './model';
+import { Auction, AuctionBid } from './model';
+import { checkAdmin } from '../../util/admin';
 
 const broadcastAuctionChange = async (auctionId: number) => {
   try {
-    const [auctionUpdated] = await AuctionsRepository.getAuctionsWithBids(
+    const [auctionUpdated] = await AuctionsService.getAuctionsWithBids(
       auctionId,
+      true,
     );
 
     pubsub.publish(AUCTION_UPDATED, {
@@ -25,28 +27,111 @@ const broadcastAuctionChange = async (auctionId: number) => {
     console.error(e);
   }
 };
-const debounceBroadcastAuction = debounce(broadcastAuctionChange, 50);
+const debounceBroadcastAuction = debounce(broadcastAuctionChange, 50, {
+  maxWait: 150,
+});
 
 export const resolvers = {
   Query: {
-    auctions: async (
+    AdmAuction: async (
       _: any,
-      {
-        id,
-        unannounced,
-        privateCode,
-      }: { id: number; unannounced: boolean; privateCode: string },
+      { id }: { id: number },
       { user }: ApolloContext,
     ) => {
-      return await AuctionsRepository.getAuctionsWithBids(
-        id,
-        user,
-        unannounced,
-        privateCode,
+      //  todo: call getAuctionsWithBids
+      await checkAdmin(user?.id);
+      return Auction.findByPk(id);
+    },
+    allAdmAuctions: async (
+      _: any,
+      data: ResourceOptions,
+      { user }: ApolloContext,
+    ) => {
+      await checkAdmin(user?.id);
+      return await AuctionsService.getAuctionsWithBids(
+        null,
+        true,
+        data.sortField,
+        data.sortOrder,
+        data.page,
+        data.perPage,
+        data.filter,
       );
+    },
+    allAuctions: async (
+      _: any,
+      data: ResourceOptions,
+      { user }: ApolloContext,
+    ) => {
+      return await AuctionsService.getAuctionsWithBids(
+        null,
+        user,
+        data.sortField,
+        data.sortOrder,
+        data.page,
+        data.perPage,
+        data.filter,
+      );
+    },
+    _allAuctionsMeta: async (
+      _: any,
+      {
+        filter,
+      }: {
+        filter: ResourceOptions['filter'];
+      },
+    ) => {
+      return AuctionsService.countAuctions(filter);
+    },
+    _allAdmAuctionsMeta: async (
+      _: any,
+      {
+        filter,
+      }: {
+        filter: ResourceOptions['filter'];
+      },
+      { user }: ApolloContext,
+    ) => {
+      return AuctionsService.countAdmAuctions(user, filter);
     },
   },
   Mutation: {
+    updateAuction: async (
+      _: any,
+      data: Partial<Auction>,
+      { user }: ApolloContext,
+    ) => {
+      try {
+        return AuctionsService.updateAuction(user, data);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+    },
+    createAuction: async (
+      _: any,
+      data: Partial<Auction>,
+      { user }: ApolloContext,
+    ) => {
+      try {
+        return AuctionsService.createAuction(user, data);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+    },
+    deleteAuction: async (
+      _: any,
+      { id }: { id: number },
+      { user }: ApolloContext,
+    ) => {
+      try {
+        return AuctionsService.deleteAuction(user, id);
+      } catch (e) {
+        console.error(e);
+        throw e;
+      }
+    },
     bid: async (_: any, { id }: { id: number }, { user }: ApolloContext) => {
       if (!user) {
         throw new Error('User not found');
@@ -73,12 +158,11 @@ export const resolvers = {
         throw e;
       }
     },
-
     claim: async (_: any, { id }: { id: number }, { user }: ApolloContext) => {
       if (!user) {
         throw new Error('User not found');
       }
-      const [auction] = await AuctionsRepository.getAuctionsWithBids(id);
+      const [auction] = await AuctionsService.getAuctionsWithBids(id, user);
 
       if (!auction.isFinalized) throw new Error('Auction not finalized');
       if (auction.maxClaimDate && +new Date(auction.maxClaimDate) < Date.now())

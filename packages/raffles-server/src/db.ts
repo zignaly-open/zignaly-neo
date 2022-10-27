@@ -6,20 +6,11 @@ import {
   AuctionBasketItem,
 } from './entities/auctions/model';
 import { isTest, postgresUrl } from '../config';
-import { Setting } from './entities/setting/model';
+import { Setting } from './entities/settings/model';
 import { Payout } from './entities/payouts/model';
-import { connect } from './redisAuctionWatcher';
 import { Code, CodeRedemption } from './entities/codes/model';
-import {
-  DEFAULT_BENEFIT_DEPOSIT_FACTOR,
-  DEFAULT_BENEFIT_DIRECT,
-  DEFAULT_MAX_TOTAL_BENEFITS,
-  DEFAULT_MAX_TOTAL_REWARDS,
-  DEFAULT_REQ_MINIMUM_DEPOSIT,
-  DEFAULT_REWARD_DEPOSIT_FACTOR,
-  DEFAULT_REWARD_DIRECT,
-} from './entities/codes/constants';
 import { generateCode } from './entities/codes/util';
+import { getCodeSettings } from './entities/settings/service';
 
 const models = [
   User,
@@ -42,23 +33,31 @@ if (isTest) {
     logging: false,
     models,
   });
-  // pg NOTIFY listener
-  connect();
 }
 
 User.afterCreate(async (user) => {
+  const {
+    benefitDirect,
+    rewardDirect,
+    reqMinimumDeposit,
+    maxTotalBenefits,
+    maxTotalRewards,
+    benefitDepositFactor,
+    rewardDepositFactor,
+  } = await getCodeSettings();
+
   await Code.create({
     isDefault: true,
     code: generateCode(),
     welcomeType: true,
     userId: user.id,
-    benefitDirect: DEFAULT_BENEFIT_DIRECT,
-    rewardDirect: DEFAULT_REWARD_DIRECT,
-    reqMinimumDeposit: DEFAULT_REQ_MINIMUM_DEPOSIT,
-    maxTotalBenefits: DEFAULT_MAX_TOTAL_BENEFITS,
-    maxTotalRewards: DEFAULT_MAX_TOTAL_REWARDS,
-    benefitDepositFactor: DEFAULT_BENEFIT_DEPOSIT_FACTOR,
-    rewardDepositFactor: DEFAULT_REWARD_DEPOSIT_FACTOR,
+    benefitDirect,
+    rewardDirect,
+    reqMinimumDeposit,
+    maxTotalBenefits,
+    maxTotalRewards,
+    benefitDepositFactor,
+    rewardDepositFactor,
   });
 });
 

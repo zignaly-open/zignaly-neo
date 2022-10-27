@@ -5,13 +5,100 @@ import {
   getUserDeposits,
   internalTransfer,
 } from '../../cybavo';
-import { ContextUser, TransactionType } from '../../types';
+import { ContextUser, ResourceOptions, TransactionType } from '../../types';
 import { AuctionBid } from '../auctions/model';
 import { User } from '../users/model';
 import { emitBalanceChanged } from '../users/util';
 import { Code, CodeRedemption } from './model';
 import BN from 'bignumber.js';
 import { format } from 'date-fns';
+import { checkAdmin } from '../../util/admin';
+import { Op } from 'sequelize';
+
+export const getCode = async (user: ContextUser, code: string) => {
+  await checkAdmin(user?.id);
+  return Code.findByPk(code);
+};
+
+const applyFilters = (filter: ResourceOptions['filter'] = {}) => {
+  const { type, ...restFilters } = filter;
+
+  return {
+    ...restFilters,
+    // If no userId filter, look for type
+    ...(!filter.userId && {
+      userId:
+        type === 'user'
+          ? {
+              [Op.not]: null,
+            }
+          : null,
+    }),
+  };
+};
+
+export const getCodes = async (
+  user?: ContextUser,
+  sortField = 'createdAt',
+  sortOrder = 'desc',
+  page = 0,
+  perPage = 25,
+  filter?: ResourceOptions['filter'],
+) => {
+  await checkAdmin(user?.id);
+
+  return Code.findAll({
+    where: applyFilters(filter),
+    order: [[sortField, sortOrder]],
+    include: [User],
+    limit: perPage,
+    offset: page * perPage,
+  });
+};
+
+export const countCodes = async (
+  user?: ContextUser,
+  filter?: ResourceOptions['filter'],
+) => {
+  await checkAdmin(user?.id);
+
+  const count = await Code.count({
+    where: applyFilters(filter),
+  });
+  return { count };
+};
+
+export const updateCode = async (user: ContextUser, data: Partial<Code>) => {
+  await checkAdmin(user?.id);
+
+  const [, [code]] = await Code.update(data, {
+    where: { code: data.id },
+    returning: true,
+  });
+  if (!code) throw new Error('Code Not Found');
+
+  return code;
+};
+
+export const createCode = async (user: ContextUser, data: Partial<Code>) => {
+  await checkAdmin(user?.id);
+
+  const code = await Code.create(data, { returning: true });
+  if (!code) throw new Error("Can't create code");
+
+  return code;
+};
+
+export const deleteCode = async (user: ContextUser, code: string) => {
+  await checkAdmin(user?.id);
+  return Boolean(
+    await Code.destroy({
+      where: {
+        code,
+      },
+    }),
+  );
+};
 
 export const check = async (codeName: string, user: ContextUser) => {
   const code = await Code.findByPk(codeName?.toUpperCase());

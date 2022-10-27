@@ -60,6 +60,10 @@ export class User extends Model {
   @Default('metamask')
   @Column
   public walletType: string;
+
+  @Default(false)
+  @Column
+  public isAdmin?: boolean;
 }
 
 export function generateUserNonce(): number {

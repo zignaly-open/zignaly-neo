@@ -1,19 +1,43 @@
 import { gql } from 'apollo-server-express';
 
+const code = `
+  code: String
+  reqMinimumBalance: Int
+  reqMinimumDeposit: Float
+  reqDepositFrom: Date
+  reqMinAuctions: Int
+  reqWalletType: String
+  benefitDirect: Float
+  benefitBalanceFactor: Float
+  benefitDepositFactor: Float
+  maxTotalBenefits: Int
+`;
+
 export const typeDef = gql`
   scalar Date
 
   type CodeInfo {
-    code: String
-    reqMinimumBalance: Int
-    reqMinimumDeposit: Float
-    reqDepositFrom: Date
-    reqMinAuctions: Int
-    reqWalletType: String
-    benefitDirect: Float
-    benefitBalanceFactor: Float
-    benefitDepositFactor: Float
-    maxTotalBenefits: Int
+    ${code}
+  }
+
+  type CodeUser {
+    id: ID
+    username: String
+  }
+
+  type Code {
+    ${code}
+    user: CodeUser
+    welcomeType: Boolean
+    maxRedemptions: Int
+    currentRedemptions: Int
+    rewardDirect: Float
+    rewardFactor: Float
+    rewardDepositFactor: Float
+    maxTotalRewards: Int
+    startDate: Date
+    endDate: Date
+    isDefault: Boolean
   }
 
   type CodeCheckInfo {
@@ -57,13 +81,49 @@ export const typeDef = gql`
     invited: InvitedInfo
   }
 
+  input CodeFilter {
+    id: ID
+    code: String
+    isDefault: Boolean
+    userId: Int
+    type: String
+  }
+
   extend type Query {
+    Code(id: ID!): Code
     checkCode(code: String!): CodeCheckInfo
     userCodes: [UserCodeInfo]
     userCodesRedemptions: [CodeRedemptionInfo]
+    allCodes(
+      page: Int
+      perPage: Int
+      sortField: String
+      sortOrder: String
+      filter: CodeFilter
+    ): [Code]
+    _allCodesMeta(filter: CodeFilter, page: Int, perPage: Int): ListMetadata
+  }
+
+  type ListMetadata {
+    count: Int!
   }
 
   extend type Mutation {
     redeemCode(code: String!): Float
+    updateCode(
+      id: ID
+      ${code}
+      welcomeType: Boolean
+      maxRedemptions: Int
+      currentRedemptions: Int
+      rewardDirect: Float
+      rewardFactor: Float
+      rewardDepositFactor: Float
+      maxTotalRewards: Int
+      startDate: Date
+      endDate: Date
+    ): Code
+    createCode(${code}): Code
+    deleteCode(id: ID): Boolean
   }
 `;

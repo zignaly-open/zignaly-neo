@@ -63,13 +63,11 @@ export async function getAuctions(
   privateCode = '',
 ): Promise<AuctionType[]> {
   const AUCTIONS_QUERY = `
-  query {
-    auctions(id: null, unannounced: ${unannounced}, privateCode: "${privateCode}") {
+  query ($filter: AuctionFilter) {
+    items: allAuctions(filter: $filter) {
       id
       title
-      createdAt
       expiresAt
-      status
       currentBid
       website
       twitter
@@ -87,10 +85,18 @@ export async function getAuctions(
           username
         }
       }
+    },
+    total: _allAuctionsMeta(filter: $filter) {
+      count
     }
-  }`;
-  const auctions = await makeRequest(AUCTIONS_QUERY, token);
-  return auctions.body.data.auctions;
+  }
+  `;
+  const filter = { unannounced, privateCode };
+  const auctions = await makeRequest(AUCTIONS_QUERY, token, {
+    perPage: 100,
+    filter,
+  });
+  return auctions.body.data.items;
 }
 
 export async function getBalance(token: string): Promise<any> {
@@ -283,12 +289,17 @@ export async function createRandomUser(
   }
 }
 
-export async function makeRequest(gql: string, token: string): Promise<any> {
+export async function makeRequest(
+  gql: string,
+  token: string,
+  variables = {},
+): Promise<any> {
   let r = request.post('/graphql');
   if (token) r = r.set('Authorization', 'Bearer ' + token);
   return r
     .send({
       query: gql,
+      variables,
     })
     .set('Accept', 'application/json');
 }

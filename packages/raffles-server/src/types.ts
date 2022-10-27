@@ -29,6 +29,14 @@ export type RedisAuctionData = {
   ranking: number[];
 };
 
+export type ResourceOptions = {
+  sortField: string;
+  sortOrder: 'desc' | 'asc';
+  page: number;
+  perPage: number;
+  filter: { [key: string]: string | number };
+};
+
 declare global {
   // eslint-disable-next-line no-var
   var redisServer: any;

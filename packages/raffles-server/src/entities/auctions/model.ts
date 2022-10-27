@@ -30,9 +30,6 @@ export class Auction extends Model {
   @Column(DataType.TEXT)
   public claimSuccess: string;
 
-  @Column
-  public monetaryValue!: string;
-
   @Column(DataType.STRING)
   public website: string;
 

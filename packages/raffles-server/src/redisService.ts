@@ -1,7 +1,7 @@
 import Redis from 'ioredis';
 import { isTest, redisURL, zignalySystemId } from '../config';
 import { AUCTION_UPDATED } from './entities/auctions/constants';
-import AuctionsRepository from './entities/auctions/repository';
+import AuctionsService from './entities/auctions/service';
 import { Auction, AuctionBid } from './entities/auctions/model';
 import pubsub from './pubsub';
 import { RedisAuctionData, TransactionType } from './types';
@@ -11,6 +11,7 @@ import { mapLimit } from 'modern-async';
 import BN from 'bignumber.js';
 import fs from 'fs';
 import path from 'path';
+import { Op } from 'sequelize';
 
 const redis = new Redis(redisURL, {
   ...(isTest && {
@@ -167,6 +168,11 @@ const makeTransfer = async (auctionId: number, user: User) => {
   return tx.transaction_id;
 };
 
+const deleteAuctionFromRedis = async (auctionId: number) => {
+  await redis.del(`AUCTION:${auctionId}`);
+  await redis.del(`AUCTION_LEADERBOARD:${auctionId}`);
+};
+
 const finalizeAuction = async (auctionId: number) => {
   const auction = await Auction.findByPk(auctionId);
   const { price, expire, ranking } = await getAuctionData(auctionId);
@@ -218,14 +224,72 @@ const finalizeAuction = async (auctionId: number) => {
     { where: { id: auctionId } },
   );
 
-  await redis.del(`AUCTION:${auctionId}`);
-  await redis.del(`AUCTION_LEADERBOARD:${auctionId}`);
+  await deleteAuctionFromRedis(auctionId);
 
-  const [auctionUpdated] = await AuctionsRepository.getAuctionsWithBids(
+  const [auctionUpdated] = await AuctionsService.getAuctionsWithBids(
     auctionId,
+    true,
   );
   pubsub.publish(AUCTION_UPDATED, {
     auctionUpdated,
+  });
+};
+
+export const redisImport = async (auctionId: number, checkStarted = true) => {
+  const auction = (await Auction.findByPk(auctionId)) as Auction;
+  if (!auction) {
+    throw new Error('Auction not found');
+  }
+  if (checkStarted && auction.startDate < new Date()) {
+    return;
+  }
+  await prepareAuction(auction);
+  await auction.update({ inRedis: true });
+  console.log(`Auction ${auction.id} imported to redis`);
+  watchForAuctionExpiration(auctionId);
+};
+
+// Dictionary of setTimeout ids corresponding to each redis auction watcher.
+const watchingAuctions = {};
+
+const watchForAuctionExpiration = async (auctionId: number) => {
+  try {
+    if (watchingAuctions[auctionId]) {
+      clearTimeout(watchingAuctions[auctionId]);
+    }
+
+    const expire = await getAuctionExpiration(auctionId);
+    const diff = Math.floor(+expire / 1000) - +new Date() + 1000;
+
+    if (isNaN(diff)) {
+      throw new Error('expire is not valid');
+    }
+
+    if (diff <= 0) {
+      await finalizeAuction(auctionId);
+      console.log(`Auction ${auctionId} exported to db`);
+      clearTimeout(watchingAuctions[auctionId]);
+    } else {
+      watchingAuctions[auctionId] = setTimeout(() => {
+        watchForAuctionExpiration(auctionId);
+      }, diff);
+    }
+  } catch (e) {
+    console.error(e);
+  }
+};
+
+export const initAuctionsWatchers = async () => {
+  const auctions = await Auction.findAll({
+    where: {
+      inRedis: true,
+      isFinalized: {
+        [Op.not]: true,
+      },
+    },
+  });
+  auctions.forEach((a) => {
+    watchForAuctionExpiration(a.id);
   });
 };
 
@@ -238,4 +302,8 @@ export default {
   getAuctionRanking,
   getAuctionExpiration,
   finalizeAuction,
+  watchForAuctionExpiration,
+  initAuctionsWatchers,
+  redisImport,
+  deleteAuctionFromRedis,
 };

@@ -30,6 +30,7 @@ export class WalletType extends Model {
 export class Code extends Model {
   @PrimaryKey
   @IsUppercase
+  @Unique
   @Column
   public code!: string;
 

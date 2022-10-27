@@ -5,7 +5,7 @@ import {
   validateEmail,
   validateUsername,
 } from './util';
-import { ApolloContext, ContextUser } from '../../types';
+import { ApolloContext, ContextUser, ResourceOptions } from '../../types';
 import { getUserBalance } from '../../cybavo';
 import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from './constants';
@@ -13,6 +13,7 @@ import { withFilter } from 'graphql-subscriptions';
 import { getUserIdFromToken } from '../../util/jwt';
 import redisService from '../../redisService';
 import { WalletType } from '@zignaly-open/raffles-shared/types';
+import { countUsers, getUsers } from './service';
 
 const generateNonceSignMessage = (nonce: string | number) =>
   `Please sign this message to verify it's you: ${nonce}`;
@@ -46,6 +47,31 @@ export const resolvers = {
     ) => {
       if (!user) return null;
       return await validateUsername(username, user.id);
+    },
+    allUsers: async (
+      _: any,
+      data: ResourceOptions,
+      { user }: ApolloContext,
+    ) => {
+      return getUsers(
+        user,
+        data.sortField,
+        data.sortOrder,
+        data.page,
+        data.perPage,
+        data.filter,
+      );
+    },
+    _allUsersMeta: async (
+      _: any,
+      {
+        filter,
+      }: {
+        filter: ResourceOptions['filter'];
+      },
+      { user }: ApolloContext,
+    ) => {
+      return countUsers(user, filter);
     },
   },
   Mutation: {

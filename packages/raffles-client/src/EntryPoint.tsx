@@ -18,7 +18,6 @@ import { OnboardingProvider } from './contexts/Onboarding';
 import { dark, ThemeProvider } from '@zignaly-open/ui';
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
-import { BrowserRouter } from 'react-router-dom';
 import { Toaster as ToastProvider } from 'react-hot-toast';
 
 const httpLink = createHttpLink({
@@ -151,14 +150,12 @@ function EntryPoint() {
       <ThemeProviderMui theme={augmentedTheme}>
         <DAppProvider config={config}>
           <ApolloProvider client={client}>
-            <BrowserRouter>
-              <OnboardingProvider>
-                <ModalProvider>
-                  <Routes />
-                  <ToastProvider position='top-right' />
-                </ModalProvider>
-              </OnboardingProvider>
-            </BrowserRouter>
+            <OnboardingProvider>
+              <ModalProvider>
+                <Routes />
+                <ToastProvider position='top-right' />
+              </ModalProvider>
+            </OnboardingProvider>
           </ApolloProvider>
         </DAppProvider>
       </ThemeProviderMui>

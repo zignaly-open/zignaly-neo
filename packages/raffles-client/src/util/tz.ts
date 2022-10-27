@@ -27,7 +27,7 @@ const sendTz = (data: tzData) => {
 export const triggerTz = async (
   location: string,
   prevLocation?: string,
-  userId?: number,
+  address?: string,
 ) => {
   if (process.env.REACT_APP_ENABLE_TRACKING !== 'true') return;
 
@@ -35,7 +35,7 @@ export const triggerTz = async (
     action: 'sData',
     urlReferer: prevLocation || document.referrer,
     urlDestination: location,
-    userId,
+    userId: address,
     tid: localStorage.getItem('tid'),
   };
 
