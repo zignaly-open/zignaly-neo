@@ -3,13 +3,14 @@ import { FunctionField, RaRecord, TextFieldProps } from 'react-admin';
 import { format } from 'date-fns';
 
 const DateField = (props: TextFieldProps & { multiline?: boolean }) => {
+  const { multiline, ...rest } = props;
   return (
     <FunctionField
-      {...props}
+      {...rest}
       render={(record: RaRecord) => (
         <span
           style={
-            props.multiline
+            multiline
               ? {
                   width: '73px',
                   display: 'flex',
