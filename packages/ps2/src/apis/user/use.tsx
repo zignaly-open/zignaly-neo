@@ -80,7 +80,7 @@ export const useAuthenticate = (): [
               user,
               onSuccess: resolve,
               onFailure: reject,
-              close: () => modal.hide(),
+              close: () => modal.destroy(),
             });
           });
         }

@@ -33,7 +33,6 @@ import {
   useTraderServiceBalance,
   useTraderServiceManagement,
 } from '../../../../apis/service/use';
-import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import EditMinimumBalanceModal from '../EditMinimumBalanceModal';
 import TransferFundsModal from '../TransferFundsModal';
 import ManagementHelper from '../ManagementHelper';
@@ -43,6 +42,7 @@ import {
   TraderServiceFull,
   TraderServiceManagement,
 } from '../../../../apis/service/types';
+import { useZModal } from '../../../../components/ZModal/use';
 
 function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   const theme = useTheme() as Theme;
@@ -53,19 +53,17 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   ];
 
   const { t } = useTranslation(['management', 'action']);
-  const { showModal } = useModal();
+  const { showModal } = useZModal();
 
   const onClickTransfers = useCallback(() => {
-    const modal: ShowFnOutput<void> = showModal(TransferFundsModal, {
+    showModal(TransferFundsModal, {
       serviceId,
-      close: () => modal.hide(),
     });
   }, [serviceId]);
 
   const onClickMinBalance = () => {
-    const modal: ShowFnOutput<void> = showModal(EditMinimumBalanceModal, {
+    showModal(EditMinimumBalanceModal, {
       serviceId,
-      close: () => modal.hide(),
     });
   };
 
