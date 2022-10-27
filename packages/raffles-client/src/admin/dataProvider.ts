@@ -3,6 +3,7 @@ import {
   ApolloQueryResult,
   createHttpLink,
   gql,
+  ServerError,
 } from '@apollo/client';
 import buildGraphQLProvider, { buildQuery } from 'ra-data-graphql-simple';
 import { setContext } from '@apollo/client/link/context';
@@ -10,6 +11,7 @@ import { getToken } from 'util/token';
 import { IntrospectionResult } from 'ra-data-graphql';
 import { CodeInfo } from 'components/Modals/RedeemCode/types';
 import { onError } from '@apollo/client/link/error';
+import { NetworkError } from '@apollo/client/errors';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
@@ -25,8 +27,8 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
-const errorLink = onError(({ networkError }: any) => {
-  if (networkError.statusCode === 401) {
+const errorLink = onError(({ networkError }) => {
+  if ((networkError as ServerError).statusCode === 401) {
     window.location.assign('/');
   }
 });
