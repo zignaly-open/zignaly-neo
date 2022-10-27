@@ -33,10 +33,10 @@ import { useToast } from '../../../../util/hooks/useToast';
 import { Box, useMediaQuery } from '@mui/material';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
+  useCurrentBalance,
   useIsInvestedInService,
   useSetSelectedInvestment,
 } from '../../../../apis/investment/use';
-import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import InvestedFromOtherAccounts from '../InvestedFromOtherAccounts';
 import { serviceToInvestmentServiceDetail } from '../../../../apis/investment/util';
 import EditInvestmentModal from '../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
@@ -45,23 +45,32 @@ import {
   useIsAuthenticated,
   useSetMissedRoute,
 } from '../../../../apis/user/use';
+import { useZModal } from '../../../../components/ZModal/use';
+import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 
 export const InvestButton: React.FC<{
   service: Service;
 }> = ({ service }) => {
   const { t } = useTranslation('service');
   const isAuthenticated = useIsAuthenticated();
-  const { showModal } = useModal();
+  const { showModal } = useZModal();
   const selectInvestment = useSetSelectedInvestment();
   const navigate = useNavigate();
   const setMissedRoute = useSetMissedRoute();
+  const { balance } = useCurrentBalance(service.ssc);
 
   const onClickMakeInvestment = () => {
     if (isAuthenticated) {
       selectInvestment(serviceToInvestmentServiceDetail(service));
-      const modal: ShowFnOutput<void> = showModal(InvestModal, {
-        close: () => modal.hide(),
-      });
+      const showDeposit = +balance === 0;
+      showModal(
+        showDeposit ? DepositModal : InvestModal,
+        showDeposit
+          ? {
+              allowedCoins: [service.ssc],
+            }
+          : {},
+      );
     } else {
       setMissedRoute();
       navigate(ROUTE_LOGIN);
@@ -95,12 +104,11 @@ export const OtherAccountsButton: React.FC<{
   service: Service;
 }> = ({ service }) => {
   const { t } = useTranslation('service');
-  const { showModal } = useModal();
+  const { showModal } = useZModal();
   const isInvested = useIsInvestedInService(service.id);
 
   const onClickViewOther = () => {
-    const modal: ShowFnOutput<void> = showModal(InvestedFromOtherAccounts, {
-      close: () => modal.hide(),
+    showModal(InvestedFromOtherAccounts, {
       service,
     });
   };
@@ -122,16 +130,12 @@ export const OtherAccountsButton: React.FC<{
 export const InvestedButton: React.FC<{
   service: Service;
 }> = ({ service }) => {
-  const { showModal } = useModal();
+  const { showModal } = useZModal();
   const selectInvestment = useSetSelectedInvestment();
 
   const onClickEditInvestment = () => {
     selectInvestment(serviceToInvestmentServiceDetail(service));
-    const modal: ShowFnOutput<void> = showModal(EditInvestmentModal, {
-      close: () => {
-        modal.hide();
-      },
-    });
+    showModal(EditInvestmentModal);
   };
 
   const { investedAmount } = useIsInvestedInService(service.id);
