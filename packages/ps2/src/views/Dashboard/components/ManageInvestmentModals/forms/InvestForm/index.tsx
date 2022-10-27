@@ -2,7 +2,7 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
-import { Field, Form, Row } from './styles';
+import { Field, Form } from './styles';
 import {
   Button,
   CoinIcon,
@@ -97,7 +97,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
       )}
     >
       <Field>
-        <Row>
+        <div>
           {isConfirmation ? (
             <>
               <Typography variant={'body1'}>
@@ -131,8 +131,8 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
               error={isDirty && t(errors?.amountTransfer?.value?.message)}
             />
           )}
-        </Row>
-        <Row>
+        </div>
+        <div>
           {isConfirmation ? (
             <>
               <Typography variant={'body1'}>
@@ -174,7 +174,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
               )}
             />
           )}
-        </Row>
+        </div>
       </Field>
 
       <Box sx={{ mt: 4, display: isConfirmation ? 'block' : 'none' }}>

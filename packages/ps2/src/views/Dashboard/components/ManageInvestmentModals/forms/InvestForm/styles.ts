@@ -6,16 +6,16 @@ export const Field = styled.div`
   user-select: none;
   gap: 42px;
   align-items: flex-start;
-`;
 
-export const Form = styled.form``;
-
-export const Row = styled.div`
-  height: 110px;
-  ${({ theme }) => `
+  & > div {
+    min-height: 110px;
+    ${({ theme }) => `
     &:first-child {
       padding-right: 42px;
       border-right: 1px solid ${theme.neutral500};
     }
   `};
+  }
 `;
+
+export const Form = styled.form``;
