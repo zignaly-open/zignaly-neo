@@ -13,10 +13,28 @@ import { Code, CodeRedemption } from './model';
 import BN from 'bignumber.js';
 import { format } from 'date-fns';
 import { checkAdmin } from '../../util/admin';
+import { Op } from 'sequelize';
 
 export const getCode = async (user: ContextUser, code: string) => {
   await checkAdmin(user?.id);
   return Code.findByPk(code);
+};
+
+const applyFilters = (filter: ResourceOptions['filter'] = {}) => {
+  const { type, ...restFilters } = filter;
+
+  return {
+    ...restFilters,
+    // If no userId filter, look for type
+    ...(!filter.userId && {
+      userId:
+        type === 'user'
+          ? {
+              [Op.not]: null,
+            }
+          : null,
+    }),
+  };
 };
 
 export const getCodes = async (
@@ -25,12 +43,12 @@ export const getCodes = async (
   sortOrder = 'desc',
   page = 0,
   perPage = 25,
-  filter: ResourceOptions['filter'] = {},
+  filter?: ResourceOptions['filter'],
 ) => {
   await checkAdmin(user?.id);
 
   return Code.findAll({
-    where: filter,
+    where: applyFilters(filter),
     order: [[sortField, sortOrder]],
     include: [User],
     limit: perPage,
@@ -40,12 +58,12 @@ export const getCodes = async (
 
 export const countCodes = async (
   user?: ContextUser,
-  filter: ResourceOptions['filter'] = {},
+  filter?: ResourceOptions['filter'],
 ) => {
   await checkAdmin(user?.id);
 
   const count = await Code.count({
-    where: filter,
+    where: applyFilters(filter),
   });
   return { count };
 };

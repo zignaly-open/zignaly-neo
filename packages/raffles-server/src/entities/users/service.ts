@@ -9,7 +9,7 @@ const userFilter = (filter: ResourceOptions['filter'] = {}) => {
     ...restFilter,
     ...(q && {
       [Op.or]: [
-        { id: isNaN(parseInt(q)) ? null : q },
+        { id: isNaN(parseInt(q.toString())) ? null : q },
         { username: { [Op.iLike]: `%${q}%` } },
         { discordName: { [Op.iLike]: `%${q}%` } },
         { email: { [Op.iLike]: `%${q}%` } },

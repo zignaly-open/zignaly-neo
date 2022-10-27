@@ -34,7 +34,7 @@ export type ResourceOptions = {
   sortOrder: 'desc' | 'asc';
   page: number;
   perPage: number;
-  filter: { [key: string]: string };
+  filter: { [key: string]: string | number };
 };
 
 declare global {

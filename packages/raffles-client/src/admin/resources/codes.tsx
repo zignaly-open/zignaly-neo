@@ -34,7 +34,7 @@ const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
       resource='codes'
       sort={{ field: 'createdAt', order: 'desc' }}
       filters={codeFilters}
-      filter={{ isDefault: !systemCode }}
+      filter={{ type: systemCode ? '' : 'user' }}
       title={systemCode ? 'System Codes' : 'User Codes'}
       sx={{
         '& .RaList-main': {

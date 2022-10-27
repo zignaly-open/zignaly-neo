@@ -85,6 +85,8 @@ export const typeDef = gql`
     id: ID
     code: String
     isDefault: Boolean
+    userId: Int
+    type: String
   }
 
   extend type Query {
