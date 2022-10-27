@@ -235,12 +235,12 @@ const finalizeAuction = async (auctionId: number) => {
   });
 };
 
-export const redisImport = async (auctionId: number) => {
+export const redisImport = async (auctionId: number, checkStarted = true) => {
   const auction = (await Auction.findByPk(auctionId)) as Auction;
   if (!auction) {
     throw new Error('Auction not found');
   }
-  if (auction.startDate < new Date()) {
+  if (checkStarted && auction.startDate < new Date()) {
     return;
   }
   await prepareAuction(auction);
@@ -248,10 +248,6 @@ export const redisImport = async (auctionId: number) => {
   console.log(`Auction ${auction.id} imported to redis`);
   watchForAuctionExpiration(auctionId);
 };
-
-export async function wait(ms: number): Promise<void> {
-  await new Promise((r) => setTimeout(r, ms));
-}
 
 // Dictionary of setTimeout ids corresponding to each redis auction watcher.
 const watchingAuctions = {};

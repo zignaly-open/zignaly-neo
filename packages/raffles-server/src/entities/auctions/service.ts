@@ -182,7 +182,7 @@ const AuctionsRepository = () => {
     const auction = await Auction.create(data, { returning: true });
     if (!auction) throw new Error("Can't create auction");
 
-    await redisService.redisImport(auction.id);
+    await redisService.redisImport(auction.id, false);
 
     return auction;
   }
