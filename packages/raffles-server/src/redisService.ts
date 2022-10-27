@@ -240,6 +240,9 @@ export const redisImport = async (auctionId: number) => {
   if (!auction) {
     throw new Error('Auction not found');
   }
+  if (auction.startDate < new Date()) {
+    return;
+  }
   await prepareAuction(auction);
   await auction.update({ inRedis: true });
   console.log(`Auction ${auction.id} imported to redis`);
@@ -250,13 +253,13 @@ export async function wait(ms: number): Promise<void> {
   await new Promise((r) => setTimeout(r, ms));
 }
 
-// Dictionary of intervalId corresponding to each redis auction watcher.
+// Dictionary of setTimeout ids corresponding to each redis auction watcher.
 const watchingAuctions = {};
 
 const watchForAuctionExpiration = async (auctionId: number) => {
   try {
     if (watchingAuctions[auctionId]) {
-      clearInterval(watchingAuctions[auctionId]);
+      clearTimeout(watchingAuctions[auctionId]);
     }
 
     const expire = await getAuctionExpiration(auctionId);
@@ -269,10 +272,11 @@ const watchForAuctionExpiration = async (auctionId: number) => {
     if (diff <= 0) {
       await finalizeAuction(auctionId);
       console.log(`Auction ${auctionId} exported to db`);
-      clearInterval(watchingAuctions[auctionId]);
+      clearTimeout(watchingAuctions[auctionId]);
     } else {
-      await wait(diff);
-      watchForAuctionExpiration(auctionId);
+      watchingAuctions[auctionId] = setTimeout(() => {
+        watchForAuctionExpiration(auctionId);
+      }, diff);
     }
   } catch (e) {
     console.error(e);
