@@ -82,7 +82,7 @@ function InputText(
           <Side
             className={"right"}
             cursor={onClickRightSideElement === null ? "auto" : "pointer"}
-            onClick={() => onClickRightSideElement}
+            onClick={() => onClickRightSideElement?.()}
           >
             {rightSideElement}
           </Side>
