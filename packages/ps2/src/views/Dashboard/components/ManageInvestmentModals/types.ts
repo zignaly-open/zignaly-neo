@@ -14,3 +14,8 @@ export type PendingTransactionListItemType = {
   type: string;
   status: string;
 };
+
+export type DepositModalProps = {
+  selectedCoin?: string;
+  allowedCoins?: string[];
+};
