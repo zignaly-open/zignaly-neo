@@ -37,9 +37,21 @@ export type CoinNetwork = {
 
 export type CoinDetail = {
   name: string;
-  network: CoinNetwork[];
+  networks: CoinNetwork[];
 };
 
 export type CoinBalances = Record<string, CoinBalance>;
 export type CoinDetails = Record<string, CoinDetail>;
 export type AggregatedBalances = Record<string, CoinBalance & CoinDetail>;
+
+export type DepositInfo = {
+  currency: string;
+  address: string;
+  tag: string;
+  info: {
+    coin: string;
+    address: string;
+    tag: string;
+    url: string;
+  };
+};
