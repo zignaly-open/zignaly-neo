@@ -24,6 +24,7 @@ const AuctionGrid: React.FC = () => {
         privateCode,
       },
     },
+    pollInterval: 15 * 60 * 1000,
   });
 
   useSubscription(BIDS_SUBSCRIPTION);
