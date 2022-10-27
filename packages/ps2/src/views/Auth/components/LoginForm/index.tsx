@@ -10,7 +10,6 @@ import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
 import { Button, InputText, TextButton, Typography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
-import { useToast } from '../../../../util/hooks/useToast';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -29,14 +28,12 @@ const LoginForm: React.FC = () => {
     resolver: yupResolver(LoginValidation),
   });
   const [{ loading: loggingIn }, authenticate] = useAuthenticate();
-  const toast = useToast();
   const navigate = useNavigate();
 
   const submit = (data: LoginPayload) => {
     authenticate(data).catch((e) => {
       // eslint-disable-next-line no-console
       console.error(e);
-      toast.error(e.message);
       setError('email', { type: 'server', message: e.message });
       setError('password', { type: 'server', message: e.message });
     });

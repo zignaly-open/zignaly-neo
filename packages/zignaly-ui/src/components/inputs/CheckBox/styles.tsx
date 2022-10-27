@@ -21,7 +21,7 @@ export const Box = styled.div`
   border: 1px solid #706f82;
   border-radius: 2.5px;
   position: relative;
-
+  flex: 0 0 18px;
   width: 18px;
   height: 18px;
   overflow: hidden;
@@ -41,7 +41,7 @@ export const Layout = styled.div<LayoutProps>`
   display: flex;
   cursor: pointer;
   user-select: none;
-  align-items: center;
+  align-items: flex-start;
 
   ${({ isActive }) => `
     ${styledIf(

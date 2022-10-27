@@ -37,16 +37,6 @@ import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../service/api';
 import { useLocation } from 'react-router-dom';
 
-const throwBackendErrorInOurFormat = async <T,>(
-  promise: Promise<T>,
-): Promise<T> => {
-  try {
-    return await promise;
-  } catch (e) {
-    throw { message: (e.data?.error as { msg: string })?.msg };
-  }
-};
-
 export const useAuthenticate = (): [
   { loading: boolean },
   (payload: LoginPayload) => Promise<void>,
@@ -69,13 +59,11 @@ export const useAuthenticate = (): [
       const gRecaptchaResponse = await executeRecaptcha('login');
 
       try {
-        const user = await throwBackendErrorInOurFormat(
-          login({
-            ...payload,
-            gRecaptchaResponse,
-            c: 3,
-          }).unwrap(),
-        );
+        const user = await login({
+          ...payload,
+          gRecaptchaResponse,
+          c: 3,
+        }).unwrap();
 
         dispatch(setAccessToken(user.token));
 
