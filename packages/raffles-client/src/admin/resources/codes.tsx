@@ -136,7 +136,7 @@ export const CodeEdit = () => (
 );
 
 export const CodeCreate = () => (
-  <Create title='Create a Code'>
+  <Create title='Create a Code' redirect='list'>
     <CodeForm />
   </Create>
 );
