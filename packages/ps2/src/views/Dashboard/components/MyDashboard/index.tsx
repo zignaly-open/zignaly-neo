@@ -18,7 +18,6 @@ import { formatDateFromDays } from './util';
 import { Investment } from '../../../../apis/investment/types';
 import { sortBigNumbers, stringSort } from '../../../../util/numbers';
 import { BalanceSummary } from '../BalanceSummary';
-import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import EditInvestmentModal from '../ManageInvestmentModals/EditInvestmentModal';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import { DashboardTableDataType } from './types';
@@ -26,6 +25,7 @@ import { ServiceName } from '../ServiceName';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
+import { useZModal } from '../../../../components/ZModal/use';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -36,13 +36,11 @@ const MyDashboard: React.FC = () => {
   const selectInvestment = useSetSelectedInvestment();
   // we do not use the results of this till before the modal
   useCoinBalances();
-  const { showModal } = useModal();
+  const { showModal } = useZModal();
 
   const onClickEditInvestment = (service: Investment) => {
     selectInvestment(service);
-    const modal: ShowFnOutput<void> = showModal(EditInvestmentModal, {
-      close: () => modal.hide(),
-    });
+    showModal(EditInvestmentModal);
   };
 
   const tableColumns: TableProps<DashboardTableDataType>['columns'] = useMemo(
