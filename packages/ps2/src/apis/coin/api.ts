@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { CoinBalances, CoinDetails } from './types';
+import { CoinBalances, CoinDetails, DepositInfo } from './types';
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
@@ -24,7 +24,16 @@ export const api = createApi({
         url: `coins/zgly_${exchangeType}`,
       }),
     }),
+
+    depositInfo: builder.query<
+      DepositInfo,
+      { exchangeId: string; networkId: string; coinId: string }
+    >({
+      query: ({ exchangeId, coinId, networkId }) => ({
+        url: `/user/exchanges/${exchangeId}/deposit_address/${coinId}?network=${networkId}`,
+      }),
+    }),
   }),
 });
 
-export const { useCoinsQuery, useAllCoinsQuery } = api;
+export const { useCoinsQuery, useAllCoinsQuery, useDepositInfoQuery } = api;

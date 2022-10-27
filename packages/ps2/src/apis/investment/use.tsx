@@ -75,14 +75,17 @@ export function useIsInvestedInService(serviceId: string): {
   };
 }
 
-export function useCurrentBalance(): { id: string; balance: string } {
+export function useCurrentBalance(coin?: string): {
+  id: string;
+  balance: string;
+} {
   const service = useSelectedInvestment();
   const { data: coins } = useCoinBalances();
 
   return useMemo(
     () => ({
-      id: service.ssc,
-      balance: coins?.[service.ssc]?.balanceFree || '0',
+      id: coin || service?.ssc,
+      balance: coins?.[coin || service.ssc]?.balanceFree || '0',
     }),
     [service.ssc, coins],
   );
