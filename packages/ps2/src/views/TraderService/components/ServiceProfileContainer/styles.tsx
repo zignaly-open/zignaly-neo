@@ -23,7 +23,7 @@ export const GreySubHeader = styled(Typography)`
 `;
 
 export const GreySubHeaderHighlight = styled(GreySubHeader)`
-  color: ${(props) => props.theme.almostWhite} !important;
+  // no highlight lol
 `;
 
 export const ServiceHeader = styled(Typography)`
@@ -70,7 +70,6 @@ export const StyledPersonIcon = styled(PersonIcon)`
 
 export const Separator = styled.span`
   margin-left: 13px;
-  border-right: 1px solid ${(props) => props.theme.neutral200};
   margin-right: 13px;
   flex: 0 0 1px;
   height: 15px;
