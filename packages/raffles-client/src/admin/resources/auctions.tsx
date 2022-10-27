@@ -59,8 +59,20 @@ export const AuctionList = () => (
         sortBy='isFinalized'
         render={(record: AuctionType) => (
           <Chip
-            color={record.isFinalized ? 'success' : 'primary'}
-            label={record.isFinalized ? 'Done' : 'Ready'}
+            color={
+              record.isFinalized
+                ? 'success'
+                : new Date(record.startDate) < new Date()
+                ? 'warning'
+                : 'primary'
+            }
+            label={
+              record.isFinalized
+                ? 'Done'
+                : new Date(record.startDate) < new Date()
+                ? 'Running'
+                : 'Ready'
+            }
           />
         )}
       />
