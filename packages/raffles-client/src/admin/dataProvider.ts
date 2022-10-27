@@ -11,7 +11,6 @@ import { getToken } from 'util/token';
 import { IntrospectionResult } from 'ra-data-graphql';
 import { CodeInfo } from 'components/Modals/RedeemCode/types';
 import { onError } from '@apollo/client/link/error';
-import { NetworkError } from '@apollo/client/errors';
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
