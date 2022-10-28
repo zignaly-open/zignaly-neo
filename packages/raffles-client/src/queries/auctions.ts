@@ -7,7 +7,7 @@ export interface GetCurrentUserResponseModel {
 }
 
 export const GET_AUCTIONS = gql`
-  query (
+  query getAuctions(
     $page: Int
     $perPage: Int
     $sortField: String

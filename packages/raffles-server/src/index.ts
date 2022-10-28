@@ -35,7 +35,14 @@ const typeDef = gql`
   type Mutation
   type Subscription
 `;
+
 const app = express();
+// Send server time for clock synchronization
+app.get('/time', function (req, res) {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.send({ time: Date.now() });
+});
+
 app.use(
   expressjwt({
     secret,
