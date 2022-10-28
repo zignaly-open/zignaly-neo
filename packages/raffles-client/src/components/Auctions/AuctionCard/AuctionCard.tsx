@@ -26,20 +26,13 @@ import {
 import ClaimButton from './ClaimButton';
 import useUpdatedAt from 'hooks/useUpdatedAt';
 import { ChainIcon } from 'components/common/ChainIcon';
-import { GET_AUCTIONS } from 'queries/auctions';
-import { useLazyQuery } from '@apollo/client';
 import useCurrentUser from 'hooks/useCurrentUser';
 import Loader from 'components/common/Loader';
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
-}> = ({ auction }) => {
+}> = React.memo(({ auction }) => {
   const { t } = useTranslation('auction');
-  useLazyQuery(GET_AUCTIONS, {
-    variables: {
-      id: auction.id,
-    },
-  });
   const { user } = useCurrentUser();
   const { isActive, hasWon, isStarted } = getWinningLosingStatus(
     auction,
@@ -166,6 +159,6 @@ const AuctionCard: React.FC<{
       </CardColumn>
     </Item>
   );
-};
+});
 
 export default AuctionCard;
