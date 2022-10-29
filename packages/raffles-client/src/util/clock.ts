@@ -20,7 +20,7 @@ const doFetchTime = async () => {
 // Don't try to request time for better accuracy under this latency
 const LATENCY_THRESHOLD = 5000;
 // Keep user clock under this offset
-const OFFSET_THRESHOLD_KEEP = 300;
+const OFFSET_THRESHOLD_KEEP = 600;
 
 let best = {
   offset: 0,
@@ -53,7 +53,7 @@ const fetchTime = async () => {
       if (!best.latency || latency < best.latency) {
         best = {
           // Keep user clock if offset is minimal
-          offset: offset < OFFSET_THRESHOLD_KEEP ? 0 : offset,
+          offset: Math.abs(offset) < OFFSET_THRESHOLD_KEEP ? 0 : offset,
           latency,
         };
       }
