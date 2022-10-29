@@ -1,18 +1,12 @@
 const doFetchTime = async () => {
   const requestDate = Date.now();
 
-  const url =
-    process.env.REACT_APP_GRAPHQL.substring(
-      0,
-      process.env.REACT_APP_GRAPHQL.lastIndexOf('/'),
-    ) + '/time';
-
-  const response = await fetch(url, {
+  const response = await fetch(process.env.REACT_APP_TIME_URL, {
     cache: `no-store`,
   });
 
   if (!response.ok) {
-    throw new Error(`Bad date sample from server: ${response.statusText}`);
+    throw new Error(`Bad date from server: ${response.statusText}`);
   }
   const json = await response.json();
 
@@ -23,7 +17,7 @@ const doFetchTime = async () => {
   };
 };
 
-const ACCEPT_LATENCY = 6000;
+const LATENCY_THRESHOLD = 6000;
 
 let best = {
   offset: 0,
@@ -38,8 +32,21 @@ const fetchTime = async () => {
       const { requestDate, responseDate, serverDate } = await doFetchTime();
       const latency = responseDate - requestDate;
 
-      const offset = Date.now() - serverDate - latency;
+      const offset = Date.now() - serverDate - Math.floor(latency / 2);
 
+      // eslint-disable-next-line no-console
+      console.log(
+        'requestDate:',
+        requestDate,
+        '\nresponseDate:',
+        responseDate,
+        '\nlatency:',
+        responseDate - requestDate,
+        '\nserverDate:',
+        serverDate,
+        '\noffset:',
+        offset,
+      );
       if (!best.latency || latency < best.latency) {
         best = {
           offset,
@@ -47,12 +54,12 @@ const fetchTime = async () => {
         };
       }
 
-      if (latency < ACCEPT_LATENCY) {
+      if (latency <= LATENCY_THRESHOLD) {
         return;
       }
     } catch (e) {
       // eslint-disable-next-line no-console
-      console.log(e);
+      console.error(e);
     }
   }
 };

@@ -23,9 +23,6 @@ import { Toaster as ToastProvider } from 'react-hot-toast';
 import clock from 'util/clock';
 
 clock.fetchTime().then(() => {
-  // eslint-disable-next-line no-console
-  console.log(`Clock offset detected: ${clock.getOffset()} ms`);
-
   // Re-apply typePolicies merges to fix dates in case if we receive
   // the server time after auctions are already cached.
   const { data } = client.cache as typeof client.cache & {
