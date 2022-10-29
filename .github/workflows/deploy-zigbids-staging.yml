@@ -57,7 +57,7 @@ jobs:
         with:
           envkey_REACT_APP_GRAPHQL: ${{ secrets.REACT_APP_GRAPHQL }}
           envkey_REACT_APP_GRAPHQL_WS: ${{ secrets.REACT_APP_GRAPHQL_WS }}
-          envkey_REACT_APP_TIME_URL: ${{ secrets.envkey_REACT_APP_TIME_URL }}
+          envkey_REACT_APP_TIME_URL: ${{ secrets.REACT_APP_TIME_URL }}
           envkey_REACT_APP_ALCHEMY_PROJECT_ID: ${{ secrets.REACT_APP_ALCHEMY_PROJECT_ID }}
           envkey_REACT_APP_RECEIVING_ADDRESS: ${{ secrets.REACT_APP_RECEIVING_ADDRESS }}
           envkey_REACT_APP_CONTRACT_ADDRESS: ${{ secrets.REACT_APP_CONTRACT_ADDRESS }}
