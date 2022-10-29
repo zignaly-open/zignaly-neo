@@ -39,7 +39,7 @@
   },
   "transferFunds": {
     "title": "Transfer Funds",
-    "desc": "Transfer coins between my profit sharing accounts."
+    "description": "Transfer funds immediately between the Trading Account and the Disconnection Account in your service"
   },
   "hardDiconnectWarning": "Your hard disconnects have reached {perc}%. If hard-disconnects reaches {maxPerc}% of the service funds, Zignaly will take control of your service.",
   "previousValue": "Previous Value:",
