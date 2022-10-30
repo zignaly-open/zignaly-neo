@@ -22,6 +22,7 @@
     "button": {
       "saveAndClose": "Save and Close",
       "invest-now": "Invest {{amount}} {{coin}} now",
+      "saveAndInvestment": "Save and Add to Investment",
       "continue-to-confirmation": "Continue to Confirmation"
     }
   },

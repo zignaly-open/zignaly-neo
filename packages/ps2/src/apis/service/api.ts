@@ -12,28 +12,34 @@ import baseQuery from '../baseQuery';
 export const api = createApi({
   baseQuery,
   reducerPath: 'serviceApi',
+  tagTypes: ['Service'],
   endpoints: (builder) => ({
     traderServices: builder.query<TraderService[], void>({
+      providesTags: [{ type: 'Service', id: 'LIST' }],
       query: () => ({
         url: 'services/list',
       }),
     }),
     traderServiceDetails: builder.query<TraderServiceFull, string>({
+      providesTags: (result, error, id) => [{ type: 'Service', id }],
       query: (id) => ({
         url: `services/${id}`,
       }),
     }),
     traderServiceManagement: builder.query<TraderServiceManagement, string>({
+      providesTags: (result, error, id) => [{ type: 'Service', id }],
       query: (id) => ({
         url: `services/${id}/management`,
       }),
     }),
     traderServiceBalance: builder.query<TraderServiceBalance, string>({
+      providesTags: (result, error, id) => [{ type: 'Service', id }],
       query: (id) => ({
         url: `services/${id}/balances`,
       }),
     }),
     traderServiceInvestors: builder.query<Investor[], string>({
+      providesTags: (result, error, id) => [{ type: 'Service', id }],
       query: (id) => ({
         url: `services/${id}/investors`,
       }),
@@ -42,6 +48,9 @@ export const api = createApi({
       void,
       { minimum: string; serviceId: string }
     >({
+      invalidatesTags: (result, error, args) => [
+        { type: 'Service', id: args.serviceId },
+      ],
       query: ({ serviceId, minimum }) => ({
         url: `services/${serviceId}/sca`,
         method: 'PUT',
@@ -52,6 +61,9 @@ export const api = createApi({
       void,
       { serviceId: string } & TransferPayload
     >({
+      invalidatesTags: (result, error, args) => [
+        { type: 'Service', id: args.serviceId },
+      ],
       query: ({ serviceId, ...payload }) => ({
         url: `services/${serviceId}/transfer`,
         method: 'POST',

@@ -57,21 +57,22 @@ export function useIsInvestedInService(serviceId: string): {
   const { isLoading, data, refetch, isFetching } = useInvestedAmountQuery(
     serviceId,
     {
-      skip: !isAuthenticated,
+      skip: !isAuthenticated || !exchange.internalId,
     },
   );
 
   const invested = isAuthenticated && data?.[exchange?.internalId];
 
+  const investedAmount = new BigNumber(invested?.invested || 0).plus(
+    invested?.pending || 0,
+  );
+
   return {
     isLoading: isAuthenticated && (isLoading || isFetching),
     refetch,
-    thisAccount: !!invested,
+    thisAccount: investedAmount.gt(0),
     accounts: data,
-    investedAmount:
-      new BigNumber(invested?.invested || 0)
-        .plus(invested?.pending || 0)
-        .toString() || '0',
+    investedAmount: investedAmount.toString(),
   };
 }
 

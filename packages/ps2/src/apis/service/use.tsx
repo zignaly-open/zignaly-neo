@@ -44,12 +44,11 @@ export function useTraderServiceUpdateMinimum(
   serviceId: string,
 ): [(minimum: string) => Promise<void>, { isLoading: boolean }] {
   const [update, { isLoading }] = useTraderServiceUpdateScaMinimumMutation();
-  const { isFetching: isLoadingManagement, refetch } =
+  const { isFetching: isLoadingManagement } =
     useTraderServiceManagement(serviceId);
   return [
     async (minimum) => {
       await update({ minimum, serviceId }).unwrap();
-      await refetch();
     },
     { isLoading: isLoading || isLoadingManagement },
   ];
@@ -59,12 +58,11 @@ export function useTraderServiceTransferFunds(
   serviceId: string,
 ): [(payload: TransferPayload) => Promise<void>, { isLoading: boolean }] {
   const [update, { isLoading }] = useTraderServiceTransferFundsMutation();
-  const { isFetching: isLoadingManagement, refetch } =
+  const { isFetching: isLoadingManagement } =
     useTraderServiceBalance(serviceId);
   return [
     async (payload) => {
       await update({ ...payload, serviceId }).unwrap();
-      await refetch();
     },
     { isLoading: isLoading || isLoadingManagement },
   ];
