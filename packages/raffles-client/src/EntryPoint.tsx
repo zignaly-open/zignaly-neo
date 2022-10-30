@@ -7,6 +7,7 @@ import {
   ApolloProvider,
   split,
   createHttpLink,
+  ApolloLink,
 } from '@apollo/client';
 import { getMainDefinition } from '@apollo/client/utilities';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
@@ -19,6 +20,18 @@ import { dark, ThemeProvider } from '@zignaly-open/ui';
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
 import { Toaster as ToastProvider } from 'react-hot-toast';
+import clock from 'util/clock';
+
+clock.fetchTime().then(() => {
+  // Re-apply typePolicies merges to fix dates in case if we receive
+  // the server time after auctions are already cached.
+  const { data } = client.cache as typeof client.cache & {
+    data: { data: object };
+  };
+  if (Object.keys(data.data).length) {
+    client.cache.reset();
+  }
+});
 
 const httpLink = createHttpLink({
   uri: process.env.REACT_APP_GRAPHQL ?? 'http://localhost:4000/graphql',
@@ -55,34 +68,25 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+const updateDateWithClock = (_: string, incoming: string) => {
+  return new Date(+new Date(incoming) + clock.getOffset());
+};
+
 const client = new ApolloClient({
-  link: authLink.concat(splitLink),
+  link: ApolloLink.from([authLink, splitLink]),
   cache: new InMemoryCache({
     typePolicies: {
       Auction: {
         fields: {
-          // userBid: {
-          //   merge(existing, incoming, { cache, readField }) {
-          //     if (!incoming) return incoming;
-          //     const res = cache.readQuery({
-          //       query: GET_CURRENT_USER,
-          //     }) as { me: UserType };
-          //     const incomingUserId = readField<number>(
-          //       'id',
-          //       readField('user', incoming),
-          //     );
-          //     // Only update userBid if it's the current user because the subscription sends other users id.
-          //     if (
-          //       res?.me &&
-          //       res?.me.id.toString() === incomingUserId.toString()
-          //     ) {
-          //       return incoming;
-          //     }
-          //     // Keep the previous userBid although a user outbid the current user, so userBid.position is
-          //     // outdated, but the rest is good.
-          //     return existing;
-          //   },
-          // },
+          startDate: {
+            merge: updateDateWithClock,
+          },
+          expiresAt: {
+            merge: updateDateWithClock,
+          },
+          maxClaimDate: {
+            merge: updateDateWithClock,
+          },
         },
       },
     },

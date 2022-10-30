@@ -45,7 +45,11 @@ const AuctionGrid: React.FC = () => {
   };
 
   if (loading) {
-    return <Loader />;
+    return (
+      <Box my={10}>
+        <Loader />
+      </Box>
+    );
   }
 
   if (error) {
