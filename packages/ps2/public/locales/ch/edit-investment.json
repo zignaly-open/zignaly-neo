@@ -22,6 +22,7 @@
     "button": {
       "saveAndClose": "CH-Ŝávë áńḋ Ĉlöŝë",
       "invest-now": "CH-Ïńvëŝṫ {{amount}} {{coin}} ńöw",
+      "saveAndInvestment": "CH-Ŝávë áńḋ Áḋḋ ṫö Ïńvëŝṫṁëńṫ",
       "continue-to-confirmation": "CH-Ĉöńṫïńüë ṫö Ĉöńḟïѓṁáṫïöń"
     }
   },
