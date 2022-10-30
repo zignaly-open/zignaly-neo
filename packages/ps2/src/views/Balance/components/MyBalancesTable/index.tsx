@@ -6,12 +6,14 @@ import {
   CoinLabel,
   sortByValue,
   UsdPriceLabel,
+  IconButton,
 } from '@zignaly-open/ui';
 import { MyBalancesTableDataType } from './types';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { allowedDeposits } from 'util/coins';
+import AddIcon from '@mui/icons-material/Add';
 import {
   useCoinBalances,
   useExchangeCoinsList,
@@ -23,6 +25,8 @@ import {
   CoinDetails,
 } from '../../../../apis/coin/types';
 import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
+import { ShowFnOutput, useModal } from 'mui-modal-provider';
+import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 
 const initialStateTable = {
   sortBy: [
@@ -38,6 +42,7 @@ const MyBalancesTable = (): JSX.Element => {
   const balancesEndpoint = useCoinBalances({ convert: true, refetch: true });
   const coinsEndpoint = useExchangeCoinsList();
   const { exchangeType } = useActiveExchange();
+  const { showModal } = useModal();
 
   const columns: TableProps<MyBalancesTableDataType>['columns'] = useMemo(
     () => [
@@ -138,6 +143,18 @@ const MyBalancesTable = (): JSX.Element => {
           valueUSD: {
             balanceTotalUSDT: balance.balanceTotalUSDT,
           },
+          action: (
+            <IconButton
+              icon={<AddIcon color={'neutral300'} />}
+              onClick={() => {
+                const modal: ShowFnOutput<void> = showModal(DepositModal, {
+                  selectedCoin: coin,
+                  close: () => modal.hide(),
+                });
+              }}
+              variant='secondary'
+            />
+          ),
         })),
     [exchangeType],
   );
