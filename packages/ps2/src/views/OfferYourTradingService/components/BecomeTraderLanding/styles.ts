@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { isMobile, isTablet } from '../../util/css';
+import { isMobile, isTablet } from '../../../../util/css';
 
 export const Layout = styled.div`
   padding-top: 120px;

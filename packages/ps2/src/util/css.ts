@@ -1,4 +1,5 @@
-// Mobile
+// @deprecated do not use this
+// FIXME do not use this
 export const isMobile = (query: string) => {
   return `@media screen and (min-width: 0px) and (max-width: 800px) { ${query} }`;
 };
