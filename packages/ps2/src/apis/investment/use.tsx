@@ -57,7 +57,7 @@ export function useIsInvestedInService(serviceId: string): {
   const { isLoading, data, refetch, isFetching } = useInvestedAmountQuery(
     serviceId,
     {
-      skip: !isAuthenticated,
+      skip: !isAuthenticated || !exchange.internalId,
     },
   );
 
