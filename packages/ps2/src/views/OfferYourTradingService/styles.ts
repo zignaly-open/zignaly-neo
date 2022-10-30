@@ -40,6 +40,12 @@ export const Side = styled.div`
   `)}
 `;
 
+export const SideImage = styled(Side)`
+  background: url('/images/service-provider/main-graphic.png') center center
+    no-repeat;
+  background-size: contain;
+`;
+
 export const WrapperList = styled.ul`
   display: flex;
   flex-direction: column;
@@ -132,22 +138,10 @@ export const Feature = styled.li`
   gap: 26px;
 `;
 
-export const FeatureIcon = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
+export const FeatureImage = styled.img`
   width: 80px;
   height: 80px;
-  border-radius: 8px;
-  background: #403bb2;
-  background: -moz-linear-gradient(-45deg, #403bb2 0%, #148ea0 100%);
-  background: -webkit-linear-gradient(-45deg, #403bb2 0%, #148ea0 100%);
-  background: linear-gradient(135deg, #403bb2 0%, #148ea0 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#403bb2', endColorstr='#148ea0',GradientType=1 );
 `;
-
-export const FeatureImage = styled.img``;
 
 export const FeatureData = styled.div`
   display: flex;
@@ -183,6 +177,9 @@ export const Box = styled.div`
 
 export const StepImage = styled.img`
   margin: 24px 0;
+  width: 100%;
+  object-fit: contain;
+  height: 120px;
 `;
 
 export const Separator = styled.li`

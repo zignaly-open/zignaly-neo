@@ -8,6 +8,7 @@ import {
   Header,
   Wrapper,
   Side,
+  SideImage,
   Margin,
   Center,
   WrapperList,
@@ -21,7 +22,6 @@ import {
   FeaturesList,
   Feature,
   FeatureImage,
-  FeatureIcon,
   FeatureData,
   StepList,
   Step,
@@ -34,8 +34,8 @@ import { FeatureItem, InfoBarItem, HowWorksItem } from './types';
 
 const OfferYourTradingService: React.FC = () => {
   const theme = useTheme() as Theme;
-  const { t } = useTranslation('offer-your-trading-service');
-  useTitle(t('Offer Your Trading Service'));
+  const { t } = useTranslation(['offer-your-trading-service', 'pages']);
+  useTitle(t('pages:become-trader'));
 
   const infoBarItems: InfoBarItem[] = [
     {
@@ -56,18 +56,22 @@ const OfferYourTradingService: React.FC = () => {
     {
       title: t('features.list.item1.title'),
       description: t('features.list.item1.description'),
+      image: 'icon-analytics.png',
     },
     {
       title: t('features.list.item2.title'),
       description: t('features.list.item2.description'),
+      image: 'icon-tools.png',
     },
     {
       title: t('features.list.item3.title'),
       description: t('features.list.item3.description'),
+      image: 'icon-payouts.png',
     },
     {
       title: t('features.list.item4.title'),
       description: t('features.list.item4.description'),
+      image: 'icon-marketplace.png',
     },
   ];
 
@@ -75,14 +79,17 @@ const OfferYourTradingService: React.FC = () => {
     {
       title: t('howWorks.list.item1.title'),
       description: t('howWorks.list.item1.description'),
+      image: 'pool-funds.png',
     },
     {
       title: t('howWorks.list.item2.title'),
       description: t('howWorks.list.item2.description'),
+      image: 'trade.png',
     },
     {
       title: t('howWorks.list.item3.title'),
       description: t('howWorks.list.item3.description'),
+      image: 'split-profits.png',
     },
   ];
 
@@ -121,7 +128,7 @@ const OfferYourTradingService: React.FC = () => {
                 <Button size={'large'} caption={t('wrapper.action')} />
               </WrapperAction>
             </Side>
-            <Side>{/* Put image here */}</Side>
+            <SideImage>{/* Put image here */}</SideImage>
           </Wrapper>
         </Section>
 
@@ -150,11 +157,9 @@ const OfferYourTradingService: React.FC = () => {
           <FeaturesList itemsLength={featuresItems.length}>
             {featuresItems.map((feature, index) => (
               <Feature key={`--features-item-${index.toString()}`}>
-                <FeatureIcon>
-                  <FeatureImage
-                    src={'https://dummyimage.com/50x50/000000/fff.jpg'}
-                  />
-                </FeatureIcon>
+                <FeatureImage
+                  src={'/images/service-provider/' + feature.image}
+                />
                 <FeatureData>
                   <Typography variant={'h3'} color={'neutral200'}>
                     {feature.title}
@@ -183,9 +188,7 @@ const OfferYourTradingService: React.FC = () => {
                         {howWorkItem.title.toUpperCase()}
                       </Typography>
                       <StepImage
-                        src={
-                          'https://dummyimage.com/224x120/000000/fff.jpg&text=Dummy+Image'
-                        }
+                        src={'/images/service-provider/' + howWorkItem.image}
                       />
                     </Center>
                     <Typography variant={'body2'} color={'neutral400'}>

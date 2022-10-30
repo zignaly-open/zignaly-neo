@@ -1,14 +1,9 @@
 export type InfoBarItem = {
   title: string;
   description: string;
+  image?: string;
 };
 
-export type FeatureItem = {
-  title: string;
-  description: string;
-};
+export type FeatureItem = InfoBarItem;
 
-export type HowWorksItem = {
-  title: string;
-  description: string;
-};
+export type HowWorksItem = InfoBarItem;
