@@ -46,6 +46,7 @@ export const GET_AUCTIONS = gql`
           username
         }
       }
+      isClaimed
     }
     total: _allAuctionsMeta(filter: $filter) {
       count
