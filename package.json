@@ -42,8 +42,7 @@
   "resolutions": {
     "@types/react": "17.0.2",
     "@types/react-dom": "17.0.2",
-    "@apollo/client": "3.6.9",
-    "react-hook-form": "7.34.2",
+    "react-hook-form": "7.32.0",
     "react-router-dom": "6.3.0",
     "react-router": "6.3.0"
   }
