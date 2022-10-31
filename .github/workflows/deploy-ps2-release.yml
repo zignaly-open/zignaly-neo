@@ -2,7 +2,7 @@ name: PS2 Release deploy
 on:
   push:
     tags:
-      - 'release-ps2-*'
+      - release-ps2
 
 jobs:
   pre_job:
