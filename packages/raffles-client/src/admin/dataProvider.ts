@@ -125,8 +125,6 @@ const myBuildQuery =
 export default () =>
   buildGraphQLProvider({
     clientOptions: {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       link: ApolloLink.from([authLink, errorLink, httpLink]),
     },
     // introspection: {
