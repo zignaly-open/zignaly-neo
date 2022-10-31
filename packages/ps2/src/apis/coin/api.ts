@@ -5,6 +5,7 @@ import baseQuery from '../baseQuery';
 export const api = createApi({
   baseQuery,
   reducerPath: 'coinApi',
+  tagTypes: ['Balance'],
   endpoints: (builder) => ({
     coins: builder.query<
       CoinBalances,

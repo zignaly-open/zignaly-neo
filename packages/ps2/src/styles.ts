@@ -1,4 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
+// TODO: fix this, smth weird with type defs not loading
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { isWebpSupported } from 'react-image-webp/dist/utils';
 
 // Copied from webapp-neo
 const GlobalStyle = createGlobalStyle`
@@ -7,7 +11,9 @@ const GlobalStyle = createGlobalStyle`
     padding: 0;
     margin: 0;
     background-color: #070819;
-    background-image: url("/background-dark.png");
+    background-image: url("/background-dark.${
+      isWebpSupported() ? 'webp' : 'png'
+    }");
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Avenir Next', sans-serif;

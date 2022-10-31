@@ -51,7 +51,6 @@ function EditInvestmentForm({
     useUpdateTakeProfitPercentage(serviceId);
   const { isLoading: isEditingInvestment, edit: editInvestment } =
     useUpdateTakeProfitAndInvestMore(serviceId);
-  const { refetch: refetchDetails } = useInvestmentDetails(serviceId);
   const { data: details } = useInvestmentDetails(serviceId);
   const transferOutAll = details?.transferOutAll;
 
@@ -91,14 +90,12 @@ function EditInvestmentForm({
           serviceName,
         }),
       );
-      refetchDetails();
       setView(EditInvestmentViews.EditInvestmentSuccess);
     } else {
       await editPercent({
         profitPercentage: values.profitPercentage,
       });
       toast.success(t('edit-investment:percentageChangedSuccess'));
-      refetchDetails();
       close();
     }
   };

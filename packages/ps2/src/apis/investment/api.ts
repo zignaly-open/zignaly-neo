@@ -5,11 +5,17 @@ import baseQuery from '../baseQuery';
 export const api = createApi({
   baseQuery,
   reducerPath: 'investmentApi',
+  tagTypes: [
+    'Investment',
+    'Balance', // technically it does not provide balance but affects it; needed to invalidate cache
+  ],
   endpoints: (builder) => ({
     investments: builder.query<Investment[], string>({
       query: (exchangeInternalId) => ({
         url: `user/exchanges/${exchangeInternalId}/investments`,
       }),
+      providesTags: (result) =>
+        result?.map((x) => ({ id: x.serviceId, type: 'Investment' })),
     }),
 
     withdrawInvestment: builder.mutation<
@@ -20,6 +26,10 @@ export const api = createApi({
         exchangeInternalId: string;
       }
     >({
+      invalidatesTags: (result, error, arg) => [
+        'Balance',
+        { type: 'Investment', id: arg.serviceId },
+      ],
       query: ({ serviceId, amount, exchangeInternalId }) => ({
         url: `services/${serviceId}/investments/out`,
         method: 'POST',
@@ -35,6 +45,12 @@ export const api = createApi({
         url: `user/exchanges/${serviceId}/invested`,
         method: 'GET',
       }),
+      providesTags: (result, error, id) => [
+        {
+          id,
+          type: 'Investment',
+        },
+      ],
     }),
 
     updateTakeProfit: builder.mutation<
@@ -45,6 +61,9 @@ export const api = createApi({
         exchangeInternalId: string;
       }
     >({
+      invalidatesTags: (result, error, arg) => [
+        { type: 'Investment', id: arg.serviceId },
+      ],
       query: ({ serviceId, profitPercentage, exchangeInternalId }) => ({
         url: `services/${serviceId}/investments/percentage`,
         method: 'POST',
@@ -64,6 +83,10 @@ export const api = createApi({
         exchangeInternalId: string;
       }
     >({
+      invalidatesTags: (result, error, arg) => [
+        'Balance',
+        { type: 'Investment', id: arg.serviceId },
+      ],
       query: ({ serviceId, profitPercentage, exchangeInternalId, amount }) => ({
         url: `services/${serviceId}/investments/in`,
         method: 'POST',
@@ -84,6 +107,10 @@ export const api = createApi({
         amount: string;
       }
     >({
+      invalidatesTags: (result, error, arg) => [
+        'Balance',
+        { type: 'Investment', id: arg.serviceId },
+      ],
       query: ({ serviceId, profitPercentage, exchangeInternalId, amount }) => ({
         url: `services/${serviceId}/investments/in`,
         method: 'POST',
@@ -102,6 +129,12 @@ export const api = createApi({
       query: ({ exchangeInternalId, serviceId }) => ({
         url: `user/exchanges/${exchangeInternalId}/${serviceId}`,
       }),
+      providesTags: (result, error, args) => [
+        {
+          id: args.serviceId,
+          type: 'Investment',
+        },
+      ],
     }),
   }),
 });

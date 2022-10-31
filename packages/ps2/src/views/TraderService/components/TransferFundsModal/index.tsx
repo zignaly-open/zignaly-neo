@@ -110,7 +110,7 @@ function TransferModal({
       isLoading={!balance || isTransferring}
     >
       <Box sx={{ marginBottom: 3 }}>
-        <Typography>{t('transferFunds.title')}</Typography>
+        <Typography>{t('transferFunds.description')}</Typography>
       </Box>
 
       {balance && !isTransferring && (

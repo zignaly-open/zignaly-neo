@@ -224,9 +224,10 @@ export const Layout = styled.button<LayoutProps>`
      
       ${Container} {
         min-width: 76px;
-        height: 36px; 
+        height: 36px;
+        padding: 0 16px; 
       }
-
+      
       ${styledIf(
         props.withLeftElement,
         `
