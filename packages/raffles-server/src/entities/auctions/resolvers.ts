@@ -1,7 +1,35 @@
 import pubsub from '../../pubsub';
 import { AUCTION_UPDATED } from './constants';
-import { ApolloContext, ResourceOptions } from '../../types';
-import { AuctionPayload } from './types';
+import { ApolloContext, ResourceOptions, TransactionType } from '../../types';
+import { isBalanceSufficientForPayment } from './util';
+import { Payout } from '../payouts/model';
+import { getUserBalance, internalTransfer } from '../../cybavo';
+import { isTest, zignalySystemId } from '../../../config';
+import { emitBalanceChanged } from '../users/util';
+import AuctionsService from './service';
+import redisService from '../../redisService';
+import { BALANCE_CHANGED } from '../users/constants';
+import { debounce } from 'lodash';
+import { Auction, AuctionBid } from './model';
+import { checkAdmin } from '../../util/admin';
+
+const broadcastAuctionChange = async (auctionId: number) => {
+  try {
+    const [auctionUpdated] = await AuctionsService.getAuctionsWithBids(
+      auctionId,
+      true,
+    );
+
+    pubsub.publish(AUCTION_UPDATED, {
+      auctionUpdated,
+    });
+  } catch (e) {
+    console.error(e);
+  }
+};
+const debounceBroadcastAuction = debounce(broadcastAuctionChange, 70, {
+  maxWait: 160,
+});
 
 export const resolvers = {
   Query: {
