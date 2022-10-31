@@ -126,9 +126,5 @@
     "storybook-addon-apollo-client": "^4.0.12",
     "storybook-react-i18next": "^1.0.20",
     "webpack": "^5.73.0"
-  },
-  "resolutions": {
-    "react-router-dom": "6.3.0",
-    "react-router": "6.3.0"
   }
 }
