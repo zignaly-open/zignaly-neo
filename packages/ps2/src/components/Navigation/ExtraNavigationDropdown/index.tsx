@@ -17,7 +17,10 @@ import {
   ROUTE_BECOME_TRADER,
   ROUTE_TRADING_SERVICE_MANAGE,
 } from '../../../routes';
-import { DropDownHandle } from '@zignaly-open/ui/lib/components/display/DropDown/types';
+import {
+  DropDownHandle,
+  DropDownOption,
+} from '@zignaly-open/ui/lib/components/display/DropDown/types';
 import { GlobeLanguagesStyled, LabelButton } from './styles';
 import { LocalizationLanguages } from '../../../util/languages';
 
@@ -41,12 +44,81 @@ const ExtraNavigationDropdown: React.FC = () => {
     onSelectLocale(locale);
   };
 
-  if (languageMap.length === 1) return null;
-
   const onSelectLocale = (locale: string) => {
     changeLocale(locale);
     onClose();
   };
+
+  let options: DropDownOption[] = [
+    {
+      label: t('main-menu.dropdown-link-forTrading'),
+      id: 'menu__for-trading',
+      href:
+        service &&
+        generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+          serviceId: service.serviceId?.toString(),
+        }),
+      onClick: () =>
+        navigate(
+          service
+            ? generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+                serviceId: service.serviceId?.toString(),
+              })
+            : ROUTE_BECOME_TRADER,
+        ),
+    },
+    {
+      label: t('main-menu.dropdown-link-helpDocs'),
+      id: 'menu__help-docs',
+      target: '_blank',
+      href: 'https://help.zignaly.com/hc/en-us',
+    },
+    {
+      separator: true,
+      id: 'menu__language-switcher',
+      label: (
+        <>
+          <GlobeLanguagesStyled
+            color={theme.neutral300}
+            width={'26px'}
+            height={'26px'}
+          />
+          <LabelButton variant={'body1'} color={'neutral400'}>
+            {LocalizationLanguages[i18n.language?.split('_')[0]]?.label}
+          </LabelButton>
+        </>
+      ),
+      children: languageMap.map((language) => ({
+        active: i18n.language === language.locale,
+        label: language.label,
+        onClick: () => handleSelectLanguage(language.locale),
+      })),
+    },
+    {
+      element: (
+        <Networks key={'--social-networks'}>
+          {socialNetworksLinks.map((socialNetwork, index) => {
+            const IconComponent = socialNetwork.image;
+            return (
+              <NavLink
+                as={'a'}
+                onClick={onClose}
+                href={socialNetwork.path}
+                key={`--social-network-nav-link-${index.toString()}`}
+                target={'_blank'}
+              >
+                <IconComponent height={'22px'} width={'22px'} />
+              </NavLink>
+            );
+          })}
+        </Networks>
+      ),
+    },
+  ];
+
+  if (languageMap.length === 1) {
+    options = options.filter((x) => x.id !== 'menu__language-switcher');
+  }
 
   return (
     <DropDown
@@ -63,72 +135,7 @@ const ExtraNavigationDropdown: React.FC = () => {
           isFocused={open}
         />
       )}
-      options={[
-        {
-          label: t('main-menu.dropdown-link-forTrading'),
-          id: 'menu__for-trading',
-          href:
-            service &&
-            generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-              serviceId: service.serviceId?.toString(),
-            }),
-          onClick: () =>
-            navigate(
-              service
-                ? generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-                    serviceId: service.serviceId?.toString(),
-                  })
-                : ROUTE_BECOME_TRADER,
-            ),
-        },
-        {
-          label: t('main-menu.dropdown-link-helpDocs'),
-          id: 'menu__help-docs',
-          target: '_blank',
-          href: 'https://help.zignaly.com/hc/en-us',
-        },
-        {
-          separator: true,
-          id: 'menu__language-switcher',
-          label: (
-            <>
-              <GlobeLanguagesStyled
-                color={theme.neutral300}
-                width={'26px'}
-                height={'26px'}
-              />
-              <LabelButton variant={'body1'} color={'neutral400'}>
-                {LocalizationLanguages[i18n.language?.split('_')[0]]?.label}
-              </LabelButton>
-            </>
-          ),
-          children: languageMap.map((language) => ({
-            active: i18n.language === language.locale,
-            label: language.label,
-            onClick: () => handleSelectLanguage(language.locale),
-          })),
-        },
-        {
-          element: (
-            <Networks key={'--social-networks'}>
-              {socialNetworksLinks.map((socialNetwork, index) => {
-                const IconComponent = socialNetwork.image;
-                return (
-                  <NavLink
-                    as={'a'}
-                    onClick={onClose}
-                    href={socialNetwork.path}
-                    key={`--social-network-nav-link-${index.toString()}`}
-                    target={'_blank'}
-                  >
-                    <IconComponent height={'22px'} width={'22px'} />
-                  </NavLink>
-                );
-              })}
-            </Networks>
-          ),
-        },
-      ]}
+      options={options}
     />
   );
 };
