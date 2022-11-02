@@ -24,7 +24,7 @@ import DateTimeInput from '../components/DateTimeInput';
 export const CodeIcon = Redeem;
 
 const codeFilters = [
-  <SearchInput source='q' alwaysOn placeholder='Code' key={0} />,
+  <SearchInput source='code' alwaysOn placeholder='Code' key={0} />,
 ];
 
 const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
