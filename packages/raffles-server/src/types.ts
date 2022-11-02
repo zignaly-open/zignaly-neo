@@ -1,4 +1,5 @@
-import { generateService } from './entities/auctions';
+import { generateService as generateServiceAuction } from './entities/auctions';
+import { generateService as generateServiceCode } from './entities/codes';
 
 export type ContextUser = {
   id: number;
@@ -6,10 +7,11 @@ export type ContextUser = {
   isAdmin: boolean;
 };
 
-type Service = ReturnType<typeof generateService>;
+type ServiceAuction = ReturnType<typeof generateServiceAuction>;
+type ServiceCode = ReturnType<typeof generateServiceCode>;
 export type ApolloContext = {
   user: ContextUser;
-  services: { Auctions: Service };
+  services: { Auctions: ServiceAuction; Codes: ServiceCode };
 };
 
 export type CybavoOperations = {
