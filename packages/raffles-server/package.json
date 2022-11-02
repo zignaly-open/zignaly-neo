@@ -17,6 +17,8 @@
     "redis-export": "ts-node scripts/redis-export.ts",
     "generate-codes": "ts-node scripts/generate-codes.ts",
     "stress-test": "ts-node scripts/redis-stress-test.ts",
+    "cybavo-transfer": "ts-node scripts/cybavo-transfer.ts",
+    "cybavo-balance": "ts-node scripts/cybavo-balance.ts",
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {

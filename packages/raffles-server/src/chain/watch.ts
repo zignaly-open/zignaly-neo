@@ -114,7 +114,7 @@ export default async function watchTransactions() {
 
       await internalTransfer(
         zignalySystemId,
-        from,
+        from.toLowerCase(),
         web3.utils.fromWei(value, 'ether'),
         TransactionType.Deposit,
         false,

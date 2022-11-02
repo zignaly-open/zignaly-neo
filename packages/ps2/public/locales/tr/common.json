@@ -1,0 +1,57 @@
+{
+    "yes": "Evet",
+    "no": "Hayır",
+    "loading": "Yükleniyor...",
+    "coming-soon": {
+        "title": "Çok Yakında",
+        "description": "Bu bölüm geliştirme aşamasında, daha sonra kullanıma açılacak"
+    },
+    "no-data": {
+        "title": "Veri Yok",
+        "description": "Veri mevcut değil. Bir sorun olduğunu düşünüyorsanız, lütfen destek ekibiyle iletişime geçin."
+    },
+    "critical-error": {
+        "title": "Hata Oluştu",
+        "description": "Bir şeyler yanlış gitti. Lütfen daha sonra tekrar deneyin veya destek ekibiyle iletişime geçin. [Ya da sanayi toplumunu terk edip ormanda bir kulübe inşa edin:]"
+    },
+    "main-menu": {
+        "dropdown-link-forTrading": "Alım-Satım Hizmetleri için",
+        "dropdown-link-helpDocs": "Yardım Dokümanları"
+    },
+    "account-menu": {
+        "isAuth-button-logIn": "Giriş",
+        "isAuth-button-signUp": "KAYIT OL",
+        "notAuth-dropdown-link-dashboard": "Kontrol Panelim",
+        "notAuth-dropdown-link-balances": "Bakiyelerim",
+        "notAuth-button-logOut": "Oturumu Kapat"
+    },
+    "account-selector": {
+        "type": {
+            "title": "Tip:",
+            "futures": "Vadeli İşlemler",
+            "spot": "Spot"
+        }
+    },
+    "navigation-menu": {
+        "profit-sharing": "Profit Sharing",
+        "staking": "Staking",
+        "zigpad": "ZIGPad"
+    },
+    "amount": "Miktar",
+    "new-version": "Yeni sürüm, güncellemek için tıklayın",
+    "validation": {
+        "insufficient-amount": "Yetersiz fon",
+        "invalid-value": "Geçersiz değer",
+        "negative-amount": ">= 0 olmalıdır",
+        "invalid-amount": "Bir miktar belirtmelisiniz"
+    },
+    "back": "Geri",
+    "close": "Kapat",
+    "404": {
+        "title": "Sayfa bulunamadı",
+        "description": "URL'yi veya seçimlerinizi gözden geçirin:)"
+    },
+    "refresh": {
+        "short": "Yeni sürüm mevcut, yenilemek için burayı tıklayın"
+    }
+}
