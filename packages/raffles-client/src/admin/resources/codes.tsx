@@ -30,8 +30,7 @@ const codeFilters = [
 const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
   return (
     <List
-      hasCreate={systemCode}
-      resource='codes'
+      resource={systemCode ? 'codes' : 'user-codes'}
       sort={{ field: 'createdAt', order: 'desc' }}
       filters={codeFilters}
       filter={{ type: systemCode ? '' : 'user' }}
@@ -88,6 +87,7 @@ const CodeForm = () => {
         {translate('resources.codes.name')}
       </Typography>
       <TextInput source='code' required validate={validateUppercase} />
+      <TextInput source='user.id' label='User id' />
       <BooleanInput source='welcomeType' />
       <Typography variant='h6' gutterBottom mt={1}>
         {translate('resources.codes.requirements')}
