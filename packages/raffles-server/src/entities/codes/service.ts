@@ -15,11 +15,6 @@ import { format } from 'date-fns';
 import { checkAdmin } from '../../util/admin';
 import { Op } from 'sequelize';
 
-export const getCode = async (user: ContextUser, code: string) => {
-  await checkAdmin(user?.id);
-  return Code.findByPk(code);
-};
-
 const applyFilters = (filter: ResourceOptions['filter'] = {}) => {
   const { type, ...restFilters } = filter;
 
