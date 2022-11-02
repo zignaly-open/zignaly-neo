@@ -1,10 +1,15 @@
+import { generateService } from './entities/auctions';
+
 export type ContextUser = {
   id: number;
   publicAddress: string;
+  isAdmin: boolean;
 };
 
+type Service = ReturnType<typeof generateService>;
 export type ApolloContext = {
   user: ContextUser;
+  services: { Auctions: Service };
 };
 
 export type CybavoOperations = {

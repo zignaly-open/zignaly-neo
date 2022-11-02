@@ -1,9 +1,8 @@
 import { AuthenticationError } from 'apollo-server-core';
-import { User } from '../entities/users/model';
+import { ContextUser } from '../types';
 
-export const checkAdmin = async (id: number) => {
-  const fullUser = await User.findByPk(id);
-  if (!fullUser?.isAdmin) throw new AuthenticationError('Not authorized');
+export const checkAdmin = (user: ContextUser, callback?: () => void) => {
+  if (!user?.isAdmin) throw new AuthenticationError('Not authorized');
 
-  return true;
+  return callback ? callback() : true;
 };
