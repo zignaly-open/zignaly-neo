@@ -77,7 +77,7 @@
     "ra-i18n-polyglot": "^4.4.4",
     "ra-language-english": "^4.4.4",
     "react": "^17.0.2",
-    "react-admin": "^4.4.3",
+    "react-admin": "^4.4.4",
     "react-app-rewired": "^2.2.1",
     "react-countdown": "2.2.2",
     "react-dom": "17.0.2",

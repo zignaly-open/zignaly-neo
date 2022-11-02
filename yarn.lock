@@ -25649,7 +25649,7 @@ raw-loader@^4.0.2:
     loader-utils "^2.0.0"
     schema-utils "^3.0.0"
 
-react-admin@^4.4.3:
+react-admin@^4.4.4:
   version "4.4.4"
   resolved "https://registry.yarnpkg.com/react-admin/-/react-admin-4.4.4.tgz#300bc2d620e877c7cc8b1df721ce61186a318433"
   integrity sha512-w3vde02WkkYNvop9v7iMtR6DuJ3jN5tvUkTmlPf8vyH7mo/Ppa+Lh6OUs9vIhGT/bEFufHNNHeAaTa718NJ7eg==

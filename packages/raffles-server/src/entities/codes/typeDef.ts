@@ -2,7 +2,7 @@ import { gql } from 'apollo-server-express';
 
 const code = `
   code: String
-  reqMinimumBalance: Int
+  reqMinimumBalance: Float
   reqMinimumDeposit: Float
   reqDepositFrom: Date
   reqMinAuctions: Int
@@ -10,7 +10,16 @@ const code = `
   benefitDirect: Float
   benefitBalanceFactor: Float
   benefitDepositFactor: Float
-  maxTotalBenefits: Int
+  maxTotalBenefits: Float
+  welcomeType: Boolean
+  maxRedemptions: Int
+  currentRedemptions: Int
+  rewardDirect: Float
+  rewardFactor: Float
+  rewardDepositFactor: Float
+  maxTotalRewards: Int
+  startDate: Date
+  endDate: Date
 `;
 
 export const typeDef = gql`
@@ -28,15 +37,6 @@ export const typeDef = gql`
   type Code {
     ${code}
     user: CodeUser
-    welcomeType: Boolean
-    maxRedemptions: Int
-    currentRedemptions: Int
-    rewardDirect: Float
-    rewardFactor: Float
-    rewardDepositFactor: Float
-    maxTotalRewards: Int
-    startDate: Date
-    endDate: Date
     isDefault: Boolean
   }
 
@@ -112,18 +112,13 @@ export const typeDef = gql`
     redeemCode(code: String!): Float
     updateCode(
       id: ID
+      userId: ID
       ${code}
-      welcomeType: Boolean
-      maxRedemptions: Int
-      currentRedemptions: Int
-      rewardDirect: Float
-      rewardFactor: Float
-      rewardDepositFactor: Float
-      maxTotalRewards: Int
-      startDate: Date
-      endDate: Date
     ): Code
-    createCode(${code}): Code
+    createCode(
+      ${code}
+      userId: ID
+    ): Code
     deleteCode(id: ID): Boolean
   }
 `;
