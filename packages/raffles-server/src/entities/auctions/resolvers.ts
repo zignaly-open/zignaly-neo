@@ -9,51 +9,59 @@ export const resolvers = {
       _: any,
       { id }: { id: number },
       { services }: ApolloContext,
-    ) => services.Auctions.getById(id),
+    ) => services.Auction.getById(id),
+
     allAuctions: async (
       _: any,
       data: ResourceOptions,
       { services }: ApolloContext,
-    ) => services.Auctions.getAll(data),
+    ) => services.Auction.getAll(data),
+
     _allAuctionsMeta: async (
       _: any,
       data: ResourceOptions,
       { services }: ApolloContext,
-    ) => services.Auctions.count(data),
+    ) => services.Auction.count(data),
+
     allAdmAuctions: async (
       _: any,
       data: ResourceOptions,
       { services }: ApolloContext,
-    ) => services.Auctions.getAll(data, true),
+    ) => services.Auction.getAll(data, true),
+
     _allAdmAuctionsMeta: async (
       _: any,
       data: ResourceOptions,
       { services }: ApolloContext,
-    ) => services.Auctions.count(data, true),
+    ) => services.Auction.count(data, true),
   },
   Mutation: {
     updateAuction: async (
       _: any,
       data: Partial<Auction>,
       { services }: ApolloContext,
-    ) => services.Auctions.update(data),
+    ) => services.Auction.update(data),
+
     createAuction: async (
       _: any,
       data: Partial<Auction>,
       { services }: ApolloContext,
-    ) => services.Auctions.create(data),
+    ) => services.Auction.create(data),
+
     deleteAuction: async (
       _: any,
       { id }: { id: number },
       { services }: ApolloContext,
-    ) => services.Auctions.delete(id),
+    ) => services.Auction.delete(id),
+
     bid: async (_: any, { id }: { id: number }, { services }: ApolloContext) =>
-      services.Auctions.bid(id),
+      services.Auction.bid(id),
+
     claim: async (
       _: any,
       { id }: { id: number },
       { services }: ApolloContext,
-    ) => services.Auctions.claim(id),
+    ) => services.Auction.claim(id),
   },
   Subscription: {
     auctionUpdated: {

@@ -87,7 +87,7 @@ const auctionsFilter = (
   };
 };
 
-async function getAuctionsWithBids(
+export async function getAuctionsWithBids(
   auctionId?: number,
   user?: ContextUser | boolean,
   data?: ResourceOptions,
@@ -156,13 +156,14 @@ const debounceBroadcastAuction = debounce(broadcastAuctionChange, 70, {
   maxWait: 160,
 });
 
-export const generateService = ({ user }: { user: ContextUser }) => ({
+export const generateService = (user: ContextUser) => ({
   getAll: async (data: ResourceOptions, asAdmin = false) => {
     if (asAdmin) {
       checkAdmin(user);
     }
     return getAuctionsWithBids(null, asAdmin || user, data);
   },
+
   getById: (id: number) => {
     //  todo: call getAuctionsWithBids
     checkAdmin(user);
@@ -170,6 +171,7 @@ export const generateService = ({ user }: { user: ContextUser }) => ({
       include: lastBidPopulation,
     });
   },
+
   count: async (data: ResourceOptions, asAdmin = false) => {
     if (asAdmin) {
       checkAdmin(user);
@@ -179,6 +181,7 @@ export const generateService = ({ user }: { user: ContextUser }) => ({
     });
     return { count };
   },
+
   update: async (data: Partial<Auction>) => {
     checkAdmin(user);
     try {
@@ -196,6 +199,7 @@ export const generateService = ({ user }: { user: ContextUser }) => ({
       throw e;
     }
   },
+
   create: async (data: Partial<Auction>) => {
     checkAdmin(user);
     try {
@@ -210,6 +214,7 @@ export const generateService = ({ user }: { user: ContextUser }) => ({
       throw e;
     }
   },
+
   delete: async (id: number) => {
     checkAdmin(user);
     await redisService.deleteAuctionFromRedis(id);
@@ -221,6 +226,7 @@ export const generateService = ({ user }: { user: ContextUser }) => ({
       }),
     );
   },
+
   bid: async (id: number) => {
     if (!user) {
       throw new Error('User not found');
@@ -247,6 +253,7 @@ export const generateService = ({ user }: { user: ContextUser }) => ({
       throw e;
     }
   },
+
   claim: async (id: number) => {
     if (!user) {
       throw new Error('User not found');

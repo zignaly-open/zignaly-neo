@@ -7,47 +7,55 @@ export const resolvers = {
       _: any,
       { code }: { code: string },
       { services }: ApolloContext,
-    ) => services.Codes.checkCode(code),
+    ) => services.Code.checkCode(code),
+
     userCodes: async (_: any, __: any, { services }: ApolloContext) =>
-      services.Codes.getUserCodes(),
+      services.Code.getUserCodes(),
+
     userCodesRedemptions: async (
       _: any,
       __: any,
       { services }: ApolloContext,
-    ) => services.Codes.getUserCodesRedemptions(),
+    ) => services.Code.getUserCodesRedemptions(),
+
     Code: async (_: any, { id }: { id: string }, { services }: ApolloContext) =>
-      services.Codes.getById(id),
+      services.Code.getById(id),
+
     allCodes: async (
       _: any,
       data: ResourceOptions,
       { services }: ApolloContext,
-    ) => services.Codes.getAll(data),
+    ) => services.Code.getAll(data),
+
     _allCodesMeta: async (
       _: any,
       data: ResourceOptions,
       { services }: ApolloContext,
-    ) => services.Codes.count(data),
+    ) => services.Code.count(data),
   },
   Mutation: {
     redeemCode: async (
       _: any,
       { code }: { code: string },
       { services }: ApolloContext,
-    ) => services.Codes.redeem(code),
+    ) => services.Code.redeem(code),
+
     createCode: async (
       _: any,
       data: Partial<Code>,
       { services }: ApolloContext,
-    ) => services.Codes.create(data),
+    ) => services.Code.create(data),
+
     updateCode: async (
       _: any,
       data: Partial<Code>,
       { services }: ApolloContext,
-    ) => services.Codes.update(data),
+    ) => services.Code.update(data),
+
     deleteCode: async (
       _: any,
       { id }: { id: string },
       { services }: ApolloContext,
-    ) => services.Codes.delete(id),
+    ) => services.Code.delete(id),
   },
 };

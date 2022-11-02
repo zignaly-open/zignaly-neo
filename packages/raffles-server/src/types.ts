@@ -1,6 +1,7 @@
 import { generateService as generateServiceAuction } from './entities/auctions';
 import { generateService as generateServiceCode } from './entities/codes';
-import { generateService as generateSettingCode } from './entities/settings';
+import { generateService as generateServiceSetting } from './entities/settings';
+import { generateService as generateServiceUser } from './entities/users';
 
 export type ContextUser = {
   id: number;
@@ -10,14 +11,16 @@ export type ContextUser = {
 
 type ServiceAuction = ReturnType<typeof generateServiceAuction>;
 type ServiceCode = ReturnType<typeof generateServiceCode>;
-type ServiceSetting = ReturnType<typeof generateSettingCode>;
+type ServiceSetting = ReturnType<typeof generateServiceSetting>;
+type ServiceUser = ReturnType<typeof generateServiceUser>;
 
 export type ApolloContext = {
   user: ContextUser;
   services: {
-    Auctions: ServiceAuction;
-    Codes: ServiceCode;
-    Settings: ServiceSetting;
+    Auction: ServiceAuction;
+    Code: ServiceCode;
+    Setting: ServiceSetting;
+    User: ServiceUser;
   };
 };
 

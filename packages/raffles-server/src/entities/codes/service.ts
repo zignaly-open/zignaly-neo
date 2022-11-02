@@ -84,7 +84,7 @@ const calculateInviterBenefit = (
   return inviterBenefit.toString();
 };
 
-export const generateService = ({ user }: { user: ContextUser }) => {
+export const generateService = (user: ContextUser) => {
   const getAll = async ({
     sortField = 'id',
     sortOrder = 'desc',

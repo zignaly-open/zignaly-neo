@@ -77,8 +77,23 @@ export const typeDef = gql`
       sortOrder: String
       filter: AuctionFilter
     ): [AdmAuction]
+
+    allAdmAuctions(
+      page: Int
+      perPage: Int
+      sortField: String
+      sortOrder: String
+      filter: AuctionFilter
+    ): [AdmAuction]
+
     _allAuctionsMeta(
       filter: AuctionFilter
+    ): ListMetadata
+    
+    _allAdmAuctionsMeta(
+      filter: AuctionFilter
+      page: Int
+      perPage: Int
     ): ListMetadata
   }
 

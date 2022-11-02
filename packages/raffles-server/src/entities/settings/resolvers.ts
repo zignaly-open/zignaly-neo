@@ -4,13 +4,13 @@ import { CodeSettings } from './types';
 export const resolvers = {
   Query: {
     Settings: async (_: any, __: any, { services }: ApolloContext) =>
-      services.Settings.getAll(),
+      services.Setting.getAll(),
   },
   Mutation: {
     updateSettings: async (
       _: any,
       data: CodeSettings,
       { services }: ApolloContext,
-    ) => services.Settings.update(data),
+    ) => services.Setting.update(data),
   },
 };

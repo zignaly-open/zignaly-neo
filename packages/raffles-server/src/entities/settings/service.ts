@@ -17,26 +17,30 @@ import { CodeSettings } from './types';
 
 const blackList = [CONFIG_LAST_PROCESSED_BLOCK];
 
-export const generateService = ({ user }: { user: ContextUser }) => {
+export const getCodeSettings = async () => {
+  const settings = await Setting.findAll({
+    where: { key: { [Op.notIn]: blackList } },
+  });
+  return settings.reduce(
+    (acc, s) => {
+      return { ...acc, [s.key]: s.value };
+    },
+    {
+      benefitDirect: DEFAULT_BENEFIT_DIRECT,
+      rewardDirect: DEFAULT_REWARD_DIRECT,
+      reqMinimumDeposit: DEFAULT_REQ_MINIMUM_DEPOSIT,
+      maxTotalBenefits: DEFAULT_MAX_TOTAL_BENEFITS,
+      maxTotalRewards: DEFAULT_MAX_TOTAL_REWARDS,
+      benefitDepositFactor: DEFAULT_BENEFIT_DEPOSIT_FACTOR,
+      rewardDepositFactor: DEFAULT_REWARD_DEPOSIT_FACTOR,
+    },
+  );
+};
+
+export const generateService = (user: ContextUser) => {
   const getAll = async (): Promise<CodeSettings> => {
     checkAdmin(user);
-    const settings = await Setting.findAll({
-      where: { key: { [Op.notIn]: blackList } },
-    });
-    return settings.reduce(
-      (acc, s) => {
-        return { ...acc, [s.key]: s.value };
-      },
-      {
-        benefitDirect: DEFAULT_BENEFIT_DIRECT,
-        rewardDirect: DEFAULT_REWARD_DIRECT,
-        reqMinimumDeposit: DEFAULT_REQ_MINIMUM_DEPOSIT,
-        maxTotalBenefits: DEFAULT_MAX_TOTAL_BENEFITS,
-        maxTotalRewards: DEFAULT_MAX_TOTAL_REWARDS,
-        benefitDepositFactor: DEFAULT_BENEFIT_DEPOSIT_FACTOR,
-        rewardDepositFactor: DEFAULT_REWARD_DEPOSIT_FACTOR,
-      },
-    );
+    return getCodeSettings();
   };
 
   const update = async (data: CodeSettings) => {
@@ -68,7 +72,7 @@ export const generateService = ({ user }: { user: ContextUser }) => {
       },
     );
 
-    return getAll();
+    return getCodeSettings();
   };
 
   return {

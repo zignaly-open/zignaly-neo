@@ -95,7 +95,12 @@ const server = new ApolloServer({
     const user = req.auth?.payload || null;
     return {
       user,
-      services: { Auction: auctions.generateService(user) },
+      services: {
+        Auction: auctions.generateService(user),
+        Code: codes.generateService(user),
+        User: users.generateService(user),
+        settings: settings.generateService(user),
+      },
     };
   },
   plugins: [
