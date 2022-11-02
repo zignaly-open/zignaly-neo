@@ -35,6 +35,7 @@ const errorLink = onError(({ networkError }) => {
 const resourcesMap = {
   auctions: 'Auction',
   codes: 'Code',
+  'user-codes': 'Code',
   users: 'User',
 };
 

@@ -17,7 +17,9 @@ import { Op } from 'sequelize';
 
 export const getCode = async (user: ContextUser, code: string) => {
   await checkAdmin(user?.id);
-  return Code.findByPk(code);
+  return Code.findByPk(code, {
+    include: [User],
+  });
 };
 
 const applyFilters = (filter: ResourceOptions['filter'] = {}) => {

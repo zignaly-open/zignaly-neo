@@ -59,8 +59,14 @@ const AdminEntryPoint = () => {
         create={CodeCreate}
         icon={CodeIcon}
       />
+      <Resource
+        name='user-codes'
+        list={UserCodeList}
+        edit={CodeEdit}
+        create={CodeCreate}
+        icon={CodeIcon}
+      />
       <CustomRoutes>
-        <Route path='/user-codes' element={<UserCodeList />} />
         <Route path='/settings' element={<SettingsPage />} />
       </CustomRoutes>
     </Admin>

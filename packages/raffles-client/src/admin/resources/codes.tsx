@@ -30,8 +30,7 @@ const codeFilters = [
 const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
   return (
     <List
-      hasCreate={systemCode}
-      resource='codes'
+      resource={systemCode ? 'codes' : 'user-codes'}
       sort={{ field: 'createdAt', order: 'desc' }}
       filters={codeFilters}
       filter={{ type: systemCode ? '' : 'user' }}
@@ -76,6 +75,9 @@ const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
 export const CodeList = () => <CodeListBase systemCode={true} />;
 export const UserCodeList = () => <CodeListBase systemCode={false} />;
 
+const validateUppercase = (value: string) =>
+  value?.toUpperCase() !== value ? 'Must be uppercase' : undefined;
+
 const CodeForm = () => {
   const translate = useTranslate();
 
@@ -84,7 +86,8 @@ const CodeForm = () => {
       <Typography variant='h6' gutterBottom>
         {translate('resources.codes.name')}
       </Typography>
-      <TextInput source='code' required />
+      <TextInput source='code' required validate={validateUppercase} />
+      <TextInput source='user.id' label='User id' />
       <BooleanInput source='welcomeType' />
       <Typography variant='h6' gutterBottom mt={1}>
         {translate('resources.codes.requirements')}
