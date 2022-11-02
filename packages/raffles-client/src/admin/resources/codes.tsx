@@ -76,6 +76,9 @@ const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
 export const CodeList = () => <CodeListBase systemCode={true} />;
 export const UserCodeList = () => <CodeListBase systemCode={false} />;
 
+const validateUppercase = (value: string) =>
+  value?.toUpperCase() !== value ? 'Must be uppercase' : undefined;
+
 const CodeForm = () => {
   const translate = useTranslate();
 
@@ -84,7 +87,7 @@ const CodeForm = () => {
       <Typography variant='h6' gutterBottom>
         {translate('resources.codes.name')}
       </Typography>
-      <TextInput source='code' required />
+      <TextInput source='code' required validate={validateUppercase} />
       <BooleanInput source='welcomeType' />
       <Typography variant='h6' gutterBottom mt={1}>
         {translate('resources.codes.requirements')}

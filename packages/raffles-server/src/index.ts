@@ -80,8 +80,11 @@ const setHttpPlugin = {
   async requestDidStart() {
     return {
       async willSendResponse({ response }: { response: GraphQLResponse }) {
-        if (response?.errors?.[0]?.extensions?.code === 'UNAUTHENTICATED') {
+        const errorCode = response?.errors?.[0]?.extensions?.code;
+        if (errorCode === 'UNAUTHENTICATED') {
           response.http.status = 401;
+        } else if (response?.errors?.length) {
+          response.http.status = 500;
         }
       },
     };
