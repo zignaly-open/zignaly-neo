@@ -26,7 +26,6 @@ import { chains } from 'util/chain';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import DateTimeInput from '../components/DateTimeInput';
 import DateField from '../components/DateField';
-import { validateDate } from '../util/validation';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 
