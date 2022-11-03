@@ -195,7 +195,10 @@ export const generateService = (user: ContextUser) => ({
 
       return auction;
     } catch (e) {
-      console.error(e);
+      if (!isTest) {
+        // In memory db doesn't return object
+        console.error(e);
+      }
       throw e;
     }
   },

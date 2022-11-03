@@ -402,6 +402,26 @@ export async function userCodesRedemptions(token: string): Promise<any> {
   );
 }
 
+export async function updateAuction(
+  token: string,
+  { id, title }: Partial<Auction>,
+): Promise<any> {
+  return makeRequest(
+    `
+    mutation {
+      data: updateAuction(
+        id: ${id}
+        title: "${title}"
+      ) {
+        id
+        title
+      }
+    }
+  `,
+    token,
+  );
+}
+
 export async function createCode(overrides?: Partial<Code>) {
   return Code.create({
     code: generateCode(),
