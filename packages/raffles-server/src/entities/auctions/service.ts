@@ -67,16 +67,17 @@ const auctionsFilter = (
   return {
     ...restFilters,
     ...(title && { title: { [Op.iLike]: `%${title}%` } }),
-    ...(!unannounced && {
-      announcementDate: {
-        [Op.or]: [
-          null,
-          {
-            [Op.lte]: new Date(),
-          },
-        ],
-      },
-    }),
+    ...(!unannounced &&
+      !bypassChecks && {
+        announcementDate: {
+          [Op.or]: [
+            null,
+            {
+              [Op.lte]: new Date(),
+            },
+          ],
+        },
+      }),
     ...(auctionId && { id: auctionId }),
     ...(startDateFilters && { startDate: startDateFilters }),
     ...(!bypassChecks && {
