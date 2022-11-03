@@ -67,16 +67,17 @@ const auctionsFilter = (
   return {
     ...restFilters,
     ...(title && { title: { [Op.iLike]: `%${title}%` } }),
-    ...(!unannounced && {
-      announcementDate: {
-        [Op.or]: [
-          null,
-          {
-            [Op.lte]: new Date(),
-          },
-        ],
-      },
-    }),
+    ...(!unannounced &&
+      !bypassChecks && {
+        announcementDate: {
+          [Op.or]: [
+            null,
+            {
+              [Op.lte]: new Date(),
+            },
+          ],
+        },
+      }),
     ...(auctionId && { id: auctionId }),
     ...(startDateFilters && { startDate: startDateFilters }),
     ...(!bypassChecks && {
@@ -195,7 +196,10 @@ export const generateService = (user: ContextUser) => ({
 
       return auction;
     } catch (e) {
-      console.error(e);
+      if (!isTest) {
+        // In memory db doesn't return object
+        console.error(e);
+      }
       throw e;
     }
   },

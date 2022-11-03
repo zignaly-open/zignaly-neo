@@ -20,11 +20,14 @@ import {
   ChipField,
   FunctionField,
   useTranslate,
+  email,
 } from 'react-admin';
 import { chains } from 'util/chain';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import DateTimeInput from '../components/DateTimeInput';
 import DateField from '../components/DateField';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 export const AuctionIcon = EventNote;
 
@@ -96,16 +99,49 @@ const Poster = () => {
   );
 };
 
+const schema = yup
+  .object()
+  .shape({
+    startDate: yup.date(),
+    expiresAt: yup
+      .date()
+      .when(
+        'startDate',
+        (startDate, s) =>
+          startDate && s.min(startDate, 'errors.date.expAfterStart'),
+      ),
+    maxExpiryDate: yup
+      .date()
+      .when(
+        'expiresAt',
+        (expiresAt, s) =>
+          expiresAt && s.min(expiresAt, 'errors.date.maxExpAfterExp'),
+      ),
+    maxClaimDate: yup
+      .date()
+      .when(
+        'maxExpiryDate',
+        (maxExpiryDate, s) =>
+          maxExpiryDate &&
+          s.min(maxExpiryDate, 'errors.date.claimDateAfterMaxExp'),
+      ),
+  })
+  .required();
+
 const AuctionForm = () => {
   const translate = useTranslate();
   return (
-    <SimpleForm>
+    <SimpleForm resolver={yupResolver(schema)}>
       <Typography variant='h6' gutterBottom>
         {translate('resources.auctions.name')}
       </Typography>
       <TextInput source='title' sx={{ minWidth: '300px' }} required />
       <Poster />
-      <TextInput source='imageUrl' sx={{ minWidth: '300px' }} />
+      <TextInput
+        source='imageUrl'
+        sx={{ minWidth: '300px' }}
+        validate={email()}
+      />
       <SelectInput
         required
         source='chain'
@@ -130,24 +166,20 @@ const AuctionForm = () => {
       </Typography>
       <DateTimeInput source='announcementDate' label='Announcement date' />
       <Box display='flex' gap='1em'>
-        <DateTimeInput source='startDate' label='Start date*' required />
-        <DateTimeInput label='Expiration date*' source='expiresAt' required />
-        <DateTimeInput
-          label='Max expiration*'
-          source='maxExpiryDate'
-          required
-        />
+        <DateTimeInput source='startDate' label='Start date' required />
+        <DateTimeInput label='Expiration date' source='expiresAt' required />
+        <DateTimeInput label='Max expiration' source='maxExpiryDate' required />
       </Box>
       <DateTimeInput label='Max claim date' source='maxClaimDate' />
       <Typography variant='h6' gutterBottom mt={1}>
         {translate('resources.auctions.params')}
       </Typography>
       <Box display='flex' gap='1em'>
-        <NumberInput source='currentBid' defaultValue={0.01} />
-        <NumberInput source='bidFee' defaultValue={1} />
-        <NumberInput source='bidStep' defaultValue={0.01} />
+        <NumberInput source='currentBid' defaultValue={0.01} min={0} />
+        <NumberInput source='bidFee' defaultValue={1} min={0} />
+        <NumberInput source='bidStep' defaultValue={0.01} min={0} />
       </Box>
-      <NumberInput source='numberOfWinners' required />
+      <NumberInput source='numberOfWinners' required min={1} />
       <TextInput source='privateCode' />
       <BooleanInput source='isExclusiveToKuCoin' label='KuCoin Only' />
     </SimpleForm>

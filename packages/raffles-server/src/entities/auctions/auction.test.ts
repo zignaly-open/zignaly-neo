@@ -14,6 +14,7 @@ import {
   wait,
   expireAuction,
   startAuction,
+  updateAuction,
 } from '../../util/test-utils';
 import { mock } from '../../util/mock-cybavo-wallet';
 import redisService from '../../redisService';
@@ -326,5 +327,42 @@ describe('Auctions', () => {
 
     const auctions = await getAuctions(aliceToken, false, 'aa');
     expect(auctions.length).toBe(1);
+  });
+
+  describe('permissions check', () => {
+    it('should not allow editing if not admin', async () => {
+      const [, aliceToken] = await createAlice();
+      const auction = await createAuction({
+        title: 'aa',
+      });
+
+      const { body } = await updateAuction(aliceToken, {
+        ...auction,
+        id: auction.id,
+        title: 'bbb',
+      });
+
+      const auctions = await getAuctions(aliceToken, false);
+      expect(auctions[0].title).toBe('aa');
+      expect(body.errors[0].message).toBe('Not authorized');
+    });
+  });
+
+  describe('admin', () => {
+    it('should be able to update auction', async () => {
+      const [, userToken] = await createRandomUser(0, { isAdmin: true });
+      const auction = await createAuction({
+        title: 'aa',
+      });
+
+      await updateAuction(userToken, {
+        ...auction,
+        id: auction.id,
+        title: 'bbb',
+      });
+
+      const auctions = await getAuctions(userToken, false);
+      expect(auctions[0].title).toBe('bbb');
+    });
   });
 });

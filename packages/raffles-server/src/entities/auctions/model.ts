@@ -10,6 +10,7 @@ import {
   ForeignKey,
   HasMany,
   BelongsTo,
+  AllowNull,
 } from 'sequelize-typescript';
 import { User } from '../users/model';
 
@@ -21,6 +22,7 @@ export class Auction extends Model {
   @Column
   public id!: number;
 
+  @AllowNull(false)
   @Column
   public title!: string;
 
@@ -42,20 +44,16 @@ export class Auction extends Model {
   @Column(DataType.STRING)
   public twitter: string;
 
-  @Default(() => Date.now() + 7 * 24 * 3600_000)
+  @AllowNull(false)
   @Column(DataType.DATE)
   public expiresAt!: Date;
 
-  @Default(() => Date.now() + 8 * 24 * 3600_000)
+  @AllowNull(false)
   @Column(DataType.DATE)
   public maxExpiryDate!: Date;
 
-  @Default(() => Date.now() + 10 * 24 * 3600_000)
   @Column(DataType.DATE)
-  public maxClaimDate!: Date;
-
-  @HasMany(() => AuctionBasketItem)
-  basketItems: AuctionBasketItem[];
+  public maxClaimDate: Date;
 
   @Default('1')
   @Column(DataType.DECIMAL)

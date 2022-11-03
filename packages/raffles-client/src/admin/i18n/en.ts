@@ -31,4 +31,12 @@ export default {
       defaultCodeReward: 'Default User Code Reward',
     },
   },
+  errors: {
+    date: {
+      invalid: 'Date is invalid',
+      expAfterStart: 'Expiration date must be after start date',
+      maxExpAfterExp: 'Max Expiration must be after expiration',
+      claimDateAfterMaxExp: 'Max claim date must be after max expiration',
+    },
+  },
 };
