@@ -1,125 +1,61 @@
 import { ApolloContext, ResourceOptions } from '../../types';
 import { Code } from './model';
-import {
-  check,
-  countCodes,
-  createCode,
-  deleteCode,
-  getCode,
-  getCodes,
-  redeem,
-  updateCode,
-  userCodes,
-  userCodesRedemptions,
-} from './service';
 
 export const resolvers = {
   Query: {
     checkCode: async (
       _: any,
       { code }: { code: string },
-      { user }: ApolloContext,
-    ) => {
-      try {
-        return await check(code, user);
-      } catch (e) {
-        console.error(e);
-        throw e;
-      }
-    },
-    userCodes: async (_: any, __: any, { user }: ApolloContext) => {
-      try {
-        return await userCodes(user);
-      } catch (e) {
-        console.error(e);
-        throw e;
-      }
-    },
-    userCodesRedemptions: async (_: any, __: any, { user }: ApolloContext) => {
-      try {
-        return await userCodesRedemptions(user);
-      } catch (e) {
-        console.error(e);
-        throw e;
-      }
-    },
-    Code: async (_: any, { id }: { id: string }, { user }: ApolloContext) => {
-      return getCode(user, id);
-    },
+      { services }: ApolloContext,
+    ) => services.Code.checkCode(code),
+
+    userCodes: async (_: any, __: any, { services }: ApolloContext) =>
+      services.Code.getUserCodes(),
+
+    userCodesRedemptions: async (
+      _: any,
+      __: any,
+      { services }: ApolloContext,
+    ) => services.Code.getUserCodesRedemptions(),
+
+    Code: async (_: any, { id }: { id: string }, { services }: ApolloContext) =>
+      services.Code.getById(id),
+
     allCodes: async (
       _: any,
       data: ResourceOptions,
-      { user }: ApolloContext,
-    ) => {
-      return getCodes(
-        user,
-        data.sortField,
-        data.sortOrder,
-        data.page,
-        data.perPage,
-        data.filter,
-      );
-    },
+      { services }: ApolloContext,
+    ) => services.Code.getAll(data),
+
     _allCodesMeta: async (
       _: any,
-      {
-        filter,
-      }: {
-        filter: ResourceOptions['filter'];
-      },
-      { user }: ApolloContext,
-    ) => {
-      return countCodes(user, filter);
-    },
+      data: ResourceOptions,
+      { services }: ApolloContext,
+    ) => services.Code.count(data),
   },
   Mutation: {
     redeemCode: async (
       _: any,
       { code }: { code: string },
-      { user }: ApolloContext,
-    ) => {
-      try {
-        return await redeem(code, user);
-      } catch (e) {
-        console.error(e);
-        throw e;
-      }
-    },
-    updateCode: async (
-      _: any,
-      data: Partial<Code>,
-      { user }: ApolloContext,
-    ) => {
-      try {
-        return updateCode(user, data);
-      } catch (e) {
-        console.error(e);
-        throw e;
-      }
-    },
+      { services }: ApolloContext,
+    ) => services.Code.redeem(code),
+
     createCode: async (
       _: any,
       data: Partial<Code>,
-      { user }: ApolloContext,
-    ) => {
-      try {
-        return createCode(user, data);
-      } catch (e) {
-        console.error(e);
-        throw e;
-      }
-    },
+      { services }: ApolloContext,
+    ) => services.Code.create(data),
+
+    updateCode: async (
+      _: any,
+      data: Partial<Code>,
+      { services }: ApolloContext,
+    ) => services.Code.update(data),
+
     deleteCode: async (
       _: any,
       { id }: { id: string },
-      { user }: ApolloContext,
-    ) => {
-      try {
-        return deleteCode(user, id);
-      } catch (e) {
-        console.error(e);
-        throw e;
-      }
-    },
+      { services }: ApolloContext,
+    ) => services.Code.delete(id),
   },
 };

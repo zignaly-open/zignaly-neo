@@ -96,7 +96,15 @@ const server = new ApolloServer({
   csrfPrevention: true,
   context: ({ req }: { req: AuthorizedRequest }) => {
     const user = req.auth?.payload || null;
-    return { user };
+    return {
+      user,
+      services: {
+        Auction: auctions.generateService(user),
+        Code: codes.generateService(user),
+        User: users.generateService(user),
+        settings: settings.generateService(user),
+      },
+    };
   },
   plugins: [
     setHttpPlugin,
