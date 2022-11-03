@@ -1,0 +1,12 @@
+{
+    "tableHeader": {
+        "coin": "Coin",
+        "totalBalance": "Toplam Bakiye",
+        "availableBalance": "Mevcut Bakiye",
+        "lockedBalance": "Kilitli Bakiye",
+        "valueBTC": "BTC cinsinden değer",
+        "valueUSD": "ABD Doları cinsinden değer"
+    },
+    "table-search-placeholder": "Coin aramak için buraya yazın.",
+    "loading-arialLabel": "Kontrol panelim yükleniyor"
+}

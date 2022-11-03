@@ -1,0 +1,24 @@
+{
+    "managements-label": "Fonları Yönet",
+    "investors-label": "Yatırımcılar",
+    "coins-label": "Coin'ler",
+    "dropdown": {
+        "manageServices": "Hizmeti Yönet",
+        "trade": {
+            "title": "Alım-Satım",
+            "links": {
+                "positions": "Pozisyonlarım",
+                "manual": "Manuel Alım-Satım",
+                "signals": "Alım-Satım Sinyalleri",
+                "api": "API Alım-Satımı"
+            }
+        },
+        "profile": {
+            "title": "Profil",
+            "links": {
+                "profile": "Profili Görüntüle",
+                "profile-edit": "Profili Düzenle"
+            }
+        }
+    }
+}
