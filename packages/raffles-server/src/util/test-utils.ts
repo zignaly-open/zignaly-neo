@@ -36,7 +36,9 @@ export async function createAuction(
     currentBid: '100',
     bidStep: '1',
     bidFee: '1',
-    basketItems: [],
+    expiresAt: Date.now() + 7 * 24 * 3600_000,
+    maxExpiryDate: Date.now() + 8 * 24 * 3600_000,
+    maxClaimDate: Date.now() + 10 * 24 * 3600_000,
     ...overrides,
   });
   if (saveToRedis) {

@@ -25,6 +25,7 @@ import { chains } from 'util/chain';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import DateTimeInput from '../components/DateTimeInput';
 import DateField from '../components/DateField';
+import { validateDate } from '../util/validation';
 
 export const AuctionIcon = EventNote;
 
@@ -96,6 +97,33 @@ const Poster = () => {
   );
 };
 
+const validateExpiration = [
+  validateDate,
+  (value: Date, { startDate }: AuctionType) => {
+    if (value <= startDate) {
+      return 'errors.date.expAfterStart';
+    }
+  },
+];
+
+const validateMaxExpiration = [
+  validateDate,
+  (value: Date, { expiresAt }: AuctionType) => {
+    if (value <= expiresAt) {
+      return 'errors.date.maxExpAfterExp';
+    }
+  },
+];
+
+const validateMaxClaimDate = [
+  validateDate,
+  (value: Date, { maxExpiryDate }: AuctionType) => {
+    if (value !== null && value <= maxExpiryDate) {
+      return 'errors.date.claimDateAfterMaxExp';
+    }
+  },
+];
+
 const AuctionForm = () => {
   const translate = useTranslate();
   return (
@@ -130,15 +158,30 @@ const AuctionForm = () => {
       </Typography>
       <DateTimeInput source='announcementDate' label='Announcement date' />
       <Box display='flex' gap='1em'>
-        <DateTimeInput source='startDate' label='Start date*' required />
-        <DateTimeInput label='Expiration date*' source='expiresAt' required />
+        <DateTimeInput
+          source='startDate'
+          label='Start date*'
+          required
+          validate={validateDate}
+        />
+        <DateTimeInput
+          label='Expiration date*'
+          source='expiresAt'
+          required
+          validate={validateExpiration}
+        />
         <DateTimeInput
           label='Max expiration*'
           source='maxExpiryDate'
           required
+          validate={validateMaxExpiration}
         />
       </Box>
-      <DateTimeInput label='Max claim date' source='maxClaimDate' />
+      <DateTimeInput
+        label='Max claim date'
+        source='maxClaimDate'
+        validate={validateMaxClaimDate}
+      />
       <Typography variant='h6' gutterBottom mt={1}>
         {translate('resources.auctions.params')}
       </Typography>
