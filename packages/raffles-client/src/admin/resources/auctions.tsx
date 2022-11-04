@@ -199,38 +199,21 @@ const AuctionForm = () => {
   );
 };
 
-// const exporter = (records, fetchRelatedRecords) => {
-//   // will call dataProvider.getMany('posts', { ids: records.map(record => record.post_id) }), ignoring duplicate and empty post_id
-//   fetchRelatedRecords(records, 'post_id', 'posts').then((posts) => {
-//     const data = records.map((record) => ({
-//       ...record,
-//       post_title: posts[record.post_id].title,
-//     }));
-//     jsonExport(
-//       data,
-//       {
-//         headers: ['id', 'post_id', 'post_title', 'body'],
-//       },
-//       (err, csv) => {
-//         downloadCSV(csv, 'comments');
-//       },
-//     );
-//   });
-// };
-
 const Participants = () => {
   const translate = useTranslate();
   const record = useRecordContext<AuctionType>();
 
   const exporter = () => {
-    const postsForExport = record.bids.map((bid) => ({
-      position: bid.position,
-      userId: bid.user.id,
-      username: bid.user.username,
-      discordName: bid.user.discordName,
-      isWinner: bid.isWinner,
-      isClaimed: bid.isClaimed,
-    }));
+    const postsForExport = record.bids
+      .map((bid) => ({
+        position: bid.position,
+        userId: bid.user.id,
+        username: bid.user.username,
+        discordName: bid.user.discordName,
+        isWinner: bid.isWinner,
+        isClaimed: bid.isClaimed,
+      }))
+      .sort((a, b) => a.position - b.position);
     jsonExport(postsForExport, (_, csv: string) => {
       downloadCSV(csv, 'participants');
     });
@@ -245,13 +228,6 @@ const Participants = () => {
   }
 
   return (
-    // <ListContext.Provider
-    //   value={{
-    //     ...controllerProps,
-    //     data: record.bids,
-    //     exporter: customExporter,
-    //   }}
-    // >
     <>
       <ListToolbar
         actions={<ExportButton maxResults={0} exporter={exporter} />}
@@ -262,9 +238,9 @@ const Participants = () => {
           <TextField source='user.username' label='Username' />
           <TextField source='user.discordName' label='Discord' />
           <BooleanField source='isWinner' />
+          <BooleanField source='isClaimed' />
         </Datagrid>
       </ArrayField>
-      {/* </ListContext.Provider> */}
     </>
   );
 };

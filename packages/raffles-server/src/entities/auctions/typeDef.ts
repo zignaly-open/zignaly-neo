@@ -41,6 +41,7 @@ export const typeDef = gql`
     isWinner: Boolean
     position: Int
     user: UserInfo
+    isClaimed: Boolean
   }
 
   type Auction {
