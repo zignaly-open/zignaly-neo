@@ -119,6 +119,16 @@ export const OtherAccountsButton: React.FC<{
 export const InvestedButton: React.FC<{
   service: Service;
 }> = ({ service }) => {
+  const { investedAmount } = useIsInvestedInService(service.id);
+  return (
+    <InvestedButtonBase service={service} investedAmount={investedAmount} />
+  );
+};
+
+export const InvestedButtonBase: React.FC<{
+  service: Service;
+  investedAmount: string;
+}> = ({ service, investedAmount }) => {
   const { showModal } = useZModal();
   const selectInvestment = useSetSelectedInvestment();
 
@@ -127,7 +137,6 @@ export const InvestedButton: React.FC<{
     showModal(EditInvestmentModal);
   };
 
-  const { investedAmount } = useIsInvestedInService(service.id);
   const { t } = useTranslation(['service', 'action']);
   return (
     <InvestButtonContainer>

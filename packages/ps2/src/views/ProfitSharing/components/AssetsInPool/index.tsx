@@ -20,7 +20,7 @@ const AssetsInPool = ({
         }}
       >
         <UsdPriceLabel value={assetsValue} />
-        {assetsValue >= 1 && (
+        {assetsValue >= 200000 && (
           <Icon>
             <WhaleIcon />
           </Icon>

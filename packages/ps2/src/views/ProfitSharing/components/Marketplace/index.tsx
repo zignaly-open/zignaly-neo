@@ -20,6 +20,7 @@ import { ServiceName } from '../../../Dashboard/components/ServiceName';
 import { MarketplaceTableDataType } from './types';
 import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace/util';
 import AssetsInPool from '../AssetsInPool';
+import MarketplaceAction from '../MarketplaceAction';
 
 const Marketplace: React.FC = () => {
   const marketplaceEndpoint = useMarketplace();
@@ -54,7 +55,8 @@ const Marketplace: React.FC = () => {
             numberOfInvestors={value.investors}
           />
         ),
-        sortType: (a, b) => sortByValue(a.values.invested, b.values.invested),
+        sortType: (a, b) =>
+          sortByValue(a.values.assets.invested, b.values.assets.invested),
       },
       {
         Header: t('table.n-months', { count: 3 }),
@@ -92,11 +94,11 @@ const Marketplace: React.FC = () => {
         sortType: (a, b) =>
           sortByValue(a.values['30d'].pnl30d || 0, b.values['30d'].pnl30d || 0),
       },
-      // {
-      //   Header: '',
-      //   accessor: 'actionService',
-      //   Cell: ({ cell: { value } }) => <>{value?.name}</>,
-      // },
+      {
+        Header: '',
+        accessor: 'actionService',
+        Cell: ({ cell: { value } }) => <MarketplaceAction service={value} />,
+      },
     ],
     [],
   );
