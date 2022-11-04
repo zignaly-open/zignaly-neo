@@ -1,4 +1,4 @@
-import { Edit as EditIcon, People, EventNote } from '@mui/icons-material';
+import { EventNote } from '@mui/icons-material';
 import { Box, Card, CardMedia, Chip, Typography } from '@mui/material';
 import MarkdownInput from '../components/MarkdownInput';
 import React from 'react';
@@ -25,12 +25,9 @@ import {
   BooleanField,
   TabbedShowLayout,
   Tab,
-  Title,
   ListToolbar,
   ExportButton,
-  ListBase,
-  ListContext,
-  useListController,
+  downloadCSV,
 } from 'react-admin';
 import { chains } from 'util/chain';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
@@ -39,6 +36,7 @@ import DateField from '../components/DateField';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import EditToolbar from 'admin/components/EditToolbar';
+import jsonExport from 'jsonexport/dist';
 
 export const AuctionIcon = EventNote;
 
@@ -220,42 +218,54 @@ const AuctionForm = () => {
 //   });
 // };
 
-const Participants = (props) => {
+const Participants = () => {
   const translate = useTranslate();
-  // const controllerProps = {};
-  const controllerProps = useListController({ ...props });
   const record = useRecordContext<AuctionType>();
 
-  const customExporter = (data, _, __, resource) => {
-    console.log(data, _, __, resource);
-    return (
-      controllerProps.exporter &&
-      controllerProps.exporter(record.bids, _, __, resource)
-    );
+  const exporter = () => {
+    const postsForExport = record.bids.map((bid) => ({
+      position: bid.position,
+      userId: bid.user.id,
+      username: bid.user.username,
+      discordName: bid.user.discordName,
+      isWinner: bid.isWinner,
+      isClaimed: bid.isClaimed,
+    }));
+    jsonExport(postsForExport, (_, csv: string) => {
+      downloadCSV(csv, 'participants');
+    });
   };
 
-  console.log(props, controllerProps, record);
-  return (
-    <ListContext.Provider
-      value={{
-        ...controllerProps,
-        data: record.bids,
-        exporter: customExporter,
-      }}
-    >
-      <Typography variant='h6'>
-        {translate('resources.auctions.participants')}
+  if (!record.bids.length) {
+    return (
+      <Typography mt={2}>
+        {translate('resources.auctions.noParticipants')}
       </Typography>
-      <ListToolbar actions={<ExportButton exporter={customExporter} />} />
-      {/* <ArrayField source='bids'> */}
-      <Datagrid bulkActionButtons={false}>
-        <TextField source='user.id' />
-        <TextField source='user.username' label='Username' />
-        <TextField source='user.discordName' label='Discord' />
-        <BooleanField source='isWinner' />
-      </Datagrid>
-      {/* </ArrayField> */}
-    </ListContext.Provider>
+    );
+  }
+
+  return (
+    // <ListContext.Provider
+    //   value={{
+    //     ...controllerProps,
+    //     data: record.bids,
+    //     exporter: customExporter,
+    //   }}
+    // >
+    <>
+      <ListToolbar
+        actions={<ExportButton maxResults={0} exporter={exporter} />}
+      />
+      <ArrayField source='bids'>
+        <Datagrid bulkActionButtons={false}>
+          <TextField source='user.id' />
+          <TextField source='user.username' label='Username' />
+          <TextField source='user.discordName' label='Discord' />
+          <BooleanField source='isWinner' />
+        </Datagrid>
+      </ArrayField>
+      {/* </ListContext.Provider> */}
+    </>
   );
 };
 

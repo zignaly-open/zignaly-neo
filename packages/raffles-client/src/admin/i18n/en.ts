@@ -17,7 +17,7 @@ export default {
         last_month: 'Last month',
         earlier: 'Earlier',
       },
-      participants: 'Participants',
+      noParticipants: 'No participants yet',
     },
     codes: {
       name: 'Code',
