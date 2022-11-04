@@ -36,6 +36,7 @@ export async function createAuction(
     currentBid: '100',
     bidStep: '1',
     bidFee: '1',
+    startDate: Date.now(),
     expiresAt: Date.now() + 7 * 24 * 3600_000,
     maxExpiryDate: Date.now() + 8 * 24 * 3600_000,
     maxClaimDate: Date.now() + 10 * 24 * 3600_000,
@@ -416,6 +417,19 @@ export async function updateAuction(
         id
         title
       }
+    }
+  `,
+    token,
+  );
+}
+
+export async function deleteAuction(token: string, id: number): Promise<any> {
+  return makeRequest(
+    `
+    mutation {
+      data: deleteAuction(
+        id: ${id}
+      )
     }
   `,
     token,

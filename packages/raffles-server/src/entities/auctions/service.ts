@@ -221,6 +221,11 @@ export const generateService = (user: ContextUser) => ({
 
   delete: async (id: number) => {
     checkAdmin(user);
+    const auction = await Auction.findByPk(id);
+    if (!auction) throw new Error('Auction not found');
+    if (auction.startDate <= new Date())
+      throw new Error('Cannot delete auction already started');
+
     await redisService.deleteAuctionFromRedis(id);
     return Boolean(
       await Auction.destroy({
