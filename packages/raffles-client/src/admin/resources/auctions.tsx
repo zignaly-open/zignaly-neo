@@ -21,10 +21,13 @@ import {
   FunctionField,
   useTranslate,
   email,
-  Toolbar,
-  SaveButton,
-  DeleteWithConfirmButton,
-  ToolbarProps,
+  ArrayField,
+  BooleanField,
+  TabbedShowLayout,
+  Tab,
+  ListToolbar,
+  ExportButton,
+  downloadCSV,
 } from 'react-admin';
 import { chains } from 'util/chain';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
@@ -32,6 +35,8 @@ import DateTimeInput from '../components/DateTimeInput';
 import DateField from '../components/DateField';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import EditToolbar from 'admin/components/EditToolbar';
+import jsonExport from 'jsonexport/dist';
 
 export const AuctionIcon = EventNote;
 
@@ -136,20 +141,6 @@ const schema = yup
   })
   .required();
 
-const EditToolbar = (props: ToolbarProps) => {
-  const record = useRecordContext();
-
-  return (
-    <Toolbar
-      sx={{ display: 'flex', justifyContent: 'space-between' }}
-      {...props}
-    >
-      <SaveButton />
-      <DeleteWithConfirmButton translateOptions={{ name: record.title }} />
-    </Toolbar>
-  );
-};
-
 const AuctionForm = () => {
   const translate = useTranslate();
   return (
@@ -208,9 +199,86 @@ const AuctionForm = () => {
   );
 };
 
+// const exporter = (records, fetchRelatedRecords) => {
+//   // will call dataProvider.getMany('posts', { ids: records.map(record => record.post_id) }), ignoring duplicate and empty post_id
+//   fetchRelatedRecords(records, 'post_id', 'posts').then((posts) => {
+//     const data = records.map((record) => ({
+//       ...record,
+//       post_title: posts[record.post_id].title,
+//     }));
+//     jsonExport(
+//       data,
+//       {
+//         headers: ['id', 'post_id', 'post_title', 'body'],
+//       },
+//       (err, csv) => {
+//         downloadCSV(csv, 'comments');
+//       },
+//     );
+//   });
+// };
+
+const Participants = () => {
+  const translate = useTranslate();
+  const record = useRecordContext<AuctionType>();
+
+  const exporter = () => {
+    const postsForExport = record.bids.map((bid) => ({
+      position: bid.position,
+      userId: bid.user.id,
+      username: bid.user.username,
+      discordName: bid.user.discordName,
+      isWinner: bid.isWinner,
+      isClaimed: bid.isClaimed,
+    }));
+    jsonExport(postsForExport, (_, csv: string) => {
+      downloadCSV(csv, 'participants');
+    });
+  };
+
+  if (!record.bids.length) {
+    return (
+      <Typography mt={2}>
+        {translate('resources.auctions.noParticipants')}
+      </Typography>
+    );
+  }
+
+  return (
+    // <ListContext.Provider
+    //   value={{
+    //     ...controllerProps,
+    //     data: record.bids,
+    //     exporter: customExporter,
+    //   }}
+    // >
+    <>
+      <ListToolbar
+        actions={<ExportButton maxResults={0} exporter={exporter} />}
+      />
+      <ArrayField source='bids'>
+        <Datagrid bulkActionButtons={false}>
+          <TextField source='user.id' />
+          <TextField source='user.username' label='Username' />
+          <TextField source='user.discordName' label='Discord' />
+          <BooleanField source='isWinner' />
+        </Datagrid>
+      </ArrayField>
+      {/* </ListContext.Provider> */}
+    </>
+  );
+};
+
 export const AuctionEdit = () => (
   <Edit>
-    <AuctionForm />
+    <TabbedShowLayout>
+      <Tab label='Edit'>
+        <AuctionForm />
+      </Tab>
+      <Tab label='Participants'>
+        <Participants />
+      </Tab>
+    </TabbedShowLayout>
   </Edit>
 );
 

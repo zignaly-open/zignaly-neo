@@ -1,5 +1,6 @@
 import { Redeem } from '@mui/icons-material';
 import { Typography } from '@mui/material';
+import EditToolbar from 'admin/components/EditToolbar';
 import React from 'react';
 import {
   List,
@@ -84,7 +85,7 @@ const CodeForm = () => {
   const translate = useTranslate();
 
   return (
-    <SimpleForm>
+    <SimpleForm toolbar={<EditToolbar />}>
       <Typography variant='h6' gutterBottom>
         {translate('resources.codes.name')}
       </Typography>
