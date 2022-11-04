@@ -78,7 +78,7 @@ export const typeDef = gql`
       sortField: String
       sortOrder: String
       filter: AuctionFilter
-    ): [AdmAuction]
+    ): [Auction]
 
     allAdmAuctions(
       page: Int
