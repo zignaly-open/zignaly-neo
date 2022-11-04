@@ -234,6 +234,7 @@ const Participants = () => {
       />
       <ArrayField source='bids'>
         <Datagrid bulkActionButtons={false}>
+          <TextField source='position' />
           <TextField source='user.id' />
           <TextField source='user.username' label='Username' />
           <TextField source='user.discordName' label='Discord' />
