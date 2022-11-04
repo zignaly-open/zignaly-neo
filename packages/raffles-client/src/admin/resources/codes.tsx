@@ -46,7 +46,9 @@ const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
     >
       <Datagrid rowClick='edit'>
         <TextField source='code' />
-        {!systemCode && <TextField source='user.id' label='UserId' />}
+        {!systemCode && (
+          <TextField source='user.id' label='UserId' sortBy='userId' />
+        )}
         {!systemCode && <TextField source='user.username' label='Username' />}
         {systemCode && <BooleanField source='welcomeType' />}
         <NumberField source='reqMinimumBalance' label='Min balance' />
