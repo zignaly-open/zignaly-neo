@@ -102,28 +102,32 @@ const Poster = () => {
 const schema = yup
   .object()
   .shape({
+    announcementDate: yup.date().nullable(),
     startDate: yup.date(),
     expiresAt: yup
       .date()
-      .when(
-        'startDate',
-        (startDate, s) =>
-          startDate && s.min(startDate, 'errors.date.expAfterStart'),
+      .when('startDate', (startDate, s) =>
+        s.min(
+          new Date(startDate.getTime() + 1000),
+          'errors.date.expAfterStart',
+        ),
       ),
     maxExpiryDate: yup
       .date()
-      .when(
-        'expiresAt',
-        (expiresAt, s) =>
-          expiresAt && s.min(expiresAt, 'errors.date.maxExpAfterExp'),
+      .when('expiresAt', (expiresAt, s) =>
+        s.min(
+          new Date(expiresAt.getTime() + 1000),
+          'errors.date.maxExpAfterExp',
+        ),
       ),
     maxClaimDate: yup
       .date()
-      .when(
-        'maxExpiryDate',
-        (maxExpiryDate, s) =>
-          maxExpiryDate &&
-          s.min(maxExpiryDate, 'errors.date.claimDateAfterMaxExp'),
+      .nullable()
+      .when('startDate', (startDate, s) =>
+        s.min(
+          new Date(startDate.getTime() + 1000),
+          'errors.date.claimDateAfterMaxExp',
+        ),
       ),
   })
   .required();
