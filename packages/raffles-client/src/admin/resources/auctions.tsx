@@ -28,6 +28,9 @@ import {
   Title,
   ListToolbar,
   ExportButton,
+  ListBase,
+  ListContext,
+  useListController,
 } from 'react-admin';
 import { chains } from 'util/chain';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
@@ -198,23 +201,61 @@ const AuctionForm = () => {
   );
 };
 
-const Participants = () => {
+// const exporter = (records, fetchRelatedRecords) => {
+//   // will call dataProvider.getMany('posts', { ids: records.map(record => record.post_id) }), ignoring duplicate and empty post_id
+//   fetchRelatedRecords(records, 'post_id', 'posts').then((posts) => {
+//     const data = records.map((record) => ({
+//       ...record,
+//       post_title: posts[record.post_id].title,
+//     }));
+//     jsonExport(
+//       data,
+//       {
+//         headers: ['id', 'post_id', 'post_title', 'body'],
+//       },
+//       (err, csv) => {
+//         downloadCSV(csv, 'comments');
+//       },
+//     );
+//   });
+// };
+
+const Participants = (props) => {
   const translate = useTranslate();
+  // const controllerProps = {};
+  const controllerProps = useListController({ ...props });
+  const record = useRecordContext<AuctionType>();
+
+  const customExporter = (data, _, __, resource) => {
+    console.log(data, _, __, resource);
+    return (
+      controllerProps.exporter &&
+      controllerProps.exporter(record.bids, _, __, resource)
+    );
+  };
+
+  console.log(props, controllerProps, record);
   return (
-    <>
-      <Typography variant='h6' gutterBottom>
+    <ListContext.Provider
+      value={{
+        ...controllerProps,
+        data: record.bids,
+        exporter: customExporter,
+      }}
+    >
+      <Typography variant='h6'>
         {translate('resources.auctions.participants')}
       </Typography>
-      <ListToolbar actions={<ExportButton />} />
-      <ArrayField source='bids'>
-        <Datagrid bulkActionButtons={false}>
-          <TextField source='user.id' />
-          <TextField source='user.username' label='Username' />
-          <TextField source='user.discordName' label='Discord' />
-          <BooleanField source='isWinner' />
-        </Datagrid>
-      </ArrayField>
-    </>
+      <ListToolbar actions={<ExportButton exporter={customExporter} />} />
+      {/* <ArrayField source='bids'> */}
+      <Datagrid bulkActionButtons={false}>
+        <TextField source='user.id' />
+        <TextField source='user.username' label='Username' />
+        <TextField source='user.discordName' label='Discord' />
+        <BooleanField source='isWinner' />
+      </Datagrid>
+      {/* </ArrayField> */}
+    </ListContext.Provider>
   );
 };
 
