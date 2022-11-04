@@ -1,5 +1,4 @@
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
-import { Includeable } from 'sequelize';
 import { ContextUser, ResourceOptions, TransactionType } from '../../types';
 import { User } from '../users/model';
 import { Auction, AuctionBid } from './model';
@@ -20,14 +19,6 @@ import { AuctionFilter, AuctionPayload } from './types';
 const omitPrivateFields = {
   attributes: { exclude: ['announcementDate', 'maxExpiryDate'] },
 };
-
-const lastBidPopulation = {
-  model: AuctionBid,
-  as: 'bids',
-  order: [['id', 'DESC']],
-  limit: 1,
-  include: [User],
-} as Includeable;
 
 async function findUsers(ids: number[]): Promise<User[]> {
   return await User.findAll({ where: { id: ids } });
@@ -166,10 +157,13 @@ export const generateService = (user: ContextUser) => ({
   },
 
   getById: (id: number) => {
-    //  todo: call getAuctionsWithBids
     checkAdmin(user);
     return Auction.findByPk(id, {
-      include: lastBidPopulation,
+      include: {
+        model: AuctionBid,
+        as: 'bids',
+        include: [User],
+      },
     });
   },
 

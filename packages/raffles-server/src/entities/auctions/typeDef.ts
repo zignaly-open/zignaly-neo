@@ -36,7 +36,9 @@ export const typeDef = gql`
     username: String
     discordName: String
   }
+
   type Bid {
+    isWinner: Boolean
     position: Int
     user: UserInfo
   }

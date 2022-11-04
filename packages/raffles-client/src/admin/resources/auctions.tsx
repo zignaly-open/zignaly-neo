@@ -1,4 +1,4 @@
-import { EventNote } from '@mui/icons-material';
+import { Edit as EditIcon, People, EventNote } from '@mui/icons-material';
 import { Box, Card, CardMedia, Chip, Typography } from '@mui/material';
 import MarkdownInput from '../components/MarkdownInput';
 import React from 'react';
@@ -21,10 +21,13 @@ import {
   FunctionField,
   useTranslate,
   email,
-  Toolbar,
-  SaveButton,
-  DeleteWithConfirmButton,
-  ToolbarProps,
+  ArrayField,
+  BooleanField,
+  TabbedShowLayout,
+  Tab,
+  Title,
+  ListToolbar,
+  ExportButton,
 } from 'react-admin';
 import { chains } from 'util/chain';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
@@ -32,6 +35,7 @@ import DateTimeInput from '../components/DateTimeInput';
 import DateField from '../components/DateField';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import EditToolbar from 'admin/components/EditToolbar';
 
 export const AuctionIcon = EventNote;
 
@@ -136,20 +140,6 @@ const schema = yup
   })
   .required();
 
-const EditToolbar = (props: ToolbarProps) => {
-  const record = useRecordContext();
-
-  return (
-    <Toolbar
-      sx={{ display: 'flex', justifyContent: 'space-between' }}
-      {...props}
-    >
-      <SaveButton />
-      <DeleteWithConfirmButton translateOptions={{ name: record.title }} />
-    </Toolbar>
-  );
-};
-
 const AuctionForm = () => {
   const translate = useTranslate();
   return (
@@ -208,9 +198,36 @@ const AuctionForm = () => {
   );
 };
 
+const Participants = () => {
+  const translate = useTranslate();
+  return (
+    <>
+      <Typography variant='h6' gutterBottom>
+        {translate('resources.auctions.participants')}
+      </Typography>
+      <ListToolbar actions={<ExportButton />} />
+      <ArrayField source='bids'>
+        <Datagrid bulkActionButtons={false}>
+          <TextField source='user.id' />
+          <TextField source='user.username' label='Username' />
+          <TextField source='user.discordName' label='Discord' />
+          <BooleanField source='isWinner' />
+        </Datagrid>
+      </ArrayField>
+    </>
+  );
+};
+
 export const AuctionEdit = () => (
   <Edit>
-    <AuctionForm />
+    <TabbedShowLayout>
+      <Tab label='Edit'>
+        <AuctionForm />
+      </Tab>
+      <Tab label='Participants'>
+        <Participants />
+      </Tab>
+    </TabbedShowLayout>
   </Edit>
 );
 
