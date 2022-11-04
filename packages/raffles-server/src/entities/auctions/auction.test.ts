@@ -366,6 +366,38 @@ describe('Auctions', () => {
       expect(auctions[0].title).toBe('bbb');
     });
 
+    it('should be able to update auction title if started', async () => {
+      const [, userToken] = await createRandomUser(0, { isAdmin: true });
+      const auction = await createAuction({
+        startDate: new Date(Date.now() - 1000),
+      });
+
+      await updateAuction(userToken, {
+        ...auction,
+        id: auction.id,
+        title: 'bbb',
+      });
+
+      const auctions = await getAuctions(userToken, false);
+      expect(auctions[0].title).toBe('bbb');
+    });
+
+    it('should not be able to update auction dates if started', async () => {
+      const [, userToken] = await createRandomUser(0, { isAdmin: true });
+      const auction = await createAuction({
+        startDate: new Date(Date.now() - 1000),
+      });
+
+      await updateAuction(userToken, {
+        ...auction,
+        id: auction.id,
+        startDate: new Date(Date.now() + 1000),
+      });
+
+      const auctions = await getAuctions(userToken, true);
+      expect(auctions[0].startDate).toBe(auction.startDate.toISOString());
+    });
+
     it('should be able to delete auction', async () => {
       const [, userToken] = await createRandomUser(0, { isAdmin: true });
       const auction = await createAuction({

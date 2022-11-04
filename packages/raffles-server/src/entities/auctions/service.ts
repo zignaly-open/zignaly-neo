@@ -15,7 +15,7 @@ import { emitBalanceChanged } from '../users/util';
 import { Payout } from '../payouts/model';
 import { debounce } from 'lodash';
 import { AUCTION_UPDATED } from './constants';
-import { AuctionFilter } from './types';
+import { AuctionFilter, AuctionPayload } from './types';
 
 const omitPrivateFields = {
   attributes: { exclude: ['announcementDate', 'maxExpiryDate'] },
@@ -183,18 +183,32 @@ export const generateService = (user: ContextUser) => ({
     return { count };
   },
 
-  update: async (data: Partial<Auction>) => {
+  update: async (data: AuctionPayload) => {
     checkAdmin(user);
     try {
-      const [, [auction]] = await Auction.update(data, {
+      const auction = await Auction.findByPk(data.id);
+      if (!auction) throw new Error('Auction Not Found');
+      if (
+        ((data.startDate &&
+          data.startDate !== auction.startDate.toISOString()) ||
+          (data.expiresAt &&
+            data.expiresAt !== auction.expiresAt.toISOString()) ||
+          (data.maxExpiryDate &&
+            data.maxExpiryDate !== auction.maxExpiryDate.toISOString())) &&
+        auction.startDate <= new Date()
+      ) {
+        throw new Error("Can't change dates of auction already started");
+      }
+
+      const [, [updatedAuction]] = await Auction.update(data, {
         where: { id: data.id },
         returning: true,
       });
-      if (!auction) throw new Error('Auction Not Found');
+      if (!updatedAuction) throw new Error("Auction couldn't update");
 
-      await redisService.redisImport(auction.id);
+      await redisService.redisImport(updatedAuction.id);
 
-      return auction;
+      return updatedAuction;
     } catch (e) {
       if (!isTest) {
         // In memory db doesn't return object
