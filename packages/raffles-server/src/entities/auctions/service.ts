@@ -166,8 +166,8 @@ export const generateService = (user: ContextUser) => ({
         model: AuctionBid,
         as: 'bids',
         include: [User],
-        order: [['AuctionBid', 'position', 'asc']],
       },
+      order: [['bids', 'position', 'ASC']],
     });
     auction.bids.forEach(
       (b: AuctionBidType) => (b.isClaimed = Boolean(b.claimTransactionId)),
