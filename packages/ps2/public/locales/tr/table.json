@@ -1,0 +1,28 @@
+{
+    "footer": {
+        "elements": {
+            "show": "Gösteriliyor",
+            "out": "dışında",
+            "items": "öğeler"
+        },
+        "page": {
+            "items": "Sayfa",
+            "out": "dışarı"
+        },
+        "selector": {
+            "display": "Görüntüleniyor",
+            "items": "öğeler"
+        }
+    },
+    "assetsInPool-investors": "{{count}} yatırımcı",
+    "assetsInPool-investors_plural": "{{count}} yatırımcı",
+    "balanceSummary-invested": "Yatırım yapıldı",
+    "selector-validation-notData": "Veri mevcut değil",
+    "investColumn": {
+        "successFess": "%10 Başarım Ücreti",
+        "liquidated": "LİKİDE OLDU"
+    },
+    "tooltip-columnHeader": "Sıralamayı Değiştir",
+    "serviceName-by": "tarafından",
+    "columns-hideOrShow": "Sütunları Göster\/Gizle"
+}

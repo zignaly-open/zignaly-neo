@@ -1,0 +1,31 @@
+{
+    "title": "Kripto Para Yatırma",
+    "description": "Yatırma işlemlerinin bakiyenize yansıması 3 saate kadar sürebilir.",
+    "coinSelector": {
+        "label": "Coin:",
+        "placeholder": "Coin arama"
+    },
+    "balances": {
+        "loadingAriaLabel": "Coin bakiyeleri yükleniyor",
+        "total": "Bakiye:",
+        "balanceLocked": "Emirler:",
+        "balanceFree": "Mevcut:"
+    },
+    "networkSelector": {
+        "label": "Ağ:",
+        "placeholder": "Ağı seçin"
+    },
+    "depositAddress": {
+        "label": "Yatırma Adresi:",
+        "loading": "Yatırma adresi yükleniyor...",
+        "placeholder": "Önce kripto birimini ve ağı seçin.",
+        "warning": "Yalnızca {{network}} ağındaki {{coin}} token'ları bu adrese gönderin"
+    },
+    "depositMemo": {
+        "label": "MEMO\/Etiket ile Yatırma:"
+    },
+    "depositQR": {
+        "address": "{{coin}} Adresi",
+        "memo": "{{coin}} MEMO\/Etiket"
+    }
+}

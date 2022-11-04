@@ -1,0 +1,25 @@
+{
+    "title": "Kripto Çekme",
+    "description": "Harici bir hesaba kripto çekimi yapın. Zignaly hesapları arasında fonlarınızı taşımak için ise transferi kullanın.",
+    "coinSelector": {
+        "label": "Coin:",
+        "placeholder": "Coin arama"
+    },
+    "networkSelector": {
+        "label": "Ağ:",
+        "placeholder": "Ağı seçin"
+    },
+    "withdrawAddress": {
+        "label": "Bu Adrese Çekin:",
+        "placeholder": "Cüzdan adresini buraya yapıştırın",
+        "warning": "Bu adrese yalnızca {{network}} {{coin}} token'larını gönderin"
+    },
+    "amountToWithdraw": {
+        "label": "Çekilecek Tutar:"
+    },
+    "validation": {
+        "indicateAnAddress": "Geçerli bir adres belirtmelisiniz.",
+        "indicateAnAmount": "Bir miktar belirtmelisiniz.",
+        "minimumToWithdrawal": "Minimum çekim miktarı {{value}} {{coin}}"
+    }
+}
