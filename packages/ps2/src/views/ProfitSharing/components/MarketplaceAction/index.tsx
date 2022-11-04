@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { MarketplaceService } from '../../../../apis/marketplace/types';
 import {
   useActiveExchange,
   useIsAuthenticated,
@@ -14,8 +13,9 @@ import { marketplaceServiceToServiceType } from '../../../../apis/marketplace/ut
 import { Service } from '../../../../apis/service/types';
 import CenteredLoader from '../../../../components/CenteredLoader';
 import { LoaderWrapper } from './styles';
+import { MarketplaceActionType } from './types';
 
-const MarketplaceAction = ({ service }: { service: MarketplaceService }) => {
+const MarketplaceAction = ({ service }: MarketplaceActionType) => {
   const exchange = useActiveExchange();
   const isAuthenticated = useIsAuthenticated();
 
