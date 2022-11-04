@@ -6,3 +6,13 @@ export type AuctionFilter = {
   startDateLte?: Date;
   startDateGte?: Date;
 };
+
+export type AuctionPayload = Partial<
+  Auction & {
+    startDate: string;
+    expiresAt: string;
+    maxExpiryDate: string;
+    announcementDate: string;
+    maxClaimDate: string;
+  }
+>;
