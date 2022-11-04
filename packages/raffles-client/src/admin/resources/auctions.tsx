@@ -204,16 +204,14 @@ const Participants = () => {
   const record = useRecordContext<AuctionType>();
 
   const exporter = () => {
-    const postsForExport = record.bids
-      .map((bid) => ({
-        position: bid.position,
-        userId: bid.user.id,
-        username: bid.user.username,
-        discordName: bid.user.discordName,
-        isWinner: bid.isWinner,
-        isClaimed: bid.isClaimed,
-      }))
-      .sort((a, b) => a.position - b.position);
+    const postsForExport = record.bids.map((bid) => ({
+      position: bid.position,
+      userId: bid.user.id,
+      username: bid.user.username,
+      discordName: bid.user.discordName,
+      isWinner: bid.isWinner,
+      isClaimed: bid.isClaimed,
+    }));
     jsonExport(postsForExport, (_, csv: string) => {
       downloadCSV(csv, 'participants');
     });
@@ -232,7 +230,7 @@ const Participants = () => {
       <ListToolbar
         actions={<ExportButton maxResults={0} exporter={exporter} />}
       />
-      <ArrayField source='bids'>
+      <ArrayField source='bids' sortBy='position'>
         <Datagrid bulkActionButtons={false}>
           <TextField source='position' />
           <TextField source='user.id' />
