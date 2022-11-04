@@ -166,6 +166,7 @@ export const generateService = (user: ContextUser) => ({
         model: AuctionBid,
         as: 'bids',
         include: [User],
+        order: ['position', 'asc'],
       },
     });
     auction.bids.forEach(
