@@ -21,6 +21,10 @@ import {
   FunctionField,
   useTranslate,
   email,
+  Toolbar,
+  SaveButton,
+  DeleteWithConfirmButton,
+  ToolbarProps,
 } from 'react-admin';
 import { chains } from 'util/chain';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
@@ -132,10 +136,24 @@ const schema = yup
   })
   .required();
 
+const EditToolbar = (props: ToolbarProps) => {
+  const record = useRecordContext();
+
+  return (
+    <Toolbar
+      sx={{ display: 'flex', justifyContent: 'space-between' }}
+      {...props}
+    >
+      <SaveButton />
+      <DeleteWithConfirmButton translateOptions={{ name: record.title }} />
+    </Toolbar>
+  );
+};
+
 const AuctionForm = () => {
   const translate = useTranslate();
   return (
-    <SimpleForm resolver={yupResolver(schema)}>
+    <SimpleForm resolver={yupResolver(schema)} toolbar={<EditToolbar />}>
       <Typography variant='h6' gutterBottom>
         {translate('resources.auctions.name')}
       </Typography>
