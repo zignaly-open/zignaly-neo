@@ -230,7 +230,7 @@ const Participants = () => {
       <ListToolbar
         actions={<ExportButton maxResults={0} exporter={exporter} />}
       />
-      <ArrayField source='bids' sortBy='position'>
+      <ArrayField source='bids'>
         <Datagrid bulkActionButtons={false}>
           <TextField source='position' />
           <TextField source='user.id' />
