@@ -1,4 +1,7 @@
-import { AuctionType } from '@zignaly-open/raffles-shared/types';
+import {
+  AuctionBidType,
+  AuctionType,
+} from '@zignaly-open/raffles-shared/types';
 import { ContextUser, ResourceOptions, TransactionType } from '../../types';
 import { User } from '../users/model';
 import { Auction, AuctionBid } from './model';
@@ -156,15 +159,19 @@ export const generateService = (user: ContextUser) => ({
     return getAuctionsWithBids(null, asAdmin || user, data);
   },
 
-  getById: (id: number) => {
+  getById: async (id: number) => {
     checkAdmin(user);
-    return Auction.findByPk(id, {
+    const auction = await Auction.findByPk(id, {
       include: {
         model: AuctionBid,
         as: 'bids',
         include: [User],
       },
     });
+    auction.bids.forEach(
+      (b: AuctionBidType) => (b.isClaimed = Boolean(b.claimTransactionId)),
+    );
+    return auction;
   },
 
   count: async (data: ResourceOptions, asAdmin = false) => {
