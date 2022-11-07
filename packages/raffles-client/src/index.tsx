@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import './util/i18next';
 import reportWebVitals from './reportWebVitals';
-import { HelmetProvider } from 'react-helmet-async';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import EntryPoint from './EntryPoint';
 const AdminEntryPoint = React.lazy(() => import('./admin/AdminEntryPoint'));
@@ -14,6 +14,22 @@ ReactDOM.render(
   <React.StrictMode>
     <React.Suspense fallback={null}>
       <HelmetProvider>
+        <Helmet>
+          {process.env.NODE_ENV === 'production' && (
+            <>
+              <script
+                async
+                src='https://www.googletagmanager.com/gtag/js?id=UA-123818598-1'
+              ></script>
+              <script>
+                {`window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', 'UA-123818598-1');`}
+              </script>
+            </>
+          )}
+        </Helmet>
         <BrowserRouter>
           <Routes>
             <Route path='/' element={<EntryPoint />} />
