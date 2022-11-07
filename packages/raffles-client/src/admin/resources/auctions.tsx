@@ -1,5 +1,5 @@
 import { EventNote } from '@mui/icons-material';
-import { Box, Card, CardMedia, Chip, Typography } from '@mui/material';
+import { Box, Chip, Typography } from '@mui/material';
 import MarkdownInput from '../components/MarkdownInput';
 import React from 'react';
 import {
@@ -96,16 +96,11 @@ export const AuctionList = () => (
 const Poster = () => {
   const record = useRecordContext<AuctionType>();
   if (!record) return null;
-  return (
-    <Card sx={{ display: 'inline-block' }}>
-      <CardMedia
-        component='img'
-        image={record.imageUrl}
-        alt=''
-        sx={{ maxWidth: '42em', maxHeight: '15em' }}
-      />
-    </Card>
-  );
+  return record.imageUrl ? (
+    <Box mb={1}>
+      <img src={record.imageUrl} alt='' />
+    </Box>
+  ) : null;
 };
 
 const schema = yup
