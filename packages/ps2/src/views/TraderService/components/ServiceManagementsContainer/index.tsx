@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useTheme } from 'styled-components';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -10,7 +9,6 @@ import {
   TextButton,
   Typography,
 } from '@zignaly-open/ui';
-import Theme from '@zignaly-open/ui/lib/theme/theme';
 import {
   BottomContainer,
   Box,
@@ -43,9 +41,10 @@ import {
   TraderServiceManagement,
 } from '../../../../apis/service/types';
 import { useZModal } from '../../../../components/ZModal/use';
+import { useTheme } from '@mui/material';
 
 function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
-  const theme = useTheme() as Theme;
+  const theme = useTheme();
   const endpoints = [
     useServiceDetails(serviceId),
     useTraderServiceManagement(serviceId),
@@ -127,7 +126,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 <ArrowLeftIcon
                   height={24}
                   width={24}
-                  color={theme.neutral600}
+                  color={theme.palette.neutral600}
                 />
                 <HorizontalConnection />
                 <Button
@@ -140,7 +139,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 <ArrowRightIcon
                   height={24}
                   width={24}
-                  color={theme.neutral600}
+                  color={theme.palette.neutral600}
                 />
               </MiddleContainer>
               <Box>
@@ -177,7 +176,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                         <EditPenIcon
                           height={16}
                           width={16}
-                          color={theme.neutral300}
+                          color={theme.palette.neutral300}
                         />
                       }
                       caption={t('action:edit')}

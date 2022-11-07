@@ -92,7 +92,7 @@ declare module "@mui/material/Button" {
 }
 
 declare module "@mui/material/SvgIcon" {
-  interface SvgIconPropsColorOverrides {
+  export interface SvgIconPropsColorOverrides {
     white: true;
     neutral800: true;
     neutral750: true;

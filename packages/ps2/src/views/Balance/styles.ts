@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material';
 
-export const Header = styled.div`
+export const Header = styled('div')`
   display: flex;
   align-items: center;
   justify-content: center;

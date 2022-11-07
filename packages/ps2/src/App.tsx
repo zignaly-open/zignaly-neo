@@ -16,8 +16,6 @@ import CenteredLoader from './components/CenteredLoader';
 import Header from './components/Navigation/Header';
 import UpdateChecker from './components/Navigation/UpdateChecker';
 
-const augmentedTheme = { ...dark, ...theme };
-
 if (
   process.env.NODE_ENV === 'production' &&
   process.env.REACT_APP_SENTRY_RELEASE &&
@@ -40,7 +38,7 @@ function App() {
     >
       <Provider store={store}>
         <ThemeProvider theme={dark}>
-          <ThemeProviderMui theme={augmentedTheme}>
+          <ThemeProviderMui theme={theme}>
             <GlobalStyle />
             <ToastContainer
               position='top-right'

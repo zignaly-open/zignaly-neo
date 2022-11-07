@@ -1,8 +1,8 @@
+import { styled } from '@mui/material';
 import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 
 const AnchorLink = styled(Link)`
-  color: ${(props) => props.theme.links};
+  color: ${(props) => props.theme.palette.links};
 
   &:hover {
     text-decoration: underline;

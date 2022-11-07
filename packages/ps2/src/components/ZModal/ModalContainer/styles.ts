@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components';
+import { styled, css } from '@mui/material';
 import { styledIf, Typography } from '@zignaly-open/ui';
 
-export const Layout = styled.div<{ width: number }>`
+export const Layout = styled('div')<{ width: number }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -18,24 +18,21 @@ export const Layout = styled.div<{ width: number }>`
   user-select: none;
 `;
 
-export const Title = styled(Typography).attrs({
-  variant: 'h1',
-  color: 'neutral100',
-})`
+export const Title = styled(Typography)`
   display: flex;
   justify-content: space-between;
 `;
 
-export const Body = styled.div`
+export const Body = styled('div')`
   font-size: 14px;
   text-align: left;
   display: flex;
   flex-direction: column;
   width: 100%;
-  color: ${({ theme }) => theme.neutral200};
+  color: ${({ theme }) => theme.palette.neutral200};
 `;
 
-export const Header = styled.div`
+export const Header = styled('div')`
   display: flex;
   z-index: 999;
   position: relative;
@@ -46,7 +43,7 @@ export const Header = styled.div`
   margin-bottom: 14px;
 `;
 
-export const HeaderButton = styled.button`
+export const HeaderButton = styled('button')`
   border: 0;
   padding: 0;
   margin: 0;
@@ -57,12 +54,12 @@ export const HeaderButton = styled.button`
   cursor: pointer;
   ${({ theme }) => `
     svg { 
-      fill: ${theme.neutral300};
+      fill: ${theme.palette.neutral300};
     }
   `}
 `;
 
-export const Inline = styled.div<{ align?: string }>`
+export const Inline = styled('div')<{ align?: string }>`
   ${({ align }) => `
     ${styledIf(
       align === 'center',
@@ -78,7 +75,7 @@ export const Inline = styled.div<{ align?: string }>`
   gap: 12px;
 `;
 
-export const ModalActions = styled.div`
+export const ModalActions = styled('div')`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -88,7 +85,7 @@ export const ModalActions = styled.div`
 
   ${({ theme }) => `
     svg {
-      fill: ${theme.links};
+      fill: ${theme.palette.links};
     }
   `}
 `;

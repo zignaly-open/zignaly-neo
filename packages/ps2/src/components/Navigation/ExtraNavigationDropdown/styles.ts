@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material';
 import { GlobeLanguages, styledIf, Typography } from '@zignaly-open/ui';
 
-export const NavLink = styled.span<{ active?: boolean; disabled?: boolean }>`
+export const NavLink = styled('a')<{ active?: boolean; disabled?: boolean }>`
   color: #706f82;
   font-weight: 500;
   font-size: 14px;
@@ -39,7 +39,7 @@ export const NavLink = styled.span<{ active?: boolean; disabled?: boolean }>`
   `}
 `;
 
-export const NavList = styled.div`
+export const NavList = styled('div')`
   display: flex;
   flex-direction: column;
 
@@ -57,7 +57,7 @@ export const NavList = styled.div`
   }
 `;
 
-export const Networks = styled.div`
+export const Networks = styled('div')`
   display: grid;
   max-width: 185px;
   grid-template-columns: repeat(5, minmax(0%, 100%));

@@ -78,7 +78,7 @@ import MenuDropDown from "./components/navigation/MenuDropDown";
 import ZigsBalance from "./components/navigation/Header/components/ZigsBalance";
 import BrandImage from "./components/navigation/Header/components/BrandImage";
 
-import { dark, light } from "theme";
+export * from "./theme";
 import ThemeProvider from "utils/ThemeProvider";
 import { sortByValue } from "utils/numbers";
 import { HeaderLinksContainer } from "components/navigation/Header/styles";
@@ -146,8 +146,6 @@ export {
    * =-=-=-=-=-=-=-=
    */
   ThemeProvider,
-  dark,
-  light,
   sortByValue,
   styledIf,
 };

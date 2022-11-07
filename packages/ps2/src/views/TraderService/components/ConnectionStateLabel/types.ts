@@ -1,4 +1,4 @@
-import Theme from '@zignaly-open/ui/lib/theme/theme';
+import { darkMui } from '@zignaly-open/ui';
 
 export const ConnectionStateLabelId = {
   CONNECTED: 'invested',
@@ -20,14 +20,14 @@ export const connectionStateName = {
   [ConnectionStateLabelId.OWNER]: 'status.owner',
 };
 
-export const connectionStateColor = (theme: Theme) => ({
-  [ConnectionStateLabelId.CONNECTED]: theme.greenGraph,
-  [ConnectionStateLabelId.PENDING]: theme.neutral175,
-  [ConnectionStateLabelId.SOFT_DISCONNECT]: theme.yellow,
-  [ConnectionStateLabelId.HARD_DISCONNECT]: theme.redGraphOrError,
-  [ConnectionStateLabelId.SUSPENDED]: theme.red,
-  [ConnectionStateLabelId.DISCONNECTED]: theme.neutral400,
-  [ConnectionStateLabelId.OWNER]: theme.neutral100,
+export const connectionStateColor = (theme: typeof darkMui) => ({
+  [ConnectionStateLabelId.CONNECTED]: theme.palette.greenGraph,
+  [ConnectionStateLabelId.PENDING]: theme.palette.neutral175,
+  [ConnectionStateLabelId.SOFT_DISCONNECT]: theme.palette.yellow,
+  [ConnectionStateLabelId.HARD_DISCONNECT]: theme.palette.redGraphOrError,
+  [ConnectionStateLabelId.SUSPENDED]: theme.palette.red,
+  [ConnectionStateLabelId.DISCONNECTED]: theme.palette.neutral400,
+  [ConnectionStateLabelId.OWNER]: theme.palette.neutral100,
 });
 
 export type ConnectionStateLabelProps = {

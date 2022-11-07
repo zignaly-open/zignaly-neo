@@ -1,7 +1,6 @@
 import React from 'react';
-import { useTheme } from 'styled-components';
+import { useTheme } from '@mui/material';
 import { Layout, Header, Title, Body, HeaderButton, Inline } from './styles';
-import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { CloseIcon, ArrowLeftIcon } from '@zignaly-open/ui';
 import { ModalContainerProps } from './types';
 
@@ -14,7 +13,7 @@ function ModalContainer({
   onClickClose = null,
   customHeaderAction = null,
 }: ModalContainerProps) {
-  const theme = useTheme() as Theme;
+  const theme = useTheme();
 
   return (
     <Layout width={width}>
@@ -25,17 +24,19 @@ function ModalContainer({
               <ArrowLeftIcon
                 width={'32px'}
                 height={'32px'}
-                color={theme.neutral300}
+                color={theme.palette.neutral300}
               />
             </HeaderButton>
           )}
-          <Title>{title}</Title>
+          <Title variant='h1' color='neutral100'>
+            {title}
+          </Title>
         </Inline>
         {!customHeaderAction
           ? onClickClose &&
             typeof onClickClose === 'function' && (
               <HeaderButton onClick={onClickClose}>
-                <CloseIcon color={theme.neutral300} />
+                <CloseIcon color={theme.palette.neutral300} />
               </HeaderButton>
             )
           : customHeaderAction}

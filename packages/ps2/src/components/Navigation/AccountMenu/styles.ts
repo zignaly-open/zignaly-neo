@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material';
 import { Typography } from '@zignaly-open/ui';
 
-export const NavList = styled.div`
+export const NavList = styled('div')`
   display: flex;
   flex-direction: column;
 
@@ -19,7 +19,7 @@ export const NavList = styled.div`
   }
 `;
 
-export const LoginButton = styled.span`
+export const LoginButton = styled('span')`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -29,7 +29,7 @@ export const LoginButton = styled.span`
 
   ${({ theme }) => `
     svg {
-      color: ${theme.neutral300};
+      color: ${theme.palette.neutral300};
     }
   `}
 `;
@@ -41,7 +41,7 @@ export const AccountName = styled(Typography)`
   text-overflow: ellipsis;
 `;
 
-export const AccountDropdown = styled.div`
+export const AccountDropdown = styled('div')`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -57,7 +57,7 @@ export const AccountDropdown = styled.div`
   }
 `;
 
-export const LogoutButtonWrap = styled.div`
+export const LogoutButtonWrap = styled('div')`
   & > button {
     width: 100%;
   }

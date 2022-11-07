@@ -79,7 +79,9 @@ function InvestedFromOtherAccounts({
                     <TextButton
                       leftElement={
                         <CompareArrowsIcon
-                          color='links'
+                          sx={{
+                            color: (theme) => theme.palette.links,
+                          }}
                           width={16}
                           height={16}
                         />

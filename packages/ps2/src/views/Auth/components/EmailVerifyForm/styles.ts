@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material';
 
-export const Layout = styled.form`
+export const Layout = styled('form')`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,7 +8,7 @@ export const Layout = styled.form`
   flex-direction: column;
 `;
 
-export const Field = styled.fieldset`
+export const Field = styled('fieldset')`
   border: 0;
   padding: 0;
   text-align: center;
