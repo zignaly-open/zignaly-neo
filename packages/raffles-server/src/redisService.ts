@@ -25,10 +25,12 @@ const content = fs.readFileSync(path.resolve(__dirname, 'functions.lua'));
 redis.function('LOAD', 'REPLACE', content);
 
 const BASE_UNIT = 10 ** 3;
-const strToUnit = (value: string) => Math.floor(parseFloat(value) * BASE_UNIT);
-const unitToStr = (value: string, decimals = 2) =>
+export const strToUnit = (value: string) =>
+  Math.floor(parseFloat(value) * BASE_UNIT);
+export const unitToStr = (value: string, decimals = 2) =>
   (parseFloat(value) / BASE_UNIT).toFixed(decimals);
-const unitToBN = (value: string) => new BN(parseFloat(value) / BASE_UNIT);
+export const unitToBN = (value: string) =>
+  new BN(parseFloat(value) / BASE_UNIT);
 
 const prepareAuction = async (auction: Auction) => {
   return redis.hset(

@@ -115,28 +115,37 @@ const schema = yup
     startDate: yup.date(),
     expiresAt: yup
       .date()
-      .when('startDate', (startDate, s) =>
-        s.min(
-          new Date(startDate.getTime() + 1000),
-          'errors.date.expAfterStart',
-        ),
+      .when(
+        'startDate',
+        (startDate, s) =>
+          startDate &&
+          s.min(
+            new Date(startDate.getTime() + 1000),
+            'errors.date.expAfterStart',
+          ),
       ),
     maxExpiryDate: yup
       .date()
-      .when('expiresAt', (expiresAt, s) =>
-        s.min(
-          new Date(expiresAt.getTime() + 1000),
-          'errors.date.maxExpAfterExp',
-        ),
+      .when(
+        'expiresAt',
+        (expiresAt, s) =>
+          expiresAt &&
+          s.min(
+            new Date(expiresAt.getTime() + 1000),
+            'errors.date.maxExpAfterExp',
+          ),
       ),
     maxClaimDate: yup
       .date()
       .nullable()
-      .when('startDate', (startDate, s) =>
-        s.min(
-          new Date(startDate.getTime() + 1000),
-          'errors.date.claimDateAfterMaxExp',
-        ),
+      .when(
+        'startDate',
+        (startDate, s) =>
+          startDate &&
+          s.min(
+            new Date(startDate.getTime() + 1000),
+            'errors.date.claimDateAfterMaxExp',
+          ),
       ),
   })
   .required();
