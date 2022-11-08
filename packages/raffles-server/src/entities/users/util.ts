@@ -17,6 +17,7 @@ export function signJwtToken(user: User) {
         payload: {
           id: user.id,
           publicAddress: user.publicAddress,
+          isAdmin: user.isAdmin,
         },
       },
       secret,

@@ -36,7 +36,10 @@ export async function createAuction(
     currentBid: '100',
     bidStep: '1',
     bidFee: '1',
-    basketItems: [],
+    startDate: Date.now(),
+    expiresAt: Date.now() + 7 * 24 * 3600_000,
+    maxExpiryDate: Date.now() + 8 * 24 * 3600_000,
+    maxClaimDate: Date.now() + 10 * 24 * 3600_000,
     ...overrides,
   });
   if (saveToRedis) {
@@ -67,6 +70,7 @@ export async function getAuctions(
     items: allAuctions(filter: $filter) {
       id
       title
+      startDate
       expiresAt
       currentBid
       website
@@ -396,6 +400,39 @@ export async function userCodesRedemptions(token: string): Promise<any> {
       }
     }
   }`,
+    token,
+  );
+}
+
+export async function updateAuction(
+  token: string,
+  { id, title }: Partial<Auction>,
+): Promise<any> {
+  return makeRequest(
+    `
+    mutation {
+      data: updateAuction(
+        id: ${id}
+        title: "${title}"
+      ) {
+        id
+        title
+      }
+    }
+  `,
+    token,
+  );
+}
+
+export async function deleteAuction(token: string, id: number): Promise<any> {
+  return makeRequest(
+    `
+    mutation {
+      data: deleteAuction(
+        id: ${id}
+      )
+    }
+  `,
     token,
   );
 }

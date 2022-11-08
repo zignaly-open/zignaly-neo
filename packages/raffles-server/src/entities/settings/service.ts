@@ -1,4 +1,6 @@
 import { Op } from 'sequelize';
+import { ContextUser } from '../../types';
+import { checkAdmin } from '../../util/admin';
 import {
   DEFAULT_BENEFIT_DEPOSIT_FACTOR,
   DEFAULT_BENEFIT_DIRECT,
@@ -15,7 +17,7 @@ import { CodeSettings } from './types';
 
 const blackList = [CONFIG_LAST_PROCESSED_BLOCK];
 
-export const getCodeSettings = async (): Promise<CodeSettings> => {
+export const getCodeSettings = async () => {
   const settings = await Setting.findAll({
     where: { key: { [Op.notIn]: blackList } },
   });
@@ -35,32 +37,46 @@ export const getCodeSettings = async (): Promise<CodeSettings> => {
   );
 };
 
-export const updateCodeSettings = async (data: CodeSettings) => {
-  const settings = Object.keys(data)
-    .filter((key) => !blackList.includes(key))
-    .map((key) => ({
-      key,
-      value: data[key],
-    }));
-  await Setting.bulkCreate(settings, {
-    updateOnDuplicate: ['value'],
-  });
+export const generateService = (user: ContextUser) => {
+  const getAll = async (): Promise<CodeSettings> => {
+    checkAdmin(user);
+    return getCodeSettings();
+  };
 
-  // Update existing user default codes
-  await Code.update(
-    {
-      benefitDirect: data.benefitDirect,
-      rewardDirect: data.rewardDirect,
-      reqMinimumDeposit: data.reqMinimumDeposit,
-      maxTotalBenefits: data.maxTotalBenefits,
-      maxTotalRewards: data.maxTotalRewards,
-      benefitDepositFactor: data.benefitDepositFactor,
-      rewardDepositFactor: data.rewardDepositFactor,
-    },
-    {
-      where: { isDefault: true },
-    },
-  );
+  const update = async (data: CodeSettings) => {
+    checkAdmin(user);
 
-  return getCodeSettings();
+    const settings = Object.keys(data)
+      .filter((key) => !blackList.includes(key))
+      .map((key) => ({
+        key,
+        value: data[key],
+      }));
+    await Setting.bulkCreate(settings, {
+      updateOnDuplicate: ['value'],
+    });
+
+    // Update existing user default codes
+    await Code.update(
+      {
+        benefitDirect: data.benefitDirect,
+        rewardDirect: data.rewardDirect,
+        reqMinimumDeposit: data.reqMinimumDeposit,
+        maxTotalBenefits: data.maxTotalBenefits,
+        maxTotalRewards: data.maxTotalRewards,
+        benefitDepositFactor: data.benefitDepositFactor,
+        rewardDepositFactor: data.rewardDepositFactor,
+      },
+      {
+        where: { isDefault: true },
+      },
+    );
+
+    return getCodeSettings();
+  };
+
+  return {
+    getAll,
+    update,
+  };
 };

@@ -17,6 +17,7 @@ export default {
         last_month: 'Last month',
         earlier: 'Earlier',
       },
+      noParticipants: 'No participants yet',
     },
     codes: {
       name: 'Code',
@@ -29,6 +30,14 @@ export default {
     settings: {
       defaultCodeBenefit: 'Default User Code Benefit',
       defaultCodeReward: 'Default User Code Reward',
+    },
+  },
+  errors: {
+    date: {
+      invalid: 'Date is invalid',
+      expAfterStart: 'Expiration date must be after start date',
+      maxExpAfterExp: 'Max Expiration must be after expiration',
+      claimDateAfterMaxExp: 'Max claim date must be after max expiration',
     },
   },
 };

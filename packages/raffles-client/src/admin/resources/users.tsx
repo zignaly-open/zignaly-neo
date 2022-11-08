@@ -14,7 +14,7 @@ const userFilters = [<SearchInput source='q' alwaysOn key={0} />];
 
 export const UserList = () => (
   <List sort={{ field: 'id', order: 'desc' }} filters={userFilters}>
-    <Datagrid>
+    <Datagrid bulkActionButtons={false}>
       <TextField source='id' />
       <TextField source='username' />
       <TextField source='discordName' />

@@ -15,20 +15,14 @@ import { format } from 'date-fns';
 import { checkAdmin } from '../../util/admin';
 import { Op } from 'sequelize';
 
-export const getCode = async (user: ContextUser, code: string) => {
-  await checkAdmin(user?.id);
-  return Code.findByPk(code, {
-    include: [User],
-  });
-};
-
 const applyFilters = (filter: ResourceOptions['filter'] = {}) => {
-  const { type, ...restFilters } = filter;
+  const { type, userId, code, ...restFilters } = filter;
 
   return {
     ...restFilters,
-    // If no userId filter, look for type
-    ...(!filter.userId && {
+    ...(code && { code: { [Op.iLike]: `%${code}%` } }),
+    // If no userId filter, look for type filter
+    ...(!userId && {
       userId:
         type === 'user'
           ? {
@@ -37,160 +31,6 @@ const applyFilters = (filter: ResourceOptions['filter'] = {}) => {
           : null,
     }),
   };
-};
-
-export const getCodes = async (
-  user?: ContextUser,
-  sortField = 'createdAt',
-  sortOrder = 'desc',
-  page = 0,
-  perPage = 25,
-  filter?: ResourceOptions['filter'],
-) => {
-  await checkAdmin(user?.id);
-
-  return Code.findAll({
-    where: applyFilters(filter),
-    order: [[sortField, sortOrder]],
-    include: [User],
-    limit: perPage,
-    offset: page * perPage,
-  });
-};
-
-export const countCodes = async (
-  user?: ContextUser,
-  filter?: ResourceOptions['filter'],
-) => {
-  await checkAdmin(user?.id);
-
-  const count = await Code.count({
-    where: applyFilters(filter),
-  });
-  return { count };
-};
-
-export const updateCode = async (user: ContextUser, data: Partial<Code>) => {
-  await checkAdmin(user?.id);
-
-  const [, [code]] = await Code.update(data, {
-    where: { code: data.id },
-    returning: true,
-  });
-  if (!code) throw new Error('Code Not Found');
-
-  return code;
-};
-
-export const createCode = async (user: ContextUser, data: Partial<Code>) => {
-  await checkAdmin(user?.id);
-
-  const code = await Code.create(data, { returning: true });
-  if (!code) throw new Error("Can't create code");
-
-  return code;
-};
-
-export const deleteCode = async (user: ContextUser, code: string) => {
-  await checkAdmin(user?.id);
-  return Boolean(
-    await Code.destroy({
-      where: {
-        code,
-      },
-    }),
-  );
-};
-
-export const check = async (codeName: string, user: ContextUser) => {
-  const code = await Code.findByPk(codeName?.toUpperCase());
-  if (!code) {
-    throw new Error('Code not found.');
-  }
-
-  if (code.userId === user.id) {
-    throw new Error('Not allowed.');
-  }
-
-  if (code.welcomeType) {
-    const redeemed = await CodeRedemption.count({
-      where: { invitedId: user.id, '$codeInfo.welcomeType$': true },
-      include: [Code],
-    });
-
-    if (redeemed > 0) {
-      throw new Error('You have already redeemed a welcome code.');
-    }
-  } else {
-    const redeemed = await CodeRedemption.count({
-      where: { invitedId: user.id, code: code.code },
-    });
-
-    if (redeemed > 0) {
-      throw new Error('You have already redeemed this code.');
-    }
-  }
-
-  const balance = parseFloat(await getUserBalance(user.publicAddress));
-  const deposits = await getDepositsTotal(code, user);
-
-  if (code.reqMinimumBalance > 0 && balance < code.reqMinimumBalance) {
-    throw new Error(
-      `You need a balance of at least ${code.reqMinimumBalance}.`,
-    );
-  }
-
-  if (code.reqMinimumDeposit > 0 && deposits < code.reqMinimumDeposit) {
-    throw new Error(
-      `You need to deposit at least ${code.reqMinimumDeposit} ZIG.${
-        code.reqDepositFrom
-          ? `\nOnly deposits after ${format(
-              code.reqDepositFrom,
-              'yyyy-MM-dd hh:mmaaa',
-            )} UTC are valid.`
-          : ''
-      }`,
-    );
-  }
-
-  if (code.reqMinAuctions > 0) {
-    const auctionsCount = await AuctionBid.count({
-      where: { userId: user.id },
-    });
-    if (auctionsCount < code.reqMinAuctions) {
-      throw new Error(
-        `You need to participate in at least ${code.reqMinAuctions} auctions.`,
-      );
-    }
-  }
-
-  if (code.reqWalletType) {
-    const userInfo = await User.findByPk(user.id);
-    if (userInfo.walletType !== code.reqWalletType) {
-      throw new Error(`You need a ${code.reqWalletType} wallet.`);
-    }
-  }
-
-  if (code.maxRedemptions > 0) {
-    if (code.currentRedemptions >= code.maxRedemptions) {
-      throw new Error('Maximum redemptions reached.');
-    }
-  }
-
-  if (code.startDate && new Date() < code.startDate) {
-    throw new Error(
-      `The code will start working on ${format(
-        code.startDate,
-        'yyyy-MM-dd hh:mmaaa',
-      )} UTC.`,
-    );
-  }
-
-  if (code.endDate && new Date() > code.endDate) {
-    throw new Error('The code is expired.');
-  }
-
-  return { code, balance, deposits };
 };
 
 const getDepositsTotal = async (code: Code, user: ContextUser) => {
@@ -245,69 +85,243 @@ const calculateInviterBenefit = (
   return inviterBenefit.toString();
 };
 
-export const redeem = async (codeName: string, user: ContextUser) => {
-  const { code, balance, deposits } = await check(codeName, user);
-  const invitedBenefit = await calculateInvitedBenefit(code, balance, deposits);
-  const inviterBenefit = calculateInviterBenefit(
-    code,
-    invitedBenefit,
-    deposits,
-  );
+export const generateService = (user: ContextUser) => {
+  const getAll = async ({
+    sortField = 'id',
+    sortOrder = 'desc',
+    page = 0,
+    perPage = 25,
+    filter,
+  }: ResourceOptions) => {
+    checkAdmin(user);
 
-  if (parseFloat(invitedBenefit) > 0) {
-    await internalTransfer(
-      zignalySystemId,
-      user.publicAddress,
-      invitedBenefit,
-      TransactionType.RedeemCode,
-      true,
-    );
-    console.log(`User ${user.id} redeemed ${invitedBenefit} ZIGs`);
-    await emitBalanceChanged(user);
-  }
+    return Code.findAll({
+      where: applyFilters(filter),
+      order: [[sortField, sortOrder]],
+      include: [User],
+      limit: perPage,
+      offset: page * perPage,
+    });
+  };
 
-  if (parseFloat(inviterBenefit) > 0) {
-    try {
-      const inviter = await User.findByPk(code.userId);
-      await internalTransfer(
-        zignalySystemId,
-        inviter.publicAddress,
-        inviterBenefit,
-        TransactionType.ReferralCode,
-        true,
-      );
-      console.log(`User ${inviter.id} got rewarded ${inviterBenefit} ZIGs`);
-      await emitBalanceChanged(inviter);
-    } catch (e) {
-      console.error(
-        `Couldn't transfer ${inviterBenefit} to ${code.userId}, ${e}`,
+  const getById = async (code: string) => {
+    checkAdmin(user);
+    return Code.findByPk(code);
+  };
+
+  const count = async ({ filter }: ResourceOptions) => {
+    checkAdmin(user);
+
+    const count = await Code.count({
+      where: applyFilters(filter),
+    });
+    return { count };
+  };
+
+  const getUserCodes = async () => {
+    return Code.findAll({ where: { userId: user.id } });
+  };
+
+  const getUserCodesRedemptions = async () => {
+    return CodeRedemption.findAll({
+      where: { inviterId: user.id },
+      include: { model: User, as: 'invited' },
+    });
+  };
+
+  const checkCode = async (codeName: string) => {
+    const code = await Code.findByPk(codeName?.toUpperCase());
+    if (!code) {
+      throw new Error('Code not found.');
+    }
+
+    if (code.userId === user.id) {
+      throw new Error('Not allowed.');
+    }
+
+    if (code.welcomeType) {
+      const redeemed = await CodeRedemption.count({
+        where: { invitedId: user.id, '$codeInfo.welcomeType$': true },
+        include: [Code],
+      });
+
+      if (redeemed > 0) {
+        throw new Error('You have already redeemed a welcome code.');
+      }
+    } else {
+      const redeemed = await CodeRedemption.count({
+        where: { invitedId: user.id, code: code.code },
+      });
+
+      if (redeemed > 0) {
+        throw new Error('You have already redeemed this code.');
+      }
+    }
+
+    const balance = parseFloat(await getUserBalance(user.publicAddress));
+    const deposits = await getDepositsTotal(code, user);
+
+    if (code.reqMinimumBalance > 0 && balance < code.reqMinimumBalance) {
+      throw new Error(
+        `You need a balance of at least ${code.reqMinimumBalance}.`,
       );
     }
-  }
 
-  await CodeRedemption.create({
-    code: codeName,
-    invitedId: user.id,
-    inviterId: code.userId,
-    invitedBenefit,
-    inviterBenefit,
-  });
+    if (code.reqMinimumDeposit > 0 && deposits < code.reqMinimumDeposit) {
+      throw new Error(
+        `You need to deposit at least ${code.reqMinimumDeposit} ZIG.${
+          code.reqDepositFrom
+            ? `\nOnly deposits after ${format(
+                code.reqDepositFrom,
+                'yyyy-MM-dd hh:mmaaa',
+              )} UTC are valid.`
+            : ''
+        }`,
+      );
+    }
 
-  await Code.update(
-    { currentRedemptions: sequelize.literal('"currentRedemptions" + 1') },
-    { where: { code: code.code } },
-  );
+    if (code.reqMinAuctions > 0) {
+      const auctionsCount = await AuctionBid.count({
+        where: { userId: user.id },
+      });
+      if (auctionsCount < code.reqMinAuctions) {
+        throw new Error(
+          `You need to participate in at least ${code.reqMinAuctions} auctions.`,
+        );
+      }
+    }
 
-  return invitedBenefit;
-};
+    if (code.reqWalletType) {
+      const userInfo = await User.findByPk(user.id);
+      if (userInfo.walletType !== code.reqWalletType) {
+        throw new Error(`You need a ${code.reqWalletType} wallet.`);
+      }
+    }
 
-export const userCodes = async (user: ContextUser) => {
-  return Code.findAll({ where: { userId: user.id } });
-};
+    if (code.maxRedemptions > 0) {
+      if (code.currentRedemptions >= code.maxRedemptions) {
+        throw new Error('Maximum redemptions reached.');
+      }
+    }
 
-export const userCodesRedemptions = async (user: ContextUser) => {
-  return CodeRedemption.findAll({
-    where: { inviterId: user.id },
-    include: { model: User, as: 'invited' },
-  });
+    if (code.startDate && new Date() < code.startDate) {
+      throw new Error(
+        `The code will start working on ${format(
+          code.startDate,
+          'yyyy-MM-dd hh:mmaaa',
+        )} UTC.`,
+      );
+    }
+
+    if (code.endDate && new Date() > code.endDate) {
+      throw new Error('The code is expired.');
+    }
+
+    return { code, balance, deposits };
+  };
+
+  const redeem = async (codeName: string) => {
+    const { code, balance, deposits } = await checkCode(codeName);
+    const invitedBenefit = await calculateInvitedBenefit(
+      code,
+      balance,
+      deposits,
+    );
+    const inviterBenefit = calculateInviterBenefit(
+      code,
+      invitedBenefit,
+      deposits,
+    );
+
+    if (parseFloat(invitedBenefit) > 0) {
+      await internalTransfer(
+        zignalySystemId,
+        user.publicAddress,
+        invitedBenefit,
+        TransactionType.RedeemCode,
+        true,
+      );
+      console.log(`User ${user.id} redeemed ${invitedBenefit} ZIGs`);
+      await emitBalanceChanged(user);
+    }
+
+    if (parseFloat(inviterBenefit) > 0) {
+      try {
+        const inviter = await User.findByPk(code.userId);
+        await internalTransfer(
+          zignalySystemId,
+          inviter.publicAddress,
+          inviterBenefit,
+          TransactionType.ReferralCode,
+          true,
+        );
+        console.log(`User ${inviter.id} got rewarded ${inviterBenefit} ZIGs`);
+        await emitBalanceChanged(inviter);
+      } catch (e) {
+        console.error(
+          `Couldn't transfer ${inviterBenefit} to ${code.userId}, ${e}`,
+        );
+      }
+    }
+
+    await CodeRedemption.create({
+      code: codeName,
+      invitedId: user.id,
+      inviterId: code.userId,
+      invitedBenefit,
+      inviterBenefit,
+    });
+
+    await Code.update(
+      { currentRedemptions: sequelize.literal('"currentRedemptions" + 1') },
+      { where: { code: code.code } },
+    );
+
+    return invitedBenefit;
+  };
+
+  const create = async (data: Partial<Code>) => {
+    checkAdmin(user);
+
+    const code = await Code.create(data, { returning: true });
+    if (!code) throw new Error("Can't create code");
+
+    return code;
+  };
+
+  const update = async (data: Partial<Code>) => {
+    checkAdmin(user);
+
+    const [, [code]] = await Code.update(data, {
+      where: { code: data.id },
+      returning: true,
+    });
+    if (!code) throw new Error('Code Not Found');
+
+    return code;
+  };
+
+  const deleteCode = async (code: string) => {
+    checkAdmin(user);
+    return Boolean(
+      await Code.destroy({
+        where: {
+          code,
+        },
+      }),
+    );
+  };
+
+  return {
+    getAll,
+    getById,
+    getUserCodes,
+    getUserCodesRedemptions,
+    count,
+    checkCode,
+    redeem,
+    create,
+    update,
+    delete: deleteCode,
+  };
 };

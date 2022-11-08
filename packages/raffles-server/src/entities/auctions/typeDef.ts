@@ -36,9 +36,12 @@ export const typeDef = gql`
     username: String
     discordName: String
   }
+
   type Bid {
+    isWinner: Boolean
     position: Int
     user: UserInfo
+    isClaimed: Boolean
   }
 
   type Auction {
@@ -77,6 +80,7 @@ export const typeDef = gql`
       sortOrder: String
       filter: AuctionFilter
     ): [Auction]
+
     allAdmAuctions(
       page: Int
       perPage: Int
@@ -84,9 +88,11 @@ export const typeDef = gql`
       sortOrder: String
       filter: AuctionFilter
     ): [AdmAuction]
+
     _allAuctionsMeta(
       filter: AuctionFilter
     ): ListMetadata
+    
     _allAdmAuctionsMeta(
       filter: AuctionFilter
       page: Int

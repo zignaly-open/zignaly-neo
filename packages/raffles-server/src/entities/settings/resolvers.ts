@@ -1,32 +1,16 @@
-import { ApolloContext, ResourceOptions } from '../../types';
-import { checkAdmin } from '../../util/admin';
-import { getCodeSettings, updateCodeSettings } from './service';
+import { ApolloContext } from '../../types';
 import { CodeSettings } from './types';
 
 export const resolvers = {
   Query: {
-    Settings: async (
-      _: any,
-      data: ResourceOptions,
-      { user }: ApolloContext,
-    ) => {
-      await checkAdmin(user?.id);
-      return getCodeSettings();
-    },
+    Settings: async (_: any, __: any, { services }: ApolloContext) =>
+      services.Setting.getAll(),
   },
   Mutation: {
     updateSettings: async (
       _: any,
       data: CodeSettings,
-      { user }: ApolloContext,
-    ) => {
-      await checkAdmin(user?.id);
-      try {
-        return updateCodeSettings(data);
-      } catch (e) {
-        console.error(e);
-        throw e;
-      }
-    },
+      { services }: ApolloContext,
+    ) => services.Setting.update(data),
   },
 };
