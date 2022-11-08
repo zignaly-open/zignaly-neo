@@ -4,6 +4,7 @@ import { ReactComponent as MATICIcon } from 'assets/icons/chains/matic.svg';
 import { ReactComponent as SOLIcon } from 'assets/icons/chains/sol.svg';
 import { ReactComponent as AVAXIcon } from 'assets/icons/chains/avax.svg';
 import { ReactComponent as APTOSIcon } from 'assets/icons/chains/aptos.svg';
+import { ReactComponent as DOGEIcon } from 'assets/icons/chains/dogechain.svg';
 
 export const chains: { [key: string]: { name: string; icon: typeof ETHIcon } } =
   {
@@ -13,4 +14,5 @@ export const chains: { [key: string]: { name: string; icon: typeof ETHIcon } } =
     SOL: { name: 'Solana', icon: SOLIcon },
     AVAX: { name: 'Avalanche', icon: AVAXIcon },
     APTOS: { name: 'Aptos', icon: APTOSIcon },
+    DOGE: { name: 'Dogechain', icon: DOGEIcon },
   };
