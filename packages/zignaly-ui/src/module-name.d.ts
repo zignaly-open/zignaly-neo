@@ -1,24 +1,4 @@
-declare module "@metamask/jazzicon";
-
-type SvgrComponent = React.StatelessComponent<
-  React.SVGAttributes<SVGElement> & { alt?: string; color?: string }
->;
-
-declare module "*.svg" {
-  import * as React from "react";
-
-  export const ReactComponent: React.FunctionComponent<
-    React.SVGProps<SVGSVGElement> & { title?: string; alt?: string }
-  >;
-
-  const src: string;
-  export default src;
-}
-
-declare module "*.svg?url" {
-  const content: any;
-  export default content;
-}
+import { Theme as MuiTheme } from "@mui/material/styles";
 
 declare module "@mui/material/styles" {
   interface CustomPalette {
@@ -56,7 +36,7 @@ declare module "@mui/material/styles" {
 }
 
 declare module "@mui/material/styles/createTheme" {
-  interface Theme extends ThemeZig {}
+  export interface Theme extends ThemeZig {}
 }
 
 declare module "@mui/material/Button" {
@@ -122,8 +102,6 @@ declare module "@mui/material/SvgIcon" {
     successToasterBorder: true;
   }
 }
-
-import { Theme as MuiTheme } from "@mui/material/styles";
 
 declare module "@emotion/react" {
   export interface Theme extends MuiTheme {
