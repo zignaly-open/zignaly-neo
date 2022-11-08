@@ -27,7 +27,8 @@ const ShareCode = (props: ShareCodeProps) => {
     {
       Header: t('direct-reward'),
       accessor: 'rewardDirect',
-      Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
+      Cell: ({ cell: { value } }) =>
+        value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
     },
     {
       Header: t('reward-benefits'),
@@ -48,7 +49,8 @@ const ShareCode = (props: ShareCodeProps) => {
     {
       Header: t('direct-benefits'),
       accessor: 'benefitDirect',
-      Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
+      Cell: ({ cell: { value } }) =>
+        value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
     },
     {
       Header: t('balance-benefits'),
