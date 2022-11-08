@@ -25,7 +25,7 @@ import UserSettingsModal from '../Modals/UserSettings';
 import { useMediaQuery } from '@mui/material';
 import theme from 'theme';
 import { People, Redeem } from '@mui/icons-material';
-import { triggerTz } from 'util/tz';
+import { triggerTz, useTz } from 'util/tz';
 import { getToken } from 'util/token';
 
 const StyledPeopleIcon = styled(People)`
@@ -62,6 +62,7 @@ const Header = () => {
   const logout = useLogout();
   const userRef = useRef<UserType>();
   const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
+  const track = useTz();
 
   const href = window.location.href;
 
@@ -118,21 +119,30 @@ const Header = () => {
                   size='small'
                   caption={t('share-earn')}
                   leftElement={<StyledPeopleIcon />}
-                  onClick={() => showModal(ShareCodeModal)}
+                  onClick={() => {
+                    track('share');
+                    showModal(ShareCodeModal);
+                  }}
                 />
                 <Button
                   variant='secondary'
                   size='small'
                   caption={t('redeem-code')}
                   leftElement={<StyledRedeemIcon />}
-                  onClick={() => showModal(RedeemCodeModal)}
+                  onClick={() => {
+                    track('redeem');
+                    showModal(RedeemCodeModal);
+                  }}
                 />
                 <Button
                   variant='secondary'
                   size='small'
                   caption={t('transfer-coin', { coin: 'ZIG' })}
                   leftElement={<StyledWalletIcon />}
-                  onClick={() => showModal(TransferZigModal)}
+                  onClick={() => {
+                    track('transfer');
+                    showModal(TransferZigModal);
+                  }}
                 />
               </Box>
               <Box ml={{ sm: 0, xs: 1 }}>

@@ -1,3 +1,5 @@
+import useCurrentUser from 'hooks/useCurrentUser';
+
 type tzData = {
   action: string;
   urlReferer?: string;
@@ -56,4 +58,27 @@ export const triggerTz = async (
   } else {
     sendTz(data);
   }
+};
+
+export const composeHash = (originalHash: string, ctaId: string) => {
+  let hash = originalHash;
+  if (ctaId) {
+    hash += `?ctaId=${ctaId}`;
+  }
+  return hash;
+};
+
+/**
+ * Trigger internal tracking event.
+ */
+export const useTz = () => {
+  const { user } = useCurrentUser();
+
+  return (ctaId?: string) => {
+    const urlString = window.location.href;
+    const url = new URL(urlString);
+    const hash = window.location.href.split('#')[1]?.split('?')[0];
+    url.hash = composeHash(hash ?? '', ctaId);
+    triggerTz(url.toString(), user.publicAddress);
+  };
 };
