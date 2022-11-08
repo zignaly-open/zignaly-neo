@@ -1,0 +1,28 @@
+{
+    "404": "404 \/ Sayfa bulunamadı - Zignaly",
+    "dashboard": "Kontrol Panelim - Zignaly",
+    "become-trader": "Trader Olun - Zignaly",
+    "my-balances": "Bakiyelerim - Zignaly",
+    "login": "Giriş - Zignaly",
+    "help": "Yardım - Zignaly",
+    "signup": "Kaydolun - Zignaly",
+    "staking": "Staking - Zignaly",
+    "trading-services": "Alım-Satım Hizmetleri - Zignaly",
+    "zigpad": "ZIGPad - Zignaly",
+    "profit-sharing": {
+        "title": "Profit Sharing- Zignaly",
+        "service": "{{serviceName}} - Zignaly",
+        "investors": "{{serviceName}} | Yatırımcı - Zignaly",
+        "api-trading": "{{serviceName}} | API ile Alım-Satım - Zignaly",
+        "coins": "{{serviceName}} | Coin'ler - Zignaly",
+        "manual": "{{serviceName}} | Manuel Alım-Satım - Zignaly",
+        "positions": "{{serviceName}} | Pozisyonlarım - Zignaly",
+        "signals": "{{serviceName}} | Sinyaller - Zignaly",
+        "management": "{{serviceName}} | Yönet - Zignaly",
+        "edit": "{{serviceName}} | Hizmeti Düzenle - Zignaly",
+        "profile": {
+            "title": "Profili Görüntüle - Zignaly",
+            "edit": "Profili Düzenle - Zignaly"
+        }
+    }
+}
