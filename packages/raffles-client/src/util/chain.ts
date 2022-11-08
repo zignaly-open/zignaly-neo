@@ -8,7 +8,7 @@ import { ReactComponent as DOGEIcon } from 'assets/icons/chains/dogechain.svg';
 
 export const chains: { [key: string]: { name: string; icon: typeof ETHIcon } } =
   {
-    ETH: { name: 'Ethereum', icon: DOGEIcon },
+    ETH: { name: 'Ethereum', icon: ETHIcon },
     BSC: { name: 'Binance Smart Chain', icon: BSCIcon },
     MATIC: { name: 'Polygon', icon: MATICIcon },
     SOL: { name: 'Solana', icon: SOLIcon },
