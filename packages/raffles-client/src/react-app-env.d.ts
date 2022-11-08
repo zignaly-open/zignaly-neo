@@ -18,8 +18,8 @@ import type { PaletteOptions, Palette } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
   interface CustomPalette {
-    prettyPink: PaletteColorOptions;
-    greedyGreen: PaletteColorOptions;
+    // prettyPink: PaletteColorOptions;
+    // greedyGreen: PaletteColorOptions;
   }
   interface Palette extends CustomPalette {}
   interface PaletteOptions extends CustomPalette {}

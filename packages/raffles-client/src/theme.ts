@@ -8,12 +8,12 @@ export default createTheme({
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
     },
-    prettyPink: {
-      main: '#f63f82',
-    },
-    greedyGreen: {
-      main: '#62e764',
-    },
+    // prettyPink: {
+    //   main: '#f63f82',
+    // },
+    // greedyGreen: {
+    //   main: '#62e764',
+    // },
     secondary: {
       dark: '#191927',
       main: '#656565',
