@@ -21,7 +21,7 @@ const withStyledTheme = (storyFn) => {
   const currentTheme = darkMode ? dark : light;
   return (
     <ThemeProvider theme={currentTheme}>
-      <ThemeProviderMui theme={{ ...dark, ...darkMui }}>
+      <ThemeProviderMui theme={darkMui}>
         <GlobalStyle darkMode />
         {storyFn()}
       </ThemeProviderMui>

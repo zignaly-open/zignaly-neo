@@ -1,12 +1,27 @@
 import React from "react";
 import { ZigInputProps } from "./types";
 import ErrorMessage from "components/display/ErrorMessage";
-import { styled, TextField } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import { TextField } from "@mui/material";
+import TextButton from "../TextButton";
 
 const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
-  ({ error, helperText, ...props }) => (
+  ({ error, labelAction, helperText, ...props }) => (
     <TextField
       {...props}
+      label={
+        <>
+          {props.label}
+          {labelAction && (
+            <TextButton
+              tabIndex={labelAction.tabIndex}
+              onClick={labelAction.onClick}
+              href={labelAction.href}
+              caption={labelAction.text}
+            />
+          )}
+        </>
+      }
       variant={"standard"}
       error={!!error}
       helperText={typeof error === "string" ? error && <ErrorMessage text={error} /> : helperText}
@@ -23,7 +38,16 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
     line-height: 24px;
     letter-spacing: 0.55px;
     color: ${({ theme }) => theme.palette.neutral200};
+    transition: color 0.2s;
+    &.Mui-focused {
+      color: ${({ theme }) => theme.palette.neutral000};
+    }
     transform: none !important;
+    width: 100%;
+
+    button {
+      float: right;
+    }
   }
 
   .MuiInput-root {
@@ -36,6 +60,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
     align-items: center;
     background: rgba(16, 18, 37);
     background: linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%);
+    transition: border-color 0.2s;
 
     &.Mui-disabled {
       cursor: not-allowed;
@@ -43,7 +68,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
     }
 
     &.Mui-focused {
-      border-color: ${({ theme }) => theme.palette.neutral500};
+      border-color: ${({ theme }) => theme.palette.neutral400};
     }
 
     &.Mui-error,

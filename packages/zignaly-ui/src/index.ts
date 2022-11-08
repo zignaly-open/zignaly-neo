@@ -14,6 +14,8 @@ import InvestSlider from "./components/display/InvestSlider";
 import { AreaChart } from "./components/display/Charts";
 import DropDown from "./components/display/DropDown";
 
+export { ThemeProvider as ThemeProviderMui } from "@mui/material";
+
 // Inputs
 import Button from "./components/inputs/Button";
 import CheckBox from "./components/inputs/CheckBox";
@@ -69,9 +71,6 @@ export { ReactComponent as GlobeLanguages } from "assets/icons/globe-languages.s
 export { ReactComponent as TimeIcon } from "assets/icons/time-icon.svg";
 export { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
 
-SliderInput;
-CoinIcon;
-
 // Navigation
 import Header from "./components/navigation/Header";
 import MenuDropDown from "./components/navigation/MenuDropDown";
@@ -79,6 +78,7 @@ import ZigsBalance from "./components/navigation/Header/components/ZigsBalance";
 import BrandImage from "./components/navigation/Header/components/BrandImage";
 
 export * from "./theme";
+export { default as ZigInput } from "./components/inputs/ZigInput";
 import ThemeProvider from "utils/ThemeProvider";
 import { sortByValue } from "utils/numbers";
 import { HeaderLinksContainer } from "components/navigation/Header/styles";

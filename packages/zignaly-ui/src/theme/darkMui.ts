@@ -4,7 +4,6 @@ import dark from "./dark";
 const darkMui = createTheme({
   palette: {
     ...dark,
-
     primary: {
       main: dark.highlighted,
     },
