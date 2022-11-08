@@ -60,7 +60,7 @@ export const triggerTz = async (
   }
 };
 
-export const composeHash = (originalHash: string, ctaId: string) => {
+const composeHash = (originalHash: string, ctaId: string) => {
   let hash = originalHash;
   if (ctaId) {
     hash += `?ctaId=${ctaId}`;
