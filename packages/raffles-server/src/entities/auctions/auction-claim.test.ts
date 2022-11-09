@@ -50,6 +50,24 @@ describe('Auction Claims', () => {
     );
   });
 
+  it('should let claim orivate auctions', async () => {
+    const [, aliceToken] = await createAlice(300);
+    const auction = await createAuction({ privateCode: 'aa' });
+
+    await makeBid(auction, aliceToken);
+
+    await expireAuction(auction.id);
+    await getFirstAuction(aliceToken);
+
+    const {
+      body: {
+        data: { claim },
+      },
+    } = await claimAuction(auction, aliceToken);
+
+    expect(claim.isClaimed).toBe(true);
+  });
+
   it('should make all winners pay final bid price', async () => {
     const [, aliceToken] = await createAlice(300);
     const [, bobToken] = await createBob(300);
