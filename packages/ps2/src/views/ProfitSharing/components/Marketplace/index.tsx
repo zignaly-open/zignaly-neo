@@ -84,11 +84,7 @@ const Marketplace: React.FC = () => {
           +value.pnl30d || Object.keys(value.data).length > 1 ? (
             <>
               <AreaChart variant='small' data={value.data} />
-              <PercentageIndicator
-                normalized
-                value={value.pnl30d}
-                type={'graph'}
-              />
+              <PercentageIndicator value={value.pnl30d} type={'graph'} />
             </>
           ) : (
             <Typography variant={'body2'} color={'neutral400'}>
