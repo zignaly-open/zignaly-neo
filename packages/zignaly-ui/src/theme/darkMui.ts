@@ -31,6 +31,14 @@ const darkMui = createTheme({
         // The props to change the default for.
       },
     },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          background: "rgba(16, 18, 37)",
+          color: dark.neutral200,
+        },
+      },
+    },
   },
 });
 
