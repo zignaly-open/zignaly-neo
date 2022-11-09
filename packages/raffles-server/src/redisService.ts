@@ -143,13 +143,10 @@ const makeTransfer = async (auctionId: number, user: User) => {
     unitToBN(await redis.hget('USER_CURRENT_BALANCE', user.id.toString())),
   ]);
 
-  // Shouldn't be possible
+  // Shouldn't be possible but we could withdraw cybavoBalance instead of returning
   if (currentBalance.gte(cybavoBalance)) return;
 
-  const amount = cybavoBalance.minus(
-    // No reason why current balance would be less than cybavo but just in case
-    cybavoBalance.lt(currentBalance) ? cybavoBalance : currentBalance,
-  );
+  const amount = cybavoBalance.minus(currentBalance);
 
   const tx = await internalTransfer(
     user.publicAddress,
