@@ -10,6 +10,7 @@ export function marketplaceServiceToInvestmentType(
     serviceId: service.id,
     ssc: service.ssc,
     serviceName: service.name,
+    serviceLogo: service.logo,
     ownerName: service.ownerName,
     sparklines: service.sparklines as unknown as AxisFormat[],
     createdAt: service.createdAt,

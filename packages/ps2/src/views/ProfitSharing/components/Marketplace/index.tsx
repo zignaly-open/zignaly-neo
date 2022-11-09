@@ -36,10 +36,10 @@ const Marketplace: React.FC = () => {
         },
         accessor: 'service',
         headerWithFooter: (
-          <div>
+          <>
             <Box textAlign={'left'}>{t('table.manager')}</Box>
             <Box textAlign={'left'}>{t('table.currency')}</Box>
-          </div>
+          </>
         ),
         Cell: ({ cell: { value } }) => (
           <ServiceName
