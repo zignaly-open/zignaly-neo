@@ -41,7 +41,7 @@ const Marketplace: React.FC = () => {
         Header: t('table.service-name'),
         style: {
           justifyContent: 'flex-start',
-          paddingLeft: '52px',
+          paddingLeft: '67px',
         },
         accessor: 'service',
         headerWithFooter: (
@@ -59,7 +59,7 @@ const Marketplace: React.FC = () => {
           a.values.service.name?.localeCompare(b.values.service.name),
       },
       {
-        Header: () => <Inline>{t('table.assets')}</Inline>,
+        Header: () => t('table.assets'),
         accessor: 'assets',
         headerWithFooter: <Inline>{t('table.nb-investors')}</Inline>,
         Cell: ({ cell: { value } }) => (
