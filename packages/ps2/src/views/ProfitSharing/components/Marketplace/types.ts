@@ -5,16 +5,16 @@ export type MarketplaceTableDataType = {
   service: MarketplaceService;
   actionService: MarketplaceService;
   '30d': {
-    pnl30d: number;
+    pnl30d: string;
     data: AxisFormat[] | number[];
   };
   '90d': {
-    roi: number;
+    roi: string;
     createdAt: string;
   };
 
   assets: {
-    invested: number;
+    invested: string;
     investors: number;
   };
 };

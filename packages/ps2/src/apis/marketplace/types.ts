@@ -1,20 +1,30 @@
 export type MarketplaceState = Record<string, never>;
 
 export type MarketplaceService = {
-  service_id: string;
-  owner_id: string;
-  name: string;
-  level: number;
-  service_type: string; // TODO
-  invested: number;
-  investors: number;
-  success_fee: number;
-  maximum_sbt: number;
-  created_at: string;
+  userId: string;
+  usdtInvested: string;
+  type: string;
+  tags: string[];
+  successFee: string;
+  ssc: string;
   sparklines: number[];
-  pnl_pct_7t: number;
-  pnl_pct_30t: number;
-  pnl_pct_90t: number;
-  pnl_pct_180t: number;
-  pnl_pct_365t: number;
+  solo: boolean;
+  pnlPercent365t: string;
+  pnlPercent180t: string;
+  pnlPercent90t: string;
+  pnlPercent30t: string;
+  pnlPercent7t: string;
+  ownerVerified: boolean;
+  ownerName: string;
+  ownerId: string;
+  name: string;
+  maximumSbt: string;
+  logo: string;
+  level: number;
+  invested: string;
+  investors: number;
+  id: string;
+  fundsAllocated: string;
+  description: string;
+  createdAt: string;
 };

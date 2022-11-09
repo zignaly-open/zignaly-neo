@@ -30,11 +30,15 @@ const Marketplace: React.FC = () => {
     () => [
       {
         Header: t('table.service-name'),
+        style: {
+          justifyContent: 'flex-start',
+          paddingLeft: '52px',
+        },
         accessor: 'service',
         headerWithFooter: (
           <div>
-            <div>{t('table.manager')}</div>
-            <div>{t('table.currency')}</div>
+            <Box textAlign={'left'}>{t('table.manager')}</Box>
+            <Box textAlign={'left'}>{t('table.currency')}</Box>
           </div>
         ),
         Cell: ({ cell: { value } }) => (
@@ -108,12 +112,12 @@ const Marketplace: React.FC = () => {
       return {
         service,
         '30d': {
-          pnl30d: service.pnl_pct_30t,
+          pnl30d: service.pnlPercent30t,
           data: service.sparklines,
         },
         '90d': {
-          roi: service.pnl_pct_30t,
-          createdAt: service.created_at,
+          roi: service.pnlPercent30t,
+          createdAt: service.createdAt,
         },
         assets: {
           invested: service.invested,

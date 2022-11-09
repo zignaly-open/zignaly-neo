@@ -1,4 +1,4 @@
 export interface AssetsInPoolProps {
-  assetsValue: number;
+  assetsValue: string;
   numberOfInvestors: number;
 }

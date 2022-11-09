@@ -28,7 +28,7 @@ const MarketplaceAction = ({ service }: MarketplaceActionType) => {
 
   const traderService = marketplaceServiceToServiceType(service) as Service;
   const investedAmount = investments?.find(
-    (x) => x.serviceId === service.service_id,
+    (x) => x.serviceId === service.id,
   )?.invested;
 
   return (
