@@ -22,6 +22,15 @@ import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace
 import AssetsInPool from '../AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 
+const initialStateTable = {
+  sortBy: [
+    {
+      id: '90d',
+      desc: true,
+    },
+  ],
+};
+
 const Marketplace: React.FC = () => {
   const marketplaceEndpoint = useMarketplace();
   const { t } = useTranslation('marketplace');
@@ -146,6 +155,7 @@ const Marketplace: React.FC = () => {
               </Typography>
             </Box>
             <Table
+              initialState={initialStateTable}
               columns={tableColumns}
               data={services?.map(bodyMapper)}
               emptyMessage={t('table-search-emptyMessage')}
