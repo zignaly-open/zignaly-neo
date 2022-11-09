@@ -1,0 +1,47 @@
+{
+    "manage": "Yönet",
+    "totalFunds": "Toplam Hizmet Fonları",
+    "tradingFunds": "Alım-Satım Fonları",
+    "tradingFunds-desc": "Alım-Satım için uygun olan ve pozisyonlarda kullanılan fonlar",
+    "availableTrading": "Alım-Satım için uygun:",
+    "allocatedTrading": "Alım-Satım için ayrılmış:",
+    "hardDisconnected": "Anında Çıkış yapılan fon:",
+    "disconnectionFunds": "Çıkış Fonları",
+    "disconnectionFunds-desc": "Çıkış yapmak isteyen yatırımcılara iade edilebilecek fon",
+    "availableDisconnection": "Çıkışlar için kullanılabilir:",
+    "neededSnapshot": "Günlük anlık görüntü için gerekli:",
+    "helper": "Rakamlarla ilgili yardıma mı ihtiyacınız var? Lütfen <0>Profit Sharing bakiyesi nasıl çalışır<\/0> makalemize göz atın.",
+    "minBalance": {
+        "title": "Minimum bakiye:",
+        "success": "Minimum bakiyeyi başarıyla düzenlediniz."
+    },
+    "minBalanceModal": {
+        "title": "Minimum Bakiyeyi Düzenle",
+        "desc": "Hizmet Çıkış Fonunuzda tutmak istediğiniz minimum bakiyeyi belirleyin.",
+        "placeholder": "0.0",
+        "labelBalance": "Güncel Minimum Bakiye",
+        "save": "Sakla"
+    },
+    "heldHardDisc": "Anında Çıkış için saklanıyor:",
+    "controlledZignaly": "Zignaly kontrolünde",
+    "transfer": {
+        "title": "Transfer",
+        "loading": "Yükleniyor",
+        "placeholder": "0.0",
+        "labelBalance": "Mevcut Bakiye:",
+        "deposit-available": "Mevcut Bakiye:",
+        "fromTradingAccount": "Alım-Satım Hesabından",
+        "toTradingAccount": "Alım-Satım Hesabına:",
+        "fromDiscAccount": "Çıkış Hesabından",
+        "toDiscAccount": "Çıkış Hesabına:",
+        "now": "Şimdi Transfer Et",
+        "success": "Başarılı bir şekilde {{amount}} transfer ettiniz."
+    },
+    "transferFunds": {
+        "title": "Fon Transferi",
+        "desc": "Profit Sharing hesaplarım arasında coin transferi."
+    },
+    "hardDiconnectWarning": "Anında Çıkışlarınız %{perc} oranına ulaştı. Eğer Anında Çıkışlar hizmet fonlarının %{maxPerc} oranına ulaşırsa, Zignaly hizmetinizin kontrolünü ele alacaktır.",
+    "previousValue": "Önceki değer:",
+    "loading-arialLabel": "Yükleme yönetimi"
+}
