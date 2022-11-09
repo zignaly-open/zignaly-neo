@@ -1,0 +1,95 @@
+{
+    "percentageChangedSuccess": "Kâr yüzdesi başarıyla güncellendi.",
+    "addMoreInvestmentSuccess": "Başarılı bir şekilde {{serviceName}} hizmetine {{amount}} {{currency}}yatırım yaptınız.",
+    "withdrawInvestmentSuccess": "Çekim talebi başarıyla alındı.",
+    "validation-indicateAnAmount": "Bir miktar belirtmelisiniz.",
+    "error-blockedInvestment": "Fonlarınız hizmet dışına transfer edilmek üzere beklemektedir.",
+    "form": {
+        "title": "Yatırılan Miktar:",
+        "profits": {
+            "title": "Kârla ne yapılsın?",
+            "left": "Yeniden yatırım",
+            "right": "Çekim"
+        },
+        "inputAmount": {
+            "label": "Yatırım Yapılacak Miktar:",
+            "labelBalance": "Mevcut:"
+        },
+        "link": {
+            "investMore": "Daha fazla yatırım yapın",
+            "withdraw": "Yatırım Geri Çekimi"
+        },
+        "button": {
+            "saveAndClose": "Sakla ve Kapat",
+            "continue-to-confirmation": "Onay aşamasına geçin",
+            "invest-now": "Şimdi {{amount}} {{coin}} yatırım yapın"
+        }
+    },
+    "pendingMajorThan": {
+        "type": "Yeni yatırım",
+        "status": "24 saat içinde işlenecek"
+    },
+    "profitOutMajorThan": {
+        "type": "Kâr",
+        "status": "Bir sonraki hesaplama bekleniyor"
+    },
+    "transferOutMajorThan": {
+        "type": "Transfer Çıkışı",
+        "status": "Bir sonraki hesaplama bekleniyor"
+    },
+    "pendingTransactions": {
+        "status_zero": "İşleminiz yok",
+        "status_one": "Bekleyen 1 işleminiz var",
+        "status_other": "Bekleyen {{count}} işleminiz var",
+        "link-label": "Görünüm"
+    },
+    "investorDetail-successFee": "% {{fee}} Başarım ücreti",
+    "modal": {
+        "withdrawInvestment": {
+            "title": "Çekim Talebi",
+            "afterPosition": {
+                "title": "Pozisyonlar Kapandıktan Sonra Fonların Çekimi",
+                "description": "Fonunuzu trader serbest bıraktığında alacaksınız. Yatırımınızın size aktarılana kadar risk altında olduğunu göz önünde bulundurun. Bu durum genellikle birkaç gün sürmesine rağmen süreç daha da uzayabilir. Bu süre trader'ın takdirindedir.",
+                "button": {
+                    "subtitle": "Serbest fonlardan çekim",
+                    "title": "Kesinti Yok"
+                }
+            },
+            "instant": {
+                "title": "Anında Çekim",
+                "description": "Anında çekim işlemleri %5 ücrete tabidir çünkü trader'ın açık pozisyonları bulunabilir ve likide olabilir. Bundan kaçınmak için, Zignaly fonlarınızı karşılamakta ve bu ücret ile riskinizi devralmaktadır.",
+                "button": {
+                    "subtitle": "Anında Çekim",
+                    "title": "%5 Kesinti Ücreti"
+                }
+            }
+        },
+        "pendingTransaction": {
+            "title": "Bekleyen İşlemler",
+            "tableHeader": {
+                "amount": "Miktar",
+                "type": "Tip",
+                "status": "Durum"
+            },
+            "button": "Geri"
+        },
+        "editInvestments": {
+            "title": "Yatırımı Düzenle",
+            "loading": "Düzenlenen yatırım yükleniyor"
+        }
+    },
+    "modalSuccess": {
+        "title": "Yatırım İşleniyor (24 saate kadar)",
+        "description": "Fonlarınız 24 saat içinde ilgili hizmet hesabına aktarılacaktır. Fonunuzu transfer gerçekleşmeden önce çekebilirsiniz. Transfer gerçekleştikten sonra, <0>Aşamalı<\/0> veya <0>Anında çıkış<\/0> ile fonlarınızı çekebilirsiniz.",
+        "button": "Kapat"
+    },
+    "invest-modal": {
+        "invest-with": "İle yatırım yapın",
+        "amount-to-invest": "Yatırılacak tutarı girin",
+        "type-transfer": "Transferi tamamlamak için aşağıdaki alana “ {{word}} ” kelimesini yazın:",
+        "transfer-error": "Geçersiz giriş. Lütfen doğru kelimeyi yazın.",
+        "transfer-label": "Transfer",
+        "i-understand-margin": "{{coin}} bakiyemin tamamının artık marjın bir parçası olduğunu ve risk altında olduğunu anlıyorum",
+        "i-understand-money-transferred": "Bakiyemin trader'ın havuzuna aktarılacağını ve artık mevcut bakiyemde görünmeyeceğini anlıyorum."
+    }
+}
