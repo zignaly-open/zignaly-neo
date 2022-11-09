@@ -14,6 +14,10 @@ const result: ComponentMeta<typeof InputText> = {
     placeholder: {
       type: "string",
     },
+    wide: {
+      type: "boolean",
+      defaultValue: false,
+    },
     disabled: {
       type: "boolean",
       defaultValue: false,
