@@ -1,5 +1,7 @@
-import { AuctionType } from '@zignaly-open/raffles-shared/types';
-import { Includeable } from 'sequelize';
+import {
+  AuctionBidType,
+  AuctionType,
+} from '@zignaly-open/raffles-shared/types';
 import { ContextUser, ResourceOptions, TransactionType } from '../../types';
 import { User } from '../users/model';
 import { Auction, AuctionBid } from './model';
@@ -15,19 +17,11 @@ import { emitBalanceChanged } from '../users/util';
 import { Payout } from '../payouts/model';
 import { debounce } from 'lodash';
 import { AUCTION_UPDATED } from './constants';
-import { AuctionFilter } from './types';
+import { AuctionFilter, AuctionPayload } from './types';
 
 const omitPrivateFields = {
   attributes: { exclude: ['announcementDate', 'maxExpiryDate'] },
 };
-
-const lastBidPopulation = {
-  model: AuctionBid,
-  as: 'bids',
-  order: [['id', 'DESC']],
-  limit: 1,
-  include: [User],
-} as Includeable;
 
 async function findUsers(ids: number[]): Promise<User[]> {
   return await User.findAll({ where: { id: ids } });
@@ -165,12 +159,20 @@ export const generateService = (user: ContextUser) => ({
     return getAuctionsWithBids(null, asAdmin || user, data);
   },
 
-  getById: (id: number) => {
-    //  todo: call getAuctionsWithBids
+  getById: async (id: number) => {
     checkAdmin(user);
-    return Auction.findByPk(id, {
-      include: lastBidPopulation,
+    const auction = await Auction.findByPk(id, {
+      include: {
+        model: AuctionBid,
+        as: 'bids',
+        include: [User],
+      },
+      order: [['bids', 'position', 'ASC']],
     });
+    auction.bids.forEach(
+      (b: AuctionBidType) => (b.isClaimed = Boolean(b.claimTransactionId)),
+    );
+    return auction;
   },
 
   count: async (data: ResourceOptions, asAdmin = false) => {
@@ -183,18 +185,32 @@ export const generateService = (user: ContextUser) => ({
     return { count };
   },
 
-  update: async (data: Partial<Auction>) => {
+  update: async (data: AuctionPayload) => {
     checkAdmin(user);
     try {
-      const [, [auction]] = await Auction.update(data, {
+      const auction = await Auction.findByPk(data.id);
+      if (!auction) throw new Error('Auction Not Found');
+      if (
+        ((data.startDate &&
+          data.startDate !== auction.startDate.toISOString()) ||
+          (data.expiresAt &&
+            data.expiresAt !== auction.expiresAt.toISOString()) ||
+          (data.maxExpiryDate &&
+            data.maxExpiryDate !== auction.maxExpiryDate.toISOString())) &&
+        auction.startDate <= new Date()
+      ) {
+        throw new Error("Can't change dates of auction already started");
+      }
+
+      const [, [updatedAuction]] = await Auction.update(data, {
         where: { id: data.id },
         returning: true,
       });
-      if (!auction) throw new Error('Auction Not Found');
+      if (!updatedAuction) throw new Error("Auction couldn't update");
 
-      await redisService.redisImport(auction.id);
+      await redisService.redisImport(updatedAuction.id);
 
-      return auction;
+      return updatedAuction;
     } catch (e) {
       if (!isTest) {
         // In memory db doesn't return object
@@ -221,6 +237,11 @@ export const generateService = (user: ContextUser) => ({
 
   delete: async (id: number) => {
     checkAdmin(user);
+    const auction = await Auction.findByPk(id);
+    if (!auction) throw new Error('Auction not found');
+    if (auction.startDate <= new Date())
+      throw new Error('Cannot delete auction already started');
+
     await redisService.deleteAuctionFromRedis(id);
     return Boolean(
       await Auction.destroy({

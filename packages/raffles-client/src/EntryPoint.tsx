@@ -69,7 +69,9 @@ const authLink = setContext((_, { headers }) => {
 });
 
 const updateDateWithClock = (_: string, incoming: string) => {
-  return new Date(+new Date(incoming) + clock.getOffset());
+  return incoming
+    ? new Date(+new Date(incoming) + clock.getOffset())
+    : incoming;
 };
 
 const client = new ApolloClient({

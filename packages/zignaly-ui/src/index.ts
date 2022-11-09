@@ -11,6 +11,7 @@ import CoinLabel from "./components/display/Table/components/CoinLabel";
 import Toaster from "./components/display/Toaster";
 import ProgressSlider from "./components/display/ProgressSlider";
 import InvestSlider from "./components/display/InvestSlider";
+
 import { AreaChart } from "./components/display/Charts";
 import DropDown from "./components/display/DropDown";
 
@@ -87,6 +88,7 @@ import CoinIcon from "components/display/CoinIcon";
 import SliderInput from "components/inputs/SliderInput";
 import InputAmountAdvanced from "components/inputs/InputAmountAdvanced";
 import { NiceScrollbar } from "utils/css";
+export { default as AssetsInPool } from "./components/display/Table/components/AssetsInPool";
 
 export {
   /**

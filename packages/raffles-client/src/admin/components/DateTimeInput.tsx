@@ -9,7 +9,9 @@ const getTimezoneOffset = (value: Date) => value.getTimezoneOffset() * 60000;
 
 const makeLocalAppearUTC = (value: string) => {
   const dateTime = new Date(value);
-  // if (isNaN(+dateTime)) return value;
+  // if (isNaN(+dateTime)) {
+  //   return value;
+  // }
   const utcFromLocal = new Date(
     dateTime.getTime() + getTimezoneOffset(dateTime),
   );

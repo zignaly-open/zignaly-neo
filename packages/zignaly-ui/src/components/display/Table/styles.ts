@@ -24,12 +24,11 @@ export const IconContainer = styled.div`
   right: 4px;
 `;
 
-export const HeaderRow = styled.div<{ align?: "left" | "right" | "center" }>`
+export const HeaderRow = styled.div`
   position: relative;
   display: flex;
   flex-direction: row;
-  justify-content: ${(props) =>
-    ({ left: "flex-start", right: "flex-end", center: "center" }[props.align!] || "center")};
+  justify-content: center;
   padding-left: 5px;
   padding-right: 5px;
   width: inherit;
