@@ -18,7 +18,7 @@ local function update_balance(keys, args)
 
   local newCurrentBalance = newCybavoBalance
   if currentBalance then
-    -- Increase the current balance by the difference fo cybavo balances
+    -- Increase the current balance by the difference of cybavo balances
     newCurrentBalance = currentBalance + (newCybavoBalance - cybavoBalance)
   end
   -- Set cached current balance
