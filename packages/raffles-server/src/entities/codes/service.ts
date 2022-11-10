@@ -16,12 +16,13 @@ import { checkAdmin } from '../../util/admin';
 import { Op } from 'sequelize';
 
 const applyFilters = (filter: ResourceOptions['filter'] = {}) => {
-  const { type, ...restFilters } = filter;
+  const { type, userId, code, ...restFilters } = filter;
 
   return {
     ...restFilters,
-    // If no userId filter, look for type
-    ...(!filter.userId && {
+    ...(code && { code: { [Op.iLike]: `%${code}%` } }),
+    // If no userId filter, look for type filter
+    ...(!userId && {
       userId:
         type === 'user'
           ? {

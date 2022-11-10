@@ -1,7 +1,7 @@
 import pubsub from '../../pubsub';
 import { AUCTION_UPDATED } from './constants';
 import { ApolloContext, ResourceOptions } from '../../types';
-import { Auction } from './model';
+import { AuctionPayload } from './types';
 
 export const resolvers = {
   Query: {
@@ -38,13 +38,13 @@ export const resolvers = {
   Mutation: {
     updateAuction: async (
       _: any,
-      data: Partial<Auction>,
+      data: AuctionPayload,
       { services }: ApolloContext,
     ) => services.Auction.update(data),
 
     createAuction: async (
       _: any,
-      data: Partial<Auction>,
+      data: AuctionPayload,
       { services }: ApolloContext,
     ) => services.Auction.create(data),
 

@@ -15,6 +15,7 @@ import {
   expireAuction,
   startAuction,
   updateAuction,
+  deleteAuction,
 } from '../../util/test-utils';
 import { mock } from '../../util/mock-cybavo-wallet';
 import redisService from '../../redisService';
@@ -363,6 +364,65 @@ describe('Auctions', () => {
 
       const auctions = await getAuctions(userToken, false);
       expect(auctions[0].title).toBe('bbb');
+    });
+
+    it('should be able to update auction title if started', async () => {
+      const [, userToken] = await createRandomUser(0, { isAdmin: true });
+      const auction = await createAuction({
+        startDate: new Date(Date.now() - 1000),
+      });
+
+      await updateAuction(userToken, {
+        ...auction,
+        id: auction.id,
+        title: 'bbb',
+      });
+
+      const auctions = await getAuctions(userToken, false);
+      expect(auctions[0].title).toBe('bbb');
+    });
+
+    it('should not be able to update auction dates if started', async () => {
+      const [, userToken] = await createRandomUser(0, { isAdmin: true });
+      const auction = await createAuction({
+        startDate: new Date(Date.now() - 1000),
+      });
+
+      await updateAuction(userToken, {
+        ...auction,
+        id: auction.id,
+        startDate: new Date(Date.now() + 1000),
+      });
+
+      const auctions = await getAuctions(userToken, true);
+      expect(auctions[0].startDate).toBe(auction.startDate.toISOString());
+    });
+
+    it('should be able to delete auction', async () => {
+      const [, userToken] = await createRandomUser(0, { isAdmin: true });
+      const auction = await createAuction({
+        startDate: new Date(Date.now() + 1000),
+      });
+
+      await deleteAuction(userToken, auction.id);
+
+      const auctions = await getAuctions(userToken, true);
+      expect(auctions.length).toBe(0);
+    });
+
+    it('should not be able to delete started auction', async () => {
+      const [, userToken] = await createRandomUser(0, { isAdmin: true });
+      const auction = await createAuction({
+        startDate: new Date(Date.now() - 1000),
+      });
+
+      const { body } = await deleteAuction(userToken, auction.id);
+      expect(body.errors[0].message).toBe(
+        'Cannot delete auction already started',
+      );
+
+      const auctions = await getAuctions(userToken, true);
+      expect(auctions.length).toBe(1);
     });
   });
 });

@@ -1,5 +1,5 @@
 import { EventNote } from '@mui/icons-material';
-import { Box, Card, CardMedia, Chip, Typography } from '@mui/material';
+import { Box, Chip, Typography } from '@mui/material';
 import MarkdownInput from '../components/MarkdownInput';
 import React from 'react';
 import {
@@ -21,6 +21,13 @@ import {
   FunctionField,
   useTranslate,
   email,
+  ArrayField,
+  BooleanField,
+  TabbedShowLayout,
+  Tab,
+  ListToolbar,
+  ExportButton,
+  downloadCSV,
 } from 'react-admin';
 import { chains } from 'util/chain';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
@@ -28,6 +35,8 @@ import DateTimeInput from '../components/DateTimeInput';
 import DateField from '../components/DateField';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
+import EditToolbar from 'admin/components/EditToolbar';
+import jsonExport from 'jsonexport/dist';
 
 export const AuctionIcon = EventNote;
 
@@ -87,43 +96,51 @@ export const AuctionList = () => (
 const Poster = () => {
   const record = useRecordContext<AuctionType>();
   if (!record) return null;
-  return (
-    <Card sx={{ display: 'inline-block' }}>
-      <CardMedia
-        component='img'
-        image={record.imageUrl}
-        alt=''
-        sx={{ maxWidth: '42em', maxHeight: '15em' }}
-      />
-    </Card>
-  );
+  return record.imageUrl ? (
+    <Box mb={1}>
+      <img src={record.imageUrl} alt='' />
+    </Box>
+  ) : null;
 };
 
 const schema = yup
   .object()
   .shape({
+    announcementDate: yup.date().nullable(),
     startDate: yup.date(),
     expiresAt: yup
       .date()
       .when(
         'startDate',
         (startDate, s) =>
-          startDate && s.min(startDate, 'errors.date.expAfterStart'),
+          startDate &&
+          s.min(
+            new Date(startDate.getTime() + 1000),
+            'errors.date.expAfterStart',
+          ),
       ),
     maxExpiryDate: yup
       .date()
       .when(
         'expiresAt',
         (expiresAt, s) =>
-          expiresAt && s.min(expiresAt, 'errors.date.maxExpAfterExp'),
+          expiresAt &&
+          s.min(
+            new Date(expiresAt.getTime() + 1000),
+            'errors.date.maxExpAfterExp',
+          ),
       ),
     maxClaimDate: yup
       .date()
+      .nullable()
       .when(
-        'maxExpiryDate',
-        (maxExpiryDate, s) =>
-          maxExpiryDate &&
-          s.min(maxExpiryDate, 'errors.date.claimDateAfterMaxExp'),
+        'startDate',
+        (startDate, s) =>
+          startDate &&
+          s.min(
+            new Date(startDate.getTime() + 1000),
+            'errors.date.claimDateAfterMaxExp',
+          ),
       ),
   })
   .required();
@@ -131,7 +148,7 @@ const schema = yup
 const AuctionForm = () => {
   const translate = useTranslate();
   return (
-    <SimpleForm resolver={yupResolver(schema)}>
+    <SimpleForm resolver={yupResolver(schema)} toolbar={<EditToolbar />}>
       <Typography variant='h6' gutterBottom>
         {translate('resources.auctions.name')}
       </Typography>
@@ -186,9 +203,61 @@ const AuctionForm = () => {
   );
 };
 
+const Participants = () => {
+  const translate = useTranslate();
+  const record = useRecordContext<AuctionType>();
+
+  const exporter = () => {
+    const postsForExport = record.bids.map((bid) => ({
+      position: bid.position,
+      userId: bid.user.id,
+      username: bid.user.username,
+      discordName: bid.user.discordName,
+      isWinner: bid.isWinner,
+      isClaimed: bid.isClaimed,
+    }));
+    jsonExport(postsForExport, (_, csv: string) => {
+      downloadCSV(csv, 'participants');
+    });
+  };
+
+  if (!record.bids.length) {
+    return (
+      <Typography mt={2}>
+        {translate('resources.auctions.noParticipants')}
+      </Typography>
+    );
+  }
+
+  return (
+    <>
+      <ListToolbar
+        actions={<ExportButton maxResults={0} exporter={exporter} />}
+      />
+      <ArrayField source='bids'>
+        <Datagrid bulkActionButtons={false}>
+          <TextField source='position' />
+          <TextField source='user.id' />
+          <TextField source='user.username' label='Username' />
+          <TextField source='user.discordName' label='Discord' />
+          <BooleanField source='isWinner' />
+          <BooleanField source='isClaimed' />
+        </Datagrid>
+      </ArrayField>
+    </>
+  );
+};
+
 export const AuctionEdit = () => (
   <Edit>
-    <AuctionForm />
+    <TabbedShowLayout>
+      <Tab label='Edit'>
+        <AuctionForm />
+      </Tab>
+      <Tab label='Participants'>
+        <Participants />
+      </Tab>
+    </TabbedShowLayout>
   </Edit>
 );
 

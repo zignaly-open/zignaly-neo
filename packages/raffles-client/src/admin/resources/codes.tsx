@@ -1,5 +1,6 @@
 import { Redeem } from '@mui/icons-material';
 import { Typography } from '@mui/material';
+import EditToolbar from 'admin/components/EditToolbar';
 import React from 'react';
 import {
   List,
@@ -46,7 +47,9 @@ const CodeListBase = ({ systemCode }: { systemCode: boolean }) => {
     >
       <Datagrid rowClick='edit'>
         <TextField source='code' />
-        {!systemCode && <TextField source='user.id' label='UserId' />}
+        {!systemCode && (
+          <TextField source='user.id' label='UserId' sortBy='userId' />
+        )}
         {!systemCode && <TextField source='user.username' label='Username' />}
         {systemCode && <BooleanField source='welcomeType' />}
         <NumberField source='reqMinimumBalance' label='Min balance' />
@@ -82,7 +85,7 @@ const CodeForm = () => {
   const translate = useTranslate();
 
   return (
-    <SimpleForm>
+    <SimpleForm toolbar={<EditToolbar />}>
       <Typography variant='h6' gutterBottom>
         {translate('resources.codes.name')}
       </Typography>
