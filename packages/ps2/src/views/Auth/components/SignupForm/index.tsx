@@ -94,8 +94,16 @@ const SignupForm: React.FC = () => {
           component='h4'
         >
           <Trans i18nKey='signup-form.accept-terms' t={t}>
-            <Link href='https://zignaly.com/legal/terms' />
-            <Link href='https://zignaly.com/legal/privacy' />
+            <Link
+              href='https://zignaly.com/legal/terms'
+              target='_blank'
+              rel='noopener'
+            />
+            <Link
+              href='https://zignaly.com/legal/privacy'
+              target='_blank'
+              rel='noopener'
+            />
           </Trans>
         </Typography>
 
