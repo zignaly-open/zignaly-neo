@@ -13,6 +13,7 @@ const PercentageIndicator = ({
   type = "graph",
   normalized = false,
   stableCoinOperative = false,
+  style,
 }: PercentageIndicatorProps) => {
   let bigNumberValue = new BigNumber(value);
   if (normalized) bigNumberValue = bigNumberValue.multipliedBy(100);
@@ -29,6 +30,7 @@ const PercentageIndicator = ({
           <Inline>
             <ValueIndicator variant={"body2"} className={indicatorClassName}>
               <NumberFormat
+                style={style}
                 value={bigNumberValue.toFixed()}
                 displayType={"text"}
                 suffix={"%"}
@@ -60,6 +62,7 @@ const PercentageIndicator = ({
           <Inline>
             <ValueIndicator variant={"body1"} className={indicatorClassName}>
               <NumberFormat
+                style={style}
                 value={bigNumberValue.toFixed()}
                 displayType={"text"}
                 thousandSeparator={","}
@@ -75,6 +78,7 @@ const PercentageIndicator = ({
           <Inline>
             <ValueIndicator variant={"body1"} className={indicatorClassName}>
               <NumberFormat
+                style={style}
                 value={bigNumberValue.toFixed()}
                 displayType={"text"}
                 suffix={"%"}

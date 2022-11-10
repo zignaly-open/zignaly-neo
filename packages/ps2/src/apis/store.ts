@@ -7,11 +7,14 @@ import coinReducer from './coin/store';
 import { api as coinApi } from './coin/api';
 import serviceReducer from './service/store';
 import { api as serviceApi } from './service/api';
+import marketplaceReducer from './marketplace/store';
+import { api as marketplaceApi } from './marketplace/api';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { UserState } from './user/types';
 import { InvestmentState } from './investment/types';
 import { ServiceState } from './service/types';
+import { MarketplaceState } from './marketplace/types';
 import { CoinState } from './coin/types';
 
 const persistConfig = {
@@ -20,6 +23,7 @@ const persistConfig = {
   // TODO: maybe we should actually leverage cache
   blacklist: [
     'userApi',
+    'marketplaceApi',
     'coinApi',
     'investmentApi',
     'dashboardApi',
@@ -34,7 +38,9 @@ export const store = configureStore({
       [userApi.reducerPath]: userApi.reducer,
       [serviceApi.reducerPath]: serviceApi.reducer,
       [investmentApi.reducerPath]: investmentApi.reducer,
+      [marketplaceApi.reducerPath]: marketplaceApi.reducer,
       [coinApi.reducerPath]: coinApi.reducer,
+      marketplace: marketplaceReducer,
       user: userReducer,
       coin: coinReducer,
       investment: investmentReducer,
@@ -47,6 +53,7 @@ export const store = configureStore({
     })
       .concat(userApi.middleware)
       .concat(serviceApi.middleware)
+      .concat(marketplaceApi.middleware)
       .concat(coinApi.middleware)
       .concat(investmentApi.middleware),
 });
@@ -57,6 +64,7 @@ export const persistor = persistStore(store);
 export type RootState = {
   user: UserState;
   coin: CoinState;
+  marketplace: MarketplaceState;
   investment: InvestmentState;
   service: ServiceState;
 };

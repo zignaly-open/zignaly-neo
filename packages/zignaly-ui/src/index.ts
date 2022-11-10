@@ -11,6 +11,7 @@ import CoinLabel from "./components/display/Table/components/CoinLabel";
 import Toaster from "./components/display/Toaster";
 import ProgressSlider from "./components/display/ProgressSlider";
 import InvestSlider from "./components/display/InvestSlider";
+
 import { AreaChart } from "./components/display/Charts";
 import DropDown from "./components/display/DropDown";
 

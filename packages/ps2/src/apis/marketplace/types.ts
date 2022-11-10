@@ -1,0 +1,30 @@
+export type MarketplaceState = Record<string, never>;
+
+export type MarketplaceService = {
+  userId: string;
+  usdtInvested: string;
+  type: string;
+  tags: string[];
+  successFee: string;
+  ssc: string;
+  sparklines: number[];
+  solo: boolean;
+  pnlPercent365t: string;
+  pnlPercent180t: string;
+  pnlPercent90t: string;
+  pnlPercent30t: string;
+  pnlPercent7t: string;
+  ownerVerified: boolean;
+  ownerName: string;
+  ownerId: string;
+  name: string;
+  maximumSbt: string;
+  logo: string;
+  level: number;
+  invested: string;
+  investors: number;
+  id: string;
+  fundsAllocated: string;
+  description: string;
+  createdAt: string;
+};

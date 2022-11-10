@@ -30,7 +30,7 @@ export const ServiceName = ({ service }: ServiceNameProps) => {
       }}
     >
       <Icon>
-        <Avatar size={'large'} image={getServiceLogo(service.serviceLogo)} />
+        <Avatar size={'x-large'} image={getServiceLogo(service.serviceLogo)} />
       </Icon>
       <Box
         sx={{

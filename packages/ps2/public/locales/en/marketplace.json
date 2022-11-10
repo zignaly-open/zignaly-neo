@@ -1,0 +1,16 @@
+{
+  "invest-in-services": "Invest in Profit Sharing",
+  "invest-in-services-explainer": "Invest with pro traders and share their profits. Get started with only $1",
+  "table": {
+    "service-name": "Service Name",
+    "manager": "Manager",
+    "currency": "Base Currency",
+    "assets": "Assets in Pool",
+    "nb-investors": "# of investors",
+    "n-months_one": "{{count}} month",
+    "n-months_other": "{{count}} months",
+    "account-age": "Account age",
+    "x-investors_one": "{{count}} investor",
+    "x-investors_other": "{{count}} investors"
+  }
+}

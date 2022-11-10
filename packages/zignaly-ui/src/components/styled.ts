@@ -24,9 +24,11 @@ export const PageContainer = styled(MarginContainer)`
 // TODO: replace with proper styled comp usages instead of classes
 export const ValueIndicator = styled(Typography)<any>`
   display: inline;
+  font-size: 15px !important;
+  line-height: 24px !important;
+  font-weight: 500;
+
   ${(props: any) => `
-    font-size: 11px;
-    font-weight: 500;
     
     &.zero {
       color: ${props.theme.neutral300}

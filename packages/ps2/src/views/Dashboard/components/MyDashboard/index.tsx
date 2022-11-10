@@ -7,7 +7,7 @@ import {
   Typography,
 } from '@zignaly-open/ui';
 import React, { useCallback, useMemo } from 'react';
-import { Heading, Inline, Layout } from './styles';
+import { Heading, Layout } from './styles';
 import { useTranslation } from 'react-i18next';
 import {
   useInvestments,
@@ -26,6 +26,7 @@ import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import { useZModal } from '../../../../components/ZModal/use';
+import { Box } from '@mui/system';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -68,10 +69,15 @@ const MyDashboard: React.FC = () => {
           ),
       },
       {
-        Header: () => <Inline>{t('tableHeader.serviceName.title')}</Inline>,
+        Header: () => t('tableHeader.serviceName.title'),
+        style: {
+          justifyContent: 'flex-start',
+          paddingLeft: '67px',
+          textAlign: 'left',
+        },
         accessor: 'service',
         headerWithFooter: (
-          <Inline>{t('tableHeader.serviceName.subtitle')}</Inline>
+          <Box textAlign={'left'}>{t('tableHeader.serviceName.subtitle')}</Box>
         ),
         Cell: ({ cell: { value } }) => <ServiceName service={value} />,
         sortType: (a, b) =>
