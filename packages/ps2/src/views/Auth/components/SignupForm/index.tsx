@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { Form, Action, TitleHead } from './styles';
 import { SignupValidation } from './validations';
 import { useAuthenticate } from '../../../../apis/user/use';
@@ -12,7 +12,8 @@ import {
   ROUTE_SIGNUP,
 } from '../../../../routes';
 import { Button, TextButton, Typography, ZigInput } from '@zignaly-open/ui';
-import { Box } from '@mui/material';
+import { Box, IconButton, InputAdornment, Link } from '@mui/material';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoginPayload } from '../../../../apis/user/types';
 
 const SignupForm: React.FC = () => {
@@ -33,6 +34,7 @@ const SignupForm: React.FC = () => {
   });
   const [{ loading: signingUp }, authenticate] = useAuthenticate();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const submit = (data: LoginPayload) => {
     authenticate(data).catch((e) => {
@@ -42,6 +44,8 @@ const SignupForm: React.FC = () => {
       setError('password', { type: 'server', message: e.message });
     });
   };
+
+  const handleShowPassword = () => setShowPassword(!showPassword);
 
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
@@ -73,14 +77,37 @@ const SignupForm: React.FC = () => {
             <ZigInput
               id={'login__password'}
               label={t('login-form.inputText.password.label') + ':'}
-              type={'password'}
               placeholder={t('login-form.inputText.password.label')}
               disabled={signingUp}
               error={t(errors.password?.message)}
+              type={showPassword ? 'text' : 'password'}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Toggle password visibility'
+                      onClick={handleShowPassword}
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               {...field}
             />
           )}
         />
+        <Typography
+          marginTop={3}
+          variant='h4'
+          color='neutral300'
+          component='h4'
+        >
+          <Trans i18nKey='signup-form.accept-terms' t={t}>
+            <Link href='https://zignaly.com/legal/terms' />
+            <Link href='https://zignaly.com/legal/privacy' />
+          </Trans>
+        </Typography>
 
         <Action>
           <Button
