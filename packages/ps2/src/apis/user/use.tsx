@@ -48,7 +48,7 @@ export const useSignup = (): [
 ] => {
   const [loading, setLoading] = useState(false);
   const [signup] = useSignupMutation();
-  const procc = useProcessAuth();
+  const startSession = useStartSession();
 
   return [
     { loading },
@@ -56,7 +56,7 @@ export const useSignup = (): [
       setLoading(true);
       try {
         const user = await signup(payload).unwrap();
-        await procc({ ...user, emailUnconfirmed: true });
+        await startSession({ ...user, emailUnconfirmed: true });
       } finally {
         setLoading(false);
       }
@@ -64,7 +64,7 @@ export const useSignup = (): [
   ];
 };
 
-const useProcessAuth = () => {
+const useStartSession = () => {
   const { showModal } = useModal();
   const dispatch = useDispatch();
   const [loadSession] = useLazySessionQuery();
@@ -114,7 +114,7 @@ export const useAuthenticate = (): [
 ] => {
   const [login] = useLoginMutation();
   const performLogout = useLogout();
-  const procc = useProcessAuth();
+  const startSession = useStartSession();
 
   const [loading, setLoading] = useState(false);
 
@@ -132,7 +132,7 @@ export const useAuthenticate = (): [
           gRecaptchaResponse,
           c: 3,
         }).unwrap();
-        await procc(user);
+        await startSession(user);
         setLoading(false);
       } catch (e) {
         setLoading(false);
