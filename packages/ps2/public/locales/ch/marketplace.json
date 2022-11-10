@@ -7,11 +7,10 @@
     "currency": "CH-Báŝë Ĉüѓѓëńĉy",
     "assets": "CH-Áŝŝëṫŝ ïń Ṗööl",
     "nb-investors": "CH-# öḟ ïńvëŝṫöѓŝ",
-    "n-months": "CH-{{count}} ṁöńṫĥ",
-    "n-months_plural": "CH-{{count}} ṁöńṫĥŝ",
+    "n-months_one": "CH-{{count}} ṁöńṫĥ",
+    "n-months_other": "CH-{{count}} ṁöńṫĥŝ",
     "account-age": "CH-Áĉĉöüńṫ áĝë",
-    "x-investors": "CH-{{count}} ïńvëŝṫöѓ",
-    "x-investors_plural": "CH-{{count}} ïńvëŝṫöѓŝ",
-    "": "CH-"
+    "x-investors_one": "CH-{{count}} ïńvëŝṫöѓ",
+    "x-investors_other": "CH-{{count}} ïńvëŝṫöѓŝ"
   }
 }

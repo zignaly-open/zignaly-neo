@@ -2,8 +2,8 @@
   "no-investors": "CH-Ṫĥïŝ ŝëѓvïĉë ḋöëŝ ńöṫ ĥávë áńy ïńvëŝṫöѓŝ yëṫ",
   "failed-to-load": "CH-Ḟáïlëḋ ṫö löáḋ ṫĥë ḋáṫá",
   "title": "CH-Ïńvëŝṫöѓŝ",
-  "number-of-investors": "CH-{{count}} Ïńvëŝṫöѓ",
-  "number-of-investors_plural": "CH-{{count}} Ïńvëŝṫöѓŝ",
+  "number-of-investors_one": "CH-{{count}} Ïńvëŝṫöѓ",
+  "number-of-investors_other": "CH-{{count}} Ïńvëŝṫöѓŝ",
   "tableHeader": {
     "email": "CH-Ëṁáïl",
     "userId": "CH-Üŝëѓ ÏḊ",
