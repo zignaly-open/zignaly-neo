@@ -37,6 +37,13 @@ export const NavLink = styled('a')<{ active?: boolean; disabled?: boolean }>`
     `,
     )}
   `}
+
+  &:hover {
+    span svg {
+      fill: #fff;
+      color: #fff;
+    }
+  }
 `;
 
 export const NavList = styled('div')`
@@ -70,13 +77,6 @@ export const Networks = styled('div')`
     fill: #707185;
     color: #707185;
     transition: all 0.15s linear;
-  }
-
-  ${NavLink}:hover {
-    span svg {
-      fill: #fff;
-      color: #fff;
-    }
   }
 `;
 

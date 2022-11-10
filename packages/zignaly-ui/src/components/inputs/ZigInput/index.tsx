@@ -6,7 +6,7 @@ import { TextField } from "@mui/material";
 import TextButton from "../TextButton";
 
 const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
-  ({ error, labelAction, helperText, ...props }) => (
+  ({ error, wide, labelAction, helperText, ...props }) => (
     <TextField
       {...props}
       label={
@@ -30,14 +30,17 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
     />
   ),
 )`
+  ${(props) => props.wide && "display: block"};
+
   .MuiInputLabel-root {
     display: flex;
+    position: static;
     flex-direction: row;
     justify-content: space-between;
     font-size: 15px !important;
     line-height: 24px;
     letter-spacing: 0.55px;
-    color: ${({ theme }) => theme.palette.neutral200};
+    color: ${({ theme }) => theme.palette.neutral200} !important;
     transition: color 0.2s;
     &.Mui-focused {
       color: ${({ theme }) => theme.palette.neutral000};
@@ -53,7 +56,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
   .MuiInput-root {
     border: 1px solid ${({ theme }) => theme.palette.neutral600};
     padding: 12px 24px;
-    margin-top: 26px;
+    margin-top: 4px;
     min-height: 60px;
     border-radius: 5px;
     display: flex;

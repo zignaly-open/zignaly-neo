@@ -2,7 +2,12 @@ import React, { Suspense } from 'react';
 import Router from './Router';
 import theme from './theme';
 import * as Sentry from '@sentry/browser';
-import { dark, ThemeProvider, ThemeProviderMui } from '@zignaly-open/ui';
+import {
+  dark,
+  ThemeProvider as ThemeInheritorStyled,
+  ThemeProviderMui as ThemeInheritorMui,
+} from '@zignaly-open/ui';
+import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
 import { ToastContainer } from 'react-toastify';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
@@ -36,33 +41,35 @@ function App() {
       useRecaptchaNet={true}
     >
       <Provider store={store}>
-        <ThemeProvider theme={dark}>
-          <ThemeProviderMui theme={theme}>
-            <GlobalStyle />
-            <ToastContainer
-              position='top-right'
-              autoClose={5000}
-              hideProgressBar
-              closeOnClick
-              pauseOnFocusLoss
-              draggable
-              closeButton={false}
-              pauseOnHover
-              theme='dark'
-            />
-            <PersistGate persistor={persistor} loading={<CenteredLoader />}>
-              <BrowserRouter>
-                <ModalProvider>
-                  <Header />
-                  <UpdateChecker />
-                  <Suspense fallback={null}>
-                    <Router />
-                  </Suspense>
-                </ModalProvider>
-              </BrowserRouter>
-            </PersistGate>
-          </ThemeProviderMui>
-        </ThemeProvider>
+        <ThemeInheritorStyled theme={dark}>
+          <ThemeInheritorMui theme={theme}>
+            <ThemeProviderMui theme={theme}>
+              <GlobalStyle />
+              <ToastContainer
+                position='top-right'
+                autoClose={5000}
+                hideProgressBar
+                closeOnClick
+                pauseOnFocusLoss
+                draggable
+                closeButton={false}
+                pauseOnHover
+                theme='dark'
+              />
+              <PersistGate persistor={persistor} loading={<CenteredLoader />}>
+                <BrowserRouter>
+                  <ModalProvider>
+                    <Header />
+                    <UpdateChecker />
+                    <Suspense fallback={null}>
+                      <Router />
+                    </Suspense>
+                  </ModalProvider>
+                </BrowserRouter>
+              </PersistGate>
+            </ThemeProviderMui>
+          </ThemeInheritorMui>
+        </ThemeInheritorStyled>
       </Provider>
     </GoogleReCaptchaProvider>
   );

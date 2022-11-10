@@ -108,7 +108,7 @@ export default function BasicTable<T extends object>({
                     key={`--table-head-row-${index.toString()}`}
                     isSorted={column.isSorted}
                   >
-                    <HeaderRow>
+                    <HeaderRow style={column.style}>
                       <TextContainer>
                         <Typography color={"neutral200"} variant={"body2"} weight={"regular"}>
                           {column.render("Header")}
