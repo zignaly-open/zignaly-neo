@@ -92,7 +92,7 @@ const Marketplace: React.FC = () => {
         Cell: ({ cell: { value } }) =>
           +value.pnl30d || Object.keys(value.data).length > 1 ? (
             <>
-              <AreaChart variant='small' data={value.data} />
+              <AreaChart midLine variant='small' data={value.data} />
               <PercentageIndicator value={value.pnl30d} type={'graph'} />
             </>
           ) : (
