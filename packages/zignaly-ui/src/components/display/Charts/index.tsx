@@ -34,7 +34,9 @@ export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
                 domainPadding: { x: [0, -10], y: 5 },
                 domain: { y: [0, 35] },
               }
-            : {})}
+            : {
+                padding: { top: 5, bottom: 5 },
+              })}
         >
           {large && <VictoryAxis dependentAxis style={largeStyle} />}
           <VictoryArea
