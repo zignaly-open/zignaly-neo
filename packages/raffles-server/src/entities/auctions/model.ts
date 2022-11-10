@@ -11,8 +11,16 @@ import {
   HasMany,
   BelongsTo,
   AllowNull,
+  Validate,
 } from 'sequelize-typescript';
+import { strToUnit } from '../../redisService';
 import { User } from '../users/model';
+
+const isValidFee = (value: string) => {
+  if (!strToUnit(value)) {
+    throw new Error('Not a valid fee (probably due to decimal places)');
+  }
+};
 
 @Table
 export class Auction extends Model {
@@ -56,14 +64,23 @@ export class Auction extends Model {
   public maxClaimDate: Date;
 
   @Default('1')
+  @Validate({
+    isValidFee,
+  })
   @Column(DataType.DECIMAL)
   public bidFee: string;
 
   @Default('0.01')
+  @Validate({
+    isValidFee,
+  })
   @Column(DataType.DECIMAL)
   public currentBid: string;
 
   @Default('0.01')
+  @Validate({
+    isValidFee,
+  })
   @Column(DataType.DECIMAL)
   public bidStep: string;
 

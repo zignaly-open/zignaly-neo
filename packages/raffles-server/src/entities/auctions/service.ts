@@ -283,7 +283,7 @@ export const generateService = (user: ContextUser) => ({
     if (!user) {
       throw new Error('User not found');
     }
-    const [auction] = await getAuctionsWithBids(id, user);
+    const [auction] = await getAuctionsWithBids(id, true);
 
     if (!auction.isFinalized) throw new Error('Auction not finalized');
     if (auction.maxClaimDate && +new Date(auction.maxClaimDate) < Date.now())
