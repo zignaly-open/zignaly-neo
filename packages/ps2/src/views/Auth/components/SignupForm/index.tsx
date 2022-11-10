@@ -4,25 +4,19 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
 import { Form, Action, TitleHead } from './styles';
 import { SignupValidation } from './validations';
-import { useAuthenticate, useSignup } from '../../../../apis/user/use';
+import { useSignup } from '../../../../apis/user/use';
 import { useNavigate } from 'react-router-dom';
-import {
-  ROUTE_FORGOT_PASSWORD,
-  ROUTE_LOGIN,
-  ROUTE_SIGNUP,
-} from '../../../../routes';
+import { ROUTE_LOGIN } from '../../../../routes';
 import { Button, TextButton, Typography, ZigInput } from '@zignaly-open/ui';
 import { Box, IconButton, InputAdornment, Link } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoginPayload } from '../../../../apis/user/types';
-import AnchorLink from 'components/AnchorLink';
 
 const SignupForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
   const {
     handleSubmit,
     control,
-    setError,
     formState: { errors },
   } = useForm<LoginPayload>({
     mode: 'onBlur',
@@ -100,8 +94,8 @@ const SignupForm: React.FC = () => {
           component='h4'
         >
           <Trans i18nKey='signup-form.accept-terms' t={t}>
-            <AnchorLink to='https://zignaly.com/legal/terms' />
-            <AnchorLink to='https://zignaly.com/legal/privacy' />
+            <Link href='https://zignaly.com/legal/terms' />
+            <Link href='https://zignaly.com/legal/privacy' />
           </Trans>
         </Typography>
 
