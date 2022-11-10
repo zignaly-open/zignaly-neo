@@ -31,10 +31,6 @@ const SignupForm: React.FC = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
-  const submit = (data: LoginPayload) => {
-    signup(data);
-  };
-
   const handleShowPassword = () => setShowPassword(!showPassword);
 
   return (
@@ -42,7 +38,7 @@ const SignupForm: React.FC = () => {
       <TitleHead>
         <Typography variant={'h2'}>{t('signup-title')}</Typography>
       </TitleHead>
-      <Form onSubmit={handleSubmit(submit)}>
+      <Form onSubmit={handleSubmit(signup)}>
         <Controller
           name='email'
           control={control}

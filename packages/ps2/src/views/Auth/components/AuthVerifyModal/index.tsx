@@ -41,16 +41,16 @@ function AuthVerifyModal({
   const [submit2FA, status2FA] = useVerify2FA();
   const toast = useToast();
 
-  const [verify, verifyStatus] = isUnknownDevice
-    ? verifyDevice
-    : disabled
-    ? verifyEmail
-    : verifyEmailNewUser;
-  const [resend, resendStatus] = isUnknownDevice
-    ? resendDevice
-    : disabled
-    ? resendEmail
-    : resendEmailNewUser;
+  let [verify, verifyStatus] = verifyEmailNewUser;
+  let [resend, resendStatus] = resendEmailNewUser;
+
+  if (isUnknownDevice) {
+    [verify, verifyStatus] = verifyDevice;
+    [resend, resendStatus] = resendDevice;
+  } else if (disabled) {
+    [verify, verifyStatus] = verifyEmail;
+    [resend, resendStatus] = resendEmail;
+  }
 
   const performResend = () => {
     resend().then(() => toast.success(t('auth:resend-code')));
