@@ -14,8 +14,8 @@
 			"items": "elementos"
 		}
 	},
-	"assetsInPool-investors": "{{cuenta}} inversor",
-	"assetsInPool-investors_plural": "{{count}} inversores",
+	"assetsInPool-investors_one": "{{cuenta}} inversor",
+	"assetsInPool-investors_other": "{{count}} inversores",
 	"balanceSummary-invested": "Invertido",
 	"selector-validation-notData": "Datos no disponibles",
 	"investColumn": {

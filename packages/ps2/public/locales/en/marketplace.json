@@ -7,11 +7,10 @@
     "currency": "Base Currency",
     "assets": "Assets in Pool",
     "nb-investors": "# of investors",
-    "n-months": "{{count}} month",
-    "n-months_plural": "{{count}} months",
+    "n-months_one": "{{count}} month",
+    "n-months_other": "{{count}} months",
     "account-age": "Account age",
-    "x-investors": "{{count}} investor",
-    "x-investors_plural": "{{count}} investors",
-    "": ""
+    "x-investors_one": "{{count}} investor",
+    "x-investors_other": "{{count}} investors"
   }
 }
