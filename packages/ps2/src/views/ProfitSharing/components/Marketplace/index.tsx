@@ -78,6 +78,10 @@ const Marketplace: React.FC = () => {
         Cell: ({ cell: { value } }) => (
           <>
             <PercentageIndicator
+              style={{
+                fontSize: '18px',
+                lineHeight: '28px',
+              }}
               value={value.roi}
               label={formatDistance(new Date(), new Date(value.createdAt))}
             />

@@ -19,7 +19,10 @@ const AssetsInPool = ({
           flexDirection: 'row',
         }}
       >
-        <UsdPriceLabel value={assetsValue} />
+        <UsdPriceLabel
+          value={assetsValue}
+          style={{ fontSize: '18px', lineHeight: '28px' }}
+        />
         {+assetsValue >= 200000 && (
           <Icon>
             <WhaleIcon />
