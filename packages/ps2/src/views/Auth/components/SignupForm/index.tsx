@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
 import { Form, Action, TitleHead } from './styles';
 import { SignupValidation } from './validations';
-import { useAuthenticate } from '../../../../apis/user/use';
+import { useAuthenticate, useSignup } from '../../../../apis/user/use';
 import { useNavigate } from 'react-router-dom';
 import {
   ROUTE_FORGOT_PASSWORD,
@@ -15,6 +15,7 @@ import { Button, TextButton, Typography, ZigInput } from '@zignaly-open/ui';
 import { Box, IconButton, InputAdornment, Link } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoginPayload } from '../../../../apis/user/types';
+import AnchorLink from 'components/AnchorLink';
 
 const SignupForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -32,17 +33,12 @@ const SignupForm: React.FC = () => {
       password: '',
     },
   });
-  const [{ loading: signingUp }, authenticate] = useAuthenticate();
+  const [{ loading: signingUp }, signup] = useSignup();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const submit = (data: LoginPayload) => {
-    authenticate(data).catch((e) => {
-      // eslint-disable-next-line no-console
-      console.error(e);
-      setError('email', { type: 'server', message: e.message });
-      setError('password', { type: 'server', message: e.message });
-    });
+    signup(data);
   };
 
   const handleShowPassword = () => setShowPassword(!showPassword);
@@ -104,8 +100,8 @@ const SignupForm: React.FC = () => {
           component='h4'
         >
           <Trans i18nKey='signup-form.accept-terms' t={t}>
-            <Link href='https://zignaly.com/legal/terms' />
-            <Link href='https://zignaly.com/legal/privacy' />
+            <AnchorLink to='https://zignaly.com/legal/terms' />
+            <AnchorLink to='https://zignaly.com/legal/privacy' />
           </Trans>
         </Typography>
 

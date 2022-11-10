@@ -3,6 +3,8 @@ import {
   LoginFullPayload,
   LoginResponse,
   SessionResponse,
+  SignupPayload,
+  SignupResponse,
   UserData,
 } from './types';
 import baseQuery from '../baseQuery';
@@ -11,6 +13,14 @@ export const api = createApi({
   reducerPath: 'userApi',
   baseQuery,
   endpoints: (builder) => ({
+    signup: builder.mutation<SignupResponse, SignupPayload>({
+      query: (credentials) => ({
+        url: 'signup',
+        method: 'POST',
+        body: credentials,
+      }),
+    }),
+
     login: builder.mutation<LoginResponse, LoginFullPayload>({
       query: (credentials) => ({
         url: 'login',
@@ -19,7 +29,22 @@ export const api = createApi({
       }),
     }),
 
-    verifyCode: builder.mutation<void, { reason: string; code: string }>({
+    verifyCodeNewUser: builder.mutation<void, { code: string }>({
+      query: ({ code }) => ({
+        url: `user/verify_code/verify_email`,
+        method: 'POST',
+        body: { code },
+      }),
+    }),
+
+    resendCodeNewUser: builder.mutation<void, void>({
+      query: () => ({
+        url: `user/resend_code/verify_email`,
+        method: 'POST',
+      }),
+    }),
+
+    verifyCode: builder.mutation<void, { code: string }>({
       query: ({ code }) => ({
         url: `user/verify_code/enable_user`,
         method: 'POST',
@@ -81,13 +106,16 @@ export const api = createApi({
 });
 
 export const {
+  useSignupMutation,
   useLoginMutation,
   useLazyUserQuery,
   useLazySessionQuery,
   useVerify2FAMutation,
   useVerifyCodeMutation,
+  useVerifyCodeNewUserMutation,
   useVerifyKnownDeviceMutation,
   useSetLocaleMutation,
   useResendCodeMutation,
+  useResendCodeNewUserMutation,
   useResendKnownDeviceCodeMutation,
 } = api;

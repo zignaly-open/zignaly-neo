@@ -3,7 +3,9 @@ import {
   Exchange,
   ExtendedExchange,
   LoginPayload,
+  LoginResponse,
   SessionsTypes,
+  SignupPayload,
   UserData,
 } from './types';
 import {
@@ -11,10 +13,13 @@ import {
   useLazyUserQuery,
   useLoginMutation,
   useResendCodeMutation,
+  useResendCodeNewUserMutation,
   useResendKnownDeviceCodeMutation,
   useSetLocaleMutation,
+  useSignupMutation,
   useVerify2FAMutation,
   useVerifyCodeMutation,
+  useVerifyCodeNewUserMutation,
   useVerifyKnownDeviceMutation,
 } from './api';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
@@ -37,19 +42,82 @@ import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../service/api';
 import { useLocation } from 'react-router-dom';
 
+export const useSignup = (): [
+  { loading: boolean },
+  (payload: SignupPayload) => Promise<void>,
+] => {
+  const [loading, setLoading] = useState(false);
+  const [signup] = useSignupMutation();
+  const procc = useProcessAuth();
+
+  return [
+    { loading },
+    async (payload: SignupPayload) => {
+      setLoading(true);
+      try {
+        const user = await signup(payload).unwrap();
+        await procc({ ...user, emailUnconfirmed: true });
+      } finally {
+        setLoading(false);
+      }
+    },
+  ];
+};
+
+const useProcessAuth = () => {
+  const { showModal } = useModal();
+  const dispatch = useDispatch();
+  const [loadSession] = useLazySessionQuery();
+  const [loadTraderServices] = useLazyTraderServicesQuery();
+  const [loadUser] = useLazyUserQuery();
+  const { i18n } = useTranslation();
+
+  return async (user: { token: string } & Partial<LoginResponse>) => {
+    dispatch(setAccessToken(user.token));
+
+    const needsModal =
+      user.ask2FA ||
+      user.isUnknownDevice ||
+      user.disabled ||
+      user.emailUnconfirmed;
+
+    if (needsModal) {
+      let modal: ShowFnOutput<void>;
+      await new Promise<void>((resolve, reject) => {
+        modal = showModal(AuthVerifyModal, {
+          user,
+          onSuccess: resolve,
+          onFailure: reject,
+          close: () => modal.destroy(),
+        });
+      });
+    }
+
+    const [, userData] = await Promise.all([
+      loadSession()
+        .unwrap()
+        .then(({ validUntil }) => dispatch(setSessionExpiryDate(validUntil))),
+      loadUser().unwrap(),
+      loadTraderServices().unwrap(),
+    ]);
+
+    dispatch(setUser(userData));
+    startLiveSession(userData);
+    trackNewSession(userData, SessionsTypes.Login);
+    i18n.changeLanguage(userData.locale);
+  };
+};
+
 export const useAuthenticate = (): [
   { loading: boolean },
   (payload: LoginPayload) => Promise<void>,
 ] => {
   const [login] = useLoginMutation();
   const performLogout = useLogout();
-  const { showModal } = useModal();
-  const dispatch = useDispatch();
+  const procc = useProcessAuth();
+
   const [loading, setLoading] = useState(false);
-  const [loadSession] = useLazySessionQuery();
-  const [loadTraderServices] = useLazyTraderServicesQuery();
-  const [loadUser] = useLazyUserQuery();
-  const { i18n } = useTranslation();
+
   const { executeRecaptcha } = useGoogleReCaptcha();
   // can't use useAsyncFn because https://github.com/streamich/react-use/issues/1768
   return [
@@ -64,41 +132,7 @@ export const useAuthenticate = (): [
           gRecaptchaResponse,
           c: 3,
         }).unwrap();
-
-        dispatch(setAccessToken(user.token));
-
-        const needsModal =
-          user.ask2FA ||
-          user.isUnknownDevice ||
-          user.disabled ||
-          user.emailUnconfirmed;
-
-        if (needsModal) {
-          let modal: ShowFnOutput<void>;
-          await new Promise<void>((resolve, reject) => {
-            modal = showModal(AuthVerifyModal, {
-              user,
-              onSuccess: resolve,
-              onFailure: reject,
-              close: () => modal.destroy(),
-            });
-          });
-        }
-
-        const [, userData] = await Promise.all([
-          loadSession()
-            .unwrap()
-            .then(({ validUntil }) =>
-              dispatch(setSessionExpiryDate(validUntil)),
-            ),
-          loadUser().unwrap(),
-          loadTraderServices().unwrap(),
-        ]);
-
-        dispatch(setUser(userData));
-        startLiveSession(userData);
-        trackNewSession(userData, SessionsTypes.Login);
-        i18n.changeLanguage(userData.locale);
+        await procc(user);
         setLoading(false);
       } catch (e) {
         setLoading(false);
@@ -130,12 +164,16 @@ export function useCurrentUser(): UserData | Partial<UserData> {
 }
 
 export const useVerify2FA: typeof useVerify2FAMutation = useVerify2FAMutation;
+export const useVerifyEmailNewUser: typeof useVerifyCodeNewUserMutation =
+  useVerifyCodeNewUserMutation;
 export const useVerifyEmail: typeof useVerifyCodeMutation =
   useVerifyCodeMutation;
 export const useVerifyEmailKnownDevice: typeof useVerifyKnownDeviceMutation =
   useVerifyKnownDeviceMutation;
 export const useResendCode: typeof useResendCodeMutation =
   useResendCodeMutation;
+export const useResendCodeNewUser: typeof useResendCodeNewUserMutation =
+  useResendCodeNewUserMutation;
 export const useResendKnownDeviceCode: typeof useResendKnownDeviceCodeMutation =
   useResendKnownDeviceCodeMutation;
 
