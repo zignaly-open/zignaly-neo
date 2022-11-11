@@ -7,13 +7,15 @@ import PercentageIndicator from "./components/display/Table/components/Percentag
 import PriceLabel, { UsdPriceLabel } from "./components/display/Table/components/PriceLabel";
 import Typography from "./components/display/Typography";
 import ZigWalletIndicator from "./components/display/ZigWalletIndicator";
-import CoinLabel from "./components/display/Table/components/CoinLabel";
+export { default as CoinLabel } from "./components/display/Table/components/CoinLabel";
 import Toaster from "./components/display/Toaster";
 import ProgressSlider from "./components/display/ProgressSlider";
 import InvestSlider from "./components/display/InvestSlider";
 
 import { AreaChart } from "./components/display/Charts";
 import DropDown from "./components/display/DropDown";
+
+export { default as ZignalyQRCode } from "./components/display/ZignalyQRCode";
 
 // Inputs
 import Button from "./components/inputs/Button";
@@ -38,6 +40,7 @@ import WithdrawModal from "components/modals/MyAccount/WithdrawModal";
 import ConnectWalletModal from "components/modals/ZigRaffle/ConnectWallet";
 
 // Icons
+export { ReactComponent as CloneIcon } from "assets/icons/clone-icon.svg";
 export { ReactComponent as RefreshIcon } from "assets/icons/refresh-icon.svg";
 export { ReactComponent as PencilIcon } from "assets/icons/pencil-icon.svg";
 export { ReactComponent as WhaleIcon } from "assets/icons/whale-icon.svg";
@@ -70,9 +73,6 @@ export { ReactComponent as GlobeLanguages } from "assets/icons/globe-languages.s
 export { ReactComponent as TimeIcon } from "assets/icons/time-icon.svg";
 export { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
 
-SliderInput;
-CoinIcon;
-
 // Navigation
 import Header from "./components/navigation/Header";
 import MenuDropDown from "./components/navigation/MenuDropDown";
@@ -88,7 +88,7 @@ import CoinIcon from "components/display/CoinIcon";
 import SliderInput from "components/inputs/SliderInput";
 import InputAmountAdvanced from "components/inputs/InputAmountAdvanced";
 import { NiceScrollbar } from "utils/css";
-
+export { SelectSizes } from "components/inputs/Selector/types";
 export {
   /**
    * =-=-=-=-=-=-=-=
@@ -110,7 +110,6 @@ export {
   CoinIcon,
   ErrorMessage,
   ZigWalletIndicator,
-  CoinLabel,
   ProgressSlider,
   InvestSlider,
   Toaster,
