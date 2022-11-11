@@ -8,6 +8,7 @@
     "title": "Amount Invested:",
     "profits": {
       "title": "What to do with profits:",
+      "title-confirmation": "Percentage of profits to Withdraw:",
       "left": "Reinvest",
       "right": "Withdraw"
     },
