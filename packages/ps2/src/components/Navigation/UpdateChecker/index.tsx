@@ -10,6 +10,7 @@ const UpdateChecker: React.FC = () => {
   const { t } = useTranslation('common');
   const { status, reloadPage } = useUpdateCheck({
     type: 'interval',
+    ignoreServerCache: true,
     interval: VERSION_CHECK_INTERVAL,
   });
 
