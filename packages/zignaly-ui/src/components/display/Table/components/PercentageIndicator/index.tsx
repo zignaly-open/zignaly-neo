@@ -101,7 +101,7 @@ const PercentageIndicator = ({
             <>
               {renderIndicator()}
               {label && (
-                <Subtitle variant="body2" color="neutral400">
+                <Subtitle variant="h5" color="neutral400">
                   {label}
                 </Subtitle>
               )}
