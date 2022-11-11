@@ -25,7 +25,7 @@ export const api = createApi({
         exchangeInternalId: string;
       }
     >({
-      invalidatesTags: () => ['Balance', 'Investment'],
+      invalidatesTags: ['Balance', 'Investment'],
       query: ({ serviceId, amount, exchangeInternalId }) => ({
         url: `services/${serviceId}/investments/out`,
         method: 'POST',
@@ -41,7 +41,7 @@ export const api = createApi({
         url: `user/exchanges/${serviceId}/invested`,
         method: 'GET',
       }),
-      providesTags: () => ['Investment'],
+      providesTags: ['Investment'],
     }),
 
     updateTakeProfit: builder.mutation<
