@@ -139,7 +139,7 @@ const MyBalancesTable = (): JSX.Element => {
             balanceTotalUSDT: balance.balanceTotalUSDT,
           },
         })),
-    [exchangeType],
+    [exchangeType, t],
   );
 
   return (

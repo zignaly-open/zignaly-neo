@@ -53,7 +53,7 @@ const PendingTransactionsList: React.FC<{
     }
 
     return fields;
-  }, [details?.pending, details?.transferOut, details?.profitOut, coin]);
+  }, [details?.pending, details?.transferOut, details?.profitOut, coin, t]);
 
   return (
     <>

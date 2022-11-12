@@ -107,7 +107,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           ),
       },
     ],
-    [],
+    [t],
   );
 
   return (

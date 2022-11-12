@@ -179,7 +179,7 @@ const MyDashboard: React.FC = () => {
           sortBigNumbers(a.values.all.pnlPctLc, b.values.all.pnlPctLc),
       },
     ],
-    [],
+    [t],
   );
 
   const bodyMapper = useCallback(
@@ -217,7 +217,7 @@ const MyDashboard: React.FC = () => {
         },
       };
     },
-    [],
+    [t],
   );
 
   return (
