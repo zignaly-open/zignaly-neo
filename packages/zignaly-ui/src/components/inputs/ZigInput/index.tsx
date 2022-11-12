@@ -70,11 +70,13 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
       border-color: ${({ theme }) => theme.palette.neutral700};
     }
 
-    &.Mui-focused {
+    &.Mui-focused,
+    &:hover {
       border-color: ${({ theme }) => theme.palette.neutral400};
     }
 
     &.Mui-error,
+    &.Mui-error:hover,
     &.Mui-error.Mui-focused {
       border-color: ${({ theme }) => theme.palette.redGraphOrError};
 
@@ -87,7 +89,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
   .MuiInput-input {
     background: transparent;
     border: none;
-    color: rgb(193, 193, 200) !important;
+    color: ${({ theme }) => theme.palette.neutral100} !important;
     outline: none;
     font-weight: 400;
     font-size: 16px;
