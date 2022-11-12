@@ -44,8 +44,7 @@ export const Inline = styled.div`
 `;
 
 export const Subtitle = styled(Typography)`
-  display: inline;
-  line-height: 20px !important;
+  display: block;
 `;
 
 export const Indicator = styled(CaretTriangleIcon)<{ isPositive: boolean }>`

@@ -14,6 +14,7 @@ import { Service } from '../../../../apis/service/types';
 import CenteredLoader from '../../../../components/CenteredLoader';
 import { LoaderWrapper } from './styles';
 import { MarketplaceActionType } from './types';
+import BigNumber from 'bignumber.js';
 
 const MarketplaceAction = ({ service }: MarketplaceActionType) => {
   const exchange = useActiveExchange();
@@ -27,9 +28,10 @@ const MarketplaceAction = ({ service }: MarketplaceActionType) => {
   );
 
   const traderService = marketplaceServiceToServiceType(service) as Service;
-  const investedAmount = investments?.find(
-    (x) => x.serviceId === service.id,
-  )?.invested;
+  const investment = investments?.find((x) => x.serviceId === service.id);
+  const investedAmount = investment
+    ? new BigNumber(investment.invested).plus(investment.pending)
+    : 0;
 
   return (
     <Box justifyContent='center'>
@@ -42,7 +44,7 @@ const MarketplaceAction = ({ service }: MarketplaceActionType) => {
           {isAuthenticated && investedAmount ? (
             <InvestedButtonBase
               service={traderService}
-              investedAmount={investedAmount}
+              investedAmount={investedAmount.toString()}
             />
           ) : (
             <InvestButton service={traderService} />

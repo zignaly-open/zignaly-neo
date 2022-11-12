@@ -34,7 +34,9 @@ export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
                 domainPadding: { x: [0, -10], y: 5 },
                 domain: { y: [0, 35] },
               }
-            : {})}
+            : {
+                padding: { top: 5, bottom: 10 },
+              })}
         >
           {large && <VictoryAxis dependentAxis style={largeStyle} />}
           <VictoryArea
@@ -58,8 +60,10 @@ export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
                   strokeOpacity: 0.7,
                 },
               }}
-              x={0}
-              y={() => processedData[0].y}
+              data={[
+                { x: processedData[0].x, y: 0 },
+                { x: processedData[processedData.length - 1].x, y: 0 },
+              ]}
             />
           )}
         </ChartWrapperComponent>
@@ -70,7 +74,7 @@ export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
 
 const GraphColor = ({ isGreen, gradientId }: { isGreen: boolean; gradientId: string }) => {
   return (
-    <svg style={{ width: 0, height: 0 }}>
+    <svg style={{ width: 0, height: 0, display: "block" }}>
       <defs>
         <linearGradient id={gradientId} x1="1%" y1="100%" x2="0%" y2="0%">
           <stop offset="0%" stopColor={isGreen ? "rgba(17, 27, 47, 0)" : "rgba(18, 20, 39, 0)"} />

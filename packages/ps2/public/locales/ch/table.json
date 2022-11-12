@@ -14,8 +14,8 @@
       "items": "CH-ïṫëṁŝ"
     }
   },
-  "assetsInPool-investors": "CH-{{count}} ïńvëŝṫöѓ",
-  "assetsInPool-investors_plural": "CH-{{count}} ïńvëŝṫöѓŝ",
+  "assetsInPool-investors_one": "CH-{{count}} ïńvëŝṫöѓ",
+  "assetsInPool-investors_other": "CH-{{count}} ïńvëŝṫöѓŝ",
   "balanceSummary-invested": "CH-Ïńvëŝṫëḋ",
   "selector-validation-notData": "CH-Ńö ḋáṫá áváïláblë",
   "investColumn": {

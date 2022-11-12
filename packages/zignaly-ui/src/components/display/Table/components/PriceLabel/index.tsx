@@ -17,6 +17,7 @@ const PriceLabel = ({
   suffixElement = null,
   hideCoinName = false,
   green,
+  style,
   precision,
   valuePrefix,
   red,
@@ -34,6 +35,7 @@ const PriceLabel = ({
             fontSize: "15px",
             lineHeight: "24px",
             color: green ? theme.greenGraph : red ? theme.redGraphOrError : theme.neutral300,
+            ...style, // TODO: should use variants and not styles
           }}
           displayType={"text"}
           thousandSeparator={true}
@@ -58,7 +60,7 @@ const PriceLabel = ({
 
 export default PriceLabel;
 
-export const UsdPriceLabel: React.FC<UsdPriceLabelProps> = ({ value, green, red }) => (
+export const UsdPriceLabel: React.FC<UsdPriceLabelProps> = ({ style, value, green, red }) => (
   <PriceLabel
     value={value}
     green={green}
@@ -66,6 +68,7 @@ export const UsdPriceLabel: React.FC<UsdPriceLabelProps> = ({ value, green, red 
     precision={2}
     valuePrefix={"$"}
     hideCoinName
+    style={style}
     coin={""}
   />
 );

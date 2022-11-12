@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 
 export type PriceLabelProps = {
   value: number | string;
@@ -9,6 +9,7 @@ export type PriceLabelProps = {
   green?: boolean;
   red?: boolean;
   textColor?: boolean;
+  style?: CSSProperties;
   bottomElement?: React.ReactNode;
   suffixElement?: React.ReactNode;
   className?: string;

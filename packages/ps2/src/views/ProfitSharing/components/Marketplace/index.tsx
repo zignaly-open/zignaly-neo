@@ -22,6 +22,15 @@ import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace
 import AssetsInPool from '../AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 
+const initialStateTable = {
+  sortBy: [
+    {
+      id: '90d',
+      desc: true,
+    },
+  ],
+};
+
 const Marketplace: React.FC = () => {
   const marketplaceEndpoint = useMarketplace();
   const { t } = useTranslation('marketplace');
@@ -32,7 +41,7 @@ const Marketplace: React.FC = () => {
         Header: t('table.service-name'),
         style: {
           justifyContent: 'flex-start',
-          paddingLeft: '52px',
+          paddingLeft: '67px',
         },
         accessor: 'service',
         headerWithFooter: (
@@ -50,7 +59,7 @@ const Marketplace: React.FC = () => {
           a.values.service.name?.localeCompare(b.values.service.name),
       },
       {
-        Header: () => <Inline>{t('table.assets')}</Inline>,
+        Header: () => t('table.assets'),
         accessor: 'assets',
         headerWithFooter: <Inline>{t('table.nb-investors')}</Inline>,
         Cell: ({ cell: { value } }) => (
@@ -69,6 +78,10 @@ const Marketplace: React.FC = () => {
         Cell: ({ cell: { value } }) => (
           <>
             <PercentageIndicator
+              style={{
+                fontSize: '18px',
+                lineHeight: '28px',
+              }}
               value={value.roi}
               label={formatDistance(new Date(), new Date(value.createdAt))}
             />
@@ -83,12 +96,8 @@ const Marketplace: React.FC = () => {
         Cell: ({ cell: { value } }) =>
           +value.pnl30d || Object.keys(value.data).length > 1 ? (
             <>
-              <AreaChart variant='small' data={value.data} />
-              <PercentageIndicator
-                normalized
-                value={value.pnl30d}
-                type={'graph'}
-              />
+              <AreaChart midLine variant='small' data={value.data} />
+              <PercentageIndicator value={value.pnl30d} type={'graph'} />
             </>
           ) : (
             <Typography variant={'body2'} color={'neutral400'}>
@@ -150,6 +159,7 @@ const Marketplace: React.FC = () => {
               </Typography>
             </Box>
             <Table
+              initialState={initialStateTable}
               columns={tableColumns}
               data={services?.map(bodyMapper)}
               emptyMessage={t('table-search-emptyMessage')}

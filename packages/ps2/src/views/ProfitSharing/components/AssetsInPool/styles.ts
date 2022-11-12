@@ -1,4 +1,5 @@
 import { Box, styled } from '@mui/material';
+import { Typography } from '@zignaly-open/ui';
 
 export const Icon = styled('div')`
   margin-left: 8px;
@@ -14,6 +15,9 @@ export const PriceBoxOverride = styled(Box)`
   span {
     ${(props) => `color: ${props.theme.palette.neutral000}`} !important;
     position: relative;
-    top: 2px;
   }
+`;
+
+export const BlockTypography = styled(Typography)`
+  display: block;
 `;

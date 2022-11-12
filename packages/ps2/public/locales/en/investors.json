@@ -2,8 +2,8 @@
   "no-investors": "This service does not have any investors yet",
   "failed-to-load": "Failed to load the data",
   "title": "Investors",
-  "number-of-investors": "{{count}} Investor",
-  "number-of-investors_plural": "{{count}} Investors",
+  "number-of-investors_one": "{{count}} Investor",
+  "number-of-investors_other": "{{count}} Investors",
   "tableHeader": {
     "email": "Email",
     "userId": "User ID",

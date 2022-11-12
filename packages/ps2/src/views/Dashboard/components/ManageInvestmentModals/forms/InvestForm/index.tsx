@@ -136,7 +136,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           {isConfirmation ? (
             <>
               <Typography variant={'body1'}>
-                {t('form.profits.title')}
+                {t('form.profits.title-confirmation')}
               </Typography>
               <AmountInvested>
                 <TokenValue>
@@ -147,9 +147,6 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                       suffix={'%'}
                       thousandSeparator={true}
                     />
-                  </Typography>
-                  <Typography variant={'h3'} color={'neutral400'}>
-                    {String(coin.id).toUpperCase()}
                   </Typography>
                 </TokenValue>
               </AmountInvested>
