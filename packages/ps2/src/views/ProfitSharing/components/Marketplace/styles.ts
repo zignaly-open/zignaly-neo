@@ -5,7 +5,7 @@ export const Layout = styled(PageContainer)`
   padding-top: 120px;
 `;
 
-export const Inline = styled.div`
+export const Inline = styled('div')`
   text-align: left;
   padding: 0 22px;
 `;
