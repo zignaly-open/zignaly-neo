@@ -31,11 +31,14 @@ declare module "@mui/material/styles" {
     successToasterBorder: string;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface Palette extends CustomPalette {}
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface PaletteOptions extends CustomPalette {}
 }
 
 declare module "@mui/material/styles/createTheme" {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   export interface Theme extends ThemeZig {}
 }
 
