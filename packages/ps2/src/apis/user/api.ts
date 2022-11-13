@@ -75,7 +75,7 @@ export const api = createApi({
       }),
     }),
 
-    resendKnownDeviceCode: builder.mutation<LoginResponse, void>({
+    resendKnownDeviceCode: builder.mutation<void, void>({
       query: () => ({
         url: `/known_device/resend`,
         method: 'POST',
