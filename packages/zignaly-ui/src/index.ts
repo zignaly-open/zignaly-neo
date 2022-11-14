@@ -84,6 +84,7 @@ import BrandImage from "./components/navigation/Header/components/BrandImage";
 export * from "./theme";
 export { default as ZigInput } from "./components/inputs/ZigInput";
 export { default as ZigAutocomplete } from "./components/inputs/ZigAutocomplete";
+export { default as ZigSelect } from "./components/inputs/ZigSelect";
 import ThemeProvider from "utils/ThemeProvider";
 import { sortByValue } from "utils/numbers";
 import { HeaderLinksContainer } from "components/navigation/Header/styles";
