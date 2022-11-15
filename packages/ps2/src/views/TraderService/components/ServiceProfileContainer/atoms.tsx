@@ -45,8 +45,8 @@ import {
   useIsAuthenticated,
   useSetMissedRoute,
 } from '../../../../apis/user/use';
-import { useZModal } from '../../../../components/ZModal/use';
 import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
+import { useZModal } from '../../../../components/ZModal/use';
 
 export const InvestButton: React.FC<{
   service: Service;
@@ -63,14 +63,11 @@ export const InvestButton: React.FC<{
     if (isAuthenticated) {
       selectInvestment(serviceToInvestmentServiceDetail(service));
       const showDeposit = +balance === 0;
-      showModal(
-        showDeposit ? DepositModal : InvestModal,
-        showDeposit
-          ? {
-              allowedCoins: [service.ssc],
-            }
-          : {},
-      );
+      if (showDeposit)
+        showModal(DepositModal, {
+          allowedCoins: [service.ssc],
+        });
+      else showModal(InvestModal);
     } else {
       setMissedRoute();
       navigate(ROUTE_LOGIN);

@@ -16,6 +16,6 @@ export type CoinValue = {
 };
 
 export type DepositFormData = {
-  coin: CoinValue;
-  network: CoinNetworkValue;
+  coin: string;
+  network: string;
 };

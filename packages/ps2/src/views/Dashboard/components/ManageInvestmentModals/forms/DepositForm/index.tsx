@@ -1,16 +1,16 @@
 import React, { useEffect, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { CoinIconWithMargins, Form, FullWidthSelect } from './styles';
+import { CoinIconWrapper, Form, FullWidthSelect } from './styles';
 import {
   dark,
   InputText,
   ErrorMessage,
   ZignalyQRCode,
-  Select as Selector,
+  ZigSelect,
   CloneIcon,
-  SelectSizes,
   Typography,
+  CoinIcon,
 } from '@zignaly-open/ui';
 import copy from 'copy-to-clipboard';
 import { DepositFormData } from './types';
@@ -42,11 +42,6 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   const coin = watch('coin');
   const network = watch('network');
 
-  const { isFetching: loading, data: depositInfo } = useDepositInfo(
-    coin?.id,
-    network?.network,
-  );
-
   const coinOptions = useMemo(
     () =>
       coins &&
@@ -55,40 +50,52 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         mergeCoinsAndBalances(coins, balances),
       )
         .map(([ssc, balance]) => ({
-          id: ssc,
-          caption: balance.name,
-          leftElement: (
-            <CoinIconWithMargins
-              size={'small'}
-              coin={ssc}
-              name={balance.name}
-            />
+          value: ssc,
+          name: balance.name,
+          label: (
+            <CoinIconWrapper>
+              <CoinIcon size={'small'} coin={ssc} name={balance.name} />{' '}
+              <Typography weight={'regular'}>{balance.name}</Typography>
+            </CoinIconWrapper>
           ),
           inOrders: balance.balanceLocked,
           balance: balance.balanceTotal,
           available: balance.balanceFree,
           networks: balance.networks?.map((n) => ({
-            caption: n.name,
+            label: n.name,
+            value: n.network,
             ...n,
           })),
         }))
-        .sort((a, b) => a.caption?.localeCompare(b.caption))
-        .filter((x) => !allowedCoins || allowedCoins?.includes(x.id)),
+        .sort((a, b) => a.name?.localeCompare(b.name))
+        .filter((x) => !allowedCoins || allowedCoins?.includes(x.value)),
     [coins, allowedCoins],
   );
 
+  const { isFetching: loading, data: depositInfo } = useDepositInfo(
+    coin,
+    network,
+  );
+
+  const coinObject = coin && coinOptions?.find((x) => x.value === coin);
+  const networkObject =
+    network && coinObject?.networks?.find((x) => x.value === network);
+
   useEffect(() => {
     if (coin) {
-      setValue('network', coin.networks.length === 1 ? coin.networks[0] : null);
+      setValue(
+        'network',
+        coinObject.networks.length === 1 ? coinObject.networks[0].value : null,
+      );
     } else if (coinOptions?.length === 1) {
-      setValue('coin', coinOptions[0]);
+      setValue('coin', coinOptions[0].value);
     }
   }, [coin]);
 
   useEffect(() => {
     if (!coin && coinOptions && selectedCoin) {
-      const match = coinOptions.find((x) => x.id === selectedCoin);
-      match && setValue('coin', match);
+      const match = coinOptions.find((x) => x.value === selectedCoin);
+      match && setValue('coin', match?.value);
     }
   }, []);
 
@@ -98,7 +105,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         <Typography>{t('description')}</Typography>
       </Box>
 
-      <Grid container pb={8}>
+      <Grid container>
         <Grid item xs={12} md={6} pt={3}>
           <FullWidthSelect>
             <Controller
@@ -106,14 +113,11 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <Selector
+                <ZigSelect
                   label={t('coinSelector.label')}
                   placeholder={t('coinSelector.placeholder')}
-                  size={SelectSizes.LARGE}
                   {...field}
                   options={coinOptions}
-                  maxHeight={60}
-                  transparent={true}
                 />
               )}
             />
@@ -137,30 +141,30 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               <Typography variant='body2' color='neutral000' weight='medium'>
                 <NumberFormat
                   displayType={'text'}
-                  value={coin?.balance ?? ''}
+                  value={coinObject?.balance ?? ''}
                 />
               </Typography>{' '}
-              {coin?.caption ?? ''}
+              {coinObject?.name ?? ''}
             </Typography>
             <Typography variant='body2' color='neutral200' weight='medium'>
               {t('balances.balanceLocked')}{' '}
               <Typography variant='body2' color='neutral000' weight='medium'>
                 <NumberFormat
-                  value={coin?.inOrders ?? ''}
+                  value={coinObject?.inOrders ?? ''}
                   displayType={'text'}
                 />
               </Typography>{' '}
-              {coin?.caption ?? ''}
+              {coinObject?.name ?? ''}
             </Typography>
             <Typography variant='body2' color='neutral200' weight='medium'>
               {t('balances.balanceFree')}{' '}
               <Typography variant='body2' color='neutral000' weight='medium'>
                 <NumberFormat
-                  value={coin?.available ?? ''}
+                  value={coinObject?.available ?? ''}
                   displayType={'text'}
                 />
               </Typography>{' '}
-              {coin?.caption ?? ''}
+              {coinObject?.name ?? ''}
             </Typography>
           </Grid>
         )}
@@ -172,21 +176,18 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <Selector
+                <ZigSelect
                   label={t('networkSelector.label')}
                   placeholder={t('networkSelector.placeholder')}
-                  size={SelectSizes.LARGE}
                   {...field}
-                  options={coin?.networks}
-                  maxHeight={60}
-                  transparent={true}
+                  options={coinObject?.networks}
                 />
               )}
             />
           </FullWidthSelect>
         </Grid>
 
-        {!!network && network?.depositEnable && (
+        {!!network && networkObject?.depositEnable && (
           <>
             <Grid item xs={12} pt={3}>
               <InputText
@@ -206,12 +207,12 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               />
             </Grid>
 
-            {network?.name && (
+            {networkObject?.label && (
               <Box>
                 <ErrorMessage
                   text={t('depositAddress.warning', {
-                    network: network?.name,
-                    coin: coin?.caption,
+                    network: networkObject?.label,
+                    coin: coinObject?.name,
                   })}
                 />
               </Box>
@@ -256,11 +257,13 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                     }}
                   >
                     <ZignalyQRCode
-                      label={t('depositQR.address', { coin: coin?.caption })}
+                      label={t('depositQR.address', {
+                        coin: coinObject?.name,
+                      })}
                       url={depositInfo.address}
                     />
                     <ZignalyQRCode
-                      label={t('depositQR.memo', { coin: coin?.caption })}
+                      label={t('depositQR.memo', { coin: coinObject?.name })}
                       url={depositInfo?.tag}
                     />
                   </Box>
@@ -270,7 +273,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
           </>
         )}
 
-        {!!network && !network.depositEnable && (
+        {!!network && !networkObject?.depositEnable && (
           <ErrorMessage text={t('no-network')} />
         )}
       </Grid>
