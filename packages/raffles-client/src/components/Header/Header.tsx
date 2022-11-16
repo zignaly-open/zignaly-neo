@@ -72,7 +72,7 @@ const Header = () => {
   useEffect(() => {
     // Avoid making an unnecessary request if user id is loading
     if (!token || currentUser?.id) {
-      triggerTz(href, null, currentUser?.publicAddress);
+      triggerTz(href, currentUser?.publicAddress);
     }
   }, [href, currentUser, token]);
 
