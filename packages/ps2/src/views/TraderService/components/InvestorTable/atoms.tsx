@@ -3,7 +3,7 @@ import React from 'react';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
-import styled from 'styled-components';
+import { styled } from '@mui/material';
 
 const TypographyStyled = styled(Typography)<{ opacity: number }>`
   opacity: ${(props) => props.opacity};

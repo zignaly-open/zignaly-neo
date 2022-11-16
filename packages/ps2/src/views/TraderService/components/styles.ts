@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material';
 import { MarginContainer } from '@zignaly-open/ui';
 
 export const TraderServicePageContainer = styled(MarginContainer)`

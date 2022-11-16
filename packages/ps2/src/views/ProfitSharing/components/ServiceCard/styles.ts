@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material';
 import { PriceLabel, Typography } from '@zignaly-open/ui';
 
 export const TotalValue = styled(PriceLabel)`

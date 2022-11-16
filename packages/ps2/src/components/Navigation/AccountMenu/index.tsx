@@ -6,7 +6,7 @@ import {
   LogoutButtonWrap,
   AccountName,
 } from './styles';
-import { useTheme } from 'styled-components';
+import { useTheme } from '@mui/material';
 import {
   useActiveExchange,
   useCurrentUser,
@@ -14,7 +14,6 @@ import {
   useLogout,
   useSelectExchange,
 } from '../../../apis/user/use';
-import Theme from '@zignaly-open/ui/lib/theme/theme';
 import {
   Avatar,
   Button,
@@ -33,7 +32,7 @@ import { generatePath, Link, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
 
 function AccountMenu(): React.ReactElement | null {
-  const theme = useTheme() as Theme;
+  const theme = useTheme();
   const logout = useLogout();
   const { t } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
@@ -57,7 +56,11 @@ function AccountMenu(): React.ReactElement | null {
         </Link>
         <Link to={ROUTE_LOGIN}>
           <LoginButton id={'menu__login'}>
-            <UserIcon color={theme.neutral300} width={'16px'} height={'16px'} />
+            <UserIcon
+              color={theme.palette.neutral300}
+              width={'16px'}
+              height={'16px'}
+            />
             <Typography variant={'buttonsm'} color={'neutral300'}>
               {t('account-menu.isAuth-button-logIn')}
             </Typography>

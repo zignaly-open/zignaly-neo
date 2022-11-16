@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material';
 
-export const Form = styled.form`
+export const Form = styled('form')`
   display: flex;
   flex-direction: column;
   gap: 22px;
@@ -8,7 +8,7 @@ export const Form = styled.form`
   width: 100%;
 `;
 
-export const Action = styled.div`
+export const Action = styled('div')`
   display: inline-flex;
   flex-direction: column;
   gap: 22px;
@@ -17,7 +17,7 @@ export const Action = styled.div`
   justify-content: center;
 `;
 
-export const TitleHead = styled.div`
+export const TitleHead = styled('div')`
   display: flex;
   align-content: center;
   justify-content: center;

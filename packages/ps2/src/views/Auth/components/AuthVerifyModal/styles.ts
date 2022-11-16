@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material';
 
-export const Container = styled.div`
+export const Container = styled('div')`
   display: flex;
   width: 100%;
   align-items: center;
@@ -9,7 +9,7 @@ export const Container = styled.div`
   gap: 72px;
 `;
 
-export const Title = styled.div`
+export const Title = styled('div')`
   display: flex;
   justify-content: center;
   align-items: center;

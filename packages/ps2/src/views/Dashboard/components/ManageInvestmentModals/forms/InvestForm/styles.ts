@@ -1,6 +1,6 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material';
 
-export const Field = styled.div`
+export const Field = styled('div')`
   display: grid;
   grid-template-columns: 1fr 1fr;
   user-select: none;
@@ -12,10 +12,10 @@ export const Field = styled.div`
     ${({ theme }) => `
     &:first-child {
       padding-right: 42px;
-      border-right: 1px solid ${theme.neutral500};
+      border-right: 1px solid ${theme.palette.neutral500};
     }
   `};
   }
 `;
 
-export const Form = styled.form``;
+export const Form = styled('form')``;

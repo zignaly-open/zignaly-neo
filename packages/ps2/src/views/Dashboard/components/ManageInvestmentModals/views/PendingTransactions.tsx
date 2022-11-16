@@ -7,8 +7,7 @@ import {
   Typography,
 } from '@zignaly-open/ui';
 import { ChangeViewFn, EditInvestmentViews } from '../types';
-import { useTheme } from 'styled-components';
-import Theme from '@zignaly-open/ui/lib/theme/theme';
+import { useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import {
   useInvestmentDetails,
@@ -18,7 +17,7 @@ import {
 const PendingTransactions: React.FC<{
   setView: ChangeViewFn;
 }> = ({ setView }) => {
-  const theme = useTheme() as Theme;
+  const theme = useTheme();
   const { serviceId } = useSelectedInvestment();
   const { data: details } = useInvestmentDetails(serviceId);
   const { t } = useTranslation('edit-investment');
@@ -45,7 +44,7 @@ const PendingTransactions: React.FC<{
             <ArrowRightIcon
               width={'22px'}
               height={'22px'}
-              color={theme.links}
+              color={theme.palette.links}
             />
           }
           caption={t('pendingTransactions.link-label')}

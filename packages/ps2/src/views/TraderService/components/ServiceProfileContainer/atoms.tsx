@@ -24,6 +24,7 @@ import {
   InvestButtonWrap,
   StyledVerifiedIcon,
   LinkIconWithSafariFix,
+  StyledChevronRightIcon,
 } from './styles';
 import { formatDistance } from 'date-fns';
 import copy from 'copy-to-clipboard';
@@ -31,7 +32,6 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN, ROUTE_TRADING_SERVICE } from '../../../../routes';
 import { useToast } from '../../../../util/hooks/useToast';
 import { Box, useMediaQuery } from '@mui/material';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import {
   useIsInvestedInService,
   useSetSelectedInvestment,
@@ -110,7 +110,7 @@ export const OtherAccountsButton: React.FC<{
         })}
         variant={'secondary'}
         onClick={onClickViewOther}
-        rightElement={<ChevronRightIcon color={'neutral300'} />}
+        rightElement={<StyledChevronRightIcon />}
       />
     </Box>
   );
