@@ -47,13 +47,14 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
     () =>
       allowedDeposits[exchangeType]?.map((ssc) => {
         const balance = balances[ssc];
-        const name = coins[ssc]?.name || ssc;
+        const name = coins[ssc]?.name || '';
         return {
           value: ssc,
           name,
           label: (
             <CoinIconWrapper>
               <CoinIcon size={'small'} coin={ssc} name={name} />{' '}
+              <Typography weight={'demibold'}>{ssc} </Typography> &nbsp;
               <Typography weight={'regular'}>{name}</Typography>
             </CoinIconWrapper>
           ),
@@ -142,7 +143,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                   value={coinObject?.balance ?? ''}
                 />
               </Typography>{' '}
-              {coinObject?.name ?? ''}
+              {coin ?? ''}
             </Typography>
             <Typography variant='body2' color='neutral200' weight='medium'>
               {t('balances.balanceLocked')}{' '}
@@ -152,7 +153,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                   displayType={'text'}
                 />
               </Typography>{' '}
-              {coinObject?.name ?? ''}
+              {coin ?? ''}
             </Typography>
             <Typography variant='body2' color='neutral200' weight='medium'>
               {t('balances.balanceFree')}{' '}
@@ -162,7 +163,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                   displayType={'text'}
                 />
               </Typography>{' '}
-              {coinObject?.name ?? ''}
+              {coin ?? ''}
             </Typography>
           </Grid>
         )}
