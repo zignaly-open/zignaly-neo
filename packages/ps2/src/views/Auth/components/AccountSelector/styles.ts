@@ -1,8 +1,8 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material';
 import { styledIf } from '@zignaly-open/ui';
 import { NiceScrollbar } from '@zignaly-open/ui/lib/utils/css';
 
-export const Button = styled.button<{ isMenu: boolean }>`
+export const Button = styled('button')<{ isMenu: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -27,7 +27,7 @@ export const Button = styled.button<{ isMenu: boolean }>`
   `}
 `;
 
-export const Container = styled.div`
+export const Container = styled('div')`
   top: 100%;
   z-index: 10;
   background: #191a30;
@@ -36,10 +36,10 @@ export const Container = styled.div`
   overflow: auto;
   border-radius: 0 0 6px 6px;
 
-  ${NiceScrollbar};
+  ${NiceScrollbar.toString()};
 `;
 
-export const Item = styled.div`
+export const Item = styled('div')`
   background: transparent;
   padding: 12px 18px;
   display: flex;
@@ -59,7 +59,7 @@ export const Item = styled.div`
   }
 `;
 
-export const Field = styled.div`
+export const Field = styled('div')`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -73,7 +73,7 @@ export const Field = styled.div`
   }
 `;
 
-export const Layout = styled.div<{ isActive: boolean }>`
+export const Layout = styled('div')<{ isActive: boolean }>`
   position: relative;
 
   ${({ isActive }) => `

@@ -1,6 +1,6 @@
 /// <reference types="react-scripts" />
 
-import ThemeZig from '@zignaly-open/ui/lib/theme/theme';
+import '@zignaly-open/ui/src/module-name.d.ts';
 
 declare global {
   interface Window {
@@ -21,38 +21,36 @@ declare module '*.svg' {
   export default content;
 }
 
-import type { PaletteOptions, Palette } from '@mui/material/styles';
-import { PaletteColorOptions } from '@mui/material';
-
 declare module '@mui/material/styles' {
   interface CustomPalette {
-    white: PaletteColorOptions;
-    neutral800: PaletteColorOptions;
-    neutral750: PaletteColorOptions;
-    neutral700: PaletteColorOptions;
-    neutral600: PaletteColorOptions;
-    neutral500: PaletteColorOptions;
-    neutral400: PaletteColorOptions;
-    neutral300: PaletteColorOptions;
-    neutral200: PaletteColorOptions;
-    neutral175: PaletteColorOptions;
-    neutral150: PaletteColorOptions;
-    neutral100: PaletteColorOptions;
-    neutral000: PaletteColorOptions;
-    secondary: PaletteColorOptions;
-    highlighted: PaletteColorOptions;
-    redGraphOrError: PaletteColorOptions;
-    greenGraph: PaletteColorOptions;
-    links: PaletteColorOptions;
-    yellow: PaletteColorOptions;
-    red: PaletteColorOptions;
-    dropDownBackground: PaletteColorOptions;
-    darkSpecial: PaletteColorOptions;
-    almostWhite: PaletteColorOptions;
-    errorToasterBg: PaletteColorOptions;
-    errorToasterBorder: PaletteColorOptions;
-    successToasterBg: PaletteColorOptions;
-    successToasterBorder: PaletteColorOptions;
+    white: string;
+    neutral800: string;
+    neutral750: string;
+    neutral700: string;
+    neutral600: string;
+    neutral500: string;
+    neutral400: string;
+    neutral300: string;
+    neutral200: string;
+    neutral175: string;
+    neutral150: string;
+    neutral100: string;
+    neutral000: string;
+    secondary: string;
+    highlighted: string;
+    redGraphOrError: string;
+    greenGraph: string;
+    links: string;
+    yellow: string;
+    red: string;
+    avatarBack: string;
+    dropDownBackground: string;
+    darkSpecial: string;
+    almostWhite: string;
+    errorToasterBg: string;
+    errorToasterBorder: string;
+    successToasterBg: string;
+    successToasterBorder: string;
   }
 
   interface Palette extends CustomPalette {}
@@ -87,6 +85,7 @@ declare module '@mui/material/Button' {
     red: true;
     dropDownBackground: true;
     darkSpecial: true;
+    avatarBack: true;
     almostWhite: true;
     errorToasterBg: true;
     errorToasterBorder: true;
@@ -96,7 +95,7 @@ declare module '@mui/material/Button' {
 }
 
 declare module '@mui/material/SvgIcon' {
-  interface SvgIconPropsColorOverrides {
+  export interface SvgIconPropsColorOverrides {
     white: true;
     neutral800: true;
     neutral750: true;
@@ -119,6 +118,7 @@ declare module '@mui/material/SvgIcon' {
     red: true;
     dropDownBackground: true;
     darkSpecial: true;
+    avatarBack: true;
     almostWhite: true;
     errorToasterBg: true;
     errorToasterBorder: true;
@@ -156,6 +156,7 @@ declare module '@emotion/react' {
     almostWhite: string;
     errorToasterBg: string;
     errorToasterBorder: string;
+    avatarBack: string;
     successToasterBg: string;
     successToasterBorder: string;
   }

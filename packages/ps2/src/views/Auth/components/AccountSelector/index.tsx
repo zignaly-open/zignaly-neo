@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useTheme } from 'styled-components';
+import { useTheme } from '@mui/material';
 import { Layout, Field, Button, Container, Item } from './styles';
 import { Typography, Avatar, ArrowBottomIcon } from '@zignaly-open/ui';
 import { Exchange } from '../../../../apis/user/types';
@@ -9,13 +9,12 @@ import {
   useSelectExchange,
   useCurrentUser,
 } from '../../../../apis/user/use';
-import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { AccountSelectorProps } from './types';
 
 const AccountSelector: React.FC<AccountSelectorProps> = ({
   onExchangeSelected,
 }) => {
-  const theme = useTheme() as Theme;
+  const theme = useTheme();
   const { exchanges } = useCurrentUser();
   const activeExchange = useActiveExchange();
   const selectExchange = useSelectExchange();
@@ -47,7 +46,7 @@ const AccountSelector: React.FC<AccountSelectorProps> = ({
         </Field>
         {hasMultipleExchanges && (
           <ArrowBottomIcon
-            color={theme.neutral300}
+            color={theme.palette.neutral300}
             width={'22px'}
             height={'22px'}
           />

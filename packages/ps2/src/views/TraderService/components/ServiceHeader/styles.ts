@@ -1,7 +1,7 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material';
 import { styledIf } from '@zignaly-open/ui';
 
-export const Layout = styled.div`
+export const Layout = styled('div')`
   flex-direction: row;
   position: fixed;
   top: 52px;
@@ -22,12 +22,12 @@ export const Layout = styled.div`
   }
 `;
 
-export const Container = styled.div`
+export const Container = styled('div')`
   display: grid;
   grid-template-columns: 25% repeat(5, minmax(0%, 100%));
 `;
 
-export const Options = styled.nav`
+export const Options = styled('nav')`
   display: flex;
   flex-direction: column;
   padding: 30px 34px;
@@ -38,7 +38,7 @@ type OptionType = {
   active: boolean;
 };
 
-export const Option = styled.a<OptionType>`
+export const Option = styled('a')<OptionType>`
   cursor: pointer;
   user-select: none;
 
@@ -46,13 +46,13 @@ export const Option = styled.a<OptionType>`
     ${styledIf(
       active,
       `
-      color: ${theme.secondary};
+      color: ${theme.palette.secondary};
     `,
       `
-      color: ${theme.neutral200};
+      color: ${theme.palette.neutral200};
       
       &:hover {
-        color: ${theme.neutral150};
+        color: ${theme.palette.neutral150};
       }        
     `,
     )}
@@ -71,14 +71,14 @@ export const HeadOption = styled(Option)<OptionType>`
     ${styledIf(
       !active,
       `
-      color: ${theme.neutral300};
+      color: ${theme.palette.neutral300};
       
       &:hover {
-        color: ${theme.neutral150};
+        color: ${theme.palette.neutral150};
       }        
     `,
       `
-       border-bottom: 3px solid ${theme.secondary};
+       border-bottom: 3px solid ${theme.palette.secondary};
        `,
     )}
   `}

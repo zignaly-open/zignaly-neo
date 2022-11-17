@@ -1,7 +1,7 @@
-import styled, { css } from 'styled-components';
+import { styled, css } from '@mui/material';
 import { Typography } from '@zignaly-open/ui';
 
-export const Investor = styled.div`
+export const Investor = styled('div')`
   display: flex;
   flex-direction: row;
   gap: 22px;
@@ -10,7 +10,7 @@ export const Investor = styled.div`
   margin-top: 18px;
 `;
 
-export const InvestorData = styled.div`
+export const InvestorData = styled('div')`
   display: flex;
   flex-direction: column;
 `;
@@ -19,7 +19,7 @@ export const InvestorName = styled(Typography)``;
 
 export const InvestorSuccessFee = styled(Typography)``;
 
-export const PendingTransaction = styled.div`
+export const PendingTransaction = styled('div')`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -29,19 +29,19 @@ export const PendingTransaction = styled.div`
 
   ${({ theme }) => `
     gap: 22px;
-    border: 1px solid ${theme.yellow};
-    background: ${theme.neutral700};
+    border: 1px solid ${theme.palette.yellow};
+    background: ${theme.palette.neutral700};
     border-radius: 5px;
     
     svg {
       width: 14px;
       height: 14px;
-      fill: ${theme.yellow};
+      fill: ${theme.palette.yellow};
     }
   `}
 `;
 
-export const Field = styled.div`
+export const Field = styled('div')`
   display: grid;
   grid-template-columns: 0.9fr 1fr;
   user-select: none;
@@ -49,34 +49,34 @@ export const Field = styled.div`
   align-items: center;
 `;
 
-export const Row = styled.div`
+export const Row = styled('div')`
   ${({ theme }) => `
     &:first-child {
-      border-right: 1px solid ${theme.neutral500};
+      border-right: 1px solid ${theme.palette.neutral500};
     }
   `};
 `;
 
-export const Inline = styled.div`
+export const Inline = styled('div')`
   display: flex;
   gap: 12px;
   align-items: center;
 `;
 
-export const Grid = styled.div`
+export const Grid = styled('div')`
   display: grid;
   grid-template-columns: 1fr 1fr;
   flex-direction: row;
   margin-top: 12px;
 `;
 
-export const Column = styled.div`
+export const Column = styled('div')`
   display: flex;
   flex-direction: column;
   gap: 24px;
 
   &:first-child {
-    border-right: 1px solid ${({ theme }) => theme.neutral500};
+    border-right: 1px solid ${({ theme }) => theme.palette.neutral500};
     padding-right: 62px;
   }
 
@@ -85,7 +85,7 @@ export const Column = styled.div`
   }
 `;
 
-export const Content = styled.div`
+export const Content = styled('div')`
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -96,7 +96,7 @@ export const WithdrawFundsSpaceTaker = styled(Typography)`
   text-align: justify;
 `;
 
-export const WithdrawFundsOptionWrapper = styled.div<{ border?: boolean }>`
+export const WithdrawFundsOptionWrapper = styled('div')<{ border?: boolean }>`
   flex-direction: column;
   gap: 15px;
   display: flex;
@@ -114,36 +114,36 @@ export const WithdrawFundsOptionWrapper = styled.div<{ border?: boolean }>`
         `};
 `;
 
-export const WithdrawFundsButtonWrapper = styled.div`
+export const WithdrawFundsButtonWrapper = styled('div')`
   text-align: center;
 `;
 
-export const MultilineButton = styled.div`
+export const MultilineButton = styled('div')`
   padding: 15px;
   flex-direction: column;
   display: flex;
 `;
 
-export const LoaderContainer = styled.div`
+export const LoaderContainer = styled('div')`
   padding: 4em 0;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-export const TransactionContainer = styled.div`
+export const TransactionContainer = styled('div')`
   margin-top: 42px;
 `;
 
-export const WithdrawActions = styled.div`
+export const WithdrawActions = styled('div')`
   margin-top: 56px;
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 
-export const Highline = styled.span`
+export const Highline = styled('span')`
   ${({ theme }) => `
-    color: ${theme.links};
+    color: ${theme.palette.links};
   `}
 `;

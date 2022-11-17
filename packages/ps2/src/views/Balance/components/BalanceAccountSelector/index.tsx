@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTheme } from 'styled-components';
+import { useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Layout, Data, Inline, TypeText } from './styles';
 import {
@@ -9,11 +9,10 @@ import {
   ArrowBottomIcon,
 } from '@zignaly-open/ui';
 import { useActiveExchange } from '../../../../apis/user/use';
-import Theme from '@zignaly-open/ui/lib/theme/theme';
 import AccountSelector from 'components/AccountSelector';
 
 const BalanceAccountSelector: React.FC = () => {
-  const theme = useTheme() as Theme;
+  const theme = useTheme();
   const { t } = useTranslation('common');
   const activeExchange = useActiveExchange();
 
@@ -37,7 +36,9 @@ const BalanceAccountSelector: React.FC = () => {
                 isFocused={open}
                 icon={
                   <ArrowBottomIcon
-                    color={open ? theme.neutral100 : theme.neutral300}
+                    color={
+                      open ? theme.palette.neutral100 : theme.palette.neutral300
+                    }
                     width={22}
                     height={20}
                   />
@@ -46,7 +47,7 @@ const BalanceAccountSelector: React.FC = () => {
             )}
           />
         </Inline>
-        <TypeText>
+        <TypeText variant={'h4'}>
           <span>{t('account-selector.type.title')}</span>
           <span>
             {t(

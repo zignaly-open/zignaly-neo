@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import NumberFormat from 'react-number-format';
-import { useTheme } from 'styled-components';
+import { useTheme } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
@@ -23,7 +23,6 @@ import {
   TextButton,
   Typography,
 } from '@zignaly-open/ui';
-import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { EditInvestmentValidation } from './validations';
 import {
   useCurrentBalance,
@@ -43,7 +42,7 @@ function EditInvestmentForm({
   setView,
 }: EditInvestmentFormProps) {
   const coin = useCurrentBalance();
-  const theme = useTheme() as Theme;
+  const theme = useTheme();
   const { t } = useTranslation('edit-investment');
   const [isInputEnabled, setInputEnabled] = useState(false);
   const { serviceId, serviceName } = useSelectedInvestment();

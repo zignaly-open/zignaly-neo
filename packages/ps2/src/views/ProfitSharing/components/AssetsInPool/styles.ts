@@ -13,7 +13,7 @@ export const Icon = styled('div')`
 
 export const PriceBoxOverride = styled(Box)`
   span {
-    ${(props) => `color: ${props.theme.neutral000}`} !important;
+    ${(props) => `color: ${props.theme.palette.neutral000}`} !important;
     position: relative;
   }
 `;

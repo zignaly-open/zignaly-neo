@@ -26,16 +26,12 @@ const sendTz = (data: tzData) => {
 /**
  * Trigger internal tracking event.
  */
-export const triggerTz = async (
-  location: string,
-  prevLocation?: string,
-  address?: string,
-) => {
+export const triggerTz = async (location: string, address?: string) => {
   if (process.env.REACT_APP_ENABLE_TRACKING !== 'true') return;
 
   const data = {
     action: 'sData',
-    urlReferer: prevLocation || document.referrer,
+    urlReferer: document.referrer,
     urlDestination: location,
     userId: address,
     tid: localStorage.getItem('tid'),

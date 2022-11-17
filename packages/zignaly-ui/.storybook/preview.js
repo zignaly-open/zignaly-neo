@@ -1,12 +1,14 @@
-import {useDarkMode} from "storybook-dark-mode";
-import {dark, light} from "../src/theme";
-import {addDecorator} from "@storybook/react";
-import {makeDecorator} from "@storybook/addons";
-import {ThemeProvider, createGlobalStyle} from "styled-components";
+import { useDarkMode } from "storybook-dark-mode";
+import { dark, light } from "../src/theme";
+import { addDecorator } from "@storybook/react";
+import { makeDecorator } from "@storybook/addons";
+import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { ThemeProvider as ThemeProviderMui } from "@mui/material";
 
 // Testing Results
-import {withTests} from "@storybook/addon-jest";
+import { withTests } from "@storybook/addon-jest";
 import results from "../.jest-test-results.json";
+import darkMui from "../src/theme/darkMui";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -19,8 +21,10 @@ const withStyledTheme = (storyFn) => {
   const currentTheme = darkMode ? dark : light;
   return (
     <ThemeProvider theme={currentTheme}>
-      <GlobalStyle darkMode/>
-      {storyFn()}
+      <ThemeProviderMui theme={darkMui}>
+        <GlobalStyle darkMode />
+        {storyFn()}
+      </ThemeProviderMui>
     </ThemeProvider>
   );
 };
@@ -40,7 +44,7 @@ export const decorators = [
 ];
 
 export const parameters = {
-  actions: {argTypesRegex: "^on[A-Z].*"},
+  actions: { argTypesRegex: "^on[A-Z].*" },
   decorators,
   controls: {
     matchers: {

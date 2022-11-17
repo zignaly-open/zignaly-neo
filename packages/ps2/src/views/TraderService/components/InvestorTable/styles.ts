@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import { styled } from '@mui/material';
 import { PageContainer } from '@zignaly-open/ui';
 
 export const Layout = styled(PageContainer)`
@@ -7,7 +7,7 @@ export const Layout = styled(PageContainer)`
   max-width: 1700px;
 `;
 
-export const InvestorCounts = styled.div`
+export const InvestorCounts = styled('div')`
   gap: 12px;
   display: flex;
   align-items: center;

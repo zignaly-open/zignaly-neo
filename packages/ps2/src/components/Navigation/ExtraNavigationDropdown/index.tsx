@@ -4,8 +4,7 @@ import {
   OptionHorizontalDotsIcon,
 } from '@zignaly-open/ui';
 import React, { useCallback, useRef } from 'react';
-import { useTheme } from 'styled-components';
-import Theme from '@zignaly-open/ui/lib/theme/theme';
+import { useTheme } from '@mui/material';
 import { NavLink, Networks } from './styles';
 import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
@@ -25,7 +24,7 @@ import { GlobeLanguagesStyled, LabelButton } from './styles';
 import { LocalizationLanguages } from '../../../util/languages';
 
 const ExtraNavigationDropdown: React.FC = () => {
-  const theme = useTheme() as Theme;
+  const theme = useTheme();
   const navigate = useNavigate();
   const dropDownRef = useRef<DropDownHandle>(null);
   const { t, i18n } = useTranslation('common');
@@ -79,7 +78,7 @@ const ExtraNavigationDropdown: React.FC = () => {
       label: (
         <>
           <GlobeLanguagesStyled
-            color={theme.neutral300}
+            color={theme.palette.neutral300}
             width={'26px'}
             height={'26px'}
           />
@@ -101,7 +100,6 @@ const ExtraNavigationDropdown: React.FC = () => {
             const IconComponent = socialNetwork.image;
             return (
               <NavLink
-                as={'a'}
                 onClick={onClose}
                 href={socialNetwork.path}
                 key={`--social-network-nav-link-${index.toString()}`}
@@ -129,7 +127,7 @@ const ExtraNavigationDropdown: React.FC = () => {
             <OptionHorizontalDotsIcon
               width={14}
               height={4}
-              color={open ? theme.neutral100 : theme.neutral300}
+              color={open ? theme.palette.neutral100 : theme.palette.neutral300}
             />
           }
           isFocused={open}

@@ -7,7 +7,7 @@ import { LoginValidation } from './validations';
 import { useAuthenticate } from '../../../../apis/user/use';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
-import { Button, InputText, TextButton, Typography } from '@zignaly-open/ui';
+import { Button, TextButton, Typography, ZigInput } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
 
@@ -50,7 +50,7 @@ const LoginForm: React.FC = () => {
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
-            <InputText
+            <ZigInput
               id={'login__username'}
               label={t('login-form.inputText.email.label') + ':'}
               placeholder={t('login-form.inputText.email.label')}
@@ -66,15 +66,15 @@ const LoginForm: React.FC = () => {
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
-            <InputText
+            <ZigInput
               id={'login__password'}
-              label={t('login-form.inputText.password.label') + ':'}
-              type={'password'}
               labelAction={{
                 tabIndex: -1,
                 text: t('login-form.inputText.password.labelForgot'),
                 onClick: () => navigate(ROUTE_FORGOT_PASSWORD),
               }}
+              label={t('login-form.inputText.password.label') + ':'}
+              type={'password'}
               placeholder={t('login-form.inputText.password.label')}
               disabled={loggingIn}
               error={t(errors.password?.message)}
