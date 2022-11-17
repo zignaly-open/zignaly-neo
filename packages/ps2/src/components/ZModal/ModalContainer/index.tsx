@@ -7,7 +7,7 @@ import { ModalContainerProps } from './types';
 function ModalContainer({
   children,
   title = null,
-  titleAlign = 'center',
+  titleAlign = 'left',
   onGoBack = null,
   width,
   onClickClose = null,
