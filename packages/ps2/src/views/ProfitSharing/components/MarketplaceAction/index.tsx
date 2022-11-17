@@ -35,10 +35,10 @@ const MarketplaceAction = ({ service }: MarketplaceActionType) => {
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <Box sx={{ width: 165 }}>
+      <Box sx={{ width: 195 }}>
         {isLoading ? (
           <LoaderWrapper>
-            <CenteredLoader width={165} height={40} />
+            <CenteredLoader width={195} height={40} />
           </LoaderWrapper>
         ) : (
           <>
