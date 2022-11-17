@@ -113,6 +113,8 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               rules={{ required: true }}
               render={({ field }) => (
                 <ZigSelect
+                  menuPlacement='auto'
+                  menuShouldScrollIntoView={false}
                   label={t('coinSelector.label')}
                   placeholder={t('coinSelector.placeholder')}
                   {...field}
@@ -176,6 +178,8 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               rules={{ required: true }}
               render={({ field }) => (
                 <ZigSelect
+                  menuPlacement='auto'
+                  menuShouldScrollIntoView={false}
                   label={t('networkSelector.label')}
                   placeholder={t('networkSelector.placeholder')}
                   {...field}
