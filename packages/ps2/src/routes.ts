@@ -1,7 +1,5 @@
 export const ROUTE_DASHBOARD = '/my-dashboard';
 export const ROUTE_PROFIT_SHARING = '/profit-sharing';
-export const ROUTE_STAKING = '/staking';
-export const ROUTE_ZIGPAD = '/zigpad';
 export const ROUTE_BECOME_TRADER = '/become-trader';
 export const ROUTE_LOGIN = '/login';
 export const ROUTE_SIGNUP = '/signup';

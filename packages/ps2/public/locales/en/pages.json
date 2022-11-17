@@ -6,9 +6,7 @@
   "login": "Log in - Zignaly",
   "help": "Help - Zignaly",
   "signup": "Sign Up - Zignaly",
-  "staking": "Staking - Zignaly",
   "trading-services": "Trading Services - Zignaly",
-  "zigpad": "ZIGPad - Zignaly",
   "profit-sharing": {
     "title": "Profit Sharing - Zignaly",
     "service": "{{serviceName}} - Zignaly",
