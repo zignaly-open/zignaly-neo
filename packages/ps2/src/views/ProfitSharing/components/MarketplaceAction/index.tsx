@@ -34,23 +34,25 @@ const MarketplaceAction = ({ service }: MarketplaceActionType) => {
     : 0;
 
   return (
-    <Box justifyContent='center'>
-      {isLoading ? (
-        <LoaderWrapper>
-          <CenteredLoader width={173} height={40} />
-        </LoaderWrapper>
-      ) : (
-        <>
-          {isAuthenticated && investedAmount ? (
-            <InvestedButtonBase
-              service={traderService}
-              investedAmount={investedAmount.toString()}
-            />
-          ) : (
-            <InvestButton service={traderService} />
-          )}
-        </>
-      )}
+    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
+      <Box sx={{ width: 195 }}>
+        {isLoading ? (
+          <LoaderWrapper>
+            <CenteredLoader width={195} height={40} />
+          </LoaderWrapper>
+        ) : (
+          <>
+            {isAuthenticated && investedAmount ? (
+              <InvestedButtonBase
+                service={traderService}
+                investedAmount={investedAmount.toString()}
+              />
+            ) : (
+              <InvestButton service={traderService} />
+            )}
+          </>
+        )}
+      </Box>
     </Box>
   );
 };

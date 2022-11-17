@@ -19,6 +19,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import CenteredLoader from './components/CenteredLoader';
 import Header from './components/Navigation/Header';
 import UpdateChecker from './components/Navigation/UpdateChecker';
+import DateLocaleFixer from './components/Navigation/DateLocaleFixer';
 
 if (
   process.env.NODE_ENV === 'production' &&
@@ -61,6 +62,7 @@ function App() {
                   <ModalProvider>
                     <Header />
                     <UpdateChecker />
+                    <DateLocaleFixer />
                     <Suspense fallback={null}>
                       <Router />
                     </Suspense>

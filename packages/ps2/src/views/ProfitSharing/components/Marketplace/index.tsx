@@ -113,7 +113,7 @@ const Marketplace: React.FC = () => {
         Cell: ({ cell: { value } }) => <MarketplaceAction service={value} />,
       },
     ],
-    [],
+    [t],
   );
 
   const bodyMapper = useCallback(
@@ -135,7 +135,7 @@ const Marketplace: React.FC = () => {
         actionService: service,
       };
     },
-    [],
+    [t],
   );
 
   return (
