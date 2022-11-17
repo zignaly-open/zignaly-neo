@@ -22,15 +22,16 @@ import {
   useDepositInfo,
   useExchangeCoinsList,
 } from '../../../../../../apis/coin/use';
-import { CoinBalance, CoinDetail } from '../../../../../../apis/coin/types';
-import { mergeCoinsAndBalances } from '../../../../../../apis/coin/util';
 import CenteredLoader from '../../../../../../components/CenteredLoader';
 import { DepositModalProps } from '../../types';
+import { allowedDeposits } from '../../../../../../util/coins';
+import { useActiveExchange } from '../../../../../../apis/user/use';
 
 function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
   const { data: balances } = useCoinBalances({ convert: true });
   const { data: coins } = useExchangeCoinsList();
+  const { exchangeType } = useActiveExchange();
   const toast = useToast();
 
   const { handleSubmit, control, watch, setValue } = useForm<DepositFormData>({
@@ -44,32 +45,29 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
 
   const coinOptions = useMemo(
     () =>
-      coins &&
-      balances &&
-      Object.entries<CoinBalance & CoinDetail>(
-        mergeCoinsAndBalances(coins, balances),
-      )
-        .map(([ssc, balance]) => ({
+      allowedDeposits[exchangeType]?.map((ssc) => {
+        const balance = balances[ssc];
+        const name = coins[ssc]?.name || ssc;
+        return {
           value: ssc,
-          name: balance.name,
+          name,
           label: (
             <CoinIconWrapper>
-              <CoinIcon size={'small'} coin={ssc} name={balance.name} />{' '}
-              <Typography weight={'regular'}>{balance.name}</Typography>
+              <CoinIcon size={'small'} coin={ssc} name={name} />{' '}
+              <Typography weight={'regular'}>{name}</Typography>
             </CoinIconWrapper>
           ),
-          inOrders: balance.balanceLocked,
-          balance: balance.balanceTotal,
-          available: balance.balanceFree,
-          networks: balance.networks?.map((n) => ({
+          inOrders: balance?.balanceLocked || 0,
+          balance: balance?.balanceTotal || 0,
+          available: balance?.balanceFree || 0,
+          networks: coins[ssc].networks?.map((n) => ({
             label: n.name,
             value: n.network,
             ...n,
           })),
-        }))
-        .sort((a, b) => a.name?.localeCompare(b.name))
-        .filter((x) => !allowedCoins || allowedCoins?.includes(x.value)),
-    [coins, allowedCoins],
+        };
+      }),
+    [coins, allowedCoins, exchangeType],
   );
 
   const { isFetching: loading, data: depositInfo } = useDepositInfo(

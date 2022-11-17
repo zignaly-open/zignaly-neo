@@ -143,7 +143,7 @@ const MyBalancesTable = (): JSX.Element => {
           valueUSD: {
             balanceTotalUSDT: balance.balanceTotalUSDT,
           },
-          action: (
+          action: !!allowedDeposits[exchangeType]?.includes(coin) && (
             <IconButton
               icon={<AddIcon color={'neutral300'} />}
               onClick={() => {
