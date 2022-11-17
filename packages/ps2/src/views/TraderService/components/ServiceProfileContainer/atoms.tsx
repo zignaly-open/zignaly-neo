@@ -33,6 +33,7 @@ import { ROUTE_LOGIN, ROUTE_TRADING_SERVICE } from '../../../../routes';
 import { useToast } from '../../../../util/hooks/useToast';
 import { Box, useMediaQuery } from '@mui/material';
 import {
+  useCurrentBalance,
   useIsInvestedInService,
   useSetSelectedInvestment,
 } from '../../../../apis/investment/use';
@@ -44,6 +45,7 @@ import {
   useIsAuthenticated,
   useSetMissedRoute,
 } from '../../../../apis/user/use';
+import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 import { useZModal } from '../../../../components/ZModal/use';
 
 export const InvestButton: React.FC<{
@@ -55,11 +57,17 @@ export const InvestButton: React.FC<{
   const selectInvestment = useSetSelectedInvestment();
   const navigate = useNavigate();
   const setMissedRoute = useSetMissedRoute();
+  const { balance } = useCurrentBalance(service.ssc);
 
   const onClickMakeInvestment = () => {
     if (isAuthenticated) {
       selectInvestment(serviceToInvestmentServiceDetail(service));
-      showModal(InvestModal);
+      const showDeposit = +balance === 0;
+      if (showDeposit)
+        showModal(DepositModal, {
+          allowedCoins: [service.ssc],
+        });
+      else showModal(InvestModal);
     } else {
       setMissedRoute();
       navigate(ROUTE_LOGIN);
