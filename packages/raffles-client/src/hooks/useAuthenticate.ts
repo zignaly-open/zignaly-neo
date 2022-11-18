@@ -1,23 +1,33 @@
 import { useApolloClient, useMutation } from '@apollo/client';
-import { setToken } from '../util/token';
-import { Mumbai, Polygon, useEthers } from '@usedapp/core';
-import { useAsync } from 'react-use';
-import { useState } from 'react';
+import { useWeb3React } from '@web3-react/core';
+import { Connector } from '@web3-react/types';
+import { getConnection } from 'config/web3';
 import {
-  GET_CURRENT_USER,
-  GET_OR_CREATE_USER,
+  GET_AUCTIONS,
   AUTHENTICATE_METAMASK,
+  GET_CURRENT_USER,
   GET_CURRENT_USER_BALANCE,
-} from 'queries/users';
-import { GET_AUCTIONS } from 'queries/auctions';
-import WalletConnectProvider from '@walletconnect/web3-provider';
-import { WalletType } from '@zignaly-open/raffles-shared/types';
+  GET_OR_CREATE_USER,
+} from 'config/apollo/queries';
+import { useCallback, useState } from 'react';
+import { useAsync } from 'react-use';
+import { useAppDispatch } from 'state/hooks';
+import { updateSelectedWallet } from 'state/user/reducer';
+import { setToken } from 'util/token';
 
 export function useLogout(): () => Promise<void> {
-  const { deactivate } = useEthers();
+  const dispatch = useAppDispatch();
+  const { connector } = useWeb3React();
+
   const client = useApolloClient();
   return async () => {
-    deactivate();
+    if (connector.deactivate) {
+      connector.deactivate();
+    } else {
+      connector.resetState();
+    }
+
+    dispatch(updateSelectedWallet({ wallet: undefined }));
     setToken('');
     client.refetchQueries({
       include: [GET_AUCTIONS],
@@ -26,41 +36,56 @@ export function useLogout(): () => Promise<void> {
 }
 
 export default function useAuthenticate(): {
-  authenticate: (walletType: WalletType, prov?: object) => void;
+  tryAuthentication: (_connector: Connector) => void;
   isSigning: boolean;
   error: Error & { code: number };
 } {
+  const dispatch = useAppDispatch();
   const [getOrCreateUser] = useMutation(GET_OR_CREATE_USER);
   const [authenticate] = useMutation(AUTHENTICATE_METAMASK);
   const [isOkToStart, setIsOkToStart] = useState(false);
   const [isSigning, setIsSigning] = useState(false);
   const client = useApolloClient();
-  const { account, activateBrowserWallet, activate, library, switchNetwork } =
-    useEthers();
+  const { account, provider, connector } = useWeb3React();
   const [error, setError] = useState(null);
-  const [provider, setProvider] = useState(null);
-  const [walletType, setWalletType] = useState(null);
 
-  async function createUserAndSign() {
-    const {
-      data: {
-        getOrCreateUser: { messageToSign },
-      },
-    } = await getOrCreateUser({
-      variables: { publicAddress: account.toLocaleLowerCase(), walletType },
-    });
+  const tryActivation = useCallback(
+    async (_connector: Connector) => {
+      const connectionType = getConnection(_connector).type;
 
-    if (!provider) {
-      await switchNetwork(
-        process.env.REACT_APP_USE_MUMBAI_CHAIN
-          ? Mumbai.chainId
-          : Polygon.chainId,
-      );
-    }
+      try {
+        await _connector.activate();
 
-    setIsSigning(true);
+        dispatch(updateSelectedWallet({ wallet: connectionType }));
+      } catch (e) {
+        // eslint-disable-next-line no-console
+        console.debug(`web3-react connection error: ${e}`);
+        // dispatch(
+        //   updateConnectionError({ connectionType, error: error.message }),
+        // );
+      }
+    },
+    [dispatch],
+  );
+
+  const handleSignMessage = useCallback(async () => {
     try {
-      const signature = await library.getSigner().signMessage(messageToSign);
+      if (!account || !provider || !connector) return;
+      setIsSigning(true);
+      const connectionType = getConnection(connector).type;
+
+      const {
+        data: {
+          getOrCreateUser: { messageToSign },
+        },
+      } = await getOrCreateUser({
+        variables: {
+          publicAddress: account.toLocaleLowerCase(),
+          walletType: connectionType.toLocaleLowerCase(),
+        },
+      });
+      const signer = provider.getSigner();
+      const signature = await signer.signMessage(messageToSign);
 
       const {
         data: {
@@ -92,43 +117,32 @@ export default function useAuthenticate(): {
     } finally {
       setIsSigning(false);
     }
-  }
+  }, [account, provider, connector]);
 
   useAsync(async () => {
-    if (!account || !isOkToStart) return;
+    if (!provider || !connector || !account || !isOkToStart) return;
+    await handleSignMessage();
     setIsOkToStart(false);
-    createUserAndSign();
-  }, [account, isOkToStart]);
+  }, [provider]);
 
-  const startAuthenticate = (
-    wallType: WalletType,
-    prov?: WalletConnectProvider,
-  ) => {
-    setError(null);
-    setProvider(prov);
-    setWalletType(wallType);
+  const startAuthenticate = useCallback(
+    (_connector: Connector) => {
+      setError(null);
 
-    // In case there is an old token saved, that will trigger useCurrentUser fetching
-    // as soon as account connected, but new message not signed yet.
-    setToken('');
+      // In case there is an old token saved, that will trigger useCurrentUser fetching
+      // as soon as account connected, but new message not signed yet.
+      setToken('');
 
-    // Ready to connect
-    setIsOkToStart(true);
+      // Ready to connect
+      setIsOkToStart(true);
 
-    if (!account) {
-      // Init account
-      if (prov) {
-        // WalletConnect
-        activate(prov);
-      } else {
-        // Metamask
-        activateBrowserWallet();
-      }
-    }
-  };
+      if (!account || !provider) tryActivation(_connector);
+    },
+    [account, provider, tryActivation],
+  );
 
   return {
-    authenticate: startAuthenticate,
+    tryAuthentication: startAuthenticate,
     isSigning,
     error,
   };

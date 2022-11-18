@@ -1,10 +1,13 @@
+import { useInactiveListener } from 'hooks';
 import React from 'react';
 import { Routes as RouterRoutes, Route } from 'react-router-dom';
-import Auctions from './components/Auctions/Auctions';
-import Footer from './components/Footer/Footer';
-import Header from './components/Header/Header';
+
+const Auctions = React.lazy(() => import('./components/Auctions/Auctions'));
+const Footer = React.lazy(() => import('./components/Footer/Footer'));
+const Header = React.lazy(() => import('./components/Header/Header'));
 
 function Routes() {
+  useInactiveListener();
   return (
     <>
       <Header />

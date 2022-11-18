@@ -1,7 +1,7 @@
 import { useMutation } from '@apollo/client';
 import { Box } from '@mui/material';
 import useCurrentUser from 'hooks/useCurrentUser';
-import { CLAIM, GET_AUCTIONS } from 'queries/auctions';
+import { CLAIM, GET_AUCTIONS } from 'config/apollo/queries';
 import React, { FormEvent, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Typography } from '@zignaly-open/ui';
@@ -71,7 +71,7 @@ const ClaimModal = ({ auction, ...props }: ClaimModalProps) => {
         setLoading(false);
       }
     },
-    [auction],
+    [auction.id, claim, claimState, showModal],
   );
 
   if (claimState === ClaimState.Claimed) {

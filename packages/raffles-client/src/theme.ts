@@ -1,12 +1,19 @@
 import { createTheme } from '@mui/material';
+import { dark as darkTheme } from '@zignaly-open/ui';
 
-export default createTheme({
+export const theme = createTheme({
   palette: {
     primary: {
       // light: will be calculated from palette.primary.main,
       main: '#770fc8',
       // dark: will be calculated from palette.primary.main,
       // contrastText: will be calculated to contrast with palette.primary.main
+    },
+    prettyPink: {
+      main: '#f63f82',
+    },
+    greedyGreen: {
+      main: '#62e764',
     },
     secondary: {
       dark: '#191927',
@@ -41,3 +48,5 @@ export default createTheme({
     },
   },
 });
+
+export const augmentedTheme = { ...darkTheme, ...theme };

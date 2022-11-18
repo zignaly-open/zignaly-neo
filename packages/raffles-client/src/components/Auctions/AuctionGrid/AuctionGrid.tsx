@@ -4,7 +4,10 @@ import { useQuery, useSubscription } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import Loader from '../../common/Loader';
-import { BIDS_SUBSCRIPTION, GET_AUCTIONS } from 'queries/auctions';
+import {
+  BIDS_SUBSCRIPTION,
+  GET_AUCTIONS,
+} from 'config/apollo/queries/auctions';
 import AuctionCard from '../AuctionCard/AuctionCard';
 import { LayoutContainer } from './styles';
 import InfiniteScroll from 'react-infinite-scroller';

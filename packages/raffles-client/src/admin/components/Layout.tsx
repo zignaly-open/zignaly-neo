@@ -10,16 +10,19 @@ import {
 } from 'react-admin';
 import { Menu } from 'react-admin';
 import { Abc, EventNote, Redeem, Settings, People } from '@mui/icons-material';
-import { Typography } from '@mui/material';
+import { PaletteOptions, Typography } from '@mui/material';
 
 const darkTheme: RaThemeOptions = {
-  palette: { mode: 'dark' },
+  palette: { mode: 'dark' } as PaletteOptions,
 };
 
 export const MyAppBar = (props: AppBarProps) => (
   <AppBar {...props}>
     <Typography flex='1' variant='h6' id='react-admin-title'></Typography>
-    <ToggleThemeButton lightTheme={defaultTheme} darkTheme={darkTheme} />
+    <ToggleThemeButton
+      lightTheme={defaultTheme as unknown as RaThemeOptions}
+      darkTheme={darkTheme}
+    />
   </AppBar>
 );
 

@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import { useEthers } from '@usedapp/core';
+import { useWeb3React } from '@web3-react/core';
 import { Button, Typography } from '@zignaly-open/ui';
 import { useLogout } from 'hooks/useAuthenticate';
 import useCurrentUser from 'hooks/useCurrentUser';
@@ -11,7 +11,7 @@ import { SwitchAccountProps } from './types';
 const SwitchAccount = (props: SwitchAccountProps) => {
   const { t } = useTranslation(['transfer-zig', 'global']);
   const { user } = useCurrentUser();
-  const { account } = useEthers();
+  const { account } = useWeb3React();
   const logout = useLogout();
 
   useEffect(() => {

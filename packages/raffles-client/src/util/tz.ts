@@ -1,5 +1,3 @@
-import useCurrentUser from 'hooks/useCurrentUser';
-
 type tzData = {
   action: string;
   urlReferer?: string;
@@ -26,12 +24,16 @@ const sendTz = (data: tzData) => {
 /**
  * Trigger internal tracking event.
  */
-export const triggerTz = async (location: string, address?: string) => {
+export const triggerTz = async (
+  location: string,
+  prevLocation?: string,
+  address?: string,
+) => {
   if (process.env.REACT_APP_ENABLE_TRACKING !== 'true') return;
 
   const data = {
     action: 'sData',
-    urlReferer: document.referrer,
+    urlReferer: prevLocation || document.referrer,
     urlDestination: location,
     userId: address,
     tid: localStorage.getItem('tid'),
@@ -54,27 +56,4 @@ export const triggerTz = async (location: string, address?: string) => {
   } else {
     sendTz(data);
   }
-};
-
-const composeHash = (originalHash: string, ctaId: string) => {
-  let hash = originalHash;
-  if (ctaId) {
-    hash += `?ctaId=${ctaId}`;
-  }
-  return hash;
-};
-
-/**
- * Trigger internal tracking event.
- */
-export const useTz = () => {
-  const { user } = useCurrentUser();
-
-  return (ctaId?: string) => {
-    const urlString = window.location.href;
-    const url = new URL(urlString);
-    const hash = window.location.href.split('#')[1]?.split('?')[0];
-    url.hash = composeHash(hash ?? '', ctaId);
-    triggerTz(url.toString(), user.publicAddress);
-  };
 };

@@ -5,7 +5,7 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import React from 'react';
-import theme from 'theme';
+import { theme } from 'theme';
 import { Typography } from '@zignaly-open/ui';
 import { CloseButton, StyledCloseIcon } from './styles';
 import { DialogContainerProps } from './types';

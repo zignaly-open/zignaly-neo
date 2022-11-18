@@ -1,14 +1,12 @@
 import { useMutation } from '@apollo/client';
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import useCurrentUser from '../../../hooks/useCurrentUser';
 import { useTranslation } from 'react-i18next';
 import useBalance from '../../../hooks/useBalance';
 import BN from 'bignumber.js';
-import useAuthenticate from '../../../hooks/useAuthenticate';
-import { onboardingContext } from '../../../contexts/Onboarding';
 import { Button } from '@zignaly-open/ui';
-import { BID_AUCTION } from 'queries/auctions';
+import { BID_AUCTION } from 'config/apollo/queries';
 import { showToast } from 'util/showToast';
 import { useModal } from 'mui-modal-provider';
 import NotEnoughZIGModal from 'components/Modals/NotEnoughZIG';
@@ -28,12 +26,10 @@ const BidButton: React.FC<{
   auction: AuctionType;
   isActive: boolean;
   updatedAt: Date;
-}> = ({ auction, isActive, updatedAt }) => {
+}> = ({ auction, isActive }) => {
   const [bid] = useMutation(BID_AUCTION);
   const { balance } = useBalance();
   const { user } = useCurrentUser();
-  const { balanceOnboarding } = useContext(onboardingContext);
-  const authenticate = useAuthenticate();
   const { t } = useTranslation('auction');
   const { showModal } = useModal();
 
@@ -48,7 +44,7 @@ const BidButton: React.FC<{
     if (new BN(balance).lt(new BN(auction.bidFee)))
       return BidButtonState.NotEnoughFunds;
     return BidButtonState.BidNow;
-  }, [user, balance, auction, BidButtonState, isActive, updatedAt]);
+  }, [user, balance, auction, isActive]);
 
   const customButtonText = useMemo(() => {
     if (state === BidButtonState.Ended) return t('ended');
@@ -59,11 +55,7 @@ const BidButton: React.FC<{
   const bidClickHandler = useCallback(() => {
     if (state === BidButtonState.NotLoggedIn) {
       showModal(ConnectWalletModal);
-    } else if (
-      auction.isExclusiveToKuCoin &&
-      !window.ethereum.isKuCoinWallet &&
-      !window.ethereum.isKuCoin
-    ) {
+    } else if (auction.isExclusiveToKuCoin) {
       showModal(ExclusiveWallet, { wallet: 'kucoin' });
     } else if (state === BidButtonState.NotEnoughFunds) {
       showModal(NotEnoughZIGModal);
@@ -76,7 +68,7 @@ const BidButton: React.FC<{
         showToast({ size: 'large', variant: 'error', caption: e.message });
       });
     }
-  }, [state, authenticate, balanceOnboarding]);
+  }, [state, auction.isExclusiveToKuCoin, auction.id, showModal, bid]);
 
   return (
     <Button

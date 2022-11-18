@@ -16,7 +16,7 @@ import Deposit from './Deposit';
 import Profile from './Profile';
 import { useMutation } from '@apollo/client';
 import { onboardingContext } from '../../contexts/Onboarding';
-import { COMPLETE_ONBOARDING } from 'queries/users';
+import { COMPLETE_ONBOARDING } from 'config/apollo/queries';
 
 const QontoConnector = styled(StepConnector)(({ theme }) => ({
   [`&.${stepConnectorClasses.alternativeLabel}`]: {

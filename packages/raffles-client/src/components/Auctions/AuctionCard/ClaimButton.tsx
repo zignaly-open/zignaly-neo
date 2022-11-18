@@ -5,7 +5,7 @@ import React, { useMemo } from 'react';
 import ClaimCountdown from './ClaimCountdown';
 import { Button, TimeIcon } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
-import useUpdatedAt from 'hooks/useUpdatedAt';
+// import useUpdatedAt from 'hooks/useUpdatedAt';
 
 const ClaimButton = ({
   auction,
@@ -25,7 +25,7 @@ const ClaimButton = ({
   const { showModal } = useModal();
   const { t } = useTranslation('auction');
 
-  const updatedAt = useUpdatedAt(auction.maxClaimDate, 0);
+  // const updatedAt = useUpdatedAt(auction.maxClaimDate, 0);
 
   const { canClaim, missClaim } = useMemo(() => {
     const maxClaimDateExpired =
@@ -35,7 +35,7 @@ const ClaimButton = ({
       canClaim: !auction.isClaimed && !maxClaimDateExpired,
       missClaim: !auction.isClaimed && maxClaimDateExpired,
     };
-  }, [updatedAt, auction]);
+  }, [auction]);
 
   return (
     <Button

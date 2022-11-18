@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import AuctionCard from './AuctionCard';
-import { GET_CURRENT_USER } from 'queries/users';
+import { GET_CURRENT_USER } from 'config/apollo/queries';
 
 export default {
   title: 'Auction Card',

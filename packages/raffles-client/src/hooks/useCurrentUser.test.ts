@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client';
 import { UserType } from '@zignaly-open/raffles-shared/types';
 import { GraphQLError } from 'graphql';
-import { GetCurrentUserResponseModel } from 'queries/auctions';
+import { GetCurrentUserResponseModel } from 'config/apollo/queries';
 import useCurrentUser, { CurrentUserModel } from './useCurrentUser';
 
 jest.mock('@apollo/client', () => ({
@@ -9,8 +9,8 @@ jest.mock('@apollo/client', () => ({
   gql: jest.fn(),
 }));
 
-jest.mock('@usedapp/core', () => ({
-  useEthers: () => ({ account: '0xabc' }),
+jest.mock('@web3-react/core', () => ({
+  useWeb3React: () => ({ account: '0xabc' }),
 }));
 
 describe('useCurrentUser', () => {

@@ -1,5 +1,5 @@
 import { EventNote } from '@mui/icons-material';
-import { Box, Chip, Typography } from '@mui/material';
+import { Box, Card, CardMedia, Chip, Typography } from '@mui/material';
 import MarkdownInput from '../components/MarkdownInput';
 import React from 'react';
 import {
@@ -96,11 +96,16 @@ export const AuctionList = () => (
 const Poster = () => {
   const record = useRecordContext<AuctionType>();
   if (!record) return null;
-  return record.imageUrl ? (
-    <Box mb={1}>
-      <img src={record.imageUrl} alt='' />
-    </Box>
-  ) : null;
+  return (
+    <Card sx={{ display: 'inline-block' }}>
+      <CardMedia
+        component='img'
+        image={record.imageUrl}
+        alt=''
+        sx={{ maxWidth: '42em', maxHeight: '15em' }}
+      />
+    </Card>
+  );
 };
 
 const schema = yup
@@ -110,37 +115,28 @@ const schema = yup
     startDate: yup.date(),
     expiresAt: yup
       .date()
-      .when(
-        'startDate',
-        (startDate, s) =>
-          startDate &&
-          s.min(
-            new Date(startDate.getTime() + 1000),
-            'errors.date.expAfterStart',
-          ),
+      .when('startDate', (startDate, s) =>
+        s.min(
+          new Date(startDate.getTime() + 1000),
+          'errors.date.expAfterStart',
+        ),
       ),
     maxExpiryDate: yup
       .date()
-      .when(
-        'expiresAt',
-        (expiresAt, s) =>
-          expiresAt &&
-          s.min(
-            new Date(expiresAt.getTime() + 1000),
-            'errors.date.maxExpAfterExp',
-          ),
+      .when('expiresAt', (expiresAt, s) =>
+        s.min(
+          new Date(expiresAt.getTime() + 1000),
+          'errors.date.maxExpAfterExp',
+        ),
       ),
     maxClaimDate: yup
       .date()
       .nullable()
-      .when(
-        'startDate',
-        (startDate, s) =>
-          startDate &&
-          s.min(
-            new Date(startDate.getTime() + 1000),
-            'errors.date.claimDateAfterMaxExp',
-          ),
+      .when('startDate', (startDate, s) =>
+        s.min(
+          new Date(startDate.getTime() + 1000),
+          'errors.date.claimDateAfterMaxExp',
+        ),
       ),
   })
   .required();

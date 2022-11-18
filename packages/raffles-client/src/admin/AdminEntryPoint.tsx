@@ -31,7 +31,7 @@ const AdminEntryPoint = () => {
     buildGraphQLProvider().then((graphQlDataProvider) =>
       setDataProvider(() => graphQlDataProvider),
     );
-  }, []);
+  }, [navigate]);
 
   if (!dataProvider) {
     return <Loading />;

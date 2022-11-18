@@ -2,7 +2,7 @@ import React from 'react';
 import { Box } from '@mui/system';
 import { Button, Typography } from '@zignaly-open/ui';
 import { Trans, useTranslation } from 'react-i18next';
-import { REDEEM_CODE } from 'queries/codes';
+import { REDEEM_CODE } from 'config/apollo/queries';
 import { useMutation } from '@apollo/client';
 import NumberFormat from 'react-number-format';
 import { StyledErrorOutline, Table } from './styles';

@@ -9,7 +9,7 @@ import Box from '@mui/material/Box';
 import { USERNAME_PATTERN, useValidateUsername } from './util';
 import { useMutation } from '@apollo/client';
 import { LoadingButton } from '@mui/lab';
-import { CHANGE_PROFILE } from 'queries/users';
+import { CHANGE_PROFILE } from 'config/apollo/queries';
 
 type ProfileComponentType = React.FC<{
   onSuccess?: () => void;

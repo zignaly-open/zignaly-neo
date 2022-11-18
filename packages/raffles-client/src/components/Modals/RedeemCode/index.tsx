@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next';
 import DialogContainer from '../DialogContainer';
 import { RedeemCodeProps } from './types';
 import * as yup from 'yup';
-import { CHECK_CODE } from 'queries/codes';
+import { CHECK_CODE } from 'config/apollo/queries';
 import { useLazyQuery } from '@apollo/client';
 import RedeemCodeConfirmation from '../RedeemCodeConfirmation';
 import { ErrorTypography } from './styles';

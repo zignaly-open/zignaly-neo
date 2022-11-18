@@ -1,9 +1,6 @@
 import { Box, useMediaQuery } from '@mui/material';
-import { useEthers, useTokenBalance } from '@usedapp/core';
-import useContract from 'hooks/useContract';
-import React, { useEffect, useRef, useState } from 'react';
-import { Trans, useTranslation } from 'react-i18next';
-import theme from 'theme';
+import { useTokenBalance } from '@usedapp/core';
+import { useWeb3React } from '@web3-react/core';
 import {
   Button,
   InputAmount,
@@ -11,11 +8,16 @@ import {
   Typography,
   ZignalyIcon,
 } from '@zignaly-open/ui';
+import { isSupportedChain } from 'config/web3';
+import useContract from 'hooks/useContract';
+import React, { useEffect, useRef, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
+import { theme } from 'theme';
 import { Gap } from '../ConnectWallet/styles';
 import DialogContainer from '../DialogContainer';
+import SwitchNetworkModal from '../SwitchNetwork';
 import { Container, InputContainer, StyledErrorOutline } from './styles';
 import { TransferZigModalProps } from './types';
-import SwitchNetworkModal from '../SwitchNetwork';
 
 function setReactInputValue(input: HTMLInputElement, value: string) {
   const previousValue = input.value;
@@ -36,23 +38,23 @@ function setReactInputValue(input: HTMLInputElement, value: string) {
 const TransferZigModal = (props: TransferZigModalProps) => {
   const { t } = useTranslation('transfer-zig');
   const [transferAmount, setTransferAmount] = useState('');
-  const address: string = process.env.REACT_APP_RECEIVING_ADDRESS as string;
+  const receivingAddress: string = process.env
+    .REACT_APP_RECEIVING_ADDRESS as string;
   const token = process.env.REACT_APP_CONTRACT_ADDRESS as string;
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
-  const { account, activateBrowserWallet, chainId } = useEthers();
+  const { account, chainId } = useWeb3React();
   const inputRef = useRef<HTMLInputElement>();
-
   const balance = useTokenBalance(token, account);
   const { isLoading, isError, transfer, isSuccess } = useContract({
-    address: address,
+    address: account,
   });
 
   useEffect(() => {
-    !account && activateBrowserWallet();
-    if (!address) {
+    // !account && handleConnect();
+    if (!receivingAddress) {
       throw new Error('Receiving address not defined');
     }
-  }, [account, address]);
+  }, [account, receivingAddress]);
 
   const handleTransfer = async () => {
     await transfer(transferAmount);
@@ -61,7 +63,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
     setTransferAmount('');
   };
 
-  if (!chainId) {
+  if (isSupportedChain(chainId) === false) {
     return <SwitchNetworkModal chainId={chainId} {...props} />;
   }
 

@@ -5,7 +5,6 @@ import Countdown from 'react-countdown';
 
 const ClaimCountdown: React.FC<{ date: Date; started: boolean }> = ({
   date,
-  started,
 }) => {
   const renderer = useCallback(
     ({
@@ -28,7 +27,7 @@ const ClaimCountdown: React.FC<{ date: Date; started: boolean }> = ({
         </Typography>
       );
     },
-    [date, started],
+    [],
   );
 
   return <Countdown date={date} renderer={renderer} />;

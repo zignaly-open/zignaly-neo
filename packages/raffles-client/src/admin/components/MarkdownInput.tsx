@@ -1,16 +1,15 @@
 import React from 'react';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import {
   useInput,
   InputHelperText,
   Labeled,
   TextInputProps,
-  useTheme,
 } from 'react-admin';
 import MDEditor from '@uiw/react-md-editor';
 
 const MarkdownInput = (props: TextInputProps) => {
-  const [theme] = useTheme();
+  const theme = useTheme();
   const { onChange, onBlur, ...rest } = props;
   const {
     field,

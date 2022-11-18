@@ -1,57 +1,50 @@
+import { Box, CircularProgress } from '@mui/material';
+import { getIsCoinbaseWallet, getIsInjected, getIsMetaMask } from 'config/web3';
+import useAuthenticate from 'hooks/useAuthenticate';
+import useCurrentUser from 'hooks/useCurrentUser';
 import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { isMobile } from 'util/userAgent';
+import ConnectionCanceledModal from '../ConnectionCanceledModal';
+import DialogContainer from '../DialogContainer';
+import {
+  InjectedOption,
+  InstallMetaMaskOption,
+  MetaMaskOption,
+} from './InjectedOption';
 import { ButtonContainer, Gap, Subtitle } from './styles';
 import { ConnectWalletModalProps } from './types';
-import DialogContainer from '../DialogContainer';
-import { Button } from '@zignaly-open/ui';
-import { ReactComponent as MetaMaskLogo } from 'assets/icons/metamask-logo.svg';
-import { ReactComponent as KuCoinLogo } from 'assets/icons/kucoin.svg';
-import { ReactComponent as WalletConnectLogo } from 'assets/icons/walletconnect-logo.svg';
-import { useTranslation } from 'react-i18next';
-import useAuthenticate from 'hooks/useAuthenticate';
-import { Box, CircularProgress, useMediaQuery } from '@mui/material';
-import theme from 'theme';
-import useCurrentUser from 'hooks/useCurrentUser';
-import { useConfig, useEthers } from '@usedapp/core';
-import { useAsync } from 'react-use';
-import UnlockMetamaskModal from '../UnlockMetamask';
-import { useModal } from 'mui-modal-provider';
-import NoMetaMask from '../NoMetaMask';
-import ConnectionCanceledModal from '../ConnectionCanceledModal';
-import WalletConnectProvider from '@walletconnect/web3-provider';
-import { WalletType } from '@zignaly-open/raffles-shared/types';
+import { WalletConnectOption } from './WalletConnectOption';
 
 const ConnectWalletModal = (props: ConnectWalletModalProps) => {
   const {
-    authenticate,
+    tryAuthentication,
     isSigning,
     error: authenticateError,
   } = useAuthenticate();
   const { t } = useTranslation('connect-wallet');
-  const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const { user } = useCurrentUser();
-  const { error } = useEthers();
-  const [showUnlock, setShowUnlock] = useState(false);
+  // const [showUnlock, setShowUnlock] = useState(false);
   const [showCanceled, setShowCanceled] = useState(false);
-  const { showModal } = useModal();
-  const config = useConfig();
+  // const { showModal } = useModal();
 
   useEffect(() => {
     if (user) {
       // Close modal once user is connected
       props.onClose(null, 'escapeKeyDown');
     }
-  }, [user]);
+  }, [props, user]);
 
   // Show unlock modal when MM stuck due to locked
-  useAsync(async () => {
-    if (!error) return;
+  // useAsync(async () => {
+  //   if (!error) return;
 
-    const { code } = error as Error & { code: number };
-    if (code === -32002) {
-      const isUnlocked = await window.ethereum?._metamask.isUnlocked();
-      setShowUnlock(!isUnlocked);
-    }
-  }, [error]);
+  //   const { code } = error as Error & { code: number };
+  //   if (code === -32002) {
+  //     const isUnlocked = await window.ethereum?._metamask.isUnlocked();
+  //     setShowUnlock(!isUnlocked);
+  //   }
+  // }, [error]);
 
   // Canceled modal
   useEffect(() => {
@@ -63,45 +56,47 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
     }
   }, [authenticateError]);
 
-  const handleAccountsChanged = (accounts: object[]) => {
-    // Should be always positive here
-    if (accounts.length) {
-      setShowUnlock(false);
+  function getOptions() {
+    const isInjected = getIsInjected();
+    const isMetaMask = getIsMetaMask();
+    const isCoinbaseWallet = getIsCoinbaseWallet();
+
+    const isCoinbaseWalletBrowser = isMobile && isCoinbaseWallet;
+    const isMetaMaskBrowser = isMobile && isMetaMask;
+    const isInjectedMobileBrowser =
+      isCoinbaseWalletBrowser || isMetaMaskBrowser;
+
+    let injectedOption;
+    if (!isInjected) {
+      if (!isMobile) {
+        injectedOption = <InstallMetaMaskOption />;
+      }
+    } else if (!isCoinbaseWallet) {
+      if (isMetaMask) {
+        injectedOption = <MetaMaskOption tryActivation={tryAuthentication} />;
+      } else {
+        injectedOption = <InjectedOption tryActivation={tryAuthentication} />;
+      }
     }
-  };
 
-  useEffect(() => {
-    window.ethereum?.on('accountsChanged', handleAccountsChanged);
+    const walletConnectionOption =
+      (!isInjectedMobileBrowser && (
+        <WalletConnectOption tryActivation={tryAuthentication} />
+      )) ??
+      null;
 
-    return () => {
-      window.ethereum?.removeListener('accountsChanged', handleAccountsChanged);
-    };
-  }, []);
+    return (
+      <>
+        {injectedOption}
+        {walletConnectionOption}
+      </>
+    );
+  }
 
-  const handleMetaMaskConnect = (walletType: WalletType) => {
-    if (window.ethereum) {
-      authenticate(walletType);
-    } else if (walletType === 'metamask') {
-      showModal(NoMetaMask);
-    }
-  };
-
-  const handleWalletConnect = async () => {
-    const provider = new WalletConnectProvider({
-      rpc: config.readOnlyUrls as { [chainId: number]: string },
-      chainId: config.readOnlyChainId,
-      // todo: it doesn't work without
-      infuraId: 'b5b4216a2e7e4fcea49c3bd93777ab95',
-    });
-    //  Enable session (triggers QR Code modal)
-    await provider.enable();
-
-    authenticate('walletconnect', provider);
-  };
-
-  if (showUnlock) {
-    return <UnlockMetamaskModal {...props} />;
-  } else if (showCanceled) {
+  // if (showUnlock) {
+  //   return <UnlockMetamaskModal {...props} />;
+  // } else
+  if (showCanceled) {
     return (
       <ConnectionCanceledModal
         {...props}
@@ -135,32 +130,7 @@ const ConnectWalletModal = (props: ConnectWalletModalProps) => {
             {t('subtitle')}
           </Subtitle>
           <Gap gap={20} />
-          <ButtonContainer>
-            <Button
-              variant='primary'
-              minWidth={270}
-              size={matchesSmall ? 'xlarge' : 'large'}
-              caption='METAMASK'
-              onClick={() => handleMetaMaskConnect('metamask')}
-              leftElement={<MetaMaskLogo />}
-            />
-            <Button
-              variant='primary'
-              minWidth={270}
-              size={matchesSmall ? 'xlarge' : 'large'}
-              caption='KUCOIN WALLET'
-              onClick={() => handleMetaMaskConnect('kucoin')}
-              leftElement={<KuCoinLogo />}
-            />
-            <Button
-              variant='primary'
-              minWidth={270}
-              size={matchesSmall ? 'xlarge' : 'large'}
-              caption='WALLETCONNECT'
-              onClick={handleWalletConnect}
-              leftElement={<WalletConnectLogo />}
-            />
-          </ButtonContainer>
+          <ButtonContainer>{getOptions()}</ButtonContainer>
         </>
       )}
     </DialogContainer>

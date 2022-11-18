@@ -1,5 +1,5 @@
 import { useLazyQuery } from '@apollo/client';
-import { CHECK_USERNAME } from 'queries/users';
+import { CHECK_USERNAME } from 'config/apollo/queries';
 import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 
@@ -24,6 +24,6 @@ export const useValidateUsername = (): ((
       });
       return isValid || t('username-taken', { username });
     },
-    [checkUsername],
+    [checkUsername, t],
   );
 };

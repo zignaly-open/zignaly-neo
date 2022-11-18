@@ -3,7 +3,10 @@ import { useQuery } from '@apollo/client';
 import { Box } from '@mui/system';
 import { PriceLabel, Table, Typography } from '@zignaly-open/ui';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
-import { GET_USER_CODES, GET_USER_CODES_REDEMPTIONS } from 'queries/codes';
+import {
+  GET_USER_CODES,
+  GET_USER_CODES_REDEMPTIONS,
+} from 'config/apollo/queries';
 import { useTranslation } from 'react-i18next';
 import DialogContainer from '../DialogContainer';
 import { ShareCodeProps, UserCodes, UserCodesRedemptions } from './types';
@@ -27,8 +30,7 @@ const ShareCode = (props: ShareCodeProps) => {
     {
       Header: t('direct-reward'),
       accessor: 'rewardDirect',
-      Cell: ({ cell: { value } }) =>
-        value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
+      Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {
       Header: t('reward-benefits'),
@@ -49,8 +51,7 @@ const ShareCode = (props: ShareCodeProps) => {
     {
       Header: t('direct-benefits'),
       accessor: 'benefitDirect',
-      Cell: ({ cell: { value } }) =>
-        value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
+      Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
     },
     {
       Header: t('balance-benefits'),

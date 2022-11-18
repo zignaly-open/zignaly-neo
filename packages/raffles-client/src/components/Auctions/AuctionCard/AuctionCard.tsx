@@ -31,7 +31,7 @@ import Loader from 'components/common/Loader';
 
 const AuctionCard: React.FC<{
   auction: AuctionType;
-}> = React.memo(({ auction }) => {
+}> = ({ auction }) => {
   const { t } = useTranslation('auction');
   const { user } = useCurrentUser();
   const { isActive, hasWon, isStarted } = getWinningLosingStatus(
@@ -159,6 +159,6 @@ const AuctionCard: React.FC<{
       </CardColumn>
     </Item>
   );
-});
+};
 
-export default AuctionCard;
+export default React.memo(AuctionCard);

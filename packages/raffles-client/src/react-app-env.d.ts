@@ -17,13 +17,16 @@ declare module '*.svg' {
 import type { PaletteOptions, Palette } from '@mui/material/styles';
 
 declare module '@mui/material/styles' {
-  interface CustomPalette {}
-  interface Palette extends CustomPalette {}
-  interface PaletteOptions extends CustomPalette {}
+  interface CustomPalette {
+    prettyPink: PaletteColorOptions;
+    greedyGreen: PaletteColorOptions;
+  }
+  interface Palette extends CustomPalette { }
+  interface PaletteOptions extends CustomPalette { }
 }
 
 declare module '@mui/material/styles/createTheme' {
-  interface Theme extends ThemeZig {}
+  interface Theme extends ThemeZig { }
 }
 
 declare module '@mui/material/Button' {
@@ -34,8 +37,18 @@ declare module '@mui/material/Button' {
 }
 
 declare global {
+  interface EthereumProvider {
+    isCoinbaseWallet?: true;
+    isMetaMask?: true;
+    providers?: any[];
+    request?: (...args: any[]) => Promise<void>;
+    on?: (...args: any[]) => void;
+    removeListener?: (...args: any[]) => void;
+    autoRefreshOnNetworkChange?: boolean;
+  }
+
   interface Window {
-    ethereum?: MetaMaskInpageProvider;
+    ethereum?: EthereumProvider;
     subscribersSiteId: string;
   }
 }

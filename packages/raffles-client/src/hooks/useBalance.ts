@@ -1,5 +1,8 @@
 import { useQuery, useSubscription } from '@apollo/client';
-import { BALANCE_SUBSCRIPTION, GET_CURRENT_USER_BALANCE } from 'queries/users';
+import {
+  BALANCE_SUBSCRIPTION,
+  GET_CURRENT_USER_BALANCE,
+} from 'config/apollo/queries';
 import { getToken } from '../util/token';
 
 export default function useBalance(): {
