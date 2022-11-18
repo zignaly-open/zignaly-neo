@@ -41,28 +41,7 @@ import AuthVerifyModal from '../../views/Auth/components/AuthVerifyModal';
 import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../service/api';
 import { useLocation } from 'react-router-dom';
-
-export const useSignup = (): [
-  { loading: boolean },
-  (payload: SignupPayload) => Promise<void>,
-] => {
-  const [loading, setLoading] = useState(false);
-  const [signup] = useSignupMutation();
-  const startSession = useStartSession();
-
-  return [
-    { loading },
-    async (payload: SignupPayload) => {
-      setLoading(true);
-      try {
-        const user = await signup(payload).unwrap();
-        await startSession({ ...user, emailUnconfirmed: true });
-      } finally {
-        setLoading(false);
-      }
-    },
-  ];
-};
+import { ROUTE_PROFIT_SHARING } from 'routes';
 
 const useStartSession = () => {
   const { showModal } = useModal();
@@ -106,6 +85,33 @@ const useStartSession = () => {
     trackNewSession(userData, SessionsTypes.Login);
     i18n.changeLanguage(userData.locale);
   };
+};
+
+export const useSignup = (): [
+  { loading: boolean },
+  (payload: SignupPayload) => Promise<void>,
+] => {
+  const [loading, setLoading] = useState(false);
+  const [signup] = useSignupMutation();
+  const startSession = useStartSession();
+  const { missedRoute } = useSelector((state: RootState) => state.user);
+  const dispatch = useDispatch();
+
+  return [
+    { loading },
+    async (payload: SignupPayload) => {
+      setLoading(true);
+      try {
+        const user = await signup(payload).unwrap();
+        if (!missedRoute) {
+          dispatch(setMissedRoute(ROUTE_PROFIT_SHARING));
+        }
+        await startSession({ ...user, emailUnconfirmed: true });
+      } finally {
+        setLoading(false);
+      }
+    },
+  ];
 };
 
 export const useAuthenticate = (): [

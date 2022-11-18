@@ -111,7 +111,12 @@ function AuthVerifyModal({
   }, [allGood]);
 
   return (
-    <ZModal {...props} close={onClickClose} title={texts.title}>
+    <ZModal
+      {...props}
+      close={onClickClose}
+      title={texts.title}
+      titleAlign='center'
+    >
       <Title>
         {texts.description && (
           <Typography variant={'body1'} className={'description'}>
