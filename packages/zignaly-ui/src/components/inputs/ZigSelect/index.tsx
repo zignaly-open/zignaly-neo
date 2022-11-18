@@ -28,7 +28,7 @@ function ZigSelect<T>({
         options={options as unknown as { label: string; value: number }[]}
         isDisabled={disabled}
         onChange={(v) => {
-          onChange?.((v as ZigSelectOption<T>)?.value || null, (v as ZigSelectOption<T>) || null);
+          onChange?.((v as ZigSelectOption<T>)?.value ?? null, (v as ZigSelectOption<T>) || null);
         }}
         placeholder={placeholder || label}
         value={options?.find?.((x) => x.value === value || (x as unknown) === value) || null}
