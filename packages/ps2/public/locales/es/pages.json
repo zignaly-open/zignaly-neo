@@ -6,9 +6,7 @@
 	"login": "Iniciar Sesión - Zignaly",
 	"help": "Ayuda - Zignaly",
 	"signup": "Registrarse - Zignaly",
-	"staking": "Staking - Zignaly",
 	"trading-services": "Servicios de Trading - Zignaly",
-	"zigpad": "ZIGPad - Zignaly",
 	"profit-sharing": {
 		"title": "Profit Sharing - Zignaly",
 		"service": "{{serviceName}} - Zignaly",

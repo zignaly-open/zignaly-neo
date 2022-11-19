@@ -33,9 +33,7 @@
         }
     },
     "navigation-menu": {
-        "profit-sharing": "Profit Sharing",
-        "staking": "Staking",
-        "zigpad": "ZIGPad"
+        "profit-sharing": "Profit Sharing"
     },
     "amount": "Miktar",
     "new-version": "Yeni sürüm, güncellemek için tıklayın",
