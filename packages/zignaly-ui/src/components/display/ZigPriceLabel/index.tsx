@@ -29,10 +29,10 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
 
   return (
     <ZigTypography {...withDefaultProps}>
-      {usd && <ZigTypography {...withDefaultPropsCoin}>$</ZigTypography>}
-
+      {+value > 0 ? "" : <>&ndash;</>}
+      {usd && "$"}
       <NumberFormat
-        value={value}
+        value={Math.abs(value)}
         displayType={"text"}
         thousandSeparator={true}
         decimalScale={precision || getPrecisionForCoin(coin || "USDT", value)}
