@@ -118,4 +118,16 @@ export type Service = {
   type: string;
   usdtInvested: string;
   userId: string;
+
+  pnlPercent7t: string;
+  pnlPercent30t: string;
+  pnlPercent90t: string;
+  pnlPercent180t: string;
+  pnlPercent365t: string;
+
+  pnlSsc7t: string;
+  pnlSsc30t: string;
+  pnlSsc90t: string;
+  pnlSsc180t: string;
+  pnlSsc365t: string;
 };
