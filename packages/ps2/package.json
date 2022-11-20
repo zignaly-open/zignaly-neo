@@ -74,6 +74,7 @@
     "react-toastify": "^9.0.8",
     "react-update-notification": "^1.1.1",
     "react-use": "^17.4.0",
+    "read-more-react": "^1.0.10",
     "redux-persist": "^6.0.0",
     "styled-components": "^5.3.5",
     "typescript": "4.7.4",

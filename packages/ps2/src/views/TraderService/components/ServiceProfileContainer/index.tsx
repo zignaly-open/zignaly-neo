@@ -4,13 +4,11 @@ import { useIsServiceOwner } from '../../../../apis/service/use';
 import { Box } from '@mui/system';
 import { getServiceLogo } from '../../../../util/images';
 import { Avatar } from '@zignaly-open/ui';
-import {
-  InvestButton,
-  InvestedButton,
-  LiquidatedLabel,
-  OtherAccountsButton,
-  ServiceInformation,
-} from './atoms';
+import InvestedButton from './atoms/InvestedButton';
+import LiquidatedLabel from './atoms/LiquidatedLabel';
+import OtherAccountsButton from './atoms/OtherAccountsButton';
+import ServiceInformation from './atoms/ServiceInformation';
+import InvestButton from './atoms/InvestButton';
 import { useMediaQuery } from '@mui/material';
 import theme from 'theme';
 import { useIsInvestedInService } from '../../../../apis/investment/use';
@@ -41,17 +39,10 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
 
   return (
     <Box
-      sx={
-        md
-          ? {
-              paddingLeft: 4,
-              paddingRight: 4,
-            }
-          : {
-              paddingLeft: 0,
-              paddingRight: 0,
-            }
-      }
+      sx={{
+        pl: md ? 4 : 0,
+        pr: md ? 4 : 0,
+      }}
       paddingTop={isOwner ? 7 : 0}
     >
       <Box
