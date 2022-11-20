@@ -14,7 +14,7 @@ const ZignalyQRCode = ({
   return (
     <Column justifyContent="center" alignItems="center" gap={8}>
       {label && (
-        <Typography variant="h2" color="neutral100">
+        <Typography variant="h4" color="neutral100">
           {label}
         </Typography>
       )}
