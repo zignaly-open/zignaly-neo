@@ -6,7 +6,7 @@ import { dark } from "../../../theme";
 import { weightByType } from "./types";
 
 export default {
-  title: "Display/Typography",
+  title: "Display/DeprecatedTypography",
   component: Typography,
   argTypes: {
     variant: {

@@ -1,7 +1,7 @@
 import { styled, css } from '@mui/material';
 import muiStyled from '@emotion/styled';
 import VerifiedIcon from '@mui/icons-material/Verified';
-import { Typography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PersonIcon from '@mui/icons-material/Person';
 import { Box } from '@mui/material';
@@ -13,7 +13,7 @@ export const LinkIconWithSafariFix = muiStyled(LinkIcon)`
   height: 13px !important; 
 `;
 
-export const GreySubHeader = muiStyled(Typography)`
+export const GreySubHeader: typeof ZigTypography = muiStyled(ZigTypography)`
   font-weight: 500 !important;
   font-size: 13px !important;
   line-height: 20px !important;
@@ -27,7 +27,7 @@ export const GreySubHeaderHighlight = styled(GreySubHeader)`
   // no highlight lol
 `;
 
-export const ServiceHeader = styled(Typography)`
+export const ServiceHeader: typeof ZigTypography = styled(ZigTypography)`
   font-weight: 500 !important;
   font-size: 18px !important;
   line-height: 28px !important;
@@ -108,7 +108,7 @@ export const BigNumberWrapper = styled('div')`
   }
 `;
 
-export const InvestButtonSubtext = styled(Typography)`
+export const InvestButtonSubtext: typeof ZigTypography = styled(ZigTypography)`
   font-size: 12px;
   line-height: 16px;
 `;
