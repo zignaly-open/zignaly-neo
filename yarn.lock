@@ -26308,6 +26308,11 @@ read-cmd-shim@^3.0.0:
   resolved "https://registry.npmjs.org/read-cmd-shim/-/read-cmd-shim-3.0.0.tgz"
   integrity sha512-KQDVjGqhZk92PPNRj9ZEXEuqg8bUobSKRw+q0YQ3TKI5xkce7bUJobL4Z/OtiEbAAv70yEpYIXp4iQ9L8oPVog==
 
+read-more-react@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/read-more-react/-/read-more-react-1.0.10.tgz#d384d0d1403ab5705e309b44574af71810fded6f"
+  integrity sha512-8IRDU/tJX1hLbHjPxJHeUxAhm/wC8RHPSbAA+3mS7Dk13/PJf9ra7Z18apkqqPkENIoEaQI5NqhIMQIa1vOxfw==
+
 read-package-json-fast@^2.0.2, read-package-json-fast@^2.0.3:
   version "2.0.3"
   resolved "https://registry.npmjs.org/read-package-json-fast/-/read-package-json-fast-2.0.3.tgz"
