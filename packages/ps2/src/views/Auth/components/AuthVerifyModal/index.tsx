@@ -4,7 +4,7 @@ import EmailVerifyForm from '../EmailVerifyForm';
 import TwoFAForm from '../TwoFAForm';
 import { LoginResponse } from '../../../../apis/user/types';
 import { useTranslation } from 'react-i18next';
-import { Typography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
 import { Container, Title } from './styles';
 import {
   useResendKnownDeviceCode,
@@ -102,9 +102,7 @@ function AuthVerifyModal({
     <ZModal {...props} close={onClickClose} title={texts.title}>
       <Title>
         {texts.description && (
-          <Typography variant={'body1'} className={'description'}>
-            {texts.description}
-          </Typography>
+          <ZigTypography>{texts.description}</ZigTypography>
         )}
       </Title>
       <Container>

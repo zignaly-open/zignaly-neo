@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { Typography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
 import { Layout } from './styles';
 
 // TODO: this belongs to zignaly-ui
@@ -9,10 +9,8 @@ const Stub: React.FC<{
 }> = ({ title, description }) => {
   return (
     <Layout>
-      <Typography variant={'h1'}>{title}</Typography>
-      <Typography variant={'body1'} color={'neutral200'}>
-        {description}
-      </Typography>
+      <ZigTypography variant={'h1'}>{title}</ZigTypography>
+      <ZigTypography variant={'subtitle1'}>{description}</ZigTypography>
     </Layout>
   );
 };

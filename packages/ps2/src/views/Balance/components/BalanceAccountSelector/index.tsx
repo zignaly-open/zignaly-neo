@@ -5,7 +5,7 @@ import { Layout, Data, Inline, TypeText } from './styles';
 import {
   Avatar,
   IconButton,
-  Typography,
+  ZigTypography,
   ArrowBottomIcon,
 } from '@zignaly-open/ui';
 import { useActiveExchange } from '../../../../apis/user/use';
@@ -25,9 +25,9 @@ const BalanceAccountSelector: React.FC = () => {
       <Avatar size={'xxlarge'} image={activeExchange.image} />
       <Data>
         <Inline>
-          <Typography variant={'h1'} color={'neutral200'}>
+          <ZigTypography variant={'h1'}>
             {activeExchange.internalName}
-          </Typography>
+          </ZigTypography>
           <AccountSelector
             component={({ open }) => (
               <IconButton
