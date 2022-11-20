@@ -11,6 +11,13 @@
     "all-accounts": "See all ({{count}})",
     "x-success-fee": "{{fee}}% Success fee"
   },
+  "owner-verified": "The Manager has been verified",
+  "owner-from": "The Manager is from {{country}}",
+  "strategy": "Strategy",
+  "strategy-empty": "The Manager prefers to keep an air of mystery around their trading strategy",
+  "about-trader": "About the Manager",
+  "about-trader-empty": "The Manager prefers to keep an air of mystery around themself",
+  "about-trader-joined-time": "Joined {{date}}",
   "other-accounts": {
     "title": "Invested Across all Accounts",
     "account": "Account",

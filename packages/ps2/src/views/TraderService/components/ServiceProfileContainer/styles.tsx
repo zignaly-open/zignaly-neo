@@ -95,6 +95,7 @@ export const InvestButtonContainer = styled('div')`
 `;
 
 export const InvestButtonWrap = styled('div')`
+  text-align: center;
   button > div {
     height: 60px !important;
   }
@@ -105,6 +106,12 @@ export const BigNumberWrapper = styled('div')`
     font-weight: 500;
     font-size: 22px !important;
     line-height: 36px !important;
+  }
+`;
+
+export const HideReadMoreEffects = styled('div')`
+  .readmore.overhang {
+    display: none !important;
   }
 `;
 

@@ -43,7 +43,7 @@ const InvestButton: React.FC<{
           <InvestButtonSubtext
             variant={'h5'}
             color='neutral150'
-            weight='regular'
+            fontWeight='regular'
           >
             {t('invest-button.x-success-fee', {
               fee: service.successFee,
