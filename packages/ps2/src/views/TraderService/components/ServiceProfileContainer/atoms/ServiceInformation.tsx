@@ -1,7 +1,7 @@
 import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useToast } from '../../../../../util/hooks/useToast';
-import { Box, useMediaQuery } from '@mui/material';
+import { Box, Tooltip, useMediaQuery } from '@mui/material';
 import theme from '../../../../../theme';
 import { Trans, useTranslation } from 'react-i18next';
 import {
@@ -45,8 +45,10 @@ const ServiceInformation: React.FC<{
             components={[<GreySubHeaderHighlight key={'--service--by'} />]}
             values={{ name: service.ownerName }}
           />
-          {service.ownerVerified && (
-            <StyledVerifiedIcon width={13} height={13} />
+          {!service.ownerVerified && (
+            <Tooltip title={t('owner-verified')}>
+              <StyledVerifiedIcon width={13} height={13} />
+            </Tooltip>
           )}
         </GreySubHeader>
         {md && <Separator />}

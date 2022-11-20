@@ -6,6 +6,8 @@ import { useIsServiceOwner } from '../../../../apis/service/use';
 import { Box, Grid, useMediaQuery } from '@mui/material';
 import theme from '../../../../theme';
 import RightSideActions from './atoms/RightSideActions';
+import ServiceDescription from './atoms/ServiceDescription';
+import ServiceManagerDescription from './atoms/ServiceManagerDescription';
 
 const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
@@ -27,6 +29,8 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
       <Grid container>
         <Grid item xs={12} md={9}>
           <ServiceProfileHeader service={service} />
+          <ServiceDescription service={service} />
+          <ServiceManagerDescription service={service} />
         </Grid>
         <Grid item xs={12} md={3}>
           <RightSideActions service={service} />
