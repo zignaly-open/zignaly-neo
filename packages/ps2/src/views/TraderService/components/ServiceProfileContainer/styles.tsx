@@ -1,4 +1,4 @@
-import { styled, css } from '@mui/material';
+import { styled, css, Grid } from '@mui/material';
 import muiStyled from '@emotion/styled';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { ZigTypography } from '@zignaly-open/ui';
@@ -118,4 +118,28 @@ export const HideReadMoreEffects = styled('div')`
 export const InvestButtonSubtext: typeof ZigTypography = styled(ZigTypography)`
   font-size: 12px;
   line-height: 16px;
+`;
+
+export const GridWithBottomBorder = styled(Grid)`
+  border-bottom: 0.5px solid ${({ theme }) => theme.palette.neutral700};
+`;
+
+export const GridCell = styled(Grid)`
+  text-align: center;
+`;
+
+export const PercentChangeContainer: typeof ZigTypography = styled(
+  ZigTypography,
+)`
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+`;
+
+export const RightSideActionWrapper = styled(Box)`
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
