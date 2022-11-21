@@ -8,6 +8,7 @@ import theme from '../../../../theme';
 import RightSideActions from './atoms/RightSideActions';
 import ServiceDescription from './atoms/ServiceDescription';
 import ServiceManagerDescription from './atoms/ServiceManagerDescription';
+import ServiceSummary from './atoms/ServiceSummary';
 
 const ServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
@@ -27,13 +28,14 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
       paddingTop={isOwner ? 7 : 0}
     >
       <Grid container>
-        <Grid item xs={12} md={9}>
+        <Grid item xs={12} md={8}>
           <ServiceProfileHeader service={service} />
           <ServiceDescription service={service} />
           <ServiceManagerDescription service={service} />
         </Grid>
-        <Grid item xs={12} md={3}>
+        <Grid item xs={12} md={4}>
           <RightSideActions service={service} />
+          <ServiceSummary service={service} />
         </Grid>
       </Grid>
     </Box>

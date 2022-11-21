@@ -31,15 +31,7 @@ const BigNumber: React.FC<{
       {ssc && ssc !== 'USDT' && (
         <PriceLabel coin={ssc} value={value} green={green} red={red} />
       )}
-      {!ssc && (
-        <PriceLabel
-          hideCoinName
-          coin={ssc}
-          value={value}
-          green={green}
-          red={red}
-        />
-      )}
+      {!ssc && <PriceLabel hideCoinName coin={ssc} value={value} red={red} />}
     </BigNumberWrapper>
   );
 };
