@@ -11,6 +11,21 @@
     "all-accounts": "CH-Ŝëë áll ({{count}})",
     "x-success-fee": "CH-{{fee}}% Ŝüĉĉëŝŝ ḟëë"
   },
+  "owner-verified": "CH-Ṫĥë Ṁáńáĝëѓ ĥáŝ bëëń vëѓïḟïëḋ",
+  "owner-from": "CH-Ṫĥë Ṁáńáĝëѓ ïŝ ḟѓöṁ {{country}}",
+  "strategy": "CH-Ŝṫѓáṫëĝy",
+  "assets-in-pool": "CH-Áŝŝëṫŝ ïń Ṗööl",
+  "investors-count": "CH-Ïńvëŝṫöѓŝ",
+  "strategy-empty": "CH-Ṫĥë Ṁáńáĝëѓ ṗѓëḟëѓŝ ṫö këëṗ áń áïѓ öḟ ṁyŝṫëѓy áѓöüńḋ ṫĥëïѓ ṫѓáḋïńĝ ŝṫѓáṫëĝy",
+  "about-trader": "CH-Áböüṫ ṫĥë Ṁáńáĝëѓ",
+  "about-trader-empty": "CH-Ṫĥë Ṁáńáĝëѓ ṗѓëḟëѓŝ ṫö këëṗ áń áïѓ öḟ ṁyŝṫëѓy áѓöüńḋ ṫĥëṁŝëlḟ",
+  "about-trader-joined-time": "CH-Jöïńëḋ {{date}}",
+  "summary": {
+    "base-currency": "CH-Báŝë ĉüѓѓëńĉy:",
+    "funds-allocated": "CH-Ḟüńḋŝ állöĉáṫëḋ:",
+    "success-fee": "CH-Ŝüĉĉëŝŝ ḟëë:",
+    "tags": "CH-Ṫáĝŝ:"
+  },
   "other-accounts": {
     "title": "CH-Ïńvëŝṫëḋ Áĉѓöŝŝ áll Áĉĉöüńṫŝ",
     "account": "CH-Áĉĉöüńṫ",
