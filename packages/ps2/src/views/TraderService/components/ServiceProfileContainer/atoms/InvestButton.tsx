@@ -1,16 +1,13 @@
 import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
-import {
-  useIsAuthenticated,
-  useSetMissedRoute,
-} from '../../../../../apis/user/use';
+import { useIsAuthenticated } from '../../../../../apis/user/use';
 import { useZModal } from '../../../../../components/ZModal/use';
 import {
   useCurrentBalance,
   useSetSelectedInvestment,
 } from '../../../../../apis/investment/use';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { serviceToInvestmentServiceDetail } from '../../../../../apis/investment/util';
 import InvestModal from '../../../../Dashboard/components/ManageInvestmentModals/InvestModal';
 import { ROUTE_LOGIN } from '../../../../../routes';
@@ -26,7 +23,7 @@ const InvestButton: React.FC<{
   const { showModal } = useZModal();
   const selectInvestment = useSetSelectedInvestment();
   const navigate = useNavigate();
-  const setMissedRoute = useSetMissedRoute();
+  const location = useLocation();
   const { balance } = useCurrentBalance(service.ssc);
 
   const onClickMakeInvestment = () => {
@@ -39,8 +36,7 @@ const InvestButton: React.FC<{
         });
       else showModal(InvestModal);
     } else {
-      setMissedRoute();
-      navigate(ROUTE_LOGIN);
+      navigate(ROUTE_LOGIN, { state: { redirectTo: location } });
     }
   };
 
