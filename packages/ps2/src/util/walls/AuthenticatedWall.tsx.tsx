@@ -6,7 +6,7 @@ import { ROUTE_LOGIN } from '../../routes';
 const AuthenticatedWall: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
   const setMissedRoute = useSetMissedRoute();
-  useEffect(() => !isAuthenticated && setMissedRoute(), [isAuthenticated]);
+  useEffect(() => !isAuthenticated && setMissedRoute(), []);
 
   return isAuthenticated ? <Outlet /> : <Navigate to={ROUTE_LOGIN} replace />;
 };
