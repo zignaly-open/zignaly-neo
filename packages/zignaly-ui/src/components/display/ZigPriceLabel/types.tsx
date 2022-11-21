@@ -7,10 +7,10 @@ type TypographyProps = Pick<
   component: string; // actualy this comes from the typographymap but whatever
 };
 
-export type ZigPriceLabelProps = TypographyProps & {
+export type ZigPriceLabelProps = Partial<TypographyProps> & {
   value: string | number;
   coin?: string;
   precision?: number;
   usd?: boolean;
-  coinProps?: TypographyProps;
+  coinProps?: Partial<TypographyProps>;
 };
