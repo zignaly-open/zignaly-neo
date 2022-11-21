@@ -1,14 +1,12 @@
 {
   "404": "CH-404 / Ṗáĝë ńöṫ ḟöüńḋ - Žïĝńály",
   "dashboard": "CH-Ṁy Ḋáŝĥböáѓḋ - Žïĝńály",
-  "become-trader": "CH-Bëĉöṁë Ṫѓáḋëѓ - Žïĝńály",
+  "become-trader": "CH-Öḟḟëѓ Yöüѓ Ṫѓáḋïńĝ Ŝëѓvïĉë - Žïĝńály",
   "my-balances": "CH-Ṁy Báláńĉëŝ - Žïĝńály",
   "login": "CH-Löĝ ïń - Žïĝńály",
   "help": "CH-Ĥëlṗ - Žïĝńály",
   "signup": "CH-Ŝïĝń Üṗ - Žïĝńály",
-  "staking": "CH-Ŝṫákïńĝ - Žïĝńály",
   "trading-services": "CH-Ṫѓáḋïńĝ Ŝëѓvïĉëŝ - Žïĝńály",
-  "zigpad": "CH-ŽÏĜṖáḋ - Žïĝńály",
   "profit-sharing": {
     "title": "CH-Ṗѓöḟïṫ Ŝĥáѓïńĝ - Žïĝńály",
     "service": "CH-{{serviceName}} - Žïĝńály",

@@ -4,7 +4,7 @@ import EmailVerifyForm from '../EmailVerifyForm';
 import TwoFAForm from '../TwoFAForm';
 import { LoginResponse } from '../../../../apis/user/types';
 import { useTranslation } from 'react-i18next';
-import { Typography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
 import { Container, Title } from './styles';
 import {
   useResendKnownDeviceCode,
@@ -12,6 +12,8 @@ import {
   useResendCode,
   useVerifyEmail,
   useVerifyEmailKnownDevice,
+  useVerifyEmailNewUser,
+  useResendCodeNewUser,
 } from '../../../../apis/user/use';
 import { useToast } from '../../../../util/hooks/useToast';
 import ZModal from '../../../../components/ZModal';
@@ -23,22 +25,32 @@ function AuthVerifyModal({
   onFailure,
   ...props
 }: {
-  user: LoginResponse;
+  user: { token: string } & Partial<LoginResponse>;
   close: () => void;
   onSuccess: () => void;
   onFailure: ({ message }: { message: string }) => void;
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation(['auth', 'error']);
   const { ask2FA, disabled, emailUnconfirmed, isUnknownDevice } = user;
-  const resendUnknown = useResendCode();
-  const resendKnown = useResendKnownDeviceCode();
-  const verifyUnknown = useVerifyEmail();
-  const verifyKnown = useVerifyEmailKnownDevice();
+  const resendEmail = useResendCode();
+  const resendEmailNewUser = useResendCodeNewUser();
+  const resendDevice = useResendKnownDeviceCode();
+  const verifyEmail = useVerifyEmail();
+  const verifyEmailNewUser = useVerifyEmailNewUser();
+  const verifyDevice = useVerifyEmailKnownDevice();
   const [submit2FA, status2FA] = useVerify2FA();
   const toast = useToast();
 
-  const [verify, verifyStatus] = disabled ? verifyUnknown : verifyKnown;
-  const [resend, resendStatus] = disabled ? resendUnknown : resendKnown;
+  let [verify, verifyStatus] = verifyEmailNewUser;
+  let [resend, resendStatus] = resendEmailNewUser;
+
+  if (isUnknownDevice) {
+    [verify, verifyStatus] = verifyDevice;
+    [resend, resendStatus] = resendDevice;
+  } else if (disabled) {
+    [verify, verifyStatus] = verifyEmail;
+    [resend, resendStatus] = resendEmail;
+  }
 
   const performResend = () => {
     resend().then(() => toast.success(t('auth:resend-code')));
@@ -99,12 +111,15 @@ function AuthVerifyModal({
   }, [allGood]);
 
   return (
-    <ZModal {...props} close={onClickClose} title={texts.title}>
+    <ZModal
+      {...props}
+      close={onClickClose}
+      title={texts.title}
+      titleAlign='center'
+    >
       <Title>
         {texts.description && (
-          <Typography variant={'body1'} className={'description'}>
-            {texts.description}
-          </Typography>
+          <ZigTypography>{texts.description}</ZigTypography>
         )}
       </Title>
       <Container>

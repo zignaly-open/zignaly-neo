@@ -2,7 +2,10 @@ import React from "react";
 import * as styled from "./styles";
 import { componentByVariants, TypographyProps } from "./types";
 
-const Typography = ({
+/**
+ * @deprecated
+ */
+function Typography({
   children,
   variant = "body1",
   weight,
@@ -10,7 +13,7 @@ const Typography = ({
   underline,
   component,
   className,
-}: TypographyProps) => {
+}: TypographyProps): JSX.Element {
   return (
     <styled.Layout
       color={color}
@@ -22,6 +25,6 @@ const Typography = ({
       {children}
     </styled.Layout>
   );
-};
+}
 
 export default Typography;

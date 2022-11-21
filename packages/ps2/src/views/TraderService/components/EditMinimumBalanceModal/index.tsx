@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { MinBalanceModalProps } from './types';
 import { MinBalanceModalValidation } from './validation';
 import BigNumber from 'bignumber.js';
-import { Button, InputAmountAdvanced, Typography } from '@zignaly-open/ui';
+import { Button, InputAmountAdvanced, ZigTypography } from '@zignaly-open/ui';
 import {
   useServiceDetails,
   useTraderServiceManagement,
@@ -59,7 +59,7 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
   return (
     <ZModal wide {...props} title={t('minBalanceModal.title')} close={close}>
       <Box sx={{ marginBottom: 3 }}>
-        <Typography>{t('minBalanceModal.desc')}</Typography>
+        <ZigTypography>{t('minBalanceModal.desc')}</ZigTypography>
       </Box>
       <form noValidate onSubmit={handleSubmit(onSubmit)}>
         <InputAmountAdvanced

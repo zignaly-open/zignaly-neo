@@ -42,11 +42,10 @@
     }
   },
   "navigation-menu": {
-    "profit-sharing": "Profit Sharing",
-    "staking": "Staking",
-    "zigpad": "ZIGPad"
+    "profit-sharing": "Profit Sharing"
   },
   "amount": "Amount",
+  "percent": "{{value, prettyNumber}}%",
   "new-version": "New version, click me to update",
   "validation": {
     "insufficient-amount": "Insufficient funds",

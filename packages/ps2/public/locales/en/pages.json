@@ -1,14 +1,12 @@
 {
   "404": "404 / Page not found - Zignaly",
   "dashboard": "My Dashboard - Zignaly",
-  "become-trader": "Become Trader - Zignaly",
+  "become-trader": "Offer Your Trading Service - Zignaly",
   "my-balances": "My Balances - Zignaly",
   "login": "Log in - Zignaly",
   "help": "Help - Zignaly",
   "signup": "Sign Up - Zignaly",
-  "staking": "Staking - Zignaly",
   "trading-services": "Trading Services - Zignaly",
-  "zigpad": "ZIGPad - Zignaly",
   "profit-sharing": {
     "title": "Profit Sharing - Zignaly",
     "service": "{{serviceName}} - Zignaly",

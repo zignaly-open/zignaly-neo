@@ -2,12 +2,10 @@ import React from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import ProfitSharing from './views/ProfitSharing';
 import Dashboard from './views/Dashboard';
-import Staking from './views/Staking';
 import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
 import ForgotPassword from './views/Auth/ForgotPassword';
 import MyBalances from './views/Balance';
-import Zigpad from './views/Zigpad';
 
 import {
   ROUTE_DASHBOARD,
@@ -16,7 +14,6 @@ import {
   ROUTE_MY_BALANCES,
   ROUTE_PROFIT_SHARING,
   ROUTE_SIGNUP,
-  ROUTE_STAKING,
   ROUTE_TRADING_SERVICE,
   ROUTE_TRADING_SERVICE_API,
   ROUTE_TRADING_SERVICE_COINS,
@@ -26,7 +23,6 @@ import {
   ROUTE_TRADING_SERVICE_POSITIONS,
   ROUTE_TRADING_SERVICE_EDIT,
   ROUTE_TRADING_SERVICE_SIGNALS,
-  ROUTE_ZIGPAD,
   ROUTE_BECOME_TRADER,
   ROUTE_HELP_TRADER,
   ROUTE_HELP_INVESTOR,
@@ -35,7 +31,6 @@ import {
 
 import Management from './views/TraderService/Management';
 import Investors from './views/TraderService/Investors';
-import BecomeTrader from './views/TraderService/BecomeTrader';
 import Positions from './views/TraderService/Positions';
 import Coins from './views/TraderService/Coins';
 import ServiceProfile from './views/TraderService/ServiceProfile';
@@ -49,6 +44,7 @@ import ServiceOwnerWall from './util/walls/ServiceOwnerWall';
 import HelpInvestor from './views/Help/HelpInvestor';
 import HelpTrader from './views/Help/HelpTrader';
 import NotFound from 'views/404';
+import OfferYourTradingService from './views/OfferYourTradingService';
 
 const Router: React.FC = () => (
   <Routes>
@@ -71,7 +67,6 @@ const Router: React.FC = () => (
       </Route>
     </Route>
 
-    <Route path={ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
     <Route path={ROUTE_HELP_TRADER} element={<HelpTrader />} />
     <Route path={ROUTE_HELP_INVESTOR} element={<HelpInvestor />} />
 
@@ -81,9 +76,8 @@ const Router: React.FC = () => (
       <Route path={ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />
     </Route>
 
+    <Route path={ROUTE_BECOME_TRADER} element={<OfferYourTradingService />} />
     <Route path={ROUTE_PROFIT_SHARING} element={<ProfitSharing />} />
-    <Route path={ROUTE_STAKING} element={<Staking />} />
-    <Route path={ROUTE_ZIGPAD} element={<Zigpad />} />
     <Route path={ROUTE_404} element={<NotFound />} />
 
     <Route path='/' element={<Navigate to={ROUTE_PROFIT_SHARING} replace />} />

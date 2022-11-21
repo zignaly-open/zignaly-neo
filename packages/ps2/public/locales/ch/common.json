@@ -42,11 +42,10 @@
     }
   },
   "navigation-menu": {
-    "profit-sharing": "CH-Ṗѓöḟïṫ Ŝĥáѓïńĝ",
-    "staking": "CH-Ŝṫákïńĝ",
-    "zigpad": "CH-ŽÏĜṖáḋ"
+    "profit-sharing": "CH-Ṗѓöḟïṫ Ŝĥáѓïńĝ"
   },
   "amount": "CH-Áṁöüńṫ",
+  "percent": "CH-{{value, prettyNumber}}%",
   "new-version": "CH-Ńëw vëѓŝïöń, ĉlïĉk ṁë ṫö üṗḋáṫë",
   "validation": {
     "insufficient-amount": "CH-Ïńŝüḟḟïĉïëńṫ ḟüńḋŝ",

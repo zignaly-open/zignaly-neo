@@ -33,9 +33,7 @@
 		}
 	},
 	"navigation-menu": {
-		"profit-sharing": "Profit Sharing",
-		"staking": "Staking",
-		"zigpad": "ZIGPad"
+		"profit-sharing": "Profit Sharing"
 	},
 	"amount": "Cantidad",
 	"new-version": "Nueva versión, haz clic para actualizar",

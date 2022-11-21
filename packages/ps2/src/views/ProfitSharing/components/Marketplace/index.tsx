@@ -8,6 +8,7 @@ import {
   AreaChart,
   PercentageIndicator,
   sortByValue,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import { formatDistance } from 'date-fns';
 import { Box } from '@mui/material';
@@ -19,7 +20,7 @@ import { Inline } from '../../../Dashboard/components/MyDashboard/styles';
 import { ServiceName } from '../../../Dashboard/components/ServiceName';
 import { MarketplaceTableDataType } from './types';
 import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace/util';
-import AssetsInPool from '../AssetsInPool';
+import AssetsInPool from '../../../../components/AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 
 const initialStateTable = {
@@ -151,12 +152,12 @@ const Marketplace: React.FC = () => {
                 mb: 4,
               }}
             >
-              <Typography variant={'h1'} component={'h1'}>
+              <ZigTypography variant={'h1'}>
                 {t('invest-in-services')}
-              </Typography>
-              <Typography variant={'body1'} color={'neutral200'}>
+              </ZigTypography>
+              <ZigTypography variant={'body1'}>
                 {t('invest-in-services-explainer')}
-              </Typography>
+              </ZigTypography>
             </Box>
             <Table
               initialState={initialStateTable}

@@ -2,6 +2,14 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
+import Countries from 'i18n-iso-countries';
+import CountiesEn from 'i18n-iso-countries/langs/en.json';
+
+Countries.registerLocale(CountiesEn);
+
+// mishka vodka balalayka
+if (CountiesEn.countries.RU)
+  CountiesEn.countries.RU = 'Mother Russia' as unknown as string[];
 
 export const supportedLanguages = ['en'];
 

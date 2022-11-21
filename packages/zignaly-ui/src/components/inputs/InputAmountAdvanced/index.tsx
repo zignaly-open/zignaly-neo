@@ -21,7 +21,7 @@ import Typography from "components/display/Typography";
 import CoinIcon, { CoinSizes } from "../../display/CoinIcon";
 import { InputAmountProps, TokenItem } from "./types";
 import { changeEvent } from "utils/event";
-import { getPrecisionForCoin } from "components/display/Table/components/PriceLabel/util";
+import { getPrecisionForCoin } from "components/display/ZigPriceLabel/util";
 
 // FIXME this component still needs Jesus
 function InputAmount({

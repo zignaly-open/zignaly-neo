@@ -6,12 +6,7 @@ import {
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavigationLink } from './atoms';
-import {
-  ROUTE_DASHBOARD,
-  ROUTE_PROFIT_SHARING,
-  ROUTE_STAKING,
-  ROUTE_ZIGPAD,
-} from '../../../routes';
+import { ROUTE_DASHBOARD, ROUTE_PROFIT_SHARING } from '../../../routes';
 import { Link } from 'react-router-dom';
 import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
 import AccountMenu from '../AccountMenu';
@@ -36,20 +31,6 @@ const Header: React.FC = () => {
             key='--route-ps'
           >
             {t('navigation-menu.profit-sharing')}
-          </NavigationLink>
-          <NavigationLink
-            id='menu__staking'
-            to={ROUTE_STAKING}
-            key='--route-staking'
-          >
-            {t('navigation-menu.staking')}
-          </NavigationLink>
-          <NavigationLink
-            id='menu__zigpad'
-            to={ROUTE_ZIGPAD}
-            key='--route-zigpad'
-          >
-            {t('navigation-menu.zigpad')}
           </NavigationLink>
         </HeaderLinksContainer>,
         <ExtraNavigationDropdown key={'extra-nav'} />,

@@ -5,6 +5,7 @@ import {
   sortByValue,
   Table,
   Typography,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import React, { useCallback, useMemo } from 'react';
 import { Heading, Layout } from './styles';
@@ -223,9 +224,7 @@ const MyDashboard: React.FC = () => {
   return (
     <Layout>
       <Heading>
-        <Typography variant='h1' color={'neutral000'}>
-          {t('title')}
-        </Typography>
+        <ZigTypography variant='h1'>{t('title')}</ZigTypography>
       </Heading>
       <LayoutContentWrapper
         endpoint={investmentsEndpoint}

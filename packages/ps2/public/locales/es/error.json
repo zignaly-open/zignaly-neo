@@ -7,7 +7,7 @@
 		"email-invalid": "Por favor introduzca un correo electrónico válido",
 		"9003": "Este campo es obligatorio",
 		"failed-verification": "No se ha podido verificar",
-		"occured": "Ocurrió un Error",
+		"occurred": "Ocurrió un Error",
 		"noidea": "¡Algo salió mal!",
 		"paymentnotcompleted": "Pago no completado.",
 		"1": "El correo ya está usado",

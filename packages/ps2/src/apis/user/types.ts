@@ -72,6 +72,17 @@ export type Exchange = {
   activated: boolean;
 };
 
+export type SignupResponse = {
+  token: string;
+  userId: string;
+};
+
+export type SignupPayload = {
+  email: string;
+  password: string;
+  newPageAB?: boolean;
+};
+
 export type LoginResponse = {
   token: string;
   ask2FA: boolean;
