@@ -55,7 +55,7 @@ function AccountMenu(): React.ReactElement | null {
             caption={t('account-menu.isAuth-button-signUp')}
           />
         </Link>
-        <Link to={ROUTE_LOGIN}>
+        <Link to={ROUTE_LOGIN} state={{ redirectTo: location }}>
           <LoginButton id={'menu__login'}>
             <UserIcon
               color={theme.palette.neutral300}
