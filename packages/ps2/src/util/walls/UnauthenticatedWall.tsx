@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useIsAuthenticated } from '../../apis/user/use';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { ROUTE_DASHBOARD } from '../../routes';
+import { ROUTE_DASHBOARD, ROUTE_PROFIT_SHARING } from '../../routes';
 
 type RedirectLocationState = {
   redirectTo: Location;
@@ -9,14 +9,14 @@ type RedirectLocationState = {
 
 const UnauthenticatedWall: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
-  const { state: locationState } = useLocation();
+  const { pathname, state: locationState } = useLocation();
 
   const redirectPath = useCallback(() => {
     if (locationState) {
       const { redirectTo } = locationState as RedirectLocationState;
       return `${redirectTo.pathname}${redirectTo.search}`;
     } else {
-      return ROUTE_DASHBOARD;
+      return pathname === 'signup' ? ROUTE_PROFIT_SHARING : ROUTE_DASHBOARD;
     }
   }, [locationState]);
 

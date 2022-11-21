@@ -27,7 +27,6 @@ import {
   logout,
   setAccessToken,
   setActiveExchangeInternalId,
-  setMissedRoute,
   setSessionExpiryDate,
   setUser,
 } from './store';
@@ -40,8 +39,6 @@ import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import AuthVerifyModal from '../../views/Auth/components/AuthVerifyModal';
 import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../service/api';
-import { ROUTE_PROFIT_SHARING } from 'routes';
-import { useLocation } from 'react-router-dom';
 
 const useStartSession = () => {
   const { showModal } = useModal();
@@ -94,8 +91,6 @@ export const useSignup = (): [
   const [loading, setLoading] = useState(false);
   const [signup] = useSignupMutation();
   const startSession = useStartSession();
-  const { state: locationState } = useLocation();
-  const dispatch = useDispatch();
 
   return [
     { loading },
@@ -103,9 +98,6 @@ export const useSignup = (): [
       setLoading(true);
       try {
         const user = await signup(payload).unwrap();
-        if (!locationState) {
-          dispatch(setMissedRoute(ROUTE_PROFIT_SHARING));
-        }
         await startSession({ ...user, emailUnconfirmed: true });
       } finally {
         setLoading(false);
