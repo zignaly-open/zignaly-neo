@@ -47,7 +47,7 @@
     "45": "Unknown Error",
     "46": "User not found or token expired",
     "47": "The URL has been already visited. Please start the recovery process again.",
-    "48": "Token expired. Please start the recovery process again.",
+    "48": "Code expired, please try again.",
     "49": "Password too weak. It has to be 8 characters long include numbers letters CAPs and symbols.",
     "50": "No balance yet",
     "51": "Error getting your Credit Card information.",
