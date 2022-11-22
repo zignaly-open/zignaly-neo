@@ -17,7 +17,7 @@ const IconButton = ({
   },
   isFocused = false,
   className,
-  type,
+  type = "button",
 }: IconButtonProps): JSX.Element => {
   return (
     <Layout className={className}>

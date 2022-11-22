@@ -7,8 +7,14 @@ import { LoginValidation } from './validations';
 import { useAuthenticate } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
-import { Button, TextButton, Typography, ZigInput } from '@zignaly-open/ui';
-import { Box, IconButton, InputAdornment } from '@mui/material';
+import {
+  Button,
+  IconButton,
+  TextButton,
+  Typography,
+  ZigInput,
+} from '@zignaly-open/ui';
+import { Box, InputAdornment } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 
@@ -87,9 +93,15 @@ const LoginForm: React.FC = () => {
                     <IconButton
                       aria-label='Toggle password visibility'
                       onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
+                      icon={
+                        showPassword ? (
+                          <Visibility sx={{ color: 'neutral200' }} />
+                        ) : (
+                          <VisibilityOff sx={{ color: 'neutral200' }} />
+                        )
+                      }
+                      variant='flat'
+                    />
                   </InputAdornment>
                 ),
               }}
