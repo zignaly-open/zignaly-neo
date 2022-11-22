@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
-import { Form, Action, TitleHead } from './styles';
+import { Form, Action, TitleHead, StyledErrorOutline } from './styles';
 import { SignupValidation } from './validations';
 import { useSignup } from '../../../../apis/user/use';
 import { useNavigate } from 'react-router-dom';
@@ -66,6 +66,20 @@ const SignupForm: React.FC = () => {
               placeholder={t('login-form.inputText.password.label')}
               disabled={signingUp}
               error={t(errors.password?.message)}
+              helperText={
+                <Box display='flex' alignItems='center'>
+                  <StyledErrorOutline height='24px' width='24px' />
+                  <Typography
+                    variant='body2'
+                    color='neutral300'
+                    weight='regular'
+                  >
+                    {t('error:error.password-requirements', {
+                      length: 8,
+                    })}
+                  </Typography>
+                </Box>
+              }
               type={showPassword ? 'text' : 'password'}
               InputProps={{
                 endAdornment: (
