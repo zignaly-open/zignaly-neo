@@ -3,6 +3,7 @@ import "@mui/system";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import ZigButton from "./index";
 import "@mui/system";
+import { ButtonGroup } from "@mui/material";
 
 const result: ComponentMeta<typeof ZigButton> = {
   title: "Inputs/ZigButton",
@@ -19,7 +20,7 @@ const result: ComponentMeta<typeof ZigButton> = {
       control: {
         type: "select",
       },
-      options: ["primary", "outlined", "contained"],
+      options: ["outlined", "contained"],
     },
     size: {
       control: {
@@ -36,5 +37,20 @@ const Template: ComponentStory<typeof ZigButton> = (args) => <ZigButton {...args
 
 export const Default: ComponentMeta<typeof ZigButton> = Template.bind({});
 Default.args = {
+  children: "Amount to Withdraw",
+};
+
+const TemplateGroup: ComponentStory<typeof ZigButton> = ({ variant, size, ...args }) => {
+  return (
+    <ButtonGroup variant={variant} size={size}>
+      <ZigButton {...args} />
+      <ZigButton {...args} />
+      <ZigButton {...args} />
+    </ButtonGroup>
+  );
+};
+
+export const Group: ComponentMeta<typeof ZigButton> = TemplateGroup.bind({});
+Group.args = {
   children: "Amount to Withdraw",
 };
