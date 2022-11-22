@@ -7,8 +7,14 @@ import { SignupValidation } from './validations';
 import { useSignup } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN } from '../../../../routes';
-import { Button, TextButton, Typography, ZigInput } from '@zignaly-open/ui';
-import { Box, IconButton, InputAdornment, Link } from '@mui/material';
+import {
+  Button,
+  IconButton,
+  TextButton,
+  Typography,
+  ZigInput,
+} from '@zignaly-open/ui';
+import { Box, InputAdornment, Link } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoginPayload } from '../../../../apis/user/types';
 
@@ -70,7 +76,7 @@ const SignupForm: React.FC = () => {
                   <StyledErrorOutline height='24px' width='24px' />
                   <Typography
                     variant='body2'
-                    color='neutral300'
+                    color='neutral200'
                     weight='regular'
                   >
                     {t('error:error.password-requirements', {
@@ -86,9 +92,15 @@ const SignupForm: React.FC = () => {
                     <IconButton
                       aria-label='Toggle password visibility'
                       onClick={() => setShowPassword(!showPassword)}
-                    >
-                      {showPassword ? <Visibility /> : <VisibilityOff />}
-                    </IconButton>
+                      icon={
+                        showPassword ? (
+                          <Visibility sx={{ color: 'neutral200' }} />
+                        ) : (
+                          <VisibilityOff sx={{ color: 'neutral200' }} />
+                        )
+                      }
+                      variant='flat'
+                    />
                   </InputAdornment>
                 ),
               }}
