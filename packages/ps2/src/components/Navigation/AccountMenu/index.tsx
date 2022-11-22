@@ -28,7 +28,7 @@ import {
   ROUTE_SIGNUP,
   ROUTE_MY_BALANCES,
 } from '../../../routes';
-import { generatePath, Link, useNavigate } from 'react-router-dom';
+import { generatePath, Link, useLocation, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
 
 function AccountMenu(): React.ReactElement | null {
@@ -40,6 +40,7 @@ function AccountMenu(): React.ReactElement | null {
   const navigate = useNavigate();
   const { exchanges } = useCurrentUser();
   const selectExchange = useSelectExchange();
+  const location = useLocation();
 
   const setActiveExchange = (exchangeInternalId: string) => {
     selectExchange(exchangeInternalId);
@@ -48,13 +49,13 @@ function AccountMenu(): React.ReactElement | null {
   if (!isAuthenticated) {
     return (
       <>
-        <Link to={ROUTE_SIGNUP}>
+        <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>
           <Button
             id={'menu__signup'}
             caption={t('account-menu.isAuth-button-signUp')}
           />
         </Link>
-        <Link to={ROUTE_LOGIN}>
+        <Link to={ROUTE_LOGIN} state={{ redirectTo: location }}>
           <LoginButton id={'menu__login'}>
             <UserIcon
               color={theme.palette.neutral300}

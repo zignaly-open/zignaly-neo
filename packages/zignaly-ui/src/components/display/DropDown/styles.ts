@@ -25,7 +25,7 @@ export const Component = styled.div`
 `;
 
 export const ComponentWrapper = styled.div<WithSeparator>`
-  padding: 12px 18px;
+  padding: 5px 18px;
   ${withSeparator}
 `;
 

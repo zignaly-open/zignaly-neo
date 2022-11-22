@@ -27,7 +27,6 @@ import {
   logout,
   setAccessToken,
   setActiveExchangeInternalId,
-  setMissedRoute,
   setSessionExpiryDate,
   setUser,
 } from './store';
@@ -40,8 +39,6 @@ import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import AuthVerifyModal from '../../views/Auth/components/AuthVerifyModal';
 import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../service/api';
-import { useLocation } from 'react-router-dom';
-import { ROUTE_PROFIT_SHARING } from 'routes';
 
 const useStartSession = () => {
   const { showModal } = useModal();
@@ -94,8 +91,6 @@ export const useSignup = (): [
   const [loading, setLoading] = useState(false);
   const [signup] = useSignupMutation();
   const startSession = useStartSession();
-  const { missedRoute } = useSelector((state: RootState) => state.user);
-  const dispatch = useDispatch();
 
   return [
     { loading },
@@ -103,9 +98,6 @@ export const useSignup = (): [
       setLoading(true);
       try {
         const user = await signup(payload).unwrap();
-        if (!missedRoute) {
-          dispatch(setMissedRoute(ROUTE_PROFIT_SHARING));
-        }
         await startSession({ ...user, emailUnconfirmed: true });
       } finally {
         setLoading(false);
@@ -191,21 +183,6 @@ export function useChangeLocale(): (locale: string) => void {
   return (locale: string) => {
     i18n.changeLanguage(locale);
     isAuthenticated && save({ locale });
-  };
-}
-
-export function useSetMissedRoute(): () => void {
-  const dispatch = useDispatch();
-  const location = useLocation();
-  return () => dispatch(setMissedRoute(location.pathname));
-}
-
-export function usePopMissedRoute(): () => string {
-  const dispatch = useDispatch();
-  const { missedRoute } = useSelector((state: RootState) => state.user);
-  return () => {
-    missedRoute && setTimeout(() => dispatch(setMissedRoute('')));
-    return missedRoute;
   };
 }
 
