@@ -131,3 +131,24 @@ export type Service = {
   pnlSsc180t: string;
   pnlSsc365t: string;
 };
+
+export type TraderServiceChart = {
+  data: Record<string, number>;
+};
+
+export enum GraphTimeframe {
+  '7d' = '7d',
+  '30d' = '30d',
+  '90d' = '90d',
+  '180d' = '180d',
+  '365d' = '365d',
+  'all' = 'all',
+}
+
+export enum GraphChartType {
+  'investors' = 'investors',
+  'sbt_ssc' = 'sbt_ssc',
+  'pnl_ssc' = 'pnl_ssc',
+  'at_risk_pct' = 'at_risk_pct',
+  'pnl_pct_compound' = 'pnl_pct_compound',
+}

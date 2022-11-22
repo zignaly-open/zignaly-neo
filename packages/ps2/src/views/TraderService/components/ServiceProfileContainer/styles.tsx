@@ -143,3 +143,7 @@ export const RightSideActionWrapper = styled(Box)`
   align-items: center;
   justify-content: center;
 `;
+
+export const ChartWrapper = styled(Box)`
+  min-height: 400px;
+`;
