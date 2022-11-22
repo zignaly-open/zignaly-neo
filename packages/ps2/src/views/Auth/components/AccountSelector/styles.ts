@@ -1,6 +1,5 @@
 import { styled } from '@mui/material';
 import { styledIf } from '@zignaly-open/ui';
-import { NiceScrollbar } from '@zignaly-open/ui/lib/utils/css';
 
 export const Button = styled('button')<{ isMenu: boolean }>`
   display: flex;
@@ -35,8 +34,6 @@ export const Container = styled('div')`
   max-height: 300px;
   overflow: auto;
   border-radius: 0 0 6px 6px;
-
-  ${NiceScrollbar.toString()};
 `;
 
 export const Item = styled('div')`

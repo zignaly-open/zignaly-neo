@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { NiceScrollbar } from '@zignaly-open/ui';
 // TODO: fix this, smth weird with type defs not loading
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -6,7 +7,6 @@ import { isWebpSupported } from 'react-image-webp/dist/utils';
 
 // Copied from webapp-neo
 const GlobalStyle = createGlobalStyle`
-  html,
   body {
     padding: 0;
     margin: 0;
@@ -19,26 +19,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Avenir Next', sans-serif;
     font-size: 100%;
     color: #fff;
-
-    &::-webkit-scrollbar {
-      width: 8px;
-      height: 10px;
-    }
-
-    &::-webkit-scrollbar-track {
-      border: 2px solid transparent;
-      background-clip: content-box;
-      background: #131225;
-    }
-
-    &::-webkit-scrollbar-thumb {
-      background-color: rgba(255, 255, 255, 0.05);
-
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.08);
-      }
-    }
+    overflow: overlay;
   }
+
+  ${NiceScrollbar};
 
   a {
     color: inherit;
