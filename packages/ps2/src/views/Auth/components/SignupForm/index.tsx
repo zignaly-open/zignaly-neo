@@ -31,8 +31,6 @@ const SignupForm: React.FC = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleShowPassword = () => setShowPassword(!showPassword);
-
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
       <TitleHead>
@@ -86,7 +84,7 @@ const SignupForm: React.FC = () => {
                   <InputAdornment position='end'>
                     <IconButton
                       aria-label='Toggle password visibility'
-                      onClick={handleShowPassword}
+                      onClick={() => setShowPassword(!showPassword)}
                     >
                       {showPassword ? <Visibility /> : <VisibilityOff />}
                     </IconButton>
