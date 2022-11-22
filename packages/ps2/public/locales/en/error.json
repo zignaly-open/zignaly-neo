@@ -166,7 +166,7 @@
     "required": "This field is required",
     "email-invalid": "Please enter a valid email",
     "did-you-mean": "Did you mean {{suggested}}?",
-    "password-requirements": "At least {{length}} characters, with letter, number, and symbol",
+    "password-requirements": "At least {{length}} characters, with a letter, number, and symbol",
     "failed-verification": "Failed to verify",
     "occurred": "Error Occurred",
     "noidea": "Something went wrong!",
