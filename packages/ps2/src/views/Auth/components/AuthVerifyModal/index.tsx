@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { DialogProps } from '@mui/material/Dialog';
 import EmailVerifyForm from '../EmailVerifyForm';
 import TwoFAForm from '../TwoFAForm';
@@ -93,6 +93,20 @@ function AuthVerifyModal({
     return { title, description };
   }, [user, t, verifyStatus.isSuccess]);
 
+  const getError = useCallback(
+    (status: typeof verifyStatus) => {
+      return status.isError
+        ? t(
+            (status.error as { data: { error: { code: number } } }).data.error
+              .code === 13
+              ? 'error:error.login-session-expired'
+              : 'error:error.wrong-code',
+          )
+        : null;
+    },
+    [t],
+  );
+
   const onClickClose = () => {
     onFailure({ message: t('error:error.failed-verification') });
     close();
@@ -113,7 +127,7 @@ function AuthVerifyModal({
   return (
     <ZModal
       {...props}
-      close={onClickClose}
+      close={emailUnconfirmed ? null : onClickClose}
       title={texts.title}
       titleAlign='center'
     >
@@ -128,7 +142,7 @@ function AuthVerifyModal({
             clearOnError
             onSubmit={(code) => verify({ code })}
             onReSendCode={performResend}
-            error={verifyStatus.isError ? t('error:error.wrong-code') : null}
+            error={getError(verifyStatus)}
             isReSendLoading={resendStatus.isLoading}
             isLoading={verifyStatus.isLoading}
           />
@@ -139,7 +153,7 @@ function AuthVerifyModal({
             clearOnError
             onSubmit={(code) => submit2FA({ code })}
             isLoading={status2FA.isLoading}
-            error={status2FA.isError ? t('error:error.wrong-code') : null}
+            error={getError(status2FA)}
           />
         )}
       </Container>
