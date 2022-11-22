@@ -5,7 +5,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Form, Action, TitleHead, StyledErrorOutline } from './styles';
 import { SignupValidation } from './validations';
 import { useSignup } from '../../../../apis/user/use';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN } from '../../../../routes';
 import { Button, TextButton, Typography, ZigInput } from '@zignaly-open/ui';
 import { Box, IconButton, InputAdornment, Link } from '@mui/material';
@@ -30,6 +30,7 @@ const SignupForm: React.FC = () => {
   const [{ loading: signingUp }, signup] = useSignup();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const { state: locationState } = useLocation();
 
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
@@ -127,7 +128,7 @@ const SignupForm: React.FC = () => {
 
           <TextButton
             id={'signup__login'}
-            onClick={() => navigate(ROUTE_LOGIN)}
+            onClick={() => navigate(ROUTE_LOGIN, { state: locationState })}
             caption={t('signup-form.link.login')}
           />
         </Action>
