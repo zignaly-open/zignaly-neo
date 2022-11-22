@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
@@ -8,8 +8,9 @@ import { useAuthenticate } from '../../../../apis/user/use';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
 import { Button, TextButton, Typography, ZigInput } from '@zignaly-open/ui';
-import { Box } from '@mui/material';
+import { Box, IconButton, InputAdornment } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -29,6 +30,7 @@ const LoginForm: React.FC = () => {
   });
   const [{ loading: loggingIn }, authenticate] = useAuthenticate();
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const submit = (data: LoginPayload) => {
     authenticate(data).catch((e) => {
@@ -74,10 +76,22 @@ const LoginForm: React.FC = () => {
                 onClick: () => navigate(ROUTE_FORGOT_PASSWORD),
               }}
               label={t('login-form.inputText.password.label') + ':'}
-              type={'password'}
               placeholder={t('login-form.inputText.password.label')}
               disabled={loggingIn}
               error={t(errors.password?.message)}
+              type={showPassword ? 'text' : 'password'}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Toggle password visibility'
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? <Visibility /> : <VisibilityOff />}
+                    </IconButton>
+                  </InputAdornment>
+                ),
+              }}
               {...field}
             />
           )}
