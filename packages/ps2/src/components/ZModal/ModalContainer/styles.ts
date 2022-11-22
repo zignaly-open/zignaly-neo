@@ -1,5 +1,5 @@
 import { styled, css } from '@mui/material';
-import { NiceScrollbar, styledIf, Typography } from '@zignaly-open/ui';
+import { styledIf, Typography } from '@zignaly-open/ui';
 
 export const Layout = styled('div')<{ width: number }>`
   display: flex;
@@ -31,16 +31,12 @@ export const Body = styled('div')`
   color: ${({ theme }) => theme.palette.neutral200};
   max-height: calc(100vh - 150px);
   overflow-y: auto;
-
-  ${NiceScrollbar};
-  
   overflow-x: visible;
   margin-left: -40px;
   margin-right: -40px;
   width: calc(100% + 80px);
   padding-left: 40px;
   padding-right: 40px;
-}
 `;
 
 export const Header = styled('div')`
