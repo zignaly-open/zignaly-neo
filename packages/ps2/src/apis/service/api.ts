@@ -1,10 +1,13 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import {
+  GraphChartType,
+  GraphTimeframe,
   Investor,
   TraderService,
   TraderServiceBalance,
   TraderServiceFull,
   TraderServiceManagement,
+  TraderServiceChart,
   TransferPayload,
 } from './types';
 import baseQuery from '../baseQuery';
@@ -12,7 +15,7 @@ import baseQuery from '../baseQuery';
 export const api = createApi({
   baseQuery,
   reducerPath: 'serviceApi',
-  tagTypes: ['Service'],
+  tagTypes: ['Service', 'ServiceChart'],
   endpoints: (builder) => ({
     traderServices: builder.query<TraderService[], void>({
       providesTags: [{ type: 'Service', id: 'LIST' }],
@@ -24,6 +27,16 @@ export const api = createApi({
       providesTags: (result, error, id) => [{ type: 'Service', id }],
       query: (id) => ({
         url: `services/${id}`,
+      }),
+    }),
+    traderServiceGraph: builder.query<
+      TraderServiceChart,
+      { id: string; period: GraphTimeframe; chart: GraphChartType }
+    >({
+      providesTags: (result, error, { id }) => [{ type: 'ServiceChart', id }],
+      query: ({ id, chart, period }) => ({
+        url: `services/${id}/stats`,
+        params: { chart, period },
       }),
     }),
     traderServiceManagement: builder.query<TraderServiceManagement, string>({
@@ -78,6 +91,7 @@ export const {
   useLazyTraderServiceInvestorsQuery,
   useTraderServiceDetailsQuery,
   useTraderServiceBalanceQuery,
+  useTraderServiceGraphQuery,
   useTraderServiceManagementQuery,
   useTraderServiceUpdateScaMinimumMutation,
   useLazyTraderServicesQuery,

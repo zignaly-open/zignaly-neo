@@ -4,6 +4,7 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 import Countries from 'i18n-iso-countries';
 import CountiesEn from 'i18n-iso-countries/langs/en.json';
+import enUS from 'date-fns/locale/en-US';
 
 Countries.registerLocale(CountiesEn);
 
@@ -14,6 +15,10 @@ if (CountiesEn.countries.RU)
 export const supportedLanguages = ['en'];
 
 if (process.env.REACT_APP_ENABLE_TEST_LANGUAGE) supportedLanguages.push('ch');
+
+export const dateFnsLocaleMapping = {
+  en: enUS,
+};
 
 i18n
   .use(Backend)

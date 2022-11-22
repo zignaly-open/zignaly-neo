@@ -1,8 +1,9 @@
 /* eslint-disable multiline-ternary */
-import React, { useMemo } from "react";
+import React, { useMemo, useRef } from "react";
 import { VictoryArea, VictoryAxis, VictoryChart, VictoryGroup, VictoryLine } from "victory";
 import { Layout } from "./styles";
 import { AxisFormat, ChartsProps, largeStyle } from "./types";
+import Loader from "../Loader";
 
 export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
   const processedData = useMemo<AxisFormat[]>(() => {
@@ -17,6 +18,7 @@ export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
     return chart.map((c) => ({ ...c, y0: min }));
   }, [data]);
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const firstTimestamp = processedData[0].y;
   const lastTimeStamp = processedData[data.length - 1].y;
   const isGreen = firstTimestamp <= lastTimeStamp;
@@ -24,15 +26,29 @@ export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
   const gradientId = useMemo(() => `gradient-${Math.random()}`, []);
   const large = variant === "large";
   const ChartWrapperComponent = large ? VictoryChart : VictoryGroup;
+  const width = wrapperRef?.current?.getBoundingClientRect().width;
+
+  if (!width && large) {
+    // sorry
+    // this needs to be refactored ayways and we plan to drop this library altogether
+    return (
+      <div ref={wrapperRef}>
+        <Loader color={"#fff"} ariaLabel={""} />
+      </div>
+    );
+  }
+
   return (
-    <div>
+    <div ref={wrapperRef}>
       <GraphColor isGreen={isGreen} gradientId={gradientId} />
       <Layout variant={variant}>
         <ChartWrapperComponent
           {...(large
             ? {
-                domainPadding: { x: [0, -10], y: 5 },
-                domain: { y: [0, 35] },
+                width: wrapperRef?.current?.getBoundingClientRect().width || 600,
+                height: 400,
+                domainPadding: { x: [0, 1], y: 5 },
+                padding: { left: 35, top: 20, right: 35, bottom: 20 },
               }
             : {
                 padding: { top: 5, bottom: 10 },
