@@ -61,30 +61,58 @@ const darkMui = createTheme({
         h1: {
           fontSize: "22px",
           lineHeight: "36px",
+          color: dark.neutral000,
+          fontWeight: "500",
         },
         h2: {
           fontSize: "18px",
           lineHeight: "28px",
+          color: dark.neutral000,
+          fontWeight: "500",
         },
         h3: {
           fontSize: "15px",
           lineHeight: "24px",
+          color: dark.neutral000,
+          fontWeight: "500",
         },
         h4: {
           fontSize: "13px",
           lineHeight: "20px",
+          color: dark.neutral000,
+          fontWeight: "500",
         },
         h5: {
           fontSize: "11px",
           lineHeight: "16px",
+          color: dark.neutral000,
+          fontWeight: "500",
+        },
+        h6: {
+          fontSize: "10px",
+          lineHeight: "14px",
+          color: dark.neutral000,
+          fontWeight: "500",
+        },
+        subtitle1: {
+          fontSize: "15px",
+          lineHeight: "24px",
+          color: dark.neutral200,
+        },
+        subtitle2: {
+          fontSize: "13px",
+          lineHeight: "20px",
+          color: dark.neutral200,
         },
         body1: {
           fontSize: "15px",
           lineHeight: "24px",
+          color: dark.neutral200,
         },
         body2: {
           fontSize: "13px",
           lineHeight: "20px",
+          color: dark.neutral200,
         },
       },
     },
