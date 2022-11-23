@@ -25,6 +25,7 @@ function ZigSelect<T>({
         components={{
           IndicatorSeparator: () => null,
         }}
+        // if you want to use this inside of a modal, pass it `menuPosition="fixed"`, `menuShouldScrollIntoView={false}` and `menuShouldBlockScroll`
         isOptionDisabled={(option) => !!(option as ZigSelectOption<T>).disabled}
         options={options as unknown as { label: string; value: number }[]}
         isDisabled={disabled}
