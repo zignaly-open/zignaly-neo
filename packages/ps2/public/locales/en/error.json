@@ -1,6 +1,6 @@
 {
   "error": {
-    "1": "The email is already taken",
+    "1": "Email already in use. Please log in instead.",
     "2": "Error Storing the document in the DB",
     "3": "First Name field is mandatory",
     "4": "E-Mail field is mandatory",
