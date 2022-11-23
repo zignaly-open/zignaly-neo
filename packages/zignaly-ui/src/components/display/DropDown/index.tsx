@@ -1,5 +1,5 @@
 import Popover from "@mui/material/Popover";
-import React, { MouseEvent, useImperativeHandle } from "react";
+import React, { MouseEvent, useEffect, useImperativeHandle } from "react";
 import { DropDownProps, DropDownHandle, DropDownOption } from "./types";
 import {
   ArrowBottomIconStyled,
@@ -62,6 +62,13 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
       f();
     }
   };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleClose);
+    return () => {
+      window.removeEventListener("scroll", handleClose);
+    };
+  }, []);
 
   return (
     <>

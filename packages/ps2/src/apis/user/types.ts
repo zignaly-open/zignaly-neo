@@ -1,6 +1,5 @@
 export interface UserState {
   accessToken?: string;
-  missedRoute?: string;
   sessionExpiryDate?: Date;
   user?: UserData;
   activeExchangeInternalId?: string;
@@ -70,6 +69,17 @@ export type Exchange = {
   globalWhitelist: boolean;
   isBrokerAccount: boolean;
   activated: boolean;
+};
+
+export type SignupResponse = {
+  token: string;
+  userId: string;
+};
+
+export type SignupPayload = {
+  email: string;
+  password: string;
+  newPageAB?: boolean;
 };
 
 export type LoginResponse = {

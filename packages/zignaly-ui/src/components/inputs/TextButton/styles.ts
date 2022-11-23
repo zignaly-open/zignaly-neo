@@ -25,8 +25,10 @@ export const LeftElement = styled.div`
 export const ButtonLoader = styled(Loader)`
   justify-content: center;
   align-items: center;
-  height: 20px;
-  width: 20px;
+  svg {
+    height: 20px;
+    width: 20px;
+  }
 `;
 
 export const ElementsContainer = styled.div`
