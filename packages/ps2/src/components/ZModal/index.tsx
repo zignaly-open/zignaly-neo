@@ -14,6 +14,7 @@ const ZModal: React.FC<ZModalProps> = ({
   title,
   width,
   wide,
+  titleAlign,
   ...props
 }): React.ReactElement => {
   return (
@@ -31,6 +32,7 @@ const ZModal: React.FC<ZModalProps> = ({
         title={title}
         onClickClose={close}
         onGoBack={onGoBack}
+        titleAlign={titleAlign}
       >
         {isLoading ? (
           <LoaderContainer>

@@ -7,4 +7,5 @@ export type ZModalProps = {
   onGoBack?: () => void;
   width?: number;
   close: () => void;
+  titleAlign?: 'center' | 'left';
 } & DialogProps;
