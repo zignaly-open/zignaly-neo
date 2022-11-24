@@ -1,15 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { Form, Action, TitleHead } from './styles';
 import { LoginValidation } from './validations';
 import { useAuthenticate } from '../../../../apis/user/use';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
-import { Button, TextButton, Typography, ZigInput } from '@zignaly-open/ui';
-import { Box } from '@mui/material';
+import {
+  Button,
+  IconButton,
+  TextButton,
+  Typography,
+  ZigInput,
+} from '@zignaly-open/ui';
+import { Box, InputAdornment } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -29,6 +36,8 @@ const LoginForm: React.FC = () => {
   });
   const [{ loading: loggingIn }, authenticate] = useAuthenticate();
   const navigate = useNavigate();
+  const { state: locationState } = useLocation();
+  const [showPassword, setShowPassword] = useState(false);
 
   const submit = (data: LoginPayload) => {
     authenticate(data).catch((e) => {
@@ -74,10 +83,28 @@ const LoginForm: React.FC = () => {
                 onClick: () => navigate(ROUTE_FORGOT_PASSWORD),
               }}
               label={t('login-form.inputText.password.label') + ':'}
-              type={'password'}
               placeholder={t('login-form.inputText.password.label')}
               disabled={loggingIn}
               error={t(errors.password?.message)}
+              type={showPassword ? 'text' : 'password'}
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position='end'>
+                    <IconButton
+                      aria-label='Toggle password visibility'
+                      onClick={() => setShowPassword(!showPassword)}
+                      icon={
+                        showPassword ? (
+                          <Visibility sx={{ color: 'neutral200' }} />
+                        ) : (
+                          <VisibilityOff sx={{ color: 'neutral200' }} />
+                        )
+                      }
+                      variant='flat'
+                    />
+                  </InputAdornment>
+                ),
+              }}
               {...field}
             />
           )}
@@ -95,7 +122,7 @@ const LoginForm: React.FC = () => {
 
           <TextButton
             id={'login__signup'}
-            onClick={() => navigate(ROUTE_SIGNUP)}
+            onClick={() => navigate(ROUTE_SIGNUP, { state: locationState })}
             caption={t('login-form.link.signup')}
           />
         </Action>

@@ -3,6 +3,7 @@ import mailcheck from 'mailcheck';
 import i18n from 'util/i18next';
 
 const specialRegex = /[`!@#$%^&*()_+\-=[\]{};':"|,.<>/?~\\]/;
+const PASSWORD_LENGTH = 8;
 
 export const SignupValidation = yup
   .object({
@@ -28,12 +29,28 @@ export const SignupValidation = yup
     password: yup
       .string()
       .required('error:error.required')
-      .min(8, () => i18n.t('error:error.password-length', { length: 8 }))
+      .min(PASSWORD_LENGTH, () =>
+        i18n.t('error:error.password-requirements', {
+          length: PASSWORD_LENGTH,
+        }),
+      )
       // At least one special character
-      .matches(specialRegex, 'error:error.password-format')
+      .matches(specialRegex, () =>
+        i18n.t('error:error.password-requirements', {
+          length: PASSWORD_LENGTH,
+        }),
+      )
       // At least one letter
-      .matches(/[a-zA-Z]/, 'error:error.password-format')
+      .matches(/[a-zA-Z]/, () =>
+        i18n.t('error:error.password-requirements', {
+          length: PASSWORD_LENGTH,
+        }),
+      )
       // At least one number
-      .matches(/\d/, 'error:error.password-format'),
+      .matches(/\d/, () =>
+        i18n.t('error:error.password-requirements', {
+          length: PASSWORD_LENGTH,
+        }),
+      ),
   })
   .required();

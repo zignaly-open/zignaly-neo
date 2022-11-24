@@ -1,6 +1,6 @@
 {
   "error": {
-    "1": "The email is already taken",
+    "1": "Email already in use. Please log in instead.",
     "2": "Error Storing the document in the DB",
     "3": "First Name field is mandatory",
     "4": "E-Mail field is mandatory",
@@ -47,7 +47,7 @@
     "45": "Unknown Error",
     "46": "User not found or token expired",
     "47": "The URL has been already visited. Please start the recovery process again.",
-    "48": "Token expired. Please start the recovery process again.",
+    "48": "Code expired, please try again.",
     "49": "Password too weak. It has to be 8 characters long include numbers letters CAPs and symbols.",
     "50": "No balance yet",
     "51": "Error getting your Credit Card information.",
@@ -166,13 +166,13 @@
     "required": "This field is required",
     "email-invalid": "Please enter a valid email",
     "did-you-mean": "Did you mean {{suggested}}?",
-    "password-length": "At least {{length}} characters",
-    "password-format": "Must contain letter, number, and symbol",
+    "password-requirements": "At least {{length}} characters, with a letter, number, and symbol",
     "failed-verification": "Failed to verify",
     "occurred": "Error Occurred",
     "noidea": "Something went wrong!",
     "paymentnotcompleted": "Payment not completed.",
     "wrong-code": "Wrong Code",
+    "login-session-expired": "Session expired, please log in again",
     "XX": "Transaction error. Please try again."
   },
   "something-went-wrong": "Something went wrong",

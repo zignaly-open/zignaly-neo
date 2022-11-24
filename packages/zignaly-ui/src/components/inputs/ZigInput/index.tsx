@@ -24,7 +24,11 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
       }
       variant={"standard"}
       error={!!error}
-      helperText={typeof error === "string" ? error && <ErrorMessage text={error} /> : helperText}
+      helperText={
+        typeof error === "string" && error !== ""
+          ? error && <ErrorMessage text={error} />
+          : helperText
+      }
       InputProps={{ disableUnderline: true, ...(props.InputProps || {}) }}
       InputLabelProps={{ shrink: true, ...(props.InputLabelProps || {}) }}
     />
