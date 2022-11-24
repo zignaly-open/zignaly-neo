@@ -28,7 +28,7 @@ import {
 } from './styles';
 import { formatDistance } from 'date-fns';
 import copy from 'copy-to-clipboard';
-import { generatePath, useNavigate } from 'react-router-dom';
+import { generatePath, useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN, ROUTE_TRADING_SERVICE } from '../../../../routes';
 import { useToast } from '../../../../util/hooks/useToast';
 import { Box, useMediaQuery } from '@mui/material';
@@ -41,10 +41,7 @@ import InvestedFromOtherAccounts from '../InvestedFromOtherAccounts';
 import { serviceToInvestmentServiceDetail } from '../../../../apis/investment/util';
 import EditInvestmentModal from '../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
 import InvestModal from '../../../Dashboard/components/ManageInvestmentModals/InvestModal';
-import {
-  useIsAuthenticated,
-  useSetMissedRoute,
-} from '../../../../apis/user/use';
+import { useIsAuthenticated } from '../../../../apis/user/use';
 import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 import { useZModal } from '../../../../components/ZModal/use';
 
@@ -56,8 +53,8 @@ export const InvestButton: React.FC<{
   const { showModal } = useZModal();
   const selectInvestment = useSetSelectedInvestment();
   const navigate = useNavigate();
-  const setMissedRoute = useSetMissedRoute();
   const { balance } = useCurrentBalance(service.ssc);
+  const location = useLocation();
 
   const onClickMakeInvestment = () => {
     if (isAuthenticated) {
@@ -69,8 +66,7 @@ export const InvestButton: React.FC<{
         });
       else showModal(InvestModal);
     } else {
-      setMissedRoute();
-      navigate(ROUTE_LOGIN);
+      navigate(ROUTE_LOGIN, { state: { redirectTo: location } });
     }
   };
 
