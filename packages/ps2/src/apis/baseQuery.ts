@@ -17,9 +17,9 @@ const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
   baseUrl: process.env.REACT_APP_BASE_API,
-  prepareHeaders: (headers, { getState }) => {
+  prepareHeaders: (headers, { getState, endpoint }) => {
     const token = (getState() as RootState).user.accessToken;
-    if (token) {
+    if (token && !['login', 'signup'].includes(endpoint)) {
       headers.set('authorization', `Bearer ${token}`);
     }
     headers.set('content-type', 'application/json');

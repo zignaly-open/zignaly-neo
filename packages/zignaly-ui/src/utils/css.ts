@@ -2,7 +2,8 @@ import { css } from "styled-components";
 
 export const NiceScrollbar = css`
   &::-webkit-scrollbar {
-    width: 6px;
+    width: 8px;
+    height: 8px;
   }
 
   /* Track */

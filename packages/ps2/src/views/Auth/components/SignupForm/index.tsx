@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useTranslation } from 'react-i18next';
-import { Form, Action, TitleHead } from './styles';
-import { LoginValidation } from './validations';
-import { useAuthenticate } from '../../../../apis/user/use';
+import { Trans, useTranslation } from 'react-i18next';
+import { Form, Action, TitleHead, StyledErrorOutline } from './styles';
+import { SignupValidation } from './validations';
+import { useSignup } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
+import { ROUTE_LOGIN } from '../../../../routes';
 import {
   Button,
   IconButton,
@@ -14,56 +14,46 @@ import {
   Typography,
   ZigInput,
 } from '@zignaly-open/ui';
-import { Box, InputAdornment } from '@mui/material';
-import { LoginPayload } from '../../../../apis/user/types';
+import { Box, InputAdornment, Link } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { LoginPayload } from '../../../../apis/user/types';
 
-const LoginForm: React.FC = () => {
+const SignupForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
   const {
     handleSubmit,
     control,
-    setError,
     formState: { errors },
   } = useForm<LoginPayload>({
-    mode: 'onTouched',
+    mode: 'onBlur',
     reValidateMode: 'onBlur',
+    resolver: yupResolver(SignupValidation),
     defaultValues: {
-      email: process.env.REACT_APP_TESTING_DEFAULT_EMAIL || '',
-      password: process.env.REACT_APP_TESTING_DEFAULT_PASSWORD || '',
+      email: '',
+      password: '',
     },
-    resolver: yupResolver(LoginValidation),
   });
-  const [{ loading: loggingIn }, authenticate] = useAuthenticate();
+  const [{ loading: signingUp }, signup] = useSignup();
   const navigate = useNavigate();
-  const { state: locationState } = useLocation();
   const [showPassword, setShowPassword] = useState(false);
-
-  const submit = (data: LoginPayload) => {
-    authenticate(data).catch((e) => {
-      // eslint-disable-next-line no-console
-      console.error(e);
-      setError('email', { type: 'server', message: e.message });
-      setError('password', { type: 'server', message: e.message });
-    });
-  };
+  const { state: locationState } = useLocation();
 
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
       <TitleHead>
-        <Typography variant={'h2'}>{t('log-in-title')}</Typography>
+        <Typography variant={'h2'}>{t('signup-title')}</Typography>
       </TitleHead>
-      <Form onSubmit={handleSubmit(submit)}>
+      <Form onSubmit={handleSubmit(signup)}>
         <Controller
           name='email'
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
             <ZigInput
-              id={'login__username'}
+              id={'signup'}
               label={t('login-form.inputText.email.label') + ':'}
               placeholder={t('login-form.inputText.email.label')}
-              disabled={loggingIn}
+              disabled={signingUp}
               error={t(errors.email?.message)}
               {...field}
             />
@@ -77,15 +67,24 @@ const LoginForm: React.FC = () => {
           render={({ field }) => (
             <ZigInput
               id={'login__password'}
-              labelAction={{
-                tabIndex: -1,
-                text: t('login-form.inputText.password.labelForgot'),
-                onClick: () => navigate(ROUTE_FORGOT_PASSWORD),
-              }}
               label={t('login-form.inputText.password.label') + ':'}
               placeholder={t('login-form.inputText.password.label')}
-              disabled={loggingIn}
+              disabled={signingUp}
               error={t(errors.password?.message)}
+              helperText={
+                <Box display='flex' alignItems='center'>
+                  <StyledErrorOutline height='24px' width='24px' />
+                  <Typography
+                    variant='body2'
+                    color='neutral200'
+                    weight='regular'
+                  >
+                    {t('error:error.password-requirements', {
+                      length: 8,
+                    })}
+                  </Typography>
+                </Box>
+              }
               type={showPassword ? 'text' : 'password'}
               InputProps={{
                 endAdornment: (
@@ -109,21 +108,40 @@ const LoginForm: React.FC = () => {
             />
           )}
         />
+        <Typography
+          marginTop={3}
+          variant='h4'
+          color='neutral300'
+          component='h4'
+        >
+          <Trans i18nKey='signup-form.accept-terms' t={t}>
+            <Link
+              href='https://zignaly.com/legal/terms'
+              target='_blank'
+              rel='noopener'
+            />
+            <Link
+              href='https://zignaly.com/legal/privacy'
+              target='_blank'
+              rel='noopener'
+            />
+          </Trans>
+        </Typography>
 
         <Action>
           <Button
             type={'submit'}
             variant={'primary'}
-            id={'login__submit'}
-            caption={t('login-form.submit')}
+            id={'signup__submit'}
+            caption={t('signup-form.submit')}
             size={'xlarge'}
-            loading={loggingIn}
+            loading={signingUp}
           />
 
           <TextButton
-            id={'login__signup'}
-            onClick={() => navigate(ROUTE_SIGNUP, { state: locationState })}
-            caption={t('login-form.link.signup')}
+            id={'signup__login'}
+            onClick={() => navigate(ROUTE_LOGIN, { state: locationState })}
+            caption={t('signup-form.link.login')}
           />
         </Action>
       </Form>
@@ -131,4 +149,4 @@ const LoginForm: React.FC = () => {
   );
 };
 
-export default LoginForm;
+export default SignupForm;

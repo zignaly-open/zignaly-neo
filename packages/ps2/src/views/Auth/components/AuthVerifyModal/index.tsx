@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { DialogProps } from '@mui/material/Dialog';
 import EmailVerifyForm from '../EmailVerifyForm';
 import TwoFAForm from '../TwoFAForm';
@@ -12,6 +12,8 @@ import {
   useResendCode,
   useVerifyEmail,
   useVerifyEmailKnownDevice,
+  useVerifyEmailNewUser,
+  useResendCodeNewUser,
 } from '../../../../apis/user/use';
 import { useToast } from '../../../../util/hooks/useToast';
 import ZModal from '../../../../components/ZModal';
@@ -23,22 +25,32 @@ function AuthVerifyModal({
   onFailure,
   ...props
 }: {
-  user: LoginResponse;
+  user: { token: string } & Partial<LoginResponse>;
   close: () => void;
   onSuccess: () => void;
   onFailure: ({ message }: { message: string }) => void;
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation(['auth', 'error']);
   const { ask2FA, disabled, emailUnconfirmed, isUnknownDevice } = user;
-  const resendUnknown = useResendCode();
-  const resendKnown = useResendKnownDeviceCode();
-  const verifyUnknown = useVerifyEmail();
-  const verifyKnown = useVerifyEmailKnownDevice();
+  const resendEmail = useResendCode();
+  const resendEmailNewUser = useResendCodeNewUser();
+  const resendDevice = useResendKnownDeviceCode();
+  const verifyEmail = useVerifyEmail();
+  const verifyEmailNewUser = useVerifyEmailNewUser();
+  const verifyDevice = useVerifyEmailKnownDevice();
   const [submit2FA, status2FA] = useVerify2FA();
   const toast = useToast();
 
-  const [verify, verifyStatus] = disabled ? verifyUnknown : verifyKnown;
-  const [resend, resendStatus] = disabled ? resendUnknown : resendKnown;
+  let [verify, verifyStatus] = verifyEmailNewUser;
+  let [resend, resendStatus] = resendEmailNewUser;
+
+  if (isUnknownDevice) {
+    [verify, verifyStatus] = verifyDevice;
+    [resend, resendStatus] = resendDevice;
+  } else if (disabled) {
+    [verify, verifyStatus] = verifyEmail;
+    [resend, resendStatus] = resendEmail;
+  }
 
   const performResend = () => {
     resend().then(() => toast.success(t('auth:resend-code')));
@@ -81,6 +93,20 @@ function AuthVerifyModal({
     return { title, description };
   }, [user, t, verifyStatus.isSuccess]);
 
+  const getError = useCallback(
+    (status: typeof verifyStatus) => {
+      return status.isError
+        ? t(
+            (status.error as { data: { error: { code: number } } }).data.error
+              .code === 13
+              ? 'error:error.login-session-expired'
+              : 'error:error.wrong-code',
+          )
+        : null;
+    },
+    [t],
+  );
+
   const onClickClose = () => {
     onFailure({ message: t('error:error.failed-verification') });
     close();
@@ -99,7 +125,12 @@ function AuthVerifyModal({
   }, [allGood]);
 
   return (
-    <ZModal {...props} close={onClickClose} title={texts.title}>
+    <ZModal
+      {...props}
+      close={emailUnconfirmed ? null : onClickClose}
+      title={texts.title}
+      titleAlign='center'
+    >
       <Title>
         {texts.description && (
           <ZigTypography>{texts.description}</ZigTypography>
@@ -111,7 +142,7 @@ function AuthVerifyModal({
             clearOnError
             onSubmit={(code) => verify({ code })}
             onReSendCode={performResend}
-            error={verifyStatus.isError ? t('error:error.wrong-code') : null}
+            error={getError(verifyStatus)}
             isReSendLoading={resendStatus.isLoading}
             isLoading={verifyStatus.isLoading}
           />
@@ -122,7 +153,7 @@ function AuthVerifyModal({
             clearOnError
             onSubmit={(code) => submit2FA({ code })}
             isLoading={status2FA.isLoading}
-            error={status2FA.isError ? t('error:error.wrong-code') : null}
+            error={getError(status2FA)}
           />
         )}
       </Container>

@@ -4,6 +4,8 @@ import dark from "./dark";
 const darkMui = createTheme({
   palette: {
     ...dark,
+    mode: "dark",
+
     primary: {
       main: dark.highlighted,
     },
@@ -143,6 +145,13 @@ const darkMui = createTheme({
           lineHeight: "20px",
           color: dark.neutral200,
         },
+      },
+    },
+    MuiLink: {
+      styleOverrides: {
+        root: ({ theme }) => ({
+          color: theme.palette.links,
+        }),
       },
     },
   },
