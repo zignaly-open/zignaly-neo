@@ -11,6 +11,7 @@ import {
   CloneIcon,
   Typography,
   CoinIcon,
+  Loader,
 } from '@zignaly-open/ui';
 import copy from 'copy-to-clipboard';
 import { DepositFormData } from './types';
@@ -22,7 +23,6 @@ import {
   useDepositInfo,
   useExchangeCoinsList,
 } from '../../../../../../apis/coin/use';
-import CenteredLoader from '../../../../../../components/CenteredLoader';
 import { DepositModalProps } from '../../types';
 import { allowedDeposits } from '../../../../../../util/coins';
 import { useActiveExchange } from '../../../../../../apis/user/use';
@@ -242,40 +242,58 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               </Grid>
             )}
 
-            {loading ? (
-              <Grid item xs={12}>
-                <CenteredLoader />
-              </Grid>
-            ) : (
-              <Grid
-                item
-                xs={12}
-                mt={3}
-                sx={{ alignItems: 'center', textAlign: 'center' }}
-              >
-                {!depositInfo?.tag ? (
-                  <ZignalyQRCode url={depositInfo.address} />
-                ) : (
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'space-evenly',
-                    }}
-                  >
-                    <ZignalyQRCode
-                      label={t('depositQR.address', {
-                        coin: coinObject?.name,
-                      })}
-                      url={depositInfo.address}
-                    />
-                    <ZignalyQRCode
-                      label={t('depositQR.memo', { coin: coinObject?.name })}
-                      url={depositInfo?.tag}
-                    />
-                  </Box>
-                )}
-              </Grid>
-            )}
+            <Grid
+              item
+              xs={12}
+              mt={3}
+              sx={{
+                minHeight: '200px',
+                alignItems: 'center',
+                textAlign: 'center',
+              }}
+            >
+              {loading ? (
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: '200px',
+                  }}
+                >
+                  <Loader
+                    color={'#fff'}
+                    width={'40px'}
+                    height={'40px'}
+                    ariaLabel={t('loading')}
+                  />
+                </Box>
+              ) : (
+                <>
+                  {!depositInfo?.tag ? (
+                    <ZignalyQRCode url={depositInfo.address} />
+                  ) : (
+                    <Box
+                      sx={{
+                        display: 'flex',
+                        justifyContent: 'space-evenly',
+                      }}
+                    >
+                      <ZignalyQRCode
+                        label={t('depositQR.address', {
+                          coin: coinObject?.name,
+                        })}
+                        url={depositInfo.address}
+                      />
+                      <ZignalyQRCode
+                        label={t('depositQR.memo', { coin: coinObject?.name })}
+                        url={depositInfo?.tag}
+                      />
+                    </Box>
+                  )}
+                </>
+              )}
+            </Grid>
           </>
         )}
 

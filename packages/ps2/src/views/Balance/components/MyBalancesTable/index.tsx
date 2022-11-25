@@ -25,8 +25,8 @@ import {
   CoinDetails,
 } from '../../../../apis/coin/types';
 import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
-import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
+import { useZModal } from '../../../../components/ZModal/use';
 
 const initialStateTable = {
   sortBy: [
@@ -42,7 +42,7 @@ const MyBalancesTable = (): JSX.Element => {
   const balancesEndpoint = useCoinBalances({ convert: true, refetch: true });
   const coinsEndpoint = useExchangeCoinsList();
   const { exchangeType } = useActiveExchange();
-  const { showModal } = useModal();
+  const { showModal } = useZModal();
 
   const columns: TableProps<MyBalancesTableDataType>['columns'] = useMemo(
     () => [
@@ -146,12 +146,11 @@ const MyBalancesTable = (): JSX.Element => {
           action: !!allowedDeposits[exchangeType]?.includes(coin) && (
             <IconButton
               icon={<AddIcon color={'neutral300'} />}
-              onClick={() => {
-                const modal: ShowFnOutput<void> = showModal(DepositModal, {
+              onClick={() =>
+                showModal(DepositModal, {
                   selectedCoin: coin,
-                  close: () => modal.hide(),
-                });
-              }}
+                })
+              }
               variant='secondary'
             />
           ),
