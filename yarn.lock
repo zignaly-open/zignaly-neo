@@ -9436,13 +9436,6 @@
     expect "^29.0.0"
     pretty-format "^29.0.0"
 
-"@types/jquery@*":
-  version "3.5.14"
-  resolved "https://registry.yarnpkg.com/@types/jquery/-/jquery-3.5.14.tgz#ac8e11ee591e94d4d58da602cb3a5a8320dee577"
-  integrity sha512-X1gtMRMbziVQkErhTQmSe2jFwwENA/Zr+PprCkF63vFq+Yt5PZ4AlKqgmeNlwgn7dhsXEK888eIW2520EpC+xg==
-  dependencies:
-    "@types/sizzle" "*"
-
 "@types/js-cookie@^2.2.6":
   version "2.2.7"
   resolved "https://registry.npmjs.org/@types/js-cookie/-/js-cookie-2.2.7.tgz"
@@ -9490,13 +9483,6 @@
   version "4.0.2"
   resolved "https://registry.npmjs.org/@types/long/-/long-4.0.2.tgz"
   integrity sha512-MqTGEo5bj5t157U6fA/BiDynNkn0YknVdh48CMPkTSpFTVmvao5UQmm7uEF6xBEo7qIMAlY/JSleYaE6VOdpaA==
-
-"@types/mailcheck@^1.1.33":
-  version "1.1.33"
-  resolved "https://registry.yarnpkg.com/@types/mailcheck/-/mailcheck-1.1.33.tgz#286410ba7ed2d8ef63294210ddc8100b88a3d3a2"
-  integrity sha512-VrmxwZYdpMZkE3xrHpH2xB2LzXspaQdclnSZTxTCDdv2YVFph7V9yYTQD7xgrTnUpwYW3O1qFf2XL3gSLPf+NQ==
-  dependencies:
-    "@types/jquery" "*"
 
 "@types/mdast@^3.0.0":
   version "3.0.10"
@@ -9757,11 +9743,6 @@
   dependencies:
     "@types/mime" "*"
     "@types/node" "*"
-
-"@types/sizzle@*":
-  version "2.3.3"
-  resolved "https://registry.yarnpkg.com/@types/sizzle/-/sizzle-2.3.3.tgz#ff5e2f1902969d305225a047c8a0fd5c915cebef"
-  integrity sha512-JYM8x9EGF163bEyhdJBpR2QX1R5naCJHC8ucJylJ3w9/CVBaskdQ8WqBf8MmQrd1kRvp/a4TS8HJ+bxzR7ZJYQ==
 
 "@types/sockjs@^0.3.33":
   version "0.3.33"
@@ -25986,6 +25967,13 @@ react-loader-spinner@6.0.0-0:
     styled-components "^5.3.3"
     styled-tools "^1.7.2"
     tslib "^2.3.0"
+
+react-mailcheck@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/react-mailcheck/-/react-mailcheck-1.2.0.tgz#b7315d2b2c91c32a56d9c28d2bc49ac96f98d325"
+  integrity sha512-/ytfjNMHX/o/+6OmAU+S0Sl14clygZV87jYzvwhBzPz7MvFK2+R/iO8lA8ytPVaMVwpSyMjhry03o6QiyHCXnw==
+  dependencies:
+    mailcheck "^1.1.1"
 
 react-markdown@^8.0.3, react-markdown@~8.0.0:
   version "8.0.3"
