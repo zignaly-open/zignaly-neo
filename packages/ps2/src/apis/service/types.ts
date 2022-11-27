@@ -3,6 +3,8 @@ type TraderServiceStatus = 'FULL' | string;
 export type ServiceState = {
   traderServices?: TraderService[];
   activeServiceId?: string;
+  chartType: GraphChartType;
+  chartTimeframe: GraphTimeframe;
 };
 
 export type TraderService = {
@@ -142,7 +144,7 @@ export enum GraphTimeframe {
   '90d' = '90d',
   '180d' = '180d',
   '365d' = '365d',
-  'all' = 'all',
+  // 'all' = 'all', // looks like it is not supported by the backend
 }
 
 export enum GraphChartType {
