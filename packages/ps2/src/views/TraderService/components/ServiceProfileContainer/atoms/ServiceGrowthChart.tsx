@@ -1,8 +1,8 @@
 import React from 'react';
 import { parse } from 'date-fns';
-import { GraphTimeframe, Service } from '../../../../../apis/service/types';
-import { AreaChart, ZigButton } from '@zignaly-open/ui';
-import { Box, ButtonGroup } from '@mui/material';
+import { Service } from '../../../../../apis/service/types';
+import { AreaChart } from '@zignaly-open/ui';
+import { Box } from '@mui/material';
 import { useTraderServiceGraphQuery } from '../../../../../apis/service/api';
 import { ChartWrapper } from '../styles';
 import { formatMonthDay } from '../../../../Dashboard/components/MyDashboard/util';
@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import CenteredLoader from '../../../../../components/CenteredLoader';
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
-  const { chartType, chartTimeframe, setChartTimeframe } = useChartConfig();
+  const { chartType, chartTimeframe } = useChartConfig();
   const { data, isLoading, isFetching, isError } = useTraderServiceGraphQuery({
     id: service.id,
     period: chartTimeframe,
@@ -30,39 +30,41 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   }
 
   return (
-    <ChartWrapper>
-      <Box sx={{ mt: 2, mb: 1 }}>
-        <ButtonGroup variant={'outlined'}>
-          {Object.keys(GraphTimeframe).map((v: GraphTimeframe) => (
-            <ZigButton
-              size={'small'}
-              variant={v === chartTimeframe ? 'contained' : 'outlined'}
-              key={v}
-              onClick={() => setChartTimeframe(v)}
-            >
-              {t('periods.' + v)}
-            </ZigButton>
-          ))}
-        </ButtonGroup>
-        {/*<ZigSelect*/}
-        {/*  label={''}*/}
-        {/*  value={chartType}*/}
-        {/*  onChange={(v) => setChartType(v)}*/}
-        {/*  options={chartTypeOptions}*/}
-        {/*></ZigSelect>*/}
-      </Box>
-      {isLoading || isFetching ? (
-        <CenteredLoader />
-      ) : (
-        <AreaChart
-          variant={'large'}
-          data={Object.entries(data?.data || {}).map(([date, value]) => ({
-            x: formatMonthDay(parse(date, 'yyyy-MM-dd', Date.now())),
-            y: value,
-          }))}
-        />
-      )}
-    </ChartWrapper>
+    <Box>
+      {/*<Box sx={{ mt: 2, mb: 1 }}>*/}
+      {/*<ButtonGroup variant={'outlined'}>*/}
+      {/*  {Object.keys(GraphTimeframe).map((v: GraphTimeframe) => (*/}
+      {/*    <ZigButton*/}
+      {/*      size={'small'}*/}
+      {/*      variant={v === chartTimeframe ? 'contained' : 'outlined'}*/}
+      {/*      key={v}*/}
+      {/*      onClick={() => setChartTimeframe(v)}*/}
+      {/*    >*/}
+      {/*      {t('periods.' + v)}*/}
+      {/*    </ZigButton>*/}
+      {/*  ))}*/}
+      {/*</ButtonGroup>*/}
+      {/*<ZigSelect*/}
+      {/*  label={''}*/}
+      {/*  value={chartType}*/}
+      {/*  onChange={(v) => setChartType(v)}*/}
+      {/*  options={chartTypeOptions}*/}
+      {/*></ZigSelect>*/}
+      {/*</Box>*/}
+      <ChartWrapper>
+        {isLoading || isFetching ? (
+          <CenteredLoader />
+        ) : (
+          <AreaChart
+            variant={'large'}
+            data={Object.entries(data?.data || {}).map(([date, value]) => ({
+              x: formatMonthDay(parse(date, 'yyyy-MM-dd', Date.now())),
+              y: value,
+            }))}
+          />
+        )}
+      </ChartWrapper>
+    </Box>
   );
 };
 

@@ -41,6 +41,23 @@ const darkMui = createTheme({
         },
       },
     },
+    MuiButtonGroup: {
+      styleOverrides: {
+        root: `
+          & > .MuiButton-root {
+          border-radius: 0;
+            &:first-child {
+              border-top-left-radius: 4px;
+              border-bottom-left-radius: 4px;
+            }
+            &:last-child {
+              border-top-right-radius: 4px;
+              border-bottom-right-radius: 4px;
+            }
+          }
+        `,
+      },
+    },
     MuiButton: {
       styleOverrides: {
         root: {},
@@ -65,8 +82,14 @@ const darkMui = createTheme({
           },
         },
         outlined: {
-          background: "rgba(16, 18, 37, 0.3)",
+          borderColor: dark.neutral600,
+          color: dark.neutral300,
           transition: "all 0.2s linear",
+          "&:hover": {
+            background:
+              "linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%)",
+            color: dark.neutral000,
+          },
         },
       },
     },
