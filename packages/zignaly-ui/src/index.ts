@@ -82,6 +82,7 @@ import ZigsBalance from "./components/navigation/Header/components/ZigsBalance";
 import BrandImage from "./components/navigation/Header/components/BrandImage";
 
 export * from "./theme";
+export { default as ZigButton } from "./components/inputs/ZigButton";
 export { default as ZigInput } from "./components/inputs/ZigInput";
 export { default as ZigTypography } from "./components/display/ZigTypography";
 export { default as ZigPriceLabel } from "./components/display/ZigPriceLabel";
