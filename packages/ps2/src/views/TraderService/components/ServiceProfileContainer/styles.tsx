@@ -137,7 +137,7 @@ export const PercentChangeContainer: typeof ZigTypography = styled(
 `;
 
 export const RightSideActionWrapper = styled(Box)`
-  min-height: 200px;
+  min-height: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;

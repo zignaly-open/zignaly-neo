@@ -27,7 +27,7 @@ const ServiceProfileHeader: React.FC<{ service: Service }> = ({ service }) => {
         flexDirection: md ? 'row' : 'column',
         display: 'flex',
         flex: 1,
-        alignItems: md ? 'flex-start' : 'center',
+        alignItems: 'center',
       }}
     >
       <Box sx={{ width: '55px', marginBottom: md ? 0 : 2 }}>
