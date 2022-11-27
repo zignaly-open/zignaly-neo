@@ -1,9 +1,8 @@
 /* eslint-disable multiline-ternary */
 import React, { useMemo, useRef } from "react";
 import { VictoryArea, VictoryAxis, VictoryChart, VictoryGroup, VictoryLine } from "victory";
-import { Layout } from "./styles";
+import { Layout, WideWrapper } from "./styles";
 import { AxisFormat, ChartsProps, largeStyle } from "./types";
-import Loader from "../Loader";
 
 export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
   const processedData = useMemo<AxisFormat[]>(() => {
@@ -29,52 +28,56 @@ export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
   const width = wrapperRef?.current?.getBoundingClientRect().width;
 
   return (
-    <div ref={wrapperRef}>
+    <WideWrapper wide={large} ref={wrapperRef}>
       <GraphColor isGreen={isGreen} gradientId={gradientId} />
       <Layout variant={variant}>
-        <ChartWrapperComponent
-          {...(large
-            ? {
-                width: width || 600,
-                height: 400,
-                domainPadding: { x: [0, 1], y: 5 },
-                padding: { left: 35, top: 20, right: 35, bottom: 20 },
-              }
-            : {
-                padding: { top: 5, bottom: 10 },
-              })}
-        >
-          {large && <VictoryAxis dependentAxis style={largeStyle} />}
-          <VictoryArea
-            style={{
-              data: {
-                fill: `url(#${gradientId})`,
-                strokeWidth: large ? 3 : 4,
-                stroke: strokeColor,
-              },
-            }}
-            data={processedData}
-          />
-          {large && <VictoryAxis style={largeStyle} />}
-          {midLine && (
-            <VictoryLine
-              style={{
-                data: {
-                  stroke: "grey",
-                  strokeDasharray: 6,
-                  strokeWidth: 2,
-                  strokeOpacity: 0.7,
-                },
-              }}
-              data={[
-                { x: processedData[0].x, y: 0 },
-                { x: processedData[processedData.length - 1].x, y: 0 },
-              ]}
-            />
-          )}
-        </ChartWrapperComponent>
+        {width || !large ? (
+          <>
+            <ChartWrapperComponent
+              {...(large
+                ? {
+                    width: width || 600,
+                    height: 400,
+                    domainPadding: { x: [0, 1], y: 5 },
+                    padding: { left: 35, top: 20, right: 35, bottom: 20 },
+                  }
+                : {
+                    padding: { top: 5, bottom: 10 },
+                  })}
+            >
+              {large && <VictoryAxis dependentAxis style={largeStyle} />}
+              <VictoryArea
+                style={{
+                  data: {
+                    fill: `url(#${gradientId})`,
+                    strokeWidth: large ? 3 : 4,
+                    stroke: strokeColor,
+                  },
+                }}
+                data={processedData}
+              />
+              {large && <VictoryAxis fixLabelOverlap style={largeStyle} />}
+              {midLine && (
+                <VictoryLine
+                  style={{
+                    data: {
+                      stroke: "grey",
+                      strokeDasharray: 6,
+                      strokeWidth: 2,
+                      strokeOpacity: 0.7,
+                    },
+                  }}
+                  data={[
+                    { x: processedData[0].x, y: 0 },
+                    { x: processedData[processedData.length - 1].x, y: 0 },
+                  ]}
+                />
+              )}
+            </ChartWrapperComponent>
+          </>
+        ) : null}
       </Layout>
-    </div>
+    </WideWrapper>
   );
 };
 
