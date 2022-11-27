@@ -33,6 +33,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
       {usd && "$"}
       <NumberFormat
         value={Math.abs(+value)}
+        renderText={(v) => v}
         displayType={"text"}
         thousandSeparator={true}
         decimalScale={precision || getPrecisionForCoin(coin || "USDT", value)}

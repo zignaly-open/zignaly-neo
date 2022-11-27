@@ -28,16 +28,6 @@ export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
   const ChartWrapperComponent = large ? VictoryChart : VictoryGroup;
   const width = wrapperRef?.current?.getBoundingClientRect().width;
 
-  if (!width && large) {
-    // sorry
-    // this needs to be refactored ayways and we plan to drop this library altogether
-    return (
-      <div ref={wrapperRef}>
-        <Loader color={"#fff"} ariaLabel={""} />
-      </div>
-    );
-  }
-
   return (
     <div ref={wrapperRef}>
       <GraphColor isGreen={isGreen} gradientId={gradientId} />
@@ -45,7 +35,7 @@ export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
         <ChartWrapperComponent
           {...(large
             ? {
-                width: wrapperRef?.current?.getBoundingClientRect().width || 600,
+                width: width || 600,
                 height: 400,
                 domainPadding: { x: [0, 1], y: 5 },
                 padding: { left: 35, top: 20, right: 35, bottom: 20 },
