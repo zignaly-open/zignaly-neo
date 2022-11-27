@@ -1,5 +1,5 @@
 /* eslint-disable multiline-ternary */
-import React, { useMemo, useRef } from "react";
+import React, { useMemo, useReducer, useRef } from "react";
 import { VictoryArea, VictoryAxis, VictoryChart, VictoryGroup, VictoryLine } from "victory";
 import { Layout, WideWrapper } from "./styles";
 import { AxisFormat, ChartsProps, largeStyle } from "./types";
@@ -26,6 +26,11 @@ export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
   const large = variant === "large";
   const ChartWrapperComponent = large ? VictoryChart : VictoryGroup;
   const width = wrapperRef?.current?.getBoundingClientRect().width;
+
+  // dirty fix for rerender
+  // but this shit is going to the bin anyways so whatever
+  const [, forceUpdate] = useReducer((x) => x + 1, 0);
+  if (!width) setTimeout(forceUpdate, 50);
 
   return (
     <WideWrapper wide={large} ref={wrapperRef}>
