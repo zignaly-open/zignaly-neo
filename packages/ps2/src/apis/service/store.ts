@@ -1,8 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { api } from './api';
-import { ServiceState } from './types';
+import { GraphChartType, GraphTimeframe, ServiceState } from './types';
 
-const initialState: ServiceState = {};
+const initialState: ServiceState = {
+  chartType: GraphChartType.pnl_ssc,
+  chartTimeframe: GraphTimeframe['30d'],
+};
 
 export const serviceSlice = createSlice({
   name: 'service',
@@ -10,6 +13,12 @@ export const serviceSlice = createSlice({
   reducers: {
     setActiveServiceId: (state, action: PayloadAction<string>) => {
       state.activeServiceId = action.payload;
+    },
+    setChartType: (state, action: PayloadAction<GraphChartType>) => {
+      state.chartType = action.payload;
+    },
+    setChartTimeframe: (state, action: PayloadAction<GraphTimeframe>) => {
+      state.chartTimeframe = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -25,6 +34,7 @@ export const serviceSlice = createSlice({
 });
 
 // Action creators are generated for each case reducer function
-export const { setActiveServiceId } = serviceSlice.actions;
+export const { setActiveServiceId, setChartTimeframe, setChartType } =
+  serviceSlice.actions;
 
 export default serviceSlice.reducer;

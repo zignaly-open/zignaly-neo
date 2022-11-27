@@ -26,11 +26,24 @@
   "success-fee": "Success fee:",
   "tags": "Tags:"
   },
+  "periods": {
+    "7d": "Week",
+    "30d": "Month",
+    "90d": "3 Mo",
+    "180d": "6 Mo",
+    "365d": "1 Year",
+    "all": "All"
+  },
   "other-accounts": {
     "title": "Invested Across all Accounts",
     "account": "Account",
     "active": "Active",
     "invested": "Invested",
     "switch-action": "Switch"
+  },
+  "not-enough-time": "Not enough data for this period",
+  "chart-error": {
+    "heading": "Error occurred :(",
+    "description": "Unfortunately, we weren't able to render the chart"
   }
 }

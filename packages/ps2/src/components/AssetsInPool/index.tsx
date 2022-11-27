@@ -1,7 +1,7 @@
 import React from 'react';
 import { BlockTypography, Icon, PriceBoxOverride } from './styles';
 import { AssetsInPoolProps } from './types';
-import { UsdPriceLabel, WhaleIcon } from '@zignaly-open/ui';
+import { WhaleIcon, ZigPriceLabel } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { PriceLabel } from '@zignaly-open/ui';
@@ -22,9 +22,12 @@ const AssetsInPool = ({
           flexDirection: 'row',
         }}
       >
-        <UsdPriceLabel
+        <ZigPriceLabel
+          usd
           value={assetsValue}
-          style={{ fontSize: '18px', lineHeight: '28px' }}
+          variant={'h2'}
+          component={'div'}
+          color={'neutral200'}
         />
         {+assetsValue >= 200000 && (
           <Icon>
