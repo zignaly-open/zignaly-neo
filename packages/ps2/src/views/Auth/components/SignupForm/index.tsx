@@ -10,6 +10,7 @@ import { ROUTE_LOGIN } from '../../../../routes';
 import {
   Button,
   IconButton,
+  ErrorMessage,
   TextButton,
   Typography,
   ZigInput,
@@ -17,6 +18,7 @@ import {
 import { Box, InputAdornment, Link } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoginPayload } from '../../../../apis/user/types';
+import Mailcheck from 'react-mailcheck';
 
 const SignupForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -24,6 +26,7 @@ const SignupForm: React.FC = () => {
     handleSubmit,
     control,
     formState: { errors },
+    watch,
   } = useForm<LoginPayload>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -37,6 +40,7 @@ const SignupForm: React.FC = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const { state: locationState } = useLocation();
+  const email = watch('email');
 
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
@@ -44,21 +48,34 @@ const SignupForm: React.FC = () => {
         <Typography variant={'h2'}>{t('signup-title')}</Typography>
       </TitleHead>
       <Form onSubmit={handleSubmit(signup)}>
-        <Controller
-          name='email'
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <ZigInput
-              id={'signup'}
-              label={t('login-form.inputText.email.label') + ':'}
-              placeholder={t('login-form.inputText.email.label')}
-              disabled={signingUp}
-              error={t(errors.email?.message)}
-              {...field}
+        <Mailcheck email={email}>
+          {(suggested: { full: string }) => (
+            <Controller
+              name='email'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <ZigInput
+                  id={'signup'}
+                  label={t('login-form.inputText.email.label') + ':'}
+                  placeholder={t('login-form.inputText.email.label')}
+                  disabled={signingUp}
+                  error={t(errors.email?.message)}
+                  helperText={
+                    suggested ? (
+                      <ErrorMessage
+                        text={t('error:error.did-you-mean', {
+                          suggested: suggested.full,
+                        })}
+                      />
+                    ) : null
+                  }
+                  {...field}
+                />
+              )}
             />
           )}
-        />
+        </Mailcheck>
 
         <Controller
           name='password'
