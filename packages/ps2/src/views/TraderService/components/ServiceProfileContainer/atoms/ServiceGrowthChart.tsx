@@ -18,6 +18,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
     chart: GraphChartType.pnl_ssc,
   });
 
+  return null;
   return (
     <ChartWrapper>
       {isLoading || isFetching ? (

@@ -19,7 +19,7 @@ const SectionWithReadMore: React.FC<{
   const { t } = useTranslation('action');
   const chunks = (content || '').trim().split(/\n+/).filter(Boolean);
   return (
-    <Box mt={4} mb={4}>
+    <Box mt={8} mb={4}>
       <ZigTypography variant={'h2'} sx={{ mb: 1 }}>
         {title}
       </ZigTypography>

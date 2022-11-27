@@ -23,20 +23,25 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
     <Box
       sx={{
         p: 2,
+        pt: 0,
         pl: md ? 6 : 2,
         pr: md ? 6 : 2,
       }}
       paddingTop={isOwner ? 7 : 0}
     >
       <Grid container>
-        <Grid item xs={12} md={8}>
+        <Grid item sx={{ display: 'flex' }} xs={12} md={8}>
           <ServiceProfileHeader service={service} />
+        </Grid>
+        <Grid item xs={12} md={4}>
+          <RightSideActions service={service} />
+        </Grid>
+        <Grid item xs={12} md={8}>
           <ServiceGrowthChart service={service} />
           <ServiceDescription service={service} />
           <ServiceManagerDescription service={service} />
         </Grid>
         <Grid item xs={12} md={4}>
-          <RightSideActions service={service} />
           <ServiceSummary service={service} />
         </Grid>
       </Grid>
