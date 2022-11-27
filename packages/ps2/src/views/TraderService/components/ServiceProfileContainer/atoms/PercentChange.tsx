@@ -13,6 +13,7 @@ const PercentChange: React.FC<{ value: string | null }> = ({ value }) => {
         {+value < 0 ? (
           <ArrowDropUp
             sx={{
+              color: (theme) => theme.palette.neutral200,
               height: '0.75em',
               width: '0.75em',
             }}
@@ -20,6 +21,7 @@ const PercentChange: React.FC<{ value: string | null }> = ({ value }) => {
         ) : (
           <ArrowDropDown
             sx={{
+              color: (theme) => theme.palette.neutral200,
               height: '0.75em',
               width: '0.75em',
               position: 'relative',

@@ -124,8 +124,11 @@ export const GridWithBottomBorder = styled(Grid)`
   border-bottom: 0.5px solid ${({ theme }) => theme.palette.neutral700};
 `;
 
-export const GridCell = styled(Grid)`
+export const GridCell = styled(Grid)<{ rightBorder?: boolean }>`
   text-align: center;
+  border-right: 0.5px solid
+    ${({ theme, rightBorder }) =>
+      rightBorder ? theme.palette.neutral700 : 'transparent'};
 `;
 
 export const PercentChangeContainer: typeof ZigTypography = styled(
