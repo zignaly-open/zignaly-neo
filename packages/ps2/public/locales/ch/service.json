@@ -26,11 +26,24 @@
     "success-fee": "CH-Ŝüĉĉëŝŝ ḟëë:",
     "tags": "CH-Ṫáĝŝ:"
   },
+  "periods": {
+    "7d": "CH-Wëëk",
+    "30d": "CH-Ṁöńṫĥ",
+    "90d": "CH-3 Ṁö",
+    "180d": "CH-6 Ṁö",
+    "365d": "CH-1 Yëáѓ",
+    "all": "CH-Áll"
+  },
   "other-accounts": {
     "title": "CH-Ïńvëŝṫëḋ Áĉѓöŝŝ áll Áĉĉöüńṫŝ",
     "account": "CH-Áĉĉöüńṫ",
     "active": "CH-Áĉṫïvë",
     "invested": "CH-Ïńvëŝṫëḋ",
     "switch-action": "CH-Ŝwïṫĉĥ"
+  },
+  "not-enough-time": "CH-Ńöṫ ëńöüĝĥ ḋáṫá ḟöѓ ṫĥïŝ ṗëѓïöḋ",
+  "chart-error": {
+    "heading": "CH-Ëѓѓöѓ öĉĉüѓѓëḋ :(",
+    "description": "CH-Üńḟöѓṫüńáṫëly, wë wëѓëń'ṫ áblë ṫö ѓëńḋëѓ ṫĥë ĉĥáѓṫ"
   }
 }
