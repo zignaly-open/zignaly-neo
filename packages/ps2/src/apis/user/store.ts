@@ -28,7 +28,9 @@ export const userSlice = createSlice({
       state.user = action.payload;
     },
     activateExchange: (state, action: PayloadAction<string>) => {
-      state.user.exchanges[action.payload] = true;
+      state.user.exchanges.find(
+        (e) => e.internalId === action.payload,
+      ).activated = true;
     },
   },
 });
@@ -40,6 +42,7 @@ export const {
   setUser,
   setSessionExpiryDate,
   setActiveExchangeInternalId,
+  activateExchange,
 } = userSlice.actions;
 
 export default userSlice.reducer;
