@@ -26,7 +26,6 @@ const SignupForm: React.FC = () => {
     handleSubmit,
     control,
     formState: { errors },
-    watch,
   } = useForm<LoginPayload>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -39,8 +38,8 @@ const SignupForm: React.FC = () => {
   const [{ loading: signingUp }, signup] = useSignup();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
   const { state: locationState } = useLocation();
-  const email = watch('email');
 
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
@@ -71,6 +70,10 @@ const SignupForm: React.FC = () => {
                     ) : null
                   }
                   {...field}
+                  onBlur={(e) => {
+                    field.onBlur();
+                    setEmail(e.target.value);
+                  }}
                 />
               )}
             />
