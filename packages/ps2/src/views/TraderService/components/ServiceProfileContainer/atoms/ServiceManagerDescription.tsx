@@ -40,9 +40,12 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
             }}
           >
             {service.ownerName}
-            <Tooltip title={t('owner-verified')}>
-              <StyledVerifiedIcon sx={{ ml: 1 }} width={13} height={13} />
-            </Tooltip>
+
+            {service.ownerVerified && (
+              <Tooltip title={t('owner-verified')}>
+                <StyledVerifiedIcon sx={{ ml: 1 }} width={13} height={13} />
+              </Tooltip>
+            )}
 
             {service.ownerCountry && (
               <Tooltip

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
 import {
@@ -22,10 +22,24 @@ const InvestButton: React.FC<{
   const { showModal } = useZModal();
   const selectInvestment = useSetSelectedInvestment();
   const navigate = useNavigate();
-  const setMissedRoute = useSetMissedRoute();
+  const { balance, isFetching } = useCurrentBalance(service.ssc);
+  const location = useLocation();
+  const [needsToOpenWhenBalancesLoaded, setNeedsToOpenWhenBalancesLoaded] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    if (needsToOpenWhenBalancesLoaded && !isFetching) {
+      setNeedsToOpenWhenBalancesLoaded(false);
+      onClickMakeInvestment();
+    }
+  }, [needsToOpenWhenBalancesLoaded, isFetching]);
 
   const onClickMakeInvestment = () => {
     if (isAuthenticated) {
+      if (isFetching) {
+        setNeedsToOpenWhenBalancesLoaded(true);
+        return;
+      }
       selectInvestment(serviceToInvestmentServiceDetail(service));
       showModal(InvestModal);
     } else {
@@ -38,6 +52,7 @@ const InvestButton: React.FC<{
     <InvestButtonWrap>
       <Button
         onClick={onClickMakeInvestment}
+        loading={needsToOpenWhenBalancesLoaded && isFetching}
         caption={t('invest-button.invest-now')}
         bottomElement={
           <InvestButtonSubtext
