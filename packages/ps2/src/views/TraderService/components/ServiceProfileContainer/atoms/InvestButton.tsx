@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
 import { useIsAuthenticated } from '../../../../../apis/user/use';
@@ -23,11 +23,24 @@ const InvestButton: React.FC<{
   const { showModal } = useZModal();
   const selectInvestment = useSetSelectedInvestment();
   const navigate = useNavigate();
-  const { balance } = useCurrentBalance(service.ssc);
+  const { balance, isFetching } = useCurrentBalance(service.ssc);
   const location = useLocation();
+  const [needsToOpenWhenBalancesLoaded, setNeedsToOpenWhenBalancesLoaded] =
+    useState<boolean>(false);
+
+  useEffect(() => {
+    if (needsToOpenWhenBalancesLoaded && !isFetching) {
+      setNeedsToOpenWhenBalancesLoaded(false);
+      onClickMakeInvestment();
+    }
+  }, [needsToOpenWhenBalancesLoaded, isFetching]);
 
   const onClickMakeInvestment = () => {
     if (isAuthenticated) {
+      if (isFetching) {
+        setNeedsToOpenWhenBalancesLoaded(true);
+        return;
+      }
       selectInvestment(serviceToInvestmentServiceDetail(service));
       const showDeposit = +balance === 0;
       if (showDeposit)
@@ -44,6 +57,7 @@ const InvestButton: React.FC<{
     <InvestButtonWrap>
       <Button
         onClick={onClickMakeInvestment}
+        loading={needsToOpenWhenBalancesLoaded && isFetching}
         caption={t('invest-button.invest-now')}
         bottomElement={
           <InvestButtonSubtext

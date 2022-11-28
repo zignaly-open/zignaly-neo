@@ -45,7 +45,8 @@ const ServiceInformation: React.FC<{
             components={[<GreySubHeaderHighlight key={'--service--by'} />]}
             values={{ name: service.ownerName }}
           />
-          {!service.ownerVerified && (
+
+          {service.ownerVerified && (
             <Tooltip title={t('owner-verified')}>
               <StyledVerifiedIcon width={13} height={13} />
             </Tooltip>

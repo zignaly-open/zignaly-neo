@@ -79,12 +79,14 @@ export function useIsInvestedInService(serviceId: string): {
 export function useCurrentBalance(coin?: string): {
   id: string;
   balance: string;
+  isFetching: boolean;
 } {
   const service = useSelectedInvestment();
-  const { data: coins } = useCoinBalances();
+  const { data: coins, isFetching } = useCoinBalances();
 
   return useMemo(
     () => ({
+      isFetching,
       id: coin || service?.ssc,
       balance: coins?.[coin || service?.ssc]?.balanceFree || '0',
     }),
