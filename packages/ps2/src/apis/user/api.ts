@@ -102,6 +102,13 @@ export const api = createApi({
         url: 'user/session',
       }),
     }),
+
+    activateExchange: builder.mutation<void, { exchangeInternalId: string }>({
+      query: ({ exchangeInternalId }) => ({
+        url: `/user/exchanges/${exchangeInternalId}/activate`,
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
@@ -110,6 +117,7 @@ export const {
   useLoginMutation,
   useLazyUserQuery,
   useLazySessionQuery,
+  useActivateExchangeMutation,
   useVerify2FAMutation,
   useVerifyCodeMutation,
   useVerifyCodeNewUserMutation,

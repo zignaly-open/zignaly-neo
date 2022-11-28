@@ -9,6 +9,7 @@ import {
   UserData,
 } from './types';
 import {
+  useActivateExchangeMutation,
   useLazySessionQuery,
   useLazyUserQuery,
   useLoginMutation,
@@ -39,6 +40,7 @@ import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import AuthVerifyModal from '../../views/Auth/components/AuthVerifyModal';
 import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../service/api';
+import { QueryReturnTypeBasic } from 'util/queryReturnType';
 
 const useStartSession = () => {
   const { showModal } = useModal();
@@ -234,4 +236,19 @@ export function useSelectExchange(): (exchangeInternalId: string) => void {
   const dispatch = useDispatch();
   return (exchangeInternalId) =>
     dispatch(setActiveExchangeInternalId(exchangeInternalId));
+}
+
+export function useActivateExchange(): QueryReturnTypeBasic<void> {
+  const exchange = useActiveExchange();
+  const [activate, result] = useActivateExchangeMutation();
+
+  useEffect(() => {
+    if (exchange && !exchange.activated) {
+      activate({
+        exchangeInternalId: exchange.internalId,
+      });
+    }
+  }, [exchange?.internalId]);
+
+  return result;
 }
