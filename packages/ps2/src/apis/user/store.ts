@@ -27,6 +27,9 @@ export const userSlice = createSlice({
     setUser: (state, action: PayloadAction<UserData>) => {
       state.user = action.payload;
     },
+    activateExchange: (state, action: PayloadAction<string>) => {
+      state.user.exchanges[action.payload] = true;
+    },
   },
 });
 
