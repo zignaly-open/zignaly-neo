@@ -25,6 +25,7 @@ import {
 } from './api';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import {
+  activateExchange,
   logout,
   setAccessToken,
   setActiveExchangeInternalId,
@@ -241,11 +242,14 @@ export function useSelectExchange(): (exchangeInternalId: string) => void {
 export function useActivateExchange(): QueryReturnTypeBasic<void> {
   const exchange = useActiveExchange();
   const [activate, result] = useActivateExchangeMutation();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (exchange && !exchange.activated) {
       activate({
         exchangeInternalId: exchange.internalId,
+      }).then(() => {
+        dispatch(activateExchange(exchange.internalId));
       });
     }
   }, [exchange?.internalId]);
