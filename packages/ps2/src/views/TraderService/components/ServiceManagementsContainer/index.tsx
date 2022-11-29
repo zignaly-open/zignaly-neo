@@ -145,10 +145,10 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
               <Box>
                 <Circle />
                 <Typography variant='h2' color='neutral100'>
-                  {t('disconnectionFunds')}
+                  {t('standbyFunds')}
                 </Typography>
                 <Typography color='neutral200'>
-                  {t('disconnectionFunds-desc')}
+                  {t('standbyFunds-desc')}
                 </Typography>
                 <TradingFunds>
                   <Typography color='neutral400' variant='body2'>
