@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
@@ -18,7 +18,7 @@ import {
 import { Box, InputAdornment, Link } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoginPayload } from '../../../../apis/user/types';
-import Mailcheck from 'react-mailcheck';
+import Cookies from 'js-cookie';
 
 const SignupForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -42,11 +42,26 @@ const SignupForm: React.FC = () => {
 
   const { state: locationState } = useLocation();
 
+  useEffect(() => {
+    const ref = new URLSearchParams(window.location.search).get('invite');
+    if (ref) {
+      Cookies.set('ref', ref);
+    }
+  }, []);
+
+  const onSubmit = (payload: LoginPayload) => {
+    signup({
+      ...payload,
+      ref: Cookies.get('ref'),
+    });
+  };
+
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
       <TitleHead>
         <Typography variant={'h2'}>{t('signup-title')}</Typography>
       </TitleHead>
+<<<<<<< HEAD
       <Form onSubmit={handleSubmit(signup)}>
         <Mailcheck email={email}>
           {(suggested: { full: string }) => (
@@ -77,6 +92,21 @@ const SignupForm: React.FC = () => {
                   }}
                 />
               )}
+=======
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Controller
+          name='email'
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <ZigInput
+              id={'signup'}
+              label={t('login-form.inputText.email.label') + ':'}
+              placeholder={t('login-form.inputText.email.label')}
+              disabled={signingUp}
+              error={t(errors.email?.message)}
+              {...field}
+>>>>>>> 83335158 (feat: referral code)
             />
           )}
         </Mailcheck>
