@@ -23,7 +23,7 @@ const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
         <Grid item sm={12} md={6}>
           <WithdrawFundsOptionWrapper border={matchesSmall}>
             <Typography component={'p'} variant={'h2'} color={'neutral100'}>
-              {t('modal.withdrawInvestment.afterPosition.title')}
+              {t('modal.withdrawInvestment.freeWithdrawal.title')}
             </Typography>
             <WithdrawFundsSpaceTaker
               component={'p'}
@@ -31,7 +31,7 @@ const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
               color={'neutral200'}
               weight={'regular'}
             >
-              {t('modal.withdrawInvestment.afterPosition.description')}
+              {t('modal.withdrawInvestment.freeWithdrawal.description')}
             </WithdrawFundsSpaceTaker>
 
             <WithdrawFundsButtonWrapper>
@@ -44,7 +44,7 @@ const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
                       color={'neutral150'}
                     >
                       {t(
-                        'modal.withdrawInvestment.afterPosition.button.subtitle',
+                        'modal.withdrawInvestment.freeWithdrawal.button.subtitle',
                       )}
                     </Typography>
                     <Typography
@@ -52,7 +52,9 @@ const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
                       variant={'h3'}
                       color={'neutral000'}
                     >
-                      {t('modal.withdrawInvestment.afterPosition.button.title')}
+                      {t(
+                        'modal.withdrawInvestment.freeWithdrawal.button.title',
+                      )}
                     </Typography>
                   </MultilineButton>
                 }

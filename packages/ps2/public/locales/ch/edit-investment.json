@@ -49,7 +49,7 @@
   "modal": {
     "withdrawInvestment": {
       "title": "CH-Wïṫĥḋѓáwál Ѓëqüëŝṫ",
-      "afterPosition": {
+      "freeWithdrawal": {
         "title": "CH-Wïṫĥḋѓáw Áḟṫëѓ Ṗöŝïṫïöńŝ Ĉlöŝë",
         "description": "CH-Yöü wïll ѓëĉëïvë yöüѓ ḟüńḋŝ áḟṫëѓ ṫĥë ṫѓáḋëѓ ḟѓëë ṫĥëṁ. Ṫákë ïńṫö áĉĉöüńṫ ṫĥáṫ yöüѓ ïńvëŝṫṁëńṫ ïŝ áṫ ѓïŝk üńṫïl ïŝ ṫѓáńŝḟëѓѓëḋ ṫö yöü. Ṫĥïŝ üŝüálly ṫákëŝ á ḟëw ḋáyŝ, büṫ ĉöülḋ ṫákë ṁöѓë. Ïṫ ïŝ üṗ ṫö ṫĥëṁ.",
         "button": {
