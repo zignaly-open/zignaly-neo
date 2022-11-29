@@ -47,7 +47,7 @@
     "modal": {
         "withdrawInvestment": {
             "title": "Çekim Talebi",
-            "afterPosition": {
+            "freeWithdrawal": {
                 "title": "Pozisyonlar Kapandıktan Sonra Fonların Çekimi",
                 "description": "Fonunuzu trader serbest bıraktığında alacaksınız. Yatırımınızın size aktarılana kadar risk altında olduğunu göz önünde bulundurun. Bu durum genellikle birkaç gün sürmesine rağmen süreç daha da uzayabilir. Bu süre trader'ın takdirindedir.",
                 "button": {
