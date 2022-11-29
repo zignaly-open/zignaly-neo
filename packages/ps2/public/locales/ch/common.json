@@ -51,6 +51,7 @@
     "insufficient-amount": "CH-Ïńŝüḟḟïĉïëńṫ ḟüńḋŝ",
     "invalid-value": "CH-Ïńválïḋ válüë",
     "negative-amount": "CH-Ŝĥöülḋ bë >= 0",
+    "negative-zeroable-amount": "CH-Ŝĥöülḋ bë > 0",
     "invalid-amount": "CH-Yöü ṁüŝṫ ïńḋïĉáṫë áń áṁöüńṫ"
   }
 }
