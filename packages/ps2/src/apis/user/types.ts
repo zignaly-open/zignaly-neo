@@ -80,7 +80,7 @@ export type SignupPayload = {
   email: string;
   password: string;
   newPageAB?: boolean;
-  ref?: string;
+  refCode?: string;
 };
 
 export type LoginResponse = {
