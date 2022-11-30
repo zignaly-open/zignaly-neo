@@ -1,8 +1,16 @@
 /* eslint-disable multiline-ternary */
 import React, { useMemo, useReducer, useRef } from "react";
-import { VictoryArea, VictoryAxis, VictoryChart, VictoryGroup, VictoryLine } from "victory";
+import {
+  VictoryArea,
+  VictoryAxis,
+  VictoryChart,
+  VictoryGroup,
+  VictoryLabel,
+  VictoryLine,
+} from "victory";
 import { Layout, WideWrapper } from "./styles";
 import { AxisFormat, ChartsProps, largeStyle } from "./types";
+import { dark } from "../../../theme";
 
 export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
   const processedData = useMemo<AxisFormat[]>(() => {
@@ -50,7 +58,13 @@ export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
                     padding: { top: 5, bottom: 10 },
                   })}
             >
-              {large && <VictoryAxis dependentAxis style={largeStyle} />}
+              {large && (
+                <VictoryAxis
+                  tickLabelComponent={<VictoryLabel text={({ datum }) => `${datum}%`} />}
+                  dependentAxis
+                  style={largeStyle}
+                />
+              )}
               <VictoryArea
                 style={{
                   data: {
