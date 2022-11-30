@@ -109,6 +109,13 @@ export const BigNumberWrapper = styled('div')`
   }
 `;
 
+export const CountryFlag = styled('div')`
+  width: 21px;
+  height: 14px;
+  line-height: 1;
+  margin-left: 6px;
+`;
+
 export const HideReadMoreEffects = styled('div')`
   .readmore.overhang {
     display: none !important;
