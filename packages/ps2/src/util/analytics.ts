@@ -16,6 +16,7 @@ if (
     plugins: [
       segmentPlugin({
         writeKey: process.env.REACT_APP_SEGMENT_KEY,
+        customScriptSrc: process.env.REACT_APP_SEGMENT_SCRIPT_SRC,
       }),
     ],
   });
