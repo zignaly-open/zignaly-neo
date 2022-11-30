@@ -101,18 +101,14 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
           <ZigTypography
             fontSize={12}
             color={'neutral300'}
-            sx={{ mt: 1 }}
+            sx={{ mt: 0.5 }}
             component={'p'}
           >
             {t('summary.tags')}{' '}
-            {service.tags?.length ? (
-              <ZigTypography fontSize={12} color={'neutral200'}>
-                {service.tags?.join(', ')}
-              </ZigTypography>
-            ) : (
-              // eslint-disable-next-line i18next/no-literal-string
-              <ZigTypography color={'neutral400'}>&mdash;</ZigTypography>
-            )}
+            <ZigTypography fontSize={12} color={'neutral200'}>
+              {/* eslint-disable-next-line i18next/no-literal-string */}
+              {service.tags?.length ? service.tags?.join(', ') : <>&mdash;</>}
+            </ZigTypography>
           </ZigTypography>
         </Grid>
       </Grid>
