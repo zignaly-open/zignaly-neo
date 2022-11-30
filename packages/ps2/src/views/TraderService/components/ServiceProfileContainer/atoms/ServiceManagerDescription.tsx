@@ -6,10 +6,9 @@ import { Box } from '@mui/system';
 import { ZigTypography } from '@zignaly-open/ui';
 import Countries from 'i18n-iso-countries';
 import { formatDistance } from 'date-fns';
-import { StyledVerifiedIcon } from '../styles';
+import { CountryFlag, StyledVerifiedIcon } from '../styles';
 import { Tooltip } from '@mui/material';
-import getUnicodeFlagIcon from 'country-flag-icons/unicode';
-import { hasFlag } from 'country-flag-icons';
+import * as flags from 'country-flag-icons/string/3x2';
 
 const ServiceManagerDescription: React.FC<{ service: Service }> = ({
   service,
@@ -47,19 +46,20 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
               </Tooltip>
             )}
 
-            {service.ownerCountry && (
-              <Tooltip
-                title={t('owner-from', {
-                  country: country || service.ownerCountry,
-                })}
-              >
-                <ZigTypography variant={'h2'} sx={{ ml: 1 }}>
-                  {hasFlag(service.ownerCountry)
-                    ? getUnicodeFlagIcon(service.ownerCountry)
-                    : '🏴‍☠️‍'}
-                </ZigTypography>
-              </Tooltip>
-            )}
+            {service.ownerCountry &&
+              flags[service.ownerCountry?.toLocaleUpperCase()] && (
+                <Tooltip
+                  title={t('owner-from', {
+                    country: country || service.ownerCountry,
+                  })}
+                >
+                  <CountryFlag
+                    dangerouslySetInnerHTML={{
+                      __html: flags[service.ownerCountry?.toLocaleUpperCase()],
+                    }}
+                  />
+                </Tooltip>
+              )}
             <ZigTypography
               sx={{
                 ml: 2,
