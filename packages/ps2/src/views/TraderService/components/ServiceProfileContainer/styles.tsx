@@ -1,4 +1,4 @@
-import { styled, css } from '@mui/material';
+import { styled, css, Grid } from '@mui/material';
 import muiStyled from '@emotion/styled';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { ZigTypography } from '@zignaly-open/ui';
@@ -95,6 +95,7 @@ export const InvestButtonContainer = styled('div')`
 `;
 
 export const InvestButtonWrap = styled('div')`
+  text-align: center;
   button > div {
     height: 60px !important;
   }
@@ -108,7 +109,47 @@ export const BigNumberWrapper = styled('div')`
   }
 `;
 
+export const HideReadMoreEffects = styled('div')`
+  .readmore.overhang {
+    display: none !important;
+  }
+`;
+
 export const InvestButtonSubtext: typeof ZigTypography = styled(ZigTypography)`
   font-size: 12px;
   line-height: 16px;
+`;
+
+export const GridWithBottomBorder = styled(Grid)`
+  border-bottom: 0.5px solid ${({ theme }) => theme.palette.neutral700};
+`;
+
+export const GridCell = styled(Grid)<{ rightBorder?: boolean }>`
+  text-align: center;
+  border-right: 0.5px solid
+    ${({ theme, rightBorder }) =>
+      rightBorder ? theme.palette.neutral700 : 'transparent'};
+`;
+
+export const PercentChangeContainer: typeof ZigTypography = styled(
+  ZigTypography,
+)`
+  justify-content: center;
+  display: flex;
+  flex-direction: row;
+`;
+
+export const RightSideActionWrapper = styled(Box)`
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const ChartWrapper = styled(Box)`
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

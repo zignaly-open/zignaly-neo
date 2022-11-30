@@ -9,6 +9,8 @@
     "nb-investors": "# of investors",
     "n-months_one": "{{count}} month",
     "n-months_other": "{{count}} months",
+    "n-years_one": "{{count}} year",
+    "n-years_other": "{{count}} years",
     "account-age": "Account age",
     "x-investors_one": "{{count}} investor",
     "x-investors_other": "{{count}} investors"

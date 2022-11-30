@@ -11,11 +11,39 @@
     "all-accounts": "CH-Ŝëë áll ({{count}})",
     "x-success-fee": "CH-{{fee}}% Ŝüĉĉëŝŝ ḟëë"
   },
+  "owner-verified": "CH-Ṫĥë Ṁáńáĝëѓ ĥáŝ bëëń vëѓïḟïëḋ",
+  "owner-from": "CH-Ṫĥë Ṁáńáĝëѓ ïŝ ḟѓöṁ {{country}}",
+  "strategy": "CH-Ŝṫѓáṫëĝy",
+  "assets-in-pool": "CH-Áŝŝëṫŝ ïń Ṗööl",
+  "investors-count": "CH-Ïńvëŝṫöѓŝ",
+  "strategy-empty": "CH-Ṫĥë Ṁáńáĝëѓ ṗѓëḟëѓŝ ṫö këëṗ áń áïѓ öḟ ṁyŝṫëѓy áѓöüńḋ ṫĥëïѓ ṫѓáḋïńĝ ŝṫѓáṫëĝy",
+  "about-trader": "CH-Áböüṫ ṫĥë Ṁáńáĝëѓ",
+  "about-trader-empty": "CH-Ṫĥë Ṁáńáĝëѓ ṗѓëḟëѓŝ ṫö këëṗ áń áïѓ öḟ ṁyŝṫëѓy áѓöüńḋ ṫĥëṁŝëlḟ",
+  "about-trader-joined-time": "CH-Jöïńëḋ {{date}}",
+  "summary": {
+    "base-currency": "CH-Báŝë ĉüѓѓëńĉy:",
+    "funds-allocated": "CH-Ḟüńḋŝ állöĉáṫëḋ:",
+    "success-fee": "CH-Ŝüĉĉëŝŝ ḟëë:",
+    "tags": "CH-Ṫáĝŝ:"
+  },
+  "periods": {
+    "7d": "CH-Wëëk",
+    "30d": "CH-Ṁöńṫĥ",
+    "90d": "CH-3 Ṁö",
+    "180d": "CH-6 Ṁö",
+    "365d": "CH-1 Yëáѓ",
+    "all": "CH-Áll"
+  },
   "other-accounts": {
     "title": "CH-Ïńvëŝṫëḋ Áĉѓöŝŝ áll Áĉĉöüńṫŝ",
     "account": "CH-Áĉĉöüńṫ",
     "active": "CH-Áĉṫïvë",
     "invested": "CH-Ïńvëŝṫëḋ",
     "switch-action": "CH-Ŝwïṫĉĥ"
+  },
+  "not-enough-time": "CH-Ńöṫ ëńöüĝĥ ḋáṫá ḟöѓ ṫĥïŝ ṗëѓïöḋ",
+  "chart-error": {
+    "heading": "CH-Ëѓѓöѓ öĉĉüѓѓëḋ :(",
+    "description": "CH-Üńḟöѓṫüńáṫëly, wë wëѓëń'ṫ áblë ṫö ѓëńḋëѓ ṫĥë ĉĥáѓṫ"
   }
 }

@@ -1,7 +1,7 @@
 /* eslint-disable multiline-ternary */
-import React, { useMemo } from "react";
+import React, { useMemo, useReducer, useRef } from "react";
 import { VictoryArea, VictoryAxis, VictoryChart, VictoryGroup, VictoryLine } from "victory";
-import { Layout } from "./styles";
+import { Layout, WideWrapper } from "./styles";
 import { AxisFormat, ChartsProps, largeStyle } from "./types";
 
 export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
@@ -17,6 +17,7 @@ export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
     return chart.map((c) => ({ ...c, y0: min }));
   }, [data]);
 
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const firstTimestamp = processedData[0].y;
   const lastTimeStamp = processedData[data.length - 1].y;
   const isGreen = firstTimestamp <= lastTimeStamp;
@@ -24,51 +25,64 @@ export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
   const gradientId = useMemo(() => `gradient-${Math.random()}`, []);
   const large = variant === "large";
   const ChartWrapperComponent = large ? VictoryChart : VictoryGroup;
+  const width = wrapperRef?.current?.getBoundingClientRect().width;
+
+  // dirty fix for rerender
+  // but this shit is going to the bin anyways so whatever
+  const [, forceUpdate] = useReducer((x) => x + 1, 0);
+  if (!width) setTimeout(forceUpdate, 50);
+
   return (
-    <div>
+    <WideWrapper wide={large} ref={wrapperRef}>
       <GraphColor isGreen={isGreen} gradientId={gradientId} />
       <Layout variant={variant}>
-        <ChartWrapperComponent
-          {...(large
-            ? {
-                domainPadding: { x: [0, -10], y: 5 },
-                domain: { y: [0, 35] },
-              }
-            : {
-                padding: { top: 5, bottom: 10 },
-              })}
-        >
-          {large && <VictoryAxis dependentAxis style={largeStyle} />}
-          <VictoryArea
-            style={{
-              data: {
-                fill: `url(#${gradientId})`,
-                strokeWidth: large ? 3 : 4,
-                stroke: strokeColor,
-              },
-            }}
-            data={processedData}
-          />
-          {large && <VictoryAxis style={largeStyle} />}
-          {midLine && (
-            <VictoryLine
-              style={{
-                data: {
-                  stroke: "grey",
-                  strokeDasharray: 6,
-                  strokeWidth: 2,
-                  strokeOpacity: 0.7,
-                },
-              }}
-              data={[
-                { x: processedData[0].x, y: 0 },
-                { x: processedData[processedData.length - 1].x, y: 0 },
-              ]}
-            />
-          )}
-        </ChartWrapperComponent>
+        {width || !large ? (
+          <>
+            <ChartWrapperComponent
+              {...(large
+                ? {
+                    width: width || 600,
+                    height: 400,
+                    domainPadding: { x: [0, 1], y: 5 },
+                    padding: { left: 35, top: 20, right: 35, bottom: 20 },
+                  }
+                : {
+                    padding: { top: 5, bottom: 10 },
+                  })}
+            >
+              {large && <VictoryAxis dependentAxis style={largeStyle} />}
+              <VictoryArea
+                style={{
+                  data: {
+                    fill: `url(#${gradientId})`,
+                    strokeWidth: large ? 3 : 4,
+                    stroke: strokeColor,
+                  },
+                }}
+                data={processedData}
+              />
+              {large && <VictoryAxis fixLabelOverlap style={largeStyle} />}
+              {midLine && (
+                <VictoryLine
+                  style={{
+                    data: {
+                      stroke: "grey",
+                      strokeDasharray: 6,
+                      strokeWidth: 2,
+                      strokeOpacity: 0.7,
+                    },
+                  }}
+                  data={[
+                    { x: processedData[0].x, y: 0 },
+                    { x: processedData[processedData.length - 1].x, y: 0 },
+                  ]}
+                />
+              )}
+            </ChartWrapperComponent>
+          </>
+        ) : null}
       </Layout>
-    </div>
+    </WideWrapper>
   );
 };
 

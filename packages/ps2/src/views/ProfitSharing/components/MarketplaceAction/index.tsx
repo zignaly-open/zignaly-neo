@@ -5,10 +5,8 @@ import {
   useIsAuthenticated,
 } from '../../../../apis/user/use';
 import { useInvestments } from '../../../../apis/investment/use';
-import {
-  InvestButton,
-  InvestedButtonBase,
-} from '../../../TraderService/components/ServiceProfileContainer/atoms';
+import InvestButton from '../../../TraderService/components/ServiceProfileContainer/atoms/InvestButton';
+import { InvestedButtonBase } from '../../../TraderService/components/ServiceProfileContainer/atoms/InvestedButton';
 import { marketplaceServiceToServiceType } from '../../../../apis/marketplace/util';
 import { Service } from '../../../../apis/service/types';
 import CenteredLoader from '../../../../components/CenteredLoader';

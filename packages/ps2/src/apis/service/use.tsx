@@ -6,12 +6,18 @@ import {
   useTraderServiceTransferFundsMutation,
   useTraderServiceUpdateScaMinimumMutation,
 } from './api';
-import { useSelector } from 'react-redux';
-import { TraderService, TransferPayload } from './types';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  GraphChartType,
+  GraphTimeframe,
+  TraderService,
+  TransferPayload,
+} from './types';
 import { RootState } from '../store';
 import { useIsAuthenticated } from '../user/use';
 import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
+import { setChartTimeframe, setChartType } from './store';
 
 export function useTraderServices(): TraderService[] | undefined {
   return useSelector((store: RootState) => store.service.traderServices);
@@ -80,4 +86,22 @@ export function useTraderServiceTitle(
       ? t(translationKey, { serviceName: service.name })
       : t('trading-services'),
   );
+}
+
+export function useChartConfig(): {
+  chartType: GraphChartType;
+  chartTimeframe: GraphTimeframe;
+  setChartType: (v: GraphChartType) => void;
+  setChartTimeframe: (v: GraphTimeframe) => void;
+} {
+  const { chartType, chartTimeframe } = useSelector(
+    (store: RootState) => store.service,
+  );
+  const dispatch = useDispatch();
+  return {
+    chartType: chartType || GraphChartType.pnl_ssc,
+    chartTimeframe: chartTimeframe || GraphTimeframe['30d'],
+    setChartType: (v) => dispatch(setChartType(v)),
+    setChartTimeframe: (v) => dispatch(setChartTimeframe(v)),
+  };
 }

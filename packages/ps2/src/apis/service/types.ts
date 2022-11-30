@@ -3,6 +3,8 @@ type TraderServiceStatus = 'FULL' | string;
 export type ServiceState = {
   traderServices?: TraderService[];
   activeServiceId?: string;
+  chartType: GraphChartType;
+  chartTimeframe: GraphTimeframe;
 };
 
 export type TraderService = {
@@ -118,4 +120,37 @@ export type Service = {
   type: string;
   usdtInvested: string;
   userId: string;
+
+  pnlPercent7t: string;
+  pnlPercent30t: string;
+  pnlPercent90t: string;
+  pnlPercent180t: string;
+  pnlPercent365t: string;
+
+  pnlSsc7t: string;
+  pnlSsc30t: string;
+  pnlSsc90t: string;
+  pnlSsc180t: string;
+  pnlSsc365t: string;
 };
+
+export type TraderServiceChart = {
+  data: Record<string, number>;
+};
+
+export enum GraphTimeframe {
+  '7d' = '7d',
+  '30d' = '30d',
+  '90d' = '90d',
+  '180d' = '180d',
+  '365d' = '365d',
+  // 'all' = 'all', // looks like it is not supported by the backend
+}
+
+export enum GraphChartType {
+  'investors' = 'investors',
+  'sbt_ssc' = 'sbt_ssc',
+  'pnl_ssc' = 'pnl_ssc',
+  'at_risk_pct' = 'at_risk_pct',
+  'pnl_pct_compound' = 'pnl_pct_compound',
+}

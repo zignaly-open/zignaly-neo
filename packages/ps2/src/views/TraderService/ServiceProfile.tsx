@@ -4,6 +4,7 @@ import { Navigate, useLocation, useParams } from 'react-router-dom';
 import ServiceProfileContainer from './components/ServiceProfileContainer';
 import { TraderServicePageContainer } from 'views/TraderService/components/styles';
 import {
+  useIsServiceOwner,
   useServiceDetails,
   useTraderServiceTitle,
 } from '../../apis/service/use';
@@ -20,11 +21,12 @@ const ServiceProfile: React.FC = () => {
   useTraderServiceTitle('profit-sharing.service', serviceId);
   const serviceDetailsEndpoint = useServiceDetails(serviceId);
   const isAuthenticated = useIsAuthenticated();
+  const isOwner = useIsServiceOwner(serviceId);
 
   return (
     <>
       <ServiceHeader />
-      <TraderServicePageContainer>
+      <TraderServicePageContainer isOwner={isOwner}>
         <LayoutContentWrapper
           endpoint={serviceDetailsEndpoint}
           error={(error: BackendError) => {

@@ -41,6 +41,58 @@ const darkMui = createTheme({
         },
       },
     },
+    MuiButtonGroup: {
+      styleOverrides: {
+        root: `
+          & > .MuiButton-root {
+          border-radius: 0;
+            &:first-child {
+              border-top-left-radius: 4px;
+              border-bottom-left-radius: 4px;
+            }
+            &:last-child {
+              border-top-right-radius: 4px;
+              border-bottom-right-radius: 4px;
+            }
+          }
+        `,
+      },
+    },
+    MuiButton: {
+      styleOverrides: {
+        root: {},
+        sizeLarge: {
+          minHeight: "48px",
+          minWidth: "110px",
+        },
+        sizeMedium: {
+          minHeight: "36px",
+          minWidth: "76px",
+        },
+        sizeSmall: {
+          minHeight: "30px",
+          minWidth: "76px",
+        },
+        contained: {
+          background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
+          boxShadow: "0px 12px 16px -8px rgba(25, 25, 39, 0.36)",
+          transition: "all 0.3s linear",
+          "&:hover": {
+            background: "linear-gradient(rgba(20, 156, 173, 0.64),rgba(69, 64, 193, 0.64))",
+          },
+        },
+        outlined: {
+          borderColor: dark.neutral600,
+          color: dark.neutral300,
+          transition: "all 0.2s linear",
+          "&:hover": {
+            background:
+              "linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%)",
+            color: dark.neutral000,
+          },
+        },
+      },
+    },
     MuiTypography: {
       defaultProps: {
         variantMapping: {
