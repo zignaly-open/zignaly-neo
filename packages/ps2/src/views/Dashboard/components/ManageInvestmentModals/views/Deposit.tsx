@@ -6,11 +6,14 @@ import {
 } from '../../../../../apis/coin/use';
 import CenteredLoader from '../../../../../components/CenteredLoader';
 import { DepositModalProps } from '../types';
+import { useActivateExchange } from 'apis/user/use';
 
 const DepositView: React.FC<DepositModalProps> = (props) => {
   const { isFetching: isFetchingBalances } = useCoinBalances({ convert: true });
   const { isFetching: isFetchingCoins } = useExchangeCoinsList();
-  return isFetchingCoins || isFetchingBalances ? (
+  const { isFetching: isActivating } = useActivateExchange();
+
+  return isActivating || isFetchingCoins || isFetchingBalances ? (
     <CenteredLoader />
   ) : (
     <DepositForm {...props} />
