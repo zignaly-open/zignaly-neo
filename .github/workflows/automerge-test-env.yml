@@ -23,3 +23,4 @@ jobs:
           message: Merging ${{ github.event.pull_request.head.ref }}
           from_branch: ${{ github.event.pull_request.head.ref }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+
