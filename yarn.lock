@@ -2074,11 +2074,6 @@
   dependencies:
     chalk "^4.1.0"
 
-"@crossfield/react-read-more@^0.2.0":
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/@crossfield/react-read-more/-/react-read-more-0.2.0.tgz#7ff91d8f0093df0fab5e2660d391d6ea9b743cde"
-  integrity sha512-+S38qk9H2/NzJVyseYGRsykqp90Tp2lfqpIFsAzgpAgM+/Zhz+/BpfUltHcX8kpWvuVBg3F1tf1sWgE6eOM5lQ==
-
 "@cspotcode/source-map-consumer@0.8.0":
   version "0.8.0"
   resolved "https://registry.npmjs.org/@cspotcode/source-map-consumer/-/source-map-consumer-0.8.0.tgz"

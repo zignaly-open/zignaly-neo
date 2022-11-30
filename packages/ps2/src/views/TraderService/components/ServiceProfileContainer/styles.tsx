@@ -116,10 +116,14 @@ export const CountryFlag = styled('div')`
   margin-left: 6px;
 `;
 
-export const HideReadMoreEffects = styled('div')`
-  .readmore.overhang {
-    display: none !important;
-  }
+export const HideReadMoreEffects = styled('div')<{
+  open: boolean;
+  heightLimit: number;
+}>`
+  transition: all 0.3s;
+  overflow: hidden;
+  margin-bottom: 7px;
+  max-height: ${(props) => (props.open ? 1000 : props.heightLimit)}px;
 `;
 
 export const InvestButtonSubtext: typeof ZigTypography = styled(ZigTypography)`
