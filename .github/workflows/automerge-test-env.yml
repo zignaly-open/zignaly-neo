@@ -3,9 +3,8 @@ name: Auto-merge into the test environment
 on:
 #  push:
   pull_request:
-    types: [opened, reopened, edited]
-#    branches:
-#      - master
+    branches:
+      - master
 #      - chore/**
 #      - fix/**
 #      - feat/**
