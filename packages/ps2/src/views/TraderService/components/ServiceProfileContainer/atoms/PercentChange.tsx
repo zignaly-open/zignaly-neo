@@ -10,7 +10,7 @@ const PercentChange: React.FC<{ value: string | null }> = ({ value }) => {
   return (
     <PercentChangeContainer component={'div'}>
       <ZigTypography variant={'h6'}>
-        {+value < 0 ? (
+        {+value > 0 ? (
           <ArrowDropUp
             sx={{
               color: (theme) => theme.palette.neutral200,
