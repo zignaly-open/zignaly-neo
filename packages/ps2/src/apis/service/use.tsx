@@ -99,7 +99,7 @@ export function useChartConfig(): {
   );
   const dispatch = useDispatch();
   return {
-    chartType: chartType || GraphChartType.pnl_ssc,
+    chartType: chartType || GraphChartType.pnl_pct_compound,
     chartTimeframe: chartTimeframe || GraphTimeframe['30d'],
     setChartType: (v) => dispatch(setChartType(v)),
     setChartTimeframe: (v) => dispatch(setChartTimeframe(v)),
