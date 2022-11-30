@@ -43,16 +43,16 @@ const SignupForm: React.FC = () => {
   const { state: locationState } = useLocation();
 
   useEffect(() => {
-    const refCode = new URLSearchParams(window.location.search).get('invite');
-    if (refCode) {
-      Cookies.set('refCode', refCode);
+    const ref = new URLSearchParams(window.location.search).get('invite');
+    if (ref) {
+      Cookies.set('ref', ref);
     }
   }, []);
 
   const onSubmit = (payload: LoginPayload) => {
     signup({
       ...payload,
-      refCode: Cookies.get('refCode'),
+      ref: Cookies.get('ref'),
     });
   };
 
