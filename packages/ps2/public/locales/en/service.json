@@ -19,7 +19,7 @@
   "strategy-empty": "The Manager prefers to keep an air of mystery around their trading strategy",
   "about-trader": "About the Manager",
   "about-trader-empty": "The Manager prefers to keep an air of mystery around themself",
-  "about-trader-joined-time": "Joined {{date}}",
+  "about-trader-joined-time": "Joined {{date}} ago",
   "summary": {
   "base-currency": "Base currency:",
   "funds-allocated": "Funds allocated:",
