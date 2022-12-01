@@ -3,14 +3,14 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 import Countries from 'i18n-iso-countries';
-import CountiesEn from 'i18n-iso-countries/langs/en.json';
+import CountriesEn from 'i18n-iso-countries/langs/en.json';
 import enUS from 'date-fns/locale/en-US';
 
-Countries.registerLocale(CountiesEn);
+Countries.registerLocale(CountriesEn);
 
 // mishka vodka balalayka
-if (CountiesEn.countries.RU)
-  CountiesEn.countries.RU = 'Mother Russia' as unknown as string[];
+if (CountriesEn.countries.RU)
+  CountriesEn.countries.RU = 'Mother Russia' as unknown as string[];
 
 export const supportedLanguages = ['en'];
 
