@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN } from '../../../../routes';
 import {
   Button,
+  ErrorMessage,
   IconButton,
   TextButton,
   Typography,
@@ -18,6 +19,7 @@ import { Box, InputAdornment, Link } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoginPayload } from '../../../../apis/user/types';
 import Cookies from 'js-cookie';
+import Mailcheck from 'react-mailcheck';
 
 const SignupForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -37,6 +39,8 @@ const SignupForm: React.FC = () => {
   const [{ loading: signingUp }, signup] = useSignup();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+
   const { state: locationState } = useLocation();
 
   useEffect(() => {
@@ -59,21 +63,38 @@ const SignupForm: React.FC = () => {
         <Typography variant={'h2'}>{t('signup-title')}</Typography>
       </TitleHead>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Controller
-          name='email'
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <ZigInput
-              id={'signup'}
-              label={t('login-form.inputText.email.label') + ':'}
-              placeholder={t('login-form.inputText.email.label')}
-              disabled={signingUp}
-              error={t(errors.email?.message)}
-              {...field}
+        <Mailcheck email={email}>
+          {(suggested: { full: string }) => (
+            <Controller
+              name='email'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <ZigInput
+                  id={'signup'}
+                  label={t('login-form.inputText.email.label') + ':'}
+                  placeholder={t('login-form.inputText.email.label')}
+                  disabled={signingUp}
+                  error={t(errors.email?.message)}
+                  helperText={
+                    suggested ? (
+                      <ErrorMessage
+                        text={t('error:error.did-you-mean', {
+                          suggested: suggested.full,
+                        })}
+                      />
+                    ) : null
+                  }
+                  {...field}
+                  onBlur={(e) => {
+                    field.onBlur();
+                    setEmail(e.target.value);
+                  }}
+                />
+              )}
             />
           )}
-        />
+        </Mailcheck>
 
         <Controller
           name='password'
