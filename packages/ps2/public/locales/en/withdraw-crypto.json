@@ -1,28 +1,31 @@
 {
-    "title": "Withdraw Crypto",
-    "description": "Withdraw crypto to an external account. To move funds between Zignaly accounts, use a transfer instead.",
-    "coinSelector": {
-      "label": "Coin:",
-      "placeholder": "Search a coin"
-    },
-    "networkSelector": {
-      "label": "Network:",
-      "placeholder": "Choose the network"
-    },
-    "withdrawAddress": {
-      "label": "Withdraw to Address:",
-      "placeholder": "Paste wallet address here",
-      "warning": "Only send {{network}} {{coin}} tokens to this address"
-    },
-    "amountToWithdraw": {
-      "label": "Amount to Withdraw:"
-    },
-    "validation": {
-      "indicateAnAddress": "You must indicate an valid address.",
-      "indicateAnAmount": "You must indicate an amount.",
-      "minimumToWithdrawal": "The minimum withdrawal amount is {{value}} {{coin}}"
-    }
-
+  "title": "Withdraw Crypto",
+  "description": "Withdraw crypto to an external account. To move funds between Zignaly accounts, use a transfer instead.",
+  "coinSelector": {
+    "label": "Coin:",
+    "placeholder": "Search a coin"
+  },
+  "networkSelector": {
+    "label": "Network:",
+    "placeholder": "Choose the network"
+  },
+  "withdrawAddress": {
+    "label": "Withdraw to Address:",
+    "placeholder": "Paste wallet address here",
+    "warning": "Only send {{network}} {{coin}} tokens to this address"
+  },
+  "withdrawMemo": {
+    "label": "MEMO/Tag:",
+    "placeholder": "Paste wallet MEMO/Tag here"
+  },
+  "amountToWithdraw": {
+    "label": "Amount to Withdraw:",
+    "labelBalance": "Available:"
+  },
+  "no-network": "Withdrawal is not available on this network",
+  "validation": {
+    "indicateAnAddress": "You must indicate an valid address.",
+    "indicateAnAmount": "You must indicate an amount.",
+    "minimumToWithdrawal": "The minimum withdrawal amount is {{value}} {{coin}}"
+  }
 }
-
-
