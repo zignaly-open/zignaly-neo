@@ -25,23 +25,31 @@ import {
   useCoinBalances,
   useExchangeCoinsList,
 } from '../../../../../../apis/coin/use';
-import { DepositModalProps } from '../../types';
+import { DepositModalProps, WithdrawModalProps } from '../../types';
 import { allowedDeposits } from '../../../../../../util/coins';
 import { useActiveExchange } from '../../../../../../apis/user/use';
 import { useWithdrawMutation } from 'apis/coin/api';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithdrawValidation } from './validations';
 import { CoinNetwork } from 'apis/coin/types';
+import WithdrawConfirmForm from '../WithdrawConfirmForm';
+import CenteredLoader from 'components/CenteredLoader';
 
-function WithdrawForm({ allowedCoins, selectedCoin }: DepositModalProps) {
+function WithdrawForm({
+  isConfirmation,
+  setIsConfirmation,
+  selectedCoin,
+}: WithdrawModalProps) {
   const { t } = useTranslation('withdraw-crypto');
-  const { data: balances } = useCoinBalances({ convert: true });
-  const { data: coins } = useExchangeCoinsList();
+  const { data: balances, isFetching: isFetchingBalances } = useCoinBalances({
+    convert: true,
+  });
+  const { data: coins, isFetching: isFetchingCoins } = useExchangeCoinsList();
   console.log(coins);
+  const [confirmationData, setConfirmationData] = useState<WithdrawFormData>();
   const { internalId, exchangeType } = useActiveExchange();
   const [withdraw, withdrawStatus] = useWithdrawMutation();
   const toast = useToast();
-  const [isConfirmation, setIsConfirmation] = useState(false);
 
   const {
     handleSubmit,
@@ -96,7 +104,7 @@ function WithdrawForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             })),
           };
         }),
-    [coins, allowedCoins, exchangeType],
+    [balances, coins],
   );
 
   const coinObject = coin && coinOptions?.find((x) => x.value === coin);
@@ -123,8 +131,9 @@ function WithdrawForm({ allowedCoins, selectedCoin }: DepositModalProps) {
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
-  const onSubmitFirstStep = () => {
+  const onSubmitFirstStep = (data: WithdrawFormData) => {
     setIsConfirmation(true);
+    setConfirmationData(data);
     // setValue('transferConfirm', '');
     // setValue('step', 2);
   };
@@ -153,17 +162,23 @@ function WithdrawForm({ allowedCoins, selectedCoin }: DepositModalProps) {
     // onInvested();
   };
 
-  // if (isConfirmation) {
-  //   return <WithdrawConfirmView />;
-  // }
+  if (isFetchingCoins || isFetchingBalances) {
+    return <CenteredLoader />;
+  }
+
+  if (isConfirmation) {
+    return (
+      <WithdrawConfirmForm
+        networkCaption={networkObject.name}
+        coin={coin}
+        withdrawAddress={confirmationData.address}
+        onBack={() => setIsConfirmation(false)}
+      />
+    );
+  }
 
   return (
-    <Form
-      onSubmit={handleSubmit(
-        isConfirmation ? onSubmitSecondStep : onSubmitFirstStep,
-      )}
-      autoComplete='off'
-    >
+    <Form onSubmit={handleSubmit(onSubmitFirstStep)} autoComplete='off'>
       <Box mt={1} mb={1}>
         <Typography>{t('description')}</Typography>
       </Box>
@@ -183,8 +198,8 @@ function WithdrawForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                   menuShouldBlockScroll
                   label={t('coinSelector.label')}
                   placeholder={t('coinSelector.placeholder')}
-                  {...field}
                   options={coinOptions}
+                  {...field}
                 />
               )}
             />

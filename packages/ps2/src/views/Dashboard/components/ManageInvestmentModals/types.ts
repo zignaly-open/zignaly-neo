@@ -19,3 +19,9 @@ export type DepositModalProps = {
   selectedCoin?: string;
   allowedCoins?: string[];
 };
+
+export type WithdrawModalProps = {
+  selectedCoin?: string;
+  setIsConfirmation: (value: boolean) => void;
+  isConfirmation: boolean;
+};

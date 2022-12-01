@@ -20,6 +20,7 @@ export type UserData = {
   imageUrl: false | string;
   providerEnable: boolean;
   '2FAEnable': boolean;
+  ask2FA: boolean;
   userName: string;
   subscribe: boolean;
   binanceConnected: boolean;

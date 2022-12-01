@@ -31,6 +31,13 @@
     "minimumToWithdrawal": "The minimum withdrawal amount is {{value}} {{coin}}"
   },
   "confirmation": {
+    "title": "Confirm Withdrawal",
+    "description": "Please confirm the information is correct and submit your withdrawal.",
+    "receive": "You’ll Receive:",
+    "network": "Withdrawal Network",
+    "address": "Withdraw to Address",
+    "amount": "Withdrawal Amount",
+    "networkFee": "Network Fee",
     "continue": "Continue to Confirmation",
     "withdrawNow": "Withdraw now!"
   }

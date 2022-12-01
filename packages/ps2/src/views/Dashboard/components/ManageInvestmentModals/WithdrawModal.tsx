@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
 import ZModal from '../../../../components/ZModal';
-import WithdrawView from './views/Withdraw';
+import WithdrawForm from './forms/WithdrawForm';
 import { DepositModalProps } from './types';
 
 function WithdrawModal({
@@ -14,11 +14,21 @@ function WithdrawModal({
   close: () => void;
 } & DepositModalProps &
   DialogProps): React.ReactElement {
+  const [isConfirmation, setIsConfirmation] = useState(false);
   const { t } = useTranslation(['withdraw-crypto']);
 
   return (
-    <ZModal wide {...props} close={close} title={t('title')}>
-      <WithdrawView allowedCoins={allowedCoins} selectedCoin={selectedCoin} />
+    <ZModal
+      wide
+      {...props}
+      close={close}
+      title={t(isConfirmation ? 'confirmation.title' : 'title')}
+    >
+      <WithdrawForm
+        isConfirmation={isConfirmation}
+        setIsConfirmation={setIsConfirmation}
+        selectedCoin={selectedCoin}
+      />
     </ZModal>
   );
 }
