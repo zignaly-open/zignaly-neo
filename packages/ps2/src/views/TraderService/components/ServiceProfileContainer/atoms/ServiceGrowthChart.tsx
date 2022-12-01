@@ -31,26 +31,6 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
 
   return (
     <Box>
-      {/*<Box sx={{ mt: 2, mb: 1 }}>*/}
-      {/*<ButtonGroup variant={'outlined'}>*/}
-      {/*  {Object.keys(GraphTimeframe).map((v: GraphTimeframe) => (*/}
-      {/*    <ZigButton*/}
-      {/*      size={'small'}*/}
-      {/*      variant={v === chartTimeframe ? 'contained' : 'outlined'}*/}
-      {/*      key={v}*/}
-      {/*      onClick={() => setChartTimeframe(v)}*/}
-      {/*    >*/}
-      {/*      {t('periods.' + v)}*/}
-      {/*    </ZigButton>*/}
-      {/*  ))}*/}
-      {/*</ButtonGroup>*/}
-      {/*<ZigSelect*/}
-      {/*  label={''}*/}
-      {/*  value={chartType}*/}
-      {/*  onChange={(v) => setChartType(v)}*/}
-      {/*  options={chartTypeOptions}*/}
-      {/*></ZigSelect>*/}
-      {/*</Box>*/}
       <ChartWrapper>
         {isLoading || isFetching ? (
           <CenteredLoader />
