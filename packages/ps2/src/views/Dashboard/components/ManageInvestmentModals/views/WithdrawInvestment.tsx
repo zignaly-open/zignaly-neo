@@ -12,7 +12,9 @@ import { Grid, useMediaQuery } from '@mui/material';
 import { ChangeViewFn, EditInvestmentViews } from '../types';
 import theme from '../../../../../theme';
 
-const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
+const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
+  setView,
+}) => {
   const { t } = useTranslation('edit-investment');
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   return (
@@ -98,4 +100,4 @@ const WithdrawFunds: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
   );
 };
 
-export default WithdrawFunds;
+export default WithdrawInvestment;

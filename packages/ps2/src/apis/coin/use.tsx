@@ -1,4 +1,9 @@
-import { useAllCoinsQuery, useCoinsQuery, useDepositInfoQuery } from './api';
+import {
+  useAllCoinsQuery,
+  useCoinsQuery,
+  useDepositInfoQuery,
+  useWithdrawMutation,
+} from './api';
 import { useActiveExchange } from '../user/use';
 import { CoinBalances, CoinDetails, DepositInfo } from './types';
 import { QueryReturnType } from '../../util/queryReturnType';

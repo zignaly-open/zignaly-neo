@@ -16,3 +16,13 @@ export const FullWidthSelect = styled('div')`
     width: 100%;
   }
 `;
+
+export const ModalActions = styled('div')`
+  display: flex;
+  align-items: center;
+  margin-top: 56px;
+  gap: 14px;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end;
+`;
