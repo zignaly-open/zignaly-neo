@@ -47,7 +47,7 @@
 	"modal": {
 		"withdrawInvestment": {
 			"title": "Solicitud de desistimiento",
-			"afterPosition": {
+			"freeWithdrawal": {
 				"title": "Retirada tras el cierre de posiciones",
 				"description": "Recibirá sus fondos después de que el trader los libere. Tenga en cuenta que su inversión está en riesgo hasta que sea transferida a usted. Esto suele tardar unos días, pero podría tardar más. Depende de ellos.",
 				"button": {
