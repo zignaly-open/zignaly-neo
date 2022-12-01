@@ -8,66 +8,85 @@ import { Row } from 'utils/row';
 import { IconContainer } from './styles';
 import NumberFormat from 'react-number-format';
 import Button from 'components/inputs/Button';
-import CoinIcon from 'components/display/CoinIcon';
-import { ConfirmWithdrawalModalProps } from './types';
 import { AmountContainer } from 'components/modals/styles';
+import { Grid } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import { ConfirmWithdrawalModalProps } from './types';
+import { CoinIcon } from '@zignaly-open/ui';
+import { useWithdrawMutation } from 'apis/coin/api';
+import { useActiveExchange, useCurrentUser } from 'apis/user/use';
 
-const WithdrawConfirmView = ({
-  networkCaption,
-  coinName,
-  withdrawAddress,
-  onClickWithdraw = () => {},
-  onGoBack = () => {},
-  withdrawalAmount,
-  netWorkFee,
-  isLoading = false,
-  onClickClose = () => {},
-}: ConfirmWithdrawalModalProps) => {
-  const ZigAmount = ({
-    amount,
-    marginRight,
-  }: {
-    amount: number;
-    marginRight: number;
-  }) => {
-    return (
-      <Row gap={5} alignItems='center' justifyContent='center'>
-        <IconContainer marginRight={marginRight}>
-          <CoinIcon name={coinName} coin={coinName} />
-        </IconContainer>
-        <Typography variant='bigNumber' color='neutral100'>
-          <NumberFormat
-            value={amount}
-            thousandSeparator={true}
-            displayType={'text'}
-          />
-        </Typography>
-        <Typography variant='h3' color='neutral400'>
-          ZIG
-        </Typography>
-      </Row>
-    );
-  };
+const ZigAmount = ({
+  amount,
+  marginRight,
+  coin,
+}: {
+  amount: number;
+  marginRight: number;
+  coin: string;
+}) => {
   return (
-    <ModalContainer
-      width={784}
-      title='Confirm Withdrawal'
-      onClickClose={onClickClose}
-    >
-      <Typography variant='body1' color='neutral200' weight='regular'>
-        Please confirm the information is correct and submit your withdrawal.
+    <Row gap={5} alignItems='center' justifyContent='center'>
+      <IconContainer marginRight={marginRight}>
+        <CoinIcon name={coin} coin={coin} />
+      </IconContainer>
+      <Typography variant='bigNumber' color='neutral100'>
+        <NumberFormat
+          value={amount}
+          thousandSeparator={true}
+          displayType={'text'}
+        />
       </Typography>
-      <Gap gap={16} />
+      <Typography variant='h3' color='neutral400'>
+        {coin}
+      </Typography>
+    </Row>
+  );
+};
+
+const WithdrawConfirmForm = ({
+  coin,
+  address,
+  tag,
+  onWithdraw = () => {},
+  onBack = () => {},
+  network,
+  onClickClose = () => {},
+  amount,
+}: ConfirmWithdrawalModalProps) => {
+  const { t } = useTranslation('withdraw-crypto');
+  const { internalId } = useActiveExchange();
+  const [withdraw, withdrawStatus] = useWithdrawMutation();
+  const { ask2FA } = useCurrentUser();
+
+  const handleWithdraw = () => {
+    if (ask2FA) {
+      // showTwoFAModal(true);
+      // setFormData(data);
+    } else {
+      withdraw({
+        asset: coin,
+        network: network.network,
+        exchangeInternalId: internalId,
+        address,
+        tag,
+        amount,
+      });
+    }
+  };
+
+  return (
+    <Grid mt={16}>
       <Column justifyContent='center'>
         <Typography variant='body1' color='neutral200' weight='regular'>
-          Withdrawal Network
+          {t('confirmation.network')}
         </Typography>
         <Gap gap={5} />
         <Row alignItems='center'>
-          <CoinIcon name={coinName} coin={coinName} />
+          <CoinIcon name={coin} coin={coin} />
           <Gap gap={11} />
           <Typography variant='h2' color='neutral100' weight='medium'>
-            {networkCaption}
+            {network.name}
           </Typography>
         </Row>
       </Column>
@@ -75,7 +94,7 @@ const WithdrawConfirmView = ({
       <InputText
         label='Withdraw to Address'
         readOnly={true}
-        value={withdrawAddress}
+        value={address}
         name={'Eth'}
       />
       <Gap gap={16} />
@@ -86,7 +105,7 @@ const WithdrawConfirmView = ({
               Withdrawal Amount
             </Typography>
             <Gap gap={2} />
-            <ZigAmount amount={withdrawalAmount} marginRight={4} />
+            <ZigAmount amount={withdrawalAmount} marginRight={4} coin={coin} />
           </Column>
         </AmountContainer>
         <AmountContainer borderRadius={5} width='210' height={'96'}>
@@ -95,7 +114,7 @@ const WithdrawConfirmView = ({
               Network Fee
             </Typography>
             <Gap gap={2} />
-            <ZigAmount amount={netWorkFee} marginRight={4} />
+            <ZigAmount amount={netWorkFee} marginRight={4} coin={coin} />
           </Column>
         </AmountContainer>
       </Row>
@@ -110,27 +129,31 @@ const WithdrawConfirmView = ({
           <Typography color='neutral300' variant='h2' weight='medium'>
             You’ll Receive:
           </Typography>
-          <ZigAmount amount={withdrawalAmount - netWorkFee} marginRight={6} />
+          <ZigAmount
+            amount={withdrawalAmount - netWorkFee}
+            marginRight={6}
+            coin={coin}
+          />
         </Row>
       </AmountContainer>
       <Gap gap={28} />
       <Row gap={14} justifyContent='end' alignItems='center'>
         <Button
-          onClick={() => onGoBack()}
+          onClick={() => onBack()}
           variant='secondary'
           size='xlarge'
           caption='Back'
         />
         <Button
-          onClick={() => onClickWithdraw()}
+          onClick={handleWithdraw}
           variant='primary'
           size='xlarge'
           caption='Withdraw now!'
-          loading={isLoading}
+          loading={withdrawStatus.isLoading}
         />
       </Row>
-    </ModalContainer>
+    </Grid>
   );
 };
 
-export default WithdrawConfirmView;
+export default WithdrawConfirmForm;

@@ -2,7 +2,6 @@ export type WithdrawFormData = {
   coin: string;
   network: string;
   exchangeInternalId: string;
-  asset: string;
   tag: string;
   address: string;
   amount: string;
