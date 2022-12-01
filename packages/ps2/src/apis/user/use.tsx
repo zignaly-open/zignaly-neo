@@ -9,6 +9,7 @@ import {
   UserData,
 } from './types';
 import {
+  useActivateExchangeMutation,
   useLazySessionQuery,
   useLazyUserQuery,
   useLoginMutation,
@@ -24,6 +25,7 @@ import {
 } from './api';
 import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import {
+  activateExchange,
   logout,
   setAccessToken,
   setActiveExchangeInternalId,
@@ -39,6 +41,7 @@ import { ShowFnOutput, useModal } from 'mui-modal-provider';
 import AuthVerifyModal from '../../views/Auth/components/AuthVerifyModal';
 import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../service/api';
+import { QueryReturnTypeBasic } from 'util/queryReturnType';
 
 const useStartSession = () => {
   const { showModal } = useModal();
@@ -234,4 +237,22 @@ export function useSelectExchange(): (exchangeInternalId: string) => void {
   const dispatch = useDispatch();
   return (exchangeInternalId) =>
     dispatch(setActiveExchangeInternalId(exchangeInternalId));
+}
+
+export function useActivateExchange(): QueryReturnTypeBasic<void> {
+  const exchange = useActiveExchange();
+  const [activate, result] = useActivateExchangeMutation();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (exchange && !exchange.activated) {
+      activate({
+        exchangeInternalId: exchange.internalId,
+      }).then(() => {
+        dispatch(activateExchange(exchange.internalId));
+      });
+    }
+  }, [exchange?.internalId]);
+
+  return result;
 }
