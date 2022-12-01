@@ -144,26 +144,30 @@ const MyBalancesTable = (): JSX.Element => {
           valueUSD: {
             balanceTotalUSDT: balance.balanceTotalUSDT,
           },
-          action: !!allowedDeposits[exchangeType]?.includes(coin) && (
+          action: (
             <>
-              <IconButton
-                icon={<Add color={'neutral300'} />}
-                onClick={() =>
-                  showModal(DepositModal, {
-                    selectedCoin: coin,
-                  })
-                }
-                variant='secondary'
-              />
-              <IconButton
-                icon={<Remove color={'neutral300'} />}
-                onClick={() =>
-                  showModal(WithdrawModal, {
-                    selectedCoin: coin,
-                  })
-                }
-                variant='secondary'
-              />
+              {!!allowedDeposits[exchangeType]?.includes(coin) && (
+                <IconButton
+                  icon={<Add color={'neutral300'} />}
+                  onClick={() =>
+                    showModal(DepositModal, {
+                      selectedCoin: coin,
+                    })
+                  }
+                  variant='secondary'
+                />
+              )}
+              {parseFloat(balance.balanceTotal) > 0 && (
+                <IconButton
+                  icon={<Remove color={'neutral300'} />}
+                  onClick={() =>
+                    showModal(WithdrawModal, {
+                      selectedCoin: coin,
+                    })
+                  }
+                  variant='secondary'
+                />
+              )}
             </>
           ),
         })),

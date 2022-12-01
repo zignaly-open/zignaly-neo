@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Button, Typography } from '@zignaly-open/ui';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 
-function WithdrawSuccess({ close }: { close: () => void }) {
+function WithdrawInvestmentSuccess({ close }: { close: () => void }) {
   const { t } = useTranslation('withdraw-your-investment');
   return (
     <>
@@ -17,4 +17,4 @@ function WithdrawSuccess({ close }: { close: () => void }) {
   );
 }
 
-export default WithdrawSuccess;
+export default WithdrawInvestmentSuccess;

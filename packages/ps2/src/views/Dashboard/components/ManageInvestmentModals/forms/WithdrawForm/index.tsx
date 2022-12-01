@@ -1,7 +1,7 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { CoinIconWrapper, Form, FullWidthSelect } from './styles';
+import { CoinIconWrapper, Form, FullWidthSelect, ModalActions } from './styles';
 import {
   dark,
   InputText,
@@ -13,32 +13,60 @@ import {
   CoinIcon,
   Loader,
   InputAmountAdvanced,
+  Button,
+  ZigInput,
 } from '@zignaly-open/ui';
 import copy from 'copy-to-clipboard';
-import { DepositFormData } from './types';
+import { WithdrawFormData } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { Box, Grid } from '@mui/material';
 import NumberFormat from 'react-number-format';
 import {
   useCoinBalances,
-  useDepositInfo,
   useExchangeCoinsList,
 } from '../../../../../../apis/coin/use';
 import { DepositModalProps } from '../../types';
 import { allowedDeposits } from '../../../../../../util/coins';
 import { useActiveExchange } from '../../../../../../apis/user/use';
+import { useWithdrawMutation } from 'apis/coin/api';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { WithdrawValidation } from './validations';
+import { CoinNetwork } from 'apis/coin/types';
 
 function WithdrawForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   const { t } = useTranslation('withdraw-crypto');
   const { data: balances } = useCoinBalances({ convert: true });
   const { data: coins } = useExchangeCoinsList();
-  const { exchangeType } = useActiveExchange();
+  console.log(coins);
+  const { internalId, exchangeType } = useActiveExchange();
+  const [withdraw, withdrawStatus] = useWithdrawMutation();
   const toast = useToast();
+  const [isConfirmation, setIsConfirmation] = useState(false);
 
-  const { handleSubmit, control, watch, setValue } = useForm<DepositFormData>({
+  const {
+    handleSubmit,
+    control,
+    watch,
+    setValue,
+    formState: { isValid, errors },
+    trigger,
+  } = useForm<WithdrawFormData>({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {},
+    // resolver: yupResolver(WithdrawValidation()),
+    resolver: (data, context, options) => {
+      // const validatorSchema = formValidatorSchemaByPaymentModalityType(
+      //   data.paymentType.value,
+      // );
+      // console.log(data, context, options, coinObject);
+      const { addressRegex, memoRegex } = networkObject as CoinNetwork;
+      return yupResolver(WithdrawValidation(addressRegex, memoRegex))(
+        data,
+        context,
+        options,
+      );
+    },
   });
 
   const coin = watch('coin');
@@ -46,29 +74,28 @@ function WithdrawForm({ allowedCoins, selectedCoin }: DepositModalProps) {
 
   const coinOptions = useMemo(
     () =>
-      allowedDeposits[exchangeType]?.map((ssc) => {
-        const balance = balances[ssc];
-        const name = coins[ssc]?.name || '';
-        return {
-          value: ssc,
-          name,
-          label: (
-            <CoinIconWrapper>
-              <CoinIcon size={'small'} coin={ssc} name={name} />{' '}
-              <Typography weight={'demibold'}>{ssc} </Typography> &nbsp;
-              <Typography weight={'regular'}>{name}</Typography>
-            </CoinIconWrapper>
-          ),
-          inOrders: balance?.balanceLocked || 0,
-          balance: balance?.balanceTotal || 0,
-          available: balance?.balanceFree || 0,
-          networks: coins[ssc].networks?.map((n) => ({
-            label: n.name,
-            value: n.network,
-            ...n,
-          })),
-        };
-      }),
+      Object.entries(balances)
+        .filter(([c]) => coins[c])
+        .map(([c, balance]) => {
+          const name = coins[c]?.name || '';
+          return {
+            value: c,
+            name,
+            label: (
+              <CoinIconWrapper>
+                <CoinIcon size={'small'} coin={c} name={name} />{' '}
+                <Typography weight={'demibold'}>{c} </Typography> &nbsp;
+                <Typography weight={'regular'}>{name}</Typography>
+              </CoinIconWrapper>
+            ),
+            available: balance?.maxWithdrawAmount || 0,
+            networks: coins[c].networks?.map((n) => ({
+              label: n.name,
+              value: n.network,
+              ...n,
+            })),
+          };
+        }),
     [coins, allowedCoins, exchangeType],
   );
 
@@ -94,8 +121,49 @@ function WithdrawForm({ allowedCoins, selectedCoin }: DepositModalProps) {
     }
   }, []);
 
+  const canSubmit = isValid && Object.keys(errors).length === 0;
+
+  const onSubmitFirstStep = () => {
+    setIsConfirmation(true);
+    // setValue('transferConfirm', '');
+    // setValue('step', 2);
+  };
+
+  const onGoBackToFirstStep = () => {
+    setIsConfirmation(false);
+    // setValue('step', 1);
+    // trigger('transferConfirm');
+  };
+
+  // const isConfirmation = watch('step') === 2;
+
+  const onSubmitSecondStep = async (data: WithdrawFormData) => {
+    return console.log(data);
+    await withdraw({
+      exchangeInternalId: internalId,
+      ...data,
+    });
+    // toast.success(
+    //   t('edit-investment:addMoreInvestmentSuccess', {
+    //     amount: amountTransfer?.value,
+    //     currency: amountTransfer?.token?.id,
+    //     serviceName: service.serviceName,
+    //   }),
+    // );
+    // onInvested();
+  };
+
+  // if (isConfirmation) {
+  //   return <WithdrawConfirmView />;
+  // }
+
   return (
-    <Form onSubmit={handleSubmit(() => {})}>
+    <Form
+      onSubmit={handleSubmit(
+        isConfirmation ? onSubmitSecondStep : onSubmitFirstStep,
+      )}
+      autoComplete='off'
+    >
       <Box mt={1} mb={1}>
         <Typography>{t('description')}</Typography>
       </Box>
@@ -136,8 +204,8 @@ function WithdrawForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                   menuShouldScrollIntoView={false}
                   label={t('networkSelector.label')}
                   placeholder={t('networkSelector.placeholder')}
-                  {...field}
                   options={coinObject?.networks}
+                  {...field}
                 />
               )}
             />
@@ -147,9 +215,19 @@ function WithdrawForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         {!!network && networkObject?.withdrawEnable && (
           <>
             <Grid item xs={12} pt={3}>
-              <InputText
-                placeholder={t('withdrawAddress.placeholder')}
-                label={t('withdrawAddress.label')}
+              <Controller
+                name='address'
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <ZigInput
+                    fullWidth
+                    label={t('withdrawAddress.label')}
+                    placeholder={t('withdrawAddress.placeholder')}
+                    error={t(errors.address?.message)}
+                    {...field}
+                  />
+                )}
               />
             </Grid>
 
@@ -166,9 +244,19 @@ function WithdrawForm({ allowedCoins, selectedCoin }: DepositModalProps) {
 
             {!!networkObject?.memoRegex && (
               <Grid item xs={12} pt={3}>
-                <InputText
-                  label={t('withdrawMemo.label')}
-                  placeholder={t('withdrawMemo.placeholder')}
+                <Controller
+                  name='tag'
+                  control={control}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <ZigInput
+                      fullWidth
+                      label={t('withdrawMemo.label')}
+                      placeholder={t('withdrawMemo.placeholder')}
+                      error={t(errors.tag?.message)}
+                      {...field}
+                    />
+                  )}
                 />
               </Grid>
             )}
@@ -179,119 +267,52 @@ function WithdrawForm({ allowedCoins, selectedCoin }: DepositModalProps) {
           <ErrorMessage text={t('no-network')} />
         )}
 
-        <Grid item xs={12} mt={3}>
-          <InputAmountAdvanced
-            name='amount'
-            control={control}
-            label={t('amountToWithdraw.label')}
-            labelBalance={t('amountToWithdraw.labelBalance')}
-            showUnit={true}
-            placeholder='0.0'
-            tokens={[
-              {
-                id: coin,
-                balance: 1,
-              },
-            ]}
-            // error={isDirty && t(errors?.amountTransfer?.value?.message)}
+        {/* Wait for coinObject since InputAmountAdvanced only renders available balance at init */}
+        {coinObject && (
+          <Grid item xs={12} mt={3}>
+            <InputAmountAdvanced
+              name='amount'
+              control={control}
+              label={t('amountToWithdraw.label')}
+              labelBalance={t('amountToWithdraw.labelBalance')}
+              showUnit={true}
+              placeholder='0.0'
+              tokens={[
+                {
+                  id: coin,
+                  balance: coinObject.available,
+                },
+              ]}
+              // error={isDirty && t(errors?.amountTransfer?.value?.message)}
+            />
+          </Grid>
+        )}
+
+        <ModalActions>
+          <Button
+            size={'large'}
+            type={'button'}
+            // disabled={withdrawStatus.isLoading}
+            variant={'secondary'}
+            caption={t(isConfirmation ? 'common:back' : 'common:close')}
+            onClick={isConfirmation ? onGoBackToFirstStep : close}
           />
-        </Grid>
+
+          <Button
+            size={'large'}
+            type={'submit'}
+            // disabled={withdrawStatus.isLoading}
+            caption={
+              isConfirmation
+                ? t('confirmation.withdrawNow')
+                : t('confirmation.continue')
+            }
+            disabled={!canSubmit}
+          />
+        </ModalActions>
       </Grid>
     </Form>
   );
 }
 
 export default WithdrawForm;
-
-// import Typography from 'components/display/Typography';
-// import Selector from 'components/inputs/Selector';
-// import { SelectSizes } from 'components/inputs/Selector/types';
-// import React, { useState } from 'react';
-// import { Gap } from 'utils/gap';
-// import ModalContainer from '../../ModalContainer';
-// import {
-//   CoinOption,
-//   MyAccountWithdrawModalProps,
-//   NetworkOption,
-// } from './types';
-// import FormAndButton from './components/FormAndButton';
-
-// const MyAccountWithdrawModal = ({
-//   coins,
-//   addressOnChange = () => {},
-//   notSureOnClick = () => {},
-//   amountOnChange = () => {},
-//   onClickClose = () => {},
-//   onSubmit = () => {},
-//   isLoading = false,
-// }: MyAccountWithdrawModalProps) => {
-//   const [coin, setCoin] = useState<CoinOption>();
-//   const [network, setNetwork] = useState<NetworkOption>();
-
-//   const CoinSelector = () => {
-//     return (
-//       <>
-//         <Gap gap={16} />
-//         <Selector
-//           label='Coin'
-//           placeholder={coin?.caption ?? 'Select a Coin'}
-//           onChange={(e: CoinOption) => {
-//             setCoin(e);
-//             setNetwork(undefined);
-//           }}
-//           size={SelectSizes.LARGE}
-//           value={coin}
-//           options={coins}
-//           maxHeight={60}
-//           transparent={true}
-//         />
-//       </>
-//     );
-//   };
-
-//   const NetworkSelector = () => {
-//     return (
-//       <>
-//         <Gap gap={12} />
-//         <Selector
-//           label='Network'
-//           placeholder={network?.caption ?? 'Select a Network'}
-//           onChange={(e: NetworkOption) => {
-//             setNetwork(e);
-//           }}
-//           size={SelectSizes.LARGE}
-//           value={network !== undefined ? network : undefined}
-//           options={coin?.networks ?? undefined}
-//           maxHeight={60}
-//           transparent={true}
-//         />
-//       </>
-//     );
-//   };
-
-//   return (
-//     <ModalContainer
-//       width={784}
-//       title='Withdraw Crypto'
-//       onClickClose={onClickClose}
-//     >
-//       <Typography variant='body1' color='neutral200' weight='regular'>
-//         Withdraw crypto to an external account. To move funds between Zignaly
-//         accounts, use a transfer instead.
-//       </Typography>
-//       <CoinSelector />
-//       <NetworkSelector />
-//       <FormAndButton
-//         coin={coin}
-//         network={network}
-//         inputAmountOnChange={amountOnChange}
-//         notSureOnClick={notSureOnClick}
-//         inputAddressOnChange={addressOnChange}
-//         onSubmit={onSubmit}
-//         isLoading={isLoading}
-//       />
-//     </ModalContainer>
-//   );
-// };
-
-// export default MyAccountWithdrawModal;

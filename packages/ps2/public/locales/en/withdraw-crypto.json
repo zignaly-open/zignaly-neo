@@ -12,11 +12,13 @@
   "withdrawAddress": {
     "label": "Withdraw to Address:",
     "placeholder": "Paste wallet address here",
-    "warning": "Only send {{network}} {{coin}} tokens to this address"
+    "warning": "Only send {{network}} {{coin}} tokens to this address",
+    "invalid": "Invalid address"
   },
   "withdrawMemo": {
     "label": "MEMO/Tag:",
-    "placeholder": "Paste wallet MEMO/Tag here"
+    "placeholder": "Paste wallet MEMO/Tag here",
+    "invalid": "MEMO/Tag is invalid, please review your target wallet network details"
   },
   "amountToWithdraw": {
     "label": "Amount to Withdraw:",
@@ -27,5 +29,9 @@
     "indicateAnAddress": "You must indicate an valid address.",
     "indicateAnAmount": "You must indicate an amount.",
     "minimumToWithdrawal": "The minimum withdrawal amount is {{value}} {{coin}}"
+  },
+  "confirmation": {
+    "continue": "Continue to Confirmation",
+    "withdrawNow": "Withdraw now!"
   }
 }
