@@ -1,9 +1,9 @@
 import React from 'react';
-import WithdrawForm from '../forms/WithdrawForm';
+import WithdrawInvestmentForm from '../forms/WithdrawInvestmentForm';
 import { ChangeViewFn } from '../types';
 
 const WithdrawPerform: React.FC<{ setView: ChangeViewFn }> = ({ setView }) => {
-  return <WithdrawForm setView={setView} />;
+  return <WithdrawInvestmentForm setView={setView} />;
 };
 
 export default WithdrawPerform;
