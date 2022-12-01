@@ -21,7 +21,7 @@ jobs:
                 - 'packages/zignaly-ui/**/*'
 
   build:
-    name: PS2 Staging deploy
+    name: PS2 Release deploy
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).ui_repos.should_skip
     runs-on: ubuntu-latest
@@ -38,11 +38,12 @@ jobs:
           envkey_REACT_APP_LIVE_SESSION_TRACK_ID: ${{ secrets.PS2_LIVE_SESSION_TRACK_ID }}
           envkey_REACT_APP_SEGMENT_KEY: ${{ secrets.PS2_SEGMENT_KEY }}
           envkey_REACT_APP_ENABLE_TRACKING: ${{ secrets.REACT_APP_ENABLE_TRACKING }}
+          envkey_REACT_APP_SEGMENT_SCRIPT_SRC: ${{ secrets.PS2_SEGMENT_SCRIPT_SRC }}
           # well yeah we could store all this as action secrets in the repo
           # but would that make any sense since these values are not secret
           # and anyone with a half-functioning brain can reverse-engineer those from the source code
           envkey_REACT_APP_GTM_ID: GTM-5ZQ4JLK
-          envkey_REACT_APP_BASE_API: https://test.zignaly.com/new_api
+          envkey_REACT_APP_BASE_API: https://zignaly.com/new_api
           envkey_REACT_APP_SEGMENT_NAME: zignaly
           envkey_REACT_APP_GOOGLE_CAPTCHA_TOKEN: 6LeBZmwbAAAAAA7kbtk_4-7Yq124fQ0T-J9HrZfS
           envkey_REACT_APP_SENTRY_DNS: https://b87b3bf895ff4c0cb0e1bee22f3a0648@o967264.ingest.sentry.io/6492584

@@ -1,13 +1,16 @@
 import React from 'react';
 import { BlockTypography, Icon, PriceBoxOverride } from './styles';
 import { AssetsInPoolProps } from './types';
-import { UsdPriceLabel, WhaleIcon } from '@zignaly-open/ui';
+import { WhaleIcon, ZigPriceLabel } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { PriceLabel } from '@zignaly-open/ui';
 
 const AssetsInPool = ({
   assetsValue,
   numberOfInvestors,
+  convertedValue,
+  convertedValueCoin,
 }: AssetsInPoolProps) => {
   const { t } = useTranslation('marketplace');
   return (
@@ -19,9 +22,12 @@ const AssetsInPool = ({
           flexDirection: 'row',
         }}
       >
-        <UsdPriceLabel
+        <ZigPriceLabel
+          usd
           value={assetsValue}
-          style={{ fontSize: '18px', lineHeight: '28px' }}
+          variant={'h2'}
+          component={'div'}
+          color={'neutral200'}
         />
         {+assetsValue >= 200000 && (
           <Icon>
@@ -29,11 +35,20 @@ const AssetsInPool = ({
           </Icon>
         )}
       </PriceBoxOverride>
-      <Box justifyContent='center' alignItems='start'>
-        <BlockTypography variant='h5' color='neutral400'>
-          {t('table.x-investors', { count: numberOfInvestors })}
-        </BlockTypography>
-      </Box>
+
+      {typeof numberOfInvestors === 'number' && (
+        <Box justifyContent='center' alignItems='start'>
+          <BlockTypography variant='h5' color='neutral400'>
+            {t('table.x-investors', { count: numberOfInvestors })}
+          </BlockTypography>
+        </Box>
+      )}
+
+      {typeof convertedValue === 'number' && (
+        <Box justifyContent='center' alignItems='start'>
+          <PriceLabel value={convertedValue} coin={convertedValueCoin} />
+        </Box>
+      )}
     </Box>
   );
 };

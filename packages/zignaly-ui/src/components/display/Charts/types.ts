@@ -1,3 +1,5 @@
+import { dark } from "../../../theme";
+
 export interface ChartsProps {
   readonly variant: keyof typeof ChartVariations;
   readonly yAxis?: "left" | "right";
@@ -19,7 +21,9 @@ export const largeStyle = {
   axisLabel: {
     fontSize: 20,
     padding: 30,
-    fill: "white",
+    // sorry not sorry
+    // this component is going to the dumpster anyways
+    fill: dark.neutral200,
     fontFamily: "Avenir Next",
     letterSpacing: 0.55,
     lineHeight: 16,
@@ -27,7 +31,7 @@ export const largeStyle = {
   tickLabels: {
     fontSize: 11,
     padding: 5,
-    fill: "white",
+    fill: dark.neutral200,
     fontFamily: "Avenir Next",
     letterSpacing: 0.55,
     lineHeight: 16,

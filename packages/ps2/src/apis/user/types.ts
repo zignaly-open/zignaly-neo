@@ -81,6 +81,7 @@ export type SignupPayload = {
   email: string;
   password: string;
   newPageAB?: boolean;
+  ref?: string;
 };
 
 export type LoginResponse = {

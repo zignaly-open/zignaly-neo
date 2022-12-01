@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN } from '../../../../routes';
 import {
   Button,
+  ErrorMessage,
   IconButton,
   TextButton,
   Typography,
@@ -17,6 +18,8 @@ import {
 import { Box, InputAdornment, Link } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoginPayload } from '../../../../apis/user/types';
+import Cookies from 'js-cookie';
+import Mailcheck from 'react-mailcheck';
 
 const SignupForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -36,29 +39,62 @@ const SignupForm: React.FC = () => {
   const [{ loading: signingUp }, signup] = useSignup();
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+
   const { state: locationState } = useLocation();
+
+  useEffect(() => {
+    const ref = new URLSearchParams(window.location.search).get('invite');
+    if (ref) {
+      Cookies.set('ref', ref);
+    }
+  }, []);
+
+  const onSubmit = (payload: LoginPayload) => {
+    signup({
+      ...payload,
+      ref: Cookies.get('ref'),
+    });
+  };
 
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
       <TitleHead>
         <Typography variant={'h2'}>{t('signup-title')}</Typography>
       </TitleHead>
-      <Form onSubmit={handleSubmit(signup)}>
-        <Controller
-          name='email'
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <ZigInput
-              id={'signup'}
-              label={t('login-form.inputText.email.label') + ':'}
-              placeholder={t('login-form.inputText.email.label')}
-              disabled={signingUp}
-              error={t(errors.email?.message)}
-              {...field}
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Mailcheck email={email}>
+          {(suggested: { full: string }) => (
+            <Controller
+              name='email'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <ZigInput
+                  id={'signup'}
+                  label={t('login-form.inputText.email.label') + ':'}
+                  placeholder={t('login-form.inputText.email.label')}
+                  disabled={signingUp}
+                  error={t(errors.email?.message)}
+                  helperText={
+                    suggested ? (
+                      <ErrorMessage
+                        text={t('error:error.did-you-mean', {
+                          suggested: suggested.full,
+                        })}
+                      />
+                    ) : null
+                  }
+                  {...field}
+                  onBlur={(e) => {
+                    field.onBlur();
+                    setEmail(e.target.value);
+                  }}
+                />
+              )}
             />
           )}
-        />
+        </Mailcheck>
 
         <Controller
           name='password'
