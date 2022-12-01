@@ -16,6 +16,7 @@ if (
     plugins: [
       segmentPlugin({
         writeKey: process.env.REACT_APP_SEGMENT_KEY,
+        customScriptSrc: process.env.REACT_APP_SEGMENT_SCRIPT_SRC,
       }),
     ],
   });
@@ -31,8 +32,18 @@ export const trackNewSession = (
 ) => {
   try {
     pushGtmEvent({ event: eventType, ...userData });
-    const { email, userId } = userData;
-    analytics?.identify(userId, { email });
+    const { email, userId, firstName, intercomHash, createdAt } = userData;
+    analytics?.identify(
+      userId,
+      { email, name: firstName, created_at: +createdAt },
+      {
+        integrations: {
+          Intercom: {
+            user_hash: intercomHash,
+          },
+        },
+      },
+    );
     Sentry.setUser({ email, id: userId });
     if (eventType === SessionsTypes.Signup) {
       analytics?.track('newUser', { userId });
