@@ -10,7 +10,6 @@ import {
 } from "victory";
 import { Layout, WideWrapper } from "./styles";
 import { AxisFormat, ChartsProps, largeStyle } from "./types";
-import { dark } from "../../../theme";
 
 export const AreaChart = ({ data, variant, midLine }: ChartsProps) => {
   const processedData = useMemo<AxisFormat[]>(() => {
