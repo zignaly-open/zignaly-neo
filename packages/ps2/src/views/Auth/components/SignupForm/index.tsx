@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
@@ -18,6 +18,7 @@ import {
 import { Box, InputAdornment, Link } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoginPayload } from '../../../../apis/user/types';
+import Cookies from 'js-cookie';
 import Mailcheck from 'react-mailcheck';
 
 const SignupForm: React.FC = () => {
@@ -42,12 +43,26 @@ const SignupForm: React.FC = () => {
 
   const { state: locationState } = useLocation();
 
+  useEffect(() => {
+    const ref = new URLSearchParams(window.location.search).get('invite');
+    if (ref) {
+      Cookies.set('ref', ref);
+    }
+  }, []);
+
+  const onSubmit = (payload: LoginPayload) => {
+    signup({
+      ...payload,
+      ref: Cookies.get('ref'),
+    });
+  };
+
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
       <TitleHead>
         <Typography variant={'h2'}>{t('signup-title')}</Typography>
       </TitleHead>
-      <Form onSubmit={handleSubmit(signup)}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         <Mailcheck email={email}>
           {(suggested: { full: string }) => (
             <Controller

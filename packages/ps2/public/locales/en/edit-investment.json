@@ -49,8 +49,8 @@
   "modal": {
     "withdrawInvestment": {
       "title": "Withdrawal Request",
-      "afterPosition": {
-        "title": "Withdraw After Positions Close",
+      "freeWithdrawal": {
+        "title": "Free Withdrawal",
         "description": "You will receive your funds after the trader free them. Take into account that your investment is at risk until is transferred to you. This usually takes a few days, but could take more. It is up to them.",
         "button": {
           "subtitle": "Withdraw on free funds",
@@ -59,7 +59,7 @@
       },
       "instant": {
         "title": "Instant Withdrawal",
-        "description": "Instant withdrawals incur a 5% fee because the trader has open positions and could be liquidated. To avoid this, Zignaly must cover your funds and inherit your risk, hence the fee.",
+        "description": "Instant withdrawals incur a 5% fee because Zignaly must cover your funds and inherit your risk.",
         "button": {
           "subtitle": "Withdraw instantly",
           "title": "5% Fee"

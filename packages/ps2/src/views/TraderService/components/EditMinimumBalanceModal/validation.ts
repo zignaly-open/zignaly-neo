@@ -1,6 +1,6 @@
 import * as yup from 'yup';
-import { inputAmountTokenValidation } from '../../../../util/validation';
+import { inputAmountZeroableValidation } from '../../../../util/validation';
 
 export const MinBalanceModalValidation = yup.object({
-  amountValue: inputAmountTokenValidation,
+  amountValue: inputAmountZeroableValidation,
 });
