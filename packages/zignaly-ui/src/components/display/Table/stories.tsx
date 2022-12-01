@@ -10,22 +10,12 @@ import { CheckIconStyled, CloseIconStyled } from "./styles";
 import { dark } from "../../../theme";
 import Typography from "../Typography";
 import { MockMyCoinsData } from "./mockData";
-import AssetsInPool from "./components/AssetsInPool";
 import { AreaChart } from "../Charts";
 import { UserTableData } from "./types";
 import { ChartsProps } from "../Charts/types";
 
 const createMarketPlaceTableHeader = () => {
   return [
-    {
-      Header: "Assets In Pool",
-      Footer: (
-        <div>
-          <div>{"# Of Investors"}</div>
-        </div>
-      ),
-      accessor: "assetsInPool",
-    },
     {
       Header: "1 year",
       accessor: "oneYear",
@@ -42,10 +32,6 @@ const createMarketPlaceTableHeader = () => {
 };
 
 interface MarketPlaceTableProps {
-  assetsInPool: {
-    assetsValue: number;
-    numberOfInvestors: number;
-  };
   chart: ChartsProps;
   oneYear: {
     value: number;
@@ -54,18 +40,8 @@ interface MarketPlaceTableProps {
   };
 }
 
-const createMarketPlaceTableBodyObject = ({
-  assetsInPool,
-  chart,
-  oneYear,
-}: MarketPlaceTableProps) => {
+const createMarketPlaceTableBodyObject = ({ chart, oneYear }: MarketPlaceTableProps) => {
   return {
-    assetsInPool: (
-      <AssetsInPool
-        assetsValue={assetsInPool.assetsValue}
-        numberOfInvestors={assetsInPool.numberOfInvestors}
-      />
-    ),
     chart: <AreaChart variant={chart.variant} data={chart.data} />,
     oneYear: <PercentageIndicator value={oneYear.value} />,
   };
@@ -422,7 +398,6 @@ MarketPlaceTabel.args = {
   columns: createMarketPlaceTableHeader(),
   data: [
     createMarketPlaceTableBodyObject({
-      assetsInPool: { assetsValue: 1000000, numberOfInvestors: 200 },
       chart: {
         data: [
           { x: "Jul 1", y: 10 },
@@ -439,7 +414,6 @@ MarketPlaceTabel.args = {
       oneYear: { value: 100, subtitle: "Subtitle", showTrophy: true },
     }),
     createMarketPlaceTableBodyObject({
-      assetsInPool: { assetsValue: 0, numberOfInvestors: 200 },
       chart: {
         data: [
           { x: "Jul 1", y: 10 },

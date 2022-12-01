@@ -20,7 +20,7 @@ import { Inline } from '../../../Dashboard/components/MyDashboard/styles';
 import { ServiceName } from '../../../Dashboard/components/ServiceName';
 import { MarketplaceTableDataType } from './types';
 import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace/util';
-import AssetsInPool from '../AssetsInPool';
+import AssetsInPool from '../../../../components/AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 
 const initialStateTable = {

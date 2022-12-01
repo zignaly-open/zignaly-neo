@@ -8,8 +8,11 @@ import { BottomElementWrap } from "./styles";
 import Typography from "components/display/Typography";
 import { useTheme } from "styled-components";
 import Theme from "../../../../../theme/theme";
-import { getPrecisionForCoin } from "./util";
+import { getPrecisionForCoin } from "../../../ZigPriceLabel/util";
 
+/**
+ * @deprecated
+ */
 const PriceLabel = ({
   value = 0,
   coin = "USDT",
