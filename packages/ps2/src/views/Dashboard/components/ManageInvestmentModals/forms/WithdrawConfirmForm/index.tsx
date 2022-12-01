@@ -1,10 +1,4 @@
-import Typography from 'components/display/Typography';
-import InputText from 'components/inputs/InputText';
-import ModalContainer from 'components/modals/ModalContainer';
 import React from 'react';
-import { Column } from 'utils/column';
-import { Gap } from 'utils/gap';
-import { Row } from 'utils/row';
 import { IconContainer } from './styles';
 import NumberFormat from 'react-number-format';
 import Button from 'components/inputs/Button';
@@ -12,7 +6,7 @@ import { AmountContainer } from 'components/modals/styles';
 import { Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { ConfirmWithdrawalModalProps } from './types';
-import { CoinIcon } from '@zignaly-open/ui';
+import { CoinIcon, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { useWithdrawMutation } from 'apis/coin/api';
 import { useActiveExchange, useCurrentUser } from 'apis/user/use';
 
@@ -30,16 +24,16 @@ const ZigAmount = ({
       <IconContainer marginRight={marginRight}>
         <CoinIcon name={coin} coin={coin} />
       </IconContainer>
-      <Typography variant='bigNumber' color='neutral100'>
+      <ZigTypography variant='bigNumber' color='neutral100'>
         <NumberFormat
           value={amount}
           thousandSeparator={true}
           displayType={'text'}
         />
-      </Typography>
-      <Typography variant='h3' color='neutral400'>
+      </ZigTypography>
+      <ZigTypography variant='h3' color='neutral400'>
         {coin}
-      </Typography>
+      </ZigTypography>
     </Row>
   );
 };
@@ -91,11 +85,10 @@ const WithdrawConfirmForm = ({
         </Row>
       </Column>
       <Gap gap={12} />
-      <InputText
-        label='Withdraw to Address'
+      <ZigInput
+        label={t('confirmation.address')}
         readOnly={true}
         value={address}
-        name={'Eth'}
       />
       <Gap gap={16} />
       <Row justifyContent='center' gap={16} alignItems='center'>
