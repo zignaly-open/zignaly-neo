@@ -182,7 +182,11 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
           </FullWidthSelect>
         </Grid>
 
-        {!!network && networkObject?.withdrawEnable && (
+        {!!network && !networkObject?.withdrawEnable ? (
+          <Box mt={7}>
+            <ErrorMessage text={networkObject?.withdrawDesc} />
+          </Box>
+        ) : (
           <>
             <Grid item xs={12} pt={3}>
               <Controller
@@ -230,50 +234,46 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
                 />
               </Grid>
             )}
+
+            {/* Wait for coinObject since InputAmountAdvanced only renders available balance at first render */}
+            {coinObject && (
+              <Grid item xs={12} mt={3}>
+                <InputAmountAdvanced
+                  name='amount'
+                  control={control}
+                  label={t('amountToWithdraw.label')}
+                  labelBalance={t('amountToWithdraw.labelBalance')}
+                  showUnit={true}
+                  placeholder='0.0'
+                  tokens={[
+                    {
+                      id: coin,
+                      balance: coinObject.available,
+                    },
+                  ]}
+                  // error={isDirty && t(errors?.amountTransfer?.value?.message)}
+                />
+              </Grid>
+            )}
+
+            <ModalActions>
+              <Button
+                size={'large'}
+                type={'button'}
+                variant={'secondary'}
+                caption={t('common:close')}
+                onClick={close}
+              />
+
+              <Button
+                size={'large'}
+                type={'submit'}
+                caption={t('confirmation.continue')}
+                disabled={!canSubmit}
+              />
+            </ModalActions>
           </>
         )}
-
-        {!!network && !networkObject?.withdrawEnable && (
-          <ErrorMessage text={t('no-network')} />
-        )}
-
-        {/* Wait for coinObject since InputAmountAdvanced only renders available balance at init */}
-        {coinObject && (
-          <Grid item xs={12} mt={3}>
-            <InputAmountAdvanced
-              name='amount'
-              control={control}
-              label={t('amountToWithdraw.label')}
-              labelBalance={t('amountToWithdraw.labelBalance')}
-              showUnit={true}
-              placeholder='0.0'
-              tokens={[
-                {
-                  id: coin,
-                  balance: coinObject.available,
-                },
-              ]}
-              // error={isDirty && t(errors?.amountTransfer?.value?.message)}
-            />
-          </Grid>
-        )}
-
-        <ModalActions>
-          <Button
-            size={'large'}
-            type={'button'}
-            variant={'secondary'}
-            caption={t('common:close')}
-            onClick={close}
-          />
-
-          <Button
-            size={'large'}
-            type={'submit'}
-            caption={t('confirmation.continue')}
-            disabled={!canSubmit}
-          />
-        </ModalActions>
       </Grid>
     </Form>
   );

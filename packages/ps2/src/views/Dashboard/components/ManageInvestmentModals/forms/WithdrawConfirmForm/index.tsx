@@ -18,7 +18,7 @@ const ZigPriceLabelIcon = ({
   amount,
   coin,
 }: {
-  amount: string;
+  amount: string | number;
   coin: string;
 }) => {
   return (
@@ -159,8 +159,7 @@ const WithdrawConfirmForm = ({
             {t('confirmation.receive')}
           </ZigTypography>
           <ZigPriceLabelIcon
-            amount={amount - network.withdrawFee}
-            marginRight={6}
+            amount={parseFloat(amount) - parseFloat(network.withdrawFee)}
             coin={coin}
           />
         </Grid>

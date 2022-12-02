@@ -24,7 +24,6 @@
     "label": "Amount to Withdraw:",
     "labelBalance": "Available:"
   },
-  "no-network": "Withdrawal is not available on this network",
   "validation": {
     "indicateAnAddress": "You must indicate an valid address.",
     "indicateAnAmount": "You must indicate an amount.",
