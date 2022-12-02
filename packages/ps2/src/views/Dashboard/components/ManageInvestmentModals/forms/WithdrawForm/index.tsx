@@ -37,18 +37,14 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
     control,
     watch,
     setValue,
-    formState: { isValid, errors },
+    trigger,
+    formState: { isValid, errors, dirtyFields },
   } = useForm<WithdrawFormData>({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {},
     resolver: (data, context, options) =>
-      yupResolver(
-        WithdrawValidation(
-          networkObject?.addressRegex,
-          networkObject?.memoRegex,
-        ),
-      )(data, context, options),
+      yupResolver(WithdrawValidation(networkObject))(data, context, options),
   });
 
   const coin = watch('coin') as string;
@@ -103,6 +99,12 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
       match && setValue('coin', match?.value);
     }
   }, []);
+
+  useEffect(() => {
+    if (dirtyFields.amount) {
+      trigger('amount');
+    }
+  }, [network]);
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
@@ -252,7 +254,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
                       balance: coinObject.available,
                     },
                   ]}
-                  // error={isDirty && t(errors?.amountTransfer?.value?.message)}
+                  error={t(errors?.amount?.value?.message)}
                 />
               </Grid>
             )}
