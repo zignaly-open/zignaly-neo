@@ -40,5 +40,9 @@
     "networkFee": "Network Fee",
     "continue": "Continue to Confirmation",
     "withdrawNow": "Withdraw now!"
+  },
+  "success": {
+    "title": "Withdrawal Success",
+    "description": "Your withdrawal request has been sent and should be processed shortly."
   }
 }

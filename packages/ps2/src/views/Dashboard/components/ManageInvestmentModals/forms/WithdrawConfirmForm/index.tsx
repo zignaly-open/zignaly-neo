@@ -47,6 +47,7 @@ const WithdrawConfirmForm = ({
   tag,
   back,
   close,
+  setStep,
   network,
   amount,
 }: ConfirmWithdrawalModalProps) => {
@@ -55,12 +56,12 @@ const WithdrawConfirmForm = ({
   const [withdraw, withdrawStatus] = useWithdrawMutation();
   const { ask2FA } = useCurrentUser();
 
-  const handleWithdraw = () => {
+  const handleWithdraw = async () => {
     if (ask2FA) {
       // showTwoFAModal(true);
       // setFormData(data);
     } else {
-      withdraw({
+      await withdraw({
         asset: coin,
         network: network.network,
         exchangeInternalId: internalId,
@@ -68,8 +69,24 @@ const WithdrawConfirmForm = ({
         tag,
         amount,
       });
+      setStep('success');
     }
   };
+
+  if (withdrawStatus.isSuccess) {
+    return (
+      <Grid container direction='column'>
+        <ZigTypography my={1} color='neutral200'>
+          {t('success.description')}
+        </ZigTypography>
+        <ModalActions>
+          <ZigButton onClick={close} variant='outlined' size='large'>
+            {t('common:close')}
+          </ZigButton>
+        </ModalActions>
+      </Grid>
+    );
+  }
 
   return (
     <Grid container direction='column'>

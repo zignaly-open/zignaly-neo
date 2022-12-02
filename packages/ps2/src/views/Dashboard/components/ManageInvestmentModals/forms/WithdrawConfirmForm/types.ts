@@ -8,4 +8,5 @@ export interface ConfirmWithdrawalModalProps {
   close: () => void;
   amount: string;
   network: CoinNetwork;
+  setStep: (value: string) => void;
 }
