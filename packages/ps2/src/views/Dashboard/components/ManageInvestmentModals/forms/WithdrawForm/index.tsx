@@ -90,6 +90,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
       setValue(
         'network',
         coinObject.networks.length === 1 ? coinObject.networks[0].value : null,
+        { shouldValidate: true },
       );
     } else if (coinOptions?.length === 1) {
       setValue('coin', coinOptions[0].value);
