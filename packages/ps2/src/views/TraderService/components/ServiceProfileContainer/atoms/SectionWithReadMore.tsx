@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import { TextButton, ZigTypography } from '@zignaly-open/ui';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
@@ -22,11 +22,19 @@ const SectionWithReadMore: React.FC<{
     ref?.current || ({} as { scrollHeight: number; clientHeight: number });
 
   const [shown, setShown] = useState(false);
+  const [shouldShowReadMore, setShouldShowReadMore] = useState(true);
   const delta = 24 * 2;
-  const shouldShowReadMore = scrollHeight - delta > heightLimit;
 
-  useEffect(() => {
-    if (scrollHeight > clientHeight && scrollHeight - delta < clientHeight) {
+  useLayoutEffect(() => {
+    if (scrollHeight && clientHeight && scrollHeight - delta > heightLimit) {
+      setShouldShowReadMore(false);
+    }
+    if (
+      scrollHeight &&
+      clientHeight &&
+      scrollHeight > clientHeight &&
+      scrollHeight - delta < clientHeight
+    ) {
       setShown(true);
     }
   }, [scrollHeight, clientHeight]);
