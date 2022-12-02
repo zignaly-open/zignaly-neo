@@ -11,4 +11,17 @@ export const sortBigNumbers = (
   return 0;
 };
 
+/**
+ * Get number of decimals from a precision number
+ * @param integerMultiple Precision number (e.g. 0.00000001)
+ * @returns Number of decimals.
+ */
+export const precisionNumberToDecimals = (integerMultiple: string) => {
+  // https://www.reddit.com/r/BinanceExchange/comments/995jra/getting_atomic_withdraw_unit_from_api/e4mi63w/
+  const integerMultipleFloat = parseFloat(integerMultiple);
+  const maxDecimals =
+    integerMultipleFloat > 1 ? 0 : Math.abs(Math.log10(integerMultipleFloat));
+  return maxDecimals;
+};
+
 export const stringSort = (a: string, b: string) => a.localeCompare(b);

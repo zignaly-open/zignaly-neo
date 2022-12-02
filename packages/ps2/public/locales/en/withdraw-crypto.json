@@ -26,8 +26,7 @@
   },
   "validation": {
     "indicateAnAddress": "You must indicate an valid address.",
-    "indicateAnAmount": "You must indicate an amount.",
-    "minimumToWithdrawal": "The minimum withdrawal amount is {{value}} {{coin}}"
+    "minWithdrawal": "The minimum withdrawal amount is {{value}} {{coin}}"
   },
   "confirmation": {
     "title": "Confirm Withdrawal",
