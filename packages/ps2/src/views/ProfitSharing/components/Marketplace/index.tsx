@@ -126,7 +126,7 @@ const Marketplace: React.FC = () => {
           data: service.sparklines,
         },
         '90d': {
-          roi: service.pnlPercent30t,
+          roi: service.pnlPercent90t,
           createdAt: service.createdAt,
         },
         assets: {
