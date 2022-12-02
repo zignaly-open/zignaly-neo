@@ -30,13 +30,15 @@ const MarkdownSection: React.FC<{
     ref?.current || ({} as { scrollHeight: number; clientHeight: number });
 
   const [shown, setShown] = useState(false);
-  const [shouldShowReadMore, setShouldShowReadMore] = useState(true);
+  const [shouldShowReadMore, setShouldShowReadMore] = useState(readMore);
   const delta = 24 * 2;
 
   useLayoutEffect(() => {
     if (scrollHeight && clientHeight && scrollHeight - delta > heightLimit) {
       setShouldShowReadMore(false);
     }
+  }, []);
+  useLayoutEffect(() => {
     if (
       scrollHeight &&
       clientHeight &&
