@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { CoinIconWrapper, Form, FullWidthSelect, ModalActions } from './styles';
+import { CoinIconWrapper, Form, FullWidthSelect } from './styles';
 import {
   dark,
   InputText,
@@ -34,18 +34,19 @@ import { WithdrawValidation } from './validations';
 import { CoinNetwork } from 'apis/coin/types';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import CenteredLoader from 'components/CenteredLoader';
+import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 function WithdrawForm({
   isConfirmation,
   setIsConfirmation,
   selectedCoin,
+  close,
 }: WithdrawModalProps) {
   const { t } = useTranslation('withdraw-crypto');
   const { data: balances, isFetching: isFetchingBalances } = useCoinBalances({
     convert: true,
   });
   const { data: coins, isFetching: isFetchingCoins } = useExchangeCoinsList();
-  console.log(coins);
   const [confirmationData, setConfirmationData] = useState<WithdrawFormData>();
   const { internalId, exchangeType } = useActiveExchange();
   const [withdraw, withdrawStatus] = useWithdrawMutation();
@@ -62,19 +63,13 @@ function WithdrawForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {},
-    // resolver: yupResolver(WithdrawValidation()),
-    resolver: (data, context, options) => {
-      // const validatorSchema = formValidatorSchemaByPaymentModalityType(
-      //   data.paymentType.value,
-      // );
-      // console.log(data, context, options, coinObject);
-      const { addressRegex, memoRegex } = networkObject as CoinNetwork;
-      return yupResolver(WithdrawValidation(addressRegex, memoRegex))(
-        data,
-        context,
-        options,
-      );
-    },
+    resolver: (data, context, options) =>
+      yupResolver(
+        WithdrawValidation(
+          networkObject?.addressRegex,
+          networkObject?.memoRegex,
+        ),
+      )(data, context, options),
   });
 
   const coin = watch('coin');
@@ -108,7 +103,7 @@ function WithdrawForm({
   );
 
   const coinObject = coin && coinOptions?.find((x) => x.value === coin);
-  const networkObject =
+  const networkObject: CoinNetwork =
     network && coinObject?.networks?.find((x) => x.value === network);
 
   useEffect(() => {
@@ -166,13 +161,15 @@ function WithdrawForm({
     return <CenteredLoader />;
   }
 
-  if (isConfirmation) {
+  if (confirmationData) {
     return (
       <WithdrawConfirmForm
-        networkCaption={networkObject.name}
         coin={coin}
-        withdrawAddress={confirmationData.address}
-        onBack={() => setIsConfirmation(false)}
+        back={() => setIsConfirmation(false)}
+        close={close}
+        {...confirmationData}
+        amount={confirmationData.amount.value.toString()}
+        network={networkObject}
       />
     );
   }

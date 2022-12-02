@@ -55,6 +55,16 @@ declare module '@mui/material/styles' {
 
   interface Palette extends CustomPalette {}
   interface PaletteOptions extends CustomPalette {}
+
+  interface TypographyVariants {
+    bigNumber: React.CSSProperties;
+  }
+}
+
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    bigNumber: true;
+  }
 }
 
 declare module '@mui/material/styles/createTheme' {
