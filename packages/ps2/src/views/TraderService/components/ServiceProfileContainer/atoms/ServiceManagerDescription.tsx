@@ -1,7 +1,7 @@
 import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
-import SectionWithReadMore from './SectionWithReadMore';
+import MarkdownSection from './MarkdownSection';
 import { Box } from '@mui/system';
 import { ZigTypography } from '@zignaly-open/ui';
 import Countries from 'i18n-iso-countries';
@@ -17,7 +17,7 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
   const country = Countries.getName(service.ownerCountry, i18n.language);
 
   return (
-    <SectionWithReadMore
+    <MarkdownSection
       content={service.ownerDescription}
       title={t('about-trader')}
       emptyText={t('about-trader-empty')}
