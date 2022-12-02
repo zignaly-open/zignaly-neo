@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useEffect } from "react";
 import NumberFormat from "react-number-format";
 import { useController } from "react-hook-form";
 import {
@@ -22,6 +22,7 @@ import CoinIcon, { CoinSizes } from "../../display/CoinIcon";
 import { InputAmountProps, TokenItem } from "./types";
 import { changeEvent } from "utils/event";
 import { getPrecisionForCoin } from "components/display/ZigPriceLabel/util";
+import { useUpdateEffect } from "react-use";
 
 // FIXME this component still needs Jesus
 function InputAmount({
@@ -49,6 +50,14 @@ function InputAmount({
       token: tokens[0],
     },
   });
+
+  useUpdateEffect(() => {
+    // Update token when prop changes
+    onChange({
+      token: tokens[0],
+      value: "",
+    });
+  }, [tokens[0].id]);
 
   const onValueChange: typeof onChange = (e) => {
     onChange({

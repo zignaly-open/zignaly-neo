@@ -37,8 +37,9 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
     control,
     watch,
     setValue,
+    getValues,
     trigger,
-    formState: { isValid, errors, dirtyFields },
+    formState: { isValid, errors },
   } = useForm<WithdrawFormData>({
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -101,8 +102,13 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   }, []);
 
   useEffect(() => {
-    if (dirtyFields.amount) {
+    const { amount, address } = getValues();
+    if (amount && amount.value !== '') {
       trigger('amount');
+    }
+
+    if (address) {
+      trigger('address');
     }
   }, [network]);
 
@@ -238,7 +244,6 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
               </Grid>
             )}
 
-            {/* Wait for coinObject since InputAmountAdvanced only renders available balance at first render */}
             {coinObject && (
               <Grid item xs={12} mt={3}>
                 <InputAmountAdvanced
