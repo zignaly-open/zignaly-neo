@@ -17,7 +17,7 @@ import copy from 'copy-to-clipboard';
 import { DepositFormData } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { Box, Grid } from '@mui/material';
-import NumberFormat from 'react-number-format';
+import { NumericFormat } from 'react-number-format';
 import {
   useCoinBalances,
   useDepositInfo,
@@ -142,7 +142,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             <Typography variant='body2' color='neutral200' weight='medium'>
               {t('balances.total')}{' '}
               <Typography variant='body2' color='neutral000' weight='medium'>
-                <NumberFormat
+                <NumericFormat
                   displayType={'text'}
                   value={coinObject?.balance ?? ''}
                 />
@@ -152,7 +152,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             <Typography variant='body2' color='neutral200' weight='medium'>
               {t('balances.balanceLocked')}{' '}
               <Typography variant='body2' color='neutral000' weight='medium'>
-                <NumberFormat
+                <NumericFormat
                   value={coinObject?.inOrders ?? ''}
                   displayType={'text'}
                 />
@@ -162,7 +162,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             <Typography variant='body2' color='neutral200' weight='medium'>
               {t('balances.balanceFree')}{' '}
               <Typography variant='body2' color='neutral000' weight='medium'>
-                <NumberFormat
+                <NumericFormat
                   value={coinObject?.available ?? ''}
                   displayType={'text'}
                 />
