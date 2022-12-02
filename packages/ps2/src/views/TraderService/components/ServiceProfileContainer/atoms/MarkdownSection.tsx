@@ -4,17 +4,25 @@ import { TextButton, ZigTypography } from '@zignaly-open/ui';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useTranslation } from 'react-i18next';
-import { HideReadMoreEffects } from '../styles';
+import ReactMarkdown from 'react-markdown';
+import { HideReadMoreEffects, MarkdownContainer } from '../styles';
+import breaks from 'remark-breaks';
 
-type Content = string | JSX.Element;
-
-const SectionWithReadMore: React.FC<{
-  title: Content;
-  subtitle?: Content;
+const MarkdownSection: React.FC<{
+  title: string;
+  subtitle?: JSX.Element | string;
+  readMore?: boolean;
   content: string;
   heightLimit?: number;
   emptyText: string;
-}> = ({ title, subtitle, heightLimit = 120, content, emptyText }) => {
+}> = ({
+  title,
+  subtitle,
+  readMore = true,
+  heightLimit = 120,
+  content,
+  emptyText,
+}) => {
   const { t } = useTranslation('action');
   const ref = useRef();
   const chunks = (content || '').trim().split(/\n+/).filter(Boolean);
@@ -22,13 +30,15 @@ const SectionWithReadMore: React.FC<{
     ref?.current || ({} as { scrollHeight: number; clientHeight: number });
 
   const [shown, setShown] = useState(false);
-  const [shouldShowReadMore, setShouldShowReadMore] = useState(true);
+  const [shouldShowReadMore, setShouldShowReadMore] = useState(readMore);
   const delta = 24 * 2;
 
   useLayoutEffect(() => {
     if (scrollHeight && clientHeight && scrollHeight - delta > heightLimit) {
       setShouldShowReadMore(false);
     }
+  }, []);
+  useLayoutEffect(() => {
     if (
       scrollHeight &&
       clientHeight &&
@@ -46,16 +56,22 @@ const SectionWithReadMore: React.FC<{
         {title}
       </ZigTypography>
       {subtitle}
-      <HideReadMoreEffects ref={ref} open={shown} heightLimit={heightLimit}>
+      <HideReadMoreEffects
+        ref={ref}
+        open={shown || !shouldShowReadMore}
+        heightLimit={heightLimit}
+      >
         {chunks.length ? (
-          chunks.map((c, i) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <ZigTypography key={`${Math.random()}_${i}`}>{c}</ZigTypography>
-          ))
+          <MarkdownContainer>
+            <ReactMarkdown remarkPlugins={[breaks]} linkTarget='_blank'>
+              {content}
+            </ReactMarkdown>
+          </MarkdownContainer>
         ) : (
           <ZigTypography color={'neutral400'}>{emptyText}</ZigTypography>
         )}
       </HideReadMoreEffects>
+
       {shouldShowReadMore && (
         <TextButton
           leftElement={
@@ -70,4 +86,4 @@ const SectionWithReadMore: React.FC<{
   );
 };
 
-export default SectionWithReadMore;
+export default MarkdownSection;

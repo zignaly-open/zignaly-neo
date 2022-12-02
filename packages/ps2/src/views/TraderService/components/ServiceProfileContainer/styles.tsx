@@ -126,6 +126,18 @@ export const HideReadMoreEffects = styled('div')<{
   max-height: ${(props) => (props.open ? 1000 : props.heightLimit)}px;
 `;
 
+export const MarkdownContainer = styled('div')`
+  * {
+    color: ${({ theme }) => theme.palette.neutral200};
+  }
+
+  hr {
+    color: transparent;
+    border-top: 0.5px dashed ${({ theme }) => theme.palette.neutral500};
+    border-bottom-width: 0 !important;
+  }
+`;
+
 export const InvestButtonSubtext: typeof ZigTypography = styled(ZigTypography)`
   font-size: 12px;
   line-height: 16px;
