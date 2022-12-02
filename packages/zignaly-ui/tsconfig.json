@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "checkJs": false,
+    "preserveSymlinks": true,
     "target": "es2021",
     "module": "esnext",
     "strict": true,
