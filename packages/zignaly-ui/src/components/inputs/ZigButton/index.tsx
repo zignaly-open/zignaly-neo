@@ -1,6 +1,6 @@
-import { Button } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { styled } from "@mui/system";
 
-const ZigButton: typeof Button = styled(Button)`` as unknown as typeof Button;
+const ZigButton: typeof LoadingButton = styled(LoadingButton)`` as unknown as typeof LoadingButton;
 
 export default ZigButton;

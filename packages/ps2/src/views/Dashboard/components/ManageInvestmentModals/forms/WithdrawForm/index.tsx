@@ -3,54 +3,34 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { CoinIconWrapper, Form, FullWidthSelect } from './styles';
 import {
-  dark,
-  InputText,
   ErrorMessage,
-  ZignalyQRCode,
   ZigSelect,
-  CloneIcon,
   Typography,
   CoinIcon,
-  Loader,
   InputAmountAdvanced,
   Button,
   ZigInput,
 } from '@zignaly-open/ui';
-import copy from 'copy-to-clipboard';
 import { WithdrawFormData } from './types';
-import { useToast } from '../../../../../../util/hooks/useToast';
 import { Box, Grid } from '@mui/material';
-import NumberFormat from 'react-number-format';
 import {
   useCoinBalances,
   useExchangeCoinsList,
 } from '../../../../../../apis/coin/use';
-import { DepositModalProps, WithdrawModalProps } from '../../types';
-import { allowedDeposits } from '../../../../../../util/coins';
-import { useActiveExchange } from '../../../../../../apis/user/use';
-import { useWithdrawMutation } from 'apis/coin/api';
+import { WithdrawModalProps } from '../../types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithdrawValidation } from './validations';
-import { CoinNetwork } from 'apis/coin/types';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import CenteredLoader from 'components/CenteredLoader';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
 
-function WithdrawForm({
-  isConfirmation,
-  setIsConfirmation,
-  selectedCoin,
-  close,
-}: WithdrawModalProps) {
+function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const { t } = useTranslation('withdraw-crypto');
   const { data: balances, isFetching: isFetchingBalances } = useCoinBalances({
     convert: true,
   });
   const { data: coins, isFetching: isFetchingCoins } = useExchangeCoinsList();
   const [confirmationData, setConfirmationData] = useState<WithdrawFormData>();
-  const { internalId, exchangeType } = useActiveExchange();
-  const [withdraw, withdrawStatus] = useWithdrawMutation();
-  const toast = useToast();
 
   const {
     handleSubmit,
@@ -58,7 +38,6 @@ function WithdrawForm({
     watch,
     setValue,
     formState: { isValid, errors },
-    trigger,
   } = useForm<WithdrawFormData>({
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -72,8 +51,8 @@ function WithdrawForm({
       )(data, context, options),
   });
 
-  const coin = watch('coin');
-  const network = watch('network');
+  const coin = watch('coin') as string;
+  const network = watch('network') as string;
 
   const coinOptions = useMemo(
     () =>
@@ -103,7 +82,7 @@ function WithdrawForm({
   );
 
   const coinObject = coin && coinOptions?.find((x) => x.value === coin);
-  const networkObject: CoinNetwork =
+  const networkObject =
     network && coinObject?.networks?.find((x) => x.value === network);
 
   useEffect(() => {
@@ -126,37 +105,6 @@ function WithdrawForm({
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
-  const onSubmitFirstStep = (data: WithdrawFormData) => {
-    setIsConfirmation(true);
-    setConfirmationData(data);
-    // setValue('transferConfirm', '');
-    // setValue('step', 2);
-  };
-
-  const onGoBackToFirstStep = () => {
-    setIsConfirmation(false);
-    // setValue('step', 1);
-    // trigger('transferConfirm');
-  };
-
-  // const isConfirmation = watch('step') === 2;
-
-  const onSubmitSecondStep = async (data: WithdrawFormData) => {
-    return console.log(data);
-    await withdraw({
-      exchangeInternalId: internalId,
-      ...data,
-    });
-    // toast.success(
-    //   t('edit-investment:addMoreInvestmentSuccess', {
-    //     amount: amountTransfer?.value,
-    //     currency: amountTransfer?.token?.id,
-    //     serviceName: service.serviceName,
-    //   }),
-    // );
-    // onInvested();
-  };
-
   if (isFetchingCoins || isFetchingBalances) {
     return <CenteredLoader />;
   }
@@ -165,8 +113,12 @@ function WithdrawForm({
     return (
       <WithdrawConfirmForm
         coin={coin}
-        back={() => setIsConfirmation(false)}
+        back={() => {
+          setConfirmationData(null);
+          setStep('');
+        }}
         close={close}
+        setStep={setStep}
         {...confirmationData}
         amount={confirmationData.amount.value.toString()}
         network={networkObject}
@@ -175,7 +127,13 @@ function WithdrawForm({
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmitFirstStep)} autoComplete='off'>
+    <Form
+      onSubmit={handleSubmit((data) => {
+        setStep('confirm');
+        setConfirmationData(data);
+      })}
+      autoComplete='off'
+    >
       <Box mt={1} mb={1}>
         <Typography>{t('description')}</Typography>
       </Box>
@@ -304,21 +262,15 @@ function WithdrawForm({
           <Button
             size={'large'}
             type={'button'}
-            // disabled={withdrawStatus.isLoading}
             variant={'secondary'}
-            caption={t(isConfirmation ? 'common:back' : 'common:close')}
-            onClick={isConfirmation ? onGoBackToFirstStep : close}
+            caption={t('common:close')}
+            onClick={close}
           />
 
           <Button
             size={'large'}
             type={'submit'}
-            // disabled={withdrawStatus.isLoading}
-            caption={
-              isConfirmation
-                ? t('confirmation.withdrawNow')
-                : t('confirmation.continue')
-            }
+            caption={t('confirmation.continue')}
             disabled={!canSubmit}
           />
         </ModalActions>
