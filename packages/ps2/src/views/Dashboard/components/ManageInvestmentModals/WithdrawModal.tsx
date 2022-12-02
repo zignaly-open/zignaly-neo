@@ -24,7 +24,7 @@ function WithdrawModal({
       close={close}
       title={t(
         step === 'success'
-          ? 'confirmation.title'
+          ? 'success.title'
           : step === 'confirm'
           ? 'confirmation.title'
           : 'title',

@@ -106,7 +106,7 @@ const WithdrawConfirmForm = ({
           {network.name}
         </ZigTypography>
       </Grid>
-      <Grid mt={3}>
+      <Grid mt={3} gap={3} display='flex' direction='column'>
         <ZigInput
           label={t('confirmation.address')}
           InputProps={{
@@ -115,6 +115,16 @@ const WithdrawConfirmForm = ({
           value={address}
           fullWidth
         />
+        {tag && (
+          <ZigInput
+            label={t('withdrawMemo.label')}
+            InputProps={{
+              readOnly: true,
+            }}
+            value={tag}
+            fullWidth
+          />
+        )}
       </Grid>
       <Grid
         justifyContent='center'
