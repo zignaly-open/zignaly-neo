@@ -96,3 +96,14 @@ export const ModalActions = styled('div')`
     }
   `}
 `;
+
+// todo: check if it can replace ModalActions
+export const ModalActionsNew = styled('div')`
+  display: flex;
+  align-items: center;
+  margin-top: 56px;
+  gap: 14px;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-end;
+`;

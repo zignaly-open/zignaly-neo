@@ -24,4 +24,5 @@ export type WithdrawModalProps = {
   selectedCoin?: string;
   setIsConfirmation: (value: boolean) => void;
   isConfirmation: boolean;
+  close: () => void;
 };
