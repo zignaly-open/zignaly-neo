@@ -1,7 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import NumberFormat from 'react-number-format';
+import { NumericFormat } from 'react-number-format';
 import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
 import {
@@ -170,7 +170,7 @@ function TransferModal({
               <Typography variant='body2' color='neutral200'>
                 {t('transfer.deposit-available')}
                 <TypographyBalance variant='body2' color='neutral000'>
-                  <NumberFormat
+                  <NumericFormat
                     value={balanceTo}
                     displayType={'text'}
                     suffix={` ${service?.ssc ?? 'USDT'}`}
