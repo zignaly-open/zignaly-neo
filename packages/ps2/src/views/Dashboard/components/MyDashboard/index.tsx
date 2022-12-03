@@ -1,10 +1,10 @@
 import {
-  AreaChart,
   PercentageIndicator,
   PriceLabel,
   sortByValue,
   Table,
   Typography,
+  ZigChartMini,
   ZigTypography,
 } from '@zignaly-open/ui';
 import React, { useCallback, useMemo } from 'react';
@@ -93,7 +93,7 @@ const MyDashboard: React.FC = () => {
         Cell: ({ cell: { value } }) =>
           parseFloat(value.last30Pnl) || Object.keys(value.data).length > 1 ? (
             <>
-              <AreaChart variant='small' data={value.data} />
+              <ZigChartMini midLine data={value.data} />
               <PercentageIndicator
                 normalized
                 value={value.last30Pnl}
