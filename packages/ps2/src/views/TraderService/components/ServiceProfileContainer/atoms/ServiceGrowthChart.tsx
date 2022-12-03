@@ -24,14 +24,30 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
     chart: chartType,
   });
 
+  const { t } = useTranslation('service');
+
   const chartTypeOptions = useMemo(
     () => [
-      { label: 'pnl_pct_compound', value: GraphChartType.pnl_pct_compound },
-      { label: 'pnl_ssc', value: GraphChartType.pnl_ssc },
+      {
+        label: t('chart-options.pnl_pct_compound'),
+        value: GraphChartType.pnl_pct_compound,
+      },
+      {
+        label: t('chart-options.pnl_ssc', { coin: service.ssc }),
+        value: GraphChartType.pnl_ssc,
+      },
+      {
+        label: t('chart-options.sbt_ssc', { coin: service.ssc }),
+        value: GraphChartType.sbt_ssc,
+      },
+      {
+        label: t('chart-options.at_risk_pct'),
+        value: GraphChartType.at_risk_pct,
+      },
+      { label: t('chart-options.investors'), value: GraphChartType.investors },
     ],
-    [],
+    [t],
   );
-  const { t } = useTranslation('service');
 
   return (
     <Box>
@@ -63,7 +79,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           value={chartType}
           onChange={(v) => setChartType(v)}
           options={chartTypeOptions}
-        ></ZigSelect>
+        />
       </Box>
       <ChartWrapper>
         {isError ? (
@@ -75,6 +91,14 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           <CenteredLoader />
         ) : (
           <ZigChart
+            yAxisFormatter={(v) =>
+              [
+                GraphChartType.pnl_pct_compound,
+                GraphChartType.at_risk_pct,
+              ].includes(chartType)
+                ? `${v}%`
+                : `${v}`
+            }
             data={Object.entries(data?.data || {}).map(([date, value]) => ({
               x: formatMonthDay(parse(date, 'yyyy-MM-dd', Date.now())),
               y: value,
