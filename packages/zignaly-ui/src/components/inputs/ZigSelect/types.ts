@@ -12,6 +12,7 @@ export type ZigSelectProps<T> = Omit<
 > & {
   label?: string | JSX.Element;
   id?: string;
+  small?: boolean;
   options?: ZigSelectOption<T>[];
   filterOption?: ({ data }: { data: ZigSelectOption<T> }, search: string) => boolean;
   onChange?: (value: ZigSelectOption<T>["value"] | null, option: ZigSelectOption<T> | null) => void;

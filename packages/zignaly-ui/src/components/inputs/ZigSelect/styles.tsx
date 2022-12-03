@@ -4,16 +4,16 @@ import React from "react";
 import { css } from "@emotion/react";
 import dark from "../../../theme/dark";
 
-type Props = { error?: string; width?: number };
+type Props = { error?: string; width?: number; small?: boolean };
 
 export const StyledSelectWrapper = styled(Box)<Props>`
   .zig-react-select {
     &__control {
       border: 1px solid
         ${({ theme, error }) => (error ? theme.palette.redGraphOrError : theme.palette.neutral600)};
-      padding: 11px 24px 11px 16px;
+      padding: ${({ small }) => (small ? "3px 16px 3px 9px" : "11px 24px 11px 16px")};
       margin-top: 4px;
-      min-height: 60px;
+      min-height: ${({ small }) => (small ? "30.75px" : "60px")};
       border-radius: 5px;
       display: flex;
       align-items: center;
@@ -42,9 +42,23 @@ export const StyledSelectWrapper = styled(Box)<Props>`
     &__placeholder,
     &__single-value {
       padding: 0;
-      font-size: 16px;
       margin-left: 0;
-      line-height: 20px;
+    }
+
+    &__value-container {
+      ${({ small }) =>
+        small &&
+        css`
+          padding: 0 5px;
+        `}
+    }
+
+    &__placeholder,
+    &__single-value,
+    &__input-container,
+    &__input {
+      font-size: ${({ small }) => (small ? "13px" : "16px")};
+      line-height: ${({ small }) => (small ? "15px" : "20px")};
     }
 
     &__single-value,
@@ -62,8 +76,25 @@ export const StyledSelectWrapper = styled(Box)<Props>`
       color: ${({ theme }) => theme.palette.neutral400} !important;
     }
 
+    &__input-container {
+      margin-left: 0;
+    }
+
     &__indicator {
-      ${({ width }) => width && width <= 100 && `padding: 0 2px`};
+      ${({ width }) =>
+        width &&
+        width <= 100 &&
+        css`
+          padding: 0 2px;
+        `};
+      ${({ small }) =>
+        small &&
+        css`
+          padding-top: 0;
+          padding-bottom: 0;
+          width: 22px;
+          height: 22px;
+        `};
     }
   }
 ` as React.FC<Props>;

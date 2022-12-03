@@ -5,10 +5,10 @@ import {
   Typography,
   PageContainer,
   Table,
-  AreaChart,
   PercentageIndicator,
   sortByValue,
   ZigTypography,
+  ZigChartMini,
 } from '@zignaly-open/ui';
 import { formatDistance } from 'date-fns';
 import { Box } from '@mui/material';
@@ -97,7 +97,7 @@ const Marketplace: React.FC = () => {
         Cell: ({ cell: { value } }) =>
           +value.pnl30d || Object.keys(value.data).length > 1 ? (
             <>
-              <AreaChart midLine variant='small' data={value.data} />
+              <ZigChartMini midLine data={value.data} />
               <PercentageIndicator value={value.pnl30d} type={'graph'} />
             </>
           ) : (

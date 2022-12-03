@@ -14,11 +14,12 @@ function ZigSelect<T>({
   width,
   placeholder,
   options,
+  small,
   disabled,
   ...props
 }: ZigSelectProps<T>): JSX.Element {
   return (
-    <StyledSelectWrapper error={error} width={width}>
+    <StyledSelectWrapper error={error} width={width} small={small}>
       {label && <Typography color={"neutral200"}>{label}</Typography>}
       {ZigSelectGlobalStyle}
       <Select

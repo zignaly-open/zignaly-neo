@@ -1,12 +1,11 @@
 import React, { useLayoutEffect, useReducer, useRef } from "react";
 import { VictoryArea, VictoryAxis, VictoryChart, VictoryLabel } from "victory";
-import { ChartLayoutLarge } from "../styles";
-import { ChartMiniProps } from "../types";
+import { axisStyle, ChartLayoutLarge } from "../styles";
+import { ChartLargeProps } from "../types";
 import { useChartData } from "../hooks";
 import GraphColors from "../GraphColors";
-import { largeStyle } from "../../Charts/types";
 
-const ZigChart = ({ data }: ChartMiniProps) => {
+const ZigChart = ({ data, yAxisFormatter }: ChartLargeProps) => {
   const { data: processedData, color, gradient } = useChartData(data);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
@@ -31,12 +30,16 @@ const ZigChart = ({ data }: ChartMiniProps) => {
           }}
         >
           <VictoryAxis
-            tickLabelComponent={<VictoryLabel text={({ datum }) => `${datum}%`} />}
+            tickLabelComponent={
+              <VictoryLabel
+                text={({ datum }) => (yAxisFormatter ? yAxisFormatter(datum) : datum)}
+              />
+            }
             dependentAxis
-            style={largeStyle}
+            style={axisStyle}
           />
 
-          <VictoryAxis fixLabelOverlap style={largeStyle} />
+          <VictoryAxis tickLabelComponent={<VictoryLabel />} fixLabelOverlap style={axisStyle} />
 
           <VictoryArea
             style={{
