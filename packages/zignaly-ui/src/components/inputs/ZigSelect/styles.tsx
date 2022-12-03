@@ -2,7 +2,6 @@ import { Box, GlobalStyles, styled } from "@mui/material";
 import { NiceScrollbar } from "utils/css";
 import React from "react";
 import { css } from "@emotion/react";
-import dark from "../../../theme/dark";
 
 type Props = { error?: string; width?: number; small?: boolean };
 
@@ -103,27 +102,10 @@ export const ZigSelectGlobalStyle = (
   <GlobalStyles
     styles={css`
       .zig-react-select {
-        &__menu-portal {
-          z-index: 1500 !important;
-        }
-
         &__menu {
-          background: rgba(16, 18, 37) !important;
-          border: 1px solid ${dark.neutral600} !important;
-          color: ${dark.neutral200} !important;
-
           &-list {
             ${NiceScrollbar.toString()};
           }
-        }
-
-        &__option--is-focused {
-          cursor: pointer;
-          background: rgba(255, 255, 255, 0.1) !important;
-        }
-
-        &__option--is-selected {
-          background: rgba(255, 255, 255, 0.2) !important;
         }
       }
     `}

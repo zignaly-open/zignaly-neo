@@ -1,9 +1,44 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { StyledSelectWrapper, ZigSelectGlobalStyle } from "./styles";
 import { ZigSelectOption, ZigSelectProps } from "./types";
 import ErrorMessage from "../../display/ErrorMessage";
 import { Typography } from "@mui/material";
-import Select from "react-select";
+import Select, { StylesConfig } from "react-select";
+import Theme from "../../../theme/theme";
+import { useTheme } from "styled-components";
+
+const customStyles = (small: boolean, theme: Theme): StylesConfig => ({
+  menuPortal: (base) => ({
+    ...base,
+    zIndex: "1500 !important",
+  }),
+  menu: (base) => ({
+    ...base,
+    background: "rgba(16, 18, 37) !important",
+    border: `1px solid ${theme.neutral600} !important`,
+    color: `${theme.neutral200} !important`,
+  }),
+  option: (base, state) => ({
+    ...base,
+    ...(small
+      ? {
+          fontSize: "13px",
+          lineHeight: "20px",
+        }
+      : {}),
+    ...(state.isFocused
+      ? {
+          cursor: "pointer",
+          background: "rgba(255, 255, 255, 0.1) !important",
+        }
+      : {}),
+    ...(state.isSelected
+      ? {
+          background: "rgba(255, 255, 255, 0.2) !important",
+        }
+      : {}),
+  }),
+});
 
 function ZigSelect<T>({
   onChange,
@@ -14,15 +49,19 @@ function ZigSelect<T>({
   width,
   placeholder,
   options,
-  small,
+  small = false,
   disabled,
   ...props
 }: ZigSelectProps<T>): JSX.Element {
+  const theme = useTheme() as Theme;
+  const styles = useMemo(() => customStyles(small, theme), [small, theme]);
+
   return (
     <StyledSelectWrapper error={error} width={width} small={small}>
       {label && <Typography color={"neutral200"}>{label}</Typography>}
       {ZigSelectGlobalStyle}
       <Select
+        styles={styles}
         components={{
           IndicatorSeparator: () => null,
         }}
