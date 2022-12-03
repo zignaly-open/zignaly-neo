@@ -1,11 +1,11 @@
 import React from "react";
 import { VictoryArea, VictoryGroup, VictoryLine } from "victory";
 import { ChartLayoutMini } from "../styles";
-import { ChartsProps } from "../types";
+import { ChartMiniProps } from "../types";
 import { useChartData } from "../hooks";
 import GraphColors from "../GraphColors";
 
-const ZigChartMini = ({ data, midLine, height }: ChartsProps) => {
+const ZigChartMini = ({ data, midLine, height }: ChartMiniProps) => {
   const { data: processedData, color, gradient } = useChartData(data);
 
   return (

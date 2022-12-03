@@ -10,21 +10,20 @@ export enum ChartGradientColor {
   Red = "chart-gradient-red",
 }
 
-export interface ChartsProps {
+export interface ChartMiniProps {
   readonly data: AxisFormat[] | number[];
   midLine?: boolean | null;
   height?: number;
+}
+
+export interface ChartLargeProps {
+  readonly data: AxisFormat[] | number[];
 }
 
 export interface AxisFormat {
   x: number | string;
   y: number;
 }
-
-export const ChartVariations = {
-  small: "small",
-  large: "large",
-};
 
 export const largeStyle = {
   axisLabel: {
