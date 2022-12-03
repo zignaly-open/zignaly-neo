@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useReducer, useRef } from "react";
+import React, { useLayoutEffect, useMemo, useReducer, useRef } from "react";
 import { VictoryArea, VictoryAxis, VictoryChart, VictoryLabel } from "victory";
 import { axisStyle, ChartLayoutLarge } from "../styles";
 import { ChartLargeProps } from "../types";
@@ -16,6 +16,11 @@ const ZigChart = ({ data, yAxisFormatter }: ChartLargeProps) => {
     forceUpdate();
   }, [width]);
 
+  const yDomain = useMemo(() => {
+    const values = processedData.map((s) => s.y);
+    return [Math.min(0, ...values), Math.max(1, ...values)];
+  }, [processedData]);
+
   return (
     <ChartLayoutLarge ref={wrapperRef}>
       <GraphColors />
@@ -23,6 +28,7 @@ const ZigChart = ({ data, yAxisFormatter }: ChartLargeProps) => {
       {width && (
         <VictoryChart
           {...{
+            domain: { y: yDomain as unknown as undefined },
             width: width || 600,
             height: 400,
             domainPadding: { x: [0, 1], y: 5 },
