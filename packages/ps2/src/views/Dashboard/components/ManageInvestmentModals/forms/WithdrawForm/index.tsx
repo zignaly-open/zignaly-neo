@@ -1,11 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { CoinIconWrapper, Form, FullWidthSelect } from './styles';
 import {
   ErrorMessage,
   ZigSelect,
-  CoinIcon,
   InputAmountAdvanced,
   Button,
   ZigInput,
@@ -23,6 +21,7 @@ import { WithdrawValidation } from './validations';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import CenteredLoader from 'components/CenteredLoader';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
+import CoinOption from '../atoms/CoinOption';
 
 function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const { t } = useTranslation('withdraw-crypto');
@@ -63,13 +62,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
           return {
             value: c,
             name,
-            label: (
-              <CoinIconWrapper>
-                <CoinIcon size={'small'} coin={c} name={name} />{' '}
-                <ZigTypography fontWeight={600}>{c} </ZigTypography> &nbsp;
-                <ZigTypography>{name}</ZigTypography>
-              </CoinIconWrapper>
-            ),
+            label: <CoinOption coin={c} name={name} />,
             available: balance?.maxWithdrawAmount || 0,
             networks: coins[c].networks?.map((n) => ({
               label: n.name,
@@ -139,7 +132,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   }
 
   return (
-    <Form
+    <form
       onSubmit={handleSubmit((data) => {
         setStep('confirm');
         setConfirmationData(data);
@@ -152,46 +145,42 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
 
       <Grid container>
         <Grid item xs={12} pt={3}>
-          <FullWidthSelect>
-            <Controller
-              name='coin'
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <ZigSelect
-                  menuPlacement='auto'
-                  menuShouldScrollIntoView={false}
-                  menuPosition='fixed'
-                  menuShouldBlockScroll
-                  label={t('coinSelector.label')}
-                  placeholder={t('coinSelector.placeholder')}
-                  options={coinOptions}
-                  {...field}
-                />
-              )}
-            />
-          </FullWidthSelect>
+          <Controller
+            name='coin'
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <ZigSelect
+                menuPlacement='auto'
+                menuShouldScrollIntoView={false}
+                menuPosition='fixed'
+                menuShouldBlockScroll
+                label={t('coinSelector.label')}
+                placeholder={t('coinSelector.placeholder')}
+                options={coinOptions}
+                {...field}
+              />
+            )}
+          />
         </Grid>
 
         <Grid item xs={12} pt={3}>
-          <FullWidthSelect>
-            <Controller
-              name='network'
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <ZigSelect
-                  menuPosition='fixed'
-                  menuShouldBlockScroll
-                  menuShouldScrollIntoView={false}
-                  label={t('networkSelector.label')}
-                  placeholder={t('networkSelector.placeholder')}
-                  options={coinObject?.networks}
-                  {...field}
-                />
-              )}
-            />
-          </FullWidthSelect>
+          <Controller
+            name='network'
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <ZigSelect
+                menuPosition='fixed'
+                menuShouldBlockScroll
+                menuShouldScrollIntoView={false}
+                label={t('networkSelector.label')}
+                placeholder={t('networkSelector.placeholder')}
+                options={coinObject?.networks}
+                {...field}
+              />
+            )}
+          />
         </Grid>
 
         {!!network && !networkObject?.withdrawEnable ? (
@@ -286,7 +275,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
           </>
         )}
       </Grid>
-    </Form>
+    </form>
   );
 }
 
