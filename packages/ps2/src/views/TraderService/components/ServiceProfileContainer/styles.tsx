@@ -123,7 +123,7 @@ export const HideReadMoreEffects = styled('div')<{
   transition: all 0.3s;
   overflow: hidden;
   margin-bottom: 7px;
-  max-height: ${(props) => (props.open ? 1000 : props.heightLimit)}px;
+  max-height: ${(props) => (props.open ? 'auto' : props.heightLimit + 'px')};
 `;
 
 export const MarkdownContainer = styled('div')`

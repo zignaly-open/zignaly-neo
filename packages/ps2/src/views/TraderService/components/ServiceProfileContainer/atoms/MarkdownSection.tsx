@@ -34,10 +34,11 @@ const MarkdownSection: React.FC<{
   const delta = 24 * 2;
 
   useLayoutEffect(() => {
-    if (scrollHeight && clientHeight && scrollHeight - delta > heightLimit) {
+    if (scrollHeight && clientHeight && scrollHeight - delta < heightLimit) {
       setShouldShowReadMore(false);
     }
-  }, []);
+  }, [clientHeight && scrollHeight]);
+
   useLayoutEffect(() => {
     if (
       scrollHeight &&
@@ -56,6 +57,7 @@ const MarkdownSection: React.FC<{
         {title}
       </ZigTypography>
       {subtitle}
+
       <HideReadMoreEffects
         ref={ref}
         open={shown || !shouldShowReadMore}
