@@ -51,7 +51,7 @@ const ZigChart = ({ data, yAxisFormatter }: ChartLargeProps) => {
             style={{
               data: {
                 fill: `url(#${gradient})`,
-                strokeWidth: 3,
+                strokeWidth: 1,
                 stroke: color,
               },
             }}
