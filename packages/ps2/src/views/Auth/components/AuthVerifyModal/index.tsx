@@ -23,12 +23,17 @@ function AuthVerifyModal({
   close,
   onSuccess,
   onFailure,
+  // Custom submit handler
+  onSubmit,
+  isLoading,
   ...props
 }: {
   user: { token: string } & Partial<LoginResponse>;
   close: () => void;
   onSuccess: () => void;
   onFailure: ({ message }: { message: string }) => void;
+  onSubmit?: (code: string) => void;
+  isLoading?: boolean;
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation(['auth', 'error']);
   const { ask2FA, disabled, emailUnconfirmed, isUnknownDevice } = user;
@@ -108,7 +113,7 @@ function AuthVerifyModal({
   );
 
   const onClickClose = () => {
-    onFailure({ message: t('error:error.failed-verification') });
+    onFailure && onFailure({ message: t('error:error.failed-verification') });
     close();
   };
 
@@ -151,8 +156,10 @@ function AuthVerifyModal({
         {ask2FA && !status2FA.isSuccess && (
           <TwoFAForm
             clearOnError
-            onSubmit={(code) => submit2FA({ code })}
-            isLoading={status2FA.isLoading}
+            onSubmit={(code) =>
+              onSubmit ? onSubmit(code) : submit2FA({ code })
+            }
+            isLoading={isLoading ?? status2FA.isLoading}
             error={getError(status2FA)}
           />
         )}

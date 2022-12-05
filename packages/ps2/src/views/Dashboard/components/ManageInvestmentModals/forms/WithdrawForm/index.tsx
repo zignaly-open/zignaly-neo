@@ -5,11 +5,11 @@ import { CoinIconWrapper, Form, FullWidthSelect } from './styles';
 import {
   ErrorMessage,
   ZigSelect,
-  Typography,
   CoinIcon,
   InputAmountAdvanced,
   Button,
   ZigInput,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import { WithdrawFormData } from './types';
 import { Box, Grid } from '@mui/material';
@@ -43,7 +43,10 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   } = useForm<WithdrawFormData>({
     mode: 'onChange',
     reValidateMode: 'onChange',
-    defaultValues: {},
+    defaultValues: {
+      address: '',
+      tag: '',
+    },
     resolver: (data, context, options) =>
       yupResolver(WithdrawValidation(networkObject))(data, context, options),
   });
@@ -63,8 +66,8 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
             label: (
               <CoinIconWrapper>
                 <CoinIcon size={'small'} coin={c} name={name} />{' '}
-                <Typography weight={'demibold'}>{c} </Typography> &nbsp;
-                <Typography weight={'regular'}>{name}</Typography>
+                <ZigTypography fontWeight={600}>{c} </ZigTypography> &nbsp;
+                <ZigTypography>{name}</ZigTypography>
               </CoinIconWrapper>
             ),
             available: balance?.maxWithdrawAmount || 0,
@@ -144,7 +147,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
       autoComplete='off'
     >
       <Box mt={1} mb={1}>
-        <Typography>{t('description')}</Typography>
+        <ZigTypography>{t('description')}</ZigTypography>
       </Box>
 
       <Grid container>
@@ -264,7 +267,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
               </Grid>
             )}
 
-            <ModalActions>
+            <ModalActions align='right'>
               <Button
                 size={'large'}
                 type={'button'}

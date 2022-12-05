@@ -15,6 +15,7 @@ function WithdrawModal({
   selectedCoin: string;
 } & DialogProps): React.ReactElement {
   const [step, setStep] = useState<Step>('');
+  console.log(step);
   const { t } = useTranslation(['withdraw-crypto']);
 
   return (

@@ -13,6 +13,8 @@ import {
 import { useWithdrawMutation } from 'apis/coin/api';
 import { useActiveExchange, useCurrentUser } from 'apis/user/use';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { useZModal } from 'components/ZModal/use';
+import AuthVerifyModal from 'views/Auth/components/AuthVerifyModal';
 
 const ZigPriceLabelIcon = ({
   amount,
@@ -54,23 +56,35 @@ const WithdrawConfirmForm = ({
   const { t } = useTranslation('withdraw-crypto');
   const { internalId } = useActiveExchange();
   const [withdraw, withdrawStatus] = useWithdrawMutation();
-  const { ask2FA } = useCurrentUser();
+  const user = useCurrentUser();
+  const { showModal, destroyModal } = useZModal();
 
   const handleWithdraw = async () => {
-    if (ask2FA) {
-      // showTwoFAModal(true);
-      // setFormData(data);
-    } else {
-      await withdraw({
-        asset: coin,
-        network: network.network,
-        exchangeInternalId: internalId,
-        address,
-        tag,
-        amount,
+    if (user.ask2FA) {
+      const modal = showModal(AuthVerifyModal, {
+        user,
+        isLoading: withdrawStatus.isLoading,
+        onSubmit: async (code: string) => {
+          await doWithdraw(code);
+          destroyModal(modal.id);
+        },
       });
-      setStep('success');
+    } else {
+      doWithdraw();
     }
+  };
+
+  const doWithdraw = async (code?: string) => {
+    await withdraw({
+      asset: coin,
+      network: network.network,
+      exchangeInternalId: internalId,
+      address,
+      tag,
+      amount,
+      code,
+    }).unwrap();
+    setStep('success');
   };
 
   if (withdrawStatus.isSuccess) {
@@ -79,7 +93,7 @@ const WithdrawConfirmForm = ({
         <ZigTypography my={1} color='neutral200'>
           {t('success.description')}
         </ZigTypography>
-        <ModalActions>
+        <ModalActions align='left'>
           <ZigButton onClick={close} variant='outlined' size='large'>
             {t('common:close')}
           </ZigButton>
@@ -174,7 +188,7 @@ const WithdrawConfirmForm = ({
           />
         </Grid>
       </AmountContainer>
-      <ModalActions>
+      <ModalActions align='right'>
         <ZigButton onClick={back} variant='outlined' size='large'>
           {t('common:back')}
         </ZigButton>
