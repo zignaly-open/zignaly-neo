@@ -1,4 +1,3 @@
-import { ChartsProps } from "../Charts/types";
 import { PercentageIndicatorProps } from "./components/PercentageIndicator/types";
 import { Column, UseSortByColumnOptions } from "react-table";
 
@@ -29,7 +28,6 @@ export interface TableProps<T extends object> extends TableBasicProps<T> {
 }
 
 export interface UserTableData {
-  chart: ChartsProps;
   dailyAvg: PercentageIndicatorProps;
   oneMonth: PercentageIndicatorProps;
   threeMonths: PercentageIndicatorProps;

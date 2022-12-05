@@ -10,19 +10,13 @@ import { CheckIconStyled, CloseIconStyled } from "./styles";
 import { dark } from "../../../theme";
 import Typography from "../Typography";
 import { MockMyCoinsData } from "./mockData";
-import { AreaChart } from "../Charts";
 import { UserTableData } from "./types";
-import { ChartsProps } from "../Charts/types";
 
 const createMarketPlaceTableHeader = () => {
   return [
     {
       Header: "1 year",
       accessor: "oneYear",
-    },
-    {
-      Header: "1 month",
-      accessor: "chart",
     },
     {
       Header: "",
@@ -32,7 +26,6 @@ const createMarketPlaceTableHeader = () => {
 };
 
 interface MarketPlaceTableProps {
-  chart: ChartsProps;
   oneYear: {
     value: number;
     subtitle: string;
@@ -40,9 +33,8 @@ interface MarketPlaceTableProps {
   };
 }
 
-const createMarketPlaceTableBodyObject = ({ chart, oneYear }: MarketPlaceTableProps) => {
+const createMarketPlaceTableBodyObject = ({ oneYear }: MarketPlaceTableProps) => {
   return {
-    chart: <AreaChart variant={chart.variant} data={chart.data} />,
     oneYear: <PercentageIndicator value={oneYear.value} />,
   };
 };
@@ -57,10 +49,6 @@ const createUserTableHeader = () => {
           <div>{"Returns"}</div>
         </div>
       ),
-    },
-    {
-      Header: "Since Invested",
-      accessor: "chart",
     },
     {
       Header: "Daily avg",
@@ -86,15 +74,8 @@ const createUserTableHeader = () => {
   ];
 };
 
-const createUserTableDataObject = ({
-  chart,
-  dailyAvg,
-  oneMonth,
-  threeMonths,
-  all,
-}: UserTableData) => {
+const createUserTableDataObject = ({ dailyAvg, oneMonth, threeMonths, all }: UserTableData) => {
   return {
-    chart: <AreaChart variant={chart.variant} data={chart.data} />,
     dailyAvg: <PercentageIndicator value={dailyAvg.value} />,
     oneMonth: <PercentageIndicator value={oneMonth.value} />,
     threeMonths: <PercentageIndicator value={threeMonths.value} />,
@@ -354,36 +335,12 @@ UserDashBoard.args = {
   columns: createUserTableHeader(),
   data: [
     createUserTableDataObject({
-      chart: {
-        data: [
-          { x: "Jul 1", y: 10 },
-          { x: "Jul 2", y: 15 },
-          { x: "Jul 3", y: 23 },
-          { x: "Jul 4", y: 15 },
-          { x: "Jul 5", y: 17 },
-          { x: "Jul 6", y: 20 },
-          { x: "Jul 7", y: 25 },
-        ],
-        variant: "small",
-      },
       dailyAvg: { value: -10 },
       oneMonth: { value: 10 },
       threeMonths: { value: 10 },
       all: { value: 10 },
     }),
     createUserTableDataObject({
-      chart: {
-        data: [
-          { x: "Jul 1", y: 10 },
-          { x: "Jul 2", y: 15 },
-          { x: "Jul 3", y: 23 },
-          { x: "Jul 4", y: 15 },
-          { x: "Jul 5", y: 17 },
-          { x: "Jul 6", y: 20 },
-          { x: "Jul 7", y: 25 },
-        ],
-        variant: "small",
-      },
       dailyAvg: { value: -10 },
       oneMonth: { value: 10 },
       threeMonths: { value: 10 },
@@ -398,35 +355,9 @@ MarketPlaceTabel.args = {
   columns: createMarketPlaceTableHeader(),
   data: [
     createMarketPlaceTableBodyObject({
-      chart: {
-        data: [
-          { x: "Jul 1", y: 10 },
-          { x: "Jul 2", y: 15 },
-          { x: "Jul 3", y: 23 },
-          { x: "Jul 4", y: 15 },
-          { x: "Jul 5", y: 17 },
-          { x: "Jul 6", y: 15 },
-          { x: "Jul 7", y: 5 },
-        ],
-        variant: "small",
-        midLine: true,
-      },
       oneYear: { value: 100, subtitle: "Subtitle", showTrophy: true },
     }),
     createMarketPlaceTableBodyObject({
-      chart: {
-        data: [
-          { x: "Jul 1", y: 10 },
-          { x: "Jul 2", y: 15 },
-          { x: "Jul 3", y: 23 },
-          { x: "Jul 4", y: 15 },
-          { x: "Jul 5", y: 17 },
-          { x: "Jul 6", y: 15 },
-          { x: "Jul 7", y: 5 },
-        ],
-        variant: "small",
-        midLine: true,
-      },
       oneYear: { value: 50, subtitle: "Subtitle", showTrophy: false },
     }),
   ],

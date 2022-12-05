@@ -49,7 +49,7 @@ export const InvestedButtonBase: React.FC<{
   service: Service;
   investedAmount: string;
 }> = ({ service, investedAmount }) => {
-  const { showModal } = useZModal();
+  const { showModal } = useZModal({ disableAutoDestroy: true });
   const selectInvestment = useSetSelectedInvestment();
 
   const onClickEditInvestment = () => {
