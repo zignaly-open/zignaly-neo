@@ -48,7 +48,7 @@ const customFetchBase: BaseQueryFn<
   maybeReportError(result?.error);
 
   if (
-    result?.error?.status === 401 &&
+    (result?.error?.data as { error: { code: number } })?.error?.code === 13 &&
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     !endpointsWhitelistedFor401.includes(args.url)
