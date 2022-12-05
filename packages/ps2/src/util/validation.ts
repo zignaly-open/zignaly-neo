@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import BigNumber from 'bignumber.js';
+import i18n from './i18next';
 
 const inputAmountNumberValidation = yup
   .string()
@@ -48,3 +49,22 @@ export const inputAmountZeroableValidation = yup.object().shape({
 export const inputAmountTokenMaxValidation = yup.object().shape({
   value: inputAmountNumberValidationMaxToken,
 });
+
+export const decimalsValidation = (maxDecimals: number) =>
+  yup
+    .string()
+    .test(
+      'int',
+      i18n.t('common:validation.max-decimals', { maxDecimals }),
+      (val) => {
+        if (!val) return false;
+
+        const splitValueDot = val.split('.');
+        // Handle incorrect number
+        if (splitValueDot.length > 2) return false;
+
+        const decimals =
+          splitValueDot.length === 1 ? 0 : splitValueDot[1].length;
+        return decimals <= maxDecimals;
+      },
+    );
