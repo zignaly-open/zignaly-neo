@@ -19,7 +19,7 @@ const InvestButton: React.FC<{
 }> = ({ service }) => {
   const { t } = useTranslation('service');
   const isAuthenticated = useIsAuthenticated();
-  const { showModal } = useZModal();
+  const { showModal } = useZModal({ disableAutoDestroy: true });
   const selectInvestment = useSetSelectedInvestment();
   const navigate = useNavigate();
   const { balance, isFetching } = useCurrentBalance(service.ssc);
