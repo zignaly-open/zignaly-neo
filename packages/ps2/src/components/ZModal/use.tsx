@@ -1,8 +1,8 @@
-import { ShowFnOutput, useModal } from 'mui-modal-provider';
+import { ShowFnOutput, useModal, UseModalOptions } from 'mui-modal-provider';
 import { useCallback } from 'react';
 
-export function useZModal() {
-  const { showModal, ...etc } = useModal();
+export function useZModal(options?: UseModalOptions) {
+  const { showModal, ...etc } = useModal(options);
   const ourShowModal = useCallback(
     (Component, props?) => {
       const modal: ShowFnOutput<void> = showModal(Component, {
