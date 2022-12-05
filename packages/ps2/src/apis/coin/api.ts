@@ -34,7 +34,31 @@ export const api = createApi({
         url: `/user/exchanges/${exchangeId}/deposit_address/${coinId}?network=${networkId}`,
       }),
     }),
+
+    withdraw: builder.mutation<
+      { id: string },
+      {
+        exchangeInternalId: string;
+        network: string;
+        asset: string;
+        tag: string;
+        address: string;
+        amount: string;
+        code?: string;
+      }
+    >({
+      query: ({ exchangeInternalId, ...rest }) => ({
+        url: `/user/exchanges/${exchangeInternalId}/withdraw`,
+        method: 'POST',
+        body: rest,
+      }),
+    }),
   }),
 });
 
-export const { useCoinsQuery, useAllCoinsQuery, useDepositInfoQuery } = api;
+export const {
+  useCoinsQuery,
+  useAllCoinsQuery,
+  useDepositInfoQuery,
+  useWithdrawMutation,
+} = api;

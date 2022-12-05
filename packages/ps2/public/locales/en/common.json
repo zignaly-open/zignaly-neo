@@ -52,6 +52,7 @@
     "invalid-value": "Invalid value",
     "negative-amount": "Should be >= 0",
     "negative-zeroable-amount": "Should be > 0",
-    "invalid-amount": "You must indicate an amount"
+    "invalid-amount": "You must indicate an amount",
+    "max-decimals": "Please enter numbers with no more than {{maxDecimals}} decimal places."
   }
 }

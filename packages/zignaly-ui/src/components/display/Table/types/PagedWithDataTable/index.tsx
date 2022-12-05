@@ -245,13 +245,13 @@ export default function PagedWithDataTable<T extends object>({
               Showing
             </Typography>
             <Typography variant="body1" color="neutral100">
-              {pageIndex + 1}
+              {page?.length}
             </Typography>
             <Typography variant="body1" color="neutral300" weight="regular">
               out of
             </Typography>
             <Typography variant="body1" color="neutral100">
-              {pageOptions.length}
+              {data?.length}
             </Typography>
             <Typography variant="body1" color="neutral300" weight="regular">
               items

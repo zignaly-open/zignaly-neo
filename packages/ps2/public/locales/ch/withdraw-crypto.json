@@ -12,14 +12,35 @@
   "withdrawAddress": {
     "label": "CH-Wïṫĥḋѓáw ṫö Áḋḋѓëŝŝ:",
     "placeholder": "CH-Ṗáŝṫë wállëṫ áḋḋѓëŝŝ ĥëѓë",
-    "warning": "CH-Öńly ŝëńḋ {{network}} {{coin}} ṫökëńŝ ṫö ṫĥïŝ áḋḋѓëŝŝ"
+    "warning": "CH-Öńly ŝëńḋ {{network}} {{coin}} ṫökëńŝ ṫö ṫĥïŝ áḋḋѓëŝŝ",
+    "invalid": "CH-Ïńválïḋ áḋḋѓëŝŝ"
+  },
+  "withdrawMemo": {
+    "label": "CH-ṀËṀÖ/Ṫáĝ:",
+    "placeholder": "CH-Ṗáŝṫë wállëṫ ṀËṀÖ/Ṫáĝ ĥëѓë",
+    "invalid": "CH-ṀËṀÖ/Ṫáĝ ïŝ ïńválïḋ, ṗlëáŝë ѓëvïëw yöüѓ ṫáѓĝëṫ wállëṫ ńëṫwöѓk ḋëṫáïlŝ"
   },
   "amountToWithdraw": {
-    "label": "CH-Áṁöüńṫ ṫö Wïṫĥḋѓáw:"
+    "label": "CH-Áṁöüńṫ ṫö Wïṫĥḋѓáw:",
+    "labelBalance": "CH-Áváïláblë:"
   },
   "validation": {
     "indicateAnAddress": "CH-Yöü ṁüŝṫ ïńḋïĉáṫë áń válïḋ áḋḋѓëŝŝ.",
-    "indicateAnAmount": "CH-Yöü ṁüŝṫ ïńḋïĉáṫë áń áṁöüńṫ.",
-    "minimumToWithdrawal": "CH-Ṫĥë ṁïńïṁüṁ wïṫĥḋѓáwál áṁöüńṫ ïŝ {{value}} {{coin}}"
+    "minWithdrawal": "CH-Ṫĥë ṁïńïṁüṁ wïṫĥḋѓáwál áṁöüńṫ ïŝ {{value}} {{coin}}"
+  },
+  "confirmation": {
+    "title": "CH-Ĉöńḟïѓṁ Wïṫĥḋѓáwál",
+    "description": "CH-Ṗlëáŝë ĉöńḟïѓṁ ṫĥë ïńḟöѓṁáṫïöń ïŝ ĉöѓѓëĉṫ áńḋ ŝübṁïṫ yöüѓ wïṫĥḋѓáwál.",
+    "receive": "CH-Yöü’ll Ѓëĉëïvë:",
+    "network": "CH-Wïṫĥḋѓáwál Ńëṫwöѓk",
+    "address": "CH-Wïṫĥḋѓáw ṫö Áḋḋѓëŝŝ",
+    "amount": "CH-Wïṫĥḋѓáwál Áṁöüńṫ",
+    "networkFee": "CH-Ńëṫwöѓk Ḟëë",
+    "continue": "CH-Ĉöńṫïńüë ṫö Ĉöńḟïѓṁáṫïöń",
+    "withdrawNow": "CH-Wïṫĥḋѓáw ńöw!"
+  },
+  "success": {
+    "title": "CH-Wïṫĥḋѓáwál Ŝüĉĉëŝŝ",
+    "description": "CH-Yöüѓ wïṫĥḋѓáwál ѓëqüëŝṫ ĥáŝ bëëń ŝëńṫ áńḋ ŝĥöülḋ bë ṗѓöĉëŝŝëḋ ŝĥöѓṫly."
   }
 }
