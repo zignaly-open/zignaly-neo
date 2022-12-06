@@ -32,4 +32,5 @@ export interface InputAmountProps {
   showMaxButton?: boolean;
   error?: string | null;
   onInsufficientFundsError?: any;
+  additionalLabels?: React.ReactElement;
 }

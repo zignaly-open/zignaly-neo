@@ -22,6 +22,7 @@ import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import CenteredLoader from 'components/CenteredLoader';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
 import CoinOption from '../atoms/CoinOption';
+import LabelValueLine from './atoms/LabelValueLine';
 
 function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const { t } = useTranslation('withdraw-crypto');
@@ -252,6 +253,22 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
                     },
                   ]}
                   error={t(errors?.amount?.value?.message)}
+                  additionalLabels={
+                    networkObject && (
+                      <>
+                        <LabelValueLine
+                          label={t('amountToWithdraw.minimum')}
+                          value={networkObject.withdrawMin}
+                          coin={coin}
+                        />
+                        <LabelValueLine
+                          label={t('amountToWithdraw.fee')}
+                          value={networkObject.withdrawFee}
+                          coin={coin}
+                        />
+                      </>
+                    )
+                  }
                 />
               </Grid>
             )}
