@@ -11,10 +11,8 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import { useWithdrawMutation } from 'apis/coin/api';
-import { useActiveExchange, useCurrentUser } from 'apis/user/use';
+import { useActiveExchange, useCheck2FA } from 'apis/user/use';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
-import { useZModal } from 'components/ZModal/use';
-import AuthVerifyModal from 'views/Auth/components/AuthVerifyModal';
 
 const ZigPriceLabelIcon = ({
   amount,
@@ -56,36 +54,22 @@ const WithdrawConfirmForm = ({
   const { t } = useTranslation('withdraw-crypto');
   const { internalId } = useActiveExchange();
   const [withdraw, withdrawStatus] = useWithdrawMutation();
-  const user = useCurrentUser();
-  const { showModal, destroyModal } = useZModal();
 
-  const handleWithdraw = async () => {
-    if (user.ask2FA) {
-      const modal = showModal(AuthVerifyModal, {
-        user,
-        isLoading: withdrawStatus.isLoading,
-        onSubmit: async (code: string) => {
-          await doWithdraw(code);
-          destroyModal(modal.id);
-        },
-      });
-    } else {
-      doWithdraw();
-    }
-  };
-
-  const doWithdraw = async (code?: string) => {
-    await withdraw({
-      asset: coin,
-      network: network.network,
-      exchangeInternalId: internalId,
-      address,
-      tag,
-      amount,
-      code,
-    }).unwrap();
-    setStep('success');
-  };
+  const withdraw2FA = useCheck2FA({
+    status: withdrawStatus,
+    action: async (code?: string) => {
+      await withdraw({
+        asset: coin,
+        network: network.network,
+        exchangeInternalId: internalId,
+        address,
+        tag,
+        amount,
+        code,
+      }).unwrap();
+      setStep('success');
+    },
+  });
 
   if (withdrawStatus.isSuccess) {
     return (
@@ -193,10 +177,11 @@ const WithdrawConfirmForm = ({
           {t('common:back')}
         </ZigButton>
         <ZigButton
-          onClick={handleWithdraw}
+          onClick={() => withdraw2FA()}
           variant='contained'
           size='large'
           loading={withdrawStatus.isLoading}
+          type='submit'
         >
           {t('confirmation.withdrawNow')}
         </ZigButton>
