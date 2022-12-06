@@ -18,6 +18,7 @@ export const api = createApi({
           convert: convert,
         },
       }),
+      providesTags: ['Balance'],
     }),
 
     allCoins: builder.query<CoinDetails, string>({
@@ -52,6 +53,13 @@ export const api = createApi({
         method: 'POST',
         body: rest,
       }),
+      // invalidateTags delayed to allow for the withdrawal to be processed
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        setTimeout(() => {
+          dispatch(api.util.invalidateTags(['Balance']));
+        }, 5000);
+      },
     }),
   }),
 });
