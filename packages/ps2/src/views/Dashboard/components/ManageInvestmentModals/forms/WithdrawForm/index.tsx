@@ -57,7 +57,9 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const coinOptions = useMemo(
     () =>
       Object.entries(balances)
-        .filter(([c]) => coins[c])
+        .filter(
+          ([c, balance]) => parseFloat(balance.balanceTotal) > 0 && coins[c],
+        )
         .map(([c, balance]) => {
           const name = coins[c]?.name || '';
           return {
