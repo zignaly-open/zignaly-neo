@@ -1,9 +1,10 @@
-import { TypographyTypeMap } from "@mui/material";
+import { Typography, TypographyProps } from "@mui/material";
 
-export type ZigPriceLabelProps = Partial<TypographyTypeMap["props"]> & {
+export type ZigPriceLabelProps = Partial<TypographyProps> & {
   value: string | number;
   coin?: string;
   precision?: number;
   usd?: boolean;
-  coinProps?: Partial<TypographyTypeMap["props"]>;
+  coinProps?: Partial<typeof Typography>;
+  component?: string;
 };
