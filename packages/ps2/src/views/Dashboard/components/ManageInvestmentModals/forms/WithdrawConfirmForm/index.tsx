@@ -25,6 +25,7 @@ const ZigPriceLabelIcon = ({
     <Box display='flex' gap={1} alignItems='center' justifyContent='center'>
       <CoinIcon name={coin} coin={coin} />
       <ZigPriceLabel
+        noWrap
         component='span'
         color='neutral100'
         variant='bigNumber'
