@@ -22,7 +22,9 @@
   },
   "amountToWithdraw": {
     "label": "CH-Áṁöüńṫ ṫö Wïṫĥḋѓáw:",
-    "labelBalance": "CH-Áváïláblë:"
+    "labelBalance": "CH-Áváïláblë:",
+    "minimum": "CH-Ṁïńïṁüṁ:",
+    "fee": "CH-Ḟëë:"
   },
   "validation": {
     "indicateAnAddress": "CH-Yöü ṁüŝṫ ïńḋïĉáṫë áń válïḋ áḋḋѓëŝŝ.",
