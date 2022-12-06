@@ -12,7 +12,7 @@ export const AmountContainer = styled('div')<{
   box-shadow: inset 0px 0px 0px 1px #35334a;
   border-radius: 5px;
   box-sizing: border-box;
-  padding: 8px;
+  padding: 10px 18px;
 
   &:before {
     content: '';
