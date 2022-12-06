@@ -22,7 +22,9 @@
   },
   "amountToWithdraw": {
     "label": "Amount to Withdraw:",
-    "labelBalance": "Available:"
+    "labelBalance": "Available:",
+    "minimum": "Minimum:",
+    "fee": "Fee:"
   },
   "validation": {
     "indicateAnAddress": "You must indicate an valid address.",

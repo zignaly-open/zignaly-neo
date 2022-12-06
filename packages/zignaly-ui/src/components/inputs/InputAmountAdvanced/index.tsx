@@ -38,6 +38,7 @@ function InputAmount({
   showUnit = false,
   fullWidth,
   showMaxButton = true,
+  additionalLabels,
 }: InputAmountProps) {
   const {
     field: { ref, onChange, onBlur, value },
@@ -156,6 +157,8 @@ function InputAmount({
           />
         </BalanceContainer>
       )}
+
+      {additionalLabels && additionalLabels}
 
       {error && (
         <ErrorContainer>
