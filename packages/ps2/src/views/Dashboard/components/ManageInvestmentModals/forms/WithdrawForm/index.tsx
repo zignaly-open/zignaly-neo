@@ -25,10 +25,10 @@ import CoinOption from '../atoms/CoinOption';
 
 function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const { t } = useTranslation('withdraw-crypto');
-  const { data: balances, isFetching: isFetchingBalances } = useCoinBalances({
+  const { data: balances, isLoading: isLoadingBalances } = useCoinBalances({
     convert: true,
   });
-  const { data: coins, isFetching: isFetchingCoins } = useExchangeCoinsList();
+  const { data: coins, isLoading: isLoadingCoins } = useExchangeCoinsList();
   const [confirmationData, setConfirmationData] = useState<WithdrawFormData>();
 
   const {
@@ -110,7 +110,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
-  if (isFetchingCoins || isFetchingBalances) {
+  if (isLoadingCoins || isLoadingBalances) {
     return <CenteredLoader />;
   }
 
