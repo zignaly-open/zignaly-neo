@@ -35,7 +35,9 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
 
           {isAuthenticated &&
             Object.keys(isInvested.accounts || {}).length > 1 && (
-              <OtherAccountsButton service={service} />
+              <Box sx={{ mb: 0.5 }}>
+                <OtherAccountsButton service={service} />
+              </Box>
             )}
         </Box>
       )}
