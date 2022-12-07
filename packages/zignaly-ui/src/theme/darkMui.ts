@@ -30,10 +30,9 @@ const darkMui = createTheme({
     },
   },
   components: {
-    // Name of the component
     MuiButtonBase: {
       defaultProps: {
-        // The props to change the default for.
+        disableRipple: true,
       },
     },
     MuiPaper: {
