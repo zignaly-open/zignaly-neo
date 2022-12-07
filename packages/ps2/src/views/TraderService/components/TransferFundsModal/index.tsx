@@ -126,7 +126,7 @@ function TransferModal({
               label={t(
                 fromTradingAccount
                   ? 'transfer.fromTradingAccount'
-                  : 'transfer.fromDiscAccount',
+                  : 'transfer.fromStandbyAccount',
               )}
               labelBalance={t('transfer.labelBalance')}
               tokens={[
@@ -149,7 +149,9 @@ function TransferModal({
                 <Typography variant='h2'>
                   {t(
                     `transfer.${
-                      fromTradingAccount ? 'toDiscAccount' : 'toTradingAccount'
+                      fromTradingAccount
+                        ? 'toStandbyAccount'
+                        : 'toTradingAccount'
                     }`,
                   )}
                 </Typography>

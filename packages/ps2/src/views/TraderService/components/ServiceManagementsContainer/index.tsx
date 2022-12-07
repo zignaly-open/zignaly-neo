@@ -113,7 +113,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                   </Typography>
                 </TradingFunds>
                 <LabelHardDisc color='neutral200'>
-                  {t('hardDisconnected')}
+                  {t('instantWithdrawn')}
                 </LabelHardDisc>
                 <ProgressSlider
                   value={new BigNumber(balance.debt.toString())
