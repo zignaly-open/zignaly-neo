@@ -5,15 +5,22 @@ import {
   GraphTimeframe,
   Service,
 } from '../../../../../apis/service/types';
-import { ZigButton, ZigChart, ZigSelect } from '@zignaly-open/ui';
+import {
+  ZigButton,
+  ZigChart,
+  ZigPriceLabel,
+  ZigSelect,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { Box, ButtonGroup } from '@mui/material';
 import { useTraderServiceGraphQuery } from '../../../../../apis/service/api';
-import { ChartWrapper } from '../styles';
+import { ChartWrapper, GraphPercentageWrapperBox } from '../styles';
 import { formatMonthDay } from '../../../../Dashboard/components/MyDashboard/util';
 import { useChartConfig } from '../../../../../apis/service/use';
 import Stub from '../../../../../components/Stub';
 import { useTranslation } from 'react-i18next';
 import CenteredLoader from '../../../../../components/CenteredLoader';
+import PercentChange from './PercentChange';
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   const { chartType, chartTimeframe, setChartTimeframe, setChartType } =
@@ -59,6 +66,25 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           alignItems: 'center',
         }}
       >
+        <Box sx={{ mr: 2 }}>
+          <ZigTypography
+            sx={{
+              fontSize: '26px',
+              display: 'flex',
+              alignItems: 'center',
+            }}
+          >
+            <ZigPriceLabel
+              coin={service.ssc}
+              variant={'h1'}
+              color={+data?.summary > 0 ? 'redGraphOrError' : 'greenGraph'}
+              value={data?.summary}
+            />
+          </ZigTypography>
+        </Box>
+        <GraphPercentageWrapperBox sx={{ mr: 2 }}>
+          <PercentChange colored variant='h2' value={data?.summaryPct} />
+        </GraphPercentageWrapperBox>
         <Box sx={{ mr: 2 }}>
           <ButtonGroup variant={'outlined'}>
             {Object.keys(GraphTimeframe).map((v: GraphTimeframe) => (

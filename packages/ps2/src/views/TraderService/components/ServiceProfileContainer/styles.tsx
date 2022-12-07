@@ -177,3 +177,17 @@ export const ChartWrapper = styled(Box)`
   align-items: center;
   justify-content: center;
 `;
+
+export const PercentageIndicatorSmall = styled(ZigTypography)`
+  position: relative;
+  top: -1.5px;
+  font-size: 12px;
+`;
+
+export const GraphPercentageWrapperBox = styled(Box)`
+  & > * {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+`;

@@ -11,8 +11,8 @@ import { subMonths, subYears } from 'date-fns';
 const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation(['service', 'marketplace']);
   return (
-    <Box mt={4}>
-      <GridWithBottomBorder container p={2}>
+    <Box>
+      <GridWithBottomBorder container p={2} pt={0}>
         <GridCell item xs={6}>
           <ZigTypography color={'neutral300'}>
             {t('assets-in-pool')}

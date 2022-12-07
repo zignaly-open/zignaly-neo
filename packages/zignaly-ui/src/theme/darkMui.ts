@@ -62,6 +62,15 @@ const darkMui = createTheme({
       },
     },
     MuiButton: {
+      // variants: [
+      //   {
+      //     props: { variant: "dashed" },
+      //     style: {
+      //       textTransform: "none",
+      //       border: `2px dashed #f00`,
+      //     },
+      //   },
+      // ],
       styleOverrides: {
         root: {},
         sizeLarge: {
@@ -89,9 +98,9 @@ const darkMui = createTheme({
           color: dark.neutral300,
           transition: "all 0.2s linear",
           "&:hover": {
-            background:
-              "linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%)",
+            // background: "transparent",
             color: dark.neutral000,
+            borderColor: dark.neutral400,
           },
         },
       },

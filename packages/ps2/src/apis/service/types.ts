@@ -136,6 +136,8 @@ export type Service = {
 
 export type TraderServiceChart = {
   data: Record<string, number>;
+  summary: string;
+  summaryPct: string;
 };
 
 export enum GraphTimeframe {
