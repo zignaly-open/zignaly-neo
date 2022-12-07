@@ -80,6 +80,7 @@ import Header from "./components/navigation/Header";
 import MenuDropDown from "./components/navigation/MenuDropDown";
 import ZigsBalance from "./components/navigation/Header/components/ZigsBalance";
 import BrandImage from "./components/navigation/Header/components/BrandImage";
+import ZigTabs, { ZigTab, ZigTabPanel } from "./components/navigation/ZigTabs";
 
 export * from "./theme";
 export { default as ZigButton } from "./components/inputs/ZigButton";
@@ -142,6 +143,9 @@ export {
   MenuDropDown,
   PageContainer,
   MarginContainer,
+  ZigTabs,
+  ZigTab,
+  ZigTabPanel,
   // Modals
   ConnectWalletModal,
   MessageModal,

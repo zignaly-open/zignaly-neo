@@ -27,10 +27,9 @@ const darkMui = createTheme({
     fontFamily: ["Avenir Next", "Roboto", "Helvetica", "Arial", "sans-serif"].join(","),
   },
   components: {
-    // Name of the component
     MuiButtonBase: {
       defaultProps: {
-        // The props to change the default for.
+        disableRipple: true,
       },
     },
     MuiPaper: {
