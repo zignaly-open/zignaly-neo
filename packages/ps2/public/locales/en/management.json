@@ -22,7 +22,7 @@
     "labelBalance": "Current Minimum Balance",
     "save": "Save"
   },
-  "heldHardDisc": "Held for hard-disconnections:",
+  "heldInstantWithdrawals": "Held for instant withdrawals:",
   "controlledZignaly": "Controlled by Zignaly",
   "transfer": {
     "title": "Transfer",

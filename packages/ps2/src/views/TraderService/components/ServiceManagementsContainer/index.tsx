@@ -185,7 +185,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                   </Typography>
                   <LineSeparator />
                   <Typography color='neutral400' variant='body2'>
-                    {t('heldHardDisc')}
+                    {t('heldInstantWithdrawals')}
                     <InlinePriceLabel
                       value={parseFloat(balance.dfa)}
                       coin={service?.ssc ?? 'USDT'}
