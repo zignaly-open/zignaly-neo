@@ -86,8 +86,10 @@ export const InvestButtonContainer = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+`;
 
-  & > div span {
+export const BigNumberWrapperInvested = styled('div')`
+  span {
     font-weight: 500;
     font-size: 22px !important;
     line-height: 36px !important;

@@ -5,6 +5,7 @@ import { useIsAuthenticated } from '../../../../../apis/user/use';
 import { useZModal } from '../../../../../components/ZModal/use';
 import {
   useCurrentBalance,
+  useInvestedAccountsCount,
   useSetSelectedInvestment,
 } from '../../../../../apis/investment/use';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -14,10 +15,13 @@ import { ROUTE_LOGIN } from '../../../../../routes';
 import { InvestButtonSubtext, InvestButtonWrap } from '../styles';
 import { Button } from '@zignaly-open/ui';
 import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
+import OtherAccountsButton from './OtherAccountsButton';
+import { Box } from '@mui/material';
 
 const InvestButton: React.FC<{
   service: Service;
-}> = ({ service }) => {
+  showMultipleAccountButton?: boolean;
+}> = ({ service, showMultipleAccountButton }) => {
   const { t } = useTranslation('service');
   const isAuthenticated = useIsAuthenticated();
   const { showModal } = useZModal();
@@ -25,6 +29,7 @@ const InvestButton: React.FC<{
   const navigate = useNavigate();
   const { balance, isFetching } = useCurrentBalance(service.ssc);
   const location = useLocation();
+  const investedFromAccounts = useInvestedAccountsCount(service.id);
   const [needsToOpenWhenBalancesLoaded, setNeedsToOpenWhenBalancesLoaded] =
     useState<boolean>(false);
 
@@ -53,27 +58,38 @@ const InvestButton: React.FC<{
     }
   };
 
+  const showOtherAccounts =
+    investedFromAccounts > 1 && showMultipleAccountButton;
+
   return (
-    <InvestButtonWrap>
-      <Button
-        onClick={onClickMakeInvestment}
-        loading={needsToOpenWhenBalancesLoaded && isFetching}
-        caption={t('invest-button.invest-now')}
-        bottomElement={
-          <InvestButtonSubtext
-            variant={'h5'}
-            color='neutral150'
-            fontWeight='regular'
-          >
-            {t('invest-button.x-success-fee', {
-              fee: service.successFee,
-            })}
-          </InvestButtonSubtext>
-        }
-        variant={'primary'}
-        size={'xlarge'}
-      />
-    </InvestButtonWrap>
+    <>
+      <InvestButtonWrap>
+        <Button
+          onClick={onClickMakeInvestment}
+          loading={needsToOpenWhenBalancesLoaded && isFetching}
+          caption={t('invest-button.invest-now')}
+          bottomElement={
+            <InvestButtonSubtext
+              variant={'h5'}
+              color='neutral150'
+              fontWeight='regular'
+            >
+              {t('invest-button.x-success-fee', {
+                fee: service.successFee,
+              })}
+            </InvestButtonSubtext>
+          }
+          variant={'primary'}
+          size={'xlarge'}
+        />
+      </InvestButtonWrap>
+
+      {showOtherAccounts && (
+        <Box sx={{ pt: 0.5, textAlign: 'center' }}>
+          <OtherAccountsButton service={service} />
+        </Box>
+      )}
+    </>
   );
 };
 
