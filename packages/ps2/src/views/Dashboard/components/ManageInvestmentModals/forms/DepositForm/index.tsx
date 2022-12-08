@@ -24,7 +24,7 @@ import {
 import { DepositModalProps } from '../../types';
 import { allowedDeposits } from '../../../../../../util/coins';
 import { useActiveExchange } from '../../../../../../apis/user/use';
-import CoinOption from '../atoms/CoinOption';
+import CoinOption, { filterOptions } from '../atoms/CoinOption';
 
 function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
@@ -111,8 +111,9 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                 menuShouldBlockScroll
                 label={t('coinSelector.label')}
                 placeholder={t('coinSelector.placeholder')}
-                {...field}
                 options={coinOptions}
+                filterOption={filterOptions}
+                {...field}
               />
             )}
           />

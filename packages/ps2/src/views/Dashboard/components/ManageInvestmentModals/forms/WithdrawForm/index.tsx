@@ -21,7 +21,7 @@ import { WithdrawValidation } from './validations';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import CenteredLoader from 'components/CenteredLoader';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
-import CoinOption from '../atoms/CoinOption';
+import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import LabelValueLine from './atoms/LabelValueLine';
 
 function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
@@ -161,6 +161,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
                 label={t('coinSelector.label')}
                 placeholder={t('coinSelector.placeholder')}
                 options={coinOptions}
+                filterOption={filterOptions}
                 {...field}
               />
             )}
