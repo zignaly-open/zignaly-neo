@@ -1,6 +1,11 @@
-import { LoadingButton } from "@mui/lab";
+import { Button, ButtonProps } from "@mui/material";
 import { styled } from "@mui/system";
+import React from "react";
 
-const ZigButton: typeof LoadingButton = styled(LoadingButton)`` as unknown as typeof LoadingButton;
+const ZigButton: React.FC<ButtonProps & { active?: boolean }> = styled(
+  ({ active, ...props }: ButtonProps & { active?: boolean }) => (
+    <Button {...props} className={active ? "MuiButton-active" : ""} />
+  ),
+)``;
 
 export default ZigButton;

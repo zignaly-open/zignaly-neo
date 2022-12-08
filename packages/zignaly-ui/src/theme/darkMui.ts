@@ -62,15 +62,6 @@ const darkMui = createTheme({
       },
     },
     MuiButton: {
-      // variants: [
-      //   {
-      //     props: { variant: "dashed" },
-      //     style: {
-      //       textTransform: "none",
-      //       border: `2px dashed #f00`,
-      //     },
-      //   },
-      // ],
       styleOverrides: {
         root: {},
         sizeLarge: {
@@ -89,7 +80,7 @@ const darkMui = createTheme({
           background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
           boxShadow: "0px 12px 16px -8px rgba(25, 25, 39, 0.36)",
           transition: "all 0.3s linear",
-          "&:hover": {
+          "&:hover, &.MuiButton-active": {
             background: "linear-gradient(rgba(20, 156, 173, 0.64),rgba(69, 64, 193, 0.64))",
           },
         },
@@ -97,7 +88,7 @@ const darkMui = createTheme({
           borderColor: dark.neutral600,
           color: dark.neutral300,
           transition: "all 0.2s linear",
-          "&:hover": {
+          "&:hover, &.MuiButton-active": {
             color: dark.neutral000,
             borderColor: dark.neutral400,
           },
