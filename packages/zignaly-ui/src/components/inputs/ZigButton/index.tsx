@@ -1,4 +1,4 @@
-import {LoadingButton, LoadingButtonProps} from "@mui/lab";
+import { LoadingButton, LoadingButtonProps } from "@mui/lab";
 import { styled } from "@mui/system";
 import React from "react";
 
