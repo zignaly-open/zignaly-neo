@@ -157,7 +157,7 @@ const MyBalancesTable = (): JSX.Element => {
                   variant='secondary'
                 />
               )}
-              {parseFloat(balance.balanceTotal) > 0 && (
+              {+balance.balanceTotal > 0 && (
                 <IconButton
                   icon={<Remove color={'neutral300'} />}
                   onClick={() =>
