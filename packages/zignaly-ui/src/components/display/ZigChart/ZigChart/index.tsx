@@ -45,7 +45,18 @@ const ZigChart = ({ data, yAxisFormatter }: ChartLargeProps) => {
             style={axisStyle}
           />
 
-          <VictoryAxis tickLabelComponent={<VictoryLabel />} fixLabelOverlap style={axisStyle} />
+          <VictoryAxis
+            tickFormat={() => ""}
+            tickLabelComponent={<VictoryLabel />}
+            style={axisStyle}
+          />
+
+          <VictoryAxis
+            offsetY={20}
+            tickLabelComponent={<VictoryLabel />}
+            fixLabelOverlap
+            style={axisStyle}
+          />
 
           <VictoryArea
             style={{
