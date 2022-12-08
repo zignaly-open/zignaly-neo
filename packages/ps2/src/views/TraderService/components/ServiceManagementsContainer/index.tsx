@@ -113,7 +113,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                   </Typography>
                 </TradingFunds>
                 <LabelHardDisc color='neutral200'>
-                  {t('hardDisconnected')}
+                  {t('instantWithdrawn')}
                 </LabelHardDisc>
                 <ProgressSlider
                   value={new BigNumber(balance.debt.toString())
@@ -152,7 +152,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 </Typography>
                 <TradingFunds>
                   <Typography color='neutral400' variant='body2'>
-                    {t('availableDisconnection')}
+                    {t('availableWithdrawals')}
                     <InlinePriceLabel
                       value={parseFloat(balance.scaSscSum)}
                       coin={service?.ssc ?? 'USDT'}
@@ -185,7 +185,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                   </Typography>
                   <LineSeparator />
                   <Typography color='neutral400' variant='body2'>
-                    {t('heldHardDisc')}
+                    {t('heldInstantWithdrawals')}
                     <InlinePriceLabel
                       value={parseFloat(balance.dfa)}
                       coin={service?.ssc ?? 'USDT'}

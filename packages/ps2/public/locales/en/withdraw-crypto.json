@@ -1,28 +1,48 @@
 {
-    "title": "Withdraw Crypto",
-    "description": "Withdraw crypto to an external account. To move funds between Zignaly accounts, use a transfer instead.",
-    "coinSelector": {
-      "label": "Coin:",
-      "placeholder": "Search a coin"
-    },
-    "networkSelector": {
-      "label": "Network:",
-      "placeholder": "Choose the network"
-    },
-    "withdrawAddress": {
-      "label": "Withdraw to Address:",
-      "placeholder": "Paste wallet address here",
-      "warning": "Only send {{network}} {{coin}} tokens to this address"
-    },
-    "amountToWithdraw": {
-      "label": "Amount to Withdraw:"
-    },
-    "validation": {
-      "indicateAnAddress": "You must indicate an valid address.",
-      "indicateAnAmount": "You must indicate an amount.",
-      "minimumToWithdrawal": "The minimum withdrawal amount is {{value}} {{coin}}"
-    }
-
+  "title": "Withdraw Crypto",
+  "description": "Withdraw crypto to an external account. To move funds between Zignaly accounts, use a transfer instead.",
+  "coinSelector": {
+    "label": "Coin:",
+    "placeholder": "Search a coin"
+  },
+  "networkSelector": {
+    "label": "Network:",
+    "placeholder": "Choose the network"
+  },
+  "withdrawAddress": {
+    "label": "Withdraw to Address:",
+    "placeholder": "Paste wallet address here",
+    "warning": "Only send {{network}} {{coin}} tokens to this address",
+    "invalid": "Invalid address"
+  },
+  "withdrawMemo": {
+    "label": "MEMO/Tag:",
+    "placeholder": "Paste wallet MEMO/Tag here",
+    "invalid": "MEMO/Tag is invalid, please review your target wallet network details"
+  },
+  "amountToWithdraw": {
+    "label": "Amount to Withdraw:",
+    "labelBalance": "Available:",
+    "minimum": "Minimum:",
+    "fee": "Fee:"
+  },
+  "validation": {
+    "indicateAnAddress": "You must indicate an valid address.",
+    "minWithdrawal": "The minimum withdrawal amount is {{value}} {{coin}}"
+  },
+  "confirmation": {
+    "title": "Confirm Withdrawal",
+    "description": "Please confirm the information is correct and submit your withdrawal.",
+    "receive": "You’ll Receive:",
+    "network": "Withdrawal Network",
+    "address": "Withdraw to Address",
+    "amount": "Withdrawal Amount",
+    "networkFee": "Network Fee",
+    "continue": "Continue to Confirmation",
+    "withdrawNow": "Withdraw now!"
+  },
+  "success": {
+    "title": "Withdrawal Success",
+    "description": "Your withdrawal request has been sent and should be processed shortly."
+  }
 }
-
-

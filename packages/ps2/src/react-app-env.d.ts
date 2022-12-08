@@ -137,6 +137,7 @@ declare module '@mui/material/SvgIcon' {
 }
 
 import { Theme as MuiTheme } from '@mui/material/styles';
+import { NumericFormatProps } from 'react-number-format';
 import React from 'react';
 
 declare module '@emotion/react' {
@@ -170,6 +171,11 @@ declare module '@emotion/react' {
     successToasterBg: string;
     successToasterBorder: string;
   }
+}
+
+declare module 'react-number-format' {
+  const numericFormatter = (numStr: string, props: NumericFormatProps) =>
+    string;
 }
 
 // Update the Typography's variant prop options

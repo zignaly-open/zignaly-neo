@@ -40,10 +40,11 @@ declare module "@mui/material/styles" {
   interface TypographyVariants {
     bigNumber: React.CSSProperties;
   }
+}
 
-  // allow configuration using `createTheme`
-  interface TypographyVariantsOptions {
-    bigNumber?: React.CSSProperties;
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    bigNumber: true;
   }
 }
 
@@ -145,12 +146,5 @@ declare module "@emotion/react" {
     errorToasterBorder: string;
     successToasterBg: string;
     successToasterBorder: string;
-  }
-}
-
-// Update the Typography's variant prop options
-declare module "@mui/material/Typography" {
-  interface TypographyPropsVariantOverrides {
-    bigNumber: true;
   }
 }

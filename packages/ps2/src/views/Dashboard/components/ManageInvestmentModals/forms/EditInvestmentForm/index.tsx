@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import NumberFormat from 'react-number-format';
+import { NumericFormat } from 'react-number-format';
 import { useTheme } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -108,7 +108,7 @@ function EditInvestmentForm({
             <CoinIcon coin={coin.id} />
             <TokenValue>
               <Typography variant={'bigNumber'} color={'neutral100'}>
-                <NumberFormat
+                <NumericFormat
                   value={details?.invested}
                   displayType={'text'}
                   thousandSeparator={true}
