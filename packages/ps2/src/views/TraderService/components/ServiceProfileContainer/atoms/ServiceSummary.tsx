@@ -3,7 +3,7 @@ import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
 import { ZigTypography } from '@zignaly-open/ui';
 import { Box, Grid } from '@mui/material';
-import { GridCell, GridWithBottomBorder } from '../styles';
+import { GridCell, AssetsInPoolWrapper, GridWithBottomBorder } from '../styles';
 import AssetsInPool from '../../../../../components/AssetsInPool';
 import ServicePercentageInfo from './ServicePercentageInfo';
 import { subMonths, subYears } from 'date-fns';
@@ -17,11 +17,13 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
           <ZigTypography color={'neutral300'}>
             {t('assets-in-pool')}
           </ZigTypography>
-          <AssetsInPool
-            assetsValue={service.usdtInvested}
-            convertedValue={+service.invested}
-            convertedValueCoin={service.ssc}
-          />
+          <AssetsInPoolWrapper>
+            <AssetsInPool
+              assetsValue={service.usdtInvested}
+              convertedValue={+service.invested}
+              convertedValueCoin={service.ssc}
+            />
+          </AssetsInPoolWrapper>
         </GridCell>
         <GridCell item xs={6}>
           <ZigTypography color={'neutral300'}>

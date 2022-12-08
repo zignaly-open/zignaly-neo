@@ -22,6 +22,15 @@ declare module '*.svg' {
 }
 
 declare module '@mui/material/styles' {
+  interface TypographyVariants {
+    bigNumber: React.CSSProperties;
+  }
+
+  // allow configuration using `createTheme`
+  interface TypographyVariantsOptions {
+    bigNumber?: React.CSSProperties;
+  }
+
   interface CustomPalette {
     white: string;
     neutral800: string;
@@ -128,6 +137,7 @@ declare module '@mui/material/SvgIcon' {
 }
 
 import { Theme as MuiTheme } from '@mui/material/styles';
+import React from 'react';
 
 declare module '@emotion/react' {
   export interface Theme extends MuiTheme {
@@ -159,5 +169,12 @@ declare module '@emotion/react' {
     avatarBack: string;
     successToasterBg: string;
     successToasterBorder: string;
+  }
+}
+
+// Update the Typography's variant prop options
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    bigNumber: true;
   }
 }

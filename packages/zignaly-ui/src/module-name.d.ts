@@ -1,4 +1,5 @@
 import { Theme as MuiTheme } from "@mui/material/styles";
+import React from "react";
 
 declare module "@mui/material/styles" {
   interface CustomPalette {
@@ -35,6 +36,15 @@ declare module "@mui/material/styles" {
   interface Palette extends CustomPalette {}
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface PaletteOptions extends CustomPalette {}
+
+  interface TypographyVariants {
+    bigNumber: React.CSSProperties;
+  }
+
+  // allow configuration using `createTheme`
+  interface TypographyVariantsOptions {
+    bigNumber?: React.CSSProperties;
+  }
 }
 
 declare module "@mui/material/styles/createTheme" {
@@ -135,5 +145,12 @@ declare module "@emotion/react" {
     errorToasterBorder: string;
     successToasterBg: string;
     successToasterBorder: string;
+  }
+}
+
+// Update the Typography's variant prop options
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    bigNumber: true;
   }
 }

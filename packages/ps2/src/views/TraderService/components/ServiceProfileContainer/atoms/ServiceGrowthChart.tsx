@@ -65,62 +65,69 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
       <Box
         sx={{
           mb: 2,
+          minHeight: 40,
           flexDirection: 'row',
           display: 'flex',
           alignItems: 'center',
         }}
       >
-        {typeof data?.summary !== 'undefined' && (
-          <>
-            <Box sx={{ mr: 2 }}>
-              <ZigTypography
-                sx={{
-                  fontSize: '26px',
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                {![
-                  GraphChartType.pnl_pct_compound,
-                  GraphChartType.at_risk_pct,
-                  GraphChartType.investors,
-                ].includes(chartType) ? (
-                  <ZigPriceLabel
-                    coin={service.ssc}
-                    variant={'h1'}
-                    color={
-                      +data?.summary > 0 ? 'greenGraph' : 'redGraphOrError'
-                    }
-                    value={data?.summary}
-                  />
-                ) : (
-                  <ZigTypography
-                    variant={'h1'}
-                    color={
-                      +data?.summary > 0 ? 'greenGraph' : 'redGraphOrError'
-                    }
-                  >
-                    {chartType === GraphChartType.investors
-                      ? t('marketplace:table:x-investors', {
-                          count: +data?.summary,
-                        })
-                      : t('common:percent', { value: data?.summary })}
-                  </ZigTypography>
-                )}
-              </ZigTypography>
-            </Box>
+        {typeof data?.summary !== 'undefined' &&
+          !isError &&
+          !isLoading &&
+          !isFetching && (
+            <>
+              <Box sx={{ mr: 2 }}>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  {![
+                    GraphChartType.pnl_pct_compound,
+                    GraphChartType.at_risk_pct,
+                    GraphChartType.investors,
+                  ].includes(chartType) ? (
+                    <ZigPriceLabel
+                      coin={service.ssc}
+                      variant={'bigNumber'}
+                      color={
+                        +data?.summary > 0 ? 'greenGraph' : 'redGraphOrError'
+                      }
+                      value={data?.summary}
+                    />
+                  ) : (
+                    <ZigTypography
+                      variant={'bigNumber'}
+                      color={
+                        +data?.summary > 0 ? 'greenGraph' : 'redGraphOrError'
+                      }
+                    >
+                      {chartType === GraphChartType.investors
+                        ? t('marketplace:table:x-investors', {
+                            count: +data?.summary,
+                          })
+                        : t('common:percent', { value: data?.summary })}
+                    </ZigTypography>
+                  )}
+                </Box>
+              </Box>
 
-            {![
-              GraphChartType.pnl_pct_compound,
-              GraphChartType.at_risk_pct,
-              GraphChartType.investors,
-            ].includes(chartType) && (
-              <GraphPercentageWrapperBox sx={{ mr: 2 }}>
-                <PercentChange colored variant='h2' value={data?.summaryPct} />
-              </GraphPercentageWrapperBox>
-            )}
-          </>
-        )}
+              {![
+                GraphChartType.pnl_pct_compound,
+                GraphChartType.at_risk_pct,
+                GraphChartType.investors,
+              ].includes(chartType) && (
+                <GraphPercentageWrapperBox sx={{ mr: 2 }}>
+                  <PercentChange
+                    colored
+                    variant='h2'
+                    value={data?.summaryPct}
+                  />
+                </GraphPercentageWrapperBox>
+              )}
+            </>
+          )}
 
         <Box sx={{ flex: 1 }} />
         <Box sx={{ mr: 2 }}>
