@@ -202,3 +202,9 @@ export const SqueezedButtonGroup = styled(ButtonGroup)`
     min-width: 60px !important;
   }
 `;
+
+export const AssetsInPoolWrapper = styled(Box)`
+  & > .MuiBox-root > .MuiBox-root:first-child {
+    margin-bottom: 8px;
+  }
+`;

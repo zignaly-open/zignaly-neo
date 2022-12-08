@@ -106,14 +106,25 @@ const darkMui = createTheme({
       },
     },
     MuiTypography: {
+      variants: [
+        {
+          props: { variant: "bigNumber" },
+          style: {
+            fontSize: "26px",
+            lineHeight: "40px",
+            color: dark.neutral000,
+            fontWeight: "500",
+          },
+        },
+      ],
       defaultProps: {
         variantMapping: {
-          h1: "h2",
+          h1: "h1",
           h2: "h2",
-          h3: "h2",
-          h4: "h2",
-          h5: "h2",
-          h6: "h2",
+          h3: "h3",
+          h4: "h4",
+          h5: "h5",
+          h6: "h6",
           subtitle1: "h2",
           subtitle2: "h2",
           body1: "span",
