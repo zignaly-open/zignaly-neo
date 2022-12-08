@@ -134,8 +134,9 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           <SqueezedButtonGroup variant={'outlined'}>
             {Object.keys(GraphTimeframe).map((v: GraphTimeframe) => (
               <ZigButton
+                active={v === chartTimeframe}
                 size={'small'}
-                variant={v === chartTimeframe ? 'contained' : 'outlined'}
+                variant={'outlined'}
                 key={v}
                 onClick={() => setChartTimeframe(v)}
               >
