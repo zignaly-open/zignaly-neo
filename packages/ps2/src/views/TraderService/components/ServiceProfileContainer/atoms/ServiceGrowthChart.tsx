@@ -146,6 +146,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
         </Box>
         <Box sx={{ mr: 4.5 }}>
           <ZigSelect
+            outlined
             width={180}
             small
             value={chartType}

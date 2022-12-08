@@ -51,13 +51,14 @@ function ZigSelect<T>({
   options,
   small = false,
   disabled,
+  outlined,
   ...props
 }: ZigSelectProps<T>): JSX.Element {
   const theme = useTheme() as Theme;
   const styles = useMemo(() => customStyles(small, theme), [small, theme]);
 
   return (
-    <StyledSelectWrapper error={error} width={width} small={small}>
+    <StyledSelectWrapper error={error} width={width} small={small} outlined={outlined}>
       {label && <Typography color={"neutral200"}>{label}</Typography>}
       {ZigSelectGlobalStyle}
       <Select

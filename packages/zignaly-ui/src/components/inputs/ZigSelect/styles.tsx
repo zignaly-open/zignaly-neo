@@ -3,7 +3,7 @@ import { NiceScrollbar } from "utils/css";
 import React from "react";
 import { css } from "@emotion/react";
 
-type Props = { error?: string; width?: number; small?: boolean };
+type Props = { error?: string; width?: number; small?: boolean; outlined?: boolean };
 
 export const StyledSelectWrapper = styled(Box)<Props>`
   .zig-react-select {
@@ -16,8 +16,18 @@ export const StyledSelectWrapper = styled(Box)<Props>`
       border-radius: 5px;
       display: flex;
       align-items: center;
-      background: rgba(16, 18, 37);
-      background: linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%);
+      ${({ outlined }) =>
+        css`
+          background: ${outlined ? "transparent" : "rgba(16, 18, 37)"};
+          background: ${outlined
+            ? "transparent"
+            : `linear-gradient(
+            90deg,
+            rgb(16 18 37) 0%,
+            rgb(16 18 37) 35%,
+            rgb(16 18 37) 100%
+          );`};
+        `}
       transition: border-color 0.2s;
       margin-bottom: 3px;
 
@@ -28,6 +38,18 @@ export const StyledSelectWrapper = styled(Box)<Props>`
       &:hover {
         border-color: ${({ theme, error }) =>
           error ? theme.palette?.redGraphOrError : theme.palette.neutral400};
+        ${({ outlined }) =>
+          outlined &&
+          css`
+            background-color: rgba(118, 130, 247, 0.08);
+          `}
+        ${({ outlined, theme }) =>
+          outlined &&
+          css`
+            .zig-react-select__single-value {
+              color: ${theme.palette.neutral000} !important;
+            }
+          `}
       }
 
       &--is-focused {
@@ -89,8 +111,7 @@ export const StyledSelectWrapper = styled(Box)<Props>`
       ${({ small }) =>
         small &&
         css`
-          padding-top: 0;
-          padding-bottom: 0;
+          padding: 0 4px;
           width: 22px;
           height: 22px;
         `};
