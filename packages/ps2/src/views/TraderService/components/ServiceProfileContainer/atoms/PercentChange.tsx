@@ -17,6 +17,7 @@ const PercentChange: React.FC<{
       ? 'redGraphOrError'
       : 'greenGraph'
     : 'neutral200';
+
   return (
     <PercentChangeContainer component={'div'} color={color}>
       <ZigTypography variant={variant}>

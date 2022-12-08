@@ -178,6 +178,7 @@ export const RightSideActionWrapper = styled(Box)`
 export const ChartWrapper = styled(Box)`
   display: flex;
   margin-left: -20px;
+  min-height: 306px;
   align-items: center;
   justify-content: center;
 `;
