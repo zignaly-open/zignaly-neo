@@ -30,7 +30,7 @@ const ZigChart = ({ data, yAxisFormatter }: ChartLargeProps) => {
           {...{
             domain: { y: yDomain as unknown as undefined },
             width: width || 600,
-            height: 400,
+            height: 300,
             domainPadding: { x: [0, 1], y: 5 },
             padding: { left: 35, top: 20, right: 35, bottom: 20 },
           }}

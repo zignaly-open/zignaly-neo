@@ -12,7 +12,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation(['service', 'marketplace']);
   return (
     <Box>
-      <GridWithBottomBorder container p={2} pt={0}>
+      <GridWithBottomBorder container pb={2.5} pl={2} pr={2} pt={0}>
         <GridCell item xs={6}>
           <ZigTypography color={'neutral300'}>
             {t('assets-in-pool')}
@@ -32,7 +32,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
           </ZigTypography>
         </GridCell>
       </GridWithBottomBorder>
-      <GridWithBottomBorder container p={2}>
+      <GridWithBottomBorder container pb={2.5} pl={2} pr={2} pt={2.5}>
         <GridCell item xs={4} rightBorder>
           <ServicePercentageInfo
             title={t('marketplace:table.n-months', { count: 1 })}

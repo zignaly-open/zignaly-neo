@@ -30,13 +30,13 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
       paddingTop={isOwner ? 7 : 0}
     >
       <Grid container>
-        <Grid item sx={{ display: 'flex' }} xs={12} md={8} pb={2}>
+        <Grid item sx={{ display: 'flex' }} xs={12} md={8} pb={2} pr={7.5}>
           <ServiceProfileHeader service={service} />
         </Grid>
         <Grid item xs={12} md={4} pb={2}>
           <RightSideActions service={service} />
         </Grid>
-        <Grid item xs={12} md={8}>
+        <Grid item xs={12} md={8} pr={7.5}>
           <ServiceGrowthChart service={service} />
           <ServiceDescription service={service} />
           <ServiceManagerDescription service={service} />

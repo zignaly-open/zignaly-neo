@@ -12,9 +12,13 @@ import {
   ZigSelect,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { Box, ButtonGroup } from '@mui/material';
+import { Box } from '@mui/material';
 import { useTraderServiceGraphQuery } from '../../../../../apis/service/api';
-import { ChartWrapper, GraphPercentageWrapperBox } from '../styles';
+import {
+  ChartWrapper,
+  GraphPercentageWrapperBox,
+  SqueezedButtonGroup,
+} from '../styles';
 import { formatMonthDay } from '../../../../Dashboard/components/MyDashboard/util';
 import { useChartConfig } from '../../../../../apis/service/use';
 import Stub from '../../../../../components/Stub';
@@ -77,16 +81,25 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
             <ZigPriceLabel
               coin={service.ssc}
               variant={'h1'}
-              color={+data?.summary > 0 ? 'redGraphOrError' : 'greenGraph'}
+              color={+data?.summary > 0 ? 'greenGraph' : 'redGraphOrError'}
               value={data?.summary}
             />
           </ZigTypography>
         </Box>
-        <GraphPercentageWrapperBox sx={{ mr: 2 }}>
-          <PercentChange colored variant='h2' value={data?.summaryPct} />
-        </GraphPercentageWrapperBox>
+
+        {![
+          GraphChartType.pnl_pct_compound,
+          GraphChartType.at_risk_pct,
+          GraphChartType.investors,
+        ].includes(chartType) && (
+          <GraphPercentageWrapperBox sx={{ mr: 2 }}>
+            <PercentChange colored variant='h2' value={data?.summaryPct} />
+          </GraphPercentageWrapperBox>
+        )}
+
+        <Box sx={{ flex: 1 }} />
         <Box sx={{ mr: 2 }}>
-          <ButtonGroup variant={'outlined'}>
+          <SqueezedButtonGroup variant={'outlined'}>
             {Object.keys(GraphTimeframe).map((v: GraphTimeframe) => (
               <ZigButton
                 size={'small'}
@@ -97,15 +110,17 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                 {t('periods.' + v)}
               </ZigButton>
             ))}
-          </ButtonGroup>
+          </SqueezedButtonGroup>
         </Box>
-        <ZigSelect
-          width={200}
-          small
-          value={chartType}
-          onChange={(v) => setChartType(v)}
-          options={chartTypeOptions}
-        />
+        <Box sx={{ mr: 4.5 }}>
+          <ZigSelect
+            width={180}
+            small
+            value={chartType}
+            onChange={(v) => setChartType(v)}
+            options={chartTypeOptions}
+          />
+        </Box>
       </Box>
       <ChartWrapper>
         {isError ? (
