@@ -38,6 +38,10 @@ const customStyles = (small: boolean, theme: Theme): StylesConfig => ({
         }
       : {}),
   }),
+  singleValue: (provided, state) => ({
+    ...provided,
+    display: state.selectProps.menuIsOpen ? "none" : "block",
+  }),
 });
 
 function ZigSelect<T>({
@@ -77,12 +81,6 @@ function ZigSelect<T>({
         placeholder={placeholder || label}
         value={options?.find?.((x) => x.value === value || (x as unknown) === value) || null}
         classNamePrefix="zig-react-select"
-        styles={{
-          singleValue: (provided, state) => ({
-            ...provided,
-            display: state.selectProps.menuIsOpen ? "none" : "block",
-          }),
-        }}
         {...props}
       />
       {!!error && <ErrorMessage text={error} />}
