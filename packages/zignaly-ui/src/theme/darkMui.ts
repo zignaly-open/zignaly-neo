@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material/styles";
+import { createTheme, ThemeOptions } from "@mui/material/styles";
 import dark from "./dark";
 
 const darkMui = createTheme({
@@ -25,6 +25,9 @@ const darkMui = createTheme({
   },
   typography: {
     fontFamily: ["Avenir Next", "Roboto", "Helvetica", "Arial", "sans-serif"].join(","),
+    button: {
+      textTransform: "none",
+    },
   },
   components: {
     // Name of the component
@@ -122,6 +125,12 @@ const darkMui = createTheme({
         root: {
           letterSpacing: "0.55px",
         },
+        bigNumber: {
+          fontSize: "26px",
+          lineHeight: "40px",
+          color: dark.neutral000,
+          fontWeight: "500",
+        },
         h1: {
           fontSize: "22px",
           lineHeight: "36px",
@@ -188,6 +197,6 @@ const darkMui = createTheme({
       },
     },
   },
-});
+} as ThemeOptions);
 
 export default darkMui;

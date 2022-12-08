@@ -40,10 +40,11 @@ declare module "@mui/material/styles" {
   interface TypographyVariants {
     bigNumber: React.CSSProperties;
   }
+}
 
-  // allow configuration using `createTheme`
-  interface TypographyVariantsOptions {
-    bigNumber?: React.CSSProperties;
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    bigNumber: true;
   }
 }
 

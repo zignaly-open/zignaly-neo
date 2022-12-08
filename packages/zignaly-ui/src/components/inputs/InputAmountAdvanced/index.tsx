@@ -1,5 +1,4 @@
 import React, { useCallback } from "react";
-import NumberFormat from "react-number-format";
 import { useController } from "react-hook-form";
 import {
   InputContainer,
@@ -21,7 +20,8 @@ import Typography from "components/display/Typography";
 import CoinIcon, { CoinSizes } from "../../display/CoinIcon";
 import { InputAmountProps, TokenItem } from "./types";
 import { changeEvent } from "utils/event";
-import { getPrecisionForCoin } from "components/display/ZigPriceLabel/util";
+import { useUpdateEffect } from "react-use";
+import ZigPriceLabel from "components/display/ZigPriceLabel";
 
 // FIXME this component still needs Jesus
 function InputAmount({
@@ -38,6 +38,7 @@ function InputAmount({
   showUnit = false,
   fullWidth,
   showMaxButton = true,
+  additionalLabels,
 }: InputAmountProps) {
   const {
     field: { ref, onChange, onBlur, value },
@@ -49,6 +50,14 @@ function InputAmount({
       token: tokens[0],
     },
   });
+
+  useUpdateEffect(() => {
+    // Update token when prop changes
+    onChange({
+      token: tokens[0],
+      value: "",
+    });
+  }, [tokens[0].id]);
 
   const onValueChange: typeof onChange = (e) => {
     onChange({
@@ -134,17 +143,22 @@ function InputAmount({
           <BalanceLabel variant="body2" color="neutral200">
             {labelBalance}
           </BalanceLabel>
-          <Typography variant="body2" color="neutral000">
-            <NumberFormat
-              decimalScale={getPrecisionForCoin(value?.token?.id, value)}
-              value={value?.token.balance as string}
-              displayType={"text"}
-              suffix={value?.token ? ` ${value?.token?.id?.toUpperCase() ?? ""}` : ""}
-              thousandSeparator={true}
-            />
-          </Typography>
+          <ZigPriceLabel
+            value={value?.token.balance}
+            variant="body2"
+            component="span"
+            color="neutral000"
+            precision={8}
+            coin={value?.token.id}
+            coinProps={{
+              color: "neutral000",
+              fontWeight: 500,
+            }}
+          />
         </BalanceContainer>
       )}
+
+      {additionalLabels && additionalLabels}
 
       {error && (
         <ErrorContainer>

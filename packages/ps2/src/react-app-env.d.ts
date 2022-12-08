@@ -22,15 +22,6 @@ declare module '*.svg' {
 }
 
 declare module '@mui/material/styles' {
-  interface TypographyVariants {
-    bigNumber: React.CSSProperties;
-  }
-
-  // allow configuration using `createTheme`
-  interface TypographyVariantsOptions {
-    bigNumber?: React.CSSProperties;
-  }
-
   interface CustomPalette {
     white: string;
     neutral800: string;
@@ -64,6 +55,16 @@ declare module '@mui/material/styles' {
 
   interface Palette extends CustomPalette {}
   interface PaletteOptions extends CustomPalette {}
+
+  interface TypographyVariants {
+    bigNumber: React.CSSProperties;
+  }
+}
+
+declare module '@mui/material/Typography' {
+  interface TypographyPropsVariantOverrides {
+    bigNumber: true;
+  }
 }
 
 declare module '@mui/material/styles/createTheme' {
@@ -138,6 +139,7 @@ declare module '@mui/material/SvgIcon' {
 
 import { Theme as MuiTheme } from '@mui/material/styles';
 import React from 'react';
+import { NumericFormatProps } from 'react-number-format';
 
 declare module '@emotion/react' {
   export interface Theme extends MuiTheme {
@@ -177,4 +179,9 @@ declare module '@mui/material/Typography' {
   interface TypographyPropsVariantOverrides {
     bigNumber: true;
   }
+}
+
+declare module 'react-number-format' {
+  const numericFormatter = (numStr: string, props: NumericFormatProps) =>
+    string;
 }
