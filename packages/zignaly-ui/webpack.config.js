@@ -23,6 +23,7 @@ const config = {
         // build: true,
         mode: "write-dts",
         // tsconfig: __dirname + "/tsconfig.json",
+        memoryLimit: 4096,
       },
     }),
     new CopyWebpackPlugin({
@@ -59,11 +60,13 @@ const config = {
       {
         test: /\.svg$/i,
         issuer: /\.[jt]sx?$/,
-        resourceQuery: {not: [/url/]},
-        use: [{
-          loader: '@svgr/webpack',
-          options: {exportType: 'named'}
-        }],
+        resourceQuery: { not: [/url/] },
+        use: [
+          {
+            loader: "@svgr/webpack",
+            options: { exportType: "named" },
+          },
+        ],
       },
       {
         test: /\.(eot|ttf|woff|woff2|png|jpg|gif)$/i,
