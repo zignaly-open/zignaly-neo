@@ -98,7 +98,6 @@ const darkMui = createTheme({
           color: dark.neutral300,
           transition: "all 0.2s linear",
           "&:hover": {
-            // background: "transparent",
             color: dark.neutral000,
             borderColor: dark.neutral400,
           },
