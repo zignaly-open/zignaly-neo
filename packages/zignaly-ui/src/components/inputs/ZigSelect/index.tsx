@@ -38,6 +38,10 @@ const customStyles = (small: boolean, theme: Theme): StylesConfig => ({
         }
       : {}),
   }),
+  singleValue: (provided, state) => ({
+    ...provided,
+    display: state.selectProps.menuIsOpen ? "none" : "block",
+  }),
 });
 
 function ZigSelect<T>({

@@ -152,7 +152,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 </Typography>
                 <TradingFunds>
                   <Typography color='neutral400' variant='body2'>
-                    {t('availableDisconnection')}
+                    {t('availableWithdrawals')}
                     <InlinePriceLabel
                       value={parseFloat(balance.scaSscSum)}
                       coin={service?.ssc ?? 'USDT'}
