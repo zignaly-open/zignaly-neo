@@ -13,7 +13,7 @@ const PercentChange: React.FC<{
 }> = ({ value, colored, variant = 'h6' }) => {
   const { t } = useTranslation('common');
   const color = colored
-    ? +value > 0
+    ? +value < 0
       ? 'redGraphOrError'
       : 'greenGraph'
     : 'neutral200';

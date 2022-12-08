@@ -1,4 +1,4 @@
-import { styled, css, Grid } from '@mui/material';
+import { styled, css, Grid, ButtonGroup } from '@mui/material';
 import muiStyled from '@emotion/styled';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { ZigTypography } from '@zignaly-open/ui';
@@ -152,6 +152,11 @@ export const GridCell = styled(Grid)<{ rightBorder?: boolean }>`
   border-right: 0.5px solid
     ${({ theme, rightBorder }) =>
       rightBorder ? theme.palette.neutral700 : 'transparent'};
+
+  & > span:first-child {
+    display: block;
+    margin-bottom: 10px;
+  }
 `;
 
 export const PercentChangeContainer: typeof ZigTypography = styled(
@@ -171,7 +176,6 @@ export const RightSideActionWrapper = styled(Box)`
 `;
 
 export const ChartWrapper = styled(Box)`
-  min-height: 400px;
   display: flex;
   margin-left: -20px;
   align-items: center;
@@ -189,5 +193,11 @@ export const GraphPercentageWrapperBox = styled(Box)`
     display: flex;
     flex-direction: row;
     align-items: center;
+  }
+`;
+
+export const SqueezedButtonGroup = styled(ButtonGroup)`
+  .MuiButton-root {
+    min-width: 60px !important;
   }
 `;
