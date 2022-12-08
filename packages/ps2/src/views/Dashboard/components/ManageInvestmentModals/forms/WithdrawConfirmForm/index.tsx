@@ -1,46 +1,13 @@
 import React from 'react';
 import { AmountContainer } from './styles';
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { ConfirmWithdrawalModalProps } from './types';
-import {
-  CoinIcon,
-  ZigButton,
-  ZigInput,
-  ZigPriceLabel,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { CoinIcon, ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { useWithdrawMutation } from 'apis/coin/api';
 import { useActiveExchange, useCheck2FA } from 'apis/user/use';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
-
-const ZigPriceLabelIcon = ({
-  amount,
-  coin,
-}: {
-  amount: string | number;
-  coin: string;
-}) => {
-  return (
-    <Box display='flex' gap={1} alignItems='center' justifyContent='center'>
-      <CoinIcon name={coin} coin={coin} />
-      <ZigPriceLabel
-        noWrap
-        component='span'
-        color='neutral100'
-        variant='bigNumber'
-        value={+amount}
-        coin={coin}
-        coinProps={{
-          color: 'neutral400',
-          variant: 'h3',
-          component: 'span',
-          fontWeight: 500,
-        }}
-      />
-    </Box>
-  );
-};
+import ZigPriceLabelIcon from './atoms';
 
 const WithdrawConfirmForm = ({
   coin,
