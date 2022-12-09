@@ -148,12 +148,3 @@ export const InputField = styled.div`
   flex: 1;
   padding-left: 8px;
 `;
-
-export const ErrorContainer = styled.div`
-  margin-top: 12px;
-
-  &.insufficient-funds {
-    margin-top: 0;
-    margin-bottom: 8px;
-  }
-`;

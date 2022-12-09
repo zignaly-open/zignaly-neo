@@ -7,7 +7,7 @@ import { CoinIcon, ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { useWithdrawMutation } from 'apis/coin/api';
 import { useActiveExchange, useCheck2FA } from 'apis/user/use';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
-import ZigPriceLabelIcon from './atoms';
+import { ZigPriceLabelIcon } from './atoms';
 
 const WithdrawConfirmForm = ({
   coin,
