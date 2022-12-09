@@ -22,6 +22,7 @@ import { InputAmountProps, TokenItem } from "./types";
 import { changeEvent } from "utils/event";
 import { useUpdateEffect } from "react-use";
 import ZigPriceLabel from "components/display/ZigPriceLabel";
+import { Box } from "@mui/material";
 
 // FIXME this component still needs Jesus
 function InputAmount({
@@ -38,7 +39,6 @@ function InputAmount({
   showUnit = false,
   fullWidth,
   showMaxButton = true,
-  additionalLabels,
 }: InputAmountProps) {
   const {
     field: { ref, onChange, onBlur, value },
@@ -158,12 +158,10 @@ function InputAmount({
         </BalanceContainer>
       )}
 
-      {additionalLabels && additionalLabels}
-
       {error && (
-        <ErrorContainer>
+        <Box mt={value?.token?.balance ? 1 : 0}>
           <ErrorMessage text={error} />
-        </ErrorContainer>
+        </Box>
       )}
     </Layout>
   );
