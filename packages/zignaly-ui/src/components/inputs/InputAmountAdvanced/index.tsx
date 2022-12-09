@@ -12,7 +12,6 @@ import {
   UnitInvisible,
   Wrapper,
   InputField,
-  ErrorContainer,
 } from "./styles";
 import TokenSelector from "./components/TokenSelector";
 import ErrorMessage from "components/display/ErrorMessage";
