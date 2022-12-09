@@ -7,6 +7,7 @@ declare global {
     dataLayer: {
       push: (payload: unknown) => void;
     };
+    safari?: unknown;
   }
 }
 
