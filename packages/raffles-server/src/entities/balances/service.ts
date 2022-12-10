@@ -1,10 +1,8 @@
 import { Balance } from './model';
 import { ContextBalance } from '../../types';
 
-export const generateService = (balance: ContextBalance) => {
+export const generateService = () => {
   const getWalletAmountBalance = async (walletAddress: string) => {
-    if (!balance) return null;
-    // return sum of amount of all transactions by walletAddress
     return Balance.aggregate('amount', 'sum', {
       where: {
         walletAddress,
@@ -14,7 +12,6 @@ export const generateService = (balance: ContextBalance) => {
 
   // get zhits balance from all transactions by walletAddress
   const getWalletZhitsBalance = async (walletAddress: string) => {
-    if (!balance) return null;
     return Balance.aggregate('zhits', 'sum', {
       where: {
         walletAddress,
@@ -23,7 +20,6 @@ export const generateService = (balance: ContextBalance) => {
   };
 
   const getWalletTransactions = async (walletAddress: string) => {
-    if (!balance) return null;
     return Balance.findAll({
       where: {
         walletAddress,

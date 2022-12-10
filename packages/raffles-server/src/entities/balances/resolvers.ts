@@ -11,6 +11,6 @@ export const resolvers = {
       _: any,
       walletAddress: string,
       { services }: ApolloContext,
-    ) => services.Balance.getWalletAmountBalance(walletAddress),
+    ) => services.Balance.getWalletZhitsBalance(walletAddress),
   },
 };
