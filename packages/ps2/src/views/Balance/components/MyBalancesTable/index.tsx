@@ -13,7 +13,7 @@ import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types'
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { allowedDeposits } from 'util/coins';
-import AddIcon from '@mui/icons-material/Add';
+import { Add, Remove } from '@mui/icons-material';
 import {
   useCoinBalances,
   useExchangeCoinsList,
@@ -26,6 +26,7 @@ import {
 } from '../../../../apis/coin/types';
 import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
 import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
+import WithdrawModal from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
 import { useZModal } from '../../../../components/ZModal/use';
 
 const initialStateTable = {
@@ -143,16 +144,31 @@ const MyBalancesTable = (): JSX.Element => {
           valueUSD: {
             balanceTotalUSDT: balance.balanceTotalUSDT,
           },
-          action: !!allowedDeposits[exchangeType]?.includes(coin) && (
-            <IconButton
-              icon={<AddIcon color={'neutral300'} />}
-              onClick={() =>
-                showModal(DepositModal, {
-                  selectedCoin: coin,
-                })
-              }
-              variant='secondary'
-            />
+          action: (
+            <>
+              {!!allowedDeposits[exchangeType]?.includes(coin) && (
+                <IconButton
+                  icon={<Add color={'neutral300'} />}
+                  onClick={() =>
+                    showModal(DepositModal, {
+                      selectedCoin: coin,
+                    })
+                  }
+                  variant='secondary'
+                />
+              )}
+              {+balance.balanceTotal > 0 && (
+                <IconButton
+                  icon={<Remove color={'neutral300'} />}
+                  onClick={() =>
+                    showModal(WithdrawModal, {
+                      selectedCoin: coin,
+                    })
+                  }
+                  variant='secondary'
+                />
+              )}
+            </>
           ),
         })),
     [exchangeType, t],

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Exchange,
   ExtendedExchange,
@@ -42,6 +42,8 @@ import AuthVerifyModal from '../../views/Auth/components/AuthVerifyModal';
 import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../service/api';
 import { QueryReturnTypeBasic } from 'util/queryReturnType';
+import { useZModal } from 'components/ZModal/use';
+import Check2FAModal from 'views/Auth/components/Check2FAModal';
 
 const useStartSession = () => {
   const { showModal } = useModal();
@@ -255,4 +257,43 @@ export function useActivateExchange(): QueryReturnTypeBasic<void> {
   }, [exchange?.internalId]);
 
   return result;
+}
+
+export function useCheck2FA({
+  action,
+  status,
+}: {
+  action: (code?: string) => void;
+  status: QueryReturnTypeBasic<unknown>;
+}) {
+  const { showModal, updateModal } = useZModal();
+  const modalId = useRef<null | string>(null);
+  const { ask2FA } = useCurrentUser();
+
+  // Update prop: https://github.com/Quernest/mui-modal-provider/issues/2
+  useEffect(() => {
+    if (modalId.current) {
+      updateModal(modalId.current, {
+        status,
+      });
+    }
+  }, [status]);
+
+  if (!ask2FA) {
+    return action;
+  }
+
+  return () => {
+    const modal = showModal(Check2FAModal, {
+      status,
+      action,
+      TransitionProps: {
+        onClose: () => {
+          modalId.current = null;
+        },
+      },
+    });
+
+    modalId.current = modal.id;
+  };
 }
