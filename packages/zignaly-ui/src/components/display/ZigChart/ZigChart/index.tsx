@@ -21,6 +21,8 @@ const ZigChart = ({ data, yAxisFormatter }: ChartLargeProps) => {
     return [Math.min(0, ...values), Math.max(1, ...values)];
   }, [processedData]);
 
+  const show2ndAxis = yDomain[0] < 0 && (0 - yDomain[0]) / (yDomain[1] - yDomain[0]) < 0.2;
+
   return (
     <ChartLayoutLarge ref={wrapperRef}>
       <GraphColors />
@@ -45,14 +47,16 @@ const ZigChart = ({ data, yAxisFormatter }: ChartLargeProps) => {
             style={axisStyle}
           />
 
-          <VictoryAxis
-            tickFormat={() => ""}
-            tickLabelComponent={<VictoryLabel />}
-            style={axisStyle}
-          />
+          {show2ndAxis && (
+            <VictoryAxis
+              tickFormat={() => ""}
+              tickLabelComponent={<VictoryLabel />}
+              style={axisStyle}
+            />
+          )}
 
           <VictoryAxis
-            offsetY={20}
+            offsetY={show2ndAxis ? 20 : undefined}
             tickLabelComponent={<VictoryLabel />}
             fixLabelOverlap
             style={axisStyle}
