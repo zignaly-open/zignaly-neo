@@ -2,7 +2,7 @@ import { Box } from '@mui/material';
 import { CoinIcon, ZigPriceLabel } from '@zignaly-open/ui';
 import React from 'react';
 
-const ZigPriceLabelIcon = ({
+export const ZigPriceLabelIcon = ({
   amount,
   coin,
 }: {
@@ -29,5 +29,3 @@ const ZigPriceLabelIcon = ({
     </Box>
   );
 };
-
-export default ZigPriceLabelIcon;

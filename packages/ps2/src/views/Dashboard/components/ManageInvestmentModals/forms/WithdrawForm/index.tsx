@@ -252,27 +252,29 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
                   tokens={[
                     {
                       id: coin,
-                      balance: coinObject.available,
                     },
                   ]}
                   error={t(errors?.amount?.value?.message)}
-                  additionalLabels={
-                    networkObject && (
-                      <>
-                        <LabelValueLine
-                          label={t('amountToWithdraw.minimum')}
-                          value={networkObject.withdrawMin}
-                          coin={coin}
-                        />
-                        <LabelValueLine
-                          label={t('amountToWithdraw.fee')}
-                          value={networkObject.withdrawFee}
-                          coin={coin}
-                        />
-                      </>
-                    )
-                  }
                 />
+                <LabelValueLine
+                  label={t('amountToWithdraw.labelBalance')}
+                  value={coinObject.available.toString()}
+                  coin={coin}
+                />
+                {networkObject && (
+                  <>
+                    <LabelValueLine
+                      label={t('amountToWithdraw.minimum')}
+                      value={networkObject.withdrawMin}
+                      coin={coin}
+                    />
+                    <LabelValueLine
+                      label={t('amountToWithdraw.fee')}
+                      value={networkObject.withdrawFee}
+                      coin={coin}
+                    />
+                  </>
+                )}
               </Grid>
             )}
 
