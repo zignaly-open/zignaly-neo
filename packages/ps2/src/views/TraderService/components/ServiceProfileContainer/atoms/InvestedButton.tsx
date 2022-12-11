@@ -89,6 +89,7 @@ export const InvestedButtonBase: React.FC<{
         sx={{
           display: 'flex',
           flexDirection: 'row',
+          justifyContent: 'space-around',
         }}
       >
         <TextButton
