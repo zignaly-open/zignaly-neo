@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   Table,
@@ -14,6 +14,7 @@ import { Transaction } from '../../../../apis/coin/types';
 import TransactionStateLabel from '../TransactionStateLabel';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { TableLoader } from './styles';
+import { Box } from '@mui/material';
 
 const initialStateTable = {
   sortBy: [
@@ -82,13 +83,17 @@ const TransactionsHistoryTable = () => {
     [t],
   );
 
+  const renderRowSubComponent = useCallback(({ row }) => {
+    console.log(row);
+    return <Box>a</Box>;
+  }, []);
+
   return (
     <LayoutContentWrapper
       endpoint={[transactionsEndpoint]}
       content={([transactions]: [Transaction[]]) => (
         <InfiniteScroll
           style={{ overflow: 'visible' }}
-          // scrollableTarget={container}
           dataLength={transactions.length}
           next={transactionsEndpoint.readMore}
           hasMore={transactionsEndpoint.hasMore}
@@ -99,8 +104,7 @@ const TransactionsHistoryTable = () => {
             data={transactions}
             initialState={initialStateTable}
             hideOptionsButton={false}
-            // renderRowSubComponent={renderRowSubComponent}
-            isUserTable={false}
+            renderRowSubComponent={renderRowSubComponent}
             pagination={false}
           />
         </InfiniteScroll>
