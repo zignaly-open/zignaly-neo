@@ -2,10 +2,10 @@ import {
   useAllCoinsQuery,
   useCoinsQuery,
   useDepositInfoQuery,
-  useTransactionsQuery,
+  useTransactionsHistoryQuery,
 } from './api';
 import { useActiveExchange } from '../user/use';
-import { CoinBalances, CoinDetails, DepositInfo } from './types';
+import { CoinBalances, CoinDetails, DepositInfo, Transactions } from './types';
 import { QueryReturnType } from '../../util/queryReturnType';
 
 export function useCoinBalances(options?: {
@@ -30,10 +30,17 @@ export function useExchangeCoinsList(): QueryReturnType<CoinDetails> {
   });
 }
 
-export function useTransactions(): QueryReturnType<CoinDetails> {
+export function useTransactions(
+  filters: {
+    from?: string;
+    limit?: string;
+    type?: string;
+  } = {},
+): QueryReturnType<Transactions> {
   const exchange = useActiveExchange();
-  return useTransactionsQuery({
+  return useTransactionsHistoryQuery({
     exchangeInternalId: exchange?.internalId,
+    ...filters,
   });
 }
 

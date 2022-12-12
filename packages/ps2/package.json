@@ -69,6 +69,7 @@
     "react-hook-form": "^7.32.0",
     "react-i18next": "^11.16.9",
     "react-image-webp": "^0.8.0",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-mailcheck": "^1.2.0",
     "react-markdown": "^8.0.4",
     "react-number-format": "^5.1.2",
