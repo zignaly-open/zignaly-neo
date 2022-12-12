@@ -7,6 +7,7 @@ import {
   ZigTabs,
 } from '@zignaly-open/ui';
 import MyBalancesTable from './components/MyBalancesTable';
+import TransferHistoryTable from './components/TransactionsHistoryTable';
 import BalanceAccountSelector from './components/BalanceAccountSelector';
 import { Header } from './styles';
 import { useTitle } from 'react-use';
@@ -36,7 +37,7 @@ const MyBalances: React.FC = () => {
           <MyBalancesTable />
         </ZigTabPanel>
         <ZigTabPanel value={tab} index={1}>
-          <MyBalancesTable />
+          <TransferHistoryTable />
         </ZigTabPanel>
       </MarginContainer>
     </PageContainer>

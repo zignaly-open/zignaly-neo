@@ -11,6 +11,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   precision,
   usd,
   coinProps,
+  alwaysShowSign = false,
   ...otherProps
 }) => {
   const withDefaultPropsCoin = {
@@ -29,7 +30,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
 
   return (
     <ZigTypography {...withDefaultProps}>
-      {+value > 0 ? "" : <>&ndash;</>}
+      {+value > 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
       {usd && "$"}
       <NumberFormat
         value={Math.abs(+value)}

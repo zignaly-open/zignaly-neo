@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { CoinBalances, CoinDetails, DepositInfo } from './types';
+import { CoinBalances, CoinDetails, DepositInfo, Transactions } from './types';
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
@@ -34,7 +34,18 @@ export const api = createApi({
         url: `/user/exchanges/${exchangeId}/deposit_address/${coinId}?network=${networkId}`,
       }),
     }),
+
+    transactions: builder.query<Transactions, { exchangeInternalId: string }>({
+      query: ({ exchangeInternalId }) => ({
+        url: `user/exchanges/${exchangeInternalId}/transactions_history`,
+      }),
+    }),
   }),
 });
 
-export const { useCoinsQuery, useAllCoinsQuery, useDepositInfoQuery } = api;
+export const {
+  useCoinsQuery,
+  useAllCoinsQuery,
+  useDepositInfoQuery,
+  useTransactionsQuery,
+} = api;

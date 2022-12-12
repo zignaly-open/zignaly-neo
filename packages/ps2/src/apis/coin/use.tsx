@@ -1,4 +1,9 @@
-import { useAllCoinsQuery, useCoinsQuery, useDepositInfoQuery } from './api';
+import {
+  useAllCoinsQuery,
+  useCoinsQuery,
+  useDepositInfoQuery,
+  useTransactionsQuery,
+} from './api';
 import { useActiveExchange } from '../user/use';
 import { CoinBalances, CoinDetails, DepositInfo } from './types';
 import { QueryReturnType } from '../../util/queryReturnType';
@@ -22,6 +27,13 @@ export function useExchangeCoinsList(): QueryReturnType<CoinDetails> {
   const exchange = useActiveExchange();
   return useAllCoinsQuery(exchange?.exchangeType, {
     skip: !exchange?.exchangeType,
+  });
+}
+
+export function useTransactions(): QueryReturnType<CoinDetails> {
+  const exchange = useActiveExchange();
+  return useTransactionsQuery({
+    exchangeInternalId: exchange?.internalId,
   });
 }
 
