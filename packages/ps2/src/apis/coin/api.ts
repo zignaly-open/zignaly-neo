@@ -86,13 +86,9 @@ export const api = createApi({
 });
 
 export const {
- 
   useCoinsQuery,
- 
   useAllCoinsQuery,
- 
   useDepositInfoQuery,
- ,
   useWithdrawMutation,
-useTransactionsHistoryQuery,
+  useTransactionsHistoryQuery,
 } = api;
