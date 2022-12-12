@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { CoinBalances, CoinDetails, DepositInfo } from './types';
+import { CoinBalances, CoinDetails, DepositInfo, Transactions } from './types';
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
@@ -36,30 +36,10 @@ export const api = createApi({
       }),
     }),
 
-    withdraw: builder.mutation<
-      { id: string },
-      {
-        exchangeInternalId: string;
-        network: string;
-        asset: string;
-        tag: string;
-        address: string;
-        amount: string;
-        code?: string;
-      }
-    >({
-      query: ({ exchangeInternalId, ...rest }) => ({
-        url: `/user/exchanges/${exchangeInternalId}/withdraw`,
-        method: 'POST',
-        body: rest,
+    transactions: builder.query<Transactions, { exchangeInternalId: string }>({
+      query: ({ exchangeInternalId }) => ({
+        url: `user/exchanges/${exchangeInternalId}/transactions_history`,
       }),
-      // invalidateTags delayed to allow for the withdrawal to be processed
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        await queryFulfilled;
-        setTimeout(() => {
-          dispatch(api.util.invalidateTags(['Balance']));
-        }, 5000);
-      },
     }),
   }),
 });
@@ -68,5 +48,5 @@ export const {
   useCoinsQuery,
   useAllCoinsQuery,
   useDepositInfoQuery,
-  useWithdrawMutation,
+  useTransactionsQuery,
 } = api;

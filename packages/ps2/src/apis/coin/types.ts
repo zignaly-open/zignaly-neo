@@ -55,3 +55,56 @@ export type DepositInfo = {
     url: string;
   };
 };
+
+export type Metadata = {
+  from: string;
+  length: number;
+};
+
+export type TransactionType =
+  // Deposit from an external address
+  | 'deposit'
+  // Withdrawal from a Zignaly exchange account to an external address
+  | 'withdraw'
+  // Investment in a PS service (PS1 o PS2)
+  | 'psDeposit'
+  // Investment out from a PS service (PS1 o PS2)
+  | 'psWithdraw'
+  // Internal transfers of PS2 (between SCA and STA or from STA to DFA when a service is converted to PS2)
+  | 'ps2'
+  // Transfers made during PSDS
+  | 'psds'
+  // Transfers made when buying ZIG
+  | 'buyZig'
+  // In PS1 transfers when the trader receives his success fee
+  | 'traderFee'
+  // All the others that are mainly the ones between internal transfers between his accounts
+  | 'user';
+
+export const enum TransactionStateType {
+  COMPLETED = 'completed',
+  PENDING = 'pending',
+  // CLOSED = 'closed',
+}
+
+export type Transaction = {
+  from: string;
+  fromName: string;
+  to: string;
+  toName?: string;
+  txId: string;
+  amount: number;
+  asset: string;
+  status: TransactionStateType;
+  message?: string;
+  txType: TransactionType;
+  timestamp: number;
+  datetime: string;
+  network: string;
+  fee: {
+    currency: string;
+    cost: number;
+  };
+};
+
+export type Transactions = { metadata: Metadata; transactions: Transaction[] };

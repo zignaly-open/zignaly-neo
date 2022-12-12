@@ -1,0 +1,29 @@
+{
+  "tableHeader": {
+    "coin": "Coin",
+    "date": "Date",
+    "type": "Type",
+    "amount": "Amount",
+    "transactionId": "Transaction ID",
+    "from": "From",
+    "to": "To",
+    "status": "Status"
+  },
+  "type": {
+    "deposit": "Deposit",
+    "withdrawal": "Withdrawal",
+    "psDeposit": "Profit Sharing Deposit",
+    "psWithdraw": "Profit Sharing Withdrawal",
+    "ps2": "Profit Sharing Internal Transfer",
+    "psds": "PSDS Transfer",
+    "buyZig": "Buy Zig",
+    "traderFee": "Trading Fee",
+    "user": "Transfer"
+  },
+  "status": {
+    "pending": "Pending",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "failed": "Failed"
+  }
+}
