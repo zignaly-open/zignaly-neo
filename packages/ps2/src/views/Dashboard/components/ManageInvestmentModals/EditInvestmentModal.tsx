@@ -3,15 +3,15 @@ import { useTranslation } from 'react-i18next';
 import { EditInvestmentViews } from './types';
 import { DialogProps } from '@mui/material/Dialog';
 import EditInvestment from './views/EditInvestment';
-import WithdrawFunds from './views/WithdrawFunds';
+import WithdrawInvestment from './views/WithdrawInvestment';
 import PendingTransactionsList from './views/PendingTransactionsList';
 import {
   useInvestmentDetails,
   useSelectedInvestment,
 } from '../../../../apis/investment/use';
-import WithdrawPerform from './views/WithdrawPerform';
+import WithdrawWithdrawInvestmentSuccessPerform from './views/WithdrawInvestmentPerform';
 import EditInvestmentSuccess from './views/EditInvestmentSuccess';
-import WithdrawModalSuccess from './views/WithdrawSuccess';
+import WithdrawModalSuccess from './views/WithdrawInvestmentSuccess';
 import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import ZModal from '../../../../components/ZModal';
@@ -38,7 +38,7 @@ function EditInvestmentModal({
   const views = {
     [EditInvestmentViews.WithdrawInvestment]: {
       title: t('withdraw-your-investment:title'),
-      component: () => <WithdrawFunds setView={setView} />,
+      component: () => <WithdrawInvestment setView={setView} />,
     },
     [EditInvestmentViews.WithdrawSuccess]: {
       title: t('withdraw-your-investment:success.title'),
@@ -46,7 +46,9 @@ function EditInvestmentModal({
     },
     [EditInvestmentViews.WithdrawPerform]: {
       title: t('withdraw-your-investment:title'),
-      component: () => <WithdrawPerform setView={setView} />,
+      component: () => (
+        <WithdrawWithdrawInvestmentSuccessPerform setView={setView} />
+      ),
     },
     [EditInvestmentViews.PendingTransactions]: {
       title: t('modal.pendingTransaction.title'),

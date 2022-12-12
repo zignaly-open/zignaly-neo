@@ -19,6 +19,7 @@ export const api = createApi({
           convert: convert,
         },
       }),
+      providesTags: ['Balance'],
     }),
 
     allCoins: builder.query<CoinDetails, string>({
@@ -34,6 +35,32 @@ export const api = createApi({
       query: ({ exchangeId, coinId, networkId }) => ({
         url: `/user/exchanges/${exchangeId}/deposit_address/${coinId}?network=${networkId}`,
       }),
+    }),
+
+    withdraw: builder.mutation<
+      { id: string },
+      {
+        exchangeInternalId: string;
+        network: string;
+        asset: string;
+        tag: string;
+        address: string;
+        amount: string;
+        code?: string;
+      }
+    >({
+      query: ({ exchangeInternalId, ...rest }) => ({
+        url: `/user/exchanges/${exchangeInternalId}/withdraw`,
+        method: 'POST',
+        body: rest,
+      }),
+      // invalidateTags delayed to allow for the withdrawal to be processed
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        setTimeout(() => {
+          dispatch(api.util.invalidateTags(['Balance']));
+        }, 5000);
+      },
     }),
 
     transactionsHistory: builder.query<
@@ -59,8 +86,13 @@ export const api = createApi({
 });
 
 export const {
+ 
   useCoinsQuery,
+ 
   useAllCoinsQuery,
+ 
   useDepositInfoQuery,
-  useTransactionsHistoryQuery,
+ ,
+  useWithdrawMutation,
+useTransactionsHistoryQuery,
 } = api;

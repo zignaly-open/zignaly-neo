@@ -19,8 +19,8 @@
   "status": {
     "connected": "Connected",
     "pending": "Pending",
-    "soft-disconnect": "Soft-Disconnect",
-    "hard-disconnect": "Hard-Disconnect",
+    "soft-disconnect": "Free Withdrawal",
+    "hard-disconnect": "Instant Withdrawal",
     "suspended": "Suspended",
     "disconnected": "Disconnected",
     "owner": "Owner"

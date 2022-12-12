@@ -9,6 +9,7 @@ export function useZModal() {
         ...props,
         close: () => modal.destroy(),
       });
+      return modal;
     },
     [showModal],
   );

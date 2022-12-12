@@ -5,10 +5,10 @@
   "tradingFunds-desc": "Funds available for trading and used in positions",
   "availableTrading": "Available for trading:",
   "allocatedTrading": "Allocated for trading:",
-  "hardDisconnected": "Hard-disconnected Funds:",
+  "instantWithdrawn": "Instant Withdrawn Funds:",
   "standbyFunds": "Standby Funds",
-  "standbyFunds-desc": "Funds available to return to investors who want to disconnect",
-  "availableDisconnection": "Available for disconnections:",
+  "standbyFunds-desc": "Funds available to return to investors who want to withdraw",
+  "availableWithdrawals": "Available for withdrawals:",
   "neededSnapshot": "Needed for daily snapshot:",
   "helper": "Need help with these numbers? Please check out our <0>how profit sharing balances work</0>.",
   "minBalance": {
@@ -17,12 +17,12 @@
   },
   "minBalanceModal": {
     "title": "Edit Minimum Balance",
-    "desc": "Set up the minimum balance that you want to keep in the Disconnection Funds Account. If the disconnection balance is above the minimum, during the accounting the difference will be automatically transferred to the Trading Account.",
+    "desc": "Set up the minimum balance that you want to keep in the Standby Account. If the balance is above the minimum, during the accounting the difference will be automatically transferred to the Trading Account.",
     "placeholder": "0.0",
     "labelBalance": "Current Minimum Balance",
     "save": "Save"
   },
-  "heldHardDisc": "Held for hard-disconnections:",
+  "heldInstantWithdrawals": "Held for instant withdrawals:",
   "controlledZignaly": "Controlled by Zignaly",
   "transfer": {
     "title": "Transfer",
@@ -32,14 +32,14 @@
     "deposit-available": "Available Balance:",
     "fromTradingAccount": "From Trading Account",
     "toTradingAccount": "To Trading Account:",
-    "fromDiscAccount": "From Disconnection Account",
-    "toDiscAccount": "To Disconnection Account:",
+    "fromStandbyAccount": "From Standby Account",
+    "toStandbyAccount": "To Standby Account:",
     "now": "Transfer Now",
     "success": "You have successfully transferred {{amount}}."
   },
   "transferFunds": {
     "title": "Transfer Funds",
-    "description": "Transfer funds immediately between the Trading Account and the Disconnection Account in your service"
+    "description": "Transfer funds immediately between the Trading Account and the Standby Account in your service"
   },
   "hardDiconnectWarning": "Your hard disconnects have reached {perc}%. If hard-disconnects reaches {maxPerc}% of the service funds, Zignaly will take control of your service.",
   "previousValue": "Previous Value:",

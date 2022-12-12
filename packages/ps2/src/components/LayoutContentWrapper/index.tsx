@@ -23,10 +23,9 @@ const LayoutContentWrapper = <TData, TError>({
   const endpoints: EndpointEsque[] = isArray ? endpoint : [endpoint];
   const someError = endpoints.find((x) => x.error)?.error;
   const isLoading = endpoints.some((x) => x.isLoading);
-  const isFetching = endpoints.some((x) => x.isFetching);
   const data = endpoints.every((x) => x.data) && endpoints.map((x) => x.data);
 
-  if (isLoading || isFetching) return <CenteredLoader />;
+  if (isLoading) return <CenteredLoader />;
   if (someError && error) return error(someError as TError);
   if (someError) return <CriticalError />;
   if (!data) return <NoData />;

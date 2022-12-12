@@ -23,7 +23,7 @@ import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { Box } from '@mui/material';
 import { CheckBox } from '@zignaly-open/ui';
 import { AmountInvested, TokenValue } from '../EditInvestmentForm/styles';
-import NumberFormat from 'react-number-format';
+import { NumericFormat } from 'react-number-format';
 
 function InvestForm({ close, onInvested }: InvestFormProps) {
   const coin = useCurrentBalance();
@@ -107,7 +107,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                 <CoinIcon coin={coin.id} />
                 <TokenValue>
                   <Typography variant={'bigNumber'} color={'neutral100'}>
-                    <NumberFormat
+                    <NumericFormat
                       value={watch('amountTransfer')!.value.toString()}
                       displayType={'text'}
                       thousandSeparator={true}
@@ -141,7 +141,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
               <AmountInvested>
                 <TokenValue>
                   <Typography variant={'bigNumber'} color={'neutral100'}>
-                    <NumberFormat
+                    <NumericFormat
                       value={watch('profitPercentage').toString()}
                       displayType={'text'}
                       suffix={'%'}
