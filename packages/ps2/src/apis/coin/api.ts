@@ -68,7 +68,7 @@ export const api = createApi({
       {
         exchangeInternalId: string;
         from?: string;
-        limit?: string;
+        limit?: number;
         type?: string;
       }
     >({
@@ -76,7 +76,7 @@ export const api = createApi({
         const searchParams = new URLSearchParams(
           omitBy({ from, limit, type }, isEmpty),
         );
-        const url = `user/exchanges/${exchangeInternalId}/transactions_history?=${searchParams}`;
+        const url = `user/exchanges/${exchangeInternalId}/transactions_history?${searchParams}`;
         return {
           url,
         };

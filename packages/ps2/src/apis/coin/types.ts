@@ -56,11 +56,6 @@ export type DepositInfo = {
   };
 };
 
-export type Metadata = {
-  from: string;
-  length: number;
-};
-
 export type TransactionType =
   // Deposit from an external address
   | 'deposit'
@@ -107,4 +102,4 @@ export type Transaction = {
   };
 };
 
-export type Transactions = { metadata: Metadata; transactions: Transaction[] };
+export type Transactions = InfiniteListQueryResponse<Transaction[]>;

@@ -5,8 +5,10 @@ import {
   useTransactionsHistoryQuery,
 } from './api';
 import { useActiveExchange } from '../user/use';
-import { CoinBalances, CoinDetails, DepositInfo, Transactions } from './types';
+import { CoinBalances, CoinDetails, DepositInfo } from './types';
 import { QueryReturnType } from '../../util/queryReturnType';
+import useInfiniteScroll from 'util/hooks/useInfiniteScroll';
+import { useUpdateEffect } from 'react-use';
 
 export function useCoinBalances(options?: {
   convert?: boolean;
@@ -30,18 +32,26 @@ export function useExchangeCoinsList(): QueryReturnType<CoinDetails> {
   });
 }
 
-export function useTransactions(
+export function useTransactionsHistory(
   filters: {
-    from?: string;
-    limit?: string;
+    limit?: number;
     type?: string;
   } = {},
-): QueryReturnType<Transactions> {
+) {
   const exchange = useActiveExchange();
-  return useTransactionsHistoryQuery({
+  const infiniteScroll = useInfiniteScroll(useTransactionsHistoryQuery, {
     exchangeInternalId: exchange?.internalId,
     ...filters,
   });
+
+  // Reset data on filter change
+  useUpdateEffect(infiniteScroll.refresh, [
+    filters.limit,
+    filters.type,
+    exchange?.internalId,
+  ]);
+
+  return infiniteScroll;
 }
 
 export function useDepositInfo(
