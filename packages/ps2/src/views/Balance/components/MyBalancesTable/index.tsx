@@ -1,12 +1,12 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Table,
   PriceLabel,
   CoinLabel,
   sortByValue,
   UsdPriceLabel,
   IconButton,
+  ZigTable,
 } from '@zignaly-open/ui';
 import { MyBalancesTableDataType } from './types';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
@@ -181,13 +181,11 @@ const MyBalancesTable = (): JSX.Element => {
       unmountOnRefetch={true}
       endpoint={[coinsEndpoint, balancesEndpoint]}
       content={([coins, balances]: [CoinDetails, CoinBalances]) => (
-        <Table
-          type={'pagedWithData'}
+        <ZigTable
           columns={columns}
           data={getFilteredData(coins, balances)}
           initialState={initialStateTable}
           hideOptionsButton={false}
-          isUserTable={false}
         />
       )}
     />

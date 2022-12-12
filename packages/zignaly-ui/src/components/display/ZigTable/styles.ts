@@ -41,7 +41,7 @@ export const View = styled.div`
   overflow: auto;
 `;
 
-export const TableView = styled.table<{ isUserTable: boolean; hasFooter?: boolean }>`
+export const TableView = styled.table`
   border-spacing: 0;
   width: 100%;
 
@@ -104,15 +104,6 @@ export const TableView = styled.table<{ isUserTable: boolean; hasFooter?: boolea
     :last-child {
       border-right: 0;
     }
-
-    ${(props) =>
-      `${styledIf(
-        props.isUserTable,
-        `:first-child {
-            border-right: 1px solid #252339;
-          }`,
-      )}
-    `}
   }
 
   th {
@@ -228,14 +219,14 @@ export const PageNumberContainer = styled.div`
   box-shadow: inset 0px 0px 0px 1px #35334a;
 `;
 
-export const Row = styled.div<{ justifyContent: "end" | "start" | "center" }>`
-  display: flex;
-  flex: 3;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  justify-content: ${(props) => props.justifyContent};
-`;
+// export const Row = styled.div<{ justifyContent: "end" | "start" | "center" }>`
+//   display: flex;
+//   flex: 3;
+//   flex-direction: row;
+//   align-items: center;
+//   gap: 8px;
+//   justify-content: ${(props) => props.justifyContent};
+// `;
 
 export const SelectorContainer = styled.div`
   display: flex;

@@ -1,5 +1,13 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { usePagination, useSortBy, useTable } from "react-table";
+import {
+  PluginHook,
+  Row,
+  useExpanded,
+  UseExpandedRowProps,
+  usePagination,
+  useSortBy,
+  useTable,
+} from "react-table";
 import {
   EmptyMessage,
   HeaderRow,
@@ -19,7 +27,6 @@ import {
   FooterContainer,
   IconButtonContainer,
   PageNumberContainer,
-  Row,
   SelectorContainer,
   SelectorSizing,
 } from "./styles";
@@ -27,8 +34,9 @@ import DropDown from "../DropDown";
 import ZigTypography from "../ZigTypography";
 import IconButton from "../../inputs/IconButton";
 import CheckBox from "../../inputs/CheckBox";
-import { TableBasicProps } from "./types";
+import { ZigTableProps } from "./types";
 import Selector from "components/inputs/Selector";
+import { Box } from "@mui/material";
 
 export default function ZigTable<T extends object>({
   columns = [],
@@ -36,13 +44,21 @@ export default function ZigTable<T extends object>({
   onColumnHidden = () => {},
   defaultHiddenColumns,
   hideOptionsButton,
-  isUserTable,
   emptyMessage,
   initialState = {},
   pagination = true,
-}: TableBasicProps<T>) {
+  renderRowSubComponent,
+}: ZigTableProps<T>) {
   const tableRef = useRef(null);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>(defaultHiddenColumns || []);
+
+  const plugins = [useSortBy] as PluginHook<T>[];
+  if (pagination) {
+    plugins.push(usePagination);
+  }
+  if (renderRowSubComponent) {
+    plugins.push(useExpanded);
+  }
 
   const {
     getTableProps,
@@ -53,28 +69,23 @@ export default function ZigTable<T extends object>({
     footerGroups,
     toggleHideColumn,
     prepareRow,
-    // @ts-ignore
     gotoPage,
-    // @ts-ignore
     nextPage,
-    // @ts-ignore
     previousPage,
-    // @ts-ignore
     canNextPage,
-    // @ts-ignore
     canPreviousPage,
     pageOptions,
     pageCount,
     setPageSize,
     state: { pageIndex, pageSize },
+    visibleColumns,
   } = useTable(
     {
       columns,
       data,
       initialState,
     },
-    useSortBy,
-    pagination && (usePagination as any),
+    ...plugins,
   );
 
   useEffect(() => {
@@ -129,7 +140,7 @@ export default function ZigTable<T extends object>({
   return (
     <Layout>
       <View ref={tableRef}>
-        <TableView isUserTable={isUserTable} {...getTableProps()}>
+        <TableView {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup: any, index: number) => (
               <tr {...headerGroup.getHeaderGroupProps()} key={`--table-head-${index.toString()}`}>
@@ -206,11 +217,15 @@ export default function ZigTable<T extends object>({
             ))}
           </thead>
           <tbody {...getTableBodyProps()}>
-            {(pagination ? page : rows).map((row: any, index: number) => {
+            {(pagination ? page : rows).map((row: Row<T> & UseExpandedRowProps<T>, index) => {
               prepareRow(row);
               return (
                 <>
-                  <tr key={`--firstPageRows-${index.toString()}`} {...row.getRowProps()}>
+                  <tr
+                    // key={`--firstPageRows-${index.toString()}`}
+                    {...row.getRowProps()}
+                    {...(renderRowSubComponent && row.getToggleRowExpandedProps({}))}
+                  >
                     {row.cells.map((cell: any, index: number) => (
                       <td
                         className={cell.column.id === "action" ? "action" : "row-td"}
@@ -224,13 +239,13 @@ export default function ZigTable<T extends object>({
                     ))}
                     {renderActionRow(row, index)}
                   </tr>
-                  {/* {row.isExpanded ? (
+                  {row.isExpanded ? (
                     <tr>
                       <td colSpan={visibleColumns.length} style={{ border: "none" }}>
-                        {renderRowSubComponent({ row })}
+                        {renderRowSubComponent!(row)}
                       </td>
                     </tr>
-                  ) : null} */}
+                  ) : null}
                 </>
               );
             })}
@@ -259,7 +274,7 @@ export default function ZigTable<T extends object>({
       </View>
       {pagination && (
         <FooterContainer>
-          <Row justifyContent="start">
+          <Box display="flex" gap={2}>
             <ZigTypography variant="body1" color="neutral300">
               Showing
             </ZigTypography>
@@ -275,8 +290,8 @@ export default function ZigTable<T extends object>({
             <ZigTypography variant="body1" color="neutral300">
               items
             </ZigTypography>
-          </Row>
-          <Row justifyContent="center">
+          </Box>
+          <Box justifyContent="center" display="flex" gap={2}>
             <IconButtonContainer
               variant="flat"
               size="xlarge"
@@ -325,8 +340,8 @@ export default function ZigTable<T extends object>({
               disabled={!canNextPage}
               icon={<DoubleChevron width={24} height={24} color="neutral300" />}
             />
-          </Row>
-          <Row justifyContent="end">
+          </Box>
+          <Box justifyContent="end" display="flex" gap={2}>
             {data.length > 10 && (
               <SelectorContainer>
                 <ZigTypography variant="body1" color="neutral300">
@@ -351,7 +366,7 @@ export default function ZigTable<T extends object>({
                 </ZigTypography>
               </SelectorContainer>
             )}
-          </Row>
+          </Box>
         </FooterContainer>
       )}
     </Layout>
