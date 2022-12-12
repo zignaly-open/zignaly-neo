@@ -1,39 +1,13 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  Table,
-  PriceLabel,
-  CoinLabel,
-  sortByValue,
-  UsdPriceLabel,
-  IconButton,
-  DateLabel,
-  ZigPriceLabel,
-} from '@zignaly-open/ui';
-import { MyBalancesTableDataType, TransferHistoryTableDataType } from './types';
+import { Table, CoinLabel, DateLabel, ZigPriceLabel } from '@zignaly-open/ui';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
-import { useActiveExchange } from '../../../../apis/user/use';
-import { allowedDeposits } from 'util/coins';
-import AddIcon from '@mui/icons-material/Add';
-import {
-  useCoinBalances,
-  useExchangeCoinsList,
-  useTransactions,
-} from '../../../../apis/coin/use';
-import {
-  CoinBalance,
-  CoinDetail,
-  CoinBalances,
-  CoinDetails,
-  Transaction,
-  Transactions,
-} from '../../../../apis/coin/types';
-import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
-import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
-import { useZModal } from '../../../../components/ZModal/use';
-import ConnectionStateLabel from 'views/TraderService/components/ConnectionStateLabel';
+import { useTransactions } from '../../../../apis/coin/use';
+import { Transaction, Transactions } from '../../../../apis/coin/types';
 import TransactionStateLabel from '../TransactionStateLabel';
+import InfiniteScroll from 'react-infinite-scroll-component';
+import CenteredLoader from 'components/CenteredLoader';
 
 const initialStateTable = {
   sortBy: [
@@ -44,11 +18,12 @@ const initialStateTable = {
   ],
 };
 
+const limit = 30;
+
 const TransactionsHistoryTable = () => {
   const { t } = useTranslation('transactions-history');
-  const transactionsEndpoint = useTransactions();
-  const { exchangeType } = useActiveExchange();
-  const { showModal } = useZModal();
+  const [fromId, setFromId] = useState('');
+  const transactionsEndpoint = useTransactions({ from: fromId });
 
   const columns: TableProps<Transaction>['columns'] = useMemo(
     () => [
@@ -88,7 +63,7 @@ const TransactionsHistoryTable = () => {
       {
         Header: t('tableHeader.transactionId'),
         accessor: 'txId',
-        Cell: ({ cell: { value } }) => value,
+        Cell: ({ cell: { value } }) => value || '-',
       },
       {
         Header: t('tableHeader.from'),
@@ -195,15 +170,30 @@ const TransactionsHistoryTable = () => {
   return (
     <LayoutContentWrapper
       endpoint={[transactionsEndpoint]}
-      content={([transactions]: [Transactions]) => (
-        <Table
-          type={'pagedWithData'}
-          columns={columns}
-          data={transactions.transactions}
-          initialState={initialStateTable}
-          hideOptionsButton={false}
-          isUserTable={false}
-        />
+      content={([{ metadata, transactions }]: [Transactions]) => (
+        <InfiniteScroll
+          style={{ overflow: 'visible' }}
+          // scrollableTarget={container}
+          dataLength={transactions.length}
+          next={() => setFromId(metadata.from)}
+          hasMore={transactions.length === limit}
+          loader={
+            <CenteredLoader />
+            // <Box display='flex' justifyContent='center'>
+            //   <CircularProgress />
+            // </Box>
+          }
+        >
+          <Table
+            type='basic'
+            columns={columns}
+            data={transactions}
+            initialState={initialStateTable}
+            hideOptionsButton={false}
+            // renderRowSubComponent={renderRowSubComponent}
+            isUserTable={false}
+          />
+        </InfiniteScroll>
       )}
     />
   );
