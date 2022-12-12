@@ -1,13 +1,19 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Table, CoinLabel, DateLabel, ZigPriceLabel } from '@zignaly-open/ui';
+import {
+  Table,
+  CoinLabel,
+  DateLabel,
+  ZigPriceLabel,
+  ZigTable,
+} from '@zignaly-open/ui';
 import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useTransactionsHistory } from '../../../../apis/coin/use';
 import { Transaction } from '../../../../apis/coin/types';
 import TransactionStateLabel from '../TransactionStateLabel';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import CenteredLoader from 'components/CenteredLoader';
+import { TableLoader } from './styles';
 
 const initialStateTable = {
   sortBy: [
@@ -86,16 +92,16 @@ const TransactionsHistoryTable = () => {
           dataLength={transactions.length}
           next={transactionsEndpoint.readMore}
           hasMore={transactionsEndpoint.hasMore}
-          loader={<CenteredLoader />}
+          loader={<TableLoader />}
         >
-          <Table
-            type='basic'
+          <ZigTable
             columns={columns}
             data={transactions}
             initialState={initialStateTable}
             hideOptionsButton={false}
             // renderRowSubComponent={renderRowSubComponent}
             isUserTable={false}
+            pagination={false}
           />
         </InfiniteScroll>
       )}

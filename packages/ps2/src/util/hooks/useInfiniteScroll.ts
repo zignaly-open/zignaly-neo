@@ -23,7 +23,7 @@ const useInfiniteScroll = (
     ...queryParameters,
     from: localPage.id,
   });
-  const { transactions: fetchData = [], metadata } =
+  const { items: fetchData = [], metadata } =
     (queryResponse?.data as InfiniteListQueryResponse<
       typeof useGetDataListQuery
     >) || {};
