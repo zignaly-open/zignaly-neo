@@ -63,5 +63,6 @@ export const {
   useCoinsQuery,
   useAllCoinsQuery,
   useDepositInfoQuery,
+  useWithdrawMutation,
   useTransactionsHistoryQuery,
 } = api;
