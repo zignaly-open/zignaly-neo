@@ -1,21 +1,13 @@
-import styled from "styled-components";
-import { styledIf } from "utils/styled";
-
 import { ReactComponent as CheckIcon } from "assets/icons/check-icon.svg";
 import { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
-import { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";
-import Typography from "../Typography";
-import IconButton from "components/inputs/IconButton";
+import { ExpandMore } from "@mui/icons-material";
+import { styled } from "@mui/system";
 
-export const Layout = styled.div<{ maxWidth?: number }>`
-  max-width: ${(props) => props.maxWidth}px;
-`;
-
-export const TextContainer = styled.div`
+export const TextContainer = styled("div")`
   padding: 4px 24px;
 `;
 
-export const IconContainer = styled.div`
+export const IconContainer = styled("div")`
   height: 100%;
   display: flex;
   justify-content: center;
@@ -25,7 +17,7 @@ export const IconContainer = styled.div`
   right: 4px;
 `;
 
-export const HeaderRow = styled.div`
+export const HeaderRow = styled("div")`
   position: relative;
   display: flex;
   flex-direction: row;
@@ -35,41 +27,31 @@ export const HeaderRow = styled.div`
   width: inherit;
 `;
 
-export const View = styled.div`
+export const View = styled("div")`
   width: 100%;
   border-radius: 5px 5px 15px 15px;
   overflow: auto;
 `;
 
-export const TableView = styled.table`
+export const TableView = styled("table")`
   border-spacing: 0;
   width: 100%;
 
   thead {
-    background: rgba(19, 18, 37, 0.4);
     height: 56px;
     user-select: none;
-    background: #06061a;
+    background: #08081d;
     box-shadow: 0 0 10px #16192b;
-    border-radius: 0 0 5px 5px;
-    position: relative;
-    z-index: 0;
   }
 
   tbody {
-    background: rgba(19, 18, 37, 0.4);
+    background: #131225;
 
     td {
-      letter-spacing: 0;
-      color: #f3f4f6;
+      color: ${({ theme }) => theme.palette.neutral100};
       padding: 12px 22px;
       white-space: nowrap;
-      background: transparent;
       height: 95px;
-
-      &.action {
-        text-align: right;
-      }
     }
   }
 
@@ -123,7 +105,7 @@ export const TableView = styled.table`
   }
 `;
 
-export const ThView = styled.th<{ isSorted?: boolean; isAlignRight?: boolean }>`
+export const ThView = styled("th")<{ isSorted?: boolean; isAlignRight?: boolean }>`
   color: #a9a9ba;
   white-space: nowrap;
   background: transparent;
@@ -137,57 +119,31 @@ export const ThView = styled.th<{ isSorted?: boolean; isAlignRight?: boolean }>`
     border-radius: 0 0 5px 0;
   }
 
-  ${(props) => `
-     ${styledIf(
-       props.isSorted,
-       `
+  ${(props) =>
+    props.isSorted
+      ? `
         border: 1px solid #35334A;
         border-radius: 5px;
-    `,
-       `
+    `
+      : `
         border: 1px solid transparent;
-    `,
-     )}
-  `}
+    `}
 `;
 
-export const SortIcon = styled(ArrowBottomIcon)<{ isSorted?: boolean; isSortedDesc?: boolean }>`
-  color: #f3f4f6;
-  padding: 0;
+export const SortIcon = styled(ExpandMore)<{ isSorted?: boolean; isSortedDesc?: boolean }>`
+  transition: all 0.1s linear;
 
-  ${(props) => `
-     ${styledIf(
-       props.isSorted,
-       `
-        transition: all 0.1s linear;
-        visibility: visible;
-    `,
-       `
+  ${({ isSorted }) =>
+    !isSorted &&
+    `
         visibility: none;
         opacity: 0;
-    `,
-     )}
-     ${styledIf(
-       props.isSortedDesc,
-       `
-      transform: rotate(0deg);
-    `,
-       `
-      transform: rotate(180deg); 
-    `,
-     )}
-  `};
+    `}
+
+  ${({ isSortedDesc }) => !isSortedDesc && `transform: rotate(180deg); `}
 `;
 
-export const Actions = styled.div`
-  button {
-    margin-right: 8px;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-`;
+export const Actions = styled("div")``;
 
 export const CheckIconStyled = styled(CheckIcon)`
   vertical-align: middle;
@@ -197,18 +153,18 @@ export const CloseIconStyled = styled(CloseIcon)`
   vertical-align: middle;
 `;
 
-export const EmptyMessage = styled(Typography).attrs({
-  variant: "body2",
-  color: "neutral400",
-})`
-  text-align: center;
-  display: flex;
-  padding: 36px;
-  align-items: center;
-  justify-content: center;
-`;
+// export const EmptyMessage = styled(Typography).attrs({
+//   variant: "body2",
+//   color: "neutral400",
+// })`
+//   text-align: center;
+//   display: flex;
+//   padding: 36px;
+//   align-items: center;
+//   justify-content: center;
+// `;
 
-export const PageNumberContainer = styled.div`
+export const PageNumberContainer = styled("div")`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -228,36 +184,21 @@ export const PageNumberContainer = styled.div`
 //   justify-content: ${(props) => props.justifyContent};
 // `;
 
-export const SelectorContainer = styled.div`
+export const SelectorContainer = styled("div")`
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 8px;
 `;
 
-export const SelectorSizing = styled.div`
+export const SelectorSizing = styled("div")`
   height: 36px;
   width: 90px;
 `;
 
-export const FooterContainer = styled.div`
+export const FooterContainer = styled("div")`
   width: 100%;
   display: flex;
   flex-direction: row;
   padding: 22px;
-`;
-
-export const IconButtonContainer = styled(IconButton)<{ rotate?: boolean }>`
-  ${(props) => `
-  ${styledIf(
-    props.rotate,
-    `
-    -webkit-transform: rotate(180deg);
-    -moz-transform: rotate(180deg);
-    -ms-transform: rotate(180deg);
-    -o-transform: rotate(180deg);
-    transform: rotate(180deg);
-    `,
-  )}
-  `}
 `;

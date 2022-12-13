@@ -1,7 +1,8 @@
 import Button from "components/inputs/Button";
 import React from "react";
-import CoinLabel from "./components/CoinLabel";
-import PriceLabel from "./components/PriceLabel";
+import styled from "styled-components";
+import CoinLabel from "../Table/components/CoinLabel";
+import PriceLabel from "../Table/components/PriceLabel";
 import { Actions } from "./styles";
 
 export const MockMyCoinsData = [

@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import {
-  PluginHook,
   Row,
   useExpanded,
   UseExpandedRowProps,
@@ -12,7 +11,6 @@ import {
   EmptyMessage,
   HeaderRow,
   IconContainer,
-  Layout,
   SortIcon,
   TableView,
   TextContainer,
@@ -23,22 +21,20 @@ import {
 import { ReactComponent as OptionsDotsIcon } from "assets/icons/option-dots-icon.svg";
 import { ReactComponent as SingleChevron } from "assets/icons/chevron-small-icon.svg";
 import { ReactComponent as DoubleChevron } from "assets/icons/double-chevron-small-icon.svg";
-import {
-  FooterContainer,
-  IconButtonContainer,
-  PageNumberContainer,
-  SelectorContainer,
-  SelectorSizing,
-} from "./styles";
+import { FooterContainer, PageNumberContainer, SelectorContainer, SelectorSizing } from "./styles";
 import DropDown from "../DropDown";
 import ZigTypography from "../ZigTypography";
 import IconButton from "../../inputs/IconButton";
 import CheckBox from "../../inputs/CheckBox";
 import { ZigTableProps } from "./types";
-import Selector from "components/inputs/Selector";
-import { Box } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
+import { ExpandLess, ExpandMore, FirstPage, LastPage } from "@mui/icons-material";
+import ZigSelect from "components/inputs/ZigSelect";
+export default function ZigTable<T extends object>() {
+  return null;
+}
 
-export default function ZigTable<T extends object>({
+export function ZigTable2<T extends object>({
   columns = [],
   data = [],
   onColumnHidden = () => {},
@@ -47,12 +43,16 @@ export default function ZigTable<T extends object>({
   emptyMessage,
   initialState = {},
   pagination = true,
+  sort = true,
   renderRowSubComponent,
 }: ZigTableProps<T>) {
-  const tableRef = useRef(null);
   const [hiddenColumns, setHiddenColumns] = useState<string[]>(defaultHiddenColumns || []);
+  const theme = useTheme();
 
-  const plugins = [useSortBy] as PluginHook<T>[];
+  const plugins = [];
+  if (sort) {
+    plugins.push(useSortBy);
+  }
   if (pagination) {
     plugins.push(usePagination);
   }
@@ -98,18 +98,11 @@ export default function ZigTable<T extends object>({
    */
   const renderActionRow = useCallback(
     (row: any, index: number) => {
-      if (data.find((e: any) => e.action)) {
+      const hasAction = data.find((e: any) => e.action);
+      if (hasAction || !hideOptionsButton) {
         return (
           <td className={"action"} key={`--table-row-cell-${index.toString()}`}>
-            {/*@ts-ignore*/}
             {data[row.index].action}
-          </td>
-        );
-      } else if (!hideOptionsButton) {
-        return (
-          <td className={"action"} key={`--table-row-cell-${index.toString()}`}>
-            {/*@ts-ignore*/}
-            {""}
           </td>
         );
       }
@@ -129,17 +122,17 @@ export default function ZigTable<T extends object>({
     onColumnHidden(column, false);
   };
 
-  const customOptions = [
-    { index: 0, caption: "10" },
-    { index: 1, caption: "20" },
-    { index: 2, caption: "30" },
-    { index: 3, caption: "40" },
-    { index: 4, caption: "50" },
+  const pageSizeOptions = [
+    { value: 10, label: "10" },
+    { value: 20, label: "20" },
+    { value: 30, label: "30" },
+    { value: 40, label: "40" },
+    { value: 50, label: "50" },
   ];
 
   return (
-    <Layout>
-      <View ref={tableRef}>
+    <>
+      <View>
         <TableView {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup: any, index: number) => (
@@ -161,19 +154,13 @@ export default function ZigTable<T extends object>({
                       </TextContainer>
                       <IconContainer>
                         {index < headerGroup.headers.length && (
-                          <SortIcon
-                            color="neutral200"
-                            isSorted={column.isSorted}
-                            isSortedDesc={column.isSortedDesc}
-                            width={24}
-                            height={24}
-                          />
+                          <SortIcon isSorted={column.isSorted} isSortedDesc={column.isSortedDesc} />
                         )}
                       </IconContainer>
                     </HeaderRow>
                   </ThView>
                 ))}
-                <th role={"row"}>
+                <th role="columnheader">
                   <div style={{ display: "flex", justifyContent: "flex-end" }}>
                     {!hideOptionsButton && (
                       <DropDown
@@ -181,7 +168,7 @@ export default function ZigTable<T extends object>({
                           <IconButton
                             variant={"flat"}
                             isFocused={open}
-                            icon={<OptionsDotsIcon color="neutral200" />}
+                            icon={<OptionsDotsIcon color={theme.palette.neutral200} />}
                           />
                         )}
                         options={columns.map((column: any) => {
@@ -220,17 +207,16 @@ export default function ZigTable<T extends object>({
             {(pagination ? page : rows).map((row: Row<T> & UseExpandedRowProps<T>, index) => {
               prepareRow(row);
               return (
-                <>
+                <React.Fragment key={`--table-body-row-${index.toString()}`}>
                   <tr
-                    // key={`--firstPageRows-${index.toString()}`}
                     {...row.getRowProps()}
-                    {...(renderRowSubComponent && row.getToggleRowExpandedProps({}))}
+                    {...(renderRowSubComponent && row.getToggleRowExpandedProps())}
                   >
                     {row.cells.map((cell: any, index: number) => (
                       <td
-                        className={cell.column.id === "action" ? "action" : "row-td"}
                         {...cell.getCellProps()}
                         key={`--table-row-cell-${index.toString()}`}
+                        sx={{ textAlign: cell.column.id === "action" ? "right" : "" }}
                       >
                         <ZigTypography variant="body2" fontWeight="medium" color="neutral200">
                           {cell.render("Cell")}
@@ -249,7 +235,7 @@ export default function ZigTable<T extends object>({
                       </td>
                     </tr>
                   ) : null}
-                </>
+                </React.Fragment>
               );
             })}
           </tbody>
@@ -262,72 +248,51 @@ export default function ZigTable<T extends object>({
                       {column.render("Footer")}
                     </td>
                   ))}
-                  <td
-                    className={"action"}
-                    key={`--table-foot-cell-${group.headers.length.toString()}`}
-                  >
-                    {""}
-                  </td>
+                  <td key={`--table-foot-cell-${group.headers.length.toString()}`}></td>
                 </tr>
               ))}
             </tfoot>
           )}
         </TableView>
-        {!data.length && <EmptyMessage>{emptyMessage}</EmptyMessage>}
+        {/* {!data.length && <EmptyMessage>{emptyMessage}</EmptyMessage>} */}
       </View>
       {pagination && (
         <FooterContainer>
-          <Box display="flex" gap={2}>
-            <ZigTypography variant="body1" color="neutral300">
-              Showing
-            </ZigTypography>
-            <ZigTypography variant="body1" color="neutral100">
-              {pageIndex + 1}
-            </ZigTypography>
-            <ZigTypography variant="body1" color="neutral300">
-              out of
-            </ZigTypography>
-            <ZigTypography variant="body1" color="neutral100">
-              {pageOptions.length}
-            </ZigTypography>
-            <ZigTypography variant="body1" color="neutral300">
-              items
-            </ZigTypography>
-          </Box>
+          <ZigTypography color="neutral300">
+            Showing
+            <ZigTypography color="neutral100">{page.length}</ZigTypography>
+            out of
+            <ZigTypography color="neutral100">{data.length}</ZigTypography>
+            items
+          </ZigTypography>
           <Box justifyContent="center" display="flex" gap={2}>
-            <IconButtonContainer
+            <IconButton
               variant="flat"
               size="xlarge"
-              rotate={true}
               shrinkWrap={true}
-              icon={<DoubleChevron width={24} height={24} color="neutral300" />}
+              icon={<FirstPage width={24} height={24} color="neutral300" />}
               onClick={() => gotoPage(0)}
               disabled={!canPreviousPage}
             />
-            <IconButtonContainer
+            <IconButton
               variant="flat"
               size="xlarge"
-              rotate={true}
               shrinkWrap={true}
               icon={<SingleChevron width={24} height={24} color="neutral300" />}
               onClick={() => previousPage()}
               disabled={!canPreviousPage}
             />
-            <ZigTypography variant="body1" color="neutral300">
-              Page
-            </ZigTypography>
+            <ZigTypography color="neutral300">Page</ZigTypography>
             <PageNumberContainer>
               <ZigTypography variant="h3" color="neutral100">
                 {pageIndex + 1}
               </ZigTypography>
             </PageNumberContainer>
-            <ZigTypography variant="body1" color="neutral300">
-              out of
-            </ZigTypography>
-            <ZigTypography variant="body1" color="neutral100" fontWeight={600}>
+            <ZigTypography color="neutral300">out of</ZigTypography>
+            <ZigTypography color="neutral100" fontWeight={600}>
               {pageOptions.length}
             </ZigTypography>
-            <IconButtonContainer
+            <IconButton
               variant="flat"
               size="xlarge"
               shrinkWrap={true}
@@ -335,7 +300,7 @@ export default function ZigTable<T extends object>({
               disabled={!canNextPage}
               icon={<SingleChevron width={24} height={24} color="neutral300" />}
             />
-            <IconButtonContainer
+            <IconButton
               variant="flat"
               size="xlarge"
               shrinkWrap={true}
@@ -345,33 +310,23 @@ export default function ZigTable<T extends object>({
             />
           </Box>
           <Box justifyContent="end" display="flex" gap={2}>
-            {data.length > 10 && (
+            {data.length > pageSizeOptions[0].value && (
               <SelectorContainer>
-                <ZigTypography variant="body1" color="neutral300">
-                  Displaying
-                </ZigTypography>
+                <ZigTypography color="neutral300">Displaying</ZigTypography>
                 <SelectorSizing>
-                  <Selector
-                    options={customOptions}
-                    placeholder={
-                      <ZigTypography variant="h3" color="neutral100">
-                        {pageSize}
-                      </ZigTypography>
-                    }
-                    maxHeight={36}
-                    onChange={(e: { caption: string }) => {
-                      setPageSize(Number(e.caption));
-                    }}
+                  <ZigSelect
+                    options={pageSizeOptions}
+                    value={pageSize}
+                    // maxHeight={36}
+                    onChange={setPageSize}
                   />
                 </SelectorSizing>
-                <ZigTypography variant="body1" color="neutral300">
-                  items
-                </ZigTypography>
+                <ZigTypography color="neutral300">items</ZigTypography>
               </SelectorContainer>
             )}
           </Box>
         </FooterContainer>
       )}
-    </Layout>
+    </>
   );
 }

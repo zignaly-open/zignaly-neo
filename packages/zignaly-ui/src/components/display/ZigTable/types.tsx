@@ -13,5 +13,6 @@ export interface ZigTableProps<T extends object> {
   emptyMessage?: string | JSX.Element;
   hasFooter?: boolean;
   pagination?: boolean;
+  sort?: boolean;
   renderRowSubComponent?: (row: Row<T>) => JSX.Element;
 }
