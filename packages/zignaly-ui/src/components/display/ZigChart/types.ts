@@ -16,6 +16,8 @@ export interface ChartMiniProps {
 
 export interface ChartLargeProps {
   readonly data: AxisFormat[] | number[];
+  tickCount?: number;
+  onlyIntegerTicks?: boolean;
   yAxisFormatter?: (y: number | string) => string;
 }
 

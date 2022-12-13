@@ -4,8 +4,11 @@ import { axisStyle, ChartLayoutLarge } from "../styles";
 import { ChartLargeProps } from "../types";
 import { useChartData } from "../hooks";
 import GraphColors from "../GraphColors";
+// eslint-disable-next-line import/no-extraneous-dependencies
+import * as d3Scale from "victory-vendor/d3-scale";
+import { TextAnchorType } from "victory-core/lib/victory-label/victory-label";
 
-const ZigChart = ({ data, yAxisFormatter, onlyIntegerLabels }: ChartLargeProps) => {
+const ZigChart = ({ data, yAxisFormatter, tickCount = 7, onlyIntegerTicks }: ChartLargeProps) => {
   const { data: processedData, color, gradient } = useChartData(data);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
@@ -27,6 +30,12 @@ const ZigChart = ({ data, yAxisFormatter, onlyIntegerLabels }: ChartLargeProps) 
     [yAxisFormatter],
   );
 
+  const ticks = d3Scale
+    .scaleLinear()
+    .domain(yDomain)
+    .ticks(tickCount)
+    .filter((v) => !onlyIntegerTicks || Number.isInteger(v));
+
   return (
     <ChartLayoutLarge ref={wrapperRef}>
       <GraphColors />
@@ -42,17 +51,14 @@ const ZigChart = ({ data, yAxisFormatter, onlyIntegerLabels }: ChartLargeProps) 
           }}
         >
           <VictoryAxis
+            tickValues={ticks}
             tickLabelComponent={
               <VictoryLabel
                 text={getChartLabel}
-                textAnchor={(v) => {
-                  const length = getChartLabel(v).length;
-                  return length < 4 ? "end" : "start";
-                }}
-                dx={(v) => {
-                  const length = getChartLabel(v).length;
-                  return length < 4 ? 0 : -22;
-                }}
+                textAnchor={(v) =>
+                  (getChartLabel(v).length < 4 ? "end" : "start") as TextAnchorType
+                }
+                dx={(v) => (getChartLabel(v).length < 4 ? 0 : -22)}
               />
             }
             dependentAxis
