@@ -7,6 +7,8 @@
     "currency": "Base Currency",
     "assets": "Assets in Pool",
     "nb-investors": "# of investors",
+    "n-months-pnl_one": "{{count}} month PNL",
+    "n-months-pnl_other": "{{count}} months PNL",
     "n-months_one": "{{count}} month",
     "n-months_other": "{{count}} months",
     "n-years_one": "{{count}} year",
