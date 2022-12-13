@@ -137,7 +137,7 @@ export type Service = {
 };
 
 export type TraderServiceChart = {
-  [x: string]: any;
+  [x: string]: unknown;
   data: Record<string, number>;
   summary: string;
   migration_date: string;
