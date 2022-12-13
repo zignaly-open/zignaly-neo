@@ -182,12 +182,17 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
         ) : (
           <ZigChart
             yAxisFormatter={(v) =>
-              [
-                GraphChartType.pnl_pct_compound,
-                GraphChartType.at_risk_pct,
-              ].includes(chartType)
-                ? `${v}%`
-                : `${v}`
+              `${v
+                .toString()
+                .replace(/000000$/, 'M')
+                .replace(/000$/, 'K')}${
+                [
+                  GraphChartType.pnl_pct_compound,
+                  GraphChartType.at_risk_pct,
+                ].includes(chartType)
+                  ? `%`
+                  : ``
+              }`
             }
             data={data?.data}
           />

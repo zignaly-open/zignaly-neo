@@ -21,10 +21,10 @@ const Template: ComponentStory<typeof ZigChart> = (args) => <ZigChart {...args} 
 export const ExampleChart = Template.bind({});
 ExampleChart.args = {
   data: (() => {
-    let value = 1;
+    let value = 100;
     // say "trista"
     return new Array(300).fill(0).map((_, i) => {
-      value += Math.random() * 2 - 1;
+      value += Math.random() * 200 - 1;
       return {
         x: "Jun " + i,
         y: value,

@@ -1,11 +1,11 @@
-import React, { useLayoutEffect, useMemo, useReducer, useRef } from "react";
+import React, { useCallback, useLayoutEffect, useMemo, useReducer, useRef } from "react";
 import { VictoryArea, VictoryAxis, VictoryChart, VictoryLabel } from "victory";
 import { axisStyle, ChartLayoutLarge } from "../styles";
 import { ChartLargeProps } from "../types";
 import { useChartData } from "../hooks";
 import GraphColors from "../GraphColors";
 
-const ZigChart = ({ data, yAxisFormatter }: ChartLargeProps) => {
+const ZigChart = ({ data, yAxisFormatter, onlyIntegerLabels }: ChartLargeProps) => {
   const { data: processedData, color, gradient } = useChartData(data);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
@@ -22,6 +22,10 @@ const ZigChart = ({ data, yAxisFormatter }: ChartLargeProps) => {
   }, [processedData]);
 
   const show2ndAxis = yDomain[0] < 0 && (0 - yDomain[0]) / (yDomain[1] - yDomain[0]) > 0.2;
+  const getChartLabel = useCallback(
+    ({ datum }) => (yAxisFormatter ? yAxisFormatter(datum) : datum),
+    [yAxisFormatter],
+  );
 
   return (
     <ChartLayoutLarge ref={wrapperRef}>
@@ -40,7 +44,15 @@ const ZigChart = ({ data, yAxisFormatter }: ChartLargeProps) => {
           <VictoryAxis
             tickLabelComponent={
               <VictoryLabel
-                text={({ datum }) => (yAxisFormatter ? yAxisFormatter(datum) : datum)}
+                text={getChartLabel}
+                textAnchor={(v) => {
+                  const length = getChartLabel(v).length;
+                  return length < 4 ? "end" : "start";
+                }}
+                dx={(v) => {
+                  const length = getChartLabel(v).length;
+                  return length < 4 ? 0 : -22;
+                }}
               />
             }
             dependentAxis
