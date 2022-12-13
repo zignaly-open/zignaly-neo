@@ -1,18 +1,20 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import NumberFormat from "react-number-format";
-import Table from ".";
-import PriceLabel from "./components/PriceLabel";
-import PercentageIndicator from "./components/PercentageIndicator";
-import ConnectionStateLabel, { ConnectionStateLabelId } from "./components/ConnectionStateLabel";
-import DateLabel from "./components/DateLabel";
 import { CheckIconStyled, CloseIconStyled } from "./styles";
 import { dark } from "../../../theme";
 import Typography from "../Typography";
 import { MockMyCoinsData } from "./mockData";
 import { AreaChart } from "../Charts";
-import { UserTableData } from "./types";
 import { ChartsProps } from "../Charts/types";
+import ZigTable from ".";
+import PriceLabel from "../Table/components/PriceLabel";
+import PercentageIndicator from "../Table/components/PercentageIndicator";
+import ConnectionStateLabel, {
+  ConnectionStateLabelId,
+} from "../Table/components/ConnectionStateLabel";
+import DateLabel from "../Table/components/DateLabel";
+import CoinLabel from "../Table/components/CoinLabel";
 
 const createMarketPlaceTableHeader = () => {
   return [
@@ -103,12 +105,12 @@ const createUserTableDataObject = ({
 };
 
 export default {
-  title: "Display/Table",
-  component: Table,
+  title: "Display/ZigTable",
+  component: ZigTable,
   decorators: [(story) => <div style={{ paddingBottom: "2rem" }}>{story()}</div>],
-} as ComponentMeta<typeof Table>;
+} as ComponentMeta<typeof ZigTable>;
 
-const Template: ComponentStory<typeof Table> = (args) => <Table {...args} />;
+const Template: ComponentStory<typeof ZigTable> = (args) => <ZigTable {...args} />;
 /**
  * IMPORTANT if there are amounts of money use the sortByPointDecimal function to sort.
  * IMPORTANT useMemo must be used and in the following way wrap the result of the sort function executed in a variable because if not it will not be memorized,
@@ -116,9 +118,6 @@ const Template: ComponentStory<typeof Table> = (args) => <Table {...args} />;
  */
 export const MyCoins = Template.bind({});
 MyCoins.args = {
-  type: "pagedWithData",
-  hideOptionsButton: false,
-  hasFooter: true,
   initialState: {
     sortBy: [
       {
