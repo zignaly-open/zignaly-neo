@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { parse } from 'date-fns';
 import {
   GraphChartType,
   GraphTimeframe,
@@ -13,14 +12,12 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import { useTraderServiceGraphQuery } from '../../../../../apis/service/api';
 import {
   ChartWrapper,
   GraphPercentageWrapperBox,
   SqueezedButtonGroup,
 } from '../styles';
-import { formatMonthDay } from '../../../../Dashboard/components/MyDashboard/util';
-import { useChartConfig } from '../../../../../apis/service/use';
+import { useChartConfig, useChartData } from '../../../../../apis/service/use';
 import Stub from '../../../../../components/Stub';
 import { useTranslation } from 'react-i18next';
 import CenteredLoader from '../../../../../components/CenteredLoader';
@@ -29,10 +26,10 @@ import PercentChange from './PercentChange';
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   const { chartType, chartTimeframe, setChartTimeframe, setChartType } =
     useChartConfig();
-  const { data, isLoading, isFetching, isError } = useTraderServiceGraphQuery({
-    id: service.id,
-    period: chartTimeframe,
-    chart: chartType,
+  const { data, isLoading, isFetching, isError } = useChartData({
+    service,
+    chartTimeframe,
+    chartType,
   });
 
   const { t } = useTranslation(['service', 'marketplace']);
@@ -174,10 +171,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                 ? `${v}%`
                 : `${v}`
             }
-            data={Object.entries(data?.data || {}).map(([date, value]) => ({
-              x: formatMonthDay(parse(date, 'yyyy-MM-dd', Date.now())),
-              y: value,
-            }))}
+            data={data?.data}
           />
         )}
       </ChartWrapper>
