@@ -53,5 +53,6 @@
     "at_risk_pct": "% at risk",
     "investors": "Nb of investors"
   },
+  "migrated-to-ps2": "Migrated to PS2",
   "not-enough-data": "Not enough historic data for this period"
 }

@@ -64,6 +64,15 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
     [service.createdAt],
   );
 
+  const events = useMemo(() => {
+    // yes, we intentionally skip the case when the migration date is 0 index
+    const allEvents = [];
+    if (data?.migrationIndex > 0) {
+      allEvents.push({ x: data?.migrationIndex, label: t('migrated-to-ps2') });
+      return allEvents;
+    }
+  }, [data?.migrationIndex]);
+
   return (
     <Box>
       <Box
@@ -182,6 +191,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
         ) : (
           <ZigChart
             onlyIntegerTicks={chartType === GraphChartType.investors}
+            events={events}
             yAxisFormatter={(v) =>
               `${v
                 .toString()
