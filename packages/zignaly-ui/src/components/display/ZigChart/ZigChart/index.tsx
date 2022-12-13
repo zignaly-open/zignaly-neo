@@ -21,7 +21,7 @@ const ZigChart = ({ data, yAxisFormatter }: ChartLargeProps) => {
     return [Math.min(0, ...values), Math.max(1, ...values)];
   }, [processedData]);
 
-  const show2ndAxis = yDomain[0] < 0 && (0 - yDomain[0]) / (yDomain[1] - yDomain[0]) < 0.2;
+  const show2ndAxis = yDomain[0] < 0 && (0 - yDomain[0]) / (yDomain[1] - yDomain[0]) > 0.2;
 
   return (
     <ChartLayoutLarge ref={wrapperRef}>
