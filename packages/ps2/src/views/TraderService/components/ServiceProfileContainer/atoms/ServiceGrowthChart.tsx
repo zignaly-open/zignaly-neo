@@ -181,6 +181,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           <CenteredLoader />
         ) : (
           <ZigChart
+            onlyIntegerTicks={chartType === GraphChartType.investors}
             yAxisFormatter={(v) =>
               `${v
                 .toString()

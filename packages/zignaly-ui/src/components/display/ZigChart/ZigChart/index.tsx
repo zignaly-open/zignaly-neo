@@ -6,6 +6,7 @@ import { useChartData } from "../hooks";
 import GraphColors from "../GraphColors";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as d3Scale from "victory-vendor/d3-scale";
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { TextAnchorType } from "victory-core/lib/victory-label/victory-label";
 
 const ZigChart = ({ data, yAxisFormatter, tickCount = 7, onlyIntegerTicks }: ChartLargeProps) => {
@@ -26,7 +27,8 @@ const ZigChart = ({ data, yAxisFormatter, tickCount = 7, onlyIntegerTicks }: Cha
 
   const show2ndAxis = yDomain[0] < 0 && (0 - yDomain[0]) / (yDomain[1] - yDomain[0]) > 0.2;
   const getChartLabel = useCallback(
-    ({ datum }) => (yAxisFormatter ? yAxisFormatter(datum) : datum),
+    ({ datum = 0 }: { datum?: number }): string =>
+      yAxisFormatter ? yAxisFormatter(datum) : datum.toString(),
     [yAxisFormatter],
   );
 
@@ -55,8 +57,11 @@ const ZigChart = ({ data, yAxisFormatter, tickCount = 7, onlyIntegerTicks }: Cha
             tickLabelComponent={
               <VictoryLabel
                 text={getChartLabel}
-                textAnchor={(v) =>
-                  (getChartLabel(v).length < 4 ? "end" : "start") as TextAnchorType
+                textAnchor={
+                  ((v: { datum?: number }) =>
+                    getChartLabel(v).length < 4
+                      ? "end"
+                      : "start") as unknown as () => TextAnchorType
                 }
                 dx={(v) => (getChartLabel(v).length < 4 ? 0 : -22)}
               />
