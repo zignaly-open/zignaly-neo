@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { TransactionContainer } from '../styles';
-import { ArrowLeftIcon, Button, PriceLabel, Table } from '@zignaly-open/ui';
+import { ArrowLeftIcon, Button, ZigPriceLabel, Table } from '@zignaly-open/ui';
 import {
   ChangeViewFn,
   EditInvestmentViews,
@@ -31,14 +31,16 @@ const PendingTransactionsList: React.FC<{
 
     if (details.pending > 0) {
       fields.push({
-        amount: <PriceLabel coin={coin.id} value={details.pending} />,
+        amount: <ZigPriceLabel exact coin={coin.id} value={details.pending} />,
         type: t('pendingMajorThan.type'),
         status: t('pendingMajorThan.status'),
       });
     }
     if (details.profitOut > 0) {
       fields.push({
-        amount: <PriceLabel coin={coin.id} value={details.profitOut} />,
+        amount: (
+          <ZigPriceLabel exact coin={coin.id} value={details.profitOut} />
+        ),
         type: t('profitOutMajorThan.type'),
         status: t('profitOutMajorThan.status'),
       });
@@ -46,7 +48,9 @@ const PendingTransactionsList: React.FC<{
 
     if (details.transferOut > 0) {
       fields.push({
-        amount: <PriceLabel coin={coin.id} value={details.transferOut} />,
+        amount: (
+          <ZigPriceLabel exact coin={coin.id} value={details.transferOut} />
+        ),
         type: t('transferOutMajorThan.type'),
         status: t('transferOutMajorThan.status'),
       });

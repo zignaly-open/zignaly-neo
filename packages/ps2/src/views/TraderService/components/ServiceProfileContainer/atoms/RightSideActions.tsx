@@ -2,7 +2,6 @@ import { Box } from '@mui/system';
 import LiquidatedLabel from './LiquidatedLabel';
 import InvestedButton from './InvestedButton';
 import InvestButton from './InvestButton';
-import OtherAccountsButton from './OtherAccountsButton';
 import React from 'react';
 import { useIsAuthenticated } from '../../../../../apis/user/use';
 import { useIsInvestedInService } from '../../../../../apis/investment/use';
@@ -30,13 +29,8 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
           {isAuthenticated && isInvested.thisAccount ? (
             <InvestedButton service={service} />
           ) : (
-            <InvestButton service={service} />
+            <InvestButton showMultipleAccountButton service={service} />
           )}
-
-          {isAuthenticated &&
-            Object.keys(isInvested.accounts || {}).length > 1 && (
-              <OtherAccountsButton service={service} />
-            )}
         </Box>
       )}
 

@@ -45,5 +45,12 @@
   "chart-error": {
     "heading": "Error occurred :(",
     "description": "Unfortunately, we weren't able to render the chart"
+  },
+  "chart-options": {
+    "pnl_pct_compound": "PNL %",
+    "pnl_ssc": "PNL, {{coin}}",
+    "sbt_ssc": "SBT, {{coin}}",
+    "at_risk_pct": "% at risk",
+    "investors": "Nb of investors"
   }
 }

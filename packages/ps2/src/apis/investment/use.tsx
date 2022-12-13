@@ -76,6 +76,15 @@ export function useIsInvestedInService(serviceId: string): {
   };
 }
 
+export function useInvestedAccountsCount(serviceId: string): number {
+  const isAuthenticated = useIsAuthenticated();
+  const isInvested = useIsInvestedInService(serviceId);
+
+  return (
+    (isAuthenticated && Object.keys(isInvested.accounts || {}).length) || 0
+  );
+}
+
 export function useCurrentBalance(coin?: string): {
   id: string;
   balance: string;

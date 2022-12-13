@@ -80,7 +80,7 @@ const darkMui = createTheme({
           background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
           boxShadow: "0px 12px 16px -8px rgba(25, 25, 39, 0.36)",
           transition: "all 0.3s linear",
-          "&:hover": {
+          "&:hover, &.MuiButton-active": {
             background: "linear-gradient(rgba(20, 156, 173, 0.64),rgba(69, 64, 193, 0.64))",
           },
         },
@@ -88,23 +88,33 @@ const darkMui = createTheme({
           borderColor: dark.neutral600,
           color: dark.neutral300,
           transition: "all 0.2s linear",
-          "&:hover": {
-            background:
-              "linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%)",
+          "&:hover, &.MuiButton-active": {
             color: dark.neutral000,
+            borderColor: dark.neutral400,
           },
         },
       },
     },
     MuiTypography: {
+      variants: [
+        {
+          props: { variant: "bigNumber" },
+          style: {
+            fontSize: "26px",
+            lineHeight: "40px",
+            color: dark.neutral000,
+            fontWeight: "500",
+          },
+        },
+      ],
       defaultProps: {
         variantMapping: {
-          h1: "h2",
+          h1: "h1",
           h2: "h2",
-          h3: "h2",
-          h4: "h2",
-          h5: "h2",
-          h6: "h2",
+          h3: "h3",
+          h4: "h4",
+          h5: "h5",
+          h6: "h6",
           subtitle1: "h2",
           subtitle2: "h2",
           body1: "span",
