@@ -1,19 +1,22 @@
+import { ZigTypography } from '@zignaly-open/ui';
 import React from 'react';
 
-const ProviderLink = ({
-  providerId,
-  providerName,
+const ServiceLink = ({
+  serviceId,
+  serviceName,
 }: {
-  providerId: string;
-  providerName: string;
+  serviceId: string;
+  serviceName: string;
 }) => (
-  <a
-    target='_blank'
-    rel='noopener noreferrer'
-    href={`${window.location.origin}${process.env.GATSBY_BASE_PATH}/profitSharing/${providerId}`}
-  >
-    {providerName}
-  </a>
+  <ZigTypography color='neutral000' fontWeight={600}>
+    <a
+      target='_blank'
+      rel='noopener noreferrer'
+      href={`${window.location.origin}/profit-sharing/${serviceId}`}
+    >
+      {serviceName}
+    </a>
+  </ZigTypography>
 );
 
-export default ProviderLink;
+export default ServiceLink;
