@@ -144,15 +144,17 @@ export function useChartData({
       }
     }
 
+    const dates = Object.entries(chart).sort(([a], [b]) => a.localeCompare(b));
+
     return {
       summary: data?.summary,
       summaryPct: data?.summaryPct,
-      data: Object.entries(chart)
-        .sort(([a], [b]) => a.localeCompare(b))
-        .map(([date, value]) => ({
-          x: formatMonthDay(parse(date, 'yyyy-MM-dd', Date.now())),
-          y: value,
-        })),
+      migrationDate: data?.migration_date,
+      migrationIndex: dates.findIndex(([x]) => x === data?.migration_date),
+      data: dates.map(([date, value]) => ({
+        x: formatMonthDay(parse(date, 'yyyy-MM-dd', Date.now())),
+        y: value,
+      })),
     };
   }, [data?.data]);
 

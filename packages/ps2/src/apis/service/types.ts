@@ -137,8 +137,10 @@ export type Service = {
 };
 
 export type TraderServiceChart = {
+  [x: string]: any;
   data: Record<string, number>;
   summary: string;
+  migration_date: string;
   summaryPct: string;
 };
 
@@ -146,6 +148,8 @@ export type TraderServiceChartProcessed = {
   data: AxisFormat[];
   summary: string;
   summaryPct: string;
+  migrationDate?: string;
+  migrationIndex?: number;
 };
 
 export enum GraphTimeframe {
