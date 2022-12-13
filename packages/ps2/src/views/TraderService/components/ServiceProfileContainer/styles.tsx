@@ -188,7 +188,7 @@ export const ChartWrapper = styled(Box)`
 export const PercentageIndicatorSmall = styled(ZigTypography)`
   position: relative;
   top: -1.5px;
-  font-size: 12px;
+  font-size: 12px !important;
 `;
 
 export const GraphPercentageWrapperBox = styled(Box)`
