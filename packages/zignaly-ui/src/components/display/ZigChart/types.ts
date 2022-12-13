@@ -8,6 +8,11 @@ export enum ChartGradientColor {
   Red = "chart-gradient-red",
 }
 
+export type ChartEvent = {
+  x: number;
+  label: string;
+};
+
 export interface ChartMiniProps {
   readonly data: AxisFormat[] | number[];
   midLine?: boolean | null;
@@ -17,6 +22,7 @@ export interface ChartMiniProps {
 export interface ChartLargeProps {
   readonly data: AxisFormat[] | number[];
   tickCount?: number;
+  events?: ChartEvent[];
   onlyIntegerTicks?: boolean;
   yAxisFormatter?: (y: number | string) => string;
 }

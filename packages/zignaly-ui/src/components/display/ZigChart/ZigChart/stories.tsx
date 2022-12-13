@@ -33,6 +33,25 @@ ExampleChart.args = {
   })(),
 };
 
+export const ExampleChartWithEvents = Template.bind({});
+ExampleChartWithEvents.args = {
+  events: [
+    { x: 25, label: "Raz raz raz" },
+    { x: 145, label: "Eto hardbass" },
+  ],
+  data: (() => {
+    let value = 10;
+    // say "trista"
+    return new Array(300).fill(0).map((_, i) => {
+      value += Math.random() * 20 - 1;
+      return {
+        x: "Jun " + i,
+        y: value,
+      };
+    });
+  })(),
+};
+
 export const ExampleChart2 = Template.bind({});
 ExampleChart2.args = {
   data: [
