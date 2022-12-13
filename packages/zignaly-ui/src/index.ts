@@ -72,6 +72,7 @@ export { ReactComponent as SwapIcon } from "assets/icons/swap-icon.svg";
 export { ReactComponent as SwapVertIcon } from "assets/icons/swap-vert-icon.svg";
 export { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.svg";
 export { ReactComponent as ZignalyIcon } from "assets/icons/coins/zignaly-coin.svg";
+export { ReactComponent as ZignalyLogo } from "assets/images/zignaly-isotype.svg";
 export { ReactComponent as GlobeLanguages } from "assets/icons/globe-languages.svg";
 export { ReactComponent as TimeIcon } from "assets/icons/time-icon.svg";
 export { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";

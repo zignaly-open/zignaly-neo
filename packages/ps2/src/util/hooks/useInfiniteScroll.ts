@@ -42,13 +42,12 @@ const useInfiniteScroll = (
   };
 
   return {
+    ...queryResponse,
     data: combinedData,
     page: localPage.page,
     hasMore: fetchData.length === limit,
     readMore,
     refresh,
-    isLoading: queryResponse?.isLoading,
-    isFetching: queryResponse?.isFetching,
   };
 };
 

@@ -23,3 +23,5 @@ export type TransferHistoryTableDataType = {
     balanceTotalUSDT: string;
   };
 };
+
+export type Side = 'to' | 'from';

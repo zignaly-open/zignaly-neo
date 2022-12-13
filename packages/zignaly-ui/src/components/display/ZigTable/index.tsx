@@ -241,7 +241,10 @@ export default function ZigTable<T extends object>({
                   </tr>
                   {row.isExpanded ? (
                     <tr>
-                      <td colSpan={visibleColumns.length} style={{ border: "none" }}>
+                      <td
+                        colSpan={visibleColumns.length}
+                        style={{ border: "none", padding: "0 14px" }}
+                      >
                         {renderRowSubComponent!(row)}
                       </td>
                     </tr>
