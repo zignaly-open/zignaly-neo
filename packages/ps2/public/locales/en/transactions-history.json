@@ -25,5 +25,11 @@
     "completed": "Completed",
     "cancelled": "Cancelled",
     "failed": "Failed"
+  },
+  "details": {
+    "from": "From:",
+    "to": "To:",
+    "txHash": "TX Hash:",
+    "note": "Note:"
   }
 }
