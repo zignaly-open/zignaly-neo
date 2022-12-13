@@ -22,9 +22,9 @@ import {
 import { Box } from '@mui/material';
 import { ArrowRightAlt } from '@mui/icons-material';
 import ChainIcon from './atoms/ChainIcon';
-import ProviderLink from './atoms/ProviderLink';
+import ServiceLink from './atoms/ProviderLink';
 import ZignalyAccount from './atoms/TransferZigLabel';
-import { Side } from './types';
+import { Side, transactionTypeName } from './types';
 import { getTransactionSideType } from './utils';
 
 const initialStateTable = {
@@ -65,8 +65,7 @@ const TransactionsHistoryTable = () => {
         {
           Header: t('tableHeader.type'),
           accessor: 'txType',
-          // Cell: ({ cell: { value } }) => <>{t(connectionStateName[value])}</>,
-          Cell: ({ cell: { value } }) => <>{t(`type.${value}`)}</>,
+          Cell: ({ cell: { value } }) => <>{t(transactionTypeName[value])}</>,
         },
         {
           Header: t('tableHeader.amount'),
@@ -107,9 +106,8 @@ const TransactionsHistoryTable = () => {
       const name = side === 'to' ? toName : fromName;
       const sideType = getTransactionSideType(txType, side);
 
-      console.log(transaction, type);
       return sideType === 'service' ? (
-        <ProviderLink providerId={idAddress} providerName={name} />
+        <ServiceLink serviceId={idAddress} serviceName={name} />
       ) : sideType === 'external' ? (
         <>
           <Box mr={2}>

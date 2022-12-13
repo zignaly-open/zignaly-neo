@@ -69,8 +69,6 @@ export enum TransactionType {
   PS_WITHDRAW = 'psWithdraw',
   // Investment in a PS2 service
   PS2_DEPOSIT = 'ps2_deposit',
-  // Investment out from a PS service
-  // PS_WITHDRAW = 'ps2_withdraw',
   // Internal transfers of PS2 (between SCA and STA or from STA to DFA when a service is converted to PS2)
   PS2 = 'ps2',
   // Transfers made during PSDS
@@ -81,6 +79,7 @@ export enum TransactionType {
   SUCCESS_FEE = 'psSuccessFee',
   // All the others that are mainly the ones between internal transfers between his accounts
   USER = 'user',
+  PIFA = 'PIFA',
 }
 
 export const enum TransactionStateType {
