@@ -1,5 +1,12 @@
 import React, { useCallback, useLayoutEffect, useMemo, useReducer, useRef } from "react";
-import { VictoryArea, VictoryAxis, VictoryChart, VictoryLabel } from "victory";
+import {
+  VictoryArea,
+  VictoryAxis,
+  VictoryLine,
+  VictoryChart,
+  VictoryScatter,
+  VictoryLabel,
+} from "victory";
 import { axisStyle, ChartLayoutLarge } from "../styles";
 import { ChartLargeProps } from "../types";
 import { useChartData } from "../hooks";
@@ -8,8 +15,17 @@ import GraphColors from "../GraphColors";
 import * as d3Scale from "victory-vendor/d3-scale";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { TextAnchorType } from "victory-core/lib/victory-label/victory-label";
+import { useTheme } from "styled-components";
+import Theme from "../../../../theme/theme";
 
-const ZigChart = ({ data, yAxisFormatter, tickCount = 7, onlyIntegerTicks }: ChartLargeProps) => {
+const ZigChart = ({
+  data,
+  yAxisFormatter,
+  events,
+  tickCount = 7,
+  onlyIntegerTicks,
+}: ChartLargeProps) => {
+  const theme = useTheme() as Theme;
   const { data: processedData, color, gradient } = useChartData(data);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
@@ -69,6 +85,38 @@ const ZigChart = ({ data, yAxisFormatter, tickCount = 7, onlyIntegerTicks }: Cha
             dependentAxis
             style={axisStyle}
           />
+
+          {(events || []).map(({ x, label }) => (
+            <VictoryScatter
+              key={"event-text-" + x}
+              width={0}
+              data={[{ x, y: yDomain[1] }]}
+              labels={[label]}
+              size={0}
+              labelComponent={
+                <VictoryLabel
+                  dy={17}
+                  labelPlacement="vertical"
+                  style={[{ fontSize: 14, fill: theme.neutral500 }]}
+                  angle={-90}
+                  textAnchor="end"
+                />
+              }
+            />
+          ))}
+
+          {(events || []).map(({ x }) => (
+            <VictoryLine
+              key={"event-line-" + x}
+              style={{
+                data: { stroke: theme.neutral500, strokeWidth: 0.5 },
+              }}
+              data={[
+                { x, y: yDomain[0] },
+                { x, y: yDomain[1] },
+              ]}
+            />
+          ))}
 
           {show2ndAxis && (
             <VictoryAxis
