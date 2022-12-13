@@ -52,5 +52,6 @@
     "sbt_ssc": "SBT, {{coin}}",
     "at_risk_pct": "% at risk",
     "investors": "Nb of investors"
-  }
+  },
+  "not-enough-data": "Not enough historic data for this period"
 }

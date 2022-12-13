@@ -48,7 +48,7 @@ const darkMui = createTheme({
       styleOverrides: {
         root: `
           & > .MuiButton-root {
-          border-radius: 0;
+            border-radius: 0;
             &:first-child {
               border-top-left-radius: 4px;
               border-bottom-left-radius: 4px;
@@ -57,6 +57,18 @@ const darkMui = createTheme({
               border-top-right-radius: 4px;
               border-bottom-right-radius: 4px;
             }
+          }
+          
+          & > span .MuiButton-root {
+            border-radius: 0 !important;
+          }
+          
+          & > span:first-child .MuiButton-root {
+            border-radius: 4px 0 0 4px !important;
+          }
+          
+          & > span:last-child .MuiButton-root {
+            border-radius: 0 4px 4px 0 !important;
           }
         `,
       },

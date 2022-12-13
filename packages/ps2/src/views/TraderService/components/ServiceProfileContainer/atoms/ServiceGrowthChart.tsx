@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import {
   GraphChartType,
   GraphTimeframe,
+  GraphTimeframeDayLength,
   Service,
 } from '../../../../../apis/service/types';
 import {
@@ -22,6 +23,7 @@ import Stub from '../../../../../components/Stub';
 import { useTranslation } from 'react-i18next';
 import CenteredLoader from '../../../../../components/CenteredLoader';
 import PercentChange from './PercentChange';
+import { differenceInDays } from 'date-fns';
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   const { chartType, chartTimeframe, setChartTimeframe, setChartType } =
@@ -55,6 +57,11 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
       { label: t('chart-options.investors'), value: GraphChartType.investors },
     ],
     [t],
+  );
+
+  const serviceStartedDaysAgo = useMemo(
+    () => differenceInDays(new Date(service.createdAt), new Date()),
+    [service.createdAt],
   );
 
   return (
@@ -129,17 +136,28 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
         <Box sx={{ flex: 1 }} />
         <Box sx={{ mr: 2 }}>
           <SqueezedButtonGroup variant={'outlined'}>
-            {Object.keys(GraphTimeframe).map((v: GraphTimeframe) => (
-              <ZigButton
-                active={v === chartTimeframe}
-                size={'small'}
-                variant={'outlined'}
-                key={v}
-                onClick={() => setChartTimeframe(v)}
-              >
-                {t('periods.' + v)}
-              </ZigButton>
-            ))}
+            {Object.keys(GraphTimeframe).map((v: GraphTimeframe, i, all) => {
+              const isDisabled =
+                i > 0 &&
+                GraphTimeframeDayLength[v] > 30 &&
+                GraphTimeframeDayLength[all[i - 1]] > serviceStartedDaysAgo;
+
+              return (
+                <ZigButton
+                  active={v === chartTimeframe}
+                  size={'small'}
+                  variant={'outlined'}
+                  key={v}
+                  disabled={isDisabled}
+                  tooltip={
+                    isDisabled ? t('service:not-enough-data') : undefined
+                  }
+                  onClick={() => setChartTimeframe(v)}
+                >
+                  {t('periods.' + v)}
+                </ZigButton>
+              );
+            })}
           </SqueezedButtonGroup>
         </Box>
         <Box sx={{ mr: 4.5 }}>
