@@ -9,6 +9,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   value = 0,
   coin,
   precision,
+  exact,
   usd,
   coinProps,
   ...otherProps
@@ -36,7 +37,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
         renderText={(v) => v}
         displayType={"text"}
         thousandSeparator={true}
-        decimalScale={precision || getPrecisionForCoin(coin || "USDT", value)}
+        decimalScale={exact ? undefined : precision || getPrecisionForCoin(coin || "USDT", value)}
       />
 
       {coin && (
