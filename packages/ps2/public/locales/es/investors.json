@@ -2,8 +2,6 @@
 	"no-investors": "Este servicio aún no tiene inversores",
 	"failed-to-load": "No se han podido cargar los datos",
 	"title": "Inversores",
-	"number-of-investors_one": "{{count}} Inversor",
-	"number-of-investors_other": "{{count}} Inversores",
 	"tableHeader": {
 		"email": "Email",
 		"userId": "ID de usuario",
@@ -24,5 +22,7 @@
 		"suspended": "Suspendido",
 		"disconnected": "Desconectado",
 		"owner": "Propietario"
-	}
+	},
+	"number-of-investors_one": "{{count}} Inversor",
+	"number-of-investors_other": "{{count}} Inversores"
 }

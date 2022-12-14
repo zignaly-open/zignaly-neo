@@ -14,15 +14,15 @@
 			"items": "elementos"
 		}
 	},
-	"assetsInPool-investors_one": "{{cuenta}} inversor",
-	"assetsInPool-investors_other": "{{count}} inversores",
 	"balanceSummary-invested": "Invertido",
 	"selector-validation-notData": "Datos no disponibles",
 	"investColumn": {
 		"successFess": "10% de Comisión por Beneficios",
 		"liquidated": "LIQUIDADO"
 	},
-	"tooltip-columnHeader": "Alternar SortBy",
+	"tooltip-columnHeader": "Alternar OrdenarPor",
 	"serviceName-by": "por",
-	"columns-hideOrShow": "Mostrar\/Ocultar columnas"
+	"columns-hideOrShow": "Mostrar\/Ocultar columnas",
+	"assetsInPool-investors_one": "{{count}} inversor",
+	"assetsInPool-investors_other": "{{count}} inversores"
 }
