@@ -1,0 +1,28 @@
+{
+	"no-investors": "Este serviço ainda não tem investidores",
+	"failed-to-load": "Falha em carregar os dados",
+	"title": "Investidores",
+	"tableHeader": {
+		"email": "Email",
+		"userId": "ID do Usuario",
+		"investment": "Investimento",
+		"P&L": "P&L",
+		"P&LTotal": "P&L Total",
+		"totalFeesPaid": "Taxas Totais Pagas",
+		"successFee": "Taxa de Sucesso",
+		"feesZIG": "Taxas em ZIG",
+		"status": "Estado"
+	},
+	"loading-arialLabel": "Carregando investidores",
+	"status": {
+		"connected": "Conectado",
+		"pending": "Pendente",
+		"soft-disconnect": "Desconexão Suave",
+		"hard-disconnect": "Desconexão Dura",
+		"suspended": "Em suspenso",
+		"disconnected": "Desconectado",
+		"owner": "Proprietário"
+	},
+	"number-of-investors_one": "{{count}} Investidor",
+	"number-of-investors_other": "{{count}} Investidores"
+}

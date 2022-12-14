@@ -1,0 +1,47 @@
+{
+	"manage": "Gerenciar",
+	"totalFunds": "Fundos Totais em Serviço",
+	"tradingFunds": "Fundos de Trading",
+	"tradingFunds-desc": "Fundos disponíveis para trading e utilizados em posições",
+	"availableTrading": "Disponível para trading:",
+	"allocatedTrading": "Alocado para trading:",
+	"hardDisconnected": "Fundos de Desconexão Dura:",
+	"availableDisconnection": "Disponível para desconexões:",
+	"neededSnapshot": "Necessário para instantâneo diário:",
+	"helper": "Precisa de ajuda com estes números? Por favor, verifique <0>como funcionam os saldos de profit sharing<\/0>.",
+	"minBalance": {
+		"title": "Saldo mínimo:",
+		"success": "Editou com sucesso o saldo mínimo."
+	},
+	"minBalanceModal": {
+		"title": "Editar Saldo Mínimo",
+		"desc": "Estabelecer o saldo mínimo que deseja manter na Conta de Fundos de Desconexão. Se o saldo de desconexão for superior ao mínimo, durante a contabilidade a diferença será automaticamente transferida para a Conta de Trading.",
+		"placeholder": "0.0",
+		"labelBalance": "Saldo Mínimo Atual",
+		"save": "Guardar"
+	},
+	"heldHardDisc": "Realizada para desconexões duras:",
+	"controlledZignaly": "Controlado por Zignaly",
+	"transfer": {
+		"title": "Transferência",
+		"loading": "Carregando",
+		"placeholder": "0.0",
+		"labelBalance": "Saldo Disponível:",
+		"deposit-available": "Saldo Disponível:",
+		"fromTradingAccount": "Da Conta de Trading",
+		"toTradingAccount": "Para Conta de Trading:",
+		"fromDiscAccount": "Da Conta de Desconexão",
+		"toDiscAccount": "Para Conta de Desconexão:",
+		"now": "Transferir Agora",
+		"success": "Transferiu com êxito {{amount}}."
+	},
+	"transferFunds": {
+		"title": "Transferir Fundos",
+		"description": "Transferir fundos imediatamente entre a Conta de Trading e a Conta de Desconexão no seu serviço"
+	},
+	"hardDiconnectWarning": "As suas desconexões duras atingiram {perc}%. Se as desconexões duras atingirem {maxPerc}% dos fundos do serviço, Zignaly assumirá o controlo do seu serviço.",
+	"previousValue": "Valor Anterior:",
+	"loading-arialLabel": "Carregamento gerenciamento",
+	"standbyFunds": "Fundos Standby",
+	"standbyFunds-desc": "Fundos disponíveis para retornar aos investidores que desejam se desconectar"
+}

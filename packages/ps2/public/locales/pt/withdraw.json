@@ -1,0 +1,8 @@
+{
+	"replace-existing-amount": "Esta quantidade irá substituir qualquer pedido de retiro anterior.",
+	"button": "Retirar",
+	"form": {
+		"label": "Quantidade a retirar:",
+		"labelBalance": "Disponível:"
+	}
+}
