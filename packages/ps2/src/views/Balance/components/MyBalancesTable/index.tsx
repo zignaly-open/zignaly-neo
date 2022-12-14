@@ -8,7 +8,7 @@ import {
   ZigTablePriceLabel,
   createColumnHelper,
 } from '@zignaly-open/ui';
-import { CoinBalanceTable } from './types';
+import { BalanceTableDataType } from './types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { allowedDeposits } from 'util/coins';
@@ -33,7 +33,7 @@ const MyBalancesTable = (): JSX.Element => {
   const { exchangeType } = useActiveExchange();
   const { showModal } = useZModal();
 
-  const columnHelper = createColumnHelper<CoinBalanceTable>();
+  const columnHelper = createColumnHelper<BalanceTableDataType>();
   const columns = [
     columnHelper.accessor('coin', {
       header: t('tableHeader.coin'),

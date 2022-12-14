@@ -1,25 +1,9 @@
-import { ColumnDef, TableState } from "@tanstack/react-table";
-import { Column, Row, UseSortByColumnOptions } from "react-table";
+import { ColumnDef, TableState, Row } from "@tanstack/react-table";
 
-type ExtendedColumn<T extends object> = Column<T> & UseSortByColumnOptions<T>;
-
-export interface ZigTableProps0<T extends object> {
-  columns: Array<ExtendedColumn<T>>;
-  data: T[];
-  defaultHiddenColumns?: string[];
-  onColumnHidden?: (column: string, isHidden: boolean) => void;
-  hideOptionsButton: boolean;
-  maxWidth?: number;
-  initialState?: object;
-  emptyMessage?: string | JSX.Element;
-  hasFooter?: boolean;
-  pagination?: boolean;
-  sort?: boolean;
-  renderRowSubComponent?: (row: Row<T>) => JSX.Element;
-}
-
-export type ZigTableProps<T> = {
+export type ZigTableProps<T extends object> = {
   data: T[];
   columns: ColumnDef<T>[];
   initialState?: Partial<TableState>;
+  pagination?: boolean;
+  renderSubComponent?: (props: { row: Row<T> }) => React.ReactElement;
 };

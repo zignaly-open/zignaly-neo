@@ -1,4 +1,4 @@
-import { TransactionType } from 'apis/coin/types';
+import { Transaction, TransactionType } from 'apis/coin/types';
 
 export const transactionTypeName = {
   [TransactionType.DEPOSIT]: 'type.deposit',
@@ -14,30 +14,4 @@ export const transactionTypeName = {
   [TransactionType.PIFA]: 'type.pifa',
 };
 
-export type TransferHistoryTableDataType = {
-  date: string;
-  coin: {
-    symbol: string;
-    name: string;
-  };
-  total: {
-    symbol: string;
-    balanceTotal: string;
-  };
-  available: {
-    symbol: string;
-    balanceFree: string;
-  };
-  locked: {
-    symbol: string;
-    balanceLocked: string;
-  };
-  valueBTC: {
-    balanceTotalBTC: string;
-  };
-  valueUSD: {
-    balanceTotalUSDT: string;
-  };
-};
-
-export type Side = 'to' | 'from';
+export type TransactionsTableDataType = Transaction & { assetName: string };
