@@ -7,23 +7,23 @@
 		"description": "Esta sección está en desarrollo, la verás disponible próximamente."
 	},
 	"no-data": {
-		"title": "Sin datos",
-		"description": "No hay datos disponibles. Si cree que es un problema, póngase en contacto con el servicio de asistencia."
+		"title": "Sin Datos",
+		"description": "No hay datos disponibles. Si cree que es un problema, póngase en contacto con el servicio de soporte."
 	},
 	"critical-error": {
-		"title": "Se ha producido un error",
-		"description": "Algo ha ido mal. Vuelve a intentarlo más tarde o ponte en contacto con el servicio de asistencia. O abandonar la sociedad industrial y construir una cabaña en el bosque."
+		"title": "Ocurrió un Error",
+		"description": "Algo ha ido mal. Vuelve a intentarlo más tarde o ponte en contacto con el servicio de soporte. O abandone la sociedad industrial y construya una cabaña en el bosque."
 	},
 	"main-menu": {
 		"dropdown-link-forTrading": "Para Servicios de Trading",
 		"dropdown-link-helpDocs": "Documentos de Ayuda"
 	},
 	"account-menu": {
-		"isAuth-button-logIn": "Entrar en el sistema",
+		"isAuth-button-logIn": "Iniciar sesión",
 		"isAuth-button-signUp": "REGISTRARSE",
-		"notAuth-dropdown-link-dashboard": "Mi Panel Principal",
+		"notAuth-dropdown-link-dashboard": "Mi Panel",
 		"notAuth-dropdown-link-balances": "Mi Saldo",
-		"notAuth-button-logOut": "Cierre de sesión"
+		"notAuth-button-logOut": "Cerrar Sesión"
 	},
 	"account-selector": {
 		"type": {
@@ -41,8 +41,17 @@
 		"insufficient-amount": "Fondos insuficientes",
 		"invalid-value": "Valor no válido",
 		"negative-amount": "Debe ser >= 0",
-		"invalid-amount": "Debe indicar una cantidad"
+		"invalid-amount": "Debe indicar una cantidad",
+		"negative-zeroable-amount": "Debe ser > 0"
 	},
 	"back": "Volver",
-	"close": "Cerrar"
+	"close": "Cerrar",
+	"404": {
+		"title": "No encontrado",
+		"description": "Comprueba la URL o tus decisiones de vida."
+	},
+	"refresh": {
+		"short": "Nueva versión disponible, haga clic aquí para actualizar"
+	},
+	"percent": "{{value, prettyNumber}}%"
 }

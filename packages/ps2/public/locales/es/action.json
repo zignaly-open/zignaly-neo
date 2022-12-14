@@ -2,5 +2,7 @@
 	"deposit": "Depositar",
 	"edit": "Editar",
 	"save": "Guardar",
-	"withdraw": "Retirar"
+	"withdraw": "Retirar",
+	"read-more": "Leer Más",
+	"read-less": "Leer Menos"
 }

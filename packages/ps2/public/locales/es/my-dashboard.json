@@ -1,5 +1,5 @@
 {
-	"title": "Mi Panel Principal",
+	"title": "Mi Panel",
 	"tableHeader": {
 		"summary": {
 			"title": "Mi Valor Actual",
@@ -13,7 +13,7 @@
 			"title": "1 mes",
 			"no-data": "Todavía no hay datos que mostrar"
 		},
-		"dailyAvg-title": "Promedio diario.",
+		"dailyAvg-title": "Promedio diario",
 		"3-mos-title": "3 meses",
 		"6-mos-title": "6 meses",
 		"all": {
@@ -23,7 +23,7 @@
 	},
 	"table-search-emptyMessage": "Aún no estás conectado a ningún servicio.",
 	"something-went-wrong": "Algo salió mal",
-	"loading-arialLabel": "Cargando mi panel principal",
+	"loading-arialLabel": "Cargando mi panel",
 	"slider-input": {
 		"labels": {
 			"left": "Reinvertir",
