@@ -7,6 +7,16 @@ import { Actions } from "./styles";
 
 export const MockMyCoinsData = [
   {
+    coin: { symbol: "ETH", name: "Ethereum" },
+    totalBalance: { coin: "ETH", value: "3.200" },
+    availableBalance: { coin: "ETHAS", value: "2.13521254" },
+    lockedBalance: { coin: "ETHAS", value: "30.18389589" },
+    valueInBtc: { coin: "BTC", value: "0.78232496" },
+    valueInUsd: { coin: "USD", value: "3.200" },
+  },
+];
+export const MockMyCoinsData0 = [
+  {
     coin: <CoinLabel coin={"ETH"} name={"Ethereum"} />,
     totalBalance: <PriceLabel coin={"ETH"} value={"3.200"} />,
     availableBalance: <PriceLabel coin={"ETHAS"} value={"2.13521254"} />,

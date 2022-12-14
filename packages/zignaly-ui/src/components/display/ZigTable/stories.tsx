@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import NumberFormat from "react-number-format";
 import { CheckIconStyled, CloseIconStyled } from "./styles";
@@ -15,20 +15,23 @@ import ConnectionStateLabel, {
 } from "../Table/components/ConnectionStateLabel";
 import DateLabel from "../Table/components/DateLabel";
 import CoinLabel from "../Table/components/CoinLabel";
+import { ColumnDef } from "@tanstack/react-table";
+import { makeCoinsData } from "./makeData";
+import ZigPriceLabel from "../ZigPriceLabel";
 
-const createMarketPlaceTableHeader = () => {
+const createMarketPlaceTableheader = () => {
   return [
     {
-      Header: "1 year",
-      accessor: "oneYear",
+      header: "1 year",
+      accessorKey: "oneYear",
     },
     {
-      Header: "1 month",
-      accessor: "chart",
+      header: "1 month",
+      accessorKey: "chart",
     },
     {
-      Header: "",
-      accessor: "invest",
+      header: "",
+      accessorKey: "invest",
     },
   ];
 };
@@ -49,60 +52,44 @@ const createMarketPlaceTableBodyObject = ({ chart, oneYear }: MarketPlaceTablePr
   };
 };
 
-const createUserTableHeader = () => {
-  return [
-    {
-      Header: "My Current Value",
-      accessor: "summary",
-      headerWithFooter: (
-        <div>
-          <div>{"Returns"}</div>
-        </div>
-      ),
+const userTableColumns: ColumnDef<{}>[] = [
+  {
+    header: "My Current Value",
+    headerSubtitle: "Returns",
+    accessorKey: "summary",
+  },
+  {
+    header: "Since Invested",
+    accessorKey: "chart",
+    cell: ({ getValue }) => {
+      const chart = getValue();
+      return <AreaChart variant={chart.variant} data={chart.data} />;
     },
-    {
-      Header: "Since Invested",
-      accessor: "chart",
+    enableSorting: false,
+  },
+  {
+    header: "Daily avg",
+    accessorKey: "dailyAvg",
+    cell: ({ getValue }) => <PercentageIndicator value={getValue().value} />,
+  },
+  {
+    header: "1 mo.",
+    accessorKey: "oneMonth",
+    cell: ({ getValue }) => <PercentageIndicator value={getValue().value} />,
+  },
+  {
+    header: "3 mo.",
+    accessorKey: "threeMonths",
+    cell: ({ getValue }) => <PercentageIndicator value={getValue()} />,
+  },
+  {
+    header: "All",
+    accessorFn: (row) => {
+      return row.all.value;
     },
-    {
-      Header: "Daily avg",
-      accessor: "dailyAvg",
-    },
-    {
-      Header: "1 mo.",
-      accessor: "oneMonth",
-    },
-    {
-      Header: "3 mo.",
-      accessor: "threeMonths",
-    },
-    {
-      Header: "All",
-      accessor: "all",
-      headerWithFooter: (
-        <div>
-          <div>{"Age"}</div>
-        </div>
-      ),
-    },
-  ];
-};
-
-const createUserTableDataObject = ({
-  chart,
-  dailyAvg,
-  oneMonth,
-  threeMonths,
-  all,
-}: UserTableData) => {
-  return {
-    chart: <AreaChart variant={chart.variant} data={chart.data} />,
-    dailyAvg: <PercentageIndicator value={dailyAvg.value} />,
-    oneMonth: <PercentageIndicator value={oneMonth.value} />,
-    threeMonths: <PercentageIndicator value={threeMonths.value} />,
-    all: <PercentageIndicator value={all.value} />,
-  };
-};
+    cell: ({ getValue }) => <PercentageIndicator value={getValue()} />,
+  },
+];
 
 export default {
   title: "Display/ZigTable",
@@ -111,15 +98,11 @@ export default {
 } as ComponentMeta<typeof ZigTable>;
 
 const Template: ComponentStory<typeof ZigTable> = (args) => <ZigTable {...args} />;
-/**
- * IMPORTANT if there are amounts of money use the sortByPointDecimal function to sort.
- * IMPORTANT useMemo must be used and in the following way wrap the result of the sort function executed in a variable because if not it will not be memorized,
- * it will create a new function whenever it is always executed
- */
+
 export const MyCoins = Template.bind({});
 MyCoins.args = {
   initialState: {
-    sortBy: [
+    sorting: [
       {
         id: "totalBalance",
         desc: false,
@@ -128,31 +111,45 @@ MyCoins.args = {
   },
   columns: [
     {
-      Header: "Coin",
-      accessor: "coin",
+      header: "Coin",
+      accessorKey: "coin",
+      cell: ({ getValue }) => <CoinLabel coin={getValue().coin} name={getValue().name} />,
     },
     {
-      Header: "Total Balance",
-      accessor: "totalBalance",
+      header: "Total Balance",
+      accessorKey: "totalBalance",
+      accessorFn: (row) => row.totalBalance.value,
+      cell: ({ getValue, row }) => (
+        <ZigPriceLabel
+          color="neutral100"
+          coinProps={{ color: "neutral400" }}
+          coin={row.original.totalBalance.coin}
+          value={getValue()}
+        />
+      ),
     },
     {
-      Header: "Available Balance",
-      accessor: "availableBalance",
+      header: "Available Balance",
+      accessorKey: "availableBalance",
+      cell: ({ getValue }) => <PriceLabel coin={getValue().coin} value={getValue().value} />,
     },
     {
-      Header: "Locked Balance",
-      accessor: "lockedBalance",
+      header: "Locked Balance",
+      accessorKey: "lockedBalance",
+      cell: ({ getValue }) => <PriceLabel coin={getValue().coin} value={getValue().value} />,
     },
     {
-      Header: "Value in BTC",
-      accessor: "valueInBtc",
+      header: "Value in BTC",
+      accessorKey: "valueInBtc",
+      cell: ({ getValue }) => <PriceLabel coin={getValue().coin} value={getValue().value} />,
     },
     {
-      Header: "Value in USD",
-      accessor: "valueInUsd",
+      header: "Value in USD",
+      accessorKey: "valueInUsd",
+      cell: ({ getValue }) => <PriceLabel coin={getValue().coin} value={getValue().value} />,
     },
   ],
-  data: MockMyCoinsData,
+  data: makeCoinsData(50),
 };
 
 export const Investors = Template.bind({});
@@ -160,40 +157,40 @@ Investors.args = {
   hideOptionsButton: false,
   columns: [
     {
-      Header: "Email",
-      accessor: "email",
+      header: "Email",
+      accessorKey: "email",
     },
     {
-      Header: "User ID",
-      accessor: "userId",
+      header: "User ID",
+      accessorKey: "userId",
     },
     {
-      Header: "Investment",
-      accessor: "investment",
+      header: "Investment",
+      accessorKey: "investment",
     },
     {
-      Header: "P & L",
-      accessor: "pyd",
+      header: "P & L",
+      accessorKey: "pyd",
     },
     {
-      Header: "P & L Total",
-      accessor: "pydTotal",
+      header: "P & L Total",
+      accessorKey: "pydTotal",
     },
     {
-      Header: "Total Fees Paid",
-      accessor: "totalFeesPaid",
+      header: "Total Fees Paid",
+      accessorKey: "totalFeesPaid",
     },
     {
-      Header: "Success Fee",
-      accessor: "successFee",
+      header: "Success Fee",
+      accessorKey: "successFee",
     },
     {
-      Header: "Fees in ZIG",
-      accessor: "feesInZig",
+      header: "Fees in ZIG",
+      accessorKey: "feesInZig",
     },
     {
-      Header: "Status",
-      accessor: "status",
+      header: "Status",
+      accessorKey: "status",
     },
   ],
   data: [
@@ -350,9 +347,10 @@ export const UserDashBoard = Template.bind({});
 UserDashBoard.args = {
   hideOptionsButton: true,
   isUserTable: true,
-  columns: createUserTableHeader(),
+  columns: userTableColumns,
   data: [
-    createUserTableDataObject({
+    {
+      summary: "",
       chart: {
         data: [
           { x: "Jul 1", y: 10 },
@@ -367,10 +365,11 @@ UserDashBoard.args = {
       },
       dailyAvg: { value: -10 },
       oneMonth: { value: 10 },
-      threeMonths: { value: 10 },
+      threeMonths: 10,
       all: { value: 10 },
-    }),
-    createUserTableDataObject({
+    },
+    {
+      summary: "",
       chart: {
         data: [
           { x: "Jul 1", y: 10 },
@@ -385,16 +384,16 @@ UserDashBoard.args = {
       },
       dailyAvg: { value: -10 },
       oneMonth: { value: 10 },
-      threeMonths: { value: 10 },
-      all: { value: 10 },
-    }),
+      threeMonths: 20,
+      all: { value: 20 },
+    },
   ],
 };
 
 export const MarketPlaceTabel = Template.bind({});
 MarketPlaceTabel.args = {
   hideOptionsButton: true,
-  columns: createMarketPlaceTableHeader(),
+  columns: createMarketPlaceTableheader(),
   data: [
     createMarketPlaceTableBodyObject({
       chart: {
@@ -436,36 +435,36 @@ ExchangeOrders.args = {
   hideOptionsButton: false,
   columns: [
     {
-      Header: "Date",
-      accessor: "date",
+      header: "Date",
+      accessorKey: "date",
     },
     {
-      Header: "Order ID",
-      accessor: "orderId",
+      header: "Order ID",
+      accessorKey: "orderId",
     },
     {
-      Header: "Pair",
-      accessor: "pair",
+      header: "Pair",
+      accessorKey: "pair",
     },
     {
-      Header: "Amount",
-      accessor: "amount",
+      header: "Amount",
+      accessorKey: "amount",
     },
     {
-      Header: "Status",
-      accessor: "status",
+      header: "Status",
+      accessorKey: "status",
     },
     {
-      Header: "Entry Price",
-      accessor: "entryPrice",
+      header: "Entry Price",
+      accessorKey: "entryPrice",
     },
     {
-      Header: "Side",
-      accessor: "side",
+      header: "Side",
+      accessorKey: "side",
     },
     {
-      Header: "Type",
-      accessor: "type",
+      header: "Type",
+      accessorKey: "type",
     },
   ],
   data: [

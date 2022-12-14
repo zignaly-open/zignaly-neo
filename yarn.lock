@@ -3289,6 +3289,11 @@
     "@ethersproject/properties" "^5.6.0"
     "@ethersproject/strings" "^5.6.1"
 
+"@faker-js/faker@^7.6.0":
+  version "7.6.0"
+  resolved "https://registry.yarnpkg.com/@faker-js/faker/-/faker-7.6.0.tgz#9ea331766084288634a9247fcd8b84f16ff4ba07"
+  integrity sha512-XK6BTq1NDMo9Xqw/YkYyGjSsg44fbNwYRx7QK2CuoQgyy+f1rrTDHoExVM5PsyXCtfl2vs2vVJ0MN0yN6LppRw==
+
 "@floating-ui/core@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@floating-ui/core/-/core-1.0.1.tgz#00e64d74e911602c8533957af0cce5af6b2e93c8"
@@ -8935,6 +8940,18 @@
   integrity sha512-XIB2XbzHTN6ieIjfIMV9hlVcfPU26s2vafYWQcZHWXHOxiaRZYEDKEwdl129Zyg50+foYV2jCgtrqSA6qNuNSA==
   dependencies:
     defer-to-connect "^1.0.1"
+
+"@tanstack/react-table@^8.7.3":
+  version "8.7.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.7.3.tgz#287713263f48c713ce0ad2324e930b138baa64b1"
+  integrity sha512-4hUSl10UGEp3DTS0sKe8ZEr0MYKEHXKXzAolzjs+w+vjVIimFICuyIjxisY6rLOvRVNXbwF5Pjyr+1YC6ptpZw==
+  dependencies:
+    "@tanstack/table-core" "8.7.3"
+
+"@tanstack/table-core@8.7.3":
+  version "8.7.3"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.7.3.tgz#53e180e74b366468f2c0c10d24c0d148261d8398"
+  integrity sha512-P+LKZuytLRUEKv0zMKFpYCLb9ZRiZ+kaFXh99HS6gOEX58tq41PltQ2BhTBe2UPlB8O6IQFsilKhx94/6w3ZMg==
 
 "@testing-library/dom@^8.0.0", "@testing-library/dom@^8.3.0":
   version "8.16.0"
