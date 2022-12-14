@@ -11,11 +11,11 @@
 	},
 	"withdrawAddress": {
 		"label": "Retirarse a la dirección:",
-		"placeholder": "Pegue la dirección del monedero aquí",
+		"placeholder": "Pegue la dirección de la billetera aquí",
 		"warning": "Solo envíe {{network}} {{coin}} tokens a esta dirección"
 	},
 	"amountToWithdraw": {
-		"label": "Cantidad a retirar:"
+		"label": "Cantidad a Retirar:"
 	},
 	"validation": {
 		"indicateAnAddress": "Debe indicar una dirección válida.",
