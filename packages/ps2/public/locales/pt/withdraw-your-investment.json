@@ -1,0 +1,8 @@
+{
+	"title": "Pedido de Retirada",
+	"success": {
+		"title": "Retirada Solicitada",
+		"description": "Os seus fundos estarão disponíveis assim que o trader liberar fundos de qualquer posição aberta. Isso pode levar alguns dias ou mais para ser concluído. Zignaly não controla esse período de tempo, por isso, seja paciente.",
+		"button": "Fechar"
+	}
+}
