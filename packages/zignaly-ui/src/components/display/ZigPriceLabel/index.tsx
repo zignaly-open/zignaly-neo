@@ -52,3 +52,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
 };
 
 export default React.memo(ZigPriceLabel);
+
+export const ZigTablePriceLabel = (props: ZigPriceLabelProps) => (
+  <ZigPriceLabel color="neutral100" coinProps={{ color: "neutral400" }} {...props} />
+);

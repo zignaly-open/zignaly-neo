@@ -1,8 +1,9 @@
+import { ColumnDef, TableState } from "@tanstack/react-table";
 import { Column, Row, UseSortByColumnOptions } from "react-table";
 
 type ExtendedColumn<T extends object> = Column<T> & UseSortByColumnOptions<T>;
 
-export interface ZigTableProps<T extends object> {
+export interface ZigTableProps0<T extends object> {
   columns: Array<ExtendedColumn<T>>;
   data: T[];
   defaultHiddenColumns?: string[];
@@ -16,3 +17,9 @@ export interface ZigTableProps<T extends object> {
   sort?: boolean;
   renderRowSubComponent?: (row: Row<T>) => JSX.Element;
 }
+
+export type ZigTableProps<T> = {
+  data: T[];
+  columns: ColumnDef<T>[];
+  initialState?: Partial<TableState>;
+};
