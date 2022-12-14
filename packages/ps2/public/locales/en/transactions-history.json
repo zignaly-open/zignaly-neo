@@ -24,8 +24,7 @@
   "status": {
     "pending": "Pending",
     "completed": "Completed",
-    "cancelled": "Cancelled",
-    "failed": "Failed"
+    "error": "Error"
   },
   "details": {
     "from": "From:",

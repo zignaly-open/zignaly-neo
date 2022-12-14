@@ -1,40 +1,21 @@
-import React, { useCallback, useMemo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   CoinLabel,
+  createColumnHelper,
   DateLabel,
   ZigPriceLabel,
   ZigTable,
-  ZigTypography,
 } from '@zignaly-open/ui';
-import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
 import LayoutContentWrapper from 'components/LayoutContentWrapper';
 import { useExchangeCoinsList, useTransactionsHistory } from 'apis/coin/use';
-import { CoinDetails, Transaction, TransactionType } from 'apis/coin/types';
-import TransactionStateLabel from '../TransactionStateLabel';
+import { CoinDetails, Transaction } from 'apis/coin/types';
+import TransactionStateLabel from './atoms/TransactionStateLabel';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import {
-  TableLoader,
-  TransactionPanel,
-  TypographyAddress,
-  TypographyPanelLabel,
-} from './styles';
-import { Box } from '@mui/material';
-import { ArrowRightAlt } from '@mui/icons-material';
-import ChainIcon from './atoms/ChainIcon';
-import ServiceLink from './atoms/ProviderLink';
-import ZignalyAccount from './atoms/TransferZigLabel';
-import { Side, transactionTypeName } from './types';
-import { getTransactionSideType } from './utils';
-
-const initialStateTable = {
-  sortBy: [
-    {
-      id: 'datetime',
-      desc: true,
-    },
-  ],
-};
+import { TableLoader } from './styles';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { TransactionsTableDataType, transactionTypeName } from './types';
+import TransactionDetails from './atoms/TransactionDetails';
 
 const limit = 30;
 
@@ -47,104 +28,50 @@ const TransactionsHistoryTable = () => {
   });
   const coinsEndpoint = useExchangeCoinsList();
 
-  const columns: TableProps<Transaction & { assetName: string }>['columns'] =
-    useMemo(
-      () => [
-        {
-          Header: t('tableHeader.date'),
-          accessor: 'datetime',
-          Cell: ({ cell: { value } }) => <DateLabel date={new Date(value)} />,
-        },
-        {
-          Header: t('tableHeader.coin'),
-          accessor: 'asset',
-          Cell: ({ cell: { value, row } }) => (
-            <CoinLabel coin={value} name={row.original.assetName ?? '-'} />
-          ),
-        },
-        {
-          Header: t('tableHeader.type'),
-          accessor: 'txType',
-          Cell: ({ cell: { value } }) => <>{t(transactionTypeName[value])}</>,
-        },
-        {
-          Header: t('tableHeader.amount'),
-          accessor: 'amount',
-          Cell: ({ cell: { value, row } }) => (
-            <ZigPriceLabel
-              coin={row.original.asset}
-              value={value}
-              alwaysShowSign={true}
-            />
-          ),
-        },
-        {
-          Header: t('tableHeader.from'),
-          accessor: 'fromName',
-          Cell: ({ cell: { value } }) => value || '-',
-        },
-        {
-          Header: t('tableHeader.to'),
-          accessor: 'toName',
-          Cell: ({ cell: { value } }) => value || '-',
-        },
-        {
-          Header: t('tableHeader.status'),
-          accessor: 'status',
-          Cell: ({ cell: { value } }) => (
-            <TransactionStateLabel state={value} />
-          ),
-        },
-      ],
-      [t],
-    );
-
-  const FromTo = useCallback(
-    ({ transaction, side }: { transaction: Transaction; side: Side }) => {
-      const { from, to, fromName, toName, network, txType } = transaction;
-      const idAddress = side === 'to' ? to : from;
-      const name = side === 'to' ? toName : fromName;
-      const sideType = getTransactionSideType(txType, side);
-
-      return sideType === 'service' ? (
-        <ServiceLink serviceId={idAddress} serviceName={name} />
-      ) : sideType === 'external' ? (
+  const columnHelper = createColumnHelper<TransactionsTableDataType>();
+  const columns = [
+    columnHelper.accessor('datetime', {
+      header: t('tableHeader.date'),
+      cell: ({ getValue }) => <DateLabel date={new Date(getValue())} />,
+    }),
+    columnHelper.accessor('asset', {
+      header: t('tableHeader.coin'),
+      cell: ({ getValue, row: { original } }) => (
+        <CoinLabel coin={getValue()} name={original.assetName ?? '-'} />
+      ),
+    }),
+    columnHelper.accessor('txType', {
+      header: t('tableHeader.type'),
+      cell: ({ getValue }) => t(transactionTypeName[getValue()]),
+    }),
+    columnHelper.accessor('amount', {
+      header: t('tableHeader.amount'),
+      cell: ({ getValue, row: { original } }) => (
+        <ZigPriceLabel
+          coin={original.asset}
+          value={getValue()}
+          alwaysShowSign={true}
+        />
+      ),
+    }),
+    columnHelper.accessor('fromName', {
+      header: t('tableHeader.from'),
+      cell: ({ getValue }) => getValue() || '-',
+    }),
+    columnHelper.accessor('toName', {
+      header: t('tableHeader.to'),
+      cell: ({ getValue }) => getValue() || '-',
+    }),
+    columnHelper.accessor('status', {
+      header: t('tableHeader.status'),
+      cell: ({ getValue, row }) => (
         <>
-          <Box mr={2}>
-            <ChainIcon network={network} />
-          </Box>
-          <ZigTypography>{idAddress}</ZigTypography>
+          <TransactionStateLabel state={getValue()} />
+          {row.getIsExpanded() ? <ExpandLess /> : <ExpandMore />}
         </>
-      ) : (
-        <ZignalyAccount name={name} />
-      );
-    },
-    [],
-  );
-
-  const renderRowSubComponent = useCallback((row) => {
-    return (
-      <TransactionPanel>
-        <Box display='flex' justifyContent='center'>
-          <TypographyPanelLabel>{t('details.from')}</TypographyPanelLabel>
-          <FromTo side='from' transaction={row.original} />
-          <ArrowRightAlt style={{ margin: '0 21px' }} />
-          <TypographyPanelLabel>{t('details.to')}</TypographyPanelLabel>
-          <FromTo side='to' transaction={row.original} />
-        </Box>
-        <Box display='flex' alignItems='center'>
-          <TypographyPanelLabel>{t('details.txHash')}</TypographyPanelLabel>
-          <TypographyAddress>{row.original.txId}</TypographyAddress>
-        </Box>
-        {row.original.note && (
-          <Box display='flex' alignItems='center'>
-            <TypographyPanelLabel>{t('details.note')}</TypographyPanelLabel>
-            <TypographyAddress>{row.original.note}</TypographyAddress>
-          </Box>
-        )}
-      </TransactionPanel>
-    );
-  }, []);
+      ),
+    }),
+  ];
 
   return (
     <LayoutContentWrapper
@@ -163,9 +90,17 @@ const TransactionsHistoryTable = () => {
               ...transaction,
               assetName: coins[transaction.asset]?.name,
             }))}
-            initialState={initialStateTable}
-            hideOptionsButton={false}
-            renderRowSubComponent={renderRowSubComponent}
+            initialState={{
+              sorting: [
+                {
+                  id: 'datetime',
+                  desc: true,
+                },
+              ],
+            }}
+            renderSubComponent={({ row }) => (
+              <TransactionDetails transaction={row.original} />
+            )}
             pagination={false}
           />
         </InfiniteScroll>
