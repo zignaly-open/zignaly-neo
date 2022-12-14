@@ -1,0 +1,28 @@
+{
+	"footer": {
+		"elements": {
+			"show": "Mostrando",
+			"out": "de",
+			"items": "artigos"
+		},
+		"page": {
+			"items": "Página",
+			"out": "sair de"
+		},
+		"selector": {
+			"display": "Exibindo",
+			"items": "Itens"
+		}
+	},
+	"balanceSummary-invested": "Investido",
+	"selector-validation-notData": "Não há dados disponíveis",
+	"investColumn": {
+		"successFess": "10% Taxa de Sucesso",
+		"liquidated": "LIQUIDADO"
+	},
+	"tooltip-columnHeader": "Alternar ClassificarPor",
+	"serviceName-by": "por",
+	"columns-hideOrShow": "Mostrar\/Ocultar Colunas",
+	"assetsInPool-investors_one": "{{count}} investidor",
+	"assetsInPool-investors_other": "{{count}} investidores"
+}
