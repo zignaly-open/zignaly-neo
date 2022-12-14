@@ -1,8 +1,8 @@
 {
-    "replace-existing-amount": "Bu tutar, önceki çekim taleplerinin yerine geçecektir.",
-    "button": "Çekim",
-    "form": {
-        "label": "Çekilecek miktar:",
-        "labelBalance": "Mevcut:"
-    }
+	"replace-existing-amount": "Bu tutar, önceki çekim taleplerinin yerine geçecektir.",
+	"button": "Çekim",
+	"form": {
+		"label": "Çekilecek miktar:",
+		"labelBalance": "Mevcut:"
+	}
 }
