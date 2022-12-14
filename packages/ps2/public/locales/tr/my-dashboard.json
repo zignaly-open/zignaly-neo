@@ -1,33 +1,33 @@
 {
-    "title": "Kontrol Panelim",
-    "tableHeader": {
-        "summary": {
-            "title": "Mevcut Değer",
-            "subtitle": "Getiriler"
-        },
-        "serviceName": {
-            "title": "Hizmet Adı",
-            "subtitle": "Yönetici\/Baz birim"
-        },
-        "1-mo": {
-            "title": "1 ay",
-            "no-data": "Henüz gösterilecek veri yok"
-        },
-        "dailyAvg-title": "Günlük ortalama",
-        "3-mos-title": "3 ay",
-        "6-mos-title": "6 ay",
-        "all": {
-            "title": "Tümü",
-            "subtitle": "Yaş"
-        }
-    },
-    "table-search-emptyMessage": "Henüz herhangi bir hizmete bağlı değilsiniz.",
-    "something-went-wrong": "Bir şeyler ters gitti",
-    "loading-arialLabel": "Kontrol Paneli yükleniyor",
-    "slider-input": {
-        "labels": {
-            "left": "Yeniden Yatırım",
-            "right": "Çekim"
-        }
-    }
+	"title": "Kontrol Panelim",
+	"tableHeader": {
+		"summary": {
+			"title": "Mevcut Değer",
+			"subtitle": "Getiriler"
+		},
+		"serviceName": {
+			"title": "Hizmet Adı",
+			"subtitle": "Yönetici\/Baz birim"
+		},
+		"1-mo": {
+			"title": "1 ay",
+			"no-data": "Henüz gösterilecek veri yok"
+		},
+		"dailyAvg-title": "Günlük ortalama",
+		"3-mos-title": "3 ay",
+		"6-mos-title": "6 ay",
+		"all": {
+			"title": "Tümü",
+			"subtitle": "Yaş"
+		}
+	},
+	"table-search-emptyMessage": "Henüz herhangi bir hizmete bağlı değilsiniz.",
+	"something-went-wrong": "Bir şeyler ters gitti",
+	"loading-arialLabel": "Kontrol Paneli yükleniyor",
+	"slider-input": {
+		"labels": {
+			"left": "Yeniden Yatırım",
+			"right": "Çekim"
+		}
+	}
 }
