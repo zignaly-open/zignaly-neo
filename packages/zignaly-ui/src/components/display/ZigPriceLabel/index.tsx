@@ -29,7 +29,10 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   };
 
   return (
-    <ZigTypography {...withDefaultProps}>
+    <ZigTypography
+      {...withDefaultProps}
+      sx={{ whiteSpace: "nowrap", ...(withDefaultProps?.sx || {}) }}
+    >
       {+value >= 0 ? "" : <>&ndash;</>}
       {usd && "$"}
       <NumberFormat

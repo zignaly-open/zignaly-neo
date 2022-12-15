@@ -82,6 +82,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           flexDirection: 'row',
           display: 'flex',
           alignItems: 'center',
+          flexWrap: 'wrap',
         }}
       >
         {typeof data?.summary !== 'undefined' &&
@@ -112,6 +113,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   ) : (
                     <ZigTypography
                       variant={'bigNumber'}
+                      sx={{ whiteSpace: 'nowrap' }}
                       color={
                         +data?.summary > 0 ? 'greenGraph' : 'redGraphOrError'
                       }

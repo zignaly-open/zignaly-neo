@@ -13,9 +13,9 @@ import {
   BigNumberWrapper,
   BigNumberWrapperInvested,
   InvestButtonContainer,
+  StyledPencilIcon,
 } from '../styles';
 import {
-  PencilIcon,
   PriceLabel,
   TextButton,
   Typography,
@@ -93,7 +93,11 @@ export const InvestedButtonBase: React.FC<{
         }}
       >
         <TextButton
-          leftElement={<PencilIcon color='#65647E' width={16} height={16} />}
+          leftElement={
+            <Box>
+              <StyledPencilIcon />
+            </Box>
+          }
           caption={t('action:edit')}
           color={'links'}
           onClick={onClickEditInvestment}

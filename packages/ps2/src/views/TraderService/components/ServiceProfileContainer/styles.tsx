@@ -3,6 +3,7 @@ import muiStyled from '@emotion/styled';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { ZigTypography } from '@zignaly-open/ui';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import EditIcon from '@mui/icons-material/Edit';
 import PersonIcon from '@mui/icons-material/Person';
 import { Box } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
@@ -71,6 +72,16 @@ export const StyledPersonIcon = styled(PersonIcon)`
 
 export const StyledChevronRightIcon = styled(ChevronRightIcon)`
   fill: ${({ theme }) => theme.palette.neutral300};
+  margin-top: 1px;
+`;
+
+export const StyledPencilIcon = styled(EditIcon)`
+  fill: ${({ theme }) => theme.palette.neutral300};
+  padding: 3px;
+  padding-right: 0;
+  margin-top: 1px;
+  position: relative;
+  left: 2px;
 `;
 
 export const Separator = styled('span')`
@@ -166,6 +177,7 @@ export const PercentChangeContainer: typeof ZigTypography = styled(
 )`
   justify-content: center;
   display: flex;
+  white-space: nowrap;
   flex-direction: row;
 `;
 
