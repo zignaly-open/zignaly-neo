@@ -8,7 +8,6 @@ import { MockMyCoinsData } from "./mockData";
 import { AreaChart } from "../Charts";
 import { ChartsProps } from "../Charts/types";
 import ZigTable from ".";
-import PriceLabel from "../Table/components/PriceLabel";
 import PercentageIndicator from "../Table/components/PercentageIndicator";
 import ConnectionStateLabel, {
   ConnectionStateLabelId,
@@ -17,7 +16,7 @@ import DateLabel from "../Table/components/DateLabel";
 import CoinLabel from "../Table/components/CoinLabel";
 import { ColumnDef } from "@tanstack/react-table";
 import { makeCoinsData } from "./makeData";
-import ZigPriceLabel from "../ZigPriceLabel";
+import { ZigTablePriceLabel } from "../ZigPriceLabel";
 
 const createMarketPlaceTableheader = () => {
   return [
@@ -120,7 +119,7 @@ MyCoins.args = {
       accessorKey: "totalBalance",
       accessorFn: (row) => row.totalBalance.value,
       cell: ({ getValue, row }) => (
-        <ZigPriceLabel
+        <ZigTablePriceLabel
           color="neutral100"
           coinProps={{ color: "neutral400" }}
           coin={row.original.totalBalance.coin}
@@ -131,22 +130,30 @@ MyCoins.args = {
     {
       header: "Available Balance",
       accessorKey: "availableBalance",
-      cell: ({ getValue }) => <PriceLabel coin={getValue().coin} value={getValue().value} />,
+      cell: ({ getValue }) => (
+        <ZigTablePriceLabel coin={getValue().coin} value={getValue().value} />
+      ),
     },
     {
       header: "Locked Balance",
       accessorKey: "lockedBalance",
-      cell: ({ getValue }) => <PriceLabel coin={getValue().coin} value={getValue().value} />,
+      cell: ({ getValue }) => (
+        <ZigTablePriceLabel coin={getValue().coin} value={getValue().value} />
+      ),
     },
     {
       header: "Value in BTC",
       accessorKey: "valueInBtc",
-      cell: ({ getValue }) => <PriceLabel coin={getValue().coin} value={getValue().value} />,
+      cell: ({ getValue }) => (
+        <ZigTablePriceLabel coin={getValue().coin} value={getValue().value} />
+      ),
     },
     {
       header: "Value in USD",
       accessorKey: "valueInUsd",
-      cell: ({ getValue }) => <PriceLabel coin={getValue().coin} value={getValue().value} />,
+      cell: ({ getValue }) => (
+        <ZigTablePriceLabel coin={getValue().coin} value={getValue().value} />
+      ),
     },
   ],
   data: makeCoinsData(50),
@@ -205,16 +212,16 @@ Investors.args = {
           5f886d29da8e9666b1684c9a
         </Typography>
       ),
-      investment: <PriceLabel coin={"USDT"} value={"1250"} />,
+      investment: <ZigTablePriceLabel coin={"USDT"} value={"1250"} />,
       pyd: (
-        <PriceLabel
+        <ZigTablePriceLabel
           coin={"USDT"}
           value={"37.5"}
           bottomElement={<PercentageIndicator value={3} />}
         />
       ),
-      pydTotal: <PriceLabel coin={"USDT"} value={"145"} />,
-      totalFeesPaid: <PriceLabel coin={"USDT"} value={"218"} />,
+      pydTotal: <ZigTablePriceLabel coin={"USDT"} value={"145"} />,
+      totalFeesPaid: <ZigTablePriceLabel coin={"USDT"} value={"218"} />,
       successFee: (
         <Typography color="neutral100" variant="body1">
           10%
@@ -234,16 +241,16 @@ Investors.args = {
           5f886d29da8e9666b1684c9a
         </Typography>
       ),
-      investment: <PriceLabel coin={"USDT"} value={"1250"} />,
+      investment: <ZigTablePriceLabel coin={"USDT"} value={"1250"} />,
       pyd: (
-        <PriceLabel
+        <ZigTablePriceLabel
           coin={"USDT"}
           value={"0.85"}
           bottomElement={<PercentageIndicator value={-1} />}
         />
       ),
-      pydTotal: <PriceLabel coin={"USDT"} value={"23.68586856858"} />,
-      totalFeesPaid: <PriceLabel coin={"USDT"} value={"71813"} />,
+      pydTotal: <ZigTablePriceLabel coin={"USDT"} value={"23.68586856858"} />,
+      totalFeesPaid: <ZigTablePriceLabel coin={"USDT"} value={"71813"} />,
       successFee: (
         <Typography color="neutral100" variant="body1">
           10%
@@ -264,16 +271,16 @@ Investors.args = {
           5f886d29da8e9666b1684c9a
         </Typography>
       ),
-      investment: <PriceLabel coin={"USDT"} value={"3468"} />,
+      investment: <ZigTablePriceLabel coin={"USDT"} value={"3468"} />,
       pyd: (
-        <PriceLabel
+        <ZigTablePriceLabel
           coin={"USDT"}
           value={"637956.523"}
           bottomElement={<PercentageIndicator value={-3} />}
         />
       ),
-      pydTotal: <PriceLabel coin={"USDT"} value={"0.347347"} />,
-      totalFeesPaid: <PriceLabel coin={"USDT"} value={"09864"} />,
+      pydTotal: <ZigTablePriceLabel coin={"USDT"} value={"0.347347"} />,
+      totalFeesPaid: <ZigTablePriceLabel coin={"USDT"} value={"09864"} />,
       successFee: (
         <Typography color="neutral100" variant="body1">
           10%
@@ -293,16 +300,16 @@ Investors.args = {
           5f886d29da8e9666b1684c9a
         </Typography>
       ),
-      investment: <PriceLabel coin={"USDT"} value={"1250"} />,
+      investment: <ZigTablePriceLabel coin={"USDT"} value={"1250"} />,
       pyd: (
-        <PriceLabel
+        <ZigTablePriceLabel
           coin={"USDT"}
           value={"1929292"}
           bottomElement={<PercentageIndicator value={-87} />}
         />
       ),
-      pydTotal: <PriceLabel coin={"USDT"} value={"134581"} />,
-      totalFeesPaid: <PriceLabel coin={"USDT"} value={"218"} />,
+      pydTotal: <ZigTablePriceLabel coin={"USDT"} value={"134581"} />,
+      totalFeesPaid: <ZigTablePriceLabel coin={"USDT"} value={"218"} />,
       successFee: (
         <Typography color="neutral100" variant="body1">
           10%
@@ -322,16 +329,16 @@ Investors.args = {
           5f886d29da8e9666b1684c9a
         </Typography>
       ),
-      investment: <PriceLabel coin={"USDT"} value={"1250"} />,
+      investment: <ZigTablePriceLabel coin={"USDT"} value={"1250"} />,
       pyd: (
-        <PriceLabel
+        <ZigTablePriceLabel
           coin={"USDT"}
           value={"30.5"}
           bottomElement={<PercentageIndicator value={-1} />}
         />
       ),
-      pydTotal: <PriceLabel coin={"USDT"} value={"145"} />,
-      totalFeesPaid: <PriceLabel coin={"USDT"} value={"218"} />,
+      pydTotal: <ZigTablePriceLabel coin={"USDT"} value={"145"} />,
+      totalFeesPaid: <ZigTablePriceLabel coin={"USDT"} value={"218"} />,
       successFee: (
         <Typography color="neutral100" variant="body1">
           10%

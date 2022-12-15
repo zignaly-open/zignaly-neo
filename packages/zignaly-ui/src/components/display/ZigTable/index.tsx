@@ -1,35 +1,28 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import {
-  Column,
-  Table as ReactTable,
-  PaginationState,
   useReactTable,
   getCoreRowModel,
-  getFilteredRowModel,
   getPaginationRowModel,
-  ColumnDef,
-  OnChangeFn,
   flexRender,
   SortingState,
   getSortedRowModel,
   getExpandedRowModel,
 } from "@tanstack/react-table";
-import { ReactComponent as OptionsDotsIcon } from "assets/icons/option-dots-icon.svg";
-import { PageNumberContainer, SmallSelectWrapper } from "./styles";
+import {
+  ExpandedRow,
+  HeaderIconButton,
+  PageNumberContainer,
+  SmallIconButton,
+  SmallSelectWrapper,
+  SortBox,
+} from "./styles";
 import DropDown from "../DropDown";
 import ZigTypography from "../ZigTypography";
 import IconButton from "../../inputs/IconButton";
 import CheckBox from "../../inputs/CheckBox";
 import { ZigTableProps } from "./types";
-import { Box } from "@mui/material";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ExpandLess,
-  ExpandMore,
-  FirstPage,
-  LastPage,
-} from "@mui/icons-material";
+import { Box, Collapse, IconButton as IconButtonMui } from "@mui/material";
+import { ChevronLeft, ChevronRight, FirstPage, LastPage, MoreVert } from "@mui/icons-material";
 import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
 
@@ -38,21 +31,24 @@ export default function ZigTable<T extends object>({
   columns,
   initialState = {},
   pagination = true,
+  columnVisibility: enableColumnVisibility = true,
   renderSubComponent,
 }: ZigTableProps<T>) {
   const [sorting, setSorting] = React.useState<SortingState>(initialState.sorting ?? []);
+  const [columnVisibility, setColumnVisibility] = React.useState({});
 
   const table = useReactTable({
     data,
     columns,
     state: {
       sorting,
+      columnVisibility,
     },
+    onColumnVisibilityChange: setColumnVisibility,
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     getCoreRowModel: getCoreRowModel(),
     ...(pagination && { getPaginationRowModel: getPaginationRowModel() }),
-    // ...(renderSubComponent && { getExpandedRowModel: getExpandedRowModel() }),
     getExpandedRowModel: getExpandedRowModel(),
     getRowCanExpand: () => !!renderSubComponent,
     debugTable: false,
@@ -64,30 +60,62 @@ export default function ZigTable<T extends object>({
     <>
       <Table>
         <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
+          {table.getHeaderGroups().map((headerGroup, groupIndex) => (
             <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => {
+              {headerGroup.headers.map((header, index) => {
                 return (
                   <th key={header.id} colSpan={header.colSpan}>
                     {header.isPlaceholder ? null : (
-                      <Box
-                        display="flex"
-                        justifyContent="center"
-                        onClick={header.column.getToggleSortingHandler()}
-                        sx={{ cursor: header.column.getCanSort() ? "pointer" : "auto" }}
-                      >
-                        <div>
-                          <ZigTypography color="neutral200" variant="body2">
-                            {flexRender(header.column.columnDef.header, header.getContext())}
-                          </ZigTypography>
-                          <ZigTypography color="neutral400" variant="h5">
-                            {flexRender(
-                              header.column.columnDef.headerSubtitle,
-                              header.getContext(),
-                            )}
-                          </ZigTypography>
-                        </div>
-                        <SortIcon isSorted={header.column.getIsSorted()} />
+                      <Box display="flex" justifyContent="center" alignItems="center">
+                        <SortBox
+                          canSort={header.column.getCanSort()}
+                          onClick={header.column.getToggleSortingHandler()}
+                        >
+                          <div>
+                            <ZigTypography color="neutral200" variant="body2">
+                              {flexRender(header.column.columnDef.header, header.getContext())}
+                            </ZigTypography>
+                            <ZigTypography color="neutral400" variant="h5">
+                              {flexRender(
+                                header.column.columnDef.headerSubtitle,
+                                header.getContext(),
+                              )}
+                            </ZigTypography>
+                          </div>
+                          {header.column.getCanSort() && (
+                            <SortIcon isSorted={header.column.getIsSorted()} />
+                          )}
+                        </SortBox>
+                        {enableColumnVisibility &&
+                          table.getHeaderGroups().length === groupIndex + 1 &&
+                          headerGroup.headers.length === index + 1 && (
+                            <DropDown
+                              component={({ open }) => (
+                                <HeaderIconButton
+                                  variant="flat"
+                                  isFocused={open}
+                                  icon={<MoreVert sx={{ color: "neutral200" }} />}
+                                />
+                              )}
+                              options={table
+                                .getAllLeafColumns()
+                                .filter(
+                                  (c) =>
+                                    c.columnDef.header && typeof c.columnDef.header === "string",
+                                )
+                                .map((column) => {
+                                  return {
+                                    element: (
+                                      <CheckBox
+                                        value={column.getIsVisible()}
+                                        label={column.columnDef.header as string}
+                                        onChange={column.getToggleVisibilityHandler()}
+                                      />
+                                    ),
+                                  };
+                                })}
+                            />
+                          )}
                       </Box>
                     )}
                   </th>
