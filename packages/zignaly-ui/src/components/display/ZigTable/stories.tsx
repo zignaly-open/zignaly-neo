@@ -14,6 +14,7 @@ import { Box } from "@mui/material";
 import PriceLabel, { UsdPriceLabel } from "../Table/components/PriceLabel";
 import ZigTypography from "../ZigTypography";
 import { Check, Close } from "@mui/icons-material";
+import { AreaChart } from "../Charts";
 
 const exchangeOrdersData = makeExchangeOrdersData(10);
 const columnHelperExchangeOrders = createColumnHelper<typeof exchangeOrdersData[number]>();
