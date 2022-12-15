@@ -1,12 +1,32 @@
 import React from 'react';
 import { Box } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
-import { Transaction } from 'apis/coin/types';
-import { getTransactionSideType } from '../../utils';
+import { Transaction, TransactionType } from 'apis/coin/types';
 import ChainIcon from '../ChainIcon';
 import ServiceLink from '../ProviderLink';
 import ZignalyAccount from '../TransferZigLabel';
 import { Side } from './types';
+
+const getTransactionSideType = (txType: TransactionType, side: Side) => {
+  if (
+    ([TransactionType.PS_DEPOSIT, TransactionType.PS2_DEPOSIT].includes(
+      txType,
+    ) &&
+      side === 'to') ||
+    (txType === TransactionType.PS_WITHDRAW && side === 'from')
+  ) {
+    return 'service';
+  }
+
+  if (
+    (txType === TransactionType.DEPOSIT && side === 'from') ||
+    (txType === TransactionType.WITHDRAW && side === 'to')
+  ) {
+    return 'external';
+  }
+
+  return 'zignaly';
+};
 
 const FromTo = ({
   transaction,

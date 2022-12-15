@@ -1,5 +1,5 @@
 import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import { useState, useEffect, useCallback, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 
 export type PaginationMetadata = {
   from: string;
