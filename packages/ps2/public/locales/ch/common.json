@@ -46,12 +46,14 @@
   },
   "amount": "CH-Áṁöüńṫ",
   "percent": "CH-{{value, prettyNumber}}%",
+  "number": "CH-{{value, prettyNumber}}",
   "new-version": "CH-Ńëw vëѓŝïöń, ĉlïĉk ṁë ṫö üṗḋáṫë",
   "validation": {
     "insufficient-amount": "CH-Ïńŝüḟḟïĉïëńṫ ḟüńḋŝ",
     "invalid-value": "CH-Ïńválïḋ válüë",
     "negative-amount": "CH-Ŝĥöülḋ bë >= 0",
     "negative-zeroable-amount": "CH-Ŝĥöülḋ bë > 0",
-    "invalid-amount": "CH-Yöü ṁüŝṫ ïńḋïĉáṫë áń áṁöüńṫ"
+    "invalid-amount": "CH-Yöü ṁüŝṫ ïńḋïĉáṫë áń áṁöüńṫ",
+    "max-decimals": "CH-Ṗlëáŝë ëńṫëѓ ńüṁbëѓŝ wïṫĥ ńö ṁöѓë ṫĥáń {{maxDecimals}} ḋëĉïṁál ṗláĉëŝ."
   }
 }
