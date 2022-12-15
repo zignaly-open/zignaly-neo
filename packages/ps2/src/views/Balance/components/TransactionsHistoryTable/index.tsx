@@ -17,7 +17,9 @@ import { Box } from '@mui/material';
 import { PaginationState } from '@tanstack/react-table';
 
 const TransactionsHistoryTable = () => {
-  const [filteredData, setFilteredData] = useState([]);
+  const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(
+    [],
+  );
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
     pageSize: 30,
