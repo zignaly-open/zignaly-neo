@@ -16,15 +16,15 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0 # better fetch all and rebuild part than to fetch part and rebuild all
-      - name: Restore Lerna cache
-        uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            */*/node_modules
-          key: ${{ runner.os }}-lerna-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-lerna-
+      # - name: Restore Lerna cache
+      #   uses: actions/cache@v2
+      #   with:
+      #     path: |
+      #       node_modules
+      #       */*/node_modules
+      #     key: ${{ runner.os }}-lerna-${{ hashFiles('**/package.json') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-lerna-
       - name: Install node
         uses: actions/setup-node@v3
         with:
