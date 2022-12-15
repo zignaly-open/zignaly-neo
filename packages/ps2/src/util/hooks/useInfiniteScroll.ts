@@ -12,6 +12,8 @@ export interface InfiniteListQueryResponse<T> {
 }
 
 const useInfiniteScroll = (
+  // TODO
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useGetDataListQuery: UseQuery<any>,
   { limit = 10, ...queryParameters },
 ) => {
