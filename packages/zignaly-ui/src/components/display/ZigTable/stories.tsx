@@ -14,7 +14,6 @@ import { Box } from "@mui/material";
 import PriceLabel, { UsdPriceLabel } from "../Table/components/PriceLabel";
 import ZigTypography from "../ZigTypography";
 import { Check, Close } from "@mui/icons-material";
-import { AreaChart } from "../Charts";
 
 const exchangeOrdersData = makeExchangeOrdersData(10);
 const columnHelperExchangeOrders = createColumnHelper<typeof exchangeOrdersData[number]>();
@@ -70,13 +69,6 @@ const userTableColumns = [
     header: "My Current Value",
     meta: { subtitle: "Returns" },
   }),
-  // columnHelperUserTable.accessor("chart", {
-  //   header: "Since Invested",
-  //   cell: ({ row: { original } }) => (
-  //     <AreaChart variant={original.chart.variant as any} data={original.chart.data} />
-  //   ),
-  //   enableSorting: false,
-  // }),
   columnHelperUserTable.accessor("dailyAvg.value", {
     header: "Daily avg",
     cell: ({ getValue }) => <PercentageIndicator value={getValue()} />,
