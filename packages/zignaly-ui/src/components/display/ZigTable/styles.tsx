@@ -19,6 +19,7 @@ export const Table = styled("table")`
   th {
     color: ${({ theme }) => theme.palette.neutral200};
     white-space: nowrap;
+    padding: 4px 10px;
   }
 
   td {
@@ -84,7 +85,9 @@ export const HeaderIconButton = styled(IconButton)`
   margin-left: -20px;
 `;
 
-export const SortBox = styled("div")<{ canSort: boolean }>`
+export const SortBox = styled("div", {
+  shouldForwardProp: (prop) => prop !== "canSort",
+})<{ canSort: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;

@@ -76,6 +76,19 @@ const TransactionsHistoryTable = () => {
     }),
   ];
 
+  const test = [{ a: 'aa' }];
+  const columnHelper0 = createColumnHelper<typeof test[number]>();
+  const A = () => (
+    <ZigTable
+      columns={[
+        columnHelper0.accessor('a', {
+          header: 'Value in USD',
+        }),
+      ]}
+      data={test}
+    />
+  );
+
   return (
     <LayoutContentWrapper
       endpoint={[transactionsEndpoint, coinsEndpoint]}

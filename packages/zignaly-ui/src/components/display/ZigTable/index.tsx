@@ -8,20 +8,13 @@ import {
   getSortedRowModel,
   getExpandedRowModel,
 } from "@tanstack/react-table";
-import {
-  ExpandedRow,
-  HeaderIconButton,
-  PageNumberContainer,
-  SmallIconButton,
-  SmallSelectWrapper,
-  SortBox,
-} from "./styles";
+import { HeaderIconButton, PageNumberContainer, SmallSelectWrapper, SortBox } from "./styles";
 import DropDown from "../DropDown";
 import ZigTypography from "../ZigTypography";
 import IconButton from "../../inputs/IconButton";
 import CheckBox from "../../inputs/CheckBox";
 import { ZigTableProps } from "./types";
-import { Box, Collapse, IconButton as IconButtonMui } from "@mui/material";
+import { Box } from "@mui/material";
 import { ChevronLeft, ChevronRight, FirstPage, LastPage, MoreVert } from "@mui/icons-material";
 import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
@@ -33,6 +26,7 @@ export default function ZigTable<T extends object>({
   pagination = true,
   columnVisibility: enableColumnVisibility = true,
   renderSubComponent,
+  ...rest
 }: ZigTableProps<T>) {
   const [sorting, setSorting] = React.useState<SortingState>(initialState.sorting ?? []);
   const [columnVisibility, setColumnVisibility] = React.useState({});
@@ -52,6 +46,7 @@ export default function ZigTable<T extends object>({
     getExpandedRowModel: getExpandedRowModel(),
     getRowCanExpand: () => !!renderSubComponent,
     debugTable: false,
+    ...rest,
   });
 
   const pageSizeOptions = [10, 20, 30, 40, 50].map((o) => ({ value: o, label: o.toString() }));
@@ -75,12 +70,14 @@ export default function ZigTable<T extends object>({
                             <ZigTypography color="neutral200" variant="body2">
                               {flexRender(header.column.columnDef.header, header.getContext())}
                             </ZigTypography>
-                            <ZigTypography color="neutral400" variant="h5">
-                              {flexRender(
-                                header.column.columnDef.headerSubtitle,
-                                header.getContext(),
-                              )}
-                            </ZigTypography>
+                            {header.column.columnDef.meta?.subtitle && (
+                              <ZigTypography color="neutral400" variant="h5">
+                                {flexRender(
+                                  header.column.columnDef.meta.subtitle,
+                                  header.getContext(),
+                                )}
+                              </ZigTypography>
+                            )}
                           </div>
                           {header.column.getCanSort() && (
                             <SortIcon isSorted={header.column.getIsSorted()} />
