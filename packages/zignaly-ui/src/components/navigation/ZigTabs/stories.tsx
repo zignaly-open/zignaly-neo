@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { ComponentStory, ComponentMeta } from "@storybook/react";
+import { ComponentMeta, Story } from "@storybook/react";
 
 import Tabs from "./";
 import Tab from "./components/Tab";
@@ -22,8 +22,13 @@ export default {
   },
 } as ComponentMeta<typeof Tabs>;
 
-const Template: ComponentStory<typeof Tabs> = (args) => {
-  const [value, setValue] = useState(args.value || 0);
+type IProps = {
+  tabs: string[];
+  content: string[];
+};
+
+const Template: Story<typeof Tabs & IProps> = (args) => {
+  const [value, setValue] = useState(0);
   return (
     <>
       <Tabs
@@ -33,13 +38,13 @@ const Template: ComponentStory<typeof Tabs> = (args) => {
         }}
         value={value}
       >
-        {args.tabs.map((t: string, i: number) => (
-          <Tab label={t} key={i} />
+        {args.tabs.map((t: string) => (
+          <Tab label={t} key={t} />
         ))}
       </Tabs>
       {args.content.map((c: string, i: number) => (
-        <TabPanel value={args.value} index={i} key={i}>
-          {c}
+        <TabPanel value={value} index={i} key={c}>
+          {args.content[i]}
         </TabPanel>
       ))}
     </>

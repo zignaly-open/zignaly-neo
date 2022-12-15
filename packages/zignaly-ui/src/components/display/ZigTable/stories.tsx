@@ -273,24 +273,28 @@ MyCoins.args = {
       },
     ],
   },
+  // @ts-ignore Property 'accessorFn' is missing in type (storybook only), god help me.
   columns: myCoinsTableColumns,
   data: myCoinsTableData,
 };
 
 export const Investors = Template.bind({});
 Investors.args = {
+  // @ts-ignore
   columns: investorsTableColumns,
   data: investorsTableData,
 };
 
 export const UserDashBoard = Template.bind({});
 UserDashBoard.args = {
+  // @ts-ignore
   columns: userTableColumns,
   data: userTableData,
 };
 
 export const ExchangeOrders = Template.bind({});
 ExchangeOrders.args = {
+  // @ts-ignore
   columns: exchangeOrdersColumns,
   data: exchangeOrdersData,
 };
