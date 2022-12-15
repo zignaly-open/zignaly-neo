@@ -1,0 +1,35 @@
+{
+  "tableHeader": {
+    "coin": "CH-Ĉöïń",
+    "date": "CH-Ḋáṫë",
+    "type": "CH-Ṫyṗë",
+    "amount": "CH-Áṁöüńṫ",
+    "transactionId": "CH-Ṫѓáńŝáĉṫïöń ÏḊ",
+    "from": "CH-Ḟѓöṁ",
+    "to": "CH-Ṫö",
+    "status": "CH-Ŝṫáṫüŝ"
+  },
+  "type": {
+    "deposit": "CH-Ḋëṗöŝïṫ",
+    "withdrawal": "CH-Wïṫĥḋѓáwál",
+    "psDeposit": "CH-Ṗѓöḟïṫ Ŝĥáѓïńĝ Ḋëṗöŝïṫ",
+    "psWithdraw": "CH-Ṗѓöḟïṫ Ŝĥáѓïńĝ Wïṫĥḋѓáwál",
+    "ps2": "CH-Ṗѓöḟïṫ Ŝĥáѓïńĝ Ïńṫëѓńál Ṫѓáńŝḟëѓ",
+    "psds": "CH-ṖŜḊŜ Ṫѓáńŝḟëѓ",
+    "pifa": "CH-ṖÏḞÁ",
+    "buyZig": "CH-Büy Žïĝ",
+    "traderFee": "CH-Ṫѓáḋïńĝ Ḟëë",
+    "user": "CH-Ṫѓáńŝḟëѓ"
+  },
+  "status": {
+    "pending": "CH-Ṗëńḋïńĝ",
+    "completed": "CH-Ĉöṁṗlëṫëḋ",
+    "error": "CH-Ëѓѓöѓ"
+  },
+  "details": {
+    "from": "CH-Ḟѓöṁ:",
+    "to": "CH-Ṫö:",
+    "txHash": "CH-ṪX Ĥáŝĥ:",
+    "note": "CH-Ńöṫë:"
+  }
+}
