@@ -26048,13 +26048,6 @@ react-merge-refs@^1.0.0:
   resolved "https://registry.npmjs.org/react-merge-refs/-/react-merge-refs-1.1.0.tgz"
   integrity sha512-alTKsjEL0dKH/ru1Iyn7vliS2QRcBp9zZPGoWxUOvRGWPUYgjo+V01is7p04It6KhgrzhJGnIj9GgX8W4bZoCQ==
 
-react-number-format@4.9.1:
-  version "4.9.1"
-  resolved "https://registry.npmjs.org/react-number-format/-/react-number-format-4.9.1.tgz"
-  integrity sha512-v49XqXv7SpwYZKGkghNJjoDUr6lIUozlPLrObcxre7GfcLx7qD4TCvArn3GozN/Y4FVbLyEYCwJoBCiChdBh5A==
-  dependencies:
-    prop-types "^15.7.2"
-
 react-number-format@4.9.3:
   version "4.9.3"
   resolved "https://registry.npmjs.org/react-number-format/-/react-number-format-4.9.3.tgz"
@@ -26062,7 +26055,7 @@ react-number-format@4.9.3:
   dependencies:
     prop-types "^15.7.2"
 
-react-number-format@^5.1.2:
+react-number-format@5.1.2, react-number-format@^5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/react-number-format/-/react-number-format-5.1.2.tgz#54feff94d837e67078e234c2950d9a0fb96df3d6"
   integrity sha512-NXm/MvZVjmPqrFbjAut/prCyBZ+pA+O+C12rDkWZrwS3JXz1J42RC1kpclkdnkx2KDjRCNFLb21FlwGcNBZddw==
@@ -29574,20 +29567,15 @@ typescript-template-language-service-decorator@^2.2.0:
   resolved "https://registry.npmjs.org/typescript-template-language-service-decorator/-/typescript-template-language-service-decorator-2.3.1.tgz"
   integrity sha512-+Q5+cvBtPO4VKNyyI6O+XnIne+/hq/WfNhBaF4hJP8nB8TbikTg+2h9uBMsqduwX1+kVfwG9SBSwMTtvi2Ep7w==
 
-typescript@4.6.3:
-  version "4.6.3"
-  resolved "https://registry.npmjs.org/typescript/-/typescript-4.6.3.tgz"
-  integrity sha512-yNIatDa5iaofVozS/uQJEl3JRWLKKGJKh6Yaiv0GLGSuhpFJe7P3SbHZ8/yjAHRQwKRoA6YZqlfjXWmVzoVSMw==
-
-typescript@4.7.2:
-  version "4.7.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.7.2.tgz#1f9aa2ceb9af87cca227813b4310fff0b51593c4"
-  integrity sha512-Mamb1iX2FDUpcTRzltPxgWMKy3fhg0TN378ylbktPGPK/99KbDtMQ4W1hwgsbPAsG3a0xKa1vmw4VKZQbkvz5A==
-
 typescript@4.7.4, typescript@^4.6.4:
   version "4.7.4"
   resolved "https://registry.npmjs.org/typescript/-/typescript-4.7.4.tgz"
   integrity sha512-C0WQT0gezHuw6AdY1M2jxUO83Rjf0HP7Sk1DtXj6j1EwkQNZrHAg2XPWlq62oqEhYvONq5pkC2Y9oPljWToLmQ==
+
+typescript@4.9.4:
+  version "4.9.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.4.tgz#a2a3d2756c079abda241d75f149df9d561091e78"
+  integrity sha512-Uz+dTXYzxXXbsFpM86Wh3dKCxrQqUcVMxwU54orwlJjOpO3ao8L7j5lH+dWfTwgCwIuM9GQ2kvVotzYJMXTBZg==
 
 ua-parser-js@^1.0.2:
   version "1.0.2"

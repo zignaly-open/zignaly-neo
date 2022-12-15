@@ -1,94 +1,257 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import NumberFormat from "react-number-format";
-import { CheckIconStyled, CloseIconStyled } from "./styles";
-import { dark } from "../../../theme";
-import Typography from "../Typography";
-import { MockMyCoinsData } from "./mockData";
+import { NumericFormat } from "react-number-format";
 import { AreaChart } from "../Charts";
-import { ChartsProps } from "../Charts/types";
 import ZigTable from ".";
 import PercentageIndicator from "../Table/components/PercentageIndicator";
-import ConnectionStateLabel, {
-  ConnectionStateLabelId,
-} from "../Table/components/ConnectionStateLabel";
+import ConnectionStateLabel from "../Table/components/ConnectionStateLabel";
 import DateLabel from "../Table/components/DateLabel";
 import CoinLabel from "../Table/components/CoinLabel";
-import { ColumnDef } from "@tanstack/react-table";
-import { makeCoinsData } from "./makeData";
+import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
+import { makeCoinsData, makeExchangeOrdersData, makeInvestorsData } from "./makeData";
 import { ZigTablePriceLabel } from "../ZigPriceLabel";
 import ZigButton from "components/inputs/ZigButton";
 import { Box } from "@mui/material";
+import PriceLabel, { UsdPriceLabel } from "../Table/components/PriceLabel";
+import ZigTypography from "../ZigTypography";
+import { Check, Close } from "@mui/icons-material";
 
-const createMarketPlaceTableheader = () => {
-  return [
-    {
-      header: "1 year",
-      accessorKey: "oneYear",
-    },
-    {
-      header: "1 month",
-      accessorKey: "chart",
-    },
-    {
-      header: "",
-      accessorKey: "invest",
-    },
-  ];
-};
+const exchangeOrdersData = makeExchangeOrdersData(10);
+const columnHelperExchangeOrders = createColumnHelper<typeof exchangeOrdersData[number]>();
+const exchangeOrdersColumns = [
+  columnHelperExchangeOrders.accessor("date", {
+    header: "Date",
+    cell: (props) => <DateLabel date={new Date(props.getValue())} />,
+  }),
+  columnHelperExchangeOrders.accessor("orderId", {
+    header: "Order ID",
+  }),
+  columnHelperExchangeOrders.accessor("pair", {
+    header: "Pair",
+  }),
+  columnHelperExchangeOrders.accessor("amount", {
+    header: "Amount",
+    cell: (props) => <NumericFormat value={props.getValue()} displayType="text" />,
+  }),
+  columnHelperExchangeOrders.accessor("status", {
+    header: "Status",
+  }),
+  columnHelperExchangeOrders.accessor("entryPrice", {
+    header: "Entry Price",
+    cell: (props) => <NumericFormat value={props.getValue()} displayType="text" />,
+  }),
+  columnHelperExchangeOrders.accessor("side", {
+    header: "Side",
+  }),
+  columnHelperExchangeOrders.accessor("type", {
+    header: "Type",
+  }),
+];
 
-interface MarketPlaceTableProps {
-  chart: ChartsProps;
-  oneYear: {
-    value: number;
-    subtitle: string;
-    showTrophy: boolean;
-  };
-}
-
-const createMarketPlaceTableBodyObject = ({ chart, oneYear }: MarketPlaceTableProps) => {
-  return {
-    chart: <AreaChart variant={chart.variant} data={chart.data} />,
-    oneYear: <PercentageIndicator value={oneYear.value} />,
-  };
-};
-
-const userTableColumns: ColumnDef<{}>[] = [
+const userTableData = [
   {
+    summary: "",
+    chart: {
+      data: [
+        { x: "Jul 1", y: 10 },
+        { x: "Jul 2", y: 15 },
+        { x: "Jul 3", y: 23 },
+        { x: "Jul 4", y: 15 },
+        { x: "Jul 5", y: 17 },
+        { x: "Jul 6", y: 20 },
+        { x: "Jul 7", y: 25 },
+      ],
+      variant: "small",
+    },
+    dailyAvg: { value: -10 },
+    oneMonth: { value: 10 },
+    threeMonths: { value: 20 },
+    all: { value: 10 },
+  },
+  {
+    summary: "",
+    chart: {
+      data: [
+        { x: "Jul 1", y: 10 },
+        { x: "Jul 2", y: 15 },
+        { x: "Jul 3", y: 23 },
+        { x: "Jul 4", y: 15 },
+        { x: "Jul 5", y: 17 },
+        { x: "Jul 6", y: 20 },
+        { x: "Jul 7", y: 25 },
+      ],
+      variant: "small",
+    },
+    dailyAvg: { value: -10 },
+    oneMonth: { value: 10 },
+    threeMonths: { value: 20 },
+    all: { value: 20 },
+  },
+];
+const columnHelperUserTable = createColumnHelper<typeof userTableData[number]>();
+const userTableColumns = [
+  columnHelperUserTable.accessor("summary", {
     header: "My Current Value",
-    headerSubtitle: "Returns",
-    accessorKey: "summary",
-  },
-  {
+    meta: { subtitle: "Returns" },
+  }),
+  columnHelperUserTable.accessor("chart", {
     header: "Since Invested",
-    accessorKey: "chart",
-    cell: ({ getValue }) => {
-      const chart = getValue();
-      return <AreaChart variant={chart.variant} data={chart.data} />;
-    },
+    cell: ({ row: { original } }) => (
+      <AreaChart variant={original.chart.variant as any} data={original.chart.data} />
+    ),
     enableSorting: false,
-  },
-  {
+  }),
+  columnHelperUserTable.accessor("dailyAvg.value", {
     header: "Daily avg",
-    accessorKey: "dailyAvg",
-    cell: ({ getValue }) => <PercentageIndicator value={getValue().value} />,
-  },
-  {
+    cell: ({ getValue }) => <PercentageIndicator value={getValue()} />,
+  }),
+  columnHelperUserTable.accessor("oneMonth.value", {
     header: "1 mo.",
-    accessorKey: "oneMonth",
-    cell: ({ getValue }) => <PercentageIndicator value={getValue().value} />,
-  },
-  {
+    cell: ({ getValue }) => <PercentageIndicator value={getValue()} />,
+  }),
+  columnHelperUserTable.accessor("threeMonths.value", {
     header: "3 mo.",
-    accessorKey: "threeMonths",
     cell: ({ getValue }) => <PercentageIndicator value={getValue()} />,
+  }),
+  columnHelperUserTable.accessor("all.value", {
+    header: "All",
+    cell: ({ getValue }) => <PercentageIndicator value={getValue()} />,
+  }),
+];
+
+const myCoinsTableData = makeCoinsData(50);
+const columnHelperMyCoins = createColumnHelper<typeof myCoinsTableData[number]>();
+const myCoinsTableColumns = [
+  columnHelperMyCoins.accessor("coin.coin", {
+    header: "Coin",
+    cell: ({ getValue, row: { original } }) => (
+      <CoinLabel coin={getValue()} name={original.coin.name} />
+    ),
+  }),
+  columnHelperMyCoins.accessor("totalBalance.value", {
+    header: "Total Balance",
+    cell: ({ getValue, row: { original } }) => (
+      <ZigTablePriceLabel
+        color="neutral100"
+        coinProps={{ color: "neutral400" }}
+        coin={original.totalBalance.coin}
+        value={getValue()}
+      />
+    ),
+  }),
+  columnHelperMyCoins.accessor("availableBalance.value", {
+    header: "Available Balance",
+    cell: ({ getValue, row: { original } }) => (
+      <ZigTablePriceLabel coin={original.totalBalance.coin} value={getValue()} />
+    ),
+  }),
+  columnHelperMyCoins.accessor("lockedBalance.value", {
+    header: "Locked Balance",
+    cell: ({ getValue, row: { original } }) => (
+      <ZigTablePriceLabel coin={original.totalBalance.coin} value={getValue()} />
+    ),
+  }),
+  columnHelperMyCoins.accessor("valueInBtc.value", {
+    header: "Value in BTC",
+    cell: ({ getValue, row: { original } }) => (
+      <ZigTablePriceLabel coin={original.totalBalance.coin} value={getValue()} />
+    ),
+  }),
+  columnHelperMyCoins.accessor("valueInUsd.value", {
+    header: "Value in USD",
+    cell: ({ getValue }) => <UsdPriceLabel value={getValue()} />,
+  }),
+  columnHelperMyCoins.display({
+    header: "",
+    id: "action",
+    cell: () => (
+      <Box display="flex" gap={1}>
+        <ZigButton size="small" variant="outlined" onClick={() => {}}>
+          Deposit
+        </ZigButton>
+        <ZigButton size="small" variant="outlined" onClick={() => {}}>
+          Withdraw
+        </ZigButton>
+      </Box>
+    ),
+  }),
+];
+
+const investorsTableData = makeInvestorsData(10);
+const investorsTableColumns: ColumnDef<typeof investorsTableData[number], any>[] = [
+  {
+    header: "Email",
+    accessorKey: "email",
+    cell: ({ getValue }) => (
+      <ZigTypography color="neutral100" variant="body2">
+        {getValue()}
+      </ZigTypography>
+    ),
   },
   {
-    header: "All",
-    accessorFn: (row) => {
-      return row.all.value;
-    },
-    cell: ({ getValue }) => <PercentageIndicator value={getValue()} />,
+    header: "User ID",
+    accessorKey: "userId",
+    cell: ({ getValue }) => (
+      <ZigTypography color="neutral200" variant="h5">
+        {getValue()}
+      </ZigTypography>
+    ),
+  },
+  {
+    header: "Investment",
+    accessorKey: "investment",
+    cell: ({ getValue, row: { original } }) => (
+      <ZigTablePriceLabel coin={original.coin} value={getValue()} />
+    ),
+  },
+  {
+    header: "P & L",
+    accessorKey: "pnl",
+    cell: ({ getValue, row: { original } }) => (
+      <PriceLabel
+        coin={original.coin}
+        value={getValue()}
+        bottomElement={<PercentageIndicator value={3} />}
+      />
+    ),
+  },
+  {
+    header: "P & L Total",
+    accessorKey: "pnlTotal",
+    cell: ({ getValue, row: { original } }) => (
+      <ZigTablePriceLabel coin={original.coin} value={getValue()} />
+    ),
+  },
+  {
+    header: "Total Fees Paid",
+    accessorKey: "totalFeesPaid",
+    cell: ({ getValue, row: { original } }) => (
+      <ZigTablePriceLabel coin={original.coin} value={getValue()} />
+    ),
+  },
+  {
+    header: "Success Fee",
+    accessorKey: "successFee",
+    cell: ({ getValue }) => (
+      <ZigTypography color="neutral100" variant="body1">
+        {getValue()}%
+      </ZigTypography>
+    ),
+  },
+  {
+    header: "Fees in ZIG",
+    accessorKey: "feesInZig",
+    cell: ({ getValue }) =>
+      getValue() ? (
+        <Check width="24" height="24" sx={{ color: "neutral300" }} />
+      ) : (
+        <Close width="24" height="24" sx={{ color: "neutral300" }} />
+      ),
+  },
+  {
+    header: "Status",
+    accessorKey: "status",
+    cell: ({ getValue }) => <ConnectionStateLabel stateId={getValue()} />,
   },
 ];
 
@@ -105,421 +268,29 @@ MyCoins.args = {
   initialState: {
     sorting: [
       {
-        id: "totalBalance",
-        desc: false,
+        id: "totalBalance_value",
+        desc: true,
       },
     ],
   },
-  columns: [
-    {
-      header: "Coin",
-      accessorKey: "coin",
-      cell: ({ getValue }) => <CoinLabel coin={getValue().coin} name={getValue().name} />,
-    },
-    {
-      header: "Total Balance",
-      accessorKey: "totalBalance",
-      accessorFn: (row) => row.totalBalance.value,
-      cell: ({ getValue, row }) => (
-        <ZigTablePriceLabel
-          color="neutral100"
-          coinProps={{ color: "neutral400" }}
-          coin={row.original.totalBalance.coin}
-          value={getValue()}
-        />
-      ),
-    },
-    {
-      header: "Available Balance",
-      accessorKey: "availableBalance",
-      cell: ({ getValue }) => (
-        <ZigTablePriceLabel coin={getValue().coin} value={getValue().value} />
-      ),
-    },
-    {
-      header: "Locked Balance",
-      accessorKey: "lockedBalance",
-      cell: ({ getValue }) => (
-        <ZigTablePriceLabel coin={getValue().coin} value={getValue().value} />
-      ),
-    },
-    {
-      header: "Value in BTC",
-      accessorKey: "valueInBtc",
-      cell: ({ getValue }) => (
-        <ZigTablePriceLabel coin={getValue().coin} value={getValue().value} />
-      ),
-    },
-    {
-      header: "Value in USD",
-      accessorKey: "valueInUsd",
-      cell: ({ getValue }) => (
-        <ZigTablePriceLabel coin={getValue().coin} value={getValue().value} />
-      ),
-    },
-    {
-      header: "",
-      id: "action",
-      cell: () => (
-        <Box display="flex" gap={1}>
-          <ZigButton size="small" variant="outlined" onClick={() => {}}>
-            Deposit
-          </ZigButton>
-          <ZigButton size="small" variant="outlined" onClick={() => {}}>
-            Withdraw
-          </ZigButton>
-        </Box>
-      ),
-    },
-  ],
-  data: makeCoinsData(50),
+  columns: myCoinsTableColumns,
+  data: myCoinsTableData,
 };
 
 export const Investors = Template.bind({});
 Investors.args = {
-  hideOptionsButton: false,
-  columns: [
-    {
-      header: "Email",
-      accessorKey: "email",
-    },
-    {
-      header: "User ID",
-      accessorKey: "userId",
-    },
-    {
-      header: "Investment",
-      accessorKey: "investment",
-    },
-    {
-      header: "P & L",
-      accessorKey: "pyd",
-    },
-    {
-      header: "P & L Total",
-      accessorKey: "pydTotal",
-    },
-    {
-      header: "Total Fees Paid",
-      accessorKey: "totalFeesPaid",
-    },
-    {
-      header: "Success Fee",
-      accessorKey: "successFee",
-    },
-    {
-      header: "Fees in ZIG",
-      accessorKey: "feesInZig",
-    },
-    {
-      header: "Status",
-      accessorKey: "status",
-    },
-  ],
-  data: [
-    {
-      email: (
-        <Typography color="neutral100" variant="body2">
-          tec**@zig**.com
-        </Typography>
-      ),
-      userId: (
-        <Typography color="neutral200" variant="h5">
-          5f886d29da8e9666b1684c9a
-        </Typography>
-      ),
-      investment: <ZigTablePriceLabel coin={"USDT"} value={"1250"} />,
-      pyd: (
-        <ZigTablePriceLabel
-          coin={"USDT"}
-          value={"37.5"}
-          bottomElement={<PercentageIndicator value={3} />}
-        />
-      ),
-      pydTotal: <ZigTablePriceLabel coin={"USDT"} value={"145"} />,
-      totalFeesPaid: <ZigTablePriceLabel coin={"USDT"} value={"218"} />,
-      successFee: (
-        <Typography color="neutral100" variant="body1">
-          10%
-        </Typography>
-      ),
-      feesInZig: <CheckIconStyled width="24" height="24" color={dark.neutral300} />,
-      status: <ConnectionStateLabel stateId={ConnectionStateLabelId.CONNECTED} />,
-    },
-    {
-      email: (
-        <Typography color="neutral100" variant="body2">
-          tec**@zig**.com
-        </Typography>
-      ),
-      userId: (
-        <Typography color="neutral200" variant="h5">
-          5f886d29da8e9666b1684c9a
-        </Typography>
-      ),
-      investment: <ZigTablePriceLabel coin={"USDT"} value={"1250"} />,
-      pyd: (
-        <ZigTablePriceLabel
-          coin={"USDT"}
-          value={"0.85"}
-          bottomElement={<PercentageIndicator value={-1} />}
-        />
-      ),
-      pydTotal: <ZigTablePriceLabel coin={"USDT"} value={"23.68586856858"} />,
-      totalFeesPaid: <ZigTablePriceLabel coin={"USDT"} value={"71813"} />,
-      successFee: (
-        <Typography color="neutral100" variant="body1">
-          10%
-        </Typography>
-      ),
-      feesInZig: <CloseIconStyled width="24" height="24" color={dark.neutral300} />,
-      status: <ConnectionStateLabel stateId={ConnectionStateLabelId.DISCONNECTED} />,
-    },
-
-    {
-      email: (
-        <Typography color="neutral100" variant="body2">
-          tec**@zig**.com
-        </Typography>
-      ),
-      userId: (
-        <Typography color="neutral200" variant="h5">
-          5f886d29da8e9666b1684c9a
-        </Typography>
-      ),
-      investment: <ZigTablePriceLabel coin={"USDT"} value={"3468"} />,
-      pyd: (
-        <ZigTablePriceLabel
-          coin={"USDT"}
-          value={"637956.523"}
-          bottomElement={<PercentageIndicator value={-3} />}
-        />
-      ),
-      pydTotal: <ZigTablePriceLabel coin={"USDT"} value={"0.347347"} />,
-      totalFeesPaid: <ZigTablePriceLabel coin={"USDT"} value={"09864"} />,
-      successFee: (
-        <Typography color="neutral100" variant="body1">
-          10%
-        </Typography>
-      ),
-      feesInZig: <CloseIconStyled width="24" height="24" color={dark.neutral300} />,
-      status: <ConnectionStateLabel stateId={ConnectionStateLabelId.HARD_DISCONNECT} />,
-    },
-    {
-      email: (
-        <Typography color="neutral100" variant="body2">
-          tec**@zig**.com
-        </Typography>
-      ),
-      userId: (
-        <Typography color="neutral200" variant="h5">
-          5f886d29da8e9666b1684c9a
-        </Typography>
-      ),
-      investment: <ZigTablePriceLabel coin={"USDT"} value={"1250"} />,
-      pyd: (
-        <ZigTablePriceLabel
-          coin={"USDT"}
-          value={"1929292"}
-          bottomElement={<PercentageIndicator value={-87} />}
-        />
-      ),
-      pydTotal: <ZigTablePriceLabel coin={"USDT"} value={"134581"} />,
-      totalFeesPaid: <ZigTablePriceLabel coin={"USDT"} value={"218"} />,
-      successFee: (
-        <Typography color="neutral100" variant="body1">
-          10%
-        </Typography>
-      ),
-      feesInZig: <CloseIconStyled width="24" height="24" color={dark.neutral300} />,
-      status: <ConnectionStateLabel stateId={ConnectionStateLabelId.SOFT_DISCONNECT} />,
-    },
-    {
-      email: (
-        <Typography color="neutral100" variant="body2">
-          tec**@zig**.com
-        </Typography>
-      ),
-      userId: (
-        <Typography color="neutral200" variant="h5">
-          5f886d29da8e9666b1684c9a
-        </Typography>
-      ),
-      investment: <ZigTablePriceLabel coin={"USDT"} value={"1250"} />,
-      pyd: (
-        <ZigTablePriceLabel
-          coin={"USDT"}
-          value={"30.5"}
-          bottomElement={<PercentageIndicator value={-1} />}
-        />
-      ),
-      pydTotal: <ZigTablePriceLabel coin={"USDT"} value={"145"} />,
-      totalFeesPaid: <ZigTablePriceLabel coin={"USDT"} value={"218"} />,
-      successFee: (
-        <Typography color="neutral100" variant="body1">
-          10%
-        </Typography>
-      ),
-      feesInZig: <CloseIconStyled width="24" height="24" color={dark.neutral300} />,
-      status: <ConnectionStateLabel stateId={ConnectionStateLabelId.SUSPENDED} />,
-    },
-  ],
+  columns: investorsTableColumns,
+  data: investorsTableData,
 };
 
 export const UserDashBoard = Template.bind({});
 UserDashBoard.args = {
-  hideOptionsButton: true,
-  isUserTable: true,
   columns: userTableColumns,
-  data: [
-    {
-      summary: "",
-      chart: {
-        data: [
-          { x: "Jul 1", y: 10 },
-          { x: "Jul 2", y: 15 },
-          { x: "Jul 3", y: 23 },
-          { x: "Jul 4", y: 15 },
-          { x: "Jul 5", y: 17 },
-          { x: "Jul 6", y: 20 },
-          { x: "Jul 7", y: 25 },
-        ],
-        variant: "small",
-      },
-      dailyAvg: { value: -10 },
-      oneMonth: { value: 10 },
-      threeMonths: 10,
-      all: { value: 10 },
-    },
-    {
-      summary: "",
-      chart: {
-        data: [
-          { x: "Jul 1", y: 10 },
-          { x: "Jul 2", y: 15 },
-          { x: "Jul 3", y: 23 },
-          { x: "Jul 4", y: 15 },
-          { x: "Jul 5", y: 17 },
-          { x: "Jul 6", y: 20 },
-          { x: "Jul 7", y: 25 },
-        ],
-        variant: "small",
-      },
-      dailyAvg: { value: -10 },
-      oneMonth: { value: 10 },
-      threeMonths: 20,
-      all: { value: 20 },
-    },
-  ],
-};
-
-export const MarketPlaceTabel = Template.bind({});
-MarketPlaceTabel.args = {
-  hideOptionsButton: true,
-  columns: createMarketPlaceTableheader(),
-  data: [
-    createMarketPlaceTableBodyObject({
-      chart: {
-        data: [
-          { x: "Jul 1", y: 10 },
-          { x: "Jul 2", y: 15 },
-          { x: "Jul 3", y: 23 },
-          { x: "Jul 4", y: 15 },
-          { x: "Jul 5", y: 17 },
-          { x: "Jul 6", y: 15 },
-          { x: "Jul 7", y: 5 },
-        ],
-        variant: "small",
-        midLine: true,
-      },
-      oneYear: { value: 100, subtitle: "Subtitle", showTrophy: true },
-    }),
-    createMarketPlaceTableBodyObject({
-      chart: {
-        data: [
-          { x: "Jul 1", y: 10 },
-          { x: "Jul 2", y: 15 },
-          { x: "Jul 3", y: 23 },
-          { x: "Jul 4", y: 15 },
-          { x: "Jul 5", y: 17 },
-          { x: "Jul 6", y: 15 },
-          { x: "Jul 7", y: 5 },
-        ],
-        variant: "small",
-        midLine: true,
-      },
-      oneYear: { value: 50, subtitle: "Subtitle", showTrophy: false },
-    }),
-  ],
+  data: userTableData,
 };
 
 export const ExchangeOrders = Template.bind({});
 ExchangeOrders.args = {
-  hideOptionsButton: false,
-  columns: [
-    {
-      header: "Date",
-      accessorKey: "date",
-    },
-    {
-      header: "Order ID",
-      accessorKey: "orderId",
-    },
-    {
-      header: "Pair",
-      accessorKey: "pair",
-    },
-    {
-      header: "Amount",
-      accessorKey: "amount",
-    },
-    {
-      header: "Status",
-      accessorKey: "status",
-    },
-    {
-      header: "Entry Price",
-      accessorKey: "entryPrice",
-    },
-    {
-      header: "Side",
-      accessorKey: "side",
-    },
-    {
-      header: "Type",
-      accessorKey: "type",
-    },
-  ],
-  data: [
-    {
-      date: <DateLabel date={new Date("December 2, 1997 20:10:00")} />,
-      orderId: "138495028471",
-      pair: "XML/USDT",
-      amount: <NumberFormat value={35.978087076} displayType={"text"} thousandSeparator={true} />,
-      status: "Open",
-      entryPrice: <NumberFormat value={"110.20"} displayType={"text"} thousandSeparator={true} />,
-      side: "Buy",
-      type: "Limit",
-    },
-    {
-      date: <DateLabel date={new Date("December 15, 1997 20:10:00")} />,
-      orderId: "248495028471",
-      pair: "XML/USDT",
-      amount: <NumberFormat value={2352} displayType={"text"} thousandSeparator={true} />,
-      status: "Open",
-      entryPrice: <NumberFormat value={"21077.20"} displayType={"text"} thousandSeparator={true} />,
-      side: "Buy",
-      type: "Limit",
-    },
-    {
-      date: <DateLabel date={new Date("December 7, 1997 20:10:00")} />,
-      orderId: "358495028471",
-      pair: "XML/USDT",
-      amount: <NumberFormat value={643745} displayType={"text"} thousandSeparator={true} />,
-      status: "Open",
-      entryPrice: <NumberFormat value={"3109.60"} displayType={"text"} thousandSeparator={true} />,
-      side: "Buy",
-      type: "Limit",
-    },
-  ],
+  columns: exchangeOrdersColumns,
+  data: exchangeOrdersData,
 };

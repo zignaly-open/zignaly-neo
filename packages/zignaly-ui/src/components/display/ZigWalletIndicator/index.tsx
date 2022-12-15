@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { utils } from "ethers";
-import NumberFormat from "react-number-format";
+import { NumericFormat } from "react-number-format";
 import * as styled from "./styles";
 
 import ZigCoinIcon from "assets/images/zignaly-coin.svg?url";
@@ -15,7 +15,7 @@ const ZigWalletIndicator = ({
 }: ZigWalletIndicatorProps) => {
   const renderZigsCoins = useMemo(
     () => (
-      <NumberFormat
+      <NumericFormat
         value={utils.formatUnits((zigs || "0").toString())}
         displayType={"text"}
         thousandSeparator={true}

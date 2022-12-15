@@ -1,5 +1,5 @@
 import React from "react";
-import NumberFormat from "react-number-format";
+import { NumericFormat } from "react-number-format";
 import { ZigPriceLabelProps } from "./types";
 import { getPrecisionForCoin } from "./util";
 import ZigTypography from "../ZigTypography";
@@ -33,7 +33,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
     <ZigTypography {...withDefaultProps}>
       {+value > 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
       {usd && "$"}
-      <NumberFormat
+      <NumericFormat
         value={Math.abs(+value)}
         renderText={(v) => v}
         displayType={"text"}
