@@ -126,6 +126,9 @@ const TransactionsHistoryTable = () => {
               },
             ],
           }}
+          // TODO: why github ci doesn't find the type?
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           renderSubComponent={({ row }) => (
             <TransactionDetails transaction={row.original} />
           )}
