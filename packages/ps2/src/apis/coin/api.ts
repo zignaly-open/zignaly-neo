@@ -50,9 +50,8 @@ export const api = createApi({
         const searchParams = new URLSearchParams(
           omitBy({ from, limit, type }, isEmpty),
         );
-        const url = `user/exchanges/${exchangeInternalId}/transactions_history?${searchParams}`;
         return {
-          url,
+          url: `user/exchanges/${exchangeInternalId}/transactions_history?${searchParams}`,
         };
       },
     }),
