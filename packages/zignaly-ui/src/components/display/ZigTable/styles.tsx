@@ -1,6 +1,7 @@
 import { ExpandMore } from "@mui/icons-material";
-import { styled } from "@mui/system";
+import { css, styled } from "@mui/system";
 import { SortDirection } from "@tanstack/react-table";
+import IconButton from "components/inputs/IconButton";
 
 export const Table = styled("table")`
   border-spacing: 0;
@@ -47,12 +48,15 @@ export const SortIcon = styled(ExpandMore, {
 
   ${({ isSorted }) =>
     !isSorted
-      ? `
-      visibility: none;
-      opacity: 0;`
+      ? css`
+          visibility: none;
+          opacity: 0;
+          margin-left: -24px;
+        `
       : isSorted === "asc"
-      ? `
-      transform: rotate(180deg);`
+      ? css`
+          transform: rotate(180deg);
+        `
       : ``}
 `;
 
@@ -76,27 +80,18 @@ export const SmallSelectWrapper = styled("div")`
   }
 `;
 
-export const ThView = styled("th")<{ isSorted?: boolean; isAlignRight?: boolean }>`
-  color: ${({ theme }) => theme.palette.neutral200};
-  white-space: nowrap;
-  background: transparent;
-  margin: 0;
+export const HeaderIconButton = styled(IconButton)`
+  margin-left: -20px;
+`;
 
-  &:first-child {
-    border-radius: 0 0 0 5px;
-  }
-
-  &:last-child {
-    border-radius: 0 0 5px 0;
-  }
-
-  ${(props) =>
-    props.isSorted
-      ? `
-        border: 1px solid #35334A;
-        border-radius: 5px;
-    `
-      : `
-        border: 1px solid transparent;
+export const SortBox = styled("div")<{ canSort: boolean }>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  ${({ canSort }) =>
+    canSort &&
+    css`
+      cursor: pointer;
     `}
 `;

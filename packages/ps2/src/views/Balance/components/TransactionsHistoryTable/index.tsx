@@ -16,6 +16,7 @@ import { TableLoader } from './styles';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { TransactionsTableDataType, transactionTypeName } from './types';
 import TransactionDetails from './atoms/TransactionDetails';
+import { Box } from '@mui/material';
 
 const limit = 30;
 
@@ -65,10 +66,12 @@ const TransactionsHistoryTable = () => {
     columnHelper.accessor('status', {
       header: t('tableHeader.status'),
       cell: ({ getValue, row }) => (
-        <>
-          <TransactionStateLabel state={getValue()} />
+        <Box display='flex' justifyContent='center' alignItems='center' gap={1}>
+          <Box display='flex' justifyContent='center' flex={1}>
+            <TransactionStateLabel state={getValue()} />
+          </Box>
           {row.getIsExpanded() ? <ExpandLess /> : <ExpandMore />}
-        </>
+        </Box>
       ),
     }),
   ];
