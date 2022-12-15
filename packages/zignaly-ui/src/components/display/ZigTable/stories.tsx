@@ -17,6 +17,8 @@ import CoinLabel from "../Table/components/CoinLabel";
 import { ColumnDef } from "@tanstack/react-table";
 import { makeCoinsData } from "./makeData";
 import { ZigTablePriceLabel } from "../ZigPriceLabel";
+import ZigButton from "components/inputs/ZigButton";
+import { Box } from "@mui/material";
 
 const createMarketPlaceTableheader = () => {
   return [
@@ -153,6 +155,20 @@ MyCoins.args = {
       accessorKey: "valueInUsd",
       cell: ({ getValue }) => (
         <ZigTablePriceLabel coin={getValue().coin} value={getValue().value} />
+      ),
+    },
+    {
+      header: "",
+      id: "action",
+      cell: () => (
+        <Box display="flex" gap={1}>
+          <ZigButton size="small" variant="outlined" onClick={() => {}}>
+            Deposit
+          </ZigButton>
+          <ZigButton size="small" variant="outlined" onClick={() => {}}>
+            Withdraw
+          </ZigButton>
+        </Box>
       ),
     },
   ],
