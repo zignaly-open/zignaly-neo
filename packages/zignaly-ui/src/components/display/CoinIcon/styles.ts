@@ -7,24 +7,14 @@ export const sizes = {
   [CoinSizes.LARGE]: 40,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.div<{ size: CoinSizes }>`
   overflow: hidden;
   border-radius: 50%;
 
-  &.${CoinSizes.SMALL} {
-    width: ${sizes[CoinSizes.SMALL]}px;
-    height: ${sizes[CoinSizes.SMALL]}px;
-  }
-
-  &.${CoinSizes.MEDIUM} {
-    width: ${sizes[CoinSizes.MEDIUM]}px;
-    height: ${sizes[CoinSizes.MEDIUM]}px;
-  }
-
-  &.${CoinSizes.LARGE} {
-    width: ${sizes[CoinSizes.LARGE]}px;
-    height: ${sizes[CoinSizes.LARGE]}px;
-  }
+  ${({ size }) => `
+    width: ${sizes[size]}px;
+    height: ${sizes[size]}px;
+  `}
 `;
 
 export const Image = styled.img`
