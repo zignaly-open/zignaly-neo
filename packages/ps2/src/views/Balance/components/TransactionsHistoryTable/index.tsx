@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   CoinLabel,
@@ -9,41 +9,70 @@ import {
 } from '@zignaly-open/ui';
 import LayoutContentWrapper from 'components/LayoutContentWrapper';
 import { useExchangeCoinsList, useTransactionsHistory } from 'apis/coin/use';
-import { CoinDetails, Transaction } from 'apis/coin/types';
 import TransactionStateLabel from './atoms/TransactionStateLabel';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { TableLoader } from './styles';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { TransactionsTableDataType, transactionTypeName } from './types';
 import TransactionDetails from './atoms/TransactionDetails';
 import { Box } from '@mui/material';
-
-const limit = 30;
+import { PaginationState } from '@tanstack/react-table';
 
 const TransactionsHistoryTable = () => {
+  const [filteredData, setFilteredData] = useState([]);
+  const [pagination, setPagination] = useState<PaginationState>({
+    pageIndex: 0,
+    pageSize: 30,
+  });
+  const { pageIndex, pageSize } = pagination;
   const { t } = useTranslation('transactions-history');
-  const type = null;
   const transactionsEndpoint = useTransactionsHistory({
-    limit,
-    type,
+    limit: 30,
+    type: null,
   });
   const coinsEndpoint = useExchangeCoinsList();
+
+  useEffect(() => {
+    if (
+      !transactionsEndpoint.isFetching &&
+      transactionsEndpoint.data.length < pageIndex * pageSize + 1
+    ) {
+      transactionsEndpoint.fetchMore();
+    }
+  }, [pageIndex]);
+
+  useEffect(() => {
+    if (
+      !transactionsEndpoint.isFetching &&
+      transactionsEndpoint.data.length > pageIndex * pageSize + 1 &&
+      coinsEndpoint.data
+    ) {
+      const data = transactionsEndpoint.data
+        .slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
+        .map((transaction) => ({
+          ...transaction,
+          assetName: coinsEndpoint.data[transaction.asset]?.name,
+        }));
+      setFilteredData(data);
+    }
+  }, [transactionsEndpoint.data, coinsEndpoint.data, pageIndex]);
 
   const columnHelper = createColumnHelper<TransactionsTableDataType>();
   const columns = [
     columnHelper.accessor('datetime', {
       header: t('tableHeader.date'),
       cell: ({ getValue }) => <DateLabel date={new Date(getValue())} />,
+      enableSorting: false,
     }),
     columnHelper.accessor('asset', {
       header: t('tableHeader.coin'),
       cell: ({ getValue, row: { original } }) => (
         <CoinLabel coin={getValue()} name={original.assetName ?? '-'} />
       ),
+      enableSorting: false,
     }),
     columnHelper.accessor('txType', {
       header: t('tableHeader.type'),
       cell: ({ getValue }) => t(transactionTypeName[getValue()]),
+      enableSorting: false,
     }),
     columnHelper.accessor('amount', {
       header: t('tableHeader.amount'),
@@ -54,14 +83,17 @@ const TransactionsHistoryTable = () => {
           alwaysShowSign={true}
         />
       ),
+      enableSorting: false,
     }),
     columnHelper.accessor('fromName', {
       header: t('tableHeader.from'),
       cell: ({ getValue }) => getValue() || '-',
+      enableSorting: false,
     }),
     columnHelper.accessor('toName', {
       header: t('tableHeader.to'),
       cell: ({ getValue }) => getValue() || '-',
+      enableSorting: false,
     }),
     columnHelper.accessor('status', {
       header: t('tableHeader.status'),
@@ -73,53 +105,36 @@ const TransactionsHistoryTable = () => {
           {row.getIsExpanded() ? <ExpandLess /> : <ExpandMore />}
         </Box>
       ),
+      enableSorting: false,
     }),
   ];
-
-  const test = [{ a: 'aa' }];
-  const columnHelper0 = createColumnHelper<typeof test[number]>();
-  const A = () => (
-    <ZigTable
-      columns={[
-        columnHelper0.accessor('a', {
-          header: 'Value in USD',
-        }),
-      ]}
-      data={test}
-    />
-  );
 
   return (
     <LayoutContentWrapper
       endpoint={[transactionsEndpoint, coinsEndpoint]}
-      content={([transactions, coins]: [Transaction[], CoinDetails]) => (
-        <InfiniteScroll
-          style={{ overflow: 'visible' }}
-          dataLength={transactions.length}
-          next={transactionsEndpoint.readMore}
-          hasMore={transactionsEndpoint.hasMore}
-          loader={<TableLoader />}
-        >
-          <ZigTable
-            columns={columns}
-            data={transactions.map((transaction) => ({
-              ...transaction,
-              assetName: coins[transaction.asset]?.name,
-            }))}
-            initialState={{
-              sorting: [
-                {
-                  id: 'datetime',
-                  desc: true,
-                },
-              ],
-            }}
-            renderSubComponent={({ row }) => (
-              <TransactionDetails transaction={row.original} />
-            )}
-            pagination={false}
-          />
-        </InfiniteScroll>
+      content={() => (
+        <ZigTable
+          columns={columns}
+          data={filteredData}
+          initialState={{
+            sorting: [
+              {
+                id: 'datetime',
+                desc: true,
+              },
+            ],
+          }}
+          renderSubComponent={({ row }) => (
+            <TransactionDetails transaction={row.original} />
+          )}
+          manualPagination={true}
+          pagination={pagination}
+          pageCount={
+            transactionsEndpoint.hasMore ? -1 : transactionsEndpoint.page
+          }
+          onPaginationChange={setPagination}
+          loading={transactionsEndpoint.isFetching}
+        />
       )}
     />
   );

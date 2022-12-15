@@ -18,14 +18,17 @@ import { Box } from "@mui/material";
 import { ChevronLeft, ChevronRight, FirstPage, LastPage, MoreVert } from "@mui/icons-material";
 import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
+import Loader from "../Loader";
 
 export default function ZigTable<T extends object>({
   data,
   columns,
   initialState = {},
-  pagination = true,
   columnVisibility: enableColumnVisibility = true,
   renderSubComponent,
+  pagination,
+  onPaginationChange,
+  loading,
   ...rest
 }: ZigTableProps<T>) {
   const [sorting, setSorting] = React.useState<SortingState>(initialState.sorting ?? []);
@@ -37,7 +40,10 @@ export default function ZigTable<T extends object>({
     state: {
       sorting,
       columnVisibility,
+      pagination,
     },
+    pageCount: -1,
+    onPaginationChange,
     onColumnVisibilityChange: setColumnVisibility,
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
@@ -176,11 +182,16 @@ export default function ZigTable<T extends object>({
                   {table.getState().pagination.pageIndex + 1}
                 </ZigTypography>
               </PageNumberContainer>
-              <ZigTypography color="neutral300">out of</ZigTypography>
-              <ZigTypography color="neutral100" fontWeight={600}>
-                {table.getPageCount()}
-              </ZigTypography>
+              {table.getPageCount() !== -1 && (
+                <>
+                  <ZigTypography color="neutral300">out of</ZigTypography>
+                  <ZigTypography color="neutral100" fontWeight={600}>
+                    {table.getPageCount()}
+                  </ZigTypography>
+                </>
+              )}
             </Box>
+            {loading && <Loader color="#fff" width="24px" height="24px" ariaLabel="loading" />}
             <IconButton
               variant="flat"
               size="xlarge"
@@ -189,14 +200,16 @@ export default function ZigTable<T extends object>({
               onClick={table.nextPage}
               disabled={!table.getCanNextPage()}
             />
-            <IconButton
-              variant="flat"
-              size="xlarge"
-              shrinkWrap={true}
-              icon={<LastPage width={24} height={24} sx={{ color: "neutral300" }} />}
-              onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-              disabled={!table.getCanNextPage()}
-            />
+            {table.getPageCount() !== -1 && (
+              <IconButton
+                variant="flat"
+                size="xlarge"
+                shrinkWrap={true}
+                icon={<LastPage width={24} height={24} sx={{ color: "neutral300" }} />}
+                onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                disabled={!table.getCanNextPage()}
+              />
+            )}
           </Box>
           <Box flex={3} display="flex" gap={2} alignItems="center" justifyContent="flex-end">
             <ZigTypography color="neutral300">Displaying</ZigTypography>

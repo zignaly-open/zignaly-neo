@@ -61,7 +61,7 @@ const PercentageIndicator = ({
         return (
           <Inline>
             <ValueIndicator variant={"body1"} className={indicatorClassName}>
-              <NumberFormat
+              <NumericFormat
                 style={style}
                 value={bigNumberValue.toFixed()}
                 displayType={"text"}
@@ -77,7 +77,7 @@ const PercentageIndicator = ({
         return (
           <Inline>
             <ValueIndicator variant={"body1"} className={indicatorClassName}>
-              <NumberFormat
+              <NumericFormat
                 style={style}
                 value={bigNumberValue.toFixed()}
                 displayType={"text"}

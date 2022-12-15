@@ -1,5 +1,5 @@
 import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useMemo } from 'react';
 
 export type PaginationMetadata = {
   from: string;
@@ -16,14 +16,13 @@ const useInfiniteScroll = (
   { limit = 10, ...queryParameters },
 ) => {
   const [localPage, setLocalPage] = useState({ page: 1, id: '' });
-  // const [fromId, setFromId] = useState('');
   const [combinedData, setCombinedData] = useState([]);
   const queryResponse = useGetDataListQuery({
     limit,
     ...queryParameters,
     from: localPage.id,
   });
-  const { items: fetchData = [], metadata } =
+  const { items: fetchData, metadata } =
     (queryResponse?.data as InfiniteListQueryResponse<
       typeof useGetDataListQuery
     >) || {};
@@ -33,11 +32,11 @@ const useInfiniteScroll = (
     else setCombinedData((previousData) => [...previousData, ...fetchData]);
   }, [fetchData]);
 
-  const refresh = useCallback(() => {
+  const refresh = () => {
     setLocalPage({ page: 1, id: '' });
-  }, []);
+  };
 
-  const readMore = () => {
+  const fetchMore = () => {
     setLocalPage(({ page }) => ({ page: page + 1, id: metadata.from }));
   };
 
@@ -45,8 +44,8 @@ const useInfiniteScroll = (
     ...queryResponse,
     data: combinedData,
     page: localPage.page,
-    hasMore: fetchData.length === limit,
-    readMore,
+    hasMore: fetchData?.length === limit,
+    fetchMore,
     refresh,
   };
 };
