@@ -47,6 +47,7 @@ const MyBalancesTable = (): JSX.Element => {
       cell: ({ getValue, row }) => (
         <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
       ),
+      sortingFn: 'alphanumeric',
     }),
     columnHelper.accessor((row) => row.balance.balanceFree, {
       id: 'balanceFree',
@@ -54,6 +55,7 @@ const MyBalancesTable = (): JSX.Element => {
       cell: ({ getValue, row }) => (
         <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
       ),
+      sortingFn: 'alphanumeric',
     }),
     columnHelper.accessor((row) => row.balance.balanceLocked, {
       id: 'balanceLocked',
@@ -61,6 +63,7 @@ const MyBalancesTable = (): JSX.Element => {
       cell: ({ getValue }) => (
         <ZigTablePriceLabel coin='BTC' value={getValue()} />
       ),
+      sortingFn: 'alphanumeric',
     }),
     columnHelper.accessor((row) => row.balance.balanceTotalBTC, {
       id: 'balanceTotalBTC',
@@ -68,11 +71,13 @@ const MyBalancesTable = (): JSX.Element => {
       cell: ({ getValue, row }) => (
         <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
       ),
+      sortingFn: 'alphanumeric',
     }),
     columnHelper.accessor((row) => row.balance.balanceTotalUSDT, {
       id: 'balanceTotalUSDT',
       header: t('tableHeader.valueUSD'),
       cell: ({ getValue }) => <UsdPriceLabel value={getValue()} />,
+      sortingFn: 'alphanumeric',
     }),
     columnHelper.display({
       id: 'action',
