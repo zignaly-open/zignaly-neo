@@ -28,7 +28,6 @@ export default function ZigTable<T extends object>({
   renderSubComponent,
   pagination,
   loading,
-  manualPagination,
   ...rest
 }: ZigTableProps<T>) {
   const [sorting, setSorting] = React.useState<SortingState>(initialState.sorting ?? []);
