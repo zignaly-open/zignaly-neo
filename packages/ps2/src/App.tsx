@@ -7,6 +7,7 @@ import {
   ThemeProvider as ThemeInheritorStyled,
   ThemeProviderMui as ThemeInheritorMui,
 } from '@zignaly-open/ui';
+import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
 import { ToastContainer } from 'react-toastify';
 import { GoogleReCaptchaProvider } from 'react-google-recaptcha-v3';
@@ -44,30 +45,32 @@ function App() {
       <Provider store={store}>
         <ThemeInheritorStyled theme={dark}>
           <ThemeInheritorMui theme={theme}>
-            <GlobalStyle />
-            <ToastContainer
-              position='top-right'
-              autoClose={5000}
-              hideProgressBar
-              closeOnClick
-              pauseOnFocusLoss
-              draggable
-              closeButton={false}
-              pauseOnHover
-              theme='dark'
-            />
-            <PersistGate persistor={persistor} loading={<CenteredLoader />}>
-              <BrowserRouter>
-                <ModalProvider>
-                  <Header />
-                  <UpdateChecker />
-                  <DateLocaleFixer />
-                  <Suspense fallback={null}>
-                    <Router />
-                  </Suspense>
-                </ModalProvider>
-              </BrowserRouter>
-            </PersistGate>
+            <ThemeProviderMui theme={theme}>
+              <GlobalStyle />
+              <ToastContainer
+                position='top-right'
+                autoClose={5000}
+                hideProgressBar
+                closeOnClick
+                pauseOnFocusLoss
+                draggable
+                closeButton={false}
+                pauseOnHover
+                theme='dark'
+              />
+              <PersistGate persistor={persistor} loading={<CenteredLoader />}>
+                <BrowserRouter>
+                  <ModalProvider>
+                    <Header />
+                    <UpdateChecker />
+                    <DateLocaleFixer />
+                    <Suspense fallback={null}>
+                      <Router />
+                    </Suspense>
+                  </ModalProvider>
+                </BrowserRouter>
+              </PersistGate>
+            </ThemeProviderMui>
           </ThemeInheritorMui>
         </ThemeInheritorStyled>
       </Provider>
