@@ -1,8 +1,8 @@
 {
-    "title": "Çekim Talebi",
-    "success": {
-        "title": "Çekim Talep Edildi",
-        "description": "Trader açık pozisyona bağlı fonları serbest bıraktığında fonlarınız kullanılabilir hale gelecektir. Bu işlemin tamamlanması birkaç gün veya daha uzun sürebilir. Bu zaman dilimini Zignaly kontrol etmemektedir, lütfen sabırlı olun.",
-        "button": "Kapat"
-    }
+	"title": "Çekim Talebi",
+	"success": {
+		"title": "Çekim Talep Edildi",
+		"description": "Trader açık pozisyona bağlı fonları serbest bıraktığında fonlarınız kullanılabilir hale gelecektir. Bu işlemin tamamlanması birkaç gün veya daha uzun sürebilir. Bu zaman dilimini Zignaly kontrol etmemektedir, lütfen sabırlı olun.",
+		"button": "Kapat"
+	}
 }

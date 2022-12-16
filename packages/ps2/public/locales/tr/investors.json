@@ -1,28 +1,28 @@
 {
-    "no-investors": "Bu hizmetin henüz bir yatırımcısı yok",
-    "failed-to-load": "Veriler yüklenemedi",
-    "title": "Yatırımcılar",
-    "number-of-investors": "{{count}} Yatırımcı",
-    "number-of-investors_plural": "{{count}} Yatırımcı",
-    "tableHeader": {
-        "email": "E-posta",
-        "userId": "Kullanıcı Kimliği",
-        "investment": "Yatırım",
-        "P&L": "PnL",
-        "P&LTotal": "PnL Toplam",
-        "totalFeesPaid": "Ödenen Toplam Ücret",
-        "successFee": "Başarım Ücreti",
-        "feesZIG": "ZIG olarak ücretler",
-        "status": "Durum"
-    },
-    "loading-arialLabel": "Yatırımcılar yükleniyor",
-    "status": {
-        "connected": "Bağlandı",
-        "pending": "Bekliyor",
-        "soft-disconnect": "Aşamalı Çıkış",
-        "hard-disconnect": "Anında Çıkış",
-        "suspended": "Askıya alındı",
-        "disconnected": "Çıkış yapıldı",
-        "owner": "Sahip"
-    }
+	"no-investors": "Bu hizmetin henüz bir yatırımcısı yok",
+	"failed-to-load": "Veriler yüklenemedi",
+	"title": "Yatırımcılar",
+	"tableHeader": {
+		"email": "E-posta",
+		"userId": "Kullanıcı Kimliği",
+		"investment": "Yatırım",
+		"P&L": "PnL",
+		"P&LTotal": "PnL Toplam",
+		"totalFeesPaid": "Ödenen Toplam Ücret",
+		"successFee": "Başarım Ücreti",
+		"feesZIG": "ZIG olarak ücretler",
+		"status": "Durum"
+	},
+	"loading-arialLabel": "Yatırımcılar yükleniyor",
+	"status": {
+		"connected": "Bağlandı",
+		"pending": "Bekliyor",
+		"soft-disconnect": "Aşamalı Çıkış",
+		"hard-disconnect": "Anında Çıkış",
+		"suspended": "Askıya alındı",
+		"disconnected": "Çıkış yapıldı",
+		"owner": "Sahip"
+	},
+	"number-of-investors_one": "{{count}} Yatırımcı",
+	"number-of-investors_other": "{{count}} Yatırımcı"
 }

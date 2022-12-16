@@ -1,6 +1,8 @@
 {
-    "deposit": "Yatır",
-    "edit": "Düzenle",
-    "save": "Sakla",
-    "withdraw": "Çekim"
+	"deposit": "Yatır",
+	"edit": "Düzenle",
+	"save": "Sakla",
+	"withdraw": "Çekim",
+	"read-more": "Daha fazla",
+	"read-less": "Daha az"
 }
