@@ -11,8 +11,7 @@ export interface InfiniteQueryResponse<T> {
   metadata: PaginationMetadata;
 }
 
-const useInfiniteQuery = (
-  // TODO
+const useInfinitePaginatedQuery = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useGetDataListQuery: UseQuery<any>,
   { limit = 10, ...queryParameters },
@@ -52,4 +51,4 @@ const useInfiniteQuery = (
   };
 };
 
-export default useInfiniteQuery;
+export default useInfinitePaginatedQuery;
