@@ -1,0 +1,35 @@
+{
+  "tableHeader": {
+    "coin": "Coin",
+    "date": "Date",
+    "type": "Type",
+    "amount": "Amount",
+    "transactionId": "Transaction ID",
+    "from": "From",
+    "to": "To",
+    "status": "Status"
+  },
+  "type": {
+    "deposit": "Deposit",
+    "withdrawal": "Withdrawal",
+    "psDeposit": "Profit Sharing Deposit",
+    "psWithdraw": "Profit Sharing Withdrawal",
+    "ps2": "Profit Sharing Internal Transfer",
+    "psds": "PSDS Transfer",
+    "pifa": "PIFA",
+    "buyZig": "Buy Zig",
+    "traderFee": "Trading Fee",
+    "user": "Transfer"
+  },
+  "status": {
+    "pending": "Pending",
+    "completed": "Completed",
+    "error": "Error"
+  },
+  "details": {
+    "from": "From:",
+    "to": "To:",
+    "txHash": "TX Hash:",
+    "note": "Note:"
+  }
+}

@@ -1,6 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { CoinBalances, CoinDetails, DepositInfo } from './types';
+import { CoinBalances, CoinDetails, DepositInfo, Transactions } from './types';
 import baseQuery from '../baseQuery';
+import { isEmpty, omitBy } from 'lodash';
 
 export const api = createApi({
   baseQuery,
@@ -61,6 +62,25 @@ export const api = createApi({
         }, 5000);
       },
     }),
+
+    transactionsHistory: builder.query<
+      Transactions,
+      {
+        exchangeInternalId: string;
+        from?: string;
+        limit?: number;
+        type?: string;
+      }
+    >({
+      query: ({ exchangeInternalId, from, limit, type }) => {
+        const searchParams = new URLSearchParams(
+          omitBy({ from, limit, type }, isEmpty),
+        );
+        return {
+          url: `user/exchanges/${exchangeInternalId}/transactions_history?${searchParams}`,
+        };
+      },
+    }),
   }),
 });
 
@@ -69,4 +89,5 @@ export const {
   useAllCoinsQuery,
   useDepositInfoQuery,
   useWithdrawMutation,
+  useTransactionsHistoryQuery,
 } = api;

@@ -1,6 +1,6 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import NumberFormat from "react-number-format";
+import { NumericFormat } from "react-number-format";
 import Table from "./";
 import PriceLabel from "./components/PriceLabel";
 import PercentageIndicator from "./components/PercentageIndicator";
@@ -405,9 +405,9 @@ ExchangeOrders.args = {
       date: <DateLabel date={new Date("December 2, 1997 20:10:00")} />,
       orderId: "138495028471",
       pair: "XML/USDT",
-      amount: <NumberFormat value={35.978087076} displayType={"text"} thousandSeparator={true} />,
+      amount: <NumericFormat value={35.978087076} displayType={"text"} thousandSeparator={true} />,
       status: "Open",
-      entryPrice: <NumberFormat value={"110.20"} displayType={"text"} thousandSeparator={true} />,
+      entryPrice: <NumericFormat value={"110.20"} displayType={"text"} thousandSeparator={true} />,
       side: "Buy",
       type: "Limit",
     },
@@ -415,9 +415,11 @@ ExchangeOrders.args = {
       date: <DateLabel date={new Date("December 15, 1997 20:10:00")} />,
       orderId: "248495028471",
       pair: "XML/USDT",
-      amount: <NumberFormat value={2352} displayType={"text"} thousandSeparator={true} />,
+      amount: <NumericFormat value={2352} displayType={"text"} thousandSeparator={true} />,
       status: "Open",
-      entryPrice: <NumberFormat value={"21077.20"} displayType={"text"} thousandSeparator={true} />,
+      entryPrice: (
+        <NumericFormat value={"21077.20"} displayType={"text"} thousandSeparator={true} />
+      ),
       side: "Buy",
       type: "Limit",
     },
@@ -425,9 +427,9 @@ ExchangeOrders.args = {
       date: <DateLabel date={new Date("December 7, 1997 20:10:00")} />,
       orderId: "358495028471",
       pair: "XML/USDT",
-      amount: <NumberFormat value={643745} displayType={"text"} thousandSeparator={true} />,
+      amount: <NumericFormat value={643745} displayType={"text"} thousandSeparator={true} />,
       status: "Open",
-      entryPrice: <NumberFormat value={"3109.60"} displayType={"text"} thousandSeparator={true} />,
+      entryPrice: <NumericFormat value={"3109.60"} displayType={"text"} thousandSeparator={true} />,
       side: "Buy",
       type: "Limit",
     },

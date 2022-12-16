@@ -1,42 +1,30 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  Table,
-  PriceLabel,
   CoinLabel,
-  sortByValue,
   UsdPriceLabel,
   IconButton,
+  ZigTable,
+  ZigTablePriceLabel,
+  createColumnHelper,
 } from '@zignaly-open/ui';
-import { MyBalancesTableDataType } from './types';
-import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
+import { BalanceTableDataType } from './types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { allowedDeposits } from 'util/coins';
 import { Add, Remove } from '@mui/icons-material';
-import {
-  useCoinBalances,
-  useExchangeCoinsList,
-} from '../../../../apis/coin/use';
+import { useCoinBalances, useExchangeCoinsList } from 'apis/coin/use';
 import {
   CoinBalance,
   CoinDetail,
   CoinBalances,
   CoinDetails,
-} from '../../../../apis/coin/types';
+} from 'apis/coin/types';
 import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
 import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 import WithdrawModal from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
 import { useZModal } from '../../../../components/ZModal/use';
-
-const initialStateTable = {
-  sortBy: [
-    {
-      id: 'valueUSD',
-      desc: true,
-    },
-  ],
-};
+import { Box } from '@mui/material';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
@@ -45,74 +33,79 @@ const MyBalancesTable = (): JSX.Element => {
   const { exchangeType } = useActiveExchange();
   const { showModal } = useZModal();
 
-  const columns: TableProps<MyBalancesTableDataType>['columns'] = useMemo(
-    () => [
-      {
-        Header: t('tableHeader.coin'),
-        accessor: 'coin',
-        Cell: ({ cell: { value } }) => (
-          <CoinLabel coin={value.symbol} name={value.name} />
-        ),
-        sortType: (a, b) =>
-          a.values.coin?.symbol?.localeCompare(b.values.coin?.symbol),
-      },
-      {
-        Header: t('tableHeader.totalBalance'),
-        accessor: 'total',
-        Cell: ({ cell: { value } }) => (
-          <PriceLabel coin={value.symbol} value={value.balanceTotal} />
-        ),
-        sortType: (a, b) =>
-          sortByValue(a.values.total.balanceTotal, b.values.total.balanceTotal),
-      },
-      {
-        Header: t('tableHeader.availableBalance'),
-        accessor: 'available',
-        Cell: ({ cell: { value } }) => (
-          <PriceLabel coin={value.symbol} value={value.balanceFree} />
-        ),
-        sortType: (a, b) =>
-          sortByValue(
-            a.values.available.balanceFree,
-            b.values.available.balanceFree,
-          ),
-      },
-      {
-        Header: t('tableHeader.lockedBalance'),
-        accessor: 'locked',
-        Cell: ({ cell: { value } }) => (
-          <PriceLabel coin={value.symbol} value={value.balanceLocked} />
-        ),
-        sortType: (a, b) =>
-          sortByValue(a.values.balanceLocked, b.values.balanceLocked),
-      },
-      {
-        Header: t('tableHeader.valueBTC'),
-        accessor: 'valueBTC',
-        Cell: ({ cell: { value } }) => (
-          <PriceLabel coin={'btc'} value={value.balanceTotalBTC} />
-        ),
-        sortType: (a, b) =>
-          sortByValue(
-            a.values.valueBTC.balanceTotalBTC,
-            b.values.valueBTC.balanceTotalBTC,
-          ),
-      },
-      {
-        Header: t('tableHeader.valueUSD'),
-        accessor: 'valueUSD',
-        Cell: ({ cell: { value } }) => (
-          <UsdPriceLabel value={value.balanceTotalUSDT} />
-        ),
-        sortType: (a, b) =>
-          sortByValue(
-            a.values.valueUSD.balanceTotalUSDT,
-            b.values.valueUSD.balanceTotalUSDT,
-          ),
-      },
-    ],
-    [t],
-  );
+  const columnHelper = createColumnHelper<BalanceTableDataType>();
+  const columns = [
+    columnHelper.accessor('coin', {
+      header: t('tableHeader.coin'),
+      cell: ({ getValue, row: { original } }) => (
+        <CoinLabel coin={getValue()} name={original.balance.name} />
+      ),
+    }),
+    columnHelper.accessor((row) => row.balance.balanceTotal, {
+      id: 'totalBalance',
+      header: t('tableHeader.totalBalance'),
+      cell: ({ getValue, row }) => (
+        <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
+      ),
+    }),
+    columnHelper.accessor((row) => row.balance.balanceFree, {
+      id: 'balanceFree',
+      header: t('tableHeader.availableBalance'),
+      cell: ({ getValue, row }) => (
+        <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
+      ),
+    }),
+    columnHelper.accessor((row) => row.balance.balanceLocked, {
+      id: 'balanceLocked',
+      header: t('tableHeader.lockedBalance'),
+      cell: ({ getValue }) => (
+        <ZigTablePriceLabel coin='BTC' value={getValue()} />
+      ),
+    }),
+    columnHelper.accessor((row) => row.balance.balanceTotalBTC, {
+      id: 'balanceTotalBTC',
+      header: t('tableHeader.valueBTC'),
+      cell: ({ getValue, row }) => (
+        <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
+      ),
+    }),
+    columnHelper.accessor((row) => row.balance.balanceTotalUSDT, {
+      id: 'balanceTotalUSDT',
+      header: t('tableHeader.valueUSD'),
+      cell: ({ getValue }) => <UsdPriceLabel value={getValue()} />,
+    }),
+    columnHelper.display({
+      id: 'action',
+      cell: ({ row }) => (
+        <Box display='flex' justifyContent='flex-end'>
+          {!!allowedDeposits[exchangeType]?.includes(row.original.coin) && (
+            <IconButton
+              icon={<Add color={'neutral300'} />}
+              onClick={() =>
+                showModal(DepositModal, {
+                  ctaId: 'balances-table-row',
+                  selectedCoin: row.original.coin,
+                })
+              }
+              variant='secondary'
+            />
+          )}
+          {+row.original.balance.balanceTotal > 0 && (
+            <IconButton
+              icon={<Remove color={'neutral300'} />}
+              onClick={() =>
+                showModal(WithdrawModal, {
+                  ctaId: 'balances-table-row',
+                  selectedCoin: row.original.coin,
+                })
+              }
+              variant='secondary'
+            />
+          )}
+        </Box>
+      ),
+    }),
+  ];
 
   const getFilteredData = useCallback(
     (coins: CoinDetails, balances: CoinBalances) =>
@@ -124,55 +117,7 @@ const MyBalancesTable = (): JSX.Element => {
             allowedDeposits[exchangeType]?.includes(coin) ||
             +balance.balanceTotal > 0,
         )
-        .map(([coin, balance]) => ({
-          coin: { symbol: coin, name: balance.name },
-          total: {
-            symbol: coin,
-            balanceTotal: balance.balanceTotal,
-          },
-          available: {
-            symbol: coin,
-            balanceFree: balance.balanceFree,
-          },
-          locked: {
-            symbol: coin,
-            balanceLocked: balance.balanceLocked,
-          },
-          valueBTC: {
-            balanceTotalBTC: balance.balanceTotalBTC,
-          },
-          valueUSD: {
-            balanceTotalUSDT: balance.balanceTotalUSDT,
-          },
-          action: (
-            <>
-              {!!allowedDeposits[exchangeType]?.includes(coin) && (
-                <IconButton
-                  icon={<Add color={'neutral300'} />}
-                  onClick={() =>
-                    showModal(DepositModal, {
-                      ctaId: 'balances-table-row',
-                      selectedCoin: coin,
-                    })
-                  }
-                  variant='secondary'
-                />
-              )}
-              {+balance.balanceTotal > 0 && (
-                <IconButton
-                  icon={<Remove color={'neutral300'} />}
-                  onClick={() =>
-                    showModal(WithdrawModal, {
-                      ctaId: 'balances-table-row',
-                      selectedCoin: coin,
-                    })
-                  }
-                  variant='secondary'
-                />
-              )}
-            </>
-          ),
-        })),
+        .map(([coin, balance]) => ({ coin, balance })),
     [exchangeType, t],
   );
 
@@ -180,13 +125,17 @@ const MyBalancesTable = (): JSX.Element => {
     <LayoutContentWrapper
       endpoint={[coinsEndpoint, balancesEndpoint]}
       content={([coins, balances]: [CoinDetails, CoinBalances]) => (
-        <Table
-          type={'pagedWithData'}
+        <ZigTable
           columns={columns}
           data={getFilteredData(coins, balances)}
-          initialState={initialStateTable}
-          hideOptionsButton={false}
-          isUserTable={false}
+          initialState={{
+            sorting: [
+              {
+                id: 'balanceTotalUSDT',
+                desc: true,
+              },
+            ],
+          }}
         />
       )}
     />

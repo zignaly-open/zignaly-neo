@@ -6,7 +6,7 @@ import { Column } from "utils/column";
 import { Gap } from "utils/gap";
 import { Row } from "utils/row";
 import { IconContainer } from "./styles";
-import NumberFormat from "react-number-format";
+import { NumericFormat } from "react-number-format";
 import Button from "components/inputs/Button";
 import CoinIcon from "components/display/CoinIcon";
 import { ConfirmWithdrawalModalProps } from "./types";
@@ -30,7 +30,7 @@ const ConfirmWithdrawalModal = ({
           <CoinIcon name={coinName} coin={coinName} />
         </IconContainer>
         <Typography variant="bigNumber" color="neutral100">
-          <NumberFormat value={amount} thousandSeparator={true} displayType={"text"} />
+          <NumericFormat value={amount} thousandSeparator={true} displayType={"text"} />
         </Typography>
         <Typography variant="h3" color="neutral400">
           ZIG
