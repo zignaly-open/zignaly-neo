@@ -6,12 +6,12 @@ export type PaginationMetadata = {
   length: number;
 };
 
-export interface InfiniteListQueryResponse<T> {
+export interface InfiniteQueryResponse<T> {
   items: T[];
   metadata: PaginationMetadata;
 }
 
-const useInfiniteScroll = (
+const useInfiniteQuery = (
   // TODO
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useGetDataListQuery: UseQuery<any>,
@@ -25,7 +25,7 @@ const useInfiniteScroll = (
     from: localPage.id,
   });
   const { items: fetchData, metadata } =
-    (queryResponse?.data as InfiniteListQueryResponse<
+    (queryResponse?.data as InfiniteQueryResponse<
       typeof useGetDataListQuery
     >) || {};
 
@@ -52,4 +52,4 @@ const useInfiniteScroll = (
   };
 };
 
-export default useInfiniteScroll;
+export default useInfiniteQuery;
