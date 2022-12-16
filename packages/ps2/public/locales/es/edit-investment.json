@@ -1,7 +1,7 @@
 {
 	"percentageChangedSuccess": "Porcentaje de ganancia actualizado con éxito.",
 	"addMoreInvestmentSuccess": "Invirtió {{amount}} {{currency}} con éxito en el servicio {{serviceName}}.",
-	"withdrawInvestmentSuccess": "Retirada solicitada con éxito.",
+	"withdrawInvestmentSuccess": "Retiro solicitado con éxito.",
 	"validation-indicateAnAmount": "Debe indicar una cantidad.",
 	"error-blockedInvestment": "Todos sus fondos están pendientes de ser transferidos desde del servicio.",
 	"form": {
@@ -9,7 +9,8 @@
 		"profits": {
 			"title": "Qué hacer con las ganancias:",
 			"left": "Reinvertir",
-			"right": "Retirar"
+			"right": "Retirar",
+			"title-confirmation": "Porcentaje de ganancias a Retirar:"
 		},
 		"inputAmount": {
 			"label": "Monto a Invertir:",
@@ -17,20 +18,21 @@
 		},
 		"link": {
 			"investMore": "Invertir más",
-			"withdraw": "Retirar la inversión"
+			"withdraw": "Retirar Inversión"
 		},
 		"button": {
 			"saveAndClose": "Guardar y Cerrar",
-			"saveAndInvestment": "Ahorre y Añada a la Inversión",
-			"continue-to-confirmation": "Continuar con la Confirmación"
+			"continue-to-confirmation": "Continuar con la Confirmación",
+			"invest-now": "Invierta {{amount}} {{coin}} ahora",
+			"saveAndInvestment": "Ahorre y Añada a la Inversión"
 		}
 	},
 	"pendingMajorThan": {
-		"type": "Nuevas inversiones",
+		"type": "Nueva inversión",
 		"status": "Procesamiento en 24 horas"
 	},
 	"profitOutMajorThan": {
-		"type": "Beneficios",
+		"type": "Ganancias",
 		"status": "Esperando la próxima contabilidad"
 	},
 	"transferOutMajorThan": {
@@ -38,29 +40,29 @@
 		"status": "Esperando la próxima contabilidad"
 	},
 	"pendingTransactions": {
-		"status_zero": "No tienes ninguno",
+		"status_zero": "No tiene ningún artículo",
 		"status_one": "Tiene 1 transacción pendiente",
 		"status_other": "Tienes {{count}} transacciones pendientes",
 		"link-label": "Ver"
 	},
-	"investorDetail-successFee": "{{fee}}% Tasa de éxito",
+	"investorDetail-successFee": "{{fee}}% \nComisión por Beneficios",
 	"modal": {
 		"withdrawInvestment": {
-			"title": "Solicitud de desistimiento",
+			"title": "Solicitud de Retiro",
+			"instant": {
+				"title": "Retiro Instantáneo",
+				"description": "Los retiros instantáneos incurren en una tarifa del 5% porque Zignaly debe cubrir sus fondos y heredar su riesgo.",
+				"button": {
+					"subtitle": "Retirada instantánea",
+					"title": "Comisión 5%"
+				}
+			},
 			"freeWithdrawal": {
-				"title": "Retirada tras el cierre de posiciones",
+				"title": "Retiro Gratuito",
 				"description": "Recibirá sus fondos después de que el trader los libere. Tenga en cuenta que su inversión está en riesgo hasta que sea transferida a usted. Esto suele tardar unos días, pero podría tardar más. Depende de ellos.",
 				"button": {
 					"subtitle": "Retirada de fondos libres",
 					"title": "Sin Comisión"
-				}
-			},
-			"instant": {
-				"title": "Retiro Instantáneo",
-				"description": "Los retiros instantáneos incurren en una tarifa del 5% porque el trader tiene posiciones abiertas y podría liquidarse. Para evitar esto, Zignaly debe cubrir sus fondos y cubrir su riesgo, de ahí la tarifa.",
-				"button": {
-					"subtitle": "Retirada instantánea",
-					"title": "Comisión 5%"
 				}
 			}
 		},
@@ -84,9 +86,12 @@
 		"button": "Cerrar"
 	},
 	"invest-modal": {
+		"invest-with": "Invertir con",
+		"amount-to-invest": "Importe a invertir",
 		"type-transfer": "Escriba la palabra \" {{word}} \" en el campo a continuación para completar la transferencia:",
-		"transfer-error": "Texto introducido incorrecto. Por favor, introduzca la palabra correcta",
+		"transfer-error": "Valor no válido. Por favor escriba la palabra correcta.",
 		"transfer-label": "Transferencia",
-		"i-understand-margin": "Entiendo que todo mi saldo de {{coin}} ahora es parte del colateral y está en riesgo"
+		"i-understand-margin": "Entiendo que todo mi saldo de {{coin}} ahora es parte del colateral y está en riesgo",
+		"i-understand-money-transferred": "Entiendo y acepto que mis fondos sean transferidos al pool del trader y que no será visible en mi saldo disponible"
 	}
 }

@@ -1,0 +1,57 @@
+{
+	"yes": "Sim",
+	"no": "Não",
+	"loading": "Carregando...",
+	"coming-soon": {
+		"title": "Em Breve",
+		"description": "Esta secção está em fase de desenvolvimento e estará disponível numa data posterior."
+	},
+	"no-data": {
+		"title": "Sem Dados",
+		"description": "Não há dados disponíveis. Se acredita que é um problema, entre em contacto com o suporte."
+	},
+	"critical-error": {
+		"title": "Ocorreu um Erro",
+		"description": "Algo deu errado. Tente novamente mais tarde ou entre em contacto com o suporte. Ou abandone a sociedade industrial e construa uma cabana na floresta."
+	},
+	"main-menu": {
+		"dropdown-link-forTrading": "Para Serviços de Trading",
+		"dropdown-link-helpDocs": "Documentos de Ajuda"
+	},
+	"account-menu": {
+		"isAuth-button-logIn": "Iniciar Sessão",
+		"isAuth-button-signUp": "CADASTRAR-SE",
+		"notAuth-dropdown-link-dashboard": "O meu Painel",
+		"notAuth-dropdown-link-balances": "Os Meus Saldos",
+		"notAuth-button-logOut": "Sair"
+	},
+	"account-selector": {
+		"type": {
+			"title": "Tipo:",
+			"futures": "Futuros",
+			"spot": "Spot"
+		}
+	},
+	"navigation-menu": {
+		"profit-sharing": "Profit Sharing"
+	},
+	"amount": "Quantia",
+	"new-version": "Nova versão, clique em mim para actualizar",
+	"validation": {
+		"insufficient-amount": "Fundos insuficientes",
+		"invalid-value": "Valor inválido",
+		"negative-amount": "Deve ser >= 0",
+		"invalid-amount": "Deve indicar uma quantia",
+		"negative-zeroable-amount": "Deve ser > 0"
+	},
+	"back": "Voltar",
+	"close": "Fechar",
+	"404": {
+		"title": "Não encontrado",
+		"description": "Verifique o URL ou as suas escolhas de vida."
+	},
+	"refresh": {
+		"short": "Nova versão disponível, clique aqui para atualizar"
+	},
+	"percent": "{{value, prettyNumber}}%"
+}

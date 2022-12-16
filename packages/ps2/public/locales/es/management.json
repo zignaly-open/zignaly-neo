@@ -6,18 +6,16 @@
 	"availableTrading": "Disponible para trading:",
 	"allocatedTrading": "Asignado para trading:",
 	"hardDisconnected": "Fondos de Desconexión Forzosa:",
-	"disconnectionFunds": "Fondos de Desconexión",
-	"disconnectionFunds-desc": "Fondos disponibles para devolver a los inversores que quieran desconectarse",
 	"availableDisconnection": "Disponible para desconexiones:",
 	"neededSnapshot": "Necesario para la instantánea diaria:",
-	"helper": "¿Necesita ayuda con estas cifras? Consulte nuestro apartado sobre <0>el funcionamiento de los saldos de la participación en los beneficios<\/0>.",
+	"helper": "¿Necesita ayuda con estas cifras? Consulte nuestro apartado sobre <0>el funcionamiento de los saldos de la profit sharing<\/0>.",
 	"minBalance": {
 		"title": "Saldo mínimo:",
 		"success": "Has editado el saldo mínimo con éxito."
 	},
 	"minBalanceModal": {
 		"title": "Editar Saldo Mínimo",
-		"desc": "Establezca el saldo mínimo que desea mantener en la Cuenta de Fondos de Desconexión.",
+		"desc": "Establezca el saldo mínimo que desea mantener en la Cuenta de Fondos de Desconexión. Si el saldo de desconexión es superior al mínimo, durante la contabilidad la diferencia se transferirá automáticamente a la Cuenta de Trading.",
 		"placeholder": "0.0",
 		"labelBalance": "Saldo Mínimo Actual",
 		"save": "Guardar"
@@ -39,9 +37,11 @@
 	},
 	"transferFunds": {
 		"title": "Transferir Fondos",
-		"desc": "Transferir monedas entre mis cuentas de profit sharing."
+		"description": "Transfiera fondos inmediatamente entre la Cuenta de Trading y la Cuenta de Desconexión en su servicio"
 	},
 	"hardDiconnectWarning": "Tus desconexiones forzosas han alcanzado el {perc}%. Si las desconexiones forzosas alcanzan el {maxPerc}% de los fondos del servicio, Zignaly tomará el control de su servicio.",
 	"previousValue": "Valor Anterior:",
-	"loading-arialLabel": "Cargando Gestión"
+	"loading-arialLabel": "Cargando Gestión",
+	"standbyFunds": "Fondos Standby",
+	"standbyFunds-desc": "Fondos disponibles para devolver a los inversores que quieran desconectarse"
 }

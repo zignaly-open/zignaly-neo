@@ -1,0 +1,24 @@
+{
+	"managements-label": "Gerenciar Fundos",
+	"investors-label": "Investidores",
+	"coins-label": "Moedas",
+	"dropdown": {
+		"manageServices": "Gerenciar Serviço",
+		"trade": {
+			"title": "Trade",
+			"links": {
+				"positions": "Minhas Posições",
+				"manual": "Trading Manual",
+				"signals": "Trading Sinais",
+				"api": "Trading API"
+			}
+		},
+		"profile": {
+			"title": "Perfil",
+			"links": {
+				"profile": "Ver Perfil",
+				"profile-edit": "Editar Perfil"
+			}
+		}
+	}
+}

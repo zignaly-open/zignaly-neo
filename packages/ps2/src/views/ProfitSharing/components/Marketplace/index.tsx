@@ -73,7 +73,7 @@ const Marketplace: React.FC = () => {
           sortByValue(a.values.assets.invested, b.values.assets.invested),
       },
       {
-        Header: t('table.n-months', { count: 3 }),
+        Header: t('table.n-months-pnl', { count: 3 }),
         accessor: '90d',
         headerWithFooter: <Inline>{t('table.account-age')}</Inline>,
         Cell: ({ cell: { value } }) => (
@@ -92,7 +92,7 @@ const Marketplace: React.FC = () => {
           sortByValue(a.values['90d'].roi || 0, b.values['90d'].roi || 0),
       },
       {
-        Header: t('table.n-months', { count: 1 }),
+        Header: t('table.n-months-pnl', { count: 1 }),
         accessor: '30d',
         Cell: ({ cell: { value } }) =>
           +value.pnl30d || Object.keys(value.data).length > 1 ? (

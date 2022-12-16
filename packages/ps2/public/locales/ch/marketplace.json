@@ -7,6 +7,8 @@
     "currency": "CH-Báŝë Ĉüѓѓëńĉy",
     "assets": "CH-Áŝŝëṫŝ ïń Ṗööl",
     "nb-investors": "CH-# öḟ ïńvëŝṫöѓŝ",
+    "n-months-pnl_one": "CH-{{count}} ṁöńṫĥ ṖŃL",
+    "n-months-pnl_other": "CH-{{count}} ṁöńṫĥŝ ṖŃL",
     "n-months_one": "CH-{{count}} ṁöńṫĥ",
     "n-months_other": "CH-{{count}} ṁöńṫĥŝ",
     "n-years_one": "CH-{{count}} yëáѓ",

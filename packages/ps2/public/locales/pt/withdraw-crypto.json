@@ -1,0 +1,25 @@
+{
+	"title": "Retirar Criptomoedas",
+	"description": "Retire a criptomoedas para uma conta externa. Para mover fundos entre contas Zignaly, use uma transferência.",
+	"coinSelector": {
+		"label": "Moeda:",
+		"placeholder": "Pesquisar uma moeda"
+	},
+	"networkSelector": {
+		"label": "Rede:",
+		"placeholder": "Escolha a rede"
+	},
+	"withdrawAddress": {
+		"label": "Retirar para o Endereço:",
+		"placeholder": "Cole o endereço da carteira aqui",
+		"warning": "Só enviar {{network}} {{coin}} para este endereço"
+	},
+	"amountToWithdraw": {
+		"label": "Quantidade a retirar:"
+	},
+	"validation": {
+		"indicateAnAddress": "Deve indicar um endereço válido.",
+		"indicateAnAmount": "Deve indicar uma quantia.",
+		"minimumToWithdrawal": "O quantidade mínima de retirada é {{value}} {{coin}}"
+	}
+}
