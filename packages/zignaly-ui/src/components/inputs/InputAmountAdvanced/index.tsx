@@ -4,7 +4,6 @@ import {
   InputContainer,
   InputValue,
   Layout,
-  BalanceContainer,
   BalanceLabel,
   MaxButton,
   Side,
