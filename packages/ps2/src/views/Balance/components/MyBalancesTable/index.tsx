@@ -176,6 +176,7 @@ const MyBalancesTable = (): JSX.Element => {
 
   return (
     <LayoutContentWrapper
+      unmountOnRefetch={true}
       endpoint={[coinsEndpoint, balancesEndpoint]}
       content={([coins, balances]: [CoinDetails, CoinBalances]) => (
         <Table
