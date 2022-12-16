@@ -1,0 +1,97 @@
+{
+	"percentageChangedSuccess": "Percentagem de lucro actualizada com sucesso.",
+	"addMoreInvestmentSuccess": "Investiu {{amount}} {{currency}} com sucesso no serviço {{serviceName}}.",
+	"withdrawInvestmentSuccess": "Retirada solicitada com sucesso.",
+	"validation-indicateAnAmount": "Deve indicar uma quantidade.",
+	"error-blockedInvestment": "Todos os seus fundos estão pendentes para serem transferidos para fora do serviço.",
+	"form": {
+		"title": "Quantidade Investida:",
+		"profits": {
+			"title": "O que fazer com os lucros:",
+			"left": "Reinvestir",
+			"right": "Retirada",
+			"title-confirmation": "Percentagem de lucros a Retirar:"
+		},
+		"inputAmount": {
+			"label": "Quantidade a Investir:",
+			"labelBalance": "Disponível:"
+		},
+		"link": {
+			"investMore": "Invista mais",
+			"withdraw": "Retirada de Investimento"
+		},
+		"button": {
+			"saveAndClose": "Guardar e Fechar",
+			"continue-to-confirmation": "Continuar a Confirmação",
+			"invest-now": "Investir {{amount}}{{coin}} agora",
+			"saveAndInvestment": "Salvar e Adicionar ao Investimento"
+		}
+	},
+	"pendingMajorThan": {
+		"type": "Novo investimento",
+		"status": "Processamento em 24 hrs"
+	},
+	"profitOutMajorThan": {
+		"type": "Lucros",
+		"status": "À espera da próxima contabilidade"
+	},
+	"transferOutMajorThan": {
+		"type": "Transferência para Fora",
+		"status": "Aguardando a próxima contabilidade"
+	},
+	"pendingTransactions": {
+		"status_zero": "Não tem nenhum item",
+		"status_one": "Tem 1 transacção pendente",
+		"status_other": "Tem {{count}} transacções pendentes",
+		"link-label": "Ver"
+	},
+	"investorDetail-successFee": "{{fee}}% Taxa de Sucesso",
+	"modal": {
+		"withdrawInvestment": {
+			"title": "Pedido de Retirada",
+			"instant": {
+				"title": "Retirada Instantânea",
+				"description": "As retiradas instantâneas incorrem numa taxa de 5% porque a Zignaly deve cobrir os seus fundos e herdar o seu risco.",
+				"button": {
+					"subtitle": "Retirada imediata",
+					"title": "5% de Taxa"
+				}
+			},
+			"freeWithdrawal": {
+				"title": "Desconexión Gratuita",
+				"description": "Receberá os seus fundos depois que o trader liberá-los. Considere que o seu investimento está em risco até ser transferido para você. Isso geralmente leva alguns dias, mas pode levar mais. Depende deles.",
+				"button": {
+					"subtitle": "Retirada de fundos livres",
+					"title": "Sem Taxa"
+				}
+			}
+		},
+		"pendingTransaction": {
+			"title": "Transacções Pendentes",
+			"tableHeader": {
+				"amount": "Quantidade",
+				"type": "Tipo",
+				"status": "Estado"
+			},
+			"button": "Voltar"
+		},
+		"editInvestments": {
+			"title": "Editar Investimento",
+			"loading": "Carregamento editar investimento"
+		}
+	},
+	"modalSuccess": {
+		"title": "Processamento de Investimentos (Até 24h)",
+		"description": "Os seus fundos serão transferidos para a conta do serviço dentro de 24 horas. Pode retirar os seus fundos a qualquer momento antes que essa transferência seja feita. Depois que os fundos forem transferidos, poderá sacar por meio de uma desconexão <0>soft<\/0> ou <0>hard.<\/0>",
+		"button": "Fechar"
+	},
+	"invest-modal": {
+		"invest-with": "Invista com",
+		"amount-to-invest": "Quantidade a Investir",
+		"type-transfer": "Escreva a palavra \"{{word}}\" no campo abaixo para completar a transferência:",
+		"transfer-error": "Valor inválido. Por favor, escreva a palavra correcta.",
+		"transfer-label": "Transferência",
+		"i-understand-margin": "Entendo e confirmo que todo o meu {{coin}} saldo faz agora parte do margin e está em risco",
+		"i-understand-money-transferred": "Entendo e confirmo que os meus fundos serão transferidos para o pool do trader e não aparecerão mais no meu saldo disponível"
+	}
+}

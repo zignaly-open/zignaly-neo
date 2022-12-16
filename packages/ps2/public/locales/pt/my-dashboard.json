@@ -1,0 +1,33 @@
+{
+	"title": "O meu Painel",
+	"tableHeader": {
+		"summary": {
+			"title": "O meu Valor Atual",
+			"subtitle": "Rentabilidade"
+		},
+		"serviceName": {
+			"title": "Nome do Serviço",
+			"subtitle": "MAnager\/Moeda base"
+		},
+		"1-mo": {
+			"title": "1 mês",
+			"no-data": "Ainda não há dados a mostrar"
+		},
+		"dailyAvg-title": "Média diária.",
+		"3-mos-title": "3 meses",
+		"6-mos-title": "6 meses",
+		"all": {
+			"title": "Todos",
+			"subtitle": "Idade"
+		}
+	},
+	"table-search-emptyMessage": "Ainda não está conectado a nenhum serviço.",
+	"something-went-wrong": "Algo deu errado",
+	"loading-arialLabel": "Carregar o meu painel",
+	"slider-input": {
+		"labels": {
+			"left": "Reinvestir",
+			"right": "Retirar"
+		}
+	}
+}
