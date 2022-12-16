@@ -1,0 +1,33 @@
+{
+  "name": "@zignaly-open/tracker",
+  "version": "0.1.3",
+  "main": "lib/index.js",
+  "module": "lib/index.es.js",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "webpack --mode=production --node-env=production"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "dependencies": {
+    "webpack-cli": "4.10.0",
+    "ts-loader": "9.2.8",
+    "fork-ts-checker-webpack-plugin": "7.2.3",
+    "tsconfig-paths-webpack-plugin": "3.5.2"
+  },
+  "devDependencies": {
+    "@zignaly-open/eslint-config-zignaly-react": "^0.1.2"
+  }
+}
