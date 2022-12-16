@@ -138,7 +138,7 @@ function InputAmount({
       </Wrapper>
 
       {value?.token?.balance && showBalance && (
-        <Box mt={1}>
+        <BalanceContainer>
           <BalanceLabel variant="body2" color="neutral200">
             {labelBalance}
           </BalanceLabel>
