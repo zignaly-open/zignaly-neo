@@ -139,7 +139,7 @@ function InputAmount({
       </Wrapper>
 
       {value?.token?.balance && showBalance && (
-        <BalanceContainer>
+        <Box mt={1}>
           <BalanceLabel variant="body2" color="neutral200">
             {labelBalance}
           </BalanceLabel>
@@ -155,7 +155,7 @@ function InputAmount({
               fontWeight: 500,
             }}
           />
-        </BalanceContainer>
+        </Box>
       )}
 
       {error && (
