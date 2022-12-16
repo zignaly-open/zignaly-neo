@@ -1,5 +1,5 @@
 import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { useUpdateEffect } from 'react-use';
 
 export type PaginationMetadata = {
@@ -18,12 +18,10 @@ const useInfinitePaginatedQuery = (
   params: Record<string, string | number>,
 ) => {
   const { limit = 10 } = params;
-  // Keep params as reference so we don't trigger a refresh when they change
-  const localParams = useRef(params);
   const [localPage, setLocalPage] = useState({ page: 1, id: '' });
   const [combinedData, setCombinedData] = useState([]);
   const queryResponse = useGetDataListQuery({
-    ...localParams.current,
+    ...params,
     from: localPage.id,
   });
   const { items: fetchData, metadata } =
@@ -40,10 +38,7 @@ const useInfinitePaginatedQuery = (
     setLocalPage({ page: 1, id: '' });
   };
 
-  useUpdateEffect(() => {
-    localParams.current = params;
-    refresh();
-  }, Object.values(params));
+  useUpdateEffect(refresh, Object.values(params));
 
   const fetchMore = () => {
     setLocalPage(({ page }) => ({ page: page + 1, id: metadata.from }));
