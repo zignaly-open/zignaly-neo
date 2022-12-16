@@ -1,4 +1,4 @@
-import { InfiniteListQueryResponse } from 'util/hooks/useInfiniteScroll';
+import { InfiniteQueryResponse } from 'util/hooks/useInfiniteScroll';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type CoinState = {};
@@ -109,4 +109,4 @@ export type Transaction = {
   note?: string;
 };
 
-export type Transactions = InfiniteListQueryResponse<Transaction[]>;
+export type Transactions = InfiniteQueryResponse<Transaction[]>;
