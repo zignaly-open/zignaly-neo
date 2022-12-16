@@ -54,28 +54,28 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const coin = watch('coin') as string;
   const network = watch('network') as string;
 
-  const coinOptions = useMemo(
-    () =>
-      Object.entries(balances)
-        .filter(
-          ([c, balance]) => parseFloat(balance.balanceTotal) > 0 && coins[c],
-        )
-        .map(([c, balance]) => {
-          const name = coins[c]?.name || '';
-          return {
-            value: c,
-            name,
-            label: <CoinOption coin={c} name={name} />,
-            available: balance?.maxWithdrawAmount || 0,
-            networks: coins[c].networks?.map((n) => ({
-              label: n.name,
-              value: n.network,
-              ...n,
-            })),
-          };
-        }),
-    [balances, coins],
-  );
+  const coinOptions = useMemo(() => {
+    if (!balances || !coins) return [];
+
+    return Object.entries(balances)
+      .filter(
+        ([c, balance]) => parseFloat(balance.balanceTotal) > 0 && coins[c],
+      )
+      .map(([c, balance]) => {
+        const name = coins[c]?.name || '';
+        return {
+          value: c,
+          name,
+          label: <CoinOption coin={c} name={name} />,
+          available: balance?.maxWithdrawAmount || 0,
+          networks: coins[c].networks?.map((n) => ({
+            label: n.name,
+            value: n.network,
+            ...n,
+          })),
+        };
+      });
+  }, [balances, coins]);
 
   const coinObject = coin && coinOptions?.find((x) => x.value === coin);
   const networkObject =
@@ -188,7 +188,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
         </Grid>
 
         {!!network && !networkObject?.withdrawEnable ? (
-          <Box mt={7}>
+          <Box mt={2}>
             <ErrorMessage text={networkObject?.withdrawDesc} />
           </Box>
         ) : (
@@ -246,12 +246,13 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
                   name='amount'
                   control={control}
                   label={t('amountToWithdraw.label')}
-                  labelBalance={t('amountToWithdraw.labelBalance')}
                   showUnit={true}
+                  showBalance={false}
                   placeholder='0.0'
                   tokens={[
                     {
                       id: coin,
+                      balance: coinObject.available,
                     },
                   ]}
                   error={t(errors?.amount?.value?.message)}

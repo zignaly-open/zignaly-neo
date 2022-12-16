@@ -38,6 +38,7 @@ function InputAmount({
   showUnit = false,
   fullWidth,
   showMaxButton = true,
+  showBalance = true,
 }: InputAmountProps) {
   const {
     field: { ref, onChange, onBlur, value },
@@ -137,7 +138,7 @@ function InputAmount({
         </InputContainer>
       </Wrapper>
 
-      {value?.token?.balance && (
+      {value?.token?.balance && showBalance && (
         <BalanceContainer>
           <BalanceLabel variant="body2" color="neutral200">
             {labelBalance}
@@ -158,7 +159,7 @@ function InputAmount({
       )}
 
       {error && (
-        <Box mt={value?.token?.balance ? 1 : 0}>
+        <Box mt={value?.token?.balance && showBalance ? 1 : 0}>
           <ErrorMessage text={error} />
         </Box>
       )}
