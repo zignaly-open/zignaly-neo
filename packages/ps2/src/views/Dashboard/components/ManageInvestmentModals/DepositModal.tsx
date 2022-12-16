@@ -23,6 +23,6 @@ function DepositModal({
   );
 }
 
-DepositModal.trackId = 'Deposit';
+DepositModal.trackId = 'deposit';
 
 export default DepositModal;
