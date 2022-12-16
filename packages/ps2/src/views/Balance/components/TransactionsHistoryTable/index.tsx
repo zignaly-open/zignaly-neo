@@ -49,6 +49,7 @@ const TransactionsHistoryTable = () => {
     ) {
       const data = transactionsEndpoint.data
         .slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
+        .sort((a, b) => +new Date(b.datetime) - +new Date(a.datetime))
         .map((transaction) => ({
           ...transaction,
           assetName: coinsEndpoint.data[transaction.asset]?.name,
