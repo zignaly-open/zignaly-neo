@@ -27,7 +27,7 @@ const TransactionsHistoryTable = () => {
   const { pageIndex, pageSize } = pagination;
   const { t } = useTranslation('transactions-history');
   const transactionsEndpoint = useTransactionsHistory({
-    limit: 30,
+    limit: pageSize,
     type: null,
   });
   const coinsEndpoint = useExchangeCoinsList();
