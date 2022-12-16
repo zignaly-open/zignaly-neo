@@ -159,7 +159,7 @@ function InputAmount({
       )}
 
       {error && (
-        <Box mt={value?.token?.balance ? 1 : 0}>
+        <Box mt={value?.token?.balance && showBalance ? 1 : 0}>
           <ErrorMessage text={error} />
         </Box>
       )}
