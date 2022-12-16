@@ -246,12 +246,13 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
                   name='amount'
                   control={control}
                   label={t('amountToWithdraw.label')}
-                  labelBalance={t('amountToWithdraw.labelBalance')}
                   showUnit={true}
+                  showBalance={false}
                   placeholder='0.0'
                   tokens={[
                     {
                       id: coin,
+                      balance: coinObject.available,
                     },
                   ]}
                   error={t(errors?.amount?.value?.message)}
