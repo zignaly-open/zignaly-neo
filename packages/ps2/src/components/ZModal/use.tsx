@@ -1,11 +1,8 @@
 import { ShowFnOutput, useModal, UseModalOptions } from 'mui-modal-provider';
-import { ComponentType, useCallback } from 'react';
-import { track } from '@zignaly-open/tracker';
-import { useCurrentUser } from '../../apis/user/use';
+import { useCallback } from 'react';
 
 export function useZModal(options?: UseModalOptions) {
   const { showModal, ...etc } = useModal(options);
-  const { userId } = useCurrentUser();
   const ourShowModal = useCallback(
     (
       Component: ComponentType & { trackId?: string },
