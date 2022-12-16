@@ -188,7 +188,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
         </Grid>
 
         {!!network && !networkObject?.withdrawEnable ? (
-          <Box mt={7}>
+          <Box mt={2}>
             <ErrorMessage text={networkObject?.withdrawDesc} />
           </Box>
         ) : (
