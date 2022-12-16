@@ -14,18 +14,21 @@ const LayoutContentWrapper = <TData, TError>({
   endpoint,
   content,
   error,
+  unmountOnRefetch = false,
 }: {
   endpoint: EndpointEsque | EndpointEsque[];
   content: (data: TData) => ReactElement;
   error?: (error: TError) => ReactElement;
+  unmountOnRefetch?: boolean;
 }): ReactElement => {
   const isArray = Array.isArray(endpoint);
   const endpoints: EndpointEsque[] = isArray ? endpoint : [endpoint];
   const someError = endpoints.find((x) => x.error)?.error;
   const isLoading = endpoints.some((x) => x.isLoading);
+  const isFetching = endpoints.some((x) => x.isFetching);
   const data = endpoints.every((x) => x.data) && endpoints.map((x) => x.data);
 
-  if (isLoading) return <CenteredLoader />;
+  if (isLoading || (unmountOnRefetch && isFetching)) return <CenteredLoader />;
   if (someError && error) return error(someError as TError);
   if (someError) return <CriticalError />;
   if (!data) return <NoData />;

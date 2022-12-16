@@ -54,30 +54,28 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const coin = watch('coin') as string;
   const network = watch('network') as string;
 
-  const coinOptions = useMemo(
-    () =>
-      Object.entries(balances)
-        .filter(
-          ([c]) =>
-            // parseFloat(balance.balanceTotal) > 0 &&
-            coins[c],
-        )
-        .map(([c, balance]) => {
-          const name = coins[c]?.name || '';
-          return {
-            value: c,
-            name,
-            label: <CoinOption coin={c} name={name} />,
-            available: balance?.maxWithdrawAmount || 0,
-            networks: coins[c].networks?.map((n) => ({
-              label: n.name,
-              value: n.network,
-              ...n,
-            })),
-          };
-        }),
-    [balances, coins],
-  );
+  const coinOptions = useMemo(() => {
+    if (!balances || !coins) return [];
+
+    return Object.entries(balances)
+      .filter(
+        ([c, balance]) => parseFloat(balance.balanceTotal) > 0 && coins[c],
+      )
+      .map(([c, balance]) => {
+        const name = coins[c]?.name || '';
+        return {
+          value: c,
+          name,
+          label: <CoinOption coin={c} name={name} />,
+          available: balance?.maxWithdrawAmount || 0,
+          networks: coins[c].networks?.map((n) => ({
+            label: n.name,
+            value: n.network,
+            ...n,
+          })),
+        };
+      });
+  }, [balances, coins]);
 
   const coinObject = coin && coinOptions?.find((x) => x.value === coin);
   const networkObject =

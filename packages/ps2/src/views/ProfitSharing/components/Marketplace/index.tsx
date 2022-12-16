@@ -142,6 +142,7 @@ const Marketplace: React.FC = () => {
   return (
     <PageContainer>
       <LayoutContentWrapper
+        unmountOnReFetch={false}
         endpoint={marketplaceEndpoint}
         content={(services: MarketplaceService[]) => (
           <>
