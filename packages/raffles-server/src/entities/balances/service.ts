@@ -2,6 +2,11 @@ import { Balance } from './model';
 import { ContextBalance } from '../../types';
 
 export const generateService = () => {
+  const getAll = async (data: any) => {
+    console.log('data', data, Balance.findAll(data).then((res) => console.log(res)));
+    return Balance.findAll(data);
+  };
+
   const getWalletAmountBalance = async (walletAddress: string) => {
     return Balance.aggregate('amount', 'sum', {
       where: {
@@ -78,6 +83,7 @@ export const generateService = () => {
   };
 
   return {
+    getAll,
     getWalletAmountBalance,
     getWalletTransactions,
     getWalletZhitsBalance,

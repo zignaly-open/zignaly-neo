@@ -29,7 +29,7 @@ export class Balance extends Model {
   public blockchain: string;
 
   @Column
-  public TransactionType: TransactionType;
+  public transactionType: TransactionType;
 
   @Column
   public note: string;

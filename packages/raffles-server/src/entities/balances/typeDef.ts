@@ -4,7 +4,7 @@ export const typeDef = gql`
   type Balance {
     id: ID!
     walletAddress: String!
-    node: String!
+    note: String!
     amount: String!
     currency: String!
     zhits: Int!
@@ -23,6 +23,7 @@ export const typeDef = gql`
 
   extend type Query {
     balances: [Balance]
+    allBalances: [Balance]
     getBalanceByWalletAddress(walletAddress: String!): [AmountBalance]
     getZhitsByWalletAddress(walletAddress: String!): [ZhitsBalance]
   }
