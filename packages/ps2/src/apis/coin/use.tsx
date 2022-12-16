@@ -47,13 +47,6 @@ export function useTransactionsHistory(
     },
   );
 
-  // Reset data on filter change
-  useUpdateEffect(infinitePaginatedQuery.refresh, [
-    filters.limit,
-    filters.type,
-    exchange?.internalId,
-  ]);
-
   return infinitePaginatedQuery;
 }
 
