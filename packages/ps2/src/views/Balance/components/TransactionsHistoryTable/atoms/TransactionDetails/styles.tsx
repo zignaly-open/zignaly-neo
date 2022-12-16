@@ -15,10 +15,12 @@ export const TransactionPanel = styled('div')`
 `;
 
 export const TypographyPanelLabel = styled(ZigTypography)`
-  margin-right: 16px;
-  color: ${({ theme }) => theme.palette.neutral000};
-  font-weight: 600;
-  font-size: 15px;
+  && {
+    margin-right: 16px;
+    color: ${({ theme }) => theme.palette.neutral000};
+    font-weight: 600;
+    font-size: 15px;
+  }
 `;
 
 export const TypographyAddress = styled((props) => (
