@@ -7,7 +7,7 @@ import {
 import { useActiveExchange } from '../user/use';
 import { CoinBalances, CoinDetails, DepositInfo } from './types';
 import { QueryReturnType } from '../../util/queryReturnType';
-import useInfiniteQuery from 'util/hooks/useInfiniteScroll';
+import useInfinitePaginatedQuery from 'util/hooks/useInfinitePaginatedQuery';
 import { useUpdateEffect } from 'react-use';
 
 export function useCoinBalances(options?: {
@@ -39,19 +39,22 @@ export function useTransactionsHistory(
   } = {},
 ) {
   const exchange = useActiveExchange();
-  const infiniteScroll = useInfiniteQuery(useTransactionsHistoryQuery, {
-    exchangeInternalId: exchange?.internalId,
-    ...filters,
-  });
+  const infinitePaginatedQuery = useInfinitePaginatedQuery(
+    useTransactionsHistoryQuery,
+    {
+      exchangeInternalId: exchange?.internalId,
+      ...filters,
+    },
+  );
 
   // Reset data on filter change
-  useUpdateEffect(infiniteScroll.refresh, [
+  useUpdateEffect(infinitePaginatedQuery.refresh, [
     filters.limit,
     filters.type,
     exchange?.internalId,
   ]);
 
-  return infiniteScroll;
+  return infinitePaginatedQuery;
 }
 
 export function useDepositInfo(

@@ -1,4 +1,4 @@
-import { InfiniteQueryResponse } from 'util/hooks/useInfiniteScroll';
+import { InfiniteQueryResponse } from 'util/hooks/useInfinitePaginatedQuery';
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type CoinState = {};
