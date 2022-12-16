@@ -5,9 +5,12 @@ import { Transaction, TransactionType } from 'apis/coin/types';
 import ChainIcon from '../ChainIcon';
 import ServiceLink from '../ProviderLink';
 import ZignalyAccount from '../TransferZigLabel';
-import { Side } from './types';
+import { Side, SideType } from './types';
 
-const getTransactionSideType = (txType: TransactionType, side: Side) => {
+const getTransactionSideType = (
+  txType: TransactionType,
+  side: Side,
+): SideType => {
   if (
     ([TransactionType.PS_DEPOSIT, TransactionType.PS2_DEPOSIT].includes(
       txType,
