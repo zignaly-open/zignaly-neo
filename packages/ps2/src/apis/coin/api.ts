@@ -46,10 +46,8 @@ export const api = createApi({
         type?: string;
       }
     >({
-      query: ({ exchangeInternalId, from, limit, type }) => {
-        const searchParams = new URLSearchParams(
-          omitBy({ from, limit, type }, isEmpty),
-        );
+      query: ({ exchangeInternalId, ...params }) => {
+        const searchParams = new URLSearchParams(omitBy(params, isEmpty));
         return {
           url: `user/exchanges/${exchangeInternalId}/transactions_history?${searchParams}`,
         };
