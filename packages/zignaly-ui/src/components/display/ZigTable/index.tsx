@@ -27,8 +27,8 @@ export default function ZigTable<T extends object>({
   columnVisibility: enableColumnVisibility = true,
   renderSubComponent,
   pagination,
-  onPaginationChange,
   loading,
+  manualPagination,
   ...rest
 }: ZigTableProps<T>) {
   const [sorting, setSorting] = React.useState<SortingState>(initialState.sorting ?? []);
@@ -40,15 +40,13 @@ export default function ZigTable<T extends object>({
     state: {
       sorting,
       columnVisibility,
-      pagination,
+      ...(pagination && { pagination }),
     },
-    pageCount: -1,
-    onPaginationChange,
     onColumnVisibilityChange: setColumnVisibility,
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
     getCoreRowModel: getCoreRowModel(),
-    ...(pagination && { getPaginationRowModel: getPaginationRowModel() }),
+    ...(pagination !== false && { getPaginationRowModel: getPaginationRowModel() }),
     getExpandedRowModel: getExpandedRowModel(),
     getRowCanExpand: () => !!renderSubComponent,
     debugTable: false,
@@ -155,7 +153,7 @@ export default function ZigTable<T extends object>({
           })}
         </tbody>
       </Table>
-      {pagination && (
+      {pagination !== false && (
         <Box p="22px" display="flex" alignItems="center" justifyContent="center">
           <Box display="flex" flex={3} justifyContent="flex-start" />
           <Box justifyContent="center" display="flex" gap={1} alignItems="center" flex={3}>
