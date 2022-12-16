@@ -25,7 +25,7 @@ import UserSettingsModal from '../Modals/UserSettings';
 import { useMediaQuery } from '@mui/material';
 import theme from 'theme';
 import { People, Redeem } from '@mui/icons-material';
-import { triggerTz, useTz } from 'util/tz';
+import { useTz } from 'util/tz';
 import { getToken } from 'util/token';
 
 const StyledPeopleIcon = styled(People)`
@@ -72,7 +72,7 @@ const Header = () => {
   useEffect(() => {
     // Avoid making an unnecessary request if user id is loading
     if (!token || currentUser?.id) {
-      triggerTz(href, currentUser?.publicAddress);
+      track();
     }
   }, [href, currentUser, token]);
 
