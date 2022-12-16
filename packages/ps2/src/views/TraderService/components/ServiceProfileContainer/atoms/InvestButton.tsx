@@ -18,8 +18,9 @@ import { Box } from '@mui/material';
 
 const InvestButton: React.FC<{
   service: Service;
+  ctaId?: string;
   showMultipleAccountButton?: boolean;
-}> = ({ service, showMultipleAccountButton }) => {
+}> = ({ service, ctaId, showMultipleAccountButton }) => {
   const { t } = useTranslation('service');
   const isAuthenticated = useIsAuthenticated();
   const { showModal } = useZModal({ disableAutoDestroy: true });
@@ -47,7 +48,13 @@ const InvestButton: React.FC<{
         return;
       }
       selectInvestment(serviceToInvestmentServiceDetail(service));
-      showModal(InvestModal);
+      const showDeposit = +balance === 0;
+      if (showDeposit)
+        showModal(DepositModal, {
+          allowedCoins: [service.ssc],
+          ctaId,
+        });
+      else showModal(InvestModal, { ctaId });
     } else {
       setMissedRoute();
       navigate(ROUTE_LOGIN);

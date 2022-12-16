@@ -46,10 +46,12 @@ const BigNumber: React.FC<{
 
 const InvestedButton: React.FC<{
   service: Service;
-}> = ({ service }) => {
+  ctaId?: string;
+}> = ({ ctaId, service }) => {
   const { investedAmount } = useIsInvestedInService(service.id);
   return (
     <InvestedButtonBase
+      ctaId={ctaId}
       showMultipleAccountButton
       service={service}
       investedAmount={investedAmount}
@@ -59,10 +61,11 @@ const InvestedButton: React.FC<{
 
 export const InvestedButtonBase: React.FC<{
   service: Service;
+  ctaId?: string;
   investedAmount: string;
   showMultipleAccountButton?: boolean;
-}> = ({ service, investedAmount, showMultipleAccountButton }) => {
-  const { showModal } = useZModal();
+}> = ({ service, investedAmount, ctaId, showMultipleAccountButton }) => {
+  const { showModal } = useZModal({ disableAutoDestroy: true });
   const selectInvestment = useSetSelectedInvestment();
   const investedFromAccounts = useInvestedAccountsCount(service.id, {
     skip: !showMultipleAccountButton,
@@ -70,7 +73,7 @@ export const InvestedButtonBase: React.FC<{
 
   const onClickEditInvestment = () => {
     selectInvestment(serviceToInvestmentServiceDetail(service));
-    showModal(EditInvestmentModal);
+    showModal(EditInvestmentModal, { ctaId });
   };
 
   const { t } = useTranslation(['service', 'action']);

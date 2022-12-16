@@ -151,6 +151,7 @@ const MyBalancesTable = (): JSX.Element => {
                   icon={<Add color={'neutral300'} />}
                   onClick={() =>
                     showModal(DepositModal, {
+                      ctaId: 'balances-table-row',
                       selectedCoin: coin,
                     })
                   }
@@ -162,6 +163,7 @@ const MyBalancesTable = (): JSX.Element => {
                   icon={<Remove color={'neutral300'} />}
                   onClick={() =>
                     showModal(WithdrawModal, {
+                      ctaId: 'balances-table-row',
                       selectedCoin: coin,
                     })
                   }

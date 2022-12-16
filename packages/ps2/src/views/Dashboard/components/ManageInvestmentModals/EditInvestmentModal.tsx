@@ -90,4 +90,6 @@ function EditInvestmentModal({
   );
 }
 
+EditInvestmentModal.trackId = 'edit-investment';
+
 export default EditInvestmentModal;
