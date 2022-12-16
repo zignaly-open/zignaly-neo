@@ -257,11 +257,13 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
                   ]}
                   error={t(errors?.amount?.value?.message)}
                 />
-                <LabelValueLine
-                  label={t('amountToWithdraw.labelBalance')}
-                  value={coinObject.available.toString()}
-                  coin={coin}
-                />
+                <Box mt={1}>
+                  <LabelValueLine
+                    label={t('amountToWithdraw.labelBalance')}
+                    value={coinObject.available.toString()}
+                    coin={coin}
+                  />
+                </Box>
                 {networkObject && (
                   <>
                     <LabelValueLine
