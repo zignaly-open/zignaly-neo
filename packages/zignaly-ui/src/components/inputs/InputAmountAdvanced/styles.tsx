@@ -18,7 +18,6 @@ export const InputContainer = styled.div`
   align-items: center;
   background: rgba(16, 18, 37, 0.7);
   margin-top: 4px;
-  margin-bottom: 8px;
   gap: 22px;
   width: 100%;
   overflow: hidden;
@@ -37,8 +36,6 @@ export const InputValue = styled.input`
   width: 100%;
   font-family: "Avenir Next", sans-serif;
 `;
-
-export const BalanceContainer = styled.div``;
 
 export const BalanceLabel = styled(Typography)`
   padding-right: 4px;
