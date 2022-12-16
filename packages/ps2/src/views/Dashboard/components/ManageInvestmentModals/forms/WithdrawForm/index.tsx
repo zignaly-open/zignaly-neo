@@ -58,7 +58,9 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
     () =>
       Object.entries(balances)
         .filter(
-          ([c, balance]) => parseFloat(balance.balanceTotal) > 0 && coins[c],
+          ([c]) =>
+            // parseFloat(balance.balanceTotal) > 0 &&
+            coins[c],
         )
         .map(([c, balance]) => {
           const name = coins[c]?.name || '';
@@ -188,7 +190,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
         </Grid>
 
         {!!network && !networkObject?.withdrawEnable ? (
-          <Box mt={7}>
+          <Box mt={2}>
             <ErrorMessage text={networkObject?.withdrawDesc} />
           </Box>
         ) : (
