@@ -9,6 +9,8 @@ export const typeDef = gql`
     amount: Int!
     currency: String!
     zhits: Int!
+    fromAddressWallet: String
+    toAddressWallet: String
   }
 
   type AmountBalance {
@@ -28,15 +30,17 @@ export const typeDef = gql`
     getBalanceByWalletAddress(walletAddress: String!): [AmountBalance]
     getZhitsByWalletAddress(walletAddress: String!): [ZhitsBalance]
     getDepositsByWalletAddress(walletAddress: String!): [Balance]
+    getInternalTransfersByWalletAddress(walletAddress: String!): [Balance]
   }
 
   extend type Mutation {
     internalTransfer(
       walletAddress: String!
-      transactionType: String!
       amount: Int!
       currency: String!
-      zhits: Int!
+      zhits: Int
+      fromAddressWallet: String!
+      toAddressWallet: String!
     ): Balance
     deposit(
       walletAddress: String!

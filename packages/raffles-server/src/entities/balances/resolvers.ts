@@ -30,13 +30,24 @@ export const resolvers = {
         data.walletAddress,
         'deposit',
       ),
+    getInternalTransfersByWalletAddress: async (
+      _: any,
+      data: { walletAddress: string },
+      { services }: ApolloContext,
+    ) =>
+      services.Balance.getTransactionsTypeByWalletAddress(
+        data.walletAddress,
+        'internalTransfer',
+      ),
   },
   Mutation: {
     internalTransfer: async (
       _: any,
       data: ContextBalance,
       { services }: ApolloContext,
-    ) => services.Balance.internalTransfer(data),
+    ) => {
+      return services.Balance.internalTransfer(data);
+    },
 
     deposit: async (
       _: any,

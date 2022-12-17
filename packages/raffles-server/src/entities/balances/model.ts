@@ -39,4 +39,10 @@ export class Balance extends Model {
 
   @Column
   public zhits: number;
+
+  @Column
+  public fromAddressWallet: string;
+
+  @Column
+  public toAddressWallet: string;
 }

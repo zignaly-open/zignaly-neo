@@ -49,16 +49,35 @@ export const generateService = () => {
     blockchain,
     currency,
     zhits,
+    fromAddressWallet,
+    toAddressWallet,
   }: ContextBalance) => {
-    addTransaction({
-      walletAddress,
-      blockchain,
-      currency,
-      transactionType: 'transfer',
-      note: 'internal transfer',
-      amount,
-      zhits,
-    });
+    try {
+      await addTransaction({
+        walletAddress,
+        blockchain,
+        currency,
+        transactionType: 'transfer',
+        note: 'internal transfer',
+        amount: -amount,
+        zhits,
+        fromAddressWallet,
+        toAddressWallet,
+      });
+      await addTransaction({
+        walletAddress: toAddressWallet,
+        blockchain,
+        currency,
+        transactionType: 'transfer',
+        note: 'internal transfer',
+        amount: amount,
+        zhits,
+        fromAddressWallet,
+        toAddressWallet,
+      });
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   const deposit = async ({
@@ -87,6 +106,8 @@ export const generateService = () => {
     amount,
     note,
     zhits,
+    fromAddressWallet,
+    toAddressWallet,
   }: ContextBalance) => {
     if (!walletAddress) return null;
 
@@ -99,6 +120,8 @@ export const generateService = () => {
         note,
         amount,
         zhits,
+        fromAddressWallet,
+        toAddressWallet,
       });
 
       return {

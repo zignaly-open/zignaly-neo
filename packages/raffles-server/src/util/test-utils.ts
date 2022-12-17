@@ -22,6 +22,7 @@ import {
   DEFAULT_REQ_MINIMUM_DEPOSIT,
   DEFAULT_REWARD_DIRECT,
 } from '../entities/codes/constants';
+import { Balance } from '../entities/balances/model';
 
 const request = supertest(app);
 
@@ -466,6 +467,7 @@ export async function wipeOut() {
       await CodeRedemption.destroy(options);
       await Code.destroy(options);
       await User.destroy(options);
+      await Balance.destroy(options);
     } catch (e) {
       console.error(e);
     }

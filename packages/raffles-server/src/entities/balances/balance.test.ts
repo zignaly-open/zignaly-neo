@@ -118,9 +118,8 @@ describe('Balances', () => {
     });
 
     it('should be able to get deposits by wallet', async () => {
-      try {
-        const token = await getToken();
-        const addDeposit = `
+      const token = await getToken();
+      const addDeposit = `
         mutation {
           deposit(
             walletAddress: "0x0001"
@@ -140,8 +139,8 @@ describe('Balances', () => {
           }
         }
         `;
-        await makeRequest(addDeposit, token);
-        const walletDeposits = `
+      await makeRequest(addDeposit, token);
+      const walletDeposits = `
         query {
           getDepositsByWalletAddress(walletAddress: "0x0001") {
             id
@@ -154,23 +153,96 @@ describe('Balances', () => {
           }
         }
         `;
-        const expectedDeposit = {
-          id: '2',
+      const expectedDeposit = {
+        id: '2',
+        walletAddress: '0x0001',
+        transactionType: 'deposit',
+        note: 'deposit',
+        amount: 100,
+        currency: 'ETH',
+        zhits: 0,
+      };
+
+      const response = await makeRequest(walletDeposits, token);
+      expect(response.body.data.getDepositsByWalletAddress[0]).toEqual(
+        expectedDeposit,
+      );
+    });
+  });
+
+  describe('internal transfers', () => {
+    it('can add a new internal transfer in balance', async () => {
+      const token = await getToken();
+      const query = `
+        mutation {
+          internalTransfer(
+            walletAddress: "0x0001"
+            amount: 100
+            currency: "ETH"
+            zhits: 0
+            fromAddressWallet: "0x0001"
+            toAddressWallet: "0x0002"
+          ) {
+            id
+            walletAddress
+            transactionType
+            note
+            amount
+            currency
+            zhits
+            fromAddressWallet
+            toAddressWallet
+          }
+        }
+        `;
+      await makeRequest(query, token);
+
+      // console.log(resp);
+
+      const transfersBalance = `
+      query {
+        allBalances {
+          id
+          walletAddress
+          transactionType
+          note
+          amount
+          currency
+          zhits
+          fromAddressWallet
+          toAddressWallet
+        }
+      }
+      `;
+
+      const expectedTransfers = [
+        {
+          id: '3',
           walletAddress: '0x0001',
-          transactionType: 'deposit',
-          note: 'deposit',
+          transactionType: 'transfer',
+          note: 'internal transfer',
+          amount: -100,
+          currency: 'ETH',
+          zhits: 0,
+          fromAddressWallet: '0x0001',
+          toAddressWallet: '0x0002',
+        },
+        {
+          id: '4',
+          walletAddress: '0x0002',
+          transactionType: 'transfer',
+          note: 'internal transfer',
           amount: 100,
           currency: 'ETH',
           zhits: 0,
-        };
+          fromAddressWallet: '0x0001',
+          toAddressWallet: '0x0002',
+        },
+      ];
 
-        const response = await makeRequest(walletDeposits, token);
-        expect(response.body.data.getDepositsByWalletAddress[0]).toEqual(
-          expectedDeposit,
-        );
-      } catch (error) {
-        console.log(error);
-      }
+      const response = await makeRequest(transfersBalance, token);
+      console.log('response', response.body.data.allBalances);
+      expect(response.body.data.allBalances).toEqual(expectedTransfers);
     });
   });
 });

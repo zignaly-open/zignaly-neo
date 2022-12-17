@@ -16,9 +16,11 @@ export type ContextBalance = {
   blockchain: string;
   currency: string;
   transactionType?: string;
-  amount: string;
+  amount: number;
   note?: string;
   zhits: number;
+  fromAddressWallet?: string;
+  toAddressWallet?: string;
 };
 
 type ServiceAuction = ReturnType<typeof generateServiceAuction>;
