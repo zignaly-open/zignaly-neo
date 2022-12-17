@@ -48,7 +48,6 @@ export const resolvers = {
     ) => {
       return services.Balance.internalTransfer(data);
     },
-
     deposit: async (
       _: any,
       data: ContextBalance,

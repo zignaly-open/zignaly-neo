@@ -45,4 +45,7 @@ export class Balance extends Model {
 
   @Column
   public toAddressWallet: string;
+
+  @Column
+  public locked: boolean;
 }

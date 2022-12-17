@@ -11,6 +11,7 @@ export const typeDef = gql`
     zhits: Int!
     fromAddressWallet: String
     toAddressWallet: String
+    locked: Boolean
   }
 
   type AmountBalance {
@@ -25,7 +26,6 @@ export const typeDef = gql`
   }
 
   extend type Query {
-    balances: [Balance]
     allBalances: [Balance]
     getBalanceByWalletAddress(walletAddress: String!): [AmountBalance]
     getZhitsByWalletAddress(walletAddress: String!): [ZhitsBalance]
@@ -41,6 +41,7 @@ export const typeDef = gql`
       zhits: Int
       fromAddressWallet: String!
       toAddressWallet: String!
+      locked: Boolean
     ): Balance
     deposit(
       walletAddress: String!

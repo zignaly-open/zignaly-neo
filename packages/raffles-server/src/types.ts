@@ -21,6 +21,7 @@ export type ContextBalance = {
   zhits: number;
   fromAddressWallet?: string;
   toAddressWallet?: string;
+  locked?: boolean;
 };
 
 type ServiceAuction = ReturnType<typeof generateServiceAuction>;

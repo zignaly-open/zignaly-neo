@@ -182,6 +182,7 @@ describe('Balances', () => {
             zhits: 0
             fromAddressWallet: "0x0001"
             toAddressWallet: "0x0002"
+            locked: false
           ) {
             id
             walletAddress
@@ -241,7 +242,6 @@ describe('Balances', () => {
       ];
 
       const response = await makeRequest(transfersBalance, token);
-      console.log('response', response.body.data.allBalances);
       expect(response.body.data.allBalances).toEqual(expectedTransfers);
     });
   });

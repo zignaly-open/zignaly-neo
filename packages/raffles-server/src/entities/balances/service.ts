@@ -18,6 +18,15 @@ export const generateService = () => {
     });
   };
 
+  const getWalletDepositBalance = async (walletAddress: string) => {
+    return Balance.aggregate('amount', 'sum', {
+      where: {
+        walletAddress,
+        transactionType: 'deposit',
+      },
+    });
+  };
+
   const getWalletAmountBalance = async (walletAddress: string) => {
     return Balance.aggregate('amount', 'sum', {
       where: {
@@ -51,9 +60,10 @@ export const generateService = () => {
     zhits,
     fromAddressWallet,
     toAddressWallet,
+    locked,
   }: ContextBalance) => {
     try {
-      await addTransaction({
+      const respIn = await addTransaction({
         walletAddress,
         blockchain,
         currency,
@@ -63,6 +73,7 @@ export const generateService = () => {
         zhits,
         fromAddressWallet,
         toAddressWallet,
+        locked,
       });
       await addTransaction({
         walletAddress: toAddressWallet,
@@ -75,6 +86,7 @@ export const generateService = () => {
         fromAddressWallet,
         toAddressWallet,
       });
+      return respIn.id;
     } catch (e) {
       console.error(e);
     }
@@ -137,6 +149,7 @@ export const generateService = () => {
     getAll,
     getTransactionsTypeByWalletAddress,
     getWalletAmountBalance,
+    getWalletDepositBalance,
     getWalletTransactions,
     getWalletZhitsBalance,
     internalTransfer,
