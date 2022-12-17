@@ -25,7 +25,8 @@ export const resolvers = {
       _: any,
       data: { walletAddress: string },
       { services }: ApolloContext,
-    ) => services.Balance.getTransactionsTypeByWalletAddress(
+    ) =>
+      services.Balance.getTransactionsTypeByWalletAddress(
         data.walletAddress,
         'deposit',
       ),
