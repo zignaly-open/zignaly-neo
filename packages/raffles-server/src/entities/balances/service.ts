@@ -3,8 +3,19 @@ import { ContextBalance } from '../../types';
 
 export const generateService = () => {
   const getAll = async (data: any) => {
-    console.log('data', data, Balance.findAll(data).then((res) => console.log(res)));
     return Balance.findAll(data);
+  };
+
+  const getTransactionsTypeByWalletAddress = async (
+    walletAddress: string,
+    transactionType: string,
+  ) => {
+    return Balance.findAll({
+      where: {
+        walletAddress,
+        transactionType,
+      },
+    });
   };
 
   const getWalletAmountBalance = async (walletAddress: string) => {
@@ -39,13 +50,30 @@ export const generateService = () => {
     currency,
     zhits,
   }: ContextBalance) => {
-    console.log('internalTransfer');
     addTransaction({
       walletAddress,
       blockchain,
       currency,
       transactionType: 'transfer',
       note: 'internal transfer',
+      amount,
+      zhits,
+    });
+  };
+
+  const deposit = async ({
+    walletAddress,
+    amount,
+    blockchain,
+    currency,
+    zhits,
+  }: ContextBalance) => {
+    addTransaction({
+      walletAddress,
+      blockchain,
+      currency,
+      transactionType: 'deposit',
+      note: 'deposit',
       amount,
       zhits,
     });
@@ -84,9 +112,11 @@ export const generateService = () => {
 
   return {
     getAll,
+    getTransactionsTypeByWalletAddress,
     getWalletAmountBalance,
     getWalletTransactions,
     getWalletZhitsBalance,
     internalTransfer,
+    deposit,
   };
 };

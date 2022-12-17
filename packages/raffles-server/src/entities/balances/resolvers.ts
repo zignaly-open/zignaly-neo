@@ -1,4 +1,5 @@
 import { ApolloContext, ResourceOptions } from '../../types';
+import { ContextBalance } from '../../types';
 
 export const resolvers = {
   Query: {
@@ -19,5 +20,27 @@ export const resolvers = {
       walletAddress: string,
       { services }: ApolloContext,
     ) => services.Balance.getWalletZhitsBalance(walletAddress),
+
+    getDepositsByWalletAddress: async (
+      _: any,
+      data: { walletAddress: string },
+      { services }: ApolloContext,
+    ) => services.Balance.getTransactionsTypeByWalletAddress(
+        data.walletAddress,
+        'deposit',
+      ),
+  },
+  Mutation: {
+    internalTransfer: async (
+      _: any,
+      data: ContextBalance,
+      { services }: ApolloContext,
+    ) => services.Balance.internalTransfer(data),
+
+    deposit: async (
+      _: any,
+      data: ContextBalance,
+      { services }: ApolloContext,
+    ) => services.Balance.deposit(data),
   },
 };

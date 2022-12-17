@@ -1,15 +1,12 @@
 import {
   PrimaryKey,
   Column,
-  ForeignKey,
   AutoIncrement,
   Unique,
   Model,
   Table,
   Validate,
-  DataType,
 } from 'sequelize-typescript';
-import { Auction } from '../auctions/model';
 import { TransactionType } from '../../types';
 
 @Table
@@ -34,13 +31,12 @@ export class Balance extends Model {
   @Column
   public note: string;
 
-  @Column(DataType.DECIMAL)
-  public amount!: string;
+  @Column
+  public amount!: number;
 
   @Column
   public currency: string;
 
-  @ForeignKey(() => Auction)
   @Column
   public zhits: number;
 }
