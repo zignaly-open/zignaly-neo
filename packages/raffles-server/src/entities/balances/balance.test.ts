@@ -44,129 +44,133 @@ describe('Balances', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
 
-  it('can query all balances', async () => {
-    const query = `
-      query {
-        allBalances {
-          id
-          walletAddress
-          transactionType
-          note
-          amount
-          currency
-          zhits
+  describe('transactions', () => {
+    it('can query all balances', async () => {
+      const query = `
+        query {
+          allBalances {
+            id
+            walletAddress
+            transactionType
+            note
+            amount
+            currency
+            zhits
+          }
         }
-      }
-    `;
-    const response = await makeRequest(query, '');
-    expect(response.body.data.allBalances).toBeDefined();
-  });
-
-  it('can add a new deposit in balance', async () => {
-    const token = await getToken();
-    const query = `
-      mutation {
-        deposit(
-          walletAddress: "0x0000"
-          transactionType: "deposit"
-          note: "deposit"
-          amount: 100
-          currency: "ETH"
-          zhits: 0
-        ) {
-          id
-          walletAddress
-          transactionType
-          note
-          amount
-          currency
-          zhits
-        }
-      }
       `;
-
-    const response = await makeRequest(query, token);
-    expect(response.body.data.deposit).toBeDefined();
-
-    const queryDeposit = `
-      query {
-        allBalances {
-          id
-          walletAddress
-          transactionType
-          note
-          amount
-          currency
-          zhits
-        }
-      }
-    `;
-    const expectedRow = {
-      id: '1',
-      walletAddress: '0x0000',
-      transactionType: 'deposit',
-      note: 'deposit',
-      amount: 100,
-      currency: 'ETH',
-      zhits: 0,
-    };
-    const responseDeposit = await makeRequest(queryDeposit, token);
-    expect(responseDeposit.body.data.allBalances[0]).toEqual(expectedRow);
+      const response = await makeRequest(query, '');
+      expect(response.body.data.allBalances).toBeDefined();
+    });
   });
 
-  it('should be able to get deposits by wallet', async () => {
-    try {
+  describe('deposits', () => {
+    it('can add a new deposit in balance', async () => {
       const token = await getToken();
-      const addDeposit = `
-      mutation {
-        deposit(
-          walletAddress: "0x0001"
-          transactionType: "deposit"
-          note: "deposit"
-          amount: 100
-          currency: "ETH"
-          zhits: 0
-        ) {
-          id
-          walletAddress
-          transactionType
-          note
-          amount
-          currency
-          zhits
+      const query = `
+        mutation {
+          deposit(
+            walletAddress: "0x0000"
+            transactionType: "deposit"
+            note: "deposit"
+            amount: 100
+            currency: "ETH"
+            zhits: 0
+          ) {
+            id
+            walletAddress
+            transactionType
+            note
+            amount
+            currency
+            zhits
+          }
         }
-      }
-      `;
-      await makeRequest(addDeposit, token);
-      const walletDeposits = `
-      query {
-        getDepositsByWalletAddress(walletAddress: "0x0001") {
-          id
-          walletAddress
-          transactionType
-          note
-          amount
-          currency
-          zhits
+        `;
+
+      const response = await makeRequest(query, token);
+      expect(response.body.data.deposit).toBeDefined();
+
+      const queryDeposit = `
+        query {
+          allBalances {
+            id
+            walletAddress
+            transactionType
+            note
+            amount
+            currency
+            zhits
+          }
         }
-      }
       `;
-      const expectedDeposit = {
-        id: '2',
-        walletAddress: '0x0001',
+      const expectedRow = {
+        id: '1',
+        walletAddress: '0x0000',
         transactionType: 'deposit',
         note: 'deposit',
         amount: 100,
         currency: 'ETH',
         zhits: 0,
       };
+      const responseDeposit = await makeRequest(queryDeposit, token);
+      expect(responseDeposit.body.data.allBalances[0]).toEqual(expectedRow);
+    });
 
-      const response = await makeRequest(walletDeposits, token);
-      expect(response.body.data.getDepositsByWalletAddress[0]).toEqual(
-        expectedDeposit,
-      );
-    } catch (error) {
-      console.log(error);
-    }
+    it('should be able to get deposits by wallet', async () => {
+      try {
+        const token = await getToken();
+        const addDeposit = `
+        mutation {
+          deposit(
+            walletAddress: "0x0001"
+            transactionType: "deposit"
+            note: "deposit"
+            amount: 100
+            currency: "ETH"
+            zhits: 0
+          ) {
+            id
+            walletAddress
+            transactionType
+            note
+            amount
+            currency
+            zhits
+          }
+        }
+        `;
+        await makeRequest(addDeposit, token);
+        const walletDeposits = `
+        query {
+          getDepositsByWalletAddress(walletAddress: "0x0001") {
+            id
+            walletAddress
+            transactionType
+            note
+            amount
+            currency
+            zhits
+          }
+        }
+        `;
+        const expectedDeposit = {
+          id: '2',
+          walletAddress: '0x0001',
+          transactionType: 'deposit',
+          note: 'deposit',
+          amount: 100,
+          currency: 'ETH',
+          zhits: 0,
+        };
+
+        const response = await makeRequest(walletDeposits, token);
+        expect(response.body.data.getDepositsByWalletAddress[0]).toEqual(
+          expectedDeposit,
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    });
   });
 });
