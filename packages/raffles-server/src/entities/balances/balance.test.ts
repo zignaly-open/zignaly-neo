@@ -41,10 +41,10 @@ const getToken = async (): Promise<string> => {
 };
 
 describe('Balances', () => {
-  beforeAll(waitUntilTablesAreCreated);
-  beforeEach(wipeOut);
-
   describe('transactions', () => {
+    beforeAll(waitUntilTablesAreCreated);
+    beforeEach(wipeOut);
+
     it('can query all balances', async () => {
       const query = `
         query {
@@ -65,6 +65,9 @@ describe('Balances', () => {
   });
 
   describe('deposits', () => {
+    beforeAll(waitUntilTablesAreCreated);
+    beforeEach(wipeOut);
+
     it('can add a new deposit in balance', async () => {
       const token = await getToken();
       const query = `
@@ -73,7 +76,7 @@ describe('Balances', () => {
             walletAddress: "0x0000"
             transactionType: "deposit"
             note: "deposit"
-            amount: 100
+            amount: "100"
             currency: "ETH"
             zhits: 0
           ) {
@@ -109,7 +112,7 @@ describe('Balances', () => {
         walletAddress: '0x0000',
         transactionType: 'deposit',
         note: 'deposit',
-        amount: 100,
+        amount: '100',
         currency: 'ETH',
         zhits: 0,
       };
@@ -125,7 +128,7 @@ describe('Balances', () => {
             walletAddress: "0x0001"
             transactionType: "deposit"
             note: "deposit"
-            amount: 100
+            amount: "100"
             currency: "ETH"
             zhits: 0
           ) {
@@ -158,7 +161,7 @@ describe('Balances', () => {
         walletAddress: '0x0001',
         transactionType: 'deposit',
         note: 'deposit',
-        amount: 100,
+        amount: '100',
         currency: 'ETH',
         zhits: 0,
       };
@@ -168,16 +171,133 @@ describe('Balances', () => {
         expectedDeposit,
       );
     });
+
+    it('should be able to get the correct deposit sum', async () => {
+      const token = await getToken();
+      const addDeposit = `
+        mutation {
+          deposit(
+            walletAddress: "0x0001"
+            transactionType: "deposit"
+            note: "deposit"
+            amount: "100"
+            currency: "ETH"
+            zhits: 0
+          ) {
+            id
+            walletAddress
+            transactionType
+            note
+            amount
+            currency
+            zhits
+          }
+        }
+        `;
+      await makeRequest(addDeposit, token);
+      await makeRequest(addDeposit, token);
+
+      const walletBalance = `
+        query {
+          getDepositBalanceByWalletAddress(walletAddress: "0x0001") {
+            walletAddress
+            currency
+            amount
+          }
+        }
+        `;
+      const expectedDeposit = {
+        walletAddress: '0x0001',
+        currency: 'ETH',
+        amount: '200',
+      };
+      const response = await makeRequest(walletBalance, token);
+      expect(response.body.data.getDepositBalanceByWalletAddress[0]).toEqual(
+        expectedDeposit,
+      );
+    });
+
+    it('should be able to get the correct balance sum', async () => {
+      const token = await getToken();
+      const addDeposit = `
+        mutation {
+          deposit(
+            walletAddress: "0x0001"
+            transactionType: "deposit"
+            note: "deposit"
+            amount: "100"
+            currency: "ETH"
+            zhits: 0
+          ) {
+            id
+            walletAddress
+            transactionType
+            note
+            amount
+            currency
+            zhits
+          }
+        }
+        `;
+      await makeRequest(addDeposit, token);
+      await makeRequest(addDeposit, token);
+
+      const addTransfer = `
+      mutation {
+        internalTransfer(
+          walletAddress: "0x0002"
+          amount: "100"
+          currency: "ETH"
+          zhits: 0
+          fromAddressWallet: "0x0002"
+          toAddressWallet: "0x0001"
+          locked: false
+        ) {
+          id
+          walletAddress
+          transactionType
+          note
+          amount
+          currency
+          zhits
+          fromAddressWallet
+          toAddressWallet
+        }
+      }
+      `;
+      await makeRequest(addTransfer, token);
+      const walletBalance = `
+        query {
+          getBalanceByWalletAddress(walletAddress: "0x0001") {
+            walletAddress
+            currency
+            amount
+          }
+        }
+        `;
+      const expectedDeposit = {
+        walletAddress: '0x0001',
+        currency: 'ETH',
+        amount: '300',
+      };
+      const response = await makeRequest(walletBalance, token);
+      expect(response.body.data.getBalanceByWalletAddress[0]).toEqual(
+        expectedDeposit,
+      );
+    });
   });
 
   describe('internal transfers', () => {
+    beforeAll(waitUntilTablesAreCreated);
+    beforeEach(wipeOut);
+
     it('can add a new internal transfer in balance', async () => {
       const token = await getToken();
       const query = `
         mutation {
           internalTransfer(
             walletAddress: "0x0001"
-            amount: 100
+            amount: "100"
             currency: "ETH"
             zhits: 0
             fromAddressWallet: "0x0001"
@@ -218,22 +338,22 @@ describe('Balances', () => {
 
       const expectedTransfers = [
         {
-          id: '3',
+          id: '9',
           walletAddress: '0x0001',
           transactionType: 'transfer',
           note: 'internal transfer',
-          amount: -100,
+          amount: '-100',
           currency: 'ETH',
           zhits: 0,
           fromAddressWallet: '0x0001',
           toAddressWallet: '0x0002',
         },
         {
-          id: '4',
+          id: '10',
           walletAddress: '0x0002',
           transactionType: 'transfer',
           note: 'internal transfer',
-          amount: 100,
+          amount: '100',
           currency: 'ETH',
           zhits: 0,
           fromAddressWallet: '0x0001',

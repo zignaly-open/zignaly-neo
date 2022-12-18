@@ -11,9 +11,17 @@ export const resolvers = {
 
     getBalanceByWalletAddress: async (
       _: any,
-      walletAddress: string,
+      data: { walletAddress: string },
       { services }: ApolloContext,
-    ) => services.Balance.getWalletAmountBalance(walletAddress),
+    ) => services.Balance.getWalletAmountBalance(data.walletAddress),
+
+    getDepositBalanceByWalletAddress: async (
+      _: any,
+      data: { walletAddress: string },
+      { services }: ApolloContext,
+    ) => {
+      return services.Balance.getWalletDepositBalance(data.walletAddress);
+    },
 
     getZhitsByWalletAddress: async (
       _: any,

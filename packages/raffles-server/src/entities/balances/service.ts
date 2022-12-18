@@ -19,19 +19,37 @@ export const generateService = () => {
   };
 
   const getWalletDepositBalance = async (walletAddress: string) => {
-    return Balance.aggregate('amount', 'sum', {
+    return Balance.findAll({
       where: {
         walletAddress,
         transactionType: 'deposit',
       },
+      group: ['walletAddress', 'currency'],
+      attributes: [
+        'walletAddress',
+        'currency',
+        [
+          Balance.sequelize.fn('sum', Balance.sequelize.col('amount')),
+          'amount',
+        ],
+      ],
     });
   };
 
   const getWalletAmountBalance = async (walletAddress: string) => {
-    return Balance.aggregate('amount', 'sum', {
+    return Balance.findAll({
       where: {
         walletAddress,
       },
+      group: ['walletAddress', 'currency'],
+      attributes: [
+        'walletAddress',
+        'currency',
+        [
+          Balance.sequelize.fn('sum', Balance.sequelize.col('amount')),
+          'amount',
+        ],
+      ],
     });
   };
 

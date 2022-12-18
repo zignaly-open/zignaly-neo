@@ -6,6 +6,7 @@ import {
   Model,
   Table,
   Validate,
+  DataType,
 } from 'sequelize-typescript';
 import { TransactionType } from '../../types';
 
@@ -17,7 +18,6 @@ export class Balance extends Model {
   @Column
   public id!: number;
 
-  @Unique
   @Validate({ isLowercase: true })
   @Column
   public walletAddress!: string;
@@ -31,8 +31,8 @@ export class Balance extends Model {
   @Column
   public note: string;
 
-  @Column
-  public amount!: number;
+  @Column(DataType.DECIMAL)
+  public amount!: string;
 
   @Column
   public currency: string;

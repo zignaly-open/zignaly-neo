@@ -5,10 +5,10 @@ export const typeDef = gql`
     id: ID!
     walletAddress: String!
     transactionType: String!
-    note: String!
-    amount: Int!
-    currency: String!
-    zhits: Int!
+    note: String
+    amount: String
+    currency: String
+    zhits: Int
     fromAddressWallet: String
     toAddressWallet: String
     locked: Boolean
@@ -17,7 +17,7 @@ export const typeDef = gql`
   type AmountBalance {
     walletAddress: String!
     currency: String!
-    amount: Int!
+    amount: String!
   }
 
   type ZhitsBalance {
@@ -30,13 +30,14 @@ export const typeDef = gql`
     getBalanceByWalletAddress(walletAddress: String!): [AmountBalance]
     getZhitsByWalletAddress(walletAddress: String!): [ZhitsBalance]
     getDepositsByWalletAddress(walletAddress: String!): [Balance]
+    getDepositBalanceByWalletAddress(walletAddress: String!): [Balance]
     getInternalTransfersByWalletAddress(walletAddress: String!): [Balance]
   }
 
   extend type Mutation {
     internalTransfer(
       walletAddress: String!
-      amount: Int!
+      amount: String!
       currency: String!
       zhits: Int
       fromAddressWallet: String!
@@ -47,7 +48,7 @@ export const typeDef = gql`
       walletAddress: String!
       transactionType: String!
       note: String!
-      amount: Int!
+      amount: String!
       currency: String!
       zhits: Int!
     ): Balance
