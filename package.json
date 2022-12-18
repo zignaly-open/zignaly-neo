@@ -13,6 +13,7 @@
   },
   "postinstall": "husky install",
   "scripts": {
+    "prepare": "lerna run prepare",
     "bootstrap": "lerna bootstrap",
     "test": "lerna run test",
     "storybook": "lerna run storybook --scope=*/ui",
