@@ -4,7 +4,6 @@ import {
   InputContainer,
   InputValue,
   Layout,
-  BalanceContainer,
   BalanceLabel,
   MaxButton,
   Side,
@@ -38,6 +37,7 @@ function InputAmount({
   showUnit = false,
   fullWidth,
   showMaxButton = true,
+  showBalance = true,
 }: InputAmountProps) {
   const {
     field: { ref, onChange, onBlur, value },
@@ -137,8 +137,8 @@ function InputAmount({
         </InputContainer>
       </Wrapper>
 
-      {value?.token?.balance && (
-        <BalanceContainer>
+      {value?.token?.balance && showBalance && (
+        <Box mt={1}>
           <BalanceLabel variant="body2" color="neutral200">
             {labelBalance}
           </BalanceLabel>
@@ -154,11 +154,11 @@ function InputAmount({
               fontWeight: 500,
             }}
           />
-        </BalanceContainer>
+        </Box>
       )}
 
       {error && (
-        <Box mt={value?.token?.balance ? 1 : 0}>
+        <Box mt={value?.token?.balance && showBalance ? 1 : 0}>
           <ErrorMessage text={error} />
         </Box>
       )}

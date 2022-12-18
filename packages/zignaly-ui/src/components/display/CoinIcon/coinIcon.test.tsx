@@ -38,20 +38,17 @@ describe("components/display/CoinIcon", () => {
       const { getByTestId } = render(<EtherCoinIconStory />);
       const etherCoinIcon = getByTestId("coin-icon-view");
       expect(etherCoinIcon).toBeVisible();
-      expect(etherCoinIcon).toHaveClass(CoinSizes.MEDIUM);
     });
     it("should be rendered BitcoinCoinIconStory", () => {
       const { getByTestId } = render(<BitcoinCoinIconStory />);
       const bitcoinCoinIcon = getByTestId("coin-icon-view");
       expect(bitcoinCoinIcon).toBeVisible();
-      expect(bitcoinCoinIcon).toHaveClass(CoinSizes.LARGE);
     });
 
     it("should be rendered TetherCoinIconStory", () => {
       const { getByTestId } = render(<TetherCoinIconStory />);
       const tetherCoinIcon = getByTestId("coin-icon-view");
       expect(tetherCoinIcon).toBeVisible();
-      expect(tetherCoinIcon).toHaveClass(CoinSizes.SMALL);
     });
   });
 });

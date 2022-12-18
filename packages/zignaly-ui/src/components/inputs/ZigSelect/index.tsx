@@ -75,7 +75,7 @@ function ZigSelect<T>({
         options={options as unknown as { label: string; value: number }[]}
         isDisabled={disabled}
         onChange={(v) => {
-          onChange?.((v as ZigSelectOption<T>)?.value ?? null, (v as ZigSelectOption<T>) || null);
+          onChange?.((v as ZigSelectOption<T>)?.value, (v as ZigSelectOption<T>) || null);
         }}
         menuPortalTarget={document.body}
         placeholder={placeholder || label}

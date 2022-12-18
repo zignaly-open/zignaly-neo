@@ -1,7 +1,9 @@
+export { createColumnHelper } from "@tanstack/react-table";
 import Avatar from "./components/display/Avatar";
 import ErrorMessage from "./components/display/ErrorMessage";
 import Loader from "./components/display/Loader";
 import Table from "./components/display/Table";
+import ZigTable from "./components/display/ZigTable";
 import DateLabel from "./components/display/Table/components/DateLabel";
 import PercentageIndicator from "./components/display/Table/components/PercentageIndicator";
 import PriceLabel, { UsdPriceLabel } from "./components/display/Table/components/PriceLabel";
@@ -71,6 +73,7 @@ export { ReactComponent as SwapIcon } from "assets/icons/swap-icon.svg";
 export { ReactComponent as SwapVertIcon } from "assets/icons/swap-vert-icon.svg";
 export { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.svg";
 export { ReactComponent as ZignalyIcon } from "assets/icons/coins/zignaly-coin.svg";
+export { ReactComponent as ZignalyLogo } from "assets/images/zignaly-isotype.svg";
 export { ReactComponent as GlobeLanguages } from "assets/icons/globe-languages.svg";
 export { ReactComponent as TimeIcon } from "assets/icons/time-icon.svg";
 export { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
@@ -80,12 +83,13 @@ import Header from "./components/navigation/Header";
 import MenuDropDown from "./components/navigation/MenuDropDown";
 import ZigsBalance from "./components/navigation/Header/components/ZigsBalance";
 import BrandImage from "./components/navigation/Header/components/BrandImage";
+import ZigTabs, { ZigTab, ZigTabPanel } from "./components/navigation/ZigTabs";
 
 export * from "./theme";
 export { default as ZigButton } from "./components/inputs/ZigButton";
 export { default as ZigInput } from "./components/inputs/ZigInput";
 export { default as ZigTypography } from "./components/display/ZigTypography";
-export { default as ZigPriceLabel } from "./components/display/ZigPriceLabel";
+export { default as ZigPriceLabel, ZigTablePriceLabel } from "./components/display/ZigPriceLabel";
 export { default as ZigAutocomplete } from "./components/inputs/ZigAutocomplete";
 export { default as ZigSelect } from "./components/inputs/ZigSelect";
 import ThemeProvider from "utils/ThemeProvider";
@@ -107,6 +111,7 @@ export {
   Avatar,
   Loader,
   Table,
+  ZigTable,
   DateLabel,
   PriceLabel,
   UsdPriceLabel,
@@ -141,6 +146,9 @@ export {
   MenuDropDown,
   PageContainer,
   MarginContainer,
+  ZigTabs,
+  ZigTab,
+  ZigTabPanel,
   // Modals
   ConnectWalletModal,
   MessageModal,

@@ -45,5 +45,14 @@
   "chart-error": {
     "heading": "CH-Ëѓѓöѓ öĉĉüѓѓëḋ :(",
     "description": "CH-Üńḟöѓṫüńáṫëly, wë wëѓëń'ṫ áblë ṫö ѓëńḋëѓ ṫĥë ĉĥáѓṫ"
-  }
+  },
+  "chart-options": {
+    "pnl_pct_compound": "CH-ṖŃL %",
+    "pnl_ssc": "CH-ṖŃL, {{coin}}",
+    "sbt_ssc": "CH-ŜBṪ, {{coin}}",
+    "at_risk_pct": "CH-% áṫ ѓïŝk",
+    "investors": "CH-Ńb öḟ ïńvëŝṫöѓŝ"
+  },
+  "migrated-to-ps2": "CH-Ṁïĝѓáṫëḋ ṫö ṖŜ2",
+  "not-enough-data": "CH-Ńöṫ ëńöüĝĥ ĥïŝṫöѓïĉ ḋáṫá ḟöѓ ṫĥïŝ ṗëѓïöḋ"
 }
