@@ -30,6 +30,7 @@ export interface InputAmountProps {
   showUnit?: boolean;
   readOnly?: boolean;
   showMaxButton?: boolean;
+  showBalance?: boolean;
   error?: string | null;
   onInsufficientFundsError?: any;
   additionalLabels?: React.ReactElement;
