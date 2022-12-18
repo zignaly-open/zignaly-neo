@@ -18,7 +18,10 @@ export function useZModal(options?: UseModalOptions) {
       trackId && track({ hash: trackId, userId, ctaId });
       const modal: ShowFnOutput<void> = showModal(Component, {
         ...modalProps,
-        close: () => modal.destroy(),
+        close: () => {
+          track({ userId });
+          modal.destroy();
+        },
       });
       return modal;
     },

@@ -24,12 +24,16 @@ const sendTz = (data: tzData) => {
 /**
  * Trigger internal tracking event.
  */
-const triggerTz = async (location: string, userId?: string) => {
+const triggerTz = async (
+  location: string,
+  userId?: string,
+  referrer?: string,
+) => {
   if (process.env.REACT_APP_ENABLE_TRACKING !== 'true') return;
 
   const data = {
     action: 'sData',
-    urlReferer: document.referrer,
+    urlReferer: referrer,
     urlDestination: location,
     userId,
     tid: localStorage.getItem('tid'),
@@ -51,6 +55,8 @@ const triggerTz = async (location: string, userId?: string) => {
   await sendTz(data);
 };
 
+let referrer = document.referrer;
+
 export const track = ({
   location = '',
   ctaId = '',
@@ -65,5 +71,6 @@ export const track = ({
   const url = new URL(location || window.location.href);
   url.hash =
     (hash || url.hash?.split('?')[0]) + (ctaId ? `?ctaId=${ctaId}` : '');
-  triggerTz(url.toString(), userId);
+  triggerTz(url.toString(), userId, referrer);
+  referrer = url.toString();
 };
