@@ -8,6 +8,7 @@
     "access": "public"
   },
   "scripts": {
+    "prepare": "yarn build",
     "start": "webpack --watch",
     "storybook": "start-storybook -p 6006 -s ./src",
     "build:storybook": "build-storybook -c .storybook -o build/",
