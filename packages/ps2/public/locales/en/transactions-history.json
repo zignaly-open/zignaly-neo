@@ -14,12 +14,11 @@
     "withdrawal": "Withdrawal",
     "psDeposit": "Profit Sharing Deposit",
     "psWithdraw": "Profit Sharing Withdrawal",
-    "ps2": "Profit Sharing Internal Transfer",
-    "psds": "PSDS Transfer",
-    "pifa": "PIFA",
+    "ps2": "PS Internal Transfer",
+    "psds": "Profit Sharing Free Withdrawal",
     "buyZig": "Buy Zig",
-    "traderFee": "Trading Fee",
-    "user": "Transfer"
+    "traderFee": "Trader Success Fee",
+    "user": "Internal Transfer"
   },
   "filter": {
     "max": "(last 3 months max)",

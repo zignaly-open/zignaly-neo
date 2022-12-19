@@ -11,7 +11,6 @@ export const TRANSACTION_TYPE_NAME = {
   [TRANSACTION_TYPE.BUYZIG]: 'type.buyZig',
   [TRANSACTION_TYPE.SUCCESS_FEE]: 'type.traderFee',
   [TRANSACTION_TYPE.USER]: 'type.user',
-  [TRANSACTION_TYPE.PIFA]: 'type.pifa',
 };
 
 export type TransactionsTableDataType = Transaction & { assetName: string };
