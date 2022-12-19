@@ -222,3 +222,11 @@ export const AssetsInPoolWrapper = styled(Box)`
     margin-bottom: 8px;
   }
 `;
+
+export const SelectWrapperBox = styled(Box)`
+  height: 30px;
+  .zig-react-select__control {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+`;
