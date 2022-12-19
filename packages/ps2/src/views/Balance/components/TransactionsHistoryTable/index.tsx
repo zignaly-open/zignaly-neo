@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   CoinLabel,
@@ -26,20 +26,14 @@ const TransactionsHistoryTable = () => {
   });
   const { pageIndex, pageSize } = pagination;
   const { t } = useTranslation('transactions-history');
-  const transactionsEndpoint = useTransactionsHistory({
-    limit: pageSize,
-    type: null,
-  });
+  const transactionsEndpoint = useTransactionsHistory(
+    {
+      limit: pageSize,
+      type: null,
+    },
+    pageIndex,
+  );
   const coinsEndpoint = useExchangeCoinsList();
-
-  useEffect(() => {
-    if (
-      !transactionsEndpoint.isFetching &&
-      transactionsEndpoint.data.length < pageIndex * pageSize + 1
-    ) {
-      transactionsEndpoint.fetchMore();
-    }
-  }, [pageIndex]);
 
   useEffect(() => {
     if (
@@ -59,58 +53,66 @@ const TransactionsHistoryTable = () => {
   }, [transactionsEndpoint.data, coinsEndpoint.data, pageIndex]);
 
   const columnHelper = createColumnHelper<TransactionsTableDataType>();
-  const columns = [
-    columnHelper.accessor('datetime', {
-      header: t('tableHeader.date'),
-      cell: ({ getValue }) => <DateLabel date={new Date(getValue())} />,
-      enableSorting: false,
-    }),
-    columnHelper.accessor('asset', {
-      header: t('tableHeader.coin'),
-      cell: ({ getValue, row: { original } }) => (
-        <CoinLabel coin={getValue()} name={original.assetName ?? '-'} />
-      ),
-      enableSorting: false,
-    }),
-    columnHelper.accessor('txType', {
-      header: t('tableHeader.type'),
-      cell: ({ getValue }) => t(transactionTypeName[getValue()]),
-      enableSorting: false,
-    }),
-    columnHelper.accessor('amount', {
-      header: t('tableHeader.amount'),
-      cell: ({ getValue, row: { original } }) => (
-        <ZigPriceLabel
-          coin={original.asset}
-          value={getValue()}
-          alwaysShowSign={true}
-        />
-      ),
-      enableSorting: false,
-    }),
-    columnHelper.accessor('fromName', {
-      header: t('tableHeader.from'),
-      cell: ({ getValue }) => getValue() || '-',
-      enableSorting: false,
-    }),
-    columnHelper.accessor('toName', {
-      header: t('tableHeader.to'),
-      cell: ({ getValue }) => getValue() || '-',
-      enableSorting: false,
-    }),
-    columnHelper.accessor('status', {
-      header: t('tableHeader.status'),
-      cell: ({ getValue, row }) => (
-        <Box display='flex' justifyContent='center' alignItems='center' gap={1}>
-          <Box display='flex' justifyContent='center' flex={1}>
-            <TransactionStateLabel state={getValue()} />
+  const columns = useMemo(
+    () => [
+      columnHelper.accessor('datetime', {
+        header: t('tableHeader.date'),
+        cell: ({ getValue }) => <DateLabel date={new Date(getValue())} />,
+        enableSorting: false,
+      }),
+      columnHelper.accessor('asset', {
+        header: t('tableHeader.coin'),
+        cell: ({ getValue, row: { original } }) => (
+          <CoinLabel coin={getValue()} name={original.assetName ?? '-'} />
+        ),
+        enableSorting: false,
+      }),
+      columnHelper.accessor('txType', {
+        header: t('tableHeader.type'),
+        cell: ({ getValue }) => t(transactionTypeName[getValue()]),
+        enableSorting: false,
+      }),
+      columnHelper.accessor('amount', {
+        header: t('tableHeader.amount'),
+        cell: ({ getValue, row: { original } }) => (
+          <ZigPriceLabel
+            coin={original.asset}
+            value={getValue()}
+            alwaysShowSign={true}
+          />
+        ),
+        enableSorting: false,
+      }),
+      columnHelper.accessor('fromName', {
+        header: t('tableHeader.from'),
+        cell: ({ getValue }) => getValue() || '-',
+        enableSorting: false,
+      }),
+      columnHelper.accessor('toName', {
+        header: t('tableHeader.to'),
+        cell: ({ getValue }) => getValue() || '-',
+        enableSorting: false,
+      }),
+      columnHelper.accessor('status', {
+        header: t('tableHeader.status'),
+        cell: ({ getValue, row }) => (
+          <Box
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
+            gap={1}
+          >
+            <Box display='flex' justifyContent='center' flex={1}>
+              <TransactionStateLabel state={getValue()} />
+            </Box>
+            {row.getIsExpanded() ? <ExpandLess /> : <ExpandMore />}
           </Box>
-          {row.getIsExpanded() ? <ExpandLess /> : <ExpandMore />}
-        </Box>
-      ),
-      enableSorting: false,
-    }),
-  ];
+        ),
+        enableSorting: false,
+      }),
+    ],
+    [],
+  );
 
   return (
     <LayoutContentWrapper
