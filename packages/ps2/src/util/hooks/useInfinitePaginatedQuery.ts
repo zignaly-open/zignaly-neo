@@ -15,7 +15,8 @@ export interface InfiniteQueryResponse<T> {
 const useInfinitePaginatedQuery = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   useGetDataListQuery: UseQuery<any>,
-  params: Record<string, string | number>,
+  params: Record<string, string | number> & { limit?: number },
+  pageIndex: number,
 ) => {
   // Keep params as reference so we don't trigger a refresh when they change
   const localParams = useRef(params);
@@ -45,6 +46,12 @@ const useInfinitePaginatedQuery = (
     localParams.current = params;
     refresh();
   }, Object.values(params));
+
+  useEffect(() => {
+    if (!queryResponse.isFetching && fetchData.length < pageIndex * limit + 1) {
+      fetchMore();
+    }
+  }, [pageIndex]);
 
   const fetchMore = () => {
     setLocalPage(({ page }) => ({ page: page + 1, id: metadata.from }));
