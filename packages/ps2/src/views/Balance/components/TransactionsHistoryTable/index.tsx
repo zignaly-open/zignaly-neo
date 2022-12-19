@@ -11,12 +11,12 @@ import LayoutContentWrapper from 'components/LayoutContentWrapper';
 import { useExchangeCoinsList, useTransactionsHistory } from 'apis/coin/use';
 import TransactionStateLabel from './atoms/TransactionStateLabel';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
-import { TransactionsTableDataType, transactionTypeName } from './types';
+import { TransactionsTableDataType, TRANSACTION_TYPE_NAME } from './types';
 import TransactionDetails from './atoms/TransactionDetails';
 import { Box } from '@mui/material';
 import { PaginationState } from '@tanstack/react-table';
 
-const TransactionsHistoryTable = () => {
+const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(
     [],
   );
@@ -29,7 +29,7 @@ const TransactionsHistoryTable = () => {
   const transactionsEndpoint = useTransactionsHistory(
     {
       limit: pageSize,
-      type: null,
+      type,
     },
     pageIndex,
   );
@@ -69,7 +69,7 @@ const TransactionsHistoryTable = () => {
       }),
       columnHelper.accessor('txType', {
         header: t('tableHeader.type'),
-        cell: ({ getValue }) => t(transactionTypeName[getValue()]),
+        cell: ({ getValue }) => t(TRANSACTION_TYPE_NAME[getValue()]),
         enableSorting: false,
       }),
       columnHelper.accessor('amount', {
