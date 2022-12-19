@@ -12,9 +12,7 @@ export function useZModal(options?: UseModalOptions) {
       props: undefined | (Record<string, unknown> & { ctaId?: string }),
     ) => {
       const { ctaId, ...modalProps } = props || {};
-      const trackId = (
-        Component.trackId || Component.name?.replace(/Modal$/, '')
-      ).toLocaleLowerCase();
+      const trackId = Component.trackId?.toLocaleLowerCase();
       trackId && track({ hash: trackId, userId, ctaId });
       const modal: ShowFnOutput<void> = showModal(Component, {
         ...modalProps,
