@@ -21,6 +21,10 @@
     "traderFee": "Trading Fee",
     "user": "Transfer"
   },
+  "filter": {
+    "max": "(last 3 months max)",
+    "all": "All Transactions"
+  },
   "status": {
     "pending": "Pending",
     "completed": "Completed",
