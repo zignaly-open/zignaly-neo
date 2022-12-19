@@ -13,7 +13,16 @@ const ZigTabs = (props: TabsProps) => {
   }, [props.value, children]);
 
   return (
-    <Box display="flex" alignItems="center" justifyContent="space-between">
+    <Box
+      display="flex"
+      justifyContent="space-between"
+      flexWrap="wrap"
+      sx={{
+        flexDirection: { xs: "column", sm: "row" },
+        rowGap: 2,
+        alignItems: { xs: "flex-start", sm: "center" },
+      }}
+    >
       <styled.ZigTabs {...restProps}>{children}</styled.ZigTabs>
       {asideComponent}
     </Box>
