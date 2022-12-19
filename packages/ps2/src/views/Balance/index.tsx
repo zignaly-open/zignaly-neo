@@ -19,6 +19,7 @@ import { useZModal } from 'components/ZModal/use';
 import { Box } from '@mui/material';
 import { TRANSACTION_TYPE } from 'apis/coin/types';
 import { TRANSACTION_TYPE_NAME } from './components/TransactionsHistoryTable/types';
+import { CSSObject } from '@emotion/react';
 
 const MyBalances: React.FC = () => {
   const { t } = useTranslation([
@@ -43,7 +44,7 @@ const MyBalances: React.FC = () => {
   );
 
   const maxLegend = useCallback(
-    () => ({
+    (): CSSObject => ({
       display: 'inline-block',
       textAlign: 'center',
 

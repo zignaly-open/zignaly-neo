@@ -75,11 +75,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
       columnHelper.accessor('amount', {
         header: t('tableHeader.amount'),
         cell: ({ getValue, row: { original } }) => (
-          <ZigPriceLabel
-            coin={original.asset}
-            value={getValue()}
-            alwaysShowSign={true}
-          />
+          <ZigPriceLabel coin={original.asset} value={getValue()} />
         ),
         enableSorting: false,
       }),

@@ -79,7 +79,6 @@ export const TRANSACTION_TYPE = {
   SUCCESS_FEE: 'psSuccessFee',
   // All the others that are mainly the ones between internal transfers between his accounts
   USER: 'user',
-  PIFA: 'PIFA',
 };
 export type TransactionType = keyof typeof TRANSACTION_TYPE;
 
