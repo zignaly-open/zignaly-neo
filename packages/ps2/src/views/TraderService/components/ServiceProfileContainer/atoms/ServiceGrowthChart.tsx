@@ -50,10 +50,6 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
         label: t('chart-options.sbt_ssc', { coin: service.ssc }),
         value: GraphChartType.sbt_ssc,
       },
-      {
-        label: t('chart-options.at_risk_pct'),
-        value: GraphChartType.at_risk_pct,
-      },
       { label: t('chart-options.investors'), value: GraphChartType.investors },
     ],
     [t],
