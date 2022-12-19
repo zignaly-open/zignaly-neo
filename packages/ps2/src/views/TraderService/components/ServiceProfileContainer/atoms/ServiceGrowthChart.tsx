@@ -17,6 +17,7 @@ import {
   ChartWrapper,
   GraphPercentageWrapperBox,
   SqueezedButtonGroup,
+  SelectWrapperBox,
 } from '../styles';
 import { useChartConfig, useChartData } from '../../../../../apis/service/use';
 import Stub from '../../../../../components/Stub';
@@ -159,7 +160,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
             })}
           </SqueezedButtonGroup>
         </Box>
-        <Box sx={{ mr: 4.5 }}>
+        <SelectWrapperBox sx={{ mr: 4.5 }}>
           <ZigSelect
             outlined
             width={180}
@@ -168,7 +169,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
             onChange={(v) => setChartType(v)}
             options={chartTypeOptions}
           />
-        </Box>
+        </SelectWrapperBox>
       </Box>
       <ChartWrapper>
         {isError ? (
