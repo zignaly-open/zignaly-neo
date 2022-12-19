@@ -29,6 +29,34 @@ const MyBalances: React.FC = () => {
   ]);
   useTitle(t('my-balances'));
   const [tab, setTab] = useState(0);
+  const [type, setType] = useState('all');
+  const { showModal } = useZModal();
+
+  const filterOptions = [
+    { value: 'all', label: t('transactions-history:filter.all') },
+  ].concat(
+    Object.entries(TRANSACTION_TYPE)
+      .filter(([, v]) => ![TRANSACTION_TYPE.PS2_DEPOSIT].includes(v))
+      .map(([, v]) => {
+        return {
+          value: v,
+          label: t(`transactions-history:${TRANSACTION_TYPE_NAME[v]}`),
+        };
+      }),
+  );
+
+  const maxLegend = useCallback(
+    (): CSSObject => ({
+      display: 'inline-block',
+      textAlign: 'center',
+
+      ':after': {
+        content: `'\\A ${t('transactions-history:filter.max')}'`,
+        whiteSpace: 'pre',
+      },
+    }),
+    [t],
+  );
 
   return (
     <PageContainer className={'withSubHeader'}>
@@ -43,7 +71,31 @@ const MyBalances: React.FC = () => {
           value={tab}
         >
           <ZigTab label={t('my-balances:my-coins')} />
-          <ZigTab label={t('my-balances:deposits-withdrawals')} />
+          <ZigTab
+            label={t('my-balances:deposits-withdrawals')}
+            asideComponent={
+              <Box display='flex' gap={2}>
+                <TextButton
+                  rightElement={<Add sx={{ color: 'links' }} />}
+                  caption={t('action:export')}
+                  onClick={() => {
+                    showModal(ExportModal, {});
+                  }}
+                />
+                <StyledZigSelect
+                  options={filterOptions}
+                  value={type}
+                  onChange={setType}
+                  styles={{
+                    singleValue: (styles) => ({
+                      ...styles,
+                      ...maxLegend(),
+                    }),
+                  }}
+                />
+              </Box>
+            }
+          />
         </ZigTabs>
         <ZigTabPanel value={tab} index={0}>
           <MyBalancesTable />
