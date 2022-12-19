@@ -36,6 +36,7 @@ export function useTransactionsHistory(
     limit?: number;
     type?: string;
   } = {},
+  pageIndex = 0,
 ) {
   const exchange = useActiveExchange();
   const infinitePaginatedQuery = useInfinitePaginatedQuery(
@@ -44,6 +45,7 @@ export function useTransactionsHistory(
       exchangeInternalId: exchange?.internalId,
       ...filters,
     },
+    pageIndex,
   );
 
   return infinitePaginatedQuery;

@@ -1,17 +1,16 @@
-import { Transaction, TransactionType } from 'apis/coin/types';
+import { Transaction, TRANSACTION_TYPE } from 'apis/coin/types';
 
-export const transactionTypeName = {
-  [TransactionType.DEPOSIT]: 'type.deposit',
-  [TransactionType.WITHDRAW]: 'type.withdrawal',
-  [TransactionType.PS_DEPOSIT]: 'type.psDeposit',
-  [TransactionType.PS2_DEPOSIT]: 'type.psDeposit',
-  [TransactionType.PS_WITHDRAW]: 'type.psWithdraw',
-  [TransactionType.PS2]: 'type.ps2',
-  [TransactionType.PSDS]: 'type.psds',
-  [TransactionType.BUYZIG]: 'type.buyZig',
-  [TransactionType.SUCCESS_FEE]: 'type.psSuccessFee',
-  [TransactionType.USER]: 'type.user',
-  [TransactionType.PIFA]: 'type.pifa',
+export const TRANSACTION_TYPE_NAME = {
+  [TRANSACTION_TYPE.DEPOSIT]: 'type.deposit',
+  [TRANSACTION_TYPE.WITHDRAW]: 'type.withdrawal',
+  [TRANSACTION_TYPE.PS_DEPOSIT]: 'type.psDeposit',
+  [TRANSACTION_TYPE.PS2_DEPOSIT]: 'type.psDeposit',
+  [TRANSACTION_TYPE.PS_WITHDRAW]: 'type.psWithdraw',
+  [TRANSACTION_TYPE.PS2]: 'type.ps2',
+  [TRANSACTION_TYPE.PSDS]: 'type.psds',
+  [TRANSACTION_TYPE.BUYZIG]: 'type.buyZig',
+  [TRANSACTION_TYPE.SUCCESS_FEE]: 'type.traderFee',
+  [TRANSACTION_TYPE.USER]: 'type.user',
 };
 
 export type TransactionsTableDataType = Transaction & { assetName: string };
