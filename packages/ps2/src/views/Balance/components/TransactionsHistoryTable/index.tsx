@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   CoinLabel,
@@ -15,6 +15,7 @@ import { TransactionsTableDataType, TRANSACTION_TYPE_NAME } from './types';
 import TransactionDetails from './atoms/TransactionDetails';
 import { Box } from '@mui/material';
 import { PaginationState } from '@tanstack/react-table';
+import { useUpdateEffect } from 'react-use';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(
@@ -61,7 +62,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
     }
   }, [transactionsEndpoint.data, coinsEndpoint.data, pageIndex]);
 
-  useLayoutEffect(() => {
+  useUpdateEffect(() => {
     // Reset pagination when infinite query is refreshed from filter change
     if (transactionsEndpoint.page === 1) {
       setPagination((p) => ({ ...p, pageIndex: 0 }));
