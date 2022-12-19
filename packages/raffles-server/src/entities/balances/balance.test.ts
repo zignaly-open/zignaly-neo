@@ -318,8 +318,6 @@ describe('Balances', () => {
         `;
       await makeRequest(query, token);
 
-      // console.log(resp);
-
       const transfersBalance = `
       query {
         allBalances {
