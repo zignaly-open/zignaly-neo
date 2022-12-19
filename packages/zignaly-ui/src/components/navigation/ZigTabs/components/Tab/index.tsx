@@ -1,11 +1,12 @@
 import React from "react";
-import { Tab as TabMui, TabProps } from "@mui/material";
+import { TabProps } from "@mui/material";
+import * as styled from "./styles";
 
 const Tab = (
   props: TabProps & {
     asideComponent?: React.ReactNode;
   },
 ) => {
-  return <TabMui {...props} data-text={props.label} />;
+  return <styled.Tab {...props} data-text={props.label} />;
 };
 export default Tab;

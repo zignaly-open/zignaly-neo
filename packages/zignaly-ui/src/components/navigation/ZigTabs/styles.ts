@@ -7,6 +7,10 @@ export const ZigTabs = styled(Tabs)`
     border-radius: 6px;
   }
 
+  .MuiTabs-flexContainer {
+    gap: 16px;
+  }
+
   .MuiTab-root {
     text-transform: initial;
     color: #9ca3af;
@@ -15,15 +19,7 @@ export const ZigTabs = styled(Tabs)`
     line-height: 20px;
     padding-left: 0;
     padding-right: 0;
-    margin: 0 16px;
     position: relative;
-
-    &:first-child {
-      margin-left: 0;
-    }
-    &:last-child {
-      margin-right: 0;
-    }
 
     &:before {
       /* Hack to avoid the button from changing size when bold */
