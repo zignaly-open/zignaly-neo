@@ -18,11 +18,19 @@ export const ZigTabs = styled(Tabs)`
     margin: 0 16px;
     position: relative;
 
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+
     &:before {
       /* Hack to avoid the button from changing size when bold */
       content: attr(data-text);
       font-weight: bold;
       visibility: hidden;
+      height: 0;
     }
   }
 

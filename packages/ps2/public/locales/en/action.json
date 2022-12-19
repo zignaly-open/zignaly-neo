@@ -1,9 +1,11 @@
 {
-
     "deposit": "Deposit",
     "edit": "Edit",
     "save": "Save",
     "withdraw": "Withdraw",
     "read-more": "Read More",
-    "read-less": "Read Less"
+    "read-less": "Read Less",
+    "cancel": "Cancel",
+    "proceed": "Proceed",
+    "export": "Export"
 }
