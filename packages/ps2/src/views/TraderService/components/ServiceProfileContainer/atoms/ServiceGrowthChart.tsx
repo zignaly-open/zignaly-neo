@@ -60,7 +60,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   );
 
   const serviceStartedDaysAgo = useMemo(
-    () => differenceInDays(new Date(service.createdAt), new Date()),
+    () => differenceInDays(new Date(), new Date(service.createdAt)),
     [service.createdAt],
   );
 
