@@ -146,8 +146,8 @@ export type TraderServiceChart = {
 
 export type TraderServiceChartProcessed = {
   data: AxisFormat[];
-  summary: string;
-  summaryPct: string;
+  summary: string | number;
+  percentDiff?: number;
   migrationDate?: string;
   migrationIndex?: number;
 };

@@ -12,7 +12,7 @@ export const StyledSelectWrapper = styled(Box)<Props>`
         ${({ theme, error }) => (error ? theme.palette.redGraphOrError : theme.palette.neutral600)};
       padding: ${({ small }) => (small ? "3px 16px 3px 9px" : "11px 24px 11px 16px")};
       margin-top: 4px;
-      min-height: ${({ small }) => (small ? "30.75px" : "60px")};
+      min-height: ${({ small }) => (small ? "0" : "60px")};
       border-radius: 5px;
       display: flex;
       align-items: center;
@@ -80,10 +80,22 @@ export const StyledSelectWrapper = styled(Box)<Props>`
     &__input {
       font-size: ${({ small }) => (small ? "13px" : "16px")};
       line-height: ${({ small }) => (small ? "15px" : "20px")};
+      ${({ small }) =>
+        small
+          ? css`
+              padding-bottom: 1px;
+            `
+          : ""};
     }
 
     &__single-value,
     &__input {
+      ${({ small }) =>
+        small
+          ? css`
+              height: 13px;
+            `
+          : ""};
       color: ${({ theme }) => theme.palette.neutral100} !important;
     }
 

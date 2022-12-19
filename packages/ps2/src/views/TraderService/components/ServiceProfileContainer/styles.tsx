@@ -136,7 +136,7 @@ export const HideReadMoreEffects = styled('div')<{
   transition: all 0.3s;
   overflow: hidden;
   margin-bottom: 7px;
-  max-height: ${(props) => (props.open ? 1000 : props.heightLimit)}px;
+  max-height: ${(props) => (props.open ? '100%' : `${props.heightLimit}px`)};
 `;
 
 export const MarkdownContainer = styled('div')`
@@ -220,5 +220,13 @@ export const SqueezedButtonGroup = styled(ButtonGroup)`
 export const AssetsInPoolWrapper = styled(Box)`
   & > .MuiBox-root > .MuiBox-root:first-child {
     margin-bottom: 8px;
+  }
+`;
+
+export const SelectWrapperBox = styled(Box)`
+  height: 30px;
+  .zig-react-select__control {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
 `;
