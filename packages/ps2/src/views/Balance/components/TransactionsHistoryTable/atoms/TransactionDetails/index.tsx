@@ -22,16 +22,35 @@ const TransactionDetails = ({ transaction }: { transaction: Transaction }) => {
         <TypographyPanelLabel>{t('details.to')}</TypographyPanelLabel>
         <FromTo side='to' transaction={transaction} />
       </Box>
-      <Box display='flex' alignItems='center'>
-        <TypographyPanelLabel>{t('details.txHash')}</TypographyPanelLabel>
-        <TypographyAddress>{transaction.txId}</TypographyAddress>
-      </Box>
-      {transaction.note && (
+      <Box
+        display='flex'
+        sx={{
+          flexDirection: {
+            xs: 'column',
+            sm: 'row',
+          },
+          gap: {
+            xs: 2,
+            sm: 8,
+          },
+          alignItems: {
+            xs: 'flex-start',
+            sm: 'center',
+          },
+        }}
+        flexWrap='wrap'
+      >
         <Box display='flex' alignItems='center'>
-          <TypographyPanelLabel>{t('details.note')}</TypographyPanelLabel>
-          <TypographyAddress>{transaction.note}</TypographyAddress>
+          <TypographyPanelLabel>{t('details.txHash')}</TypographyPanelLabel>
+          <TypographyAddress>{transaction.txId}</TypographyAddress>
         </Box>
-      )}
+        {transaction.note && (
+          <Box display='flex' alignItems='center'>
+            <TypographyPanelLabel>{t('details.note')}</TypographyPanelLabel>
+            <TypographyAddress>{transaction.note}</TypographyAddress>
+          </Box>
+        )}
+      </Box>
     </TransactionPanel>
   );
 };
