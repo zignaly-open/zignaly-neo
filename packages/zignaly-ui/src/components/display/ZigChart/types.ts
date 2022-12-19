@@ -22,6 +22,7 @@ export interface ChartMiniProps {
 export interface ChartLargeProps {
   readonly data: AxisFormat[] | number[];
   tickCount?: number;
+  forceColor?: "red" | "green";
   events?: ChartEvent[];
   onlyIntegerTicks?: boolean;
   yAxisFormatter?: (y: number | string) => string;

@@ -8,7 +8,7 @@ import {
   VictoryLabel,
 } from "victory";
 import { axisStyle, ChartLayoutLarge } from "../styles";
-import { ChartLargeProps } from "../types";
+import { ChartColor, ChartLargeProps } from "../types";
 import { useChartData } from "../hooks";
 import GraphColors from "../GraphColors";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -22,11 +22,13 @@ const ZigChart = ({
   data,
   yAxisFormatter,
   events,
+  forceColor,
   tickCount = 7,
   onlyIntegerTicks,
 }: ChartLargeProps) => {
   const theme = useTheme() as Theme;
-  const { data: processedData, color, gradient } = useChartData(data);
+  const { data: processedData, color: graphColor, gradient } = useChartData(data);
+  const color = forceColor ? ChartColor[forceColor === "red" ? "Red" : "Green"] : graphColor;
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
 
