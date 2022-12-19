@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   CoinLabel,
@@ -38,6 +38,15 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   useEffect(() => {
     if (
       !transactionsEndpoint.isFetching &&
+      transactionsEndpoint.data.length < pageIndex * pageSize + 1
+    ) {
+      transactionsEndpoint.fetchMore();
+    }
+  }, [pageIndex]);
+
+  useEffect(() => {
+    if (
+      !transactionsEndpoint.isFetching &&
       transactionsEndpoint.data.length > pageIndex * pageSize + 1 &&
       coinsEndpoint.data
     ) {
@@ -51,6 +60,13 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
       setFilteredData(data);
     }
   }, [transactionsEndpoint.data, coinsEndpoint.data, pageIndex]);
+
+  useLayoutEffect(() => {
+    // Reset pagination when infinite query is refreshed from filter change
+    if (transactionsEndpoint.page === 1) {
+      setPagination((p) => ({ ...p, pageIndex: 0 }));
+    }
+  }, [transactionsEndpoint.page]);
 
   const columnHelper = createColumnHelper<TransactionsTableDataType>();
   const columns = useMemo(
