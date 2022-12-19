@@ -55,6 +55,18 @@ export const api = createApi({
         };
       },
     }),
+
+    transactionsHistoryCsv: builder.mutation<
+      { id: string },
+      {
+        exchangeInternalId: string;
+      }
+    >({
+      query: ({ exchangeInternalId }) => ({
+        url: `/user/exchanges/${exchangeInternalId}/transactions_history_csv`,
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
@@ -63,5 +75,6 @@ export const {
   useAllCoinsQuery,
   useDepositInfoQuery,
   useWithdrawMutation,
+  useTransactionsHistoryCsvMutation,
   useTransactionsHistoryQuery,
 } = api;

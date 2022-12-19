@@ -12,7 +12,7 @@ const TabPanel = (props: Props) => {
 
   return (
     <div role="tabpanel" hidden={value !== index} aria-labelledby={`tab-${index}`} {...other}>
-      {value === index && <Box m={2}>{children}</Box>}
+      {value === index && <Box mt={2}>{children}</Box>}
     </div>
   );
 };
