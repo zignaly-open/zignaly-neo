@@ -145,16 +145,40 @@ export function useChartData({
     }
 
     const dates = Object.entries(chart).sort(([a], [b]) => a.localeCompare(b));
+    const graph = dates?.map(([date, value]) => ({
+      x: formatMonthDay(parse(date, 'yyyy-MM-dd', Date.now())),
+      y: value,
+    }));
+
+    let summary, percentDiff;
+    switch (chartType) {
+      case GraphChartType.at_risk_pct:
+        summary = graph.reduce((sum, { y }) => sum + y, 0) / graph.length;
+        break;
+      case GraphChartType.pnl_ssc:
+        summary = graph.reduce((sum, { y }) => sum + y, 0);
+        break;
+      case GraphChartType.sbt_ssc:
+      case GraphChartType.investors:
+      case GraphChartType.pnl_pct_compound: {
+        const last = graph?.[graph?.length - 1].y;
+        const first = graph?.[0].y;
+        summary = last;
+        // how difficult would it be to calculate a BLOODY PERCENT DIFF?
+        // well, I guess it is lol, because some values may be negative
+        percentDiff = first
+          ? 100 * (Math.abs((last - first) / first) * (last > 0 ? 1 : -1))
+          : (last - first) / first; // infinity here is ok lol
+        break;
+      }
+    }
 
     return {
-      summary: data?.summary,
-      summaryPct: data?.summaryPct,
+      summary,
+      percentDiff,
       migrationDate: data?.migration_date,
       migrationIndex: dates.findIndex(([x]) => x === data?.migration_date),
-      data: dates.map(([date, value]) => ({
-        x: formatMonthDay(parse(date, 'yyyy-MM-dd', Date.now())),
-        y: value,
-      })),
+      data: graph,
     };
   }, [data?.data]);
 

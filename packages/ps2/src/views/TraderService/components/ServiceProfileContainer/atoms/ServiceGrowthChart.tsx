@@ -73,6 +73,13 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
     }
   }, [data?.migrationIndex]);
 
+  const canShowSummary =
+    typeof data?.summary !== 'undefined' &&
+    !isError &&
+    !isLoading &&
+    !isFetching;
+  const value = data?.summary;
+
   return (
     <Box>
       <Box
@@ -85,64 +92,49 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           flexWrap: 'wrap',
         }}
       >
-        {typeof data?.summary !== 'undefined' &&
-          !isError &&
-          !isLoading &&
-          !isFetching && (
-            <>
-              <Box sx={{ mr: 2 }}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  {![
-                    GraphChartType.pnl_pct_compound,
-                    GraphChartType.at_risk_pct,
-                    GraphChartType.investors,
-                  ].includes(chartType) ? (
-                    <ZigPriceLabel
-                      coin={service.ssc}
-                      variant={'bigNumber'}
-                      color={
-                        +data?.summary > 0 ? 'greenGraph' : 'redGraphOrError'
-                      }
-                      value={data?.summary}
-                    />
-                  ) : (
-                    <ZigTypography
-                      variant={'bigNumber'}
-                      sx={{ whiteSpace: 'nowrap' }}
-                      color={
-                        +data?.summary > 0 ? 'greenGraph' : 'redGraphOrError'
-                      }
-                    >
-                      {chartType === GraphChartType.investors
-                        ? t('marketplace:table:x-investors', {
-                            count: +data?.summary,
-                          })
-                        : t('common:percent', { value: data?.summary })}
-                    </ZigTypography>
-                  )}
-                </Box>
-              </Box>
-
-              {![
-                GraphChartType.pnl_pct_compound,
-                GraphChartType.at_risk_pct,
-                GraphChartType.investors,
-              ].includes(chartType) && (
-                <GraphPercentageWrapperBox sx={{ mr: 2 }}>
-                  <PercentChange
-                    colored
-                    variant='h2'
-                    value={data?.summaryPct}
+        {canShowSummary && (
+          <>
+            <Box sx={{ mr: 2 }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                {![
+                  GraphChartType.pnl_pct_compound,
+                  GraphChartType.at_risk_pct,
+                  GraphChartType.investors,
+                ].includes(chartType) ? (
+                  <ZigPriceLabel
+                    coin={service.ssc}
+                    variant={'bigNumber'}
+                    color={+value > 0 ? 'greenGraph' : 'redGraphOrError'}
+                    value={value}
                   />
-                </GraphPercentageWrapperBox>
-              )}
-            </>
-          )}
+                ) : (
+                  <ZigTypography
+                    variant={'bigNumber'}
+                    sx={{ whiteSpace: 'nowrap' }}
+                    color={+value > 0 ? 'greenGraph' : 'redGraphOrError'}
+                  >
+                    {chartType === GraphChartType.investors
+                      ? t('marketplace:table:x-investors', {
+                          count: +value,
+                        })
+                      : t('common:percent', { value })}
+                  </ZigTypography>
+                )}
+              </Box>
+            </Box>
+
+            {typeof data?.percentDiff !== 'undefined' && (
+              <GraphPercentageWrapperBox sx={{ mr: 2 }}>
+                <PercentChange colored variant='h2' value={data?.percentDiff} />
+              </GraphPercentageWrapperBox>
+            )}
+          </>
+        )}
 
         <Box sx={{ flex: 1 }} />
         <Box sx={{ mr: 2 }}>
