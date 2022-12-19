@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   CoinLabel,
@@ -35,22 +35,29 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   );
   const coinsEndpoint = useExchangeCoinsList();
 
+  const updateData = () => {
+    const data = transactionsEndpoint.data
+      .slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
+      .sort((a, b) => +new Date(b.datetime) - +new Date(a.datetime))
+      .map((transaction) => ({
+        ...transaction,
+        assetName: coinsEndpoint.data[transaction.asset]?.name,
+      }));
+    setFilteredData(data);
+  };
+
   useEffect(() => {
-    if (
-      !transactionsEndpoint.isFetching &&
-      transactionsEndpoint.data.length > pageIndex * pageSize + 1 &&
-      coinsEndpoint.data
-    ) {
-      const data = transactionsEndpoint.data
-        .slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
-        .sort((a, b) => +new Date(b.datetime) - +new Date(a.datetime))
-        .map((transaction) => ({
-          ...transaction,
-          assetName: coinsEndpoint.data[transaction.asset]?.name,
-        }));
-      setFilteredData(data);
+    if (transactionsEndpoint.data && coinsEndpoint.data) {
+      updateData();
     }
   }, [transactionsEndpoint.data, coinsEndpoint.data, pageIndex]);
+
+  useLayoutEffect(() => {
+    // Reset pagination when infinite query is refreshed from filter change
+    if (transactionsEndpoint.page === 1) {
+      setPagination((p) => ({ ...p, pageIndex: 0 }));
+    }
+  }, [transactionsEndpoint.page]);
 
   const columnHelper = createColumnHelper<TransactionsTableDataType>();
   const columns = useMemo(

@@ -35,12 +35,14 @@ const MyBalances: React.FC = () => {
   const filterOptions = [
     { value: 'all', label: t('transactions-history:filter.all') },
   ].concat(
-    Object.entries(TRANSACTION_TYPE).map(([, v]) => {
-      return {
-        value: v,
-        label: t(`transactions-history:${TRANSACTION_TYPE_NAME[v]}`),
-      };
-    }),
+    Object.entries(TRANSACTION_TYPE)
+      .filter(([, v]) => ![TRANSACTION_TYPE.PS2_DEPOSIT].includes(v))
+      .map(([, v]) => {
+        return {
+          value: v,
+          label: t(`transactions-history:${TRANSACTION_TYPE_NAME[v]}`),
+        };
+      }),
   );
 
   const maxLegend = useCallback(
