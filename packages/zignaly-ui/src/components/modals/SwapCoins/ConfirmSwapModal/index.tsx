@@ -9,7 +9,7 @@ import { dark } from "theme";
 import { Gap } from "utils/gap";
 import { IconContainer, Line } from "./styles";
 import { AmountContainer } from "components/modals/styles";
-import NumberFormat from "react-number-format";
+import { NumericFormat } from "react-number-format";
 import Button from "components/inputs/Button";
 import { ConfirmSwapModalProps } from "./types";
 import { Swap } from "../types";
@@ -47,7 +47,7 @@ const ConfirmSwapModal = ({
             <CoinIcon name={swapToResult.token.id} coin={swapToResult.token.id} />
           </IconContainer>
           <Typography variant="bigNumber" color="neutral100">
-            <NumberFormat
+            <NumericFormat
               value={swapToResult.value.toString()}
               thousandSeparator={true}
               displayType={"text"}

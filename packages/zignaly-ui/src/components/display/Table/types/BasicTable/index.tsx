@@ -56,8 +56,6 @@ export default function BasicTable<T extends object>({
     defaultHiddenColumns?.forEach((c) => toggleHideColumn(c, true));
   }, []);
 
-  const firstPageRows = rows.slice(0, 20);
-
   /**
    * @function renderActionRow():
    * @description Inject the action row on "column options" column.
@@ -175,7 +173,7 @@ export default function BasicTable<T extends object>({
             ))}
           </thead>
           <tbody {...getTableBodyProps()}>
-            {firstPageRows.map((row: any, index: number) => {
+            {rows.map((row: any, index: number) => {
               prepareRow(row);
               return (
                 <tr key={`--firstPageRows-${index.toString()}`} {...row.getRowProps()}>

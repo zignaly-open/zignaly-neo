@@ -1,3 +1,5 @@
+import { InfiniteQueryResponse } from 'util/hooks/useInfinitePaginatedQuery';
+
 // eslint-disable-next-line @typescript-eslint/ban-types
 export type CoinState = {};
 
@@ -55,3 +57,56 @@ export type DepositInfo = {
     url: string;
   };
 };
+
+export const TRANSACTION_TYPE = {
+  // Deposit from an external address
+  DEPOSIT: 'deposit',
+  // Withdrawal from a Zignaly exchange account to an external address
+  WITHDRAW: 'withdrawal',
+  // Investment in a PS1 service
+  PS_DEPOSIT: 'psDeposit',
+  // Investment out from a PS1 service
+  PS_WITHDRAW: 'psWithdraw',
+  // Investment in a PS2 service
+  PS2_DEPOSIT: 'ps2_deposit',
+  // Internal transfers of PS2 (between SCA and STA or from STA to DFA when a service is converted to PS2)
+  PS2: 'ps2',
+  // Transfers made during PSDS
+  PSDS: 'psds',
+  // Transfers made when buying ZIG
+  BUYZIG: 'buyZig',
+  // In PS1 transfers when the trader receives his success fee
+  SUCCESS_FEE: 'psSuccessFee',
+  // All the others that are mainly the ones between internal transfers between his accounts
+  USER: 'user',
+};
+export type TransactionType = keyof typeof TRANSACTION_TYPE;
+
+export const enum TransactionStateType {
+  COMPLETED = 'completed',
+  PENDING = 'pending',
+  ERROR = 'error',
+}
+
+export type Transaction = {
+  from: string;
+  fromName: string;
+  to: string;
+  toName?: string;
+  txId: string;
+  amount: number;
+  asset: string;
+  status: TransactionStateType;
+  message?: string;
+  txType: TransactionType;
+  timestamp: number;
+  datetime: string;
+  network: string;
+  fee: {
+    currency: string;
+    cost: number;
+  };
+  note?: string;
+};
+
+export type Transactions = InfiniteQueryResponse<Transaction[]>;

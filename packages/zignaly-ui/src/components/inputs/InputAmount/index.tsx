@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from "react";
-import NumberFormat from "react-number-format";
+import { NumericFormat } from "react-number-format";
 import { parseUnits } from "@ethersproject/units";
 import { BigNumber, utils } from "ethers";
 
@@ -202,7 +202,7 @@ function InputAmount(
             {labelBalance}
           </BalanceLabel>
           <BalanceValue variant="body2" weight="medium">
-            <NumberFormat
+            <NumericFormat
               value={utils.formatUnits(selectedToken.balance)}
               displayType={"text"}
               suffix={selectedToken ? ` ${selectedToken.id.toUpperCase()}` : ""}
