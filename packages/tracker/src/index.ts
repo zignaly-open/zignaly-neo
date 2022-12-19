@@ -74,3 +74,15 @@ export const track = ({
   triggerTz(url.toString(), userId, referrer);
   referrer = url.toString();
 };
+
+export const trackCta = ({
+  ctaId = '',
+  userId,
+}: {
+  ctaId: string;
+  userId?: string;
+}) => {
+  const url = new URL(referrer);
+  url.hash = url.hash?.split('?')[0] + `?ctaId=${ctaId}`;
+  triggerTz(url.toString(), userId, referrer);
+};

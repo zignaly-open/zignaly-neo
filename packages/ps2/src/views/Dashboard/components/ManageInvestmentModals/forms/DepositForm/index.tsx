@@ -23,14 +23,19 @@ import {
 } from '../../../../../../apis/coin/use';
 import { DepositModalProps } from '../../types';
 import { allowedDeposits } from '../../../../../../util/coins';
-import { useActiveExchange } from '../../../../../../apis/user/use';
+import {
+  useActiveExchange,
+  useCurrentUser,
+} from '../../../../../../apis/user/use';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
+import { trackCta } from '@zignaly-open/tracker';
 
 function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
   const { data: balances } = useCoinBalances({ convert: true });
   const { data: coins } = useExchangeCoinsList();
   const { exchangeType } = useActiveExchange();
+  const { userId } = useCurrentUser();
   const toast = useToast();
 
   const { handleSubmit, control, watch, setValue } = useForm<DepositFormData>({
@@ -197,6 +202,10 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                   <CloneIcon width={40} height={40} color={dark.neutral300} />
                 }
                 onClickRightSideElement={() => {
+                  trackCta({
+                    userId,
+                    ctaId: 'copy-deposit-address',
+                  });
                   copy(depositInfo?.address);
                   toast.success(t('depositAddress.copied'));
                 }}
@@ -225,6 +234,10 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                     <CloneIcon width={40} height={40} color={dark.neutral300} />
                   }
                   onClickRightSideElement={() => {
+                    trackCta({
+                      userId,
+                      ctaId: 'copy-deposit-memo',
+                    });
                     copy(depositInfo?.tag);
                     toast.success(t('depositMemo.copied'));
                   }}
