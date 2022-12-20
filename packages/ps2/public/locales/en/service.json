@@ -49,7 +49,7 @@
   "chart-options": {
     "pnl_pct_compound": "PNL % Compound",
     "pnl_ssc": "Daily PNL",
-    "sbt_ssc": "Total balance evolution",
+    "sbt_ssc": "Total balance",
     "at_risk_pct": "% at risk",
     "investors": "N. of investors"
   },
