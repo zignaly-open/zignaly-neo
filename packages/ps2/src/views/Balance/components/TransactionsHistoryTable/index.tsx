@@ -88,12 +88,12 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
       }),
       columnHelper.accessor('fromName', {
         header: t('tableHeader.from'),
-        cell: ({ getValue }) => getValue() || '-',
+        cell: ({ getValue }) => getValue() || t('external'),
         enableSorting: false,
       }),
       columnHelper.accessor('toName', {
         header: t('tableHeader.to'),
-        cell: ({ getValue }) => getValue() || '-',
+        cell: ({ getValue }) => getValue() || t('external'),
         enableSorting: false,
       }),
       columnHelper.accessor('status', {

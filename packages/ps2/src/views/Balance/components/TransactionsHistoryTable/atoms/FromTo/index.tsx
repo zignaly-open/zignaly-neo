@@ -10,6 +10,7 @@ import ChainIcon from '../ChainIcon';
 import ServiceLink from '../ProviderLink';
 import ZignalyAccount from '../TransferZigLabel';
 import { Side, SideType } from './types';
+import { useTranslation } from 'react-i18next';
 
 const getTransactionSideType = (
   txType: TransactionType,
@@ -46,6 +47,7 @@ const FromTo = ({
   const idAddress = side === 'to' ? to : from;
   const name = side === 'to' ? toName : fromName;
   const sideType = getTransactionSideType(txType, side);
+  const { t } = useTranslation('transactions-history');
 
   return sideType === 'service' ? (
     <ServiceLink serviceId={idAddress} serviceName={name} />
@@ -54,7 +56,7 @@ const FromTo = ({
       <Box mr={2}>
         <ChainIcon network={network} />
       </Box>
-      <ZigTypography>{idAddress}</ZigTypography>
+      <ZigTypography>{idAddress || t('external')}</ZigTypography>
     </>
   ) : (
     <ZignalyAccount name={name} />

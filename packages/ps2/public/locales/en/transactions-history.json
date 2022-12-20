@@ -39,5 +39,6 @@
     "title": "Transaction History Report",
     "description": "We will process your request and send you an email in the following 10 minutes with the information to download your transactions history report.",
     "success": "Your request has been processed successfully. Please check your email for the download link."
-  }
+  },
+  "external": "External Address"
 }
