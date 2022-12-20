@@ -109,7 +109,11 @@ export default function ZigTable<T extends object>({
                                       <CheckBox
                                         value={column.getIsVisible()}
                                         label={column.columnDef.header as string}
-                                        onChange={column.toggleVisibility}
+                                        onChange={(v) => {
+                                          if (v || table.getVisibleLeafColumns().length > 1) {
+                                            column.toggleVisibility(v);
+                                          }
+                                        }}
                                       />
                                     ),
                                   };
