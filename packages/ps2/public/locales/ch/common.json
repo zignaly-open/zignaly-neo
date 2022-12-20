@@ -46,6 +46,7 @@
   },
   "amount": "CH-Áṁöüńṫ",
   "percent": "CH-{{value, prettyNumber}}%",
+  "number": "CH-{{value, prettyNumber}}",
   "new-version": "CH-Ńëw vëѓŝïöń, ĉlïĉk ṁë ṫö üṗḋáṫë",
   "validation": {
     "insufficient-amount": "CH-Ïńŝüḟḟïĉïëńṫ ḟüńḋŝ",
