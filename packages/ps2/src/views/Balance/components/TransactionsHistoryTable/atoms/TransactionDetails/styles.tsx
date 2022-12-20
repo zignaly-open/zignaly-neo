@@ -8,7 +8,6 @@ export const TransactionPanel = styled('div')`
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  height: 100%;
   align-items: flex-start;
   padding: 20px;
   gap: 16px;
