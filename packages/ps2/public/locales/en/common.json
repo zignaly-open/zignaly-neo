@@ -30,7 +30,7 @@
   "account-menu": {
     "isAuth-button-logIn": "Log in",
     "isAuth-button-signUp": "SIGN UP",
-    "notAuth-dropdown-link-dashboard": "My Dashboard",
+    "notAuth-dropdown-link-dashboard": "My Portfolio",
     "notAuth-dropdown-link-balances": "My Balances",
     "notAuth-button-logOut": "Logout"
   },
