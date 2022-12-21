@@ -38,12 +38,12 @@ const customStyles = (small: boolean, theme: Theme, userStyles: StylesConfig): S
           background: "rgba(255, 255, 255, 0.2) !important",
         }
       : {}),
-    ...(userStyles.option && userStyles.option(base, state)),
+    ...userStyles.option?.(base, state),
   }),
   singleValue: (base, state) => ({
     ...base,
     display: state.selectProps.menuIsOpen ? "none" : "block",
-    ...(userStyles.singleValue && userStyles.singleValue(base, state)),
+    ...userStyles.singleValue?.(base, state),
   }),
 });
 
