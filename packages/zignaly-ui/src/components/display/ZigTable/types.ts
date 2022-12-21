@@ -14,14 +14,14 @@ declare module "@tanstack/react-table" {
   // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/59304
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  export interface ColumnDefBase {
+  interface ColumnDefBase {
     style?: React.CSSProperties;
   }
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  export interface ColumnMeta {
-    subtitle: string;
+  interface ColumnMeta {
+    subtitle: string | JSX.Element;
     style?: React.CSSProperties;
   }
 }
