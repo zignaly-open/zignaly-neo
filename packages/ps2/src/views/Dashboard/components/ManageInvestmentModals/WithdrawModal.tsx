@@ -39,4 +39,6 @@ function WithdrawModal({
   );
 }
 
+WithdrawModal.trackId = 'withdraw';
+
 export default WithdrawModal;
