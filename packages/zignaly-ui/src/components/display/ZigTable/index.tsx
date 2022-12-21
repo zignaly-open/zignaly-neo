@@ -145,7 +145,9 @@ export default function ZigTable<T extends object>({
                   {row.getVisibleCells().map((cell) => {
                     return (
                       <td key={cell.id}>
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        <ZigTypography variant="body2" fontWeight="medium" color="neutral200">
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </ZigTypography>
                       </td>
                     );
                   })}
