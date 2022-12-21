@@ -106,7 +106,6 @@ export type Transaction = {
     currency: string;
     cost: number;
   };
-  note?: string;
 };
 
 export type Transactions = InfiniteQueryResponse<Transaction[]>;
