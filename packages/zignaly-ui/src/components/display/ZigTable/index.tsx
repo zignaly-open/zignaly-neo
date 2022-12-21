@@ -8,7 +8,13 @@ import {
   getSortedRowModel,
   getExpandedRowModel,
 } from "@tanstack/react-table";
-import { HeaderIconButton, PageNumberContainer, SmallSelectWrapper, SortBox } from "./styles";
+import {
+  TableContainer,
+  HeaderIconButton,
+  PageNumberContainer,
+  SmallSelectWrapper,
+  SortBox,
+} from "./styles";
 import DropDown from "../DropDown";
 import ZigTypography from "../ZigTypography";
 import IconButton from "../../inputs/IconButton";
@@ -60,111 +66,113 @@ export default function ZigTable<T extends object>({
 
   return (
     <>
-      <Table>
-        <thead>
-          {table.getHeaderGroups().map((headerGroup, groupIndex) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header, index) => {
-                return (
-                  <th key={header.id} colSpan={header.colSpan}>
-                    {header.isPlaceholder ? null : (
-                      <Box display="flex" justifyContent="center" alignItems="center">
-                        <SortBox
-                          canSort={header.column.getCanSort()}
-                          onClick={header.column.getToggleSortingHandler()}
-                          style={header.column.columnDef.style}
-                        >
-                          <div>
-                            <ZigTypography color="neutral200" variant="body2">
-                              {flexRender(header.column.columnDef.header, header.getContext())}
-                            </ZigTypography>
-                            {header.column.columnDef.meta?.subtitle && (
-                              <ZigTypography color="neutral400" variant="h5">
-                                {flexRender(
-                                  header.column.columnDef.meta.subtitle,
-                                  header.getContext(),
-                                )}
+      <TableContainer>
+        <Table>
+          <thead>
+            {table.getHeaderGroups().map((headerGroup, groupIndex) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header, index) => {
+                  return (
+                    <th key={header.id} colSpan={header.colSpan}>
+                      {header.isPlaceholder ? null : (
+                        <Box display="flex" justifyContent="center" alignItems="center">
+                          <SortBox
+                            canSort={header.column.getCanSort()}
+                            onClick={header.column.getToggleSortingHandler()}
+                            style={header.column.columnDef.style}
+                          >
+                            <div>
+                              <ZigTypography color="neutral200" variant="body2">
+                                {flexRender(header.column.columnDef.header, header.getContext())}
                               </ZigTypography>
-                            )}
-                          </div>
-                          {header.column.getCanSort() && (
-                            <SortIcon isSorted={header.column.getIsSorted()} />
-                          )}
-                        </SortBox>
-                        {enableColumnVisibility &&
-                          table.getHeaderGroups().length === groupIndex + 1 &&
-                          headerGroup.headers.length === index + 1 && (
-                            <DropDown
-                              component={({ open }) => (
-                                <HeaderIconButton
-                                  variant="flat"
-                                  isFocused={open}
-                                  icon={<MoreVert sx={{ color: "neutral200" }} />}
-                                />
+                              {header.column.columnDef.meta?.subtitle && (
+                                <ZigTypography color="neutral400" variant="h5">
+                                  {flexRender(
+                                    header.column.columnDef.meta.subtitle,
+                                    header.getContext(),
+                                  )}
+                                </ZigTypography>
                               )}
-                              options={table
-                                .getAllLeafColumns()
-                                .filter(
-                                  (c) =>
-                                    c.columnDef.header &&
-                                    typeof c.columnDef.header === "string" &&
-                                    c.getCanHide(),
-                                )
-                                .map((column) => {
-                                  return {
-                                    element: (
-                                      <CheckBox
-                                        value={column.getIsVisible()}
-                                        label={column.columnDef.header as string}
-                                        onChange={(v) => {
-                                          if (v || table.getVisibleLeafColumns().length > 1) {
-                                            column.toggleVisibility(v);
-                                          }
-                                        }}
-                                      />
-                                    ),
-                                  };
-                                })}
-                            />
-                          )}
-                      </Box>
-                    )}
-                  </th>
-                );
-              })}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => {
-            return (
-              <React.Fragment key={row.id}>
-                <tr
-                  {...(row.getCanExpand() && {
-                    onClick: row.getToggleExpandedHandler(),
-                    style: { cursor: "pointer" },
-                  })}
-                >
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <td key={cell.id}>
-                        <ZigTypography variant="body2" fontWeight="medium" color="neutral200">
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </ZigTypography>
-                      </td>
-                    );
-                  })}
-                </tr>
-                {row.getIsExpanded() && (
-                  <tr style={{ border: "none", padding: "0 14px" }}>
-                    <td colSpan={row.getVisibleCells().length}>{renderSubComponent!({ row })}</td>
+                            </div>
+                            {header.column.getCanSort() && (
+                              <SortIcon isSorted={header.column.getIsSorted()} />
+                            )}
+                          </SortBox>
+                          {enableColumnVisibility &&
+                            table.getHeaderGroups().length === groupIndex + 1 &&
+                            headerGroup.headers.length === index + 1 && (
+                              <DropDown
+                                component={({ open }) => (
+                                  <HeaderIconButton
+                                    variant="flat"
+                                    isFocused={open}
+                                    icon={<MoreVert sx={{ color: "neutral200" }} />}
+                                  />
+                                )}
+                                options={table
+                                  .getAllLeafColumns()
+                                  .filter(
+                                    (c) =>
+                                      c.columnDef.header &&
+                                      typeof c.columnDef.header === "string" &&
+                                      c.getCanHide(),
+                                  )
+                                  .map((column) => {
+                                    return {
+                                      element: (
+                                        <CheckBox
+                                          value={column.getIsVisible()}
+                                          label={column.columnDef.header as string}
+                                          onChange={(v) => {
+                                            if (v || table.getVisibleLeafColumns().length > 1) {
+                                              column.toggleVisibility(v);
+                                            }
+                                          }}
+                                        />
+                                      ),
+                                    };
+                                  })}
+                              />
+                            )}
+                        </Box>
+                      )}
+                    </th>
+                  );
+                })}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => {
+              return (
+                <React.Fragment key={row.id}>
+                  <tr
+                    {...(row.getCanExpand() && {
+                      onClick: row.getToggleExpandedHandler(),
+                      style: { cursor: "pointer" },
+                    })}
+                  >
+                    {row.getVisibleCells().map((cell) => {
+                      return (
+                        <td key={cell.id}>
+                          <ZigTypography variant="body2" fontWeight="medium" color="neutral200">
+                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                          </ZigTypography>
+                        </td>
+                      );
+                    })}
                   </tr>
-                )}
-              </React.Fragment>
-            );
-          })}
-        </tbody>
-      </Table>
+                  {row.getIsExpanded() && (
+                    <tr style={{ border: "none", padding: "0 14px" }}>
+                      <td colSpan={row.getVisibleCells().length}>{renderSubComponent!({ row })}</td>
+                    </tr>
+                  )}
+                </React.Fragment>
+              );
+            })}
+          </tbody>
+        </Table>
+      </TableContainer>
       {!data.length && (
         <ZigTypography
           variant="body2"
