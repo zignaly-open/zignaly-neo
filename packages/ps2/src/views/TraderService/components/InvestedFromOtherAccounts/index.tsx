@@ -93,10 +93,8 @@ function InvestedFromOtherAccounts({
                     />
                   ),
               },
-            ] as ColumnDef<
-              typeof allInvestedServices[number],
-              string | number
-            >[]
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ] as ColumnDef<typeof allInvestedServices[number], any>[]
           }
           data={allInvestedServices}
           columnVisibility={false}
