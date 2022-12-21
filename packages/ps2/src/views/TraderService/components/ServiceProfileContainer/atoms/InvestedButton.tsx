@@ -64,7 +64,9 @@ export const InvestedButtonBase: React.FC<{
 }> = ({ service, investedAmount, showMultipleAccountButton }) => {
   const { showModal } = useZModal({ disableAutoDestroy: true });
   const selectInvestment = useSetSelectedInvestment();
-  const investedFromAccounts = useInvestedAccountsCount(service.id);
+  const investedFromAccounts = useInvestedAccountsCount(service.id, {
+    skip: !showMultipleAccountButton,
+  });
 
   const onClickEditInvestment = () => {
     selectInvestment(serviceToInvestmentServiceDetail(service));
