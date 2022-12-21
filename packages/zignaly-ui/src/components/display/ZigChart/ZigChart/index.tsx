@@ -40,7 +40,9 @@ const ZigChart = ({
 
   const yDomain = useMemo(() => {
     const values = processedData.map((s) => s.y);
-    return [Math.min(0, ...values), Math.max(1, ...values)];
+    const ranges = [Math.min(0, ...values), Math.max(1, ...values)];
+    if (ranges[0] < 0 && ranges[1] > 0) ranges[0] = Math.min(ranges[0], ranges[1] * -0.2);
+    return ranges;
   }, [processedData]);
 
   const show2ndAxis = yDomain[0] < 0 && (0 - yDomain[0]) / (yDomain[1] - yDomain[0]) > 0.2;
