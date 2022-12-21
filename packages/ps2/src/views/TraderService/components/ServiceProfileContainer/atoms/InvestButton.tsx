@@ -30,7 +30,9 @@ const InvestButton: React.FC<{
   const navigate = useNavigate();
   const { balance, isFetching } = useCurrentBalance(service.ssc);
   const location = useLocation();
-  const investedFromAccounts = useInvestedAccountsCount(service.id);
+  const investedFromAccounts = useInvestedAccountsCount(service.id, {
+    skip: !showMultipleAccountButton,
+  });
   const [needsToOpenWhenBalancesLoaded, setNeedsToOpenWhenBalancesLoaded] =
     useState<boolean>(false);
 

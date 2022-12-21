@@ -64,3 +64,66 @@ ExampleChart2.args = {
     { x: "Jul 7", y: -25 },
   ],
 };
+
+export const ExampleChartSlightlyNegative = Template.bind({});
+ExampleChartSlightlyNegative.args = {
+  data: [
+    { x: "Jul 1", y: 10 },
+    { x: "Jul 2", y: 15 },
+    { x: "Jul 3", y: 23 },
+    { x: "Jul 4", y: 15 },
+    { x: "Jul 5", y: -1 },
+    { x: "Jul 6", y: 20 },
+    { x: "Jul 7", y: -2 },
+  ],
+};
+
+export const ExampleBarChart = Template.bind({});
+ExampleBarChart.args = {
+  bars: true,
+  data: (() => {
+    let value = 100;
+    // say "trista"
+    return new Array(90).fill(0).map((_, i) => {
+      value += Math.random() * 200 - 1;
+      return {
+        x: "Jun " + i,
+        y: value,
+      };
+    });
+  })(),
+};
+
+export const ExampleBarChartWithEvents = Template.bind({});
+ExampleBarChartWithEvents.args = {
+  events: [
+    { x: 25, label: "Raz raz raz" },
+    { x: 145, label: "Eto hardbass" },
+  ],
+  bars: true,
+  data: (() => {
+    let value = 10;
+    // say "trista"
+    return new Array(300).fill(0).map((_, i) => {
+      value += (Math.random() - 0.5) * 20;
+      return {
+        x: "Jun " + i,
+        y: value,
+      };
+    });
+  })(),
+};
+
+export const ExampleBarChart2 = Template.bind({});
+ExampleBarChart2.args = {
+  bars: true,
+  data: [
+    { x: "Jul 1", y: 10 },
+    { x: "Jul 2", y: 15 },
+    { x: "Jul 3", y: 23 },
+    { x: "Jul 4", y: 15 },
+    { x: "Jul 5", y: -17 },
+    { x: "Jul 6", y: 20 },
+    { x: "Jul 7", y: -25 },
+  ],
+};
