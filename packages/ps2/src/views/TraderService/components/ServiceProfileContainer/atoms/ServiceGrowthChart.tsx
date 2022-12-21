@@ -102,24 +102,56 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   GraphChartType.pnl_pct_compound,
                   GraphChartType.at_risk_pct,
                   GraphChartType.investors,
-                ].includes(chartType) ? (
+                ].includes(chartType) && (
                   <ZigPriceLabel
                     coin={service.ssc}
                     variant={'bigNumber'}
                     color={+value > 0 ? 'greenGraph' : 'redGraphOrError'}
                     value={value}
                   />
-                ) : (
+                )}
+
+                {[
+                  GraphChartType.pnl_pct_compound,
+                  GraphChartType.at_risk_pct,
+                ].includes(chartType) && (
+                  <ZigTypography
+                    variant={'bigNumber'}
+                    sx={{ whiteSpace: 'nowrap' }}
+                    color={
+                      chartType === GraphChartType.sbt_ssc
+                        ? 'neutral200'
+                        : +value > 0
+                        ? 'greenGraph'
+                        : 'redGraphOrError'
+                    }
+                  >
+                    {t('common:percent', { value })}
+                  </ZigTypography>
+                )}
+
+                {[
+                  GraphChartType.pnl_pct_compound,
+                  GraphChartType.at_risk_pct,
+                ].includes(chartType) && (
                   <ZigTypography
                     variant={'bigNumber'}
                     sx={{ whiteSpace: 'nowrap' }}
                     color={+value > 0 ? 'greenGraph' : 'redGraphOrError'}
                   >
-                    {chartType === GraphChartType.investors
-                      ? t('marketplace:table:x-investors', {
-                          count: +value,
-                        })
-                      : t('common:percent', { value })}
+                    {t('common:percent', { value })}
+                  </ZigTypography>
+                )}
+
+                {GraphChartType.investors === chartType && (
+                  <ZigTypography
+                    color={'neutral200'}
+                    variant={'h1'}
+                    sx={{ whiteSpace: 'nowrap' }}
+                  >
+                    {t('marketplace:table:x-investors', {
+                      count: +value,
+                    })}
                   </ZigTypography>
                 )}
               </Box>
