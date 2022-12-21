@@ -15,6 +15,7 @@ import { TransactionsTableDataType, TRANSACTION_TYPE_NAME } from './types';
 import TransactionDetails from './atoms/TransactionDetails';
 import { Box } from '@mui/material';
 import { PaginationState } from '@tanstack/react-table';
+import { truncateAddress } from './util';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(
@@ -93,7 +94,8 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
       }),
       columnHelper.accessor('toName', {
         header: t('tableHeader.to'),
-        cell: ({ getValue }) => getValue() || t('external'),
+        cell: ({ getValue, row: { original } }) =>
+          getValue() || truncateAddress(original.to),
         enableSorting: false,
       }),
       columnHelper.accessor('status', {
