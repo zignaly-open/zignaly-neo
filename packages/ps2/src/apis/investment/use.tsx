@@ -45,7 +45,10 @@ export function useSelectedInvestment(): InvestmentServiceDetails {
     ?.selectedInvestment;
 }
 
-export function useIsInvestedInService(serviceId: string): {
+export function useIsInvestedInService(
+  serviceId: string,
+  options?: { skip: boolean },
+): {
   isLoading: boolean;
   thisAccount: boolean;
   accounts?: InvestedInService;
@@ -54,10 +57,11 @@ export function useIsInvestedInService(serviceId: string): {
 } {
   const isAuthenticated = useIsAuthenticated();
   const exchange = useActiveExchange();
+
   const { isLoading, data, refetch, isFetching } = useInvestedAmountQuery(
     serviceId,
     {
-      skip: !isAuthenticated || !exchange.internalId,
+      skip: !isAuthenticated || !exchange.internalId || options?.skip,
     },
   );
 
@@ -76,9 +80,12 @@ export function useIsInvestedInService(serviceId: string): {
   };
 }
 
-export function useInvestedAccountsCount(serviceId: string): number {
+export function useInvestedAccountsCount(
+  serviceId: string,
+  options?: { skip: boolean },
+): number {
   const isAuthenticated = useIsAuthenticated();
-  const isInvested = useIsInvestedInService(serviceId);
+  const isInvested = useIsInvestedInService(serviceId, options);
 
   return (
     (isAuthenticated && Object.keys(isInvested.accounts || {}).length) || 0
