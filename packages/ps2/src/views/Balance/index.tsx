@@ -44,8 +44,8 @@ const MyBalances: React.FC = () => {
   );
 
   const maxLegend = useCallback(
-    (): CSSObject => ({
-      display: 'inline-block',
+    (_, state): CSSObject => ({
+      display: state.selectProps.menuIsOpen ? 'none' : 'inline-block',
       textAlign: 'center',
 
       ':after': {
@@ -85,10 +85,7 @@ const MyBalances: React.FC = () => {
                   value={type}
                   onChange={setType}
                   styles={{
-                    singleValue: (styles) => ({
-                      ...styles,
-                      ...maxLegend(),
-                    }),
+                    singleValue: maxLegend,
                   }}
                 />
               </Box>
