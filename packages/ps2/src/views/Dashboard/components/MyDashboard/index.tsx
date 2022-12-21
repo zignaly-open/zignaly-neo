@@ -1,14 +1,13 @@
 import {
   PercentageIndicator,
   PriceLabel,
-  sortByValue,
-  Table,
-  Typography,
   ZigChartMini,
+  createColumnHelper,
+  ZigTable,
   ZigTypography,
 } from '@zignaly-open/ui';
-import React, { useCallback, useMemo } from 'react';
-import { Heading, Layout } from './styles';
+import React, { useMemo } from 'react';
+import { Heading, Layout, ZigTableWrapper } from './styles';
 import { useTranslation } from 'react-i18next';
 import {
   useInvestments,
@@ -17,17 +16,13 @@ import {
 import BigNumber from 'bignumber.js';
 import { formatDateFromDays } from './util';
 import { Investment } from '../../../../apis/investment/types';
-import { sortBigNumbers, stringSort } from '../../../../util/numbers';
 import { BalanceSummary } from '../BalanceSummary';
 import EditInvestmentModal from '../ManageInvestmentModals/EditInvestmentModal';
-import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
-import { DashboardTableDataType } from './types';
 import { ServiceName } from '../ServiceName';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import { useZModal } from '../../../../components/ZModal/use';
-import { Box } from '@mui/system';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -47,179 +42,107 @@ const MyDashboard: React.FC = () => {
     });
   };
 
-  const tableColumns: TableProps<DashboardTableDataType>['columns'] = useMemo(
+  const columnHelper = createColumnHelper<Investment>();
+  const columns = useMemo(
     () => [
-      {
-        Header: t('tableHeader.summary.title'),
-        accessor: 'summary',
-        headerWithFooter: (
-          <div>
-            <div>{t('tableHeader.summary.subtitle')}</div>
-          </div>
-        ),
-        Cell: ({ cell: { value } }) => (
-          <BalanceSummary
-            totalValue={value.totalValue}
-            coin={value.service.ssc}
-            profit={value.profit}
-            onClickEdit={() => onClickEditInvestment(value.service)}
-          />
-        ),
-        sortType: (a, b) =>
-          sortBigNumbers(
-            a.values.summary.totalValue,
-            b.values.summary.totalValue,
-          ),
-      },
-      {
-        Header: () => t('tableHeader.serviceName.title'),
+      columnHelper.accessor('invested', {
+        header: t('tableHeader.summary.title'),
+        meta: { subtitle: t('tableHeader.summary.subtitle') },
+        cell: ({ row: { original } }) => {
+          const bigNumberInvestment = new BigNumber(original.invested);
+          const bigNumberPending = new BigNumber(original.pending);
+          const totalValue = bigNumberInvestment.plus(bigNumberPending);
+          return (
+            <BalanceSummary
+              totalValue={totalValue.toFixed()}
+              coin={original.ssc}
+              profit={new BigNumber(original.pnlSumLc).toFixed()}
+              onClickEdit={() => onClickEditInvestment(original)}
+            />
+          );
+        },
+        enableHiding: false,
+        sortingFn: 'alphanumeric',
+      }),
+      columnHelper.accessor('serviceName', {
         style: {
           justifyContent: 'flex-start',
-          paddingLeft: '67px',
+          marginLeft: '83px',
           textAlign: 'left',
         },
-        accessor: 'service',
-        headerWithFooter: (
-          <Box textAlign={'left'}>{t('tableHeader.serviceName.subtitle')}</Box>
-        ),
-        Cell: ({ cell: { value } }) => <ServiceName service={value} />,
-        sortType: (a, b) =>
-          stringSort(
-            a.values.service.serviceName,
-            b.values.service.serviceName,
-          ),
-      },
-      {
-        Header: t('tableHeader.1-mo.title'),
-        accessor: 'chart',
-        Cell: ({ cell: { value } }) =>
-          parseFloat(value.last30Pnl) || Object.keys(value.data).length > 1 ? (
+        header: t('tableHeader.serviceName.title'),
+        meta: {
+          subtitle: t('tableHeader.serviceName.subtitle'),
+        },
+        cell: ({ row: { original } }) => <ServiceName service={original} />,
+      }),
+      columnHelper.accessor('pnl30dPct', {
+        header: t('tableHeader.1-mo.title'),
+        cell: ({ row: { original } }) =>
+          original.pnl30dPct || Object.keys(original.sparklines).length > 1 ? (
             <>
-              <ZigChartMini midLine data={value.data} />
+              <ZigChartMini midLine data={original.sparklines} />
               <PercentageIndicator
                 normalized
-                value={value.last30Pnl}
-                type={'graph'}
+                value={new BigNumber(original.pnl30dPct).toFixed()}
+                type='graph'
               />
             </>
           ) : (
-            <Typography variant={'body2'} color={'neutral400'}>
+            <ZigTypography variant='body2' color='neutral400'>
               {t('tableHeader.1-mo.no-data')}
-            </Typography>
+            </ZigTypography>
           ),
-        sortType: (a, b) =>
-          sortByValue(
-            a.values.service.pnl30dSum || 0,
-            b.values.service.pnl30dSum || 0,
-          ),
-      },
-      {
-        Header: t('tableHeader.dailyAvg-title'),
-        accessor: 'dailyAvg',
-        Cell: ({ cell: { value } }) => (
+        sortingFn: 'alphanumeric',
+      }),
+      columnHelper.accessor('pnlDailyMeanLc', {
+        header: t('tableHeader.dailyAvg-title'),
+        cell: ({ getValue, row: { original } }) => (
           <PriceLabel
-            green={+value.dailyAvgPnl > 0}
-            red={+value.dailyAvgPnl < 0}
-            coin={value.currency}
-            value={value.dailyAvgPnl}
+            green={new BigNumber(getValue()).gt(0)}
+            red={new BigNumber(getValue()).lt(0)}
+            coin={original.ssc}
+            value={new BigNumber(getValue()).toFixed()}
           />
         ),
-        sortType: (a, b) =>
-          sortBigNumbers(
-            a.values.dailyAvg.dailyAvgPnl,
-            b.values.dailyAvg.dailyAvgPnl,
-          ),
-      },
-      {
-        Header: t('tableHeader.3-mos-title'),
-        accessor: 'threeMonths',
-        Cell: ({ cell: { value } }) => (
+        sortingFn: 'alphanumeric',
+      }),
+      columnHelper.accessor('pnl90dPct', {
+        header: t('tableHeader.3-mos-title'),
+        cell: ({ getValue }) => (
           <PercentageIndicator
             normalized
             type='default'
-            value={value.pnl90dPct}
+            value={new BigNumber(getValue()).toFixed()}
           />
         ),
-        sortType: (a, b) =>
-          sortBigNumbers(
-            a.values.threeMonths.pnl90dPct,
-            b.values.threeMonths.pnl90dPct,
-          ),
-      },
-      {
-        Header: t('tableHeader.6-mos-title'),
-        accessor: 'sixMonths',
-        Cell: ({ cell: { value } }) => (
+        sortingFn: 'alphanumeric',
+      }),
+      columnHelper.accessor('pnl180dPct', {
+        header: t('tableHeader.6-mos-title'),
+        cell: ({ getValue }) => (
           <PercentageIndicator
             normalized
             type='default'
-            value={value.pnl180dPct}
+            value={new BigNumber(getValue()).toFixed()}
           />
         ),
-        sortType: (a, b) =>
-          sortBigNumbers(
-            a.values.sixMonths.pnl180dPct,
-            b.values.sixMonths.pnl180dPct,
-          ),
-      },
-      {
-        Header: t('tableHeader.all.title'),
-        accessor: 'all',
-        headerWithFooter: (
-          <div>
-            <div>{t('tableHeader.all.subtitle')}</div>
-          </div>
-        ),
-        Cell: ({ cell: { value } }) => (
+        sortingFn: 'alphanumeric',
+      }),
+      columnHelper.accessor('pnlPctLc', {
+        header: t('tableHeader.all.title'),
+        meta: { subtitle: t('tableHeader.all.subtitle') },
+        cell: ({ getValue, row: { original } }) => (
           <PercentageIndicator
-            type={'default'}
+            type='default'
             normalized
-            value={value.pnlPctLc}
-            label={formatDateFromDays(value.periodsLc)}
+            value={getValue()}
+            label={formatDateFromDays(original.periodsLc)}
           />
         ),
-        sortType: (a, b) =>
-          sortBigNumbers(a.values.all.pnlPctLc, b.values.all.pnlPctLc),
-      },
+        sortingFn: 'alphanumeric',
+      }),
     ],
-    [t],
-  );
-
-  const bodyMapper = useCallback(
-    (service: Investment): DashboardTableDataType => {
-      const bigNumberInvestment = new BigNumber(service.invested);
-      const bigNumberPending = new BigNumber(service.pending);
-      const totalValue = bigNumberInvestment.plus(bigNumberPending);
-
-      return {
-        summary: {
-          totalValue: totalValue.toFixed(),
-          profit: new BigNumber(service.pnlSumLc).toFixed(),
-          service,
-        },
-        service,
-        chart: {
-          data: service.sparklines,
-          last30Pnl: new BigNumber(service.pnl30dPct).toFixed(),
-        },
-        dailyAvg: {
-          dailyAvgPnl: new BigNumber(service.pnlDailyMeanLc).toFixed(),
-          currency: service.ssc,
-        },
-        threeMonths: {
-          pnl90dPct: new BigNumber(service.pnl90dPct).toFixed(),
-          currency: service.ssc,
-        },
-        sixMonths: {
-          pnl180dPct: new BigNumber(service.pnl180dPct).toFixed(),
-          currency: service.ssc,
-        },
-        all: {
-          pnlPctLc: new BigNumber(service.pnlPctLc).toFixed(),
-          periodsLc: service.periodsLc,
-        },
-      };
-    },
     [t],
   );
 
@@ -231,13 +154,14 @@ const MyDashboard: React.FC = () => {
       <LayoutContentWrapper
         endpoint={investmentsEndpoint}
         content={(services: Investment[]) => (
-          <Table
-            columns={tableColumns}
-            data={services?.map(bodyMapper)}
-            emptyMessage={t('table-search-emptyMessage')}
-            hideOptionsButton={true}
-            isUserTable={true}
-          />
+          <ZigTableWrapper>
+            <ZigTable
+              columns={columns}
+              data={services}
+              emptyMessage={t('table-search-emptyMessage')}
+              columnVisibility
+            />
+          </ZigTableWrapper>
         )}
       />
     </Layout>
