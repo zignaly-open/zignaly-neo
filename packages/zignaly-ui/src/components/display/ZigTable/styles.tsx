@@ -3,11 +3,14 @@ import { css, styled } from "@mui/system";
 import { SortDirection } from "@tanstack/react-table";
 import IconButton from "components/inputs/IconButton";
 
+export const TableContainer = styled("div")`
+  overflow: auto;
+`;
+
 export const Table = styled("table")`
   border-spacing: 0;
   width: 100%;
   border-radius: 16px;
-  overflow: hidden;
 
   thead {
     height: 56px;
@@ -73,6 +76,8 @@ export const PageNumberContainer = styled("div")`
 `;
 
 export const SmallSelectWrapper = styled("div")`
+  min-width: 84px;
+
   .zig-react-select {
     &__control {
       min-height: 36px !important;

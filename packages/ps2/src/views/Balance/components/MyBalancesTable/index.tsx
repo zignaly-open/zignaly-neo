@@ -2,7 +2,6 @@ import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   CoinLabel,
-  UsdPriceLabel,
   IconButton,
   ZigTable,
   ZigTablePriceLabel,
@@ -77,7 +76,9 @@ const MyBalancesTable = (): JSX.Element => {
       columnHelper.accessor((row) => row.balance.balanceTotalUSDT, {
         id: 'balanceTotalUSDT',
         header: t('tableHeader.valueUSD'),
-        cell: ({ getValue }) => <UsdPriceLabel value={getValue()} />,
+        cell: ({ getValue }) => (
+          <ZigTablePriceLabel usd color='neutral100' value={getValue()} />
+        ),
         sortingFn: 'alphanumeric',
       }),
       columnHelper.display({

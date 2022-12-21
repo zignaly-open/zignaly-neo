@@ -6,6 +6,7 @@ export interface ZigTableProps<T extends object> extends Omit<TableOptions<T>, "
   pagination?: false | TableState["pagination"];
   loading?: boolean;
   columnVisibility?: boolean;
+  defaultHiddenColumns?: string[];
   renderSubComponent?: (props: { row: Row<T> }) => React.ReactElement;
   emptyMessage?: string;
 }

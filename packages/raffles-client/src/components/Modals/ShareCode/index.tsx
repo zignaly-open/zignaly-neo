@@ -1,12 +1,16 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Box } from '@mui/system';
-import { PriceLabel, Table, Typography } from '@zignaly-open/ui';
-import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
+import {
+  ColumnDef,
+  Typography,
+  ZigTable,
+  ZigTablePriceLabel,
+} from '@zignaly-open/ui';
 import { GET_USER_CODES, GET_USER_CODES_REDEMPTIONS } from 'queries/codes';
 import { useTranslation } from 'react-i18next';
 import DialogContainer from '../DialogContainer';
-import { ShareCodeProps, UserCodes, UserCodesRedemptions } from './types';
+import { ShareCodeProps } from './types';
 import { StyledTable } from './styles';
 import { format } from 'date-fns';
 
@@ -19,128 +23,157 @@ const ShareCode = (props: ShareCodeProps) => {
   const { data: dataCodes } = useQuery(GET_USER_CODES);
   const { data: dataCodesRedemptions } = useQuery(GET_USER_CODES_REDEMPTIONS);
 
-  const columnsCodes: TableProps<UserCodes>['columns'] = [
+  const columnsCodes: ColumnDef<typeof dataCodes.userCodes[number], any>[] = [
     {
-      Header: t('code'),
-      accessor: 'code',
+      header: t('code'),
+      accessorKey: 'code',
     },
     {
-      Header: t('direct-reward'),
-      accessor: 'rewardDirect',
-      Cell: ({ cell: { value } }) =>
-        value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
+      header: t('direct-reward'),
+      accessorKey: 'rewardDirect',
+      cell: ({ getValue }) =>
+        getValue() ? (
+          <ZigTablePriceLabel value={getValue()} coin='ZIG' />
+        ) : (
+          'N/A'
+        ),
     },
     {
-      Header: t('reward-benefits'),
-      accessor: 'rewardFactor',
-      Cell: ({ cell: { value } }) => formatPerc(value),
+      header: t('reward-benefits'),
+      accessorKey: 'rewardFactor',
+      cell: ({ getValue }) => formatPerc(getValue()),
     },
     {
-      Header: t('reward-deposits'),
-      accessor: 'rewardDepositFactor',
-      Cell: ({ cell: { value } }) => formatPerc(value),
+      header: t('reward-deposits'),
+      accessorKey: 'rewardDepositFactor',
+      cell: ({ getValue }) => formatPerc(getValue()),
     },
     {
-      Header: t('max-rewards'),
-      accessor: 'maxTotalRewards',
-      Cell: ({ cell: { value } }) =>
-        value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
+      header: t('max-rewards'),
+      accessorKey: 'maxTotalRewards',
+      cell: ({ getValue }) =>
+        getValue() ? (
+          <ZigTablePriceLabel value={getValue()} coin='ZIG' />
+        ) : (
+          'N/A'
+        ),
     },
     {
-      Header: t('direct-benefits'),
-      accessor: 'benefitDirect',
-      Cell: ({ cell: { value } }) =>
-        value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
+      header: t('direct-benefits'),
+      accessorKey: 'benefitDirect',
+      cell: ({ getValue }) =>
+        getValue() ? (
+          <ZigTablePriceLabel value={getValue()} coin='ZIG' />
+        ) : (
+          'N/A'
+        ),
     },
     {
-      Header: t('balance-benefits'),
-      accessor: 'benefitBalanceFactor',
-      Cell: ({ cell: { value } }) => formatPerc(value),
+      header: t('balance-benefits'),
+      accessorKey: 'benefitBalanceFactor',
+      cell: ({ getValue }) => formatPerc(getValue()),
     },
     {
-      Header: t('deposit-benefits'),
-      accessor: 'benefitDepositFactor',
-      Cell: ({ cell: { value } }) => formatPerc(value),
+      header: t('deposit-benefits'),
+      accessorKey: 'benefitDepositFactor',
+      cell: ({ getValue }) => formatPerc(getValue()),
     },
     {
-      Header: t('max-benefit'),
-      accessor: 'maxTotalBenefits',
-      Cell: ({ cell: { value } }) =>
-        value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
+      header: t('max-benefit'),
+      accessorKey: 'maxTotalBenefits',
+      cell: ({ getValue }) =>
+        getValue() ? (
+          <ZigTablePriceLabel value={getValue()} coin='ZIG' />
+        ) : (
+          'N/A'
+        ),
     },
     {
-      Header: t('current-redemptions'),
-      accessor: 'currentRedemptions',
+      header: t('current-redemptions'),
+      accessorKey: 'currentRedemptions',
     },
     {
-      Header: t('maximum-redemptions'),
-      accessor: 'maxRedemptions',
-      Cell: ({ cell: { value } }) => value || 'N/A',
+      header: t('maximum-redemptions'),
+      accessorKey: 'maxRedemptions',
+      cell: ({ getValue }) => getValue() || 'N/A',
     },
     {
-      Header: t('min-balance'),
-      accessor: 'reqMinimumBalance',
-      Cell: ({ cell: { value } }) =>
-        value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
+      header: t('min-balance'),
+      accessorKey: 'reqMinimumBalance',
+      cell: ({ getValue }) =>
+        getValue() ? (
+          <ZigTablePriceLabel value={getValue()} coin='ZIG' />
+        ) : (
+          'N/A'
+        ),
     },
     {
-      Header: t('min-deposit'),
-      accessor: 'reqMinimumDeposit',
-      Cell: ({ cell: { value } }) =>
-        value ? <PriceLabel value={value} coin='ZIG' /> : 'N/A',
+      header: t('min-deposit'),
+      accessorKey: 'reqMinimumDeposit',
+      cell: ({ getValue }) =>
+        getValue ? <ZigTablePriceLabel value={getValue()} coin='ZIG' /> : 'N/A',
     },
     {
-      Header: t('only-deposit-from'),
-      accessor: 'reqDepositFrom',
-      Cell: ({ cell: { value } }) => formatDate(value),
+      header: t('only-deposit-from'),
+      accessorKey: 'reqDepositFrom',
+      cell: ({ getValue }) => formatDate(getValue()),
     },
     {
-      Header: t('min-auction-bids'),
-      accessor: 'reqAuctionBids',
-      Cell: ({ cell: { value } }) => value || 'N/A',
+      header: t('min-auction-bids'),
+      accessorKey: 'reqAuctionBids',
+      cell: ({ getValue }) => getValue() || 'N/A',
     },
     {
-      Header: t('wallet'),
-      accessor: 'reqWalletType',
-      Cell: ({ cell: { value } }) =>
-        value ? value.charAt(0).toUpperCase() + value.slice(1) : 'N/A',
+      header: t('wallet'),
+      accessorKey: 'reqWalletType',
+      cell: ({ getValue }) =>
+        getValue()
+          ? getValue().charAt(0).toUpperCase() + getValue().slice(1)
+          : 'N/A',
     },
     {
-      Header: t('expiration-date'),
-      accessor: 'endDate',
-      Cell: ({ cell: { value } }) => formatDate(value),
+      header: t('expiration-date'),
+      accessorKey: 'endDate',
+      cell: ({ getValue }) => formatDate(getValue()),
     },
   ];
 
-  const columnsCodesRedemptions: TableProps<UserCodesRedemptions>['columns'] = [
+  const columnsCodesRedemptions: ColumnDef<
+    typeof dataCodes.userCodes[number],
+    any
+  >[] = [
     {
-      Header: t('date'),
-      accessor: 'redemptionDate',
-      Cell: ({ cell: { value } }) => format(new Date(value), 'PP'),
+      header: t('date'),
+      accessorKey: 'redemptionDate',
+      cell: ({ getValue }) => format(new Date(getValue()), 'PP'),
     },
     {
-      Header: t('code'),
-      accessor: 'code',
+      header: t('code'),
+      accessorKey: 'code',
     },
     {
-      Header: t('your-reward'),
-      accessor: 'inviterBenefit',
-      Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
+      header: t('your-reward'),
+      accessorKey: 'inviterBenefit',
+      cell: ({ getValue }) => (
+        <ZigTablePriceLabel value={getValue()} coin='ZIG' />
+      ),
     },
     {
-      Header: t('your-friend-benefits'),
-      accessor: 'invitedBenefit',
-      Cell: ({ cell: { value } }) => <PriceLabel value={value} coin='ZIG' />,
+      header: t('your-friend-benefits'),
+      accessorKey: 'invitedBenefit',
+      cell: ({ getValue }) => (
+        <ZigTablePriceLabel value={getValue()} coin='ZIG' />
+      ),
     },
     {
-      Header: t('user'),
-      accessor: 'invited.username',
-      Cell: ({ cell: { value }, data, row }) =>
-        value || `${t('user')}#${data[row.index].invited.id}`,
+      header: t('user'),
+      accessorKey: 'invited.username',
+      cell: ({ getValue, row: { original } }) =>
+        getValue() || `${t('user')}#${original.invited.id}`,
     },
     {
-      Header: t('address'),
-      accessor: 'invited.shortAddress',
+      header: t('address'),
+      accessorKey: 'invited.shortAddress',
     },
   ];
 
@@ -163,11 +196,9 @@ const ShareCode = (props: ShareCodeProps) => {
       </Box>
       {dataCodes && (
         <StyledTable>
-          <Table
+          <ZigTable
             columns={columnsCodes}
             data={dataCodes.userCodes}
-            isUserTable={false}
-            hideOptionsButton={false}
             defaultHiddenColumns={[
               'rewardFactor',
               'maxTotalRewards',
@@ -190,13 +221,11 @@ const ShareCode = (props: ShareCodeProps) => {
       </Box>
       {dataCodesRedemptions && (
         <StyledTable>
-          <Table
+          <ZigTable
             columns={columnsCodesRedemptions}
             data={dataCodesRedemptions.userCodesRedemptions}
-            isUserTable={false}
-            hideOptionsButton={false}
             initialState={{
-              sortBy: [
+              sorting: [
                 {
                   id: 'redemptionDate',
                   desc: true,
