@@ -204,7 +204,9 @@ export default function ZigTable<T extends object>({
               </PageNumberContainer>
               {table.getPageCount() !== -1 && (
                 <>
-                  <ZigTypography color="neutral300">out of</ZigTypography>
+                  <ZigTypography whiteSpace="nowrap" color="neutral300">
+                    out of
+                  </ZigTypography>
                   <ZigTypography color="neutral100" fontWeight={600}>
                     {table.getPageCount()}
                   </ZigTypography>
@@ -231,7 +233,7 @@ export default function ZigTable<T extends object>({
               />
             )}
           </Box>
-          <Box flex={3} display="flex" gap={2} alignItems="center" justifyContent="flex-end">
+          <Box flex={3} display="flex" gap={2} alignItems="center" justifyContent="flex-end" ml={2}>
             <ZigTypography color="neutral300">Displaying</ZigTypography>
             <SmallSelectWrapper>
               <ZigSelect
