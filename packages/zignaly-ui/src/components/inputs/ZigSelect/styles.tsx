@@ -16,6 +16,7 @@ export const StyledSelectWrapper = styled(Box)<Props>`
       border-radius: 5px;
       display: flex;
       align-items: center;
+      cursor: pointer;
       ${({ outlined }) =>
         css`
           background: ${outlined ? "transparent" : "rgba(16, 18, 37)"};
