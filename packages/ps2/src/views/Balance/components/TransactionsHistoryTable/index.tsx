@@ -6,6 +6,7 @@ import {
   DateLabel,
   ZigPriceLabel,
   ZigTable,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import LayoutContentWrapper from 'components/LayoutContentWrapper';
 import { useExchangeCoinsList, useTransactionsHistory } from 'apis/coin/use';
@@ -77,7 +78,15 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
       }),
       columnHelper.accessor('txType', {
         header: t('tableHeader.type'),
-        cell: ({ getValue }) => t(TRANSACTION_TYPE_NAME[getValue()]),
+        cell: ({ getValue }) => (
+          <ZigTypography
+            whiteSpace='normal'
+            color='neutral100'
+            fontWeight={500}
+          >
+            {t(TRANSACTION_TYPE_NAME[getValue()])}
+          </ZigTypography>
+        ),
         enableSorting: false,
       }),
       columnHelper.accessor('amount', {
@@ -89,13 +98,28 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
       }),
       columnHelper.accessor('fromName', {
         header: t('tableHeader.from'),
-        cell: ({ getValue }) => getValue() || t('external'),
+        cell: ({ getValue }) => (
+          <ZigTypography
+            whiteSpace='normal'
+            color='neutral100'
+            fontWeight={500}
+          >
+            {getValue() || t('external')}
+          </ZigTypography>
+        ),
         enableSorting: false,
       }),
       columnHelper.accessor('toName', {
         header: t('tableHeader.to'),
-        cell: ({ getValue, row: { original } }) =>
-          getValue() || truncateAddress(original.to),
+        cell: ({ getValue, row: { original } }) => (
+          <ZigTypography
+            whiteSpace='normal'
+            color='neutral100'
+            fontWeight={500}
+          >
+            {getValue() || truncateAddress(original.to)}
+          </ZigTypography>
+        ),
         enableSorting: false,
       }),
       columnHelper.accessor('status', {
