@@ -28,6 +28,7 @@ export default function ZigTable<T extends object>({
   renderSubComponent,
   pagination,
   loading,
+  emptyMessage,
   ...rest
 }: ZigTableProps<T>) {
   const [sorting, setSorting] = React.useState<SortingState>(initialState.sorting ?? []);
@@ -68,6 +69,7 @@ export default function ZigTable<T extends object>({
                         <SortBox
                           canSort={header.column.getCanSort()}
                           onClick={header.column.getToggleSortingHandler()}
+                          style={header.column.columnDef.style}
                         >
                           <div>
                             <ZigTypography color="neutral200" variant="body2">
@@ -101,7 +103,9 @@ export default function ZigTable<T extends object>({
                                 .getAllLeafColumns()
                                 .filter(
                                   (c) =>
-                                    c.columnDef.header && typeof c.columnDef.header === "string",
+                                    c.columnDef.header &&
+                                    typeof c.columnDef.header === "string" &&
+                                    c.getCanHide(),
                                 )
                                 .map((column) => {
                                   return {
@@ -156,6 +160,19 @@ export default function ZigTable<T extends object>({
           })}
         </tbody>
       </Table>
+      {!data.length && (
+        <ZigTypography
+          variant="body2"
+          color="neutral400"
+          textAlign="center"
+          padding="36px"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          {emptyMessage}
+        </ZigTypography>
+      )}
       {pagination !== false && (
         <Box p="22px" display="flex" alignItems="center" justifyContent="center">
           <Box display="flex" flex={3} justifyContent="flex-start" />
