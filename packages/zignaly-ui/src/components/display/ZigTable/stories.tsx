@@ -3,7 +3,6 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { NumericFormat } from "react-number-format";
 import ZigTable from ".";
 import PercentageIndicator from "../Table/components/PercentageIndicator";
-import ConnectionStateLabel from "../Table/components/ConnectionStateLabel";
 import DateLabel from "../Table/components/DateLabel";
 import CoinLabel from "../Table/components/CoinLabel";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
@@ -251,7 +250,7 @@ const investorsTableColumns: ColumnDef<typeof investorsTableData[number], any>[]
   {
     header: "Status",
     accessorKey: "status",
-    cell: ({ getValue }) => <ConnectionStateLabel stateId={getValue()} />,
+    cell: ({ getValue }) => getValue(),
   },
 ];
 
