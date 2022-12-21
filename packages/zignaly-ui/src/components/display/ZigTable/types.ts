@@ -1,10 +1,6 @@
-import {
-  Row,
-  TableOptions,
-  TableState,
-  ColumnMeta as ColumnMetaOrig,
-  ColumnDefBase as ColumnDefBaseOrig,
-} from "@tanstack/react-table";
+import React from "react";
+
+import { Row, TableOptions, TableState } from "@tanstack/react-table";
 
 export interface ZigTableProps<T extends object> extends Omit<TableOptions<T>, "getCoreRowModel"> {
   pagination?: false | TableState["pagination"];
@@ -15,11 +11,16 @@ export interface ZigTableProps<T extends object> extends Omit<TableOptions<T>, "
 }
 
 declare module "@tanstack/react-table" {
-  export interface ColumnDefBase extends ColumnDefBaseOrig {
+  // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/59304
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  export interface ColumnDefBase {
     style?: React.CSSProperties;
   }
 
-  export interface ColumnMeta extends ColumnMetaOrig {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  export interface ColumnMeta {
     subtitle: string;
     style?: React.CSSProperties;
   }
