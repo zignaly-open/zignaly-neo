@@ -25,6 +25,7 @@ export default function ZigTable<T extends object>({
   columns,
   initialState = {},
   columnVisibility: enableColumnVisibility = true,
+  defaultHiddenColumns = [],
   renderSubComponent,
   pagination,
   loading,
@@ -32,7 +33,9 @@ export default function ZigTable<T extends object>({
   ...rest
 }: ZigTableProps<T>) {
   const [sorting, setSorting] = React.useState<SortingState>(initialState.sorting ?? []);
-  const [columnVisibility, setColumnVisibility] = React.useState({});
+  const [columnVisibility, setColumnVisibility] = React.useState(
+    Object.assign({}, ...defaultHiddenColumns.map((c) => ({ [c]: false }))),
+  );
 
   const table = useReactTable({
     data,
