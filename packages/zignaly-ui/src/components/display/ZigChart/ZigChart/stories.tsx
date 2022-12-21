@@ -84,7 +84,7 @@ ExampleBarChart.args = {
   data: (() => {
     let value = 100;
     // say "trista"
-    return new Array(300).fill(0).map((_, i) => {
+    return new Array(90).fill(0).map((_, i) => {
       value += Math.random() * 200 - 1;
       return {
         x: "Jun " + i,

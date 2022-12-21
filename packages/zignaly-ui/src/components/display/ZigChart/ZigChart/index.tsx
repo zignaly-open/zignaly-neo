@@ -33,8 +33,9 @@ const ZigChart = ({
   const { data: processedData, color, gradient } = useChartData(data);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
-  const barChartWidth = (width || 0) / processedData.length;
-  const barChartWidthAdjustedForPadding = (width || 0) / (processedData.length + 1);
+  const pureChartWidth = width ? width - 70 - 2 : 0;
+  const barChartWidth = pureChartWidth / processedData.length;
+  const barChartWidthAdjustedForPadding = Math.min(25, pureChartWidth / (processedData.length + 2));
 
   // dirty fix for rerender
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
@@ -157,7 +158,7 @@ const ZigChart = ({
 
           {bars ? (
             <VictoryBar
-              barRatio={1}
+              barRatio={0.9}
               animate={{
                 duration: 2000,
                 onLoad: { duration: 1000 },
