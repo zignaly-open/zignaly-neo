@@ -211,15 +211,9 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           <CenteredLoader />
         ) : (
           <ZigChart
+            bars={chartType === GraphChartType.pnl_ssc}
             onlyIntegerTicks={chartType === GraphChartType.investors}
             events={events}
-            forceColor={
-              chartType === GraphChartType.pnl_ssc
-                ? value > 0
-                  ? 'green'
-                  : 'red'
-                : undefined
-            }
             yAxisFormatter={(v) =>
               `${v
                 .toString()
