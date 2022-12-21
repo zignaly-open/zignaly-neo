@@ -83,7 +83,10 @@ const PendingTransactionsList: React.FC<{
                 header: t('modal.pendingTransaction.tableHeader.status'),
                 accessorKey: 'status',
               },
-            ] as ColumnDef<typeof pendingTransactionsList[number], any>[]
+            ] as ColumnDef<
+              typeof pendingTransactionsList[number],
+              string | number
+            >[]
           }
           data={pendingTransactionsList}
           columnVisibility={false}
