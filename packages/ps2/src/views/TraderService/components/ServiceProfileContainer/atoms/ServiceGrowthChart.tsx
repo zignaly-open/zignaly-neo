@@ -108,7 +108,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                       <ZigTypography
                         color={'neutral200'}
                         variant={'h1'}
-                        sx={{ mr: 0.5 }}
+                        sx={{ mr: 0.5, position: 'relative', top: '1px' }}
                       >
                         {t('service:total')}
                       </ZigTypography>
