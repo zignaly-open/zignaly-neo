@@ -2,7 +2,6 @@ export { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import Avatar from "./components/display/Avatar";
 import ErrorMessage from "./components/display/ErrorMessage";
 import Loader from "./components/display/Loader";
-import Table from "./components/display/Table";
 import ZigTable from "./components/display/ZigTable";
 import DateLabel from "./components/display/Table/components/DateLabel";
 import PercentageIndicator from "./components/display/Table/components/PercentageIndicator";
@@ -110,7 +109,6 @@ export {
    */
   Avatar,
   Loader,
-  Table,
   ZigTable,
   DateLabel,
   PriceLabel,

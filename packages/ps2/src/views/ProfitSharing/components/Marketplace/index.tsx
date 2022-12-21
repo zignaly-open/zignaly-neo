@@ -62,6 +62,7 @@ const Marketplace: React.FC = () => {
             numberOfInvestors={props.row.original.investors}
           />
         ),
+        sortingFn: 'alphanumeric',
       }),
       columnHelper.accessor('pnlPercent90t', {
         header: t('table.n-months-pnl', { count: 3 }),
@@ -81,6 +82,7 @@ const Marketplace: React.FC = () => {
             )}
           />
         ),
+        sortingFn: 'alphanumeric',
       }),
       columnHelper.accessor('pnlPercent30t', {
         header: t('table.n-months-pnl', { count: 1 }),
@@ -100,6 +102,7 @@ const Marketplace: React.FC = () => {
               {t('tableHeader.1-mo.no-data')}
             </ZigTypography>
           ),
+        sortingFn: 'alphanumeric',
       }),
       columnHelper.display({
         header: '',
