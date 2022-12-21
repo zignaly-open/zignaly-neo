@@ -67,12 +67,10 @@ export const TRANSACTION_TYPE = {
   PS_DEPOSIT: 'psDeposit',
   // Investment out from a PS1 service
   PS_WITHDRAW: 'psWithdraw',
-  // Investment in a PS2 service
-  PS2_DEPOSIT: 'ps2_deposit',
+  // Transfers made during PSDS (free withdrawal)
+  PSDS: 'psds',
   // Internal transfers of PS2 (between SCA and STA or from STA to DFA when a service is converted to PS2)
   PS2: 'ps2',
-  // Transfers made during PSDS
-  PSDS: 'psds',
   // Transfers made when buying ZIG
   BUYZIG: 'buyZig',
   // In PS1 transfers when the trader receives his success fee

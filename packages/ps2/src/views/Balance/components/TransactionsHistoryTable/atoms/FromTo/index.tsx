@@ -17,11 +17,13 @@ const getTransactionSideType = (
   side: Side,
 ): SideType => {
   if (
-    ([TRANSACTION_TYPE.PS_DEPOSIT, TRANSACTION_TYPE.PS2_DEPOSIT].includes(
-      txType,
-    ) &&
-      side === 'to') ||
-    (txType === TRANSACTION_TYPE.PS_WITHDRAW && side === 'from')
+    (txType === TRANSACTION_TYPE.PS_DEPOSIT && side === 'to') ||
+    ([
+      TRANSACTION_TYPE.PS_WITHDRAW,
+      TRANSACTION_TYPE.PSDS,
+      TRANSACTION_TYPE.SUCCESS_FEE,
+    ].includes(txType) &&
+      side === 'from')
   ) {
     return 'service';
   }
