@@ -17,6 +17,7 @@ import {
   ChartWrapper,
   GraphPercentageWrapperBox,
   SqueezedButtonGroup,
+  SelectWrapperBox,
 } from '../styles';
 import { useChartConfig, useChartData } from '../../../../../apis/service/use';
 import Stub from '../../../../../components/Stub';
@@ -50,17 +51,13 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
         label: t('chart-options.sbt_ssc', { coin: service.ssc }),
         value: GraphChartType.sbt_ssc,
       },
-      {
-        label: t('chart-options.at_risk_pct'),
-        value: GraphChartType.at_risk_pct,
-      },
       { label: t('chart-options.investors'), value: GraphChartType.investors },
     ],
     [t],
   );
 
   const serviceStartedDaysAgo = useMemo(
-    () => differenceInDays(new Date(service.createdAt), new Date()),
+    () => differenceInDays(new Date(), new Date(service.createdAt)),
     [service.createdAt],
   );
 
@@ -72,6 +69,13 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
       return allEvents;
     }
   }, [data?.migrationIndex]);
+
+  const canShowSummary =
+    typeof data?.summary !== 'undefined' &&
+    !isError &&
+    !isLoading &&
+    !isFetching;
+  const value = data?.summary;
 
   return (
     <Box>
@@ -85,64 +89,79 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           flexWrap: 'wrap',
         }}
       >
-        {typeof data?.summary !== 'undefined' &&
-          !isError &&
-          !isLoading &&
-          !isFetching && (
-            <>
-              <Box sx={{ mr: 2 }}>
-                <Box
-                  sx={{
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
-                  {![
-                    GraphChartType.pnl_pct_compound,
-                    GraphChartType.at_risk_pct,
-                    GraphChartType.investors,
-                  ].includes(chartType) ? (
+        {canShowSummary && (
+          <>
+            <Box sx={{ mr: 2 }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                {![
+                  GraphChartType.pnl_pct_compound,
+                  GraphChartType.at_risk_pct,
+                  GraphChartType.investors,
+                ].includes(chartType) && (
+                  <>
+                    {chartType === GraphChartType.pnl_ssc && (
+                      <ZigTypography
+                        color={'neutral200'}
+                        variant={'h1'}
+                        sx={{ mr: 0.5 }}
+                      >
+                        {t('service:total')}
+                      </ZigTypography>
+                    )}
                     <ZigPriceLabel
                       coin={service.ssc}
                       variant={'bigNumber'}
                       color={
-                        +data?.summary > 0 ? 'greenGraph' : 'redGraphOrError'
+                        chartType === GraphChartType.sbt_ssc
+                          ? 'neutral200'
+                          : +value > 0
+                          ? 'greenGraph'
+                          : 'redGraphOrError'
                       }
-                      value={data?.summary}
+                      value={value}
                     />
-                  ) : (
-                    <ZigTypography
-                      variant={'bigNumber'}
-                      sx={{ whiteSpace: 'nowrap' }}
-                      color={
-                        +data?.summary > 0 ? 'greenGraph' : 'redGraphOrError'
-                      }
-                    >
-                      {chartType === GraphChartType.investors
-                        ? t('marketplace:table:x-investors', {
-                            count: +data?.summary,
-                          })
-                        : t('common:percent', { value: data?.summary })}
-                    </ZigTypography>
-                  )}
-                </Box>
-              </Box>
+                  </>
+                )}
 
-              {![
-                GraphChartType.pnl_pct_compound,
-                GraphChartType.at_risk_pct,
-                GraphChartType.investors,
-              ].includes(chartType) && (
-                <GraphPercentageWrapperBox sx={{ mr: 2 }}>
-                  <PercentChange
-                    colored
-                    variant='h2'
-                    value={data?.summaryPct}
-                  />
-                </GraphPercentageWrapperBox>
-              )}
-            </>
-          )}
+                {[
+                  GraphChartType.pnl_pct_compound,
+                  GraphChartType.at_risk_pct,
+                ].includes(chartType) && (
+                  <ZigTypography
+                    variant={'bigNumber'}
+                    sx={{ whiteSpace: 'nowrap' }}
+                    color={+value > 0 ? 'greenGraph' : 'redGraphOrError'}
+                  >
+                    {t('common:percent', { value })}
+                  </ZigTypography>
+                )}
+
+                {GraphChartType.investors === chartType && (
+                  <ZigTypography
+                    color={'neutral200'}
+                    variant={'h1'}
+                    sx={{ whiteSpace: 'nowrap' }}
+                  >
+                    {t('marketplace:table:x-investors', {
+                      count: +value,
+                    })}
+                  </ZigTypography>
+                )}
+              </Box>
+            </Box>
+
+            {typeof data?.percentDiff !== 'undefined' && (
+              <GraphPercentageWrapperBox sx={{ mr: 2 }}>
+                <PercentChange colored variant='h2' value={data?.percentDiff} />
+              </GraphPercentageWrapperBox>
+            )}
+          </>
+        )}
 
         <Box sx={{ flex: 1 }} />
         <Box sx={{ mr: 2 }}>
@@ -171,7 +190,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
             })}
           </SqueezedButtonGroup>
         </Box>
-        <Box sx={{ mr: 4.5 }}>
+        <SelectWrapperBox sx={{ mr: 4.5 }}>
           <ZigSelect
             outlined
             width={180}
@@ -180,7 +199,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
             onChange={(v) => setChartType(v)}
             options={chartTypeOptions}
           />
-        </Box>
+        </SelectWrapperBox>
       </Box>
       <ChartWrapper>
         {isError ? (
@@ -194,6 +213,13 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           <ZigChart
             onlyIntegerTicks={chartType === GraphChartType.investors}
             events={events}
+            forceColor={
+              chartType === GraphChartType.pnl_ssc
+                ? value > 0
+                  ? 'green'
+                  : 'red'
+                : undefined
+            }
             yAxisFormatter={(v) =>
               `${v
                 .toString()

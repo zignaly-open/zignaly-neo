@@ -145,16 +145,21 @@ export function useChartData({
     }
 
     const dates = Object.entries(chart).sort(([a], [b]) => a.localeCompare(b));
+    const graph = dates?.map(([date, value]) => ({
+      x: formatMonthDay(parse(date, 'yyyy-MM-dd', Date.now())),
+      y: value,
+    }));
 
     return {
       summary: data?.summary,
-      summaryPct: data?.summaryPct,
+      percentDiff: [GraphChartType.investors, GraphChartType.sbt_ssc].includes(
+        chartType,
+      )
+        ? data?.summaryPct
+        : undefined,
       migrationDate: data?.migration_date,
       migrationIndex: dates.findIndex(([x]) => x === data?.migration_date),
-      data: dates.map(([date, value]) => ({
-        x: formatMonthDay(parse(date, 'yyyy-MM-dd', Date.now())),
-        y: value,
-      })),
+      data: graph,
     };
   }, [data?.data]);
 

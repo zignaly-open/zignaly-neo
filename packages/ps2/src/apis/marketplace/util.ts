@@ -1,7 +1,7 @@
 import { Investment } from '../investment/types';
 import { MarketplaceService } from './types';
-import type { AxisFormat } from '@zignaly-open/ui/lib/components/display/ZigChart/types';
 import { Service } from '../service/types';
+import { AxisFormat } from '@zignaly-open/ui/lib/components/display/ZigChart/types';
 
 export function marketplaceServiceToInvestmentType(
   service: MarketplaceService,

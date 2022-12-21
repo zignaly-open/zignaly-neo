@@ -20,7 +20,7 @@ const CoinIcon = ({ size = CoinSizes.MEDIUM, name, coin, className = "" }: CoinT
   }, [coin]);
 
   return (
-    <Layout className={[size, className] as any} data-testid="coin-icon-view">
+    <Layout size={size} className={className} data-testid="coin-icon-view">
       <Image src={src} alt={name} onError={onError} />
     </Layout>
   );

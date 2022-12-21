@@ -1,5 +1,5 @@
 import React from "react";
-import NumberFormat from "react-number-format";
+import { NumericFormat } from "react-number-format";
 import { useTheme } from "styled-components";
 import BigNumber from "bignumber.js";
 import { Layout, Row, Container, Indicator, Subtitle, Inline } from "./styles";
@@ -29,7 +29,7 @@ const PercentageIndicator = ({
         return (
           <Inline>
             <ValueIndicator variant={"body2"} className={indicatorClassName}>
-              <NumberFormat
+              <NumericFormat
                 style={style}
                 value={bigNumberValue.toFixed()}
                 displayType={"text"}
@@ -61,7 +61,7 @@ const PercentageIndicator = ({
         return (
           <Inline>
             <ValueIndicator variant={"body1"} className={indicatorClassName}>
-              <NumberFormat
+              <NumericFormat
                 style={style}
                 value={bigNumberValue.toFixed()}
                 displayType={"text"}
@@ -77,7 +77,7 @@ const PercentageIndicator = ({
         return (
           <Inline>
             <ValueIndicator variant={"body1"} className={indicatorClassName}>
-              <NumberFormat
+              <NumericFormat
                 style={style}
                 value={bigNumberValue.toFixed()}
                 displayType={"text"}
