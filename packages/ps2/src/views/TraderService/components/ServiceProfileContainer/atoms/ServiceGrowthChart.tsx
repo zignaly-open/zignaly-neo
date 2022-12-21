@@ -103,31 +103,29 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   GraphChartType.at_risk_pct,
                   GraphChartType.investors,
                 ].includes(chartType) && (
-                  <ZigPriceLabel
-                    coin={service.ssc}
-                    variant={'bigNumber'}
-                    color={+value > 0 ? 'greenGraph' : 'redGraphOrError'}
-                    value={value}
-                  />
-                )}
-
-                {[
-                  GraphChartType.pnl_pct_compound,
-                  GraphChartType.at_risk_pct,
-                ].includes(chartType) && (
-                  <ZigTypography
-                    variant={'bigNumber'}
-                    sx={{ whiteSpace: 'nowrap' }}
-                    color={
-                      chartType === GraphChartType.sbt_ssc
-                        ? 'neutral200'
-                        : +value > 0
-                        ? 'greenGraph'
-                        : 'redGraphOrError'
-                    }
-                  >
-                    {t('common:percent', { value })}
-                  </ZigTypography>
+                  <>
+                    {chartType === GraphChartType.pnl_ssc && (
+                      <ZigTypography
+                        color={'neutral200'}
+                        variant={'h1'}
+                        sx={{ mr: 0.5 }}
+                      >
+                        {t('service:total')}
+                      </ZigTypography>
+                    )}
+                    <ZigPriceLabel
+                      coin={service.ssc}
+                      variant={'bigNumber'}
+                      color={
+                        chartType === GraphChartType.sbt_ssc
+                          ? 'neutral200'
+                          : +value > 0
+                          ? 'greenGraph'
+                          : 'redGraphOrError'
+                      }
+                      value={value}
+                    />
+                  </>
                 )}
 
                 {[
