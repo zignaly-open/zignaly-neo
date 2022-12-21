@@ -93,7 +93,10 @@ function InvestedFromOtherAccounts({
                     />
                   ),
               },
-            ] as ColumnDef<typeof allInvestedServices[number], any>[]
+            ] as ColumnDef<
+              typeof allInvestedServices[number],
+              string | number
+            >[]
           }
           data={allInvestedServices}
           columnVisibility={false}
