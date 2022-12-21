@@ -3,6 +3,9 @@ import { TableProps, tableTypes } from "./types";
 import BasicTable from "./types/BasicTable";
 import PagedWithDataTable from "./types/PagedWithDataTable";
 
+/**
+ * @deprecated
+ */
 const Table = <T extends object>({
   columns = [],
   data = [],

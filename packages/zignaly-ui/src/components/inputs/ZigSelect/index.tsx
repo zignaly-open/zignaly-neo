@@ -7,7 +7,8 @@ import Select, { StylesConfig } from "react-select";
 import Theme from "../../../theme/theme";
 import { useTheme } from "styled-components";
 
-const customStyles = (small: boolean, theme: Theme): StylesConfig => ({
+const customStyles = (small: boolean, theme: Theme, userStyles: StylesConfig): StylesConfig => ({
+  ...userStyles,
   menuPortal: (base) => ({
     ...base,
     zIndex: "1500 !important",
@@ -37,10 +38,12 @@ const customStyles = (small: boolean, theme: Theme): StylesConfig => ({
           background: "rgba(255, 255, 255, 0.2) !important",
         }
       : {}),
+    ...userStyles.option?.(base, state),
   }),
-  singleValue: (provided, state) => ({
-    ...provided,
+  singleValue: (base, state) => ({
+    ...base,
     display: state.selectProps.menuIsOpen ? "none" : "block",
+    ...userStyles.singleValue?.(base, state),
   }),
 });
 
@@ -56,10 +59,11 @@ function ZigSelect<T>({
   small = false,
   disabled,
   outlined,
+  styles: userStyles = {},
   ...props
 }: ZigSelectProps<T>): JSX.Element {
   const theme = useTheme() as Theme;
-  const styles = useMemo(() => customStyles(small, theme), [small, theme]);
+  const styles = useMemo(() => customStyles(small, theme, userStyles), [small, theme, userStyles]);
 
   return (
     <StyledSelectWrapper error={error} width={width} small={small} outlined={outlined}>
@@ -75,7 +79,7 @@ function ZigSelect<T>({
         options={options as unknown as { label: string; value: number }[]}
         isDisabled={disabled}
         onChange={(v) => {
-          onChange?.((v as ZigSelectOption<T>)?.value ?? null, (v as ZigSelectOption<T>) || null);
+          onChange?.((v as ZigSelectOption<T>)?.value, (v as ZigSelectOption<T>) || null);
         }}
         menuPortalTarget={document.body}
         placeholder={placeholder || label}

@@ -41,6 +41,7 @@ i18n
       'management',
       'my-balances',
       'my-dashboard',
+      'transactions-history',
       'pages',
       'service',
       'service-header',

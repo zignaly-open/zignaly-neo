@@ -1,5 +1,5 @@
 import React from "react";
-import NumberFormat from "react-number-format";
+import { NumericFormat } from "react-number-format";
 import { ZigPriceLabelProps } from "./types";
 import { getPrecisionForCoin } from "./util";
 import ZigTypography from "../ZigTypography";
@@ -12,6 +12,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   exact,
   usd,
   coinProps,
+  alwaysShowSign = false,
   ...otherProps
 }) => {
   const withDefaultPropsCoin = {
@@ -33,9 +34,9 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
       {...withDefaultProps}
       sx={{ whiteSpace: "nowrap", ...(withDefaultProps?.sx || {}) }}
     >
-      {+value >= 0 ? "" : <>&ndash;</>}
+      {+value >= 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
       {usd && "$"}
-      <NumberFormat
+      <NumericFormat
         value={Math.abs(+value)}
         renderText={(v) => v}
         displayType={"text"}
@@ -54,3 +55,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
 };
 
 export default React.memo(ZigPriceLabel);
+
+export const ZigTablePriceLabel = (props: ZigPriceLabelProps) => (
+  <ZigPriceLabel color="neutral100" coinProps={{ color: "neutral400" }} {...props} />
+);
