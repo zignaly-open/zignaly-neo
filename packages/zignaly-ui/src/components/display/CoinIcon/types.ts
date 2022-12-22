@@ -8,5 +8,5 @@ export type CoinTypeProps = {
   size?: CoinSizes | any;
   name: string;
   coin: string;
-  className?: string | any;
+  className?: string;
 };

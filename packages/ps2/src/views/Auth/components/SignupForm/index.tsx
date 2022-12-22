@@ -9,8 +9,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN } from '../../../../routes';
 import {
   Button,
-  ErrorMessage,
   IconButton,
+  ErrorMessage,
   TextButton,
   Typography,
   ZigInput,
@@ -40,7 +40,6 @@ const SignupForm: React.FC = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
-
   const { state: locationState } = useLocation();
 
   useEffect(() => {

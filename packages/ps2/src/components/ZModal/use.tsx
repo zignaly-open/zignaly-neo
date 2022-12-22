@@ -1,17 +1,29 @@
 import { ShowFnOutput, useModal, UseModalOptions } from 'mui-modal-provider';
-import { useCallback } from 'react';
+import { ComponentType, useCallback } from 'react';
+import { track } from '@zignaly-open/tracker';
+import { useCurrentUser } from '../../apis/user/use';
 
 export function useZModal(options?: UseModalOptions) {
   const { showModal, ...etc } = useModal(options);
+  const { userId } = useCurrentUser();
   const ourShowModal = useCallback(
-    (Component, props?) => {
+    (
+      Component: ComponentType & { trackId?: string },
+      props: undefined | (Record<string, unknown> & { ctaId?: string }),
+    ) => {
+      const { ctaId, ...modalProps } = props || {};
+      const trackId = Component.trackId?.toLocaleLowerCase();
+      trackId && track({ hash: trackId, userId, ctaId });
       const modal: ShowFnOutput<void> = showModal(Component, {
-        ...props,
-        close: () => modal.destroy(),
+        ...modalProps,
+        close: () => {
+          track({ userId });
+          modal.destroy();
+        },
       });
       return modal;
     },
-    [showModal],
+    [showModal, userId],
   );
 
   return {

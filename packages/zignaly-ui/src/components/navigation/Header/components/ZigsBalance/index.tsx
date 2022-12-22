@@ -1,5 +1,5 @@
 import React from "react";
-import NumberFormat from "react-number-format";
+import { NumericFormat } from "react-number-format";
 
 import { ZigBalanceProps } from "./types";
 
@@ -11,7 +11,7 @@ function ZigBalance({ balance, className }: ZigBalanceProps) {
   return (
     <Layout className={className}>
       <StyledWalletIcon />
-      <NumberFormat
+      <NumericFormat
         value={utils.formatUnits((balance || "0").toString())}
         displayType={"text"}
         thousandSeparator={true}
