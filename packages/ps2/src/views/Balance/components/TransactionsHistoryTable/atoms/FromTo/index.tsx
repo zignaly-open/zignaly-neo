@@ -45,14 +45,19 @@ const FromTo = ({
   transaction: Transaction;
   side: Side;
 }) => {
-  const { from, to, fromName, toName, network, txType } = transaction;
+  const { from, to, fromName, toName, network, txType, servicePsVersion } =
+    transaction;
   const idAddress = side === 'to' ? to : from;
   const name = side === 'to' ? toName : fromName;
   const sideType = getTransactionSideType(txType, side);
   const { t } = useTranslation('transactions-history');
 
   return sideType === 'service' ? (
-    <ServiceLink serviceId={idAddress} serviceName={name} />
+    <ServiceLink
+      serviceId={idAddress}
+      serviceName={name}
+      servicePsVersion={servicePsVersion}
+    />
   ) : sideType === 'external' ? (
     <>
       <Box mr={2}>
