@@ -93,7 +93,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
       columnHelper.accessor('amount', {
         header: t('tableHeader.amount'),
         cell: ({ getValue, row: { original } }) => (
-          <ZigTablePriceLabel coin={original.asset} value={getValue()} />
+          <ZigTablePriceLabel exact coin={original.asset} value={getValue()} />
         ),
         enableSorting: false,
       }),
