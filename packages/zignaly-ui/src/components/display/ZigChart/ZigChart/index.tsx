@@ -55,8 +55,6 @@ const ZigChart = ({
     return ranges;
   }, [processedData]);
 
-  const show2ndAxis =
-    yDomain[0] < 0 && (0 - yDomain[0]) / (yDomain[1] - yDomain[0]) >= deltaToShowSecondChart;
   const getChartLabel = useCallback(
     ({ datum = 0 }: { datum?: number }): string =>
       yAxisFormatter ? yAxisFormatter(datum) : datum.toString(),
@@ -133,16 +131,14 @@ const ZigChart = ({
             />
           ))}
 
-          {show2ndAxis && (
-            <VictoryAxis
-              tickFormat={() => ""}
-              tickLabelComponent={<VictoryLabel />}
-              style={axisStyle}
-            />
-          )}
+          <VictoryAxis
+            tickFormat={() => ""}
+            tickLabelComponent={<VictoryLabel />}
+            style={axisStyle}
+          />
 
           <VictoryAxis
-            offsetY={show2ndAxis ? 20 : undefined}
+            offsetY={20}
             tickLabelComponent={<VictoryLabel />}
             fixLabelOverlap
             style={
