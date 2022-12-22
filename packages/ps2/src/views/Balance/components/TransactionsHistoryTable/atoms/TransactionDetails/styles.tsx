@@ -4,7 +4,6 @@ import { ZigTypography } from '@zignaly-open/ui';
 
 export const TransactionPanel = styled('div')`
   background: ${({ theme }) => theme.palette.neutral800};
-  border: 1px dashed ${({ theme }) => theme.palette.neutral500};
   border-radius: 8px;
   display: flex;
   flex-direction: column;
