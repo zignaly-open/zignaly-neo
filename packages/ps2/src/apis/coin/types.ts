@@ -104,6 +104,7 @@ export type Transaction = {
     currency: string;
     cost: number;
   };
+  servicePsVersion?: number;
 };
 
 export type Transactions = InfiniteQueryResponse<Transaction[]>;
