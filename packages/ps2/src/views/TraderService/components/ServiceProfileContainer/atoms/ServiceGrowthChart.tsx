@@ -108,7 +108,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                       <ZigTypography
                         color={'neutral200'}
                         variant={'h1'}
-                        sx={{ mr: 0.5 }}
+                        sx={{ mr: 0.5, position: 'relative', top: '1px' }}
                       >
                         {t('service:total')}
                       </ZigTypography>
@@ -211,15 +211,9 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           <CenteredLoader />
         ) : (
           <ZigChart
+            bars={chartType === GraphChartType.pnl_ssc}
             onlyIntegerTicks={chartType === GraphChartType.investors}
             events={events}
-            forceColor={
-              chartType === GraphChartType.pnl_ssc
-                ? value > 0
-                  ? 'green'
-                  : 'red'
-                : undefined
-            }
             yAxisFormatter={(v) =>
               `${v
                 .toString()
