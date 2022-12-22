@@ -42,7 +42,9 @@ const MyDashboard: React.FC = () => {
 
   const onClickEditInvestment = (service: Investment) => {
     selectInvestment(service);
-    showModal(EditInvestmentModal);
+    showModal(EditInvestmentModal, {
+      ctaId: 'edit-investment-dashboard',
+    });
   };
 
   const tableColumns: TableProps<DashboardTableDataType>['columns'] = useMemo(

@@ -20,6 +20,7 @@ import CenteredLoader from './components/CenteredLoader';
 import Header from './components/Navigation/Header';
 import UpdateChecker from './components/Navigation/UpdateChecker';
 import DateLocaleFixer from './components/Navigation/DateLocaleFixer';
+import Tracker from './components/Navigation/Tracker/Tracker';
 
 if (
   process.env.NODE_ENV === 'production' &&
@@ -61,6 +62,7 @@ function App() {
                 <BrowserRouter>
                   <ModalProvider>
                     <Header />
+                    <Tracker />
                     <UpdateChecker />
                     <DateLocaleFixer />
                     <Suspense fallback={null}>
