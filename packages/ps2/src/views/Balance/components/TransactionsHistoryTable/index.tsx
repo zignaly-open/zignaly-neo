@@ -4,8 +4,8 @@ import {
   CoinLabel,
   createColumnHelper,
   DateLabel,
-  ZigPriceLabel,
   ZigTable,
+  ZigTablePriceLabel,
   ZigTypography,
 } from '@zignaly-open/ui';
 import LayoutContentWrapper from 'components/LayoutContentWrapper';
@@ -92,7 +92,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
       columnHelper.accessor('amount', {
         header: t('tableHeader.amount'),
         cell: ({ getValue, row: { original } }) => (
-          <ZigPriceLabel coin={original.asset} value={getValue()} />
+          <ZigTablePriceLabel coin={original.asset} value={getValue()} />
         ),
         enableSorting: false,
       }),

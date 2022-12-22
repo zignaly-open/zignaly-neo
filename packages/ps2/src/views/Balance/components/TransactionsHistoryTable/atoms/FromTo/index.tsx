@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { ZigTypography } from '@zignaly-open/ui';
 import {
   Transaction,
   TransactionType,
@@ -11,6 +10,7 @@ import ServiceLink from '../ProviderLink';
 import ZignalyAccount from '../TransferZigLabel';
 import { Side, SideType } from './types';
 import { useTranslation } from 'react-i18next';
+import { TypographyPanelName } from '../TransactionDetails/styles';
 
 const getTransactionSideType = (
   txType: TransactionType,
@@ -45,20 +45,25 @@ const FromTo = ({
   transaction: Transaction;
   side: Side;
 }) => {
-  const { from, to, fromName, toName, network, txType } = transaction;
+  const { from, to, fromName, toName, network, txType, servicePsVersion } =
+    transaction;
   const idAddress = side === 'to' ? to : from;
   const name = side === 'to' ? toName : fromName;
   const sideType = getTransactionSideType(txType, side);
   const { t } = useTranslation('transactions-history');
 
   return sideType === 'service' ? (
-    <ServiceLink serviceId={idAddress} serviceName={name} />
+    <ServiceLink
+      serviceId={idAddress}
+      serviceName={name}
+      servicePsVersion={servicePsVersion}
+    />
   ) : sideType === 'external' ? (
     <>
       <Box mr={2}>
         <ChainIcon network={network} />
       </Box>
-      <ZigTypography>{idAddress || t('external')}</ZigTypography>
+      <TypographyPanelName>{idAddress || t('external')}</TypographyPanelName>
     </>
   ) : (
     <ZignalyAccount name={name} />

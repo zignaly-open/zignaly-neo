@@ -23,6 +23,7 @@ const ShareCode = (props: ShareCodeProps) => {
   const { data: dataCodes } = useQuery(GET_USER_CODES);
   const { data: dataCodesRedemptions } = useQuery(GET_USER_CODES_REDEMPTIONS);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const columnsCodes: ColumnDef<typeof dataCodes.userCodes[number], any>[] = [
     {
       header: t('code'),
@@ -140,6 +141,7 @@ const ShareCode = (props: ShareCodeProps) => {
 
   const columnsCodesRedemptions: ColumnDef<
     typeof dataCodes.userCodes[number],
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     any
   >[] = [
     {
