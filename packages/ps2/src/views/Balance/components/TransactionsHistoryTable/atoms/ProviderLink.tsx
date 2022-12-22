@@ -1,5 +1,5 @@
-import { ZigTypography } from '@zignaly-open/ui';
 import React from 'react';
+import { TypographyPanelName } from './TransactionDetails/styles';
 
 const ServiceLink = ({
   serviceId,
@@ -8,7 +8,7 @@ const ServiceLink = ({
   serviceId: string;
   serviceName: string;
 }) => (
-  <ZigTypography color='neutral000' fontWeight={600}>
+  <TypographyPanelName>
     <a
       target='_blank'
       rel='noopener noreferrer'
@@ -16,7 +16,7 @@ const ServiceLink = ({
     >
       {serviceName}
     </a>
-  </ZigTypography>
+  </TypographyPanelName>
 );
 
 export default ServiceLink;
