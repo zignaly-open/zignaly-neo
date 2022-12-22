@@ -4,7 +4,6 @@ import {
   CoinLabel,
   createColumnHelper,
   DateLabel,
-  ZigPriceLabel,
   ZigTable,
   ZigTablePriceLabel,
   ZigTypography,
