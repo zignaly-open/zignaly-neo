@@ -45,5 +45,15 @@
   "chart-error": {
     "heading": "Error occurred :(",
     "description": "Unfortunately, we weren't able to render the chart"
-  }
+  },
+  "chart-options": {
+    "pnl_pct_compound": "PNL % Compound",
+    "pnl_ssc": "Daily PNL",
+    "sbt_ssc": "Total balance",
+    "at_risk_pct": "% at risk",
+    "investors": "N. of investors"
+  },
+  "migrated-to-ps2": "Migrated to PS2",
+  "total": "Total:",
+  "not-enough-data": "Not enough historic data for this period"
 }

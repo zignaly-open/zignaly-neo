@@ -1,8 +1,9 @@
-import { styled, css, Grid } from '@mui/material';
+import { styled, css, Grid, ButtonGroup } from '@mui/material';
 import muiStyled from '@emotion/styled';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { ZigTypography } from '@zignaly-open/ui';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import EditIcon from '@mui/icons-material/Edit';
 import PersonIcon from '@mui/icons-material/Person';
 import { Box } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
@@ -71,6 +72,16 @@ export const StyledPersonIcon = styled(PersonIcon)`
 
 export const StyledChevronRightIcon = styled(ChevronRightIcon)`
   fill: ${({ theme }) => theme.palette.neutral300};
+  margin-top: 1px;
+`;
+
+export const StyledPencilIcon = styled(EditIcon)`
+  fill: ${({ theme }) => theme.palette.neutral300};
+  padding: 3px;
+  padding-right: 0;
+  margin-top: 1px;
+  position: relative;
+  left: 2px;
 `;
 
 export const Separator = styled('span')`
@@ -86,8 +97,10 @@ export const InvestButtonContainer = styled('div')`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+`;
 
-  & > div span {
+export const BigNumberWrapperInvested = styled('div')`
+  span {
     font-weight: 500;
     font-size: 22px !important;
     line-height: 36px !important;
@@ -152,6 +165,11 @@ export const GridCell = styled(Grid)<{ rightBorder?: boolean }>`
   border-right: 0.5px solid
     ${({ theme, rightBorder }) =>
       rightBorder ? theme.palette.neutral700 : 'transparent'};
+
+  & > span:first-child {
+    display: block;
+    margin-bottom: 10px;
+  }
 `;
 
 export const PercentChangeContainer: typeof ZigTypography = styled(
@@ -159,6 +177,7 @@ export const PercentChangeContainer: typeof ZigTypography = styled(
 )`
   justify-content: center;
   display: flex;
+  white-space: nowrap;
   flex-direction: row;
 `;
 
@@ -171,8 +190,43 @@ export const RightSideActionWrapper = styled(Box)`
 `;
 
 export const ChartWrapper = styled(Box)`
-  min-height: 400px;
   display: flex;
+  margin-left: -20px;
+  min-height: 306px;
   align-items: center;
   justify-content: center;
+`;
+
+export const PercentageIndicatorSmall = styled(ZigTypography)`
+  position: relative;
+  top: -1.5px;
+  font-size: 12px !important;
+`;
+
+export const GraphPercentageWrapperBox = styled(Box)`
+  & > * {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+`;
+
+export const SqueezedButtonGroup = styled(ButtonGroup)`
+  .MuiButton-root {
+    min-width: 60px !important;
+  }
+`;
+
+export const AssetsInPoolWrapper = styled(Box)`
+  & > .MuiBox-root > .MuiBox-root:first-child {
+    margin-bottom: 8px;
+  }
+`;
+
+export const SelectWrapperBox = styled(Box)`
+  height: 30px;
+  .zig-react-select__control {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
 `;

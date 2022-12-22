@@ -63,6 +63,8 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
             <ZigTypography
               sx={{
                 ml: 2,
+                position: 'relative',
+                top: '2px',
               }}
               variant={'body2'}
               color='neutral400'
