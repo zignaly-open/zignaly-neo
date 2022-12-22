@@ -1,3 +1,0 @@
-INSERT INTO "Balances" ("id", "walletAddress", "blockchain", "TransactionType", "note", "amount", "currency", "zhits", "createdAt", "updatedAt") VALUES (1, '0x1234', 'Ethereum', 'deposit', 'Initial deposit', 100.00, 'ETH', 0, now(), now());
-INSERT INTO "Balances" ("id", "walletAddress", "blockchain", "TransactionType", "note", "amount", "currency", "zhits", "createdAt", "updatedAt") VALUES (2, '0x5678', 'Bitcoin', 'withdrawal', 'Test withdrawal', 0.50, 'BTC', 0, now(), now());
-INSERT INTO "Balances" ("id", "walletAddress", "blockchain", "TransactionType", "note", "amount", "currency", "zhits", "createdAt", "updatedAt") VALUES (3, '0xabcd', 'Ethereum', 'deposit', 'Second deposit', 50.00, 'ETH', 100, now(), now());

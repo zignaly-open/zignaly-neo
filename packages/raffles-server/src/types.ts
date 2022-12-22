@@ -2,7 +2,6 @@ import { generateService as generateServiceAuction } from './entities/auctions';
 import { generateService as generateServiceCode } from './entities/codes';
 import { generateService as generateServiceSetting } from './entities/settings';
 import { generateService as generateServiceUser } from './entities/users';
-import { generateService as generateServiceBalance } from './entities/balances';
 
 export type ContextUser = {
   id: number;
@@ -10,25 +9,10 @@ export type ContextUser = {
   isAdmin: boolean;
 };
 
-export type ContextBalance = {
-  id?: number;
-  walletAddress: string;
-  blockchain: string;
-  currency: string;
-  transactionType?: string;
-  amount: number;
-  note?: string;
-  zhits: number;
-  fromAddressWallet?: string;
-  toAddressWallet?: string;
-  locked?: boolean;
-};
-
 type ServiceAuction = ReturnType<typeof generateServiceAuction>;
 type ServiceCode = ReturnType<typeof generateServiceCode>;
 type ServiceSetting = ReturnType<typeof generateServiceSetting>;
 type ServiceUser = ReturnType<typeof generateServiceUser>;
-type ServiceBalance = ReturnType<typeof generateServiceBalance>;
 
 export type ApolloContext = {
   user: ContextUser;
@@ -37,7 +21,6 @@ export type ApolloContext = {
     Code: ServiceCode;
     Setting: ServiceSetting;
     User: ServiceUser;
-    Balance: ServiceBalance;
   };
 };
 

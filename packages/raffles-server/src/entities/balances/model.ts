@@ -35,17 +35,8 @@ export class Balance extends Model {
   public amount!: string;
 
   @Column
-  public currency: string;
-
-  @Column
   public zhits: number;
 
   @Column
-  public fromAddressWallet: string;
-
-  @Column
-  public toAddressWallet: string;
-
-  @Column
-  public locked: boolean;
+  public currency: string;
 }

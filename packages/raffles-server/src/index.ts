@@ -11,7 +11,6 @@ import http from 'http';
 import './db';
 import * as auctions from './entities/auctions';
 import * as users from './entities/users';
-import * as balances from './entities/balances';
 import * as payouts from './entities/payouts';
 import * as codes from './entities/codes';
 import * as settings from './entities/settings';
@@ -58,7 +57,6 @@ const schema = makeExecutableSchema({
   typeDefs: [
     typeDef,
     auctions.typeDef,
-    balances.typeDef,
     users.typeDef,
     payouts.typeDef,
     codes.typeDef,
@@ -66,7 +64,6 @@ const schema = makeExecutableSchema({
   ],
   resolvers: [
     auctions.resolvers,
-    balances.resolvers,
     users.resolvers,
     payouts.resolvers,
     codes.resolvers,
@@ -105,7 +102,6 @@ const server = new ApolloServer({
         Auction: auctions.generateService(user),
         Code: codes.generateService(user),
         User: users.generateService(user),
-        Balance: balances.generateService(),
         settings: settings.generateService(user),
       },
     };
