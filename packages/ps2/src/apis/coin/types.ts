@@ -58,29 +58,27 @@ export type DepositInfo = {
   };
 };
 
-export enum TransactionType {
+export const TRANSACTION_TYPE = {
   // Deposit from an external address
-  DEPOSIT = 'deposit',
+  DEPOSIT: 'deposit',
   // Withdrawal from a Zignaly exchange account to an external address
-  WITHDRAW = 'withdrawal',
+  WITHDRAW: 'withdrawal',
   // Investment in a PS1 service
-  PS_DEPOSIT = 'psDeposit',
+  PS_DEPOSIT: 'psDeposit',
   // Investment out from a PS1 service
-  PS_WITHDRAW = 'psWithdraw',
-  // Investment in a PS2 service
-  PS2_DEPOSIT = 'ps2_deposit',
+  PS_WITHDRAW: 'psWithdraw',
+  // Transfers made during PSDS (free withdrawal)
+  PSDS: 'psds',
   // Internal transfers of PS2 (between SCA and STA or from STA to DFA when a service is converted to PS2)
-  PS2 = 'ps2',
-  // Transfers made during PSDS
-  PSDS = 'psds',
+  PS2: 'ps2',
   // Transfers made when buying ZIG
-  BUYZIG = 'buyZig',
+  BUYZIG: 'buyZig',
   // In PS1 transfers when the trader receives his success fee
-  SUCCESS_FEE = 'psSuccessFee',
+  SUCCESS_FEE: 'psSuccessFee',
   // All the others that are mainly the ones between internal transfers between his accounts
-  USER = 'user',
-  PIFA = 'PIFA',
-}
+  USER: 'user',
+};
+export type TransactionType = keyof typeof TRANSACTION_TYPE;
 
 export const enum TransactionStateType {
   COMPLETED = 'completed',
@@ -106,7 +104,7 @@ export type Transaction = {
     currency: string;
     cost: number;
   };
-  note?: string;
+  servicePsVersion?: number;
 };
 
 export type Transactions = InfiniteQueryResponse<Transaction[]>;

@@ -2,8 +2,8 @@ import React from 'react';
 import { Transaction } from 'apis/coin/types';
 import {
   TransactionPanel,
-  TypographyAddress,
   TypographyPanelLabel,
+  TypographyPanelName,
 } from './styles';
 import { Box } from '@mui/material';
 import FromTo from '../FromTo';
@@ -15,7 +15,7 @@ const TransactionDetails = ({ transaction }: { transaction: Transaction }) => {
 
   return (
     <TransactionPanel>
-      <Box display='flex' justifyContent='center'>
+      <Box display='flex' alignItems='center'>
         <TypographyPanelLabel>{t('details.from')}</TypographyPanelLabel>
         <FromTo side='from' transaction={transaction} />
         <ArrowRightAlt style={{ margin: '0 21px' }} />
@@ -24,12 +24,12 @@ const TransactionDetails = ({ transaction }: { transaction: Transaction }) => {
       </Box>
       <Box display='flex' alignItems='center'>
         <TypographyPanelLabel>{t('details.txHash')}</TypographyPanelLabel>
-        <TypographyAddress>{transaction.txId}</TypographyAddress>
+        <TypographyPanelName>{transaction.txId}</TypographyPanelName>
       </Box>
-      {transaction.note && (
+      {transaction.message && (
         <Box display='flex' alignItems='center'>
           <TypographyPanelLabel>{t('details.note')}</TypographyPanelLabel>
-          <TypographyAddress>{transaction.note}</TypographyAddress>
+          <TypographyPanelName>{transaction.message}</TypographyPanelName>
         </Box>
       )}
     </TransactionPanel>

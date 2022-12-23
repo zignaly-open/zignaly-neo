@@ -3,7 +3,6 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { NumericFormat } from "react-number-format";
 import ZigTable from ".";
 import PercentageIndicator from "../Table/components/PercentageIndicator";
-import ConnectionStateLabel from "../Table/components/ConnectionStateLabel";
 import DateLabel from "../Table/components/DateLabel";
 import CoinLabel from "../Table/components/CoinLabel";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
@@ -14,7 +13,6 @@ import { Box } from "@mui/material";
 import PriceLabel, { UsdPriceLabel } from "../Table/components/PriceLabel";
 import ZigTypography from "../ZigTypography";
 import { Check, Close } from "@mui/icons-material";
-import { AreaChart } from "../Charts";
 
 const exchangeOrdersData = makeExchangeOrdersData(10);
 const columnHelperExchangeOrders = createColumnHelper<typeof exchangeOrdersData[number]>();
@@ -51,18 +49,6 @@ const exchangeOrdersColumns = [
 const userTableData = [
   {
     summary: "",
-    chart: {
-      data: [
-        { x: "Jul 1", y: 10 },
-        { x: "Jul 2", y: 15 },
-        { x: "Jul 3", y: 23 },
-        { x: "Jul 4", y: 15 },
-        { x: "Jul 5", y: 17 },
-        { x: "Jul 6", y: 20 },
-        { x: "Jul 7", y: 25 },
-      ],
-      variant: "small",
-    },
     dailyAvg: { value: -10 },
     oneMonth: { value: 10 },
     threeMonths: { value: 20 },
@@ -70,18 +56,6 @@ const userTableData = [
   },
   {
     summary: "",
-    chart: {
-      data: [
-        { x: "Jul 1", y: 10 },
-        { x: "Jul 2", y: 15 },
-        { x: "Jul 3", y: 23 },
-        { x: "Jul 4", y: 15 },
-        { x: "Jul 5", y: 17 },
-        { x: "Jul 6", y: 20 },
-        { x: "Jul 7", y: 25 },
-      ],
-      variant: "small",
-    },
     dailyAvg: { value: -10 },
     oneMonth: { value: 10 },
     threeMonths: { value: 20 },
@@ -93,13 +67,6 @@ const userTableColumns = [
   columnHelperUserTable.accessor("summary", {
     header: "My Current Value",
     meta: { subtitle: "Returns" },
-  }),
-  columnHelperUserTable.accessor("chart", {
-    header: "Since Invested",
-    cell: ({ row: { original } }) => (
-      <AreaChart variant={original.chart.variant as any} data={original.chart.data} />
-    ),
-    enableSorting: false,
   }),
   columnHelperUserTable.accessor("dailyAvg.value", {
     header: "Daily avg",
@@ -251,7 +218,7 @@ const investorsTableColumns: ColumnDef<typeof investorsTableData[number], any>[]
   {
     header: "Status",
     accessorKey: "status",
-    cell: ({ getValue }) => <ConnectionStateLabel stateId={getValue()} />,
+    cell: ({ getValue }) => getValue(),
   },
 ];
 

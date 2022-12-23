@@ -1,6 +1,11 @@
 import React, { useMemo } from 'react';
 import { TransactionContainer } from '../styles';
-import { ArrowLeftIcon, Button, PriceLabel, Table } from '@zignaly-open/ui';
+import {
+  ArrowLeftIcon,
+  Button,
+  ZigTable,
+  ZigTablePriceLabel,
+} from '@zignaly-open/ui';
 import {
   ChangeViewFn,
   EditInvestmentViews,
@@ -13,6 +18,7 @@ import {
   useSelectedInvestment,
 } from '../../../../../apis/investment/use';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { ColumnDef } from '@tanstack/react-table';
 
 const PendingTransactionsList: React.FC<{
   setView: ChangeViewFn;
@@ -31,14 +37,14 @@ const PendingTransactionsList: React.FC<{
 
     if (details.pending > 0) {
       fields.push({
-        amount: <PriceLabel coin={coin.id} value={details.pending} />,
+        amount: details.pending,
         type: t('pendingMajorThan.type'),
         status: t('pendingMajorThan.status'),
       });
     }
     if (details.profitOut > 0) {
       fields.push({
-        amount: <PriceLabel coin={coin.id} value={details.profitOut} />,
+        amount: details.profitOut,
         type: t('profitOutMajorThan.type'),
         status: t('profitOutMajorThan.status'),
       });
@@ -46,7 +52,7 @@ const PendingTransactionsList: React.FC<{
 
     if (details.transferOut > 0) {
       fields.push({
-        amount: <PriceLabel coin={coin.id} value={details.transferOut} />,
+        amount: details.transferOut,
         type: t('transferOutMajorThan.type'),
         status: t('transferOutMajorThan.status'),
       });
@@ -58,24 +64,33 @@ const PendingTransactionsList: React.FC<{
   return (
     <>
       <TransactionContainer>
-        <Table
-          columns={[
-            {
-              Header: t('modal.pendingTransaction.tableHeader.amount'),
-              accessor: 'amount',
-            },
-            {
-              Header: t('modal.pendingTransaction.tableHeader.type'),
-              accessor: 'type',
-            },
-            {
-              Header: t('modal.pendingTransaction.tableHeader.status'),
-              accessor: 'status',
-            },
-          ]}
+        <ZigTable
+          columns={
+            [
+              {
+                header: t('modal.pendingTransaction.tableHeader.amount'),
+                accessorKey: 'amount',
+                cell: (props) => (
+                  <ZigTablePriceLabel coin={coin.id} value={props.getValue()} />
+                ),
+                sortingFn: 'alphanumeric',
+              },
+              {
+                header: t('modal.pendingTransaction.tableHeader.type'),
+                accessorKey: 'type',
+              },
+              {
+                header: t('modal.pendingTransaction.tableHeader.status'),
+                accessorKey: 'status',
+              },
+            ] as ColumnDef<
+              typeof pendingTransactionsList[number],
+              string | number
+            >[]
+          }
           data={pendingTransactionsList}
-          hideOptionsButton={true}
-          isUserTable={false}
+          columnVisibility={false}
+          pagination={false}
         />
       </TransactionContainer>
 

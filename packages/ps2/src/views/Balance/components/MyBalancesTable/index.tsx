@@ -2,7 +2,6 @@ import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   CoinLabel,
-  UsdPriceLabel,
   IconButton,
   ZigTable,
   ZigTablePriceLabel,
@@ -77,7 +76,9 @@ const MyBalancesTable = (): JSX.Element => {
       columnHelper.accessor((row) => row.balance.balanceTotalUSDT, {
         id: 'balanceTotalUSDT',
         header: t('tableHeader.valueUSD'),
-        cell: ({ getValue }) => <UsdPriceLabel value={getValue()} />,
+        cell: ({ getValue }) => (
+          <ZigTablePriceLabel usd color='neutral100' value={getValue()} />
+        ),
         sortingFn: 'alphanumeric',
       }),
       columnHelper.display({
@@ -90,6 +91,7 @@ const MyBalancesTable = (): JSX.Element => {
                 onClick={() =>
                   showModal(DepositModal, {
                     selectedCoin: row.original.coin,
+                    ctaId: 'balances-table-row',
                   })
                 }
                 variant='secondary'
@@ -101,6 +103,7 @@ const MyBalancesTable = (): JSX.Element => {
                 onClick={() =>
                   showModal(WithdrawModal, {
                     selectedCoin: row.original.coin,
+                    ctaId: 'balances-table-row',
                   })
                 }
                 variant='secondary'
@@ -110,7 +113,7 @@ const MyBalancesTable = (): JSX.Element => {
         ),
       }),
     ],
-    [],
+    [t],
   );
 
   const getFilteredData = useCallback(
@@ -129,6 +132,7 @@ const MyBalancesTable = (): JSX.Element => {
 
   return (
     <LayoutContentWrapper
+      unmountOnRefetch={true}
       endpoint={[coinsEndpoint, balancesEndpoint]}
       content={([coins, balances]: [CoinDetails, CoinBalances]) => (
         <ZigTable

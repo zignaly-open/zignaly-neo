@@ -4,6 +4,7 @@ export type ZigPriceLabelProps = Partial<TypographyProps> & {
   value: string | number;
   coin?: string;
   precision?: number;
+  exact?: boolean;
   usd?: boolean;
   coinProps?: Partial<typeof Typography>;
   component?: string;

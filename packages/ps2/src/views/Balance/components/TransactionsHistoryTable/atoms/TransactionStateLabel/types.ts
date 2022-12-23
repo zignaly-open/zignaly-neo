@@ -13,6 +13,6 @@ export const transactionStateColor: {
   [key in TransactionStateType]: keyof Theme;
 } = {
   [TransactionStateType.COMPLETED]: 'greenGraph',
-  [TransactionStateType.PENDING]: 'neutral175',
+  [TransactionStateType.PENDING]: 'yellow',
   [TransactionStateType.ERROR]: 'red',
 };

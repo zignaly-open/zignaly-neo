@@ -1,22 +1,28 @@
-import { ZigTypography } from '@zignaly-open/ui';
 import React from 'react';
+import { TypographyPanelName } from './TransactionDetails/styles';
 
 const ServiceLink = ({
   serviceId,
   serviceName,
+  servicePsVersion,
 }: {
   serviceId: string;
   serviceName: string;
+  servicePsVersion: number;
 }) => (
-  <ZigTypography color='neutral000' fontWeight={600}>
-    <a
-      target='_blank'
-      rel='noopener noreferrer'
-      href={`${window.location.origin}/profit-sharing/${serviceId}`}
-    >
-      {serviceName}
-    </a>
-  </ZigTypography>
+  <TypographyPanelName>
+    {servicePsVersion === 1 ? (
+      serviceName
+    ) : (
+      <a
+        target='_blank'
+        rel='noopener noreferrer'
+        href={`${window.location.origin}/profit-sharing/${serviceId}`}
+      >
+        {serviceName}
+      </a>
+    )}
+  </TypographyPanelName>
 );
 
 export default ServiceLink;

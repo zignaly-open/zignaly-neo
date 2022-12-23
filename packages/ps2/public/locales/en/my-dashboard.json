@@ -1,5 +1,5 @@
 {
-    "title": "My Dashboard",
+    "title": "My Portfolio",
     "tableHeader": {
       "summary": {
         "title": "My Current Value",
@@ -23,7 +23,7 @@
     },
     "table-search-emptyMessage": "You are not connected to any service yet.",
     "something-went-wrong": "Something went wrong",
-    "loading-arialLabel": "Loading my dashboard",
+    "loading-arialLabel": "Loading my portfolio",
     "slider-input": {
       "labels": {
         "left": "Reinvest",

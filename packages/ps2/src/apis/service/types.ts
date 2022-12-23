@@ -1,3 +1,5 @@
+import { AxisFormat } from '@zignaly-open/ui/lib/components/display/ZigChart/types';
+
 type TraderServiceStatus = 'FULL' | string;
 
 export type ServiceState = {
@@ -135,7 +137,19 @@ export type Service = {
 };
 
 export type TraderServiceChart = {
+  [x: string]: unknown;
   data: Record<string, number>;
+  summary: string;
+  migration_date: string;
+  summaryPct: string;
+};
+
+export type TraderServiceChartProcessed = {
+  data: AxisFormat[];
+  summary: string | number;
+  percentDiff?: number | string;
+  migrationDate?: string;
+  migrationIndex?: number;
 };
 
 export enum GraphTimeframe {
@@ -146,6 +160,14 @@ export enum GraphTimeframe {
   '365d' = '365d',
   // 'all' = 'all', // looks like it is not supported by the backend
 }
+
+export const GraphTimeframeDayLength = {
+  [GraphTimeframe['7d']]: 7,
+  [GraphTimeframe['30d']]: 30,
+  [GraphTimeframe['90d']]: 90,
+  [GraphTimeframe['180d']]: 180,
+  [GraphTimeframe['365d']]: 365,
+};
 
 export enum GraphChartType {
   'investors' = 'investors',

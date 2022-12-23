@@ -1,9 +1,51 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { StyledSelectWrapper, ZigSelectGlobalStyle } from "./styles";
 import { ZigSelectOption, ZigSelectProps } from "./types";
 import ErrorMessage from "../../display/ErrorMessage";
 import { Typography } from "@mui/material";
-import Select from "react-select";
+import Select, { StylesConfig } from "react-select";
+import Theme from "../../../theme/theme";
+import { useTheme } from "styled-components";
+
+const customStyles = (small: boolean, theme: Theme, userStyles: StylesConfig): StylesConfig => ({
+  ...userStyles,
+  menuPortal: (base) => ({
+    ...base,
+    zIndex: "1500 !important",
+  }),
+  menu: (base) => ({
+    ...base,
+    background: "rgba(16, 18, 37) !important",
+    border: `1px solid ${theme.neutral600} !important`,
+    color: `${theme.neutral200} !important`,
+  }),
+  option: (base, state) => ({
+    ...base,
+    ...(small
+      ? {
+          fontSize: "13px",
+          lineHeight: "20px",
+        }
+      : {}),
+    ...(state.isFocused
+      ? {
+          cursor: "pointer",
+          background: "rgba(255, 255, 255, 0.1) !important",
+        }
+      : {}),
+    ...(state.isSelected
+      ? {
+          background: "rgba(255, 255, 255, 0.2) !important",
+        }
+      : {}),
+    ...userStyles.option?.(base, state),
+  }),
+  singleValue: (base, state) => ({
+    ...base,
+    display: state.selectProps.menuIsOpen ? "none" : "block",
+    ...userStyles.singleValue?.(base, state),
+  }),
+});
 
 function ZigSelect<T>({
   onChange,
@@ -14,14 +56,21 @@ function ZigSelect<T>({
   width,
   placeholder,
   options,
+  small = false,
   disabled,
+  outlined,
+  styles: userStyles = {},
   ...props
 }: ZigSelectProps<T>): JSX.Element {
+  const theme = useTheme() as Theme;
+  const styles = useMemo(() => customStyles(small, theme, userStyles), [small, theme, userStyles]);
+
   return (
-    <StyledSelectWrapper error={error} width={width}>
+    <StyledSelectWrapper error={error} width={width} small={small} outlined={outlined}>
       {label && <Typography color={"neutral200"}>{label}</Typography>}
       {ZigSelectGlobalStyle}
       <Select
+        styles={styles}
         components={{
           IndicatorSeparator: () => null,
         }}
@@ -36,12 +85,6 @@ function ZigSelect<T>({
         placeholder={placeholder || label}
         value={options?.find?.((x) => x.value === value || (x as unknown) === value) || null}
         classNamePrefix="zig-react-select"
-        styles={{
-          singleValue: (provided, state) => ({
-            ...provided,
-            display: state.selectProps.menuIsOpen ? "none" : "block",
-          }),
-        }}
         {...props}
       />
       {!!error && <ErrorMessage text={error} />}

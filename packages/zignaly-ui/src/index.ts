@@ -1,8 +1,8 @@
 export { createColumnHelper } from "@tanstack/react-table";
+export type { ColumnDef } from "@tanstack/react-table";
 import Avatar from "./components/display/Avatar";
 import ErrorMessage from "./components/display/ErrorMessage";
 import Loader from "./components/display/Loader";
-import Table from "./components/display/Table";
 import ZigTable from "./components/display/ZigTable";
 import DateLabel from "./components/display/Table/components/DateLabel";
 import PercentageIndicator from "./components/display/Table/components/PercentageIndicator";
@@ -14,7 +14,7 @@ import Toaster from "./components/display/Toaster";
 import ProgressSlider from "./components/display/ProgressSlider";
 import InvestSlider from "./components/display/InvestSlider";
 
-import { AreaChart } from "./components/display/Charts";
+export * from "./components/display/ZigChart";
 import DropDown from "./components/display/DropDown";
 
 export { default as ZignalyQRCode } from "./components/display/ZignalyQRCode";
@@ -108,10 +108,8 @@ export {
    *   Components
    * =-=-=-=-=-=-=-=
    */
-  AreaChart,
   Avatar,
   Loader,
-  Table,
   ZigTable,
   DateLabel,
   PriceLabel,

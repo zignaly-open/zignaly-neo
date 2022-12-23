@@ -10,7 +10,7 @@ export enum EditInvestmentViews {
 export type ChangeViewFn = (view: EditInvestmentViews) => void;
 
 export type PendingTransactionListItemType = {
-  amount: JSX.Element;
+  amount: number;
   type: string;
   status: string;
 };
