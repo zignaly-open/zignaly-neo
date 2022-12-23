@@ -1,5 +1,15 @@
 import { Balance } from './model';
-import { ContextBalance, DepositParams } from './types';
+import {
+  BalanceType,
+  DepositParams,
+  PayoutParams,
+  FeeParams,
+  RedeemParams,
+  UserBalanceZhits,
+  ImportParams,
+  Import,
+} from './types';
+import { TransactionType } from '../../types';
 
 export const getWalletZhitsBalance = async (walletAddress: string) => {
   return Balance.aggregate('zhits', 'sum', {
@@ -9,67 +19,15 @@ export const getWalletZhitsBalance = async (walletAddress: string) => {
   });
 };
 
-export const itemPayout = async ({
+const addTransaction = async ({
   walletAddress,
-  blockchain,
   zhits,
-}: ContextBalance) => {
-  addTransaction({
-    walletAddress,
-    zhits,
-    amount: '0',
-    currency: '',
-    blockchain,
-    transactionType: 'itemPayout',
-    note: 'itemPayout',
-  });
-};
-
-export const redeemCode = async ({
-  walletAddress,
-  blockchain,
-  currency,
-  zhits,
-}: ContextBalance) => {
-  addTransaction({
-    walletAddress,
-    zhits,
-    amount: '0',
-    currency,
-    blockchain,
-    transactionType: 'redeem',
-    note: 'redeem',
-  });
-};
-
-export const deposit = async ({
-  walletAddress,
   amount,
   currency,
   blockchain,
-}: DepositParams) => {
-  addTransaction({
-    walletAddress,
-    zhits: Number(amount) * 1,
-    amount,
-    currency,
-    blockchain,
-    transactionType: 'deposit',
-    note: 'deposit',
-  });
-};
-
-const addTransaction = async ({
-  walletAddress,
-  blockchain,
-  currency,
   transactionType,
-  amount = '0',
   note = '',
-  zhits,
-}: ContextBalance) => {
-  if (!walletAddress) return null;
-
+}: BalanceType) => {
   try {
     const transaction = await Balance.create({
       walletAddress,
@@ -81,11 +39,152 @@ const addTransaction = async ({
       zhits,
     });
 
-    return {
-      ...transaction.toJSON(),
-    };
+    return transaction;
   } catch (e) {
     console.error(e);
     return null;
   }
+};
+
+const addTransactions = async (balanceType: BalanceType[]) => {
+  try {
+    const transaction = await Balance.bulkCreate(balanceType);
+    return transaction;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
+};
+
+export const payFee = async ({ walletAddress, zhits, note }: FeeParams) => {
+  if (!walletAddress) {
+    throw new Error('Wallet address is required');
+  }
+  if (!zhits || isNaN(Number(zhits)) || Number(zhits) <= 0) {
+    throw new Error('Invalid amount');
+  }
+
+  addTransaction({
+    walletAddress,
+    zhits: `${-zhits}`,
+    amount: '0',
+    currency: '',
+    blockchain: '',
+    transactionType: TransactionType.Fee,
+    note,
+  });
+};
+
+export const claim = async ({ walletAddress, zhits, note }: PayoutParams) => {
+  if (!walletAddress) {
+    throw new Error('Wallet address is required');
+  }
+  if (!zhits || isNaN(Number(zhits)) || Number(zhits) <= 0) {
+    throw new Error('Invalid amount');
+  }
+
+  addTransaction({
+    walletAddress,
+    zhits: `${-zhits}`,
+    amount: '0',
+    currency: '',
+    blockchain: '',
+    transactionType: TransactionType.Payout,
+    note,
+  });
+};
+
+export const redeemCode = async ({
+  walletAddress,
+  zhits,
+  note,
+}: RedeemParams) => {
+  if (!walletAddress) {
+    throw new Error('Wallet address is required');
+  }
+  if (!zhits || isNaN(Number(zhits)) || Number(zhits) <= 0) {
+    throw new Error('Invalid amount');
+  }
+
+  addTransaction({
+    walletAddress,
+    zhits,
+    amount: '0',
+    currency: '',
+    blockchain: '',
+    transactionType: TransactionType.RedeemCode,
+    note,
+  });
+};
+
+export const deposit = async ({
+  walletAddress,
+  amount,
+  currency,
+  blockchain,
+}: DepositParams) => {
+  if (!walletAddress) {
+    throw new Error('Wallet address is required');
+  }
+  if (!amount || isNaN(Number(amount)) || Number(amount) <= 0) {
+    throw new Error('Invalid amount');
+  }
+  if (!currency) {
+    throw new Error('Currency is required');
+  }
+  if (!blockchain) {
+    throw new Error('Blockchain is required');
+  }
+
+  addTransaction({
+    walletAddress,
+    zhits: `${Number(amount) * 1}`,
+    amount,
+    currency,
+    blockchain,
+    transactionType: TransactionType.Deposit,
+    note: '',
+  });
+};
+
+//This two functions are only for migrating current balances from the old system to the new one
+export const importBalance = async ({ walletAddress, zhits }: ImportParams) => {
+  if (!walletAddress) {
+    throw new Error('Wallet address is required');
+  }
+  if (!zhits || isNaN(Number(zhits)) || Number(zhits) <= 0) {
+    throw new Error('Invalid amount');
+  }
+
+  addTransaction({
+    walletAddress,
+    zhits: zhits,
+    amount: '0',
+    currency: '',
+    blockchain: '',
+    transactionType: Import.Import,
+    note: '',
+  });
+};
+
+export const importBalanceBulk = async (balanceRowsImports: BalanceType[]) => {
+  if (balanceRowsImports.length === 0) {
+    throw new Error('No rows to import from cybavo');
+  }
+  addTransactions(balanceRowsImports);
+};
+
+export const getUserBalance = async (
+  walletAddress: string,
+): Promise<UserBalanceZhits> => {
+  const userBalance = await Balance.aggregate('zhits', 'sum', {
+    where: {
+      walletAddress,
+    },
+  });
+
+  return {
+    walletAddress,
+    zhits: `${userBalance}`,
+  };
 };

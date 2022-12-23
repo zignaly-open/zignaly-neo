@@ -23,20 +23,38 @@ export class Balance extends Model {
   public walletAddress!: string;
 
   @Column
+  public zhits!: string;
+
+  @Column(DataType.DECIMAL)
+  public amount: string;
+
+  @Column
+  public currency: string;
+
+  @Column
   public blockchain: string;
 
   @Column
-  public transactionType: TransactionType;
+  public transactionType!: TransactionType;
 
   @Column
   public note: string;
+}
+
+@Table
+export class CurrencyToZhit extends Model {
+  @PrimaryKey
+  @AutoIncrement
+  @Unique
+  @Column
+  public id!: number;
 
   @Column(DataType.DECIMAL)
   public amount!: string;
 
   @Column
-  public zhits: number;
+  public currency!: string;
 
   @Column
-  public currency: string;
+  public zhits!: string;
 }

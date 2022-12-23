@@ -1,20 +1,22 @@
+import { TransactionType } from '../../types';
+
 export type UserBalanceZhits = {
   walletAddress: string;
   zhits: string;
 };
 
-export type ContextBalance = {
-  id?: number;
+export enum Import {
+  Import = 'import',
+}
+
+export type BalanceType = {
   walletAddress: string;
-  blockchain: string;
-  currency: string;
-  transactionType?: string;
-  amount: string;
+  zhits: string;
+  blockchain?: string;
+  amount?: string;
+  currency?: string;
+  transactionType: TransactionType | Import;
   note?: string;
-  zhits: number;
-  fromAddressWallet?: string;
-  toAddressWallet?: string;
-  locked?: boolean;
 };
 
 export type DepositParams = {
@@ -22,4 +24,39 @@ export type DepositParams = {
   amount: string;
   currency: string;
   blockchain: string;
+  note?: string;
+};
+
+export type RedeemParams = {
+  walletAddress: string;
+  zhits: string;
+  note: string;
+};
+
+export type FeeParams = {
+  walletAddress: string;
+  zhits: string;
+  note: string;
+};
+
+export type ReferralParams = {
+  walletAddress: string;
+  zhits: string;
+  note: string;
+};
+
+export type PayoutParams = {
+  walletAddress: string;
+  zhits: string;
+  note: string;
+};
+
+// this is for importing data from cybavo
+export type ImportParams = {
+  walletAddress: string;
+  zhits: string;
+};
+
+export type ImportBalanceZhits = {
+  zhits: string;
 };
