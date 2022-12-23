@@ -13,7 +13,7 @@ import Toaster from "./components/display/Toaster";
 import ProgressSlider from "./components/display/ProgressSlider";
 import InvestSlider from "./components/display/InvestSlider";
 
-import { AreaChart } from "./components/display/Charts";
+export * from "./components/display/ZigChart";
 import DropDown from "./components/display/DropDown";
 
 export { default as ZignalyQRCode } from "./components/display/ZignalyQRCode";
@@ -107,7 +107,6 @@ export {
    *   Components
    * =-=-=-=-=-=-=-=
    */
-  AreaChart,
   Avatar,
   Loader,
   ZigTable,

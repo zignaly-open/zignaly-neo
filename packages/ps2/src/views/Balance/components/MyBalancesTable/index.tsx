@@ -91,6 +91,7 @@ const MyBalancesTable = (): JSX.Element => {
                 onClick={() =>
                   showModal(DepositModal, {
                     selectedCoin: row.original.coin,
+                    ctaId: 'balances-table-row',
                   })
                 }
                 variant='secondary'
@@ -102,6 +103,7 @@ const MyBalancesTable = (): JSX.Element => {
                 onClick={() =>
                   showModal(WithdrawModal, {
                     selectedCoin: row.original.coin,
+                    ctaId: 'balances-table-row',
                   })
                 }
                 variant='secondary'

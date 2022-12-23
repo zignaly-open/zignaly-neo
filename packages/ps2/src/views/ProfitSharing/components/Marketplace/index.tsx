@@ -3,11 +3,11 @@ import { useMarketplace } from '../../../../apis/marketplace/use';
 import { useTranslation } from 'react-i18next';
 import {
   PageContainer,
-  AreaChart,
   PercentageIndicator,
   ZigTypography,
   ZigTable,
   createColumnHelper,
+  ZigChartMini,
 } from '@zignaly-open/ui';
 import { formatDistance } from 'date-fns';
 import { Box } from '@mui/material';
@@ -90,12 +90,8 @@ const Marketplace: React.FC = () => {
           +props.getValue() ||
           Object.keys(props.row.original.sparklines).length > 1 ? (
             <>
-              <AreaChart
-                midLine
-                variant='small'
-                data={props.row.original.sparklines}
-              />
-              <PercentageIndicator value={props.getValue()} type='graph' />
+              <ZigChartMini midLine data={props.row.original.sparklines} />
+              <PercentageIndicator value={props.getValue()} type={'graph'} />
             </>
           ) : (
             <ZigTypography variant='body2' color='neutral400'>

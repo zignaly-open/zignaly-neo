@@ -1,10 +1,10 @@
 import {
-  AreaChart,
   createColumnHelper,
   PercentageIndicator,
   PriceLabel,
   ZigTable,
   ZigTypography,
+  ZigChartMini,
 } from '@zignaly-open/ui';
 import React, { useMemo } from 'react';
 import { Heading, Layout, ZigTableWrapper } from './styles';
@@ -37,7 +37,9 @@ const MyDashboard: React.FC = () => {
 
   const onClickEditInvestment = (service: Investment) => {
     selectInvestment(service);
-    showModal(EditInvestmentModal);
+    showModal(EditInvestmentModal, {
+      ctaId: 'edit-investment-dashboard',
+    });
   };
 
   const columnHelper = createColumnHelper<Investment>();
@@ -79,7 +81,7 @@ const MyDashboard: React.FC = () => {
         cell: ({ row: { original } }) =>
           original.pnl30dPct || Object.keys(original.sparklines).length > 1 ? (
             <>
-              <AreaChart variant='small' data={original.sparklines} />
+              <ZigChartMini midLine data={original.sparklines} />
               <PercentageIndicator
                 normalized
                 value={new BigNumber(original.pnl30dPct).toFixed()}

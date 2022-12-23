@@ -32,4 +32,6 @@ function InvestModal({
   );
 }
 
+InvestModal.trackId = 'invest';
+
 export default InvestModal;

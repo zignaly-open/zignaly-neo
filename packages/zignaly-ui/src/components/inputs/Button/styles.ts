@@ -544,7 +544,7 @@ export const Layout = styled.button<LayoutProps>`
           &:hover {
             background: linear-gradient(289.8deg, rgba(20, 156, 173, 0.16) 0%, rgba(69, 64, 193, 0.16) 100%);
             &:before {
-              background: ${props.theme.neutral500};
+              background: ${props.theme.neutral400};
             }
             ${Caption} {
               color: ${props.theme.neutral000};

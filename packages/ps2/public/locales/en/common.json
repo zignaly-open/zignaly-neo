@@ -30,7 +30,7 @@
   "account-menu": {
     "isAuth-button-logIn": "Log in",
     "isAuth-button-signUp": "SIGN UP",
-    "notAuth-dropdown-link-dashboard": "My Dashboard",
+    "notAuth-dropdown-link-dashboard": "My Portfolio",
     "notAuth-dropdown-link-balances": "My Balances",
     "notAuth-button-logOut": "Logout"
   },
@@ -46,7 +46,10 @@
   },
   "amount": "Amount",
   "percent": "{{value, prettyNumber}}%",
+  "number": "{{value, prettyNumber}}",
   "new-version": "New version, click me to update",
+  "infinitely-better": "Yes, the current value is infinity percent better because the starting value is 0",
+  "infinitely-worse": "Yes, the current value is infinity percent worse because the starting value is 0",
   "validation": {
     "insufficient-amount": "Insufficient funds",
     "invalid-value": "Invalid value",

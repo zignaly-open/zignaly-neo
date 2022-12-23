@@ -19,6 +19,7 @@ import {
 } from '../../../../apis/user/use';
 import { Box } from '@mui/material';
 import { ColumnDef } from '@tanstack/react-table';
+import BigNumber from 'bignumber.js';
 
 function InvestedFromOtherAccounts({
   close,
@@ -37,7 +38,9 @@ function InvestedFromOtherAccounts({
     return Object.entries(isInvested?.accounts).map(([internalId, data]) => ({
       account: exchanges?.find((x) => x.internalId === internalId)
         ?.internalName,
-      invested: data.invested,
+      invested: new BigNumber(data?.invested || 0)
+        .plus(data?.pending || 0)
+        .toString(),
       internalId,
     }));
   }, [isInvested?.accounts]);

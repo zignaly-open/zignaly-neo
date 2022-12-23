@@ -22,7 +22,8 @@ const GlobalStyle = createGlobalStyle`
     overflow: overlay;
   }
 
-  ${NiceScrollbar};
+  /* Use default scrollbar on Safari because it doesn't support overflow: overlay */
+  ${!window.safari && NiceScrollbar}
 
   a {
     color: inherit;

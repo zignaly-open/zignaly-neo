@@ -1,46 +1,233 @@
-import React from 'react';
-import { parse } from 'date-fns';
-import { Service } from '../../../../../apis/service/types';
-import { AreaChart } from '@zignaly-open/ui';
+import React, { useMemo } from 'react';
+import {
+  GraphChartType,
+  GraphTimeframe,
+  GraphTimeframeDayLength,
+  Service,
+} from '../../../../../apis/service/types';
+import {
+  ZigButton,
+  ZigChart,
+  ZigPriceLabel,
+  ZigSelect,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import { useTraderServiceGraphQuery } from '../../../../../apis/service/api';
-import { ChartWrapper } from '../styles';
-import { formatMonthDay } from '../../../../Dashboard/components/MyDashboard/util';
-import { useChartConfig } from '../../../../../apis/service/use';
+import {
+  ChartWrapper,
+  GraphPercentageWrapperBox,
+  SqueezedButtonGroup,
+  SelectWrapperBox,
+} from '../styles';
+import { useChartConfig, useChartData } from '../../../../../apis/service/use';
 import Stub from '../../../../../components/Stub';
 import { useTranslation } from 'react-i18next';
 import CenteredLoader from '../../../../../components/CenteredLoader';
+import PercentChange from './PercentChange';
+import { differenceInDays } from 'date-fns';
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
-  const { chartType, chartTimeframe } = useChartConfig();
-  const { data, isLoading, isFetching, isError } = useTraderServiceGraphQuery({
-    id: service.id,
-    period: chartTimeframe,
-    chart: chartType,
+  const { chartType, chartTimeframe, setChartTimeframe, setChartType } =
+    useChartConfig();
+  const { data, isLoading, isFetching, isError } = useChartData({
+    service,
+    chartTimeframe,
+    chartType,
   });
-  const { t } = useTranslation('service');
 
-  if (isError) {
-    return (
-      <Stub
-        title={t('chart-error.heading')}
-        description={t('chart-error.description')}
-      />
-    );
-  }
+  const { t } = useTranslation(['service', 'marketplace']);
+
+  const chartTypeOptions = useMemo(
+    () => [
+      {
+        label: t('chart-options.pnl_pct_compound'),
+        value: GraphChartType.pnl_pct_compound,
+      },
+      {
+        label: t('chart-options.pnl_ssc', { coin: service.ssc }),
+        value: GraphChartType.pnl_ssc,
+      },
+      {
+        label: t('chart-options.sbt_ssc', { coin: service.ssc }),
+        value: GraphChartType.sbt_ssc,
+      },
+      { label: t('chart-options.investors'), value: GraphChartType.investors },
+    ],
+    [t],
+  );
+
+  const serviceStartedDaysAgo = useMemo(
+    () => differenceInDays(new Date(), new Date(service.createdAt)),
+    [service.createdAt],
+  );
+
+  const events = useMemo(() => {
+    // yes, we intentionally skip the case when the migration date is 0 index
+    const allEvents = [];
+    if (data?.migrationIndex > 0) {
+      allEvents.push({ x: data?.migrationIndex, label: t('migrated-to-ps2') });
+      return allEvents;
+    }
+  }, [data?.migrationIndex]);
+
+  const canShowSummary =
+    typeof data?.summary !== 'undefined' &&
+    !isError &&
+    !isLoading &&
+    !isFetching;
+  const value = data?.summary;
 
   return (
     <Box>
+      <Box
+        sx={{
+          mb: 2,
+          minHeight: 40,
+          flexDirection: 'row',
+          display: 'flex',
+          alignItems: 'center',
+          flexWrap: 'wrap',
+        }}
+      >
+        {canShowSummary && (
+          <>
+            <Box sx={{ mr: 2 }}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                {![
+                  GraphChartType.pnl_pct_compound,
+                  GraphChartType.at_risk_pct,
+                  GraphChartType.investors,
+                ].includes(chartType) && (
+                  <>
+                    {chartType === GraphChartType.pnl_ssc && (
+                      <ZigTypography
+                        color={'neutral200'}
+                        variant={'h1'}
+                        sx={{ mr: 0.5, position: 'relative', top: '1px' }}
+                      >
+                        {t('service:total')}
+                      </ZigTypography>
+                    )}
+                    <ZigPriceLabel
+                      coin={service.ssc}
+                      variant={'bigNumber'}
+                      color={
+                        chartType === GraphChartType.sbt_ssc
+                          ? 'neutral200'
+                          : +value > 0
+                          ? 'greenGraph'
+                          : 'redGraphOrError'
+                      }
+                      value={value}
+                    />
+                  </>
+                )}
+
+                {[
+                  GraphChartType.pnl_pct_compound,
+                  GraphChartType.at_risk_pct,
+                ].includes(chartType) && (
+                  <ZigTypography
+                    variant={'bigNumber'}
+                    sx={{ whiteSpace: 'nowrap' }}
+                    color={+value > 0 ? 'greenGraph' : 'redGraphOrError'}
+                  >
+                    {t('common:percent', { value })}
+                  </ZigTypography>
+                )}
+
+                {GraphChartType.investors === chartType && (
+                  <ZigTypography
+                    color={'neutral200'}
+                    variant={'h1'}
+                    sx={{ whiteSpace: 'nowrap' }}
+                  >
+                    {t('marketplace:table:x-investors', {
+                      count: +value,
+                    })}
+                  </ZigTypography>
+                )}
+              </Box>
+            </Box>
+
+            {typeof data?.percentDiff !== 'undefined' && (
+              <GraphPercentageWrapperBox sx={{ mr: 2 }}>
+                <PercentChange colored variant='h2' value={data?.percentDiff} />
+              </GraphPercentageWrapperBox>
+            )}
+          </>
+        )}
+
+        <Box sx={{ flex: 1 }} />
+        <Box sx={{ mr: 2 }}>
+          <SqueezedButtonGroup variant={'outlined'}>
+            {Object.keys(GraphTimeframe).map((v: GraphTimeframe, i, all) => {
+              const isDisabled =
+                i > 0 &&
+                GraphTimeframeDayLength[v] > 30 &&
+                GraphTimeframeDayLength[all[i - 1]] > serviceStartedDaysAgo;
+
+              return (
+                <ZigButton
+                  active={v === chartTimeframe}
+                  size={'small'}
+                  variant={'outlined'}
+                  key={v}
+                  disabled={isDisabled}
+                  tooltip={
+                    isDisabled ? t('service:not-enough-data') : undefined
+                  }
+                  onClick={() => setChartTimeframe(v)}
+                >
+                  {t('periods.' + v)}
+                </ZigButton>
+              );
+            })}
+          </SqueezedButtonGroup>
+        </Box>
+        <SelectWrapperBox sx={{ mr: 4.5 }}>
+          <ZigSelect
+            outlined
+            width={180}
+            small
+            value={chartType}
+            onChange={(v) => setChartType(v)}
+            options={chartTypeOptions}
+          />
+        </SelectWrapperBox>
+      </Box>
       <ChartWrapper>
-        {isLoading || isFetching ? (
+        {isError ? (
+          <Stub
+            title={t('chart-error.heading')}
+            description={t('chart-error.description')}
+          />
+        ) : isLoading || isFetching || !data?.data ? (
           <CenteredLoader />
         ) : (
-          <AreaChart
-            variant={'large'}
-            data={Object.entries(data?.data || {}).map(([date, value]) => ({
-              x: formatMonthDay(parse(date, 'yyyy-MM-dd', Date.now())),
-              y: value,
-            }))}
+          <ZigChart
+            bars={chartType === GraphChartType.pnl_ssc}
+            onlyIntegerTicks={chartType === GraphChartType.investors}
+            events={events}
+            yAxisFormatter={(v) =>
+              `${v
+                .toString()
+                .replace(/000000$/, 'M')
+                .replace(/000$/, 'K')}${
+                [
+                  GraphChartType.pnl_pct_compound,
+                  GraphChartType.at_risk_pct,
+                ].includes(chartType)
+                  ? `%`
+                  : ``
+              }`
+            }
+            data={data?.data}
           />
         )}
       </ChartWrapper>

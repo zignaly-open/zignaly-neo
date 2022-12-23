@@ -3,7 +3,7 @@ import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
 import { ZigTypography } from '@zignaly-open/ui';
 import { Box, Grid } from '@mui/material';
-import { GridCell, GridWithBottomBorder } from '../styles';
+import { GridCell, AssetsInPoolWrapper, GridWithBottomBorder } from '../styles';
 import AssetsInPool from '../../../../../components/AssetsInPool';
 import ServicePercentageInfo from './ServicePercentageInfo';
 import { subMonths, subYears } from 'date-fns';
@@ -11,17 +11,19 @@ import { subMonths, subYears } from 'date-fns';
 const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation(['service', 'marketplace']);
   return (
-    <Box mt={4}>
-      <GridWithBottomBorder container p={2}>
+    <Box>
+      <GridWithBottomBorder container pb={2.5} pl={2} pr={2} pt={0}>
         <GridCell item xs={6}>
           <ZigTypography color={'neutral300'}>
             {t('assets-in-pool')}
           </ZigTypography>
-          <AssetsInPool
-            assetsValue={service.usdtInvested}
-            convertedValue={+service.invested}
-            convertedValueCoin={service.ssc}
-          />
+          <AssetsInPoolWrapper>
+            <AssetsInPool
+              assetsValue={service.usdtInvested}
+              convertedValue={+service.invested}
+              convertedValueCoin={service.ssc}
+            />
+          </AssetsInPoolWrapper>
         </GridCell>
         <GridCell item xs={6}>
           <ZigTypography color={'neutral300'}>
@@ -32,7 +34,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
           </ZigTypography>
         </GridCell>
       </GridWithBottomBorder>
-      <GridWithBottomBorder container p={2}>
+      <GridWithBottomBorder container pb={2.5} pl={2} pr={2} pt={2.5}>
         <GridCell item xs={4} rightBorder>
           <ServicePercentageInfo
             title={t('marketplace:table.n-months', { count: 1 })}
