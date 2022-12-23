@@ -1,4 +1,5 @@
-export { ColumnDef, createColumnHelper } from "@tanstack/react-table";
+export { createColumnHelper } from "@tanstack/react-table";
+export type { ColumnDef } from "@tanstack/react-table";
 import Avatar from "./components/display/Avatar";
 import ErrorMessage from "./components/display/ErrorMessage";
 import Loader from "./components/display/Loader";
