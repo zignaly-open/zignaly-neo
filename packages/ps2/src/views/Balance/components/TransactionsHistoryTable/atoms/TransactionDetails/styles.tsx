@@ -28,9 +28,3 @@ export const TypographyPanelName = styled((props) => (
     color: rgb(193, 193, 200);
   }
 `;
-
-export const TypographyAddress = styled((props) => (
-  <ZigTypography {...props} variant='h5' />
-))`
-  color: ${({ theme }) => theme.palette.neutral000};
-`;
