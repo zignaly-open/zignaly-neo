@@ -17,6 +17,7 @@ const ZigTabs = (props: TabsProps) => {
       display="flex"
       justifyContent="space-between"
       flexWrap="wrap"
+      flex={1}
       sx={{
         flexDirection: { xs: "column", sm: "row" },
         rowGap: 2,

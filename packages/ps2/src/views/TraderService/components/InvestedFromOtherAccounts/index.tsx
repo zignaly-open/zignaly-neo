@@ -18,8 +18,8 @@ import {
   useSelectExchange,
 } from '../../../../apis/user/use';
 import { Box } from '@mui/material';
-import BigNumber from 'bignumber.js';
 import { ColumnDef } from '@tanstack/react-table';
+import BigNumber from 'bignumber.js';
 
 function InvestedFromOtherAccounts({
   close,

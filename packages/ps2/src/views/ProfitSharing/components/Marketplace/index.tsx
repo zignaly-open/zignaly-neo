@@ -5,9 +5,9 @@ import {
   PageContainer,
   PercentageIndicator,
   ZigTypography,
-  ZigChartMini,
   ZigTable,
   createColumnHelper,
+  ZigChartMini,
 } from '@zignaly-open/ui';
 import { formatDistance } from 'date-fns';
 import { Box } from '@mui/material';
