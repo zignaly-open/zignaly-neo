@@ -1,7 +1,13 @@
-import { useAllCoinsQuery, useCoinsQuery, useDepositInfoQuery } from './api';
+import {
+  useAllCoinsQuery,
+  useCoinsQuery,
+  useDepositInfoQuery,
+  useTransactionsHistoryQuery,
+} from './api';
 import { useActiveExchange } from '../user/use';
 import { CoinBalances, CoinDetails, DepositInfo } from './types';
 import { QueryReturnType } from '../../util/queryReturnType';
+import useInfinitePaginatedQuery from 'util/hooks/useInfinitePaginatedQuery';
 
 export function useCoinBalances(options?: {
   convert?: boolean;
@@ -23,6 +29,26 @@ export function useExchangeCoinsList(): QueryReturnType<CoinDetails> {
   return useAllCoinsQuery(exchange?.exchangeType, {
     skip: !exchange?.exchangeType,
   });
+}
+
+export function useTransactionsHistory(
+  filters: {
+    limit?: number;
+    type?: string;
+  } = {},
+  pageIndex = 0,
+) {
+  const exchange = useActiveExchange();
+  const infinitePaginatedQuery = useInfinitePaginatedQuery(
+    useTransactionsHistoryQuery,
+    {
+      exchangeInternalId: exchange?.internalId,
+      ...filters,
+    },
+    pageIndex,
+  );
+
+  return infinitePaginatedQuery;
 }
 
 export function useDepositInfo(

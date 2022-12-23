@@ -1,5 +1,5 @@
 import React from "react";
-import NumberFormat from "react-number-format";
+import { NumericFormat } from "react-number-format";
 
 import * as styled from "./styles";
 
@@ -30,7 +30,7 @@ const PriceLabel = ({
   return (
     <styled.Layout className={className}>
       <styled.Value>
-        <NumberFormat
+        <NumericFormat
           prefix={valuePrefix || ""}
           value={value}
           style={{

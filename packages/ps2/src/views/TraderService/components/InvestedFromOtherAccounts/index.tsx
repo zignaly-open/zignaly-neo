@@ -6,11 +6,11 @@ import { useIsInvestedInService } from '../../../../apis/investment/use';
 import ZModal from '../../../../components/ZModal';
 import { Service } from '../../../../apis/service/types';
 import {
-  PriceLabel,
-  Table,
   TextButton,
-  Typography,
   UsdPriceLabel,
+  ZigTable,
+  ZigTablePriceLabel,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import {
   useActiveExchange,
@@ -18,7 +18,7 @@ import {
   useSelectExchange,
 } from '../../../../apis/user/use';
 import { Box } from '@mui/material';
-import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
+import { ColumnDef } from '@tanstack/react-table';
 import BigNumber from 'bignumber.js';
 
 function InvestedFromOtherAccounts({
@@ -53,31 +53,32 @@ function InvestedFromOtherAccounts({
       isLoading={isInvested.isLoading}
     >
       <Box mt={3}>
-        <Table
+        <ZigTable
           columns={
             [
               {
-                Header: t('other-accounts.account'),
-                accessor: 'account',
+                header: t('other-accounts.account'),
+                accessorKey: 'account',
               },
               {
-                Header: t('other-accounts.invested'),
-                accessor: 'invested',
-                Cell: ({ cell: { value } }) =>
+                header: t('other-accounts.invested'),
+                accessorKey: 'invested',
+                cell: ({ getValue }) =>
                   service.ssc === 'USDT' ? (
-                    <UsdPriceLabel value={value} />
+                    <UsdPriceLabel value={getValue()} />
                   ) : (
-                    <PriceLabel coin={service.ssc} value={value} />
+                    <ZigTablePriceLabel coin={service.ssc} value={getValue()} />
                   ),
               },
               {
-                Header: '',
-                accessor: 'internalId',
-                Cell: ({ cell: { value } }) =>
-                  value === activeExchange.internalId ? (
-                    <Typography color={'neutral500'}>
+                header: '',
+                id: 'internalId',
+                accessorKey: 'internalId',
+                cell: ({ getValue }) =>
+                  getValue() === activeExchange.internalId ? (
+                    <ZigTypography color='neutral500'>
                       {t('other-accounts.active')}
-                    </Typography>
+                    </ZigTypography>
                   ) : (
                     <TextButton
                       leftElement={
@@ -91,19 +92,16 @@ function InvestedFromOtherAccounts({
                       }
                       caption={t('other-accounts.switch-action')}
                       color={'links'}
-                      onClick={() => selectExchange(value)}
+                      onClick={() => selectExchange(getValue())}
                     />
                   ),
               },
-            ] as TableProps<{
-              account: string;
-              invested: string;
-              internalId: string;
-            }>['columns']
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ] as ColumnDef<typeof allInvestedServices[number], any>[]
           }
           data={allInvestedServices}
-          hideOptionsButton={true}
-          isUserTable={false}
+          columnVisibility={false}
+          pagination={false}
         />
       </Box>
     </ZModal>

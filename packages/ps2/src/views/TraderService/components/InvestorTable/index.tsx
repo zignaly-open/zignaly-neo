@@ -5,12 +5,12 @@ import { Layout, InvestorCounts } from './styles';
 import {
   UserIcon,
   Typography,
-  Table,
   PriceLabel,
   PercentageIndicator,
+  ZigTable,
+  createColumnHelper,
+  ZigTablePriceLabel,
 } from '@zignaly-open/ui';
-import { TableProps } from '@zignaly-open/ui/lib/components/display/Table/types';
-import { InvestorTableDataType } from './types';
 import {
   useTraderServiceInvestors,
   useServiceDetails,
@@ -23,8 +23,6 @@ import {
 import ConnectionStateLabel from '../ConnectionStateLabel';
 import { YesNo } from './atoms';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
-import { sortBigNumbers } from '../../../../util/numbers';
-import { connectionStateName } from '../ConnectionStateLabel/types';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -37,78 +35,81 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
 
   const { t } = useTranslation('investors');
 
-  const columns: TableProps<InvestorTableDataType>['columns'] = useMemo(
-    () => [
-      {
-        Header: t('tableHeader.email'),
-        accessor: 'email',
-      },
-      {
-        Header: t('tableHeader.userId'),
-        accessor: 'userId',
-      },
-      {
-        Header: t('tableHeader.investment'),
-        accessor: 'investment',
-        Cell: ({ cell: { value } }) => (
-          <PriceLabel coin={service?.ssc ?? 'USDT'} value={value.toFixed()} />
-        ),
-        sortType: (a, b) =>
-          sortBigNumbers(a.values.investment, b.values.investment),
-      },
-      {
-        Header: t('tableHeader.P&L'),
-        accessor: 'pnl',
-        Cell: ({ cell: { value } }) => (
+  const columnHelper = createColumnHelper<Investor & { successFee: string }>();
+  const columns = useMemo(() => {
+    return [
+      columnHelper.accessor('email', {
+        header: t('tableHeader.email'),
+      }),
+      columnHelper.accessor('userId', {
+        header: t('tableHeader.userId'),
+      }),
+      columnHelper.accessor(
+        (row) => new BigNumber(row.invested).plus(new BigNumber(row.pending)),
+        {
+          header: t('tableHeader.investment'),
+          id: 'investment',
+          cell: (props) => (
+            <ZigTablePriceLabel
+              coin={service?.ssc ?? 'USDT'}
+              value={props.getValue().toFixed()}
+            />
+          ),
+        },
+      ),
+      columnHelper.accessor('pnlNetLc', {
+        header: t('tableHeader.P&L'),
+        cell: (props) => (
           <PriceLabel
             coin={service?.ssc ?? 'USDT'}
-            value={parseFloat(value.pnlNetLc)}
-            bottomElement={<PercentageIndicator value={value.pnlPctLc} />}
+            value={parseFloat(props.getValue())}
+            bottomElement={
+              <PercentageIndicator value={props.row.original.pnlPctLc} />
+            }
           />
         ),
-        sortType: (a, b) =>
-          sortBigNumbers(a.values.pnlPctLc, b.values.pnlPctLc),
-      },
-      {
-        Header: t('tableHeader.P&LTotal'),
-        accessor: 'pnlTotal',
-        Cell: ({ cell: { value } }) => (
-          <PriceLabel coin={service?.ssc ?? 'USDT'} value={parseFloat(value)} />
+      }),
+      columnHelper.accessor('pnlNetAt', {
+        header: t('tableHeader.P&LTotal'),
+        cell: (props) => (
+          <ZigTablePriceLabel
+            coin={service?.ssc ?? 'USDT'}
+            value={parseFloat(props.getValue())}
+          />
         ),
-        sortType: (a, b) =>
-          sortBigNumbers(a.values.pnlTotal, b.values.pnlTotal),
-      },
-      {
-        Header: t('tableHeader.totalFeesPaid'),
-        accessor: 'totalFeesPaid',
-        Cell: ({ cell: { value } }) => (
-          <PriceLabel coin={service?.ssc ?? 'USDT'} value={parseFloat(value)} />
+      }),
+      columnHelper.accessor('sfOwnerAt', {
+        header: t('tableHeader.totalFeesPaid'),
+        cell: (props) => (
+          <ZigTablePriceLabel
+            coin={service?.ssc ?? 'USDT'}
+            value={parseFloat(props.getValue())}
+          />
         ),
-        sortType: (a, b) =>
-          sortBigNumbers(a.values.totalFeesPaid, b.values.totalFeesPaid),
-      },
-      {
-        Header: t('tableHeader.successFee'),
-        accessor: 'successFee',
-      },
-      {
-        Header: t('tableHeader.feesZIG'),
-        accessor: 'feesInZig',
-        Cell: ({ cell: { value } }) => <YesNo value={value} />,
-        sortType: (a, b) => +a.values.feesInZig - +b.values.feesInZig,
-      },
-      {
-        Header: t('tableHeader.status'),
-        accessor: 'status',
-        Cell: ({ cell: { value } }) => <ConnectionStateLabel stateId={value} />,
-        sortType: (a, b) =>
-          t(connectionStateName[a.values.status])?.localeCompare(
-            t(connectionStateName[b.values.status]),
-          ),
-      },
-    ],
-    [t],
-  );
+      }),
+      columnHelper.accessor('successFee', {
+        header: t('tableHeader.successFee'),
+        cell: (props) => `${props.getValue()}%`,
+      }),
+      columnHelper.accessor('pnlNetAt', {
+        header: t('tableHeader.P&LTotal'),
+        cell: (props) => (
+          <ZigTablePriceLabel
+            coin={service?.ssc ?? 'USDT'}
+            value={parseFloat(props.getValue())}
+          />
+        ),
+      }),
+      columnHelper.accessor('payZig', {
+        header: t('tableHeader.feesZIG'),
+        cell: (props) => <YesNo value={props.getValue()} />,
+      }),
+      columnHelper.accessor('accountType', {
+        header: t('tableHeader.status'),
+        cell: (props) => <ConnectionStateLabel stateId={props.getValue()} />,
+      }),
+    ];
+  }, []);
 
   return (
     <Layout>
@@ -132,28 +133,13 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
               </Typography>
             </InvestorCounts>
 
-            <Table
-              type={'pagedWithData'}
+            <ZigTable
               columns={columns}
-              data={investors?.map((investor: Investor) => ({
-                email: investor.email,
-                userId: investor.userId,
-                investment: new BigNumber(investor.invested).plus(
-                  new BigNumber(investor.pending),
-                ),
-                pnl: {
-                  pnlNetLc: investor.pnlNetLc,
-                  pnlPctLc: investor.pnlPctLc,
-                },
-                pnlTotal: investor.pnlNetAt,
-                totalFeesPaid: investor.sfOwnerAt,
-                successFee: `${management.successFee}%`,
-                feesInZig: investor.payZig,
-                status: investor.accountType,
+              data={investors.map((inv) => ({
+                ...inv,
+                successFee: management.successFee,
               }))}
-              hideOptionsButton={false}
               emptyMessage={t('no-investors')}
-              isUserTable={false}
             />
           </>
         )}
