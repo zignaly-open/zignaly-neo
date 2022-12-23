@@ -62,36 +62,38 @@ const MyBalances: React.FC = () => {
         <Header>
           <BalanceAccountSelector />
         </Header>
-        <ZigTabs
-          onChange={(_, newValue) => {
-            setTab(newValue);
-          }}
-          value={tab}
-        >
-          <ZigTab label={t('my-balances:my-coins')} />
-          <ZigTab
-            label={t('my-balances:deposits-withdrawals')}
-            asideComponent={
-              <Box display='flex' gap={2}>
-                <TextButton
-                  rightElement={<Add sx={{ color: 'links' }} />}
-                  caption={t('action:export')}
-                  onClick={() => {
-                    showModal(ExportModal);
-                  }}
-                />
-                <StyledZigSelect
-                  options={filterOptions}
-                  value={type}
-                  onChange={setType}
-                  styles={{
-                    singleValue: maxLegend,
-                  }}
-                />
-              </Box>
-            }
-          />
-        </ZigTabs>
+        <Box height='67px' display='flex' alignItems='center'>
+          <ZigTabs
+            onChange={(_, newValue) => {
+              setTab(newValue);
+            }}
+            value={tab}
+          >
+            <ZigTab label={t('my-balances:my-coins')} />
+            <ZigTab
+              label={t('my-balances:deposits-withdrawals')}
+              asideComponent={
+                <Box display='flex' gap={2}>
+                  <TextButton
+                    rightElement={<Add sx={{ color: 'links' }} />}
+                    caption={t('action:export')}
+                    onClick={() => {
+                      showModal(ExportModal);
+                    }}
+                  />
+                  <StyledZigSelect
+                    options={filterOptions}
+                    value={type}
+                    onChange={setType}
+                    styles={{
+                      singleValue: maxLegend,
+                    }}
+                  />
+                </Box>
+              }
+            />
+          </ZigTabs>
+        </Box>
         <ZigTabPanel value={tab} index={0}>
           <MyBalancesTable />
         </ZigTabPanel>
