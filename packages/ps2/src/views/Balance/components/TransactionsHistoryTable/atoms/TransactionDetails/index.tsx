@@ -15,7 +15,7 @@ const TransactionDetails = ({ transaction }: { transaction: Transaction }) => {
 
   return (
     <TransactionPanel>
-      <Box display='flex' justifyContent='center'>
+      <Box display='flex' alignItems='center'>
         <TypographyPanelLabel>{t('details.from')}</TypographyPanelLabel>
         <FromTo side='from' transaction={transaction} />
         <ArrowRightAlt style={{ margin: '0 21px' }} />
