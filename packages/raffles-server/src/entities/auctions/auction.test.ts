@@ -17,7 +17,6 @@ import {
   updateAuction,
   deleteAuction,
 } from '../../util/test-utils';
-import { mock } from '../../util/mock-cybavo-wallet';
 import redisService from '../../redisService';
 import pubsub from '../../pubsub';
 
@@ -25,7 +24,6 @@ describe('Auctions', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
   afterEach(() => {
-    mock.reset();
     clearMocks();
   });
   afterAll(async () => {

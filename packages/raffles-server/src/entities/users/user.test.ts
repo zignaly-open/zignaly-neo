@@ -5,6 +5,7 @@ import {
   checkUsername,
   createAlice,
   createAlicesDiscord,
+  createAliceDeposit,
   createBob,
   createBobDiscord,
   getBalance,
@@ -121,16 +122,16 @@ describe('User', () => {
       expect(balance).toBe('200.00');
     });
 
-    it('should update USER_CURRENT_BALANCE if different cybavo balance', async () => {
-      const [alice, aliceToken, cybavoMock] = await createAlice(300.33);
+    it('should update USER_CURRENT_BALANCE if different than service balance', async () => {
+      const [alice, aliceToken] = await createAlice(300.33);
       // User has bid 50 ZIGS
       await redisService.redis.hset(
         `USER_CURRENT_BALANCE`,
         alice.id,
         250.33 * 1000,
       );
-      // User has received 100.11009 ZIGS
-      cybavoMock.setBalance(400.44009);
+
+      await createAliceDeposit(100.11009);
 
       expect(await getBalance(aliceToken)).toEqual(
         expect.objectContaining({ balance: '350.44' }),

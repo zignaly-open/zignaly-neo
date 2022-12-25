@@ -12,16 +12,12 @@ import {
   createBob,
   getBalance,
 } from '../../util/test-utils';
-import { mock } from '../../util/mock-cybavo-wallet';
 import redisService from '../../redisService';
 
 describe('Auction Claims', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
   afterEach(clearMocks);
-  afterEach(() => {
-    mock.reset();
-  });
   afterAll(async () => {
     await redisService.redis.quit();
   });
@@ -190,10 +186,6 @@ describe('Auction Claims', () => {
     const auction = await createAuction();
     await makeBid(auction, aliceToken);
     await claimAuction(auction, aliceToken);
-    mock['handlers' as any].post[0] = mock
-      .onPost('/transfer/internal')
-      // No transaction id
-      .reply(200, {});
     const {
       body: { errors },
     } = await claimAuction(auction, aliceToken);

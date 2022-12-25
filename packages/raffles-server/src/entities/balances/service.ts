@@ -10,6 +10,7 @@ import {
   Import,
 } from './types';
 import { TransactionType } from '../../types';
+import { Code } from '../codes/model';
 
 export const getWalletZhitsBalance = async (walletAddress: string) => {
   return Balance.aggregate('zhits', 'sum', {
@@ -64,7 +65,7 @@ export const payFee = async ({ walletAddress, zhits, note }: FeeParams) => {
     throw new Error('Invalid amount');
   }
 
-  addTransaction({
+  const tx = addTransaction({
     walletAddress,
     zhits: `${-zhits}`,
     amount: '0',
@@ -73,9 +74,40 @@ export const payFee = async ({ walletAddress, zhits, note }: FeeParams) => {
     transactionType: TransactionType.Fee,
     note,
   });
+
+  return tx;
 };
 
-export const claim = async ({ walletAddress, zhits, note }: PayoutParams) => {
+export const makePayout = async ({
+  walletAddress,
+  zhits,
+  note,
+}: PayoutParams) => {
+  if (!walletAddress) {
+    throw new Error('Wallet address is required');
+  }
+  if (!zhits || isNaN(Number(zhits)) || Number(zhits) <= 0) {
+    throw new Error('Invalid amount');
+  }
+
+  const tx = addTransaction({
+    walletAddress,
+    zhits: `${-zhits}`,
+    amount: '0',
+    currency: '',
+    blockchain: '',
+    transactionType: TransactionType.Payout,
+    note,
+  });
+
+  return tx;
+};
+
+export const referralCode = async ({
+  walletAddress,
+  zhits,
+  note,
+}: RedeemParams) => {
   if (!walletAddress) {
     throw new Error('Wallet address is required');
   }
@@ -85,11 +117,11 @@ export const claim = async ({ walletAddress, zhits, note }: PayoutParams) => {
 
   addTransaction({
     walletAddress,
-    zhits: `${-zhits}`,
+    zhits,
     amount: '0',
     currency: '',
     blockchain: '',
-    transactionType: TransactionType.Payout,
+    transactionType: TransactionType.ReferralCode,
     note,
   });
 };
@@ -136,7 +168,7 @@ export const deposit = async ({
     throw new Error('Blockchain is required');
   }
 
-  addTransaction({
+  const tx = addTransaction({
     walletAddress,
     zhits: `${Number(amount) * 1}`,
     amount,
@@ -145,6 +177,8 @@ export const deposit = async ({
     transactionType: TransactionType.Deposit,
     note: '',
   });
+
+  return tx;
 };
 
 //This two functions are only for migrating current balances from the old system to the new one
@@ -183,8 +217,29 @@ export const getUserBalance = async (
     },
   });
 
-  return {
-    walletAddress,
-    zhits: `${userBalance}`,
-  };
+  return `${userBalance}`;
+};
+
+export const getUserDeposits = async (
+  walletAddress: string,
+): Promise<Balance[]> => {
+  const userBalance = await Balance.findAll({
+    where: {
+      walletAddress,
+      transactionType: TransactionType.Deposit,
+    },
+  });
+
+  return userBalance;
+};
+
+export const getDepositsTotal = async (code: Code, walletAddress: string) => {
+  return (await getUserDeposits(walletAddress)).reduce(
+    (total, deposit) =>
+      total +
+      (!code.reqDepositFrom || new Date(deposit.createdAt) > code.reqDepositFrom
+        ? Number(deposit.zhits)
+        : 0),
+    0,
+  );
 };

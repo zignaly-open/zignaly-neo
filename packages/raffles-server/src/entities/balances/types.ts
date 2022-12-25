@@ -1,9 +1,6 @@
 import { TransactionType } from '../../types';
 
-export type UserBalanceZhits = {
-  walletAddress: string;
-  zhits: string;
-};
+export type UserBalanceZhits = string;
 
 export enum Import {
   Import = 'import',

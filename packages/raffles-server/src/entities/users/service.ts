@@ -1,7 +1,7 @@
 import { WalletType } from '@zignaly-open/raffles-shared/types';
 import { withFilter } from 'graphql-subscriptions';
 import { Op } from 'sequelize';
-import { getUserBalance } from '../../cybavo';
+import { getUserBalance } from '../balances/service';
 import pubsub from '../../pubsub';
 import redisService from '../../redisService';
 import { ContextUser, ResourceOptions } from '../../types';

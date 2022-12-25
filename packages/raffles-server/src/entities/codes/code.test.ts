@@ -1,11 +1,10 @@
 import { zignalySystemId } from '../../../config';
 import redisService from '../../redisService';
 import { TransactionType } from '../../types';
-import { mock } from '../../util/mock-cybavo-wallet';
 import {
   checkCode,
-  clearMocks,
   createAlice,
+  createAliceDeposit,
   createAuction,
   createBob,
   createCode,
@@ -24,14 +23,11 @@ import {
   DEFAULT_MAX_TOTAL_REWARDS,
   DEFAULT_REWARD_DIRECT,
 } from './constants';
+import { Balance } from '../balances/model';
 
 describe('Codes', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
-  afterEach(() => {
-    mock.reset();
-    clearMocks();
-  });
   afterAll(async () => {
     await redisService.redis.quit();
   });
@@ -227,17 +223,26 @@ describe('Codes', () => {
     const { body } = await redeemCode(code.code, bobToken);
     expect(body.data.redeemCode).toEqual(code.benefitDirect);
 
-    expect(mock.history.post[1].data).toBe(
-      JSON.stringify({
-        amount: code.rewardDirect.toString(),
-        fees: '0',
-        currency: 'ZIG',
-        user_id: zignalySystemId,
-        to_user_id: alice.publicAddress,
-        locked: 'true',
-        type: TransactionType.ReferralCode,
-      }),
+    const response = await Balance.findAll({});
+    const expected = {
+      walletAddress: alice.publicAddress,
+      zhits: '10',
+      amount: 0,
+      currency: '',
+      blockchain: '',
+      transactionType: TransactionType.ReferralCode,
+      note: '617bab4be4ca6a2937666523',
+    };
+
+    expect(expected.walletAddress).toBe(
+      response[response.length - 1].walletAddress,
     );
+
+    expect(expected.transactionType).toBe(
+      response[response.length - 1].transactionType,
+    );
+
+    expect(expected.zhits).toBe(response[response.length - 1].zhits);
   });
 
   it('should transfer to both users', async () => {
@@ -250,29 +255,31 @@ describe('Codes', () => {
       DEFAULT_BENEFIT_DIRECT + DEFAULT_BENEFIT_DEPOSIT_FACTOR * 1000,
     );
 
-    expect(mock.history.post[0].data).toBe(
-      JSON.stringify({
-        amount: '5100',
-        fees: '0',
-        currency: 'ZIG',
-        user_id: zignalySystemId,
-        to_user_id: bob.publicAddress,
-        locked: 'true',
-        type: TransactionType.RedeemCode,
-      }),
-    );
+    const [, , response1, response2] = await Balance.findAll({});
 
-    expect(mock.history.post[1].data).toBe(
-      JSON.stringify({
-        amount: DEFAULT_MAX_TOTAL_REWARDS.toString(),
-        fees: '0',
-        currency: 'ZIG',
-        user_id: zignalySystemId,
-        to_user_id: alice.publicAddress,
-        locked: 'true',
-        type: TransactionType.ReferralCode,
-      }),
-    );
+    const expected = {
+      amount: '5100',
+      fees: '0',
+      currency: 'ZIG',
+      user_id: zignalySystemId,
+      to_user_id: bob.publicAddress,
+      type: TransactionType.RedeemCode,
+    };
+
+    expect(expected.type).toBe(response1.transactionType);
+    expect(bob.publicAddress).toBe(response1.walletAddress);
+
+    const expected2 = {
+      amount: DEFAULT_MAX_TOTAL_REWARDS.toString(),
+      fees: '0',
+      currency: 'ZIG',
+      user_id: zignalySystemId,
+      to_user_id: alice.publicAddress,
+      type: TransactionType.ReferralCode,
+    };
+
+    expect(expected2.type).toBe(response2.transactionType);
+    expect(alice.publicAddress).toBe(response2.walletAddress);
   });
 
   it('should apply benefitBalanceFactor', async () => {
@@ -300,43 +307,19 @@ describe('Codes', () => {
       maxTotalBenefits: 200,
       maxTotalRewards: 200,
     });
-    const [alice, aliceToken] = await createAlice(1000);
 
-    // Mock deposits
-    mock.onGet(`/operations/all/${alice.publicAddress}`).reply(() => {
-      return [
-        200,
-        [
-          {
-            amount: 500,
-            created_at: '2022-09-09T16:09:56',
-            internal_type: TransactionType.Deposit,
-          },
-          {
-            amount: 500,
-            created_at: new Date(Date.now() - 12 * 60 * 60 * 1000),
-            internal_type: TransactionType.Deposit,
-          },
-        ],
-      ];
-    });
+    const [, aliceToken] = await createAlice(1000);
+
+    await createAliceDeposit(500, '2022-09-09T16:09:56');
+    await createAliceDeposit(500, new Date(Date.now() - 12 * 60 * 60 * 1000));
 
     const { body } = await redeemCode(code.code, aliceToken);
-    expect(body.data.redeemCode).toEqual(150);
+    expect(body.data.redeemCode).toEqual(200);
 
-    // Check inviterBenefit
-    expect(mock.history.post[1].data).toBe(
-      JSON.stringify({
-        // 100 + 150*0.2
-        amount: '130',
-        fees: '0',
-        currency: 'ZIG',
-        user_id: zignalySystemId,
-        to_user_id: bob.publicAddress,
-        locked: 'true',
-        type: TransactionType.ReferralCode,
-      }),
-    );
+    const [response1] = await (await Balance.findAll({})).reverse();
+    expect(response1.walletAddress).toBe(bob.publicAddress);
+    expect(response1.zhits).toBe('140');
+    expect(response1.transactionType).toBe(TransactionType.ReferralCode);
   });
 
   it('should apply benefitDepositFactor up to maxTotalBenefits', async () => {
@@ -355,18 +338,11 @@ describe('Codes', () => {
     const { body } = await redeemCode(code.code, aliceToken);
     expect(body.data.redeemCode).toEqual(120);
 
-    // Check inviterBenefit
-    expect(mock.history.post[1].data).toBe(
-      JSON.stringify({
-        amount: '110',
-        fees: '0',
-        currency: 'ZIG',
-        user_id: zignalySystemId,
-        to_user_id: bob.publicAddress,
-        locked: 'true',
-        type: TransactionType.ReferralCode,
-      }),
-    );
+    const [response1] = await (await Balance.findAll({})).reverse();
+
+    expect(TransactionType.ReferralCode).toBe(response1.transactionType);
+    expect(bob.publicAddress).toBe(response1.walletAddress);
+    expect('110').toBe(response1.zhits);
   });
 
   it('should apply rewardDepositFactor', async () => {
@@ -384,18 +360,11 @@ describe('Codes', () => {
     const { body } = await redeemCode(code.code, aliceToken);
     expect(body.data.redeemCode).toEqual(DEFAULT_BENEFIT_DIRECT);
 
-    // Check inviterBenefit
-    expect(mock.history.post[1].data).toBe(
-      JSON.stringify({
-        amount: (DEFAULT_REWARD_DIRECT + 100).toString(),
-        fees: '0',
-        currency: 'ZIG',
-        user_id: zignalySystemId,
-        to_user_id: bob.publicAddress,
-        locked: 'true',
-        type: TransactionType.ReferralCode,
-      }),
-    );
+    const [response1] = await (await Balance.findAll({})).reverse();
+
+    expect(TransactionType.ReferralCode).toBe(response1.transactionType);
+    expect(bob.publicAddress).toBe(response1.walletAddress);
+    expect((DEFAULT_REWARD_DIRECT + 100).toString()).toBe(response1.zhits);
   });
 
   it('should return user code', async () => {

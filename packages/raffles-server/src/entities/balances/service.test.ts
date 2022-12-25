@@ -2,7 +2,7 @@ import { waitUntilTablesAreCreated, wipeOut } from '../../util/test-utils';
 import {
   deposit,
   redeemCode,
-  claim,
+  makePayout,
   payFee,
   getUserBalance,
   importBalance,
@@ -47,11 +47,6 @@ describe('Balance service', () => {
 
   describe('deposits', () => {
     it('should be able to deposit 100 zhits from 100 zigs', async () => {
-      const expectedBalance = {
-        walletAddress: '0x001',
-        zhits: '100',
-      } as UserBalanceZhits;
-
       await deposit({
         walletAddress: '0x001',
         amount: '100',
@@ -61,7 +56,7 @@ describe('Balance service', () => {
 
       const userBalance: UserBalanceZhits = await getUserBalance('0x001');
 
-      expect(userBalance).toEqual(expectedBalance);
+      expect(userBalance).toEqual('100');
     });
 
     it('should not be able to deposit 0 amount', async () => {
@@ -78,11 +73,6 @@ describe('Balance service', () => {
     });
 
     it('should be able to make multiple deposit to same address', async () => {
-      const expectedBalance = {
-        walletAddress: '0x001',
-        zhits: '200',
-      } as UserBalanceZhits;
-
       // first deposit
       await deposit({
         walletAddress: '0x001',
@@ -101,16 +91,13 @@ describe('Balance service', () => {
 
       const userBalance: UserBalanceZhits = await getUserBalance('0x001');
 
-      expect(userBalance).toEqual(expectedBalance);
+      expect(userBalance).toEqual('200');
     });
   });
 
   describe('Pay Fee', () => {
     it('should be able to pay zhits fee for the last auction', async () => {
-      const expectedBalance = {
-        walletAddress: '0x001',
-        zhits: '98',
-      } as UserBalanceZhits;
+      const expectedBalance = '98';
 
       await deposit({
         walletAddress: '0x001',
@@ -127,17 +114,12 @@ describe('Balance service', () => {
 
       const userBalance: UserBalanceZhits = await getUserBalance('0x001');
 
-      expect(userBalance.zhits).toEqual(expectedBalance.zhits);
+      expect(userBalance).toEqual(expectedBalance);
     });
   });
 
   describe('Redeem Code', () => {
     it('should be able to redeem a code of 200 zhits', async () => {
-      const expectedBalance = {
-        walletAddress: '0x001',
-        zhits: '400',
-      } as UserBalanceZhits;
-
       await deposit({
         walletAddress: '0x001',
         amount: '200',
@@ -153,17 +135,12 @@ describe('Balance service', () => {
 
       const userBalance: UserBalanceZhits = await getUserBalance('0x001');
 
-      expect(userBalance).toEqual(expectedBalance);
+      expect(userBalance).toEqual('400');
     });
   });
 
-  describe('Claim', () => {
+  describe('Make Payout', () => {
     it('should be able to redeem a code of 200 zhits', async () => {
-      const expectedBalance = {
-        walletAddress: '0x001',
-        zhits: '0',
-      } as UserBalanceZhits;
-
       await deposit({
         walletAddress: '0x001',
         amount: '200',
@@ -171,7 +148,7 @@ describe('Balance service', () => {
         blockchain: 'polygon',
       });
 
-      await claim({
+      await makePayout({
         walletAddress: '0x001',
         zhits: '200',
         note: 'code number',
@@ -179,7 +156,7 @@ describe('Balance service', () => {
 
       const userBalance: UserBalanceZhits = await getUserBalance('0x001');
 
-      expect(userBalance).toEqual(expectedBalance);
+      expect(userBalance).toEqual('0');
     });
   });
 });

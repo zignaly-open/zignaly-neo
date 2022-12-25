@@ -4,8 +4,8 @@ import { AUCTION_UPDATED } from './entities/auctions/constants';
 import { getAuctionsWithBids } from './entities/auctions/service';
 import { Auction, AuctionBid } from './entities/auctions/model';
 import pubsub from './pubsub';
-import { RedisAuctionData, TransactionType } from './types';
-import { getUserBalance, internalTransfer } from './cybavo';
+import { RedisAuctionData } from './types';
+import { getUserBalance, payFee } from './entities/balances/service';
 import { User } from './entities/users/model';
 import { mapLimit } from 'modern-async';
 import BN from 'bignumber.js';
@@ -148,14 +148,13 @@ const makeTransfer = async (auctionId: number, user: User) => {
 
   const amount = cybavoBalance.minus(currentBalance);
 
-  const tx = await internalTransfer(
-    user.publicAddress,
-    zignalySystemId,
-    amount.toString(),
-    TransactionType.Fee,
-    false,
-  );
-  if (!tx.transaction_id) {
+  const tx = await payFee({
+    walletAddress: user.publicAddress,
+    zhits: amount.toString(),
+    note: zignalySystemId,
+  });
+
+  if (!tx.id) {
     throw new Error('Transaction error');
   }
   // Set balance
@@ -164,7 +163,7 @@ const makeTransfer = async (auctionId: number, user: User) => {
     redis.hset('USER_CYBAVO_BALANCE', user.id.toString(), strToUnit(balance)),
     redis.hset('USER_CURRENT_BALANCE', user.id.toString(), strToUnit(balance)),
   ]);
-  return tx.transaction_id;
+  return tx.id;
 };
 
 const deleteAuctionFromRedis = async (auctionId: number) => {
@@ -183,7 +182,7 @@ const finalizeAuction = async (auctionId: number) => {
     ranking,
     async (userId, i) => {
       const user = usersData.find((u) => u.id === +userId);
-      let txId: string;
+      let txId: number;
       try {
         txId = await makeTransfer(auctionId, user);
         if (!txId) {

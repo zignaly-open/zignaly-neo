@@ -1,5 +1,6 @@
 import supertest from 'supertest';
 import { User } from '../entities/users/model';
+import { Balance } from '../entities/balances/model';
 import app from '../index';
 import { signJwtToken } from '../entities/users/util';
 import {
@@ -11,7 +12,6 @@ import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import { isTest } from '../../config';
 import { persistTablesToTheDatabase } from '../db';
 import { Payout } from '../entities/payouts/model';
-import mockCybavoWallet, { MockedCybavo } from './mock-cybavo-wallet';
 import redisService from '../redisService';
 import { Code, CodeRedemption } from '../entities/codes/model';
 import { generateCode } from '../entities/codes/util';
@@ -22,7 +22,7 @@ import {
   DEFAULT_REQ_MINIMUM_DEPOSIT,
   DEFAULT_REWARD_DIRECT,
 } from '../entities/codes/constants';
-import { Balance } from '../entities/balances/model';
+import { TransactionType } from '../types';
 
 const request = supertest(app);
 
@@ -106,7 +106,7 @@ export async function getAuctions(
 
 export async function getBalance(token: string): Promise<any> {
   const balance = await makeRequest(BALANCE_QUERY, token);
-  return balance.body.data.balance;
+  return { balance: balance.body.data.balance.balance };
 }
 
 export async function getFirstAuction(token: string): Promise<AuctionType> {
@@ -200,9 +200,7 @@ export async function changeDiscordName(
   return updateProfile;
 }
 
-export async function createAlice(
-  balance = 0,
-): Promise<[User, string, MockedCybavo]> {
+export async function createAlice(balance = 0): Promise<[User, string]> {
   try {
     const user = await User.create(
       {
@@ -215,9 +213,29 @@ export async function createAlice(
     );
     // Load associations
     await user.reload();
+    await createAliceDeposit(balance);
+    await redisService.processBalance(`${balance}`, user.id);
+    return [user, await signJwtToken(user)];
+  } catch (e) {
+    console.error(e);
+  }
+}
 
-    const cybavoMock = await mockCybavoWallet(user, balance);
-    return [user, await signJwtToken(user), cybavoMock];
+export async function createAliceDeposit(
+  balance = 0,
+  createdAt: any = undefined,
+): Promise<void> {
+  try {
+    await Balance.create({
+      walletAddress: '0x6a3B248855bc8a687992CBAb7FD03E1947EAee07'.toLowerCase(),
+      zhits: balance,
+      amount: '100.50',
+      currency: '0x9876543210fedcba',
+      blockchain: 'Ethereum',
+      transactionType: TransactionType.Deposit,
+      note: 'Initial deposit',
+      createdAt,
+    });
   } catch (e) {
     console.error(e);
   }
@@ -236,9 +254,7 @@ export async function createAlicesDiscord(): Promise<[User, string]> {
   }
 }
 
-export async function createBob(
-  balance = 0,
-): Promise<[User, string, MockedCybavo]> {
+export async function createBob(balance = 0): Promise<[User, string]> {
   try {
     const user = await User.create(
       {
@@ -251,8 +267,9 @@ export async function createBob(
     );
     // Load associations
     await user.reload();
-    const cybavoMock = await mockCybavoWallet(user, balance);
-    return [user, await signJwtToken(user), cybavoMock];
+    await createBobDeposit(balance);
+    await redisService.processBalance(`${balance}`, user.id);
+    return [user, await signJwtToken(user)];
   } catch (e) {
     console.error(e);
   }
@@ -271,10 +288,26 @@ export async function createBobDiscord(): Promise<[User, string]> {
   }
 }
 
+export async function createBobDeposit(balance = 0): Promise<void> {
+  try {
+    await Balance.create({
+      walletAddress: '0xE288AE3acccc630781354da2AA64379A0d4C56dB'.toLowerCase(),
+      zhits: balance,
+      amount: '100.50',
+      currency: '0x9876543210fedcba',
+      blockchain: 'Ethereum',
+      transactionType: TransactionType.Deposit,
+      note: 'Initial deposit',
+    });
+  } catch (e) {
+    console.error(e);
+  }
+}
+
 export async function createRandomUser(
   balance = 0,
   overrides?: Partial<User>,
-): Promise<[User, string, MockedCybavo]> {
+): Promise<[User, string]> {
   try {
     const user = await User.create(
       {
@@ -287,8 +320,28 @@ export async function createRandomUser(
     );
     // Load associations
     await user.reload();
-    const cybavoMock = await mockCybavoWallet(user, balance);
-    return [user, await signJwtToken(user), cybavoMock];
+    await createRandomDeposit(balance, user.publicAddress);
+    await redisService.processBalance(`${balance}`, user.id);
+    return [user, await signJwtToken(user)];
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+export async function createRandomDeposit(
+  balance = 0,
+  publicAddress: string,
+): Promise<void> {
+  try {
+    await Balance.create({
+      walletAddress: publicAddress.toLowerCase(),
+      zhits: balance,
+      amount: '100.50',
+      currency: '0x9876543210fedcba',
+      blockchain: 'Ethereum',
+      transactionType: TransactionType.Deposit,
+      note: 'Initial deposit',
+    });
   } catch (e) {
     console.error(e);
   }
