@@ -1,6 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import { User } from './entities/users/model';
-import { Balance } from './entities/balances/model';
+import { Balance, CurrencyToZhit } from './entities/balances/model';
 import {
   Auction,
   AuctionBid,
@@ -15,6 +15,7 @@ import { getCodeSettings } from './entities/settings/service';
 
 const models = [
   User,
+  CurrencyToZhit,
   Balance,
   Auction,
   AuctionBid,

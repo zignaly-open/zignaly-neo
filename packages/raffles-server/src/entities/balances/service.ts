@@ -1,4 +1,4 @@
-import { Balance } from './model';
+import { Balance, CurrencyToZhit } from './model';
 import {
   BalanceType,
   DepositParams,
@@ -168,9 +168,15 @@ export const deposit = async ({
     throw new Error('Blockchain is required');
   }
 
+  const currencies = await CurrencyToZhit.findAll({
+    where: { currency },
+  });
+
   const tx = addTransaction({
     walletAddress,
-    zhits: `${Number(amount) * 1}`,
+    zhits: `${
+      Number(amount) * (currencies.length > 0 ? Number(currencies[0].zhits) : 1)
+    }`,
     amount,
     currency,
     blockchain,
