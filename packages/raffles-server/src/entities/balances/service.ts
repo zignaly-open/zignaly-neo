@@ -209,7 +209,7 @@ export const importBalance = async ({ walletAddress, zhits }: ImportParams) => {
 
 export const importBalanceBulk = async (balanceRowsImports: BalanceType[]) => {
   if (balanceRowsImports.length === 0) {
-    throw new Error('No rows to import from cybavo');
+    throw new Error('No rows to import from transaction');
   }
   addTransactions(balanceRowsImports);
 };

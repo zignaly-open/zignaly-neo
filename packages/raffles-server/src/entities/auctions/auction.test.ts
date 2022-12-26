@@ -244,7 +244,7 @@ describe('Auctions', () => {
     expect(expiredAuction.bids[0].user.username).toBe(alice.username);
   });
 
-  // it('should not bid if cybavo transfer fails', async () => {
+  // it('should not bid if transaction transfer fails', async () => {
   //   const [, aliceToken] = await createAlice(300);
   //   const auction = await createAuction();
   //   mock['handlers' as any].post[0] = mock

@@ -181,7 +181,7 @@ describe('Auction Claims', () => {
     );
   });
 
-  it('should not claim if cybavo transfer fails', async () => {
+  it('should not claim if transaction transfer fails', async () => {
     const [, aliceToken] = await createAlice(300);
     const auction = await createAuction();
     await makeBid(auction, aliceToken);

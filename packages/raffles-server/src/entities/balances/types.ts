@@ -48,7 +48,7 @@ export type PayoutParams = {
   note: string;
 };
 
-// this is for importing data from cybavo
+// this is for importing data from transaction
 export type ImportParams = {
   walletAddress: string;
   zhits: string;

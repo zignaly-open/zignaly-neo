@@ -58,7 +58,7 @@ const processBalance = async (
     const res = (await redis.fcall(
       'update_balance',
       2,
-      `USER_CYBAVO_BALANCE`,
+      `USER_TRANSACTION_BALANCE`,
       `USER_CURRENT_BALANCE`,
       userId,
       strToUnit(balance),
@@ -138,15 +138,15 @@ const getAuctionExpiration = async (auctionId: number) => {
 };
 
 const makeTransfer = async (auctionId: number, user: User) => {
-  const [cybavoBalance, currentBalance] = await Promise.all([
-    unitToBN(await redis.hget('USER_CYBAVO_BALANCE', user.id.toString())),
+  const [transactionBalance, currentBalance] = await Promise.all([
+    unitToBN(await redis.hget('USER_TRANSACTION_BALANCE', user.id.toString())),
     unitToBN(await redis.hget('USER_CURRENT_BALANCE', user.id.toString())),
   ]);
 
-  // Shouldn't be possible but we could withdraw cybavoBalance instead of returning
-  if (currentBalance.gte(cybavoBalance)) return;
+  // Shouldn't be possible but we could withdraw transactionBalance instead of returning
+  if (currentBalance.gte(transactionBalance)) return;
 
-  const amount = cybavoBalance.minus(currentBalance);
+  const amount = transactionBalance.minus(currentBalance);
 
   const tx = await payFee({
     walletAddress: user.publicAddress,
@@ -160,7 +160,7 @@ const makeTransfer = async (auctionId: number, user: User) => {
   // Set balance
   const balance = await getUserBalance(user.publicAddress);
   await Promise.all([
-    redis.hset('USER_CYBAVO_BALANCE', user.id.toString(), strToUnit(balance)),
+    redis.hset('USER_TRANSACTION_BALANCE', user.id.toString(), strToUnit(balance)),
     redis.hset('USER_CURRENT_BALANCE', user.id.toString(), strToUnit(balance)),
   ]);
   return tx.id;

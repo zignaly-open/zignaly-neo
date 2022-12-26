@@ -15,8 +15,8 @@ describe('Balance service', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
 
-  describe('Import Cybavo', () => {
-    it('should be able to import one balance users from cybavo', async () => {
+  describe('Import Transaction', () => {
+    it('should be able to import one balance users from transaction', async () => {
       await importBalance({
         walletAddress: '0x001',
         zhits: '100',
@@ -26,7 +26,7 @@ describe('Balance service', () => {
       expect(balance.zhits).toEqual('100');
     });
 
-    it('should be able to bulk import for multiple users from cybavo', async () => {
+    it('should be able to bulk import for multiple users from transaction', async () => {
       await importBalanceBulk([
         {
           walletAddress: '0x001',
