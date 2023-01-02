@@ -7,7 +7,10 @@ import CountriesTr from 'i18n-iso-countries/langs/tr.json';
 import CountriesPt from 'i18n-iso-countries/langs/pt.json';
 import CountriesEs from 'i18n-iso-countries/langs/es.json';
 import CountriesEn from 'i18n-iso-countries/langs/en.json';
-import enUS from 'date-fns/locale/en-US';
+import dateLocaleEnUs from 'date-fns/locale/en-US';
+import dateLocaleEs from 'date-fns/locale/es';
+import dateLocalePt from 'date-fns/locale/pt';
+import dateLocaleTr from 'date-fns/locale/tr';
 
 Countries.registerLocale(CountriesEn);
 Countries.registerLocale(CountriesPt);
@@ -23,7 +26,10 @@ export const supportedLanguages = ['en', 'es', 'pt', 'tr'];
 if (process.env.REACT_APP_ENABLE_TEST_LANGUAGE) supportedLanguages.push('ch');
 
 export const dateFnsLocaleMapping = {
-  en: enUS,
+  en: dateLocaleEnUs,
+  es: dateLocaleEs,
+  pt: dateLocalePt,
+  tr: dateLocaleTr,
 };
 
 i18n
