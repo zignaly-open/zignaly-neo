@@ -116,6 +116,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                     <ZigPriceLabel
                       coin={service.ssc}
                       variant={'bigNumber'}
+                      shorten
                       color={
                         chartType === GraphChartType.sbt_ssc
                           ? 'neutral200'
@@ -180,20 +181,22 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   key={v}
                   disabled={isDisabled}
                   tooltip={
-                    isDisabled ? t('service:not-enough-data') : undefined
+                    isDisabled
+                      ? t('service:not-enough-data')
+                      : t(`periods.${v}-full`)
                   }
                   onClick={() => setChartTimeframe(v)}
                 >
-                  {t('periods.' + v)}
+                  {t(`periods.${v}`)}
                 </ZigButton>
               );
             })}
           </SqueezedButtonGroup>
         </Box>
-        <SelectWrapperBox sx={{ mr: 4.5 }}>
+        <SelectWrapperBox>
           <ZigSelect
             outlined
-            width={180}
+            width={170}
             small
             value={chartType}
             onChange={(v) => setChartType(v)}
