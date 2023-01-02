@@ -21,6 +21,7 @@ const ServicePercentageInfo: React.FC<{
           <ZigPriceLabel
             sx={{ mb: 1 }}
             component='div'
+            shorten
             variant={'h1'}
             color={+value > 0 ? 'greenGraph' : 'redGraphOrError'}
             value={+value}
