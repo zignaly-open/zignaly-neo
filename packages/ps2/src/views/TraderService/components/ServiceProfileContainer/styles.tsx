@@ -213,7 +213,7 @@ export const GraphPercentageWrapperBox = styled(Box)`
 
 export const SqueezedButtonGroup = styled(ButtonGroup)`
   .MuiButton-root {
-    min-width: 60px !important;
+    min-width: 55px !important;
   }
 `;
 
@@ -225,6 +225,7 @@ export const AssetsInPoolWrapper = styled(Box)`
 
 export const SelectWrapperBox = styled(Box)`
   height: 30px;
+
   .zig-react-select__control {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
