@@ -1,14 +1,16 @@
 import React from "react";
-import { NumericFormat } from "react-number-format";
+import { NumericFormat, numericFormatter } from "react-number-format";
 import { ZigPriceLabelProps } from "./types";
-import { getPrecisionForCoin } from "./util";
+import { getPrecisionForCoin, shortenNumber } from "./util";
 import ZigTypography from "../ZigTypography";
 import { Variant } from "@mui/material/styles/createTypography";
+import { Tooltip } from "@mui/material";
 
 const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   value = 0,
   coin,
   precision,
+  shorten,
   exact,
   usd,
   coinProps,
@@ -29,7 +31,13 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
     ...(otherProps || ""),
   };
 
-  return (
+  const {
+    value: shortened,
+    precision: shortenedPrecision,
+    suffix: shortenSuffix,
+  } = shortenNumber(+value);
+
+  const content = (
     <ZigTypography
       {...withDefaultProps}
       sx={{ whiteSpace: "nowrap", ...(withDefaultProps?.sx || {}) }}
@@ -37,12 +45,20 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
       {+value >= 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
       {usd && "$"}
       <NumericFormat
-        value={Math.abs(+value)}
+        value={Math.abs(shorten ? shortened : +value)}
         renderText={(v) => v}
         displayType={"text"}
         thousandSeparator={true}
-        decimalScale={exact ? undefined : precision || getPrecisionForCoin(coin || "USDT", value)}
+        decimalScale={
+          exact
+            ? undefined
+            : shorten
+            ? shortenedPrecision
+            : precision || getPrecisionForCoin(coin || "USDT", value)
+        }
       />
+
+      {shorten ? shortenSuffix : ""}
 
       {coin && (
         <>
@@ -51,6 +67,20 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
         </>
       )}
     </ZigTypography>
+  );
+
+  return shorten ? (
+    <Tooltip
+      title={
+        numericFormatter(value.toString(), { thousandSeparator: true, displayType: "text" }) +
+        " " +
+        coin
+      }
+    >
+      {content}
+    </Tooltip>
+  ) : (
+    content
   );
 };
 

@@ -19,6 +19,10 @@ export default {
       control: "boolean",
       default: false,
     },
+    shorten: {
+      control: "boolean",
+      default: false,
+    },
     symbol: {
       control: "text",
       default: "$",
@@ -37,6 +41,13 @@ USDT.args = {
 export const ETH = Template.bind({});
 ETH.args = {
   value: Math.PI,
+  coin: "ETH",
+};
+
+export const Shorten = Template.bind({});
+Shorten.args = {
+  value: Math.PI * 1000_000,
+  shorten: true,
   coin: "ETH",
 };
 
