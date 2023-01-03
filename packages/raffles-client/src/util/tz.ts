@@ -5,7 +5,7 @@ export const useTz = () => {
   const { user } = useCurrentUser();
   return (ctaId?: string) => {
     track({
-      userId: user.publicAddress,
+      userId: user?.publicAddress,
       ctaId,
     });
   };
