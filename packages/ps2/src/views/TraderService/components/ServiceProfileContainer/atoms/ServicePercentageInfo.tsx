@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 const ServicePercentageInfo: React.FC<{
   title: string;
-  value: string;
+  value: string | number;
   percent: string;
   ssc: string;
   canShow?: boolean;
@@ -21,6 +21,7 @@ const ServicePercentageInfo: React.FC<{
           <ZigPriceLabel
             sx={{ mb: 1 }}
             component='div'
+            shorten
             variant={'h1'}
             color={+value > 0 ? 'greenGraph' : 'redGraphOrError'}
             value={+value}
