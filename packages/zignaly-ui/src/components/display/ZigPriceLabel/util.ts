@@ -11,7 +11,7 @@ export function getPrecisionForCoin(coin: string, value: string | number): numbe
 export function shortenNumber(value: number): {
   value: number;
   precision: number;
-  suffix: "K" | "M" | "m" | "";
+  suffix: "K" | "M" | "μ" | "";
 } {
   const log = Math.log10(Math.abs(value));
   if (log >= 6) {
@@ -26,10 +26,10 @@ export function shortenNumber(value: number): {
       suffix: "K",
       precision: log >= 4 ? 1 : 2,
     };
-  } else if (log < -2) {
+  } else if (log > -16 && log < -2) {
     return {
       value: value * Math.pow(10, 3),
-      suffix: "m",
+      suffix: "μ",
       precision: 2,
     };
   } else {
