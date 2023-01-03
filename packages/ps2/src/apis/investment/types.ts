@@ -1,4 +1,4 @@
-import type { AxisFormat } from '@zignaly-open/ui/lib/components/display/ZigChart/types';
+import { AxisFormat } from '@zignaly-open/ui/lib/components/display/ZigChart/types';
 
 export interface InvestmentState {
   selectedInvestment?: InvestmentServiceDetails;

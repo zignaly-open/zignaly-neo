@@ -14,11 +14,11 @@ import {
   StyledPersonIcon,
   StyledVerifiedIcon,
 } from '../styles';
-import { formatDistance } from 'date-fns';
 import { Button } from '@zignaly-open/ui';
 import copy from 'copy-to-clipboard';
 import { generatePath } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../../routes';
+import { formatLocalizedDistance } from '../../../../Dashboard/components/MyDashboard/util';
 
 const ServiceInformation: React.FC<{
   service?: Service;
@@ -59,7 +59,10 @@ const ServiceInformation: React.FC<{
             t={t}
             i18nKey={'service-age'}
             values={{
-              date: formatDistance(new Date(), new Date(service.createdAt)),
+              date: formatLocalizedDistance(
+                new Date(),
+                new Date(service.createdAt),
+              ),
             }}
             components={[<GreySubHeaderHighlight key={'--service--by'} />]}
           />

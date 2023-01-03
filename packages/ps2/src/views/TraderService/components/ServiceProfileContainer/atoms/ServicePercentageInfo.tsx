@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next';
 
 const ServicePercentageInfo: React.FC<{
   title: string;
-  value: string;
+  value: string | number;
   percent: string;
   ssc: string;
   canShow?: boolean;
