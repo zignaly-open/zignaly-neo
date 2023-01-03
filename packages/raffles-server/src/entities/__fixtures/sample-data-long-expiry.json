@@ -5,9 +5,9 @@
       "id": 1,
       "imageUrl": "/images/4.jpg",
       "expiresAt": "2022-10-05T13:30:00.511Z",
+      "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "title": "Best Auction EVER",
       "description": "Bid now or die regretting",
-      "monetaryValue": "100 BTC!!11",
       "currentBid": "1",
       "website": "https://zignaly.com/",
       "discord": "https://zignaly.com/",
@@ -27,10 +27,10 @@
     "model": "Auction",
     "data": {
       "id": 2,
+      "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "imageUrl": "/images/11.jpg",
       "title": "Elon Musk's giveaway",
       "description": "Have you ever dreamt of reading the most retarded description ever? Well, continue dreaming",
-      "monetaryValue": "1 Model S",
       "currentBid": "1"
     }
   },
@@ -55,9 +55,9 @@
     "data": {
       "id": 3,
       "imageUrl": "/images/9.jpg",
+      "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "title": "Charity Giveaway",
       "description": "All proceeds from this auction will go towards the needs of Alex who desperately needs a brand new X5 40d",
-      "monetaryValue": "$1",
       "currentBid": "10"
     }
   },
@@ -73,10 +73,10 @@
     "model": "Auction",
     "data": {
       "id": 4,
+      "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "imageUrl": "/images/10.jpg",
       "title": "Charity Giveaway 2",
       "description": "All proceeds from this auction will go towards the needs of Alex who would like to have an M4 as well",
-      "monetaryValue": "$1",
       "currentBid": "100"
     }
   },
@@ -92,10 +92,10 @@
     "model": "Auction",
     "data": {
       "id": 5,
+      "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "imageUrl": "/images/5.jpg",
       "title": "Win&Go",
       "description": "Bid, win, get outbid and go",
-      "monetaryValue": "$4000",
       "currentBid": "1"
     }
   },
@@ -111,10 +111,10 @@
     "model": "Auction",
     "data": {
       "id": 6,
+      "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "imageUrl": "/images/6.jpg",
       "title": "Honest Auction",
       "description": "Lotteries are for economically illiterate, stop playing one",
-      "monetaryValue": "$30k",
       "currentBid": "1"
     }
   },
@@ -132,8 +132,8 @@
       "id": 7,
       "imageUrl": "/images/7.jpg",
       "title": "Just go",
+      "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "description": "Pay me and go",
-      "monetaryValue": "$100",
       "currentBid": "1"
     }
   },
@@ -158,9 +158,9 @@
     "data": {
       "id": 8,
       "imageUrl": "/images/8.jpg",
+      "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "title": "Diversification",
       "description": "Win a basket more diverse than a Netflix cast",
-      "monetaryValue": "$1000",
       "currentBid": "3"
     }
   },
@@ -202,8 +202,8 @@
       "id": 9,
       "imageUrl": "/images/2.jpg",
       "title": "Diversification 2",
+      "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "description": "Win a basket more diverse than a Netflix cast",
-      "monetaryValue": "$1000",
       "basketItems": [
         {
           "ticker": "SHT",
@@ -262,9 +262,9 @@
     "data": {
       "id": 10,
       "imageUrl": "/images/3.jpg",
+      "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "title": "Diversification 3",
       "description": "Win a basket more diverse than a Netflix cast",
-      "monetaryValue": "$1000",
       "currentBid": "3"
     }
   },
@@ -306,8 +306,8 @@
       "id": 11,
       "imageUrl": "/images/1.jpg",
       "title": "Diversification 4",
+      "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "description": "Win a basket more diverse than a Netflix cast",
-      "monetaryValue": "$1000",
       "currentBid": "3"
     }
   },

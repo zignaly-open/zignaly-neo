@@ -45,7 +45,6 @@ const auctionObject = {
   createdAt: new Date(),
   expiresAt: new Date(Date.now() + 3600_000),
   maxClaimDate: new Date(Date.now() + 10_000),
-  monetaryValue: '$84.52',
   imageUrl: '/images/11.jpg',
   basketItems: [
     {
