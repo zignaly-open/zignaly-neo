@@ -168,6 +168,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
           }
           onPaginationChange={setPagination}
           loading={transactionsEndpoint.isFetching}
+          emptyMessage={t('noData')}
         />
       )}
     />
