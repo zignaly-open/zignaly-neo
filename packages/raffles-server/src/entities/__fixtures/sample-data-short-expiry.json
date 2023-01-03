@@ -3,7 +3,8 @@
     "model": "Auction",
     "data": {
       "id": 1,
-      "expiresAt": "2022-09-10T12:30:00.511Z",
+      "expiresAt": "2026-09-10T12:30:00.511Z",
+      "chain": "DOGE",
       "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "imageUrl": "/images/4.jpg",
       "title": "Best Auction EVER",
@@ -27,8 +28,9 @@
     "model": "Auction",
     "data": {
       "id": 2,
-      "expiresAt": "2022-09-10T12:30:00.511Z",
+      "expiresAt": "2026-09-10T12:30:00.511Z",
       "imageUrl": "/images/11.jpg",
+      "chain": "DOGE",
       "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "title": "Elon Musk's giveaway",
       "description": "Have you ever dreamt of reading the most retarded description ever? Well, continue dreaming",
@@ -55,7 +57,8 @@
     "model": "Auction",
     "data": {
       "id": 3,
-      "expiresAt": "2022-09-10T18:43:00.511Z",
+      "expiresAt": "2026-09-10T18:43:00.511Z",
+      "chain": "DOGE",
       "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "imageUrl": "/images/9.jpg",
       "title": "Charity Giveaway",
@@ -75,8 +78,9 @@
     "model": "Auction",
     "data": {
       "id": 4,
-      "expiresAt": "2022-09-03T19:00:00.511Z",
+      "expiresAt": "2026-09-03T19:00:00.511Z",
       "imageUrl": "/images/10.jpg",
+      "chain": "DOGE",
       "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "title": "Charity Giveaway 2",
       "description": "All proceeds from this auction will go towards the needs of Alex who would like to have an M4 as well",
@@ -95,9 +99,10 @@
     "model": "Auction",
     "data": {
       "id": 5,
-      "expiresAt": "2022-08-05T18:20:00.511Z",
+      "expiresAt": "2026-08-05T18:20:00.511Z",
       "imageUrl": "/images/5.jpg",
       "title": "Win&Go",
+      "chain": "DOGE",
       "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "description": "Bid, win, get outbid and go",
       "currentBid": "0.01"
@@ -115,8 +120,9 @@
     "model": "Auction",
     "data": {
       "id": 6,
-      "expiresAt": "2022-08-05T19:15:00.511Z",
+      "expiresAt": "2026-08-05T19:15:00.511Z",
       "imageUrl": "/images/6.jpg",
+      "chain": "DOGE",
       "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "title": "Honest Auction",
       "description": "Lotteries are for economically illiterate, stop playing one",
@@ -135,8 +141,9 @@
     "model": "Auction",
     "data": {
       "id": 7,
-      "expiresAt": "2022-08-06T11:10:00.511Z",
+      "expiresAt": "2026-08-06T11:10:00.511Z",
       "imageUrl": "/images/7.jpg",
+      "chain": "DOGE",
       "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "title": "Just go",
       "description": "Pay me and go",
@@ -163,8 +170,9 @@
     "model": "Auction",
     "data": {
       "id": 8,
-      "expiresAt": "2022-08-06T09:20:00.511Z",
+      "expiresAt": "2026-08-06T09:20:00.511Z",
       "imageUrl": "/images/8.jpg",
+      "chain": "DOGE",
       "maxExpiryDate": "2029-10-05T13:30:00.511Z",
       "title": "Diversification",
       "description": "Win a basket more diverse than a Netflix cast",
