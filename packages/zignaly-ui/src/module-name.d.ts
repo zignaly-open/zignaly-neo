@@ -4,8 +4,6 @@ import React from "react";
 declare module "@mui/material/styles" {
   interface CustomPalette {
     white: string;
-    danger: string;
-    success: string;
     neutral800: string;
     neutral750: string;
     neutral700: string;
@@ -58,6 +56,8 @@ declare module "@mui/material/styles/createTheme" {
 declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides {
     white: true;
+    danger: true;
+    success: true;
     neutral800: true;
     neutral750: true;
     neutral700: true;
@@ -90,6 +90,8 @@ declare module "@mui/material/Button" {
 declare module "@mui/material/SvgIcon" {
   export interface SvgIconPropsColorOverrides {
     white: true;
+    danger: true;
+    success: true;
     neutral800: true;
     neutral750: true;
     neutral700: true;
