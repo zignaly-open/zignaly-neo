@@ -43,5 +43,21 @@
   },
   "hardDiconnectWarning": "Your hard disconnects have reached {perc}%. If hard-disconnects reaches {maxPerc}% of the service funds, Zignaly will take control of your service.",
   "previousValue": "Previous Value:",
-  "loading-arialLabel": "Loading management"
+  "loading-arialLabel": "Loading management",
+  "api-keys": {
+    "title": "Trade with API",
+    "description": "For complete trading control, connect to Zignaly via the API and send trades directly from your preferred exchange or trading application. You can manage positions from your own trading platform as well as here on the <0>positions page</0>.",
+    "create-key": "Create API Key",
+    "manage-keys": "Manage API Keys",
+    "api-key": "API Key",
+    "permission-label": "Permissions",
+    "permissions": {
+      "read": "Enable reading",
+      "canTrade": "Spot trading",
+      "marginTrade": "Margin trading",
+      "futuresTrade": "Futures trading"
+    },
+    "ip-restrictions": "IP restrictions",
+    "ip-restrictions-none": "Unrestricted"
+  }
 }
