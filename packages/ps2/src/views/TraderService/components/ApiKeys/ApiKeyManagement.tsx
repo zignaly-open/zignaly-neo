@@ -12,7 +12,7 @@ import PencilIcon from '@mui/icons-material/Create';
 import { Trans, useTranslation } from 'react-i18next';
 import { ROUTE_TRADING_SERVICE_POSITIONS } from '../../../../routes';
 import AnchorLink from '../../../../components/AnchorLink';
-import { ApiKey, ApiKeysContainer, TitleBox } from './atoms';
+import { ApiKey, ApiKeysContainer, TextWrapperRow, TitleBox } from './atoms';
 import { generatePath, useParams } from 'react-router-dom';
 import { useServiceApiKeysQuery } from '../../../../apis/serviceApiKey/api';
 import CenteredLoader from '../../../../components/CenteredLoader';
@@ -72,9 +72,11 @@ const ApiKeyManagement: React.FC = () => {
         <ApiKeysContainer>
           {keys.map((k) => (
             <ApiKey key={k.id}>
-              <ZigTypography variant='h3'>{k.alias}</ZigTypography>
-              <Box sx={{ flexDirection: 'row', display: 'flex' }}>
-                <Box>
+              <ZigTypography variant='h3' sx={{ mb: 1.5 }}>
+                {k.alias}
+              </ZigTypography>
+              <Box sx={{ flexDirection: 'row', display: 'flex', gap: 3 }}>
+                <Box sx={{ flex: 5, mr: 2 }}>
                   <InputText
                     placeholder={t('api-keys.api-key')}
                     label={t('api-keys.api-key')}
@@ -93,11 +95,11 @@ const ApiKeyManagement: React.FC = () => {
                     }}
                   />
                 </Box>
-                <Box>
+                <Box sx={{ flex: 2 }}>
                   <ZigTypography color={'neutral200'}>
                     {t('api-keys.permission-label')}
                   </ZigTypography>
-                  <Box>
+                  <TextWrapperRow>
                     <ZigTypography color={'neutral100'}>
                       {addReadIfMissing(k.permissions)
                         .map((p) =>
@@ -107,17 +109,17 @@ const ApiKeyManagement: React.FC = () => {
                         )
                         .join(', ')}
                     </ZigTypography>
-                  </Box>
+                  </TextWrapperRow>
                 </Box>
-                <Box>
+                <Box sx={{ flex: 2 }}>
                   <ZigTypography color={'neutral200'}>
                     {t('api-keys.ip-restrictions')}
                   </ZigTypography>
-                  <Box>
+                  <TextWrapperRow>
                     <ZigTypography color={'neutral100'}>
                       {k.ips.join(', ') || t('api-keys.ip-restrictions-none')}
                     </ZigTypography>
-                  </Box>
+                  </TextWrapperRow>
                 </Box>
                 <Box sx={{ alignSelf: 'center' }}>
                   <ZigButton
