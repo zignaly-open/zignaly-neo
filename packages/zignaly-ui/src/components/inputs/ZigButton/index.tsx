@@ -8,12 +8,15 @@ const ZigButton = styled(
     active,
     tooltip,
     ctaId,
+    color,
     ...props
   }: LoadingButtonProps & { ctaId?: string; tooltip?: string; active?: boolean }) => {
     const button = (
       <LoadingButton
         data-tack-cta={ctaId}
         {...props}
+        // hack to preserve old behavior but allow for normal mui theming
+        color={props.variant === "outlined" && !color ? "secondary" : color}
         className={active ? "MuiButton-active" : ""}
       />
     );
