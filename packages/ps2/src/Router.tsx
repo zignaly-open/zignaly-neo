@@ -6,6 +6,7 @@ import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
 import ForgotPassword from './views/Auth/ForgotPassword';
 import MyBalances from './views/Balance';
+import Wallet from './views/Wallet';
 
 import {
   ROUTE_DASHBOARD,
@@ -27,6 +28,7 @@ import {
   ROUTE_HELP_TRADER,
   ROUTE_HELP_INVESTOR,
   ROUTE_404,
+  ROUTE_WALLET,
 } from './routes';
 
 import Management from './views/TraderService/Management';
@@ -51,6 +53,7 @@ const Router: React.FC = () => (
     <Route element={<AuthenticatedWall />}>
       <Route path={ROUTE_DASHBOARD} element={<Dashboard />} />
       <Route path={ROUTE_MY_BALANCES} element={<MyBalances />} />
+      <Route path={ROUTE_WALLET} element={<Wallet />} />
     </Route>
 
     <Route path={ROUTE_TRADING_SERVICE}>

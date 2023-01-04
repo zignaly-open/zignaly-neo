@@ -42,6 +42,7 @@
     }
   },
   "navigation-menu": {
+    "wallet": "Wallet",
     "profit-sharing": "Profit Sharing"
   },
   "amount": "Amount",

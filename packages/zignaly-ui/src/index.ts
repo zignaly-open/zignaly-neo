@@ -67,6 +67,7 @@ export { ReactComponent as LogoTwitterIcon } from "assets/icons/twitter-logo-ico
 export { ReactComponent as LogoMediumIcon } from "assets/icons/medium-logo-icon.svg";
 export { ReactComponent as LogoTelegramIcon } from "assets/icons/telegram-logo-icon.svg";
 export { ReactComponent as WalletIcon } from "assets/icons/wallet-icon.svg";
+export { ReactComponent as WalletGradientIcon } from "assets/icons/wallet-gradient-icon.svg";
 export { ReactComponent as OptionHorizontalDotsIcon } from "assets/icons/horizontal-three-dots-icon.svg";
 export { ReactComponent as EditPenIcon } from "assets/icons/edit-pen-icon.svg";
 export { ReactComponent as SwapIcon } from "assets/icons/swap-icon.svg";

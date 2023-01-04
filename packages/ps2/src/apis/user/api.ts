@@ -109,6 +109,23 @@ export const api = createApi({
         method: 'POST',
       }),
     }),
+
+    updateUser: builder.mutation<
+      void,
+      {
+        userName?: string;
+        imageUrl?: string;
+        payFeeWithZig?: boolean;
+        tradingFeeDiscount?: boolean;
+        refRewardType?: string;
+      }
+    >({
+      query: (params) => ({
+        url: `/user`,
+        method: 'POST',
+        body: params,
+      }),
+    }),
   }),
 });
 
@@ -126,4 +143,5 @@ export const {
   useResendCodeMutation,
   useResendCodeNewUserMutation,
   useResendKnownDeviceCodeMutation,
+  useUpdateUserMutation,
 } = api;
