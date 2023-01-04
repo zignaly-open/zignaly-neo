@@ -4,6 +4,8 @@ import React from "react";
 declare module "@mui/material/styles" {
   interface CustomPalette {
     white: string;
+    danger: string;
+    success: string;
     neutral800: string;
     neutral750: string;
     neutral700: string;
