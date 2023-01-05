@@ -72,6 +72,8 @@
     "create-new-key": "Create New API Key",
     "create-new-key-description": "Create a new API key to connect and trade from your favorite trading platform.",
     "edit-key": "Edit API Key Settings",
+    "delete-title": "Delete {{title}} API Key",
+    "delete-description": "This action is irreversible. Please confirm.",
     "ip-restrictions": "IP restrictions",
     "ip-restrictions-none": "Unrestricted",
     "ip-restrictions-invalid": "Invalid ip format",

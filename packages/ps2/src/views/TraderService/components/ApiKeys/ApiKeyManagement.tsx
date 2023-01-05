@@ -14,12 +14,15 @@ import { ROUTE_TRADING_SERVICE_POSITIONS } from '../../../../routes';
 import AnchorLink from '../../../../components/AnchorLink';
 import { ApiKey, ApiKeysContainer, TextWrapperRow, TitleBox } from './atoms';
 import { generatePath, useParams } from 'react-router-dom';
-import { useServiceApiKeysQuery } from '../../../../apis/serviceApiKey/api';
+import {
+  useServiceApiKeyDeleteMutation,
+  useServiceApiKeysQuery,
+} from '../../../../apis/serviceApiKey/api';
 import CenteredLoader from '../../../../components/CenteredLoader';
 import copy from 'copy-to-clipboard';
 import { useToast } from '../../../../util/hooks/useToast';
 import { addReadIfMissing } from './util';
-import { useZModal } from '../../../../components/ZModal/use';
+import { useZConfirm, useZModal } from '../../../../components/ZModal/use';
 import CreateApiKey from './modals/CreateApiKey';
 import EditApiKey from './modals/EditApiKey';
 import { ServiceApiKey } from 'apis/serviceApiKey/types';
@@ -28,8 +31,15 @@ const ApiKeyManagement: React.FC = () => {
   const { t, i18n } = useTranslation(['management', 'actions']);
   const { serviceId } = useParams();
   const { showModal } = useZModal();
+  const askConfirm = useZConfirm();
   const toast = useToast();
-  const { isLoading, data: keys } = useServiceApiKeysQuery({ serviceId });
+  const {
+    isLoading,
+    isFetching,
+    data: keys,
+  } = useServiceApiKeysQuery({ serviceId });
+  const [deleteKey, { isLoading: isDeleting }] =
+    useServiceApiKeyDeleteMutation();
 
   return (
     <>
@@ -81,7 +91,7 @@ const ApiKeyManagement: React.FC = () => {
         {t('api-keys.manage-keys')}
       </ZigTypography>
 
-      {isLoading ? (
+      {isLoading || isDeleting || isFetching ? (
         <CenteredLoader />
       ) : (
         <ApiKeysContainer>
@@ -148,6 +158,21 @@ const ApiKeyManagement: React.FC = () => {
                   </ZigButton>
                   <ZigButton
                     sx={{ mr: 2 }}
+                    onClick={() =>
+                      askConfirm({
+                        title: t('api-keys.delete-title', {
+                          title: apiKey.alias,
+                        }),
+                        yesLabel: t('action:delete'),
+                        yesButtonProps: {
+                          color: 'danger',
+                          variant: 'outlined',
+                        },
+                        description: t('api-keys.delete-description'),
+                        yesAction: () =>
+                          deleteKey({ serviceId, keyId: apiKey.id }),
+                      })
+                    }
                     color={'danger'}
                     startIcon={<DeleteIcon />}
                     variant={'outlined'}
