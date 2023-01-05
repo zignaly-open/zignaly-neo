@@ -68,6 +68,7 @@ export { ReactComponent as LogoMediumIcon } from "assets/icons/medium-logo-icon.
 export { ReactComponent as LogoTelegramIcon } from "assets/icons/telegram-logo-icon.svg";
 export { ReactComponent as WalletIcon } from "assets/icons/wallet-icon.svg";
 export { ReactComponent as WalletGradientIcon } from "assets/icons/wallet-gradient-icon.svg";
+export { ReactComponent as ListGradientIcon } from "assets/icons/list-gradient-icon.svg";
 export { ReactComponent as OptionHorizontalDotsIcon } from "assets/icons/horizontal-three-dots-icon.svg";
 export { ReactComponent as EditPenIcon } from "assets/icons/edit-pen-icon.svg";
 export { ReactComponent as SwapIcon } from "assets/icons/swap-icon.svg";
@@ -98,6 +99,7 @@ import { sortByValue } from "utils/numbers";
 import { HeaderLinksContainer } from "components/navigation/Header/styles";
 import { styledIf } from "utils/styled";
 import CoinIcon from "components/display/CoinIcon";
+import ZigCoinIcon from "components/display/ZigCoinIcon";
 import SliderInput from "components/inputs/SliderInput";
 import InputAmountAdvanced from "components/inputs/InputAmountAdvanced";
 import { NiceScrollbar } from "utils/css";
@@ -121,6 +123,7 @@ export {
   Typography,
   SliderInput,
   CoinIcon,
+  ZigCoinIcon,
   ErrorMessage,
   ZigWalletIndicator,
   ProgressSlider,

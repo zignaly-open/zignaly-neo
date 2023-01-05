@@ -1,7 +1,7 @@
 import React from 'react';
 import BSCIcon from 'images/chain/bsc.svg';
 import ETHIcon from 'images/chain/eth.svg';
-import { SmallCoinIcon } from '../styles';
+import { ZigCoinIcon } from '@zignaly-open/ui';
 
 export const getChainIcon = (chain: string) => {
   switch (chain.toUpperCase()) {
@@ -20,7 +20,7 @@ const ChainIcon = ({ network }: { network: string }) => {
   return icon ? (
     <img width={24} height={24} src={icon} />
   ) : (
-    <SmallCoinIcon size={'small'} coin={network} name='' />
+    <ZigCoinIcon size='small' coin={network} />
   );
 };
 

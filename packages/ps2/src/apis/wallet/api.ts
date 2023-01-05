@@ -5,6 +5,7 @@ import {
   DepositInfo,
   TotalSavings,
   Transactions,
+  TransactionType,
   WalletBalances,
   WalletCoins,
 } from './types';
@@ -14,7 +15,6 @@ import { isString, pickBy } from 'lodash';
 export const api = createApi({
   baseQuery,
   reducerPath: 'walletApi',
-  // tagTypes: ['Balance'],
   endpoints: (builder) => ({
     coins: builder.query<WalletCoins, void>({
       query: () => ({
@@ -72,18 +72,14 @@ export const api = createApi({
     transactionsHistory: builder.query<
       Transactions,
       {
-        exchangeInternalId: string;
-        from?: string;
-        limit?: number;
-        type?: string;
+        type: TransactionType;
       }
     >({
-      query: ({ exchangeInternalId, ...params }) => {
-        const searchParams = new URLSearchParams(
-          pickBy({ ...params, limit: params.limit?.toString() }, isString),
-        );
+      query: (params) => {
         return {
-          url: `user/exchanges/${exchangeInternalId}/transactions_history?${searchParams.toString()}`,
+          url: `${
+            process.env.REACT_APP_WALLET_API
+          }/get-operations?${new URLSearchParams(params).toString()}`,
         };
       },
     }),
@@ -102,4 +98,9 @@ export const api = createApi({
   }),
 });
 
-export const { useBalanceQuery, useCoinsQuery, useSavingsQuery } = api;
+export const {
+  useBalanceQuery,
+  useCoinsQuery,
+  useSavingsQuery,
+  useTransactionsHistoryQuery,
+} = api;

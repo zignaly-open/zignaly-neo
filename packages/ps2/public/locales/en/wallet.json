@@ -11,5 +11,57 @@
   "withdraw": "Withdraw",
   "savingMoney": "You are SAVING MONEY with ZIG!",
   "saveMoney": "SAVE MONEY with ZIG!",
-  "min": "min."
+  "min": "min.",
+  "transactions": {
+    "header": {
+      "date": "Date",
+      "type": "Type",
+      "amount": "Amount",
+      "coin": "Coin",
+      "network": "Network",
+      "status": "Status"
+    },
+    "walletTransactions": "Wallet Transactions",
+    "type": {
+      "deposit": "Deposit",
+      "internal": "Internal",
+      "reward": "Reward",
+      "successfee": "Success Fee",
+      "coinsalvage": "Coin Salvage",
+      "withdraw": "Withdraw",
+      "compensation": "Compensation",
+      "payment": "Payment",
+      "cashbackvolume": "Cashback Volume",
+      "withdrawfee": "Withdraw Fee",
+      "zigpadpledge": "ZIGPad Pledge",
+      "zigpadreturn": "ZIGPad Return",
+      "zigpadtokensreward": "IDO Tokens Distribution",
+      "stakingvault": "Staking Vault",
+      "stakingvaultreturn": "Staking Vault Return",
+      "unstakingvault": "Unstake",
+      "buyzig": "Buy ZIG",
+      "zigbidsredeemcode": "ZIGBids Redeem Code",
+      "zigbidsreferralcode": "ZIGBids Referral Code"
+    },
+    "filter": {
+      "max": "(last 3 months max)",
+      "all": "All Transactions"
+    },
+    "status": {
+      "pending": "Pending",
+      "completed": "Completed",
+      "error": "Error"
+    },
+    "details": {
+      "from": "From:",
+      "to": "To:",
+      "txHash": "TX Hash:",
+      "note": "Note:"
+    },
+    "export": {
+      "title": "Transaction History Report",
+      "description": "We will process your request and send you an email in the following 10 minutes with the information to download your transactions history report.",
+      "success": "Your request has been processed successfully. Please check your email for the download link."
+    }
+  }
 }

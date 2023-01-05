@@ -9,7 +9,7 @@ export type PaginationMetadata = {
 
 export interface InfiniteQueryResponse<T> {
   items: T[];
-  metadata: PaginationMetadata;
+  metadata?: PaginationMetadata;
 }
 
 const useInfinitePaginatedQuery = (
@@ -27,11 +27,14 @@ const useInfinitePaginatedQuery = (
     ...localParams.current,
     limit,
     from: localPage.id,
+    offset: (localPage.page - 1) * limit,
   });
-  const { items: fetchData, metadata } =
+  // const { items: fetchData, metadata } =
+  const fetchData =
     (queryResponse?.data as InfiniteQueryResponse<
       typeof useGetDataListQuery
-    >) || {};
+    >) || [];
+  console.log('fetchData', fetchData);
 
   useEffect(() => {
     if (localPage.page === 1) setCombinedData(fetchData);

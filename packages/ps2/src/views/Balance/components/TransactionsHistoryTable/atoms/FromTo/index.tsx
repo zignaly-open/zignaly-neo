@@ -5,12 +5,12 @@ import {
   TransactionType,
   TRANSACTION_TYPE,
 } from 'apis/coin/types';
-import ChainIcon from '../ChainIcon';
 import ServiceLink from '../ProviderLink';
 import ZignalyAccount from '../TransferZigLabel';
 import { Side, SideType } from './types';
 import { useTranslation } from 'react-i18next';
 import { TypographyPanelName } from '../TransactionDetails/styles';
+import ChainIcon from 'components/ChainIcon';
 
 const getTransactionSideType = (
   txType: TransactionType,
