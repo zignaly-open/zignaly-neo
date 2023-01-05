@@ -3,9 +3,13 @@ import { styled } from "@mui/system";
 import React from "react";
 import { Tooltip } from "@mui/material";
 
-type ButtonProps = LoadingButtonProps & { ctaId?: string; tooltip?: string; active?: boolean };
+export type ZigButtonProps = LoadingButtonProps & {
+  ctaId?: string;
+  tooltip?: string;
+  active?: boolean;
+};
 
-type ButtonPropsSxFix = Omit<ButtonProps, "sx"> & { __sx: ButtonProps["sx"] };
+type ZigButtonPropsSxFix = Omit<ZigButtonProps, "sx"> & { __sx: ZigButtonProps["sx"] };
 
 const ZigButton = styled(
   ({
@@ -15,7 +19,7 @@ const ZigButton = styled(
     color,
     __sx, // somehow in this scenario the sx prop is not passed properly
     ...props
-  }: ButtonPropsSxFix) => {
+  }: ZigButtonPropsSxFix) => {
     const button = (
       <LoadingButton
         data-tack-cta={ctaId}
@@ -37,4 +41,4 @@ const ZigButton = styled(
   },
 )``;
 
-export default ({ sx, ...props }: ButtonProps) => <ZigButton {...props} __sx={sx} />;
+export default ({ sx, ...props }: ZigButtonProps) => <ZigButton {...props} __sx={sx} />;
