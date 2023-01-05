@@ -10,6 +10,7 @@ import { CreateKeyValidation } from '../validations';
 import { useServiceApiKeyCreateMutation } from '../../../../../apis/serviceApiKey/api';
 import { CreateApiKeyFormType } from '../types';
 import { ServiceApiKey } from '../../../../../apis/serviceApiKey/types';
+import { useCheck2FA } from '../../../../../apis/user/use';
 
 function CreateApiKeysModal({
   close,
@@ -22,6 +23,7 @@ function CreateApiKeysModal({
   close: () => void;
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation(['management']);
+
   const {
     handleSubmit,
     control,
@@ -35,14 +37,21 @@ function CreateApiKeysModal({
     },
   });
 
-  const [create, { isLoading: isCreating }] = useServiceApiKeyCreateMutation();
+  const [create, status] = useServiceApiKeyCreateMutation();
+  const { isLoading: isCreating } = status;
 
-  const onSubmit = async ({ alias }: CreateApiKeyFormType) => {
-    const result = await create({ alias, serviceId });
-    if (!('error' in result)) {
-      afterSave(result.data);
-      close();
-    }
+  const create2FA = useCheck2FA({
+    status,
+  });
+
+  const onSubmit = ({ alias }: CreateApiKeyFormType) => {
+    create2FA(async (code?: string) => {
+      const result = await create({ alias, serviceId, code });
+      if (!('error' in result)) {
+        afterSave(result.data);
+        close();
+      }
+    });
   };
 
   return (

@@ -15,12 +15,13 @@ export const api = createApi({
     }),
     serviceApiKeyDelete: builder.mutation<
       never,
-      { serviceId: string; keyId: string }
+      { serviceId: string; keyId: string; code?: string }
     >({
       invalidatesTags: ['ServiceApiKey'],
-      query: ({ serviceId, keyId }) => ({
+      query: ({ serviceId, keyId, code }) => ({
         method: 'DELETE',
         url: `services/${serviceId}/api_keys/${keyId}`,
+        body: { code },
       }),
     }),
     serviceApiKeyEdit: builder.mutation<
@@ -36,13 +37,13 @@ export const api = createApi({
     }),
     serviceApiKeyCreate: builder.mutation<
       ServiceApiKey,
-      { serviceId: string; alias: string }
+      { serviceId: string; alias: string; code?: string }
     >({
       invalidatesTags: ['ServiceApiKey'],
-      query: ({ serviceId, alias }) => ({
+      query: ({ serviceId, alias, code }) => ({
         method: 'POST',
         url: `services/${serviceId}/api_keys`,
-        body: { alias },
+        body: { alias, code },
       }),
     }),
   }),

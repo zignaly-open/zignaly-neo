@@ -32,6 +32,7 @@ import { MultilineLabel } from '../atoms';
 import { useServiceApiKeyEditMutation } from '../../../../../apis/serviceApiKey/api';
 import { BooleanString, EditApiKeyFormType } from '../types';
 import { formTypeToBackendPayloadType } from '../util';
+import { useCheck2FA } from '../../../../../apis/user/use';
 
 function EditApiKeysModal({
   close,
@@ -45,7 +46,11 @@ function EditApiKeysModal({
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation(['management']);
   const toast = useToast();
-  const [updateApiKey, { isLoading }] = useServiceApiKeyEditMutation();
+  const [updateApiKey, status] = useServiceApiKeyEditMutation();
+  const { isLoading } = status;
+  const edit2FA = useCheck2FA({
+    status,
+  });
 
   const defaultValues = useMemo(
     () => ({
@@ -82,15 +87,17 @@ function EditApiKeysModal({
   const showIpRestrictions = watch('enableIpRestriction') === 'true';
 
   const onSubmit = async (data: EditApiKeyFormType) => {
-    const result = await updateApiKey({
-      serviceId,
-      keyId: apiKey.id,
-      data: formTypeToBackendPayloadType(data),
+    edit2FA(async (code) => {
+      const result = await updateApiKey({
+        serviceId,
+        keyId: apiKey.id,
+        data: { ...formTypeToBackendPayloadType(data), code },
+      });
+      if (!('error' in result)) {
+        toast.success(t('common:changes-saved'));
+        close();
+      }
     });
-    if (!('error' in result)) {
-      toast.success(t('common:changes-saved'));
-      close();
-    }
   };
 
   const isCreate = !!apiKey.secret;

@@ -18,4 +18,5 @@ export type ServiceApiKeyPayload = {
   alias: string;
   ips: string;
   permissions: string;
+  code?: string;
 };

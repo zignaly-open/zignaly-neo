@@ -27,6 +27,7 @@ import CreateApiKey from './modals/CreateApiKey';
 import EditApiKey from './modals/EditApiKey';
 import { ServiceApiKey } from 'apis/serviceApiKey/types';
 import Stub from '../../../../components/Stub';
+import { useCheck2FA } from '../../../../apis/user/use';
 
 const ApiKeyManagement: React.FC = () => {
   const { t, i18n } = useTranslation(['management', 'actions']);
@@ -39,8 +40,11 @@ const ApiKeyManagement: React.FC = () => {
     isFetching,
     data: keys,
   } = useServiceApiKeysQuery({ serviceId });
-  const [deleteKey, { isLoading: isDeleting }] =
-    useServiceApiKeyDeleteMutation();
+  const [deleteKey, deleteStatus] = useServiceApiKeyDeleteMutation();
+  const { isLoading: isDeleting } = deleteStatus;
+  const delete2FA = useCheck2FA({
+    status: deleteStatus,
+  });
 
   return (
     <>
@@ -179,7 +183,9 @@ const ApiKeyManagement: React.FC = () => {
                         },
                         description: t('api-keys.delete-description'),
                         yesAction: () =>
-                          deleteKey({ serviceId, keyId: apiKey.id }),
+                          delete2FA((code) =>
+                            deleteKey({ serviceId, keyId: apiKey.id, code }),
+                          ),
                       })
                     }
                     color={'danger'}
