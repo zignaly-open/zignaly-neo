@@ -278,9 +278,7 @@ export function useCheck2FA({
   }, [status]);
 
   if (!ask2FA) {
-    return (action) => {
-      action();
-    };
+    return (action) => action();
   }
 
   return (action) => {
