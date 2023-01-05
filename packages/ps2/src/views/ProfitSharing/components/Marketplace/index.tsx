@@ -9,7 +9,6 @@ import {
   createColumnHelper,
   ZigChartMini,
 } from '@zignaly-open/ui';
-import { formatDistance } from 'date-fns';
 import { Box } from '@mui/material';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { MarketplaceService } from '../../../../apis/marketplace/types';
@@ -19,6 +18,7 @@ import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace
 import AssetsInPool from '../../../../components/AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 import { TableWrapper } from './styles';
+import { formatLocalizedDistance } from '../../../Dashboard/components/MyDashboard/util';
 
 const Marketplace: React.FC = () => {
   const marketplaceEndpoint = useMarketplace();
@@ -76,7 +76,7 @@ const Marketplace: React.FC = () => {
               lineHeight: '28px',
             }}
             value={props.getValue()}
-            label={formatDistance(
+            label={formatLocalizedDistance(
               new Date(),
               new Date(props.row.original.createdAt),
             )}

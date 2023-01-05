@@ -5,10 +5,10 @@ import MarkdownSection from './MarkdownSection';
 import { Box } from '@mui/system';
 import { ZigTypography } from '@zignaly-open/ui';
 import Countries from 'i18n-iso-countries';
-import { formatDistance } from 'date-fns';
 import { CountryFlag, StyledVerifiedIcon } from '../styles';
 import { Tooltip } from '@mui/material';
 import * as flags from 'country-flag-icons/string/3x2';
+import { formatLocalizedDistance } from '../../../../Dashboard/components/MyDashboard/util';
 
 const ServiceManagerDescription: React.FC<{ service: Service }> = ({
   service,
@@ -71,7 +71,7 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
               component={'span'}
             >
               {t('about-trader-joined-time', {
-                date: formatDistance(
+                date: formatLocalizedDistance(
                   new Date(),
                   new Date(service.ownerCreatedAt),
                 ),

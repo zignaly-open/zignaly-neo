@@ -1,10 +1,10 @@
 import {
   createColumnHelper,
-  PercentageIndicator,
-  PriceLabel,
   ZigTable,
   ZigTypography,
   ZigChartMini,
+  PercentageIndicator,
+  PriceLabel,
 } from '@zignaly-open/ui';
 import React, { useMemo } from 'react';
 import { Heading, Layout, ZigTableWrapper } from './styles';

@@ -16,10 +16,9 @@ import {
   StyledPencilIcon,
 } from '../styles';
 import {
-  PriceLabel,
   TextButton,
   Typography,
-  UsdPriceLabel,
+  ZigPriceLabel,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Box } from '@mui/system';
@@ -33,13 +32,12 @@ const BigNumber: React.FC<{
 }> = ({ ssc, green = false, red = false, value }) => {
   return (
     <BigNumberWrapper>
-      {ssc === 'USDT' && (
-        <UsdPriceLabel value={value} green={green} red={red} />
-      )}
-      {ssc && ssc !== 'USDT' && (
-        <PriceLabel coin={ssc} value={value} green={green} red={red} />
-      )}
-      {!ssc && <PriceLabel hideCoinName coin={ssc} value={value} red={red} />}
+      <ZigPriceLabel
+        value={value}
+        coin={ssc !== 'USDT' ? ssc : undefined}
+        color={green ? 'greenGraph' : red ? 'redGraphOrError' : undefined}
+        usd={ssc === 'USDT'}
+      />
     </BigNumberWrapper>
   );
 };

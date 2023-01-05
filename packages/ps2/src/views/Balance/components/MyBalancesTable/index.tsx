@@ -68,8 +68,8 @@ const MyBalancesTable = (): JSX.Element => {
       columnHelper.accessor((row) => row.balance.balanceTotalBTC, {
         id: 'balanceTotalBTC',
         header: t('tableHeader.valueBTC'),
-        cell: ({ getValue, row }) => (
-          <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
+        cell: ({ getValue }) => (
+          <ZigTablePriceLabel coin='BTC' value={getValue()} />
         ),
         sortingFn: 'alphanumeric',
       }),
@@ -90,8 +90,8 @@ const MyBalancesTable = (): JSX.Element => {
                 icon={<Add color={'neutral300'} />}
                 onClick={() =>
                   showModal(DepositModal, {
-                    selectedCoin: row.original.coin,
                     ctaId: 'balances-table-row',
+                    selectedCoin: row.original.coin,
                   })
                 }
                 variant='secondary'
@@ -102,8 +102,8 @@ const MyBalancesTable = (): JSX.Element => {
                 icon={<Remove color={'neutral300'} />}
                 onClick={() =>
                   showModal(WithdrawModal, {
-                    selectedCoin: row.original.coin,
                     ctaId: 'balances-table-row',
+                    selectedCoin: row.original.coin,
                   })
                 }
                 variant='secondary'
