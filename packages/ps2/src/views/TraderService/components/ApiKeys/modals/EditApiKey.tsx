@@ -2,10 +2,13 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
 import ZModal from '../../../../../components/ZModal';
-import { ServiceApiKey } from '../../../../../apis/serviceApiKey/types';
+import {
+  ServiceApiKey,
+  ServiceApiKeyPermission,
+} from '../../../../../apis/serviceApiKey/types';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import { CreateKeyValidation } from '../validations';
+import { EditKeyValidation } from '../validations';
 import {
   CloneIcon,
   dark,
@@ -26,45 +29,66 @@ import {
   Tooltip,
 } from '@mui/material';
 import { MultilineLabel } from '../atoms';
+import { useServiceApiKeyEditMutation } from '../../../../../apis/serviceApiKey/api';
+import { BooleanString, EditApiKeyFormType } from '../types';
+import { formTypeToBackendPayloadType } from '../util';
 
 function EditApiKeysModal({
   close,
   apiKey,
+  serviceId,
   ...props
 }: {
   apiKey: ServiceApiKey;
+  serviceId: string;
   close: () => void;
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation(['management']);
   const toast = useToast();
+  const [updateApiKey, { isLoading }] = useServiceApiKeyEditMutation();
+
   const {
     handleSubmit,
     control,
     watch,
     register,
     formState: { errors },
-  } = useForm<{
-    alias: string;
-    enableIpRestriction: 'true' | 'false'; // kek
-    ipRestrictions: string;
-  }>({
+  } = useForm<EditApiKeyFormType>({
     mode: 'onTouched',
     reValidateMode: 'onBlur',
-    resolver: yupResolver(CreateKeyValidation),
+    resolver: yupResolver(EditKeyValidation),
     defaultValues: {
       alias: apiKey.alias,
-      enableIpRestriction: 'false',
+      enableIpRestriction: JSON.stringify(
+        apiKey.ips.some(Boolean),
+      ) as BooleanString,
       ipRestrictions: apiKey.ips.join(' '),
+      canTrade: apiKey.permissions?.includes(ServiceApiKeyPermission.canTrade),
+      marginTrade: apiKey.permissions?.includes(
+        ServiceApiKeyPermission.marginTrade,
+      ),
+      futuresTrade: apiKey.permissions?.includes(
+        ServiceApiKeyPermission.futuresTrade,
+      ),
     },
   });
 
-  const onSubmit = () => {
-    alert('privet');
+  const showIpRestrictions = watch('enableIpRestriction') === 'true';
+
+  const onSubmit = async (data: EditApiKeyFormType) => {
+    await updateApiKey({
+      serviceId,
+      keyId: apiKey.id,
+      data: formTypeToBackendPayloadType(data),
+    });
+    toast.success(t('common:changes-saved'));
+    close();
   };
 
-  const showIpRestrictions = watch('enableIpRestriction') === 'true';
-  const isCreate = true;
-  const isCreating = false;
+  const isCreate = !!apiKey.secret;
+
+  // since we won't have that in the form
+  isCreate && register('alias');
 
   return (
     <ZModal
@@ -93,7 +117,7 @@ function EditApiKeysModal({
                 wide
                 label={t('common:name') + ':'}
                 placeholder={t('common:name')}
-                disabled={isCreating}
+                disabled={isLoading}
                 error={t(errors.alias?.message)}
                 {...field}
               />
@@ -148,32 +172,57 @@ function EditApiKeysModal({
             </>
           )}
         </Box>
+
         <Box sx={{ mb: 4 }}>
           <ZigTypography>{t('api-keys.api-settings')}</ZigTypography>
           <Grid container>
             <Grid item xs={12} md={6}>
               <Tooltip title={t('api-keys.cant-disable-read')}>
                 <FormControlLabel
-                  control={<Checkbox checked onChange={() => {}} />}
+                  control={
+                    <Checkbox
+                      disabled={isLoading}
+                      checked
+                      onChange={() => {}}
+                    />
+                  }
                   label={t('api-keys.permissions-enable.read')}
                 />
               </Tooltip>
             </Grid>
             <Grid item xs={12} md={6}>
               <FormControlLabel
-                control={<Checkbox />}
+                control={
+                  <Checkbox
+                    {...register('canTrade')}
+                    checked={watch('canTrade')}
+                    disabled={isLoading}
+                  />
+                }
                 label={t('api-keys.permissions-enable.canTrade')}
               />
             </Grid>
             <Grid item xs={12} md={6}>
               <FormControlLabel
-                control={<Checkbox />}
+                control={
+                  <Checkbox
+                    {...register('marginTrade')}
+                    checked={watch('marginTrade')}
+                    disabled={isLoading}
+                  />
+                }
                 label={t('api-keys.permissions-enable.marginTrade')}
               />
             </Grid>
             <Grid item xs={12} md={6}>
               <FormControlLabel
-                control={<Checkbox />}
+                control={
+                  <Checkbox
+                    {...register('futuresTrade')}
+                    checked={watch('futuresTrade')}
+                    disabled={isLoading}
+                  />
+                }
                 label={t('api-keys.permissions-enable.futuresTrade')}
               />
             </Grid>
@@ -185,12 +234,22 @@ function EditApiKeysModal({
 
           <RadioGroup name={'enableIpRestriction'} defaultValue={false}>
             <FormControlLabel
-              control={<Radio {...register('enableIpRestriction')} />}
+              control={
+                <Radio
+                  disabled={isLoading}
+                  {...register('enableIpRestriction')}
+                />
+              }
               value={false}
               label={t('api-keys.ip-restrictions-none')}
             />
             <FormControlLabel
-              control={<Radio {...register('enableIpRestriction')} />}
+              control={
+                <Radio
+                  disabled={isLoading}
+                  {...register('enableIpRestriction')}
+                />
+              }
               value={true}
               label={t('api-keys.ip-restrictions-on')}
             />
@@ -205,6 +264,7 @@ function EditApiKeysModal({
               rules={{ required: true }}
               render={({ field }) => (
                 <ZigInput
+                  disabled={isLoading}
                   sx={{
                     mt: 2,
                     mb: 4,
@@ -218,8 +278,7 @@ function EditApiKeysModal({
                       subtitle={t('api-keys.ip-restrictions-allowed-explainer')}
                     />
                   }
-                  disabled={isCreating}
-                  error={t(errors.alias?.message)}
+                  error={t(errors.ipRestrictions?.message)}
                   {...field}
                 />
               )}
@@ -228,7 +287,12 @@ function EditApiKeysModal({
         )}
 
         <Box sx={{ textAlign: 'center', mt: 4 }}>
-          <ZigButton variant={'contained'} type='submit' size={'large'}>
+          <ZigButton
+            variant={'contained'}
+            loading={isLoading}
+            type='submit'
+            size={'large'}
+          >
             {t('action:save-and-close')}
           </ZigButton>
         </Box>

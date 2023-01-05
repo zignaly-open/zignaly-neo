@@ -1,5 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { ServiceApiKey } from './types';
+import { ServiceApiKey, ServiceApiKeyPayload } from './types';
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
@@ -25,23 +25,26 @@ export const api = createApi({
     }),
     serviceApiKeyEdit: builder.mutation<
       ServiceApiKey,
-      { serviceId: string; keyId: string }
+      { serviceId: string; keyId: string; data: ServiceApiKeyPayload }
     >({
       invalidatesTags: ['ServiceApiKey'],
-      query: ({ serviceId, keyId }) => ({
+      query: ({ serviceId, keyId, data }) => ({
         method: 'PUT',
         url: `services/${serviceId}/api_keys/${keyId}`,
+        body: data,
       }),
     }),
-    serviceApiKeyCreate: builder.mutation<ServiceApiKey, { serviceId: string }>(
-      {
-        invalidatesTags: ['ServiceApiKey'],
-        query: ({ serviceId }) => ({
-          method: 'POST',
-          url: `services/${serviceId}/api_keys`,
-        }),
-      },
-    ),
+    serviceApiKeyCreate: builder.mutation<
+      ServiceApiKey,
+      { serviceId: string; data: ServiceApiKeyPayload }
+    >({
+      invalidatesTags: ['ServiceApiKey'],
+      query: ({ serviceId, data }) => ({
+        method: 'POST',
+        url: `services/${serviceId}/api_keys`,
+        body: data,
+      }),
+    }),
   }),
 });
 

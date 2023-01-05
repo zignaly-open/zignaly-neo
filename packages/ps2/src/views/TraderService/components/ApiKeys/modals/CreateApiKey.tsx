@@ -10,8 +10,10 @@ import { CreateKeyValidation } from '../validations';
 
 function CreateApiKeysModal({
   close,
+  serviceId,
   ...props
 }: {
+  serviceId: string;
   close: () => void;
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation(['management']);

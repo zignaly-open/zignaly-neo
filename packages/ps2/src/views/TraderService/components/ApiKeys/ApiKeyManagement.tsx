@@ -61,7 +61,7 @@ const ApiKeyManagement: React.FC = () => {
           }}
         >
           <ZigButton
-            onClick={() => showModal(CreateApiKey)}
+            onClick={() => showModal(CreateApiKey, { serviceId })}
             variant='contained'
             size='large'
           >
@@ -133,7 +133,7 @@ const ApiKeyManagement: React.FC = () => {
                 <Box sx={{ alignSelf: 'center' }}>
                   <ZigButton
                     sx={{ mr: 2 }}
-                    onClick={() => showModal(EditApiKey, { apiKey })}
+                    onClick={() => showModal(EditApiKey, { apiKey, serviceId })}
                     startIcon={<PencilIcon />}
                     variant={'outlined'}
                   >
