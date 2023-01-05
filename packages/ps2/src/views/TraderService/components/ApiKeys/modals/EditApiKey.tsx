@@ -76,13 +76,15 @@ function EditApiKeysModal({
   const showIpRestrictions = watch('enableIpRestriction') === 'true';
 
   const onSubmit = async (data: EditApiKeyFormType) => {
-    await updateApiKey({
+    const result = await updateApiKey({
       serviceId,
       keyId: apiKey.id,
       data: formTypeToBackendPayloadType(data),
     });
-    toast.success(t('common:changes-saved'));
-    close();
+    if (!('error' in result)) {
+      toast.success(t('common:changes-saved'));
+      close();
+    }
   };
 
   const isCreate = !!apiKey.secret;
