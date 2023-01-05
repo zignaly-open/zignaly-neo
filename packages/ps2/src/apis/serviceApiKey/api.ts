@@ -36,13 +36,13 @@ export const api = createApi({
     }),
     serviceApiKeyCreate: builder.mutation<
       ServiceApiKey,
-      { serviceId: string; data: ServiceApiKeyPayload }
+      { serviceId: string; alias: string }
     >({
       invalidatesTags: ['ServiceApiKey'],
-      query: ({ serviceId, data }) => ({
+      query: ({ serviceId, alias }) => ({
         method: 'POST',
         url: `services/${serviceId}/api_keys`,
-        body: data,
+        body: { alias },
       }),
     }),
   }),

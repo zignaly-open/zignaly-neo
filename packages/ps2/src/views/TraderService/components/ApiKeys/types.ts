@@ -9,3 +9,7 @@ export type EditApiKeyFormType = {
   marginTrade: boolean;
   futuresTrade: boolean;
 };
+
+export type CreateApiKeyFormType = {
+  alias: string;
+};

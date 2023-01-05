@@ -22,6 +22,7 @@ import { addReadIfMissing } from './util';
 import { useZModal } from '../../../../components/ZModal/use';
 import CreateApiKey from './modals/CreateApiKey';
 import EditApiKey from './modals/EditApiKey';
+import { ServiceApiKey } from 'apis/serviceApiKey/types';
 
 const ApiKeyManagement: React.FC = () => {
   const { t, i18n } = useTranslation(['management', 'actions']);
@@ -61,7 +62,13 @@ const ApiKeyManagement: React.FC = () => {
           }}
         >
           <ZigButton
-            onClick={() => showModal(CreateApiKey, { serviceId })}
+            onClick={() =>
+              showModal(CreateApiKey, {
+                serviceId,
+                afterSave: (result: ServiceApiKey) =>
+                  showModal(EditApiKey, { apiKey: result, serviceId }),
+              })
+            }
             variant='contained'
             size='large'
           >
@@ -99,7 +106,7 @@ const ApiKeyManagement: React.FC = () => {
                     }
                     onClickRightSideElement={() => {
                       copy(apiKey.key);
-                      toast.success(t('actions:copied'));
+                      toast.success(t('action:copied'));
                     }}
                   />
                 </Box>

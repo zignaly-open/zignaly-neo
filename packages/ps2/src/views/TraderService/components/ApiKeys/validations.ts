@@ -9,7 +9,7 @@ const validateIpRange = (ip: string) => ipRangeRegex.test(ip);
 
 export const CreateKeyValidation = yup
   .object({
-    name: yup.string().required('error:error.required'),
+    alias: yup.string().required('error:error.required'),
   })
   .required();
 

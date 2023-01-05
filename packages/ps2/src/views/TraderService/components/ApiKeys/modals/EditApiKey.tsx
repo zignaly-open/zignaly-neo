@@ -144,7 +144,7 @@ function EditApiKeysModal({
             }
             onClickRightSideElement={() => {
               copy(apiKey.key);
-              toast.success(t('actions:copied'));
+              toast.success(t('action:copied'));
             }}
           />
         </Box>
@@ -165,7 +165,7 @@ function EditApiKeysModal({
               }
               onClickRightSideElement={() => {
                 copy(apiKey.secret);
-                toast.success(t('actions:copied'));
+                toast.success(t('action:copied'));
               }}
             />
           ) : (

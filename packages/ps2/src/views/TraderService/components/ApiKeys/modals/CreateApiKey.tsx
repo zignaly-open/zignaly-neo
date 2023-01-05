@@ -7,13 +7,18 @@ import { Box } from '@mui/system';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CreateKeyValidation } from '../validations';
+import { useServiceApiKeyCreateMutation } from '../../../../../apis/serviceApiKey/api';
+import { CreateApiKeyFormType } from '../types';
+import { ServiceApiKey } from '../../../../../apis/serviceApiKey/types';
 
 function CreateApiKeysModal({
   close,
   serviceId,
+  afterSave,
   ...props
 }: {
   serviceId: string;
+  afterSave: (result: ServiceApiKey) => void;
   close: () => void;
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation(['management']);
@@ -21,19 +26,23 @@ function CreateApiKeysModal({
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<{ name: string }>({
+  } = useForm<CreateApiKeyFormType>({
     mode: 'onTouched',
     reValidateMode: 'onBlur',
     resolver: yupResolver(CreateKeyValidation),
     defaultValues: {
-      name: '',
+      alias: '',
     },
   });
 
-  const isCreating = false;
+  const [create, { isLoading: isCreating }] = useServiceApiKeyCreateMutation();
 
-  const onSubmit = () => {
-    alert('privet');
+  const onSubmit = async ({ alias }: CreateApiKeyFormType) => {
+    const result = await create({ alias, serviceId });
+    if (!('error' in result)) {
+      afterSave(result.data);
+      close();
+    }
   };
 
   return (
@@ -41,7 +50,7 @@ function CreateApiKeysModal({
       <ZigTypography>{t('api-keys.create-new-key-description')}</ZigTypography>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
-          name='name'
+          name='alias'
           control={control}
           rules={{ required: true }}
           render={({ field }) => (
@@ -54,15 +63,20 @@ function CreateApiKeysModal({
               label={t('common:name') + ':'}
               placeholder={t('common:name') + ':'}
               disabled={isCreating}
-              error={t(errors.name?.message)}
+              error={t(errors.alias?.message)}
               {...field}
             />
           )}
         />
 
         <Box sx={{ textAlign: 'center' }}>
-          <ZigButton variant={'contained'} type='submit' size={'large'}>
-            {t('actions:continue')}
+          <ZigButton
+            disabled={isCreating}
+            variant={'contained'}
+            type='submit'
+            size={'large'}
+          >
+            {t('action:continue')}
           </ZigButton>
         </Box>
       </form>
