@@ -26,6 +26,7 @@ import { useZConfirm, useZModal } from '../../../../components/ZModal/use';
 import CreateApiKey from './modals/CreateApiKey';
 import EditApiKey from './modals/EditApiKey';
 import { ServiceApiKey } from 'apis/serviceApiKey/types';
+import Stub from '../../../../components/Stub';
 
 const ApiKeyManagement: React.FC = () => {
   const { t, i18n } = useTranslation(['management', 'actions']);
@@ -87,14 +88,22 @@ const ApiKeyManagement: React.FC = () => {
         </Box>
       </TitleBox>
 
-      <ZigTypography color='neutral200' variant={'h2'}>
-        {t('api-keys.manage-keys')}
-      </ZigTypography>
-
       {isLoading || isDeleting || isFetching ? (
         <CenteredLoader />
       ) : (
         <ApiKeysContainer>
+          {!!keys.length && (
+            <ZigTypography color='neutral200' variant={'h2'}>
+              {t('api-keys.manage-keys')}
+            </ZigTypography>
+          )}
+
+          {!keys.length && (
+            <Stub
+              title={t('api-keys.no-keys')}
+              description={t('api-keys.no-keys-description')}
+            />
+          )}
           {keys.map((apiKey) => (
             <ApiKey key={apiKey.id}>
               <ZigTypography variant='h3' sx={{ mb: 1.5 }}>
