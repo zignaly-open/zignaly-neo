@@ -4,6 +4,7 @@ import React from 'react';
 
 export const ApiKeysContainer = styled(Box)`
   gap: 24px;
+  margin-bottom: 80px;
 `;
 
 export const TitleBox = styled(Box)`
