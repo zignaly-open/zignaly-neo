@@ -229,7 +229,6 @@ export const generateService = (user: ContextUser) => {
         zhits: invitedBenefit,
         note: zignalySystemId,
       });
-      // console.log(`User ${user.id} redeemed ${invitedBenefit} ZIGs`);
       await emitBalanceChanged(user);
     }
 
@@ -241,7 +240,6 @@ export const generateService = (user: ContextUser) => {
           zhits: inviterBenefit,
           note: zignalySystemId,
         });
-        // console.log(`User ${inviter.id} got rewarded ${inviterBenefit} ZIGs`);
         await emitBalanceChanged(inviter);
       } catch (e) {
         console.error(
