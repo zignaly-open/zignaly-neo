@@ -9,8 +9,8 @@ import '../src/db';
 import { signJwtToken } from '../src/entities/users/util';
 import { User } from '../src/entities/users/model';
 
-const numberOfUsers = 10;
-const bidsPerSecond = 2;
+const numberOfUsers = 50;
+const bidsPerSecond = 3;
 
 const httpAgent = new http.Agent({
   keepAlive: true,
@@ -20,20 +20,22 @@ const httpAgent = new http.Agent({
 const createAuction = async () => {
   try {
     await Auction.destroy({ where: { id: 13 } });
-    return await Auction.create({
+    const auction = await Auction.create({
       id: 13,
-      expiresAt: '2029-09-10T12:30:00.511Z',
+      expiresAt: '2023-01-10T13:30:00.511Z',
       chain: 'DOGE',
-      maxExpiryDate: '2029-10-05T13:30:00.511Z',
+      maxExpiryDate: '2023-01-10T13:30:00.511Z',
       imageUrl: '/images/4.jpg',
       title: 'Most stressful auction',
       description: 'Click',
-      currentBid: '0.01',
+      currentBid: '0.07',
       website: 'https://zignaly.com/',
       discord: 'https://zignaly.com/',
       twitter: 'https://zignaly.com/',
       telegram: 'https://zignaly.com/',
     });
+    await redisService.redisImport(auction.id, false);
+    return auction;
   } catch (e) {
     console.error(e);
   }
@@ -85,6 +87,7 @@ const makeBidEveryNthOfSecond = async (
   bid(auctionId, token);
   console.log('bid ' + token);
   await new Promise((r) => setTimeout(r, Math.round(1000 / n)));
+  makeBidEveryNthOfSecond(token, auctionId, n);
 };
 
 const bid = (auctionId: string, token: string) =>
@@ -108,7 +111,7 @@ const bid = (auctionId: string, token: string) =>
       },
     )
     .catch((e) => {
-      console.error(e.response.data);
+      console.error(e);
     });
 
 (async () => {
