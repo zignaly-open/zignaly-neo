@@ -4,7 +4,7 @@ import { ZigTypography } from '@zignaly-open/ui';
 import { withAttrs } from 'util/styles';
 
 export const TopPanel = styled(Grid)`
-  border: 1px solid ${({ theme }) => theme.palette.neutral100};
+  background: #13122566;
   border-radius: 16px;
   margin: 21px 0 40px;
   flex: 1;

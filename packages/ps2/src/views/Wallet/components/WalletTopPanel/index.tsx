@@ -66,7 +66,7 @@ const WalletTopPanel = ({
     <TopPanel container direction='row'>
       <PanelItem item>
         <SubTitle>{t('totalBalance')}</SubTitle>
-        <Box display='flex' alignItems='center' gap='10px'>
+        <Box display='flex' alignItems='center' gap='12px'>
           <ZignalyIcon width={54} height={54} />
           <div>
             <ZigPriceLabel
@@ -134,7 +134,7 @@ const WalletTopPanel = ({
           <RewardsIcon width={48} height={48} />
           <div>
             <ZigPriceLabel
-              value={savings.total}
+              value={savings}
               variant='h1'
               color='greenGraph'
               coin='ZIG'

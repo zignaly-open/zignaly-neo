@@ -1,10 +1,6 @@
 import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import {
-  transactionStateColor,
-  transactionStateName,
-  WalletTransactionsProps,
-} from './types';
+import { transactionStateColor, transactionStateName } from './types';
 import {
   createColumnHelper,
   DateLabel,
@@ -19,8 +15,10 @@ import { useTransactionsHistory } from 'apis/wallet/use';
 import ChainIcon from 'components/ChainIcon';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { NumericFormat } from 'react-number-format';
+import TransactionDetails from '../TransactionDetails';
+import { PaginationState } from '@tanstack/react-table';
 
-const WalletTransactions = ({}: WalletTransactionsProps) => {
+const WalletTransactions = () => {
   const type = 'all';
   const { t } = useTranslation('wallet');
   const [filteredData, setFilteredData] = useState<Transaction[]>([]);
@@ -29,22 +27,21 @@ const WalletTransactions = ({}: WalletTransactionsProps) => {
     pageSize: 30,
   });
   const { pageIndex, pageSize } = pagination;
-  const transactionsEndpoint = useTransactionsHistory({
-    type,
-  });
-  console.log(transactionsEndpoint);
+  const transactionsEndpoint = useTransactionsHistory(
+    {
+      limit: pageSize,
+      type,
+    },
+    pageIndex,
+  );
 
   useEffect(() => {
     if (transactionsEndpoint.data) {
-      const data = transactionsEndpoint.data
-        .slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
-        .sort((a, b) => +new Date(b.datetime) - +new Date(a.datetime))
-        .map((transaction) => ({
-          ...transaction,
-          // assetName: coinsEndpoint.data[transaction.asset]?.name,
-        }));
+      const data = transactionsEndpoint.data.slice(
+        pageIndex * pageSize,
+        (pageIndex + 1) * pageSize,
+      );
       setFilteredData(data);
-      console.log('filrered', data);
     }
   }, [transactionsEndpoint.data, pageIndex]);
 
@@ -89,9 +86,8 @@ const WalletTransactions = ({}: WalletTransactionsProps) => {
               alignItems='center'
               justifyContent='center'
               gap={1}
-              fontWeight={600}
             >
-              <ZigCoinIcon coin={getValue()} size='small' />
+              <ZigCoinIcon coin={getValue()} size='small' bucket='coins' />
               {getValue()}
             </ZigTypography>
           </>
@@ -100,18 +96,20 @@ const WalletTransactions = ({}: WalletTransactionsProps) => {
       }),
       columnHelper.accessor('network', {
         header: t('transactions.header.network'),
-        cell: ({ getValue, row: { original } }) => (
-          <ZigTypography
-            display='flex'
-            alignItems='center'
-            justifyContent='center'
-            gap={1}
-            fontWeight={600}
-          >
-            <ChainIcon network={getValue()} />
-            {original.networkName}
-          </ZigTypography>
-        ),
+        cell: ({ getValue, row: { original } }) =>
+          getValue() ? (
+            <ZigTypography
+              display='flex'
+              alignItems='center'
+              justifyContent='center'
+              gap={1}
+            >
+              <ChainIcon network={getValue()} />
+              {original.networkName}
+            </ZigTypography>
+          ) : (
+            <ZigTypography>{t('transactions.internal')}</ZigTypography>
+          ),
         enableSorting: false,
       }),
       columnHelper.accessor('status', {
@@ -159,14 +157,6 @@ const WalletTransactions = ({}: WalletTransactionsProps) => {
       <ZigTable
         columns={columns}
         data={filteredData}
-        // initialState={{
-        //   sorting: [
-        //     {
-        //       id: 'datetime',
-        //       desc: true,
-        //     },
-        //   ],
-        // }}
         renderSubComponent={({ row }) => (
           <TransactionDetails transaction={row.original} />
         )}

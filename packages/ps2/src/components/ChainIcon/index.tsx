@@ -1,6 +1,7 @@
 import React from 'react';
 import BSCIcon from 'images/chain/bsc.svg';
 import ETHIcon from 'images/chain/eth.svg';
+import MATICIcon from 'images/chain/matic.svg';
 import { ZigCoinIcon } from '@zignaly-open/ui';
 
 export const getChainIcon = (chain: string) => {
@@ -9,6 +10,8 @@ export const getChainIcon = (chain: string) => {
       return ETHIcon;
     case 'BSC':
       return BSCIcon;
+    case 'MATIC':
+      return MATICIcon;
     default:
       return null;
   }

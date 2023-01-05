@@ -13,6 +13,7 @@ export function useTransactionsHistory(
     useTransactionsHistoryQuery,
     filters,
     pageIndex,
+    false,
   );
 
   return infinitePaginatedQuery;

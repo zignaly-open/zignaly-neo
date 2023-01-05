@@ -1,5 +1,5 @@
-import React from "react";
-import { Icon } from "./styles";
+import React, { useCallback, useState } from "react";
+import { Icon, Placeholder } from "./styles";
 import { CoinSizes, ZIGCoinIconProps, COIN_SIZES, sizes } from "./types";
 
 const ZigCoinIcon = ({
@@ -7,18 +7,21 @@ const ZigCoinIcon = ({
   name,
   coin,
   className = "",
+  bucket = "coins-binance",
 }: ZIGCoinIconProps) => {
+  const s = typeof size === "number" ? size : sizes[size];
+  const [src, setSrc] = useState(
+    `https://res.cloudinary.com/zignaly/image/upload/c_scale,w_${s},h_${s},r_max/${bucket}/${coin}`,
+  );
+  const onError = useCallback(() => setSrc(""), []);
   if (!coin) return null;
 
-  const s = typeof size === "number" ? size : sizes[size];
-
-  return (
-    <Icon
-      src={`https://res.cloudinary.com/zignaly/image/upload/c_scale,w_${s},h_${s},r_max/coins/${coin}`}
-      alt={name}
-      size={s}
-      className={className}
-    />
+  return src ? (
+    <Icon src={src} alt={name} size={s} className={className} onError={onError} />
+  ) : (
+    <Placeholder size={s} className={className} as="div">
+      {coin[0]}
+    </Placeholder>
   );
 };
 

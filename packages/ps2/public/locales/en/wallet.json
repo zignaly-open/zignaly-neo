@@ -13,6 +13,7 @@
   "saveMoney": "SAVE MONEY with ZIG!",
   "min": "min.",
   "transactions": {
+    "internal": "Internal Transfer",
     "header": {
       "date": "Date",
       "type": "Type",
