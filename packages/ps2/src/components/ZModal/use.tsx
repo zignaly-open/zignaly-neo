@@ -9,7 +9,7 @@ export function useZModal(options?: UseModalOptions) {
   const ourShowModal = useCallback(
     (
       Component: ComponentType & { trackId?: string },
-      props: undefined | (Record<string, unknown> & { ctaId?: string }),
+      props?: Record<string, unknown> & { ctaId?: string },
     ) => {
       const { ctaId, ...modalProps } = props || {};
       const trackId = Component.trackId?.toLocaleLowerCase();

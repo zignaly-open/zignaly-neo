@@ -19,10 +19,14 @@ import CenteredLoader from '../../../../components/CenteredLoader';
 import copy from 'copy-to-clipboard';
 import { useToast } from '../../../../util/hooks/useToast';
 import { addReadIfMissing } from './util';
+import { useZModal } from '../../../../components/ZModal/use';
+import CreateApiKey from './modals/CreateApiKey';
+import EditApiKey from './modals/EditApiKey';
 
 const ApiKeyManagement: React.FC = () => {
   const { t, i18n } = useTranslation(['management', 'actions']);
   const { serviceId } = useParams();
+  const { showModal } = useZModal();
   const toast = useToast();
   const { isLoading, data: keys } = useServiceApiKeysQuery({ serviceId });
 
@@ -56,7 +60,11 @@ const ApiKeyManagement: React.FC = () => {
             alignSelf: 'center',
           }}
         >
-          <ZigButton onClick={() => alert()} variant='contained' size='large'>
+          <ZigButton
+            onClick={() => showModal(CreateApiKey)}
+            variant='contained'
+            size='large'
+          >
             {t('api-keys.create-key')}
           </ZigButton>
         </Box>
@@ -70,10 +78,10 @@ const ApiKeyManagement: React.FC = () => {
         <CenteredLoader />
       ) : (
         <ApiKeysContainer>
-          {keys.map((k) => (
-            <ApiKey key={k.id}>
+          {keys.map((apiKey) => (
+            <ApiKey key={apiKey.id}>
               <ZigTypography variant='h3' sx={{ mb: 1.5 }}>
-                {k.alias}
+                {apiKey.alias}
               </ZigTypography>
               <Box sx={{ flexDirection: 'row', display: 'flex', gap: 3 }}>
                 <Box sx={{ flex: 5, mr: 2 }}>
@@ -81,7 +89,7 @@ const ApiKeyManagement: React.FC = () => {
                     placeholder={t('api-keys.api-key')}
                     label={t('api-keys.api-key')}
                     readOnly={true}
-                    value={k.key}
+                    value={apiKey.key}
                     rightSideElement={
                       <CloneIcon
                         width={40}
@@ -90,7 +98,7 @@ const ApiKeyManagement: React.FC = () => {
                       />
                     }
                     onClickRightSideElement={() => {
-                      copy(k.key);
+                      copy(apiKey.key);
                       toast.success(t('actions:copied'));
                     }}
                   />
@@ -101,7 +109,7 @@ const ApiKeyManagement: React.FC = () => {
                   </ZigTypography>
                   <TextWrapperRow>
                     <ZigTypography color={'neutral100'}>
-                      {addReadIfMissing(k.permissions)
+                      {addReadIfMissing(apiKey.permissions)
                         .map((p) =>
                           i18n.exists(`management:api-keys.permissions.${p}`)
                             ? t(`api-keys.permissions.${p}`)
@@ -117,13 +125,15 @@ const ApiKeyManagement: React.FC = () => {
                   </ZigTypography>
                   <TextWrapperRow>
                     <ZigTypography color={'neutral100'}>
-                      {k.ips.join(', ') || t('api-keys.ip-restrictions-none')}
+                      {apiKey.ips.join(', ') ||
+                        t('api-keys.ip-restrictions-none')}
                     </ZigTypography>
                   </TextWrapperRow>
                 </Box>
                 <Box sx={{ alignSelf: 'center' }}>
                   <ZigButton
                     sx={{ mr: 2 }}
+                    onClick={() => showModal(EditApiKey, { apiKey })}
                     startIcon={<PencilIcon />}
                     variant={'outlined'}
                   >

@@ -14,7 +14,7 @@ export interface InputTextProps {
   onChange?: Function;
   disabled?: boolean;
   error?: string | null;
-  label?: string | null;
+  label?: string | null | JSX.Element;
   /**
    * The default value. Use when the component is not controlled.
    */

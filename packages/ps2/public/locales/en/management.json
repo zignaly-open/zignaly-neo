@@ -50,14 +50,32 @@
     "create-key": "Create API Key",
     "manage-keys": "Manage API Keys",
     "api-key": "API Key",
+    "api-settings": "API Settings",
+    "api-settings-tooltip": "You know it's just little too late. API secret is shown only once. If you've lost it, you will have to regenerate the key",
+    "cant-disable-read": "You can not disable the read permission",
+    "restrict-ip": "Restrict IP",
+    "api-secret": "API Secret",
+    "api-secret-explainer": "Only visible on key generation. If lost, you will have to generate a new API key",
     "permission-label": "Permissions",
     "permissions": {
-      "read": "Enable reading",
+      "read": "Read",
       "canTrade": "Spot trading",
       "marginTrade": "Margin trading",
       "futuresTrade": "Futures trading"
     },
+    "permissions-enable": {
+      "read": "Enable reading",
+      "canTrade": "Enable spot trading",
+      "marginTrade": "Enable margin trading",
+      "futuresTrade": "Enable futures trading"
+    },
+    "create-new-key": "Create New API Key",
+    "create-new-key-description": "Create a new API key to connect and trade from your favorite trading platform.",
+    "edit-key": "Edit API Key Settings",
     "ip-restrictions": "IP restrictions",
-    "ip-restrictions-none": "Unrestricted"
+    "ip-restrictions-none": "Unrestricted",
+    "ip-restrictions-allowed": "IP Addresses",
+    "ip-restrictions-allowed-explainer": "When entering more than one IP address, please separate them with spaces",
+    "ip-restrictions-on": "Restrict access to trusted IPs only (recommended)"
   }
 }
