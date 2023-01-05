@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
 import ZModal from '../../../../../components/ZModal';
@@ -47,18 +47,10 @@ function EditApiKeysModal({
   const toast = useToast();
   const [updateApiKey, { isLoading }] = useServiceApiKeyEditMutation();
 
-  const {
-    handleSubmit,
-    control,
-    watch,
-    register,
-    formState: { errors },
-  } = useForm<EditApiKeyFormType>({
-    mode: 'onTouched',
-    reValidateMode: 'onBlur',
-    resolver: yupResolver(EditKeyValidation),
-    defaultValues: {
+  const defaultValues = useMemo(
+    () => ({
       alias: apiKey.alias,
+      // I fucking love radio boxes
       enableIpRestriction: JSON.stringify(
         apiKey.ips.some(Boolean),
       ) as BooleanString,
@@ -70,7 +62,21 @@ function EditApiKeysModal({
       futuresTrade: apiKey.permissions?.includes(
         ServiceApiKeyPermission.futuresTrade,
       ),
-    },
+    }),
+    [],
+  );
+
+  const {
+    handleSubmit,
+    control,
+    watch,
+    register,
+    formState: { errors },
+  } = useForm<EditApiKeyFormType>({
+    mode: 'onTouched',
+    reValidateMode: 'onBlur',
+    resolver: yupResolver(EditKeyValidation),
+    defaultValues,
   });
 
   const showIpRestrictions = watch('enableIpRestriction') === 'true';
@@ -234,7 +240,10 @@ function EditApiKeysModal({
         <Box sx={{ mb: showIpRestrictions ? 1 : 4 }}>
           <ZigTypography>{t('api-keys.restrict-ip')}</ZigTypography>
 
-          <RadioGroup name={'enableIpRestriction'} defaultValue={false}>
+          <RadioGroup
+            name={'enableIpRestriction'}
+            defaultValue={defaultValues.enableIpRestriction}
+          >
             <FormControlLabel
               control={
                 <Radio
@@ -242,7 +251,7 @@ function EditApiKeysModal({
                   {...register('enableIpRestriction')}
                 />
               }
-              value={false}
+              value={'false'}
               label={t('api-keys.ip-restrictions-none')}
             />
             <FormControlLabel
@@ -252,7 +261,7 @@ function EditApiKeysModal({
                   {...register('enableIpRestriction')}
                 />
               }
-              value={true}
+              value={'true'}
               label={t('api-keys.ip-restrictions-on')}
             />
           </RadioGroup>
