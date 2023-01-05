@@ -28,7 +28,7 @@ const addTransaction = async ({
   blockchain,
   transactionType,
   note = '',
-}: BalanceType) => {
+}: BalanceType): Promise<Balance> => {
   try {
     const transaction = await Balance.create({
       walletAddress,
@@ -39,7 +39,6 @@ const addTransaction = async ({
       amount,
       zhits,
     });
-
     return transaction;
   } catch (e) {
     console.error(e);
@@ -115,7 +114,7 @@ export const referralCode = async ({
     throw new Error('Invalid amount');
   }
 
-  addTransaction({
+  const tx = addTransaction({
     walletAddress,
     zhits,
     amount: '0',
@@ -124,6 +123,8 @@ export const referralCode = async ({
     transactionType: TransactionType.ReferralCode,
     note,
   });
+
+  return tx;
 };
 
 export const redeemCode = async ({
@@ -188,7 +189,10 @@ export const deposit = async ({
 };
 
 //This two functions are only for migrating current balances from the old system to the new one
-export const importBalance = async ({ walletAddress, zhits }: ImportParams) => {
+export const importBalance = async ({
+  walletAddress,
+  zhits,
+}: ImportParams): Promise<Balance> => {
   if (!walletAddress) {
     throw new Error('Wallet address is required');
   }
@@ -196,7 +200,7 @@ export const importBalance = async ({ walletAddress, zhits }: ImportParams) => {
     throw new Error('Invalid amount');
   }
 
-  addTransaction({
+  const tx = addTransaction({
     walletAddress,
     zhits: zhits,
     amount: '0',
@@ -205,6 +209,7 @@ export const importBalance = async ({ walletAddress, zhits }: ImportParams) => {
     transactionType: Import.Import,
     note: '',
   });
+  return tx;
 };
 
 export const importBalanceBulk = async (balanceRowsImports: BalanceType[]) => {
