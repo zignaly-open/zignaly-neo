@@ -9,6 +9,7 @@ import {
   ImportParams,
   Import,
 } from './types';
+// import BN from 'bignumber.js';
 import { TransactionType } from '../../types';
 import { Code } from '../codes/model';
 
@@ -177,11 +178,22 @@ export const deposit = async ({
     },
   });
 
+  const getAmountOfZhits = (
+    convertedAmount: string,
+    zhits: string,
+    amount: string,
+  ) => {
+    return Number(convertedAmount) > Number(zhits)
+      ? Number(amount) / Number(convertedAmount)
+      : Number(amount) * Number(zhits);
+  };
+
   const tx = await addTransaction({
     walletAddress,
     zhits: `${
-      Number(amount) /
-      (currencies.length > 0 ? Number(currencies[0].amount) : 1)
+      currencies.length > 0
+        ? getAmountOfZhits(currencies[0].amount, currencies[0].zhits, amount)
+        : amount
     }`,
     amount,
     currency,

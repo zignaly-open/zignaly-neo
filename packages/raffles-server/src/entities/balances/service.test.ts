@@ -182,7 +182,7 @@ describe('Balance service', () => {
       expect(userBalance).toEqual('1');
     });
 
-    it('should be able to add a new convertion, 1 zhit for 100 token amount', async () => {
+    it('should be able to add a new convertion, 1 zhit for 200 token amount', async () => {
       addNewTokenInCurrencyToZhit('100', '1', '0x045');
 
       await deposit({
@@ -194,6 +194,20 @@ describe('Balance service', () => {
 
       const userBalance: UserBalanceZhits = await getUserBalance('0x002');
       expect(userBalance).toEqual('2');
+    });
+
+    it('should be able to add a new convertion, 10 zhit for 1 token amount', async () => {
+      addNewTokenInCurrencyToZhit('1', '10', '0x045');
+
+      await deposit({
+        walletAddress: '0x002',
+        amount: '200',
+        currency: '0x045',
+        blockchain: 'polygon',
+      });
+
+      const userBalance: UserBalanceZhits = await getUserBalance('0x002');
+      expect(userBalance).toEqual('2000');
     });
   });
 });

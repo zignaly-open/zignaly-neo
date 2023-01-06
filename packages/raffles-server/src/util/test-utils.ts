@@ -521,6 +521,7 @@ export async function wipeOut() {
       await Code.destroy(options);
       await User.destroy(options);
       await Balance.destroy(options);
+      await CurrencyToZhit.destroy(options);
     } catch (e) {
       console.error(e);
     }
