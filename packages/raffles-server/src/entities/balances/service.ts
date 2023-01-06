@@ -131,7 +131,7 @@ export const redeemCode = async ({
   walletAddress,
   zhits,
   note,
-}: RedeemParams) => {
+}: RedeemParams): Promise<Balance> => {
   if (!walletAddress) {
     throw new Error('Wallet address is required');
   }
@@ -139,7 +139,7 @@ export const redeemCode = async ({
     throw new Error('Invalid amount');
   }
 
-  addTransaction({
+  const tx = await addTransaction({
     walletAddress,
     zhits,
     amount: '0',
@@ -148,6 +148,8 @@ export const redeemCode = async ({
     transactionType: TransactionType.RedeemCode,
     note,
   });
+
+  return tx;
 };
 
 export const deposit = async ({
@@ -155,7 +157,7 @@ export const deposit = async ({
   amount,
   currency,
   blockchain,
-}: DepositParams) => {
+}: DepositParams): Promise<Balance> => {
   if (!walletAddress) {
     throw new Error('Wallet address is required');
   }
@@ -173,7 +175,7 @@ export const deposit = async ({
     where: { currency },
   });
 
-  const tx = addTransaction({
+  const tx = await addTransaction({
     walletAddress,
     zhits: `${
       Number(amount) * (currencies.length > 0 ? Number(currencies[0].zhits) : 1)
@@ -200,7 +202,7 @@ export const importBalance = async ({
     throw new Error('Invalid amount');
   }
 
-  const tx = addTransaction({
+  const tx = await addTransaction({
     walletAddress,
     zhits: zhits,
     amount: '0',
@@ -244,7 +246,10 @@ export const getUserDeposits = async (
   return userBalance;
 };
 
-export const getDepositsTotal = async (code: Code, walletAddress: string) => {
+export const getDepositsTotal = async (
+  code: Code,
+  walletAddress: string,
+): Promise<number> => {
   return (await getUserDeposits(walletAddress)).reduce(
     (total, deposit) =>
       total +

@@ -47,7 +47,7 @@ describe('Balance service', () => {
 
   describe('deposits', () => {
     it('should be able to deposit 100 zhits from 100 zigs', async () => {
-      await deposit({
+      const tx = await deposit({
         walletAddress: '0x001',
         amount: '100',
         currency: 'zigs',
@@ -55,8 +55,8 @@ describe('Balance service', () => {
       });
 
       const userBalance: UserBalanceZhits = await getUserBalance('0x001');
-
       expect(userBalance).toEqual('100');
+      expect(tx.id).toEqual(expect.any(Number));
     });
 
     it('should not be able to deposit 0 amount', async () => {
@@ -106,7 +106,7 @@ describe('Balance service', () => {
         blockchain: 'polygon',
       });
 
-      await payFee({
+      const tx = await payFee({
         walletAddress: '0x001',
         zhits: '2',
         note: '',
@@ -115,6 +115,7 @@ describe('Balance service', () => {
       const userBalance: UserBalanceZhits = await getUserBalance('0x001');
 
       expect(userBalance).toEqual(expectedBalance);
+      expect(tx.id).toEqual(expect.any(Number));
     });
   });
 
@@ -127,7 +128,7 @@ describe('Balance service', () => {
         blockchain: 'polygon',
       });
 
-      await redeemCode({
+      const tx = await redeemCode({
         walletAddress: '0x001',
         zhits: '200',
         note: 'code number',
@@ -136,6 +137,7 @@ describe('Balance service', () => {
       const userBalance: UserBalanceZhits = await getUserBalance('0x001');
 
       expect(userBalance).toEqual('400');
+      expect(tx.id).toEqual(expect.any(Number));
     });
   });
 
@@ -148,7 +150,7 @@ describe('Balance service', () => {
         blockchain: 'polygon',
       });
 
-      await makePayout({
+      const tx = await makePayout({
         walletAddress: '0x001',
         zhits: '200',
         note: 'code number',
@@ -157,6 +159,7 @@ describe('Balance service', () => {
       const userBalance: UserBalanceZhits = await getUserBalance('0x001');
 
       expect(userBalance).toEqual('0');
+      expect(tx.id).toEqual(expect.any(Number));
     });
   });
 });
