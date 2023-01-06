@@ -7,7 +7,6 @@
   "successFeeTooltip": "Pay the success fees of any Profit Sharing Service with ZIG and get a discount on the amount to pay.",
   "tradingFeeTooltip": "Zignaly will return the whole trading fees of your new trades in USDT to your account and will charge you the equivalent amount minus the discount in ZIG.",
   "buy": "Buy",
-  "deposit": "Deposit",
   "withdraw": "Withdraw",
   "savingMoney": "You are SAVING MONEY with ZIG!",
   "saveMoney": "SAVE MONEY with ZIG!",
@@ -63,6 +62,42 @@
       "title": "Transaction History Report",
       "description": "We will process your request and send you an email in the following 10 minutes with the information to download your transactions history report.",
       "success": "Your request has been processed successfully. Please check your email for the download link."
+    }
+  },
+  "deposit": {
+    "deposit": "Deposit",
+    "title": "Deposit Crypto",
+    "description": "To deposit {{coin}} tokens, select the network and send to the address below.",
+    "coinSelector": {
+      "label": "Coin:",
+      "placeholder": "Search a coin"
+    },
+    "balances": {
+      "loadingAriaLabel": "Loading coin balances",
+      "total": "Balance:",
+      "balanceLocked": "In Orders:",
+      "balanceFree": "Available:"
+    },
+    "networkSelector": {
+      "label": "Network:",
+      "placeholder": "Choose the network"
+    },
+    "no-network": "Deposit is not available on this network",
+    "depositAddress": {
+      "copied": "Deposit Address copied to clipboard!",
+      "label": "Deposit Address:",
+      "loading": "Loading deposit address...",
+      "placeholder": "Choose the currency and the network first.",
+      "warning": "Only send {{network}} {{coin}} tokens to this address"
+    },
+    "depositMemo": {
+      "copied": "Deposit Memo copied to clipboard!",
+      "loading": "Loading deposit tag...",
+      "label": "Deposit MEMO/Tag:"
+    },
+    "depositQR": {
+      "address": "{{coin}} Address",
+      "memo": "{{coin}} MEMO/Tag"
     }
   }
 }

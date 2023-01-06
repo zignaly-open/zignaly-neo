@@ -1,29 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   MarginContainer,
   WalletGradientIcon,
-  ZigButton,
-  ZignalyIcon,
-  ZigPriceLabel,
   ZigTypography,
 } from '@zignaly-open/ui';
-import {
-  MinText,
-  Layout,
-  PanelItem,
-  StyledSwitch,
-  SubTitle,
-  TopPanel,
-  SwitchLabel,
-  TooltipIcon,
-  PercText,
-  Separator,
-} from './styles';
+import { Layout } from './styles';
 import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
-import { Add, InfoOutlined, Remove } from '@mui/icons-material';
-import { useZModal } from 'components/ZModal/use';
-import { Box, FormControlLabel, Tooltip } from '@mui/material';
+import { Box } from '@mui/material';
 import {
   useBalanceQuery,
   useCoinsQuery,
@@ -37,7 +21,6 @@ import WalletTransactions from './components/WalletTransactions';
 const Wallet = () => {
   const { t } = useTranslation('wallet');
   useTitle(t('title'));
-  const { showModal } = useZModal();
   const balancesEndpoint = useBalanceQuery();
   const coinsEndpoint = useCoinsQuery();
   const savingsEndpoint = useSavingsQuery();
@@ -66,8 +49,8 @@ const Wallet = () => {
               </Box>
               <WalletTopPanel
                 balance={balances?.ZIG?.balance}
-                rate={coins?.ZIG.usdPrice}
                 savings={savings.total}
+                coins={coins}
               />
               <WalletTransactions />
             </>

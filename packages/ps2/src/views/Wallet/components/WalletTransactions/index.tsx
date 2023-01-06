@@ -62,19 +62,26 @@ const WalletTransactions = () => {
       }),
       columnHelper.accessor('type', {
         header: t('transactions.header.type'),
-        cell: ({ getValue }) =>
-          t(`transactions.type.${getValue().replace(/_/g, '').toLowerCase()}`),
+        cell: ({ getValue }) => (
+          <ZigTypography color='almostWhite'>
+            {t(
+              `transactions.type.${getValue().replace(/_/g, '').toLowerCase()}`,
+            )}
+          </ZigTypography>
+        ),
         enableSorting: false,
       }),
       columnHelper.accessor('formattedAmount', {
         header: t('transactions.header.amount'),
         enableSorting: false,
         cell: ({ getValue }) => (
-          <NumericFormat
-            value={getValue()}
-            displayType='text'
-            thousandSeparator={true}
-          />
+          <ZigTypography color='almostWhite'>
+            <NumericFormat
+              value={getValue()}
+              displayType='text'
+              thousandSeparator={true}
+            />
+          </ZigTypography>
         ),
       }),
       columnHelper.accessor('currency', {
@@ -103,12 +110,15 @@ const WalletTransactions = () => {
               alignItems='center'
               justifyContent='center'
               gap={1}
+              color='almostWhite'
             >
               <ChainIcon network={getValue()} />
               {original.networkName}
             </ZigTypography>
           ) : (
-            <ZigTypography>{t('transactions.internal')}</ZigTypography>
+            <ZigTypography color='almostWhite'>
+              {t('transactions.internal')}
+            </ZigTypography>
           ),
         enableSorting: false,
       }),

@@ -90,3 +90,9 @@ export const enum TransactionStateType {
   PENDING = 'IN_PROGRESS',
   ERROR = 'FAILED',
 }
+
+export type DepositInfo = {
+  address: string;
+  currency: string;
+  memo: string;
+};

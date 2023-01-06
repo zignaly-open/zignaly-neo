@@ -25,19 +25,23 @@ import { ReactComponent as RewardsIcon } from 'images/rewards.svg';
 import { WalletTopPanelProps } from './types';
 import { useCurrentUser } from 'apis/user/use';
 import { useUpdateEffect } from 'react-use';
+import { useZModal } from 'components/ZModal/use';
+import WalletDepositModal from '../modals/WalletDepositModal';
 
 const WalletTopPanel = ({
   balance = 0,
-  rate,
   savings,
+  coins,
 }: WalletTopPanelProps) => {
   const { t } = useTranslation('wallet');
+  const { showModal } = useZModal();
   const user = useCurrentUser();
   const [payFeeWithZig, setPayFeeWithZig] = useState(user.payFeeWithZig);
   const [tradingFeeDiscount, setTradingFeeDiscount] = useState(
     user.tradingFeeDiscount,
   );
   const [updateUser] = useUpdateUserMutation();
+  const rate = coins?.ZIG.usdPrice;
 
   const onPayFeeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.checked;
@@ -109,11 +113,15 @@ const WalletTopPanel = ({
             variant='contained'
             startIcon={<Add />}
             onClick={() => {
+              showModal(WalletDepositModal, {
+                ctaId: 'deposit-zig',
+                coins,
+              });
               // track('deposit-zig');
               // showBuyZIG(true);
             }}
           >
-            {t('deposit')}
+            {t('deposit.deposit')}
           </ZigButton>
           <ZigButton
             startIcon={<Remove />}

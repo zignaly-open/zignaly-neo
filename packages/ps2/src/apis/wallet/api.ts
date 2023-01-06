@@ -34,12 +34,9 @@ export const api = createApi({
       }),
     }),
 
-    depositInfo: builder.query<
-      DepositInfo,
-      { exchangeId: string; networkId: string; coinId: string }
-    >({
-      query: ({ exchangeId, coinId, networkId }) => ({
-        url: `/user/exchanges/${exchangeId}/deposit_address/${coinId}?network=${networkId}`,
+    depositInfo: builder.query<DepositInfo, { network: string; coin: string }>({
+      query: ({ coin, network }) => ({
+        url: `/generate-address/${network}/currency/${coin}`,
       }),
     }),
 
@@ -103,4 +100,5 @@ export const {
   useCoinsQuery,
   useSavingsQuery,
   useTransactionsHistoryQuery,
+  useDepositInfoQuery,
 } = api;
