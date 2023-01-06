@@ -1,4 +1,8 @@
-import { waitUntilTablesAreCreated, wipeOut } from '../../util/test-utils';
+import {
+  waitUntilTablesAreCreated,
+  wipeOut,
+  addNewTokenInCurrencyToZhit,
+} from '../../util/test-utils';
 import {
   deposit,
   redeemCode,
@@ -46,11 +50,11 @@ describe('Balance service', () => {
   });
 
   describe('deposits', () => {
-    it('should be able to deposit 100 zhits from 100 zigs', async () => {
+    it('should be able to deposit 100 zhits from 100 0x999', async () => {
       const tx = await deposit({
         walletAddress: '0x001',
         amount: '100',
-        currency: 'zigs',
+        currency: '0x999',
         blockchain: 'polygon',
       });
 
@@ -64,7 +68,7 @@ describe('Balance service', () => {
         await deposit({
           walletAddress: '0x001',
           amount: '0',
-          currency: 'zigs',
+          currency: '0x999',
           blockchain: 'polygon',
         });
       } catch (error) {
@@ -77,7 +81,7 @@ describe('Balance service', () => {
       await deposit({
         walletAddress: '0x001',
         amount: '100',
-        currency: 'zigs',
+        currency: '0x999',
         blockchain: 'polygon',
       });
 
@@ -85,7 +89,7 @@ describe('Balance service', () => {
       await deposit({
         walletAddress: '0x001',
         amount: '100',
-        currency: 'zigs',
+        currency: '0x999',
         blockchain: 'polygon',
       });
 
@@ -102,7 +106,7 @@ describe('Balance service', () => {
       await deposit({
         walletAddress: '0x001',
         amount: '100',
-        currency: 'zigs',
+        currency: '0x999',
         blockchain: 'polygon',
       });
 
@@ -160,6 +164,36 @@ describe('Balance service', () => {
 
       expect(userBalance).toEqual('0');
       expect(tx.id).toEqual(expect.any(Number));
+    });
+  });
+
+  describe('Currency To hit', () => {
+    it('should be able to add a new convertion, 1 zhit for 100 token amount', async () => {
+      addNewTokenInCurrencyToZhit('100', '1', '0x045');
+
+      await deposit({
+        walletAddress: '0x002',
+        amount: '100',
+        currency: '0x045',
+        blockchain: 'polygon',
+      });
+
+      const userBalance: UserBalanceZhits = await getUserBalance('0x002');
+      expect(userBalance).toEqual('1');
+    });
+
+    it('should be able to add a new convertion, 1 zhit for 100 token amount', async () => {
+      addNewTokenInCurrencyToZhit('100', '1', '0x045');
+
+      await deposit({
+        walletAddress: '0x002',
+        amount: '200',
+        currency: '0x045',
+        blockchain: 'polygon',
+      });
+
+      const userBalance: UserBalanceZhits = await getUserBalance('0x002');
+      expect(userBalance).toEqual('2');
     });
   });
 });

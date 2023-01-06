@@ -172,13 +172,16 @@ export const deposit = async ({
   }
 
   const currencies = await CurrencyToZhit.findAll({
-    where: { currency },
+    where: {
+      currency,
+    },
   });
 
   const tx = await addTransaction({
     walletAddress,
     zhits: `${
-      Number(amount) * (currencies.length > 0 ? Number(currencies[0].zhits) : 1)
+      Number(amount) /
+      (currencies.length > 0 ? Number(currencies[0].amount) : 1)
     }`,
     amount,
     currency,

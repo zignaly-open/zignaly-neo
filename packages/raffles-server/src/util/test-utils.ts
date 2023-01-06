@@ -1,6 +1,6 @@
 import supertest from 'supertest';
 import { User } from '../entities/users/model';
-import { Balance } from '../entities/balances/model';
+import { Balance, CurrencyToZhit } from '../entities/balances/model';
 import app from '../index';
 import { signJwtToken } from '../entities/users/util';
 import {
@@ -532,6 +532,7 @@ let persisted = false;
 export async function waitUntilTablesAreCreated() {
   if (persisted) return;
   await persistTablesToTheDatabase();
+  await addNewTokenInCurrencyToZhit('1', '1', '0x001');
   persisted = true;
 }
 
@@ -563,4 +564,16 @@ export async function startAuction(auctionId: number) {
     'start',
     +auction.startDate * 1000,
   );
+}
+
+export async function addNewTokenInCurrencyToZhit(
+  amount: string,
+  zhits: string,
+  currency: string,
+) {
+  await CurrencyToZhit.create({
+    amount,
+    zhits,
+    currency,
+  });
 }
