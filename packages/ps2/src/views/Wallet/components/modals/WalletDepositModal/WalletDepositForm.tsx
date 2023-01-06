@@ -9,6 +9,7 @@ import {
   ZigSelect,
   CloneIcon,
   ZigTypography,
+  ZigCoinIcon,
 } from '@zignaly-open/ui';
 import copy from 'copy-to-clipboard';
 import { DepositFormData, WalletDepositModalProps } from './types';
@@ -16,45 +17,27 @@ import { Box, Grid } from '@mui/material';
 import { NumericFormat } from 'react-number-format';
 import CenteredLoader from 'components/CenteredLoader';
 import { useToast } from 'util/hooks/useToast';
-import CoinOption, { filterOptions } from '../../forms/atoms/CoinOption';
 import { useDepositInfoQuery } from 'apis/wallet/api';
 import { useCurrentUser } from 'apis/user/use';
+import ChainIcon from 'components/ChainIcon';
+import ChainOption, { filterOptions } from './atoms/ChainOption';
 
 function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
-  const { t } = useTranslation('deposit-crypto');
-  // const { data: balances, isFetching: isFetchingBalances } = useCoinBalances({
-  //   convert: true,
-  // });
-  // const { data: coins, isFetching: isFetchingCoins } = useExchangeCoinsList();
-  // const { exchangeType } = useActiveExchange();
-  const { userId } = useCurrentUser();
+  const { t } = useTranslation(['deposit-crypto', 'wallet']);
   const toast = useToast();
 
-  const { handleSubmit, control, watch, setValue } = useForm<DepositFormData>({
-    mode: 'onChange',
-    reValidateMode: 'onChange',
+  const { control, watch } = useForm<DepositFormData>({
     defaultValues: {
       coin: selectedCoin,
     },
   });
 
-  const coin = watch('coin');
   const network = watch('network');
-
-  const coinOptions = useMemo(
-    () =>
-      Object.keys(coins).map((c) => ({
-        value: c,
-        label: <CoinOption coin={c} name={coins[c].name} />,
-      })),
-    [coins],
-  );
-  const networkOptions =
-    coin &&
-    coins[coin].networks?.map((n) => ({
-      label: n.name,
-      value: n.network,
-    }));
+  const networkOptions = coins[selectedCoin]?.networks?.map((n) => ({
+    label: <ChainOption network={n.network} name={n.name} />,
+    value: n.network,
+    name: n.name,
+  }));
 
   // const coinOptions = useMemo(
   //   () =>
@@ -80,14 +63,14 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
 
   const { isFetching: loading, data: depositInfo } = useDepositInfoQuery(
     {
-      coin,
+      coin: selectedCoin,
       network,
     },
-    { skip: !coin || !network },
+    { skip: !network },
   );
 
   // const coinObject = coin && coinOptions?.find((x) => x.value === coin);
-  const coinObject = coin && coins[coin];
+  const coinObject = coins[selectedCoin];
   const networkObject =
     network && coinObject?.networks?.find((x) => x.network === network);
 
@@ -114,34 +97,28 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
   // }
 
   return (
-    <form onSubmit={handleSubmit(() => {})}>
+    <form>
       <Box mt={1} mb={1}>
-        <ZigTypography>{t('description', { coin })}</ZigTypography>
+        <ZigTypography>
+          {t('deposit.description', {
+            coin: selectedCoin,
+            ns: 'wallet',
+          })}
+        </ZigTypography>
       </Box>
 
       <Grid container>
-        <Grid item xs={12} md={6} pt={3}>
-          <Controller
-            name='coin'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <ZigSelect
-                menuPlacement='auto'
-                menuShouldScrollIntoView={false}
-                menuPosition='fixed'
-                menuShouldBlockScroll
-                label={t('coinSelector.label')}
-                placeholder={t('coinSelector.placeholder')}
-                options={coinOptions}
-                filterOption={filterOptions}
-                {...field}
-              />
-            )}
+        <Box display='flex' gap='11px' pt={3}>
+          <ZigCoinIcon
+            size='small'
+            coin={selectedCoin}
+            name={coinObject?.name}
+            bucket='coins'
           />
-        </Grid>
+          <ZigTypography fontWeight={600}>{selectedCoin}</ZigTypography>&nbsp;
+        </Box>
 
-        {!!coin && (
+        {/* {!!coinObject && (
           <Grid
             item
             xs={12}
@@ -169,7 +146,7 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
                   value={coinObject?.balance ?? ''}
                 />
               </ZigTypography>{' '}
-              {coin ?? ''}
+              {selectedCoin}
             </ZigTypography>
             <ZigTypography
               variant='body2'
@@ -187,10 +164,10 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
                   displayType={'text'}
                 />
               </ZigTypography>{' '}
-              {coin ?? ''}
+              {selectedCoin}
             </ZigTypography>
           </Grid>
-        )}
+        )} */}
 
         <Grid item xs={12} pt={3}>
           <Controller
@@ -206,6 +183,7 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
                 placeholder={t('networkSelector.placeholder')}
                 {...field}
                 options={networkOptions}
+                filterOption={filterOptions}
               />
             )}
           />
@@ -289,9 +267,9 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
                       label={t('depositQR.address', {
                         coin: coinObject?.name,
                       })}
-                      url={depositInfo.address}
+                      url={depositInfo?.address}
                     />
-                    {depositInfo.memo && (
+                    {depositInfo?.memo && (
                       <ZignalyQRCode
                         label={t('depositQR.memo', { coin: coinObject?.name })}
                         url={depositInfo?.memo}

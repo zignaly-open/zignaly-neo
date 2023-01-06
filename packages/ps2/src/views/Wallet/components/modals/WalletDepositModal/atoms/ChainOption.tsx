@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { CoinIcon, ZigCoinIcon, ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
+import ChainIcon from 'components/ChainIcon';
 
 export const filterOptions = (
   option: {
@@ -20,16 +21,13 @@ export const filterOptions = (
   return true;
 };
 
-const CoinOption = ({ coin, name }: { coin: string; name: string }) => {
+const ChainOption = ({ network, name }: { network: string; name: string }) => {
   return (
-    <Box display='flex' alignItems='center'>
-      <Box mr='11px'>
-        <ZigCoinIcon size={'small'} coin={coin} name={name} />
-      </Box>
-      <ZigTypography fontWeight={600}>{coin}</ZigTypography>&nbsp;
+    <Box display='flex' alignItems='center' gap='11px'>
+      <ChainIcon network={network} />
       <ZigTypography>{name}</ZigTypography>
     </Box>
   );
 };
 
-export default CoinOption;
+export default ChainOption;

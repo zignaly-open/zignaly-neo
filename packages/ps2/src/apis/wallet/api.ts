@@ -36,7 +36,8 @@ export const api = createApi({
 
     depositInfo: builder.query<DepositInfo, { network: string; coin: string }>({
       query: ({ coin, network }) => ({
-        url: `/generate-address/${network}/currency/${coin}`,
+        url: `${process.env.REACT_APP_WALLET_API}/generate-address/${network}/currency/${coin}`,
+        method: 'POST',
       }),
     }),
 
@@ -88,7 +89,7 @@ export const api = createApi({
       }
     >({
       query: ({ exchangeInternalId }) => ({
-        url: `/user/exchanges/${exchangeInternalId}/transactions_history_csv`,
+        url: `${process.env.REACT_APP_WALLET_API}/user/exchanges/${exchangeInternalId}/transactions_history_csv`,
         method: 'POST',
       }),
     }),

@@ -116,6 +116,7 @@ const WalletTopPanel = ({
               showModal(WalletDepositModal, {
                 ctaId: 'deposit-zig',
                 coins,
+                selectedCoin: 'ZIG',
               });
               // track('deposit-zig');
               // showBuyZIG(true);
