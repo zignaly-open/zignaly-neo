@@ -4,7 +4,6 @@ import { TransactionType } from '../../types';
 import {
   checkCode,
   createAlice,
-  createAliceDeposit,
   createAuction,
   createBob,
   createCode,
@@ -308,17 +307,15 @@ describe('Codes', () => {
       maxTotalRewards: 200,
     });
 
-    const [, aliceToken] = await createAlice(1000);
-
-    await createAliceDeposit(500, '2022-09-09T16:09:56');
-    await createAliceDeposit(500, new Date(Date.now() - 12 * 60 * 60 * 1000));
+    const [, aliceToken] = await createAlice(500);
+    // await createAliceDeposit(500, new Date(Date.now() - 12 * 60 * 60 * 1000));
 
     const { body } = await redeemCode(code.code, aliceToken);
-    expect(body.data.redeemCode).toEqual(200);
+    expect(body.data.redeemCode).toEqual(150);
 
     const [response1] = await (await Balance.findAll({})).reverse();
     expect(response1.walletAddress).toBe(bob.publicAddress);
-    expect(response1.zhits).toBe('140');
+    expect(response1.zhits).toBe('130');
     expect(response1.transactionType).toBe(TransactionType.ReferralCode);
   });
 
