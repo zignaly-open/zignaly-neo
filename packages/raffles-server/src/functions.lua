@@ -1,25 +1,25 @@
 #!lua name=zigbids
 
 local function update_balance(keys, args)
-  local cybavoBalanceKey = keys[1]
+  local transactionBalanceKey = keys[1]
   local currentBalanceKey = keys[2]
   local id = args[1]
-  local newCybavoBalance = tonumber(args[2])
-  local cybavoBalance = tonumber(redis.call('HGET', cybavoBalanceKey, id))
+  local newTransactionBalance = tonumber(args[2])
+  local transactionBalance = tonumber(redis.call('HGET', transactionBalanceKey, id))
   local currentBalance = tonumber(redis.call('HGET', currentBalanceKey, id))
 
-  -- Don't do anything if cached cybavo balance is up to date
-  if newCybavoBalance == cybavoBalance then
-    return currentBalance or cybavoBalance
+  -- Don't do anything if cached transaction balance is up to date
+  if newTransactionBalance == transactionBalance then
+    return currentBalance or transactionBalance
   end
 
-  -- Update cached cybavo balance
-  redis.call('HSET', cybavoBalanceKey, id, newCybavoBalance)
+  -- Update cached transaction balance
+  redis.call('HSET', transactionBalanceKey, id, newTransactionBalance)
 
-  local newCurrentBalance = newCybavoBalance
+  local newCurrentBalance = newTransactionBalance
   if currentBalance then
-    -- Increase the current balance by the difference of cybavo balances
-    newCurrentBalance = currentBalance + (newCybavoBalance - cybavoBalance)
+    -- Increase the current balance by the difference of transaction balances
+    newCurrentBalance = currentBalance + (newTransactionBalance - transactionBalance)
   end
   -- Set cached current balance
   redis.call('HSET', currentBalanceKey, id, newCurrentBalance)

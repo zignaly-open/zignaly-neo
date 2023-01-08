@@ -5,7 +5,7 @@ import { generateUserNonce, User } from './model';
 import jwt from 'jsonwebtoken';
 import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from './constants';
-import { getUserBalance } from '../../cybavo';
+import { getUserBalance } from '../balances/service';
 import { ContextUser } from '../../types';
 import redisService from '../../redisService';
 

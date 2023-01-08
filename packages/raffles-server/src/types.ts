@@ -24,13 +24,13 @@ export type ApolloContext = {
   };
 };
 
-export type CybavoOperations = {
+export type TransactionOperations = {
   internal_type: string;
   amount: number;
   created_at: string;
 }[];
-export type CybavoBalance = Record<string, { balance: string }>;
-export type CybavoTransfer = { transaction_id: string };
+export type TransactionBalance = Record<string, { balance: string }>;
+export type TransactionTransfer = { transaction_id: string };
 
 export enum TransactionType {
   Deposit = 'ZigBids Deposit',
