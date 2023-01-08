@@ -308,7 +308,6 @@ describe('Codes', () => {
     });
 
     const [, aliceToken] = await createAlice(500);
-    // await createAliceDeposit(500, new Date(Date.now() - 12 * 60 * 60 * 1000));
 
     const { body } = await redeemCode(code.code, aliceToken);
     expect(body.data.redeemCode).toEqual(150);

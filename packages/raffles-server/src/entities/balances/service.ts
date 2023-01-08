@@ -9,7 +9,7 @@ import {
   ImportParams,
   Import,
 } from './types';
-// import BN from 'bignumber.js';
+
 import { TransactionType } from '../../types';
 import { Code } from '../codes/model';
 
@@ -229,7 +229,7 @@ export const importBalance = async ({
   return tx;
 };
 
-export const importBalanceBulk = async (balanceRowsImports: BalanceType[]) => {
+export const importBalanceBulk = (balanceRowsImports: BalanceType[]) => {
   if (balanceRowsImports.length === 0) {
     throw new Error('No rows to import from transaction');
   }
