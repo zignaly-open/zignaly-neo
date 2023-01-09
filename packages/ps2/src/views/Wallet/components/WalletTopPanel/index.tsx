@@ -28,6 +28,7 @@ import { useUpdateEffect } from 'react-use';
 import { useZModal } from 'components/ZModal/use';
 import WalletDepositModal from '../modals/WalletDepositModal';
 import BuyZigModal from '../modals/BuyZigModal';
+import WalletWithdrawModal from '../modals/WalletWithdrawModal';
 
 const WalletTopPanel = ({
   balance = 0,
@@ -128,8 +129,11 @@ const WalletTopPanel = ({
             startIcon={<Remove />}
             variant='outlined'
             onClick={() => {
-              // track('withdraw-zig');
-              // showBuyZIG(true);
+              showModal(WalletWithdrawModal, {
+                ctaId: 'withdraw-zig',
+                coins,
+                selectedCoin: 'ZIG',
+              });
             }}
           >
             {t('withdraw')}

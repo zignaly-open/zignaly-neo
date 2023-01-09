@@ -74,40 +74,10 @@ function BuyZIGForm({ coins, selectedCoin }: WalletDepositModalProps) {
   //     return;
   //   }
 
-  //   const res = [] as BalanceExchange[];
-
-  //   await Promise.all(
-  //     zignalyExchangeAccountsActivated.map(async (account) => {
-  //       return await tradeApi
-  //         .exchangeAssetsGet({ internalId: account.internalId })
-  //         .then((data) => {
-  //           res.push({
-  //             exchangeId: account.internalId,
-  //             balance: parseFloat(data.USDT.balanceFree),
-  //             networks: data.USDT.networks,
-  //             name: account.internalName,
-  //           });
-  //         })
-  //         .catch((e) => {
-  //           dispatch(showErrorAlert(e));
-  //         });
-  //     }),
-  //   );
-  //   setAccountsBalances(res);
-  //   const hasUSDT = res.find((a) => a.balance > 0);
-  //   setShowDeposit(!hasUSDT);
-  // };
-
+  // todo
   useEffect(() => {
     // fetchBalances();
   }, [exchanges]);
-
-  // const network = watch('network');
-  // const exchangeAccountOptions = coins[selectedCoin]?.networks?.map((n) => ({
-  //   label: <ChainOption network={n.network} name={n.name} />,
-  //   value: n.network,
-  //   name: n.name,
-  // }));
 
   return (
     <form>

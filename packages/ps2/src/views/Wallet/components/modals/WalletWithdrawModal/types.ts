@@ -1,4 +1,5 @@
 import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
+import { WalletCoins } from 'apis/wallet/types';
 
 export type WithdrawFormData = {
   coin: string;
@@ -9,7 +10,8 @@ export type WithdrawFormData = {
 };
 
 export type WalletWithdrawModalProps = {
-  selectedCoin?: string;
+  coins: WalletCoins;
+  selectedCoin: string;
   setStep: (value: '' | 'confirm' | 'success') => void;
   close: () => void;
 };

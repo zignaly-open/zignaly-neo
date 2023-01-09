@@ -1,36 +1,28 @@
 import { CoinNetwork } from 'apis/coin/types';
+import { WalletNetwork } from 'apis/wallet/types';
 import BigNumber from 'bignumber.js';
 import { numericFormatter } from 'react-number-format';
 import i18n from 'util/i18next';
 import { precisionNumberToDecimals } from 'util/numbers';
+import { inputAmountTokenMaxValidation } from 'util/validation';
 import * as yup from 'yup';
-import {
-  decimalsValidation,
-  inputAmountTokenMaxValidation,
-} from '../../../../../../util/validation';
 
-export const WithdrawValidation = (network: CoinNetwork) => {
-  const amountDecimalsValidation =
-    network?.integerMultiple &&
-    decimalsValidation(precisionNumberToDecimals(network.integerMultiple));
-
+export const WithdrawValidation = (
+  network: WalletNetwork,
+  min: number,
+  coin: string,
+) => {
   return yup.object({
     amount: inputAmountTokenMaxValidation.concat(
       yup.object().shape({
-        value: yup
-          .string()
-          .test(
-            'min',
-            i18n.t('withdraw-crypto:validation.minWithdrawal', {
-              value:
-                network && numericFormatter(network.withdrawMin.toString(), {}),
-              coin: network?.coin,
-            }),
-            (val) =>
-              !network ||
-              new BigNumber(val).isGreaterThanOrEqualTo(network.withdrawMin),
-          )
-          .concat(amountDecimalsValidation),
+        value: yup.string().test(
+          'min',
+          i18n.t('withdraw-crypto:validation.minWithdrawal', {
+            value: network && numericFormatter(min.toString(), {}),
+            coin,
+          }),
+          (val) => !min || new BigNumber(val).isGreaterThan(min),
+        ),
       }),
     ),
     network: yup.string().required(),

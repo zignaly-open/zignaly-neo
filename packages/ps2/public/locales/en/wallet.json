@@ -85,6 +85,9 @@
       "noCrypto": "I don't have any crypto yet",
       "more": "Deposit More {{coin}}"
     },
+    "wallet": {
+      "notAvailable": "This network is currently not available"
+    },
     "from": "Swap from",
     "to": "Swap to",
     "done": "Bought {coin} successfully.",

@@ -9,6 +9,7 @@ import {
   TransactionType,
   WalletBalances,
   WalletCoins,
+  WithdrawFeeInfo,
 } from './types';
 import baseQuery from '../baseQuery';
 import { isString, pickBy } from 'lodash';
@@ -45,27 +46,26 @@ export const api = createApi({
     withdraw: builder.mutation<
       { id: string },
       {
-        exchangeInternalId: string;
         network: string;
-        asset: string;
-        tag: string;
+        memo: string;
+        coin: string;
         address: string;
         amount: string;
+        fee: string;
         code?: string;
       }
     >({
-      query: ({ exchangeInternalId, ...rest }) => ({
-        url: `/user/exchanges/${exchangeInternalId}/withdraw`,
-        method: 'POST',
+      query: ({ network, coin, ...rest }) => ({
+        url: `${process.env.REACT_APP_WALLET_API}/make-withdraw/${network}/currency/${coin}`,
         body: rest,
       }),
       // invalidateTags delayed to allow for the withdrawal to be processed
-      async onQueryStarted(_, { dispatch, queryFulfilled }) {
-        await queryFulfilled;
-        setTimeout(() => {
-          dispatch(api.util.invalidateTags(['Balance']));
-        }, 5000);
-      },
+      // async onQueryStarted(_, { dispatch, queryFulfilled }) {
+      //   await queryFulfilled;
+      //   setTimeout(() => {
+      //     dispatch(api.util.invalidateTags(['Balance']));
+      //   }, 5000);
+      // },
     }),
 
     transactionsHistory: builder.query<
@@ -108,6 +108,19 @@ export const api = createApi({
         body: params,
       }),
     }),
+
+    generateWithdrawFee: builder.query<
+      WithdrawFeeInfo,
+      {
+        network: string;
+        coin: string;
+      }
+    >({
+      query: ({ network, coin }) => ({
+        url: `${process.env.REACT_APP_WALLET_API}/generate-fee/${network}/currency/${coin}`,
+        method: 'POST',
+      }),
+    }),
   }),
 });
 
@@ -118,4 +131,6 @@ export const {
   useTransactionsHistoryQuery,
   useDepositInfoQuery,
   useGenerateBuyPriceQuery,
+  useGenerateWithdrawFeeQuery,
+  useWithdrawMutation,
 } = api;

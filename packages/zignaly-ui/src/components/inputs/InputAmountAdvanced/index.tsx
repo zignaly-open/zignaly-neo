@@ -21,6 +21,7 @@ import { changeEvent } from "utils/event";
 import { useDeepCompareEffect, useUpdateEffect } from "react-use";
 import ZigPriceLabel from "components/display/ZigPriceLabel";
 import { Box } from "@mui/material";
+import ZigCoinIcon from "components/display/ZigCoinIcon";
 
 // FIXME this component still needs Jesus
 function InputAmount({
@@ -38,6 +39,7 @@ function InputAmount({
   fullWidth,
   showMaxButton = true,
   showBalance = true,
+  iconBucket,
 }: InputAmountProps) {
   const {
     field: { ref, onChange, onBlur, value },
@@ -100,7 +102,12 @@ function InputAmount({
         <InputContainer>
           <Side>
             {value?.token?.id && tokens.length < 2 && (
-              <CoinIcon name={value?.token.id} size={CoinSizes.SMALL} coin={value?.token.id} />
+              <ZigCoinIcon
+                name={value?.token.id}
+                size={CoinSizes.SMALL}
+                coin={value?.token.id}
+                bucket={iconBucket}
+              />
             )}
             <InputField>
               <InputValue

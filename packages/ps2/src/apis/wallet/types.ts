@@ -105,3 +105,10 @@ export type PriceInfo = {
   minAmount: string;
   timeForMax: number;
 };
+
+export type WithdrawFeeInfo = {
+  floatFee: string;
+  expiration: number;
+  key: string;
+  feeCurrency: string;
+};

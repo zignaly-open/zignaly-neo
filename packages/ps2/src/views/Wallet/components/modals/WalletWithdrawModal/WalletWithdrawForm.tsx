@@ -8,32 +8,32 @@ import {
   Button,
   ZigInput,
   ZigTypography,
+  ZigCoinIcon,
 } from '@zignaly-open/ui';
 import { WalletWithdrawModalProps, WithdrawFormData } from './types';
 import { Box, Grid } from '@mui/material';
-import {
-  useCoinBalances,
-  useExchangeCoinsList,
-} from '../../../../../../apis/coin/use';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithdrawValidation } from './validations';
-import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import CenteredLoader from 'components/CenteredLoader';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
-import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import LabelValueLine from './atoms/LabelValueLine';
+import {
+  useBalanceQuery,
+  useGenerateWithdrawFeeQuery,
+  useWithdrawMutation,
+} from 'apis/wallet/api';
+import WithdrawConfirmForm from 'views/Dashboard/components/ManageInvestmentModals/forms/WithdrawConfirmForm';
+import { useCheck2FA } from 'apis/user/use';
 
 function WalletWithdrawForm({
   setStep,
   selectedCoin,
   close,
+  coins,
 }: WalletWithdrawModalProps) {
   const { t } = useTranslation('withdraw-crypto');
-  const { data: balances, isLoading: isLoadingBalances } = useCoinBalances({
-    convert: true,
-  });
-  const { data: coins, isLoading: isLoadingCoins } = useExchangeCoinsList();
   const [confirmationData, setConfirmationData] = useState<WithdrawFormData>();
+  const { data: balances, isLoading: isLoadingBalances } = useBalanceQuery();
 
   const {
     handleSubmit,
@@ -51,88 +51,103 @@ function WalletWithdrawForm({
       tag: '',
     },
     resolver: (data, context, options) =>
-      yupResolver(WithdrawValidation(networkObject))(data, context, options),
+      yupResolver(
+        WithdrawValidation(
+          networkObject,
+          Number(feeInfo?.floatFee),
+          selectedCoin,
+        ),
+      )(data, context, options),
   });
 
-  const coin = watch('coin') as string;
   const network = watch('network') as string;
 
-  const coinOptions = useMemo(() => {
-    if (!balances || !coins) return [];
-
-    return Object.entries(balances)
-      .filter(
-        ([c, balance]) => parseFloat(balance.balanceTotal) > 0 && coins[c],
-      )
-      .map(([c, balance]) => {
-        const name = coins[c]?.name || '';
-        return {
-          value: c,
-          name,
-          label: <CoinOption coin={c} name={name} />,
-          available: balance?.maxWithdrawAmount || 0,
-          networks: coins[c].networks?.map((n) => ({
+  const coinObject = coins[selectedCoin];
+  const networkObject =
+    network && coinObject?.networks?.find((x) => x.network === network);
+  const networkOptions = useMemo(
+    () =>
+      coinObject
+        ? coinObject.networks?.map((n) => ({
             label: n.name,
             value: n.network,
-            ...n,
-          })),
-        };
-      });
-  }, [balances, coins]);
+          }))
+        : [],
+    [coinObject],
+  );
+  const { data: feeInfo } = useGenerateWithdrawFeeQuery(
+    {
+      network,
+      coin: selectedCoin,
+    },
+    {
+      skip: !network,
+      pollingInterval: 7500,
+    },
+  );
 
-  const coinObject = coin && coinOptions?.find((x) => x.value === coin);
-  const networkObject =
-    network && coinObject?.networks?.find((x) => x.value === network);
+  const [withdraw, withdrawStatus] = useWithdrawMutation();
+
+  const withdraw2FA = useCheck2FA({
+    status: withdrawStatus,
+    action: async (code?: string) => {
+      await withdraw({
+        network: confirmationData.network,
+        coin: confirmationData.coin,
+        address: confirmationData.network,
+        amount: confirmationData.amount.value.toString(),
+        memo: confirmationData.tag,
+        fee: feeInfo.key,
+        ...(code && { code }),
+      }).unwrap();
+      // setStep('success');
+    },
+  });
 
   useEffect(() => {
-    if (coin) {
+    if (coinObject) {
       setValue(
         'network',
-        coinObject.networks.length === 1 ? coinObject.networks[0].value : null,
+        coinObject.networks.length === 1
+          ? coinObject.networks[0].network
+          : null,
         { shouldValidate: true },
       );
-    } else if (coinOptions?.length === 1) {
-      setValue('coin', coinOptions[0].value);
     }
-  }, [coin]);
-
-  useEffect(() => {
-    if (!coin && coinOptions && selectedCoin) {
-      const match = coinOptions.find((x) => x.value === selectedCoin);
-      match && setValue('coin', match?.value);
-    }
-  }, []);
+  }, [networkOptions]);
 
   useEffect(() => {
     const { amount, address } = getValues();
-    if (amount && amount.value !== '') {
+    if (amount.value) {
       trigger('amount');
     }
 
     if (address) {
       trigger('address');
     }
-  }, [network]);
+  }, [network, feeInfo]);
 
-  const canSubmit = isValid && Object.keys(errors).length === 0;
-
-  if (isLoadingCoins || isLoadingBalances) {
+  if (isLoadingBalances) {
     return <CenteredLoader />;
   }
 
   if (confirmationData) {
     return (
       <WithdrawConfirmForm
-        coin={coin}
+        coin={selectedCoin}
         back={() => {
           setConfirmationData(null);
           setStep('');
         }}
         close={close}
-        setStep={setStep}
         {...confirmationData}
-        amount={confirmationData.amount.value.toString()}
-        network={networkObject}
+        amount={Number(confirmationData.amount.value)}
+        networkName={networkObject.name}
+        networkCoin={networkObject.network}
+        action={withdraw2FA}
+        status={withdrawStatus}
+        fee={Number(feeInfo.floatFee)}
+        iconBucket='coins'
       />
     );
   }
@@ -151,24 +166,15 @@ function WalletWithdrawForm({
 
       <Grid container>
         <Grid item xs={12} pt={3}>
-          <Controller
-            name='coin'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <ZigSelect
-                menuPlacement='auto'
-                menuShouldScrollIntoView={false}
-                menuPosition='fixed'
-                menuShouldBlockScroll
-                label={t('coinSelector.label')}
-                placeholder={t('coinSelector.placeholder')}
-                options={coinOptions}
-                filterOption={filterOptions}
-                {...field}
-              />
-            )}
-          />
+          <Box display='flex' gap='11px' pt={3}>
+            <ZigCoinIcon
+              size='small'
+              coin={selectedCoin}
+              name={coinObject?.name}
+              bucket='coins'
+            />
+            <ZigTypography fontWeight={600}>{selectedCoin}</ZigTypography>&nbsp;
+          </Box>
         </Grid>
 
         <Grid item xs={12} pt={3}>
@@ -183,7 +189,7 @@ function WalletWithdrawForm({
                 menuShouldScrollIntoView={false}
                 label={t('networkSelector.label')}
                 placeholder={t('networkSelector.placeholder')}
-                options={coinObject?.networks}
+                options={networkOptions}
                 {...field}
               />
             )}
@@ -192,7 +198,7 @@ function WalletWithdrawForm({
 
         {!!network && !networkObject?.withdrawEnable ? (
           <Box mt={2}>
-            <ErrorMessage text={networkObject?.withdrawDesc} />
+            <ErrorMessage text={t('wallet.withdraw.notAvailable')} />
           </Box>
         ) : (
           <>
@@ -212,17 +218,6 @@ function WalletWithdrawForm({
                 )}
               />
             </Grid>
-
-            {networkObject?.label && (
-              <Box>
-                <ErrorMessage
-                  text={t('withdrawAddress.warning', {
-                    network: networkObject?.label,
-                    coin: coinObject?.name,
-                  })}
-                />
-              </Box>
-            )}
 
             {!!networkObject?.memoRegex && (
               <Grid item xs={12} pt={3}>
@@ -252,10 +247,11 @@ function WalletWithdrawForm({
                   showUnit={true}
                   showBalance={false}
                   placeholder='0.0'
+                  iconBucket='coins'
                   tokens={[
                     {
-                      id: coin,
-                      balance: coinObject.available,
+                      id: selectedCoin,
+                      balance: balances[selectedCoin].availableBalance,
                     },
                   ]}
                   error={t(errors?.amount?.value?.message)}
@@ -263,23 +259,16 @@ function WalletWithdrawForm({
                 <Box mt={1}>
                   <LabelValueLine
                     label={t('amountToWithdraw.labelBalance')}
-                    value={coinObject.available.toString()}
-                    coin={coin}
+                    value={balances[selectedCoin].availableBalance.toString()}
+                    coin={selectedCoin}
                   />
                 </Box>
-                {networkObject && (
-                  <>
-                    <LabelValueLine
-                      label={t('amountToWithdraw.minimum')}
-                      value={networkObject.withdrawMin}
-                      coin={coin}
-                    />
-                    <LabelValueLine
-                      label={t('amountToWithdraw.fee')}
-                      value={networkObject.withdrawFee}
-                      coin={coin}
-                    />
-                  </>
+                {feeInfo && (
+                  <LabelValueLine
+                    label={t('amountToWithdraw.fee')}
+                    value={feeInfo.floatFee}
+                    coin={selectedCoin}
+                  />
                 )}
               </Grid>
             )}
@@ -297,7 +286,7 @@ function WalletWithdrawForm({
                 size={'large'}
                 type={'submit'}
                 caption={t('confirmation.continue')}
-                disabled={!canSubmit}
+                disabled={!isValid || !feeInfo}
               />
             </ModalActions>
           </>
