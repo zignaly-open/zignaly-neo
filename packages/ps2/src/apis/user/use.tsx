@@ -13,6 +13,7 @@ import {
   useLazySessionQuery,
   useLazyUserQuery,
   useLoginMutation,
+  useLogoutMutation,
   useResendCodeMutation,
   useResendCodeNewUserMutation,
   useResendKnownDeviceCodeMutation,
@@ -153,7 +154,9 @@ export const useAuthenticate = (): [
 
 export function useLogout(): () => void {
   const dispatch = useDispatch();
+  const [logoutRequest] = useLogoutMutation();
   return () => {
+    logoutRequest();
     dispatch(logout());
     endLiveSession();
     trackEndSession();
