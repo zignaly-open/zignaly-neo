@@ -94,6 +94,10 @@ const Header = () => {
     userRef.current = currentUser;
   }, [account, currentUser]);
 
+  useEffect(() => {
+    showModal(TransferZigModal);
+  }, []);
+
   return (
     <StickyHeader
       leftElements={[

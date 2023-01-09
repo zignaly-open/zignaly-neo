@@ -6,7 +6,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import theme from 'theme';
 import {
   Button,
-  InputAmount,
+  InputAmount, InputAmountAdvanced,
   TextButton,
   Typography,
   ZignalyIcon,
@@ -16,6 +16,7 @@ import DialogContainer from '../DialogContainer';
 import { Container, InputContainer, StyledErrorOutline } from './styles';
 import { TransferZigModalProps } from './types';
 import SwitchNetworkModal from '../SwitchNetwork';
+import { BigNumber } from 'ethers';
 
 function setReactInputValue(input: HTMLInputElement, value: string) {
   const previousValue = input.value;
@@ -42,7 +43,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
   const { account, activateBrowserWallet, chainId } = useEthers();
   const inputRef = useRef<HTMLInputElement>();
 
-  const balance = useTokenBalance(token, account);
+  const balance = BigNumber.from('212343434312');
   const { isLoading, isError, transfer, isSuccess } = useContract({
     address: address,
   });
@@ -90,7 +91,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
               ref={inputRef}
               label={''}
               value={transferAmount}
-              showMaxButton={true}
+              showMaxButton
               customCoinIcon={<ZignalyIcon width={32} height={32} />}
               // TODO: we should fix types in @zignaly-open/ui
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
