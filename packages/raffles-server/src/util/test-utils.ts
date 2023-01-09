@@ -32,7 +32,6 @@ export async function createAuction(
   const auction = await Auction.create({
     title: 'Test auction',
     description: 'Test auction',
-    monetaryValue: '$100500',
     currentBid: '100',
     bidStep: '1',
     bidFee: '1',

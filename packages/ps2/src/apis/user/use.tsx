@@ -33,7 +33,11 @@ import {
   setUser,
 } from './store';
 import { useDispatch, useSelector } from 'react-redux';
-import { trackEndSession, trackNewSession } from '../../util/analytics';
+import {
+  trackConversion,
+  trackEndSession,
+  trackNewSession,
+} from '../../util/analytics';
 import { endLiveSession, startLiveSession } from '../../util/liveSession';
 import { RootState } from '../store';
 import { useTranslation } from 'react-i18next';
@@ -104,6 +108,7 @@ export const useSignup = (): [
       try {
         const user = await signup(payload).unwrap();
         await startSession({ ...user, emailUnconfirmed: true });
+        trackConversion();
       } finally {
         setLoading(false);
       }
@@ -260,12 +265,10 @@ export function useActivateExchange(): QueryReturnTypeBasic<void> {
 }
 
 export function useCheck2FA({
-  action,
   status,
 }: {
-  action: (code?: string) => void;
   status: QueryReturnTypeBasic<unknown>;
-}) {
+}): (action: (code?: string) => void) => void {
   const { showModal, updateModal } = useZModal();
   const modalId = useRef<null | string>(null);
   const { ask2FA } = useCurrentUser();
@@ -280,10 +283,10 @@ export function useCheck2FA({
   }, [status]);
 
   if (!ask2FA) {
-    return action;
+    return (action) => action();
   }
 
-  return () => {
+  return (action) => {
     const modal = showModal(Check2FAModal, {
       status,
       action,

@@ -56,6 +56,8 @@ declare module "@mui/material/styles/createTheme" {
 declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides {
     white: true;
+    danger: true;
+    success: true;
     neutral800: true;
     neutral750: true;
     neutral700: true;
@@ -88,6 +90,8 @@ declare module "@mui/material/Button" {
 declare module "@mui/material/SvgIcon" {
   export interface SvgIconPropsColorOverrides {
     white: true;
+    danger: true;
+    success: true;
     neutral800: true;
     neutral750: true;
     neutral700: true;
