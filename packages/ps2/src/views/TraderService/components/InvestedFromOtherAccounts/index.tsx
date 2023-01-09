@@ -65,7 +65,6 @@ function InvestedFromOtherAccounts({
                 cell: ({ getValue }) => (
                   <ZigTablePriceLabel
                     exact
-                    usd={service.ssc === 'USDT'}
                     coin={service.ssc}
                     value={getValue()}
                   />

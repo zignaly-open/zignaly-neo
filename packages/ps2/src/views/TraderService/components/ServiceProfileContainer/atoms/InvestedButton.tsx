@@ -34,9 +34,8 @@ const BigNumber: React.FC<{
     <BigNumberWrapper>
       <ZigPriceLabel
         value={value}
-        coin={ssc !== 'USDT' ? ssc : undefined}
+        coin={ssc}
         color={green ? 'greenGraph' : red ? 'redGraphOrError' : undefined}
-        usd={ssc === 'USDT'}
       />
     </BigNumberWrapper>
   );
