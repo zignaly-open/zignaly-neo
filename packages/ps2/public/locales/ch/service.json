@@ -27,11 +27,17 @@
     "tags": "CH-Ṫáĝŝ:"
   },
   "periods": {
-    "7d": "CH-Wëëk",
-    "30d": "CH-Ṁöńṫĥ",
+    "7d-full": "CH-1 Wëëk",
+    "30d-full": "CH-1 Ṁöńṫĥ",
+    "90d-full": "CH-3 Ṁöńṫĥŝ",
+    "180d-full": "CH-6 Ṁöńṫĥŝ",
+    "365d-full": "CH-1 Yëáѓ",
+    "all-full": "CH-Áll ṫïṁë",
+    "7d": "CH-1 W",
+    "30d": "CH-1 Ṁö",
     "90d": "CH-3 Ṁö",
     "180d": "CH-6 Ṁö",
-    "365d": "CH-1 Yëáѓ",
+    "365d": "CH-1 Y",
     "all": "CH-Áll"
   },
   "other-accounts": {
