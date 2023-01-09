@@ -8,6 +8,7 @@
   "back": "CH-Báĉk",
   "close": "CH-Ĉlöŝë",
   "loading": "CH-Löáḋïńĝ...",
+  "changes-saved": "CH-Ĉĥáńĝëŝ ŝávëḋ ŝüĉĉëŝŝḟülly",
   "coming-soon": {
     "title": "CH-Ĉöṁïńĝ Ŝööń",
     "description": "CH-Ṫĥïŝ ŝëĉṫïöń ïŝ üńḋëѓ ḋëvëlöṗṁëńṫ, yöü wïll ŝëë ïṫ áváïláblë áṫ á láṫëѓ ḋáṫë."
@@ -47,6 +48,7 @@
   "amount": "CH-Áṁöüńṫ",
   "percent": "CH-{{value, prettyNumber}}%",
   "number": "CH-{{value, prettyNumber}}",
+  "name": "CH-Ńáṁë",
   "new-version": "CH-Ńëw vëѓŝïöń, ĉlïĉk ṁë ṫö üṗḋáṫë",
   "infinitely-better": "CH-Yëŝ, ṫĥë ĉüѓѓëńṫ válüë ïŝ ïńḟïńïṫy ṗëѓĉëńṫ bëṫṫëѓ bëĉáüŝë ṫĥë ŝṫáѓṫïńĝ válüë ïŝ 0",
   "infinitely-worse": "CH-Yëŝ, ṫĥë ĉüѓѓëńṫ válüë ïŝ ïńḟïńïṫy ṗëѓĉëńṫ wöѓŝë bëĉáüŝë ṫĥë ŝṫáѓṫïńĝ válüë ïŝ 0",

@@ -1,11 +1,16 @@
 {
   "deposit": "CH-Ḋëṗöŝïṫ",
   "edit": "CH-Ëḋïṫ",
+  "confirm": "CH-Ĉöńḟïѓṁ",
+  "delete": "CH-Ḋëlëṫë",
   "save": "CH-Ŝávë",
   "withdraw": "CH-Wïṫĥḋѓáw",
   "read-more": "CH-Ѓëáḋ Ṁöѓë",
   "read-less": "CH-Ѓëáḋ Lëŝŝ",
   "cancel": "CH-Ĉáńĉël",
+  "continue": "CH-Ĉöńṫïńüë",
+  "save-and-close": "CH-Ŝávë áńḋ Ĉlöŝë",
+  "copied": "CH-Ĉöṗïëḋ ṫö ĉlïṗböáѓḋ",
   "proceed": "CH-Ṗѓöĉëëḋ",
   "export": "CH-Ëxṗöѓṫ"
 }
