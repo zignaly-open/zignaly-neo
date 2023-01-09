@@ -10,9 +10,11 @@ describe("shortenNumber", () => {
   it("should shorten correctly", () => {
     shortenAndCheck(0, ["", 3]);
     shortenAndCheck(1000000, ["M", 2]);
-    shortenAndCheck(1234567890.123456, ["M", 1]);
+    shortenAndCheck(1234567890.123456, ["G", 2]);
     shortenAndCheck(1234.123456, ["K", 2]);
     shortenAndCheck(12345.123456, ["K", 1]);
-    shortenAndCheck(12538.1083085 * 100000, ["M", 1]);
+    shortenAndCheck(138.1083085 * 1000_000, ["M", 1]);
+    shortenAndCheck(1.83085 * 1000_000_000, ["G", 2]);
+    shortenAndCheck(13.83085 * 1000_000_000, ["G", 1]);
   });
 });
