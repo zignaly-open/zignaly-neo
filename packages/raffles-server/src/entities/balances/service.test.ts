@@ -13,7 +13,7 @@ import {
   importBalanceBulk,
 } from './service';
 import { getImportBalance } from './utils';
-import { ImportBalanceZhits, UserBalanceZhits, Import } from './types';
+import { UserBalanceZhits, Import } from './types';
 
 describe('Balance service', () => {
   beforeAll(waitUntilTablesAreCreated);
@@ -26,7 +26,7 @@ describe('Balance service', () => {
         zhits: '100',
       });
 
-      const balance: ImportBalanceZhits = await getImportBalance();
+      const balance = await getImportBalance();
       expect(balance.zhits).toEqual('100');
     });
 
@@ -44,7 +44,7 @@ describe('Balance service', () => {
         },
       ]);
 
-      const balance: ImportBalanceZhits = await getImportBalance();
+      const balance = await getImportBalance();
       expect(balance.zhits).toEqual('2000');
     });
   });
