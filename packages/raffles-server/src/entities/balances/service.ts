@@ -172,7 +172,7 @@ export const deposit = async ({
     throw new Error('Blockchain is required');
   }
 
-  const currencies = await CurrencyToZhit.findAll({
+  const currencyChange = await CurrencyToZhit.findOne({
     where: {
       currency,
     },
@@ -191,8 +191,8 @@ export const deposit = async ({
   const tx = await addTransaction({
     walletAddress,
     zhits: `${
-      currencies.length > 0
-        ? getAmountOfZhits(currencies[0].amount, currencies[0].zhits, amount)
+      currencyChange
+        ? getAmountOfZhits(currencyChange.amount, currencyChange.zhits, amount)
         : amount
     }`,
     amount,

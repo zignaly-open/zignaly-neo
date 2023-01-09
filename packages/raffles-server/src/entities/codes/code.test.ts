@@ -312,10 +312,11 @@ describe('Codes', () => {
     const { body } = await redeemCode(code.code, aliceToken);
     expect(body.data.redeemCode).toEqual(150);
 
-    const [response1] = await (await Balance.findAll({})).reverse();
-    expect(response1.walletAddress).toBe(bob.publicAddress);
-    expect(response1.zhits).toBe('130');
-    expect(response1.transactionType).toBe(TransactionType.ReferralCode);
+    const response1 = await Balance.findAll({});
+    const tx = response1.pop();
+    expect(tx.walletAddress).toBe(bob.publicAddress);
+    expect(tx.zhits).toBe('130');
+    expect(tx.transactionType).toBe(TransactionType.ReferralCode);
   });
 
   it('should apply benefitDepositFactor up to maxTotalBenefits', async () => {
