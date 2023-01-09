@@ -28,7 +28,7 @@ function ModalContainer({
               />
             </HeaderButton>
           )}
-          <Title variant='h1' color='neutral100'>
+          <Title variant='h1' sx={{ paddingRight: '20px' }} color='neutral100'>
             {title}
           </Title>
         </Inline>

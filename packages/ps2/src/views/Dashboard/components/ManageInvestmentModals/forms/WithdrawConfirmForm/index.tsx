@@ -25,7 +25,10 @@ const WithdrawConfirmForm = ({
 
   const withdraw2FA = useCheck2FA({
     status: withdrawStatus,
-    action: async (code?: string) => {
+  });
+
+  const performWithdraw2FA = () =>
+    withdraw2FA(async (code?: string) => {
       await withdraw({
         asset: coin,
         network: network.network,
@@ -36,8 +39,7 @@ const WithdrawConfirmForm = ({
         code,
       }).unwrap();
       setStep('success');
-    },
-  });
+    });
 
   if (withdrawStatus.isSuccess) {
     return (
@@ -145,7 +147,7 @@ const WithdrawConfirmForm = ({
           {t('common:back')}
         </ZigButton>
         <ZigButton
-          onClick={() => withdraw2FA()}
+          onClick={performWithdraw2FA}
           variant='contained'
           size='large'
           loading={withdrawStatus.isLoading}
