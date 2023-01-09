@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import { useController } from "react-hook-form";
 import {
   InputContainer,
@@ -18,7 +18,7 @@ import Typography from "components/display/Typography";
 import CoinIcon, { CoinSizes } from "../../display/CoinIcon";
 import { InputAmountProps, TokenItem } from "./types";
 import { changeEvent } from "utils/event";
-import { useUpdateEffect } from "react-use";
+import { useDeepCompareEffect, useUpdateEffect } from "react-use";
 import ZigPriceLabel from "components/display/ZigPriceLabel";
 import { Box } from "@mui/material";
 
@@ -50,13 +50,18 @@ function InputAmount({
     },
   });
 
-  useUpdateEffect(() => {
+  const didMountRef = useRef(false);
+
+  useDeepCompareEffect(() => {
     // Update token when prop changes
-    onChange({
-      token: tokens[0],
-      value: "",
-    });
-  }, [tokens[0].id]);
+    if (didMountRef.current) {
+      onChange({
+        token: tokens[0],
+        value: "",
+      });
+    }
+    didMountRef.current = true;
+  }, [tokens]);
 
   const onValueChange: typeof onChange = (e) => {
     onChange({

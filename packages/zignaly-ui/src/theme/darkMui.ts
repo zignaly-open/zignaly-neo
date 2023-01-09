@@ -207,6 +207,14 @@ const darkMui = createTheme({
         }),
       },
     },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          fontSize: "14px",
+          backgroundColor: dark.dropDownBackground,
+        },
+      },
+    },
   },
 } as ThemeOptions);
 

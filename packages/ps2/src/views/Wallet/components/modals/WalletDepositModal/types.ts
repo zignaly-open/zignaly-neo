@@ -5,21 +5,6 @@ export type WalletDepositModalProps = {
   coins: WalletCoins;
 };
 
-export type CoinNetworkValue = CoinNetwork & {
-  caption: string;
-};
-
-export type CoinValue = {
-  id: string;
-  caption: string;
-  leftElement: React.ReactElement;
-  inOrders: string;
-  balance: string;
-  available: string;
-  networks: CoinNetworkValue[];
-};
-
 export type DepositFormData = {
-  coin: string;
   network: string;
 };

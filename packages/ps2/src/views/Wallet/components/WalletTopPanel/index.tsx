@@ -27,6 +27,7 @@ import { useCurrentUser } from 'apis/user/use';
 import { useUpdateEffect } from 'react-use';
 import { useZModal } from 'components/ZModal/use';
 import WalletDepositModal from '../modals/WalletDepositModal';
+import BuyZigModal from '../modals/BuyZigModal';
 
 const WalletTopPanel = ({
   balance = 0,
@@ -103,11 +104,12 @@ const WalletTopPanel = ({
           <ZigButton
             variant='contained'
             onClick={() => {
-              // track('buy-zig');
-              // showBuyZIG(true);
+              showModal(BuyZigModal, {
+                ctaId: 'buy-zig',
+              });
             }}
           >
-            {t('buy')}
+            {t('buy.buy')}
           </ZigButton>
           <ZigButton
             variant='contained'
@@ -118,8 +120,6 @@ const WalletTopPanel = ({
                 coins,
                 selectedCoin: 'ZIG',
               });
-              // track('deposit-zig');
-              // showBuyZIG(true);
             }}
           >
             {t('deposit.deposit')}

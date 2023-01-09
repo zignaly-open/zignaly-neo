@@ -96,3 +96,12 @@ export type DepositInfo = {
   currency: string;
   memo: string;
 };
+
+export type PriceInfo = {
+  key: string;
+  price: string;
+  expiration: number;
+  maxAmount: string;
+  minAmount: string;
+  timeForMax: number;
+};

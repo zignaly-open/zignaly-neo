@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import {
@@ -14,12 +14,9 @@ import {
 import copy from 'copy-to-clipboard';
 import { DepositFormData, WalletDepositModalProps } from './types';
 import { Box, Grid } from '@mui/material';
-import { NumericFormat } from 'react-number-format';
 import CenteredLoader from 'components/CenteredLoader';
 import { useToast } from 'util/hooks/useToast';
 import { useDepositInfoQuery } from 'apis/wallet/api';
-import { useCurrentUser } from 'apis/user/use';
-import ChainIcon from 'components/ChainIcon';
 import ChainOption, { filterOptions } from './atoms/ChainOption';
 
 function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
@@ -27,9 +24,7 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
   const toast = useToast();
 
   const { control, watch } = useForm<DepositFormData>({
-    defaultValues: {
-      coin: selectedCoin,
-    },
+    defaultValues: {},
   });
 
   const network = watch('network');
@@ -182,7 +177,7 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
                 label={t('networkSelector.label')}
                 placeholder={t('networkSelector.placeholder')}
                 {...field}
-                options={networkOptions}
+                options={[]}
                 filterOption={filterOptions}
               />
             )}

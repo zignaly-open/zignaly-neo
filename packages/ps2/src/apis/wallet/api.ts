@@ -3,6 +3,7 @@ import {
   CoinBalances,
   CoinDetails,
   DepositInfo,
+  PriceInfo,
   TotalSavings,
   Transactions,
   TransactionType,
@@ -93,6 +94,20 @@ export const api = createApi({
         method: 'POST',
       }),
     }),
+
+    generateBuyPrice: builder.query<
+      PriceInfo,
+      {
+        from: string;
+        to: string;
+      }
+    >({
+      query: (params) => ({
+        url: `${process.env.REACT_APP_WALLET_API}/generate-buy-price`,
+        method: 'POST',
+        body: params,
+      }),
+    }),
   }),
 });
 
@@ -102,4 +117,5 @@ export const {
   useSavingsQuery,
   useTransactionsHistoryQuery,
   useDepositInfoQuery,
+  useGenerateBuyPriceQuery,
 } = api;

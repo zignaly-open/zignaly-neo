@@ -79,6 +79,7 @@ export { ReactComponent as ZignalyLogo } from "assets/images/zignaly-isotype.svg
 export { ReactComponent as GlobeLanguages } from "assets/icons/globe-languages.svg";
 export { ReactComponent as TimeIcon } from "assets/icons/time-icon.svg";
 export { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
+export { ReactComponent as ZignalyExchangeIcon } from "assets/icons/zignaly-exchange-icon.svg";
 
 // Navigation
 import Header from "./components/navigation/Header";
