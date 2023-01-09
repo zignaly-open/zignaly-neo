@@ -43,5 +43,46 @@
   },
   "hardDiconnectWarning": "CH-Yöüѓ ĥáѓḋ ḋïŝĉöńńëĉṫŝ ĥávë ѓëáĉĥëḋ {ṗëѓĉ}%. Ïḟ ĥáѓḋ-ḋïŝĉöńńëĉṫŝ ѓëáĉĥëŝ {ṁáxṖëѓĉ}% öḟ ṫĥë ŝëѓvïĉë ḟüńḋŝ, Žïĝńály wïll ṫákë ĉöńṫѓöl öḟ yöüѓ ŝëѓvïĉë.",
   "previousValue": "CH-Ṗѓëvïöüŝ Válüë:",
-  "loading-arialLabel": "CH-Löáḋïńĝ ṁáńáĝëṁëńṫ"
+  "loading-arialLabel": "CH-Löáḋïńĝ ṁáńáĝëṁëńṫ",
+  "api-keys": {
+    "title": "CH-Ṫѓáḋë wïṫĥ ÁṖÏ",
+    "description": "CH-Ḟöѓ ĉöṁṗlëṫë ṫѓáḋïńĝ ĉöńṫѓöl, ĉöńńëĉṫ ṫö Žïĝńály vïá ṫĥë ÁṖÏ áńḋ ŝëńḋ ṫѓáḋëŝ ḋïѓëĉṫly ḟѓöṁ yöüѓ ṗѓëḟëѓѓëḋ ëxĉĥáńĝë öѓ ṫѓáḋïńĝ áṗṗlïĉáṫïöń. Yöü ĉáń ṁáńáĝë ṗöŝïṫïöńŝ ḟѓöṁ yöüѓ öwń ṫѓáḋïńĝ ṗláṫḟöѓṁ áŝ wëll áŝ ĥëѓë öń ṫĥë <0>ṗöŝïṫïöńŝ ṗáĝë</0>.",
+    "create-key": "CH-Ĉѓëáṫë ÁṖÏ Këy",
+    "no-keys": "CH-Ńö ÁṖÏ këyŝ",
+    "no-keys-description": "CH-Yöü ĥávë ńöṫ ĉѓëáṫëḋ áńy ÁṖÏ këyŝ yëṫ",
+    "manage-keys": "CH-Ṁáńáĝë ÁṖÏ Këyŝ",
+    "api-key": "CH-ÁṖÏ Këy",
+    "api-settings": "CH-ÁṖÏ Ŝëṫṫïńĝŝ",
+    "api-settings-tooltip": "CH-Yöü kńöw ïṫ'ŝ jüŝṫ lïṫṫlë ṫöö láṫë. ÁṖÏ ŝëĉѓëṫ ïŝ ŝĥöwń öńly öńĉë. Ïḟ yöü'vë löŝṫ ïṫ, yöü wïll ĥávë ṫö ѓëĝëńëѓáṫë ṫĥë këy",
+    "cant-disable-read": "CH-Yöü ĉáń ńöṫ ḋïŝáblë ṫĥë ѓëáḋ ṗëѓṁïŝŝïöń",
+    "restrict-ip": "CH-Ѓëŝṫѓïĉṫ ÏṖ",
+    "api-secret": "CH-ÁṖÏ Ŝëĉѓëṫ",
+    "api-secret-explainer": "CH-Öńly vïŝïblë öń këy ĝëńëѓáṫïöń. Ïḟ löŝṫ, yöü wïll ĥávë ṫö ĝëńëѓáṫë á ńëw ÁṖÏ këy",
+    "permission-label": "CH-Ṗëѓṁïŝŝïöńŝ",
+    "permissions": {
+      "read": "CH-Ѓëáḋ",
+      "canTrade": "CH-Ŝṗöṫ ṫѓáḋïńĝ",
+      "marginTrade": "CH-Ṁáѓĝïń ṫѓáḋïńĝ",
+      "futuresTrade": "CH-Ḟüṫüѓëŝ ṫѓáḋïńĝ"
+    },
+    "permissions-enable": {
+      "read": "CH-Ëńáblë ѓëáḋïńĝ",
+      "canTrade": "CH-Ëńáblë ŝṗöṫ ṫѓáḋïńĝ",
+      "marginTrade": "CH-Ëńáblë ṁáѓĝïń ṫѓáḋïńĝ",
+      "futuresTrade": "CH-Ëńáblë ḟüṫüѓëŝ ṫѓáḋïńĝ"
+    },
+    "create-new-key": "CH-Ĉѓëáṫë Ńëw ÁṖÏ Këy",
+    "create-new-key-description": "CH-Ĉѓëáṫë á ńëw ÁṖÏ këy ṫö ĉöńńëĉṫ áńḋ ṫѓáḋë ḟѓöṁ yöüѓ ḟávöѓïṫë ṫѓáḋïńĝ ṗláṫḟöѓṁ.",
+    "edit-key": "CH-Ëḋïṫ ÁṖÏ Këy Ŝëṫṫïńĝŝ",
+    "delete-title": "CH-Ḋëlëṫë {{title}} ÁṖÏ Këy",
+    "delete-description": "CH-Ṫĥïŝ áĉṫïöń ïŝ ïѓѓëvëѓŝïblë. Ṗlëáŝë ĉöńḟïѓṁ.",
+    "ip-restrictions": "CH-ÏṖ ѓëŝṫѓïĉṫïöńŝ",
+    "ip-restrictions-none": "CH-Üńѓëŝṫѓïĉṫëḋ",
+    "ip-restrictions-invalid": "CH-Ïńválïḋ ïṗ ḟöѓṁáṫ",
+    "ip-restrictions-ranges": "CH-Ŝöѓѓy wë ḋö ńöṫ ŝüṗṗöѓṫ ÏṖ ѓáńĝëŝ",
+    "ip-restrictions-duplicates": "CH-Ŝöṁë ïṗŝ áѓë lïŝṫëḋ ṫwïĉë, ṗlëáŝë ѓëṁövë ḋüṗlïĉáṫëŝ",
+    "ip-restrictions-allowed": "CH-ÏṖ Áḋḋѓëŝŝëŝ",
+    "ip-restrictions-allowed-explainer": "CH-Wĥëń ëńṫëѓïńĝ ṁöѓë ṫĥáń öńë ÏṖ áḋḋѓëŝŝ, ṗlëáŝë ŝëṗáѓáṫë ṫĥëṁ wïṫĥ ŝṗáĉëŝ",
+    "ip-restrictions-on": "CH-Ѓëŝṫѓïĉṫ áĉĉëŝŝ ṫö ṫѓüŝṫëḋ ÏṖŝ öńly (ѓëĉöṁṁëńḋëḋ)"
+  }
 }
