@@ -156,11 +156,7 @@ export function useLogout(): () => void {
   const dispatch = useDispatch();
   const [logoutRequest] = useLogoutMutation();
   return () => {
-    try {
-      logoutRequest();
-    } catch (e) {
-      throw e;
-    }
+    logoutRequest();
     dispatch(logout());
     endLiveSession();
     trackEndSession();
