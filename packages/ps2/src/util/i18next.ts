@@ -3,21 +3,33 @@ import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import Backend from 'i18next-http-backend';
 import Countries from 'i18n-iso-countries';
+import CountriesTr from 'i18n-iso-countries/langs/tr.json';
+import CountriesPt from 'i18n-iso-countries/langs/pt.json';
+import CountriesEs from 'i18n-iso-countries/langs/es.json';
 import CountriesEn from 'i18n-iso-countries/langs/en.json';
-import enUS from 'date-fns/locale/en-US';
+import dateLocaleEnUs from 'date-fns/locale/en-US';
+import dateLocaleEs from 'date-fns/locale/es';
+import dateLocalePt from 'date-fns/locale/pt';
+import dateLocaleTr from 'date-fns/locale/tr';
 
 Countries.registerLocale(CountriesEn);
+Countries.registerLocale(CountriesPt);
+Countries.registerLocale(CountriesTr);
+Countries.registerLocale(CountriesEs);
 
 // mishka vodka balalayka
 if (CountriesEn.countries.RU)
   CountriesEn.countries.RU = 'Mother Russia' as unknown as string[];
 
-export const supportedLanguages = ['en'];
+export const supportedLanguages = ['en', 'es', 'pt', 'tr'];
 
 if (process.env.REACT_APP_ENABLE_TEST_LANGUAGE) supportedLanguages.push('ch');
 
 export const dateFnsLocaleMapping = {
-  en: enUS,
+  en: dateLocaleEnUs,
+  es: dateLocaleEs,
+  pt: dateLocalePt,
+  tr: dateLocaleTr,
 };
 
 i18n
