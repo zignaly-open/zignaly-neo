@@ -249,31 +249,33 @@ export function useSelectExchange(): (exchangeInternalId: string) => void {
     dispatch(setActiveExchangeInternalId(exchangeInternalId));
 }
 
-export function useActivateExchange(): QueryReturnTypeBasic<void> {
+export function useActivateExchange(
+  exchangeInternalId?: string,
+): QueryReturnTypeBasic<void> {
   const exchange = useActiveExchange();
   const [activate, result] = useActivateExchangeMutation();
   const dispatch = useDispatch();
 
+  const internalId = exchangeInternalId || exchange?.internalId;
+
   useEffect(() => {
-    if (exchange && !exchange.activated) {
+    if (exchangeInternalId || (exchange && !exchange.activated)) {
       activate({
-        exchangeInternalId: exchange.internalId,
+        exchangeInternalId: internalId,
       }).then(() => {
-        dispatch(activateExchange(exchange.internalId));
+        dispatch(activateExchange(internalId));
       });
     }
-  }, [exchange?.internalId]);
+  }, [internalId]);
 
   return result;
 }
 
 export function useCheck2FA({
-  action,
   status,
 }: {
-  action: (code?: string) => void;
   status: QueryReturnTypeBasic<unknown>;
-}) {
+}): (action: (code?: string) => void) => void {
   const { showModal, updateModal } = useZModal();
   const modalId = useRef<null | string>(null);
   const { ask2FA } = useCurrentUser();
@@ -288,10 +290,10 @@ export function useCheck2FA({
   }, [status]);
 
   if (!ask2FA) {
-    return action;
+    return (action) => action();
   }
 
-  return () => {
+  return (action) => {
     const modal = showModal(Check2FAModal, {
       status,
       action,

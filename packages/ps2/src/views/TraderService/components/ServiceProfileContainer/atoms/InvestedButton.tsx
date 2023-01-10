@@ -27,14 +27,16 @@ import OtherAccountsButton from './OtherAccountsButton';
 const BigNumber: React.FC<{
   ssc?: string;
   green?: boolean;
+  shorten?: boolean;
   red?: boolean;
   value: string;
-}> = ({ ssc, green = false, red = false, value }) => {
+}> = ({ ssc, green = false, shorten, red = false, value }) => {
   return (
     <BigNumberWrapper>
       <ZigPriceLabel
         value={value}
         coin={ssc}
+        shorten={shorten}
         color={green ? 'greenGraph' : red ? 'redGraphOrError' : undefined}
       />
     </BigNumberWrapper>
@@ -85,7 +87,7 @@ export const InvestedButtonBase: React.FC<{
       </Typography>
 
       <BigNumberWrapperInvested>
-        <BigNumber ssc={service.ssc} value={investedAmount} green />
+        <BigNumber ssc={service.ssc} shorten value={investedAmount} green />
       </BigNumberWrapperInvested>
       <Box
         sx={{

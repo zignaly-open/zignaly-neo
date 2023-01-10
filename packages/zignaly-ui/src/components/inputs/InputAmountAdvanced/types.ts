@@ -34,4 +34,6 @@ export interface InputAmountProps {
   error?: string | null;
   onInsufficientFundsError?: any;
   additionalLabels?: React.ReactElement;
+  // Overwrite cloudinary icon bucket
+  iconBucket?: string;
 }

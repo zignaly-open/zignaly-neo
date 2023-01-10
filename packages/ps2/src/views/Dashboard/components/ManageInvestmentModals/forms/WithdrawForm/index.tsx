@@ -18,11 +18,13 @@ import {
 import { WithdrawModalProps } from '../../types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithdrawValidation } from './validations';
-import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import CenteredLoader from 'components/CenteredLoader';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import LabelValueLine from './atoms/LabelValueLine';
+import WithdrawConfirmForm from '../WithdrawConfirmForm';
+import { useWithdrawMutation } from 'apis/coin/api';
+import { useActiveExchange, useCheck2FA } from 'apis/user/use';
 
 function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const { t } = useTranslation('withdraw-crypto');
@@ -31,6 +33,25 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   });
   const { data: coins, isLoading: isLoadingCoins } = useExchangeCoinsList();
   const [confirmationData, setConfirmationData] = useState<WithdrawFormData>();
+  const { internalId } = useActiveExchange();
+  const [withdraw, withdrawStatus] = useWithdrawMutation();
+
+  const check2FA = useCheck2FA({
+    status: withdrawStatus,
+  });
+  const withdraw2FA = () =>
+    check2FA(async (code) => {
+      await withdraw({
+        asset: coin,
+        network: confirmationData.network,
+        exchangeInternalId: internalId,
+        address: confirmationData.address,
+        tag: confirmationData.tag,
+        amount: confirmationData.amount.value.toString(),
+        code,
+      }).unwrap();
+      setStep('success');
+    });
 
   const {
     handleSubmit,
@@ -120,16 +141,19 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   if (confirmationData) {
     return (
       <WithdrawConfirmForm
-        coin={coin}
+        action={withdraw2FA}
+        status={withdrawStatus}
         back={() => {
           setConfirmationData(null);
           setStep('');
         }}
-        close={close}
-        setStep={setStep}
         {...confirmationData}
-        amount={confirmationData.amount.value.toString()}
-        network={networkObject}
+        amount={Number(confirmationData.amount.value)}
+        networkName={networkObject.name}
+        networkCoin={networkObject.coin}
+        coin={coin}
+        fee={parseFloat(networkObject.withdrawFee)}
+        close={close}
       />
     );
   }

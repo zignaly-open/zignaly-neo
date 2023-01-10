@@ -1,19 +1,20 @@
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import dark from "./dark";
 
+const {
+  palette: { augmentColor },
+} = createTheme();
+const createColor = (mainColor: string) => augmentColor({ color: { main: mainColor } });
+
 const darkMui = createTheme({
   palette: {
     ...dark,
     mode: "dark",
 
-    primary: {
-      main: dark.highlighted,
-    },
-
-    secondary: {
-      dark: "#191927",
-      main: "#656565",
-    },
+    primary: createColor(dark.highlighted),
+    secondary: createColor(dark.neutral300),
+    danger: createColor(dark.redGraphOrError),
+    success: createColor(dark.greenGraph),
 
     // Used by `getContrastText()` to maximize the contrast between
     // the background and the text.
@@ -88,17 +89,21 @@ const darkMui = createTheme({
           minWidth: "76px",
         },
         contained: {
-          background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
           boxShadow: "0px 12px 16px -8px rgba(25, 25, 39, 0.36)",
           transition: "all 0.3s linear",
+        },
+        containedPrimary: {
+          background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
           "&:hover, &.MuiButton-active": {
             background: "linear-gradient(rgba(20, 156, 173, 0.64),rgba(69, 64, 193, 0.64))",
           },
         },
         outlined: {
+          transition: "all 0.2s linear",
+        },
+        outlinedSecondary: {
           borderColor: dark.neutral600,
           color: dark.neutral300,
-          transition: "all 0.2s linear",
           "&:hover, &.MuiButton-active": {
             color: dark.neutral000,
             borderColor: dark.neutral400,
@@ -205,6 +210,14 @@ const darkMui = createTheme({
         root: ({ theme }) => ({
           color: theme.palette.links,
         }),
+      },
+    },
+    MuiTooltip: {
+      styleOverrides: {
+        tooltip: {
+          fontSize: "14px",
+          backgroundColor: dark.dropDownBackground,
+        },
       },
     },
   },

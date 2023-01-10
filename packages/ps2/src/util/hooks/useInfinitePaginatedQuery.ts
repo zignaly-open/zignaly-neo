@@ -1,6 +1,7 @@
 import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
+import { isArray } from 'lodash';
 import { useState, useEffect, useRef } from 'react';
-import { useUpdateEffect } from 'react-use';
+import { useDeepCompareEffect, useUpdateEffect } from 'react-use';
 
 export type PaginationMetadata = {
   from: string;
@@ -9,7 +10,7 @@ export type PaginationMetadata = {
 
 export interface InfiniteQueryResponse<T> {
   items: T[];
-  metadata: PaginationMetadata;
+  metadata?: PaginationMetadata;
 }
 
 const useInfinitePaginatedQuery = (
@@ -17,26 +18,35 @@ const useInfinitePaginatedQuery = (
   useGetDataListQuery: UseQuery<any>,
   params: Record<string, string | number> & { limit?: number },
   pageIndex: number,
+  hasMetadata: boolean,
 ) => {
   // Keep params as reference so we don't trigger a refresh when they change
   const localParams = useRef(params);
   const { limit = 10 } = localParams.current;
   const [localPage, setLocalPage] = useState({ page: 1, id: '' });
   const [combinedData, setCombinedData] = useState([]);
+
   const queryResponse = useGetDataListQuery({
     ...localParams.current,
     limit,
-    from: localPage.id,
+    ...(hasMetadata
+      ? { from: localPage.id }
+      : { offset: (localPage.page - 1) * limit }),
   });
-  const { items: fetchData, metadata } =
-    (queryResponse?.data as InfiniteQueryResponse<
-      typeof useGetDataListQuery
-    >) || {};
 
-  useEffect(() => {
-    if (localPage.page === 1) setCombinedData(fetchData);
-    else setCombinedData((previousData) => [...previousData, ...fetchData]);
-  }, [fetchData]);
+  type InfiniteQueryResponseType = InfiniteQueryResponse<
+    typeof useGetDataListQuery
+  >;
+  const data = queryResponse.data
+    ? isArray(queryResponse.data)
+      ? queryResponse.data
+      : (queryResponse.data as InfiniteQueryResponseType).items
+    : [];
+
+  useDeepCompareEffect(() => {
+    if (localPage.page === 1) setCombinedData(data);
+    else setCombinedData((previousData) => [...previousData, ...data]);
+  }, [data]);
 
   const refresh = () => {
     setLocalPage({ page: 1, id: '' });
@@ -48,20 +58,23 @@ const useInfinitePaginatedQuery = (
   }, Object.values(params));
 
   useEffect(() => {
-    if (!queryResponse.isFetching && fetchData.length < pageIndex * limit + 1) {
+    if (!queryResponse.isFetching && data.length < pageIndex * limit + 1) {
       fetchMore();
     }
   }, [pageIndex]);
 
   const fetchMore = () => {
-    setLocalPage(({ page }) => ({ page: page + 1, id: metadata.from }));
+    setLocalPage(({ page }) => ({
+      page: page + 1,
+      id: (queryResponse.data as InfiniteQueryResponseType).metadata?.from,
+    }));
   };
 
   return {
     ...queryResponse,
     data: combinedData,
     page: localPage.page,
-    hasMore: fetchData?.length === limit,
+    hasMore: data?.length === limit,
     fetchMore,
     refresh,
   };

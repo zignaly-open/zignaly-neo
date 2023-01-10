@@ -43,6 +43,10 @@ export type CoinDetail = {
 };
 
 export type CoinBalances = Record<string, CoinBalance>;
+export type AccountCoinBalances = {
+  exchangeInternalId: string;
+  balances: CoinBalances;
+}[];
 export type CoinDetails = Record<string, CoinDetail>;
 export type AggregatedBalances = Record<string, CoinBalance & CoinDetail>;
 
