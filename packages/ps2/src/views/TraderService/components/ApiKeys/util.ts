@@ -3,6 +3,7 @@ import {
   ServiceApiKeyPermission,
 } from '../../../../apis/serviceApiKey/types';
 import { EditApiKeyFormType } from './types';
+import { ipStringToArray } from './validations';
 
 export function addReadIfMissing(
   permissions: ServiceApiKeyPermission[],
@@ -24,7 +25,7 @@ export function formTypeToBackendPayloadType({
     ips:
       // yes, passing arrays as comma-separated values is bad, glad you notices
       enableIpRestriction === 'true'
-        ? ipRestrictions.split(/\s+/).filter(Boolean).join(',')
+        ? ipStringToArray(ipRestrictions).join(',')
         : '',
     permissions: [
       futuresTrade && ServiceApiKeyPermission.futuresTrade,

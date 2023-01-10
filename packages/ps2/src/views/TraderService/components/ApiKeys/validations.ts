@@ -25,7 +25,9 @@ export const CreateKeyValidation = yup
   })
   .required();
 
-const ipStringToArray = (value: string) => value.split(/\s+/).filter(Boolean);
+export const ipStringToArray = (value: string) =>
+  value.split(/,|\s+/).filter(Boolean);
+
 export const EditKeyValidation = yup
   .object({
     alias: validateAlias,
@@ -45,6 +47,12 @@ export const EditKeyValidation = yup
           );
         },
       )
+      .test('empty', 'error:error.required', function (value) {
+        return (
+          this.parent.enableIpRestriction !== 'true' ||
+          ipStringToArray(value).length !== 0
+        );
+      })
       .test(
         'invalid',
         'management:api-keys.ip-restrictions-invalid',
