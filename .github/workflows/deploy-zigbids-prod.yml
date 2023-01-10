@@ -1,8 +1,9 @@
 name: Zigbids Production deploy
 on:
   push:
-    branches:
-      - release
+    tags:
+      - 'release-zigbids-*'
+
 jobs:
   pre_job:
     runs-on: ubuntu-latest
