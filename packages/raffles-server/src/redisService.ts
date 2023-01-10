@@ -160,7 +160,11 @@ const makeTransfer = async (auctionId: number, user: User) => {
   // Set balance
   const balance = await getUserBalance(user.publicAddress);
   await Promise.all([
-    redis.hset('USER_TRANSACTION_BALANCE', user.id.toString(), strToUnit(balance)),
+    redis.hset(
+      'USER_TRANSACTION_BALANCE',
+      user.id.toString(),
+      strToUnit(balance),
+    ),
     redis.hset('USER_CURRENT_BALANCE', user.id.toString(), strToUnit(balance)),
   ]);
   return tx.id;
