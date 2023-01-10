@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useRef } from "react";
 import { useController } from "react-hook-form";
 import {
   InputContainer,
@@ -18,9 +18,10 @@ import Typography from "components/display/Typography";
 import CoinIcon, { CoinSizes } from "../../display/CoinIcon";
 import { InputAmountProps, TokenItem } from "./types";
 import { changeEvent } from "utils/event";
-import { useUpdateEffect } from "react-use";
+import { useDeepCompareEffect, useUpdateEffect } from "react-use";
 import ZigPriceLabel from "components/display/ZigPriceLabel";
 import { Box } from "@mui/material";
+import ZigCoinIcon from "components/display/ZigCoinIcon";
 
 // FIXME this component still needs Jesus
 function InputAmount({
@@ -38,6 +39,7 @@ function InputAmount({
   fullWidth,
   showMaxButton = true,
   showBalance = true,
+  iconBucket,
 }: InputAmountProps) {
   const {
     field: { ref, onChange, onBlur, value },
@@ -50,13 +52,18 @@ function InputAmount({
     },
   });
 
-  useUpdateEffect(() => {
+  const didMountRef = useRef(false);
+
+  useDeepCompareEffect(() => {
     // Update token when prop changes
-    onChange({
-      token: tokens[0],
-      value: "",
-    });
-  }, [tokens[0].id]);
+    if (didMountRef.current) {
+      onChange({
+        token: tokens[0],
+        value: "",
+      });
+    }
+    didMountRef.current = true;
+  }, [tokens]);
 
   const onValueChange: typeof onChange = (e) => {
     onChange({
@@ -95,7 +102,12 @@ function InputAmount({
         <InputContainer>
           <Side>
             {value?.token?.id && tokens.length < 2 && (
-              <CoinIcon name={value?.token.id} size={CoinSizes.SMALL} coin={value?.token.id} />
+              <ZigCoinIcon
+                name={value?.token.id}
+                size={CoinSizes.SMALL}
+                coin={value?.token.id}
+                bucket={iconBucket}
+              />
             )}
             <InputField>
               <InputValue
@@ -137,7 +149,7 @@ function InputAmount({
         </InputContainer>
       </Wrapper>
 
-      {value?.token?.balance && showBalance && (
+      {Number(value?.token?.balance) >= 0 && showBalance && (
         <Box mt={1}>
           <BalanceLabel variant="body2" color="neutral200">
             {labelBalance}

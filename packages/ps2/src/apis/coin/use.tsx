@@ -46,6 +46,7 @@ export function useTransactionsHistory(
       ...filters,
     },
     pageIndex,
+    true,
   );
 
   return infinitePaginatedQuery;

@@ -43,6 +43,7 @@
     }
   },
   "navigation-menu": {
+    "wallet": "Wallet",
     "profit-sharing": "Profit Sharing"
   },
   "amount": "Amount",
@@ -57,6 +58,7 @@
     "invalid-value": "Invalid value",
     "negative-amount": "Should be >= 0",
     "negative-zeroable-amount": "Should be > 0",
+    "min-amount": "Minimum amount is {{amount}} {{coin}}.",
     "invalid-amount": "You must indicate an amount",
     "max-decimals": "Please enter numbers with no more than {{maxDecimals}} decimal places."
   }
