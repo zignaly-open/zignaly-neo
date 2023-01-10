@@ -149,7 +149,7 @@ function InputAmount({
         </InputContainer>
       </Wrapper>
 
-      {value?.token?.balance && showBalance && (
+      {Number(value?.token?.balance) >= 0 && showBalance && (
         <Box mt={1}>
           <BalanceLabel variant="body2" color="neutral200">
             {labelBalance}

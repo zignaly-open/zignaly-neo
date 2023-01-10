@@ -1,9 +1,7 @@
-import { CoinNetwork } from 'apis/coin/types';
 import { WalletNetwork } from 'apis/wallet/types';
 import BigNumber from 'bignumber.js';
 import { numericFormatter } from 'react-number-format';
 import i18n from 'util/i18next';
-import { precisionNumberToDecimals } from 'util/numbers';
 import { inputAmountTokenMaxValidation } from 'util/validation';
 import * as yup from 'yup';
 

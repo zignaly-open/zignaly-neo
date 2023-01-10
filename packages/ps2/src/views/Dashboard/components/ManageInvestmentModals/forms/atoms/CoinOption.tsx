@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { CoinIcon, ZigCoinIcon, ZigTypography } from '@zignaly-open/ui';
+import { ZigCoinIcon, ZigTypography } from '@zignaly-open/ui';
 
 export const filterOptions = (
   option: {

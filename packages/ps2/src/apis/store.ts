@@ -12,16 +12,7 @@ import { api as marketplaceApi } from './marketplace/api';
 import walletReducer from './wallet/store';
 import { api as walletApi } from './wallet//api';
 import storage from 'redux-persist/lib/storage';
-import {
-  persistReducer,
-  persistStore,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from 'redux-persist';
+import { persistReducer, persistStore } from 'redux-persist';
 import { UserState } from './user/types';
 import { InvestmentState } from './investment/types';
 import { ServiceState } from './service/types';
