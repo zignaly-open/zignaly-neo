@@ -23,7 +23,7 @@ const Wallet = () => {
   useTitle(t('title'));
   const balancesEndpoint = useBalanceQuery();
   const coinsEndpoint = useCoinsQuery();
-  const savingsEndpoint = useSavingsQuery();
+  const savingsEndpoint = useSavingsQuery(null, { pollingInterval: 60_000 });
 
   return (
     <Layout>

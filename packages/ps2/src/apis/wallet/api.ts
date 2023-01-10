@@ -1,7 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import {
-  CoinBalances,
-  CoinDetails,
   DepositInfo,
   PriceInfo,
   TotalSavings,
@@ -12,11 +10,11 @@ import {
   WithdrawFeeInfo,
 } from './types';
 import baseQuery from '../baseQuery';
-import { isString, pickBy } from 'lodash';
 
 export const api = createApi({
   baseQuery,
   reducerPath: 'walletApi',
+  tagTypes: ['Balance'],
   endpoints: (builder) => ({
     coins: builder.query<WalletCoins, void>({
       query: () => ({
@@ -28,6 +26,7 @@ export const api = createApi({
       query: () => ({
         url: process.env.REACT_APP_WALLET_API + '/get-balance',
       }),
+      providesTags: ['Balance'],
     }),
 
     savings: builder.query<TotalSavings, void>({
@@ -60,12 +59,12 @@ export const api = createApi({
         body: rest,
       }),
       // invalidateTags delayed to allow for the withdrawal to be processed
-      // async onQueryStarted(_, { dispatch, queryFulfilled }) {
-      //   await queryFulfilled;
-      //   setTimeout(() => {
-      //     dispatch(api.util.invalidateTags(['Balance']));
-      //   }, 5000);
-      // },
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        setTimeout(() => {
+          dispatch(api.util.invalidateTags(['Balance']));
+        }, 5000);
+      },
     }),
 
     transactionsHistory: builder.query<
@@ -109,6 +108,28 @@ export const api = createApi({
       }),
     }),
 
+    buy: builder.mutation<
+      { id: string },
+      {
+        price: string;
+        amount: string;
+        exchangeInternalId: string;
+      }
+    >({
+      query: (params) => ({
+        url: `${process.env.REACT_APP_WALLET_API}/buy-coin`,
+        method: 'POST',
+        body: params,
+      }),
+      // invalidateTags delayed to allow for the withdrawal to be processed
+      async onQueryStarted(_, { dispatch, queryFulfilled }) {
+        await queryFulfilled;
+        setTimeout(() => {
+          dispatch(api.util.invalidateTags(['Balance']));
+        }, 5000);
+      },
+    }),
+
     generateWithdrawFee: builder.query<
       WithdrawFeeInfo,
       {
@@ -133,4 +154,5 @@ export const {
   useGenerateBuyPriceQuery,
   useGenerateWithdrawFeeQuery,
   useWithdrawMutation,
+  useBuyMutation,
 } = api;

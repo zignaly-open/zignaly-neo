@@ -1,20 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import {
   CoinIcon,
-  DepositModal,
   OpenArrowIcon,
   WalletIcon,
   ZigButton,
   ZigTypography,
 } from '@zignaly-open/ui';
 import ExchangesTooltip from './atoms/ExchangesTooltip';
-import { Box, CircularProgress, IconButton, Select } from '@mui/material';
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Divider,
+  Grid,
+  IconButton,
+  Select,
+} from '@mui/material';
 import { BUY_CRYPTO_URL } from 'util/constants';
 import { AddUsdtFormProps } from './types';
-import { FileCopyOutlined } from '@mui/icons-material';
+import { FileCopyOutlined, NorthEast } from '@mui/icons-material';
 import { getChainIcon } from 'components/ChainIcon';
 import { useZModal } from 'components/ZModal/use';
 import { useTranslation, Trans } from 'react-i18next';
+import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
+import { LoadingButton, LoadingButtonProps } from '@mui/lab';
+import { UsdButtonChoice } from './styles';
 
 const AddUsdtForm = ({ accountsBalances }: AddUsdtFormProps) => {
   const { t } = useTranslation('wallet');
@@ -27,18 +37,9 @@ const AddUsdtForm = ({ accountsBalances }: AddUsdtFormProps) => {
 
   return (
     <>
-      {/* <Title>
-        <img src={WalletIcon} width={40} height={40} />
-        <FormattedMessage
-          id='`wallet.zig.deposit.title`'
-          values={{ coin: 'USDT' }}
-        />
-      </Title> */}
-      {t('deposit.title')}
       <ZigTypography my={1}>
-        {t('deposit.description', { coin: 'USDT' })}
-      </ZigTypography>
-      <ZigTypography>
+        {t('buy.deposit.description', { coin: 'USDT' })}
+        <br />
         <Trans
           i18nKey='buy.description'
           t={t}
@@ -51,22 +52,59 @@ const AddUsdtForm = ({ accountsBalances }: AddUsdtFormProps) => {
         </Trans>
       </ZigTypography>
 
-      <Box>
-        <ZigTypography>{t('buy.deposit.external')}</ZigTypography>
-        <ZigButton onClick={() => showModal(DepositModal, {})}>
-          {t('buy.deposit.depositCoin', { coin: 'USDT' })}
-        </ZigButton>
-      </Box>
-      <Box>
-        <ZigTypography>{t('buy.deposit.noCrypto')}</ZigTypography>
-        <ZigButton
-          href={BUY_CRYPTO_URL}
-          target='_blank'
-          endIcon={<OpenArrowIcon />}
+      <Grid display='flex' container mt={5} gap={{ xs: 5, sm: 0 }}>
+        <UsdButtonChoice item sm={5}>
+          <Box
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
+            flex={1}
+          >
+            <ZigTypography>{t('buy.deposit.external')}</ZigTypography>
+          </Box>
+          <ZigButton
+            variant='outlined'
+            onClick={() =>
+              showModal(DepositModal, {
+                selectedCoin: 'USDT',
+              })
+            }
+          >
+            {t('buy.deposit.depositCoin', { coin: 'USDT' })}
+          </ZigButton>
+        </UsdButtonChoice>
+        <Grid
+          item
+          sm={2}
+          justifyContent='center'
+          sx={{
+            display: {
+              xs: 'none',
+              sm: 'flex',
+            },
+          }}
         >
-          {t('buy.deposit.buyCoin', { coin: 'USDT' })}
-        </ZigButton>
-      </Box>
+          <Divider orientation='vertical' />
+        </Grid>
+        <UsdButtonChoice item sm={5}>
+          <Box
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
+            flex={1}
+          >
+            <ZigTypography>{t('buy.deposit.noCrypto')}</ZigTypography>
+          </Box>
+          <ZigButton
+            variant='outlined'
+            href={BUY_CRYPTO_URL}
+            target='_blank'
+            endIcon={<NorthEast />}
+          >
+            {t('buy.deposit.buyCoin', { coin: 'USDT' })}
+          </ZigButton>
+        </UsdButtonChoice>
+      </Grid>
     </>
   );
 };

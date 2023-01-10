@@ -1,14 +1,17 @@
-import { CircularProgress, Grid } from '@mui/material';
+/* eslint-disable i18next/no-literal-string */
+import { ArrowDownward } from '@mui/icons-material';
+import { Box, CircularProgress, Grid } from '@mui/material';
 import {
   Loader,
   ZigButton,
   ZigPriceLabel,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { useGenerateBuyPriceQuery } from 'apis/wallet/api';
+import { useBuyMutation, useGenerateBuyPriceQuery } from 'apis/wallet/api';
 import BigNumber from 'bignumber.js';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { useToast } from 'util/hooks/useToast';
 import { ZigPriceLabelIcon } from 'views/Dashboard/components/ManageInvestmentModals/forms/WithdrawConfirmForm/atoms/ZigPriceLabelIcon';
 import { AmountContainer } from 'views/Dashboard/components/ManageInvestmentModals/forms/WithdrawConfirmForm/styles';
 import { SwapConfirmFormProps } from './types';
@@ -29,15 +32,67 @@ const SwapConfirmForm = ({
     },
     { pollingInterval: 20000 },
   );
+  const toast = useToast();
+  const [buy, buyStatus] = useBuyMutation();
+
+  const handleSubmit = async () => {
+    await buy({
+      price: priceInfo.key,
+      amount,
+      exchangeInternalId: internalId,
+    }).unwrap();
+    toast.success(t('buy.success', { coin: coinTo }));
+    onDone();
+  };
+
   return (
-    <>
-      <Grid gap={2} justifyContent='center' display='flex' alignItems='center'>
+    <Box
+      display='flex'
+      justifyContent='center'
+      flexDirection='column'
+      margin='0 auto'
+    >
+      <AmountContainer
+        style={{
+          gap: '16px',
+          height: '70px',
+          margin: '8px 36px 0',
+        }}
+      >
         <ZigTypography color='neutral300' variant='h2'>
           {t('buy.from')}
         </ZigTypography>
         <ZigPriceLabelIcon amount={amount} coin={coinFrom} iconBucket='coins' />
+      </AmountContainer>
+      <Grid my={3} justifyContent='center' display='flex' alignItems='center'>
+        <ArrowDownward style={{ width: '36px', height: '36px' }} />
       </Grid>
-      <Grid>
+
+      <AmountContainer
+        coloredBorder={true}
+        sx={{
+          height: '90px',
+          padding: '10px 59px',
+        }}
+      >
+        <Grid
+          gap={2}
+          justifyContent='center'
+          display='flex'
+          alignItems='center'
+        >
+          <ZigTypography color='neutral300' variant='h2'>
+            {t('buy.willReceive')}
+          </ZigTypography>
+          <ZigPriceLabelIcon
+            amount={BigNumber(amount).times(priceInfo.price).toString()}
+            coin={coinTo}
+            iconBucket='coins'
+            precision={2}
+          />
+        </Grid>
+      </AmountContainer>
+      <Grid mt={3} textAlign='center'>
         <ZigTypography color='neutral300' variant='h2'>
           {t('buy.rate')}
         </ZigTypography>
@@ -53,23 +108,6 @@ const SwapConfirmForm = ({
           )}
         </ZigTypography>
       </Grid>
-      <AmountContainer coloredBorder={true} sx={{ height: '120px' }}>
-        <Grid
-          gap={2}
-          justifyContent='center'
-          display='flex'
-          alignItems='center'
-        >
-          <ZigTypography color='neutral300' variant='h2'>
-            {t('buy.willReceive')}
-          </ZigTypography>
-          <ZigPriceLabelIcon
-            amount={BigNumber(amount).times(priceInfo.price).toString()}
-            coin={coinTo}
-            iconBucket='coins'
-          />
-        </Grid>
-      </AmountContainer>
       <Grid
         item
         display='flex'
@@ -79,17 +117,18 @@ const SwapConfirmForm = ({
         gap={1}
       >
         <ZigButton
-          type='submit'
           disabled={!priceInfo?.price}
           variant='contained'
+          onClick={handleSubmit}
+          loading={buyStatus.isLoading}
         >
-          {t('buy.swapNow')}
+          {t('buy.buyNow', { coin: coinTo })}
         </ZigButton>
         <ZigButton onClick={onCancel} variant='text'>
           {t('common:back')}
         </ZigButton>
       </Grid>
-    </>
+    </Box>
   );
 };
 

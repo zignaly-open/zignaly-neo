@@ -91,7 +91,7 @@ const WalletTopPanel = ({
               <ZigPriceLabel
                 value={balance * rate}
                 usd
-                color='white'
+                color='almostWhite'
                 fontWeight={600}
                 fontSize={16}
               />

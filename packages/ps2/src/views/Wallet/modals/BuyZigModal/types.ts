@@ -6,6 +6,7 @@ import { WalletCoins } from 'apis/wallet/types';
 export type WalletDepositModalProps = {
   selectedCoin: string;
   coins: WalletCoins;
+  close: () => void;
 };
 
 export type DepositFormData = {
@@ -14,7 +15,10 @@ export type DepositFormData = {
 
 export type AddUsdtFormProps = {
   accountBalances: AccountBalances[];
+  setStep: (value: Step) => void;
 };
+
+export type Step = 'swap' | 'deposit' | 'confirm';
 
 export type SwapFormProps = {
   accountsBalances: AccountBalances[];
@@ -22,6 +26,7 @@ export type SwapFormProps = {
   coinTo?: string;
   onDepositMore: () => void;
   onDone: () => void;
+  setStep: (value: Step) => void;
 };
 
 export type AccountBalances = {

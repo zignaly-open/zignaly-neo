@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Box, Grid } from '@mui/material';
 import {
@@ -9,7 +9,7 @@ import {
   ZigSelect,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { SwapFormData, SwapFormProps } from './types';
 import { useGenerateBuyPriceQuery } from 'apis/wallet/api';
 import { track } from '@zignaly-open/tracker';
@@ -18,6 +18,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { differenceInMinutes, fromUnixTime } from 'date-fns';
 import { useUpdateEffect } from 'react-use';
 import SwapConfirmForm from './SwapConfirmForm';
+import ExchangesTooltip from './atoms/ExchangesTooltip';
 
 const SwapForm = ({
   coinFrom = 'USDT',
@@ -25,6 +26,7 @@ const SwapForm = ({
   accountsBalances,
   onDepositMore,
   onDone,
+  setStep,
 }: SwapFormProps) => {
   const { t } = useTranslation('wallet');
   const [confirm, setConfirm] = useState<SwapFormData>(null);
@@ -46,6 +48,9 @@ const SwapForm = ({
           timeForMaxDiff,
         ),
       )(data, context, options),
+    defaultValues: {
+      exchangeAccount: accountsBalances[0]?.exchange.internalId,
+    },
   });
   const exchangeOptions = accountsBalances.map((a) => ({
     value: a.exchange.internalId,
@@ -77,15 +82,15 @@ const SwapForm = ({
     priceInfo && amountFrom ? +amountFrom.value * +priceInfo.price : null;
 
   useUpdateEffect(() => {
-    if (!isValid && amountFrom) {
+    if (!isValid && amountFrom.value) {
       // Force refresh validation in case the user entered the amount before we got the price info.
       trigger('amount');
     }
   }, [priceInfo]);
 
   const submitForm = (data: SwapFormData) => {
-    console.log('a');
     setConfirm(data);
+    setStep('confirm');
   };
 
   if (confirm) {
@@ -95,89 +100,110 @@ const SwapForm = ({
         coinFrom={coinFrom}
         coinTo={coinTo}
         amount={confirm.amount.value.toString()}
-        onCancel={() => setConfirm(null)}
+        onCancel={() => {
+          setConfirm(null);
+          setStep('swap');
+        }}
         onDone={onDone}
       />
     );
   }
 
   return (
-    <form onSubmit={handleSubmit(submitForm)}>
-      <Grid container flexDirection='column'>
-        <Grid item pt={3}>
-          <Controller
-            name='exchangeAccount'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <ZigSelect
-                menuPlacement='auto'
-                menuShouldScrollIntoView={false}
-                menuPosition='fixed'
-                menuShouldBlockScroll
-                label={t('buy.exchangeAccount')}
-                placeholder=''
-                options={exchangeOptions}
-                {...field}
-                onChange={(value) => {
-                  field.onChange(value);
-                  track({ ctaId: 'select-account-zig' });
-                }}
-              />
-            )}
-          />
-        </Grid>
-        {selectedExchangeId && (
-          <>
-            <Grid item pt={3}>
-              <InputAmountAdvanced
-                name='amount'
-                control={control}
-                label={t('buy.swapFrom')}
-                showUnit={true}
-                placeholder='0.0'
-                tokens={[
-                  {
-                    id: coinFrom,
-                    balance:
-                      selectedExchangeObject.balances[coinFrom].balanceFree,
-                  },
-                ]}
-                error={t(errors?.amount?.value?.message)}
-              />
-            </Grid>
-            <Grid item pt={3} display='flex' flexDirection='column'>
-              <ZigTypography>{t('buy.swapTo')}</ZigTypography>
-              <ZigPriceLabel
-                variant='h2'
-                precision={2}
-                value={amountTo}
-                coin='ZIG'
-              />
-            </Grid>
-            <Grid
-              item
-              display='flex'
-              flexDirection='column'
-              mt='64px'
-              alignItems='center'
-              gap={1}
-            >
-              <ZigButton
-                type='submit'
-                disabled={!isValid || !amountTo}
-                variant='contained'
+    <>
+      {/* <Title> */}
+      <Box my={1}>
+        <ZigTypography>
+          <Trans
+            i18nKey='buy.description'
+            t={t}
+            values={{
+              coin: 'USDT',
+              max: '5,000',
+            }}
+          >
+            <ExchangesTooltip />
+          </Trans>
+        </ZigTypography>
+      </Box>
+      {/* </Title> */}
+      <form onSubmit={handleSubmit(submitForm)}>
+        <Grid container flexDirection='column'>
+          <Grid item pt={3}>
+            <Controller
+              name='exchangeAccount'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <ZigSelect
+                  menuPlacement='auto'
+                  menuShouldScrollIntoView={false}
+                  menuPosition='fixed'
+                  menuShouldBlockScroll
+                  label={t('buy.exchangeAccount')}
+                  placeholder=''
+                  options={exchangeOptions}
+                  {...field}
+                  onChange={(value) => {
+                    field.onChange(value);
+                    track({ ctaId: 'select-account-zig' });
+                  }}
+                />
+              )}
+            />
+          </Grid>
+          {selectedExchangeId && (
+            <>
+              <Grid item pt={3}>
+                <InputAmountAdvanced
+                  name='amount'
+                  control={control}
+                  label={t('buy.swapFrom')}
+                  showUnit={true}
+                  placeholder='0.0'
+                  tokens={[
+                    {
+                      id: coinFrom,
+                      balance:
+                        selectedExchangeObject.balances[coinFrom].balanceFree,
+                    },
+                  ]}
+                  error={t(errors?.amount?.value?.message)}
+                />
+              </Grid>
+              <Grid item pt={3} display='flex' flexDirection='column'>
+                <ZigTypography>{t('buy.swapTo')}</ZigTypography>
+                <ZigPriceLabel
+                  variant='h2'
+                  precision={2}
+                  value={amountTo}
+                  coin='ZIG'
+                />
+              </Grid>
+              <Grid
+                item
+                display='flex'
+                flexDirection='column'
+                mt='64px'
+                alignItems='center'
+                gap={1}
               >
-                {t('buy.continue')}
-              </ZigButton>
-              <ZigButton onClick={onDepositMore} variant='text'>
-                {t('buy.deposit.more', { coin: coinFrom })}
-              </ZigButton>
-            </Grid>
-          </>
-        )}
-      </Grid>
-    </form>
+                <ZigButton
+                  type='submit'
+                  disabled={!isValid || !amountTo}
+                  variant='contained'
+                >
+                  {t('buy.continue')}
+                </ZigButton>
+                <ZigButton onClick={onDepositMore} variant='text'>
+                  {t('buy.deposit.more', { coin: coinFrom })}
+                </ZigButton>
+              </Grid>
+            </>
+          )}
+        </Grid>
+      </form>
+    </>
   );
 };
 export default SwapForm;
