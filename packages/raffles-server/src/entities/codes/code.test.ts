@@ -225,7 +225,7 @@ describe('Codes', () => {
     const response = await Balance.findAll({});
     const expected = {
       walletAddress: alice.publicAddress,
-      zhits: '10',
+      zhits: 10,
       amount: 0,
       currency: '',
       blockchain: '',
@@ -315,7 +315,7 @@ describe('Codes', () => {
     const response1 = await Balance.findAll({});
     const tx = response1.pop();
     expect(tx.walletAddress).toBe(bob.publicAddress);
-    expect(tx.zhits).toBe('130');
+    expect(tx.zhits).toBe(130);
     expect(tx.transactionType).toBe(TransactionType.ReferralCode);
   });
 
@@ -339,7 +339,7 @@ describe('Codes', () => {
 
     expect(TransactionType.ReferralCode).toBe(response1.transactionType);
     expect(bob.publicAddress).toBe(response1.walletAddress);
-    expect('110').toBe(response1.zhits);
+    expect(110).toBe(response1.zhits);
   });
 
   it('should apply rewardDepositFactor', async () => {
@@ -361,7 +361,7 @@ describe('Codes', () => {
 
     expect(TransactionType.ReferralCode).toBe(response1.transactionType);
     expect(bob.publicAddress).toBe(response1.walletAddress);
-    expect((DEFAULT_REWARD_DIRECT + 100).toString()).toBe(response1.zhits);
+    expect(DEFAULT_REWARD_DIRECT + 100).toBe(response1.zhits);
   });
 
   it('should return user code', async () => {

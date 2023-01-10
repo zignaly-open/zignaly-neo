@@ -22,7 +22,7 @@ export class Balance extends Model {
   @Column
   public walletAddress!: string;
 
-  @Column
+  @Column(DataType.DECIMAL)
   public zhits!: string;
 
   @Column(DataType.DECIMAL)
