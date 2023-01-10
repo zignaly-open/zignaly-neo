@@ -189,6 +189,22 @@ function EditApiKeysModal({
         </Box>
 
         <Box sx={{ mb: 4 }}>
+          <InputText
+            placeholder={t('api-keys.zignaly-code')}
+            label={t('api-keys.zignaly-code')}
+            readOnly={true}
+            value={apiKey.id}
+            rightSideElement={
+              <CloneIcon width={40} height={40} color={dark.neutral300} />
+            }
+            onClickRightSideElement={() => {
+              copy(apiKey.id);
+              toast.success(t('action:copied'));
+            }}
+          />
+        </Box>
+
+        <Box sx={{ mb: 4 }}>
           <ZigTypography>{t('api-keys.api-settings')}</ZigTypography>
           <Grid container>
             <Grid item xs={12} md={6}>

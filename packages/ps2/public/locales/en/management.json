@@ -57,6 +57,7 @@
     "cant-disable-read": "You can not disable the read permission",
     "restrict-ip": "Restrict IP",
     "api-secret": "API Secret",
+    "zignaly-code": "Zignaly Code",
     "api-secret-explainer": "Only visible on key generation. If lost, you will have to generate a new API key",
     "permission-label": "Permissions",
     "permissions": {
