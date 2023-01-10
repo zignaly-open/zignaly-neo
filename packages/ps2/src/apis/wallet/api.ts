@@ -14,7 +14,7 @@ import baseQuery from '../baseQuery';
 export const api = createApi({
   baseQuery,
   reducerPath: 'walletApi',
-  tagTypes: ['Balance'],
+  tagTypes: ['Balance', 'WalletTransactions'],
   endpoints: (builder) => ({
     coins: builder.query<WalletCoins, void>({
       query: () => ({
@@ -57,12 +57,13 @@ export const api = createApi({
       query: ({ network, coin, ...rest }) => ({
         url: `${process.env.REACT_APP_WALLET_API}/make-withdraw/${network}/currency/${coin}`,
         body: rest,
+        method: 'POST',
       }),
       // invalidateTags delayed to allow for the withdrawal to be processed
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled;
         setTimeout(() => {
-          dispatch(api.util.invalidateTags(['Balance']));
+          dispatch(api.util.invalidateTags(['Balance', 'WalletTransactions']));
         }, 5000);
       },
     }),
@@ -80,6 +81,7 @@ export const api = createApi({
           }/get-operations?${new URLSearchParams(params).toString()}`,
         };
       },
+      providesTags: ['WalletTransactions'],
     }),
 
     transactionsHistoryCsv: builder.mutation<
@@ -125,7 +127,7 @@ export const api = createApi({
       async onQueryStarted(_, { dispatch, queryFulfilled }) {
         await queryFulfilled;
         setTimeout(() => {
-          dispatch(api.util.invalidateTags(['Balance']));
+          dispatch(api.util.invalidateTags(['Balance', 'WalletTransactions']));
         }, 5000);
       },
     }),

@@ -1,7 +1,7 @@
 import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
 import { isArray } from 'lodash';
 import { useState, useEffect, useRef } from 'react';
-import { useUpdateEffect } from 'react-use';
+import { useDeepCompareEffect, useUpdateEffect } from 'react-use';
 
 export type PaginationMetadata = {
   from: string;
@@ -43,7 +43,7 @@ const useInfinitePaginatedQuery = (
       : (queryResponse.data as InfiniteQueryResponseType).items
     : [];
 
-  useEffect(() => {
+  useDeepCompareEffect(() => {
     if (localPage.page === 1) setCombinedData(data);
     else setCombinedData((previousData) => [...previousData, ...data]);
   }, [data]);

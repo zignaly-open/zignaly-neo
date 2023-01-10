@@ -27,6 +27,7 @@ const WalletTransactions = () => {
     pageSize: 30,
   });
   const { pageIndex, pageSize } = pagination;
+
   const transactionsEndpoint = useTransactionsHistory(
     {
       limit: pageSize,

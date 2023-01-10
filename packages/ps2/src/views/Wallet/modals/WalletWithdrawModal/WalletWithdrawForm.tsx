@@ -105,7 +105,7 @@ function WalletWithdrawForm({
         fee: feeInfo.key,
         ...(code && { code }),
       }).unwrap();
-      // setStep('success');
+      setStep('success');
     },
   });
 
@@ -169,7 +169,7 @@ function WalletWithdrawForm({
     <form
       onSubmit={handleSubmit((data) => {
         setStep('confirm');
-        setConfirmationData(data);
+        setConfirmationData({ ...data, coin: selectedCoin });
       })}
       autoComplete='off'
     >
