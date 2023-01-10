@@ -9,10 +9,9 @@ import {
   ZigInput,
   ZigTypography,
   ZigCoinIcon,
-  ZigButton,
 } from '@zignaly-open/ui';
 import { WalletWithdrawModalProps, WithdrawFormData } from './types';
-import { Alert, Box, Grid, Link } from '@mui/material';
+import { Box, Grid, Link } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithdrawValidation } from './validations';
 import CenteredLoader from 'components/CenteredLoader';
@@ -143,6 +142,8 @@ function WalletWithdrawForm({
   const notEnoughZig =
     feeCoin === 'ZIG' && balances?.ZIG?.balance < parseFloat(feeInfo?.floatFee);
 
+  const balance = balances[selectedCoin]?.availableBalance ?? 0;
+
   if (confirmationData) {
     return (
       <WithdrawConfirmForm
@@ -264,7 +265,7 @@ function WalletWithdrawForm({
                   tokens={[
                     {
                       id: selectedCoin,
-                      balance: balances[selectedCoin].availableBalance,
+                      balance,
                     },
                   ]}
                   error={
@@ -295,7 +296,7 @@ function WalletWithdrawForm({
                 <Box mt={1}>
                   <LabelValueLine
                     label={t('amountToWithdraw.labelBalance')}
-                    value={balances[selectedCoin].availableBalance.toString()}
+                    value={balance.toString()}
                     coin={selectedCoin}
                   />
                 </Box>

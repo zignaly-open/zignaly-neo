@@ -1,12 +1,7 @@
 /* eslint-disable i18next/no-literal-string */
 import { ArrowDownward } from '@mui/icons-material';
 import { Box, CircularProgress, Grid } from '@mui/material';
-import {
-  Loader,
-  ZigButton,
-  ZigPriceLabel,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { useBuyMutation, useGenerateBuyPriceQuery } from 'apis/wallet/api';
 import BigNumber from 'bignumber.js';
 import React from 'react';

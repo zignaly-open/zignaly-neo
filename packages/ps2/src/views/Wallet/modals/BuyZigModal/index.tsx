@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Step, WalletDepositModalProps } from './types';
 import { DialogProps } from '@mui/material';
-import { useActivateExchange, useCurrentUser } from 'apis/user/use';
+import { useCurrentUser } from 'apis/user/use';
 import CenteredLoader from 'components/CenteredLoader';
 import { useBulkCoinsQuery } from 'apis/coin/api';
 import AddUsdtForm from './AddUsdtForm';
@@ -21,17 +21,11 @@ function BuyZigModal({
   const zignalyExchangeAccounts = exchanges?.filter(
     (e) => e.exchangeName.toLowerCase() === 'zignaly',
   );
-  const zignalyExchangeAccountsActivated = zignalyExchangeAccounts.filter(
-    (e) => e.activated,
-  );
-
-  useActivateExchange(
-    zignalyExchangeAccounts.find((a) => !a.activated)?.internalId,
-  );
 
   const { data: accountsCoins } = useBulkCoinsQuery({
-    exchangeAccounts: zignalyExchangeAccountsActivated.map((a) => a.internalId),
+    exchangeAccounts: zignalyExchangeAccounts.map((a) => a.internalId),
   });
+
   const exchangeAccounts = useMemo(
     () =>
       accountsCoins?.map((a) => {
@@ -47,15 +41,18 @@ function BuyZigModal({
   );
 
   useEffect(() => {
+    if (!accountsCoins) return;
+
     if (
-      accountsCoins &&
-      !accountsCoins.find((a) => parseFloat(a.balances.USDT.balanceFree) > 0)
+      !accountsCoins.find((a) => parseFloat(a.balances.USDT?.balanceFree) > 0)
     ) {
       setStep('deposit');
+    } else {
+      setStep('swap');
     }
   }, [accountsCoins]);
 
-  const [step, setStep] = useState<Step>('swap');
+  const [step, setStep] = useState<Step>(null);
 
   const PAGE_TITLE = {
     deposit: t('buy.deposit.title', { coin: 'USDT' }),
@@ -73,7 +70,7 @@ function BuyZigModal({
           setStep={setStep}
           close={close}
         />
-      ) : (
+      ) : step === 'swap' ? (
         <SwapZIGForm
           coinFrom='USDT'
           coinTo='ZIG'
@@ -82,7 +79,7 @@ function BuyZigModal({
           setStep={setStep}
           onDone={close}
         />
-      )}
+      ) : null}
     </ZModal>
   );
 }

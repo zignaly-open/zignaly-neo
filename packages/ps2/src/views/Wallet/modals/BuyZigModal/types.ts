@@ -1,5 +1,5 @@
 import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
-import { AccountCoinBalances, CoinBalances } from 'apis/coin/types';
+import { CoinBalances } from 'apis/coin/types';
 import { Exchange } from 'apis/user/types';
 import { WalletCoins } from 'apis/wallet/types';
 
