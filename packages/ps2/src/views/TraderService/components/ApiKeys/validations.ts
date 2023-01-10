@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import i18n from '../../../../util/i18next';
 
 const ipRegex = /^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)\.?\b){4}$/;
 const ipRangeRegex =
@@ -7,16 +8,27 @@ const ipRangeRegex =
 const validateIp = (ip: string) => ipRegex.test(ip);
 const validateIpRange = (ip: string) => ipRangeRegex.test(ip);
 
+const validateAlias = yup
+  .string()
+  .required('error:error.required')
+  .test(
+    'maxlength',
+    i18n.t('common:validation.max-allowed-length', { count: 30 }),
+    function (val) {
+      return val.length <= 20;
+    },
+  );
+
 export const CreateKeyValidation = yup
   .object({
-    alias: yup.string().required('error:error.required'),
+    alias: validateAlias,
   })
   .required();
 
 const ipStringToArray = (value: string) => value.split(/\s+/).filter(Boolean);
 export const EditKeyValidation = yup
   .object({
-    alias: yup.string().required('error:error.required'),
+    alias: validateAlias,
     ipRestrictions: yup
       .string()
       .test('required', 'error:error.required', function (value) {
