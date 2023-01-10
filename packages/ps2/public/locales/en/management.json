@@ -46,7 +46,7 @@
   "loading-arialLabel": "Loading management",
   "api-keys": {
     "title": "Trade with API",
-    "description": "For complete trading control, connect to Zignaly via the API and send trades directly from your preferred exchange or trading application. You can manage positions from your own trading platform as well as here on the <0>positions page</0>.",
+    "description": "Create the Binance API keys for your Profit Sharing service and connect them to your favourite tool or application. You can also connect these API Keys to our Zignaly trading application at <0>zignaly.com</0>.",
     "create-key": "Create API Key",
     "no-keys": "No API keys",
     "no-keys-description": "You have not created any API keys yet",
