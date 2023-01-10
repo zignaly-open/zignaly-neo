@@ -1,11 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { Trans, useTranslation } from 'react-i18next';
-import { ZigTypography } from '@zignaly-open/ui';
-import { DepositFormData, Step, WalletDepositModalProps } from './types';
-import { Box, DialogProps } from '@mui/material';
-import { useToast } from 'util/hooks/useToast';
-import ExchangesTooltip from './atoms/ExchangesTooltip';
+import { useTranslation } from 'react-i18next';
+import { Step, WalletDepositModalProps } from './types';
+import { DialogProps } from '@mui/material';
 import { useActivateExchange, useCurrentUser } from 'apis/user/use';
 import CenteredLoader from 'components/CenteredLoader';
 import { useBulkCoinsQuery } from 'apis/coin/api';
@@ -20,16 +16,7 @@ function BuyZigModal({
   ...props
 }: WalletDepositModalProps & DialogProps) {
   const { t } = useTranslation('wallet');
-  const toast = useToast();
-  const [showDeposit, setShowDeposit] = useState(false);
-  // const [reloadBalance, setReloadBalance] = useState(null);
   const { exchanges } = useCurrentUser();
-
-  const [page, setPage] = useState('');
-
-  const { control, watch } = useForm<DepositFormData>({
-    defaultValues: {},
-  });
 
   const zignalyExchangeAccounts = exchanges?.filter(
     (e) => e.exchangeName.toLowerCase() === 'zignaly',
@@ -42,12 +29,12 @@ function BuyZigModal({
     zignalyExchangeAccounts.find((a) => !a.activated)?.internalId,
   );
 
-  const { data } = useBulkCoinsQuery({
+  const { data: accountsCoins } = useBulkCoinsQuery({
     exchangeAccounts: zignalyExchangeAccountsActivated.map((a) => a.internalId),
   });
   const exchangeAccounts = useMemo(
     () =>
-      data?.map((a) => {
+      accountsCoins?.map((a) => {
         const exchange = exchanges.find(
           (e) => e.internalId === a.exchangeInternalId,
         );
@@ -56,28 +43,17 @@ function BuyZigModal({
           balances: a.balances,
         };
       }),
-    [data],
+    [accountsCoins],
   );
 
   useEffect(() => {
     if (
-      data &&
-      !data.find((a) => parseFloat(a.balances.USDT.balanceFree) > 0)
+      accountsCoins &&
+      !accountsCoins.find((a) => parseFloat(a.balances.USDT.balanceFree) > 0)
     ) {
-      setPage('deposit');
+      setStep('deposit');
     }
-  }, [data]);
-
-  // const fetchBalances = async () => {
-  //   if (!zignalyExchangeAccountsActivated.length) {
-  //     // No zignaly exchange account
-  //     return;
-  //   }
-
-  // todo
-  useEffect(() => {
-    // fetchBalances();
-  }, [exchanges]);
+  }, [accountsCoins]);
 
   const [step, setStep] = useState<Step>('swap');
 
@@ -92,7 +68,11 @@ function BuyZigModal({
       {!exchangeAccounts ? (
         <CenteredLoader />
       ) : step === 'deposit' ? (
-        <AddUsdtForm accountBalances={exchangeAccounts} setStep={setStep} />
+        <AddUsdtForm
+          accountBalances={exchangeAccounts}
+          setStep={setStep}
+          close={close}
+        />
       ) : (
         <SwapZIGForm
           coinFrom='USDT'

@@ -16,6 +16,7 @@ export type DepositFormData = {
 export type AddUsdtFormProps = {
   accountBalances: AccountBalances[];
   setStep: (value: Step) => void;
+  close: () => void;
 };
 
 export type Step = 'swap' | 'deposit' | 'confirm';

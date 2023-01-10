@@ -9,9 +9,10 @@ import {
   ZigInput,
   ZigTypography,
   ZigCoinIcon,
+  ZigButton,
 } from '@zignaly-open/ui';
 import { WalletWithdrawModalProps, WithdrawFormData } from './types';
-import { Box, Grid } from '@mui/material';
+import { Alert, Box, Grid, Link } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithdrawValidation } from './validations';
 import CenteredLoader from 'components/CenteredLoader';
@@ -24,6 +25,8 @@ import {
 } from 'apis/wallet/api';
 import WithdrawConfirmForm from 'views/Dashboard/components/ManageInvestmentModals/forms/WithdrawConfirmForm';
 import { useCheck2FA } from 'apis/user/use';
+import { useZModal } from 'components/ZModal/use';
+import WalletDepositModal from '../WalletDepositModal';
 
 function WalletWithdrawForm({
   setStep,
@@ -34,6 +37,7 @@ function WalletWithdrawForm({
   const { t } = useTranslation('withdraw-crypto');
   const [confirmationData, setConfirmationData] = useState<WithdrawFormData>();
   const { data: balances, isLoading: isLoadingBalances } = useBalanceQuery();
+  const { showModal } = useZModal();
 
   const {
     handleSubmit,
@@ -75,6 +79,7 @@ function WalletWithdrawForm({
         : [],
     [coinObject],
   );
+
   const { data: feeInfo } = useGenerateWithdrawFeeQuery(
     {
       network,
@@ -131,6 +136,13 @@ function WalletWithdrawForm({
     return <CenteredLoader />;
   }
 
+  // Withdrawing other coins than chain coins needs ZIG
+  const feesPaidFromZigBalance =
+    feeInfo?.feeCurrency === 'ZIG' && selectedCoin !== 'ZIG';
+  const feeCoin = feesPaidFromZigBalance ? 'ZIG' : selectedCoin;
+  const notEnoughZig =
+    feeCoin === 'ZIG' && balances?.ZIG?.balance < parseFloat(feeInfo?.floatFee);
+
   if (confirmationData) {
     return (
       <WithdrawConfirmForm
@@ -147,6 +159,7 @@ function WalletWithdrawForm({
         action={withdraw2FA}
         status={withdrawStatus}
         fee={Number(feeInfo.floatFee)}
+        feeCoin={feeCoin}
         iconBucket='coins'
       />
     );
@@ -254,7 +267,30 @@ function WalletWithdrawForm({
                       balance: balances[selectedCoin].availableBalance,
                     },
                   ]}
-                  error={t(errors?.amount?.value?.message)}
+                  error={
+                    t(errors?.amount?.value?.message) ||
+                    (notEnoughZig && (
+                      <>
+                        {t('notEnoughZig')}&nbsp;
+                        <Link
+                          href='#'
+                          onClick={() => {
+                            close();
+                            setTimeout(() => {
+                              showModal(WalletDepositModal, {
+                                selectedCoin: 'ZIG',
+                                coins,
+                              });
+                            });
+                          }}
+                        >
+                          {t('wallet:buy.deposit.depositCoin', {
+                            coin: 'ZIG',
+                          })}
+                        </Link>
+                      </>
+                    ))
+                  }
                 />
                 <Box mt={1}>
                   <LabelValueLine
@@ -267,7 +303,7 @@ function WalletWithdrawForm({
                   <LabelValueLine
                     label={t('amountToWithdraw.fee')}
                     value={feeInfo.floatFee}
-                    coin={selectedCoin}
+                    coin={feeCoin}
                   />
                 )}
               </Grid>
@@ -286,7 +322,7 @@ function WalletWithdrawForm({
                 size={'large'}
                 type={'submit'}
                 caption={t('confirmation.continue')}
-                disabled={!isValid || !feeInfo}
+                disabled={!isValid || !feeInfo || notEnoughZig}
               />
             </ModalActions>
           </>

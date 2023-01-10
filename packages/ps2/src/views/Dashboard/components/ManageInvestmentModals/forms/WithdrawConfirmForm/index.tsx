@@ -20,6 +20,7 @@ const WithdrawConfirmForm = ({
   networkCoin,
   amount,
   fee,
+  feeCoin = coin,
   close,
   iconBucket,
 }: WithdrawConfirmFormProps) => {
@@ -110,7 +111,7 @@ const WithdrawConfirmForm = ({
             </ZigTypography>
             <ZigPriceLabelIcon
               amount={fee}
-              coin={coin}
+              coin={feeCoin}
               iconBucket={iconBucket}
             />
           </Grid>
@@ -128,7 +129,11 @@ const WithdrawConfirmForm = ({
             {t('confirmation.receive')}
           </ZigTypography>
           <ZigPriceLabelIcon
-            amount={BigNumber(amount).minus(fee).toString()}
+            amount={
+              coin !== feeCoin
+                ? amount
+                : BigNumber(amount).minus(fee).toString()
+            }
             coin={coin}
             iconBucket={iconBucket}
           />

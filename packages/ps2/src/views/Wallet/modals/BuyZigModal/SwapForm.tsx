@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Box, Grid } from '@mui/material';
 import {
@@ -111,7 +111,6 @@ const SwapForm = ({
 
   return (
     <>
-      {/* <Title> */}
       <Box my={1}>
         <ZigTypography>
           <Trans

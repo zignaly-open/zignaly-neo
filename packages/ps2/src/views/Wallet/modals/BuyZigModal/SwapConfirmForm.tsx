@@ -55,8 +55,9 @@ const SwapConfirmForm = ({
       <AmountContainer
         style={{
           gap: '16px',
-          height: '70px',
-          margin: '8px 36px 0',
+          marginTop: '8px',
+          padding: '12px 32px',
+          placeSelf: 'center',
         }}
       >
         <ZigTypography color='neutral300' variant='h2'>
@@ -96,7 +97,12 @@ const SwapConfirmForm = ({
         <ZigTypography color='neutral300' variant='h2'>
           {t('buy.rate')}
         </ZigTypography>
-        <ZigTypography fontWeight={600}>
+        <ZigTypography
+          fontWeight={600}
+          display='flex'
+          justifyContent='center'
+          alignItems='center'
+        >
           &nbsp;1&nbsp;{coinTo}&nbsp;=&nbsp;
           {priceInfo?.price ? (
             <ZigPriceLabel
@@ -104,7 +110,7 @@ const SwapConfirmForm = ({
               coin={coinTo}
             />
           ) : (
-            <CircularProgress />
+            <CircularProgress size={12} />
           )}
         </ZigTypography>
       </Grid>

@@ -12,5 +12,6 @@ export interface WithdrawConfirmFormProps {
   networkCoin: string;
   amount: number;
   fee: number;
+  feeCoin?: string;
   iconBucket?: string;
 }

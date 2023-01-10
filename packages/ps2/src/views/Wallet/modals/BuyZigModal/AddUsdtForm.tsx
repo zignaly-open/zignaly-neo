@@ -1,39 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import {
-  CoinIcon,
-  OpenArrowIcon,
-  WalletIcon,
-  ZigButton,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import React from 'react';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import ExchangesTooltip from './atoms/ExchangesTooltip';
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Divider,
-  Grid,
-  IconButton,
-  Select,
-} from '@mui/material';
+import { Box, Divider, Grid } from '@mui/material';
 import { BUY_CRYPTO_URL } from 'util/constants';
 import { AddUsdtFormProps } from './types';
-import { FileCopyOutlined, NorthEast } from '@mui/icons-material';
-import { getChainIcon } from 'components/ChainIcon';
+import { NorthEast } from '@mui/icons-material';
 import { useZModal } from 'components/ZModal/use';
 import { useTranslation, Trans } from 'react-i18next';
 import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
-import { LoadingButton, LoadingButtonProps } from '@mui/lab';
 import { UsdButtonChoice } from './styles';
 
-const AddUsdtForm = ({ accountsBalances }: AddUsdtFormProps) => {
+const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
   const { t } = useTranslation('wallet');
   const { showModal } = useZModal();
-  // const [depositUSDT, showDepositUSDT] = useState(false);
-
-  // if (depositUSDT) {
-  //   return <DepositUSDT accountsBalances={accountsBalances} />;
-  // }
 
   return (
     <>
@@ -64,11 +43,14 @@ const AddUsdtForm = ({ accountsBalances }: AddUsdtFormProps) => {
           </Box>
           <ZigButton
             variant='outlined'
-            onClick={() =>
-              showModal(DepositModal, {
-                selectedCoin: 'USDT',
-              })
-            }
+            onClick={() => {
+              close();
+              setTimeout(() =>
+                showModal(DepositModal, {
+                  selectedCoin: 'USDT',
+                }),
+              );
+            }}
           >
             {t('buy.deposit.depositCoin', { coin: 'USDT' })}
           </ZigButton>
@@ -109,135 +91,4 @@ const AddUsdtForm = ({ accountsBalances }: AddUsdtFormProps) => {
   );
 };
 
-const AddUsdtFormOld = ({
-  accountsBalances,
-  coin = 'USDT',
-}: DepositUSDTProps) => {
-  const [network, setNetwork] = useState('');
-  const copyToClipboard = useClipboard();
-  const [internalId, setInternalId] = useState(null);
-  const selectedAccount = accountsBalances.find(
-    (a) => a.exchangeId === internalId,
-  );
-  const networkOptions = selectedAccount
-    ? selectedAccount.networks.map((n) => ({
-        value: n.network,
-        label: n.name,
-        icon: getChainIcon(n.network),
-      }))
-    : [];
-  const networkData = selectedAccount
-    ? selectedAccount.networks.find((n) => n.network === network)
-    : null;
-  const address = useExchangeDepositAddress(internalId, coin, networkData);
-  const exchangeOptions = accountsBalances.map((a) => ({
-    value: a.exchangeId,
-    label: a.name,
-    // icon: ZignalyIcon,
-  }));
-
-  return (
-    <Modal>
-      <Title>
-        <img src={WalletIcon} width={40} height={40} />
-        <FormattedMessage id='accounts.deposit' /> {coin}
-      </Title>
-      <TextDesc>
-        <FormattedMessage id='wallet.zig.deposit.subtitle' values={{ coin }} />
-      </TextDesc>
-      <Control>
-        <Label>
-          <FormattedMessage id='transfer.internal.coin' />
-        </Label>
-        <Box display='flex' alignItems='center' pt='2px'>
-          <CoinIcon width={32} height={32} coin={coin} />
-          <TypographyToken>{coin}</TypographyToken>
-        </Box>
-      </Control>
-      <Control>
-        <Label>
-          <FormattedMessage id='wallet.zig.deposit.exchangeaccount' />
-        </Label>
-        <Select
-          values={exchangeOptions}
-          fullWidth
-          value={internalId}
-          handleChange={(e) => setInternalId(e.target.value)}
-        />
-      </Control>
-      {selectedAccount && (
-        <Control>
-          <Label>
-            <FormattedMessage id='deposit.network' />
-          </Label>
-          <Select
-            values={networkOptions}
-            fullWidth
-            value={network}
-            handleChange={(e) => setNetwork(e.target.value)}
-          />
-        </Control>
-      )}
-      {address?.tag && (
-        <Control>
-          <Label>
-            <FormattedMessage id='wallet.withdraw.memo' />
-          </Label>
-          <Input
-            readOnly
-            fullWidth
-            value={address.tag}
-            endAdornment={
-              <IconButton
-                aria-label='Copy'
-                onClick={() =>
-                  copyToClipboard(address.tag, 'deposit.memo.copied')
-                }
-              >
-                <FileCopyOutlined width={24} height={24} />
-              </IconButton>
-            }
-          />
-          <QRCodeContainer>
-            <QRCode size={200} value={address.tag} />
-          </QRCodeContainer>
-        </Control>
-      )}
-      {network && (
-        <Control>
-          <Label>
-            <FormattedMessage id='deposit.address' />
-          </Label>
-          {address ? (
-            <>
-              <Input
-                readOnly
-                fullWidth
-                value={address.address}
-                endAdornment={
-                  <IconButton
-                    aria-label='Copy'
-                    onClick={() =>
-                      copyToClipboard(address.address, 'deposit.address.copied')
-                    }
-                  >
-                    <FileCopyOutlined width={24} height={24} />
-                  </IconButton>
-                }
-              />
-              {networkData && (
-                <NetworkCautionMessage network={networkData.name} coin={coin} />
-              )}
-              <QRCodeContainer>
-                <QRCode size={200} value={address.address} />
-              </QRCodeContainer>
-            </>
-          ) : (
-            <CircularProgress size={21} style={{ margin: '0 auto' }} />
-          )}
-        </Control>
-      )}
-    </Modal>
-  );
-};
 export default AddUsdtForm;
