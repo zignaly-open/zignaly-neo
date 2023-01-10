@@ -29,7 +29,9 @@ function TypeTextConfirmModal({
   const [confirmWord, setConfirmWord] = useState('');
   return (
     <ZModal {...props} close={close} title={title}>
-      {!!description && <ZigTypography>{description}</ZigTypography>}
+      {!!description && (
+        <ZigTypography sx={{ mb: 1 }}>{description}</ZigTypography>
+      )}
 
       <ZigInput
         label={t('common:type-to-confirm', { word: safeWord })}
