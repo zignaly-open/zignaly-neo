@@ -15,7 +15,10 @@ import { useParams } from 'react-router-dom';
 import copy from 'copy-to-clipboard';
 import { useToast } from '../../../../../util/hooks/useToast';
 import { addReadIfMissing } from '../util';
-import { useZConfirm, useZModal } from '../../../../../components/ZModal/use';
+import {
+  useZModal,
+  useZTypeWordConfirm,
+} from '../../../../../components/ZModal/use';
 import EditApiKey from '../modals/EditApiKey';
 import { useServiceApiKeyDeleteMutation } from '../../../../../apis/serviceApiKey/api';
 import { useCheck2FA } from '../../../../../apis/user/use';
@@ -25,7 +28,7 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
   const { t, i18n } = useTranslation(['management', 'actions']);
   const { serviceId } = useParams();
   const { showModal } = useZModal();
-  const askConfirm = useZConfirm();
+  const askConfirm = useZTypeWordConfirm();
   const toast = useToast();
   const [deleteKey, deleteStatus] = useServiceApiKeyDeleteMutation();
   const delete2FA = useCheck2FA({
@@ -95,6 +98,7 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
                 title: t('api-keys.delete-title', {
                   title: apiKey.alias,
                 }),
+                safeWord: t('action:delete'),
                 yesLabel: t('action:delete'),
                 yesButtonProps: {
                   color: 'danger',

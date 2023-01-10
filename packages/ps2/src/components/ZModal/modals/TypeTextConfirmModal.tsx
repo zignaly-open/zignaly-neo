@@ -1,45 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/system';
 import ZModal from '../index';
-import { ZigButtonProps } from '@zignaly-open/ui/lib/components/inputs/ZigButton';
+import { ConfirmModalProps } from './ConfirmModal';
 
-export type ConfirmModalProps = {
-  title: string | JSX.Element;
-  description?: string | JSX.Element;
-  yesLabel?: string | JSX.Element;
-  yesAction: () => void;
-  yesButtonProps?: Partial<ZigButtonProps>;
-  noLabel?: string | JSX.Element;
-  noAction?: () => void;
-};
+export type TypeTextConfirmModalProps = {
+  safeWord: string;
+} & ConfirmModalProps;
 
-function ConfirmModal({
+function TypeTextConfirmModal({
   close,
   title,
   description,
   yesLabel,
   yesAction,
+  safeWord = 'Fluggaenkoecchicebolsen',
   yesButtonProps,
   noLabel,
   noAction,
   ...props
 }: {
   close: () => void;
-} & ConfirmModalProps &
+} & TypeTextConfirmModalProps &
   DialogProps): React.ReactElement {
   const { t } = useTranslation('action');
-
+  const [confirmWord, setConfirmWord] = useState('');
   return (
     <ZModal {...props} close={close} title={title}>
       {!!description && <ZigTypography>{description}</ZigTypography>}
 
+      <ZigInput
+        label={t('common:type-to-confirm', { word: safeWord })}
+        onChange={(e) => {
+          setConfirmWord(e.target.value);
+        }}
+        value={confirmWord}
+        fullWidth
+      />
+
       <Box sx={{ mt: 2 }}>
         <ZigButton
-          sx={{ mr: 1 }}
           variant={'contained'}
+          disabled={confirmWord !== safeWord}
+          tooltip={
+            confirmWord !== safeWord
+              ? t('common:type-to-confirm', { word: safeWord })
+              : undefined
+          }
           type='submit'
           size={'large'}
           onClick={() => {
@@ -52,6 +61,7 @@ function ConfirmModal({
         </ZigButton>
 
         <ZigButton
+          sx={{ ml: 1 }}
           variant={'outlined'}
           type='submit'
           size={'large'}
@@ -67,4 +77,4 @@ function ConfirmModal({
   );
 }
 
-export default ConfirmModal;
+export default TypeTextConfirmModal;

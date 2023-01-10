@@ -52,6 +52,7 @@
   "new-version": "New version, click me to update",
   "infinitely-better": "Yes, the current value is infinity percent better because the starting value is 0",
   "infinitely-worse": "Yes, the current value is infinity percent worse because the starting value is 0",
+  "type-to-confirm": "Type \"{{word}}\" to confirm",
   "validation": {
     "insufficient-amount": "Insufficient funds",
     "invalid-value": "Invalid value",
