@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Box, Grid } from '@mui/material';
 import {
@@ -17,6 +17,7 @@ import { SwapValidation } from './validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { differenceInMinutes, fromUnixTime } from 'date-fns';
 import { useUpdateEffect } from 'react-use';
+import SwapConfirmForm from './SwapConfirmForm';
 
 const SwapForm = ({
   coinFrom = 'USDT',
@@ -83,16 +84,17 @@ const SwapForm = ({
   }, [priceInfo]);
 
   const submitForm = (data: SwapFormData) => {
+    console.log('a');
     setConfirm(data);
   };
 
   if (confirm) {
     return (
-      <SwapZIGConfirm
-        internalId={confirm.internalId}
+      <SwapConfirmForm
+        internalId={confirm.exchangeAccount}
         coinFrom={coinFrom}
         coinTo={coinTo}
-        amount={parseFloat(confirm.amount)}
+        amount={confirm.amount.value.toString()}
         onCancel={() => setConfirm(null)}
         onDone={onDone}
       />
@@ -131,7 +133,7 @@ const SwapForm = ({
               <InputAmountAdvanced
                 name='amount'
                 control={control}
-                label={t('buy.from')}
+                label={t('buy.swapFrom')}
                 showUnit={true}
                 placeholder='0.0'
                 tokens={[
@@ -145,7 +147,7 @@ const SwapForm = ({
               />
             </Grid>
             <Grid item pt={3} display='flex' flexDirection='column'>
-              <ZigTypography>{t('buy.to')}</ZigTypography>
+              <ZigTypography>{t('buy.swapTo')}</ZigTypography>
               <ZigPriceLabel
                 variant='h2'
                 precision={2}
@@ -159,6 +161,7 @@ const SwapForm = ({
               flexDirection='column'
               mt='64px'
               alignItems='center'
+              gap={1}
             >
               <ZigButton
                 type='submit'
@@ -167,11 +170,7 @@ const SwapForm = ({
               >
                 {t('buy.continue')}
               </ZigButton>
-              <ZigButton
-                onClick={onDepositMore}
-                variant='text'
-                style={{ marginTop: '8px' }}
-              >
+              <ZigButton onClick={onDepositMore} variant='text'>
                 {t('buy.deposit.more', { coin: coinFrom })}
               </ZigButton>
             </Grid>

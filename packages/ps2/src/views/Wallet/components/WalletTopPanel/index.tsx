@@ -26,9 +26,9 @@ import { WalletTopPanelProps } from './types';
 import { useCurrentUser } from 'apis/user/use';
 import { useUpdateEffect } from 'react-use';
 import { useZModal } from 'components/ZModal/use';
-import WalletDepositModal from '../modals/WalletDepositModal';
-import BuyZigModal from '../modals/BuyZigModal';
-import WalletWithdrawModal from '../modals/WalletWithdrawModal';
+import WalletDepositModal from '../../modals/WalletDepositModal';
+import BuyZigModal from '../../modals/BuyZigModal';
+import WalletWithdrawModal from '../../modals/WalletWithdrawModal';
 
 const WalletTopPanel = ({
   balance = 0,

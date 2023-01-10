@@ -34,28 +34,6 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
     name: n.name,
   }));
 
-  // const coinOptions = useMemo(
-  //   () =>
-  //     allowedDeposits[exchangeType]?.map((ssc) => {
-  //       const balance = balances[ssc];
-  //       const name = coins[ssc]?.name || '';
-  //       return {
-  //         value: ssc,
-  //         name,
-  //         label: <CoinOption coin={ssc} name={name} />,
-  //         inOrders: balance?.balanceLocked || 0,
-  //         balance: balance?.balanceTotal || 0,
-  //         available: balance?.balanceFree || 0,
-  //         networks: coins[ssc].networks?.map((n) => ({
-  //           label: n.name,
-  //           value: n.network,
-  //           ...n,
-  //         })),
-  //       };
-  //     }),
-  //   [coins, allowedCoins, exchangeType],
-  // );
-
   const { isFetching: loading, data: depositInfo } = useDepositInfoQuery(
     {
       coin: selectedCoin,
@@ -113,57 +91,6 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
           <ZigTypography fontWeight={600}>{selectedCoin}</ZigTypography>&nbsp;
         </Box>
 
-        {/* {!!coinObject && (
-          <Grid
-            item
-            xs={12}
-            md={6}
-            sx={{
-              pt: 6,
-              pl: 6,
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <ZigTypography
-              variant='body2'
-              color='neutral200'
-              fontWeight='medium'
-            >
-              {t('balances.total')}{' '}
-              <ZigTypography
-                variant='body2'
-                color='neutral000'
-                fontWeight='medium'
-              >
-                <NumericFormat
-                  displayType={'text'}
-                  value={coinObject?.balance ?? ''}
-                />
-              </ZigTypography>{' '}
-              {selectedCoin}
-            </ZigTypography>
-            <ZigTypography
-              variant='body2'
-              color='neutral200'
-              fontWeight='medium'
-            >
-              {t('balances.balanceFree')}{' '}
-              <ZigTypography
-                variant='body2'
-                color='neutral000'
-                fontWeight='medium'
-              >
-                <NumericFormat
-                  value={coinObject?.available ?? ''}
-                  displayType={'text'}
-                />
-              </ZigTypography>{' '}
-              {selectedCoin}
-            </ZigTypography>
-          </Grid>
-        )} */}
-
         <Grid item xs={12} pt={3}>
           <Controller
             name='network'
@@ -177,7 +104,7 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
                 label={t('networkSelector.label')}
                 placeholder={t('networkSelector.placeholder')}
                 {...field}
-                options={[]}
+                options={networkOptions}
                 filterOption={filterOptions}
               />
             )}

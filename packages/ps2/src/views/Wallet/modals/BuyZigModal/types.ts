@@ -33,3 +33,12 @@ export type SwapFormData = {
   exchangeAccount: string;
   amount: InputAmountAdvancedValue;
 };
+
+export type SwapConfirmFormProps = {
+  internalId: string;
+  coinFrom: string;
+  coinTo: string;
+  amount: string;
+  onCancel: () => void;
+  onDone: () => void;
+};

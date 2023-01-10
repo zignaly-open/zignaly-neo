@@ -85,15 +85,15 @@
       "noCrypto": "I don't have any crypto yet",
       "more": "Deposit More {{coin}}"
     },
-    "wallet": {
-      "notAvailable": "This network is currently not available"
-    },
-    "from": "Swap from",
-    "to": "Swap to",
+    "from": "From",
+    "swapFrom": "Swap from",
+    "swapTo": "Swap to",
     "done": "Bought {coin} successfully.",
     "received": "Amount received",
+    "willReceive": "You will receive:",
     "rate": "Rate:",
     "max": "The maximum amount is {{amount}} {{coin}}.",
-    "maxLeft": "The maximum amount left is {{amount}} {coin}. It will reset in {{mins}} mins."
+    "maxLeft": "The maximum amount left is {{amount}} {coin}. It will reset in {{mins}} mins.",
+    "buyNow": "Buy {{coin}} Now"
   }
 }

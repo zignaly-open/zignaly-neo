@@ -18,6 +18,7 @@ import { useBulkCoinsQuery } from 'apis/coin/api';
 import DepositUSDTForm from './AddUsdtForm';
 import SwapZIGForm from './SwapForm';
 
+// todo: move to index?
 function BuyZIGForm({ coins, selectedCoin }: WalletDepositModalProps) {
   const { t } = useTranslation('wallet');
   const toast = useToast();

@@ -30,7 +30,7 @@ export const SwapValidation = (
               coin,
               timeForMaxDiff,
             }),
-            (val) => !max || new BigNumber(val).isLessThanOrEqualTo(min),
+            (val) => !max || new BigNumber(val).isLessThanOrEqualTo(max),
           ),
       }),
     ),
