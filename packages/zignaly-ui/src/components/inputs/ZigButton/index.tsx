@@ -10,8 +10,9 @@ export type ZigButtonProps = OverrideProps<ExtendButtonBaseTypeMap<ButtonBaseTyp
     tooltip?: string;
     active?: boolean;
   };
+type ZigButtonPropsSxFix = Omit<ZigButtonProps, "sx"> & { __sx: ZigButtonProps["sx"] };
 
-const ZigButton = styled(({ active, tooltip, ctaId, color, ...props }: ZigButtonProps) => {
+const ZigButton = styled(({ active, tooltip, ctaId, color, ...props }: ZigButtonPropsSxFix) => {
   const button = (
     <LoadingButton
       data-tack-cta={ctaId}
@@ -31,4 +32,4 @@ const ZigButton = styled(({ active, tooltip, ctaId, color, ...props }: ZigButton
   );
 })``;
 
-export default ZigButton;
+export default ({ sx, ...props }: ZigButtonProps) => <ZigButton {...props} __sx={sx} />;
