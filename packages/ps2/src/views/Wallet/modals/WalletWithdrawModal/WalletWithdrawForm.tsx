@@ -92,9 +92,12 @@ function WalletWithdrawForm({
 
   const [withdraw, withdrawStatus] = useWithdrawMutation();
 
-  const withdraw2FA = useCheck2FA({
+  const check2FA = useCheck2FA({
     status: withdrawStatus,
-    action: async (code?: string) => {
+  });
+
+  const withdraw2FA = () =>
+    check2FA(async (code) => {
       await withdraw({
         network: confirmationData.network,
         coin: confirmationData.coin,
@@ -105,8 +108,7 @@ function WalletWithdrawForm({
         ...(code && { code }),
       }).unwrap();
       setStep('success');
-    },
-  });
+    });
 
   useEffect(() => {
     if (coinObject) {

@@ -36,9 +36,11 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const { internalId } = useActiveExchange();
   const [withdraw, withdrawStatus] = useWithdrawMutation();
 
-  const withdraw2FA = useCheck2FA({
+  const check2FA = useCheck2FA({
     status: withdrawStatus,
-    action: async (code?: string) => {
+  });
+  const withdraw2FA = () =>
+    check2FA(async (code) => {
       await withdraw({
         asset: coin,
         network: confirmationData.network,
@@ -49,8 +51,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
         code,
       }).unwrap();
       setStep('success');
-    },
-  });
+    });
 
   const {
     handleSubmit,
