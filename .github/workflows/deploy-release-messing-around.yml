@@ -5,7 +5,7 @@ on:
 jobs:
   build:
     name: PS2 Test Release deploy
-    if: contains(github.event.release.name, "PS2")
+    if: contains(github.event.release.name, 'PS2')
     runs-on: ubuntu-latest
     environment: test
     steps:
