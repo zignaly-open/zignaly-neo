@@ -43,6 +43,7 @@
     }
   },
   "navigation-menu": {
+    "wallet": "CH-Wállëṫ",
     "profit-sharing": "CH-Ṗѓöḟïṫ Ŝĥáѓïńĝ"
   },
   "amount": "CH-Áṁöüńṫ",
@@ -57,6 +58,7 @@
     "invalid-value": "CH-Ïńválïḋ válüë",
     "negative-amount": "CH-Ŝĥöülḋ bë >= 0",
     "negative-zeroable-amount": "CH-Ŝĥöülḋ bë > 0",
+    "min-amount": "CH-Ṁïńïṁüṁ áṁöüńṫ ïŝ {{amount}} {{coin}}.",
     "invalid-amount": "CH-Yöü ṁüŝṫ ïńḋïĉáṫë áń áṁöüńṫ",
     "max-decimals": "CH-Ṗlëáŝë ëńṫëѓ ńüṁbëѓŝ wïṫĥ ńö ṁöѓë ṫĥáń {{maxDecimals}} ḋëĉïṁál ṗláĉëŝ."
   }
