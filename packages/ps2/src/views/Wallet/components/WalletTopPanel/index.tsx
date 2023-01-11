@@ -75,7 +75,7 @@ const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
         <Box display='flex' alignItems='center' gap='12px'>
           <ZignalyIcon width={54} height={54} />
           <div>
-            <Box display='flex' justifyContent='center'>
+            <Box display='flex' alignItems='center'>
               <ZigPriceLabel
                 value={balance}
                 variant='h1'
@@ -94,7 +94,7 @@ const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
                   balances?.ZIG?.staked,
                   balances?.ZIG?.unstaking,
                 ].some((v) => v > 0) ||
-                  true) && (
+                  balances?.ZIG) && (
                   <>
                     <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
                       <ChevronRight />

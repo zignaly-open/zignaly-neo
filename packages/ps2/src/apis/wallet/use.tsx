@@ -1,11 +1,10 @@
 import { useTransactionsHistoryQuery } from './api';
 import useInfinitePaginatedQuery from 'util/hooks/useInfinitePaginatedQuery';
-import { TransactionType } from './types';
 
 export function useTransactionsHistory(
   filters: {
     limit?: number;
-    type?: TransactionType;
+    type?: string;
   } = {},
   pageIndex = 0,
 ) {

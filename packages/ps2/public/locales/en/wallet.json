@@ -18,6 +18,7 @@
   },
   "transactions": {
     "internal": "Internal Transfer",
+    "noData": "No transactions",
     "header": {
       "date": "Date",
       "type": "Type",
@@ -28,6 +29,7 @@
     },
     "walletTransactions": "Wallet Transactions",
     "type": {
+      "all": "All Transactions",
       "deposit": "Deposit",
       "internal": "Internal",
       "reward": "Reward",
@@ -47,10 +49,6 @@
       "buyzig": "Buy ZIG",
       "zigbidsredeemcode": "ZIGBids Redeem Code",
       "zigbidsreferralcode": "ZIGBids Referral Code"
-    },
-    "filter": {
-      "max": "(last 3 months max)",
-      "all": "All Transactions"
     },
     "status": {
       "pending": "Pending",
