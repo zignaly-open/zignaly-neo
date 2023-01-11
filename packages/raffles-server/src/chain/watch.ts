@@ -15,8 +15,7 @@ import {
   // TODO: here's the problem and we cant run the watch script separately from the main app
   emitBalanceChanged,
 } from '../entities/users/util';
-import { internalTransfer } from '../cybavo';
-import { TransactionType } from '../types';
+import { deposit } from '../entities/balances/service';
 
 type ChainEvent = {
   blockNumber: number;
@@ -112,13 +111,13 @@ export default async function watchTransactions() {
         }`,
       );
 
-      await internalTransfer(
-        zignalySystemId,
-        from.toLowerCase(),
-        web3.utils.fromWei(value, 'ether'),
-        TransactionType.Deposit,
-        false,
-      );
+      await deposit({
+        walletAddress: from.toLowerCase(),
+        amount: web3.utils.fromWei(value, 'ether'),
+        currency: '',
+        blockchain: 'polygon',
+        note: zignalySystemId,
+      });
 
       const user = await User.findOne({
         where: { publicAddress: from.toLowerCase() },

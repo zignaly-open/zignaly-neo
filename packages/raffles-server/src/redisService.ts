@@ -4,8 +4,8 @@ import { AUCTION_UPDATED } from './entities/auctions/constants';
 import { getAuctionsWithBids } from './entities/auctions/service';
 import { Auction, AuctionBid } from './entities/auctions/model';
 import pubsub from './pubsub';
-import { RedisAuctionData, TransactionType } from './types';
-import { getUserBalance, internalTransfer } from './cybavo';
+import { RedisAuctionData } from './types';
+import { getUserBalance, payFee } from './entities/balances/service';
 import { User } from './entities/users/model';
 import { mapLimit } from 'modern-async';
 import BN from 'bignumber.js';
@@ -58,7 +58,7 @@ const processBalance = async (
     const res = (await redis.fcall(
       'update_balance',
       2,
-      `USER_CYBAVO_BALANCE`,
+      `USER_TRANSACTION_BALANCE`,
       `USER_CURRENT_BALANCE`,
       userId,
       strToUnit(balance),
@@ -138,33 +138,36 @@ const getAuctionExpiration = async (auctionId: number) => {
 };
 
 const makeTransfer = async (auctionId: number, user: User) => {
-  const [cybavoBalance, currentBalance] = await Promise.all([
-    unitToBN(await redis.hget('USER_CYBAVO_BALANCE', user.id.toString())),
+  const [transactionBalance, currentBalance] = await Promise.all([
+    unitToBN(await redis.hget('USER_TRANSACTION_BALANCE', user.id.toString())),
     unitToBN(await redis.hget('USER_CURRENT_BALANCE', user.id.toString())),
   ]);
 
-  // Shouldn't be possible but we could withdraw cybavoBalance instead of returning
-  if (currentBalance.gte(cybavoBalance)) return;
+  // Shouldn't be possible but we could withdraw transactionBalance instead of returning
+  if (currentBalance.gte(transactionBalance)) return;
 
-  const amount = cybavoBalance.minus(currentBalance);
+  const amount = transactionBalance.minus(currentBalance);
 
-  const tx = await internalTransfer(
-    user.publicAddress,
-    zignalySystemId,
-    amount.toString(),
-    TransactionType.Fee,
-    false,
-  );
-  if (!tx.transaction_id) {
+  const tx = await payFee({
+    walletAddress: user.publicAddress,
+    zhits: amount.toString(),
+    note: zignalySystemId,
+  });
+
+  if (!tx.id) {
     throw new Error('Transaction error');
   }
   // Set balance
   const balance = await getUserBalance(user.publicAddress);
   await Promise.all([
-    redis.hset('USER_CYBAVO_BALANCE', user.id.toString(), strToUnit(balance)),
+    redis.hset(
+      'USER_TRANSACTION_BALANCE',
+      user.id.toString(),
+      strToUnit(balance),
+    ),
     redis.hset('USER_CURRENT_BALANCE', user.id.toString(), strToUnit(balance)),
   ]);
-  return tx.transaction_id;
+  return tx.id;
 };
 
 const deleteAuctionFromRedis = async (auctionId: number) => {
@@ -183,7 +186,7 @@ const finalizeAuction = async (auctionId: number) => {
     ranking,
     async (userId, i) => {
       const user = usersData.find((u) => u.id === +userId);
-      let txId: string;
+      let txId: number;
       try {
         txId = await makeTransfer(auctionId, user);
         if (!txId) {

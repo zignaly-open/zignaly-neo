@@ -2,7 +2,7 @@ import {
   AuctionBidType,
   AuctionType,
 } from '@zignaly-open/raffles-shared/types';
-import { ContextUser, ResourceOptions, TransactionType } from '../../types';
+import { ContextUser, ResourceOptions } from '../../types';
 import { User } from '../users/model';
 import { Auction, AuctionBid } from './model';
 import redisService from '../../redisService';
@@ -12,12 +12,12 @@ import { isTest, zignalySystemId } from '../../../config';
 import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from '../users/constants';
 import { isBalanceSufficientForPayment } from './util';
-import { getUserBalance, internalTransfer } from '../../cybavo';
 import { emitBalanceChanged } from '../users/util';
 import { Payout } from '../payouts/model';
 import { debounce } from 'lodash';
 import { AUCTION_UPDATED } from './constants';
 import { AuctionFilter, AuctionPayload } from './types';
+import { getUserBalance, makePayout } from '../balances/service';
 
 const omitPrivateFields = {
   attributes: { exclude: ['announcementDate', 'maxExpiryDate'] },
@@ -310,17 +310,13 @@ export const generateService = (user: ContextUser) => ({
     }
 
     try {
-      await internalTransfer(
-        user.publicAddress,
-        zignalySystemId,
-        auction.currentBid,
-        TransactionType.Payout,
-        false,
-      ).then((tx) => {
-        if (!tx.transaction_id) throw new Error('Transaction error');
-        userBid.claimTransactionId = tx.transaction_id;
+      const tx = await makePayout({
+        walletAddress: user.publicAddress,
+        zhits: auction.currentBid,
+        note: zignalySystemId,
       });
 
+      userBid.claimTransactionId = `${tx.id}`;
       (userBid as AuctionBid).save();
     } catch (error) {
       throw new Error('Could not transfer');
