@@ -276,6 +276,8 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                   sx={{
                     display: 'flex',
                     justifyContent: 'space-evenly',
+                    flexDirection: ['column', 'row'],
+                    gap: 2,
                   }}
                 >
                   <ZignalyQRCode

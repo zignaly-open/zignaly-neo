@@ -3,13 +3,13 @@ import { WalletState } from './types';
 
 const initialState: WalletState = {};
 
-export const coinsSlice = createSlice({
+export const walletSlice = createSlice({
   name: 'wallet',
   initialState,
   reducers: {},
 });
 
 // Action creators are generated for each case reducer function
-export const {} = coinsSlice.actions;
+export const {} = walletSlice.actions;
 
-export default coinsSlice.reducer;
+export default walletSlice.reducer;

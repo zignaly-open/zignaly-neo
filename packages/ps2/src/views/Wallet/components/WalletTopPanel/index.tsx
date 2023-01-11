@@ -202,7 +202,6 @@ const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
             />
             <MinText component='span'>
               {t('min')}&nbsp;
-              {/* eslint-disable-next-line i18next/no-literal-string */}
               <PercText>
                 6%
                 <Tooltip title={t('successFeeTooltip')}>
@@ -223,7 +222,6 @@ const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
             />
             <MinText component='span'>
               {t('min')}&nbsp;
-              {/* eslint-disable-next-line i18next/no-literal-string */}
               <PercText>
                 15%
                 <Tooltip title={t('tradingFeeTooltip')}>
