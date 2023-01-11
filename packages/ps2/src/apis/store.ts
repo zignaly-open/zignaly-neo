@@ -3,6 +3,8 @@ import userReducer from './user/store';
 import { api as userApi } from './user/api';
 import investmentReducer from './investment/store';
 import { api as investmentApi } from './investment/api';
+import serviceApiKeyReducer from './serviceApiKey/store';
+import { api as serviceApiKeyApi } from './serviceApiKey/api';
 import coinReducer from './coin/store';
 import { api as coinApi } from './coin/api';
 import serviceReducer from './service/store';
@@ -38,12 +40,14 @@ export const store = configureStore({
       [userApi.reducerPath]: userApi.reducer,
       [serviceApi.reducerPath]: serviceApi.reducer,
       [investmentApi.reducerPath]: investmentApi.reducer,
+      [serviceApiKeyApi.reducerPath]: serviceApiKeyApi.reducer,
       [marketplaceApi.reducerPath]: marketplaceApi.reducer,
       [coinApi.reducerPath]: coinApi.reducer,
       marketplace: marketplaceReducer,
       user: userReducer,
       coin: coinReducer,
       investment: investmentReducer,
+      serviceApiKey: serviceApiKeyReducer,
       service: serviceReducer,
     }),
   ),
@@ -55,6 +59,7 @@ export const store = configureStore({
       .concat(serviceApi.middleware)
       .concat(marketplaceApi.middleware)
       .concat(coinApi.middleware)
+      .concat(serviceApiKeyApi.middleware)
       .concat(investmentApi.middleware),
 });
 

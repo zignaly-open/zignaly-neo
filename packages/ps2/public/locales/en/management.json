@@ -43,5 +43,47 @@
   },
   "hardDiconnectWarning": "Your hard disconnects have reached {perc}%. If hard-disconnects reaches {maxPerc}% of the service funds, Zignaly will take control of your service.",
   "previousValue": "Previous Value:",
-  "loading-arialLabel": "Loading management"
+  "loading-arialLabel": "Loading management",
+  "api-keys": {
+    "title": "Trade with API",
+    "description": "Create the Binance API keys for your Profit Sharing service and connect them to your favourite tool or application. You can also connect these API Keys to our Zignaly trading application at <0>zignaly.com</0>.",
+    "create-key": "Create API Key",
+    "no-keys": "No API keys",
+    "no-keys-description": "You have not created any API keys yet",
+    "manage-keys": "Manage API Keys",
+    "api-key": "API Key",
+    "api-settings": "API Settings",
+    "api-settings-tooltip": "You know it's just little too late. API secret is shown only once. If you've lost it, you will have to regenerate the key",
+    "cant-disable-read": "You can not disable the read permission",
+    "restrict-ip": "Restrict IP",
+    "api-secret": "API Secret",
+    "zignaly-code": "Zignaly Code",
+    "api-secret-explainer": "Only visible on key generation. If lost, you will have to generate a new API key",
+    "permission-label": "Permissions",
+    "permissions": {
+      "read": "Read",
+      "canTrade": "Spot trading",
+      "marginTrade": "Margin trading",
+      "futuresTrade": "Futures trading"
+    },
+    "permissions-enable": {
+      "read": "Enable reading",
+      "canTrade": "Enable spot trading",
+      "marginTrade": "Enable margin trading",
+      "futuresTrade": "Enable futures trading"
+    },
+    "create-new-key": "Create New API Key",
+    "create-new-key-description": "Create a new API key to connect and trade from your favorite trading platform.",
+    "edit-key": "Edit API Key Settings",
+    "delete-title": "Delete {{title}} API Key",
+    "delete-description": "This action is irreversible.",
+    "ip-restrictions": "IP restrictions",
+    "ip-restrictions-none": "Unrestricted",
+    "ip-restrictions-invalid": "Invalid ip format",
+    "ip-restrictions-ranges": "Sorry we do not support IP ranges",
+    "ip-restrictions-duplicates": "Some ips are listed twice, please remove duplicates",
+    "ip-restrictions-allowed": "IP Addresses",
+    "ip-restrictions-allowed-explainer": "When entering more than one IP address, please separate them with spaces",
+    "ip-restrictions-on": "Restrict access to trusted IPs only (recommended)"
+  }
 }

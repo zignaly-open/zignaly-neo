@@ -2,6 +2,11 @@ import { ShowFnOutput, useModal, UseModalOptions } from 'mui-modal-provider';
 import { ComponentType, useCallback } from 'react';
 import { track } from '@zignaly-open/tracker';
 import { useCurrentUser } from '../../apis/user/use';
+import AlertModal, { AlertModalProps } from './modals/AlertModal';
+import ConfirmModal, { ConfirmModalProps } from './modals/ConfirmModal';
+import TypeTextConfirmModal, {
+  TypeTextConfirmModalProps,
+} from './modals/TypeTextConfirmModal';
 
 export function useZModal(options?: UseModalOptions) {
   const { showModal, ...etc } = useModal(options);
@@ -9,7 +14,7 @@ export function useZModal(options?: UseModalOptions) {
   const ourShowModal = useCallback(
     (
       Component: ComponentType & { trackId?: string },
-      props: undefined | (Record<string, unknown> & { ctaId?: string }),
+      props?: Record<string, unknown> & { ctaId?: string },
     ) => {
       const { ctaId, ...modalProps } = props || {};
       const trackId = Component.trackId?.toLocaleLowerCase();
@@ -31,4 +36,22 @@ export function useZModal(options?: UseModalOptions) {
     showModal: ourShowModal,
     originalShowModal: showModal,
   };
+}
+export function useZAlert(): (props: AlertModalProps) => ShowFnOutput<void> {
+  const { showModal } = useZModal();
+  return (props) => showModal(AlertModal, props);
+}
+
+export function useZConfirm(): (
+  props: ConfirmModalProps,
+) => ShowFnOutput<void> {
+  const { showModal } = useZModal();
+  return (props) => showModal(ConfirmModal, props);
+}
+
+export function useZTypeWordConfirm(): (
+  props: TypeTextConfirmModalProps,
+) => ShowFnOutput<void> {
+  const { showModal } = useZModal();
+  return (props) => showModal(TypeTextConfirmModal, props);
 }

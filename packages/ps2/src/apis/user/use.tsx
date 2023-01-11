@@ -268,12 +268,10 @@ export function useActivateExchange(): QueryReturnTypeBasic<void> {
 }
 
 export function useCheck2FA({
-  action,
   status,
 }: {
-  action: (code?: string) => void;
   status: QueryReturnTypeBasic<unknown>;
-}) {
+}): (action: (code?: string) => void) => void {
   const { showModal, updateModal } = useZModal();
   const modalId = useRef<null | string>(null);
   const { ask2FA } = useCurrentUser();
@@ -288,10 +286,10 @@ export function useCheck2FA({
   }, [status]);
 
   if (!ask2FA) {
-    return action;
+    return (action) => action();
   }
 
-  return () => {
+  return (action) => {
     const modal = showModal(Check2FAModal, {
       status,
       action,
