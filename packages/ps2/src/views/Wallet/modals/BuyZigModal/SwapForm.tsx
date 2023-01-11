@@ -171,7 +171,7 @@ const SwapForm = ({
               </Grid>
               <Grid item pt={3} display='flex' flexDirection='column'>
                 <ZigTypography>{t('buy.swapTo')}</ZigTypography>
-                {priceInfo?.price ? (
+                {priceInfo?.price || !amountFrom?.value ? (
                   <ZigPriceLabel
                     variant='h2'
                     precision={2}
