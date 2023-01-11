@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { Box, Grid } from '@mui/material';
+import { Box, CircularProgress, Grid } from '@mui/material';
 import {
   InputAmountAdvanced,
   ZigButton,
@@ -171,12 +171,16 @@ const SwapForm = ({
               </Grid>
               <Grid item pt={3} display='flex' flexDirection='column'>
                 <ZigTypography>{t('buy.swapTo')}</ZigTypography>
-                <ZigPriceLabel
-                  variant='h2'
-                  precision={2}
-                  value={amountTo}
-                  coin='ZIG'
-                />
+                {priceInfo?.price ? (
+                  <ZigPriceLabel
+                    variant='h2'
+                    precision={2}
+                    value={amountTo}
+                    coin='ZIG'
+                  />
+                ) : (
+                  <CircularProgress size={12} sx={{ m: 1 }} />
+                )}
               </Grid>
               <Grid
                 item
