@@ -1,3 +1,3 @@
 export type ErrorMessageProps = {
-  text: string;
+  text: string | React.ReactElement;
 };

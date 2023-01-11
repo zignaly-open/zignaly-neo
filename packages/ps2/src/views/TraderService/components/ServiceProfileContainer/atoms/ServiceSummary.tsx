@@ -38,7 +38,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
         <GridCell item xs={4} rightBorder>
           <ServicePercentageInfo
             title={t('marketplace:table.n-months', { count: 1 })}
-            value={1000 * +service.pnlSsc30t}
+            value={service.pnlSsc30t}
             percent={service.pnlPercent30t}
             ssc={service.ssc}
             canShow={+new Date(service.createdAt) < +subMonths(new Date(), 1)}
@@ -47,7 +47,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
         <GridCell item xs={4} rightBorder>
           <ServicePercentageInfo
             title={t('marketplace:table.n-months', { count: 3 })}
-            value={-100000 * +service.pnlSsc90t}
+            value={+service.pnlSsc90t}
             ssc={service.ssc}
             percent={service.pnlPercent90t}
             canShow={+new Date(service.createdAt) < +subMonths(new Date(), 3)}
