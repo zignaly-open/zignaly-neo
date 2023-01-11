@@ -1,5 +1,8 @@
 import * as yup from 'yup';
-import { inputAmountTokenMaxValidation } from 'util/validation';
+import {
+  decimalsValidation,
+  inputAmountTokenMaxValidation,
+} from 'util/validation';
 import i18n from 'util/i18next';
 import BigNumber from 'bignumber.js';
 import { numericFormatter } from 'react-number-format';
@@ -31,7 +34,8 @@ export const SwapValidation = (
               timeForMaxDiff,
             }),
             (val) => !max || new BigNumber(val).isLessThanOrEqualTo(max),
-          ),
+          )
+          .concat(decimalsValidation(8)),
       }),
     ),
   });

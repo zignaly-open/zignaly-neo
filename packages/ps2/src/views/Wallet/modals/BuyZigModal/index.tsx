@@ -70,7 +70,7 @@ function BuyZigModal({
           setStep={setStep}
           close={close}
         />
-      ) : step === 'swap' ? (
+      ) : step === 'swap' || step === 'confirm' ? (
         <SwapZIGForm
           coinFrom='USDT'
           coinTo='ZIG'
