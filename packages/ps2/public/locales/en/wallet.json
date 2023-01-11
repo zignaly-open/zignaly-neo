@@ -10,6 +10,12 @@
   "savingMoney": "You are SAVING MONEY with ZIG!",
   "saveMoney": "SAVE MONEY with ZIG!",
   "min": "min.",
+  "balance": {
+    "available": "Available",
+    "locked": "Locked",
+    "unstaking": "Unstaking",
+    "staked": "Staked"
+  },
   "transactions": {
     "internal": "Internal Transfer",
     "header": {

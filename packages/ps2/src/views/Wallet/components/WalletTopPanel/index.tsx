@@ -18,8 +18,8 @@ import {
   ZigPriceLabel,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { Box, FormControlLabel, Tooltip } from '@mui/material';
-import { Add, Remove } from '@mui/icons-material';
+import { Box, FormControlLabel, IconButton, Tooltip } from '@mui/material';
+import { Add, ChevronRight, Remove } from '@mui/icons-material';
 import { useUpdateUserMutation } from 'apis/user/api';
 import { ReactComponent as RewardsIcon } from 'images/rewards.svg';
 import { WalletTopPanelProps } from './types';
@@ -29,13 +29,11 @@ import { useZModal } from 'components/ZModal/use';
 import WalletDepositModal from '../../modals/WalletDepositModal';
 import BuyZigModal from '../../modals/BuyZigModal';
 import WalletWithdrawModal from '../../modals/WalletWithdrawModal';
+import WalletPopover from './atoms/WalletPopover';
 
-const WalletTopPanel = ({
-  balance = 0,
-  savings,
-  coins,
-}: WalletTopPanelProps) => {
+const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
   const { t } = useTranslation('wallet');
+  const balance = balances?.ZIG?.balance ?? 0;
   const { showModal } = useZModal();
   const user = useCurrentUser();
   const [payFeeWithZig, setPayFeeWithZig] = useState(user.payFeeWithZig);
@@ -44,6 +42,8 @@ const WalletTopPanel = ({
   );
   const [updateUser] = useUpdateUserMutation();
   const rate = coins?.ZIG.usdPrice;
+  // Balance Popover
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const onPayFeeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.checked;
@@ -75,18 +75,40 @@ const WalletTopPanel = ({
         <Box display='flex' alignItems='center' gap='12px'>
           <ZignalyIcon width={54} height={54} />
           <div>
-            <ZigPriceLabel
-              value={balance}
-              variant='h1'
-              color='almostWhite'
-              coin='ZIG'
-              coinProps={{
-                color: '#9864EF',
-                fontWeight: 500,
-                variant: 'h3',
-                as: 'span',
-              }}
-            />
+            <Box display='flex' justifyContent='center'>
+              <ZigPriceLabel
+                value={balance}
+                variant='h1'
+                color='almostWhite'
+                coin='ZIG'
+                coinProps={{
+                  color: '#9864EF',
+                  fontWeight: 500,
+                  variant: 'h3',
+                  as: 'span',
+                }}
+              />
+              {coins &&
+                ([
+                  balances?.ZIG?.locked,
+                  balances?.ZIG?.staked,
+                  balances?.ZIG?.unstaking,
+                ].some((v) => v > 0) ||
+                  true) && (
+                  <>
+                    <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
+                      <ChevronRight />
+                    </IconButton>
+                    <WalletPopover
+                      anchorEl={anchorEl}
+                      balance={balances?.ZIG}
+                      coin={coins.ZIG}
+                      handleClose={() => setAnchorEl(null)}
+                      showLocked={true}
+                    />
+                  </>
+                )}
+            </Box>
             <Box display='flex' alignItems='center' gap={1}>
               <ZigPriceLabel
                 value={balance * rate}
