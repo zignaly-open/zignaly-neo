@@ -23,7 +23,7 @@ const baseQuery = (baseUrl = process.env.REACT_APP_BASE_API) =>
       if (token && !['login', 'signup'].includes(endpoint)) {
         headers.set('authorization', `Bearer ${token}`);
       }
-      if (!headers) {
+      if (!headers || !headers.get('Content-Type')) {
         headers.set('content-type', 'application/json');
       }
       return headers;
