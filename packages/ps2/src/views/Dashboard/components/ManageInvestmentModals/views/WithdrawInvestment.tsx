@@ -70,9 +70,7 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
         <Grid item sm={12} md={6}>
           <WithdrawFundsOptionWrapper>
             <ZigTypography component={'p'} variant={'h2'} color={'neutral100'}>
-              {t('modal.withdrawInvestment.instant.title', {
-                fee: INSTANT_WITHDRAWAL_FEE,
-              })}
+              {t('modal.withdrawInvestment.instant.title')}
             </ZigTypography>
             <WithdrawFundsSpaceTaker
               component={'p'}
@@ -80,7 +78,9 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
               color={'neutral200'}
               weight={'regular'}
             >
-              {t('modal.withdrawInvestment.instant.description')}
+              {t('modal.withdrawInvestment.instant.description', {
+                fee: INSTANT_WITHDRAWAL_FEE,
+              })}
             </WithdrawFundsSpaceTaker>
             <WithdrawFundsButtonWrapper>
               <Button
