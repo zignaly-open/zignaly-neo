@@ -1,4 +1,4 @@
-import { Button, Typography, ZigTypography } from '@zignaly-open/ui';
+import { Button, ZigTypography } from '@zignaly-open/ui';
 import React from 'react';
 import {
   WithdrawFundsOptionWrapper,
