@@ -32,9 +32,9 @@ export function shortenNumber(value: number): {
       suffix: "K",
       precision: log >= 4 ? 1 : 2,
     };
-  } else if (log > -16 && log < -2) {
+  } else if (log > -16 && log < -5) {
     return {
-      value: value * Math.pow(10, 3),
+      value: value * Math.pow(10, 6),
       suffix: "μ",
       precision: 2,
     };
