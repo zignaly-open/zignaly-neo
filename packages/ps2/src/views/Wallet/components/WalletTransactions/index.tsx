@@ -11,13 +11,7 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import {
-  FILTERS_TYPE,
-  FilterType,
-  Transaction,
-  TransactionType,
-  TRANSACTION_TYPE,
-} from 'apis/wallet/types';
+import { FILTERS_TYPE, FilterType, Transaction } from 'apis/wallet/types';
 import { useTransactionsHistory } from 'apis/wallet/use';
 import ChainIcon from 'components/ChainIcon';
 import { Add, ExpandLess, ExpandMore } from '@mui/icons-material';
@@ -76,7 +70,9 @@ const WalletTransactions = () => {
         header: t('transactions.header.type'),
         cell: ({ getValue }) => (
           <ZigTypography color='almostWhite'>
-            {t(`transactions.type.${TRANSACTION_TYPE[getValue()]}`)}
+            {t(
+              `transactions.type.${getValue().replace(/_/g, '').toLowerCase()}`,
+            )}
           </ZigTypography>
         ),
         enableSorting: false,
