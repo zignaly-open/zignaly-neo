@@ -1,10 +1,10 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import {
   DepositInfo,
+  FilterType,
   PriceInfo,
   TotalSavings,
   Transactions,
-  TransactionType,
   WalletBalances,
   WalletCoins,
   WithdrawFeeInfo,
@@ -12,7 +12,7 @@ import {
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
-  baseQuery,
+  baseQuery: baseQuery(process.env.REACT_APP_WALLET_API),
   reducerPath: 'walletApi',
   tagTypes: ['Balance', 'WalletTransactions'],
   endpoints: (builder) => ({
@@ -37,7 +37,7 @@ export const api = createApi({
 
     depositInfo: builder.query<DepositInfo, { network: string; coin: string }>({
       query: ({ coin, network }) => ({
-        url: `${process.env.REACT_APP_WALLET_API}/generate-address/${network}/currency/${coin}`,
+        url: `generate-address/${network}/currency/${coin}`,
         method: 'POST',
       }),
     }),
@@ -55,7 +55,7 @@ export const api = createApi({
       }
     >({
       query: ({ network, coin, ...rest }) => ({
-        url: `${process.env.REACT_APP_WALLET_API}/make-withdraw/${network}/currency/${coin}`,
+        url: `make-withdraw/${network}/currency/${coin}`,
         body: rest,
         method: 'POST',
       }),
@@ -71,28 +71,30 @@ export const api = createApi({
     transactionsHistory: builder.query<
       Transactions,
       {
-        type: TransactionType;
+        type: FilterType;
       }
     >({
       query: (params) => {
         return {
-          url: `${
-            process.env.REACT_APP_WALLET_API
-          }/get-operations?${new URLSearchParams(params).toString()}`,
+          url: '/get-operations',
+          params,
         };
       },
       providesTags: ['WalletTransactions'],
     }),
 
-    transactionsHistoryCsv: builder.mutation<
-      { id: string },
-      {
-        exchangeInternalId: string;
-      }
-    >({
-      query: ({ exchangeInternalId }) => ({
-        url: `${process.env.REACT_APP_WALLET_API}/user/exchanges/${exchangeInternalId}/transactions_history_csv`,
-        method: 'POST',
+    downloadTransactionsHistory: builder.mutation<void, void>({
+      query: () => ({
+        url: `history.csv`,
+        responseHandler: async (response) => {
+          const href = await URL.createObjectURL(await response.blob());
+          Object.assign(document.createElement('a'), {
+            href,
+            download: 'transactions.csv',
+          }).click();
+        },
+        cache: 'no-cache',
+        headers: {},
       }),
     }),
 
@@ -104,7 +106,7 @@ export const api = createApi({
       }
     >({
       query: (params) => ({
-        url: `${process.env.REACT_APP_WALLET_API}/generate-buy-price`,
+        url: `generate-buy-price`,
         method: 'POST',
         body: params,
       }),
@@ -119,7 +121,7 @@ export const api = createApi({
       }
     >({
       query: (params) => ({
-        url: `${process.env.REACT_APP_WALLET_API}/buy-coin`,
+        url: `buy-coin`,
         method: 'POST',
         body: params,
       }),
@@ -140,7 +142,7 @@ export const api = createApi({
       }
     >({
       query: ({ network, coin }) => ({
-        url: `${process.env.REACT_APP_WALLET_API}/generate-fee/${network}/currency/${coin}`,
+        url: `generate-fee/${network}/currency/${coin}`,
         method: 'POST',
       }),
     }),
@@ -157,4 +159,5 @@ export const {
   useGenerateWithdrawFeeQuery,
   useWithdrawMutation,
   useBuyMutation,
+  useDownloadTransactionsHistoryMutation,
 } = api;

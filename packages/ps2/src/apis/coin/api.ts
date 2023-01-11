@@ -10,7 +10,7 @@ import baseQuery from '../baseQuery';
 import { isString, pickBy } from 'lodash';
 
 export const api = createApi({
-  baseQuery,
+  baseQuery: baseQuery(),
   reducerPath: 'coinApi',
   tagTypes: ['Balance'],
   endpoints: (builder) => ({

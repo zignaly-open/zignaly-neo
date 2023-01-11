@@ -18,13 +18,11 @@ import { Add, ExpandLess, ExpandMore } from '@mui/icons-material';
 import { NumericFormat } from 'react-number-format';
 import TransactionDetails from '../TransactionDetails';
 import { PaginationState } from '@tanstack/react-table';
-import { useZModal } from 'components/ZModal/use';
 import { StyledZigSelect } from './styles';
-import ExportModal from 'views/Wallet/modals/ExportModal';
+import { useDownloadTransactionsHistoryMutation } from 'apis/wallet/api';
 
 const WalletTransactions = () => {
   const { t } = useTranslation('wallet');
-  const { showModal } = useZModal();
   const [type, setType] = useState<FilterType>('ALL');
   const [filteredData, setFilteredData] = useState<Transaction[]>([]);
   const [pagination, setPagination] = useState<PaginationState>({
@@ -151,6 +149,8 @@ const WalletTransactions = () => {
     [],
   );
 
+  const [downloadCsv] = useDownloadTransactionsHistoryMutation();
+
   const filterOptions = useMemo(
     () =>
       Object.entries(FILTERS_TYPE).map(([k, v]) => ({
@@ -173,9 +173,7 @@ const WalletTransactions = () => {
           <TextButton
             rightElement={<Add sx={{ color: 'links' }} />}
             caption={t('action:export')}
-            onClick={() => {
-              showModal(ExportModal, {});
-            }}
+            onClick={() => downloadCsv()}
           />
           <StyledZigSelect
             options={filterOptions}
