@@ -17,7 +17,7 @@ export const api = createApi({
       never,
       { serviceId: string; keyId: string; code?: string }
     >({
-      invalidatesTags: ['ServiceApiKey'],
+      invalidatesTags: (result) => (result ? ['ServiceApiKey'] : []),
       query: ({ serviceId, keyId, code }) => ({
         method: 'DELETE',
         url: `services/${serviceId}/api_keys/${keyId}`,
@@ -28,7 +28,7 @@ export const api = createApi({
       ServiceApiKey,
       { serviceId: string; keyId: string; data: ServiceApiKeyPayload }
     >({
-      invalidatesTags: ['ServiceApiKey'],
+      invalidatesTags: (result) => (result ? ['ServiceApiKey'] : []),
       query: ({ serviceId, keyId, data }) => ({
         method: 'PUT',
         url: `services/${serviceId}/api_keys/${keyId}`,
@@ -39,7 +39,7 @@ export const api = createApi({
       ServiceApiKey,
       { serviceId: string; alias: string; code?: string }
     >({
-      invalidatesTags: ['ServiceApiKey'],
+      invalidatesTags: (result) => (result ? ['ServiceApiKey'] : []),
       query: ({ serviceId, alias, code }) => ({
         method: 'POST',
         url: `services/${serviceId}/api_keys`,
