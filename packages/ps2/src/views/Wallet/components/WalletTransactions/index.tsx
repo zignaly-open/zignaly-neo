@@ -1,6 +1,10 @@
 import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { transactionStateColor, transactionStateName } from './types';
+import {
+  FILTERS_TYPE_NAME,
+  transactionStateColor,
+  transactionStateName,
+} from './types';
 import {
   createColumnHelper,
   DateLabel,
@@ -11,7 +15,7 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import { FILTERS_TYPE, FilterType, Transaction } from 'apis/wallet/types';
+import { FILTERS_TYPE, FilterValues, Transaction } from 'apis/wallet/types';
 import { useTransactionsHistory } from 'apis/wallet/use';
 import ChainIcon from 'components/ChainIcon';
 import { Add, ExpandLess, ExpandMore } from '@mui/icons-material';
@@ -23,7 +27,7 @@ import { useDownloadTransactionsHistoryMutation } from 'apis/wallet/api';
 
 const WalletTransactions = () => {
   const { t } = useTranslation('wallet');
-  const [type, setType] = useState<FilterType>('ALL');
+  const [type, setType] = useState<FilterValues>('all');
   const [filteredData, setFilteredData] = useState<Transaction[]>([]);
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
@@ -154,8 +158,8 @@ const WalletTransactions = () => {
   const filterOptions = useMemo(
     () =>
       Object.entries(FILTERS_TYPE).map(([k, v]) => ({
-        value: k,
-        label: t(`transactions.type.${v}`),
+        value: v,
+        label: t(`transactions.type.${FILTERS_TYPE_NAME[k]}`),
       })),
     [t],
   );

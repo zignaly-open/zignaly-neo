@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import {
   DepositInfo,
-  FilterType,
+  FilterValues,
   PriceInfo,
   TotalSavings,
   Transactions,
@@ -71,7 +71,7 @@ export const api = createApi({
     transactionsHistory: builder.query<
       Transactions,
       {
-        type: FilterType;
+        type: FilterValues;
       }
     >({
       query: (params) => {

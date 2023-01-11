@@ -65,22 +65,23 @@ export const FILTERS_TYPE = {
   ALL: 'all',
   DEPOSIT: 'deposit',
   WITHDRAW: 'withdraw',
-  CASHBACK_VOLUME: 'cashbackvolume',
-  COIN_SALVAGE: 'coinsalvage',
+  CASHBACK_VOLUME: 'cashback_volume',
+  COIN_SALVAGE: 'coin_salvage',
   COMPENSATION: 'compensation',
   PAYMENT: 'payment',
   REWARD: 'reward',
-  SUCCESS_FEE: 'successfee',
-  WITHDRAW_FEE: 'withdrawfee',
-  ZIGPAD_PLEDGE: 'zigpadpledge',
-  ZIGPAD_RETURN: 'zigpadreturn',
-  ZIGPAD_REWARD: 'zigpadtokensreward',
-  STAKING_VAULT: 'stakingvault',
-  STAKING_VAULT_RETURN: 'stakingvaultreturn',
-  UNSTAKING_VAULT: 'unstakingvault',
-  BUY_ZIG: 'buyzig',
+  SUCCESS_FEE: 'success_fee',
+  WITHDRAW_FEE: 'withdraw_fee',
+  ZIGPAD_PLEDGE: 'zigpad_pledge',
+  ZIGPAD_RETURN: 'zigpad_return',
+  ZIGPAD_REWARD: 'zigpad_reward',
+  STAKING_VAULT: 'staking_vault',
+  STAKING_VAULT_RETURN: 'staking_vault_return',
+  UNSTAKING_VAULT: 'unstaking_vault',
+  BUY_ZIG: 'buy_zig',
 };
-export type FilterType = keyof typeof FILTERS_TYPE;
+export type FilterKeys = keyof typeof FILTERS_TYPE;
+export type FilterValues = typeof FILTERS_TYPE[FilterKeys];
 
 export const enum TransactionStateType {
   COMPLETED = 'SUCCESS',

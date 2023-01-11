@@ -15,10 +15,10 @@ import {
 import TokenSelector from "./components/TokenSelector";
 import ErrorMessage from "components/display/ErrorMessage";
 import Typography from "components/display/Typography";
-import CoinIcon, { CoinSizes } from "../../display/CoinIcon";
+import { CoinSizes } from "../../display/CoinIcon";
 import { InputAmountProps, TokenItem } from "./types";
 import { changeEvent } from "utils/event";
-import { useDeepCompareEffect, useUpdateEffect } from "react-use";
+import { useDeepCompareEffect } from "react-use";
 import ZigPriceLabel from "components/display/ZigPriceLabel";
 import { Box } from "@mui/material";
 import ZigCoinIcon from "components/display/ZigCoinIcon";

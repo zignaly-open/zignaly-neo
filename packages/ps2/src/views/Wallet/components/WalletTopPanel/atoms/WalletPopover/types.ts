@@ -8,7 +8,7 @@ export type BalanceRowProps = {
 
 export type WalletPopoverProps = {
   anchorEl: Element;
-  handleClose: any;
+  handleClose: () => void;
   balance: WalletBalance;
   coin: WalletCoin;
   showLocked?: boolean;
