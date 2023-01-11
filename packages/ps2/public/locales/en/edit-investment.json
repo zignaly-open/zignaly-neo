@@ -59,10 +59,10 @@
       },
       "instant": {
         "title": "Instant Withdrawal",
-        "description": "Instant withdrawals incur a {fee}% fee because Zignaly must cover your funds and inherit your risk.",
+        "description": "Instant withdrawals incur a {{fee}}% fee because Zignaly must cover your funds and inherit your risk.",
         "button": {
           "subtitle": "Withdraw instantly",
-          "title": "{fee}% Fee"
+          "title": "{{fee}}% Fee"
         }
       }
     },
