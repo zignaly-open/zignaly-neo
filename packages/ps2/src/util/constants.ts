@@ -1,4 +1,5 @@
 export const TIME_TO_START_REFRESHING_TOKEN = 1800_000;
+export const INSTANT_WITHDRAWAL_FEE = 10;
 
 export const ASCENDEX_URL =
   'https://ascendex.com/en-us/register?inviteCode=I180THP3';
