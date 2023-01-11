@@ -42,32 +42,9 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
     { skip: !network },
   );
 
-  // const coinObject = coin && coinOptions?.find((x) => x.value === coin);
   const coinObject = coins[selectedCoin];
   const networkObject =
     network && coinObject?.networks?.find((x) => x.network === network);
-
-  // useEffect(() => {
-  //   if (coin) {
-  //     setValue(
-  //       'network',
-  //       coinObject.networks.length === 1 ? coinObject.networks[0].value : null,
-  //     );
-  //   } else if (coinOptions?.length === 1) {
-  //     setValue('coin', coinOptions[0].value);
-  //   }
-  // }, [coin]);
-
-  // useEffect(() => {
-  //   if (!coin && coinOptions && selectedCoin) {
-  //     const match = coinOptions.find((x) => x.value === selectedCoin);
-  //     match && setValue('coin', match?.value);
-  //   }
-  // }, []);
-
-  // if (isFetchingCoins || isFetchingBalances) {
-  //   return <CenteredLoader />;
-  // }
 
   return (
     <form>
@@ -183,6 +160,8 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
                     sx={{
                       display: 'flex',
                       justifyContent: 'space-evenly',
+                      flexDirection: ['column', 'row'],
+                      gap: 2,
                     }}
                   >
                     <ZignalyQRCode

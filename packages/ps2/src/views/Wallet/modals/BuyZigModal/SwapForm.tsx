@@ -125,7 +125,6 @@ const SwapForm = ({
           </Trans>
         </ZigTypography>
       </Box>
-      {/* </Title> */}
       <form onSubmit={handleSubmit(submitForm)}>
         <Grid container flexDirection='column'>
           <Grid item pt={3}>

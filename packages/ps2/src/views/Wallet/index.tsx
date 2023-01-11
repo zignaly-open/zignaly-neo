@@ -48,7 +48,7 @@ const Wallet = () => {
                 </ZigTypography>
               </Box>
               <WalletTopPanel
-                balance={balances?.ZIG?.balance}
+                balances={balances}
                 savings={savings.total}
                 coins={coins}
               />

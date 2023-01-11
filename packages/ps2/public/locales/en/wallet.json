@@ -10,8 +10,15 @@
   "savingMoney": "You are SAVING MONEY with ZIG!",
   "saveMoney": "SAVE MONEY with ZIG!",
   "min": "min.",
+  "balance": {
+    "available": "Available",
+    "locked": "Locked",
+    "unstaking": "Unstaking",
+    "staked": "Staked"
+  },
   "transactions": {
     "internal": "Internal Transfer",
+    "noData": "No transactions",
     "header": {
       "date": "Date",
       "type": "Type",
@@ -22,6 +29,7 @@
     },
     "walletTransactions": "Wallet Transactions",
     "type": {
+      "all": "All Transactions",
       "deposit": "Deposit",
       "internal": "Internal",
       "reward": "Reward",
@@ -42,10 +50,6 @@
       "zigbidsredeemcode": "ZIGBids Redeem Code",
       "zigbidsreferralcode": "ZIGBids Referral Code"
     },
-    "filter": {
-      "max": "(last 3 months max)",
-      "all": "All Transactions"
-    },
     "status": {
       "pending": "Pending",
       "completed": "Completed",
@@ -56,11 +60,6 @@
       "to": "To:",
       "txHash": "TX Hash:",
       "note": "Note:"
-    },
-    "export": {
-      "title": "Transaction History Report",
-      "description": "We will process your request and send you an email in the following 10 minutes with the information to download your transactions history report.",
-      "success": "Your request has been processed successfully. Please check your email for the download link."
     }
   },
   "deposit": {

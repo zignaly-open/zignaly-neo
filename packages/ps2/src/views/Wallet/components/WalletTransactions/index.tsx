@@ -1,26 +1,33 @@
 import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { transactionStateColor, transactionStateName } from './types';
+import {
+  FILTERS_TYPE_NAME,
+  transactionStateColor,
+  transactionStateName,
+} from './types';
 import {
   createColumnHelper,
   DateLabel,
   ListGradientIcon,
+  TextButton,
   ZigCoinIcon,
   ZigTable,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import { Transaction } from 'apis/wallet/types';
+import { FILTERS_TYPE, FilterValues, Transaction } from 'apis/wallet/types';
 import { useTransactionsHistory } from 'apis/wallet/use';
 import ChainIcon from 'components/ChainIcon';
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { Add, ExpandLess, ExpandMore } from '@mui/icons-material';
 import { NumericFormat } from 'react-number-format';
 import TransactionDetails from '../TransactionDetails';
 import { PaginationState } from '@tanstack/react-table';
+import { StyledZigSelect } from './styles';
+import { useDownloadTransactionsHistoryMutation } from 'apis/wallet/api';
 
 const WalletTransactions = () => {
-  const type = 'all';
   const { t } = useTranslation('wallet');
+  const [type, setType] = useState<FilterValues>('all');
   const [filteredData, setFilteredData] = useState<Transaction[]>([]);
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
@@ -146,24 +153,38 @@ const WalletTransactions = () => {
     [],
   );
 
-  // const filterOptions = [
-  //   { value: 'all', label: t('transactions-history:filter.all') },
-  // ].concat(
-  //   Object.entries(TRANSACTION_TYPE).map(([, v]) => {
-  //     return {
-  //       value: v,
-  //       label: t(`transactions-history:${TRANSACTION_TYPE_NAME[v]}`),
-  //     };
-  //   }),
-  // );
+  const [downloadCsv] = useDownloadTransactionsHistoryMutation();
+
+  const filterOptions = useMemo(
+    () =>
+      Object.entries(FILTERS_TYPE).map(([k, v]) => ({
+        value: v,
+        label: t(`transactions.type.${FILTERS_TYPE_NAME[k]}`),
+      })),
+    [t],
+  );
 
   return (
     <>
-      <Box display='flex' gap={1} alignItems='center' color='neutral100' mb={2}>
-        <ListGradientIcon width={40} height={40} />
-        <ZigTypography textTransform='uppercase' variant='h3'>
-          {t('transactions.walletTransactions')}
-        </ZigTypography>
+      <Box display='flex' mb={2} justifyContent='space-between'>
+        <Box display='flex' gap={1} alignItems='center'>
+          <ListGradientIcon width={40} height={40} />
+          <ZigTypography textTransform='uppercase' variant='h3'>
+            {t('transactions.walletTransactions')}
+          </ZigTypography>
+        </Box>
+        <Box display='flex' gap={2}>
+          <TextButton
+            rightElement={<Add sx={{ color: 'links' }} />}
+            caption={t('action:export')}
+            onClick={() => downloadCsv()}
+          />
+          <StyledZigSelect
+            options={filterOptions}
+            value={type}
+            onChange={setType}
+          />
+        </Box>
       </Box>
       <ZigTable
         columns={columns}
@@ -178,6 +199,7 @@ const WalletTransactions = () => {
         }
         onPaginationChange={setPagination}
         loading={transactionsEndpoint.isFetching}
+        emptyMessage={t('transactions.noData')}
       />
     </>
   );

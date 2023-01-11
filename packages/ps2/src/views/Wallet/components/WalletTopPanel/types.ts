@@ -1,7 +1,7 @@
-import { WalletCoins } from 'apis/wallet/types';
+import { WalletBalances, WalletCoins } from 'apis/wallet/types';
 
 export interface WalletTopPanelProps {
-  balance: number;
+  balances: WalletBalances;
   savings: number;
   coins: WalletCoins;
 }

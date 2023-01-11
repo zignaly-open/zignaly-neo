@@ -11,7 +11,7 @@ import baseQuery from '../baseQuery';
 
 export const api = createApi({
   reducerPath: 'userApi',
-  baseQuery,
+  baseQuery: baseQuery(),
   endpoints: (builder) => ({
     signup: builder.mutation<SignupResponse, SignupPayload>({
       query: (credentials) => ({

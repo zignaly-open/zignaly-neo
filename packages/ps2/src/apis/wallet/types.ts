@@ -36,8 +36,6 @@ export type TotalSavings = {
   total: number;
 };
 
-export type TransactionType = 'deposit' | 'withdraw' | 'internal' | 'all';
-
 export type Transaction = {
   amount: string;
   formattedAmount: string;
@@ -63,27 +61,27 @@ export type Transaction = {
 };
 export type Transactions = Transaction[];
 
-// export const TRANSACTION_TYPE = {
-//   DEPOSIT: 'deposit',
-//   internal: 'internal',
-//   reward: 'reward',
-//   successfee: 'successfee',
-//   DEPOSIT: 'coinsalvage',
-//   DEPOSIT: 'withdraw',
-//   DEPOSIT: 'compensation',
-//   DEPOSIT: 'payment',
-//   DEPOSIT: 'cashbackvolume',
-//   DEPOSIT: 'withdrawfee',
-//   DEPOSIT: 'zigpadpledge',
-//   DEPOSIT: 'zigpadreturn',
-//   DEPOSIT: 'zigpadtokensreward',
-//   DEPOSIT: 'stakingvault',
-//   DEPOSIT: 'stakingvaultreturn',
-//   DEPOSIT: 'unstakingvault',
-//   DEPOSIT: 'buyzig',
-//   DEPOSIT: 'zigbidsredeemcode',
-//   DEPOSIT: 'zigbidsreferralcode',
-// };
+export const FILTERS_TYPE = {
+  ALL: 'all',
+  DEPOSIT: 'deposit',
+  WITHDRAW: 'withdraw',
+  CASHBACK_VOLUME: 'cashback_volume',
+  COIN_SALVAGE: 'coin_salvage',
+  COMPENSATION: 'compensation',
+  PAYMENT: 'payment',
+  REWARD: 'reward',
+  SUCCESS_FEE: 'success_fee',
+  WITHDRAW_FEE: 'withdraw_fee',
+  ZIGPAD_PLEDGE: 'zigpad_pledge',
+  ZIGPAD_RETURN: 'zigpad_return',
+  ZIGPAD_REWARD: 'zigpad_reward',
+  STAKING_VAULT: 'staking_vault',
+  STAKING_VAULT_RETURN: 'staking_vault_return',
+  UNSTAKING_VAULT: 'unstaking_vault',
+  BUY_ZIG: 'buy_zig',
+};
+export type FilterKeys = keyof typeof FILTERS_TYPE;
+export type FilterValues = typeof FILTERS_TYPE[FilterKeys];
 
 export const enum TransactionStateType {
   COMPLETED = 'SUCCESS',
