@@ -24,49 +24,36 @@ import { useUpdateUserMutation } from 'apis/user/api';
 import { ReactComponent as RewardsIcon } from 'images/rewards.svg';
 import { WalletTopPanelProps } from './types';
 import { useCurrentUser } from 'apis/user/use';
-import { useUpdateEffect } from 'react-use';
 import { useZModal } from 'components/ZModal/use';
 import WalletDepositModal from '../../modals/WalletDepositModal';
 import BuyZigModal from '../../modals/BuyZigModal';
 import WalletWithdrawModal from '../../modals/WalletWithdrawModal';
 import WalletPopover from './atoms/WalletPopover';
+import { useDispatch } from 'react-redux';
+import { setUser } from 'apis/user/store';
+import { UserData } from 'apis/user/types';
 
 const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
   const { t } = useTranslation('wallet');
   const balance = balances?.ZIG?.balance ?? 0;
   const { showModal } = useZModal();
   const user = useCurrentUser();
-  const [payFeeWithZig, setPayFeeWithZig] = useState(user.payFeeWithZig);
-  const [tradingFeeDiscount, setTradingFeeDiscount] = useState(
-    user.tradingFeeDiscount,
-  );
   const [updateUser] = useUpdateUserMutation();
   const rate = coins?.ZIG.usdPrice;
+  const dispatch = useDispatch();
   // Balance Popover
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const onPayFeeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const val = e.target.checked;
-    setPayFeeWithZig(val);
-    updateUser({ payFeeWithZig: val }).catch(() => {
-      setPayFeeWithZig(user.payFeeWithZig);
-    });
-  };
-
-  const onTradingFeeDiscountChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+  const handleChange = (
+    value: boolean,
+    property: 'payFeeWithZig' | 'tradingFeeDiscount',
   ) => {
-    const val = e.target.checked;
-    setTradingFeeDiscount(val);
-    updateUser({ tradingFeeDiscount: val }).catch(() => {
-      setTradingFeeDiscount(!val);
+    dispatch(setUser({ ...(user as UserData), [property]: value }));
+
+    updateUser({ [property]: value }).catch(() => {
+      dispatch(setUser({ ...(user as UserData), [property]: !value }));
     });
   };
-
-  useUpdateEffect(() => {
-    setTradingFeeDiscount(user.tradingFeeDiscount);
-    setPayFeeWithZig(user.payFeeWithZig);
-  }, [user.payFeeWithZig, user.tradingFeeDiscount]);
 
   return (
     <TopPanel container direction='row'>
@@ -182,7 +169,7 @@ const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
             />
             <ZigTypography variant='h5' color='almostWhite'>
               {t(
-                payFeeWithZig || tradingFeeDiscount
+                user.payFeeWithZig || user.tradingFeeDiscount
                   ? 'savingMoney'
                   : 'saveMoney',
               )}
@@ -194,8 +181,10 @@ const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
             <FormControlLabel
               control={
                 <StyledSwitch
-                  checked={payFeeWithZig}
-                  onChange={onPayFeeChange}
+                  checked={user.payFeeWithZig}
+                  onChange={(e) =>
+                    handleChange(e.target.checked, 'payFeeWithZig')
+                  }
                 />
               }
               label={<SwitchLabel>{t('successFee')}</SwitchLabel>}
@@ -214,8 +203,10 @@ const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
             <FormControlLabel
               control={
                 <StyledSwitch
-                  checked={tradingFeeDiscount}
-                  onChange={onTradingFeeDiscountChange}
+                  checked={user.tradingFeeDiscount}
+                  onChange={(e) =>
+                    handleChange(e.target.checked, 'tradingFeeDiscount')
+                  }
                 />
               }
               label={<SwitchLabel>{t('tradingFee')}</SwitchLabel>}

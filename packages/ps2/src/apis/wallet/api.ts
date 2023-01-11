@@ -94,7 +94,9 @@ export const api = createApi({
           }).click();
         },
         cache: 'no-cache',
-        headers: {},
+        headers: {
+          'content-type': '',
+        },
       }),
     }),
 
