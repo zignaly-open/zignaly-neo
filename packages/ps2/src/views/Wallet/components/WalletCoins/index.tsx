@@ -14,6 +14,7 @@ import { WalletCoinsProps, WalletCoinsTableType } from './types';
 import { useZModal } from 'components/ZModal/use';
 import { Remove } from '@mui/icons-material';
 import WalletWithdrawModal from 'views/Wallet/modals/WalletWithdrawModal';
+import { StyledTable } from './styles';
 
 const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
   const { t } = useTranslation('wallet');
@@ -82,23 +83,27 @@ const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
 
   return (
     <Box mb='70px'>
-      <ZigTable
-        columns={columns}
-        data={Object.entries(balances)
-          .map(([coin, balance]) => ({
-            coin,
-            balance,
-          }))
-          .filter(({ coin, balance }) => coin !== 'ZIG' && balance.balance > 0)}
-        initialState={{
-          sorting: [
-            {
-              id: 'value',
-              desc: true,
-            },
-          ],
-        }}
-      />
+      <StyledTable>
+        <ZigTable
+          columns={columns}
+          data={Object.entries(balances)
+            .map(([coin, balance]) => ({
+              coin,
+              balance,
+            }))
+            .filter(
+              ({ coin, balance }) => coin !== 'ZIG' && balance.balance > 0,
+            )}
+          initialState={{
+            sorting: [
+              {
+                id: 'value',
+                desc: true,
+              },
+            ],
+          }}
+        />
+      </StyledTable>
     </Box>
   );
 };

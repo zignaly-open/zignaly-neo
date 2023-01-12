@@ -10,6 +10,11 @@ export const TopPanel = styled(Grid)`
   flex: 1;
   padding: 40px 32px;
   justify-content: space-around;
+
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    justify-content: flex-start;
+    gap: 70px;
+  }
 `;
 
 export const PanelItem = styled(Grid)`
@@ -68,4 +73,7 @@ export const Separator = styled('div')`
   height: 128px;
   background: #222249;
   align-self: center;
+  ${({ theme }) => theme.breakpoints.down('sm')} {
+    display: none;
+  }
 `;
