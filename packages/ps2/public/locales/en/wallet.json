@@ -67,6 +67,11 @@
     "title": "Deposit Crypto",
     "description": "To deposit {{coin}} tokens, select the network and send to the address below."
   },
+  "coins": {
+    "header": {
+      "value": "Value"
+    }
+  },
   "buy": {
     "buy": "Buy",
     "title": "Buy ZIG coins",

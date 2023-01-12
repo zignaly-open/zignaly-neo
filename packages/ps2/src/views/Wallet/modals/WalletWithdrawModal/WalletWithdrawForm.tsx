@@ -124,7 +124,7 @@ function WalletWithdrawForm({
 
   useEffect(() => {
     const { amount, address } = getValues();
-    if (amount.value) {
+    if (amount?.value) {
       trigger('amount');
     }
 
