@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import { ZignalyIcon } from "../../../index";
 import { sizes, Image, Layout } from "./styles";
 
 import { CoinSizes, CoinTypeProps } from "./types";
@@ -20,9 +21,15 @@ const CoinIcon = ({ size = CoinSizes.MEDIUM, name, coin, className = "" }: CoinT
   }, [coin]);
 
   return (
-    <Layout size={size} className={className} data-testid="coin-icon-view">
-      <Image src={src} alt={name} onError={onError} />
-    </Layout>
+    <>
+      {coin.toLowerCase() === "zig" ? (
+        <ZignalyIcon width={sizes[size as CoinSizes]} height={sizes[size as CoinSizes]} />
+      ) : (
+        <Layout size={size} className={className} data-testid="coin-icon-view">
+          <Image src={src} alt={name} onError={onError} />
+        </Layout>
+      )}
+    </>
   );
 };
 
