@@ -19,7 +19,7 @@ export const WithdrawValidation = (
             value: network && numericFormatter(min.toString(), {}),
             coin,
           }),
-          (val) => !min || new BigNumber(val).isGreaterThan(min),
+          (val) => !min || new BigNumber(val).isGreaterThanOrEqualTo(min),
         ),
       }),
     ),
