@@ -87,13 +87,23 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                 value={''}
                 control={control}
                 placeholder={'0.0'}
+                labelBalance={t('label-balance')}
                 error={
                   (isDirty &&
-                    errors.amount?.types?.checkMaxAndIsNumber &&
-                    'Wrong amount') ||
+                    errors.amount?.types?.checkNumber &&
+                    t('errors.error-number')) ||
+                  (isDirty &&
+                    errors.amount?.types?.checkEmpty &&
+                    t('errors.error-empty')) ||
+                  (isDirty &&
+                    errors.amount?.types?.checkMax &&
+                    t('errors.error-max')) ||
+                  (isDirty &&
+                    errors.amount?.types?.checkZero &&
+                    t('errors.error-zero')) ||
                   (isDirty &&
                     errors.amount?.types?.checkDecimals &&
-                    'Max decimals is 8')
+                    t('errors.error-decimals'))
                 }
                 {...register('amount', {
                   validate: {
@@ -101,8 +111,11 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                       state?.value?.toString().includes('.')
                         ? state?.value?.toString().split('.').pop().length <= 8
                         : true,
-                    checkMaxAndIsNumber: (state) =>
+                    checkMax: (state) =>
                       balance.toNumber() >= Number(state?.value),
+                    checkZero: (state) => Number(state?.value) > 0,
+                    checkEmpty: (state) => state?.value.toString() != '',
+                    checkNumber: (state) => !isNaN(Number(state?.value)),
                   },
                 })}
                 tokens={[
