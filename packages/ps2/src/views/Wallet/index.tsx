@@ -17,13 +17,14 @@ import LayoutContentWrapper from 'components/LayoutContentWrapper';
 import { TotalSavings, WalletBalances, WalletCoins } from 'apis/wallet/types';
 import WalletTopPanel from './components/WalletTopPanel';
 import WalletTransactions from './components/WalletTransactions';
+import WalletCoinsTable from './components/WalletCoins';
 
 const Wallet = () => {
   const { t } = useTranslation('wallet');
   useTitle(t('title'));
-  const balancesEndpoint = useBalanceQuery();
+  const balancesEndpoint = useBalanceQuery(null, { pollingInterval: 60_000 });
   const coinsEndpoint = useCoinsQuery();
-  const savingsEndpoint = useSavingsQuery(null, { pollingInterval: 60_000 });
+  const savingsEndpoint = useSavingsQuery();
 
   return (
     <Layout>
@@ -52,6 +53,7 @@ const Wallet = () => {
                 savings={savings.total}
                 coins={coins}
               />
+              <WalletCoinsTable balances={balances} coins={coins} />
               <WalletTransactions />
             </>
           )}

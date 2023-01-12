@@ -31,7 +31,7 @@ const WalletTransactions = () => {
   const [filteredData, setFilteredData] = useState<Transaction[]>([]);
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: 0,
-    pageSize: 30,
+    pageSize: 20,
   });
   const { pageIndex, pageSize } = pagination;
 
