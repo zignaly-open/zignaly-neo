@@ -25,7 +25,6 @@ export { ThemeProvider as ThemeProviderMui } from "@mui/material";
 import Button from "./components/inputs/Button";
 import CheckBox from "./components/inputs/CheckBox";
 import IconButton from "./components/inputs/IconButton";
-import InputAmount from "./components/inputs/InputAmount";
 import TextButton from "./components/inputs/TextButton";
 import InputText from "./components/inputs/InputText";
 import Select from "./components/inputs/Selector";
@@ -34,14 +33,6 @@ import { ButtonGroup, ValueIndicator } from "./components/styled";
 
 // Layouts
 import { MarginContainer, PageContainer } from "./components/styled";
-
-// Modals
-import MessageModal from "components/modals/MessageModal";
-import AuthVerifyModal from "components/modals/AuthVerifyModal";
-import MinBalanceModal from "components/modals/MinBalanceModal";
-import DepositModal from "components/modals/MyAccount/DepositModal";
-import WithdrawModal from "components/modals/MyAccount/WithdrawModal";
-import ConnectWalletModal from "components/modals/ZigRaffle/ConnectWallet";
 
 // Icons
 export { ReactComponent as CloneIcon } from "assets/icons/clone-icon.svg";
@@ -130,7 +121,7 @@ export {
   Button,
   CheckBox,
   IconButton,
-  InputAmount,
+  // InputAmount,
   InputAmountAdvanced,
   TextButton,
   InputText,
@@ -148,13 +139,6 @@ export {
   ZigTabs,
   ZigTab,
   ZigTabPanel,
-  // Modals
-  ConnectWalletModal,
-  MessageModal,
-  AuthVerifyModal,
-  DepositModal,
-  WithdrawModal,
-  MinBalanceModal,
   /**
    * =-=-=-=-=-=-=-=
    *     Utils
