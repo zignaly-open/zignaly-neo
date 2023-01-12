@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -54,8 +55,24 @@ const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
         {
           id: 'value',
           header: t('coins.header.value'),
-          cell: ({ getValue }) => (
-            <ZigPriceLabel value={getValue()} usd color='almostWhite' />
+          cell: ({ getValue, row: { original } }) => (
+            <Box
+              display='flex'
+              alignItems='center'
+              justifyContent='center'
+              gap={1}
+            >
+              <ZigPriceLabel value={getValue()} usd color='almostWhite' />
+              <ZigTypography variant='h5' color='neutral300'>
+                @
+                <NumericFormat
+                  value={coins[original.coin].usdPrice}
+                  displayType='text'
+                  decimalScale={10}
+                />
+                /{original.coin}
+              </ZigTypography>
+            </Box>
           ),
         },
       ),
