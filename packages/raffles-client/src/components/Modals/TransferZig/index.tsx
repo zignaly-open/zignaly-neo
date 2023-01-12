@@ -15,7 +15,6 @@ import DialogContainer from '../DialogContainer';
 import { Container, InputContainer, StyledErrorOutline } from './styles';
 import { TransferZigModalProps, ITransferField } from './types';
 import SwitchNetworkModal from '../SwitchNetwork';
-import { BigNumber } from 'ethers';
 import { SubmitHandler, useForm } from 'react-hook-form';
 
 const TransferZigModal = (props: TransferZigModalProps) => {
