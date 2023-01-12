@@ -98,19 +98,23 @@ const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
     [],
   );
 
+  const data = Object.entries(balances)
+    .map(([coin, balance]) => ({
+      coin,
+      balance,
+    }))
+    .filter(({ coin, balance }) => coin !== 'ZIG' && balance.balance > 0);
+
+  if (!data.length) {
+    return null;
+  }
+
   return (
     <Box mb='70px'>
       <StyledTable>
         <ZigTable
           columns={columns}
-          data={Object.entries(balances)
-            .map(([coin, balance]) => ({
-              coin,
-              balance,
-            }))
-            .filter(
-              ({ coin, balance }) => coin !== 'ZIG' && balance.balance > 0,
-            )}
+          data={data}
           initialState={{
             sorting: [
               {
