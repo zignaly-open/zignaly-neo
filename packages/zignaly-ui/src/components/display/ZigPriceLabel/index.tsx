@@ -14,7 +14,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   exact,
   usd,
   coinProps,
-  showTooltip = false,
+  showTooltip = true,
   alwaysShowSign = false,
   ...otherProps
 }) => {
