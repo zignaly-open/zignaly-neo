@@ -245,7 +245,7 @@ export const getUserBalance = async (
     },
   });
 
-  return `${userBalance}`;
+  return userBalance ? `${userBalance}` : '0';
 };
 
 export const getUserDeposits = async (
