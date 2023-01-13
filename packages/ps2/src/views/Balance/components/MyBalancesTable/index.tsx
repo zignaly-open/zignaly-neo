@@ -117,16 +117,38 @@ const MyBalancesTable = (): JSX.Element => {
   );
 
   const getFilteredData = useCallback(
-    (coins: CoinDetails, balances: CoinBalances) =>
-      Object.entries<CoinBalance & CoinDetail>(
-        mergeCoinsAndBalances(coins, balances),
+    (coins: CoinDetails, balances: CoinBalances) => {
+      // Populate coins that can be deposited
+      const depositCoinsBalances: CoinBalances = Object.fromEntries(
+        allowedDeposits[exchangeType].map((coin) => [
+          coin,
+          {
+            balanceFree: '',
+            balanceFreeBTC: '',
+            balanceFreeUSDT: '',
+            balanceLocked: '',
+            balanceLockedBTC: '',
+            balanceLockedUSDT: '',
+            balanceTotal: '',
+            balanceTotalBTC: '',
+            balanceTotalExchCoin: '',
+            balanceTotalUSDT: '',
+            exchCoin: '',
+            maxWithdrawAmount: '',
+          },
+        ]),
+      );
+
+      return Object.entries<CoinBalance & CoinDetail>(
+        mergeCoinsAndBalances(coins, { ...depositCoinsBalances, ...balances }),
       )
         .filter(
           ([coin, balance]) =>
             allowedDeposits[exchangeType]?.includes(coin) ||
             +balance.balanceTotal > 0,
         )
-        .map(([coin, balance]) => ({ coin, balance })),
+        .map(([coin, balance]) => ({ coin, balance }));
+    },
     [exchangeType, t],
   );
 
