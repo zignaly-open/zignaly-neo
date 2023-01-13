@@ -143,6 +143,7 @@ const Marketplace: React.FC = () => {
                 data={services}
                 emptyMessage={t('table-search-emptyMessage')}
                 columnVisibility={false}
+                enableSortingRemoval={false}
               />
             </TableWrapper>
           </>
