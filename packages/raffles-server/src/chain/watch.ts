@@ -6,7 +6,6 @@ import {
   receivingAddress,
   rpcSocketUrl,
   rpcUrl,
-  zignalySystemId,
 } from '../../config';
 import { AbiItem } from 'web3-utils';
 import { getLastProcessedBlock, setLastProcessedBlock } from './lastBlock';
@@ -116,7 +115,7 @@ export default async function watchTransactions() {
         amount: web3.utils.fromWei(value, 'ether'),
         currency: '',
         blockchain: 'polygon',
-        note: zignalySystemId,
+        note: '',
       });
 
       const user = await User.findOne({

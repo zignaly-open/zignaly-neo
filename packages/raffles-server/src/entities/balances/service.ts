@@ -156,7 +156,7 @@ export const redeemCode = async ({
 export const deposit = async ({
   walletAddress,
   amount,
-  currency,
+  currency = 'ZIG',
   blockchain,
 }: DepositParams): Promise<Balance> => {
   if (!walletAddress) {
@@ -164,9 +164,6 @@ export const deposit = async ({
   }
   if (!amount || isNaN(Number(amount)) || Number(amount) <= 0) {
     throw new Error('Invalid amount');
-  }
-  if (!currency) {
-    throw new Error('Currency is required');
   }
   if (!blockchain) {
     throw new Error('Blockchain is required');
