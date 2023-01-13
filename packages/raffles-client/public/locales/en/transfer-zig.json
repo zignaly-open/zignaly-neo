@@ -16,7 +16,7 @@
     "unlock": "Unlock MetaMask to continue",
     "unlock-info": "Check the MetaMask extension icon in your browser to unlock your wallet.",
     "errors": {
-        "error-decimals": "Max decimals is 8",
+        "error-decimals": "Please enter numbers with no more than {{maxDecimals}} decimal places.",
         "error-max": "Insufficient funds",
         "error-zero": "Should be > 0",
         "error-empty": "You must indicate an amount",
