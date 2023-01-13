@@ -16,7 +16,6 @@ export type CoinBalance = {
   balanceTotalUSDT: string;
   exchCoin: string;
   maxWithdrawAmount: string;
-  name: string;
 };
 
 export type CoinNetwork = {
