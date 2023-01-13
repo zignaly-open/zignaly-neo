@@ -98,10 +98,10 @@ function WalletWithdrawForm({
       await withdraw({
         network: confirmationData.network,
         coin: confirmationData.coin,
-        address: confirmationData.network,
+        address: confirmationData.address,
         amount: confirmationData.amount.value.toString(),
         fee: feeInfo.key,
-        ...(confirmationData.tag && { memo: confirmationData.tag }),
+        memo: confirmationData.tag,
         ...(code && { code }),
       }).unwrap();
       setStep('success');
