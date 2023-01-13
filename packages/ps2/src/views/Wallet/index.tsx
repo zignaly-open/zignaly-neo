@@ -22,7 +22,7 @@ import WalletCoinsTable from './components/WalletCoins';
 const Wallet = () => {
   const { t } = useTranslation('wallet');
   useTitle(t('title'));
-  const balancesEndpoint = useBalanceQuery(null, { pollingInterval: 60_000 });
+  const balancesEndpoint = useBalanceQuery();
   const coinsEndpoint = useCoinsQuery();
   const savingsEndpoint = useSavingsQuery();
 
