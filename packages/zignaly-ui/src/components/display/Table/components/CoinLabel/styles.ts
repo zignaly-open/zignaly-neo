@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import Typography from "components/display/Typography";
-import CoinIcon from "components/display/CoinIcon";
+import {default as CoinIcon} from "components/display/CoinIcon";
 
 export const Layout = styled.div`
   flex-direction: row;
