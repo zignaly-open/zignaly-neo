@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 import Typography from "components/display/Typography";
-import {default as CoinIcon} from "components/display/CoinIcon";
+import CoinIcon from "components/display/CoinIcon";
 
 export const Layout = styled.div`
   flex-direction: row;
@@ -18,7 +18,7 @@ export const WrapCoin = styled.div`
   justify-content: space-between;
 `;
 
-export const Icon = styled(CoinIcon)`
+export const Icon = styled(props => <CoinIcon {...props} />)`
   display: flex;
   margin-right: 12px;
 `;
