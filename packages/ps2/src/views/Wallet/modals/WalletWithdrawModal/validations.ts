@@ -2,7 +2,10 @@ import { WalletNetwork } from 'apis/wallet/types';
 import BigNumber from 'bignumber.js';
 import { numericFormatter } from 'react-number-format';
 import i18n from 'util/i18next';
-import { inputAmountTokenMaxValidation } from 'util/validation';
+import {
+  decimalsValidation,
+  inputAmountTokenMaxValidation,
+} from 'util/validation';
 import * as yup from 'yup';
 
 export const WithdrawValidation = (
@@ -13,14 +16,17 @@ export const WithdrawValidation = (
   return yup.object({
     amount: inputAmountTokenMaxValidation.concat(
       yup.object().shape({
-        value: yup.string().test(
-          'min',
-          i18n.t('withdraw-crypto:validation.minWithdrawal', {
-            value: network && numericFormatter(min.toString(), {}),
-            coin,
-          }),
-          (val) => !min || new BigNumber(val).isGreaterThanOrEqualTo(min),
-        ),
+        value: yup
+          .string()
+          .test(
+            'min',
+            i18n.t('withdraw-crypto:validation.minWithdrawal', {
+              value: network && numericFormatter(min.toString(), {}),
+              coin,
+            }),
+            (val) => !min || new BigNumber(val).isGreaterThanOrEqualTo(min),
+          )
+          .concat(decimalsValidation(8)),
       }),
     ),
     network: yup.string().required(),
