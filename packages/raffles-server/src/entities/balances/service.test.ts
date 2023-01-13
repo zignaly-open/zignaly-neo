@@ -19,6 +19,13 @@ describe('Balance service', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
 
+  describe('Balance bootstrap', () => {
+    it('should return 0 when there is no balance for an user', async () => {
+      const balance = await getUserBalance('0x0010');
+      expect(balance).toEqual('0');
+    });
+  });
+
   describe('Import Transaction', () => {
     it('should be able to import one balance users from transaction', async () => {
       await importBalance({
@@ -96,6 +103,17 @@ describe('Balance service', () => {
       const userBalance: UserBalanceZhits = await getUserBalance('0x001');
 
       expect(userBalance).toEqual('200');
+    });
+
+    it('should be able to create a deposit if no currency is passed', async () => {
+      await deposit({
+        walletAddress: '0x001',
+        amount: '100',
+        blockchain: 'polygon',
+      });
+
+      const userBalance: UserBalanceZhits = await getUserBalance('0x001');
+      expect(userBalance).toEqual('100');
     });
   });
 

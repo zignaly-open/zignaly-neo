@@ -8,7 +8,7 @@ import { Auction, AuctionBid } from './model';
 import redisService from '../../redisService';
 import { Op } from 'sequelize';
 import { checkAdmin } from '../../util/admin';
-import { isTest, zignalySystemId } from '../../../config';
+import { isTest } from '../../../config';
 import pubsub from '../../pubsub';
 import { BALANCE_CHANGED } from '../users/constants';
 import { isBalanceSufficientForPayment } from './util';
@@ -313,7 +313,7 @@ export const generateService = (user: ContextUser) => ({
       const tx = await makePayout({
         walletAddress: user.publicAddress,
         zhits: auction.currentBid,
-        note: zignalySystemId,
+        note: `${auction.id}`,
       });
 
       userBid.claimTransactionId = `${tx.id}`;
