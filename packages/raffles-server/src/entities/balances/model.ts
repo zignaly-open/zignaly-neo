@@ -52,9 +52,11 @@ export class CurrencyToZhit extends Model {
   @Column(DataType.DECIMAL)
   public amount!: string;
 
+  @Unique
   @Column
   public currency!: string;
 
+  @Unique
   @Column
   public symbol!: string;
 
