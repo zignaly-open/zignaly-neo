@@ -180,6 +180,9 @@ export const deposit = async ({
     zhits: string,
     amount: string,
   ) => {
+    if (Number(convertedAmount) === Number(zhits)) {
+      return Number(amount) * 1;
+    }
     return Number(convertedAmount) > Number(zhits)
       ? Number(amount) / Number(convertedAmount)
       : Number(amount) * Number(zhits);
