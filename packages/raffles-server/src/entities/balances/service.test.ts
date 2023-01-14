@@ -187,7 +187,7 @@ describe('Balance service', () => {
 
   describe('Currency To hit', () => {
     it('should be able to add a new convertion, 1 zhit for 100 token amount', async () => {
-      addNewTokenInCurrencyToZhit('100', '1', '0x045');
+      await addNewTokenInCurrencyToZhit('100', '1', '0x045');
 
       await deposit({
         walletAddress: '0x002',
@@ -201,7 +201,7 @@ describe('Balance service', () => {
     });
 
     it('should be able to add a new convertion, 1 zhit for 200 token amount', async () => {
-      addNewTokenInCurrencyToZhit('100', '1', '0x045');
+      await addNewTokenInCurrencyToZhit('100', '1', '0x045');
 
       await deposit({
         walletAddress: '0x002',
@@ -215,7 +215,7 @@ describe('Balance service', () => {
     });
 
     it('should be able to add a new convertion, 10 zhit for 1 token amount', async () => {
-      addNewTokenInCurrencyToZhit('1', '10', '0x045');
+      await addNewTokenInCurrencyToZhit('1', '10', '0x045');
 
       await deposit({
         walletAddress: '0x002',
@@ -229,7 +229,7 @@ describe('Balance service', () => {
     });
 
     it('should be able to add a new convertion, 1 zhit for 1 token amount', async () => {
-      addNewTokenInCurrencyToZhit('1', '1', '0x045');
+      await addNewTokenInCurrencyToZhit('1', '1', '0x045');
 
       await deposit({
         walletAddress: '0x002',
@@ -243,7 +243,7 @@ describe('Balance service', () => {
     });
 
     it('should be able to add a new convertion, 10 zhit for 10 token amount', async () => {
-      addNewTokenInCurrencyToZhit('10', '10', '0x045');
+      await addNewTokenInCurrencyToZhit('10', '10', '0x045');
 
       await deposit({
         walletAddress: '0x002',
@@ -254,6 +254,15 @@ describe('Balance service', () => {
 
       const userBalance: UserBalanceZhits = await getUserBalance('0x002');
       expect(userBalance).toEqual('200');
+    });
+
+    it('should not be able to insert duplicated contracts', async () => {
+      try {
+        await addNewTokenInCurrencyToZhit('10', '10', '0x045');
+        await addNewTokenInCurrencyToZhit('10', '1', '0x045');
+      } catch (error) {
+        expect(error.message).toEqual('Validation error');
+      }
     });
   });
 });
