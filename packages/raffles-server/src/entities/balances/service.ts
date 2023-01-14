@@ -156,7 +156,7 @@ export const redeemCode = async ({
 export const deposit = async ({
   walletAddress,
   amount,
-  currency = 'ZIG',
+  currency = '0x7bebd226154e865954a87650faefa8f485d36081',
   blockchain,
 }: DepositParams): Promise<Balance> => {
   if (!walletAddress) {
