@@ -19,6 +19,13 @@ describe('Balance service', () => {
   beforeAll(waitUntilTablesAreCreated);
   beforeEach(wipeOut);
 
+  describe('Balance bootstrap', () => {
+    it('should return 0 when there is no balance for an user', async () => {
+      const balance = await getUserBalance('0x0010');
+      expect(balance).toEqual('0');
+    });
+  });
+
   describe('Import Transaction', () => {
     it('should be able to import one balance users from transaction', async () => {
       await importBalance({
@@ -97,6 +104,17 @@ describe('Balance service', () => {
 
       expect(userBalance).toEqual('200');
     });
+
+    it('should be able to create a deposit if no currency is passed', async () => {
+      await deposit({
+        walletAddress: '0x001',
+        amount: '100',
+        blockchain: 'polygon',
+      });
+
+      const userBalance: UserBalanceZhits = await getUserBalance('0x001');
+      expect(userBalance).toEqual('100');
+    });
   });
 
   describe('Pay Fee', () => {
@@ -169,7 +187,7 @@ describe('Balance service', () => {
 
   describe('Currency To hit', () => {
     it('should be able to add a new convertion, 1 zhit for 100 token amount', async () => {
-      addNewTokenInCurrencyToZhit('100', '1', '0x045');
+      await addNewTokenInCurrencyToZhit('100', '1', '0x045');
 
       await deposit({
         walletAddress: '0x002',
@@ -183,7 +201,7 @@ describe('Balance service', () => {
     });
 
     it('should be able to add a new convertion, 1 zhit for 200 token amount', async () => {
-      addNewTokenInCurrencyToZhit('100', '1', '0x045');
+      await addNewTokenInCurrencyToZhit('100', '1', '0x045');
 
       await deposit({
         walletAddress: '0x002',
@@ -197,7 +215,7 @@ describe('Balance service', () => {
     });
 
     it('should be able to add a new convertion, 10 zhit for 1 token amount', async () => {
-      addNewTokenInCurrencyToZhit('1', '10', '0x045');
+      await addNewTokenInCurrencyToZhit('1', '10', '0x045');
 
       await deposit({
         walletAddress: '0x002',
@@ -208,6 +226,43 @@ describe('Balance service', () => {
 
       const userBalance: UserBalanceZhits = await getUserBalance('0x002');
       expect(userBalance).toEqual('2000');
+    });
+
+    it('should be able to add a new convertion, 1 zhit for 1 token amount', async () => {
+      await addNewTokenInCurrencyToZhit('1', '1', '0x045');
+
+      await deposit({
+        walletAddress: '0x002',
+        amount: '200',
+        currency: '0x045',
+        blockchain: 'polygon',
+      });
+
+      const userBalance: UserBalanceZhits = await getUserBalance('0x002');
+      expect(userBalance).toEqual('200');
+    });
+
+    it('should be able to add a new convertion, 10 zhit for 10 token amount', async () => {
+      await addNewTokenInCurrencyToZhit('10', '10', '0x045');
+
+      await deposit({
+        walletAddress: '0x002',
+        amount: '200',
+        currency: '0x045',
+        blockchain: 'polygon',
+      });
+
+      const userBalance: UserBalanceZhits = await getUserBalance('0x002');
+      expect(userBalance).toEqual('200');
+    });
+
+    it('should not be able to insert duplicated contracts', async () => {
+      try {
+        await addNewTokenInCurrencyToZhit('10', '10', '0x045');
+        await addNewTokenInCurrencyToZhit('10', '1', '0x045');
+      } catch (error) {
+        expect(error.message).toEqual('Validation error');
+      }
     });
   });
 });
