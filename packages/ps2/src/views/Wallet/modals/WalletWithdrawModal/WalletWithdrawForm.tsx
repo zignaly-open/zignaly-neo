@@ -212,7 +212,7 @@ function WalletWithdrawForm({
 
         {!!network && networkObject?.withdrawEnable ? (
           <Box mt={2}>
-            <ErrorMessage text={t('wallet.withdraw.notAvailable')} />
+            <ErrorMessage text={t('wallet:notAvailable')} />
           </Box>
         ) : (
           <>
