@@ -46,6 +46,8 @@ export const MinText = withAttrs(ZigTypography, {
   variant: 'h4',
   color: 'greenGraph',
   whiteSpace: 'nowrap',
+  display: 'flex',
+  alignItems: 'center',
 });
 
 export const PercText = withAttrs(ZigTypography, {
