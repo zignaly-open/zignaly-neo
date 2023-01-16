@@ -153,7 +153,8 @@ const WalletTransactions = () => {
     [],
   );
 
-  const [downloadCsv] = useDownloadTransactionsHistoryMutation();
+  const [downloadCsv, downloadCsvStatus] =
+    useDownloadTransactionsHistoryMutation();
 
   const filterOptions = useMemo(
     () =>
@@ -178,6 +179,7 @@ const WalletTransactions = () => {
             rightElement={<Add sx={{ color: 'links' }} />}
             caption={t('action:export')}
             onClick={() => downloadCsv()}
+            loading={downloadCsvStatus.isLoading}
           />
           <StyledZigSelect
             options={filterOptions}
