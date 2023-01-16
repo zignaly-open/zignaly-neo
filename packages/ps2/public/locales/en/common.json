@@ -32,6 +32,7 @@
     "isAuth-button-signUp": "SIGN UP",
     "notAuth-dropdown-link-dashboard": "My Portfolio",
     "notAuth-dropdown-link-balances": "My Balances",
+    "notAuth-dropdown-link-wallet": "ZIG Wallet",
     "notAuth-button-logOut": "Logout"
   },
   "account-selector": {
@@ -42,7 +43,6 @@
     }
   },
   "navigation-menu": {
-    "wallet": "Wallet",
     "profit-sharing": "Profit Sharing"
   },
   "amount": "Amount",
