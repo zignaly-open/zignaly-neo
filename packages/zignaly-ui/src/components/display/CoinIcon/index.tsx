@@ -22,13 +22,13 @@ const CoinIcon = ({ size = CoinSizes.MEDIUM, name, coin, className = "" }: CoinT
 
   return (
     <>
-      {coin.toLowerCase() === "zig" ? (
-        <ZignalyIcon width={sizes[size as CoinSizes]} height={sizes[size as CoinSizes]} />
-      ) : (
-        <Layout size={size} className={className} data-testid="coin-icon-view">
+      <Layout size={size} className={className} data-testid="coin-icon-view">
+        {coin.toLowerCase() === "zig" ? (
+          <ZignalyIcon width={sizes[size as CoinSizes]} height={sizes[size as CoinSizes]} />
+        ) : (
           <Image src={src} alt={name} onError={onError} />
-        </Layout>
-      )}
+        )}
+      </Layout>
     </>
   );
 };

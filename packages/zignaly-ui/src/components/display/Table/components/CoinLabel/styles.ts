@@ -18,7 +18,7 @@ export const WrapCoin = styled.div`
   justify-content: space-between;
 `;
 
-export const Icon = styled(props => <CoinIcon {...props} />)`
+export const Icon = styled(CoinIcon)`
   display: flex;
   margin-right: 12px;
 `;
