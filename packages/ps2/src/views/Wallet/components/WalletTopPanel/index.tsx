@@ -76,12 +76,11 @@ const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
                 }}
               />
               {coins &&
-                ([
+                [
                   balances?.ZIG?.locked,
                   balances?.ZIG?.staked,
                   balances?.ZIG?.unstaking,
-                ].some((v) => v > 0) ||
-                  balances?.ZIG) && (
+                ].some((v) => v > 0) && (
                   <>
                     <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
                       <ChevronRight />
