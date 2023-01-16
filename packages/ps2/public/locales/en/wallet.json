@@ -10,6 +10,7 @@
   "savingMoney": "You are SAVING MONEY with ZIG!",
   "saveMoney": "SAVE MONEY with ZIG!",
   "min": "min.",
+  "notAvailable": "Network not available, please try again later",
   "balance": {
     "available": "Available",
     "locked": "Locked",
