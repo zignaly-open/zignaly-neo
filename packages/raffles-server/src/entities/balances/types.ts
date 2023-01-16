@@ -19,7 +19,7 @@ export type BalanceType = {
 export type DepositParams = {
   walletAddress: string;
   amount: string;
-  currency: string;
+  currency?: string;
   blockchain: string;
   note?: string;
 };

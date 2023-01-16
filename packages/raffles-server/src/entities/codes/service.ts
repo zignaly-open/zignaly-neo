@@ -1,5 +1,4 @@
 import sequelize from 'sequelize';
-import { zignalySystemId } from '../../../config';
 import {
   getUserBalance,
   getDepositsTotal,
@@ -227,7 +226,7 @@ export const generateService = (user: ContextUser) => {
       await redeemCode({
         walletAddress: user.publicAddress,
         zhits: invitedBenefit,
-        note: zignalySystemId,
+        note: code.code,
       });
       await emitBalanceChanged(user);
     }
@@ -238,7 +237,7 @@ export const generateService = (user: ContextUser) => {
         await referralCode({
           walletAddress: inviter.publicAddress,
           zhits: inviterBenefit,
-          note: zignalySystemId,
+          note: `${code.userId}`,
         });
         await emitBalanceChanged(inviter);
       } catch (e) {

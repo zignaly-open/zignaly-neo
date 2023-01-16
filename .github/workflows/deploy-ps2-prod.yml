@@ -1,4 +1,4 @@
-name: PS2 Release deploy
+name: PS2 Production deploy
 on:
   push:
     tags:
@@ -21,11 +21,11 @@ jobs:
                 - 'packages/zignaly-ui/**/*'
 
   build:
-    name: PS2 Release deploy
+    name: PS2 Prod deploy
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).ui_repos.should_skip
     runs-on: ubuntu-latest
-    environment: test
+    environment: prod
     steps:
       - name: Checkout
         uses: actions/checkout@v3

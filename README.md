@@ -82,11 +82,12 @@ We also will have this very storybook deployed to GH pages once the repo issues 
 
 ### Publishing
 
-Run this and follow the instructions:
+We actually do not do that anymore.
 
-```
-lerna publish
-```
+## How to deploy
+
+Push a `release-ps2-{date}-{description}` tag to deploy ps2, a `release-zigbids-{date}-{description}` tag to deploy zigbids. 
+
 
 ## Packages
 
