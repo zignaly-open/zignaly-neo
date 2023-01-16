@@ -6,11 +6,7 @@ import {
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavigationLink } from './atoms';
-import {
-  ROUTE_DASHBOARD,
-  ROUTE_PROFIT_SHARING,
-  ROUTE_WALLET,
-} from '../../../routes';
+import { ROUTE_DASHBOARD, ROUTE_PROFIT_SHARING } from '../../../routes';
 import { Link } from 'react-router-dom';
 import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
 import AccountMenu from '../AccountMenu';
@@ -29,13 +25,6 @@ const Header: React.FC = () => {
           />
         </Link>,
         <HeaderLinksContainer key='links'>
-          <NavigationLink
-            id='menu__wallet'
-            to={ROUTE_WALLET}
-            key='--route-wallet'
-          >
-            {t('navigation-menu.wallet')}
-          </NavigationLink>
           <NavigationLink
             id='menu__profit-sharing'
             to={ROUTE_PROFIT_SHARING}
