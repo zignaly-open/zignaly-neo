@@ -9,7 +9,7 @@ import {
   useTraderServiceTitle,
 } from '../../apis/service/use';
 import { useIsAuthenticated } from '../../apis/user/use';
-import { ROUTE_404, ROUTE_PROFIT_SHARING, ROUTE_SIGNUP } from '../../routes';
+import { ROUTE_404, ROUTE_LOGIN, ROUTE_PROFIT_SHARING } from '../../routes';
 import { Service, TraderServiceAccessLevel } from '../../apis/service/types';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { BackendError, ErrorCodes } from '../../util/errors';
@@ -40,7 +40,7 @@ const ServiceProfile: React.FC = () => {
             ) {
               return (
                 <Navigate
-                  to={ROUTE_SIGNUP}
+                  to={ROUTE_LOGIN}
                   state={{
                     redirectTo: location,
                   }}
@@ -60,7 +60,7 @@ const ServiceProfile: React.FC = () => {
               ) {
                 return (
                   <Navigate
-                    to={ROUTE_SIGNUP}
+                    to={ROUTE_LOGIN}
                     state={{
                       redirectTo: location,
                     }}
