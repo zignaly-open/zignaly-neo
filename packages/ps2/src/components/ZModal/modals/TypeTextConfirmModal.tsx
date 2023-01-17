@@ -27,6 +27,8 @@ function TypeTextConfirmModal({
   DialogProps): React.ReactElement {
   const { t } = useTranslation('action');
   const [confirmWord, setConfirmWord] = useState('');
+  const typedCorrectly =
+    confirmWord?.toLocaleLowerCase() !== safeWord.toLocaleLowerCase();
   return (
     <ZModal {...props} close={close} title={title}>
       {!!description && (
@@ -45,9 +47,9 @@ function TypeTextConfirmModal({
       <Box sx={{ mt: 2 }}>
         <ZigButton
           variant={'contained'}
-          disabled={confirmWord !== safeWord}
+          disabled={typedCorrectly}
           tooltip={
-            confirmWord !== safeWord
+            typedCorrectly
               ? t('common:type-to-confirm', { word: safeWord })
               : undefined
           }
