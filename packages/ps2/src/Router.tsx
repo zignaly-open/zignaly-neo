@@ -24,7 +24,6 @@ import {
   ROUTE_TRADING_SERVICE_EDIT,
   ROUTE_TRADING_SERVICE_SIGNALS,
   ROUTE_BECOME_TRADER,
-  ROUTE_HELP_TRADER,
   ROUTE_HELP_INVESTOR,
   ROUTE_404,
 } from './routes';
@@ -68,7 +67,6 @@ const Router: React.FC = () => (
     </Route>
 
     <Route path={ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
-    <Route path={ROUTE_HELP_TRADER} element={<HelpTrader />} />
     <Route path={ROUTE_HELP_INVESTOR} element={<HelpInvestor />} />
 
     <Route element={<UnauthenticatedWall />}>
