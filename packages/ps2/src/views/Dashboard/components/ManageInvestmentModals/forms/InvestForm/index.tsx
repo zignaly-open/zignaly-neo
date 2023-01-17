@@ -128,7 +128,10 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
               showUnit={true}
               placeholder={'0.0'}
               tokens={[coin]}
-              error={isDirty && t(errors?.amountTransfer?.value?.message)}
+              error={
+                isDirty &&
+                t(errors?.amountTransfer?.value?.message, { maxDecimals: 8 })
+              }
             />
           )}
         </div>
