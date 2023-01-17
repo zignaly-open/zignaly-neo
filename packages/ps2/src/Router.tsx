@@ -25,7 +25,6 @@ import {
   ROUTE_TRADING_SERVICE_EDIT,
   ROUTE_TRADING_SERVICE_SIGNALS,
   ROUTE_BECOME_TRADER,
-  ROUTE_HELP_TRADER,
   ROUTE_HELP_INVESTOR,
   ROUTE_404,
   ROUTE_WALLET,
@@ -45,7 +44,6 @@ import AuthenticatedWall from 'util/walls/AuthenticatedWall.tsx';
 import UnauthenticatedWall from './util/walls/UnauthenticatedWall';
 import ServiceOwnerWall from './util/walls/ServiceOwnerWall';
 import HelpInvestor from './views/Help/HelpInvestor';
-import HelpTrader from './views/Help/HelpTrader';
 import NotFound from 'views/404';
 
 const Router: React.FC = () => (
@@ -71,7 +69,6 @@ const Router: React.FC = () => (
     </Route>
 
     <Route path={ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
-    <Route path={ROUTE_HELP_TRADER} element={<HelpTrader />} />
     <Route path={ROUTE_HELP_INVESTOR} element={<HelpInvestor />} />
 
     <Route element={<UnauthenticatedWall />}>

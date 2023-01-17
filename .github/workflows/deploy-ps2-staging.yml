@@ -1,8 +1,8 @@
-name: PS2 Release deploy
+name: PS2 Staging deploy
 on:
   push:
-    tags:
-      - 'release-ps2-*'
+    branches:
+      - master
 
 jobs:
   pre_job:
@@ -21,7 +21,7 @@ jobs:
                 - 'packages/zignaly-ui/**/*'
 
   build:
-    name: PS2 Release deploy
+    name: PS2 Staging deploy
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).ui_repos.should_skip
     runs-on: ubuntu-latest
@@ -37,13 +37,14 @@ jobs:
           envkey_ESLINT_NO_DEV_ERRORS: true
           envkey_REACT_APP_LIVE_SESSION_TRACK_ID: ${{ secrets.PS2_LIVE_SESSION_TRACK_ID }}
           envkey_REACT_APP_SEGMENT_KEY: ${{ secrets.PS2_SEGMENT_KEY }}
-          envkey_REACT_APP_ENABLE_TRACKING: true
+          envkey_REACT_APP_ENABLE_TRACKING: false
           envkey_REACT_APP_SEGMENT_SCRIPT_SRC: ${{ secrets.PS2_SEGMENT_SCRIPT_SRC }}
           # well yeah we could store all this as action secrets in the repo
           # but would that make any sense since these values are not secret
           # and anyone with a half-functioning brain can reverse-engineer those from the source code
           envkey_REACT_APP_GTM_ID: GTM-5ZQ4JLK
-          envkey_REACT_APP_BASE_API: https://zignaly.com/new_api
+          envkey_REACT_APP_ENABLE_TEST_LANGUAGE: 1
+          envkey_REACT_APP_BASE_API: https://staging.zignaly.com/new_api
           envkey_REACT_APP_WALLET_API: https://wallet.zignaly.com/api
           envkey_REACT_APP_SEGMENT_NAME: zignaly
           envkey_REACT_APP_GOOGLE_CAPTCHA_TOKEN: 6LeBZmwbAAAAAA7kbtk_4-7Yq124fQ0T-J9HrZfS
@@ -65,7 +66,7 @@ jobs:
         with:
           args: --delete
         env:
-          AWS_S3_BUCKET: ${{ secrets.AWS_PS2_PROD_S3_BUCKET }}
+          AWS_S3_BUCKET: ${{ secrets.AWS_PS2_STAGING_S3_BUCKET }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PS2_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PS2_SECRET_KEY }}
           AWS_REGION: 'us-east-1'
@@ -73,7 +74,7 @@ jobs:
       - name: Invalidate CloudFront
         uses: chetan/invalidate-cloudfront-action@v2
         env:
-          DISTRIBUTION: ${{ secrets.AWS_PS2_PROD_DISTRIBUTION }}
+          DISTRIBUTION: ${{ secrets.AWS_PS2_STAGING_DISTRIBUTION }}
           PATHS: '/'
           AWS_REGION: 'us-east-1'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PS2_ACCESS_KEY }}

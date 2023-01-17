@@ -4,17 +4,22 @@ export function getPrecisionForCoin(coin: string, value: string | number): numbe
   if (+value === 0) return 2;
   const coinPrecision = coinPrecisions[coin];
   // Show more decimals for stable coins with a value lower than 0.01
-  if (coinPrecision === 2 && +value > 0 && +value < 0.01) return 8;
   return coinPrecision || 8;
 }
 
 export function shortenNumber(value: number): {
   value: number;
   precision: number;
-  suffix: "K" | "M" | "m" | "";
+  suffix: "G" | "K" | "M" | "μ" | "";
 } {
   const log = Math.log10(Math.abs(value));
-  if (log >= 6) {
+  if (log >= 9) {
+    return {
+      value: value / Math.pow(10, 9),
+      suffix: "G",
+      precision: log >= 10 ? 1 : 2,
+    };
+  } else if (log >= 6) {
     return {
       value: value / Math.pow(10, 6),
       suffix: "M",
@@ -26,10 +31,10 @@ export function shortenNumber(value: number): {
       suffix: "K",
       precision: log >= 4 ? 1 : 2,
     };
-  } else if (log < -2) {
+  } else if (log > -16 && log < -5) {
     return {
-      value: value * Math.pow(10, 3),
-      suffix: "m",
+      value: value * Math.pow(10, 6),
+      suffix: "μ",
       precision: 2,
     };
   } else {

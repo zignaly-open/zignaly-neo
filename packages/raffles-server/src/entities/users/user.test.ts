@@ -5,6 +5,7 @@ import {
   checkUsername,
   createAlice,
   createAlicesDiscord,
+  createAliceDeposit,
   createBob,
   createBobDiscord,
   getBalance,
@@ -85,62 +86,53 @@ describe('User', () => {
   });
 
   describe('fetching balance => redis', () => {
-    it('should update USER_CYBAVO_BALANCE on empty store', async () => {
+    it('should update USER_DB_BALANCE on empty store', async () => {
       const [alice, aliceToken] = await createAlice(300);
       const { balance } = await getBalance(aliceToken);
       expect(balance).toBe('300.00');
       const res = await redisService.redis.hget(
-        `USER_CYBAVO_BALANCE`,
+        `USER_DB_BALANCE`,
         alice.id.toString(),
       );
       expect(res).toBe('300000');
     });
 
-    it('should update USER_CYBAVO_BALANCE on different value', async () => {
+    it('should update USER_DB_BALANCE on different value', async () => {
       const [alice, aliceToken] = await createAlice(300);
-      await redisService.redis.set(
-        `USER-${alice.id}:CYBAVO_BALANCE`,
-        200 * 1000,
-      );
+      await redisService.redis.set(`USER-${alice.id}:DB_BALANCE`, 200 * 1000);
       const { balance } = await getBalance(aliceToken);
       expect(balance).toBe('300.00');
       const res = await redisService.redis.hget(
-        `USER_CYBAVO_BALANCE`,
+        `USER_DB_BALANCE`,
         alice.id.toString(),
       );
       expect(res).toBe('300000');
     });
 
-    it('should return USER_CYBAVO_BALANCE if no change', async () => {
+    it('should return USER_DB_BALANCE if no change', async () => {
       const [alice, aliceToken] = await createAlice(200);
-      await redisService.redis.set(
-        `USER-${alice.id}:CYBAVO_BALANCE`,
-        200 * 1000,
-      );
+      await redisService.redis.set(`USER-${alice.id}:DB_BALANCE`, 200 * 1000);
       const { balance } = await getBalance(aliceToken);
       expect(balance).toBe('200.00');
     });
 
-    it('should update USER_CURRENT_BALANCE if different cybavo balance', async () => {
-      const [alice, aliceToken, cybavoMock] = await createAlice(300.33);
+    it('should update USER_CURRENT_BALANCE if different than service balance', async () => {
+      const [alice, aliceToken] = await createAlice(300.33);
       // User has bid 50 ZIGS
       await redisService.redis.hset(
         `USER_CURRENT_BALANCE`,
         alice.id,
         250.33 * 1000,
       );
-      // User has received 100.11009 ZIGS
-      cybavoMock.setBalance(400.44009);
+
+      await createAliceDeposit(100.11009);
 
       expect(await getBalance(aliceToken)).toEqual(
         expect.objectContaining({ balance: '350.44' }),
       );
 
       expect(
-        await redisService.redis.hget(
-          `USER_CYBAVO_BALANCE`,
-          alice.id.toString(),
-        ),
+        await redisService.redis.hget(`USER_DB_BALANCE`, alice.id.toString()),
       ).toBe('400440');
       expect(
         await redisService.redis.hget(

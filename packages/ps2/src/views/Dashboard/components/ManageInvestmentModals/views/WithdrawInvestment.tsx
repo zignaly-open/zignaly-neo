@@ -1,4 +1,4 @@
-import { Button, Typography } from '@zignaly-open/ui';
+import { Button, ZigTypography } from '@zignaly-open/ui';
 import React from 'react';
 import {
   WithdrawFundsOptionWrapper,
@@ -11,6 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { Grid, useMediaQuery } from '@mui/material';
 import { ChangeViewFn, EditInvestmentViews } from '../types';
 import theme from '../../../../../theme';
+import { INSTANT_WITHDRAWAL_FEE } from 'util/constants';
 
 const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
   setView,
@@ -24,9 +25,9 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
       <Grid container marginBottom={3} rowSpacing={6}>
         <Grid item sm={12} md={6}>
           <WithdrawFundsOptionWrapper border={matchesSmall}>
-            <Typography component={'p'} variant={'h2'} color={'neutral100'}>
+            <ZigTypography component={'p'} variant={'h2'} color={'neutral100'}>
               {t('modal.withdrawInvestment.freeWithdrawal.title')}
-            </Typography>
+            </ZigTypography>
             <WithdrawFundsSpaceTaker
               component={'p'}
               variant={'body1'}
@@ -40,7 +41,7 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
               <Button
                 caption={
                   <MultilineButton>
-                    <Typography
+                    <ZigTypography
                       component={'p'}
                       variant={'h5'}
                       color={'neutral150'}
@@ -48,8 +49,8 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
                       {t(
                         'modal.withdrawInvestment.freeWithdrawal.button.subtitle',
                       )}
-                    </Typography>
-                    <Typography
+                    </ZigTypography>
+                    <ZigTypography
                       component={'p'}
                       variant={'h3'}
                       color={'neutral000'}
@@ -57,7 +58,7 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
                       {t(
                         'modal.withdrawInvestment.freeWithdrawal.button.title',
                       )}
-                    </Typography>
+                    </ZigTypography>
                   </MultilineButton>
                 }
                 size={'xlarge'}
@@ -68,27 +69,31 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
         </Grid>
         <Grid item sm={12} md={6}>
           <WithdrawFundsOptionWrapper>
-            <Typography component={'p'} variant={'h2'} color={'neutral100'}>
+            <ZigTypography component={'p'} variant={'h2'} color={'neutral100'}>
               {t('modal.withdrawInvestment.instant.title')}
-            </Typography>
+            </ZigTypography>
             <WithdrawFundsSpaceTaker
               component={'p'}
               variant={'body1'}
               color={'neutral200'}
               weight={'regular'}
             >
-              {t('modal.withdrawInvestment.instant.description')}
+              {t('modal.withdrawInvestment.instant.description', {
+                fee: INSTANT_WITHDRAWAL_FEE,
+              })}
             </WithdrawFundsSpaceTaker>
             <WithdrawFundsButtonWrapper>
               <Button
                 caption={
                   <MultilineButton>
-                    <Typography variant={'h5'} color={'neutral150'}>
+                    <ZigTypography variant={'h5'} color={'neutral150'}>
                       {t('modal.withdrawInvestment.instant.button.subtitle')}
-                    </Typography>
-                    <Typography variant={'h3'} color={'neutral000'}>
-                      {t('modal.withdrawInvestment.instant.button.title')}
-                    </Typography>
+                    </ZigTypography>
+                    <ZigTypography variant={'h3'} color={'neutral000'}>
+                      {t('modal.withdrawInvestment.instant.button.title', {
+                        fee: INSTANT_WITHDRAWAL_FEE,
+                      })}
+                    </ZigTypography>
                   </MultilineButton>
                 }
                 size={'xlarge'}

@@ -34,6 +34,7 @@ const endpointsWhitelistedFor401 = [
   'user/verify_code/enable_user',
   `user/verify_2fa`,
   `known_device/verify`,
+  `login`,
 ];
 
 const maybeReportError = (error: FetchBaseQueryError) => {

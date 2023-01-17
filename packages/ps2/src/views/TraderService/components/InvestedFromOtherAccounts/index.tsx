@@ -7,7 +7,6 @@ import ZModal from '../../../../components/ZModal';
 import { Service } from '../../../../apis/service/types';
 import {
   TextButton,
-  UsdPriceLabel,
   ZigTable,
   ZigTablePriceLabel,
   ZigTypography,
@@ -63,12 +62,13 @@ function InvestedFromOtherAccounts({
               {
                 header: t('other-accounts.invested'),
                 accessorKey: 'invested',
-                cell: ({ getValue }) =>
-                  service.ssc === 'USDT' ? (
-                    <UsdPriceLabel value={getValue()} />
-                  ) : (
-                    <ZigTablePriceLabel coin={service.ssc} value={getValue()} />
-                  ),
+                cell: ({ getValue }) => (
+                  <ZigTablePriceLabel
+                    exact
+                    coin={service.ssc}
+                    value={getValue()}
+                  />
+                ),
               },
               {
                 header: '',

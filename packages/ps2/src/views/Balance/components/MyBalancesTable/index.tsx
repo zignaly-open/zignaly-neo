@@ -68,8 +68,8 @@ const MyBalancesTable = (): JSX.Element => {
       columnHelper.accessor((row) => row.balance.balanceTotalBTC, {
         id: 'balanceTotalBTC',
         header: t('tableHeader.valueBTC'),
-        cell: ({ getValue, row }) => (
-          <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
+        cell: ({ getValue }) => (
+          <ZigTablePriceLabel coin='BTC' value={getValue()} />
         ),
         sortingFn: 'alphanumeric',
       }),
@@ -117,16 +117,38 @@ const MyBalancesTable = (): JSX.Element => {
   );
 
   const getFilteredData = useCallback(
-    (coins: CoinDetails, balances: CoinBalances) =>
-      Object.entries<CoinBalance & CoinDetail>(
-        mergeCoinsAndBalances(coins, balances),
+    (coins: CoinDetails, balances: CoinBalances) => {
+      // Populate coins that can be deposited
+      const depositCoinsBalances: CoinBalances = Object.fromEntries(
+        allowedDeposits[exchangeType].map((coin) => [
+          coin,
+          {
+            balanceFree: '',
+            balanceFreeBTC: '',
+            balanceFreeUSDT: '',
+            balanceLocked: '',
+            balanceLockedBTC: '',
+            balanceLockedUSDT: '',
+            balanceTotal: '',
+            balanceTotalBTC: '',
+            balanceTotalExchCoin: '',
+            balanceTotalUSDT: '',
+            exchCoin: '',
+            maxWithdrawAmount: '',
+          },
+        ]),
+      );
+
+      return Object.entries<CoinBalance & CoinDetail>(
+        mergeCoinsAndBalances(coins, { ...depositCoinsBalances, ...balances }),
       )
         .filter(
           ([coin, balance]) =>
             allowedDeposits[exchangeType]?.includes(coin) ||
             +balance.balanceTotal > 0,
         )
-        .map(([coin, balance]) => ({ coin, balance })),
+        .map(([coin, balance]) => ({ coin, balance }));
+    },
     [exchangeType, t],
   );
 

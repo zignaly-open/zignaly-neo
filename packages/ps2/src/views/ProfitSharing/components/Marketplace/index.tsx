@@ -9,7 +9,6 @@ import {
   createColumnHelper,
   ZigChartMini,
 } from '@zignaly-open/ui';
-import { formatDistance } from 'date-fns';
 import { Box } from '@mui/material';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { MarketplaceService } from '../../../../apis/marketplace/types';
@@ -19,6 +18,7 @@ import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace
 import AssetsInPool from '../../../../components/AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 import { TableWrapper } from './styles';
+import { formatLocalizedDistance } from '../../../Dashboard/components/MyDashboard/util';
 
 const Marketplace: React.FC = () => {
   const marketplaceEndpoint = useMarketplace();
@@ -64,7 +64,8 @@ const Marketplace: React.FC = () => {
         ),
         sortingFn: 'alphanumeric',
       }),
-      columnHelper.accessor('pnlPercent90t', {
+      columnHelper.accessor((row) => Number(row.pnlPercent90t), {
+        id: 'pnlPercent90t',
         header: t('table.n-months-pnl', { count: 3 }),
         meta: {
           subtitle: t('table.account-age'),
@@ -76,15 +77,15 @@ const Marketplace: React.FC = () => {
               lineHeight: '28px',
             }}
             value={props.getValue()}
-            label={formatDistance(
+            label={formatLocalizedDistance(
               new Date(),
               new Date(props.row.original.createdAt),
             )}
           />
         ),
-        sortingFn: 'alphanumeric',
       }),
-      columnHelper.accessor('pnlPercent30t', {
+      columnHelper.accessor((row) => Number(row.pnlPercent30t), {
+        id: 'pnlPercent30t',
         header: t('table.n-months-pnl', { count: 1 }),
         cell: (props) =>
           +props.getValue() ||
@@ -98,7 +99,6 @@ const Marketplace: React.FC = () => {
               {t('tableHeader.1-mo.no-data')}
             </ZigTypography>
           ),
-        sortingFn: 'alphanumeric',
       }),
       columnHelper.display({
         header: '',
@@ -143,6 +143,7 @@ const Marketplace: React.FC = () => {
                 data={services}
                 emptyMessage={t('table-search-emptyMessage')}
                 columnVisibility={false}
+                enableSortingRemoval={false}
               />
             </TableWrapper>
           </>

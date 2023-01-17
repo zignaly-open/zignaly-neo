@@ -20,7 +20,12 @@ export const api = createApi({
         body: credentials,
       }),
     }),
-
+    logout: builder.mutation<void, void>({
+      query: () => ({
+        url: 'logout',
+        method: 'POST',
+      }),
+    }),
     login: builder.mutation<LoginResponse, LoginFullPayload>({
       query: (credentials) => ({
         url: 'login',
@@ -131,6 +136,7 @@ export const api = createApi({
 
 export const {
   useSignupMutation,
+  useLogoutMutation,
   useLoginMutation,
   useLazyUserQuery,
   useLazySessionQuery,

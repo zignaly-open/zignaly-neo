@@ -27,11 +27,17 @@
   "tags": "Tags:"
   },
   "periods": {
-    "7d": "Week",
-    "30d": "Month",
+    "7d-full": "1 Week",
+    "30d-full": "1 Month",
+    "90d-full": "3 Months",
+    "180d-full": "6 Months",
+    "365d-full": "1 Year",
+    "all-full": "All time",
+    "7d": "1 W",
+    "30d": "1 Mo",
     "90d": "3 Mo",
     "180d": "6 Mo",
-    "365d": "1 Year",
+    "365d": "1 Y",
     "all": "All"
   },
   "other-accounts": {

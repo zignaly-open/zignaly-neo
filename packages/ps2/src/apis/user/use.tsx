@@ -13,6 +13,7 @@ import {
   useLazySessionQuery,
   useLazyUserQuery,
   useLoginMutation,
+  useLogoutMutation,
   useResendCodeMutation,
   useResendCodeNewUserMutation,
   useResendKnownDeviceCodeMutation,
@@ -33,7 +34,11 @@ import {
   setUser,
 } from './store';
 import { useDispatch, useSelector } from 'react-redux';
-import { trackEndSession, trackNewSession } from '../../util/analytics';
+import {
+  trackConversion,
+  trackEndSession,
+  trackNewSession,
+} from '../../util/analytics';
 import { endLiveSession, startLiveSession } from '../../util/liveSession';
 import { RootState } from '../store';
 import { useTranslation } from 'react-i18next';
@@ -104,6 +109,7 @@ export const useSignup = (): [
       try {
         const user = await signup(payload).unwrap();
         await startSession({ ...user, emailUnconfirmed: true });
+        trackConversion();
       } finally {
         setLoading(false);
       }
@@ -148,7 +154,9 @@ export const useAuthenticate = (): [
 
 export function useLogout(): () => void {
   const dispatch = useDispatch();
+  const [logoutRequest] = useLogoutMutation();
   return () => {
+    logoutRequest();
     dispatch(logout());
     endLiveSession();
     trackEndSession();

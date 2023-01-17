@@ -1,6 +1,6 @@
 {
   "title": "Withdraw Crypto",
-  "description": "Withdraw crypto to an external account. To move funds between Zignaly accounts, use a transfer instead.",
+  "description": "Withdraw crypto to an external account.",
   "coinSelector": {
     "label": "Coin:",
     "placeholder": "Search a coin"

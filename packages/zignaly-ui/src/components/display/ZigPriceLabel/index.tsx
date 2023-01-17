@@ -14,6 +14,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   exact,
   usd,
   coinProps,
+  showTooltip = !usd,
   alwaysShowSign = false,
   ...otherProps
 }) => {
@@ -69,10 +70,13 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
     </ZigTypography>
   );
 
-  return shorten ? (
+  return showTooltip || shorten ? (
     <Tooltip
       title={
-        numericFormatter(value.toString(), { thousandSeparator: true, displayType: "text" }) +
+        numericFormatter(value?.toString() ?? "", {
+          thousandSeparator: true,
+          displayType: "text",
+        }) +
         " " +
         coin
       }
