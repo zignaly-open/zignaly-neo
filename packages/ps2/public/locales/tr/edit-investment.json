@@ -51,10 +51,10 @@
 			"title": "Çekim Talebi",
 			"instant": {
 				"title": "Anında Çekim",
-				"description": "Zignaly, fonunuzu karşılayarak riskinizi devralmak üzere Anında Çekim işlemlerinde  %5'lik kesinti uygulamaktadır.",
+				"description": "Zignaly, fonunuzu karşılayarak riskinizi devralmak üzere Anında Çekim işlemlerinde  %{{fee}}'lik kesinti uygulamaktadır.",
 				"button": {
 					"subtitle": "Anında Çekim",
-					"title": "%5 Kesinti Ücreti"
+					"title": "%{{fee}} Kesinti Ücreti"
 				}
 			},
 			"freeWithdrawal": {
