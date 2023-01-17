@@ -51,10 +51,10 @@
 			"title": "Pedido de Retirada",
 			"instant": {
 				"title": "Retirada Instantânea",
-				"description": "As retiradas instantâneas incorrem numa taxa de 5% porque a Zignaly deve cobrir os seus fundos e herdar o seu risco.",
+				"description": "As retiradas instantâneas incorrem numa taxa de {{fee}}% porque a Zignaly deve cobrir os seus fundos e herdar o seu risco.",
 				"button": {
 					"subtitle": "Retirada imediata",
-					"title": "5% de Taxa"
+					"title": "{{fee}}% de Taxa"
 				}
 			},
 			"freeWithdrawal": {
