@@ -51,10 +51,10 @@
 			"title": "Solicitud de Retiro",
 			"instant": {
 				"title": "Retiro Instantáneo",
-				"description": "Los retiros instantáneos incurren en una tarifa del 5% porque Zignaly debe cubrir sus fondos y heredar su riesgo.",
+				"description": "Los retiros instantáneos incurren en una tarifa del {{fee}}% porque Zignaly debe cubrir sus fondos y heredar su riesgo.",
 				"button": {
 					"subtitle": "Retirada instantánea",
-					"title": "Comisión 5%"
+					"title": "Comisión {{fee}}%"
 				}
 			},
 			"freeWithdrawal": {

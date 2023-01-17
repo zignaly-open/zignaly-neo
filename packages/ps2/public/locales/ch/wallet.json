@@ -1,0 +1,100 @@
+{
+  "title": "CH-ŽÏĜ Wállëṫ",
+  "totalBalance": "CH-Ṫöṫál ŽÏĜ Báláńĉë",
+  "savings": "CH-Ѓëwáѓḋŝ & Ŝávïńĝŝ",
+  "successFee": "CH-Ŝüĉĉëŝŝ ḟëë ḋïŝĉöüńṫ:",
+  "tradingFee": "CH-Ṫѓáḋïńĝ ḟëëŝ ĉáŝĥbáĉk:",
+  "successFeeTooltip": "CH-Ṗáy ṫĥë ŝüĉĉëŝŝ ḟëëŝ öḟ áńy Ṗѓöḟïṫ Ŝĥáѓïńĝ Ŝëѓvïĉë wïṫĥ ŽÏĜ áńḋ ĝëṫ á ḋïŝĉöüńṫ öń ṫĥë áṁöüńṫ ṫö ṗáy.",
+  "tradingFeeTooltip": "CH-Žïĝńály wïll ѓëṫüѓń ṫĥë wĥölë ṫѓáḋïńĝ ḟëëŝ öḟ yöüѓ ńëw ṫѓáḋëŝ ïń ÜŜḊṪ ṫö yöüѓ áĉĉöüńṫ áńḋ wïll ĉĥáѓĝë yöü ṫĥë ëqüïválëńṫ áṁöüńṫ ṁïńüŝ ṫĥë ḋïŝĉöüńṫ ïń ŽÏĜ.",
+  "withdraw": "CH-Wïṫĥḋѓáw",
+  "savingMoney": "CH-Yöü áѓë ŜÁVÏŃĜ ṀÖŃËY wïṫĥ ŽÏĜ!",
+  "saveMoney": "CH-ŜÁVË ṀÖŃËY wïṫĥ ŽÏĜ!",
+  "min": "CH-ṁïń.",
+  "transactions": {
+    "internal": "CH-Ïńṫëѓńál Ṫѓáńŝḟëѓ",
+    "header": {
+      "date": "CH-Ḋáṫë",
+      "type": "CH-Ṫyṗë",
+      "amount": "CH-Áṁöüńṫ",
+      "coin": "CH-Ĉöïń",
+      "network": "CH-Ńëṫwöѓk",
+      "status": "CH-Ŝṫáṫüŝ"
+    },
+    "walletTransactions": "CH-Wállëṫ Ṫѓáńŝáĉṫïöńŝ",
+    "type": {
+      "deposit": "CH-Ḋëṗöŝïṫ",
+      "internal": "CH-Ïńṫëѓńál",
+      "reward": "CH-Ѓëwáѓḋ",
+      "successfee": "CH-Ŝüĉĉëŝŝ Ḟëë",
+      "coinsalvage": "CH-Ĉöïń Ŝálváĝë",
+      "withdraw": "CH-Wïṫĥḋѓáw",
+      "compensation": "CH-Ĉöṁṗëńŝáṫïöń",
+      "payment": "CH-Ṗáyṁëńṫ",
+      "cashbackvolume": "CH-Ĉáŝĥbáĉk Völüṁë",
+      "withdrawfee": "CH-Wïṫĥḋѓáw Ḟëë",
+      "zigpadpledge": "CH-ŽÏĜṖáḋ Ṗlëḋĝë",
+      "zigpadreturn": "CH-ŽÏĜṖáḋ Ѓëṫüѓń",
+      "zigpadtokensreward": "CH-ÏḊÖ Ṫökëńŝ Ḋïŝṫѓïbüṫïöń",
+      "stakingvault": "CH-Ŝṫákïńĝ Váülṫ",
+      "stakingvaultreturn": "CH-Ŝṫákïńĝ Váülṫ Ѓëṫüѓń",
+      "unstakingvault": "CH-Üńŝṫákë",
+      "buyzig": "CH-Büy ŽÏĜ",
+      "zigbidsredeemcode": "CH-ŽÏĜBïḋŝ Ѓëḋëëṁ Ĉöḋë",
+      "zigbidsreferralcode": "CH-ŽÏĜBïḋŝ Ѓëḟëѓѓál Ĉöḋë"
+    },
+    "filter": {
+      "max": "CH-(láŝṫ 3 ṁöńṫĥŝ ṁáx)",
+      "all": "CH-Áll Ṫѓáńŝáĉṫïöńŝ"
+    },
+    "status": {
+      "pending": "CH-Ṗëńḋïńĝ",
+      "completed": "CH-Ĉöṁṗlëṫëḋ",
+      "error": "CH-Ëѓѓöѓ"
+    },
+    "details": {
+      "from": "CH-Ḟѓöṁ:",
+      "to": "CH-Ṫö:",
+      "txHash": "CH-ṪX Ĥáŝĥ:",
+      "note": "CH-Ńöṫë:"
+    },
+    "export": {
+      "title": "CH-Ṫѓáńŝáĉṫïöń Ĥïŝṫöѓy Ѓëṗöѓṫ",
+      "description": "CH-Wë wïll ṗѓöĉëŝŝ yöüѓ ѓëqüëŝṫ áńḋ ŝëńḋ yöü áń ëṁáïl ïń ṫĥë ḟöllöwïńĝ 10 ṁïńüṫëŝ wïṫĥ ṫĥë ïńḟöѓṁáṫïöń ṫö ḋöwńlöáḋ yöüѓ ṫѓáńŝáĉṫïöńŝ ĥïŝṫöѓy ѓëṗöѓṫ.",
+      "success": "CH-Yöüѓ ѓëqüëŝṫ ĥáŝ bëëń ṗѓöĉëŝŝëḋ ŝüĉĉëŝŝḟülly. Ṗlëáŝë ĉĥëĉk yöüѓ ëṁáïl ḟöѓ ṫĥë ḋöwńlöáḋ lïńk."
+    }
+  },
+  "deposit": {
+    "deposit": "CH-Ḋëṗöŝïṫ",
+    "title": "CH-Ḋëṗöŝïṫ Ĉѓyṗṫö",
+    "description": "CH-Ṫö ḋëṗöŝïṫ {{coin}} ṫökëńŝ, ŝëlëĉṫ ṫĥë ńëṫwöѓk áńḋ ŝëńḋ ṫö ṫĥë áḋḋѓëŝŝ bëlöw."
+  },
+  "buy": {
+    "buy": "CH-Büy",
+    "title": "CH-Büy ŽÏĜ ĉöïńŝ",
+    "description": "CH-Ïḟ yöü wáńṫ ṫö ŝṗëńḋ ṁöѓë ṫĥáń {{max}} {{coin}}, büy ŽÏĜ ḟѓöṁ öńë öḟ ṫĥë <0>áváïláblë ëxĉĥáńĝëŝ.</0>",
+    "available-exchanges": "CH-áváïláblë ëxĉĥáńĝëŝ.",
+    "buy-exchanges": "CH-Yöü ĉáń büy ŽÏĜ öń ṫĥëŝë ëxĉĥáńĝëŝ:",
+    "exchangeAccount": "CH-Ŝëlëĉṫ Ëxĉĥáńĝë Áĉĉöüńṫ",
+    "continue": "CH-Ĉöńṫïńüë ṫö Ĉöńḟïѓṁáṫïöń",
+    "confirm": "CH-Ĉöńḟïѓṁ büy ŽÏĜ",
+    "deposit": {
+      "title": "CH-Ḋëṗöŝïṫ {{coin}} ṫö büy ŽÏĜŝ",
+      "description": "CH-Ṫö büy ŽÏĜŝ yöü wïll ńëëḋ ḟïѓŝṫ ṫö ḋëṗöŝïṫ {{coin}} ïń yöüѓ Žïĝńály Ëxĉĥáńĝë Áĉĉöüńṫ.",
+      "external": "CH-Ṫѓáńŝḟëѓ ĉѓyṗṫö ḟѓöṁ áń ëxṫëѓńál wállëṫ",
+      "depositCoin": "CH-Ḋëṗöŝïṫ {{coin}}",
+      "buyCoin": "CH-Büy {{coin}}",
+      "noCrypto": "CH-Ï ḋöń'ṫ ĥávë áńy ĉѓyṗṫö yëṫ",
+      "more": "CH-Ḋëṗöŝïṫ Ṁöѓë {{coin}}"
+    },
+    "from": "CH-Ḟѓöṁ:",
+    "swapFrom": "CH-Ŝwáṗ ḟѓöṁ",
+    "swapTo": "CH-Ŝwáṗ ṫö",
+    "success": "CH-Böüĝĥṫ {{coin}} ŝüĉĉëŝŝḟülly.",
+    "received": "CH-Áṁöüńṫ ѓëĉëïvëḋ",
+    "willReceive": "CH-Yöü wïll ѓëĉëïvë:",
+    "rate": "CH-Ѓáṫë:",
+    "max": "CH-Ṫĥë ṁáxïṁüṁ áṁöüńṫ ïŝ {{amount}} {{coin}}.",
+    "maxLeft": "CH-Ṫĥë ṁáxïṁüṁ áṁöüńṫ lëḟṫ ïŝ {{amount}} {ĉöïń}. Ïṫ wïll ѓëŝëṫ ïń {{mins}} ṁïńŝ.",
+    "buyNow": "CH-Büy {{coin}} Ńöw"
+  }
+}

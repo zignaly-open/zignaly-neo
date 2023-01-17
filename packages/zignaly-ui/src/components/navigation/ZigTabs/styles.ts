@@ -21,6 +21,13 @@ export const ZigTabs = styled(Tabs)`
     padding-right: 0;
     position: relative;
 
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+
     &:before {
       /* Hack to avoid the button from changing size when bold */
       content: attr(data-text);

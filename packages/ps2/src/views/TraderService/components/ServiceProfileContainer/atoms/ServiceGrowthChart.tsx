@@ -25,6 +25,7 @@ import { useTranslation } from 'react-i18next';
 import CenteredLoader from '../../../../../components/CenteredLoader';
 import PercentChange from './PercentChange';
 import { differenceInDays } from 'date-fns';
+import { getColorForNumber } from '../../../../../util/numbers';
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   const { chartType, chartTimeframe, setChartTimeframe, setChartType } =
@@ -136,7 +137,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   <ZigTypography
                     variant={'bigNumber'}
                     sx={{ whiteSpace: 'nowrap' }}
-                    color={+value > 0 ? 'greenGraph' : 'redGraphOrError'}
+                    color={getColorForNumber(value)}
                   >
                     {t('common:percent', { value })}
                   </ZigTypography>

@@ -3,7 +3,7 @@ import { MarketplaceService } from './types';
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
-  baseQuery,
+  baseQuery: baseQuery(),
   reducerPath: 'marketplaceApi',
   tagTypes: ['MarketplaceService'],
   endpoints: (builder) => ({

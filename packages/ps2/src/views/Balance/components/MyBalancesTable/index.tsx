@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  CoinLabel,
   IconButton,
   ZigTable,
   ZigTablePriceLabel,
@@ -24,6 +23,7 @@ import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/D
 import WithdrawModal from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
 import { useZModal } from '../../../../components/ZModal/use';
 import { Box } from '@mui/material';
+import CoinLabel from 'components/CoinLabel';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
@@ -90,8 +90,8 @@ const MyBalancesTable = (): JSX.Element => {
                 icon={<Add color={'neutral300'} />}
                 onClick={() =>
                   showModal(DepositModal, {
-                    selectedCoin: row.original.coin,
                     ctaId: 'balances-table-row',
+                    selectedCoin: row.original.coin,
                   })
                 }
                 variant='secondary'
@@ -102,8 +102,8 @@ const MyBalancesTable = (): JSX.Element => {
                 icon={<Remove color={'neutral300'} />}
                 onClick={() =>
                   showModal(WithdrawModal, {
-                    selectedCoin: row.original.coin,
                     ctaId: 'balances-table-row',
+                    selectedCoin: row.original.coin,
                   })
                 }
                 variant='secondary'
@@ -117,16 +117,38 @@ const MyBalancesTable = (): JSX.Element => {
   );
 
   const getFilteredData = useCallback(
-    (coins: CoinDetails, balances: CoinBalances) =>
-      Object.entries<CoinBalance & CoinDetail>(
-        mergeCoinsAndBalances(coins, balances),
+    (coins: CoinDetails, balances: CoinBalances) => {
+      // Populate coins that can be deposited
+      const depositCoinsBalances: CoinBalances = Object.fromEntries(
+        allowedDeposits[exchangeType].map((coin) => [
+          coin,
+          {
+            balanceFree: '',
+            balanceFreeBTC: '',
+            balanceFreeUSDT: '',
+            balanceLocked: '',
+            balanceLockedBTC: '',
+            balanceLockedUSDT: '',
+            balanceTotal: '',
+            balanceTotalBTC: '',
+            balanceTotalExchCoin: '',
+            balanceTotalUSDT: '',
+            exchCoin: '',
+            maxWithdrawAmount: '',
+          },
+        ]),
+      );
+
+      return Object.entries<CoinBalance & CoinDetail>(
+        mergeCoinsAndBalances(coins, { ...depositCoinsBalances, ...balances }),
       )
         .filter(
           ([coin, balance]) =>
             allowedDeposits[exchangeType]?.includes(coin) ||
             +balance.balanceTotal > 0,
         )
-        .map(([coin, balance]) => ({ coin, balance })),
+        .map(([coin, balance]) => ({ coin, balance }));
+    },
     [exchangeType, t],
   );
 
