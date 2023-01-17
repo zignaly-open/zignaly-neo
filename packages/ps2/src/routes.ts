@@ -17,6 +17,5 @@ export const ROUTE_TRADING_SERVICE_SIGNALS = ROUTE_TRADING_SERVICE + '/signals';
 export const ROUTE_TRADING_SERVICE_MANUAL = ROUTE_TRADING_SERVICE + '/manual';
 export const ROUTE_TRADING_SERVICE_EDIT = ROUTE_TRADING_SERVICE + '/edit';
 export const ROUTE_MY_BALANCES = '/my-balances';
-export const ROUTE_HELP_TRADER = '/help/trader';
 export const ROUTE_HELP_INVESTOR = '/help/investor';
 export const ROUTE_404 = '/404';

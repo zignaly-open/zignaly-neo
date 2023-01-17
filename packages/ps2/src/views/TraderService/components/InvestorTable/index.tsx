@@ -91,15 +91,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         header: t('tableHeader.successFee'),
         cell: (props) => `${props.getValue()}%`,
       }),
-      columnHelper.accessor('pnlNetAt', {
-        header: t('tableHeader.P&LTotal'),
-        cell: (props) => (
-          <ZigTablePriceLabel
-            coin={service?.ssc ?? 'USDT'}
-            value={parseFloat(props.getValue())}
-          />
-        ),
-      }),
       columnHelper.accessor('payZig', {
         header: t('tableHeader.feesZIG'),
         cell: (props) => <YesNo value={props.getValue()} />,

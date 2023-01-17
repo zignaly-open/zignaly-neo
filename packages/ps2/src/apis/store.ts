@@ -1,5 +1,5 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import userReducer from './user/store';
+import { Action, combineReducers, configureStore } from '@reduxjs/toolkit';
+import userReducer, { logout } from './user/store';
 import { api as userApi } from './user/api';
 import investmentReducer from './investment/store';
 import { api as investmentApi } from './investment/api';
@@ -31,22 +31,29 @@ const persistConfig = {
   ] as string[],
 };
 
+const appReducer = combineReducers({
+  [userApi.reducerPath]: userApi.reducer,
+  [serviceApi.reducerPath]: serviceApi.reducer,
+  [investmentApi.reducerPath]: investmentApi.reducer,
+  [marketplaceApi.reducerPath]: marketplaceApi.reducer,
+  [coinApi.reducerPath]: coinApi.reducer,
+  marketplace: marketplaceReducer,
+  user: userReducer,
+  coin: coinReducer,
+  investment: investmentReducer,
+  service: serviceReducer,
+});
+
+const rootReducer = (state: ReturnType<typeof appReducer>, action: Action) => {
+  if (logout.match(action)) {
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+};
+
 export const store = configureStore({
-  reducer: persistReducer(
-    persistConfig,
-    combineReducers({
-      [userApi.reducerPath]: userApi.reducer,
-      [serviceApi.reducerPath]: serviceApi.reducer,
-      [investmentApi.reducerPath]: investmentApi.reducer,
-      [marketplaceApi.reducerPath]: marketplaceApi.reducer,
-      [coinApi.reducerPath]: coinApi.reducer,
-      marketplace: marketplaceReducer,
-      user: userReducer,
-      coin: coinReducer,
-      investment: investmentReducer,
-      service: serviceReducer,
-    }),
-  ),
+  reducer: persistReducer(persistConfig, rootReducer),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,

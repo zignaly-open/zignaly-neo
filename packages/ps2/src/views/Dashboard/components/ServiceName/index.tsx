@@ -1,26 +1,22 @@
 import React from 'react';
 import { Icon } from './styles';
 import { ServiceNameProps } from './types';
-import { Avatar, Typography } from '@zignaly-open/ui';
+import { Avatar, ZigTypography } from '@zignaly-open/ui';
 import Box from '@mui/system/Box/Box';
 import { ROUTE_TRADING_SERVICE } from '../../../../routes';
-import { generatePath, useNavigate } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import { getServiceLogo } from '../../../../util/images';
 import { useTranslation } from 'react-i18next';
 
 export const ServiceName = ({ service }: ServiceNameProps) => {
-  const navigate = useNavigate();
   const { t } = useTranslation('table');
 
   return (
     <Box
-      onClick={() =>
-        navigate(
-          generatePath(ROUTE_TRADING_SERVICE, {
-            serviceId: service.serviceId?.toString(),
-          }),
-        )
-      }
+      component={Link}
+      to={generatePath(ROUTE_TRADING_SERVICE, {
+        serviceId: service.serviceId?.toString(),
+      })}
       sx={{
         cursor: 'pointer',
         alignItems: 'center',
@@ -39,15 +35,15 @@ export const ServiceName = ({ service }: ServiceNameProps) => {
           alignItems: 'flex-start',
         }}
       >
-        <Typography variant='body1' weight='medium' color='neutral100'>
+        <ZigTypography fontWeight='medium' color='neutral100'>
           {service.serviceName}
-        </Typography>
-        <Typography variant='body2' weight='medium' color='neutral400'>
+        </ZigTypography>
+        <ZigTypography variant='body2' fontWeight='medium' color='neutral400'>
           {t('serviceName-by')} {service.ownerName}
-        </Typography>
-        <Typography variant='body2' weight='medium' color='neutral400'>
+        </ZigTypography>
+        <ZigTypography variant='body2' fontWeight='medium' color='neutral400'>
           {service.ssc}
-        </Typography>
+        </ZigTypography>
       </Box>
     </Box>
   );
