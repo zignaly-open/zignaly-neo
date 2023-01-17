@@ -121,7 +121,6 @@ export {
   Button,
   CheckBox,
   IconButton,
-  // InputAmount,
   InputAmountAdvanced,
   TextButton,
   InputText,
