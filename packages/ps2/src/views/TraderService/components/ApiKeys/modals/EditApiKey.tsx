@@ -59,7 +59,7 @@ function EditApiKeysModal({
       enableIpRestriction: JSON.stringify(
         apiKey.ips.some(Boolean),
       ) as BooleanString,
-      ipRestrictions: apiKey.ips.join(' '),
+      ipRestrictions: apiKey.ips.join(', '),
       canTrade: apiKey.permissions?.includes(ServiceApiKeyPermission.canTrade),
       marginTrade: apiKey.permissions?.includes(
         ServiceApiKeyPermission.marginTrade,
