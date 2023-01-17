@@ -1,11 +1,11 @@
 import sequelize from 'sequelize';
-import { zignalySystemId } from '../../../config';
 import {
   getUserBalance,
-  getUserDeposits,
-  internalTransfer,
-} from '../../cybavo';
-import { ContextUser, ResourceOptions, TransactionType } from '../../types';
+  getDepositsTotal,
+  redeemCode,
+  referralCode,
+} from '../balances/service';
+import { ContextUser, ResourceOptions } from '../../types';
 import { AuctionBid } from '../auctions/model';
 import { User } from '../users/model';
 import { emitBalanceChanged } from '../users/util';
@@ -31,17 +31,6 @@ const applyFilters = (filter: ResourceOptions['filter'] = {}) => {
           : null,
     }),
   };
-};
-
-const getDepositsTotal = async (code: Code, user: ContextUser) => {
-  return (await getUserDeposits(user.publicAddress)).reduce(
-    (total, d) =>
-      total +
-      (!code.reqDepositFrom || new Date(d.created_at) > code.reqDepositFrom
-        ? d.amount
-        : 0),
-    0,
-  );
 };
 
 const calculateInvitedBenefit = async (
@@ -158,8 +147,8 @@ export const generateService = (user: ContextUser) => {
       }
     }
 
-    const balance = parseFloat(await getUserBalance(user.publicAddress));
-    const deposits = await getDepositsTotal(code, user);
+    const balance = Number(await getUserBalance(user.publicAddress));
+    const deposits = await getDepositsTotal(code, user.publicAddress);
 
     if (code.reqMinimumBalance > 0 && balance < code.reqMinimumBalance) {
       throw new Error(
@@ -234,28 +223,22 @@ export const generateService = (user: ContextUser) => {
     );
 
     if (parseFloat(invitedBenefit) > 0) {
-      await internalTransfer(
-        zignalySystemId,
-        user.publicAddress,
-        invitedBenefit,
-        TransactionType.RedeemCode,
-        true,
-      );
-      console.log(`User ${user.id} redeemed ${invitedBenefit} ZIGs`);
+      await redeemCode({
+        walletAddress: user.publicAddress,
+        zhits: invitedBenefit,
+        note: code.code,
+      });
       await emitBalanceChanged(user);
     }
 
     if (parseFloat(inviterBenefit) > 0) {
       try {
         const inviter = await User.findByPk(code.userId);
-        await internalTransfer(
-          zignalySystemId,
-          inviter.publicAddress,
-          inviterBenefit,
-          TransactionType.ReferralCode,
-          true,
-        );
-        console.log(`User ${inviter.id} got rewarded ${inviterBenefit} ZIGs`);
+        await referralCode({
+          walletAddress: inviter.publicAddress,
+          zhits: inviterBenefit,
+          note: `${code.userId}`,
+        });
         await emitBalanceChanged(inviter);
       } catch (e) {
         console.error(

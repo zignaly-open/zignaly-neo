@@ -68,8 +68,8 @@ const MyBalancesTable = (): JSX.Element => {
       columnHelper.accessor((row) => row.balance.balanceTotalBTC, {
         id: 'balanceTotalBTC',
         header: t('tableHeader.valueBTC'),
-        cell: ({ getValue, row }) => (
-          <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
+        cell: ({ getValue }) => (
+          <ZigTablePriceLabel coin='BTC' value={getValue()} />
         ),
         sortingFn: 'alphanumeric',
       }),
