@@ -133,7 +133,7 @@ function EditApiKeysModal({
                 label={t('common:name') + ':'}
                 placeholder={t('common:name')}
                 disabled={isLoading}
-                error={t(errors.alias?.message)}
+                error={t(errors.alias?.message, { maxLength: 30 })}
                 {...field}
               />
             )}
