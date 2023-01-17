@@ -67,3 +67,7 @@ export const trackConversion = () => {
   img.width = 0;
   document.body.append(img);
 };
+
+export const trackPage = () => {
+  analytics?.page();
+};
