@@ -42,7 +42,6 @@ import AuthenticatedWall from 'util/walls/AuthenticatedWall.tsx';
 import UnauthenticatedWall from './util/walls/UnauthenticatedWall';
 import ServiceOwnerWall from './util/walls/ServiceOwnerWall';
 import HelpInvestor from './views/Help/HelpInvestor';
-import HelpTrader from './views/Help/HelpTrader';
 import NotFound from 'views/404';
 
 const Router: React.FC = () => (
