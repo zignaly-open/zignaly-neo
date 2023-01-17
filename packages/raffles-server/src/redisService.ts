@@ -1,5 +1,5 @@
 import Redis from 'ioredis';
-import { isTest, redisURL, zignalySystemId } from '../config';
+import { isTest, redisURL } from '../config';
 import { AUCTION_UPDATED } from './entities/auctions/constants';
 import { getAuctionsWithBids } from './entities/auctions/service';
 import { Auction, AuctionBid } from './entities/auctions/model';
@@ -58,7 +58,7 @@ const processBalance = async (
     const res = (await redis.fcall(
       'update_balance',
       2,
-      `USER_TRANSACTION_BALANCE`,
+      `USER_DB_BALANCE`,
       `USER_CURRENT_BALANCE`,
       userId,
       strToUnit(balance),
@@ -139,7 +139,7 @@ const getAuctionExpiration = async (auctionId: number) => {
 
 const makeTransfer = async (auctionId: number, user: User) => {
   const [transactionBalance, currentBalance] = await Promise.all([
-    unitToBN(await redis.hget('USER_TRANSACTION_BALANCE', user.id.toString())),
+    unitToBN(await redis.hget('USER_DB_BALANCE', user.id.toString())),
     unitToBN(await redis.hget('USER_CURRENT_BALANCE', user.id.toString())),
   ]);
 
@@ -151,7 +151,7 @@ const makeTransfer = async (auctionId: number, user: User) => {
   const tx = await payFee({
     walletAddress: user.publicAddress,
     zhits: amount.toString(),
-    note: zignalySystemId,
+    note: `${auctionId}`,
   });
 
   if (!tx.id) {
@@ -160,11 +160,7 @@ const makeTransfer = async (auctionId: number, user: User) => {
   // Set balance
   const balance = await getUserBalance(user.publicAddress);
   await Promise.all([
-    redis.hset(
-      'USER_TRANSACTION_BALANCE',
-      user.id.toString(),
-      strToUnit(balance),
-    ),
+    redis.hset('USER_DB_BALANCE', user.id.toString(), strToUnit(balance)),
     redis.hset('USER_CURRENT_BALANCE', user.id.toString(), strToUnit(balance)),
   ]);
   return tx.id;

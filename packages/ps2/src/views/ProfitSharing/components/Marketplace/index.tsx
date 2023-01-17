@@ -64,7 +64,8 @@ const Marketplace: React.FC = () => {
         ),
         sortingFn: 'alphanumeric',
       }),
-      columnHelper.accessor('pnlPercent90t', {
+      columnHelper.accessor((row) => Number(row.pnlPercent90t), {
+        id: 'pnlPercent90t',
         header: t('table.n-months-pnl', { count: 3 }),
         meta: {
           subtitle: t('table.account-age'),
@@ -82,9 +83,9 @@ const Marketplace: React.FC = () => {
             )}
           />
         ),
-        sortingFn: 'alphanumeric',
       }),
-      columnHelper.accessor('pnlPercent30t', {
+      columnHelper.accessor((row) => Number(row.pnlPercent30t), {
+        id: 'pnlPercent30t',
         header: t('table.n-months-pnl', { count: 1 }),
         cell: (props) =>
           +props.getValue() ||
@@ -98,7 +99,6 @@ const Marketplace: React.FC = () => {
               {t('tableHeader.1-mo.no-data')}
             </ZigTypography>
           ),
-        sortingFn: 'alphanumeric',
       }),
       columnHelper.display({
         header: '',
@@ -143,6 +143,7 @@ const Marketplace: React.FC = () => {
                 data={services}
                 emptyMessage={t('table-search-emptyMessage')}
                 columnVisibility={false}
+                enableSortingRemoval={false}
               />
             </TableWrapper>
           </>

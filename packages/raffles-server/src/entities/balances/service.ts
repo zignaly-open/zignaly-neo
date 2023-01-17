@@ -156,7 +156,7 @@ export const redeemCode = async ({
 export const deposit = async ({
   walletAddress,
   amount,
-  currency,
+  currency = '',
   blockchain,
 }: DepositParams): Promise<Balance> => {
   if (!walletAddress) {
@@ -164,9 +164,6 @@ export const deposit = async ({
   }
   if (!amount || isNaN(Number(amount)) || Number(amount) <= 0) {
     throw new Error('Invalid amount');
-  }
-  if (!currency) {
-    throw new Error('Currency is required');
   }
   if (!blockchain) {
     throw new Error('Blockchain is required');
@@ -183,6 +180,9 @@ export const deposit = async ({
     zhits: string,
     amount: string,
   ) => {
+    if (Number(convertedAmount) === Number(zhits)) {
+      return Number(amount) * 1;
+    }
     return Number(convertedAmount) > Number(zhits)
       ? Number(amount) / Number(convertedAmount)
       : Number(amount) * Number(zhits);
@@ -245,7 +245,7 @@ export const getUserBalance = async (
     },
   });
 
-  return `${userBalance}`;
+  return userBalance ? `${userBalance}` : '0';
 };
 
 export const getUserDeposits = async (
