@@ -117,7 +117,9 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
             color='neutral100'
             fontWeight={500}
           >
-            {getValue() || truncateAddress(original.to)}
+            {getValue() || original.to
+              ? truncateAddress(original.to)
+              : t('deleted')}
           </ZigTypography>
         ),
         enableSorting: false,
