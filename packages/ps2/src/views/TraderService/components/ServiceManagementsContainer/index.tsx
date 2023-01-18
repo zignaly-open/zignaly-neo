@@ -5,7 +5,6 @@ import {
   ArrowRightIcon,
   Button,
   EditPenIcon,
-  ProgressSlider,
   TextButton,
   Typography,
 } from '@zignaly-open/ui';
@@ -15,9 +14,7 @@ import {
   Circle,
   HorizontalConnection,
   InlinePriceLabel,
-  LabelHardDisc,
   Layout,
-  LineSeparator,
   MainPriceLabel,
   MiddleContainer,
   TopConnector,
@@ -25,7 +22,6 @@ import {
   TradingFunds,
 } from './styles';
 
-import BigNumber from 'bignumber.js';
 import {
   useServiceDetails,
   useTraderServiceBalance,
@@ -112,7 +108,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                     />
                   </Typography>
                 </TradingFunds>
-                <LabelHardDisc color='neutral200'>
+                {/* <LabelHardDisc color='neutral200'>
                   {t('instantWithdrawn')}
                 </LabelHardDisc>
                 <ProgressSlider
@@ -120,7 +116,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                     .dividedBy(new BigNumber(balance.sbt.toString()))
                     .toNumber()}
                   max={50}
-                />
+                /> */}
               </Box>
               <MiddleContainer>
                 <ArrowLeftIcon
@@ -183,14 +179,14 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                       onClick={onClickMinBalance}
                     />
                   </Typography>
-                  <LineSeparator />
+                  {/* <LineSeparator />
                   <Typography color='neutral400' variant='body2'>
                     {t('heldInstantWithdrawals')}
                     <InlinePriceLabel
                       value={parseFloat(balance.dfa)}
                       coin={service?.ssc ?? 'USDT'}
                     />
-                  </Typography>
+                  </Typography> */}
                 </TradingFunds>
               </Box>
             </BottomContainer>
