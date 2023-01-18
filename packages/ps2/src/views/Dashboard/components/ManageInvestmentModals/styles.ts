@@ -1,4 +1,4 @@
-import { styled, css } from '@mui/material';
+import { styled } from '@mui/material';
 import { Typography } from '@zignaly-open/ui';
 
 export const Investor = styled('div')`
@@ -102,20 +102,14 @@ export const WithdrawFundsOptionWrapper = styled('div')<{ border?: boolean }>`
   display: flex;
 
   height: 100%;
-
-  ${(props) =>
-    props.border
-      ? css`
-          border-right: 1px solid rgb(74, 73, 88);
-          padding-right: 50px;
-        `
-      : css`
-          padding-left: 50px;
-        `};
 `;
 
 export const WithdrawFundsButtonWrapper = styled('div')`
   text-align: center;
+
+  button {
+    min-width: 170px;
+  }
 `;
 
 export const MultilineButton = styled('div')`

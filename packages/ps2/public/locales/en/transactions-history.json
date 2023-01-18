@@ -41,5 +41,6 @@
     "success": "Your request has been processed successfully. Please check your email for the download link."
   },
   "external": "External Address",
+  "deleted": "Deleted Exchange Account",
   "noData": "No transactions"
 }
