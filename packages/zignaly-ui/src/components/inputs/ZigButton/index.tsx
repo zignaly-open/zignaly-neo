@@ -4,11 +4,12 @@ import React from "react";
 import { ButtonBaseTypeMap, ExtendButtonBaseTypeMap, Tooltip } from "@mui/material";
 import { OverrideProps } from "@mui/material/OverridableComponent";
 
-export type ZigButtonProps = LoadingButtonProps & {
-  ctaId?: string;
-  tooltip?: string;
-  active?: boolean;
-};
+export type ZigButtonProps = OverrideProps<ExtendButtonBaseTypeMap<ButtonBaseTypeMap>, "a"> &
+  LoadingButtonProps & {
+    ctaId?: string;
+    tooltip?: string;
+    active?: boolean;
+  };
 
 type ZigButtonPropsSxFix = Omit<ZigButtonProps, "sx"> & { __sx: ZigButtonProps["sx"] };
 
@@ -20,7 +21,7 @@ const ZigButton = styled(
     color,
     __sx, // somehow in this scenario the sx prop is not passed properly
     ...props
-  }: OverrideProps<ExtendButtonBaseTypeMap<ButtonBaseTypeMap>, "a"> & ZigButtonPropsSxFix) => {
+  }: ZigButtonPropsSxFix) => {
     const button = (
       <LoadingButton
         data-tack-cta={ctaId}
