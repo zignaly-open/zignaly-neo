@@ -3,6 +3,8 @@ import userReducer, { logout } from './user/store';
 import { api as userApi } from './user/api';
 import investmentReducer from './investment/store';
 import { api as investmentApi } from './investment/api';
+import serviceApiKeyReducer from './serviceApiKey/store';
+import { api as serviceApiKeyApi } from './serviceApiKey/api';
 import coinReducer from './coin/store';
 import { api as coinApi } from './coin/api';
 import serviceReducer from './service/store';
@@ -39,6 +41,7 @@ const appReducer = combineReducers({
   [userApi.reducerPath]: userApi.reducer,
   [serviceApi.reducerPath]: serviceApi.reducer,
   [investmentApi.reducerPath]: investmentApi.reducer,
+  [serviceApiKeyApi.reducerPath]: serviceApiKeyApi.reducer,
   [marketplaceApi.reducerPath]: marketplaceApi.reducer,
   [coinApi.reducerPath]: coinApi.reducer,
   [walletApi.reducerPath]: walletApi.reducer,
@@ -46,6 +49,7 @@ const appReducer = combineReducers({
   user: userReducer,
   coin: coinReducer,
   investment: investmentReducer,
+  serviceApiKey: serviceApiKeyReducer,
   service: serviceReducer,
   wallet: walletReducer,
 });
@@ -69,7 +73,8 @@ export const store = configureStore({
       .concat(marketplaceApi.middleware)
       .concat(coinApi.middleware)
       .concat(investmentApi.middleware)
-      .concat(walletApi.middleware),
+      .concat(walletApi.middleware)
+      .concat(serviceApiKeyApi.middleware),
 });
 
 export const persistor = persistStore(store);

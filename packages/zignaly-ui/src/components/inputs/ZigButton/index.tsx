@@ -4,22 +4,30 @@ import React from "react";
 import { ButtonBaseTypeMap, ExtendButtonBaseTypeMap, Tooltip } from "@mui/material";
 import { OverrideProps } from "@mui/material/OverridableComponent";
 
+export type ZigButtonProps = LoadingButtonProps & {
+  ctaId?: string;
+  tooltip?: string;
+  active?: boolean;
+};
+
+type ZigButtonPropsSxFix = Omit<ZigButtonProps, "sx"> & { __sx: ZigButtonProps["sx"] };
+
 const ZigButton = styled(
   ({
     active,
     tooltip,
     ctaId,
+    color,
+    __sx, // somehow in this scenario the sx prop is not passed properly
     ...props
-  }: OverrideProps<ExtendButtonBaseTypeMap<ButtonBaseTypeMap>, "a"> &
-    LoadingButtonProps & {
-      ctaId?: string;
-      tooltip?: string;
-      active?: boolean;
-    }) => {
+  }: OverrideProps<ExtendButtonBaseTypeMap<ButtonBaseTypeMap>, "a"> & ZigButtonPropsSxFix) => {
     const button = (
       <LoadingButton
         data-tack-cta={ctaId}
         {...props}
+        sx={__sx}
+        // hack to preserve old behavior but allow for normal mui theming
+        color={props.variant === "outlined" && !color ? "secondary" : color}
         className={active ? "MuiButton-active" : ""}
       />
     );
@@ -34,4 +42,4 @@ const ZigButton = styled(
   },
 )``;
 
-export default ZigButton;
+export default ({ sx, ...props }: ZigButtonProps) => <ZigButton {...props} __sx={sx} />;

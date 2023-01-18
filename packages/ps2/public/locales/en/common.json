@@ -4,6 +4,7 @@
   "back": "Back",
   "close": "Close",
   "loading": "Loading...",
+  "changes-saved": "Changes saved successfully",
   "coming-soon": {
     "title": "Coming Soon",
     "description": "This section is under development, you will see it available at a later date."
@@ -48,13 +49,16 @@
   "amount": "Amount",
   "percent": "{{value, prettyNumber}}%",
   "number": "{{value, prettyNumber}}",
+  "name": "Name",
   "new-version": "New version, click me to update",
   "infinitely-better": "Yes, the current value is infinity percent better because the starting value is 0",
   "infinitely-worse": "Yes, the current value is infinity percent worse because the starting value is 0",
+  "type-to-confirm": "Type \"{{word}}\" to confirm",
   "validation": {
     "insufficient-amount": "Insufficient funds",
     "invalid-value": "Invalid value",
     "negative-amount": "Should be >= 0",
+    "max-allowed-length": "Should be under {{ maxLength }} characters",
     "negative-zeroable-amount": "Should be > 0",
     "min-amount": "Minimum amount is {{amount}} {{coin}}.",
     "invalid-amount": "You must indicate an amount",
