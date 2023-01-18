@@ -83,7 +83,7 @@
     "ip-restrictions-ranges": "Sorry we do not support IP ranges",
     "ip-restrictions-duplicates": "Some ips are listed twice, please remove duplicates",
     "ip-restrictions-allowed": "IP Addresses",
-    "ip-restrictions-allowed-explainer": "When entering more than one IP address, please separate them with spaces",
+    "ip-restrictions-allowed-explainer": "When entering more than one IP address, please separate them with commas",
     "ip-restrictions-on": "Restrict access to trusted IPs only (recommended)"
   }
 }
