@@ -5,6 +5,7 @@ import { Avatar, ZigButton } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { Close, Edit } from '@mui/icons-material';
 import { LogoContainer } from './styles';
+import { getServiceLogo } from 'util/images';
 
 const ServiceLogo = ({
   service,
@@ -53,7 +54,7 @@ const ServiceLogo = ({
         <Avatar
           size={'xx-large'}
           alt={t('logo-alt', { name: service.name })}
-          image={logo}
+          image={getServiceLogo(logo)}
         />
         {uploading ? (
           <CircularProgress size={24} />
