@@ -1,9 +1,8 @@
 import React from "react";
-import { LoadingButton } from "@mui/lab";
+import { LoadingButton, LoadingButtonProps } from "@mui/lab";
 import { Tooltip } from "@mui/material";
 
-export type ZigButtonProps = React.ComponentProps<typeof LoadingButton> & {
-  // export type ZigButtonProps = LoadingButtonProps & {
+export type ZigButtonProps = LoadingButtonProps & {
   ctaId?: string;
   tooltip?: string;
   active?: boolean;
