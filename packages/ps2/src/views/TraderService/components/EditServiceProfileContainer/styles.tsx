@@ -3,8 +3,8 @@ import { ZigSelect } from '@zignaly-open/ui';
 import { VISIBILITY_LABEL } from './types';
 
 export const StyledZigSelect = styled(ZigSelect)`
-  .zig-react-select {
-    && {
+  && {
+    .zig-react-select {
       &__control {
         border: ${({ value }) =>
           `1px solid ${VISIBILITY_LABEL[value as number].color} !important`};
