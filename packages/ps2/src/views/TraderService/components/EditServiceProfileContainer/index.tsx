@@ -12,7 +12,7 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Trans, useTranslation } from 'react-i18next';
-import ServiceLogo from './atoms/ServiceLogo';
+import ServiceLogo from '../ServiceLogo';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { EditServiceValidation } from './validations';
 import { Controller, useForm } from 'react-hook-form';
@@ -59,16 +59,18 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   });
   const [edit, editStatus] = useTraderServiceEditMutation();
   const [visibility, setVisibility] = useState(getVisibility(service.level));
+  const [logoUrl, setLogoUrl] = useState(service.logo);
   const navigate = useNavigate();
 
   const submit = async (data: EditServicePayload) => {
-    await edit({ id: service.id, ...data, level: visibility });
+    await edit({ id: service.id, ...data, level: visibility, logo: logoUrl });
     back();
   };
 
   useUpdateEffect(() => {
     reset(defaultValues);
     setVisibility(getVisibility(service.level));
+    setLogoUrl(service.logo);
   }, [service.id]);
 
   const visibilityOptions = useMemo(
@@ -122,7 +124,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
       </ZigTypography>
       <Grid container mt={8} gap={2}>
         <Grid item sm={12} md={2} pb={2}>
-          <ServiceLogo service={service} />
+          <ServiceLogo service={service} logo={logoUrl} onChange={setLogoUrl} />
         </Grid>
         <Grid container sm={12} md={7} pb={2} alignItems='flex-start' gap={6}>
           <Controller
@@ -245,7 +247,10 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                   i18nKey={'edit.visibility.marketplace-requirements'}
                   t={t}
                   components={[
-                    <ExternalLink href={HELP_CREATE_SERVICE_MARKETPLACE_URL} />,
+                    <ExternalLink
+                      href={HELP_CREATE_SERVICE_MARKETPLACE_URL}
+                      key={0}
+                    />,
                   ]}
                 />
               </ZigTypography>
