@@ -5,7 +5,6 @@ import { Avatar, ZigButton } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { Close, Edit } from '@mui/icons-material';
 import { LogoContainer } from './styles';
-import { LoadingButton } from '@mui/lab';
 
 const ServiceLogo = ({
   service,
@@ -67,10 +66,6 @@ const ServiceLogo = ({
         )}
       </LogoContainer>
 
-      <LoadingButton startIcon={<Edit />} variant='text' component='label'>
-        {t('edit.logo')}
-        <input hidden type='file' onChange={uploadLogo} />
-      </LoadingButton>
       <ZigButton startIcon={<Edit />} variant='text' component='label'>
         {t('edit.logo')}
         <input hidden type='file' onChange={uploadLogo} />
