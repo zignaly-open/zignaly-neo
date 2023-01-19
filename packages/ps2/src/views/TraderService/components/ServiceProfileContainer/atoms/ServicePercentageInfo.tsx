@@ -3,6 +3,7 @@ import { ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import PercentChange from './PercentChange';
 import { Box, Tooltip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
+import { getColorForNumber } from '../../../../../util/numbers';
 
 const ServicePercentageInfo: React.FC<{
   title: string;
@@ -23,7 +24,7 @@ const ServicePercentageInfo: React.FC<{
             component='div'
             shorten
             variant={'h1'}
-            color={+value > 0 ? 'greenGraph' : 'redGraphOrError'}
+            color={getColorForNumber(value)}
             value={+value}
             coin={ssc}
           />
