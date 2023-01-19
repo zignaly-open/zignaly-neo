@@ -87,6 +87,7 @@ const MyBalancesTable = (): JSX.Element => {
           <Box display='flex' justifyContent='flex-end'>
             {!!allowedDeposits[exchangeType]?.includes(row.original.coin) && (
               <IconButton
+                id={'balance-row__deposit'}
                 icon={<Add color={'neutral300'} />}
                 onClick={() =>
                   showModal(DepositModal, {
@@ -99,6 +100,7 @@ const MyBalancesTable = (): JSX.Element => {
             )}
             {+row.original.balance.balanceTotal > 0 && (
               <IconButton
+                id={'balance-row__withdrawal'}
                 icon={<Remove color={'neutral300'} />}
                 onClick={() =>
                   showModal(WithdrawModal, {

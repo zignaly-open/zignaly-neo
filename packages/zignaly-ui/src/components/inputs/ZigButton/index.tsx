@@ -5,15 +5,17 @@ import { Tooltip } from "@mui/material";
 
 const ZigButton = styled(
   ({
+    id,
     active,
     tooltip,
     ctaId,
     ...props
-  }: LoadingButtonProps & { ctaId?: string; tooltip?: string; active?: boolean }) => {
+  }: LoadingButtonProps & { id?: string; ctaId?: string; tooltip?: string; active?: boolean }) => {
     const button = (
       <LoadingButton
         data-tack-cta={ctaId}
         {...props}
+        id={id}
         className={active ? "MuiButton-active" : ""}
       />
     );
