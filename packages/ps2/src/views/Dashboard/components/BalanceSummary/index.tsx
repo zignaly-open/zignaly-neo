@@ -6,6 +6,7 @@ import { BalanceSummaryProps } from './types';
 import { PencilIcon, TextButton, Typography } from '@zignaly-open/ui';
 
 export const BalanceSummary = ({
+  id,
   totalValue,
   profit,
   coin = 'USDT',
@@ -35,6 +36,7 @@ export const BalanceSummary = ({
         />
       )}
       <TextButton
+        id={id}
         leftElement={<PencilIcon color='#65647E' width={16} height={16} />}
         caption={t('action:edit')}
         color={'links'}

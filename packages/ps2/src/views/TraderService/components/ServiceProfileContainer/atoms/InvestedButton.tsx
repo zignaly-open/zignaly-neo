@@ -57,11 +57,12 @@ const InvestedButton: React.FC<{
 };
 
 export const InvestedButtonBase: React.FC<{
+  id?: string;
   service: Service;
   ctaId?: string;
   investedAmount: string;
   showMultipleAccountButton?: boolean;
-}> = ({ service, investedAmount, ctaId, showMultipleAccountButton }) => {
+}> = ({ id, service, investedAmount, ctaId, showMultipleAccountButton }) => {
   const { showModal } = useZModal({ disableAutoDestroy: true });
   const selectInvestment = useSetSelectedInvestment();
   const investedFromAccounts = useInvestedAccountsCount(service.id, {
@@ -95,6 +96,7 @@ export const InvestedButtonBase: React.FC<{
         }}
       >
         <TextButton
+          id={id}
           leftElement={
             <Box>
               <StyledPencilIcon />
