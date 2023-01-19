@@ -23,7 +23,6 @@ import { ExternalLink } from 'components/AnchorLink';
 import { HELP_CREATE_SERVICE_MARKETPLACE_URL } from 'util/constants';
 import { useNavigate } from 'react-router-dom';
 import { useUpdateEffect } from 'react-use';
-import { getServiceLogo } from 'util/images';
 
 const getVisibility = (level: number) => {
   if (level < 100) {
