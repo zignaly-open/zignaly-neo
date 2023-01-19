@@ -9,13 +9,17 @@ import {
   ZigSelect,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import ServiceLogo from './atoms/ServiceLogo';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { EditServiceValidation } from './validations';
 import { Controller, useForm } from 'react-hook-form';
 import { useTraderServiceEditMutation } from 'apis/service/api';
 import { VISIBILITY_LABEL } from './types';
+import { StyledZigSelect } from './styles';
+import { useCurrentUser } from 'apis/user/use';
+import { ExternalLink } from 'components/AnchorLink';
+import { HELP_CREATE_SERVICE_MARKETPLACE_URL } from 'util/constants';
 
 const getVisibility = (level: number) => {
   if (level < 100) {
@@ -55,7 +59,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   });
   const [edit, editStatus] = useTraderServiceEditMutation();
   const [visibility, setVisibility] = useState(getVisibility(service.level));
-  console.log(visibility);
+  const user = useCurrentUser();
 
   const submit = ({ name }: Partial<EditServicePayload>) => {
     console.log(name);
@@ -63,11 +67,29 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   };
 
   const visibilityOptions = [
-    { value: 0, label: t('edit.visibility.unlisted') },
+    { value: 0, label: t('edit.visibility.unlisted'), disabled: true },
     { value: 100, label: t('edit.visibility.private') },
     { value: 200, label: t('edit.visibility.public') },
-    { value: 500, label: t('edit.visibility.marketplace') },
+    { value: 500, label: t('edit.visibility.marketplace'), disabled: true },
   ];
+
+  const selectStyles: React.ComponentProps<typeof ZigSelect>['styles'] = {
+    option: (styles, { data }) => {
+      const { value } = data as { value: number };
+      if (value === 0 || value === 500) {
+        return {
+          display: 'none',
+        };
+      }
+      return {
+        ...styles,
+        cursor: 'pointer',
+        color: VISIBILITY_LABEL[value].color,
+        fontSize: '17px',
+        padding: '16px 14px',
+      };
+    },
+  };
 
   return (
     <Box onSubmit={handleSubmit(submit)} component='form' pt={7}>
@@ -172,14 +194,15 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
           </Grid>
           <Grid item container columnSpacing={6} alignItems='center'>
             <Grid item md={6} sm={12}>
-              <ZigSelect
+              <StyledZigSelect
                 options={visibilityOptions}
                 label={t('edit.visibility.visibility')}
                 value={visibility}
                 onChange={setVisibility}
+                styles={selectStyles}
               />
               <ZigTypography variant='h4' color='neutral400'>
-                {t(`edit.visibility.${VISIBILITY_LABEL[visibility]}-desc`)}
+                {t(`edit.visibility.${VISIBILITY_LABEL[visibility].key}-desc`)}
               </ZigTypography>
             </Grid>
             <Grid
@@ -191,9 +214,23 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
               display='flex'
               pt={1}
             >
-              <ZigButton variant='outlined' size='large'>
-                {t('edit.visibility.publish')}
-              </ZigButton>
+              {!user?.isSupport ? (
+                <ZigTypography variant='h4' color='neutral400'>
+                  <Trans
+                    i18nKey={'edit.visibility.marketplace-requirements'}
+                    t={t}
+                    components={[
+                      <ExternalLink
+                        href={HELP_CREATE_SERVICE_MARKETPLACE_URL}
+                      />,
+                    ]}
+                  />
+                </ZigTypography>
+              ) : (
+                <ZigButton variant='outlined' size='large'>
+                  {t('edit.visibility.publish')}
+                </ZigButton>
+              )}
             </Grid>
           </Grid>
           <ZigButton

@@ -72,7 +72,7 @@
     "pool-size-desc": "Max you'll accept from investors",
     "visibility": {
       "visibility": "Visibility:",
-      "unlisted": "Service Live: Unlisted",
+      "unlisted": "Unpublished Draft",
       "unlisted-desc": "Service only available to you",
       "private": "Service Live: Private",
       "private-desc": "Service available to logged users with the URL",
@@ -80,8 +80,8 @@
       "public-desc": "Service available to any visitor with the URL",
       "marketplace": "Service Live: Marketplace",
       "marketplace-desc": "Service published in the marketplace to everyone",
-      "publish": "Publish to Marketplace",
-      "publish-desc": "To be listed in the marketplace, check out the List of requirements[link to help center] and contact our support through the widget once your service meets the requirements"
+      "marketplace-requirements": "To be listed in the marketplace, check out the <0>list of requirements</0> and contact our support through the widget once your service meets the requirements",
+      "publish": "Publish to Marketplace"
     },
     "save": "Save Profile",
     "validation": {
