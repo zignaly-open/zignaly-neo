@@ -4,6 +4,13 @@ import { VISIBILITY_LABEL } from './types';
 
 export const LogoContainer = styled('div')`
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .MuiCircularProgress-root {
+    position: absolute;
+  }
 
   button {
     display: none;

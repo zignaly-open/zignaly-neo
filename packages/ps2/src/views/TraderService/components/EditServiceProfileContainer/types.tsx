@@ -1,17 +1,19 @@
+import { TraderServiceAccessLevel } from 'apis/service/types';
+
 export const VISIBILITY_LABEL = {
-  0: {
+  [TraderServiceAccessLevel.Solo]: {
     key: 'unlisted',
     color: '#706F82',
   },
-  100: {
+  [TraderServiceAccessLevel.Private]: {
     key: 'private',
     color: '#f7cf00',
   },
-  200: {
+  [TraderServiceAccessLevel.Public]: {
     key: 'public',
     color: '#e18728',
   },
-  500: {
+  [TraderServiceAccessLevel.Marketplace]: {
     key: 'marketplace',
     color: '#26c496',
   },

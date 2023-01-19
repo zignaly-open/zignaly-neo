@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
-import { EditServicePayload, Service } from '../../../../apis/service/types';
-import { useCoinBalances } from '../../../../apis/coin/use';
-import { Box, Grid, InputAdornment, useMediaQuery } from '@mui/material';
-import theme from '../../../../theme';
+import React, { useMemo, useState } from 'react';
+import {
+  EditServicePayload,
+  Service,
+  TraderServiceAccessLevel,
+} from '../../../../apis/service/types';
+import { Box, Grid, InputAdornment } from '@mui/material';
 import {
   ZigButton,
   ZigInput,
@@ -17,7 +19,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTraderServiceEditMutation } from 'apis/service/api';
 import { VISIBILITY_LABEL } from './types';
 import { StyledZigSelect } from './styles';
-import { useCurrentUser } from 'apis/user/use';
 import { ExternalLink } from 'components/AnchorLink';
 import { HELP_CREATE_SERVICE_MARKETPLACE_URL } from 'util/constants';
 import { useNavigate } from 'react-router-dom';
@@ -39,6 +40,12 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
 }) => {
   const { t } = useTranslation('service');
+  const defaultValues = {
+    name: service.name,
+    description: service.description,
+    maximumSbt: service.maximumSbt,
+    successFee: service.successFee,
+  };
   const {
     handleSubmit,
     control,
@@ -49,12 +56,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   } = useForm<EditServicePayload>({
     mode: 'onTouched',
     reValidateMode: 'onBlur',
-    defaultValues: {
-      name: service.name,
-      description: service.description,
-      maximumSbt: service.maximumSbt,
-      successFee: service.successFee,
-    },
+    defaultValues,
     resolver: yupResolver(EditServiceValidation),
   });
   const [edit, editStatus] = useTraderServiceEditMutation();
@@ -67,12 +69,34 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
     back();
   };
 
-  const visibilityOptions = [
-    { value: 0, label: t('edit.visibility.unlisted'), disabled: true },
-    { value: 100, label: t('edit.visibility.private') },
-    { value: 200, label: t('edit.visibility.public') },
-    { value: 500, label: t('edit.visibility.marketplace'), disabled: true },
-  ];
+  useUpdateEffect(() => {
+    reset(defaultValues);
+    setVisibility(getVisibility(service.level));
+  }, [service.id]);
+
+  const visibilityOptions = useMemo(
+    () => [
+      {
+        value: TraderServiceAccessLevel.Solo,
+        label: t('edit.visibility.unlisted'),
+        disabled: true,
+      },
+      {
+        value: TraderServiceAccessLevel.Private,
+        label: t('edit.visibility.private'),
+      },
+      {
+        value: TraderServiceAccessLevel.Public,
+        label: t('edit.visibility.public'),
+      },
+      {
+        value: TraderServiceAccessLevel.Marketplace,
+        label: t('edit.visibility.marketplace'),
+        disabled: true,
+      },
+    ],
+    [t],
+  );
 
   const selectStyles: React.ComponentProps<typeof ZigSelect>['styles'] = {
     option: (styles, { data }) => {
@@ -91,6 +115,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
       };
     },
   };
+
   const back = () => navigate(`/profit-sharing/${service.id}`);
 
   return (

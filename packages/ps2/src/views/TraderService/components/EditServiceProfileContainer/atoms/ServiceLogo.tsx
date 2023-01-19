@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { Box, IconButton } from '@mui/material';
+import { Box, CircularProgress, IconButton } from '@mui/material';
 import { Service } from 'apis/service/types';
 import { Avatar, ZigButton } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { getServiceLogo } from 'util/images';
-import { Close, Edit } from '@mui/icons-material';
+import { Close, Edit, Sync } from '@mui/icons-material';
 import { LogoContainer } from '../styles';
 import { useUpdateEffect } from 'react-use';
 
 const ServiceLogo = ({ service }: { service: Service }) => {
   const { t } = useTranslation('service');
   const [logoUrl, setLogoUrl] = useState(service.logo);
+  const [uploading, setUploading] = useState(false);
 
   useUpdateEffect(() => {
     setLogoUrl(service.logo);
@@ -25,13 +26,18 @@ const ServiceLogo = ({ service }: { service: Service }) => {
       method: 'POST',
       body: formData,
     };
+    setUploading(true);
 
-    const response = await fetch(
-      'https://api.cloudinary.com/v1_1/zignaly/image/upload',
-      options,
-    );
-    const data = await response.json();
-    setLogoUrl(data.secure_url);
+    try {
+      const response = await fetch(
+        'https://api.cloudinary.com/v1_1/zignaly/image/upload',
+        options,
+      );
+      const data = await response.json();
+      setLogoUrl(data.secure_url);
+    } finally {
+      setUploading(false);
+    }
   }
 
   return (
@@ -48,10 +54,14 @@ const ServiceLogo = ({ service }: { service: Service }) => {
           alt={t('logo-alt', { name: service.name })}
           image={getServiceLogo(logoUrl)}
         />
-        {logoUrl && (
-          <IconButton onClick={() => setLogoUrl('')}>
-            <Close />
-          </IconButton>
+        {uploading ? (
+          <CircularProgress size={24} />
+        ) : (
+          logoUrl && (
+            <IconButton onClick={() => setLogoUrl('')}>
+              <Close />
+            </IconButton>
+          )
         )}
       </LogoContainer>
 

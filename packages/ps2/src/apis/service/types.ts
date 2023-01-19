@@ -19,6 +19,7 @@ export enum TraderServiceAccessLevel {
   Solo = 0,
   Private = 100,
   Public = 200,
+  Marketplace = 500,
 }
 
 export type TraderServiceFull = {
@@ -117,7 +118,7 @@ export type Service = {
   ownerVerified: boolean;
   solo: boolean;
   ssc: string;
-  successFee: string;
+  successFee: number;
   tags: string[];
   type: string;
   usdtInvested: string;
@@ -185,5 +186,5 @@ export type EditServicePayload = {
   successFee: number;
   maximumSbt: number;
   logo: string;
-  level: number;
+  level: TraderServiceAccessLevel;
 };
