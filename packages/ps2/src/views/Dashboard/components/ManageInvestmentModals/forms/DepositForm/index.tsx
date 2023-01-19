@@ -277,29 +277,29 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                   />
                 </Box>
               ) : (
-                <>
-                  {!depositInfo?.tag ? (
-                    <ZignalyQRCode url={depositInfo.address} />
-                  ) : (
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        justifyContent: 'space-evenly',
-                      }}
-                    >
-                      <ZignalyQRCode
-                        label={t('depositQR.address', {
-                          coin: coinObject?.name,
-                        })}
-                        url={depositInfo.address}
-                      />
-                      <ZignalyQRCode
-                        label={t('depositQR.memo', { coin: coinObject?.name })}
-                        url={depositInfo?.tag}
-                      />
-                    </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'space-evenly',
+                    flexDirection: ['column', 'row'],
+                    gap: 2,
+                  }}
+                >
+                  <ZignalyQRCode
+                    label={t('depositQR.address', {
+                      coin: coinObject?.name,
+                    })}
+                    url={depositInfo.address}
+                  />
+                  {depositInfo?.tag && (
+                    <ZignalyQRCode
+                      label={t('depositQR.memo', {
+                        coin: coinObject?.name,
+                      })}
+                      url={depositInfo?.tag}
+                    />
                   )}
-                </>
+                </Box>
               )}
             </Grid>
           </>

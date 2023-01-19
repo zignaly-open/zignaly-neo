@@ -27,6 +27,7 @@ import {
   ROUTE_LOGIN,
   ROUTE_SIGNUP,
   ROUTE_MY_BALANCES,
+  ROUTE_WALLET,
 } from '../../../routes';
 import { generatePath, Link, useLocation, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
@@ -126,6 +127,12 @@ function AccountMenu(): React.ReactElement | null {
           id: 'account-menu-dropdown__balance',
           href: generatePath(ROUTE_MY_BALANCES),
           onClick: () => navigate(ROUTE_MY_BALANCES),
+        },
+        {
+          label: t('account-menu.notAuth-dropdown-link-wallet'),
+          id: 'menu__wallet',
+          href: generatePath(ROUTE_WALLET),
+          onClick: () => navigate(ROUTE_WALLET),
         },
         {
           separator: true,

@@ -4,6 +4,9 @@ import { Layout, WrapCoin, Coin, Name, Icon } from "./styles";
 
 import { CoinLabelProps } from "./types";
 
+/**
+ * @deprecated
+ */
 const CoinLabel = ({ name = "TEATHER", coin = "USDT" }: CoinLabelProps) => (
   <Layout>
     <Icon coin={coin} name={name} />

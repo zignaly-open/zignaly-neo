@@ -3,7 +3,7 @@ import { InvestedInService, Investment, InvestmentDetails } from './types';
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
-  baseQuery,
+  baseQuery: baseQuery(),
   reducerPath: 'investmentApi',
   tagTypes: [
     'Investment',

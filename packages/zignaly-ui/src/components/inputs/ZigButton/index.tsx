@@ -1,14 +1,16 @@
 import { LoadingButton, LoadingButtonProps } from "@mui/lab";
 import { styled } from "@mui/system";
 import React from "react";
-import { Tooltip } from "@mui/material";
+import { ButtonBaseTypeMap, ExtendButtonBaseTypeMap, Tooltip } from "@mui/material";
+import { OverrideProps } from "@mui/material/OverridableComponent";
 
-export type ZigButtonProps = LoadingButtonProps & {
-  id?: string;
-  ctaId?: string;
-  tooltip?: string;
-  active?: boolean;
-};
+export type ZigButtonProps = OverrideProps<ExtendButtonBaseTypeMap<ButtonBaseTypeMap>, "a"> &
+  LoadingButtonProps & {
+    id?: string;
+    ctaId?: string;
+    tooltip?: string;
+    active?: boolean;
+  };
 
 type ZigButtonPropsSxFix = Omit<ZigButtonProps, "sx"> & { __sx: ZigButtonProps["sx"] };
 
