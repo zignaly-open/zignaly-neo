@@ -122,6 +122,7 @@ export type Service = {
   type: string;
   usdtInvested: string;
   userId: string;
+  maximumSbt: number;
 
   pnlPercent7t: string;
   pnlPercent30t: string;
@@ -176,3 +177,13 @@ export enum GraphChartType {
   'at_risk_pct' = 'at_risk_pct',
   'pnl_pct_compound' = 'pnl_pct_compound',
 }
+
+export type EditServicePayload = {
+  id: string;
+  name: string;
+  description: string;
+  successFee: number | string;
+  maximumSbt: number | string;
+  logo: string;
+  level: number;
+};

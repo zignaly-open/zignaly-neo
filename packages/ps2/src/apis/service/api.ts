@@ -9,6 +9,7 @@ import {
   TraderServiceManagement,
   TraderServiceChart,
   TransferPayload,
+  EditServicePayload,
 } from './types';
 import baseQuery from '../baseQuery';
 
@@ -83,6 +84,16 @@ export const api = createApi({
         body: payload,
       }),
     }),
+    traderServiceEdit: builder.mutation<void, EditServicePayload>({
+      invalidatesTags: (result, error, args) => [
+        { type: 'Service', id: args.id },
+      ],
+      query: ({ id, ...payload }) => ({
+        url: `services/${id}`,
+        method: 'PUT',
+        body: payload,
+      }),
+    }),
   }),
 });
 
@@ -97,4 +108,5 @@ export const {
   useLazyTraderServicesQuery,
   useTraderServiceTransferFundsMutation,
   useTraderServicesQuery,
+  useTraderServiceEditMutation,
 } = api;
