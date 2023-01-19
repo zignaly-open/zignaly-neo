@@ -20,6 +20,8 @@ import { StyledZigSelect } from './styles';
 import { useCurrentUser } from 'apis/user/use';
 import { ExternalLink } from 'components/AnchorLink';
 import { HELP_CREATE_SERVICE_MARKETPLACE_URL } from 'util/constants';
+import { useNavigate } from 'react-router-dom';
+import { useUpdateEffect } from 'react-use';
 
 const getVisibility = (level: number) => {
   if (level < 100) {
@@ -36,9 +38,6 @@ const getVisibility = (level: number) => {
 const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   service,
 }) => {
-  // we do not use the results of this till before the modal
-  useCoinBalances();
-  const md = useMediaQuery(theme.breakpoints.up('sm'));
   const { t } = useTranslation('service');
   const {
     handleSubmit,
@@ -46,6 +45,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
     setError,
     formState: { errors },
     register,
+    reset,
   } = useForm<EditServicePayload>({
     mode: 'onTouched',
     reValidateMode: 'onBlur',
@@ -59,11 +59,12 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   });
   const [edit, editStatus] = useTraderServiceEditMutation();
   const [visibility, setVisibility] = useState(getVisibility(service.level));
-  const user = useCurrentUser();
+  const navigate = useNavigate();
 
-  const submit = ({ name }: Partial<EditServicePayload>) => {
-    console.log(name);
-    edit({ service_id: service.id, name });
+  const submit = async (data: EditServicePayload) => {
+    console.log(data);
+    await edit({ id: service.id, ...data, level: visibility });
+    back();
   };
 
   const visibilityOptions = [
@@ -90,6 +91,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
       };
     },
   };
+  const back = () => navigate(`/profit-sharing/${service.id}`);
 
   return (
     <Box onSubmit={handleSubmit(submit)} component='form' pt={7}>
@@ -104,7 +106,6 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
           <Controller
             name='name'
             control={control}
-            rules={{ required: true }}
             render={({ field }) => (
               <ZigInput
                 fullWidth
@@ -117,7 +118,6 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
           <Controller
             name='description'
             control={control}
-            rules={{ required: true }}
             render={({ field }) => (
               <ZigInput
                 fullWidth
@@ -138,11 +138,10 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
               <Controller
                 name='successFee'
                 control={control}
-                rules={{ required: true }}
                 render={({ field }) => (
                   <ZigInput
+                    type='number'
                     InputProps={{
-                      // endAdornment: '%',
                       endAdornment: (
                         <InputAdornment position='end'>%</InputAdornment>
                       ),
@@ -166,9 +165,9 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
               <Controller
                 name='maximumSbt'
                 control={control}
-                rules={{ required: true }}
                 render={({ field }) => (
                   <ZigInput
+                    type='number'
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position='end'>
@@ -214,33 +213,30 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
               display='flex'
               pt={1}
             >
-              {!user?.isSupport ? (
-                <ZigTypography variant='h4' color='neutral400'>
-                  <Trans
-                    i18nKey={'edit.visibility.marketplace-requirements'}
-                    t={t}
-                    components={[
-                      <ExternalLink
-                        href={HELP_CREATE_SERVICE_MARKETPLACE_URL}
-                      />,
-                    ]}
-                  />
-                </ZigTypography>
-              ) : (
-                <ZigButton variant='outlined' size='large'>
-                  {t('edit.visibility.publish')}
-                </ZigButton>
-              )}
+              <ZigTypography variant='h4' color='neutral400'>
+                <Trans
+                  i18nKey={'edit.visibility.marketplace-requirements'}
+                  t={t}
+                  components={[
+                    <ExternalLink href={HELP_CREATE_SERVICE_MARKETPLACE_URL} />,
+                  ]}
+                />
+              </ZigTypography>
             </Grid>
           </Grid>
-          <ZigButton
-            variant='contained'
-            type='submit'
-            loading={editStatus.isLoading}
-            size='large'
-          >
-            {t('edit.save')}
-          </ZigButton>
+          <Grid item container justifyContent='flex-end' spacing={1} gap={2}>
+            <ZigButton variant='outlined' size='large' onClick={back}>
+              {t('action:cancel')}
+            </ZigButton>
+            <ZigButton
+              variant='contained'
+              type='submit'
+              loading={editStatus.isLoading}
+              size='large'
+            >
+              {t('edit.save')}
+            </ZigButton>
+          </Grid>
         </Grid>
       </Grid>
     </Box>

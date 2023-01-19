@@ -10,5 +10,14 @@ export const EditServiceValidation = yup
       .matches(nameRegex, 'common:validation.invalid-characters')
       .min(5, 'service:edit.validation.name-length')
       .max(50, 'service:edit.validation.name-length'),
+    successFee: yup
+      .number()
+      .required('error:error.required')
+      .test(
+        'range',
+        'service:edit.validation.success-fee-range',
+        (v) => !v || (v >= 10 && v < 75),
+      ),
+    maximumSbt: yup.number().required('error:error.required'),
   })
   .required();

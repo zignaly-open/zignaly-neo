@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
-import { Box, IconButton, useMediaQuery } from '@mui/material';
+import { Box, IconButton } from '@mui/material';
 import { Service } from 'apis/service/types';
-import { Avatar, PencilIcon, TextButton, ZigButton } from '@zignaly-open/ui';
+import { Avatar, ZigButton } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { getServiceLogo } from 'util/images';
-import theme from 'theme';
-import { Close, Delete, DeleteOutline, Edit } from '@mui/icons-material';
-import AnchorLink from 'components/AnchorLink';
+import { Close, Edit } from '@mui/icons-material';
 import { LogoContainer } from '../styles';
+import { useUpdateEffect } from 'react-use';
 
 const ServiceLogo = ({ service }: { service: Service }) => {
   const { t } = useTranslation('service');
-  const md = useMediaQuery(theme.breakpoints.up('sm'));
   const [logoUrl, setLogoUrl] = useState(service.logo);
 
-  // useeffect to update logoUrl when service.logo changes
+  useUpdateEffect(() => {
+    setLogoUrl(service.logo);
+  }, [service.logo]);
 
   async function uploadLogo(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files[0];
-    console.log(file);
     const formData = new FormData();
     formData.append('file', file);
     formData.append('upload_preset', 'xiammksy');
@@ -40,7 +39,6 @@ const ServiceLogo = ({ service }: { service: Service }) => {
       display='flex'
       justifyContent='center'
       alignItems='center'
-      sx={{ marginBottom: md ? 0 : 2 }}
       flexDirection='column'
       gap={1}
     >

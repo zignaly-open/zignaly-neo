@@ -26,6 +26,7 @@ const EditService: React.FC = () => {
       <TraderServicePageContainer isOwner={isOwner}>
         <LayoutContentWrapper
           endpoint={serviceDetailsEndpoint}
+          unmountOnRefetch
           // error={(error: BackendError) => {
           //   if (error?.data?.error.code === ErrorCodes.SoloService)
           //     return <Navigate to={ROUTE_PROFIT_SHARING} />;

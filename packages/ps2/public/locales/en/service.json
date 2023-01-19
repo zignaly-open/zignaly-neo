@@ -85,7 +85,8 @@
     },
     "save": "Save Profile",
     "validation": {
-      "name-length": "Must be between 5 and 50 characters"
+      "name-length": "Must be between 5 and 50 characters",
+      "success-fee-range": "Must be 0 or between 10% and 75%"
     }
   }
 }

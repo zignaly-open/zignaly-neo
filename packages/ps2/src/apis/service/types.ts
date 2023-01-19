@@ -182,8 +182,8 @@ export type EditServicePayload = {
   id: string;
   name: string;
   description: string;
-  successFee: number | string;
-  maximumSbt: number | string;
+  successFee: number;
+  maximumSbt: number;
   logo: string;
   level: number;
 };
