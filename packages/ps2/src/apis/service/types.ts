@@ -19,6 +19,7 @@ export enum TraderServiceAccessLevel {
   Solo = 0,
   Private = 100,
   Public = 200,
+  Marketplace = 500,
 }
 
 export type TraderServiceFull = {
@@ -117,11 +118,12 @@ export type Service = {
   ownerVerified: boolean;
   solo: boolean;
   ssc: string;
-  successFee: string;
+  successFee: number;
   tags: string[];
   type: string;
   usdtInvested: string;
   userId: string;
+  maximumSbt: number;
 
   pnlPercent7t: string;
   pnlPercent30t: string;
@@ -176,3 +178,13 @@ export enum GraphChartType {
   'at_risk_pct' = 'at_risk_pct',
   'pnl_pct_compound' = 'pnl_pct_compound',
 }
+
+export type EditServicePayload = {
+  id: string;
+  name: string;
+  description: string;
+  successFee: number;
+  maximumSbt: number;
+  logo: string;
+  level: TraderServiceAccessLevel;
+};
