@@ -4,6 +4,7 @@ import React from "react";
 import { Tooltip } from "@mui/material";
 
 export type ZigButtonProps = LoadingButtonProps & {
+  id?: string;
   ctaId?: string;
   tooltip?: string;
   active?: boolean;
