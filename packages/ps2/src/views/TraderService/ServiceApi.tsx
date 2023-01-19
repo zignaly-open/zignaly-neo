@@ -1,9 +1,9 @@
 import React from 'react';
-import ComingSoon from '../../components/Stub/ComingSoon';
 import ServiceHeader from './components/ServiceHeader';
 import { TraderServicePageContainer } from './components/styles';
 import { useParams } from 'react-router-dom';
 import { useTraderServiceTitle } from '../../apis/service/use';
+import ApiKeyManagement from './components/ApiKeys/ApiKeyManagement';
 
 const ServiceApi: React.FC = () => {
   const { serviceId } = useParams();
@@ -12,7 +12,7 @@ const ServiceApi: React.FC = () => {
     <>
       <ServiceHeader />
       <TraderServicePageContainer>
-        <ComingSoon />
+        <ApiKeyManagement />
       </TraderServicePageContainer>
     </>
   );

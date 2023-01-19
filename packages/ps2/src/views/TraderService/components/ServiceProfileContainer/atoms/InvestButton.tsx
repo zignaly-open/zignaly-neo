@@ -11,7 +11,7 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 import { serviceToInvestmentServiceDetail } from '../../../../../apis/investment/util';
 import InvestModal from '../../../../Dashboard/components/ManageInvestmentModals/InvestModal';
-import { ROUTE_LOGIN } from '../../../../../routes';
+import { ROUTE_SIGNUP } from '../../../../../routes';
 import { InvestButtonSubtext, InvestButtonWrap } from '../styles';
 import { Button } from '@zignaly-open/ui';
 import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
@@ -59,7 +59,7 @@ const InvestButton: React.FC<{
         });
       else showModal(InvestModal, { ctaId });
     } else {
-      navigate(ROUTE_LOGIN, { state: { redirectTo: location } });
+      navigate(ROUTE_SIGNUP, { state: { redirectTo: location } });
     }
   };
 

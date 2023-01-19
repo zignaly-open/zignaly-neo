@@ -1,8 +1,10 @@
-import { combineReducers, configureStore } from '@reduxjs/toolkit';
-import userReducer from './user/store';
+import { Action, combineReducers, configureStore } from '@reduxjs/toolkit';
+import userReducer, { logout } from './user/store';
 import { api as userApi } from './user/api';
 import investmentReducer from './investment/store';
 import { api as investmentApi } from './investment/api';
+import serviceApiKeyReducer from './serviceApiKey/store';
+import { api as serviceApiKeyApi } from './serviceApiKey/api';
 import coinReducer from './coin/store';
 import { api as coinApi } from './coin/api';
 import serviceReducer from './service/store';
@@ -31,22 +33,31 @@ const persistConfig = {
   ] as string[],
 };
 
+const appReducer = combineReducers({
+  [userApi.reducerPath]: userApi.reducer,
+  [serviceApi.reducerPath]: serviceApi.reducer,
+  [investmentApi.reducerPath]: investmentApi.reducer,
+  [serviceApiKeyApi.reducerPath]: serviceApiKeyApi.reducer,
+  [marketplaceApi.reducerPath]: marketplaceApi.reducer,
+  [coinApi.reducerPath]: coinApi.reducer,
+  marketplace: marketplaceReducer,
+  user: userReducer,
+  coin: coinReducer,
+  investment: investmentReducer,
+  serviceApiKey: serviceApiKeyReducer,
+  service: serviceReducer,
+});
+
+const rootReducer = (state: ReturnType<typeof appReducer>, action: Action) => {
+  if (logout.match(action)) {
+    state = undefined;
+  }
+
+  return appReducer(state, action);
+};
+
 export const store = configureStore({
-  reducer: persistReducer(
-    persistConfig,
-    combineReducers({
-      [userApi.reducerPath]: userApi.reducer,
-      [serviceApi.reducerPath]: serviceApi.reducer,
-      [investmentApi.reducerPath]: investmentApi.reducer,
-      [marketplaceApi.reducerPath]: marketplaceApi.reducer,
-      [coinApi.reducerPath]: coinApi.reducer,
-      marketplace: marketplaceReducer,
-      user: userReducer,
-      coin: coinReducer,
-      investment: investmentReducer,
-      service: serviceReducer,
-    }),
-  ),
+  reducer: persistReducer(persistConfig, rootReducer),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
@@ -55,6 +66,7 @@ export const store = configureStore({
       .concat(serviceApi.middleware)
       .concat(marketplaceApi.middleware)
       .concat(coinApi.middleware)
+      .concat(serviceApiKeyApi.middleware)
       .concat(investmentApi.middleware),
 });
 

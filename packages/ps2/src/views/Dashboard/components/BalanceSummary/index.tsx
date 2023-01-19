@@ -1,9 +1,15 @@
 import React from 'react';
 import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
-import { Layout, Profit, TotalValue } from './styles';
+import { Layout } from './styles';
 import { BalanceSummaryProps } from './types';
-import { PencilIcon, TextButton, Typography } from '@zignaly-open/ui';
+import {
+  PencilIcon,
+  TextButton,
+  Typography,
+  ZigPriceLabel,
+} from '@zignaly-open/ui';
+import { getColorForNumber } from '../../../../util/numbers';
 
 export const BalanceSummary = ({
   id,
@@ -19,7 +25,10 @@ export const BalanceSummary = ({
       {dashboardType === 'marketplace' ? (
         <Typography>{t('balanceSummary.invested')}</Typography>
       ) : (
-        <TotalValue value={new BigNumber(totalValue).toFixed()} coin={coin} />
+        <ZigPriceLabel
+          value={new BigNumber(totalValue).toFixed()}
+          coin={coin}
+        />
       )}
       {isNaN(+profit) || profit === '' ? (
         // eslint-disable-next-line i18next/no-literal-string
@@ -27,12 +36,10 @@ export const BalanceSummary = ({
           -
         </Typography>
       ) : (
-        <Profit
+        <ZigPriceLabel
           value={profit}
           coin={coin}
-          hideCoinName
-          green={+profit > 0}
-          red={+profit < 0}
+          color={getColorForNumber(profit)}
         />
       )}
       <TextButton
