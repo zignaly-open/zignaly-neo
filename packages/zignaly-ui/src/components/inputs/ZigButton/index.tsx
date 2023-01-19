@@ -2,12 +2,11 @@ import React from "react";
 import { LoadingButton, LoadingButtonProps } from "@mui/lab";
 import { Tooltip } from "@mui/material";
 
-export type ZigButtonProps = LoadingButtonProps &
-  LoadingButtonProps & {
-    ctaId?: string;
-    tooltip?: string;
-    active?: boolean;
-  };
+export type ZigButtonProps = LoadingButtonProps & {
+  ctaId?: string;
+  tooltip?: string;
+  active?: boolean;
+};
 
 const ZigButton = ({ loading, active, tooltip, ctaId, color, ...props }: ZigButtonProps) => {
   const button = (
