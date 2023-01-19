@@ -49,9 +49,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   const {
     handleSubmit,
     control,
-    setError,
     formState: { errors },
-    register,
     reset,
   } = useForm<EditServicePayload>({
     mode: 'onTouched',
@@ -64,7 +62,6 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   const navigate = useNavigate();
 
   const submit = async (data: EditServicePayload) => {
-    console.log(data);
     await edit({ id: service.id, ...data, level: visibility });
     back();
   };
@@ -123,11 +120,11 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
       <ZigTypography textAlign='center' variant='h1'>
         {t('edit.title')}
       </ZigTypography>
-      <Grid container mt={8}>
-        <Grid item xs={12} md={2} pb={2} pr={7.5}>
+      <Grid container mt={8} gap={2}>
+        <Grid item sm={12} md={2} pb={2}>
           <ServiceLogo service={service} />
         </Grid>
-        <Grid container xs={12} md={7} pb={2} alignItems='flex-start' gap={6}>
+        <Grid container sm={12} md={7} pb={2} alignItems='flex-start' gap={6}>
           <Controller
             name='name'
             control={control}
@@ -158,8 +155,8 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
               />
             )}
           />
-          <Grid item container columnSpacing={6}>
-            <Grid item md={6} sm={12}>
+          <Grid item container columnSpacing={6} rowSpacing={6}>
+            <Grid item md={6} sm={6} xs={12}>
               <Controller
                 name='successFee'
                 control={control}
@@ -186,7 +183,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                 )}
               />
             </Grid>
-            <Grid item md={6} sm={12}>
+            <Grid item xs={12} sm={6} md={6}>
               <Controller
                 name='maximumSbt'
                 control={control}
@@ -216,8 +213,14 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
               />
             </Grid>
           </Grid>
-          <Grid item container columnSpacing={6} alignItems='center'>
-            <Grid item md={6} sm={12}>
+          <Grid
+            item
+            container
+            columnSpacing={6}
+            alignItems='center'
+            rowSpacing={2}
+          >
+            <Grid item xs={12} sm={6}>
               <StyledZigSelect
                 options={visibilityOptions}
                 label={t('edit.visibility.visibility')}
@@ -236,7 +239,6 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
               alignItems='center'
               justifyContent='center'
               display='flex'
-              pt={1}
             >
               <ZigTypography variant='h4' color='neutral400'>
                 <Trans
@@ -249,7 +251,14 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
               </ZigTypography>
             </Grid>
           </Grid>
-          <Grid item container justifyContent='flex-end' spacing={1} gap={2}>
+          <Grid
+            item
+            container
+            justifyContent='flex-end'
+            spacing={1}
+            gap={2}
+            mb={2}
+          >
             <ZigButton variant='outlined' size='large' onClick={back}>
               {t('action:cancel')}
             </ZigButton>
