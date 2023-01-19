@@ -36,6 +36,8 @@ export const Table = styled("table")`
 
   tbody {
     tr {
+      background: #13122566;
+
       :last-child {
         td {
           border-bottom: 0;

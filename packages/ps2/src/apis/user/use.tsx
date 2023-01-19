@@ -249,20 +249,24 @@ export function useSelectExchange(): (exchangeInternalId: string) => void {
     dispatch(setActiveExchangeInternalId(exchangeInternalId));
 }
 
-export function useActivateExchange(): QueryReturnTypeBasic<void> {
+export function useActivateExchange(
+  exchangeInternalId?: string,
+): QueryReturnTypeBasic<void> {
   const exchange = useActiveExchange();
   const [activate, result] = useActivateExchangeMutation();
   const dispatch = useDispatch();
 
+  const internalId = exchangeInternalId || exchange?.internalId;
+
   useEffect(() => {
-    if (exchange && !exchange.activated) {
+    if (exchangeInternalId || (exchange && !exchange.activated)) {
       activate({
-        exchangeInternalId: exchange.internalId,
+        exchangeInternalId: internalId,
       }).then(() => {
-        dispatch(activateExchange(exchange.internalId));
+        dispatch(activateExchange(internalId));
       });
     }
-  }, [exchange?.internalId]);
+  }, [internalId]);
 
   return result;
 }

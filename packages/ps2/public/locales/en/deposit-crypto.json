@@ -1,35 +1,35 @@
 {
-    "title": "Deposit Crypto",
-    "description": "Deposits may take up to 3 hours to reflect in your balance.",
-    "coinSelector": {
-      "label": "Coin:",
-      "placeholder": "Search a coin"
-    },
-    "balances": {
-      "loadingAriaLabel": "Loading coin balances",
-      "total": "Balance:",
-      "balanceLocked": "In Orders:",
-      "balanceFree": "Available:"
-    },
-    "networkSelector": {
-      "label": "Network:",
-      "placeholder": "Choose the network"
-    },
-    "no-network": "Deposit is not available on this network",
-    "depositAddress": {
-      "copied": "Deposit Address copied to clipboard!",
-      "label": "Deposit Address:",
-      "loading": "Loading deposit address...",
-      "placeholder": "Choose the currency and the network first.",
-      "warning": "Only send {{network}} {{coin}} tokens to this address"
-    },
-    "depositMemo": {
-      "copied": "Deposit Memo copied to clipboard!",
-      "loading": "Loading deposit tag...",
-      "label": "Deposit MEMO/Tag:"
-    },
-    "depositQR": {
-      "address": "{{coin}} Address",
-      "memo": "{{coin}} MEMO/Tag"
-    }
+  "title": "Deposit Crypto",
+  "description": "Deposits may take up to 3 hours to reflect in your balance.",
+  "coinSelector": {
+    "label": "Coin:",
+    "placeholder": "Search a coin"
+  },
+  "balances": {
+    "loadingAriaLabel": "Loading coin balances",
+    "total": "Balance:",
+    "balanceLocked": "In Orders:",
+    "balanceFree": "Available:"
+  },
+  "networkSelector": {
+    "label": "Network:",
+    "placeholder": "Choose the network"
+  },
+  "no-network": "Deposit is not available on this network",
+  "depositAddress": {
+    "copied": "Deposit address copied to clipboard!",
+    "label": "Deposit Address:",
+    "loading": "Loading deposit address...",
+    "placeholder": "Choose the currency and the network first.",
+    "warning": "Only send {{network}} {{coin}} tokens to this address"
+  },
+  "depositMemo": {
+    "copied": "Deposit memo copied to clipboard!",
+    "loading": "Loading deposit tag...",
+    "label": "Deposit MEMO/Tag:"
+  },
+  "depositQR": {
+    "address": "{{coin}} Address",
+    "memo": "{{coin}} MEMO/Tag"
+  }
 }

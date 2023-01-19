@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  CoinLabel,
   IconButton,
   ZigTable,
   ZigTablePriceLabel,
@@ -24,6 +23,7 @@ import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/D
 import WithdrawModal from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
 import { useZModal } from '../../../../components/ZModal/use';
 import { Box } from '@mui/material';
+import CoinLabel from 'components/CoinLabel';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
