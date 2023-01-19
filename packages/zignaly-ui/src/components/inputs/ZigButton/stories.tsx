@@ -1,11 +1,9 @@
 import React, { useState } from "react";
-import "@mui/system";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { ComponentMeta, ComponentStory, Meta, Story } from "@storybook/react";
 import ZigButton from "./index";
-import "@mui/system";
 import { ButtonGroup } from "@mui/material";
 
-const result: ComponentMeta<typeof ZigButton> = {
+const result = {
   title: "Inputs/ZigButton",
   component: ZigButton,
   argTypes: {
@@ -32,13 +30,13 @@ const result: ComponentMeta<typeof ZigButton> = {
       options: ["small", "medium", "large"],
     },
   },
-};
+} as Meta<typeof ZigButton>;
 
 export default result;
 
-const Template: ComponentStory<typeof ZigButton> = (args) => <ZigButton {...args} />;
+const Template: Story<typeof ZigButton> = (args) => <ZigButton {...args} />;
 
-export const Default: ComponentMeta<typeof ZigButton> = Template.bind({});
+export const Default = Template.bind({});
 Default.args = {
   children: "Amount to Withdraw",
   tooltip: "Hello",
