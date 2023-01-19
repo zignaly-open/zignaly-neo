@@ -33,6 +33,7 @@
     "isAuth-button-signUp": "SIGN UP",
     "notAuth-dropdown-link-dashboard": "My Portfolio",
     "notAuth-dropdown-link-balances": "My Balances",
+    "notAuth-dropdown-link-wallet": "ZIG Wallet",
     "notAuth-button-logOut": "Logout"
   },
   "account-selector": {
@@ -59,6 +60,7 @@
     "negative-amount": "Should be >= 0",
     "max-allowed-length": "Should be under {{ maxLength }} characters",
     "negative-zeroable-amount": "Should be > 0",
+    "min-amount": "Minimum amount is {{amount}} {{coin}}.",
     "invalid-amount": "You must indicate an amount",
     "max-decimals": "Please enter numbers with no more than {{maxDecimals}} decimal places."
   }

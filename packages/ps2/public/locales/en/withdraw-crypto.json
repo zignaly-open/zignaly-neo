@@ -30,6 +30,7 @@
     "indicateAnAddress": "You must indicate an valid address.",
     "minWithdrawal": "The minimum withdrawal amount is {{value}} {{coin}}"
   },
+  "notEnoughZig": "You don't have enough ZIG to pay for the withdrawal fees.",
   "confirmation": {
     "title": "Confirm Withdrawal",
     "description": "Please confirm the information is correct and submit your withdrawal.",

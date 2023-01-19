@@ -23,18 +23,16 @@ function Check2FAModal({
     }
   }, [status.isSuccess]);
 
-  const error = useMemo(
-    () =>
-      status.isError
-        ? t(
-            (status.error as { data: { error: { code: number } } }).data.error
-              .code === 13
-              ? 'error:error.login-session-expired'
-              : 'error:error.wrong-code',
-          )
-        : null,
-    [t, status],
-  );
+  const error = useMemo(() => {
+    const errorCode = (status.error as { data?: { error: { code: number } } })
+      ?.data?.error.code;
+
+    return errorCode === 13
+      ? t('error:error.login-session-expired')
+      : errorCode === 37
+      ? t('error:error.wrong-code')
+      : null;
+  }, [t, status]);
 
   return (
     <ZModal
