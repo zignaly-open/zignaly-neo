@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { ComponentMeta, ComponentStory, Meta, Story } from "@storybook/react";
-import ZigButton from "./index";
+import { Meta, Story } from "@storybook/react";
+import ZigButton, { ZigButtonProps } from "./index";
 import { ButtonGroup } from "@mui/material";
 
-const result = {
+export default {
   title: "Inputs/ZigButton",
   component: ZigButton,
   argTypes: {
@@ -30,11 +30,9 @@ const result = {
       options: ["small", "medium", "large"],
     },
   },
-} as Meta<typeof ZigButton>;
+} as Meta<ZigButtonProps>;
 
-export default result;
-
-const Template: Story<typeof ZigButton> = (args) => <ZigButton {...args} />;
+const Template: Story<ZigButtonProps> = (args) => <ZigButton {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
@@ -43,7 +41,7 @@ Default.args = {
   variant: "outlined",
 };
 
-const TemplateGroup: ComponentStory<typeof ZigButton> = ({ variant, size, ...args }) => {
+const TemplateGroup: Story = ({ size, ...args }) => {
   const [value, setValue] = useState<number>(1);
   return (
     <ButtonGroup variant="outlined" size={size}>
@@ -54,12 +52,12 @@ const TemplateGroup: ComponentStory<typeof ZigButton> = ({ variant, size, ...arg
   );
 };
 
-export const Group: ComponentMeta<typeof ZigButton> = TemplateGroup.bind({});
+export const Group = TemplateGroup.bind({});
 Group.args = {
   children: "Amount to Withdraw",
 };
 
-const TemplateSizes: ComponentStory<typeof ZigButton> = ({ variant, size, ...args }) => {
+const TemplateSizes: Story<typeof ZigButton> = (args) => {
   return (
     <>
       <ZigButton size="small" {...args} />
@@ -77,7 +75,7 @@ const TemplateSizes: ComponentStory<typeof ZigButton> = ({ variant, size, ...arg
   );
 };
 
-export const Sizes: ComponentMeta<typeof ZigButton> = TemplateSizes.bind({});
+export const Sizes = TemplateSizes.bind({});
 Sizes.args = {
   children: "Amount to Withdraw",
 };
