@@ -28,4 +28,4 @@ const ZigButton = ({ loading, active, tooltip, ctaId, color, ...props }: ZigButt
   );
 };
 
-export default ZigButton as typeof ZigButton & typeof LoadingButton;
+export default ZigButton as typeof LoadingButton & typeof ZigButton;
