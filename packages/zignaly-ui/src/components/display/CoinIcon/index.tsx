@@ -4,6 +4,9 @@ import { sizes, Image, Layout } from "./styles";
 
 import { CoinSizes, CoinTypeProps } from "./types";
 
+/**
+ * @deprecated
+ */
 const CoinIcon = ({ size = CoinSizes.MEDIUM, name = "", coin, className = "" }: CoinTypeProps) => {
   const [src, setSrc] = useState(``);
 

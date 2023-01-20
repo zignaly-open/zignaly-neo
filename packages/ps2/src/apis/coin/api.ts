@@ -1,10 +1,16 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { CoinBalances, CoinDetails, DepositInfo, Transactions } from './types';
+import {
+  AccountCoinBalances,
+  CoinBalances,
+  CoinDetails,
+  DepositInfo,
+  Transactions,
+} from './types';
 import baseQuery from '../baseQuery';
 import { isString, pickBy } from 'lodash';
 
 export const api = createApi({
-  baseQuery,
+  baseQuery: baseQuery(),
   reducerPath: 'coinApi',
   tagTypes: ['Balance'],
   endpoints: (builder) => ({
@@ -20,6 +26,33 @@ export const api = createApi({
         },
       }),
       providesTags: ['Balance'],
+    }),
+
+    bulkCoins: builder.query<
+      AccountCoinBalances,
+      { exchangeAccounts: string[] }
+    >({
+      async queryFn(
+        { exchangeAccounts },
+        _queryApi,
+        _extraOptions,
+        fetchWithBQ,
+      ) {
+        const doFetch = async (exchangeInternalId: string) => {
+          const result = await fetchWithBQ(
+            `user/exchanges/${exchangeInternalId}/assets?view=reduced&convert=false`,
+          );
+          if (result.error) throw result.error;
+          return { exchangeInternalId, balances: result.data as CoinBalances };
+        };
+
+        try {
+          const res = await Promise.all(exchangeAccounts.map(doFetch));
+          return { data: res };
+        } catch (e) {
+          return { error: e };
+        }
+      },
     }),
 
     allCoins: builder.query<CoinDetails, string>({
@@ -98,6 +131,7 @@ export const api = createApi({
 
 export const {
   useCoinsQuery,
+  useBulkCoinsQuery,
   useAllCoinsQuery,
   useDepositInfoQuery,
   useWithdrawMutation,

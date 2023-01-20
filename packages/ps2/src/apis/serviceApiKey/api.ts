@@ -3,7 +3,7 @@ import { ServiceApiKey, ServiceApiKeyPayload } from './types';
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
-  baseQuery,
+  baseQuery: baseQuery(),
   reducerPath: 'serviceApiKeyApi',
   tagTypes: ['ServiceApiKey'],
   endpoints: (builder) => ({

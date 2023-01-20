@@ -14,7 +14,7 @@ import {
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
-  baseQuery,
+  baseQuery: baseQuery(),
   reducerPath: 'serviceApi',
   tagTypes: ['Service', 'ServiceChart'],
   endpoints: (builder) => ({

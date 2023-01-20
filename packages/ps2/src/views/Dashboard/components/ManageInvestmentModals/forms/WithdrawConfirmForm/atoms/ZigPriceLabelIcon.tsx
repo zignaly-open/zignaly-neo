@@ -1,17 +1,21 @@
 import { Box } from '@mui/material';
-import { CoinIcon, ZigPriceLabel } from '@zignaly-open/ui';
+import { ZigCoinIcon, ZigPriceLabel } from '@zignaly-open/ui';
 import React from 'react';
 
 export const ZigPriceLabelIcon = ({
   amount,
   coin,
+  iconBucket,
+  precision,
 }: {
   amount: string | number;
   coin: string;
+  iconBucket?: string;
+  precision?: number;
 }) => {
   return (
     <Box display='flex' gap={1} alignItems='center' justifyContent='center'>
-      <CoinIcon name={coin} coin={coin} />
+      <ZigCoinIcon name={coin} coin={coin} bucket={iconBucket} />
       <ZigPriceLabel
         noWrap
         component='span'
@@ -19,6 +23,7 @@ export const ZigPriceLabelIcon = ({
         variant='bigNumber'
         value={+amount}
         coin={coin}
+        precision={precision}
         coinProps={{
           color: 'neutral400',
           variant: 'h3',

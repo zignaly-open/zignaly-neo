@@ -1,47 +1,31 @@
 import React from 'react';
 import { AmountContainer } from './styles';
 import { Grid } from '@mui/material';
-import { useTranslation } from 'react-i18next';
-import { ConfirmWithdrawalModalProps } from './types';
-import { CoinIcon, ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
-import { useWithdrawMutation } from 'apis/coin/api';
-import { useActiveExchange, useCheck2FA } from 'apis/user/use';
+import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
-import { ZigPriceLabelIcon } from './atoms';
+import { ZigPriceLabelIcon } from './atoms/ZigPriceLabelIcon';
+import ChainIcon from 'components/ChainIcon';
+import { useTranslation } from 'react-i18next';
+import { WithdrawConfirmFormProps } from './types';
+import BigNumber from 'bignumber.js';
 
 const WithdrawConfirmForm = ({
-  coin,
+  action,
+  back,
+  status,
   address,
   tag,
-  back,
-  close,
-  setStep,
-  network,
+  coin,
+  networkName,
+  networkCoin,
   amount,
-}: ConfirmWithdrawalModalProps) => {
+  fee,
+  feeCoin = coin,
+  close,
+  iconBucket,
+}: WithdrawConfirmFormProps) => {
   const { t } = useTranslation('withdraw-crypto');
-  const { internalId } = useActiveExchange();
-  const [withdraw, withdrawStatus] = useWithdrawMutation();
-
-  const withdraw2FA = useCheck2FA({
-    status: withdrawStatus,
-  });
-
-  const performWithdraw2FA = () =>
-    withdraw2FA(async (code?: string) => {
-      await withdraw({
-        asset: coin,
-        network: network.network,
-        exchangeInternalId: internalId,
-        address,
-        tag,
-        amount,
-        code,
-      }).unwrap();
-      setStep('success');
-    });
-
-  if (withdrawStatus.isSuccess) {
+  if (status.isSuccess) {
     return (
       <Grid container direction='column'>
         <ZigTypography my={1} color='neutral200'>
@@ -65,13 +49,13 @@ const WithdrawConfirmForm = ({
         {t('confirmation.network')}
       </ZigTypography>
       <Grid alignItems='center' direction='row' display='flex' gap={2} mt='8px'>
-        <CoinIcon name={coin} coin={coin} />
+        <ChainIcon network={networkCoin} />
         <ZigTypography
           variant='h2'
           color='neutral100'
           sx={{ weight: 'medium' }}
         >
-          {network.name}
+          {networkName}
         </ZigTypography>
       </Grid>
       <Grid mt={3} gap={3} display='flex' direction='column'>
@@ -109,7 +93,11 @@ const WithdrawConfirmForm = ({
             <ZigTypography color='neutral200' variant='h3' fontWeight='regular'>
               {t('confirmation.amount')}
             </ZigTypography>
-            <ZigPriceLabelIcon amount={amount} coin={coin} />
+            <ZigPriceLabelIcon
+              amount={amount}
+              coin={coin}
+              iconBucket={iconBucket}
+            />
           </Grid>
         </AmountContainer>
         <AmountContainer sx={{ height: '100%', flex: 1 }}>
@@ -121,7 +109,11 @@ const WithdrawConfirmForm = ({
             >
               {t('confirmation.networkFee')}
             </ZigTypography>
-            <ZigPriceLabelIcon amount={network.withdrawFee} coin={coin} />
+            <ZigPriceLabelIcon
+              amount={fee}
+              coin={feeCoin}
+              iconBucket={iconBucket}
+            />
           </Grid>
         </AmountContainer>
       </Grid>
@@ -137,8 +129,13 @@ const WithdrawConfirmForm = ({
             {t('confirmation.receive')}
           </ZigTypography>
           <ZigPriceLabelIcon
-            amount={parseFloat(amount) - parseFloat(network.withdrawFee)}
+            amount={
+              coin !== feeCoin
+                ? amount
+                : BigNumber(amount).minus(fee).toString()
+            }
             coin={coin}
+            iconBucket={iconBucket}
           />
         </Grid>
       </AmountContainer>
@@ -147,10 +144,10 @@ const WithdrawConfirmForm = ({
           {t('common:back')}
         </ZigButton>
         <ZigButton
-          onClick={performWithdraw2FA}
+          onClick={action}
           variant='contained'
           size='large'
-          loading={withdrawStatus.isLoading}
+          loading={status.isLoading}
           type='submit'
         >
           {t('confirmation.withdrawNow')}
