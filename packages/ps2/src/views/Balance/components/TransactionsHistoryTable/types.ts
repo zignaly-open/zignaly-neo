@@ -13,3 +13,5 @@ export const TRANSACTION_TYPE_NAME = {
 };
 
 export type TransactionsTableDataType = Transaction & { assetName: string };
+export type Side = 'to' | 'from';
+export type SideType = 'service' | 'external' | 'zignaly';

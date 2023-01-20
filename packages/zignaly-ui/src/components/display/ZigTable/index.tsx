@@ -173,7 +173,7 @@ export default function ZigTable<T extends object>({
           </tbody>
         </Table>
       </TableContainer>
-      {!data.length && (
+      {!data.length && !loading && (
         <ZigTypography
           variant="subtitle1"
           textAlign="center"

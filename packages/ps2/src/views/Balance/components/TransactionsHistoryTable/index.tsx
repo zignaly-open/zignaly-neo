@@ -16,7 +16,7 @@ import { TransactionsTableDataType, TRANSACTION_TYPE_NAME } from './types';
 import TransactionDetails from './atoms/TransactionDetails';
 import { Box } from '@mui/material';
 import { PaginationState } from '@tanstack/react-table';
-import { truncateAddress } from './util';
+import { getTransactionSideType, truncateAddress } from './util';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(
@@ -117,9 +117,12 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
             color='neutral100'
             fontWeight={500}
           >
-            {getValue() || original.to
-              ? truncateAddress(original.to)
-              : t('deleted')}
+            {getValue() ||
+              (original.to
+                ? truncateAddress(original.to)
+                : getTransactionSideType(original.txType, 'to') === 'zignaly'
+                ? t('deleted')
+                : '-')}
           </ZigTypography>
         ),
         enableSorting: false,
