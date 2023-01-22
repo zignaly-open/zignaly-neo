@@ -135,14 +135,23 @@ export async function getAuctionsWithBids(
   return auctions;
 }
 
-const broadcastAuctionChange = async (auctionId: number, user: ContextUser) => {
+const broadcastAuctionChange = async (auctionId: number, user: User) => {
   pubsub.publish(BID_MADE, {
     bidMade: {
       user: {
         id: user.id,
-        username: 'hui', // FIXME
+        username: user.username,
       },
       auctionId: auctionId,
+    },
+  });
+};
+
+const broadcastBalanceChange = async (balance: string, user: ContextUser) => {
+  pubsub.publish(BALANCE_CHANGED, {
+    balanceChanged: {
+      id: user.id,
+      balance,
     },
   });
 };
@@ -254,18 +263,9 @@ export const generateService = (user: ContextUser) => ({
     }
     try {
       const balance = await redisService.bid(user.id, id);
-
-      if (!isTest) {
-        broadcastAuctionChange(id, user);
-      }
-
-      pubsub.publish(BALANCE_CHANGED, {
-        balanceChanged: {
-          id: user.id,
-          balance,
-        },
-      });
-
+      const userInstance = await User.findByPk(user.id);
+      broadcastBalanceChange(balance, user);
+      !isTest && broadcastAuctionChange(id, userInstance);
       return 'ok';
     } catch (e) {
       if (!isTest) {
