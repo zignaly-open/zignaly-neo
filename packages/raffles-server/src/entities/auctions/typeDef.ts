@@ -47,7 +47,7 @@ export const typeDef = gql`
   type BidInfo {
     auctionId: ID
     date: Date
-    user: User
+    user: UserInfo
   }
 
   type Auction implements IAuction & IAuctionPrivate {
