@@ -14,8 +14,7 @@ import { BALANCE_CHANGED } from '../users/constants';
 import { isBalanceSufficientForPayment } from './util';
 import { emitBalanceChanged } from '../users/util';
 import { Payout } from '../payouts/model';
-import { debounce } from 'lodash';
-import { AUCTION_UPDATED } from './constants';
+import { BID_MADE } from './constants';
 import { AuctionFilter, AuctionPayload } from './types';
 import { getUserBalance, makePayout } from '../balances/service';
 
@@ -136,20 +135,27 @@ export async function getAuctionsWithBids(
   return auctions;
 }
 
-const broadcastAuctionChange = async (auctionId: number) => {
+const broadcastAuctionChange = async (auctionId: number, user: ContextUser) => {
   try {
-    const [auctionUpdated] = await getAuctionsWithBids(auctionId, true);
+    // TODO: here
+    // const [auctionUpdated] = await getAuctionsWithBids(auctionId, true);
 
-    pubsub.publish(AUCTION_UPDATED, {
-      auctionUpdated,
+    pubsub.publish(BID_MADE, {
+      bidMade: {
+        user: {
+          id: user.id,
+          username: 'hui',
+        },
+        auctionId: auctionId,
+      },
     });
+    // pubsub.publish(AUCTION_UPDATED, {
+    //   auctionUpdated,
+    // });
   } catch (e) {
     console.error(e);
   }
 };
-const debounceBroadcastAuction = debounce(broadcastAuctionChange, 70, {
-  maxWait: 160,
-});
 
 export const generateService = (user: ContextUser) => ({
   getAll: async (data: ResourceOptions, asAdmin = false) => {
@@ -260,7 +266,7 @@ export const generateService = (user: ContextUser) => ({
       const balance = await redisService.bid(user.id, id);
 
       if (!isTest) {
-        debounceBroadcastAuction(id);
+        broadcastAuctionChange(id, user);
       }
 
       pubsub.publish(BALANCE_CHANGED, {

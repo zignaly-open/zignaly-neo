@@ -26,6 +26,7 @@ export const GET_AUCTIONS = gql`
       expiresAt
       maxClaimDate
       startDate
+      bidStep
       currentBid
       website
       twitter
@@ -69,12 +70,13 @@ export const CLAIM = gql`
   }
 `;
 
-export const BIDS_SUBSCRIPTION = gql`
+export const AUCTION_UPDATED_SUBSCRIPTION = gql`
   subscription onAuctionUpdated {
     auctionUpdated {
       id
       expiresAt
       currentBid
+      bidStep
       startDate
       isFinalized
       bids {
@@ -83,6 +85,18 @@ export const BIDS_SUBSCRIPTION = gql`
           id
           username
         }
+      }
+    }
+  }
+`;
+
+export const BID_MADE_SUBSCRIPTION = gql`
+  subscription onBidMade {
+    bidMade {
+      auctionId
+      user {
+        id
+        username
       }
     }
   }

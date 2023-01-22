@@ -151,6 +151,7 @@ export const typeDef = gql`
 
   extend type Subscription {
     auctionUpdated: Auction
+    bidMade: BidInfo
   }
 
   extend type Mutation {
