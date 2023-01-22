@@ -22,9 +22,9 @@ const createAuction = async () => {
     await Auction.destroy({ where: { id: 13 } });
     const auction = await Auction.create({
       id: 13,
-      expiresAt: '2023-01-10T13:30:00.511Z',
+      expiresAt: '2023-02-10T13:30:00.511Z',
       chain: 'DOGE',
-      maxExpiryDate: '2023-01-10T13:30:00.511Z',
+      maxExpiryDate: '2023-02-10T13:30:00.511Z',
       imageUrl: '/images/4.jpg',
       title: 'Most stressful auction',
       description: 'Click',
