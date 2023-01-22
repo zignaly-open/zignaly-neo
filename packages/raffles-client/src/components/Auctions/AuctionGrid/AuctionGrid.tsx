@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Alert, Box, Grid } from '@mui/material';
 import { useQuery, useSubscription } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import Loader from '../../common/Loader';
-import { BIDS_SUBSCRIPTION, GET_AUCTIONS } from 'queries/auctions';
+import {
+  AUCTION_UPDATED_SUBSCRIPTION,
+  BID_MADE_SUBSCRIPTION,
+  GET_AUCTIONS,
+} from 'queries/auctions';
 import AuctionCard from '../AuctionCard/AuctionCard';
 import { LayoutContainer } from './styles';
 import InfiniteScroll from 'react-infinite-scroller';
+import BN from 'bignumber.js';
 
 const PER_PAGE = 20;
 
@@ -16,18 +21,46 @@ const AuctionGrid: React.FC = () => {
   const { showUnannounced, privateCode } = Object.fromEntries(
     new URLSearchParams(location.search),
   );
-  const { loading, error, data, fetchMore } = useQuery(GET_AUCTIONS, {
-    variables: {
-      perPage: PER_PAGE,
-      filter: {
-        unannounced: showUnannounced === 'true',
-        privateCode,
+  const { subscribeToMore, loading, error, data, fetchMore } = useQuery(
+    GET_AUCTIONS,
+    {
+      variables: {
+        perPage: PER_PAGE,
+        filter: {
+          unannounced: showUnannounced === 'true',
+          privateCode,
+        },
       },
     },
-    pollInterval: 15 * 60 * 1000,
-  });
+  );
 
-  useSubscription(BIDS_SUBSCRIPTION);
+  useEffect(() => {
+    subscribeToMore({
+      document: BID_MADE_SUBSCRIPTION,
+      updateQuery: (prev, { subscriptionData }) => {
+        const newItems = prev.items.map((x: AuctionType) => {
+          if (x.id === subscriptionData?.data?.bidMade?.auctionId) {
+            return {
+              ...x,
+              currentBid: new BN(x.currentBid)
+                .plus(new BN(x.bidStep))
+                .toString(),
+              // add bid to the bids list and maybe checkl for dates
+            };
+          } else {
+            return x;
+          }
+        });
+        return {
+          ...prev,
+          items: newItems,
+        };
+      },
+    });
+  }, []);
+
+  useSubscription(BID_MADE_SUBSCRIPTION);
+  useSubscription(AUCTION_UPDATED_SUBSCRIPTION);
 
   const onLoadMore = () => {
     fetchMore({
