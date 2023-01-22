@@ -44,7 +44,13 @@ export const typeDef = gql`
     isClaimed: Boolean
   }
 
-  type Auction implements IAuction, IAuctionPrivate {
+  type BidInfo {
+    auctionId: ID
+    date: Date
+    user: User
+  }
+
+  type Auction implements IAuction & IAuctionPrivate {
     id: ID
     bids: [Bid]
     isClaimed: Boolean
