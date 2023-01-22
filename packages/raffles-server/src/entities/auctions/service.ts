@@ -136,25 +136,15 @@ export async function getAuctionsWithBids(
 }
 
 const broadcastAuctionChange = async (auctionId: number, user: ContextUser) => {
-  try {
-    // TODO: here
-    // const [auctionUpdated] = await getAuctionsWithBids(auctionId, true);
-
-    pubsub.publish(BID_MADE, {
-      bidMade: {
-        user: {
-          id: user.id,
-          username: 'hui',
-        },
-        auctionId: auctionId,
+  pubsub.publish(BID_MADE, {
+    bidMade: {
+      user: {
+        id: user.id,
+        username: 'hui', // FIXME
       },
-    });
-    // pubsub.publish(AUCTION_UPDATED, {
-    //   auctionUpdated,
-    // });
-  } catch (e) {
-    console.error(e);
-  }
+      auctionId: auctionId,
+    },
+  });
 };
 
 export const generateService = (user: ContextUser) => ({

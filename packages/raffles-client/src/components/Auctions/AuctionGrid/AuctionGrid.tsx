@@ -12,7 +12,7 @@ import {
 import AuctionCard from '../AuctionCard/AuctionCard';
 import { LayoutContainer } from './styles';
 import InfiniteScroll from 'react-infinite-scroller';
-import BN from 'bignumber.js';
+import { extendAuctionListWithNewBid } from './util';
 
 const PER_PAGE = 20;
 
@@ -37,25 +37,13 @@ const AuctionGrid: React.FC = () => {
   useEffect(() => {
     subscribeToMore({
       document: BID_MADE_SUBSCRIPTION,
-      updateQuery: (prev, { subscriptionData }) => {
-        const newItems = prev.items.map((x: AuctionType) => {
-          if (x.id === subscriptionData?.data?.bidMade?.auctionId) {
-            return {
-              ...x,
-              currentBid: new BN(x.currentBid)
-                .plus(new BN(x.bidStep))
-                .toString(),
-              // add bid to the bids list and maybe checkl for dates
-            };
-          } else {
-            return x;
-          }
-        });
-        return {
-          ...prev,
-          items: newItems,
-        };
-      },
+      updateQuery: (prev, { subscriptionData }) => ({
+        ...prev,
+        items: extendAuctionListWithNewBid(
+          prev.items,
+          subscriptionData?.data?.bidMade,
+        ),
+      }),
     });
   }, []);
 
