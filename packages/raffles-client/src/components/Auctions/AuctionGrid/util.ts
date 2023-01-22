@@ -14,26 +14,39 @@ const fixBid = (bid: BidSubscriptionData): BidSubscriptionData => ({
   },
 });
 
+const unshiftBid = (bids: AuctionBidType[], bid: BidSubscriptionData) => {
+  const usersBidIndex = bids?.findIndex((b) => b.user.id === bid.user.id);
+  const newBid = {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    __typename: 'Bid',
+    position: 1,
+    user: bid.user,
+  };
+  return [
+    newBid,
+    ...bids.reduce((memo, b, i) => {
+      const position =
+        b.position + (usersBidIndex === -1 || i < usersBidIndex ? 1 : 0);
+      if (i !== usersBidIndex) memo.push({ ...b, position });
+      return memo;
+    }, []),
+  ];
+};
+
 export const extendAuctionListWithNewBid = (
   auctions: AuctionType[],
   bidMade: { auctionId: number; user: AuctionBidType['user'] },
 ): AuctionType[] => {
   const bid = fixBid(bidMade);
-  return auctions.map((x: AuctionType) => {
+  return auctions?.map((x: AuctionType) => {
     if (x.id === bid?.auctionId) {
       let { bids = [] } = x;
       const winningBid = bids[0];
-      debugger;
-      if (winningBid?.user?.id === bid.user.id) {
+      if (+winningBid?.user?.id === +bid.user.id) {
         // same user, do nothing
       } else {
-        bids = [
-          {
-            position: 1,
-            user: bid.user,
-          },
-          ...bids.map((b) => ({ ...b, position: b.position + 1 })),
-        ];
+        bids = unshiftBid(bids, bid);
       }
       return {
         ...x,
