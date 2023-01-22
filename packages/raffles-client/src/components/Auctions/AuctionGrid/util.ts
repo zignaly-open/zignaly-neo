@@ -21,10 +21,10 @@ export const extendAuctionListWithNewBid = (
   const bid = fixBid(bidMade);
   return auctions.map((x: AuctionType) => {
     if (x.id === bid?.auctionId) {
-      let { bids } = x;
+      let { bids = [] } = x;
       const winningBid = bids[0];
       debugger;
-      if (winningBid.user.id === bid.user.id) {
+      if (winningBid?.user?.id === bid.user.id) {
         // same user, do nothing
       } else {
         bids = [
@@ -32,7 +32,7 @@ export const extendAuctionListWithNewBid = (
             position: 1,
             user: bid.user,
           },
-          ...x.bids.map((b) => ({ ...b, position: b.position + 1 })),
+          ...bids.map((b) => ({ ...b, position: b.position + 1 })),
         ];
       }
       return {
