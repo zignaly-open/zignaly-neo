@@ -309,6 +309,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
 
             <ModalActions align='right'>
               <Button
+                id={'withdraw__close'}
                 size={'large'}
                 type={'button'}
                 variant={'secondary'}
@@ -317,6 +318,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
               />
 
               <Button
+                id={'withdraw__continue'}
                 size={'large'}
                 type={'submit'}
                 caption={t('confirmation.continue')}

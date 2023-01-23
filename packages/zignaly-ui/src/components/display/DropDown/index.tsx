@@ -159,6 +159,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
                       {childDropdownShow === option &&
                         option.children.map((c) => (
                           <NavLink
+                            id={c.id}
                             active={c?.active}
                             key={"--sub-" + key + "--" + c.label}
                             onClick={onClick(c.onClick!)}

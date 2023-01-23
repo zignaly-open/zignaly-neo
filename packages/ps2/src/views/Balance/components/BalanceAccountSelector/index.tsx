@@ -31,6 +31,7 @@ const BalanceAccountSelector: React.FC = () => {
           <AccountSelector
             component={({ open }) => (
               <IconButton
+                id={'balance__account-switcher'}
                 variant={'secondary'}
                 size={'medium'}
                 isFocused={open}

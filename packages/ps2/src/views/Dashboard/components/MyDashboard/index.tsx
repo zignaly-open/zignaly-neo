@@ -54,6 +54,7 @@ const MyDashboard: React.FC = () => {
           const totalValue = bigNumberInvestment.plus(bigNumberPending);
           return (
             <BalanceSummary
+              id={`portfolio-row__edit-${original.serviceId}`}
               totalValue={totalValue.toFixed()}
               coin={original.ssc}
               profit={new BigNumber(original.pnlSumLc).toFixed()}

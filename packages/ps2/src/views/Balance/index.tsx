@@ -69,12 +69,17 @@ const MyBalances: React.FC = () => {
             }}
             value={tab}
           >
-            <ZigTab label={t('my-balances:my-coins')} />
             <ZigTab
+              label={t('my-balances:my-coins')}
+              id={'balance__my-coins'}
+            />
+            <ZigTab
+              id={'balance__deposits-withdrawals'}
               label={t('my-balances:deposits-withdrawals')}
               asideComponent={
                 <Box display='flex' gap={2}>
                   <TextButton
+                    id={'balance__export'}
                     rightElement={<Add sx={{ color: 'links' }} />}
                     caption={t('action:export')}
                     onClick={() => {

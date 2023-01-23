@@ -199,7 +199,12 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                   loading ? t('depositAddress.loading') : depositInfo?.address
                 }
                 rightSideElement={
-                  <CloneIcon width={40} height={40} color={dark.neutral300} />
+                  <CloneIcon
+                    width={40}
+                    height={40}
+                    color={dark.neutral300}
+                    id={'deposit-address__copy'}
+                  />
                 }
                 onClickRightSideElement={() => {
                   trackCta({
