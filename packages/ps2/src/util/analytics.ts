@@ -9,7 +9,7 @@ let analytics: AnalyticsInstance | null = null;
 
 if (
   process.env.REACT_APP_SEGMENT_KEY &&
-  process.env.REACT_APP_ENABLE_TRACKING
+  process.env.REACT_APP_ENABLE_TRACKING === 'true'
 ) {
   analytics = Analytics({
     app: process.env.REACT_APP_SEGMENT_NAME || 'zignaly',
