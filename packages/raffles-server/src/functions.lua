@@ -27,6 +27,19 @@ local function update_balance(keys, args)
   return newCurrentBalance
 end
 
+-- yes I wrote my own map because looks like lua doesn't have one
+-- so there are two options: if lua doesn't have one, it should be called lula, not lua
+-- if it has one, I am the clown here.
+local function map(array, callback) -- mapper(value, index, length, array)
+  local result = {}
+  local length = #array
+  for index = 1, length do
+    local value = array[index]
+    result[index] = callback(value, index, length, array)
+  end
+  return result
+end
+
 local function get_auction_data(keys, args)
   local auction = redis.call('HGETALL', keys[1])
   local start = tonumber(auction[2])
@@ -36,7 +49,9 @@ local function get_auction_data(keys, args)
   -- local bidFee = tonumber(auction[10])
   local price = tonumber(auction[12])
   local ranking = redis.call('ZRANGE', keys[2], 0, -1);
-  return {expire, price, ranking}
+  local username_keys = map(ranking, function(item) return 'USER_DB_USERNAME:' .. item end)
+  local usernames = redis.call('MGET', unpack(username_keys))
+  return { expire, price, ranking, usernames }
 end
 
 local function bid(keys, args)

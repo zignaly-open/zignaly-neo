@@ -22,10 +22,6 @@ const omitPrivateFields = {
   attributes: { exclude: ['announcementDate', 'maxExpiryDate'] },
 };
 
-async function findUsers(ids: number[]): Promise<User[]> {
-  return await User.findAll({ where: { id: ids } });
-}
-
 const auctionsFilter = (
   auctionId?: number,
   filter: AuctionFilter = {},
@@ -114,14 +110,9 @@ export async function getAuctionsWithBids(
       const redisData = await redisService.getAuctionData(a.id);
       a.currentBid = redisData.price;
       a.expiresAt = redisData.expire;
-      // todo: store usernames in redis to avoid querying db for users
-      const users = await findUsers(redisData.ranking);
-      a.bids = redisData.ranking.map((userId, i) => ({
+      a.bids = redisData.ranking.map((user, i) => ({
         position: i + 1,
-        user: {
-          id: userId,
-          username: users?.find((u) => u.id === +userId)?.username,
-        },
+        user,
       }));
     } else {
       a.isClaimed = Boolean(
