@@ -122,7 +122,7 @@ export async function getAuctionsWithBids(
   for await (const a of auctions) {
     // Apply redis data
     if (a.inRedis) {
-      Object.assign(a, getAuctionTypePartialFromRedisData(a.id));
+      Object.assign(a, await getAuctionTypePartialFromRedisData(a.id));
     } else {
       a.isClaimed = Boolean(
         typeof user === 'object' &&
