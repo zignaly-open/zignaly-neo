@@ -4,11 +4,7 @@ import { useQuery, useSubscription } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import { AuctionType } from '@zignaly-open/raffles-shared/types';
 import Loader from '../../common/Loader';
-import {
-  AUCTION_UPDATED_SUBSCRIPTION,
-  RANKING_UPDATED_SUBSCRIPTION,
-  GET_AUCTIONS,
-} from 'queries/auctions';
+import { AUCTION_UPDATED_SUBSCRIPTION, GET_AUCTIONS } from 'queries/auctions';
 import AuctionCard from '../AuctionCard/AuctionCard';
 import { LayoutContainer } from './styles';
 import InfiniteScroll from 'react-infinite-scroller';
@@ -30,7 +26,6 @@ const AuctionGrid: React.FC = () => {
     },
   });
 
-  useSubscription(RANKING_UPDATED_SUBSCRIPTION);
   useSubscription(AUCTION_UPDATED_SUBSCRIPTION);
 
   const onLoadMore = () => {
