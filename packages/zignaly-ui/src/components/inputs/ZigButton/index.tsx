@@ -6,7 +6,6 @@ import { OverrideProps } from "@mui/material/OverridableComponent";
 
 export type ZigButtonProps = OverrideProps<ExtendButtonBaseTypeMap<ButtonBaseTypeMap>, "a"> &
   LoadingButtonProps & {
-    id?: string;
     ctaId?: string;
     tooltip?: string;
     active?: boolean;
@@ -16,7 +15,6 @@ type ZigButtonPropsSxFix = Omit<ZigButtonProps, "sx"> & { __sx: ZigButtonProps["
 
 const ZigButton = styled(
   ({
-    id,
     active,
     tooltip,
     ctaId,
@@ -26,7 +24,6 @@ const ZigButton = styled(
   }: ZigButtonPropsSxFix) => {
     const button = (
       <LoadingButton
-        id={id}
         data-tack-cta={ctaId}
         {...props}
         sx={__sx}
