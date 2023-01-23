@@ -90,13 +90,18 @@ export const AUCTION_UPDATED_SUBSCRIPTION = gql`
   }
 `;
 
-export const BID_MADE_SUBSCRIPTION = gql`
-  subscription onBidMade {
-    bidMade {
-      auctionId
-      user {
-        id
-        username
+export const RANKING_UPDATED_SUBSCRIPTION = gql`
+  subscription onRankingUpdated {
+    rankingUpdated {
+      id
+      expiresAt
+      currentBid
+      bids {
+        position
+        user {
+          id
+          username
+        }
       }
     }
   }
