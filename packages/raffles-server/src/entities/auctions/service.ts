@@ -18,6 +18,7 @@ import { AuctionFilter, AuctionPayload } from './types';
 import { getUserBalance, makePayout } from '../balances/service';
 import { AUCTION_UPDATED } from './constants';
 import { debounce } from 'lodash';
+import { BN } from 'ethereumjs-util';
 
 const omitPrivateFields = {
   attributes: { exclude: ['announcementDate', 'maxExpiryDate'] },
@@ -80,16 +81,20 @@ const auctionsFilter = (
 
 export async function getAuctionTypePartialFromRedisData(
   auctionId: number,
-): Promise<Pick<AuctionType, 'currentBid' | 'expiresAt' | 'bids'>> {
-  const redisData = await redisService.getAuctionData(auctionId);
-  return {
-    currentBid: redisData.price,
-    expiresAt: redisData.expire,
-    bids: redisData.ranking.map((user, i) => ({
-      position: i + 1,
-      user,
-    })),
-  };
+): Promise<Partial<Pick<AuctionType, 'currentBid' | 'expiresAt' | 'bids'>>> {
+  try {
+    const redisData = await redisService.getAuctionData(auctionId);
+    return {
+      currentBid: new BN(parseFloat(redisData.price)).toString(),
+      expiresAt: redisData.expire,
+      bids: redisData.ranking.map((user, i) => ({
+        position: i + 1,
+        user,
+      })),
+    };
+  } catch (e) {
+    return {};
+  }
 }
 
 export async function getAuctionsWithBids(

@@ -48,9 +48,13 @@ local function get_auction_data(keys, args)
   -- local bidStep = tonumber(auction[8])
   -- local bidFee = tonumber(auction[10])
   local price = tonumber(auction[12])
-  local ranking = redis.call('ZRANGE', keys[2], 0, -1);
+  local ranking = redis.call('ZRANGE', keys[2], 0, -1)
   local username_keys = map(ranking, function(item) return 'USER_DB_USERNAME:' .. item end)
-  local usernames = redis.call('MGET', unpack(username_keys))
+  local number_of_bids = #ranking
+  local usernames = {}
+  if number_of_bids > 0 then
+    usernames = redis.call('MGET', unpack(username_keys))
+  end
   return { expire, price, ranking, usernames }
 end
 
