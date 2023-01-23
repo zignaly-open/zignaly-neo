@@ -14,9 +14,9 @@ import { BALANCE_CHANGED } from '../users/constants';
 import { isBalanceSufficientForPayment } from './util';
 import { emitBalanceChanged } from '../users/util';
 import { Payout } from '../payouts/model';
-import { RANKING_UPDATED } from './constants';
 import { AuctionFilter, AuctionPayload } from './types';
 import { getUserBalance, makePayout } from '../balances/service';
+import { AUCTION_UPDATED } from './constants';
 
 const omitPrivateFields = {
   attributes: { exclude: ['announcementDate', 'maxExpiryDate'] },
@@ -135,8 +135,8 @@ export async function getAuctionsWithBids(
 }
 
 const broadcastAuctionChange = async (auctionId: number) => {
-  pubsub.publish(RANKING_UPDATED, {
-    rankingUpdated: {
+  pubsub.publish(AUCTION_UPDATED, {
+    auctionUpdated: {
       id: auctionId,
       ...(await getAuctionTypePartialFromRedisData(auctionId)),
     },

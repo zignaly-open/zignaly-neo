@@ -26,7 +26,6 @@ export const GET_AUCTIONS = gql`
       expiresAt
       maxClaimDate
       startDate
-      bidStep
       currentBid
       website
       twitter
@@ -76,26 +75,8 @@ export const AUCTION_UPDATED_SUBSCRIPTION = gql`
       id
       expiresAt
       currentBid
-      bidStep
       startDate
       isFinalized
-      bids {
-        position
-        user {
-          id
-          username
-        }
-      }
-    }
-  }
-`;
-
-export const RANKING_UPDATED_SUBSCRIPTION = gql`
-  subscription onRankingUpdated {
-    rankingUpdated {
-      id
-      expiresAt
-      currentBid
       bids {
         position
         user {
