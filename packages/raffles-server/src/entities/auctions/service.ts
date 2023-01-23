@@ -135,7 +135,10 @@ export async function getAuctionsWithBids(
   return auctions;
 }
 
-const broadcastAuctionChange = async (auctionId: number, user: User) => {
+const broadcastAuctionChange = async (
+  auctionId: number,
+  user: { id: number; username: string },
+) => {
   pubsub.publish(BID_MADE, {
     bidMade: {
       user: {
@@ -263,9 +266,9 @@ export const generateService = (user: ContextUser) => ({
     }
     try {
       const balance = await redisService.bid(user.id, id);
-      const userInstance = await User.findByPk(user.id);
+      const username = await redisService.getUsernameFromRedisCache(user.id);
       broadcastBalanceChange(balance, user);
-      !isTest && broadcastAuctionChange(id, userInstance);
+      !isTest && broadcastAuctionChange(id, { id: user.id, username });
       return 'ok';
     } catch (e) {
       if (!isTest) {
