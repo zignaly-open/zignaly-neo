@@ -263,6 +263,8 @@ export const generateService = (user: ContextUser) => ({
       throw new Error('User not found');
     }
     try {
+      // Need to make sure redis cache has the username
+      await redisService.getUsernameFromRedisCache(user.id);
       const balance = await redisService.bid(user.id, id);
       broadcastBalanceChange(balance, user);
       !isTest && debounceBroadcastAuctionChange(id);
