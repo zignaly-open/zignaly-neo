@@ -106,7 +106,7 @@ const bid = async (userId: number, auctionId: number): Promise<string> => {
 
 const getAuctionData = async (auctionId: number): Promise<RedisAuctionData> => {
   try {
-    const [expire, price, ranking] = (await redis.fcall(
+    const [expire, price, rankingIds, rankingUsernames] = (await redis.fcall(
       'get_auction_data',
       2,
       `AUCTION:${auctionId}`,
@@ -120,7 +120,14 @@ const getAuctionData = async (auctionId: number): Promise<RedisAuctionData> => {
     return {
       expire: new Date(Math.round(expire / 1000)),
       price: unitToStr(price),
-      ranking: ranking ? ranking.reverse() : [],
+      ranking: rankingIds
+        ? rankingIds
+            .map((id: number, index: number) => ({
+              id,
+              username: rankingUsernames[index] || '',
+            }))
+            .reverse()
+        : [],
     };
   } catch (e) {
     console.error(e);
@@ -134,7 +141,7 @@ export const updateRedisUsernameCache = async (
   const userInstance = await User.findByPk(userId);
   if (userInstance) {
     const username = userInstance.username || '';
-    await redis.hset('USER_DB_USERNAME', userId.toString(), username);
+    await redis.set('USER_DB_USERNAME:' + userId.toString(), username);
     return username;
   } else {
     return '';
@@ -142,7 +149,7 @@ export const updateRedisUsernameCache = async (
 };
 
 const getUsernameFromRedisCache = async (userId: number): Promise<string> => {
-  const username = await redis.hget('USER_DB_USERNAME', userId.toString());
+  const username = await redis.get('USER_DB_USERNAME:' + userId.toString());
   if (typeof username === 'string') {
     return username;
   } else {
@@ -196,12 +203,15 @@ const deleteAuctionFromRedis = async (auctionId: number) => {
 const finalizeAuction = async (auctionId: number) => {
   const auction = await Auction.findByPk(auctionId);
   const { price, expire, ranking } = await getAuctionData(auctionId);
-  const usersData = await User.findAll({ where: { id: ranking } });
+  const rankingIds = ranking.map((x) => x.id);
+  const usersData = await User.findAll({
+    where: { id: rankingIds },
+  });
 
   let transfersSuccess = 0;
 
   const bids = await mapLimit(
-    ranking,
+    rankingIds,
     async (userId, i) => {
       const user = usersData.find((u) => u.id === +userId);
       let txId: number;
