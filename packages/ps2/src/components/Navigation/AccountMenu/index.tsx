@@ -130,13 +130,13 @@ function AccountMenu(): React.ReactElement | null {
         },
         {
           label: t('account-menu.notAuth-dropdown-link-wallet'),
-          id: 'menu__wallet',
+          id: 'account-menu-dropdown__wallet',
           href: generatePath(ROUTE_WALLET),
           onClick: () => navigate(ROUTE_WALLET),
         },
         {
           separator: true,
-          id: 'menu-dropdown__log-out',
+          id: 'account-menu-dropdown__log-out',
           element: (
             <LogoutButtonWrap>
               <Button
