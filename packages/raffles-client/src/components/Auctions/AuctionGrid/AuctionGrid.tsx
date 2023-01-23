@@ -29,19 +29,6 @@ const AuctionGrid: React.FC = () => {
       },
     },
   });
-  //
-  // useEffect(() => {
-  //   subscribeToMore({
-  //     document: RANKING_UPDATED_SUBSCRIPTION,
-  //     updateQuery: (prev, { subscriptionData }) => ({
-  //       ...prev,
-  //       items: extendAuctionListWithNewBid(
-  //         prev.items,
-  //         subscriptionData?.data?.rankingUpdated,
-  //       ),
-  //     }),
-  //   });
-  // }, []);
 
   useSubscription(RANKING_UPDATED_SUBSCRIPTION);
   useSubscription(AUCTION_UPDATED_SUBSCRIPTION);
