@@ -213,7 +213,7 @@ export const importBalance = async ({
   if (!walletAddress) {
     throw new Error('Wallet address is required');
   }
-  if (!zhits || isNaN(Number(zhits)) || Number(zhits) <= 0) {
+  if (!zhits) {
     throw new Error('Invalid amount');
   }
 
