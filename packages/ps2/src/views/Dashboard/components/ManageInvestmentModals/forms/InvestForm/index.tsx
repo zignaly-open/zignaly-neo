@@ -104,7 +104,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                 {t('invest-modal.amount-to-invest')}
               </Typography>
               <AmountInvested>
-                <CoinIcon coin={coin.id} />
+                <CoinIcon coin={coin.id} name={'coin-icon'} />
                 <TokenValue>
                   <Typography variant={'bigNumber'} color={'neutral100'}>
                     <NumericFormat
@@ -128,10 +128,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
               showUnit={true}
               placeholder={'0.0'}
               tokens={[coin]}
-              error={
-                isDirty &&
-                t(errors?.amountTransfer?.value?.message, { maxDecimals: 8 })
-              }
+              error={isDirty && t(errors?.amountTransfer?.value?.message)}
             />
           )}
         </div>
