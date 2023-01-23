@@ -19,9 +19,9 @@ const httpAgent = new http.Agent({
 
 const createAuction = async () => {
   try {
-    await Auction.destroy({ where: { id: 13 } });
+    await Auction.destroy({ where: { id: 130 } });
     const auction = await Auction.create({
-      id: 13,
+      id: 130,
       expiresAt: '2023-02-10T13:30:00.511Z',
       chain: 'DOGE',
       maxExpiryDate: '2023-02-10T13:30:00.511Z',
