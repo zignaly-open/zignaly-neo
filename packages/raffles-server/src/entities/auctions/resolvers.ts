@@ -1,5 +1,5 @@
 import pubsub from '../../pubsub';
-import { AUCTION_UPDATED, BID_MADE } from './constants';
+import { AUCTION_UPDATED, RANKING_UPDATED } from './constants';
 import { ApolloContext, ResourceOptions } from '../../types';
 import { AuctionPayload } from './types';
 
@@ -67,8 +67,8 @@ export const resolvers = {
     auctionUpdated: {
       subscribe: () => pubsub.asyncIterator([AUCTION_UPDATED]),
     },
-    bidMade: {
-      subscribe: () => pubsub.asyncIterator([BID_MADE]),
+    rankingUpdated: {
+      subscribe: () => pubsub.asyncIterator([RANKING_UPDATED]),
     },
   },
 };

@@ -14,7 +14,7 @@ import { BALANCE_CHANGED } from '../users/constants';
 import { isBalanceSufficientForPayment } from './util';
 import { emitBalanceChanged } from '../users/util';
 import { Payout } from '../payouts/model';
-import { BID_MADE } from './constants';
+import { RANKING_UPDATED } from './constants';
 import { AuctionFilter, AuctionPayload } from './types';
 import { getUserBalance, makePayout } from '../balances/service';
 
@@ -126,17 +126,11 @@ export async function getAuctionsWithBids(
   return auctions;
 }
 
-const broadcastAuctionChange = async (
-  auctionId: number,
-  user: { id: number; username: string },
-) => {
-  pubsub.publish(BID_MADE, {
-    bidMade: {
-      user: {
-        id: user.id,
-        username: user.username,
-      },
-      auctionId: auctionId,
+const broadcastAuctionChange = async (auctionId: number) => {
+  pubsub.publish(RANKING_UPDATED, {
+    rankingUpdated: {
+      id: auctionId,
+      ...(await redisService.getAuctionData(auctionId)),
     },
   });
 };
@@ -257,9 +251,8 @@ export const generateService = (user: ContextUser) => ({
     }
     try {
       const balance = await redisService.bid(user.id, id);
-      const username = await redisService.getUsernameFromRedisCache(user.id);
       broadcastBalanceChange(balance, user);
-      !isTest && broadcastAuctionChange(id, { id: user.id, username });
+      !isTest && broadcastAuctionChange(id);
       return 'ok';
     } catch (e) {
       if (!isTest) {
