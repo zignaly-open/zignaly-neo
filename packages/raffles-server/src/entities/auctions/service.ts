@@ -17,6 +17,7 @@ import { Payout } from '../payouts/model';
 import { AuctionFilter, AuctionPayload } from './types';
 import { getUserBalance, makePayout } from '../balances/service';
 import { AUCTION_UPDATED } from './constants';
+import { debounce } from 'lodash';
 
 const omitPrivateFields = {
   attributes: { exclude: ['announcementDate', 'maxExpiryDate'] },
@@ -143,6 +144,10 @@ const broadcastAuctionChange = async (auctionId: number) => {
   });
 };
 
+const debounceBroadcastAuctionChange = debounce(broadcastAuctionChange, 75, {
+  maxWait: 200,
+});
+
 const broadcastBalanceChange = async (balance: string, user: ContextUser) => {
   pubsub.publish(BALANCE_CHANGED, {
     balanceChanged: {
@@ -260,7 +265,7 @@ export const generateService = (user: ContextUser) => ({
     try {
       const balance = await redisService.bid(user.id, id);
       broadcastBalanceChange(balance, user);
-      !isTest && broadcastAuctionChange(id);
+      !isTest && debounceBroadcastAuctionChange(id);
       return 'ok';
     } catch (e) {
       if (!isTest) {
