@@ -79,8 +79,7 @@ function ServiceHeader() {
             ]}
           />
 
-          <RouteDropdown
-            title={t('dropdown.trade.title')}
+          <RouteGroup
             routes={[
               {
                 name: t('dropdown.trade.links.api'),
