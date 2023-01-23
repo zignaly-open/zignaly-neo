@@ -128,6 +128,28 @@ const getAuctionData = async (auctionId: number): Promise<RedisAuctionData> => {
   }
 };
 
+export const updateRedisUsernameCache = async (
+  userId: number,
+): Promise<string> => {
+  const userInstance = await User.findByPk(userId);
+  if (userInstance) {
+    const username = userInstance.username || '';
+    await redis.hset('USER_DB_USERNAME', userId.toString(), username);
+    return username;
+  } else {
+    return '';
+  }
+};
+
+const getUsernameFromRedisCache = async (userId: number): Promise<string> => {
+  const username = await redis.hget('USER_DB_USERNAME', userId.toString());
+  if (typeof username === 'string') {
+    return username;
+  } else {
+    return await updateRedisUsernameCache(userId);
+  }
+};
+
 const getAuctionRanking = async (auctionId: number) => {
   return redis.zrange(`AUCTION_LEADERBOARD:${auctionId}`, 0, -1);
 };
@@ -302,4 +324,6 @@ export default {
   initAuctionsWatchers,
   redisImport,
   deleteAuctionFromRedis,
+  updateRedisUsernameCache,
+  getUsernameFromRedisCache,
 };
