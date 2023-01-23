@@ -12,31 +12,29 @@ const BATCH_SIZE = 1000;
   const totalUsers = users.length;
   let currentIndex = 0;
 
-  while (currentIndex < totalUsers) {
-    const batchUsers = users.slice(currentIndex, currentIndex + BATCH_SIZE);
-    currentIndex += BATCH_SIZE;
-    const promises = [];
+  try {
+    while (currentIndex < totalUsers) {
+      const batchUsers = users.slice(currentIndex, currentIndex + BATCH_SIZE);
+      currentIndex += BATCH_SIZE;
 
-    for (const user of batchUsers) {
-      promises.push(getUserBalance(user.publicAddress));
-    }
-
-    const balances = await Promise.all(promises);
-
-    for (let i = 0; i < batchUsers.length; i++) {
-      const user = batchUsers[i];
-      const userBalance = {
-        walletAddress: user.publicAddress,
-        zhits: balances[i],
-      };
-      console.log(userBalance);
-      if (Number(userBalance.zhits) > 0) {
-        await importBalance(userBalance);
+      for (let i = 0; i < batchUsers.length; i++) {
+        const user = batchUsers[i];
+        const userBalance = {
+          walletAddress: user.publicAddress,
+          zhits: await getUserBalance(user.publicAddress),
+        };
+        if (Number(userBalance.zhits) > 0) {
+          await importBalance(userBalance);
+        }
       }
+      const partialTime = new Date().getTime() - time;
+      console.log('totalTime in minutes', partialTime / (1000 * 60));
     }
+  } catch (error) {
+    console.log(error.message);
   }
 
   const totalTime = new Date().getTime() - time;
-  console.log('totalTime in minutes', totalTime / 1000 / 60);
+  console.log('totalTime in minutes', totalTime / (1000 * 60));
   process.exit();
 })();
