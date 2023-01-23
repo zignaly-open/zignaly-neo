@@ -60,7 +60,6 @@ const fetchAPI = async (url: string, params?: any): Promise<AxiosResponse> => {
 export const getUserBalance = async (address: string) => {
   return fetchAPI(`/balance/all/${address}`).then(
     ({ data }: { data: CybavoBalance }) => {
-      //console.log('address', address, data.ZIG?.balance);
       return data.ZIG?.balance || '0';
     },
   );
