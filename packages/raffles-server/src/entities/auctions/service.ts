@@ -77,6 +77,20 @@ const auctionsFilter = (
   };
 };
 
+export async function getAuctionTypePartialFromRedisData(
+  auctionId: number,
+): Promise<Pick<AuctionType, 'currentBid' | 'expiresAt' | 'bids'>> {
+  const redisData = await redisService.getAuctionData(auctionId);
+  return {
+    currentBid: redisData.price,
+    expiresAt: redisData.expire,
+    bids: redisData.ranking.map((user, i) => ({
+      position: i + 1,
+      user,
+    })),
+  };
+}
+
 export async function getAuctionsWithBids(
   auctionId?: number,
   user?: ContextUser | boolean,
@@ -107,13 +121,7 @@ export async function getAuctionsWithBids(
   for await (const a of auctions) {
     // Apply redis data
     if (a.inRedis) {
-      const redisData = await redisService.getAuctionData(a.id);
-      a.currentBid = redisData.price;
-      a.expiresAt = redisData.expire;
-      a.bids = redisData.ranking.map((user, i) => ({
-        position: i + 1,
-        user,
-      }));
+      Object.assign(a, getAuctionTypePartialFromRedisData(a.id));
     } else {
       a.isClaimed = Boolean(
         typeof user === 'object' &&
@@ -130,7 +138,7 @@ const broadcastAuctionChange = async (auctionId: number) => {
   pubsub.publish(RANKING_UPDATED, {
     rankingUpdated: {
       id: auctionId,
-      ...(await redisService.getAuctionData(auctionId)),
+      ...(await getAuctionTypePartialFromRedisData(auctionId)),
     },
   });
 };
