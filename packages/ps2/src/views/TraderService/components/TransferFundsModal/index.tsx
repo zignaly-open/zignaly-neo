@@ -138,6 +138,7 @@ function TransferModal({
               showUnit
             />
             <IconButton
+              id={'transfer__swap-zig'}
               size='xlarge'
               icon={<SwapVertIcon color={'#65647E'} />}
               variant='secondary'
@@ -185,6 +186,7 @@ function TransferModal({
 
           <Actions>
             <Button
+              id={'transfer__transfer-now'}
               caption={t('transfer.now')}
               disabled={!isValid}
               size='xlarge'
