@@ -14,18 +14,15 @@ import { BALANCE_CHANGED } from '../users/constants';
 import { isBalanceSufficientForPayment } from './util';
 import { emitBalanceChanged } from '../users/util';
 import { Payout } from '../payouts/model';
-import { debounce } from 'lodash';
-import { AUCTION_UPDATED } from './constants';
 import { AuctionFilter, AuctionPayload } from './types';
 import { getUserBalance, makePayout } from '../balances/service';
+import { AUCTION_UPDATED } from './constants';
+import { debounce } from 'lodash';
+import { BN } from 'ethereumjs-util';
 
 const omitPrivateFields = {
   attributes: { exclude: ['announcementDate', 'maxExpiryDate'] },
 };
-
-async function findUsers(ids: number[]): Promise<User[]> {
-  return await User.findAll({ where: { id: ids } });
-}
 
 const auctionsFilter = (
   auctionId?: number,
@@ -82,6 +79,24 @@ const auctionsFilter = (
   };
 };
 
+export async function getAuctionTypePartialFromRedisData(
+  auctionId: number,
+): Promise<Partial<Pick<AuctionType, 'currentBid' | 'expiresAt' | 'bids'>>> {
+  try {
+    const redisData = await redisService.getAuctionData(auctionId);
+    return {
+      currentBid: new BN(parseFloat(redisData.price)).toString(),
+      expiresAt: redisData.expire,
+      bids: redisData.ranking.map((user, i) => ({
+        position: i + 1,
+        user,
+      })),
+    };
+  } catch (e) {
+    return {};
+  }
+}
+
 export async function getAuctionsWithBids(
   auctionId?: number,
   user?: ContextUser | boolean,
@@ -112,18 +127,7 @@ export async function getAuctionsWithBids(
   for await (const a of auctions) {
     // Apply redis data
     if (a.inRedis) {
-      const redisData = await redisService.getAuctionData(a.id);
-      a.currentBid = redisData.price;
-      a.expiresAt = redisData.expire;
-      // todo: store usernames in redis to avoid querying db for users
-      const users = await findUsers(redisData.ranking);
-      a.bids = redisData.ranking.map((userId, i) => ({
-        position: i + 1,
-        user: {
-          id: userId,
-          username: users?.find((u) => u.id === +userId)?.username,
-        },
-      }));
+      Object.assign(a, await getAuctionTypePartialFromRedisData(a.id));
     } else {
       a.isClaimed = Boolean(
         typeof user === 'object' &&
@@ -137,19 +141,26 @@ export async function getAuctionsWithBids(
 }
 
 const broadcastAuctionChange = async (auctionId: number) => {
-  try {
-    const [auctionUpdated] = await getAuctionsWithBids(auctionId, true);
-
-    pubsub.publish(AUCTION_UPDATED, {
-      auctionUpdated,
-    });
-  } catch (e) {
-    console.error(e);
-  }
+  pubsub.publish(AUCTION_UPDATED, {
+    auctionUpdated: {
+      id: auctionId,
+      ...(await getAuctionTypePartialFromRedisData(auctionId)),
+    },
+  });
 };
-const debounceBroadcastAuction = debounce(broadcastAuctionChange, 70, {
-  maxWait: 160,
+
+const debounceBroadcastAuctionChange = debounce(broadcastAuctionChange, 75, {
+  maxWait: 200,
 });
+
+const broadcastBalanceChange = async (balance: string, user: ContextUser) => {
+  pubsub.publish(BALANCE_CHANGED, {
+    balanceChanged: {
+      id: user.id,
+      balance,
+    },
+  });
+};
 
 export const generateService = (user: ContextUser) => ({
   getAll: async (data: ResourceOptions, asAdmin = false) => {
@@ -257,19 +268,11 @@ export const generateService = (user: ContextUser) => ({
       throw new Error('User not found');
     }
     try {
+      // Need to make sure redis cache has the username
+      await redisService.getUsernameFromRedisCache(user.id);
       const balance = await redisService.bid(user.id, id);
-
-      if (!isTest) {
-        debounceBroadcastAuction(id);
-      }
-
-      pubsub.publish(BALANCE_CHANGED, {
-        balanceChanged: {
-          id: user.id,
-          balance,
-        },
-      });
-
+      broadcastBalanceChange(balance, user);
+      !isTest && debounceBroadcastAuctionChange(id);
       return 'ok';
     } catch (e) {
       if (!isTest) {
