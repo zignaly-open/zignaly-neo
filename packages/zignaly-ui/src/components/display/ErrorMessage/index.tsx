@@ -15,7 +15,7 @@ function ErrorMessage({ text }: ErrorMessageProps) {
       <Icon>
         <ErrorAlertIcon height="24px" width="24px" color={dark.redGraphOrError} />
       </Icon>
-      <ZigTypography variant="body2" color="redGraphOrError">
+      <ZigTypography variant="body2" color={dark.redGraphOrError}>
         {text}
       </ZigTypography>
     </Layout>

@@ -102,7 +102,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                     t('errors.error-zero')) ||
                   (isDirty &&
                     errors.amount?.types?.checkDecimals &&
-                    t('errors.error-decimals', { maxDecimals: 8 }))
+                    t('errors.error-decimals'))
                 }
                 {...register('amount', {
                   validate: {
