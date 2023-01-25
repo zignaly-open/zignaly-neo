@@ -1,6 +1,5 @@
 import React from 'react';
 import Routes from './Routes';
-import theme from './theme';
 import {
   ApolloClient,
   InMemoryCache,
@@ -16,7 +15,12 @@ import { setContext } from '@apollo/client/link/context';
 import { getToken } from './util/token';
 import { Config, DAppProvider, Mumbai, Polygon } from '@usedapp/core';
 import { OnboardingProvider } from './contexts/Onboarding';
-import { dark, ThemeProvider } from '@zignaly-open/ui';
+import {
+  dark,
+  darkMui,
+  ThemeProvider,
+  ThemeProviderMui as ThemeInheritorMui,
+} from '@zignaly-open/ui';
 import { ThemeProvider as ThemeProviderMui } from '@mui/material';
 import ModalProvider from 'mui-modal-provider';
 import { Toaster as ToastProvider } from 'react-hot-toast';
@@ -148,23 +152,23 @@ if (process.env.REACT_APP_USE_MUMBAI_CHAIN) {
   };
 }
 
-const augmentedTheme = { ...dark, ...theme };
-
 function EntryPoint() {
   return (
     <ThemeProvider theme={dark}>
-      <ThemeProviderMui theme={augmentedTheme}>
-        <DAppProvider config={config}>
-          <ApolloProvider client={client}>
-            <OnboardingProvider>
-              <ModalProvider>
-                <Routes />
-                <ToastProvider position='top-right' />
-              </ModalProvider>
-            </OnboardingProvider>
-          </ApolloProvider>
-        </DAppProvider>
-      </ThemeProviderMui>
+      <ThemeInheritorMui theme={darkMui}>
+        <ThemeProviderMui theme={darkMui}>
+          <DAppProvider config={config}>
+            <ApolloProvider client={client}>
+              <OnboardingProvider>
+                <ModalProvider>
+                  <Routes />
+                  <ToastProvider position='top-right' />
+                </ModalProvider>
+              </OnboardingProvider>
+            </ApolloProvider>
+          </DAppProvider>
+        </ThemeProviderMui>
+      </ThemeInheritorMui>
     </ThemeProvider>
   );
 }
