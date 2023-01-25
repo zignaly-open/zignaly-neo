@@ -21,9 +21,10 @@
 	"account-menu": {
 		"isAuth-button-logIn": "Giriş",
 		"isAuth-button-signUp": "KAYIT OL",
-		"notAuth-dropdown-link-dashboard": "Kontrol Panelim",
+		"notAuth-dropdown-link-dashboard": "Portföyüm",
 		"notAuth-dropdown-link-balances": "Bakiyelerim",
-		"notAuth-button-logOut": "Oturumu Kapat"
+		"notAuth-button-logOut": "Oturumu Kapat",
+		"notAuth-dropdown-link-wallet": "ZIG Cüzdan"
 	},
 	"account-selector": {
 		"type": {
@@ -42,7 +43,8 @@
 		"invalid-value": "Geçersiz değer",
 		"negative-amount": ">= 0 olmalıdır",
 		"invalid-amount": "Bir miktar belirtmelisiniz",
-		"negative-zeroable-amount": "> 0 olmalıdır"
+		"negative-zeroable-amount": "> 0 olmalıdır",
+		"max-decimals": "Lütfen sayıları {{maxDecimals}} ondalık basamaktan daha fazla olmayacak şekilde girin."
 	},
 	"back": "Geri",
 	"close": "Kapat",
@@ -53,5 +55,7 @@
 	"refresh": {
 		"short": "Yeni sürüm mevcut, yenilemek için burayı tıklayın"
 	},
-	"percent": "{{value, prettyNumber}}%"
+	"percent": "{{value, prettyNumber}}%",
+	"number": "{{value, prettyNumber}}",
+	"name": "İsim"
 }

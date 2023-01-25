@@ -1,6 +1,6 @@
 {
 	"title": "Retirar Criptomoedas",
-	"description": "Retire a criptomoedas para uma conta externa. Para mover fundos entre contas Zignaly, use uma transferência.",
+	"description": "Retirar o cryptomoedas para uma conta externa.",
 	"coinSelector": {
 		"label": "Moeda:",
 		"placeholder": "Pesquisar uma moeda"
@@ -12,14 +12,38 @@
 	"withdrawAddress": {
 		"label": "Retirar para o Endereço:",
 		"placeholder": "Cole o endereço da carteira aqui",
-		"warning": "Só enviar {{network}} {{coin}} para este endereço"
+		"warning": "Só enviar {{network}} {{coin}} para este endereço",
+		"invalid": "Endereço inválido"
 	},
 	"amountToWithdraw": {
-		"label": "Quantidade a retirar:"
+		"label": "Quantidade a retirar:",
+		"labelBalance": "Disponível:",
+		"minimum": "Mínimo:",
+		"fee": "Taxa:"
 	},
 	"validation": {
 		"indicateAnAddress": "Deve indicar um endereço válido.",
-		"indicateAnAmount": "Deve indicar uma quantia.",
-		"minimumToWithdrawal": "O quantidade mínima de retirada é {{value}} {{coin}}"
-	}
+		"minWithdrawal": "O quantidade mínima de retirada é {{value}} {{coin}}"
+	},
+	"withdrawMemo": {
+		"label": "MEMO\/Tag:",
+		"placeholder": "Cole o MEMO\/Tag da carteira aqui",
+		"invalid": "MEMO\/Tag é inválido, por favor, reveja os detalhes da rede da sua carteira de destino"
+	},
+	"confirmation": {
+		"title": "Confirmar Retirada",
+		"description": "Por favor confirmar que as informações estão corretas e enviar sua retirada.",
+		"receive": "Você irá Receber:",
+		"network": "Rede de Retirada",
+		"address": "Retirada para Endereço",
+		"amount": "Quantidade de Retirada",
+		"networkFee": "Taxa de Rede",
+		"continue": "¡Continuar a Verificação!",
+		"withdrawNow": "Retirar agora!"
+	},
+	"success": {
+		"title": "Retirada com Sucesso",
+		"description": "O seu pedido de retirada foi enviado e deverá ser processado em breve."
+	},
+	"notEnoughZig": "Você não tem ZIG suficiente para pagar as taxas de retirada."
 }

@@ -5,8 +5,6 @@
 	"tradingFunds-desc": "Alım-Satım için uygun olan ve pozisyonlarda kullanılan fonlar",
 	"availableTrading": "Alım-Satım için uygun:",
 	"allocatedTrading": "Alım-Satım için ayrılmış:",
-	"hardDisconnected": "Anında Çıkış yapılan fon:",
-	"availableDisconnection": "Çıkışlar için kullanılabilir:",
 	"neededSnapshot": "Günlük anlık görüntü için gerekli:",
 	"helper": "Rakamlarla ilgili yardıma mı ihtiyacınız var? Lütfen <0>Profit Sharing bakiyesi nasıl çalışır<\/0> makalemize göz atın.",
 	"minBalance": {
@@ -15,12 +13,11 @@
 	},
 	"minBalanceModal": {
 		"title": "Minimum Bakiyeyi Düzenle",
-		"desc": "Hizmetten Çıkış Fon Hesabında tutmak istediğiniz minimum bakiyeyi belirleyin. Çıkış bakiyesi minimumun üzerindeyse, hesaplama sırasında fark otomatik olarak Alım-Satım Hesabına aktarılacaktır.",
+		"desc": "Bekleme Hesabında tutmak istediğiniz minimum bakiyeyi ayarlayın. Bakiye minimumun üzerindeyse, hesaplama sırasında fark otomatik olarak Alım-Satım Hesabına aktarılacaktır.",
 		"placeholder": "0.0",
 		"labelBalance": "Güncel Minimum Bakiye",
 		"save": "Sakla"
 	},
-	"heldHardDisc": "Anında Çıkış için saklanıyor:",
 	"controlledZignaly": "Zignaly kontrolünde",
 	"transfer": {
 		"title": "Transfer",
@@ -30,18 +27,24 @@
 		"deposit-available": "Mevcut Bakiye:",
 		"fromTradingAccount": "Alım-Satım Hesabından",
 		"toTradingAccount": "Alım-Satım Hesabına:",
-		"fromDiscAccount": "Çıkış Hesabından",
-		"toDiscAccount": "Çıkış Hesabına:",
 		"now": "Şimdi Transfer Et",
-		"success": "Başarılı bir şekilde {{amount}} transfer ettiniz."
+		"success": "Başarılı bir şekilde {{amount}} transfer ettiniz.",
+		"fromStandbyAccount": "Bekleme Hesabından",
+		"toStandbyAccount": "Bekleme Hesabına:"
 	},
 	"transferFunds": {
 		"title": "Fon Transferi",
-		"description": "Hizmetinizdeki Alım-Satım Hesabı ile Çıkılan Hesap arasındaki fonu anında transfer edin"
+		"description": "Hizmetinizdeki İşlem Hesabı ile Yedek Hesap arasında fon transferi yapın"
 	},
-	"hardDiconnectWarning": "Anında Çıkışlarınız %{perc} oranına ulaştı. Eğer Anında Çıkışlar hizmet fonlarının %{maxPerc} oranına ulaşırsa, Zignaly hizmetinizin kontrolünü ele alacaktır.",
+	"hardDiconnectWarning": "Çıkışlarınız %{perc} oranına ulaştı. Eğer Çıkışlar hizmet fonlarının %{maxPerc} oranına ulaşırsa, Zignaly hizmetinizin kontrolünü ele alacaktır.",
 	"previousValue": "Önceki değer:",
 	"loading-arialLabel": "Yükleme yönetimi",
-	"standbyFunds": "Destek Fonu",
-	"standbyFunds-desc": "Çıkış yapmak isteyen yatırımcılara iade edilebilecek fon"
+	"standbyFunds": "Beklemedeki Fonlar",
+	"standbyFunds-desc": "Fonlarını çekmek isteyen yatırımcılara iade edilebilecek fonlar",
+	"instantWithdrawn": "Çekilen Fonlar:",
+	"availableWithdrawals": "Çekim için kullanılabilir meblağ:",
+	"heldInstantWithdrawals": "Çekim için tutulan:",
+	"api-keys": {
+		"api-key": "API Anahtarı"
+	}
 }

@@ -36,7 +36,7 @@
 		"status": "Bir sonraki hesaplama bekleniyor"
 	},
 	"transferOutMajorThan": {
-		"type": "Transfer Çıkışı",
+		"type": "Dışa Transferi",
 		"status": "Bir sonraki hesaplama bekleniyor"
 	},
 	"pendingTransactions": {
@@ -50,16 +50,13 @@
 		"withdrawInvestment": {
 			"title": "Çekim Talebi",
 			"instant": {
-				"title": "Anında Çekim",
-				"description": "Zignaly, fonunuzu karşılayarak riskinizi devralmak üzere Anında Çekim işlemlerinde  %{{fee}}'lik kesinti uygulamaktadır.",
+				"title": "Çekim",
 				"button": {
-					"subtitle": "Anında Çekim",
-					"title": "%{{fee}} Kesinti Ücreti"
+					"subtitle": "Çekim"
 				}
 			},
 			"freeWithdrawal": {
 				"title": "Ücretsiz Çekim",
-				"description": "Fonunuzu trader serbest bıraktığında alacaksınız. Yatırımınızın size aktarılana kadar risk altında olduğunu göz önünde bulundurun. Bu durum genellikle birkaç gün sürmesine rağmen süreç daha da uzayabilir. Bu süre trader'ın takdirindedir.",
 				"button": {
 					"subtitle": "Serbest fonlardan çekim",
 					"title": "Kesinti Yok"
@@ -82,7 +79,7 @@
 	},
 	"modalSuccess": {
 		"title": "Yatırım İşleniyor (24 saate kadar)",
-		"description": "Fonlarınız 24 saat içinde ilgili hizmet hesabına aktarılacaktır. Fonunuzu transfer gerçekleşmeden önce çekebilirsiniz. Transfer gerçekleştikten sonra, <0>Aşamalı<\/0> veya <0>Anında çıkış<\/0> ile fonlarınızı çekebilirsiniz.",
+		"description": "Paranız 24 saat içinde hizmetin hesabına aktarılacaktır. Transfer yapılmadan önce istediğiniz zaman paranızı çekebilirsiniz. Para aktarıldıktan sonra, <0>Ücretsiz<\/0> veya <0>para çekme<\/0 seçeneği ile fonunuzu çekebilirsiniz>",
 		"button": "Kapat"
 	},
 	"invest-modal": {
@@ -92,6 +89,6 @@
 		"transfer-error": "Geçersiz giriş. Lütfen doğru kelimeyi yazın.",
 		"transfer-label": "Transfer",
 		"i-understand-margin": "{{coin}} bakiyemin tamamının artık marjın bir parçası olduğunu ve risk altında olduğunu anlıyorum",
-		"i-understand-money-transferred": "Bakiyemin trader'ın havuzuna aktarılacağını ve artık mevcut bakiyemde görünmeyeceğini anlıyorum."
+		"i-understand-money-transferred": "Paramın trader'ın havuzuna aktarılacağını ve artık mevcut bakiyemde görünmeyeceğini anlıyor ve onaylıyorum."
 	}
 }

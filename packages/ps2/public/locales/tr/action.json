@@ -4,5 +4,12 @@
 	"save": "Sakla",
 	"withdraw": "Çekim",
 	"read-more": "Daha fazla",
-	"read-less": "Daha az"
+	"read-less": "Daha az",
+	"cancel": "İptal",
+	"proceed": "Devam et",
+	"export": "Aktar",
+	"confirm": "Onay",
+	"delete": "Sil",
+	"continue": "Devam et",
+	"save-and-close": "Sakla ve Kapat"
 }

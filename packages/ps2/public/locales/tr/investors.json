@@ -17,8 +17,7 @@
 	"status": {
 		"connected": "Bağlandı",
 		"pending": "Bekliyor",
-		"soft-disconnect": "Aşamalı Çıkış",
-		"hard-disconnect": "Anında Çıkış",
+		"hard-disconnect": "Çekim",
 		"suspended": "Askıya alındı",
 		"disconnected": "Çıkış yapıldı",
 		"owner": "Sahip"

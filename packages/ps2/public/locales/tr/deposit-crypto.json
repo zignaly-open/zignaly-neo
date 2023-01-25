@@ -19,12 +19,10 @@
 		"label": "Yatırma Adresi:",
 		"loading": "Yatırma adresi yükleniyor...",
 		"placeholder": "Önce kripto birimini ve ağı seçin.",
-		"warning": "Yalnızca {{network}} ağındaki {{coin}} token'ları bu adrese gönderin",
-		"copied": "Yatırma Adresi panoya kopyalandı!"
+		"warning": "Yalnızca {{network}} ağındaki {{coin}} token'ları bu adrese gönderin"
 	},
 	"depositMemo": {
 		"label": "MEMO\/Etiket ile Yatırma:",
-		"copied": "Yatırma Notu panoya kopyalandı!",
 		"loading": "Yatırma etiketi yükleniyor..."
 	},
 	"depositQR": {

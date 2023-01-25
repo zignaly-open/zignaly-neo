@@ -5,8 +5,6 @@
 	"tradingFunds-desc": "Fundos disponíveis para trading e utilizados em posições",
 	"availableTrading": "Disponível para trading:",
 	"allocatedTrading": "Alocado para trading:",
-	"hardDisconnected": "Fundos de Desconexão Dura:",
-	"availableDisconnection": "Disponível para desconexões:",
 	"neededSnapshot": "Necessário para instantâneo diário:",
 	"helper": "Precisa de ajuda com estes números? Por favor, verifique <0>como funcionam os saldos de profit sharing<\/0>.",
 	"minBalance": {
@@ -15,12 +13,11 @@
 	},
 	"minBalanceModal": {
 		"title": "Editar Saldo Mínimo",
-		"desc": "Estabelecer o saldo mínimo que deseja manter na Conta de Fundos de Desconexão. Se o saldo de desconexão for superior ao mínimo, durante a contabilidade a diferença será automaticamente transferida para a Conta de Trading.",
+		"desc": "Configure o saldo mínimo que deseja manter na Conta Standby. Se o saldo estiver acima do mínimo, durante a contabilização a diferença será automaticamente transferida para a Conta de Trading.",
 		"placeholder": "0.0",
 		"labelBalance": "Saldo Mínimo Atual",
 		"save": "Guardar"
 	},
-	"heldHardDisc": "Realizada para desconexões duras:",
 	"controlledZignaly": "Controlado por Zignaly",
 	"transfer": {
 		"title": "Transferência",
@@ -30,18 +27,63 @@
 		"deposit-available": "Saldo Disponível:",
 		"fromTradingAccount": "Da Conta de Trading",
 		"toTradingAccount": "Para Conta de Trading:",
-		"fromDiscAccount": "Da Conta de Desconexão",
-		"toDiscAccount": "Para Conta de Desconexão:",
 		"now": "Transferir Agora",
-		"success": "Transferiu com êxito {{amount}}."
+		"success": "Transferiu com êxito {{amount}}.",
+		"fromStandbyAccount": "Desde conta Standby",
+		"toStandbyAccount": "Para Conta Standby:"
 	},
 	"transferFunds": {
 		"title": "Transferir Fundos",
-		"description": "Transferir fundos imediatamente entre a Conta de Trading e a Conta de Desconexão no seu serviço"
+		"description": "Transfira fundos imediatamente entre a Conta de Trading e a Conta Standby em seu serviço"
 	},
 	"hardDiconnectWarning": "As suas desconexões duras atingiram {perc}%. Se as desconexões duras atingirem {maxPerc}% dos fundos do serviço, Zignaly assumirá o controlo do seu serviço.",
 	"previousValue": "Valor Anterior:",
 	"loading-arialLabel": "Carregamento gerenciamento",
 	"standbyFunds": "Fundos Standby",
-	"standbyFunds-desc": "Fundos disponíveis para retornar aos investidores que desejam se desconectar"
+	"standbyFunds-desc": "Fundos disponíveis para retornar aos investidores que desejam retirar",
+	"instantWithdrawn": "Fundos de Retirada Instantânea:",
+	"availableWithdrawals": "Disponível para retiradas:",
+	"heldInstantWithdrawals": "Retido para retiradas instantâneas:",
+	"api-keys": {
+		"title": "Faz trade com API",
+		"description": "Crie as chaves da API Binance para o seu serviço de Profit Sharing e conecte-as à sua ferramenta ou aplicativo favorito. Você também pode conectar essas chaves de API ao nosso aplicativo de trading Zignaly em <0>zignaly.com<\/0>.",
+		"create-key": "Criar Chave API",
+		"no-keys": "Sem Chaves API",
+		"no-keys-description": "Ainda não criou nenhuma chave API",
+		"manage-keys": "Gerenciar Chaves API",
+		"api-key": "Chave API",
+		"api-settings": "Configurações da API",
+		"api-settings-tooltip": "Sabe que é um pouco tarde demais. API segredo é mostrado apenas uma vez. Se o tiver perdido, terá de regenerar a chave",
+		"cant-disable-read": "Não se pode desativar a permissão de leitura",
+		"restrict-ip": "Restringir IP",
+		"api-secret": "API Segredo",
+		"zignaly-code": "Código Zignaly",
+		"api-secret-explainer": "Apenas visível na geração chave. Se se perder, terá de gerar uma nova chave API",
+		"permission-label": "Permissões",
+		"permissions": {
+			"read": "Ler",
+			"canTrade": "Trading spot",
+			"marginTrade": "Margin trading",
+			"futuresTrade": "Trading futuros"
+		},
+		"permissions-enable": {
+			"read": "Ativar leitura",
+			"canTrade": "Ativar trading de spot",
+			"marginTrade": "Ativar margin trading",
+			"futuresTrade": "Ativar trading de futuros"
+		},
+		"create-new-key": "Criar Nova Chave API",
+		"create-new-key-description": "Crie uma nova chave de API para se conectar e tradear em sua plataforma de trading favorita.",
+		"edit-key": "Editar Configurações de Chave API",
+		"delete-title": "Excluir {{title}} Chave API",
+		"delete-description": "Essa ação é irreversível.",
+		"ip-restrictions": "Restrições de IP",
+		"ip-restrictions-none": "Irrestrito",
+		"ip-restrictions-invalid": "Formato de ip inválido",
+		"ip-restrictions-ranges": "Desculpe, não oferecemos suporte a faixas de IP",
+		"ip-restrictions-duplicates": "Alguns ips são listados duas vezes, por favor remova os duplicados",
+		"ip-restrictions-allowed": "Endereços IP",
+		"ip-restrictions-allowed-explainer": "Ao introduzir mais do que um endereço IP, separá-los por favor com vírgulas",
+		"ip-restrictions-on": "Restringir o acesso apenas a IPs confiáveis (recomendado)"
+	}
 }
