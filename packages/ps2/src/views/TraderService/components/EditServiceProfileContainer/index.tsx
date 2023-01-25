@@ -24,6 +24,7 @@ import { HELP_CREATE_SERVICE_MARKETPLACE_URL } from 'util/constants';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { useUpdateEffect } from 'react-use';
 import { ROUTE_TRADING_SERVICE } from 'routes';
+import { useCurrentUser } from 'apis/user/use';
 
 const getVisibility = (level: TraderServiceAccessLevel) => {
   if (level < TraderServiceAccessLevel.Private) {
@@ -64,6 +65,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   );
   const [logoUrl, setLogoUrl] = useState(service.logo);
   const navigate = useNavigate();
+  const user = useCurrentUser();
 
   const submit = async (data: EditServicePayload) => {
     await edit({ id: service.id, ...data, level: visibility, logo: logoUrl });
@@ -94,7 +96,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
       {
         value: TraderServiceAccessLevel.Marketplace,
         label: t('edit.visibility.marketplace'),
-        disabled: true,
+        disabled: !user?.isSupport,
       },
     ],
     [t],
@@ -103,7 +105,10 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   const selectStyles: React.ComponentProps<typeof ZigSelect>['styles'] = {
     option: (styles, { data }) => {
       const { value } = data as { value: number };
-      if (value === 0 || value === 500) {
+      if (
+        value === TraderServiceAccessLevel.Solo ||
+        (value === TraderServiceAccessLevel.Marketplace && !user?.isSupport)
+      ) {
         return {
           display: 'none',
         };
