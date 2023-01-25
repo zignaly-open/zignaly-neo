@@ -27,7 +27,6 @@ import {
   StepImage,
   Box,
   Separator,
-  GraphicImage,
 } from './styles';
 import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { FeatureItem, InfoBarItem, HowWorksItem } from './types';
@@ -127,12 +126,7 @@ const BecomeTraderLanding: React.FC = () => {
                 <Button size={'large'} caption={t('wrapper.action')} />
               </WrapperAction>
             </Side>
-            <SideImage>
-              <GraphicImage
-                src={'/images/service-provider/main-graphic.png'}
-                alt=''
-              />
-            </SideImage>
+            <SideImage />
           </Wrapper>
         </Section>
 

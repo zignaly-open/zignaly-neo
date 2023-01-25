@@ -18,7 +18,7 @@
       "description": "Pooled Assets"
     },
     "item2": {
-      "title": "0.5 MILLION",
+      "title": "0.5M",
       "description": "Profit Sharing Investors"
     },
     "item3": {
@@ -64,8 +64,5 @@
         "description": "Choose your desired success fee. Zignaly cut is always 5% which must be included."
       }
     }
-  },
-  "testimonials": {
-    "title": "Testimonials"
   }
 }

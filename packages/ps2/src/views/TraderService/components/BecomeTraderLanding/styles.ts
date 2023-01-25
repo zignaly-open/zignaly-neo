@@ -25,10 +25,9 @@ export const Side = styled.div`
 `;
 
 export const SideImage = styled(Side)`
+  background: url('/images/service-provider/main-graphic.png') center center
+    no-repeat;
   background-size: contain;
-`;
-export const GraphicImage = styled.img`
-  width: 25vw;
 `;
 
 export const WrapperList = styled.ul`
