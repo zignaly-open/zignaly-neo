@@ -101,12 +101,12 @@ describe('Auctions', () => {
     const [bob, bobToken] = await createBob(300);
     const auction = await createAuction();
     const auctionBeforeBids = await getFirstAuction(aliceToken);
-    expect(auctionBeforeBids.currentBid).toBe('100');
+    expect(auctionBeforeBids.currentBid).toBe('100.00');
     expect(auctionBeforeBids.bids.length).toBe(0);
 
     await makeBid(auction, aliceToken);
     const auctionAfter1BidAlice = await getFirstAuction(aliceToken);
-    expect(auctionAfter1BidAlice.currentBid).toBe('101');
+    expect(auctionAfter1BidAlice.currentBid).toBe('101.00');
     expect(auctionAfter1BidAlice.bids[0].user.id).toBe(alice.id);
     expect(
       auctionAfter1BidAlice.bids.find((b) => b.user.id === alice.id).position,
@@ -115,11 +115,11 @@ describe('Auctions', () => {
     expect(!!auctionAfter1BidBob.bids.find((b) => b.user.id === bob.id)).toBe(
       false,
     );
-    expect(auctionAfter1BidBob.currentBid).toBe('101');
+    expect(auctionAfter1BidBob.currentBid).toBe('101.00');
 
     await makeBid(auction, aliceToken);
     const auctionAfter2BidAlice = await getFirstAuction(aliceToken);
-    expect(auctionAfter2BidAlice.currentBid).toBe('102');
+    expect(auctionAfter2BidAlice.currentBid).toBe('102.00');
     expect(auctionAfter1BidAlice.bids[0].user.id).toBe(alice.id);
     expect(
       auctionAfter1BidAlice.bids.find((b) => b.user.id === alice.id).position,
@@ -128,11 +128,11 @@ describe('Auctions', () => {
     expect(
       !!auctionAfter2BidBob.bids.find((b) => b.user.id === bob.id),
     ).toBeFalsy();
-    expect(auctionAfter2BidBob.currentBid).toBe('102');
+    expect(auctionAfter2BidBob.currentBid).toBe('102.00');
 
     await makeBid(auction, bobToken);
     const auctionAfter3BidsAlice = await getFirstAuction(aliceToken);
-    expect(auctionAfter3BidsAlice.currentBid).toBe('103');
+    expect(auctionAfter3BidsAlice.currentBid).toBe('103.00');
     expect(auctionAfter3BidsAlice.bids[0].position).toBe(1);
     expect(auctionAfter3BidsAlice.bids[1].position).toBe(2);
     expect(auctionAfter3BidsAlice.bids[0].user.username).toBe('Bob');
