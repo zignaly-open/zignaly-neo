@@ -6,7 +6,11 @@ import {
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavigationLink } from './atoms';
-import { ROUTE_DASHBOARD, ROUTE_PROFIT_SHARING } from '../../../routes';
+import {
+  ROUTE_BECOME_TRADER,
+  ROUTE_DASHBOARD,
+  ROUTE_PROFIT_SHARING,
+} from '../../../routes';
 import { Link } from 'react-router-dom';
 import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
 import AccountMenu from '../AccountMenu';
@@ -31,6 +35,13 @@ const Header: React.FC = () => {
             key='--route-ps'
           >
             {t('navigation-menu.profit-sharing')}
+          </NavigationLink>
+          <NavigationLink
+            id='menu__become-trader'
+            to={ROUTE_BECOME_TRADER}
+            key='--route-bt'
+          >
+            {t('navigation-menu.become-trader')}
           </NavigationLink>
         </HeaderLinksContainer>,
         <ExtraNavigationDropdown key={'extra-nav'} />,
