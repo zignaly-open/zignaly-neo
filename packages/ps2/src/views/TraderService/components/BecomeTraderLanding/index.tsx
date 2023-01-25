@@ -1,7 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { Typography, ArrowRightIcon, Button } from '@zignaly-open/ui';
-import { useTheme } from 'styled-components';
+import { Typography, Button } from '@zignaly-open/ui';
 import {
   Layout,
   Header,
@@ -28,11 +27,9 @@ import {
   Box,
   Separator,
 } from './styles';
-import Theme from '@zignaly-open/ui/lib/theme/theme';
 import { FeatureItem, InfoBarItem, HowWorksItem } from './types';
 
 const BecomeTraderLanding: React.FC = () => {
-  const theme = useTheme() as Theme;
   const { t } = useTranslation('offer-your-trading-service');
 
   const infoBarItems: InfoBarItem[] = [
@@ -95,9 +92,9 @@ const BecomeTraderLanding: React.FC = () => {
     <Layout>
       <Header>
         <Typography variant={'h1'}>{t('header.title')}</Typography>
-        <Typography variant={'body1'} color={'neutral400'}>
-          {t('header.description')}
-        </Typography>
+        {/*<Typography variant={'body1'} color={'neutral400'}>*/}
+        {/*  {t('header.description')}*/}
+        {/*</Typography>*/}
       </Header>
 
       <Sections>
@@ -149,30 +146,6 @@ const BecomeTraderLanding: React.FC = () => {
 
         <Section>
           <Typography variant={'h2'} color={'neutral100'}>
-            {t('features.title')}
-          </Typography>
-
-          <FeaturesList itemsLength={featuresItems.length}>
-            {featuresItems.map((feature, index) => (
-              <Feature key={`--features-item-${index.toString()}`}>
-                <FeatureImage
-                  src={'/images/service-provider/' + feature.image}
-                />
-                <FeatureData>
-                  <Typography variant={'h3'} color={'neutral200'}>
-                    {feature.title}
-                  </Typography>
-                  <Typography variant={'body2'} color={'neutral400'}>
-                    {feature.description}
-                  </Typography>
-                </FeatureData>
-              </Feature>
-            ))}
-          </FeaturesList>
-        </Section>
-
-        <Section>
-          <Typography variant={'h2'} color={'neutral100'}>
             {t('howWorks.title')}
           </Typography>
 
@@ -194,25 +167,35 @@ const BecomeTraderLanding: React.FC = () => {
                     </Typography>
                   </Box>
                 </Step>
-                {index < howWorksItems.length - 1 && (
-                  <Separator>
-                    <ArrowRightIcon
-                      width={48}
-                      height={48}
-                      color={theme.neutral500}
-                    />
-                  </Separator>
-                )}
+                {index < howWorksItems.length - 1 && <Separator></Separator>}
               </>
             ))}
           </StepList>
         </Section>
 
-        {/*<Section>*/}
-        {/*  <Typography variant={'h2'} color={'neutral100'}>*/}
-        {/*    {t('testimonials.title')}*/}
-        {/*  </Typography>*/}
-        {/*</Section>*/}
+        <Section>
+          <Typography variant={'h2'} color={'neutral100'}>
+            {t('features.title')}
+          </Typography>
+
+          <FeaturesList itemsLength={featuresItems.length}>
+            {featuresItems.map((feature, index) => (
+              <Feature key={`--features-item-${index.toString()}`}>
+                <FeatureImage
+                  src={'/images/service-provider/' + feature.image}
+                />
+                <FeatureData>
+                  <Typography variant={'h3'} color={'neutral200'}>
+                    {feature.title}
+                  </Typography>
+                  <Typography variant={'body2'} color={'neutral400'}>
+                    {feature.description}
+                  </Typography>
+                </FeatureData>
+              </Feature>
+            ))}
+          </FeaturesList>
+        </Section>
       </Sections>
     </Layout>
   );

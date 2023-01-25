@@ -11,7 +11,8 @@ export const Header = styled.div`
   justify-content: center;
   margin-bottom: 42px;
   padding: 0 42px;
-  text-align: center;
+  text-align: left;
+  white-space: break-spaces;
 `;
 
 export const Wrapper = styled.div`
@@ -151,7 +152,7 @@ export const Separator = styled.li`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 14px;
+  padding: 0 50px;
 `;
 
 export const Center = styled.div`
