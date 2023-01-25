@@ -11,8 +11,8 @@ export const Header = styled.div`
   justify-content: center;
   margin-bottom: 42px;
   padding: 0 42px;
-  text-align: left;
-  white-space: break-spaces;
+  text-align: center;
+  white-space: pre-line;
 `;
 
 export const Wrapper = styled.div`
@@ -40,6 +40,7 @@ export const WrapperList = styled.ul`
 
 export const WrapperItem = styled.li`
   list-style-type: disc;
+  padding: 5px 0;
 `;
 
 export const Margin = styled.div`
@@ -95,7 +96,7 @@ export const Section = styled.section`
 export const FeaturesList = styled.ul<{ itemsLength: number }>`
   display: grid;
   padding: 42px 0;
-  gap: 52px;
+  gap: 130px;
 
   ${({ itemsLength }) => `
     grid-template-columns: repeat(${itemsLength}, minmax(0%, 100%));
@@ -106,7 +107,7 @@ export const Feature = styled.li`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 26px;
+  gap: 22px;
 `;
 
 export const FeatureImage = styled.img`

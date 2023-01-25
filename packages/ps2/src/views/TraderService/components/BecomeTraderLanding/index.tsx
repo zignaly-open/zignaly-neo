@@ -28,9 +28,14 @@ import {
   Separator,
 } from './styles';
 import { FeatureItem, InfoBarItem, HowWorksItem } from './types';
+import { useIsAuthenticated } from '../../../../apis/user/use';
+import { ROUTE_SIGNUP } from '../../../../routes';
+import { useNavigate } from 'react-router-dom';
 
 const BecomeTraderLanding: React.FC = () => {
   const { t } = useTranslation('offer-your-trading-service');
+  const isAuthenticated = useIsAuthenticated();
+  const navigate = useNavigate();
 
   const infoBarItems: InfoBarItem[] = [
     {
@@ -87,14 +92,20 @@ const BecomeTraderLanding: React.FC = () => {
       image: 'split-profits.png',
     },
   ];
+  const onClickCreateService = () => {
+    if (isAuthenticated) {
+      null;
+    } else {
+      navigate(ROUTE_SIGNUP);
+    }
+  };
 
   return (
     <Layout>
       <Header>
-        <Typography variant={'h1'}>{t('header.title')}</Typography>
-        {/*<Typography variant={'body1'} color={'neutral400'}>*/}
-        {/*  {t('header.description')}*/}
-        {/*</Typography>*/}
+        <Typography variant={'h1'} color={'neutral100'}>
+          {t('header.title')}
+        </Typography>
       </Header>
 
       <Sections>
@@ -120,7 +131,11 @@ const BecomeTraderLanding: React.FC = () => {
                 </WrapperItem>
               </WrapperList>
               <WrapperAction>
-                <Button size={'large'} caption={t('wrapper.action')} />
+                <Button
+                  size={'large'}
+                  caption={t('wrapper.action')}
+                  onClick={onClickCreateService}
+                />
               </WrapperAction>
             </Side>
             <SideImage />
