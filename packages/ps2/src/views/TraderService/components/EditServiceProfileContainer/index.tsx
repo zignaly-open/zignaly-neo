@@ -21,18 +21,19 @@ import { VISIBILITY_LABEL } from './types';
 import { StyledZigSelect } from './styles';
 import { ExternalLink } from 'components/AnchorLink';
 import { HELP_CREATE_SERVICE_MARKETPLACE_URL } from 'util/constants';
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 import { useUpdateEffect } from 'react-use';
+import { ROUTE_TRADING_SERVICE } from 'routes';
 
-const getVisibility = (level: number) => {
-  if (level < 100) {
-    return 0;
-  } else if (level < 200) {
-    return 100;
-  } else if (level < 500) {
-    return 200;
+const getVisibility = (level: TraderServiceAccessLevel) => {
+  if (level < TraderServiceAccessLevel.Private) {
+    return TraderServiceAccessLevel.Solo;
+  } else if (level < TraderServiceAccessLevel.Public) {
+    return TraderServiceAccessLevel.Private;
+  } else if (level < TraderServiceAccessLevel.Marketplace) {
+    return TraderServiceAccessLevel.Public;
   } else {
-    return 500;
+    return TraderServiceAccessLevel.Marketplace;
   }
 };
 
@@ -58,7 +59,9 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
     resolver: yupResolver(EditServiceValidation),
   });
   const [edit, editStatus] = useTraderServiceEditMutation();
-  const [visibility, setVisibility] = useState(getVisibility(service.level));
+  const [visibility, setVisibility] = useState<TraderServiceAccessLevel>(
+    getVisibility(service.level),
+  );
   const [logoUrl, setLogoUrl] = useState(service.logo);
   const navigate = useNavigate();
 
@@ -115,7 +118,12 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
     },
   };
 
-  const back = () => navigate(`/profit-sharing/${service.id}`);
+  const back = () =>
+    navigate(
+      generatePath(ROUTE_TRADING_SERVICE, {
+        serviceId: service.id.toString(),
+      }),
+    );
 
   return (
     <Box onSubmit={handleSubmit(submit)} component='form' pt={7}>

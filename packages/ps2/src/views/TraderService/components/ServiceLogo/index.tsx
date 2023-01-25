@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { Close, Edit } from '@mui/icons-material';
 import { LogoContainer } from './styles';
 import { getServiceLogo } from 'util/images';
+import { uploadImage } from 'apis/cloudinary';
 
 const ServiceLogo = ({
   service,
@@ -20,22 +21,10 @@ const ServiceLogo = ({
   const [uploading, setUploading] = useState(false);
 
   async function uploadLogo(e: React.ChangeEvent<HTMLInputElement>) {
-    const file = e.target.files[0];
-    const formData = new FormData();
-    formData.append('file', file);
-    formData.append('upload_preset', 'xiammksy');
-    const options = {
-      method: 'POST',
-      body: formData,
-    };
     setUploading(true);
 
     try {
-      const response = await fetch(
-        'https://api.cloudinary.com/v1_1/zignaly/image/upload',
-        options,
-      );
-      const data = await response.json();
+      const data = await uploadImage(e.target.files[0]);
       onChange(data.secure_url);
     } finally {
       setUploading(false);
