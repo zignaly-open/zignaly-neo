@@ -21,18 +21,20 @@ import { VISIBILITY_LABEL } from './types';
 import { StyledZigSelect } from './styles';
 import { ExternalLink } from 'components/AnchorLink';
 import { HELP_CREATE_SERVICE_MARKETPLACE_URL } from 'util/constants';
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 import { useUpdateEffect } from 'react-use';
+import { ROUTE_TRADING_SERVICE } from 'routes';
+import { useCurrentUser } from 'apis/user/use';
 
-const getVisibility = (level: number) => {
-  if (level < 100) {
-    return 0;
-  } else if (level < 200) {
-    return 100;
-  } else if (level < 500) {
-    return 200;
+const getVisibility = (level: TraderServiceAccessLevel) => {
+  if (level < TraderServiceAccessLevel.Private) {
+    return TraderServiceAccessLevel.Solo;
+  } else if (level < TraderServiceAccessLevel.Public) {
+    return TraderServiceAccessLevel.Private;
+  } else if (level < TraderServiceAccessLevel.Marketplace) {
+    return TraderServiceAccessLevel.Public;
   } else {
-    return 500;
+    return TraderServiceAccessLevel.Marketplace;
   }
 };
 
@@ -58,9 +60,12 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
     resolver: yupResolver(EditServiceValidation),
   });
   const [edit, editStatus] = useTraderServiceEditMutation();
-  const [visibility, setVisibility] = useState(getVisibility(service.level));
+  const [visibility, setVisibility] = useState<TraderServiceAccessLevel>(
+    getVisibility(service.level),
+  );
   const [logoUrl, setLogoUrl] = useState(service.logo);
   const navigate = useNavigate();
+  const user = useCurrentUser();
 
   const submit = async (data: EditServicePayload) => {
     await edit({ id: service.id, ...data, level: visibility, logo: logoUrl });
@@ -91,7 +96,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
       {
         value: TraderServiceAccessLevel.Marketplace,
         label: t('edit.visibility.marketplace'),
-        disabled: true,
+        disabled: !user?.isSupport,
       },
     ],
     [t],
@@ -100,7 +105,10 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   const selectStyles: React.ComponentProps<typeof ZigSelect>['styles'] = {
     option: (styles, { data }) => {
       const { value } = data as { value: number };
-      if (value === 0 || value === 500) {
+      if (
+        value === TraderServiceAccessLevel.Solo ||
+        (value === TraderServiceAccessLevel.Marketplace && !user?.isSupport)
+      ) {
         return {
           display: 'none',
         };
@@ -115,7 +123,12 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
     },
   };
 
-  const back = () => navigate(`/profit-sharing/${service.id}`);
+  const back = () =>
+    navigate(
+      generatePath(ROUTE_TRADING_SERVICE, {
+        serviceId: service.id.toString(),
+      }),
+    );
 
   return (
     <Box onSubmit={handleSubmit(submit)} component='form' pt={7}>

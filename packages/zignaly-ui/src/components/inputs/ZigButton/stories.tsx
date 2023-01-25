@@ -41,7 +41,7 @@ Default.args = {
   variant: "outlined",
 };
 
-const TemplateGroup: Story = ({ size, ...args }) => {
+const TemplateGroup: Story<ZigButtonProps> = ({ size, ...args }) => {
   const [value, setValue] = useState<number>(1);
   return (
     <ButtonGroup variant="outlined" size={size}>
