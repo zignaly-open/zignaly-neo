@@ -17,7 +17,7 @@ const ResetPasswordForm = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<{ password: string }>({
     mode: 'onBlur',
     reValidateMode: 'onBlur',
@@ -101,6 +101,7 @@ const ResetPasswordForm = () => {
             caption={t('reset-password.reset-password')}
             size={'xlarge'}
             loading={resetPasswordStatus.isLoading}
+            disabled={!isValid}
           />
         </Action>
       </Form>

@@ -15,7 +15,7 @@ const ForgotPasswordForm = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<{ email: string }>({
     mode: 'onTouched',
     reValidateMode: 'onBlur',
@@ -84,6 +84,7 @@ const ForgotPasswordForm = () => {
             caption={t('reset-password.send-instructions')}
             size={'xlarge'}
             loading={resetPasswordStatus.isLoading}
+            disabled={!isValid}
           />
           <Box display='flex' flexDirection='column' alignItems='center'>
             <ZigTypography variant='body2' fontWeight={500}>
