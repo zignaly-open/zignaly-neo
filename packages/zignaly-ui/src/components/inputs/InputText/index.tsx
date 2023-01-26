@@ -80,6 +80,7 @@ function InputText(
         </Side>
         {rightSideElement && (
           <Side
+            id={"input__copy"}
             className={"right"}
             cursor={onClickRightSideElement === null ? "auto" : "pointer"}
             onClick={() => onClickRightSideElement?.()}
