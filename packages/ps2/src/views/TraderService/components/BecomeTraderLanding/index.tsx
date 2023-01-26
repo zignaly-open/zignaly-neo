@@ -29,8 +29,8 @@ import {
 } from './styles';
 import { FeatureItem, InfoBarItem, HowWorksItem } from './types';
 import { useIsAuthenticated } from '../../../../apis/user/use';
-import { ROUTE_PROFIT_SHARING, ROUTE_SIGNUP } from '../../../../routes';
-import { Link, useNavigate } from 'react-router-dom';
+import { ROUTE_SIGNUP } from '../../../../routes';
+import { useNavigate } from 'react-router-dom';
 
 const BecomeTraderLanding: React.FC = () => {
   const { t } = useTranslation('offer-your-trading-service');
@@ -132,9 +132,14 @@ const BecomeTraderLanding: React.FC = () => {
                     {/*  'https://test-app.zignaly.com/profit-sharing',*/}
                     {/*)}*/}
                     {t('wrapper.list.item3_1')}
-                    <Link to={ROUTE_PROFIT_SHARING}>
+                    <a
+                      href={
+                        'https://help.zignaly.com/en/articles/6845502-rules-for-being-listed-in-the-marketplace'
+                      }
+                      target={'_blank'}
+                    >
                       {t('wrapper.list.item3_link')}
-                    </Link>
+                    </a>
                     {t('wrapper.list.item3_2')}
                     {/*{t('wrapper.list.item3', {*/}
                     {/*  marketplaceLink: '[link]'.link(*/}
@@ -146,6 +151,7 @@ const BecomeTraderLanding: React.FC = () => {
               </WrapperList>
               <WrapperAction>
                 <Button
+                  id={'offer-service__create-service'}
                   size={'large'}
                   caption={t('wrapper.action')}
                   onClick={onClickCreateService}
