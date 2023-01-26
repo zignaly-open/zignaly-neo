@@ -12,12 +12,17 @@ export const EditServiceValidation = yup
       .max(50, 'service:edit.validation.name-length'),
     successFee: yup
       .number()
+      .typeError('error:error.required')
       .required('error:error.required')
       .test(
         'range',
         'service:edit.validation.success-fee-range',
         (v) => !v || (v >= 10 && v < 75),
       ),
-    maximumSbt: yup.number().required('error:error.required'),
+    maximumSbt: yup
+      .number()
+      .typeError('error:error.required')
+      .required('error:error.required')
+      .positive('common:validation.negative-zeroable-amount'),
   })
   .required();
