@@ -28,6 +28,7 @@ import {
   ROUTE_HELP_INVESTOR,
   ROUTE_404,
   ROUTE_WALLET,
+  ROUTE_RESET_PASSWORD,
 } from './routes';
 
 import Management from './views/TraderService/Management';
@@ -45,6 +46,7 @@ import UnauthenticatedWall from './util/walls/UnauthenticatedWall';
 import ServiceOwnerWall from './util/walls/ServiceOwnerWall';
 import HelpInvestor from './views/Help/HelpInvestor';
 import NotFound from 'views/404';
+import ResetPassword from 'views/Auth/ResetPassword';
 
 const Router: React.FC = () => (
   <Routes>
@@ -75,6 +77,7 @@ const Router: React.FC = () => (
       <Route path={ROUTE_LOGIN} element={<Login />} />
       <Route path={ROUTE_SIGNUP} element={<Signup />} />
       <Route path={ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />
+      <Route path={ROUTE_RESET_PASSWORD} element={<ResetPassword />} />
     </Route>
 
     <Route path={ROUTE_PROFIT_SHARING} element={<ProfitSharing />} />
