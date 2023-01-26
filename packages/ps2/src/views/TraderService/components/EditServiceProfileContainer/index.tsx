@@ -198,7 +198,18 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                 )}
               />
             </Grid>
-            <Grid item xs={12} sm={6} md={6}>
+            <Grid
+              item
+              xs={12}
+              sm={6}
+              sx={{
+                display: {
+                  xs: 'none',
+                  sm: 'block',
+                },
+              }}
+            />
+            {/* <Grid item xs={12} sm={6}>
               <Controller
                 name='maximumSbt'
                 control={control}
@@ -226,7 +237,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                   />
                 )}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
           <Grid
             item
