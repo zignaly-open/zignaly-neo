@@ -1,5 +1,5 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { Typography, Button } from '@zignaly-open/ui';
 import {
   Layout,
@@ -31,6 +31,7 @@ import { FeatureItem, InfoBarItem, HowWorksItem } from './types';
 import { useIsAuthenticated } from '../../../../apis/user/use';
 import { ROUTE_SIGNUP } from '../../../../routes';
 import { useNavigate } from 'react-router-dom';
+import { Link } from '@mui/material';
 
 const BecomeTraderLanding: React.FC = () => {
   const { t } = useTranslation('offer-your-trading-service');
@@ -128,24 +129,15 @@ const BecomeTraderLanding: React.FC = () => {
                 </WrapperItem>
                 <WrapperItem>
                   <Typography variant={'body1'} color={'neutral300'}>
-                    {/*{'[link]'.link(*/}
-                    {/*  'https://test-app.zignaly.com/profit-sharing',*/}
-                    {/*)}*/}
-                    {t('wrapper.list.item3_1')}
-                    <a
-                      href={
-                        'https://help.zignaly.com/en/articles/6845502-rules-for-being-listed-in-the-marketplace'
-                      }
-                      target={'_blank'}
-                    >
-                      {t('wrapper.list.item3_link')}
-                    </a>
-                    {t('wrapper.list.item3_2')}
-                    {/*{t('wrapper.list.item3', {*/}
-                    {/*  marketplaceLink: '[link]'.link(*/}
-                    {/*    'https://test-app.zignaly.com/profit-sharing',*/}
-                    {/*  ),*/}
-                    {/*})}*/}
+                    <Trans i18nKey={'wrapper.list.item3'} t={t}>
+                      <Link
+                        underline={'hover'}
+                        href={
+                          'https://help.zignaly.com/en/articles/6845502-rules-for-being-listed-in-the-marketplace'
+                        }
+                        target={'_blank'}
+                      />
+                    </Trans>
                   </Typography>
                 </WrapperItem>
               </WrapperList>
