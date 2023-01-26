@@ -112,7 +112,9 @@ const BecomeTraderLanding: React.FC = () => {
         <Section>
           <Wrapper>
             <Side>
-              <Typography variant={'h2'}>{t('wrapper.title')}</Typography>
+              <Typography variant={'h2'} color={'neutral100'}>
+                {t('wrapper.title')}
+              </Typography>
               <WrapperList>
                 <WrapperItem>
                   <Typography variant={'body1'} color={'neutral300'}>
@@ -126,7 +128,22 @@ const BecomeTraderLanding: React.FC = () => {
                 </WrapperItem>
                 <WrapperItem>
                   <Typography variant={'body1'} color={'neutral300'}>
-                    {t('wrapper.list.item3')}
+                    {/*{'[link]'.link(*/}
+                    {/*  'https://test-app.zignaly.com/profit-sharing',*/}
+                    {/*)}*/}
+                    {t('wrapper.list.item3_1')}
+                    <a
+                      href={'https://test-app.zignaly.com/profit-sharing'}
+                      target={'_blank'}
+                    >
+                      {t('wrapper.list.item3_link')}
+                    </a>
+                    {t('wrapper.list.item3_2')}
+                    {/*{t('wrapper.list.item3', {*/}
+                    {/*  marketplaceLink: '[link]'.link(*/}
+                    {/*    'https://test-app.zignaly.com/profit-sharing',*/}
+                    {/*  ),*/}
+                    {/*})}*/}
                   </Typography>
                 </WrapperItem>
               </WrapperList>

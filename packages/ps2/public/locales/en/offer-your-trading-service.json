@@ -7,7 +7,9 @@
     "list": {
       "item1": "Trade from any solution that allows Binance API Keys",
       "item2": "Choose your own success fees",
-      "item3": "Apply to get listed in our marketplace [link] or keep it private"
+      "item3_1": "Apply to get listed in our marketplace ",
+      "item3_link": "[link]",
+      "item3_2": " or keep it private"
     },
     "action": "Create your service"
   },
@@ -30,15 +32,15 @@
     "list": {
       "item1": {
         "title": "PERFORMANCE ANALYTICS",
-        "description": "You and users will be able to check your daily profis and losses and compound PNL percentage among other metrics."
+        "description": "You, as well as the users, will be able to check your daily profits and losses and compound PNL percentage among other metrics."
       },
       "item2": {
         "title": "FUND MANAGEMENT",
-        "description": "You can handle thousands of investors without worrying about the each individual accounting and support. Zignaly’s team will take care of it."
+        "description": "You can handle thousands of investors without worrying about each individual's accounting and support. Zignaly’s team will take care of it."
       },
       "item3": {
         "title": "DAILY PAYOUTS",
-        "description": "Receive daily Success Fees from your Profit Sharing services."
+        "description": "Receive daily success fees from your Profit Sharing services."
       },
       "item4": {
         "title": "TRADER SUCCESS TEAM",
@@ -56,11 +58,11 @@
       },
       "item2": {
         "title": "Trade",
-        "description": "Connecting your strategy is easy API keys are available to keep trading on your favorite tool or send signals from Trading View."
+        "description": "Connecting your strategy is easy: API keys are available to keep trading on your favorite tool or send signals from Trading View."
       },
       "item3": {
         "title": "Split Profits",
-        "description": "Choose your desired success fee. Zignaly cut is always 5% which must be included."
+        "description": "Choose your desired success fee. Zignaly's share is always 5% which must be included."
       }
     }
   }
