@@ -69,7 +69,7 @@ export const CLAIM = gql`
   }
 `;
 
-export const BIDS_SUBSCRIPTION = gql`
+export const AUCTION_UPDATED_SUBSCRIPTION = gql`
   subscription onAuctionUpdated {
     auctionUpdated {
       id
