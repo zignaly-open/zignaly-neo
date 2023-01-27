@@ -85,6 +85,7 @@ const ForgotPasswordForm = () => {
             size={'xlarge'}
             loading={resetPasswordStatus.isLoading}
             disabled={!isValid}
+            id='forgotpassword__submit'
           />
           <Box display='flex' flexDirection='column' alignItems='center'>
             <ZigTypography variant='body2' fontWeight={500}>
