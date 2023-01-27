@@ -140,10 +140,16 @@ const WithdrawConfirmForm = ({
         </Grid>
       </AmountContainer>
       <ModalActions align='right'>
-        <ZigButton onClick={back} variant='outlined' size='large'>
+        <ZigButton
+          id={'confirm__back'}
+          onClick={back}
+          variant='outlined'
+          size='large'
+        >
           {t('common:back')}
         </ZigButton>
         <ZigButton
+          id={'confirm__confirm-withdraw'}
           onClick={action}
           variant='contained'
           size='large'
