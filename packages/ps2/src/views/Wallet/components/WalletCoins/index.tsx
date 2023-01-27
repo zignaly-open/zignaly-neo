@@ -81,6 +81,7 @@ const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
         cell: ({ row: { original } }) => (
           <Box display='flex' justifyContent='flex-end'>
             <IconButton
+              id={'wallet-table__withdraw'}
               icon={<Remove color={'neutral300'} />}
               onClick={() =>
                 showModal(WalletWithdrawModal, {

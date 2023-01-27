@@ -160,6 +160,7 @@ function EditInvestmentForm({
       <ModalActions>
         {!isInputEnabled && (
           <TextButton
+            id={'edit-investment__invest-more'}
             onClick={() =>
               transferOutAll ? openBlockedToast() : setInputEnabled(true)
             }
@@ -177,6 +178,7 @@ function EditInvestmentForm({
           />
         )}
         <Button
+          id={'edit-investment__save-invest'}
           size={'large'}
           type={'submit'}
           loading={isLoading}
@@ -188,6 +190,7 @@ function EditInvestmentForm({
           disabled={isInputEnabled ? !canSubmit : false}
         />
         <TextButton
+          id={'edit-investment__withdraw'}
           rightElement={
             <ArrowRightIcon
               width={'22px'}
