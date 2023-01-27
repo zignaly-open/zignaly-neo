@@ -102,6 +102,7 @@ const ResetPasswordForm = () => {
             size={'xlarge'}
             loading={resetPasswordStatus.isLoading}
             disabled={!isValid}
+            id='resetpassword__submit'
           />
         </Action>
       </Form>
