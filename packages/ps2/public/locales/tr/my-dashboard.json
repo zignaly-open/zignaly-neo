@@ -1,5 +1,5 @@
 {
-	"title": "Kontrol Panelim",
+	"title": "Portföyüm",
 	"tableHeader": {
 		"summary": {
 			"title": "Mevcut Değer",
@@ -23,7 +23,7 @@
 	},
 	"table-search-emptyMessage": "Henüz herhangi bir hizmete bağlı değilsiniz.",
 	"something-went-wrong": "Bir şeyler ters gitti",
-	"loading-arialLabel": "Kontrol Paneli yükleniyor",
+	"loading-arialLabel": "Portföy yükleniyor",
 	"slider-input": {
 		"labels": {
 			"left": "Yeniden Yatırım",
