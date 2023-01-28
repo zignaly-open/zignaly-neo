@@ -4,5 +4,13 @@
 	"save": "Guardar",
 	"withdraw": "Retirar",
 	"read-more": "Leer Más",
-	"read-less": "Leer Menos"
+	"read-less": "Leer Menos",
+	"cancel": "Cancelar",
+	"proceed": "Proceder",
+	"export": "Exportar",
+	"confirm": "Confirmar",
+	"delete": "Eliminar",
+	"continue": "Continuar",
+	"save-and-close": "Guardar y Cerrar",
+	"copied": "Copiado al portapapeles"
 }

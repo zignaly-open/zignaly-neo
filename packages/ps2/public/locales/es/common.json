@@ -8,11 +8,11 @@
 	},
 	"no-data": {
 		"title": "Sin Datos",
-		"description": "No hay datos disponibles. Si cree que es un problema, póngase en contacto con el servicio de soporte."
+		"description": "No hay datos disponibles. Si cree que es un problema, por favor póngase en contacto con el servicio de soporte."
 	},
 	"critical-error": {
 		"title": "Ocurrió un Error",
-		"description": "Algo ha ido mal. Vuelve a intentarlo más tarde o ponte en contacto con el servicio de soporte. O abandone la sociedad industrial y construya una cabaña en el bosque."
+		"description": "Algo ha ido mal. Por favor vuelve a intentarlo más tarde o ponte en contacto con el servicio de soporte. O abandone la sociedad industrial y construya una cabaña en el bosque."
 	},
 	"main-menu": {
 		"dropdown-link-forTrading": "Para Servicios de Trading",
@@ -21,9 +21,10 @@
 	"account-menu": {
 		"isAuth-button-logIn": "Iniciar sesión",
 		"isAuth-button-signUp": "REGISTRARSE",
-		"notAuth-dropdown-link-dashboard": "Mi Panel",
+		"notAuth-dropdown-link-dashboard": "Mi Portafolio",
 		"notAuth-dropdown-link-balances": "Mi Saldo",
-		"notAuth-button-logOut": "Cerrar Sesión"
+		"notAuth-button-logOut": "Cerrar Sesión",
+		"notAuth-dropdown-link-wallet": "Billetera ZIG"
 	},
 	"account-selector": {
 		"type": {
@@ -42,7 +43,10 @@
 		"invalid-value": "Valor no válido",
 		"negative-amount": "Debe ser >= 0",
 		"invalid-amount": "Debe indicar una cantidad",
-		"negative-zeroable-amount": "Debe ser > 0"
+		"negative-zeroable-amount": "Debe ser > 0",
+		"max-decimals": "Por favor ingrese números que no tengan más de {{maxDecimals}} decimales.",
+		"max-allowed-length": "Debe ser inferior a {{ maxLength }} caracteres",
+		"min-amount": "La cantidad mínima es {{amount}} {{coin}}."
 	},
 	"back": "Volver",
 	"close": "Cerrar",
@@ -53,5 +57,11 @@
 	"refresh": {
 		"short": "Nueva versión disponible, haga clic aquí para actualizar"
 	},
-	"percent": "{{value, prettyNumber}}%"
+	"percent": "{{value, prettyNumber}}%",
+	"number": "{{value, prettyNumber}}",
+	"infinitely-better": "Sí, el valor actual es infinito por ciento mejor porque el valor inicial es 0",
+	"infinitely-worse": "Sí, el valor actual es infinito por ciento peor porque el valor inicial es 0",
+	"changes-saved": "Cambios guardados correctamente",
+	"name": "Nombre",
+	"type-to-confirm": "Escriba \"{{word}}\" para confirmar"
 }
