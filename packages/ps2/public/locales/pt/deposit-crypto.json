@@ -20,7 +20,7 @@
 		"loading": "Carregando endereço de depósito...",
 		"placeholder": "Escolher primeiro a moeda e a rede.",
 		"warning": "Só enviar {{network}} {{coin}} para este endereço",
-		"copied": "Endereço de Depósito copiado para a prancheta!"
+		"copied": "Endereço de depósito copiado para prancheta!"
 	},
 	"depositMemo": {
 		"label": "Depósito MEMO\/Tag:",

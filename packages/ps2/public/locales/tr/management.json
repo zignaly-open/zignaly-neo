@@ -5,8 +5,6 @@
 	"tradingFunds-desc": "Alım-Satım için uygun olan ve pozisyonlarda kullanılan fonlar",
 	"availableTrading": "Alım-Satım için uygun:",
 	"allocatedTrading": "Alım-Satım için ayrılmış:",
-	"hardDisconnected": "Anında Çıkış yapılan fon:",
-	"availableDisconnection": "Çıkışlar için kullanılabilir:",
 	"neededSnapshot": "Günlük anlık görüntü için gerekli:",
 	"helper": "Rakamlarla ilgili yardıma mı ihtiyacınız var? Lütfen <0>Profit Sharing bakiyesi nasıl çalışır<\/0> makalemize göz atın.",
 	"minBalance": {
@@ -15,12 +13,11 @@
 	},
 	"minBalanceModal": {
 		"title": "Minimum Bakiyeyi Düzenle",
-		"desc": "Hizmetten Çıkış Fon Hesabında tutmak istediğiniz minimum bakiyeyi belirleyin. Çıkış bakiyesi minimumun üzerindeyse, hesaplama sırasında fark otomatik olarak Alım-Satım Hesabına aktarılacaktır.",
+		"desc": "Bekleme Hesabında tutmak istediğiniz minimum bakiyeyi ayarlayın. Bakiye minimumun üzerindeyse, hesaplama sırasında fark otomatik olarak Alım-Satım Hesabına aktarılacaktır.",
 		"placeholder": "0.0",
 		"labelBalance": "Güncel Minimum Bakiye",
 		"save": "Sakla"
 	},
-	"heldHardDisc": "Anında Çıkış için saklanıyor:",
 	"controlledZignaly": "Zignaly kontrolünde",
 	"transfer": {
 		"title": "Transfer",
@@ -30,18 +27,63 @@
 		"deposit-available": "Mevcut Bakiye:",
 		"fromTradingAccount": "Alım-Satım Hesabından",
 		"toTradingAccount": "Alım-Satım Hesabına:",
-		"fromDiscAccount": "Çıkış Hesabından",
-		"toDiscAccount": "Çıkış Hesabına:",
 		"now": "Şimdi Transfer Et",
-		"success": "Başarılı bir şekilde {{amount}} transfer ettiniz."
+		"success": "Başarılı bir şekilde {{amount}} transfer ettiniz.",
+		"fromStandbyAccount": "Bekleme Hesabından",
+		"toStandbyAccount": "Bekleme Hesabına:"
 	},
 	"transferFunds": {
 		"title": "Fon Transferi",
-		"description": "Hizmetinizdeki Alım-Satım Hesabı ile Çıkılan Hesap arasındaki fonu anında transfer edin"
+		"description": "Hizmetinizdeki İşlem Hesabı ile Yedek Hesap arasında fon transferi yapın"
 	},
-	"hardDiconnectWarning": "Anında Çıkışlarınız %{perc} oranına ulaştı. Eğer Anında Çıkışlar hizmet fonlarının %{maxPerc} oranına ulaşırsa, Zignaly hizmetinizin kontrolünü ele alacaktır.",
+	"hardDiconnectWarning": "Çıkışlarınız %{perc} oranına ulaştı. Eğer Çıkışlar hizmet fonlarının %{maxPerc} oranına ulaşırsa, Zignaly hizmetinizin kontrolünü ele alacaktır.",
 	"previousValue": "Önceki değer:",
 	"loading-arialLabel": "Yükleme yönetimi",
-	"standbyFunds": "Destek Fonu",
-	"standbyFunds-desc": "Çıkış yapmak isteyen yatırımcılara iade edilebilecek fon"
+	"standbyFunds": "Beklemedeki Fonlar",
+	"standbyFunds-desc": "Fonlarını çekmek isteyen yatırımcılara iade edilebilecek fonlar",
+	"instantWithdrawn": "Çekilen Fonlar:",
+	"availableWithdrawals": "Çekim için kullanılabilir meblağ:",
+	"heldInstantWithdrawals": "Çekim için tutulan:",
+	"api-keys": {
+		"title": "API ile alım-satım yapın",
+		"description": "Profit Sharing hizmetiniz için Binance API anahtarlarını oluşturun ve bunları favori aracınıza veya uygulamanıza bağlayın. Bu API Anahtarlarını <0>zignaly.com<\/0> adresindeki <0>Zignaly<\/0> alım satım uygulamamıza da bağlayabilirsiniz.",
+		"create-key": "API Anahtarı Oluştur",
+		"no-keys": "API anahtarı yok",
+		"no-keys-description": "Henüz herhangi bir API anahtarı oluşturmadınız",
+		"manage-keys": "API Anahtarlarını Yönetme",
+		"api-key": "API Anahtarı",
+		"api-settings": "API Ayarları",
+		"api-settings-tooltip": "Biraz geç kaldınız. API sırrı sadece bir kez gösterilir. Eğer kaybettiyseniz, anahtarı yeniden oluşturmanız gerekecektir",
+		"cant-disable-read": "Okuma iznini devre dışı bırakamazsınız",
+		"restrict-ip": "IP'yi Kısıtla",
+		"api-secret": "API Sırrı",
+		"zignaly-code": "Zignaly Kodu",
+		"api-secret-explainer": "Yalnızca anahtar oluşturulurken görünür. Kaybolursa, yeni bir API anahtarı oluşturmanız gerekecektir",
+		"permission-label": "İzinler",
+		"permissions": {
+			"read": "Okuma",
+			"canTrade": "Spot işlemler",
+			"marginTrade": "Marjin işlemler",
+			"futuresTrade": "Vadeli işlemler"
+		},
+		"permissions-enable": {
+			"read": "Okumayı etkinleştirin",
+			"canTrade": "Spot alım-satımı etkinleştirin",
+			"marginTrade": "Marjin alım-satımını etkinleştirin",
+			"futuresTrade": "Vadeli işlemleri etkinleştirin"
+		},
+		"create-new-key": "Yeni API Anahtarı Oluştur",
+		"create-new-key-description": "Favori trade platformununuza bağlanarak al-sat yapmak için yeni bir API anahtarı oluşturun.",
+		"edit-key": "API Anahtarı Ayarlarını Düzenle",
+		"delete-title": "{{title}} API Anahtarını Sil",
+		"delete-description": "Bu işlem geri alınamaz.",
+		"ip-restrictions": "IP kısıtlamaları",
+		"ip-restrictions-none": "Kısıtlanmamış",
+		"ip-restrictions-invalid": "Geçersiz IP biçimi",
+		"ip-restrictions-ranges": "Üzgünüz, IP aralıklarını desteklemiyoruz",
+		"ip-restrictions-duplicates": "Bazı IP'ler iki kez listelenmiş, lütfen kopyaları kaldırın",
+		"ip-restrictions-allowed": "IP Adresleri",
+		"ip-restrictions-allowed-explainer": "Birden fazla IP adresi girerken, lütfen virgülle ayırın",
+		"ip-restrictions-on": "Erişimi yalnızca güvenilir IP'lerle kısıtlayın (önerilir)"
+	}
 }

@@ -18,7 +18,6 @@ import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace
 import AssetsInPool from '../../../../components/AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 import { TableWrapper } from './styles';
-import { formatLocalizedDistance } from '../../../Dashboard/components/MyDashboard/util';
 
 const Marketplace: React.FC = () => {
   const marketplaceEndpoint = useMarketplace();
@@ -51,15 +50,21 @@ const Marketplace: React.FC = () => {
           />
         ),
       }),
-      columnHelper.accessor('invested', {
+      columnHelper.accessor('investedUSDT', {
         header: t('table.assets'),
         meta: {
-          subtitle: t('table.nb-investors'),
+          subtitle: (
+            <>
+              <div>{t('table.nb-investors')}</div>
+              <div>{t('table.account-age')}</div>
+            </>
+          ),
         },
         cell: (props) => (
           <AssetsInPool
             assetsValue={props.getValue()}
             numberOfInvestors={props.row.original.investors}
+            createdAt={props.row.original.createdAt}
           />
         ),
         sortingFn: 'alphanumeric',
@@ -67,9 +72,6 @@ const Marketplace: React.FC = () => {
       columnHelper.accessor((row) => Number(row.pnlPercent90t), {
         id: 'pnlPercent90t',
         header: t('table.n-months-pnl', { count: 3 }),
-        meta: {
-          subtitle: t('table.account-age'),
-        },
         cell: (props) => (
           <PercentageIndicator
             style={{
@@ -77,10 +79,6 @@ const Marketplace: React.FC = () => {
               lineHeight: '28px',
             }}
             value={props.getValue()}
-            label={formatLocalizedDistance(
-              new Date(),
-              new Date(props.row.original.createdAt),
-            )}
           />
         ),
       }),

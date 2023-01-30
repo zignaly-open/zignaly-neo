@@ -9,3 +9,6 @@ export const BUY_CRYPTO_URL = 'https://changelly.com/?ref_id=q0s68wsie1uf9wza';
 
 export const HELP_MANAGE_FUNDS_URL =
   'https://help.zignaly.com/en/articles/6792440-manage-funds-inside-your-service';
+
+export const HELP_CREATE_SERVICE_MARKETPLACE_URL =
+  'https://help.zignaly.com/en/articles/6845502-rules-for-being-listed-in-the-marketplace';

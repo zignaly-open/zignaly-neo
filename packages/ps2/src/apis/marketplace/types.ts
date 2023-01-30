@@ -2,10 +2,10 @@ export type MarketplaceState = Record<string, never>;
 
 export type MarketplaceService = {
   userId: string;
-  usdtInvested: string;
+  investedUSDT: string;
   type: string;
   tags: string[];
-  successFee: string;
+  successFee: number;
   ssc: string;
   sparklines: number[];
   solo: boolean;
@@ -18,7 +18,7 @@ export type MarketplaceService = {
   ownerName: string;
   ownerId: string;
   name: string;
-  maximumSbt: string;
+  maximumSbt: number;
   logo: string;
   level: number;
   invested: string;
