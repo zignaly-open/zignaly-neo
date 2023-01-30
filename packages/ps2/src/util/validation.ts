@@ -1,9 +1,8 @@
 import * as yup from 'yup';
 import BigNumber from 'bignumber.js';
-import i18n from './i18next';
 
 export const decimalsValidation = (maxDecimals: number) =>
-  yup.string().test('int', i18n.t('common:validation.max-decimals'), (val) => {
+  yup.string().test('int', 'common:validation.max-decimals', (val) => {
     if (!val) return false;
 
     const splitValueDot = val.split('.');
