@@ -53,6 +53,35 @@
         f.parentNode.insertBefore(j, f);
       })(window, document, 'script', 'dataLayer', '%REACT_APP_GTM_ID%');
     </script>
+    <script type="text/javascript" strategy="afterInteractive">
+      var _cio = _cio || [];
+      '%REACT_APP_CUSTOMER_IO_SITE_ID%' &&
+        !'%REACT_APP_CUSTOMER_IO_SITE_ID%'.startsWith('%') &&
+        (function () {
+          var a, b, c;
+          a = function (f) {
+            return function () {
+              _cio.push([f].concat(Array.prototype.slice.call(arguments, 0)));
+            };
+          };
+          b = ['load', 'identify', 'sidentify', 'track', 'page', 'on', 'off'];
+          for (c = 0; c < b.length; c++) {
+            _cio[b[c]] = a(b[c]);
+          }
+          var t = document.createElement('script'),
+            s = document.getElementsByTagName('script')[0];
+          t.async = true;
+          t.id = 'cio-tracker';
+          t.setAttribute('data-site-id', '%REACT_APP_CUSTOMER_IO_SITE_ID%');
+          t.setAttribute('data-use-array-params', 'true');
+          t.setAttribute('data-in-app-org-id', '%REACT_APP_CUSTOMER_IO_ORG_ID%');
+          t.setAttribute('data-use-in-app', 'true');
+          t.src = 'https://assets.customer.io/assets/track.js';
+          //If your account is in the EU, use:
+          //t.src = 'https://assets.customer.io/assets/track-eu.js'
+          s.parentNode.insertBefore(t, s);
+        })();
+    </script>
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.

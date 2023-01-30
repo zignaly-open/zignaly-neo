@@ -1,6 +1,6 @@
 {
 	"title": "Kripto Çekme",
-	"description": "Harici bir hesaba kripto çekimi yapın. Zignaly hesapları arasında fonlarınızı taşımak için ise transferi kullanın.",
+	"description": "Kriptonuzu harici bir hesaba çekin",
 	"coinSelector": {
 		"label": "Coin:",
 		"placeholder": "Coin arama"
@@ -12,14 +12,38 @@
 	"withdrawAddress": {
 		"label": "Bu Adrese Çekin:",
 		"placeholder": "Cüzdan adresini buraya yapıştırın",
-		"warning": "Bu adrese yalnızca {{network}} {{coin}} token'larını gönderin"
+		"warning": "Bu adrese yalnızca {{network}} {{coin}} token'larını gönderin",
+		"invalid": "Geçersiz adres"
 	},
 	"amountToWithdraw": {
-		"label": "Çekilecek Tutar:"
+		"label": "Çekilecek Tutar:",
+		"labelBalance": "Kullanılabilir Bakiye:",
+		"minimum": "Minimum:",
+		"fee": "Komisyon:"
 	},
 	"validation": {
 		"indicateAnAddress": "Geçerli bir adres belirtmelisiniz.",
-		"indicateAnAmount": "Bir miktar belirtmelisiniz.",
-		"minimumToWithdrawal": "Minimum çekim miktarı {{value}} {{coin}}"
-	}
+		"minWithdrawal": "Minimum çekim miktarı {{value}} {{coin}}"
+	},
+	"withdrawMemo": {
+		"label": "MEMO\/Etiket:",
+		"placeholder": "Cüzdan MEMO\/Etiketini buraya yapıştırın",
+		"invalid": "MEMO\/Etiket geçersiz, lütfen hedef cüzdan ağı bilgilerinizi gözden geçirin"
+	},
+	"confirmation": {
+		"title": "Çekme İşlemini Onayla",
+		"description": "Lütfen bilgilerin doğru olduğunu onaylayın ve çekim işleminizi tamamlayın.",
+		"receive": "Alacağınız Meblağ",
+		"network": "Çekim Yapılacak Ağ",
+		"address": "Çekim Yapılacak Adres",
+		"amount": "Çekilecek Miktar",
+		"networkFee": "Ağ Ücreti",
+		"continue": "Doğrulamaya Geçin",
+		"withdrawNow": "Şimdi Çek"
+	},
+	"success": {
+		"title": "Çekim Başarılı",
+		"description": "Çekim talebiniz gönderildi ve kısa süre içinde işleme alınacak."
+	},
+	"notEnoughZig": "Çekim masrafını karşılamak için yeterli ZIG'iniz yok."
 }

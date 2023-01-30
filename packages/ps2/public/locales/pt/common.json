@@ -21,9 +21,10 @@
 	"account-menu": {
 		"isAuth-button-logIn": "Iniciar Sessão",
 		"isAuth-button-signUp": "CADASTRAR-SE",
-		"notAuth-dropdown-link-dashboard": "O meu Painel",
+		"notAuth-dropdown-link-dashboard": "Meu Portfólio",
 		"notAuth-dropdown-link-balances": "Os Meus Saldos",
-		"notAuth-button-logOut": "Sair"
+		"notAuth-button-logOut": "Sair",
+		"notAuth-dropdown-link-wallet": "ZIG Wallet"
 	},
 	"account-selector": {
 		"type": {
@@ -42,7 +43,10 @@
 		"invalid-value": "Valor inválido",
 		"negative-amount": "Deve ser >= 0",
 		"invalid-amount": "Deve indicar uma quantia",
-		"negative-zeroable-amount": "Deve ser > 0"
+		"negative-zeroable-amount": "Deve ser > 0",
+		"max-decimals": "Por favor insira números com no máximo {{maxDecimals}} decimais.",
+		"max-allowed-length": "Deve ter menos de {{ maxLength }} caracteres",
+		"min-amount": "A quantidade mínima é {{amount}} {{coin}}."
 	},
 	"back": "Voltar",
 	"close": "Fechar",
@@ -53,5 +57,11 @@
 	"refresh": {
 		"short": "Nova versão disponível, clique aqui para atualizar"
 	},
-	"percent": "{{value, prettyNumber}}%"
+	"percent": "{{value, prettyNumber}}%",
+	"number": "{{value, prettyNumber}}",
+	"infinitely-better": "Sim, o valor actual é infinitamente melhor porque o valor inicial é 0",
+	"infinitely-worse": "Sim, o valor actual é infinitamente pior porque o valor inicial é 0",
+	"changes-saved": "Alterações salvas com sucesso",
+	"name": "Nome",
+	"type-to-confirm": "Digite \" {{word}} \" para confirmar"
 }

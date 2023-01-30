@@ -8,5 +8,7 @@
 		"valueUSD": "ABD Doları cinsinden değer"
 	},
 	"table-search-placeholder": "Coin aramak için buraya yazın.",
-	"loading-arialLabel": "Kontrol panelim yükleniyor"
+	"loading-arialLabel": "Yükleniyor...",
+	"my-coins": "Koinlerim",
+	"deposits-withdrawals": "Yatırma\/Çekme"
 }
