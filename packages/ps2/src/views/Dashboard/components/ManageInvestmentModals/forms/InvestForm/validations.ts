@@ -1,16 +1,12 @@
 import * as yup from 'yup';
 import {
   inputAmountTokenMaxValidation,
-  decimalsValidation,
+  inputAmountTokenDecimalsValidation,
 } from '../../../../../../util/validation';
-
-const amountDecimalsValidation = decimalsValidation(8);
 
 export const EditInvestmentValidation = yup.object().shape({
   amountTransfer: inputAmountTokenMaxValidation.concat(
-    yup.object().shape({
-      value: yup.string().concat(amountDecimalsValidation),
-    }),
+    inputAmountTokenDecimalsValidation,
   ),
   understandMargin: yup.boolean().oneOf([true], 'error:error.required'),
   transferConfirm: yup
