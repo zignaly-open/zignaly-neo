@@ -47,6 +47,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
     description: service.description,
     maximumSbt: service.maximumSbt,
     successFee: service.successFee,
+    logo: service.logo,
   };
   const {
     handleSubmit,
@@ -63,19 +64,17 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   const [visibility, setVisibility] = useState<TraderServiceAccessLevel>(
     getVisibility(service.level),
   );
-  const [logoUrl, setLogoUrl] = useState(service.logo);
   const navigate = useNavigate();
   const user = useCurrentUser();
 
   const submit = async (data: EditServicePayload) => {
-    await edit({ id: service.id, ...data, level: visibility, logo: logoUrl });
+    await edit({ id: service.id, ...data, level: visibility });
     back();
   };
 
   useUpdateEffect(() => {
     reset(defaultValues);
     setVisibility(getVisibility(service.level));
-    setLogoUrl(service.logo);
   }, [service.id]);
 
   const visibilityOptions = useMemo(
@@ -137,7 +136,11 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
       </ZigTypography>
       <Grid container mt={8} gap={2}>
         <Grid item sm={12} md={2} pb={2}>
-          <ServiceLogo service={service} logo={logoUrl} onChange={setLogoUrl} />
+          <Controller
+            name='logo'
+            control={control}
+            render={({ field }) => <ServiceLogo service={service} {...field} />}
+          />
         </Grid>
         <Grid container sm={12} md={7} pb={2} alignItems='flex-start' gap={6}>
           <Controller
