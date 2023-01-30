@@ -44,12 +44,14 @@ const BigNumber: React.FC<{
 };
 
 const InvestedButton: React.FC<{
+  id?: string;
   service: Service;
   ctaId?: string;
-}> = ({ ctaId, service }) => {
+}> = ({ id, ctaId, service }) => {
   const { investedAmount } = useIsInvestedInService(service.id);
   return (
     <InvestedButtonBase
+      id={id}
       ctaId={ctaId}
       showMultipleAccountButton
       service={service}

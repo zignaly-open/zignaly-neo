@@ -180,6 +180,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
+                id={'withdraw__select-coin'}
                 menuPlacement='auto'
                 menuShouldScrollIntoView={false}
                 menuPosition='fixed'
@@ -201,6 +202,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
+                id={'withdraw__select-network'}
                 menuPosition='fixed'
                 menuShouldBlockScroll
                 menuShouldScrollIntoView={false}

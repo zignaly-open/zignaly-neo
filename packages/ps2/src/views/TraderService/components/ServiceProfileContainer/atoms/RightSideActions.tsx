@@ -28,6 +28,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
         <Box sx={{ mt: md ? 0 : 3 }}>
           {isAuthenticated && isInvested.thisAccount ? (
             <InvestedButton
+              id={'service__edit-investment'}
               service={service}
               ctaId={'service-profile-invested-button'}
             />

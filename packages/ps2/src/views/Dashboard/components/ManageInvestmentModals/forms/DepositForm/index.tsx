@@ -194,6 +194,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
           <>
             <Grid item xs={12} pt={3}>
               <InputText
+                id={'deposit__deposit-address'}
                 placeholder={t('depositAddress.placeholder')}
                 label={t('depositAddress.label')}
                 readOnly={true}
@@ -233,6 +234,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             {!!depositInfo?.tag && (
               <Grid item xs={12} pt={3}>
                 <InputText
+                  id={'deposit__deposit-memo'}
                   label={t('depositMemo.label')}
                   placeholder={t('depositAddress.placeholder')}
                   readOnly={true}
