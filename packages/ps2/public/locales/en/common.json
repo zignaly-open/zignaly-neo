@@ -62,6 +62,7 @@
     "negative-zeroable-amount": "Should be > 0",
     "min-amount": "Minimum amount is {{amount}} {{coin}}.",
     "invalid-amount": "You must indicate an amount",
-    "max-decimals": "Please enter numbers with no more than {{maxDecimals}} decimal places."
+    "max-decimals": "Please enter numbers with no more than {{maxDecimals}} decimal places.",
+    "invalid-characters": "Invalid characters"
   }
 }
