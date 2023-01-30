@@ -178,7 +178,11 @@ function EditInvestmentForm({
           />
         )}
         <Button
-          id={'edit-investment__save-invest'}
+          id={
+            isInputEnabled
+              ? 'edit-investment__save-invest'
+              : 'edit-investment__save-close'
+          }
           size={'large'}
           type={'submit'}
           loading={isLoading}

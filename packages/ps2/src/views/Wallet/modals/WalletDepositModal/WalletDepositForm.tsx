@@ -75,6 +75,7 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
+                id={'deposit__select-network'}
                 menuPosition='fixed'
                 menuShouldBlockScroll
                 menuShouldScrollIntoView={false}

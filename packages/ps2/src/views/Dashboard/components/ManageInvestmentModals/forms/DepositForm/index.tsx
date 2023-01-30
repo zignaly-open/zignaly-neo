@@ -110,6 +110,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
+                id={'deposit__select-coin'}
                 menuPlacement='auto'
                 menuShouldScrollIntoView={false}
                 menuPosition='fixed'
@@ -176,6 +177,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
+                id={'deposit__select-network'}
                 menuPosition='fixed'
                 menuShouldBlockScroll
                 menuShouldScrollIntoView={false}
