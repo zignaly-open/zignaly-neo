@@ -2,7 +2,7 @@ export type MarketplaceState = Record<string, never>;
 
 export type MarketplaceService = {
   userId: string;
-  usdtInvested: string;
+  investedUSDT: string;
   type: string;
   tags: string[];
   successFee: string;

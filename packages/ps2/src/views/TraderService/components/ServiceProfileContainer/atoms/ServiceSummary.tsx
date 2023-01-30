@@ -19,7 +19,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
           </ZigTypography>
           <AssetsInPoolWrapper>
             <AssetsInPool
-              assetsValue={service.usdtInvested}
+              assetsValue={service.investedUSDT}
               convertedValue={+service.invested}
               convertedValueCoin={service.ssc}
             />
