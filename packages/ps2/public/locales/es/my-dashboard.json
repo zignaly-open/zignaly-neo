@@ -1,5 +1,5 @@
 {
-	"title": "Mi Panel",
+	"title": "Mi Portafolio",
 	"tableHeader": {
 		"summary": {
 			"title": "Mi Valor Actual",
@@ -23,7 +23,7 @@
 	},
 	"table-search-emptyMessage": "Aún no estás conectado a ningún servicio.",
 	"something-went-wrong": "Algo salió mal",
-	"loading-arialLabel": "Cargando mi panel",
+	"loading-arialLabel": "Cargando mi portafolio",
 	"slider-input": {
 		"labels": {
 			"left": "Reinvertir",

@@ -81,6 +81,7 @@ const LoginForm: React.FC = () => {
                 tabIndex: -1,
                 text: t('login-form.inputText.password.labelForgot'),
                 onClick: () => navigate(ROUTE_FORGOT_PASSWORD),
+                id: 'login__forgot-password',
               }}
               label={t('login-form.inputText.password.label') + ':'}
               placeholder={t('login-form.inputText.password.label')}
