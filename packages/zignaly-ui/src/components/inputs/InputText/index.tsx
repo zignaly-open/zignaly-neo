@@ -60,11 +60,15 @@ function InputText(
           />
         )}
       </Label>
-      <InputContainer maxHeight={maxHeight} minHeight={minHeight} withoutBorder={withoutBorder}>
+      <InputContainer
+        id={id}
+        maxHeight={maxHeight}
+        minHeight={minHeight}
+        withoutBorder={withoutBorder}
+      >
         <Side cursor="auto">
           {leftSideElement && <IconContainer>{leftSideElement}</IconContainer>}
           <InputValue
-            id={id}
             as={multiline ? "textarea" : "input"}
             readOnly={readOnly}
             ref={inputRef}

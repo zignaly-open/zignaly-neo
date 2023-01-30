@@ -17,6 +17,7 @@ function EditInvestmentSuccessModal({ close }: { close: () => void }) {
       </Typography>
       <ModalActions>
         <Button
+          id={'invest-success__close'}
           onClick={close}
           size={'large'}
           caption={t('modalSuccess.button')}
