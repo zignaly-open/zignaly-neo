@@ -42,7 +42,7 @@ export type TraderServiceFull = {
   ssc: string;
   successFee: string;
   type: string;
-  usdtInvested: string;
+  investedUSDT: string;
   userId: string;
 };
 
@@ -121,7 +121,7 @@ export type Service = {
   successFee: number;
   tags: string[];
   type: string;
-  usdtInvested: string;
+  investedUSDT: string;
   userId: string;
   maximumSbt: number;
 
