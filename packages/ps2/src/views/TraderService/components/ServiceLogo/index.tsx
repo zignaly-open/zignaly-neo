@@ -10,11 +10,11 @@ import { uploadImage } from 'apis/cloudinary';
 
 const ServiceLogo = ({
   service,
-  logo,
+  value,
   onChange,
 }: {
   service: Service;
-  logo: string;
+  value: string;
   onChange: (logo: string) => void;
 }) => {
   const { t } = useTranslation('service');
@@ -43,12 +43,12 @@ const ServiceLogo = ({
         <Avatar
           size={'xx-large'}
           alt={t('logo-alt', { name: service.name })}
-          image={getServiceLogo(logo)}
+          image={getServiceLogo(value)}
         />
         {uploading ? (
           <CircularProgress size={24} />
         ) : (
-          logo && (
+          value && (
             <IconButton onClick={() => onChange('')}>
               <Close />
             </IconButton>
