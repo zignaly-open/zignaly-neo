@@ -3,24 +3,17 @@ import BigNumber from 'bignumber.js';
 import i18n from './i18next';
 
 export const decimalsValidation = (maxDecimals: number) =>
-  yup
-    .string()
-    .test(
-      'int',
-      i18n.t('common:validation.max-decimals', { maxDecimals }),
-      (val) => {
-        if (!val) return false;
+  yup.string().test('int', i18n.t('common:validation.max-decimals'), (val) => {
+    if (!val) return false;
 
-        const splitValueDot = val.split('.');
-        // Handle incorrect number
-        if (splitValueDot.length > 2) return false;
+    const splitValueDot = val.split('.');
+    // Handle incorrect number
+    if (splitValueDot.length > 2) return false;
 
-        const decimals =
-          splitValueDot.length === 1 ? 0 : splitValueDot[1].length;
+    const decimals = splitValueDot.length === 1 ? 0 : splitValueDot[1].length;
 
-        return decimals <= maxDecimals;
-      },
-    );
+    return decimals <= maxDecimals;
+  });
 
 const inputAmountNumberValidation = yup
   .string()
