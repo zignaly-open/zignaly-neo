@@ -41,7 +41,7 @@ export type TraderServiceFull = {
   ssc: string;
   successFee: string;
   type: string;
-  usdtInvested: string;
+  investedUSDT: string;
   userId: string;
 };
 
@@ -120,7 +120,7 @@ export type Service = {
   successFee: string;
   tags: string[];
   type: string;
-  usdtInvested: string;
+  investedUSDT: string;
   userId: string;
 
   pnlPercent7t: string;

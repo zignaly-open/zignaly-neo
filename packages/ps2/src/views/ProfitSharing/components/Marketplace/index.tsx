@@ -50,7 +50,7 @@ const Marketplace: React.FC = () => {
           />
         ),
       }),
-      columnHelper.accessor('invested', {
+      columnHelper.accessor('investedUSDT', {
         header: t('table.assets'),
         meta: {
           subtitle: (

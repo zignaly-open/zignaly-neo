@@ -4,7 +4,6 @@ import { AssetsInPoolProps } from './types';
 import { WhaleIcon, ZigPriceLabel } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { PriceLabel } from '@zignaly-open/ui';
 import { formatLocalizedDistance } from 'views/Dashboard/components/MyDashboard/util';
 
 const AssetsInPool = ({
@@ -56,7 +55,12 @@ const AssetsInPool = ({
 
       {typeof convertedValue === 'number' && (
         <Box justifyContent='center' alignItems='start'>
-          <PriceLabel value={convertedValue} coin={convertedValueCoin} />
+          <ZigPriceLabel
+            value={convertedValue}
+            coin={convertedValueCoin}
+            color='neutral300'
+            coinProps={{ color: 'neutral300' }}
+          />
         </Box>
       )}
     </Box>
