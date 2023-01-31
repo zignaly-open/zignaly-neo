@@ -118,6 +118,7 @@ const SwapConfirmForm = ({
         gap={1}
       >
         <ZigButton
+          id={'confirm__buy-zig'}
           disabled={!priceInfo?.price}
           variant='contained'
           onClick={handleSubmit}
@@ -125,7 +126,7 @@ const SwapConfirmForm = ({
         >
           {t('buy.buyNow', { coin: coinTo })}
         </ZigButton>
-        <ZigButton onClick={onCancel} variant='text'>
+        <ZigButton id={'confirm__back'} onClick={onCancel} variant='text'>
           {t('common:back')}
         </ZigButton>
       </Grid>

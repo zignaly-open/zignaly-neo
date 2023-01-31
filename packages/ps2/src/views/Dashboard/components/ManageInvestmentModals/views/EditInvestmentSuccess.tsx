@@ -12,6 +12,7 @@ function EditInvestmentSuccessModal({ close }: { close: () => void }) {
       </ZigTypography>
       <ModalActions>
         <Button
+          id={'invest-success__close'}
           onClick={close}
           size={'large'}
           caption={t('modalSuccess.button')}

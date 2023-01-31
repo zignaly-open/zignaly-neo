@@ -82,7 +82,10 @@ const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
                   balances?.ZIG?.unstaking,
                 ].some((v) => v > 0) && (
                   <>
-                    <IconButton onClick={(e) => setAnchorEl(e.currentTarget)}>
+                    <IconButton
+                      id={'wallet__coin'}
+                      onClick={(e) => setAnchorEl(e.currentTarget)}
+                    >
                       <ChevronRight />
                     </IconButton>
                     <WalletPopover
@@ -111,6 +114,7 @@ const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
         </Box>
         <Box display='flex' flexDirection='row' mt='20px' gap={1}>
           <ZigButton
+            id={'wallet__buy-zig'}
             variant='contained'
             onClick={() => {
               showModal(BuyZigModal, {
@@ -121,6 +125,7 @@ const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
             {t('buy.buy')}
           </ZigButton>
           <ZigButton
+            id={'wallet__deposit-zig'}
             variant='contained'
             startIcon={<Add />}
             onClick={() => {
@@ -134,6 +139,7 @@ const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
             {t('deposit.deposit')}
           </ZigButton>
           <ZigButton
+            id={'wallet__withdraw-zig'}
             startIcon={<Remove />}
             variant='outlined'
             onClick={() => {

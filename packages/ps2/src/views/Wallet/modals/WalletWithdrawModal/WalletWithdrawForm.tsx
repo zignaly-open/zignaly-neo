@@ -315,6 +315,7 @@ function WalletWithdrawForm({
 
             <ModalActions align='right'>
               <Button
+                id={'withdraw__close'}
                 size={'large'}
                 type={'button'}
                 variant={'secondary'}
@@ -323,6 +324,7 @@ function WalletWithdrawForm({
               />
 
               <Button
+                id={'withdraw__continue'}
                 size={'large'}
                 type={'submit'}
                 caption={t('confirmation.continue')}

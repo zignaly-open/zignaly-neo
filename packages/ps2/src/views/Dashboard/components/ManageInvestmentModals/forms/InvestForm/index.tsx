@@ -245,6 +245,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           }}
         >
           <Button
+            id={'invest-close'}
             size={'large'}
             type={'button'}
             disabled={isLoading}
@@ -254,6 +255,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           />
 
           <Button
+            id={'invest-confirm'}
             size={'large'}
             type={'submit'}
             loading={isLoading}
