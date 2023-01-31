@@ -24,7 +24,7 @@ function InvestModal({
       wide
       {...props}
       close={close}
-      title={t('invest-modal.invest-with')}
+      title={t('modalSuccess.title')}
       isLoading={isLoading}
     >
       {!isLoading && <InvestView close={close} />}
