@@ -36,7 +36,7 @@ const ResetPasswordForm = () => {
     await resetPassword({
       password,
       token,
-    });
+    }).unwrap();
 
     toast.success(t('reset-password.reset-password-success'));
     navigate(ROUTE_LOGIN);
