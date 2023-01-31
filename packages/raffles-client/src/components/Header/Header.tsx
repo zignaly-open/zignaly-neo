@@ -183,6 +183,9 @@ const Header = () => {
                   />
                 )}
               />
+              <Box ml={{ sm: 0, xs: 1 }}>
+                <p>{'this is a text'}</p>
+              </Box>
             </React.Fragment>
           ) : (
             <Button
