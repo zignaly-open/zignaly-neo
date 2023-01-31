@@ -2,10 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MarginContainer, MenuDropDown, ZigTypography } from '@zignaly-open/ui';
 import { Layout, Container, Options, Option } from './styles';
-import {
-  useIsServiceOwner,
-  useTraderServices,
-} from '../../../../apis/service/use';
+import { useIsServiceOwner } from '../../../../apis/service/use';
 import { TraderService } from '../../../../apis/service/types';
 import { generatePath, Link, useParams, useLocation } from 'react-router-dom';
 import { RouteDropdown, RouteGroup } from './atoms';
@@ -16,6 +13,7 @@ import {
   ROUTE_TRADING_SERVICE_MANAGE,
   ROUTE_TRADING_SERVICE_EDIT,
 } from '../../../../routes';
+import { useTraderServicesQuery } from 'apis/service/api';
 
 function ServiceHeader() {
   const menuDropDownRef = useRef(null);
@@ -24,7 +22,7 @@ function ServiceHeader() {
   const currentPath = useLocation()?.pathname;
   const isOwner = useIsServiceOwner(serviceId);
 
-  const myServicesList = useTraderServices();
+  const { data: myServicesList } = useTraderServicesQuery();
   const activeService = myServicesList?.find(
     (s: TraderService) => s.serviceId === serviceId,
   );
