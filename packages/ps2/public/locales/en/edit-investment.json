@@ -50,20 +50,7 @@
     "withdrawInvestment": {
       "title": "Withdrawal Request",
       "freeWithdrawal": {
-        "title": "Free Withdrawal",
         "description": "You will receive your funds after the fund manager releases them. Take into account that your investment is at risk until the balance is transferred to you. This usually takes a few days but may take longer to complete depending on the fund manager.",
-        "button": {
-          "subtitle": "Withdraw on free funds",
-          "title": "No Fee"
-        }
-      },
-      "instant": {
-        "title": "Instant Withdrawal",
-        "description": "Instant withdrawals incur a {{fee}}% fee because Zignaly must cover your funds and inherit your risk.",
-        "button": {
-          "subtitle": "Withdraw instantly",
-          "title": "{{fee}}% Fee"
-        }
       }
     },
     "pendingTransaction": {
@@ -86,7 +73,6 @@
     "button": "Close"
   },
   "invest-modal": {
-    "invest-with": "Invest with",
     "amount-to-invest": "Amount to Invest",
     "type-transfer": "Type the word “{{word}}” in the field below to complete the transfer:",
     "transfer-error": "Invalid value. Please type the correct word.",
