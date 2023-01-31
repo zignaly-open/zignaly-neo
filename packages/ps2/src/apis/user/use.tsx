@@ -123,7 +123,6 @@ export const useAuthenticate = (): [
   (payload: LoginPayload) => Promise<void>,
 ] => {
   const [login] = useLoginMutation();
-  const performLogout = useLogout();
   const startSession = useStartSession();
 
   const [loading, setLoading] = useState(false);
@@ -146,7 +145,6 @@ export const useAuthenticate = (): [
         setLoading(false);
       } catch (e) {
         setLoading(false);
-        performLogout();
         throw e;
       }
     },
