@@ -50,7 +50,7 @@
     "withdrawInvestment": {
       "title": "Withdrawal Request",
       "freeWithdrawal": {
-        "description": "You will receive your funds after the fund manager releases them. Take into account that your investment is at risk until the balance is transferred to you. This usually takes a few days but may take longer to complete depending on the fund manager.",
+        "description": "You will receive your funds after the fund manager releases them. Take into account that your investment is at risk until the balance is transferred to you. This usually takes a few days but may take longer to complete depending on the fund manager."
       }
     },
     "pendingTransaction": {
