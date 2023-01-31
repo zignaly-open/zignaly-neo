@@ -45,7 +45,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   const defaultValues = {
     name: service.name,
     description: service.description,
-    maximumSbt: service.maximumSbt,
+    // maximumSbt: service.maximumSbt,
     successFee: service.successFee,
     logo: service.logo,
   };
