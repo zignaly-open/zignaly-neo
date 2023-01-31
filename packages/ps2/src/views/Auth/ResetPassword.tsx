@@ -2,11 +2,11 @@ import { PageContainer } from '@zignaly-open/ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
-import ForgotPasswordForm from './components/ForgotPasswordForm';
+import ResetPasswordForm from './components/ResetPasswordForm';
 
 const ForgotPassword = () => {
   const { t } = useTranslation('pages');
-  useTitle(t('forgot-password'));
+  useTitle(t('reset-password'));
 
   return (
     <PageContainer
@@ -17,7 +17,7 @@ const ForgotPassword = () => {
         alignItems: 'center',
       }}
     >
-      <ForgotPasswordForm />
+      <ResetPasswordForm />
     </PageContainer>
   );
 };
