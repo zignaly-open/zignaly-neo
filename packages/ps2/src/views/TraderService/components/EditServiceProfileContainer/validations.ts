@@ -19,10 +19,10 @@ export const EditServiceValidation = yup
         'service:edit.validation.success-fee-range',
         (v) => !v || (v >= 10 && v < 75),
       ),
-    maximumSbt: yup
-      .number()
-      .typeError('error:error.required')
-      .required('error:error.required')
-      .positive('common:validation.negative-zeroable-amount'),
+    // maximumSbt: yup
+    //   .number()
+    //   .typeError('error:error.required')
+    //   .required('error:error.required')
+    //   .positive('common:validation.negative-zeroable-amount'),
   })
   .required();
