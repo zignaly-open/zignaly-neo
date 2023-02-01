@@ -2,10 +2,10 @@ import { useParams } from 'react-router-dom';
 import { useLazyServiceApiKeysQuery } from './api';
 import { BackendErrorResponse, ErrorCodes } from '../../util/errors';
 
-export const useRefetchIfDesynchronizedState = (): ((
-  backendResponse: BackendErrorResponse | undefined,
-) => void) => {
-  const { serviceId } = useParams();
+export const useRefetchIfDesynchronizedState = (
+  serviceId?: string,
+): ((backendResponse: BackendErrorResponse | undefined) => void) => {
+  const { serviceId: serviceIdFromParams } = useParams();
   const [reloadKeys] = useLazyServiceApiKeysQuery();
 
   return (backendResponse) => {
@@ -15,7 +15,7 @@ export const useRefetchIfDesynchronizedState = (): ((
         ErrorCodes.ServiceApiKeyNotFound,
       ].includes(backendResponse?.error?.data?.error?.code)
     ) {
-      reloadKeys({ serviceId });
+      reloadKeys({ serviceId: serviceId || serviceIdFromParams });
     }
   };
 };
