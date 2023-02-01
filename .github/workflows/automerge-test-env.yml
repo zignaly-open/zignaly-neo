@@ -1,4 +1,4 @@
-name: Auto-merge into the test environment
+name: Auto-merge into test
 
 on:
   pull_request_review:
