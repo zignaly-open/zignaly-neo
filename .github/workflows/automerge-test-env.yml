@@ -1,4 +1,4 @@
-name: Auto-merge into the test environment
+name: Auto-merge into test
 
 on:
   pull_request_review:
@@ -6,10 +6,12 @@ on:
 
 jobs:
   merge-to-test:
-    if: ${{ github.event.review.state == 'approved' && github.event.pull_request.head.ref == 'master' }}
+#    if: ${{ github.event.review.state == 'approved' && github.event.pull_request.head.ref == 'master' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+        with:
+          token: ${{ secrets.ROBOZIGNALY_PAT }}
       - name: Merge the PR branch to origin/test
         uses: devmasx/merge-branch@master
         with:
@@ -17,4 +19,4 @@ jobs:
           target_branch: test
           message: Merging ${{ github.event.pull_request.head.ref }}
           from_branch: ${{ github.event.pull_request.head.ref }}
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.ROBOZIGNALY_PAT }}
