@@ -58,6 +58,11 @@ jobs:
           cache: 'yarn'
       - name: Install Lerna
         run: yarn global add lerna
+      - name: Restore Lerna modules
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Bootstrap packages
         run: lerna bootstrap --scope=@zignaly-open/ps2
       - name: Build client
