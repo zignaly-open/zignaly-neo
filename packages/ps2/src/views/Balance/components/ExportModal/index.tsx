@@ -7,6 +7,8 @@ import { useTransactionsHistoryCsvMutation } from 'apis/coin/api';
 import { useActiveExchange } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
 import { ExportModalProps } from './types';
+import { differenceInDays, subDays } from 'date-fns';
+import { Data } from '../BalanceAccountSelector/styles';
 
 function ExportModal({
   close,
@@ -14,7 +16,7 @@ function ExportModal({
 }: ExportModalProps): React.ReactElement {
   const { t } = useTranslation('transactions-history');
   const [exportCsv, exportStatus] = useTransactionsHistoryCsvMutation();
-  const { internalId } = useActiveExchange();
+  const { internalId, createdAt } = useActiveExchange();
   const toast = useToast();
 
   return (
@@ -34,6 +36,7 @@ function ExportModal({
           onClick={() =>
             exportCsv({
               exchangeInternalId: internalId,
+              days: differenceInDays(new Date(createdAt), new Date()) + 1,
             }).then(() => {
               toast.success(t('export.success'));
               close();
