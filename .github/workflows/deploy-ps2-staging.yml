@@ -71,6 +71,13 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PS2_SECRET_KEY }}
           AWS_REGION: 'us-east-1'
           SOURCE_DIR: 'packages/ps2/build'
+
+  invalidate:
+    name: Invalidate Cloudfront
+    needs: build
+    runs-on: ubuntu-latest
+    environment: test
+    steps:
       - name: Invalidate CloudFront
         uses: chetan/invalidate-cloudfront-action@v2
         env:
