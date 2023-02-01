@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - test
-      - fix/invalidate-cf
 
 jobs:
   pre_job:
