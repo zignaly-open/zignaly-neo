@@ -73,6 +73,7 @@
     "button": "Close"
   },
   "invest-modal": {
+    "invest-with": "Invest with",
     "amount-to-invest": "Amount to Invest",
     "type-transfer": "Type the word “{{word}}” in the field below to complete the transfer:",
     "transfer-error": "Invalid value. Please type the correct word.",
