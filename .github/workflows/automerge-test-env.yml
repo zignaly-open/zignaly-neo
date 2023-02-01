@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+        with:
+          token: ${{ secrets.ROBOZIGNALY_PAT }}
       - name: Merge the PR branch to origin/test
         uses: devmasx/merge-branch@master
         with:
