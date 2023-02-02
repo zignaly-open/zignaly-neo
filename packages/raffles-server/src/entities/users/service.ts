@@ -14,6 +14,7 @@ import {
   validateDiscordName,
   validateEmail,
   validateUsername,
+  sendEmailVerification,
 } from './util';
 
 const generateNonceSignMessage = (nonce: string | number) =>
@@ -169,15 +170,24 @@ export const generateService = (user: ContextUser) => {
     }
   };
 
-  const verifyEmail = (userId: number) => {
-    return User.update(
-      { emailVerified: true },
-      {
-        where: {
-          id: userId,
+  const verifyEmail = async (userId: number, email: string) => {
+    try {
+      await sendEmailVerification(`${userId}`, email);
+      return User.update(
+        {
+          emailVerified: true,
+          email,
         },
-      },
-    );
+        {
+          where: {
+            id: userId,
+          },
+        },
+      );
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
   };
 
   return {

@@ -8,6 +8,7 @@ import { BALANCE_CHANGED } from './constants';
 import { getUserBalance } from '../balances/service';
 import { ContextUser } from '../../types';
 import redisService from '../../redisService';
+import SibApiV3Sdk from 'sib-api-v3-typescript';
 
 export function signJwtToken(user: User) {
   return new Promise<string>((resolve, reject) =>
@@ -110,4 +111,27 @@ export async function emitBalanceChanged(user: ContextUser) {
       balance: currentBalance,
     },
   });
+}
+
+export async function sendEmailVerification(userId: string, email: string) {
+  const apiInstance = new SibApiV3Sdk.ContactsApi();
+
+  apiInstance.setApiKey(
+    SibApiV3Sdk.ContactsApiApiKeys.apiKey,
+    process.env.SENDINBLUE_API_KEY,
+  );
+
+  const createDoiContact = new SibApiV3Sdk.CreateDoiContact(); // CreateDoiContact | Values to create the Double opt-in (DOI) contact
+
+  createDoiContact.email = email;
+  createDoiContact.includeListIds = [2];
+  createDoiContact.templateId = 4;
+  createDoiContact.redirectionUrl = `https://zigbids.zignaly.com/?confirm=${userId}}`;
+
+  try {
+    const response = await apiInstance.createDoiContact(createDoiContact);
+    console.log(response);
+  } catch (error) {
+    console.error(error);
+  }
 }
