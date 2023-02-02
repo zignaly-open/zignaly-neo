@@ -137,7 +137,7 @@ export const generateService = (user: ContextUser) => {
 
     userInstance.username = username;
     userInstance.email = email;
-    if (!email) {
+    if (!emailValid) {
       userInstance.emailVerified = false;
     }
     userInstance.discordName = discordName;
