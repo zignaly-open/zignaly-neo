@@ -46,7 +46,7 @@ const ZigButtonGroupInput = ({
             variant={"outlined"}
             {...(o.extraProps || {})}
           >
-            {label}
+            {o.label}
           </ZigButton>
         ))}
       </ZigButtonGroup>
