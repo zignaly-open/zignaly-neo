@@ -119,7 +119,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                 })}
                 tokens={[
                   {
-                    id: 'Zig',
+                    id: 'ZIG',
                     balance: balance?.toString(),
                   },
                 ]}
