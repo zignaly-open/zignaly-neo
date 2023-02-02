@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { Typography, Button } from '@zignaly-open/ui';
+import { Typography, ZigButton } from '@zignaly-open/ui';
 import {
   Layout,
   Header,
@@ -32,9 +32,12 @@ import { useIsAuthenticated } from '../../../../apis/user/use';
 import { ROUTE_SIGNUP } from '../../../../routes';
 import { useNavigate } from 'react-router-dom';
 import { Link } from '@mui/material';
+import { useZModal } from '../../../../components/ZModal/use';
+import CreateServiceModal from './modals/CreateServiceModal';
 
 const BecomeTraderLanding: React.FC = () => {
   const { t } = useTranslation('offer-your-trading-service');
+  const { showModal } = useZModal();
   const isAuthenticated = useIsAuthenticated();
   const navigate = useNavigate();
 
@@ -53,28 +56,31 @@ const BecomeTraderLanding: React.FC = () => {
     },
   ];
 
-  const featuresItems: FeatureItem[] = [
-    {
-      title: t('features.list.item1.title'),
-      description: t('features.list.item1.description'),
-      image: 'icon-analytics.png',
-    },
-    {
-      title: t('features.list.item2.title'),
-      description: t('features.list.item2.description'),
-      image: 'icon-tools.png',
-    },
-    {
-      title: t('features.list.item3.title'),
-      description: t('features.list.item3.description'),
-      image: 'icon-payouts.png',
-    },
-    {
-      title: t('features.list.item4.title'),
-      description: t('features.list.item4.description'),
-      image: 'icon-marketplace.png',
-    },
-  ];
+  const featuresItems: FeatureItem[] = useMemo(
+    () => [
+      {
+        title: t('features.list.item1.title'),
+        description: t('features.list.item1.description'),
+        image: 'icon-analytics.png',
+      },
+      {
+        title: t('features.list.item2.title'),
+        description: t('features.list.item2.description'),
+        image: 'icon-tools.png',
+      },
+      {
+        title: t('features.list.item3.title'),
+        description: t('features.list.item3.description'),
+        image: 'icon-payouts.png',
+      },
+      {
+        title: t('features.list.item4.title'),
+        description: t('features.list.item4.description'),
+        image: 'icon-marketplace.png',
+      },
+    ],
+    [t],
+  );
 
   const howWorksItems: HowWorksItem[] = [
     {
@@ -95,7 +101,9 @@ const BecomeTraderLanding: React.FC = () => {
   ];
   const onClickCreateService = () => {
     if (isAuthenticated) {
-      null;
+      showModal(CreateServiceModal, {
+        ctaId: 'create-service',
+      });
     } else {
       navigate(ROUTE_SIGNUP);
     }
@@ -142,12 +150,14 @@ const BecomeTraderLanding: React.FC = () => {
                 </WrapperItem>
               </WrapperList>
               <WrapperAction>
-                <Button
+                <ZigButton
                   id={'offer-service__create-service'}
                   size={'large'}
-                  caption={t('wrapper.action')}
+                  variant={'contained'}
                   onClick={onClickCreateService}
-                />
+                >
+                  {t('wrapper.action')}
+                </ZigButton>
               </WrapperAction>
             </Side>
             <SideImage />
@@ -178,8 +188,8 @@ const BecomeTraderLanding: React.FC = () => {
 
           <StepList itemsLength={howWorksItems.length}>
             {howWorksItems.map((howWorkItem, index) => (
-              <>
-                <Step key={`--how-works-item-${index.toString()}`}>
+              <React.Fragment key={`--how-works-item-${index.toString()}`}>
+                <Step>
                   <Box>
                     <Center>
                       <Typography variant={'h2'} color={'neutral100'}>
@@ -194,8 +204,8 @@ const BecomeTraderLanding: React.FC = () => {
                     </Typography>
                   </Box>
                 </Step>
-                {index < howWorksItems.length - 1 && <Separator></Separator>}
-              </>
+                {index < howWorksItems.length - 1 && <Separator />}
+              </React.Fragment>
             ))}
           </StepList>
         </Section>
