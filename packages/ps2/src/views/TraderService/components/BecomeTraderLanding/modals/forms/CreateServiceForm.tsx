@@ -34,6 +34,7 @@ const CreateServiceForm: React.FC<{
     handleSubmit,
     control,
     setValue,
+    trigger,
     watch,
     register,
     formState: { errors },
@@ -101,7 +102,10 @@ const CreateServiceForm: React.FC<{
           value={exchangeType}
           options={serviceTypes}
           error={t(errors.serviceType?.message)}
-          onChange={(v) => setValue('serviceType', v as ExchangeType)}
+          onChange={(v) => {
+            setValue('serviceType', v as ExchangeType);
+            trigger('serviceType');
+          }}
           label={t('create.service-type')}
         />
       </ZigButtonGroupInputWrapper>
