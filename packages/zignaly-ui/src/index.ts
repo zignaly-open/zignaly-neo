@@ -89,7 +89,7 @@ import BrandImage from "./components/navigation/Header/components/BrandImage";
 import ZigTabs, { ZigTab, ZigTabPanel } from "./components/navigation/ZigTabs";
 
 export * from "./theme";
-export { default as ZigButton } from "./components/inputs/ZigButton";
+export { default as ZigButton, ZigButtonGroup } from "./components/inputs/ZigButton";
 export { default as ZigInput } from "./components/inputs/ZigInput";
 export { default as ZigTypography } from "./components/display/ZigTypography";
 export { default as ZigPriceLabel, ZigTablePriceLabel } from "./components/display/ZigPriceLabel";
