@@ -57,6 +57,11 @@ jobs:
           cache: 'yarn'
       - name: Install Lerna
         run: yarn global add lerna
+      - name: Restore Lerna modules
+        uses: actions/cache@v3
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-${{ hashFiles('**/yarn.lock') }}
       - name: Bootstrap packages
         run: lerna bootstrap --scope=@zignaly-open/ps2
       - name: Build client
@@ -70,6 +75,13 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PS2_SECRET_KEY }}
           AWS_REGION: 'us-east-1'
           SOURCE_DIR: 'packages/ps2/build'
+
+  invalidate:
+    name: Invalidate Cloudfront
+    needs: build
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
       - name: Invalidate CloudFront
         uses: chetan/invalidate-cloudfront-action@v2
         env:
