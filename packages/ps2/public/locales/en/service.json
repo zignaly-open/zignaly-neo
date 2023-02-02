@@ -67,7 +67,7 @@
     "name": "Service Name:",
     "logo": "Edit Logo",
     "description": "Description:",
-    "success-fee-desc": "Amount of profits you will keep",
+    "success-fee-desc": "Amount of profits you will charge your investors (including 5% Zignaly fee)",
     "pool-size": "Maximum pool size:",
     "pool-size-desc": "Max you'll accept from investors",
     "visibility": {
@@ -87,5 +87,17 @@
       "name-length": "Must be between 5 and 50 characters",
       "success-fee-range": "Must be 0 or between 10% and 75%"
     }
+  },
+  "you-get-x": "You get {{number}}%",
+  "create": {
+    "title": "Create new service",
+    "service-type": "Service type",
+    "service-name": "Service name",
+    "base-currency": "Base Currency",
+    "types": {
+      "spot": "Spot",
+      "futures": "Futures"
+    },
+    "please-verify": "Please review your info. Type, base and name can't be changed later"
   }
 }

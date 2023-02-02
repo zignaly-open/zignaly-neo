@@ -3,7 +3,15 @@
     "title": "OFFER YOUR TRADING SERVICE \n TO UP TO +400K USERS"
   },
   "modal": {
-    "title": "Create new service"
+    "title": "Create new service",
+    "service-type": "Service type",
+    "service-name": "Service name",
+    "base-currency": "Base Currency",
+    "types": {
+      "spot": "Spot",
+      "futures": "Futures"
+    },
+    "please-verify": "Please review your info. Type, base and name can't be changed later"
   },
   "wrapper": {
     "title": "Profit Sharing Service Benefits",
