@@ -119,11 +119,15 @@ export const api = createApi({
       { id: string },
       {
         exchangeInternalId: string;
+        days: number;
       }
     >({
-      query: ({ exchangeInternalId }) => ({
+      query: ({ exchangeInternalId, days }) => ({
         url: `/user/exchanges/${exchangeInternalId}/transactions_history_csv`,
         method: 'POST',
+        body: {
+          days,
+        },
       }),
     }),
   }),
