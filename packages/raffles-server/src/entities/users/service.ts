@@ -138,6 +138,7 @@ export const generateService = (user: ContextUser) => {
     userInstance.email = email;
     userInstance.discordName = discordName;
     await userInstance.save();
+    await redisService.updateRedisUsernameCache(user.id);
     return userInstance.toJSON();
   };
 

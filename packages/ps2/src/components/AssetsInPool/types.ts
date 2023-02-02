@@ -3,4 +3,5 @@ export interface AssetsInPoolProps {
   numberOfInvestors?: number;
   convertedValue?: number;
   convertedValueCoin?: string;
+  createdAt?: string;
 }

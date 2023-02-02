@@ -12,6 +12,7 @@ import {
 import { getColorForNumber } from '../../../../util/numbers';
 
 export const BalanceSummary = ({
+  id,
   totalValue,
   profit,
   coin = 'USDT',
@@ -42,6 +43,7 @@ export const BalanceSummary = ({
         />
       )}
       <TextButton
+        id={id}
         leftElement={<PencilIcon color='#65647E' width={16} height={16} />}
         caption={t('action:edit')}
         color={'links'}

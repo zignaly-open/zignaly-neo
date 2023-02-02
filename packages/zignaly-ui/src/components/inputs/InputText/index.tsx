@@ -60,11 +60,15 @@ function InputText(
           />
         )}
       </Label>
-      <InputContainer maxHeight={maxHeight} minHeight={minHeight} withoutBorder={withoutBorder}>
+      <InputContainer
+        id={id}
+        maxHeight={maxHeight}
+        minHeight={minHeight}
+        withoutBorder={withoutBorder}
+      >
         <Side cursor="auto">
           {leftSideElement && <IconContainer>{leftSideElement}</IconContainer>}
           <InputValue
-            id={id}
             as={multiline ? "textarea" : "input"}
             readOnly={readOnly}
             ref={inputRef}
@@ -80,6 +84,7 @@ function InputText(
         </Side>
         {rightSideElement && (
           <Side
+            id={"input__copy"}
             className={"right"}
             cursor={onClickRightSideElement === null ? "auto" : "pointer"}
             onClick={() => onClickRightSideElement?.()}

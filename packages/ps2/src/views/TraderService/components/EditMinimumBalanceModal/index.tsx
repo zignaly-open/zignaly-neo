@@ -78,6 +78,7 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
 
         <ModalActions>
           <Button
+            id={'edit-balance__save'}
             loading={isLoadingManagement || isLoadingService || isUpdating}
             caption={t('minBalanceModal.save')}
             disabled={!isValid}

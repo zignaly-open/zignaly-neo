@@ -44,9 +44,11 @@ const SignupForm: React.FC = () => {
   const { state: locationState } = useLocation();
 
   useEffect(() => {
-    const ref = new URLSearchParams(window.location.search).get('invite');
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get('invite');
+    const subtrack = params.get('subtrack');
     if (ref) {
-      Cookies.set('ref', ref);
+      Cookies.set('ref', subtrack ? `${ref}:${subtrack}` : ref);
     }
   }, []);
 

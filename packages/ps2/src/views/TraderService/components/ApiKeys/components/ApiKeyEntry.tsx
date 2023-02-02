@@ -84,6 +84,7 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
         </Box>
         <Box sx={{ alignSelf: 'center' }}>
           <ZigButton
+            id={'trader-api__edit-key'}
             sx={{ mr: 2 }}
             onClick={() => showModal(EditApiKey, { apiKey, serviceId })}
             startIcon={<PencilIcon />}
@@ -92,6 +93,7 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
             {t('action:edit')}
           </ZigButton>
           <ZigButton
+            id={'trader-api__delete-key'}
             sx={{ mr: 2 }}
             onClick={() =>
               askConfirm({

@@ -18,10 +18,12 @@ const IconButton = ({
   isFocused = false,
   className,
   type = "button",
+  id,
 }: IconButtonProps): JSX.Element => {
   return (
     <Layout className={className}>
       <ViewPort
+        id={id}
         shrinkWrap={shrinkWrap}
         type={type}
         size={size}

@@ -22,7 +22,7 @@ const Header: React.FC = () => {
       leftElements={[
         <Link to={ROUTE_DASHBOARD} key='logo'>
           <BrandImage
-            id='menu__logo'
+            id='menu__logo-portfolio'
             height='32px'
             type='isotype'
             width='32px'
@@ -30,7 +30,7 @@ const Header: React.FC = () => {
         </Link>,
         <HeaderLinksContainer key='links'>
           <NavigationLink
-            id='menu__profit-sharing'
+            id='menu__marketplace'
             to={ROUTE_PROFIT_SHARING}
             key='--route-ps'
           >

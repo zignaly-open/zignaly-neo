@@ -76,6 +76,7 @@ function AccountMenu(): React.ReactElement | null {
     <DropDown
       component={({ open }) => (
         <IconButton
+          id={'menu__dropdown-account'}
           variant={'flat'}
           icon={<Avatar size={'medium'} image={activeExchange?.image} />}
           key={'user'}
@@ -92,10 +93,11 @@ function AccountMenu(): React.ReactElement | null {
               </AccountName>
             </AccountDropdown>
           ),
-          id: 'menu__account-switcher',
+          id: 'account-menu-dropdown__account-switcher',
           children: (exchanges?.length > 1 ? exchanges : []).map(
             (exchange, index) => ({
               onClick: () => setActiveExchange(exchange.internalId),
+              id: `account-switcher-dropdown__account-${index}`,
               label: (
                 <>
                   <Avatar size={'medium'} image={getImageOfAccount(index)} />
@@ -116,25 +118,25 @@ function AccountMenu(): React.ReactElement | null {
         },
         {
           label: t('account-menu.notAuth-dropdown-link-dashboard'),
-          id: 'menu__dashboard',
+          id: 'account-menu-dropdown__portfolio',
           href: generatePath(ROUTE_DASHBOARD),
           onClick: () => navigate(ROUTE_DASHBOARD),
         },
         {
           label: t('account-menu.notAuth-dropdown-link-balances'),
-          id: 'menu__my-balance',
+          id: 'account-menu-dropdown__balance',
           href: generatePath(ROUTE_MY_BALANCES),
           onClick: () => navigate(ROUTE_MY_BALANCES),
         },
         {
           label: t('account-menu.notAuth-dropdown-link-wallet'),
-          id: 'menu__wallet',
+          id: 'account-menu-dropdown__wallet',
           href: generatePath(ROUTE_WALLET),
           onClick: () => navigate(ROUTE_WALLET),
         },
         {
           separator: true,
-          id: 'menu__log-out',
+          id: 'account-menu-dropdown__log-out',
           element: (
             <LogoutButtonWrap>
               <Button

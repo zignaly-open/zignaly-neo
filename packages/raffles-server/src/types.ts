@@ -43,7 +43,7 @@ export enum TransactionType {
 export type RedisAuctionData = {
   price: string;
   expire: Date;
-  ranking: number[];
+  ranking: { id: number; username: string }[];
 };
 
 export type ResourceOptions = {

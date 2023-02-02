@@ -12,13 +12,9 @@ import { RouteDropdown, RouteGroup } from './atoms';
 import {
   ROUTE_TRADING_SERVICE,
   ROUTE_TRADING_SERVICE_API,
-  ROUTE_TRADING_SERVICE_COINS,
   ROUTE_TRADING_SERVICE_INVESTORS,
   ROUTE_TRADING_SERVICE_MANAGE,
-  ROUTE_TRADING_SERVICE_MANUAL,
-  ROUTE_TRADING_SERVICE_POSITIONS,
   ROUTE_TRADING_SERVICE_EDIT,
-  ROUTE_TRADING_SERVICE_SIGNALS,
 } from '../../../../routes';
 
 function ServiceHeader() {
@@ -83,27 +79,8 @@ function ServiceHeader() {
             ]}
           />
 
-          <RouteDropdown
-            title={t('dropdown.trade.title')}
+          <RouteGroup
             routes={[
-              {
-                name: t('dropdown.trade.links.positions'),
-                path: generatePath(ROUTE_TRADING_SERVICE_POSITIONS, {
-                  serviceId,
-                }),
-              },
-              {
-                name: t('dropdown.trade.links.manual'),
-                path: generatePath(ROUTE_TRADING_SERVICE_MANUAL, {
-                  serviceId,
-                }),
-              },
-              {
-                name: t('dropdown.trade.links.signals'),
-                path: generatePath(ROUTE_TRADING_SERVICE_SIGNALS, {
-                  serviceId,
-                }),
-              },
               {
                 name: t('dropdown.trade.links.api'),
                 path: generatePath(ROUTE_TRADING_SERVICE_API, { serviceId }),
@@ -113,10 +90,6 @@ function ServiceHeader() {
 
           <RouteGroup
             routes={[
-              {
-                name: t('coins-label'),
-                path: generatePath(ROUTE_TRADING_SERVICE_COINS, { serviceId }),
-              },
               {
                 name: t('investors-label'),
                 path: generatePath(ROUTE_TRADING_SERVICE_INVESTORS, {

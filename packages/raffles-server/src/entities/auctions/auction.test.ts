@@ -1,4 +1,4 @@
-import { Auction } from '../../../src/entities/auctions/model';
+import { Auction } from './model';
 import {
   waitUntilTablesAreCreated,
   wipeOut,
@@ -55,6 +55,7 @@ describe('Auctions', () => {
       amount: '100',
       auctionId,
     });
+
     await createBasketItem({
       ticker: 'BTC',
       amount: '100',
