@@ -30,7 +30,7 @@ function CreateServiceModal({
 
   return (
     <ZModal
-      onGoBack={step === 1 && (() => setStep(0))}
+      onGoBack={step === 1 && (() => !isLoading && setStep(0))}
       onBackdropClick={(e) => {
         e.stopPropagation();
         return false;
