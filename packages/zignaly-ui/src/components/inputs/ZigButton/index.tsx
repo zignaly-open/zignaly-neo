@@ -9,7 +9,7 @@ export type ZigButtonProps = LoadingButtonProps & {
   active?: boolean;
 };
 
-const ZigButton = ({ loading, active, tooltip, ctaId, color, ...props }: ZigButtonProps) => {
+const ZigButton = ({ active, tooltip, ctaId, color, ...props }: ZigButtonProps) => {
   const button = (
     <LoadingButton
       data-tack-cta={ctaId}
