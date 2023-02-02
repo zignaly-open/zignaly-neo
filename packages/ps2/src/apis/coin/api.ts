@@ -5,6 +5,7 @@ import {
   CoinDetails,
   DepositInfo,
   Transactions,
+  TransactionType,
 } from './types';
 import baseQuery from '../baseQuery';
 import { isString, pickBy } from 'lodash';
@@ -120,13 +121,15 @@ export const api = createApi({
       {
         exchangeInternalId: string;
         days: number;
+        type?: TransactionType;
       }
     >({
-      query: ({ exchangeInternalId, days }) => ({
+      query: ({ exchangeInternalId, days, type }) => ({
         url: `/user/exchanges/${exchangeInternalId}/transactions_history_csv`,
         method: 'POST',
-        body: {
+        params: {
           days,
+          type,
         },
       }),
     }),
