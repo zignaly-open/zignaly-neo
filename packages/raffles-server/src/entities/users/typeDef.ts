@@ -58,6 +58,7 @@ export const typeDef = gql`
     updateProfile(username: String, email: String, discordName: String): User
     getOrCreateUser(walletType: String!, publicAddress: String!): AuthUser
     authenticate(publicAddress: String!, signature: String!): AccessToken!
+    verifyEmail(userId: Int!, email: String!): Boolean
   }
 
   extend type Subscription {
