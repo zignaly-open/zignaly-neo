@@ -9,7 +9,9 @@ const SuccessFeeInputWrapper: React.FC<{ value: number }> = ({
   value,
 }) => {
   const { t } = useTranslation('service');
-
+  const feeWeCharge = !value
+    ? 0
+    : Math.max(0, Math.min(75, value) - ZIGNALY_PROFIT_FEE);
   // Service Type Base currency Service name Success fee
   return (
     <SuccessFieldWrapper>
@@ -18,7 +20,7 @@ const SuccessFeeInputWrapper: React.FC<{ value: number }> = ({
       <SuccessFieldWrapperShit>
         <ZigTypography>
           {t('you-get-x', {
-            number: Math.max(0, Math.min(75, value) - ZIGNALY_PROFIT_FEE),
+            number: feeWeCharge,
           })}
         </ZigTypography>
       </SuccessFieldWrapperShit>

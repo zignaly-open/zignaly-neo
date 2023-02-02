@@ -22,8 +22,8 @@ import SuccessFeeInputWrapper from './SuccessFeeInputWrapper';
 import { ExchangeType } from '../../../../../../apis/user/types';
 import { ServiceFormData } from './types';
 
-const CreateServiceForm: React.FC<{
-  service?: Partial<ServiceFormData>;
+const InvestInYourServiceForm: React.FC<{
+  service?: ServiceFormData;
   onSubmit: (service: ServiceFormData) => void;
 }> = ({ service, onSubmit }) => {
   const { t } = useTranslation('service');
@@ -197,4 +197,4 @@ const CreateServiceForm: React.FC<{
   );
 };
 
-export default CreateServiceForm;
+export default InvestInYourServiceForm;

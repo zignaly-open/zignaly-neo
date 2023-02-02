@@ -90,6 +90,8 @@
   },
   "you-get-x": "You get {{number}}%",
   "create": {
+    "invest-in-your-service": "Invest in your service",
+    "select-type-first": "Select a service type first",
     "title": "Create new service",
     "action": "Create service",
     "service-type": "Service type",
