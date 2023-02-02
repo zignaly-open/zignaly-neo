@@ -16,6 +16,8 @@ import { useCurrentBalance } from '../../../../../../apis/investment/use';
 import { CreateServicePayload } from '../../../../../../apis/service/types';
 import { useCreateTraderServiceMutation } from '../../../../../../apis/service/api';
 import { useActiveExchange } from '../../../../../../apis/user/use';
+import { generatePath, useNavigate } from 'react-router-dom';
+import { ROUTE_TRADING_SERVICE_MANAGE } from '../../../../../../routes';
 
 const InvestInYourServiceForm: React.FC<{
   service?: ServiceFormData;
@@ -23,6 +25,7 @@ const InvestInYourServiceForm: React.FC<{
   const { t } = useTranslation(['service', 'edit-investment']);
   const coin = useCurrentBalance(service.baseCurrency);
   const exchange = useActiveExchange();
+  const navigate = useNavigate();
   const [createService, { isLoading }] = useCreateTraderServiceMutation();
   const {
     handleSubmit,
@@ -41,11 +44,11 @@ const InvestInYourServiceForm: React.FC<{
     },
   });
 
-  const onSubmit = ({
+  const onSubmit = async ({
     amountToInvest,
     profitPercentage,
   }: ServiceInvestType) => {
-    createService({
+    const result = await createService({
       name: service.serviceName,
       type: service.serviceType.toLocaleUpperCase(),
       amount: amountToInvest.value,
@@ -54,6 +57,14 @@ const InvestInYourServiceForm: React.FC<{
       exchangeInternalId: exchange.internalId,
       profitPercentage,
     } as CreateServicePayload);
+
+    if ('data' in result) {
+      navigate(
+        generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+          serviceId: result.data.id,
+        }),
+      );
+    }
   };
 
   // Service Type Base currency Service name Success fee
@@ -71,6 +82,7 @@ const InvestInYourServiceForm: React.FC<{
           <InputAmountAdvanced
             name={'amountToInvest'}
             control={control}
+            disabled={isLoading}
             label={
               <div>
                 {t('edit-investment:form.inputAmount.label')}
@@ -94,6 +106,7 @@ const InvestInYourServiceForm: React.FC<{
             render={({ field }) => (
               <SliderInput
                 mode={'range'}
+                disabled={isLoading}
                 labels={{
                   top: (
                     <div>

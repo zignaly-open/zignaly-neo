@@ -72,10 +72,13 @@ export const api = createApi({
         body: { minimum },
       }),
     }),
-    createTraderService: builder.mutation<void, CreateServicePayload>({
+    createTraderService: builder.mutation<
+      TraderServiceFull,
+      CreateServicePayload
+    >({
       invalidatesTags: ['Service'],
       query: (payload) => ({
-        url: `services/`,
+        url: `services`,
         method: 'POST',
         body: payload,
       }),
