@@ -176,7 +176,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
             )}
           />
           <Grid item container columnSpacing={6} rowSpacing={6}>
-            <Grid item md={8} sm={8} xs={12}>
+            <Grid item xs={12}>
               <Controller
                 name='successFee'
                 control={control}
@@ -205,17 +205,6 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                 )}
               />
             </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={4}
-              sx={{
-                display: {
-                  xs: 'none',
-                  sm: 'block',
-                },
-              }}
-            />
             {/* <Grid item xs={12} sm={6}>
               <Controller
                 name='maximumSbt'

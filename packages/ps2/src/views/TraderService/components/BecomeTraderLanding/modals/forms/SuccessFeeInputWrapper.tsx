@@ -17,7 +17,9 @@ const SuccessFeeInputWrapper: React.FC<{ value: number }> = ({
 
       <SuccessFieldWrapperShit>
         <ZigTypography>
-          {t('you-get-x', { number: Math.max(0, value - ZIGNALY_PROFIT_FEE) })}
+          {t('you-get-x', {
+            number: Math.max(0, Math.min(75, value) - ZIGNALY_PROFIT_FEE),
+          })}
         </ZigTypography>
       </SuccessFieldWrapperShit>
     </SuccessFieldWrapper>
