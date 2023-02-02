@@ -9,6 +9,7 @@ import InvestInYourServiceForm from './forms/InvestInYourServiceForm';
 import CreateServiceForm from './forms/CreateServiceForm';
 import { ServiceFormData } from './forms/types';
 import { useCurrentBalance } from '../../../../../apis/investment/use';
+import { useCreateTraderServiceMutation } from '../../../../../apis/service/api';
 
 function CreateServiceModal({
   close,
@@ -17,10 +18,15 @@ function CreateServiceModal({
   close: () => void;
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation('service');
-  const { isLoading } = useExchangeCoinsList();
+  const { isLoading: isLoadingCoins } = useExchangeCoinsList();
+  const [, { isLoading: isCreating }] = useCreateTraderServiceMutation();
   const [step, setStep] = useState(0);
   const [service, setService] = useState<Partial<ServiceFormData>>({});
-  const { isFetching } = useCurrentBalance(service.baseCurrency);
+  const { isFetching: isLoadingBalances } = useCurrentBalance(
+    service.baseCurrency,
+  );
+  const isLoading =
+    isLoadingCoins || isCreating || (isLoadingBalances && step === 1);
 
   return (
     <ZModal
@@ -36,7 +42,7 @@ function CreateServiceModal({
         step === 1 ? t('create.invest-in-your-service') : t('create.title')
       }
     >
-      {(isLoading || (isFetching && step === 1)) && <CenteredLoader />}
+      {isLoading && <CenteredLoader />}
       {!isLoading && step === 0 && (
         <CreateServiceForm
           service={service}
@@ -46,7 +52,7 @@ function CreateServiceModal({
           }}
         />
       )}
-      {!isLoading && !isFetching && step === 1 && (
+      {!isLoading && step === 1 && (
         <InvestInYourServiceForm service={service as ServiceFormData} />
       )}
     </ZModal>
