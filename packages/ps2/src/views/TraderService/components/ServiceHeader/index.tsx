@@ -24,7 +24,7 @@ function ServiceHeader() {
   const currentPath = useLocation()?.pathname;
   const isOwner = useIsServiceOwner(serviceId);
 
-  const myServicesList = useTraderServices();
+  const { data: myServicesList } = useTraderServices();
   const activeService = myServicesList?.find(
     (s: TraderService) => s.serviceId === serviceId,
   );
