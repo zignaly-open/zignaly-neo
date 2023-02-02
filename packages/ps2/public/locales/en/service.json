@@ -91,6 +91,7 @@
   "you-get-x": "You get {{number}}%",
   "create": {
     "title": "Create new service",
+    "action": "Create service",
     "service-type": "Service type",
     "service-name": "Service name",
     "base-currency": "Base Currency",

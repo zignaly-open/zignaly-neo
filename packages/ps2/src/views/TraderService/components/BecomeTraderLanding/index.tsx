@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Typography, ZigButton } from '@zignaly-open/ui';
 import {
@@ -99,6 +99,13 @@ const BecomeTraderLanding: React.FC = () => {
       image: 'split-profits.png',
     },
   ];
+
+  useEffect(() => {
+    showModal(CreateServiceModal, {
+      ctaId: 'create-service',
+    });
+  }, []);
+
   const onClickCreateService = () => {
     if (isAuthenticated) {
       showModal(CreateServiceModal, {
