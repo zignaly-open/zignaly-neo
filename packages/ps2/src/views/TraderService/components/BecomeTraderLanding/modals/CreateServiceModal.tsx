@@ -18,13 +18,8 @@ function CreateServiceModal({
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation('service');
   const { isLoading } = useExchangeCoinsList();
-  const [step, setStep] = useState(1);
-  const [service, setService] = useState<Partial<ServiceFormData>>({
-    serviceName: 'sdfvjsdfvjsdfv sdfvsdfv',
-    baseCurrency: 'USDT',
-    serviceType: 'spot',
-    successFee: 12,
-  });
+  const [step, setStep] = useState(0);
+  const [service, setService] = useState<Partial<ServiceFormData>>({});
   const { isFetching } = useCurrentBalance(service.baseCurrency);
 
   return (

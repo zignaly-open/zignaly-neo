@@ -61,7 +61,7 @@ const InvestInYourServiceForm: React.FC<{
     <form onSubmit={handleSubmit(onSubmit)}>
       <InvestorDetailsForService
         service={{
-          successFee: service.successFee.toString(),
+          successFee: service.successFee?.toString(),
           serviceName: service.serviceName,
         }}
       />
