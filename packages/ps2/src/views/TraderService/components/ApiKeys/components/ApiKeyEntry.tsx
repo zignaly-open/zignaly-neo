@@ -22,11 +22,17 @@ import {
 import EditApiKey from '../modals/EditApiKey';
 import { useServiceApiKeyDeleteMutation } from '../../../../../apis/serviceApiKey/api';
 import { useCheck2FA } from '../../../../../apis/user/use';
-import { ServiceApiKey } from '../../../../../apis/serviceApiKey/types';
+import {
+  ServiceApiKey,
+  ServiceApiKeyDeletePayload,
+} from '../../../../../apis/serviceApiKey/types';
+import { useRefetchIfDesynchronizedState } from '../../../../../apis/serviceApiKey/use';
+import { BackendErrorResponse } from '../../../../../util/errors';
 
 const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
   const { t, i18n } = useTranslation(['management', 'actions']);
   const { serviceId } = useParams();
+  const refetchIfDesyncronized = useRefetchIfDesynchronizedState();
   const { showModal } = useZModal();
   const askConfirm = useZTypeWordConfirm();
   const toast = useToast();
@@ -34,6 +40,11 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
   const delete2FA = useCheck2FA({
     status: deleteStatus,
   });
+
+  const handleDeleteWrapper = async (args: ServiceApiKeyDeletePayload) => {
+    const result = await deleteKey(args);
+    'error' in result && refetchIfDesyncronized(result as BackendErrorResponse);
+  };
 
   return (
     <ApiKey>
@@ -109,7 +120,7 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
                 description: t('api-keys.delete-description'),
                 yesAction: () => {
                   delete2FA((code) =>
-                    deleteKey({ serviceId, keyId: apiKey.id, code }),
+                    handleDeleteWrapper({ serviceId, keyId: apiKey.id, code }),
                   );
                 },
               })

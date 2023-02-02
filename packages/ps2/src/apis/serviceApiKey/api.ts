@@ -1,5 +1,9 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { ServiceApiKey, ServiceApiKeyPayload } from './types';
+import {
+  ServiceApiKey,
+  ServiceApiKeyDeletePayload,
+  ServiceApiKeyPayload,
+} from './types';
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
@@ -13,10 +17,7 @@ export const api = createApi({
         url: `services/${serviceId}/api_keys`,
       }),
     }),
-    serviceApiKeyDelete: builder.mutation<
-      never,
-      { serviceId: string; keyId: string; code?: string }
-    >({
+    serviceApiKeyDelete: builder.mutation<never, ServiceApiKeyDeletePayload>({
       invalidatesTags: (result) => (result ? ['ServiceApiKey'] : []),
       query: ({ serviceId, keyId, code }) => ({
         method: 'DELETE',
@@ -54,4 +55,5 @@ export const {
   useServiceApiKeyDeleteMutation,
   useServiceApiKeyEditMutation,
   useServiceApiKeysQuery,
+  useLazyServiceApiKeysQuery,
 } = api;
