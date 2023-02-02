@@ -41,6 +41,7 @@ function InputCode({
         className={"input-box"}
         fields={fields}
         loading={loading}
+        disabled={loading}
         autoFocus={autoFocus}
         onComplete={onComplete}
       />

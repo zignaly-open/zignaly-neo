@@ -739,11 +739,6 @@ const GlobalStyle = createGlobalStyle`
       transform: rotate(360deg);
     }
   }
-
-  .grecaptcha-badge {
-    visibility: hidden;
-  }
-
 `;
 
 export default GlobalStyle;

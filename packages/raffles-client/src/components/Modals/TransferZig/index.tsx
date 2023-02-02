@@ -1,50 +1,45 @@
 import { Box, useMediaQuery } from '@mui/material';
 import { useEthers, useTokenBalance } from '@usedapp/core';
 import useContract from 'hooks/useContract';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import theme from 'theme';
 import {
   Button,
-  InputAmount,
+  InputAmountAdvanced,
   TextButton,
   Typography,
-  ZignalyIcon,
 } from '@zignaly-open/ui';
 import { Gap } from '../ConnectWallet/styles';
 import DialogContainer from '../DialogContainer';
 import { Container, InputContainer, StyledErrorOutline } from './styles';
-import { TransferZigModalProps } from './types';
+import { TransferZigModalProps, ITransferField } from './types';
 import SwitchNetworkModal from '../SwitchNetwork';
-
-function setReactInputValue(input: HTMLInputElement, value: string) {
-  const previousValue = input.value;
-
-  // eslint-disable-next-line no-param-reassign
-  input.value = value;
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const tracker = (input as any)._valueTracker;
-  if (tracker) {
-    tracker.setValue(previousValue);
-  }
-
-  // 'change' instead of 'input', see https://github.com/facebook/react/issues/11488#issuecomment-381590324
-  input.dispatchEvent(new Event('change', { bubbles: true }));
-}
+import { SubmitHandler, useForm } from 'react-hook-form';
 
 const TransferZigModal = (props: TransferZigModalProps) => {
   const { t } = useTranslation('transfer-zig');
-  const [transferAmount, setTransferAmount] = useState('');
   const address: string = process.env.REACT_APP_RECEIVING_ADDRESS as string;
   const token = process.env.REACT_APP_CONTRACT_ADDRESS as string;
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const { account, activateBrowserWallet, chainId } = useEthers();
-  const inputRef = useRef<HTMLInputElement>();
 
   const balance = useTokenBalance(token, account);
   const { isLoading, isError, transfer, isSuccess } = useContract({
     address: address,
+  });
+
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors, isDirty },
+    watch,
+    reset,
+  } = useForm<ITransferField>({
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    criteriaMode: 'all',
   });
 
   useEffect(() => {
@@ -54,11 +49,10 @@ const TransferZigModal = (props: TransferZigModalProps) => {
     }
   }, [account, address]);
 
-  const handleTransfer = async () => {
-    await transfer(transferAmount);
-    // Temporary Hack to clear the input since it's not controlled...
-    setReactInputValue(inputRef.current, '');
-    setTransferAmount('');
+  const watchAmount = watch('amount');
+  const handleTransfer: SubmitHandler<ITransferField> = async ({ amount }) => {
+    await transfer(amount.value);
+    reset();
   };
 
   if (!chainId) {
@@ -85,37 +79,64 @@ const TransferZigModal = (props: TransferZigModalProps) => {
             </Trans>
           </Typography>
           <Gap gap={15} />
-          <InputContainer width={matchesSmall ? 350 : null}>
-            <InputAmount
-              ref={inputRef}
-              label={''}
-              value={transferAmount}
-              showMaxButton={true}
-              customCoinIcon={<ZignalyIcon width={32} height={32} />}
-              // TODO: we should fix types in @zignaly-open/ui
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              onChange={(e: any) => {
-                setTransferAmount(e.target.value);
-              }}
-              tokens={[
-                {
-                  id: 'Zig',
-                  balance: balance?.toString(),
-                },
-              ]}
-            />
-          </InputContainer>
-          <Gap gap={8} />
-          <Box display='flex' flexDirection='row'>
-            <Button
-              size={matchesSmall ? 'xlarge' : 'large'}
-              caption={t('button')}
-              minWidth={matchesSmall ? 350 : 260}
-              disabled={!transferAmount}
-              onClick={handleTransfer}
-              loading={isLoading}
-            />
-          </Box>
+          <form onSubmit={handleSubmit(handleTransfer)}>
+            <InputContainer width={matchesSmall ? 350 : null}>
+              <InputAmountAdvanced
+                label={''}
+                value={''}
+                control={control}
+                placeholder={'0.0'}
+                labelBalance={t('label-balance')}
+                error={
+                  (isDirty &&
+                    errors.amount?.types?.checkNumber &&
+                    t('errors.error-number')) ||
+                  (isDirty &&
+                    errors.amount?.types?.checkEmpty &&
+                    t('errors.error-empty')) ||
+                  (isDirty &&
+                    errors.amount?.types?.checkMax &&
+                    t('errors.error-max')) ||
+                  (isDirty &&
+                    errors.amount?.types?.checkZero &&
+                    t('errors.error-zero')) ||
+                  (isDirty &&
+                    errors.amount?.types?.checkDecimals &&
+                    t('errors.error-decimals'))
+                }
+                {...register('amount', {
+                  validate: {
+                    checkDecimals: (state) =>
+                      state?.value?.toString().includes('.')
+                        ? state?.value?.toString().split('.').pop().length <= 8
+                        : true,
+                    checkMax: (state) =>
+                      balance.toNumber() >= Number(state?.value),
+                    checkZero: (state) => Number(state?.value) > 0,
+                    checkEmpty: (state) => state?.value.toString() != '',
+                    checkNumber: (state) => !isNaN(Number(state?.value)),
+                  },
+                })}
+                tokens={[
+                  {
+                    id: 'Zig',
+                    balance: balance?.toString(),
+                  },
+                ]}
+              />
+            </InputContainer>
+            <Gap gap={8} />
+            <Box display='flex' flexDirection='row'>
+              <Button
+                size={matchesSmall ? 'xlarge' : 'large'}
+                caption={t('button')}
+                minWidth={matchesSmall ? 350 : 260}
+                disabled={!watchAmount || !!errors.amount}
+                loading={isLoading}
+                type={'submit'}
+              />
+            </Box>
+          </form>
           <Gap gap={8} />
           {isError && (
             <Typography

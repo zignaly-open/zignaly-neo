@@ -70,6 +70,7 @@ export type Exchange = {
   globalWhitelist: boolean;
   isBrokerAccount: boolean;
   activated: boolean;
+  createdAt: string;
 };
 
 export type SignupResponse = {
@@ -82,6 +83,7 @@ export type SignupPayload = {
   password: string;
   newPageAB?: boolean;
   ref?: string;
+  subtrack?: string;
 };
 
 export type LoginResponse = {
@@ -95,11 +97,6 @@ export type LoginResponse = {
 export type LoginPayload = {
   email: string;
   password: string;
-};
-
-export type LoginFullPayload = LoginPayload & {
-  gRecaptchaResponse: string;
-  c: number;
 };
 
 export type SessionResponse = {
