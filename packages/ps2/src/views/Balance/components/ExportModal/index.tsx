@@ -36,7 +36,7 @@ function ExportModal({
           onClick={() =>
             exportCsv({
               exchangeInternalId: internalId,
-              days: differenceInDays(new Date(createdAt), new Date()) + 1,
+              days: differenceInDays(new Date(), new Date(createdAt)) + 1,
             }).then(() => {
               toast.success(t('export.success'));
               close();
