@@ -38,12 +38,7 @@ const CreateServiceForm: React.FC<{
     watch,
     register,
     formState: { errors },
-  } = useForm<{
-    serviceType: ExchangeType;
-    serviceName: string;
-    baseCurrency: string;
-    successFee: number;
-  }>({
+  } = useForm<ServiceFormData>({
     mode: 'onTouched',
     reValidateMode: 'onBlur',
     resolver: yupResolver(CreateServiceValidation),

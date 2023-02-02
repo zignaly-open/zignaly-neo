@@ -188,3 +188,12 @@ export type EditServicePayload = {
   logo: string;
   level: TraderServiceAccessLevel;
 };
+
+export type CreateServicePayload = {
+  amount: number;
+  name: string;
+  ssc: string;
+  type: string;
+  exchangeInternalId: string;
+  successFee: number;
+};

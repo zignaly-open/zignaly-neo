@@ -8,6 +8,7 @@ import CenteredLoader from '../../../../../components/CenteredLoader';
 import InvestInYourServiceForm from './forms/InvestInYourServiceForm';
 import CreateServiceForm from './forms/CreateServiceForm';
 import { ServiceFormData } from './forms/types';
+import { useCurrentBalance } from '../../../../../apis/investment/use';
 
 function CreateServiceModal({
   close,
@@ -17,8 +18,14 @@ function CreateServiceModal({
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation('service');
   const { isLoading } = useExchangeCoinsList();
-  const [step, setStep] = useState(0);
-  const [service, setService] = useState<Partial<ServiceFormData>>({});
+  const [step, setStep] = useState(1);
+  const [service, setService] = useState<Partial<ServiceFormData>>({
+    serviceName: 'sdfvjsdfvjsdfv sdfvsdfv',
+    baseCurrency: 'USDT',
+    serviceType: 'spot',
+    successFee: 12,
+  });
+  const { isFetching } = useCurrentBalance(service.baseCurrency);
 
   return (
     <ZModal
@@ -34,24 +41,18 @@ function CreateServiceModal({
         step === 1 ? t('create.invest-in-your-service') : t('create.title')
       }
     >
-      {isLoading && <CenteredLoader />}
+      {(isLoading || (isFetching && step === 1)) && <CenteredLoader />}
       {!isLoading && step === 0 && (
         <CreateServiceForm
           service={service}
           onSubmit={(s) => {
-            alert();
             setStep(1);
             setService(s);
           }}
         />
       )}
-      {!isLoading && step === 1 && (
-        <InvestInYourServiceForm
-          service={service as ServiceFormData}
-          onSubmit={(s) => {
-            setService(s);
-          }}
-        />
+      {!isLoading && !isFetching && step === 1 && (
+        <InvestInYourServiceForm service={service as ServiceFormData} />
       )}
     </ZModal>
   );

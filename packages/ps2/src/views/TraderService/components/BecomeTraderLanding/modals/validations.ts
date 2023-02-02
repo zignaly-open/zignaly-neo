@@ -3,6 +3,7 @@ import {
   serviceNameValidation,
   successFeeValidation,
 } from '../../EditServiceProfileContainer/validations';
+import { inputAmountTokenMaxValidation } from '../../../../../util/validation';
 
 export const CreateServiceValidation = yup
   .object({
@@ -10,5 +11,11 @@ export const CreateServiceValidation = yup
     serviceName: serviceNameValidation,
     successFee: successFeeValidation,
     baseCurrency: yup.string().required('error:error.required'),
+  })
+  .required();
+
+export const InvestInYourServiceValidation = yup
+  .object({
+    amountToInvest: inputAmountTokenMaxValidation,
   })
   .required();

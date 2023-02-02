@@ -1,187 +1,119 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  ErrorMessage,
+  InputAmountAdvanced,
+  SliderInput,
   ZigButton,
-  ZigButtonGroupInput,
-  ZigInput,
-  ZigSelect,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
-import { CreateServiceValidation } from '../validations';
-import CoinOption, {
-  filterOptions,
-} from '../../../../../Dashboard/components/ManageInvestmentModals/forms/atoms/CoinOption';
-import { allowedDeposits } from '../../../../../../util/coins';
-import { useExchangeCoinsList } from '../../../../../../apis/coin/use';
-import { Box, ButtonProps, InputAdornment, Tooltip } from '@mui/material';
-import { ZigButtonGroupInputWrapper } from '../atoms';
-import SuccessFeeInputWrapper from './SuccessFeeInputWrapper';
-import { ExchangeType } from '../../../../../../apis/user/types';
-import { ServiceFormData } from './types';
+import { InvestInYourServiceValidation } from '../validations';
+import { Box, Grid } from '@mui/material';
+import { ServiceFormData, ServiceInvestType } from './types';
+import InvestorDetailsForService from '../../../../../Dashboard/components/ManageInvestmentModals/views/InvestorDetailsForService';
+import { useCurrentBalance } from '../../../../../../apis/investment/use';
+import { CreateServicePayload } from '../../../../../../apis/service/types';
+import { useCreateTraderServiceMutation } from '../../../../../../apis/service/api';
+import { useActiveExchange } from '../../../../../../apis/user/use';
 
 const InvestInYourServiceForm: React.FC<{
   service?: ServiceFormData;
-  onSubmit: (service: ServiceFormData) => void;
-}> = ({ service, onSubmit }) => {
-  const { t } = useTranslation('service');
-  const { data: coins } = useExchangeCoinsList();
-  const isLoading = false;
-
+}> = ({ service }) => {
+  const { t } = useTranslation(['service', 'edit-investment']);
+  const coin = useCurrentBalance(service.baseCurrency);
+  const exchange = useActiveExchange();
+  const [createService, { isLoading }] = useCreateTraderServiceMutation();
   const {
     handleSubmit,
     control,
-    setValue,
-    watch,
-    register,
     formState: { errors },
-  } = useForm<{
-    serviceType: ExchangeType;
-    serviceName: string;
-    baseCurrency: string;
-    successFee: number;
-  }>({
+  } = useForm<ServiceInvestType>({
     mode: 'onTouched',
     reValidateMode: 'onBlur',
-    resolver: yupResolver(CreateServiceValidation),
-    defaultValues: service || {
-      serviceName: '',
-      baseCurrency: '',
+    resolver: yupResolver(InvestInYourServiceValidation),
+    defaultValues: {
+      profitPercentage: 30,
+      amountToInvest: {
+        value: '',
+        token: coin,
+      },
     },
   });
 
-  const exchangeType = watch('serviceType');
-
-  const coinOptions = useMemo(
-    () =>
-      exchangeType
-        ? allowedDeposits[exchangeType]?.map((ssc: string) => {
-            const name = coins[ssc]?.name || '';
-            return {
-              value: ssc,
-              name,
-              label: <CoinOption coin={ssc} name={name} />,
-            };
-          })
-        : [],
-    [exchangeType],
-  );
-
-  const serviceTypes = useMemo(
-    () => [
-      {
-        value: 'spot',
-        label: t(`create.types.spot`),
-        extraProps: {
-          size: 'large' as ButtonProps['size'],
-          sx: { width: '50%' },
-        },
-      },
-      {
-        value: 'futures',
-        label: t(`create.types.futures`),
-        extraProps: {
-          size: 'large' as ButtonProps['size'],
-          sx: { width: '50%' },
-        },
-      },
-    ],
-    [t],
-  );
-
-  register('serviceType');
+  const onSubmit = ({
+    amountToInvest,
+    profitPercentage,
+  }: ServiceInvestType) => {
+    createService({
+      name: service.serviceName,
+      type: service.serviceType.toLocaleUpperCase(),
+      amount: amountToInvest.value,
+      ssc: service.baseCurrency,
+      successFee: service.successFee,
+      exchangeInternalId: exchange.internalId,
+      profitPercentage,
+    } as CreateServicePayload);
+  };
 
   // Service Type Base currency Service name Success fee
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <ZigButtonGroupInputWrapper sx={{ mb: 2 }}>
-        <ZigButtonGroupInput
-          value={exchangeType}
-          options={serviceTypes}
-          error={t(errors.serviceType?.message)}
-          onChange={(v) => setValue('serviceType', v as ExchangeType)}
-          label={t('create.service-type')}
-        />
-      </ZigButtonGroupInputWrapper>
-
-      <Controller
-        name='baseCurrency'
-        control={control}
-        rules={{ required: true }}
-        render={({ field }) => (
-          <Tooltip title={!exchangeType ? t('create.select-type-first') : ''}>
-            <Box>
-              <ZigSelect
-                disabled={!exchangeType}
-                id={'create-service__base-currency'}
-                menuPlacement='auto'
-                menuShouldScrollIntoView={false}
-                menuPosition='fixed'
-                menuShouldBlockScroll
-                label={t('create.base-currency')}
-                placeholder={t('create.base-currency')}
-                options={coinOptions}
-                filterOption={filterOptions}
-                {...field}
-              />
-            </Box>
-          </Tooltip>
-        )}
+      <InvestorDetailsForService
+        service={{
+          successFee: service.successFee.toString(),
+          serviceName: service.serviceName,
+        }}
       />
 
-      <Controller
-        name='serviceName'
-        control={control}
-        rules={{ required: true }}
-        render={({ field }) => (
-          <ZigInput
-            sx={{
-              mt: 2,
-              mb: 2,
-            }}
-            wide
-            id={'create-service__service-name'}
-            label={t('create.service-name') + ':'}
-            placeholder={t('create.service-name')}
-            disabled={isLoading}
-            error={t(errors.serviceName?.message)}
-            {...field}
+      <Grid container spacing={5}>
+        <Grid item xs={12} md={6}>
+          <InputAmountAdvanced
+            name={'amountToInvest'}
+            control={control}
+            label={
+              <div>
+                {t('edit-investment:form.inputAmount.label')}
+                <ZigTypography variant='h4' color='neutral400'>
+                  {t('create.minimum-balance')}
+                </ZigTypography>
+              </div>
+            }
+            labelBalance={t('edit-investment:form.inputAmount.labelBalance')}
+            showUnit={true}
+            placeholder={'0.0'}
+            tokens={[service.baseCurrency]}
+            error={t(errors?.amountToInvest?.value?.message)}
           />
-        )}
-      />
-
-      <Controller
-        name='successFee'
-        control={control}
-        render={({ field }) => (
-          <SuccessFeeInputWrapper value={watch('successFee') || 0}>
-            <ZigInput
-              type='number'
-              InputProps={{
-                endAdornment: <InputAdornment position='end'>%</InputAdornment>,
-              }}
-              sx={{
-                mb: 2,
-              }}
-              fullWidth
-              label={
-                <div>
-                  {t('summary.success-fee')}
-                  <ZigTypography variant='h4' color='neutral400'>
-                    {t('edit.success-fee-desc')}
-                  </ZigTypography>
-                </div>
-              }
-              error={t(errors.successFee?.message)}
-              {...field}
-            />
-          </SuccessFeeInputWrapper>
-        )}
-      />
-
-      <ErrorMessage text={t('create.please-verify')} yellow />
+        </Grid>
+        <Grid item xs={12} md={6}>
+          <Controller
+            name='profitPercentage'
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <SliderInput
+                mode={'range'}
+                labels={{
+                  top: (
+                    <div>
+                      {t('edit-investment:form.profits.title')}
+                      <ZigTypography variant='h4' color='neutral400'>
+                        {t('create.profits-explainer')}
+                      </ZigTypography>
+                    </div>
+                  ),
+                  left: t('edit-investment:form.profits.left'),
+                  right: t('edit-investment:form.profits.right'),
+                }}
+                value={field.value}
+                initialValue={field.value}
+                onChange={field.onChange}
+              />
+            )}
+          />
+        </Grid>
+      </Grid>
 
       <Box sx={{ textAlign: 'center', mt: 2 }}>
         <ZigButton
