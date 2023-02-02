@@ -169,6 +169,17 @@ export const generateService = (user: ContextUser) => {
     }
   };
 
+  const verifyEmail = (userId: number) => {
+    return User.update(
+      { emailVerified: true },
+      {
+        where: {
+          id: userId,
+        },
+      },
+    );
+  };
+
   return {
     me,
     balance,
@@ -178,5 +189,6 @@ export const generateService = (user: ContextUser) => {
     authenticate,
     updateProfile,
     getOrCreateUser,
+    verifyEmail,
   };
 };

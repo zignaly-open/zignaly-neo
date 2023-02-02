@@ -64,6 +64,10 @@ export class User extends Model {
   @Default(false)
   @Column
   public isAdmin: boolean;
+
+  @Default(false)
+  @Column
+  public emailVerified: boolean;
 }
 
 export function generateUserNonce(): number {
