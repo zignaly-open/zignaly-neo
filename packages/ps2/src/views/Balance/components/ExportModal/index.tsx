@@ -11,6 +11,7 @@ import { differenceInDays } from 'date-fns';
 
 function ExportModal({
   close,
+  type,
   ...props
 }: ExportModalProps): React.ReactElement {
   const { t } = useTranslation('transactions-history');
@@ -35,6 +36,7 @@ function ExportModal({
           onClick={() =>
             exportCsv({
               exchangeInternalId: internalId,
+              type,
               days: differenceInDays(new Date(), new Date(createdAt)) + 1,
             }).then(() => {
               toast.success(t('export.success'));
