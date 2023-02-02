@@ -83,7 +83,9 @@ const MyBalances: React.FC = () => {
                     rightElement={<Add sx={{ color: 'links' }} />}
                     caption={t('action:export')}
                     onClick={() => {
-                      showModal(ExportModal, {});
+                      showModal(ExportModal, {
+                        type: type !== 'all' ? type : null,
+                      });
                     }}
                   />
                   <StyledZigSelect

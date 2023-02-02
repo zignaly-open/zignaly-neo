@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { api } from './api';
 import { GraphChartType, GraphTimeframe, ServiceState } from './types';
 
 const initialState: ServiceState = {
@@ -20,16 +19,6 @@ export const serviceSlice = createSlice({
     setChartTimeframe: (state, action: PayloadAction<GraphTimeframe>) => {
       state.chartTimeframe = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      api.endpoints.traderServices.matchFulfilled,
-      (state, { payload }) => {
-        // we need this to be able to access this syncronously
-        // if we invalidate caches or smth
-        state.traderServices = payload;
-      },
-    );
   },
 });
 

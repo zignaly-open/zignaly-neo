@@ -14,5 +14,13 @@
     "not-enough-info": "You don't have enough ZIGs to bid!",
     "buy-info": "To see where to buy ZIGs, check <0>this article.<0>",
     "unlock": "Unlock MetaMask to continue",
-    "unlock-info": "Check the MetaMask extension icon in your browser to unlock your wallet."
+    "unlock-info": "Check the MetaMask extension icon in your browser to unlock your wallet.",
+    "errors": {
+        "error-decimals": "Please enter numbers with no more than 8 decimal places.",
+        "error-max": "Insufficient funds",
+        "error-zero": "Should be > 0",
+        "error-empty": "You must indicate an amount",
+        "error-number": "Invalid value"
+    },
+    "label-balance": "Available:"
 }

@@ -33,6 +33,8 @@ import { useServiceApiKeyEditMutation } from '../../../../../apis/serviceApiKey/
 import { BooleanString, EditApiKeyFormType } from '../types';
 import { formTypeToBackendPayloadType } from '../util';
 import { useCheck2FA } from '../../../../../apis/user/use';
+import { useRefetchIfDesynchronizedState } from '../../../../../apis/serviceApiKey/use';
+import { BackendErrorResponse } from '../../../../../util/errors';
 
 function EditApiKeysModal({
   close,
@@ -47,6 +49,7 @@ function EditApiKeysModal({
   const { t } = useTranslation(['management']);
   const toast = useToast();
   const [updateApiKey, status] = useServiceApiKeyEditMutation();
+  const refetchIfDesyncronized = useRefetchIfDesynchronizedState(serviceId);
   const { isLoading } = status;
   const edit2FA = useCheck2FA({
     status,
@@ -96,6 +99,8 @@ function EditApiKeysModal({
       if (!('error' in result)) {
         toast.success(t('common:changes-saved'));
         close();
+      } else {
+        refetchIfDesyncronized(result as BackendErrorResponse);
       }
     });
   };
