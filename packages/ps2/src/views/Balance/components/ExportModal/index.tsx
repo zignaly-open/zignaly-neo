@@ -7,8 +7,7 @@ import { useTransactionsHistoryCsvMutation } from 'apis/coin/api';
 import { useActiveExchange } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
 import { ExportModalProps } from './types';
-import { differenceInDays, subDays } from 'date-fns';
-import { Data } from '../BalanceAccountSelector/styles';
+import { differenceInDays } from 'date-fns';
 
 function ExportModal({
   close,
