@@ -3,6 +3,10 @@ on:
   push:
     branches:
       - test
+  workflow_run:
+    workflows: ["Auto-merge into test"]
+    types:
+      - completed
 
 jobs:
   pre_job:
