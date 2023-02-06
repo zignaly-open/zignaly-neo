@@ -22,5 +22,5 @@
         "error-empty": "You must indicate an amount",
         "error-number": "Invalid value"
     },
-    "label-balance": "Available:"
+    "label-balance": "Balance:"
 }
