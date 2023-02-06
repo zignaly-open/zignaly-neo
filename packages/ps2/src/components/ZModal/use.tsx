@@ -22,7 +22,7 @@ export function useZModal(options?: UseModalOptions) {
       const modal: ShowFnOutput<void> = showModal(Component, {
         ...modalProps,
         close: () => {
-          track({ userId });
+          trackId && track({ userId });
           modal.destroy();
         },
       });
