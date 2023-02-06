@@ -6,7 +6,7 @@ import {
   Service,
 } from '../../../../../apis/service/types';
 import {
-  ZigButton,
+  ZigButtonGroupInput,
   ZigChart,
   ZigPriceLabel,
   ZigSelect,
@@ -16,8 +16,8 @@ import { Box } from '@mui/material';
 import {
   ChartWrapper,
   GraphPercentageWrapperBox,
-  SqueezedButtonGroup,
   SelectWrapperBox,
+  SqueezedButtonGroupWrapper,
 } from '../styles';
 import { useChartConfig, useChartData } from '../../../../../apis/service/use';
 import Stub from '../../../../../components/Stub';
@@ -166,34 +166,31 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
         )}
 
         <Box sx={{ flex: 1 }} />
-        <Box sx={{ mr: 2 }}>
-          <SqueezedButtonGroup variant={'outlined'}>
-            {Object.keys(GraphTimeframe).map((v: GraphTimeframe, i, all) => {
-              const isDisabled =
-                i > 0 &&
-                GraphTimeframeDayLength[v] > 30 &&
-                GraphTimeframeDayLength[all[i - 1]] > serviceStartedDaysAgo;
+        <SqueezedButtonGroupWrapper sx={{ mr: 2 }}>
+          <ZigButtonGroupInput
+            options={Object.keys(GraphTimeframe).map(
+              (v: GraphTimeframe, i, all) => {
+                const isDisabled =
+                  i > 0 &&
+                  GraphTimeframeDayLength[v] > 30 &&
+                  GraphTimeframeDayLength[all[i - 1]] > serviceStartedDaysAgo;
 
-              return (
-                <ZigButton
-                  active={v === chartTimeframe}
-                  size={'small'}
-                  variant={'outlined'}
-                  key={v}
-                  disabled={isDisabled}
-                  tooltip={
-                    isDisabled
+                return {
+                  value: v,
+                  label: t(`periods.${v}`),
+                  extraProps: {
+                    size: 'small',
+                    tooltip: isDisabled
                       ? t('service:not-enough-data')
-                      : t(`periods.${v}-full`)
-                  }
-                  onClick={() => setChartTimeframe(v)}
-                >
-                  {t(`periods.${v}`)}
-                </ZigButton>
-              );
-            })}
-          </SqueezedButtonGroup>
-        </Box>
+                      : t(`periods.${v}-full`),
+                  },
+                };
+              },
+            )}
+            value={chartTimeframe}
+            onChange={(v: GraphTimeframe) => setChartTimeframe(v)}
+          />
+        </SqueezedButtonGroupWrapper>
         <SelectWrapperBox>
           <ZigSelect
             outlined

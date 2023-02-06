@@ -44,7 +44,8 @@
     }
   },
   "navigation-menu": {
-    "profit-sharing": "Profit Sharing"
+    "profit-sharing": "Profit Sharing",
+    "become-trader": "Offer your trading services"
   },
   "amount": "Amount",
   "percent": "{{value, prettyNumber}}%",
