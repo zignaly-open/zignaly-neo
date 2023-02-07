@@ -34,7 +34,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          branch: test
+          ref: test
       - name: Create client .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
