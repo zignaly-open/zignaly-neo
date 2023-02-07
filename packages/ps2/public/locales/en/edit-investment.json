@@ -18,6 +18,7 @@
     },
     "link": {
       "investMore": "Invest more",
+      "maxReached": "Maximum Balance allowed reached in the service",
       "withdraw": "Withdraw Investment"
     },
     "button": {
