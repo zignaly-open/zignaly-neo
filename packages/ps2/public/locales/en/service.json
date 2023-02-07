@@ -8,6 +8,7 @@
   "copy-link": "Copy link",
   "invest-button": {
     "invest-now": "INVEST",
+    "max-reached": "Maximum Funds Reached",
     "all-accounts": "See all ({{count}})",
     "x-success-fee": "{{fee}}% Success fee"
   },
@@ -23,6 +24,7 @@
   "summary": {
     "base-currency": "Base currency:",
     "funds-allocated": "Funds allocated:",
+    "no-max-limit": "No maximum funds limit",
     "success-fee": "Success fee:",
     "tags": "Tags:"
   },

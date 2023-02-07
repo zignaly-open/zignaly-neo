@@ -84,7 +84,9 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
           >
             {t('summary.funds-allocated')}{' '}
             <ZigTypography fontSize={12} color={'neutral200'}>
-              {t('common:percent', { value: +service.fundsAllocated })}
+              {service.maximumSbt === 1000000000
+                ? t('summary.no-max-limit')
+                : t('common:percent', { value: +service.fundsAllocated })}
             </ZigTypography>
           </ZigTypography>
           <ZigTypography
