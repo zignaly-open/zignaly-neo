@@ -69,7 +69,14 @@ function EditInvestmentForm({
       },
       profitPercentage: details?.profitPercentage,
     },
-    resolver: isInputEnabled ? yupResolver(EditInvestmentValidation) : null,
+    resolver: isInputEnabled
+      ? yupResolver(
+          EditInvestmentValidation({
+            max: service.maximumSbt - +service.invested,
+            coin: service.ssc,
+          }),
+        )
+      : null,
   });
 
   const toast = useToast();
