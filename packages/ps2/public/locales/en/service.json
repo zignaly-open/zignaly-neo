@@ -24,6 +24,7 @@
   "summary": {
     "base-currency": "Base currency:",
     "funds-allocated": "Funds allocated:",
+    "no-max-limit": "No maximum funds limit",
     "success-fee": "Success fee:",
     "tags": "Tags:"
   },
