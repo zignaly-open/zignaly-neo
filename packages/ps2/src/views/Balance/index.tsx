@@ -13,7 +13,7 @@ import BalanceAccountSelector from './components/BalanceAccountSelector';
 import { Header, StyledZigSelect } from './styles';
 import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
-import { Add } from '@mui/icons-material';
+import { OpenInNew } from '@mui/icons-material';
 import ExportModal from './components/ExportModal';
 import { useZModal } from 'components/ZModal/use';
 import { Box } from '@mui/material';
@@ -80,10 +80,12 @@ const MyBalances: React.FC = () => {
                 <Box display='flex' gap={2}>
                   <TextButton
                     id={'balance__export'}
-                    rightElement={<Add sx={{ color: 'links' }} />}
+                    rightElement={<OpenInNew sx={{ color: 'links' }} />}
                     caption={t('action:export')}
                     onClick={() => {
-                      showModal(ExportModal, {});
+                      showModal(ExportModal, {
+                        type: type !== 'all' ? type : null,
+                      });
                     }}
                   />
                   <StyledZigSelect

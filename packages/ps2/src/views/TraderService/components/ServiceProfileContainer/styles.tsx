@@ -1,4 +1,4 @@
-import { styled, css, Grid, ButtonGroup } from '@mui/material';
+import { styled, css, Grid } from '@mui/material';
 import muiStyled from '@emotion/styled';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { ZigTypography } from '@zignaly-open/ui';
@@ -211,7 +211,7 @@ export const GraphPercentageWrapperBox = styled(Box)`
   }
 `;
 
-export const SqueezedButtonGroup = styled(ButtonGroup)`
+export const SqueezedButtonGroupWrapper = styled(Box)`
   .MuiButton-root {
     min-width: 55px !important;
   }

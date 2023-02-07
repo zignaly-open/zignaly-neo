@@ -67,7 +67,7 @@
     "name": "Service Name:",
     "logo": "Edit Logo",
     "description": "Description:",
-    "success-fee-desc": "Amount of profits you will keep",
+    "success-fee-desc": "Amount of profits you will charge your investors (including 5% Zignaly fee)",
     "pool-size": "Maximum pool size:",
     "pool-size-desc": "Max you'll accept from investors",
     "visibility": {
@@ -87,5 +87,22 @@
       "name-length": "Must be between 5 and 50 characters",
       "success-fee-range": "Must be 0 or between 10% and 75%"
     }
+  },
+  "you-get-x": "You get {{number}}%",
+  "create": {
+    "invest-in-your-service": "Invest in your service",
+    "select-type-first": "Select a service type first",
+    "title": "Create new service",
+    "action": "Create service",
+    "service-type": "Service type",
+    "service-name": "Service name",
+    "base-currency": "Base Currency",
+    "types": {
+      "spot": "Spot",
+      "futures": "Futures"
+    },
+    "minimum-balance": "You need to invest a minimum balance in your service to be able to trade and, in the future, allow other investors to invest in your service.",
+    "profits-explainer": "Decide how much of your profits from trading and success fees you would like to request to transfer out automatically.",
+    "please-verify": "Please review your info. Type, base and name can't be changed later"
   }
 }
