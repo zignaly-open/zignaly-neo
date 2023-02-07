@@ -107,13 +107,6 @@ export const BigNumberWrapperInvested = styled('div')`
   }
 `;
 
-export const InvestButtonWrap = styled('div')`
-  text-align: center;
-  button > div {
-    height: 60px !important;
-  }
-`;
-
 export const BigNumberWrapper = styled('div')`
   & > div span {
     font-weight: 500;
@@ -149,11 +142,6 @@ export const MarkdownContainer = styled('div')`
     border-top: 0.5px dashed ${({ theme }) => theme.palette.neutral500};
     border-bottom-width: 0 !important;
   }
-`;
-
-export const InvestButtonSubtext: typeof ZigTypography = styled(ZigTypography)`
-  font-size: 12px;
-  line-height: 16px;
 `;
 
 export const GridWithBottomBorder = styled(Grid)`

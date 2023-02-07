@@ -8,6 +8,7 @@
   "copy-link": "Copy link",
   "invest-button": {
     "invest-now": "INVEST",
+    "max-reached": "Maximum Funds Reached",
     "all-accounts": "See all ({{count}})",
     "x-success-fee": "{{fee}}% Success fee"
   },
