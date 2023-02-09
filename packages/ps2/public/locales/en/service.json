@@ -87,7 +87,7 @@
     "save": "Save Profile",
     "validation": {
       "name-length": "Must be between 5 and 50 characters",
-      "success-fee-range": "Must be 0 or an integer between 10% and 75%"
+      "success-fee-range": "Must be 0 or an integer between 10 and 75"
     }
   },
   "you-get-x": "You get {{number}}%",
