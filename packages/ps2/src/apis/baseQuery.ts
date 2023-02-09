@@ -32,6 +32,7 @@ const baseQuery = (baseUrl = process.env.REACT_APP_BASE_API) =>
 
 const endpointsWhitelistedFor401 = [
   'user/verify_code/enable_user',
+  'user/verify_code/verify_email',
   `user/verify_2fa`,
   `known_device/verify`,
   `login`,

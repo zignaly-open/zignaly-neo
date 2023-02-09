@@ -106,7 +106,7 @@ export function useCurrentBalance(coin?: string): {
       id: coin || service?.ssc,
       balance: coins?.[coin || service?.ssc]?.balanceFree || '0',
     }),
-    [service?.ssc, coins],
+    [coin, service?.ssc, coins, isFetching],
   );
 }
 

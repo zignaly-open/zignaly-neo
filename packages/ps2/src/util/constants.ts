@@ -1,6 +1,6 @@
 export const TIME_TO_START_REFRESHING_TOKEN = 1800_000;
 export const INSTANT_WITHDRAWAL_FEE = 10;
-
+export const ZIGNALY_PROFIT_FEE = 5;
 export const ASCENDEX_URL =
   'https://ascendex.com/en-us/register?inviteCode=I180THP3';
 export const MEXC_URL = 'https://www.mexc.com/register?inviteCode=1DHh4';
