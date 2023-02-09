@@ -3,7 +3,10 @@ import {
   serviceNameValidation,
   successFeeValidation,
 } from '../../EditServiceProfileContainer/validations';
-import { inputAmountTokenMaxValidation } from '../../../../../util/validation';
+import {
+  inputAmountTokenDecimalsValidation,
+  inputAmountTokenMaxValidation,
+} from '../../../../../util/validation';
 
 export const CreateServiceValidation = yup
   .object({
@@ -16,6 +19,8 @@ export const CreateServiceValidation = yup
 
 export const InvestInYourServiceValidation = yup
   .object({
-    amountToInvest: inputAmountTokenMaxValidation,
+    amountToInvest: inputAmountTokenMaxValidation.concat(
+      inputAmountTokenDecimalsValidation,
+    ),
   })
   .required();
