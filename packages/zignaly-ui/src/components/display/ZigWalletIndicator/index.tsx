@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { utils } from "ethers";
+import { formatUnits } from "ethers/lib/utils";
 import { NumericFormat } from "react-number-format";
 import * as styled from "./styles";
 
@@ -16,7 +16,7 @@ const ZigWalletIndicator = ({
   const renderZigsCoins = useMemo(
     () => (
       <NumericFormat
-        value={utils.formatUnits((zigs || "0").toString())}
+        value={formatUnits((zigs || "0").toString())}
         displayType={"text"}
         thousandSeparator={true}
         renderText={(value) => (
