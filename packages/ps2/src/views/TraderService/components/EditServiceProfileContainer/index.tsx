@@ -25,6 +25,7 @@ import { generatePath, useNavigate } from 'react-router-dom';
 import { useUpdateEffect } from 'react-use';
 import { ROUTE_TRADING_SERVICE } from 'routes';
 import { useCurrentUser } from 'apis/user/use';
+import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessFeeInputWrapper';
 
 const getVisibility = (level: TraderServiceAccessLevel) => {
   if (level < TraderServiceAccessLevel.Private) {
@@ -52,6 +53,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   const {
     handleSubmit,
     control,
+    watch,
     formState: { errors },
     reset,
   } = useForm<EditServicePayload>({
@@ -174,44 +176,35 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
             )}
           />
           <Grid item container columnSpacing={6} rowSpacing={6}>
-            <Grid item md={6} sm={6} xs={12}>
+            <Grid item xs={12}>
               <Controller
                 name='successFee'
                 control={control}
                 render={({ field }) => (
-                  <ZigInput
-                    type='number'
-                    InputProps={{
-                      endAdornment: (
-                        <InputAdornment position='end'>%</InputAdornment>
-                      ),
-                    }}
-                    fullWidth
-                    label={
-                      <div>
-                        {t('summary.success-fee')}
-                        <ZigTypography variant='h4' color='neutral400'>
-                          {t('edit.success-fee-desc')}
-                        </ZigTypography>
-                      </div>
-                    }
-                    error={t(errors.successFee?.message)}
-                    {...field}
-                  />
+                  <SuccessFeeInputWrapper value={watch('successFee') || 0}>
+                    <ZigInput
+                      type='number'
+                      InputProps={{
+                        endAdornment: (
+                          <InputAdornment position='end'>%</InputAdornment>
+                        ),
+                      }}
+                      fullWidth
+                      label={
+                        <div>
+                          {t('summary.success-fee')}
+                          <ZigTypography variant='h4' color='neutral400'>
+                            {t('edit.success-fee-desc')}
+                          </ZigTypography>
+                        </div>
+                      }
+                      error={t(errors.successFee?.message)}
+                      {...field}
+                    />
+                  </SuccessFeeInputWrapper>
                 )}
               />
             </Grid>
-            <Grid
-              item
-              xs={12}
-              sm={6}
-              sx={{
-                display: {
-                  xs: 'none',
-                  sm: 'block',
-                },
-              }}
-            />
             {/* <Grid item xs={12} sm={6}>
               <Controller
                 name='maximumSbt'
