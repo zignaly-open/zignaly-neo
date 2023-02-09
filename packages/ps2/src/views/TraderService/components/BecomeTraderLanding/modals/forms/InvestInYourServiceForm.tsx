@@ -93,7 +93,10 @@ const InvestInYourServiceForm: React.FC<{
               <div>
                 {t('edit-investment:form.inputAmount.label')}
                 <ZigTypography variant='h4' color='neutral400'>
-                  {t('create.minimum-balance')}
+                  {t('create.minimum-balance', {
+                    minValue,
+                    minValueCoin: coin.id,
+                  })}
                 </ZigTypography>
               </div>
             }
