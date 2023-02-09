@@ -73,7 +73,6 @@ const InvestInYourServiceForm: React.FC<{
     }
   };
 
-  // Service Type Base currency Service name Success fee
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <InvestorDetailsForService
