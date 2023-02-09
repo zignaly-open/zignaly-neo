@@ -2,11 +2,10 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   InputAmountAdvanced,
-  SliderInput,
   ZigButton,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { InvestInYourServiceValidation } from '../validations';
 import { Grid } from '@mui/material';
@@ -38,7 +37,6 @@ const InvestInYourServiceForm: React.FC<{
     reValidateMode: 'onBlur',
     resolver: yupResolver(InvestInYourServiceValidation),
     defaultValues: {
-      profitPercentage: 30,
       amountToInvest: {
         value: '',
         token: coin,
@@ -46,10 +44,7 @@ const InvestInYourServiceForm: React.FC<{
     },
   });
 
-  const onSubmit = async ({
-    amountToInvest,
-    profitPercentage,
-  }: ServiceInvestType) => {
+  const onSubmit = async ({ amountToInvest }: ServiceInvestType) => {
     const result = await createService({
       name: service.serviceName,
       type: service.serviceType.toLocaleUpperCase(),
@@ -57,7 +52,6 @@ const InvestInYourServiceForm: React.FC<{
       ssc: service.baseCurrency,
       successFee: service.successFee,
       exchangeInternalId: exchange.internalId,
-      profitPercentage,
     } as CreateServicePayload);
 
     if ('data' in result) {
@@ -80,7 +74,7 @@ const InvestInYourServiceForm: React.FC<{
       />
 
       <Grid container spacing={5}>
-        <Grid item xs={12} md={6}>
+        <Grid item xs={12} md={12}>
           <InputAmountAdvanced
             name={'amountToInvest'}
             control={control}
@@ -98,34 +92,6 @@ const InvestInYourServiceForm: React.FC<{
             placeholder={'0.0'}
             tokens={[service.baseCurrency]}
             error={t(errors?.amountToInvest?.value?.message)}
-          />
-        </Grid>
-        <Grid item xs={12} md={6}>
-          <Controller
-            name='profitPercentage'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <SliderInput
-                mode={'range'}
-                disabled={isLoading}
-                labels={{
-                  top: (
-                    <div>
-                      {t('edit-investment:form.profits.title')}
-                      <ZigTypography variant='h4' color='neutral400'>
-                        {t('create.profits-explainer')}
-                      </ZigTypography>
-                    </div>
-                  ),
-                  left: t('edit-investment:form.profits.left'),
-                  right: t('edit-investment:form.profits.right'),
-                }}
-                value={field.value}
-                initialValue={field.value}
-                onChange={field.onChange}
-              />
-            )}
           />
         </Grid>
       </Grid>
