@@ -1,6 +1,11 @@
 import * as yup from 'yup';
-import { inputAmountTokenMaxValidation } from '../../../../util/validation';
+import {
+  inputAmountTokenMaxValidation,
+  inputAmountTokenDecimalsValidation,
+} from '../../../../util/validation';
 
 export const TransferModalValidation = yup.object({
-  amountValue: inputAmountTokenMaxValidation,
+  amountValue: inputAmountTokenMaxValidation.concat(
+    inputAmountTokenDecimalsValidation,
+  ),
 });
