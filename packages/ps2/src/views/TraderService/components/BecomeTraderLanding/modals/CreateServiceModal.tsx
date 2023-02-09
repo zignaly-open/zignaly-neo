@@ -49,8 +49,8 @@ function CreateServiceModal({
         <CreateServiceForm
           service={service}
           onSubmit={(s) => {
-            setStep(1);
             setService(s);
+            setStep(1);
           }}
         />
       )}
