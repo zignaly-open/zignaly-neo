@@ -166,6 +166,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
         )}
 
         <Box sx={{ flex: 1 }} />
+
         <SqueezedButtonGroupWrapper sx={{ mr: 2 }}>
           <ZigButtonGroupInput
             options={Object.keys(GraphTimeframe).map(
@@ -202,6 +203,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           />
         </SelectWrapperBox>
       </Box>
+
       <ChartWrapper>
         {isError ? (
           <Stub

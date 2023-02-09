@@ -41,20 +41,23 @@ const BecomeTraderLanding: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
   const navigate = useNavigate();
 
-  const infoBarItems: InfoBarItem[] = [
-    {
-      title: t('infoBar.item1.title'),
-      description: t('infoBar.item1.description'),
-    },
-    {
-      title: t('infoBar.item2.title'),
-      description: t('infoBar.item2.description'),
-    },
-    {
-      title: t('infoBar.item3.title'),
-      description: t('infoBar.item3.description'),
-    },
-  ];
+  const infoBarItems: InfoBarItem[] = useMemo(
+    () => [
+      {
+        title: t('infoBar.item1.title'),
+        description: t('infoBar.item1.description'),
+      },
+      {
+        title: t('infoBar.item2.title'),
+        description: t('infoBar.item2.description'),
+      },
+      {
+        title: t('infoBar.item3.title'),
+        description: t('infoBar.item3.description'),
+      },
+    ],
+    [t],
+  );
 
   const featuresItems: FeatureItem[] = useMemo(
     () => [
@@ -82,23 +85,26 @@ const BecomeTraderLanding: React.FC = () => {
     [t],
   );
 
-  const howWorksItems: HowWorksItem[] = [
-    {
-      title: t('howWorks.list.item1.title'),
-      description: t('howWorks.list.item1.description'),
-      image: 'pool-funds.png',
-    },
-    {
-      title: t('howWorks.list.item2.title'),
-      description: t('howWorks.list.item2.description'),
-      image: 'trade.png',
-    },
-    {
-      title: t('howWorks.list.item3.title'),
-      description: t('howWorks.list.item3.description'),
-      image: 'split-profits.png',
-    },
-  ];
+  const howWorksItems: HowWorksItem[] = useMemo(
+    () => [
+      {
+        title: t('howWorks.list.item1.title'),
+        description: t('howWorks.list.item1.description'),
+        image: 'pool-funds.png',
+      },
+      {
+        title: t('howWorks.list.item2.title'),
+        description: t('howWorks.list.item2.description'),
+        image: 'trade.png',
+      },
+      {
+        title: t('howWorks.list.item3.title'),
+        description: t('howWorks.list.item3.description'),
+        image: 'split-profits.png',
+      },
+    ],
+    [t],
+  );
 
   const onClickCreateService = () => {
     if (isAuthenticated) {
