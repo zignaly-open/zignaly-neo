@@ -12,7 +12,7 @@ const SuccessFeeInputWrapper: React.FC<{ value: number }> = ({
   const feeWeCharge = !value
     ? 0
     : Math.max(0, Math.min(75, value) - ZIGNALY_PROFIT_FEE);
-  // Service Type Base currency Service name Success fee
+
   return (
     <SuccessFieldWrapper>
       {children}

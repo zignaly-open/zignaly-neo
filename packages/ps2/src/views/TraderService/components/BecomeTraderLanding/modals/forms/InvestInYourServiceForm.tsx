@@ -73,7 +73,6 @@ const InvestInYourServiceForm: React.FC<{
     }
   };
 
-  // Service Type Base currency Service name Success fee
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <InvestorDetailsForService
@@ -93,7 +92,10 @@ const InvestInYourServiceForm: React.FC<{
               <div>
                 {t('edit-investment:form.inputAmount.label')}
                 <ZigTypography variant='h4' color='neutral400'>
-                  {t('create.minimum-balance')}
+                  {t('create.minimum-balance', {
+                    minValue,
+                    minValueCoin: coin.id,
+                  })}
                 </ZigTypography>
               </div>
             }
