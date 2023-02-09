@@ -9,7 +9,7 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { InvestInYourServiceValidation } from '../validations';
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 import { ServiceFormData, ServiceInvestType } from './types';
 import InvestorDetailsForService from '../../../../../Dashboard/components/ManageInvestmentModals/views/InvestorDetailsForService';
 import { useCurrentBalance } from '../../../../../../apis/investment/use';
@@ -18,10 +18,12 @@ import { useCreateTraderServiceMutation } from '../../../../../../apis/service/a
 import { useActiveExchange } from '../../../../../../apis/user/use';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE_MANAGE } from '../../../../../../routes';
+import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
 
 const InvestInYourServiceForm: React.FC<{
   service?: ServiceFormData;
-}> = ({ service }) => {
+  goBack: () => void;
+}> = ({ service, goBack }) => {
   const { t } = useTranslation(['service', 'edit-investment']);
   const coin = useCurrentBalance(service.baseCurrency);
   const exchange = useActiveExchange();
@@ -128,16 +130,26 @@ const InvestInYourServiceForm: React.FC<{
         </Grid>
       </Grid>
 
-      <Box sx={{ textAlign: 'center', mt: 2 }}>
+      <ModalActionsNew>
+        <ZigButton
+          id={'confirm__back'}
+          onClick={goBack}
+          variant='outlined'
+          size='large'
+        >
+          {t('common:back')}
+        </ZigButton>
+
         <ZigButton
           variant='contained'
           type='submit'
           loading={isLoading}
+          id={'create-service-modal__invest-and-create'}
           size='large'
         >
           {t('create.action')}
         </ZigButton>
-      </Box>
+      </ModalActionsNew>
     </form>
   );
 };

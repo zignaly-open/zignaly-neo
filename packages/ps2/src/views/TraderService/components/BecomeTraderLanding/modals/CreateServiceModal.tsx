@@ -28,9 +28,11 @@ function CreateServiceModal({
   const isLoading =
     isLoadingCoins || isCreating || (isLoadingBalances && step === 1);
 
+  const goBack = () => !isLoading && setStep(0);
+
   return (
     <ZModal
-      onGoBack={step === 1 && (() => !isLoading && setStep(0))}
+      onGoBack={step === 1 && goBack}
       onBackdropClick={(e) => {
         e.stopPropagation();
         return false;
@@ -53,7 +55,10 @@ function CreateServiceModal({
         />
       )}
       {!isLoading && step === 1 && (
-        <InvestInYourServiceForm service={service as ServiceFormData} />
+        <InvestInYourServiceForm
+          goBack={goBack}
+          service={service as ServiceFormData}
+        />
       )}
     </ZModal>
   );

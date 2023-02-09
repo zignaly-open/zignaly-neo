@@ -21,6 +21,7 @@ import { ZigButtonGroupInputWrapper } from '../atoms';
 import SuccessFeeInputWrapper from './SuccessFeeInputWrapper';
 import { ExchangeType } from '../../../../../../apis/user/types';
 import { ServiceFormData } from './types';
+import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
 
 const CreateServiceForm: React.FC<{
   service?: Partial<ServiceFormData>;
@@ -182,16 +183,17 @@ const CreateServiceForm: React.FC<{
 
       <ErrorMessage text={t('create.please-verify')} yellow />
 
-      <Box sx={{ textAlign: 'center', mt: 2 }}>
+      <ModalActionsNew>
         <ZigButton
           variant='contained'
           type='submit'
+          id={'create-service-modal__create-1st-step'}
           loading={isLoading}
           size='large'
         >
           {t('create.action')}
         </ZigButton>
-      </Box>
+      </ModalActionsNew>
     </form>
   );
 };
