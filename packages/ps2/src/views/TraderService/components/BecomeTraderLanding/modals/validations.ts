@@ -6,6 +6,7 @@ import {
 import {
   inputAmountTokenDecimalsValidation,
   inputAmountTokenMaxValidation,
+  inputAmountTokenMinValidation,
 } from '../../../../../util/validation';
 
 export const CreateServiceValidation = yup
@@ -19,8 +20,8 @@ export const CreateServiceValidation = yup
 
 export const InvestInYourServiceValidation = yup
   .object({
-    amountToInvest: inputAmountTokenMaxValidation.concat(
-      inputAmountTokenDecimalsValidation,
-    ),
+    amountToInvest: inputAmountTokenMaxValidation
+      .concat(inputAmountTokenDecimalsValidation)
+      .concat(inputAmountTokenMinValidation),
   })
   .required();

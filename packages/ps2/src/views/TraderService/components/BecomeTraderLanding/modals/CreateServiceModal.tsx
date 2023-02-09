@@ -9,7 +9,10 @@ import InvestInYourServiceForm from './forms/InvestInYourServiceForm';
 import CreateServiceForm from './forms/CreateServiceForm';
 import { ServiceFormData } from './forms/types';
 import { useCurrentBalance } from '../../../../../apis/investment/use';
-import { useCreateTraderServiceMutation } from '../../../../../apis/service/api';
+import {
+  useCreateTraderServiceMutation,
+  useGetServiceTypesInfoQuery,
+} from '../../../../../apis/service/api';
 
 function CreateServiceModal({
   close,
@@ -21,12 +24,16 @@ function CreateServiceModal({
   const { isLoading: isLoadingCoins } = useExchangeCoinsList();
   const [, { isLoading: isCreating }] = useCreateTraderServiceMutation();
   const [step, setStep] = useState(0);
+  const { isLoading: isLoadingServiceTypes } = useGetServiceTypesInfoQuery();
   const [service, setService] = useState<Partial<ServiceFormData>>({});
   const { isFetching: isLoadingBalances } = useCurrentBalance(
     service.baseCurrency,
   );
   const isLoading =
-    isLoadingCoins || isCreating || (isLoadingBalances && step === 1);
+    isLoadingCoins ||
+    isCreating ||
+    isLoadingServiceTypes ||
+    (isLoadingBalances && step === 1);
 
   const goBack = () => !isLoading && setStep(0);
 

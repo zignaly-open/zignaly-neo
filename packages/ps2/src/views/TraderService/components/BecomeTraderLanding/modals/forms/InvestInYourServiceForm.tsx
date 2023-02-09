@@ -13,7 +13,10 @@ import { ServiceFormData, ServiceInvestType } from './types';
 import InvestorDetailsForService from '../../../../../Dashboard/components/ManageInvestmentModals/views/InvestorDetailsForService';
 import { useCurrentBalance } from '../../../../../../apis/investment/use';
 import { CreateServicePayload } from '../../../../../../apis/service/types';
-import { useCreateTraderServiceMutation } from '../../../../../../apis/service/api';
+import {
+  useCreateTraderServiceMutation,
+  useGetServiceTypesInfoQuery,
+} from '../../../../../../apis/service/api';
 import { useActiveExchange } from '../../../../../../apis/user/use';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE_MANAGE } from '../../../../../../routes';
@@ -28,6 +31,10 @@ const InvestInYourServiceForm: React.FC<{
   const exchange = useActiveExchange();
   const navigate = useNavigate();
   const [createService, { isLoading }] = useCreateTraderServiceMutation();
+  const { data: serviceTypesInfo } = useGetServiceTypesInfoQuery();
+  const minValue =
+    serviceTypesInfo?.[service.serviceType]?.[service.baseCurrency]
+      ?.minimum_owner_balance || 0;
   const {
     handleSubmit,
     control,
@@ -39,7 +46,10 @@ const InvestInYourServiceForm: React.FC<{
     defaultValues: {
       amountToInvest: {
         value: '',
-        token: coin,
+        token: {
+          ...coin,
+          min: minValue,
+        },
       },
     },
   });
@@ -91,7 +101,10 @@ const InvestInYourServiceForm: React.FC<{
             showUnit={true}
             placeholder={'0.0'}
             tokens={[service.baseCurrency]}
-            error={t(errors?.amountToInvest?.value?.message)}
+            error={t(errors?.amountToInvest?.value?.message, {
+              minValue,
+              minValueCoin: coin.id,
+            })}
           />
         </Grid>
       </Grid>

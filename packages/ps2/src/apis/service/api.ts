@@ -11,6 +11,7 @@ import {
   TransferPayload,
   EditServicePayload,
   CreateServicePayload,
+  ServiceTypesInfo,
 } from './types';
 import baseQuery from '../baseQuery';
 import { providesList } from 'apis/util';
@@ -84,6 +85,11 @@ export const api = createApi({
         body: payload,
       }),
     }),
+    getServiceTypesInfo: builder.query<ServiceTypesInfo, void>({
+      query: () => ({
+        url: `service-types`,
+      }),
+    }),
     traderServiceTransferFunds: builder.mutation<
       void,
       { serviceId: string } & TransferPayload
@@ -118,6 +124,7 @@ export const {
   useTraderServiceGraphQuery,
   useTraderServiceManagementQuery,
   useCreateTraderServiceMutation,
+  useGetServiceTypesInfoQuery,
   useTraderServiceUpdateScaMinimumMutation,
   useLazyTraderServicesQuery,
   useTraderServiceTransferFundsMutation,

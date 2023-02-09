@@ -57,6 +57,7 @@
   "type-to-confirm": "Type \"{{word}}\" to confirm",
   "validation": {
     "insufficient-amount": "Insufficient funds",
+    "insufficient-amount-min": "Min amount: {{ minValue }} {{ minValueCoin }}",
     "invalid-value": "Invalid value",
     "negative-amount": "Should be >= 0",
     "max-allowed-length": "Should be under {{ maxLength }} characters",

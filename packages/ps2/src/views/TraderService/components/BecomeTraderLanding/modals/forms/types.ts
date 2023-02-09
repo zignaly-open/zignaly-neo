@@ -10,5 +10,5 @@ export type ServiceFormData = {
 
 export type ServiceInvestType = {
   profitPercentage: number;
-  amountToInvest: InputAmountAdvancedValue;
+  amountToInvest: InputAmountAdvancedValue & { min: number };
 };

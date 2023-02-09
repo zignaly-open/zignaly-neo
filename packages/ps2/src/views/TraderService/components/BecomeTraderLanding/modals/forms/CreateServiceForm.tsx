@@ -14,7 +14,6 @@ import { CreateServiceValidation } from '../validations';
 import CoinOption, {
   filterOptions,
 } from '../../../../../Dashboard/components/ManageInvestmentModals/forms/atoms/CoinOption';
-import { allowedDeposits } from '../../../../../../util/coins';
 import { useExchangeCoinsList } from '../../../../../../apis/coin/use';
 import { Box, ButtonProps, InputAdornment, Tooltip } from '@mui/material';
 import { ZigButtonGroupInputWrapper } from '../atoms';
@@ -22,6 +21,7 @@ import SuccessFeeInputWrapper from './SuccessFeeInputWrapper';
 import { ExchangeType } from '../../../../../../apis/user/types';
 import { ServiceFormData } from './types';
 import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
+import { useGetServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 
 const CreateServiceForm: React.FC<{
   service?: Partial<ServiceFormData>;
@@ -29,7 +29,6 @@ const CreateServiceForm: React.FC<{
 }> = ({ service, onSubmit }) => {
   const { t } = useTranslation('service');
   const { data: coins } = useExchangeCoinsList();
-  const isLoading = false;
 
   const {
     handleSubmit,
@@ -51,10 +50,12 @@ const CreateServiceForm: React.FC<{
 
   const exchangeType = watch('serviceType');
 
+  const { data: serviceTypesInfo } = useGetServiceTypesInfoQuery();
+
   const coinOptions = useMemo(
     () =>
       exchangeType
-        ? allowedDeposits[exchangeType]?.map((ssc: string) => {
+        ? Object.keys(serviceTypesInfo?.[exchangeType])?.map((ssc: string) => {
             const name = coins[ssc]?.name || '';
             return {
               value: ssc,
@@ -146,7 +147,6 @@ const CreateServiceForm: React.FC<{
             id={'create-service__service-name'}
             label={t('create.service-name') + ':'}
             placeholder={t('create.service-name')}
-            disabled={isLoading}
             error={t(errors.serviceName?.message)}
             {...field}
           />
@@ -189,7 +189,6 @@ const CreateServiceForm: React.FC<{
           variant='contained'
           type='submit'
           id={'create-service-modal__create-1st-step'}
-          loading={isLoading}
           size='large'
         >
           {t('create.action')}
