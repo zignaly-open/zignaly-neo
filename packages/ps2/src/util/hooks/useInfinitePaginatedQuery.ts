@@ -1,5 +1,5 @@
 import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import { isArray } from 'lodash';
+import _isArray from 'lodash/isArray';
 import { useState, useEffect, useRef } from 'react';
 import { useDeepCompareEffect, useUpdateEffect } from 'react-use';
 
@@ -38,7 +38,7 @@ const useInfinitePaginatedQuery = (
     typeof useGetDataListQuery
   >;
   const data = queryResponse.data
-    ? isArray(queryResponse.data)
+    ? _isArray(queryResponse.data)
       ? queryResponse.data
       : (queryResponse.data as InfiniteQueryResponseType).items
     : [];

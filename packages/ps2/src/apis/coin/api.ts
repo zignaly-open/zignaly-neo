@@ -1,4 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+import _isString from 'lodash/isString';
+import _pickBy from 'lodash/pickBy';
 import {
   AccountCoinBalances,
   CoinBalances,
@@ -7,7 +9,6 @@ import {
   Transactions,
 } from './types';
 import baseQuery from '../baseQuery';
-import { isString, pickBy } from 'lodash';
 
 export const api = createApi({
   baseQuery: baseQuery(),
@@ -107,7 +108,7 @@ export const api = createApi({
     >({
       query: ({ exchangeInternalId, ...params }) => {
         const searchParams = new URLSearchParams(
-          pickBy({ ...params, limit: params.limit?.toString() }, isString),
+          _pickBy({ ...params, limit: params.limit?.toString() }, _isString),
         );
         return {
           url: `user/exchanges/${exchangeInternalId}/transactions_history?${searchParams.toString()}`,
