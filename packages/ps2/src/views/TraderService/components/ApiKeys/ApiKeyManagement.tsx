@@ -22,7 +22,7 @@ const ApiKeyManagement: React.FC = () => {
     isLoading,
     isFetching,
     data: keys,
-  } = useServiceApiKeysQuery({ serviceId });
+  } = useServiceApiKeysQuery({ serviceId }, { refetchOnMountOrArgChange: 30 });
 
   return (
     <>
