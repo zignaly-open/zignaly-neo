@@ -59,7 +59,7 @@ const CreateServiceForm: React.FC<{
             return {
               value: ssc,
               name,
-              label: <CoinOption coin={ssc} name={name} />,
+              label: <CoinOption key={ssc} coin={ssc} name={name} />,
             };
           })
         : [],

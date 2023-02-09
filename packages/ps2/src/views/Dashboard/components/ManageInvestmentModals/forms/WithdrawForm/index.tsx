@@ -89,7 +89,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
         return {
           value: c,
           name,
-          label: <CoinOption coin={c} name={name} />,
+          label: <CoinOption key={c} coin={c} name={name} />,
           available: balance?.maxWithdrawAmount || 0,
           networks: coins[c].networks?.map((n) => ({
             label: n.name,
