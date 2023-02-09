@@ -4,15 +4,15 @@ const nameRegex = /^[a-zA-Z0-9 $._#&|()\[\]%-]*$/;
 
 export const successFeeValidation = yup
   .number()
-  .typeError('error:error.invalid-value')
+  .typeError('error:error.success-fee-range')
   .required('error:error.required')
+  .test('integer', 'service:edit.validation.success-fee-range', (v) =>
+    Number.isInteger(v),
+  )
   .test(
     'range',
     'service:edit.validation.success-fee-range',
     (v) => !v || (v >= 10 && v < 75),
-  )
-  .test('integer', 'service:edit.validation.must-be-integer', (v) =>
-    Number.isInteger(v),
   );
 
 export const serviceNameValidation = yup

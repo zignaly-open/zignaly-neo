@@ -20,7 +20,7 @@ const SuccessFeeInputWrapper: React.FC<{ value: number }> = ({
       <SuccessFieldWrapperShit>
         <ZigTypography>
           {t('you-get-x', {
-            number: feeWeCharge,
+            number: Math.round(feeWeCharge),
           })}
         </ZigTypography>
       </SuccessFieldWrapperShit>
