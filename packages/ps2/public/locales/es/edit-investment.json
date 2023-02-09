@@ -45,21 +45,21 @@
 		"status_other": "Tienes {{count}} transacciones pendientes",
 		"link-label": "Ver"
 	},
-	"investorDetail-successFee": "{{fee}}% \nComisión por Beneficios",
+	"investorDetail-successFee": "{{fee}}% Comisión por Beneficios",
 	"modal": {
 		"withdrawInvestment": {
 			"title": "Solicitud de Retiro",
 			"instant": {
 				"title": "Retiro Instantáneo",
-				"description": "Los retiros instantáneos incurren en una tarifa del {{fee}}% porque Zignaly debe cubrir sus fondos y heredar su riesgo.",
+				"description": "Los retiros instantáneos incurren en una comisión de {{fee}}% porque Zignaly debe cubrir sus fondos y heredar su riesgo.",
 				"button": {
 					"subtitle": "Retirada instantánea",
-					"title": "Comisión {{fee}}%"
+					"title": "{{fee}}% Comisión"
 				}
 			},
 			"freeWithdrawal": {
 				"title": "Retiro Gratuito",
-				"description": "Recibirá sus fondos después de que el trader los libere. Tenga en cuenta que su inversión está en riesgo hasta que sea transferida a usted. Esto suele tardar unos días, pero podría tardar más. Depende de ellos.",
+				"description": "Recibirá sus fondos después de que el gestor del fondo los libere. Tenga en cuenta que su inversión está en riesgo hasta que se le transfiera el saldo. Esto generalmente toma unos días, pero puede tardar más en completarse dependiendo del gestor del fondo.",
 				"button": {
 					"subtitle": "Retirada de fondos libres",
 					"title": "Sin Comisión"
@@ -82,7 +82,7 @@
 	},
 	"modalSuccess": {
 		"title": "Inversión en Proceso (Hasta 24h)",
-		"description": "Sus fondos serán transferidos a la cuenta del servicio dentro de las 24 horas. Puede retirar sus fondos en cualquier momento antes de que se realice esta transferencia. Una vez que se transfieran los fondos, podrá retirarlos a través de una desconexión < 0 > progresiva < \/0 > o < 0 > forzosa. < \/0 >",
+		"description": "Sus fondos serán transferidos a la cuenta del servicio dentro de las 24 horas. Puede retirar sus fondos en cualquier momento antes de que se realice esta transferencia. Una vez que se transfieran los fondos, podrá retirarlos a través de un retiro <0>Gratuito<\/0> o <0>Retiro Instantáneo.<\/0>",
 		"button": "Cerrar"
 	},
 	"invest-modal": {
@@ -92,6 +92,6 @@
 		"transfer-error": "Valor no válido. Por favor escriba la palabra correcta.",
 		"transfer-label": "Transferencia",
 		"i-understand-margin": "Entiendo que todo mi saldo de {{coin}} ahora es parte del colateral y está en riesgo",
-		"i-understand-money-transferred": "Entiendo y acepto que mis fondos sean transferidos al pool del trader y que no será visible en mi saldo disponible"
+		"i-understand-money-transferred": "Entiendo y confirmo que mis fondos sean transferidos al pool del trader y que no será visible en mi saldo disponible"
 	}
 }

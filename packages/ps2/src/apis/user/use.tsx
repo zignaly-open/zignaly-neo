@@ -24,7 +24,6 @@ import {
   useVerifyCodeNewUserMutation,
   useVerifyKnownDeviceMutation,
 } from './api';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import {
   activateExchange,
   logout,
@@ -49,6 +48,7 @@ import { useLazyTraderServicesQuery } from '../service/api';
 import { QueryReturnTypeBasic } from 'util/queryReturnType';
 import { useZModal } from 'components/ZModal/use';
 import Check2FAModal from 'views/Auth/components/Check2FAModal';
+import { useNavigate } from 'react-router-dom';
 
 const useStartSession = () => {
   const { showModal } = useModal();
@@ -122,30 +122,24 @@ export const useAuthenticate = (): [
   (payload: LoginPayload) => Promise<void>,
 ] => {
   const [login] = useLoginMutation();
-  const performLogout = useLogout();
   const startSession = useStartSession();
 
   const [loading, setLoading] = useState(false);
 
-  const { executeRecaptcha } = useGoogleReCaptcha();
   // can't use useAsyncFn because https://github.com/streamich/react-use/issues/1768
   return [
     { loading },
     async (payload: LoginPayload) => {
       setLoading(true);
-      const gRecaptchaResponse = await executeRecaptcha('login');
 
       try {
         const user = await login({
           ...payload,
-          gRecaptchaResponse,
-          c: 3,
         }).unwrap();
         await startSession(user);
         setLoading(false);
       } catch (e) {
         setLoading(false);
-        performLogout();
         throw e;
       }
     },
@@ -155,7 +149,10 @@ export const useAuthenticate = (): [
 export function useLogout(): () => void {
   const dispatch = useDispatch();
   const [logoutRequest] = useLogoutMutation();
+  const navigate = useNavigate();
+
   return () => {
+    navigate('/login');
     logoutRequest();
     dispatch(logout());
     endLiveSession();

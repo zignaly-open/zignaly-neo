@@ -137,7 +137,9 @@ function InputAmount({
               </>
             )}
             {value?.token && tokens && showMaxButton && (
-              <MaxButton onClick={onClickMaxValue}>MAX</MaxButton>
+              <MaxButton id={"input-amount__max"} onClick={onClickMaxValue}>
+                MAX
+              </MaxButton>
             )}
           </Side>
 

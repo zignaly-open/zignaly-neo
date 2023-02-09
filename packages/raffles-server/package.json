@@ -19,6 +19,7 @@
     "stress-test": "ts-node scripts/redis-stress-test.ts",
     "cybavo-transfer": "ts-node scripts/cybavo-transfer.ts",
     "cybavo-balance": "ts-node scripts/cybavo-balance.ts",
+    "import-cybavo": "ts-node scripts/cybavo-migration.ts",
     "test": "NODE_ENV=test jest"
   },
   "dependencies": {
@@ -46,7 +47,7 @@
     "http": "^0.0.1-security",
     "ioredis": "^5.2.3",
     "jest": "28.1.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "lodash": "^4.17.21",
     "modern-async": "^1.1.2",
     "ncp": "^2.0.0",

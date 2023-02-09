@@ -42,12 +42,14 @@ const MarketplaceAction = ({ service }: MarketplaceActionType) => {
           <>
             {isAuthenticated && investedAmount ? (
               <InvestedButtonBase
+                id={`marketplace-table__edit-${traderService.id}`}
                 ctaId={'marketplace-invested-button'}
                 service={traderService}
                 investedAmount={investedAmount.toString()}
               />
             ) : (
               <InvestButton
+                id={`marketplace-table__invest-${traderService.id}`}
                 service={traderService}
                 ctaId={'marketplace-invest-button'}
               />

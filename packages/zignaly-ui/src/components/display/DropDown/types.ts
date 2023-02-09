@@ -1,6 +1,7 @@
 import { PopoverOrigin, PopoverPosition } from "@mui/material/Popover/Popover";
 
 type Option = {
+  id?: string;
   label?: string | JSX.Element;
   onClick?: () => void;
   href?: string;

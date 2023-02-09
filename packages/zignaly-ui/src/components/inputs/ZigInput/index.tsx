@@ -18,6 +18,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
               onClick={labelAction.onClick}
               href={labelAction.href}
               caption={labelAction.text}
+              id={labelAction.id}
             />
           )}
         </>

@@ -42,6 +42,7 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
             <ZigTypography>{t('buy.deposit.external')}</ZigTypography>
           </Box>
           <ZigButton
+            id={'deposit__deposit-coin'}
             variant='outlined'
             onClick={() => {
               close();
@@ -78,6 +79,7 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
             <ZigTypography>{t('buy.deposit.noCrypto')}</ZigTypography>
           </Box>
           <ZigButton
+            id={'deposit__buy-coin'}
             variant='outlined'
             href={BUY_CRYPTO_URL}
             target='_blank'

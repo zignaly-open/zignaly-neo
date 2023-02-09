@@ -4,13 +4,14 @@ import { AssetsInPoolProps } from './types';
 import { WhaleIcon, ZigPriceLabel } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import { PriceLabel } from '@zignaly-open/ui';
+import { formatLocalizedDistance } from 'views/Dashboard/components/MyDashboard/util';
 
 const AssetsInPool = ({
   assetsValue,
   numberOfInvestors,
   convertedValue,
   convertedValueCoin,
+  createdAt,
 }: AssetsInPoolProps) => {
   const { t } = useTranslation('marketplace');
   return (
@@ -44,9 +45,22 @@ const AssetsInPool = ({
         </Box>
       )}
 
+      {createdAt && (
+        <Box justifyContent='center' alignItems='start'>
+          <BlockTypography variant='h5' color='neutral400'>
+            {formatLocalizedDistance(new Date(), new Date(createdAt))}
+          </BlockTypography>
+        </Box>
+      )}
+
       {typeof convertedValue === 'number' && (
         <Box justifyContent='center' alignItems='start'>
-          <PriceLabel value={convertedValue} coin={convertedValueCoin} />
+          <ZigPriceLabel
+            value={convertedValue}
+            coin={convertedValueCoin}
+            color='neutral300'
+            coinProps={{ color: 'neutral300' }}
+          />
         </Box>
       )}
     </Box>

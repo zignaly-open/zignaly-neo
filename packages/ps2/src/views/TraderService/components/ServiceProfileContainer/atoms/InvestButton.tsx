@@ -19,10 +19,11 @@ import OtherAccountsButton from './OtherAccountsButton';
 import { Box } from '@mui/material';
 
 const InvestButton: React.FC<{
+  id?: string;
   service: Service;
   ctaId?: string;
   showMultipleAccountButton?: boolean;
-}> = ({ service, ctaId, showMultipleAccountButton }) => {
+}> = ({ id, service, ctaId, showMultipleAccountButton }) => {
   const { t } = useTranslation('service');
   const isAuthenticated = useIsAuthenticated();
   const { showModal } = useZModal({ disableAutoDestroy: true });
@@ -69,6 +70,7 @@ const InvestButton: React.FC<{
     <>
       <InvestButtonWrap>
         <Button
+          id={id}
           onClick={onClickMakeInvestment}
           loading={needsToOpenWhenBalancesLoaded && isFetching}
           caption={t('invest-button.invest-now')}

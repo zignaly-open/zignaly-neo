@@ -17,8 +17,8 @@
 	"status": {
 		"connected": "Conectado",
 		"pending": "Pendente",
-		"soft-disconnect": "Desconexão Suave",
-		"hard-disconnect": "Desconexão Dura",
+		"soft-disconnect": "Retirada",
+		"hard-disconnect": "Retirada Instantânea",
 		"suspended": "Em suspenso",
 		"disconnected": "Desconectado",
 		"owner": "Proprietário"

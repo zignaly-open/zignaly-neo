@@ -51,6 +51,7 @@ const ApiKeyManagement: React.FC = () => {
           }}
         >
           <ZigButton
+            id={'trader-api__create-key'}
             onClick={() =>
               showModal(CreateApiKey, {
                 serviceId,

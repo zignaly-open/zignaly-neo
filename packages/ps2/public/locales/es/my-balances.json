@@ -8,5 +8,7 @@
 		"valueUSD": "Valor en USD"
 	},
 	"table-search-placeholder": "Escriba para buscar monedas.",
-	"loading-arialLabel": "Cargando mi panel"
+	"loading-arialLabel": "Cargando...",
+	"my-coins": "Mis Monedas",
+	"deposits-withdrawals": "Depósitos\/Retiros"
 }

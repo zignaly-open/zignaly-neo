@@ -1,4 +1,4 @@
-import { getUserBalance } from '../src/cybavo';
+import { getUserBalance } from './cybavo';
 import '../src/db';
 
 (async () => {

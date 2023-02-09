@@ -97,11 +97,6 @@ export type LoginPayload = {
   password: string;
 };
 
-export type LoginFullPayload = LoginPayload & {
-  gRecaptchaResponse: string;
-  c: number;
-};
-
 export type SessionResponse = {
   validUntil: number;
   userId: string;
