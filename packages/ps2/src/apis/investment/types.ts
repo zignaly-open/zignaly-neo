@@ -23,6 +23,7 @@ export type InvestmentDetails = {
 };
 
 export type InvestmentServiceDetails = {
+  ownerVerified: boolean;
   serviceName: string;
   serviceLogo: string;
   ssc: string;

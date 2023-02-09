@@ -24,5 +24,6 @@
   },
   "tooltip-columnHeader": "Toggle SortBy",
   "serviceName-by": "by",
+  "owner-verified": "The Manager has been verified",
   "columns-hideOrShow": "Show/Hide Columns"
 }
