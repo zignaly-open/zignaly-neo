@@ -25,7 +25,9 @@ import { useTranslation } from 'react-i18next';
 import { setChartTimeframe, setChartType } from './store';
 import { useMemo } from 'react';
 import { formatMonthDay } from '../../views/Dashboard/components/MyDashboard/util';
-import { format, parse, subDays } from 'date-fns';
+import format from 'date-fns/format';
+import parse from 'date-fns/parse';
+import subDays from 'date-fns/subDays';
 
 export function useTraderServices() {
   const isAuthenticated = useIsAuthenticated();

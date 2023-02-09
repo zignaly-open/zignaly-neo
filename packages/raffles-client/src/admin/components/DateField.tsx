@@ -1,6 +1,7 @@
 import React from 'react';
 import { FunctionField, RaRecord, TextFieldProps } from 'react-admin';
-import { addMinutes, format } from 'date-fns';
+import format from 'date-fns/format';
+import addMinutes from 'date-fns/addMinutes';
 
 const DateField = (props: TextFieldProps & { multiline?: boolean }) => {
   const { multiline, ...rest } = props;

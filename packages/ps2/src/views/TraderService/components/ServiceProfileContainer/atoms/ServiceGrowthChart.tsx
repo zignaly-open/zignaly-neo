@@ -24,7 +24,7 @@ import Stub from '../../../../../components/Stub';
 import { useTranslation } from 'react-i18next';
 import CenteredLoader from '../../../../../components/CenteredLoader';
 import PercentChange from './PercentChange';
-import { differenceInDays } from 'date-fns';
+import differenceInDays from 'date-fns/differenceInDays';
 import { getColorForNumber } from '../../../../../util/numbers';
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {

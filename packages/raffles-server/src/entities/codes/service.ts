@@ -11,7 +11,7 @@ import { User } from '../users/model';
 import { emitBalanceChanged } from '../users/util';
 import { Code, CodeRedemption } from './model';
 import BN from 'bignumber.js';
-import { format } from 'date-fns';
+import format from 'date-fns/format';
 import { checkAdmin } from '../../util/admin';
 import { Op } from 'sequelize';
 

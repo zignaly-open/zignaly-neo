@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
-import { setDefaultOptions } from 'date-fns';
-import * as locales from 'date-fns/locale';
+import setDefaultOptions from 'date-fns/setDefaultOptions';
 import { useTranslation } from 'react-i18next';
+import { dateFnsLocaleMapping } from '../../../util/i18next';
 
 export default function DateLocaleFixer(): JSX.Element {
   const {
@@ -12,8 +12,8 @@ export default function DateLocaleFixer(): JSX.Element {
     locale &&
       setDefaultOptions({
         locale:
-          locales[locale !== 'ch' ? locale.split('_')[0] : 'ru'] ||
-          locales.enUS,
+          dateFnsLocaleMapping[locale !== 'ch' ? locale.split('_')[0] : 'ru'] ||
+          dateFnsLocaleMapping.en,
       });
   }, [locale]);
   return null;

@@ -5,6 +5,7 @@
   "scripts": {
     "precommit": "yarn lint-staged",
     "start": "react-scripts start",
+    "analyze": "lerna run build --scope=@zignaly-open/ps2 --include-dependencies; source-map-explorer 'build/static/js/*.js'",
     "build": "react-scripts build && generate-version",
     "test": "react-scripts test --passWithNoTests",
     "release": "export REACT_APP_SENTRY_RELEASE=$(git rev-parse --short HEAD); react-scripts build && node scripts/sentry.js",
@@ -81,6 +82,7 @@
     "react-use": "^17.4.0",
     "redux-persist": "^6.0.0",
     "remark-breaks": "^3.0.2",
+    "source-map-explorer": "^2.5.3",
     "styled-components": "^5.3.5",
     "typescript": "4.9.4",
     "web-vitals": "2.1.4",

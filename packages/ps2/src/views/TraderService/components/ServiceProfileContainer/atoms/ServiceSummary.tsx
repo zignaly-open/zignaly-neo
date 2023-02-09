@@ -6,7 +6,8 @@ import { Box, Grid } from '@mui/material';
 import { GridCell, AssetsInPoolWrapper, GridWithBottomBorder } from '../styles';
 import AssetsInPool from '../../../../../components/AssetsInPool';
 import ServicePercentageInfo from './ServicePercentageInfo';
-import { subMonths, subYears } from 'date-fns';
+import subMonths from 'date-fns/subMonths';
+import subYears from 'date-fns/subYears';
 
 const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation(['service', 'marketplace']);

@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import DialogContainer from '../DialogContainer';
 import { ShareCodeProps } from './types';
 import { StyledTable } from './styles';
-import { format } from 'date-fns';
+import format from 'date-fns/format';
 
 const formatPerc = (value: number) => (value ? `${value * 100}%` : 'N/A');
 const formatDate = (value: string) =>
