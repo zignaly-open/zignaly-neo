@@ -23,6 +23,7 @@ export const ServiceName = ({ service }: ServiceNameProps) => {
         flexDirection: 'row',
         display: 'flex',
         textAlign: 'start',
+        minWidth: 451,
       }}
     >
       <Icon>
