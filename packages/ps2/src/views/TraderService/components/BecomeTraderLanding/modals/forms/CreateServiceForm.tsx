@@ -123,6 +123,7 @@ const CreateServiceForm: React.FC<{
                 label={t('create.base-currency')}
                 placeholder={t('create.base-currency')}
                 options={coinOptions}
+                error={t(errors.baseCurrency?.message)}
                 filterOption={filterOptions}
                 {...field}
               />
