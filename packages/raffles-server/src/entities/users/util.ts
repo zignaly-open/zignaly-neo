@@ -4,7 +4,11 @@ import { algorithm, secret } from '../../../config';
 import { generateUserNonce, User } from './model';
 import jwt from 'jsonwebtoken';
 import pubsub from '../../pubsub';
-import { BALANCE_CHANGED } from './constants';
+import {
+  BALANCE_CHANGED,
+  SENDINBLUE_LIST_ID,
+  SENDINBLUE_TEMPLATE_ID,
+} from './constants';
 import { getUserBalance } from '../balances/service';
 import { ContextUser } from '../../types';
 import redisService from '../../redisService';
@@ -124,8 +128,8 @@ export async function sendEmailVerification(userId: string, email: string) {
   const createDoiContact = new SibApiV3Sdk.CreateDoiContact(); // CreateDoiContact | Values to create the Double opt-in (DOI) contact
 
   createDoiContact.email = email;
-  createDoiContact.includeListIds = [2];
-  createDoiContact.templateId = 4;
+  createDoiContact.includeListIds = [SENDINBLUE_LIST_ID];
+  createDoiContact.templateId = SENDINBLUE_TEMPLATE_ID;
   createDoiContact.redirectionUrl = `https://zigbids.zignaly.com/?confirm=${userId}}`;
 
   try {
