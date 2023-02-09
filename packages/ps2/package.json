@@ -66,7 +66,6 @@
     "react": "17.0.2",
     "react-device-detect": "^2.2.2",
     "react-dom": "17.0.2",
-    "react-google-recaptcha-v3": "^1.10.0",
     "react-hook-form": "^7.32.0",
     "react-i18next": "^11.16.9",
     "react-image-webp": "^0.8.0",

@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import {
-  LoginFullPayload,
+  LoginPayload,
   LoginResponse,
   SessionResponse,
   SignupPayload,
@@ -26,7 +26,7 @@ export const api = createApi({
         method: 'POST',
       }),
     }),
-    login: builder.mutation<LoginResponse, LoginFullPayload>({
+    login: builder.mutation<LoginResponse, LoginPayload>({
       query: (credentials) => ({
         url: 'login',
         method: 'POST',
