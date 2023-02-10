@@ -1,4 +1,5 @@
 import { AxisFormat } from '@zignaly-open/ui/lib/components/display/ZigChart/types';
+import { ExchangeType } from '../user/types';
 
 type TraderServiceStatus = 'FULL' | string;
 
@@ -44,7 +45,13 @@ export type TraderServiceFull = {
   type: string;
   investedUSDT: string;
   userId: string;
+  maximumSbt: number;
 };
+
+export type ServiceTypesInfo = Record<
+  ExchangeType,
+  Record<string, { minimum_owner_balance: number }>
+>;
 
 export type TraderServiceManagement = {
   createdAt: string;
@@ -187,4 +194,13 @@ export type EditServicePayload = {
   maximumSbt: number;
   logo: string;
   level: TraderServiceAccessLevel;
+};
+
+export type CreateServicePayload = {
+  amount: number;
+  name: string;
+  ssc: string;
+  type: string;
+  exchangeInternalId: string;
+  successFee: number;
 };

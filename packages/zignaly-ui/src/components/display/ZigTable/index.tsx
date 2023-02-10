@@ -218,7 +218,7 @@ export default function ZigTable<T extends object>({
                     out of
                   </ZigTypography>
                   <ZigTypography color="neutral100" fontWeight={600}>
-                    {table.getPageCount()}
+                    {table.getPageCount() || 1}
                   </ZigTypography>
                 </>
               )}
