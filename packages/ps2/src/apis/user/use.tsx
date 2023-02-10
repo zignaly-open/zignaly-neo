@@ -91,6 +91,7 @@ const useStartSession = () => {
     startLiveSession(userData);
     trackNewSession(userData, SessionsTypes.Login);
     i18n.changeLanguage(userData.locale);
+    localStorage.setItem('hasLoggedIn', 'true');
   };
 };
 
