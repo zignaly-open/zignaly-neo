@@ -18,6 +18,7 @@
     },
     "link": {
       "investMore": "Invest more",
+      "maxReached": "Maximum Balance allowed reached in the service",
       "withdraw": "Withdraw Investment"
     },
     "button": {
@@ -77,6 +78,7 @@
     "amount-to-invest": "Amount to Invest",
     "type-transfer": "Type the word “{{word}}” in the field below to complete the transfer:",
     "transfer-error": "Invalid value. Please type the correct word.",
+    "max-funds": "Overpassing maximum funds allowed in service. Invest maximum {{max}} {{coin}}.",
     "transfer-label": "Transfer",
     "i-understand-margin": "I understand my whole {{coin}} balance is now part of the margin and at risk",
     "i-understand-money-transferred": "I understand and confirm that my funds will be transferred to the trader's pool and will no longer appear in my available balance"
