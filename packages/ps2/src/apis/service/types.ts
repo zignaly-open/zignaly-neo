@@ -45,7 +45,6 @@ export type TraderServiceFull = {
   type: string;
   investedUSDT: string;
   userId: string;
-  maximumSbt: number;
 };
 
 export type ServiceTypesInfo = Record<
