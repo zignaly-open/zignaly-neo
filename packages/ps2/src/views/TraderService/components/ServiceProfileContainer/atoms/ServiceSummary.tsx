@@ -7,6 +7,7 @@ import { GridCell, AssetsInPoolWrapper, GridWithBottomBorder } from '../styles';
 import AssetsInPool from '../../../../../components/AssetsInPool';
 import ServicePercentageInfo from './ServicePercentageInfo';
 import { subMonths, subYears } from 'date-fns';
+import { numericFormatter } from 'react-number-format';
 
 const SBT_UNLIMITED = 1000000000;
 
@@ -86,9 +87,13 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
           >
             {t('summary.funds-allocated')}{' '}
             <ZigTypography fontSize={12} color={'neutral200'}>
-              {service.maximumSbt <= SBT_UNLIMITED
+              {service.maximumSbt >= SBT_UNLIMITED
                 ? t('summary.no-max-limit')
-                : t('common:percent', { value: +service.fundsAllocated })}
+                : t('common:percent', {
+                    value: numericFormatter(service.fundsAllocated, {
+                      thousandSeparator: true,
+                    }),
+                  })}
             </ZigTypography>
           </ZigTypography>
           <ZigTypography
