@@ -17,18 +17,21 @@ export const Header = styled.div`
 
 export const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.2fr;
   gap: 42px;
+  min-height: 400px;
+  align-items: center;
 `;
 
 export const Side = styled.div`
-  padding: 28px 0;
+  padding: 28px 0 28px 15%;
 `;
 
 export const SideImage = styled(Side)`
   background: url('/images/service-provider/main-graphic.png') center center
     no-repeat;
   background-size: contain;
+  min-height: 400px;
 `;
 
 export const WrapperList = styled.ul`
