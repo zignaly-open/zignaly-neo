@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NumericFormat } from 'react-number-format';
-import { Tooltip, useTheme } from '@mui/material';
+import { useTheme } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
@@ -35,7 +35,6 @@ import { EditFormData, EditInvestmentFormProps } from './types';
 import { EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
-import { useServiceDetails } from 'apis/service/use';
 
 function EditInvestmentForm({
   onClickWithdrawInvestment,
@@ -52,7 +51,6 @@ function EditInvestmentForm({
   const { isLoading: isEditingInvestment, edit: editInvestment } =
     useUpdateTakeProfitAndInvestMore(serviceId);
   const { data: details } = useInvestmentDetails(serviceId);
-  const { data: service } = useServiceDetails(serviceId);
   const transferOutAll = details?.transferOutAll;
 
   const {
@@ -69,14 +67,7 @@ function EditInvestmentForm({
       },
       profitPercentage: details?.profitPercentage,
     },
-    resolver: isInputEnabled
-      ? yupResolver(
-          EditInvestmentValidation({
-            max: service.maximumSbt - +service.invested,
-            coin: service.ssc,
-          }),
-        )
-      : null,
+    resolver: isInputEnabled ? yupResolver(EditInvestmentValidation) : null,
   });
 
   const toast = useToast();
@@ -107,11 +98,6 @@ function EditInvestmentForm({
       close();
     }
   };
-
-  const maxReached = +service.invested >= service.maximumSbt;
-
-  const tooltipWrap = (v: React.ReactElement) =>
-    maxReached ? <Tooltip title={t('form.link.maxReached')}>{v}</Tooltip> : v;
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -172,29 +158,25 @@ function EditInvestmentForm({
       )}
 
       <ModalActions>
-        {!isInputEnabled &&
-          tooltipWrap(
-            <div>
-              <TextButton
-                id={'edit-investment__invest-more'}
-                onClick={() =>
-                  !maxReached &&
-                  (transferOutAll ? openBlockedToast() : setInputEnabled(true))
-                }
-                disabled={transferOutAll || maxReached}
-                allowClickOnDisabled
-                as={'span'}
-                leftElement={
-                  <PlusIcon
-                    color={theme[transferOutAll ? 'neutral300' : 'links']}
-                    width={'22px'}
-                    height={'22px'}
-                  />
-                }
-                caption={t('form.link.investMore')}
+        {!isInputEnabled && (
+          <TextButton
+            id={'edit-investment__invest-more'}
+            onClick={() =>
+              transferOutAll ? openBlockedToast() : setInputEnabled(true)
+            }
+            disabled={transferOutAll}
+            allowClickOnDisabled
+            as={'span'}
+            leftElement={
+              <PlusIcon
+                color={theme[transferOutAll ? 'neutral300' : 'links']}
+                width={'22px'}
+                height={'22px'}
               />
-            </div>,
-          )}
+            }
+            caption={t('form.link.investMore')}
+          />
+        )}
         <Button
           id={
             isInputEnabled

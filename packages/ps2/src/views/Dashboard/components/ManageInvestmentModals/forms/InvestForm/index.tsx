@@ -24,14 +24,12 @@ import { Box } from '@mui/material';
 import { CheckBox } from '@zignaly-open/ui';
 import { AmountInvested, TokenValue } from '../EditInvestmentForm/styles';
 import { NumericFormat } from 'react-number-format';
-import { useServiceDetails } from 'apis/service/use';
 
 function InvestForm({ close, onInvested }: InvestFormProps) {
   const coin = useCurrentBalance();
   const { t } = useTranslation('edit-investment');
   const service = useSelectedInvestment();
   const { isLoading, invest } = useInvestInService(service.serviceId);
-  const { data: serviceDetails } = useServiceDetails(service.serviceId);
   const toast = useToast();
 
   // the safe word is Fluggaenkoecchicebolsen
@@ -57,12 +55,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
       profitPercentage: 30,
       step: 1,
     },
-    resolver: yupResolver(
-      EditInvestmentValidation({
-        max: serviceDetails.maximumSbt - +serviceDetails.invested,
-        coin: service.ssc,
-      }),
-    ),
+    resolver: yupResolver(EditInvestmentValidation),
   });
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
