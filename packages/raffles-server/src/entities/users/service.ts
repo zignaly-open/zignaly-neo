@@ -193,7 +193,6 @@ export const generateService = (user: ContextUser) => {
   };
 
   const verifyEmail = async (userId: number, email: string) => {
-    console.log(userId, email)
     try {
       await sendEmailVerification(`${userId}`, email);
       User.update(
