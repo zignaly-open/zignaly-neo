@@ -130,7 +130,7 @@ export async function sendEmailVerification(userId: string, email: string) {
   createDoiContact.email = email;
   createDoiContact.includeListIds = [SENDINBLUE_LIST_ID];
   createDoiContact.templateId = SENDINBLUE_TEMPLATE_ID;
-  createDoiContact.redirectionUrl = `https://zigbids.zignaly.com/?confirm=${userId}}`;
+  createDoiContact.redirectionUrl = `https://zigbids.zignaly.com/?confirm=${userId}`;
 
   try {
     const response = await apiInstance.createDoiContact(createDoiContact);
