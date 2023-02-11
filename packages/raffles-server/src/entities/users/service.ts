@@ -173,13 +173,11 @@ export const generateService = (user: ContextUser) => {
     }
   };
 
-  const verifyEmail = async (userId: number, email: string) => {
+  const confirmEmail = async (userId: number) => {
     try {
-      await sendEmailVerification(`${userId}`, email);
-      return User.update(
+      User.update(
         {
           emailVerified: true,
-          email,
         },
         {
           where: {
@@ -187,9 +185,30 @@ export const generateService = (user: ContextUser) => {
           },
         },
       );
+      return { success: true };
     } catch (e) {
       console.error(e);
       return null;
+    }
+  };
+
+  const verifyEmail = async (userId: number, email: string) => {
+    try {
+      await sendEmailVerification(`${userId}`, email);
+      User.update(
+        {
+          emailVerificationSent: true,
+        },
+        {
+          where: {
+            id: userId,
+          },
+        },
+      );
+      return { success: true };
+    } catch (e) {
+      console.error(e);
+      return { success: false };
     }
   };
 
@@ -203,5 +222,6 @@ export const generateService = (user: ContextUser) => {
     updateProfile,
     getOrCreateUser,
     verifyEmail,
+    confirmEmail,
   };
 };

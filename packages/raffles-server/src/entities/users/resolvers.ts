@@ -52,6 +52,12 @@ export const resolvers = {
       { userId, email }: { userId: number; email: string },
       { services }: ApolloContext,
     ) => services.User.verifyEmail(userId, email),
+
+    confirmEmail: async (
+      _: any,
+      { userId }: { userId: number },
+      { services }: ApolloContext,
+    ) => services.User.confirmEmail(userId),
   },
   Subscription: {
     balanceChanged: {

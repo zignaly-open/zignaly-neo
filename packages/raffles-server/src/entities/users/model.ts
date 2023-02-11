@@ -67,6 +67,10 @@ export class User extends Model {
 
   @Default(false)
   @Column
+  public emailVerificationSent: boolean;
+
+  @Default(false)
+  @Column
   public emailVerified: boolean;
 }
 
