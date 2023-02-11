@@ -4,8 +4,10 @@ import {
   UserIcon,
   WalletIcon,
   DropDown,
+  ZigTypography,
 } from '@zignaly-open/ui';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { useMutation } from '@apollo/client';
 import { useTranslation } from 'react-i18next';
 import useCurrentUser from '../../hooks/useCurrentUser';
 import { Header as ZIGHeader, Button } from '@zignaly-open/ui';
@@ -27,6 +29,7 @@ import theme from 'theme';
 import { People, Redeem } from '@mui/icons-material';
 import { useTz } from 'util/tz';
 import { getToken } from 'util/token';
+import { VERIFY_EMAIL_MUTATION, CONFIRM_EMAIL_MUTATION } from 'queries/users';
 
 const StyledPeopleIcon = styled(People)`
   color: ${(props) => props.theme.neutral200};
@@ -63,6 +66,20 @@ const Header = () => {
   const userRef = useRef<UserType>();
   const matchesSmall = useMediaQuery(theme.breakpoints.down('sm'));
   const track = useTz();
+  const [email, setEmail] = useState('');
+  const [verifyEmail] = useMutation(VERIFY_EMAIL_MUTATION);
+  const [confirmEmail] = useMutation(CONFIRM_EMAIL_MUTATION);
+  // const { user } = useCurrentUser();
+
+  const handleVerifyEmail = () => {
+    verifyEmail({
+      variables: { userId: 1, email },
+    });
+  };
+
+  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
 
   const href = window.location.href;
 
@@ -90,6 +107,12 @@ const Header = () => {
       logout();
     }
 
+    const userIdParams = new URLSearchParams(window.location.search).get(
+      'confirm',
+    );
+    if (userIdParams) {
+      confirmEmail({ variables: { userId: Number(userIdParams) } });
+    }
     // Save user to avoid detecting false disconnection because "account" wasn't yet loaded at page load.
     userRef.current = currentUser;
   }, [account, currentUser]);
@@ -114,6 +137,21 @@ const Header = () => {
                 }}
                 gap='28px'
               >
+                <div>
+                  <ZigTypography color='neutral200'>
+                    {t('discord-user-label')}
+                  </ZigTypography>
+                  <input placeholder='email' onChange={handleEmail} />
+                  <Button
+                    variant='secondary'
+                    size='small'
+                    caption={t('Validate email')}
+                    leftElement={<StyledPeopleIcon />}
+                    onClick={() => {
+                      handleVerifyEmail();
+                    }}
+                  />
+                </div>
                 <Button
                   variant='secondary'
                   size='small'

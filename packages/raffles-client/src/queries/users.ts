@@ -82,3 +82,15 @@ export const BALANCE_SUBSCRIPTION = gql`
     }
   }
 `;
+
+export const VERIFY_EMAIL_MUTATION = gql`
+  mutation verifyEmail($userId: Int!, $email: String!) {
+    verifyEmail(userId: $userId, email: $email)
+  }
+`;
+
+export const CONFIRM_EMAIL_MUTATION = gql`
+  mutation confirmEmail($userId: Int!) {
+    confirmEmail(userId: $userId)
+  }
+`;

@@ -185,14 +185,15 @@ export const generateService = (user: ContextUser) => {
           },
         },
       );
-      return { success: true };
+      return true;
     } catch (e) {
       console.error(e);
-      return null;
+      return false;
     }
   };
 
   const verifyEmail = async (userId: number, email: string) => {
+    console.log(userId, email)
     try {
       await sendEmailVerification(`${userId}`, email);
       User.update(
@@ -205,10 +206,10 @@ export const generateService = (user: ContextUser) => {
           },
         },
       );
-      return { success: true };
+      return true;
     } catch (e) {
       console.error(e);
-      return { success: false };
+      return false;
     }
   };
 
