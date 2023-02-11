@@ -12,7 +12,7 @@ import {
 import { getUserBalance } from '../balances/service';
 import { ContextUser } from '../../types';
 import redisService from '../../redisService';
-import SibApiV3Sdk from 'sib-api-v3-typescript';
+import * as SibApiV3Sdk from 'sib-api-v3-typescript';
 
 export function signJwtToken(user: User) {
   return new Promise<string>((resolve, reject) =>
@@ -134,8 +134,8 @@ export async function sendEmailVerification(userId: string, email: string) {
 
   try {
     const response = await apiInstance.createDoiContact(createDoiContact);
-    console.log(response);
+    return response;
   } catch (error) {
-    console.error(error);
+    console.error(error.message);
   }
 }
