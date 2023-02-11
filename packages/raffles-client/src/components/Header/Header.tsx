@@ -69,11 +69,11 @@ const Header = () => {
   const [email, setEmail] = useState('');
   const [verifyEmail] = useMutation(VERIFY_EMAIL_MUTATION);
   const [confirmEmail] = useMutation(CONFIRM_EMAIL_MUTATION);
-  // const { user } = useCurrentUser();
+  const { user } = useCurrentUser();
 
   const handleVerifyEmail = () => {
     verifyEmail({
-      variables: { userId: 1, email },
+      variables: { userId: Number(user.id), email },
     });
   };
 
