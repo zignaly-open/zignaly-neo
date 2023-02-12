@@ -1,13 +1,13 @@
 import { WalletType } from '@zignaly-open/raffles-shared/types';
 import { withFilter } from 'graphql-subscriptions';
 import { Op } from 'sequelize';
-import { getUserBalance } from '../balances/service';
+import { getUserBalance, deposit } from '../balances/service';
 import pubsub from '../../pubsub';
 import redisService from '../../redisService';
 import { ContextUser, ResourceOptions } from '../../types';
 import { checkAdmin } from '../../util/admin';
 import { getUserIdFromToken } from '../../util/jwt';
-import { BALANCE_CHANGED } from './constants';
+import { BALANCE_CHANGED, EMAIL_REWARD } from './constants';
 import { User } from './model';
 import {
   authenticateSignature,
@@ -175,7 +175,8 @@ export const generateService = (user: ContextUser) => {
 
   const confirmEmail = async (userId: number) => {
     try {
-      User.update(
+      const user = await User.findByPk(userId);
+      await User.update(
         {
           emailVerified: true,
         },
@@ -185,6 +186,26 @@ export const generateService = (user: ContextUser) => {
           },
         },
       );
+
+      if (!user.zhitRewarded) {
+        await deposit({
+          walletAddress: user.publicAddress,
+          amount: EMAIL_REWARD,
+          currency: 'ZHIT',
+          blockchain: '',
+          note: 'Email verification',
+        });
+        await User.update(
+          {
+            zhitRewarded: true,
+          },
+          {
+            where: {
+              id: userId,
+            },
+          },
+        );
+      }
       return true;
     } catch (e) {
       console.error(e);

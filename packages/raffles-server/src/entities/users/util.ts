@@ -6,8 +6,8 @@ import jwt from 'jsonwebtoken';
 import pubsub from '../../pubsub';
 import {
   BALANCE_CHANGED,
-  SENDINBLUE_LIST_ID,
-  SENDINBLUE_TEMPLATE_ID,
+  EMAIL_LIST_IDS,
+  EMAIL_TEMPLATE_ID,
 } from './constants';
 import { getUserBalance } from '../balances/service';
 import { ContextUser } from '../../types';
@@ -122,14 +122,14 @@ export async function sendEmailVerification(userId: string, email: string) {
 
   apiInstance.setApiKey(
     SibApiV3Sdk.ContactsApiApiKeys.apiKey,
-    process.env.SENDINBLUE_API_KEY,
+    process.env.EMAIL_API_KEY,
   );
 
   const createDoiContact = new SibApiV3Sdk.CreateDoiContact(); // CreateDoiContact | Values to create the Double opt-in (DOI) contact
 
   createDoiContact.email = email;
-  createDoiContact.includeListIds = [SENDINBLUE_LIST_ID];
-  createDoiContact.templateId = SENDINBLUE_TEMPLATE_ID;
+  createDoiContact.includeListIds = EMAIL_LIST_IDS;
+  createDoiContact.templateId = EMAIL_TEMPLATE_ID;
   createDoiContact.redirectionUrl = `https://zigbids.zignaly.com/?confirm=${userId}`;
 
   try {

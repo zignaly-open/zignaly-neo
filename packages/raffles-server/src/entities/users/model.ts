@@ -74,6 +74,10 @@ export class User extends Model {
   @Default(false)
   @Column
   public emailVerified: boolean;
+
+  @Default(false)
+  @Column
+  public zhitRewarded: boolean;
 }
 
 export function generateUserNonce(): number {
