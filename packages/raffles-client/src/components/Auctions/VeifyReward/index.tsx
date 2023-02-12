@@ -1,13 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/material/styles';
 import useCurrentUser from '../../../hooks/useCurrentUser';
-import { Layout } from './styles';
-import { Button } from '@zignaly-open/ui';
+import {
+  Button,
+  ErrorMessage,
+  ZigTypography,
+  ZigInput,
+} from '@zignaly-open/ui';
+import { Box } from '@mui/material';
 import { useMutation } from '@apollo/client';
 import { VERIFY_EMAIL_MUTATION, CONFIRM_EMAIL_MUTATION } from 'queries/users';
 import { Send } from '@mui/icons-material';
-// import { Stack } from '@mui/material';
+import { Controller, useForm } from 'react-hook-form';
+import { Form, Gap } from './styles';
+import { EmailValidation } from 'util/validation';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 const StyledSendIcon = styled(Send)`
   color: ${(props) => props.theme.neutral200};
@@ -19,14 +27,11 @@ const VerifyReward = () => {
 
   const [verifyEmail] = useMutation(VERIFY_EMAIL_MUTATION);
   const [confirmEmail] = useMutation(CONFIRM_EMAIL_MUTATION);
-  const [email, setEmail] = React.useState('');
-  const [isConfirmed, setIsConfirmed] = React.useState(false);
-  const [isEmailSent, setIsEmailSent] = React.useState(false);
-  const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
+  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [isEmailSent, setIsEmailSent] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleVerifyEmail = async () => {
+  const handleVerifyEmail = async (email: string) => {
     await verifyEmail({
       variables: { userId: Number(currentUser.id), email },
     });
@@ -45,47 +50,69 @@ const VerifyReward = () => {
     }
   }, [currentUser]);
 
+  const {
+    handleSubmit,
+    control,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: 'onChange',
+    defaultValues: {
+      email: '',
+    },
+    resolver: yupResolver(EmailValidation),
+  });
+
+  const submit = async (values: { email: string }) => {
+    try {
+      handleVerifyEmail(values.email);
+    } catch (e) {
+      setErrorMessage(e.message || 'Something went wrong');
+    }
+  };
+
   return isConfirmed || !currentUser ? (
     <></>
   ) : !isEmailSent ? (
-    <form onSubmit={(e) => e.preventDefault()}>
-      <Layout
-        display='flex'
-        flexDirection='row'
-        alignItems='center'
-        justifyContent='space-between'
-        mb={{ xs: 5, md: 1 }}
-      >
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            width: '100%',
-          }}
-        >
-          <label htmlFor='email'>{t('verify-email-and-earn')}</label>
-          <input
-            id='email'
-            type='email'
-            placeholder={t('Enter email')}
-            onChange={handleEmail}
+    <Box display='flex' flexDirection='row'>
+      <Form onSubmit={handleSubmit(submit)}>
+        <ZigTypography variant='h2' color='neutral400'>
+          {t('verify-email-and-earn')}
+        </ZigTypography>
+        <Box display='flex' flexDirection='row'>
+          <Controller
+            name='email'
+            control={control}
+            render={({ field }) => (
+              <ZigInput
+                fullWidth
+                placeholder={t('email-placeholder')}
+                error={errors.email?.message}
+                {...field}
+              />
+            )}
           />
+          <Gap gap={13} />
           <Button
-            variant='secondary'
-            size='small'
-            caption={t('validate')}
+            type={'submit'}
             leftElement={<StyledSendIcon />}
-            onClick={() => {
-              handleVerifyEmail();
-            }}
+            caption={t('validate')}
+            size='large'
+            disabled={!isValid}
           />
-        </div>
-      </Layout>
-    </form>
+          {errorMessage && (
+            <>
+              <Gap gap={13} />
+              <ErrorMessage text={errorMessage} />
+            </>
+          )}
+        </Box>
+      </Form>
+    </Box>
   ) : (
     <>
-      <p>{t('email-sent')}</p>
+      <ZigTypography variant='h2' color='neutral400'>
+        {t('email-sent')}
+      </ZigTypography>
     </>
   );
 };
