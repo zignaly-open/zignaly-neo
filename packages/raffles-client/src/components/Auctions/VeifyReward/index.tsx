@@ -1,27 +1,15 @@
 import React, { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-// import { Typography, TextButton } from '@zignaly-open/ui';
-// import {
-//   Step,
-//   TypographyTitle,
-//   Layout,
-//   StepDetails,
-//   TypographyStep,
-// } from './styles';
 import { styled } from '@mui/material/styles';
 import useCurrentUser from '../../../hooks/useCurrentUser';
 import { Layout } from './styles';
 import { Button } from '@zignaly-open/ui';
 import { useMutation } from '@apollo/client';
 import { VERIFY_EMAIL_MUTATION, CONFIRM_EMAIL_MUTATION } from 'queries/users';
-import { People } from '@mui/icons-material';
+import { Send } from '@mui/icons-material';
 // import { Stack } from '@mui/material';
-// import { ReactComponent as BidIcon } from '../../../assets/icons/bid_gradient.svg';
-// import { ReactComponent as TrophyIcon } from '../../../assets/icons/trophy_gradient.svg';
-// import { ReactComponent as WalletIcon } from '../../../assets/icons/wallet_gradient.svg';
-// import { ReactComponent as ZigcoinIcon } from '../../../assets/icons/zigcoin_gradient.svg';
 
-const StyledPeopleIcon = styled(People)`
+const StyledSendIcon = styled(Send)`
   color: ${(props) => props.theme.neutral200};
 `;
 
@@ -32,17 +20,23 @@ const VerifyReward = () => {
   const [verifyEmail] = useMutation(VERIFY_EMAIL_MUTATION);
   const [confirmEmail] = useMutation(CONFIRM_EMAIL_MUTATION);
   const [email, setEmail] = React.useState('');
+  const [isConfirmed, setIsConfirmed] = React.useState(false);
+  const [isEmailSent, setIsEmailSent] = React.useState(false);
   const handleEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
-  const handleVerifyEmail = () => {
-    verifyEmail({
+  const handleVerifyEmail = async () => {
+    await verifyEmail({
       variables: { userId: Number(currentUser.id), email },
     });
+    await setIsEmailSent(true);
   };
 
   useEffect(() => {
+    if (currentUser?.emailVerified) {
+      setIsConfirmed(currentUser.emailVerified);
+    }
     const userIdParams = new URLSearchParams(window.location.search).get(
       'confirm',
     );
@@ -51,28 +45,48 @@ const VerifyReward = () => {
     }
   }, [currentUser]);
 
-  return (
-    <Layout
-      display='flex'
-      flexDirection='column'
-      alignItems='center'
-      mb={{ xs: 5, md: 1 }}
-    >
-      <p>{'Verify Email'}</p>
-      {/* <ZigTypography color='neutral200'>
-        {t('discord-user-label')}
-      </ZigTypography> */}
-      <input placeholder='email' onChange={handleEmail} />
-      <Button
-        variant='secondary'
-        size='small'
-        caption={t('Validate email')}
-        leftElement={<StyledPeopleIcon />}
-        onClick={() => {
-          handleVerifyEmail();
-        }}
-      />
-    </Layout>
+  return isConfirmed ? (
+    <></>
+  ) : !isEmailSent ? (
+    <form onSubmit={(e) => e.preventDefault()}>
+      <Layout
+        display='flex'
+        flexDirection='row'
+        alignItems='center'
+        justifyContent='space-between'
+        mb={{ xs: 5, md: 1 }}
+      >
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            width: '100%',
+          }}
+        >
+          <label htmlFor='email'>{t('verify-email-and-earn')}</label>
+          <input
+            id='email'
+            type='email'
+            placeholder={t('Enter email')}
+            onChange={handleEmail}
+          />
+          <Button
+            variant='secondary'
+            size='small'
+            caption={t('validate')}
+            leftElement={<StyledSendIcon />}
+            onClick={() => {
+              handleVerifyEmail();
+            }}
+          />
+        </div>
+      </Layout>
+    </form>
+  ) : (
+    <>
+      <p>{t('email-sent')}</p>
+    </>
   );
 };
 
