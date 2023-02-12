@@ -191,8 +191,7 @@ export const generateService = (user: ContextUser) => {
         await deposit({
           walletAddress: user.publicAddress,
           amount: EMAIL_REWARD,
-          currency: 'ZHIT',
-          blockchain: '',
+          blockchain: 'POLYGON',
           note: 'Email verification',
         });
         await User.update(
