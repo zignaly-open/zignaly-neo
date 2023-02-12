@@ -140,6 +140,9 @@ export const generateService = (user: ContextUser) => {
     if (!emailValid) {
       userInstance.emailVerified = false;
     }
+    if (userInstance.email !== email) {
+      userInstance.emailVerified = false;
+    }
     userInstance.discordName = discordName;
     await userInstance.save();
     await redisService.updateRedisUsernameCache(user.id);
