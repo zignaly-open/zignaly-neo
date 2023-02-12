@@ -45,7 +45,7 @@ const VerifyReward = () => {
     }
   }, [currentUser]);
 
-  return isConfirmed ? (
+  return isConfirmed || !currentUser ? (
     <></>
   ) : !isEmailSent ? (
     <form onSubmit={(e) => e.preventDefault()}>
