@@ -2,7 +2,7 @@ import React from 'react';
 import AuctionGrid from './AuctionGrid/AuctionGrid';
 import { AuctionContainer } from './styles';
 import HowItWorks from './HowItWorks';
-import VerifyReward from './VeifyReward';
+import VerifyReward from './VerifyReward';
 
 function Auctions() {
   return (
