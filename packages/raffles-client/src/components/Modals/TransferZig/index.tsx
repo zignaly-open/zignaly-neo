@@ -17,6 +17,7 @@ import { TransferZigModalProps, ITransferField } from './types';
 import SwitchNetworkModal from '../SwitchNetwork';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { utils } from 'ethers';
+import { ZIGCOIN_PRECISION } from '../../../contract';
 
 const TransferZigModal = (props: TransferZigModalProps) => {
   const { t } = useTranslation('transfer-zig');
@@ -25,7 +26,10 @@ const TransferZigModal = (props: TransferZigModalProps) => {
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const { account, activateBrowserWallet, chainId } = useEthers();
 
-  const balance = utils.formatEther(useTokenBalance(token, account));
+  const tokenBalance = useTokenBalance(token, account);
+  const balance =
+    tokenBalance &&
+    utils.parseUnits(utils.formatUnits(tokenBalance, ZIGCOIN_PRECISION), 0);
   const { isLoading, isError, transfer, isSuccess } = useContract({
     address: address,
   });
@@ -112,7 +116,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                         ? state?.value?.toString().split('.').pop().length <= 8
                         : true,
                     checkMax: (state) =>
-                      Number(balance) >= Number(state?.value),
+                      balance.toNumber() >= Number(state?.value),
                     checkZero: (state) => Number(state?.value) > 0,
                     checkEmpty: (state) => state?.value.toString() != '',
                     checkNumber: (state) => !isNaN(Number(state?.value)),
@@ -155,7 +159,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
           )}
         </Container>
       ) : (
-        <Box display='flex' alignItems={'center'} justifyContent='center'></Box>
+        <Box display='flex' alignItems={'center'} justifyContent='center' />
       )}
       <Gap gap={isError ? 8 : 14} />
       <Box display='flex' justifyContent='center' flexDirection='row'>
