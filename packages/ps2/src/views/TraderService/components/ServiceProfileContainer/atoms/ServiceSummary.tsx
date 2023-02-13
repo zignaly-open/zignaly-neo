@@ -92,6 +92,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
                 : t('common:percent', {
                     value: numericFormatter(service.fundsAllocated, {
                       thousandSeparator: true,
+                      decimalScale: 2,
                     }),
                   })}
             </ZigTypography>
