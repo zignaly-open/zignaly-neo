@@ -36,6 +36,7 @@ import { EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { useServiceDetails } from 'apis/service/use';
+import BigNumber from 'bignumber.js';
 
 function EditInvestmentForm({
   onClickWithdrawInvestment,
@@ -72,7 +73,9 @@ function EditInvestmentForm({
     resolver: isInputEnabled
       ? yupResolver(
           EditInvestmentValidation({
-            max: service.maximumSbt - +service.invested,
+            max: new BigNumber(service.maximumSbt)
+              .minus(service.invested)
+              .toString(),
             coin: service.ssc,
           }),
         )
