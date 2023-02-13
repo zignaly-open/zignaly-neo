@@ -16,6 +16,7 @@ import { Container, InputContainer, StyledErrorOutline } from './styles';
 import { TransferZigModalProps, ITransferField } from './types';
 import SwitchNetworkModal from '../SwitchNetwork';
 import { SubmitHandler, useForm } from 'react-hook-form';
+import { utils } from 'ethers';
 
 const TransferZigModal = (props: TransferZigModalProps) => {
   const { t } = useTranslation('transfer-zig');
@@ -24,7 +25,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
   const matchesSmall = useMediaQuery(theme.breakpoints.up('sm'));
   const { account, activateBrowserWallet, chainId } = useEthers();
 
-  const balance = useTokenBalance(token, account);
+  const balance = utils.formatEther(useTokenBalance(token, account));
   const { isLoading, isError, transfer, isSuccess } = useContract({
     address: address,
   });
@@ -111,7 +112,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                         ? state?.value?.toString().split('.').pop().length <= 8
                         : true,
                     checkMax: (state) =>
-                      balance.toNumber() >= Number(state?.value),
+                      Number(balance) >= Number(state?.value),
                     checkZero: (state) => Number(state?.value) > 0,
                     checkEmpty: (state) => state?.value.toString() != '',
                     checkNumber: (state) => !isNaN(Number(state?.value)),
@@ -119,7 +120,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                 })}
                 tokens={[
                   {
-                    id: 'Zig',
+                    id: 'ZIG',
                     balance: balance?.toString(),
                   },
                 ]}
