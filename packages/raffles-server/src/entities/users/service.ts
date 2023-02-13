@@ -220,6 +220,7 @@ export const generateService = (user: ContextUser) => {
       await sendEmailVerification(`${userId}`, email);
       User.update(
         {
+          email,
           emailVerificationSent: true,
         },
         {
