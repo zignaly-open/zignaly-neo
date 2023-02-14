@@ -72,10 +72,11 @@ const InvestButton: React.FC<{
         id={id}
         onClick={onClickMakeInvestment}
         loading={needsToOpenWhenBalancesLoaded && isFetching}
-        variant={maxReached ? 'outlined' : 'contained'}
+        variant='contained'
         size={'large'}
         disabled={maxReached}
         sx={{ flexDirection: 'column', minWidth: 165 }}
+        tooltip={t('invest-button.max-reached-tooltip')}
       >
         <>
           <ZigTypography

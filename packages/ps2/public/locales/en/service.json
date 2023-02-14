@@ -9,6 +9,7 @@
   "invest-button": {
     "invest-now": "INVEST",
     "max-reached": "Maximum Funds Reached",
+    "max-reached-tooltip": "Investments are not allowed in this service because it has reached the Maximum Funds Limit. Discover other Profit Sharing Services in our Marketplace.",
     "all-accounts": "See all ({{count}})",
     "x-success-fee": "{{fee}}% Success fee"
   },
