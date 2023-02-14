@@ -44,7 +44,7 @@ function AuthVerifyModal({
   let [verify, verifyStatus] = verifyEmailNewUser;
   let [resend, resendStatus] = resendEmailNewUser;
 
-  if (isUnknownDevice) {
+  if (!emailUnconfirmed && isUnknownDevice) {
     [verify, verifyStatus] = verifyDevice;
     [resend, resendStatus] = resendDevice;
   } else if (disabled) {
