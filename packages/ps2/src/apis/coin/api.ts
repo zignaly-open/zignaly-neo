@@ -129,7 +129,7 @@ export const api = createApi({
         method: 'POST',
         params: {
           days,
-          type,
+          ...(type && { type }),
         },
       }),
     }),
