@@ -4,10 +4,15 @@ import { algorithm, secret } from '../../../config';
 import { generateUserNonce, User } from './model';
 import jwt from 'jsonwebtoken';
 import pubsub from '../../pubsub';
-import { BALANCE_CHANGED } from './constants';
+import {
+  BALANCE_CHANGED,
+  EMAIL_LIST_IDS,
+  EMAIL_TEMPLATE_ID,
+} from './constants';
 import { getUserBalance } from '../balances/service';
 import { ContextUser } from '../../types';
 import redisService from '../../redisService';
+import * as SibApiV3Sdk from 'sib-api-v3-typescript';
 
 export function signJwtToken(user: User) {
   return new Promise<string>((resolve, reject) =>
@@ -110,4 +115,27 @@ export async function emitBalanceChanged(user: ContextUser) {
       balance: currentBalance,
     },
   });
+}
+
+export async function sendEmailVerification(userId: string, email: string) {
+  const apiInstance = new SibApiV3Sdk.ContactsApi();
+
+  apiInstance.setApiKey(
+    SibApiV3Sdk.ContactsApiApiKeys.apiKey,
+    process.env.EMAIL_API_KEY,
+  );
+
+  const createDoiContact = new SibApiV3Sdk.CreateDoiContact(); // CreateDoiContact | Values to create the Double opt-in (DOI) contact
+
+  createDoiContact.email = email;
+  createDoiContact.includeListIds = EMAIL_LIST_IDS;
+  createDoiContact.templateId = Number(EMAIL_TEMPLATE_ID);
+  createDoiContact.redirectionUrl = `https://zigbids.zignaly.com/?confirm=${userId}`;
+
+  try {
+    const response = await apiInstance.createDoiContact(createDoiContact);
+    return response;
+  } catch (error) {
+    console.error(error.message);
+  }
 }
