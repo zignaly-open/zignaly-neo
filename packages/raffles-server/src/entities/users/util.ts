@@ -139,3 +139,20 @@ export async function sendEmailVerification(userId: string, email: string) {
     console.error(error.message);
   }
 }
+
+export async function isEmailConfirmed(email: string) {
+  const apiInstance = new SibApiV3Sdk.ContactsApi();
+
+  apiInstance.setApiKey(
+    SibApiV3Sdk.ContactsApiApiKeys.apiKey,
+    process.env.EMAIL_API_KEY,
+  );
+
+  try {
+    const { body } = await apiInstance.getContactInfo(email);
+    const hasOptedIn = body.attributes['DOUBLE_OPT-IN'] === '1';
+    return hasOptedIn;
+  } catch (error) {
+    console.error(error.message);
+  }
+}

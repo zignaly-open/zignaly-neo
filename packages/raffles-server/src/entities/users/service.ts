@@ -15,6 +15,7 @@ import {
   validateEmail,
   validateUsername,
   sendEmailVerification,
+  isEmailConfirmed,
 } from './util';
 
 const generateNonceSignMessage = (nonce: string | number) =>
@@ -179,27 +180,10 @@ export const generateService = (user: ContextUser) => {
   const confirmEmail = async (userId: number) => {
     try {
       const user = await User.findByPk(userId);
-      await User.update(
-        {
-          emailVerified: true,
-        },
-        {
-          where: {
-            id: userId,
-          },
-        },
-      );
-
-      if (!user.zhitRewarded) {
-        await deposit({
-          walletAddress: user.publicAddress,
-          amount: EMAIL_REWARD,
-          blockchain: 'POLYGON',
-          note: 'Email verification',
-        });
+      if (await isEmailConfirmed(user.email)) {
         await User.update(
           {
-            zhitRewarded: true,
+            emailVerified: true,
           },
           {
             where: {
@@ -207,8 +191,27 @@ export const generateService = (user: ContextUser) => {
             },
           },
         );
+
+        if (!user.zhitRewarded) {
+          await deposit({
+            walletAddress: user.publicAddress,
+            amount: EMAIL_REWARD,
+            blockchain: 'POLYGON',
+            note: 'Email verification',
+          });
+          await User.update(
+            {
+              zhitRewarded: true,
+            },
+            {
+              where: {
+                id: userId,
+              },
+            },
+          );
+        }
+        return true;
       }
-      return true;
     } catch (e) {
       console.error(e);
       return false;
@@ -222,6 +225,7 @@ export const generateService = (user: ContextUser) => {
         {
           email,
           emailVerificationSent: true,
+          emailVerified: false,
         },
         {
           where: {
