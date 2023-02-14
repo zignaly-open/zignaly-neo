@@ -83,7 +83,6 @@ const Header = () => {
       // Disconnected manually from MM.
       logout();
     }
-
     // Save user to avoid detecting false disconnection because "account" wasn't yet loaded at page load.
     userRef.current = currentUser;
   }, [account, currentUser]);

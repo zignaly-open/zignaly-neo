@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - master
-      - feat/zigbids-speedup
+      - feat/deprecate-usages-imput-amount
 jobs:
   pre_job:
     runs-on: ubuntu-latest
