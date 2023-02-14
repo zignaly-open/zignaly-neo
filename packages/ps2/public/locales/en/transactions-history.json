@@ -42,5 +42,6 @@
   },
   "external": "External Address",
   "deleted": "Deleted Exchange Account",
-  "noData": "No transactions"
+  "noData": "No transactions",
+  "psService": "Profit Sharing Service"
 }
