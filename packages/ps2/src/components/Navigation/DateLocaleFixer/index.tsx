@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import setDefaultOptions from 'date-fns/setDefaultOptions';
+import { setDefaultOptions } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 import { dateFnsLocaleMapping } from '../../../util/i18next';
 
