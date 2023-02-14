@@ -26,6 +26,7 @@ const LayoutContentWrapper = <TData, TError>({
   const someError = endpoints.find((x) => x.error)?.error;
   const isLoading = endpoints.some((x) => x.isLoading);
   const isFetching = endpoints.some((x) => x.isFetching);
+
   const data = endpoints.every((x) => x.data) && endpoints.map((x) => x.data);
 
   if (isLoading || (unmountOnRefetch && isFetching)) return <CenteredLoader />;

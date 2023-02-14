@@ -25,7 +25,6 @@ export { ThemeProvider as ThemeProviderMui } from "@mui/material";
 import Button from "./components/inputs/Button";
 import CheckBox from "./components/inputs/CheckBox";
 import IconButton from "./components/inputs/IconButton";
-import InputAmount from "./components/inputs/InputAmount";
 import TextButton from "./components/inputs/TextButton";
 import InputText from "./components/inputs/InputText";
 import Select from "./components/inputs/Selector";
@@ -34,14 +33,6 @@ import { ButtonGroup, ValueIndicator } from "./components/styled";
 
 // Layouts
 import { MarginContainer, PageContainer } from "./components/styled";
-
-// Modals
-import MessageModal from "components/modals/MessageModal";
-import AuthVerifyModal from "components/modals/AuthVerifyModal";
-import MinBalanceModal from "components/modals/MinBalanceModal";
-import DepositModal from "components/modals/MyAccount/DepositModal";
-import WithdrawModal from "components/modals/MyAccount/WithdrawModal";
-import ConnectWalletModal from "components/modals/ZigRaffle/ConnectWallet";
 
 // Icons
 export { ReactComponent as CloneIcon } from "assets/icons/clone-icon.svg";
@@ -89,7 +80,8 @@ import BrandImage from "./components/navigation/Header/components/BrandImage";
 import ZigTabs, { ZigTab, ZigTabPanel } from "./components/navigation/ZigTabs";
 
 export * from "./theme";
-export { default as ZigButton } from "./components/inputs/ZigButton";
+export { default as ZigButton, ZigButtonGroup } from "./components/inputs/ZigButton";
+export { default as ZigButtonGroupInput } from "./components/inputs/ZigButtonGroupInput";
 export { default as ZigInput } from "./components/inputs/ZigInput";
 export { default as ZigTypography } from "./components/display/ZigTypography";
 export { default as ZigPriceLabel, ZigTablePriceLabel } from "./components/display/ZigPriceLabel";
@@ -135,7 +127,6 @@ export {
   Button,
   CheckBox,
   IconButton,
-  InputAmount,
   InputAmountAdvanced,
   TextButton,
   InputText,
@@ -153,13 +144,6 @@ export {
   ZigTabs,
   ZigTab,
   ZigTabPanel,
-  // Modals
-  ConnectWalletModal,
-  MessageModal,
-  AuthVerifyModal,
-  DepositModal,
-  WithdrawModal,
-  MinBalanceModal,
   /**
    * =-=-=-=-=-=-=-=
    *     Utils

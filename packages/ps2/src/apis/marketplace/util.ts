@@ -14,6 +14,7 @@ export function marketplaceServiceToInvestmentType(
     ownerName: service.ownerName,
     sparklines: service.sparklines as unknown as AxisFormat[],
     createdAt: service.createdAt,
+    ownerVerified: service.ownerVerified,
     pnl30dPct: service.pnlPercent30t.toString(),
     pnl90dPct: service.pnlPercent90t.toString(),
     pnl180dPct: service.pnlPercent180t.toString(),

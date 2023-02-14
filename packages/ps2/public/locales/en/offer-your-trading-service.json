@@ -1,0 +1,78 @@
+{
+  "header": {
+    "title": "OFFER YOUR TRADING SERVICE \n TO UP TO +400K USERS"
+  },
+  "modal": {
+    "title": "Create new service",
+    "service-type": "Service type",
+    "service-name": "Service name",
+    "base-currency": "Base Currency",
+    "types": {
+      "spot": "Spot",
+      "futures": "Futures"
+    },
+    "please-verify": "Please review your info. Type, base and name can't be changed later"
+  },
+  "wrapper": {
+    "title": "Profit Sharing Service Benefits",
+    "list": {
+      "item1": "Trade from any solution that allows Binance API Keys",
+      "item2": "Choose your own success fees",
+      "item3": "Apply to get listed in our <0>marketplace</0> or keep it private"
+    },
+    "action": "Create your service"
+  },
+  "infoBar": {
+    "item1": {
+      "title": "$5 MILLION",
+      "description": "Pooled Assets"
+    },
+    "item2": {
+      "title": "+430,000",
+      "description": "Profit Sharing Investors"
+    },
+    "item3": {
+      "title": "1300",
+      "description": "Active Services"
+    }
+  },
+  "features": {
+    "title": "Profit Sharing Service Features",
+    "list": {
+      "item1": {
+        "title": "PERFORMANCE ANALYTICS",
+        "description": "You, as well as the users, will be able to check your daily profits and losses and compound PNL percentage among other metrics."
+      },
+      "item2": {
+        "title": "FUND MANAGEMENT",
+        "description": "You can handle thousands of investors without worrying about each individual's accounting and support. Zignaly’s team will take care of it."
+      },
+      "item3": {
+        "title": "DAILY PAYOUTS",
+        "description": "Receive daily success fees from your Profit Sharing services."
+      },
+      "item4": {
+        "title": "TRADER SUCCESS TEAM",
+        "description": "A success manager will be assigned to you that will help you during the process."
+      }
+    }
+  },
+  "howWorks": {
+    "title": "Reasons why the best traders offer their services in Zignaly",
+    "list": {
+      "item1": {
+        "title": "Pool Funds",
+        "description": "You'll get access to the funds through a secured pooled account, so all the users will get exactly the same results."
+
+      },
+      "item2": {
+        "title": "Trade",
+        "description": "Connecting your strategy is easy: API keys are available to keep trading on your favorite tool or send signals from Trading View."
+      },
+      "item3": {
+        "title": "Split Profits",
+        "description": "Choose your desired success fee. Zignaly's share is always 5% which must be included."
+      }
+    }
+  }
+}

@@ -23,6 +23,7 @@ const OtherAccountsButton: React.FC<{
 
   return (
     <TextButton
+      id={'service__see-all'}
       caption={t('invest-button.all-accounts', {
         count: investedFromAccounts,
       })}

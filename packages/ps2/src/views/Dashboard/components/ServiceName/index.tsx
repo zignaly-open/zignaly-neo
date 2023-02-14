@@ -7,6 +7,8 @@ import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import { generatePath, Link } from 'react-router-dom';
 import { getServiceLogo } from '../../../../util/images';
 import { useTranslation } from 'react-i18next';
+import { Tooltip } from '@mui/material';
+import { StyledVerifiedIcon } from './styles';
 
 export const ServiceName = ({ service }: ServiceNameProps) => {
   const { t } = useTranslation('table');
@@ -38,9 +40,16 @@ export const ServiceName = ({ service }: ServiceNameProps) => {
         <ZigTypography fontWeight='medium' color='neutral100'>
           {service.serviceName}
         </ZigTypography>
-        <ZigTypography variant='body2' fontWeight='medium' color='neutral400'>
-          {t('serviceName-by')} {service.ownerName}
-        </ZigTypography>
+        <div>
+          <ZigTypography variant='body2' fontWeight='medium' color='neutral400'>
+            {t('serviceName-by')} {service.ownerName}
+          </ZigTypography>
+          {service.ownerVerified && (
+            <Tooltip title={t('owner-verified')}>
+              <StyledVerifiedIcon width={13} height={13} />
+            </Tooltip>
+          )}
+        </div>
         <ZigTypography variant='body2' fontWeight='medium' color='neutral400'>
           {service.ssc}
         </ZigTypography>

@@ -9,8 +9,12 @@ import {
   TraderServiceManagement,
   TraderServiceChart,
   TransferPayload,
+  EditServicePayload,
+  CreateServicePayload,
+  ServiceTypesInfo,
 } from './types';
 import baseQuery from '../baseQuery';
+import { providesList } from 'apis/util';
 
 export const api = createApi({
   baseQuery: baseQuery(),
@@ -18,10 +22,10 @@ export const api = createApi({
   tagTypes: ['Service', 'ServiceChart'],
   endpoints: (builder) => ({
     traderServices: builder.query<TraderService[], void>({
-      providesTags: [{ type: 'Service', id: 'LIST' }],
       query: () => ({
         url: 'services/list',
       }),
+      providesTags: (result) => providesList(result, 'Service', 'serviceId'),
     }),
     traderServiceDetails: builder.query<TraderServiceFull, string>({
       providesTags: (result, error, id) => [{ type: 'Service', id }],
@@ -70,6 +74,22 @@ export const api = createApi({
         body: { minimum },
       }),
     }),
+    createTraderService: builder.mutation<
+      TraderServiceFull,
+      CreateServicePayload
+    >({
+      invalidatesTags: ['Service'],
+      query: (payload) => ({
+        url: `services`,
+        method: 'POST',
+        body: payload,
+      }),
+    }),
+    getServiceTypesInfo: builder.query<ServiceTypesInfo, void>({
+      query: () => ({
+        url: `service-types`,
+      }),
+    }),
     traderServiceTransferFunds: builder.mutation<
       void,
       { serviceId: string } & TransferPayload
@@ -83,6 +103,16 @@ export const api = createApi({
         body: payload,
       }),
     }),
+    traderServiceEdit: builder.mutation<void, EditServicePayload>({
+      invalidatesTags: (result, error, args) => [
+        { type: 'Service', id: args.id },
+      ],
+      query: ({ id, ...payload }) => ({
+        url: `services/${id}`,
+        method: 'PUT',
+        body: payload,
+      }),
+    }),
   }),
 });
 
@@ -93,8 +123,11 @@ export const {
   useTraderServiceBalanceQuery,
   useTraderServiceGraphQuery,
   useTraderServiceManagementQuery,
+  useCreateTraderServiceMutation,
+  useGetServiceTypesInfoQuery,
   useTraderServiceUpdateScaMinimumMutation,
   useLazyTraderServicesQuery,
   useTraderServiceTransferFundsMutation,
   useTraderServicesQuery,
+  useTraderServiceEditMutation,
 } = api;

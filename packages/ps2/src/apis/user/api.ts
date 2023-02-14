@@ -1,6 +1,6 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import {
-  LoginFullPayload,
+  LoginPayload,
   LoginResponse,
   SessionResponse,
   SignupPayload,
@@ -26,7 +26,7 @@ export const api = createApi({
         method: 'POST',
       }),
     }),
-    login: builder.mutation<LoginResponse, LoginFullPayload>({
+    login: builder.mutation<LoginResponse, LoginPayload>({
       query: (credentials) => ({
         url: 'login',
         method: 'POST',
@@ -131,6 +131,33 @@ export const api = createApi({
         body: params,
       }),
     }),
+
+    resetPasswordRequest: builder.mutation<
+      void,
+      {
+        email: string;
+      }
+    >({
+      query: (params) => ({
+        url: `/user/request_action/forgotten_password`,
+        method: 'POST',
+        body: params,
+      }),
+    }),
+
+    resetPassword: builder.mutation<
+      void,
+      {
+        token: string;
+        password: string;
+      }
+    >({
+      query: (params) => ({
+        url: `/user/confirm_action/forgotten_password`,
+        method: 'POST',
+        body: params,
+      }),
+    }),
   }),
 });
 
@@ -150,4 +177,6 @@ export const {
   useResendCodeNewUserMutation,
   useResendKnownDeviceCodeMutation,
   useUpdateUserMutation,
+  useResetPasswordRequestMutation,
+  useResetPasswordMutation,
 } = api;

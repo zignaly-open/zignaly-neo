@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { Icon, Placeholder } from "./styles";
 import { CoinSizes, ZIGCoinIconProps, COIN_SIZES, sizes } from "./types";
+import { ZignalyIcon } from "../../../index";
 
 const ZigCoinIcon = ({
   size = COIN_SIZES.MEDIUM,
@@ -18,6 +19,8 @@ const ZigCoinIcon = ({
 
   return src ? (
     <Icon src={src} alt={name} size={s} className={className} onError={onError} />
+  ) : coin.toLowerCase() === "zig" ? (
+    <ZignalyIcon width={sizes[size as CoinSizes]} height={sizes[size as CoinSizes]} />
   ) : (
     <Placeholder size={s} className={className} as="div">
       {coin[0]}

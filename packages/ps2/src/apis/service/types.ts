@@ -1,4 +1,5 @@
 import { AxisFormat } from '@zignaly-open/ui/lib/components/display/ZigChart/types';
+import { ExchangeType } from '../user/types';
 
 type TraderServiceStatus = 'FULL' | string;
 
@@ -19,6 +20,7 @@ export enum TraderServiceAccessLevel {
   Solo = 0,
   Private = 100,
   Public = 200,
+  Marketplace = 500,
 }
 
 export type TraderServiceFull = {
@@ -41,9 +43,14 @@ export type TraderServiceFull = {
   ssc: string;
   successFee: string;
   type: string;
-  usdtInvested: string;
+  investedUSDT: string;
   userId: string;
 };
+
+export type ServiceTypesInfo = Record<
+  ExchangeType,
+  Record<string, { minimum_owner_balance: number }>
+>;
 
 export type TraderServiceManagement = {
   createdAt: string;
@@ -117,11 +124,12 @@ export type Service = {
   ownerVerified: boolean;
   solo: boolean;
   ssc: string;
-  successFee: string;
+  successFee: number;
   tags: string[];
   type: string;
-  usdtInvested: string;
+  investedUSDT: string;
   userId: string;
+  maximumSbt: number;
 
   pnlPercent7t: string;
   pnlPercent30t: string;
@@ -176,3 +184,22 @@ export enum GraphChartType {
   'at_risk_pct' = 'at_risk_pct',
   'pnl_pct_compound' = 'pnl_pct_compound',
 }
+
+export type EditServicePayload = {
+  id: string;
+  name: string;
+  description: string;
+  successFee: number;
+  maximumSbt: number;
+  logo: string;
+  level: TraderServiceAccessLevel;
+};
+
+export type CreateServicePayload = {
+  amount: number;
+  name: string;
+  ssc: string;
+  type: string;
+  exchangeInternalId: string;
+  successFee: number;
+};

@@ -176,6 +176,7 @@ const WalletTransactions = () => {
         </Box>
         <Box display='flex' gap={2}>
           <TextButton
+            id={'wallet__export-transactions'}
             rightElement={<Add sx={{ color: 'links' }} />}
             caption={t('action:export')}
             onClick={() => downloadCsv()}

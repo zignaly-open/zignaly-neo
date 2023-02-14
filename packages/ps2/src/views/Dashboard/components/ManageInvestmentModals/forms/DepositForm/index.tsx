@@ -55,7 +55,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         return {
           value: ssc,
           name,
-          label: <CoinOption coin={ssc} name={name} />,
+          label: <CoinOption key={ssc} coin={ssc} name={name} />,
           inOrders: balance?.balanceLocked || 0,
           balance: balance?.balanceTotal || 0,
           available: balance?.balanceFree || 0,
@@ -110,6 +110,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
+                id={'deposit__select-coin'}
                 menuPlacement='auto'
                 menuShouldScrollIntoView={false}
                 menuPosition='fixed'
@@ -176,6 +177,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
+                id={'deposit__select-network'}
                 menuPosition='fixed'
                 menuShouldBlockScroll
                 menuShouldScrollIntoView={false}
@@ -192,6 +194,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
           <>
             <Grid item xs={12} pt={3}>
               <InputText
+                id={'deposit__deposit-address'}
                 placeholder={t('depositAddress.placeholder')}
                 label={t('depositAddress.label')}
                 readOnly={true}
@@ -199,7 +202,12 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                   loading ? t('depositAddress.loading') : depositInfo?.address
                 }
                 rightSideElement={
-                  <CloneIcon width={40} height={40} color={dark.neutral300} />
+                  <CloneIcon
+                    width={40}
+                    height={40}
+                    color={dark.neutral300}
+                    id={'deposit-address__copy'}
+                  />
                 }
                 onClickRightSideElement={() => {
                   trackCta({
@@ -226,6 +234,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             {!!depositInfo?.tag && (
               <Grid item xs={12} pt={3}>
                 <InputText
+                  id={'deposit__deposit-memo'}
                   label={t('depositMemo.label')}
                   placeholder={t('depositAddress.placeholder')}
                   readOnly={true}

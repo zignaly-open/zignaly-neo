@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
 import { useSelectedInvestment } from '../../../../apis/investment/use';
@@ -18,16 +18,23 @@ function InvestModal({
   const { isLoading: isLoadingCoins } = useCoinBalances();
   const { t } = useTranslation(['edit-investment', 'withdraw-your-investment']);
   const isLoading = isLoadingService || isLoadingCoins;
+  const [isInvested, setIsInvested] = useState(false);
 
   return (
     <ZModal
       wide
       {...props}
       close={close}
-      title={t('invest-modal.invest-with')}
+      title={t(isInvested ? 'modalSuccess.title' : 'invest-modal.invest-with')}
       isLoading={isLoading}
     >
-      {!isLoading && <InvestView close={close} />}
+      {!isLoading && (
+        <InvestView
+          close={close}
+          isInvested={isInvested}
+          setIsInvested={setIsInvested}
+        />
+      )}
     </ZModal>
   );
 }

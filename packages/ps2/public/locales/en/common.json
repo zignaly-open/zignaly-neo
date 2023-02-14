@@ -44,7 +44,8 @@
     }
   },
   "navigation-menu": {
-    "profit-sharing": "Profit Sharing"
+    "profit-sharing": "Profit Sharing",
+    "become-trader": "Offer your trading services"
   },
   "amount": "Amount",
   "percent": "{{value, prettyNumber}}%",
@@ -56,12 +57,14 @@
   "type-to-confirm": "Type \"{{word}}\" to confirm",
   "validation": {
     "insufficient-amount": "Insufficient funds",
+    "insufficient-amount-min": "Min amount: {{ minValue }} {{ minValueCoin }}",
     "invalid-value": "Invalid value",
     "negative-amount": "Should be >= 0",
     "max-allowed-length": "Should be under {{ maxLength }} characters",
     "negative-zeroable-amount": "Should be > 0",
     "min-amount": "Minimum amount is {{amount}} {{coin}}.",
     "invalid-amount": "You must indicate an amount",
-    "max-decimals": "Please enter numbers with no more than {{maxDecimals}} decimal places."
+    "max-decimals": "Please enter numbers with no more than 8 decimal places.",
+    "invalid-characters": "Invalid characters"
   }
 }

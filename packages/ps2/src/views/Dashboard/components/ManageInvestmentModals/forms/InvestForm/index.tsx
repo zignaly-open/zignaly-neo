@@ -104,7 +104,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                 {t('invest-modal.amount-to-invest')}
               </Typography>
               <AmountInvested>
-                <CoinIcon coin={coin.id} />
+                <CoinIcon coin={coin.id} name={'coin-icon'} />
                 <TokenValue>
                   <Typography variant={'bigNumber'} color={'neutral100'}>
                     <NumericFormat
@@ -245,6 +245,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           }}
         >
           <Button
+            id={'invest-close'}
             size={'large'}
             type={'button'}
             disabled={isLoading}
@@ -254,6 +255,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           />
 
           <Button
+            id={'invest-confirm'}
             size={'large'}
             type={'submit'}
             loading={isLoading}

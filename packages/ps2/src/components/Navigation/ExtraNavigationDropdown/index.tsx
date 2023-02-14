@@ -51,7 +51,7 @@ const ExtraNavigationDropdown: React.FC = () => {
   let options: DropDownOption[] = [
     {
       label: t('main-menu.dropdown-link-forTrading'),
-      id: 'menu__for-trading',
+      id: 'menu-dropdown__for-trading',
       href:
         service &&
         generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
@@ -68,13 +68,13 @@ const ExtraNavigationDropdown: React.FC = () => {
     },
     {
       label: t('main-menu.dropdown-link-helpDocs'),
-      id: 'menu__help-docs',
+      id: 'menu-dropdown__help-docs',
       target: '_blank',
       href: 'https://help.zignaly.com/hc/en-us',
     },
     {
       separator: true,
-      id: 'menu__language-switcher',
+      id: 'menu-dropdown__language-switcher',
       label: (
         <>
           <GlobeLanguagesStyled
@@ -87,7 +87,8 @@ const ExtraNavigationDropdown: React.FC = () => {
           </LabelButton>
         </>
       ),
-      children: languageMap.map((language) => ({
+      children: languageMap.map((language, index) => ({
+        id: `menu-dropdown-languages__${index.toString()}`,
         active: i18n.language === language.locale,
         label: language.label,
         onClick: () => handleSelectLanguage(language.locale),
@@ -103,6 +104,7 @@ const ExtraNavigationDropdown: React.FC = () => {
                 onClick={onClose}
                 href={socialNetwork.path}
                 key={`--social-network-nav-link-${index.toString()}`}
+                id={`menu-dropdown__social-network-${index.toString()}`}
                 target={'_blank'}
               >
                 <IconComponent height={'22px'} width={'22px'} />
@@ -115,13 +117,16 @@ const ExtraNavigationDropdown: React.FC = () => {
   ];
 
   if (languageMap.length === 1) {
-    options = options.filter((x) => x.id !== 'menu__language-switcher');
+    options = options.filter(
+      (x) => x.id !== 'menu-dropdown__language-switcher',
+    );
   }
 
   return (
     <DropDown
       component={({ open }) => (
         <IconButton
+          id={'menu__dropdown-trading'}
           variant={'flat'}
           icon={
             <OptionHorizontalDotsIcon
