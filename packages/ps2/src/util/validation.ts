@@ -3,7 +3,8 @@ import BigNumber from 'bignumber.js';
 
 export const decimalsValidation = (maxDecimals: number) =>
   yup.string().test('int', 'common:validation.max-decimals', (val) => {
-    if (!val) return false;
+    // will be checked by .required()
+    if (!val) return true;
 
     const splitValueDot = val.split('.');
     // Handle incorrect number
@@ -50,6 +51,16 @@ const inputAmountNumberValidationMaxToken = inputAmountNumberValidationGt0.test(
   },
 );
 
+const inputAmountNumberValidationMinToken = inputAmountNumberValidationGt0.test(
+  'number',
+  'common:validation.insufficient-amount-min',
+  function (val) {
+    const minValue = new BigNumber(this.parent?.token?.min);
+    const currentValue = new BigNumber(val);
+    return !currentValue.isLessThan(minValue);
+  },
+);
+
 export const inputAmountTokenValidation = yup.object().shape({
   value: inputAmountNumberValidationGt0,
 });
@@ -60,6 +71,10 @@ export const inputAmountZeroableValidation = yup.object().shape({
 
 export const inputAmountTokenMaxValidation = yup.object().shape({
   value: inputAmountNumberValidationMaxToken,
+});
+
+export const inputAmountTokenMinValidation = yup.object().shape({
+  value: inputAmountNumberValidationMinToken,
 });
 
 export const inputAmountTokenDecimalsValidation = yup.object().shape({

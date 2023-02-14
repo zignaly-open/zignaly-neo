@@ -31,7 +31,7 @@
   "license": "ISC",
   "devDependencies": {
     "husky": "^8.0.1",
-    "lerna": "^5.1.2",
+    "lerna": "^6.4.1",
     "lint-staged": "^13.0.0"
   },
   "dependencies": {
@@ -45,6 +45,7 @@
     "@apollo/client": "3.6.9",
     "react-hook-form": "7.34.2",
     "react-router-dom": "6.3.0",
-    "react-router": "6.3.0"
+    "react-router": "6.3.0",
+    "loader-utils": "2.0.4"
   }
 }

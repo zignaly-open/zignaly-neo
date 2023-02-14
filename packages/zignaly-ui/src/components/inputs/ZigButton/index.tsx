@@ -1,6 +1,7 @@
 import React from "react";
 import { LoadingButton, LoadingButtonProps } from "@mui/lab";
-import { Tooltip } from "@mui/material";
+import { ButtonGroup, styled, Tooltip } from "@mui/material";
+import { dark } from "../../../theme";
 
 export type ZigButtonProps = LoadingButtonProps & {
   ctaId?: string;
@@ -8,7 +9,7 @@ export type ZigButtonProps = LoadingButtonProps & {
   active?: boolean;
 };
 
-const ZigButton = ({ loading, active, tooltip, ctaId, color, ...props }: ZigButtonProps) => {
+const ZigButton = ({ active, tooltip, ctaId, color, ...props }: ZigButtonProps) => {
   const button = (
     <LoadingButton
       data-tack-cta={ctaId}
@@ -27,5 +28,21 @@ const ZigButton = ({ loading, active, tooltip, ctaId, color, ...props }: ZigButt
     button
   );
 };
+
+export const ZigButtonGroup: React.FC = styled(ButtonGroup)`
+  .MuiButton-root {
+    border-right-width: 0 !important;
+
+    &:last-child {
+      border-right-width: 1px !important;
+    }
+
+    &:hover,
+    &.MuiButton-active {
+      z-index: 3;
+      box-shadow: 1px 0 0 ${dark.neutral400};
+    }
+  }
+`;
 
 export default ZigButton as typeof LoadingButton & typeof ZigButton;

@@ -55,7 +55,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         return {
           value: ssc,
           name,
-          label: <CoinOption coin={ssc} name={name} />,
+          label: <CoinOption key={ssc} coin={ssc} name={name} />,
           inOrders: balance?.balanceLocked || 0,
           balance: balance?.balanceTotal || 0,
           available: balance?.balanceFree || 0,

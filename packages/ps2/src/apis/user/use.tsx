@@ -24,7 +24,6 @@ import {
   useVerifyCodeNewUserMutation,
   useVerifyKnownDeviceMutation,
 } from './api';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import {
   activateExchange,
   logout,
@@ -127,19 +126,15 @@ export const useAuthenticate = (): [
 
   const [loading, setLoading] = useState(false);
 
-  const { executeRecaptcha } = useGoogleReCaptcha();
   // can't use useAsyncFn because https://github.com/streamich/react-use/issues/1768
   return [
     { loading },
     async (payload: LoginPayload) => {
       setLoading(true);
-      const gRecaptchaResponse = await executeRecaptcha('login');
 
       try {
         const user = await login({
           ...payload,
-          gRecaptchaResponse,
-          c: 3,
         }).unwrap();
         await startSession(user);
         setLoading(false);

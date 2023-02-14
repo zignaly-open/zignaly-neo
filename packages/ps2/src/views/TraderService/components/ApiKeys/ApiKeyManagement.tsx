@@ -22,7 +22,7 @@ const ApiKeyManagement: React.FC = () => {
     isLoading,
     isFetching,
     data: keys,
-  } = useServiceApiKeysQuery({ serviceId });
+  } = useServiceApiKeysQuery({ serviceId }, { refetchOnMountOrArgChange: 30 });
 
   return (
     <>
@@ -41,7 +41,7 @@ const ApiKeyManagement: React.FC = () => {
           <ZigTypography variant={'h1'}>{t('api-keys.title')}</ZigTypography>
           <ZigTypography variant={'body1'}>
             <Trans i18nKey='api-keys.description' t={t}>
-              <ExternalLink href={'https://zignaly.com'} />
+              <ExternalLink href={'https://trading.zignaly.com'} />
             </Trans>
           </ZigTypography>
         </Box>
