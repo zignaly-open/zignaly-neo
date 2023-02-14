@@ -17,6 +17,7 @@ import TransactionDetails from './atoms/TransactionDetails';
 import { Box } from '@mui/material';
 import { PaginationState } from '@tanstack/react-table';
 import { getTransactionSideType, truncateAddress } from './util';
+import { TRANSACTION_TYPE } from 'apis/coin/types';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(
@@ -98,13 +99,16 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
       }),
       columnHelper.accessor('fromName', {
         header: t('tableHeader.from'),
-        cell: ({ getValue }) => (
+        cell: ({ getValue, row: { original } }) => (
           <ZigTypography
             whiteSpace='normal'
             color='neutral100'
             fontWeight={500}
           >
-            {getValue() || t('external')}
+            {getValue() ||
+              (original.txType === TRANSACTION_TYPE.PS_WITHDRAW
+                ? t('psService')
+                : t('external'))}
           </ZigTypography>
         ),
         enableSorting: false,
