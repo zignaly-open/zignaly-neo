@@ -26,10 +26,10 @@ export const EditServiceValidation = yup
   .object({
     name: serviceNameValidation,
     successFee: successFeeValidation,
-    // maximumSbt: yup
-    //   .number()
-    //   .typeError('error:error.required')
-    //   .required('error:error.required')
-    //   .positive('common:validation.negative-zeroable-amount'),
+    maximumSbt: yup
+      .number()
+      .typeError('error:error.required')
+      .required('error:error.required')
+      .positive('common:validation.negative-zeroable-amount'),
   })
   .required();
