@@ -76,7 +76,7 @@ const InvestButton: React.FC<{
         size={'large'}
         disabled={maxReached}
         sx={{ flexDirection: 'column', minWidth: 165 }}
-        tooltip={t('invest-button.max-reached-tooltip')}
+        tooltip={maxReached ? t('invest-button.max-reached-tooltip') : null}
       >
         <>
           <ZigTypography

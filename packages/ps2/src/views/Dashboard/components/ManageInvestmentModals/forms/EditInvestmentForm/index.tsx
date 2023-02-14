@@ -114,7 +114,13 @@ function EditInvestmentForm({
   const maxReached = +service.invested >= service.maximumSbt;
 
   const tooltipWrap = (v: React.ReactElement) =>
-    maxReached ? <Tooltip title={t('form.link.maxReached')}>{v}</Tooltip> : v;
+    maxReached ? (
+      <Tooltip title={t('service:invest-button.max-reached-tooltip')}>
+        {v}
+      </Tooltip>
+    ) : (
+      v
+    );
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
