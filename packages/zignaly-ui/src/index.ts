@@ -98,7 +98,6 @@ export { ReactComponent as ZignalyExchangeIcon } from "assets/icons/zignaly-exch
 // Navigation
 export { default as Header } from "./components/navigation/Header";
 export { default as MenuDropDown } from "./components/navigation/MenuDropDown";
-export { default as ZigsBalance } from "./components/navigation/Header/components/ZigsBalance";
 export { default as BrandImage } from "./components/navigation/Header/components/BrandImage";
 
 // Utils
