@@ -75,6 +75,7 @@ function EditInvestmentForm({
           EditInvestmentValidation({
             max: new BigNumber(service.maximumSbt)
               .minus(service.invested)
+              .minus(service.pending)
               .toString(),
             coin: service.ssc,
           }),
@@ -111,7 +112,7 @@ function EditInvestmentForm({
     }
   };
 
-  const maxReached = +service.invested >= service.maximumSbt;
+  const maxReached = +service.invested + service.pending >= service.maximumSbt;
 
   const tooltipWrap = (v: React.ReactElement) =>
     maxReached ? (
