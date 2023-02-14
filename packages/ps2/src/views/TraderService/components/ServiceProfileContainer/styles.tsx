@@ -115,7 +115,7 @@ export const BigNumberWrapper = styled('div')`
   }
 `;
 
-export const CountryFlag = styled('div')`
+export const CountryFlag = styled('img')`
   width: 21px;
   height: 14px;
   line-height: 1;
