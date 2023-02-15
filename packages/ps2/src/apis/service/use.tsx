@@ -36,7 +36,9 @@ export function useTraderServices() {
 
 export function useIsServiceOwner(serviceId: string) {
   const { data: traderServices } = useTraderServices();
-  return traderServices?.some((s: TraderService) => s.serviceId === serviceId);
+  return Boolean(
+    traderServices?.find((s: TraderService) => s.serviceId === serviceId),
+  );
 }
 
 export function useFirstOwnedService(): TraderService | null {
