@@ -62,6 +62,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
       EditInvestmentValidation({
         max: new BigNumber(serviceDetails.maximumSbt)
           .minus(serviceDetails.invested)
+          .minus(serviceDetails.pending)
           .toString(),
         coin: service.ssc,
       }),

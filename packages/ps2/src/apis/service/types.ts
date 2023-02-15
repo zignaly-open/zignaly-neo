@@ -39,6 +39,7 @@ export type TraderServiceFull = {
   ownerDescription: string;
   ownerName: string;
   ownerVerified: boolean;
+  pending: number;
   solo: boolean;
   ssc: string;
   successFee: string;
@@ -123,6 +124,7 @@ export type Service = {
   ownerDescription: string;
   ownerName: string;
   ownerVerified: boolean;
+  pending: number;
   solo: boolean;
   ssc: string;
   successFee: number;
