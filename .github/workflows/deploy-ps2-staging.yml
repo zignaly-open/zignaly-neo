@@ -65,7 +65,7 @@ jobs:
       - name: Bootstrap packages
         run: lerna bootstrap --scope=@zignaly-open/ps2
       - name: Build client
-        run: yarn run build --scope=@zignaly-open/ps2 --include-dependencies
+        run: lerna run build --scope=@zignaly-open/ps2
       - uses: jakejarvis/s3-sync-action@master
         with:
           args: --delete
@@ -86,7 +86,7 @@ jobs:
         uses: chetan/invalidate-cloudfront-action@v2
         env:
           DISTRIBUTION: ${{ secrets.AWS_PS2_STAGING_DISTRIBUTION }}
-          PATHS: '/'
+          PATHS: '/*'
           AWS_REGION: 'us-east-1'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PS2_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PS2_SECRET_KEY }}

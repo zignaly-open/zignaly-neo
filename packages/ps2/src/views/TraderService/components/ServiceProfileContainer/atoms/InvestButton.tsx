@@ -12,8 +12,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { serviceToInvestmentServiceDetail } from '../../../../../apis/investment/util';
 import InvestModal from '../../../../Dashboard/components/ManageInvestmentModals/InvestModal';
 import { ROUTE_SIGNUP } from '../../../../../routes';
-import { InvestButtonSubtext, InvestButtonWrap } from '../styles';
-import { Button } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import OtherAccountsButton from './OtherAccountsButton';
 import { Box } from '@mui/material';
@@ -65,30 +64,42 @@ const InvestButton: React.FC<{
 
   const showOtherAccounts =
     investedFromAccounts > 1 && showMultipleAccountButton;
+  const maxReached = +service.invested + service.pending >= service.maximumSbt;
 
   return (
     <>
-      <InvestButtonWrap>
-        <Button
-          id={id}
-          onClick={onClickMakeInvestment}
-          loading={needsToOpenWhenBalancesLoaded && isFetching}
-          caption={t('invest-button.invest-now')}
-          bottomElement={
-            <InvestButtonSubtext
-              variant={'h5'}
-              color='neutral150'
-              fontWeight='regular'
-            >
+      <ZigButton
+        id={id}
+        onClick={onClickMakeInvestment}
+        loading={needsToOpenWhenBalancesLoaded && isFetching}
+        variant='contained'
+        size={'large'}
+        disabled={maxReached}
+        sx={{ flexDirection: 'column', minWidth: 165 }}
+        tooltip={maxReached ? t('invest-button.max-reached-tooltip') : null}
+      >
+        <>
+          <ZigTypography
+            variant='body2'
+            color='neutral000'
+            fontWeight={600}
+            letterSpacing={1.1}
+          >
+            {t(
+              maxReached
+                ? 'invest-button.max-reached'
+                : 'invest-button.invest-now',
+            )}
+          </ZigTypography>
+          {!maxReached && (
+            <ZigTypography variant={'h5'} color='neutral150' fontWeight={500}>
               {t('invest-button.x-success-fee', {
                 fee: service.successFee,
               })}
-            </InvestButtonSubtext>
-          }
-          variant={'primary'}
-          size={'xlarge'}
-        />
-      </InvestButtonWrap>
+            </ZigTypography>
+          )}
+        </>
+      </ZigButton>
 
       {showOtherAccounts && (
         <Box sx={{ pt: 0.5, textAlign: 'center' }}>

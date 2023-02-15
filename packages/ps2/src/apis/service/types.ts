@@ -39,12 +39,14 @@ export type TraderServiceFull = {
   ownerDescription: string;
   ownerName: string;
   ownerVerified: boolean;
+  pending: number;
   solo: boolean;
   ssc: string;
   successFee: string;
   type: string;
   investedUSDT: string;
   userId: string;
+  maximumSbt: number;
 };
 
 export type ServiceTypesInfo = Record<
@@ -122,6 +124,7 @@ export type Service = {
   ownerDescription: string;
   ownerName: string;
   ownerVerified: boolean;
+  pending: number;
   solo: boolean;
   ssc: string;
   successFee: number;
