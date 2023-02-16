@@ -85,6 +85,8 @@ jobs:
     runs-on: ubuntu-latest
     environment: test
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Get filed to invalidate
         id: diff_files
         run: |
@@ -95,7 +97,7 @@ jobs:
           
           echo "::set-output name=cloudfront::$CLOUDFRONT_FORMAT"
           echo "::set-output name=cloudflare::$CLOUDFLARE_FORMAT"
-        working-directory: packages/ps2
+        working-directory: ./packages/ps2
       - name: Invalidate Cloudflare
         uses: jakejarvis/cloudflare-purge-action@master
         env:
