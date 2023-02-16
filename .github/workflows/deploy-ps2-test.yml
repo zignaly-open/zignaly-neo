@@ -84,17 +84,29 @@ jobs:
     runs-on: ubuntu-latest
     environment: test
     steps:
+      - name: Get filed to invalidate
+        id: diff_files
+        run: |
+          CLOUDFRONT_FORMAT=$(
+            (find public/locales -type f -print && echo "index.html" && echo "version.json" )| awk {'print "/"$1'} | tr '\n' ' '
+          )
+          CLOUDFLARE_FORMAT="[\"$((( ls -1rt `find public/locales -type f -print` | tail -28) && echo "index.html\nversion.json" )| awk {'print "https://test-app.zignaly.com/"$1'} | awk -v d="\", \"" '{s=(NR==1?s:s d)$0}END{print s}')\"]"
+          
+          echo "::set-output name=cloudfront::$CLOUDFRONT_FORMAT"
+          echo "::set-output name=cloudflare::$CLOUDFLARE_FORMAT"
+        working-directory: ./packages/ps2
       - name: Invalidate Cloudflare
         uses: jakejarvis/cloudflare-purge-action@master
         env:
           # Zone is required by both authentication methods
           CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
           CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_KEY }}
+          PURGE_URLS: ${{ steps.diff_files.outputs.cloudflare }}
       - name: Invalidate CloudFront
         uses: chetan/invalidate-cloudfront-action@v2
         env:
           DISTRIBUTION: ${{ secrets.AWS_PS2_TEST_DISTRIBUTION }}
-          PATHS: '/index.html /version.json'
+          PATHS: ${{ steps.diff_files.outputs.cloudfront }}
           AWS_REGION: 'us-east-1'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PS2_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PS2_SECRET_KEY }}
