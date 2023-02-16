@@ -6,32 +6,32 @@ on:
       - feat/my-super-cool-cache-invalidation
 
 jobs:
-  pre_job:
-    runs-on: ubuntu-latest
-    outputs:
-      should_skip: ${{ steps.skip_check.outputs.should_skip }}
-      paths_result: ${{ steps.skip_check.outputs.paths_result }}
-    steps:
-      - id: skip_check
-        uses: fkirc/skip-duplicate-actions@v4
-        with:
-          paths_filter: |
-            ui_repos:
-              paths:
-                - 'packages/ps2/**/*'
-                - 'packages/zignaly-ui/**/*'
-
-  build:
-    name: PS2 Test deploy
-    needs: pre_job
-    if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).ui_repos.should_skip
-    runs-on: ubuntu-latest
-    environment: test
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: test
+#  pre_job:
+#    runs-on: ubuntu-latest
+#    outputs:
+#      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+#      paths_result: ${{ steps.skip_check.outputs.paths_result }}
+#    steps:
+#      - id: skip_check
+#        uses: fkirc/skip-duplicate-actions@v4
+#        with:
+#          paths_filter: |
+#            ui_repos:
+#              paths:
+#                - 'packages/ps2/**/*'
+#                - 'packages/zignaly-ui/**/*'
+#
+#  build:
+#    name: PS2 Test deploy
+#    needs: pre_job
+#    if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).ui_repos.should_skip
+#    runs-on: ubuntu-latest
+#    environment: test
+#    steps:
+#      - name: Checkout
+#        uses: actions/checkout@v3
+#        with:
+#          ref: test
 #      - name: Create client .env file
 #        uses: SpicyPizza/create-envfile@v1.3
 #        with:
@@ -81,7 +81,7 @@ jobs:
 
   invalidate:
     name: Invalidate Cloudfront
-    needs: build
+#    needs: build
     runs-on: ubuntu-latest
     environment: test
     steps:
@@ -93,7 +93,7 @@ jobs:
           CLOUDFRONT_FORMAT=$(
             (find public/locales -type f -print && echo "index.html" && echo "version.json" )| awk {'print "/"$1'} | tr '\n' ' '
           )
-          CLOUDFLARE_FORMAT=$((( ls -1rt `find public/locales -type f -print`) && echo "index.html\nversion.json" ) | awk {'print "https://test-app.zignaly.com/"$1'})
+          CLOUDFLARE_FORMAT=$((( ls -1rt `find public/locales -type f -print`) && echo "index.html" && echo "version.json" ) | awk {'print "https://test-app.zignaly.com/"$1'})
           
           echo "::set-output name=cloudfront::$CLOUDFRONT_FORMAT"
           echo "::set-output name=cloudflare::$CLOUDFLARE_FORMAT"
