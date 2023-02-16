@@ -20,16 +20,16 @@ jobs:
           node-version: "16"
           cache: 'yarn'
       - name: Get diff
-          id: diff_files
-          run: |
-            CLOUDFRONT_FORMAT=$(
-              (find public/locales -type f -print && echo "index.html\nversion.json" )| awk {'print "/"$1'} | tr '\n' ' '
-            )
-            CLOUDFLARE_FORMAT="[\"$((find public/locales -type f -print && echo "index.html\nversion.json" )| awk {'print "https://test-app.zignaly.com/"$1'} | awk -v d="\", \"" '{s=(NR==1?s:s d)$0}END{print s}')\"]"
-            
-            echo "::set-output name=cloudfront::$CLOUDFRONT_FORMAT"
-            echo "::set-output name=cloudflare::$CLOUDFLARE_FORMAT"
-          working-directory: ./packages/ps2
+        id: diff_files
+        run: |
+          CLOUDFRONT_FORMAT=$(
+            (find public/locales -type f -print && echo "index.html\nversion.json" )| awk {'print "/"$1'} | tr '\n' ' '
+          )
+          CLOUDFLARE_FORMAT="[\"$((find public/locales -type f -print && echo "index.html\nversion.json" )| awk {'print "https://test-app.zignaly.com/"$1'} | awk -v d="\", \"" '{s=(NR==1?s:s d)$0}END{print s}')\"]"
+          
+          echo "::set-output name=cloudfront::$CLOUDFRONT_FORMAT"
+          echo "::set-output name=cloudflare::$CLOUDFLARE_FORMAT"
+        working-directory: ./packages/ps2
       - run: echo "${{ steps.diff_files.outputs.cloudflare }}"
       - run: echo "${{ steps.diff_files.outputs.cloudfront }}"
       - name: Invalidate Cloudflare
