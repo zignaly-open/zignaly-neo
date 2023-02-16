@@ -137,16 +137,17 @@ function AuthVerifyModal({
         )}
       </Title>
       <Container>
-        {(isUnknownDevice || disabled || emailUnconfirmed) && (
-          <EmailVerifyForm
-            clearOnError
-            onSubmit={(code) => verify({ code })}
-            onReSendCode={performResend}
-            error={getError(verifyStatus)}
-            isReSendLoading={resendStatus.isLoading}
-            isLoading={verifyStatus.isLoading}
-          />
-        )}
+        {(isUnknownDevice || disabled || emailUnconfirmed) &&
+          !verifyStatus.isSuccess && (
+            <EmailVerifyForm
+              clearOnError
+              onSubmit={(code) => verify({ code })}
+              onReSendCode={performResend}
+              error={getError(verifyStatus)}
+              isReSendLoading={resendStatus.isLoading}
+              isLoading={verifyStatus.isLoading}
+            />
+          )}
 
         {ask2FA && !status2FA.isSuccess && (
           <TwoFAForm
