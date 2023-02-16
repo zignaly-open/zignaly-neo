@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 
 const nameRegex = /^[a-zA-Z0-9 $._#&|()\[\]%-]*$/;
+const letterNumberRegex = /[a-zA-Z0-9]/;
 
 export const successFeeValidation = yup
   .number()
@@ -19,6 +20,7 @@ export const serviceNameValidation = yup
   .string()
   .required('error:error.required')
   .matches(nameRegex, 'common:validation.invalid-characters')
+  .matches(letterNumberRegex, 'common:validation.letter-number')
   .min(5, 'service:edit.validation.name-length')
   .max(50, 'service:edit.validation.name-length');
 
