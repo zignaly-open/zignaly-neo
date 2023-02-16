@@ -100,8 +100,8 @@ jobs:
           echo $CLOUDFRONT_FORMAT
           echo $CLOUDFLARE_FORMAT
           
-          echo "::set-output name=cloudfront::$CLOUDFRONT_FORMAT"
-          echo "::set-output name=cloudflare::$CLOUDFLARE_FORMAT"
+          echo "cloudfront=$CLOUDFRONT_FORMAT" >> $GITHUB_OUTPUT
+          echo "cloudflare=$CLOUDFLARE_FORMAT" >> $GITHUB_OUTPUT
         working-directory: ./packages/ps2
       - name: Invalidate Cloudflare
         uses: strrife/cloudflare-chunked-purge-action@master
