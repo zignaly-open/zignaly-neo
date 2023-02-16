@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - test
-      - feat/proper-invalidate
 
 jobs:
   pre_job:
