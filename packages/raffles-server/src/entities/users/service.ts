@@ -16,6 +16,7 @@ import {
   validateUsername,
   sendEmailVerification,
   isEmailConfirmed,
+  deleteContact,
 } from './util';
 
 const generateNonceSignMessage = (nonce: string | number) =>
@@ -225,6 +226,8 @@ export const generateService = (user: ContextUser) => {
 
   const verifyEmail = async (userId: number, email: string) => {
     try {
+      const user = await User.findByPk(userId);
+      await deleteContact(user.email);
       await sendEmailVerification(`${userId}`, email);
       User.update(
         {

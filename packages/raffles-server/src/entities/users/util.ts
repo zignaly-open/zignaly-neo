@@ -136,7 +136,7 @@ export async function sendEmailVerification(userId: string, email: string) {
     const response = await apiInstance.createDoiContact(createDoiContact);
     return response;
   } catch (error) {
-    console.error(error.message);
+    console.error('Send email', error.message);
   }
 }
 
@@ -153,6 +153,27 @@ export async function isEmailConfirmed(email: string) {
     const hasOptedIn = body.attributes['DOUBLE_OPT-IN'] === '1';
     return hasOptedIn;
   } catch (error) {
+    console.error('confirm email', error, error.message);
+  }
+}
+
+export async function deleteContact(email: string) {
+  const apiInstance = new SibApiV3Sdk.ContactsApi();
+
+  apiInstance.setApiKey(
+    SibApiV3Sdk.ContactsApiApiKeys.apiKey,
+    process.env.EMAIL_API_KEY,
+  );
+
+  try {
+    const { body } = await apiInstance.getContactInfo(email);
+    const contactEmail = body ? body.email : null;
+    if (contactEmail) {
+      await apiInstance.deleteContact(email);
+      return true;
+    }
+  } catch (error) {
+    console.log('error', error, email);
     console.error(error.message);
   }
 }
