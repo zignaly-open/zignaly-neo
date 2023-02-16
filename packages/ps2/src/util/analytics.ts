@@ -44,6 +44,9 @@ export const trackNewSession = (
         },
       },
     );
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    _cio?.identify({ email, id: userId, name: firstName });
     Sentry.setUser({ email, id: userId });
     if (eventType === SessionsTypes.Signup) {
       analytics?.track('newUser', { userId });
@@ -70,4 +73,5 @@ export const trackConversion = () => {
 
 export const trackPage = () => {
   analytics?.page();
+  // window._cio?.page(name, page.properties())
 };
