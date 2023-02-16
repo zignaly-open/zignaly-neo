@@ -95,6 +95,9 @@ jobs:
           )
           CLOUDFLARE_FORMAT=$((( ls -1rt `find public/locales -type f -print`) && echo "index.html" && echo "version.json" ) | awk {'print "https://test-app.zignaly.com/"$1'}) | tr '\n' ' '
           
+          echo $CLOUDFRONT_FORMAT
+          echo CLOUDFLARE_FORMAT
+          
           echo "::set-output name=cloudfront::$CLOUDFRONT_FORMAT"
           echo "::set-output name=cloudflare::$CLOUDFLARE_FORMAT"
         working-directory: ./packages/ps2
