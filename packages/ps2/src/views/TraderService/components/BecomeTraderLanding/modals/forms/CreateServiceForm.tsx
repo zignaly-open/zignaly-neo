@@ -190,7 +190,7 @@ const CreateServiceForm: React.FC<{
           id={'create-service-modal__create-1st-step'}
           size='large'
         >
-          {t('create.action')}
+          {t('create.next-step')}
         </ZigButton>
       </ModalActionsNew>
     </form>
