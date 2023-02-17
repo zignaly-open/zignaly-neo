@@ -85,7 +85,7 @@ export const api = createApi({
         body: payload,
       }),
     }),
-    getServiceTypesInfo: builder.query<ServiceTypesInfo, void>({
+    serviceTypesInfo: builder.query<ServiceTypesInfo, void>({
       query: () => ({
         url: `service-types`,
       }),
@@ -124,7 +124,7 @@ export const {
   useTraderServiceGraphQuery,
   useTraderServiceManagementQuery,
   useCreateTraderServiceMutation,
-  useGetServiceTypesInfoQuery,
+  useServiceTypesInfoQuery,
   useTraderServiceUpdateScaMinimumMutation,
   useLazyTraderServicesQuery,
   useTraderServiceTransferFundsMutation,
