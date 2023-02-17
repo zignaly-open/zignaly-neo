@@ -25,7 +25,7 @@ export const ServiceName = ({ service }: ServiceNameProps) => {
         flexDirection: 'row',
         display: 'flex',
         textAlign: 'start',
-        minWidth: 451,
+        width: 300,
       }}
     >
       <Icon>
@@ -38,7 +38,11 @@ export const ServiceName = ({ service }: ServiceNameProps) => {
           alignItems: 'flex-start',
         }}
       >
-        <ZigTypography fontWeight='medium' color='neutral100'>
+        <ZigTypography
+          fontWeight='medium'
+          color='neutral100'
+          whiteSpace='normal'
+        >
           {service.serviceName}
         </ZigTypography>
         <div>
