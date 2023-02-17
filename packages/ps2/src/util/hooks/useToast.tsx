@@ -46,13 +46,14 @@ export function useToast(): {
   success: ToastFn;
   info: ToastFn;
   error: ToastFn;
-  backendError: (error?: BackendError) => void;
+  backendError: (error?: BackendError, ignoreDuplicate?: boolean) => void;
 } {
   const { t } = useTranslation('error');
   return {
     success: showToast('success'),
     error: showToast('error'),
     info: showToast('info'),
-    backendError: (error: BackendError) => backendError(t, error),
+    backendError: (error: BackendError, ignoreDuplicate: boolean) =>
+      backendError(t, error, ignoreDuplicate),
   };
 }
