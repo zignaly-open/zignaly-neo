@@ -158,15 +158,14 @@ export const deposit = async ({
   amount,
   currency = '',
   blockchain,
+  transactionType = TransactionType.Deposit,
 }: DepositParams): Promise<Balance> => {
   if (!walletAddress) {
     throw new Error('Wallet address is required');
   }
+
   if (!amount || isNaN(Number(amount)) || Number(amount) <= 0) {
     throw new Error('Invalid amount');
-  }
-  if (!blockchain) {
-    throw new Error('Blockchain is required');
   }
 
   const currencyChange = await CurrencyToZhit.findOne({
@@ -198,7 +197,7 @@ export const deposit = async ({
     amount,
     currency,
     blockchain,
-    transactionType: TransactionType.Deposit,
+    transactionType,
     note: '',
   });
 
@@ -242,6 +241,19 @@ export const getUserBalance = async (
   const userBalance = await Balance.aggregate('zhits', 'sum', {
     where: {
       walletAddress,
+    },
+  });
+
+  return userBalance ? `${userBalance}` : '0';
+};
+
+export const getUserRewardsBalance = async (
+  walletAddress: string,
+): Promise<UserBalanceZhits> => {
+  const userBalance = await Balance.aggregate('zhits', 'sum', {
+    where: {
+      walletAddress,
+      transactionType: TransactionType.Reward,
     },
   });
 
