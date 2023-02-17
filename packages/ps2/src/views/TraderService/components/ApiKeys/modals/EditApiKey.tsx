@@ -64,9 +64,6 @@ function EditApiKeysModal({
       ) as BooleanString,
       ipRestrictions: apiKey.ips.join(', '),
       canTrade: apiKey.permissions?.includes(ServiceApiKeyPermission.canTrade),
-      marginTrade: apiKey.permissions?.includes(
-        ServiceApiKeyPermission.marginTrade,
-      ),
       futuresTrade: apiKey.permissions?.includes(
         ServiceApiKeyPermission.futuresTrade,
       ),
@@ -236,18 +233,6 @@ function EditApiKeysModal({
                   />
                 }
                 label={t('api-keys.permissions-enable.canTrade')}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    {...register('marginTrade')}
-                    checked={watch('marginTrade')}
-                    disabled={isLoading}
-                  />
-                }
-                label={t('api-keys.permissions-enable.marginTrade')}
               />
             </Grid>
             <Grid item xs={12} md={6}>
