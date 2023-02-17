@@ -25,9 +25,14 @@ const backendErrorText = (t: TFunction, error: BackendError) => {
 
 const lastShownBackendError = { error: '', time: 0, expiry: 10_000 };
 
-export const backendError = (t: TFunction, error: BackendError) => {
+export const backendError = (
+  t: TFunction,
+  error: BackendError,
+  ignoreDuplicate: boolean,
+) => {
   const text = backendErrorText(t, error);
   if (
+    !ignoreDuplicate &&
     lastShownBackendError.error === text &&
     lastShownBackendError.time + lastShownBackendError.expiry > Date.now()
   )
