@@ -7,6 +7,7 @@ import { Variant } from "@mui/material/styles/createTypography";
 import { Tooltip } from "@mui/material";
 
 const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
+  sign = "",
   value = 0,
   coin,
   precision,
@@ -43,7 +44,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
       {...withDefaultProps}
       sx={{ whiteSpace: "nowrap", ...(withDefaultProps?.sx || {}) }}
     >
-      {+value >= 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
+      {+value >= 0 ? alwaysShowSign ? sign : "" : <>&ndash;</>}
       {usd && "$"}
       <NumericFormat
         value={Math.abs(shorten ? shortened : +value)}
