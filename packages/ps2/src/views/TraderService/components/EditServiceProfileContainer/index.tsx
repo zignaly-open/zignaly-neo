@@ -211,7 +211,6 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                 control={control}
                 render={({ field }) => (
                   <ZigInput
-                    type='number'
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position='end'>

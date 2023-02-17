@@ -28,7 +28,7 @@ export const EditServiceValidation = yup
     successFee: successFeeValidation,
     maximumSbt: yup
       .number()
-      .typeError('error:error.required')
+      .typeError('common:validation.invalid-amount')
       .required('error:error.required')
       .positive('common:validation.negative-zeroable-amount'),
   })
