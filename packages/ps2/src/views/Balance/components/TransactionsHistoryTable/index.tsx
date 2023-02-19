@@ -40,16 +40,20 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
 
   const defineSign = (typeTransaction: string) => {
     if (
-      typeTransaction === TRANSACTION_TYPE.PS_WITHDRAW ||
-      typeTransaction === TRANSACTION_TYPE.DEPOSIT ||
-      typeTransaction === TRANSACTION_TYPE.SUCCESS_FEE ||
-      typeTransaction === TRANSACTION_TYPE.PSDS
+      [
+        TRANSACTION_TYPE.PS_WITHDRAW,
+        TRANSACTION_TYPE.DEPOSIT,
+        TRANSACTION_TYPE.SUCCESS_FEE,
+        TRANSACTION_TYPE.PSDS,
+      ].includes(typeTransaction)
     )
       return '+';
     else if (
-      typeTransaction === TRANSACTION_TYPE.PS_DEPOSIT ||
-      typeTransaction === TRANSACTION_TYPE.WITHDRAW ||
-      typeTransaction === TRANSACTION_TYPE.BUYZIG
+      [
+        TRANSACTION_TYPE.PS_DEPOSIT,
+        TRANSACTION_TYPE.WITHDRAW,
+        TRANSACTION_TYPE.BUYZIG,
+      ].includes(typeTransaction)
     )
       return '-';
     else return '';
