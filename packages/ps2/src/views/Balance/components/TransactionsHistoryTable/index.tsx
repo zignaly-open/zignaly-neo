@@ -117,7 +117,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
           <ZigTablePriceLabel
             exact
             coin={original.asset}
-            alwaysShowSign={true}
+            alwaysShowSign
             sign={defineSign(original.txType)}
             value={getValue()}
           />
