@@ -12,8 +12,7 @@ const config = {
     path: path.resolve(__dirname, "lib"),
     filename: "index.js",
     library: {
-      type: "umd",
-      name: "ufc",
+      type: "module",
     },
     globalObject: "this",
   },
@@ -102,6 +101,9 @@ const config = {
     "@emotion/react",
     "@emotion/styled",
   ],
+  experiments: {
+    outputModule: true,
+  },
 };
 
 module.exports = () => {

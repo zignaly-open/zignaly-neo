@@ -5,9 +5,13 @@
   "scope": "@zignaly-open",
   "main": "index.js",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": ["packages/*"],
+    "nohoist": [
+      "zignaly-ui/webpack**",
+      "zignaly-ui/babel**"
+    ]
+  },
   "publishConfig": {
     "access": "public"
   },
