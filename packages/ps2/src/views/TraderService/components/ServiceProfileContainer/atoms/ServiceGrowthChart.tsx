@@ -7,7 +7,7 @@ import {
 } from '../../../../../apis/service/types';
 import {
   ZigButtonGroupInput,
-  ZigChart,
+  // ZigChart,
   ZigPriceLabel,
   ZigSelect,
   ZigTypography,
@@ -62,14 +62,15 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
     [service.createdAt],
   );
 
-  const events = useMemo(() => {
-    // yes, we intentionally skip the case when the migration date is 0 index
-    const allEvents = [];
-    if (data?.migrationIndex > 0) {
-      allEvents.push({ x: data?.migrationIndex, label: t('migrated-to-ps2') });
-      return allEvents;
-    }
-  }, [data?.migrationIndex]);
+  // // @ts-ignore
+  // const events = useMemo(() => {
+  //   // yes, we intentionally skip the case when the migration date is 0 index
+  //   const allEvents = [];
+  //   if (data?.migrationIndex > 0) {
+  //     allEvents.push({ x: data?.migrationIndex, label: t('migrated-to-ps2') });
+  //     return allEvents;
+  //   }
+  // }, [data?.migrationIndex]);
 
   const canShowSummary =
     typeof data?.summary !== 'undefined' &&
@@ -205,34 +206,35 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
       </Box>
 
       <ChartWrapper>
-        {isError ? (
-          <Stub
-            title={t('chart-error.heading')}
-            description={t('chart-error.description')}
-          />
-        ) : isLoading || isFetching || !data?.data ? (
-          <CenteredLoader />
-        ) : (
-          <ZigChart
-            bars={chartType === GraphChartType.pnl_ssc}
-            onlyIntegerTicks={chartType === GraphChartType.investors}
-            events={events}
-            yAxisFormatter={(v) =>
-              `${v
-                .toString()
-                .replace(/000000$/, 'M')
-                .replace(/000$/, 'K')}${
-                [
-                  GraphChartType.pnl_pct_compound,
-                  GraphChartType.at_risk_pct,
-                ].includes(chartType)
-                  ? `%`
-                  : ``
-              }`
-            }
-            data={data?.data}
-          />
-        )}
+        {
+          isError ? (
+            <Stub
+              title={t('chart-error.heading')}
+              description={t('chart-error.description')}
+            />
+          ) : isLoading || isFetching || !data?.data ? (
+            <CenteredLoader />
+          ) : null
+          // <ZigChart
+          //   bars={chartType === GraphChartType.pnl_ssc}
+          //   onlyIntegerTicks={chartType === GraphChartType.investors}
+          //   events={events}
+          //   yAxisFormatter={(v) =>
+          //     `${v
+          //       .toString()
+          //       .replace(/000000$/, 'M')
+          //       .replace(/000$/, 'K')}${
+          //       [
+          //         GraphChartType.pnl_pct_compound,
+          //         GraphChartType.at_risk_pct,
+          //       ].includes(chartType)
+          //         ? `%`
+          //         : ``
+          //     }`
+          //   }
+          //   data={data?.data}
+          // />
+        }
       </ChartWrapper>
     </Box>
   );

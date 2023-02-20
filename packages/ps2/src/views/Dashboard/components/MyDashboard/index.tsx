@@ -4,7 +4,7 @@ import {
   PriceLabel,
   ZigTable,
   ZigTypography,
-  ZigChartMini,
+  // ZigChartMini,
 } from '@zignaly-open/ui';
 import React, { useMemo } from 'react';
 import { Heading, Layout, ZigTableWrapper } from './styles';
@@ -23,6 +23,12 @@ import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import { useZModal } from '../../../../components/ZModal/use';
+
+// const ZigChartMini = React.lazy(() =>
+//   import('@zignaly-open/ui').then((module) => ({
+//     default: module.ZigChartMini,
+//   })),
+// );
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -82,7 +88,7 @@ const MyDashboard: React.FC = () => {
         cell: ({ row: { original } }) =>
           original.pnl30dPct || Object.keys(original.sparklines).length > 1 ? (
             <>
-              <ZigChartMini midLine data={original.sparklines} />
+              {/*<ZigChartMini midLine data={original.sparklines} />*/}
               <PercentageIndicator
                 normalized
                 value={new BigNumber(original.pnl30dPct).toFixed()}

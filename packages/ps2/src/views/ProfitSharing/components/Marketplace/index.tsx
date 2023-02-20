@@ -7,7 +7,7 @@ import {
   ZigTypography,
   ZigTable,
   createColumnHelper,
-  ZigChartMini,
+  // ZigChartMini,
 } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
@@ -18,6 +18,12 @@ import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace
 import AssetsInPool from '../../../../components/AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 import { TableWrapper } from './styles';
+
+// const ZigChartMini = React.lazy(() =>
+//   import('@zignaly-open/ui').then((module) => ({
+//     default: module.ZigChartMini,
+//   })),
+// );
 
 const Marketplace: React.FC = () => {
   const marketplaceEndpoint = useMarketplace();
@@ -89,7 +95,7 @@ const Marketplace: React.FC = () => {
           +props.getValue() ||
           Object.keys(props.row.original.sparklines).length > 1 ? (
             <>
-              <ZigChartMini midLine data={props.row.original.sparklines} />
+              {/*<ZigChartMini midLine data={props.row.original.sparklines} />*/}
               <PercentageIndicator value={props.getValue()} type={'graph'} />
             </>
           ) : (
