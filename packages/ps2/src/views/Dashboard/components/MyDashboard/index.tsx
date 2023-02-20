@@ -48,8 +48,7 @@ const MyDashboard: React.FC = () => {
     ).toString();
 
   const getDateFromDatetime = (date: string) => {
-    const time = new Date(date).toLocaleDateString();
-    return `${time}`;
+    return new Date(date).toLocaleDateString();
   };
 
   const columnHelper = createColumnHelper<Investment>();
