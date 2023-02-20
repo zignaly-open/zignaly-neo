@@ -1,3 +1,4 @@
+import { isNumeric } from 'util/validation';
 import * as yup from 'yup';
 
 const nameRegex = /^[a-zA-Z0-9 $._#&|()\[\]%-]*$/;
@@ -28,7 +29,7 @@ export const EditServiceValidation = yup
     successFee: successFeeValidation,
     maximumSbt: yup
       .number()
-      .typeError('common:validation.invalid-amount')
+      .typeError('common:validation.invalid-value')
       .required('error:error.required')
       .positive('common:validation.negative-zeroable-amount'),
   })
