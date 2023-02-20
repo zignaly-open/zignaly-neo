@@ -42,6 +42,16 @@ const MyDashboard: React.FC = () => {
     });
   };
 
+  const calculateServiceAge = (createdAt: string) =>
+    Math.floor(
+      (Date.now() - Date.parse(createdAt)) / 1000 / 60 / 60 / 24,
+    ).toString();
+
+  const getDateFromDatetime = (date: string) => {
+    const time = new Date(date).toLocaleDateString();
+    return `${time}`;
+  };
+
   const columnHelper = createColumnHelper<Investment>();
   const columns = useMemo(
     () => [
@@ -138,7 +148,10 @@ const MyDashboard: React.FC = () => {
             type='default'
             normalized
             value={getValue()}
-            label={formatDateFromDays(original.periodsLc)}
+            label={formatDateFromDays(calculateServiceAge(original.createdAt))}
+            labelTooltip={t('tooltip-date', {
+              date: getDateFromDatetime(original.createdAt),
+            })}
           />
         ),
         sortingFn: 'alphanumeric',
