@@ -4,17 +4,23 @@ const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
-const isProduction = process.env.NODE_ENV == "production";
+const isProduction = true;
 
 const config = {
   entry: "./src/index.ts",
   output: {
     path: path.resolve(__dirname, "lib"),
     filename: "index.js",
+    // module: true,
     library: {
       type: "module",
     },
-    globalObject: "this",
+    // globalObject: "this",
+    // chunkLoading: "import",
+    // chunkFormat: "module",
+    // environment: {
+    //   module: true,
+    // },
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin({
@@ -104,13 +110,16 @@ const config = {
   experiments: {
     outputModule: true,
   },
+  optimization: {
+    minimize: false,
+  },
 };
 
 module.exports = () => {
   if (isProduction) {
     config.mode = "production";
     // Separate sourcemap file
-    config.devtool = "source-map";
+    config.devtool = false;
   } else {
     config.mode = "development";
     // Better sourcemap for dev

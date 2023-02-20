@@ -3,7 +3,7 @@
     "checkJs": false,
     "preserveSymlinks": true,
     "target": "es2021",
-    "module": "esnext",
+    "module": "es2022",
     "strict": true,
     "jsx": "react",
     "esModuleInterop": true,
