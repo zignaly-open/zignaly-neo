@@ -1,4 +1,5 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
+import { isString, pickBy } from 'lodash-es';
 import {
   AccountCoinBalances,
   CoinBalances,
@@ -8,7 +9,6 @@ import {
   TransactionType,
 } from './types';
 import baseQuery from '../baseQuery';
-import { isString, pickBy } from 'lodash';
 
 export const api = createApi({
   baseQuery: baseQuery(),

@@ -68,7 +68,7 @@ jobs:
       - name: Bootstrap packages
         run: lerna bootstrap --scope=@zignaly-open/ps2
       - name: Build client
-        run: yarn run build --scope=@zignaly-open/ps2 --include-dependencies
+        run: lerna run build --scope=@zignaly-open/ps2
       - uses: jakejarvis/s3-sync-action@master
         with:
           args: --delete

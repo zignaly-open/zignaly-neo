@@ -93,7 +93,15 @@ const config = {
   // assume a corresponding global variable exists and use that instead.
   // This is important because it allows us to avoid bundling all of our
   // dependencies, which allows browsers to cache those libraries between builds.
-  externals: ["react", "react-dom", "styled-components"],
+  externals: [
+    "react",
+    "react-dom",
+    "styled-components",
+    // making these bad boys shred actually INCREASES the build size because now less is tree-shaken in ps2 lol
+    // "@mui/material", "@mui/system",
+    "@emotion/react",
+    "@emotion/styled",
+  ],
 };
 
 module.exports = () => {

@@ -9,6 +9,7 @@ import {
   useTraderServiceUpdateScaMinimumMutation,
 } from './api';
 import { useDispatch, useSelector } from 'react-redux';
+import { format, parse, subDays } from 'date-fns';
 import {
   GraphChartType,
   GraphTimeframe,
@@ -25,7 +26,6 @@ import { useTranslation } from 'react-i18next';
 import { setChartTimeframe, setChartType } from './store';
 import { useMemo } from 'react';
 import { formatMonthDay } from '../../views/Dashboard/components/MyDashboard/util';
-import { format, parse, subDays } from 'date-fns';
 
 export function useTraderServices() {
   const isAuthenticated = useIsAuthenticated();

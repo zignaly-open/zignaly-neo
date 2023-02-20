@@ -7,7 +7,6 @@ import IconButton from "../../inputs/IconButton";
 
 import { ReactComponent as ThreeDotsIcon } from "assets/icons/horizontal-three-dots-icon.svg";
 import { ReactComponent as UserIcon } from "assets/icons/user-icon.svg";
-import ZigBalance from "./components/ZigsBalance";
 import { HeaderLinksContainer } from "./styles";
 
 export default {
@@ -36,8 +35,5 @@ Main.args = {
     </HeaderLinksContainer>,
     <IconButton key={"menu"} variant={"secondary"} icon={<ThreeDotsIcon />} />,
   ],
-  rightElements: [
-    <ZigBalance key={"balance"} balance={0} />,
-    <IconButton key={"user"} variant={"flat"} icon={<UserIcon color="#65647E" />} />,
-  ],
+  rightElements: [<IconButton key={"user"} variant={"flat"} icon={<UserIcon color="#65647E" />} />],
 };
