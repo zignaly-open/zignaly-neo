@@ -13,7 +13,7 @@ export const successFeeValidation = yup
   .test(
     'range',
     'service:edit.validation.success-fee-range',
-    (v) => !v || (v >= 10 && v < 75),
+    (v) => !v || (v >= 10 && v < 76),
   );
 
 export const serviceNameValidation = yup
