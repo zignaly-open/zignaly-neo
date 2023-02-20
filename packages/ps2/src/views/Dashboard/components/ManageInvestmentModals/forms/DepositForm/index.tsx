@@ -11,10 +11,11 @@ import {
   Typography,
   Loader,
 } from '@zignaly-open/ui';
+import NorthEastIcon from '@mui/icons-material/NorthEast';
 import copy from 'copy-to-clipboard';
 import { DepositFormData } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Link } from '@mui/material';
 import { NumericFormat } from 'react-number-format';
 import {
   useCoinBalances,
@@ -312,6 +313,26 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         {!!network && !networkObject?.depositEnable && (
           <ErrorMessage text={t('no-network')} />
         )}
+        <Grid item xs={12} pt={3}>
+          <Typography variant={'body2'} color={'neutral300'}>
+            <Link
+              underline={'hover'}
+              href={'https://changelly.com/?ref_id=q0s68wsie1uf9wza'}
+              target={'_blank'}
+            >
+              <Box
+                sx={{
+                  display: 'flex',
+                  gap: 0.5,
+                  alignItems: 'center',
+                }}
+              >
+                {t('buy-crypto')}
+                <NorthEastIcon fontSize={'inherit'} />
+              </Box>
+            </Link>
+          </Typography>
+        </Grid>
       </Grid>
     </form>
   );

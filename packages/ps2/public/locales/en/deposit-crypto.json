@@ -31,5 +31,6 @@
   "depositQR": {
     "address": "{{coin}} Address",
     "memo": "{{coin}} MEMO/Tag"
-  }
+  },
+  "buy-crypto": "Buy Crypto"
 }
