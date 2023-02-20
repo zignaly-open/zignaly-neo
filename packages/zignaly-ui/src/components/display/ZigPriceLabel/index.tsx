@@ -43,7 +43,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
       {...withDefaultProps}
       sx={{ whiteSpace: "nowrap", ...(withDefaultProps?.sx || {}) }}
     >
-      {+value >= 0 ? sign : <>&ndash;</>}
+      {sign ?? (+value < 0 && <>&ndash;</>)}
       {usd && "$"}
       <NumericFormat
         value={Math.abs(shorten ? shortened : +value)}
