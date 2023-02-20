@@ -38,6 +38,27 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   );
   const coinsEndpoint = useExchangeCoinsList();
 
+  const defineSign = (typeTransaction: string) => {
+    if (
+      [
+        TRANSACTION_TYPE.PS_WITHDRAW,
+        TRANSACTION_TYPE.DEPOSIT,
+        TRANSACTION_TYPE.SUCCESS_FEE,
+        TRANSACTION_TYPE.PSDS,
+      ].includes(typeTransaction)
+    )
+      return '+';
+    else if (
+      [
+        TRANSACTION_TYPE.PS_DEPOSIT,
+        TRANSACTION_TYPE.WITHDRAW,
+        TRANSACTION_TYPE.BUYZIG,
+      ].includes(typeTransaction)
+    )
+      return '-';
+    else return '';
+  };
+
   const updateData = () => {
     const data = transactionsEndpoint.data
       .slice(pageIndex * pageSize, (pageIndex + 1) * pageSize)
@@ -93,7 +114,12 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
       columnHelper.accessor('amount', {
         header: t('tableHeader.amount'),
         cell: ({ getValue, row: { original } }) => (
-          <ZigTablePriceLabel exact coin={original.asset} value={getValue()} />
+          <ZigTablePriceLabel
+            exact
+            coin={original.asset}
+            sign={defineSign(original.txType)}
+            value={getValue()}
+          />
         ),
         enableSorting: false,
       }),
