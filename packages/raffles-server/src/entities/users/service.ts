@@ -17,6 +17,10 @@ import {
   sendEmailVerification,
   isEmailConfirmed,
   deleteContact,
+  createHashedStrWithExpiration,
+  createHashedStr,
+  isHashExpired,
+  isSendinblueHashValid,
 } from './util';
 
 const generateNonceSignMessage = (nonce: string | number) =>
@@ -188,9 +192,23 @@ export const generateService = (user: ContextUser) => {
     }
   };
 
-  const confirmEmail = async (userId: number) => {
+  const confirmEmail = async (hashStr: string) => {
     try {
-      const user = await User.findByPk(userId);
+      const [hashedValue, expirationTimestamp] = hashStr.split(',');
+      if (isHashExpired(expirationTimestamp)) {
+        return false;
+      }
+
+      const user = await User.findOne({
+        where: { emailValidationHash: hashedValue },
+      });
+
+      if (
+        !isSendinblueHashValid(user.email, process.env.HASH_SECRET, hashedValue)
+      ) {
+        return false;
+      }
+
       if (await isEmailConfirmed(user.email)) {
         await User.update(
           {
@@ -198,7 +216,7 @@ export const generateService = (user: ContextUser) => {
           },
           {
             where: {
-              id: userId,
+              id: user.id,
             },
           },
         );
@@ -227,11 +245,13 @@ export const generateService = (user: ContextUser) => {
   const verifyEmail = async (userId: number, email: string) => {
     try {
       const user = await User.findByPk(userId);
+      const hashStr = createHashedStr(email, process.env.HASH_SECRET);
+      const hashWithExpiration = createHashedStrWithExpiration(hashStr);
       await deleteContact(user.email);
-      await sendEmailVerification(`${userId}`, email);
+      await sendEmailVerification(`${userId}`, email, hashWithExpiration);
       User.update(
         {
-          email,
+          emailValidationHash: hashStr,
           emailVerificationSent: true,
           emailVerified: false,
         },

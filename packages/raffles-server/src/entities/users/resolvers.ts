@@ -55,9 +55,9 @@ export const resolvers = {
 
     confirmEmail: async (
       _: any,
-      { userId }: { userId: number },
+      { hashStr }: { hashStr: string },
       { services }: ApolloContext,
-    ) => services.User.confirmEmail(userId),
+    ) => services.User.confirmEmail(hashStr),
   },
   Subscription: {
     balanceChanged: {

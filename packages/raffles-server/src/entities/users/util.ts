@@ -8,11 +8,13 @@ import {
   BALANCE_CHANGED,
   EMAIL_LIST_IDS,
   EMAIL_TEMPLATE_ID,
+  HASH_EXPIRATION_SECONDS,
 } from './constants';
 import { getUserBalance } from '../balances/service';
 import { ContextUser } from '../../types';
 import redisService from '../../redisService';
 import * as SibApiV3Sdk from 'sib-api-v3-typescript';
+import crypto from 'crypto';
 
 export function signJwtToken(user: User) {
   return new Promise<string>((resolve, reject) =>
@@ -117,7 +119,11 @@ export async function emitBalanceChanged(user: ContextUser) {
   });
 }
 
-export async function sendEmailVerification(userId: string, email: string) {
+export async function sendEmailVerification(
+  userId: string,
+  email: string,
+  hashStrWithExpiration: string,
+) {
   const apiInstance = new SibApiV3Sdk.ContactsApi();
 
   apiInstance.setApiKey(
@@ -130,7 +136,7 @@ export async function sendEmailVerification(userId: string, email: string) {
   createDoiContact.email = email;
   createDoiContact.includeListIds = EMAIL_LIST_IDS;
   createDoiContact.templateId = Number(EMAIL_TEMPLATE_ID);
-  createDoiContact.redirectionUrl = `${process.env.ZIGNALY_API}?confirm=${userId}`;
+  createDoiContact.redirectionUrl = `${process.env.ZIGNALY_API}?confirm=${hashStrWithExpiration}`;
 
   try {
     const response = await apiInstance.createDoiContact(createDoiContact);
@@ -177,3 +183,29 @@ export async function deleteContact(email: string) {
     console.error(error.message);
   }
 }
+
+export const createHashedStr = (email: string, secretKey: string) => {
+  return crypto.createHmac('sha256', secretKey).update(email).digest('hex');
+};
+
+export const createHashedStrWithExpiration = (hashedValue: string) => {
+  const timestampInSeconds = Date.now() / 1000;
+  const expirationInSeconds = HASH_EXPIRATION_SECONDS;
+  return `${hashedValue},${timestampInSeconds + expirationInSeconds}`;
+};
+
+export const isHashExpired = (hashStr: string) => {
+  const [, expirationTimestamp] = hashStr.split(',');
+  const currentTimestampInSeconds = Date.now() / 1000;
+  return currentTimestampInSeconds > Number(expirationTimestamp);
+};
+
+export const isSendinblueHashValid = (
+  email: string,
+  secretKey: string,
+  hashStr: string,
+) => {
+  const calculatedHash = createHashedStr(email, secretKey);
+  const [hashedValue] = hashStr.split(',');
+  return calculatedHash === hashedValue;
+};
