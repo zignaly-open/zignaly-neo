@@ -54,9 +54,34 @@ const appReducer = combineReducers({
   wallet: walletReducer,
 });
 
-const rootReducer = (state: ReturnType<typeof appReducer>, action: Action) => {
+const rootReducer = (
+  rootState: ReturnType<typeof appReducer>,
+  action: Action,
+) => {
+  let state = rootState;
+  // state = undefined;
   if (logout.match(action)) {
+    // const {
+    //   userApi,
+    //   serviceApi,
+    //   investmentApi,
+    //   serviceApiKeyApi,
+    //   marketplaceApi,
+    //   coinApi,
+    //   walletApi,
+    // } = rootState;
+    // state = {
+    //   userApi,
+    //   serviceApi,
+    //   investmentApi,
+    //   serviceApiKeyApi,
+    //   marketplaceApi,
+    //   coinApi,
+    //   walletApi,
+    // };
     state = undefined;
+
+    console.log('reset');
   }
 
   return appReducer(state, action);
