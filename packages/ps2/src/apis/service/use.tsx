@@ -40,7 +40,7 @@ export function useIsServiceOwner(serviceId: string) {
   const { data: traderServices } = useTraderServices();
   return (
     isAuthenticated &&
-    traderServices?.some((s: TraderService) => s.serviceId === serviceId)
+    !!traderServices?.some((s: TraderService) => s.serviceId === serviceId)
   );
 }
 
