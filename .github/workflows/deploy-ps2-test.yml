@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - test
+      - feat/my-super-cool-cache-invalidation
 
 jobs:
   pre_job:
