@@ -23,6 +23,7 @@ import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import { useZModal } from '../../../../components/ZModal/use';
+import { differenceInDays } from 'date-fns';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -43,9 +44,7 @@ const MyDashboard: React.FC = () => {
   };
 
   const calculateServiceAge = (createdAt: string) =>
-    Math.floor(
-      (Date.now() - Date.parse(createdAt)) / 1000 / 60 / 60 / 24,
-    ).toString();
+    differenceInDays(new Date(), new Date(createdAt)).toString();
 
   const getDateFromDatetime = (date: string) => {
     return new Date(date).toLocaleDateString();
