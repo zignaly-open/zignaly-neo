@@ -44,6 +44,7 @@ export const trackNewSession = (
         },
       },
     );
+    // Manually call customer.io identify due to in-app plugin not loaded if using the library from segment
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     _cio?.identify({ email, id: userId, name: firstName });
@@ -73,5 +74,4 @@ export const trackConversion = () => {
 
 export const trackPage = () => {
   analytics?.page();
-  // window._cio?.page(name, page.properties())
 };
