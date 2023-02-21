@@ -128,7 +128,8 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
               columns={columns}
               data={investors.map((inv) => ({
                 ...inv,
-                successFee: management.successFee,
+                successFee:
+                  inv.accountType === 'owner' ? '0' : management.successFee,
               }))}
               emptyMessage={t('no-investors')}
             />
