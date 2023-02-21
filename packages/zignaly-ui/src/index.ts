@@ -1,40 +1,63 @@
+// Core
+export { ThemeProvider as ThemeProviderMui } from "@mui/material";
+export { default as ThemeProvider } from "utils/ThemeProvider";
+export * from "./theme";
+
+// Basic inputs <3
+export { default as ZigButton, ZigButtonGroup } from "./components/inputs/ZigButton";
+export { default as ZigButtonGroupInput } from "./components/inputs/ZigButtonGroupInput";
+export { default as ZigInput } from "./components/inputs/ZigInput";
+export { default as ZigAutocomplete } from "./components/inputs/ZigAutocomplete";
+export { default as ZigSelect } from "./components/inputs/ZigSelect";
+export { default as InputAmountAdvanced } from "components/inputs/InputAmountAdvanced";
+export { default as SliderInput } from "components/inputs/SliderInput";
+
+// Basic display components
+export { default as ZigTypography } from "./components/display/ZigTypography";
+export { default as ZigPriceLabel, ZigTablePriceLabel } from "./components/display/ZigPriceLabel";
+export { default as Avatar } from "./components/display/Avatar";
+export { default as ErrorMessage } from "./components/display/ErrorMessage";
+export { default as Loader } from "./components/display/Loader";
+export { default as Toaster } from "./components/display/Toaster";
+export { default as ProgressSlider } from "./components/display/ProgressSlider";
+export { default as ZigCoinIcon } from "components/display/ZigCoinIcon";
+export { default as ZignalyQRCode } from "./components/display/ZignalyQRCode";
+export { default as ZigTabs, ZigTab, ZigTabPanel } from "./components/navigation/ZigTabs";
+
+// Table
 export { createColumnHelper } from "@tanstack/react-table";
 export type { ColumnDef } from "@tanstack/react-table";
-import Avatar from "./components/display/Avatar";
-import ErrorMessage from "./components/display/ErrorMessage";
-import Loader from "./components/display/Loader";
-import ZigTable from "./components/display/ZigTable";
-import DateLabel from "./components/display/Table/components/DateLabel";
-import PercentageIndicator from "./components/display/Table/components/PercentageIndicator";
-import PriceLabel, { UsdPriceLabel } from "./components/display/Table/components/PriceLabel";
-import Typography from "./components/display/Typography";
-import ZigWalletIndicator from "./components/display/ZigWalletIndicator";
+export { default as ZigTable } from "./components/display/ZigTable";
+export { default as DateLabel } from "./components/display/Table/components/DateLabel"; // yes, this is used
+export { default as PercentageIndicator } from "./components/display/Table/components/PercentageIndicator"; // yes, this is used too
 export { default as CoinLabel } from "./components/display/Table/components/CoinLabel";
-import Toaster from "./components/display/Toaster";
-import ProgressSlider from "./components/display/ProgressSlider";
-import InvestSlider from "./components/display/InvestSlider";
 
+// TODO: Layouts - questionable, probably shoudl deprecate
+export { MarginContainer, PageContainer } from "./components/styled";
+
+// Chart
 export * from "./components/display/ZigChart";
-import DropDown from "./components/display/DropDown";
 
-export { default as ZignalyQRCode } from "./components/display/ZignalyQRCode";
+// TODO: deprecate
+export {
+  default as PriceLabel,
+  UsdPriceLabel,
+} from "./components/display/Table/components/PriceLabel";
+export { default as DropDown } from "./components/display/DropDown";
+export { default as Typography } from "./components/display/Typography";
+export { default as CoinIcon } from "components/display/CoinIcon";
 
-export { ThemeProvider as ThemeProviderMui } from "@mui/material";
+// TODO: deprecate - Inputs
+export { default as Button } from "./components/inputs/Button";
+export { default as CheckBox } from "./components/inputs/CheckBox";
+export { default as IconButton } from "./components/inputs/IconButton";
+export { default as TextButton } from "./components/inputs/TextButton";
+export { default as InputText } from "./components/inputs/InputText";
+export { default as InputCode } from "./components/inputs/InputCode";
+export { ButtonGroup, ValueIndicator } from "./components/styled";
 
-// Inputs
-import Button from "./components/inputs/Button";
-import CheckBox from "./components/inputs/CheckBox";
-import IconButton from "./components/inputs/IconButton";
-import TextButton from "./components/inputs/TextButton";
-import InputText from "./components/inputs/InputText";
-import Select from "./components/inputs/Selector";
-import InputCode from "./components/inputs/InputCode";
-import { ButtonGroup, ValueIndicator } from "./components/styled";
-
-// Layouts
-import { MarginContainer, PageContainer } from "./components/styled";
-
-// Icons
+// Icons - for the love of God, we should not do this
+// TODO: we have mui icons for a bloody reason
 export { ReactComponent as CloneIcon } from "assets/icons/clone-icon.svg";
 export { ReactComponent as RefreshIcon } from "assets/icons/refresh-icon.svg";
 export { ReactComponent as PencilIcon } from "assets/icons/pencil-icon.svg";
@@ -73,83 +96,12 @@ export { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
 export { ReactComponent as ZignalyExchangeIcon } from "assets/icons/zignaly-exchange-icon.svg";
 
 // Navigation
-import Header from "./components/navigation/Header";
-import MenuDropDown from "./components/navigation/MenuDropDown";
-import ZigsBalance from "./components/navigation/Header/components/ZigsBalance";
-import BrandImage from "./components/navigation/Header/components/BrandImage";
-import ZigTabs, { ZigTab, ZigTabPanel } from "./components/navigation/ZigTabs";
+export { default as Header } from "./components/navigation/Header";
+export { default as MenuDropDown } from "./components/navigation/MenuDropDown";
+export { default as BrandImage } from "./components/navigation/Header/components/BrandImage";
 
-export * from "./theme";
-export { default as ZigButton, ZigButtonGroup } from "./components/inputs/ZigButton";
-export { default as ZigButtonGroupInput } from "./components/inputs/ZigButtonGroupInput";
-export { default as ZigInput } from "./components/inputs/ZigInput";
-export { default as ZigTypography } from "./components/display/ZigTypography";
-export { default as ZigPriceLabel, ZigTablePriceLabel } from "./components/display/ZigPriceLabel";
-export { default as ZigAutocomplete } from "./components/inputs/ZigAutocomplete";
-export { default as ZigSelect } from "./components/inputs/ZigSelect";
-import ThemeProvider from "utils/ThemeProvider";
-import { sortByValue } from "utils/numbers";
-import { HeaderLinksContainer } from "components/navigation/Header/styles";
-import { styledIf } from "utils/styled";
-import CoinIcon from "components/display/CoinIcon";
-import ZigCoinIcon from "components/display/ZigCoinIcon";
-import SliderInput from "components/inputs/SliderInput";
-import InputAmountAdvanced from "components/inputs/InputAmountAdvanced";
-import { NiceScrollbar } from "utils/css";
-export { SelectSizes } from "components/inputs/Selector/types";
-
-export {
-  /**
-   * =-=-=-=-=-=-=-=
-   *   Components
-   * =-=-=-=-=-=-=-=
-   */
-  Avatar,
-  Loader,
-  ZigTable,
-  DateLabel,
-  PriceLabel,
-  UsdPriceLabel,
-  ValueIndicator,
-  PercentageIndicator,
-  NiceScrollbar,
-  Typography,
-  SliderInput,
-  CoinIcon,
-  ZigCoinIcon,
-  ErrorMessage,
-  ZigWalletIndicator,
-  ProgressSlider,
-  InvestSlider,
-  Toaster,
-  DropDown,
-  // Inputs
-  Button,
-  CheckBox,
-  IconButton,
-  InputAmountAdvanced,
-  TextButton,
-  InputText,
-  Select,
-  ButtonGroup,
-  InputCode,
-  // Navigation
-  Header,
-  BrandImage,
-  ZigsBalance,
-  HeaderLinksContainer,
-  MenuDropDown,
-  PageContainer,
-  MarginContainer,
-  ZigTabs,
-  ZigTab,
-  ZigTabPanel,
-  /**
-   * =-=-=-=-=-=-=-=
-   *     Utils
-   * =-=-=-=-=-=-=-=
-   */
-  ThemeProvider,
-  sortByValue,
-  styledIf,
-};
+// Utils
+export { sortByValue } from "utils/numbers";
+export { NiceScrollbar } from "utils/css";
+export { styledIf } from "utils/styled";
+export { HeaderLinksContainer } from "components/navigation/Header/styles";

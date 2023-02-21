@@ -9,6 +9,7 @@ export const GET_CURRENT_USER = gql`
       discordName
       onboardingCompletedAt
       publicAddress
+      emailVerified
     }
   }
 `;
@@ -80,5 +81,17 @@ export const BALANCE_SUBSCRIPTION = gql`
       id
       balance
     }
+  }
+`;
+
+export const VERIFY_EMAIL_MUTATION = gql`
+  mutation verifyEmail($userId: Int!, $email: String!) {
+    verifyEmail(userId: $userId, email: $email)
+  }
+`;
+
+export const CONFIRM_EMAIL_MUTATION = gql`
+  mutation confirmEmail($userId: Int!) {
+    confirmEmail(userId: $userId)
   }
 `;

@@ -11,7 +11,7 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 import { serviceToInvestmentServiceDetail } from '../../../../../apis/investment/util';
 import InvestModal from '../../../../Dashboard/components/ManageInvestmentModals/InvestModal';
-import { ROUTE_SIGNUP } from '../../../../../routes';
+import { ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../../../routes';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import OtherAccountsButton from './OtherAccountsButton';
@@ -58,7 +58,10 @@ const InvestButton: React.FC<{
         });
       else showModal(InvestModal, { ctaId });
     } else {
-      navigate(ROUTE_SIGNUP, { state: { redirectTo: location } });
+      const newUser = !localStorage.getItem('hasLoggedIn');
+      navigate(newUser ? ROUTE_SIGNUP : ROUTE_LOGIN, {
+        state: { redirectTo: location },
+      });
     }
   };
 

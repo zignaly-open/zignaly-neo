@@ -97,6 +97,7 @@
     "select-type-first": "Select a service type first",
     "title": "Create new service",
     "action": "Create service",
+    "next-step": "Next",
     "service-type": "Service type",
     "service-name": "Service name",
     "base-currency": "Base Currency",

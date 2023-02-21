@@ -61,8 +61,8 @@ export function useDepositInfo(
     {
       coinId,
       networkId,
-      exchangeId: exchange.internalId,
+      exchangeId: exchange?.internalId,
     },
-    { skip: !coinId || !networkId || !exchange.internalId },
+    { skip: !coinId || !networkId || !exchange?.internalId },
   );
 }

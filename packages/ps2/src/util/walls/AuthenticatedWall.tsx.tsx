@@ -1,7 +1,7 @@
 import React from 'react';
 import { useIsAuthenticated } from '../../apis/user/use';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
-import { ROUTE_SIGNUP } from '../../routes';
+import { ROUTE_LOGIN } from '../../routes';
 
 const AuthenticatedWall: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
@@ -10,7 +10,7 @@ const AuthenticatedWall: React.FC = () => {
   return isAuthenticated ? (
     <Outlet />
   ) : (
-    <Navigate to={ROUTE_SIGNUP} replace state={{ redirectTo: location }} />
+    <Navigate to={ROUTE_LOGIN} replace state={{ redirectTo: location }} />
   );
 };
 

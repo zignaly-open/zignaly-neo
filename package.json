@@ -37,7 +37,8 @@
   "dependencies": {
     "@commitlint/cli": "^17.0.3",
     "@commitlint/config-conventional": "^17.0.3",
-    "env-cmd": "^10.1.0"
+    "env-cmd": "^10.1.0",
+    "sib-api-v3-typescript": "^2.2.2"
   },
   "resolutions": {
     "@types/react": "17.0.2",

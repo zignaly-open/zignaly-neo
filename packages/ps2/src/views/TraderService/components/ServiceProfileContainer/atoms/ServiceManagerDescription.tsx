@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
 import MarkdownSection from './MarkdownSection';
@@ -7,7 +7,6 @@ import { ZigTypography } from '@zignaly-open/ui';
 import Countries from 'i18n-iso-countries';
 import { CountryFlag, StyledVerifiedIcon } from '../styles';
 import { Tooltip } from '@mui/material';
-import * as flags from 'country-flag-icons/string/3x2';
 import { formatLocalizedDistance } from '../../../../Dashboard/components/MyDashboard/util';
 
 const ServiceManagerDescription: React.FC<{ service: Service }> = ({
@@ -15,6 +14,7 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
 }) => {
   const { t, i18n } = useTranslation('service');
   const country = Countries.getName(service.ownerCountry, i18n.language);
+  const [flagInFolder, setFlagInFolder] = useState(true);
 
   return (
     <MarkdownSection
@@ -46,20 +46,20 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
               </Tooltip>
             )}
 
-            {service.ownerCountry &&
-              flags[service.ownerCountry?.toLocaleUpperCase()] && (
-                <Tooltip
-                  title={t('owner-from', {
-                    country: country || service.ownerCountry,
-                  })}
-                >
-                  <CountryFlag
-                    dangerouslySetInnerHTML={{
-                      __html: flags[service.ownerCountry?.toLocaleUpperCase()],
-                    }}
-                  />
-                </Tooltip>
-              )}
+            {service.ownerCountry && flagInFolder && (
+              <Tooltip
+                title={t('owner-from', {
+                  country: country || service.ownerCountry,
+                })}
+              >
+                <CountryFlag
+                  src={`/images/country-flags/${service.ownerCountry.toUpperCase()}.svg`}
+                  onError={() => {
+                    setFlagInFolder(false);
+                  }}
+                />
+              </Tooltip>
+            )}
             <ZigTypography
               sx={{
                 ml: 2,

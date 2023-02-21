@@ -1,19 +1,21 @@
 import { WalletType } from '@zignaly-open/raffles-shared/types';
 import { withFilter } from 'graphql-subscriptions';
 import { Op } from 'sequelize';
-import { getUserBalance } from '../balances/service';
+import { getUserBalance, deposit } from '../balances/service';
 import pubsub from '../../pubsub';
 import redisService from '../../redisService';
 import { ContextUser, ResourceOptions } from '../../types';
 import { checkAdmin } from '../../util/admin';
 import { getUserIdFromToken } from '../../util/jwt';
-import { BALANCE_CHANGED } from './constants';
+import { BALANCE_CHANGED, EMAIL_REWARD } from './constants';
 import { User } from './model';
 import {
   authenticateSignature,
   validateDiscordName,
   validateEmail,
   validateUsername,
+  sendEmailVerification,
+  isEmailConfirmed,
 } from './util';
 
 const generateNonceSignMessage = (nonce: string | number) =>
@@ -136,6 +138,12 @@ export const generateService = (user: ContextUser) => {
 
     userInstance.username = username;
     userInstance.email = email;
+    if (!emailValid) {
+      userInstance.emailVerified = false;
+    }
+    if (userInstance.email !== email) {
+      userInstance.emailVerified = false;
+    }
     userInstance.discordName = discordName;
     await userInstance.save();
     await redisService.updateRedisUsernameCache(user.id);
@@ -169,6 +177,69 @@ export const generateService = (user: ContextUser) => {
     }
   };
 
+  const confirmEmail = async (userId: number) => {
+    try {
+      const user = await User.findByPk(userId);
+      if (await isEmailConfirmed(user.email)) {
+        await User.update(
+          {
+            emailVerified: true,
+          },
+          {
+            where: {
+              id: userId,
+            },
+          },
+        );
+
+        if (!user.zhitRewarded) {
+          await deposit({
+            walletAddress: user.publicAddress,
+            amount: EMAIL_REWARD,
+            blockchain: 'POLYGON',
+            note: 'Email verification',
+          });
+          await User.update(
+            {
+              zhitRewarded: true,
+            },
+            {
+              where: {
+                id: userId,
+              },
+            },
+          );
+        }
+        return true;
+      }
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  };
+
+  const verifyEmail = async (userId: number, email: string) => {
+    try {
+      await sendEmailVerification(`${userId}`, email);
+      User.update(
+        {
+          email,
+          emailVerificationSent: true,
+          emailVerified: false,
+        },
+        {
+          where: {
+            id: userId,
+          },
+        },
+      );
+      return true;
+    } catch (e) {
+      console.error(e);
+      return false;
+    }
+  };
+
   return {
     me,
     balance,
@@ -178,5 +249,7 @@ export const generateService = (user: ContextUser) => {
     authenticate,
     updateProfile,
     getOrCreateUser,
+    verifyEmail,
+    confirmEmail,
   };
 };

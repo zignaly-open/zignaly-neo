@@ -3,7 +3,8 @@ import BigNumber from 'bignumber.js';
 
 export const decimalsValidation = (maxDecimals: number) =>
   yup.string().test('int', 'common:validation.max-decimals', (val) => {
-    if (!val) return false;
+    // will be checked by .required()
+    if (!val) return true;
 
     const splitValueDot = val.split('.');
     // Handle incorrect number
