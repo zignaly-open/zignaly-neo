@@ -14,7 +14,7 @@ import InvestModal from '../../../../Dashboard/components/ManageInvestmentModals
 import { ROUTE_SIGNUP } from '../../../../../routes';
 import { InvestButtonSubtext, InvestButtonWrap } from '../styles';
 import { Button } from '@zignaly-open/ui';
-import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
+import ChooseDepositTypeModal from 'views/Dashboard/components/ManageInvestmentModals/ChooseDepositTypeModal';
 import OtherAccountsButton from './OtherAccountsButton';
 import { Box } from '@mui/material';
 
@@ -53,8 +53,8 @@ const InvestButton: React.FC<{
       selectInvestment(serviceToInvestmentServiceDetail(service));
       const showDeposit = +balance === 0;
       if (showDeposit)
-        showModal(DepositModal, {
-          allowedCoins: [service.ssc],
+        showModal(ChooseDepositTypeModal, {
+          selectedCoin: service.ssc,
           ctaId,
         });
       else showModal(InvestModal, { ctaId });
