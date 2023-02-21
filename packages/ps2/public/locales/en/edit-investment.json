@@ -78,6 +78,7 @@
     "type-transfer": "Type the word “{{word}}” in the field below to complete the transfer:",
     "transfer-error": "Invalid value. Please type the correct word.",
     "max-funds": "Exceeds maximum funds allowed in this service. Invest max. {{max}} {{coin}}.",
+    "max-reached": "Maximum funds reached",
     "transfer-label": "Transfer",
     "i-understand-margin": "I understand my whole {{coin}} balance is now part of the margin and at risk",
     "i-understand-money-transferred": "I understand and confirm that my funds will be transferred to the trader's pool and will no longer appear in my available balance"

@@ -53,7 +53,9 @@ function EditInvestmentForm({
   const { isLoading: isEditingInvestment, edit: editInvestment } =
     useUpdateTakeProfitAndInvestMore(serviceId);
   const { data: details } = useInvestmentDetails(serviceId);
-  const { data: service } = useServiceDetails(serviceId);
+  const { data: service } = useServiceDetails(serviceId, {
+    refetchOnMountOrArgChange: true,
+  });
   const transferOutAll = details?.transferOutAll;
 
   const {
