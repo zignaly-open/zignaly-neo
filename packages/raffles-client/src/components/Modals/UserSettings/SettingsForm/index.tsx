@@ -12,7 +12,11 @@ import theme from 'theme';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
-import { CHANGE_PROFILE } from 'queries/users';
+import {
+  CHANGE_PROFILE,
+  GET_CURRENT_USER,
+  VERIFY_EMAIL_MUTATION,
+} from 'queries/users';
 import { UserSettingsValidation } from 'util/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Form } from './styles';
@@ -62,12 +66,21 @@ const SettingsForm = (props: UserSettingsModalProps) => {
     }
   };
 
+  const [verifyEmail] = useMutation(VERIFY_EMAIL_MUTATION, {
+    refetchQueries: [{ query: GET_CURRENT_USER }],
+  });
+
   const submit = async (values: {
     username: string;
     email: string;
     discordName: string;
   }) => {
     try {
+      if (user.email !== values.email) {
+        verifyEmail({
+          variables: { userId: Number(user.id), email: values.email },
+        });
+      }
       await updateUsername({
         variables: values,
       });
