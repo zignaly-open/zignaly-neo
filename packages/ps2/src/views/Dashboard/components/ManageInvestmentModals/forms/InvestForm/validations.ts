@@ -7,6 +7,31 @@ import {
   inputAmountTokenDecimalsValidation,
 } from '../../../../../../util/validation';
 
+export const investAmountValidation = (max: string, coin: string) =>
+  inputAmountTokenMaxValidation
+    .concat(inputAmountTokenDecimalsValidation)
+    .concat(
+      yup.object().shape({
+        value: yup
+          .string()
+          .test(
+            'sbt',
+            i18n.t('edit-investment:invest-modal.max-reached'),
+            () => parseFloat(max) > 0,
+          )
+          .test(
+            'sbt-limit',
+            i18n.t('edit-investment:invest-modal.max-funds', {
+              max: numericFormatter(max.toString(), {
+                thousandSeparator: true,
+              }),
+              coin,
+            }),
+            (val) => new BigNumber(val).isLessThanOrEqualTo(max),
+          ),
+      }),
+    );
+
 export const EditInvestmentValidation = ({
   max,
   coin,
@@ -15,22 +40,7 @@ export const EditInvestmentValidation = ({
   coin: string;
 }) =>
   yup.object().shape({
-    amountTransfer: inputAmountTokenMaxValidation
-      .concat(inputAmountTokenDecimalsValidation)
-      .concat(
-        yup.object().shape({
-          value: yup.string().test(
-            'sbt',
-            i18n.t('edit-investment:invest-modal.max-funds', {
-              max: numericFormatter(max.toString(), {
-                thousandSeparator: true,
-              }),
-              coin: coin,
-            }),
-            (val) => new BigNumber(val).isLessThanOrEqualTo(max),
-          ),
-        }),
-      ),
+    amountTransfer: investAmountValidation(max, coin),
     understandMargin: yup.boolean().oneOf([true], 'error:error.required'),
     transferConfirm: yup
       .string()
