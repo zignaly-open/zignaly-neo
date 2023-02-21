@@ -12,3 +12,5 @@ export const HELP_MANAGE_FUNDS_URL =
 
 export const HELP_CREATE_SERVICE_MARKETPLACE_URL =
   'https://help.zignaly.com/en/articles/6845502-rules-for-being-listed-in-the-marketplace';
+
+export const PURCHASE_CRYPTO = 'https://changelly.com/?ref_id=q0s68wsie1uf9wza';
