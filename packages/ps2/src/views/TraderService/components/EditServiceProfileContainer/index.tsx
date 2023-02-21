@@ -46,7 +46,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
   const defaultValues = {
     name: service.name,
     description: service.description,
-    // maximumSbt: service.maximumSbt,
+    maximumSbt: service.maximumSbt,
     successFee: service.successFee,
     logo: service.logo,
   };
@@ -183,7 +183,6 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                 render={({ field }) => (
                   <SuccessFeeInputWrapper value={watch('successFee') || 0}>
                     <ZigInput
-                      type='number'
                       InputProps={{
                         endAdornment: (
                           <InputAdornment position='end'>%</InputAdornment>
@@ -205,13 +204,12 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                 )}
               />
             </Grid>
-            {/* <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={6}>
               <Controller
                 name='maximumSbt'
                 control={control}
                 render={({ field }) => (
                   <ZigInput
-                    type='number'
                     InputProps={{
                       endAdornment: (
                         <InputAdornment position='end'>
@@ -233,7 +231,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                   />
                 )}
               />
-            </Grid> */}
+            </Grid>
           </Grid>
           <Grid
             item
