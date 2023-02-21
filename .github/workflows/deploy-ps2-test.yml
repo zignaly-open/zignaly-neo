@@ -39,7 +39,7 @@ jobs:
           envkey_ESLINT_NO_DEV_ERRORS: true
           envkey_REACT_APP_LIVE_SESSION_TRACK_ID: ${{ secrets.PS2_LIVE_SESSION_TRACK_ID }}
           envkey_REACT_APP_SEGMENT_KEY: ${{ secrets.PS2_SEGMENT_KEY }}
-          envkey_REACT_APP_ENABLE_TRACKING: true
+          envkey_REACT_APP_ENABLE_TRACKING: false
           envkey_REACT_APP_SEGMENT_SCRIPT_SRC: ${{ secrets.PS2_SEGMENT_SCRIPT_SRC }}
           # well yeah we could store all this as action secrets in the repo
           # but would that make any sense since these values are not secret
