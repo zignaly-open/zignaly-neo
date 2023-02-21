@@ -20,3 +20,9 @@ export const UserSettingsValidation = yup
       }),
   })
   .required();
+
+export const EmailValidation = yup
+  .object({
+    email: yup.string().trim().email('The email is not valid'),
+  })
+  .required();

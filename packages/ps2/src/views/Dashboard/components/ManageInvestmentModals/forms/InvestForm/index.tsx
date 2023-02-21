@@ -25,6 +25,7 @@ import { CheckBox } from '@zignaly-open/ui';
 import { AmountInvested, TokenValue } from '../EditInvestmentForm/styles';
 import { NumericFormat } from 'react-number-format';
 import { useServiceDetails } from 'apis/service/use';
+import BigNumber from 'bignumber.js';
 
 function InvestForm({ close, onInvested }: InvestFormProps) {
   const coin = useCurrentBalance();
@@ -59,7 +60,10 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
     },
     resolver: yupResolver(
       EditInvestmentValidation({
-        max: serviceDetails.maximumSbt - +serviceDetails.invested,
+        max: new BigNumber(serviceDetails.maximumSbt)
+          .minus(serviceDetails.invested)
+          .minus(serviceDetails.pending)
+          .toString(),
         coin: service.ssc,
       }),
     ),

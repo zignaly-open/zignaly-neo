@@ -11,7 +11,7 @@ export const EditInvestmentValidation = ({
   max,
   coin,
 }: {
-  max: number;
+  max: string;
   coin: string;
 }) =>
   yup.object().shape({

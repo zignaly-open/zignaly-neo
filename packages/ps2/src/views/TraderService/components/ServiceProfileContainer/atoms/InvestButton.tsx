@@ -67,7 +67,7 @@ const InvestButton: React.FC<{
 
   const showOtherAccounts =
     investedFromAccounts > 1 && showMultipleAccountButton;
-  const maxReached = +service.invested >= service.maximumSbt;
+  const maxReached = +service.invested + service.pending >= service.maximumSbt;
 
   return (
     <>
@@ -75,10 +75,11 @@ const InvestButton: React.FC<{
         id={id}
         onClick={onClickMakeInvestment}
         loading={needsToOpenWhenBalancesLoaded && isFetching}
-        variant={maxReached ? 'outlined' : 'contained'}
+        variant='contained'
         size={'large'}
         disabled={maxReached}
         sx={{ flexDirection: 'column', minWidth: 165 }}
+        tooltip={maxReached ? t('invest-button.max-reached-tooltip') : null}
       >
         <>
           <ZigTypography

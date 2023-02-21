@@ -22,7 +22,7 @@ const InvestorDetailsForService: React.FC<{
           {service.serviceName}
         </InvestorName>
 
-        {service.successFee && (
+        {service.successFee?.toString() && (
           <Typography variant={'h3'} color={'neutral400'}>
             {t('investorDetail-successFee', {
               fee: service.successFee,

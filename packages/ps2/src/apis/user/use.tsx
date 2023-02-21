@@ -56,7 +56,6 @@ const useStartSession = () => {
   const [loadSession] = useLazySessionQuery();
   const [loadTraderServices] = useLazyTraderServicesQuery();
   const [loadUser] = useLazyUserQuery();
-  const { i18n } = useTranslation();
 
   return async (user: { token: string } & Partial<LoginResponse>) => {
     dispatch(setAccessToken(user.token));
@@ -90,7 +89,6 @@ const useStartSession = () => {
     dispatch(setUser(userData));
     startLiveSession(userData);
     trackNewSession(userData, SessionsTypes.Login);
-    i18n.changeLanguage(userData.locale);
     localStorage.setItem('hasLoggedIn', 'true');
   };
 };
@@ -190,10 +188,31 @@ export function useChangeLocale(): (locale: string) => void {
   const [save] = useSetLocaleMutation();
   const { i18n } = useTranslation();
   const isAuthenticated = useIsAuthenticated();
+  const userData = useCurrentUser();
+  const [newLocale, setNewLocale] = useState<string>(null);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    // After logged in
+
+    if (newLocale && userData?.locale !== newLocale) {
+      // Update BE with custom locale if changed
+      save({ locale: newLocale });
+    } else if (userData?.locale !== i18n.language) {
+      // Otherwise update locale to match BE
+      i18n.changeLanguage(userData.locale);
+    }
+  }, [userData?.locale]);
 
   return (locale: string) => {
     i18n.changeLanguage(locale);
-    isAuthenticated && save({ locale });
+    if (isAuthenticated) {
+      // Update locale to BE directly
+      save({ locale });
+    } else {
+      // Save locale for BE update after login
+      setNewLocale(locale);
+    }
   };
 }
 

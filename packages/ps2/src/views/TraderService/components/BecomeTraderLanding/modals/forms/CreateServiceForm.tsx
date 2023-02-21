@@ -21,7 +21,7 @@ import SuccessFeeInputWrapper from './SuccessFeeInputWrapper';
 import { ExchangeType } from '../../../../../../apis/user/types';
 import { ServiceFormData } from './types';
 import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
-import { useGetServiceTypesInfoQuery } from '../../../../../../apis/service/api';
+import { useServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 
 const CreateServiceForm: React.FC<{
   service?: Partial<ServiceFormData>;
@@ -50,7 +50,7 @@ const CreateServiceForm: React.FC<{
 
   const exchangeType = watch('serviceType');
 
-  const { data: serviceTypesInfo } = useGetServiceTypesInfoQuery();
+  const { data: serviceTypesInfo } = useServiceTypesInfoQuery();
 
   const coinOptions = useMemo(
     () =>
@@ -190,7 +190,7 @@ const CreateServiceForm: React.FC<{
           id={'create-service-modal__create-1st-step'}
           size='large'
         >
-          {t('create.action')}
+          {t('create.next-step')}
         </ZigButton>
       </ModalActionsNew>
     </form>

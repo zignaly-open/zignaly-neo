@@ -36,6 +36,7 @@ import { EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { useServiceDetails } from 'apis/service/use';
+import BigNumber from 'bignumber.js';
 
 function EditInvestmentForm({
   onClickWithdrawInvestment,
@@ -72,7 +73,10 @@ function EditInvestmentForm({
     resolver: isInputEnabled
       ? yupResolver(
           EditInvestmentValidation({
-            max: service.maximumSbt - +service.invested,
+            max: new BigNumber(service.maximumSbt)
+              .minus(service.invested)
+              .minus(service.pending)
+              .toString(),
             coin: service.ssc,
           }),
         )
@@ -108,10 +112,16 @@ function EditInvestmentForm({
     }
   };
 
-  const maxReached = +service.invested >= service.maximumSbt;
+  const maxReached = +service.invested + service.pending >= service.maximumSbt;
 
   const tooltipWrap = (v: React.ReactElement) =>
-    maxReached ? <Tooltip title={t('form.link.maxReached')}>{v}</Tooltip> : v;
+    maxReached ? (
+      <Tooltip title={t('service:invest-button.max-reached-tooltip')}>
+        {v}
+      </Tooltip>
+    ) : (
+      v
+    );
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>

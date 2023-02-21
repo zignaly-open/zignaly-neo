@@ -15,7 +15,7 @@ import { useCurrentBalance } from '../../../../../../apis/investment/use';
 import { CreateServicePayload } from '../../../../../../apis/service/types';
 import {
   useCreateTraderServiceMutation,
-  useGetServiceTypesInfoQuery,
+  useServiceTypesInfoQuery,
 } from '../../../../../../apis/service/api';
 import { useActiveExchange } from '../../../../../../apis/user/use';
 import { generatePath, useNavigate } from 'react-router-dom';
@@ -31,7 +31,7 @@ const InvestInYourServiceForm: React.FC<{
   const exchange = useActiveExchange();
   const navigate = useNavigate();
   const [createService, { isLoading }] = useCreateTraderServiceMutation();
-  const { data: serviceTypesInfo } = useGetServiceTypesInfoQuery();
+  const { data: serviceTypesInfo } = useServiceTypesInfoQuery();
   const minValue =
     serviceTypesInfo?.[service.serviceType]?.[service.baseCurrency]
       ?.minimum_owner_balance || 0;

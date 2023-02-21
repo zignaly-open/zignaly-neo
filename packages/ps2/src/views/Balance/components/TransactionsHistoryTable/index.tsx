@@ -17,6 +17,7 @@ import TransactionDetails from './atoms/TransactionDetails';
 import { Box } from '@mui/material';
 import { PaginationState } from '@tanstack/react-table';
 import { getTransactionSideType, truncateAddress } from './util';
+import { TRANSACTION_TYPE } from 'apis/coin/types';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(
@@ -36,6 +37,27 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
     pageIndex,
   );
   const coinsEndpoint = useExchangeCoinsList();
+
+  const defineSign = (typeTransaction: string) => {
+    if (
+      [
+        TRANSACTION_TYPE.PS_WITHDRAW,
+        TRANSACTION_TYPE.DEPOSIT,
+        TRANSACTION_TYPE.SUCCESS_FEE,
+        TRANSACTION_TYPE.PSDS,
+      ].includes(typeTransaction)
+    )
+      return '+';
+    else if (
+      [
+        TRANSACTION_TYPE.PS_DEPOSIT,
+        TRANSACTION_TYPE.WITHDRAW,
+        TRANSACTION_TYPE.BUYZIG,
+      ].includes(typeTransaction)
+    )
+      return '-';
+    else return '';
+  };
 
   const updateData = () => {
     const data = transactionsEndpoint.data
@@ -92,19 +114,27 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
       columnHelper.accessor('amount', {
         header: t('tableHeader.amount'),
         cell: ({ getValue, row: { original } }) => (
-          <ZigTablePriceLabel exact coin={original.asset} value={getValue()} />
+          <ZigTablePriceLabel
+            exact
+            coin={original.asset}
+            sign={defineSign(original.txType)}
+            value={getValue()}
+          />
         ),
         enableSorting: false,
       }),
       columnHelper.accessor('fromName', {
         header: t('tableHeader.from'),
-        cell: ({ getValue }) => (
+        cell: ({ getValue, row: { original } }) => (
           <ZigTypography
             whiteSpace='normal'
             color='neutral100'
             fontWeight={500}
           >
-            {getValue() || t('external')}
+            {getValue() ||
+              (original.txType === TRANSACTION_TYPE.PS_WITHDRAW
+                ? t('psService')
+                : t('external'))}
           </ZigTypography>
         ),
         enableSorting: false,

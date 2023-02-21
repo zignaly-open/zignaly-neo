@@ -70,6 +70,7 @@ export type Exchange = {
   globalWhitelist: boolean;
   isBrokerAccount: boolean;
   activated: boolean;
+  createdAt: string;
 };
 
 export type SignupResponse = {
@@ -82,6 +83,7 @@ export type SignupPayload = {
   password: string;
   newPageAB?: boolean;
   ref?: string;
+  subtrack?: string;
 };
 
 export type LoginResponse = {

@@ -1,10 +1,4 @@
-import {
-  IconButton,
-  BrandImage,
-  UserIcon,
-  WalletIcon,
-  DropDown,
-} from '@zignaly-open/ui';
+import { IconButton, UserIcon, WalletIcon, DropDown } from '@zignaly-open/ui';
 import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import useCurrentUser from '../../hooks/useCurrentUser';
@@ -89,7 +83,6 @@ const Header = () => {
       // Disconnected manually from MM.
       logout();
     }
-
     // Save user to avoid detecting false disconnection because "account" wasn't yet loaded at page load.
     userRef.current = currentUser;
   }, [account, currentUser]);
@@ -97,11 +90,12 @@ const Header = () => {
   return (
     <StickyHeader
       leftElements={[
-        <BrandImage
+        <img
+          src={'/zigbids-logotype.svg'}
+          alt={'Zigbids'}
           key={'logo2'}
-          type={'zigbidslogotype'}
-          width={'140px'}
-          height={'68px'}
+          width={'140'}
+          height={'68'}
         />,
       ]}
       rightElements={[

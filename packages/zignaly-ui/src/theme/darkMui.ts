@@ -97,6 +97,9 @@ const darkMui = createTheme({
           "&:hover, &.MuiButton-active": {
             background: "linear-gradient(rgba(20, 156, 173, 0.64),rgba(69, 64, 193, 0.64))",
           },
+          "&.Mui-disabled": {
+            opacity: 0.33,
+          },
         },
         outlined: {
           transition: "all 0.2s linear",
