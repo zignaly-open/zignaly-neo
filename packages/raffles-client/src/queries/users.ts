@@ -8,6 +8,8 @@ export const GET_CURRENT_USER = gql`
       username
       discordName
       onboardingCompletedAt
+      emailVerificationSent
+      zhitRewarded
       publicAddress
       emailVerified
     }
@@ -91,7 +93,7 @@ export const VERIFY_EMAIL_MUTATION = gql`
 `;
 
 export const CONFIRM_EMAIL_MUTATION = gql`
-  mutation confirmEmail($userId: Int!) {
-    confirmEmail(userId: $userId)
+  mutation confirmEmail($hashStr: String!) {
+    confirmEmail(hashStr: $hashStr)
   }
 `;

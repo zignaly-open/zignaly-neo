@@ -120,6 +120,9 @@ export const generateService = (user: ContextUser) => {
   };
 
   const rewardUser = async (user: User) => {
+    if (user.zhitRewarded) {
+      return;
+    }
     await deposit({
       walletAddress: user.publicAddress,
       amount: EMAIL_REWARD,
@@ -195,6 +198,8 @@ export const generateService = (user: ContextUser) => {
   const confirmEmail = async (hashStr: string) => {
     try {
       const [hashedValue, expirationTimestamp] = hashStr.split(',');
+
+      console.log(expirationTimestamp, isHashExpired(expirationTimestamp));
       if (isHashExpired(expirationTimestamp)) {
         return false;
       }
@@ -229,7 +234,7 @@ export const generateService = (user: ContextUser) => {
             },
             {
               where: {
-                id: userId,
+                id: user.id,
               },
             },
           );

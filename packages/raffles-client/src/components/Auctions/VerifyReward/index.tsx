@@ -36,6 +36,7 @@ const VerifyReward = () => {
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [verificationMessage, setVerificationMessage] = useState('');
 
   const handleVerifyEmail = async (email: string) => {
     await verifyEmail({
@@ -45,15 +46,24 @@ const VerifyReward = () => {
   };
 
   useEffect(() => {
-    if (currentUser?.emailVerified) {
-      setIsConfirmed(currentUser.emailVerified);
-    }
-    const userIdParams = new URLSearchParams(window.location.search).get(
-      'confirm',
-    );
-    if (userIdParams) {
-      confirmEmail({ variables: { userId: Number(userIdParams) } });
-    }
+    const checkUserState = async () => {
+      if (currentUser?.emailVerified) {
+        setIsConfirmed(currentUser.emailVerified);
+      }
+      const hashStr = new URLSearchParams(window.location.search).get(
+        'confirm',
+      );
+      if (hashStr) {
+        const { data } = await confirmEmail({ variables: { hashStr } });
+        if (!data.confirmEmail) {
+          setVerificationMessage('confirmation-link-invalid');
+        } else {
+          setVerificationMessage('email-verified');
+        }
+      }
+    };
+
+    checkUserState();
   }, [currentUser]);
 
   const {
@@ -71,6 +81,7 @@ const VerifyReward = () => {
   const submit = async (values: { email: string }) => {
     try {
       handleVerifyEmail(values.email);
+      setVerificationMessage('email-sent');
     } catch (e) {
       setErrorMessage(e.message || 'Something went wrong');
     }
@@ -78,7 +89,7 @@ const VerifyReward = () => {
 
   return isConfirmed || !currentUser ? (
     <></>
-  ) : !isEmailSent ? (
+  ) : !isEmailSent && !currentUser.emailVerificationSent ? (
     <Box display='flex' flexDirection='row'>
       <Form onSubmit={handleSubmit(submit)}>
         <ZigTypography variant='h2' color='neutral400'>
@@ -117,7 +128,7 @@ const VerifyReward = () => {
   ) : (
     <>
       <ZigTypography variant='h2' color='neutral400'>
-        {t('email-sent')}
+        {t(verificationMessage)}
       </ZigTypography>
     </>
   );

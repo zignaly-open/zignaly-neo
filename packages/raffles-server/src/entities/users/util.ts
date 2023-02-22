@@ -194,8 +194,7 @@ export const createHashedStrWithExpiration = (hashedValue: string) => {
   return `${hashedValue},${timestampInSeconds + expirationInSeconds}`;
 };
 
-export const isHashExpired = (hashStr: string) => {
-  const [, expirationTimestamp] = hashStr.split(',');
+export const isHashExpired = (expirationTimestamp: string) => {
   const currentTimestampInSeconds = Date.now() / 1000;
   return currentTimestampInSeconds > Number(expirationTimestamp);
 };

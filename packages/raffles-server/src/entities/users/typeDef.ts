@@ -8,6 +8,8 @@ export const typeDef = gql`
     onboardingCompletedAt: Date
     discordName: String
     emailVerified: Boolean
+    emailVerificationSent: Boolean
+    zhitRewarded: Boolean
     email: String
     createdAt: Date
   }

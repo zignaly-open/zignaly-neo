@@ -160,7 +160,11 @@ const SettingsForm = (props: UserSettingsModalProps) => {
                 <ZigInput
                   fullWidth
                   placeholder={t('email-placeholder')}
-                  error={errors.email?.message}
+                  error={
+                    user.emailVerified
+                      ? errors.email?.message
+                      : t('email-not-verified')
+                  }
                   {...field}
                 />
               )}
