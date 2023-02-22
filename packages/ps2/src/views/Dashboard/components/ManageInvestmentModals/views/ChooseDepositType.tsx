@@ -11,7 +11,7 @@ const ChooseDepositType: React.FC<{
   ctaId?: string;
 }> = ({ coin, ctaId = '' }) => {
   const { t } = useTranslation('purchase-deposit-crypto');
-  const { showModal } = useZModal({ disableAutoDestroy: true });
+  const { showModal } = useZModal();
   return (
     <>
       <Box padding={'15px 0'}>
