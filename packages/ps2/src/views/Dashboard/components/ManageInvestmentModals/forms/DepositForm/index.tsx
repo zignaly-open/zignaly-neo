@@ -11,10 +11,11 @@ import {
   Typography,
   Loader,
 } from '@zignaly-open/ui';
+import NorthEastIcon from '@mui/icons-material/NorthEast';
 import copy from 'copy-to-clipboard';
 import { DepositFormData } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Link } from '@mui/material';
 import { NumericFormat } from 'react-number-format';
 import {
   useCoinBalances,
@@ -29,6 +30,7 @@ import {
 } from '../../../../../../apis/user/use';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import { trackCta } from '@zignaly-open/tracker';
+import { PURCHASE_CRYPTO } from '../../../../../../util/constants';
 
 function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
@@ -312,6 +314,22 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         {!!network && !networkObject?.depositEnable && (
           <ErrorMessage text={t('no-network')} />
         )}
+        <Grid item xs={12} pt={3}>
+          <Typography variant={'body2'} color={'neutral300'}>
+            <Link underline={'hover'} href={PURCHASE_CRYPTO} target={'_blank'}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  gap: 0.5,
+                  alignItems: 'center',
+                }}
+              >
+                {t('buy-crypto')}
+                <NorthEastIcon fontSize={'inherit'} />
+              </Box>
+            </Link>
+          </Typography>
+        </Grid>
       </Grid>
     </form>
   );
