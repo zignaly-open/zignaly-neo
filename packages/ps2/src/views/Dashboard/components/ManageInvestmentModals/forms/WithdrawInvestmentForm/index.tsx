@@ -16,11 +16,15 @@ import {
   useSelectedInvestment,
   useWithdrawInvestment,
 } from '../../../../../../apis/investment/use';
-import { EditInvestmentValidation } from './validations';
+import {
+  EditInvestmentValidation,
+  EditInvestmentValidationOwner,
+} from './validations';
 import { WithdrawInvestmentFormFormData } from './types';
 import { ChangeViewFn, EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import CenteredLoader from '../../../../../../components/CenteredLoader';
+import { useServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 
 const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
   setView,
@@ -40,6 +44,10 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
     [service],
   );
 
+  const { data: serviceTypesInfo } = useServiceTypesInfoQuery();
+  const minInvestedAmountOwner =
+    serviceTypesInfo?.spot[coin.id].minimum_owner_balance;
+
   const { t } = useTranslation('withdraw');
   const toast = useToast();
   const {
@@ -58,7 +66,10 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
         token: coin,
       },
     },
-    resolver: yupResolver(EditInvestmentValidation),
+    resolver:
+      service.accountType === 'owner'
+        ? yupResolver(EditInvestmentValidationOwner(minInvestedAmountOwner))
+        : yupResolver(EditInvestmentValidation),
   });
 
   const watchAmountTransfer = watch(
@@ -100,7 +111,13 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
             showUnit={true}
             placeholder={'0.0'}
             tokens={[coin]}
-            error={isDirty && t(errors?.amountTransfer?.value?.message)}
+            error={
+              isDirty &&
+              t(errors?.amountTransfer?.value?.message, {
+                minAmount: minInvestedAmountOwner,
+                minAmountCoin: coin.id,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={6}>
