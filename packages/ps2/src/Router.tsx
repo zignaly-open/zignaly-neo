@@ -28,6 +28,7 @@ import {
   ROUTE_HELP_INVESTOR,
   ROUTE_404,
   ROUTE_WALLET,
+  ROUTE_REFERRALS,
   ROUTE_RESET_PASSWORD,
 } from './routes';
 
@@ -47,6 +48,7 @@ import ServiceOwnerWall from './util/walls/ServiceOwnerWall';
 import HelpInvestor from './views/Help/HelpInvestor';
 import NotFound from 'views/404';
 import ResetPassword from 'views/Auth/ResetPassword';
+import Referrals from './views/Referrals';
 
 const Router: React.FC = () => (
   <Routes>
@@ -54,6 +56,7 @@ const Router: React.FC = () => (
       <Route path={ROUTE_DASHBOARD} element={<Dashboard />} />
       <Route path={ROUTE_MY_BALANCES} element={<MyBalances />} />
       <Route path={ROUTE_WALLET} element={<Wallet />} />
+      <Route path={ROUTE_REFERRALS} element={<Referrals />} />
     </Route>
 
     <Route path={ROUTE_TRADING_SERVICE}>

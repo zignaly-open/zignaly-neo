@@ -34,6 +34,7 @@
     "notAuth-dropdown-link-dashboard": "My Portfolio",
     "notAuth-dropdown-link-balances": "My Balances",
     "notAuth-dropdown-link-wallet": "ZIG Wallet",
+    "referrals": "Referrals",
     "notAuth-button-logOut": "Logout"
   },
   "account-selector": {

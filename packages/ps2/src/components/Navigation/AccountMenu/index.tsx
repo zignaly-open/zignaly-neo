@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import {
   LoginButton,
   AccountDropdown,
@@ -28,6 +29,7 @@ import {
   ROUTE_SIGNUP,
   ROUTE_MY_BALANCES,
   ROUTE_WALLET,
+  ROUTE_REFERRALS,
 } from '../../../routes';
 import { generatePath, Link, useLocation, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
@@ -133,6 +135,18 @@ function AccountMenu(): React.ReactElement | null {
           id: 'account-menu-dropdown__wallet',
           href: generatePath(ROUTE_WALLET),
           onClick: () => navigate(ROUTE_WALLET),
+        },
+        {
+          separator: true,
+          label: (
+            <>
+              <CardGiftcardIcon />
+              {t('account-menu.notAuth-dropdown-link-wallet')}
+            </>
+          ),
+          id: 'account-menu-dropdown__referrals',
+          href: generatePath(ROUTE_REFERRALS),
+          onClick: () => navigate(ROUTE_REFERRALS),
         },
         {
           separator: true,
