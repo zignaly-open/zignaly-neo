@@ -41,22 +41,13 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   const defineSign = (typeTransaction: string) => {
     if (
       [
-        TRANSACTION_TYPE.PS_WITHDRAW,
-        TRANSACTION_TYPE.DEPOSIT,
-        TRANSACTION_TYPE.SUCCESS_FEE,
-        TRANSACTION_TYPE.PSDS,
-      ].includes(typeTransaction)
-    )
-      return '+';
-    else if (
-      [
         TRANSACTION_TYPE.PS_DEPOSIT,
         TRANSACTION_TYPE.WITHDRAW,
         TRANSACTION_TYPE.BUYZIG,
       ].includes(typeTransaction)
     )
-      return '-';
-    else return '';
+      return -1;
+    else return 1;
   };
 
   const updateData = () => {
@@ -117,8 +108,8 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
           <ZigTablePriceLabel
             exact
             coin={original.asset}
-            sign={defineSign(original.txType)}
-            value={getValue()}
+            alwaysShowSign
+            value={defineSign(original.txType) * getValue()}
           />
         ),
         enableSorting: false,
