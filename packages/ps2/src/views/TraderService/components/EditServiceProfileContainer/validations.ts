@@ -1,3 +1,4 @@
+import { decimalsValidationNumber } from 'util/validation';
 import * as yup from 'yup';
 
 const nameRegex = /^[a-zA-Z0-9 $._#&|()\[\]%-]*$/;
@@ -32,6 +33,7 @@ export const EditServiceValidation = yup
       .number()
       .typeError('common:validation.invalid-value')
       .required('error:error.required')
-      .positive('common:validation.negative-zeroable-amount'),
+      .positive('common:validation.negative-zeroable-amount')
+      .concat(decimalsValidationNumber(8)),
   })
   .required();
