@@ -23,6 +23,7 @@ export const decimalsValidation = (maxDecimals: number) =>
 export const decimalsValidationNumber = (maxDecimals: number) =>
   yup
     .number()
+    .typeError('common:validation.invalid-value')
     .test('int', 'common:validation.max-decimals', (val) =>
       checkDecimals(val, maxDecimals),
     );
