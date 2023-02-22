@@ -141,7 +141,7 @@ function AccountMenu(): React.ReactElement | null {
           label: (
             <>
               <CardGiftcardIcon />
-              {t('account-menu.notAuth-dropdown-link-wallet')}
+              {t('account-menu.referrals')}
             </>
           ),
           id: 'account-menu-dropdown__referrals',
