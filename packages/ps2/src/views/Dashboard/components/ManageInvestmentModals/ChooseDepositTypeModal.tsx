@@ -7,12 +7,14 @@ import ChooseDepositType from './views/ChooseDepositType';
 function ChooseDepositTypeModal({
   close,
   selectedCoin,
+  ctaId,
   ...props
 }: {
   close: () => void;
+  ctaId: string;
   selectedCoin: string;
 } & DialogProps): React.ReactElement {
-  const { t } = useTranslation(['purchase-deposit-crypto']);
+  const { t } = useTranslation('purchase-deposit-crypto');
 
   return (
     <ZModal
@@ -21,7 +23,7 @@ function ChooseDepositTypeModal({
       close={close}
       title={t('title', { coin: selectedCoin })}
     >
-      <ChooseDepositType coin={selectedCoin} />
+      <ChooseDepositType coin={selectedCoin} ctaId={ctaId} close={close} />
     </ZModal>
   );
 }

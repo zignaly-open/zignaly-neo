@@ -10,7 +10,8 @@ import { PURCHASE_CRYPTO } from '../../../../../util/constants';
 const ChooseDepositType: React.FC<{
   coin: string;
   ctaId?: string;
-}> = ({ coin, ctaId = '' }) => {
+  close: () => void;
+}> = ({ coin, ctaId = '', close }) => {
   const { t } = useTranslation('purchase-deposit-crypto');
   const { showModal } = useZModal();
   return (
@@ -48,6 +49,7 @@ const ChooseDepositType: React.FC<{
             size={'large'}
             caption={t('buttons.deposit', { coin })}
             onClick={() => {
+              close();
               showModal(DepositModal, {
                 allowedCoins: [coin],
                 ctaId,
