@@ -5,6 +5,7 @@ import { useZModal } from '../../../../../components/ZModal/use';
 import DepositModal from '../DepositModal';
 import { Box, Divider, Link } from '@mui/material';
 import NorthEastIcon from '@mui/icons-material/NorthEast';
+import { PURCHASE_CRYPTO } from '../../../../../util/constants';
 
 const ChooseDepositType: React.FC<{
   coin: string;
@@ -73,10 +74,7 @@ const ChooseDepositType: React.FC<{
               {t('buy-crypto', { coin })}
             </Typography>
           </Box>
-          <Link
-            href={'https://changelly.com/?ref_id=q0s68wsie1uf9wza'}
-            target={'_blank'}
-          >
+          <Link href={PURCHASE_CRYPTO} target={'_blank'}>
             <Button
               id={'choose-deposit-type__purchase'}
               size={'large'}
