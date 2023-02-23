@@ -179,8 +179,7 @@ export async function deleteContact(email: string) {
       return true;
     }
   } catch (error) {
-    console.log('error', error, email);
-    console.error(error.message);
+    console.log('error deleting contact', email);
   }
 }
 

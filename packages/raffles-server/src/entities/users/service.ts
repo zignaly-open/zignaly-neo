@@ -199,7 +199,6 @@ export const generateService = (user: ContextUser) => {
     try {
       const [hashedValue, expirationTimestamp] = hashStr.split(',');
 
-      console.log(expirationTimestamp, isHashExpired(expirationTimestamp));
       if (isHashExpired(expirationTimestamp)) {
         return false;
       }
@@ -207,6 +206,17 @@ export const generateService = (user: ContextUser) => {
       const user = await User.findOne({
         where: { emailValidationHash: hashedValue },
       });
+
+      console.log(
+        expirationTimestamp,
+        isHashExpired(expirationTimestamp),
+        user.id,
+        !isSendinblueHashValid(
+          user.email,
+          process.env.HASH_SECRET,
+          hashedValue,
+        ),
+      );
 
       if (
         !isSendinblueHashValid(user.email, process.env.HASH_SECRET, hashedValue)
@@ -253,12 +263,14 @@ export const generateService = (user: ContextUser) => {
       const hashStr = createHashedStr(email, process.env.HASH_SECRET);
       const hashWithExpiration = createHashedStrWithExpiration(hashStr);
       await deleteContact(user.email);
+
       await sendEmailVerification(`${userId}`, email, hashWithExpiration);
       User.update(
         {
           emailValidationHash: hashStr,
           emailVerificationSent: true,
           emailVerified: false,
+          email: email,
         },
         {
           where: {

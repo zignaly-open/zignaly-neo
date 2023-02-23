@@ -150,7 +150,7 @@ const SettingsForm = (props: UserSettingsModalProps) => {
             <ZigTypography color='neutral200'>{t('email-label')}</ZigTypography>
           </Box>
           <ZigTypography variant='h4' color='neutral400'>
-            {t('email-info')}
+            {user.email ? '' : t('email-info')}
           </ZigTypography>
           <InputContainer width={getInputWidth()}>
             <Controller

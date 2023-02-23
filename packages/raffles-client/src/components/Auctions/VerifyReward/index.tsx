@@ -14,6 +14,7 @@ import {
   VERIFY_EMAIL_MUTATION,
   CONFIRM_EMAIL_MUTATION,
   GET_CURRENT_USER,
+  GET_CURRENT_USER_BALANCE,
 } from 'queries/users';
 import { Send } from '@mui/icons-material';
 import { Controller, useForm } from 'react-hook-form';
@@ -30,35 +31,34 @@ const VerifyReward = () => {
   const { user: currentUser } = useCurrentUser();
 
   const [verifyEmail] = useMutation(VERIFY_EMAIL_MUTATION, {
-    refetchQueries: [{ query: GET_CURRENT_USER }],
+    refetchQueries: [
+      { query: GET_CURRENT_USER },
+      { query: GET_CURRENT_USER_BALANCE },
+    ],
   });
   const [confirmEmail] = useMutation(CONFIRM_EMAIL_MUTATION);
-  const [isConfirmed, setIsConfirmed] = useState(false);
-  const [isEmailSent, setIsEmailSent] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [verificationMessage, setVerificationMessage] = useState('');
+  const [emailSent, setEmailSent] = useState(false);
 
   const handleVerifyEmail = async (email: string) => {
     await verifyEmail({
       variables: { userId: Number(currentUser.id), email },
     });
-    await setIsEmailSent(true);
+    setEmailSent(true);
   };
 
   useEffect(() => {
     const checkUserState = async () => {
-      if (currentUser?.emailVerified) {
-        setIsConfirmed(currentUser.emailVerified);
-      }
       const hashStr = new URLSearchParams(window.location.search).get(
         'confirm',
       );
       if (hashStr) {
         const { data } = await confirmEmail({ variables: { hashStr } });
         if (!data.confirmEmail) {
-          setVerificationMessage('confirmation-link-invalid');
+          setVerificationMessage(t('confirmation-link-invalid'));
         } else {
-          setVerificationMessage('email-verified');
+          setVerificationMessage(t('email-confirmed'));
         }
       }
     };
@@ -81,19 +81,23 @@ const VerifyReward = () => {
   const submit = async (values: { email: string }) => {
     try {
       handleVerifyEmail(values.email);
-      setVerificationMessage('email-sent');
+      setVerificationMessage(t('email-sent'));
     } catch (e) {
       setErrorMessage(e.message || 'Something went wrong');
     }
   };
 
-  return isConfirmed || !currentUser ? (
-    <></>
-  ) : !isEmailSent && !currentUser.emailVerificationSent ? (
+  return currentUser && currentUser.emailVerified ? (
+    <ZigTypography variant='h2' color='neutral400'>
+      {verificationMessage}
+    </ZigTypography>
+  ) : currentUser && !currentUser.emailVerified && !emailSent ? (
     <Box display='flex' flexDirection='row'>
       <Form onSubmit={handleSubmit(submit)}>
         <ZigTypography variant='h2' color='neutral400'>
-          {t('verify-email-and-earn')}
+          {!currentUser.zhitRewarded
+            ? t('verify-email-and-earn')
+            : t('verify-email')}
         </ZigTypography>
         <Box display='flex' flexDirection='row'>
           <Controller
@@ -128,7 +132,7 @@ const VerifyReward = () => {
   ) : (
     <>
       <ZigTypography variant='h2' color='neutral400'>
-        {t(verificationMessage)}
+        {verificationMessage}
       </ZigTypography>
     </>
   );
