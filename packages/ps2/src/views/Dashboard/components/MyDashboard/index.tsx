@@ -46,10 +46,6 @@ const MyDashboard: React.FC = () => {
   const calculateServiceAge = (createdAt: string) =>
     differenceInDays(new Date(), new Date(createdAt)).toString();
 
-  const getDateFromDatetime = (date: string) => {
-    return new Date(date).toLocaleDateString();
-  };
-
   const columnHelper = createColumnHelper<Investment>();
   const columns = useMemo(
     () => [
@@ -148,7 +144,7 @@ const MyDashboard: React.FC = () => {
             value={getValue()}
             label={formatDateFromDays(calculateServiceAge(original.createdAt))}
             labelTooltip={t('tooltip-date', {
-              date: getDateFromDatetime(original.createdAt),
+              date: new Date(original.createdAt).toLocaleDateString(),
             })}
           />
         ),
