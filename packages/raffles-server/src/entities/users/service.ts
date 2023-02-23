@@ -207,17 +207,6 @@ export const generateService = (user: ContextUser) => {
         where: { emailValidationHash: hashedValue },
       });
 
-      console.log(
-        expirationTimestamp,
-        isHashExpired(expirationTimestamp),
-        user.id,
-        !isSendinblueHashValid(
-          user.email,
-          process.env.HASH_SECRET,
-          hashedValue,
-        ),
-      );
-
       if (
         !isSendinblueHashValid(user.email, process.env.HASH_SECRET, hashedValue)
       ) {
@@ -249,12 +238,23 @@ export const generateService = (user: ContextUser) => {
             },
           );
         }
+        const balance = await getUserBalance(user.publicAddress);
+        broadcastBalanceChange(balance, user);
         return true;
       }
     } catch (e) {
       console.error(e);
       return false;
     }
+  };
+
+  const broadcastBalanceChange = async (balance: string, user: ContextUser) => {
+    pubsub.publish(BALANCE_CHANGED, {
+      balanceChanged: {
+        id: user.id,
+        balance,
+      },
+    });
   };
 
   const verifyEmail = async (userId: number, email: string) => {

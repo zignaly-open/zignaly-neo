@@ -36,6 +36,7 @@ const VerifyReward = () => {
       { query: GET_CURRENT_USER_BALANCE },
     ],
   });
+
   const [confirmEmail] = useMutation(CONFIRM_EMAIL_MUTATION);
   const [errorMessage, setErrorMessage] = useState('');
   const [verificationMessage, setVerificationMessage] = useState('');
