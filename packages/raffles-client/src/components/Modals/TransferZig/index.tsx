@@ -29,7 +29,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
   const tokenBalance = useTokenBalance(token, account);
   const balance =
     tokenBalance &&
-    utils.parseUnits(utils.formatUnits(tokenBalance, ZIGCOIN_PRECISION), 0);
+    utils.parseUnits(utils.formatUnits(tokenBalance, ZIGCOIN_PRECISION), 8);
   const { isLoading, isError, transfer, isSuccess } = useContract({
     address: address,
   });
@@ -125,7 +125,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                 tokens={[
                   {
                     id: 'ZIG',
-                    balance: balance?.toString(),
+                    balance: utils.formatUnits(balance, 8),
                   },
                 ]}
               />
