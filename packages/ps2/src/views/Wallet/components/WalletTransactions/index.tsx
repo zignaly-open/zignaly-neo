@@ -88,6 +88,7 @@ const WalletTransactions = () => {
               value={getValue()}
               displayType='text'
               thousandSeparator={true}
+              prefix={Number(getValue()) > 0 ? '+' : ''}
             />
           </ZigTypography>
         ),
