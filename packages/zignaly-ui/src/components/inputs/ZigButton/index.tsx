@@ -42,6 +42,10 @@ export const ZigButtonGroup: React.FC = styled(ButtonGroup)`
       z-index: 3;
       box-shadow: 1px 0 0 ${dark.neutral400};
     }
+
+    &.Mui-disabled {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
   }
 `;
 
