@@ -23,7 +23,7 @@ function ChooseDepositTypeModal({
       close={close}
       title={t('title', { coin: selectedCoin })}
     >
-      <ChooseDepositType coin={selectedCoin} ctaId={ctaId} close={close} />
+      <ChooseDepositType coin={selectedCoin} ctaId={ctaId} />
     </ZModal>
   );
 }

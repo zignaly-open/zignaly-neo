@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Typography } from '@zignaly-open/ui';
+import { Typography, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { useZModal } from '../../../../../components/ZModal/use';
 import DepositModal from '../DepositModal';
@@ -10,9 +10,9 @@ import { PURCHASE_CRYPTO } from '../../../../../util/constants';
 const ChooseDepositType: React.FC<{
   coin: string;
   ctaId?: string;
-  close: () => void;
-}> = ({ coin, ctaId = '', close }) => {
+}> = ({ coin, ctaId = '' }) => {
   const { t } = useTranslation('purchase-deposit-crypto');
+
   const { showModal } = useZModal();
   return (
     <>
@@ -43,19 +43,27 @@ const ChooseDepositType: React.FC<{
             </Typography>
           </Box>
 
-          <Button
-            maxHeight={500}
+          <ZigButton
+            variant='contained'
             id={'choose-deposit-type__deposit'}
             size={'large'}
-            caption={t('buttons.deposit', { coin })}
+            sx={{ height: '60px', width: '180px' }}
             onClick={() => {
-              close();
               showModal(DepositModal, {
                 allowedCoins: [coin],
                 ctaId,
               });
             }}
-          />
+          >
+            <ZigTypography
+              variant='body1'
+              color='neutral000'
+              fontWeight={600}
+              letterSpacing={1.1}
+            >
+              {t('buttons.deposit', { coin })}
+            </ZigTypography>
+          </ZigButton>
         </Box>
 
         <Divider
@@ -77,14 +85,23 @@ const ChooseDepositType: React.FC<{
             </Typography>
           </Box>
           <Link href={PURCHASE_CRYPTO} target={'_blank'}>
-            <Button
+            <ZigButton
+              variant='contained'
               id={'choose-deposit-type__purchase'}
               size={'large'}
-              caption={t('buttons.purchase', { coin })}
-              rightElement={
-                <NorthEastIcon sx={{ width: '1px' }} color={'white'} />
-              }
-            />
+              sx={{ height: '60px', width: '210px' }}
+            >
+              <ZigTypography
+                variant='body1'
+                color='neutral000'
+                fontWeight={600}
+                letterSpacing={1.1}
+                sx={{ marginTop: '5px' }}
+              >
+                {t('buttons.purchase', { coin })}
+              </ZigTypography>
+              <NorthEastIcon sx={{ width: '13px', marginLeft: '7px' }} />
+            </ZigButton>
           </Link>
         </Box>
       </Box>
