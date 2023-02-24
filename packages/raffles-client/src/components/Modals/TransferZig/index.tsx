@@ -27,6 +27,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
   const { account, activateBrowserWallet, chainId } = useEthers();
 
   const tokenBalance = useTokenBalance(token, account);
+
   const balance =
     tokenBalance &&
     utils.parseUnits(utils.formatUnits(tokenBalance, ZIGCOIN_PRECISION), 8);
