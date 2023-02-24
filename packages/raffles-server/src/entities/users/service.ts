@@ -226,9 +226,13 @@ export const generateService = (user: ContextUser) => {
           }
           const balance = await getUserBalance(user.publicAddress);
           broadcastBalanceChange(balance, user);
+          if (user.previousEmail) {
+            await deleteContact(user.previousEmail);
+          }
           return true;
+        } else {
+          return false;
         }
-        return false;
       }
     } catch (e) {
       console.error(e);
@@ -248,15 +252,11 @@ export const generateService = (user: ContextUser) => {
   const verifyEmail = async (userId: number, email: string) => {
     try {
       const user = await User.findByPk(userId);
-      // const hashStr = createHashedStr(email, process.env.HASH_SECRET);
-      // const hashWithExpiration = createHashedStrWithExpiration(hashStr);
       const hashWithExpiration = generateJwtToken(
         userId,
         email,
         process.env.HASH_SECRET,
       );
-      await deleteContact(user.email);
-
       await sendEmailVerification(`${userId}`, email, hashWithExpiration);
       User.update(
         {
@@ -264,6 +264,7 @@ export const generateService = (user: ContextUser) => {
           emailVerificationSent: true,
           emailVerified: false,
           email: email,
+          previousEmail: user.email,
         },
         {
           where: {

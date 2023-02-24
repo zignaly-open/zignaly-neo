@@ -21,12 +21,13 @@ import { Controller, useForm } from 'react-hook-form';
 import { Form, Gap } from './styles';
 import { EmailValidation } from 'util/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useSearchParams } from 'react-router-dom';
 
 const StyledSendIcon = styled(Send)`
   color: ${(props) => props.theme.neutral200};
 `;
 
-const VerifyReward = () => {
+const VerifyReward: React.FC = () => {
   const { t } = useTranslation('global');
   const { user: currentUser } = useCurrentUser();
 
@@ -41,6 +42,7 @@ const VerifyReward = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [verificationMessage, setVerificationMessage] = useState('');
   const [emailSent, setEmailSent] = useState(false);
+  const [searchParams] = useSearchParams();
 
   const handleVerifyEmail = async (email: string) => {
     await verifyEmail({
@@ -51,9 +53,7 @@ const VerifyReward = () => {
 
   useEffect(() => {
     const checkUserState = async () => {
-      const hashStr = new URLSearchParams(window.location.search).get(
-        'confirm',
-      );
+      const hashStr = searchParams.get('confirm');
       if (hashStr) {
         const { data } = await confirmEmail({ variables: { hashStr } });
         if (!data.confirmEmail) {

@@ -51,6 +51,9 @@ export class User extends Model {
   public email?: string;
 
   @Column
+  public previousEmail?: string;
+
+  @Column
   public discordName?: string;
 
   @Column
