@@ -17,10 +17,8 @@ import {
   sendEmailVerification,
   isEmailConfirmed,
   deleteContact,
-  createHashedStrWithExpiration,
-  createHashedStr,
-  isHashExpired,
-  isSendinblueHashValid,
+  generateJwtToken,
+  verifyJwtToken,
 } from './util';
 
 const generateNonceSignMessage = (nonce: string | number) =>
@@ -197,50 +195,40 @@ export const generateService = (user: ContextUser) => {
 
   const confirmEmail = async (hashStr: string) => {
     try {
-      const [hashedValue, expirationTimestamp] = hashStr.split(',');
-
-      if (isHashExpired(expirationTimestamp)) {
-        return false;
-      }
-
-      const user = await User.findOne({
-        where: { emailValidationHash: hashedValue },
-      });
-
-      if (
-        !isSendinblueHashValid(user.email, process.env.HASH_SECRET, hashedValue)
-      ) {
-        return false;
-      }
-
-      if (await isEmailConfirmed(user.email)) {
-        await User.update(
-          {
-            emailVerified: true,
-          },
-          {
-            where: {
-              id: user.id,
-            },
-          },
-        );
-
-        if (!user.zhitRewarded) {
-          await rewardUser(user);
+      const { userId, email } = verifyJwtToken(hashStr);
+      console.log('userId', userId, hashStr);
+      if (userId) {
+        const user = await User.findByPk(userId);
+        if (await isEmailConfirmed(email)) {
           await User.update(
             {
-              zhitRewarded: true,
+              emailVerified: true,
             },
             {
               where: {
-                id: user.id,
+                id: userId,
               },
             },
           );
+
+          if (!user.zhitRewarded) {
+            await rewardUser(user);
+            await User.update(
+              {
+                zhitRewarded: true,
+              },
+              {
+                where: {
+                  id: user.id,
+                },
+              },
+            );
+          }
+          const balance = await getUserBalance(user.publicAddress);
+          broadcastBalanceChange(balance, user);
+          return true;
         }
-        const balance = await getUserBalance(user.publicAddress);
-        broadcastBalanceChange(balance, user);
-        return true;
+        return false;
       }
     } catch (e) {
       console.error(e);
@@ -260,14 +248,19 @@ export const generateService = (user: ContextUser) => {
   const verifyEmail = async (userId: number, email: string) => {
     try {
       const user = await User.findByPk(userId);
-      const hashStr = createHashedStr(email, process.env.HASH_SECRET);
-      const hashWithExpiration = createHashedStrWithExpiration(hashStr);
+      // const hashStr = createHashedStr(email, process.env.HASH_SECRET);
+      // const hashWithExpiration = createHashedStrWithExpiration(hashStr);
+      const hashWithExpiration = generateJwtToken(
+        userId,
+        email,
+        process.env.HASH_SECRET,
+      );
       await deleteContact(user.email);
 
       await sendEmailVerification(`${userId}`, email, hashWithExpiration);
       User.update(
         {
-          emailValidationHash: hashStr,
+          emailValidationHash: hashWithExpiration,
           emailVerificationSent: true,
           emailVerified: false,
           email: email,

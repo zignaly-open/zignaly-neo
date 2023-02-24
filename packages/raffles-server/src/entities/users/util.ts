@@ -8,13 +8,12 @@ import {
   BALANCE_CHANGED,
   EMAIL_LIST_IDS,
   EMAIL_TEMPLATE_ID,
-  HASH_EXPIRATION_SECONDS,
+  HASH_EXPIRATION,
 } from './constants';
 import { getUserBalance } from '../balances/service';
-import { ContextUser } from '../../types';
+import { ContextUser, TokenPayload } from '../../types';
 import redisService from '../../redisService';
 import * as SibApiV3Sdk from 'sib-api-v3-typescript';
-import crypto from 'crypto';
 
 export function signJwtToken(user: User) {
   return new Promise<string>((resolve, reject) =>
@@ -147,6 +146,7 @@ export async function sendEmailVerification(
 }
 
 export async function isEmailConfirmed(email: string) {
+  console.log('isEmailConfirmed', email);
   const apiInstance = new SibApiV3Sdk.ContactsApi();
 
   apiInstance.setApiKey(
@@ -183,27 +183,39 @@ export async function deleteContact(email: string) {
   }
 }
 
-export const createHashedStr = (email: string, secretKey: string) => {
-  return crypto.createHmac('sha256', secretKey).update(email).digest('hex');
-};
-
-export const createHashedStrWithExpiration = (hashedValue: string) => {
-  const timestampInSeconds = Date.now() / 1000;
-  const expirationInSeconds = HASH_EXPIRATION_SECONDS;
-  return `${hashedValue},${timestampInSeconds + expirationInSeconds}`;
-};
-
-export const isHashExpired = (expirationTimestamp: string) => {
-  const currentTimestampInSeconds = Date.now() / 1000;
-  return currentTimestampInSeconds > Number(expirationTimestamp);
-};
-
-export const isSendinblueHashValid = (
+export const generateJwtToken = (
+  userId: number,
   email: string,
-  secretKey: string,
-  hashStr: string,
+  secret: string,
 ) => {
-  const calculatedHash = createHashedStr(email, secretKey);
-  const [hashedValue] = hashStr.split(',');
-  return calculatedHash === hashedValue;
+  const user: TokenPayload = {
+    userId,
+    email,
+  };
+
+  return jwt.sign(user, secret, {
+    expiresIn: HASH_EXPIRATION,
+  });
+};
+
+export const verifyJwtToken = (token: string) => {
+  try {
+    const decodedPayload = jwt.verify(token, process.env.HASH_SECRET, {
+      algorithms: ['HS256'],
+      clockTimestamp: Math.floor(Date.now() / 1000),
+    }) as TokenPayload;
+    console.log('Token is valid');
+    console.log(decodedPayload);
+    const { userId, email } = decodedPayload;
+    return {
+      userId,
+      email,
+    };
+  } catch (err) {
+    if (err instanceof jwt.TokenExpiredError) {
+      console.log('Token has expired');
+    } else {
+      console.log('Error verifying token:', err);
+    }
+  }
 };
