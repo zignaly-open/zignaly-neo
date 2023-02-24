@@ -12,7 +12,6 @@ import { Box } from '@mui/material';
 import { useMutation } from '@apollo/client';
 import {
   VERIFY_EMAIL_MUTATION,
-  CONFIRM_EMAIL_MUTATION,
   GET_CURRENT_USER,
   GET_CURRENT_USER_BALANCE,
 } from 'queries/users';
@@ -22,6 +21,7 @@ import { Form, Gap } from './styles';
 import { EmailValidation } from 'util/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSearchParams } from 'react-router-dom';
+import useConfirmEmail from 'hooks/useConfirmEmail';
 
 const StyledSendIcon = styled(Send)`
   color: ${(props) => props.theme.neutral200};
@@ -38,7 +38,7 @@ const VerifyReward: React.FC = () => {
     ],
   });
 
-  const [confirmEmail] = useMutation(CONFIRM_EMAIL_MUTATION);
+  const { confirmEmail, loading } = useConfirmEmail();
   const [errorMessage, setErrorMessage] = useState('');
   const [verificationMessage, setVerificationMessage] = useState('');
   const [emailSent, setEmailSent] = useState(false);
@@ -52,20 +52,19 @@ const VerifyReward: React.FC = () => {
   };
 
   useEffect(() => {
-    const checkUserState = async () => {
+    const checkConfirm = async () => {
       const hashStr = searchParams.get('confirm');
       if (hashStr) {
-        const { data } = await confirmEmail({ variables: { hashStr } });
-        if (!data.confirmEmail) {
-          setVerificationMessage(t('confirmation-link-invalid'));
+        const result = await confirmEmail(hashStr);
+        if (loading) {
+          setVerificationMessage(t('loading'));
         } else {
-          setVerificationMessage(t('email-confirmed'));
+          setVerificationMessage(t(result));
         }
       }
     };
-
-    checkUserState();
-  }, [currentUser]);
+    checkConfirm();
+  }, []);
 
   const {
     handleSubmit,
