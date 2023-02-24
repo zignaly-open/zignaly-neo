@@ -9,6 +9,7 @@ import {
   useTraderServiceUpdateScaMinimumMutation,
 } from './api';
 import { useDispatch, useSelector } from 'react-redux';
+import { format, parse, subDays } from 'date-fns';
 import {
   GraphChartType,
   GraphTimeframe,
@@ -25,7 +26,6 @@ import { useTranslation } from 'react-i18next';
 import { setChartTimeframe, setChartType } from './store';
 import { useMemo } from 'react';
 import { formatMonthDay } from '../../views/Dashboard/components/MyDashboard/util';
-import { format, parse, subDays } from 'date-fns';
 
 export function useTraderServices() {
   const isAuthenticated = useIsAuthenticated();
@@ -35,8 +35,13 @@ export function useTraderServices() {
 }
 
 export function useIsServiceOwner(serviceId: string) {
+  const isAuthenticated = useIsAuthenticated();
+
   const { data: traderServices } = useTraderServices();
-  return traderServices?.some((s: TraderService) => s.serviceId === serviceId);
+  return (
+    isAuthenticated &&
+    !!traderServices?.some((s: TraderService) => s.serviceId === serviceId)
+  );
 }
 
 export function useFirstOwnedService(): TraderService | null {

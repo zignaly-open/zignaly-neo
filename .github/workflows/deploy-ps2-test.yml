@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - test
+      - feat/my-super-cool-cache-invalidation
 
 jobs:
   pre_job:
@@ -50,6 +51,8 @@ jobs:
           envkey_REACT_APP_WALLET_API: https://wallet.zignaly.com/api
           envkey_REACT_APP_SEGMENT_NAME: zignaly
           envkey_REACT_APP_SENTRY_DNS: https://b87b3bf895ff4c0cb0e1bee22f3a0648@o967264.ingest.sentry.io/6492584
+          envkey_REACT_APP_CUSTOMER_IO_ORG_ID: 5b1f596d-a830-4bb9-8ef3-81a4bb65f8e7
+          envkey_REACT_APP_CUSTOMER_IO_SITE_ID: e2599a7a80f3cf2fdbb5
           directory: packages/ps2
           file_name: .env
       - name: Setup Node.js
@@ -67,7 +70,7 @@ jobs:
       - name: Bootstrap packages
         run: lerna bootstrap --scope=@zignaly-open/ps2
       - name: Build client
-        run: yarn run build --scope=@zignaly-open/ps2 --include-dependencies
+        run: lerna run build --scope=@zignaly-open/ps2
       - uses: jakejarvis/s3-sync-action@master
         with:
           args: --delete
@@ -84,11 +87,36 @@ jobs:
     runs-on: ubuntu-latest
     environment: test
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Get filed to invalidate
+        id: diff_files
+        run: |
+          CLOUDFRONT_FORMAT=$(
+            (find public/locales -type f -print && echo "index.html" && echo "version.json" )| awk {'print "/"$1'} | tr '\n' ' '
+          )
+          CLOUDFLARE_FORMAT=$(
+            (find public/locales -type f -print && echo "index.html" && echo "version.json" )| awk {'print "https://test-app.zignaly.com/"$1'} | tr '\n' ' '
+          )
+          
+          echo $CLOUDFRONT_FORMAT
+          echo $CLOUDFLARE_FORMAT
+          
+          echo "cloudfront=$CLOUDFRONT_FORMAT" >> $GITHUB_OUTPUT
+          echo "cloudflare=$CLOUDFLARE_FORMAT" >> $GITHUB_OUTPUT
+        working-directory: ./packages/ps2
+      - name: Invalidate Cloudflare
+        uses: strrife/cloudflare-chunked-purge-action@master
+        env:
+          # Zone is required by both authentication methods
+          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_KEY }}
+          PURGE_URLS: ${{ steps.diff_files.outputs.cloudflare }}
       - name: Invalidate CloudFront
         uses: chetan/invalidate-cloudfront-action@v2
         env:
           DISTRIBUTION: ${{ secrets.AWS_PS2_TEST_DISTRIBUTION }}
-          PATHS: '/'
+          PATHS: ${{ steps.diff_files.outputs.cloudfront }}
           AWS_REGION: 'us-east-1'
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_PS2_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_PS2_SECRET_KEY }}

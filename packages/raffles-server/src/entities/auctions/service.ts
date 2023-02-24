@@ -17,7 +17,7 @@ import { Payout } from '../payouts/model';
 import { AuctionFilter, AuctionPayload } from './types';
 import { getUserBalance, makePayout } from '../balances/service';
 import { AUCTION_UPDATED } from './constants';
-import { debounce } from 'lodash';
+import _debounce from 'lodash/debounce';
 
 const omitPrivateFields = {
   attributes: { exclude: ['announcementDate', 'maxExpiryDate'] },
@@ -148,7 +148,7 @@ const broadcastAuctionChange = async (auctionId: number) => {
   });
 };
 
-const debounceBroadcastAuctionChange = debounce(broadcastAuctionChange, 75, {
+const debounceBroadcastAuctionChange = _debounce(broadcastAuctionChange, 75, {
   maxWait: 200,
 });
 

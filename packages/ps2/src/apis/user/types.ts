@@ -70,6 +70,7 @@ export type Exchange = {
   globalWhitelist: boolean;
   isBrokerAccount: boolean;
   activated: boolean;
+  createdAt: string;
 };
 
 export type SignupResponse = {

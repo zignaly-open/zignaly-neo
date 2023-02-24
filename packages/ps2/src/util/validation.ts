@@ -1,18 +1,32 @@
 import * as yup from 'yup';
 import BigNumber from 'bignumber.js';
 
+export const checkDecimals = (val: string | number, maxDecimals: number) => {
+  if (!val) return true;
+
+  const splitValueDot = val.toString().split('.');
+  // Handle incorrect number
+  if (splitValueDot.length > 2) return false;
+
+  const decimals = splitValueDot.length === 1 ? 0 : splitValueDot[1].length;
+
+  return decimals <= maxDecimals;
+};
+
 export const decimalsValidation = (maxDecimals: number) =>
-  yup.string().test('int', 'common:validation.max-decimals', (val) => {
-    if (!val) return false;
+  yup
+    .string()
+    .test('int', 'common:validation.max-decimals', (val) =>
+      checkDecimals(val, maxDecimals),
+    );
 
-    const splitValueDot = val.split('.');
-    // Handle incorrect number
-    if (splitValueDot.length > 2) return false;
-
-    const decimals = splitValueDot.length === 1 ? 0 : splitValueDot[1].length;
-
-    return decimals <= maxDecimals;
-  });
+export const decimalsValidationNumber = (maxDecimals: number) =>
+  yup
+    .number()
+    .typeError('common:validation.invalid-value')
+    .test('int', 'common:validation.max-decimals', (val) =>
+      checkDecimals(val, maxDecimals),
+    );
 
 const inputAmountNumberValidation = yup
   .string()
