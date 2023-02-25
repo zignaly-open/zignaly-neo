@@ -11,8 +11,10 @@ export default function useConfirmEmail(): {
 
   const confirmEmail = async (hashStr: string): Promise<string> => {
     try {
-      const result = await confirmEmailMutation({ variables: { hashStr } });
-      return result ? 'email-confirmed' : 'confirmation-link-valid';
+      const { data } = await confirmEmailMutation({ variables: { hashStr } });
+      return data.confirmEmail
+        ? 'email-confirmed'
+        : 'confirmation-link-invalid';
     } catch (error) {
       return 'confirmation-link-invalid';
     }

@@ -43,6 +43,7 @@ const VerifyReward: React.FC = () => {
   const [verificationMessage, setVerificationMessage] = useState('');
   const [emailSent, setEmailSent] = useState(false);
   const [searchParams] = useSearchParams();
+  const [isInvalidLink, setIsInvalidLink] = useState(false);
 
   const handleVerifyEmail = async (email: string) => {
     await verifyEmail({
@@ -59,7 +60,14 @@ const VerifyReward: React.FC = () => {
         if (loading) {
           setVerificationMessage(t('loading'));
         } else {
-          setVerificationMessage(t(result));
+          if (currentUser && currentUser.emailVerified) {
+            setVerificationMessage('');
+          } else {
+            setVerificationMessage(t('confirmation-link-invalid'));
+            if (result === 'confirmation-link-invalid') {
+              setIsInvalidLink(true);
+            }
+          }
         }
       }
     };
@@ -87,48 +95,53 @@ const VerifyReward: React.FC = () => {
     }
   };
 
-  return currentUser && currentUser.emailVerified ? (
+  return currentUser && currentUser.emailVerified && !isInvalidLink ? (
     <ZigTypography variant='h2' color='neutral400'>
       {verificationMessage}
     </ZigTypography>
   ) : currentUser && !currentUser.emailVerified && !emailSent ? (
-    <Box display='flex' flexDirection='row'>
-      <Form onSubmit={handleSubmit(submit)}>
-        <ZigTypography variant='h2' color='neutral400'>
-          {!currentUser.zhitRewarded
-            ? t('verify-email-and-earn')
-            : t('verify-email')}
-        </ZigTypography>
-        <Box display='flex' flexDirection='row'>
-          <Controller
-            name='email'
-            control={control}
-            render={({ field }) => (
-              <ZigInput
-                fullWidth
-                placeholder={t('email-placeholder')}
-                error={errors.email?.message}
-                {...field}
-              />
+    <>
+      <ZigTypography variant='h2' color='red'>
+        {isInvalidLink ? t('confirmation-link-invalid') : ''}
+      </ZigTypography>
+      <Box display='flex' flexDirection='row'>
+        <Form onSubmit={handleSubmit(submit)}>
+          <ZigTypography variant='h2' color='neutral400'>
+            {!currentUser.zhitRewarded
+              ? t('verify-email-and-earn')
+              : t('verify-email')}
+          </ZigTypography>
+          <Box display='flex' flexDirection='row'>
+            <Controller
+              name='email'
+              control={control}
+              render={({ field }) => (
+                <ZigInput
+                  fullWidth
+                  placeholder={t('email-placeholder')}
+                  error={errors.email?.message}
+                  {...field}
+                />
+              )}
+            />
+            <Gap gap={13} />
+            <Button
+              type={'submit'}
+              leftElement={<StyledSendIcon />}
+              caption={t('validate')}
+              size='large'
+              disabled={!isValid}
+            />
+            {errorMessage && (
+              <>
+                <Gap gap={13} />
+                <ErrorMessage text={errorMessage} />
+              </>
             )}
-          />
-          <Gap gap={13} />
-          <Button
-            type={'submit'}
-            leftElement={<StyledSendIcon />}
-            caption={t('validate')}
-            size='large'
-            disabled={!isValid}
-          />
-          {errorMessage && (
-            <>
-              <Gap gap={13} />
-              <ErrorMessage text={errorMessage} />
-            </>
-          )}
-        </Box>
-      </Form>
-    </Box>
+          </Box>
+        </Form>
+      </Box>
+    </>
   ) : (
     <>
       <ZigTypography variant='h2' color='neutral400'>
