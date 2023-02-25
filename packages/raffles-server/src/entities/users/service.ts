@@ -196,7 +196,7 @@ export const generateService = (user: ContextUser) => {
   const confirmEmail = async (hashStr: string) => {
     try {
       const { userId, email } = verifyJwtToken(hashStr);
-      console.log('userId', userId, hashStr);
+
       if (userId) {
         const user = await User.findByPk(userId);
         if (await isEmailConfirmed(email)) {
@@ -235,7 +235,7 @@ export const generateService = (user: ContextUser) => {
         }
       }
     } catch (e) {
-      console.error(e);
+      console.error('Error Confirm Email:', e);
       return false;
     }
   };
