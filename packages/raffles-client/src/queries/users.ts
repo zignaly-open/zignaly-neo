@@ -1,4 +1,10 @@
 import { gql } from '@apollo/client';
+import { UserType } from '@zignaly-open/raffles-shared/types';
+
+export interface GetCurrentUserResponseModel {
+  loading: boolean;
+  data?: { me: UserType };
+}
 
 export const GET_CURRENT_USER = gql`
   query me {
@@ -82,6 +88,17 @@ export const BALANCE_SUBSCRIPTION = gql`
     balanceChanged(token: $token) {
       id
       balance
+    }
+  }
+`;
+
+export const EMAIL_SUBSCRIPTION = gql`
+  subscription onBalanceChanged($token: String!) {
+    balanceChanged(token: $token) {
+      id
+      emailVerificationSent
+      emailVerified
+      zhitRewarded
     }
   }
 `;

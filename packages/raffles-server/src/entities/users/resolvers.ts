@@ -1,6 +1,6 @@
 import { ApolloContext, ResourceOptions } from '../../types';
 import { WalletType } from '@zignaly-open/raffles-shared/types';
-import { subscribeBalanceChanged } from './service';
+import { subscribeBalanceChanged, subscribeEmailChanged } from './service';
 
 export const resolvers = {
   Query: {
@@ -62,6 +62,9 @@ export const resolvers = {
   Subscription: {
     balanceChanged: {
       subscribe: subscribeBalanceChanged,
+    },
+    emailChanged: {
+      subscribe: subscribeEmailChanged,
     },
   },
 };

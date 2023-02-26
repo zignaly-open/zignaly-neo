@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/material/styles';
-import useCurrentUser from '../../../hooks/useCurrentUser';
 import {
   Button,
   ErrorMessage,
@@ -22,6 +21,7 @@ import { EmailValidation } from 'util/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useSearchParams } from 'react-router-dom';
 import useConfirmEmail from 'hooks/useConfirmEmail';
+import useCurrentUser, { useEmailSubscription } from 'hooks/useCurrentUser';
 
 const StyledSendIcon = styled(Send)`
   color: ${(props) => props.theme.neutral200};
@@ -30,6 +30,7 @@ const StyledSendIcon = styled(Send)`
 const VerifyReward: React.FC = () => {
   const { t } = useTranslation('global');
   const { user: currentUser } = useCurrentUser();
+  useEmailSubscription();
 
   const [verifyEmail] = useMutation(VERIFY_EMAIL_MUTATION, {
     refetchQueries: [
@@ -57,22 +58,22 @@ const VerifyReward: React.FC = () => {
       const hashStr = searchParams.get('confirm');
       if (hashStr) {
         const result = await confirmEmail(hashStr);
-        if (loading) {
-          setVerificationMessage(t('loading'));
+        if (
+          currentUser &&
+          currentUser.emailVerified &&
+          result === 'email-confirmed'
+        ) {
+          setVerificationMessage(t('email-confirmed'));
         } else {
-          if (currentUser && currentUser.emailVerified) {
-            setVerificationMessage('');
-          } else {
+          if (result === 'confirmation-link-invalid') {
+            setIsInvalidLink(true);
             setVerificationMessage(t('confirmation-link-invalid'));
-            if (result === 'confirmation-link-invalid') {
-              setIsInvalidLink(true);
-            }
           }
         }
       }
     };
     checkConfirm();
-  }, []);
+  }, [currentUser]);
 
   const {
     handleSubmit,
@@ -97,7 +98,7 @@ const VerifyReward: React.FC = () => {
 
   return currentUser && currentUser.emailVerified && !isInvalidLink ? (
     <ZigTypography variant='h2' color='neutral400'>
-      {verificationMessage}
+      {loading ? 'loading' : verificationMessage}
     </ZigTypography>
   ) : currentUser && !currentUser.emailVerified && !emailSent ? (
     <>

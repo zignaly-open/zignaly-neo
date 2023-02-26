@@ -7,7 +7,7 @@ import redisService from '../../redisService';
 import { ContextUser, ResourceOptions, TransactionType } from '../../types';
 import { checkAdmin } from '../../util/admin';
 import { getUserIdFromToken } from '../../util/jwt';
-import { BALANCE_CHANGED, EMAIL_REWARD } from './constants';
+import { BALANCE_CHANGED, EMAIL_REWARD, EMAIL_CHANGED } from './constants';
 import { User } from './model';
 import {
   authenticateSignature,
@@ -34,6 +34,12 @@ export const getUserBalanceObject = async (
     balance: currentBalance,
   };
 };
+
+export const subscribeEmailChanged = withFilter(
+  () => pubsub.asyncIterator([EMAIL_CHANGED]),
+  (payload, variables) =>
+    getUserIdFromToken(variables.token) === payload.emailChanged.id,
+);
 
 export const subscribeBalanceChanged = withFilter(
   () => pubsub.asyncIterator([BALANCE_CHANGED]),
@@ -130,6 +136,18 @@ export const generateService = (user: ContextUser) => {
     });
   };
 
+  const broadcastEmailChange = async (userId: number) => {
+    const user = await User.findByPk(userId);
+    pubsub.publish(EMAIL_CHANGED, {
+      emailChanged: {
+        id: user.id,
+        emailVerified: user.emailVerified,
+        emailVerificationSent: user.emailVerificationSent,
+        zhitRewared: user.zhitRewarded,
+      },
+    });
+  };
+
   const updateProfile = async ({
     username,
     discordName,
@@ -163,6 +181,7 @@ export const generateService = (user: ContextUser) => {
     userInstance.discordName = discordName;
     await userInstance.save();
     await redisService.updateRedisUsernameCache(user.id);
+    await broadcastEmailChange(user.id);
     return userInstance.toJSON();
   };
 

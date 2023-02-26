@@ -33,6 +33,13 @@ export const typeDef = gql`
     balance: String!
   }
 
+  type UserVerification {
+    id: ID!
+    emailVerificationSent: Boolean
+    emailVerified: Boolean
+    zhitRewarded: Boolean
+  }
+
   input UserFilter {
     id: ID
     q: String
@@ -67,5 +74,6 @@ export const typeDef = gql`
 
   extend type Subscription {
     balanceChanged(token: String!): UserBalance
+    emailChanged(token: String!): UserVerification
   }
 `;
