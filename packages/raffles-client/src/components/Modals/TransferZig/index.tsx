@@ -42,6 +42,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
     formState: { errors, isDirty },
     watch,
     reset,
+    clearErrors,
   } = useForm<ITransferField>({
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -59,6 +60,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
   const handleTransfer: SubmitHandler<ITransferField> = async ({ amount }) => {
     await transfer(amount.value);
     reset();
+    clearErrors();
   };
 
   if (!chainId) {
@@ -97,7 +99,8 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                   (isDirty &&
                     errors.amount?.types?.checkNumber &&
                     t('errors.error-number')) ||
-                  (isDirty &&
+                  (!isLoading &&
+                    isDirty &&
                     errors.amount?.types?.checkEmpty &&
                     t('errors.error-empty')) ||
                   (isDirty &&
