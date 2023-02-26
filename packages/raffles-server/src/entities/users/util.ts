@@ -146,7 +146,6 @@ export async function sendEmailVerification(
 }
 
 export async function isEmailConfirmed(email: string) {
-  console.log('isEmailConfirmed', email);
   const apiInstance = new SibApiV3Sdk.ContactsApi();
 
   apiInstance.setApiKey(
@@ -204,8 +203,6 @@ export const verifyJwtToken = (token: string) => {
       algorithms: ['HS256'],
       clockTimestamp: Math.floor(Date.now() / 1000),
     }) as TokenPayload;
-    console.log('Token is valid');
-    console.log(decodedPayload);
     const { userId, email } = decodedPayload;
     return {
       userId,
