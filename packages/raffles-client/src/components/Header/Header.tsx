@@ -1,10 +1,4 @@
-import {
-  IconButton,
-  BrandImage,
-  UserIcon,
-  WalletIcon,
-  DropDown,
-} from '@zignaly-open/ui';
+import { IconButton, UserIcon, WalletIcon, DropDown } from '@zignaly-open/ui';
 import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import useCurrentUser from '../../hooks/useCurrentUser';
@@ -96,11 +90,12 @@ const Header = () => {
   return (
     <StickyHeader
       leftElements={[
-        <BrandImage
+        <img
+          src={'/zigbids-logotype.svg'}
+          alt={'Zigbids'}
           key={'logo2'}
-          type={'zigbidslogotype'}
-          width={'140px'}
-          height={'68px'}
+          width={'140'}
+          height={'68'}
         />,
       ]}
       rightElements={[

@@ -4,7 +4,7 @@ import { Op } from 'sequelize';
 import { getUserBalance, deposit } from '../balances/service';
 import pubsub from '../../pubsub';
 import redisService from '../../redisService';
-import { ContextUser, ResourceOptions } from '../../types';
+import { ContextUser, ResourceOptions, TransactionType } from '../../types';
 import { checkAdmin } from '../../util/admin';
 import { getUserIdFromToken } from '../../util/jwt';
 import { BALANCE_CHANGED, EMAIL_REWARD } from './constants';
@@ -16,6 +16,7 @@ import {
   validateUsername,
   sendEmailVerification,
   isEmailConfirmed,
+  deleteContact,
 } from './util';
 
 const generateNonceSignMessage = (nonce: string | number) =>
@@ -114,6 +115,16 @@ export const generateService = (user: ContextUser) => {
     }
   };
 
+  const rewardUser = async (user: User) => {
+    await deposit({
+      walletAddress: user.publicAddress,
+      amount: EMAIL_REWARD,
+      blockchain: '',
+      note: '',
+      transactionType: TransactionType.Reward,
+    });
+  };
+
   const updateProfile = async ({
     username,
     discordName,
@@ -193,12 +204,7 @@ export const generateService = (user: ContextUser) => {
         );
 
         if (!user.zhitRewarded) {
-          await deposit({
-            walletAddress: user.publicAddress,
-            amount: EMAIL_REWARD,
-            blockchain: 'POLYGON',
-            note: 'Email verification',
-          });
+          await rewardUser(user);
           await User.update(
             {
               zhitRewarded: true,
@@ -220,6 +226,8 @@ export const generateService = (user: ContextUser) => {
 
   const verifyEmail = async (userId: number, email: string) => {
     try {
+      const user = await User.findByPk(userId);
+      await deleteContact(user.email);
       await sendEmailVerification(`${userId}`, email);
       User.update(
         {

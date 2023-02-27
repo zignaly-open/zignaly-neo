@@ -89,6 +89,7 @@ const useStartSession = () => {
     dispatch(setUser(userData));
     startLiveSession(userData);
     trackNewSession(userData, SessionsTypes.Login);
+    localStorage.setItem('hasLoggedIn', 'true');
   };
 };
 

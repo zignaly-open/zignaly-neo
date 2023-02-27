@@ -10,7 +10,11 @@ import {
 } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useMutation } from '@apollo/client';
-import { VERIFY_EMAIL_MUTATION, CONFIRM_EMAIL_MUTATION } from 'queries/users';
+import {
+  VERIFY_EMAIL_MUTATION,
+  CONFIRM_EMAIL_MUTATION,
+  GET_CURRENT_USER,
+} from 'queries/users';
 import { Send } from '@mui/icons-material';
 import { Controller, useForm } from 'react-hook-form';
 import { Form, Gap } from './styles';
@@ -25,7 +29,9 @@ const VerifyReward = () => {
   const { t } = useTranslation('global');
   const { user: currentUser } = useCurrentUser();
 
-  const [verifyEmail] = useMutation(VERIFY_EMAIL_MUTATION);
+  const [verifyEmail] = useMutation(VERIFY_EMAIL_MUTATION, {
+    refetchQueries: [{ query: GET_CURRENT_USER }],
+  });
   const [confirmEmail] = useMutation(CONFIRM_EMAIL_MUTATION);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [isEmailSent, setIsEmailSent] = useState(false);

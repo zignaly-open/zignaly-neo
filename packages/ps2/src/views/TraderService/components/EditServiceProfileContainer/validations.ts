@@ -1,3 +1,4 @@
+import { decimalsValidationNumber } from 'util/validation';
 import * as yup from 'yup';
 
 const nameRegex = /^[a-zA-Z0-9 $._#&|()\[\]%-]*$/;
@@ -13,7 +14,7 @@ export const successFeeValidation = yup
   .test(
     'range',
     'service:edit.validation.success-fee-range',
-    (v) => !v || (v >= 10 && v < 75),
+    (v) => !v || (v >= 10 && v <= 75),
   );
 
 export const serviceNameValidation = yup
@@ -28,10 +29,11 @@ export const EditServiceValidation = yup
   .object({
     name: serviceNameValidation,
     successFee: successFeeValidation,
-    // maximumSbt: yup
-    //   .number()
-    //   .typeError('error:error.required')
-    //   .required('error:error.required')
-    //   .positive('common:validation.negative-zeroable-amount'),
+    maximumSbt: yup
+      .number()
+      .typeError('common:validation.invalid-value')
+      .required('error:error.required')
+      .positive('common:validation.negative-zeroable-amount')
+      .concat(decimalsValidationNumber(8)),
   })
   .required();

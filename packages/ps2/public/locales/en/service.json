@@ -8,6 +8,8 @@
   "copy-link": "Copy link",
   "invest-button": {
     "invest-now": "INVEST",
+    "max-reached": "Maximum Funds Reached",
+    "max-reached-tooltip": "Investments are not allowed in this service because it has reached the Maximum Funds Limit. Discover other Profit Sharing Services in our Marketplace.",
     "all-accounts": "See all ({{count}})",
     "x-success-fee": "{{fee}}% Success fee"
   },
@@ -23,6 +25,7 @@
   "summary": {
     "base-currency": "Base currency:",
     "funds-allocated": "Funds allocated:",
+    "no-max-limit": "No maximum funds limit",
     "success-fee": "Success fee:",
     "tags": "Tags:"
   },
@@ -94,6 +97,7 @@
     "select-type-first": "Select a service type first",
     "title": "Create new service",
     "action": "Create service",
+    "next-step": "Next",
     "service-type": "Service type",
     "service-name": "Service name",
     "base-currency": "Base Currency",

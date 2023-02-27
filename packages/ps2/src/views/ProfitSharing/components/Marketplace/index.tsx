@@ -61,11 +61,13 @@ const Marketplace: React.FC = () => {
           ),
         },
         cell: (props) => (
-          <AssetsInPool
-            assetsValue={props.getValue()}
-            numberOfInvestors={props.row.original.investors}
-            createdAt={props.row.original.createdAt}
-          />
+          <Box minWidth={148}>
+            <AssetsInPool
+              assetsValue={props.getValue()}
+              numberOfInvestors={props.row.original.investors}
+              createdAt={props.row.original.createdAt}
+            />
+          </Box>
         ),
         sortingFn: 'alphanumeric',
       }),

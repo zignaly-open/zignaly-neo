@@ -1,5 +1,5 @@
 import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import { isArray } from 'lodash';
+import { isArray } from 'lodash-es';
 import { useState, useEffect, useRef } from 'react';
 import { useDeepCompareEffect, useUpdateEffect } from 'react-use';
 

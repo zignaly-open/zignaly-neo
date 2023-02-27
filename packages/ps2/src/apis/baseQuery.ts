@@ -12,6 +12,7 @@ import { TIME_TO_START_REFRESHING_TOKEN } from '../util/constants';
 import i18next from '../util/i18next';
 import { backendError } from 'util/hooks/useToast';
 import { BackendError } from '../util/errors';
+import { BaseQueryApi } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 
 const mutex = new Mutex();
 
@@ -39,9 +40,16 @@ const endpointsWhitelistedFor401 = [
   'change_password',
 ];
 
-const maybeReportError = (error: FetchBaseQueryError) => {
+const maybeReportError = (
+  error: FetchBaseQueryError,
+  requestType: BaseQueryApi['type'],
+) => {
   if (!error) return;
-  backendError(i18next.t, error as unknown as BackendError);
+  backendError(
+    i18next.t,
+    error as unknown as BackendError,
+    requestType === 'mutation',
+  );
 };
 
 const customFetchBase: (
@@ -50,7 +58,7 @@ const customFetchBase: (
   (baseUrl) => async (args, api, extraOptions) => {
     const result = await baseQuery(baseUrl)(args, api, extraOptions);
 
-    maybeReportError(result?.error);
+    maybeReportError(result?.error, api?.type);
 
     if (
       result?.error?.status === 401 &&
