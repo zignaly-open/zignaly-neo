@@ -12,7 +12,7 @@ const UpdatePasswordModal = ({
   close: () => void;
   action: (code?: string) => void;
 } & DialogProps) => {
-  const { t } = useTranslation(['auth', 'error']);
+  const { t } = useTranslation('settings');
 
   return (
     <ZModal

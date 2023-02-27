@@ -11,9 +11,10 @@ import { StyledErrorOutline } from '../../Auth/components/SignupForm/styles';
 import { UpdatePasswordFormType } from './types';
 import PasswordVisibilityAdornment from '../../Auth/components/atoms/PasswordVisibilityAdornment';
 import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
+import { useCheck2FA } from 'apis/user/use';
 
 const UpdatePasswordForm = ({ close }: { close: () => void }) => {
-  const { t } = useTranslation(['auth', 'error']);
+  const { t } = useTranslation('settings');
   const {
     handleSubmit,
     control,
@@ -27,18 +28,28 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
   const [updatePassword, updatePasswordStatus] = useUpdatePasswordMutation();
   const [showPassword, setShowPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
+  const check2FA = useCheck2FA({
+    status: updatePasswordStatus,
+  });
 
   const onSubmit = (data: UpdatePasswordFormType) => {
-    updatePassword(data)
-      .unwrap()
-      .catch((e) => {
-        if (e.data.error?.code === 7) {
-          setError('password', {
-            type: 'notMatch',
-            message: t(`error:error.${e.data.error.code}`),
-          });
-        }
-      });
+    check2FA((code) => {
+      updatePassword({ ...data, code })
+        .unwrap()
+        .then(() => {
+          toast.success(t('enable-2fa.success'));
+          logout();
+          close();
+        })
+        .catch((e) => {
+          if (e.data.error?.code === 7) {
+            setError('password', {
+              type: 'notMatch',
+              message: t(`error:error.${e.data.error.code}`),
+            });
+          }
+        });
+    });
   };
 
   return (

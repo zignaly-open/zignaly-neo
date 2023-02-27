@@ -164,6 +164,7 @@ export const api = createApi({
       {
         password: string;
         newPassword: string;
+        code?: string;
       }
     >({
       query: (params) => ({
