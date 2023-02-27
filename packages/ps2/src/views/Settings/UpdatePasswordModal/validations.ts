@@ -1,5 +1,5 @@
 import * as yup from 'yup';
-import { passwordYup } from '../SignupForm/validations';
+import { passwordYup } from '../../Auth/components/SignupForm/validations';
 
 export const UpdatePasswordValidation = yup
   .object({

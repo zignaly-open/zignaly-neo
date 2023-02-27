@@ -19,7 +19,7 @@ import { useDispatch } from 'react-redux';
 import { enable2FA } from 'apis/user/store';
 
 const Disable2FAForm = ({ close }: { close: () => void }) => {
-  const { t } = useTranslation(['auth', 'error']);
+  const { t } = useTranslation('settings');
   const {
     handleSubmit,
     control,
@@ -38,7 +38,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
     disable2FA(data)
       .unwrap()
       .then(() => {
-        toast.success(t('enable-2fa.disable-2fa-success'));
+        toast.success(t('disable-2fa.success'));
         dispatch(enable2FA(false));
         close();
       })
@@ -56,7 +56,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
     <>
       <Box mt={1} mb={1}>
         <ZigTypography whiteSpace='pre-line'>
-          {t('enable-2fa.disable-2fa-description')}
+          {t('disable-2fa.description')}
         </ZigTypography>
       </Box>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -65,7 +65,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
           control={control}
           render={({ field }) => (
             <ZigInput
-              label={t('enable-2fa.code')}
+              label={t('enable-2fa.enter-code')}
               placeholder={t('enable-2fa.code-2fa')}
               error={t(errors.code?.message)}
               type='text'
@@ -73,7 +73,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
             />
           )}
         />
-        <ErrorMessage text={t('enable-2fa.disable-2fa-security')} />
+        <ErrorMessage text={t('disable-2fa.security')} />
 
         <ModalActionsNew align='right'>
           <ZigButton

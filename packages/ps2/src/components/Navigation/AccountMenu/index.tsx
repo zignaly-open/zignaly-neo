@@ -32,8 +32,8 @@ import {
 import { generatePath, Link, useLocation, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
 import { useZModal } from 'components/ZModal/use';
-import UpdatePasswordModal from 'views/Auth/components/UpdatePasswordModal';
-import Update2FAModal from 'views/Auth/components/Enable2FAModal';
+import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
+import Enable2FAModal from 'views/Settings/Enable2FAModal';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme();
@@ -150,7 +150,7 @@ function AccountMenu(): React.ReactElement | null {
             {
               id: `menu-dropdown-settings__password}`,
               label: t('account-menu.notAuth-dropdown-link-2fa'),
-              onClick: () => showModal(Update2FAModal),
+              onClick: () => showModal(Enable2FAModal),
             },
           ],
         },

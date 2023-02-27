@@ -2,8 +2,8 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material';
 import ZModal from 'components/ZModal';
-import Enable2FAForm from './Enable2FAForm';
-import Disable2FAForm from './Disable2FAForm';
+import Enable2FAForm from './Enable2FaForm';
+import Disable2FAForm from './Disable2FaForm';
 import { useCurrentUser } from 'apis/user/use';
 
 const UpdatePasswordModal = ({
@@ -14,7 +14,7 @@ const UpdatePasswordModal = ({
   close: () => void;
   action: (code?: string) => void;
 } & DialogProps) => {
-  const { t } = useTranslation('auth');
+  const { t } = useTranslation('settings');
   const user = useCurrentUser();
 
   return (

@@ -7,9 +7,9 @@ import { useUpdatePasswordMutation } from 'apis/user/api';
 import { useForm, Controller } from 'react-hook-form';
 import { Form } from './styles';
 import { UpdatePasswordValidation } from './validations';
-import { StyledErrorOutline } from '../SignupForm/styles';
+import { StyledErrorOutline } from '../../Auth/components/SignupForm/styles';
 import { UpdatePasswordFormType } from './types';
-import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
+import PasswordVisibilityAdornment from '../../Auth/components/atoms/PasswordVisibilityAdornment';
 import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
 
 const UpdatePasswordForm = ({ close }: { close: () => void }) => {

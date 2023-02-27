@@ -1,6 +1,11 @@
 import React from 'react';
 import { Box, Link } from '@mui/material';
-import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
+import {
+  IconButton,
+  ZigButton,
+  ZigInput,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { Trans, useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEnable2FAMutation, useLazyEnable2FAInfoQuery } from 'apis/user/api';
@@ -15,9 +20,11 @@ import {
   DOWNLOAD_GOOGLE_AUTHENTICATOR_URL,
   HELP_CREATE_ENABLE_2FA_URL,
 } from 'util/constants';
+import copy from 'copy-to-clipboard';
+import { ContentCopy } from '@mui/icons-material';
 
 const Enable2FAForm = ({ close }: { close: () => void }) => {
-  const { t } = useTranslation(['auth', 'error']);
+  const { t } = useTranslation('settings');
   const {
     handleSubmit,
     control,
@@ -74,6 +81,19 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
           label={t('enable-2fa.key-phrase')}
           type='text'
           value={load2FAInfoResult.data[0]}
+          InputProps={{
+            endAdornment: (
+              <IconButton
+                aria-label='Toggle password visibility'
+                onClick={() => {
+                  copy(load2FAInfoResult.data[0]);
+                  toast.success(t('enable-2fa.key-phrase-copied'));
+                }}
+                icon={<ContentCopy sx={{ color: 'neutral200' }} />}
+                variant='flat'
+              />
+            ),
+          }}
         />
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Controller
@@ -81,7 +101,14 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
             control={control}
             render={({ field }) => (
               <ZigInput
-                label={t('enable-2fa.code')}
+                label={
+                  <div>
+                    {t('enable-2fa.enter-code')}
+                    <ZigTypography variant='h4' color='neutral400'>
+                      {t('enable-2fa.enter-code-subtitle')}
+                    </ZigTypography>
+                  </div>
+                }
                 placeholder={t('enable-2fa.code-2fa')}
                 error={t(errors.code?.message)}
                 type='text'
