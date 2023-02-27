@@ -1,19 +1,17 @@
 import React from 'react';
 import { Typography, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
-import { useZModal } from '../../../../../components/ZModal/use';
-import DepositModal from '../DepositModal';
 import { Box, Divider, Link } from '@mui/material';
 import NorthEastIcon from '@mui/icons-material/NorthEast';
 import { PURCHASE_CRYPTO } from '../../../../../util/constants';
+import { ChooseDepositTypeViews } from '../types';
 
 const ChooseDepositType: React.FC<{
   coin: string;
-  ctaId?: string;
-}> = ({ coin, ctaId = '' }) => {
+  setView: (view: ChooseDepositTypeViews) => void;
+}> = ({ coin, setView }) => {
   const { t } = useTranslation('purchase-deposit-crypto');
 
-  const { showModal } = useZModal();
   return (
     <>
       <Box padding={'15px 0'}>
@@ -49,10 +47,7 @@ const ChooseDepositType: React.FC<{
             size={'large'}
             sx={{ height: '60px', width: '180px' }}
             onClick={() => {
-              showModal(DepositModal, {
-                allowedCoins: [coin],
-                ctaId,
-              });
+              setView(ChooseDepositTypeViews.DepositView);
             }}
           >
             <ZigTypography
