@@ -30,13 +30,14 @@ const persistConfig = {
   storage,
   // TODO: maybe we should actually leverage cache
   blacklist: [
-    'userApi',
-    'marketplaceApi',
-    'coinApi',
-    'investmentApi',
-    'dashboardApi',
-    'serviceApi',
-    'walletApi',
+    userApi.reducerPath,
+    coinApi.reducerPath,
+    investmentApi.reducerPath,
+    investmentApi.reducerPath,
+    marketplaceApi.reducerPath,
+    referralApi.reducerPath,
+    serviceApi.reducerPath,
+    walletApi.reducerPath,
   ] as string[],
 };
 
