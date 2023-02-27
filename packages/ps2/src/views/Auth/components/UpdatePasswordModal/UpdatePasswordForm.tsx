@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, DialogProps } from '@mui/material';
 import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -12,7 +12,7 @@ import { UpdatePasswordFormType } from './types';
 import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
 import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
 
-const UpdatePasswordForm = () => {
+const UpdatePasswordForm = ({ close }: { close: () => void }) => {
   const { t } = useTranslation(['auth', 'error']);
   const {
     handleSubmit,

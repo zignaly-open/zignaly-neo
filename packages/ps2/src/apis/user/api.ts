@@ -172,6 +172,19 @@ export const api = createApi({
         body: params,
       }),
     }),
+
+    disable2FA: builder.mutation<
+      void,
+      {
+        code: string;
+      }
+    >({
+      query: (params) => ({
+        url: `/disable_2fa`,
+        method: 'POST',
+        body: params,
+      }),
+    }),
   }),
 });
 
@@ -194,4 +207,5 @@ export const {
   useResetPasswordRequestMutation,
   useResetPasswordMutation,
   useUpdatePasswordMutation,
+  useDisable2FAMutation,
 } = api;

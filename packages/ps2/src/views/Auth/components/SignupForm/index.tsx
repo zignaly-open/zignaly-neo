@@ -10,13 +10,11 @@ import { ROUTE_LOGIN } from '../../../../routes';
 import {
   Button,
   ErrorMessage,
-  IconButton,
   TextButton,
   Typography,
   ZigInput,
 } from '@zignaly-open/ui';
-import { Box, InputAdornment, Link } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Box, Link } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
 import Cookies from 'js-cookie';
 import Mailcheck from 'react-mailcheck';
