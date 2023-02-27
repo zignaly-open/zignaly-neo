@@ -11,6 +11,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { useResetPasswordMutation } from 'apis/user/api';
 import { ROUTE_LOGIN } from 'routes';
 import { useToast } from 'util/hooks/useToast';
+import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
 
 const ResetPasswordForm = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -73,20 +74,10 @@ const ResetPasswordForm = () => {
               type={showPassword ? 'text' : 'password'}
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='Toggle password visibility'
-                      onClick={() => setShowPassword(!showPassword)}
-                      icon={
-                        showPassword ? (
-                          <Visibility sx={{ color: 'neutral200' }} />
-                        ) : (
-                          <VisibilityOff sx={{ color: 'neutral200' }} />
-                        )
-                      }
-                      variant='flat'
-                    />
-                  </InputAdornment>
+                  <PasswordVisibilityAdornment
+                    show={showPassword}
+                    onToggle={() => setShowPassword(!showPassword)}
+                  />
                 ),
               }}
               {...field}

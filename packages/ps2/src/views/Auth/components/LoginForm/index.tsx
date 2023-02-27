@@ -17,6 +17,7 @@ import {
 import { Box, InputAdornment } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -91,17 +92,9 @@ const LoginForm: React.FC = () => {
               InputProps={{
                 endAdornment: (
                   <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='Toggle password visibility'
-                      onClick={() => setShowPassword(!showPassword)}
-                      icon={
-                        showPassword ? (
-                          <Visibility sx={{ color: 'neutral200' }} />
-                        ) : (
-                          <VisibilityOff sx={{ color: 'neutral200' }} />
-                        )
-                      }
-                      variant='flat'
+                    <PasswordVisibilityAdornment
+                      show={showPassword}
+                      onToggle={() => setShowPassword(!showPassword)}
                     />
                   </InputAdornment>
                 ),

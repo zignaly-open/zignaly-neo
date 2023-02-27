@@ -20,6 +20,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoginPayload } from '../../../../apis/user/types';
 import Cookies from 'js-cookie';
 import Mailcheck from 'react-mailcheck';
+import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
 
 const SignupForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -126,20 +127,10 @@ const SignupForm: React.FC = () => {
               type={showPassword ? 'text' : 'password'}
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='Toggle password visibility'
-                      onClick={() => setShowPassword(!showPassword)}
-                      icon={
-                        showPassword ? (
-                          <Visibility sx={{ color: 'neutral200' }} />
-                        ) : (
-                          <VisibilityOff sx={{ color: 'neutral200' }} />
-                        )
-                      }
-                      variant='flat'
-                    />
-                  </InputAdornment>
+                  <PasswordVisibilityAdornment
+                    show={showPassword}
+                    onToggle={() => setShowPassword(!showPassword)}
+                  />
                 ),
               }}
               {...field}
