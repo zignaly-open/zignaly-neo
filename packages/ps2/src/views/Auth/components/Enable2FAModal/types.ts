@@ -1,3 +1,3 @@
-export type UpdatePasswordFormType = {
+export type TwoFAFormType = {
   code: string;
 };

@@ -37,6 +37,7 @@ const endpointsWhitelistedFor401 = [
   `user/verify_2fa`,
   `known_device/verify`,
   `login`,
+  `logout`,
   'change_password',
 ];
 

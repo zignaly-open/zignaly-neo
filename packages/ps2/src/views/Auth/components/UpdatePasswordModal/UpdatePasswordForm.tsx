@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, DialogProps } from '@mui/material';
+import { Box } from '@mui/material';
 import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';

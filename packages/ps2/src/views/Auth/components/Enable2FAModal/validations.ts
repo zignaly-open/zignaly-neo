@@ -1,8 +1,15 @@
 import * as yup from 'yup';
-import { passwordYup } from '../SignupForm/validations';
 
-export const UpdatePasswordValidation = yup
+export const TwoFAValidation = yup
   .object({
-    code: yup.string().required('error:error.required'),
+    code: yup
+      .string()
+      .required('error:error.required')
+      .typeError('common:validation.invalid-value')
+      .test(
+        'value',
+        'common:validation.invalid-value',
+        (v) => Number.isInteger(Number(v)) && v?.length === 6,
+      ),
   })
   .required();

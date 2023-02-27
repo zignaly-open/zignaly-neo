@@ -1,16 +1,9 @@
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { Trans, useTranslation } from 'react-i18next';
-import { Form, TitleHead } from './styles';
-import { ForgotPasswordValidation } from './validations';
-import { ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../../routes';
-import { Button, ZigInput, ZigTypography } from '@zignaly-open/ui';
-import { Box, DialogProps } from '@mui/material';
-import { useResetPasswordRequestMutation } from 'apis/user/api';
-import AnchorLink from 'components/AnchorLink';
+import { useTranslation } from 'react-i18next';
+import { DialogProps } from '@mui/material';
 import ZModal from 'components/ZModal';
 import Enable2FAForm from './Enable2FAForm';
+import Disable2FAForm from './Disable2FAForm';
 import { useCurrentUser } from 'apis/user/use';
 
 const UpdatePasswordModal = ({
@@ -32,7 +25,11 @@ const UpdatePasswordModal = ({
       title={t('enable-2fa.title')}
       titleAlign='left'
     >
-      {user['2FAEnable'] ? <Enable2FAForm /> : <Enable2FAForm />}
+      {user['2FAEnable'] ? (
+        <Disable2FAForm close={close} />
+      ) : (
+        <Enable2FAForm close={close} />
+      )}
     </ZModal>
   );
 };
