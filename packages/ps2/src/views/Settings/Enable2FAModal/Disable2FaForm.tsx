@@ -92,7 +92,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
             loading={disable2FAStatus.isLoading}
             disabled={!isValid}
           >
-            {t('enable-2fa.disable-2fa')}
+            {t('disable-2fa.title')}
           </ZigButton>
         </ModalActionsNew>
       </Form>

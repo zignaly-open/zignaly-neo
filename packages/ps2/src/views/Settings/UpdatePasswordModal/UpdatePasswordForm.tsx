@@ -11,7 +11,8 @@ import { StyledErrorOutline } from '../../Auth/components/SignupForm/styles';
 import { UpdatePasswordFormType } from './types';
 import PasswordVisibilityAdornment from '../../Auth/components/atoms/PasswordVisibilityAdornment';
 import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
-import { useCheck2FA } from 'apis/user/use';
+import { useCheck2FA, useLogout } from 'apis/user/use';
+import { useToast } from 'util/hooks/useToast';
 
 const UpdatePasswordForm = ({ close }: { close: () => void }) => {
   const { t } = useTranslation('settings');
@@ -31,6 +32,8 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
   const check2FA = useCheck2FA({
     status: updatePasswordStatus,
   });
+  const logout = useLogout();
+  const toast = useToast();
 
   const onSubmit = (data: UpdatePasswordFormType) => {
     check2FA((code) => {

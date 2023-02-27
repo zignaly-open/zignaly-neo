@@ -152,8 +152,8 @@ export function useLogout(): () => void {
 
   return () => {
     logoutRequest();
-    navigate('/login');
     dispatch(logout());
+    navigate('/login');
     endLiveSession();
     trackEndSession();
   };
