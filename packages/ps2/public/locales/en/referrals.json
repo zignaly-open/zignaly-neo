@@ -1,0 +1,19 @@
+{
+    "title": "Invite Friends & Traders and Earn!",
+    "description": "Get a percentage of the trading and success fees paid by your friends or from all the investors when you invite a trader to Zignaly",
+    "share-your-link": "Share your link:",
+    "what-you-get": "What you get",
+    "what-they-get": "What they get",
+    "invite-friends": "Invite friends <0>${{value}}</0> in ZIG when they deposit ${{threshold}}",
+    "invite-traders": "Invite traders <0>{{value}}%</0> of their success fees",
+    "they-get-rewards": "Rewards of <0>${{value}}</0> in {{coin}} when they deposit ${{threshold}}",
+    "total-invitees": "Total Invitees",
+    "total-rewards": "Total Rewards",
+    "pending-rewards": "Pending Rewards",
+    "table": {
+        "title": "Rewards history",
+        "no-referrals": "No referrals to show",
+        "time-and-date": "Time and date",
+        "user-trader": "User/Trader"
+    }
+}
