@@ -48,8 +48,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
 
   const { data: serviceTypesInfo } = useServiceTypesInfoQuery();
   const minInvestedAmountOwner =
-    serviceTypesInfo &&
-    serviceTypesInfo[serviceInfo.type][coin.id].minimum_owner_balance;
+    serviceTypesInfo?.[serviceInfo.type]?.[coin.id]?.minimum_owner_balance;
 
   const { t } = useTranslation('withdraw');
   const toast = useToast();
