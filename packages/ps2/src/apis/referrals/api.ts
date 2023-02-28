@@ -3,8 +3,8 @@ import { ReferralRewards, ReferralHistory } from './types';
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
-  baseQuery: baseQuery(),
-  reducerPath: 'referralsApi',
+  baseQuery: baseQuery(process.env.REACT_APP_REFERRALS_API),
+  reducerPath: 'referralApi',
   tagTypes: ['Referrals'],
   endpoints: (builder) => ({
     referralRewards: builder.query<ReferralRewards, void>({
