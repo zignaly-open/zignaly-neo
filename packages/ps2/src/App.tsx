@@ -20,6 +20,7 @@ import Header from './components/Navigation/Header';
 import UpdateChecker from './components/Navigation/UpdateChecker';
 import DateLocaleFixer from './components/Navigation/DateLocaleFixer';
 import Tracker from './components/Navigation/Tracker/Tracker';
+import Cookies from 'js-cookie';
 
 if (
   process.env.NODE_ENV === 'production' &&
@@ -31,6 +32,14 @@ if (
     debug: false,
     release: process.env.REACT_APP_SENTRY_RELEASE,
   });
+}
+
+const params = new URLSearchParams(window.location.search);
+const ref = params.get('invite');
+const subtrack = params.get('subtrack');
+// Save ref in cookies
+if (ref) {
+  Cookies.set('ref', subtrack ? `${ref}:${subtrack}` : ref);
 }
 
 function App() {
