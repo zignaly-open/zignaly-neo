@@ -54,12 +54,6 @@ function AccountMenu(): React.ReactElement | null {
   if (!isAuthenticated) {
     return (
       <>
-        <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>
-          <Button
-            id={'menu__signup'}
-            caption={t('account-menu.isAuth-button-signUp')}
-          />
-        </Link>
         <Link to={ROUTE_LOGIN} state={{ redirectTo: location }}>
           <LoginButton id={'menu__login'}>
             <UserIcon
@@ -71,6 +65,12 @@ function AccountMenu(): React.ReactElement | null {
               {t('account-menu.isAuth-button-logIn')}
             </Typography>
           </LoginButton>
+        </Link>
+        <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>
+          <Button
+            id={'menu__signup'}
+            caption={t('account-menu.isAuth-button-signUp')}
+          />
         </Link>
       </>
     );
