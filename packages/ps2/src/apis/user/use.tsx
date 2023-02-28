@@ -151,9 +151,9 @@ export function useLogout(): () => void {
   const navigate = useNavigate();
 
   return () => {
-    navigate('/login');
     logoutRequest();
     dispatch(logout());
+    navigate('/login');
     endLiveSession();
     trackEndSession();
   };
