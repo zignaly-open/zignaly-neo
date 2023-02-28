@@ -18,6 +18,7 @@ import { Box } from '@mui/material';
 import { PaginationState } from '@tanstack/react-table';
 import { getTransactionSideType, truncateAddress } from './util';
 import { TRANSACTION_TYPE } from 'apis/coin/types';
+import { useActiveExchange } from '../../../../apis/user/use';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(
@@ -38,13 +39,15 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   );
   const coinsEndpoint = useExchangeCoinsList();
 
-  const defineSign = (typeTransaction: string) => {
+  const exchange = useActiveExchange();
+  const defineSign = (typeTransaction: string, fromId: string) => {
     if (
       [
         TRANSACTION_TYPE.PS_DEPOSIT,
         TRANSACTION_TYPE.WITHDRAW,
         TRANSACTION_TYPE.BUYZIG,
-      ].includes(typeTransaction)
+      ].includes(typeTransaction) ||
+      fromId === exchange?.internalId
     )
       return -1;
     else return 1;
@@ -109,7 +112,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
             exact
             coin={original.asset}
             alwaysShowSign
-            value={defineSign(original.txType) * getValue()}
+            value={defineSign(original.txType, original.from) * getValue()}
           />
         ),
         enableSorting: false,
