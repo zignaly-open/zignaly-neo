@@ -33,7 +33,7 @@ const ExtraNavigationDropdown: React.FC = () => {
   const { t, i18n } = useTranslation('common');
   const changeLocale = useChangeLocale();
   const service = useFirstOwnedService();
-  const { data: traderServices } = useTraderServices();
+  const { data: traderServices, isFetching } = useTraderServices();
 
   const onClose = useCallback(() => {
     dropDownRef.current?.closeDropDown();
@@ -53,23 +53,6 @@ const ExtraNavigationDropdown: React.FC = () => {
   };
 
   let options: DropDownOption[] = [
-    {
-      label: t('main-menu.dropdown-link-forTrading'),
-      id: 'menu-dropdown__for-trading',
-      href:
-        service &&
-        generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-          serviceId: service.serviceId?.toString(),
-        }),
-      onClick: () =>
-        navigate(
-          service
-            ? generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-                serviceId: service.serviceId?.toString(),
-              })
-            : ROUTE_BECOME_TRADER,
-        ),
-    },
     {
       label: t('main-menu.dropdown-link-helpDocs'),
       id: 'menu-dropdown__help-docs',
@@ -125,9 +108,27 @@ const ExtraNavigationDropdown: React.FC = () => {
       (x) => x.id !== 'menu-dropdown__language-switcher',
     );
   }
-
-  if (!traderServices?.length) {
-    options = options.filter((x) => x.id !== 'menu-dropdown__for-trading');
+  if (traderServices?.length && !isFetching) {
+    options = [
+      {
+        label: t('main-menu.dropdown-link-forTrading'),
+        id: 'menu-dropdown__for-trading',
+        href:
+          service &&
+          generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+            serviceId: service.serviceId?.toString(),
+          }),
+        onClick: () =>
+          navigate(
+            service
+              ? generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+                  serviceId: service.serviceId?.toString(),
+                })
+              : ROUTE_BECOME_TRADER,
+          ),
+      },
+      ...options,
+    ];
   }
 
   return (
