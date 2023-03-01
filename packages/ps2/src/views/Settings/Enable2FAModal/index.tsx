@@ -25,7 +25,7 @@ const UpdatePasswordModal = ({
       title={t('enable-2fa.title')}
       titleAlign='left'
     >
-      {user['2FAEnable'] ? (
+      {user.ask2FA ? (
         <Disable2FAForm close={close} />
       ) : (
         <Enable2FAForm close={close} />
