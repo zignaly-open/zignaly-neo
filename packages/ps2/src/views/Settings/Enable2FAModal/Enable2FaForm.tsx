@@ -38,7 +38,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
   const [load2FAInfo, load2FAInfoResult] = useLazyEnable2FAInfoQuery();
   const [enable2FA, enable2FAStatus] = useEnable2FAMutation();
   const toast = useToast();
-  const logout = useLogout();
+  const logout = useLogout(false);
 
   const onSubmit = (data: TwoFAFormType) => {
     enable2FA(data)

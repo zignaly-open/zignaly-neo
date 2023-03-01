@@ -33,7 +33,7 @@ export const userSlice = createSlice({
       ).activated = true;
     },
     enable2FA: (state, action: PayloadAction<boolean>) => {
-      state.user['2FAEnable'] = action.payload;
+      state.user.ask2FA = action.payload;
     },
   },
 });

@@ -32,7 +32,7 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
   const check2FA = useCheck2FA({
     status: updatePasswordStatus,
   });
-  const logout = useLogout();
+  const logout = useLogout(false);
   const toast = useToast();
 
   const onSubmit = (data: UpdatePasswordFormType) => {
@@ -40,7 +40,7 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
       updatePassword({ ...data, code })
         .unwrap()
         .then(() => {
-          toast.success(t('enable-2fa.success'));
+          toast.success(t('update-password.success'));
           logout();
           close();
         })
