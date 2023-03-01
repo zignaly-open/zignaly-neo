@@ -54,10 +54,9 @@ const VerifyReward: React.FC = () => {
   };
 
   useEffect(() => {
-    const checkConfirm = async () => {
-      const hashStr = searchParams.get('confirm');
-      if (hashStr) {
-        const result = await confirmEmail(hashStr);
+    const hashStr = searchParams.get('confirm');
+    if (hashStr) {
+      confirmEmail(hashStr).then((result) => {
         if (
           currentUser &&
           currentUser.emailVerified &&
@@ -70,9 +69,8 @@ const VerifyReward: React.FC = () => {
             setVerificationMessage(t('confirmation-link-invalid'));
           }
         }
-      }
-    };
-    checkConfirm();
+      });
+    }
   }, [currentUser]);
 
   const {
