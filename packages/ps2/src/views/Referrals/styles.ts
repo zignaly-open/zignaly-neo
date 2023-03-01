@@ -1,4 +1,4 @@
-import { Paper, styled } from '@mui/material';
+import { Grid, Paper, styled } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
 
 export const Hr = styled('hr')`
@@ -26,6 +26,22 @@ export const TotalBoxValue = styled(ZigTypography)`
   span {
     color: ${({ theme }) => theme.palette.neutral000};
     font-size: 30px;
+  }
+`;
+
+export const FilterWrapperContainer = styled(Grid)`
+  justify-content: flex-end;
+
+  &,
+  & > .MuiBox-root {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .zig-react-select__control {
+    width: 150px;
   }
 `;
 

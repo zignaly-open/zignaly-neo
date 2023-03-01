@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import {
@@ -8,13 +8,10 @@ import {
 import { Box, Grid } from '@mui/material';
 import {
   CloneIcon,
-  createColumnHelper,
   dark,
   InputText,
   PageContainer,
-  ZigCoinIcon,
   ZigPriceLabel,
-  ZigTable,
   ZigTypography,
 } from '@zignaly-open/ui';
 import GroupIcon from '@mui/icons-material/Group';
@@ -28,11 +25,8 @@ import { useToast } from '../../util/hooks/useToast';
 import { generatePath } from 'react-router-dom';
 import { ROUTE_REFERRALS_INVITE } from '../../routes';
 import { TotalBox } from './atoms';
-import {
-  ReferralHistory,
-  ReferralHistoryEntry,
-  ReferralRewards,
-} from '../../apis/referrals/types';
+import { ReferralHistory, ReferralRewards } from '../../apis/referrals/types';
+import ReferralsTable from './components/ReferralsTable';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -42,43 +36,6 @@ const Referrals: React.FC = () => {
   const toast = useToast();
 
   useTitle(t('pages:referrals'));
-
-  const columnHelper = createColumnHelper<ReferralHistoryEntry>();
-  const columns = useMemo(
-    () => [
-      columnHelper.accessor('date', {
-        header: t('table.time-and-date'),
-        cell: ({ getValue }) => (
-          <ZigTypography
-            display='flex'
-            alignItems='center'
-            justifyContent='center'
-            gap={1}
-          >
-            <ZigCoinIcon coin={getValue()} size='small' bucket='coins' />
-            {getValue()}
-          </ZigTypography>
-        ),
-      }),
-      columnHelper.accessor('amount', {
-        header: t('common:amount'),
-        cell: ({ getValue }) => <ZigPriceLabel value={getValue()} usd />,
-      }),
-      columnHelper.accessor('email', {
-        header: t('table.user-trader'),
-        cell: ({ getValue }) => <ZigPriceLabel value={getValue()} usd />,
-      }),
-      columnHelper.accessor('type', {
-        header: t('table.user-trader'),
-        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
-      }),
-      columnHelper.accessor('status', {
-        header: t('table.user-trader'),
-        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
-      }),
-    ],
-    [],
-  );
 
   const link =
     window.location.protocol +
@@ -274,37 +231,7 @@ const Referrals: React.FC = () => {
                 value={<ZigPriceLabel usd value={rewardsData.usdtPending} />}
               />
             </Box>
-
-            <Box sx={{ mb: 6, mt: 3 }}>
-              <Grid container>
-                <Grid item xs={12} sm={6}>
-                  <ZigTypography
-                    sx={{
-                      mb: 3,
-                    }}
-                    variant={'h2'}
-                  >
-                    {t('table.title')}
-                  </ZigTypography>
-                </Grid>
-                <Grid item xs={12} sm={6}></Grid>
-              </Grid>
-              <ZigTable
-                initialState={{
-                  sorting: [
-                    {
-                      id: 'time',
-                      desc: true,
-                    },
-                  ],
-                }}
-                columns={columns}
-                data={referrals.history}
-                columnVisibility={false}
-                enableSortingRemoval={false}
-                emptyMessage={t('table.no-referrals')}
-              />
-            </Box>
+            <ReferralsTable referrals={referrals.history} />
           </>
         )}
       />

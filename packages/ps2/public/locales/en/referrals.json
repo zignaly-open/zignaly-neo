@@ -10,10 +10,21 @@
     "total-invitees": "Total Invitees",
     "total-rewards": "Total Rewards",
     "pending-rewards": "Pending Rewards",
+    "filter-any": "Any",
     "table": {
         "title": "Rewards history",
         "no-referrals": "No referrals to show",
         "time-and-date": "Time and date",
         "user-trader": "User/Trader"
+    },
+    "statusTypes": {
+        "Completed": "Completed"
+    },
+    "rewardTypes": {
+        "SIGNUP_REWARD": "Signup reward",
+        "DEPOSIT_REWARD": "Deposit reward",
+        "ALLOCATE_REWARD": "Allocate reward",
+        "SUCCESS_FEE_REWARD": "Success fee reward",
+        "REBATE_COMMISSION_REWARD": "Rebate commission reward"
     }
 }
