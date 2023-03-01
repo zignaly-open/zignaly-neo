@@ -12,7 +12,7 @@ import { RewardType, StatusType } from '../constants';
 import { ReferralHistoryEntry } from '../../../apis/referrals/types';
 import { useTranslation } from 'react-i18next';
 
-const ReferralsTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
+const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
   referrals,
 }) => {
   const { t } = useTranslation('referrals');
@@ -147,4 +147,4 @@ const ReferralsTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
   );
 };
 
-export default ReferralsTable;
+export default ReferralTable;

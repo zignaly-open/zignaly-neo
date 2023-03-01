@@ -1,11 +1,11 @@
 import React from 'react';
-import { Trans, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import {
   useReferralHistoryQuery,
   useReferralRewardsQuery,
 } from '../../apis/referrals/api';
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import {
   CloneIcon,
   dark,
@@ -15,7 +15,7 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import GroupIcon from '@mui/icons-material/Group';
-import { GetWhatYouDeserveLabel, Hr, TotalBoxValue } from './styles';
+import { Hr } from './styles';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
@@ -26,7 +26,8 @@ import { generatePath } from 'react-router-dom';
 import { ROUTE_REFERRALS_INVITE } from '../../routes';
 import { TotalBox } from './atoms';
 import { ReferralHistory, ReferralRewards } from '../../apis/referrals/types';
-import ReferralsTable from './components/ReferralsTable';
+import ReferralTable from './components/ReferralTable';
+import ReferralRewardsList from './components/ReferralRewardsList';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -112,96 +113,7 @@ const Referrals: React.FC = () => {
 
             <Hr />
 
-            <Grid
-              container
-              sx={{
-                mt: 4,
-                mb: 4,
-              }}
-            >
-              <Grid item xs={12} md={8}>
-                <ZigTypography
-                  variant={'h2'}
-                  textAlign={'center'}
-                  sx={{ mt: 2, mb: 2.5 }}
-                >
-                  {t('what-you-get')}
-                </ZigTypography>
-                <Grid container>
-                  <Grid item xs={12} md={6}>
-                    <GetWhatYouDeserveLabel>
-                      <Trans
-                        i18nKey='referrals:invite-friends'
-                        t={t}
-                        values={{
-                          value: rewardsData.configuration.rewardSignupAmount,
-                          coin: rewardsData.configuration.rewardSignupSymbol,
-                          threshold:
-                            rewardsData.configuration.rewardMinDepositAmount,
-                        }}
-                      >
-                        <TotalBoxValue
-                          sx={{
-                            mt: 1.5,
-                            mb: 1.5,
-                          }}
-                        />
-                      </Trans>
-                    </GetWhatYouDeserveLabel>
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <GetWhatYouDeserveLabel>
-                      <Trans
-                        i18nKey='referrals:invite-traders'
-                        t={t}
-                        values={{
-                          value: rewardsData.configuration.zignalySuccessFee,
-                        }}
-                      >
-                        <TotalBoxValue
-                          sx={{
-                            mt: 1.5,
-                            mb: 1.5,
-                          }}
-                        />
-                      </Trans>
-                    </GetWhatYouDeserveLabel>
-                  </Grid>
-                </Grid>
-              </Grid>
-              <Grid item xs={12} md={4}>
-                <ZigTypography
-                  variant={'h2'}
-                  textAlign={'center'}
-                  sx={{ mt: 5, mb: 5 }}
-                >
-                  {t('what-they-get')}
-                </ZigTypography>
-                <Grid container>
-                  <Grid item xs={12} md={12}>
-                    <GetWhatYouDeserveLabel>
-                      <Trans
-                        i18nKey='referrals:they-get-rewards'
-                        t={t}
-                        values={{
-                          value: rewardsData.configuration.rewardSignupAmount,
-                          coin: rewardsData.configuration.rewardSignupSymbol,
-                          threshold:
-                            rewardsData.configuration.rewardMinDepositAmount,
-                        }}
-                      >
-                        <TotalBoxValue
-                          sx={{
-                            mt: 1.5,
-                            mb: 1.5,
-                          }}
-                        />
-                      </Trans>
-                    </GetWhatYouDeserveLabel>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
+            <ReferralRewardsList rewards={rewardsData} />
 
             <Hr />
 
@@ -231,7 +143,7 @@ const Referrals: React.FC = () => {
                 value={<ZigPriceLabel usd value={rewardsData.usdtPending} />}
               />
             </Box>
-            <ReferralsTable referrals={referrals.history} />
+            <ReferralTable referrals={referrals.history} />
           </>
         )}
       />

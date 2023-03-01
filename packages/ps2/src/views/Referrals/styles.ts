@@ -48,4 +48,5 @@ export const FilterWrapperContainer = styled(Grid)`
 export const GetWhatYouDeserveLabel = styled(ZigTypography)`
   display: block;
   text-align: center;
+  margin: 15px;
 `;
