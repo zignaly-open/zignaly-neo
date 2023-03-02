@@ -2,6 +2,7 @@ import { WalletType } from '@zignaly-open/raffles-shared/types';
 import { withFilter } from 'graphql-subscriptions';
 import { Op } from 'sequelize';
 import { getUserBalance, deposit } from '../balances/service';
+import { broadcastBalanceChange } from '../auctions/service';
 import pubsub from '../../pubsub';
 import redisService from '../../redisService';
 import { ContextUser, ResourceOptions, TransactionType } from '../../types';
@@ -261,15 +262,6 @@ export const generateService = (user: ContextUser) => {
       console.error('Error Confirm Email:');
       return false;
     }
-  };
-
-  const broadcastBalanceChange = async (balance: string, user: ContextUser) => {
-    pubsub.publish(BALANCE_CHANGED, {
-      balanceChanged: {
-        id: user.id,
-        balance,
-      },
-    });
   };
 
   const verifyEmail = async (userId: number, email: string) => {

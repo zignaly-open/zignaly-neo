@@ -152,7 +152,10 @@ const debounceBroadcastAuctionChange = _debounce(broadcastAuctionChange, 75, {
   maxWait: 200,
 });
 
-const broadcastBalanceChange = async (balance: string, user: ContextUser) => {
+export const broadcastBalanceChange = async (
+  balance: string,
+  user: ContextUser,
+) => {
   pubsub.publish(BALANCE_CHANGED, {
     balanceChanged: {
       id: user.id,
