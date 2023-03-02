@@ -37,6 +37,7 @@
     "notAuth-dropdown-link-settings": "Settings",
     "notAuth-dropdown-link-password": "Password",
     "notAuth-dropdown-link-2fa": "Two-Factor Authentication",
+    "referrals": "Referrals",
     "notAuth-button-logOut": "Logout"
   },
   "account-selector": {

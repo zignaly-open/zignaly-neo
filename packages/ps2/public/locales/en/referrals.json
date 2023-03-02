@@ -1,0 +1,42 @@
+{
+    "title": "Invite Friends & Traders and Earn!",
+    "description": "Get a percentage of the trading and success fees paid by your friends or from all the investors when you invite a trader to Zignaly",
+    "share-your-link": "Share your link:",
+    "what-you-get": "What you get",
+    "what-they-get": "What they get",
+    "invite-traders-for-percent": "Invite traders <0>{{value}}%</0> of all their investors' success fees",
+    "invite-friends-for-percent": "Invite friends <0>{{value}}%</0> of their success fees",
+    "invite-traders-for-percent-rebate": "Invite traders <0>{{value}}%</0> of all their investors' trading fees",
+    "invite-friends-for-percent-rebate": "Invite friends <0>{{value}}%</0> of their trading fees",
+    "invite-for-deposit": "Invite friends <0>{{value}} {{symbol}}</0> when they make a single deposit of ${{threshold}}+",
+    "invite-for-investment": "Invite friends <0>{{value}} {{symbol}}</0> when they make an investment of ${{threshold}}+",
+    "invite-for-investment-long": "Invite friends <0>{{value}} {{symbol}}</0> when they make an investment of ${{threshold}}+ for at least {{days}} days",
+    "invite-for-balance": "Invite friends <0>{{value}} {{symbol}}</0> when their balance reaches ${{threshold}}+",
+    "invite-for-signup": "Invite friends <0>{{value}} {{symbol}}</0> when they create an account",
+    "invite-friends": "Invite traders <0>{{value}}%</0> of their success fees",
+    "they-get-rewards": "Rewards of <0>${{value}}</0> in {{coin}} when they deposit ${{threshold}}",
+    "total-invitees": "Total Invitees",
+    "total-rewards": "Total Rewards",
+    "pending-rewards": "Pending Rewards",
+    "filter-any": "Any",
+    "table": {
+        "title": "Rewards history",
+        "no-referrals": "No referrals to show",
+        "time-and-date": "Time and date",
+        "user-trader": "User/Trader"
+    },
+    "statusTypes": {
+        "Completed": "Completed"
+    },
+    "rewardTypes": {
+        "SIGNUP_REWARD": "Signup reward",
+        "DEPOSIT_REWARD": "Deposit reward",
+        "ALLOCATE_REWARD": "Allocate reward",
+        "SUCCESS_FEE_REWARD": "Success fee reward",
+        "REBATE_COMMISSION_REWARD": "Rebate commission reward"
+    },
+    "header": {
+        "title": "Earn $10 + 20%",
+        "description": "Invite friends"
+    }
+}

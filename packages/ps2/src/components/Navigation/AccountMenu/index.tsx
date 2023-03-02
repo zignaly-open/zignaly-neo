@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import {
   LoginButton,
   AccountDropdown,
@@ -28,6 +29,7 @@ import {
   ROUTE_SIGNUP,
   ROUTE_MY_BALANCES,
   ROUTE_WALLET,
+  ROUTE_REFERRALS,
 } from '../../../routes';
 import { generatePath, Link, useLocation, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
@@ -153,6 +155,18 @@ function AccountMenu(): React.ReactElement | null {
               onClick: () => showModal(Enable2FAModal),
             },
           ],
+        },
+        {
+          separator: true,
+          label: (
+            <>
+              <CardGiftcardIcon />
+              {t('account-menu.referrals')}
+            </>
+          ),
+          id: 'account-menu-dropdown__referrals',
+          href: generatePath(ROUTE_REFERRALS),
+          onClick: () => navigate(ROUTE_REFERRALS),
         },
         {
           separator: true,

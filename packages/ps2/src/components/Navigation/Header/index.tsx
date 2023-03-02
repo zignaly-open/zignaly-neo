@@ -14,6 +14,7 @@ import {
 import { Link } from 'react-router-dom';
 import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
 import AccountMenu from '../AccountMenu';
+import ReferralButton from '../ReferralButton';
 
 const Header: React.FC = () => {
   const { t } = useTranslation('common');
@@ -46,7 +47,10 @@ const Header: React.FC = () => {
         </HeaderLinksContainer>,
         <ExtraNavigationDropdown key={'extra-nav'} />,
       ]}
-      rightElements={[<AccountMenu key={'account'} />]}
+      rightElements={[
+        <ReferralButton key={'referral'} />,
+        <AccountMenu key={'account'} />,
+      ]}
     />
   );
 };
