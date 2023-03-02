@@ -61,7 +61,6 @@ const InvestButton: React.FC<{
       if (showDeposit)
         showModal(ChooseDepositTypeModal, {
           selectedCoin: service.ssc,
-          ctaId,
         });
       else showModal(InvestModal, { ctaId });
     } else {

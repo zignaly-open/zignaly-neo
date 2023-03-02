@@ -9,11 +9,9 @@ import { ChooseDepositTypeViews } from './types';
 function ChooseDepositTypeModal({
   close,
   selectedCoin,
-  ctaId,
   ...props
 }: {
   close: () => void;
-  ctaId: string;
   selectedCoin: string;
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation(['purchase-deposit-crypto', 'deposit-crypto']);
