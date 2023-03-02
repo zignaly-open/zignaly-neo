@@ -15,7 +15,7 @@
 		"description": "Algo ha ido mal. Por favor vuelve a intentarlo más tarde o ponte en contacto con el servicio de soporte. O abandone la sociedad industrial y construya una cabaña en el bosque."
 	},
 	"main-menu": {
-		"dropdown-link-forTrading": "Para Servicios de Trading",
+		"dropdown-link-forTrading": "Gestione sus Servicios",
 		"dropdown-link-helpDocs": "Documentos de Ayuda"
 	},
 	"account-menu": {
@@ -34,7 +34,8 @@
 		}
 	},
 	"navigation-menu": {
-		"profit-sharing": "Profit Sharing"
+		"profit-sharing": "Examinar los mejores comerciantes",
+		"become-trader": "Ofrezca sus servicios de trading"
 	},
 	"amount": "Cantidad",
 	"new-version": "Nueva versión, haz clic para actualizar",
@@ -44,9 +45,12 @@
 		"negative-amount": "Debe ser >= 0",
 		"invalid-amount": "Debe indicar una cantidad",
 		"negative-zeroable-amount": "Debe ser > 0",
-		"max-decimals": "Por favor ingrese números que no tengan más de {{maxDecimals}} decimales.",
+		"max-decimals": "Por favor ingrese números que no tengan más de 8 decimales.",
 		"max-allowed-length": "Debe ser inferior a {{ maxLength }} caracteres",
-		"min-amount": "La cantidad mínima es {{amount}} {{coin}}."
+		"min-amount": "La cantidad mínima es {{amount}} {{coin}}.",
+		"insufficient-amount-min": "Cantidad mínima: {{ minValue }} {{ minValueCoin }}",
+		"invalid-characters": "Caracteres inválidos",
+		"letter-number": "Debe contener al menos una letra o un número"
 	},
 	"back": "Volver",
 	"close": "Cerrar",
