@@ -47,6 +47,7 @@ const SignupForm: React.FC = () => {
     signup({
       ...payload,
       ref: Cookies.get('ref'),
+      subtrack: Cookies.get('subtrack'),
     });
   };
 
