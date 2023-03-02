@@ -22,8 +22,7 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
     formState: { errors, isValid },
     setError,
   } = useForm<UpdatePasswordFormType>({
-    mode: 'onTouched',
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
     resolver: yupResolver(UpdatePasswordValidation),
   });
   const [updatePassword, updatePasswordStatus] = useUpdatePasswordMutation();

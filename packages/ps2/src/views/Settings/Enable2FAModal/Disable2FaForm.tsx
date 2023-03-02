@@ -26,8 +26,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
     formState: { errors, isValid },
     setError,
   } = useForm<TwoFAFormType>({
-    mode: 'onTouched',
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
     resolver: yupResolver(TwoFAValidation),
   });
   const [disable2FA, disable2FAStatus] = useDisable2FAMutation();
@@ -59,6 +58,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
           {t('disable-2fa.description')}
         </ZigTypography>
       </Box>
+      <ErrorMessage text={t('disable-2fa.security')} />
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name='code'
@@ -73,7 +73,6 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
             />
           )}
         />
-        <ErrorMessage text={t('disable-2fa.security')} />
 
         <ModalActionsNew align='right'>
           <ZigButton
