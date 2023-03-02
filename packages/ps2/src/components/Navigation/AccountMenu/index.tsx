@@ -33,6 +33,9 @@ import {
 } from '../../../routes';
 import { generatePath, Link, useLocation, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
+import { useZModal } from 'components/ZModal/use';
+import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
+import Enable2FAModal from 'views/Settings/Enable2FAModal';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme();
@@ -44,6 +47,7 @@ function AccountMenu(): React.ReactElement | null {
   const { exchanges } = useCurrentUser();
   const selectExchange = useSelectExchange();
   const location = useLocation();
+  const { showModal } = useZModal();
 
   const setActiveExchange = (exchangeInternalId: string) => {
     selectExchange(exchangeInternalId);
@@ -52,12 +56,6 @@ function AccountMenu(): React.ReactElement | null {
   if (!isAuthenticated) {
     return (
       <>
-        <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>
-          <Button
-            id={'menu__signup'}
-            caption={t('account-menu.isAuth-button-signUp')}
-          />
-        </Link>
         <Link to={ROUTE_LOGIN} state={{ redirectTo: location }}>
           <LoginButton id={'menu__login'}>
             <UserIcon
@@ -69,6 +67,12 @@ function AccountMenu(): React.ReactElement | null {
               {t('account-menu.isAuth-button-logIn')}
             </Typography>
           </LoginButton>
+        </Link>
+        <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>
+          <Button
+            id={'menu__signup'}
+            caption={t('account-menu.isAuth-button-signUp')}
+          />
         </Link>
       </>
     );
@@ -135,6 +139,22 @@ function AccountMenu(): React.ReactElement | null {
           id: 'account-menu-dropdown__wallet',
           href: generatePath(ROUTE_WALLET),
           onClick: () => navigate(ROUTE_WALLET),
+        },
+        {
+          id: 'account-menu-dropdown__settings',
+          label: t('account-menu.notAuth-dropdown-link-settings'),
+          children: [
+            {
+              id: `menu-dropdown-settings__password}`,
+              label: t('account-menu.notAuth-dropdown-link-password'),
+              onClick: () => showModal(UpdatePasswordModal),
+            },
+            {
+              id: `menu-dropdown-settings__password}`,
+              label: t('account-menu.notAuth-dropdown-link-2fa'),
+              onClick: () => showModal(Enable2FAModal),
+            },
+          ],
         },
         {
           separator: true,

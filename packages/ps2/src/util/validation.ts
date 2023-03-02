@@ -23,6 +23,7 @@ export const decimalsValidation = (maxDecimals: number) =>
 export const decimalsValidationNumber = (maxDecimals: number) =>
   yup
     .number()
+    .typeError('common:validation.invalid-value')
     .test('int', 'common:validation.max-decimals', (val) =>
       checkDecimals(val, maxDecimals),
     );
@@ -62,6 +63,25 @@ const inputAmountNumberValidationMaxToken = inputAmountNumberValidationGt0.test(
     return !currentValue.isGreaterThan(tokenBalance);
   },
 );
+
+export const inputAmountMinOwnerInvested = (minInvestedAmount: number) =>
+  yup
+    .string()
+    .test(
+      'number',
+      'common:validation.min-invest-amount-for-owner',
+      function (val) {
+        const tokenBalance = new BigNumber(this.parent?.token?.balance);
+        const currentValue = new BigNumber(val);
+        const minBalance = new BigNumber(minInvestedAmount);
+        return tokenBalance.minus(currentValue).isGreaterThan(minBalance);
+      },
+    );
+
+export const inputAmountMinOwnerInvestedValidation = (minAmount: number) =>
+  yup.object().shape({
+    value: inputAmountMinOwnerInvested(minAmount),
+  });
 
 const inputAmountNumberValidationMinToken = inputAmountNumberValidationGt0.test(
   'number',

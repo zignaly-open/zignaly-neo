@@ -86,7 +86,7 @@ function InputAmount({
           name,
           value?.token.balance
             ?.toString()
-            .replace(/([^1-9])0+$/, "$1")
+            .replace(/(\.[\d]*[^1-9])0+$/, "$1")
             .replace(/\.0*$/, ""),
         ),
       );

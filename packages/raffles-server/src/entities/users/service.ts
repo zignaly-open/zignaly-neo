@@ -7,7 +7,7 @@ import redisService from '../../redisService';
 import { ContextUser, ResourceOptions, TransactionType } from '../../types';
 import { checkAdmin } from '../../util/admin';
 import { getUserIdFromToken } from '../../util/jwt';
-import { BALANCE_CHANGED, EMAIL_REWARD } from './constants';
+import { BALANCE_CHANGED, EMAIL_REWARD, EMAIL_CHANGED } from './constants';
 import { User } from './model';
 import {
   authenticateSignature,
@@ -17,6 +17,8 @@ import {
   sendEmailVerification,
   isEmailConfirmed,
   deleteContact,
+  generateJwtToken,
+  verifyJwtToken,
 } from './util';
 
 const generateNonceSignMessage = (nonce: string | number) =>
@@ -32,6 +34,12 @@ export const getUserBalanceObject = async (
     balance: currentBalance,
   };
 };
+
+export const subscribeEmailChanged = withFilter(
+  () => pubsub.asyncIterator([EMAIL_CHANGED]),
+  (payload, variables) =>
+    getUserIdFromToken(variables.token) === payload.emailChanged.id,
+);
 
 export const subscribeBalanceChanged = withFilter(
   () => pubsub.asyncIterator([BALANCE_CHANGED]),
@@ -116,12 +124,27 @@ export const generateService = (user: ContextUser) => {
   };
 
   const rewardUser = async (user: User) => {
+    if (user.zhitRewarded) {
+      return;
+    }
     await deposit({
       walletAddress: user.publicAddress,
       amount: EMAIL_REWARD,
       blockchain: '',
       note: '',
       transactionType: TransactionType.Reward,
+    });
+  };
+
+  const broadcastEmailChange = async (userId: number) => {
+    const user = await User.findByPk(userId);
+    pubsub.publish(EMAIL_CHANGED, {
+      emailChanged: {
+        id: user.id,
+        emailVerified: user.emailVerified,
+        emailVerificationSent: user.emailVerificationSent,
+        zhitRewared: user.zhitRewarded,
+      },
     });
   };
 
@@ -158,6 +181,7 @@ export const generateService = (user: ContextUser) => {
     userInstance.discordName = discordName;
     await userInstance.save();
     await redisService.updateRedisUsernameCache(user.id);
+    await broadcastEmailChange(user.id);
     return userInstance.toJSON();
   };
 
@@ -188,26 +212,16 @@ export const generateService = (user: ContextUser) => {
     }
   };
 
-  const confirmEmail = async (userId: number) => {
+  const confirmEmail = async (hashStr: string) => {
     try {
-      const user = await User.findByPk(userId);
-      if (await isEmailConfirmed(user.email)) {
-        await User.update(
-          {
-            emailVerified: true,
-          },
-          {
-            where: {
-              id: userId,
-            },
-          },
-        );
+      const { userId, email } = verifyJwtToken(hashStr);
 
-        if (!user.zhitRewarded) {
-          await rewardUser(user);
+      if (userId) {
+        const user = await User.findByPk(userId);
+        if (await isEmailConfirmed(email)) {
           await User.update(
             {
-              zhitRewarded: true,
+              emailVerified: true,
             },
             {
               where: {
@@ -215,25 +229,61 @@ export const generateService = (user: ContextUser) => {
               },
             },
           );
+
+          if (!user.zhitRewarded) {
+            await rewardUser(user);
+            await User.update(
+              {
+                zhitRewarded: true,
+              },
+              {
+                where: {
+                  id: user.id,
+                },
+              },
+            );
+          }
+          const balance = await getUserBalance(user.publicAddress);
+          broadcastBalanceChange(balance, user);
+          if (user.previousEmail) {
+            await deleteContact(user.previousEmail);
+          }
+          return true;
+        } else {
+          return false;
         }
-        return true;
       }
     } catch (e) {
-      console.error(e);
+      console.error('Error Confirm Email:', e);
       return false;
     }
+  };
+
+  const broadcastBalanceChange = async (balance: string, user: ContextUser) => {
+    pubsub.publish(BALANCE_CHANGED, {
+      balanceChanged: {
+        id: user.id,
+        balance,
+      },
+    });
   };
 
   const verifyEmail = async (userId: number, email: string) => {
     try {
       const user = await User.findByPk(userId);
-      await deleteContact(user.email);
-      await sendEmailVerification(`${userId}`, email);
+      const hashWithExpiration = generateJwtToken(
+        userId,
+        email,
+        process.env.HASH_SECRET,
+      );
+      await sendEmailVerification(`${userId}`, email, hashWithExpiration);
       User.update(
         {
-          email,
+          emailValidationHash: hashWithExpiration,
           emailVerificationSent: true,
           emailVerified: false,
+          email: email,
+          previousEmail: user.email,
         },
         {
           where: {
