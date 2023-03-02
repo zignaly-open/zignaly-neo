@@ -20,24 +20,28 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
   const statusOptions = useMemo(
     () => [
       { label: t('filter-any'), value: null },
-      ...Object.values(StatusType).map((v) => ({
-        label: t(`statusTypes.${v}`),
-        value: v,
-      })),
+      ...Object.entries(StatusType)
+        .map(([k, v]) => ({
+          label: t(`statusTypes.${k}`),
+          value: v,
+        }))
+        .filter(({ value }) => referrals.some((r) => r.status === value)),
     ],
-    [t],
+    [t, referrals],
   );
 
   const [rewardType, setRewardType] = useState<RewardType>(null as RewardType);
   const rewardTypeOptions = useMemo(
     () => [
       { label: t('filter-any'), value: null },
-      ...Object.values(RewardType).map((v) => ({
-        label: t(`rewardTypes.${v}`),
-        value: v,
-      })),
+      ...Object.values(RewardType)
+        .map((v) => ({
+          label: t(`rewardTypes.${v}`),
+          value: v,
+        }))
+        .filter(({ value }) => referrals.some((r) => r.type === value)),
     ],
-    [t],
+    [t, referrals],
   );
 
   const columnHelper = createColumnHelper<ReferralHistoryEntry>();

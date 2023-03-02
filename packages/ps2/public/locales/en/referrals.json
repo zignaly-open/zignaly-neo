@@ -26,7 +26,13 @@
         "user-trader": "User/Trader"
     },
     "statusTypes": {
-        "Completed": "Completed"
+        "Completed": "Completed",
+        "Pending": "Pending",
+        "Locked": "Locked",
+        "TransferPending": "Transfer pending",
+        "TransferOrdered": "Transfer ordered",
+        "Cancelled": "Cancelled",
+        "Failed": "Failed"
     },
     "rewardTypes": {
         "SIGNUP_REWARD": "Signup reward",

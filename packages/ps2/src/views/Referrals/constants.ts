@@ -8,4 +8,10 @@ export enum RewardType {
 
 export enum StatusType {
   Completed = 'Completed',
+  Pending = 'Pending',
+  Locked = 'Locked',
+  TransferPending = 'Transfer pending',
+  TransferOrdered = 'Transfer ordered',
+  Cancelled = 'Cancelled',
+  Failed = 'Failed',
 }
