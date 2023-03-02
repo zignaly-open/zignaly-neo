@@ -21,6 +21,9 @@ export const TotalBoxBox = styled(Paper)`
 
 export const TotalBoxValue = styled(ZigTypography)`
   display: block;
+  text-align: center;
+  margin-top: 12px;
+  margin-bottom: 12px;
 
   &,
   span {
