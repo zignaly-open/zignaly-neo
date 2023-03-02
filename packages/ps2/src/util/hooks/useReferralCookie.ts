@@ -10,7 +10,10 @@ const useReferralCookie = () => {
     const ref = params.get('invite');
     const subtrack = params.get('subtrack');
     if (ref) {
-      Cookies.set('ref', subtrack ? `${ref}:${subtrack}` : ref);
+      Cookies.set('ref', ref);
+      if (subtrack) {
+        Cookies.set('subtrack', subtrack);
+      }
     }
   }, []);
 };
