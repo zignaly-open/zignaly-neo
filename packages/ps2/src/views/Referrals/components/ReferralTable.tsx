@@ -119,14 +119,14 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
             onChange={setStatus}
             value={status}
             small
-            label={'eee'}
+            label={t('table.filter-status')}
             options={statusOptions}
           />
           <ZigSelect
             onChange={setRewardType}
             value={rewardType}
             small
-            label={'ee'}
+            label={t('table.filter-type')}
             options={rewardTypeOptions}
           />
         </FilterWrapperContainer>

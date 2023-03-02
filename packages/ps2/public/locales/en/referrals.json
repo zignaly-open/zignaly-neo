@@ -23,7 +23,9 @@
         "title": "Rewards history",
         "no-referrals": "No referrals to show",
         "time-and-date": "Time and date",
-        "user-trader": "User/Trader"
+        "user-trader": "User/Trader",
+        "filter-status": "Status",
+        "filter-type": "Type"
     },
     "statusTypes": {
         "Completed": "Completed",
