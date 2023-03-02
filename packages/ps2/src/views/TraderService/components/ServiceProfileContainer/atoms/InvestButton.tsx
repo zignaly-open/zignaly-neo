@@ -24,7 +24,13 @@ const InvestButton: React.FC<{
   ctaId?: string;
   showMultipleAccountButton?: boolean;
 }> = ({ id, service, ctaId, showMultipleAccountButton }) => {
-  const { t } = useTranslation('service');
+  const { t } = useTranslation([
+    'service',
+    // we need these two otherwise a Suspense will trigger when we load the other ns
+    // and the page will scroll to top
+    'purchase-deposit-crypto',
+    'deposit-crypto',
+  ]);
   const isAuthenticated = useIsAuthenticated();
   const { showModal } = useZModal({ disableAutoDestroy: true });
   const selectInvestment = useSetSelectedInvestment();
