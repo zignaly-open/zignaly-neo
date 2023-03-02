@@ -179,6 +179,7 @@ export async function deleteContact(email: string) {
     }
   } catch (error) {
     console.log('error deleting contact', email);
+    return true;
   }
 }
 
@@ -197,13 +198,17 @@ export const generateJwtToken = (
   });
 };
 
-export const verifyJwtToken = (token: string) => {
+export const verifyJwtToken = async (token: string) => {
   try {
     const decodedPayload = jwt.verify(token, process.env.HASH_SECRET, {
       algorithms: ['HS256'],
       clockTimestamp: Math.floor(Date.now() / 1000),
     }) as TokenPayload;
     const { userId, email } = decodedPayload;
+    const user = await User.findOne({ where: { id: userId } });
+    if (email !== user.email) {
+      console.log('Email does not match', email, user.email);
+    }
     return {
       userId,
       email,

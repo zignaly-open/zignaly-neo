@@ -14,12 +14,13 @@ import {
   GET_CURRENT_USER,
   GET_CURRENT_USER_BALANCE,
 } from 'queries/users';
+import { useEthers } from '@usedapp/core';
 import { Send } from '@mui/icons-material';
 import { Controller, useForm } from 'react-hook-form';
 import { Form, Gap } from './styles';
 import { EmailValidation } from 'util/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import useConfirmEmail from 'hooks/useConfirmEmail';
 import useCurrentUser, { useEmailSubscription } from 'hooks/useCurrentUser';
 
@@ -29,6 +30,7 @@ const StyledSendIcon = styled(Send)`
 
 const VerifyReward: React.FC = () => {
   const { t } = useTranslation('global');
+  const navigate = useNavigate();
   const { user: currentUser } = useCurrentUser();
   useEmailSubscription();
 
@@ -43,8 +45,11 @@ const VerifyReward: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [verificationMessage, setVerificationMessage] = useState('');
   const [emailSent, setEmailSent] = useState(false);
+  const [emailVerified, setEmailVerified] = useState(false);
+  const [zhitRewarded, setZhitRewarded] = useState(false);
   const [searchParams] = useSearchParams();
   const [isInvalidLink, setIsInvalidLink] = useState(false);
+  const { account } = useEthers();
 
   const handleVerifyEmail = async (email: string) => {
     await verifyEmail({
@@ -63,6 +68,8 @@ const VerifyReward: React.FC = () => {
           result === 'email-confirmed'
         ) {
           setVerificationMessage(t('email-confirmed'));
+          setEmailVerified(true);
+          navigate('/?confirmed=true');
         } else {
           if (result === 'confirmation-link-invalid') {
             setIsInvalidLink(true);
@@ -71,7 +78,19 @@ const VerifyReward: React.FC = () => {
         }
       });
     }
+    if (currentUser) {
+      setEmailVerified(currentUser.emailVerified);
+      setZhitRewarded(currentUser.zhitRewarded);
+    }
   }, [currentUser]);
+
+  useEffect(() => {
+    const confirmed = searchParams.get('confirmed');
+    if (confirmed) {
+      setVerificationMessage(t('email-confirmed'));
+      setEmailVerified(true);
+    }
+  }, [searchParams]);
 
   const {
     handleSubmit,
@@ -94,11 +113,11 @@ const VerifyReward: React.FC = () => {
     }
   };
 
-  return currentUser && currentUser.emailVerified && !isInvalidLink ? (
+  return (emailVerified && !isInvalidLink) || emailSent ? (
     <ZigTypography variant='h2' color='neutral400'>
       {loading ? 'loading' : verificationMessage}
     </ZigTypography>
-  ) : currentUser && !currentUser.emailVerified && !emailSent ? (
+  ) : account && !emailVerified ? (
     <>
       <ZigTypography variant='h2' color='red'>
         {isInvalidLink ? t('confirmation-link-invalid') : ''}
@@ -106,9 +125,7 @@ const VerifyReward: React.FC = () => {
       <Box display='flex' flexDirection='row'>
         <Form onSubmit={handleSubmit(submit)}>
           <ZigTypography variant='h2' color='neutral400'>
-            {!currentUser.zhitRewarded
-              ? t('verify-email-and-earn')
-              : t('verify-email')}
+            {!zhitRewarded ? t('verify-email-and-earn') : t('verify-email')}
           </ZigTypography>
           <Box display='flex' flexDirection='row'>
             <Controller
