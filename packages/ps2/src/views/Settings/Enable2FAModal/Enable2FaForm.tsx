@@ -31,8 +31,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
     formState: { errors, isValid },
     setError,
   } = useForm<TwoFAFormType>({
-    mode: 'onTouched',
-    reValidateMode: 'onBlur',
+    mode: 'onChange',
     resolver: yupResolver(TwoFAValidation),
   });
   const [load2FAInfo, load2FAInfoResult] = useLazyEnable2FAInfoQuery();
