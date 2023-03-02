@@ -13,8 +13,6 @@
     "invite-for-investment-long": "Invite friends <0>{{value}} {{symbol}}</0> when they make an investment of ${{threshold}}+ for at least {{days}} days",
     "invite-for-balance": "Invite friends <0>{{value}} {{symbol}}</0> when their balance reaches ${{threshold}}+",
     "invite-for-signup": "Invite friends <0>{{value}} {{symbol}}</0> when they create an account",
-
-
     "invite-friends": "Invite traders <0>{{value}}%</0> of their success fees",
     "they-get-rewards": "Rewards of <0>${{value}}</0> in {{coin}} when they deposit ${{threshold}}",
     "total-invitees": "Total Invitees",
@@ -36,5 +34,9 @@
         "ALLOCATE_REWARD": "Allocate reward",
         "SUCCESS_FEE_REWARD": "Success fee reward",
         "REBATE_COMMISSION_REWARD": "Rebate commission reward"
+    },
+    "header": {
+        "title": "Earn $10 + 20%",
+        "description": "Invite friends"
     }
 }

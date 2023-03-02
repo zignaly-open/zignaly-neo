@@ -130,7 +130,6 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
       sx={{
         mt: 4,
         mb: 4,
-        justifyContent: 'center',
       }}
     >
       <Grid item xs={12} md={12}>
@@ -142,7 +141,12 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           {t('what-you-get')}
         </ZigTypography>
 
-        <Grid container>
+        <Grid
+          container
+          sx={{
+            justifyContent: 'center',
+          }}
+        >
           {elements.map((x) => (
             <Grid key={Math.random()} item xs={12} md={4}>
               <GetWhatYouDeserveLabel>{x}</GetWhatYouDeserveLabel>
