@@ -8,7 +8,6 @@ export const Hr = styled('hr')`
 `;
 
 export const TotalBoxBox = styled(Paper)`
-  border: 1px solid ${({ theme }) => theme.palette.neutral600};
   width: 200px;
   min-height: 120px;
   margin: 16px;
