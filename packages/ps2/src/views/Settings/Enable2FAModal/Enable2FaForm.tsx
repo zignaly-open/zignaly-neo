@@ -165,6 +165,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
           loading={load2FAInfoResult.isLoading || load2FAInfoResult.isFetching}
           variant='contained'
           size='large'
+          id='enable-2fa__setup'
         >
           {t('enable-2fa.setup-2fa')}
         </ZigButton>

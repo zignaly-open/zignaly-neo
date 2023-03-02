@@ -143,12 +143,12 @@ function AccountMenu(): React.ReactElement | null {
           label: t('account-menu.notAuth-dropdown-link-settings'),
           children: [
             {
-              id: `menu-dropdown-settings__password}`,
+              id: `menu-dropdown-settings__password`,
               label: t('account-menu.notAuth-dropdown-link-password'),
               onClick: () => showModal(UpdatePasswordModal),
             },
             {
-              id: `menu-dropdown-settings__password}`,
+              id: `menu-dropdown-settings__2fa`,
               label: t('account-menu.notAuth-dropdown-link-2fa'),
               onClick: () => showModal(Enable2FAModal),
             },
