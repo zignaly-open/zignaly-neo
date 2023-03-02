@@ -41,12 +41,10 @@
 	"loading-arialLabel": "Carregamento gerenciamento",
 	"standbyFunds": "Fundos Standby",
 	"standbyFunds-desc": "Fundos disponíveis para retornar aos investidores que desejam retirar",
-	"instantWithdrawn": "Fundos de Retirada Instantânea:",
 	"availableWithdrawals": "Disponível para retiradas:",
-	"heldInstantWithdrawals": "Retido para retiradas instantâneas:",
 	"api-keys": {
 		"title": "Faz trade com API",
-		"description": "Crie as chaves da API Binance para o seu serviço de Profit Sharing e conecte-as à sua ferramenta ou aplicativo favorito. Você também pode conectar essas chaves de API ao nosso aplicativo de trading Zignaly em <0>zignaly.com<\/0>.",
+		"description": "Crie as chaves da API Binance para o seu serviço de Profit Sharing e conecte-as à sua ferramenta ou aplicativo favorito. Você também pode conectar essas chaves de API ao nosso aplicativo de trading Zignaly em <0>trading.zignaly.com<\/0>.",
 		"create-key": "Criar Chave API",
 		"no-keys": "Sem Chaves API",
 		"no-keys-description": "Ainda não criou nenhuma chave API",
