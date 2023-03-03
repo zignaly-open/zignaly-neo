@@ -156,7 +156,12 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
       </Box>
 
       <ModalActionsNew align='right'>
-        <ZigButton onClick={close} variant='outlined' size='large'>
+        <ZigButton
+          onClick={close}
+          variant='outlined'
+          size='large'
+          id='enable-2fa__setup-cancel'
+        >
           {t('action:cancel')}
         </ZigButton>
         <ZigButton
