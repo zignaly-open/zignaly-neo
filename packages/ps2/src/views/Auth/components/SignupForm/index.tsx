@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
@@ -43,19 +43,11 @@ const SignupForm: React.FC = () => {
 
   const { state: locationState } = useLocation();
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const ref = params.get('invite');
-    const subtrack = params.get('subtrack');
-    if (ref) {
-      Cookies.set('ref', subtrack ? `${ref}:${subtrack}` : ref);
-    }
-  }, []);
-
   const onSubmit = (payload: LoginPayload) => {
     signup({
       ...payload,
       ref: Cookies.get('ref'),
+      subtrack: Cookies.get('subtrack'),
     });
   };
 
