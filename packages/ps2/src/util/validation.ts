@@ -73,7 +73,9 @@ export const inputAmountMinOwnerInvested = (minInvestedAmount: number) =>
         const tokenBalance = new BigNumber(this.parent?.token?.balance);
         const currentValue = new BigNumber(val);
         const minBalance = new BigNumber(minInvestedAmount);
-        return tokenBalance.minus(currentValue).isGreaterThan(minBalance);
+        return tokenBalance
+          .minus(currentValue)
+          .isGreaterThanOrEqualTo(minBalance);
       },
     );
 
