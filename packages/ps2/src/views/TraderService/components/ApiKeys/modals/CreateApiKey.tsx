@@ -86,7 +86,7 @@ function CreateApiKeysModal({
             type='submit'
             size={'large'}
           >
-            {t('action:continue')}
+            {t('api-keys.create-key')}
           </ZigButton>
         </Box>
       </form>
