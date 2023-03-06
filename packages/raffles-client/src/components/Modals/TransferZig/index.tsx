@@ -58,7 +58,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
   const watchAmount = watch('amount');
   const handleTransfer: SubmitHandler<ITransferField> = async ({ amount }) => {
     await transfer(amount.value);
-    reset({ isDirty: false });
+    reset();
   };
 
   if (!chainId) {
