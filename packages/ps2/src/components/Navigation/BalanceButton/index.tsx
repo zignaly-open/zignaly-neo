@@ -70,10 +70,8 @@ const BalanceButton = () => {
       <Paper
         sx={{
           cursor: 'pointer',
-          pl: 1,
-          pr: 1,
-          pt: 0.5,
-          pb: 0.5,
+          px: 1,
+          py: 0.25,
           display: 'flex',
           flexDirection: 'row',
           alignItems: 'center',
