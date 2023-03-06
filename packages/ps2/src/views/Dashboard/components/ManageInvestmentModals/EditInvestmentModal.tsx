@@ -26,9 +26,7 @@ function EditInvestmentModal({
   const { isLoading: isLoadingInvestment } = useInvestmentDetails(
     service.serviceId,
   );
-  const { isLoading: isLoadingService } = useServiceDetails(service.serviceId, {
-    refetchOnMountOrArgChange: true,
-  });
+  const { isLoading: isLoadingService } = useServiceDetails(service.serviceId);
   const { isLoading: isLoadingCoins } = useCoinBalances();
 
   const [view, setView] = useState<EditInvestmentViews>(
