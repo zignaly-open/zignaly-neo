@@ -73,7 +73,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
         </Box>
         <QRCode aria-labelledby='QR Code' src={load2FAInfoResult.data[1]} />
 
-        <ZigTypography color='yellow' my={3} variant='body2'>
+        <ZigTypography color='yellow' my={3}>
           {t('enable-2fa.key-phrase-info')}
         </ZigTypography>
         <ZigInput

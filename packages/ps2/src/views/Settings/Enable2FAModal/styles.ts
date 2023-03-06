@@ -12,4 +12,7 @@ export const QRCode = styled('img')`
   width: 192px;
   height: 192px;
   margin: 0 auto;
+  border-radius: 8px;
+  background: white;
+  padding: 8px;
 `;
