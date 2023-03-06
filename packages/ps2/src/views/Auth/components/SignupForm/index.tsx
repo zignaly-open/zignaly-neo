@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
@@ -10,16 +10,15 @@ import { ROUTE_LOGIN } from '../../../../routes';
 import {
   Button,
   ErrorMessage,
-  IconButton,
   TextButton,
   Typography,
   ZigInput,
 } from '@zignaly-open/ui';
-import { Box, InputAdornment, Link } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
+import { Box, Link } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
 import Cookies from 'js-cookie';
 import Mailcheck from 'react-mailcheck';
+import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
 
 const SignupForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -43,19 +42,11 @@ const SignupForm: React.FC = () => {
 
   const { state: locationState } = useLocation();
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const ref = params.get('invite');
-    const subtrack = params.get('subtrack');
-    if (ref) {
-      Cookies.set('ref', subtrack ? `${ref}:${subtrack}` : ref);
-    }
-  }, []);
-
   const onSubmit = (payload: LoginPayload) => {
     signup({
       ...payload,
       ref: Cookies.get('ref'),
+      subtrack: Cookies.get('subtrack'),
     });
   };
 
@@ -126,20 +117,10 @@ const SignupForm: React.FC = () => {
               type={showPassword ? 'text' : 'password'}
               InputProps={{
                 endAdornment: (
-                  <InputAdornment position='end'>
-                    <IconButton
-                      aria-label='Toggle password visibility'
-                      onClick={() => setShowPassword(!showPassword)}
-                      icon={
-                        showPassword ? (
-                          <Visibility sx={{ color: 'neutral200' }} />
-                        ) : (
-                          <VisibilityOff sx={{ color: 'neutral200' }} />
-                        )
-                      }
-                      variant='flat'
-                    />
-                  </InputAdornment>
+                  <PasswordVisibilityAdornment
+                    show={showPassword}
+                    onToggle={() => setShowPassword(!showPassword)}
+                  />
                 ),
               }}
               {...field}

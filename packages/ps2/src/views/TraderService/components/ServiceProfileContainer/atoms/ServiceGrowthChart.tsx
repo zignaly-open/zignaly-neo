@@ -181,6 +181,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   label: t(`periods.${v}`),
                   extraProps: {
                     size: 'small',
+                    disabled: isDisabled,
                     tooltip: isDisabled
                       ? t('service:not-enough-data')
                       : t(`periods.${v}-full`),

@@ -44,6 +44,10 @@ export const trackNewSession = (
         },
       },
     );
+    // Manually call customer.io identify due to in-app plugin not loaded if using the library from segment
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    _cio?.identify({ email, id: userId, name: firstName });
     Sentry.setUser({ email, id: userId });
     if (eventType === SessionsTypes.Signup) {
       analytics?.track('newUser', { userId });

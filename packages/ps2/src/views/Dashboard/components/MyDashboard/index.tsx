@@ -23,6 +23,7 @@ import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import { useZModal } from '../../../../components/ZModal/use';
+import { differenceInDays } from 'date-fns';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -41,6 +42,9 @@ const MyDashboard: React.FC = () => {
       ctaId: 'edit-investment-dashboard',
     });
   };
+
+  const calculateServiceAge = (createdAt: string) =>
+    differenceInDays(new Date(), new Date(createdAt)).toString();
 
   const columnHelper = createColumnHelper<Investment>();
   const columns = useMemo(
@@ -138,7 +142,10 @@ const MyDashboard: React.FC = () => {
             type='default'
             normalized
             value={getValue()}
-            label={formatDateFromDays(original.periodsLc)}
+            label={formatDateFromDays(calculateServiceAge(original.createdAt))}
+            labelTooltip={t('tooltip-date', {
+              date: new Date(original.createdAt).toLocaleDateString(),
+            })}
           />
         ),
         sortingFn: 'alphanumeric',
