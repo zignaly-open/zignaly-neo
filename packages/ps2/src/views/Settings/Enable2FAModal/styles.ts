@@ -9,10 +9,10 @@ export const Form = styled('form')`
 `;
 
 export const QRCode = styled('img')`
-  width: 192px;
-  height: 192px;
+  width: 190px;
+  height: 190px;
   margin: 0 auto;
   border-radius: 8px;
   background: white;
-  padding: 8px;
+  padding: 10px;
 `;
