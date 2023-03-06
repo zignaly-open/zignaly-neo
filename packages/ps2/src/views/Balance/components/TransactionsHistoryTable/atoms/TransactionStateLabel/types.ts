@@ -5,6 +5,7 @@ export const transactionStateName: {
   [key in TransactionStateType]: string;
 } = {
   [TransactionStateType.COMPLETED]: 'status.completed',
+  [TransactionStateType.SENT]: 'status.completed',
   [TransactionStateType.PENDING]: 'status.pending',
   [TransactionStateType.ERROR]: 'status.error',
 };
@@ -13,6 +14,7 @@ export const transactionStateColor: {
   [key in TransactionStateType]: keyof Theme;
 } = {
   [TransactionStateType.COMPLETED]: 'greenGraph',
+  [TransactionStateType.SENT]: 'greenGraph',
   [TransactionStateType.PENDING]: 'yellow',
   [TransactionStateType.ERROR]: 'red',
 };
