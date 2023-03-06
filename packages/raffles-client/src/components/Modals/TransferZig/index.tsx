@@ -44,7 +44,6 @@ const TransferZigModal = (props: TransferZigModalProps) => {
     reset,
   } = useForm<ITransferField>({
     mode: 'onChange',
-    reValidateMode: 'onBlur',
     criteriaMode: 'all',
   });
 
@@ -58,7 +57,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
   const watchAmount = watch('amount');
   const handleTransfer: SubmitHandler<ITransferField> = async ({ amount }) => {
     await transfer(amount.value);
-    reset();
+    reset({});
   };
 
   if (!chainId) {
@@ -124,7 +123,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                     checkMax: (state) =>
                       balance.toNumber() >= Number(state?.value),
                     checkZero: (state) => Number(state?.value) > 0,
-                    checkEmpty: (state) => state?.value.toString() != '',
+                    checkEmpty: (state) => !!state?.value,
                     checkNumber: (state) => !isNaN(Number(state?.value)),
                   },
                 })}
