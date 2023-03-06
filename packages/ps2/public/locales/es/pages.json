@@ -1,7 +1,7 @@
 {
 	"404": "404 \/ Page not found - Zignaly",
 	"dashboard": "Mi Portafolio - Zignaly",
-	"become-trader": "Convertirse en comerciante - Zignaly",
+	"become-trader": "Convertirse Trader - Zignaly",
 	"my-balances": "Mis Saldos - Zignaly",
 	"login": "Iniciar Sesión - Zignaly",
 	"help": "Ayuda - Zignaly",
@@ -22,5 +22,7 @@
 			"title": "Ver Perfil - Zignaly",
 			"edit": "Editar Perfil - Zignaly"
 		}
-	}
+	},
+	"forgot-password": "Contraseña Olvidada - Zignaly",
+	"reset-password": "Restablecer Contraseña - Zignaly"
 }
