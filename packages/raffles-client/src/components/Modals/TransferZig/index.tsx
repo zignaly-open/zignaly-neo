@@ -42,6 +42,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
     formState: { errors, isDirty },
     watch,
     reset,
+    clearErrors,
   } = useForm<ITransferField>({
     mode: 'onChange',
     criteriaMode: 'all',
@@ -55,8 +56,12 @@ const TransferZigModal = (props: TransferZigModalProps) => {
   }, [account, address]);
 
   const watchAmount = watch('amount');
+  useEffect(() => {
+    clearErrors();
+  }, [watchAmount]);
   const handleTransfer: SubmitHandler<ITransferField> = async ({ amount }) => {
-    await transfer(amount.value).then(() => reset({}));
+    await transfer(amount.value);
+    reset();
   };
 
   if (!chainId) {
@@ -140,7 +145,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                 size={matchesSmall ? 'xlarge' : 'large'}
                 caption={t('button')}
                 minWidth={matchesSmall ? 350 : 260}
-                disabled={!watchAmount || !!errors.amount}
+                disabled={!watchAmount || !!errors.amount || !isDirty}
                 loading={isLoading}
                 type={'submit'}
               />
