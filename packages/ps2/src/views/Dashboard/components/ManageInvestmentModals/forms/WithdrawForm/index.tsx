@@ -14,7 +14,7 @@ import { Box, Grid } from '@mui/material';
 import {
   useCoinBalances,
   useExchangeCoinsList,
-} from '../../../../../../apis/coin/use';
+} from '../../../../../../apis/ps2/coin/use';
 import { WithdrawModalProps } from '../../types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithdrawValidation } from './validations';
@@ -23,8 +23,8 @@ import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContaine
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import LabelValueLine from './atoms/LabelValueLine';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
-import { useWithdrawMutation } from 'apis/coin/api';
-import { useActiveExchange, useCheck2FA } from 'apis/user/use';
+import { useWithdrawMutation } from 'apis/ps2/coin/api';
+import { useActiveExchange, useCheck2FA } from 'apis/ps2/user/use';
 
 function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const { t } = useTranslation('withdraw-crypto');

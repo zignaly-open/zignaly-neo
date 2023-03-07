@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { Service } from '../../../../../apis/service/types';
+import { Service } from '../../../../../apis/ps2/service/types';
 import { useTranslation } from 'react-i18next';
-import { useIsAuthenticated } from '../../../../../apis/user/use';
+import { useIsAuthenticated } from '../../../../../apis/ps2/user/use';
 import { useZModal } from '../../../../../components/ZModal/use';
 import {
   useCurrentBalance,
   useInvestedAccountsCount,
   useSetSelectedInvestment,
-} from '../../../../../apis/investment/use';
+} from '../../../../../apis/ps2/investment/use';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { serviceToInvestmentServiceDetail } from '../../../../../apis/investment/util';
+import { serviceToInvestmentServiceDetail } from '../../../../../apis/ps2/investment/util';
 import InvestModal from '../../../../Dashboard/components/ManageInvestmentModals/InvestModal';
 import { ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../../../routes';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';

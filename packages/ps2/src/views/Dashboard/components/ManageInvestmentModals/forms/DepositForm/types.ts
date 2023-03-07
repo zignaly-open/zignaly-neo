@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { CoinNetwork } from '../../../../../../apis/coin/types';
+import { CoinNetwork } from '../../../../../../apis/ps2/coin/types';
 
 export type CoinNetworkValue = CoinNetwork & {
   caption: string;

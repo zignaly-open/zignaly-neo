@@ -1,4 +1,4 @@
-import { MarketplaceService } from '../../../../apis/marketplace/types';
+import { MarketplaceService } from '../../../../apis/ps2/marketplace/types';
 import type { AxisFormat } from '@zignaly-open/ui/lib/components/display/ZigChart/types';
 
 export type MarketplaceTableDataType = {

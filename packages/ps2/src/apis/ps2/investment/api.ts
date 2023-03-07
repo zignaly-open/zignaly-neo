@@ -1,16 +1,8 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
 import { InvestedInService, Investment, InvestmentDetails } from './types';
-import baseQuery from '../baseQuery';
+import emptySplitApi from '../base';
 
-export const api = createApi({
-  baseQuery: baseQuery(),
-  reducerPath: 'investmentApi',
-  tagTypes: [
-    'Investment',
-    // technically it does not provide balance/service but affects them; needed to invalidate cache
-    'Balance',
-    'Service',
-  ],
+export const api = emptySplitApi.injectEndpoints({
+  overrideExisting: false,
   endpoints: (builder) => ({
     investments: builder.query<Investment[], string>({
       query: (exchangeInternalId) => ({

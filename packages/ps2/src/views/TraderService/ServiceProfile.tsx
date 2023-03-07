@@ -7,10 +7,13 @@ import {
   useIsServiceOwner,
   useServiceDetails,
   useTraderServiceTitle,
-} from '../../apis/service/use';
-import { useIsAuthenticated } from '../../apis/user/use';
+} from '../../apis/ps2/service/use';
+import { useIsAuthenticated } from '../../apis/ps2/user/use';
 import { ROUTE_404, ROUTE_LOGIN, ROUTE_PROFIT_SHARING } from '../../routes';
-import { Service, TraderServiceAccessLevel } from '../../apis/service/types';
+import {
+  Service,
+  TraderServiceAccessLevel,
+} from '../../apis/ps2/service/types';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { BackendError, ErrorCodes } from '../../util/errors';
 import CriticalError from '../../components/Stub/CriticalError';

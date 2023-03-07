@@ -1,11 +1,8 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
 import { MarketplaceService } from './types';
-import baseQuery from '../baseQuery';
+import emptySplitApi from '../base';
 
-export const api = createApi({
-  baseQuery: baseQuery(),
-  reducerPath: 'marketplaceApi',
-  tagTypes: ['MarketplaceService'],
+export const api = emptySplitApi.injectEndpoints({
+  overrideExisting: false,
   endpoints: (builder) => ({
     marketplace: builder.query<MarketplaceService[], void>({
       providesTags: ['MarketplaceService'],

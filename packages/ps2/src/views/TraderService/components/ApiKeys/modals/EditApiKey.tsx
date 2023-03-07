@@ -5,7 +5,7 @@ import ZModal from '../../../../../components/ZModal';
 import {
   ServiceApiKey,
   ServiceApiKeyPermission,
-} from '../../../../../apis/serviceApiKey/types';
+} from '../../../../../apis/ps2/serviceApiKey/types';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { EditKeyValidation } from '../validations';
@@ -29,11 +29,11 @@ import {
   Tooltip,
 } from '@mui/material';
 import { MultilineLabel } from '../atoms';
-import { useServiceApiKeyEditMutation } from '../../../../../apis/serviceApiKey/api';
+import { useServiceApiKeyEditMutation } from '../../../../../apis/ps2/serviceApiKey/api';
 import { BooleanString, EditApiKeyFormType } from '../types';
 import { formTypeToBackendPayloadType } from '../util';
-import { useCheck2FA } from '../../../../../apis/user/use';
-import { useRefetchIfDesynchronizedState } from '../../../../../apis/serviceApiKey/use';
+import { useCheck2FA } from '../../../../../apis/ps2/user/use';
+import { useRefetchIfDesynchronizedState } from '../../../../../apis/ps2/serviceApiKey/use';
 import { BackendErrorResponse } from '../../../../../util/errors';
 
 function EditApiKeysModal({

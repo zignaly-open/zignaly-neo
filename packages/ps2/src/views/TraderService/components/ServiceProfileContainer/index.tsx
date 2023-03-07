@@ -1,8 +1,8 @@
 import React from 'react';
-import { Service } from '../../../../apis/service/types';
-import { useCoinBalances } from '../../../../apis/coin/use';
+import { Service } from '../../../../apis/ps2/service/types';
+import { useCoinBalances } from '../../../../apis/ps2/coin/use';
 import ServiceProfileHeader from './atoms/ServiceProfileHeader';
-import { useIsServiceOwner } from '../../../../apis/service/use';
+import { useIsServiceOwner } from '../../../../apis/ps2/service/use';
 import { Box, Grid, useMediaQuery } from '@mui/material';
 import theme from '../../../../theme';
 import RightSideActions from './atoms/RightSideActions';

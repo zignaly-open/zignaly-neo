@@ -9,11 +9,11 @@ import { NavLink, Networks } from './styles';
 import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
 import { supportedLanguages } from '../../../util/i18next';
-import { useChangeLocale } from '../../../apis/user/use';
+import { useChangeLocale } from '../../../apis/ps2/user/use';
 import {
   useFirstOwnedService,
   useTraderServices,
-} from '../../../apis/service/use';
+} from '../../../apis/ps2/service/use';
 import { generatePath, useNavigate } from 'react-router-dom';
 import {
   ROUTE_BECOME_TRADER,

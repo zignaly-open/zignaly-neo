@@ -14,14 +14,14 @@ import { CreateServiceValidation } from '../validations';
 import CoinOption, {
   filterOptions,
 } from '../../../../../Dashboard/components/ManageInvestmentModals/forms/atoms/CoinOption';
-import { useExchangeCoinsList } from '../../../../../../apis/coin/use';
+import { useExchangeCoinsList } from '../../../../../../apis/ps2/coin/use';
 import { Box, ButtonProps, InputAdornment, Tooltip } from '@mui/material';
 import { ZigButtonGroupInputWrapper } from '../atoms';
 import SuccessFeeInputWrapper from './SuccessFeeInputWrapper';
-import { ExchangeType } from '../../../../../../apis/user/types';
+import { ExchangeType } from '../../../../../../apis/ps2/user/types';
 import { ServiceFormData } from './types';
 import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
-import { useServiceTypesInfoQuery } from '../../../../../../apis/service/api';
+import { useServiceTypesInfoQuery } from '../../../../../../apis/ps2/service/api';
 
 const CreateServiceForm: React.FC<{
   service?: Partial<ServiceFormData>;

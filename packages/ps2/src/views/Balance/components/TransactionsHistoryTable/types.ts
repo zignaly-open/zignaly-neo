@@ -1,4 +1,4 @@
-import { Transaction, TRANSACTION_TYPE } from 'apis/coin/types';
+import { Transaction, TRANSACTION_TYPE } from 'apis/ps2/coin/types';
 
 export const TRANSACTION_TYPE_NAME = {
   [TRANSACTION_TYPE.DEPOSIT]: 'type.deposit',

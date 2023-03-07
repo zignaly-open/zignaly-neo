@@ -23,7 +23,7 @@ import {
   useWithdrawMutation,
 } from 'apis/wallet/api';
 import WithdrawConfirmForm from 'views/Dashboard/components/ManageInvestmentModals/forms/WithdrawConfirmForm';
-import { useCheck2FA } from 'apis/user/use';
+import { useCheck2FA } from 'apis/ps2/user/use';
 import { useZModal } from 'components/ZModal/use';
 import WalletDepositModal from '../WalletDepositModal';
 

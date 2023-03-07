@@ -1,5 +1,5 @@
 import ls from '@livesession/sdk';
-import { UserData } from 'apis/user/types';
+import { UserData } from 'apis/ps2/user/types';
 
 const isEnabled =
   process.env.REACT_APP_ENABLE_TRACKING &&

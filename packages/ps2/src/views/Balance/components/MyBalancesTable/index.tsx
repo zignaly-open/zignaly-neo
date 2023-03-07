@@ -8,17 +8,17 @@ import {
 } from '@zignaly-open/ui';
 import { BalanceTableDataType } from './types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
-import { useActiveExchange } from '../../../../apis/user/use';
+import { useActiveExchange } from '../../../../apis/ps2/user/use';
 import { allowedDeposits } from 'util/coins';
 import { Add, Remove } from '@mui/icons-material';
-import { useCoinBalances, useExchangeCoinsList } from 'apis/coin/use';
+import { useCoinBalances, useExchangeCoinsList } from 'apis/ps2/coin/use';
 import {
   CoinBalance,
   CoinDetail,
   CoinBalances,
   CoinDetails,
-} from 'apis/coin/types';
-import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
+} from 'apis/ps2/coin/types';
+import { mergeCoinsAndBalances } from '../../../../apis/ps2/coin/util';
 import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 import WithdrawModal from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
 import { useZModal } from '../../../../components/ZModal/use';

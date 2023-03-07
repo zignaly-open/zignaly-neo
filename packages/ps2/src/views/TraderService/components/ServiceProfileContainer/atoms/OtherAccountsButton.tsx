@@ -1,8 +1,8 @@
 import React from 'react';
-import { Service } from '../../../../../apis/service/types';
+import { Service } from '../../../../../apis/ps2/service/types';
 import { useTranslation } from 'react-i18next';
 import { useZModal } from '../../../../../components/ZModal/use';
-import { useInvestedAccountsCount } from '../../../../../apis/investment/use';
+import { useInvestedAccountsCount } from '../../../../../apis/ps2/investment/use';
 import InvestedFromOtherAccounts from '../../InvestedFromOtherAccounts';
 import { TextButton } from '@zignaly-open/ui';
 import { StyledChevronRightIcon } from '../styles';

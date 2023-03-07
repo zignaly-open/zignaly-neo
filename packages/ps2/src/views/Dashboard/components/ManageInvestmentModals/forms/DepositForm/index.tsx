@@ -21,13 +21,13 @@ import {
   useCoinBalances,
   useDepositInfo,
   useExchangeCoinsList,
-} from '../../../../../../apis/coin/use';
+} from '../../../../../../apis/ps2/coin/use';
 import { DepositModalProps } from '../../types';
 import { allowedDeposits } from '../../../../../../util/coins';
 import {
   useActiveExchange,
   useCurrentUser,
-} from '../../../../../../apis/user/use';
+} from '../../../../../../apis/ps2/user/use';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import { trackCta } from '@zignaly-open/tracker';
 import { PURCHASE_CRYPTO } from '../../../../../../util/constants';

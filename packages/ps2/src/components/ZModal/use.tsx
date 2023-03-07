@@ -1,7 +1,7 @@
 import { ShowFnOutput, useModal, UseModalOptions } from 'mui-modal-provider';
 import { ComponentType, useCallback } from 'react';
 import { track } from '@zignaly-open/tracker';
-import { useCurrentUser } from '../../apis/user/use';
+import { useCurrentUser } from '../../apis/ps2/user/use';
 import AlertModal, { AlertModalProps } from './modals/AlertModal';
 import ConfirmModal, { ConfirmModalProps } from './modals/ConfirmModal';
 import TypeTextConfirmModal, {

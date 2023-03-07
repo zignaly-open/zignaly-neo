@@ -5,8 +5,8 @@ import { Layout, Container, Options, Option } from './styles';
 import {
   useIsServiceOwner,
   useTraderServices,
-} from '../../../../apis/service/use';
-import { TraderService } from '../../../../apis/service/types';
+} from '../../../../apis/ps2/service/use';
+import { TraderService } from '../../../../apis/ps2/service/types';
 import { generatePath, Link, useParams, useLocation } from 'react-router-dom';
 import { RouteDropdown, RouteGroup } from './atoms';
 import {

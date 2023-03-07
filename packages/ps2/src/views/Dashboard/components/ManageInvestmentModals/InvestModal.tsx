@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
-import { useSelectedInvestment } from '../../../../apis/investment/use';
-import { useServiceDetails } from '../../../../apis/service/use';
-import { useCoinBalances } from '../../../../apis/coin/use';
+import { useSelectedInvestment } from '../../../../apis/ps2/investment/use';
+import { useServiceDetails } from '../../../../apis/ps2/service/use';
+import { useCoinBalances } from '../../../../apis/ps2/coin/use';
 import ZModal from '../../../../components/ZModal';
 import InvestView from './views/Invest';
 

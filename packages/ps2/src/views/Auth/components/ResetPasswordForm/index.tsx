@@ -7,7 +7,7 @@ import { ResetPasswordValidation } from './validations';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import { useResetPasswordMutation } from 'apis/user/api';
+import { useResetPasswordMutation } from 'apis/ps2/user/api';
 import { ROUTE_LOGIN } from 'routes';
 import { useToast } from 'util/hooks/useToast';
 import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';

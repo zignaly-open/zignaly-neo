@@ -4,7 +4,7 @@ import { DialogProps } from '@mui/material';
 import ZModal from 'components/ZModal';
 import Enable2FAForm from './Enable2FaForm';
 import Disable2FAForm from './Disable2FaForm';
-import { useCurrentUser } from 'apis/user/use';
+import { useCurrentUser } from 'apis/ps2/user/use';
 
 const UpdatePasswordModal = ({
   close,

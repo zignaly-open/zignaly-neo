@@ -11,13 +11,13 @@ import { InvestInYourServiceValidation } from '../validations';
 import { Grid } from '@mui/material';
 import { ServiceFormData, ServiceInvestType } from './types';
 import InvestorDetailsForService from '../../../../../Dashboard/components/ManageInvestmentModals/views/InvestorDetailsForService';
-import { useCurrentBalance } from '../../../../../../apis/investment/use';
-import { CreateServicePayload } from '../../../../../../apis/service/types';
+import { useCurrentBalance } from '../../../../../../apis/ps2/investment/use';
+import { CreateServicePayload } from '../../../../../../apis/ps2/service/types';
 import {
   useCreateTraderServiceMutation,
   useServiceTypesInfoQuery,
-} from '../../../../../../apis/service/api';
-import { useActiveExchange } from '../../../../../../apis/user/use';
+} from '../../../../../../apis/ps2/service/api';
+import { useActiveExchange } from '../../../../../../apis/ps2/user/use';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE_MANAGE } from '../../../../../../routes';
 import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';

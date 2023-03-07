@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { useTheme } from '@mui/material';
 import { Layout, Field, Button, Container, Item } from './styles';
 import { Typography, Avatar, ArrowBottomIcon } from '@zignaly-open/ui';
-import { Exchange } from '../../../../apis/user/types';
+import { Exchange } from '../../../../apis/ps2/user/types';
 import { getImageOfAccount } from '../../../../util/images';
 import {
   useActiveExchange,
   useSelectExchange,
   useCurrentUser,
-} from '../../../../apis/user/use';
+} from '../../../../apis/ps2/user/use';
 import { AccountSelectorProps } from './types';
 
 const AccountSelector: React.FC<AccountSelectorProps> = ({

@@ -4,12 +4,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { Form, Action, TitleHead } from './styles';
 import { LoginValidation } from './validations';
-import { useAuthenticate } from '../../../../apis/user/use';
+import { useAuthenticate } from '../../../../apis/ps2/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
 import { Button, TextButton, Typography, ZigInput } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import { LoginPayload } from '../../../../apis/user/types';
+import { LoginPayload } from '../../../../apis/ps2/user/types';
 import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
 
 const LoginForm: React.FC = () => {

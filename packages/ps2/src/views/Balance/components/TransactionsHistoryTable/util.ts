@@ -1,4 +1,4 @@
-import { TransactionType, TRANSACTION_TYPE } from 'apis/coin/types';
+import { TransactionType, TRANSACTION_TYPE } from 'apis/ps2/coin/types';
 import { Side, SideType } from './types';
 
 export const truncateAddress = (address: string) => {

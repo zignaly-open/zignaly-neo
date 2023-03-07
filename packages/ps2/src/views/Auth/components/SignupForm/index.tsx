@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
 import { Form, Action, TitleHead, StyledErrorOutline } from './styles';
 import { SignupValidation } from './validations';
-import { useSignup } from '../../../../apis/user/use';
+import { useSignup } from '../../../../apis/ps2/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN } from '../../../../routes';
 import {
@@ -15,7 +15,7 @@ import {
   ZigInput,
 } from '@zignaly-open/ui';
 import { Box, Link } from '@mui/material';
-import { LoginPayload } from '../../../../apis/user/types';
+import { LoginPayload } from '../../../../apis/ps2/user/types';
 import Cookies from 'js-cookie';
 import Mailcheck from 'react-mailcheck';
 import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';

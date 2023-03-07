@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo } from 'react';
 import { DialogProps } from '@mui/material/Dialog';
 import EmailVerifyForm from '../EmailVerifyForm';
 import TwoFAForm from '../TwoFAForm';
-import { LoginResponse } from '../../../../apis/user/types';
+import { LoginResponse } from '../../../../apis/ps2/user/types';
 import { useTranslation } from 'react-i18next';
 import { ZigTypography } from '@zignaly-open/ui';
 import { Container, Title } from './styles';
@@ -14,7 +14,7 @@ import {
   useVerifyEmailKnownDevice,
   useVerifyEmailNewUser,
   useResendCodeNewUser,
-} from '../../../../apis/user/use';
+} from '../../../../apis/ps2/user/use';
 import { useToast } from '../../../../util/hooks/useToast';
 import ZModal from '../../../../components/ZModal';
 

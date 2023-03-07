@@ -3,7 +3,7 @@ import {
   EditServicePayload,
   Service,
   TraderServiceAccessLevel,
-} from '../../../../apis/service/types';
+} from '../../../../apis/ps2/service/types';
 import { Box, Grid, InputAdornment } from '@mui/material';
 import {
   ZigButton,
@@ -16,7 +16,7 @@ import ServiceLogo from '../ServiceLogo';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { EditServiceValidation } from './validations';
 import { Controller, useForm } from 'react-hook-form';
-import { useTraderServiceEditMutation } from 'apis/service/api';
+import { useTraderServiceEditMutation } from 'apis/ps2/service/api';
 import { VISIBILITY_LABEL } from './types';
 import { StyledZigSelect } from './styles';
 import { ExternalLink } from 'components/AnchorLink';
@@ -24,7 +24,7 @@ import { HELP_CREATE_SERVICE_MARKETPLACE_URL } from 'util/constants';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { useUpdateEffect } from 'react-use';
 import { ROUTE_TRADING_SERVICE } from 'routes';
-import { useCurrentUser } from 'apis/user/use';
+import { useCurrentUser } from 'apis/ps2/user/use';
 import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessFeeInputWrapper';
 
 const getVisibility = (level: TraderServiceAccessLevel) => {

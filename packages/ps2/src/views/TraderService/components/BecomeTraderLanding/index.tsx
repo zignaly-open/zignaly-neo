@@ -28,7 +28,7 @@ import {
   Separator,
 } from './styles';
 import { FeatureItem, InfoBarItem, HowWorksItem } from './types';
-import { useIsAuthenticated } from '../../../../apis/user/use';
+import { useIsAuthenticated } from '../../../../apis/ps2/user/use';
 import { ROUTE_SIGNUP } from '../../../../routes';
 import { useNavigate } from 'react-router-dom';
 import { Link } from '@mui/material';

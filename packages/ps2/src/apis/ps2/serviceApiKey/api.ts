@@ -1,15 +1,12 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
 import {
   ServiceApiKey,
   ServiceApiKeyDeletePayload,
   ServiceApiKeyPayload,
 } from './types';
-import baseQuery from '../baseQuery';
+import emptySplitApi from '../base';
 
-export const api = createApi({
-  baseQuery: baseQuery(),
-  reducerPath: 'serviceApiKeyApi',
-  tagTypes: ['ServiceApiKey'],
+export const api = emptySplitApi.injectEndpoints({
+  overrideExisting: false,
   endpoints: (builder) => ({
     serviceApiKeys: builder.query<ServiceApiKey[], { serviceId: string }>({
       providesTags: ['ServiceApiKey'],

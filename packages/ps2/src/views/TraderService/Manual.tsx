@@ -3,7 +3,7 @@ import ComingSoon from '../../components/Stub/ComingSoon';
 import ServiceHeader from './components/ServiceHeader';
 import { TraderServicePageContainer } from './components/styles';
 import { useParams } from 'react-router-dom';
-import { useTraderServiceTitle } from '../../apis/service/use';
+import { useTraderServiceTitle } from '../../apis/ps2/service/use';
 
 const Manual: React.FC = () => {
   const { serviceId } = useParams();

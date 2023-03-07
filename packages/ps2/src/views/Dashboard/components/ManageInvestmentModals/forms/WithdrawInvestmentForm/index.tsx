@@ -15,7 +15,7 @@ import {
   useInvestmentDetails,
   useSelectedInvestment,
   useWithdrawInvestment,
-} from '../../../../../../apis/investment/use';
+} from '../../../../../../apis/ps2/investment/use';
 import { EditInvestmentValidation } from './validations';
 import { WithdrawInvestmentFormFormData } from './types';
 import { ChangeViewFn, EditInvestmentViews } from '../../types';

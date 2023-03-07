@@ -20,18 +20,18 @@ import {
 } from '@zignaly-open/ui';
 import { Box, FormControlLabel, IconButton, Tooltip } from '@mui/material';
 import { Add, ChevronRight, Remove } from '@mui/icons-material';
-import { useUpdateUserMutation } from 'apis/user/api';
+import { useUpdateUserMutation } from 'apis/ps2/user/api';
 import { ReactComponent as RewardsIcon } from 'images/rewards.svg';
 import { WalletTopPanelProps } from './types';
-import { useCurrentUser } from 'apis/user/use';
+import { useCurrentUser } from 'apis/ps2/user/use';
 import { useZModal } from 'components/ZModal/use';
 import WalletDepositModal from '../../modals/WalletDepositModal';
 import BuyZigModal from '../../modals/BuyZigModal';
 import WalletWithdrawModal from '../../modals/WalletWithdrawModal';
 import WalletPopover from './atoms/WalletPopover';
 import { useDispatch } from 'react-redux';
-import { setUser } from 'apis/user/store';
-import { UserData } from 'apis/user/types';
+import { setUser } from 'apis/ps2/user/store';
+import { UserData } from 'apis/ps2/user/types';
 
 const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
   const { t } = useTranslation('wallet');

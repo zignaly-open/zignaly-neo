@@ -3,10 +3,10 @@ import DepositForm from '../forms/DepositForm';
 import {
   useCoinBalances,
   useExchangeCoinsList,
-} from '../../../../../apis/coin/use';
+} from '../../../../../apis/ps2/coin/use';
 import CenteredLoader from '../../../../../components/CenteredLoader';
 import { DepositModalProps } from '../types';
-import { useActivateExchange } from 'apis/user/use';
+import { useActivateExchange } from 'apis/ps2/user/use';
 
 const DepositView: React.FC<DepositModalProps> = (props) => {
   const { isFetching: isFetchingBalances } = useCoinBalances({ convert: true });

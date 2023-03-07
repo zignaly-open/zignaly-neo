@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useIsAuthenticated } from '../../apis/user/use';
+import { useIsAuthenticated } from '../../apis/ps2/user/use';
 import { Navigate, Outlet, useLocation } from 'react-router-dom';
 import { ROUTE_DASHBOARD, ROUTE_PROFIT_SHARING } from '../../routes';
 

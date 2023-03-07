@@ -1,4 +1,3 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
 import {
   LoginPayload,
   LoginResponse,
@@ -7,11 +6,10 @@ import {
   SignupResponse,
   UserData,
 } from './types';
-import baseQuery from '../baseQuery';
+import emptySplitApi from '../base';
 
-export const api = createApi({
-  reducerPath: 'userApi',
-  baseQuery: baseQuery(),
+export const api = emptySplitApi.injectEndpoints({
+  overrideExisting: false,
   endpoints: (builder) => ({
     signup: builder.mutation<SignupResponse, SignupPayload>({
       query: (credentials) => ({

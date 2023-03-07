@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
 import ZModal from 'components/ZModal';
-import { useExchangeCoinsList } from '../../../../../apis/coin/use';
+import { useExchangeCoinsList } from '../../../../../apis/ps2/coin/use';
 import CenteredLoader from '../../../../../components/CenteredLoader';
 // import CreateServiceForm from './forms/CreateServiceForm';
 import InvestInYourServiceForm from './forms/InvestInYourServiceForm';
 import CreateServiceForm from './forms/CreateServiceForm';
 import { ServiceFormData } from './forms/types';
-import { useCurrentBalance } from '../../../../../apis/investment/use';
+import { useCurrentBalance } from '../../../../../apis/ps2/investment/use';
 import {
   useCreateTraderServiceMutation,
   useServiceTypesInfoQuery,
-} from '../../../../../apis/service/api';
+} from '../../../../../apis/ps2/service/api';
 
 function CreateServiceModal({
   close,

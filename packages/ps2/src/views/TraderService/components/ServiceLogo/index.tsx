@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, CircularProgress, IconButton } from '@mui/material';
-import { Service } from 'apis/service/types';
+import { Service } from 'apis/ps2/service/types';
 import { Avatar, ZigButton } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { Close, Edit } from '@mui/icons-material';

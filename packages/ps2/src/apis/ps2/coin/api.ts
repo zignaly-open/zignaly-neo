@@ -1,4 +1,3 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
 import { isString, pickBy } from 'lodash-es';
 import {
   AccountCoinBalances,
@@ -8,12 +7,10 @@ import {
   Transactions,
   TransactionType,
 } from './types';
-import baseQuery from '../baseQuery';
+import emptySplitApi from '../base';
 
-export const api = createApi({
-  baseQuery: baseQuery(),
-  reducerPath: 'coinApi',
-  tagTypes: ['Balance'],
+export const api = emptySplitApi.injectEndpoints({
+  overrideExisting: false,
   endpoints: (builder) => ({
     coins: builder.query<
       CoinBalances,

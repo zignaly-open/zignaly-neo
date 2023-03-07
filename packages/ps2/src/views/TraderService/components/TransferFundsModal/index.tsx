@@ -28,7 +28,7 @@ import {
   useTraderServiceBalance,
   useServiceDetails,
   useTraderServiceTransferFunds,
-} from '../../../../apis/service/use';
+} from '../../../../apis/ps2/service/use';
 import { useToast } from '../../../../util/hooks/useToast';
 import ZModal from 'components/ZModal';
 

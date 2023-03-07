@@ -4,7 +4,7 @@ import {
   GraphTimeframe,
   GraphTimeframeDayLength,
   Service,
-} from '../../../../../apis/service/types';
+} from '../../../../../apis/ps2/service/types';
 import {
   ZigButtonGroupInput,
   ZigChart,
@@ -19,7 +19,10 @@ import {
   SelectWrapperBox,
   SqueezedButtonGroupWrapper,
 } from '../styles';
-import { useChartConfig, useChartData } from '../../../../../apis/service/use';
+import {
+  useChartConfig,
+  useChartData,
+} from '../../../../../apis/ps2/service/use';
 import Stub from '../../../../../components/Stub';
 import { useTranslation } from 'react-i18next';
 import CenteredLoader from '../../../../../components/CenteredLoader';

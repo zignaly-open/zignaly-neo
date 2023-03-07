@@ -1,4 +1,3 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
 import {
   GraphChartType,
   GraphTimeframe,
@@ -13,13 +12,11 @@ import {
   CreateServicePayload,
   ServiceTypesInfo,
 } from './types';
-import baseQuery from '../baseQuery';
 import { providesList } from 'apis/util';
+import emptySplitApi from '../base';
 
-export const api = createApi({
-  baseQuery: baseQuery(),
-  reducerPath: 'serviceApi',
-  tagTypes: ['Service', 'ServiceChart'],
+export const api = emptySplitApi.injectEndpoints({
+  overrideExisting: false,
   endpoints: (builder) => ({
     traderServices: builder.query<TraderService[], void>({
       query: () => ({
