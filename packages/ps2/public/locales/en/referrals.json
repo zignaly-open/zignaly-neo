@@ -3,6 +3,7 @@
     "description": "Get a percentage of the trading and success fees paid by your friends or from all the investors of the trader's service when you invite a trader to Zignaly",
     "share-your-link": "Share your link:",
     "what-you-get": "What you get",
+    "how-to-earn": "How to Earn Commissions",
     "what-they-get": "What they get",
     "invite-traders-for-percent": "Invite traders <0>{{value}}%</0> of all their investors' success fees",
     "invite-friends-for-percent": "Invite friends <0>{{value}}%</0> of their success fees",

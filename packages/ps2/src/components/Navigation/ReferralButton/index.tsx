@@ -1,6 +1,5 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router-dom';
@@ -26,7 +25,11 @@ const ReferralButton = () => {
           id={'trader-api__create-key'}
           variant='outlined'
         >
-          <CardGiftcardIcon sx={{ height: 22, width: 22 }} />
+          <img
+            src={'/images/referrals/envelope-mini.png'}
+            style={{ height: 22, width: 22 }}
+            alt={'referral'}
+          />
           <Box
             component={'span'}
             sx={{

@@ -17,8 +17,6 @@ import {
 import GroupIcon from '@mui/icons-material/Group';
 import { Hr } from './styles';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
-
-import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import { useCurrentUser } from '../../apis/user/use';
 import copy from 'copy-to-clipboard';
 import { useToast } from '../../util/hooks/useToast';
@@ -62,14 +60,18 @@ const Referrals: React.FC = () => {
                 flexDirection: 'row',
               }}
             >
-              <Box>
-                <CardGiftcardIcon
-                  sx={{
-                    width: 200,
-                    height: 200,
-                    mr: 4,
-                    ml: 4,
-                  }}
+              <Box
+                sx={{
+                  mr: 4,
+                  ml: 4,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <img
+                  src={'/images/referrals/envelope-main.png'}
+                  style={{ width: 200 }}
+                  alt={'referral'}
                 />
               </Box>
               <Box
