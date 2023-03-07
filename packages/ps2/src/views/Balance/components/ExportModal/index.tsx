@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import ZModal from '../../../../components/ZModal';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
-import { useTransactionsHistoryCsvMutation } from 'apis/ps2/coin/api';
+import { useTransactionsHistoryCsvMutation } from 'apis/coin/api';
 import { useActiveExchange } from 'apis/ps2/user/use';
 import { useToast } from 'util/hooks/useToast';
 import { ExportModalProps } from './types';

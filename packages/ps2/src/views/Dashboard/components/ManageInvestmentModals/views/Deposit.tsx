@@ -3,7 +3,7 @@ import DepositForm from '../forms/DepositForm';
 import {
   useCoinBalances,
   useExchangeCoinsList,
-} from '../../../../../apis/ps2/coin/use';
+} from '../../../../../apis/coin/use';
 import CenteredLoader from '../../../../../components/CenteredLoader';
 import { DepositModalProps } from '../types';
 import { useActivateExchange } from 'apis/ps2/user/use';

@@ -6,7 +6,7 @@ import {
   SignupResponse,
   UserData,
 } from './types';
-import emptySplitApi from '../base';
+import emptySplitApi from '../baseApiPs2';
 
 export const api = emptySplitApi.injectEndpoints({
   overrideExisting: false,

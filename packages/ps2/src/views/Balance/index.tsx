@@ -17,7 +17,7 @@ import { OpenInNew } from '@mui/icons-material';
 import ExportModal from './components/ExportModal';
 import { useZModal } from 'components/ZModal/use';
 import { Box } from '@mui/material';
-import { TRANSACTION_TYPE } from 'apis/ps2/coin/types';
+import { TRANSACTION_TYPE } from 'apis/coin/types';
 import { TRANSACTION_TYPE_NAME } from './components/TransactionsHistoryTable/types';
 import { CSSObject } from '@emotion/react';
 

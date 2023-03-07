@@ -6,8 +6,8 @@ import {
 } from '@reduxjs/toolkit/dist/query/react';
 import { RootState } from './store';
 import { Mutex } from 'async-mutex';
-import { logout, setSessionExpiryDate } from './ps2/user/store';
-import { SessionResponse } from './ps2/user/types';
+import { logout, setSessionExpiryDate } from './user/store';
+import { SessionResponse } from './user/types';
 import { TIME_TO_START_REFRESHING_TOKEN } from '../util/constants';
 import i18next from '../util/i18next';
 import { backendError } from 'util/hooks/useToast';

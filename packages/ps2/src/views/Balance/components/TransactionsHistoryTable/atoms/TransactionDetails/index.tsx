@@ -1,5 +1,5 @@
 import React from 'react';
-import { Transaction } from 'apis/ps2/coin/types';
+import { Transaction } from 'apis/coin/types';
 import {
   TransactionPanel,
   TypographyPanelLabel,

@@ -9,10 +9,7 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import LayoutContentWrapper from 'components/LayoutContentWrapper';
-import {
-  useExchangeCoinsList,
-  useTransactionsHistory,
-} from 'apis/ps2/coin/use';
+import { useExchangeCoinsList, useTransactionsHistory } from 'apis/coin/use';
 import TransactionStateLabel from './atoms/TransactionStateLabel';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { TransactionsTableDataType, TRANSACTION_TYPE_NAME } from './types';
@@ -20,7 +17,7 @@ import TransactionDetails from './atoms/TransactionDetails';
 import { Box } from '@mui/material';
 import { PaginationState } from '@tanstack/react-table';
 import { getTransactionSideType, truncateAddress } from './util';
-import { TRANSACTION_TYPE } from 'apis/ps2/coin/types';
+import { TRANSACTION_TYPE } from 'apis/coin/types';
 import { useActiveExchange } from '../../../../apis/ps2/user/use';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {

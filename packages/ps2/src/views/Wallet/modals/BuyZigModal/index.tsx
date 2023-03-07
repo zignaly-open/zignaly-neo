@@ -4,7 +4,7 @@ import { Step, WalletDepositModalProps } from './types';
 import { DialogProps } from '@mui/material';
 import { useCurrentUser } from 'apis/ps2/user/use';
 import CenteredLoader from 'components/CenteredLoader';
-import { useBulkCoinsQuery } from 'apis/ps2/coin/api';
+import { useBulkCoinsQuery } from 'apis/coin/api';
 import AddUsdtForm from './AddUsdtForm';
 import SwapZIGForm from './SwapForm';
 import ZModal from 'components/ZModal';

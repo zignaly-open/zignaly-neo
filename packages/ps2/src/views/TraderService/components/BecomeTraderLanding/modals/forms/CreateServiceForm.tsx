@@ -14,7 +14,7 @@ import { CreateServiceValidation } from '../validations';
 import CoinOption, {
   filterOptions,
 } from '../../../../../Dashboard/components/ManageInvestmentModals/forms/atoms/CoinOption';
-import { useExchangeCoinsList } from '../../../../../../apis/ps2/coin/use';
+import { useExchangeCoinsList } from '../../../../../../apis/coin/use';
 import { Box, ButtonProps, InputAdornment, Tooltip } from '@mui/material';
 import { ZigButtonGroupInputWrapper } from '../atoms';
 import SuccessFeeInputWrapper from './SuccessFeeInputWrapper';

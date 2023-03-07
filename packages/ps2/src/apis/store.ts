@@ -1,20 +1,20 @@
 import { Action, combineReducers, configureStore } from '@reduxjs/toolkit';
-import userReducer, { logout } from './ps2/user/store';
-import ps2Api from './ps2/base';
-import investmentReducer from './ps2/investment/store';
-import serviceApiKeyReducer from './ps2/serviceApiKey/store';
-import coinReducer from './ps2/coin/store';
-import serviceReducer from './ps2/service/store';
-import marketplaceReducer from './ps2/marketplace/store';
+import userReducer, { logout } from './user/store';
+import ps2Api from './baseApiPs2';
+import investmentReducer from './investment/store';
+import serviceApiKeyReducer from './serviceApiKey/store';
+import coinReducer from './coin/store';
+import serviceReducer from './service/store';
+import marketplaceReducer from './marketplace/store';
 import walletReducer from './wallet/store';
 import { api as walletApi } from './wallet//api';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
-import { UserState } from './ps2/user/types';
-import { InvestmentState } from './ps2/investment/types';
-import { ServiceState } from './ps2/service/types';
-import { MarketplaceState } from './ps2/marketplace/types';
-import { CoinState } from './ps2/coin/types';
+import { UserState } from './user/types';
+import { InvestmentState } from './investment/types';
+import { ServiceState } from './service/types';
+import { MarketplaceState } from './marketplace/types';
+import { CoinState } from './coin/types';
 import { WalletState } from './wallet/types';
 
 const persistConfig = {

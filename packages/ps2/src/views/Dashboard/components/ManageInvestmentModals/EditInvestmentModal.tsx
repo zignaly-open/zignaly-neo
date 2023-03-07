@@ -13,7 +13,7 @@ import WithdrawWithdrawInvestmentSuccessPerform from './views/WithdrawInvestment
 import EditInvestmentSuccess from './views/EditInvestmentSuccess';
 import WithdrawModalSuccess from './views/WithdrawInvestmentSuccess';
 import { useServiceDetails } from '../../../../apis/ps2/service/use';
-import { useCoinBalances } from '../../../../apis/ps2/coin/use';
+import { useCoinBalances } from '../../../../apis/coin/use';
 import ZModal from '../../../../components/ZModal';
 
 function EditInvestmentModal({

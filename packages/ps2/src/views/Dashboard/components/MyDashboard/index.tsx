@@ -21,7 +21,7 @@ import EditInvestmentModal from '../ManageInvestmentModals/EditInvestmentModal';
 import { ServiceName } from '../ServiceName';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/ps2/user/use';
-import { useCoinBalances } from '../../../../apis/ps2/coin/use';
+import { useCoinBalances } from '../../../../apis/coin/use';
 import { useZModal } from '../../../../components/ZModal/use';
 import { differenceInDays } from 'date-fns';
 

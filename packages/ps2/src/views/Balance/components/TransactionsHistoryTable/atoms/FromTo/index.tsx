@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { Transaction } from 'apis/ps2/coin/types';
+import { Transaction } from 'apis/coin/types';
 import ServiceLink from '../ProviderLink';
 import ZignalyAccount from '../TransferZigLabel';
 import { useTranslation } from 'react-i18next';

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
 import ZModal from 'components/ZModal';
-import { useExchangeCoinsList } from '../../../../../apis/ps2/coin/use';
+import { useExchangeCoinsList } from '../../../../../apis/coin/use';
 import CenteredLoader from '../../../../../components/CenteredLoader';
 // import CreateServiceForm from './forms/CreateServiceForm';
 import InvestInYourServiceForm from './forms/InvestInYourServiceForm';

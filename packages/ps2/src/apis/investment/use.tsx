@@ -13,12 +13,12 @@ import {
   InvestmentDetails,
   InvestmentServiceDetails,
 } from './types';
-import { RootState } from '../../store';
+import { RootState } from '../store';
 import { setSelectedInvestment } from './store';
 import { useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { useCoinBalances } from '../coin/use';
-import { QueryReturnType } from '../../../util/queryReturnType';
+import { QueryReturnType } from '../../util/queryReturnType';
 import { useActiveExchange, useIsAuthenticated } from '../user/use';
 
 export const useInvestments = useInvestmentsQuery;

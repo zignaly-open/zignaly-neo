@@ -1,4 +1,4 @@
-import { CoinBalance, CoinDetail } from 'apis/ps2/coin/types';
+import { CoinBalance, CoinDetail } from 'apis/coin/types';
 
 export type BalanceTableDataType = {
   coin: string;

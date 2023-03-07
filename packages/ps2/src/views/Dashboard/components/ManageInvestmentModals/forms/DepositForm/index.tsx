@@ -21,7 +21,7 @@ import {
   useCoinBalances,
   useDepositInfo,
   useExchangeCoinsList,
-} from '../../../../../../apis/ps2/coin/use';
+} from '../../../../../../apis/coin/use';
 import { DepositModalProps } from '../../types';
 import { allowedDeposits } from '../../../../../../util/coins';
 import {
