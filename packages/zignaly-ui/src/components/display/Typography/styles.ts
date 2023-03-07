@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { styledIf } from "utils/styled";
+import { styledIf } from "../../../utils/styled";
 
 const getWeight = (weight: string) => {
   if (weight === "demibold") {

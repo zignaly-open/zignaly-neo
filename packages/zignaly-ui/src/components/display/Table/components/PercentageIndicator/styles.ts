@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { ReactComponent as CaretTriangleIcon } from "assets/icons/caret-triangle-icon.svg";
+import { ReactComponent as CaretTriangleIcon } from "../../../../../assets/icons/caret-triangle-icon.svg";
 import Typography from "components/display/Typography";
 
 export const Layout = styled.div`

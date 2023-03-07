@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { dark } from "theme";
-import { styledIf } from "utils/styled";
+import { dark } from "../../../theme";
+import { styledIf } from "../../../utils/styled";
 
 export const InputValue = styled.input`
   background: transparent;

@@ -1,6 +1,6 @@
 import Typography from "components/display/Typography";
 import styled from "styled-components";
-import { styledIf } from "utils/styled";
+import { styledIf } from "../../../utils/styled";
 import { dark } from "../../../theme";
 
 export const Wrapper = styled.div`

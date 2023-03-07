@@ -1,8 +1,8 @@
 import Typography from "components/display/Typography";
 import styled from "styled-components";
-import { styledIf } from "utils/styled";
+import { styledIf } from "../../../utils/styled";
 
-import { ReactComponent as CheckmarkIcon } from "assets/icons/checkmark-active-icon.svg";
+import { ReactComponent as CheckmarkIcon } from "../../../assets/icons/checkmark-active-icon.svg";
 
 export const Icon = styled(CheckmarkIcon)`
   width: 10px;

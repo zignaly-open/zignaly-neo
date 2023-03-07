@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { styledIf } from "utils/styled";
+import { styledIf } from "../../../utils/styled";
 
 const ToggleCommonProperties = styled.div`
   transition: opacity 0.25s ease;

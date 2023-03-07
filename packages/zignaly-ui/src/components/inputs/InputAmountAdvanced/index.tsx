@@ -17,7 +17,7 @@ import ErrorMessage from "components/display/ErrorMessage";
 import Typography from "components/display/Typography";
 import { CoinSizes } from "../../display/CoinIcon";
 import { InputAmountProps, TokenItem } from "./types";
-import { changeEvent } from "utils/event";
+import { changeEvent } from "../../../utils/event";
 import { useDeepCompareEffect } from "react-use";
 import ZigPriceLabel from "components/display/ZigPriceLabel";
 import { Box } from "@mui/material";

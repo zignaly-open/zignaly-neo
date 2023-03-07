@@ -13,6 +13,7 @@
   },
   "postinstall": "husky install",
   "scripts": {
+    "shit": "lerna run build --scope=@zignaly-open/ui && lerna run build --scope=@zignaly-open/test",
     "prepare": "lerna run prepare; node scripts/fix-locales.js",
     "bootstrap": "lerna bootstrap",
     "test": "lerna run test",
@@ -47,6 +48,10 @@
     "react-hook-form": "7.34.2",
     "react-router-dom": "6.3.0",
     "react-router": "6.3.0",
-    "loader-utils": "2.0.4"
+    "loader-utils": "2.0.4",
+    "@babel/core": "7.18.9",
+    "@babel/preset-env": "7.18.9",
+    "@babel/helper-plugin-utils": "7.18.9",
+    "@babel/helper-compilation-targets": "7.18.9"
   }
 }

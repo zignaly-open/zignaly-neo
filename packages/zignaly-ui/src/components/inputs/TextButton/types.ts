@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { dark } from "theme";
+import { dark } from "./../../../theme";
 
 export const componentByVariants = {
   h1: "span",

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 import Typography from "components/display/Typography";
 
-import { styledIf } from "utils/styled";
+import { styledIf } from "../../../../../utils/styled";
 
 export const Layout = styled.div``;
 

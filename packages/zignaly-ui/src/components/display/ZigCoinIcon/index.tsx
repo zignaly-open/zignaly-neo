@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import { Icon, Placeholder } from "./styles";
-import { CoinSizes, ZIGCoinIconProps, COIN_SIZES, sizes } from "./types";
+import type { CoinSizes, ZIGCoinIconProps } from "./types";
+import { sizes, COIN_SIZES } from "./types";
 import { ZignalyIcon } from "../../../index";
 
 const ZigCoinIcon = ({

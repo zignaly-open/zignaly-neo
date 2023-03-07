@@ -3,7 +3,7 @@ import { ReactElement, useState, useRef, useMemo } from "react";
 import { useClickAway } from "react-use";
 import { Layout, Container, Value, ArrowContainer, ValueContainer, Menu, Item } from "./styles";
 import CoinIcon from "components/display/CoinIcon";
-import { ReactComponent as CaretDownIcon } from "assets/icons/caret-down-icon.svg";
+import { ReactComponent as CaretDownIcon } from "../../../../../assets/icons/caret-down-icon.svg";
 import { TokenSelectorProps } from "./types";
 import { TokenItem } from "../../types";
 

@@ -1,5 +1,5 @@
 import { Box, GlobalStyles, styled } from "@mui/material";
-import { NiceScrollbar } from "utils/css";
+import { NiceScrollbar } from "../../../utils/css";
 import React from "react";
 import { css } from "@emotion/react";
 

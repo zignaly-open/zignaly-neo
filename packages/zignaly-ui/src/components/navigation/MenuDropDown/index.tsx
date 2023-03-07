@@ -2,7 +2,7 @@ import React, { useCallback, useImperativeHandle, useRef, useState } from "react
 import { useClickAway } from "react-use";
 import { Layout, Field, Button, ArrowIcon, DropDown } from "./styles";
 
-import { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";
+import { ReactComponent as ArrowBottomIcon } from "../../../assets/icons/arrow-bottom-icon.svg";
 
 import Typography from "components/display/Typography";
 

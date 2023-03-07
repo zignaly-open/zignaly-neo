@@ -12,7 +12,7 @@ import {
   SpaceTaker,
 } from "./styles";
 import { useTheme } from "styled-components";
-import Theme from "theme/theme";
+import Theme from "../../../theme/theme";
 
 const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => JSX.Element = (
   {

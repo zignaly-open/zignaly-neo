@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+// @ts-ignore
 import Jazzicon from "@metamask/jazzicon";
 import { sizes, Image, JazzIcon, Layout } from "./styles";
 

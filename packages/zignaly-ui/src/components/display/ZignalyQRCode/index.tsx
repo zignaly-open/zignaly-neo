@@ -1,6 +1,6 @@
 import { QRCodeSVG } from "qrcode.react";
 import React from "react";
-import { Column } from "utils/column";
+import { Column } from "../../../utils/column";
 import Typography from "../Typography";
 import { QRCodeContainer } from "./styles";
 

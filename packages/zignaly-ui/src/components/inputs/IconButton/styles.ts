@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { styledIf } from "utils/styled";
+import { styledIf } from "../../../utils/styled";
 import { buttonSizes, buttonVariants } from "./types";
 import Loader from "components/display/Loader";
 import Theme from "../../../theme/theme";

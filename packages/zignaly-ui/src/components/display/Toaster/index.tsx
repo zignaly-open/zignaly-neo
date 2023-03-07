@@ -2,10 +2,10 @@ import React from "react";
 import { ToasterProps } from "./types";
 import * as styled from "./styles";
 import Typography from "../Typography";
-import { ReactComponent as SuccessIcon } from "assets/icons/check-icon.svg";
+import { ReactComponent as SuccessIcon } from "../../../assets/icons/check-icon.svg";
 import InfoIcon from "@mui/icons-material/Info";
-import { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.svg";
-import { dark } from "theme";
+import { ReactComponent as ErrorAlertIcon } from "../../../assets/icons/error-alert-icon.svg";
+import { dark } from "./../../../theme";
 
 const Toaster = ({ variant = "error", size = "large", caption = "" }: ToasterProps) => {
   return (

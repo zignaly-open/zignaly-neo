@@ -4,8 +4,8 @@ import { Layout, Icon } from "./styles";
 
 import { ErrorMessageProps } from "./types";
 
-import { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.svg";
-import { dark } from "theme";
+import { ReactComponent as ErrorAlertIcon } from "../../../assets/icons/error-alert-icon.svg";
+import { dark } from "./../../../theme";
 import ZigTypography from "../ZigTypography";
 
 // TODO(Vetle): Refactor usage of Dark theme when light theme is ready

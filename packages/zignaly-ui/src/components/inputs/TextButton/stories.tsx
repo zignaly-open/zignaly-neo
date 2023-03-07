@@ -5,7 +5,7 @@ import TextButton from "./";
 
 import { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
 import { ReactComponent as ArrowDown } from "assets/icons/arrow-bottom-icon.svg";
-import { dark } from "theme";
+import { dark } from "./../../../theme";
 
 const ICONS = {
   ArrowDown: <ArrowDown height="20" width="20" color={"#E1E9F0"} />,

@@ -1,6 +1,6 @@
 import Loader from "components/display/Loader";
 import styled from "styled-components";
-import { styledIf } from "utils/styled";
+import { styledIf } from "../../../utils/styled";
 import { buttonVariants, buttonSizes, buttonColors } from "./types";
 
 const isPrimaryButton = (variant: keyof typeof buttonVariants) => variant === "primary";
