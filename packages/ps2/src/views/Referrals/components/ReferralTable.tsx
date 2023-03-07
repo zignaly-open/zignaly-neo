@@ -1,4 +1,4 @@
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Paper } from '@mui/material';
 import {
   createColumnHelper,
   ZigPriceLabel,
@@ -53,10 +53,18 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
       }),
       columnHelper.accessor('amount', {
         header: t('common:amount'),
-        cell: ({ getValue }) => (
+        cell: ({ row: { original } }) => (
           // a hack to make the column width fixed
-          <Box sx={{ minWidth: '60px' }}>
-            <ZigPriceLabel value={getValue()} usd />
+          <Box
+            sx={{ minWidth: '60px', flexDirection: 'column', display: 'flex' }}
+          >
+            <ZigPriceLabel value={original.amount} coin={original.coin} />
+            <ZigPriceLabel
+              variant={'caption'}
+              color={'neutral300'}
+              value={original.usdtAmount}
+              usd
+            />
           </Box>
         ),
       }),
@@ -77,7 +85,16 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
       columnHelper.accessor('status', {
         header: t('table.filter-status'),
         cell: ({ getValue }) => (
-          <ZigTypography>
+          <ZigTypography
+            color={
+              (getValue() === StatusType.Pending && 'yellow') ||
+              (getValue() === StatusType.Completed && 'greenGraph') ||
+              ([StatusType.Failed, StatusType.Cancelled].includes(
+                getValue() as StatusType,
+              ) &&
+                'red')
+            }
+          >
             {getValue() in StatusType
               ? t(`statusTypes.${getValue()}`)
               : getValue()}
@@ -110,12 +127,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
             alignItems: 'center',
           }}
         >
-          <ZigTypography
-            sx={{
-              mb: 3,
-            }}
-            variant={'h2'}
-          >
+          <ZigTypography sx={{}} variant={'h2'}>
             {t('table.title')}
           </ZigTypography>
         </Grid>
@@ -137,21 +149,27 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         </FilterWrapperContainer>
       </Grid>
 
-      <ZigTable
-        initialState={{
-          sorting: [
-            {
-              id: 'date',
-              desc: true,
-            },
-          ],
-        }}
-        columns={columns}
-        data={filteredHistory}
-        columnVisibility={false}
-        enableSortingRemoval={false}
-        emptyMessage={t('table.no-referrals')}
-      />
+      {!referrals.length ? (
+        <ZigTable
+          initialState={{
+            sorting: [
+              {
+                id: 'date',
+                desc: true,
+              },
+            ],
+          }}
+          columns={columns}
+          data={filteredHistory}
+          columnVisibility={false}
+          enableSortingRemoval={false}
+          emptyMessage={t('table.no-referrals')}
+        />
+      ) : (
+        <Paper sx={{ p: 2 }}>
+          <ZigTypography>{t('table.no-commission-history')}</ZigTypography>
+        </Paper>
+      )}
     </Box>
   );
 };

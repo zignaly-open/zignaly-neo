@@ -70,7 +70,7 @@ const Referrals: React.FC = () => {
               >
                 <img
                   src={'/images/referrals/envelope-main.png'}
-                  style={{ width: 200 }}
+                  style={{ width: 200, marginTop: 17 }}
                   alt={'referral'}
                 />
               </Box>
@@ -86,7 +86,7 @@ const Referrals: React.FC = () => {
                   sx={{
                     mb: 1,
                   }}
-                  variant={'h1'}
+                  variant={'bigNumber'}
                 >
                   {t('title')}
                 </ZigTypography>
