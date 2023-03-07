@@ -85,6 +85,8 @@ export type TransactionType = keyof typeof TRANSACTION_TYPE;
 
 export const enum TransactionStateType {
   COMPLETED = 'completed',
+  SENT = 'sent',
+  TRANSFER = 'transfer',
   PENDING = 'pending',
   ERROR = 'error',
 }

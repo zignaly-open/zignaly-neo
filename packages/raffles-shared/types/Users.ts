@@ -6,6 +6,8 @@ export type UserType = {
   email: string;
   discordName: string;
   onBoardingCompleted: Date;
+  emailVerificationSent?: boolean;
+  zhitRewarded?: boolean;
   isAdmin?: boolean;
   emailVerified?: boolean;
 };
