@@ -75,7 +75,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         ),
       }),
       columnHelper.accessor('status', {
-        header: t('table.user-trader'),
+        header: t('table.filter-status'),
         cell: ({ getValue }) => (
           <ZigTypography>
             {getValue() in StatusType
