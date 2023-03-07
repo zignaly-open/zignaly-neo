@@ -20,6 +20,7 @@ import Header from './components/Navigation/Header';
 import UpdateChecker from './components/Navigation/UpdateChecker';
 import DateLocaleFixer from './components/Navigation/DateLocaleFixer';
 import Tracker from './components/Navigation/Tracker/Tracker';
+import useReferralCookie from 'util/hooks/useReferralCookie';
 
 if (
   process.env.NODE_ENV === 'production' &&
@@ -34,6 +35,8 @@ if (
 }
 
 function App() {
+  useReferralCookie();
+
   return (
     <Provider store={store}>
       <ThemeInheritorStyled theme={dark}>

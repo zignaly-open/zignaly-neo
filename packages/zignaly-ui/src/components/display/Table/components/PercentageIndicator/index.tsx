@@ -6,6 +6,7 @@ import { Layout, Row, Container, Indicator, Subtitle, Inline } from "./styles";
 import { ValueIndicator } from "components/styled";
 import { PercentageIndicatorProps } from "./types";
 import Typography from "components/display/Typography";
+import { Tooltip } from "@mui/material";
 
 const PercentageIndicator = ({
   value = "0",
@@ -14,6 +15,7 @@ const PercentageIndicator = ({
   normalized = false,
   stableCoinOperative = false,
   style,
+  labelTooltip = "",
 }: PercentageIndicatorProps) => {
   let bigNumberValue = new BigNumber(value);
   if (normalized) bigNumberValue = bigNumberValue.multipliedBy(100);
@@ -96,22 +98,24 @@ const PercentageIndicator = ({
   return (
     <Layout>
       <Container>
-        <Row>
-          {!isNaN(+value) ? (
-            <>
-              {renderIndicator()}
-              {label && (
-                <Subtitle variant="h5" color="neutral400">
-                  {label}
-                </Subtitle>
-              )}
-            </>
-          ) : (
-            <Typography variant={"body2"} color={"neutral400"}>
-              -
-            </Typography>
-          )}
-        </Row>
+        <Tooltip title={labelTooltip}>
+          <Row>
+            {!isNaN(+value) ? (
+              <>
+                {renderIndicator()}
+                {label && (
+                  <Subtitle variant="h5" color="neutral400">
+                    <>{label}</>
+                  </Subtitle>
+                )}
+              </>
+            ) : (
+              <Typography variant={"body2"} color={"neutral400"}>
+                -
+              </Typography>
+            )}
+          </Row>
+        </Tooltip>
       </Container>
     </Layout>
   );

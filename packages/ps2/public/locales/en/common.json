@@ -22,7 +22,7 @@
     "description": "Something went wrong. Please try again later or contact support. Or abandon the industrial society and build a cabin in the woods."
   },
   "main-menu": {
-    "dropdown-link-forTrading": "For Trading Services",
+    "dropdown-link-forTrading": "Manage your Services",
     "dropdown-link-helpDocs": "Help Docs"
   },
   "refresh": {
@@ -35,6 +35,9 @@
     "notAuth-dropdown-link-balances": "My Balances",
     "notAuth-dropdown-link-wallet": "ZIG Wallet",
     "referrals": "Referrals",
+    "notAuth-dropdown-link-settings": "Settings",
+    "notAuth-dropdown-link-password": "Password",
+    "notAuth-dropdown-link-2fa": "Two-Factor Authentication",
     "notAuth-button-logOut": "Logout"
   },
   "account-selector": {
@@ -45,7 +48,7 @@
     }
   },
   "navigation-menu": {
-    "profit-sharing": "Profit Sharing",
+    "profit-sharing": "Browse Top Traders",
     "become-trader": "Offer your trading services"
   },
   "amount": "Amount",
