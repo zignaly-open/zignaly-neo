@@ -12,11 +12,9 @@ export default function useConfirmEmail(): {
   const confirmEmail = async (hashStr: string): Promise<string> => {
     try {
       const { data } = await confirmEmailMutation({ variables: { hashStr } });
-      return data.confirmEmail
-        ? 'email-confirmed'
-        : 'confirmation-link-invalid';
+      return data.confirmEmail;
     } catch (error) {
-      return 'confirmation-link-invalid';
+      return error + 'Unexpected error verifying email. Please try again.';
     }
   };
 

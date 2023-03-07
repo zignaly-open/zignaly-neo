@@ -219,7 +219,7 @@ export const generateService = (user: ContextUser) => {
       const user = await User.findByPk(userId);
 
       if (user.emailVerified) {
-        return true;
+        return 'email-confirmed';
       }
 
       if (userId) {
@@ -253,14 +253,14 @@ export const generateService = (user: ContextUser) => {
           if (user.previousEmail) {
             await deleteContact(user.previousEmail);
           }
-          return true;
+          return 'email-confirmed';
         } else {
-          return false;
+          return 'confirmation-link-invalid';
         }
       }
     } catch (e) {
       console.error('Error Confirm Email:');
-      return false;
+      return 'confirmation-link-invalid';
     }
   };
 
