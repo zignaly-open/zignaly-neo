@@ -53,7 +53,12 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
       }),
       columnHelper.accessor('amount', {
         header: t('common:amount'),
-        cell: ({ getValue }) => <ZigPriceLabel value={getValue()} usd />,
+        cell: ({ getValue }) => (
+          // a hack to make the column width fixed
+          <Box sx={{ minWidth: '60px' }}>
+            <ZigPriceLabel value={getValue()} usd />
+          </Box>
+        ),
       }),
       columnHelper.accessor('email', {
         header: t('table.user-trader'),
