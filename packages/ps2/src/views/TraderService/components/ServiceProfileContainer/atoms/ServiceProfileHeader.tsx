@@ -1,7 +1,7 @@
 import React from 'react';
-import { Service } from '../../../../../apis/ps2/service/types';
-import { useIsInvestedInService } from '../../../../../apis/ps2/investment/use';
-import { useActiveExchange } from '../../../../../apis/ps2/user/use';
+import { Service } from '../../../../../apis/service/types';
+import { useIsInvestedInService } from '../../../../../apis/investment/use';
+import { useActiveExchange } from '../../../../../apis/user/use';
 import { useMediaQuery } from '@mui/material';
 import theme from '../../../../../theme';
 import { useTranslation } from 'react-i18next';

@@ -24,7 +24,7 @@ import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import LabelValueLine from './atoms/LabelValueLine';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import { useWithdrawMutation } from 'apis/coin/api';
-import { useActiveExchange, useCheck2FA } from 'apis/ps2/user/use';
+import { useActiveExchange, useCheck2FA } from 'apis/user/use';
 
 function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const { t } = useTranslation('withdraw-crypto');

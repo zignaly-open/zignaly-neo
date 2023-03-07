@@ -2,7 +2,7 @@ import React from 'react';
 import ServiceHeader from './components/ServiceHeader';
 import { TraderServicePageContainer } from './components/styles';
 import { useParams } from 'react-router-dom';
-import { useTraderServiceTitle } from '../../apis/ps2/service/use';
+import { useTraderServiceTitle } from '../../apis/service/use';
 import ApiKeyManagement from './components/ApiKeys/ApiKeyManagement';
 
 const ServiceApi: React.FC = () => {

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Service } from '../../../../../apis/ps2/service/types';
+import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
 import MarkdownSection from './MarkdownSection';
 

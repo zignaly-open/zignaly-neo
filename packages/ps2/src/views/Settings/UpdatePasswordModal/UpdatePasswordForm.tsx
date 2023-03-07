@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useUpdatePasswordMutation } from 'apis/ps2/user/api';
+import { useUpdatePasswordMutation } from 'apis/user/api';
 import { useForm, Controller } from 'react-hook-form';
 import { Form } from './styles';
 import { UpdatePasswordValidation } from './validations';
@@ -11,7 +11,7 @@ import { StyledErrorOutline } from '../../Auth/components/SignupForm/styles';
 import { UpdatePasswordFormType } from './types';
 import PasswordVisibilityAdornment from '../../Auth/components/atoms/PasswordVisibilityAdornment';
 import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
-import { useCheck2FA, useLogout } from 'apis/ps2/user/use';
+import { useCheck2FA, useLogout } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
 
 const UpdatePasswordForm = ({ close }: { close: () => void }) => {

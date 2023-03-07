@@ -27,7 +27,7 @@ import { allowedDeposits } from '../../../../../../util/coins';
 import {
   useActiveExchange,
   useCurrentUser,
-} from '../../../../../../apis/ps2/user/use';
+} from '../../../../../../apis/user/use';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import { trackCta } from '@zignaly-open/tracker';
 import { PURCHASE_CRYPTO } from '../../../../../../util/constants';

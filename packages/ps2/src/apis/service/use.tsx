@@ -19,13 +19,13 @@ import {
   TraderServiceChartProcessed,
   TransferPayload,
 } from './types';
-import { RootState } from '../../store';
+import { RootState } from '../store';
 import { useIsAuthenticated } from '../user/use';
 import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
 import { setChartTimeframe, setChartType } from './store';
 import { useMemo } from 'react';
-import { formatMonthDay } from '../../../views/Dashboard/components/MyDashboard/util';
+import { formatMonthDay } from '../../views/Dashboard/components/MyDashboard/util';
 
 export function useTraderServices() {
   const isAuthenticated = useIsAuthenticated();

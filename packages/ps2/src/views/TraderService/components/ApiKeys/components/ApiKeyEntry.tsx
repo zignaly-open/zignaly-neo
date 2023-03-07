@@ -20,13 +20,13 @@ import {
   useZTypeWordConfirm,
 } from '../../../../../components/ZModal/use';
 import EditApiKey from '../modals/EditApiKey';
-import { useServiceApiKeyDeleteMutation } from '../../../../../apis/ps2/serviceApiKey/api';
-import { useCheck2FA } from '../../../../../apis/ps2/user/use';
+import { useServiceApiKeyDeleteMutation } from '../../../../../apis/serviceApiKey/api';
+import { useCheck2FA } from '../../../../../apis/user/use';
 import {
   ServiceApiKey,
   ServiceApiKeyDeletePayload,
-} from '../../../../../apis/ps2/serviceApiKey/types';
-import { useRefetchIfDesynchronizedState } from '../../../../../apis/ps2/serviceApiKey/use';
+} from '../../../../../apis/serviceApiKey/types';
+import { useRefetchIfDesynchronizedState } from '../../../../../apis/serviceApiKey/use';
 import { BackendErrorResponse } from '../../../../../util/errors';
 
 const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {

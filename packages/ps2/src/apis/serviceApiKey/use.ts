@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useLazyServiceApiKeysQuery } from './api';
-import { BackendErrorResponse, ErrorCodes } from '../../../util/errors';
+import { BackendErrorResponse, ErrorCodes } from '../../util/errors';
 
 export const useRefetchIfDesynchronizedState = (
   serviceId?: string,

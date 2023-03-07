@@ -8,11 +8,11 @@ import CenteredLoader from '../../../../../components/CenteredLoader';
 import InvestInYourServiceForm from './forms/InvestInYourServiceForm';
 import CreateServiceForm from './forms/CreateServiceForm';
 import { ServiceFormData } from './forms/types';
-import { useCurrentBalance } from '../../../../../apis/ps2/investment/use';
+import { useCurrentBalance } from '../../../../../apis/investment/use';
 import {
   useCreateTraderServiceMutation,
   useServiceTypesInfoQuery,
-} from '../../../../../apis/ps2/service/api';
+} from '../../../../../apis/service/api';
 
 function CreateServiceModal({
   close,

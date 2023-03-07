@@ -7,10 +7,10 @@ import { Box } from '@mui/system';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { CreateKeyValidation } from '../validations';
-import { useServiceApiKeyCreateMutation } from '../../../../../apis/ps2/serviceApiKey/api';
+import { useServiceApiKeyCreateMutation } from '../../../../../apis/serviceApiKey/api';
 import { CreateApiKeyFormType } from '../types';
-import { ServiceApiKey } from '../../../../../apis/ps2/serviceApiKey/types';
-import { useCheck2FA } from '../../../../../apis/ps2/user/use';
+import { ServiceApiKey } from '../../../../../apis/serviceApiKey/types';
+import { useCheck2FA } from '../../../../../apis/user/use';
 
 function CreateApiKeysModal({
   close,

@@ -1,4 +1,4 @@
-import { TraderServiceAccessLevel } from 'apis/ps2/service/types';
+import { TraderServiceAccessLevel } from 'apis/service/types';
 
 export const VISIBILITY_LABEL = {
   [TraderServiceAccessLevel.Solo]: {

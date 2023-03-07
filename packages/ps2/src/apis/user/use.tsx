@@ -37,13 +37,13 @@ import {
   trackConversion,
   trackEndSession,
   trackNewSession,
-} from '../../../util/analytics';
-import { endLiveSession, startLiveSession } from '../../../util/liveSession';
-import { RootState } from '../../store';
+} from '../../util/analytics';
+import { endLiveSession, startLiveSession } from '../../util/liveSession';
+import { RootState } from '../store';
 import { useTranslation } from 'react-i18next';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
-import AuthVerifyModal from '../../../views/Auth/components/AuthVerifyModal';
-import { getImageOfAccount } from '../../../util/images';
+import AuthVerifyModal from '../../views/Auth/components/AuthVerifyModal';
+import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../service/api';
 import { QueryReturnTypeBasic } from 'util/queryReturnType';
 import { useZModal } from 'components/ZModal/use';

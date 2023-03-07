@@ -8,7 +8,7 @@ import {
   ZigTypography,
   ArrowBottomIcon,
 } from '@zignaly-open/ui';
-import { useActiveExchange } from '../../../../apis/ps2/user/use';
+import { useActiveExchange } from '../../../../apis/user/use';
 import AccountSelector from 'components/AccountSelector';
 
 const BalanceAccountSelector: React.FC = () => {

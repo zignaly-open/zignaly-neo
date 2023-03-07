@@ -18,7 +18,7 @@ import { Box } from '@mui/material';
 import { PaginationState } from '@tanstack/react-table';
 import { getTransactionSideType, truncateAddress } from './util';
 import { TRANSACTION_TYPE } from 'apis/coin/types';
-import { useActiveExchange } from '../../../../apis/ps2/user/use';
+import { useActiveExchange } from '../../../../apis/user/use';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(

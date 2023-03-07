@@ -15,11 +15,11 @@ import {
   useTraderServiceInvestors,
   useServiceDetails,
   useTraderServiceManagement,
-} from '../../../../apis/ps2/service/use';
+} from '../../../../apis/service/use';
 import {
   Investor,
   TraderServiceManagement,
-} from '../../../../apis/ps2/service/types';
+} from '../../../../apis/service/types';
 import ConnectionStateLabel from '../ConnectionStateLabel';
 import { YesNo } from './atoms';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';

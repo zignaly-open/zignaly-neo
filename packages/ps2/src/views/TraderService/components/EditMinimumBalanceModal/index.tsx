@@ -10,7 +10,7 @@ import {
   useServiceDetails,
   useTraderServiceManagement,
   useTraderServiceUpdateMinimum,
-} from '../../../../apis/ps2/service/use';
+} from '../../../../apis/service/use';
 import { Box } from '@mui/material';
 import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
 import { useToast } from '../../../../util/hooks/useToast';

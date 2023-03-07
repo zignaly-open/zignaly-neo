@@ -14,7 +14,7 @@ import {
   useIsAuthenticated,
   useLogout,
   useSelectExchange,
-} from '../../../apis/ps2/user/use';
+} from '../../../apis/user/use';
 import {
   Avatar,
   Button,

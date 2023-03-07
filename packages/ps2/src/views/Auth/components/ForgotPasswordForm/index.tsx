@@ -7,7 +7,7 @@ import { ForgotPasswordValidation } from './validations';
 import { ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../../routes';
 import { Button, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import { useResetPasswordRequestMutation } from 'apis/ps2/user/api';
+import { useResetPasswordRequestMutation } from 'apis/user/api';
 import AnchorLink from 'components/AnchorLink';
 
 const ForgotPasswordForm = () => {

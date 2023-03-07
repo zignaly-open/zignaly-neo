@@ -1,6 +1,6 @@
 import React from 'react';
-import { useServiceDetails } from '../../../../../apis/ps2/service/use';
-import { useSelectedInvestment } from '../../../../../apis/ps2/investment/use';
+import { useServiceDetails } from '../../../../../apis/service/use';
+import { useSelectedInvestment } from '../../../../../apis/investment/use';
 import InvestorDetailsForService from './InvestorDetailsForService';
 
 const InvestorDetails: React.FC = () => {

@@ -8,17 +8,14 @@ import {
 } from '@zignaly-open/ui';
 import { Trans, useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
-import {
-  useEnable2FAMutation,
-  useLazyEnable2FAInfoQuery,
-} from 'apis/ps2/user/api';
+import { useEnable2FAMutation, useLazyEnable2FAInfoQuery } from 'apis/user/api';
 import { useForm, Controller } from 'react-hook-form';
 import { Form, QRCode } from './styles';
 import { TwoFAValidation } from './validations';
 import { TwoFAFormType } from './types';
 import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
 import { useToast } from 'util/hooks/useToast';
-import { useLogout } from 'apis/ps2/user/use';
+import { useLogout } from 'apis/user/use';
 import {
   DOWNLOAD_GOOGLE_AUTHENTICATOR_URL,
   HELP_CREATE_ENABLE_2FA_URL,

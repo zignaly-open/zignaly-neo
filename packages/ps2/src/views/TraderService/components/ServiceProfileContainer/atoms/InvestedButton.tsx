@@ -1,12 +1,12 @@
 import React from 'react';
-import { Service } from '../../../../../apis/ps2/service/types';
+import { Service } from '../../../../../apis/service/types';
 import {
   useInvestedAccountsCount,
   useIsInvestedInService,
   useSetSelectedInvestment,
-} from '../../../../../apis/ps2/investment/use';
+} from '../../../../../apis/investment/use';
 import { useZModal } from '../../../../../components/ZModal/use';
-import { serviceToInvestmentServiceDetail } from '../../../../../apis/ps2/investment/util';
+import { serviceToInvestmentServiceDetail } from '../../../../../apis/investment/util';
 import EditInvestmentModal from '../../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
 import { useTranslation } from 'react-i18next';
 import {

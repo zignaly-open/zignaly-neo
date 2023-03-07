@@ -12,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import {
   useInvestmentDetails,
   useSelectedInvestment,
-} from '../../../../../apis/ps2/investment/use';
+} from '../../../../../apis/investment/use';
 
 const PendingTransactions: React.FC<{
   setView: ChangeViewFn;

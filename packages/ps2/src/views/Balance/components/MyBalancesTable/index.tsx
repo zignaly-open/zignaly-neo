@@ -8,7 +8,7 @@ import {
 } from '@zignaly-open/ui';
 import { BalanceTableDataType } from './types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
-import { useActiveExchange } from '../../../../apis/ps2/user/use';
+import { useActiveExchange } from '../../../../apis/user/use';
 import { allowedDeposits } from 'util/coins';
 import { Add, Remove } from '@mui/icons-material';
 import { useCoinBalances, useExchangeCoinsList } from 'apis/coin/use';

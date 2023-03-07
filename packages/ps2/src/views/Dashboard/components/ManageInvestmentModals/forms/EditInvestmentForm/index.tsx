@@ -30,12 +30,12 @@ import {
   useSelectedInvestment,
   useUpdateTakeProfitAndInvestMore,
   useUpdateTakeProfitPercentage,
-} from '../../../../../../apis/ps2/investment/use';
+} from '../../../../../../apis/investment/use';
 import { EditFormData, EditInvestmentFormProps } from './types';
 import { EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
-import { useServiceDetails } from 'apis/ps2/service/use';
+import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
 
 function EditInvestmentForm({

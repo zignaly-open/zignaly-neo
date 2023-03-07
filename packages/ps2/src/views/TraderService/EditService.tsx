@@ -5,11 +5,11 @@ import { Navigate, useParams } from 'react-router-dom';
 import {
   useServiceDetails,
   useTraderServiceTitle,
-} from '../../apis/ps2/service/use';
+} from '../../apis/service/use';
 import EditServiceProfileContainer from './components/EditServiceProfileContainer';
 import LayoutContentWrapper from 'components/LayoutContentWrapper';
 import { BackendError, ErrorCodes } from 'util/errors';
-import { Service } from 'apis/ps2/service/types';
+import { Service } from 'apis/service/types';
 import { ROUTE_404 } from 'routes';
 import CriticalError from 'components/Stub/CriticalError';
 

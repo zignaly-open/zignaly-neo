@@ -16,7 +16,7 @@ import {
   useCurrentBalance,
   useInvestInService,
   useSelectedInvestment,
-} from '../../../../../../apis/ps2/investment/use';
+} from '../../../../../../apis/investment/use';
 import { InvestFormData, InvestFormProps } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
@@ -24,7 +24,7 @@ import { Box } from '@mui/material';
 import { CheckBox } from '@zignaly-open/ui';
 import { AmountInvested, TokenValue } from '../EditInvestmentForm/styles';
 import { NumericFormat } from 'react-number-format';
-import { useServiceDetails } from 'apis/ps2/service/use';
+import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
 
 function InvestForm({ close, onInvested }: InvestFormProps) {

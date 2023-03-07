@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useCurrentUser } from '../../../apis/ps2/user/use';
+import { useCurrentUser } from '../../../apis/user/use';
 import { track, trackCta } from '@zignaly-open/tracker';
 import { useLocation } from 'react-router-dom';
 import { trackPage } from 'util/analytics';

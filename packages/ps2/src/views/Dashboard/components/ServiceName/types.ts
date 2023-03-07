@@ -1,4 +1,4 @@
-import { Investment } from '../../../../apis/ps2/investment/types';
+import { Investment } from '../../../../apis/investment/types';
 
 export interface ServiceNameProps {
   service: Investment;

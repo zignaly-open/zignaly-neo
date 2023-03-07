@@ -1,4 +1,4 @@
-import { MarketplaceService } from '../../../../apis/ps2/marketplace/types';
+import { MarketplaceService } from '../../../../apis/marketplace/types';
 
 export type MarketplaceActionType = {
   service: MarketplaceService;

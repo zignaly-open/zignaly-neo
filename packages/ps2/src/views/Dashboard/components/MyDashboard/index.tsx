@@ -12,15 +12,15 @@ import { useTranslation } from 'react-i18next';
 import {
   useInvestments,
   useSetSelectedInvestment,
-} from '../../../../apis/ps2/investment/use';
+} from '../../../../apis/investment/use';
 import BigNumber from 'bignumber.js';
 import { formatDateFromDays } from './util';
-import { Investment } from '../../../../apis/ps2/investment/types';
+import { Investment } from '../../../../apis/investment/types';
 import { BalanceSummary } from '../BalanceSummary';
 import EditInvestmentModal from '../ManageInvestmentModals/EditInvestmentModal';
 import { ServiceName } from '../ServiceName';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
-import { useActiveExchange } from '../../../../apis/ps2/user/use';
+import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import { useZModal } from '../../../../components/ZModal/use';
 import { differenceInDays } from 'date-fns';

@@ -3,7 +3,7 @@ import React from 'react';
 import ServiceHeader from './components/ServiceHeader';
 import { useParams } from 'react-router-dom';
 import { TraderServicePageContainer } from './components/styles';
-import { useTraderServiceTitle } from '../../apis/ps2/service/use';
+import { useTraderServiceTitle } from '../../apis/service/use';
 
 const Investors: React.FC = () => {
   const { serviceId } = useParams();

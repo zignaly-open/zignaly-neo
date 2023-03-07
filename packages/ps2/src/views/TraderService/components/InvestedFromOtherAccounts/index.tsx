@@ -2,9 +2,9 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
 import CompareArrowsIcon from '@mui/icons-material/CompareArrows';
-import { useIsInvestedInService } from '../../../../apis/ps2/investment/use';
+import { useIsInvestedInService } from '../../../../apis/investment/use';
 import ZModal from '../../../../components/ZModal';
-import { Service } from '../../../../apis/ps2/service/types';
+import { Service } from '../../../../apis/service/types';
 import {
   TextButton,
   ZigTable,
@@ -15,7 +15,7 @@ import {
   useActiveExchange,
   useCurrentUser,
   useSelectExchange,
-} from '../../../../apis/ps2/user/use';
+} from '../../../../apis/user/use';
 import { Box } from '@mui/material';
 import { ColumnDef } from '@tanstack/react-table';
 import BigNumber from 'bignumber.js';

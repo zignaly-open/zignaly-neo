@@ -1,7 +1,7 @@
 import {
   ServiceApiKeyPayload,
   ServiceApiKeyPermission,
-} from '../../../../apis/ps2/serviceApiKey/types';
+} from '../../../../apis/serviceApiKey/types';
 import { EditApiKeyFormType } from './types';
 import { ipStringToArray } from './validations';
 

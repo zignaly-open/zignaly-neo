@@ -8,7 +8,7 @@ import {
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useDisable2FAMutation } from 'apis/ps2/user/api';
+import { useDisable2FAMutation } from 'apis/user/api';
 import { useForm, Controller } from 'react-hook-form';
 import { Form } from './styles';
 import { TwoFAValidation } from './validations';
@@ -16,7 +16,7 @@ import { TwoFAFormType } from './types';
 import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
 import { useToast } from 'util/hooks/useToast';
 import { useDispatch } from 'react-redux';
-import { enable2FA } from 'apis/ps2/user/store';
+import { enable2FA } from 'apis/user/store';
 
 const Disable2FAForm = ({ close }: { close: () => void }) => {
   const { t } = useTranslation('settings');

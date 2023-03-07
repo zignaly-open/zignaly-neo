@@ -1,5 +1,5 @@
 import React from 'react';
-import { Service } from '../../../../../apis/ps2/service/types';
+import { Service } from '../../../../../apis/service/types';
 import { useToast } from '../../../../../util/hooks/useToast';
 import { Box, Tooltip, useMediaQuery } from '@mui/material';
 import theme from '../../../../../theme';

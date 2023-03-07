@@ -1,4 +1,4 @@
-import { ExchangeType } from '../../../../../../apis/ps2/user/types';
+import { ExchangeType } from '../../../../../../apis/user/types';
 import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
 
 export type ServiceFormData = {

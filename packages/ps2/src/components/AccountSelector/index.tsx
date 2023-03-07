@@ -5,9 +5,9 @@ import {
   useActiveExchange,
   useCurrentUser,
   useSelectExchange,
-} from '../../apis/ps2/user/use';
+} from '../../apis/user/use';
 import { getImageOfAccount } from '../../util/images';
-import { Exchange, UserData } from '../../apis/ps2/user/types';
+import { Exchange, UserData } from '../../apis/user/types';
 import { DropDownProps } from '@zignaly-open/ui/lib/components/display/DropDown/types';
 
 const AccountSelector: React.FC<{

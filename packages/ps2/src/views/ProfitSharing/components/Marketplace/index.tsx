@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useMarketplace } from '../../../../apis/ps2/marketplace/use';
+import { useMarketplace } from '../../../../apis/marketplace/use';
 import { useTranslation } from 'react-i18next';
 import {
   PageContainer,
@@ -11,10 +11,10 @@ import {
 } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
-import { MarketplaceService } from '../../../../apis/ps2/marketplace/types';
-import { Investment } from '../../../../apis/ps2/investment/types';
+import { MarketplaceService } from '../../../../apis/marketplace/types';
+import { Investment } from '../../../../apis/investment/types';
 import { ServiceName } from '../../../Dashboard/components/ServiceName';
-import { marketplaceServiceToInvestmentType } from '../../../../apis/ps2/marketplace/util';
+import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace/util';
 import AssetsInPool from '../../../../components/AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 import { TableWrapper } from './styles';

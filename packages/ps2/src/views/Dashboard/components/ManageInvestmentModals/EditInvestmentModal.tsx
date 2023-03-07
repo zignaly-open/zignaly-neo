@@ -8,11 +8,11 @@ import PendingTransactionsList from './views/PendingTransactionsList';
 import {
   useInvestmentDetails,
   useSelectedInvestment,
-} from '../../../../apis/ps2/investment/use';
+} from '../../../../apis/investment/use';
 import WithdrawWithdrawInvestmentSuccessPerform from './views/WithdrawInvestmentPerform';
 import EditInvestmentSuccess from './views/EditInvestmentSuccess';
 import WithdrawModalSuccess from './views/WithdrawInvestmentSuccess';
-import { useServiceDetails } from '../../../../apis/ps2/service/use';
+import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import ZModal from '../../../../components/ZModal';
 

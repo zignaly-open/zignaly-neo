@@ -16,7 +16,7 @@ import {
   useCurrentBalance,
   useInvestmentDetails,
   useSelectedInvestment,
-} from '../../../../../apis/ps2/investment/use';
+} from '../../../../../apis/investment/use';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { ColumnDef } from '@tanstack/react-table';
 

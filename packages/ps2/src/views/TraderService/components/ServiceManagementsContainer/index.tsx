@@ -26,7 +26,7 @@ import {
   useServiceDetails,
   useTraderServiceBalance,
   useTraderServiceManagement,
-} from '../../../../apis/ps2/service/use';
+} from '../../../../apis/service/use';
 import EditMinimumBalanceModal from '../EditMinimumBalanceModal';
 import TransferFundsModal from '../TransferFundsModal';
 import ManagementHelper from '../ManagementHelper';
@@ -35,7 +35,7 @@ import {
   TraderServiceBalance,
   TraderServiceFull,
   TraderServiceManagement,
-} from '../../../../apis/ps2/service/types';
+} from '../../../../apis/service/types';
 import { useZModal } from '../../../../components/ZModal/use';
 import { useTheme } from '@mui/material';
 

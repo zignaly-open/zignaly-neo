@@ -4,7 +4,7 @@ import ZModal from '../../../../components/ZModal';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { useTransactionsHistoryCsvMutation } from 'apis/coin/api';
-import { useActiveExchange } from 'apis/ps2/user/use';
+import { useActiveExchange } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
 import { ExportModalProps } from './types';
 import { differenceInDays } from 'date-fns';

@@ -1,6 +1,6 @@
 import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
 import { CoinBalances } from 'apis/coin/types';
-import { Exchange } from 'apis/ps2/user/types';
+import { Exchange } from 'apis/user/types';
 import { WalletCoins } from 'apis/wallet/types';
 
 export type WalletDepositModalProps = {
