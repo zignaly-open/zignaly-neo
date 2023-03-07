@@ -4,12 +4,13 @@ import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_REFERRALS } from '../../../routes';
+import { GradientBorderButtonWrapper } from './atoms';
 
 const ReferralButton = () => {
   const { t } = useTranslation('referrals');
   return (
     <Link to={generatePath(ROUTE_REFERRALS)}>
-      <>
+      <GradientBorderButtonWrapper>
         <ZigButton
           component={'a'}
           sx={{
@@ -42,7 +43,7 @@ const ReferralButton = () => {
             <ZigTypography
               color={'primary'}
               sx={{
-                fontSize: '12px',
+                fontSize: '13px',
                 lineHeight: 1,
                 textAlign: 'center',
               }}
@@ -52,8 +53,8 @@ const ReferralButton = () => {
             <ZigTypography
               sx={{
                 mt: '1px',
-                fontSize: '10px',
-                lineHeight: 1,
+                fontSize: '12px',
+                lineHeight: 1.3,
                 textAlign: 'center',
               }}
             >
@@ -61,7 +62,7 @@ const ReferralButton = () => {
             </ZigTypography>
           </Box>
         </ZigButton>
-      </>
+      </GradientBorderButtonWrapper>
     </Link>
   );
 };
