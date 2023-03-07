@@ -249,7 +249,7 @@ export const generateService = (user: ContextUser) => {
             );
           }
           const balance = await getUserBalance(user.publicAddress);
-          broadcastBalanceChange(balance, user);
+          await broadcastBalanceChange(balance, user);
           if (user.previousEmail) {
             await deleteContact(user.previousEmail);
           }
