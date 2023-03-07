@@ -11,7 +11,7 @@ const SuccessFeeInputWrapper: React.FC<{ value: number | string }> = ({
   const { t } = useTranslation('service');
   const feeWeCharge = !value
     ? 0
-    : Math.max(0, Math.min(75, Number(value)) - ZIGNALY_PROFIT_FEE);
+    : Math.max(0, Math.min(75, +value) - ZIGNALY_PROFIT_FEE);
 
   return (
     <>
