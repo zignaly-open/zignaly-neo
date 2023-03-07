@@ -37,22 +37,18 @@ const BalanceButton = () => {
 
   if (!balanceStatus) return null;
 
-  const LinkWrapper = ({ children }: { children: React.ReactElement }) => {
-    if (balanceStatus === BalanceStatus.NoFunds) {
-      return (
-        <div
-          onClick={() =>
-            showModal(DepositModal, {
-              ctaId: 'balance-add-funds-button',
-            })
-          }
-        >
-          {children}
-        </div>
-      );
-    }
-
-    return (
+  const linkWrap = (v: React.ReactElement) =>
+    balanceStatus === BalanceStatus.NoFunds ? (
+      <div
+        onClick={() =>
+          showModal(DepositModal, {
+            ctaId: 'balance-add-funds-button',
+          })
+        }
+      >
+        {v}
+      </div>
+    ) : (
       <Link
         to={generatePath(
           balanceStatus === BalanceStatus.NoInvestments
@@ -60,84 +56,77 @@ const BalanceButton = () => {
             : ROUTE_DASHBOARD,
         )}
       >
-        {children}
+        {v}
       </Link>
     );
-  };
 
-  return (
-    <LinkWrapper>
-      <Paper
-        sx={{
-          px: 1,
-          py: 0.25,
-        }}
-      >
-        <Box display='flex' alignItems='center'>
-          <Box
-            sx={{
-              display: 'flex',
-              ml: 1,
-              flexDirection: 'column',
-              justifyContent: 'center',
-            }}
-          >
-            <Box gap={1} display='flex'>
-              <ZigTypography variant='body2' color='neutral300'>
-                {t('balance.account-value')}
-              </ZigTypography>
-              <ZigPriceLabel
-                usd
-                value={balance.totalWalletUSDT}
-                color='neutral100'
-                variant='body2'
-              />
-            </Box>
-            <Box gap={1} display='flex'>
-              <ZigTypography variant='body2' color='neutral300'>
-                {t('balance.available')}
-              </ZigTypography>
-              <ZigPriceLabel
-                usd
-                value={balance.totalFreeUSDT}
-                color='neutral100'
-                variant='body2'
-              />
-            </Box>
-          </Box>
-          <Divider
-            variant='middle'
-            orientation='vertical'
-            sx={{
-              borderColor: (theme) => theme.palette.neutral600,
-              mx: 1.5,
-              my: 0,
-            }}
-            flexItem
-          />
-          <Box
-            display='flex'
-            sx={{
-              maxWidth: 113,
-            }}
-            alignItems='center'
-          >
-            <ZigTypography
-              variant='body2'
-              color='neutral300'
-              textAlign='center'
-            >
-              {balanceStatus === BalanceStatus.NoFunds
-                ? t('balance.deposit-funds')
-                : balanceStatus === BalanceStatus.NoInvestments
-                ? t('balance.find-traders')
-                : t('balance.my-portfolio')}
+  return linkWrap(
+    <Paper
+      sx={{
+        px: 1,
+        py: 0.25,
+      }}
+    >
+      <Box display='flex' alignItems='center'>
+        <Box
+          sx={{
+            display: 'flex',
+            ml: 1,
+            flexDirection: 'column',
+            justifyContent: 'center',
+          }}
+        >
+          <Box gap={1} display='flex'>
+            <ZigTypography variant='body2' color='neutral300'>
+              {t('balance.account-value')}
             </ZigTypography>
-            <ChevronRight />
+            <ZigPriceLabel
+              usd
+              value={balance.totalWalletUSDT}
+              color='neutral100'
+              variant='body2'
+            />
+          </Box>
+          <Box gap={1} display='flex'>
+            <ZigTypography variant='body2' color='neutral300'>
+              {t('balance.available')}
+            </ZigTypography>
+            <ZigPriceLabel
+              usd
+              value={balance.totalFreeUSDT}
+              color='neutral100'
+              variant='body2'
+            />
           </Box>
         </Box>
-      </Paper>
-    </LinkWrapper>
+        <Divider
+          variant='middle'
+          orientation='vertical'
+          sx={{
+            borderColor: (theme) => theme.palette.neutral600,
+            mx: 1.5,
+            my: 0,
+          }}
+          flexItem
+        />
+        <Box
+          display='flex'
+          sx={{
+            maxWidth: 113,
+          }}
+          alignItems='center'
+        >
+          <ZigTypography variant='body2' color='neutral300' textAlign='center'>
+            {balanceStatus === BalanceStatus.NoFunds
+              ? t('balance.deposit-funds')
+              : balanceStatus === BalanceStatus.NoInvestments
+              ? t('balance.find-traders')
+              : t('balance.my-portfolio')}
+          </ZigTypography>
+          <ChevronRight />
+        </Box>
+      </Box>
+    </Paper>,
   );
 };
 
