@@ -2,12 +2,6 @@ import { Grid, Paper, styled } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
 import Box from '@mui/system/Box/Box';
 
-export const Hr = styled('hr')`
-  border-color: ${({ theme }) => theme.palette.neutral600};
-  border-width: 0;
-  border-bottom-width: 0.5px;
-`;
-
 export const TotalBoxBox = styled(Paper)`
   width: 250px;
   min-height: 160px;
@@ -23,11 +17,12 @@ export const TotalBoxBox = styled(Paper)`
 export const TotalBoxValue = styled(ZigTypography)`
   display: block;
   text-align: center;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin-top: 13px;
+  margin-bottom: 13px;
 
   &,
   span {
+    color: ${({ theme }) => theme.palette.neutral175};
     font-size: 30px;
   }
 `;
@@ -54,6 +49,7 @@ export const GetWhatYouDeserveLabel = styled(ZigTypography)`
   margin: 15px;
 `;
 
+// what are you doing stepbox, what if somebody sees us
 export const StepBox = styled(Box)`
   padding: 16px;
   img {
@@ -74,4 +70,14 @@ export const StepCounter = styled(Box)`
   display: flex;
   justify-content: center;
   margin-right: 19px;
+`;
+
+export const RewardsListContainer = styled(Grid)`
+  max-width: 900px;
+  margin: 0 auto;
+  border-top: 1px solid ${({ theme }) => theme.palette.neutral700};
+  border-bottom: 1px solid ${({ theme }) => theme.palette.neutral700};
+  background-color: rgba(255, 255, 255, 0.02);
+  padding-top: 20px;
+  padding-bottom: 20px;
 `;

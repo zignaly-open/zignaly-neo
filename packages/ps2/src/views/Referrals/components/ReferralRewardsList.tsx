@@ -1,7 +1,11 @@
 import React from 'react';
 import { Grid } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
-import { GetWhatYouDeserveLabel, TotalBoxValue } from '../styles';
+import {
+  GetWhatYouDeserveLabel,
+  RewardsListContainer,
+  TotalBoxValue,
+} from '../styles';
 import { Trans, useTranslation } from 'react-i18next';
 import { ReferralRewards } from '../../../apis/referrals/types';
 
@@ -19,7 +23,9 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           value: config.zignalySuccessFee,
         }}
       >
+        <ZigTypography />
         <TotalBoxValue />
+        <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
     config.enableSuccessFeeReward && !!config.traderSuccessFee && (
@@ -31,7 +37,9 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           value: config.traderSuccessFee,
         }}
       >
+        <ZigTypography />
         <TotalBoxValue />
+        <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
     config.enableRebateFeeReward && !!config.zignalyRebateFee && (
@@ -42,7 +50,9 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           value: config.zignalyRebateFee,
         }}
       >
+        <ZigTypography />
         <TotalBoxValue />
+        <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
     config.enableRebateFeeReward && !!config.traderRebateFee && (
@@ -53,7 +63,9 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           value: config.traderRebateFee,
         }}
       >
+        <ZigTypography />
         <TotalBoxValue />
+        <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
 
@@ -66,7 +78,9 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           symbol: config.rewardSignupSymbol,
         }}
       >
+        <ZigTypography />
         <TotalBoxValue />
+        <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
     !!config.rewardDepositAmount && (
@@ -79,7 +93,9 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           threshold: config.rewardMinDepositAmount,
         }}
       >
+        <ZigTypography />
         <TotalBoxValue />
+        <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
     !!config.rewardBalanceAmount && (
@@ -92,7 +108,9 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           threshold: config.rewardMinBalanceAmount,
         }}
       >
+        <ZigTypography />
         <TotalBoxValue />
+        <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
     !!config.rewardOneAllocationAmount && (
@@ -105,7 +123,9 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           threshold: config.rewardMinOneAllocationAmount,
         }}
       >
+        <ZigTypography />
         <TotalBoxValue />
+        <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
     !!config.rewardTotalAllocationAmount && (
@@ -119,13 +139,15 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           days: config.rewardMinTotalAllocationDays,
         }}
       >
+        <ZigTypography />
         <TotalBoxValue />
+        <ZigTypography color='neutral504' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
   ].filter(Boolean);
 
   return (
-    <Grid
+    <RewardsListContainer
       container
       sx={{
         mt: 4,
@@ -134,7 +156,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
     >
       <Grid item xs={12} md={12}>
         <ZigTypography
-          variant={'h2'}
+          variant={'h1'}
           textAlign={'center'}
           sx={{ mt: 2, mb: 2.5 }}
         >
@@ -154,7 +176,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           ))}
         </Grid>
       </Grid>
-    </Grid>
+    </RewardsListContainer>
   );
 };
 

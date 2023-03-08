@@ -15,7 +15,6 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import GroupIcon from '@mui/icons-material/Group';
-import { Hr } from './styles';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { useCurrentUser } from '../../apis/user/use';
 import copy from 'copy-to-clipboard';
@@ -114,11 +113,7 @@ const Referrals: React.FC = () => {
               </Box>
             </Box>
 
-            <Hr />
-
             <ReferralRewardsList rewards={rewardsData} />
-
-            <Hr />
 
             {!referrals.history?.length ? (
               <>
