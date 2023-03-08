@@ -12,6 +12,7 @@ const ReferralButton = () => {
     <Link to={generatePath(ROUTE_REFERRALS)}>
       <GradientBorderButtonWrapper>
         <ZigButton
+          id='menu__referral-link'
           component={'a'}
           sx={{
             cursor: 'pointer',

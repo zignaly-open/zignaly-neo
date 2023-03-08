@@ -103,7 +103,12 @@ const Referrals: React.FC = () => {
                   readOnly={true}
                   value={link}
                   rightSideElement={
-                    <CloneIcon width={40} height={40} color={dark.neutral300} />
+                    <CloneIcon
+                      id='referrals__copy-link'
+                      width={40}
+                      height={40}
+                      color={dark.neutral300}
+                    />
                   }
                   onClickRightSideElement={() => {
                     copy(link);
