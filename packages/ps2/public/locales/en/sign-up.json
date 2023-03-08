@@ -1,0 +1,24 @@
+{
+  "company": "zignaly",
+  "description": "Invest together with the top traders through <0>Profit Sharing</0>",
+  "info-bar": {
+    "item1": {
+      "title": "+150 expert traders",
+      "description": "Verified with KYC, proven results and investing their own money"
+    },
+    "item2": {
+      "title": "No monthly fee",
+      "description": "Pay only when you make a profit"
+    },
+    "item3": {
+      "title": "No minimum investment",
+      "description": "The average investment allocation is $200, but you can start from $1"
+    }
+  },
+  "trusted-by": "Trusted by +430.000 users worldwide",
+  "bottom-description": "The biggest financial outlest have featured Zignaly, including:",
+  "signup-form": {
+    "title": "Create a free account\nYou’re <0>2 mins away<0> from investing",
+    "protect": "We take the protection of your data seriously"
+  }
+}
