@@ -5,7 +5,6 @@ import { BrandImage, PageContainer, ZigTypography } from '@zignaly-open/ui';
 import SignupForm from './components/SignupForm';
 import { Grid, Link } from '@mui/material';
 import { Box } from '@mui/system';
-// import { Image } from '@mui/icons-material';
 
 export type InfoBarItem = {
   title: string;
@@ -104,10 +103,12 @@ const Signup: React.FC = () => {
                     width={'53px'}
                   />
                   <Box
-                    display={'flex'}
-                    flexDirection={'column'}
-                    marginLeft={'26px'}
-                    maxWidth={'300px'}
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'column',
+                      marginLeft: '26px',
+                      maxWidth: '300px',
+                    }}
                   >
                     <ZigTypography
                       variant={'h2'}

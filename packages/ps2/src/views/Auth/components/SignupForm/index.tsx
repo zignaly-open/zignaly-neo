@@ -2,7 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
-import { Form, Action, TitleHead, StyledErrorOutline } from './styles';
+import {
+  Form,
+  Action,
+  TitleHead,
+  StyledErrorOutline,
+  Wrapper,
+  LineBox,
+  ColouredLine,
+} from './styles';
 import { SignupValidation } from './validations';
 import { useSignup } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -64,44 +72,12 @@ const SignupForm: React.FC = () => {
   };
 
   return (
-    <Box
-      sx={{
-        width: '100%',
-        pt: 2,
-        pb: 2,
-        pr: 1,
-        pl: 1,
-        maxWidth: 500,
-        background:
-          'linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%)',
-        border: '1px solid #2a283a',
-        borderRadius: '5px',
-      }}
-    >
-      <Box
-        display={'flex'}
-        height={'10px'}
-        width={'100%'}
-        borderRadius={'3px'}
-        borderColor={'rgb(41,24,73)'}
-        sx={{
-          background: '#b7bac7',
-          border: '2px solid #150448',
-        }}
-        marginBottom={'20px'}
-      >
-        <Box
-          flex={3}
-          height={'100%'}
-          borderRadius={'2px'}
-          sx={{
-            background:
-              'linear-gradient(100.88deg, #3F3BB1 6.99%, #138EA0 93.63%)',
-          }}
-        />
+    <Wrapper>
+      <LineBox>
+        <ColouredLine />
         <Box flex={1} height={'100%'} />
-      </Box>
-      <Box sx={{ pl: 4, pr: 4 }}>
+      </LineBox>
+      <Box padding={'0 32px'}>
         <TitleHead>
           <ZigTypography variant={'h1'} fontWeight={700}>
             {t('signup-title')}
@@ -111,7 +87,6 @@ const SignupForm: React.FC = () => {
           <ZigTypography variant={'h2'}>
             <Trans i18nKey={'signup-description'} t={t}>
               <Link
-                href={'#'}
                 underline={'always'}
                 sx={{
                   color: 'neutral000',
@@ -278,7 +253,7 @@ const SignupForm: React.FC = () => {
           />
         </Form>
       </Box>
-    </Box>
+    </Wrapper>
   );
 };
 
