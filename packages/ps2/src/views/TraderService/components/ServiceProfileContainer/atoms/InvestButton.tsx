@@ -13,7 +13,6 @@ import { serviceToInvestmentServiceDetail } from '../../../../../apis/investment
 import InvestModal from '../../../../Dashboard/components/ManageInvestmentModals/InvestModal';
 import { ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../../../routes';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
-// import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import OtherAccountsButton from './OtherAccountsButton';
 import { Box } from '@mui/material';
 import ChooseDepositTypeModal from 'views/Dashboard/components/ManageInvestmentModals/ChooseDepositTypeModal';

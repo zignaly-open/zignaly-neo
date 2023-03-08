@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { Box, Divider, Link } from '@mui/material';
 import NorthEastIcon from '@mui/icons-material/NorthEast';
@@ -15,30 +15,38 @@ const ChooseDepositType: React.FC<{
   return (
     <>
       <Box padding={'15px 0'}>
-        <Typography variant={'body2'}>{t('description', { coin })}</Typography>
+        <ZigTypography variant={'body2'}>
+          {t('description', { coin })}
+        </ZigTypography>
       </Box>
       <Box
-        display={'flex'}
-        justifyContent={'center'}
-        height={200}
-        paddingTop={'25px'}
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          height: '180px',
+          paddingTop: '25px',
+        }}
       >
         <Box
-          display={'flex'}
-          flexDirection={'column'}
-          alignItems={'center'}
-          width={'100%'}
-          padding={'0 75px'}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            width: '100%',
+            padding: '0 75px',
+          }}
         >
           <Box
-            textAlign={'center'}
-            height={100}
-            paddingTop={'15px'}
-            lineHeight={2}
+            sx={{
+              textAlign: 'center',
+              height: '100px',
+              paddingTop: '15px',
+              lineHeight: 2,
+            }}
           >
-            <Typography variant={'body1'} color={'neutral100'}>
+            <ZigTypography variant={'h3'} letterSpacing={0.9}>
               {t('transfer-crypto', { coin })}
-            </Typography>
+            </ZigTypography>
           </Box>
 
           <ZigButton
@@ -50,12 +58,7 @@ const ChooseDepositType: React.FC<{
               setView(ChooseDepositTypeViews.DepositView);
             }}
           >
-            <ZigTypography
-              variant='body1'
-              color='neutral000'
-              fontWeight={600}
-              letterSpacing={1.1}
-            >
+            <ZigTypography variant={'h3'} fontWeight={600} letterSpacing={1.1}>
               {t('buttons.deposit', { coin })}
             </ZigTypography>
           </ZigButton>
@@ -69,15 +72,17 @@ const ChooseDepositType: React.FC<{
           role={'presentation'}
         />
         <Box
-          width={'100%'}
-          padding={'0 75px'}
-          display={'flex'}
-          flexDirection={'column'}
+          sx={{
+            width: '100%',
+            padding: '0 75px',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
         >
           <Box textAlign={'center'} height={100} paddingTop={'15px'}>
-            <Typography variant={'body1'} color={'neutral100'}>
+            <ZigTypography variant={'h3'} letterSpacing={0.9}>
               {t('buy-crypto', { coin })}
-            </Typography>
+            </ZigTypography>
           </Box>
           <Link href={PURCHASE_CRYPTO} target={'_blank'}>
             <ZigButton
@@ -87,15 +92,15 @@ const ChooseDepositType: React.FC<{
               sx={{ height: '60px', width: '210px' }}
             >
               <ZigTypography
-                variant='body1'
-                color='neutral000'
+                variant={'h3'}
                 fontWeight={600}
                 letterSpacing={1.1}
-                sx={{ marginTop: '5px' }}
               >
                 {t('buttons.purchase', { coin })}
               </ZigTypography>
-              <NorthEastIcon sx={{ width: '13px', marginLeft: '7px' }} />
+              <NorthEastIcon
+                sx={{ width: '13px', marginLeft: '7px', marginTop: '-5px' }}
+              />
             </ZigButton>
           </Link>
         </Box>
