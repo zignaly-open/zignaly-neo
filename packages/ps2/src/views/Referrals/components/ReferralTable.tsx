@@ -76,7 +76,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
       }),
       columnHelper.accessor('type', {
-        header: t('table.user-trader'),
+        header: t('table.reward-type'),
         cell: ({ getValue }) => (
           <ZigTypography>
             {getValue() in RewardType
