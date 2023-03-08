@@ -30,6 +30,7 @@
     "invite-for-signup": "<0>Invite friends</0><1>{{value}} {{symbol}}</1><2> when they create an account</2>",
     "invite-friends": "<0>Invite traders</0><1>{{value}}%</1><2> of their success fees</2>",
     "they-get-rewards": "<0>Rewards of</0><1>${{value}}</1><2> in {{coin}} when they deposit ${{threshold}}</2>",
+    "full-rewards": "Full terms",
     "total-invitees": "Total Invitees",
     "total-rewards": "Total Earnings",
     "my-referrals": "My Referrals",

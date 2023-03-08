@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid } from '@mui/material';
-import { ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import {
   GetWhatYouDeserveLabel,
   RewardsListContainer,
   TotalBoxValue,
 } from '../styles';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Trans, useTranslation } from 'react-i18next';
 import { ReferralRewards } from '../../../apis/referrals/types';
 
@@ -42,7 +43,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
-    config.enableRebateFeeReward && !!config.zignalyRebateFee && (
+    !config.enableRebateFeeReward && !!config.zignalyRebateFee && (
       <Trans
         i18nKey='referrals:invite-friends-for-percent-rebate'
         t={t}
@@ -55,7 +56,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
-    config.enableRebateFeeReward && !!config.traderRebateFee && (
+    !config.enableRebateFeeReward && !!config.traderRebateFee && (
       <Trans
         i18nKey='referrals:invite-traders-for-percent-rebate'
         t={t}
@@ -69,7 +70,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
       </Trans>
     ),
 
-    !!config.rewardSignupAmount && (
+    !!!config.rewardSignupAmount && (
       <Trans
         i18nKey='referrals:invite-for-signup'
         t={t}
@@ -83,7 +84,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
-    !!config.rewardDepositAmount && (
+    !!!config.rewardDepositAmount && (
       <Trans
         i18nKey='referrals:invite-for-deposit'
         t={t}
@@ -146,6 +147,8 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
     ),
   ].filter(Boolean);
 
+  const [showAll, setShowAll] = useState(elements.length <= 4);
+
   return (
     <RewardsListContainer
       container
@@ -169,11 +172,40 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
             justifyContent: 'center',
           }}
         >
-          {elements.map((x) => (
-            <Grid key={Math.random()} item xs={12} md={4}>
+          {elements.slice(0, showAll ? elements.length : 3).map((x) => (
+            <Grid
+              key={Math.random()}
+              item
+              xs={12}
+              p={1}
+              md={elements.length <= 3 ? 4 : 3}
+            >
               <GetWhatYouDeserveLabel>{x}</GetWhatYouDeserveLabel>
             </Grid>
           ))}
+          {!showAll && (
+            <Grid
+              item
+              xs={12}
+              md={3}
+              p={1}
+              sx={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                display: 'flex',
+              }}
+            >
+              <ZigButton
+                variant='outlined'
+                size={'large'}
+                sx={{ mb: 8 }}
+                onClick={() => setShowAll(true)}
+              >
+                {t('full-rewards')}
+                <ArrowForwardIosIcon sx={{ height: '16px' }} />
+              </ZigButton>
+            </Grid>
+          )}
         </Grid>
       </Grid>
     </RewardsListContainer>
