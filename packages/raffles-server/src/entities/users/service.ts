@@ -219,7 +219,7 @@ export const generateService = (user: ContextUser) => {
       const user = await User.findByPk(userId);
 
       if (user.emailVerified) {
-        return 'email-confirmed';
+        return true;
       }
 
       if (userId) {

@@ -19,7 +19,7 @@ const ConfirmEmail: React.FC = () => {
     if (hashStr) {
       setIsConfirmRoute(true);
       confirmEmailMutation({
-        variables: { hash: hashStr || '' },
+        variables: { hashStr },
       });
     }
   }, [confirmEmailMutation]);
