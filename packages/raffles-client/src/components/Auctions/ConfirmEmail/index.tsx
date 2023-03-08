@@ -32,7 +32,7 @@ const ConfirmEmail: React.FC = () => {
     return (
       <ZigTypography
         variant='h2'
-        color='neutral400'
+        color='error'
         sx={{ display: isConfirmRoute ? '' : 'none' }}
       >
         {t('confirmation-link-invalid')}

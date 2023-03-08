@@ -253,14 +253,14 @@ export const generateService = (user: ContextUser) => {
           if (user.previousEmail) {
             await deleteContact(user.previousEmail);
           }
-          return 'email-confirmed';
+          return true;
         } else {
-          return 'confirmation-link-invalid';
+          return false;
         }
       }
     } catch (e) {
-      console.error('Error Confirm Email:');
-      return 'confirmation-link-invalid';
+      console.error('Error Confirming Email:', e.message);
+      return false;
     }
   };
 

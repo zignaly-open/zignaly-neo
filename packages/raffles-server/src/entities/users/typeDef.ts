@@ -69,7 +69,7 @@ export const typeDef = gql`
     getOrCreateUser(walletType: String!, publicAddress: String!): AuthUser
     authenticate(publicAddress: String!, signature: String!): AccessToken!
     verifyEmail(userId: Int!, email: String!): Boolean
-    confirmEmail(hashStr: String!): String
+    confirmEmail(hashStr: String!): Boolean
   }
 
   extend type Subscription {
