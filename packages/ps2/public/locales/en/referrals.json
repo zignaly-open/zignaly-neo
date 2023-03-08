@@ -4,6 +4,20 @@
     "share-your-link": "Share your link:",
     "what-you-get": "What you get",
     "how-to-earn": "How to Earn Commissions",
+    "how-to-earn-steps": {
+        "step-1": {
+            "title": "Invite friends & Traders",
+            "description": "Share your referral link above for friends to sign up to Zignaly with"
+        },
+        "step-2": {
+            "title": "They Deposit $100",
+            "description": "Get your friends and traders to make a deposit of at least ${{minDeposit}}"
+        },
+        "step-3": {
+            "title": "You Both Earn",
+            "description": "You both get ${{reward}} plus you'll earn commissions from traders"
+        }
+    },
     "what-they-get": "What they get",
     "invite-traders-for-percent": "Invite traders <0>{{value}}%</0> of all their investors' success fees",
     "invite-friends-for-percent": "Invite friends <0>{{value}}%</0> of their success fees",
@@ -17,8 +31,9 @@
     "invite-friends": "Invite traders <0>{{value}}%</0> of their success fees",
     "they-get-rewards": "Rewards of <0>${{value}}</0> in {{coin}} when they deposit ${{threshold}}",
     "total-invitees": "Total Invitees",
-    "total-rewards": "Total Rewards",
-    "pending-rewards": "Pending Rewards",
+    "total-rewards": "Total Earnings",
+    "my-referrals": "My Referrals",
+    "pending-rewards": "Pending Earnings",
     "filter-any": "Any",
     "table": {
         "title": "Commissions history",

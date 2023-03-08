@@ -5,7 +5,7 @@ import {
   useReferralHistoryQuery,
   useReferralRewardsQuery,
 } from '../../apis/referrals/api';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import {
   CloneIcon,
   dark,
@@ -26,6 +26,7 @@ import { TotalBox } from './atoms';
 import { ReferralHistory, ReferralRewards } from '../../apis/referrals/types';
 import ReferralTable from './components/ReferralTable';
 import ReferralRewardsList from './components/ReferralRewardsList';
+import ReferralSuccessStep from './components/ReferralSuccessStep';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -43,7 +44,7 @@ const Referrals: React.FC = () => {
     generatePath(ROUTE_REFERRALS_INVITE, { key: refCode });
 
   return (
-    <PageContainer style={{ maxWidth: '960px' }}>
+    <PageContainer style={{ maxWidth: '1200px' }}>
       <LayoutContentWrapper
         endpoint={[rewards, history]}
         content={([rewardsData, referrals]: [
@@ -119,32 +120,76 @@ const Referrals: React.FC = () => {
 
             <Hr />
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-evenly',
-                pt: 5,
-                pb: 5,
-              }}
-            >
-              <TotalBox
-                label={t('total-invitees')}
-                value={
-                  <>
-                    {rewardsData.invitedCount} <GroupIcon />
-                  </>
-                }
-              />
-              <TotalBox
-                label={t('total-rewards')}
-                value={<ZigPriceLabel usd value={rewardsData.usdtEarned} />}
-              />
-              <TotalBox
-                label={t('pending-rewards')}
-                value={<ZigPriceLabel usd value={rewardsData.usdtPending} />}
-              />
-            </Box>
+            {!referrals.history?.length ? (
+              <>
+                <ZigTypography
+                  align={'center'}
+                  variant={'h1'}
+                  sx={{ mt: 7, mb: 5 }}
+                >
+                  {t('how-to-earn')}
+                </ZigTypography>
+
+                <Grid container sx={{ mb: 8 }}>
+                  <Grid item xs={12} md={4}>
+                    <ReferralSuccessStep step={1} />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <ReferralSuccessStep step={2} />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <ReferralSuccessStep step={3} />
+                  </Grid>
+                </Grid>
+              </>
+            ) : (
+              <>
+                <ZigTypography align={'center'} variant={'h1'} sx={{ mt: 7 }}>
+                  {t('my-referrals')}
+                </ZigTypography>
+
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-evenly',
+                    pt: 5,
+                    pb: 5,
+                  }}
+                >
+                  <TotalBox
+                    label={t('total-invitees')}
+                    value={
+                      <>
+                        {rewardsData.invitedCount} <GroupIcon />
+                      </>
+                    }
+                  />
+                  <TotalBox
+                    label={t('total-rewards')}
+                    value={
+                      <ZigPriceLabel
+                        color={'greenGraph'}
+                        usd
+                        variant={'bigNumber'}
+                        value={rewardsData.usdtEarned}
+                      />
+                    }
+                  />
+                  <TotalBox
+                    label={t('pending-rewards')}
+                    value={
+                      <ZigPriceLabel
+                        color={'yellow'}
+                        usd
+                        variant={'bigNumber'}
+                        value={rewardsData.usdtPending}
+                      />
+                    }
+                  />
+                </Box>
+              </>
+            )}
             <ReferralTable referrals={referrals.history} />
           </>
         )}
