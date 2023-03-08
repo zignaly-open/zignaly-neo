@@ -110,7 +110,7 @@ export const VERIFY_EMAIL_MUTATION = gql`
 `;
 
 export const CONFIRM_EMAIL_MUTATION = gql`
-  mutation confirmEmail($hashStr: String!) {
+  mutation confirmEmail($hashStr: string!) {
     confirmEmail(hashStr: $hashStr)
   }
 `;
