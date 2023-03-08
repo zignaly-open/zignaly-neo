@@ -83,6 +83,7 @@ export type SignupPayload = {
   password: string;
   newPageAB?: boolean;
   ref?: string;
+  subtrack?: string;
 };
 
 export type LoginResponse = {

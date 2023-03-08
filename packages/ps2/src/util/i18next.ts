@@ -61,6 +61,7 @@ i18n
       'withdraw',
       'withdraw-crypto',
       'withdraw-your-investment',
+      'settings',
     ],
     supportedLngs: supportedLanguages,
     defaultNS: 'common',

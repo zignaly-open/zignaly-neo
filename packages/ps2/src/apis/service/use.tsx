@@ -34,13 +34,13 @@ export function useTraderServices() {
   });
 }
 
-export function useIsServiceOwner(serviceId: string) {
+export function useIsServiceOwner(serviceId: string): boolean | undefined {
   const isAuthenticated = useIsAuthenticated();
 
   const { data: traderServices } = useTraderServices();
   return (
     isAuthenticated &&
-    !!traderServices?.some((s: TraderService) => s.serviceId === serviceId)
+    traderServices?.some((s: TraderService) => s.serviceId === serviceId)
   );
 }
 
