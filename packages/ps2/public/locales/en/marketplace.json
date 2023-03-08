@@ -1,4 +1,11 @@
 {
+  "card": {
+    "top-rated": "Top Rated",
+    "n-months_one": "{{count}} Month",
+    "short-month": "{{count}}M",
+    "assets": "Assets",
+    "investors": "Investors"
+  },
   "invest-in-services": "Invest in Profit Sharing",
   "invest-in-services-explainer": "Invest with our selection of pro traders and pay only a share of your profits. The average investment is $200, but you can start with only $1",
   "table": {
