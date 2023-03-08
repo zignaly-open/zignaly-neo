@@ -1,8 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ZigTypography } from '@zignaly-open/ui';
-import { SuccessFieldWrapper, SuccessFieldWrapperShit } from '../atoms';
+import {
+  SuccessFieldWrapper,
+  SuccessFieldWrapperShit,
+  StyledErrorOutline,
+} from '../atoms';
 import { ZIGNALY_PROFIT_FEE } from '../../../../../../util/constants';
+import { Box } from '@mui/material';
 
 const SuccessFeeInputWrapper: React.FC<{ value: number | string }> = ({
   children,
@@ -27,9 +32,12 @@ const SuccessFeeInputWrapper: React.FC<{ value: number | string }> = ({
         </SuccessFieldWrapperShit>
       </SuccessFieldWrapper>
       {value === '0' && (
-        <ZigTypography variant={'body2'} color={'neutral400'}>
-          {t('create.zero-fee')}
-        </ZigTypography>
+        <Box display={'flex'}>
+          <StyledErrorOutline fontSize={'small'} />
+          <ZigTypography variant={'body2'} color={'neutral400'}>
+            {t('create.zero-fee')}
+          </ZigTypography>
+        </Box>
       )}
     </>
   );
