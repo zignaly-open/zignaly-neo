@@ -16,7 +16,7 @@ const UnauthenticatedWall: React.FC = () => {
       const { redirectTo } = locationState as RedirectLocationState;
       return `${redirectTo.pathname}${redirectTo.search}`;
     } else {
-      return pathname === 'signup' ? ROUTE_PROFIT_SHARING : ROUTE_DASHBOARD;
+      return pathname === '/signup' ? ROUTE_PROFIT_SHARING : ROUTE_DASHBOARD;
     }
   }, [locationState]);
 
