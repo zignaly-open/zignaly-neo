@@ -59,12 +59,15 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
             sx={{ minWidth: '60px', flexDirection: 'column', display: 'flex' }}
           >
             <ZigPriceLabel value={original.amount} coin={original.coin} />
-            <ZigPriceLabel
-              variant={'caption'}
-              color={'neutral300'}
-              value={original.usdtAmount}
-              usd
-            />
+            {!original.coin?.includes('USD') && (
+              <ZigPriceLabel
+                prefix={'~'}
+                variant={'caption'}
+                color={'neutral300'}
+                value={original.usdtAmount}
+                usd
+              />
+            )}
           </Box>
         ),
       }),
@@ -149,7 +152,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
         </FilterWrapperContainer>
       </Grid>
 
-      {!referrals.length ? (
+      {referrals.length ? (
         <ZigTable
           initialState={{
             sorting: [
