@@ -20,7 +20,10 @@ import { ZigButtonGroupInputWrapper } from '../atoms';
 import SuccessFeeInputWrapper from './SuccessFeeInputWrapper';
 import { ExchangeType } from '../../../../../../apis/user/types';
 import { ServiceFormData } from './types';
-import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
+import {
+  ErrorBlock,
+  ModalActionsNew,
+} from 'components/ZModal/ModalContainer/styles';
 import { useServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 
 const CreateServiceForm: React.FC<{
@@ -163,7 +166,7 @@ const CreateServiceForm: React.FC<{
                 endAdornment: <InputAdornment position='end'>%</InputAdornment>,
               }}
               sx={{
-                mb: 2,
+                mb: 1,
               }}
               fullWidth
               label={
@@ -180,8 +183,9 @@ const CreateServiceForm: React.FC<{
           </SuccessFeeInputWrapper>
         )}
       />
-
-      <ErrorMessage text={t('create.please-verify')} yellow />
+      <ErrorBlock>
+        <ErrorMessage text={t('create.please-verify')} yellow />
+      </ErrorBlock>
 
       <ModalActionsNew>
         <ZigButton
