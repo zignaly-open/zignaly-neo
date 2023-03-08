@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
@@ -18,20 +18,19 @@ import { ROUTE_LOGIN } from '../../../../routes';
 import {
   Button,
   ErrorMessage,
-  IconButton,
   TextButton,
   Typography,
   ZigInput,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Box, InputAdornment, Link } from '@mui/material';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { LoginPayload } from '../../../../apis/user/types';
 import Cookies from 'js-cookie';
 import Mailcheck from 'react-mailcheck';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import LockIcon from '@mui/icons-material/Lock';
+import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
 
 const SignupForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -55,19 +54,11 @@ const SignupForm: React.FC = () => {
 
   const { state: locationState } = useLocation();
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const ref = params.get('invite');
-    const subtrack = params.get('subtrack');
-    if (ref) {
-      Cookies.set('ref', subtrack ? `${ref}:${subtrack}` : ref);
-    }
-  }, []);
-
   const onSubmit = (payload: LoginPayload) => {
     signup({
       ...payload,
       ref: Cookies.get('ref'),
+      subtrack: Cookies.get('subtrack'),
     });
   };
 
@@ -97,7 +88,6 @@ const SignupForm: React.FC = () => {
             </Trans>
           </ZigTypography>
         </TitleHead>
-
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Mailcheck email={email}>
             {(suggested: { full: string }) => (
@@ -108,6 +98,7 @@ const SignupForm: React.FC = () => {
                 render={({ field }) => (
                   <ZigInput
                     id={'signup'}
+                    label={t('login-form.inputText.email.label') + ':'}
                     placeholder={t('login-form.inputText.email.label')}
                     disabled={signingUp}
                     error={t(errors.email?.message)}
@@ -140,6 +131,7 @@ const SignupForm: React.FC = () => {
               />
             )}
           </Mailcheck>
+
           <Controller
             name='password'
             control={control}
@@ -147,6 +139,7 @@ const SignupForm: React.FC = () => {
             render={({ field }) => (
               <ZigInput
                 id={'login__password'}
+                label={t('login-form.inputText.password.label') + ':'}
                 placeholder={t('login-form.inputText.password.label')}
                 disabled={signingUp}
                 error={t(errors.password?.message)}
@@ -175,48 +168,35 @@ const SignupForm: React.FC = () => {
                     </InputAdornment>
                   ),
                   endAdornment: (
-                    <InputAdornment position='end'>
-                      <IconButton
-                        aria-label='Toggle password visibility'
-                        onClick={() => setShowPassword(!showPassword)}
-                        icon={
-                          showPassword ? (
-                            <Visibility sx={{ color: 'neutral200' }} />
-                          ) : (
-                            <VisibilityOff sx={{ color: 'neutral200' }} />
-                          )
-                        }
-                        variant='flat'
-                      />
-                    </InputAdornment>
+                    <PasswordVisibilityAdornment
+                      show={showPassword}
+                      onToggle={() => setShowPassword(!showPassword)}
+                    />
                   ),
                 }}
                 {...field}
               />
             )}
           />
-          <Box display={'flex'} width={'100%'} justifyContent={'center'}>
-            <ZigTypography
-              marginTop={2}
-              variant={'h3'}
-              color={'neutral300'}
-              textAlign={'center'}
-              maxWidth={'300px'}
-            >
-              <Trans i18nKey='signup-form.accept-terms' t={t}>
-                <Link
-                  href='https://zignaly.com/legal/terms'
-                  target='_blank'
-                  rel='noopener'
-                />
-                <Link
-                  href='https://zignaly.com/legal/privacy'
-                  target='_blank'
-                  rel='noopener'
-                />
-              </Trans>
-            </ZigTypography>
-          </Box>
+          <Typography
+            marginTop={3}
+            variant='h4'
+            color='neutral300'
+            component='h4'
+          >
+            <Trans i18nKey='signup-form.accept-terms' t={t}>
+              <Link
+                href='https://zignaly.com/legal/terms'
+                target='_blank'
+                rel='noopener'
+              />
+              <Link
+                href='https://zignaly.com/legal/privacy'
+                target='_blank'
+                rel='noopener'
+              />
+            </Trans>
+          </Typography>
 
           <Action>
             <Button

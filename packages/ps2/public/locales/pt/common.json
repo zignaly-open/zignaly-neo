@@ -15,7 +15,7 @@
 		"description": "Algo deu errado. Tente novamente mais tarde ou entre em contacto com o suporte. Ou abandone a sociedade industrial e construa uma cabana na floresta."
 	},
 	"main-menu": {
-		"dropdown-link-forTrading": "Para Serviços de Trading",
+		"dropdown-link-forTrading": "Gerencie seus Serviços",
 		"dropdown-link-helpDocs": "Documentos de Ajuda"
 	},
 	"account-menu": {
@@ -34,7 +34,8 @@
 		}
 	},
 	"navigation-menu": {
-		"profit-sharing": "Profit Sharing"
+		"profit-sharing": "Procurar os Melhores Traders",
+		"become-trader": "Ofereça seus serviços de trading"
 	},
 	"amount": "Quantia",
 	"new-version": "Nova versão, clique em mim para actualizar",
@@ -44,9 +45,12 @@
 		"negative-amount": "Deve ser >= 0",
 		"invalid-amount": "Deve indicar uma quantia",
 		"negative-zeroable-amount": "Deve ser > 0",
-		"max-decimals": "Por favor insira números com no máximo {{maxDecimals}} decimais.",
+		"max-decimals": "Por favor insira números com no máximo 8 decimais.",
 		"max-allowed-length": "Deve ter menos de {{ maxLength }} caracteres",
-		"min-amount": "A quantidade mínima é {{amount}} {{coin}}."
+		"min-amount": "A quantidade mínima é {{amount}} {{coin}}.",
+		"insufficient-amount-min": "Quantidade mínima: {{ minValue }} {{ minValueCoin }}",
+		"invalid-characters": "Caracteres inválidos",
+		"letter-number": "Deve conter pelo menos uma letra ou número"
 	},
 	"back": "Voltar",
 	"close": "Fechar",

@@ -145,15 +145,17 @@ export const useAuthenticate = (): [
   ];
 };
 
-export function useLogout(): () => void {
+export function useLogout(performRequest = true): () => void {
   const dispatch = useDispatch();
   const [logoutRequest] = useLogoutMutation();
   const navigate = useNavigate();
 
   return () => {
-    navigate('/login');
-    logoutRequest();
+    if (performRequest) {
+      logoutRequest();
+    }
     dispatch(logout());
+    navigate('/login');
     endLiveSession();
     trackEndSession();
   };
