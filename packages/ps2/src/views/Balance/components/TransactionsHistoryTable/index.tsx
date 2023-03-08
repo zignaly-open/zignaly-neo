@@ -128,6 +128,8 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
             {getValue() ||
               (original.txType === TRANSACTION_TYPE.PS_WITHDRAW
                 ? t('psService')
+                : getTransactionSideType(original.txType, 'from') === 'zignaly'
+                ? t('deleted')
                 : t('external'))}
           </ZigTypography>
         ),
