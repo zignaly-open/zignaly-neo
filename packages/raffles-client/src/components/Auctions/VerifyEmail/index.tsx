@@ -19,18 +19,16 @@ import { Controller, useForm } from 'react-hook-form';
 import { Form, Gap } from './styles';
 import { EmailValidation } from 'util/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useSearchParams } from 'react-router-dom';
-import useConfirmEmail from 'hooks/useConfirmEmail';
-import useCurrentUser, { useEmailSubscription } from 'hooks/useCurrentUser';
+// import useCurrentUser, { useEmailSubscription } from 'hooks/useCurrentUser';  useEmailSubscription();
+import useCurrentUser from 'hooks/useCurrentUser';
 
 const StyledSendIcon = styled(Send)`
   color: ${(props) => props.theme.neutral200};
 `;
 
-const VerifyReward: React.FC = () => {
+const VerifyEmail: React.FC = () => {
   const { t } = useTranslation('global');
   const { user: currentUser } = useCurrentUser();
-  useEmailSubscription();
 
   const [verifyEmail] = useMutation(VERIFY_EMAIL_MUTATION, {
     refetchQueries: [
@@ -39,12 +37,10 @@ const VerifyReward: React.FC = () => {
     ],
   });
 
-  const { confirmEmail } = useConfirmEmail();
   const [errorMessage, setErrorMessage] = useState('');
   const [verificationMessage, setVerificationMessage] = useState(
     'verify-email-and-earn',
   );
-  const [searchParams] = useSearchParams();
 
   const handleVerifyEmail = async (email: string) => {
     await verifyEmail({
@@ -53,7 +49,6 @@ const VerifyReward: React.FC = () => {
   };
 
   useEffect(() => {
-    const hashStr = searchParams.get('confirm');
     if (currentUser) {
       if (currentUser.emailVerified) {
         setVerificationMessage('');
@@ -61,19 +56,7 @@ const VerifyReward: React.FC = () => {
         setVerificationMessage('verify-email');
       }
     }
-    if (hashStr) {
-      confirmEmail(hashStr).then((result) => {
-        setVerificationMessage(t(result));
-      });
-    }
   }, [currentUser]);
-
-  useEffect(() => {
-    const confirmed = searchParams.get('confirmed');
-    if (confirmed) {
-      setVerificationMessage(t('email-confirmed'));
-    }
-  }, [searchParams]);
 
   const {
     handleSubmit,
@@ -105,11 +88,7 @@ const VerifyReward: React.FC = () => {
         display='flex'
         flexDirection='row'
         sx={{
-          display:
-            currentUser.emailVerified ||
-            verificationMessage === 'Email verified!'
-              ? 'none'
-              : '',
+          display: currentUser.emailVerified ? 'none' : 'flex',
         }}
       >
         <Form onSubmit={handleSubmit(submit)}>
@@ -149,4 +128,4 @@ const VerifyReward: React.FC = () => {
   );
 };
 
-export default VerifyReward;
+export default VerifyEmail;

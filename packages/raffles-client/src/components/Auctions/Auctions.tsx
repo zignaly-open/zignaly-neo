@@ -2,13 +2,15 @@ import React from 'react';
 import AuctionGrid from './AuctionGrid/AuctionGrid';
 import { AuctionContainer } from './styles';
 import HowItWorks from './HowItWorks';
-import VerifyReward from './VerifyReward';
+import VerifyEmail from './VerifyEmail';
+import ConfirmEmail from './ConfirmEmail';
 
 function Auctions() {
   return (
     <>
       <AuctionContainer>
-        <VerifyReward />
+        <VerifyEmail />
+        <ConfirmEmail />
         <HowItWorks />
       </AuctionContainer>
       <AuctionGrid />
