@@ -24,7 +24,6 @@ const ReferralButton = () => {
             flexDirection: 'row',
             alignItems: 'center',
           }}
-          id={'trader-api__create-key'}
           variant='outlined'
         >
           <img
