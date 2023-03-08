@@ -16,11 +16,16 @@ import {
   useSelectedInvestment,
   useWithdrawInvestment,
 } from '../../../../../../apis/investment/use';
-import { EditInvestmentValidation } from './validations';
+import {
+  EditInvestmentValidation,
+  EditInvestmentValidationOwner,
+} from './validations';
 import { WithdrawInvestmentFormFormData } from './types';
 import { ChangeViewFn, EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import CenteredLoader from '../../../../../../components/CenteredLoader';
+import { useServiceTypesInfoQuery } from '../../../../../../apis/service/api';
+import { useServiceDetails } from '../../../../../../apis/service/use';
 
 const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
   setView,
@@ -29,6 +34,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
   const { serviceId, ssc } = useSelectedInvestment();
   const { isLoading: isLoadingDetails, data: service } =
     useInvestmentDetails(serviceId);
+  const { data: serviceInfo } = useServiceDetails(serviceId);
 
   const coin = useMemo(
     () => ({
@@ -39,6 +45,10 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
     }),
     [service],
   );
+
+  const { data: serviceTypesInfo } = useServiceTypesInfoQuery();
+  const minInvestedAmountOwner =
+    serviceTypesInfo?.[serviceInfo.type]?.[coin.id]?.minimum_owner_balance;
 
   const { t } = useTranslation('withdraw');
   const toast = useToast();
@@ -58,7 +68,10 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
         token: coin,
       },
     },
-    resolver: yupResolver(EditInvestmentValidation),
+    resolver:
+      service.accountType === 'owner'
+        ? yupResolver(EditInvestmentValidationOwner(minInvestedAmountOwner))
+        : yupResolver(EditInvestmentValidation),
   });
 
   const watchAmountTransfer = watch(
@@ -100,7 +113,13 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
             showUnit={true}
             placeholder={'0.0'}
             tokens={[coin]}
-            error={isDirty && t(errors?.amountTransfer?.value?.message)}
+            error={
+              isDirty &&
+              t(errors?.amountTransfer?.value?.message, {
+                minAmount: minInvestedAmountOwner,
+                minAmountCoin: coin.id,
+              })
+            }
           />
         </Grid>
         <Grid item xs={12} md={6}>

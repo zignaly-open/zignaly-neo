@@ -8,9 +8,10 @@ import {
   BALANCE_CHANGED,
   EMAIL_LIST_IDS,
   EMAIL_TEMPLATE_ID,
+  HASH_EXPIRATION,
 } from './constants';
 import { getUserBalance } from '../balances/service';
-import { ContextUser } from '../../types';
+import { ContextUser, TokenPayload } from '../../types';
 import redisService from '../../redisService';
 import * as SibApiV3Sdk from 'sib-api-v3-typescript';
 
@@ -117,7 +118,11 @@ export async function emitBalanceChanged(user: ContextUser) {
   });
 }
 
-export async function sendEmailVerification(userId: string, email: string) {
+export async function sendEmailVerification(
+  userId: string,
+  email: string,
+  hashStrWithExpiration: string,
+) {
   const apiInstance = new SibApiV3Sdk.ContactsApi();
 
   apiInstance.setApiKey(
@@ -130,7 +135,7 @@ export async function sendEmailVerification(userId: string, email: string) {
   createDoiContact.email = email;
   createDoiContact.includeListIds = EMAIL_LIST_IDS;
   createDoiContact.templateId = Number(EMAIL_TEMPLATE_ID);
-  createDoiContact.redirectionUrl = `${process.env.ZIGNALY_API}?confirm=${userId}`;
+  createDoiContact.redirectionUrl = `${process.env.ZIGNALY_API}?confirm=${hashStrWithExpiration}`;
 
   try {
     const response = await apiInstance.createDoiContact(createDoiContact);
@@ -173,7 +178,41 @@ export async function deleteContact(email: string) {
       return true;
     }
   } catch (error) {
-    console.log('error', error, email);
-    console.error(error.message);
+    console.log('error deleting contact', email);
   }
 }
+
+export const generateJwtToken = (
+  userId: number,
+  email: string,
+  secret: string,
+) => {
+  const user: TokenPayload = {
+    userId,
+    email,
+  };
+
+  return jwt.sign(user, secret, {
+    expiresIn: HASH_EXPIRATION,
+  });
+};
+
+export const verifyJwtToken = (token: string) => {
+  try {
+    const decodedPayload = jwt.verify(token, process.env.HASH_SECRET, {
+      algorithms: ['HS256'],
+      clockTimestamp: Math.floor(Date.now() / 1000),
+    }) as TokenPayload;
+    const { userId, email } = decodedPayload;
+    return {
+      userId,
+      email,
+    };
+  } catch (err) {
+    if (err instanceof jwt.TokenExpiredError) {
+      console.log('Token has expired');
+    } else {
+      console.log('Error verifying token:', err);
+    }
+  }
+};
