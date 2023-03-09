@@ -158,6 +158,54 @@ export const api = createApi({
         body: params,
       }),
     }),
+
+    updatePassword: builder.mutation<
+      void,
+      {
+        password: string;
+        newPassword: string;
+        code?: string;
+      }
+    >({
+      query: (params) => ({
+        url: `/change_password`,
+        method: 'POST',
+        body: params,
+      }),
+    }),
+
+    disable2FA: builder.mutation<
+      void,
+      {
+        code: string;
+      }
+    >({
+      query: (params) => ({
+        url: `/user/disable_2fa`,
+        method: 'POST',
+        body: params,
+      }),
+    }),
+
+    enable2FAInfo: builder.query<[string, string], void>({
+      query: () => ({
+        url: `/user/enable_2fa/step1`,
+        method: 'POST',
+      }),
+    }),
+
+    enable2FA: builder.mutation<
+      void,
+      {
+        code: string;
+      }
+    >({
+      query: (params) => ({
+        url: `/user/enable_2fa/step2`,
+        method: 'POST',
+        body: params,
+      }),
+    }),
   }),
 });
 
@@ -179,4 +227,9 @@ export const {
   useUpdateUserMutation,
   useResetPasswordRequestMutation,
   useResetPasswordMutation,
+  useUpdatePasswordMutation,
+  useDisable2FAMutation,
+  useEnable2FAInfoQuery,
+  useLazyEnable2FAInfoQuery,
+  useEnable2FAMutation,
 } = api;

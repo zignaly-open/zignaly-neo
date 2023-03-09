@@ -12,6 +12,7 @@ import {
   TextButton,
   ZigCoinIcon,
   ZigTable,
+  ZigTablePriceLabel,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
@@ -19,7 +20,6 @@ import { FILTERS_TYPE, FilterValues, Transaction } from 'apis/wallet/types';
 import { useTransactionsHistory } from 'apis/wallet/use';
 import ChainIcon from 'components/ChainIcon';
 import { Add, ExpandLess, ExpandMore } from '@mui/icons-material';
-import { NumericFormat } from 'react-number-format';
 import TransactionDetails from '../TransactionDetails';
 import { PaginationState } from '@tanstack/react-table';
 import { StyledZigSelect } from './styles';
@@ -84,11 +84,7 @@ const WalletTransactions = () => {
         enableSorting: false,
         cell: ({ getValue }) => (
           <ZigTypography color='almostWhite'>
-            <NumericFormat
-              value={getValue()}
-              displayType='text'
-              thousandSeparator={true}
-            />
+            <ZigTablePriceLabel exact alwaysShowSign value={getValue()} />
           </ZigTypography>
         ),
       }),

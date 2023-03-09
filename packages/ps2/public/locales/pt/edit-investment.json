@@ -49,21 +49,8 @@
 	"modal": {
 		"withdrawInvestment": {
 			"title": "Pedido de Retirada",
-			"instant": {
-				"title": "Retirada Instantânea",
-				"description": "As retiradas instantâneas incorrem numa taxa de {{fee}}% porque a Zignaly deve cobrir os seus fundos e herdar o seu risco.",
-				"button": {
-					"subtitle": "Retirada imediata",
-					"title": "{{fee}}% Taxa"
-				}
-			},
 			"freeWithdrawal": {
-				"title": "Desconexión Gratuita",
-				"description": "Receberá os seus fundos depois que o gestor do fundo liberá-los. Considere que o seu investimento está em risco até que o saldo seja transferido para você. Isso geralmente leva alguns dias, mas pode levar mais tempo para ser concluído, dependendo do gestor do fundo.",
-				"button": {
-					"subtitle": "Retirada de fundos livres",
-					"title": "Sem Taxa"
-				}
+				"description": "Receberá os seus fundos depois que o gestor do fundo liberá-los. Considere que o seu investimento está em risco até que o saldo seja transferido para você. Isso geralmente leva alguns dias, mas pode levar mais tempo para ser concluído, dependendo do gestor do fundo."
 			}
 		},
 		"pendingTransaction": {
@@ -82,7 +69,7 @@
 	},
 	"modalSuccess": {
 		"title": "Processamento de Investimentos (Até 24h)",
-		"description": "Os seus fundos serão transferidos para a conta do serviço dentro de 24 horas. Pode retirar os seus fundos a qualquer momento antes que essa transferência seja feita. Depois que os fundos forem transferidos, poderá sacar através de uma desconexão <0>gratuita<\/0> ou <0>Retirada instantânea.<\/0>",
+		"description": "Os seus fundos serão transferidos para a conta do serviço no prazo de 24 horas. Poderá retirar os seus fundos em qualquer momento antes de esta transferência ser efetuada.",
 		"button": "Fechar"
 	},
 	"invest-modal": {
@@ -92,6 +79,8 @@
 		"transfer-error": "Valor inválido. Por favor, escreva a palavra correcta.",
 		"transfer-label": "Transferência",
 		"i-understand-margin": "Entendo e confirmo que todo o meu {{coin}} saldo faz agora parte do margin e está em risco",
-		"i-understand-money-transferred": "Eu entendo e confirmo que meus fundos serão transferidos para o pool do trader e não aparecerão mais no meu saldo disponível."
+		"i-understand-money-transferred": "Eu entendo e confirmo que meus fundos serão transferidos para o pool do trader e não aparecerão mais no meu saldo disponível.",
+		"max-funds": "Excede os fundos máximos permitidos neste serviço. Investir no máximo {{max}} {{coin}}.",
+		"max-reached": "Não é possível investir neste serviço porque atingiu o limite Máximo de Fundos."
 	}
 }

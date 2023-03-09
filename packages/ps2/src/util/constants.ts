@@ -9,8 +9,12 @@ export const BUY_CRYPTO_URL = 'https://changelly.com/?ref_id=q0s68wsie1uf9wza';
 
 export const HELP_MANAGE_FUNDS_URL =
   'https://help.zignaly.com/en/articles/6792440-manage-funds-inside-your-service';
-
 export const HELP_CREATE_SERVICE_MARKETPLACE_URL =
   'https://help.zignaly.com/en/articles/6845502-rules-for-being-listed-in-the-marketplace';
+export const HELP_CREATE_ENABLE_2FA_URL =
+  'https://help.zignaly.com/en/articles/7060936-secure-your-account-with-2fa';
+
+export const DOWNLOAD_GOOGLE_AUTHENTICATOR_URL =
+  'https://support.google.com/accounts/answer/1066447';
 
 export const PURCHASE_CRYPTO = 'https://changelly.com/?ref_id=q0s68wsie1uf9wza';

@@ -18,9 +18,10 @@
       "6-mos-title": "6 mos.",
       "all": {
         "title": "All",
-        "subtitle": "Age"
+        "subtitle": "Investing since"
       }
     },
+    "tooltip-date": "You are investing in this service since {{date}}",
     "table-search-emptyMessage": "You are not connected to any service yet.",
     "something-went-wrong": "Something went wrong",
     "loading-arialLabel": "Loading my portfolio",
