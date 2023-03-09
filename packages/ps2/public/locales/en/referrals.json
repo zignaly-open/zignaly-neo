@@ -29,7 +29,7 @@
     "invite-for-balance": "<0>Invite friends</0><1>{{value}} {{symbol}}</1><2> when their balance reaches ${{threshold}}+</2>",
     "invite-for-signup": "<0>Invite friends</0><1>{{value}} {{symbol}}</1><2> when they create an account</2>",
     "invite-friends": "<0>Invite traders</0><1>{{value}}%</1><2> of their success fees</2>",
-    "they-get-rewards": "<0>Rewards of</0><1>${{value}}</1><2> in {{coin}} when they deposit ${{threshold}}</2>",
+    "they-get-rewards": "<0>Comission of</0><1>${{value}}</1><2> in {{coin}} when they deposit ${{threshold}}</2>",
     "full-rewards": "Full terms",
     "total-invitees": "Total Invitees",
     "total-rewards": "Total Earnings",
@@ -38,11 +38,11 @@
     "filter-any": "Any",
     "table": {
         "title": "Commissions history",
-        "no-referrals": "No rewards to show",
-        "no-commission-history": "No commission history yet. Invite some friends ior traders to earn commissions",
+        "no-referrals": "No commissions to show",
+        "no-commission-history": "No commission history yet. Invite some friends or traders to earn commissions",
         "time-and-date": "Time & Date",
         "user-trader": "User/Trader",
-        "reward-type": "Reward Type",
+        "reward-type": "Commission Type",
         "filter-status": "Status",
         "filter-type": "Type"
     },
@@ -56,11 +56,11 @@
         "Failed": "Failed"
     },
     "rewardTypes": {
-        "SIGNUP_REWARD": "Signup reward",
-        "DEPOSIT_REWARD": "Deposit reward",
-        "ALLOCATE_REWARD": "Allocate reward",
-        "SUCCESS_FEE_REWARD": "Success fee reward",
-        "REBATE_COMMISSION_REWARD": "Rebate commission reward"
+        "SIGNUP_REWARD": "Signup commission",
+        "DEPOSIT_REWARD": "Deposit commission",
+        "ALLOCATE_REWARD": "Allocate commission",
+        "SUCCESS_FEE_REWARD": "Success fee commission",
+        "REBATE_COMMISSION_REWARD": "Rebate commission commission"
     },
     "header": {
         "title": "Earn $10 + 20%",
