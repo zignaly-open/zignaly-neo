@@ -9,8 +9,8 @@ function Auctions() {
   return (
     <>
       <AuctionContainer>
-        <VerifyEmail />
         <ConfirmEmail />
+        <VerifyEmail />
         <HowItWorks />
       </AuctionContainer>
       <AuctionGrid />

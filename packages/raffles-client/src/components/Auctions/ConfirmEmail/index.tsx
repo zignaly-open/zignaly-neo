@@ -40,13 +40,21 @@ const ConfirmEmail: React.FC = () => {
     );
   }
 
-  return (
+  return data?.confirmEmail ? (
     <ZigTypography
       variant='h2'
       color='neutral400'
       sx={{ display: isConfirmRoute ? '' : 'none' }}
     >
-      {data ? t('email-confirmed') : t('confirmation-link-invalid')}
+      {t('email-confirmed')}
+    </ZigTypography>
+  ) : (
+    <ZigTypography
+      variant='h2'
+      color='error'
+      sx={{ display: isConfirmRoute ? '' : 'none' }}
+    >
+      {t('confirmation-link-invalid')}
     </ZigTypography>
   );
 };
