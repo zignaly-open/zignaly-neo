@@ -206,7 +206,7 @@ const SignupForm: React.FC = () => {
               caption={t('signup-form.submit')}
               size={'xlarge'}
               loading={signingUp}
-              minWidth={400}
+              width={'100%'}
             />
           </Action>
           <Box

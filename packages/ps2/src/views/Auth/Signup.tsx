@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import { BrandImage, PageContainer, ZigTypography } from '@zignaly-open/ui';
@@ -14,6 +14,7 @@ export type InfoBarItem = {
 
 const Signup: React.FC = () => {
   const { t } = useTranslation(['pages', 'sign-up']);
+  const [mobileVersion] = useState<boolean>(window.innerWidth < 900);
   useTitle(t('pages:signup'));
 
   const infoBarItems: InfoBarItem[] = useMemo(
@@ -46,15 +47,28 @@ const Signup: React.FC = () => {
         alignItems: 'center',
       }}
     >
-      <Grid container direction='row' alignItems='center' padding={'0 10%'}>
-        <Grid item xs={12} md={6}>
+      <Grid
+        container
+        direction='row'
+        alignItems='center'
+        padding={mobileVersion ? '0 3%' : '0 10%'}
+      >
+        <Grid
+          item
+          xs={12}
+          md={6}
+          marginBottom={'85px'}
+          order={mobileVersion ? 1 : 0}
+          justifyContent={'center'}
+          display={mobileVersion && 'flex'}
+        >
           <Grid container direction='column' maxWidth={'450px'}>
-            <Grid item>
+            <Grid item display={mobileVersion && 'none'}>
               <Grid
                 container
                 direction='row'
                 alignItems='center'
-                marginBottom={'50px'}
+                marginBottom={'70px'}
               >
                 <BrandImage height='32px' type='isotype' width='32px' />
                 <ZigTypography
@@ -75,6 +89,7 @@ const Signup: React.FC = () => {
                 fontSize={'25px'}
                 lineHeight={1.4}
                 color={'neutral100'}
+                textAlign={mobileVersion ? 'center' : null}
               >
                 <Trans i18nKey={'sign-up:description'} t={t}>
                   <Link
@@ -133,7 +148,13 @@ const Signup: React.FC = () => {
             ))}
           </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          order={mobileVersion ? 0 : 1}
+          marginBottom={mobileVersion && '25px'}
+        >
           <Grid container direction={'column'}>
             <Grid item>
               <Grid container justifyContent={'center'}>
@@ -162,14 +183,20 @@ const Signup: React.FC = () => {
           container
           alignItems={'center'}
           justifyContent={'center'}
-          marginTop={'75px'}
+          marginTop={!mobileVersion && '75px'}
           gap={'15px'}
+          order={3}
         >
           <Grid item>
             <img src={'/images/signup/secured.svg'} alt='' />
           </Grid>
           <Grid item>
-            <ZigTypography variant={'h2'} fontSize={'25px'} fontWeight={600}>
+            <ZigTypography
+              variant={'h2'}
+              fontSize={'25px'}
+              fontWeight={600}
+              textAlign={mobileVersion ? 'center' : null}
+            >
               {t('sign-up:trusted-by')}
             </ZigTypography>
           </Grid>
@@ -181,8 +208,12 @@ const Signup: React.FC = () => {
           justifyContent={'center'}
           padding={'25px 0'}
           flexDirection={'column'}
+          order={4}
         >
-          <ZigTypography fontSize={'20px'}>
+          <ZigTypography
+            fontSize={'20px'}
+            textAlign={mobileVersion ? 'center' : null}
+          >
             {t('sign-up:bottom-description')}
           </ZigTypography>
           <Grid
