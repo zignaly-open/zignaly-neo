@@ -210,10 +210,12 @@ const SignupForm: React.FC = () => {
             />
           </Action>
           <Box
-            display={'flex'}
-            alignItems={'center'}
-            justifyContent={'center'}
-            gap={'5px'}
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '5px',
+            }}
           >
             <LockIcon color={'secondary'} fontSize={'small'} />
             <ZigTypography
@@ -221,7 +223,6 @@ const SignupForm: React.FC = () => {
               color={'neutral300'}
               textAlign={'center'}
               marginTop={'5px'}
-              sx={{ verticalAlign: 'middle', display: 'inline' }}
             >
               {t('signup-protect')}
             </ZigTypography>
