@@ -1,5 +1,4 @@
 import { Box, styled } from '@mui/material';
-import { ErrorOutline } from '@mui/icons-material';
 
 export const ZigButtonGroupInputWrapper = styled(Box)`
   & > div {
@@ -25,11 +24,6 @@ export const SuccessFieldWrapper = styled(Box)`
       border-bottom-right-radius: 0;
     }
   }
-`;
-
-export const StyledErrorOutline = styled(ErrorOutline)`
-  color: ${({ theme }) => theme.palette.neutral300};
-  margin-right: 8px;
 `;
 
 export const SuccessFieldWrapperShit = styled(Box)`

@@ -9,17 +9,20 @@ import { dark } from "theme";
 import ZigTypography from "../ZigTypography";
 
 // TODO(Vetle): Refactor usage of Dark theme when light theme is ready
-function ErrorMessage({ text, yellow }: ErrorMessageProps) {
+function ErrorMessage({ text, yellow, grey }: ErrorMessageProps) {
   return (
     <Layout>
       <Icon>
         <ErrorAlertIcon
           height="24px"
           width="24px"
-          color={yellow ? dark.yellow : dark.redGraphOrError}
+          color={yellow ? dark.yellow : grey ? dark.neutral400 : dark.redGraphOrError}
         />
       </Icon>
-      <ZigTypography variant="body2" sx={{ color: yellow ? dark.yellow : dark.redGraphOrError }}>
+      <ZigTypography
+        variant="body2"
+        sx={{ color: yellow ? dark.yellow : grey ? dark.neutral400 : dark.redGraphOrError }}
+      >
         {text}
       </ZigTypography>
     </Layout>
