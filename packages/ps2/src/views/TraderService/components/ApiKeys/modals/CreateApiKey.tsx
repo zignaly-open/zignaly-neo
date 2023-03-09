@@ -80,7 +80,7 @@ function CreateApiKeysModal({
 
         <Box sx={{ textAlign: 'center' }}>
           <ZigButton
-            id={'api-key__continue'}
+            id={'api-key__create-key'}
             disabled={isCreating}
             variant={'contained'}
             type='submit'
