@@ -169,12 +169,7 @@ const Signup: React.FC = () => {
             <img src={'/images/signup/secured.svg'} alt='' />
           </Grid>
           <Grid item>
-            <ZigTypography
-              variant={'h2'}
-              fontSize={'25px'}
-              marginTop={'5px'}
-              fontWeight={600}
-            >
+            <ZigTypography variant={'h2'} fontSize={'25px'} fontWeight={600}>
               {t('sign-up:trusted-by')}
             </ZigTypography>
           </Grid>
