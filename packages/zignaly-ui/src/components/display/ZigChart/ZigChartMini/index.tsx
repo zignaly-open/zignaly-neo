@@ -15,7 +15,7 @@ const ZigChartMini = ({ data, midLine, height, width }: ChartMiniProps) => {
         padding={{ top: 5, bottom: 10 }}
         height={height}
         width={width}
-        containerComponent={<VictoryContainer responsive={!width && !height} />}
+        containerComponent={<VictoryContainer responsive={!width || !height} />}
       >
         <VictoryArea
           style={{
