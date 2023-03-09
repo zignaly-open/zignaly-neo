@@ -1,7 +1,7 @@
 import { Box } from '@mui/material';
 import {
   PercentageIndicator,
-  ZigButton,
+  ZigChartMini,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Investment } from 'apis/investment/types';
@@ -11,7 +11,14 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ServiceName } from 'views/Dashboard/components/ServiceName';
 import MarketplaceAction from '../MarketplaceAction';
-import { Card } from './styles';
+import {
+  ValueContainer,
+  Card,
+  ChartContainer,
+  BottomPnLContainer,
+  ButtonContainer,
+  AssetContainer,
+} from './styles';
 import { ServiceCardProps } from './types';
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
@@ -19,56 +26,93 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
 
   return (
     <Card>
+      <ChartContainer>
+        <ZigChartMini
+          data={service.sparklines}
+          midLine={false}
+          height={130}
+          width={360}
+        />
+      </ChartContainer>
       <ServiceName
         service={marketplaceServiceToInvestmentType(service) as Investment}
+        showCoin={false}
       />
-      {/* <ZigTypography>{service.name}</ZigTypography> */}
       <Box
         display='flex'
         flexDirection='row'
         justifyContent='space-between'
         width={1}
-        mb={2}
+        mt={2.25}
+        mb={3}
       >
         <Box display='flex' flexDirection='column'>
-          <PercentageIndicator
-            style={{
-              fontSize: '18px',
-              lineHeight: '28px',
-            }}
-            value={service.pnlPercent90t}
-          />
-          <ZigTypography>{t('card.short-month', { count: 3 })}</ZigTypography>
+          <ValueContainer>
+            <PercentageIndicator
+              style={{
+                fontSize: '17px',
+              }}
+              value={service.pnlPercent90t}
+            />
+          </ValueContainer>
+          <ZigTypography
+            fontSize={11}
+            fontWeight={500}
+            color='neutral300'
+            lineHeight='11px'
+          >
+            {t('card.short-month', { count: 3 })}
+          </ZigTypography>
         </Box>
         <Box display='flex' flexDirection='column'>
-          <AssetsInPool shorten assetsValue={service.investedUSDT} />
-          <ZigTypography>{t('card.assets')}</ZigTypography>
+          <AssetContainer>
+            <AssetsInPool shorten assetsValue={service.investedUSDT} />
+          </AssetContainer>
+          <ZigTypography
+            fontSize={11}
+            fontWeight={500}
+            color='neutral300'
+            lineHeight='11px'
+          >
+            {t('card.assets')}
+          </ZigTypography>
         </Box>
         <Box display='flex' flexDirection='column'>
-          <ZigTypography>{service.investors}</ZigTypography>
-          <ZigTypography>{t('card.investors')}</ZigTypography>
+          <ValueContainer>
+            <ZigTypography color='neutral200' fontSize={17} fontWeight={500}>
+              {service.investors}
+            </ZigTypography>
+          </ValueContainer>
+          <ZigTypography
+            fontSize={11}
+            fontWeight={500}
+            color='neutral300'
+            lineHeight='11px'
+          >
+            {t('card.investors')}
+          </ZigTypography>
         </Box>
       </Box>
-      <MarketplaceAction service={service} />
-      <Box
+      <ButtonContainer>
+        <MarketplaceAction service={service} />
+      </ButtonContainer>
+      <BottomPnLContainer
         display='flex'
         justifyContent='flex-end'
         alignItems='center'
         width={1}
         gap={1}
-        mt={1}
       >
         <ZigTypography fontSize='11px' color='neutral200'>
-          {t('card.n-months', { count: 1 })}
+          {t('card.short-month', { count: 1 })}
         </ZigTypography>
         <PercentageIndicator
           style={{
-            fontSize: '18px',
-            lineHeight: '28px',
+            fontSize: '13px',
           }}
           value={service.pnlPercent30t}
         />
-      </Box>
+      </BottomPnLContainer>
     </Card>
   );
 };

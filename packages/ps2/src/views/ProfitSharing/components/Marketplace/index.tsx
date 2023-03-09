@@ -31,7 +31,7 @@ const Marketplace: React.FC = () => {
         header: t('table.service-name'),
         style: {
           justifyContent: 'flex-start',
-          paddingLeft: '83px',
+          paddingLeft: '88px',
         },
         meta: {
           subtitle: (

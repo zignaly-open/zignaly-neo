@@ -17,6 +17,7 @@ export interface ChartMiniProps {
   readonly data: AxisFormat[] | number[];
   midLine?: boolean | null;
   height?: number;
+  width?: number;
 }
 
 export interface ChartLargeProps {
