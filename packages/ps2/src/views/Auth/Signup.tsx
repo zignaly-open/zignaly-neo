@@ -54,7 +54,7 @@ const Signup: React.FC = () => {
                 container
                 direction='row'
                 alignItems='center'
-                marginBottom={'70px'}
+                marginBottom={'50px'}
               >
                 <BrandImage height='32px' type='isotype' width='32px' />
                 <ZigTypography
@@ -69,7 +69,7 @@ const Signup: React.FC = () => {
                 </ZigTypography>
               </Grid>
             </Grid>
-            <Grid item marginBottom={'20px'}>
+            <Grid item marginBottom={'10px'}>
               <ZigTypography
                 variant={'h2'}
                 fontSize={'25px'}
@@ -91,8 +91,8 @@ const Signup: React.FC = () => {
                 </Trans>
               </ZigTypography>
             </Grid>
-            <Grid item marginBottom={'20px'}>
-              <img src={'/images/signup/official-broker.png'} alt={''} />
+            <Grid item marginBottom={'10px'}>
+              <img src={'/images/signup/official-broker.svg'} alt={''} />
             </Grid>
             {infoBarItems.map((item, index) => (
               <Grid item key={`--info-bar-item-${index.toString()}`}>
@@ -169,12 +169,7 @@ const Signup: React.FC = () => {
             <img src={'/images/signup/secured.svg'} alt='' />
           </Grid>
           <Grid item>
-            <ZigTypography
-              variant={'h2'}
-              fontSize={'25px'}
-              marginTop={'5px'}
-              fontWeight={600}
-            >
+            <ZigTypography variant={'h2'} fontSize={'25px'} fontWeight={600}>
               {t('sign-up:trusted-by')}
             </ZigTypography>
           </Grid>
@@ -203,7 +198,7 @@ const Signup: React.FC = () => {
               <img src={'/images/signup/forbes.svg'} alt='' />
             </Grid>
             <Grid item>
-              <img src={'/images/signup/nasdaq.svg'} alt='' />
+              <img src={'/images/signup/nasdaq.png'} alt='' />
             </Grid>
             <Grid item>
               <img src={'/images/signup/yahoo.svg'} alt='' />
