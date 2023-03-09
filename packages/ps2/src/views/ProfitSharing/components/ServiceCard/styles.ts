@@ -55,7 +55,7 @@ export const BottomPnLContainer = styled(Box)`
 
 export const ButtonContainer = styled(Box)`
   position: absolute;
-  bottom: 30px;
+  bottom: 36px;
 
   > div > div > div {
     height: 67px;
