@@ -1,9 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import { BrandImage, PageContainer, ZigTypography } from '@zignaly-open/ui';
 import SignupForm from './components/SignupForm';
-import { Grid, Link } from '@mui/material';
+import { Grid, Link, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 
 export type InfoBarItem = {
@@ -14,7 +14,9 @@ export type InfoBarItem = {
 
 const Signup: React.FC = () => {
   const { t } = useTranslation(['pages', 'sign-up']);
-  const [mobileVersion] = useState<boolean>(window.innerWidth < 900);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('md'));
+
   useTitle(t('pages:signup'));
 
   const infoBarItems: InfoBarItem[] = useMemo(
@@ -51,19 +53,19 @@ const Signup: React.FC = () => {
         container
         direction='row'
         alignItems='center'
-        padding={mobileVersion ? '0 3%' : '0 10%'}
+        padding={matches ? '0 10%' : '0 3%'}
       >
         <Grid
           item
           xs={12}
           md={6}
           marginBottom={'85px'}
-          order={mobileVersion ? 1 : 0}
+          order={matches ? 0 : 1}
           justifyContent={'center'}
-          display={mobileVersion && 'flex'}
+          display={!matches && 'flex'}
         >
           <Grid container direction='column' maxWidth={'450px'}>
-            <Grid item display={mobileVersion && 'none'}>
+            <Grid item display={!matches && 'none'}>
               <Grid
                 container
                 direction='row'
@@ -89,7 +91,7 @@ const Signup: React.FC = () => {
                 fontSize={'25px'}
                 lineHeight={1.4}
                 color={'neutral100'}
-                textAlign={mobileVersion ? 'center' : null}
+                textAlign={matches ? 'unset' : 'center'}
               >
                 <Trans i18nKey={'sign-up:description'} t={t}>
                   <Link
@@ -152,8 +154,8 @@ const Signup: React.FC = () => {
           item
           xs={12}
           md={6}
-          order={mobileVersion ? 0 : 1}
-          marginBottom={mobileVersion && '25px'}
+          order={matches ? 1 : 0}
+          marginBottom={!matches && '25px'}
         >
           <Grid container direction={'column'}>
             <Grid item>
@@ -183,7 +185,7 @@ const Signup: React.FC = () => {
           container
           alignItems={'center'}
           justifyContent={'center'}
-          marginTop={!mobileVersion && '75px'}
+          marginTop={matches && '75px'}
           gap={'15px'}
           order={3}
         >
@@ -195,7 +197,7 @@ const Signup: React.FC = () => {
               variant={'h2'}
               fontSize={'25px'}
               fontWeight={600}
-              textAlign={mobileVersion ? 'center' : null}
+              textAlign={matches ? 'unset' : 'center'}
             >
               {t('sign-up:trusted-by')}
             </ZigTypography>
@@ -212,7 +214,7 @@ const Signup: React.FC = () => {
         >
           <ZigTypography
             fontSize={'20px'}
-            textAlign={mobileVersion ? 'center' : null}
+            textAlign={matches ? 'unset' : 'center'}
           >
             {t('sign-up:bottom-description')}
           </ZigTypography>

@@ -16,10 +16,10 @@ import { useSignup } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN } from '../../../../routes';
 import {
-  Button,
   ErrorMessage,
   TextButton,
   Typography,
+  ZigButton,
   ZigInput,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -199,15 +199,23 @@ const SignupForm: React.FC = () => {
           </Typography>
 
           <Action>
-            <Button
+            <ZigButton
               type={'submit'}
-              variant={'primary'}
+              variant={'contained'}
               id={'signup__submit'}
-              caption={t('signup-form.submit')}
-              size={'xlarge'}
+              size={'large'}
               loading={signingUp}
-              width={'100%'}
-            />
+              fullWidth={true}
+              sx={{ padding: '19px 0' }}
+            >
+              <ZigTypography
+                variant={'h3'}
+                letterSpacing={1.2}
+                fontWeight={600}
+              >
+                {t('signup-form.submit')}
+              </ZigTypography>
+            </ZigButton>
           </Action>
           <Box
             sx={{
