@@ -23,7 +23,8 @@ const BalanceButton = () => {
     if (!investments || !balance) return null;
 
     const hasInvested = investments.some(
-      (investment) => +investment.investedUSDT > 0,
+      (investment) =>
+        +investment.investedUSDT > 0 || +investment.pendingUSDT > 0,
     );
     if (!hasInvested) {
       if (+balance.totalFreeUSDT) {
