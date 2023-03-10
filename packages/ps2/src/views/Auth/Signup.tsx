@@ -3,7 +3,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import { BrandImage, PageContainer, ZigTypography } from '@zignaly-open/ui';
 import SignupForm from './components/SignupForm';
-import { Grid, Link } from '@mui/material';
+import { Grid, Link, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 
 export type InfoBarItem = {
@@ -14,6 +14,9 @@ export type InfoBarItem = {
 
 const Signup: React.FC = () => {
   const { t } = useTranslation(['pages', 'sign-up']);
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('md'));
+
   useTitle(t('pages:signup'));
 
   const infoBarItems: InfoBarItem[] = useMemo(
@@ -46,15 +49,28 @@ const Signup: React.FC = () => {
         alignItems: 'center',
       }}
     >
-      <Grid container direction='row' alignItems='center' padding={'0 10%'}>
-        <Grid item xs={12} md={6}>
+      <Grid
+        container
+        direction='row'
+        alignItems='center'
+        padding={matches ? '0 10%' : '0 3%'}
+      >
+        <Grid
+          item
+          xs={12}
+          md={6}
+          marginBottom={'85px'}
+          order={matches ? 0 : 1}
+          justifyContent={'center'}
+          display={!matches && 'flex'}
+        >
           <Grid container direction='column' maxWidth={'450px'}>
-            <Grid item>
+            <Grid item display={!matches && 'none'}>
               <Grid
                 container
                 direction='row'
                 alignItems='center'
-                marginBottom={'50px'}
+                marginBottom={'70px'}
               >
                 <BrandImage height='32px' type='isotype' width='32px' />
                 <ZigTypography
@@ -75,6 +91,7 @@ const Signup: React.FC = () => {
                 fontSize={'25px'}
                 lineHeight={1.4}
                 color={'neutral100'}
+                textAlign={matches ? 'unset' : 'center'}
               >
                 <Trans i18nKey={'sign-up:description'} t={t}>
                   <Link
@@ -133,7 +150,13 @@ const Signup: React.FC = () => {
             ))}
           </Grid>
         </Grid>
-        <Grid item xs={12} md={6}>
+        <Grid
+          item
+          xs={12}
+          md={6}
+          order={matches ? 1 : 0}
+          marginBottom={!matches && '25px'}
+        >
           <Grid container direction={'column'}>
             <Grid item>
               <Grid container justifyContent={'center'}>
@@ -162,14 +185,20 @@ const Signup: React.FC = () => {
           container
           alignItems={'center'}
           justifyContent={'center'}
-          marginTop={'75px'}
+          marginTop={matches && '75px'}
           gap={'15px'}
+          order={3}
         >
           <Grid item>
             <img src={'/images/signup/secured.svg'} alt='' />
           </Grid>
           <Grid item>
-            <ZigTypography variant={'h2'} fontSize={'25px'} fontWeight={600}>
+            <ZigTypography
+              variant={'h2'}
+              fontSize={'25px'}
+              fontWeight={600}
+              textAlign={matches ? 'unset' : 'center'}
+            >
               {t('sign-up:trusted-by')}
             </ZigTypography>
           </Grid>
@@ -181,8 +210,12 @@ const Signup: React.FC = () => {
           justifyContent={'center'}
           padding={'25px 0'}
           flexDirection={'column'}
+          order={4}
         >
-          <ZigTypography fontSize={'20px'}>
+          <ZigTypography
+            fontSize={'20px'}
+            textAlign={matches ? 'unset' : 'center'}
+          >
             {t('sign-up:bottom-description')}
           </ZigTypography>
           <Grid
