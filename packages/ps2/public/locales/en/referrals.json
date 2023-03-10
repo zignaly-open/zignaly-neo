@@ -39,7 +39,7 @@
     "table": {
         "title": "Commissions history",
         "no-referrals": "No commissions to show",
-        "no-commission-history": "No commission history yet. Invite some friends or traders to earn commissions",
+        "no-commission-history": "No commission history yet. Invite some friends or traders to earn commissions.",
         "time-and-date": "Time & Date",
         "user-trader": "User/Trader",
         "reward-type": "Commission Type",
