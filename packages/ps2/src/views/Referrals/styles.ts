@@ -22,7 +22,6 @@ export const TotalBoxValue = styled(ZigTypography)`
 
   &,
   span {
-    color: ${({ theme }) => theme.palette.neutral175};
     font-size: 30px;
   }
 `;
