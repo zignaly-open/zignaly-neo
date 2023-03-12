@@ -7,7 +7,9 @@ export const api = createApi({
   reducerPath: 'investmentApi',
   tagTypes: [
     'Investment',
-    'Balance', // technically it does not provide balance but affects it; needed to invalidate cache
+    // technically it does not provide balance/service but affects them; needed to invalidate cache
+    'Balance',
+    'Service',
   ],
   endpoints: (builder) => ({
     investments: builder.query<Investment[], string>({
@@ -25,7 +27,11 @@ export const api = createApi({
         exchangeInternalId: string;
       }
     >({
-      invalidatesTags: ['Balance', 'Investment'],
+      invalidatesTags: (result, error, args) => [
+        'Balance',
+        'Investment',
+        { type: 'Service', id: args.serviceId },
+      ],
       query: ({ serviceId, amount, exchangeInternalId }) => ({
         url: `services/${serviceId}/investments/out`,
         method: 'POST',
@@ -72,7 +78,11 @@ export const api = createApi({
         exchangeInternalId: string;
       }
     >({
-      invalidatesTags: ['Balance', 'Investment'],
+      invalidatesTags: (result, error, args) => [
+        'Balance',
+        'Investment',
+        { type: 'Service', id: args.serviceId },
+      ],
       query: ({ serviceId, profitPercentage, exchangeInternalId, amount }) => ({
         url: `services/${serviceId}/investments/in`,
         method: 'POST',
@@ -93,7 +103,11 @@ export const api = createApi({
         amount: string;
       }
     >({
-      invalidatesTags: ['Balance', 'Investment'],
+      invalidatesTags: (result, error, args) => [
+        'Balance',
+        'Investment',
+        { type: 'Service', id: args.serviceId },
+      ],
       query: ({ serviceId, profitPercentage, exchangeInternalId, amount }) => ({
         url: `services/${serviceId}/investments/in`,
         method: 'POST',
