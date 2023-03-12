@@ -26,6 +26,7 @@ function Button({
   maxWidth,
   maxHeight,
   bottomElement,
+  width,
 }: ButtonProps): ReactElement {
   /**
    * @function renderLeftElement
@@ -49,6 +50,7 @@ function Button({
 
   return (
     <styled.Layout
+      width={width}
       isLoading={loading}
       id={id}
       withElements={!!leftElement && !!rightElement && !!caption}
