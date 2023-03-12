@@ -70,18 +70,35 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
       </Trans>
     ),
 
-    !!!config.rewardSignupAmount && (
+    !!config.rewardOneAllocationAmount && (
       <Trans
-        i18nKey='referrals:invite-for-signup'
+        i18nKey='referrals:invite-for-investment'
         t={t}
         values={{
-          value: config.rewardSignupAmount,
-          symbol: config.rewardSignupSymbol,
+          value: config.rewardOneAllocationAmount,
+          symbol: config.rewardOneAllocationSymbol,
+          threshold: config.rewardMinOneAllocationAmount,
         }}
       >
         <ZigTypography />
         <TotalBoxValue />
         <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
+      </Trans>
+    ),
+    !!config.rewardTotalAllocationAmount && (
+      <Trans
+        i18nKey='referrals:invite-for-investment'
+        t={t}
+        values={{
+          value: config.rewardTotalAllocationAmount,
+          symbol: config.rewardTotalAllocationSymbol,
+          threshold: config.rewardMinTotalAllocationAmount,
+          days: config.rewardMinTotalAllocationDays,
+        }}
+      >
+        <ZigTypography />
+        <TotalBoxValue />
+        <ZigTypography color='neutral504' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
     !!!config.rewardDepositAmount && (
@@ -114,35 +131,18 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
-    !!config.rewardOneAllocationAmount && (
+    !!!config.rewardSignupAmount && (
       <Trans
-        i18nKey='referrals:invite-for-investment'
+        i18nKey='referrals:invite-for-signup'
         t={t}
         values={{
-          value: config.rewardOneAllocationAmount,
-          symbol: config.rewardOneAllocationSymbol,
-          threshold: config.rewardMinOneAllocationAmount,
+          value: config.rewardSignupAmount,
+          symbol: config.rewardSignupSymbol,
         }}
       >
         <ZigTypography />
         <TotalBoxValue />
         <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
-      </Trans>
-    ),
-    !!config.rewardTotalAllocationAmount && (
-      <Trans
-        i18nKey='referrals:invite-for-investment'
-        t={t}
-        values={{
-          value: config.rewardTotalAllocationAmount,
-          symbol: config.rewardTotalAllocationSymbol,
-          threshold: config.rewardMinTotalAllocationAmount,
-          days: config.rewardMinTotalAllocationDays,
-        }}
-      >
-        <ZigTypography />
-        <TotalBoxValue />
-        <ZigTypography color='neutral504' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
   ].filter(Boolean);

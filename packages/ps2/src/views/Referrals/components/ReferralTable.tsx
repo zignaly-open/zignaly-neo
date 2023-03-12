@@ -134,22 +134,24 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
             {t('table.title')}
           </ZigTypography>
         </Grid>
-        <FilterWrapperContainer item xs={12} sm={8}>
-          <ZigSelect
-            onChange={setStatus}
-            value={status}
-            small
-            label={t('table.filter-status')}
-            options={statusOptions}
-          />
-          <ZigSelect
-            onChange={setRewardType}
-            value={rewardType}
-            small
-            label={t('table.filter-type')}
-            options={rewardTypeOptions}
-          />
-        </FilterWrapperContainer>
+        {referrals.length > 0 && (
+          <FilterWrapperContainer item xs={12} sm={8}>
+            <ZigSelect
+              onChange={setRewardType}
+              value={rewardType}
+              small
+              label={t('table.filter-type')}
+              options={rewardTypeOptions}
+            />
+            <ZigSelect
+              onChange={setStatus}
+              value={status}
+              small
+              label={t('table.filter-status')}
+              options={statusOptions}
+            />
+          </FilterWrapperContainer>
+        )}
       </Grid>
 
       {referrals.length ? (
