@@ -22,7 +22,6 @@ export const TotalBoxValue = styled(ZigTypography)`
 
   &,
   span {
-    color: ${({ theme }) => theme.palette.neutral175};
     font-size: 30px;
   }
 `;
@@ -79,4 +78,12 @@ export const RewardsListContainer = styled(Grid)`
   background-color: rgba(255, 255, 255, 0.02);
   padding-top: 20px;
   padding-bottom: 20px;
+`;
+
+export const UlList = styled('ul')`
+  &,
+  & li {
+    list-style: disc;
+  }
+  margin-left: 20px;
 `;
