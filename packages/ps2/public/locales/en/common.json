@@ -60,6 +60,13 @@
   "infinitely-better": "Yes, the current value is infinity percent better because the starting value is 0",
   "infinitely-worse": "Yes, the current value is infinity percent worse because the starting value is 0",
   "type-to-confirm": "Type \"{{word}}\" to confirm",
+  "balance": {
+    "account-value": "Account Value",
+    "available": "Available",
+    "deposit-funds": "Deposit Funds",
+    "find-traders": "Find traders to invest in",
+    "my-portfolio": "My Portfolio"
+  },
   "validation": {
     "insufficient-amount": "Insufficient funds",
     "insufficient-amount-min": "Min amount: {{ minValue }} {{ minValueCoin }}",
