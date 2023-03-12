@@ -5,8 +5,11 @@ import {
   ZigSelect,
   ZigTable,
   ZigTypography,
+  downloadTableCsv,
+  ZigButton,
 } from '@zignaly-open/ui';
 import { FilterWrapperContainer } from '../styles';
+import IosShareIcon from '@mui/icons-material/IosShare';
 import React, { useMemo, useState } from 'react';
 import { RewardType, StatusType } from '../constants';
 import { ReferralHistoryEntry } from '../../../apis/referrals/types';
@@ -16,6 +19,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
   referrals,
 }) => {
   const { t } = useTranslation('referrals');
+
   const [status, setStatus] = useState<StatusType>(null as StatusType);
   const statusOptions = useMemo(
     () => [
@@ -118,6 +122,25 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
     [referrals, rewardType, status],
   );
 
+  const exporter = () =>
+    downloadTableCsv(
+      filteredHistory.map((r) => [
+        r.date,
+        `${r.amount} ${r.coin}`,
+        r.email,
+        r.type in RewardType ? t(`rewardTypes.${r.type}`) : r.type,
+        r.status in StatusType ? t(`statusTypes.${r.status}`) : r.status,
+      ]),
+      [
+        t('table.time-and-date'),
+        t('common:amount'),
+        t('table.user-trader'),
+        t('table.reward-type'),
+        t('table.filter-status'),
+      ],
+      'commissions.csv',
+    );
+
   return (
     <Box sx={{ mb: 6, mt: 3 }}>
       <Grid container mb={3}>
@@ -150,6 +173,15 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
               label={t('table.filter-status')}
               options={statusOptions}
             />
+
+            <ZigButton
+              onClick={exporter}
+              sx={{
+                color: (theme) => theme.palette.links,
+              }}
+            >
+              {t('export')} <IosShareIcon sx={{ ml: 0.5 }} />
+            </ZigButton>
           </FilterWrapperContainer>
         )}
       </Grid>
