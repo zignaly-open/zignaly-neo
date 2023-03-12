@@ -31,5 +31,6 @@
 		"address": "{{coin}} Dirección",
 		"memo": "{{coin}} MEMO\/Tag"
 	},
-	"no-network": "El depósito no está disponible en esta red"
+	"no-network": "El depósito no está disponible en esta red",
+	"buy-crypto": "Comprar Criptomonedas"
 }

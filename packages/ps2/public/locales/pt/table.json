@@ -24,5 +24,6 @@
 	"serviceName-by": "por",
 	"columns-hideOrShow": "Mostrar\/Ocultar Colunas",
 	"assetsInPool-investors_one": "{{count}} investidor",
-	"assetsInPool-investors_other": "{{count}} investidores"
+	"assetsInPool-investors_other": "{{count}} investidores",
+	"owner-verified": "O Gestor foi verificado"
 }
