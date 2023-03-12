@@ -321,7 +321,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         mb: 4,
       }}
     >
-      <Grid item xs={12} md={12}>
+      <Grid item xs={12} md={9}>
         <ZigTypography
           variant={'h1'}
           textAlign={'center'}
@@ -336,41 +336,39 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
             justifyContent: 'center',
           }}
         >
-          {elements.slice(0, 3).map((x) => (
+          {elements.slice(0, 3).map((x, _, all) => (
             <Grid
               key={Math.random()}
               item
               xs={12}
               p={1}
-              md={elements.length <= 2 ? 3 : 4}
+              md={Math.min(4, 12 / all.length)}
             >
               <GetWhatYouDeserveLabel>{x}</GetWhatYouDeserveLabel>
             </Grid>
           ))}
-          {
-            <Grid
-              item
-              xs={12}
-              md={3}
-              p={1}
-              sx={{
-                alignItems: 'center',
-                justifyContent: 'center',
-                display: 'flex',
-              }}
-            >
-              <ZigButton
-                variant='outlined'
-                size={'large'}
-                sx={{ mb: 8 }}
-                onClick={showFullRewards}
-              >
-                {t('full-rewards')}
-                <ArrowForwardIosIcon sx={{ height: '16px' }} />
-              </ZigButton>
-            </Grid>
-          }
         </Grid>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        md={3}
+        p={1}
+        sx={{
+          alignItems: 'center',
+          justifyContent: 'center',
+          display: 'flex',
+        }}
+      >
+        <ZigButton
+          variant='outlined'
+          size={'large'}
+          sx={{ mb: 3, mt: 3 }}
+          onClick={showFullRewards}
+        >
+          {t('full-rewards')}
+          <ArrowForwardIosIcon sx={{ height: '16px' }} />
+        </ZigButton>
       </Grid>
     </RewardsListContainer>
   );
