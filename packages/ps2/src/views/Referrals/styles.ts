@@ -80,3 +80,11 @@ export const RewardsListContainer = styled(Grid)`
   padding-top: 20px;
   padding-bottom: 20px;
 `;
+
+export const UlList = styled('ul')`
+  &,
+  & li {
+    list-style: disc;
+  }
+  margin-left: 20px;
+`;
