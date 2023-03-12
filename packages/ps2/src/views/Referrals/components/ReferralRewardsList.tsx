@@ -101,7 +101,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         <ZigTypography color='neutral504' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
-    !!!config.rewardDepositAmount && (
+    !!config.rewardDepositAmount && (
       <Trans
         i18nKey='referrals:invite-for-deposit'
         t={t}
@@ -131,7 +131,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
       </Trans>
     ),
-    !!!config.rewardSignupAmount && (
+    !!config.rewardSignupAmount && (
       <Trans
         i18nKey='referrals:invite-for-signup'
         t={t}
