@@ -98,6 +98,7 @@ const ChooseDepositType: React.FC<{
                 target={'_blank'}
                 display={'flex'}
                 justifyContent={'center'}
+                underline={'none'}
               >
                 <ZigButton
                   variant='contained'
