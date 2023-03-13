@@ -6,9 +6,9 @@ import {
   SignupResponse,
   UserData,
 } from './types';
-import emptySplitApi from '../baseApiPs2';
+import baseApiPs2 from '../baseApiPs2';
 
-export const api = emptySplitApi.injectEndpoints({
+export const api = baseApiPs2.injectEndpoints({
   overrideExisting: false,
   endpoints: (builder) => ({
     signup: builder.mutation<SignupResponse, SignupPayload>({

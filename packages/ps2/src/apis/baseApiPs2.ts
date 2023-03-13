@@ -1,7 +1,7 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
 import baseQuery from 'apis/baseQuery';
 
-const emptySplitApi = createApi({
+const baseApiPs2 = createApi({
   reducerPath: 'ps2Api',
   baseQuery: baseQuery(),
   endpoints: () => ({}),
@@ -15,4 +15,4 @@ const emptySplitApi = createApi({
   ],
 });
 
-export default emptySplitApi;
+export default baseApiPs2;
