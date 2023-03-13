@@ -14,9 +14,9 @@ const ChooseDepositType: React.FC<{
 
   return (
     <>
-      <Grid container sx={{ padding: '15px 0', paddingRight: '60px' }}>
-        <Grid item xs={12}>
-          <ZigTypography variant={'body2'} fontSize={'14px'}>
+      <Grid container sx={{ padding: '15px 0' }}>
+        <Grid item xs={12} sx={{ paddingRight: '50px' }}>
+          <ZigTypography variant={'body2'} fontSize={'15px'}>
             {t('description', { coin })}
           </ZigTypography>
         </Grid>
@@ -26,14 +26,14 @@ const ChooseDepositType: React.FC<{
           justifyContent='center'
           sx={{ height: '180px', paddingTop: '25px' }}
         >
-          <Grid item xs={12} md={6}>
+          <Grid item xs={12} md={5}>
             <Box
               sx={{
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
                 width: '100%',
-                padding: '0 75px',
+                padding: '0 55px',
               }}
             >
               <Box
