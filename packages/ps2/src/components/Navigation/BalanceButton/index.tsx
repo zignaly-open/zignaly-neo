@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
-import { Box, Divider, Paper } from '@mui/material';
-import { ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import { Box, Divider } from '@mui/material';
+import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_DASHBOARD, ROUTE_PROFIT_SHARING } from '../../../routes';
@@ -11,6 +11,7 @@ import { useInvestmentsQuery } from 'apis/investment/api';
 import { BalanceStatus } from './types';
 import { useZModal } from 'components/ZModal/use';
 import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
+import { GradientBorderButtonWrapper } from '../ReferralButton/atoms';
 
 const BalanceButton = () => {
   const { t } = useTranslation('common');
@@ -19,18 +20,21 @@ const BalanceButton = () => {
   const { data: balance } = useBalanceQuery(internalId);
   const { showModal } = useZModal();
 
+  const investedAmount = useMemo(() => {
+    return investments?.reduce(
+      (total, investment) =>
+        total + +investment.investedUSDT + +investment.pendingUSDT,
+      0,
+    );
+  }, [investments]);
+
   const balanceStatus = useMemo(() => {
     if (!investments || !balance) return null;
 
-    const hasInvested = investments.some(
-      (investment) =>
-        +investment.investedUSDT > 0 || +investment.pendingUSDT > 0,
-    );
-    if (!hasInvested) {
-      if (+balance.totalFreeUSDT) {
-        return BalanceStatus.NoInvestments;
-      }
-      return BalanceStatus.NoFunds;
+    if (!investedAmount) {
+      return +balance.totalFreeUSDT
+        ? BalanceStatus.NoInvestments
+        : BalanceStatus.NoFunds;
     }
 
     return BalanceStatus.Invested;
@@ -62,72 +66,88 @@ const BalanceButton = () => {
     );
 
   return linkWrap(
-    <Paper
-      sx={{
-        px: 1,
-        py: 0.25,
-      }}
-    >
-      <Box display='flex' alignItems='center'>
-        <Box
-          sx={{
-            display: 'flex',
-            ml: 1,
-            flexDirection: 'column',
-            justifyContent: 'center',
-          }}
-        >
-          <Box gap={1} display='flex'>
-            <ZigTypography variant='body2' color='neutral300'>
-              {t('balance.account-value')}
-            </ZigTypography>
-            <ZigPriceLabel
-              usd
-              value={balance.totalWalletUSDT}
-              color='neutral100'
-              variant='body2'
-            />
+    <GradientBorderButtonWrapper>
+      <ZigButton
+        id='menu__balance-link'
+        component={'a'}
+        sx={{
+          cursor: 'pointer',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+          px: 1,
+          py: 0.5,
+        }}
+        variant='outlined'
+      >
+        <Box display='flex' alignItems='center'>
+          <Box
+            sx={{
+              display: 'flex',
+              ml: 1,
+              flexDirection: 'column',
+              justifyContent: 'center',
+            }}
+          >
+            <Box gap={1} display='flex'>
+              <ZigTypography variant='body2' color='neutral300' fontSize='12px'>
+                {t('balance.account-value')}
+              </ZigTypography>
+              <ZigPriceLabel
+                usd
+                value={investedAmount + balance.totalFreeUSDT}
+                color='neutral100'
+                variant='body2'
+                fontSize='12px'
+              />
+            </Box>
+            <Box gap={1} display='flex'>
+              <ZigTypography variant='body2' color='neutral300' fontSize='12px'>
+                {t('balance.available')}
+              </ZigTypography>
+              <ZigPriceLabel
+                usd
+                value={balance.totalFreeUSDT}
+                color='neutral100'
+                variant='body2'
+                fontSize='12px'
+              />
+            </Box>
           </Box>
-          <Box gap={1} display='flex'>
-            <ZigTypography variant='body2' color='neutral300'>
-              {t('balance.available')}
-            </ZigTypography>
-            <ZigPriceLabel
-              usd
-              value={balance.totalFreeUSDT}
-              color='neutral100'
+          <Divider
+            variant='middle'
+            orientation='vertical'
+            sx={{
+              borderColor: (theme) => theme.palette.neutral600,
+              mx: 1.5,
+              my: 0,
+            }}
+            flexItem
+          />
+          <Box
+            display='flex'
+            sx={{
+              maxWidth: 113,
+            }}
+            alignItems='center'
+          >
+            <ZigTypography
               variant='body2'
-            />
+              color='primary'
+              textAlign='center'
+              fontSize='12px'
+            >
+              {balanceStatus === BalanceStatus.NoFunds
+                ? t('balance.deposit-funds')
+                : balanceStatus === BalanceStatus.NoInvestments
+                ? t('balance.find-traders')
+                : t('balance.my-portfolio')}
+            </ZigTypography>
+            <ChevronRight />
           </Box>
         </Box>
-        <Divider
-          variant='middle'
-          orientation='vertical'
-          sx={{
-            borderColor: (theme) => theme.palette.neutral600,
-            mx: 1.5,
-            my: 0,
-          }}
-          flexItem
-        />
-        <Box
-          display='flex'
-          sx={{
-            maxWidth: 113,
-          }}
-          alignItems='center'
-        >
-          <ZigTypography variant='body2' color='neutral300' textAlign='center'>
-            {balanceStatus === BalanceStatus.NoFunds
-              ? t('balance.deposit-funds')
-              : balanceStatus === BalanceStatus.NoInvestments
-              ? t('balance.find-traders')
-              : t('balance.my-portfolio')}
-          </ZigTypography>
-          <ChevronRight />
-        </Box>
-      </Box>
-    </Paper>,
+      </ZigButton>
+    </GradientBorderButtonWrapper>,
   );
 };
 
