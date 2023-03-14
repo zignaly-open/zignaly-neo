@@ -42,7 +42,6 @@ const TransferZigModal = (props: TransferZigModalProps) => {
     formState: { errors, isDirty },
     watch,
     reset,
-    clearErrors,
   } = useForm<ITransferField>({
     mode: 'onChange',
     criteriaMode: 'all',
@@ -56,9 +55,6 @@ const TransferZigModal = (props: TransferZigModalProps) => {
   }, [account, address]);
 
   const watchAmount = watch('amount');
-  useEffect(() => {
-    clearErrors();
-  }, [watchAmount]);
   const handleTransfer: SubmitHandler<ITransferField> = async ({ amount }) => {
     await transfer(amount.value);
     reset();
@@ -103,10 +99,6 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                     t('errors.error-number')) ||
                   (!isLoading &&
                     isDirty &&
-                    errors.amount?.types?.checkEmpty &&
-                    t('errors.error-empty')) ||
-                  (!isLoading &&
-                    isDirty &&
                     errors.amount?.types?.checkMax &&
                     t('errors.error-max')) ||
                   (!isLoading &&
@@ -126,7 +118,8 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                         : true,
                     checkMax: (state) =>
                       balance.toNumber() >= Number(state?.value),
-                    checkZero: (state) => Number(state?.value) > 0,
+                    checkZero: (state) =>
+                      Number(state?.value) > 0 || state?.value == '',
                     checkEmpty: (state) => !!state?.value,
                     checkNumber: (state) => !isNaN(Number(state?.value)),
                   },

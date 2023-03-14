@@ -24,6 +24,7 @@ jobs:
   build:
     name: PS2 Test deploy
     needs: pre_job
+    timeout-minutes: 20
     if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).ui_repos.should_skip
     runs-on: ubuntu-latest
     environment: test
