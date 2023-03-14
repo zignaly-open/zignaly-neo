@@ -27,9 +27,10 @@ const TransferZigModal = (props: TransferZigModalProps) => {
   const { account, activateBrowserWallet, chainId } = useEthers();
 
   const tokenBalance = useTokenBalance(token, account);
+
   const balance =
     tokenBalance &&
-    utils.parseUnits(utils.formatUnits(tokenBalance, ZIGCOIN_PRECISION), 0);
+    utils.parseUnits(utils.formatUnits(tokenBalance, ZIGCOIN_PRECISION), 8);
   const { isLoading, isError, transfer, isSuccess } = useContract({
     address: address,
   });
@@ -43,7 +44,6 @@ const TransferZigModal = (props: TransferZigModalProps) => {
     reset,
   } = useForm<ITransferField>({
     mode: 'onChange',
-    reValidateMode: 'onChange',
     criteriaMode: 'all',
   });
 
@@ -93,19 +93,20 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                 placeholder={'0.0'}
                 labelBalance={t('label-balance')}
                 error={
-                  (isDirty &&
+                  (!isLoading &&
+                    isDirty &&
                     errors.amount?.types?.checkNumber &&
                     t('errors.error-number')) ||
-                  (isDirty &&
-                    errors.amount?.types?.checkEmpty &&
-                    t('errors.error-empty')) ||
-                  (isDirty &&
+                  (!isLoading &&
+                    isDirty &&
                     errors.amount?.types?.checkMax &&
                     t('errors.error-max')) ||
-                  (isDirty &&
+                  (!isLoading &&
+                    isDirty &&
                     errors.amount?.types?.checkZero &&
                     t('errors.error-zero')) ||
-                  (isDirty &&
+                  (!isLoading &&
+                    isDirty &&
                     errors.amount?.types?.checkDecimals &&
                     t('errors.error-decimals'))
                 }
@@ -117,15 +118,16 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                         : true,
                     checkMax: (state) =>
                       balance.toNumber() >= Number(state?.value),
-                    checkZero: (state) => Number(state?.value) > 0,
-                    checkEmpty: (state) => state?.value.toString() != '',
+                    checkZero: (state) =>
+                      Number(state?.value) > 0 || state?.value == '',
+                    checkEmpty: (state) => !!state?.value,
                     checkNumber: (state) => !isNaN(Number(state?.value)),
                   },
                 })}
                 tokens={[
                   {
                     id: 'ZIG',
-                    balance: balance?.toString(),
+                    balance: utils.formatUnits(balance, 8),
                   },
                 ]}
               />
@@ -136,7 +138,7 @@ const TransferZigModal = (props: TransferZigModalProps) => {
                 size={matchesSmall ? 'xlarge' : 'large'}
                 caption={t('button')}
                 minWidth={matchesSmall ? 350 : 260}
-                disabled={!watchAmount || !!errors.amount}
+                disabled={!watchAmount || !!errors.amount || !isDirty}
                 loading={isLoading}
                 type={'submit'}
               />
