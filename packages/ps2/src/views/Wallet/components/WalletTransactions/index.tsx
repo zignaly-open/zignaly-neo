@@ -18,7 +18,7 @@ import { Box } from '@mui/material';
 import { FILTERS_TYPE, FilterValues, Transaction } from 'apis/wallet/types';
 import { useTransactionsHistory } from 'apis/wallet/use';
 import ChainIcon from 'components/ChainIcon';
-import { Add, ExpandLess, ExpandMore } from '@mui/icons-material';
+import { ExpandLess, ExpandMore, OpenInNew } from '@mui/icons-material';
 import { NumericFormat } from 'react-number-format';
 import TransactionDetails from '../TransactionDetails';
 import { PaginationState } from '@tanstack/react-table';
@@ -177,7 +177,7 @@ const WalletTransactions = () => {
         <Box display='flex' gap={2}>
           <TextButton
             id={'wallet__export-transactions'}
-            rightElement={<Add sx={{ color: 'links' }} />}
+            rightElement={<OpenInNew sx={{ color: 'links' }} />}
             caption={t('action:export')}
             onClick={() => downloadCsv()}
             loading={downloadCsvStatus.isLoading}
