@@ -61,7 +61,7 @@
   "infinitely-worse": "Yes, the current value is infinity percent worse because the starting value is 0",
   "type-to-confirm": "Type \"{{word}}\" to confirm",
   "balance": {
-    "account-value": "Account Value",
+    "total": "Total",
     "available": "Available",
     "deposit-funds": "Deposit Funds",
     "find-traders": "Find traders to invest in",
