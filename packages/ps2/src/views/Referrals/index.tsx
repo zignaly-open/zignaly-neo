@@ -5,7 +5,7 @@ import {
   useReferralHistoryQuery,
   useReferralRewardsQuery,
 } from '../../apis/referrals/api';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import {
   CloneIcon,
   dark,
@@ -15,10 +15,7 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import GroupIcon from '@mui/icons-material/Group';
-import { Hr } from './styles';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
-
-import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import { useCurrentUser } from '../../apis/user/use';
 import copy from 'copy-to-clipboard';
 import { useToast } from '../../util/hooks/useToast';
@@ -28,6 +25,7 @@ import { TotalBox } from './atoms';
 import { ReferralHistory, ReferralRewards } from '../../apis/referrals/types';
 import ReferralTable from './components/ReferralTable';
 import ReferralRewardsList from './components/ReferralRewardsList';
+import ReferralSuccessStep from './components/ReferralSuccessStep';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -45,7 +43,7 @@ const Referrals: React.FC = () => {
     generatePath(ROUTE_REFERRALS_INVITE, { key: refCode });
 
   return (
-    <PageContainer style={{ maxWidth: '960px' }}>
+    <PageContainer style={{ maxWidth: '1200px' }}>
       <LayoutContentWrapper
         endpoint={[rewards, history]}
         content={([rewardsData, referrals]: [
@@ -62,14 +60,18 @@ const Referrals: React.FC = () => {
                 flexDirection: 'row',
               }}
             >
-              <Box>
-                <CardGiftcardIcon
-                  sx={{
-                    width: 200,
-                    height: 200,
-                    mr: 4,
-                    ml: 4,
-                  }}
+              <Box
+                sx={{
+                  mr: 4,
+                  ml: 4,
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <img
+                  src={'/images/referrals/envelope-main.png'}
+                  style={{ width: 200, marginTop: 17 }}
+                  alt={'referral'}
                 />
               </Box>
               <Box
@@ -84,7 +86,7 @@ const Referrals: React.FC = () => {
                   sx={{
                     mb: 1,
                   }}
-                  variant={'h1'}
+                  variant={'bigNumber'}
                 >
                   {t('title')}
                 </ZigTypography>
@@ -101,7 +103,12 @@ const Referrals: React.FC = () => {
                   readOnly={true}
                   value={link}
                   rightSideElement={
-                    <CloneIcon width={40} height={40} color={dark.neutral300} />
+                    <CloneIcon
+                      id='referrals__copy-link'
+                      width={40}
+                      height={40}
+                      color={dark.neutral300}
+                    />
                   }
                   onClickRightSideElement={() => {
                     copy(link);
@@ -111,38 +118,78 @@ const Referrals: React.FC = () => {
               </Box>
             </Box>
 
-            <Hr />
-
             <ReferralRewardsList rewards={rewardsData} />
 
-            <Hr />
+            {!referrals.history?.length ? (
+              <>
+                <ZigTypography
+                  align={'center'}
+                  variant={'h1'}
+                  sx={{ mt: 7, mb: 5 }}
+                >
+                  {t('how-to-earn')}
+                </ZigTypography>
 
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'space-evenly',
-                pt: 5,
-                pb: 5,
-              }}
-            >
-              <TotalBox
-                label={t('total-invitees')}
-                value={
-                  <>
-                    {rewardsData.invitedCount} <GroupIcon />
-                  </>
-                }
-              />
-              <TotalBox
-                label={t('total-rewards')}
-                value={<ZigPriceLabel usd value={rewardsData.usdtEarned} />}
-              />
-              <TotalBox
-                label={t('pending-rewards')}
-                value={<ZigPriceLabel usd value={rewardsData.usdtPending} />}
-              />
-            </Box>
+                <Grid container sx={{ mb: 8 }}>
+                  <Grid item xs={12} md={4}>
+                    <ReferralSuccessStep step={1} />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <ReferralSuccessStep step={2} />
+                  </Grid>
+                  <Grid item xs={12} md={4}>
+                    <ReferralSuccessStep step={3} />
+                  </Grid>
+                </Grid>
+              </>
+            ) : (
+              <>
+                <ZigTypography align={'center'} variant={'h1'} sx={{ mt: 7 }}>
+                  {t('my-referrals')}
+                </ZigTypography>
+
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'space-evenly',
+                    pt: 5,
+                    pb: 5,
+                  }}
+                >
+                  <TotalBox
+                    label={t('total-invitees')}
+                    value={
+                      <ZigTypography color={'neutral175'}>
+                        {rewardsData.invitedCount} <GroupIcon />
+                      </ZigTypography>
+                    }
+                  />
+                  <TotalBox
+                    label={t('total-rewards')}
+                    value={
+                      <ZigPriceLabel
+                        color={'greenGraph'}
+                        usd
+                        variant={'bigNumber'}
+                        value={rewardsData.usdtEarned}
+                      />
+                    }
+                  />
+                  <TotalBox
+                    label={t('pending-rewards')}
+                    value={
+                      <ZigPriceLabel
+                        color={'yellow'}
+                        usd
+                        variant={'bigNumber'}
+                        value={rewardsData.usdtPending}
+                      />
+                    }
+                  />
+                </Box>
+              </>
+            )}
             <ReferralTable referrals={referrals.history} />
           </>
         )}
