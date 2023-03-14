@@ -88,3 +88,11 @@ export const UlList = styled('ul')`
   }
   margin-left: 20px;
 `;
+
+export const OlList = styled('ol')`
+  &,
+  & li {
+    list-style: decimal;
+  }
+  margin-left: 20px;
+`;
