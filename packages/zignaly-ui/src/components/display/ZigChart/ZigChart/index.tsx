@@ -181,6 +181,7 @@ const ZigChart = ({
                 },
               }}
               data={processedData}
+              interpolation="monotoneX"
             />
           )}
         </VictoryChart>

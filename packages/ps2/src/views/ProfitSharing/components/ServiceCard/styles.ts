@@ -36,7 +36,7 @@ export const ChartContainer = styled(Box)`
   top: 140px;
   left: 0;
   right: 0;
-  opacity: 0.5;
+  opacity: 0.7;
   bottom: 0;
 `;
 
@@ -49,9 +49,13 @@ export const ValueContainer = styled('div')`
 
 export const BottomPnLContainer = styled(Box)`
   position: absolute;
-  bottom: 0;
+  bottom: 8px;
   right: 8px;
-  backdrop-filter: blur(1.5px);
+
+  span {
+    backdrop-filter: blur(1.5px);
+    line-height: 10px !important;
+  }
 `;
 
 export const ButtonContainer = styled(Box)`
