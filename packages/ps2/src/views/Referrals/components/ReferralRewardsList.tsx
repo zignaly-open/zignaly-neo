@@ -363,7 +363,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         <ZigButton
           variant='outlined'
           size={'large'}
-          sx={{ mb: 3, mt: 3 }}
+          sx={{ mb: 3, mt: '67px' }}
           onClick={showFullRewards}
         >
           {t('full-rewards')}
