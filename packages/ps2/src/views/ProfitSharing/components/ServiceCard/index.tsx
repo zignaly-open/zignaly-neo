@@ -32,6 +32,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
           midLine={false}
           height={138}
           width={360}
+          gradientVariant='full'
         />
       </ChartContainer>
       <ServiceName

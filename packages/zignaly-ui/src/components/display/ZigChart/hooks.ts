@@ -1,7 +1,10 @@
 import { useMemo } from "react";
-import { AxisFormat, ChartColor, ChartGradientColor } from "./types";
+import { AxisFormat, ChartColor, ChartGradientColor, GradientVariant } from "./types";
 
-export function useChartData(data: AxisFormat[] | number[]): {
+export function useChartData(
+  data: AxisFormat[] | number[],
+  gradientVariant = "full" as GradientVariant,
+): {
   data: AxisFormat[];
   color: ChartColor;
   gradient: ChartGradientColor;
@@ -25,6 +28,12 @@ export function useChartData(data: AxisFormat[] | number[]): {
   return {
     data: processedData,
     color: isGreen ? ChartColor.Green : ChartColor.Red,
-    gradient: isGreen ? ChartGradientColor.Green : ChartGradientColor.Red,
+    gradient: isGreen
+      ? gradientVariant === "full"
+        ? ChartGradientColor.GreenLong
+        : ChartGradientColor.Green
+      : gradientVariant === "full"
+      ? ChartGradientColor.RedLong
+      : ChartGradientColor.Red,
   };
 }

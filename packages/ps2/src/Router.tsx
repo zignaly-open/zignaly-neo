@@ -41,7 +41,7 @@ import ServiceApi from './views/TraderService/ServiceApi';
 import Manual from 'views/TraderService/Manual';
 import Signals from './views/TraderService/Signals';
 import EditService from 'views/TraderService/EditService';
-import AuthenticatedWall from 'util/walls/AuthenticatedWall.tsx';
+import AuthenticatedWall from 'util/walls/AuthenticatedWall';
 import UnauthenticatedWall from './util/walls/UnauthenticatedWall';
 import ServiceOwnerWall from './util/walls/ServiceOwnerWall';
 import HelpInvestor from './views/Help/HelpInvestor';
