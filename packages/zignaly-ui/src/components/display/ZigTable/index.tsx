@@ -27,6 +27,7 @@ import { Table, SortIcon } from "./styles";
 import Loader from "../Loader";
 
 export default function ZigTable<T extends object>({
+  id,
   data,
   columns,
   initialState = {},
@@ -67,7 +68,7 @@ export default function ZigTable<T extends object>({
   return (
     <>
       <TableContainer>
-        <Table>
+        <Table id={id}>
           <thead>
             {table.getHeaderGroups().map((headerGroup, groupIndex) => (
               <tr key={headerGroup.id}>
@@ -181,6 +182,7 @@ export default function ZigTable<T extends object>({
           display="flex"
           justifyContent="center"
           alignItems="center"
+          id={"table__empty-message"}
         >
           {emptyMessage}
         </ZigTypography>
@@ -190,6 +192,7 @@ export default function ZigTable<T extends object>({
           <Box display="flex" flex={3} justifyContent="flex-start" />
           <Box justifyContent="center" display="flex" gap={1} alignItems="center" flex={3}>
             <IconButton
+              id={`table__go-zero-page`}
               variant="flat"
               size="xlarge"
               shrinkWrap={true}
@@ -198,6 +201,7 @@ export default function ZigTable<T extends object>({
               disabled={!table.getCanPreviousPage()}
             />
             <IconButton
+              id={`table__go-previous-page`}
               variant="flat"
               size="xlarge"
               shrinkWrap={true}
@@ -205,7 +209,7 @@ export default function ZigTable<T extends object>({
               onClick={table.previousPage}
               disabled={!table.getCanPreviousPage()}
             />
-            <Box display="flex" gap={1} alignItems="center" px={2}>
+            <Box display="flex" gap={1} alignItems="center" px={2} id={"table__pages"}>
               <ZigTypography color="neutral300">Page</ZigTypography>
               <PageNumberContainer>
                 <ZigTypography variant="h3" color="neutral100">
@@ -225,6 +229,7 @@ export default function ZigTable<T extends object>({
             </Box>
             {loading && <Loader color="#fff" width="24px" height="24px" ariaLabel="loading" />}
             <IconButton
+              id={`table__go-next-page`}
               variant="flat"
               size="xlarge"
               shrinkWrap={true}
@@ -234,6 +239,7 @@ export default function ZigTable<T extends object>({
             />
             {table.getPageCount() !== -1 && (
               <IconButton
+                id={`table__go-last-page`}
                 variant="flat"
                 size="xlarge"
                 shrinkWrap={true}
@@ -247,6 +253,7 @@ export default function ZigTable<T extends object>({
             <ZigTypography color="neutral300">Displaying</ZigTypography>
             <SmallSelectWrapper>
               <ZigSelect
+                id={"table__items-per-page"}
                 options={pageSizeOptions}
                 value={table.getState().pagination.pageSize}
                 onChange={table.setPageSize}

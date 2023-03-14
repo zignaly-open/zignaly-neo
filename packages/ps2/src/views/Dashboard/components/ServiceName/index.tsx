@@ -10,11 +10,12 @@ import { useTranslation } from 'react-i18next';
 import { Tooltip } from '@mui/material';
 import { StyledVerifiedIcon } from './styles';
 
-export const ServiceName = ({ service }: ServiceNameProps) => {
+export const ServiceName = ({ service, id }: ServiceNameProps) => {
   const { t } = useTranslation('table');
 
   return (
     <Box
+      id={id}
       component={Link}
       to={generatePath(ROUTE_TRADING_SERVICE, {
         serviceId: service.serviceId?.toString(),
