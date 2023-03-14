@@ -80,7 +80,9 @@ const MyBalances: React.FC = () => {
                 <Box display='flex' gap={2}>
                   <TextButton
                     id={'balance__export'}
-                    rightElement={<OpenInNew sx={{ color: 'links' }} />}
+                    rightElement={
+                      <OpenInNew sx={{ color: 'links', width: '15px' }} />
+                    }
                     caption={t('action:export')}
                     onClick={() => {
                       showModal(ExportModal, {
