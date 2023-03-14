@@ -9,11 +9,11 @@ import {
   ZigButton,
 } from '@zignaly-open/ui';
 import { FilterWrapperContainer } from '../styles';
-import IosShareIcon from '@mui/icons-material/IosShare';
 import React, { useMemo, useState } from 'react';
 import { RewardType, StatusType } from '../constants';
 import { ReferralHistoryEntry } from '../../../apis/referrals/types';
 import { useTranslation } from 'react-i18next';
+import { OpenInNew } from '@mui/icons-material';
 
 const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
   referrals,
@@ -180,7 +180,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
                 color: (theme) => theme.palette.links,
               }}
             >
-              {t('export')} <IosShareIcon sx={{ ml: 0.5 }} />
+              {t('export')} <OpenInNew sx={{ ml: 1 }} />
             </ZigButton>
           </FilterWrapperContainer>
         )}
