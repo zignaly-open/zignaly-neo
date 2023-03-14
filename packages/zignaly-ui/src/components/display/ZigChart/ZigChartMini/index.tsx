@@ -21,11 +21,12 @@ const ZigChartMini = ({ data, midLine, height, width }: ChartMiniProps) => {
           style={{
             data: {
               fill: `url(#${gradient})`,
-              strokeWidth: 4,
+              strokeWidth: 2,
               stroke: color,
             },
           }}
           data={processedData}
+          interpolation="monotoneX"
         />
         {midLine && (
           <VictoryLine

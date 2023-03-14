@@ -30,7 +30,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         <ZigChartMini
           data={service.sparklines}
           midLine={false}
-          height={130}
+          height={138}
           width={360}
         />
       </ChartContainer>
