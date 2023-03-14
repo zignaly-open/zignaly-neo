@@ -51,6 +51,7 @@ export const BottomPnLContainer = styled(Box)`
   position: absolute;
   bottom: 0;
   right: 8px;
+  backdrop-filter: blur(1.5px);
 `;
 
 export const ButtonContainer = styled(Box)`
@@ -62,6 +63,10 @@ export const ButtonContainer = styled(Box)`
     > span {
       display: none;
     }
+  }
+
+  button {
+    opacity: 0.8;
   }
 `;
 

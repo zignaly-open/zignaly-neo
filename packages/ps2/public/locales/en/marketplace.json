@@ -1,7 +1,6 @@
 {
   "card": {
     "top-rated": "Top Rated",
-    "short-month": "{{count}}M",
     "assets": "Assets",
     "investors": "Investors"
   },
