@@ -42,10 +42,12 @@ export type InvestedInService = Record<
 export type Investment = InvestmentServiceDetails & {
   ownerName: string;
   invested: string;
+  investedUSDT: string;
   pending: string;
+  pendingUSDT: string;
   version: number;
   accountId: string;
-  sparklines: AxisFormat[];
+  sparklines: AxisFormat[] | number[];
   createdAt: string;
   updatedAt: string;
   periodsLc: string;

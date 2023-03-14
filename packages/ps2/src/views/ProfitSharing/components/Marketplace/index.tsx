@@ -18,6 +18,7 @@ import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace
 import AssetsInPool from '../../../../components/AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 import { TableWrapper } from './styles';
+import TopServicesCards from '../TopServicesCards';
 
 const Marketplace: React.FC = () => {
   const marketplaceEndpoint = useMarketplace();
@@ -30,7 +31,7 @@ const Marketplace: React.FC = () => {
         header: t('table.service-name'),
         style: {
           justifyContent: 'flex-start',
-          paddingLeft: '83px',
+          paddingLeft: '88px',
         },
         meta: {
           subtitle: (
@@ -91,7 +92,10 @@ const Marketplace: React.FC = () => {
           +props.getValue() ||
           Object.keys(props.row.original.sparklines).length > 1 ? (
             <>
-              <ZigChartMini midLine data={props.row.original.sparklines} />
+              <ZigChartMini
+                midLine
+                data={[0, ...(props.row.original.sparklines as number[])]}
+              />
               <PercentageIndicator value={props.getValue()} type={'graph'} />
             </>
           ) : (
@@ -122,13 +126,19 @@ const Marketplace: React.FC = () => {
                 mb: 4,
               }}
             >
-              <ZigTypography variant={'h1'}>
+              <ZigTypography variant='h1' lineHeight='42px'>
                 {t('invest-in-services')}
               </ZigTypography>
-              <ZigTypography variant={'body1'}>
+              <ZigTypography variant={'body1'} color='neutral300'>
                 {t('invest-in-services-explainer')}
               </ZigTypography>
             </Box>
+            <TopServicesCards
+              services={services
+                ?.slice()
+                .sort((a, b) => +b.pnlPercent90t - +a.pnlPercent90t)
+                .slice(0, 3)}
+            />
             <TableWrapper>
               <ZigTable
                 initialState={{

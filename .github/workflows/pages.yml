@@ -8,6 +8,7 @@ on:
 jobs:
   pre_job:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     outputs:
       should_skip: ${{ steps.skip_check.outputs.should_skip }}
       paths_result: ${{ steps.skip_check.outputs.paths_result }}

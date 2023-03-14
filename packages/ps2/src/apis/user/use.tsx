@@ -17,6 +17,7 @@ import {
   useResendCodeMutation,
   useResendCodeNewUserMutation,
   useResendKnownDeviceCodeMutation,
+  useSessionQuery,
   useSetLocaleMutation,
   useSignupMutation,
   useVerify2FAMutation,
@@ -288,6 +289,13 @@ export function useActivateExchange(
   }, [internalId]);
 
   return result;
+}
+
+export function useMaybeMakeSureSessionIsAlive(makeSure: boolean): void {
+  useSessionQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    skip: !makeSure,
+  });
 }
 
 export function useCheck2FA({
