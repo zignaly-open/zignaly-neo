@@ -18,7 +18,7 @@
 		"6-mos-title": "6 meses",
 		"all": {
 			"title": "Todo",
-			"subtitle": "Tiempo"
+			"subtitle": "Invirtiendo desde"
 		}
 	},
 	"table-search-emptyMessage": "Aún no estás conectado a ningún servicio.",
@@ -29,5 +29,6 @@
 			"left": "Reinvertir",
 			"right": "Retirar"
 		}
-	}
+	},
+	"tooltip-date": "Estás invirtiendo en este servicio desde {{date}}"
 }

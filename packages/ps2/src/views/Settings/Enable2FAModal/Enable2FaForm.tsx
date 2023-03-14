@@ -60,7 +60,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
   if (!load2FAInfoResult.isFetching && load2FAInfoResult.data) {
     return (
       <>
-        <Box mt={1} mb={3}>
+        <Box mt={1} mb='20px'>
           <ZigTypography whiteSpace='pre-line'>
             <Trans i18nKey='enable-2fa.setup-description' t={t}>
               <Link
@@ -73,7 +73,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
         </Box>
         <QRCode aria-labelledby='QR Code' src={load2FAInfoResult.data[1]} />
 
-        <ZigTypography color='yellow' my={3} variant='body2'>
+        <ZigTypography color='yellow' mt={5} mb={3}>
           {t('enable-2fa.key-phrase-info')}
         </ZigTypography>
         <ZigInput

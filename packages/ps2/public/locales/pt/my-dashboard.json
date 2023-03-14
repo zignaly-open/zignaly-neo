@@ -7,7 +7,7 @@
 		},
 		"serviceName": {
 			"title": "Nome do Serviço",
-			"subtitle": "MAnager\/Moeda base"
+			"subtitle": "Manager\/Moeda base"
 		},
 		"1-mo": {
 			"title": "1 mês",
@@ -18,7 +18,7 @@
 		"6-mos-title": "6 meses",
 		"all": {
 			"title": "Todos",
-			"subtitle": "Idade"
+			"subtitle": "Investindo desde"
 		}
 	},
 	"table-search-emptyMessage": "Ainda não está conectado a nenhum serviço.",
@@ -29,5 +29,6 @@
 			"left": "Reinvestir",
 			"right": "Retirar"
 		}
-	}
+	},
+	"tooltip-date": "Você está investindo neste serviço desde {{date}}"
 }
