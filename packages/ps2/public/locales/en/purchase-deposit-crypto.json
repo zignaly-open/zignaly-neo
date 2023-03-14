@@ -5,6 +5,6 @@
   "buy-crypto": "I don't have any crypto yet",
   "buttons": {
     "deposit": "Deposit {{coin}}",
-    "purchase": "Buy {{coin}}"
+    "purchase": "Purchase {{coin}}"
   }
 }

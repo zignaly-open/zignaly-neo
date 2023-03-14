@@ -107,7 +107,7 @@ const ChooseDepositType: React.FC<{
                 underline={'none'}
               >
                 <ZigButton
-                  variant='outlined'
+                  variant='contained'
                   id={'choose-deposit-type__purchase'}
                   size={'large'}
                 >
@@ -115,14 +115,12 @@ const ChooseDepositType: React.FC<{
                     variant={'h4'}
                     fontWeight={600}
                     letterSpacing={1.1}
-                    color={'neutral300'}
                   >
                     {t('buttons.purchase', { coin })}
                   </ZigTypography>
                   <NorthEastIcon
                     fontSize={'small'}
                     sx={{
-                      color: 'neutral300',
                       marginLeft: '3px',
                       marginTop: '-3px',
                     }}
