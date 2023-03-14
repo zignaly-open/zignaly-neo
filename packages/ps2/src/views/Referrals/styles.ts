@@ -17,12 +17,13 @@ export const TotalBoxBox = styled(Paper)`
 export const TotalBoxValue = styled(ZigTypography)`
   display: block;
   text-align: center;
-  margin-top: 13px;
-  margin-bottom: 13px;
+  margin-top: 17px;
+  margin-bottom: 14px;
+  color: ${({ theme }) => theme.palette.neutral175};
 
   &,
   span {
-    font-size: 30px;
+    font-size: 36px;
   }
 `;
 

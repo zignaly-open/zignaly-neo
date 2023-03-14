@@ -319,9 +319,10 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
       sx={{
         mt: 4,
         mb: 4,
+        justifyContent: 'center',
       }}
     >
-      <Grid item xs={12} md={9}>
+      <Grid item xs={12} md={12}>
         <ZigTypography
           variant={'h1'}
           textAlign={'center'}
@@ -329,33 +330,27 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         >
           {t('what-you-get')}
         </ZigTypography>
-
-        <Grid
-          container
-          sx={{
-            justifyContent: 'center',
-          }}
-        >
-          {elements.slice(0, 3).map((x, _, all) => (
-            <Grid
-              key={Math.random()}
-              item
-              xs={12}
-              p={1}
-              md={Math.min(4, 12 / all.length)}
-            >
-              <GetWhatYouDeserveLabel>{x}</GetWhatYouDeserveLabel>
-            </Grid>
-          ))}
-        </Grid>
       </Grid>
+
+      {elements.slice(0, 3).map((x, _, all) => (
+        <Grid
+          key={Math.random()}
+          item
+          xs={12}
+          p={1}
+          md={Math.min(4, 12 / (all.length + 1))}
+        >
+          <GetWhatYouDeserveLabel>{x}</GetWhatYouDeserveLabel>
+        </Grid>
+      ))}
+
       <Grid
         item
         xs={12}
-        md={3}
+        md={Math.min(4, 12 / (elements.length + 1))}
         p={1}
         sx={{
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'center',
           display: 'flex',
         }}
@@ -363,7 +358,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         <ZigButton
           variant='outlined'
           size={'large'}
-          sx={{ mb: 3, mt: '67px', color: (theme) => theme.palette.neutral175 }}
+          sx={{ mb: 3, mt: '28px', color: (theme) => theme.palette.neutral175 }}
           onClick={showFullRewards}
         >
           {t('full-rewards')}
