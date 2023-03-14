@@ -180,7 +180,7 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
                 color: (theme) => theme.palette.links,
               }}
             >
-              {t('export')} <OpenInNew sx={{ ml: 1 }} />
+              {t('export')} <OpenInNew sx={{ ml: 1, width: '15px' }} />
             </ZigButton>
           </FilterWrapperContainer>
         )}
