@@ -92,7 +92,10 @@ const Marketplace: React.FC = () => {
           +props.getValue() ||
           Object.keys(props.row.original.sparklines).length > 1 ? (
             <>
-              <ZigChartMini midLine data={props.row.original.sparklines} />
+              <ZigChartMini
+                midLine
+                data={[0, ...(props.row.original.sparklines as number[])]}
+              />
               <PercentageIndicator value={props.getValue()} type={'graph'} />
             </>
           ) : (
