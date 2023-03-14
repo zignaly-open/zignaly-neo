@@ -13,13 +13,19 @@ import { Trans, useTranslation } from 'react-i18next';
 import { ReferralRewards } from '../../../apis/referrals/types';
 import { useZAlert } from '../../../components/ZModal/use';
 
+const hardcodedInviteeReward = {
+  value: 20,
+  coin: 'ZIG',
+  threshold: 100,
+};
+
 const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
   rewards,
 }) => {
   const { t } = useTranslation(['referrals', 'pages']);
   const { configuration: config } = rewards;
   const showModal = useZAlert();
-  const elements = useMemo(
+  const elementsYou = useMemo(
     () =>
       [
         config.enableSuccessFeeReward && !!config.zignalySuccessFee && (
@@ -154,6 +160,24 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           </Trans>
         ),
       ].filter(Boolean),
+    [config, t],
+  );
+
+  const elementsThem = useMemo(
+    () => [
+      config.enableSuccessFeeReward && !!config.zignalySuccessFee && (
+        <Trans
+          i18nKey='referrals:they-get-invest'
+          t={t}
+          values={hardcodedInviteeReward}
+        >
+          {/*desparate times call for desperate measures*/}
+          <ZigTypography sx={{ opacity: 0 }} />
+          <TotalBoxValue />
+          <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
+        </Trans>
+      ),
+    ],
     [config, t],
   );
 
@@ -323,6 +347,20 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
     [config, t],
   );
 
+  const modalThemElements = useMemo(
+    () => [
+      <Trans
+        key='they-get-invest-modal'
+        i18nKey='they-get-invest-modal'
+        t={t}
+        values={hardcodedInviteeReward}
+      >
+        <ZigTypography fontWeight={600} color={'neutral100'} />
+      </Trans>,
+    ],
+    [config, t],
+  );
+
   const showFullRewards = useCallback(() => {
     showModal({
       title: t('full-rewards-title'),
@@ -342,6 +380,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
               {showFeesExplainerFriend && feesExplainerBottom}
             </Box>
           )}
+
           {!!modalTraderElements.length && (
             <Box sx={{ mb: 4 }}>
               <ZigTypography variant={'h3'}>
@@ -357,6 +396,17 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
             </Box>
           )}
 
+          {!!modalThemElements.length && (
+            <Box sx={{ mb: 4 }}>
+              <ZigTypography variant={'h3'}>{t('invitee-gets')}</ZigTypography>
+              <UlList>
+                {modalThemElements.map((x) => (
+                  <li key={Math.random()}>{x}</li>
+                ))}
+              </UlList>
+            </Box>
+          )}
+
           <Box sx={{ mb: 4 }}>
             <ZigTypography variant={'h3'}>{t('terms.title')}</ZigTypography>
             <OlList>
@@ -369,17 +419,23 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         </Box>
       ),
     });
-  }, [elements]);
+  }, [elementsYou]);
+
+  const cols = elementsYou.length + elementsThem.length + 1;
   return (
     <RewardsListContainer
       container
       sx={{
         mt: 4,
         mb: 4,
-        justifyContent: 'center',
+        justifyContent: 'left',
       }}
     >
-      <Grid item xs={12} md={12}>
+      <Grid
+        item
+        xs={12}
+        md={Math.min(4, 12 / cols) * elementsYou.slice(0, 2).length}
+      >
         <ZigTypography
           variant={'h1'}
           textAlign={'center'}
@@ -389,13 +445,46 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         </ZigTypography>
       </Grid>
 
-      {elements.slice(0, 3).map((x, _, all) => (
+      <Grid
+        item
+        xs={12}
+        md={Math.min(4, 12 / cols) * elementsThem.slice(0, 1).length}
+      >
+        <ZigTypography
+          variant={'h1'}
+          textAlign={'center'}
+          sx={{ mt: 2, mb: 2.5 }}
+        >
+          {t('what-they-get')}
+        </ZigTypography>
+      </Grid>
+
+      <Grid item xs={12} />
+
+      {elementsYou.slice(0, 2).map((x) => (
         <Grid
           key={Math.random()}
           item
           xs={12}
-          p={1}
-          md={Math.min(4, 12 / (all.length + 1))}
+          pl={3}
+          pr={3}
+          md={Math.min(4, 12 / cols)}
+        >
+          <GetWhatYouDeserveLabel>{x}</GetWhatYouDeserveLabel>
+        </Grid>
+      ))}
+
+      {elementsThem.slice(0, 1).map((x) => (
+        <Grid
+          key={Math.random()}
+          item
+          xs={12}
+          pl={3}
+          pr={3}
+          sx={{
+            borderLeft: (theme) => `1px solid ${theme.palette.neutral700}`,
+          }}
+          md={Math.min(4, 12 / cols)}
         >
           <GetWhatYouDeserveLabel>{x}</GetWhatYouDeserveLabel>
         </Grid>
@@ -404,8 +493,9 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
       <Grid
         item
         xs={12}
-        md={Math.min(4, 12 / (elements.length + 1))}
-        p={1}
+        md={Math.min(4, 12 / cols)}
+        pl={3}
+        pr={3}
         sx={{
           alignItems: 'flex-start',
           justifyContent: 'center',

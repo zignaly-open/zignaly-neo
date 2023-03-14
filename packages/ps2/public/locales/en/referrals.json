@@ -3,22 +3,24 @@
     "description": "Get a percentage of the trading and success fees paid by your friends or from all the investors of the trader's service when you invite a trader to Zignaly",
     "share-your-link": "Share your link:",
     "what-you-get": "What you get",
+    "what-they-get": "What they get",
     "how-to-earn": "How to Earn Commissions",
     "how-to-earn-steps": {
         "step-1": {
-            "title": "Invite friends & Traders",
-            "description": "Share your referral link above for friends to sign up to Zignaly with"
+            "title": "Invite friends",
+            "description": "Share your referral link above with <0>one click</0> for friends to sign up to Zignaly with"
         },
         "step-2": {
-            "title": "They Deposit $100",
-            "description": "Get your friends and traders to make a deposit of at least ${{minDeposit}}"
+            "title": "They invest in a Service",
+            "description": "Get your friends to invest any amount in a Profit Sharing Service"
         },
         "step-3": {
             "title": "You Both Earn",
-            "description": "You both get ${{reward}} plus you'll earn commissions from traders"
+            "description": "You'll earn {{successFee}}% of Success Fees paid to Zignaly Unlimited. They get ${{reward}} in ZIG if they invest more than ${{minDeposit}}"
         }
     },
-    "what-they-get": "What they get",
+    "they-get-invest": "<0>They get</0><1>${{value}}</1><2> in {{coin}} when they deposit ${{threshold}}+",
+    "they-get-invest-modal": "Invitee gets <0>${{value}}</0> in {{coin}} when they deposit ${{threshold}}+",
     "invite-traders-for-percent": "<0>Invite traders</0><1>{{value}}%</1><2> of all their investors' success fees</2>",
     "invite-traders-for-percent-modal": "Invite traders to get <0>{{value}}%</0> of all their investors' success fees",
     "invite-friends-for-percent": "<0>Invite friends</0><1>{{value}}%</1><2> of their success fees</2>",
@@ -52,6 +54,7 @@
     },
     "when-invite-friends": "When you invite friends",
     "when-invite-traders": "When you invite traders",
+    "invitee-gets": "Invitee gets",
 
     "export": "Export",
     "full-rewards": "Full terms",

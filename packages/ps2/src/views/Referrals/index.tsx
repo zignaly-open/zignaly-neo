@@ -132,7 +132,7 @@ const Referrals: React.FC = () => {
 
                 <Grid container sx={{ mb: 8 }}>
                   <Grid item xs={12} md={4}>
-                    <ReferralSuccessStep step={1} />
+                    <ReferralSuccessStep step={1} link={link} />
                   </Grid>
                   <Grid item xs={12} md={4}>
                     <ReferralSuccessStep step={2} />
