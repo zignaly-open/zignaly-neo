@@ -92,7 +92,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         ),
         !!config.rewardTotalAllocationAmount && (
           <Trans
-            i18nKey='referrals:invite-for-investment'
+            i18nKey='referrals:invite-for-total-investment'
             t={t}
             values={{
               value: config.rewardTotalAllocationAmount,
@@ -194,7 +194,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         ),
         !!config.rewardTotalAllocationAmount && (
           <Trans
-            i18nKey='referrals:invite-for-investment-modal'
+            i18nKey='referrals:invite-for-total-investment-modal'
             t={t}
             values={{
               value: config.rewardTotalAllocationAmount,
