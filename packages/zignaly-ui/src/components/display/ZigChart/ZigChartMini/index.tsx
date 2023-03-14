@@ -5,12 +5,18 @@ import { ChartMiniProps } from "../types";
 import { useChartData } from "../hooks";
 import GraphColors from "../GraphColors";
 
-const ZigChartMini = ({ data, midLine, height, width }: ChartMiniProps) => {
-  const { data: processedData, color, gradient } = useChartData(data);
+const ZigChartMini = ({
+  data,
+  midLine,
+  height,
+  width,
+  gradientVariant = "short",
+}: ChartMiniProps) => {
+  const { data: processedData, color, gradient } = useChartData(data, gradientVariant);
 
   return (
     <ChartLayoutMini height={height}>
-      <GraphColors />
+      <GraphColors variant={gradientVariant} />
       <VictoryGroup
         padding={{ top: 5, bottom: 10 }}
         height={height}
