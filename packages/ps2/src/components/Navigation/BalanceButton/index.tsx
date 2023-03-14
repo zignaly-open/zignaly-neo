@@ -133,7 +133,7 @@ const BalanceButton = () => {
           >
             <ZigTypography
               variant='body2'
-              color='primary'
+              color='neutral300'
               textAlign='center'
               fontSize='12px'
             >
