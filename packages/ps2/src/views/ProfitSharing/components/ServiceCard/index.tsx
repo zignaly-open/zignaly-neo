@@ -22,7 +22,7 @@ import {
 import { ServiceCardProps } from './types';
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
-  const { t } = useTranslation('marketplace');
+  const { t } = useTranslation(['marketplace', 'service']);
 
   return (
     <Card>
@@ -61,7 +61,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
             color='neutral300'
             lineHeight='11px'
           >
-            {t('card.short-month', { count: 3 })}
+            {t('service:periods.90d')}
           </ZigTypography>
         </Box>
         <Box display='flex' flexDirection='column'>
@@ -100,11 +100,10 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         display='flex'
         justifyContent='flex-end'
         alignItems='center'
-        width={1}
         gap={1}
       >
         <ZigTypography fontSize='11px' color='neutral200'>
-          {t('card.short-month', { count: 1 })}
+          {t('service:periods.30d')}
         </ZigTypography>
         <PercentageIndicator
           style={{
