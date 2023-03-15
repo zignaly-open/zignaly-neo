@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import { Box, Grid, Tooltip } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import {
   GetWhatYouDeserveLabel,
@@ -191,10 +191,10 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
     (config.enableRebateFeeReward && !!config.zignalyRebateFee);
   // Aye, I could do that
   const feesExplainer = (
-    <Tooltip title={t('terms.fees')}>
-      {/* eslint-disable-next-line i18next/no-literal-string */}
-      <ZigTypography color={'neutral300'}> (*)</ZigTypography>
-    </Tooltip>
+    // there should have been a tooltip there
+    // I fought for this tooltip, and I lost that battle
+    // eslint-disable-next-line i18next/no-literal-string
+    <ZigTypography color={'neutral300'}> (*)</ZigTypography>
   );
   const feesExplainerBottom = (
     <ZigTypography
