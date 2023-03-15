@@ -14,10 +14,10 @@ import MarketplaceAction from '../MarketplaceAction';
 import {
   ValueContainer,
   Card,
-  ChartContainer,
   BottomPnLContainer,
   ButtonContainer,
   AssetContainer,
+  ChartBox,
 } from './styles';
 import { ServiceCardProps } from './types';
 
@@ -26,15 +26,36 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
 
   return (
     <Card>
-      <ChartContainer>
+      <ChartBox>
         <ZigChartMini
           data={service.sparklines}
           midLine={false}
-          height={138}
+          height={108}
           width={360}
           gradientVariant='full'
+          chartProps={{
+            padding: 0,
+          }}
         />
-      </ChartContainer>
+        <BottomPnLContainer
+          display='flex'
+          justifyContent='flex-end'
+          alignItems='center'
+          gap={1}
+          flex={1}
+          negative={+service.pnlPercent30t < 0}
+        >
+          <ZigTypography fontSize='11px' color='neutral200'>
+            {t('service:periods.30d')}
+          </ZigTypography>
+          <PercentageIndicator
+            style={{
+              fontSize: '13px',
+            }}
+            value={service.pnlPercent30t}
+          />
+        </BottomPnLContainer>
+      </ChartBox>
       <ServiceName
         service={marketplaceServiceToInvestmentType(service) as Investment}
         showCoin={false}
@@ -97,22 +118,6 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
       <ButtonContainer>
         <MarketplaceAction service={service} />
       </ButtonContainer>
-      <BottomPnLContainer
-        display='flex'
-        justifyContent='flex-end'
-        alignItems='center'
-        gap={1}
-      >
-        <ZigTypography fontSize='11px' color='neutral200'>
-          {t('service:periods.30d')}
-        </ZigTypography>
-        <PercentageIndicator
-          style={{
-            fontSize: '13px',
-          }}
-          value={service.pnlPercent30t}
-        />
-      </BottomPnLContainer>
     </Card>
   );
 };
