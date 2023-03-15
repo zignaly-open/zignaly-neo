@@ -16,7 +16,7 @@
         },
         "step-3": {
             "title": "You Both Earn",
-            "description": "You'll earn {{successFee}}% of Success Fees paid to Zignaly Unlimited. They get ${{reward}} in ZIG if they invest more than ${{minDeposit}}"
+            "description": "You'll earn unlimited commissions: {{successFee}}% of Success Fees paid to Zignaly. They get ${{reward}} in ZIG if they invest more than ${{minDeposit}}"
         }
     },
     "they-get-invest": "<0>They get</0><1>${{value}}</1><2> in {{coin}} when they deposit ${{threshold}}+",
@@ -46,10 +46,10 @@
 
     "terms": {
         "title": "Fixed Terms:",
-        "fees": "Fees are calculated over the fee that Zignaly receives, deducting a safety factor given that commissions are paid in advance",
+        "fees": "Fees are calculated from the fee that Zignaly receives, deducting a safety factor given that commissions are paid in advance",
         "1": "Zignaly reserves the right to disqualify a participant if he/she engages in inappropriate, dishonest, or abusive activities.",
         "2": "Zignaly reserves the right to amend the Terms and Conditions of the referral program at any time without prior notice.",
-        "3": "Participants who violate these terms will not be eligible for referral incentives; any fraudulent or abusive behaviors will immediately terminate all associated accounts.",
+        "3": "Participants who violate these terms will not be eligible for referral incentives; any fraudulent or abusive behavior will result in immediate termination of all associated accounts.",
         "4": "Paid online advertisements with the use of Zignaly's logo is strictly prohibited"
     },
     "when-invite-friends": "When you invite friends",
