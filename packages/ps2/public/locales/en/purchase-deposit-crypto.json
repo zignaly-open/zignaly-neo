@@ -2,9 +2,9 @@
   "title": "Deposit {{coin}} to Invest in this Service",
   "description": "The trader of this service is trading with {{coin}}, so you must deposit the same crypto the trader is using in order to share profits with them. Please deposit {{coin}} to your account.",
   "transfer-crypto": "Transfer {{coin}} from an external wallet",
-  "buy-crypto": "I don't have any crypto yet",
+  "buy-crypto": "I don't own any {{coin}}",
   "buttons": {
     "deposit": "Deposit {{coin}}",
-    "purchase": "Buy {{coin}}"
+    "purchase": "Purchase {{coin}}"
   }
 }
