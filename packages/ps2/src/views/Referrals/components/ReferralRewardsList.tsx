@@ -421,7 +421,8 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
     });
   }, [elementsYou]);
 
-  const cols = elementsYou.length + elementsThem.length + 1;
+  const cols =
+    elementsYou.slice(0, 2).length + elementsThem.slice(0, 1).length + 1;
   return (
     <RewardsListContainer
       container
