@@ -28,7 +28,7 @@
     "invite-traders-for-percent-rebate": "<0>Invite traders</0><1>{{value}}%</1><2> of the trading rebate fees</2>",
     "invite-traders-for-percent-rebate-modal": "Invite traders to get <0>{{value}}%</0> of the trading rebate fees from their services",
     "invite-friends-for-percent-rebate": "<0>Invite friends</0><1>{{value}}%</1><2> of their trading rebate fees</2>",
-    "invite-friends-for-percent-rebate-modal": "Invite friends<0>{{value}}%</0> of their trading rebate fees from the services they invest in",
+    "invite-friends-for-percent-rebate-modal": "Invite friends to get <0>{{value}}%</0> of their trading rebate fees from the services they invest in",
     "invite-for-deposit": "<0>Invite friends</0><1>{{value}} {{symbol}}</1><2> when they make a single deposit of ${{threshold}}+</2>",
     "invite-for-deposit-modal": "Invite friends to get <0>{{value}} {{symbol}}</0> when they make a single deposit of ${{threshold}}+",
     "invite-for-investment": "<0>Invite friends</0><1>{{value}} {{symbol}}</1><2> when they make a single investment of ${{threshold}}+</2>",
