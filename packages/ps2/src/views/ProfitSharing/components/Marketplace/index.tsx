@@ -142,7 +142,7 @@ const Marketplace: React.FC = () => {
             </Box>
             <TableWrapper>
               <ZigTable
-                id={'marketplace__table'}
+                prefixId={'marketplace'}
                 initialState={{
                   sorting: [
                     {

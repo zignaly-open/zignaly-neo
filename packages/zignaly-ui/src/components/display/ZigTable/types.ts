@@ -3,7 +3,7 @@ import React from "react";
 import { Row, TableOptions, TableState } from "@tanstack/react-table";
 
 export interface ZigTableProps<T extends object> extends Omit<TableOptions<T>, "getCoreRowModel"> {
-  id?: string;
+  prefixId: string;
   pagination?: false | TableState["pagination"];
   loading?: boolean;
   columnVisibility?: boolean;
