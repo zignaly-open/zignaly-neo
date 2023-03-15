@@ -1,5 +1,12 @@
 import React from "react";
-import { VictoryArea, VictoryContainer, VictoryGroup, VictoryLine } from "victory";
+import {
+  VictoryArea,
+  VictoryAxis,
+  VictoryChart,
+  VictoryContainer,
+  VictoryGroup,
+  VictoryLine,
+} from "victory";
 import { ChartLayoutMini } from "../styles";
 import { ChartMiniProps } from "../types";
 import { useChartData } from "../hooks";
@@ -11,18 +18,28 @@ const ZigChartMini = ({
   height,
   width,
   gradientVariant = "short",
+  chartProps = {},
 }: ChartMiniProps) => {
   const { data: processedData, color, gradient } = useChartData(data, gradientVariant);
 
   return (
     <ChartLayoutMini height={height}>
       <GraphColors variant={gradientVariant} />
-      <VictoryGroup
-        padding={{ top: 5, bottom: 10 }}
+      <VictoryChart
         height={height}
         width={width}
-        containerComponent={<VictoryContainer responsive={!width || !height} />}
+        singleQuadrantDomainPadding={false}
+        domainPadding={{ x: 0, y: 1 }}
+        padding={{ top: 5, bottom: 10, left: 0, right: 0 }}
+        {...chartProps}
       >
+        <VictoryAxis
+          style={{
+            axis: { stroke: "transparent" },
+            ticks: { stroke: "transparent" },
+            tickLabels: { fill: "transparent" },
+          }}
+        />
         <VictoryArea
           style={{
             data: {
@@ -50,7 +67,7 @@ const ZigChartMini = ({
             ]}
           />
         )}
-      </VictoryGroup>
+      </VictoryChart>
     </ChartLayoutMini>
   );
 };

@@ -30,10 +30,10 @@ export function useChartData(
     color: isGreen ? ChartColor.Green : ChartColor.Red,
     gradient: isGreen
       ? gradientVariant === "full"
-        ? ChartGradientColor.GreenLong
+        ? ChartGradientColor.GreenCard
         : ChartGradientColor.Green
       : gradientVariant === "full"
-      ? ChartGradientColor.RedLong
+      ? ChartGradientColor.RedCard
       : ChartGradientColor.Red,
   };
 }

@@ -1,5 +1,7 @@
+import { VictoryChartProps } from "victory";
+
 export enum ChartColor {
-  Green = "#18ED90",
+  Green = "#039179",
   Red = "#CC3993",
 }
 
@@ -7,7 +9,9 @@ export enum ChartGradientColor {
   Green = "chart-gradient-green",
   Red = "chart-gradient-red",
   GreenLong = "chart-gradient-green-long",
+  GreenCard = "chart-gradient-green-card",
   RedLong = "chart-gradient-red-long",
+  RedCard = "chart-gradient-red-card",
 }
 
 export type ChartEvent = {
@@ -23,6 +27,7 @@ export interface ChartMiniProps {
   height?: number;
   width?: number;
   gradientVariant?: GradientVariant;
+  chartProps?: VictoryChartProps;
 }
 
 export interface ChartLargeProps {

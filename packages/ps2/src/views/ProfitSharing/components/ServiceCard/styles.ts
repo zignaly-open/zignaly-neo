@@ -1,4 +1,4 @@
-import { Box, styled } from '@mui/material';
+import { Box, css, styled } from '@mui/material';
 
 export const Card = styled(Box)`
   width: 360px;
@@ -31,13 +31,14 @@ export const Card = styled(Box)`
   }
 `;
 
-export const ChartContainer = styled(Box)`
+export const ChartBox = styled(Box)`
   position: absolute;
   top: 140px;
   left: 0;
   right: 0;
-  opacity: 0.7;
   bottom: 0;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const ValueContainer = styled('div')`
@@ -47,13 +48,26 @@ export const ValueContainer = styled('div')`
   }
 `;
 
-export const BottomPnLContainer = styled(Box)`
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
+export const BottomPnLContainer = styled(Box)<{ negative: boolean }>`
+  margin-top: -1px;
+  ${({ negative }) =>
+    negative
+      ? css`
+          background-image: linear-gradient(
+            to top,
+            rgba(46, 0, 28, 0.24),
+            rgba(37, 15, 38, 0.29)
+          );
+        `
+      : css`
+          background-image: linear-gradient(
+            to top,
+            rgba(0, 45, 20, 0.56),
+            rgba(16, 33, 33, 0.52)
+          );
+        `}
 
   span {
-    backdrop-filter: blur(1.5px);
     line-height: 10px !important;
   }
 `;

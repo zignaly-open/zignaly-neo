@@ -176,12 +176,12 @@ const ZigChart = ({
               style={{
                 data: {
                   fill: `url(#${gradient})`,
-                  strokeWidth: 1,
+                  strokeWidth: 2,
                   stroke: color,
                 },
               }}
               data={processedData}
-              interpolation="monotoneX"
+              interpolation="catmullRom"
             />
           )}
         </VictoryChart>
