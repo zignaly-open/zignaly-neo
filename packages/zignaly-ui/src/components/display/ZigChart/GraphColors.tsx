@@ -26,8 +26,8 @@ const GraphColors = ({ variant = "full" }: { variant?: GradientVariant }) => (
           </linearGradient>
 
           <linearGradient id={ChartGradientColor.GreenLong} x1="1%" y1="100%" x2="0%" y2="0%">
-            <stop offset="0%" stop-color="rgba(33, 81, 78, 0.69)" />
-            <stop offset="100%" stop-color="#12213b" />
+            <stop offset="0%" stop-color="#12213b" />
+            <stop offset="100%" stop-color="rgba(33, 81, 78, 0.69)" />
           </linearGradient>
         </>
       )}
