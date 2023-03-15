@@ -39,6 +39,7 @@ const darkMui = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
+          border: `1px solid ${dark.neutral600}`,
           background: "rgba(16, 18, 37)",
           color: dark.neutral200,
         },
