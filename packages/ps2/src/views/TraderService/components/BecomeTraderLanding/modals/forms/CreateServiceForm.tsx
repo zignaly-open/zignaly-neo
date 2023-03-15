@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  ErrorMessage,
+  ZigAlertMessage,
   ZigButton,
   ZigButtonGroupInput,
   ZigInput,
@@ -21,7 +21,7 @@ import SuccessFeeInputWrapper from './SuccessFeeInputWrapper';
 import { ExchangeType } from '../../../../../../apis/user/types';
 import { ServiceFormData } from './types';
 import {
-  ErrorBlock,
+  AlertBlock,
   ModalActionsNew,
 } from 'components/ZModal/ModalContainer/styles';
 import { useServiceTypesInfoQuery } from '../../../../../../apis/service/api';
@@ -183,9 +183,9 @@ const CreateServiceForm: React.FC<{
           </SuccessFeeInputWrapper>
         )}
       />
-      <ErrorBlock>
-        <ErrorMessage text={t('create.please-verify')} yellow />
-      </ErrorBlock>
+      <AlertBlock>
+        <ZigAlertMessage text={t('create.please-verify')} warning />
+      </AlertBlock>
 
       <ModalActionsNew>
         <ZigButton

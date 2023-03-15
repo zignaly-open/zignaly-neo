@@ -115,7 +115,7 @@ export const ModalActionsNew = styled('div')<{
       : 'center'};
 `;
 
-export const ErrorBlock = styled('div')`
+export const AlertBlock = styled('div')`
   display: flex;
   margin-top: 15px;
 `;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ErrorMessage, ZigTypography } from '@zignaly-open/ui';
+import { ZigAlertMessage, ZigTypography } from '@zignaly-open/ui';
 import { SuccessFieldWrapper, SuccessFieldWrapperShit } from '../atoms';
 import { ZIGNALY_PROFIT_FEE } from '../../../../../../util/constants';
 
@@ -26,7 +26,7 @@ const SuccessFeeInputWrapper: React.FC<{ value: number | string }> = ({
           </ZigTypography>
         </SuccessFieldWrapperShit>
       </SuccessFieldWrapper>
-      {value === '0' && <ErrorMessage text={t('create.zero-fee')} grey />}
+      {value === '0' && <ZigAlertMessage text={t('create.zero-fee')} />}
     </>
   );
 };
