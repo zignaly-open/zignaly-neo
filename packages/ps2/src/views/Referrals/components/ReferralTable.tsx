@@ -99,7 +99,8 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
               ([StatusType.Failed, StatusType.Cancelled].includes(
                 getValue() as StatusType,
               ) &&
-                'red')
+                'red') ||
+              (getValue() === StatusType.TransferOrdered && 'neutral175')
             }
           >
             {getValue() in StatusType

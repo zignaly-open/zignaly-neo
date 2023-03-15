@@ -26,7 +26,7 @@ const ReferralSuccessStep: React.FC<{ step: number; link?: string }> = ({
         <ZigTypography variant={'h2'}>
           {t(`how-to-earn-steps.step-${step}.title`)}
         </ZigTypography>
-        <ZigTypography component='p' sx={{ mt: 1, mb: 2 }}>
+        <ZigTypography component='p' sx={{ mt: 1, mb: 2, minHeight: '100px' }}>
           <Trans
             t={t}
             i18nKey={`how-to-earn-steps.step-${step}.description`}
