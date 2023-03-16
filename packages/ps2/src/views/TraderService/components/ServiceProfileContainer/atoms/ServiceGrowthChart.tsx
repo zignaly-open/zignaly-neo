@@ -27,6 +27,7 @@ import PercentChange from './PercentChange';
 import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../../util/numbers';
 import { numericFormatter } from 'react-number-format';
+import { formatLocalizedDate } from 'views/Dashboard/components/MyDashboard/util';
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   const { chartType, chartTimeframe, setChartTimeframe, setChartType } =
@@ -78,6 +79,11 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
     !isLoading &&
     !isFetching;
   const value = data?.summary;
+
+  const isPerc = [
+    GraphChartType.pnl_pct_compound,
+    GraphChartType.at_risk_pct,
+  ].includes(chartType);
 
   return (
     <Box>
@@ -223,20 +229,23 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
               `${v
                 .toString()
                 .replace(/000000$/, 'M')
-                .replace(/000$/, 'K')}${
-                [
-                  GraphChartType.pnl_pct_compound,
-                  GraphChartType.at_risk_pct,
-                ].includes(chartType)
-                  ? `%`
-                  : ``
-              }`
+                .replace(/000$/, 'K')}${isPerc ? `%` : ``}`
             }
             data={data?.data}
             tooltipFormatter={(v) =>
-              `${v.x}\n${numericFormatter(v.y.toString(), {
-                decimalScale: 2,
-                suffix: '%',
+              `${formatLocalizedDate(
+                (v as typeof v & { date?: Date }).date,
+                'PP',
+              )}\n${numericFormatter(v.y.toString(), {
+                ...(isPerc
+                  ? {
+                      decimalScale: 2,
+                      suffix: '%',
+                    }
+                  : {
+                      decimalScale: 8,
+                      suffix: ` ${service.ssc}`,
+                    }),
               })}`
             }
           />

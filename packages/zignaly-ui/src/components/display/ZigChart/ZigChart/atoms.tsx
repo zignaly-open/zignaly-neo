@@ -3,7 +3,7 @@ import { useTheme } from "@mui/material";
 import { VictoryTooltip, VictoryLabel, LineSegment, Point, VictoryTooltipProps } from "victory";
 
 export const ChartTooltip = React.memo(
-  ({ color, ...props }: VictoryTooltipProps & { color: string }) => {
+  ({ color, ...props }: VictoryTooltipProps & { color?: string }) => {
     const theme = useTheme();
 
     return (
@@ -35,7 +35,7 @@ export const ChartTooltip = React.memo(
           y={props.y}
           size={5}
           style={{
-            stroke: color,
+            stroke: color ?? "#4c535e",
             fill: "#353234",
           }}
         />

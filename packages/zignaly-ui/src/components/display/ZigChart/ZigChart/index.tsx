@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useMemo, useReducer, useRef, useState } from "react";
+import React, { useCallback, useLayoutEffect, useMemo, useReducer, useRef } from "react";
 import {
   VictoryArea,
   VictoryAxis,
@@ -80,7 +80,7 @@ const ZigChart = ({
             <VictoryVoronoiContainer
               voronoiDimension="x"
               labels={(point) => tooltipFormatter?.(point.datum) ?? " "}
-              labelComponent={<ChartTooltip color={color} />}
+              labelComponent={<ChartTooltip color={!bars ? color : null} />}
               voronoiBlacklist={["eventLine", "scatterText"]}
             />
           }
