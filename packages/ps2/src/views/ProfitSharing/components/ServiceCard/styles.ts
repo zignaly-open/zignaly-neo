@@ -50,6 +50,8 @@ export const ValueContainer = styled('div')`
 
 export const BottomPnLContainer = styled(Box)<{ negative: boolean }>`
   margin-top: -1px;
+  padding-right: 4px;
+
   ${({ negative }) =>
     negative
       ? css`

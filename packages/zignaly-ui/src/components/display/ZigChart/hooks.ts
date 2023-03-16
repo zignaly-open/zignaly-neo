@@ -1,6 +1,17 @@
 import { useMemo } from "react";
 import { AxisFormat, ChartColor, ChartGradientColor, GradientVariant } from "./types";
 
+const getGradient = (gradientVariant: GradientVariant, isGreen: boolean) => {
+  switch (gradientVariant) {
+    case "mini":
+      return isGreen ? ChartGradientColor.GreenMini : ChartGradientColor.RedMini;
+    case "card":
+      return isGreen ? ChartGradientColor.GreenCard : ChartGradientColor.RedCard;
+    default:
+      return isGreen ? ChartGradientColor.GreenFull : ChartGradientColor.RedFull;
+  }
+};
+
 export function useChartData(
   data: AxisFormat[] | number[],
   gradientVariant = "full" as GradientVariant,
@@ -28,12 +39,6 @@ export function useChartData(
   return {
     data: processedData,
     color: isGreen ? ChartColor.Green : ChartColor.Red,
-    gradient: isGreen
-      ? gradientVariant === "full"
-        ? ChartGradientColor.GreenCard
-        : ChartGradientColor.Green
-      : gradientVariant === "full"
-      ? ChartGradientColor.RedCard
-      : ChartGradientColor.Red,
+    gradient: getGradient(gradientVariant, isGreen),
   };
 }
