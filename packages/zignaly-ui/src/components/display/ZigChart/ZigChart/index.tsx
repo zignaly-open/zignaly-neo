@@ -30,7 +30,7 @@ const ZigChart = ({
   onlyIntegerTicks,
 }: ChartLargeProps) => {
   const theme = useTheme() as Theme;
-  const { data: processedData, color, gradient } = useChartData(data);
+  const { data: processedData, color, gradient } = useChartData(data, "full");
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
   const pureChartWidth = width ? width - 70 - 2 : 0;
@@ -69,7 +69,7 @@ const ZigChart = ({
 
   return (
     <ChartLayoutLarge ref={wrapperRef}>
-      <GraphColors />
+      <GraphColors variant="full" />
 
       {width && (
         <VictoryChart
@@ -176,11 +176,12 @@ const ZigChart = ({
               style={{
                 data: {
                   fill: `url(#${gradient})`,
-                  strokeWidth: 1,
+                  strokeWidth: 2,
                   stroke: color,
                 },
               }}
               data={processedData}
+              interpolation="catmullRom"
             />
           )}
         </VictoryChart>
