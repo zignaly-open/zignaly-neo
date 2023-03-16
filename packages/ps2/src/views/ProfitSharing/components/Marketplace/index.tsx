@@ -95,12 +95,15 @@ const Marketplace: React.FC = () => {
       columnHelper.accessor((row) => Number(row.pnlPercent30t), {
         id: 'pnlPercent30t',
         header: t('table.n-months-pnl', { count: 1 }),
-        cell: (props) => (
+        cell: (props) =>
           <Box id={`marketplace-table__pnl30t-${props.row.original.id}`}>
             {+props.getValue() ||
             Object.keys(props.row.original.sparklines).length > 1 ? (
               <>
-                <ZigChartMini midLine data={props.row.original.sparklines} />
+                <ZigChartMini
+                  midLine
+                  data={[0, ...(props.row.original.sparklines as number[])]}
+                />
                 <PercentageIndicator value={props.getValue()} type={'graph'} />
               </>
             ) : (
@@ -109,7 +112,6 @@ const Marketplace: React.FC = () => {
               </ZigTypography>
             )}
           </Box>
-        ),
       }),
       columnHelper.display({
         header: '',

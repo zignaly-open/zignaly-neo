@@ -13,9 +13,9 @@ import { serviceToInvestmentServiceDetail } from '../../../../../apis/investment
 import InvestModal from '../../../../Dashboard/components/ManageInvestmentModals/InvestModal';
 import { ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../../../routes';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
-import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import OtherAccountsButton from './OtherAccountsButton';
 import { Box } from '@mui/material';
+import ChooseDepositTypeModal from 'views/Dashboard/components/ManageInvestmentModals/ChooseDepositTypeModal';
 
 const InvestButton: React.FC<{
   id?: string;
@@ -23,7 +23,13 @@ const InvestButton: React.FC<{
   ctaId?: string;
   showMultipleAccountButton?: boolean;
 }> = ({ id, service, ctaId, showMultipleAccountButton }) => {
-  const { t } = useTranslation('service');
+  const { t } = useTranslation([
+    'service',
+    // we need these two otherwise a Suspense will trigger when we load the other ns
+    // and the page will scroll to top
+    'purchase-deposit-crypto',
+    'deposit-crypto',
+  ]);
   const isAuthenticated = useIsAuthenticated();
   const { showModal } = useZModal({ disableAutoDestroy: true });
   const selectInvestment = useSetSelectedInvestment();
@@ -52,8 +58,8 @@ const InvestButton: React.FC<{
       selectInvestment(serviceToInvestmentServiceDetail(service));
       const showDeposit = +balance === 0;
       if (showDeposit)
-        showModal(DepositModal, {
-          allowedCoins: [service.ssc],
+        showModal(ChooseDepositTypeModal, {
+          selectedCoin: service.ssc,
           ctaId,
         });
       else showModal(InvestModal, { ctaId });
