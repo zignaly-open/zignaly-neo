@@ -37,6 +37,8 @@ export interface ChartLargeProps {
   events?: ChartEvent[];
   onlyIntegerTicks?: boolean;
   yAxisFormatter?: (y: number | string) => string;
+  tooltipFormatter?: (v: AxisFormat) => string;
+  chartProps?: VictoryChartProps;
 }
 
 export interface AxisFormat {
