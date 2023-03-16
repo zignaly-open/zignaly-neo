@@ -6,7 +6,7 @@ export const Card = styled(Box)`
   padding: 20px 24px;
   border-radius: 16px;
   border: solid 1px ${({ theme }) => theme.palette.neutral700};
-  background-color: #181728;
+  background-color: rgba(53, 51, 74, 0.3);
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -76,7 +76,7 @@ export const BottomPnLContainer = styled(Box)<{ negative: boolean }>`
 
 export const ButtonContainer = styled(Box)`
   position: absolute;
-  bottom: 36px;
+  bottom: 42px;
 
   > div > div > div {
     height: 67px;

@@ -65,8 +65,9 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         flexDirection='row'
         justifyContent='space-between'
         width={1}
-        mt={2.25}
+        mt={2.5}
         mb={3}
+        px={2}
       >
         <Box display='flex' flexDirection='column'>
           <ValueContainer>
