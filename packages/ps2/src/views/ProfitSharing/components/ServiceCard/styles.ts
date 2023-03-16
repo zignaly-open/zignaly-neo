@@ -6,7 +6,7 @@ export const Card = styled(Box)`
   padding: 20px 24px;
   border-radius: 16px;
   border: solid 1px ${({ theme }) => theme.palette.neutral700};
-  background-color: #121129;
+  background-color: #181728;
   align-items: center;
   display: flex;
   flex-direction: column;
