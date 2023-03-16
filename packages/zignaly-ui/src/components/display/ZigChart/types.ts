@@ -6,12 +6,12 @@ export enum ChartColor {
 }
 
 export enum ChartGradientColor {
-  Green = "chart-gradient-green",
-  Red = "chart-gradient-red",
-  GreenLong = "chart-gradient-green-long",
-  GreenCard = "chart-gradient-green-card",
-  RedLong = "chart-gradient-red-long",
-  RedCard = "chart-gradient-red-card",
+  GreenMini = "chart-gradient-mini-green",
+  RedMini = "chart-gradient-mini-red",
+  GreenFull = "chart-gradient-full-green",
+  RedFull = "chart-gradient-full-red",
+  GreenCard = "chart-gradient-card-green",
+  RedCard = "chart-gradient-card-red",
 }
 
 export type ChartEvent = {
@@ -19,7 +19,7 @@ export type ChartEvent = {
   label: string;
 };
 
-export type GradientVariant = "short" | "full";
+export type GradientVariant = "mini" | "full" | "card";
 
 export interface ChartMiniProps {
   readonly data: AxisFormat[] | number[];

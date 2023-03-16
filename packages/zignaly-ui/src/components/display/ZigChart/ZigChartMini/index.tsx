@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  VictoryArea,
-  VictoryAxis,
-  VictoryChart,
-  VictoryContainer,
-  VictoryGroup,
-  VictoryLine,
-} from "victory";
+import { VictoryArea, VictoryAxis, VictoryChart, VictoryLine } from "victory";
 import { ChartLayoutMini } from "../styles";
 import { ChartMiniProps } from "../types";
 import { useChartData } from "../hooks";
@@ -17,7 +10,7 @@ const ZigChartMini = ({
   midLine,
   height,
   width,
-  gradientVariant = "short",
+  gradientVariant = "mini",
   chartProps = {},
 }: ChartMiniProps) => {
   const { data: processedData, color, gradient } = useChartData(data, gradientVariant);
@@ -28,6 +21,7 @@ const ZigChartMini = ({
       <VictoryChart
         height={height}
         width={width}
+        // Avoid cutting the line when it's at the edge of the chart
         singleQuadrantDomainPadding={false}
         domainPadding={{ x: 0, y: 1 }}
         padding={{ top: 5, bottom: 10, left: 0, right: 0 }}
