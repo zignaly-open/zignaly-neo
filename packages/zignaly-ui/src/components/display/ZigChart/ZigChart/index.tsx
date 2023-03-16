@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useMemo, useReducer, useRef } from "react";
+import React, { useCallback, useLayoutEffect, useMemo, useReducer, useRef, useState } from "react";
 import {
   VictoryArea,
   VictoryAxis,
@@ -7,6 +7,7 @@ import {
   VictoryScatter,
   VictoryLabel,
   VictoryBar,
+  VictoryVoronoiContainer,
 } from "victory";
 import { axisStyle, ChartLayoutLarge } from "../styles";
 import { ChartColor, ChartLargeProps } from "../types";
@@ -16,20 +17,22 @@ import GraphColors from "../GraphColors";
 import * as d3Scale from "victory-vendor/d3-scale";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { TextAnchorType } from "victory-core/lib/victory-label/victory-label";
-import { useTheme } from "styled-components";
-import Theme from "../../../../theme/theme";
+import { useTheme } from "@mui/material";
+import { ChartTooltip } from "./atoms";
 
 const deltaToShowSecondChart = 0.2;
 
 const ZigChart = ({
   data,
   yAxisFormatter,
+  tooltipFormatter,
   events,
   bars,
   tickCount = 7,
   onlyIntegerTicks,
+  chartProps = {},
 }: ChartLargeProps) => {
-  const theme = useTheme() as Theme;
+  const theme = useTheme();
   const { data: processedData, color, gradient } = useChartData(data, "full");
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
@@ -73,6 +76,13 @@ const ZigChart = ({
 
       {width && (
         <VictoryChart
+          containerComponent={
+            <VictoryVoronoiContainer
+              voronoiDimension="x"
+              labels={(point) => tooltipFormatter?.(point.datum) ?? " "}
+              labelComponent={<ChartTooltip color={color} />}
+            />
+          }
           {...{
             domain: { y: yDomain as unknown as undefined },
             width: width || 600,
@@ -80,6 +90,7 @@ const ZigChart = ({
             domainPadding: { x: bars ? [barChartWidth / 2, barChartWidth / 2] : [0, 1], y: 5 },
             padding: { left: 35, top: 20, right: 35, bottom: 20 },
           }}
+          {...chartProps}
         >
           <VictoryAxis
             tickValues={ticks}
@@ -110,7 +121,7 @@ const ZigChart = ({
                 <VictoryLabel
                   dy={17}
                   labelPlacement="vertical"
-                  style={[{ fontSize: 14, fill: theme.neutral500 }]}
+                  style={[{ fontSize: 14, fill: theme.palette.neutral500 }]}
                   angle={-90}
                   textAnchor="end"
                 />
@@ -122,7 +133,7 @@ const ZigChart = ({
             <VictoryLine
               key={"event-line-" + x}
               style={{
-                data: { stroke: theme.neutral500, strokeWidth: 0.5 },
+                data: { stroke: theme.palette.neutral500, strokeWidth: 0.5 },
               }}
               data={[
                 { x, y: yDomain[0] },
@@ -145,8 +156,8 @@ const ZigChart = ({
               bars
                 ? {
                     ...axisStyle,
-                    grid: { stroke: theme.neutral700, strokeDasharray: "3 3" },
-                    ticks: { stroke: theme.neutral700, size: 5 },
+                    grid: { stroke: theme.palette.neutral700, strokeDasharray: "3 3" },
+                    ticks: { stroke: theme.palette.neutral700, size: 5 },
                   }
                 : axisStyle
             }

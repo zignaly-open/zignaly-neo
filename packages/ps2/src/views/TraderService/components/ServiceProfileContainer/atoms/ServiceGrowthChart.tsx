@@ -26,6 +26,7 @@ import CenteredLoader from '../../../../../components/CenteredLoader';
 import PercentChange from './PercentChange';
 import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../../util/numbers';
+import { numericFormatter } from 'react-number-format';
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   const { chartType, chartTimeframe, setChartTimeframe, setChartType } =
@@ -232,6 +233,12 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
               }`
             }
             data={data?.data}
+            tooltipFormatter={(v) =>
+              `${v.x}\n${numericFormatter(v.y.toString(), {
+                decimalScale: 2,
+                suffix: '%',
+              })}`
+            }
           />
         )}
       </ChartWrapper>
