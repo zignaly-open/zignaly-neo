@@ -81,6 +81,7 @@ const ZigChart = ({
               voronoiDimension="x"
               labels={(point) => tooltipFormatter?.(point.datum) ?? " "}
               labelComponent={<ChartTooltip color={color} />}
+              voronoiBlacklist={["eventLine", "scatterText"]}
             />
           }
           {...{
@@ -117,6 +118,7 @@ const ZigChart = ({
               data={[{ x, y: yDomain[1] }]}
               labels={[label]}
               size={0}
+              name="scatterText"
               labelComponent={
                 <VictoryLabel
                   dy={17}
@@ -131,6 +133,7 @@ const ZigChart = ({
 
           {(events || []).map(({ x }) => (
             <VictoryLine
+              name="eventLine"
               key={"event-line-" + x}
               style={{
                 data: { stroke: theme.palette.neutral500, strokeWidth: 0.5 },
