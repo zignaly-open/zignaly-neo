@@ -3,7 +3,6 @@ import { VictoryArea, VictoryAxis, VictoryChart, VictoryLine } from "victory";
 import { ChartLayoutMini } from "../styles";
 import { ChartMiniProps } from "../types";
 import { useChartData } from "../hooks";
-import GraphColors from "../GraphColors";
 
 const ZigChartMini = ({
   data,
@@ -17,7 +16,6 @@ const ZigChartMini = ({
 
   return (
     <ChartLayoutMini height={height}>
-      <GraphColors variant={gradientVariant} />
       <VictoryChart
         height={height}
         width={width}

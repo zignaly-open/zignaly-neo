@@ -12,15 +12,12 @@ import {
 import { axisStyle, ChartLayoutLarge } from "../styles";
 import { ChartColor, ChartLargeProps } from "../types";
 import { useChartData } from "../hooks";
-import GraphColors from "../GraphColors";
+import GraphColors from "../ChartGradients";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as d3Scale from "victory-vendor/d3-scale";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { TextAnchorType } from "victory-core/lib/victory-label/victory-label";
 import { useTheme } from "@mui/material";
 import { ChartTooltip } from "./atoms";
-
-const deltaToShowSecondChart = 0.2;
 
 const ZigChart = ({
   data,
@@ -64,15 +61,13 @@ const ZigChart = ({
 
   return (
     <ChartLayoutLarge ref={wrapperRef}>
-      <GraphColors variant="full" />
-
       {width && (
         <VictoryChart
           containerComponent={
             <VictoryVoronoiContainer
               voronoiDimension="x"
               labels={(point) => tooltipFormatter?.(point.datum) ?? " "}
-              labelComponent={<ChartTooltip color={!bars ? color : null} />}
+              labelComponent={<ChartTooltip color={!bars ? color : undefined} />}
               voronoiBlacklist={["eventLine", "scatterText"]}
             />
           }
