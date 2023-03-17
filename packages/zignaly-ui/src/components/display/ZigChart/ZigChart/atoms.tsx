@@ -6,6 +6,8 @@ export const ChartTooltip = React.memo(
   ({ color, ...props }: VictoryTooltipProps & { color?: string }) => {
     const theme = useTheme();
 
+    if (!props.text) return null;
+
     return (
       <g>
         <VictoryTooltip

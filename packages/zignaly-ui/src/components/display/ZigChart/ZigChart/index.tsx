@@ -10,7 +10,7 @@ import {
   VictoryVoronoiContainer,
 } from "victory";
 import { axisStyle, ChartLayoutLarge } from "../styles";
-import { ChartColor, ChartLargeProps } from "../types";
+import { AxisFormat, ChartColor, ChartLargeProps } from "../types";
 import { useChartData } from "../hooks";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as d3Scale from "victory-vendor/d3-scale";
@@ -52,6 +52,12 @@ const ZigChart = ({
     [yAxisFormatter],
   );
 
+  const getChartTooltip = useCallback(
+    ({ datum }: { datum: AxisFormat }): string =>
+      tooltipFormatter ? tooltipFormatter(datum) : `${datum.x}\n${datum.y}`,
+    [tooltipFormatter],
+  );
+
   const ticks = d3Scale
     .scaleLinear()
     .domain(yDomain)
@@ -65,7 +71,7 @@ const ZigChart = ({
           containerComponent={
             <VictoryVoronoiContainer
               voronoiDimension="x"
-              labels={(point) => tooltipFormatter?.(point.datum) ?? " "}
+              labels={getChartTooltip}
               labelComponent={<ChartTooltip color={!bars ? color : undefined} />}
               voronoiBlacklist={["eventLine", "scatterText"]}
             />
