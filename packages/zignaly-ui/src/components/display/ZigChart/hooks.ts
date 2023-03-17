@@ -29,7 +29,7 @@ export function useChartData(
           }))
         : (data as AxisFormat[]);
     const min = chart.reduce((min, v) => Math.min(min, v.y), Number.MAX_VALUE);
-    return chart.map((c) => ({ ...c, y0: min }));
+    return chart.map((c) => ({ ...c, y0: Math.min(0, min) }));
   }, [data]);
 
   const firstTimestamp = processedData[0].y;
