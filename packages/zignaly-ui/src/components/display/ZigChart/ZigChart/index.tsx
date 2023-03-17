@@ -48,14 +48,7 @@ const ZigChart = ({
 
   const yDomain = useMemo(() => {
     const values = processedData.map((s) => s.y);
-    const ranges = [Math.min(0, ...values), Math.max(1, ...values)];
-    if (ranges[0] < 0 && ranges[1] > 0)
-      ranges[0] = Math.min(
-        ranges[0],
-        (ranges[1] * -1 * deltaToShowSecondChart) / (1 - deltaToShowSecondChart),
-      );
-
-    return ranges;
+    return [Math.min(0, ...values), Math.max(1, ...values)];
   }, [processedData]);
 
   const getChartLabel = useCallback(
@@ -69,7 +62,7 @@ const ZigChart = ({
     .domain(yDomain)
     .ticks(tickCount)
     .filter((v) => !onlyIntegerTicks || Number.isInteger(v));
-
+  console.log(barChartWidth, barChartWidth / 2);
   return (
     <ChartLayoutLarge ref={wrapperRef}>
       <GraphColors variant="full" />
@@ -95,20 +88,10 @@ const ZigChart = ({
         >
           <VictoryAxis
             tickValues={ticks}
-            tickLabelComponent={
-              <VictoryLabel
-                text={getChartLabel}
-                textAnchor={
-                  ((v: { datum?: number }) =>
-                    getChartLabel(v).length < 4
-                      ? "end"
-                      : "start") as unknown as () => TextAnchorType
-                }
-                dx={(v) => (getChartLabel(v).length < 4 ? 0 : -22)}
-              />
-            }
+            tickLabelComponent={<VictoryLabel textAnchor="end" text={getChartLabel} />}
             dependentAxis
             style={axisStyle}
+            fixLabelOverlap
           />
 
           {(events || []).map(({ x, label }) => (
@@ -153,7 +136,7 @@ const ZigChart = ({
 
           <VictoryAxis
             offsetY={20}
-            tickLabelComponent={<VictoryLabel />}
+            tickLabelComponent={<VictoryLabel backgroundPadding={{ top: 5 }} />}
             fixLabelOverlap
             style={
               bars
@@ -195,7 +178,7 @@ const ZigChart = ({
                 },
               }}
               data={processedData}
-              interpolation="catmullRom"
+              interpolation="monotoneX"
             />
           )}
         </VictoryChart>
