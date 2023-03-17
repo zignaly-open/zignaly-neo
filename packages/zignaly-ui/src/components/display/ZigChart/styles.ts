@@ -27,7 +27,7 @@ export const axisStyle = {
   },
   tickLabels: {
     fontSize: 11,
-    padding: 5,
+    padding: 7,
     // sorry not sorry
     fill: dark.neutral200,
     fontFamily: "Avenir Next",
