@@ -14,7 +14,7 @@ export const ChartTooltip = React.memo(
           {...props}
           orientation="top"
           cornerRadius={8}
-          flyoutStyle={{ fill: "#151515", stroke: "#313131" }}
+          flyoutStyle={{ fill: "#151515", stroke: "none" }}
           pointerOrientation="bottom"
           flyoutPadding={8}
           labelComponent={<VictoryLabel lineHeight={1.5} />}
@@ -26,7 +26,8 @@ export const ChartTooltip = React.memo(
             },
             {
               fill: theme.palette.neutral200,
-              fontSize: "16px",
+              fontSize: "15px",
+              fontWeight: 500,
               fontFamily: "Avenir Next",
             },
           ]}
