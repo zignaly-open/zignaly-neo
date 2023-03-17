@@ -19,8 +19,8 @@
             "description": "You'll earn unlimited commissions: {{successFee}}% of Success Fees paid to Zignaly. They get ${{reward}} in ZIG if they invest more than ${{minDeposit}}"
         }
     },
-    "they-get-invest": "<0>They get</0><1>${{value}}</1><2> in {{coin}} when they deposit ${{threshold}}+",
-    "they-get-invest-modal": "Invitee gets <0>${{value}}</0> in {{coin}} when they deposit ${{threshold}}+",
+    "they-get-invest": "<0>They get</0><1>${{value}}</1><2> in {{coin}} when they invest ${{threshold}}+",
+    "they-get-invest-modal": "Invitee gets <0>${{value}}</0> in {{coin}} when they invest ${{threshold}}+",
     "invite-traders-for-percent": "<0>Invite traders</0><1>{{value}}%</1><2> of all their investors' success fees</2>",
     "invite-traders-for-percent-modal": "Invite traders to get <0>{{value}}%</0> of all their investors' success fees",
     "invite-friends-for-percent": "<0>Invite friends</0><1>{{value}}%</1><2> of their success fees</2>",
@@ -46,7 +46,7 @@
 
     "terms": {
         "title": "Fixed Terms:",
-        "fees": "Fees are calculated from the fee that Zignaly receives, deducting a safety factor given that commissions are paid in advance",
+        "fees": "Fees are calculated from the fee that Zignaly receives",
         "1": "Zignaly reserves the right to disqualify a participant if he/she engages in inappropriate, dishonest, or abusive activities.",
         "2": "Zignaly reserves the right to amend the Terms and Conditions of the referral program at any time without prior notice.",
         "3": "Participants who violate these terms will not be eligible for referral incentives; any fraudulent or abusive behavior will result in immediate termination of all associated accounts.",
@@ -86,12 +86,13 @@
     "rewardTypes": {
         "SIGNUP_REWARD": "Signup commission",
         "DEPOSIT_REWARD": "Deposit commission",
+        "SUCCESS_REWARD": "Success Fee commission",
         "ALLOCATE_REWARD": "Allocate commission",
-        "SUCCESS_FEE_REWARD": "Success fee commission",
-        "REBATE_COMMISSION_REWARD": "Rebate commission commission"
+        "SUCCESS_FEE_REWARD": "Success Fee commission",
+        "REBATE_COMMISSION_REWARD": "Rebate Fee commission"
     },
     "header": {
-        "title": "Earn 20% from fees",
+        "title": "Earn 20%",
         "description": "Invite friends"
     }
 }
