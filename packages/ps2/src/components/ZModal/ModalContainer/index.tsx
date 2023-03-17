@@ -17,7 +17,7 @@ function ModalContainer({
 
   return (
     <Layout width={width}>
-      <Header>
+      <Header compact={!title && !onGoBack}>
         <Inline align={titleAlign}>
           {onGoBack && typeof onGoBack === 'function' && (
             <HeaderButton onClick={onGoBack}>
