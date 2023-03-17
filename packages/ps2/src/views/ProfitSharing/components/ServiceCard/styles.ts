@@ -6,7 +6,7 @@ export const Card = styled(Box)`
   padding: 20px 24px;
   border-radius: 16px;
   border: solid 1px ${({ theme }) => theme.palette.neutral700};
-  background-color: #181728;
+  background-color: rgba(53, 51, 73, 0.3);
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -76,7 +76,11 @@ export const BottomPnLContainer = styled(Box)<{ negative: boolean }>`
 
 export const ButtonContainer = styled(Box)`
   position: absolute;
-  bottom: 36px;
+  bottom: 42px;
+
+  > div > div {
+    min-width: auto;
+  }
 
   > div > div > div {
     height: 67px;
@@ -86,7 +90,13 @@ export const ButtonContainer = styled(Box)`
   }
 
   button {
-    opacity: 0.8;
+    background: linear-gradient(
+      289.8deg,
+      rgba(20, 156, 173, 0.8) 0%,
+      rgba(69, 64, 193, 0.8) 100%
+    );
+    min-width: 135px;
+    height: 50px;
   }
 `;
 
@@ -94,5 +104,9 @@ export const AssetContainer = styled(ValueContainer)`
   div:nth-child(2) {
     width: 14px;
     height: 14px;
+  }
+
+  .MuiTypography-root {
+    font-size: 17px;
   }
 `;
