@@ -6,6 +6,7 @@ import {
   Service,
 } from '../../../../../apis/service/types';
 import {
+  getPrecisionForCoin,
   ZigButtonGroupInput,
   ZigChart,
   ZigPriceLabel,
@@ -243,7 +244,8 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                       suffix: '%',
                     }
                   : {
-                      decimalScale: 8,
+                      thousandSeparator: true,
+                      decimalScale: getPrecisionForCoin(service.ssc) ?? 8,
                       suffix:
                         chartType === GraphChartType.investors
                           ? ''
