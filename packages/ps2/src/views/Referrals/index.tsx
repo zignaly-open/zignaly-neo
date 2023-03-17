@@ -11,6 +11,7 @@ import {
   dark,
   InputText,
   PageContainer,
+  ZigButton,
   ZigPriceLabel,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -26,6 +27,8 @@ import { ReferralHistory, ReferralRewards } from '../../apis/referrals/types';
 import ReferralTable from './components/ReferralTable';
 import ReferralRewardsList from './components/ReferralRewardsList';
 import ReferralSuccessStep from './components/ReferralSuccessStep';
+import { useZModal } from 'components/ZModal/use';
+import ReferralInviteModal from './components/ReferralInviteModal';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -33,6 +36,7 @@ const Referrals: React.FC = () => {
   const history = useReferralHistoryQuery();
   const { refCode } = useCurrentUser();
   const toast = useToast();
+  const { showModal } = useZModal();
 
   useTitle(t('pages:referrals'));
 
@@ -41,6 +45,8 @@ const Referrals: React.FC = () => {
     '//' +
     window.location.host +
     generatePath(ROUTE_REFERRALS_INVITE, { key: refCode });
+
+  const openInviteModal = () => showModal(ReferralInviteModal);
 
   return (
     <PageContainer style={{ maxWidth: '1200px' }}>
@@ -98,23 +104,52 @@ const Referrals: React.FC = () => {
                   {t('description')}
                 </ZigTypography>
 
-                <InputText
-                  label={t('share-your-link')}
-                  readOnly={true}
-                  value={link}
-                  rightSideElement={
-                    <CloneIcon
-                      id='referrals__copy-link'
-                      width={40}
-                      height={40}
-                      color={dark.neutral300}
-                    />
-                  }
-                  onClickRightSideElement={() => {
-                    copy(link);
-                    toast.success(t('action:copied'));
+                <Box
+                  sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'flex-end',
                   }}
-                />
+                >
+                  <InputText
+                    label={t('share-your-link')}
+                    readOnly={true}
+                    value={link}
+                    rightSideElement={
+                      <CloneIcon
+                        id='referrals__copy-link'
+                        width={40}
+                        height={40}
+                        color={dark.neutral300}
+                      />
+                    }
+                    onClickRightSideElement={() => {
+                      copy(link);
+                      toast.success(t('action:copied'));
+                    }}
+                  />
+                  <ZigButton
+                    variant={'contained'}
+                    size={'large'}
+                    sx={{
+                      mb: '10px',
+                      height: '66px',
+                      ml: 1,
+                      fontSize: '16px',
+                      textTransform: 'uppercase',
+                    }}
+                    onClick={openInviteModal}
+                  >
+                    <img
+                      src={'/images/referrals/qrcode.svg'}
+                      width='16'
+                      height='16'
+                      style={{ marginRight: 10 }}
+                      alt={''}
+                    />
+                    {t('create-invite')}
+                  </ZigButton>
+                </Box>
               </Box>
             </Box>
 
