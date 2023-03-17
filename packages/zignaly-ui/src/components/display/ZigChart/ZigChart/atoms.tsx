@@ -17,8 +17,16 @@ export const ChartTooltip = React.memo(
           flyoutPadding={8}
           labelComponent={<VictoryLabel lineHeight={1.5} />}
           style={[
-            { fill: theme.palette.neutral300, fontSize: "14px" },
-            { fill: theme.palette.neutral200, fontSize: "16px" },
+            {
+              fill: theme.palette.neutral300,
+              fontSize: "14px",
+              fontFamily: "Avenir Next",
+            },
+            {
+              fill: theme.palette.neutral200,
+              fontSize: "16px",
+              fontFamily: "Avenir Next",
+            },
           ]}
         />
         <LineSegment

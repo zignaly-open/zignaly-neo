@@ -12,7 +12,6 @@ import {
 import { axisStyle, ChartLayoutLarge } from "../styles";
 import { ChartColor, ChartLargeProps } from "../types";
 import { useChartData } from "../hooks";
-import GraphColors from "../ChartGradients";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as d3Scale from "victory-vendor/d3-scale";
 // eslint-disable-next-line import/no-extraneous-dependencies
