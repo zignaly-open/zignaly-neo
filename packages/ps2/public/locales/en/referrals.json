@@ -86,6 +86,7 @@
     "rewardTypes": {
         "SIGNUP_REWARD": "Signup commission",
         "DEPOSIT_REWARD": "Deposit commission",
+        "SUCCESS_REWARD": "Success commission",
         "ALLOCATE_REWARD": "Allocate commission",
         "SUCCESS_FEE_REWARD": "Success fee commission",
         "REBATE_COMMISSION_REWARD": "Rebate commission commission"
