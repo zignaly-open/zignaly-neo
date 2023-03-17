@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { Tooltip } from '@mui/material';
 import { StyledVerifiedIcon } from './styles';
 
-export const ServiceName = ({ service, id }: ServiceNameProps) => {
+export const ServiceName = ({ service, showCoin = true, id  }: ServiceNameProps) => {
   const { t } = useTranslation('table');
 
   return (
@@ -56,9 +56,11 @@ export const ServiceName = ({ service, id }: ServiceNameProps) => {
             </Tooltip>
           )}
         </div>
-        <ZigTypography variant='body2' fontWeight='medium' color='neutral400'>
-          {service.ssc}
-        </ZigTypography>
+        {showCoin && (
+          <ZigTypography variant='body2' fontWeight='medium' color='neutral400'>
+            {service.ssc}
+          </ZigTypography>
+        )}
       </Box>
     </Box>
   );

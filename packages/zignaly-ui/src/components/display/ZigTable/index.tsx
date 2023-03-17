@@ -188,8 +188,8 @@ export default function ZigTable<T extends object>({
         </ZigTypography>
       )}
       {pagination !== false && (
-        <Box p="22px" display="flex" alignItems="center" justifyContent="center">
-          <Box display="flex" flex={3} justifyContent="flex-start" />
+        <Box p="22px" display="flex" alignItems="center" justifyContent="center" flexWrap="wrap">
+          <Box display={["none", "flex"]} flex={3} justifyContent="flex-start" />
           <Box justifyContent="center" display="flex" gap={1} alignItems="center" flex={3}>
             <IconButton
               id={prefixId && `${prefixId}-table__go-zero-page`}
@@ -255,7 +255,16 @@ export default function ZigTable<T extends object>({
               />
             )}
           </Box>
-          <Box flex={3} display="flex" gap={2} alignItems="center" justifyContent="flex-end" ml={2}>
+          <Box
+            flex={3}
+            display="flex"
+            gap={2}
+            alignItems="center"
+            mx={2}
+            flexBasis={["100%", "auto"]}
+            justifyContent={["center", "flex-end"]}
+            marginTop={[1, 0]}
+          >
             <ZigTypography color="neutral300">Displaying</ZigTypography>
             <SmallSelectWrapper>
               <ZigSelect

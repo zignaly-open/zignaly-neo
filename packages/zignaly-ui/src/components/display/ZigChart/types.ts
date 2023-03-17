@@ -1,11 +1,17 @@
+import { VictoryChartProps } from "victory";
+
 export enum ChartColor {
-  Green = "#18ED90",
+  Green = "#039179",
   Red = "#CC3993",
 }
 
 export enum ChartGradientColor {
-  Green = "chart-gradient-green",
-  Red = "chart-gradient-red",
+  GreenMini = "chart-gradient-mini-green",
+  RedMini = "chart-gradient-mini-red",
+  GreenFull = "chart-gradient-full-green",
+  RedFull = "chart-gradient-full-red",
+  GreenCard = "chart-gradient-card-green",
+  RedCard = "chart-gradient-card-red",
 }
 
 export type ChartEvent = {
@@ -13,10 +19,15 @@ export type ChartEvent = {
   label: string;
 };
 
+export type GradientVariant = "mini" | "full" | "card";
+
 export interface ChartMiniProps {
   readonly data: AxisFormat[] | number[];
   midLine?: boolean | null;
   height?: number;
+  width?: number;
+  gradientVariant?: GradientVariant;
+  chartProps?: VictoryChartProps;
 }
 
 export interface ChartLargeProps {
@@ -26,6 +37,8 @@ export interface ChartLargeProps {
   events?: ChartEvent[];
   onlyIntegerTicks?: boolean;
   yAxisFormatter?: (y: number | string) => string;
+  tooltipFormatter?: (v: AxisFormat) => string;
+  chartProps?: VictoryChartProps;
 }
 
 export interface AxisFormat {

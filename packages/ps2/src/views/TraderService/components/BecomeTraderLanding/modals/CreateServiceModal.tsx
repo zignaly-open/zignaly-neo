@@ -4,7 +4,6 @@ import { DialogProps } from '@mui/material/Dialog';
 import ZModal from 'components/ZModal';
 import { useExchangeCoinsList } from '../../../../../apis/coin/use';
 import CenteredLoader from '../../../../../components/CenteredLoader';
-// import CreateServiceForm from './forms/CreateServiceForm';
 import InvestInYourServiceForm from './forms/InvestInYourServiceForm';
 import CreateServiceForm from './forms/CreateServiceForm';
 import { ServiceFormData } from './forms/types';
@@ -39,6 +38,7 @@ function CreateServiceModal({
 
   return (
     <ZModal
+      authOnly
       onGoBack={step === 1 && goBack}
       onBackdropClick={(e) => {
         e.stopPropagation();

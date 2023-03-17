@@ -5,6 +5,7 @@ import {
   SessionResponse,
   SignupPayload,
   SignupResponse,
+  UserBalance,
   UserData,
 } from './types';
 import baseQuery from '../baseQuery';
@@ -206,6 +207,12 @@ export const api = createApi({
         body: params,
       }),
     }),
+
+    balance: builder.query<UserBalance, string>({
+      query: (exchangeInternalId) => ({
+        url: `user/exchanges/${exchangeInternalId}/balance`,
+      }),
+    }),
   }),
 });
 
@@ -218,6 +225,7 @@ export const {
   useActivateExchangeMutation,
   useVerify2FAMutation,
   useVerifyCodeMutation,
+  useSessionQuery,
   useVerifyCodeNewUserMutation,
   useVerifyKnownDeviceMutation,
   useSetLocaleMutation,
@@ -232,4 +240,5 @@ export const {
   useEnable2FAInfoQuery,
   useLazyEnable2FAInfoQuery,
   useEnable2FAMutation,
+  useBalanceQuery,
 } = api;

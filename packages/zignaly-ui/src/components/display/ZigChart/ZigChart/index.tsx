@@ -7,34 +7,32 @@ import {
   VictoryScatter,
   VictoryLabel,
   VictoryBar,
+  VictoryVoronoiContainer,
 } from "victory";
 import { axisStyle, ChartLayoutLarge } from "../styles";
-import { ChartColor, ChartLargeProps } from "../types";
+import { AxisFormat, ChartColor, ChartLargeProps } from "../types";
 import { useChartData } from "../hooks";
-import GraphColors from "../GraphColors";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as d3Scale from "victory-vendor/d3-scale";
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { TextAnchorType } from "victory-core/lib/victory-label/victory-label";
-import { useTheme } from "styled-components";
-import Theme from "../../../../theme/theme";
-
-const deltaToShowSecondChart = 0.2;
+import { useTheme } from "@mui/material";
+import { ChartTooltip } from "./atoms";
 
 const ZigChart = ({
   data,
   yAxisFormatter,
+  tooltipFormatter,
   events,
   bars,
   tickCount = 7,
   onlyIntegerTicks,
+  chartProps = {},
 }: ChartLargeProps) => {
-  const theme = useTheme() as Theme;
-  const { data: processedData, color, gradient } = useChartData(data);
+  const theme = useTheme();
+  const { data: processedData, color, gradient } = useChartData(data, "full");
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
   const pureChartWidth = width ? width - 70 - 2 : 0;
-  const barChartWidth = pureChartWidth / processedData.length;
   const barChartWidthAdjustedForPadding = Math.min(25, pureChartWidth / (processedData.length + 2));
 
   // dirty fix for rerender
@@ -45,20 +43,19 @@ const ZigChart = ({
 
   const yDomain = useMemo(() => {
     const values = processedData.map((s) => s.y);
-    const ranges = [Math.min(0, ...values), Math.max(1, ...values)];
-    if (ranges[0] < 0 && ranges[1] > 0)
-      ranges[0] = Math.min(
-        ranges[0],
-        (ranges[1] * -1 * deltaToShowSecondChart) / (1 - deltaToShowSecondChart),
-      );
-
-    return ranges;
+    return [Math.min(0, ...values), Math.max(1, ...values)];
   }, [processedData]);
 
   const getChartLabel = useCallback(
     ({ datum = 0 }: { datum?: number }): string =>
       yAxisFormatter ? yAxisFormatter(datum) : datum.toString(),
     [yAxisFormatter],
+  );
+
+  const getChartTooltip = useCallback(
+    ({ datum }: { datum: AxisFormat }): string =>
+      tooltipFormatter ? tooltipFormatter(datum) : `${datum.x}\n${datum.y}`,
+    [tooltipFormatter],
   );
 
   const ticks = d3Scale
@@ -69,34 +66,31 @@ const ZigChart = ({
 
   return (
     <ChartLayoutLarge ref={wrapperRef}>
-      <GraphColors />
-
       {width && (
         <VictoryChart
+          containerComponent={
+            <VictoryVoronoiContainer
+              voronoiDimension="x"
+              labels={getChartTooltip}
+              labelComponent={<ChartTooltip color={!bars ? color : undefined} />}
+              voronoiBlacklist={["eventLine", "scatterText"]}
+            />
+          }
           {...{
             domain: { y: yDomain as unknown as undefined },
             width: width || 600,
             height: 300,
-            domainPadding: { x: bars ? [barChartWidth / 2, barChartWidth / 2] : [0, 1], y: 5 },
+            domainPadding: { x: 0, y: 1 },
             padding: { left: 35, top: 20, right: 35, bottom: 20 },
           }}
+          {...chartProps}
         >
           <VictoryAxis
             tickValues={ticks}
-            tickLabelComponent={
-              <VictoryLabel
-                text={getChartLabel}
-                textAnchor={
-                  ((v: { datum?: number }) =>
-                    getChartLabel(v).length < 4
-                      ? "end"
-                      : "start") as unknown as () => TextAnchorType
-                }
-                dx={(v) => (getChartLabel(v).length < 4 ? 0 : -22)}
-              />
-            }
+            tickLabelComponent={<VictoryLabel textAnchor="end" text={getChartLabel} />}
             dependentAxis
             style={axisStyle}
+            fixLabelOverlap
           />
 
           {(events || []).map(({ x, label }) => (
@@ -106,11 +100,12 @@ const ZigChart = ({
               data={[{ x, y: yDomain[1] }]}
               labels={[label]}
               size={0}
+              name="scatterText"
               labelComponent={
                 <VictoryLabel
                   dy={17}
                   labelPlacement="vertical"
-                  style={[{ fontSize: 14, fill: theme.neutral500 }]}
+                  style={[{ fontSize: 14, fill: theme.palette.neutral500 }]}
                   angle={-90}
                   textAnchor="end"
                 />
@@ -120,9 +115,10 @@ const ZigChart = ({
 
           {(events || []).map(({ x }) => (
             <VictoryLine
+              name="eventLine"
               key={"event-line-" + x}
               style={{
-                data: { stroke: theme.neutral500, strokeWidth: 0.5 },
+                data: { stroke: theme.palette.neutral500, strokeWidth: 0.5 },
               }}
               data={[
                 { x, y: yDomain[0] },
@@ -139,14 +135,14 @@ const ZigChart = ({
 
           <VictoryAxis
             offsetY={20}
-            tickLabelComponent={<VictoryLabel />}
+            tickLabelComponent={<VictoryLabel backgroundPadding={{ top: 5 }} />}
             fixLabelOverlap
             style={
               bars
                 ? {
                     ...axisStyle,
-                    grid: { stroke: theme.neutral700, strokeDasharray: "3 3" },
-                    ticks: { stroke: theme.neutral700, size: 5 },
+                    grid: { stroke: theme.palette.neutral700, strokeDasharray: "3 3" },
+                    ticks: { stroke: theme.palette.neutral700, size: 5 },
                   }
                 : axisStyle
             }
@@ -176,11 +172,12 @@ const ZigChart = ({
               style={{
                 data: {
                   fill: `url(#${gradient})`,
-                  strokeWidth: 1,
+                  strokeWidth: 2,
                   stroke: color,
                 },
               }}
               data={processedData}
+              interpolation="monotoneX"
             />
           )}
         </VictoryChart>

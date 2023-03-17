@@ -3,6 +3,7 @@ import Router from './Router';
 import theme from './theme';
 import * as Sentry from '@sentry/browser';
 import {
+  ChartGradients,
   dark,
   ThemeProvider as ThemeInheritorStyled,
   ThemeProviderMui as ThemeInheritorMui,
@@ -61,6 +62,7 @@ function App() {
                   <Tracker />
                   <UpdateChecker />
                   <DateLocaleFixer />
+                  <ChartGradients />
                   <Suspense fallback={null}>
                     <Router />
                   </Suspense>

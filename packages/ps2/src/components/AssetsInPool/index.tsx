@@ -12,6 +12,7 @@ const AssetsInPool = ({
   convertedValue,
   convertedValueCoin,
   createdAt,
+  shorten = false,
 }: AssetsInPoolProps) => {
   const { t } = useTranslation('marketplace');
   return (
@@ -29,6 +30,7 @@ const AssetsInPool = ({
           variant={'h2'}
           component={'div'}
           color={'neutral200'}
+          shorten={shorten}
         />
         {+assetsValue >= 200000 && (
           <Icon>
