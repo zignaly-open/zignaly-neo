@@ -4,9 +4,9 @@ export const Card = styled(Box)`
   width: 360px;
   height: 270px;
   padding: 20px 24px;
-  border-radius: 16px;
+  border-radius: 7.5px;
   border: solid 1px ${({ theme }) => theme.palette.neutral700};
-  background-color: rgba(53, 51, 73, 0.3);
+  background-color: rgba(53, 51, 74, 0.3);
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -80,6 +80,16 @@ export const ButtonContainer = styled(Box)`
 
   > div > div {
     min-width: auto;
+
+    > button {
+      background: linear-gradient(
+        289.8deg,
+        rgba(20, 156, 173, 0.8) 0%,
+        rgba(69, 64, 193, 0.8) 100%
+      );
+      min-width: 135px;
+      height: 50px;
+    }
   }
 
   > div > div > div {
@@ -87,16 +97,6 @@ export const ButtonContainer = styled(Box)`
     > span {
       display: none;
     }
-  }
-
-  button {
-    background: linear-gradient(
-      289.8deg,
-      rgba(20, 156, 173, 0.8) 0%,
-      rgba(69, 64, 193, 0.8) 100%
-    );
-    min-width: 135px;
-    height: 50px;
   }
 `;
 
