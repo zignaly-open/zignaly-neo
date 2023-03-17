@@ -244,7 +244,10 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                     }
                   : {
                       decimalScale: 8,
-                      suffix: ` ${service.ssc}`,
+                      suffix:
+                        chartType === GraphChartType.investors
+                          ? ''
+                          : ` ${service.ssc}`,
                     }),
               })}`
             }
