@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { Tooltip } from '@mui/material';
 import { StyledVerifiedIcon } from './styles';
 
-export const ServiceName = ({ service, id }: ServiceNameProps) => {
+export const ServiceName = ({ id, service }: ServiceNameProps) => {
   const { t } = useTranslation('table');
 
   return (
