@@ -7,6 +7,8 @@ import serviceApiKeyReducer from './serviceApiKey/store';
 import { api as serviceApiKeyApi } from './serviceApiKey/api';
 import coinReducer from './coin/store';
 import { api as coinApi } from './coin/api';
+import referralsReducer from './referrals/store';
+import { api as referralApi } from './referrals/api';
 import serviceReducer from './service/store';
 import { api as serviceApi } from './service/api';
 import marketplaceReducer from './marketplace/store';
@@ -21,19 +23,21 @@ import { ServiceState } from './service/types';
 import { MarketplaceState } from './marketplace/types';
 import { CoinState } from './coin/types';
 import { WalletState } from './wallet/types';
+import { ReferralsState } from './referrals/types';
 
 const persistConfig = {
   key: 'root',
   storage,
   // TODO: maybe we should actually leverage cache
   blacklist: [
-    'userApi',
-    'marketplaceApi',
-    'coinApi',
-    'investmentApi',
-    'dashboardApi',
-    'serviceApi',
-    'walletApi',
+    userApi.reducerPath,
+    coinApi.reducerPath,
+    investmentApi.reducerPath,
+    investmentApi.reducerPath,
+    marketplaceApi.reducerPath,
+    referralApi.reducerPath,
+    serviceApi.reducerPath,
+    walletApi.reducerPath,
   ] as string[],
 };
 
@@ -44,10 +48,12 @@ const appReducer = combineReducers({
   [serviceApiKeyApi.reducerPath]: serviceApiKeyApi.reducer,
   [marketplaceApi.reducerPath]: marketplaceApi.reducer,
   [coinApi.reducerPath]: coinApi.reducer,
+  [referralApi.reducerPath]: referralApi.reducer,
   [walletApi.reducerPath]: walletApi.reducer,
   marketplace: marketplaceReducer,
   user: userReducer,
   coin: coinReducer,
+  referrals: referralsReducer,
   investment: investmentReducer,
   serviceApiKey: serviceApiKeyReducer,
   service: serviceReducer,
@@ -72,6 +78,7 @@ export const store = configureStore({
       .concat(serviceApi.middleware)
       .concat(marketplaceApi.middleware)
       .concat(coinApi.middleware)
+      .concat(referralApi.middleware)
       .concat(investmentApi.middleware)
       .concat(walletApi.middleware)
       .concat(serviceApiKeyApi.middleware),
@@ -84,6 +91,7 @@ export type RootState = {
   user: UserState;
   coin: CoinState;
   marketplace: MarketplaceState;
+  referrals: ReferralsState;
   investment: InvestmentState;
   service: ServiceState;
   wallet: WalletState;

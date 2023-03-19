@@ -46,6 +46,7 @@ jobs:
           envkey_REACT_APP_GTM_ID: GTM-5ZQ4JLK
           envkey_REACT_APP_BASE_API: https://zignaly.com/new_api
           envkey_REACT_APP_WALLET_API: https://wallet.zignaly.com/api
+          envkey_REACT_APP_REFERRALS_API: https://referrals.zignaly.com/
           envkey_REACT_APP_SEGMENT_NAME: zignaly
           envkey_REACT_APP_SENTRY_DNS: https://b87b3bf895ff4c0cb0e1bee22f3a0648@o967264.ingest.sentry.io/6492584
           envkey_REACT_APP_CUSTOMER_IO_ORG_ID: 5b1f596d-a830-4bb9-8ef3-81a4bb65f8e7
