@@ -79,12 +79,12 @@ const WalletTransactions = () => {
         ),
         enableSorting: false,
       }),
-      columnHelper.accessor('formattedAmount', {
+      columnHelper.accessor('amount', {
         header: t('transactions.header.amount'),
         enableSorting: false,
         cell: ({ getValue }) => (
           <ZigTypography color='almostWhite'>
-            <ZigTablePriceLabel exact alwaysShowSign value={getValue()} />
+            <ZigTablePriceLabel alwaysShowSign value={getValue()} />
           </ZigTypography>
         ),
       }),
