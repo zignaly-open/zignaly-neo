@@ -35,6 +35,7 @@ const ServiceProfileHeader: React.FC<{ service: Service }> = ({ service }) => {
           size={'x-large'}
           alt={t('logo-alt', { name: service.name })}
           image={getServiceLogo(service.logo)}
+          id={'service-profile__avatar'}
         />
       </Box>
       <Box ml={md ? 2 : 0} flex={1} sx={{ textAlign: md ? 'left' : 'center' }}>

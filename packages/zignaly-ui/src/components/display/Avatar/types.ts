@@ -11,4 +11,5 @@ export type AvatarTypeProps = {
   alt?: string;
   hash?: string | any;
   image?: string | any;
+  id?: string;
 };

@@ -22,6 +22,7 @@ import Theme from "../../../../theme/theme";
 const deltaToShowSecondChart = 0.2;
 
 const ZigChart = ({
+  id,
   data,
   yAxisFormatter,
   events,
@@ -68,7 +69,7 @@ const ZigChart = ({
     .filter((v) => !onlyIntegerTicks || Number.isInteger(v));
 
   return (
-    <ChartLayoutLarge ref={wrapperRef}>
+    <ChartLayoutLarge ref={wrapperRef} id={id}>
       <GraphColors />
 
       {width && (

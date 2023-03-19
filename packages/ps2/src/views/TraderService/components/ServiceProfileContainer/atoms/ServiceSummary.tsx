@@ -16,7 +16,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
   return (
     <Box>
       <GridWithBottomBorder container pb={2.5} pl={2} pr={2} pt={0}>
-        <GridCell item xs={6}>
+        <GridCell item xs={6} id={'service-profile__assets-in-pool'}>
           <ZigTypography color={'neutral300'}>
             {t('assets-in-pool')}
           </ZigTypography>
@@ -28,7 +28,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             />
           </AssetsInPoolWrapper>
         </GridCell>
-        <GridCell item xs={6}>
+        <GridCell item xs={6} id={'service-profile__investors'}>
           <ZigTypography color={'neutral300'}>
             {t('investors-count')}
           </ZigTypography>
@@ -38,7 +38,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
         </GridCell>
       </GridWithBottomBorder>
       <GridWithBottomBorder container pb={2.5} pl={2} pr={2} pt={2.5}>
-        <GridCell item xs={4} rightBorder>
+        <GridCell item xs={4} rightBorder id={'service-profile__pnl30t'}>
           <ServicePercentageInfo
             title={t('marketplace:table.n-months', { count: 1 })}
             value={service.pnlSsc30t}
@@ -47,7 +47,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             canShow={+new Date(service.createdAt) < +subMonths(new Date(), 1)}
           />
         </GridCell>
-        <GridCell item xs={4} rightBorder>
+        <GridCell item xs={4} rightBorder id={'service-profile__pnl90t'}>
           <ServicePercentageInfo
             title={t('marketplace:table.n-months', { count: 3 })}
             value={+service.pnlSsc90t}
@@ -56,7 +56,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             canShow={+new Date(service.createdAt) < +subMonths(new Date(), 3)}
           />
         </GridCell>
-        <GridCell item xs={4}>
+        <GridCell item xs={4} id={'service-profile__pnl365t'}>
           <ServicePercentageInfo
             title={t('marketplace:table.n-years', { count: 1 })}
             value={service.pnlSsc365t}
@@ -73,6 +73,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             color={'neutral300'}
             sx={{ mt: 0.5 }}
             component={'p'}
+            id={'service-profile__base-currency'}
           >
             {t('summary.base-currency')}{' '}
             <ZigTypography fontSize={12} color={'neutral200'}>
@@ -84,6 +85,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             color={'neutral300'}
             sx={{ mt: 0.5 }}
             component={'p'}
+            id={'service-profile__funds-allocated'}
           >
             {t('summary.funds-allocated')}{' '}
             <ZigTypography fontSize={12} color={'neutral200'}>
@@ -102,6 +104,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             color={'neutral300'}
             sx={{ mt: 0.5 }}
             component={'p'}
+            id={'service-profile__success-fee'}
           >
             {t('summary.success-fee')}{' '}
             <ZigTypography fontSize={12} color={'neutral200'}>
@@ -115,6 +118,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             color={'neutral300'}
             sx={{ mt: 0.5 }}
             component={'p'}
+            id={'service-profile__tags'}
           >
             {t('summary.tags')}{' '}
             <ZigTypography fontSize={12} color={'neutral200'}>

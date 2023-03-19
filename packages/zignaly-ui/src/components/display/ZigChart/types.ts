@@ -26,6 +26,7 @@ export interface ChartLargeProps {
   events?: ChartEvent[];
   onlyIntegerTicks?: boolean;
   yAxisFormatter?: (y: number | string) => string;
+  id?: string;
 }
 
 export interface AxisFormat {
