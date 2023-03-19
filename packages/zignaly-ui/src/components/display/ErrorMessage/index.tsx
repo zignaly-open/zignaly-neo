@@ -3,7 +3,7 @@ import React from "react";
 import { ErrorMessageProps } from "./types";
 import ZigAlertMessage from "../ZigAlertMessage";
 
-// TODO(Vetle): Refactor usage of Dark theme when light theme is ready
+// added for backwards compatibility
 function ErrorMessage({ text }: ErrorMessageProps) {
   return <ZigAlertMessage text={text} error />;
 }
