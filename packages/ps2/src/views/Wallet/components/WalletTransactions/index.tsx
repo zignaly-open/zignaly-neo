@@ -186,6 +186,7 @@ const WalletTransactions = () => {
         </Box>
       </Box>
       <ZigTable
+        prefixId={'wallet-transactions'}
         columns={columns}
         data={filteredData}
         renderSubComponent={({ row }) => (

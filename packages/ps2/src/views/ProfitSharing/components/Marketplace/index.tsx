@@ -28,6 +28,7 @@ const Marketplace: React.FC = () => {
   const columns = useMemo(
     () => [
       columnHelper.accessor('name', {
+        id: 'service-name',
         header: t('table.service-name'),
         style: {
           justifyContent: 'flex-start',
@@ -43,6 +44,7 @@ const Marketplace: React.FC = () => {
         },
         cell: (props) => (
           <ServiceName
+            id={`marketplace-table__service-${props.row.original.id}`}
             service={
               marketplaceServiceToInvestmentType(
                 props.row.original,
@@ -52,6 +54,7 @@ const Marketplace: React.FC = () => {
         ),
       }),
       columnHelper.accessor('investedUSDT', {
+        id: 'investedUSDT',
         header: t('table.assets'),
         meta: {
           subtitle: (
@@ -62,7 +65,10 @@ const Marketplace: React.FC = () => {
           ),
         },
         cell: (props) => (
-          <Box minWidth={148}>
+          <Box
+            minWidth={148}
+            id={`marketplace-table__assets-${props.row.original.id}`}
+          >
             <AssetsInPool
               assetsValue={props.getValue()}
               numberOfInvestors={props.row.original.investors}
@@ -76,33 +82,38 @@ const Marketplace: React.FC = () => {
         id: 'pnlPercent90t',
         header: t('table.n-months-pnl', { count: 3 }),
         cell: (props) => (
-          <PercentageIndicator
-            style={{
-              fontSize: '18px',
-              lineHeight: '28px',
-            }}
-            value={props.getValue()}
-          />
+          <Box id={`marketplace-table__pnl90t-${props.row.original.id}`}>
+            <PercentageIndicator
+              style={{
+                fontSize: '18px',
+                lineHeight: '28px',
+              }}
+              value={props.getValue()}
+            />
+          </Box>
         ),
       }),
       columnHelper.accessor((row) => Number(row.pnlPercent30t), {
         id: 'pnlPercent30t',
         header: t('table.n-months-pnl', { count: 1 }),
-        cell: (props) =>
-          +props.getValue() ||
-          Object.keys(props.row.original.sparklines).length > 1 ? (
-            <>
-              <ZigChartMini
-                midLine
-                data={[0, ...(props.row.original.sparklines as number[])]}
-              />
-              <PercentageIndicator value={props.getValue()} type={'graph'} />
-            </>
-          ) : (
-            <ZigTypography variant='body2' color='neutral400'>
-              {t('tableHeader.1-mo.no-data')}
-            </ZigTypography>
-          ),
+        cell: (props) => (
+          <Box id={`marketplace-table__pnl30t-${props.row.original.id}`}>
+            {+props.getValue() ||
+            Object.keys(props.row.original.sparklines).length > 1 ? (
+              <>
+                <ZigChartMini
+                  midLine
+                  data={[0, ...(props.row.original.sparklines as number[])]}
+                />
+                <PercentageIndicator value={props.getValue()} type={'graph'} />
+              </>
+            ) : (
+              <ZigTypography variant='body2' color='neutral400'>
+                {t('tableHeader.1-mo.no-data')}
+              </ZigTypography>
+            )}
+          </Box>
+        ),
       }),
       columnHelper.display({
         header: '',
@@ -126,10 +137,10 @@ const Marketplace: React.FC = () => {
                 mb: 4,
               }}
             >
-              <ZigTypography variant='h1' lineHeight='42px'>
+              <ZigTypography variant={'h1'} id={'marketplace__title'} lineHeight='42px'>
                 {t('invest-in-services')}
               </ZigTypography>
-              <ZigTypography variant={'body1'} color='neutral300'>
+              <ZigTypography variant={'body1'} id={'marketplace__description'} color='neutral300'>
                 {t('invest-in-services-explainer')}
               </ZigTypography>
             </Box>
@@ -141,6 +152,7 @@ const Marketplace: React.FC = () => {
             />
             <TableWrapper>
               <ZigTable
+                prefixId={'marketplace'}
                 initialState={{
                   sorting: [
                     {
