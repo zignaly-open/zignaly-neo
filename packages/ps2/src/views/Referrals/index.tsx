@@ -43,7 +43,9 @@ const Referrals: React.FC = () => {
   const link =
     window.location.protocol +
     '//' +
-    window.location.host +
+    (window.location.host?.includes('localhost')
+      ? 'zignaly.com'
+      : window.location.host) +
     generatePath(ROUTE_REFERRALS_INVITE, { key: refCode });
 
   const openInviteModal = () => showModal(ReferralInviteModal, { url: link });

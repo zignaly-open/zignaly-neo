@@ -96,3 +96,20 @@ export const OlList = styled('ol')`
   }
   margin-left: 20px;
 `;
+
+export const ShareIconsContainer = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  svg {
+    width: 32px;
+    height: 32px;
+    margin-left: 6px;
+    margin-right: 6px;
+    fill: url(#shareIconGradient);
+    transition: fill 0.2s;
+    &:hover {
+      fill: #7682f7;
+    }
+  }
+`;
