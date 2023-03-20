@@ -33,6 +33,7 @@ const ZigChart = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
   const pureChartWidth = width ? width - 70 - 2 : 0;
+  const barChartWidth = pureChartWidth / processedData.length;
   const barChartWidthAdjustedForPadding = Math.min(25, pureChartWidth / (processedData.length + 2));
 
   // dirty fix for rerender
@@ -80,7 +81,7 @@ const ZigChart = ({
             domain: { y: yDomain as unknown as undefined },
             width: width || 600,
             height: 300,
-            domainPadding: { x: 0, y: 1 },
+            domainPadding: { x: bars ? [barChartWidth / 2, barChartWidth / 2] : 0, y: 1 },
             padding: { left: 35, top: 20, right: 35, bottom: 20 },
           }}
           {...chartProps}
