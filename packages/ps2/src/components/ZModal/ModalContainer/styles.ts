@@ -52,6 +52,7 @@ export const Header = styled('div')<{ compact: boolean }>`
   ${({ compact }) =>
     compact &&
     `
+    width: 32px;
     position: absolute;
     right: 56px;
     top: 40px;
