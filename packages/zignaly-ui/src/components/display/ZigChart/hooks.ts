@@ -1,6 +1,8 @@
 import { useMemo } from "react";
 import { AxisFormat, ChartColor, ChartGradientColor, GradientVariant } from "./types";
 
+const deltaToShowSecondChart = 0.2;
+
 const getGradient = (gradientVariant: GradientVariant, isGreen: boolean) => {
   switch (gradientVariant) {
     case "mini":
@@ -12,6 +14,21 @@ const getGradient = (gradientVariant: GradientVariant, isGreen: boolean) => {
   }
 };
 
+/**
+ * Get y domain for chart, adjusted to leave space under 0 axis if needed
+ */
+const getYDomain = (data: AxisFormat[]) => {
+  const values = data.map((s) => s.y);
+  const ranges = [Math.min(0, ...values), Math.max(1, ...values)];
+  if (ranges[0] < 0 && ranges[1] > 0)
+    ranges[0] = Math.min(
+      ranges[0],
+      (ranges[1] * -1 * deltaToShowSecondChart) / (1 - deltaToShowSecondChart),
+    );
+
+  return ranges as [number, number];
+};
+
 export function useChartData(
   data: AxisFormat[] | number[],
   gradientVariant = "full" as GradientVariant,
@@ -19,8 +36,9 @@ export function useChartData(
   data: AxisFormat[];
   color: ChartColor;
   gradient: ChartGradientColor;
+  yDomain: [number, number];
 } {
-  const processedData = useMemo<AxisFormat[]>(() => {
+  const [processedData, yDomain] = useMemo(() => {
     const chart =
       typeof data?.[0] === "number"
         ? data.map((value, index) => ({
@@ -28,8 +46,8 @@ export function useChartData(
             y: value as number,
           }))
         : (data as AxisFormat[]);
-    const min = chart.reduce((min, v) => Math.min(min, v.y), Number.MAX_VALUE);
-    return chart.map((c) => ({ ...c, y0: Math.min(0, min) }));
+    const yDomain = getYDomain(chart);
+    return [chart.map((c) => ({ ...c, y0: yDomain[0] })), yDomain];
   }, [data]);
 
   const firstTimestamp = processedData[0].y;
@@ -40,5 +58,6 @@ export function useChartData(
     data: processedData,
     color: isGreen ? ChartColor.Green : ChartColor.Red,
     gradient: getGradient(gradientVariant, isGreen),
+    yDomain,
   };
 }
