@@ -2,7 +2,6 @@
     "title": "Invite Friends & Traders and Earn!",
     "description": "Get a percentage of the trading and success fees paid by your friends or from all the investors of the trader's service when you invite a trader to Zignaly",
     "share-your-link": "Share your link:",
-    "create-invite": "Create Invite",
     "what-you-get": "What you get",
     "what-they-get": "What they get",
     "how-to-earn": "How to Earn Commissions",
@@ -44,7 +43,6 @@
     "invite-for-balance-modal": "Invite friends to get <0>{{value}} {{symbol}}</0> when their balance reaches ${{threshold}}+",
     "invite-for-signup": "<0>Invite friends</0><1>{{value}} {{symbol}}</1><2> when they create and verify an account</2>",
     "invite-for-signup-modal": "Invite friends to get <0>{{value}} {{symbol}}</0> when they create and verify an account",
-
     "terms": {
         "title": "Fixed Terms:",
         "fees": "Fees are calculated from the fee that Zignaly receives",
@@ -56,7 +54,6 @@
     "when-invite-friends": "When you invite friends",
     "when-invite-traders": "When you invite traders",
     "invitee-gets": "Invitee gets",
-
     "export": "Export",
     "full-rewards": "Full terms",
     "full-rewards-title": "Referral commission terms",
@@ -95,5 +92,17 @@
     "header": {
         "title": "Earn 20%",
         "description": "Invite friends"
+    },
+    "create-invite": {
+        "create-invite": "Create Invite",
+        "invite-friends": "Invite Friends",
+        "invite-traders": "Invite Traders"
+    },
+    "share": {
+        "telegram-title": "Check out Zignaly, a new way to trade",
+        "email-subject": "Zignaly, a new way to trade",
+        "email-body": "Hey pal, here's Zignaly, a new way to trade",
+        "facebook-quote": "All of the profit, none of the work",
+        "facebook-hashtags": "#crypto #trading"
     }
 }

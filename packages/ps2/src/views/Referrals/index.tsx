@@ -46,7 +46,7 @@ const Referrals: React.FC = () => {
     window.location.host +
     generatePath(ROUTE_REFERRALS_INVITE, { key: refCode });
 
-  const openInviteModal = () => showModal(ReferralInviteModal);
+  const openInviteModal = () => showModal(ReferralInviteModal, { url: link });
 
   return (
     <PageContainer style={{ maxWidth: '1200px' }}>
@@ -111,23 +111,25 @@ const Referrals: React.FC = () => {
                     alignItems: 'flex-end',
                   }}
                 >
-                  <InputText
-                    label={t('share-your-link')}
-                    readOnly={true}
-                    value={link}
-                    rightSideElement={
-                      <CloneIcon
-                        id='referrals__copy-link'
-                        width={40}
-                        height={40}
-                        color={dark.neutral300}
-                      />
-                    }
-                    onClickRightSideElement={() => {
-                      copy(link);
-                      toast.success(t('action:copied'));
-                    }}
-                  />
+                  <Box sx={{ flex: 1 }}>
+                    <InputText
+                      label={t('share-your-link')}
+                      readOnly={true}
+                      value={link}
+                      rightSideElement={
+                        <CloneIcon
+                          id='referrals__copy-link'
+                          width={40}
+                          height={40}
+                          color={dark.neutral300}
+                        />
+                      }
+                      onClickRightSideElement={() => {
+                        copy(link);
+                        toast.success(t('action:copied'));
+                      }}
+                    />
+                  </Box>
                   <ZigButton
                     variant={'contained'}
                     size={'large'}
@@ -147,7 +149,7 @@ const Referrals: React.FC = () => {
                       style={{ marginRight: 10 }}
                       alt={''}
                     />
-                    {t('create-invite')}
+                    {t('create-invite.create-invite')}
                   </ZigButton>
                 </Box>
               </Box>
