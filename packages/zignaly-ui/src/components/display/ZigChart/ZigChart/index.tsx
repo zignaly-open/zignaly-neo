@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useMemo, useReducer, useRef } from "react";
+import React, { useCallback, useLayoutEffect, useReducer, useRef } from "react";
 import {
   VictoryArea,
   VictoryAxis,
@@ -29,7 +29,7 @@ const ZigChart = ({
   chartProps = {},
 }: ChartLargeProps) => {
   const theme = useTheme();
-  const { data: processedData, color, gradient } = useChartData(data, "full");
+  const { data: processedData, color, gradient, yDomain } = useChartData(data, "full");
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
   const pureChartWidth = width ? width - 70 - 2 : 0;
@@ -41,11 +41,6 @@ const ZigChart = ({
   useLayoutEffect(() => {
     forceUpdate();
   }, [width]);
-
-  const yDomain = useMemo(() => {
-    const values = processedData.map((s) => s.y);
-    return [Math.min(0, ...values), Math.max(1, ...values)];
-  }, [processedData]);
 
   const getChartLabel = useCallback(
     ({ datum = 0 }: { datum?: number }): string =>
