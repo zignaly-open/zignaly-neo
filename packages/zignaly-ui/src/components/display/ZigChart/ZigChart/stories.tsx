@@ -74,7 +74,7 @@ ExampleChartSlightlyNegative.args = {
     { x: "Jul 4", y: 15 },
     { x: "Jul 5", y: -1 },
     { x: "Jul 6", y: 20 },
-    { x: "Jul 7", y: -2 },
+    { x: "Jul 7", y: -1 },
   ],
 };
 

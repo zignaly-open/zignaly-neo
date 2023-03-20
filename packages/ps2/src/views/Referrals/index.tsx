@@ -43,21 +43,16 @@ const Referrals: React.FC = () => {
 
   useTitle(t('pages:referrals'));
 
-  const link =
+  const baseUrl =
     window.location.protocol +
     '//' +
     (window.location.host?.includes('localhost')
       ? 'app.zignaly.com'
-      : window.location.host) +
-    generatePath(ROUTE_REFERRALS_INVITE, { key: refCode });
+      : window.location.host);
 
+  const link = baseUrl + generatePath(ROUTE_REFERRALS_INVITE, { key: refCode });
   const shortLink =
-    window.location.protocol +
-    '//' +
-    (window.location.host?.includes('localhost')
-      ? 'app.zignaly.com'
-      : window.location.host) +
-    generatePath(ROUTE_REFERRALS_INVITE_SHORT, { key: refCode });
+    baseUrl + generatePath(ROUTE_REFERRALS_INVITE_SHORT, { key: refCode });
 
   const openInviteModal = () =>
     showModal(ReferralInviteModal, { url: link, urlShort: shortLink });

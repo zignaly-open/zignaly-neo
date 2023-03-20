@@ -24,6 +24,7 @@ import copy from 'copy-to-clipboard';
 import { useToast } from '../../../util/hooks/useToast';
 import { ShareIconsContainer } from '../styles';
 import ReferralInviteImage from './ReferralInviteImage';
+import { downloadSvgElementAsImage } from 'util/images';
 
 const ReferralInviteModal: React.FC<
   ZDialogProps & { url: string; urlShort: string }
@@ -34,18 +35,12 @@ const ReferralInviteModal: React.FC<
 
   const imageWrapper = useRef<HTMLDivElement>();
   const toast = useToast();
-  const download = () => {
-    if (!imageWrapper.current) return;
-    const data = new XMLSerializer().serializeToString(
-      imageWrapper.current.querySelector('svg'),
+
+  const download = () =>
+    downloadSvgElementAsImage(
+      imageWrapper?.current?.querySelector('svg'),
+      'zignaly-invite.svg',
     );
-    const svgBlob = new Blob([data], { type: 'image/svg+xml;charset=utf-8' });
-    const a = document.createElement('a');
-    a.setAttribute('download', 'zignaly-invite.svg');
-    a.setAttribute('href', URL.createObjectURL(svgBlob));
-    a.setAttribute('target', '_blank');
-    a.click();
-  };
 
   const copyLink = () => {
     copy(url);
