@@ -21,10 +21,9 @@ import { useToast } from '../../../util/hooks/useToast';
 import { ShareIconsContainer } from '../styles';
 import ReferralInviteImage from './ReferralInviteImage';
 
-const ReferralInviteModal: React.FC<ZDialogProps & { url: string }> = ({
-  url,
-  ...props
-}) => {
+const ReferralInviteModal: React.FC<
+  ZDialogProps & { url: string; urlShort: string }
+> = ({ url, urlShort, ...props }) => {
   const { t } = useTranslation(['referrals', 'pages']);
   const [tab, setTab] = useState(0);
   const imageWrapper = useRef<HTMLDivElement>();
@@ -81,10 +80,10 @@ const ReferralInviteModal: React.FC<ZDialogProps & { url: string }> = ({
       </Box>
       <Box ref={imageWrapper} sx={{ mt: 2, mb: 2 }}>
         <ZigTabPanel value={tab} index={0}>
-          <ReferralInviteImage url={url} mode={'friend'} />
+          <ReferralInviteImage urlShort={urlShort} url={url} mode={'friend'} />
         </ZigTabPanel>
         <ZigTabPanel value={tab} index={1}>
-          <ReferralInviteImage url={url} mode={'trader'} />
+          <ReferralInviteImage urlShort={urlShort} url={url} mode={'trader'} />
         </ZigTabPanel>
       </Box>
 

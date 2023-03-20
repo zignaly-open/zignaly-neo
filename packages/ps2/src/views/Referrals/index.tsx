@@ -21,7 +21,10 @@ import { useCurrentUser } from '../../apis/user/use';
 import copy from 'copy-to-clipboard';
 import { useToast } from '../../util/hooks/useToast';
 import { generatePath } from 'react-router-dom';
-import { ROUTE_REFERRALS_INVITE } from '../../routes';
+import {
+  ROUTE_REFERRALS_INVITE,
+  ROUTE_REFERRALS_INVITE_SHORT,
+} from '../../routes';
 import { TotalBox } from './atoms';
 import { ReferralHistory, ReferralRewards } from '../../apis/referrals/types';
 import ReferralTable from './components/ReferralTable';
@@ -44,11 +47,20 @@ const Referrals: React.FC = () => {
     window.location.protocol +
     '//' +
     (window.location.host?.includes('localhost')
-      ? 'zignaly.com'
+      ? 'app.zignaly.com'
       : window.location.host) +
     generatePath(ROUTE_REFERRALS_INVITE, { key: refCode });
 
-  const openInviteModal = () => showModal(ReferralInviteModal, { url: link });
+  const shortLink =
+    window.location.protocol +
+    '//' +
+    (window.location.host?.includes('localhost')
+      ? 'app.zignaly.com'
+      : window.location.host) +
+    generatePath(ROUTE_REFERRALS_INVITE_SHORT, { key: refCode });
+
+  const openInviteModal = () =>
+    showModal(ReferralInviteModal, { url: link, urlShort: shortLink });
 
   return (
     <PageContainer style={{ maxWidth: '1200px' }}>

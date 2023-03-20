@@ -2,7 +2,7 @@ import React from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { QRCodeSVG } from 'qrcode.react';
 import { ZignalyLogotype } from '@zignaly-open/ui';
-import Envelope from '../../../images/invite-envelope.png';
+import { ReactComponent as Envelope } from '../../../images/envelope-main.svg';
 
 // hardcoded values
 // TODO: move to config along with the other hardcoded values for rewards
@@ -12,18 +12,19 @@ const depositReward = 20;
 // svg controls
 const qrCodeWidth = 100;
 const imageHeight = 600;
-const imageWidth = 500;
+const imageWidth = 480;
 const logoHeight = 70;
-const qrCodePadding = 15;
-const sidePadding = 40;
+const qrCodePadding = 10;
+const sidePadding = 35;
 const qrCodeBorderRadius = 10;
-const sectionRatio = 0.4;
+const sectionRatio = 0.45;
 const borderRadius = 15;
 
 const ReferralInviteImage: React.FC<{
   mode: 'trader' | 'friend';
   url: string;
-}> = ({ mode, url }) => {
+  urlShort: string;
+}> = ({ mode, url, urlShort }) => {
   const { t } = useTranslation(['referrals', 'pages']);
 
   return (
@@ -106,9 +107,9 @@ const ReferralInviteImage: React.FC<{
           <text
             key={`referral-cta-line-${i}`}
             x={sidePadding}
-            y={2 * sidePadding + logoHeight + 25 + i * 40}
+            y={2 * sidePadding + logoHeight + 43 + i * 50}
             fontFamily={"'Avenir Next', arial, sans-serif"}
-            fontSize={32}
+            fontSize={38}
             fontWeight={700}
             fill='url(#ctaGradient)'
           >
@@ -116,12 +117,11 @@ const ReferralInviteImage: React.FC<{
           </text>
         ))}
 
-      <image
+      <Envelope
         width={(imageWidth - 3 * sidePadding) / 3}
-        height={(imageWidth - 3 * sidePadding) / 3}
+        height={((imageWidth - 3 * sidePadding) / 3 / 291) * 259}
         x={((imageWidth - 3 * sidePadding) / 3) * 2 + 2 * sidePadding}
         y={2 * sidePadding + logoHeight}
-        href={Envelope}
       />
 
       <ZignalyLogotype
@@ -133,9 +133,9 @@ const ReferralInviteImage: React.FC<{
 
       <foreignObject
         x={sidePadding}
-        y={imageHeight / (1 + sectionRatio) - 70 - sidePadding}
+        y={imageHeight / (1 + sectionRatio) - 75 - sidePadding}
         width={imageWidth - 2 * sidePadding}
-        height={70}
+        height={90}
       >
         <div
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -157,6 +157,7 @@ const ReferralInviteImage: React.FC<{
               depositReward,
             }}
           >
+            <span style={{ color: '#a58fe5' }} />
             <span style={{ color: '#a58fe5' }} />
           </Trans>
         </div>
@@ -183,14 +184,14 @@ const ReferralInviteImage: React.FC<{
           }}
         >
           <div>
-            <span style={{ color: '#A9A9BA', fontSize: 18 }}>
+            <span style={{ color: '#A9A9BA', fontSize: 20 }}>
               {t('create-invite.scan-qr')}
             </span>
             <br />
-            <span style={{ color: '#6e4dbe', fontSize: 15 }}>
-              {url
+            <span style={{ color: '#a58fe5', fontSize: 14 }}>
+              {urlShort
                 .replace(/https?:\/\//, '')
-                .replace(/(?:test|staging)-app\./, '')}
+                .replace(/(?:test|staging)-app\./, 'app.')}
             </span>
           </div>
         </div>

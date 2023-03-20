@@ -97,8 +97,8 @@
         "create-invite": "Create Invite",
         "invite-friends": "Invite Friends",
         "invite-traders": "Invite Traders",
-        "deposit-cta": "Deposit ${{depositAmount}} and <0> we'll give you ${{depositReward}} </0> just for trying the platform",
-        "friend-cta": "Want to earn $20\nand a stream of\npassive income?",
+        "deposit-cta": "With a <1>${{depositAmount}} investment</1> you'll receive a bonus. Start investing <0>with just $1</0>.",
+        "friend-cta": "Sign up and\n get $20 in ZIG",
         "trader-cta": "Want to earn $20\nand a stream\nof investors?",
         "scan-qr": "Scan the QR code and join me on Zignaly!"
     },
