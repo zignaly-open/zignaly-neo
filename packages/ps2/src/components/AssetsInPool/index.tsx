@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { formatLocalizedDistance } from 'views/Dashboard/components/MyDashboard/util';
 
 const AssetsInPool = ({
+  prefixId,
   assetsValue,
   numberOfInvestors,
   convertedValue,
@@ -17,6 +18,7 @@ const AssetsInPool = ({
   return (
     <Box justifyContent='center' sx={{ gap: 2 }}>
       <PriceBoxOverride
+        id={prefixId && `${prefixId}__invested-amount`}
         sx={{
           display: 'flex',
           justifyContent: 'center',
@@ -38,7 +40,11 @@ const AssetsInPool = ({
       </PriceBoxOverride>
 
       {typeof numberOfInvestors === 'number' && (
-        <Box justifyContent='center' alignItems='start'>
+        <Box
+          justifyContent='center'
+          alignItems='start'
+          id={prefixId && `${prefixId}__number-investors`}
+        >
           <BlockTypography variant='h5' color='neutral400'>
             {t('table.x-investors', { count: numberOfInvestors })}
           </BlockTypography>
@@ -46,7 +52,11 @@ const AssetsInPool = ({
       )}
 
       {createdAt && (
-        <Box justifyContent='center' alignItems='start'>
+        <Box
+          justifyContent='center'
+          alignItems='start'
+          id={prefixId && `${prefixId}__created-at`}
+        >
           <BlockTypography variant='h5' color='neutral400'>
             {formatLocalizedDistance(new Date(), new Date(createdAt))}
           </BlockTypography>
@@ -54,7 +64,11 @@ const AssetsInPool = ({
       )}
 
       {typeof convertedValue === 'number' && (
-        <Box justifyContent='center' alignItems='start'>
+        <Box
+          justifyContent='center'
+          alignItems='start'
+          id={prefixId && `${prefixId}__converted`}
+        >
           <ZigPriceLabel
             value={convertedValue}
             coin={convertedValueCoin}
