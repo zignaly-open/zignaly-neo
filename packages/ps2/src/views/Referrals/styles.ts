@@ -98,12 +98,14 @@ export const OlList = styled('ol')`
 `;
 
 export const ShareIconsContainer = styled(Box)`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  display: grid;
   svg {
-    width: 40px;
+    min-width: 40px;
+    width: 100%;
     height: 40px;
+    margin-top: 6px;
+    margin-bottom: 6px;
     margin-left: 6px;
     margin-right: 6px;
     fill: url(#shareIconGradient);

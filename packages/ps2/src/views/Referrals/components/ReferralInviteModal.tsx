@@ -7,12 +7,16 @@ import {
   EmailShareButton,
   TwitterShareButton,
   TelegramShareButton,
+  LinkedinShareButton,
+  WhatsappShareButton,
 } from 'react-share';
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import DownloadIcon from '@mui/icons-material/DownloadForOffline';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import TelegramIcon from '@mui/icons-material/Telegram';
+import LinkedinIcon from '@mui/icons-material/LinkedIn';
+import WhatsappIcon from '@mui/icons-material/WhatsApp';
 import EmailIcon from '@mui/icons-material/Email';
 import { Box, Grid } from '@mui/material';
 import { ZigInput, ZigTab, ZigTabPanel, ZigTabs } from '@zignaly-open/ui';
@@ -48,9 +52,8 @@ const ReferralInviteModal: React.FC<
     toast.success(t('action:copied'));
   };
 
-  // @ts-ignore
   return (
-    <ZModal {...props} close={close}>
+    <ZModal wide {...props} close={close}>
       <ZigTabs
         sx={{
           margin: '0 auto',
@@ -71,7 +74,7 @@ const ReferralInviteModal: React.FC<
       </ZigTabs>
 
       <Grid container>
-        <Grid item xs={12} sm={8}>
+        <Grid item xs={12} sm={7}>
           <Box ref={imageWrapper}>
             <ZigTabPanel value={tab} index={0}>
               <ReferralInviteImage
@@ -92,7 +95,7 @@ const ReferralInviteModal: React.FC<
         <Grid
           item
           xs={12}
-          sm={4}
+          sm={5}
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -125,7 +128,8 @@ const ReferralInviteModal: React.FC<
             <ZigInput
               wide
               label={t('create-invite.customize-text')}
-              rows={3}
+              rows={8}
+              multiline
               value={text}
               onChange={(e) => setText(e.target.value)}
             />
@@ -137,20 +141,25 @@ const ReferralInviteModal: React.FC<
             <FacebookShareButton quote={t('share.facebook-title')} url={url}>
               <FacebookIcon />
             </FacebookShareButton>
-
+            <WhatsappShareButton url={url} title={text}>
+              <WhatsappIcon />
+            </WhatsappShareButton>
             <EmailShareButton
               subject={t('share.email-subject')}
-              body={t('share.email-body')}
+              body={text}
               url={url}
             >
               <EmailIcon />
             </EmailShareButton>
-            <TwitterShareButton url={url} title={t('share.twitter-title')}>
+            <TwitterShareButton url={url} title={text}>
               <TwitterIcon />
             </TwitterShareButton>
-            <TelegramShareButton url={url} title={t('share.telegram-title')}>
+            <TelegramShareButton url={url} title={text}>
               <TelegramIcon />
             </TelegramShareButton>
+            <LinkedinShareButton url={url} title={text}>
+              <LinkedinIcon />
+            </LinkedinShareButton>
           </ShareIconsContainer>
         </Grid>
       </Grid>
