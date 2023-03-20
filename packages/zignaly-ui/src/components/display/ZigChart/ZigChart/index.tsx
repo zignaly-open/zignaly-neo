@@ -86,7 +86,6 @@ const ZigChart = ({
             tickLabelComponent={<VictoryLabel textAnchor="end" text={getChartLabel} />}
             dependentAxis
             style={axisStyle}
-            fixLabelOverlap
           />
 
           {(events || []).map(({ x, label }) => (
