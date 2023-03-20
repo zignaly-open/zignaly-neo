@@ -14,7 +14,10 @@ import { LoaderWrapper } from './styles';
 import { MarketplaceActionType } from './types';
 import BigNumber from 'bignumber.js';
 
-const MarketplaceAction = ({ service }: MarketplaceActionType) => {
+const MarketplaceAction = ({
+  service,
+  prefixId = 'marketplace-table',
+}: MarketplaceActionType) => {
   const exchange = useActiveExchange();
   const isAuthenticated = useIsAuthenticated();
 
@@ -42,14 +45,14 @@ const MarketplaceAction = ({ service }: MarketplaceActionType) => {
           <>
             {isAuthenticated && investedAmount ? (
               <InvestedButtonBase
-                id={`marketplace-table__edit-${traderService.id}`}
+                id={`${prefixId}__edit-${traderService.id}`}
                 ctaId={'marketplace-invested-button'}
                 service={traderService}
                 investedAmount={investedAmount.toString()}
               />
             ) : (
               <InvestButton
-                id={`marketplace-table__invest-${traderService.id}`}
+                id={`${prefixId}__invest-${traderService.id}`}
                 service={traderService}
                 ctaId={'marketplace-invest-button'}
               />

@@ -117,7 +117,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         </Box>
       </Box>
       <ButtonContainer>
-        <MarketplaceAction service={service} />
+        <MarketplaceAction service={service} prefixId='marketplace-card' />
       </ButtonContainer>
     </Card>
   );
