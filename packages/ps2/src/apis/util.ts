@@ -26,12 +26,12 @@ export const providesList = <
  */
 export const injectEndpoints = <
   T extends typeof baseApiPs2,
-  P extends EndpointDefinitions,
+  E extends EndpointDefinitions,
 >(
   base: T,
   endpoints: (
-    a: Parameters<Parameters<T['injectEndpoints']>[0]['endpoints']>[0],
-  ) => P,
+    b: Parameters<Parameters<T['injectEndpoints']>[0]['endpoints']>[0],
+  ) => E,
 ) => {
   const evaluatedEndpoints = endpoints({
     query: () => null,
