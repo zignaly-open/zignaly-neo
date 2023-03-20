@@ -11,6 +11,8 @@ export function downloadSvgElementAsImage(
   name: string,
 ) {
   if (!svg) return;
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   const data = new XMLSerializer().serializeToString(svg);
   const svgBlob = new Blob([data], { type: 'image/svg+xml;charset=utf-8' });
   const a = document.createElement('a');
