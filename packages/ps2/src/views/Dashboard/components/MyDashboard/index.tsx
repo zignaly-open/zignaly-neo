@@ -58,7 +58,7 @@ const MyDashboard: React.FC = () => {
           const totalValue = bigNumberInvestment.plus(bigNumberPending);
           return (
             <BalanceSummary
-              id={`portfolio-row__edit-${original.serviceId}`}
+              serviceId={original.serviceId.toString()}
               totalValue={totalValue.toFixed()}
               coin={original.ssc}
               profit={new BigNumber(original.pnlSumLc).toFixed()}
@@ -160,7 +160,9 @@ const MyDashboard: React.FC = () => {
   return (
     <Layout>
       <Heading>
-        <ZigTypography variant='h1'>{t('title')}</ZigTypography>
+        <ZigTypography variant='h1' id={'my-portfolio__title'}>
+          {t('title')}
+        </ZigTypography>
       </Heading>
       <LayoutContentWrapper
         endpoint={investmentsEndpoint}

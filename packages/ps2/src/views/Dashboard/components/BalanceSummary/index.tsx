@@ -6,13 +6,13 @@ import { BalanceSummaryProps } from './types';
 import {
   PencilIcon,
   TextButton,
-  Typography,
+  ZigTypography,
   ZigPriceLabel,
 } from '@zignaly-open/ui';
 import { getColorForNumber } from '../../../../util/numbers';
 
 export const BalanceSummary = ({
-  id,
+  serviceId,
   totalValue,
   profit,
   coin = 'USDT',
@@ -21,9 +21,9 @@ export const BalanceSummary = ({
 }: BalanceSummaryProps) => {
   const { t } = useTranslation(['table', 'action']);
   return (
-    <Layout>
+    <Layout id={`portfolio-table__invested-${serviceId}`}>
       {dashboardType === 'marketplace' ? (
-        <Typography>{t('balanceSummary.invested')}</Typography>
+        <ZigTypography>{t('balanceSummary.invested')}</ZigTypography>
       ) : (
         <ZigPriceLabel
           value={new BigNumber(totalValue).toFixed()}
@@ -32,9 +32,9 @@ export const BalanceSummary = ({
       )}
       {isNaN(+profit) || profit === '' ? (
         // eslint-disable-next-line i18next/no-literal-string
-        <Typography variant={'body2'} color={'neutral400'}>
+        <ZigTypography variant={'body2'} color={'neutral400'}>
           -
-        </Typography>
+        </ZigTypography>
       ) : (
         <ZigPriceLabel
           value={profit}
@@ -43,7 +43,7 @@ export const BalanceSummary = ({
         />
       )}
       <TextButton
-        id={id}
+        id={`portfolio-table__edit-${serviceId}`}
         leftElement={<PencilIcon color='#65647E' width={16} height={16} />}
         caption={t('action:edit')}
         color={'links'}
