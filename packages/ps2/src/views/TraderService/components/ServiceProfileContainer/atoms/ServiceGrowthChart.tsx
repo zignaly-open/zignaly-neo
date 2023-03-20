@@ -81,7 +81,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
     !isFetching;
   const value = data?.summary;
 
-  const isPerc = [
+  const isPercent = [
     GraphChartType.pnl_pct_compound,
     GraphChartType.at_risk_pct,
   ].includes(chartType);
@@ -230,7 +230,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
               `${v
                 .toString()
                 .replace(/000000$/, 'M')
-                .replace(/000$/, 'K')}${isPerc ? `%` : ``}`
+                .replace(/000$/, 'K')}${isPercent ? `%` : ``}`
             }
             data={data?.data}
             tooltipFormatter={(v) =>
@@ -238,7 +238,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                 (v as typeof v & { date?: Date }).date,
                 'PP',
               )}\n${numericFormatter(v.y.toString(), {
-                ...(isPerc
+                ...(isPercent
                   ? {
                       decimalScale: 2,
                       suffix: '%',

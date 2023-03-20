@@ -16,13 +16,11 @@ const ChartGradients = () => (
         <stop offset="100%" stopColor={"rgba(39, 110, 107, 1)"} />
       </linearGradient>
       <linearGradient id={ChartGradientColor.RedCard} x1="0" y1="1" x2="0" y2="0">
-        {/* <stop offset="0%" stopColor="rgba(46, 0, 28, 0.32)" stopOpacity="0.76" /> */}
         <stop offset="0%" stopColor="rgba(37, 15, 38, 0.38)" stopOpacity="0.76" />
         <stop offset="32%" stopColor="rgba(46, 0, 28, 0.44)" stopOpacity="0.76" />
         <stop offset="100%" stopColor="rgba(204, 57, 147, 0.69)" stopOpacity="0.76" />
       </linearGradient>
       <linearGradient id={ChartGradientColor.GreenCard} x1="0" y1="1" x2="0" y2="0">
-        {/* <stop offset="0%" stopColor="rgba(0, 45, 20, 0.74)" stopOpacity="0.76" /> */}
         <stop offset="0%" stopColor="rgba(16, 33, 33, 0.68)" stopOpacity="0.76" />
         <stop offset="32%" stopColor="rgba(0, 45, 20, 0.44)" stopOpacity="0.76" />
         <stop offset="53%" stopColor="rgba(7, 47, 30, 0.44)" stopOpacity="0.76" />
