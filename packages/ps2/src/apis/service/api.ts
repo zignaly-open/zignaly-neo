@@ -82,7 +82,7 @@ export const api = baseApiPs2.injectEndpoints({
         body: payload,
       }),
     }),
-    serviceTypesInfo: builder.query<ServiceTypesInfo, void>({
+    traderServiceTypesInfo: builder.query<ServiceTypesInfo, void>({
       query: () => ({
         url: `service-types`,
       }),
@@ -121,7 +121,7 @@ export const {
   useTraderServiceGraphQuery,
   useTraderServiceManagementQuery,
   useCreateTraderServiceMutation,
-  useServiceTypesInfoQuery,
+  useTraderServiceTypesInfoQuery,
   useTraderServiceUpdateScaMinimumMutation,
   useLazyTraderServicesQuery,
   useTraderServiceTransferFundsMutation,
