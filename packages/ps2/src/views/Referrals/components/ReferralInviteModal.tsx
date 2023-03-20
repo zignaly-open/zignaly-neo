@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ZModal from '../../../components/ZModal';
 import { ZDialogProps } from '../../../components/ZModal/types';
@@ -19,6 +19,7 @@ import { ZigTab, ZigTabPanel, ZigTabs } from '@zignaly-open/ui';
 import copy from 'copy-to-clipboard';
 import { useToast } from '../../../util/hooks/useToast';
 import { ShareIconsContainer } from '../styles';
+import ReferralInviteImage from './ReferralInviteImage';
 
 const ReferralInviteModal: React.FC<ZDialogProps & { url: string }> = ({
   url,
@@ -26,14 +27,28 @@ const ReferralInviteModal: React.FC<ZDialogProps & { url: string }> = ({
 }) => {
   const { t } = useTranslation(['referrals', 'pages']);
   const [tab, setTab] = useState(0);
+  const imageWrapper = useRef<HTMLDivElement>();
   const toast = useToast();
-  const download = () => alert();
+  const download = () => {
+    if (!imageWrapper.current) return;
+    const data = new XMLSerializer().serializeToString(
+      imageWrapper.current.querySelector('svg'),
+    );
+    const svgBlob = new Blob([data], { type: 'image/svg+xml;charset=utf-8' });
+    const a = document.createElement('a');
+    a.setAttribute('download', 'zignaly-invite.svg');
+    a.setAttribute('href', URL.createObjectURL(svgBlob));
+    a.setAttribute('target', '_blank');
+    a.click();
+  };
+
   const copyLink = () => {
     copy(url);
     toast.success(t('action:copied'));
   };
+
   return (
-    <ZModal wide {...props} close={close}>
+    <ZModal {...props} close={close}>
       <Box
         sx={{
           margin: '0 auto',
@@ -64,12 +79,14 @@ const ReferralInviteModal: React.FC<ZDialogProps & { url: string }> = ({
           />
         </ZigTabs>
       </Box>
-      <ZigTabPanel value={tab} index={0}>
-        Hui
-      </ZigTabPanel>
-      <ZigTabPanel value={tab} index={1}>
-        Pizda
-      </ZigTabPanel>
+      <Box ref={imageWrapper} sx={{ mt: 2, mb: 2 }}>
+        <ZigTabPanel value={tab} index={0}>
+          <ReferralInviteImage url={url} mode={'friend'} />
+        </ZigTabPanel>
+        <ZigTabPanel value={tab} index={1}>
+          <ReferralInviteImage url={url} mode={'trader'} />
+        </ZigTabPanel>
+      </Box>
 
       <ShareIconsContainer>
         <DownloadIcon sx={{ cursor: 'pointer' }} onClick={download} />
