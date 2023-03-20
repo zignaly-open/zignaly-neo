@@ -102,8 +102,8 @@ export const ShareIconsContainer = styled(Box)`
   flex-direction: row;
   justify-content: center;
   svg {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     margin-left: 6px;
     margin-right: 6px;
     fill: url(#shareIconGradient);

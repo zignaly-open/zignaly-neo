@@ -14,8 +14,8 @@ import DownloadIcon from '@mui/icons-material/DownloadForOffline';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import EmailIcon from '@mui/icons-material/Email';
-import { Box } from '@mui/material';
-import { ZigTab, ZigTabPanel, ZigTabs } from '@zignaly-open/ui';
+import { Box, Grid } from '@mui/material';
+import { ZigInput, ZigTab, ZigTabPanel, ZigTabs } from '@zignaly-open/ui';
 import copy from 'copy-to-clipboard';
 import { useToast } from '../../../util/hooks/useToast';
 import { ShareIconsContainer } from '../styles';
@@ -26,6 +26,8 @@ const ReferralInviteModal: React.FC<
 > = ({ url, urlShort, ...props }) => {
   const { t } = useTranslation(['referrals', 'pages']);
   const [tab, setTab] = useState(0);
+  const [text, setText] = useState<string>(t('create-invite.invite-text'));
+
   const imageWrapper = useRef<HTMLDivElement>();
   const toast = useToast();
   const download = () => {
@@ -46,68 +48,112 @@ const ReferralInviteModal: React.FC<
     toast.success(t('action:copied'));
   };
 
+  // @ts-ignore
   return (
     <ZModal {...props} close={close}>
-      <Box
+      <ZigTabs
         sx={{
           margin: '0 auto',
-          pl: 3,
-          pr: 3,
         }}
+        onChange={(_, newValue) => {
+          setTab(newValue);
+        }}
+        value={tab}
       >
-        <svg width={0} height={0}>
-          <linearGradient id='shareIconGradient' x1={1} y1={0} x2={1} y2={1}>
-            <stop offset={0} stopColor='#149cad' />
-            <stop offset={1} stopColor='#4540c1' />
-          </linearGradient>
-        </svg>
+        <ZigTab
+          label={t('create-invite.invite-friends')}
+          id={'create-invite__friends'}
+        />
+        <ZigTab
+          label={t('create-invite.invite-traders')}
+          id={'create-invite__traders'}
+        />
+      </ZigTabs>
 
-        <ZigTabs
-          onChange={(_, newValue) => {
-            setTab(newValue);
+      <Grid container>
+        <Grid item xs={12} sm={8}>
+          <Box ref={imageWrapper}>
+            <ZigTabPanel value={tab} index={0}>
+              <ReferralInviteImage
+                urlShort={urlShort}
+                url={url}
+                mode={'friend'}
+              />
+            </ZigTabPanel>
+            <ZigTabPanel value={tab} index={1}>
+              <ReferralInviteImage
+                urlShort={urlShort}
+                url={url}
+                mode={'trader'}
+              />
+            </ZigTabPanel>
+          </Box>
+        </Grid>
+        <Grid
+          item
+          xs={12}
+          sm={4}
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '30px',
+            justifyContent: 'center',
           }}
-          value={tab}
         >
-          <ZigTab
-            label={t('create-invite.invite-friends')}
-            id={'create-invite__friends'}
-          />
-          <ZigTab
-            label={t('create-invite.invite-traders')}
-            id={'create-invite__traders'}
-          />
-        </ZigTabs>
-      </Box>
-      <Box ref={imageWrapper} sx={{ mt: 2, mb: 2 }}>
-        <ZigTabPanel value={tab} index={0}>
-          <ReferralInviteImage urlShort={urlShort} url={url} mode={'friend'} />
-        </ZigTabPanel>
-        <ZigTabPanel value={tab} index={1}>
-          <ReferralInviteImage urlShort={urlShort} url={url} mode={'trader'} />
-        </ZigTabPanel>
-      </Box>
+          <Box
+            sx={{
+              margin: '0 auto',
+              pl: 3,
+              pr: 3,
+            }}
+          >
+            <svg width={0} height={0}>
+              <linearGradient
+                id='shareIconGradient'
+                x1={1}
+                y1={0}
+                x2={1}
+                y2={1}
+              >
+                <stop offset={0} stopColor='#149cad' />
+                <stop offset={1} stopColor='#4540c1' />
+              </linearGradient>
+            </svg>
+          </Box>
 
-      <ShareIconsContainer>
-        <DownloadIcon sx={{ cursor: 'pointer' }} onClick={download} />
-        <InsertLinkIcon sx={{ cursor: 'pointer' }} onClick={copyLink} />
-        <FacebookShareButton quote={t('share.facebook-title')} url={url}>
-          <FacebookIcon />
-        </FacebookShareButton>
+          <Box>
+            <ZigInput
+              wide
+              label={t('create-invite.customize-text')}
+              rows={3}
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+            />
+          </Box>
 
-        <EmailShareButton
-          subject={t('share.email-subject')}
-          body={t('share.email-body')}
-          url={url}
-        >
-          <EmailIcon />
-        </EmailShareButton>
-        <TwitterShareButton url={url} title={t('share.twitter-title')}>
-          <TwitterIcon />
-        </TwitterShareButton>
-        <TelegramShareButton url={url} title={t('share.telegram-title')}>
-          <TelegramIcon />
-        </TelegramShareButton>
-      </ShareIconsContainer>
+          <ShareIconsContainer>
+            <DownloadIcon sx={{ cursor: 'pointer' }} onClick={download} />
+            <InsertLinkIcon sx={{ cursor: 'pointer' }} onClick={copyLink} />
+            <FacebookShareButton quote={t('share.facebook-title')} url={url}>
+              <FacebookIcon />
+            </FacebookShareButton>
+
+            <EmailShareButton
+              subject={t('share.email-subject')}
+              body={t('share.email-body')}
+              url={url}
+            >
+              <EmailIcon />
+            </EmailShareButton>
+            <TwitterShareButton url={url} title={t('share.twitter-title')}>
+              <TwitterIcon />
+            </TwitterShareButton>
+            <TelegramShareButton url={url} title={t('share.telegram-title')}>
+              <TelegramIcon />
+            </TelegramShareButton>
+          </ShareIconsContainer>
+        </Grid>
+      </Grid>
     </ZModal>
   );
 };
