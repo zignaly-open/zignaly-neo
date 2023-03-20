@@ -7,7 +7,6 @@ import { ReactComponent as Envelope } from '../../../images/envelope-main.svg';
 // hardcoded values
 // TODO: move to config along with the other hardcoded values for rewards
 const depositAmount = 100;
-const depositReward = 20;
 
 // svg controls
 const qrCodeWidth = 100;
@@ -105,6 +104,7 @@ const ReferralInviteImage: React.FC<{
         .split('\n')
         .map((text, i) => (
           <text
+            // eslint-disable-next-line react/no-array-index-key
             key={`referral-cta-line-${i}`}
             x={sidePadding}
             y={2 * sidePadding + logoHeight + 43 + i * 50}
@@ -154,7 +154,6 @@ const ReferralInviteImage: React.FC<{
             t={t}
             values={{
               depositAmount,
-              depositReward,
             }}
           >
             <span style={{ color: '#a58fe5' }} />
@@ -189,6 +188,7 @@ const ReferralInviteImage: React.FC<{
             </span>
             <br />
             <span style={{ color: '#a58fe5', fontSize: 14 }}>
+              {/*this is needed to have a link that fits when we're testing*/}
               {urlShort
                 .replace(/https?:\/\//, '')
                 .replace(/(?:test|staging)-app\./, 'app.')}
