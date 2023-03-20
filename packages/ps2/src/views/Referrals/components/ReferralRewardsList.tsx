@@ -3,6 +3,7 @@ import { Box, Grid } from '@mui/material';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import {
   GetWhatYouDeserveLabel,
+  OlList,
   RewardsListContainer,
   TotalBoxValue,
   UlList,
@@ -12,13 +13,19 @@ import { Trans, useTranslation } from 'react-i18next';
 import { ReferralRewards } from '../../../apis/referrals/types';
 import { useZAlert } from '../../../components/ZModal/use';
 
+const hardcodedInviteeReward = {
+  value: 20,
+  coin: 'ZIG',
+  threshold: 100,
+};
+
 const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
   rewards,
 }) => {
   const { t } = useTranslation(['referrals', 'pages']);
   const { configuration: config } = rewards;
   const showModal = useZAlert();
-  const elements = useMemo(
+  const elementsYou = useMemo(
     () =>
       [
         config.enableSuccessFeeReward && !!config.zignalySuccessFee && (
@@ -92,13 +99,15 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         ),
         !!config.rewardTotalAllocationAmount && (
           <Trans
-            i18nKey='referrals:invite-for-investment'
+            i18nKey={`referrals:invite-for-total-investment${
+              config.rewardMinTotalAllocationDays ? '-days' : ''
+            }`}
             t={t}
             values={{
               value: config.rewardTotalAllocationAmount,
               symbol: config.rewardTotalAllocationSymbol,
               threshold: config.rewardMinTotalAllocationAmount,
-              days: config.rewardMinTotalAllocationDays,
+              count: config.rewardMinTotalAllocationDays,
             }}
           >
             <ZigTypography />
@@ -154,30 +163,81 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
     [config, t],
   );
 
+  const elementsThem = useMemo(
+    () => [
+      config.enableSuccessFeeReward && !!config.zignalySuccessFee && (
+        <Trans
+          i18nKey='referrals:they-get-invest'
+          t={t}
+          values={hardcodedInviteeReward}
+        >
+          {/*desparate times call for desperate measures*/}
+          <ZigTypography sx={{ opacity: 0 }} />
+          <TotalBoxValue />
+          <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
+        </Trans>
+      ),
+    ],
+    [config, t],
+  );
+
+  // I never thought I'd die fighting side by side with an trader
+  const showFeesExplainerTrader =
+    (config.enableSuccessFeeReward && !!config.traderSuccessFee) ||
+    (config.enableRebateFeeReward && !!config.traderRebateFee);
+  // What about side by side with a friend?
+  const showFeesExplainerFriend =
+    (config.enableSuccessFeeReward && !!config.zignalySuccessFee) ||
+    (config.enableRebateFeeReward && !!config.zignalyRebateFee);
+  // Aye, I could do that
+  const feesExplainer = (
+    // there should have been a tooltip there
+    // I fought for this tooltip, and I lost that battle
+    // eslint-disable-next-line i18next/no-literal-string
+    <ZigTypography color={'neutral300'}> (*)</ZigTypography>
+  );
+  const feesExplainerBottom = (
+    <ZigTypography
+      variant={'caption'}
+      color={'neutral400'}
+      component={'div'}
+      sx={{ ml: 2.5, mt: 1 }}
+    >
+      {/* eslint-disable-next-line i18next/no-literal-string */}*{' '}
+      {t('terms.fees')}
+    </ZigTypography>
+  );
+
   const modalFriendElements = useMemo(
     () =>
       [
         config.enableSuccessFeeReward && !!config.zignalySuccessFee && (
-          <Trans
-            i18nKey='referrals:invite-friends-for-percent-modal'
-            t={t}
-            values={{
-              value: config.zignalySuccessFee,
-            }}
-          >
-            <ZigTypography fontWeight={600} color={'neutral100'} />
-          </Trans>
+          <>
+            <Trans
+              i18nKey='referrals:invite-friends-for-percent-modal'
+              t={t}
+              values={{
+                value: config.zignalySuccessFee,
+              }}
+            >
+              <ZigTypography fontWeight={600} color={'neutral100'} />
+            </Trans>
+            {feesExplainer}
+          </>
         ),
-        !config.enableRebateFeeReward && !!config.zignalyRebateFee && (
-          <Trans
-            i18nKey='referrals:invite-friends-for-percent-rebate-modal'
-            t={t}
-            values={{
-              value: config.zignalyRebateFee,
-            }}
-          >
-            <ZigTypography fontWeight={600} color={'neutral100'} />
-          </Trans>
+        config.enableRebateFeeReward && !!config.zignalyRebateFee && (
+          <>
+            <Trans
+              i18nKey='referrals:invite-friends-for-percent-rebate-modal'
+              t={t}
+              values={{
+                value: config.zignalyRebateFee,
+              }}
+            >
+              <ZigTypography fontWeight={600} color={'neutral100'} />
+            </Trans>
+            {feesExplainer}
+          </>
         ),
         !!config.rewardOneAllocationAmount && (
           <Trans
@@ -194,13 +254,15 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         ),
         !!config.rewardTotalAllocationAmount && (
           <Trans
-            i18nKey='referrals:invite-for-investment-modal'
+            i18nKey={`referrals:invite-for-total-investment-modal${
+              config.rewardMinTotalAllocationDays ? '-days' : ''
+            }`}
             t={t}
             values={{
               value: config.rewardTotalAllocationAmount,
               symbol: config.rewardTotalAllocationSymbol,
               threshold: config.rewardMinTotalAllocationAmount,
-              days: config.rewardMinTotalAllocationDays,
+              count: config.rewardMinTotalAllocationDays,
             }}
           >
             <ZigTypography fontWeight={600} color={'neutral100'} />
@@ -254,28 +316,48 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
     () =>
       [
         config.enableSuccessFeeReward && !!config.traderSuccessFee && (
-          <Trans
-            i18nKey='referrals:invite-traders-for-percent-modal'
-            t={t}
-            values={{
-              value: config.traderSuccessFee,
-            }}
-          >
-            <ZigTypography fontWeight={600} color={'neutral100'} />
-          </Trans>
+          <>
+            <Trans
+              i18nKey='referrals:invite-traders-for-percent-modal'
+              t={t}
+              values={{
+                value: config.traderSuccessFee,
+              }}
+            >
+              <ZigTypography fontWeight={600} color={'neutral100'} />
+            </Trans>
+            {feesExplainer}
+          </>
         ),
-        !config.enableRebateFeeReward && !!config.traderRebateFee && (
-          <Trans
-            i18nKey='referrals:invite-traders-for-percent-rebate-modal'
-            t={t}
-            values={{
-              value: config.traderRebateFee,
-            }}
-          >
-            <ZigTypography fontWeight={600} color={'neutral100'} />
-          </Trans>
+        config.enableRebateFeeReward && !!config.traderRebateFee && (
+          <>
+            <Trans
+              i18nKey='referrals:invite-traders-for-percent-rebate-modal'
+              t={t}
+              values={{
+                value: config.traderRebateFee,
+              }}
+            >
+              <ZigTypography fontWeight={600} color={'neutral100'} />
+            </Trans>
+            {feesExplainer}
+          </>
         ),
       ].filter(Boolean),
+    [config, t],
+  );
+
+  const modalThemElements = useMemo(
+    () => [
+      <Trans
+        key='they-get-invest-modal'
+        i18nKey='they-get-invest-modal'
+        t={t}
+        values={hardcodedInviteeReward}
+      >
+        <ZigTypography fontWeight={600} color={'neutral100'} />
+      </Trans>,
+    ],
     [config, t],
   );
 
@@ -284,9 +366,9 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
       title: t('full-rewards-title'),
       okLabel: t('common:ok'),
       description: (
-        <>
+        <Box sx={{ maxWidth: 650 }}>
           {!!modalFriendElements.length && (
-            <Box sx={{ mb: 2 }}>
+            <Box sx={{ mb: 4 }}>
               <ZigTypography variant={'h3'}>
                 {t('when-invite-friends')}
               </ZigTypography>
@@ -295,10 +377,12 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
                   <li key={Math.random()}>{x}</li>
                 ))}
               </UlList>
+              {showFeesExplainerFriend && feesExplainerBottom}
             </Box>
           )}
+
           {!!modalTraderElements.length && (
-            <Box sx={{ mb: 2 }}>
+            <Box sx={{ mb: 4 }}>
               <ZigTypography variant={'h3'}>
                 {t('when-invite-traders')}
               </ZigTypography>
@@ -307,21 +391,52 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
                   <li key={Math.random()}>{x}</li>
                 ))}
               </UlList>
+
+              {showFeesExplainerTrader && feesExplainerBottom}
             </Box>
           )}
-        </>
+
+          {!!modalThemElements.length && (
+            <Box sx={{ mb: 4 }}>
+              <ZigTypography variant={'h3'}>{t('invitee-gets')}</ZigTypography>
+              <UlList>
+                {modalThemElements.map((x) => (
+                  <li key={Math.random()}>{x}</li>
+                ))}
+              </UlList>
+            </Box>
+          )}
+
+          <Box sx={{ mb: 4 }}>
+            <ZigTypography variant={'h3'}>{t('terms.title')}</ZigTypography>
+            <OlList>
+              <li>{t('terms.1')}</li>
+              <li>{t('terms.2')}</li>
+              <li>{t('terms.3')}</li>
+              <li>{t('terms.4')}</li>
+            </OlList>
+          </Box>
+        </Box>
       ),
     });
-  }, [elements]);
+  }, [elementsYou]);
+
+  const cols =
+    elementsYou.slice(0, 2).length + elementsThem.slice(0, 1).length + 1;
   return (
     <RewardsListContainer
       container
       sx={{
         mt: 4,
         mb: 4,
+        justifyContent: 'left',
       }}
     >
-      <Grid item xs={12} md={9}>
+      <Grid
+        item
+        xs={12}
+        md={Math.min(4, 12 / cols) * elementsYou.slice(0, 2).length}
+      >
         <ZigTypography
           variant={'h1'}
           textAlign={'center'}
@@ -329,33 +444,61 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         >
           {t('what-you-get')}
         </ZigTypography>
-
-        <Grid
-          container
-          sx={{
-            justifyContent: 'center',
-          }}
-        >
-          {elements.slice(0, 3).map((x, _, all) => (
-            <Grid
-              key={Math.random()}
-              item
-              xs={12}
-              p={1}
-              md={Math.min(4, 12 / all.length)}
-            >
-              <GetWhatYouDeserveLabel>{x}</GetWhatYouDeserveLabel>
-            </Grid>
-          ))}
-        </Grid>
       </Grid>
+
       <Grid
         item
         xs={12}
-        md={3}
-        p={1}
+        md={Math.min(4, 12 / cols) * elementsThem.slice(0, 1).length}
+      >
+        <ZigTypography
+          variant={'h1'}
+          textAlign={'center'}
+          sx={{ mt: 2, mb: 2.5 }}
+        >
+          {t('what-they-get')}
+        </ZigTypography>
+      </Grid>
+
+      <Grid item xs={12} />
+
+      {elementsYou.slice(0, 2).map((x) => (
+        <Grid
+          key={Math.random()}
+          item
+          xs={12}
+          pl={3}
+          pr={3}
+          md={Math.min(4, 12 / cols)}
+        >
+          <GetWhatYouDeserveLabel>{x}</GetWhatYouDeserveLabel>
+        </Grid>
+      ))}
+
+      {elementsThem.slice(0, 1).map((x) => (
+        <Grid
+          key={Math.random()}
+          item
+          xs={12}
+          pl={3}
+          pr={3}
+          sx={{
+            borderLeft: (theme) => `1px solid ${theme.palette.neutral700}`,
+          }}
+          md={Math.min(4, 12 / cols)}
+        >
+          <GetWhatYouDeserveLabel>{x}</GetWhatYouDeserveLabel>
+        </Grid>
+      ))}
+
+      <Grid
+        item
+        xs={12}
+        md={Math.min(4, 12 / cols)}
+        pl={3}
+        pr={3}
         sx={{
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'center',
           display: 'flex',
         }}
@@ -363,7 +506,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         <ZigButton
           variant='outlined'
           size={'large'}
-          sx={{ mb: 3, mt: 3 }}
+          sx={{ mb: 3, mt: '28px', color: (theme) => theme.palette.neutral175 }}
           onClick={showFullRewards}
         >
           {t('full-rewards')}

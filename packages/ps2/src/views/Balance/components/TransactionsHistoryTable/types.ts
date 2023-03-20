@@ -5,6 +5,7 @@ export const TRANSACTION_TYPE_NAME = {
   [TRANSACTION_TYPE.WITHDRAW]: 'type.withdrawal',
   [TRANSACTION_TYPE.PS_DEPOSIT]: 'type.psDeposit',
   [TRANSACTION_TYPE.PS_WITHDRAW]: 'type.psWithdraw',
+  [TRANSACTION_TYPE.REWARD]: 'type.reward',
   [TRANSACTION_TYPE.PS2]: 'type.ps2',
   [TRANSACTION_TYPE.PSDS]: 'type.psds',
   [TRANSACTION_TYPE.BUYZIG]: 'type.buyZig',

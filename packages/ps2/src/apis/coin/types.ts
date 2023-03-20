@@ -66,6 +66,8 @@ export const TRANSACTION_TYPE = {
   DEPOSIT: 'deposit',
   // Withdrawal from a Zignaly exchange account to an external address
   WITHDRAW: 'withdrawal',
+  // Referral reward
+  REWARD: 'reward',
   // Investment in a PS1 service
   PS_DEPOSIT: 'psDeposit',
   // Investment out from a PS1 service
@@ -85,6 +87,8 @@ export type TransactionType = keyof typeof TRANSACTION_TYPE;
 
 export const enum TransactionStateType {
   COMPLETED = 'completed',
+  SENT = 'sent',
+  TRANSFER = 'transfer',
   PENDING = 'pending',
   ERROR = 'error',
 }
