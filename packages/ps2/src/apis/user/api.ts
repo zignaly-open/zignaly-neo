@@ -218,6 +218,7 @@ export const {
   useActivateExchangeMutation,
   useVerify2FAMutation,
   useVerifyCodeMutation,
+  useSessionQuery,
   useVerifyCodeNewUserMutation,
   useVerifyKnownDeviceMutation,
   useSetLocaleMutation,
