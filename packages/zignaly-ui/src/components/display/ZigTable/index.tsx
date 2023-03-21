@@ -74,7 +74,17 @@ export default function ZigTable<T extends object>({
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header, index) => {
                   return (
-                    <th key={header.id} colSpan={header.colSpan}>
+                    <th
+                      key={header.id}
+                      colSpan={header.colSpan}
+                      id={
+                        prefixId &&
+                        header?.column?.columnDef?.header &&
+                        `${prefixId}-table__header-${header.column.columnDef.header
+                          .toString()
+                          .replace(/ /g, "")}`
+                      }
+                    >
                       {header.isPlaceholder ? null : (
                         <Box display="flex" justifyContent="center" alignItems="center">
                           <SortBox
