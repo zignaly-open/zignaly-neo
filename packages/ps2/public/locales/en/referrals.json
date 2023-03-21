@@ -105,7 +105,7 @@
         "invite-text": "Invite your friends to Zignaly and earn a $20 bonus when they make their first investment of $100 or more. You'll also earn a 20% commission on all their trades.",
         "scan-join": "Scan the QR code and join me on <0>app.zignaly.com</0>",
         "invite-code": "Code: <0>{{code}}</0>",
-        "ugly-friend-cta": "Sign up for Zignaly and receive <0>$20</0> in ZIG",
+        "ugly-friend-cta": "Sign up for Zignaly and receive <0>${{reward}}</0> in ZIG",
         "ugly-trader-cta": "Sign up for Zignaly and get a <0>Lamborghini</0> (no)"
     },
     "share": {

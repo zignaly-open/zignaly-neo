@@ -3,10 +3,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { QRCodeSVG } from 'qrcode.react';
 import { ReactComponent as InviteTemplate } from '../../../images/invite-template.svg';
 import { useCurrentUser } from '../../../apis/user/use';
-
-// hardcoded values
-// TODO: move to config along with the other hardcoded values for rewards
-const depositAmount = 100;
+import { hardcodedInviteeReward } from '../constants';
 
 // svg controls
 const qrCodeWidth = 125;
@@ -78,7 +75,8 @@ const ReferralInviteImage: React.FC<{
             i18nKey={'create-invite.ugly-' + mode + '-cta'}
             t={t}
             values={{
-              depositAmount,
+              depositAmount: hardcodedInviteeReward.threshold,
+              reward: hardcodedInviteeReward.value,
             }}
           >
             <span style={{ color: '#ACB6FF' }} />
@@ -107,7 +105,7 @@ const ReferralInviteImage: React.FC<{
             i18nKey={'create-invite.deposit-cta'}
             t={t}
             values={{
-              depositAmount,
+              depositAmount: hardcodedInviteeReward.threshold,
             }}
           >
             <span style={{ fontWeight: 700 }} />

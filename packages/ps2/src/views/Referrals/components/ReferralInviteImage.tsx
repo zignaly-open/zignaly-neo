@@ -3,10 +3,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { QRCodeSVG } from 'qrcode.react';
 import { ZignalyLogotype } from '@zignaly-open/ui';
 import { ReactComponent as Envelope } from '../../../images/envelope-main.svg';
-
-// hardcoded values
-// TODO: move to config along with the other hardcoded values for rewards
-const depositAmount = 100;
+import { hardcodedInviteeReward } from '../constants';
 
 // svg controls
 const qrCodeWidth = 100;
@@ -153,7 +150,7 @@ const ReferralInviteImage: React.FC<{
             i18nKey={'create-invite.deposit-cta'}
             t={t}
             values={{
-              depositAmount,
+              depositAmount: hardcodedInviteeReward.threshold,
             }}
           >
             <span style={{ color: '#a58fe5' }} />

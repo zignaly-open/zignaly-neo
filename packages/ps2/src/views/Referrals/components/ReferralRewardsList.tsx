@@ -12,12 +12,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import { Trans, useTranslation } from 'react-i18next';
 import { ReferralRewards } from '../../../apis/referrals/types';
 import { useZAlert } from '../../../components/ZModal/use';
-
-const hardcodedInviteeReward = {
-  value: 20,
-  coin: 'ZIG',
-  threshold: 100,
-};
+import { hardcodedInviteeReward } from '../constants';
 
 const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
   rewards,
