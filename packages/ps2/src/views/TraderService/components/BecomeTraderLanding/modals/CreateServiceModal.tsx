@@ -10,7 +10,7 @@ import { ServiceFormData } from './forms/types';
 import { useCurrentBalance } from '../../../../../apis/investment/use';
 import {
   useCreateTraderServiceMutation,
-  useServiceTypesInfoQuery,
+  useTraderServiceTypesInfoQuery,
 } from '../../../../../apis/service/api';
 
 function CreateServiceModal({
@@ -23,7 +23,7 @@ function CreateServiceModal({
   const { isLoading: isLoadingCoins } = useExchangeCoinsList();
   const [, { isLoading: isCreating }] = useCreateTraderServiceMutation();
   const [step, setStep] = useState(0);
-  const { isLoading: isLoadingServiceTypes } = useServiceTypesInfoQuery();
+  const { isLoading: isLoadingServiceTypes } = useTraderServiceTypesInfoQuery();
   const [service, setService] = useState<Partial<ServiceFormData>>({});
   const { isFetching: isLoadingBalances } = useCurrentBalance(
     service.baseCurrency,
