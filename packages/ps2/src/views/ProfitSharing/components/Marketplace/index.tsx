@@ -18,7 +18,7 @@ import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace
 import AssetsInPool from '../../../../components/AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 import { TableWrapper } from './styles';
-import TopServicesCards from '../TopServicesCards';
+// import TopServicesCards from '../TopServicesCards';
 
 const Marketplace: React.FC = () => {
   const marketplaceEndpoint = useMarketplace();
@@ -130,12 +130,12 @@ const Marketplace: React.FC = () => {
                 {t('invest-in-services-explainer')}
               </ZigTypography>
             </Box>
-            <TopServicesCards
+            {/* <TopServicesCards
               services={services
                 ?.slice()
                 .sort((a, b) => +b.pnlPercent90t - +a.pnlPercent90t)
                 .slice(0, 3)}
-            />
+            /> */}
             <TableWrapper>
               <ZigTable
                 initialState={{
