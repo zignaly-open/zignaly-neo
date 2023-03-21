@@ -120,7 +120,7 @@ const Referrals: React.FC = () => {
 
             <ReferralRewardsList rewards={rewardsData} />
 
-            {!referrals.history?.length ? (
+            {!rewardsData.invitedCount ? (
               <>
                 <ZigTypography
                   align={'center'}

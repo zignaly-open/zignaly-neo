@@ -8,7 +8,6 @@ import {
   useInvestedAmountQuery,
   useInvestInServiceMutation,
 } from './api';
-import { useActiveExchange, useIsAuthenticated } from '../user/use';
 import {
   InvestedInService,
   InvestmentDetails,
@@ -20,6 +19,7 @@ import { useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { useCoinBalances } from '../coin/use';
 import { QueryReturnType } from '../../util/queryReturnType';
+import { useActiveExchange, useIsAuthenticated } from '../user/use';
 
 export const useInvestments = useInvestmentsQuery;
 

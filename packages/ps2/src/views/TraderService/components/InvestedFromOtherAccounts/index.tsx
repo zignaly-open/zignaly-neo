@@ -53,6 +53,7 @@ function InvestedFromOtherAccounts({
     >
       <Box mt={3}>
         <ZigTable
+          prefixId={'invested-from-others'}
           columns={
             [
               {

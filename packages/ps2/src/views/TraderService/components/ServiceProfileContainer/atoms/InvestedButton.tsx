@@ -44,14 +44,14 @@ const BigNumber: React.FC<{
 };
 
 const InvestedButton: React.FC<{
-  id?: string;
+  prefixId?: string;
   service: Service;
   ctaId?: string;
-}> = ({ id, ctaId, service }) => {
+}> = ({ prefixId, ctaId, service }) => {
   const { investedAmount } = useIsInvestedInService(service.id);
   return (
     <InvestedButtonBase
-      id={id}
+      prefixId={prefixId}
       ctaId={ctaId}
       showMultipleAccountButton
       service={service}
@@ -61,12 +61,18 @@ const InvestedButton: React.FC<{
 };
 
 export const InvestedButtonBase: React.FC<{
-  id?: string;
+  prefixId?: string;
   service: Service;
   ctaId?: string;
   investedAmount: string;
   showMultipleAccountButton?: boolean;
-}> = ({ id, service, investedAmount, ctaId, showMultipleAccountButton }) => {
+}> = ({
+  prefixId,
+  service,
+  investedAmount,
+  ctaId,
+  showMultipleAccountButton,
+}) => {
   const { showModal } = useZModal({ disableAutoDestroy: true });
   const selectInvestment = useSetSelectedInvestment();
   const investedFromAccounts = useInvestedAccountsCount(service.id, {
@@ -88,10 +94,13 @@ export const InvestedButtonBase: React.FC<{
       <Typography variant={'body2'} color='neutral200'>
         {t('invested-label')}
       </Typography>
-
-      <BigNumberWrapperInvested>
-        <BigNumber ssc={service.ssc} shorten value={investedAmount} green />
-      </BigNumberWrapperInvested>
+      <Box>
+        <BigNumberWrapperInvested
+          id={prefixId && `${prefixId}__invested-${service.id}`}
+        >
+          <BigNumber ssc={service.ssc} shorten value={investedAmount} green />
+        </BigNumberWrapperInvested>
+      </Box>
       <Box
         sx={{
           display: 'flex',
@@ -100,7 +109,7 @@ export const InvestedButtonBase: React.FC<{
         }}
       >
         <TextButton
-          id={id}
+          id={prefixId && `${prefixId}__edit-${service.id}`}
           leftElement={
             <Box>
               <StyledPencilIcon />
