@@ -28,7 +28,9 @@ const ServiceInformation: React.FC<{
   const { t } = useTranslation('service');
   return (
     <>
-      <ServiceHeader component={'h1'}>{service.name}</ServiceHeader>
+      <ServiceHeader component={'h1'} id={'service-profile__service-name'}>
+        {service.name}
+      </ServiceHeader>
       <Box
         sx={{
           flexDirection: md ? 'row' : 'column',
@@ -37,7 +39,10 @@ const ServiceInformation: React.FC<{
           paddingRight: md ? 3 : 0,
         }}
       >
-        <GreySubHeader component={md ? 'span' : 'p'}>
+        <GreySubHeader
+          component={md ? 'span' : 'p'}
+          id={'service-profile__owner-name'}
+        >
           <StyledPersonIcon />
           <Trans
             t={t}
@@ -48,12 +53,19 @@ const ServiceInformation: React.FC<{
 
           {service.ownerVerified && (
             <Tooltip title={t('owner-verified')}>
-              <StyledVerifiedIcon width={13} height={13} />
+              <StyledVerifiedIcon
+                width={13}
+                height={13}
+                id={'service-profile__owner-verified-icon'}
+              />
             </Tooltip>
           )}
         </GreySubHeader>
         {md && <Separator />}
-        <GreySubHeader component={md ? 'span' : 'p'}>
+        <GreySubHeader
+          component={md ? 'span' : 'p'}
+          id={'service-profile__started-since'}
+        >
           <StyledCalendarMonthIcon />
           <Trans
             t={t}
@@ -69,6 +81,7 @@ const ServiceInformation: React.FC<{
         </GreySubHeader>
         {md ? <Separator /> : <Box mt={2} />}
         <Button
+          id={'service-profile__copy-link'}
           minWidth={30}
           onClick={() => {
             copy(

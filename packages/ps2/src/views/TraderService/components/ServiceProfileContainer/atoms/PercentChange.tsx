@@ -8,10 +8,11 @@ import { Variant } from '@mui/material/styles/createTypography';
 import { Tooltip } from '@mui/material';
 
 const PercentChange: React.FC<{
+  id?: string;
   value: string | null | number;
   colored?: boolean;
   variant?: Variant;
-}> = ({ value, colored, variant = 'h6' }) => {
+}> = ({ id, value, colored, variant = 'h6' }) => {
   const { t } = useTranslation('common');
   const color = colored
     ? +value < 0
@@ -31,7 +32,7 @@ const PercentChange: React.FC<{
     );
 
   return tooltipWrap(
-    <PercentChangeContainer component={'div'} color={color}>
+    <PercentChangeContainer component={'div'} color={color} id={id}>
       <ZigTypography variant={variant}>
         {+value > 0 ? (
           <ArrowDropUp

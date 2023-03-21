@@ -17,70 +17,72 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
   const [flagInFolder, setFlagInFolder] = useState(true);
 
   return (
-    <MarkdownSection
-      content={service.ownerDescription}
-      title={t('about-trader')}
-      emptyText={t('about-trader-empty')}
-      subtitle={
-        <Box
-          sx={{
-            flexDirection: 'row',
-            display: 'flex',
-            flex: 1,
-            alignItems: 'flex-start',
-          }}
-        >
-          <ZigTypography
-            variant={'h2'}
+    <Box id={'service-profile__about-manager'}>
+      <MarkdownSection
+        content={service.ownerDescription}
+        title={t('about-trader')}
+        emptyText={t('about-trader-empty')}
+        subtitle={
+          <Box
             sx={{
-              mb: 1,
+              flexDirection: 'row',
               display: 'flex',
-              alignItems: 'center',
+              flex: 1,
+              alignItems: 'flex-start',
             }}
           >
-            {service.ownerName}
-
-            {service.ownerVerified && (
-              <Tooltip title={t('owner-verified')}>
-                <StyledVerifiedIcon sx={{ ml: 1 }} width={13} height={13} />
-              </Tooltip>
-            )}
-
-            {service.ownerCountry && flagInFolder && (
-              <Tooltip
-                title={t('owner-from', {
-                  country: country || service.ownerCountry,
-                })}
-              >
-                <CountryFlag
-                  src={`/images/country-flags/${service.ownerCountry.toUpperCase()}.svg`}
-                  onError={() => {
-                    setFlagInFolder(false);
-                  }}
-                />
-              </Tooltip>
-            )}
             <ZigTypography
+              variant={'h2'}
               sx={{
-                ml: 2,
-                position: 'relative',
-                top: '2px',
+                mb: 1,
+                display: 'flex',
+                alignItems: 'center',
               }}
-              variant={'body2'}
-              color='neutral400'
-              component={'span'}
             >
-              {t('about-trader-joined-time', {
-                date: formatLocalizedDistance(
-                  new Date(),
-                  new Date(service.ownerCreatedAt),
-                ),
-              })}
+              {service.ownerName}
+
+              {service.ownerVerified && (
+                <Tooltip title={t('owner-verified')}>
+                  <StyledVerifiedIcon sx={{ ml: 1 }} width={13} height={13} />
+                </Tooltip>
+              )}
+
+              {service.ownerCountry && flagInFolder && (
+                <Tooltip
+                  title={t('owner-from', {
+                    country: country || service.ownerCountry,
+                  })}
+                >
+                  <CountryFlag
+                    src={`/images/country-flags/${service.ownerCountry.toUpperCase()}.svg`}
+                    onError={() => {
+                      setFlagInFolder(false);
+                    }}
+                  />
+                </Tooltip>
+              )}
+              <ZigTypography
+                sx={{
+                  ml: 2,
+                  position: 'relative',
+                  top: '2px',
+                }}
+                variant={'body2'}
+                color='neutral400'
+                component={'span'}
+              >
+                {t('about-trader-joined-time', {
+                  date: formatLocalizedDistance(
+                    new Date(),
+                    new Date(service.ownerCreatedAt),
+                  ),
+                })}
+              </ZigTypography>
             </ZigTypography>
-          </ZigTypography>
-        </Box>
-      }
-    />
+          </Box>
+        }
+      />
+    </Box>
   );
 };
 

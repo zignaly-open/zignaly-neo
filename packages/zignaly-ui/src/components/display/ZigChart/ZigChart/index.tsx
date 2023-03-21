@@ -1,4 +1,4 @@
-import React, { useCallback, useLayoutEffect, useReducer, useRef } from "react";
+import React, { useCallback, useLayoutEffect, useMemo, useReducer, useRef } from "react";
 import {
   VictoryArea,
   VictoryAxis,
@@ -19,6 +19,7 @@ import { useTheme } from "@mui/material";
 import { ChartTooltip } from "./atoms";
 
 const ZigChart = ({
+  id,
   data,
   yAxisFormatter,
   tooltipFormatter,
@@ -61,7 +62,7 @@ const ZigChart = ({
     .filter((v) => !onlyIntegerTicks || Number.isInteger(v));
 
   return (
-    <ChartLayoutLarge ref={wrapperRef}>
+    <ChartLayoutLarge ref={wrapperRef} id={id}>
       {width && (
         <VictoryChart
           containerComponent={
