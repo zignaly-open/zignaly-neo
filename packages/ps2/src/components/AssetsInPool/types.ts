@@ -5,4 +5,5 @@ export interface AssetsInPoolProps {
   convertedValueCoin?: string;
   createdAt?: string;
   shorten?: boolean;
+  prefixId?: string;
 }

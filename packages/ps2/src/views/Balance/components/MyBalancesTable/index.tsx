@@ -160,6 +160,7 @@ const MyBalancesTable = (): JSX.Element => {
       endpoint={[coinsEndpoint, balancesEndpoint]}
       content={([coins, balances]: [CoinDetails, CoinBalances]) => (
         <ZigTable
+          prefixId={'balance'}
           columns={columns}
           data={getFilteredData(coins, balances)}
           initialState={{

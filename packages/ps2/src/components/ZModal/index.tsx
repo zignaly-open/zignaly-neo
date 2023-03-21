@@ -4,11 +4,14 @@ import { LoaderContainer } from './styles';
 import { Loader } from '@zignaly-open/ui';
 import ModalContainer from './ModalContainer';
 import { ZModalProps } from './types';
+import AuthenticatedWall from '../../util/walls/AuthenticatedWall';
+import { useMaybeMakeSureSessionIsAlive } from '../../apis/user/use';
 
 // TODO: move to zignaly-ui
 const ZModal: React.FC<ZModalProps> = ({
   close,
   isLoading,
+  authOnly,
   children,
   onGoBack,
   title,
@@ -17,6 +20,7 @@ const ZModal: React.FC<ZModalProps> = ({
   titleAlign,
   ...props
 }): React.ReactElement => {
+  useMaybeMakeSureSessionIsAlive(!!authOnly);
   return (
     <MuiModal
       {...props}
@@ -34,6 +38,7 @@ const ZModal: React.FC<ZModalProps> = ({
         onGoBack={onGoBack}
         titleAlign={titleAlign}
       >
+        {authOnly && <AuthenticatedWall />}
         {isLoading ? (
           <LoaderContainer>
             <Loader color={'#fff'} ariaLabel={'Loading...'} />
