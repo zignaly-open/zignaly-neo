@@ -23,7 +23,8 @@ import { ZigInput, ZigTab, ZigTabPanel, ZigTabs } from '@zignaly-open/ui';
 import copy from 'copy-to-clipboard';
 import { useToast } from '../../../util/hooks/useToast';
 import { ShareIconsContainer } from '../styles';
-import ReferralInviteImage from './ReferralInviteImage';
+// import ReferralInviteImage from './ReferralInviteImage';
+import ReferralInviteImage from './ReferralInviteUglyImage';
 import { downloadSvgElementAsImage } from 'util/images';
 
 const ReferralInviteModal: React.FC<
