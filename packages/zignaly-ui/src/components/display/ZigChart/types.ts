@@ -28,6 +28,7 @@ export interface ChartMiniProps {
   width?: number;
   gradientVariant?: GradientVariant;
   chartProps?: VictoryChartProps;
+  id?: string;
 }
 
 export interface ChartLargeProps {
