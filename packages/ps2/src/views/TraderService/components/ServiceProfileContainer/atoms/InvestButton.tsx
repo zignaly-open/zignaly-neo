@@ -18,11 +18,11 @@ import { Box } from '@mui/material';
 import ChooseDepositTypeModal from 'views/Dashboard/components/ManageInvestmentModals/ChooseDepositTypeModal';
 
 const InvestButton: React.FC<{
-  id?: string;
+  prefixId?: string;
   service: Service;
   ctaId?: string;
   showMultipleAccountButton?: boolean;
-}> = ({ id, service, ctaId, showMultipleAccountButton }) => {
+}> = ({ prefixId, service, ctaId, showMultipleAccountButton }) => {
   const { t } = useTranslation([
     'service',
     // we need these two otherwise a Suspense will trigger when we load the other ns
@@ -78,7 +78,7 @@ const InvestButton: React.FC<{
   return (
     <>
       <ZigButton
-        id={id}
+        id={prefixId && `${prefixId}__invest-${service.id}`}
         onClick={onClickMakeInvestment}
         loading={needsToOpenWhenBalancesLoaded && isFetching}
         variant='contained'
