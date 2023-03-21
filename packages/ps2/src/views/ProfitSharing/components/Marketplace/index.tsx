@@ -43,7 +43,7 @@ const Marketplace: React.FC = () => {
         },
         cell: (props) => (
           <ServiceName
-            id={`marketplace-table__service-${props.row.original.id}`}
+            prefixId={`marketplace-table`}
             service={
               marketplaceServiceToInvestmentType(
                 props.row.original,
