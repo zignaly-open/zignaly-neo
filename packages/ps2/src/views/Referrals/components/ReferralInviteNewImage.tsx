@@ -14,18 +14,14 @@ const sidePadding = 53;
 const qrCodeBorderRadius = 10;
 
 const ReferralInviteNewImage: React.FC<{
-  width?: number;
   mode: 'trader' | 'friend';
   url: string;
-}> = ({ width, mode, url }) => {
+}> = ({ mode, url }) => {
   const { t } = useTranslation(['referrals', 'pages']);
   const { refCode } = useCurrentUser();
 
   return (
-    <svg
-      width={width || imageWidth}
-      viewBox={`0 0 ${imageWidth} ${imageHeight}`}
-    >
+    <svg height={389} width={300} viewBox={`0 0 ${imageWidth} ${imageHeight}`}>
       <defs>
         <style type='text/css'>
           {`

@@ -72,10 +72,10 @@ const ReferralInviteModal: React.FC<
         <Grid item xs={12} sm={6} columnSpacing={2}>
           <Box ref={imageWrapper}>
             <ZigTabPanel value={tab} index={0}>
-              <ReferralInviteNewImage width={300} url={url} mode={'friend'} />
+              <ReferralInviteNewImage url={url} mode={'friend'} />
             </ZigTabPanel>
             <ZigTabPanel value={tab} index={1}>
-              <ReferralInviteNewImage width={300} url={url} mode={'trader'} />
+              <ReferralInviteNewImage url={url} mode={'trader'} />
             </ZigTabPanel>
           </Box>
         </Grid>
