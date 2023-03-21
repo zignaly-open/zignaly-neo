@@ -14,9 +14,12 @@ import {
 import { Link } from 'react-router-dom';
 import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
 import AccountMenu from '../AccountMenu';
+import ReferralButton from '../ReferralButton';
+import { useIsAuthenticated } from '../../../apis/user/use';
 
 const Header: React.FC = () => {
   const { t } = useTranslation('common');
+  const isAuthenticated = useIsAuthenticated();
   return (
     <ZigHeader
       leftElements={[
@@ -46,7 +49,10 @@ const Header: React.FC = () => {
         </HeaderLinksContainer>,
         <ExtraNavigationDropdown key={'extra-nav'} />,
       ]}
-      rightElements={[<AccountMenu key={'account'} />]}
+      rightElements={[
+        isAuthenticated && <ReferralButton key={'referral'} />,
+        <AccountMenu key={'account'} />,
+      ].filter(Boolean)}
     />
   );
 };

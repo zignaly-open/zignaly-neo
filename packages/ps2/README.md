@@ -71,4 +71,7 @@ src
 
 ```
 
+### IDs in PS 2.0:
+#### `location-sublocation__id`
+
 Please follow the existing codestyle. Good luck on your journey.

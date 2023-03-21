@@ -28,7 +28,9 @@ import {
   ROUTE_HELP_INVESTOR,
   ROUTE_404,
   ROUTE_WALLET,
+  ROUTE_REFERRALS,
   ROUTE_RESET_PASSWORD,
+  ROUTE_REFERRALS_INVITE,
 } from './routes';
 
 import Management from './views/TraderService/Management';
@@ -47,6 +49,8 @@ import ServiceOwnerWall from './util/walls/ServiceOwnerWall';
 import HelpInvestor from './views/Help/HelpInvestor';
 import NotFound from 'views/404';
 import ResetPassword from 'views/Auth/ResetPassword';
+import Referrals from './views/Referrals';
+import Invite from './views/Referrals/Invite';
 
 const Router: React.FC = () => (
   <Routes>
@@ -54,6 +58,7 @@ const Router: React.FC = () => (
       <Route path={ROUTE_DASHBOARD} element={<Dashboard />} />
       <Route path={ROUTE_MY_BALANCES} element={<MyBalances />} />
       <Route path={ROUTE_WALLET} element={<Wallet />} />
+      <Route path={ROUTE_REFERRALS} element={<Referrals />} />
     </Route>
 
     <Route path={ROUTE_TRADING_SERVICE}>
@@ -74,6 +79,7 @@ const Router: React.FC = () => (
     <Route path={ROUTE_HELP_INVESTOR} element={<HelpInvestor />} />
 
     <Route element={<UnauthenticatedWall />}>
+      <Route path={ROUTE_REFERRALS_INVITE} element={<Invite />} />
       <Route path={ROUTE_LOGIN} element={<Login />} />
       <Route path={ROUTE_SIGNUP} element={<Signup />} />
       <Route path={ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />

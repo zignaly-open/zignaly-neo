@@ -199,6 +199,7 @@ const ShareCode = (props: ShareCodeProps) => {
       {dataCodes && (
         <StyledTable>
           <ZigTable
+            prefixId={'share-code'}
             columns={columnsCodes}
             data={dataCodes.userCodes}
             defaultHiddenColumns={[
@@ -224,6 +225,7 @@ const ShareCode = (props: ShareCodeProps) => {
       {dataCodesRedemptions && (
         <StyledTable>
           <ZigTable
+            prefixId={'share-code-redemptions'}
             columns={columnsCodesRedemptions}
             data={dataCodesRedemptions.userCodesRedemptions}
             initialState={{

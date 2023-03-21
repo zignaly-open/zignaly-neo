@@ -1,6 +1,7 @@
 {
   "yes": "Yes",
   "no": "No",
+  "ok": "OK",
   "back": "Back",
   "close": "Close",
   "loading": "Loading...",
@@ -34,6 +35,7 @@
     "notAuth-dropdown-link-dashboard": "My Portfolio",
     "notAuth-dropdown-link-balances": "My Balances",
     "notAuth-dropdown-link-wallet": "ZIG Wallet",
+    "referrals": "Referrals",
     "notAuth-dropdown-link-settings": "Settings",
     "notAuth-dropdown-link-password": "Password",
     "notAuth-dropdown-link-2fa": "Two-Factor Authentication",
@@ -69,6 +71,7 @@
     "invalid-amount": "You must indicate an amount",
     "max-decimals": "Please enter numbers with no more than 8 decimal places.",
     "invalid-characters": "Invalid characters",
-    "letter-number": "Should contain at least one letter or number"
+    "letter-number": "Should contain at least one letter or number",
+    "min-invest-amount-for-owner": "Owner balance must be above {{minAmount}} {{minAmountCoin}}"
   }
 }
