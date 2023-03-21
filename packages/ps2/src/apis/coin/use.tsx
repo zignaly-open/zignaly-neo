@@ -4,10 +4,10 @@ import {
   useDepositInfoQuery,
   useTransactionsHistoryQuery,
 } from './api';
-import { useActiveExchange } from '../user/use';
 import { CoinBalances, CoinDetails, DepositInfo } from './types';
-import { QueryReturnType } from '../../util/queryReturnType';
+import { QueryReturnType } from 'util/queryReturnType';
 import useInfinitePaginatedQuery from 'util/hooks/useInfinitePaginatedQuery';
+import { useActiveExchange } from '../user/use';
 
 export function useCoinBalances(options?: {
   convert?: boolean;

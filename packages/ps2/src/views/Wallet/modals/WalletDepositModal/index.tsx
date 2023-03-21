@@ -17,7 +17,7 @@ function WalletDepositModal({
   const { t } = useTranslation(['wallet']);
 
   return (
-    <ZModal wide {...props} close={close} title={t('deposit.title')}>
+    <ZModal authOnly wide {...props} close={close} title={t('deposit.title')}>
       <WalletDepositForm coins={coins} selectedCoin={selectedCoin} />
     </ZModal>
   );

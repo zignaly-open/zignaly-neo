@@ -94,7 +94,6 @@ export const InvestedButtonBase: React.FC<{
       <Typography variant={'body2'} color='neutral200'>
         {t('invested-label')}
       </Typography>
-
       <BigNumberWrapperInvested
         id={prefixId && `${prefixId}__invested-${service.id}`}
       >

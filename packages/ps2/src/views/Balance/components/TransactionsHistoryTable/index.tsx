@@ -179,6 +179,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
       endpoint={[transactionsEndpoint, coinsEndpoint]}
       content={() => (
         <ZigTable
+          prefixId={'transactions'}
           columns={columns}
           data={filteredData}
           initialState={{
