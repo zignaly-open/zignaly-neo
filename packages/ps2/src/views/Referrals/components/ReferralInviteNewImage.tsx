@@ -13,7 +13,7 @@ const qrCodePadding = 10;
 const sidePadding = 53;
 const qrCodeBorderRadius = 10;
 
-const ReferralInviteImage: React.FC<{
+const ReferralInviteNewImage: React.FC<{
   width?: number;
   mode: 'trader' | 'friend';
   url: string;
@@ -173,4 +173,4 @@ const ReferralInviteImage: React.FC<{
   );
 };
 
-export default ReferralInviteImage;
+export default ReferralInviteNewImage;

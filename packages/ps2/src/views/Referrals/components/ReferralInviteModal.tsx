@@ -23,8 +23,7 @@ import { ZigInput, ZigTab, ZigTabPanel, ZigTabs } from '@zignaly-open/ui';
 import copy from 'copy-to-clipboard';
 import { useToast } from '../../../util/hooks/useToast';
 import { ShareIconsContainer } from '../styles';
-// import ReferralInviteImage from './ReferralInviteImage';
-import ReferralInviteImage from './ReferralInviteUglyImage';
+import ReferralInviteNewImage from './ReferralInviteNewImage';
 import { downloadSvgElementAsImage } from 'util/images';
 
 const ReferralInviteModal: React.FC<
@@ -73,20 +72,10 @@ const ReferralInviteModal: React.FC<
         <Grid item xs={12} sm={6} columnSpacing={2}>
           <Box ref={imageWrapper}>
             <ZigTabPanel value={tab} index={0}>
-              <ReferralInviteImage
-                width={300}
-                urlShort={urlShort}
-                url={url}
-                mode={'friend'}
-              />
+              <ReferralInviteNewImage width={300} url={url} mode={'friend'} />
             </ZigTabPanel>
             <ZigTabPanel value={tab} index={1}>
-              <ReferralInviteImage
-                width={300}
-                urlShort={urlShort}
-                url={url}
-                mode={'trader'}
-              />
+              <ReferralInviteNewImage width={300} url={url} mode={'trader'} />
             </ZigTabPanel>
           </Box>
         </Grid>
