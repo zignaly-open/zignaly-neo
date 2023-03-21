@@ -1,7 +1,7 @@
 import { Investment } from '../../../../apis/investment/types';
 
 export interface ServiceNameProps {
-  id?: string;
+  prefixId?: string;
   service: Investment;
   showCoin?: boolean;
 }
