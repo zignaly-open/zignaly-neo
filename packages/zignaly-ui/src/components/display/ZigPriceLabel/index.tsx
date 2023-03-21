@@ -39,25 +39,6 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
     suffix: shortenSuffix,
   } = shortenNumber(+value);
 
-  const removeTrailingZeros = (value: string) => {
-    if (value === undefined || value === null) {
-      return "";
-    }
-    const stringValue = value.toString();
-    const decimalIndex = stringValue.indexOf(".");
-    if (decimalIndex === -1) {
-      return stringValue;
-    }
-    let endIndex = stringValue.length - 1;
-    while (
-      (stringValue[endIndex] === "0" || stringValue[endIndex] === ".") &&
-      endIndex >= decimalIndex
-    ) {
-      endIndex--;
-    }
-    return stringValue.slice(0, endIndex + 1);
-  };
-
   const content = (
     <ZigTypography
       {...withDefaultProps}
@@ -68,7 +49,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
       {usd && "$"}
       <NumericFormat
         value={Math.abs(shorten ? shortened : +value)}
-        renderText={removeTrailingZeros}
+        renderText={(v) => v.toString().replace(/(\.\d*?[1-9]+)0+$|\.0+$/g, "$1")}
         displayType={"text"}
         thousandSeparator={true}
         decimalScale={
