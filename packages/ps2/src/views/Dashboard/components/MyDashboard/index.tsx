@@ -167,6 +167,7 @@ const MyDashboard: React.FC = () => {
         content={(services: Investment[]) => (
           <ZigTableWrapper>
             <ZigTable
+              prefixId={'dashboard'}
               columns={columns}
               data={services}
               emptyMessage={t('table-search-emptyMessage')}

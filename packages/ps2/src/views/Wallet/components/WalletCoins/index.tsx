@@ -114,6 +114,7 @@ const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
     <Box mb='70px'>
       <StyledTable>
         <ZigTable
+          prefixId={'wallet-coins'}
           columns={columns}
           data={data}
           initialState={{
