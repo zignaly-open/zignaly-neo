@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
-import { BrandImage, PageContainer, ZigTypography } from '@zignaly-open/ui';
+import { PageContainer, ZigTypography } from '@zignaly-open/ui';
 import SignupForm from './components/SignupForm';
 import { Grid, Link, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
@@ -72,17 +72,11 @@ const Signup: React.FC = () => {
                 alignItems='center'
                 marginBottom={'70px'}
               >
-                <BrandImage height='32px' type='isotype' width='32px' />
-                <ZigTypography
-                  variant={'h1'}
-                  fontSize={'30px'}
-                  fontWeight={600}
-                  letterSpacing={-0.8}
-                  marginLeft={'15px'}
-                  color={'neutral000'}
-                >
-                  {t('sign-up:company')}
-                </ZigTypography>
+                <img
+                  src={`/images/signup/zignaly-logo.png`}
+                  alt='zignaly'
+                  width={'135px'}
+                />
               </Grid>
             </Grid>
             <Grid item marginBottom={'10px'}>
