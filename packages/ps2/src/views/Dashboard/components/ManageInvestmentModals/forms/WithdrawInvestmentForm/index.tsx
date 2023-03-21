@@ -24,7 +24,7 @@ import { WithdrawInvestmentFormFormData } from './types';
 import { ChangeViewFn, EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import CenteredLoader from '../../../../../../components/CenteredLoader';
-import { useServiceTypesInfoQuery } from '../../../../../../apis/service/api';
+import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 import { useServiceDetails } from '../../../../../../apis/service/use';
 
 const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
@@ -46,7 +46,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
     [service],
   );
 
-  const { data: serviceTypesInfo } = useServiceTypesInfoQuery();
+  const { data: serviceTypesInfo } = useTraderServiceTypesInfoQuery();
   const minInvestedAmountOwner =
     serviceTypesInfo?.[serviceInfo.type]?.[coin.id]?.minimum_owner_balance;
 

@@ -109,6 +109,7 @@ function EditApiKeysModal({
 
   return (
     <ZModal
+      authOnly
       wide
       {...props}
       close={close}

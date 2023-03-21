@@ -57,7 +57,13 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
   }, []);
 
   return (
-    <ZModal wide {...props} title={t('minBalanceModal.title')} close={close}>
+    <ZModal
+      authOnly
+      wide
+      {...props}
+      title={t('minBalanceModal.title')}
+      close={close}
+    >
       <Box sx={{ marginBottom: 3 }}>
         <ZigTypography>{t('minBalanceModal.desc')}</ZigTypography>
       </Box>
