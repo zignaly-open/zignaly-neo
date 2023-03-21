@@ -20,17 +20,17 @@ const sectionRatio = 0.45;
 const borderRadius = 15;
 
 const ReferralInviteImage: React.FC<{
+  width?: number;
   mode: 'trader' | 'friend';
   url: string;
   urlShort: string;
-}> = ({ mode, url, urlShort }) => {
+}> = ({ width, mode, url, urlShort }) => {
   const { t } = useTranslation(['referrals', 'pages']);
 
   return (
     <svg
-      width={imageWidth}
-      height={imageHeight}
-      viewBox={`0 0 ${imageWidth}px ${imageHeight}px`}
+      width={width || imageWidth}
+      viewBox={`0 0 ${imageWidth} ${imageHeight}`}
     >
       <defs>
         <clipPath id='round-corner'>

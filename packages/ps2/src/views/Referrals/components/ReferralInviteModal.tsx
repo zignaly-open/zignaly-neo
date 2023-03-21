@@ -69,10 +69,11 @@ const ReferralInviteModal: React.FC<
       </ZigTabs>
 
       <Grid container>
-        <Grid item xs={12} sm={7}>
+        <Grid item xs={12} sm={6} columnSpacing={2}>
           <Box ref={imageWrapper}>
             <ZigTabPanel value={tab} index={0}>
               <ReferralInviteImage
+                width={300}
                 urlShort={urlShort}
                 url={url}
                 mode={'friend'}
@@ -80,6 +81,7 @@ const ReferralInviteModal: React.FC<
             </ZigTabPanel>
             <ZigTabPanel value={tab} index={1}>
               <ReferralInviteImage
+                width={300}
                 urlShort={urlShort}
                 url={url}
                 mode={'trader'}
@@ -90,7 +92,7 @@ const ReferralInviteModal: React.FC<
         <Grid
           item
           xs={12}
-          sm={5}
+          sm={6}
           sx={{
             display: 'flex',
             flexDirection: 'column',
@@ -123,7 +125,7 @@ const ReferralInviteModal: React.FC<
             <ZigInput
               wide
               label={t('create-invite.customize-text')}
-              rows={8}
+              rows={6}
               multiline
               value={text}
               onChange={(e) => setText(e.target.value)}
