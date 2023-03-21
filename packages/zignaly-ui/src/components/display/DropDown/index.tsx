@@ -89,6 +89,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
               color: "#fff",
               boxShadow: "0 4px 6px -2px #00000061",
               borderRadius: "4px 0 4px 4px",
+              border: "none",
             },
           }}
           onClose={handleClose}
