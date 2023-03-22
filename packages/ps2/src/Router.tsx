@@ -31,6 +31,7 @@ import {
   ROUTE_REFERRALS,
   ROUTE_RESET_PASSWORD,
   ROUTE_REFERRALS_INVITE,
+  ROUTE_REFERRALS_INVITE_SHORT,
 } from './routes';
 
 import Management from './views/TraderService/Management';
@@ -80,6 +81,7 @@ const Router: React.FC = () => (
 
     <Route element={<UnauthenticatedWall />}>
       <Route path={ROUTE_REFERRALS_INVITE} element={<Invite />} />
+      <Route path={ROUTE_REFERRALS_INVITE_SHORT} element={<Invite />} />
       <Route path={ROUTE_LOGIN} element={<Login />} />
       <Route path={ROUTE_SIGNUP} element={<Signup />} />
       <Route path={ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />

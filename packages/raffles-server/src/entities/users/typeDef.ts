@@ -8,6 +8,8 @@ export const typeDef = gql`
     onboardingCompletedAt: Date
     discordName: String
     emailVerified: Boolean
+    emailVerificationSent: Boolean
+    zhitRewarded: Boolean
     email: String
     createdAt: Date
   }
@@ -29,6 +31,13 @@ export const typeDef = gql`
   type UserBalance {
     id: ID!
     balance: String!
+  }
+
+  type UserVerification {
+    id: ID!
+    emailVerificationSent: Boolean
+    emailVerified: Boolean
+    zhitRewarded: Boolean
   }
 
   input UserFilter {
@@ -60,10 +69,11 @@ export const typeDef = gql`
     getOrCreateUser(walletType: String!, publicAddress: String!): AuthUser
     authenticate(publicAddress: String!, signature: String!): AccessToken!
     verifyEmail(userId: Int!, email: String!): Boolean
-    confirmEmail(userId: Int!): Boolean
+    confirmEmail(hashStr: String!): Boolean
   }
 
   extend type Subscription {
     balanceChanged(token: String!): UserBalance
+    emailChanged(token: String!): UserVerification
   }
 `;

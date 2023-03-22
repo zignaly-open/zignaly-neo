@@ -1,7 +1,7 @@
 import { DialogProps } from '@mui/material/Dialog';
 
 export type ZModalProps = {
-  title: string;
+  title?: string;
   wide?: boolean;
   authOnly?: boolean;
   isLoading?: boolean;
@@ -10,3 +10,5 @@ export type ZModalProps = {
   close: () => void;
   titleAlign?: 'center' | 'left';
 } & DialogProps;
+
+export type ZDialogProps = DialogProps & { close: () => void };

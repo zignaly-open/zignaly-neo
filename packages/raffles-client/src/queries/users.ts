@@ -1,4 +1,10 @@
 import { gql } from '@apollo/client';
+import { UserType } from '@zignaly-open/raffles-shared/types';
+
+export interface GetCurrentUserResponseModel {
+  loading: boolean;
+  data?: { me: UserType };
+}
 
 export const GET_CURRENT_USER = gql`
   query me {
@@ -8,6 +14,8 @@ export const GET_CURRENT_USER = gql`
       username
       discordName
       onboardingCompletedAt
+      emailVerificationSent
+      zhitRewarded
       publicAddress
       emailVerified
     }
@@ -84,6 +92,17 @@ export const BALANCE_SUBSCRIPTION = gql`
   }
 `;
 
+export const EMAIL_SUBSCRIPTION = gql`
+  subscription onBalanceChanged($token: String!) {
+    balanceChanged(token: $token) {
+      id
+      emailVerificationSent
+      emailVerified
+      zhitRewarded
+    }
+  }
+`;
+
 export const VERIFY_EMAIL_MUTATION = gql`
   mutation verifyEmail($userId: Int!, $email: String!) {
     verifyEmail(userId: $userId, email: $email)
@@ -91,7 +110,7 @@ export const VERIFY_EMAIL_MUTATION = gql`
 `;
 
 export const CONFIRM_EMAIL_MUTATION = gql`
-  mutation confirmEmail($userId: Int!) {
-    confirmEmail(userId: $userId)
+  mutation confirmEmail($hashStr: String!) {
+    confirmEmail(hashStr: $hashStr)
   }
 `;

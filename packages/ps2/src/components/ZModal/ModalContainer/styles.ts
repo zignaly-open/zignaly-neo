@@ -3,6 +3,7 @@ import { styledIf, Typography } from '@zignaly-open/ui';
 
 export const Layout = styled('div')<{ width: number }>`
   display: flex;
+  position: relative;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
@@ -39,7 +40,7 @@ export const Body = styled('div')`
   padding-right: 40px;
 `;
 
-export const Header = styled('div')`
+export const Header = styled('div')<{ compact: boolean }>`
   display: flex;
   z-index: 999;
   position: relative;
@@ -48,6 +49,14 @@ export const Header = styled('div')`
   width: 100%;
   align-items: center;
   margin-bottom: 14px;
+  ${({ compact }) =>
+    compact &&
+    `
+    width: 32px;
+    position: absolute;
+    right: 56px;
+    top: 40px;
+  `}
 `;
 
 export const HeaderButton = styled('button')`
@@ -113,4 +122,9 @@ export const ModalActionsNew = styled('div')<{
       : align === 'right'
       ? 'flex-end'
       : 'center'};
+`;
+
+export const ErrorBlock = styled('div')`
+  display: flex;
+  margin-top: 15px;
 `;

@@ -55,6 +55,10 @@ export type ResourceOptions = {
   filter: { [key: string]: string | number };
 };
 
+export type TokenPayload = {
+  userId: number;
+  email: string;
+};
 declare global {
   // eslint-disable-next-line no-var
   var redisServer: any;

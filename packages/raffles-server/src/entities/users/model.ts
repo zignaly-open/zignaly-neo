@@ -51,6 +51,9 @@ export class User extends Model {
   public email?: string;
 
   @Column
+  public previousEmail?: string;
+
+  @Column
   public discordName?: string;
 
   @Column
@@ -78,6 +81,9 @@ export class User extends Model {
   @Default(false)
   @Column
   public zhitRewarded: boolean;
+
+  @Column
+  public emailValidationHash: string;
 }
 
 export function generateUserNonce(): number {
