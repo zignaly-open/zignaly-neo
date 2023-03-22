@@ -13,12 +13,17 @@ jobs:
       - uses: actions/checkout@master
         with:
           token: ${{ secrets.ROBOZIGNALY_PAT }}
+      - name: Get clickup id
+        id: clickup
+        run: |
+            echo "::set-output name=clickup_id::$(echo ${{ github.event.pull_request.title }} | grep -oP '(?<=CU-)[0-9]+')"
+      - run: echo ${{steps.clickup.outputs.clickup_id}}
       - name: Merge the PR branch to origin/test
         uses: devmasx/merge-branch@master
         with:
           type: now
           target_branch: test
-          message: Merging ${{ github.event.pull_request.head.ref }}
+          message: Merging ${{steps.clickup.outputs.clickup_id}} ${{ github.event.pull_request.head.ref }}
           from_branch: ${{ github.event.pull_request.head.ref }}
           github_token: ${{ secrets.ROBOZIGNALY_PAT }}
 
