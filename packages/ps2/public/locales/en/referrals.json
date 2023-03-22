@@ -97,16 +97,18 @@
         "create-invite": "Create Invite",
         "invite-friends": "Invite Friends",
         "invite-traders": "Invite Traders",
-        "deposit-cta": "With a <1>${{depositAmount}} investment</1> you'll receive a bonus. Start investing <0>with just $1</0>.",
+        "deposit-friend-cta": "With a <1>${{depositAmount}} investment</1> you'll receive a bonus. Start investing <0>with just $1</0>.",
+        "deposit-trader-cta": "Offer your trading services to more than <0>430k users</0>, trading from your favorite app/tool",
         "friend-cta": "Sign up and\n get $20 in ZIG",
         "trader-cta": "Want to earn $20\nand a stream\nof investors?",
         "scan-qr": "Scan the QR code and join me on Zignaly!",
         "customize-text": "Customize your invitation:",
-        "invite-text": "Invite your friends to Zignaly and earn a $20 bonus when they make their first investment of $100 or more. You'll also earn a 20% commission on all their trades.",
+        "invite-text": "Let's win together! Join me at Zignaly, invest at least ${{depositThreshold}} in one of our pro traders, and earn ${{reward}} in ZIG and exclusive rewards.",
         "scan-join": "Scan the QR code and join me on <0>app.zignaly.com</0>",
         "invite-code": "Code: <0>{{code}}</0>",
+
         "ugly-friend-cta": "Sign up for Zignaly and receive <0>${{reward}}</0> in ZIG",
-        "ugly-trader-cta": "Sign up for Zignaly and get a <0>Lamborghini</0> (no)"
+        "ugly-trader-cta": "Create a service in Zignaly and <0>earn</0> when your investors <1>earn</1>"
     },
     "share": {
         "email-subject": "Zignaly, a new way to trade",

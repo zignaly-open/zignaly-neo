@@ -25,13 +25,19 @@ import { useToast } from '../../../util/hooks/useToast';
 import { ShareIconsContainer } from '../styles';
 import ReferralInviteNewImage from './ReferralInviteNewImage';
 import { downloadSvgElementAsImage } from 'util/images';
+import { hardcodedInviteeReward } from '../constants';
 
 const ReferralInviteModal: React.FC<
   ZDialogProps & { url: string; urlShort: string }
 > = ({ url, urlShort, ...props }) => {
   const { t } = useTranslation(['referrals', 'pages']);
   const [tab, setTab] = useState(0);
-  const [text, setText] = useState<string>(t('create-invite.invite-text'));
+  const [text, setText] = useState<string>(
+    t('create-invite.invite-text', {
+      depositThreshold: hardcodedInviteeReward.threshold,
+      reward: hardcodedInviteeReward.value,
+    }),
+  );
 
   const imageWrapper = useRef<HTMLDivElement>();
   const toast = useToast();

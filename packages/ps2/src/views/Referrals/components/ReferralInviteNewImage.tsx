@@ -49,12 +49,7 @@ const ReferralInviteNewImage: React.FC<{
 
       <InviteTemplate x={0} y={0} height={imageHeight} width={imageWidth} />
 
-      <foreignObject
-        x={sidePadding}
-        y={130}
-        width={imageWidth - 3 * sidePadding}
-        height={100}
-      >
+      <foreignObject x={sidePadding} y={130} width={423} height={150}>
         <div
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
@@ -76,14 +71,15 @@ const ReferralInviteNewImage: React.FC<{
             }}
           >
             <span style={{ color: '#ACB6FF' }} />
+            <span style={{ color: '#ACB6FF' }} />
           </Trans>
         </div>
       </foreignObject>
 
       <foreignObject
         x={sidePadding}
-        y={255}
-        width={imageWidth - 3 * sidePadding}
+        y={mode === 'trader' ? 300 : 255}
+        width={423}
         height={175}
       >
         <div
@@ -98,7 +94,7 @@ const ReferralInviteNewImage: React.FC<{
           }}
         >
           <Trans
-            i18nKey={'create-invite.deposit-cta'}
+            i18nKey={`create-invite.deposit-${mode}-cta`}
             t={t}
             values={{
               depositAmount: hardcodedInviteeReward.threshold,

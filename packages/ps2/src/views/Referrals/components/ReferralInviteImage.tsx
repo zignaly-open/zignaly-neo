@@ -147,7 +147,7 @@ const ReferralInviteImage: React.FC<{
           }}
         >
           <Trans
-            i18nKey={'create-invite.deposit-cta'}
+            i18nKey={`create-invite.deposit-${mode}-cta`}
             t={t}
             values={{
               depositAmount: hardcodedInviteeReward.threshold,
