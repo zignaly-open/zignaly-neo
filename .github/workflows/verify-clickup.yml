@@ -1,0 +1,22 @@
+name: Run CI checks
+
+on: [ pull_request ]
+
+jobs:
+  verify_valid_name:
+    name: Make sure the PR is named properly
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      matrix:
+        node: [ 16.x ]
+
+    steps:
+      - name: Verify clickup id
+        id: clickup
+        run: |
+          CLICKUP_ID=$(echo "${{ github.event.pull_request.title }}" | grep -oP '(?<=(CU-))[#\da-z]+')
+          if [ ! $CLICKUP_ID ] 
+          then 
+            exit 1; 
+          fi
