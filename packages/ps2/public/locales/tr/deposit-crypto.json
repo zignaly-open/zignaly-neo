@@ -31,5 +31,6 @@
 		"address": "{{coin}} Adresi",
 		"memo": "{{coin}} MEMO\/Etiket"
 	},
-	"no-network": "Bu ağda yatırma işlemi yapılamıyor"
+	"no-network": "Bu ağda yatırma işlemi yapılamıyor",
+	"buy-crypto": "Kripto Satın Al"
 }

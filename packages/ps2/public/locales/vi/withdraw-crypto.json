@@ -1,0 +1,49 @@
+{
+	"title": "Rút tiền",
+	"description": "Rút tiền về tài khoản bên ngoài.",
+	"coinSelector": {
+		"label": "Đồng tiền:",
+		"placeholder": "Tìm kiếm loại tiền"
+	},
+	"networkSelector": {
+		"label": "Mạng:",
+		"placeholder": "Chọn mạng"
+	},
+	"withdrawAddress": {
+		"label": "Rút về địa chỉ:",
+		"placeholder": "Dán địa chỉ ví vào đây",
+		"warning": "Chỉ gửi {{network}} {{coin}} đến địa chỉ này",
+		"invalid": "Địa chỉ không hợp lệ"
+	},
+	"amountToWithdraw": {
+		"label": "Số tiền rút:",
+		"labelBalance": "Hiện có:",
+		"minimum": "Tối thiểu:",
+		"fee": "Phí:"
+	},
+	"validation": {
+		"indicateAnAddress": "Bạn phải chỉ ra một địa chỉ hợp lệ.",
+		"minWithdrawal": "Số tiền rút tối thiểu là {{value}} {{coin}}"
+	},
+	"withdrawMemo": {
+		"label": "MEMO\/Tag:",
+		"placeholder": "Dán MEMO\/Tag của ví nhận tại đây",
+		"invalid": "MEMO\/Tag không hợp lệ, vui lòng xem lại thông tin ví nhận của bạn"
+	},
+	"confirmation": {
+		"title": "Xác nhận rút tiền",
+		"description": "Vui lòng xác nhận thông tin là chính xác và gửi yêu cầu rút tiền của bạn.",
+		"receive": "Bạn sẽ nhận được:",
+		"network": "Mạng rút tiền",
+		"address": "Rút về địa chỉ",
+		"amount": "Số tiền rút",
+		"networkFee": "Phí mạng",
+		"continue": "Tiếp tục xác nhận",
+		"withdrawNow": "Rút ngay!"
+	},
+	"success": {
+		"title": "Rút tiền thành công",
+		"description": "Yêu cầu rút tiền của bạn đã được gửi và sẽ sớm được xử lý."
+	},
+	"notEnoughZig": "Bạn không có đủ ZIG để thanh toán phí rút tiền."
+}
