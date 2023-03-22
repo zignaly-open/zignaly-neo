@@ -47,7 +47,7 @@ export type Investment = InvestmentServiceDetails & {
   pendingUSDT: string;
   version: number;
   accountId: string;
-  sparklines: AxisFormat[];
+  sparklines: AxisFormat[] | number[];
   createdAt: string;
   updatedAt: string;
   periodsLc: string;

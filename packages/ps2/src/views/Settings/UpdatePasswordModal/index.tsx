@@ -16,6 +16,7 @@ const UpdatePasswordModal = ({
 
   return (
     <ZModal
+      authOnly
       {...props}
       wide
       close={close}

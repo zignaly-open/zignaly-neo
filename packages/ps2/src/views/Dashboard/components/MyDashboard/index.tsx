@@ -86,7 +86,10 @@ const MyDashboard: React.FC = () => {
         cell: ({ row: { original } }) =>
           original.pnl30dPct || Object.keys(original.sparklines).length > 1 ? (
             <>
-              <ZigChartMini midLine data={original.sparklines} />
+              <ZigChartMini
+                midLine
+                data={[0, ...(original.sparklines as number[])]}
+              />
               <PercentageIndicator
                 normalized
                 value={new BigNumber(original.pnl30dPct).toFixed()}
@@ -164,6 +167,7 @@ const MyDashboard: React.FC = () => {
         content={(services: Investment[]) => (
           <ZigTableWrapper>
             <ZigTable
+              prefixId={'dashboard'}
               columns={columns}
               data={services}
               emptyMessage={t('table-search-emptyMessage')}

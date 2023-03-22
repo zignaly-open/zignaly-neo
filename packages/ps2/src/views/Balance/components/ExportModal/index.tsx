@@ -20,7 +20,7 @@ function ExportModal({
   const toast = useToast();
 
   return (
-    <ZModal wide {...props} close={close} title={t('export.title')}>
+    <ZModal authOnly wide {...props} close={close} title={t('export.title')}>
       <ZigTypography>{t('export.description')}</ZigTypography>
       <ModalActions>
         <ZigButton
