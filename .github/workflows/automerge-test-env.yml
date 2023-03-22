@@ -16,7 +16,7 @@ jobs:
       - name: Get clickup id
         id: clickup
         run: |
-            CLICKUP_ID=$(echo "${{ github.event.pull_request.title }}" | grep -oP '(?<=CU-)[0-9]+')
+            CLICKUP_ID=$(echo "${{ github.event.pull_request.title }}" | grep -oP '(?<=(CU-))[#\da-z]+')
             echo "clickup_id=$CLICKUP_ID" >> $GITHUB_OUTPUT
       - name: Dump context
         uses: crazy-max/ghaction-dump-context@v2
