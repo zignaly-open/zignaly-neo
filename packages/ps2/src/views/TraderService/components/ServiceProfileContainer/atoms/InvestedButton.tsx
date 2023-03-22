@@ -94,11 +94,13 @@ export const InvestedButtonBase: React.FC<{
       <Typography variant={'body2'} color='neutral200'>
         {t('invested-label')}
       </Typography>
-      <BigNumberWrapperInvested
-        id={prefixId && `${prefixId}__invested-${service.id}`}
-      >
-        <BigNumber ssc={service.ssc} shorten value={investedAmount} green />
-      </BigNumberWrapperInvested>
+      <Box>
+        <BigNumberWrapperInvested
+          id={prefixId && `${prefixId}__invested-${service.id}`}
+        >
+          <BigNumber ssc={service.ssc} shorten value={investedAmount} green />
+        </BigNumberWrapperInvested>
+      </Box>
       <Box
         sx={{
           display: 'flex',
