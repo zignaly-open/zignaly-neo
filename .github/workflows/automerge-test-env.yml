@@ -19,10 +19,10 @@ jobs:
             CLICKUP_ID=$(echo "${{ github.event.pull_request.title }}" | grep -oP '(?<=(CU-))[#\da-z]+')
             if [ $CLICKUP_ID ] 
             then 
-              echo "clickup_status=#$CLICKUP_ID""[in progress]" >> $GITHUB_OUTPUT 
+              echo "clickup_status=#$CLICKUP_ID""[in progress]" >> $GITHUB_OUTPUT
+            else 
+              echo "clickup_status=""[no clickup]" >> $GITHUB_OUTPUT
             fi
-      - name: Dump context
-        uses: crazy-max/ghaction-dump-context@v2
       - run: echo ${{steps.clickup.outputs.clickup_id}}
       - name: Merge the PR branch to origin/test
         uses: devmasx/merge-branch@master
