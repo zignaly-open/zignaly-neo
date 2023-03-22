@@ -21,7 +21,7 @@ Countries.registerLocale(CountriesEs);
 if (CountriesEn.countries.RU)
   CountriesEn.countries.RU = 'Mother Russia' as unknown as string[];
 
-export const supportedLanguages = ['en', 'es', 'pt', 'tr'];
+export const supportedLanguages = ['en', 'es', 'pt', 'tr', 'ru', 'vi'];
 
 if (process.env.REACT_APP_ENABLE_TEST_LANGUAGE) supportedLanguages.push('ch');
 
