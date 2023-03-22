@@ -1,9 +1,9 @@
 {
 	"404": "404 \/ Page not found - Zignaly",
 	"dashboard": "Mi Portafolio - Zignaly",
-	"become-trader": "Convertirse Trader - Zignaly",
+	"become-trader": "Convertirse en Trader - Zignaly",
 	"my-balances": "Mis Saldos - Zignaly",
-	"login": "Iniciar Sesión - Zignaly",
+	"login": "Iniciar sesión - Zignaly",
 	"help": "Ayuda - Zignaly",
 	"signup": "Registrarse - Zignaly",
 	"trading-services": "Servicios de Trading - Zignaly",
@@ -13,7 +13,7 @@
 		"investors": "{{serviceName}} | Inversores - Zignaly",
 		"api-trading": "{{serviceName}} | API Trading - Zignaly",
 		"coins": "{{serviceName}} | Monedas - Zignaly",
-		"manual": "{{serviceName}} | Comercio manual - Zignaly",
+		"manual": "{{serviceName}} | Trading Manual - Zignaly",
 		"positions": "{{serviceName}} | Mis Posiciones - Zignaly",
 		"signals": "{{serviceName}} | Señales - Zignaly",
 		"management": "{{serviceName}} | Gestión - Zignaly",
@@ -24,5 +24,6 @@
 		}
 	},
 	"forgot-password": "Contraseña Olvidada - Zignaly",
-	"reset-password": "Restablecer Contraseña - Zignaly"
+	"reset-password": "Restablecer Contraseña - Zignaly",
+	"referrals": "Panel de Referidos - Zignaly"
 }

@@ -1,0 +1,29 @@
+{
+	"404": "404 \/ Không tìm thấy trang - Zignaly",
+	"dashboard": "Danh mục đầu tư của tôi - Zignaly",
+	"become-trader": "Trở thành Nhà giao dịch - Zignaly",
+	"my-balances": "Số dư của tôi - Zignaly",
+	"login": "Đăng nhập - Zignaly",
+	"help": "Trợ giúp - Zignaly",
+	"signup": "Đăng ký - Zignaly",
+	"trading-services": "Dịch vụ Thương mại - Zignaly",
+	"profit-sharing": {
+		"title": "Profit Sharing - Zignaly",
+		"service": "{{serviceName}} - Zignaly",
+		"investors": "{{serviceName}} | Nhà đầu tư - Zignaly",
+		"api-trading": "{{serviceName}} | Giao dịch API - Zignaly",
+		"coins": "{{serviceName}} | Loại tiền - Zignaly",
+		"manual": "{{serviceName}} | Giao dịch thủ công - Zignaly",
+		"positions": "{{serviceName}} | Vị thế - Zignaly",
+		"signals": "{{serviceName}} | Tín hiệu - Zignaly",
+		"management": "{{serviceName}} | Quản lý - Zignaly",
+		"edit": "{{serviceName}} | Chỉnh sửa dịch vụ - Zignaly",
+		"profile": {
+			"title": "Xem hồ sơ - Zignaly",
+			"edit": "Chỉnh Sửa Hồ Sơ - Zignaly"
+		}
+	},
+	"forgot-password": "Quên mật khẩu - Zignaly",
+	"reset-password": "Đặt lại mật khẩu - Zignaly",
+	"referrals": "Bảng giới thiệu - Zignaly"
+}
