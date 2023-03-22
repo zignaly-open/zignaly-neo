@@ -1,7 +1,7 @@
 {
 	"tableHeader": {
 		"coin": "Moeda",
-		"totalBalance": "Saldo total",
+		"totalBalance": "Saldo Total",
 		"availableBalance": "Saldo Disponível",
 		"lockedBalance": "Saldo Bloqueado",
 		"valueBTC": "Valor em BTC",

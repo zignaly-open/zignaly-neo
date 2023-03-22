@@ -1,0 +1,86 @@
+{
+	"percentageChangedSuccess": "Tỷ lệ phần trăm lợi nhuận được cập nhật thành công.",
+	"addMoreInvestmentSuccess": "Bạn đã đầu tư thành công {{amount}} {{currency}} vào dịch vụ {{serviceName}} .",
+	"withdrawInvestmentSuccess": "Yêu cầu rút tiền thành công.",
+	"validation-indicateAnAmount": "Bạn phải cho biết số tiền",
+	"error-blockedInvestment": "Tất cả số tiền của bạn đang chờ được chuyển ra khỏi dịch vụ.",
+	"form": {
+		"title": "Số tiền đã đầu tư:",
+		"profits": {
+			"title": "Làm gì với lợi nhuận:",
+			"left": "Tái đầu tư",
+			"right": "Rút tiền",
+			"title-confirmation": "Tỷ lệ phần trăm lợi nhuận cần rút:"
+		},
+		"inputAmount": {
+			"label": "Khả dụng để đầu tư:",
+			"labelBalance": "Khả dụng:"
+		},
+		"link": {
+			"investMore": "Đầu tư thêm",
+			"withdraw": "Rút tiền đầu tư"
+		},
+		"button": {
+			"saveAndClose": "Lưu và Đóng",
+			"continue-to-confirmation": "Tiếp tục xác nhận",
+			"invest-now": "Đầu tư {{số tiền}} {{coin}}",
+			"saveAndInvestment": "Lưu và thêm vào đầu tư"
+		}
+	},
+	"pendingMajorThan": {
+		"type": "Đầu tư mới",
+		"status": "Xử lý trong 24h"
+	},
+	"profitOutMajorThan": {
+		"type": "Lợi nhuận",
+		"status": "Chờ vòng hạch toán tiếp theo"
+	},
+	"transferOutMajorThan": {
+		"type": "Chuyển ra",
+		"status": "Chờ vòng hạch toán tiếp theo"
+	},
+	"pendingTransactions": {
+		"status_zero": "Không có mục nào",
+		"status_one": "Bạn có 1 giao dịch đang chờ xử lý",
+		"status_other": "Bạn có {{count}} giao dịch đang chờ xử lý",
+		"link-label": "Xem"
+	},
+	"investorDetail-successFee": "{{fee}} % Phí thành công",
+	"modal": {
+		"withdrawInvestment": {
+			"title": "Yêu cầu rút tiền",
+			"freeWithdrawal": {
+				"description": "Bạn sẽ nhận được tiền của mình sau khi người quản lý quỹ chuyển tiền ra. Hãy nhớ rằng khoản đầu tư của bạn vẫn có rủi ro cho đến khi số dư được chuyển cho bạn. Quá trình này thường mất vài ngày nhưng có thể mất lâu hơn để hoàn thành, tùy thuộc vào người quản lý quỹ."
+			}
+		},
+		"pendingTransaction": {
+			"title": "Giao dịch đang chờ xử lý",
+			"tableHeader": {
+				"amount": "Số lượng",
+				"type": "Loại",
+				"status": "Trạng thái"
+			},
+			"button": "Quay Lại"
+		},
+		"editInvestments": {
+			"title": "Chỉnh sửa số tiền đầu tư",
+			"loading": "Đang tải chỉnh sửa đầu tư"
+		}
+	},
+	"modalSuccess": {
+		"title": "Đang xử ký nạp (Tối đa 24h)",
+		"description": "Tiền của bạn sẽ được chuyển vào tài khoản của dịch vụ trong vòng 24 giờ. Trong thời gian này, bạn có thể rút tiền của mình bất cứ lúc nào.",
+		"button": "Đóng"
+	},
+	"invest-modal": {
+		"invest-with": "Đầu tư với",
+		"amount-to-invest": "Số tiền đầu tư",
+		"type-transfer": "Nhập từ “ {{word}} ” vào trường bên dưới để hoàn tất quá trình chuyển:",
+		"transfer-error": "Giá trị không hợp lệ. Vui lòng nhập từ chính xác.",
+		"transfer-label": "Chuyển",
+		"i-understand-margin": "Tôi hiểu toàn bộ số dư {{coin}} của tôi hiện là một phần của ký quỹ và chịu rủi ro",
+		"i-understand-money-transferred": "Tôi hiểu và xác nhận rằng tiền của tôi sẽ được chuyển vào dịch vụ và sẽ không còn xuất hiện trong số dư khả dụng của tôi nữa",
+		"max-funds": "Vượt quá số tiền tối đa cho phép trong dịch vụ này. Đầu tư tối đa {{max}} {{coin}}.",
+		"max-reached": "Không thể đầu tư vào dịch vụ này vì nó đã đạt đến giới hạn Quỹ tối đa."
+	}
+}

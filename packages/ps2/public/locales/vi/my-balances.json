@@ -1,0 +1,14 @@
+{
+	"tableHeader": {
+		"coin": "Loại tiền",
+		"totalBalance": "Tổng số dư",
+		"availableBalance": "Số dư khả dụng",
+		"lockedBalance": "Số dư bị khóa",
+		"valueBTC": "Giá trị bằng BTC",
+		"valueUSD": "Giá trị bằng USD"
+	},
+	"table-search-placeholder": "Nhập để tìm kiếm",
+	"loading-arialLabel": "Đang tải...",
+	"my-coins": "Tiền của tôi",
+	"deposits-withdrawals": "Nạp\/Rút tiền"
+}

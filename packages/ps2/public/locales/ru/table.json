@@ -1,0 +1,29 @@
+{
+	"footer": {
+		"elements": {
+			"show": "Показывать",
+			"out": "из",
+			"items": "элементы"
+		},
+		"page": {
+			"items": "Страница",
+			"out": "из"
+		},
+		"selector": {
+			"display": "Отображение",
+			"items": "элементы"
+		}
+	},
+	"balanceSummary-invested": "Инвестировано",
+	"selector-validation-notData": "Данные недоступны",
+	"investColumn": {
+		"successFess": "10% Комиссия за Успех",
+		"liquidated": "ЛИКВИДИРОВАН"
+	},
+	"tooltip-columnHeader": "Переключить Сортировать по",
+	"serviceName-by": "by",
+	"columns-hideOrShow": "Показать\/Скрыть Столбцы",
+	"assetsInPool-investors_one": "{{count}} инвестор",
+	"assetsInPool-investors_other": "{{count}} инвесторов",
+	"owner-verified": "Менеджер прошел проверку"
+}
