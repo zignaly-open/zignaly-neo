@@ -17,16 +17,19 @@ jobs:
         id: clickup
         run: |
             CLICKUP_ID=$(echo "${{ github.event.pull_request.title }}" | grep -oP '(?<=(CU-))[#\da-z]+')
-            echo "clickup_id=$CLICKUP_ID" >> $GITHUB_OUTPUT
-      - name: Dump context
-        uses: crazy-max/ghaction-dump-context@v2
+            if [ $CLICKUP_ID ] 
+            then 
+              echo "clickup_status=#$CLICKUP_ID""[in progress]" >> $GITHUB_OUTPUT
+            else 
+              echo "clickup_status=""[no clickup]" >> $GITHUB_OUTPUT
+            fi
       - run: echo ${{steps.clickup.outputs.clickup_id}}
       - name: Merge the PR branch to origin/test
         uses: devmasx/merge-branch@master
         with:
           type: now
           target_branch: test
-          message: Merging ${{steps.clickup.outputs.clickup_id}}[in progress] ${{ github.event.pull_request.head.ref }}
+          message: Merging ${{ github.event.pull_request.head.ref }} ${{steps.clickup.outputs.clickup_status}}
           from_branch: ${{ github.event.pull_request.head.ref }}
           github_token: ${{ secrets.ROBOZIGNALY_PAT }}
 
