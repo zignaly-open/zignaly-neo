@@ -13,12 +13,13 @@ jobs:
       - uses: actions/checkout@master
         with:
           token: ${{ secrets.ROBOZIGNALY_PAT }}
-      - name: Dump context
-        uses: crazy-max/ghaction-dump-context@v2
       - name: Get clickup id
         id: clickup
         run: |
-            echo "::set-output name=clickup_id::$(echo ${{ github.event.pull_request.title }} | grep -oP '(?<=CU-)[0-9]+')"
+            CLICKUP_ID=$(echo "${{ github.event.pull_request.title }}" | grep -oP '(?<=CU-)[0-9]+')
+            echo "clickup_id=$CLICKUP_ID" >> $GITHUB_OUTPUT
+      - name: Dump context
+        uses: crazy-max/ghaction-dump-context@v2
       - run: echo ${{steps.clickup.outputs.clickup_id}}
       - name: Merge the PR branch to origin/test
         uses: devmasx/merge-branch@master
