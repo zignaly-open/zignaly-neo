@@ -98,19 +98,17 @@ const MyBalancesTable = (): JSX.Element => {
                 variant='secondary'
               />
             )}
-            {+row.original.balance.balanceTotal > 0 && (
-              <IconButton
-                id={'balance-row__withdrawal'}
-                icon={<Remove color={'neutral300'} />}
-                onClick={() =>
-                  showModal(WithdrawModal, {
-                    selectedCoin: row.original.coin,
-                    ctaId: 'balances-table-row',
-                  })
-                }
-                variant='secondary'
-              />
-            )}
+            <IconButton
+              id={'balance-row__withdrawal'}
+              icon={<Remove color={'neutral300'} />}
+              onClick={() =>
+                showModal(WithdrawModal, {
+                  selectedCoin: row.original.coin,
+                  ctaId: 'balances-table-row',
+                })
+              }
+              variant='secondary'
+            />
           </Box>
         ),
       }),

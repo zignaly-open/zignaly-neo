@@ -8,4 +8,5 @@ export interface PercentageIndicatorProps {
   style?: CSSProperties;
   normalized?: boolean;
   stableCoinOperative?: boolean;
+  id?: string;
 }
