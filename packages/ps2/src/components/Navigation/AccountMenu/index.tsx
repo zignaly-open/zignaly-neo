@@ -169,7 +169,6 @@ function AccountMenu(): React.ReactElement | null {
           onClick: () => navigate(ROUTE_REFERRALS),
         },
         {
-          separator: true,
           id: 'account-menu-dropdown__log-out',
           element: (
             <LogoutButtonWrap>

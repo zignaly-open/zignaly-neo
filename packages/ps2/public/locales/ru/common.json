@@ -1,6 +1,77 @@
 {
-  "coming-soon": {
-    "title": "В разработке",
-    "description": "Этот раздел находится в разработке, скоро всё будет, честно-честно"
-  }
+	"yes": "Да",
+	"no": "Нет",
+	"loading": "Загрузка...",
+	"coming-soon": {
+		"title": "Скоро",
+		"description": "Этот раздел находится в стадии разработки, вы увидите его доступным позднее."
+	},
+	"no-data": {
+		"title": "Нет Данных",
+		"description": "Данные отсутствуют. Если вы считаете, что это проблема, обратитесь в службу поддержки."
+	},
+	"critical-error": {
+		"title": "Произошла Ошибка",
+		"description": "Что-то пошло не так. Пожалуйста, повторите попытку позже или обратитесь в службу поддержки. Или откажитесь от индустриального общества и постройте хижину в лесу."
+	},
+	"main-menu": {
+		"dropdown-link-forTrading": "Управление Вашими Сервисами",
+		"dropdown-link-helpDocs": "Раздел Помощи"
+	},
+	"account-menu": {
+		"isAuth-button-logIn": "Войти",
+		"isAuth-button-signUp": "ЗАРЕГИСТРИРОВАТЬСЯ",
+		"notAuth-dropdown-link-dashboard": "Мое Портфолио",
+		"notAuth-dropdown-link-balances": "Мои Балансы",
+		"notAuth-button-logOut": "Выход",
+		"notAuth-dropdown-link-wallet": "ZIG Wallet",
+		"referrals": "Рефералы",
+		"notAuth-dropdown-link-settings": "Настройки",
+		"notAuth-dropdown-link-password": "Пароль",
+		"notAuth-dropdown-link-2fa": "Двухфакторная Аутентификация"
+	},
+	"account-selector": {
+		"type": {
+			"title": "Тип:",
+			"futures": "Фьючерсы",
+			"spot": "Спот"
+		}
+	},
+	"navigation-menu": {
+		"profit-sharing": "Просмотреть Топ Трейдеров",
+		"become-trader": "Предложить свой торговый сервис"
+	},
+	"amount": "Сумма",
+	"new-version": "Новая версия, нажмите на меня, чтобы обновить",
+	"validation": {
+		"insufficient-amount": "Недостаточно средств",
+		"invalid-value": "Неверное значение",
+		"negative-amount": "Должно быть > = 0",
+		"invalid-amount": "Вы должны указать сумму",
+		"negative-zeroable-amount": "Должно быть > 0",
+		"max-decimals": "Пожалуйста, вводите число, содержащие не более 8 знаков после запятой.",
+		"max-allowed-length": "Должно быть менее {{ maxLength }} символов",
+		"min-amount": "Минимальная сумма составляет {{amount}} {{coin}}.",
+		"insufficient-amount-min": "Минимальная сумма: {{ minValue }} {{ minValueCoin }}",
+		"invalid-characters": "Недопустимые символы",
+		"letter-number": "Должен содержать хотя бы одну букву или цифру",
+		"min-invest-amount-for-owner": "Баланс владельца должен быть выше {{minAmount}} {{minAmountCoin}}"
+	},
+	"back": "Назад",
+	"close": "Закрыть",
+	"404": {
+		"title": "Не найдено",
+		"description": "Проверьте URL или ваши взгляды на жизнь."
+	},
+	"refresh": {
+		"short": "Доступна новая версия, нажмите здесь, чтобы обновить"
+	},
+	"percent": "{{value, prettyNumber}}%",
+	"number": "{{value, prettyNumber}}",
+	"infinitely-better": "Да, текущее значение на бесконечность процентов лучше, потому что начальное значение равно 0.",
+	"infinitely-worse": "Да, текущее значение на бесконечность процентов хуже, потому что начальное значение равно 0.",
+	"changes-saved": "Изменения успешно сохранены",
+	"name": "Имя",
+	"type-to-confirm": "Введите \" {{word}} \" для подтверждения",
+	"ok": "OK"
 }
