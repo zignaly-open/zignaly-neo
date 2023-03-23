@@ -7,6 +7,11 @@ import ConfirmModal, { ConfirmModalProps } from './modals/ConfirmModal';
 import TypeTextConfirmModal, {
   TypeTextConfirmModalProps,
 } from './modals/TypeTextConfirmModal';
+import {
+  generatePath,
+  Params,
+  useNavigate,
+} from 'react-router-dom';
 
 export function useZModal(options?: UseModalOptions) {
   const { showModal, ...etc } = useModal(options);
@@ -37,6 +42,20 @@ export function useZModal(options?: UseModalOptions) {
     originalShowModal: showModal,
   };
 }
+
+export function useZRouteModal(route: string): {
+  showModal: (params?: Params<string>) => void;
+} {
+  const navigate = useNavigate();
+  const showModal = useCallback(
+    (params) => navigate(generatePath(route, params || {})),
+    [],
+  );
+  return {
+    showModal,
+  };
+}
+
 export function useZAlert(): (props: AlertModalProps) => ShowFnOutput<void> {
   const { showModal } = useZModal();
   return (props) => showModal(AlertModal, props);

@@ -1,7 +1,7 @@
 import React from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, Outlet } from 'react-router-dom';
 import ProfitSharing from './views/ProfitSharing';
-import Dashboard from './views/Dashboard';
+import Dashboard, { DashboardModalInvestmentEdit } from './views/Dashboard';
 import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
 import ForgotPassword from './views/Auth/ForgotPassword';
@@ -31,6 +31,7 @@ import {
   ROUTE_REFERRALS,
   ROUTE_RESET_PASSWORD,
   ROUTE_REFERRALS_INVITE,
+  ROUTE_DASHBOARD_EDIT_INVESTMENT,
 } from './routes';
 
 import Management from './views/TraderService/Management';
@@ -52,10 +53,22 @@ import ResetPassword from 'views/Auth/ResetPassword';
 import Referrals from './views/Referrals';
 import Invite from './views/Referrals/Invite';
 
+const outleted = (Component: JSX.Element) => (
+  <>
+    {Component}
+    <Outlet />
+  </>
+);
+
 const Router: React.FC = () => (
   <Routes>
     <Route element={<AuthenticatedWall />}>
-      <Route path={ROUTE_DASHBOARD} element={<Dashboard />} />
+      <Route path={ROUTE_DASHBOARD} element={outleted(<Dashboard />)}>
+        <Route
+          path={ROUTE_DASHBOARD_EDIT_INVESTMENT}
+          element={<DashboardModalInvestmentEdit />}
+        />
+      </Route>
       <Route path={ROUTE_MY_BALANCES} element={<MyBalances />} />
       <Route path={ROUTE_WALLET} element={<Wallet />} />
       <Route path={ROUTE_REFERRALS} element={<Referrals />} />

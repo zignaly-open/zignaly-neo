@@ -17,13 +17,13 @@ import BigNumber from 'bignumber.js';
 import { formatDateFromDays } from './util';
 import { Investment } from '../../../../apis/investment/types';
 import { BalanceSummary } from '../BalanceSummary';
-import EditInvestmentModal from '../ManageInvestmentModals/EditInvestmentModal';
 import { ServiceName } from '../ServiceName';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
-import { useZModal } from '../../../../components/ZModal/use';
+import { useZRouteModal } from '../../../../components/ZModal/use';
 import { differenceInDays } from 'date-fns';
+import { ROUTE_DASHBOARD_EDIT_INVESTMENT } from '../../../../routes';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -34,13 +34,11 @@ const MyDashboard: React.FC = () => {
   const selectInvestment = useSetSelectedInvestment();
   // we do not use the results of this till before the modal
   useCoinBalances();
-  const { showModal } = useZModal();
+  const { showModal } = useZRouteModal(ROUTE_DASHBOARD_EDIT_INVESTMENT);
 
   const onClickEditInvestment = (service: Investment) => {
     selectInvestment(service);
-    showModal(EditInvestmentModal, {
-      ctaId: 'edit-investment-dashboard',
-    });
+    showModal({ serviceId: service.serviceId });
   };
 
   const calculateServiceAge = (createdAt: string) =>
