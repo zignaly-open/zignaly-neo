@@ -64,7 +64,7 @@
 		},
 		"editInvestments": {
 			"title": "Editar Investimento",
-			"loading": "Carregamento editar investimento"
+			"loading": "Carregando editar investimento"
 		}
 	},
 	"modalSuccess": {

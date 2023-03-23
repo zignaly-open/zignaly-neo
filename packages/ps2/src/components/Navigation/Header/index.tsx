@@ -14,9 +14,17 @@ import {
 import { Link } from 'react-router-dom';
 import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
 import AccountMenu from '../AccountMenu';
+import ReferralButton from '../ReferralButton';
+import { useIsAuthenticated } from '../../../apis/user/use';
+import BalanceButton from '../BalanceButton';
+import { useMediaQuery } from '@mui/material';
+import theme from 'theme';
 
 const Header: React.FC = () => {
   const { t } = useTranslation('common');
+  const isAuthenticated = useIsAuthenticated();
+  const md = useMediaQuery(theme.breakpoints.up('sm'));
+
   return (
     <ZigHeader
       leftElements={[
@@ -46,7 +54,11 @@ const Header: React.FC = () => {
         </HeaderLinksContainer>,
         <ExtraNavigationDropdown key={'extra-nav'} />,
       ]}
-      rightElements={[<AccountMenu key={'account'} />]}
+      rightElements={[
+        isAuthenticated && md && <BalanceButton key={'balance'} />,
+        isAuthenticated && md && <ReferralButton key={'referral'} />,
+        <AccountMenu key={'account'} />,
+      ].filter(Boolean)}
     />
   );
 };

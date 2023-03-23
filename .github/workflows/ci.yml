@@ -6,7 +6,7 @@ jobs:
   lint_and_test:
     name: Make sure our Zignaly code is great <3
     runs-on: ubuntu-latest
-
+    timeout-minutes: 20
     strategy:
       matrix:
         node: [ 16.x ]

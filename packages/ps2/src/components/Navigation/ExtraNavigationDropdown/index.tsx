@@ -9,7 +9,7 @@ import { NavLink, Networks } from './styles';
 import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
 import { supportedLanguages } from '../../../util/i18next';
-import { useChangeLocale } from '../../../apis/user/use';
+import { useChangeLocale, useIsAuthenticated } from '../../../apis/user/use';
 import {
   useFirstOwnedService,
   useTraderServices,
@@ -34,6 +34,7 @@ const ExtraNavigationDropdown: React.FC = () => {
   const changeLocale = useChangeLocale();
   const service = useFirstOwnedService();
   const { data: traderServices, isFetching } = useTraderServices();
+  const isAuthenticated = useIsAuthenticated();
 
   const onClose = useCallback(() => {
     dropDownRef.current?.closeDropDown();
@@ -108,7 +109,7 @@ const ExtraNavigationDropdown: React.FC = () => {
       (x) => x.id !== 'menu-dropdown__language-switcher',
     );
   }
-  if (traderServices?.length && !isFetching) {
+  if (isAuthenticated && traderServices?.length && !isFetching) {
     options = [
       {
         label: t('main-menu.dropdown-link-forTrading'),

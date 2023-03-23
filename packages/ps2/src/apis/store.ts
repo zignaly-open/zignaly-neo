@@ -1,18 +1,15 @@
 import { Action, combineReducers, configureStore } from '@reduxjs/toolkit';
 import userReducer, { logout } from './user/store';
-import { api as userApi } from './user/api';
+import ps2Api from './baseApiPs2';
 import investmentReducer from './investment/store';
-import { api as investmentApi } from './investment/api';
 import serviceApiKeyReducer from './serviceApiKey/store';
-import { api as serviceApiKeyApi } from './serviceApiKey/api';
 import coinReducer from './coin/store';
-import { api as coinApi } from './coin/api';
 import serviceReducer from './service/store';
-import { api as serviceApi } from './service/api';
 import marketplaceReducer from './marketplace/store';
-import { api as marketplaceApi } from './marketplace/api';
 import walletReducer from './wallet/store';
 import { api as walletApi } from './wallet//api';
+import referralsReducer from './referrals/store';
+import { api as referralApi } from './referrals/api';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { UserState } from './user/types';
@@ -21,33 +18,27 @@ import { ServiceState } from './service/types';
 import { MarketplaceState } from './marketplace/types';
 import { CoinState } from './coin/types';
 import { WalletState } from './wallet/types';
+import { ReferralsState } from './referrals/types';
 
 const persistConfig = {
   key: 'root',
   storage,
   // TODO: maybe we should actually leverage cache
   blacklist: [
-    'userApi',
-    'marketplaceApi',
-    'coinApi',
-    'investmentApi',
-    'dashboardApi',
-    'serviceApi',
-    'walletApi',
-  ] as string[],
+    ps2Api.reducerPath,
+    walletApi.reducerPath,
+    referralApi.reducerPath,
+  ],
 };
 
 const appReducer = combineReducers({
-  [userApi.reducerPath]: userApi.reducer,
-  [serviceApi.reducerPath]: serviceApi.reducer,
-  [investmentApi.reducerPath]: investmentApi.reducer,
-  [serviceApiKeyApi.reducerPath]: serviceApiKeyApi.reducer,
-  [marketplaceApi.reducerPath]: marketplaceApi.reducer,
-  [coinApi.reducerPath]: coinApi.reducer,
+  [ps2Api.reducerPath]: ps2Api.reducer,
   [walletApi.reducerPath]: walletApi.reducer,
+  [referralApi.reducerPath]: referralApi.reducer,
   marketplace: marketplaceReducer,
   user: userReducer,
   coin: coinReducer,
+  referrals: referralsReducer,
   investment: investmentReducer,
   serviceApiKey: serviceApiKeyReducer,
   service: serviceReducer,
@@ -68,13 +59,9 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: false,
     })
-      .concat(userApi.middleware)
-      .concat(serviceApi.middleware)
-      .concat(marketplaceApi.middleware)
-      .concat(coinApi.middleware)
-      .concat(investmentApi.middleware)
+      .concat(ps2Api.middleware)
       .concat(walletApi.middleware)
-      .concat(serviceApiKeyApi.middleware),
+      .concat(referralApi.middleware),
 });
 
 export const persistor = persistStore(store);
@@ -84,6 +71,7 @@ export type RootState = {
   user: UserState;
   coin: CoinState;
   marketplace: MarketplaceState;
+  referrals: ReferralsState;
   investment: InvestmentState;
   service: ServiceState;
   wallet: WalletState;

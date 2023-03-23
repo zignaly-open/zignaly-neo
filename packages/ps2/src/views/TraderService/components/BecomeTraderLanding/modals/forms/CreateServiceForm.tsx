@@ -24,7 +24,7 @@ import {
   AlertBlock,
   ModalActionsNew,
 } from 'components/ZModal/ModalContainer/styles';
-import { useServiceTypesInfoQuery } from '../../../../../../apis/service/api';
+import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 
 const CreateServiceForm: React.FC<{
   service?: Partial<ServiceFormData>;
@@ -53,7 +53,7 @@ const CreateServiceForm: React.FC<{
 
   const exchangeType = watch('serviceType');
 
-  const { data: serviceTypesInfo } = useServiceTypesInfoQuery();
+  const { data: serviceTypesInfo } = useTraderServiceTypesInfoQuery();
 
   const coinOptions = useMemo(
     () =>

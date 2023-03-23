@@ -5,6 +5,7 @@ export type ZigPriceLabelProps = Partial<TypographyProps> & {
   coin?: string;
   precision?: number;
   exact?: boolean;
+  prefix?: string | JSX.Element;
   shorten?: boolean;
   showTooltip?: boolean;
   usd?: boolean;

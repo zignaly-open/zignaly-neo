@@ -109,6 +109,7 @@ function EditApiKeysModal({
 
   return (
     <ZModal
+      authOnly
       wide
       {...props}
       close={close}
@@ -312,6 +313,7 @@ function EditApiKeysModal({
 
         <Box sx={{ textAlign: 'center', mt: 4 }}>
           <ZigButton
+            id={'api-key__save-and-close'}
             variant={'contained'}
             loading={isLoading}
             type='submit'

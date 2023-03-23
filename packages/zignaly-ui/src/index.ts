@@ -29,6 +29,7 @@ export { default as ZigTabs, ZigTab, ZigTabPanel } from "./components/navigation
 export { createColumnHelper } from "@tanstack/react-table";
 export type { ColumnDef } from "@tanstack/react-table";
 export { default as ZigTable } from "./components/display/ZigTable";
+export { downloadTableCsv } from "./components/display/ZigTable/util";
 export { default as DateLabel } from "./components/display/Table/components/DateLabel"; // yes, this is used
 export { default as PercentageIndicator } from "./components/display/Table/components/PercentageIndicator"; // yes, this is used too
 export { default as CoinLabel } from "./components/display/Table/components/CoinLabel";
@@ -106,3 +107,4 @@ export { sortByValue } from "utils/numbers";
 export { NiceScrollbar } from "utils/css";
 export { styledIf } from "utils/styled";
 export { HeaderLinksContainer } from "components/navigation/Header/styles";
+export { getPrecisionForCoin } from "components/display/ZigPriceLabel/util";

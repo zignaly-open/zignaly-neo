@@ -23,6 +23,7 @@ jobs:
   build:
     name: PS2 Staging deploy
     needs: pre_job
+    timeout-minutes: 20
     if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).ui_repos.should_skip
     runs-on: ubuntu-latest
     environment: test
@@ -46,6 +47,7 @@ jobs:
           envkey_REACT_APP_ENABLE_TEST_LANGUAGE: 1
           envkey_REACT_APP_BASE_API: https://staging.zignaly.com/new_api
           envkey_REACT_APP_WALLET_API: https://wallet.zignaly.com/api
+          envkey_REACT_APP_REFERRALS_API: https://referrals.zignaly.com/
           envkey_REACT_APP_SEGMENT_NAME: zignaly
           envkey_REACT_APP_SENTRY_DNS: https://b87b3bf895ff4c0cb0e1bee22f3a0648@o967264.ingest.sentry.io/6492584
           directory: packages/ps2

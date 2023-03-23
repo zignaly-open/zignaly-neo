@@ -128,6 +128,8 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
             {getValue() ||
               (original.txType === TRANSACTION_TYPE.PS_WITHDRAW
                 ? t('psService')
+                : getTransactionSideType(original.txType, 'from') === 'zignaly'
+                ? t('deleted')
                 : t('external'))}
           </ZigTypography>
         ),
@@ -177,6 +179,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
       endpoint={[transactionsEndpoint, coinsEndpoint]}
       content={() => (
         <ZigTable
+          prefixId={'transactions'}
           columns={columns}
           data={filteredData}
           initialState={{

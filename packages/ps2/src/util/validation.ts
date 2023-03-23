@@ -64,6 +64,27 @@ const inputAmountNumberValidationMaxToken = inputAmountNumberValidationGt0.test(
   },
 );
 
+export const inputAmountMinOwnerInvested = (minInvestedAmount: number) =>
+  yup
+    .string()
+    .test(
+      'number',
+      'common:validation.min-invest-amount-for-owner',
+      function (val) {
+        const tokenBalance = new BigNumber(this.parent?.token?.balance);
+        const currentValue = new BigNumber(val);
+        const minBalance = new BigNumber(minInvestedAmount);
+        return tokenBalance
+          .minus(currentValue)
+          .isGreaterThanOrEqualTo(minBalance);
+      },
+    );
+
+export const inputAmountMinOwnerInvestedValidation = (minAmount: number) =>
+  yup.object().shape({
+    value: inputAmountMinOwnerInvested(minAmount),
+  });
+
 const inputAmountNumberValidationMinToken = inputAmountNumberValidationGt0.test(
   'number',
   'common:validation.insufficient-amount-min',

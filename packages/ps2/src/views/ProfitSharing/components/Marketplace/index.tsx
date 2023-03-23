@@ -18,6 +18,7 @@ import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace
 import AssetsInPool from '../../../../components/AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 import { TableWrapper } from './styles';
+// import TopServicesCards from '../TopServicesCards';
 
 const Marketplace: React.FC = () => {
   const marketplaceEndpoint = useMarketplace();
@@ -27,10 +28,11 @@ const Marketplace: React.FC = () => {
   const columns = useMemo(
     () => [
       columnHelper.accessor('name', {
+        id: 'service-name',
         header: t('table.service-name'),
         style: {
           justifyContent: 'flex-start',
-          paddingLeft: '83px',
+          paddingLeft: '88px',
         },
         meta: {
           subtitle: (
@@ -42,6 +44,7 @@ const Marketplace: React.FC = () => {
         },
         cell: (props) => (
           <ServiceName
+            prefixId={`marketplace-table`}
             service={
               marketplaceServiceToInvestmentType(
                 props.row.original,
@@ -51,6 +54,7 @@ const Marketplace: React.FC = () => {
         ),
       }),
       columnHelper.accessor('investedUSDT', {
+        id: 'investedUSDT',
         header: t('table.assets'),
         meta: {
           subtitle: (
@@ -61,8 +65,12 @@ const Marketplace: React.FC = () => {
           ),
         },
         cell: (props) => (
-          <Box minWidth={148}>
+          <Box
+            minWidth={148}
+            id={`marketplace-table__assets-${props.row.original.id}`}
+          >
             <AssetsInPool
+              prefixId={'marketplace-table'}
               assetsValue={props.getValue()}
               numberOfInvestors={props.row.original.investors}
               createdAt={props.row.original.createdAt}
@@ -75,30 +83,38 @@ const Marketplace: React.FC = () => {
         id: 'pnlPercent90t',
         header: t('table.n-months-pnl', { count: 3 }),
         cell: (props) => (
-          <PercentageIndicator
-            style={{
-              fontSize: '18px',
-              lineHeight: '28px',
-            }}
-            value={props.getValue()}
-          />
+          <Box id={`marketplace-table__pnl90t-${props.row.original.id}`}>
+            <PercentageIndicator
+              style={{
+                fontSize: '18px',
+                lineHeight: '28px',
+              }}
+              value={props.getValue()}
+            />
+          </Box>
         ),
       }),
       columnHelper.accessor((row) => Number(row.pnlPercent30t), {
         id: 'pnlPercent30t',
         header: t('table.n-months-pnl', { count: 1 }),
-        cell: (props) =>
-          +props.getValue() ||
-          Object.keys(props.row.original.sparklines).length > 1 ? (
-            <>
-              <ZigChartMini midLine data={props.row.original.sparklines} />
-              <PercentageIndicator value={props.getValue()} type={'graph'} />
-            </>
-          ) : (
-            <ZigTypography variant='body2' color='neutral400'>
-              {t('tableHeader.1-mo.no-data')}
-            </ZigTypography>
-          ),
+        cell: (props) => (
+          <Box id={`marketplace-table__pnl30t-${props.row.original.id}`}>
+            {+props.getValue() ||
+            Object.keys(props.row.original.sparklines).length > 1 ? (
+              <>
+                <ZigChartMini
+                  midLine
+                  data={[0, ...(props.row.original.sparklines as number[])]}
+                />
+                <PercentageIndicator value={props.getValue()} type={'graph'} />
+              </>
+            ) : (
+              <ZigTypography variant='body2' color='neutral400'>
+                {t('tableHeader.1-mo.no-data')}
+              </ZigTypography>
+            )}
+          </Box>
+        ),
       }),
       columnHelper.display({
         header: '',
@@ -122,15 +138,30 @@ const Marketplace: React.FC = () => {
                 mb: 4,
               }}
             >
-              <ZigTypography variant={'h1'}>
+              <ZigTypography
+                variant={'h1'}
+                id={'marketplace__title'}
+                lineHeight='42px'
+              >
                 {t('invest-in-services')}
               </ZigTypography>
-              <ZigTypography variant={'body1'}>
+              <ZigTypography
+                variant={'body1'}
+                id={'marketplace__description'}
+                color='neutral300'
+              >
                 {t('invest-in-services-explainer')}
               </ZigTypography>
             </Box>
+            {/* <TopServicesCards
+              services={services
+                ?.slice()
+                .sort((a, b) => +b.pnlPercent90t - +a.pnlPercent90t)
+                .slice(0, 3)}
+            /> */}
             <TableWrapper>
               <ZigTable
+                prefixId={'marketplace'}
                 initialState={{
                   sorting: [
                     {
