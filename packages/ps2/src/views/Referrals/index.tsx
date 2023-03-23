@@ -171,6 +171,7 @@ const Referrals: React.FC = () => {
                       <ZigPriceLabel
                         color={'greenGraph'}
                         usd
+                        showTooltip
                         variant={'bigNumber'}
                         value={rewardsData.usdtEarned}
                       />
