@@ -41,17 +41,14 @@ export function useZModal(options?: UseZModalOptions) {
   };
 }
 
-export function useZRouteModal(route: string): {
-  showModal: (params?: Params<string>) => void;
-} {
+export function useZRouteModal(
+  route: string,
+): (params?: Params<string>) => void {
   const navigate = useNavigate();
-  const showModal = useCallback(
+  return useCallback(
     (params) => navigate(generatePath(route, params || {})),
     [],
   );
-  return {
-    showModal,
-  };
 }
 
 export function useZAlert(): (props: AlertModalProps) => ShowFnOutput<void> {

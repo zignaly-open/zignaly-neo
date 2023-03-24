@@ -29,10 +29,12 @@ const MyDashboard: React.FC = () => {
     skip: !exchange?.internalId,
   });
   useCoinBalances();
-  const { showModal } = useZRouteModal(ROUTE_DASHBOARD_EDIT_INVESTMENT);
+  const showEditInvestmentModal = useZRouteModal(
+    ROUTE_DASHBOARD_EDIT_INVESTMENT,
+  );
 
   const onClickEditInvestment = (service: Investment) =>
-    showModal({ serviceId: service.serviceId });
+    showEditInvestmentModal({ serviceId: service.serviceId });
   const calculateServiceAge = (createdAt: string) =>
     differenceInDays(new Date(), new Date(createdAt)).toString();
 
