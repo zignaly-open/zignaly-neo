@@ -1,7 +1,10 @@
 export const ROUTE_DASHBOARD = '/my-portfolio';
-export const ROUTE_DASHBOARD_EDIT_INVESTMENT =
-  '/my-portfolio/invest/:serviceId';
+export const ROUTE_DASHBOARD_EDIT_INVESTMENT = '/my-portfolio/edit/:serviceId';
 export const ROUTE_PROFIT_SHARING = '/profit-sharing';
+// export const ROUTE_PROFIT_SHARING_EDIT_INVESTMENT =
+//   '/profit-sharing/edit/:serviceId';
+// export const ROUTE_PROFIT_SHARING_INVEST = '/profit-sharing/invest/:serviceId';
+// export const ROUTE_PROFIT_SHARING_INVEST = '/profit-sharing/invest/:serviceId';
 export const ROUTE_BECOME_TRADER = '/become-trader';
 export const ROUTE_LOGIN = '/login';
 export const ROUTE_SIGNUP = '/signup';
@@ -20,6 +23,9 @@ export const ROUTE_TRADING_SERVICE_SIGNALS = ROUTE_TRADING_SERVICE + '/signals';
 export const ROUTE_TRADING_SERVICE_MANUAL = ROUTE_TRADING_SERVICE + '/manual';
 export const ROUTE_TRADING_SERVICE_EDIT = ROUTE_TRADING_SERVICE + '/edit';
 export const ROUTE_MY_BALANCES = '/my-balances';
+export const ROUTE_MY_BALANCES_DEPOSIT_COIN =
+  '/my-balances/deposit/:selectedCoin';
+export const ROUTE_MY_BALANCES_DEPOSIT = '/my-balances/deposit';
 export const ROUTE_WALLET = '/zigwallet';
 export const ROUTE_REFERRALS = '/referrals';
 export const ROUTE_REFERRALS_INVITE = '/invite/:key';

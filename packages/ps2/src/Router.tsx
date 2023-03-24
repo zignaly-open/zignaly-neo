@@ -5,7 +5,7 @@ import Dashboard, { DashboardModalInvestmentEdit } from './views/Dashboard';
 import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
 import ForgotPassword from './views/Auth/ForgotPassword';
-import MyBalances from './views/Balance';
+import MyBalances, { MyBalancesDeposit } from './views/Balance';
 import Wallet from './views/Wallet';
 
 import {
@@ -32,6 +32,8 @@ import {
   ROUTE_RESET_PASSWORD,
   ROUTE_REFERRALS_INVITE,
   ROUTE_DASHBOARD_EDIT_INVESTMENT,
+  ROUTE_MY_BALANCES_DEPOSIT,
+  ROUTE_MY_BALANCES_DEPOSIT_COIN,
 } from './routes';
 
 import Management from './views/TraderService/Management';
@@ -69,7 +71,16 @@ const Router: React.FC = () => (
           element={<DashboardModalInvestmentEdit bgRoute={ROUTE_DASHBOARD} />}
         />
       </Route>
-      <Route path={ROUTE_MY_BALANCES} element={<MyBalances />} />
+      <Route path={ROUTE_MY_BALANCES} element={outleted(<MyBalances />)}>
+        <Route
+          path={ROUTE_MY_BALANCES_DEPOSIT}
+          element={<MyBalancesDeposit bgRoute={ROUTE_MY_BALANCES} />}
+        />
+        <Route
+          path={ROUTE_MY_BALANCES_DEPOSIT_COIN}
+          element={<MyBalancesDeposit bgRoute={ROUTE_MY_BALANCES} />}
+        />
+      </Route>
       <Route path={ROUTE_WALLET} element={<Wallet />} />
       <Route path={ROUTE_REFERRALS} element={<Referrals />} />
     </Route>
