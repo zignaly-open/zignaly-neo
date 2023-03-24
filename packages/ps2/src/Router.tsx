@@ -66,7 +66,7 @@ const Router: React.FC = () => (
       <Route path={ROUTE_DASHBOARD} element={outleted(<Dashboard />)}>
         <Route
           path={ROUTE_DASHBOARD_EDIT_INVESTMENT}
-          element={<DashboardModalInvestmentEdit />}
+          element={<DashboardModalInvestmentEdit bgRoute={ROUTE_DASHBOARD} />}
         />
       </Route>
       <Route path={ROUTE_MY_BALANCES} element={<MyBalances />} />
