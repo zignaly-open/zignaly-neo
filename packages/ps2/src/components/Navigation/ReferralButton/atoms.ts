@@ -5,6 +5,7 @@ export const GradientBorderButtonWrapper = styled(Box)`
   background: linear-gradient(46deg, #138ea0, #3f3bb1);
   border-radius: 4px;
   padding: 1px;
+  height: 42px;
 
   &:hover {
     background: ${({ theme }) => theme.palette.neutral600};

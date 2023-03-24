@@ -1,0 +1,87 @@
+{
+	"manage": "Quản lý",
+	"totalFunds": "Tổng số tiền trong dịch vụ",
+	"tradingFunds": "Quỹ giao dịch",
+	"tradingFunds-desc": "Số dư khả dụng để giao dịch và mở vị thế",
+	"availableTrading": "Có sẵn để giao dịch:",
+	"allocatedTrading": "Phân bổ cho giao dịch:",
+	"neededSnapshot": "Số tiền cần chi",
+	"helper": "Bạn cần trợ giúp? Vui lòng xem qua <0>Cách hoạt động của số dư trong dịch vụ Profit Sharing<\/0>.",
+	"minBalance": {
+		"title": "Số dư tối thiểu:",
+		"success": "Bạn đã chỉnh sửa số dư tối thiểu thành công."
+	},
+	"minBalanceModal": {
+		"title": "Chỉnh sửa số dư tối thiểu",
+		"desc": "Thiết lập số dư tối thiểu mà bạn muốn giữ trong Tài khoản dự phòng. Nếu số dư cao hơn mức tối thiểu, trong quá trình hạch toán, phần chênh lệch sẽ tự động được chuyển vào Tài khoản giao dịch.",
+		"placeholder": "0.0",
+		"labelBalance": "Số dư tối thiểu hiện tại",
+		"save": "Lưu"
+	},
+	"controlledZignaly": "Kiểm soát bởi Zignaly",
+	"transfer": {
+		"title": "Chuyển",
+		"loading": "Đang tải",
+		"placeholder": "0.0",
+		"labelBalance": "Số Dư Khả Dụng",
+		"deposit-available": "Số Dư Khả Dụng",
+		"fromTradingAccount": "Từ tài khoản giao dịch",
+		"toTradingAccount": "Vào tài khoản giao dịch:",
+		"now": "Chuyển ngay",
+		"success": "Bạn đã chuyển thành công {{amount}} .",
+		"fromStandbyAccount": "Từ tài khoản dự phòng",
+		"toStandbyAccount": "Đến tài khoản dự phòng:"
+	},
+	"transferFunds": {
+		"title": "Chuyển tiền",
+		"description": "Chuyển tiền ngay lập tức giữa Tài khoản giao dịch và Tài khoản dự phòng trong dịch vụ của bạn"
+	},
+	"hardDiconnectWarning": "Số lần rút tiền ngay của bạn đã đạt đến {perc} %. Nếu con số đạt {maxPerc} % của tổng tiền trong dịch vụ, Zignaly sẽ kiểm soát dịch vụ của bạn.",
+	"previousValue": "Giá trị trước đó:",
+	"loading-arialLabel": "Đang tải mục quản lý",
+	"standbyFunds": "Quỹ dự phòng",
+	"standbyFunds-desc": "Tiền hiện có để trả cho các nhà đầu tư muốn rút tiền",
+	"availableWithdrawals": "Có thể rút:",
+	"api-keys": {
+		"title": "Giao dịch với API",
+		"description": "Tạo Binance API key cho dịch vụ Profit-sharing và kết nối chúng với công cụ hoặc ứng dụng yêu thích của bạn. Bạn cũng có thể kết nối các khóa API này với ứng dụng giao dịch Zignaly của chúng tôi tại <0>trading.zignaly.com<\/0>.",
+		"create-key": "Tạo khóa API",
+		"no-keys": "Không có mã API nào",
+		"no-keys-description": "Bạn chưa tạo bất kỳ API key nào",
+		"manage-keys": "Quản lý API key",
+		"api-key": "Mã API",
+		"api-settings": "Cài đặt API",
+		"api-settings-tooltip": "Bạn muộn mất rồi! Mã bí mật API chỉ được hiển thị một lần. Nếu bạn đã mất nó, bạn sẽ phải tạo lại mã mới",
+		"cant-disable-read": "Bạn không thể tắt quyền đọc",
+		"restrict-ip": "Hạn chế IP",
+		"api-secret": "Mã bí mật của API",
+		"zignaly-code": "Mã Zignaly",
+		"api-secret-explainer": "Chỉ hiển thị khi tạo khóa. Nếu bị mất, bạn sẽ phải tạo khóa API mới",
+		"permission-label": "Quyền hạn",
+		"permissions": {
+			"read": "Đọc",
+			"canTrade": "Giao dịch giao ngay",
+			"marginTrade": "Giao dịch ký quỹ",
+			"futuresTrade": "Giao dịch hợp đồng tương lai"
+		},
+		"permissions-enable": {
+			"read": "Kích hoạt tính năng đọc",
+			"canTrade": "Kích hoạt giao dịch giao ngay",
+			"marginTrade": "Kích hoạt giao dịch ký quỹ",
+			"futuresTrade": "Kích hoạt giao dịch tương lai"
+		},
+		"create-new-key": "Tạo mã API mới",
+		"create-new-key-description": "Tạo mã API mới để kết nối và giao dịch từ nền tảng giao dịch yêu thích của bạn.",
+		"edit-key": "Chỉnh sửa phần cài đặt mã API",
+		"delete-title": "Xóa API {{title}}",
+		"delete-description": "Hành động này không thể đảo ngược.",
+		"ip-restrictions": "Hạn chế IP",
+		"ip-restrictions-none": "Không hạn chế",
+		"ip-restrictions-invalid": "Định dạng ip không hợp lệ",
+		"ip-restrictions-ranges": "Rất tiếc, chúng tôi không hỗ trợ dải IP",
+		"ip-restrictions-duplicates": "Một số IP bị lặp lại, vui lòng loại bỏ các IP trùng",
+		"ip-restrictions-allowed": "Địa chỉ IP",
+		"ip-restrictions-allowed-explainer": "Khi nhập nhiều địa chỉ IP, vui lòng tách chúng bằng dấu phẩy",
+		"ip-restrictions-on": "Giới hạn quyền truy cập vào các IP đáng tin cậy (được khuyến nghị)"
+	}
+}

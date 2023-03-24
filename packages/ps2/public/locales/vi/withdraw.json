@@ -1,0 +1,8 @@
+{
+	"replace-existing-amount": "Số tiền này sẽ thay thế mọi yêu cầu rút tiền trước đó.",
+	"button": "Rút tiền",
+	"form": {
+		"label": "Số tiền rút:",
+		"labelBalance": "Khả dụng:"
+	}
+}

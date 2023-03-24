@@ -4,6 +4,7 @@ import {
   SessionResponse,
   SignupPayload,
   SignupResponse,
+  UserBalance,
   UserData,
 } from './types';
 import baseApiPs2 from '../baseApiPs2';
@@ -203,6 +204,12 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       body: params,
     }),
   }),
+
+  balance: builder.query<UserBalance, string>({
+    query: (exchangeInternalId) => ({
+      url: `user/exchanges/${exchangeInternalId}/balance`,
+    }),
+  }),
 }));
 
 export const {
@@ -229,4 +236,5 @@ export const {
   useEnable2FAInfoQuery,
   useLazyEnable2FAInfoQuery,
   useEnable2FAMutation,
+  useBalanceQuery,
 } = api;

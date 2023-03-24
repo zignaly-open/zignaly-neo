@@ -1,0 +1,29 @@
+{
+	"footer": {
+		"elements": {
+			"show": "Hiển thị",
+			"out": "ra khỏi",
+			"items": "Mục"
+		},
+		"page": {
+			"items": "Trang",
+			"out": "ra khỏi"
+		},
+		"selector": {
+			"display": "Hiển thị",
+			"items": "Mục"
+		}
+	},
+	"balanceSummary-invested": "Đã Đầu Tư",
+	"selector-validation-notData": "Không có dữ liệu",
+	"investColumn": {
+		"successFess": "Phí thành công 10%",
+		"liquidated": "THANH LÝ"
+	},
+	"tooltip-columnHeader": "Chuyển đổi Sắp xếp theo",
+	"serviceName-by": "bằng cách",
+	"columns-hideOrShow": "Hiện\/Ẩn cột",
+	"assetsInPool-investors_one": "{{count}} Nhà đầu tư",
+	"assetsInPool-investors_other": "{{count}} Nhà đầu tư",
+	"owner-verified": "Người quản lý đã được xác minh"
+}

@@ -1,0 +1,34 @@
+{
+	"title": "Мое Портфолио",
+	"tableHeader": {
+		"summary": {
+			"title": "Моя Текущая Стоимость",
+			"subtitle": "Прибыль"
+		},
+		"serviceName": {
+			"title": "Имя Сервиса",
+			"subtitle": "Управлять\/Базовая валюта"
+		},
+		"1-mo": {
+			"title": "1 мес.",
+			"no-data": "Пока нет данных для показа"
+		},
+		"dailyAvg-title": "Дневное среднее",
+		"3-mos-title": "3 мес.",
+		"6-mos-title": "6 мес.",
+		"all": {
+			"title": "Все",
+			"subtitle": "Инвестиции с"
+		}
+	},
+	"table-search-emptyMessage": "Вы еще не подключены ни к одному сервису.",
+	"something-went-wrong": "Что-то пошло не так",
+	"loading-arialLabel": "Загрузка моего портфолио",
+	"slider-input": {
+		"labels": {
+			"left": "Реинвестировать",
+			"right": "Выводить"
+		}
+	},
+	"tooltip-date": "Вы инвестируете в этот сервис с {{date}}"
+}
