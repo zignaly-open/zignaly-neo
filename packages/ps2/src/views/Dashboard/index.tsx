@@ -3,18 +3,14 @@ import React, { ComponentType, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import EditInvestmentModal from './components/ManageInvestmentModals/EditInvestmentModal';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useZModal } from '../../components/ZModal/use';
 import { ROUTE_DASHBOARD } from '../../routes';
 
 const Dashboard: React.FC = () => {
   const { t } = useTranslation('pages');
   useTitle(t('dashboard'));
-  return (
-    <>
-      <DashboardComponent />
-    </>
-  );
+  return <DashboardComponent />;
 };
 
 export const ZModalRouteElement: React.FC<{
@@ -22,7 +18,12 @@ export const ZModalRouteElement: React.FC<{
   ctaId?: string;
   component: ComponentType;
 }> = ({ bgRoute, component, ctaId }) => {
-  const { showModal } = useZModal();
+  const navigate = useNavigate();
+  const { showModal } = useZModal({
+    // ideally we should use useMatches fron the latest react-router's api
+    // but that would require us to swith to data router. meh.
+    customClose: () => navigate(bgRoute),
+  });
   const params = useParams();
   useEffect(() => {
     showModal(component, { ctaId, ...params });
