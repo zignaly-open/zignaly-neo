@@ -9,10 +9,7 @@ import {
 import React, { useMemo } from 'react';
 import { Heading, Layout, ZigTableWrapper } from './styles';
 import { useTranslation } from 'react-i18next';
-import {
-  useInvestments,
-  useSetSelectedInvestment,
-} from '../../../../apis/investment/use';
+import { useInvestments } from '../../../../apis/investment/use';
 import BigNumber from 'bignumber.js';
 import { formatDateFromDays } from './util';
 import { Investment } from '../../../../apis/investment/types';
@@ -31,16 +28,11 @@ const MyDashboard: React.FC = () => {
   const investmentsEndpoint = useInvestments(exchange?.internalId, {
     skip: !exchange?.internalId,
   });
-  const selectInvestment = useSetSelectedInvestment();
-  // we do not use the results of this till before the modal
   useCoinBalances();
   const { showModal } = useZRouteModal(ROUTE_DASHBOARD_EDIT_INVESTMENT);
 
-  const onClickEditInvestment = (service: Investment) => {
-    selectInvestment(service);
+  const onClickEditInvestment = (service: Investment) =>
     showModal({ serviceId: service.serviceId });
-  };
-
   const calculateServiceAge = (createdAt: string) =>
     differenceInDays(new Date(), new Date(createdAt)).toString();
 
