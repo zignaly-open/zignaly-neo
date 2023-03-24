@@ -5,6 +5,7 @@ import { getPrecisionForCoin, shortenNumber } from "./util";
 import ZigTypography from "../ZigTypography";
 import { Variant } from "@mui/material/styles/createTypography";
 import { Tooltip } from "@mui/material";
+import { trimZeros } from "../../../utils/numbers";
 
 const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   value = 0,
@@ -49,7 +50,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
       {usd && "$"}
       <NumericFormat
         value={Math.abs(shorten ? shortened : +value)}
-        renderText={(v) => v.toString().replace(/(\.\d*?[1-9]+)0+$|\.0+$/g, "$1")}
+        renderText={(v) => trimZeros(v)}
         displayType={"text"}
         thousandSeparator={true}
         decimalScale={
