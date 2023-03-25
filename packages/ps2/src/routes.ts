@@ -1,16 +1,14 @@
 export const ROUTE_DASHBOARD = '/my-portfolio';
 export const ROUTE_DASHBOARD_EDIT_INVESTMENT = '/my-portfolio/edit/:serviceId';
 export const ROUTE_PROFIT_SHARING = '/profit-sharing';
-// export const ROUTE_PROFIT_SHARING_EDIT_INVESTMENT =
-//   '/profit-sharing/edit/:serviceId';
-// export const ROUTE_PROFIT_SHARING_INVEST = '/profit-sharing/invest/:serviceId';
-// export const ROUTE_PROFIT_SHARING_INVEST = '/profit-sharing/invest/:serviceId';
 export const ROUTE_BECOME_TRADER = '/become-trader';
 export const ROUTE_LOGIN = '/login';
 export const ROUTE_SIGNUP = '/signup';
 export const ROUTE_FORGOT_PASSWORD = '/forgot-password';
 export const ROUTE_RESET_PASSWORD = '/reset-password/:token';
 export const ROUTE_TRADING_SERVICE = '/profit-sharing/:serviceId';
+export const ROUTE_PROFIT_SHARING_SERVICE_INVEST =
+  '/profit-sharing/:serviceId/invest';
 export const ROUTE_TRADING_SERVICE_MANAGE =
   ROUTE_TRADING_SERVICE + '/management';
 export const ROUTE_TRADING_SERVICE_INVESTORS =

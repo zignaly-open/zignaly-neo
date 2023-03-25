@@ -14,6 +14,8 @@ import { Service, TraderServiceAccessLevel } from '../../apis/service/types';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { BackendError, ErrorCodes } from '../../util/errors';
 import CriticalError from '../../components/Stub/CriticalError';
+import createZModalRouteElement from '../../components/ZModal/ZModalRoute';
+import InvestDepositModal from '../Dashboard/components/ManageInvestmentModals/IndestDepositModal';
 
 const ServiceProfile: React.FC = () => {
   const { serviceId } = useParams();
@@ -78,3 +80,8 @@ const ServiceProfile: React.FC = () => {
 };
 
 export default ServiceProfile;
+
+export const ServiceProfileInvestment = createZModalRouteElement({
+  component: InvestDepositModal,
+  // ctaId: 'edit-investment-dashboard',
+});

@@ -34,6 +34,7 @@ import {
   ROUTE_DASHBOARD_EDIT_INVESTMENT,
   ROUTE_MY_BALANCES_DEPOSIT,
   ROUTE_MY_BALANCES_DEPOSIT_COIN,
+  ROUTE_PROFIT_SHARING_SERVICE_INVEST,
 } from './routes';
 
 import Management from './views/TraderService/Management';
@@ -41,7 +42,9 @@ import Investors from './views/TraderService/Investors';
 import BecomeTrader from './views/TraderService/BecomeTrader';
 import Positions from './views/TraderService/Positions';
 import Coins from './views/TraderService/Coins';
-import ServiceProfile from './views/TraderService/ServiceProfile';
+import ServiceProfile, {
+  ServiceProfileInvestment,
+} from './views/TraderService/ServiceProfile';
 import ServiceApi from './views/TraderService/ServiceApi';
 import Manual from 'views/TraderService/Manual';
 import Signals from './views/TraderService/Signals';
@@ -85,18 +88,22 @@ const Router: React.FC = () => (
       <Route path={ROUTE_REFERRALS} element={<Referrals />} />
     </Route>
 
-    <Route path={ROUTE_TRADING_SERVICE}>
-      <Route index element={<ServiceProfile />} />
-      <Route element={<ServiceOwnerWall />}>
-        <Route path={ROUTE_TRADING_SERVICE_MANAGE} element={<Management />} />
-        <Route path={ROUTE_TRADING_SERVICE_INVESTORS} element={<Investors />} />
-        <Route path={ROUTE_TRADING_SERVICE_POSITIONS} element={<Positions />} />
-        <Route path={ROUTE_TRADING_SERVICE_COINS} element={<Coins />} />
-        <Route path={ROUTE_TRADING_SERVICE_MANUAL} element={<Manual />} />
-        <Route path={ROUTE_TRADING_SERVICE_API} element={<ServiceApi />} />
-        <Route path={ROUTE_TRADING_SERVICE_SIGNALS} element={<Signals />} />
-        <Route path={ROUTE_TRADING_SERVICE_EDIT} element={<EditService />} />
-      </Route>
+    <Route path={ROUTE_TRADING_SERVICE} element={outleted(<ServiceProfile />)}>
+      <Route
+        path={ROUTE_PROFIT_SHARING_SERVICE_INVEST}
+        element={<ServiceProfileInvestment bgRoute={ROUTE_TRADING_SERVICE} />}
+      />
+    </Route>
+
+    <Route element={<ServiceOwnerWall />}>
+      <Route path={ROUTE_TRADING_SERVICE_MANAGE} element={<Management />} />
+      <Route path={ROUTE_TRADING_SERVICE_INVESTORS} element={<Investors />} />
+      <Route path={ROUTE_TRADING_SERVICE_POSITIONS} element={<Positions />} />
+      <Route path={ROUTE_TRADING_SERVICE_COINS} element={<Coins />} />
+      <Route path={ROUTE_TRADING_SERVICE_MANUAL} element={<Manual />} />
+      <Route path={ROUTE_TRADING_SERVICE_API} element={<ServiceApi />} />
+      <Route path={ROUTE_TRADING_SERVICE_SIGNALS} element={<Signals />} />
+      <Route path={ROUTE_TRADING_SERVICE_EDIT} element={<EditService />} />
     </Route>
 
     <Route path={ROUTE_BECOME_TRADER} element={<BecomeTrader />} />

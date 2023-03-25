@@ -2,7 +2,10 @@ import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
 import { useIsAuthenticated } from '../../../../../apis/user/use';
-import { useZModal } from '../../../../../components/ZModal/use';
+import {
+  useZModal,
+  useZRouteModal,
+} from '../../../../../components/ZModal/use';
 import {
   useCurrentBalance,
   useInvestedAccountsCount,
@@ -17,9 +20,10 @@ import InvestDepositModal from 'views/Dashboard/components/ManageInvestmentModal
 const InvestButton: React.FC<{
   prefixId?: string;
   service: Service;
+  modalRoute?: string;
   ctaId?: string;
   showMultipleAccountButton?: boolean;
-}> = ({ prefixId, service, ctaId, showMultipleAccountButton }) => {
+}> = ({ prefixId, modalRoute, service, ctaId, showMultipleAccountButton }) => {
   const { t } = useTranslation([
     'service',
     // we need these two otherwise a Suspense will trigger when we load the other ns
@@ -29,6 +33,7 @@ const InvestButton: React.FC<{
   ]);
   const isAuthenticated = useIsAuthenticated();
   const { showModal } = useZModal({ disableAutoDestroy: true });
+  const showInvestModal = useZRouteModal(modalRoute);
   const navigate = useNavigate();
   useCurrentBalance(service.ssc);
   const location = useLocation();
@@ -38,7 +43,11 @@ const InvestButton: React.FC<{
 
   const onClickMakeInvestment = () => {
     if (isAuthenticated) {
-      showModal(InvestDepositModal, { ctaId, serviceId: service.id });
+      if (modalRoute) {
+        showInvestModal({ serviceId: service.id });
+      } else {
+        showModal(InvestDepositModal, { ctaId, serviceId: service.id });
+      }
     } else {
       const newUser = !localStorage.getItem('hasLoggedIn');
       navigate(newUser ? ROUTE_SIGNUP : ROUTE_LOGIN, {

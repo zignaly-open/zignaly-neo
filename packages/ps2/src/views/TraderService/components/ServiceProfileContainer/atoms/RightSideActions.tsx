@@ -10,6 +10,7 @@ import { useMediaQuery } from '@mui/material';
 import theme from '../../../../../theme';
 import { RightSideActionWrapper } from '../styles';
 import { Loader } from '@zignaly-open/ui';
+import { ROUTE_PROFIT_SHARING_SERVICE_INVEST } from '../../../../../routes';
 
 const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const isAuthenticated = useIsAuthenticated();
@@ -34,6 +35,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
             />
           ) : (
             <InvestButton
+              modalRoute={ROUTE_PROFIT_SHARING_SERVICE_INVEST}
               showMultipleAccountButton
               service={service}
               ctaId={'service-profile-invest-button'}
