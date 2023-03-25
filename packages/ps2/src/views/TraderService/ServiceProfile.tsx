@@ -83,5 +83,8 @@ export default ServiceProfile;
 
 export const ServiceProfileInvestment = createZModalRouteElement({
   component: InvestDepositModal,
-  // ctaId: 'edit-investment-dashboard',
+  options: {
+    disableAutoDestroy: true,
+  },
+  ctaId: 'service-profile-invest-modal',
 });
