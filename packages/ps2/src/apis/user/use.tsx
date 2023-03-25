@@ -50,6 +50,7 @@ import { QueryReturnTypeBasic } from 'util/queryReturnType';
 import { useZModal } from 'components/ZModal/use';
 import Check2FAModal from 'views/Auth/components/Check2FAModal';
 import { useNavigate } from 'react-router-dom';
+import { track } from '@zignaly-open/tracker';
 
 const useStartSession = () => {
   const { showModal } = useModal();
@@ -58,9 +59,11 @@ const useStartSession = () => {
   const [loadTraderServices] = useLazyTraderServicesQuery();
   const [loadUser] = useLazyUserQuery();
 
-  return async (user: { token: string } & Partial<LoginResponse>) => {
+  return async (
+    user: { token: string; userId?: string } & Partial<LoginResponse>,
+  ) => {
     dispatch(setAccessToken(user.token));
-
+    user.userId && track({ userId: user.userId });
     const needsModal =
       user.ask2FA ||
       user.isUnknownDevice ||
