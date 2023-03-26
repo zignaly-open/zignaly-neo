@@ -8,6 +8,7 @@ import { useServiceDetails } from '../../../../apis/service/use';
 import useMaybeNavigateNotLoggedIn from '../../../../util/hooks/useMaybeNavigateNotLoggedIn';
 import InvestModal from './InvestModal';
 import ChooseDepositTypeModal from './ChooseDepositTypeModal';
+import ZModal from '../../../../components/ZModal';
 
 function InvestDepositModal({
   serviceId,
@@ -31,8 +32,7 @@ function InvestDepositModal({
   const showDeposit = +balance === 0;
 
   if (isLoadingService || isLoadingBalance || isFetching) {
-    // TODO
-    return null;
+    return <ZModal title={''} wide {...props} close={close} isLoading />;
   } else if (showDeposit) {
     return <ChooseDepositTypeModal {...props} selectedCoin={service?.ssc} />;
   } else {
