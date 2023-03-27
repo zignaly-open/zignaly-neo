@@ -55,7 +55,7 @@ import { AccountName } from '../AccountMenu/styles';
 import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
 import { AccountDropdown } from './styles';
 
-const drawerWidth = 240;
+const drawerWidth = 250;
 
 const ZigDrawer = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -133,12 +133,12 @@ const ZigDrawer = () => {
                   display='flex'
                   flexDirection='column'
                   alignItems='center'
-                  gap={2}
+                  gap={1.5}
                 >
                   {imageUrl ? (
-                    <Avatar image={imageUrl} size={'large'} />
+                    <Avatar image={imageUrl} size={'xlarge'} />
                   ) : (
-                    <AccountCircle />
+                    <AccountCircle sx={{ width: 55, height: 55 }} />
                   )}
                   <ZigTypography variant='caption'>{email}</ZigTypography>
                 </Box>

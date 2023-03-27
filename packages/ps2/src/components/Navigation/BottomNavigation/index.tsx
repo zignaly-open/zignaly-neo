@@ -1,7 +1,6 @@
 import {
   CardGiftcardOutlined,
   CurrencyBitcoinOutlined,
-  GifOutlined,
   Storefront,
   WorkOutline,
 } from '@mui/icons-material';
@@ -45,31 +44,30 @@ const ZigBottomNavigation = () => {
           onChange={(event, newValue) => {
             setValue(newValue);
           }}
-          // component={NavigationLink}
         >
           <BottomNavigationAction
             label={t('account-menu.marketplace')}
             icon={<Storefront />}
             to={generatePath(ROUTE_PROFIT_SHARING)}
-            LinkComponent={NavigationLink}
+            component={NavigationLink}
           />
           <BottomNavigationAction
             label={t('account-menu.portfolio')}
             icon={<WorkOutline />}
             to={generatePath(ROUTE_DASHBOARD)}
-            LinkComponent={NavigationLink}
+            component={NavigationLink}
           />
           <BottomNavigationAction
             label={t('account-menu.referrals')}
             icon={<CardGiftcardOutlined />}
             to={generatePath(ROUTE_REFERRALS)}
-            LinkComponent={NavigationLink}
+            component={NavigationLink}
           />
           <BottomNavigationAction
             label={t('account-menu.balance')}
             icon={<CurrencyBitcoinOutlined />}
             to={generatePath(ROUTE_MY_BALANCES)}
-            LinkComponent={NavigationLink}
+            component={NavigationLink}
           />
         </BottomNavigation>
       </Paper>
