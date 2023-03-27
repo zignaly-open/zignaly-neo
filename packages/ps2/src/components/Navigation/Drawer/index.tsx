@@ -150,71 +150,60 @@ const ZigDrawer = () => {
             gap={2}
             justifyContent='center'
           >
-            <Box
-              sx={{ my: 2 }}
-              display='flex'
-              flexDirection='column'
-              alignItems='center'
-              gap={2}
-            >
-              {true ? (
-                <Avatar
-                  image={
-                    'https://cdn-icons-png.flaticon.com/512/685/685681.png'
-                  }
-                  size={'large'}
-                />
-              ) : (
-                <AccountCircle />
-              )}
-              <ZigTypography variant='h6'>{email}</ZigTypography>
-            </Box>
-            <DropDown
-              component={({ open }) => (
-                // <ZigIconButton
-                //   id={'menu__dropdown-account'}
-                //   variant={'flat'}
-                //   icon={
-                //     <Avatar size={'medium'} image={activeExchange?.image} />
-                //   }
-                //   key={'user'}
-                //   isFocused={open}
-                // />
-                <AccountDropdown>
-                  <Avatar size={'medium'} image={activeExchange?.image} />
-                  <AccountName variant={'body1'} color={'neutral100'}>
-                    {activeExchange?.internalName}
-                  </AccountName>
-                  {open ? <ExpandLess /> : <ChevronRight />}
-                </AccountDropdown>
-              )}
-              options={(exchanges?.length > 1 ? exchanges : []).map(
-                (exchange, index) => ({
-                  onClick: () => setActiveExchange(exchange.internalId),
-                  id: `account-switcher-dropdown__account-${index}`,
-                  label: (
-                    <>
-                      <Avatar
-                        size={'medium'}
-                        image={getImageOfAccount(index)}
-                      />
-                      <AccountName
-                        variant={'body1'}
-                        color={
-                          activeExchange?.internalId === exchange.internalId
-                            ? 'highlighted'
-                            : 'neutral200'
-                        }
-                      >
-                        {exchange.internalName}
+            {isAuthenticated && (
+              <>
+                <Box
+                  sx={{ my: 2 }}
+                  display='flex'
+                  flexDirection='column'
+                  alignItems='center'
+                  gap={2}
+                >
+                  {imageUrl ? (
+                    <Avatar image={imageUrl} size={'large'} />
+                  ) : (
+                    <AccountCircle />
+                  )}
+                  <ZigTypography variant='h6'>{email}</ZigTypography>
+                </Box>
+                <DropDown
+                  component={({ open }) => (
+                    <AccountDropdown>
+                      <Avatar size={'medium'} image={activeExchange?.image} />
+                      <AccountName variant={'body1'} color={'neutral100'}>
+                        {activeExchange?.internalName}
                       </AccountName>
-                    </>
-                  ),
-                }),
-              )}
-            />
-
-            <Divider />
+                      {open ? <ExpandLess /> : <ChevronRight />}
+                    </AccountDropdown>
+                  )}
+                  options={(exchanges?.length > 1 ? exchanges : []).map(
+                    (exchange, index) => ({
+                      onClick: () => setActiveExchange(exchange.internalId),
+                      id: `account-switcher-dropdown__account-${index}`,
+                      label: (
+                        <>
+                          <Avatar
+                            size={'medium'}
+                            image={getImageOfAccount(index)}
+                          />
+                          <AccountName
+                            variant={'body1'}
+                            color={
+                              activeExchange?.internalId === exchange.internalId
+                                ? 'highlighted'
+                                : 'neutral200'
+                            }
+                          >
+                            {exchange.internalName}
+                          </AccountName>
+                        </>
+                      ),
+                    }),
+                  )}
+                />
+                <Divider />
+              </>
+            )}
             <List>
               {isAuthenticated && (
                 <>
@@ -230,10 +219,7 @@ const ZigDrawer = () => {
                       </ListItemIcon>
                       <ListItemText primary='Drafts' />
                     </ListItemButton> */}
-                  <ListItemButton
-                    onClick={handleClick}
-                    sx={{ textAlign: 'center', pl: 5 }}
-                  >
+                  <ListItemButton onClick={handleClick}>
                     {/* <ListItemIcon>
                         <InboxIcon />
                       </ListItemIcon> */}
@@ -245,8 +231,8 @@ const ZigDrawer = () => {
                   <Collapse in={open} timeout='auto' unmountOnExit>
                     <List component='div' disablePadding>
                       <ListItemButton
+                        sx={{ pl: 4 }}
                         onClick={() => showModal(UpdatePasswordModal)}
-                        sx={{ textAlign: 'center' }}
                       >
                         <ListItemText
                           primary={t(
@@ -256,7 +242,7 @@ const ZigDrawer = () => {
                       </ListItemButton>
                       <ListItemButton
                         onClick={() => showModal(Enable2FAModal)}
-                        sx={{ textAlign: 'center' }}
+                        sx={{ pl: 4 }}
                       >
                         <ListItemText
                           primary={t('account-menu.notAuth-dropdown-link-2fa')}
@@ -268,7 +254,6 @@ const ZigDrawer = () => {
                     <ListItemButton
                       target='_blank'
                       href={ROUTE_BECOME_TRADER}
-                      sx={{ textAlign: 'center' }}
                       id='drawer__become-trader'
                     >
                       <ListItemText
@@ -283,7 +268,6 @@ const ZigDrawer = () => {
                         href={generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
                           serviceId: service.serviceId?.toString(),
                         })}
-                        sx={{ textAlign: 'center' }}
                         id='drawer__for-trading'
                       >
                         <ListItemText
@@ -295,11 +279,7 @@ const ZigDrawer = () => {
                 </>
               )}
               <ListItem disablePadding>
-                <ListItemButton
-                  target='_blank'
-                  href={HELP_URL}
-                  sx={{ textAlign: 'center' }}
-                >
+                <ListItemButton target='_blank' href={HELP_URL}>
                   <ListItemText
                     primary={t('main-menu.dropdown-link-helpDocs')}
                   />
@@ -343,11 +323,8 @@ const ZigDrawer = () => {
             )}
             <List>
               <ListItem disablePadding>
-                <ListItemButton
-                  onClick={() => setLanguageOpen(!languageOpen)}
-                  sx={{ textAlign: 'center' }}
-                >
-                  <ListItemIcon>
+                <ListItemButton onClick={() => setLanguageOpen(!languageOpen)}>
+                  <ListItemIcon sx={{ minWidth: '48px' }}>
                     <GlobeLanguages
                       color={theme.palette.neutral300}
                       width={'26px'}
@@ -367,9 +344,9 @@ const ZigDrawer = () => {
                 <List component='div' disablePadding>
                   {languageMap.map((language, index) => (
                     <ListItemButton
+                      sx={{ pl: 4 }}
                       key={language.locale}
                       onClick={() => handleSelectLanguage(language.locale)}
-                      sx={{ textAlign: 'center' }}
                       id={`drawer-languages__${index.toString()}`}
                     >
                       <ListItemText primary={language.label} />
@@ -378,7 +355,7 @@ const ZigDrawer = () => {
                 </List>
               </Collapse>
             </List>
-            <ZigTypography mt={4} variant='body2'>
+            <ZigTypography mt={2} variant='caption'>
               {t('follow-us')}
             </ZigTypography>
             <Box display='flex' justifyContent='center' mt={-1}>
