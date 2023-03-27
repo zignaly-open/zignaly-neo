@@ -109,7 +109,7 @@ const ZigDrawer = () => {
           open={mobileOpen}
           onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
           }}
           sx={{
             display: { xs: 'block', sm: 'none' },
@@ -140,43 +140,46 @@ const ZigDrawer = () => {
                   ) : (
                     <AccountCircle />
                   )}
-                  <ZigTypography variant='h6'>{email}</ZigTypography>
+                  <ZigTypography variant='caption'>{email}</ZigTypography>
                 </Box>
-                <DropDown
-                  component={({ open }) => (
-                    <AccountDropdown>
-                      <Avatar size={'medium'} image={activeExchange?.image} />
-                      <AccountName variant={'body1'} color={'neutral100'}>
-                        {activeExchange?.internalName}
-                      </AccountName>
-                      {open ? <ExpandLess /> : <ChevronRight />}
-                    </AccountDropdown>
-                  )}
-                  options={(exchanges?.length > 1 ? exchanges : []).map(
-                    (exchange, index) => ({
-                      onClick: () => setActiveExchange(exchange.internalId),
-                      id: `account-switcher-dropdown__account-${index}`,
-                      label: (
-                        <>
-                          <Avatar
-                            size={'medium'}
-                            image={getImageOfAccount(index)}
-                          />
-                          <AccountName
-                            variant={'body1'}
-                            color={
-                              activeExchange?.internalId === exchange.internalId
-                                ? 'highlighted'
-                                : 'neutral200'
-                            }
-                          >
-                            {exchange.internalName}
-                          </AccountName>
-                        </>
-                      ),
-                    }),
-                  )}
-                />
+                {exchanges?.length && (
+                  <DropDown
+                    component={({ open }) => (
+                      <AccountDropdown>
+                        <Avatar size={'medium'} image={activeExchange?.image} />
+                        <AccountName variant={'body1'} color={'neutral100'}>
+                          {activeExchange?.internalName}
+                        </AccountName>
+                        {open ? <ExpandLess /> : <ChevronRight />}
+                      </AccountDropdown>
+                    )}
+                    options={(exchanges?.length > 1 ? exchanges : []).map(
+                      (exchange, index) => ({
+                        onClick: () => setActiveExchange(exchange.internalId),
+                        id: `account-switcher-dropdown__account-${index}`,
+                        label: (
+                          <>
+                            <Avatar
+                              size={'medium'}
+                              image={getImageOfAccount(index)}
+                            />
+                            <AccountName
+                              variant={'body1'}
+                              color={
+                                activeExchange?.internalId ===
+                                exchange.internalId
+                                  ? 'highlighted'
+                                  : 'neutral200'
+                              }
+                            >
+                              {exchange.internalName}
+                            </AccountName>
+                          </>
+                        ),
+                      }),
+                    )}
+                  />
+                )}
                 <Divider />
               </>
             ) : (
