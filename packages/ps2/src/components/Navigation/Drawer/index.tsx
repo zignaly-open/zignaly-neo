@@ -1,34 +1,20 @@
 import {
   AccountCircle,
-  CardGiftcardOutlined,
   ChevronRight,
-  CurrencyBitcoinOutlined,
   ExpandLess,
-  ExpandMore,
-  GifOutlined,
   Menu,
-  StarBorder,
-  Storefront,
-  WorkOutline,
 } from '@mui/icons-material';
 import {
-  BottomNavigationAction,
-  BottomNavigation,
-  Paper,
   Box,
-  useMediaQuery,
   Divider,
   List,
   ListItem,
   ListItemButton,
   ListItemText,
-  Typography,
   Drawer,
   IconButton,
-  Button,
   Collapse,
   ListItemIcon,
-  ListSubheader,
 } from '@mui/material';
 import {
   Avatar,
@@ -36,12 +22,12 @@ import {
   UserIcon,
   ZigButton,
   ZigTypography,
-  IconButton as ZigIconButton,
   GlobeLanguages,
 } from '@zignaly-open/ui';
-import { useFirstOwnedService, useTraderServices } from 'apis/service/use';
+import { useFirstOwnedService } from 'apis/service/use';
 import {
   useActiveExchange,
+  useChangeLocale,
   useCurrentUser,
   useIsAuthenticated,
   useLogout,
@@ -50,12 +36,8 @@ import {
 import { useZModal } from 'components/ZModal/use';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, Link } from 'react-router-dom';
+import { generatePath, Link, useLocation } from 'react-router-dom';
 import {
-  ROUTE_PROFIT_SHARING,
-  ROUTE_DASHBOARD,
-  ROUTE_REFERRALS,
-  ROUTE_MY_BALANCES,
   ROUTE_LOGIN,
   ROUTE_SIGNUP,
   ROUTE_TRADING_SERVICE_MANAGE,
@@ -69,13 +51,11 @@ import { LocalizationLanguages } from 'util/languages';
 import socialNetworksLinks from 'util/socialNetworks';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
-import { AccountName, LoginButton } from '../AccountMenu/styles';
+import { AccountName } from '../AccountMenu/styles';
 import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
-import { NavigationLink } from '../Header/atoms';
 import { AccountDropdown } from './styles';
 
 const drawerWidth = 240;
-const navItems = ['Home', 'About', 'Contact'];
 
 const ZigDrawer = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -86,19 +66,15 @@ const ZigDrawer = () => {
   const logout = useLogout();
   const { t, i18n } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
-  const [open, setOpen] = useState(false);
+  const [exchangeOpen, setExchangeOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
   const { showModal } = useZModal();
-  const { data: traderServices, isFetching } = useTraderServices();
   const service = useFirstOwnedService();
   const activeExchange = useActiveExchange();
   const { exchanges, email, imageUrl } = useCurrentUser();
-
+  const location = useLocation();
+  const changeLocale = useChangeLocale();
   const selectExchange = useSelectExchange();
-
-  const handleClick = () => {
-    setOpen(!open);
-  };
 
   const languageMap = supportedLanguages
     ? supportedLanguages.map((x) => LocalizationLanguages[x])
@@ -106,7 +82,7 @@ const ZigDrawer = () => {
 
   const onSelectLocale = (locale: string) => {
     changeLocale(locale);
-    onClose();
+    handleDrawerToggle();
   };
 
   const handleSelectLanguage = (locale: string) => {
@@ -148,9 +124,9 @@ const ZigDrawer = () => {
             flexDirection='column'
             textAlign='center'
             gap={2}
-            justifyContent='center'
+            flex={1}
           >
-            {isAuthenticated && (
+            {isAuthenticated ? (
               <>
                 <Box
                   sx={{ my: 2 }}
@@ -203,101 +179,15 @@ const ZigDrawer = () => {
                 />
                 <Divider />
               </>
-            )}
-            <List>
-              {isAuthenticated && (
-                <>
-                  {/* <ListItemButton>
-                      <ListItemIcon>
-                        <SendIcon />
-                      </ListItemIcon>
-                      <ListItemText primary='Sent mail' />
-                    </ListItemButton> */}
-                  {/* <ListItemButton>
-                      <ListItemIcon>
-                        <DraftsIcon />
-                      </ListItemIcon>
-                      <ListItemText primary='Drafts' />
-                    </ListItemButton> */}
-                  <ListItemButton onClick={handleClick}>
-                    {/* <ListItemIcon>
-                        <InboxIcon />
-                      </ListItemIcon> */}
-                    <ListItemText
-                      primary={t('account-menu.notAuth-dropdown-link-settings')}
-                    />
-                    {open ? <ExpandLess /> : <ChevronRight />}
-                  </ListItemButton>
-                  <Collapse in={open} timeout='auto' unmountOnExit>
-                    <List component='div' disablePadding>
-                      <ListItemButton
-                        sx={{ pl: 4 }}
-                        onClick={() => showModal(UpdatePasswordModal)}
-                      >
-                        <ListItemText
-                          primary={t(
-                            'account-menu.notAuth-dropdown-link-password',
-                          )}
-                        />
-                      </ListItemButton>
-                      <ListItemButton
-                        onClick={() => showModal(Enable2FAModal)}
-                        sx={{ pl: 4 }}
-                      >
-                        <ListItemText
-                          primary={t('account-menu.notAuth-dropdown-link-2fa')}
-                        />
-                      </ListItemButton>
-                    </List>
-                  </Collapse>
-                  <ListItem disablePadding>
-                    <ListItemButton
-                      target='_blank'
-                      href={ROUTE_BECOME_TRADER}
-                      id='drawer__become-trader'
-                    >
-                      <ListItemText
-                        primary={t('navigation-menu.become-trader')}
-                      />
-                    </ListItemButton>
-                  </ListItem>
-                  {service && (
-                    <ListItem disablePadding>
-                      <ListItemButton
-                        target='_blank'
-                        href={generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-                          serviceId: service.serviceId?.toString(),
-                        })}
-                        id='drawer__for-trading'
-                      >
-                        <ListItemText
-                          primary={t('main-menu.dropdown-link-forTrading')}
-                        />
-                      </ListItemButton>
-                    </ListItem>
-                  )}
-                </>
-              )}
-              <ListItem disablePadding>
-                <ListItemButton target='_blank' href={HELP_URL}>
-                  <ListItemText
-                    primary={t('main-menu.dropdown-link-helpDocs')}
-                  />
-                </ListItemButton>
-              </ListItem>
-            </List>
-
-            {isAuthenticated ? (
-              <ZigButton
-                onClick={() => {
-                  logout();
-                  handleClick();
-                }}
-              >
-                {t('account-menu.notAuth-button-logOut')}
-              </ZigButton>
             ) : (
-              <>
+              <Box
+                mt={3}
+                mb={2}
+                display='flex'
+                flexDirection='column'
+                gap={2}
+                onClick={handleDrawerToggle}
+              >
                 <Link to={ROUTE_LOGIN} state={{ redirectTo: location }}>
                   <ZigButton
                     id={'drawer__login'}
@@ -319,8 +209,79 @@ const ZigDrawer = () => {
                     {t('account-menu.isAuth-button-signUp')}
                   </ZigButton>
                 </Link>
-              </>
+              </Box>
             )}
+            <List>
+              {isAuthenticated && (
+                <>
+                  <ListItemButton
+                    onClick={() => setExchangeOpen(!exchangeOpen)}
+                  >
+                    <ListItemText
+                      primary={t('account-menu.notAuth-dropdown-link-settings')}
+                    />
+                    {exchangeOpen ? <ExpandLess /> : <ChevronRight />}
+                  </ListItemButton>
+                  <Collapse in={exchangeOpen} timeout='auto' unmountOnExit>
+                    <List
+                      component='div'
+                      disablePadding
+                      onClick={handleDrawerToggle}
+                    >
+                      <ListItemButton
+                        sx={{ pl: 4 }}
+                        onClick={() => showModal(UpdatePasswordModal)}
+                      >
+                        <ListItemText
+                          primary={t(
+                            'account-menu.notAuth-dropdown-link-password',
+                          )}
+                        />
+                      </ListItemButton>
+                      <ListItemButton
+                        onClick={() => showModal(Enable2FAModal)}
+                        sx={{ pl: 4 }}
+                      >
+                        <ListItemText
+                          primary={t('account-menu.notAuth-dropdown-link-2fa')}
+                        />
+                      </ListItemButton>
+                    </List>
+                  </Collapse>
+                  <ListItem disablePadding onClick={handleDrawerToggle}>
+                    <Link to={ROUTE_BECOME_TRADER}>
+                      <ListItemButton id='drawer__become-trader'>
+                        <ListItemText
+                          primary={t('navigation-menu.become-trader')}
+                        />
+                      </ListItemButton>
+                    </Link>
+                  </ListItem>
+                  {service && (
+                    <ListItem disablePadding onClick={handleDrawerToggle}>
+                      <Link
+                        to={generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+                          serviceId: service.serviceId?.toString(),
+                        })}
+                      >
+                        <ListItemButton id='drawer__for-trading'>
+                          <ListItemText
+                            primary={t('main-menu.dropdown-link-forTrading')}
+                          />
+                        </ListItemButton>
+                      </Link>
+                    </ListItem>
+                  )}
+                </>
+              )}
+              <ListItem disablePadding onClick={handleDrawerToggle}>
+                <ListItemButton target='_blank' href={HELP_URL}>
+                  <ListItemText
+                    primary={t('main-menu.dropdown-link-helpDocs')}
+                  />
+                </ListItemButton>
+              </ListItem>
+            </List>
             <List>
               <ListItem disablePadding>
                 <ListItemButton onClick={() => setLanguageOpen(!languageOpen)}>
@@ -355,16 +316,28 @@ const ZigDrawer = () => {
                 </List>
               </Collapse>
             </List>
-            <ZigTypography mt={2} variant='caption'>
+            {isAuthenticated && (
+              <ZigButton
+                onClick={() => {
+                  logout();
+                  handleDrawerToggle();
+                }}
+                variant='outlined'
+                sx={{ mx: 4, mY: 1 }}
+              >
+                {t('account-menu.notAuth-button-logOut')}
+              </ZigButton>
+            )}
+            <ZigTypography mt={2} variant='caption' marginTop='auto'>
               {t('follow-us')}
             </ZigTypography>
-            <Box display='flex' justifyContent='center' mt={-1}>
+            <Box display='flex' justifyContent='center' mt={-1} mb={1}>
               <Networks>
                 {socialNetworksLinks.map((socialNetwork, index) => {
                   const IconComponent = socialNetwork.image;
                   return (
                     <NavLink
-                      onClick={handleClick}
+                      onClick={handleDrawerToggle}
                       href={socialNetwork.path}
                       key={`--social-network-nav-link-${index.toString()}`}
                       id={`drawer__social-network-${index.toString()}`}

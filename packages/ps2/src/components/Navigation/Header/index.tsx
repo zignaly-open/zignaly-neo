@@ -2,7 +2,6 @@ import {
   Header as ZigHeader,
   HeaderLinksContainer,
   BrandImage,
-  MarginContainer,
 } from '@zignaly-open/ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -18,23 +17,8 @@ import AccountMenu from '../AccountMenu';
 import ReferralButton from '../ReferralButton';
 import { useIsAuthenticated } from '../../../apis/user/use';
 import BalanceButton from '../BalanceButton';
-import {
-  AppBar,
-  Box,
-  Button,
-  CssBaseline,
-  Divider,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Toolbar,
-  Typography,
-  useMediaQuery,
-} from '@mui/material';
+import { Box, Toolbar, useMediaQuery } from '@mui/material';
 import theme from 'theme';
-import { Menu } from '@mui/icons-material';
 import { Container, StyledAppBar } from './styles';
 import Drawer from '../Drawer';
 
@@ -82,20 +66,6 @@ const Header: React.FC = () => {
             ) : (
               <Drawer />
             )}
-            {/* <Typography
-            variant='h6'
-            component='div'
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            MUI
-          </Typography> */}
-            {/* <Box sx={{ display: { xs: 'none', md: 'block' } }}>
-            {navItems.map((item) => (
-              <Button key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
-            ))}
-          </Box> */}
             <Box
               display='flex'
               gap='28px'
