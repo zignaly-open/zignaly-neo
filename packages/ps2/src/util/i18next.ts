@@ -7,21 +7,27 @@ import CountriesTr from 'i18n-iso-countries/langs/tr.json';
 import CountriesPt from 'i18n-iso-countries/langs/pt.json';
 import CountriesEs from 'i18n-iso-countries/langs/es.json';
 import CountriesEn from 'i18n-iso-countries/langs/en.json';
+import CountriesRu from 'i18n-iso-countries/langs/ru.json';
+import CountriesVi from 'i18n-iso-countries/langs/vi.json';
 import dateLocaleEnUs from 'date-fns/locale/en-US';
 import dateLocaleEs from 'date-fns/locale/es';
 import dateLocalePt from 'date-fns/locale/pt';
 import dateLocaleTr from 'date-fns/locale/tr';
+import dateLocaleRu from 'date-fns/locale/ru';
+import dateLocaleVi from 'date-fns/locale/vi';
 
 Countries.registerLocale(CountriesEn);
 Countries.registerLocale(CountriesPt);
 Countries.registerLocale(CountriesTr);
 Countries.registerLocale(CountriesEs);
+Countries.registerLocale(CountriesRu);
+Countries.registerLocale(CountriesVi);
 
 // mishka vodka balalayka
 if (CountriesEn.countries.RU)
   CountriesEn.countries.RU = 'Mother Russia' as unknown as string[];
 
-export const supportedLanguages = ['en', 'es', 'pt', 'tr'];
+export const supportedLanguages = ['en', 'es', 'pt', 'tr', 'ru', 'vi'];
 
 if (process.env.REACT_APP_ENABLE_TEST_LANGUAGE) supportedLanguages.push('ch');
 
@@ -29,7 +35,9 @@ export const dateFnsLocaleMapping = {
   en: dateLocaleEnUs,
   es: dateLocaleEs,
   pt: dateLocalePt,
+  ru: dateLocaleRu,
   tr: dateLocaleTr,
+  vi: dateLocaleVi,
 };
 
 i18n

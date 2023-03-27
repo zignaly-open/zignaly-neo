@@ -16,7 +16,7 @@
 		"invalid": "Endereço inválido"
 	},
 	"amountToWithdraw": {
-		"label": "Quantidade a retirar:",
+		"label": "Quantidade a Retirar:",
 		"labelBalance": "Disponível:",
 		"minimum": "Mínimo:",
 		"fee": "Taxa:"
@@ -38,7 +38,7 @@
 		"address": "Retirada para Endereço",
 		"amount": "Quantidade de Retirada",
 		"networkFee": "Taxa de Rede",
-		"continue": "¡Continuar a Verificação!",
+		"continue": "Continuar para Confirmação",
 		"withdrawNow": "Retirar agora!"
 	},
 	"success": {

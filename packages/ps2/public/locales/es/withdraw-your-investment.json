@@ -2,7 +2,7 @@
 	"title": "Solicitud de Retiro",
 	"success": {
 		"title": "Retiro Solicitado",
-		"description": "Sus fondos estarán disponibles tan pronto como el trader libere suficientes fondos del servicio. Esto puede tardar unos días o más en completarse. Zignaly no controla este periodo de tiempo, así que por favor sea paciente.",
+		"description": "Tus fondos estarán disponibles tan pronto como el trader libere suficientes fondos del servicio. Esto puede tardar unos días o más en completarse. Zignaly no controla este periodo de tiempo, así que por favor se paciente.",
 		"button": "Cerrar"
 	}
 }

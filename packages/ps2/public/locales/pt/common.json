@@ -24,7 +24,11 @@
 		"notAuth-dropdown-link-dashboard": "Meu Portfólio",
 		"notAuth-dropdown-link-balances": "Os Meus Saldos",
 		"notAuth-button-logOut": "Sair",
-		"notAuth-dropdown-link-wallet": "ZIG Wallet"
+		"notAuth-dropdown-link-wallet": "ZIG Wallet",
+		"referrals": "Referidos",
+		"notAuth-dropdown-link-settings": "Configurações",
+		"notAuth-dropdown-link-password": "Senha",
+		"notAuth-dropdown-link-2fa": "Autenticação de Dois Factores"
 	},
 	"account-selector": {
 		"type": {
@@ -50,7 +54,8 @@
 		"min-amount": "A quantidade mínima é {{amount}} {{coin}}.",
 		"insufficient-amount-min": "Quantidade mínima: {{ minValue }} {{ minValueCoin }}",
 		"invalid-characters": "Caracteres inválidos",
-		"letter-number": "Deve conter pelo menos uma letra ou número"
+		"letter-number": "Deve conter pelo menos uma letra ou número",
+		"min-invest-amount-for-owner": "O saldo do proprietário deve estar acima de {{minAmount}} {{minAmountCoin}}"
 	},
 	"back": "Voltar",
 	"close": "Fechar",
@@ -67,5 +72,6 @@
 	"infinitely-worse": "Sim, o valor actual é infinitamente pior porque o valor inicial é 0",
 	"changes-saved": "Alterações salvas com sucesso",
 	"name": "Nome",
-	"type-to-confirm": "Digite \" {{word}} \" para confirmar"
+	"type-to-confirm": "Digite \" {{word}} \" para confirmar",
+	"ok": "OK"
 }
