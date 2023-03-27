@@ -17,7 +17,12 @@ const InvestingStep: React.FC<{ step: number }> = ({ step }) => {
   const navigate = useNavigate();
 
   return (
-    <StepBox sx={{ display: 'flex', flexDirection: 'row' }}>
+    <StepBox
+      sx={{
+        display: 'flex',
+        flexDirection: 'row',
+      }}
+    >
       <StepCounter>
         <ZigTypography variant='h2' color='highlighted'>
           {step}
@@ -80,8 +85,12 @@ const InvestingStep: React.FC<{ step: number }> = ({ step }) => {
             color={'secondary'}
           />
         </Box>
-        <Box>
-          <img
+        <Box sx={{ marginTop: step === 1 && '25px' }}>
+          <Box
+            component='img'
+            sx={{
+              maxHeight: step === 1 ? 120 : 145,
+            }}
             src={`/images/portfolio/step${step}.svg`}
             alt={t(`how-to-invest-steps.step-${step}.title`)}
           />
