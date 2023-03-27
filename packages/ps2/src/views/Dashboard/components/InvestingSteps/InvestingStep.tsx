@@ -90,6 +90,7 @@ const InvestingStep: React.FC<{ step: number }> = ({ step }) => {
             component='img'
             sx={{
               maxHeight: step === 1 ? 120 : 145,
+              opacity: step === 2 && 0.75,
             }}
             src={`/images/portfolio/step${step}.svg`}
             alt={t(`how-to-invest-steps.step-${step}.title`)}
