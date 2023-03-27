@@ -41,14 +41,15 @@ import Drawer from '../Drawer';
 const Header: React.FC = () => {
   const { t } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
-  const md = useMediaQuery(theme.breakpoints.up('sm'));
+  const sm = useMediaQuery(theme.breakpoints.up('sm'));
+  const md = useMediaQuery(theme.breakpoints.up('md'));
 
   return (
     <Box sx={{ display: 'flex' }}>
       <StyledAppBar component='nav'>
         <Toolbar sx={{ flex: 1 }}>
           <Container>
-            {md ? (
+            {sm ? (
               <Box display='flex' alignItems='center' gap='28px'>
                 <Link to={ROUTE_DASHBOARD} key='logo'>
                   <BrandImage
@@ -66,13 +67,15 @@ const Header: React.FC = () => {
                   >
                     {t('navigation-menu.profit-sharing')}
                   </NavigationLink>
-                  <NavigationLink
-                    id='menu__become-trader'
-                    to={ROUTE_BECOME_TRADER}
-                    key='--route-bt'
-                  >
-                    {t('navigation-menu.become-trader')}
-                  </NavigationLink>
+                  {md && (
+                    <NavigationLink
+                      id='menu__become-trader'
+                      to={ROUTE_BECOME_TRADER}
+                      key='--route-bt'
+                    >
+                      {t('navigation-menu.become-trader')}
+                    </NavigationLink>
+                  )}
                 </HeaderLinksContainer>
                 <ExtraNavigationDropdown />
               </Box>
@@ -99,13 +102,13 @@ const Header: React.FC = () => {
               sx={{
                 // Center balance widget on mobile
                 ...(isAuthenticated &&
-                  !md && { flex: 1, justifyContent: 'center' }),
+                  !sm && { flex: 1, justifyContent: 'center' }),
               }}
             >
               {isAuthenticated && (
                 <>
                   <BalanceButton key={'balance'} />
-                  {md && <ReferralButton key={'referral'} />}
+                  {sm && <ReferralButton key={'referral'} />}
                 </>
               )}
               <AccountMenu />
@@ -146,8 +149,8 @@ const Header: React.FC = () => {
         <ExtraNavigationDropdown key={'extra-nav'} />,
       ]}
       rightElements={[
-        isAuthenticated && md && <BalanceButton key={'balance'} />,
-        isAuthenticated && md && <ReferralButton key={'referral'} />,
+        isAuthenticated && sm && <BalanceButton key={'balance'} />,
+        isAuthenticated && sm && <ReferralButton key={'referral'} />,
         <AccountMenu key={'account'} />,
       ].filter(Boolean)}
     />
