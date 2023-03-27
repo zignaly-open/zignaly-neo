@@ -1,0 +1,36 @@
+{
+	"title": "Депозит Криптовалюты",
+	"description": "Пополнение счета может занять до 3 часов, пока оно отразиться на вашем балансе.",
+	"coinSelector": {
+		"label": "Монета:",
+		"placeholder": "Поиск монеты"
+	},
+	"balances": {
+		"loadingAriaLabel": "Загрузка баланса монет",
+		"total": "Баланс:",
+		"balanceLocked": "В Ордерах:",
+		"balanceFree": "Доступно:"
+	},
+	"networkSelector": {
+		"label": "Сеть:",
+		"placeholder": "Выберите сеть"
+	},
+	"depositAddress": {
+		"label": "Адрес Депозита:",
+		"loading": "Загрузка адреса депозита...",
+		"placeholder": "Сначала выберите валюту и сеть.",
+		"warning": "Отправляйте на этот адрес только токены {{network}} {{coin}}",
+		"copied": "Адрес депозита скопирован в буфер обмена!"
+	},
+	"depositMemo": {
+		"label": "Депозит MEMO\/Tag:",
+		"copied": "Memo депозита скопирован в буфер обмена!",
+		"loading": "Загрузка депозит tag..."
+	},
+	"depositQR": {
+		"address": "{{coin}} Адрес",
+		"memo": "{{coin}} MEMO\/Tag"
+	},
+	"no-network": "Депозит недоступен в этой сети",
+	"buy-crypto": "Купить Криптовалюту"
+}

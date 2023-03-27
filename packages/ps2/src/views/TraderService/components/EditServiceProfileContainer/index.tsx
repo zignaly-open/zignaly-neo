@@ -166,11 +166,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                 label={t('edit.description')}
                 error={t(errors.description?.message)}
                 multiline
-                inputProps={{
-                  style: {
-                    height: '384px',
-                  },
-                }}
+                rows={18}
                 {...field}
               />
             )}
