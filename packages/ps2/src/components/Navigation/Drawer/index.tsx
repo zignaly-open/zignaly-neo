@@ -180,7 +180,6 @@ const ZigDrawer = () => {
                     )}
                   />
                 )}
-                <Divider />
               </>
             ) : (
               <Box
@@ -214,6 +213,7 @@ const ZigDrawer = () => {
                 </Link>
               </Box>
             )}
+            <Divider />
             <List>
               {isAuthenticated && (
                 <>
