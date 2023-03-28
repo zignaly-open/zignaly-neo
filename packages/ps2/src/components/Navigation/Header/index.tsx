@@ -78,7 +78,7 @@ const Header: React.FC = () => {
               {isAuthenticated && (
                 <>
                   <BalanceButton key={'balance'} />
-                  {sm && <ReferralButton key={'referral'} />}
+                  {md && <ReferralButton key={'referral'} />}
                 </>
               )}
               <AccountMenu />
@@ -87,43 +87,6 @@ const Header: React.FC = () => {
         </Toolbar>
       </StyledAppBar>
     </Box>
-  );
-
-  return (
-    <ZigHeader
-      leftElements={[
-        <Link to={ROUTE_DASHBOARD} key='logo'>
-          <BrandImage
-            id='menu__logo-portfolio'
-            height='32px'
-            type='isotype'
-            width='32px'
-          />
-        </Link>,
-        <HeaderLinksContainer key='links'>
-          <NavigationLink
-            id='menu__marketplace'
-            to={ROUTE_PROFIT_SHARING}
-            key='--route-ps'
-          >
-            {t('navigation-menu.profit-sharing')}
-          </NavigationLink>
-          <NavigationLink
-            id='menu__become-trader'
-            to={ROUTE_BECOME_TRADER}
-            key='--route-bt'
-          >
-            {t('navigation-menu.become-trader')}
-          </NavigationLink>
-        </HeaderLinksContainer>,
-        <ExtraNavigationDropdown key={'extra-nav'} />,
-      ]}
-      rightElements={[
-        isAuthenticated && sm && <BalanceButton key={'balance'} />,
-        isAuthenticated && sm && <ReferralButton key={'referral'} />,
-        <AccountMenu key={'account'} />,
-      ].filter(Boolean)}
-    />
   );
 };
 
