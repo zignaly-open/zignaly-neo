@@ -71,6 +71,7 @@ const Marketplace: React.FC = () => {
           >
             <AssetsInPool
               prefixId={'marketplace-table'}
+              serviceId={props.row.original.id}
               assetsValue={props.getValue()}
               numberOfInvestors={props.row.original.investors}
               createdAt={props.row.original.createdAt}
