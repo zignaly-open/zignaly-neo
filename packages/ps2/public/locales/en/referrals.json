@@ -1,5 +1,5 @@
 {
-    "title": "Invite Friends & Traders and Earn!",
+    "title": "Invite Friends and Earn Lifetime Income",
     "description": "Get a percentage of the trading and success fees paid by your friends or from all the investors of the trader's service when you invite a trader to Zignaly",
     "share-your-link": "Share your link:",
     "what-you-get": "What you get",
@@ -19,10 +19,12 @@
             "description": "You'll earn unlimited commissions: {{successFee}}% of Success Fees paid to Zignaly. They get ${{reward}} in ZIG if they invest more than ${{minDeposit}}"
         }
     },
-    "they-get-invest": "<0>They get</0><1>${{value}}</1><2> in {{coin}} when they invest ${{threshold}}+",
+    "they-get-invest": "<0>They get</0><1>${{value}}</1><2> in Fee Voucher on First Deposit",
     "they-get-invest-modal": "Invitee gets <0>${{value}}</0> in {{coin}} when they invest ${{threshold}}+",
+    "invite-traders-for-revenue": "<0>Invite traders</0><1>{{value}}%</1><2>of Zignaly Revenue</2>",
     "invite-traders-for-percent": "<0>Invite traders</0><1>{{value}}%</1><2> of all their investors' success fees</2>",
     "invite-traders-for-percent-modal": "Invite traders to get <0>{{value}}%</0> of all their investors' success fees",
+    "invite-friends-for-revenue": "<0>Invite friends</0><1>{{value}}%</1><2>of Zignaly Revenue</2>",
     "invite-friends-for-percent": "<0>Invite friends</0><1>{{value}}%</1><2> of their success fees</2>",
     "invite-friends-for-percent-modal": "Invite friends to get <0>{{value}}%</0> of their success fees",
     "invite-traders-for-percent-rebate": "<0>Invite traders</0><1>{{value}}%</1><2> of the trading rebate fees</2>",
@@ -94,7 +96,7 @@
         "description": "Invite friends"
     },
     "create-invite": {
-        "create-invite": "Create Invite",
+        "create-invite": "Share Invite",
         "invite-friends": "Invite Friends",
         "invite-traders": "Invite Traders",
         "deposit-friend-cta": "With a <1>${{depositAmount}} investment</1> you'll receive a bonus. Start investing <0>with just $1</0>.",

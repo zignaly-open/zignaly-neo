@@ -23,19 +23,52 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
   const elementsYou = useMemo(
     () =>
       [
-        config.enableSuccessFeeReward && !!config.zignalySuccessFee && (
-          <Trans
-            i18nKey='referrals:invite-friends-for-percent'
-            t={t}
-            values={{
-              value: config.zignalySuccessFee,
-            }}
-          >
-            <ZigTypography />
-            <TotalBoxValue />
-            <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
-          </Trans>
-        ),
+        config.enableSuccessFeeReward &&
+          !!config.zignalySuccessFee &&
+          config.zignalySuccessFee === config.zignalyRebateFee && (
+            <Trans
+              i18nKey='referrals:invite-friends-for-revenue'
+              t={t}
+              values={{
+                value: config.zignalySuccessFee,
+              }}
+            >
+              <ZigTypography />
+              <TotalBoxValue />
+              <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
+            </Trans>
+          ),
+        config.enableSuccessFeeReward &&
+          !!config.zignalySuccessFee &&
+          config.zignalySuccessFee !== config.zignalyRebateFee && (
+            <Trans
+              i18nKey='referrals:invite-friends-for-percent'
+              t={t}
+              values={{
+                value: config.zignalySuccessFee,
+              }}
+            >
+              <ZigTypography />
+              <TotalBoxValue />
+              <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
+            </Trans>
+          ),
+        config.enableSuccessFeeReward &&
+          !!config.traderSuccessFee &&
+          config.traderSuccessFee === config.traderRebateFee && (
+            <Trans
+              // does the distinction "invite friends" vs "invite traders" imply traders can have no friends?
+              i18nKey='referrals:invite-traders-for-revenue'
+              t={t}
+              values={{
+                value: config.traderSuccessFee,
+              }}
+            >
+              <ZigTypography />
+              <TotalBoxValue />
+              <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
+            </Trans>
+          ),
         config.enableSuccessFeeReward && !!config.traderSuccessFee && (
           <Trans
             // does the distinction "invite friends" vs "invite traders" imply traders can have no friends?
@@ -50,32 +83,36 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
             <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
           </Trans>
         ),
-        !config.enableRebateFeeReward && !!config.zignalyRebateFee && (
-          <Trans
-            i18nKey='referrals:invite-friends-for-percent-rebate'
-            t={t}
-            values={{
-              value: config.zignalyRebateFee,
-            }}
-          >
-            <ZigTypography />
-            <TotalBoxValue />
-            <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
-          </Trans>
-        ),
-        !config.enableRebateFeeReward && !!config.traderRebateFee && (
-          <Trans
-            i18nKey='referrals:invite-traders-for-percent-rebate'
-            t={t}
-            values={{
-              value: config.traderRebateFee,
-            }}
-          >
-            <ZigTypography />
-            <TotalBoxValue />
-            <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
-          </Trans>
-        ),
+        !config.enableRebateFeeReward &&
+          !!config.zignalyRebateFee &&
+          config.zignalySuccessFee !== config.zignalyRebateFee && (
+            <Trans
+              i18nKey='referrals:invite-friends-for-percent-rebate'
+              t={t}
+              values={{
+                value: config.zignalyRebateFee,
+              }}
+            >
+              <ZigTypography />
+              <TotalBoxValue />
+              <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
+            </Trans>
+          ),
+        !config.enableRebateFeeReward &&
+          !!config.traderRebateFee &&
+          config.traderSuccessFee === config.traderRebateFee && (
+            <Trans
+              i18nKey='referrals:invite-traders-for-percent-rebate'
+              t={t}
+              values={{
+                value: config.traderRebateFee,
+              }}
+            >
+              <ZigTypography />
+              <TotalBoxValue />
+              <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
+            </Trans>
+          ),
 
         !!config.rewardOneAllocationAmount && (
           <Trans
