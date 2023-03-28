@@ -53,7 +53,6 @@ import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import { AccountName } from '../AccountMenu/styles';
 import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
-import { AccountDropdown } from './styles';
 
 const drawerWidth = 250;
 
@@ -145,13 +144,13 @@ const ZigDrawer = () => {
                 {exchanges?.length && (
                   <DropDown
                     component={({ open }) => (
-                      <AccountDropdown>
+                      <Box display='flex' gap={1} justifyContent='center'>
                         <Avatar size={'medium'} image={activeExchange?.image} />
                         <AccountName variant={'body1'} color={'neutral100'}>
                           {activeExchange?.internalName}
                         </AccountName>
                         {open ? <ExpandLess /> : <ChevronRight />}
-                      </AccountDropdown>
+                      </Box>
                     )}
                     options={(exchanges?.length > 1 ? exchanges : []).map(
                       (exchange, index) => ({
