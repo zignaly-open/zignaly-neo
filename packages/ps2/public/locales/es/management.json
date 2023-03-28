@@ -6,14 +6,14 @@
 	"availableTrading": "Disponible para trading:",
 	"allocatedTrading": "Asignado para trading:",
 	"neededSnapshot": "Necesario para la instantánea diaria:",
-	"helper": "¿Necesita ayuda con estas cifras? Por favor consulte nuestro apartado sobre <0>el funcionamiento de los saldos de la profit sharing<\/0>.",
+	"helper": "¿Necesitas ayuda con estas cifras? Por favor consulta nuestro apartado sobre <0>el funcionamiento de los saldos de profit sharing<\/0>.",
 	"minBalance": {
 		"title": "Saldo mínimo:",
 		"success": "Has editado el saldo mínimo con éxito."
 	},
 	"minBalanceModal": {
 		"title": "Editar Saldo Mínimo",
-		"desc": "Configure el saldo mínimo que desea mantener en la cuenta de Standby. Si el saldo está por encima del mínimo, durante la contabilidad la diferencia se transferirá automáticamente a la Cuenta de Trading.",
+		"desc": "Configura el saldo mínimo que deseas mantener en la cuenta de Standby. Si el saldo está por encima del mínimo, durante la contabilidad la diferencia se transferirá automáticamente a la Cuenta de Trading.",
 		"placeholder": "0.0",
 		"labelBalance": "Saldo Mínimo Actual",
 		"save": "Guardar"
@@ -34,20 +34,20 @@
 	},
 	"transferFunds": {
 		"title": "Transferir Fondos",
-		"description": "Transfiera fondos inmediatamente entre la Cuenta de Trading y la Cuenta de Standby en su servicio"
+		"description": "Transfiere fondos inmediatamente entre la Cuenta de Trading y la Cuenta de Standby en tu servicio"
 	},
-	"hardDiconnectWarning": "Tus desconexiones forzosas han alcanzado el {perc}%. Si las desconexiones forzosas alcanzan el {maxPerc}% de los fondos del servicio, Zignaly tomará el control de su servicio.",
+	"hardDiconnectWarning": "Tus desconexiones forzosas han alcanzado el {perc}%. Si las desconexiones forzosas alcanzan el {maxPerc}% de los fondos del servicio, Zignaly tomará el control de tu servicio.",
 	"previousValue": "Valor Anterior:",
-	"loading-arialLabel": "Cargando Gestión",
+	"loading-arialLabel": "Cargando gestión",
 	"standbyFunds": "Fondos Standby",
 	"standbyFunds-desc": "Fondos disponibles para devolver a los inversores que quieran retirarlos",
 	"availableWithdrawals": "Disponible para retiros:",
 	"api-keys": {
-		"title": "Opere con API",
-		"description": "Crea las llaves API de Binance para tu servicio Profit Sharing y conéctalas a tu herramienta o aplicación favorita. También puede conectar estas Llaves API a nuestra aplicación de trading Zignaly en <0>trading.zignaly.com<\/0>.",
+		"title": "Opera con API",
+		"description": "Crea las llaves API de Binance para tu servicio Profit Sharing y conéctalas a tu herramienta o aplicación favorita. También puedes conectar estas Llaves API a nuestra aplicación de trading de Zignaly en <0>trading.zignaly.com<\/0>.",
 		"create-key": "Crear llave API",
 		"no-keys": "Sin llaves API",
-		"no-keys-description": "Aún no ha creado ninguna llave API",
+		"no-keys-description": "Aún no has creado ninguna llave API",
 		"manage-keys": "Gestión de Llaves API",
 		"api-key": "Llave API",
 		"api-settings": "Configuración de API",
@@ -56,13 +56,13 @@
 		"restrict-ip": "Restringir IP",
 		"api-secret": "API Secreta",
 		"zignaly-code": "Código Zignaly",
-		"api-secret-explainer": "Solo visible en la generación de llave. Si lo pierde, tendrá que generar una nueva llave API",
+		"api-secret-explainer": "Solo visible en la generación de llave. Si lo pierdes, tendrás que generar una nueva llave API",
 		"permission-label": "Permisos",
 		"permissions": {
 			"read": "Leer",
 			"canTrade": "Trading de spot",
 			"marginTrade": "Margin trading",
-			"futuresTrade": "Trading de Futuros"
+			"futuresTrade": "Trading de futuros"
 		},
 		"permissions-enable": {
 			"read": "Habilitar lectura",
@@ -71,7 +71,7 @@
 			"futuresTrade": "Habilitar el trading de futuros"
 		},
 		"create-new-key": "Crear Nueva Llave API",
-		"create-new-key-description": "Cree una nueva llave API para conectarse y operar desde su plataforma de trading favorita.",
+		"create-new-key-description": "Crea una nueva llave API para conectarte y operar desde tu plataforma de trading favorita.",
 		"edit-key": "Editar la Configuración de la Llave API",
 		"delete-title": "Eliminar {{title}} Llave API",
 		"delete-description": "Esta acción es irreversible.",
@@ -79,9 +79,9 @@
 		"ip-restrictions-none": "Sin restricciones",
 		"ip-restrictions-invalid": "Formato de ip inválido",
 		"ip-restrictions-ranges": "Lo sentimos, no admitimos rangos de IP",
-		"ip-restrictions-duplicates": "Algunas IPs aparecen dos veces, por favor, elimine los duplicados",
+		"ip-restrictions-duplicates": "Algunas IPs aparecen dos veces, por favor, elimina los duplicados",
 		"ip-restrictions-allowed": "Direcciones IP",
-		"ip-restrictions-allowed-explainer": "Al introducir más de una dirección IP, sepárelas con comas",
+		"ip-restrictions-allowed-explainer": "Al introducir más de una dirección IP, sepáralas con comas",
 		"ip-restrictions-on": "Restringir el acceso sólo a IP de confianza (recomendado)"
 	}
 }

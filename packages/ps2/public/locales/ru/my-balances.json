@@ -1,0 +1,14 @@
+{
+	"tableHeader": {
+		"coin": "Монета",
+		"totalBalance": "Общий Баланс",
+		"availableBalance": "Доступный Баланс",
+		"lockedBalance": "Заблокированный Баланс",
+		"valueBTC": "Стоимость в BTC",
+		"valueUSD": "Стоимость в USD"
+	},
+	"table-search-placeholder": "Введите для поиска монет.",
+	"loading-arialLabel": "Загрузка...",
+	"my-coins": "Мои Монеты",
+	"deposits-withdrawals": "Депозиты\/Выводы"
+}
