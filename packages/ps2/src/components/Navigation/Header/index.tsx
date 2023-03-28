@@ -26,7 +26,7 @@ const Header: React.FC = () => {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      <StyledAppBar component='nav'>
+      <StyledAppBar>
         <Toolbar sx={{ flex: 1 }}>
           <Container>
             {sm ? (
