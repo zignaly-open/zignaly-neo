@@ -1,8 +1,4 @@
-import {
-  Header as ZigHeader,
-  HeaderLinksContainer,
-  BrandImage,
-} from '@zignaly-open/ui';
+import { HeaderLinksContainer, BrandImage } from '@zignaly-open/ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavigationLink } from './atoms';

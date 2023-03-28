@@ -38,8 +38,8 @@ const ZigBottomNavigation = () => {
 
   useEffect(() => {
     // On url change, find the matching tab and set it as the active tab
-    const match = tabs.find((t) =>
-      matchPath({ path: t, end: false }, location.pathname),
+    const match = tabs.find((tab) =>
+      matchPath({ path: tab, end: false }, location.pathname),
     );
     if (match) {
       setTabValue(match);
