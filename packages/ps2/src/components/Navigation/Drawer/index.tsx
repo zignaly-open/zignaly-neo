@@ -73,13 +73,9 @@ const ZigDrawer = () => {
     ? supportedLanguages.map((x) => LocalizationLanguages[x])
     : Object.values(LocalizationLanguages);
 
-  const onSelectLocale = (locale: string) => {
+  const handleSelectLanguage = (locale: string) => {
     changeLocale(locale);
     handleDrawerToggle();
-  };
-
-  const handleSelectLanguage = (locale: string) => {
-    onSelectLocale(locale);
   };
 
   return (

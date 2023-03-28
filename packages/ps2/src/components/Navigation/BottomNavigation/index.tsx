@@ -22,19 +22,19 @@ import { ReactComponent as PortfolioIcon } from 'images/tab-portfolio.svg';
 import { ReactComponent as RewardsIcon } from 'images/tab-rewards.svg';
 import { Link } from 'react-router-dom';
 
+const tabs = [
+  ROUTE_DASHBOARD,
+  ROUTE_PROFIT_SHARING,
+  ROUTE_REFERRALS,
+  ROUTE_MY_BALANCES,
+];
+
 const ZigBottomNavigation = () => {
   const location = useLocation();
   const { t } = useTranslation('common');
   const [tabValue, setTabValue] = useState(location.pathname);
   const isAuthenticated = useIsAuthenticated();
   const xs = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const tabs = [
-    ROUTE_DASHBOARD,
-    ROUTE_PROFIT_SHARING,
-    ROUTE_REFERRALS,
-    ROUTE_MY_BALANCES,
-  ];
 
   useEffect(() => {
     // On url change, find the matching tab and set it as the active tab
