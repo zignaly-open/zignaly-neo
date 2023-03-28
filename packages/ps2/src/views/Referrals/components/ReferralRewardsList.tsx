@@ -214,37 +214,25 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
   );
 
   // I never thought I'd die fighting side by side with an trader
-  const showFeesExplainerTrader =
-    (config.enableSuccessFeeReward && !!config.traderSuccessFee) ||
-    (config.enableRebateFeeReward && !!config.traderRebateFee);
-  // What about side by side with a friend?
-  const showFeesExplainerFriend =
-    (config.enableSuccessFeeReward && !!config.zignalySuccessFee) ||
-    (config.enableRebateFeeReward && !!config.zignalyRebateFee);
-  // Aye, I could do that
-  const feesExplainer = (
-    // there should have been a tooltip there
-    // I fought for this tooltip, and I lost that battle
-    // eslint-disable-next-line i18next/no-literal-string
-    <ZigTypography color={'neutral300'}> (*)</ZigTypography>
-  );
-  const feesExplainerBottom = (
-    <ZigTypography
-      variant={'caption'}
-      color={'neutral400'}
-      component={'div'}
-      sx={{ ml: 2.5, mt: 1 }}
-    >
-      {/* eslint-disable-next-line i18next/no-literal-string */}*{' '}
-      {t('terms.fees')}
-    </ZigTypography>
-  );
-
   const modalFriendElements = useMemo(
     () =>
       [
-        config.enableSuccessFeeReward && !!config.zignalySuccessFee && (
-          <>
+        config.enableSuccessFeeReward &&
+          !!config.zignalySuccessFee &&
+          config.zignalySuccessFee === config.zignalyRebateFee && (
+            <Trans
+              i18nKey='referrals:invite-friends-for-revenue-modal'
+              t={t}
+              values={{
+                value: config.zignalySuccessFee,
+              }}
+            >
+              <ZigTypography fontWeight={600} color={'neutral100'} />
+            </Trans>
+          ),
+        config.enableSuccessFeeReward &&
+          !!config.zignalySuccessFee &&
+          config.zignalySuccessFee !== config.zignalyRebateFee && (
             <Trans
               i18nKey='referrals:invite-friends-for-percent-modal'
               t={t}
@@ -254,11 +242,10 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
             >
               <ZigTypography fontWeight={600} color={'neutral100'} />
             </Trans>
-            {feesExplainer}
-          </>
-        ),
-        config.enableRebateFeeReward && !!config.zignalyRebateFee && (
-          <>
+          ),
+        config.enableRebateFeeReward &&
+          !!config.zignalyRebateFee &&
+          config.zignalySuccessFee !== config.zignalyRebateFee && (
             <Trans
               i18nKey='referrals:invite-friends-for-percent-rebate-modal'
               t={t}
@@ -268,9 +255,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
             >
               <ZigTypography fontWeight={600} color={'neutral100'} />
             </Trans>
-            {feesExplainer}
-          </>
-        ),
+          ),
         !!config.rewardOneAllocationAmount && (
           <Trans
             i18nKey='referrals:invite-for-investment-modal'
@@ -347,8 +332,22 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
   const modalTraderElements = useMemo(
     () =>
       [
-        config.enableSuccessFeeReward && !!config.traderSuccessFee && (
-          <>
+        config.enableSuccessFeeReward &&
+          !!config.traderSuccessFee &&
+          config.traderRebateFee === config.traderSuccessFee && (
+            <Trans
+              i18nKey='referrals:invite-traders-for-revenue-modal'
+              t={t}
+              values={{
+                value: config.traderSuccessFee,
+              }}
+            >
+              <ZigTypography fontWeight={600} color={'neutral100'} />
+            </Trans>
+          ),
+        config.enableSuccessFeeReward &&
+          !!config.traderSuccessFee &&
+          config.traderRebateFee !== config.traderSuccessFee && (
             <Trans
               i18nKey='referrals:invite-traders-for-percent-modal'
               t={t}
@@ -358,11 +357,10 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
             >
               <ZigTypography fontWeight={600} color={'neutral100'} />
             </Trans>
-            {feesExplainer}
-          </>
-        ),
-        config.enableRebateFeeReward && !!config.traderRebateFee && (
-          <>
+          ),
+        config.enableRebateFeeReward &&
+          !!config.traderRebateFee &&
+          config.traderRebateFee !== config.traderSuccessFee && (
             <Trans
               i18nKey='referrals:invite-traders-for-percent-rebate-modal'
               t={t}
@@ -372,9 +370,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
             >
               <ZigTypography fontWeight={600} color={'neutral100'} />
             </Trans>
-            {feesExplainer}
-          </>
-        ),
+          ),
       ].filter(Boolean),
     [config, t],
   );
@@ -409,7 +405,6 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
                   <li key={Math.random()}>{x}</li>
                 ))}
               </UlList>
-              {showFeesExplainerFriend && feesExplainerBottom}
             </Box>
           )}
 
@@ -423,8 +418,6 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
                   <li key={Math.random()}>{x}</li>
                 ))}
               </UlList>
-
-              {showFeesExplainerTrader && feesExplainerBottom}
             </Box>
           )}
 
@@ -446,6 +439,8 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
               <li>{t('terms.2')}</li>
               <li>{t('terms.3')}</li>
               <li>{t('terms.4')}</li>
+              <li>{t('terms.5')}</li>
+              <li>{t('terms.6')}</li>
             </OlList>
           </Box>
         </Box>
