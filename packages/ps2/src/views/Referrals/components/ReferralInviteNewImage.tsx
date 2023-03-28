@@ -38,7 +38,7 @@ const ReferralInviteNewImage: React.FC<{
           }
           
           * {
-            font-family: "Avenir Next";
+            font-family: "Avenir Next", arial, sans-serif";
             line-height: 1.4;
           }
          
