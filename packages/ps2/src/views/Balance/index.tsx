@@ -20,6 +20,8 @@ import { Box } from '@mui/material';
 import { TRANSACTION_TYPE } from 'apis/coin/types';
 import { TRANSACTION_TYPE_NAME } from './components/TransactionsHistoryTable/types';
 import { CSSObject } from '@emotion/react';
+import createZModalRouteElement from '../../components/ZModal/ZModalRoute';
+import DepositModal from '../Dashboard/components/ManageInvestmentModals/DepositModal';
 
 const MyBalances: React.FC = () => {
   const { t } = useTranslation([
@@ -115,3 +117,8 @@ const MyBalances: React.FC = () => {
 };
 
 export default MyBalances;
+
+export const MyBalancesDeposit = createZModalRouteElement({
+  component: DepositModal,
+  ctaId: 'balances-table-row',
+});
