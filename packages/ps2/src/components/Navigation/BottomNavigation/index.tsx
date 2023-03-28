@@ -1,10 +1,4 @@
 import {
-  CardGiftcardOutlined,
-  CurrencyBitcoinOutlined,
-  Storefront,
-  WorkOutline,
-} from '@mui/icons-material';
-import {
   BottomNavigationAction,
   BottomNavigation,
   Paper,
@@ -23,6 +17,10 @@ import {
 } from 'routes';
 import theme from 'theme';
 import { NavigationLink } from '../Header/atoms';
+import { ReactComponent as BalanceIcon } from 'images/tab-balance.svg';
+import { ReactComponent as MarketplaceIcon } from 'images/tab-marketplace.svg';
+import { ReactComponent as PortfolioIcon } from 'images/tab-portfolio.svg';
+import { ReactComponent as RewardsIcon } from 'images/tab-rewards.svg';
 
 const ZigBottomNavigation = () => {
   const { t } = useTranslation('common');
@@ -35,7 +33,7 @@ const ZigBottomNavigation = () => {
   return (
     <Box height='58px'>
       <Paper
-        sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+        sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100 }}
         elevation={3}
       >
         <BottomNavigation
@@ -47,25 +45,25 @@ const ZigBottomNavigation = () => {
         >
           <BottomNavigationAction
             label={t('account-menu.marketplace')}
-            icon={<Storefront />}
+            icon={<MarketplaceIcon />}
             to={generatePath(ROUTE_PROFIT_SHARING)}
             component={NavigationLink}
           />
           <BottomNavigationAction
             label={t('account-menu.portfolio')}
-            icon={<WorkOutline />}
+            icon={<PortfolioIcon />}
             to={generatePath(ROUTE_DASHBOARD)}
             component={NavigationLink}
           />
           <BottomNavigationAction
             label={t('account-menu.referrals')}
-            icon={<CardGiftcardOutlined />}
+            icon={<RewardsIcon />}
             to={generatePath(ROUTE_REFERRALS)}
             component={NavigationLink}
           />
           <BottomNavigationAction
             label={t('account-menu.balance')}
-            icon={<CurrencyBitcoinOutlined />}
+            icon={<BalanceIcon />}
             to={generatePath(ROUTE_MY_BALANCES)}
             component={NavigationLink}
           />
