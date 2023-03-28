@@ -4,7 +4,7 @@
     "share-your-link": "Share your link:",
     "what-you-get": "What you get",
     "what-they-get": "What they get",
-    "how-to-earn": "How to Earn Commissions",
+    "how-to-earn": "How to Earn",
     "how-to-earn-steps": {
         "step-1": {
             "title": "Invite friends",
@@ -54,23 +54,23 @@
         "3": "Participants who violate these terms will not be eligible for referral incentives; any fraudulent or abusive behavior will result in immediate termination of all associated accounts.",
         "4": "Paid online advertisements with the use of Zignaly's logo is strictly prohibited",
         "5": "All the referral is calculated based on the revenue earned and realized by Zignaly.  All the calculations by Zignaly are final",
-        "6": "If any discount, you get commission after the discount"
+        "6": "If any discount, you get earnings after the discount"
     },
     "when-invite-friends": "When you invite friends",
     "when-invite-traders": "When you invite traders",
     "invitee-gets": "Invitee gets",
     "export": "Export",
     "full-rewards": "Full terms",
-    "full-rewards-title": "Referral commission terms",
+    "full-rewards-title": "Referral earning terms",
     "total-invitees": "Total Invitees",
     "total-rewards": "Total Earnings",
     "my-referrals": "My Referrals",
     "pending-rewards": "Pending Earnings",
     "filter-any": "Any",
     "table": {
-        "title": "Commissions history",
-        "no-referrals": "No commissions to show",
-        "no-commission-history": "No commission history yet. Invite some friends or traders to earn commissions.",
+        "title": "Earnings",
+        "no-referrals": "No earnings to show",
+        "no-commission-history": "No earning history yet. Invite some friends or traders to earn.",
         "time-and-date": "Time & Date",
         "user-trader": "User/Trader",
         "reward-type": "Commission Type",
@@ -87,12 +87,12 @@
         "Failed": "Failed"
     },
     "rewardTypes": {
-        "SIGNUP_REWARD": "Signup commission",
-        "DEPOSIT_REWARD": "Deposit commission",
-        "SUCCESS_REWARD": "Success Fee commission",
-        "ALLOCATE_REWARD": "Allocate commission",
-        "SUCCESS_FEE_REWARD": "Success Fee commission",
-        "REBATE_COMMISSION_REWARD": "Rebate Fee commission"
+        "SIGNUP_REWARD": "Signup earning",
+        "DEPOSIT_REWARD": "Deposit earning",
+        "SUCCESS_REWARD": "Success Fee earning",
+        "ALLOCATE_REWARD": "Allocate earning",
+        "SUCCESS_FEE_REWARD": "Success Fee earning",
+        "REBATE_COMMISSION_REWARD": "Rebate Fee earning"
     },
     "header": {
         "title": "Earn 20%",
