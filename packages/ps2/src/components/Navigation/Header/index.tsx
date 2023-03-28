@@ -19,6 +19,7 @@ import { useIsAuthenticated } from '../../../apis/user/use';
 import BalanceButton from '../BalanceButton';
 import { useMediaQuery } from '@mui/material';
 import theme from 'theme';
+import RewardsButton from '../RewardsButton';
 
 const Header: React.FC = () => {
   const { t } = useTranslation('common');
@@ -56,6 +57,7 @@ const Header: React.FC = () => {
       ]}
       rightElements={[
         isAuthenticated && md && <BalanceButton key={'balance'} />,
+        isAuthenticated && md && <RewardsButton key={'rewards'} />,
         isAuthenticated && md && <ReferralButton key={'referral'} />,
         <AccountMenu key={'account'} />,
       ].filter(Boolean)}

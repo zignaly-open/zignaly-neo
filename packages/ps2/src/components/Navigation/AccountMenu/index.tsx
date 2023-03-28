@@ -30,11 +30,13 @@ import {
   ROUTE_MY_BALANCES,
   ROUTE_WALLET,
   ROUTE_REFERRALS,
+  ROUTE_REWARDS,
 } from '../../../routes';
 import { generatePath, Link, useLocation, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
 import { useZModal } from 'components/ZModal/use';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
 
 function AccountMenu(): React.ReactElement | null {
@@ -158,6 +160,17 @@ function AccountMenu(): React.ReactElement | null {
         },
         {
           separator: true,
+          label: (
+            <>
+              <EmojiEventsIcon />
+              {t('account-menu.rewards')}
+            </>
+          ),
+          id: 'account-menu-dropdown__rewards',
+          href: generatePath(ROUTE_REWARDS),
+          onClick: () => navigate(ROUTE_REWARDS),
+        },
+        {
           label: (
             <>
               <CardGiftcardIcon />
