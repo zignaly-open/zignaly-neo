@@ -1,0 +1,28 @@
+{
+	"no-investors": "У этого сервиса пока нет инвесторов",
+	"failed-to-load": "Не удалось загрузить данные",
+	"title": "Инвесторы",
+	"tableHeader": {
+		"email": "Email",
+		"userId": "ID Пользователя",
+		"investment": "Инвестиции",
+		"P&L": "P&L",
+		"P&LTotal": "P&L Всего",
+		"totalFeesPaid": "Всего Уплачено Комиссии",
+		"successFee": "Плата за Успех",
+		"feesZIG": "Комиссия в ZIG",
+		"status": "Статус"
+	},
+	"loading-arialLabel": "Загрузка инвесторов",
+	"status": {
+		"connected": "Подключено",
+		"pending": "В ожидании",
+		"soft-disconnect": "Вывод средств",
+		"hard-disconnect": "Мгновенный Вывод",
+		"suspended": "Приостановлено",
+		"disconnected": "Отключено",
+		"owner": "Владелец"
+	},
+	"number-of-investors_one": "{{count}} Инвестор",
+	"number-of-investors_other": "{{count}} Инвесторов"
+}

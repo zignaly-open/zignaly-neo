@@ -15,16 +15,20 @@
 		"description": "Bir şeyler yanlış gitti. Lütfen daha sonra tekrar deneyin veya destek ekibiyle iletişime geçin. [Ya da sanayi toplumunu terk edip ormanda bir kulübe inşa edin:]"
 	},
 	"main-menu": {
-		"dropdown-link-forTrading": "Alım-Satım Hizmetleri için",
+		"dropdown-link-forTrading": "Hizmetlerinizi yönetin",
 		"dropdown-link-helpDocs": "Yardım Dokümanları"
 	},
 	"account-menu": {
 		"isAuth-button-logIn": "Giriş",
 		"isAuth-button-signUp": "KAYIT OL",
-		"notAuth-dropdown-link-dashboard": "Portföyüm",
+		"portfolio": "Portföyüm",
 		"notAuth-dropdown-link-balances": "Bakiyelerim",
 		"notAuth-button-logOut": "Oturumu Kapat",
-		"notAuth-dropdown-link-wallet": "ZIG Cüzdan"
+		"notAuth-dropdown-link-wallet": "ZIG Cüzdan",
+		"referrals": "Referanslar",
+		"notAuth-dropdown-link-settings": "Ayarlar",
+		"notAuth-dropdown-link-password": "Parola",
+		"notAuth-dropdown-link-2fa": "İki Faktörlü Kimlik Doğrulama"
 	},
 	"account-selector": {
 		"type": {
@@ -34,7 +38,8 @@
 		}
 	},
 	"navigation-menu": {
-		"profit-sharing": "Profit Sharing"
+		"profit-sharing": "En İyi Trader'lara Göz Atın",
+		"become-trader": "Alım-satım hizmetinizi sunun"
 	},
 	"amount": "Miktar",
 	"new-version": "Yeni sürüm, güncellemek için tıklayın",
@@ -44,9 +49,13 @@
 		"negative-amount": ">= 0 olmalıdır",
 		"invalid-amount": "Bir miktar belirtmelisiniz",
 		"negative-zeroable-amount": "> 0 olmalıdır",
-		"max-decimals": "Lütfen sayıları {{maxDecimals}} ondalık basamaktan daha fazla olmayacak şekilde girin.",
+		"max-decimals": "Lütfen sayıları 8 ondalık basamaktan fazla olmayacak şekilde girin.",
 		"max-allowed-length": "{{ maxLength }} karakterlerinin altında olmalıdır",
-		"min-amount": "Minimum miktar {{amount}} {{coin}} ."
+		"min-amount": "Minimum miktar {{amount}} {{coin}} .",
+		"insufficient-amount-min": "Minimum tutar: {{ minValue }} {{ minValueCoin }}",
+		"invalid-characters": "Geçersiz karakter kullanımı",
+		"letter-number": "En az bir harf veya rakam içermelidir",
+		"min-invest-amount-for-owner": "Sahibin bakiyesi {{minAmount}} {{minAmountCoin}} üzerinde olmalıdır."
 	},
 	"back": "Geri",
 	"close": "Kapat",
@@ -59,7 +68,10 @@
 	},
 	"percent": "{{value, prettyNumber}}%",
 	"number": "{{value, prettyNumber}}",
+	"infinitely-better": "Evet, mevcut değer, başlangıç değeri 0 olduğu için infinity yüzdesi daha iyi",
+	"infinitely-worse": "Evet, mevcut değer, başlangıç değeri 0 olduğu için infinity yüzdesi daha kötü",
 	"changes-saved": "Değişiklikler başarıyla kaydedildi",
 	"name": "İsim",
-	"type-to-confirm": "Onaylamak için \"{{word}}\" yazın"
+	"type-to-confirm": "Onaylamak için \"{{word}}\" yazın",
+	"ok": "Tamam"
 }

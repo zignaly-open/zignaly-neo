@@ -1,5 +1,6 @@
 export interface BalanceSummaryProps {
-  id?: string;
+  prefixId?: string;
+  serviceId?: string;
   totalValue?: string;
   profit: string;
   coin: string;

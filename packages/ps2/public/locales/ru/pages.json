@@ -1,0 +1,29 @@
+{
+	"404": "404 \/ Страница не найдена - Zignaly",
+	"dashboard": "Мое портфолио - Zignaly",
+	"become-trader": "Стать Трейдером - Zignaly",
+	"my-balances": "Мои Балансы - Zignaly",
+	"login": "Войти - Zignaly",
+	"help": "Помощь - Zignaly",
+	"signup": "Зарегистрироваться - Zignaly",
+	"trading-services": "Торговые Сервисы - Zignaly",
+	"profit-sharing": {
+		"title": "Profit Sharing - Zignaly",
+		"service": "{{serviceName}} - Zignaly",
+		"investors": "{{serviceName}} | Инвесторы - Zignaly",
+		"api-trading": "{{serviceName}} | Торговля API - Zignaly",
+		"coins": "{{serviceName}} | Монеты - Zignaly",
+		"manual": "{{serviceName}} | Ручная торговля - Zignaly",
+		"positions": "{{serviceName}} | Мои позиции - Zignaly",
+		"signals": "{{serviceName}} | Сигналы - Zignaly",
+		"management": "{{serviceName}} | Управление - Zignaly",
+		"edit": "{{serviceName}} | Редактировать сервис - Zignaly",
+		"profile": {
+			"title": "Просмотреть Профиль - Zignaly",
+			"edit": "Редактировать Профиль - Zignaly"
+		}
+	},
+	"forgot-password": "Забыли Пароль - Zignaly",
+	"reset-password": "Сброс Пароля - Zignaly",
+	"referrals": "Реферальная Панель - Zignaly"
+}

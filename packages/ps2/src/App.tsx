@@ -3,6 +3,7 @@ import Router from './Router';
 import theme from './theme';
 import * as Sentry from '@sentry/browser';
 import {
+  ChartGradients,
   dark,
   ThemeProvider as ThemeInheritorStyled,
   ThemeProviderMui as ThemeInheritorMui,
@@ -21,6 +22,7 @@ import UpdateChecker from './components/Navigation/UpdateChecker';
 import DateLocaleFixer from './components/Navigation/DateLocaleFixer';
 import Tracker from './components/Navigation/Tracker/Tracker';
 import useReferralCookie from 'util/hooks/useReferralCookie';
+import BottomNavigation from 'components/Navigation/BottomNavigation';
 
 if (
   process.env.NODE_ENV === 'production' &&
@@ -61,9 +63,11 @@ function App() {
                   <Tracker />
                   <UpdateChecker />
                   <DateLocaleFixer />
+                  <ChartGradients />
                   <Suspense fallback={null}>
                     <Router />
                   </Suspense>
+                  <BottomNavigation />
                 </ModalProvider>
               </BrowserRouter>
             </PersistGate>

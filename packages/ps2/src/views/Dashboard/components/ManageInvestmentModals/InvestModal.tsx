@@ -14,7 +14,7 @@ function InvestModal({
   close: () => void;
 } & DialogProps): React.ReactElement {
   const service = useSelectedInvestment();
-  const { isLoading: isLoadingService } = useServiceDetails(service.serviceId);
+  const { isLoading: isLoadingService } = useServiceDetails(service?.serviceId);
   const { isLoading: isLoadingCoins } = useCoinBalances();
   const { t } = useTranslation(['edit-investment', 'withdraw-your-investment']);
   const isLoading = isLoadingService || isLoadingCoins;

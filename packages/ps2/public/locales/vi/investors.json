@@ -1,0 +1,28 @@
+{
+	"no-investors": "Dịch vụ này chưa có nhà đầu tư nào",
+	"failed-to-load": "Không thể tải dữ liệu",
+	"title": "Nhà đầu tư",
+	"tableHeader": {
+		"email": "E-mail",
+		"userId": "ID người dùng",
+		"investment": "Đầu tư",
+		"P&L": "P&L",
+		"P&LTotal": "Tổng P&L",
+		"totalFeesPaid": "Tổng phí đã trả",
+		"successFee": "Phí thành công",
+		"feesZIG": "Phí thanh toán bằng ZIG",
+		"status": "Trạng thái"
+	},
+	"loading-arialLabel": "Đang tải nhà đầu tư",
+	"status": {
+		"connected": "Kết nối",
+		"pending": "Chờ",
+		"soft-disconnect": "Rút tiền",
+		"hard-disconnect": "Rút tiền ngay lập tức",
+		"suspended": "Cấm",
+		"disconnected": "ngắt kết nối",
+		"owner": "Người sở hữu"
+	},
+	"number-of-investors_one": "{{count}} Nhà đầu tư",
+	"number-of-investors_other": "{{đếm}} Nhà đầu tư"
+}

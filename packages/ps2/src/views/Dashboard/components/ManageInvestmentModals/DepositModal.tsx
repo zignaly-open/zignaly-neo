@@ -17,7 +17,7 @@ function DepositModal({
   const { t } = useTranslation(['deposit-crypto']);
 
   return (
-    <ZModal wide {...props} close={close} title={t('title')}>
+    <ZModal authOnly wide {...props} close={close} title={t('title')}>
       <DepositView allowedCoins={allowedCoins} selectedCoin={selectedCoin} />
     </ZModal>
   );

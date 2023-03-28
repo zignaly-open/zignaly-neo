@@ -5,12 +5,14 @@ import {
   ZigTable,
   ZigTablePriceLabel,
   createColumnHelper,
+  ZigTypography,
+  ZigButton,
 } from '@zignaly-open/ui';
 import { BalanceTableDataType } from './types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { allowedDeposits } from 'util/coins';
-import { Add, Remove } from '@mui/icons-material';
+import { Remove } from '@mui/icons-material';
 import { useCoinBalances, useExchangeCoinsList } from 'apis/coin/use';
 import {
   CoinBalance,
@@ -19,11 +21,11 @@ import {
   CoinDetails,
 } from 'apis/coin/types';
 import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
-import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 import WithdrawModal from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
-import { useZModal } from '../../../../components/ZModal/use';
-import { Box } from '@mui/material';
+import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
+import { Box, Tooltip } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
+import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
@@ -31,6 +33,7 @@ const MyBalancesTable = (): JSX.Element => {
   const coinsEndpoint = useExchangeCoinsList();
   const { exchangeType } = useActiveExchange();
   const { showModal } = useZModal();
+  const showDepositModal = useZRouteModal(ROUTE_MY_BALANCES_DEPOSIT_COIN);
 
   const columnHelper = createColumnHelper<BalanceTableDataType>();
   const columns = useMemo(
@@ -84,33 +87,36 @@ const MyBalancesTable = (): JSX.Element => {
       columnHelper.display({
         id: 'action',
         cell: ({ row }) => (
-          <Box display='flex' justifyContent='flex-end'>
+          <Box display='flex' justifyContent='flex-end' alignItems={'center'}>
             {!!allowedDeposits[exchangeType]?.includes(row.original.coin) && (
-              <IconButton
+              <ZigButton
                 id={'balance-row__deposit'}
-                icon={<Add color={'neutral300'} />}
                 onClick={() =>
-                  showModal(DepositModal, {
+                  showDepositModal({
                     selectedCoin: row.original.coin,
-                    ctaId: 'balances-table-row',
                   })
                 }
-                variant='secondary'
-              />
+                variant='outlined'
+                sx={{ maxHeight: '20px' }}
+              >
+                <ZigTypography>{t('deposit')}</ZigTypography>
+              </ZigButton>
             )}
-            {+row.original.balance.balanceTotal > 0 && (
-              <IconButton
-                id={'balance-row__withdrawal'}
-                icon={<Remove color={'neutral300'} />}
-                onClick={() =>
-                  showModal(WithdrawModal, {
-                    selectedCoin: row.original.coin,
-                    ctaId: 'balances-table-row',
-                  })
-                }
-                variant='secondary'
-              />
-            )}
+            <Tooltip title={t('withdraw')}>
+              <Box>
+                <IconButton
+                  id={'balance-row__withdrawal'}
+                  icon={<Remove color={'neutral300'} />}
+                  onClick={() =>
+                    showModal(WithdrawModal, {
+                      selectedCoin: row.original.coin,
+                      ctaId: 'balances-table-row',
+                    })
+                  }
+                  variant='secondary'
+                />
+              </Box>
+            </Tooltip>
           </Box>
         ),
       }),
@@ -160,6 +166,7 @@ const MyBalancesTable = (): JSX.Element => {
       endpoint={[coinsEndpoint, balancesEndpoint]}
       content={([coins, balances]: [CoinDetails, CoinBalances]) => (
         <ZigTable
+          prefixId={'balance'}
           columns={columns}
           data={getFilteredData(coins, balances)}
           initialState={{
