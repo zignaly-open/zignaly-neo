@@ -141,6 +141,7 @@ const Referrals: React.FC = () => {
                   </Box>
                   <ZigButton
                     variant={'contained'}
+                    id='referrals__open-invite-image-modal'
                     size={'large'}
                     sx={{
                       mb: '10px',

@@ -132,6 +132,7 @@ const ReferralInviteModal: React.FC<
           <Box>
             <ZigInput
               wide
+              id={'create-invite__invitation-text'}
               label={t('create-invite.customize-text')}
               rows={6}
               multiline
