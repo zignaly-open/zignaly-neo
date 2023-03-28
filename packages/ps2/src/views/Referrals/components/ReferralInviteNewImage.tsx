@@ -76,12 +76,7 @@ const ReferralInviteNewImage: React.FC<{
         </div>
       </foreignObject>
 
-      <foreignObject
-        x={sidePadding}
-        y={mode === 'trader' ? 300 : 255}
-        width={423}
-        height={175}
-      >
+      <foreignObject x={sidePadding} y={255} width={423} height={175}>
         <div
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
