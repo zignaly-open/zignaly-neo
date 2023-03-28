@@ -35,12 +35,21 @@ const ReferralInviteModal: React.FC<
 > = ({ url, urlShort, ...props }) => {
   const { t } = useTranslation(['referrals', 'pages']);
   const [tab, setTab] = useState(0);
-  const [text, setText] = useState<string>(
-    t('create-invite.invite-text', {
+  const [friendText, setFriendText] = useState<string>(
+    t('create-invite.invite-text-friend', {
       depositThreshold: hardcodedInviteeReward.threshold,
       reward: hardcodedInviteeReward.value,
     }),
   );
+  const [traderText, setTraderText] = useState<string>(
+    t('create-invite.invite-text-trader', {
+      depositThreshold: hardcodedInviteeReward.threshold,
+      reward: hardcodedInviteeReward.value,
+    }),
+  );
+
+  const [text, setText] =
+    tab === 0 ? [friendText, setFriendText] : [traderText, setTraderText];
 
   const imageWrapper = useRef<HTMLDivElement>();
   const toast = useToast();

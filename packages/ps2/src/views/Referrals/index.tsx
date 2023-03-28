@@ -91,6 +91,7 @@ const Referrals: React.FC = () => {
               </Box>
               <Box
                 sx={{
+                  flex: 1,
                   maxWidth: 700,
                   justifyContent: 'center',
                   display: 'flex',
@@ -105,13 +106,6 @@ const Referrals: React.FC = () => {
                 >
                   {t('title')}
                 </ZigTypography>
-                <ZigTypography
-                  sx={{
-                    mb: 3,
-                  }}
-                >
-                  {t('description')}
-                </ZigTypography>
 
                 <Box
                   sx={{
@@ -122,7 +116,6 @@ const Referrals: React.FC = () => {
                 >
                   <Box sx={{ flex: 1 }}>
                     <InputText
-                      label={t('share-your-link')}
                       readOnly={true}
                       value={link}
                       rightSideElement={
