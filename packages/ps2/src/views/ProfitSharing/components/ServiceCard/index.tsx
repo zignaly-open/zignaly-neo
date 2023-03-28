@@ -50,7 +50,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
             {t('service:periods.30d')}
           </ZigTypography>
           <PercentageIndicator
-            id={prefixId && `${prefixId}__pnl30dpct`}
+            id={prefixId && `${prefixId}__pnl30dpct-${service.id}`}
             style={{
               fontSize: '13px',
             }}
@@ -75,7 +75,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
         <Box display='flex' flexDirection='column'>
           <ValueContainer>
             <PercentageIndicator
-              id={prefixId && `${prefixId}__pnl90dpct`}
+              id={prefixId && `${prefixId}__pnl90dpct-${service.id}`}
               style={{
                 fontSize: '17px',
               }}
@@ -111,7 +111,12 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
         </Box>
         <Box display='flex' flexDirection='column'>
           <ValueContainer>
-            <ZigTypography color='neutral200' fontSize={17} fontWeight={500}>
+            <ZigTypography
+              color='neutral200'
+              fontSize={17}
+              fontWeight={500}
+              id={prefixId && `${prefixId}__investors-${service.id}`}
+            >
               {service.investors}
             </ZigTypography>
           </ValueContainer>
