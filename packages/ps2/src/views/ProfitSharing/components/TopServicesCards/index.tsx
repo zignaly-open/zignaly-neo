@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import ServiceCard from '../ServiceCard';
 import { TopServicesCardsProps } from './types';
 
-const TopServicesCards = ({ services }: TopServicesCardsProps) => {
+const TopServicesCards = ({ prefixId, services }: TopServicesCardsProps) => {
   const { t } = useTranslation(['marketplace', 'action']);
   const [show, setShow] = useState(true);
 
@@ -31,7 +31,10 @@ const TopServicesCards = ({ services }: TopServicesCardsProps) => {
         >
           {services.map((s) => (
             <Grid item key={s.id}>
-              <ServiceCard service={s} />
+              <ServiceCard
+                prefixId={prefixId && `${prefixId}-cards`}
+                service={s}
+              />
             </Grid>
           ))}
         </Grid>

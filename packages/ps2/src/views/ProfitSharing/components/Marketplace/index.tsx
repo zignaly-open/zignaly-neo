@@ -154,6 +154,7 @@ const Marketplace: React.FC = () => {
               </ZigTypography>
             </Box>
             <TopServicesCards
+              prefixId={'marketplace'}
               services={services
                 ?.slice()
                 .sort((a, b) => +b.pnlPercent90t - +a.pnlPercent90t)

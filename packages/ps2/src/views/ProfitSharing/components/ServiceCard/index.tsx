@@ -21,13 +21,14 @@ import {
 } from './styles';
 import { ServiceCardProps } from './types';
 
-const ServiceCard = ({ service }: ServiceCardProps) => {
+const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
   const { t } = useTranslation(['marketplace', 'service']);
 
   return (
     <Card>
       <ChartBox>
         <ZigChartMini
+          id={prefixId && `${prefixId}__chart-${service.id}`}
           data={service.sparklines}
           midLine={false}
           height={104}
@@ -49,6 +50,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
             {t('service:periods.30d')}
           </ZigTypography>
           <PercentageIndicator
+            id={prefixId && `${prefixId}__pnl30dpct`}
             style={{
               fontSize: '13px',
             }}
@@ -57,6 +59,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         </BottomPnLContainer>
       </ChartBox>
       <ServiceName
+        prefixId={prefixId}
         service={marketplaceServiceToInvestmentType(service) as Investment}
         showCoin={false}
       />
@@ -72,6 +75,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         <Box display='flex' flexDirection='column'>
           <ValueContainer>
             <PercentageIndicator
+              id={prefixId && `${prefixId}__pnl90dpct`}
               style={{
                 fontSize: '17px',
               }}
@@ -89,7 +93,11 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         </Box>
         <Box display='flex' flexDirection='column'>
           <AssetContainer>
-            <AssetsInPool shorten assetsValue={service.investedUSDT} />
+            <AssetsInPool
+              prefixId={prefixId}
+              shorten
+              assetsValue={service.investedUSDT}
+            />
           </AssetContainer>
           <ZigTypography
             fontSize={11}
@@ -117,7 +125,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         </Box>
       </Box>
       <ButtonContainer>
-        <MarketplaceAction service={service} prefixId='marketplace-card' />
+        <MarketplaceAction service={service} prefixId={prefixId} />
       </ButtonContainer>
     </Card>
   );

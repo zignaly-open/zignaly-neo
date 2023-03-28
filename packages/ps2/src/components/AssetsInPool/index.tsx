@@ -19,7 +19,7 @@ const AssetsInPool = ({
   return (
     <Box justifyContent='center' sx={{ gap: 2 }}>
       <PriceBoxOverride
-        id={prefixId && `${prefixId}__invested-amount`}
+        id={prefixId && `${prefixId}__invested`}
         sx={{
           display: 'flex',
           justifyContent: 'center',
