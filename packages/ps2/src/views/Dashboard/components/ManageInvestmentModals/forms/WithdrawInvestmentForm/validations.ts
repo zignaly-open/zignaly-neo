@@ -13,7 +13,7 @@ export const EditInvestmentValidation = yup.object().shape({
 
 export const EditInvestmentValidationOwner = (minAmount: number) =>
   yup.object().shape({
-    amountTransfer: EditInvestmentValidation.concat(
-      inputAmountMinOwnerInvestedValidation(minAmount),
-    ),
+    amountTransfer: inputAmountTokenMaxValidation
+      .concat(inputAmountTokenDecimalsValidation)
+      .concat(inputAmountMinOwnerInvestedValidation(minAmount)),
   });

@@ -8,7 +8,6 @@ import {
   useInvestedAmountQuery,
   useInvestInServiceMutation,
 } from './api';
-import { useActiveExchange, useIsAuthenticated } from '../user/use';
 import {
   InvestedInService,
   InvestmentDetails,
@@ -16,10 +15,13 @@ import {
 } from './types';
 import { RootState } from '../store';
 import { setSelectedInvestment } from './store';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { useCoinBalances } from '../coin/use';
 import { QueryReturnType } from '../../util/queryReturnType';
+import { useActiveExchange, useIsAuthenticated } from '../user/use';
+import { TraderServiceFull } from '../service/types';
+import { serviceToInvestmentServiceDetail } from './util';
 
 export const useInvestments = useInvestmentsQuery;
 
@@ -38,6 +40,23 @@ export function useSetSelectedInvestment(): (
 ) => void {
   const dispatch = useDispatch();
   return (service) => dispatch(setSelectedInvestment(service));
+}
+
+export function useSelectInvestment(
+  // we support both scenarios, so it's easier for you <3
+  service: InvestmentServiceDetails | TraderServiceFull,
+): void {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    service &&
+      dispatch(
+        setSelectedInvestment(
+          'serviceId' in service
+            ? service
+            : serviceToInvestmentServiceDetail(service),
+        ),
+      );
+  }, [service]);
 }
 
 export function useSelectedInvestment(): InvestmentServiceDetails {

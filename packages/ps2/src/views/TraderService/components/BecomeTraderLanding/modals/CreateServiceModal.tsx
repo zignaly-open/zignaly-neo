@@ -4,14 +4,13 @@ import { DialogProps } from '@mui/material/Dialog';
 import ZModal from 'components/ZModal';
 import { useExchangeCoinsList } from '../../../../../apis/coin/use';
 import CenteredLoader from '../../../../../components/CenteredLoader';
-// import CreateServiceForm from './forms/CreateServiceForm';
 import InvestInYourServiceForm from './forms/InvestInYourServiceForm';
 import CreateServiceForm from './forms/CreateServiceForm';
 import { ServiceFormData } from './forms/types';
 import { useCurrentBalance } from '../../../../../apis/investment/use';
 import {
   useCreateTraderServiceMutation,
-  useServiceTypesInfoQuery,
+  useTraderServiceTypesInfoQuery,
 } from '../../../../../apis/service/api';
 
 function CreateServiceModal({
@@ -24,7 +23,7 @@ function CreateServiceModal({
   const { isLoading: isLoadingCoins } = useExchangeCoinsList();
   const [, { isLoading: isCreating }] = useCreateTraderServiceMutation();
   const [step, setStep] = useState(0);
-  const { isLoading: isLoadingServiceTypes } = useServiceTypesInfoQuery();
+  const { isLoading: isLoadingServiceTypes } = useTraderServiceTypesInfoQuery();
   const [service, setService] = useState<Partial<ServiceFormData>>({});
   const { isFetching: isLoadingBalances } = useCurrentBalance(
     service.baseCurrency,
@@ -39,6 +38,7 @@ function CreateServiceModal({
 
   return (
     <ZModal
+      authOnly
       onGoBack={step === 1 && goBack}
       onBackdropClick={(e) => {
         e.stopPropagation();

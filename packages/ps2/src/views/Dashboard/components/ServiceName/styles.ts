@@ -2,7 +2,7 @@ import { styled } from '@mui/material';
 import VerifiedIcon from '@mui/icons-material/Verified';
 
 export const Icon = styled('div')`
-  margin-right: 16px;
+  margin-right: 20px;
   width: 55px;
   height: 55px;
 `;

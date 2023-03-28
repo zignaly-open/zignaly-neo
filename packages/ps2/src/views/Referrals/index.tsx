@@ -160,7 +160,7 @@ const Referrals: React.FC = () => {
 
             <ReferralRewardsList rewards={rewardsData} />
 
-            {!referrals.history?.length ? (
+            {!rewardsData.invitedCount ? (
               <>
                 <ZigTypography
                   align={'center'}
@@ -211,6 +211,7 @@ const Referrals: React.FC = () => {
                       <ZigPriceLabel
                         color={'greenGraph'}
                         usd
+                        showTooltip
                         variant={'bigNumber'}
                         value={rewardsData.usdtEarned}
                       />

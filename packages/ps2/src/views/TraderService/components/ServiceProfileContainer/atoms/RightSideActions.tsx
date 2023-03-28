@@ -10,6 +10,7 @@ import { useMediaQuery } from '@mui/material';
 import theme from '../../../../../theme';
 import { RightSideActionWrapper } from '../styles';
 import { Loader } from '@zignaly-open/ui';
+import { ROUTE_PROFIT_SHARING_SERVICE_INVEST } from '../../../../../routes';
 
 const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const isAuthenticated = useIsAuthenticated();
@@ -28,12 +29,14 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
         <Box sx={{ mt: md ? 0 : 3 }}>
           {isAuthenticated && isInvested.thisAccount ? (
             <InvestedButton
-              id={'service__edit-investment'}
+              prefixId={'service-profile'}
               service={service}
               ctaId={'service-profile-invested-button'}
             />
           ) : (
             <InvestButton
+              modalRoute={ROUTE_PROFIT_SHARING_SERVICE_INVEST}
+              prefixId={'service-profile'}
               showMultipleAccountButton
               service={service}
               ctaId={'service-profile-invest-button'}

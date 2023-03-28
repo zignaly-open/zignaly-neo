@@ -14,7 +14,7 @@
 		"api-trading": "{{serviceName}} | API Trading - Zignaly",
 		"coins": "{{serviceName}} | Moedas - Zignaly",
 		"manual": "{{serviceName}} | Trading Manual - Zignaly",
-		"positions": "{{serviceName}} | As Minhas Posições - Zignaly",
+		"positions": "{{serviceName}} | Minhas Posições - Zignaly",
 		"signals": "{{serviceName}} | Sinais - Zignaly",
 		"management": "{{serviceName}} | Gerenciamento - Zignaly",
 		"edit": "{{serviceName}} | Editar Serviço - Zignaly",
@@ -24,5 +24,6 @@
 		}
 	},
 	"forgot-password": "Senha Esquecida - Zignaly",
-	"reset-password": "Redefinir Senha - Zignaly"
+	"reset-password": "Redefinir Senha - Zignaly",
+	"referrals": "Painel de Referidos - Zignaly"
 }
