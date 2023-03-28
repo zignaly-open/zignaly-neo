@@ -8,23 +8,27 @@
 	},
 	"no-data": {
 		"title": "Sin Datos",
-		"description": "No hay datos disponibles. Si cree que es un problema, por favor póngase en contacto con el servicio de soporte."
+		"description": "No hay datos disponibles. Si crees que es un problema, por favor ponte en contacto con el servicio de soporte."
 	},
 	"critical-error": {
 		"title": "Ocurrió un Error",
 		"description": "Algo ha ido mal. Por favor vuelve a intentarlo más tarde o ponte en contacto con el servicio de soporte. O abandone la sociedad industrial y construya una cabaña en el bosque."
 	},
 	"main-menu": {
-		"dropdown-link-forTrading": "Gestione sus Servicios",
+		"dropdown-link-forTrading": "Gestiona tus Servicios",
 		"dropdown-link-helpDocs": "Documentos de Ayuda"
 	},
 	"account-menu": {
 		"isAuth-button-logIn": "Iniciar sesión",
 		"isAuth-button-signUp": "REGISTRARSE",
-		"notAuth-dropdown-link-dashboard": "Mi Portafolio",
+		"portfolio": "Mi Portafolio",
 		"notAuth-dropdown-link-balances": "Mi Saldo",
 		"notAuth-button-logOut": "Cerrar Sesión",
-		"notAuth-dropdown-link-wallet": "Billetera ZIG"
+		"notAuth-dropdown-link-wallet": "Billetera ZIG",
+		"referrals": "Referidos",
+		"notAuth-dropdown-link-settings": "Configuraciones",
+		"notAuth-dropdown-link-password": "Contraseña",
+		"notAuth-dropdown-link-2fa": "Autenticación de Dos Factores"
 	},
 	"account-selector": {
 		"type": {
@@ -41,16 +45,17 @@
 	"new-version": "Nueva versión, haz clic para actualizar",
 	"validation": {
 		"insufficient-amount": "Fondos insuficientes",
-		"invalid-value": "Valor no válido",
+		"invalid-value": "Valor inválido",
 		"negative-amount": "Debe ser >= 0",
-		"invalid-amount": "Debe indicar una cantidad",
+		"invalid-amount": "Debes indicar una cantidad",
 		"negative-zeroable-amount": "Debe ser > 0",
-		"max-decimals": "Por favor ingrese números que no tengan más de 8 decimales.",
+		"max-decimals": "Por favor ingresa números que no tengan más de 8 decimales.",
 		"max-allowed-length": "Debe ser inferior a {{ maxLength }} caracteres",
 		"min-amount": "La cantidad mínima es {{amount}} {{coin}}.",
 		"insufficient-amount-min": "Cantidad mínima: {{ minValue }} {{ minValueCoin }}",
 		"invalid-characters": "Caracteres inválidos",
-		"letter-number": "Debe contener al menos una letra o un número"
+		"letter-number": "Debe contener al menos una letra o un número",
+		"min-invest-amount-for-owner": "El saldo del propietario debe ser superior a {{minAmount}} {{minAmountCoin}}"
 	},
 	"back": "Volver",
 	"close": "Cerrar",
@@ -59,7 +64,7 @@
 		"description": "Comprueba la URL o tus decisiones de vida."
 	},
 	"refresh": {
-		"short": "Nueva versión disponible, haga clic aquí para actualizar"
+		"short": "Nueva versión disponible, haz clic aquí para actualizar"
 	},
 	"percent": "{{value, prettyNumber}}%",
 	"number": "{{value, prettyNumber}}",
@@ -67,5 +72,6 @@
 	"infinitely-worse": "Sí, el valor actual es infinito por ciento peor porque el valor inicial es 0",
 	"changes-saved": "Cambios guardados correctamente",
 	"name": "Nombre",
-	"type-to-confirm": "Escriba \"{{word}}\" para confirmar"
+	"type-to-confirm": "Escribe \"{{word}}\" para confirmar",
+	"ok": "OK"
 }

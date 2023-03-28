@@ -149,10 +149,14 @@ export function useChartData({
     }
 
     const dates = Object.entries(chart).sort(([a], [b]) => a.localeCompare(b));
-    const graph = dates?.map(([date, value]) => ({
-      x: formatMonthDay(parse(date, 'yyyy-MM-dd', Date.now())),
-      y: value,
-    }));
+    const graph = dates?.map(([date, value]) => {
+      const dateObj = parse(date, 'yyyy-MM-dd', Date.now());
+      return {
+        x: formatMonthDay(dateObj),
+        date: dateObj,
+        y: value,
+      };
+    });
 
     return {
       summary: data?.summary,

@@ -105,6 +105,7 @@ function TransferModal({
     <ZModal
       wide
       {...props}
+      authOnly
       close={close}
       title={t('transferFunds.title')}
       isLoading={!balance || isTransferring}

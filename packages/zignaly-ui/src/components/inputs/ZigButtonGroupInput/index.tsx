@@ -13,6 +13,7 @@ const ZigButtonGroupInput = ({
 }: {
   value: string;
   options: {
+    id?: string;
     value: string;
     label: string | JSX.Element;
     tooltip?: string;
@@ -37,6 +38,7 @@ const ZigButtonGroupInput = ({
       <ZigButtonGroup>
         {options.map((o) => (
           <ZigButton
+            id={o.id}
             onClick={() => onChange(o.value)}
             key={o.value}
             active={value === o.value}

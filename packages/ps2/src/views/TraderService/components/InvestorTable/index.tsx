@@ -125,6 +125,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             </InvestorCounts>
 
             <ZigTable
+              prefixId={'investor'}
               columns={columns}
               data={investors.map((inv) => ({
                 ...inv,

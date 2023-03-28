@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  ErrorMessage,
+  ZigAlertMessage,
   ZigButton,
   ZigButtonGroupInput,
   ZigInput,
@@ -20,8 +20,11 @@ import { ZigButtonGroupInputWrapper } from '../atoms';
 import SuccessFeeInputWrapper from './SuccessFeeInputWrapper';
 import { ExchangeType } from '../../../../../../apis/user/types';
 import { ServiceFormData } from './types';
-import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
-import { useServiceTypesInfoQuery } from '../../../../../../apis/service/api';
+import {
+  AlertBlock,
+  ModalActionsNew,
+} from 'components/ZModal/ModalContainer/styles';
+import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 
 const CreateServiceForm: React.FC<{
   service?: Partial<ServiceFormData>;
@@ -50,7 +53,7 @@ const CreateServiceForm: React.FC<{
 
   const exchangeType = watch('serviceType');
 
-  const { data: serviceTypesInfo } = useServiceTypesInfoQuery();
+  const { data: serviceTypesInfo } = useTraderServiceTypesInfoQuery();
 
   const coinOptions = useMemo(
     () =>
@@ -163,7 +166,7 @@ const CreateServiceForm: React.FC<{
                 endAdornment: <InputAdornment position='end'>%</InputAdornment>,
               }}
               sx={{
-                mb: 2,
+                mb: 1,
               }}
               fullWidth
               label={
@@ -180,8 +183,9 @@ const CreateServiceForm: React.FC<{
           </SuccessFeeInputWrapper>
         )}
       />
-
-      <ErrorMessage text={t('create.please-verify')} yellow />
+      <AlertBlock>
+        <ZigAlertMessage text={t('create.please-verify')} warning />
+      </AlertBlock>
 
       <ModalActionsNew>
         <ZigButton

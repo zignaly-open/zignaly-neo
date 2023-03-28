@@ -142,6 +142,15 @@ export const MarkdownContainer = styled('div')`
     border-top: 0.5px dashed ${({ theme }) => theme.palette.neutral500};
     border-bottom-width: 0 !important;
   }
+
+  ul,
+  ol {
+    padding-inline-start: 15px;
+  }
+
+  li {
+    list-style-type: disc;
+  }
 `;
 
 export const GridWithBottomBorder = styled(Grid)`

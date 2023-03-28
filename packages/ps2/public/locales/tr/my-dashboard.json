@@ -18,7 +18,7 @@
 		"6-mos-title": "6 ay",
 		"all": {
 			"title": "Tümü",
-			"subtitle": "Yaş"
+			"subtitle": "Yatırıma başlanan tarih"
 		}
 	},
 	"table-search-emptyMessage": "Henüz herhangi bir hizmete bağlı değilsiniz.",
@@ -29,5 +29,6 @@
 			"left": "Yeniden Yatırım",
 			"right": "Çekim"
 		}
-	}
+	},
+	"tooltip-date": "{{date}} tarihinden beri bu hizmete yatırım yapıyorsunuz"
 }

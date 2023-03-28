@@ -65,6 +65,7 @@ const PendingTransactionsList: React.FC<{
     <>
       <TransactionContainer>
         <ZigTable
+          prefixId={'pending-transactions'}
           columns={
             [
               {

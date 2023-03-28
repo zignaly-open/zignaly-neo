@@ -7,7 +7,7 @@ import WithdrawInvestment from './views/WithdrawInvestment';
 import PendingTransactionsList from './views/PendingTransactionsList';
 import {
   useInvestmentDetails,
-  useSelectedInvestment,
+  useSelectInvestment,
 } from '../../../../apis/investment/use';
 import WithdrawWithdrawInvestmentSuccessPerform from './views/WithdrawInvestmentPerform';
 import EditInvestmentSuccess from './views/EditInvestmentSuccess';
@@ -18,15 +18,18 @@ import ZModal from '../../../../components/ZModal';
 
 function EditInvestmentModal({
   close,
+  serviceId,
   ...props
 }: {
   close: () => void;
+  serviceId: string;
 } & DialogProps): React.ReactElement {
-  const service = useSelectedInvestment();
-  const { isLoading: isLoadingInvestment } = useInvestmentDetails(
-    service.serviceId,
-  );
-  const { isLoading: isLoadingService } = useServiceDetails(service.serviceId);
+  const { isLoading: isLoadingInvestment } = useInvestmentDetails(serviceId);
+  const { isLoading: isLoadingService, data: service } =
+    useServiceDetails(serviceId);
+
+  useSelectInvestment(service);
+
   const { isLoading: isLoadingCoins } = useCoinBalances();
 
   const [view, setView] = useState<EditInvestmentViews>(
