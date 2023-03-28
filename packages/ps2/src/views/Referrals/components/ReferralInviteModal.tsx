@@ -24,7 +24,10 @@ import copy from 'copy-to-clipboard';
 import { useToast } from '../../../util/hooks/useToast';
 import { ShareIconsContainer } from '../styles';
 import ReferralInviteNewImage from './ReferralInviteNewImage';
-import { downloadSvgElementAsImage } from 'util/images';
+import {
+  downloadSvgElementAsPngImage,
+  downloadSvgElementAsSvgImage,
+} from 'util/images';
 import { hardcodedInviteeReward } from '../constants';
 
 const ReferralInviteModal: React.FC<
@@ -42,11 +45,20 @@ const ReferralInviteModal: React.FC<
   const imageWrapper = useRef<HTMLDivElement>();
   const toast = useToast();
 
-  const download = () =>
-    downloadSvgElementAsImage(
-      imageWrapper?.current?.querySelector('svg'),
-      'zignaly-invite.svg',
-    );
+  const download = () => {
+    try {
+      downloadSvgElementAsPngImage(
+        imageWrapper?.current?.querySelector('svg'),
+        'zignaly-invite.png',
+        3,
+      );
+    } catch (e) {
+      downloadSvgElementAsSvgImage(
+        imageWrapper?.current?.querySelector('svg'),
+        'zignaly-invite.svg',
+      );
+    }
+  };
 
   const copyLink = () => {
     copy(url);
@@ -120,6 +132,7 @@ const ReferralInviteModal: React.FC<
           <Box>
             <ZigInput
               wide
+              id={'create-invite__invitation-text'}
               label={t('create-invite.customize-text')}
               rows={6}
               multiline
