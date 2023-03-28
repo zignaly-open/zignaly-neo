@@ -92,7 +92,7 @@ export const InvestedButtonBase: React.FC<{
         <BigNumberWrapperInvested
           id={prefixId && `${prefixId}__invested-${service.id}`}
         >
-          <BigNumber ssc={service.ssc} shorten value={investedAmount} green />
+          <BigNumber ssc={service.ssc} value={investedAmount} green />
         </BigNumberWrapperInvested>
       </Box>
       <Box
