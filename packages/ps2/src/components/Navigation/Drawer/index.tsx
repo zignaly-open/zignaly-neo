@@ -18,7 +18,6 @@ import {
 } from '@mui/material';
 import {
   Avatar,
-  DropDown,
   UserIcon,
   ZigButton,
   ZigTypography,
@@ -26,12 +25,10 @@ import {
 } from '@zignaly-open/ui';
 import { useFirstOwnedService } from 'apis/service/use';
 import {
-  useActiveExchange,
   useChangeLocale,
   useCurrentUser,
   useIsAuthenticated,
   useLogout,
-  useSelectExchange,
 } from 'apis/user/use';
 import { useZModal } from 'components/ZModal/use';
 import React, { useState } from 'react';
@@ -46,13 +43,12 @@ import {
 import theme from 'theme';
 import { HELP_URL } from 'util/constants';
 import { supportedLanguages } from 'util/i18next';
-import { getImageOfAccount } from 'util/images';
 import { LocalizationLanguages } from 'util/languages';
 import socialNetworksLinks from 'util/socialNetworks';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
-import { AccountName } from '../AccountMenu/styles';
 import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
+import { DropdownExchangeAccount } from './atoms';
 
 const drawerWidth = 250;
 
@@ -65,15 +61,13 @@ const ZigDrawer = () => {
   const logout = useLogout();
   const { t, i18n } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
-  const [exchangeOpen, setExchangeOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
   const { showModal } = useZModal();
   const service = useFirstOwnedService();
-  const activeExchange = useActiveExchange();
   const { exchanges, email, imageUrl } = useCurrentUser();
   const location = useLocation();
   const changeLocale = useChangeLocale();
-  const selectExchange = useSelectExchange();
 
   const languageMap = supportedLanguages
     ? supportedLanguages.map((x) => LocalizationLanguages[x])
@@ -88,9 +82,6 @@ const ZigDrawer = () => {
     onSelectLocale(locale);
   };
 
-  const setActiveExchange = (exchangeInternalId: string) => {
-    selectExchange(exchangeInternalId);
-  };
   return (
     <>
       <IconButton
@@ -141,44 +132,7 @@ const ZigDrawer = () => {
                   )}
                   <ZigTypography variant='caption'>{email}</ZigTypography>
                 </Box>
-                {exchanges?.length && (
-                  <DropDown
-                    component={({ open }) => (
-                      <Box display='flex' gap={1} justifyContent='center'>
-                        <Avatar size={'medium'} image={activeExchange?.image} />
-                        <AccountName variant={'body1'} color={'neutral100'}>
-                          {activeExchange?.internalName}
-                        </AccountName>
-                        {open ? <ExpandLess /> : <ChevronRight />}
-                      </Box>
-                    )}
-                    options={(exchanges?.length > 1 ? exchanges : []).map(
-                      (exchange, index) => ({
-                        onClick: () => setActiveExchange(exchange.internalId),
-                        id: `account-switcher-dropdown__account-${index}`,
-                        label: (
-                          <>
-                            <Avatar
-                              size={'medium'}
-                              image={getImageOfAccount(index)}
-                            />
-                            <AccountName
-                              variant={'body1'}
-                              color={
-                                activeExchange?.internalId ===
-                                exchange.internalId
-                                  ? 'highlighted'
-                                  : 'neutral200'
-                              }
-                            >
-                              {exchange.internalName}
-                            </AccountName>
-                          </>
-                        ),
-                      }),
-                    )}
-                  />
-                )}
+                {exchanges?.length && <DropdownExchangeAccount />}
               </>
             ) : (
               <Box
@@ -217,14 +171,14 @@ const ZigDrawer = () => {
               {isAuthenticated && (
                 <>
                   <ListItemButton
-                    onClick={() => setExchangeOpen(!exchangeOpen)}
+                    onClick={() => setSettingsOpen(!settingsOpen)}
                   >
                     <ListItemText
                       primary={t('account-menu.notAuth-dropdown-link-settings')}
                     />
-                    {exchangeOpen ? <ExpandLess /> : <ChevronRight />}
+                    {settingsOpen ? <ExpandLess /> : <ChevronRight />}
                   </ListItemButton>
-                  <Collapse in={exchangeOpen} timeout='auto' unmountOnExit>
+                  <Collapse in={settingsOpen} timeout='auto' unmountOnExit>
                     <List
                       component='div'
                       disablePadding
