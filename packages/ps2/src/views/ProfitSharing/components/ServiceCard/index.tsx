@@ -95,6 +95,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
           <AssetContainer>
             <AssetsInPool
               prefixId={prefixId}
+              serviceId={service.id}
               shorten
               assetsValue={service.investedUSDT}
             />

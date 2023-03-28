@@ -8,6 +8,7 @@ import { formatLocalizedDistance } from 'views/Dashboard/components/MyDashboard/
 
 const AssetsInPool = ({
   prefixId,
+  serviceId,
   assetsValue,
   numberOfInvestors,
   convertedValue,
@@ -19,7 +20,7 @@ const AssetsInPool = ({
   return (
     <Box justifyContent='center' sx={{ gap: 2 }}>
       <PriceBoxOverride
-        id={prefixId && `${prefixId}__invested`}
+        id={prefixId && `${prefixId}__invested-${serviceId}`}
         sx={{
           display: 'flex',
           justifyContent: 'center',
@@ -45,7 +46,7 @@ const AssetsInPool = ({
         <Box
           justifyContent='center'
           alignItems='start'
-          id={prefixId && `${prefixId}__number-investors`}
+          id={prefixId && `${prefixId}__investors-${serviceId}`}
         >
           <BlockTypography variant='h5' color='neutral400'>
             {t('table.x-investors', { count: numberOfInvestors })}
@@ -69,7 +70,7 @@ const AssetsInPool = ({
         <Box
           justifyContent='center'
           alignItems='start'
-          id={prefixId && `${prefixId}__converted`}
+          id={prefixId && `${prefixId}__converted-${serviceId}`}
         >
           <ZigPriceLabel
             value={convertedValue}
