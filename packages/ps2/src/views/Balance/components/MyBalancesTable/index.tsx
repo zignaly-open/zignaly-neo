@@ -5,12 +5,14 @@ import {
   ZigTable,
   ZigTablePriceLabel,
   createColumnHelper,
+  ZigTypography,
+  ZigButton,
 } from '@zignaly-open/ui';
 import { BalanceTableDataType } from './types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { allowedDeposits } from 'util/coins';
-import { Add, Remove } from '@mui/icons-material';
+import { Remove } from '@mui/icons-material';
 import { useCoinBalances, useExchangeCoinsList } from 'apis/coin/use';
 import {
   CoinBalance,
@@ -21,7 +23,7 @@ import {
 import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
 import WithdrawModal from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
 import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
-import { Box } from '@mui/material';
+import { Box, Tooltip } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
 import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
 
@@ -85,30 +87,36 @@ const MyBalancesTable = (): JSX.Element => {
       columnHelper.display({
         id: 'action',
         cell: ({ row }) => (
-          <Box display='flex' justifyContent='flex-end'>
+          <Box display='flex' justifyContent='flex-end' alignItems={'center'}>
             {!!allowedDeposits[exchangeType]?.includes(row.original.coin) && (
-              <IconButton
+              <ZigButton
                 id={'balance-row__deposit'}
-                icon={<Add color={'neutral300'} />}
                 onClick={() =>
                   showDepositModal({
                     selectedCoin: row.original.coin,
                   })
                 }
-                variant='secondary'
-              />
+                variant='outlined'
+                sx={{ maxHeight: '20px' }}
+              >
+                <ZigTypography>{t('deposit')}</ZigTypography>
+              </ZigButton>
             )}
-            <IconButton
-              id={'balance-row__withdrawal'}
-              icon={<Remove color={'neutral300'} />}
-              onClick={() =>
-                showModal(WithdrawModal, {
-                  selectedCoin: row.original.coin,
-                  ctaId: 'balances-table-row',
-                })
-              }
-              variant='secondary'
-            />
+            <Tooltip title={t('withdraw')}>
+              <Box>
+                <IconButton
+                  id={'balance-row__withdrawal'}
+                  icon={<Remove color={'neutral300'} />}
+                  onClick={() =>
+                    showModal(WithdrawModal, {
+                      selectedCoin: row.original.coin,
+                      ctaId: 'balances-table-row',
+                    })
+                  }
+                  variant='secondary'
+                />
+              </Box>
+            </Tooltip>
           </Box>
         ),
       }),
