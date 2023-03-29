@@ -47,8 +47,9 @@ export type ReferralHistory = {
 };
 
 export enum BenefitType {
-  Pending = 'voucher_pending',
-  Active = 'voucher_active',
+  // This naming does not make ANY sense whatsoever
+  FeeVoucher = 'voucher_pending',
+  Deposit = 'voucher_active',
 }
 
 export enum BenefitClaimedStatus {

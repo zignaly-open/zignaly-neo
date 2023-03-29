@@ -1,14 +1,8 @@
 import { Box, LinearProgress } from '@mui/material';
-import React, { useCallback } from 'react';
-import { useTranslation } from 'react-i18next';
+import React from 'react';
 import TicketShape from '../../../components/TicketShape/atoms';
-import {
-  TextButton,
-  ZigButton,
-  ZigPriceLabel,
-  ZigTypography,
-} from '@zignaly-open/ui';
-import { useZAlert } from '../../../components/ZModal/use';
+import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import TermsButtonModal from './TermsButtonModal';
 
 const BenefitBox: React.FC<{
   label: string | JSX.Element;
@@ -17,7 +11,7 @@ const BenefitBox: React.FC<{
   requiredAmount: number;
   coin?: string;
   description: string;
-  onAction: () => void;
+  onAction?: () => void;
   actionLabel: string | JSX.Element;
   terms: string | JSX.Element;
 }> = ({
@@ -25,28 +19,11 @@ const BenefitBox: React.FC<{
   description,
   currentAmount,
   requiredAmount,
-  terms,
   onAction,
   actionLabel,
   coin,
   rewardAmount,
 }) => {
-  const { t } = useTranslation('rewards');
-  const showAlert = useZAlert();
-
-  const showTerms = useCallback(() => {
-    showAlert({
-      title: t('reward-terms'),
-      okLabel: t('common:ok'),
-      description:
-        typeof terms === 'string' ? (
-          <ZigTypography>{terms}</ZigTypography>
-        ) : (
-          terms
-        ),
-    });
-  }, [t, terms]);
-
   return (
     <TicketShape
       sx={{
@@ -99,13 +76,9 @@ const BenefitBox: React.FC<{
             flex: 1,
           }}
         >
-          <ZigTypography>
-            {description}
-            {!!terms && (
-              <TextButton caption={t('terms')} onClick={() => showTerms()} />
-            )}
-          </ZigTypography>
+          <ZigTypography>{description}</ZigTypography>
 
+          <TermsButtonModal />
           <Box
             sx={{
               display: 'flex',
@@ -146,21 +119,22 @@ const BenefitBox: React.FC<{
             </Box>
           </Box>
         </Box>
-        <Box sx={{ padding: '0 12px' }}>
-          <ZigButton
-            sx={{
-              padding: '20px 30px',
-              lineHeight: '20px',
-              fontSize: '18px',
-            }}
-            size={'large'}
-            onClick={onAction}
-            variant={'contained'}
-          >
-            {actionLabel}
-          </ZigButton>
+        <Box sx={{ padding: '0 12px', minWidth: 134 }}>
+          {!!onAction && (
+            <ZigButton
+              sx={{
+                padding: '20px 30px',
+                lineHeight: '20px',
+                fontSize: '18px',
+              }}
+              size={'large'}
+              onClick={onAction}
+              variant={'contained'}
+            >
+              {actionLabel}
+            </ZigButton>
+          )}
         </Box>
-        {/*</Box>*/}
       </TicketShape>
     </TicketShape>
   );

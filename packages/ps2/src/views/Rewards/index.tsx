@@ -12,6 +12,7 @@ import {
   Benefit,
   BenefitClaimed,
   BenefitClaimedStatus,
+  BenefitType,
 } from '../../apis/referrals/types';
 import { Box } from '@mui/material';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
@@ -21,12 +22,20 @@ import {
 } from '../../apis/referrals/api';
 import BenefitBox from './components/BenefitBox';
 import { formatLocalizedDate } from '../Dashboard/components/MyDashboard/util';
+import DepositModal from '../Dashboard/components/ManageInvestmentModals/DepositModal';
+import { useZModal } from '../../components/ZModal/use';
+import TermsButtonModal from './components/TermsButtonModal';
 
 const Rewards: React.FC = () => {
   const { t } = useTranslation(['rewards']);
   useTitle(t('pages:rewards'));
   const benefitsEndpoint = useBenefitsQuery();
   const rewardsClaimed = useBenefitsClaimedQuery();
+  const { showModal } = useZModal();
+  const deposit = () =>
+    showModal(DepositModal, {
+      ctaId: 'rewards-deposit-button',
+    });
 
   const columnHelper = createColumnHelper<BenefitClaimed & { title?: never }>();
   const columns = useMemo(
@@ -46,7 +55,11 @@ const Rewards: React.FC = () => {
           <Box
             sx={{ minWidth: '60px', flexDirection: 'column', display: 'flex' }}
           >
-            <ZigPriceLabel value={original.amount} coin={original.currency} />
+            <ZigPriceLabel
+              value={original.amount}
+              usd={original.currency?.includes('USD')}
+              coin={original.currency}
+            />
             {!original.currency?.includes('USD') && !!original.usdtAmount && (
               <ZigPriceLabel
                 prefix={'~'}
@@ -61,7 +74,12 @@ const Rewards: React.FC = () => {
       }),
       columnHelper.accessor('title', {
         header: t('table.reward-description'),
-        cell: () => <ZigTypography>{t('success-fee-voucher')}</ZigTypography>,
+        cell: ({ row: { original } }) => (
+          <ZigTypography>
+            {t('table.description', { amount: original.amount })}{' '}
+            <TermsButtonModal />
+          </ZigTypography>
+        ),
       }),
       columnHelper.accessor('status', {
         header: t('table.status'),
@@ -87,11 +105,10 @@ const Rewards: React.FC = () => {
     <PageContainer style={{ maxWidth: '909px' }}>
       <LayoutContentWrapper
         endpoint={[benefitsEndpoint, rewardsClaimed]}
-        content={([
-          // benefits
-          _,
-          benefitsClaimed,
-        ]: [Benefit[], BenefitClaimed[]]) => (
+        content={([benefits, benefitsClaimed]: [
+          Benefit[],
+          BenefitClaimed[],
+        ]) => (
           <>
             <Box
               sx={{
@@ -111,8 +128,8 @@ const Rewards: React.FC = () => {
                 }}
               >
                 <img
-                  src={'/images/referrals/gift-mini.png'}
-                  style={{ width: 100, marginTop: 17 }}
+                  src={'/images/referrals/gift-large.png'}
+                  style={{ width: 100 }}
                   alt={'referral'}
                 />
               </Box>
@@ -140,17 +157,22 @@ const Rewards: React.FC = () => {
               {t('active-rewards')}
             </ZigTypography>
 
-            {[].map(() => (
+            {benefits.map((b, i) => (
               <BenefitBox
-                label='Success fee voucher'
-                description='Deposit any amount and get $20 voucher to save on Success Fees'
+                label={t(`rewardTypes.${b.status}`)}
+                description={t(`rewardDescriptions.${b.status}`, {
+                  amount: b.amount,
+                })}
                 terms='Get a 10% discount on your success fee for 30 days'
-                currentAmount={10}
-                requiredAmount={20}
-                rewardAmount={50}
-                actionLabel={'Deposit'}
-                onAction={() => alert()}
-                key={Math.random() + 'lol'}
+                currentAmount={b.amount - b.currentAmount}
+                requiredAmount={b.amount}
+                rewardAmount={b.amount}
+                actionLabel={t('action:deposit')}
+                onAction={
+                  b.status === BenefitType.FeeVoucher ? deposit : undefined
+                }
+                // eslint-disable-next-line react/no-array-index-key
+                key={`reward-${i}`}
               />
             ))}
 
