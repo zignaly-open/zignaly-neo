@@ -3,10 +3,8 @@ import { Service } from '../../../../../apis/service/types';
 import {
   useInvestedAccountsCount,
   useIsInvestedInService,
-  useSetSelectedInvestment,
 } from '../../../../../apis/investment/use';
 import { useZModal } from '../../../../../components/ZModal/use';
-import { serviceToInvestmentServiceDetail } from '../../../../../apis/investment/util';
 import EditInvestmentModal from '../../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
 import { useTranslation } from 'react-i18next';
 import {
@@ -74,16 +72,12 @@ export const InvestedButtonBase: React.FC<{
   showMultipleAccountButton,
 }) => {
   const { showModal } = useZModal({ disableAutoDestroy: true });
-  const selectInvestment = useSetSelectedInvestment();
   const investedFromAccounts = useInvestedAccountsCount(service.id, {
     skip: !showMultipleAccountButton,
   });
 
-  const onClickEditInvestment = () => {
-    selectInvestment(serviceToInvestmentServiceDetail(service));
-    showModal(EditInvestmentModal, { ctaId });
-  };
-
+  const onClickEditInvestment = () =>
+    showModal(EditInvestmentModal, { ctaId, serviceId: service.id });
   const { t } = useTranslation(['service', 'action']);
 
   const showOtherAccounts =
@@ -98,7 +92,7 @@ export const InvestedButtonBase: React.FC<{
         <BigNumberWrapperInvested
           id={prefixId && `${prefixId}__invested-${service.id}`}
         >
-          <BigNumber ssc={service.ssc} shorten value={investedAmount} green />
+          <BigNumber ssc={service.ssc} value={investedAmount} green />
         </BigNumberWrapperInvested>
       </Box>
       <Box

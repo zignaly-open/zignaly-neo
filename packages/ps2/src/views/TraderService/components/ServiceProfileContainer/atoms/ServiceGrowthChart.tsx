@@ -52,6 +52,10 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
         value: GraphChartType.pnl_ssc,
       },
       {
+        label: t('chart-options.pnl_ssc_percent', { coin: service.ssc }),
+        value: GraphChartType.pnl_pct,
+      },
+      {
         label: t('chart-options.sbt_ssc', { coin: service.ssc }),
         value: GraphChartType.sbt_ssc,
       },
@@ -84,6 +88,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   const isPercent = [
     GraphChartType.pnl_pct_compound,
     GraphChartType.at_risk_pct,
+    GraphChartType.pnl_pct,
   ].includes(chartType);
 
   return (
@@ -113,7 +118,9 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   GraphChartType.investors,
                 ].includes(chartType) && (
                   <>
-                    {chartType === GraphChartType.pnl_ssc && (
+                    {[GraphChartType.pnl_ssc, GraphChartType.pnl_pct].includes(
+                      chartType,
+                    ) && (
                       <ZigTypography
                         color={'neutral200'}
                         variant={'h1'}
@@ -167,7 +174,12 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
 
             {typeof data?.percentDiff !== 'undefined' && (
               <GraphPercentageWrapperBox sx={{ mr: 2 }}>
-                <PercentChange colored variant='h2' value={data?.percentDiff} />
+                <PercentChange
+                  id={'service-profile__percent-change'}
+                  colored
+                  variant='h2'
+                  value={data?.percentDiff}
+                />
               </GraphPercentageWrapperBox>
             )}
           </>
@@ -187,6 +199,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                 return {
                   value: v,
                   label: t(`periods.${v}`),
+                  id: `service-profile__choose-period-${v}`,
                   extraProps: {
                     size: 'small',
                     disabled: isDisabled,
@@ -203,6 +216,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
         </SqueezedButtonGroupWrapper>
         <SelectWrapperBox>
           <ZigSelect
+            id={'service-profile__choose-graph-view'}
             outlined
             width={170}
             small
@@ -216,6 +230,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
       <ChartWrapper>
         {isError ? (
           <Stub
+            id={'service-profile__error-load'}
             title={t('chart-error.heading')}
             description={t('chart-error.description')}
           />
@@ -223,7 +238,10 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           <CenteredLoader />
         ) : (
           <ZigChart
-            bars={chartType === GraphChartType.pnl_ssc}
+            id={'service-profile__graph'}
+            bars={[GraphChartType.pnl_ssc, GraphChartType.pnl_pct].includes(
+              chartType,
+            )}
             onlyIntegerTicks={chartType === GraphChartType.investors}
             events={events}
             yAxisFormatter={(v) =>

@@ -19,7 +19,7 @@ const getGradient = (gradientVariant: GradientVariant, isGreen: boolean) => {
  */
 const getYDomain = (data: AxisFormat[]) => {
   const values = data.map((s) => s.y);
-  const ranges = [Math.min(0, ...values), Math.max(1, ...values)];
+  const ranges = [Math.min(0, ...values), Math.max(...values)];
   if (ranges[0] < 0 && ranges[1] > 0)
     ranges[0] = Math.min(
       ranges[0],
