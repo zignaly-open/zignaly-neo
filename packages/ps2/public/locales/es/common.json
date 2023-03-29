@@ -21,7 +21,7 @@
 	"account-menu": {
 		"isAuth-button-logIn": "Iniciar sesión",
 		"isAuth-button-signUp": "REGISTRARSE",
-		"notAuth-dropdown-link-dashboard": "Mi Portafolio",
+		"portfolio": "Mi Portafolio",
 		"notAuth-dropdown-link-balances": "Mi Saldo",
 		"notAuth-button-logOut": "Cerrar Sesión",
 		"notAuth-dropdown-link-wallet": "Billetera ZIG",
