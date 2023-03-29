@@ -1,17 +1,16 @@
-import { Box, Grid } from '@mui/material';
+import { Box, LinearProgress } from '@mui/material';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TicketShapeIndependent } from '../../../components/TicketShape/atoms';
+import TicketShape, {
+  TicketShapeIndependent,
+} from '../../../components/TicketShape/atoms';
 import {
   TextButton,
   ZigButton,
   ZigPriceLabel,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { OpenInNew } from '@mui/icons-material';
-import ExportModal from '../../Balance/components/ExportModal';
 import { useZAlert } from '../../../components/ZModal/use';
-import { OlList, UlList } from '../../Referrals/styles';
 
 const BenefitBox: React.FC<{
   label: string | JSX.Element;
@@ -51,25 +50,104 @@ const BenefitBox: React.FC<{
   }, [t, terms]);
 
   return (
-    <TicketShapeIndependent
-      sx={{ borderRadius: '10px', minHeight: '140px' }}
-      backgroundRgb={'53, 51, 74'}
-      hole={15}
+    <TicketShape
+      sx={{
+        borderRadius: '10px',
+        p: '1px',
+      }}
+      backgroundRgb={'58, 58, 79'}
+      hole={13}
     >
-      <Grid container>
-        <Grid item xs={12} sm={3}>
+      <TicketShapeIndependent
+        sx={{
+          borderRadius: '10px',
+          minHeight: '140px',
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'row',
+          gap: '20px',
+          pl: 5,
+          pr: 5,
+          pt: 1,
+          pb: 1,
+        }}
+        backgroundRgb={'8, 8, 29'}
+        hole={14}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '13px',
+            pb: 1,
+          }}
+        >
           <ZigTypography>{label}</ZigTypography>
-          <ZigPriceLabel value={rewardAmount} coin={coin} usd={!coin} />
-        </Grid>
-        <Grid item xs={12} sm={6}>
+          <ZigPriceLabel
+            color={'neutral175'}
+            sx={{
+              fontSize: '36px',
+            }}
+            value={rewardAmount}
+            coin={coin}
+            usd={!coin}
+          />
+        </Box>
+        <Box
+          sx={{
+            flex: 1,
+            pr: 3,
+          }}
+        >
           <ZigTypography>
-            {label}
+            {description}
             {!!terms && (
               <TextButton caption={t('terms')} onClick={() => showTerms()} />
             )}
           </ZigTypography>
-        </Grid>
-        <Grid item xs={12} sm={3}>
+
+          <Box
+            sx={{
+              display: 'flex',
+              color: (theme) => theme.palette.neutral300,
+              flexDirection: 'row',
+              alignItems: 'center',
+              mt: 2,
+            }}
+          >
+            <LinearProgress
+              sx={{
+                flex: 1,
+                mr: 2,
+              }}
+              value={(100 * currentAmount) / requiredAmount}
+              variant='determinate'
+            />
+            <Box>
+              <ZigPriceLabel
+                sx={{
+                  fontSize: '13px',
+                }}
+                color={'neutral200'}
+                value={currentAmount}
+                coin={coin}
+                usd={!coin}
+              />
+              <ZigTypography sx={{ fontSize: '13px' }}>{' / '}</ZigTypography>
+              <ZigPriceLabel
+                sx={{
+                  fontSize: '13px',
+                }}
+                color={'neutral200'}
+                value={requiredAmount}
+                coin={coin}
+                usd={!coin}
+              />
+            </Box>
+          </Box>
+        </Box>
+        <Box>
           <ZigButton
             sx={{
               padding: '20px',
@@ -81,9 +159,10 @@ const BenefitBox: React.FC<{
           >
             {actionLabel}
           </ZigButton>
-        </Grid>
-      </Grid>
-    </TicketShapeIndependent>
+        </Box>
+        {/*</Box>*/}
+      </TicketShapeIndependent>
+    </TicketShape>
   );
 };
 
