@@ -4,11 +4,12 @@ import { Layout } from './styles';
 
 // TODO: this belongs to zignaly-ui
 const Stub: React.FC<{
+  id?: string;
   title: string | ReactElement;
   description: string | ReactElement;
-}> = ({ title, description }) => {
+}> = ({ id, title, description }) => {
   return (
-    <Layout>
+    <Layout id={id}>
       <ZigTypography variant={'h1'}>{title}</ZigTypography>
       <ZigTypography variant={'subtitle1'}>{description}</ZigTypography>
     </Layout>

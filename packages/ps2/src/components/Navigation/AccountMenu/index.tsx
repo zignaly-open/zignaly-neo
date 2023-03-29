@@ -7,7 +7,7 @@ import {
   LogoutButtonWrap,
   AccountName,
 } from './styles';
-import { useTheme } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 import {
   useActiveExchange,
   useCurrentUser,
@@ -30,11 +30,13 @@ import {
   ROUTE_MY_BALANCES,
   ROUTE_WALLET,
   ROUTE_REFERRALS,
+  ROUTE_REWARDS,
 } from '../../../routes';
 import { generatePath, Link, useLocation, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
 import { useZModal } from 'components/ZModal/use';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
 
 function AccountMenu(): React.ReactElement | null {
@@ -48,6 +50,7 @@ function AccountMenu(): React.ReactElement | null {
   const selectExchange = useSelectExchange();
   const location = useLocation();
   const { showModal } = useZModal();
+  const md = useMediaQuery(theme.breakpoints.up('sm'));
 
   const setActiveExchange = (exchangeInternalId: string) => {
     selectExchange(exchangeInternalId);
@@ -76,7 +79,7 @@ function AccountMenu(): React.ReactElement | null {
         </Link>
       </>
     );
-  }
+  } else if (!md) return null;
 
   return (
     <DropDown
@@ -123,7 +126,7 @@ function AccountMenu(): React.ReactElement | null {
           ),
         },
         {
-          label: t('account-menu.notAuth-dropdown-link-dashboard'),
+          label: t('account-menu.portfolio'),
           id: 'account-menu-dropdown__portfolio',
           href: generatePath(ROUTE_DASHBOARD),
           onClick: () => navigate(ROUTE_DASHBOARD),
@@ -158,6 +161,17 @@ function AccountMenu(): React.ReactElement | null {
         },
         {
           separator: true,
+          label: (
+            <>
+              <EmojiEventsIcon />
+              {t('account-menu.rewards')}
+            </>
+          ),
+          id: 'account-menu-dropdown__rewards',
+          href: generatePath(ROUTE_REWARDS),
+          onClick: () => navigate(ROUTE_REWARDS),
+        },
+        {
           label: (
             <>
               <CardGiftcardIcon />

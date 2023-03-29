@@ -32,10 +32,13 @@
   "account-menu": {
     "isAuth-button-logIn": "Log in",
     "isAuth-button-signUp": "SIGN UP",
-    "notAuth-dropdown-link-dashboard": "My Portfolio",
     "notAuth-dropdown-link-balances": "My Balances",
     "notAuth-dropdown-link-wallet": "ZIG Wallet",
+    "portfolio": "My Portfolio",
     "referrals": "Referrals",
+    "rewards": "Rewards",
+    "marketplace": "Marketplace",
+    "balance": "Balances",
     "notAuth-dropdown-link-settings": "Settings",
     "notAuth-dropdown-link-password": "Password",
     "notAuth-dropdown-link-2fa": "Two-Factor Authentication",
@@ -50,7 +53,7 @@
   },
   "navigation-menu": {
     "profit-sharing": "Browse Top Traders",
-    "become-trader": "Offer your trading services"
+    "become-trader": "Offer your Trading Services"
   },
   "amount": "Amount",
   "percent": "{{value, prettyNumber}}%",
@@ -80,5 +83,6 @@
     "invalid-characters": "Invalid characters",
     "letter-number": "Should contain at least one letter or number",
     "min-invest-amount-for-owner": "Owner balance must be above {{minAmount}} {{minAmountCoin}}"
-  }
+  },
+  "follow-us": "Follow us"
 }
