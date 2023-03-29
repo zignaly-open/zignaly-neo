@@ -1,5 +1,10 @@
 import { createApi } from '@reduxjs/toolkit/query/react';
-import { ReferralRewards, ReferralHistory } from './types';
+import {
+  ReferralRewards,
+  ReferralHistory,
+  Benefit,
+  BenefitClaimed,
+} from './types';
 import baseQuery from '../baseQuery';
 
 export const api = createApi({
@@ -7,6 +12,16 @@ export const api = createApi({
   reducerPath: 'referralApi',
   tagTypes: ['Referrals'],
   endpoints: (builder) => ({
+    benefits: builder.query<Benefit[], void>({
+      query: () => ({
+        url: 'v1/benefit/list',
+      }),
+    }),
+    benefitsClaimed: builder.query<BenefitClaimed[], void>({
+      query: () => ({
+        url: 'v1/benefit/claimed',
+      }),
+    }),
     referralRewards: builder.query<ReferralRewards, void>({
       query: () => ({
         url: 'v1/referrer/data',
@@ -20,4 +35,9 @@ export const api = createApi({
   }),
 });
 
-export const { useReferralHistoryQuery, useReferralRewardsQuery } = api;
+export const {
+  useBenefitsClaimedQuery,
+  useBenefitsQuery,
+  useReferralHistoryQuery,
+  useReferralRewardsQuery,
+} = api;

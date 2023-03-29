@@ -45,3 +45,7 @@ export type ReferralHistoryEntry = {
 export type ReferralHistory = {
   history: ReferralHistoryEntry[];
 };
+
+export type Benefit = {};
+
+export type BenefitClaimed = {};
