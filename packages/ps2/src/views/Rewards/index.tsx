@@ -60,15 +60,6 @@ const Rewards: React.FC = () => {
               usd={original.currency?.includes('USD')}
               coin={original.currency}
             />
-            {!original.currency?.includes('USD') && !!original.usdtAmount && (
-              <ZigPriceLabel
-                prefix={'~'}
-                variant={'caption'}
-                color={'neutral300'}
-                value={original.usdtAmount}
-                usd
-              />
-            )}
           </Box>
         ),
       }),
