@@ -10,6 +10,7 @@ export const StyledAppBar = styled(AppBar)`
   flex-direction: row;
   height: 52px;
   border: none;
+  z-index: 12;
 `;
 
 export const Container = styled(MarginContainer)`
