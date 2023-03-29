@@ -1,45 +1,90 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import {
-  CloneIcon,
-  dark,
-  InputText,
+  createColumnHelper,
   PageContainer,
   ZigPriceLabel,
+  ZigTable,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { ReferralHistory, ReferralRewards } from '../../apis/referrals/types';
-import { Box, Grid } from '@mui/material';
-import copy from 'copy-to-clipboard';
-import ReferralRewardsList from '../Referrals/components/ReferralRewardsList';
-import ReferralSuccessStep from '../Referrals/components/ReferralSuccessStep';
-import { TotalBox } from '../Referrals/atoms';
-import GroupIcon from '@mui/icons-material/Group';
-import ReferralTable from '../Referrals/components/ReferralTable';
+import { Benefit, BenefitClaimed } from '../../apis/referrals/types';
+import { Box } from '@mui/material';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
-import {
-  useRewardsClaimedQuery,
-  useRewardsQuery,
-} from '../../apis/rewards/api';
 import {
   useBenefitsClaimedQuery,
   useBenefitsQuery,
 } from '../../apis/referrals/api';
+import BenefitBox from './components/BenefitBox';
+import { StatusType } from './constants';
 
+const benefits = [{}];
 const Rewards: React.FC = () => {
-  const { t } = useTranslation(['rewards', 'pages']);
+  const { t } = useTranslation(['rewards']);
   useTitle(t('pages:rewards'));
-  const rewards = useBenefitsQuery();
+  const benefitsEndpoint = useBenefitsQuery();
   const rewardsClaimed = useBenefitsClaimedQuery();
+
+  const columnHelper = createColumnHelper<BenefitClaimed>();
+  const columns = useMemo(
+    () => [
+      columnHelper.accessor('date', {
+        header: t('table.time-and-date'),
+        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
+      }),
+      columnHelper.accessor('amount', {
+        header: t('common:amount'),
+        cell: ({ row: { original } }) => (
+          // a hack to make the column width fixed
+          <Box
+            sx={{ minWidth: '60px', flexDirection: 'column', display: 'flex' }}
+          >
+            <ZigPriceLabel value={original.amount} coin={original.coin} />
+            {!original.coin?.includes('USD') && (
+              <ZigPriceLabel
+                prefix={'~'}
+                variant={'caption'}
+                color={'neutral300'}
+                value={original.usdtAmount}
+                usd
+              />
+            )}
+          </Box>
+        ),
+      }),
+      columnHelper.accessor('description', {
+        header: t('table.reward-description'),
+        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
+      }),
+      columnHelper.accessor('status', {
+        header: t('table.filter-status'),
+        cell: ({ getValue }) => (
+          <ZigTypography
+            color={
+              (getValue() === StatusType.Pending && 'yellow') ||
+              (getValue() === StatusType.Completed && 'greenGraph') ||
+              (getValue() === StatusType.Failed && 'red')
+            }
+          >
+            {getValue() in StatusType
+              ? t(`statusTypes.${getValue()}`)
+              : getValue()}
+          </ZigTypography>
+        ),
+      }),
+    ],
+    [],
+  );
+
   return (
-    <PageContainer style={{ maxWidth: '1200px' }}>
+    <PageContainer style={{ maxWidth: '1000px' }}>
       <LayoutContentWrapper
-        endpoint={[rewards, rewardsClaimed]}
-        content={([rewardsData, rewardsClaimedData]: [
-          ReferralRewards,
-          ReferralHistory,
-        ]) => (
+        endpoint={[benefitsEndpoint, rewardsClaimed]}
+        content={([
+          // benefits
+          _,
+          benefitsClaimed,
+        ]: [Benefit[], BenefitClaimed[]]) => (
           <>
             <Box
               sx={{
@@ -59,8 +104,8 @@ const Rewards: React.FC = () => {
                 }}
               >
                 <img
-                  src={'/images/referrals/envelope-main.png'}
-                  style={{ width: 200, marginTop: 17 }}
+                  src={'/images/referrals/gift-mini.png'}
+                  style={{ width: 100, marginTop: 17 }}
                   alt={'referral'}
                 />
               </Box>
@@ -80,15 +125,39 @@ const Rewards: React.FC = () => {
                 >
                   {t('title')}
                 </ZigTypography>
-                <ZigTypography
-                  sx={{
-                    mb: 3,
-                  }}
-                >
-                  {t('description')}
-                </ZigTypography>
+                <ZigTypography>{t('description')}</ZigTypography>
               </Box>
             </Box>
+
+            <ZigTypography variant={'h2'} sx={{ mt: 3, mb: 3 }}>
+              {t('active-rewards')}
+            </ZigTypography>
+
+            {benefits.map(() => (
+              <BenefitBox
+                label='Success fee voucher'
+                description='Get a 10% discount on your success fee for 30 days'
+                terms='Get a 10% discount on your success fee for 30 days'
+                currentAmount={10}
+                requiredAmount={20}
+                rewardAmount={50}
+                actionLabel={'Deposit'}
+                onAction={() => alert()}
+                key={Math.random() + 'lol'}
+              />
+            ))}
+
+            <ZigTypography variant={'h2'} sx={{ mt: 5, mb: 3 }}>
+              {t('table.title')}
+            </ZigTypography>
+
+            <ZigTable
+              columns={columns}
+              data={benefitsClaimed}
+              columnVisibility={false}
+              enableSortingRemoval={false}
+              emptyMessage={t('table.no-benefits')}
+            />
           </>
         )}
       />

@@ -19,7 +19,7 @@ export const api = createApi({
     }),
     benefitsClaimed: builder.query<BenefitClaimed[], void>({
       query: () => ({
-        url: 'v1/benefit/claimed',
+        url: 'v1/benefit/history',
       }),
     }),
     referralRewards: builder.query<ReferralRewards, void>({

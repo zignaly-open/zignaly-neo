@@ -48,4 +48,12 @@ export type ReferralHistory = {
 
 export type Benefit = {};
 
-export type BenefitClaimed = {};
+export type BenefitClaimed = {
+  date: string;
+  amount: string;
+  usdtAmount: string;
+  coin: string;
+  description: string;
+  status: string;
+  terms: string;
+};

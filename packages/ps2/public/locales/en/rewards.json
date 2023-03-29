@@ -1,6 +1,21 @@
 {
+  "title": "Rewards Center",
+  "description": "Earn rewards by completing simple tasks. It's that easy!",
   "header": {
     "title": "Get $10",
     "description": "On 1st deposit"
+  },
+  "active-rewards": "Active Rewards",
+  "table": {
+    "title": "Claimed Rewards",
+    "no-benefits": "No Claimed Rewards yet",
+    "time-and-date": "Time & Date",
+    "reward-description": "Reward Description",
+    "status": "Status"
+  },
+  "statusTypes": {
+    "pending": "Pending",
+    "completed": "Completed",
+    "failed": "Failed"
   }
 }
