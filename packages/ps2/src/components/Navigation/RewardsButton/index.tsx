@@ -1,43 +1,51 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router-dom';
-import { ROUTE_REFERRALS } from '../../../routes';
-import { GradientBorderButtonWrapper } from './atoms';
+import { ROUTE_REWARDS } from '../../../routes';
+import { useActiveExchange } from '../../../apis/user/use';
+import { useBalanceQuery } from '../../../apis/user/api';
+import { TicketShapeIndependent } from '../../TicketShape/atoms';
 
 const RewardsButton = () => {
-  const { t } = useTranslation('referrals');
+  const { internalId } = useActiveExchange();
+  const { t } = useTranslation('rewards');
+
+  const { data: balance } = useBalanceQuery(internalId);
+
+  if (!balance?.totalFreeUSDT) return null;
+
   return (
-    <Link to={generatePath(ROUTE_REFERRALS)}>
-      <GradientBorderButtonWrapper>
-        <ZigButton
-          id='menu__referral-link'
-          component={'a'}
+    <Link to={generatePath(ROUTE_REWARDS)}>
+      <TicketShapeIndependent
+        sx={{ borderRadius: '4px', height: '40px', cursor: 'pointer' }}
+        backgroundRgb={'53, 51, 74'}
+        backgroundRgbHover={'63, 61, 84'}
+        hole={8}
+      >
+        <Box
           sx={{
-            cursor: 'pointer',
-            pl: 1,
-            pr: 1,
-            pt: 0.5,
-            pb: 0.5,
+            gap: '10px',
+            marginLeft: '2px',
+            height: '100%',
+            marginRight: '2px',
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'center',
           }}
-          variant='outlined'
         >
           <img
-            src={'/images/referrals/envelope-mini.png'}
-            style={{ height: 22, width: 22 }}
-            alt={'referral'}
+            src={'/images/referrals/gift-mini.png'}
+            width='24'
+            height='25'
+            alt={'gift'}
           />
           <Box
-            component={'span'}
             sx={{
               display: 'flex',
-              ml: 1,
               flexDirection: 'column',
-              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
             <ZigTypography
@@ -53,7 +61,7 @@ const RewardsButton = () => {
             <ZigTypography
               sx={{
                 mt: '1px',
-                fontSize: '12px',
+                fontSize: '10px',
                 lineHeight: 1.3,
                 textAlign: 'center',
               }}
@@ -61,8 +69,8 @@ const RewardsButton = () => {
               {t('header.description')}
             </ZigTypography>
           </Box>
-        </ZigButton>
-      </GradientBorderButtonWrapper>
+        </Box>
+      </TicketShapeIndependent>
     </Link>
   );
 };
