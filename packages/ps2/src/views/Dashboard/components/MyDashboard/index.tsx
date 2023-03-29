@@ -161,7 +161,7 @@ const MyDashboard: React.FC = () => {
 
   return (
     <Layout>
-      {exchange?.activated ? (
+      {investmentsEndpoint?.currentData?.length ? (
         <>
           <Heading>
             <ZigTypography variant='h1' id={'my-portfolio__title'}>
