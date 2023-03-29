@@ -223,6 +223,7 @@ const Referrals: React.FC = () => {
                       <ZigPriceLabel
                         color={'yellow'}
                         usd
+                        showTooltip
                         variant={'bigNumber'}
                         value={rewardsData.usdtPending}
                       />
