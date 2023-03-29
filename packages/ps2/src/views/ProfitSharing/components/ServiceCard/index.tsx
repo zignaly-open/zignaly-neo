@@ -69,7 +69,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         mb={3}
         px={2}
       >
-        <Box display='flex' flexDirection='column'>
+        <Box display='flex' flexDirection='column' flex={1}>
           <ValueContainer>
             <PercentageIndicator
               style={{
@@ -87,7 +87,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
             {t('service:periods.90d')}
           </ZigTypography>
         </Box>
-        <Box display='flex' flexDirection='column'>
+        <Box display='flex' flexDirection='column' flex={1}>
           <AssetContainer>
             <AssetsInPool shorten assetsValue={service.investedUSDT} />
           </AssetContainer>
@@ -100,7 +100,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
             {t('card.assets')}
           </ZigTypography>
         </Box>
-        <Box display='flex' flexDirection='column'>
+        <Box display='flex' flexDirection='column' flex={1}>
           <ValueContainer>
             <ZigTypography color='neutral200' fontSize={17} fontWeight={500}>
               {service.investors}
