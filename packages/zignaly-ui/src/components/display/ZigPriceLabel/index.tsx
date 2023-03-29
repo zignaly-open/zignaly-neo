@@ -64,7 +64,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
 
       {shorten ? shortenSuffix : ""}
 
-      {coin && (
+      {coin && !usd && (
         <>
           {" "}
           <ZigTypography {...withDefaultPropsCoin}>{coin}</ZigTypography>
