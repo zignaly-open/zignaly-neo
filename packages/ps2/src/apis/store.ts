@@ -5,10 +5,9 @@ import investmentReducer from './investment/store';
 import serviceApiKeyReducer from './serviceApiKey/store';
 import coinReducer from './coin/store';
 import serviceReducer from './service/store';
-import rewardReducer from './rewards/store';
 import marketplaceReducer from './marketplace/store';
 import walletReducer from './wallet/store';
-import { api as walletApi } from './wallet/api';
+import { api as walletApi } from './wallet//api';
 import referralsReducer from './referrals/store';
 import { api as referralApi } from './referrals/api';
 import storage from 'redux-persist/lib/storage';
@@ -20,7 +19,6 @@ import { MarketplaceState } from './marketplace/types';
 import { CoinState } from './coin/types';
 import { WalletState } from './wallet/types';
 import { ReferralsState } from './referrals/types';
-import { RewardsState } from './rewards/types';
 
 const persistConfig = {
   key: 'root',
@@ -40,7 +38,6 @@ const appReducer = combineReducers({
   marketplace: marketplaceReducer,
   user: userReducer,
   coin: coinReducer,
-  rewards: rewardReducer,
   referrals: referralsReducer,
   investment: investmentReducer,
   serviceApiKey: serviceApiKeyReducer,
@@ -75,7 +72,6 @@ export type RootState = {
   coin: CoinState;
   marketplace: MarketplaceState;
   referrals: ReferralsState;
-  rewards: RewardsState;
   investment: InvestmentState;
   service: ServiceState;
   wallet: WalletState;
