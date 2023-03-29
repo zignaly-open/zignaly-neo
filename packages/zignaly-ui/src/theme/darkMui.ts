@@ -85,7 +85,7 @@ const darkMui = createTheme({
     MuiLinearProgress: {
       styleOverrides: {
         root: {
-          backgroundImage: "linear-gradient(46deg, #138ea0, #3f3bb1)",
+          backgroundImage: "linear-gradient(90deg, #7319DB, #05EAC1)",
           borderRadius: 8,
           height: 16,
 
@@ -118,7 +118,7 @@ const darkMui = createTheme({
             marginTop: 2,
             zIndex: 2,
             marginBottom: 2,
-            backgroundImage: "linear-gradient(46deg, #138ea0, #3f3bb1)",
+            backgroundImage: "linear-gradient(90deg, #7319DB, #05EAC1)",
           },
         },
       },
