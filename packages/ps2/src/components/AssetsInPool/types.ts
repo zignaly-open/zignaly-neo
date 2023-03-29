@@ -6,4 +6,5 @@ export interface AssetsInPoolProps {
   createdAt?: string;
   shorten?: boolean;
   prefixId?: string;
+  serviceId: string;
 }
