@@ -184,6 +184,7 @@ export enum GraphChartType {
   'investors' = 'investors',
   'sbt_ssc' = 'sbt_ssc',
   'pnl_ssc' = 'pnl_ssc',
+  'pnl_pct' = 'pnl_pct',
   'at_risk_pct' = 'at_risk_pct',
   'pnl_pct_compound' = 'pnl_pct_compound',
 }
