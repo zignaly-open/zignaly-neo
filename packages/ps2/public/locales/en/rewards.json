@@ -8,6 +8,7 @@
     "description": "On 1st deposit"
   },
   "active-rewards": "Active Rewards",
+  "success-fee-voucher": "Success Fee Voucher",
   "table": {
     "title": "Claimed Rewards",
     "no-benefits": "No Claimed Rewards yet",
@@ -16,8 +17,7 @@
     "status": "Status"
   },
   "statusTypes": {
-    "pending": "Pending",
-    "completed": "Completed",
-    "failed": "Failed"
+    "success_fee": "Success Fee",
+    "awarded": "Awarded"
   }
 }

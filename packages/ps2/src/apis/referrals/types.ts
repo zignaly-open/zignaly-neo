@@ -46,16 +46,31 @@ export type ReferralHistory = {
   history: ReferralHistoryEntry[];
 };
 
-export type Benefit = {};
+export enum BenefitType {
+  Pending = 'voucher_pending',
+  Active = 'voucher_active',
+}
+
+export enum BenefitClaimedStatus {
+  SuccessFee = 'success_fee',
+  Awarded = 'awarded',
+}
+
+export type Benefit = {
+  currency: string;
+  amount: number;
+  currentAmount: number;
+  status: BenefitType;
+};
 
 export type BenefitClaimed = {
   date: string;
-  amount: string;
-  usdtAmount: string;
-  coin: string;
-  description: string;
-  status: string;
-  terms: string;
+  currency: string;
+  amount: number;
+  // it's Ctually missing but let's add it here becasue backend should add it
+  usdtAmount?: number;
+  spent: number;
+  status: BenefitClaimedStatus;
 };
 
 export const VOUCHER_PENDING = 'voucher_pending';

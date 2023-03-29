@@ -8,7 +8,11 @@ import {
   ZigTable,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { Benefit, BenefitClaimed } from '../../apis/referrals/types';
+import {
+  Benefit,
+  BenefitClaimed,
+  BenefitClaimedStatus,
+} from '../../apis/referrals/types';
 import { Box } from '@mui/material';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import {
@@ -16,21 +20,24 @@ import {
   useBenefitsQuery,
 } from '../../apis/referrals/api';
 import BenefitBox from './components/BenefitBox';
-import { StatusType } from './constants';
+import { formatLocalizedDate } from '../Dashboard/components/MyDashboard/util';
 
-const benefits = [{}];
 const Rewards: React.FC = () => {
   const { t } = useTranslation(['rewards']);
   useTitle(t('pages:rewards'));
   const benefitsEndpoint = useBenefitsQuery();
   const rewardsClaimed = useBenefitsClaimedQuery();
 
-  const columnHelper = createColumnHelper<BenefitClaimed>();
+  const columnHelper = createColumnHelper<BenefitClaimed & { title?: never }>();
   const columns = useMemo(
     () => [
       columnHelper.accessor('date', {
         header: t('table.time-and-date'),
-        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
+        cell: ({ getValue }) => (
+          <ZigTypography>
+            {formatLocalizedDate(getValue(), 'PP pp')}
+          </ZigTypography>
+        ),
       }),
       columnHelper.accessor('amount', {
         header: t('common:amount'),
@@ -39,8 +46,8 @@ const Rewards: React.FC = () => {
           <Box
             sx={{ minWidth: '60px', flexDirection: 'column', display: 'flex' }}
           >
-            <ZigPriceLabel value={original.amount} coin={original.coin} />
-            {!original.coin?.includes('USD') && (
+            <ZigPriceLabel value={original.amount} coin={original.currency} />
+            {!original.currency?.includes('USD') && !!original.usdtAmount && (
               <ZigPriceLabel
                 prefix={'~'}
                 variant={'caption'}
@@ -52,21 +59,21 @@ const Rewards: React.FC = () => {
           </Box>
         ),
       }),
-      columnHelper.accessor('description', {
+      columnHelper.accessor('title', {
         header: t('table.reward-description'),
-        cell: ({ getValue }) => <ZigTypography>{getValue()}</ZigTypography>,
+        cell: () => <ZigTypography>{t('success-fee-voucher')}</ZigTypography>,
       }),
       columnHelper.accessor('status', {
-        header: t('table.filter-status'),
+        header: t('table.status'),
         cell: ({ getValue }) => (
           <ZigTypography
             color={
-              (getValue() === StatusType.Pending && 'yellow') ||
-              (getValue() === StatusType.Completed && 'greenGraph') ||
-              (getValue() === StatusType.Failed && 'red')
+              (getValue() === BenefitClaimedStatus.SuccessFee &&
+                'neutral175') ||
+              (getValue() === BenefitClaimedStatus.Awarded && 'greenGraph')
             }
           >
-            {getValue() in StatusType
+            {Object.values(BenefitClaimedStatus).includes(getValue())
               ? t(`statusTypes.${getValue()}`)
               : getValue()}
           </ZigTypography>
@@ -133,7 +140,7 @@ const Rewards: React.FC = () => {
               {t('active-rewards')}
             </ZigTypography>
 
-            {benefits.map(() => (
+            {[].map(() => (
               <BenefitBox
                 label='Success fee voucher'
                 description='Deposit any amount and get $20 voucher to save on Success Fees'
