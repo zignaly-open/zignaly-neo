@@ -151,28 +151,57 @@ const ReferralInviteModal: React.FC<
           </Box>
 
           <ShareIconsContainer>
-            <DownloadIcon sx={{ cursor: 'pointer' }} onClick={download} />
-            <InsertLinkIcon sx={{ cursor: 'pointer' }} onClick={copyLink} />
-            <FacebookShareButton quote={t('share.facebook-title')} url={url}>
+            <DownloadIcon
+              id={'create-invite__download-image'}
+              sx={{ cursor: 'pointer' }}
+              onClick={download}
+            />
+            <InsertLinkIcon
+              id={'create-invite__copy-link'}
+              sx={{ cursor: 'pointer' }}
+              onClick={copyLink}
+            />
+            <TwitterShareButton
+              id={'create-invite__twitter'}
+              url={url}
+              title={text}
+            >
+              <TwitterIcon />
+            </TwitterShareButton>
+            <TelegramShareButton
+              id={'create-invite__telegram'}
+              url={url}
+              title={text}
+            >
+              <TelegramIcon />
+            </TelegramShareButton>
+            <FacebookShareButton
+              id={'create-invite__facebook'}
+              quote={t('share.facebook-title')}
+              url={url}
+            >
               <FacebookIcon />
             </FacebookShareButton>
-            <WhatsappShareButton url={url} title={text}>
+            <WhatsappShareButton
+              id={'create-invite__whatsapp'}
+              url={url}
+              title={text}
+            >
               <WhatsappIcon />
             </WhatsappShareButton>
             <EmailShareButton
+              id={'create-invite__email'}
               subject={t('share.email-subject')}
               body={text}
               url={url}
             >
               <EmailIcon />
             </EmailShareButton>
-            <TwitterShareButton url={url} title={text}>
-              <TwitterIcon />
-            </TwitterShareButton>
-            <TelegramShareButton url={url} title={text}>
-              <TelegramIcon />
-            </TelegramShareButton>
-            <LinkedinShareButton url={url} title={text}>
+            <LinkedinShareButton
+              id={'create-invite__linkedin'}
+              url={url}
+              title={text}
+            >
               <LinkedinIcon />
             </LinkedinShareButton>
           </ShareIconsContainer>
