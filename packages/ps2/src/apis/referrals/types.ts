@@ -68,8 +68,6 @@ export type BenefitClaimed = {
   date: string;
   currency: string;
   amount: number;
-  // it's Ctually missing but let's add it here becasue backend should add it
-  usdtAmount?: number;
   spent: number;
   status: BenefitClaimedStatus;
 };
