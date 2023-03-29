@@ -10,6 +10,7 @@ const BenefitBox: React.FC<{
   currentAmount: number;
   requiredAmount: number;
   coin?: string;
+  showProgress?: boolean;
   description: string;
   onAction?: () => void;
   actionLabel: string | JSX.Element;
@@ -19,6 +20,7 @@ const BenefitBox: React.FC<{
   description,
   currentAmount,
   requiredAmount,
+  showProgress,
   onAction,
   actionLabel,
   coin,
@@ -79,45 +81,48 @@ const BenefitBox: React.FC<{
           <ZigTypography>{description}</ZigTypography>
 
           <TermsButtonModal />
-          <Box
-            sx={{
-              display: 'flex',
-              color: (theme) => theme.palette.neutral300,
-              flexDirection: 'row',
-              alignItems: 'center',
-              mt: 2,
-            }}
-          >
-            <LinearProgress
+
+          {!!showProgress && (
+            <Box
               sx={{
-                flex: 1,
-                mr: 2,
+                display: 'flex',
+                color: (theme) => theme.palette.neutral300,
+                flexDirection: 'row',
+                alignItems: 'center',
+                mt: 2,
               }}
-              value={(100 * currentAmount) / requiredAmount}
-              variant='determinate'
-            />
-            <Box>
-              <ZigPriceLabel
+            >
+              <LinearProgress
                 sx={{
-                  fontSize: '13px',
+                  flex: 1,
+                  mr: 2,
                 }}
-                color={'neutral200'}
-                value={currentAmount}
-                coin={coin}
-                usd={!coin}
+                value={(100 * currentAmount) / requiredAmount}
+                variant='determinate'
               />
-              <ZigTypography sx={{ fontSize: '13px' }}>{' / '}</ZigTypography>
-              <ZigPriceLabel
-                sx={{
-                  fontSize: '13px',
-                }}
-                color={'neutral200'}
-                value={requiredAmount}
-                coin={coin}
-                usd={!coin}
-              />
+              <Box>
+                <ZigPriceLabel
+                  sx={{
+                    fontSize: '13px',
+                  }}
+                  color={'neutral200'}
+                  value={currentAmount}
+                  coin={coin}
+                  usd={!coin}
+                />
+                <ZigTypography sx={{ fontSize: '13px' }}>{' / '}</ZigTypography>
+                <ZigPriceLabel
+                  sx={{
+                    fontSize: '13px',
+                  }}
+                  color={'neutral200'}
+                  value={requiredAmount}
+                  coin={coin}
+                  usd={!coin}
+                />
+              </Box>
             </Box>
-          </Box>
+          )}
         </Box>
         <Box sx={{ padding: '0 12px', minWidth: 134 }}>
           {!!onAction && (

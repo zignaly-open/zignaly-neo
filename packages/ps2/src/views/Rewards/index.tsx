@@ -159,6 +159,7 @@ const Rewards: React.FC = () => {
                 requiredAmount={b.amount}
                 rewardAmount={b.amount}
                 actionLabel={t('action:deposit')}
+                showProgress={b.status !== BenefitType.FeeVoucher}
                 onAction={
                   b.status === BenefitType.FeeVoucher ? deposit : undefined
                 }

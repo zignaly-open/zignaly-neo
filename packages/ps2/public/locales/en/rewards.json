@@ -10,7 +10,7 @@
   "active-rewards": "Active Rewards",
   "table": {
     "title": "Rewards History",
-    "no-benefits": "No Claimed Rewards yet",
+    "no-benefits": "No Rewards yet",
     "time-and-date": "Time & Date",
     "reward-description": "Reward Description",
     "description": "${{amount}} Fee Voucher on your first deposit",
