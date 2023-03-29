@@ -86,30 +86,38 @@ const darkMui = createTheme({
       styleOverrides: {
         root: {
           backgroundImage: "linear-gradient(46deg, #138ea0, #3f3bb1)",
-
+          borderRadius: 8,
           height: 16,
+
           "&:after": {
-            height: 14,
             content: "''",
             position: "absolute",
-            marginTop: "1px",
+            top: "1px",
             backgroundColor: "rgb(19,28,53)",
             left: "1px",
-            marginBottom: "1px",
             right: "1px",
+            bottom: "1px",
             zIndex: 1,
-            width: "100%",
+            borderRadius: 7,
           },
 
-          borderRadius: 7,
+          "&:before": {
+            content: "''",
+            position: "absolute",
+            top: "1px",
+            border: "1px solid rgb(19,28,53)",
+            left: "1px",
+            right: "1px",
+            bottom: "1px",
+            zIndex: 3,
+            borderRadius: 7,
+          },
 
           [`& .${linearProgressClasses.bar}`]: {
             borderRadius: 6,
             marginTop: 2,
             zIndex: 2,
             marginBottom: 2,
-
-            borderRadius: 5,
             backgroundImage: "linear-gradient(46deg, #138ea0, #3f3bb1)",
           },
         },
