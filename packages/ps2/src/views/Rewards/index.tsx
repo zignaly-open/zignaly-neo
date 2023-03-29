@@ -77,7 +77,7 @@ const Rewards: React.FC = () => {
   );
 
   return (
-    <PageContainer style={{ maxWidth: '1000px' }}>
+    <PageContainer style={{ maxWidth: '800px' }}>
       <LayoutContentWrapper
         endpoint={[benefitsEndpoint, rewardsClaimed]}
         content={([
