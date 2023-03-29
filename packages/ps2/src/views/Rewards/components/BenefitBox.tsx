@@ -1,9 +1,7 @@
 import { Box, LinearProgress } from '@mui/material';
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import TicketShape, {
-  TicketShapeIndependent,
-} from '../../../components/TicketShape/atoms';
+import TicketShape from '../../../components/TicketShape/atoms';
 import {
   TextButton,
   ZigButton,
@@ -55,23 +53,23 @@ const BenefitBox: React.FC<{
         borderRadius: '10px',
         p: '1px',
       }}
-      backgroundRgb={'58, 58, 79'}
+      backgroundRgb={'37, 55, 57'}
       hole={13}
     >
-      <TicketShapeIndependent
+      <TicketShape
         sx={{
           borderRadius: '10px',
           minHeight: '140px',
           display: 'flex',
           alignItems: 'center',
           flexDirection: 'row',
-          gap: '20px',
-          pl: 5,
-          pr: 5,
+          gap: '60px',
+          pr: '60px',
+          pl: '60px',
           pt: 1,
           pb: 1,
         }}
-        backgroundRgb={'8, 8, 29'}
+        backgroundRgb={'20, 25, 54'}
         hole={14}
       >
         <Box
@@ -80,10 +78,12 @@ const BenefitBox: React.FC<{
             flexDirection: 'column',
             alignItems: 'center',
             gap: '13px',
+            maxWidth: '100px',
+            textAlign: 'center',
             pb: 1,
           }}
         >
-          <ZigTypography>{label}</ZigTypography>
+          <ZigTypography sx={{ mb: 1 }}>{label}</ZigTypography>
           <ZigPriceLabel
             color={'neutral175'}
             sx={{
@@ -97,7 +97,6 @@ const BenefitBox: React.FC<{
         <Box
           sx={{
             flex: 1,
-            pr: 3,
           }}
         >
           <ZigTypography>
@@ -147,10 +146,11 @@ const BenefitBox: React.FC<{
             </Box>
           </Box>
         </Box>
-        <Box>
+        <Box sx={{ padding: '0 12px' }}>
           <ZigButton
             sx={{
-              padding: '20px',
+              padding: '20px 30px',
+              lineHeight: '20px',
               fontSize: '18px',
             }}
             size={'large'}
@@ -161,7 +161,7 @@ const BenefitBox: React.FC<{
           </ZigButton>
         </Box>
         {/*</Box>*/}
-      </TicketShapeIndependent>
+      </TicketShape>
     </TicketShape>
   );
 };

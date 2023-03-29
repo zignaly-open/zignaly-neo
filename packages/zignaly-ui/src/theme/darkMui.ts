@@ -85,14 +85,32 @@ const darkMui = createTheme({
     MuiLinearProgress: {
       styleOverrides: {
         root: {
-          height: 14,
-          borderRadius: 7,
-          [`&.${linearProgressClasses.colorPrimary}`]: {
-            // backgroundImage: "linear-gradient(46deg, #138ea0, #3f3bb1)",
+          backgroundImage: "linear-gradient(46deg, #138ea0, #3f3bb1)",
+
+          height: 16,
+          "&:after": {
+            height: 14,
+            content: "''",
+            position: "absolute",
+            marginTop: "1px",
+            backgroundColor: "rgb(19,28,53)",
+            left: "1px",
+            marginBottom: "1px",
+            right: "1px",
+            zIndex: 1,
+            width: "100%",
           },
+
+          borderRadius: 7,
+
           [`& .${linearProgressClasses.bar}`]: {
-            borderRadius: 7,
-            backgroundImage: "linear-gradient(-46deg, #138ea0, #3f3bb1)",
+            borderRadius: 6,
+            marginTop: 2,
+            zIndex: 2,
+            marginBottom: 2,
+
+            borderRadius: 5,
+            backgroundImage: "linear-gradient(46deg, #138ea0, #3f3bb1)",
           },
         },
       },

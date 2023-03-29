@@ -4,73 +4,78 @@ import { ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_REWARDS } from '../../../routes';
-import { useActiveExchange } from '../../../apis/user/use';
-import { useBalanceQuery } from '../../../apis/user/api';
-import { TicketShapeIndependent } from '../../TicketShape/atoms';
+import TicketShape, { TicketShapeIndependent } from '../../TicketShape/atoms';
+import { useBenefitsQuery } from '../../../apis/referrals/api';
+import { VOUCHER_PENDING } from '../../../apis/referrals/types';
 
 const RewardsButton = () => {
-  const { internalId } = useActiveExchange();
   const { t } = useTranslation('rewards');
+  const { data: benefits } = useBenefitsQuery();
 
-  const { data: balance } = useBalanceQuery(internalId);
-
-  if (!balance?.totalFreeUSDT) return null;
+  if (!benefits?.every((x) => x.status === VOUCHER_PENDING)) return null;
 
   return (
     <Link to={generatePath(ROUTE_REWARDS)}>
-      <TicketShapeIndependent
-        sx={{ borderRadius: '4px', height: '40px', cursor: 'pointer' }}
-        backgroundRgb={'53, 51, 74'}
-        backgroundRgbHover={'63, 61, 84'}
+      <TicketShape
+        sx={{ borderRadius: '4px', padding: '1px' }}
+        backgroundRgb={'22, 42, 71'}
+        backgroundRgbHover={'37, 35, 57'}
         hole={8}
       >
-        <Box
-          sx={{
-            gap: '10px',
-            marginLeft: '2px',
-            height: '100%',
-            marginRight: '2px',
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-          }}
+        <TicketShapeIndependent
+          sx={{ borderRadius: '3px', height: '40px', cursor: 'pointer' }}
+          backgroundRgb={'13, 28, 56'}
+          backgroundRgbHover={'53, 51, 74'}
+          hole={9}
         >
-          <img
-            src={'/images/referrals/gift-mini.png'}
-            width='24'
-            height='25'
-            alt={'gift'}
-          />
           <Box
             sx={{
+              gap: '10px',
+              marginLeft: '2px',
+              height: '100%',
+              marginRight: '2px',
               display: 'flex',
-              flexDirection: 'column',
+              flexDirection: 'row',
               alignItems: 'center',
             }}
           >
-            <ZigTypography
-              color={'primary'}
+            <img
+              src={'/images/referrals/gift-mini.png'}
+              width='24'
+              height='25'
+              alt={'gift'}
+            />
+            <Box
               sx={{
-                fontSize: '13px',
-                lineHeight: 1,
-                textAlign: 'center',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
               }}
             >
-              {t('header.title')}
-            </ZigTypography>
-            <ZigTypography
-              sx={{
-                mt: '1px',
-                fontSize: '10px',
-                lineHeight: 1.3,
-                textAlign: 'center',
-              }}
-            >
-              {t('header.description')}
-            </ZigTypography>
+              <ZigTypography
+                color={'primary'}
+                sx={{
+                  fontSize: '13px',
+                  lineHeight: 1,
+                  textAlign: 'center',
+                }}
+              >
+                {t('header.title')}
+              </ZigTypography>
+              <ZigTypography
+                sx={{
+                  mt: '1px',
+                  fontSize: '10px',
+                  lineHeight: 1.3,
+                  textAlign: 'center',
+                }}
+              >
+                {t('header.description')}
+              </ZigTypography>
+            </Box>
           </Box>
-        </Box>
-      </TicketShapeIndependent>
+        </TicketShapeIndependent>
+      </TicketShape>
     </Link>
   );
 };

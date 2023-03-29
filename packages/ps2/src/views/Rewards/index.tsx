@@ -77,7 +77,7 @@ const Rewards: React.FC = () => {
   );
 
   return (
-    <PageContainer style={{ maxWidth: '800px' }}>
+    <PageContainer style={{ maxWidth: '909px' }}>
       <LayoutContentWrapper
         endpoint={[benefitsEndpoint, rewardsClaimed]}
         content={([
@@ -136,7 +136,7 @@ const Rewards: React.FC = () => {
             {benefits.map(() => (
               <BenefitBox
                 label='Success fee voucher'
-                description='Get a 10% discount on your success fee for 30 days'
+                description='Deposit any amount and get $20 voucher to save on Success Fees'
                 terms='Get a 10% discount on your success fee for 30 days'
                 currentAmount={10}
                 requiredAmount={20}

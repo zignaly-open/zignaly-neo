@@ -57,3 +57,6 @@ export type BenefitClaimed = {
   status: string;
   terms: string;
 };
+
+export const VOUCHER_PENDING = 'voucher_pending';
+export const VOUCHER_ACTIVE = 'voucher_active';
