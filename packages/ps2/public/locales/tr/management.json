@@ -41,12 +41,10 @@
 	"loading-arialLabel": "Yükleme yönetimi",
 	"standbyFunds": "Beklemedeki Fonlar",
 	"standbyFunds-desc": "Fonlarını çekmek isteyen yatırımcılara iade edilebilecek fonlar",
-	"instantWithdrawn": "Çekilen Fonlar:",
 	"availableWithdrawals": "Çekim için kullanılabilir meblağ:",
-	"heldInstantWithdrawals": "Çekim için tutulan:",
 	"api-keys": {
 		"title": "API ile alım-satım yapın",
-		"description": "Profit Sharing hizmetiniz için Binance API anahtarlarını oluşturun ve bunları favori aracınıza veya uygulamanıza bağlayın. Bu API Anahtarlarını <0>zignaly.com<\/0> adresindeki <0>Zignaly<\/0> alım satım uygulamamıza da bağlayabilirsiniz.",
+		"description": "Profit Sharing hizmetiniz için Binance API anahtarlarını oluşturun ve bunları favori aracınıza veya uygulamanıza bağlayın. Bu API Anahtarlarını <0>trading.zignaly.com<\/0> adresinden Zignaly alım-satım uygulamamıza da bağlayabilirsiniz.",
 		"create-key": "API Anahtarı Oluştur",
 		"no-keys": "API anahtarı yok",
 		"no-keys-description": "Henüz herhangi bir API anahtarı oluşturmadınız",

@@ -1,0 +1,77 @@
+{
+	"yes": "Có",
+	"no": "Không",
+	"loading": "Đang tải...",
+	"coming-soon": {
+		"title": "Sắp ra mắt",
+		"description": "Phần này đang được phát triển."
+	},
+	"no-data": {
+		"title": "Không có dữ liệu",
+		"description": "Không có dữ liệu. Nếu bạn cho rằng đó là một vấn đề, vui lòng liên hệ với bộ phận hỗ trợ."
+	},
+	"critical-error": {
+		"title": "Đã xảy ra lỗi",
+		"description": "Đã xảy ra sự cố. Vui lòng thử lại sau hoặc liên hệ với bộ phận hỗ trợ."
+	},
+	"main-menu": {
+		"dropdown-link-forTrading": "Quản lý dịch vụ",
+		"dropdown-link-helpDocs": "Tài liệu hỗ trợ"
+	},
+	"account-menu": {
+		"isAuth-button-logIn": "Đăng nhập",
+		"isAuth-button-signUp": "ĐĂNG KÝ",
+		"notAuth-dropdown-link-dashboard": "Danh mục đầu tư của tôi",
+		"notAuth-dropdown-link-balances": "Số dư của tôi",
+		"notAuth-button-logOut": "Đăng xuất",
+		"notAuth-dropdown-link-wallet": "Ví ZIG",
+		"referrals": "Giới thiệu",
+		"notAuth-dropdown-link-settings": "Cài đặt",
+		"notAuth-dropdown-link-password": "Mật khẩu",
+		"notAuth-dropdown-link-2fa": "Xác thực hai yếu tố"
+	},
+	"account-selector": {
+		"type": {
+			"title": "Loại",
+			"futures": "Hợp đồng tương lai",
+			"spot": "Giao ngay"
+		}
+	},
+	"navigation-menu": {
+		"profit-sharing": "Xem qua các nhà giao dịch hàng đầu",
+		"become-trader": "Tạo dịch vụ của bạn"
+	},
+	"amount": "Số lượng",
+	"new-version": "Phiên bản mới, nhấp vào để cập nhật",
+	"validation": {
+		"insufficient-amount": "Không đủ tiền",
+		"invalid-value": "Giá trị không hợp lệ",
+		"negative-amount": "Nên > = 0",
+		"invalid-amount": "Bạn phải cho biết số tiền",
+		"negative-zeroable-amount": "Nên > 0",
+		"max-decimals": "Vui lòng nhập số không quá 8 chữ số thập phân.",
+		"max-allowed-length": "Phải dưới {{ maxLength }} ký tự",
+		"min-amount": "Số tiền tối thiểu là {{amount}} {{coin}} .",
+		"insufficient-amount-min": "Số tiền tối thiểu: {{ minValue }} {{ minValueCoin }}",
+		"invalid-characters": "Ký tự không hợp lệ",
+		"letter-number": "Nên có ít nhất một chữ cái hoặc số",
+		"min-invest-amount-for-owner": "Số dư của chủ sở hữu phải trên {{minAmount}} {{minAmountCoin}}"
+	},
+	"back": "Quay Lại",
+	"close": "Đóng",
+	"404": {
+		"title": "Không tìm thấy",
+		"description": "Kiểm tra URL"
+	},
+	"refresh": {
+		"short": "Phiên bản mới có sẵn, bấm vào đây để làm mới"
+	},
+	"percent": "{{value, prettyNumber}}%",
+	"number": "{{value, prettyNumber}}",
+	"infinitely-better": "Có, giá trị hiện tại tốt hơn vô cùng phần trăm vì giá trị bắt đầu là 0",
+	"infinitely-worse": "Có, giá trị hiện tại kém hơn phần trăm vô cùng vì giá trị bắt đầu là 0",
+	"changes-saved": "Đã lưu thay đổi thành công",
+	"name": "Tên",
+	"type-to-confirm": "Nhập \" {{word}} \" để xác nhận",
+	"ok": "OK"
+}
