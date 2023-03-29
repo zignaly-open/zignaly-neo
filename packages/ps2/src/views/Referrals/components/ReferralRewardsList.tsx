@@ -467,6 +467,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         <ZigTypography
           variant={'h1'}
           textAlign={'center'}
+          fontWeight={600}
           sx={{ mt: 2, mb: 2.5 }}
         >
           {t('what-you-get')}
@@ -481,6 +482,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         <ZigTypography
           variant={'h1'}
           textAlign={'center'}
+          fontWeight={600}
           sx={{ mt: 2, mb: 2.5 }}
         >
           {t('what-they-get')}
