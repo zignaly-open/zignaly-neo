@@ -11,10 +11,14 @@ import { Link } from 'react-router-dom';
 import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
 import AccountMenu from '../AccountMenu';
 import ReferralButton from '../ReferralButton';
+import RewardsButton from '../RewardsButton';
 import { useIsAuthenticated } from '../../../apis/user/use';
 import BalanceButton from '../BalanceButton';
 import { Box, Toolbar, useMediaQuery } from '@mui/material';
 import theme from 'theme';
+// FIXME
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { Container, StyledAppBar } from './styles';
 import Drawer from '../Drawer';
 
@@ -74,6 +78,7 @@ const Header: React.FC = () => {
               {isAuthenticated && (
                 <>
                   <BalanceButton key={'balance'} />
+                  <RewardsButton key={'rewards'} />
                   {md && <ReferralButton key={'referral'} />}
                 </>
               )}

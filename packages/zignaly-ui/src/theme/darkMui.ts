@@ -1,5 +1,6 @@
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import dark from "./dark";
+import { linearProgressClasses } from "@mui/material";
 
 const {
   palette: { augmentColor },
@@ -78,6 +79,47 @@ const darkMui = createTheme({
       styleOverrides: {
         popper: {
           pointerEvents: "none",
+        },
+      },
+    },
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: {
+          backgroundImage: "linear-gradient(90deg, #7319DB, #05EAC1)",
+          borderRadius: 8,
+          height: 16,
+
+          "&:after": {
+            content: "''",
+            position: "absolute",
+            top: "1px",
+            backgroundColor: "rgb(19,28,53)",
+            left: "1px",
+            right: "1px",
+            bottom: "1px",
+            zIndex: 1,
+            borderRadius: 7,
+          },
+
+          "&:before": {
+            content: "''",
+            position: "absolute",
+            top: "1px",
+            border: "1px solid rgb(19,28,53)",
+            left: "1px",
+            right: "1px",
+            bottom: "1px",
+            zIndex: 3,
+            borderRadius: 7,
+          },
+
+          [`& .${linearProgressClasses.bar}`]: {
+            borderRadius: 6,
+            marginTop: 2,
+            zIndex: 2,
+            marginBottom: 2,
+            backgroundImage: "linear-gradient(90deg, #7319DB, #05EAC1)",
+          },
         },
       },
     },

@@ -1,0 +1,44 @@
+{
+  "title": "Rewards Center",
+  "terms": "Terms >",
+  "reward-terms": "Reward Terms",
+  "description": "Earn rewards by completing simple tasks. It's that easy!",
+  "header": {
+    "title": "Get $20",
+    "description": "On 1st deposit"
+  },
+  "active-rewards": "Active Rewards",
+  "no-active-rewards": "No active rewards at this moment",
+  "disabled-voucher": "The Voucher is already activated",
+  "table": {
+    "title": "Rewards History",
+    "no-benefits": "No rewards yet",
+    "time-and-date": "Time & Date",
+    "reward-description": "Reward Description",
+    "description-success_fee": "Spent <0></0> from Fee Voucher, <1></1> remaining.",
+    "description-awarded": "<0></0> Voucher on Success Fee on 1st deposit.",
+    "status": "Status"
+  },
+  "statusTypes": {
+    "success_fee": "Success Fee",
+    "awarded": "Awarded"
+  },
+  "rewardTypes": {
+    "voucher_active": "Success Fee Voucher",
+    "voucher_pending": "Deposit Bonus"
+  },
+  "full-terms": {
+    "1": "Zignaly reserves the right to cancel \"Fee Vouchers\" if the user is found to be involved in inappropriate, dishonest, or abusive activities.",
+    "2": "Zignaly reserves the right to amend the Terms and Conditions of the Rewards program at any time without prior notice.",
+    "3": "The \"Fee Vouchers\" are applicable to Zignaly's part of the \"Success Fee\".",
+    "4": "The \"Fee Vouchers\" are not transferable and shall only be used by the original user that attained them.",
+    "5": "Paid online advertisements with the Zignaly logo are strictly prohibited.",
+    "6": "All reward calculations by Zignaly are final.",
+    "7": "Participants found violating these terms will not be eligible for the rewards; any fraudulent or abusive behavior will result in the immediate termination of all outstanding rewards.",
+    "title": "Global Terms"
+  },
+  "rewardDescriptions": {
+    "voucher_active": "Save on Success Fees now thanks to your ${{amount}} voucher.",
+    "voucher_pending": "Deposit any amount and get ${{amount}} voucher to save on Success Fees."
+  }
+}
