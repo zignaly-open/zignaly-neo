@@ -51,10 +51,18 @@ const ZigBottomNavigation = () => {
   return (
     <Box height='58px'>
       <Paper
-        sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 100 }}
+        sx={{
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          right: 0,
+          zIndex: 100,
+          border: 'none',
+        }}
         elevation={3}
       >
         <BottomNavigation
+          sx={{ backgroundColor: 'neutral800' }}
           showLabels
           value={tabValue}
           onChange={(event, newValue) => {
@@ -69,7 +77,7 @@ const ZigBottomNavigation = () => {
             value={ROUTE_PROFIT_SHARING}
           />
           <BottomNavigationAction
-            label={t('account-menu.portfolio')}
+            label={t('portfolio')}
             icon={<PortfolioIcon />}
             to={generatePath(ROUTE_DASHBOARD)}
             component={Link}

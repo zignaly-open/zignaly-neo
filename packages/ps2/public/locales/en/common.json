@@ -84,5 +84,6 @@
     "letter-number": "Should contain at least one letter or number",
     "min-invest-amount-for-owner": "Owner balance must be above {{minAmount}} {{minAmountCoin}}"
   },
-  "follow-us": "Follow us"
+  "follow-us": "Follow us",
+  "portfolio": "Portfolio"
 }
