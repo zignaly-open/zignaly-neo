@@ -21,7 +21,7 @@
 	"account-menu": {
 		"isAuth-button-logIn": "Iniciar Sessão",
 		"isAuth-button-signUp": "CADASTRAR-SE",
-		"notAuth-dropdown-link-dashboard": "Meu Portfólio",
+		"portfolio": "Meu Portfólio",
 		"notAuth-dropdown-link-balances": "Os Meus Saldos",
 		"notAuth-button-logOut": "Sair",
 		"notAuth-dropdown-link-wallet": "ZIG Wallet",

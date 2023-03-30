@@ -7,7 +7,7 @@ import {
   LogoutButtonWrap,
   AccountName,
 } from './styles';
-import { useTheme } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 import {
   useActiveExchange,
   useCurrentUser,
@@ -50,6 +50,7 @@ function AccountMenu(): React.ReactElement | null {
   const selectExchange = useSelectExchange();
   const location = useLocation();
   const { showModal } = useZModal();
+  const md = useMediaQuery(theme.breakpoints.up('sm'));
 
   const setActiveExchange = (exchangeInternalId: string) => {
     selectExchange(exchangeInternalId);
@@ -78,7 +79,7 @@ function AccountMenu(): React.ReactElement | null {
         </Link>
       </>
     );
-  }
+  } else if (!md) return null;
 
   return (
     <DropDown
@@ -125,7 +126,7 @@ function AccountMenu(): React.ReactElement | null {
           ),
         },
         {
-          label: t('account-menu.notAuth-dropdown-link-dashboard'),
+          label: t('account-menu.portfolio'),
           id: 'account-menu-dropdown__portfolio',
           href: generatePath(ROUTE_DASHBOARD),
           onClick: () => navigate(ROUTE_DASHBOARD),
