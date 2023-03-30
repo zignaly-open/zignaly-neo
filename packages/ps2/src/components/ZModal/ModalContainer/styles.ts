@@ -114,3 +114,8 @@ export const ModalActionsNew = styled('div')<{
       ? 'flex-end'
       : 'center'};
 `;
+
+export const AlertBlock = styled('div')`
+  display: flex;
+  margin-top: 15px;
+`;
