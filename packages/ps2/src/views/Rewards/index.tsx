@@ -44,7 +44,7 @@ const Rewards: React.FC = () => {
         header: t('table.time-and-date'),
         cell: ({ getValue }) => (
           <ZigTypography>
-            {formatLocalizedDate(getValue(), 'PP pp')}
+            {formatLocalizedDate(getValue(), 'P p')}
           </ZigTypography>
         ),
       }),
@@ -106,7 +106,7 @@ const Rewards: React.FC = () => {
   );
 
   return (
-    <PageContainer style={{ maxWidth: '909px' }}>
+    <PageContainer style={{ maxWidth: '915px' }}>
       <LayoutContentWrapper
         endpoint={[benefitsEndpoint, rewardsClaimed]}
         content={([benefits, benefitsClaimed]: [
@@ -171,9 +171,9 @@ const Rewards: React.FC = () => {
                 requiredAmount={b.amount}
                 rewardAmount={b.amount}
                 actionLabel={t('action:deposit')}
-                showProgress={b.status !== BenefitType.FeeVoucher}
+                showProgress={b.status === BenefitType.FeeVoucher}
                 onAction={
-                  b.status === BenefitType.FeeVoucher ? deposit : undefined
+                  b.status === BenefitType.Deposit ? deposit : undefined
                 }
                 // eslint-disable-next-line react/no-array-index-key
                 key={`reward-${i}`}
