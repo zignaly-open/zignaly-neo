@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import {
   LoginButton,
   AccountDropdown,
@@ -36,7 +35,6 @@ import { generatePath, Link, useLocation, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
 import { useZModal } from 'components/ZModal/use';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
 
 function AccountMenu(): React.ReactElement | null {
@@ -163,7 +161,12 @@ function AccountMenu(): React.ReactElement | null {
           separator: true,
           label: (
             <>
-              <EmojiEventsIcon />
+              <img
+                width={24}
+                height={24}
+                src='/images/tab-rewards.svg'
+                alt={t('account-menu.rewards')}
+              />
               {t('account-menu.rewards')}
             </>
           ),
@@ -174,7 +177,12 @@ function AccountMenu(): React.ReactElement | null {
         {
           label: (
             <>
-              <CardGiftcardIcon />
+              <img
+                width={24}
+                height={24}
+                src='/images/tab-referrals.svg'
+                alt={t('account-menu.rewards')}
+              />
               {t('account-menu.referrals')}
             </>
           ),
