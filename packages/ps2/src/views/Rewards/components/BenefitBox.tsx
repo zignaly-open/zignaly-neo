@@ -14,7 +14,6 @@ const BenefitBox: React.FC<{
   description: string;
   onAction?: () => void;
   actionLabel: string | JSX.Element;
-  terms: string | JSX.Element;
 }> = ({
   label,
   description,

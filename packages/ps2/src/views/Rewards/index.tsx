@@ -154,7 +154,6 @@ const Rewards: React.FC = () => {
                 description={t(`rewardDescriptions.${b.status}`, {
                   amount: b.amount,
                 })}
-                terms='Get a 10% discount on your success fee for 30 days'
                 currentAmount={b.amount - b.currentAmount}
                 requiredAmount={b.amount}
                 rewardAmount={b.amount}
@@ -167,6 +166,12 @@ const Rewards: React.FC = () => {
                 key={`reward-${i}`}
               />
             ))}
+
+            {!benefits?.length && (
+              <ZigTypography sx={{ textAlign: 'center' }}>
+                {t('no-active-rewards')}
+              </ZigTypography>
+            )}
 
             <ZigTypography variant={'h2'} sx={{ mt: 5, mb: 3 }}>
               {t('table.title')}

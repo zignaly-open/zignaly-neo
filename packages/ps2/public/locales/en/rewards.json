@@ -8,6 +8,7 @@
     "description": "On 1st deposit"
   },
   "active-rewards": "Active Rewards",
+  "no-active-rewards": "Maybe if you come tomorrow there will be some available rewards",
   "table": {
     "title": "Rewards History",
     "no-benefits": "No Rewards yet",

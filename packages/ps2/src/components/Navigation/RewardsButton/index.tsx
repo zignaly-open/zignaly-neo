@@ -6,13 +6,13 @@ import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_REWARDS } from '../../../routes';
 import TicketShape, { TicketShapeIndependent } from '../../TicketShape/atoms';
 import { useBenefitsQuery } from '../../../apis/referrals/api';
-import { VOUCHER_PENDING } from '../../../apis/referrals/types';
+import { BenefitType } from '../../../apis/referrals/types';
 
 const RewardsButton = () => {
   const { t } = useTranslation('rewards');
   const { data: benefits } = useBenefitsQuery();
 
-  if (!benefits?.every((x) => x.status === VOUCHER_PENDING)) return null;
+  if (!benefits?.some((x) => x.status === BenefitType.Deposit)) return null;
 
   return (
     <Link to={generatePath(ROUTE_REWARDS)}>
