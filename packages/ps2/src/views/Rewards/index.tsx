@@ -56,6 +56,7 @@ const Rewards: React.FC = () => {
             sx={{ minWidth: '60px', flexDirection: 'column', display: 'flex' }}
           >
             <ZigPriceLabel
+              showTooltip
               value={original.amount}
               usd={original.currency?.includes('USD')}
               coin={original.currency}
@@ -184,12 +185,17 @@ const Rewards: React.FC = () => {
                 actionLabel={t(
                   b.status === BenefitType.Deposit
                     ? 'action:deposit'
-                    : 'action:claim',
+                    : 'active',
                 )}
                 tooltip={
                   b.status === BenefitType.Deposit
                     ? undefined
                     : t('disabled-voucher')
+                }
+                buttonId={
+                  b.status === BenefitType.Deposit
+                    ? 'rewards__deposit-button'
+                    : 'rewards__already-active-button'
                 }
                 showProgress={b.status === BenefitType.FeeVoucher}
                 onAction={

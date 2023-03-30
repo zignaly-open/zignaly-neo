@@ -10,6 +10,7 @@ const BenefitBox: React.FC<{
   currentAmount: number;
   requiredAmount: number;
   coin?: string;
+  buttonId?: string;
   showProgress?: boolean;
   tooltip?: string;
   description: string;
@@ -22,6 +23,7 @@ const BenefitBox: React.FC<{
   tooltip,
   requiredAmount,
   showProgress,
+  buttonId,
   onAction,
   actionLabel,
   coin,
@@ -132,6 +134,7 @@ const BenefitBox: React.FC<{
               lineHeight: '20px',
               fontSize: '18px',
             }}
+            id={buttonId}
             tooltip={tooltip}
             size={'large'}
             onClick={onAction}
