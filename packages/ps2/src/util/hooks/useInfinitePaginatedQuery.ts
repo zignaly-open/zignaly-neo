@@ -25,6 +25,7 @@ const useInfinitePaginatedQuery = (
   const { limit = 10 } = localParams.current;
   const [localPage, setLocalPage] = useState({ page: 1, id: '' });
   const [combinedData, setCombinedData] = useState([]);
+  const [maxPageIndex, setMaxPageIndex] = useState(undefined);
 
   const queryResponse = useGetDataListQuery({
     ...localParams.current,
@@ -44,8 +45,10 @@ const useInfinitePaginatedQuery = (
     : [];
 
   useDeepCompareEffect(() => {
-    if (localPage.page === 1) setCombinedData(data);
-    else setCombinedData((previousData) => [...previousData, ...data]);
+    if (localPage.page === 1) {
+      setCombinedData(data);
+      setMaxPageIndex(undefined);
+    } else setCombinedData((previousData) => [...previousData, ...data]);
   }, [data]);
 
   const refresh = () => {
@@ -63,18 +66,33 @@ const useInfinitePaginatedQuery = (
     }
   }, [pageIndex]);
 
+  useEffect(() => {
+    if (!data || data.length === limit) {
+      return;
+    }
+    setMaxPageIndex((prev: number) => Math.max(prev, localPage.page));
+  }, [data, limit, localPage.page]);
+
   const fetchMore = () => {
-    setLocalPage(({ page }) => ({
-      page: page + 1,
-      id: (queryResponse.data as InfiniteQueryResponseType).metadata?.from,
-    }));
+    if (
+      (maxPageIndex && localPage.page < maxPageIndex) ||
+      data?.length !== limit
+    ) {
+      return;
+    }
+    setLocalPage(({ page }) => {
+      return {
+        page: page + 1,
+        id: (queryResponse.data as InfiniteQueryResponseType).metadata?.from,
+      };
+    });
   };
 
   return {
     ...queryResponse,
     data: combinedData,
-    page: localPage.page,
-    hasMore: data?.length === limit,
+    page: maxPageIndex || localPage.page,
+    hasMore: data?.length === limit || localPage.page < maxPageIndex,
     fetchMore,
     refresh,
   };
