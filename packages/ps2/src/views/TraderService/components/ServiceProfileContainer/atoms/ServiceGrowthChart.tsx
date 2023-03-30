@@ -28,7 +28,10 @@ import PercentChange from './PercentChange';
 import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../../util/numbers';
 import { numericFormatter } from 'react-number-format';
-import { formatLocalizedDate } from 'views/Dashboard/components/MyDashboard/util';
+import {
+  formatCompactNumber,
+  formatLocalizedDate,
+} from 'views/Dashboard/components/MyDashboard/util';
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   const { chartType, chartTimeframe, setChartTimeframe, setChartType } =
@@ -245,10 +248,9 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
             onlyIntegerTicks={chartType === GraphChartType.investors}
             events={events}
             yAxisFormatter={(v) =>
-              `${v
-                .toString()
-                .replace(/000000$/, 'M')
-                .replace(/000$/, 'K')}${isPercent ? `%` : ``}`
+              `${formatCompactNumber(v, isPercent ? 2 : 8)}${
+                isPercent ? `%` : ``
+              }`
             }
             data={data?.data}
             tooltipFormatter={(v) =>
