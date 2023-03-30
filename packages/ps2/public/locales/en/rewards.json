@@ -12,11 +12,11 @@
   "disabled-voucher": "The Voucher is already activated",
   "table": {
     "title": "Rewards History",
-    "no-benefits": "No Rewards yet",
+    "no-benefits": "No rewards yet",
     "time-and-date": "Time & Date",
     "reward-description": "Reward Description",
     "description-success_fee": "Spent <0></0> from Fee Voucher, <1></1> remaining.",
-    "description-awarded": "<0></0> Voucher on Success Fee on 1st deposit",
+    "description-awarded": "<0></0> Voucher on Success Fee on 1st deposit.",
     "status": "Status"
   },
   "statusTypes": {
