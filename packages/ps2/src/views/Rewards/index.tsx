@@ -14,7 +14,7 @@ import {
   BenefitClaimedStatus,
   BenefitType,
 } from '../../apis/referrals/types';
-import { Box } from '@mui/material';
+import { Box, Paper } from '@mui/material';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import {
   useBenefitsClaimedQuery,
@@ -67,20 +67,31 @@ const Rewards: React.FC = () => {
         header: t('table.reward-description'),
         cell: ({ row: { original } }) => (
           <ZigTypography>
-            <Trans i18nKey={'rewards:table.description'} t={t}>
-              <ZigPriceLabel
-                showTooltip
-                value={original.spent}
-                coin={original.currency}
-                usd
-              />
-              <ZigPriceLabel
-                showTooltip
-                value={original.remaining}
-                coin={original.currency}
-                usd
-              />
-            </Trans>
+            {original.status === BenefitClaimedStatus.SuccessFee ? (
+              <Trans i18nKey={'rewards:table.description-success_fee'} t={t}>
+                <ZigPriceLabel
+                  showTooltip
+                  value={original.spent}
+                  coin={original.currency}
+                  usd
+                />
+                <ZigPriceLabel
+                  showTooltip
+                  value={original.remaining}
+                  coin={original.currency}
+                  usd
+                />
+              </Trans>
+            ) : (
+              <Trans i18nKey={'rewards:table.description-awarded'} t={t}>
+                <ZigPriceLabel
+                  showTooltip
+                  value={original.amount}
+                  coin={original.currency}
+                  usd
+                />
+              </Trans>
+            )}{' '}
             <TermsButtonModal />
           </ZigTypography>
         ),
@@ -181,22 +192,28 @@ const Rewards: React.FC = () => {
             ))}
 
             {!benefits?.length && (
-              <ZigTypography sx={{ textAlign: 'center' }}>
-                {t('no-active-rewards')}
-              </ZigTypography>
+              <Paper sx={{ p: 2 }}>
+                <ZigTypography>{t('no-active-rewards')}</ZigTypography>
+              </Paper>
             )}
 
             <ZigTypography variant={'h2'} sx={{ mt: 5, mb: 3 }}>
               {t('table.title')}
             </ZigTypography>
 
-            <ZigTable
-              columns={columns}
-              data={benefitsClaimed}
-              columnVisibility={false}
-              enableSortingRemoval={false}
-              emptyMessage={t('table.no-benefits')}
-            />
+            {benefitsClaimed?.length > 0 ? (
+              <ZigTable
+                columns={columns}
+                data={benefitsClaimed}
+                columnVisibility={false}
+                enableSortingRemoval={false}
+                emptyMessage={t('table.no-benefits')}
+              />
+            ) : (
+              <Paper sx={{ p: 2 }}>
+                <ZigTypography>{t('table.no-benefits')}</ZigTypography>
+              </Paper>
+            )}
           </>
         )}
       />

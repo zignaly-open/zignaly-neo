@@ -14,7 +14,8 @@
     "no-benefits": "No Rewards yet",
     "time-and-date": "Time & Date",
     "reward-description": "Reward Description",
-    "description": "Spent <0></0> from Fee Voucher, <1></1> remaining.",
+    "description-success_fee": "Spent <0></0> from Fee Voucher, <1></1> remaining.",
+    "description-awarded": "<0></0> Voucher on Success Fee on 1st deposit",
     "status": "Status"
   },
   "statusTypes": {
@@ -36,7 +37,7 @@
     "title": "Global Terms"
   },
   "rewardDescriptions": {
-    "voucher_active": "Save on Success Fees thanks to your ${{amount}} voucher.",
+    "voucher_active": "Save on Success Fees now thanks to your ${{amount}} voucher.",
     "voucher_pending": "Deposit any amount and get ${{amount}} voucher to save on Success Fees."
   }
 }
