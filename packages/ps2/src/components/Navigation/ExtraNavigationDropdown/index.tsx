@@ -116,6 +116,7 @@ const ExtraNavigationDropdown: React.FC = () => {
         label: t('navigation-menu.become-trader'),
         id: 'menu-dropdown__become-trader',
         href: ROUTE_BECOME_TRADER,
+        onClick: () => navigate(ROUTE_BECOME_TRADER),
       },
       ...options,
     ];
