@@ -19,3 +19,10 @@ export const formatMonthDay = (date: Date) =>
   format(date, 'PP', {
     locale: dateFnsLocaleMapping?.[i18n.language] || dateFnsLocaleMapping.en,
   }).replace(/, \d{4}$/, '');
+
+export const formatCompactNumber = (value: number | string, precision = 8) =>
+  new Intl.NumberFormat('en-US', {
+    maximumFractionDigits: precision,
+    notation: 'compact',
+    compactDisplay: 'short',
+  }).format(+value);
