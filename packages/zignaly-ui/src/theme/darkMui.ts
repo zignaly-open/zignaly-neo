@@ -143,6 +143,7 @@ const darkMui = createTheme({
           transition: "all 0.3s linear",
         },
         containedPrimary: {
+          color: dark.neutral000,
           background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
           "&:hover, &.MuiButton-active": {
             background: "linear-gradient(rgba(20, 156, 173, 0.64),rgba(69, 64, 193, 0.64))",

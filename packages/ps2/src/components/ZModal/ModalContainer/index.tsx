@@ -17,7 +17,7 @@ function ModalContainer({
 
   return (
     <Layout width={width}>
-      <Header>
+      <Header compact={!title && !onGoBack}>
         <Inline align={titleAlign}>
           {onGoBack && typeof onGoBack === 'function' && (
             <HeaderButton onClick={onGoBack}>
@@ -28,9 +28,15 @@ function ModalContainer({
               />
             </HeaderButton>
           )}
-          <Title variant='h1' sx={{ paddingRight: '20px' }} color='neutral100'>
-            {title}
-          </Title>
+          {!!title && (
+            <Title
+              variant='h1'
+              sx={{ paddingRight: '20px' }}
+              color='neutral100'
+            >
+              {title}
+            </Title>
+          )}
         </Inline>
         {!customHeaderAction
           ? onClickClose &&
