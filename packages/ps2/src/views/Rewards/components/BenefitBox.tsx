@@ -11,6 +11,7 @@ const BenefitBox: React.FC<{
   requiredAmount: number;
   coin?: string;
   showProgress?: boolean;
+  tooltip?: string;
   description: string;
   onAction?: () => void;
   actionLabel: string | JSX.Element;
@@ -18,6 +19,7 @@ const BenefitBox: React.FC<{
   label,
   description,
   currentAmount,
+  tooltip,
   requiredAmount,
   showProgress,
   onAction,
@@ -124,20 +126,20 @@ const BenefitBox: React.FC<{
           )}
         </Box>
         <Box sx={{ padding: '0 12px', minWidth: 134 }}>
-          {!!onAction && (
-            <ZigButton
-              sx={{
-                padding: '20px 30px',
-                lineHeight: '20px',
-                fontSize: '18px',
-              }}
-              size={'large'}
-              onClick={onAction}
-              variant={'contained'}
-            >
-              {actionLabel}
-            </ZigButton>
-          )}
+          <ZigButton
+            sx={{
+              padding: '20px 30px',
+              lineHeight: '20px',
+              fontSize: '18px',
+            }}
+            tooltip={tooltip}
+            size={'large'}
+            onClick={onAction}
+            variant={'contained'}
+            disabled={!onAction}
+          >
+            {actionLabel}
+          </ZigButton>
         </Box>
       </TicketShape>
     </TicketShape>
