@@ -22,6 +22,7 @@ export const ROUTE_WALLET = '/zigwallet';
 export const ROUTE_REFERRALS = '/referrals';
 export const ROUTE_REWARDS = '/rewards';
 export const ROUTE_REFERRALS_INVITE = '/invite/:key';
+export const ROUTE_REFERRALS_INVITE_SHORT = '/inv/:key';
 export const ROUTE_HELP_TRADER = '/help/trader';
 export const ROUTE_HELP_INVESTOR = '/help/investor';
 export const ROUTE_404 = '/404';
