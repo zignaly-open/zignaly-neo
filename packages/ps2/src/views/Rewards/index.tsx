@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import {
   createColumnHelper,
@@ -67,7 +67,20 @@ const Rewards: React.FC = () => {
         header: t('table.reward-description'),
         cell: ({ row: { original } }) => (
           <ZigTypography>
-            {t('table.description', { amount: original.amount })}{' '}
+            <Trans i18nKey={'rewards:table.description'} t={t}>
+              <ZigPriceLabel
+                showTooltip
+                value={original.amount}
+                coin={original.currency}
+                usd
+              />
+              <ZigPriceLabel
+                showTooltip
+                value={original.remaining}
+                coin={original.currency}
+                usd
+              />
+            </Trans>
             <TermsButtonModal />
           </ZigTypography>
         ),

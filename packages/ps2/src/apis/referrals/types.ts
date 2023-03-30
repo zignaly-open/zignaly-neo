@@ -68,9 +68,6 @@ export type BenefitClaimed = {
   date: string;
   currency: string;
   amount: number;
-  spent: number;
+  remaining: number;
   status: BenefitClaimedStatus;
 };
-
-export const VOUCHER_PENDING = 'voucher_pending';
-export const VOUCHER_ACTIVE = 'voucher_active';

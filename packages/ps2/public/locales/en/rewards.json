@@ -14,7 +14,7 @@
     "no-benefits": "No Rewards yet",
     "time-and-date": "Time & Date",
     "reward-description": "Reward Description",
-    "description": "${{amount}} Fee Voucher on your first deposit.",
+    "description": "Spent <0></0> from Fee Voucher, <1></1> remaining.",
     "status": "Status"
   },
   "statusTypes": {
