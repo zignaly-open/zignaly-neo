@@ -70,7 +70,7 @@ const Rewards: React.FC = () => {
             <Trans i18nKey={'rewards:table.description'} t={t}>
               <ZigPriceLabel
                 showTooltip
-                value={original.amount}
+                value={original.spent}
                 coin={original.currency}
                 usd
               />

@@ -67,6 +67,7 @@ export type Benefit = {
 export type BenefitClaimed = {
   date: string;
   currency: string;
+  spent: number;
   amount: number;
   remaining: number;
   status: BenefitClaimedStatus;
