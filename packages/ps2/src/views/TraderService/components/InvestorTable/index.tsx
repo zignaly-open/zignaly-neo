@@ -45,14 +45,17 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         header: t('tableHeader.userId'),
       }),
       columnHelper.accessor(
-        (row) => new BigNumber(row.invested).plus(new BigNumber(row.pending)),
+        (row) =>
+          new BigNumber(row.invested)
+            .plus(new BigNumber(row.pending))
+            .toFixed(),
         {
           header: t('tableHeader.investment'),
           id: 'investment',
           cell: (props) => (
             <ZigTablePriceLabel
               coin={service?.ssc ?? 'USDT'}
-              value={props.getValue().toFixed()}
+              value={props.getValue()}
             />
           ),
         },
