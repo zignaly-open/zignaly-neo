@@ -35,6 +35,8 @@ import {
   ROUTE_MY_BALANCES_DEPOSIT,
   ROUTE_MY_BALANCES_DEPOSIT_COIN,
   ROUTE_PROFIT_SHARING_SERVICE_INVEST,
+  ROUTE_REFERRALS_INVITE_SHORT,
+  ROUTE_REWARDS,
 } from './routes';
 
 import Management from './views/TraderService/Management';
@@ -57,6 +59,7 @@ import NotFound from 'views/404';
 import ResetPassword from 'views/Auth/ResetPassword';
 import Referrals from './views/Referrals';
 import Invite from './views/Referrals/Invite';
+import Rewards from './views/Rewards';
 
 const outleted = (Component: JSX.Element) => (
   <>
@@ -86,6 +89,7 @@ const Router: React.FC = () => (
       </Route>
       <Route path={ROUTE_WALLET} element={<Wallet />} />
       <Route path={ROUTE_REFERRALS} element={<Referrals />} />
+      <Route path={ROUTE_REWARDS} element={<Rewards />} />
     </Route>
 
     <Route path={ROUTE_TRADING_SERVICE} element={outleted(<ServiceProfile />)}>
@@ -111,6 +115,7 @@ const Router: React.FC = () => (
 
     <Route element={<UnauthenticatedWall />}>
       <Route path={ROUTE_REFERRALS_INVITE} element={<Invite />} />
+      <Route path={ROUTE_REFERRALS_INVITE_SHORT} element={<Invite />} />
       <Route path={ROUTE_LOGIN} element={<Login />} />
       <Route path={ROUTE_SIGNUP} element={<Signup />} />
       <Route path={ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />

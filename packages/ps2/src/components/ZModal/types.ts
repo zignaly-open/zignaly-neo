@@ -2,7 +2,7 @@ import { DialogProps } from '@mui/material/Dialog';
 import { UseModalOptions } from 'mui-modal-provider';
 
 export type ZModalProps = {
-  title: string;
+  title?: string;
   wide?: boolean;
   authOnly?: boolean;
   isLoading?: boolean;
@@ -13,3 +13,5 @@ export type ZModalProps = {
 } & DialogProps;
 
 export type UseZModalOptions = UseModalOptions & { customClose?: () => void };
+
+export type ZDialogProps = DialogProps & { close: () => void };

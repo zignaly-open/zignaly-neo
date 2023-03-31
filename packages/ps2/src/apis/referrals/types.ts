@@ -45,3 +45,30 @@ export type ReferralHistoryEntry = {
 export type ReferralHistory = {
   history: ReferralHistoryEntry[];
 };
+
+export enum BenefitType {
+  // This naming does not make ANY sense whatsoever
+  Deposit = 'voucher_pending',
+  FeeVoucher = 'voucher_active',
+}
+
+export enum BenefitClaimedStatus {
+  SuccessFee = 'success_fee',
+  Awarded = 'awarded',
+}
+
+export type Benefit = {
+  currency: string;
+  amount: number;
+  currentAmount: number;
+  status: BenefitType;
+};
+
+export type BenefitClaimed = {
+  date: string;
+  currency: string;
+  spent: number;
+  amount: number;
+  remaining: number;
+  status: BenefitClaimedStatus;
+};
