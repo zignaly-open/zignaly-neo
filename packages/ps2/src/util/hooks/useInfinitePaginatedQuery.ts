@@ -44,9 +44,8 @@ const useInfinitePaginatedQuery = (
     : [];
 
   useDeepCompareEffect(() => {
-    if (localPage.page === 1) {
-      setCombinedData(data);
-    } else setCombinedData((previousData) => [...previousData, ...data]);
+    if (localPage.page === 1) setCombinedData(data);
+    else setCombinedData((previousData) => [...previousData, ...data]);
   }, [data]);
 
   const refresh = () => {
