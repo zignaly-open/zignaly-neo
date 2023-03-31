@@ -31,24 +31,27 @@ const InvestingLayout: React.FC = () => {
           <InvestingStep step={3} />
         </Grid>
       </Grid>
-      <Link to={ROUTE_PROFIT_SHARING}>
-        <ZigButton
-          id={'my-portfolio-steps__marketplace'}
-          onClick={() => {}}
-          variant='contained'
-          size={'large'}
-          sx={{ flexDirection: 'column', minWidth: 165 }}
-        >
-          <ZigTypography
-            variant='body2'
-            color='neutral000'
-            fontWeight={600}
-            letterSpacing={1.1}
+      <Box sx={{ padding: '0 12px', minWidth: 134 }}>
+        <Link to={ROUTE_PROFIT_SHARING}>
+          <ZigButton
+            id={'my-portfolio-steps__marketplace'}
+            variant='contained'
+            sx={{
+              padding: '18px 25px',
+              lineHeight: '20px',
+            }}
           >
-            {t('how-to-invest-steps.marketplace')}
-          </ZigTypography>
-        </ZigButton>
-      </Link>
+            <ZigTypography
+              variant='body1'
+              color='neutral000'
+              fontWeight={600}
+              letterSpacing={1.1}
+            >
+              {t('how-to-invest-steps.marketplace')}
+            </ZigTypography>
+          </ZigButton>
+        </Link>
+      </Box>
       <Box
         sx={{ display: 'flex', mt: 5, flexDirection: 'column', width: '100%' }}
       >
