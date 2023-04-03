@@ -24,17 +24,18 @@ export const BalanceSummary = ({
   const { t } = useTranslation(['table', 'action']);
   return (
     <Layout>
-      <Box id={`${prefixId}__invested-${serviceId}`}>
+      <Box>
         {dashboardType === 'marketplace' ? (
           <ZigTypography>{t('balanceSummary.invested')}</ZigTypography>
         ) : (
           <ZigPriceLabel
+            id={prefixId && serviceId && `${prefixId}__invested-${serviceId}`}
             value={new BigNumber(totalValue).toFixed()}
             coin={coin}
           />
         )}
       </Box>
-      <Box id={`${prefixId}__profit-${serviceId}`}>
+      <Box>
         {isNaN(+profit) || profit === '' ? (
           // eslint-disable-next-line i18next/no-literal-string
           <ZigTypography variant={'body2'} color={'neutral400'}>
@@ -42,6 +43,7 @@ export const BalanceSummary = ({
           </ZigTypography>
         ) : (
           <ZigPriceLabel
+            id={prefixId && serviceId && `${prefixId}__profit-${serviceId}`}
             value={profit}
             coin={coin}
             color={getColorForNumber(profit)}
