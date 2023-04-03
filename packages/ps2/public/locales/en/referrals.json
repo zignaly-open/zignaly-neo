@@ -16,7 +16,7 @@
         },
         "step-3": {
             "title": "You Both Earn",
-            "description": "You'll earn unlimited commissions: {{successFee}}% of Success Fees paid to Zignaly. They get ${{reward}} in ZIG if they invest more than ${{minDeposit}}"
+            "description": "You'll earn unlimited commissions: {{successFee}}% of Success Fees paid to Zignaly. They get ${{reward}} in ZIG if they invest any amount"
         }
     },
     "they-get-invest": "<0>They get</0><1>${{value}}</1><2> in Fee Voucher on First Deposit",

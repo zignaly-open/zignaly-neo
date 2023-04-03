@@ -39,6 +39,7 @@ export interface ChartLargeProps {
   yAxisFormatter?: (y: number | string) => string;
   tooltipFormatter?: (v: AxisFormat) => string;
   chartProps?: VictoryChartProps;
+  id?: string;
 }
 
 export interface AxisFormat {

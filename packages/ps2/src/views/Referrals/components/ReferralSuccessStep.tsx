@@ -31,7 +31,6 @@ const ReferralSuccessStep: React.FC<{ step: number; link?: string }> = ({
             t={t}
             i18nKey={`how-to-earn-steps.step-${step}.description`}
             values={{
-              minDeposit: 100,
               reward: 20,
               successFee: data.configuration.zignalySuccessFee,
             }}
