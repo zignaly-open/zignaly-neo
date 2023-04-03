@@ -3,6 +3,7 @@ import { dark } from "../../../theme";
 
 export const ChartLayoutLarge = styled("div")`
   width: 100%;
+  z-index: 3;
 
   svg {
     overflow: visible;

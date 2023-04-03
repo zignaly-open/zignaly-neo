@@ -3,6 +3,8 @@ export { ThemeProvider as ThemeProviderMui } from "@mui/material";
 export { default as ThemeProvider } from "utils/ThemeProvider";
 export * from "./theme";
 
+export { ReactComponent as ZignalyLogotype } from "assets/images/zignaly-logotype.svg";
+
 // Basic inputs <3
 export { default as ZigButton, ZigButtonGroup } from "./components/inputs/ZigButton";
 export { default as ZigButtonGroupInput } from "./components/inputs/ZigButtonGroupInput";
@@ -17,6 +19,7 @@ export { default as ZigTypography } from "./components/display/ZigTypography";
 export { default as ZigPriceLabel, ZigTablePriceLabel } from "./components/display/ZigPriceLabel";
 export { default as Avatar } from "./components/display/Avatar";
 export { default as ErrorMessage } from "./components/display/ErrorMessage";
+export { default as ZigAlertMessage } from "./components/display/ZigAlertMessage";
 export { default as Loader } from "./components/display/Loader";
 export { default as Toaster } from "./components/display/Toaster";
 export { default as ProgressSlider } from "./components/display/ProgressSlider";

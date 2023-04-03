@@ -11,6 +11,7 @@ import {
   dark,
   InputText,
   PageContainer,
+  ZigButton,
   ZigPriceLabel,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -20,12 +21,17 @@ import { useCurrentUser } from '../../apis/user/use';
 import copy from 'copy-to-clipboard';
 import { useToast } from '../../util/hooks/useToast';
 import { generatePath } from 'react-router-dom';
-import { ROUTE_REFERRALS_INVITE } from '../../routes';
+import {
+  ROUTE_REFERRALS_INVITE,
+  ROUTE_REFERRALS_INVITE_SHORT,
+} from '../../routes';
 import { TotalBox } from './atoms';
 import { ReferralHistory, ReferralRewards } from '../../apis/referrals/types';
 import ReferralTable from './components/ReferralTable';
 import ReferralRewardsList from './components/ReferralRewardsList';
 import ReferralSuccessStep from './components/ReferralSuccessStep';
+import { useZModal } from 'components/ZModal/use';
+import ReferralInviteModal from './components/ReferralInviteModal';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -33,14 +39,23 @@ const Referrals: React.FC = () => {
   const history = useReferralHistoryQuery();
   const { refCode } = useCurrentUser();
   const toast = useToast();
+  const { showModal } = useZModal();
 
   useTitle(t('pages:referrals'));
 
-  const link =
+  const baseUrl =
     window.location.protocol +
     '//' +
-    window.location.host +
-    generatePath(ROUTE_REFERRALS_INVITE, { key: refCode });
+    (window.location.host?.includes('localhost')
+      ? 'app.zignaly.com'
+      : window.location.host);
+
+  const link = baseUrl + generatePath(ROUTE_REFERRALS_INVITE, { key: refCode });
+  const shortLink =
+    baseUrl + generatePath(ROUTE_REFERRALS_INVITE_SHORT, { key: refCode });
+
+  const openInviteModal = () =>
+    showModal(ReferralInviteModal, { url: link, urlShort: shortLink });
 
   return (
     <PageContainer style={{ maxWidth: '1200px' }}>
@@ -76,6 +91,7 @@ const Referrals: React.FC = () => {
               </Box>
               <Box
                 sx={{
+                  flex: 1,
                   maxWidth: 700,
                   justifyContent: 'center',
                   display: 'flex',
@@ -90,31 +106,55 @@ const Referrals: React.FC = () => {
                 >
                   {t('title')}
                 </ZigTypography>
-                <ZigTypography
+
+                <Box
                   sx={{
-                    mb: 3,
+                    display: 'flex',
+                    flexDirection: 'row',
+                    alignItems: 'flex-end',
                   }}
                 >
-                  {t('description')}
-                </ZigTypography>
-
-                <InputText
-                  label={t('share-your-link')}
-                  readOnly={true}
-                  value={link}
-                  rightSideElement={
-                    <CloneIcon
-                      id='referrals__copy-link'
-                      width={40}
-                      height={40}
-                      color={dark.neutral300}
+                  <Box sx={{ flex: 1 }}>
+                    <InputText
+                      readOnly={true}
+                      value={link}
+                      rightSideElement={
+                        <CloneIcon
+                          id='referrals__copy-link'
+                          width={40}
+                          height={40}
+                          color={dark.neutral300}
+                        />
+                      }
+                      onClickRightSideElement={() => {
+                        copy(link);
+                        toast.success(t('action:copied'));
+                      }}
                     />
-                  }
-                  onClickRightSideElement={() => {
-                    copy(link);
-                    toast.success(t('action:copied'));
-                  }}
-                />
+                  </Box>
+                  <ZigButton
+                    variant={'contained'}
+                    id='referrals__open-invite-image-modal'
+                    size={'large'}
+                    sx={{
+                      mb: '10px',
+                      height: '66px',
+                      ml: 1,
+                      fontSize: '16px',
+                      textTransform: 'uppercase',
+                    }}
+                    onClick={openInviteModal}
+                  >
+                    <img
+                      src={'/images/referrals/qrcode.svg'}
+                      width='16'
+                      height='16'
+                      style={{ marginRight: 10 }}
+                      alt={''}
+                    />
+                    {t('create-invite.create-invite')}
+                  </ZigButton>
+                </Box>
               </Box>
             </Box>
 
@@ -171,6 +211,7 @@ const Referrals: React.FC = () => {
                       <ZigPriceLabel
                         color={'greenGraph'}
                         usd
+                        showTooltip
                         variant={'bigNumber'}
                         value={rewardsData.usdtEarned}
                       />
@@ -182,6 +223,7 @@ const Referrals: React.FC = () => {
                       <ZigPriceLabel
                         color={'yellow'}
                         usd
+                        showTooltip
                         variant={'bigNumber'}
                         value={rewardsData.usdtPending}
                       />

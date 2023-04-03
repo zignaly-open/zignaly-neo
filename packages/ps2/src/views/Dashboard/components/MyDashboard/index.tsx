@@ -25,6 +25,7 @@ import { useCoinBalances } from '../../../../apis/coin/use';
 import { useZModal } from '../../../../components/ZModal/use';
 import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../util/numbers';
+import InvestingLayout from '../InvestingSteps/InvestingLayout';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -168,25 +169,31 @@ const MyDashboard: React.FC = () => {
 
   return (
     <Layout>
-      <Heading>
-        <ZigTypography variant='h1' id={'my-portfolio__title'}>
-          {t('title')}
-        </ZigTypography>
-      </Heading>
-      <LayoutContentWrapper
-        endpoint={investmentsEndpoint}
-        content={(services: Investment[]) => (
-          <ZigTableWrapper>
-            <ZigTable
-              prefixId={'portfolio'}
-              columns={columns}
-              data={services}
-              emptyMessage={t('table-search-emptyMessage')}
-              columnVisibility
-            />
-          </ZigTableWrapper>
-        )}
-      />
+      {investmentsEndpoint?.currentData?.length ? (
+        <>
+          <Heading>
+            <ZigTypography variant='h1' id={'my-portfolio__title'}>
+              {t('title')}
+            </ZigTypography>
+          </Heading>
+          <LayoutContentWrapper
+            endpoint={investmentsEndpoint}
+            content={(services: Investment[]) => (
+              <ZigTableWrapper>
+                <ZigTable
+                  prefixId={'portfolio'}
+                  columns={columns}
+                  data={services}
+                  emptyMessage={t('table-search-emptyMessage')}
+                  columnVisibility
+                />
+              </ZigTableWrapper>
+            )}
+          />
+        </>
+      ) : (
+        <InvestingLayout />
+      )}
     </Layout>
   );
 };

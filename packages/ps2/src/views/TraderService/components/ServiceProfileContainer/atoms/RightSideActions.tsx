@@ -34,6 +34,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
             />
           ) : (
             <InvestButton
+              prefixId={'service-profile'}
               showMultipleAccountButton
               service={service}
               ctaId={'service-profile-invest-button'}

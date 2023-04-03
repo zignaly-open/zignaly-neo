@@ -5,6 +5,7 @@ import { getPrecisionForCoin, shortenNumber } from "./util";
 import ZigTypography from "../ZigTypography";
 import { Variant } from "@mui/material/styles/createTypography";
 import { Tooltip } from "@mui/material";
+import { trimZeros } from "../../../utils/numbers";
 
 const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   id,
@@ -18,6 +19,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   coinProps,
   showTooltip = !usd,
   alwaysShowSign = false,
+  id,
   ...otherProps
 }) => {
   const withDefaultPropsCoin = {
@@ -45,13 +47,14 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
       id={id}
       {...withDefaultProps}
       sx={{ whiteSpace: "nowrap", ...(withDefaultProps?.sx || {}) }}
+      id={id}
     >
       {!!prefix && <>{prefix}</>}
       {+value >= 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
       {usd && "$"}
       <NumericFormat
         value={Math.abs(shorten ? shortened : +value)}
-        renderText={(v) => v}
+        renderText={(v) => trimZeros(v)}
         displayType={"text"}
         thousandSeparator={true}
         decimalScale={
@@ -65,7 +68,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
 
       {shorten ? shortenSuffix : ""}
 
-      {coin && (
+      {coin && !usd && (
         <>
           {" "}
           <ZigTypography {...withDefaultPropsCoin}>{coin}</ZigTypography>
@@ -76,10 +79,10 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
 
   return showTooltip || shorten ? (
     <Tooltip
-      title={`${numericFormatter(value?.toString() ?? "", {
+      title={`${usd ? "$" : ""}${numericFormatter(trimZeros((+value)?.toFixed(8)) ?? "", {
         thousandSeparator: true,
         displayType: "text",
-      })} ${coin ?? ""}`}
+      })} ${!usd ? coin ?? "" : ""}`}
     >
       {content}
     </Tooltip>

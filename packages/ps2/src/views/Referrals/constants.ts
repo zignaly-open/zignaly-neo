@@ -16,3 +16,9 @@ export enum StatusType {
   Cancelled = 'Cancelled',
   Failed = 'Failed',
 }
+
+export const hardcodedInviteeReward = {
+  value: 20,
+  coin: 'ZIG',
+  threshold: 100,
+};

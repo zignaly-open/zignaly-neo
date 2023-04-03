@@ -4,7 +4,7 @@ import {
   OptionHorizontalDotsIcon,
 } from '@zignaly-open/ui';
 import React, { useCallback, useRef } from 'react';
-import { useTheme } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 import { NavLink, Networks } from './styles';
 import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
@@ -35,6 +35,7 @@ const ExtraNavigationDropdown: React.FC = () => {
   const service = useFirstOwnedService();
   const { data: traderServices, isFetching } = useTraderServices();
   const isAuthenticated = useIsAuthenticated();
+  const md = useMediaQuery(theme.breakpoints.up('md'));
 
   const onClose = useCallback(() => {
     dropDownRef.current?.closeDropDown();
@@ -108,6 +109,17 @@ const ExtraNavigationDropdown: React.FC = () => {
     options = options.filter(
       (x) => x.id !== 'menu-dropdown__language-switcher',
     );
+  }
+  if (!md) {
+    options = [
+      {
+        label: t('navigation-menu.become-trader'),
+        id: 'menu-dropdown__become-trader',
+        href: ROUTE_BECOME_TRADER,
+        onClick: () => navigate(ROUTE_BECOME_TRADER),
+      },
+      ...options,
+    ];
   }
   if (isAuthenticated && traderServices?.length && !isFetching) {
     options = [
