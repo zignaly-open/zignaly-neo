@@ -48,7 +48,7 @@
       "description": "Invest in the services and wait to see your returns growing day by day.",
       "time": "Takes 2 minutes"
     },
-    "marketplace": "Start investing now",
+    "start-investing": "Start investing now",
     "bottom-title": "My Portfolio Services",
     "bottom-description": "You are not following any service yet, invest in them to get profits."
   }

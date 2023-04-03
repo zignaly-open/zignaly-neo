@@ -17,10 +17,13 @@ const InvestingLayout: React.FC = () => {
         padding: '0 100px',
       }}
     >
-      <ZigTypography variant='h1'>
+      <ZigTypography variant='h1' sx={{ ml: 5 }}>
         {t('how-to-invest-steps.title')}
       </ZigTypography>
-      <Grid container sx={{ mt: 3, mb: 3, gap: 7, justifyContent: 'center' }}>
+      <Grid
+        container
+        sx={{ mt: 3, mb: 3, mr: 5, gap: 7, justifyContent: 'center' }}
+      >
         <Grid item xs={12} md={3.5}>
           <InvestingStep step={1} />
         </Grid>
@@ -39,6 +42,7 @@ const InvestingLayout: React.FC = () => {
             sx={{
               padding: '18px 25px',
               lineHeight: '20px',
+              ml: 5,
             }}
           >
             <ZigTypography
@@ -47,7 +51,7 @@ const InvestingLayout: React.FC = () => {
               fontWeight={600}
               letterSpacing={1.1}
             >
-              {t('how-to-invest-steps.marketplace')}
+              {t('how-to-invest-steps.start-investing')}
             </ZigTypography>
           </ZigButton>
         </Link>
