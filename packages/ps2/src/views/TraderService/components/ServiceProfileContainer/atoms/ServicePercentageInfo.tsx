@@ -11,7 +11,8 @@ const ServicePercentageInfo: React.FC<{
   percent: string;
   ssc: string;
   canShow?: boolean;
-}> = ({ title, value, ssc, percent, canShow }) => {
+  id?: string;
+}> = ({ title, value, ssc, percent, canShow, id }) => {
   const { t } = useTranslation('service');
   return (
     <>
@@ -20,6 +21,7 @@ const ServicePercentageInfo: React.FC<{
       {canShow ? (
         <>
           <ZigPriceLabel
+            id={id}
             sx={{ mb: 1 }}
             component='div'
             shorten
@@ -28,7 +30,7 @@ const ServicePercentageInfo: React.FC<{
             value={+value}
             coin={ssc}
           />
-          <PercentChange value={percent} />
+          <PercentChange value={percent} id={id && `${id}-pct`} />
         </>
       ) : (
         <Box

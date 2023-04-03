@@ -36,6 +36,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
           ) : (
             <InvestButton
               modalRoute={ROUTE_PROFIT_SHARING_SERVICE_INVEST}
+              prefixId={'service-profile'}
               showMultipleAccountButton
               service={service}
               ctaId={'service-profile-invest-button'}
