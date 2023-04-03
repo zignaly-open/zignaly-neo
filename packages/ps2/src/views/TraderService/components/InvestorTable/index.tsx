@@ -136,6 +136,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                   inv.accountType === 'owner' ? '0' : management.successFee,
               }))}
               emptyMessage={t('no-investors')}
+              enableSortingRemoval={false}
             />
           </>
         )}
