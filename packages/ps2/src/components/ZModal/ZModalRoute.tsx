@@ -14,9 +14,12 @@ export const ZModalRouteElement: React.FC<{
   const { showModal } = useZModal({
     // ideally we should use useMatches fron the latest react-router's api
     // but that would require us to swith to data router. meh.
-    // also, we use generatePath expecting the current route's params to be sufficient
-    // we can do this  safely because the modal route is expected to contain the parent route
-    customClose: () => navigate(generatePath(bgRoute, params)),
+    customClose: (modal) => {
+      modal.destroy();
+      // we use generatePath expecting the current route's params to be sufficient
+      // we can do this  safely because the modal route is expected to contain the parent route
+      navigate(generatePath(bgRoute, params));
+    },
     ...(options || {}),
   });
   useEffect(() => {

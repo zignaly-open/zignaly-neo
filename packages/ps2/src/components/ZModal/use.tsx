@@ -26,7 +26,7 @@ export function useZModal(options?: UseZModalOptions) {
         ...modalProps,
         close: () => {
           trackId && track({ userId });
-          customClose ? customClose() : modal.destroy();
+          customClose ? customClose(modal) : modal.destroy();
         },
       });
       return modal;
