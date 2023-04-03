@@ -1,5 +1,5 @@
 import React, { ComponentType, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { generatePath, useNavigate, useParams } from 'react-router-dom';
 import { useZModal } from './use';
 import { UseModalOptions } from 'mui-modal-provider';
 
@@ -10,13 +10,15 @@ export const ZModalRouteElement: React.FC<{
   options?: UseModalOptions;
 }> = ({ bgRoute, component, ctaId, options }) => {
   const navigate = useNavigate();
+  const params = useParams();
   const { showModal } = useZModal({
     // ideally we should use useMatches fron the latest react-router's api
     // but that would require us to swith to data router. meh.
-    customClose: () => navigate(bgRoute),
+    // also, we use generatePath expecting the current route's params to be sufficient
+    // we can do this  safely because the modal route is expected to contain the parent route
+    customClose: () => navigate(generatePath(bgRoute, params)),
     ...(options || {}),
   });
-  const params = useParams();
   useEffect(() => {
     showModal(component, { ctaId, ...params });
   }, []);
