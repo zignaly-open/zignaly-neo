@@ -70,7 +70,7 @@
     "table": {
         "title": "Earnings History",
         "no-referrals": "No earnings to show",
-        "no-commission-history": "Earning History Empty. Invite some friends or traders to earn.",
+        "no-commission-history": "Earning History is empty. Invite some friends or traders to earn.",
         "time-and-date": "Time & Date",
         "user-trader": "User/Trader",
         "reward-type": "Earning Type",
