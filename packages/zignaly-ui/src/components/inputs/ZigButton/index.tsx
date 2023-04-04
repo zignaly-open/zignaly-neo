@@ -3,16 +3,19 @@ import { LoadingButton, LoadingButtonProps } from "@mui/lab";
 import { ButtonGroup, styled, Tooltip } from "@mui/material";
 import { dark } from "../../../theme";
 
-export type ZigButtonProps = LoadingButtonProps & {
+export type ZigButtonProps = Omit<LoadingButtonProps, "size"> & {
+  size?: LoadingButtonProps["size"] | "xlarge";
   ctaId?: string;
   tooltip?: string;
   active?: boolean;
 };
 
-const ZigButton = ({ active, tooltip, ctaId, color, ...props }: ZigButtonProps) => {
+const ZigButton = ({ active, tooltip, ctaId, color, size, ...props }: ZigButtonProps) => {
   const button = (
     <LoadingButton
       data-tack-cta={ctaId}
+      // it wasn't me lol
+      size={size as LoadingButtonProps["size"]}
       {...props}
       // hack to preserve old behavior but allow for normal mui theming
       color={props.variant === "outlined" && !color ? "secondary" : color}

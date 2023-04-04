@@ -126,6 +126,14 @@ const darkMui = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {},
+        sizeXlarge: {
+          minHeight: "60px",
+          minWidth: "127px",
+          fontSize: "16px",
+          lineHeight: "20px",
+          letterSpacing: "1.1px",
+          fontWeight: 600,
+        },
         sizeLarge: {
           minHeight: "48px",
           minWidth: "110px",
