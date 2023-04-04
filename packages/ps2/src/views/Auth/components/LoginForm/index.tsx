@@ -7,7 +7,13 @@ import { LoginValidation } from './validations';
 import { useAuthenticate } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
-import { Button, TextButton, Typography, ZigInput } from '@zignaly-open/ui';
+import {
+  // Button,
+  TextButton,
+  Typography,
+  ZigButton,
+  ZigInput,
+} from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
 import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
@@ -104,14 +110,26 @@ const LoginForm: React.FC = () => {
         />
 
         <Action>
-          <Button
+          {/*<Button*/}
+          {/*  type={'submit'}*/}
+          {/*  variant={'primary'}*/}
+          {/*  id={'login__submit'}*/}
+          {/*  data-testid={'login__submit'}*/}
+          {/*  caption={t('login-form.submit')}*/}
+          {/*  size={'xlarge'}*/}
+          {/*  loading={loggingIn}*/}
+          {/*/>*/}
+
+          <ZigButton
             type={'submit'}
-            variant={'primary'}
+            variant={'contained'}
             id={'login__submit'}
-            caption={t('login-form.submit')}
+            data-testid={'login__submit'}
             size={'xlarge'}
             loading={loggingIn}
-          />
+          >
+            {t('login-form.submit')}
+          </ZigButton>
 
           <TextButton
             id={'login__signup'}
