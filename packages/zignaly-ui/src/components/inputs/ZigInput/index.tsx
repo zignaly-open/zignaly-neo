@@ -6,9 +6,13 @@ import { TextField } from "@mui/material";
 import TextButton from "../TextButton";
 
 const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
-  ({ error, wide, labelAction, helperText, ...props }) => (
+  ({ error, wide, labelAction, testId, helperText, ...props }) => (
     <TextField
       {...props}
+      inputProps={{
+        ...(props.inputProps || {}),
+        "data-testid": testId,
+      }}
       label={
         <>
           {props.label}
@@ -30,7 +34,10 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
           ? error && <ErrorMessage text={error} />
           : helperText
       }
-      InputProps={{ disableUnderline: true, ...(props.InputProps || {}) }}
+      InputProps={{
+        disableUnderline: true,
+        ...(props.InputProps || {}),
+      }}
       InputLabelProps={{ shrink: true, ...(props.InputLabelProps || {}) }}
     />
   ),

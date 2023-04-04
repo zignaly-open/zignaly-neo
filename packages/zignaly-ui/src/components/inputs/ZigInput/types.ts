@@ -10,6 +10,7 @@ export type LabelActionProps = {
 
 export type ZigInputProps = Omit<FilledTextFieldProps, "variant" | "error"> & {
   labelAction?: LabelActionProps;
+  testId?: string;
   wide?: boolean;
   error?: boolean | string;
 };
