@@ -1,6 +1,6 @@
-import { Grid, Paper, styled } from '@mui/material';
+import { InfoOutlined } from '@mui/icons-material';
+import { Box, Grid, Paper, styled } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
-import Box from '@mui/system/Box/Box';
 
 export const TotalBoxBox = styled(Paper)`
   width: 250px;
@@ -114,4 +114,100 @@ export const ShareIconsContainer = styled(Box)`
       fill: #7682f7;
     }
   }
+`;
+
+export const TierBox = styled(Box)`
+  padding: 0 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 7px;
+  background-color: ${({ theme }) => theme.palette.neutral600}4d;
+  border: 1px solid ${({ theme }) => theme.palette.neutral700};
+  margin-left: 60px;
+`;
+
+export const BoostBox = styled(Box)`
+  display: flex;
+  justify-content: center;
+  margin: 10px 0 18px;
+  padding: 6px 16px 6.5px 22px;
+  border-radius: 5px;
+  background-color: ${({ theme }) => theme.palette.greenGraph}1a;
+
+  .MuiTypography-root {
+    color: rgba(38, 196, 150, 0.9);
+    margin-right: 10px;
+    font-weight: 500;
+  }
+`;
+
+export const TierBarContainer = styled(Box)`
+  width: 46px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  background-image: linear-gradient(to top, #12213bb3, rgba(33, 81, 78, 0.48));
+  margin: 0 10px;
+  position: relative;
+  padding-top: 4px;
+  overflow: hidden;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 4px;
+    padding: 2px;
+    background: none;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    background: linear-gradient(to top, #15192f, #009179);
+  }
+`;
+
+export const TierArrow = styled('div')`
+  position: relative;
+  width: 30px;
+  height: 100%;
+  margin-top: 8px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid rgba(33, 81, 78, 0.69);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 15px;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 14px;
+    background-image: linear-gradient(to top, #111a30, rgba(33, 81, 78, 0.69));
+  }
+`;
+
+export const TooltipIcon = styled(InfoOutlined)`
+  width: 12px;
+  height: 12px;
+  color: #65647e;
+  margin: 0 0 5px 4px;
 `;

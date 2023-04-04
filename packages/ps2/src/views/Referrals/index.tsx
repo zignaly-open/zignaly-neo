@@ -4,6 +4,7 @@ import { useTitle } from 'react-use';
 import {
   useReferralHistoryQuery,
   useReferralRewardsQuery,
+  useTierLevelsQuery,
 } from '../../apis/referrals/api';
 import { Box, Grid } from '@mui/material';
 import {
@@ -11,6 +12,7 @@ import {
   dark,
   InputText,
   PageContainer,
+  TextButton,
   ZigButton,
   ZigPriceLabel,
   ZigTypography,
@@ -26,12 +28,20 @@ import {
   ROUTE_REFERRALS_INVITE_SHORT,
 } from '../../routes';
 import { TotalBox } from './atoms';
-import { ReferralHistory, ReferralRewards } from '../../apis/referrals/types';
+import {
+  ReferralHistory,
+  ReferralRewards,
+  TierLevels,
+} from '../../apis/referrals/types';
 import ReferralTable from './components/ReferralTable';
 import ReferralRewardsList from './components/ReferralRewardsList';
 import ReferralSuccessStep from './components/ReferralSuccessStep';
 import { useZModal } from 'components/ZModal/use';
 import ReferralInviteModal from './components/ReferralInviteModal';
+import { BoostBox, TierBox } from './styles';
+import { ReactComponent as BoltIcon } from 'images/referrals/bolt.svg';
+import { ChevronRight } from '@mui/icons-material';
+import TiersModal from './components/TiersModal';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -40,6 +50,7 @@ const Referrals: React.FC = () => {
   const { refCode } = useCurrentUser();
   const toast = useToast();
   const { showModal } = useZModal();
+  const tiers = useTierLevelsQuery();
 
   useTitle(t('pages:referrals'));
 
@@ -60,10 +71,11 @@ const Referrals: React.FC = () => {
   return (
     <PageContainer style={{ maxWidth: '1200px' }}>
       <LayoutContentWrapper
-        endpoint={[rewards, history]}
-        content={([rewardsData, referrals]: [
+        endpoint={[rewards, history, tiers]}
+        content={([rewardsData, referrals, tiersLevels]: [
           ReferralRewards,
           ReferralHistory,
+          TierLevels,
         ]) => (
           <>
             <Box
@@ -156,6 +168,40 @@ const Referrals: React.FC = () => {
                   </ZigButton>
                 </Box>
               </Box>
+              <TierBox>
+                <ZigTypography
+                  color='neutral100'
+                  variant='body2'
+                  fontWeight={500}
+                >
+                  {t('my-tier')}
+                </ZigTypography>
+                <BoostBox>
+                  <ZigTypography>
+                    {/* eslint-disable-next-line i18next/no-literal-string */}
+                    {rewardsData.tierLevelFactor}x {t('boost')}
+                  </ZigTypography>
+                  <BoltIcon width={10} height={19} />
+                </BoostBox>
+                <ZigTypography variant='body2' fontWeight={500}>
+                  {t('hold-zig')}
+                </ZigTypography>
+                <TextButton
+                  rightElement={<ChevronRight sx={{ color: 'links' }} />}
+                  caption={t('view-tiers')}
+                  onClick={() =>
+                    showModal(TiersModal, {
+                      tiers: tiersLevels,
+                      rewards: {
+                        ...rewardsData,
+                        tierLevelId: 5,
+                        zigBalance: 2000000,
+                        usdtAum: 100000,
+                      },
+                    })
+                  }
+                />
+              </TierBox>
             </Box>
 
             <ReferralRewardsList rewards={rewardsData} />

@@ -4,6 +4,8 @@ import {
   ReferralHistory,
   Benefit,
   BenefitClaimed,
+  ReferralData,
+  TierLevels,
 } from './types';
 import baseQuery from '../baseQuery';
 
@@ -32,6 +34,11 @@ export const api = createApi({
         url: 'v1/referrer/history',
       }),
     }),
+    tierLevels: builder.query<TierLevels, void>({
+      query: () => ({
+        url: 'v1/tier-levels',
+      }),
+    }),
   }),
 });
 
@@ -40,4 +47,5 @@ export const {
   useBenefitsQuery,
   useReferralHistoryQuery,
   useReferralRewardsQuery,
+  useTierLevelsQuery,
 } = api;

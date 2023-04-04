@@ -112,12 +112,26 @@
         "invite-text-trader": "Let's earn together! Join me at Zignaly and create your own Crypto Fund!",
         "scan-join": "Scan the QR code and join me on <0>app.zignaly.com</0>",
         "invite-code": "Code: <0>{{code}}</0>",
-
         "ugly-friend-cta": "Get a <0>${{reward}}</0> fee Voucher on your first deposit",
         "ugly-trader-cta": "Become a Crypto <0>Fund Manager</0> at Zignaly!"
     },
     "share": {
         "email-subject": "Zignaly, a new way to trade",
         "facebook-hashtags": "#crypto #trading"
-    }
+    },
+    "boost-title": "Boost Your Earnings By Holding ZIG",
+    "boost-desc": "When you hold ZIG tokens you’ll earn a higher percentage of the success fees of the traders you invited. The more you hold, the more you earn.",
+    "my-tier": "My Tier",
+    "hold-zig": "Hold ZIG to Earn More!",
+    "view-tiers": "View tiers",
+    "boost": "Boost",
+    "zig-held": "ZIG held:",
+    "zig-held-tooltip": "Amount of ZIGs that you have in your ZIG Wallet in Zignaly",
+    "AUM": "AUM:",
+    "AUM-tooltip": "Amount invested in Profit Sharing by you and all your invited friends to Zignaly",
+    "or": "or",
+    "boost-tiers": "ZIG Boost Tiers",
+    "to-next-boost": "to next boost",
+    "current-tier": "Current Tier",
+    "next-tier": "Next Tier"
 }
