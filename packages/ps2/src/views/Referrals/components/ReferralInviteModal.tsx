@@ -177,7 +177,7 @@ const ReferralInviteModal: React.FC<
             </TelegramShareButton>
             <FacebookShareButton
               id={'create-invite__facebook'}
-              quote={t('share.facebook-title')}
+              quote={text}
               url={url}
             >
               <FacebookIcon />
