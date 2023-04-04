@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Meta, Story } from "@storybook/react";
 import ZigButton, { ZigButtonProps } from "./index";
-import { ButtonGroup } from "@mui/material";
+import { ButtonGroup, ButtonGroupProps } from "@mui/material";
 
 export default {
   title: "Inputs/ZigButton",
@@ -44,7 +44,7 @@ Default.args = {
 const TemplateGroup: Story<ZigButtonProps> = ({ size, ...args }) => {
   const [value, setValue] = useState<number>(1);
   return (
-    <ButtonGroup variant="outlined" size={size}>
+    <ButtonGroup variant="outlined" size={size as ButtonGroupProps["size"]}>
       <ZigButton active={value === 1} onClick={() => setValue(1)} variant="outlined" {...args} />
       <ZigButton active={value === 2} onClick={() => setValue(2)} variant="outlined" {...args} />
       <ZigButton active={value === 3} onClick={() => setValue(3)} variant="outlined" {...args} />
