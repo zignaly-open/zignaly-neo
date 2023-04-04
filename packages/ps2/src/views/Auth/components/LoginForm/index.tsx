@@ -61,6 +61,7 @@ const LoginForm: React.FC = () => {
           render={({ field }) => (
             <ZigInput
               id={'login__username'}
+              testId={'login__username'}
               label={t('login-form.inputText.email.label') + ':'}
               placeholder={t('login-form.inputText.email.label')}
               disabled={loggingIn}
@@ -83,6 +84,7 @@ const LoginForm: React.FC = () => {
                 onClick: () => navigate(ROUTE_FORGOT_PASSWORD),
                 id: 'login__forgot-password',
               }}
+              testId={'login__password'}
               label={t('login-form.inputText.password.label') + ':'}
               placeholder={t('login-form.inputText.password.label')}
               disabled={loggingIn}
