@@ -16,6 +16,11 @@
     "lint": "run-s lint:tsc lint:eslint",
     "lint-ci": "run-s lint:tsc lint:eslint-ci"
   },
+  "jest": {
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!lodash-es|react-markdown|react-image-webp)"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -92,12 +97,14 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
     "@types/lodash": "^4.14.182",
     "@types/react": "^17",
     "@zignaly-open/eslint-config-zignaly-react": "^0.1.2",
     "eslint": "^8.16.0",
     "eslint-loader": "^4.0.2",
     "lint-staged": "^13.0.3",
+    "lodash": "^4.17.21",
     "prettier": "^2.7.1",
     "webpack": "^5.73.0"
   }
