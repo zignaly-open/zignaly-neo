@@ -36,18 +36,35 @@ export const TierBoost = ({
   const { t } = useTranslation('referrals');
 
   return (
-    <Box display='flex' flexDirection='column'>
+    <Box display='flex' flexDirection='column' minWidth='144px'>
       <ZigTypography color='neutral300' variant='body2'>
         {label}
       </ZigTypography>
       <Box display='flex' gap={1} alignItems='center' mt='5px'>
-        <BoltIcon width={9.5} height={18} />
-        <ZigTypography color='greenGraph' variant='body2' fontWeight={500}>
-          {value}x {t('boost')}
-        </ZigTypography>
-        <ZigTypography variant='body2' fontWeight={500}>
-          ({Number(5 * value).toFixed(2)}%)
-        </ZigTypography>
+        {value ? (
+          <>
+            <BoltIcon width={9.5} height={18} />
+            <ZigTypography
+              color='greenGraph'
+              variant='body2'
+              fontWeight={500}
+              whiteSpace='nowrap'
+            >
+              {value}x {t('boost')}
+            </ZigTypography>
+            <ZigTypography variant='body2' fontWeight={500}>
+              ({Number(5 * value).toFixed(2)}%)
+            </ZigTypography>
+          </>
+        ) : (
+          <ZigTypography
+            variant='body2'
+            fontWeight={500}
+            sx={{ margin: '0 auto' }}
+          >
+            -
+          </ZigTypography>
+        )}
       </Box>
     </Box>
   );

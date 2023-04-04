@@ -192,12 +192,7 @@ const Referrals: React.FC = () => {
                   onClick={() =>
                     showModal(TiersModal, {
                       tiers: tiersLevels,
-                      rewards: {
-                        ...rewardsData,
-                        tierLevelId: 5,
-                        zigBalance: 2000000,
-                        usdtAum: 100000,
-                      },
+                      rewards: rewardsData,
                     })
                   }
                 />
