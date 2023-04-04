@@ -74,6 +74,7 @@ const InvestingStep: React.FC<{ step: number }> = ({ step }) => {
                 sx={{
                   width: '13px',
                   height: '13px',
+                  mb: '-2px',
                   color: 'links',
                 }}
               />
