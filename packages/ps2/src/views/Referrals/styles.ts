@@ -117,7 +117,7 @@ export const ShareIconsContainer = styled(Box)`
 `;
 
 export const TierBox = styled(Box)`
-  padding: 0 34px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -144,7 +144,6 @@ export const BoostBox = styled(Box)`
 `;
 
 export const TierBarContainer = styled(Box)`
-  width: 46px;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -154,6 +153,13 @@ export const TierBarContainer = styled(Box)`
   position: relative;
   padding-top: 4px;
   overflow: hidden;
+
+  svg {
+    height: 12px;
+    min-height: 12px;
+    width: 7.5px;
+    min-width: 7.5px;
+  }
 
   &:before {
     content: '';
@@ -210,4 +216,16 @@ export const TooltipIcon = styled(InfoOutlined)`
   height: 12px;
   color: #65647e;
   margin: 0 0 5px 4px;
+`;
+
+export const TierBarStyle = styled('div')`
+  .MuiTypography-root {
+    font-size: 8.5px;
+    line-height: 15px;
+  }
+
+  && svg {
+    height: 10px;
+    min-height: 10px;
+  }
 `;

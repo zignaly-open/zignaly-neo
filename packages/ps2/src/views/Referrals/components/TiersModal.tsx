@@ -1,6 +1,6 @@
 /* eslint-disable i18next/no-literal-string */
 import { Box, LinearProgress, Tooltip } from '@mui/material';
-import { ZignalyLogo, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZignalyLogo, ZigTypography } from '@zignaly-open/ui';
 import { TierLevels, ReferralRewards } from 'apis/referrals/types';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
@@ -11,11 +11,16 @@ import { TooltipIcon } from '../styles';
 import TierBar from './TierBar';
 import { TierBoost } from '../atoms';
 import { numericFormatter } from 'react-number-format';
+import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
+import { isValid } from 'date-fns';
+import { useZModal } from 'components/ZModal/use';
+import BuyZigModal from 'views/Wallet/modals/BuyZigModal';
 
 const TiersModal: React.FC<
   ZDialogProps & { tiers: TierLevels; rewards: ReferralRewards }
-> = ({ tiers, rewards, ...props }) => {
+> = ({ tiers, rewards, close, ...props }) => {
   const { t } = useTranslation(['referrals', 'pages']);
+  const { showModal } = useZModal();
 
   const currentLevelIndex = tiers.findIndex(
     (tier) => tier.id === rewards.tierLevelId,
@@ -75,6 +80,7 @@ const TiersModal: React.FC<
           <TierBoost
             label={t('current-tier')}
             value={currentLevel.tierLevelFactor}
+            traderRebateFee={rewards.configuration.traderRebateFee}
           />
           <LinearProgress
             sx={{
@@ -87,6 +93,7 @@ const TiersModal: React.FC<
           <TierBoost
             label={t('next-tier')}
             value={nextLevel?.tierLevelFactor}
+            traderRebateFee={rewards.configuration.traderRebateFee}
           />
         </Box>
 
@@ -168,6 +175,28 @@ const TiersModal: React.FC<
             ))}
           </Box>
         </Box>
+        <ModalActionsNew>
+          <ZigButton
+            id={'tiers__buy'}
+            variant='contained'
+            size='large'
+            onClick={() => {
+              showModal(BuyZigModal, {
+                ctaId: 'tiers-buy-zig',
+              });
+            }}
+          >
+            {t('buy-zig')}
+          </ZigButton>
+          <ZigButton
+            onClick={close}
+            variant='outlined'
+            size='large'
+            id={'tiers__cancel'}
+          >
+            {t('action:close')}
+          </ZigButton>
+        </ModalActionsNew>
       </Box>
     </ZModal>
   );

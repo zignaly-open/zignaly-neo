@@ -8,28 +8,29 @@ const TierBar = ({
   tier,
   max,
   min,
+  minHeight = 45,
+  maxHeight = 200,
+  width = 46,
+  showArrow = true,
 }: {
   tier: TierLevel;
   min: number;
   max: number;
+  minHeight?: number;
+  maxHeight?: number;
+  width?: number;
+  showArrow?: boolean;
 }) => {
-  const minHeight = 45;
-  const maxHeight = 200;
-
   const height =
     minHeight +
     ((tier.tierLevelFactor - min) / (max - min)) * (maxHeight - minHeight);
 
   return (
-    <TierBarContainer height={height}>
+    <TierBarContainer width={width} height={height}>
       {/* eslint-disable-next-line i18next/no-literal-string */}
       <ZigTypography color='greenGraph'>{tier.tierLevelFactor}x</ZigTypography>
-      <BoltIcon
-        style={{ minWidth: '7px', minHeight: '12.5px' }}
-        width={7}
-        height={12.5}
-      />
-      <TierArrow />
+      <BoltIcon />
+      {showArrow && <TierArrow />}
     </TierBarContainer>
   );
 };

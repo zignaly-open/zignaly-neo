@@ -29,9 +29,11 @@ export const GetWhatYouDeserveBox: React.FC<{
 export const TierBoost = ({
   label,
   value,
+  traderRebateFee,
 }: {
   label: string;
   value: number;
+  traderRebateFee: number;
 }) => {
   const { t } = useTranslation('referrals');
 
@@ -53,7 +55,7 @@ export const TierBoost = ({
               {value}x {t('boost')}
             </ZigTypography>
             <ZigTypography variant='body2' fontWeight={500}>
-              ({Number(5 * value).toFixed(2)}%)
+              ({Number(traderRebateFee * value).toFixed(2)}%)
             </ZigTypography>
           </>
         ) : (

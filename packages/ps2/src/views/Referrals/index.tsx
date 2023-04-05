@@ -14,6 +14,7 @@ import {
   PageContainer,
   TextButton,
   ZigButton,
+  ZignalyLogo,
   ZigPriceLabel,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -38,10 +39,12 @@ import ReferralRewardsList from './components/ReferralRewardsList';
 import ReferralSuccessStep from './components/ReferralSuccessStep';
 import { useZModal } from 'components/ZModal/use';
 import ReferralInviteModal from './components/ReferralInviteModal';
-import { BoostBox, TierBox } from './styles';
+import { BoostBox, TierBarStyle, TierBox } from './styles';
 import { ReactComponent as BoltIcon } from 'images/referrals/bolt.svg';
 import { ChevronRight } from '@mui/icons-material';
 import TiersModal from './components/TiersModal';
+import TierBar from './components/TierBar';
+import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
@@ -76,206 +79,261 @@ const Referrals: React.FC = () => {
           ReferralRewards,
           ReferralHistory,
           TierLevels,
-        ]) => (
-          <>
-            <Box
-              sx={{
-                mt: 5,
-                justifyContent: 'center',
-                mb: 6,
-                display: 'flex',
-                flexDirection: 'row',
-              }}
-            >
-              <Box
-                sx={{
-                  mr: 4,
-                  ml: 4,
-                  display: 'flex',
-                  alignItems: 'center',
-                }}
-              >
-                <img
-                  src={'/images/referrals/envelope-main.png'}
-                  style={{ width: 200, marginTop: 17 }}
-                  alt={'referral'}
-                />
-              </Box>
-              <Box
-                sx={{
-                  flex: 1,
-                  maxWidth: 700,
-                  justifyContent: 'center',
-                  display: 'flex',
-                  flexDirection: 'column',
-                }}
-              >
-                <ZigTypography
-                  sx={{
-                    mb: 1,
-                  }}
-                  variant={'bigNumber'}
-                >
-                  {t('title')}
-                </ZigTypography>
+        ]) => {
+          const tiersSubset = tiersLevels.slice(1, 5);
 
+          return (
+            <>
+              <Box
+                sx={{
+                  mt: 5,
+                  justifyContent: 'center',
+                  mb: 6,
+                  display: 'flex',
+                  flexDirection: 'row',
+                }}
+              >
                 <Box
                   sx={{
+                    mr: 4,
+                    ml: 4,
                     display: 'flex',
-                    flexDirection: 'row',
-                    alignItems: 'flex-end',
+                    alignItems: 'center',
                   }}
                 >
-                  <Box sx={{ flex: 1 }}>
-                    <InputText
-                      readOnly={true}
-                      value={link}
-                      rightSideElement={
-                        <CloneIcon
-                          id='referrals__copy-link'
-                          width={40}
-                          height={40}
-                          color={dark.neutral300}
-                        />
-                      }
-                      onClickRightSideElement={() => {
-                        copy(link);
-                        toast.success(t('action:copied'));
+                  <img
+                    src={'/images/referrals/envelope-main.png'}
+                    style={{ width: 200, marginTop: 17 }}
+                    alt={'referral'}
+                  />
+                </Box>
+                <Box
+                  sx={{
+                    flex: 1,
+                    maxWidth: 700,
+                    justifyContent: 'center',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <ZigTypography
+                    sx={{
+                      mb: 1,
+                    }}
+                    variant={'bigNumber'}
+                  >
+                    {t('title')}
+                  </ZigTypography>
+
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      alignItems: 'flex-end',
+                    }}
+                  >
+                    <Box sx={{ flex: 1 }}>
+                      <InputText
+                        readOnly={true}
+                        value={link}
+                        rightSideElement={
+                          <CloneIcon
+                            id='referrals__copy-link'
+                            width={40}
+                            height={40}
+                            color={dark.neutral300}
+                          />
+                        }
+                        onClickRightSideElement={() => {
+                          copy(link);
+                          toast.success(t('action:copied'));
+                        }}
+                      />
+                    </Box>
+                    <ZigButton
+                      variant={'contained'}
+                      id='referrals__open-invite-image-modal'
+                      size={'large'}
+                      sx={{
+                        mb: '10px',
+                        height: '66px',
+                        ml: 1,
+                        fontSize: '16px',
+                        textTransform: 'uppercase',
                       }}
-                    />
+                      onClick={openInviteModal}
+                    >
+                      <img
+                        src={'/images/referrals/qrcode.svg'}
+                        width='16'
+                        height='16'
+                        style={{ marginRight: 10 }}
+                        alt={''}
+                      />
+                      {t('create-invite.create-invite')}
+                    </ZigButton>
+                  </Box>
+                </Box>
+                <TierBox>
+                  <ZigTypography
+                    color='neutral100'
+                    variant='body2'
+                    fontWeight={500}
+                  >
+                    {t('my-tier')}
+                  </ZigTypography>
+                  <BoostBox>
+                    <ZigTypography>
+                      {/* eslint-disable-next-line i18next/no-literal-string */}
+                      {rewardsData.tierLevelFactor}x {t('boost')}
+                    </ZigTypography>
+                    <BoltIcon width={10} height={19} />
+                  </BoostBox>
+                  <ZigTypography variant='body2' fontWeight={500}>
+                    {t('hold-zig')}
+                  </ZigTypography>
+                  <Box display='flex' mt={1} mb={-0.5}>
+                    {tiersSubset.map((tier) => (
+                      <Box
+                        key={tier.id}
+                        display='flex'
+                        flexDirection='column'
+                        justifyContent='flex-end'
+                      >
+                        <TierBarStyle>
+                          <TierBar
+                            tier={tier}
+                            min={tiersSubset[0].tierLevelFactor}
+                            max={
+                              tiersSubset[tiersSubset.length - 1]
+                                .tierLevelFactor
+                            }
+                            maxHeight={58}
+                            minHeight={30}
+                            showArrow={false}
+                            width={26}
+                          />
+                        </TierBarStyle>
+                        <Box
+                          display='flex'
+                          alignItems='center'
+                          gap={0.5}
+                          justifyContent='center'
+                          mt={0.25}
+                          mb={0.5}
+                        >
+                          <ZignalyLogo style={{ width: '8.5px' }} />
+                          <ZigTypography
+                            color='neutral400'
+                            fontSize={10}
+                            fontWeight={500}
+                          >
+                            {formatCompactNumber(tier.minZig)}
+                          </ZigTypography>
+                        </Box>
+                      </Box>
+                    ))}
                   </Box>
                   <ZigButton
-                    variant={'contained'}
-                    id='referrals__open-invite-image-modal'
+                    variant='text'
                     size={'large'}
                     sx={{
-                      mb: '10px',
-                      height: '66px',
-                      ml: 1,
-                      fontSize: '16px',
-                      textTransform: 'uppercase',
+                      color: (theme) => theme.palette.greenGraph,
+                      mb: -1.25,
+                      fontSize: '12px',
+                      minHeight: 'auto',
                     }}
-                    onClick={openInviteModal}
+                    onClick={() =>
+                      showModal(TiersModal, {
+                        tiers: tiersLevels,
+                        rewards: rewardsData,
+                      })
+                    }
                   >
-                    <img
-                      src={'/images/referrals/qrcode.svg'}
-                      width='16'
-                      height='16'
-                      style={{ marginRight: 10 }}
-                      alt={''}
-                    />
-                    {t('create-invite.create-invite')}
+                    {t('view-tiers')}
+                    <ChevronRight sx={{ mr: -1 }} />
                   </ZigButton>
-                </Box>
+                </TierBox>
               </Box>
-              <TierBox>
-                <ZigTypography
-                  color='neutral100'
-                  variant='body2'
-                  fontWeight={500}
-                >
-                  {t('my-tier')}
-                </ZigTypography>
-                <BoostBox>
-                  <ZigTypography>
-                    {/* eslint-disable-next-line i18next/no-literal-string */}
-                    {rewardsData.tierLevelFactor}x {t('boost')}
+
+              <ReferralRewardsList rewards={rewardsData} />
+
+              {!rewardsData.invitedCount ? (
+                <>
+                  <ZigTypography
+                    align={'center'}
+                    variant={'h1'}
+                    sx={{ mt: 7, mb: 5 }}
+                  >
+                    {t('how-to-earn')}
                   </ZigTypography>
-                  <BoltIcon width={10} height={19} />
-                </BoostBox>
-                <ZigTypography variant='body2' fontWeight={500}>
-                  {t('hold-zig')}
-                </ZigTypography>
-                <TextButton
-                  rightElement={<ChevronRight sx={{ color: 'links' }} />}
-                  caption={t('view-tiers')}
-                  onClick={() =>
-                    showModal(TiersModal, {
-                      tiers: tiersLevels,
-                      rewards: rewardsData,
-                    })
-                  }
-                />
-              </TierBox>
-            </Box>
 
-            <ReferralRewardsList rewards={rewardsData} />
-
-            {!rewardsData.invitedCount ? (
-              <>
-                <ZigTypography
-                  align={'center'}
-                  variant={'h1'}
-                  sx={{ mt: 7, mb: 5 }}
-                >
-                  {t('how-to-earn')}
-                </ZigTypography>
-
-                <Grid container sx={{ mb: 8 }}>
-                  <Grid item xs={12} md={4}>
-                    <ReferralSuccessStep step={1} link={link} />
+                  <Grid container sx={{ mb: 8 }}>
+                    <Grid item xs={12} md={4}>
+                      <ReferralSuccessStep step={1} link={link} />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <ReferralSuccessStep step={2} />
+                    </Grid>
+                    <Grid item xs={12} md={4}>
+                      <ReferralSuccessStep step={3} />
+                    </Grid>
                   </Grid>
-                  <Grid item xs={12} md={4}>
-                    <ReferralSuccessStep step={2} />
-                  </Grid>
-                  <Grid item xs={12} md={4}>
-                    <ReferralSuccessStep step={3} />
-                  </Grid>
-                </Grid>
-              </>
-            ) : (
-              <>
-                <ZigTypography align={'center'} variant={'h1'} sx={{ mt: 7 }}>
-                  {t('my-referrals')}
-                </ZigTypography>
+                </>
+              ) : (
+                <>
+                  <ZigTypography align={'center'} variant={'h1'} sx={{ mt: 7 }}>
+                    {t('my-referrals')}
+                  </ZigTypography>
 
-                <Box
-                  sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-evenly',
-                    pt: 5,
-                    pb: 5,
-                  }}
-                >
-                  <TotalBox
-                    label={t('total-invitees')}
-                    value={
-                      <ZigTypography color={'neutral175'}>
-                        {rewardsData.invitedCount} <GroupIcon />
-                      </ZigTypography>
-                    }
-                  />
-                  <TotalBox
-                    label={t('total-rewards')}
-                    value={
-                      <ZigPriceLabel
-                        color={'greenGraph'}
-                        usd
-                        showTooltip
-                        variant={'bigNumber'}
-                        value={rewardsData.usdtEarned}
-                      />
-                    }
-                  />
-                  <TotalBox
-                    label={t('pending-rewards')}
-                    value={
-                      <ZigPriceLabel
-                        color={'yellow'}
-                        usd
-                        showTooltip
-                        variant={'bigNumber'}
-                        value={rewardsData.usdtPending}
-                      />
-                    }
-                  />
-                </Box>
-              </>
-            )}
-            <ReferralTable referrals={referrals.history} />
-          </>
-        )}
+                  <Box
+                    sx={{
+                      display: 'flex',
+                      flexDirection: 'row',
+                      justifyContent: 'space-evenly',
+                      pt: 5,
+                      pb: 5,
+                    }}
+                  >
+                    <TotalBox
+                      label={t('total-invitees')}
+                      value={
+                        <ZigTypography color={'neutral175'}>
+                          {rewardsData.invitedCount} <GroupIcon />
+                        </ZigTypography>
+                      }
+                    />
+                    <TotalBox
+                      label={t('total-rewards')}
+                      value={
+                        <ZigPriceLabel
+                          color={'greenGraph'}
+                          usd
+                          showTooltip
+                          variant={'bigNumber'}
+                          value={rewardsData.usdtEarned}
+                        />
+                      }
+                    />
+                    <TotalBox
+                      label={t('pending-rewards')}
+                      value={
+                        <ZigPriceLabel
+                          color={'yellow'}
+                          usd
+                          showTooltip
+                          variant={'bigNumber'}
+                          value={rewardsData.usdtPending}
+                        />
+                      }
+                    />
+                  </Box>
+                </>
+              )}
+              <ReferralTable referrals={referrals.history} />
+            </>
+          );
+        }}
       />
     </PageContainer>
   );
