@@ -160,29 +160,31 @@ const MyDashboard: React.FC = () => {
 
   return (
     <Layout>
-      {investmentsEndpoint?.currentData?.length ? (
-        <>
-          <Heading>
-            <ZigTypography variant='h1'>{t('title')}</ZigTypography>
-          </Heading>
-          <LayoutContentWrapper
-            endpoint={investmentsEndpoint}
-            content={(services: Investment[]) => (
-              <ZigTableWrapper>
-                <ZigTable
-                  prefixId={'dashboard'}
-                  columns={columns}
-                  data={services}
-                  emptyMessage={t('table-search-emptyMessage')}
-                  columnVisibility
-                />
-              </ZigTableWrapper>
-            )}
-          />
-        </>
-      ) : (
-        <InvestingLayout />
-      )}
+      <>
+        <LayoutContentWrapper
+          endpoint={investmentsEndpoint}
+          content={(services: Investment[]) =>
+            investmentsEndpoint?.currentData?.length ? (
+              <>
+                <Heading>
+                  <ZigTypography variant='h1'>{t('title')}</ZigTypography>
+                </Heading>
+                <ZigTableWrapper>
+                  <ZigTable
+                    prefixId={'dashboard'}
+                    columns={columns}
+                    data={services}
+                    emptyMessage={t('table-search-emptyMessage')}
+                    columnVisibility
+                  />
+                </ZigTableWrapper>
+              </>
+            ) : (
+              <InvestingLayout />
+            )
+          }
+        />
+      </>
     </Layout>
   );
 };
