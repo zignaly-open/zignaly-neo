@@ -5,16 +5,11 @@ import '@testing-library/jest-dom';
 import LoginForm from '.';
 import { renderWithProviders } from '../../../../util/test';
 
-// jest.mock('../../../../apis/user/use', () => ({
-//   // this mock makes sure any components using the translate hook can use it without a warning being shown
-//   useAuthenticate: () => {
-//     return [{ loading: false }, (data) => Promise.resolve(true)];
-//   },
-// }));
+const email = 'alex@xfuturum.com';
+const password = 'alex@xfuturum.com';
 
 test('basic email validation should work', async () => {
   renderWithProviders(<LoginForm />);
-  const email = 'alex@xfuturum.com';
   fireEvent.blur(screen.getByTestId('login__username'));
   await waitFor(() => {
     expect(screen.getAllByText('error:error.required').length).toBe(1);
@@ -37,11 +32,19 @@ test('different validation behavior on revalidate', async () => {
     expect(screen.getAllByText('error:error.required').length).toBe(2);
   });
 
-  const email = 'alex@xfuturum.com';
   await userEvent.type(screen.getByTestId('login__username'), email);
   // we should have 2 here because we have revalidation onBlur
   // the next test case verifies this
   await waitFor(() => {
     expect(screen.getAllByText('error:error.required').length).toBe(2);
+  });
+});
+test('process signup', async () => {
+  renderWithProviders(<LoginForm />);
+  await userEvent.type(screen.getByTestId('login__username'), email);
+  await userEvent.type(screen.getByTestId('login__password'), password);
+  await userEvent.click(screen.getByTestId('login__submit'));
+  await waitFor(() => {
+    expect(screen.getByTestId('auth-verify-modal__title')).toBeInTheDocument();
   });
 });

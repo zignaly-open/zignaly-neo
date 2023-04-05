@@ -69,6 +69,7 @@
     "i18next-http-backend": "^1.4.1",
     "js-cookie": "^3.0.1",
     "lodash-es": "^4.17.21",
+    "msw": "^1.2.1",
     "mui-modal-provider": "^2.0.0",
     "qrcode.react": "^3.1.0",
     "react": "17.0.2",
@@ -105,6 +106,7 @@
     "eslint-loader": "^4.0.2",
     "lint-staged": "^13.0.3",
     "lodash": "^4.17.21",
+    "msw": "^1.2.1",
     "prettier": "^2.7.1",
     "webpack": "^5.73.0"
   }

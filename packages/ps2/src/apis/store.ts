@@ -7,7 +7,7 @@ import coinReducer from './coin/store';
 import serviceReducer from './service/store';
 import marketplaceReducer from './marketplace/store';
 import walletReducer from './wallet/store';
-import { api as walletApi } from './wallet//api';
+import { api as walletApi } from './wallet/api';
 import referralsReducer from './referrals/store';
 import { api as referralApi } from './referrals/api';
 import storage from 'redux-persist/lib/storage';
