@@ -21,14 +21,17 @@
 	"account-menu": {
 		"isAuth-button-logIn": "Đăng nhập",
 		"isAuth-button-signUp": "ĐĂNG KÝ",
-		"notAuth-dropdown-link-dashboard": "Danh mục đầu tư của tôi",
 		"notAuth-dropdown-link-balances": "Số dư của tôi",
 		"notAuth-button-logOut": "Đăng xuất",
 		"notAuth-dropdown-link-wallet": "Ví ZIG",
 		"referrals": "Giới thiệu",
 		"notAuth-dropdown-link-settings": "Cài đặt",
 		"notAuth-dropdown-link-password": "Mật khẩu",
-		"notAuth-dropdown-link-2fa": "Xác thực hai yếu tố"
+		"notAuth-dropdown-link-2fa": "Xác thực hai yếu tố",
+		"portfolio": "Danh mục đầu tư của tôi",
+		"marketplace": "Thị trường",
+		"balance": "Số dư",
+		"rewards": "Phần thưởng"
 	},
 	"account-selector": {
 		"type": {
@@ -39,7 +42,7 @@
 	},
 	"navigation-menu": {
 		"profit-sharing": "Xem qua các nhà giao dịch hàng đầu",
-		"become-trader": "Tạo dịch vụ của bạn"
+		"become-trader": "Cung cấp dịch vụ giao dịch của bạn"
 	},
 	"amount": "Số lượng",
 	"new-version": "Phiên bản mới, nhấp vào để cập nhật",
@@ -73,5 +76,14 @@
 	"changes-saved": "Đã lưu thay đổi thành công",
 	"name": "Tên",
 	"type-to-confirm": "Nhập \" {{word}} \" để xác nhận",
-	"ok": "OK"
+	"ok": "OK",
+	"balance": {
+		"total": "Tổng",
+		"available": "Available",
+		"deposit-funds": "Nạp tiền",
+		"find-traders": "Tìm nhà giao dịch để đầu tư",
+		"my-portfolio": "Danh mục đầu tư của tôi"
+	},
+	"follow-us": "Theo dõi",
+	"portfolio": "Danh mục đầu tư"
 }

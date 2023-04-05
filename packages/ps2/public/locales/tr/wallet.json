@@ -1,0 +1,105 @@
+{
+	"title": "ZIG Cüzdan",
+	"totalBalance": "Toplam ZIG Bakiyesi",
+	"savings": "Ödüller ve Tasarruflar",
+	"successFee": "Başarım Ücreti indirimi:",
+	"tradingFee": "İşlem ücretleri geri ödemesi:",
+	"successFeeTooltip": "Herhangi bir Profit Sharing (kâr paylaşım) Hizmetinin başarım ücretini ZIG ile ödeyin, ödeme tutarında indirim kazanın.",
+	"tradingFeeTooltip": "Zignaly, USDT cinsinden yeni işlemlerinizin tüm işlem ücretlerini hesabınıza iade edecek ve size eşdeğer tutardan ZIG'deki indirim düşülerek ödeme yapacaktır.",
+	"withdraw": "Çekim",
+	"savingMoney": "ZIG ile TASARRUF EDİYORSUNUZ!",
+	"saveMoney": "ZIG ile TASARRUF EDİN!",
+	"min": "min.",
+	"notAvailable": "Ağ kullanılamıyor, lütfen daha sonra tekrar deneyin",
+	"balance": {
+		"available": "Uygun",
+		"locked": "Kilitlendi",
+		"unstaking": "Stake'ten çıkılıyor",
+		"staked": "Stake edildi"
+	},
+	"transactions": {
+		"internal": "Dahili Transfer",
+		"noData": "İşlem yok",
+		"header": {
+			"date": "Tarih",
+			"type": "Tip",
+			"amount": "Miktar",
+			"coin": "Coin",
+			"network": "Ağ",
+			"status": "Durum"
+		},
+		"walletTransactions": "Cüzdan İşlemleri",
+		"type": {
+			"all": "Tüm İşlemler",
+			"deposit": "Yatır",
+			"internal": "Dahili",
+			"reward": "Ödül",
+			"successfee": "Başarım Ücreti",
+			"coinsalvage": "Koin Kurtarma",
+			"withdraw": "Çekim",
+			"compensation": "Telafi",
+			"payment": "Ödeme",
+			"cashbackvolume": "Hacim Geri Ödemesi",
+			"withdrawfee": "Çekim Ücreti",
+			"zigpadpledge": "ZIGPad Kilidi",
+			"zigpadreturn": "ZIGPad Dönüşü",
+			"zigpadtokensreward": "ZIGPad Token Ödülleri",
+			"stakingvault": "Staking Vault",
+			"stakingvaultreturn": "Staking Vault Dönüşü",
+			"unstakingvault": "Stake'ten çıkış",
+			"buyzig": "ZIG Satın Al",
+			"zigbidsredeemcode": "ZIGBids Kodu",
+			"zigbidsreferralcode": "ZIGBids Referans Kodu"
+		},
+		"status": {
+			"pending": "Bekliyor",
+			"completed": "Tamamlandı",
+			"error": "Hata"
+		},
+		"details": {
+			"from": "Şuradan:",
+			"to": "Şuraya:",
+			"txHash": "TX Hash'i:",
+			"note": "Not:"
+		}
+	},
+	"deposit": {
+		"deposit": "Yatır",
+		"title": "Kripto Yatırma",
+		"description": "{{coin}} jeton yatırmak için ağı seçin ve aşağıdaki adrese gönderin."
+	},
+	"coins": {
+		"header": {
+			"value": "Değer"
+		}
+	},
+	"buy": {
+		"buy": "Satın Alın",
+		"title": "ZIG coin satın alın",
+		"description": "{{max}} {{coin}}'den fazla harcamak istiyorsanız, ZIG'i <0> borsalardan birinden satın alın.<\/0>",
+		"available-exchanges": "kullanılabilir borsalar.",
+		"buy-exchanges": "ZIG'i şu borsalarda satın alabilirsiniz:",
+		"exchangeAccount": "Borsa Hesabı Seçin",
+		"continue": "Doğrulamaya Geçin",
+		"confirm": "ZIG satın almayı onaylayın",
+		"deposit": {
+			"title": "ZIG satın almak için {{coin}} yatırın",
+			"description": "ZIG satın almak için önce Zignaly Borsa Hesabınıza {{coin}} yatırmanız gerekir.",
+			"external": "Harici bir cüzdandan kripto aktarın",
+			"depositCoin": "{{coin}} yatırın",
+			"buyCoin": "{{coin}} satın al",
+			"noCrypto": "Henüz herhangi bir kriptoya sahip değilim",
+			"more": "Daha Fazla {{coin}} Yatırın"
+		},
+		"from": "Şuradan:",
+		"swapFrom": "Takasla verin",
+		"swapTo": "Takasla alın",
+		"success": "Başarıyla {{coin}} satın alındı.",
+		"received": "Gelen miktar",
+		"willReceive": "Ulaşacak meblağ:",
+		"rate": "Oran:",
+		"max": "Maksimum miktar {{amount}} {{coin}} .",
+		"maxLeft": "Kalan miktar {{amount}} {coin}. Bu {{mins}} dakika içinde sıfırlanacaktır.",
+		"buyNow": "Şimdi {{coin}} satın alın"
+	}
+}

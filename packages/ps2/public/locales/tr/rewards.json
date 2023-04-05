@@ -1,0 +1,10 @@
+{
+	"active": "Etkin",
+	"table": {
+		"time-and-date": "Saat ve Tarih",
+		"status": "Durum"
+	},
+	"statusTypes": {
+		"success_fee": "Başarım Ücreti"
+	}
+}
