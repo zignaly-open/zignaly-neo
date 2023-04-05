@@ -21,6 +21,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     invalidatesTags: (result, error, args) => [
       'Balance',
       'Investment',
+      'Marketplace',
       { type: 'Service', id: args.serviceId },
     ],
     query: ({ serviceId, amount, exchangeInternalId }) => ({
@@ -73,6 +74,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       'Balance',
       'Investment',
       { type: 'Service', id: args.serviceId },
+      'Marketplace',
     ],
     query: ({ serviceId, profitPercentage, exchangeInternalId, amount }) => ({
       url: `services/${serviceId}/investments/in`,
@@ -97,6 +99,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     invalidatesTags: (result, error, args) => [
       'Balance',
       'Investment',
+      'Marketplace',
       { type: 'Service', id: args.serviceId },
     ],
     query: ({ serviceId, profitPercentage, exchangeInternalId, amount }) => ({
