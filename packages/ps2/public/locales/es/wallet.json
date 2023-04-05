@@ -1,0 +1,105 @@
+{
+	"title": "Billetera ZIG",
+	"totalBalance": "Saldo Total de ZIG",
+	"savings": "Recompensas & Ahorros",
+	"successFee": "Descuento en success fee:",
+	"tradingFee": "Reembolso de comisiones de trading:",
+	"successFeeTooltip": "Paga el success fee de cualquier servicio de Profit Sharing con ZIG y obtén un descuento en el importe a pagar.",
+	"tradingFeeTooltip": "Zignaly va a devolver todas las comisiones de trading de tus nuevas operaciones en USDT a tu cuenta y te cobrará la cantidad equivalente menos el descuento en ZIG.",
+	"withdraw": "Retirar",
+	"savingMoney": "¡Estás AHORRANDO DINERO con ZIG!",
+	"saveMoney": "¡AHORRA DINERO con ZIG!",
+	"min": "min.",
+	"notAvailable": "Red no disponible, por favor inténtalo más tarde",
+	"balance": {
+		"available": "Disponible",
+		"locked": "Bloqueado",
+		"unstaking": "Unstaking",
+		"staked": "Staked"
+	},
+	"transactions": {
+		"internal": "Transferencia Interna",
+		"noData": "Sin transacciones",
+		"header": {
+			"date": "Fecha",
+			"type": "Tipo",
+			"amount": "Cantidad",
+			"coin": "Moneda",
+			"network": "Red",
+			"status": "Estatus"
+		},
+		"walletTransactions": "Transacciones de la Billetera",
+		"type": {
+			"all": "Todas las Transacciones",
+			"deposit": "Depósito",
+			"internal": "Interna",
+			"reward": "Recomensa",
+			"successfee": "Success Fee",
+			"coinsalvage": "Rescate de Monedas",
+			"withdraw": "Retirar",
+			"compensation": "Compensación",
+			"payment": "Pago",
+			"cashbackvolume": "Volumen de Reembolso",
+			"withdrawfee": "Comisión de Retiro",
+			"zigpadpledge": "Participación ZIGPad",
+			"zigpadreturn": "Rentabilidad ZIGPad",
+			"zigpadtokensreward": "Distribución de Tokens IDO",
+			"stakingvault": "Staking Vault",
+			"stakingvaultreturn": "Ganancia Staking Vault",
+			"unstakingvault": "Unstake",
+			"buyzig": "Comprar ZIG",
+			"zigbidsredeemcode": "Canjear Código de ZIGBids",
+			"zigbidsreferralcode": "Código de referidos de ZIGBids"
+		},
+		"status": {
+			"pending": "Pendiente",
+			"completed": "Completo",
+			"error": "Error"
+		},
+		"details": {
+			"from": "De:",
+			"to": "Para:",
+			"txHash": "TX Hash:",
+			"note": "Notas:"
+		}
+	},
+	"deposit": {
+		"deposit": "Depósito",
+		"title": "Depositar Criptomonedas",
+		"description": "Para depositar {{coin}} tokens, selecciona la red y envíala a la siguiente dirección."
+	},
+	"coins": {
+		"header": {
+			"value": "Valor"
+		}
+	},
+	"buy": {
+		"buy": "Comprar",
+		"title": "Comprar monedas ZIG",
+		"description": "Si quieres gastar más de {{max}} {{coin}}, compra ZIG en uno de los <0>exchanges disponibles.<\/0>",
+		"available-exchanges": "exchanges disponibles.",
+		"buy-exchanges": "Puedes comprar ZIG en estos exchanges:",
+		"exchangeAccount": "Seleccione la Cuenta de Exchange",
+		"continue": "Continuar con la Confirmación",
+		"confirm": "Confirmar compra ZIG",
+		"deposit": {
+			"title": "Deposita {{coin}} para comprar ZIGs",
+			"description": "Para comprar ZIGs primero necesitas depositar {{coin}} en tu Cuenta de Zignaly Exchange.",
+			"external": "Transferir cripto desde una billetera externa",
+			"depositCoin": "Deposita {{coin}}",
+			"buyCoin": "Compra {{coin}}",
+			"noCrypto": "Todavía no tengo ninguna criptomoneda",
+			"more": "Deposita Más {{coin}}"
+		},
+		"from": "De:",
+		"swapFrom": "Cambiar de",
+		"swapTo": "Cambiar a",
+		"success": "Compra de {{coin}} exitosa.",
+		"received": "Cantidad recibida",
+		"willReceive": "Recibirás:",
+		"rate": "Tasa:",
+		"max": "La cantidad máxima es de {{amount}} {{coin}}.",
+		"maxLeft": "La cantidad máxima restante es {{amount}} {coin}. Se reiniciará en {{mins}} minutos.",
+		"buyNow": "Compra {{coin}} Ahora"
+	}
+}

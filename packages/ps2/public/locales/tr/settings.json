@@ -1,0 +1,29 @@
+{
+	"update-password": {
+		"title": "Şifreyi Güncelle",
+		"description": "Zignaly Hesabınızın şifresini güncelleyin.\nGüvenliğiniz için, Şifreyi güncelle seçeneğine tıkladıktan sonra çıkış yapacaksınız.",
+		"current-password": "Mevcut Şifre:",
+		"new-password": "Yeni Parola:",
+		"success": "Şifre başarıyla güncellendi. Lütfen tekrar giriş yapın."
+	},
+	"enable-2fa": {
+		"title": "İki Faktörlü Kimlik Doğrulama (2FA)",
+		"description": "İki faktörlü kimlik doğrulama (2FA) ayarlayarak hesabınızın güvenliğini sağlayın. Halihazırda 2FA en iyi güvenlik uygulaması olarak kabul ediliyor, daha fazla bilgiye buradan <0> ulaşın. <\/0 >",
+		"setup-description": "<0>Google Kimlik Doğrulama Uygulamasını<\/0> indirin ve QR kodunu tarayın veya Anahtar Kelime Grubunu uygulamaya manuel olarak yapıştırın. Güvenlik için 6 haneli kodu girdikten sonra oturumunuz kapatılacaktır.",
+		"enter-code": "Uygulamadan 6 haneli kodu girin:",
+		"enter-code-subtitle": "Her girişte ihtiyacınız olacak.",
+		"key-phrase": "Anahtar Kelime Grubu:",
+		"key-phrase-copied": "Anahtar Kelime Grubu kopyalandı",
+		"key-phrase-info": "Anahtar Kelime Grubu, Google Authenticator'ın kurulu olduğu cihazın kaybolması veya değiştirilmesi durumunda kurtarma işlemli için kullanılır - lütfen 6 basamaklı kodu girmeden önce anahtar kelime grubunu sakladığınızdan emin olun.",
+		"code-2fa": "2FA Kodu",
+		"setup-2fa": "2FA'yı ayarlayın",
+		"enable-2fa": "2FA'yı etkinleştir",
+		"success": "2 Faktör Kimlik Doğrulaması etkinleştirildi. Lütfen tekrar giriş yapın."
+	},
+	"disable-2fa": {
+		"title": "2FA'yı devre dışı bırak",
+		"description": "Hesabınız İki Faktörlü Kimlik Doğrulama (2FA) ile güvence altına alınmıştır. 2FA'yı devre dışı bırakmak için kimlik doğrulayıcı uygulamanızdan kodu girin.",
+		"success": "2FA başarıyla devre dışı bırakıldı.",
+		"security": "Güvenliğiniz için, hesabınızda 2FA'yı etkinleştirmenizi öneririz."
+	}
+}

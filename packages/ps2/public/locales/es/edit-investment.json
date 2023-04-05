@@ -29,14 +29,14 @@
 	},
 	"pendingMajorThan": {
 		"type": "Nueva inversión",
-		"status": "Procesamiento en 24 horas"
+		"status": "Procesando en 24 horas"
 	},
 	"profitOutMajorThan": {
 		"type": "Ganancias",
 		"status": "Esperando la próxima contabilidad"
 	},
 	"transferOutMajorThan": {
-		"type": "Trasferencia",
+		"type": "Retirar",
 		"status": "Esperando la próxima contabilidad"
 	},
 	"pendingTransactions": {
@@ -45,7 +45,7 @@
 		"status_other": "Tienes {{count}} transacciones pendientes",
 		"link-label": "Ver"
 	},
-	"investorDetail-successFee": "{{fee}}% Comisión por Beneficios",
+	"investorDetail-successFee": "{{fee}}% Success Fee",
 	"modal": {
 		"withdrawInvestment": {
 			"title": "Solicitud de Retiro",
@@ -68,7 +68,7 @@
 		}
 	},
 	"modalSuccess": {
-		"title": "Inversión en Proceso (Hasta 24h)",
+		"title": "Procesando Inversión (Hasta 24h)",
 		"description": "Tus fondos se transferirán a la cuenta del servicio en un plazo de 24 horas. Puedes retirar tus fondos en cualquier momento antes de que se realice esta transferencia.",
 		"button": "Cerrar"
 	},

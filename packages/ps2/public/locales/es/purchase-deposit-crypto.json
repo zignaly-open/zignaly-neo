@@ -1,0 +1,10 @@
+{
+	"title": "Deposita {{coin}} para Invertir en este Servicio",
+	"description": "El trader de este servicio está operando con {{coin}}, por lo que debes depositar la misma criptomoneda que está usando el trader para compartir las ganancias. Por favor, deposita {{coin}} en tu cuenta.",
+	"transfer-crypto": "Transferir {{coin}} desde una billetera externa",
+	"buy-crypto": "No tengo ningún {{coin}}",
+	"buttons": {
+		"deposit": "Deposita {{coin}}",
+		"purchase": "Compra {{coin}}"
+	}
+}

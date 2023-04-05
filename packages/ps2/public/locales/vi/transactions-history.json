@@ -1,0 +1,48 @@
+{
+	"tableHeader": {
+		"coin": "Loại tiền",
+		"date": "Ngày",
+		"type": "Loại",
+		"amount": "Số lượng",
+		"transactionId": "ID giao dịch",
+		"from": "From",
+		"to": "To",
+		"status": "Trạng thái"
+	},
+	"type": {
+		"deposit": "Nạp",
+		"withdrawal": "Rút tiền",
+		"psDeposit": "Tiền gửi vào Profit Sharing",
+		"psWithdraw": "Đầu tư giảm",
+		"reward": "Hoa hồng",
+		"ps2": "Chuyển nội bộ PS",
+		"psds": "Rút tiền Profit Sharing ",
+		"buyZig": "Mua Zig",
+		"traderFee": "Phí giao dịch thành công",
+		"user": "Internal Transfer From"
+	},
+	"filter": {
+		"max": "(tối đa 3 tháng qua)",
+		"all": "Tất cả giao dịch"
+	},
+	"status": {
+		"pending": "Chờ",
+		"completed": "Hoàn thành",
+		"error": "Lỗi"
+	},
+	"details": {
+		"from": "Từ:",
+		"to": "Đến:",
+		"txHash": "TX Hash:",
+		"note": "Ghi chú:"
+	},
+	"export": {
+		"title": "Báo cáo lịch sử giao dịch",
+		"description": "Chúng tôi đang tạo một báo cáo bao gồm tất cả các giao dịch kể từ khi tài khoản này được tạo. Chúng tôi sẽ gửi email cho bạn trong vòng 10 phút tiếp theo với các bước để tải xuống báo cáo lịch sử giao dịch của bạn.",
+		"success": "Yêu cầu của bạn đã được xử lý thành công. Vui lòng kiểm tra email của bạn lấy liên kết tải xuống."
+	},
+	"external": "Địa chỉ bên ngoài",
+	"deleted": "Tài khoản Exchange đã xóa",
+	"noData": "Không có giao dịch",
+	"psService": "Dịch vụ Profit Sharing"
+}

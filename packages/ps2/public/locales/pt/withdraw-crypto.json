@@ -1,6 +1,6 @@
 {
 	"title": "Retirar Criptomoedas",
-	"description": "Retirar o cryptomoedas para uma conta externa.",
+	"description": "Retirar as criptomoedas para uma conta externa.",
 	"coinSelector": {
 		"label": "Moeda:",
 		"placeholder": "Pesquisar uma moeda"

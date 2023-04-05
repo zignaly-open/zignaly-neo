@@ -30,5 +30,26 @@
 			"right": "Retirar"
 		}
 	},
-	"tooltip-date": "Estás invirtiendo en este servicio desde {{date}}"
+	"tooltip-date": "Estás invirtiendo en este servicio desde {{date}}",
+	"how-to-invest-steps": {
+		"title": "Cómo invertir",
+		"step-1": {
+			"title": "Elije un Trader Profesional",
+			"description": "Elije al menos uno de nuestros traders profesionales de nuestro <0>marketplace<\/0> que se ajuste a tu estilo de inversión",
+			"time": "Lleva 2 minutos"
+		},
+		"step-2": {
+			"title": "Deposita fondos",
+			"description": "<0>Deposita<\/0> cripto en tu cuenta. Si no tienes criptos, también puedes <1>comprarlos<\/1><2\/>.",
+			"time": "Lleva 3 minutos"
+		},
+		"step-3": {
+			"title": "Invertir (sin mínimo)",
+			"description": "Invierte en los servicios y espera a ver crecer tus beneficios día a día.",
+			"time": "Lleva 2 minutos"
+		},
+		"bottom-title": "Servicios en mi Portafolio",
+		"bottom-description": "Todavía no sigues ningún servicio, invierte en ellos para obtener beneficios.",
+		"start-investing": "Comienza a invertir ahora"
+	}
 }

@@ -17,7 +17,7 @@
 	"balanceSummary-invested": "Investido",
 	"selector-validation-notData": "Não há dados disponíveis",
 	"investColumn": {
-		"successFess": "10% Taxa de Sucesso",
+		"successFess": "10% Success Fee",
 		"liquidated": "LIQUIDADO"
 	},
 	"tooltip-columnHeader": "Alternar ClassificarPor",
