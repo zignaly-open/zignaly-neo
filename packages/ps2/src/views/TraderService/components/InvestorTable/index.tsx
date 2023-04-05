@@ -23,6 +23,7 @@ import {
 import ConnectionStateLabel from '../ConnectionStateLabel';
 import { YesNo } from './atoms';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
+import { Box } from '@mui/material';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -53,10 +54,21 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           header: t('tableHeader.investment'),
           id: 'investment',
           cell: (props) => (
-            <ZigTablePriceLabel
-              coin={service?.ssc ?? 'USDT'}
-              value={props.getValue()}
-            />
+            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+              <ZigTablePriceLabel
+                coin={service?.ssc ?? 'USDT'}
+                value={props.getValue()}
+              />
+              {props.row.original.pending !== '0' && (
+                <ZigTablePriceLabel
+                  prefix={'~'}
+                  variant={'caption'}
+                  coin={service?.ssc ?? 'USDT'}
+                  value={props.row.original.pending}
+                  color={'neutral300'}
+                />
+              )}
+            </Box>
           ),
         },
       ),
