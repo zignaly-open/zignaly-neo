@@ -30,7 +30,7 @@ import {
 } from '../../../../../../apis/user/use';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import { trackCta } from '@zignaly-open/tracker';
-import { PURCHASE_CRYPTO } from '../../../../../../util/constants';
+import { BUY_CRYPTO_URL } from '../../../../../../util/constants';
 
 function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
@@ -316,7 +316,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         )}
         <Grid item xs={12} pt={3}>
           <Typography variant={'body2'} color={'neutral300'}>
-            <Link underline={'hover'} href={PURCHASE_CRYPTO} target={'_blank'}>
+            <Link underline={'hover'} href={BUY_CRYPTO_URL} target={'_blank'}>
               <Box
                 sx={{
                   display: 'flex',

@@ -67,6 +67,7 @@ const Header: React.FC = () => {
               <Drawer />
             )}
             <Box
+              alignItems='center'
               display='flex'
               gap='28px'
               sx={{

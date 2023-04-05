@@ -20,6 +20,7 @@ import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import { useZRouteModal } from '../../../../components/ZModal/use';
 import { differenceInDays } from 'date-fns';
+import InvestingLayout from '../InvestingSteps/InvestingLayout';
 import { ROUTE_DASHBOARD_EDIT_INVESTMENT } from '../../../../routes';
 
 const MyDashboard: React.FC = () => {
@@ -151,23 +152,29 @@ const MyDashboard: React.FC = () => {
 
   return (
     <Layout>
-      <Heading>
-        <ZigTypography variant='h1'>{t('title')}</ZigTypography>
-      </Heading>
-      <LayoutContentWrapper
-        endpoint={investmentsEndpoint}
-        content={(services: Investment[]) => (
-          <ZigTableWrapper>
-            <ZigTable
-              prefixId={'dashboard'}
-              columns={columns}
-              data={services}
-              emptyMessage={t('table-search-emptyMessage')}
-              columnVisibility
-            />
-          </ZigTableWrapper>
-        )}
-      />
+      {investmentsEndpoint?.currentData?.length ? (
+        <>
+          <Heading>
+            <ZigTypography variant='h1'>{t('title')}</ZigTypography>
+          </Heading>
+          <LayoutContentWrapper
+            endpoint={investmentsEndpoint}
+            content={(services: Investment[]) => (
+              <ZigTableWrapper>
+                <ZigTable
+                  prefixId={'dashboard'}
+                  columns={columns}
+                  data={services}
+                  emptyMessage={t('table-search-emptyMessage')}
+                  columnVisibility
+                />
+              </ZigTableWrapper>
+            )}
+          />
+        </>
+      ) : (
+        <InvestingLayout />
+      )}
     </Layout>
   );
 };
