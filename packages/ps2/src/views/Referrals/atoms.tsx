@@ -1,14 +1,13 @@
 /* eslint-disable i18next/no-literal-string */
 import React from 'react';
 import {
-  BoostBox,
   BoostChipBox,
   TierBarContainer,
   TotalBoxBox,
   TotalBoxValue,
 } from './styles';
 import { ZigTypography } from '@zignaly-open/ui';
-import { Box, Chip, Tooltip } from '@mui/material';
+import { Box, Tooltip } from '@mui/material';
 import { ReactComponent as BoltIcon } from 'images/referrals/bolt.svg';
 import { useTranslation } from 'react-i18next';
 import { prettyFloat } from 'util/numbers';

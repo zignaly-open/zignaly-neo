@@ -237,7 +237,7 @@ const Referrals: React.FC = () => {
                     variant='text'
                     size={'large'}
                     sx={{
-                      color: (theme) => theme.palette.greenGraph,
+                      color: (theme) => theme.palette.links,
                       mb: -1.25,
                       fontSize: '12px',
                       minHeight: 'auto',
