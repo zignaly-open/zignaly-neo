@@ -105,12 +105,16 @@ export const TotalBoxValueWithBoost = ({
 
   return (
     <Box position='relative'>
-      <Tooltip title={t('revenue-tooltip', { old: base, new: base * boost })}>
-        <div>
-          <TotalBoxValue>{children}</TotalBoxValue>
-          <BoostChip boost={boost} />
-        </div>
-      </Tooltip>
+      {boost > 1 ? (
+        <Tooltip title={t('revenue-tooltip', { old: base, new: base * boost })}>
+          <div>
+            <TotalBoxValue>{children}</TotalBoxValue>
+            <BoostChip boost={boost} />
+          </div>
+        </Tooltip>
+      ) : (
+        <TotalBoxValue>{children}</TotalBoxValue>
+      )}
     </Box>
   );
 };
