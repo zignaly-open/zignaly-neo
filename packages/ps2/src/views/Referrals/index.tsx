@@ -12,7 +12,6 @@ import {
   dark,
   InputText,
   PageContainer,
-  TextButton,
   ZigButton,
   ZignalyLogo,
   ZigPriceLabel,

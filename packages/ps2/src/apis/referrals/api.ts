@@ -4,7 +4,6 @@ import {
   ReferralHistory,
   Benefit,
   BenefitClaimed,
-  ReferralData,
   TierLevels,
 } from './types';
 import baseQuery from '../baseQuery';

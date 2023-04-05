@@ -12,7 +12,6 @@ import TierBar from './TierBar';
 import { TierBoost } from '../atoms';
 import { numericFormatter } from 'react-number-format';
 import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
-import { isValid } from 'date-fns';
 import { useZModal } from 'components/ZModal/use';
 import BuyZigModal from 'views/Wallet/modals/BuyZigModal';
 
@@ -33,7 +32,13 @@ const TiersModal: React.FC<
   const current = showAumProgress ? rewards.usdtAum : rewards.zigBalance;
 
   return (
-    <ZModal wide {...props} title={t('boost-title')} titleAlign='center'>
+    <ZModal
+      wide
+      {...props}
+      close={close}
+      title={t('boost-title')}
+      titleAlign='center'
+    >
       <Box
         display='flex'
         alignItems='center'
