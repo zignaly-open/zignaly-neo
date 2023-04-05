@@ -104,16 +104,6 @@ const LoginForm: React.FC = () => {
         />
 
         <Action>
-          {/*<Button*/}
-          {/*  type={'submit'}*/}
-          {/*  variant={'primary'}*/}
-          {/*  id={'login__submit'}*/}
-          {/*  data-testid={'login__submit'}*/}
-          {/*  caption={t('login-form.submit')}*/}
-          {/*  size={'xlarge'}*/}
-          {/*  loading={loggingIn}*/}
-          {/*/>*/}
-
           <ZigButton
             type={'submit'}
             variant={'contained'}
