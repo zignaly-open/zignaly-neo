@@ -72,7 +72,7 @@ export const StepCounter = styled(Box)`
 `;
 
 export const RewardsListContainer = styled(Grid)`
-  max-width: 900px;
+  max-width: 964px;
   margin: 0 auto;
   border-top: 1px solid ${({ theme }) => theme.palette.neutral700};
   border-bottom: 1px solid ${({ theme }) => theme.palette.neutral700};
@@ -131,6 +131,7 @@ export const TierBox = styled(Box)`
 export const BoostBox = styled(Box)`
   display: flex;
   justify-content: center;
+  align-items: center;
   margin: 10px 0 18px;
   padding: 6px 16px 6.5px 22px;
   border-radius: 5px;
@@ -140,6 +141,20 @@ export const BoostBox = styled(Box)`
     color: rgba(38, 196, 150, 0.9);
     margin-right: 10px;
     font-weight: 500;
+  }
+`;
+
+export const BoostChipBox = styled(BoostBox)`
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  margin: 0;
+  padding: 4px 9px;
+  border-radius: 24px;
+
+  .MuiTypography-root {
+    margin-left: 6px;
+    margin-right: 0;
   }
 `;
 

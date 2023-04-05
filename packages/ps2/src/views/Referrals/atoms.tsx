@@ -1,8 +1,14 @@
 /* eslint-disable i18next/no-literal-string */
 import React from 'react';
-import { TierBarContainer, TotalBoxBox, TotalBoxValue } from './styles';
+import {
+  BoostBox,
+  BoostChipBox,
+  TierBarContainer,
+  TotalBoxBox,
+  TotalBoxValue,
+} from './styles';
 import { ZigTypography } from '@zignaly-open/ui';
-import { Box } from '@mui/material';
+import { Box, Chip, Tooltip } from '@mui/material';
 import { ReactComponent as BoltIcon } from 'images/referrals/bolt.svg';
 import { useTranslation } from 'react-i18next';
 
@@ -78,3 +84,33 @@ export const TierArrow = ({ boost }: { boost: number }) => (
     <BoltIcon width={8} />
   </TierBarContainer>
 );
+
+export const BoostChip = ({ boost }: { boost: number }) => (
+  <BoostChipBox>
+    <BoltIcon width={10} height={19} />
+    <ZigTypography>{boost}x</ZigTypography>
+  </BoostChipBox>
+);
+
+export const TotalBoxValueWithBoost = ({
+  base,
+  boost,
+  children,
+}: {
+  base: number;
+  boost: number;
+  children?: React.ReactElement;
+}) => {
+  const { t } = useTranslation('referrals');
+
+  return (
+    <Box position='relative'>
+      <Tooltip title={t('revenue-tooltip', { old: base, new: base * boost })}>
+        <div>
+          <TotalBoxValue>{children}</TotalBoxValue>
+          <BoostChip boost={boost} />
+        </div>
+      </Tooltip>
+    </Box>
+  );
+};

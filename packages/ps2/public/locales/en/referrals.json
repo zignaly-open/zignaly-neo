@@ -47,6 +47,7 @@
     "invite-for-balance-modal": "Invite friends to get <0>{{value}} {{symbol}}</0> when their balance reaches ${{threshold}}+.",
     "invite-for-signup": "<0>Invite Friends</0><1>{{value}} {{symbol}}</1><2> when they create and verify an account</2>",
     "invite-for-signup-modal": "Invite friends to get <0>{{value}} {{symbol}}</0> when they create and verify an account.",
+    "revenue-tooltip": "You are earning {{new}}% instead of {{old}}% thanks to your boost",
     "terms": {
         "title": "Fixed Terms:",
         "1": "Zignaly reserves the right to disqualify a participant if they engage in inappropriate, dishonest, or abusive activities.",

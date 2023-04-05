@@ -13,6 +13,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { ReferralRewards } from '../../../apis/referrals/types';
 import { useZAlert } from '../../../components/ZModal/use';
 import { hardcodedInviteeReward } from '../constants';
+import { TotalBoxValueWithBoost } from '../atoms';
 
 const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
   rewards,
@@ -61,11 +62,14 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
               i18nKey='referrals:invite-traders-for-revenue'
               t={t}
               values={{
-                value: config.traderSuccessFee,
+                value: config.traderSuccessFee * rewards.tierLevelFactor,
               }}
             >
               <ZigTypography />
-              <TotalBoxValue />
+              <TotalBoxValueWithBoost
+                base={config.traderSuccessFee}
+                boost={rewards.tierLevelFactor}
+              />
               <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
             </Trans>
           ),
