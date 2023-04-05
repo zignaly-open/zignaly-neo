@@ -1,5 +1,5 @@
 import { DialogProps } from '@mui/material/Dialog';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   useCurrentBalance,
   useSelectInvestment,
@@ -26,12 +26,19 @@ function InvestDepositModal({
     service?.ssc,
   );
 
+  // we need this only once
+  const loading = isLoadingService || isLoadingBalance || isFetching;
+  const [ready, setReady] = useState(!loading);
+  useEffect(() => {
+    setReady((r) => !loading || r);
+  }, [loading]);
+
   useSelectInvestment(service);
   useMaybeNavigateNotLoggedIn();
 
   const showDeposit = +balance === 0;
 
-  if (isLoadingService || isLoadingBalance || isFetching) {
+  if (!ready) {
     return <ZModal title={''} wide {...props} close={close} isLoading />;
   } else if (showDeposit) {
     return <ChooseDepositTypeModal {...props} selectedCoin={service?.ssc} />;
