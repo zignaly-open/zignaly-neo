@@ -11,6 +11,7 @@ import { ZigTypography } from '@zignaly-open/ui';
 import { Box, Chip, Tooltip } from '@mui/material';
 import { ReactComponent as BoltIcon } from 'images/referrals/bolt.svg';
 import { useTranslation } from 'react-i18next';
+import { prettyFloat } from 'util/numbers';
 
 export const TotalBox: React.FC<{
   label: string | JSX.Element;
@@ -61,7 +62,7 @@ export const TierBoost = ({
               {value}x {t('boost')}
             </ZigTypography>
             <ZigTypography variant='body2' fontWeight={500}>
-              ({Number(traderRebateFee * value).toFixed(2)}%)
+              ({prettyFloat(Number(traderRebateFee * value))}%)
             </ZigTypography>
           </>
         ) : (
