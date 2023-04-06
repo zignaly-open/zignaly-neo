@@ -140,7 +140,7 @@ const TiersModal: React.FC<
             </ZigTypography>
           </Box>
           <Box display='flex'>
-            {tiers?.slice(1, tiers.length).map((tier) => (
+            {tiers?.map((tier) => (
               <Box
                 key={tier.id}
                 display='flex'
@@ -149,7 +149,7 @@ const TiersModal: React.FC<
               >
                 <TierBar
                   tier={tier}
-                  min={tiers[1].tierLevelFactor}
+                  min={tiers[0].tierLevelFactor}
                   max={tiers[tiers.length - 1].tierLevelFactor}
                 />
                 <Box
