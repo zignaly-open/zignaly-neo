@@ -121,6 +121,13 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       url: `user/exchanges/${exchangeInternalId}/${serviceId}`,
     }),
     providesTags: ['Investment'],
+    extraOptions: {
+      // do not report errors
+      // because this endpoint returns an error if we query after we make a full pull out
+      // and we gotta query that
+      // I understand this is a crutch but sometimes one crutch is better than 4h of debugging
+      silent: true,
+    },
   }),
 }));
 
