@@ -12,6 +12,7 @@ export const Field = styled('fieldset')`
   border: 0;
   padding: 0;
   text-align: center;
+  align-items: center;
   display: flex;
   flex-direction: column;
   gap: 14px;
