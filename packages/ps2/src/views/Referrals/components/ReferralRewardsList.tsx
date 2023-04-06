@@ -14,6 +14,7 @@ import { ReferralRewards } from '../../../apis/referrals/types';
 import { useZAlert } from '../../../components/ZModal/use';
 import { hardcodedInviteeReward } from '../constants';
 import { TotalBoxValueWithBoost } from '../atoms';
+import { prettyFloat } from 'util/numbers';
 
 const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
   rewards,
@@ -343,7 +344,9 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
               i18nKey='referrals:invite-traders-for-revenue-modal'
               t={t}
               values={{
-                value: config.traderSuccessFee * rewards.tierLevelFactor,
+                value: prettyFloat(
+                  config.traderSuccessFee * rewards.tierLevelFactor,
+                ),
                 details: t('invite-traders-for-revenue-details-modal', {
                   value: config.traderSuccessFee,
                 }),
