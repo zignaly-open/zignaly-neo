@@ -112,8 +112,14 @@ const TiersModal: React.FC<
             flexDirection='column'
             justifyContent='flex-end'
             mr='6px'
+            alignSelf='flex-end'
           >
-            <ZigTypography fontWeight={500} variant='body2' textAlign='end'>
+            <ZigTypography
+              fontWeight={500}
+              variant='body2'
+              textAlign='end'
+              lineHeight='24px'
+            >
               {t('zig-held')}
               <Tooltip title={t('zig-held-tooltip')}>
                 <TooltipIcon />
@@ -123,7 +129,7 @@ const TiersModal: React.FC<
               color='neutral400'
               fontWeight={400}
               variant='h5'
-              lineHeight='11px'
+              lineHeight='8px'
             >
               {t('or')}
             </ZigTypography>
@@ -132,6 +138,7 @@ const TiersModal: React.FC<
               variant='body2'
               mt='2px'
               textAlign='end'
+              lineHeight='24px'
             >
               {t('AUM')}
               <Tooltip title={t('AUM-tooltip')}>
