@@ -235,6 +235,7 @@ const Referrals: React.FC = () => {
                     ))}
                   </Box>
                   <ZigButton
+                    id='referrals__view-tiers'
                     variant='text'
                     size={'large'}
                     sx={{
