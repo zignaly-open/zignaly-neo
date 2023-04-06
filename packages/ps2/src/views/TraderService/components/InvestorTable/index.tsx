@@ -45,33 +45,32 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       columnHelper.accessor('userId', {
         header: t('tableHeader.userId'),
       }),
-      columnHelper.accessor(
-        (row) =>
-          new BigNumber(row.invested)
-            .plus(new BigNumber(row.pending))
-            .toFixed(),
-        {
-          header: t('tableHeader.investment'),
-          id: 'investment',
-          cell: (props) => (
-            <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-              <ZigTablePriceLabel
-                coin={service?.ssc ?? 'USDT'}
-                value={props.getValue()}
-              />
-              {props.row.original.pending !== '0' && (
-                <ZigTablePriceLabel
-                  prefix={'~'}
-                  variant={'caption'}
-                  coin={service?.ssc ?? 'USDT'}
-                  value={props.row.original.pending}
-                  color={'neutral300'}
-                />
-              )}
+      columnHelper.accessor((row) => new BigNumber(row.invested).toFixed(), {
+        header: () => (
+          <Box display={'flex'} flexDirection={'column'}>
+            {t('tableHeader.invested')}
+            <Box fontSize={'12px'} color={'neutral300'}>
+              {t('tableHeader.pending')}
             </Box>
-          ),
-        },
-      ),
+          </Box>
+        ),
+        id: 'investment',
+        cell: (props) => (
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
+            <ZigTablePriceLabel
+              coin={service?.ssc ?? 'USDT'}
+              value={props.getValue()}
+            />
+            <ZigTablePriceLabel
+              prefix={'~'}
+              variant={'caption'}
+              coin={service?.ssc ?? 'USDT'}
+              value={props.row.original.pending}
+              color={'neutral300'}
+            />
+          </Box>
+        ),
+      }),
       columnHelper.accessor('pnlNetLc', {
         header: t('tableHeader.P&L'),
         cell: (props) => (
