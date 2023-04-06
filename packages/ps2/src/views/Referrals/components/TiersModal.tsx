@@ -102,7 +102,7 @@ const TiersModal: React.FC<
           />
         </Box>
 
-        <ZigTypography color='neutral200' variant='h2' mt='70px' mb='26px'>
+        <ZigTypography color='neutral200' variant='h2' mt='46px' mb='10px'>
           {t('boost-tiers')}
         </ZigTypography>
 

@@ -21,9 +21,11 @@ const TierBar = ({
   width?: number;
   showArrow?: boolean;
 }) => {
+  const power = 1.5; // adjust this value to control the curve
   const height =
     minHeight +
-    ((tier.tierLevelFactor - min) / (max - min)) * (maxHeight - minHeight);
+    Math.pow((tier.tierLevelFactor - min) / (max - min), power) *
+      (maxHeight - minHeight);
 
   return (
     <TierBarContainer width={width} height={height}>
