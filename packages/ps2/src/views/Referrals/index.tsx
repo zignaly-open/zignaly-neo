@@ -202,11 +202,7 @@ const Referrals: React.FC = () => {
                         <TierBarStyle>
                           <TierBar
                             tier={tier}
-                            min={tiersSubset[0].tierLevelFactor}
-                            max={
-                              tiersSubset[tiersSubset.length - 1]
-                                .tierLevelFactor
-                            }
+                            tiers={tiersSubset}
                             maxHeight={58}
                             minHeight={30}
                             minOpacity={0.5}
