@@ -328,7 +328,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           </Trans>
         ),
       ].filter(Boolean),
-    [config, t],
+    [rewards, t],
   );
 
   // it can be either Trader or Friend, not both
@@ -343,7 +343,10 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
               i18nKey='referrals:invite-traders-for-revenue-modal'
               t={t}
               values={{
-                value: config.traderSuccessFee,
+                value: config.traderSuccessFee * rewards.tierLevelFactor,
+                details: t('invite-traders-for-revenue-details-modal', {
+                  value: config.traderSuccessFee,
+                }),
               }}
             >
               <ZigTypography fontWeight={600} color={'neutral100'} />
@@ -376,7 +379,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
             </Trans>
           ),
       ].filter(Boolean),
-    [config, t],
+    [rewards, t],
   );
 
   const modalThemElements = useMemo(

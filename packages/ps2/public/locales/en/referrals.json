@@ -19,10 +19,11 @@
             "description": "You'll earn unlimited commissions: {{successFee}}% of Success Fees paid to Zignaly. They get ${{reward}} in ZIG if they invest more than ${{minDeposit}}"
         }
     },
-    "they-get-invest": "<0>They get</0><1>${{value}}</1><2> in Fee Voucher on First Deposit",
+    "they-get-invest": "<0>They get</0><1>${{value}}</1><> in Fee Voucher on First Deposit",
     "they-get-invest-modal": "Your invitee gets a <0>${{value}}</0> Fee Voucher on their First Deposit.",
     "invite-traders-for-revenue": "<0>Invite Traders</0><1>{{value}}%</1><2>of Zignaly’s Revenue</2>",
-    "invite-traders-for-revenue-modal": "Invite traders to get <0>{{value}}%</0> of Zignaly’s Revenue earned from the Trader's Profit sharing service for the lifetime.",
+    "invite-traders-for-revenue-modal": "Invite traders to get <0>{{value}}%</0> of Zignaly’s Revenue earned from the Trader's Profit sharing service for the lifetime {{details}}.",
+    "invite-traders-for-revenue-details-modal": "(instead of {{value}}% thanks to your boost)",
     "invite-traders-for-percent": "<0>Invite Traders</0><1>{{value}}%</1><2> of all their investors' success fees</2>",
     "invite-traders-for-percent-modal": "Invite traders to get <0>{{value}}%</0>  of the Zignaly’s Revenue from Success Fees from that invitee for the lifetime.",
     "invite-friends-for-revenue": "<0>Invite Friends</0><1>{{value}}%</1><2>of Zignaly’s Revenue</2>",
