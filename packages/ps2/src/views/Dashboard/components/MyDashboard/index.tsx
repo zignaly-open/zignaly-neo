@@ -161,6 +161,7 @@ const MyDashboard: React.FC = () => {
   return (
     <Layout>
       <LayoutContentWrapper
+        unmountOnRefetch
         endpoint={investmentsEndpoint}
         content={(services: Investment[]) =>
           investmentsEndpoint?.currentData?.length ? (
