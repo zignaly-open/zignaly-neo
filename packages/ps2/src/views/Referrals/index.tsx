@@ -209,6 +209,7 @@ const Referrals: React.FC = () => {
                             }
                             maxHeight={58}
                             minHeight={30}
+                            minOpacity={0.5}
                             showArrow={false}
                             width={26}
                           />

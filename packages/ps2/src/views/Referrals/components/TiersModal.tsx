@@ -106,7 +106,7 @@ const TiersModal: React.FC<
           {t('boost-tiers')}
         </ZigTypography>
 
-        <Box display='flex'>
+        <Box display='flex' mb={-1}>
           <Box
             display='flex'
             flexDirection='column'

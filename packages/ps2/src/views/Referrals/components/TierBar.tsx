@@ -8,10 +8,11 @@ const TierBar = ({
   tier,
   max,
   min,
-  minHeight = 45,
+  minHeight = 32,
   maxHeight = 200,
   width = 46,
   showArrow = true,
+  minOpacity = 0.2,
 }: {
   tier: TierLevel;
   min: number;
@@ -20,19 +21,26 @@ const TierBar = ({
   maxHeight?: number;
   width?: number;
   showArrow?: boolean;
+  minOpacity?: number;
 }) => {
-  const power = 1.5; // adjust this value to control the curve
+  const power = 1.74; // adjust this value to control the curve
   const height =
     minHeight +
     Math.pow((tier.tierLevelFactor - min) / (max - min), power) *
       (maxHeight - minHeight);
 
+  const opacityPower = 0.9;
+  const opacity =
+    minOpacity +
+    Math.pow((tier.tierLevelFactor - min) / (max - min), opacityPower) *
+      (1 - minOpacity);
+
   return (
-    <TierBarContainer width={width} height={height}>
+    <TierBarContainer opacity={opacity} width={width} height={height}>
       {/* eslint-disable-next-line i18next/no-literal-string */}
       <ZigTypography color='greenGraph'>{tier.tierLevelFactor}x</ZigTypography>
-      <BoltIcon />
-      {showArrow && <TierArrow />}
+      {tier.tierLevelFactor > 1 && <BoltIcon />}
+      {showArrow && <TierArrow opacity={opacity} />}
     </TierBarContainer>
   );
 };

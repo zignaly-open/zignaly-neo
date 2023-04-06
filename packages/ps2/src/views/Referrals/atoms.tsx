@@ -78,8 +78,14 @@ export const TierBoost = ({
   );
 };
 
-export const TierArrow = ({ boost }: { boost: number }) => (
-  <TierBarContainer>
+export const TierArrow = ({
+  boost,
+  opacity = 1,
+}: {
+  boost: number;
+  opacity: number;
+}) => (
+  <TierBarContainer opacity={opacity}>
     <ZigTypography color='greenGraph'>{boost}x</ZigTypography>
     <BoltIcon width={8} />
   </TierBarContainer>

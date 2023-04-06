@@ -158,12 +158,16 @@ export const BoostChipBox = styled(BoostBox)`
   }
 `;
 
-export const TierBarContainer = styled(Box)`
+export const TierBarContainer = styled(Box)<{ opacity: number }>`
   align-items: center;
   display: flex;
   flex-direction: column;
   border-radius: 4px;
-  background-image: linear-gradient(to top, #12213bb3, rgba(33, 81, 78, 0.48));
+  background-image: linear-gradient(
+    to top,
+    rgba(18, 33, 59, ${({ opacity }) => opacity}),
+    rgba(33, 81, 78, ${({ opacity }) => 0.48 * opacity})
+  );
   margin: 0 10px;
   position: relative;
   padding-top: 4px;
@@ -192,14 +196,20 @@ export const TierBarContainer = styled(Box)`
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
     background: linear-gradient(to top, #15192f, #009179);
+    background-image: linear-gradient(
+      to top,
+      rgba(21, 25, 47, ${({ opacity }) => opacity}),
+      rgba(0, 145, 121, ${({ opacity }) => opacity})
+    );
   }
 `;
 
-export const TierArrow = styled('div')`
+export const TierArrow = styled('div')<{ opacity: number }>`
   position: relative;
   width: 30px;
   height: 100%;
   margin-top: 8px;
+  opacity: ${({ opacity }) => opacity};
 
   &::before {
     content: '';
