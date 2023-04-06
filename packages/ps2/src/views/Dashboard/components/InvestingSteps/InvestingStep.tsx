@@ -9,7 +9,7 @@ import DepositModal from '../ManageInvestmentModals/DepositModal';
 import { useNavigate } from 'react-router-dom';
 import { ROUTE_PROFIT_SHARING } from '../../../../routes';
 import { BUY_CRYPTO_URL } from '../../../../util/constants';
-import { OpenInNew } from '@mui/icons-material';
+import NorthEastIcon from '@mui/icons-material/NorthEast';
 
 const InvestingStep: React.FC<{ step: number }> = ({ step }) => {
   const { t } = useTranslation('my-dashboard');
@@ -70,8 +70,13 @@ const InvestingStep: React.FC<{ step: number }> = ({ step }) => {
               />
             )}
             {step === 2 && (
-              <OpenInNew
-                sx={{ width: '13px', height: '13px', color: 'links' }}
+              <NorthEastIcon
+                sx={{
+                  width: '13px',
+                  height: '13px',
+                  mb: '-2px',
+                  color: 'links',
+                }}
               />
             )}
           </Trans>

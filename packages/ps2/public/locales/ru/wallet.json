@@ -1,0 +1,78 @@
+{
+	"title": "ZIG Wallet",
+	"totalBalance": "Общий Баланс ZIG",
+	"savings": "Награды и Сбережения",
+	"successFee": "Скидка на комиссию:",
+	"successFeeTooltip": "Оплатите комиссию за успех любого Profit Sharing сервиса с ZIG и получите скидку на сумму платежа.",
+	"tradingFeeTooltip": "Zignaly вернет на ваш счет всю комиссию за ваши новые сделки в USDT и взимает с вас эквивалентную сумму за вычетом скидки в ZIG.",
+	"withdraw": "Вывод",
+	"min": "мин.",
+	"balance": {
+		"available": "Доступно"
+	},
+	"transactions": {
+		"internal": "Внутренний Трансфер",
+		"header": {
+			"type": "Тип",
+			"amount": "Сумма",
+			"coin": "Монета",
+			"status": "Статус"
+		},
+		"walletTransactions": "Операции с Кошельком",
+		"type": {
+			"all": "Все Транзакции",
+			"deposit": "Депозит",
+			"internal": "Внутренний",
+			"reward": "Награда",
+			"successfee": "Комиссия с Дохода",
+			"coinsalvage": "Coin Salvage",
+			"withdraw": "Вывод",
+			"compensation": "Компенсация",
+			"payment": "Оплата",
+			"cashbackvolume": "Объем Кэшбэка",
+			"withdrawfee": "Комиссия за Снятие Средств",
+			"zigpadpledge": "Залог ZIGPad",
+			"zigpadreturn": "ZIGPad Возврат",
+			"zigpadtokensreward": "IDO Tokens Распределение",
+			"stakingvault": "Стейкинг Vault",
+			"stakingvaultreturn": "Staking Vault Return",
+			"buyzig": "Купить ZIG",
+			"zigbidsreferralcode": "Реферальный код ZIGBids"
+		},
+		"status": {
+			"pending": "В ожидании",
+			"completed": "Завершенный",
+			"error": "Ошибка"
+		},
+		"details": {
+			"from": "Откуда:",
+			"to": "Куда:",
+			"note": "Примечание:"
+		}
+	},
+	"deposit": {
+		"deposit": "Депозит",
+		"title": "Депозит Криптовалюты"
+	},
+	"coins": {
+		"header": {
+			"value": "Значение"
+		}
+	},
+	"buy": {
+		"buy-exchanges": "Вы можете купить ZIG на этих биржах:",
+		"exchangeAccount": "Выберите Учетную Запись Биржи",
+		"continue": "Перейти к Подтверждению",
+		"deposit": {
+			"description": "Чтобы купить ZIGs, вам сначала нужно внести {{coin}} на свой биржевой счет Zignaly.",
+			"external": "Перевести криптовалюту с внешнего кошелька",
+			"noCrypto": "у меня пока нет крипты"
+		},
+		"from": "Откуда:",
+		"swapFrom": "Обмен с",
+		"swapTo": "Поменять на",
+		"received": "Полученная сумма",
+		"rate": "Rate:",
+		"maxLeft": "Максимальная оставшаяся сумма составляет {{amount}} {{монета}}. Она обнуляется через {{минуты}} минут."
+	}
+}

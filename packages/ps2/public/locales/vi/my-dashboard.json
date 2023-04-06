@@ -30,5 +30,26 @@
 			"right": "Rút tiền"
 		}
 	},
-	"tooltip-date": "Bạn đang đầu tư vào dịch vụ này kể từ {{date}}"
+	"tooltip-date": "Bạn đang đầu tư vào dịch vụ này kể từ {{date}}",
+	"how-to-invest-steps": {
+		"title": "Cách đầu tư",
+		"step-1": {
+			"title": "Chọn nhà giao dịch chuyên nghiệp",
+			"description": "Chọn ít nhất một trong những nhà giao dịch chuyên nghiệp của chúng tôi từ <0>thị trường<\/0> phù hợp với phong cách đầu tư của bạn",
+			"time": "Mất 2 phút"
+		},
+		"step-2": {
+			"title": "Nạp tiền",
+			"description": "<0>Nạp<\/0> tiền mã hóa trong tài khoản của bạn. Nếu bạn không có tiền điện tử, bạn cũng có thể <1>mua<\/1><2\/> nó.",
+			"time": "Đợi 3 phút"
+		},
+		"step-3": {
+			"title": "Đầu tư (không tối thiểu)",
+			"description": "Đầu tư vào các dịch vụ và chờ đợi để xem lợi nhuận của bạn tăng lên từng ngày.",
+			"time": "Đợi \n2 phút"
+		},
+		"bottom-title": "Dịch vụ danh mục đầu tư của tôi",
+		"bottom-description": "Bạn chưa đầu tư dịch vụ nào, hãy bắt đầu để thu lợi nhuận.",
+		"start-investing": "Bắt đầu đầu tư ngay"
+	}
 }

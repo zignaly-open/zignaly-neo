@@ -1,5 +1,5 @@
 {
-	"title": "Depositar Criptomonedas",
+	"title": "Depositar Cripto",
 	"description": "Los depósitos pueden tardar hasta 3 horas en reflejarse en tu saldo.",
 	"coinSelector": {
 		"label": "Moneda:",
@@ -17,7 +17,7 @@
 	},
 	"depositAddress": {
 		"label": "Dirección de Depósito:",
-		"loading": "Cargando la dirección del depósito...",
+		"loading": "Cargando la dirección de depósito...",
 		"placeholder": "Elija primero la moneda y la red.",
 		"warning": "Solo envía {{network}} {{coin}} tokens a esta dirección",
 		"copied": "¡Dirección de depósito copiada al portapapeles!"

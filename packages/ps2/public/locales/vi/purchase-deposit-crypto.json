@@ -1,0 +1,10 @@
+{
+	"title": "Nạp {{coin}} để đầu tư vào dịch vụ này",
+	"description": "Nhà giao dịch của dịch vụ này đang giao dịch với {{coin}}, vì vậy bạn phải nạp cùng một loại tiền mã hóa mà nhà giao dịch đang sử dụng để chia sẻ lợi nhuận với họ. Vui lòng nạp {{coin}} vào tài khoản của bạn.",
+	"transfer-crypto": "Chuyển {{coin}} từ ví bên ngoài",
+	"buy-crypto": "Tôi không sở hữu bất kỳ {{coin}}",
+	"buttons": {
+		"deposit": "Nạp tiền {{coin}}",
+		"purchase": "Mua {{coin}}"
+	}
+}

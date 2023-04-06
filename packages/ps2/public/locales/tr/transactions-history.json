@@ -1,0 +1,48 @@
+{
+	"tableHeader": {
+		"coin": "Coin",
+		"date": "Tarih",
+		"type": "Tip",
+		"amount": "Miktar",
+		"transactionId": "İşlem ID'si",
+		"from": "Buradan",
+		"to": "Buraya ",
+		"status": "Durum"
+	},
+	"type": {
+		"deposit": "Yatır",
+		"withdrawal": "Çekim",
+		"psDeposit": "Profit Sharing'e yatırın",
+		"psWithdraw": "Yatırım azaltıldı",
+		"reward": "Komisyon",
+		"ps2": "PS Dahili Transfer",
+		"psds": "Profit Sharing'ten Para Çekimi",
+		"buyZig": "Zig Satın Alın",
+		"traderFee": "Trader Başarım Ücreti",
+		"user": "Dahili Transfer"
+	},
+	"filter": {
+		"max": "(maksimum son 3 ay)",
+		"all": "Tüm İşlemler"
+	},
+	"status": {
+		"pending": "Bekliyor",
+		"completed": "Tamamlandı",
+		"error": "Hata"
+	},
+	"details": {
+		"from": "Şuradan:",
+		"to": "Şuraya:",
+		"txHash": "TX Hash'i:",
+		"note": "Not:"
+	},
+	"export": {
+		"title": "İşlem Geçmişi Raporu",
+		"description": "Bu hesap oluşturulduğundan beri yapılan tüm işlemleri içeren bir rapor oluşturuyoruz. Takip eden 10 dakika içinde size işlem geçmişi raporunuzu indirme adımlarını içeren bir e-posta göndereceğiz.",
+		"success": "İsteğiniz başarıyla işlendi. İndirme bağlantısı için lütfen e-postanızı kontrol edin."
+	},
+	"external": "Harici Adres",
+	"deleted": "Silinmiş Borsa Hesabı",
+	"noData": "İşlem yok",
+	"psService": "Profit Sharing Servisi"
+}

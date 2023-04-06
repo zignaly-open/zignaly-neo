@@ -1,0 +1,25 @@
+{
+	"liquidated": "Ликвидировано",
+	"invested-label": "Инвестировано",
+	"invest-button": {
+		"x-success-fee": "{{fee}} % Комиссия за успех"
+	},
+	"owner-verified": "Менеджер прошел проверку",
+	"strategy": "Стратегия",
+	"investors-count": "Инвесторы",
+	"periods": {
+		"all": "Все"
+	},
+	"other-accounts": {
+		"active": "Активный",
+		"invested": "Инвестировано",
+		"switch-action": "Переключатель"
+	},
+	"create": {
+		"next-step": "Следующий",
+		"types": {
+			"spot": "Спот",
+			"futures": "Фьючерсы"
+		}
+	}
+}

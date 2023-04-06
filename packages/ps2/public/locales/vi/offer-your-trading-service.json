@@ -1,0 +1,77 @@
+{
+	"header": {
+		"title": "CUNG CẤP DỊCH VỤ GIAO DỊCH CỦA BẠN CHO\n LÊN ĐẾN +400K NGƯỜI DÙNG"
+	},
+	"modal": {
+		"title": "Tạo mới",
+		"service-type": "Loại dịch vụ",
+		"service-name": "Tên dịch vụ",
+		"base-currency": "Đồng yết giá",
+		"types": {
+			"spot": "Giao ngay",
+			"futures": "Hợp đồng tương lai"
+		},
+		"please-verify": "Vui lòng xem lại thông tin của bạn. Không thể thay đổi loại giao dịch, loại tiền niêm yết và tên về sau."
+	},
+	"wrapper": {
+		"title": "Lợi ích của Profit Sharing",
+		"list": {
+			"item1": "Giao dịch từ bất kỳ giải pháp nào cho phép Binance API Keys",
+			"item2": "Chọn phí thành công của bạn",
+			"item3": "Đăng ký để được niêm yết trên <0>thị trường<\/0> của chúng tôi hoặc để chế độ riêng tư"
+		},
+		"action": "Tạo dịch vụ của bạn"
+	},
+	"infoBar": {
+		"item1": {
+			"title": "$ 5 TRIỆU",
+			"description": "Tài sản gộp"
+		},
+		"item2": {
+			"title": "+430,000",
+			"description": "Nhà đầu tư Profit Sharing"
+		},
+		"item3": {
+			"title": "1300",
+			"description": "Dịch vụ đang hoạt động"
+		}
+	},
+	"features": {
+		"title": "Tính năng dịch vụ Profit Sharing",
+		"list": {
+			"item1": {
+				"title": "PHÂN TÍCH HIỆU SUẤT",
+				"description": "Bạn, cũng như người dùng khác, sẽ có thể kiểm tra lợi lỗ hàng ngày của mình và tỷ lệ phần trăm PNL cùng các số liệu khác."
+			},
+			"item2": {
+				"title": "QUẢN LÝ QUỸ",
+				"description": "Bạn có thể cùng lúc có hàng ngàn nhà đầu tư mà không cần lo lắng về kế toán và hỗ trợ cho từng cá nhân. Zignaly sẽ lo liệu điều đó."
+			},
+			"item3": {
+				"title": "KHOẢN THANH TOÁN HÀNG NGÀY",
+				"description": "Nhận phí thành công hàng ngày từ các dịch vụ Profit Sharing của bạn."
+			},
+			"item4": {
+				"title": "ĐỘI HỖ TRỢ TRADER",
+				"description": "Bạn sẽ có người tư vấn riêng trong suốt quá trình sử dụng dịch vụ."
+			}
+		}
+	},
+	"howWorks": {
+		"title": "Lý do tại sao các nhà giao dịch tốt nhất cung cấp dịch vụ của họ tại Zignaly",
+		"list": {
+			"item1": {
+				"title": "Quỹ chung",
+				"description": "Bạn sẽ có quyền truy cập vào quỹ  thông qua tài khoản chung được bảo mật, vì vậy tất cả người dùng sẽ nhận được kết quả chính xác như nhau."
+			},
+			"item2": {
+				"title": "Giao dịch",
+				"description": "Kết nối phương thức giao dịch của bạn thật dễ dàng: Bạn dùng API key để tiếp tục giao dịch trên công cụ yêu thích của bạn hoặc gửi tín hiệu từ trang Trading View."
+			},
+			"item3": {
+				"title": "Chia lợi nhuận",
+				"description": "Chọn phí thành công của bạn. Nên cân nhắc 5% lợi nhuận cho Zignaly vào phí này"
+			}
+		}
+	}
+}

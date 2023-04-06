@@ -155,7 +155,7 @@
 		"1055": "Os dados de serviço não são válidos",
 		"1056": "Exchange Inválido para Serviço",
 		"1057": "Tipo Inválido para Serviço",
-		"1058": "A Taxa de Sucesso pode ser 0 ou uma flutuação de 10 a 75",
+		"1058": "O Success Fee pode ser 0 ou uma flutuação de 10 a 75",
 		"1059": "Migração falhou: o saldo não é suficiente",
 		"1060": "Saldo bloqueado para a moeda do serviço",
 		"1061": "Saldo não vazio para outras moedas",

@@ -1,0 +1,29 @@
+{
+	"update-password": {
+		"title": "Cập nhật mật khẩu",
+		"description": "Cập nhật mật khẩu của Tài khoản Zignaly của bạn.\n Để bảo mật, bạn sẽ đăng xuất sau khi nhấp vào Cập nhật mật khẩu.",
+		"current-password": "Mật khẩu hiện tại:",
+		"new-password": "Mật khẩu mới:",
+		"success": "Đã cập nhật mật khẩu thành công. Xin vui lòng đăng nhập lại."
+	},
+	"enable-2fa": {
+		"title": "Xác thực hai yếu tố (2FA)",
+		"description": "Bảo mật tài khoản của bạn khi thiết lập xác thực hai yếu tố (2FA). Ngay bây giờ, 2FA được coi là phương pháp bảo mật tốt nhất, đọc thêm <0>here.<\/0>",
+		"setup-description": "Tải xuống ứng dụng <0>Google Authentication<\/0> và quét mã QR hoặc dán Cụm từ khóa theo cách thủ công vào ứng dụng. Để bảo mật, bạn sẽ đăng xuất sau khi điền mã gồm 6 chữ số.",
+		"enter-code": "Nhập mã gồm 6 chữ số từ ứng dụng:",
+		"enter-code-subtitle": "Bạn sẽ cần nó mỗi khi đăng nhập.",
+		"key-phrase": "Cụm từ khóa:",
+		"key-phrase-copied": "Cụm từ khóa được sao chép vào khay nhớ tạm",
+		"key-phrase-info": "Cụm từ khóa được sử dụng để khôi phục Google Authenticator trong trường hợp mất hoặc thay đổi thiết bị - vui lòng đảm bảo giữ cụm từ khóa an toàn trước khi điền mã gồm 6 chữ số.",
+		"code-2fa": "Mã 2FA",
+		"setup-2fa": "Thiết lập 2FA",
+		"enable-2fa": "Kích hoạt 2FA",
+		"success": "Xác thực 2 yếu tố được kích hoạt. Xin vui lòng đăng nhập lại."
+	},
+	"disable-2fa": {
+		"title": "Vô hiệu hóa 2FA",
+		"description": "Tài khoản của bạn được bảo mật bằng Xác thực hai yếu tố (2FA). Để tắt 2FA, hãy nhập mã từ ứng dụng xác thực của bạn.",
+		"success": "2FA đã bị vô hiệu hóa thành công.",
+		"security": "Để bảo mật, chúng tôi khuyên bạn nên cài 2FA trong tài khoản của mình."
+	}
+}

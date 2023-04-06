@@ -5,6 +5,7 @@ export const defaultDropDownOptions = {
 };
 
 export type MenuDropDownProps = {
+  id?: string;
   title: string;
   secondaryTitle?: string | null;
   focused?: boolean;

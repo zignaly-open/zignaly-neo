@@ -1,0 +1,25 @@
+{
+	"card": {
+		"top-rated": "En İyi Servisler",
+		"assets": "Varlıklar",
+		"investors": "Yatırımcılar"
+	},
+	"invest-in-services": "Profit Sharing'e yatırım yap",
+	"invest-in-services-explainer": "Profesyonel trader'lardan oluşan seçkimizden seçtiklerinize yatırım yapın ve kârınızdan yalnızca bir pay ödeyin. Ortalama yatırım yapılan tutar 200 dolardır, ancak dilerseniz 1 dolar ile de başlayabilirsiniz.",
+	"table": {
+		"service-name": "Hizmet Adı",
+		"manager": "Yönetici",
+		"currency": "Temel Birim",
+		"assets": "Havuzdaki Varlıklar",
+		"nb-investors": "yatırımcı sayısı",
+		"n-months-pnl_one": "{{count}} aylık PNL",
+		"n-months-pnl_other": "{{count}} aylık PNL",
+		"n-months_one": "{{count}} ay",
+		"n-months_other": "{{count}} aylık",
+		"n-years_one": "{{count}} yıl",
+		"n-years_other": "{{count}} yıllık",
+		"account-age": "Hesap yaşı",
+		"x-investors_one": "{{count}} yatırımcı",
+		"x-investors_other": "{{count}} yatırımcı"
+	}
+}
