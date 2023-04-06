@@ -347,7 +347,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
                 value: prettyFloat(
                   config.traderSuccessFee * rewards.tierLevelFactor,
                 ),
-                details: t('invite-traders-for-revenue-details-modal', {
+                optionalDetails: t('invite-traders-for-revenue-details-modal', {
                   value: config.traderSuccessFee,
                 }),
               }}
