@@ -30,3 +30,7 @@ export const getColorForNumber = (
   value: number | string,
 ): undefined | 'redGraphOrError' | 'greenGraph' =>
   +value === 0 ? undefined : +value > 0 ? 'greenGraph' : 'redGraphOrError';
+
+export const hasMoreThanDecimals = (v: string | number, decimals: number) => {
+  return (v?.toString()?.split('.')[1] ?? '').length > decimals;
+};
