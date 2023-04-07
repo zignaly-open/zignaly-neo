@@ -1,4 +1,5 @@
 import { DialogProps } from '@mui/material/Dialog';
+import { ShowFnOutput, UseModalOptions } from 'mui-modal-provider';
 
 export type ZModalProps = {
   title?: string;
@@ -10,5 +11,9 @@ export type ZModalProps = {
   close: () => void;
   titleAlign?: 'center' | 'left';
 } & DialogProps;
+
+export type UseZModalOptions = UseModalOptions & {
+  customClose?: (modal?: ShowFnOutput<void>) => void;
+};
 
 export type ZDialogProps = DialogProps & { close: () => void };

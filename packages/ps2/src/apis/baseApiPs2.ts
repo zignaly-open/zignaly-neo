@@ -9,7 +9,7 @@ const baseApiPs2 = createApi({
     'ServiceApiKey',
     'Service',
     'ServiceChart',
-    'MarketplaceService',
+    'Marketplace',
     'Investment',
     'Balance',
   ],

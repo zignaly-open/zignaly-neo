@@ -21,11 +21,11 @@ import {
   CoinDetails,
 } from 'apis/coin/types';
 import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
-import DepositModal from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 import WithdrawModal from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
-import { useZModal } from '../../../../components/ZModal/use';
+import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
 import { Box, Tooltip } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
+import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
@@ -33,6 +33,7 @@ const MyBalancesTable = (): JSX.Element => {
   const coinsEndpoint = useExchangeCoinsList();
   const { exchangeType } = useActiveExchange();
   const { showModal } = useZModal();
+  const showDepositModal = useZRouteModal(ROUTE_MY_BALANCES_DEPOSIT_COIN);
 
   const columnHelper = createColumnHelper<BalanceTableDataType>();
   const columns = useMemo(
@@ -91,9 +92,8 @@ const MyBalancesTable = (): JSX.Element => {
               <ZigButton
                 id={'balance-row__deposit'}
                 onClick={() =>
-                  showModal(DepositModal, {
+                  showDepositModal({
                     selectedCoin: row.original.coin,
-                    ctaId: 'balances-table-row',
                   })
                 }
                 variant='outlined'

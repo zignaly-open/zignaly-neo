@@ -4,7 +4,6 @@ import { styledIf } from "../../../utils/styled";
 export const Layout = styled.div<{ error?: string }>`
   display: flex;
   width: 100%;
-  align-items: center;
   flex-direction: column;
   .input-box {
     background: #0f1124;
