@@ -5,6 +5,7 @@ import {
   ZigTable,
   ZigTypography,
   ZigChartMini,
+  ZigButton,
 } from '@zignaly-open/ui';
 import React, { useMemo } from 'react';
 import { Heading, Layout, ZigTableWrapper } from './styles';
@@ -18,13 +19,17 @@ import { ServiceName } from '../ServiceName';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
-import { useZRouteModal } from '../../../../components/ZModal/use';
+import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
 import { differenceInDays } from 'date-fns';
 import InvestingLayout from '../InvestingSteps/InvestingLayout';
 import { ROUTE_DASHBOARD_EDIT_INVESTMENT } from '../../../../routes';
+import { Add } from '@mui/icons-material';
+import DepositModal from '../ManageInvestmentModals/DepositModal';
+import { Box } from '@mui/material';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
+  const { showModal } = useZModal();
   const exchange = useActiveExchange();
   const investmentsEndpoint = useInvestments(exchange?.internalId, {
     skip: !exchange?.internalId,
@@ -155,7 +160,25 @@ const MyDashboard: React.FC = () => {
       {investmentsEndpoint?.currentData?.length ? (
         <>
           <Heading>
-            <ZigTypography variant='h1'>{t('title')}</ZigTypography>
+            <Box sx={{ flex: '0 0 100px' }} />
+            <ZigTypography variant='h1' align={'center'} sx={{ flex: 1 }}>
+              {t('title')}
+            </ZigTypography>
+            <Box sx={{ flex: '0 0 100px' }}>
+              <ZigButton
+                id={'my-portfolio__deposit'}
+                startIcon={<Add />}
+                sx={{ fontWeight: 600, mb: 1 }}
+                variant={'contained'}
+                onClick={() =>
+                  showModal(DepositModal, {
+                    ctaId: 'account-menu-deposit',
+                  })
+                }
+              >
+                {t('action:deposit')}
+              </ZigButton>
+            </Box>
           </Heading>
           <LayoutContentWrapper
             endpoint={investmentsEndpoint}
