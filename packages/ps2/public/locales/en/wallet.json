@@ -65,6 +65,7 @@
   },
   "deposit": {
     "deposit": "Deposit",
+    "deposit-zig": "Deposit ZIG",
     "title": "Deposit Crypto",
     "description": "To deposit {{coin}} tokens, select the network and send to the address below."
   },
