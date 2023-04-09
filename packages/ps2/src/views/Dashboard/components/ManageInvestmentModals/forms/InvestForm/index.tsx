@@ -153,7 +153,6 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                   id={'account-menu-dropdown__deposit'}
                   startIcon={<Add />}
                   sx={{
-                    fontWeight: 600,
                     mt: 1,
                     color: (theme) => theme.palette.links,
                   }}
