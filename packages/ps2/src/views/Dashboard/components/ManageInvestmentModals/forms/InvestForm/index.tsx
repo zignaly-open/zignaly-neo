@@ -10,6 +10,7 @@ import {
   InputText,
   SliderInput,
   Typography,
+  ZigButton,
 } from '@zignaly-open/ui';
 import { EditInvestmentValidation } from './validations';
 import {
@@ -26,6 +27,9 @@ import { AmountInvested, TokenValue } from '../EditInvestmentForm/styles';
 import { NumericFormat } from 'react-number-format';
 import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
+import { Add } from '@mui/icons-material';
+import DepositModal from '../../DepositModal';
+import { useZModal } from '../../../../../../components/ZModal/use';
 
 function InvestForm({ close, onInvested }: InvestFormProps) {
   const coin = useCurrentBalance();
@@ -34,6 +38,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
   const { isLoading, invest } = useInvestInService(service.serviceId);
   const { data: serviceDetails } = useServiceDetails(service.serviceId);
   const toast = useToast();
+  const { showModal } = useZModal();
 
   // the safe word is Fluggaenkoecchicebolsen
   const transferMagicWord = t('invest-modal.transfer-label');
@@ -131,16 +136,39 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
               </AmountInvested>
             </>
           ) : (
-            <InputAmountAdvanced
-              name={'amountTransfer'}
-              control={control}
-              label={t('form.inputAmount.label')}
-              labelBalance={t('form.inputAmount.labelBalance')}
-              showUnit={true}
-              placeholder={'0.0'}
-              tokens={[coin]}
-              error={isDirty && t(errors?.amountTransfer?.value?.message)}
-            />
+            <>
+              <InputAmountAdvanced
+                name={'amountTransfer'}
+                control={control}
+                label={t('form.inputAmount.label')}
+                labelBalance={t('form.inputAmount.labelBalance')}
+                showUnit={true}
+                placeholder={'0.0'}
+                tokens={[coin]}
+                error={isDirty && t(errors?.amountTransfer?.value?.message)}
+              />
+
+              <Box>
+                <ZigButton
+                  id={'account-menu-dropdown__deposit'}
+                  startIcon={<Add />}
+                  sx={{
+                    fontWeight: 600,
+                    mt: 1,
+                    color: (theme) => theme.palette.links,
+                  }}
+                  variant={'text'}
+                  onClick={() =>
+                    showModal(DepositModal, {
+                      ctaId: 'account-menu-deposit',
+                      selectedCoin: coin.id,
+                    })
+                  }
+                >
+                  {t('action:deposit-coin', { coin: coin.id })}
+                </ZigButton>
+              </Box>
+            </>
           )}
         </div>
         <div>
