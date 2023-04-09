@@ -31,12 +31,7 @@ const Header: React.FC = () => {
           <Container>
             {sm ? (
               <Box display='flex' alignItems='center' gap='28px'>
-                <a
-                  href={MAIN_APP_URL}
-                  key='logo'
-                  target={'_blank'}
-                  rel={'noopener'}
-                >
+                <a href={MAIN_APP_URL} key='logo' rel={'noopener'}>
                   <BrandImage
                     id='menu__logo-portfolio'
                     height='32px'
