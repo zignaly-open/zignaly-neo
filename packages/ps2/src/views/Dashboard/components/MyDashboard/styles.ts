@@ -7,7 +7,7 @@ export const Layout = styled(PageContainer)`
 
 export const Heading = styled('div')`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   margin-bottom: 64px;
 `;
