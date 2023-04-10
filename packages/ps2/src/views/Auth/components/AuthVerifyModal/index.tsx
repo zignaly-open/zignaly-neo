@@ -95,8 +95,9 @@ function AuthVerifyModal({
 
   const getError = useCallback(
     (status: typeof verifyStatus) => {
-      const errorCode = (status.error as { data?: { error: { code: number } } })
-        ?.data?.error.code;
+      const errorCode = (
+        status?.error as { data?: { error: { code: number } } }
+      )?.data?.error?.code;
 
       return errorCode === 13
         ? t('error:error.login-session-expired')
