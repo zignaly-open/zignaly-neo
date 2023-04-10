@@ -15,7 +15,7 @@ import { ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../../../routes';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import OtherAccountsButton from './OtherAccountsButton';
 import { Box } from '@mui/material';
-import InvestDepositModal from 'views/Dashboard/components/ManageInvestmentModals/IndestDepositModal';
+import InvestDepositModal from 'views/Dashboard/components/ManageInvestmentModals/InvestDepositModal';
 
 const InvestButton: React.FC<{
   prefixId?: string;
