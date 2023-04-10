@@ -3,6 +3,7 @@ import {
   MarginContainer,
   PageContainer,
   TextButton,
+  ZigButton,
   ZigTab,
   ZigTabPanel,
   ZigTabs,
@@ -13,13 +14,15 @@ import BalanceAccountSelector from './components/BalanceAccountSelector';
 import { Header, StyledZigSelect } from './styles';
 import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
-import { OpenInNew } from '@mui/icons-material';
+import { Add, OpenInNew } from '@mui/icons-material';
 import ExportModal from './components/ExportModal';
 import { useZModal } from 'components/ZModal/use';
 import { Box } from '@mui/material';
 import { TRANSACTION_TYPE } from 'apis/coin/types';
 import { TRANSACTION_TYPE_NAME } from './components/TransactionsHistoryTable/types';
 import { CSSObject } from '@emotion/react';
+import createZModalRouteElement from '../../components/ZModal/ZModalRoute';
+import DepositModal from '../Dashboard/components/ManageInvestmentModals/DepositModal';
 
 const MyBalances: React.FC = () => {
   const { t } = useTranslation([
@@ -59,8 +62,24 @@ const MyBalances: React.FC = () => {
   return (
     <PageContainer className={'withSubHeader'}>
       <MarginContainer>
-        <Header>
+        <Header sx={{}}>
+          <Box sx={{ flex: '0 0 100px' }} />
           <BalanceAccountSelector />
+          <Box sx={{ flex: '0 0 100px' }}>
+            <ZigButton
+              id={'balances__deposit-header'}
+              startIcon={<Add />}
+              sx={{ fontWeight: 600, mb: 1 }}
+              variant={'contained'}
+              onClick={() =>
+                showModal(DepositModal, {
+                  ctaId: 'balance-deposit-header-button',
+                })
+              }
+            >
+              {t('action:deposit')}
+            </ZigButton>
+          </Box>
         </Header>
         <Box height='67px' display='flex' alignItems='center'>
           <ZigTabs
@@ -115,3 +134,8 @@ const MyBalances: React.FC = () => {
 };
 
 export default MyBalances;
+
+export const MyBalancesDeposit = createZModalRouteElement({
+  component: DepositModal,
+  ctaId: 'balances-table-row',
+});
