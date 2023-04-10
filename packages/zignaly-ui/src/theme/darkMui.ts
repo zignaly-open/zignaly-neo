@@ -92,20 +92,17 @@ const darkMui = createTheme({
           "&:before": {
             content: "''",
             position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
             zIndex: 2,
             borderRadius: 9,
-            padding: "2px",
+            padding: "3px",
             background: "linear-gradient(90deg, #7319DB, #05EAC1)",
             mask: "linear-gradient(#fff 0 0, #fff 0 0), content-box, linear-gradient(#fff 0 0, #fff 0 0)",
             WebkitMask: "linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)",
             WebkitMaskComposite: "destination-out",
             maskComposite: "exclude",
             outline: "solid 2px rgb(19,28,53)",
-            outlineOffset: "-3px",
+            outlineOffset: "-4px",
+            inset: "-1px",
           },
 
           [`& .${linearProgressClasses.bar}`]: {
