@@ -1,0 +1,9 @@
+{
+	"active": "Активный",
+	"table": {
+		"status": "Статус"
+	},
+	"statusTypes": {
+		"success_fee": "Комиссия с Дохода"
+	}
+}

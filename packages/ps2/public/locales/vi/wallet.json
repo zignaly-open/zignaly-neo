@@ -1,0 +1,105 @@
+{
+	"title": "Ví ZIG",
+	"totalBalance": "Tổng số dư ZIG",
+	"savings": "Phần quà & Tiết kiệm",
+	"successFee": "Discount phí thành công:",
+	"tradingFee": "Hoàn phí giao dịch:",
+	"successFeeTooltip": "Thanh toán phí thành công của bất kỳ Profit Sharing nào với ZIG và nhận chiết khấu.",
+	"tradingFeeTooltip": "Zignaly sẽ trả lại toàn bộ phí giao dịch của các giao dịch mới bằng USDT vào tài khoản của bạn, và sẽ tính cho bạn số tiền tương đương trừ đi chiết khấu bằng ZIG.",
+	"withdraw": "Rút tiền",
+	"savingMoney": "Bạn đang TIẾT KIỆM với ZIG!",
+	"saveMoney": "TIẾT KIỆM với ZIG!",
+	"min": "phút.",
+	"notAvailable": "Mạng không khả dụng, vui lòng thử lại sau",
+	"balance": {
+		"available": "Available",
+		"locked": "Bị khóa",
+		"unstaking": "Đang huỷ",
+		"staked": "Đã gửi"
+	},
+	"transactions": {
+		"internal": "Internal Transfer From",
+		"noData": "Không có giao dịch",
+		"header": {
+			"date": "Ngày",
+			"type": "Loại",
+			"amount": "Số lượng",
+			"coin": "Loại tiền",
+			"network": "Mạng:",
+			"status": "Trạng thái"
+		},
+		"walletTransactions": "Giao dịch của ví",
+		"type": {
+			"all": "Tất cả giao dịch",
+			"deposit": "Nạp",
+			"internal": "Nội bộ",
+			"reward": "Phần quà",
+			"successfee": "Success Fee",
+			"coinsalvage": "Tiền bổ trợ",
+			"withdraw": "Rút tiền",
+			"compensation": "Bồi hoàn",
+			"payment": "Thanh toán",
+			"cashbackvolume": "Số tiền hoàn",
+			"withdrawfee": "Phí rút tiền",
+			"zigpadpledge": "Cam kết ZIGPad",
+			"zigpadreturn": "Tiền hoàn ZIGPad",
+			"zigpadtokensreward": "Phân phối IDO Tokens",
+			"stakingvault": "Staking Vault",
+			"stakingvaultreturn": "Tiền hoàn Staking Vault",
+			"unstakingvault": "Huỷ",
+			"buyzig": "Mua ZIG",
+			"zigbidsredeemcode": "Mã đổi thưởng ZIGBids",
+			"zigbidsreferralcode": "Mã giới thiệu ZIGBids"
+		},
+		"status": {
+			"pending": "Chờ",
+			"completed": "Hoàn thành",
+			"error": "Lỗi"
+		},
+		"details": {
+			"from": "Từ:",
+			"to": "Đến:",
+			"txHash": "TX Hash:",
+			"note": "Ghi chú:"
+		}
+	},
+	"deposit": {
+		"deposit": "Nạp",
+		"title": "Nạp tiền",
+		"description": "Để nạp {{coin}}, hãy chọn mạng lưới và gửi đến địa chỉ bên dưới."
+	},
+	"coins": {
+		"header": {
+			"value": "Trị giá"
+		}
+	},
+	"buy": {
+		"buy": "Mua",
+		"title": "Mua ZIG",
+		"description": "Nếu bạn muốn dùng nhiều hơn {{max}} {{coin}} , hãy mua ZIG từ một trong < 0 > sàn sau. < \/0 >",
+		"available-exchanges": "Các exchange có sẵn.",
+		"buy-exchanges": "Bạn có thể mua ZIG trên các sàn giao dịch sau:",
+		"exchangeAccount": "Chọn Tài khoản Exchange",
+		"continue": "Tiếp tục xác nhận",
+		"confirm": "Xác nhận mua ZIG",
+		"deposit": {
+			"title": "Nạp {{coin}} để mua ZIG",
+			"description": "Để mua ZIG, trước tiên bạn cần gửi {{coin}} vào Tài khoản Zignaly Exchange của mình.",
+			"external": "Chuyển tiền từ ví bên ngoài",
+			"depositCoin": "Nạp tiền {{coin}}",
+			"buyCoin": "Mua {{coin}}",
+			"noCrypto": "Tôi chưa có coins nào",
+			"more": "Nạp thêm {{coin}}"
+		},
+		"from": "Từ:",
+		"swapFrom": "Hoán đổi từ",
+		"swapTo": "Hoán đổi sang",
+		"success": "Đã mua thành công {{coin}} .",
+		"received": "Số tiền nhận",
+		"willReceive": "Bạn sẽ nhận:",
+		"rate": "Tỷ lệ:",
+		"max": "Số tiền tối đa là {{amount}} {{coin}} .",
+		"maxLeft": "Số tiền tối đa còn lại là {{amount}} {coin} . Nó sẽ đặt lại sau {{mins}} phút.",
+		"buyNow": "Mua {{coin}} ngay"
+	}
+}

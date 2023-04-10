@@ -1,0 +1,121 @@
+{
+	"title": "Convida Amigos e Ganha uma Renda Vitalícia",
+	"description": "Receba uma percentagem das taxas de trading e de success fee pagas pelos seus amigos ou por todos os investidores do serviço do trader quando convidar um trader para Zignaly",
+	"share-your-link": "Compartilha o teu link:",
+	"what-you-get": "O que você recebe",
+	"what-they-get": "O que eles recebem",
+	"how-to-earn": "Como Ganhar",
+	"how-to-earn-steps": {
+		"step-1": {
+			"title": "Convidar Amigos",
+			"description": "Partilha o teu link de referência acima com <0>um clique<\/0> para os teus amigos cadastrarem-se em Zignaly com"
+		},
+		"step-2": {
+			"title": "Eles investem em um Serviço",
+			"description": "Faça com que os seus amigos invistam qualquer quantia num Serviço de Profit Sharing"
+		},
+		"step-3": {
+			"title": "Ambos Ganham",
+			"description": "Você ganhará comissões ilimitadas: {{successFee}}% dos Success Fees pagas à Zignaly. Eles recebem ${{reward}} em ZIG se investirem qualquer quantia"
+		}
+	},
+	"they-get-invest": "<0>Eles recebem<\/0><1>${{value}}<\/1><2> em Voucher de Taxas no Primeiro Depósito",
+	"they-get-invest-modal": "O seu convidado recebe um Voucher de Taxas de <0>${{value}}<\/0> no Primeiro Depósito.",
+	"invite-traders-for-percent": "<0>Convide Traders<\/0><1>{{value}}%<\/1><2> de todos os success fees dos seus investidores<\/2>",
+	"invite-traders-for-percent-modal": "Convide traders para obter <0>{{value}}%<\/0> da Arrecadação da Zignaly dos Success Fees do convidado para toda a vida.",
+	"invite-friends-for-percent": "<0>Convidar Amigos<\/0><1>{{{value}}%<\/1><2> dos seus success fees<\/2>",
+	"invite-friends-for-percent-modal": "Convide amigos para obter <0>{{value}}%<\/0> da Arrecadação da Zignaly dos Success Fees do convidado para toda a vida.",
+	"invite-traders-for-percent-rebate": "<0>Convide Traders<\/0><1>{{value}}%<\/1><2> das taxas de reembolso de trading<\/2>",
+	"invite-traders-for-percent-rebate-modal": "Convide traders para obter <0>{{value}}%<\/0> da Arrecadação da Zignaly das Taxas de Reembolso do convidado para toda a vida.",
+	"invite-friends-for-percent-rebate": "<0>Convide Amigos<\/0><1>{{value}}%<\/1><2> das taxas de reembolso de trading<\/2>",
+	"invite-friends-for-percent-rebate-modal": "Convide amigos para obter <0>{{value}}%<\/0> da Arrecadação da Zignaly das Taxas de Reembolso do convidado para toda a vida.",
+	"invite-for-deposit": "<0>Convide Amigos<\/0><1>{{value}} {{symbol}}<\/1><2> quando eles fazem um único depósito de ${{threshold}}+<\/2>",
+	"invite-for-deposit-modal": "Convida amigos para obter <0>{{value}} {{symbol}}<\/0> quando eles fizerem um único depósito de ${{threshold}}+.",
+	"invite-for-investment": "<0>Convide Amigos<\/0><1>{{value}} {{symbol}}<\/1><2> quando eles fazem um único investimento de ${{threshold}}+<\/2>",
+	"invite-for-investment-modal": "Convida amigos para obter <0>{{value}} {{symbol}}<\/0> quando eles fizerem um único investimento de ${{threshold}}+.",
+	"invite-for-total-investment": "<0>Convide Amigos<\/0><1>{{value}} {{symbol}}<\/1><2> quando eles fizerem investimentos que totalizam ${{threshold}}+<\/2>",
+	"invite-for-total-investment-modal": "Convida amigos para obter <0>{{value}} {{symbol}}<\/0> quando eles fizerem investimentos que totalizam ${{threshold}}+.",
+	"invite-for-total-investment-days_one": "<0>Convide Amigos<\/0><1>{{value}} {{symbol}}<\/1><2> quando eles fizerem investimentos que totalizam ${{threshold}}+ por pelo menos {{count}} dia<\/2>",
+	"invite-for-total-investment-days_other": "<0>Convide Amigos<\/0><1>{{value}} {{symbol}}<\/1><2> quando eles fizerem investimentos que totalizam ${{threshold}}+ por pelo menos {{count}} dias<\/2>",
+	"invite-for-total-investment-modal-days_one": "Convida amigos para obter <0>{{value}} {{symbol}}<\/0> quando eles fizerem investimentos que totalizam ${{threshold}}+ por pelo menos {{count}} dia.",
+	"invite-for-total-investment-modal-days_other": "Convida amigos para obter <0>{{value}} {{symbol}}<\/0> quando eles fizerem investimentos que totalizam ${{threshold}}+ por pelo menos {{count}} dias.",
+	"invite-for-balance": "<0>Convida Amigos<\/0><1>{{value}} {{symbol}}<\/1><2> quando o saldo atingir ${{threshold}}+<\/2>",
+	"invite-for-balance-modal": "Convida amigos para obter <0>{{value}} {{symbol}}<\/0> quando o saldo atingir ${{threshold}}+.",
+	"invite-for-signup": "<0>Convida Amigos<\/0><1>{{value}} {{symbol}}<\/1><2> quando eles criem e verifiquem uma conta<\/2>",
+	"invite-for-signup-modal": "Convida amigos para obter <\/0>{{value}} {{symbol}}<\/0> quando eles criem e verifiquem uma conta.",
+	"terms": {
+		"title": "Termos Fixos:",
+		"1": "Zignaly reserva-se o direito de desqualificar um participante se este se envolver em atividades inadequadas, desonestas, ou abusivas.",
+		"2": "A Zignaly reserva-se o direito de alterar os Termos e Condições do programa de referência a qualquer momento, sem aviso prévio.",
+		"3": "Os participantes que violarem estes termos não serão elegíveis para incentivos de referência; qualquer comportamento fraudulento ou abusivo resultará no encerramento imediato de todas as contas associadas.",
+		"4": "Os anúncios online pagos com o uso do logotipo da Zignaly são estritamente proibidos.",
+		"5": "Todas as referências são calculadas com base na arrecadação obtida e realizada pela Zignaly. Todos os cálculos feitos pelo Zignaly são finais.",
+		"6": "No caso de um desconto, os seus ganhos serão contabilizados após o desconto."
+	},
+	"when-invite-friends": "Quando você convida amigos",
+	"when-invite-traders": "Quando se convida traders",
+	"invitee-gets": "O convidado recebe",
+	"export": "Exportar",
+	"full-rewards": "Termos completos",
+	"full-rewards-title": "Termos de ganho de referência",
+	"total-invitees": "Total de Convidados",
+	"total-rewards": "Ganhos Totais",
+	"my-referrals": "Minhas Referências",
+	"pending-rewards": "Ganhos Pendentes",
+	"filter-any": "Qualquer",
+	"table": {
+		"title": "Histórico de Ganhos",
+		"no-referrals": "Sem ganhos para mostrar",
+		"no-commission-history": "O Histórico de Ganho está vazio. Convide alguns amigos ou traders para ganhar.",
+		"time-and-date": "Hora & Data",
+		"user-trader": "Usuário\/Trader",
+		"reward-type": "Tipo de Ganho",
+		"filter-status": "Status",
+		"filter-type": "Tipo"
+	},
+	"statusTypes": {
+		"Completed": "Completado",
+		"Pending": "Pendente",
+		"Locked": "Bloqueado",
+		"TransferPending": "Transferência pendente",
+		"TransferOrdered": "Transferência solicitada",
+		"Cancelled": "Cancelado",
+		"Failed": "Falhou"
+	},
+	"rewardTypes": {
+		"SIGNUP_REWARD": "Ganho de cadastros",
+		"DEPOSIT_REWARD": "Ganho de depósito",
+		"SUCCESS_REWARD": "Ganho de Success Fee",
+		"ALLOCATE_REWARD": "Alocar ganhos",
+		"SUCCESS_FEE_REWARD": "Ganho de Success Fee",
+		"REBATE_COMMISSION_REWARD": "Ganho de Taxas de Reembolso"
+	},
+	"header": {
+		"title": "Ganhe 20%",
+		"description": "Convidar Amigos"
+	},
+	"invite-traders-for-revenue": "<0>Convide Traders<\/0><1>{{{value}}%<\/1><2>da Arrecadação da Zignaly<\/2>",
+	"invite-traders-for-revenue-modal": "Convide traders para obter <0>{{value}}%<\/0> da Arrecadação da Zignaly obtida com o serviço de Profit Sharing do Trader para toda a vida.",
+	"invite-friends-for-revenue": "<0>Convide Amigos<\/0><1>{{{value}}%<\/1><2>da Arrecadação da Zignaly<\/2>",
+	"invite-friends-for-revenue-modal": "Convide amigos para obter <0>{{value}}%<\/0> da Arrecadação da Zignaly do convidado para toda a vida.",
+	"create-invite": {
+		"create-invite": "Partilhar Convite",
+		"invite-friends": "Convidar Amigos",
+		"invite-traders": "Convidar Traders",
+		"deposit-trader-cta": "Tenha a chance de oferecer seus serviços a <0>450.000+<\/0> investidores!",
+		"friend-cta": "Inscreva-se e\n ganhe $20 em ZIG",
+		"trader-cta": "Quer ganhar $20\ne um monte\n de investidores?",
+		"scan-qr": "Digitalize o código QR e junte-se a mim em Zignaly!",
+		"customize-text": "Personalize o seu convite:",
+		"invite-text-friend": "Vamos ganhar juntos! Junte-se a mim no Zignaly e invista com os seus Gestores de Fundos Cripto favoritos! Receba um cupão para taxas de ${{reward}} no seu primeiro depósito!",
+		"invite-text-trader": "Vamos ganhar juntos! Junta-se a mim em Zignaly e cria o seu próprio Fundo Cripto!",
+		"scan-join": "Digitalize o código QR e junte-se a mim em <0>app.zignaly.com<\/0>",
+		"invite-code": "Código: <0>{{code}}<\/0>",
+		"ugly-friend-cta": "Receba um Voucher para taxas de <0>${{reward}}<\/0> no seu primeiro depósito",
+		"ugly-trader-cta": "Torne-se um <0>Gestor de Fundos<\/0> Cripto em Zignaly!"
+	},
+	"share": {
+		"email-subject": "Zignaly, uma nova forma de operar",
+		"facebook-hashtags": "#cripto #trading"
+	}
+}

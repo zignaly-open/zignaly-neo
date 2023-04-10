@@ -74,9 +74,10 @@ const Signup: React.FC = () => {
                 container
                 direction='row'
                 alignItems='center'
-                marginBottom={'70px'}
+                marginBottom={'60px'}
+                marginLeft={'-6px'}
               >
-                <ZignalyLogotype width={'135px'} height={'40px'} />
+                <ZignalyLogotype width={'155px'} height={'65px'} />
               </Grid>
             </Grid>
             <Grid item marginBottom={'10px'}>

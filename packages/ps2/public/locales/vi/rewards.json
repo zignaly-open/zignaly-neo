@@ -1,0 +1,10 @@
+{
+	"active": "Active",
+	"table": {
+		"time-and-date": "Ngày & Giờ",
+		"status": "Trạng thái"
+	},
+	"statusTypes": {
+		"success_fee": "Success Fee"
+	}
+}

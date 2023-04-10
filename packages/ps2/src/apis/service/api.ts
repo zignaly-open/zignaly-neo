@@ -101,6 +101,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
   traderServiceEdit: builder.mutation<void, EditServicePayload>({
     invalidatesTags: (result, error, args) => [
       { type: 'Service', id: args.id },
+      'Marketplace',
     ],
     query: ({ id, ...payload }) => ({
       url: `services/${id}`,

@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
+import { ReactComponent as BinanceLogo } from '../../../../../../images/binance.svg';
 import {
   dark,
   InputText,
@@ -10,6 +11,7 @@ import {
   CloneIcon,
   Typography,
   Loader,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import NorthEastIcon from '@mui/icons-material/NorthEast';
 import copy from 'copy-to-clipboard';
@@ -30,7 +32,11 @@ import {
 } from '../../../../../../apis/user/use';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import { trackCta } from '@zignaly-open/tracker';
-import { BUY_CRYPTO_URL } from '../../../../../../util/constants';
+import {
+  BUY_CRYPTO_URL,
+  DEPOSIT_INFO_URL,
+} from '../../../../../../util/constants';
+import { ExternalLink } from '../../../../../../components/AnchorLink';
 
 function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
@@ -101,7 +107,22 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   return (
     <form onSubmit={handleSubmit(() => {})}>
       <Box mt={1} mb={1}>
-        <Typography>{t('description')}</Typography>
+        <ZigTypography>
+          <Trans t={t} i18nKey={'description'}>
+            <BinanceLogo
+              width={16}
+              height={16}
+              style={{
+                verticalAlign: 'middle',
+              }}
+            />
+            <ExternalLink
+              href={DEPOSIT_INFO_URL}
+              target={'_blank'}
+              rel={'nofollow noreferrer'}
+            ></ExternalLink>
+          </Trans>
+        </ZigTypography>
       </Box>
 
       <Grid container>

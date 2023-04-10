@@ -1,0 +1,120 @@
+{
+	"title": "Mời bạn bè và kiếm thu nhập trọn đời",
+	"description": "Nhận phần trăm phí giao dịch và phí thành công do bạn bè của bạn, hoặc từ tất cả các nhà đầu tư trả cho dịch vụ của trader khi bạn mời trader đó tham gia Zignaly",
+	"share-your-link": "Chia sẻ liên kết của bạn:",
+	"what-you-get": "Bạn nhận được",
+	"what-they-get": "Họ nhận được",
+	"how-to-earn": "Cách kiếm tiền",
+	"how-to-earn-steps": {
+		"step-1": {
+			"title": "Mời bạn bè",
+			"description": "Chia sẻ liên kết giới thiệu của bạn ở trên với <0 > một cú nhấp chuột < \/ 0> để bạn bè đăng ký Zignaly"
+		},
+		"step-2": {
+			"title": "Họ đầu tư vào một dịch vụ",
+			"description": "Mời bạn bè của bạn đầu tư bất kỳ số tiền nào vào  Profit Sharing"
+		},
+		"step-3": {
+			"title": "Cả hai đều thu lời",
+			"description": "Bạn sẽ kiếm được hoa hồng không giới hạn: {{successFee}}% Phí thành công được trả cho Zignaly. Họ nhận được ${{reward}} bằng ZIG nếu họ đầu tư bất kỳ số tiền nào"
+		}
+	},
+	"they-get-invest": "<0>Họ nhận được<\/0><1>${{value}}<\/1><2> trong voucher cho lần gửi tiền đầu tiên",
+	"they-get-invest-modal": "Người được mời của bạn nhận được voucher < 0 > $ {{value}} < \/0 > cho khoản tiền gửi đầu tiên của họ.",
+	"invite-traders-for-percent": "<0>Mời nhà giao dịch<\/0><1>{{value}}%<\/1><2> tất cả phí thành công của nhà đầu tư<\/2>",
+	"invite-traders-for-percent-modal": "Mời các nhà giao dịch nhận <0>{{value}}%<\/0> doanh thu từ Phí thành công của Zignaly từ người được mời đó suốt đời.",
+	"invite-friends-for-percent": "<0>Mời bạn bè<\/0><1>{{value}}%<\/1><2> phí thành công<\/2>",
+	"invite-friends-for-percent-modal": "Mời bạn bè nhận <0>{{value}}%<\/0> doanh thu từ Phí thành công của Zignaly từ người được mời suốt đời.",
+	"invite-traders-for-percent-rebate": "<0>Mời Nhà giao dịch<\/0><1>{{value}}%<\/1><2> phí chiết khấu giao dịch<\/2>",
+	"invite-traders-for-percent-rebate-modal": "Mời các nhà giao dịch nhận <0>{{value}}%<\/0> doanh thu từ chiết khấu của Zignaly từ người được mời suốt đời.",
+	"invite-friends-for-percent-rebate": "< 0 > Mời bạn bè < \/0 > < 1 > {{value}} % < \/ 1 > < 2 > phí giảm giá giao dịch của họ < \/ 2 >",
+	"invite-friends-for-percent-rebate-modal": "Mời bạn bè để nhận được < 0 > {{value}} % < \/0 > Doanh thu của Zignaly từ Phí chiết khấu từ người được mời vĩnh viễn.",
+	"invite-for-deposit": "< 0 > Mời bạn bè < \/0 > < 1 > {{value}} {{symbol}} < \/1 > < 2 > khi họ gửi một lần $ {{threshold}} + < \/ 2 >",
+	"invite-for-deposit-modal": "Mời bạn bè nhận < 0 > {{value}} {{symbol}} < \/0 > khi họ gửi một lần $ {{threshold}} +.",
+	"invite-for-investment": "< 0 > Mời bạn bè < \/0 > < 1 > {{value}} {{symbol}} < \/1 > < 2 > khi họ đầu tư một lần $ {{threshold}} + < \/ 2 >",
+	"invite-for-investment-modal": "Mời bạn bè nhận < 0 > {{value}} {{symbol}} < \/0 > khi họ thực hiện một khoản đầu tư duy nhất là $ {{threshold}} +.",
+	"invite-for-total-investment": "< 0 > Mời bạn bè < \/0 > < 1 > {{value}} {{symbol}} < \/1 > < 2 > khi họ đầu tư tổng cộng $ {{threshold}} + < \/ 2 >",
+	"invite-for-total-investment-modal": "Mời bạn bè nhận < 0 > {{value}} {{symbol}} < \/0 > khi họ đầu tư tổng cộng $ {{threshold}} +.",
+	"invite-for-total-investment-days_one": "< 0 > Mời bạn bè < \/0 > < 1 > {{value}} {{symbol}} < \/1 > < 2 > khi họ đầu tư tổng cộng $ {{threshold}} + trong ít nhất {{count}} ngày < >",
+	"invite-for-total-investment-days_other": "< 0 > Mời bạn bè < \/0 > < 1 > {{value}} {{symbol}} < \/1 > < 2 > khi họ đầu tư tổng cộng $ {{threshold}} + trong ít nhất {{count}} ngày < >",
+	"invite-for-total-investment-modal-days_other": "Mời bạn bè nhận < 0 > {{value}} {{symbol}} < \/0 > khi họ đầu tư tổng cộng $ {{threshold}} + trong ít nhất {{count}} ngày.",
+	"invite-for-balance": "< 0 > Mời bạn bè < \/0 > < 1 > {{value}} {{symbol}} < \/1 > < 2 > khi số dư của họ đạt $ {{threshold}} + < \/ 2 >",
+	"invite-for-balance-modal": "Mời bạn bè nhận < 0 > {{value}} {{symbol}} < \/0 > khi số dư của họ đạt $ {{threshold}} +.",
+	"invite-for-signup": "<0>Mời bạn bè<\/0><1>{{value}} {{symbol}}<\/1><2> khi họ tạo và xác minh tài khoản<\/2>",
+	"invite-for-signup-modal": "Mời bạn bè nhận <0>{{value}} {{symbol}}<\/0> khi họ tạo và xác minh tài khoản.",
+	"terms": {
+		"title": "Điều khoản cố định:",
+		"1": "Zignaly có quyền loại người tham gia nếu họ tham gia vào các hoạt động không phù hợp, không trung thực hoặc lạm dụng.",
+		"2": "Zignaly có quyền sửa đổi Điều khoản và Điều kiện của chương trình referral bất cứ lúc nào mà không cần thông báo trước.",
+		"3": "Những người tham gia vi phạm các điều khoản này sẽ không đủ điều kiện nhận ưu đãi referral. Bất kỳ hành vi gian lận hoặc lạm dụng nào cũng sẽ dẫn đến việc chấm dứt ngay lập tức tất cả các tài khoản được liên kết.",
+		"4": "Quảng cáo trực tuyến trả tiền có sử dụng logo của Zignaly đều bị nghiêm cấm.",
+		"5": "Tất cả các lượt giới thiệu được tính dựa trên doanh thu mà Zignaly thực có.  Tất cả các tính toán được chốt bởi Zignaly.",
+		"6": "Trong trường hợp giảm giá, thu nhập của bạn sẽ được hạch toán sau khi giảm giá."
+	},
+	"when-invite-friends": "Khi bạn mời bạn bè",
+	"when-invite-traders": "Khi bạn mời nhà giao dịch",
+	"invitee-gets": "Người được mời được",
+	"export": "Xuất",
+	"full-rewards": "Điều khoản đầy đủ",
+	"full-rewards-title": "Điều khoản kiếm tiền referral",
+	"total-invitees": "Tổng số người được mời",
+	"total-rewards": "Tổng Thu Nhập",
+	"my-referrals": "Referral của tôi",
+	"pending-rewards": "Thu nhập đang chờ xử lý",
+	"filter-any": "Bất kì",
+	"table": {
+		"title": "Lịch sử thu nhập",
+		"no-referrals": "Không có thu nhập để hiển thị",
+		"time-and-date": "Ngày & Giờ",
+		"user-trader": "Người dùng\/Nhà giao dịch",
+		"reward-type": "Loại thu nhập",
+		"filter-status": "Trạng thái",
+		"filter-type": "Loại"
+	},
+	"statusTypes": {
+		"Completed": "Hoàn thành",
+		"Pending": "Chờ",
+		"Locked": "Khóa",
+		"TransferPending": "Đang chờ chuyển",
+		"TransferOrdered": "Đã đặt lệnh chuyển",
+		"Cancelled": "Đã hủy",
+		"Failed": "Thất bại"
+	},
+	"rewardTypes": {
+		"SIGNUP_REWARD": "Thu từ đăng ký",
+		"DEPOSIT_REWARD": "Thu từ tiền nạp",
+		"SUCCESS_REWARD": "Thu từ phí thành công",
+		"ALLOCATE_REWARD": "Thu từ phân bổ đầu tư",
+		"SUCCESS_FEE_REWARD": "Thu từ phí thành công",
+		"REBATE_COMMISSION_REWARD": "Thu từ phí chiết khấu"
+	},
+	"header": {
+		"title": "Kiếm 20%",
+		"description": "Mời bạn bè"
+	},
+	"invite-traders-for-revenue": "<0>Mời nhà giao dịch<\/0><1>{{value}}%<\/1><2>doanh thu của Zignaly<\/2>",
+	"invite-traders-for-revenue-modal": "Mời các nhà giao dịch để nhận <0>{{value}}%<\/0> từ doanh thu của Zignaly kiếm được từ dịch vụ chia sẻ Lợi nhuận của Nhà giao dịch vĩnh viễn.",
+	"invite-friends-for-revenue": "<0>Mời bạn bè<\/0><1>{{value}}%<\/1><2>doanh thu của Zignaly<\/2>",
+	"invite-friends-for-revenue-modal": "Mời bạn bè để nhận được < 0 > {{value}} % < \/0 > doanh thu của Zignaly kiếm được từ người được mời vĩnh viễn.",
+	"create-invite": {
+		"create-invite": "Chia sẻ lời mời",
+		"invite-friends": "Mời bạn bè",
+		"invite-traders": "Mời nhà giao dịch",
+		"deposit-friend-cta": "Rỗng",
+		"deposit-trader-cta": "Có cơ hội cung cấp dịch vụ của bạn cho trên < 0 > 450.000+ < nhà đầu tư!",
+		"friend-cta": "Đăng ký và\n nhận $20 bằng ZIG",
+		"trader-cta": "Muốn kiếm $20\nvà các nhà đầu tư?",
+		"scan-qr": "Quét mã QR và tham gia cùng tôi trên Zignaly!",
+		"customize-text": "Tùy chỉnh lời mời của bạn:",
+		"invite-text-friend": "Hãy cùng nhau kiếm tiền! Tham gia cùng tôi tại Zignaly và đầu tư với các Nhà quản lý quỹ tiền điện tử yêu thích của bạn! Nhận Phiếu giảm giá ${{reward}} cho lần nạp tiền đầu tiên.",
+		"invite-text-trader": "Hãy cùng nhau kiếm tiền! Tham gia cùng tôi tại Zignaly và tạo Quỹ tiền điện tử của riêng bạn!",
+		"scan-join": "Quét mã QR và tham gia cùng tôi trên <0>app.zignaly.com< \/ 0>",
+		"invite-code": "Mã: < 0 > {{code}} < \/0 >",
+		"ugly-friend-cta": "Nhận  <0>${{reward}}<\/0> Voucher cho lần nạp tiền đầu tiên của bạn",
+		"ugly-trader-cta": "Trở thành Nhà quản lý tiền điện tử < 0 > < \/0 > tại Zignaly!"
+	},
+	"share": {
+		"email-subject": "Zignaly, a new way to trade",
+		"facebook-hashtags": "#tiền điện tử #giao dịch"
+	}
+}

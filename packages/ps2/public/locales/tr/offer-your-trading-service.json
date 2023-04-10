@@ -1,0 +1,77 @@
+{
+	"header": {
+		"title": "400 BİNDEN FAZLA KULLANICIYA TRADE SERVİSİNİZİ SUNUN"
+	},
+	"modal": {
+		"title": "Yeni servis oluşturun",
+		"service-type": "Servis tipi",
+		"service-name": "Servis adı",
+		"base-currency": "Temel Birim",
+		"types": {
+			"spot": "Spot",
+			"futures": "Vadeli İşlemler"
+		},
+		"please-verify": "Lütfen bilgilerinizi gözden geçirin. Tür, taban ve ad daha sonra değiştirilemez"
+	},
+	"wrapper": {
+		"title": "Profit Sharing Servis Faydaları",
+		"list": {
+			"item1": "Binance API Anahtarlarına izin veren herhangi bir çözüm üzerinden alım satım yapın",
+			"item2": "Başarı ücretlendirmenizi belirleyin",
+			"item3": "<0>Pazar yerimizde<\/0> listelenmek için başvuruda bulunun veya özel servis olarak kalın"
+		},
+		"action": "Servisinizi oluşturun"
+	},
+	"infoBar": {
+		"item1": {
+			"title": "5 MİLYON DOLAR",
+			"description": "Havuza Alınmış Varlıklar"
+		},
+		"item2": {
+			"title": "+430,000",
+			"description": "Profit Sharing Yatırımcıları"
+		},
+		"item3": {
+			"title": "1300",
+			"description": "Aktif Servisler"
+		}
+	},
+	"features": {
+		"title": "Profit Sharing Servis Özellikleri",
+		"list": {
+			"item1": {
+				"title": "PERFORMANS ANALİZİ",
+				"description": "Kullanıcıların yanı sıra siz, günlük kar ve zararlarınızı ve diğer metriklerin yanı sıra bileşik PNL yüzdesini kontrol edebileceksiniz."
+			},
+			"item2": {
+				"title": "FON YÖNETİMİ",
+				"description": "Endişeye mahal yok! Binlerce yatırımcının hesaplama işlemleri ve destek isteklerini nasıl idare edeceğim diye düşünmenize gerek yok. Zignaly ekibi yanınızda!"
+			},
+			"item3": {
+				"title": "GÜNLÜK ÖDEMELER",
+				"description": "Profit Sharing hizmetlerinizden günlük başarı ücretleri alın."
+			},
+			"item4": {
+				"title": "TRADER BAŞARI EKİBİ",
+				"description": "Süreç boyunca size yardımcı olacak bir başarı yöneticisi atanacaktır."
+			}
+		}
+	},
+	"howWorks": {
+		"title": "En iyi trader'ların Zignaly'de servislerini sunma sebepleri",
+		"list": {
+			"item1": {
+				"title": "Havuz Fonları",
+				"description": "Fonlara güvenli bir havuz hesabı aracılığıyla erişeceksiniz, böylece tüm kullanıcılar tamamen aynı sonuçları elde edecek."
+			},
+			"item2": {
+				"title": "Alım-Satım",
+				"description": "Stratejinizi bağlamak çok kolay: Favori aracınızda işlem yapmak veya Trading View'den sinyal göndermek için API anahtarları hizmetinizde."
+			},
+			"item3": {
+				"title": "Bölünmüş Kâr",
+				"description": "İstediğiniz başarı komisyon ücretini belirleyin. Zignaly'nin dahil edilmesi gerekli payı %5'tir."
+			}
+		}
+	}
+}

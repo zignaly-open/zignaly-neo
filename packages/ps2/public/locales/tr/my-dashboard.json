@@ -30,5 +30,10 @@
 			"right": "Çekim"
 		}
 	},
-	"tooltip-date": "{{date}} tarihinden beri bu hizmete yatırım yapıyorsunuz"
+	"tooltip-date": "{{date}} tarihinden beri bu hizmete yatırım yapıyorsunuz",
+	"how-to-invest-steps": {
+		"step-1": {
+			"time": "2 dakika sürer"
+		}
+	}
 }
