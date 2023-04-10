@@ -17,6 +17,8 @@ const ZigButton = ({ active, tooltip, ctaId, color, size, ...props }: ZigButtonP
       // it wasn't me lol
       size={size as LoadingButtonProps["size"]}
       {...props}
+      // @ts-ignore
+      data-testid={props["data-testid"] || props.id}
       // hack to preserve old behavior but allow for normal mui theming
       color={props.variant === "outlined" && !color ? "secondary" : color}
       className={active ? "MuiButton-active" : ""}

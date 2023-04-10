@@ -9,7 +9,6 @@ import ps2Api from './apis/baseApiPs2';
 import { api as walletApi } from './apis/wallet/api';
 import { api as referralApi } from './apis/referrals/api';
 
-// import * as lodash from 'lodash';
 jest.mock('react-i18next', () => ({
   useTranslation: () => {
     return {

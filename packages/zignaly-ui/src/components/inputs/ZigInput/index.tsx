@@ -12,7 +12,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
       {...props}
       inputProps={{
         ...(props.inputProps || {}),
-        "data-testid": testId,
+        "data-testid": testId || props.id,
       }}
       label={
         <>
