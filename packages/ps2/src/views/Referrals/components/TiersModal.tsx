@@ -90,7 +90,7 @@ const TiersModal: React.FC<
           <LinearProgress
             sx={{
               width: '304px',
-              margin: '0 28px',
+              margin: '0 28px 2px',
             }}
             value={(current * 100) / min}
             variant='determinate'
