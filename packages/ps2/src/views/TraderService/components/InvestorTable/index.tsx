@@ -24,7 +24,6 @@ import ConnectionStateLabel from '../ConnectionStateLabel';
 import { YesNo } from './atoms';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { Box } from '@mui/material';
-import { hasMoreThanDecimals } from '../../../../util/numbers';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -63,7 +62,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
               value={props.getValue()}
             />
             <ZigTablePriceLabel
-              prefix={hasMoreThanDecimals(props.row.original.pending, 2) && '~'}
+              showApproximate
               variant={'caption'}
               coin={service?.ssc ?? 'USDT'}
               value={props.row.original.pending}
