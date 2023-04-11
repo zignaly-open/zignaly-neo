@@ -10,5 +10,7 @@
 	"table-search-placeholder": "Digite para pesquisar moedas.",
 	"loading-arialLabel": "Carregando...",
 	"my-coins": "Minhas Moedas",
-	"deposits-withdrawals": "Depósitos\/Retiradas"
+	"deposits-withdrawals": "Histórico de Transações",
+	"withdraw": "Retirar",
+	"deposit": "Depósito"
 }

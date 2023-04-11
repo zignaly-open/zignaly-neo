@@ -21,14 +21,17 @@
 	"account-menu": {
 		"isAuth-button-logIn": "Iniciar Sessão",
 		"isAuth-button-signUp": "CADASTRAR-SE",
-		"portfolio": "Meu Portfólio",
 		"notAuth-dropdown-link-balances": "Os Meus Saldos",
 		"notAuth-button-logOut": "Sair",
 		"notAuth-dropdown-link-wallet": "ZIG Wallet",
 		"referrals": "Referidos",
 		"notAuth-dropdown-link-settings": "Configurações",
 		"notAuth-dropdown-link-password": "Senha",
-		"notAuth-dropdown-link-2fa": "Autenticação de Dois Factores"
+		"notAuth-dropdown-link-2fa": "Autenticação de Dois Factores",
+		"portfolio": "Meu Portfólio",
+		"marketplace": "Marketplace",
+		"balance": "Saldos",
+		"rewards": "Recompensas"
 	},
 	"account-selector": {
 		"type": {
@@ -39,7 +42,7 @@
 	},
 	"navigation-menu": {
 		"profit-sharing": "Procurar os Melhores Traders",
-		"become-trader": "Ofereça seus serviços de trading"
+		"become-trader": "Oferece os teus Serviços de Trading"
 	},
 	"amount": "Quantia",
 	"new-version": "Nova versão, clique em mim para actualizar",
@@ -73,5 +76,14 @@
 	"changes-saved": "Alterações salvas com sucesso",
 	"name": "Nome",
 	"type-to-confirm": "Digite \" {{word}} \" para confirmar",
-	"ok": "OK"
+	"ok": "OK",
+	"balance": {
+		"total": "Total",
+		"available": "Disponível",
+		"deposit-funds": "Depositar Fundos",
+		"find-traders": "Encontra traders para investir",
+		"my-portfolio": "Meu Portfólio"
+	},
+	"follow-us": "Siga-nos",
+	"portfolio": "Portfólio"
 }

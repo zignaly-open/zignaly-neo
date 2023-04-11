@@ -136,7 +136,7 @@ const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
               });
             }}
           >
-            {t('deposit.deposit')}
+            {t('deposit.deposit-zig')}
           </ZigButton>
           <ZigButton
             id={'wallet__withdraw-zig'}

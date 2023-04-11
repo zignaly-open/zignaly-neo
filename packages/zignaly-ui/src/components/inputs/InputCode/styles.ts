@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { styledIf } from "../../../utils/styled";
 
 export const Layout = styled.div<{ error?: string }>`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
   .input-box {
     background: #0f1124;
 

@@ -12,5 +12,8 @@
 	"delete": "Excluir",
 	"continue": "Continuar",
 	"save-and-close": "Guardar e Fechar",
-	"copied": "Copiado para prancheta"
+	"copied": "Copiado para prancheta",
+	"hide": "Esconder",
+	"show": "Mostrar",
+	"claim": "Reclamar"
 }

@@ -21,14 +21,17 @@
 	"account-menu": {
 		"isAuth-button-logIn": "Iniciar sesión",
 		"isAuth-button-signUp": "REGISTRARSE",
-		"portfolio": "Mi Portafolio",
 		"notAuth-dropdown-link-balances": "Mi Saldo",
 		"notAuth-button-logOut": "Cerrar Sesión",
 		"notAuth-dropdown-link-wallet": "Billetera ZIG",
 		"referrals": "Referidos",
 		"notAuth-dropdown-link-settings": "Configuraciones",
 		"notAuth-dropdown-link-password": "Contraseña",
-		"notAuth-dropdown-link-2fa": "Autenticación de Dos Factores"
+		"notAuth-dropdown-link-2fa": "Autenticación de Dos Factores",
+		"portfolio": "Mi Portafolio",
+		"marketplace": "Marketplace",
+		"balance": "Saldos",
+		"rewards": "Recompensas"
 	},
 	"account-selector": {
 		"type": {
@@ -39,7 +42,7 @@
 	},
 	"navigation-menu": {
 		"profit-sharing": "Encuentra los Mejores Traders",
-		"become-trader": "Ofrece tus servicios de trading"
+		"become-trader": "Ofrece tus Servicios de Trading"
 	},
 	"amount": "Cantidad",
 	"new-version": "Nueva versión, haz clic para actualizar",
@@ -73,5 +76,14 @@
 	"changes-saved": "Cambios guardados correctamente",
 	"name": "Nombre",
 	"type-to-confirm": "Escribe \"{{word}}\" para confirmar",
-	"ok": "OK"
+	"ok": "OK",
+	"balance": {
+		"total": "Total",
+		"available": "Disponible",
+		"deposit-funds": "Deposita Fondos",
+		"find-traders": "Encuentra traders en los que invertir",
+		"my-portfolio": "Mi Portafolio"
+	},
+	"follow-us": "Síguenos",
+	"portfolio": "Portafolio"
 }

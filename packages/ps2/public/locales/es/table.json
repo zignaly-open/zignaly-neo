@@ -17,7 +17,7 @@
 	"balanceSummary-invested": "Invertido",
 	"selector-validation-notData": "Datos no disponibles",
 	"investColumn": {
-		"successFess": "10% Comisión por Beneficios",
+		"successFess": "10% Success Fee",
 		"liquidated": "LIQUIDADO"
 	},
 	"tooltip-columnHeader": "Cambiar OrdenarPor",

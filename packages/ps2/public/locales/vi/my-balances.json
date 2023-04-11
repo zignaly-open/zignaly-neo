@@ -10,5 +10,7 @@
 	"table-search-placeholder": "Nhập để tìm kiếm",
 	"loading-arialLabel": "Đang tải...",
 	"my-coins": "Tiền của tôi",
-	"deposits-withdrawals": "Nạp\/Rút tiền"
+	"deposits-withdrawals": "Lịch sử giao dịch",
+	"withdraw": "Rút tiền",
+	"deposit": "Nạp"
 }

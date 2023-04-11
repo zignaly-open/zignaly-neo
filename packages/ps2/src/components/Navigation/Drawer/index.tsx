@@ -39,6 +39,8 @@ import {
   ROUTE_SIGNUP,
   ROUTE_TRADING_SERVICE_MANAGE,
   ROUTE_BECOME_TRADER,
+  ROUTE_WALLET,
+  ROUTE_PROFIT_SHARING,
 } from 'routes';
 import theme from 'theme';
 import { HELP_URL } from 'util/constants';
@@ -164,8 +166,19 @@ const ZigDrawer = () => {
             )}
             <Divider />
             <List>
-              {isAuthenticated && (
+              {isAuthenticated ? (
                 <>
+                  <ListItem disablePadding onClick={handleDrawerToggle}>
+                    <ListItemButton
+                      id='drawer__wallet'
+                      to={ROUTE_WALLET}
+                      component={Link}
+                    >
+                      <ListItemText
+                        primary={t('account-menu.notAuth-dropdown-link-wallet')}
+                      />
+                    </ListItemButton>
+                  </ListItem>
                   <ListItemButton
                     onClick={() => setSettingsOpen(!settingsOpen)}
                   >
@@ -201,30 +214,44 @@ const ZigDrawer = () => {
                     </List>
                   </Collapse>
                   <ListItem disablePadding onClick={handleDrawerToggle}>
-                    <Link to={ROUTE_BECOME_TRADER}>
-                      <ListItemButton id='drawer__become-trader'>
-                        <ListItemText
-                          primary={t('navigation-menu.become-trader')}
-                        />
-                      </ListItemButton>
-                    </Link>
+                    <ListItemButton
+                      id='drawer__become-trader'
+                      to={ROUTE_BECOME_TRADER}
+                      component={Link}
+                    >
+                      <ListItemText
+                        primary={t('navigation-menu.become-trader')}
+                      />
+                    </ListItemButton>
                   </ListItem>
                   {service && (
                     <ListItem disablePadding onClick={handleDrawerToggle}>
-                      <Link
+                      <ListItemButton
+                        id='drawer__for-trading'
                         to={generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
                           serviceId: service.serviceId?.toString(),
                         })}
+                        component={Link}
                       >
-                        <ListItemButton id='drawer__for-trading'>
-                          <ListItemText
-                            primary={t('main-menu.dropdown-link-forTrading')}
-                          />
-                        </ListItemButton>
-                      </Link>
+                        <ListItemText
+                          primary={t('main-menu.dropdown-link-forTrading')}
+                        />
+                      </ListItemButton>
                     </ListItem>
                   )}
                 </>
+              ) : (
+                <ListItem disablePadding onClick={handleDrawerToggle}>
+                  <ListItemButton
+                    to={ROUTE_PROFIT_SHARING}
+                    component={Link}
+                    id='drawer__ps'
+                  >
+                    <ListItemText
+                      primary={t('navigation-menu.profit-sharing')}
+                    />
+                  </ListItemButton>
+                </ListItem>
               )}
               <ListItem disablePadding onClick={handleDrawerToggle}>
                 <ListItemButton target='_blank' href={HELP_URL}>

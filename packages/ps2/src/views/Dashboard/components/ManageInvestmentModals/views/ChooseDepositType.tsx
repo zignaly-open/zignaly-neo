@@ -3,7 +3,7 @@ import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { Box, Divider, Grid, Link } from '@mui/material';
 import NorthEastIcon from '@mui/icons-material/NorthEast';
-import { PURCHASE_CRYPTO } from '../../../../../util/constants';
+import { BUY_CRYPTO_URL } from '../../../../../util/constants';
 import { ChooseDepositTypeViews } from '../types';
 
 const ChooseDepositType: React.FC<{
@@ -100,7 +100,7 @@ const ChooseDepositType: React.FC<{
                 </ZigTypography>
               </Box>
               <Link
-                href={PURCHASE_CRYPTO}
+                href={BUY_CRYPTO_URL}
                 target={'_blank'}
                 display={'flex'}
                 justifyContent={'center'}
