@@ -4,7 +4,7 @@ import { injectEndpoints } from 'apis/util';
 
 export const api = injectEndpoints(baseApiPs2, (builder) => ({
   marketplace: builder.query<MarketplaceService[], void>({
-    providesTags: ['MarketplaceService'],
+    providesTags: ['Marketplace'],
     query: () => ({
       url: 'marketplace/',
     }),

@@ -1,5 +1,6 @@
 {
     "deposit": "Deposit",
+    "deposit-coin": "Deposit {{coin}}",
     "edit": "Edit",
     "claim": "Claim",
     "confirm": "Confirm",

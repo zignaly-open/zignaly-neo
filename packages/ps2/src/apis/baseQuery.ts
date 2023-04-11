@@ -55,45 +55,49 @@ const maybeReportError = (
 
 const customFetchBase: (
   baseUrl?: string,
-) => BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> =
-  (baseUrl) => async (args, api, extraOptions) => {
-    const result = await baseQuery(baseUrl)(args, api, extraOptions);
+) => BaseQueryFn<
+  string | FetchArgs,
+  unknown,
+  FetchBaseQueryError,
+  { silent?: boolean }
+> = (baseUrl) => async (args, api, extraOptions) => {
+  const result = await baseQuery(baseUrl)(args, api, extraOptions);
 
-    maybeReportError(result?.error, api?.type);
+  extraOptions?.silent || maybeReportError(result?.error, api?.type);
 
-    if (
-      result?.error?.status === 401 &&
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      !endpointsWhitelistedFor401.includes(args.url)
-    ) {
-      api.dispatch(logout());
-    } else if (
-      +new Date((api.getState() as RootState).user.sessionExpiryDate) -
-        TIME_TO_START_REFRESHING_TOKEN <
-      Date.now()
-    ) {
-      if (!mutex.isLocked()) {
-        const release = await mutex.acquire();
-        try {
-          const refreshResult = await baseQuery()(
-            { url: 'user/session' },
-            api,
-            extraOptions,
-          );
+  if (
+    result?.error?.status === 401 &&
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    !endpointsWhitelistedFor401.includes(args.url)
+  ) {
+    api.dispatch(logout());
+  } else if (
+    +new Date((api.getState() as RootState).user.sessionExpiryDate) -
+      TIME_TO_START_REFRESHING_TOKEN <
+    Date.now()
+  ) {
+    if (!mutex.isLocked()) {
+      const release = await mutex.acquire();
+      try {
+        const refreshResult = await baseQuery()(
+          { url: 'user/session' },
+          api,
+          extraOptions,
+        );
 
-          api.dispatch(
-            setSessionExpiryDate(
-              (refreshResult?.data as SessionResponse)?.validUntil,
-            ),
-          );
-        } finally {
-          release();
-        }
+        api.dispatch(
+          setSessionExpiryDate(
+            (refreshResult?.data as SessionResponse)?.validUntil,
+          ),
+        );
+      } finally {
+        release();
       }
     }
+  }
 
-    return result;
-  };
+  return result;
+};
 
 export default customFetchBase;

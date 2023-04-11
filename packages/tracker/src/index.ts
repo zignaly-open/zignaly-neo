@@ -6,9 +6,11 @@ type tzData = {
   tzid?: string;
 };
 
-/**
- * Send tz action.
- */
+const lastDelayedTrack = {
+  event: null as tzData,
+  timeout: null as ReturnType<typeof setTimeout>,
+};
+
 const sendTz = (data: tzData) => {
   const options = {
     method: 'POST',
@@ -19,6 +21,27 @@ const sendTz = (data: tzData) => {
   };
 
   return fetch('https://zignaly.com/api/fe/tz.php', options);
+};
+
+const delayTimeout = 100;
+
+/**
+ * We have a problem with delayed track
+ * because we track buttons and links AND we track url changed
+ * @param data
+ */
+const sendTzDelayed = (data: tzData) => {
+  if (
+    lastDelayedTrack.event?.userId === data?.userId &&
+    data.urlDestination?.indexOf(
+      lastDelayedTrack.event?.urlDestination + '#',
+    ) === 0
+  ) {
+    // if the timeout has already executed, no harm no foul
+    clearTimeout(lastDelayedTrack.timeout);
+  }
+  lastDelayedTrack.event = data;
+  lastDelayedTrack.timeout = setTimeout(() => sendTz(data), delayTimeout);
 };
 
 /**
@@ -52,7 +75,7 @@ const triggerTz = async (
     localStorage.setItem('tid', json);
   }
 
-  await sendTz(data);
+  await sendTzDelayed(data);
 };
 
 let referrer = document.referrer;

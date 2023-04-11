@@ -56,9 +56,3 @@ export const AccountDropdown = styled('div')`
     text-overflow: ellipsis;
   }
 `;
-
-export const LogoutButtonWrap = styled('div')`
-  & > button {
-    width: 100%;
-  }
-`;

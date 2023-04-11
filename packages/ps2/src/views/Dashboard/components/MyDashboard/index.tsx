@@ -5,46 +5,43 @@ import {
   ZigTypography,
   ZigChartMini,
   ZigTablePriceLabel,
+  ZigButton,
 } from '@zignaly-open/ui';
 import React, { useMemo } from 'react';
 import { Heading, Layout, ZigTableWrapper } from './styles';
 import { useTranslation } from 'react-i18next';
-import {
-  useInvestments,
-  useSetSelectedInvestment,
-} from '../../../../apis/investment/use';
+import { useInvestments } from '../../../../apis/investment/use';
 import BigNumber from 'bignumber.js';
 import { formatDateFromDays } from './util';
 import { Investment } from '../../../../apis/investment/types';
 import { BalanceSummary } from '../BalanceSummary';
-import EditInvestmentModal from '../ManageInvestmentModals/EditInvestmentModal';
 import { ServiceName } from '../ServiceName';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
-import { useZModal } from '../../../../components/ZModal/use';
+import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
 import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../util/numbers';
 import InvestingLayout from '../InvestingSteps/InvestingLayout';
+import { ROUTE_DASHBOARD_EDIT_INVESTMENT } from '../../../../routes';
+import { Add } from '@mui/icons-material';
+import DepositModal from '../ManageInvestmentModals/DepositModal';
+import { Box } from '@mui/material';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
+  const { showModal } = useZModal();
   const exchange = useActiveExchange();
   const investmentsEndpoint = useInvestments(exchange?.internalId, {
     skip: !exchange?.internalId,
   });
-  const selectInvestment = useSetSelectedInvestment();
-  // we do not use the results of this till before the modal
   useCoinBalances();
-  const { showModal } = useZModal();
+  const showEditInvestmentModal = useZRouteModal(
+    ROUTE_DASHBOARD_EDIT_INVESTMENT,
+  );
 
-  const onClickEditInvestment = (service: Investment) => {
-    selectInvestment(service);
-    showModal(EditInvestmentModal, {
-      ctaId: 'edit-investment-dashboard',
-    });
-  };
-
+  const onClickEditInvestment = (service: Investment) =>
+    showEditInvestmentModal({ serviceId: service.serviceId });
   const calculateServiceAge = (createdAt: string) =>
     differenceInDays(new Date(), new Date(createdAt)).toString();
 
@@ -169,16 +166,38 @@ const MyDashboard: React.FC = () => {
 
   return (
     <Layout>
-      {investmentsEndpoint?.currentData?.length ? (
-        <>
-          <Heading>
-            <ZigTypography variant='h1' id={'my-portfolio__title'}>
-              {t('title')}
-            </ZigTypography>
-          </Heading>
-          <LayoutContentWrapper
-            endpoint={investmentsEndpoint}
-            content={(services: Investment[]) => (
+      <LayoutContentWrapper
+        unmountOnRefetch
+        endpoint={investmentsEndpoint}
+        content={(services: Investment[]) =>
+          investmentsEndpoint?.currentData?.length ? (
+            <>
+              <Heading>
+                <Box sx={{ flex: '0 0 100px' }} />
+                <ZigTypography
+                  variant='h1'
+                  align={'center'}
+                  sx={{ flex: 1 }}
+                  id={'my-portfolio__title'}
+                >
+                  {t('title')}
+                </ZigTypography>
+                <Box sx={{ flex: '0 0 100px' }}>
+                  <ZigButton
+                    id={'my-portfolio__deposit'}
+                    startIcon={<Add />}
+                    sx={{ fontWeight: 600, mb: 1 }}
+                    variant={'contained'}
+                    onClick={() =>
+                      showModal(DepositModal, {
+                        ctaId: 'account-menu-deposit',
+                      })
+                    }
+                  >
+                    {t('action:deposit')}
+                  </ZigButton>
+                </Box>
+              </Heading>
               <ZigTableWrapper>
                 <ZigTable
                   prefixId={'portfolio'}
@@ -188,12 +207,12 @@ const MyDashboard: React.FC = () => {
                   columnVisibility
                 />
               </ZigTableWrapper>
-            )}
-          />
-        </>
-      ) : (
-        <InvestingLayout />
-      )}
+            </>
+          ) : (
+            <InvestingLayout />
+          )
+        }
+      />
     </Layout>
   );
 };
