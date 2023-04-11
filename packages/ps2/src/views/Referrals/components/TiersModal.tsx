@@ -90,7 +90,7 @@ const TiersModal: React.FC<
           <LinearProgress
             sx={{
               width: '304px',
-              margin: '0 28px',
+              margin: '0 28px 2px',
             }}
             value={(current * 100) / min}
             variant='determinate'
@@ -102,7 +102,7 @@ const TiersModal: React.FC<
           />
         </Box>
 
-        <ZigTypography color='neutral200' variant='h2' mt='46px' mb='10px'>
+        <ZigTypography color='neutral200' variant='h2' mt='42px' mb='4px'>
           {t('boost-tiers')}
         </ZigTypography>
 
@@ -154,11 +154,7 @@ const TiersModal: React.FC<
                 flexDirection='column'
                 justifyContent='flex-end'
               >
-                <TierBar
-                  tier={tier}
-                  min={tiers[0].tierLevelFactor}
-                  max={tiers[tiers.length - 1].tierLevelFactor}
-                />
+                <TierBar tier={tier} tiers={tiers} />
                 <Box
                   display='flex'
                   alignItems='center'
@@ -170,14 +166,14 @@ const TiersModal: React.FC<
                   <ZignalyLogo />
                   <ZigTypography
                     color='neutral400'
-                    fontSize={14}
+                    fontSize={13}
                     fontWeight={500}
                   >
                     {formatCompactNumber(tier.minZig)}
                   </ZigTypography>
                 </Box>
                 <ZigTypography
-                  fontSize={14}
+                  fontSize={13}
                   fontWeight={500}
                   color='highlighted'
                 >

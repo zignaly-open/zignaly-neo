@@ -208,7 +208,7 @@ export const TierArrow = styled('div')<{ opacity: number }>`
   position: relative;
   width: 30px;
   height: 100%;
-  margin-top: 8px;
+  margin-top: 6px;
   opacity: ${({ opacity }) => opacity};
 
   &::before {

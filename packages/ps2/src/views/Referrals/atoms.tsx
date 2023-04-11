@@ -94,7 +94,7 @@ export const TierArrow = ({
 export const BoostChip = ({ boost }: { boost: number }) => (
   <BoostChipBox>
     <BoltIcon width={10} height={19} />
-    <ZigTypography>{boost}x</ZigTypography>
+    <ZigTypography fontSize={13}>{boost}x</ZigTypography>
   </BoostChipBox>
 );
 
