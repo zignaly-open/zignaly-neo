@@ -157,32 +157,33 @@ const MyDashboard: React.FC = () => {
 
   return (
     <Layout>
-      {investmentsEndpoint?.currentData?.length ? (
-        <>
-          <Heading>
-            <Box sx={{ flex: '0 0 100px' }} />
-            <ZigTypography variant='h1' align={'center'} sx={{ flex: 1 }}>
-              {t('title')}
-            </ZigTypography>
-            <Box sx={{ flex: '0 0 100px' }}>
-              <ZigButton
-                id={'my-portfolio__deposit'}
-                startIcon={<Add />}
-                sx={{ fontWeight: 600, mb: 1 }}
-                variant={'contained'}
-                onClick={() =>
-                  showModal(DepositModal, {
-                    ctaId: 'account-menu-deposit',
-                  })
-                }
-              >
-                {t('action:deposit')}
-              </ZigButton>
-            </Box>
-          </Heading>
-          <LayoutContentWrapper
-            endpoint={investmentsEndpoint}
-            content={(services: Investment[]) => (
+      <LayoutContentWrapper
+        unmountOnRefetch
+        endpoint={investmentsEndpoint}
+        content={(services: Investment[]) =>
+          investmentsEndpoint?.currentData?.length ? (
+            <>
+              <Heading>
+                <Box sx={{ flex: '0 0 100px' }} />
+                <ZigTypography variant='h1' align={'center'} sx={{ flex: 1 }}>
+                  {t('title')}
+                </ZigTypography>
+                <Box sx={{ flex: '0 0 100px' }}>
+                  <ZigButton
+                    id={'my-portfolio__deposit'}
+                    startIcon={<Add />}
+                    sx={{ fontWeight: 600, mb: 1 }}
+                    variant={'contained'}
+                    onClick={() =>
+                      showModal(DepositModal, {
+                        ctaId: 'account-menu-deposit',
+                      })
+                    }
+                  >
+                    {t('action:deposit')}
+                  </ZigButton>
+                </Box>
+              </Heading>
               <ZigTableWrapper>
                 <ZigTable
                   prefixId={'dashboard'}
@@ -192,12 +193,12 @@ const MyDashboard: React.FC = () => {
                   columnVisibility
                 />
               </ZigTableWrapper>
-            )}
-          />
-        </>
-      ) : (
-        <InvestingLayout />
-      )}
+            </>
+          ) : (
+            <InvestingLayout />
+          )
+        }
+      />
     </Layout>
   );
 };
