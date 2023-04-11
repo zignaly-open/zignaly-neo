@@ -1,0 +1,114 @@
+{
+	"service-by": "bởi <0>{{name}}<\/0>",
+	"service-age": "Đã bắt đầu < 0 > {{date}} < \/0 > trước",
+	"link-copied": "Liên kết được sao chép vào khay nhớ tạm!",
+	"logo-alt": "Zignaly - Profit Sharing \/ Copy Trading profile logo của {{name}}",
+	"liquidated": "Thanh lý",
+	"invested-label": "Đã Đầu Tư",
+	"copy-link": "Sao chép liên kết",
+	"invest-button": {
+		"invest-now": "ĐẦU TƯ",
+		"max-reached": "Số tiền tối đa đã đạt được",
+		"max-reached-tooltip": "Không thể đầu tư vào dịch vụ này vì nó đã đạt đến Giới hạn tiền tối đa. Khám phá các Dịch vụ Profit Sharing khác trong thị trường của chúng tôi.",
+		"all-accounts": "Xem tất cả ( {{count}} )",
+		"x-success-fee": "{{fee}} % Phí thành công"
+	},
+	"owner-verified": "Người quản lý đã được xác minh",
+	"owner-from": "Người quản lý đến từ {{country}}",
+	"strategy": "Chiến lược",
+	"assets-in-pool": "Tài sản trong tài khoản chung",
+	"investors-count": "Nhà đầu tư",
+	"strategy-empty": "Người quản lý thích giữ thông tin giao dịch cho cá nhân",
+	"about-trader": "Thông tin người quản lý",
+	"about-trader-empty": "Người quản lý thích giữ một không gian riêng tư",
+	"about-trader-joined-time": "Đã tham gia {{date}} trước",
+	"summary": {
+		"base-currency": "Đồng tiền yết giá:",
+		"funds-allocated": "Số tiền phân bổ:",
+		"no-max-limit": "Không giới hạn số tiền tối đa",
+		"success-fee": "Phí thành công:",
+		"tags": "Tags:"
+	},
+	"periods": {
+		"7d-full": "1 tuần",
+		"30d-full": "1 tháng",
+		"90d-full": "6 tháng",
+		"180d-full": "6 tháng",
+		"365d-full": "1 năm",
+		"all-full": "Tất cả",
+		"7d": "1 tuần",
+		"30d": "1 tháng",
+		"90d": "3 tháng",
+		"180d": "6 tháng",
+		"365d": "1 năm",
+		"all": "Tất cả"
+	},
+	"other-accounts": {
+		"title": "Khoản đầu tư trên tất cả các tài khoản",
+		"account": "Tài khoản",
+		"active": "Active",
+		"invested": "Đã Đầu Tư",
+		"switch-action": "Công tắc"
+	},
+	"not-enough-time": "Không đủ dữ liệu cho giai đoạn này",
+	"chart-error": {
+		"heading": "Đã xảy ra lỗi :(",
+		"description": "Rất tiếc, chúng tôi không thể hiển thị biểu đồ"
+	},
+	"chart-options": {
+		"pnl_pct_compound": "Tổng % PNL",
+		"pnl_ssc": "PNL hàng ngày",
+		"pnl_ssc_percent": "% PNL hàng ngày",
+		"sbt_ssc": "Tổng số dư",
+		"at_risk_pct": "% rủi ro",
+		"investors": "Số nhà đầu tư"
+	},
+	"migrated-to-ps2": "Đã chuyển sang PS2",
+	"total": "Tổng:",
+	"not-enough-data": "Không đủ dữ liệu lịch sử cho giai đoạn này",
+	"edit": {
+		"title": "Chỉnh sửa hồ sơ",
+		"name": "Tên dịch vụ:",
+		"logo": "Chỉnh logo",
+		"description": "Mô tả:",
+		"success-fee-desc": "Số tiền lãi bạn sẽ tính cho các nhà đầu tư của mình (bao gồm 5% phí Zignaly)",
+		"pool-size": "Kích thước tài khoản tối đa:",
+		"pool-size-desc": "Khoản tối đa bạn sẽ chấp nhận từ nhà đầu tư",
+		"visibility": {
+			"visibility": "Hiển thị:",
+			"unlisted": "Bản thảo chưa công bố",
+			"unlisted-desc": "Dịch vụ chỉ hiển thị cho bạn",
+			"private": "Tình trạng dịch vụ: Cá nhân",
+			"private-desc": "Dịch vụ hiển thị cho người dùng đã đăng nhập bằng URL",
+			"public": "Tình trạng dịch vụ: Công khai",
+			"public-desc": "Dịch vụ hiển thị cho bất kỳ khách truy cập nào có URL",
+			"marketplace": "Tình trạng dịch vụ: Thị trường",
+			"marketplace-desc": "Dịch vụ được công bố trên thị trường cho mọi người",
+			"marketplace-requirements": "Để được liệt kê trên thị trường, hãy xem <0>danh sách yêu cầu<\/0> và liên hệ với bộ phận hỗ trợ của chúng tôi thông qua chatbox khi dịch vụ của bạn đáp ứng đủ yêu cầu"
+		},
+		"save": "Lưu hồ sơ",
+		"validation": {
+			"name-length": "Phải từ 5 đến 50 ký tự",
+			"success-fee-range": "Phải là 0 hoặc một số nguyên từ 10 đến 75"
+		}
+	},
+	"you-get-x": "Bạn nhận được {{number}} %",
+	"create": {
+		"invest-in-your-service": "Đầu tư vào dịch vụ của bạn",
+		"select-type-first": "Chọn loại dịch vụ",
+		"title": "Tạo mới",
+		"action": "Tạo dịch vụ",
+		"next-step": "Kế tiếp",
+		"service-type": "Loại dịch vụ",
+		"service-name": "Tên dịch vụ",
+		"base-currency": "Đồng yết giá",
+		"types": {
+			"spot": "Giao ngay",
+			"futures": "Hợp đồng tương lai"
+		},
+		"minimum-balance": "Để giao dịch và cho phép nhà đầu tư đầu tư, bạn cần đầu tư ít nhất {{ minValue }} {{ minValueCoin }} vào dịch vụ của mình",
+		"profits-explainer": "Quyết định số tiền lãi từ phí giao dịch và phí thành công mà bạn muốn yêu cầu tự động chuyển ra ngoài.",
+		"please-verify": "Vui lòng xem lại thông tin của bạn. Không thể thay đổi loại giao dịch, loại tiền niêm yết và tên về sau.",
+		"zero-fee": "Nếu bạn chọn phí thành công = 0, Zignaly cũng sẽ không tính bất kỳ khoản phí nào"
+	}
+}

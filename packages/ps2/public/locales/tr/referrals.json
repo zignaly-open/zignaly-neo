@@ -1,0 +1,50 @@
+{
+	"description": "Bir trader'ı Zignaly'ye davet ettiğinizde arkadaşlarınız tarafından veya trader hizmetinin tüm yatırımcıları tarafından ödenen işlem ve başarı ücretlerinden bir yüzde alın",
+	"share-your-link": "Bağlantınızı paylaşın:",
+	"what-you-get": "Sizin alacağınız",
+	"what-they-get": "Onların alacağı",
+	"how-to-earn-steps": {
+		"step-1": {
+			"description": "Arkadaşlarınızın Zignaly'e kaydolması için yukarıdaki referans bağlantınızı <0>tek bir tıklama<\/0> ile paylaşın"
+		},
+		"step-2": {
+			"title": "Bir servise yatırım yaparlar",
+			"description": "Arkadaşlarınızın bir Profit Sharing servisine herhangi bir miktarda yatırım yapmasını sağlayın"
+		},
+		"step-3": {
+			"title": "İkiniz de Kazanın"
+		}
+	},
+	"terms": {
+		"title": "Sabit Şartlar:",
+		"2": "Zignaly, referans programının Hüküm ve Koşullarını önceden haber vermeksizin istediği zaman değiştirme hakkını saklı tutar."
+	},
+	"when-invite-friends": "Arkadaşlarınızı davet ettiğinizde",
+	"when-invite-traders": "Trader'ları davet ettiğinizde",
+	"invitee-gets": "Davetli alır",
+	"export": "Aktar",
+	"full-rewards": "Tüm şartlar",
+	"total-invitees": "Toplam Davetli",
+	"total-rewards": "Toplam Kazanç",
+	"my-referrals": "Referanslarım",
+	"pending-rewards": "Bekleyen Kazançlar",
+	"filter-any": "Filtrele",
+	"table": {
+		"time-and-date": "Saat ve Tarih",
+		"user-trader": "Kullanıcı\/Trader",
+		"filter-status": "Durum",
+		"filter-type": "Tip"
+	},
+	"statusTypes": {
+		"Completed": "Tamamlandı",
+		"Pending": "Bekliyor",
+		"Locked": "Kilitlendi",
+		"TransferPending": "Transfer bekleniyor",
+		"TransferOrdered": "Transfer emri verildi",
+		"Cancelled": "İptal edildi",
+		"Failed": "Başarısız"
+	},
+	"header": {
+		"title": "%20 kazanın"
+	}
+}

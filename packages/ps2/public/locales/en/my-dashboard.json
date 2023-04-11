@@ -40,15 +40,15 @@
     },
     "step-2": {
       "title": "Deposit funds",
-      "description": "<0>Deposit</0> crypto in your account. If you don't have crypto, you can <1>purchase</1><2/> it too.",
+      "description": "<0>Deposit</0> crypto in your account. If you don't have crypto, you can <1>purchase</1><2/> it too",
       "time": "Takes 3 minutes"
     },
     "step-3": {
       "title": "Invest (no minimum)",
-      "description": "Invest in the services and wait to see your returns growing day by day.",
+      "description": "Invest in the services and wait to see your returns growing day by day",
       "time": "Takes 2 minutes"
     },
-    "marketplace": "Start investing now",
+    "start-investing": "Start investing now",
     "bottom-title": "My Portfolio Services",
     "bottom-description": "You are not following any service yet, invest in them to get profits."
   }

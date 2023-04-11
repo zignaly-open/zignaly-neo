@@ -12,5 +12,8 @@
 	"delete": "Eliminar",
 	"continue": "Continuar",
 	"save-and-close": "Guardar y Cerrar",
-	"copied": "Copiado al portapapeles"
+	"copied": "Copiado al portapapeles",
+	"hide": "Ocultar",
+	"show": "Mostrar",
+	"claim": "Reclamar"
 }

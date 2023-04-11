@@ -36,13 +36,15 @@ export const RouteGroup: React.FC<{
 };
 
 export const RouteDropdown: React.FC<{
+  id?: string;
   title: string;
   routes: { path: string; name: string; id: string }[];
-}> = ({ routes, title }) => {
+}> = ({ id, routes, title }) => {
   const activePath = useLocation()?.pathname;
   return (
     <>
       <MenuDropDown
+        id={id}
         title={title}
         dropDownOptions={{
           maxHeight: '300px',

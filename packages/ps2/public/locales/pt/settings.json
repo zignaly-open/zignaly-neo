@@ -1,0 +1,29 @@
+{
+	"update-password": {
+		"title": "Atualizar Senha",
+		"description": "Atualize a senha da sua Conta de Zignaly.\nPara sua segurança, você será desconectado após clicar em Atualizar senha.",
+		"current-password": "Senha Atual:",
+		"new-password": "Nova Senha:",
+		"success": "Senha atualizada com sucesso. Por favor, faz novamente o login."
+	},
+	"enable-2fa": {
+		"title": "Autenticação de Dois Fatores (2FA)",
+		"description": "Proteja a sua conta, criando uma autenticação de dois fatores (2FA). Neste momento, o 2FA é considerado a melhor prática de segurança, leia mais <0>aqui<\/0>.",
+		"setup-description": "Baixa o <0>Google Authentication App<\/0> e digitaliza o código QR ou cola a frase-chave manualmente no aplicativo. Por segurança, você vai ser desconectado após a introdução do código de 6 dígitos.",
+		"enter-code": "Insira o código de 6 dígitos do aplicativo:",
+		"enter-code-subtitle": "Você precisará dele toda vez que iniciar sessão.",
+		"key-phrase": "Frase Chave:",
+		"key-phrase-copied": "Frase Chave copiada para a prancheta",
+		"key-phrase-info": "A Frase-Chave é usada para recuperar o Google Authenticator em caso de perda ou alteração de dispositivo - certifique-se de manter a frase-chave segura antes de introduzir o código de 6 dígitos.",
+		"code-2fa": "Código 2FA",
+		"setup-2fa": "Configurar 2FA",
+		"enable-2fa": "Habilitar 2FA",
+		"success": "Autenticação de 2 Fatores ativada. Por favor faça login novamente."
+	},
+	"disable-2fa": {
+		"title": "Desativar 2FA",
+		"description": "Tua conta é protegida com a Autenticação de Dois Fatores (2FA). Para desativar o 2FA, introduz o código do aplicativo autenticador.",
+		"success": "2FA foi desativado com sucesso.",
+		"security": "Por segurança, recomendamos ter o 2FA ativado na tua conta."
+	}
+}

@@ -39,7 +39,7 @@
 		"amount": "Cantidad a Retirar",
 		"networkFee": "Comisión de Red",
 		"continue": "Continuar con la Confirmación",
-		"withdrawNow": "Retirar ahora!"
+		"withdrawNow": "¡Retirar ahora!"
 	},
 	"success": {
 		"title": "Retiro Exitoso",

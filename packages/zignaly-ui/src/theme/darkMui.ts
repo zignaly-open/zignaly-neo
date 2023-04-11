@@ -75,13 +75,6 @@ const darkMui = createTheme({
         `,
       },
     },
-    MuiTooltip: {
-      styleOverrides: {
-        popper: {
-          pointerEvents: "none",
-        },
-      },
-    },
     MuiLinearProgress: {
       styleOverrides: {
         root: {

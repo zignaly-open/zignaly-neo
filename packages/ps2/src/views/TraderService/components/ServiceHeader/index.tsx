@@ -45,6 +45,7 @@ function ServiceHeader() {
       <MarginContainer>
         <Container>
           <MenuDropDown
+            id={'service-management-header__choose-service'}
             ref={menuDropDownRef}
             title={activeService?.serviceName}
             secondaryTitle={t('dropdown.manageServices')}
@@ -104,6 +105,7 @@ function ServiceHeader() {
           />
 
           <RouteDropdown
+            id={'service-management-header__choose-option'}
             title={t('dropdown.profile.title')}
             routes={[
               {
