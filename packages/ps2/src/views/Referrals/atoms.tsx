@@ -36,6 +36,7 @@ export const TierBoost = ({
   label,
   value,
   traderRebateFee,
+  ...props
 }: {
   label: string;
   value: number;
@@ -44,7 +45,7 @@ export const TierBoost = ({
   const { t } = useTranslation('referrals');
 
   return (
-    <Box display='flex' flexDirection='column' minWidth='144px'>
+    <Box display='flex' flexDirection='column' minWidth='144px' {...props}>
       <ZigTypography color='neutral300' variant='body2'>
         {label}
       </ZigTypography>

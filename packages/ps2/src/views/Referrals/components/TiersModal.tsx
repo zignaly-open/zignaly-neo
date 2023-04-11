@@ -59,7 +59,11 @@ const TiersModal: React.FC<
         >
           <Box display='flex' alignItems='center' gap={0.5}>
             <ZignalyLogo style={{ marginRight: '8px' }} />
-            <ZigTypography color='greenGraph' variant='h3'>
+            <ZigTypography
+              color='greenGraph'
+              variant='h3'
+              data-testid='tiers-amount'
+            >
               {numericFormatter(current.toString(), {
                 thousandSeparator: true,
                 prefix: showAumProgress ? '$' : '',
@@ -86,6 +90,7 @@ const TiersModal: React.FC<
             label={t('current-tier')}
             value={currentLevel.tierLevelFactor}
             traderRebateFee={rewards.configuration.traderRebateFee}
+            data-testid='tiers-current'
           />
           <LinearProgress
             sx={{
@@ -99,6 +104,7 @@ const TiersModal: React.FC<
             label={t('next-tier')}
             value={nextLevel?.tierLevelFactor}
             traderRebateFee={rewards.configuration.traderRebateFee}
+            data-testid='tiers-next'
           />
         </Box>
 
@@ -153,6 +159,7 @@ const TiersModal: React.FC<
                 display='flex'
                 flexDirection='column'
                 justifyContent='flex-end'
+                data-testid={`tier-chart-${tier.tierLevelFactor}`}
               >
                 <TierBar tier={tier} tiers={tiers} />
                 <Box
@@ -168,6 +175,7 @@ const TiersModal: React.FC<
                     color='neutral400'
                     fontSize={13}
                     fontWeight={500}
+                    data-testid={`tier-chart-zig-${tier.tierLevelFactor}`}
                   >
                     {formatCompactNumber(tier.minZig)}
                   </ZigTypography>
@@ -176,6 +184,7 @@ const TiersModal: React.FC<
                   fontSize={13}
                   fontWeight={500}
                   color='highlighted'
+                  data-testid={`tier-chart-aum-${tier.tierLevelFactor}`}
                 >
                   ${formatCompactNumber(tier.minAum)}
                 </ZigTypography>
