@@ -17,9 +17,13 @@ const getGradient = (gradientVariant: GradientVariant, isGreen: boolean) => {
 /**
  * Get y domain for chart, adjusted to leave space under 0 axis if needed
  */
-const getYDomain = (data: AxisFormat[]) => {
+const getYDomain = (data: AxisFormat[], bars = false) => {
   const values = data.map((s) => s.y);
-  const ranges = [Math.min(0, ...values), Math.max(...values)];
+  // Add 0 to min values to show chart under 0 axis
+  const minValues = [0, ...values];
+  // Add 1 to max values for chart (not bars), to make sure the range of the chart is big enough
+  const maxValues = bars ? values : [1, ...values];
+  const ranges = [Math.min(...minValues), Math.max(...maxValues)];
   if (ranges[0] < 0 && ranges[1] > 0)
     ranges[0] = Math.min(
       ranges[0],
@@ -32,6 +36,7 @@ const getYDomain = (data: AxisFormat[]) => {
 export function useChartData(
   data: AxisFormat[] | number[],
   gradientVariant = "full" as GradientVariant,
+  bars = false,
 ): {
   data: AxisFormat[];
   color: ChartColor;
@@ -46,7 +51,7 @@ export function useChartData(
             y: value as number,
           }))
         : (data as AxisFormat[]);
-    const yDomain = getYDomain(chart);
+    const yDomain = getYDomain(chart, bars);
     return [chart.map((c) => ({ ...c, y0: yDomain[0] })), yDomain];
   }, [data]);
 
