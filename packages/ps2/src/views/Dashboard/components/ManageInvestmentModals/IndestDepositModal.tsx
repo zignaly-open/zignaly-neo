@@ -2,6 +2,7 @@ import { DialogProps } from '@mui/material/Dialog';
 import React, { useEffect, useState } from 'react';
 import {
   useCurrentBalance,
+  useSelectedInvestment,
   useSelectInvestment,
 } from '../../../../apis/investment/use';
 import { useServiceDetails } from '../../../../apis/service/use';
@@ -26,8 +27,11 @@ function InvestDepositModal({
     service?.ssc,
   );
 
+  // gotta make sure this is set because right after the setSelectedInvestment the value comes as null
+  const selectedInvestment = useSelectedInvestment();
   // we need this only once
-  const loading = isLoadingService || isLoadingBalance || isFetching;
+  const loading =
+    isLoadingService || isLoadingBalance || isFetching || !selectedInvestment;
   const [ready, setReady] = useState(!loading);
   useEffect(() => {
     setReady((r) => !loading || r);
