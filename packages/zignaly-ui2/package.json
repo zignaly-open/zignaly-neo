@@ -35,7 +35,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "zignaly-ui2",
+  "name": "@zignaly-open/ui2",
   "author": "Alexander Mikhalchenko",
   "module": "dist/zignaly-ui2.esm.js",
   "size-limit": [

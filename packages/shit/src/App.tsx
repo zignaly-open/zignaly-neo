@@ -1,9 +1,9 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { dummy } from '@zignaly-open/ui';
+import { littleShit } from '@zignaly-open/ui2';
 
-console.error(dummy);
+console.error(littleShit);
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
           target='_blank'
           rel='noopener noreferrer'
         >
-          Learn React
+          {littleShit}
         </a>
       </header>
     </div>
