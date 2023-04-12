@@ -21,14 +21,15 @@
 	"account-menu": {
 		"isAuth-button-logIn": "Giriş",
 		"isAuth-button-signUp": "KAYIT OL",
-		"notAuth-dropdown-link-dashboard": "Portföyüm",
 		"notAuth-dropdown-link-balances": "Bakiyelerim",
 		"notAuth-button-logOut": "Oturumu Kapat",
 		"notAuth-dropdown-link-wallet": "ZIG Cüzdan",
 		"referrals": "Referanslar",
 		"notAuth-dropdown-link-settings": "Ayarlar",
 		"notAuth-dropdown-link-password": "Parola",
-		"notAuth-dropdown-link-2fa": "İki Faktörlü Kimlik Doğrulama"
+		"notAuth-dropdown-link-2fa": "İki Faktörlü Kimlik Doğrulama",
+		"portfolio": "Portföyüm",
+		"marketplace": "Pazaryeri"
 	},
 	"account-selector": {
 		"type": {
@@ -38,8 +39,7 @@
 		}
 	},
 	"navigation-menu": {
-		"profit-sharing": "En İyi Trader'lara Göz Atın",
-		"become-trader": "Alım-satım hizmetinizi sunun"
+		"profit-sharing": "En İyi Trader'lara Göz Atın"
 	},
 	"amount": "Miktar",
 	"new-version": "Yeni sürüm, güncellemek için tıklayın",
@@ -73,5 +73,12 @@
 	"changes-saved": "Değişiklikler başarıyla kaydedildi",
 	"name": "İsim",
 	"type-to-confirm": "Onaylamak için \"{{word}}\" yazın",
-	"ok": "Tamam"
+	"ok": "Tamam",
+	"balance": {
+		"total": "Toplam",
+		"available": "Uygun",
+		"deposit-funds": "Para Yatırma",
+		"find-traders": "Yatırım yapacak trader'lar bulun",
+		"my-portfolio": "Portföyüm"
+	}
 }

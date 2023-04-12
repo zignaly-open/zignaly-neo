@@ -45,6 +45,7 @@ function ServiceHeader() {
       <MarginContainer>
         <Container>
           <MenuDropDown
+            id={'service-management-header__choose-service'}
             ref={menuDropDownRef}
             title={activeService?.serviceName}
             secondaryTitle={t('dropdown.manageServices')}
@@ -55,6 +56,7 @@ function ServiceHeader() {
             <Options>
               {myServicesList?.map((service: TraderService) => (
                 <Link
+                  id={`service-management-header__choose-${service?.serviceId}`}
                   to={currentPath.replace(serviceId, service?.serviceId)}
                   key={`--route-key-${service?.serviceId}`}
                 >
@@ -75,6 +77,7 @@ function ServiceHeader() {
                 path: generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
                   serviceId,
                 }),
+                id: `service-management-header__manage-funds`,
               },
             ]}
           />
@@ -84,6 +87,7 @@ function ServiceHeader() {
               {
                 name: t('dropdown.trade.links.api'),
                 path: generatePath(ROUTE_TRADING_SERVICE_API, { serviceId }),
+                id: `service-management-header__service-api`,
               },
             ]}
           />
@@ -95,11 +99,13 @@ function ServiceHeader() {
                 path: generatePath(ROUTE_TRADING_SERVICE_INVESTORS, {
                   serviceId,
                 }),
+                id: `service-management-header__investors`,
               },
             ]}
           />
 
           <RouteDropdown
+            id={'service-management-header__choose-option'}
             title={t('dropdown.profile.title')}
             routes={[
               {
@@ -107,12 +113,14 @@ function ServiceHeader() {
                 path: generatePath(ROUTE_TRADING_SERVICE, {
                   serviceId,
                 }),
+                id: `service-management-header__service-profile`,
               },
               {
                 name: t('dropdown.profile.links.profile-edit'),
                 path: generatePath(ROUTE_TRADING_SERVICE_EDIT, {
                   serviceId,
                 }),
+                id: `service-management-header__edit-service`,
               },
             ]}
           />

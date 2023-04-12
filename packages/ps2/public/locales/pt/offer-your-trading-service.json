@@ -1,0 +1,77 @@
+{
+	"header": {
+		"title": "OFERECE O TEU SERVIÇO DE TRADING\n A NOSSOS +400K USUÁRIOS"
+	},
+	"modal": {
+		"title": "Criar novo serviço",
+		"service-type": "Tipo de serviço",
+		"service-name": "Nome do serviço",
+		"base-currency": "Moeda Base",
+		"types": {
+			"spot": "Spot",
+			"futures": "Futuros"
+		},
+		"please-verify": "Por favor, reveja as suas informações. Tipo, base e nome não podem ser alterados mais tarde"
+	},
+	"wrapper": {
+		"title": "Benefícios do Serviço de Profit Sharing",
+		"list": {
+			"item1": "Faz trading a partir de qualquer solução que permita chaves de API da Binance",
+			"item2": "Escolha os seus próprios success fees",
+			"item3": "Candidatar-se para ser listado no nosso <0>marketplace<\/0> ou mantê-lo privado"
+		},
+		"action": "Cria o teu serviço"
+	},
+	"infoBar": {
+		"item1": {
+			"title": "$5 MILHÕES",
+			"description": "Ativos Agrupados"
+		},
+		"item2": {
+			"title": "+430,000",
+			"description": "Investidores de Profit Sharing"
+		},
+		"item3": {
+			"title": "1300",
+			"description": "Serviços Activos"
+		}
+	},
+	"features": {
+		"title": "Características do Serviço de Profit Sharing",
+		"list": {
+			"item1": {
+				"title": "ANÁLISE DE DESEMPENHO",
+				"description": "Você, assim como os usuários, poderá verificar os seus lucros e perdas diários e compor o percentual de PNL, entre outras métricas."
+			},
+			"item2": {
+				"title": "GESTÃO DE FUNDOS",
+				"description": "Você pode lidar com milhares de investidores sem se preocupar com a contabilidade e o suporte de cada indivíduo. A equipe de Zignaly se encarregará disso."
+			},
+			"item3": {
+				"title": "PAGAMENTOS DIÁRIOS",
+				"description": "Receba diariamente o success fee dos seus serviços de Profit Sharing."
+			},
+			"item4": {
+				"title": "EQUIPE DE SUCCESS TRADER",
+				"description": "Um success manager será designado a você que irá ajudá-lo durante o processo."
+			}
+		}
+	},
+	"howWorks": {
+		"title": "Razões pelas quais os melhores traders oferecem os seus serviços em Zignaly",
+		"list": {
+			"item1": {
+				"title": "Pool de Fundos",
+				"description": "Você terá acesso aos fundos por meio de uma conta compartilhada segura, para que todos os usuários obtenham exatamente os mesmos resultados."
+			},
+			"item2": {
+				"title": "Trade",
+				"description": "Conectar a sua estratégia é fácil: as chaves de API estão disponíveis para continuar a fazer trading na sua ferramenta favorita ou enviar sinais desde Trading View."
+			},
+			"item3": {
+				"title": "Dividir Lucros",
+				"description": "Escolha o success fee desejado. A quota da Zignaly é sempre de 5%, que deve ser incluída."
+			}
+		}
+	}
+}

@@ -1,5 +1,6 @@
 import { createTheme, ThemeOptions } from "@mui/material/styles";
 import dark from "./dark";
+import { linearProgressClasses } from "@mui/material";
 
 const {
   palette: { augmentColor },
@@ -74,10 +75,44 @@ const darkMui = createTheme({
         `,
       },
     },
-    MuiTooltip: {
+    MuiLinearProgress: {
       styleOverrides: {
-        popper: {
-          pointerEvents: "none",
+        root: {
+          backgroundImage: "linear-gradient(90deg, #7319DB, #05EAC1)",
+          borderRadius: 8,
+          height: 16,
+
+          "&:after": {
+            content: "''",
+            position: "absolute",
+            top: "1px",
+            backgroundColor: "rgb(19,28,53)",
+            left: "1px",
+            right: "1px",
+            bottom: "1px",
+            zIndex: 1,
+            borderRadius: 7,
+          },
+
+          "&:before": {
+            content: "''",
+            position: "absolute",
+            top: "1px",
+            border: "1px solid rgb(19,28,53)",
+            left: "1px",
+            right: "1px",
+            bottom: "1px",
+            zIndex: 3,
+            borderRadius: 7,
+          },
+
+          [`& .${linearProgressClasses.bar}`]: {
+            borderRadius: 6,
+            marginTop: 2,
+            zIndex: 2,
+            marginBottom: 2,
+            backgroundImage: "linear-gradient(90deg, #7319DB, #05EAC1)",
+          },
         },
       },
     },
@@ -101,6 +136,7 @@ const darkMui = createTheme({
           transition: "all 0.3s linear",
         },
         containedPrimary: {
+          color: dark.neutral000,
           background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
           "&:hover, &.MuiButton-active": {
             background: "linear-gradient(rgba(20, 156, 173, 0.64),rgba(69, 64, 193, 0.64))",

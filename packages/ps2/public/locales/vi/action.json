@@ -12,5 +12,8 @@
 	"delete": "Xóa",
 	"continue": "Tiếp tục",
 	"save-and-close": "Lưu và Đóng",
-	"copied": "Đã sao chép vào khay nhớ tạm"
+	"copied": "Đã sao chép vào khay nhớ tạm",
+	"hide": "Ẩn",
+	"show": "Hiển thị",
+	"claim": "Lấy"
 }

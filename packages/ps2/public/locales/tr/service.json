@@ -1,0 +1,114 @@
+{
+	"service-by": "tarafından <0>{{name}}<\/0>",
+	"service-age": "<0>{{date}}<\/0 > önce başlatıldı",
+	"link-copied": "Bağlantı panoya kopyalandı!",
+	"logo-alt": "{{name}} Zignaly - Profit Sharing \/ Alım Satım Hizmeti Profil Logosu",
+	"liquidated": "Likidite edilmiş",
+	"invested-label": "Yatırım yapılan bakiye",
+	"copy-link": "Bağlantıyı kopyala",
+	"invest-button": {
+		"invest-now": "YATIRIM YAPIN",
+		"max-reached": "Fonlar maksimum değere ulaştı",
+		"max-reached-tooltip": "Bu serviste Maksimum Fon Limitine ulaşıldığı için yatırımlara izin verilmemekte. Pazar yerimizdeki diğer Profit Sharing Servislerine göz atın.",
+		"all-accounts": "Tümünü gör ({{count}})",
+		"x-success-fee": "% {{fee}} Başarım ücreti"
+	},
+	"owner-verified": "Yönetici doğrulandı",
+	"owner-from": "Yönetici nereli? {{country}} ",
+	"strategy": "Strateji",
+	"assets-in-pool": "Havuzdaki varlıklar",
+	"investors-count": "Yatırımcılar",
+	"strategy-empty": "Servis yöneticisi alım satım stratejilerinde pek bir ketum",
+	"about-trader": "Servis yöneticisi hakkında",
+	"about-trader-empty": "Servis yöneticisi üzerinde gizli servis havasının esmesini tercih ediyor",
+	"about-trader-joined-time": "{{date}} önce katıldı",
+	"summary": {
+		"base-currency": "Temel birim:",
+		"funds-allocated": "Tahsis edilen fonlar:",
+		"no-max-limit": "Maksimum fon sınırlaması yok",
+		"success-fee": "Başarı ücreti",
+		"tags": "Etiketler:"
+	},
+	"periods": {
+		"7d-full": "1 hafta",
+		"30d-full": "1 ay",
+		"90d-full": "3 ay",
+		"180d-full": "6 ay",
+		"365d-full": "1 yıl",
+		"all-full": "Tüm zamanlar",
+		"7d": "1 Hft",
+		"30d": "1 ay",
+		"90d": "3 ay",
+		"180d": "6 ay",
+		"365d": "1 yıl",
+		"all": "Tümü"
+	},
+	"other-accounts": {
+		"title": "Tüm Hesaplarda Yatırım Yapıldı",
+		"account": "Hesap",
+		"active": "Etkin",
+		"invested": "Yatırım yapılan bakiye",
+		"switch-action": "Değiştirin"
+	},
+	"not-enough-time": "Bu dönem için yeterli veri yok",
+	"chart-error": {
+		"heading": "Hata oluştu :(",
+		"description": "Ne yazık ki, grafiği oluşturamadık"
+	},
+	"chart-options": {
+		"pnl_pct_compound": "PNL % Bileşik",
+		"pnl_ssc": "Günlük PNL",
+		"pnl_ssc_percent": "Günlük PNL %",
+		"sbt_ssc": "Toplam bakiye",
+		"at_risk_pct": "% risk altında",
+		"investors": "Yatırımcı sayısı"
+	},
+	"migrated-to-ps2": "Hizmet PS2'ye taşındı",
+	"total": "Toplam:",
+	"not-enough-data": "Bu dönem için yeterli geçmiş veri yok",
+	"edit": {
+		"title": "Hizmet Profilini Düzenle",
+		"name": "Servis adı:",
+		"logo": "Logoyu Düzenle",
+		"description": "Açıklama:",
+		"success-fee-desc": "Yatırımcılarınızdan tahsil edeceğiniz kâr tutarı (%5 Zignaly payı dahil)",
+		"pool-size": "Maksimum havuz büyüklüğü:",
+		"pool-size-desc": "Yatırımcılardan kabul edeceğiniz maksimum meblağ",
+		"visibility": {
+			"visibility": "Görünürlük:",
+			"unlisted": "Yayımlanmamış Taslak",
+			"unlisted-desc": "Yalnızca sizlerin kullanabileceği hizmet",
+			"private": "Servis Aktif: Özel",
+			"private-desc": "Özel bağlantı üzerinden oturum açmış kullanıcılar tarafından kullanılabilen hizmet",
+			"public": "Servis Aktif: Herkese Açık",
+			"public-desc": "URL'ye sahip herhangi bir ziyaretçinin kullanabileceği hizmet",
+			"marketplace": "Servis Aktif: Pazar Yeri",
+			"marketplace-desc": "Pazar yerinde herkese açık olarak yayınlanan servis",
+			"marketplace-requirements": "Pazar yerinde listelenmek için <0>gereksinimler listesine<\/0> göz atın ve servisiniz gereksinimleri karşıladığında sitede yer alan araç üzerinden destek ekibimizle iletişime geçin"
+		},
+		"save": "Profili kaydet",
+		"validation": {
+			"name-length": "5 ila 50 karakter arasında olmalıdır",
+			"success-fee-range": "0 veya 10 ile 75 arasında bir tamsayı olmalıdır"
+		}
+	},
+	"you-get-x": "%{{number}} elde edersiniz",
+	"create": {
+		"invest-in-your-service": "Servisinize yatırım yapın",
+		"select-type-first": "Önce servis türünü seçin",
+		"title": "Yeni servis oluşturun",
+		"action": "Servis oluşturun",
+		"next-step": "Sıradaki",
+		"service-type": "Servis Türü",
+		"service-name": "Servis adı",
+		"base-currency": "Temel Birim",
+		"types": {
+			"spot": "Spot",
+			"futures": "Vadeli İşlemler"
+		},
+		"minimum-balance": "Alım Satım yapmak ve yatırımcıların yatırım yapmasına izin vermek için, hizmetinize en az {{ minValue }} {{ minValueCoin }} yatırmanız gerekir.",
+		"profits-explainer": "Alım satım ve başarı ücretlerinden elde ettiğiniz kârın ne kadarının otomatik olarak transfer edilmesini istediğinize karar verin.",
+		"please-verify": "Lütfen bilgilerinizi gözden geçirin. Tür, taban ve ad daha sonra değiştirilemez",
+		"zero-fee": "Başarı ücreti olarak eğer 0'ı seçerseniz, Zignaly de bu servisten bir komisyon kesmeyecektir"
+	}
+}

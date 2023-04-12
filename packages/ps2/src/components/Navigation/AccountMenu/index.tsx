@@ -1,13 +1,7 @@
-import React from 'react';
+import React, { useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
-import {
-  LoginButton,
-  AccountDropdown,
-  LogoutButtonWrap,
-  AccountName,
-} from './styles';
-import { useTheme } from '@mui/material';
+import { LoginButton, AccountDropdown, AccountName } from './styles';
+import { useMediaQuery, useTheme } from '@mui/material';
 import {
   useActiveExchange,
   useCurrentUser,
@@ -22,6 +16,7 @@ import {
   IconButton,
   Typography,
   UserIcon,
+  ZigButton,
 } from '@zignaly-open/ui';
 import {
   ROUTE_DASHBOARD,
@@ -30,17 +25,21 @@ import {
   ROUTE_MY_BALANCES,
   ROUTE_WALLET,
   ROUTE_REFERRALS,
+  ROUTE_REWARDS,
 } from '../../../routes';
 import { generatePath, Link, useLocation, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
 import { useZModal } from 'components/ZModal/use';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
+import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
+import { Add } from '@mui/icons-material';
+import { DropDownHandle } from '@zignaly-open/ui/lib/components/display/DropDown/types';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme();
   const logout = useLogout();
-  const { t } = useTranslation('common');
+  const { t } = useTranslation(['common', 'action']);
   const isAuthenticated = useIsAuthenticated();
   const activeExchange = useActiveExchange();
   const navigate = useNavigate();
@@ -48,6 +47,11 @@ function AccountMenu(): React.ReactElement | null {
   const selectExchange = useSelectExchange();
   const location = useLocation();
   const { showModal } = useZModal();
+  const md = useMediaQuery(theme.breakpoints.up('sm'));
+  const dropDownRef = useRef<DropDownHandle>(null);
+  const onClose = useCallback(() => {
+    dropDownRef.current?.closeDropDown();
+  }, [dropDownRef]);
 
   const setActiveExchange = (exchangeInternalId: string) => {
     selectExchange(exchangeInternalId);
@@ -76,10 +80,11 @@ function AccountMenu(): React.ReactElement | null {
         </Link>
       </>
     );
-  }
+  } else if (!md) return null;
 
   return (
     <DropDown
+      ref={dropDownRef}
       component={({ open }) => (
         <IconButton
           id={'menu__dropdown-account'}
@@ -123,7 +128,7 @@ function AccountMenu(): React.ReactElement | null {
           ),
         },
         {
-          label: t('account-menu.notAuth-dropdown-link-dashboard'),
+          label: t('account-menu.portfolio'),
           id: 'account-menu-dropdown__portfolio',
           href: generatePath(ROUTE_DASHBOARD),
           onClick: () => navigate(ROUTE_DASHBOARD),
@@ -157,10 +162,50 @@ function AccountMenu(): React.ReactElement | null {
           ],
         },
         {
+          element: (
+            <ZigButton
+              id={'account-menu-dropdown__deposit'}
+              startIcon={<Add />}
+              sx={{ fontWeight: 600, mb: 1 }}
+              variant={'contained'}
+              onClick={() => {
+                // fun fact: without onClose react-select acts funky
+                onClose();
+                showModal(DepositModal, {
+                  ctaId: 'account-menu-deposit',
+                });
+              }}
+            >
+              {t('action:deposit')}
+            </ZigButton>
+          ),
+        },
+        {
           separator: true,
           label: (
             <>
-              <CardGiftcardIcon />
+              <img
+                width={24}
+                height={24}
+                src='/images/tab-rewards.svg'
+                alt={t('account-menu.rewards')}
+              />
+              {t('account-menu.rewards')}
+            </>
+          ),
+          id: 'account-menu-dropdown__rewards',
+          href: generatePath(ROUTE_REWARDS),
+          onClick: () => navigate(ROUTE_REWARDS),
+        },
+        {
+          label: (
+            <>
+              <img
+                width={24}
+                height={24}
+                src='/images/tab-referrals.svg'
+                alt={t('account-menu.rewards')}
+              />
               {t('account-menu.referrals')}
             </>
           ),
@@ -169,15 +214,10 @@ function AccountMenu(): React.ReactElement | null {
           onClick: () => navigate(ROUTE_REFERRALS),
         },
         {
-          id: 'account-menu-dropdown__log-out',
-          element: (
-            <LogoutButtonWrap>
-              <Button
-                caption={t('account-menu.notAuth-button-logOut')}
-                onClick={logout}
-              />
-            </LogoutButtonWrap>
-          ),
+          separator: true,
+          label: <>{t('account-menu.notAuth-button-logOut')}</>,
+          id: 'account-menu-dropdown__logout',
+          onClick: logout,
         },
       ]}
     />

@@ -19,6 +19,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   coinProps,
   showTooltip = !usd,
   alwaysShowSign = false,
+  id,
   ...otherProps
 }) => {
   const withDefaultPropsCoin = {
@@ -46,6 +47,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
       id={id}
       {...withDefaultProps}
       sx={{ whiteSpace: "nowrap", ...(withDefaultProps?.sx || {}) }}
+      id={id}
     >
       {!!prefix && <>{prefix}</>}
       {+value >= 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
@@ -66,7 +68,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
 
       {shorten ? shortenSuffix : ""}
 
-      {coin && (
+      {coin && !usd && (
         <>
           {" "}
           <ZigTypography {...withDefaultPropsCoin}>{coin}</ZigTypography>
@@ -77,10 +79,11 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
 
   return showTooltip || shorten ? (
     <Tooltip
+      disableInteractive
       title={`${usd ? "$" : ""}${numericFormatter(trimZeros((+value)?.toFixed(8)) ?? "", {
         thousandSeparator: true,
         displayType: "text",
-      })} ${coin ?? ""}`}
+      })} ${!usd ? coin ?? "" : ""}`}
     >
       {content}
     </Tooltip>

@@ -45,7 +45,7 @@
 		"status_other": "Tem {{count}} transacções pendentes",
 		"link-label": "Ver"
 	},
-	"investorDetail-successFee": "{{fee}}% Taxa de Sucesso",
+	"investorDetail-successFee": "{{fee}}% Success Fee",
 	"modal": {
 		"withdrawInvestment": {
 			"title": "Pedido de Retirada",
