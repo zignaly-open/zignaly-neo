@@ -188,7 +188,7 @@ export function useUpdateTakeProfitAndInvestMore(serviceId: string): {
     amount,
   }: {
     amount: BigNumber | number | string;
-    profitPercentage: number | string;
+    profitPercentage?: number | string;
   }) => Promise<void>;
 } {
   const [update, { isLoading }] = useUpdateTakeProfitAndInvestMoreMutation();
