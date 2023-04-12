@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { Form, Action, TitleHead } from './styles';
 import { LoginValidation } from './validations';
 import { useAuthenticate } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
-import { Button, TextButton, Typography, ZigInput } from '@zignaly-open/ui';
-import { Box } from '@mui/material';
+import { Button, Typography, ZigInput } from '@zignaly-open/ui';
+import { Box, Link } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
 import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
 
@@ -104,12 +104,16 @@ const LoginForm: React.FC = () => {
             size={'xlarge'}
             loading={loggingIn}
           />
-
-          <TextButton
-            id={'login__signup'}
-            onClick={() => navigate(ROUTE_SIGNUP, { state: locationState })}
-            caption={t('login-form.link.signup')}
-          />
+          <Box color={'neutral300'}>
+            <Trans i18nKey={'login-form.link.signup'} t={t}>
+              <Link
+                id={'login__signup'}
+                sx={{ cursor: 'pointer' }}
+                underline={'none'}
+                onClick={() => navigate(ROUTE_SIGNUP, { state: locationState })}
+              />
+            </Trans>
+          </Box>
         </Action>
       </Form>
     </Box>
