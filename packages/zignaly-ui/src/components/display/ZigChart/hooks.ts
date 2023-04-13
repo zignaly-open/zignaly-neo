@@ -17,13 +17,10 @@ const getGradient = (gradientVariant: GradientVariant, isGreen: boolean) => {
 /**
  * Get y domain for chart, adjusted to leave space under 0 axis if needed
  */
-const getYDomain = (data: AxisFormat[], bars = false) => {
+const getYDomain = (data: AxisFormat[]) => {
   const values = data.map((s) => s.y);
   // Add 0 to min values to show chart under 0 axis
-  const minValues = [0, ...values];
-  // Add 1 to max values for chart (not bars), to make sure the range of the chart is big enough
-  const maxValues = bars ? values : [1, ...values];
-  const ranges = [Math.min(...minValues), Math.max(...maxValues)];
+  const ranges = [Math.min(0, ...values), Math.max(...values)];
   if (ranges[0] < 0 && ranges[1] > 0)
     ranges[0] = Math.min(
       ranges[0],
@@ -36,7 +33,7 @@ const getYDomain = (data: AxisFormat[], bars = false) => {
 export function useChartData(
   data: AxisFormat[] | number[],
   gradientVariant = "full" as GradientVariant,
-  bars = false,
+  precision?: number,
 ): {
   data: AxisFormat[];
   color: ChartColor;
@@ -44,14 +41,16 @@ export function useChartData(
   yDomain: [number, number];
 } {
   const [processedData, yDomain] = useMemo(() => {
-    const chart =
-      typeof data?.[0] === "number"
-        ? data.map((value, index) => ({
-            x: index,
-            y: value as number,
-          }))
-        : (data as AxisFormat[]);
-    const yDomain = getYDomain(chart, bars);
+    const chart = data.map((value, index) => {
+      const y = typeof value === "number" ? value : value.y;
+      return {
+        ...(typeof value === "object" && { ...value }),
+        x: index,
+        // Remove extra decimals to normalize range (e.g. avoiding 0 to 0.0001%)
+        y: +y.toFixed(precision),
+      };
+    });
+    const yDomain = getYDomain(chart);
     return [chart.map((c) => ({ ...c, y0: yDomain[0] })), yDomain];
   }, [data]);
 

@@ -273,6 +273,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                     }),
               })}`
             }
+            precision={isPercent ? 2 : getPrecisionForCoin(service.ssc) ?? 8}
           />
         )}
       </ChartWrapper>

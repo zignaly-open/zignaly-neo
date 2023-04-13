@@ -28,9 +28,10 @@ const ZigChart = ({
   tickCount = 7,
   onlyIntegerTicks,
   chartProps = {},
+  precision = 2,
 }: ChartLargeProps) => {
   const theme = useTheme();
-  const { data: processedData, color, gradient, yDomain } = useChartData(data, "full", bars);
+  const { data: processedData, color, gradient, yDomain } = useChartData(data, "full", precision);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
   const pureChartWidth = width ? width - 70 - 2 : 0;
