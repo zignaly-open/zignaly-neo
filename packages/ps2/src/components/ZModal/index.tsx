@@ -38,11 +38,12 @@ const ZModal: React.FC<ZModalProps> = ({
         onGoBack={onGoBack}
         titleAlign={titleAlign}
       >
-        {authOnly && <AuthenticatedWall />}
         {isLoading ? (
           <LoaderContainer>
             <Loader color={'#fff'} ariaLabel={'Loading...'} />
           </LoaderContainer>
+        ) : authOnly ? (
+          <AuthenticatedWall>{children}</AuthenticatedWall>
         ) : (
           <>{children}</>
         )}
