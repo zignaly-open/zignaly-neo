@@ -4,7 +4,6 @@ import {
   VictoryAxis,
   VictoryLine,
   VictoryChart,
-  VictoryScatter,
   VictoryLabel,
   VictoryBar,
   VictoryVoronoiContainer,
