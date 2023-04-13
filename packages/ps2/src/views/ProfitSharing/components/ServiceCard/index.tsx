@@ -18,7 +18,6 @@ import {
   ButtonContainer,
   AssetContainer,
   ChartBox,
-  ServiceNameBox,
 } from './styles';
 import { ServiceCardProps } from './types';
 
