@@ -18,6 +18,7 @@ import {
   ButtonContainer,
   AssetContainer,
   ChartBox,
+  ServiceNameBox,
 } from './styles';
 import { ServiceCardProps } from './types';
 
@@ -58,11 +59,13 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
           />
         </BottomPnLContainer>
       </ChartBox>
-      <ServiceName
-        prefixId={prefixId}
-        service={marketplaceServiceToInvestmentType(service) as Investment}
-        showCoin={false}
-      />
+      <Box height={70}>
+        <ServiceName
+          prefixId={prefixId}
+          service={marketplaceServiceToInvestmentType(service) as Investment}
+          showCoin={false}
+        />
+      </Box>
       <Box
         display='flex'
         flexDirection='row'
