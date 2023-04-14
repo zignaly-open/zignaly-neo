@@ -101,7 +101,7 @@ function AuthVerifyModal({
 
       return errorCode === 13
         ? t('error:error.login-session-expired')
-        : errorCode === 37
+        : [37, 108].includes(errorCode)
         ? t('error:error.wrong-code')
         : null;
     },
