@@ -7,6 +7,7 @@ import WithdrawInvestment from './views/WithdrawInvestment';
 import PendingTransactionsList from './views/PendingTransactionsList';
 import {
   useInvestmentDetails,
+  useSelectedInvestment,
   useSelectInvestment,
 } from '../../../../apis/investment/use';
 import WithdrawWithdrawInvestmentSuccessPerform from './views/WithdrawInvestmentPerform';
@@ -29,7 +30,8 @@ function EditInvestmentModal({
     useServiceDetails(serviceId);
 
   useSelectInvestment(service);
-
+  // gotta make sure this is set because right after the setSelectedInvestment the value comes as null
+  const selectedInvestment = useSelectedInvestment();
   const { isLoading: isLoadingCoins } = useCoinBalances();
 
   const [view, setView] = useState<EditInvestmentViews>(
@@ -70,7 +72,12 @@ function EditInvestmentModal({
   const { title, component } =
     views[view in views ? view : EditInvestmentViews.EditInvestment];
 
-  const isLoading = isLoadingInvestment || isLoadingService || isLoadingCoins;
+  const isLoading =
+    isLoadingInvestment ||
+    isLoadingService ||
+    isLoadingCoins ||
+    !selectedInvestment;
+
   return (
     <ZModal
       wide

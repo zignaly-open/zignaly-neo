@@ -56,10 +56,13 @@ export function useSelectInvestment(
             : serviceToInvestmentServiceDetail(service),
         ),
       );
+    return () => {
+      dispatch(setSelectedInvestment(null));
+    };
   }, [service]);
 }
 
-export function useSelectedInvestment(): InvestmentServiceDetails {
+export function useSelectedInvestment(): InvestmentServiceDetails | undefined {
   return useSelector((state: RootState) => state.investment)
     ?.selectedInvestment;
 }
