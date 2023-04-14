@@ -67,7 +67,7 @@ export const TRANSACTION_TYPE = {
   // Withdrawal from a Zignaly exchange account to an external address
   WITHDRAW: 'withdrawal',
   // Referral reward
-  REWARD: 'reward',
+  REWARD: 'referral',
   // Investment in a PS1 service
   PS_DEPOSIT: 'psDeposit',
   // Investment out from a PS1 service
