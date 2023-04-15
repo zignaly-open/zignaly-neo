@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Modal as MuiModal } from '@mui/material';
 import { LoaderContainer } from './styles';
 import { Loader } from '@zignaly-open/ui';
@@ -25,6 +25,12 @@ const ZModal: React.FC<ZModalProps> = ({
 }): React.ReactElement => {
   const isAuthenticated = useIsAuthenticated();
   useMaybeMakeSureSessionIsAlive(!allowUnauth);
+  const notLoggedInWhenNeeded = !allowUnauth && !isAuthenticated;
+
+  useEffect(() => {
+    notLoggedInWhenNeeded && setTimeout(close);
+  }, [notLoggedInWhenNeeded]);
+
   return (
     <MuiModal
       {...props}
@@ -46,7 +52,7 @@ const ZModal: React.FC<ZModalProps> = ({
           <LoaderContainer>
             <Loader color={'#fff'} ariaLabel={'Loading...'} />
           </LoaderContainer>
-        ) : !allowUnauth && !isAuthenticated ? (
+        ) : notLoggedInWhenNeeded ? (
           <AuthenticatedWall />
         ) : (
           <>{children}</>
