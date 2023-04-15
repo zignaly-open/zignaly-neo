@@ -14,7 +14,7 @@ import {
 const ZModal: React.FC<ZModalProps> = ({
   close,
   isLoading,
-  authOnly,
+  allowUnauth,
   children,
   onGoBack,
   title,
@@ -24,7 +24,7 @@ const ZModal: React.FC<ZModalProps> = ({
   ...props
 }): React.ReactElement => {
   const isAuthenticated = useIsAuthenticated();
-  useMaybeMakeSureSessionIsAlive(!!authOnly);
+  useMaybeMakeSureSessionIsAlive(!allowUnauth);
   return (
     <MuiModal
       {...props}
@@ -46,7 +46,7 @@ const ZModal: React.FC<ZModalProps> = ({
           <LoaderContainer>
             <Loader color={'#fff'} ariaLabel={'Loading...'} />
           </LoaderContainer>
-        ) : authOnly && !isAuthenticated ? (
+        ) : !allowUnauth && !isAuthenticated ? (
           <AuthenticatedWall />
         ) : (
           <>{children}</>

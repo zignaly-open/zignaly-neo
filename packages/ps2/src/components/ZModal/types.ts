@@ -4,7 +4,7 @@ import { ShowFnOutput, UseModalOptions } from 'mui-modal-provider';
 export type ZModalProps = {
   title?: string;
   wide?: boolean;
-  authOnly?: boolean;
+  allowUnauth?: boolean;
   isLoading?: boolean;
   onGoBack?: () => void;
   width?: number;
