@@ -66,6 +66,7 @@ function ZigSelect<T>({
   const styles = useMemo(() => customStyles(small, theme, userStyles), [small, theme, userStyles]);
 
   return (
+    // @ts-ignore
     <StyledSelectWrapper error={error} width={width} small={small} outlined={outlined}>
       {label && <Typography color={"neutral200"}>{label}</Typography>}
       {ZigSelectGlobalStyle}
