@@ -180,6 +180,6 @@ function InputAmount({
   );
 }
 
-export { InputAmountAdvancedValue as InputAmountAdvancedValueType } from "./types";
+export type { InputAmountAdvancedValue as InputAmountAdvancedValueType } from "./types";
 
 export default InputAmount;

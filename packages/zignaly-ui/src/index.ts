@@ -6,19 +6,14 @@ export * from "./theme";
 export { ReactComponent as ZignalyLogotype } from "assets/images/zignaly-logotype.svg";
 
 // Basic inputs <3
-export {
-  default as ZigButton,
-  ZigButtonGroup,
-  ZigButtonProps,
-} from "./components/inputs/ZigButton";
+export { default as ZigButton, ZigButtonGroup } from "./components/inputs/ZigButton";
+export type { ZigButtonProps } from "./components/inputs/ZigButton";
 export { default as ZigButtonGroupInput } from "./components/inputs/ZigButtonGroupInput";
 export { default as ZigInput } from "./components/inputs/ZigInput";
 export { default as ZigAutocomplete } from "./components/inputs/ZigAutocomplete";
 export { default as ZigSelect } from "./components/inputs/ZigSelect";
-export {
-  default as InputAmountAdvanced,
-  InputAmountAdvancedValueType,
-} from "components/inputs/InputAmountAdvanced";
+export { default as InputAmountAdvanced } from "components/inputs/InputAmountAdvanced";
+export type { InputAmountAdvancedValueType } from "components/inputs/InputAmountAdvanced";
 export { default as SliderInput } from "components/inputs/SliderInput";
 
 // Basic display components
@@ -54,10 +49,10 @@ export {
   default as PriceLabel,
   UsdPriceLabel,
 } from "./components/display/Table/components/PriceLabel";
-export {
-  default as DropDown,
+export { default as DropDown } from "./components/display/DropDown";
+export type {
   DropDownHandleType,
-  DropDownPropsType,
+  DropDownProps,
   DropDownOptionType,
 } from "./components/display/DropDown";
 export { default as Typography } from "./components/display/Typography";

@@ -8,10 +8,10 @@ import {
 } from '../../apis/user/use';
 import { getImageOfAccount } from '../../util/images';
 import { Exchange, UserData } from '../../apis/user/types';
-import { DropDownPropsType } from '@zignaly-open/ui';
+import { DropDownProps } from '@zignaly-open/ui';
 
 const AccountSelector: React.FC<{
-  component: DropDownPropsType['component'];
+  component: DropDownProps['component'];
   exchangeFilter?: (exchange: Exchange) => boolean;
 }> = ({ component, exchangeFilter }) => {
   const user: UserData | Partial<UserData> = useCurrentUser();
