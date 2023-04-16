@@ -1,4 +1,4 @@
-import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
+import { InputAmountAdvancedValueType } from '@zignaly-open/ui';
 
 export type InvestFormProps = {
   close: () => void;
@@ -12,5 +12,5 @@ export type InvestFormData = {
   transferLabelForValidation: string;
   understandMargin: boolean;
   understandMoneyTransferred: boolean;
-  amountTransfer?: InputAmountAdvancedValue;
+  amountTransfer?: InputAmountAdvancedValueType;
 };

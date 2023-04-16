@@ -12,7 +12,7 @@ import {
   useTraderServiceUpdateMinimum,
 } from '../../../../apis/service/use';
 import { Box } from '@mui/material';
-import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
+import { InputAmountAdvancedValueType } from '@zignaly-open/ui';
 import { useToast } from '../../../../util/hooks/useToast';
 import ZModal from 'components/ZModal';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
@@ -35,7 +35,7 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
     handleSubmit,
     control,
     formState: { isValid, errors, isDirty },
-  } = useForm<{ amountValue: InputAmountAdvancedValue }>({
+  } = useForm<{ amountValue: InputAmountAdvancedValueType }>({
     mode: 'onChange',
     defaultValues: {
       amountValue: {
