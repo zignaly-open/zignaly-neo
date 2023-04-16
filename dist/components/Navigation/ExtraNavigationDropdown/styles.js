@@ -1,0 +1,16 @@
+var __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {
+    if (Object.defineProperty) { Object.defineProperty(cooked, "raw", { value: raw }); } else { cooked.raw = raw; }
+    return cooked;
+};
+import { styled } from '@mui/material';
+import { GlobeLanguages, styledIf, Typography } from '@zignaly-open/ui';
+export var NavLink = styled('a')(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  color: #706f82;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 28px;\n  letter-spacing: 0.55px;\n  text-decoration: none;\n  transition: 0.15s linear;\n\n  svg {\n    transition: 0.15s linear;\n    fill: #706f82;\n  }\n\n  ", "\n\n  &:hover {\n    span svg {\n      fill: #fff;\n      color: #fff;\n    }\n  }\n"], ["\n  color: #706f82;\n  font-weight: 500;\n  font-size: 14px;\n  line-height: 28px;\n  letter-spacing: 0.55px;\n  text-decoration: none;\n  transition: 0.15s linear;\n\n  svg {\n    transition: 0.15s linear;\n    fill: #706f82;\n  }\n\n  ", "\n\n  &:hover {\n    span svg {\n      fill: #fff;\n      color: #fff;\n    }\n  }\n"])), function (_a) {
+    var active = _a.active;
+    return "\n    ".concat(styledIf(active, "\n      color: #7682f7;\n    ", "\n\n      &:not([disabled]) {\n        cursor: pointer;\n\n        &:hover {\n          color: #fff;\n          \n          svg {\n            fill: #fff;\n          }\n        }\n      }\n    "), "\n  ");
+});
+export var NavList = styled('div')(templateObject_2 || (templateObject_2 = __makeTemplateObject(["\n  display: flex;\n  flex-direction: column;\n\n  padding: 12px 0;\n  gap: 8px;\n\n  &:first-child {\n    padding-top: 0;\n  }\n\n  &.last {\n    border-top: 1px solid #2c2d59;\n    margin: 0 -18px;\n    padding: 0;\n  }\n"], ["\n  display: flex;\n  flex-direction: column;\n\n  padding: 12px 0;\n  gap: 8px;\n\n  &:first-child {\n    padding-top: 0;\n  }\n\n  &.last {\n    border-top: 1px solid #2c2d59;\n    margin: 0 -18px;\n    padding: 0;\n  }\n"])));
+export var Networks = styled('div')(templateObject_3 || (templateObject_3 = __makeTemplateObject(["\n  display: grid;\n  max-width: 185px;\n  grid-template-columns: repeat(5, minmax(0%, 100%));\n  justify-content: center;\n  align-items: center;\n  gap: 16px;\n  padding-top: 8px;\n\n  span svg {\n    fill: #707185;\n    color: #707185;\n    transition: all 0.15s linear;\n  }\n"], ["\n  display: grid;\n  max-width: 185px;\n  grid-template-columns: repeat(5, minmax(0%, 100%));\n  justify-content: center;\n  align-items: center;\n  gap: 16px;\n  padding-top: 8px;\n\n  span svg {\n    fill: #707185;\n    color: #707185;\n    transition: all 0.15s linear;\n  }\n"])));
+export var GlobeLanguagesStyled = styled(GlobeLanguages)(templateObject_4 || (templateObject_4 = __makeTemplateObject(["\n  transition: 0.15s linear;\n"], ["\n  transition: 0.15s linear;\n"])));
+export var LabelButton = styled(Typography)(templateObject_5 || (templateObject_5 = __makeTemplateObject(["\n  transition: 0.15s linear;\n"], ["\n  transition: 0.15s linear;\n"])));
+var templateObject_1, templateObject_2, templateObject_3, templateObject_4, templateObject_5;
+//# sourceMappingURL=styles.js.map

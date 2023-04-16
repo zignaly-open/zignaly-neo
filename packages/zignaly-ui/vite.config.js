@@ -21,7 +21,7 @@ export default defineConfig({
       fileName: (format) => `zignaly-ui.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom", "styled-components"],
+      external: ["react", "react-dom", "styled-components", "@emotion/react", "@emotion/styled"],
       output: {
         globals: {
           react: "React",
