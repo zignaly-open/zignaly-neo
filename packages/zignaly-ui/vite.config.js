@@ -7,6 +7,7 @@ import dts from "vite-plugin-dts";
 import alias from "@rollup/plugin-alias";
 
 export default defineConfig({
+  minify: false,
   plugins: [
     react(),
     dts({
@@ -17,12 +18,20 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
       name: "ZignalyUi",
-      formats: ["es", "umd"],
+      formats: ["es"],
       fileName: (format) => `zignaly-ui.${format}.js`,
     },
     rollupOptions: {
-      external: ["react", "react-dom", "styled-components", "@emotion/react", "@emotion/styled"],
+      preserveModules: true,
+      external: [
+        "react",
+        "react-dom",
+        // "styled-components",
+        // "@emotion/react",
+        // "@emotion/styled"
+      ],
       output: {
+        inlineDynamicImports: false,
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
