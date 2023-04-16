@@ -22,20 +22,14 @@ export default defineConfig({
       fileName: (format) => `zignaly-ui.${format}.js`,
     },
     rollupOptions: {
-      preserveModules: true,
-      external: [
-        "react",
-        "react-dom",
-        // "styled-components",
-        // "@emotion/react",
-        // "@emotion/styled"
-      ],
+      // preserveModules: true,
+      external: ["react", "react-dom", "styled-components", "@emotion/react", "@emotion/styled"],
       output: {
-        inlineDynamicImports: false,
+        // inlineDynamicImports: false,
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
-          "styled-components": "styled",
+          //   "styled-components": "styled",
         },
       },
       plugins: [
