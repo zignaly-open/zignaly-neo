@@ -134,9 +134,12 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
                 }
                 setValue('amountTransfer', {
                   ...watchAmountTransfer,
-                  value: new BigNumber(coin.balance)
-                    .multipliedBy(value)
-                    .dividedBy(100),
+                  value: parseFloat(
+                    new BigNumber(coin.balance)
+                      .multipliedBy(value)
+                      .dividedBy(100)
+                      .toFixed(8),
+                  ),
                 });
                 trigger('amountTransfer');
               }}
