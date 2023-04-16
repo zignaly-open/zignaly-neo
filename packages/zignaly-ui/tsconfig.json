@@ -20,11 +20,14 @@
     "allowJs": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "outDir": "lib",
+    "outDir": "dist",
     "declarationMap": true
   },
-  "include": ["src/**/*"],
-  "exclude": [
-    "node_modules"
+  "include": [
+    "src/**/*"
   ],
+  "exclude": [
+    "node_modules",
+    "**/stories.tsx"
+  ]
 }
