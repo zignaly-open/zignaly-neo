@@ -1,1 +1,0 @@
-{"version":3,"file":"types.js","sourceRoot":"","sources":["../../../packages/ps2/src/apis/coin/types.ts"],"names":[],"mappings":"AA+DA,MAAM,CAAC,IAAM,gBAAgB,GAAG;IAE9B,OAAO,EAAE,SAAS;IAElB,QAAQ,EAAE,YAAY;IAEtB,MAAM,EAAE,UAAU;IAElB,UAAU,EAAE,WAAW;IAEvB,WAAW,EAAE,YAAY;IAEzB,IAAI,EAAE,MAAM;IAEZ,GAAG,EAAE,KAAK;IAEV,MAAM,EAAE,QAAQ;IAEhB,WAAW,EAAE,cAAc;IAE3B,IAAI,EAAE,MAAM;CACb,CAAC"}
