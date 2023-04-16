@@ -19,7 +19,6 @@
     "test": "jest -u",
     "test:watch": "jest --watch",
     "build:webpack": "webpack --mode=production --node-env=production",
-    "build:vite": "vite build",
     "build:rollup": "rollup -c",
     "build": "yarn build:rollup",
     "copy-files": "cp -R src/assets lib/assets",
@@ -71,7 +70,6 @@
     "@svgr/webpack": "6.2.1",
     "@tanstack/react-table": "^8.7.3",
     "@types/chroma-js": "^2.1.4",
-    "@vitejs/plugin-react": "^3.1.0",
     "@zignaly-open/react-verification-code-input": "1.2.10",
     "babel-jest": "^29.0.3",
     "bignumber.js": "^9.1.0",
@@ -97,8 +95,6 @@
     "rollup-plugin-typescript": "^1.0.1",
     "rollup-plugin-typescript2": "^0.34.1",
     "victory": "36.6.8",
-    "vite": "^4.2.1",
-    "vite-plugin-dts": "^2.2.0",
     "yup": "0.32.11"
   },
   "devDependencies": {
