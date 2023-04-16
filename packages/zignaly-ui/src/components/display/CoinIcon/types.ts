@@ -1,11 +1,13 @@
-export enum CoinSizes {
-  SMALL = "small",
-  MEDIUM = "medium",
-  LARGE = "large",
-}
+export const CoinSizes = {
+  Small: "small",
+  Medium: "medium",
+  Large: "large",
+};
+
+export type CoinSize = typeof CoinSizes[keyof typeof CoinSizes];
 
 export type CoinTypeProps = {
-  size?: CoinSizes | any;
+  size?: CoinSize | any;
   name: string;
   coin: string;
   className?: string;
