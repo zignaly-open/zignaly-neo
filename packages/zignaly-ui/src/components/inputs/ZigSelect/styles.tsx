@@ -2,10 +2,12 @@ import { Box, GlobalStyles, styled } from "@mui/material";
 import { NiceScrollbar } from "utils/css";
 import React from "react";
 import { css } from "@emotion/react";
+import { StyledComponent } from "@emotion/styled";
+import { BoxTypeMap } from "@mui/system";
 
 type Props = { error?: string; width?: number; small?: boolean; outlined?: boolean };
 
-export const StyledSelectWrapper = styled(Box)<Props>`
+export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(Box)<Props>`
   .zig-react-select {
     &__control {
       border: 1px solid
@@ -131,7 +133,7 @@ export const StyledSelectWrapper = styled(Box)<Props>`
         `};
     }
   }
-` as React.FC<Props>;
+`;
 
 export const ZigSelectGlobalStyle = (
   <GlobalStyles

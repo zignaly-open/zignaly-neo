@@ -115,7 +115,8 @@
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "12.1.2",
     "@types/jest": "27.4.1",
-    "@types/react": "^17.0.2",
+    "@types/react": "18.0.35",
+    "@types/react-dom": "18.0.11",
     "@types/react-portal": "4.0.4",
     "@types/react-table": "7.7.12",
     "@types/styled-components": "5.1.25",
@@ -130,8 +131,8 @@
     "jest": "^29.0.3",
     "jest-environment-jsdom": "^29.0.3",
     "prettier": "2.6.2",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "storybook-dark-mode": "1.0.9",
     "style-loader": "2.0.0",
     "ts-jest": "27.1.4",
@@ -146,9 +147,9 @@
   "peerDependencies": {
     "@emotion/react": "11.9.3",
     "@emotion/styled": "11.9.3",
-    "@types/react": "^17.0.2",
-    "@types/react-dom": "^17.0.2",
-    "react": "^17",
-    "react-dom": "^17"
+    "@types/react": "18.0.35",
+    "@types/react-dom": "18.0.11",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
   }
 }

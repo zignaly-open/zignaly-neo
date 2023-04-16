@@ -31,6 +31,7 @@ const Template: Story<typeof Tabs & IProps> = (args) => {
   const [value, setValue] = useState(0);
   return (
     <>
+      {/* @ts-ignore */}
       <Tabs
         {...args}
         onChange={(_: React.SyntheticEvent, newValue: any) => {
