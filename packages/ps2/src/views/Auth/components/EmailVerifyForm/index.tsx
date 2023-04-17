@@ -20,6 +20,7 @@ function EmailVerifyForm({
           {t('login-form.verifyEmail.title')}
         </Typography>
         <InputCode
+          prefixId={'verify-email'}
           fields={6}
           error={error}
           loading={isLoading}
@@ -28,6 +29,7 @@ function EmailVerifyForm({
           autoFocus={false}
         />
         <TextButton
+          id={'verify-email__resend-code'}
           onClick={onReSendCode}
           caption={t('login-form.verifyEmail.button')}
           loading={isReSendLoading}

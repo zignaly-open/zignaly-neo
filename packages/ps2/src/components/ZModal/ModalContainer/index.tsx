@@ -42,7 +42,10 @@ function ModalContainer({
           ? onClickClose &&
             typeof onClickClose === 'function' && (
               <HeaderButton onClick={onClickClose}>
-                <CloseIcon color={theme.palette.neutral300} />
+                <CloseIcon
+                  color={theme.palette.neutral300}
+                  id={'close-modal'}
+                />
               </HeaderButton>
             )
           : customHeaderAction}

@@ -18,6 +18,7 @@ function TwoFAForm({
           {t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-description')}
         </ZigTypography>
         <InputCode
+          prefixId={'ask-2fa'}
           fields={6}
           error={error}
           loading={isLoading}
