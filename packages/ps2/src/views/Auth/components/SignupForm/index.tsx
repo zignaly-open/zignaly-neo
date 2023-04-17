@@ -89,6 +89,7 @@ const SignupForm: React.FC = () => {
           </ZigTypography>
         </TitleHead>
         <Form onSubmit={handleSubmit(onSubmit)}>
+          {/* @ts-ignore */}
           <Mailcheck email={email}>
             {(suggested: { full: string }) => (
               <Controller

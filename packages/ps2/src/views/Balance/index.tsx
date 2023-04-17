@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import {
   MarginContainer,
   PageContainer,
@@ -44,19 +44,6 @@ const MyBalances: React.FC = () => {
         label: t(`transactions-history:${TRANSACTION_TYPE_NAME[v]}`),
       };
     }),
-  );
-
-  const maxLegend = useCallback(
-    (_, state): CSSObject => ({
-      display: state.selectProps.menuIsOpen ? 'none' : 'inline-block',
-      textAlign: 'center',
-
-      ':after': {
-        content: `'\\A ${t('transactions-history:filter.max')}'`,
-        whiteSpace: 'pre',
-      },
-    }),
-    [t],
   );
 
   return (
@@ -114,7 +101,19 @@ const MyBalances: React.FC = () => {
                     value={type}
                     onChange={setType}
                     styles={{
-                      singleValue: maxLegend,
+                      singleValue: (_, state): CSSObject => ({
+                        display: state.selectProps.menuIsOpen
+                          ? 'none'
+                          : 'inline-block',
+                        textAlign: 'center',
+
+                        ':after': {
+                          content: `'\\A ${t(
+                            'transactions-history:filter.max',
+                          )}'`,
+                          whiteSpace: 'pre',
+                        },
+                      }),
                     }}
                   />
                 </Box>
