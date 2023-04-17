@@ -49,7 +49,6 @@ export {
 } from "./components/display/Table/components/PriceLabel";
 export { default as DropDown } from "./components/display/DropDown";
 export { default as Typography } from "./components/display/Typography";
-export { default as CoinIcon } from "components/display/CoinIcon";
 
 // TODO: deprecate - Inputs
 export { default as Button } from "./components/inputs/Button";

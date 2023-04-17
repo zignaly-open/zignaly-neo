@@ -16,12 +16,12 @@ import {
 import {
   ArrowRightIcon,
   Button,
-  CoinIcon,
   InputAmountAdvanced,
   PlusIcon,
   SliderInput,
   TextButton,
   Typography,
+  ZigCoinIcon,
 } from '@zignaly-open/ui';
 import { EditInvestmentValidation } from './validations';
 import {
@@ -129,7 +129,7 @@ function EditInvestmentForm({
         <Row>
           <Typography variant={'body1'}>{t('form.title')}</Typography>
           <AmountInvested>
-            <CoinIcon coin={coin.id} />
+            <ZigCoinIcon coin={coin.id} />
             <TokenValue>
               <Typography variant={'bigNumber'} color={'neutral100'}>
                 <NumericFormat

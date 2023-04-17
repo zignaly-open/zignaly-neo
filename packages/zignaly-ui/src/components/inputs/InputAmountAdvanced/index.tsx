@@ -15,7 +15,7 @@ import {
 import TokenSelector from "./components/TokenSelector";
 import ErrorMessage from "components/display/ErrorMessage";
 import Typography from "components/display/Typography";
-import { CoinSizes } from "../../display/CoinIcon";
+import { COIN_SIZES } from "../../display/ZigCoinIcon/types";
 import { InputAmountProps, TokenItem } from "./types";
 import { changeEvent } from "utils/event";
 import { useDeepCompareEffect } from "react-use";
@@ -104,7 +104,7 @@ function InputAmount({
             {value?.token?.id && tokens.length < 2 && (
               <ZigCoinIcon
                 name={value?.token.id}
-                size={CoinSizes.SMALL}
+                size={COIN_SIZES.SMALL}
                 coin={value?.token.id}
                 bucket={iconBucket}
               />
