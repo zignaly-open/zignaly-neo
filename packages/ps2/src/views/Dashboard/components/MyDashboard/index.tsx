@@ -201,6 +201,14 @@ const MyDashboard: React.FC = () => {
               <ZigTableWrapper>
                 <ZigTable
                   prefixId={'portfolio'}
+                  initialState={{
+                    sorting: [
+                      {
+                        id: 'invested',
+                        desc: true,
+                      },
+                    ],
+                  }}
                   columns={columns}
                   data={services}
                   emptyMessage={t('table-search-emptyMessage')}
