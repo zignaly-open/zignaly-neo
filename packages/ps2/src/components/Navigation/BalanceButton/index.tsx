@@ -27,6 +27,12 @@ const BalanceButton = () => {
       0,
     );
   }, [investments]);
+  const totalBalance = useMemo(() => {
+    return investments?.reduce(
+      (total, investment) => total - +investment.pendingUSDT,
+      balance?.totalFreeUSDT,
+    );
+  }, [investments, balance]);
 
   const balanceStatus = useMemo(() => {
     if (!investments || !balance) return null;
@@ -107,7 +113,7 @@ const BalanceButton = () => {
               </ZigTypography>
               <ZigPriceLabel
                 usd
-                value={balance.totalFreeUSDT}
+                value={totalBalance}
                 color='neutral100'
                 variant='body2'
                 fontSize='12px'
