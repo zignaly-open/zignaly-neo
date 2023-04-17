@@ -89,7 +89,11 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
         </Box>
         <Box display='flex' flexDirection='column'>
           <AssetContainer>
-            <AssetsInPool shorten assetsValue={service.investedUSDT} />
+            <AssetsInPool
+              shorten
+              assetsValue={service.investedUSDT}
+              serviceId={service.id}
+            />
           </AssetContainer>
           <ZigTypography
             fontSize={11}
