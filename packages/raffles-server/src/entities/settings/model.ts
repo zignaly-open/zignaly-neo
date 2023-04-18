@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Table, Column, Model, Unique, PrimaryKey } from 'sequelize-typescript';
 
 @Table
