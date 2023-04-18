@@ -2,8 +2,9 @@ name: Zigbids Staging deploy
 on:
   push:
     branches:
-      - master
-      - feat/deprecate-usages-imput-amount
+      #      - master
+      - zigbids-deprecated
+
 jobs:
   pre_job:
     runs-on: ubuntu-latest
