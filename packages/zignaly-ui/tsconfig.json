@@ -20,7 +20,7 @@
     "allowJs": true,
     "declaration": true,
     "emitDeclarationOnly": true,
-    "outDir": "dist",
+    "outDir": "lib",
     "declarationMap": true
   },
   "include": [

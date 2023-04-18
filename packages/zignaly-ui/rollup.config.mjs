@@ -16,7 +16,7 @@ export default [
     input: "src/index.ts",
     output: [
       {
-        dir: "dist",
+        dir: "lib",
         format: "esm",
         preserveModules: true,
         globals: {
@@ -49,8 +49,8 @@ export default [
     ],
   },
   {
-    input: "dist/index.d.ts",
-    output: [{file: "dist/index.d.ts", format: "esm"}],
+    input: "lib/index.d.ts",
+    output: [{file: "lib/index.d.ts", format: "esm"}],
     plugins: [dts()],
   },
 ];
