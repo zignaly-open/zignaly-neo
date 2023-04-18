@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldErrorsImpl, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MinBalanceModalProps } from './types';
@@ -78,7 +78,14 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
           name={'amountValue'}
           fullWidth={true}
           showMaxButton={false}
-          error={isDirty && t(errors?.amountValue?.value?.message)}
+          error={
+            isDirty &&
+            t(
+              (
+                errors?.amountValue as FieldErrorsImpl<InputAmountAdvancedValueType>
+              )?.value?.message,
+            )
+          }
           enableMaxAmountMessage={false}
           tokens={[coin]}
           showUnit

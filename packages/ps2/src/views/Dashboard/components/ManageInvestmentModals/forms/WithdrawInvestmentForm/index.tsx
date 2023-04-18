@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useForm } from 'react-hook-form';
+import { FieldErrorsImpl, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Grid } from '@mui/material';
 import { WithdrawActions } from '../../styles';
 import {
   Button,
   InputAmountAdvanced,
+  InputAmountAdvancedValueType,
   SliderInput,
   Typography,
 } from '@zignaly-open/ui';
@@ -115,10 +116,15 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
             tokens={[coin]}
             error={
               isDirty &&
-              t(errors?.amountTransfer?.value?.message, {
-                minAmount: minInvestedAmountOwner,
-                minAmountCoin: coin.id,
-              })
+              t(
+                (
+                  errors?.amountTransfer as FieldErrorsImpl<InputAmountAdvancedValueType>
+                )?.value?.message,
+                {
+                  minAmount: minInvestedAmountOwner,
+                  minAmountCoin: coin.id,
+                },
+              )
             }
           />
         </Grid>

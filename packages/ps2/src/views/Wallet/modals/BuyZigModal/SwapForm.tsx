@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, FieldErrorsImpl, useForm } from 'react-hook-form';
 import { Box, CircularProgress, Grid } from '@mui/material';
 import {
   InputAmountAdvanced,
+  InputAmountAdvancedValueType,
   ZigButton,
   ZignalyExchangeIcon,
   ZigPriceLabel,
@@ -166,7 +167,11 @@ const SwapForm = ({
                         selectedExchangeObject.balances[coinFrom].balanceFree,
                     },
                   ]}
-                  error={t(errors?.amount?.value?.message)}
+                  error={t(
+                    (
+                      errors?.amount as FieldErrorsImpl<InputAmountAdvancedValueType>
+                    )?.value?.message,
+                  )}
                 />
               </Grid>
               <Grid item pt={3} display='flex' flexDirection='column'>
