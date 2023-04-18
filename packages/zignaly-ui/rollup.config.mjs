@@ -11,46 +11,39 @@ import {fileURLToPath} from "url";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 
-export default [
-  {
-    input: "src/index.ts",
-    output: [
-      {
-        dir: "lib",
-        format: "esm",
-        preserveModules: true,
-        globals: {
-          react: "React",
-          "react-dom": "ReactDOM",
-          "styled-components": "styled",
-        },
-      }
-    ],
-    plugins: [
-      external({
-        includeDependencies: true
-      }),
-      resolve({browser: true}),
-      typescript(),
-      commonjs({
-        include: /\/node_modules\//,
-      }),
+export default {
+  input: "src/index.ts",
+  output: [
+    {
+      dir: "lib",
+      format: "esm",
+      preserveModules: true,
+      globals: {
+        react: "React",
+        "react-dom": "ReactDOM",
+        "styled-components": "styled",
+      },
+    }
+  ],
+  plugins: [
+    external({
+      includeDependencies: true
+    }),
+    resolve({browser: true}),
+    typescript(),
+    commonjs({
+      include: /\/node_modules\//,
+    }),
 
-      alias({
-        entries: {
-          assets: path.resolve(__dirname, "./src/assets"),
-          theme: path.resolve(__dirname, "./src/theme"),
-          components: path.resolve(__dirname, "./src/components"),
-          utils: path.resolve(__dirname, "./src/utils"),
-        },
-      }),
-      url(),
-      svgr({icon: true}),
-    ],
-  },
-  {
-    input: "lib/index.d.ts",
-    output: [{file: "lib/index.d.ts", format: "esm"}],
-    plugins: [dts()],
-  },
-];
+    alias({
+      entries: {
+        assets: path.resolve(__dirname, "./src/assets"),
+        theme: path.resolve(__dirname, "./src/theme"),
+        components: path.resolve(__dirname, "./src/components"),
+        utils: path.resolve(__dirname, "./src/utils"),
+      },
+    }),
+    url(),
+    svgr({icon: true}),
+  ],
+}
