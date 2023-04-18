@@ -29,7 +29,7 @@ export const SettingsPage = () => {
     update('Settings', { data: newData, id: undefined });
 
   if (error) {
-    return <p>{error}</p>;
+    return <p>{error as JSX.Element}</p>;
   }
 
   return (
