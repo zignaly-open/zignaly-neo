@@ -5,10 +5,11 @@ import BigNumber from "bignumber.js";
 import { Layout, Row, Container, Indicator, Subtitle, Inline } from "./styles";
 import { ValueIndicator } from "components/styled";
 import { PercentageIndicatorProps } from "./types";
-import Typography from "components/display/Typography";
 import { Tooltip } from "@mui/material";
+import ZigTypography from "../../../ZigTypography";
 
 const PercentageIndicator = ({
+  id,
   value = "0",
   label,
   type = "graph",
@@ -38,6 +39,7 @@ const PercentageIndicator = ({
                 suffix={"%"}
                 decimalScale={2}
                 thousandSeparator={","}
+                id={id}
               />
             </ValueIndicator>
             {!isZero && (
@@ -70,6 +72,7 @@ const PercentageIndicator = ({
                 thousandSeparator={","}
                 decimalScale={stableCoinOperative ? 2 : 8}
                 fixedDecimalScale={stableCoinOperative}
+                id={id}
               />
             </ValueIndicator>
           </Inline>
@@ -87,6 +90,7 @@ const PercentageIndicator = ({
                 thousandSeparator={","}
                 decimalScale={stableCoinOperative ? 2 : 8}
                 fixedDecimalScale={stableCoinOperative}
+                id={id}
               />
             </ValueIndicator>
           </Inline>
@@ -110,9 +114,9 @@ const PercentageIndicator = ({
                 )}
               </>
             ) : (
-              <Typography variant={"body2"} color={"neutral400"}>
+              <ZigTypography variant={"body2"} color={"neutral400"}>
                 -
-              </Typography>
+              </ZigTypography>
             )}
           </Row>
         </Tooltip>

@@ -17,13 +17,9 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
     <>
       <Grid container sx={{ padding: '10px 0' }}>
         <Grid item xs={12} sx={{ paddingRight: '0px' }}>
-          <ZigTypography variant={'body2'} fontSize={'15px'}>
-            {t('buy.deposit.description', { coin: 'USDT' })}
-          </ZigTypography>
-          <ZigTypography my={1}>
-            <br />
+          <ZigTypography my={1} lineHeight={1.8}>
             <Trans
-              i18nKey='buy.description'
+              i18nKey='buy.deposit.description'
               t={t}
               values={{
                 coin: 'USDT',

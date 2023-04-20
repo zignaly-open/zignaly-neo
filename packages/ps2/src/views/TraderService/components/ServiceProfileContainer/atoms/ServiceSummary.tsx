@@ -22,6 +22,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
           </ZigTypography>
           <AssetsInPoolWrapper>
             <AssetsInPool
+              serviceId={service.id}
               prefixId={'service-profile'}
               assetsValue={service.investedUSDT}
               convertedValue={+service.invested}
