@@ -207,6 +207,7 @@ const SignupForm: React.FC = () => {
                 variant={'h3'}
                 letterSpacing={1.2}
                 fontWeight={600}
+                textTransform={'uppercase'}
               >
                 {t('signup-form.submit')}
               </ZigTypography>
