@@ -137,14 +137,11 @@ export default function ZigTable<T extends object>({
                                           onChange={(v) => {
                                             if (
                                               v ||
-                                              table.getVisibleLeafColumns().length >
-                                                1 +
-                                                  table
-                                                    .getAllLeafColumns()
-                                                    .filter(
-                                                      (c) =>
-                                                        !(typeof c.columnDef.header === "string"),
-                                                    ).length
+                                              table.getVisibleLeafColumns().length -
+                                                table
+                                                  .getAllLeafColumns()
+                                                  .filter((c) => !c.getCanFilter()).length >
+                                                1
                                             ) {
                                               column.toggleVisibility(v);
                                             }
