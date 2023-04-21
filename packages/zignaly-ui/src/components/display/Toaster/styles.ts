@@ -57,8 +57,8 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
         color: ${props.theme.greenGraph};
       }
 
-      border: 1px solid ${props.theme.successToasterBg};
-      background: ${props.theme.successToasterBg};
+      border: 1px solid #122431;
+      background: #122431;
     `}
 
 
@@ -80,7 +80,7 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
         color: ${props.theme.redGraphOrError};
       }
 
-      border: 1px solid ${props.theme.errorToasterBg};
-      background: ${props.theme.errorToasterBg};
+      border: 1px solid #231630;
+      background: #321e46;
     `}
 `;

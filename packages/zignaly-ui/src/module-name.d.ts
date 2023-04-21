@@ -26,10 +26,6 @@ declare module "@mui/material/styles" {
     dropDownBackground: string;
     darkSpecial: string;
     almostWhite: string;
-    errorToasterBg: string;
-    errorToasterBorder: string;
-    successToasterBg: string;
-    successToasterBorder: string;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -80,10 +76,6 @@ declare module "@mui/material/Button" {
     dropDownBackground: true;
     darkSpecial: true;
     almostWhite: true;
-    errorToasterBg: true;
-    errorToasterBorder: true;
-    successToasterBg: true;
-    successToasterBorder: true;
   }
 }
 
@@ -114,10 +106,6 @@ declare module "@mui/material/SvgIcon" {
     dropDownBackground: true;
     darkSpecial: true;
     almostWhite: true;
-    errorToasterBg: true;
-    errorToasterBorder: true;
-    successToasterBg: true;
-    successToasterBorder: true;
   }
 }
 
@@ -146,9 +134,5 @@ declare module "@emotion/react" {
     dropDownBackground: string;
     darkSpecial: string;
     almostWhite: string;
-    errorToasterBg: string;
-    errorToasterBorder: string;
-    successToasterBg: string;
-    successToasterBorder: string;
   }
 }
