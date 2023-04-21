@@ -105,7 +105,7 @@ export { default as MenuDropDown } from "./components/navigation/MenuDropDown";
 export { default as BrandImage } from "./components/navigation/Header/components/BrandImage";
 
 // Utils
-export { sortByValue } from "utils/numbers";
+export { sortByValue, trimZeros } from "utils/numbers";
 export { NiceScrollbar } from "utils/css";
 export { styledIf } from "utils/styled";
 export { HeaderLinksContainer } from "components/navigation/Header/styles";
