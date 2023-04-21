@@ -48,27 +48,30 @@ const MyDashboard: React.FC = () => {
   const columnHelper = createColumnHelper<Investment>();
   const columns = useMemo(
     () => [
-      columnHelper.accessor('invested', {
-        header: t('tableHeader.summary.title'),
-        meta: { subtitle: t('tableHeader.summary.subtitle') },
-        cell: ({ row: { original } }) => {
-          const bigNumberInvestment = new BigNumber(original.invested);
-          const bigNumberPending = new BigNumber(original.pending);
-          const totalValue = bigNumberInvestment.plus(bigNumberPending);
-          return (
-            <BalanceSummary
-              prefixId={'portfolio-table'}
-              serviceId={original.serviceId.toString()}
-              totalValue={totalValue.toFixed()}
-              coin={original.ssc}
-              profit={new BigNumber(original.pnlSumLc).toFixed()}
-              onClickEdit={() => onClickEditInvestment(original)}
-            />
-          );
+      columnHelper.accessor(
+        (row) =>
+          new BigNumber(row.invested)
+            .plus(new BigNumber(row.pending))
+            .toNumber(),
+        {
+          header: t('tableHeader.summary.title'),
+          id: 'invested',
+          meta: { subtitle: t('tableHeader.summary.subtitle') },
+          cell: ({ getValue, row: { original } }) => {
+            return (
+              <BalanceSummary
+                prefixId={'portfolio-table'}
+                serviceId={original.serviceId.toString()}
+                totalValue={getValue().toString()}
+                coin={original.ssc}
+                profit={new BigNumber(original.pnlSumLc).toFixed()}
+                onClickEdit={() => onClickEditInvestment(original)}
+              />
+            );
+          },
+          enableHiding: false,
         },
-        enableHiding: false,
-        sortingFn: 'alphanumeric',
-      }),
+      ),
       columnHelper.accessor('serviceName', {
         style: {
           justifyContent: 'flex-start',
