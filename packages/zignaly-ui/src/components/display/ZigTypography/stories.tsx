@@ -25,26 +25,16 @@ const Template: ComponentStory<React.FC<{ title: string; text: string; children:
   title,
   text,
 }) => {
-  const titles: Variant[] = ["h1", "h2", "h3", "h4", "h5", "h6"];
+  const titles: Variant[] = ["h1", "h2", "h3", "h4"];
   return (
     <>
+      <Typography variant={"bigNumber"}>BigNumber 0</Typography>
+
       {titles.map((t) => (
         <Typography key={t} variant={t}>
           {t} {title}
         </Typography>
       ))}
-
-      <Typography component={"p"} variant={"subtitle1"}>
-        Subtitle 1 {text}
-      </Typography>
-
-      <Typography component={"p"} variant={"subtitle2"}>
-        Subtitle 2 {text}
-      </Typography>
-
-      <Typography component={"p"} variant={"caption"}>
-        Caption {text}
-      </Typography>
 
       <Typography component={"p"} variant={"body1"}>
         Body 1 {text}
@@ -52,6 +42,10 @@ const Template: ComponentStory<React.FC<{ title: string; text: string; children:
 
       <Typography component={"p"} variant={"body2"}>
         Body 2 {text}
+      </Typography>
+
+      <Typography component={"p"} variant={"caption"}>
+        Caption {text}
       </Typography>
     </>
   );

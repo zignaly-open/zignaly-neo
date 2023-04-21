@@ -4,6 +4,7 @@ import { Layout, Box, Label, Icon } from "./styles";
 
 import { CheckBoxProps } from "./types";
 
+// TODO: deprecate, use ZigCheckbox
 function CheckBox({
   defaultValue = false,
   value,

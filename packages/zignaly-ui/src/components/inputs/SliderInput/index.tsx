@@ -15,6 +15,7 @@ import { SliderInputProps, SliderModes } from "./types";
 import Typography from "components/display/Typography";
 import { useUpdateEffect } from "react-use";
 
+// TODO: rename to ZigSliderInout, add storiea
 const SliderInput = ({
   className,
   initialValue = 30,

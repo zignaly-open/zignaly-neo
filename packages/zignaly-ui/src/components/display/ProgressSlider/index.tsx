@@ -5,6 +5,7 @@ import { Bar, Dot, DotContainer, Label, LabelTooltip, Layout } from "./styles";
 
 import { ProgressSliderProps } from "./types";
 
+// TODO: rename to ZigProgressSlider
 function ProgressSlider({ className, value, max = 100 }: ProgressSliderProps): ReactElement {
   const normalizedValue = (100 * Math.min(value, max)) / max;
   return (

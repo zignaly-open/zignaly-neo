@@ -7,6 +7,7 @@ import ErrorMessage from "components/display/ErrorMessage";
 import Typography from "components/display/Typography";
 import TextButton from "../TextButton";
 
+// TODO: deprecate
 function InputText(
   {
     onBlur,

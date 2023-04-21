@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Meta, Story } from "@storybook/react";
 import ZigButton, { ZigButtonProps } from "./index";
 import { ButtonGroup, ButtonGroupProps } from "@mui/material";
+import theme from "@zignaly-open/ps2/src/theme";
+import { UserIcon } from "../../../index";
 
 export default {
   title: "Inputs/ZigButton",
@@ -60,6 +62,13 @@ Group.args = {
 const TemplateSizes: Story<typeof ZigButton> = (args) => {
   return (
     <>
+      <ZigButton
+        size="xlarge"
+        variant={"outlined"}
+        startIcon={<UserIcon width={"16px"} height={"16px"} />}
+      >
+        <b>csdfcasd</b>
+      </ZigButton>
       <ZigButton size="small" {...args} />
       <ZigButton size="medium" {...args} />
       <ZigButton size="large" {...args} />
@@ -67,10 +76,12 @@ const TemplateSizes: Story<typeof ZigButton> = (args) => {
       <ZigButton variant={"outlined"} size="small" {...args} />
       <ZigButton variant={"outlined"} size="medium" {...args} />
       <ZigButton variant={"outlined"} size="large" {...args} />
+      <ZigButton variant={"outlined"} size="xlarge" {...args} />
       <br />
       <ZigButton variant={"contained"} size="small" {...args} />
       <ZigButton variant={"contained"} size="medium" {...args} />
       <ZigButton variant={"contained"} size="large" {...args} />
+      <ZigButton variant={"contained"} size="xlarge" {...args} />
     </>
   );
 };

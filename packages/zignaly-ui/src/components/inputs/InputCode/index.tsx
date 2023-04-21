@@ -4,6 +4,7 @@ import { InputCodeProps } from "./types";
 import { Layout } from "./styles";
 import ErrorMessage from "components/display/ErrorMessage";
 
+// TODO: rename to ZigInoutCode
 function InputCode({
   fields,
   loading,

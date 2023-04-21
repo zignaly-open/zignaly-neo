@@ -52,7 +52,6 @@ function ZigSelect<T>({
   value,
   label,
   error,
-  helperText,
   width,
   placeholder,
   options,

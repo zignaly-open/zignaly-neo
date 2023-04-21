@@ -24,6 +24,7 @@ import { Box } from "@mui/material";
 import ZigCoinIcon from "components/display/ZigCoinIcon";
 
 // FIXME this component still needs Jesus
+// TODO: rename to ZigInoutAmount, add stories
 function InputAmount({
   tokens = [],
   name = "amountValue",

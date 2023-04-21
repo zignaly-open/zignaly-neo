@@ -6,6 +6,7 @@ import * as styled from "./styles";
 
 import { ButtonProps } from "./types";
 
+// TODO: deprecated, use ZigButton
 function Button({
   variant = "primary",
   size = "medium",

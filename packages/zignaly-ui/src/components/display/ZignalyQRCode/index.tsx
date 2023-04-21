@@ -4,6 +4,7 @@ import { Column } from "utils/column";
 import Typography from "../Typography";
 import { QRCodeContainer } from "./styles";
 
+// TODO: rename to ZigQRCode
 const ZignalyQRCode = ({
   url = "www.zignaly.com",
   label = "",
