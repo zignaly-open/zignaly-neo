@@ -81,6 +81,7 @@ const ServiceInformation: React.FC<{
         </GreySubHeader>
         {md ? <Separator /> : <Box mt={2} />}
         <Button
+          data-tack-cta={'service-profile-copy-link'}
           id={'service-profile__copy-link'}
           minWidth={30}
           onClick={() => {

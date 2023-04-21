@@ -45,7 +45,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       columnHelper.accessor('userId', {
         header: t('tableHeader.userId'),
       }),
-      columnHelper.accessor((row) => new BigNumber(row.invested).toFixed(), {
+      columnHelper.accessor((row) => new BigNumber(row.invested).toNumber(), {
         header: () => (
           <Box display={'flex'} flexDirection={'column'}>
             {t('tableHeader.invested')}

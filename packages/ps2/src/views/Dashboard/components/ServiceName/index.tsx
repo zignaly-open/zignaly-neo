@@ -34,7 +34,11 @@ export const ServiceName = ({
       }}
     >
       <Icon>
-        <Avatar size={'x-large'} image={getServiceLogo(service.serviceLogo)} />
+        <Avatar
+          size={'x-large'}
+          image={getServiceLogo(service.serviceLogo)}
+          id={prefixId && `${prefixId}__logo-${service.serviceId}`}
+        />
       </Icon>
       <Box
         sx={{

@@ -68,7 +68,7 @@ function AuthVerifyModal({
       }
     } else if (ask2FA) {
       if (verifyStatus.isSuccess) {
-        // Do nothing
+        title = t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-title');
       } else if (isUnknownDevice) {
         title = t(
           'auth-verify-modal.isNotDisabled.ask2FA.isUnknownDevice-title',
