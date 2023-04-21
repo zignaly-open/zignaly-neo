@@ -1,1 +1,0 @@
-export const AUCTION_UPDATED = 'AUCTION_UPDATED';
