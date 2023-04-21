@@ -1,6 +1,6 @@
 {
   "name": "@zignaly-open/raffles-server",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "license": "MIT",
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
@@ -26,7 +26,7 @@
   "dependencies": {
     "@graphql-tools/schema": "^8.3.13",
     "@slack/webhook": "^6.1.0",
-    "@zignaly-open/raffles-shared": "^1.0.2",
+    "@zignaly-open/raffles-shared": "^1.1.0",
     "apollo-server-core": "^3.10.3",
     "apollo-server-express": "^3.10.3",
     "axios": "^0.27.2",

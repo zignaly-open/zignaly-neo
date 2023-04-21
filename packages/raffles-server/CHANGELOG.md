@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/zignaly-open/zigraffle/compare/@zignaly-open/raffles-server@0.2.0...@zignaly-open/raffles-server@0.2.1) (2023-04-21)
+
+**Note:** Version bump only for package @zignaly-open/raffles-server
+
+
+
+
+
 # [0.2.0](https://github.com/zignaly-open/zigraffle/compare/@zignaly-open/raffles-server@0.1.3...@zignaly-open/raffles-server@0.2.0) (2023-04-21)
 
 

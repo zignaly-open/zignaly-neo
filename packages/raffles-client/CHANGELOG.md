@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/zignaly-open/zigraffle/compare/@zignaly-open/raffles-client@0.2.0...@zignaly-open/raffles-client@0.3.0) (2023-04-21)
+
+
+### Bug Fixes
+
+* clear the build ([822156b](https://github.com/zignaly-open/zigraffle/commit/822156bd2c88630b32ac38f3c97f6f95962c6b5e))
+* edit empty error ([798bb5c](https://github.com/zignaly-open/zigraffle/commit/798bb5c792a03c803f3fce7bfbbe7e18b165dce6))
+* edit error decimals text ([2edd4a2](https://github.com/zignaly-open/zigraffle/commit/2edd4a27fc888d2778f57bb7c5f6573d474eef5a))
+* edit errors ([b5be648](https://github.com/zignaly-open/zigraffle/commit/b5be64883d11e400a2dc69b7a9e746c2b6f01eb7))
+* edit text balance ([aa2fa88](https://github.com/zignaly-open/zigraffle/commit/aa2fa88cba227cb139baeee432f5250b43d89e41))
+* errors after submit ([7f5a33f](https://github.com/zignaly-open/zigraffle/commit/7f5a33f9685dc5bca47ded782ddd2c8ba194eba4))
+* errors after submit ([56ce781](https://github.com/zignaly-open/zigraffle/commit/56ce781af5ada9bc2caf52d0d13238442917dec6))
+* errors after submit ([83d71d9](https://github.com/zignaly-open/zigraffle/commit/83d71d9d7415586aa91cfe766ef0f5ddacfa7b86))
+* errors after submit ([b5a43f6](https://github.com/zignaly-open/zigraffle/commit/b5a43f6491c42c8d5ba74a3eceb48cdc4773d8a8))
+* errors after submit ([1d4ebd9](https://github.com/zignaly-open/zigraffle/commit/1d4ebd9c0f9ee88e13b750103393803c2a95f23a))
+* fix balance and validation ([862ca25](https://github.com/zignaly-open/zigraffle/commit/862ca259c3a3a6c9c16a8734a78767cd8c18f84f))
+* fix decimals error ([b7d7a42](https://github.com/zignaly-open/zigraffle/commit/b7d7a4250ddca36458f64297a42ee474d4a38e4d))
+* fix decimals error ([d15c54e](https://github.com/zignaly-open/zigraffle/commit/d15c54ea73361353affce1de86f0b70fd0529da3))
+* fix error after transfer ([6dcbaa4](https://github.com/zignaly-open/zigraffle/commit/6dcbaa4b7876b91370ea25102476313915f7bc8a))
+* fix userpilot page event ([a410663](https://github.com/zignaly-open/zigraffle/commit/a410663b0e9a3516a6f21237f93e8d06f700acb2))
+* fix validation and balance ([4c4ba64](https://github.com/zignaly-open/zigraffle/commit/4c4ba649b272a11d0860ebf9084e8dd369052890))
+* fixes for the Edit Profile form ([49ce2db](https://github.com/zignaly-open/zigraffle/commit/49ce2dbad7b7449cae1f173c21b89efc97101c30))
+* merged with master ([5ded8b3](https://github.com/zignaly-open/zigraffle/commit/5ded8b3491435a64c27b5377c381ef10afac5290))
+
+
+### Features
+
+* add ids to all tables ([6a8a2a5](https://github.com/zignaly-open/zigraffle/commit/6a8a2a5ab0f77d237d2c1bc4a6039d91b418d595))
+* add validation to TransferZig.tsx form, delete zignaly-ui modals ([ed9bfd0](https://github.com/zignaly-open/zigraffle/commit/ed9bfd060b51655b8ee816b96c82162c16ae7148))
+* add zigcoin precision to contrsct ([111d14d](https://github.com/zignaly-open/zigraffle/commit/111d14d9472806424d49d2cb670ddccfaf32dd23))
+* replace InputAmount with InputAmountAdvanced in TransferZig modal ([0e79a2b](https://github.com/zignaly-open/zigraffle/commit/0e79a2b72839d61dcf71ddfbe99bcba3b74d3c6d))
+* share [@motions](https://github.com/motions) ([2ddc98f](https://github.com/zignaly-open/zigraffle/commit/2ddc98f2f6557a3cf7594b81f29d8f1deb2f3cb2))
+
+
+### Reverts
+
+* Revert "chore: more small fixes" ([f9888db](https://github.com/zignaly-open/zigraffle/commit/f9888db44f08e6f80106fb1ce968f10ec5ff3aea))
+
+
+
+
+
 # [0.2.0](https://github.com/zignaly-open/zigraffle/compare/@zignaly-open/raffles-client@0.1.3...@zignaly-open/raffles-client@0.2.0) (2023-04-21)
 
 
