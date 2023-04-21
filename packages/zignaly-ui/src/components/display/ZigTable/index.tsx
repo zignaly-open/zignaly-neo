@@ -27,6 +27,7 @@ import { Table, SortIcon } from "./styles";
 import Loader from "../Loader";
 
 export default function ZigTable<T extends object>({
+  prefixId,
   data,
   columns,
   initialState = {},
@@ -67,13 +68,23 @@ export default function ZigTable<T extends object>({
   return (
     <>
       <TableContainer>
-        <Table>
+        <Table id={prefixId && `${prefixId}__table`}>
           <thead>
             {table.getHeaderGroups().map((headerGroup, groupIndex) => (
               <tr key={headerGroup.id}>
                 {headerGroup.headers.map((header, index) => {
                   return (
-                    <th key={header.id} colSpan={header.colSpan}>
+                    <th
+                      key={header.id}
+                      colSpan={header.colSpan}
+                      id={
+                        prefixId &&
+                        header?.column?.columnDef?.header &&
+                        `${prefixId}-table__header-${header.column.columnDef.header
+                          .toString()
+                          .replace(/ /g, "")}`
+                      }
+                    >
                       {header.isPlaceholder ? null : (
                         <Box display="flex" justifyContent="center" alignItems="center">
                           <SortBox
@@ -173,7 +184,7 @@ export default function ZigTable<T extends object>({
           </tbody>
         </Table>
       </TableContainer>
-      {!data.length && (
+      {!data.length && !loading && (
         <ZigTypography
           variant="subtitle1"
           textAlign="center"
@@ -181,15 +192,17 @@ export default function ZigTable<T extends object>({
           display="flex"
           justifyContent="center"
           alignItems="center"
+          id={"table__empty-message"}
         >
           {emptyMessage}
         </ZigTypography>
       )}
       {pagination !== false && (
-        <Box p="22px" display="flex" alignItems="center" justifyContent="center">
-          <Box display="flex" flex={3} justifyContent="flex-start" />
+        <Box p="22px" display="flex" alignItems="center" justifyContent="center" flexWrap="wrap">
+          <Box display={["none", "flex"]} flex={3} justifyContent="flex-start" />
           <Box justifyContent="center" display="flex" gap={1} alignItems="center" flex={3}>
             <IconButton
+              id={prefixId && `${prefixId}-table__go-zero-page`}
               variant="flat"
               size="xlarge"
               shrinkWrap={true}
@@ -198,6 +211,7 @@ export default function ZigTable<T extends object>({
               disabled={!table.getCanPreviousPage()}
             />
             <IconButton
+              id={prefixId && `${prefixId}-table__go-previous-page`}
               variant="flat"
               size="xlarge"
               shrinkWrap={true}
@@ -205,7 +219,13 @@ export default function ZigTable<T extends object>({
               onClick={table.previousPage}
               disabled={!table.getCanPreviousPage()}
             />
-            <Box display="flex" gap={1} alignItems="center" px={2}>
+            <Box
+              display="flex"
+              gap={1}
+              alignItems="center"
+              px={2}
+              id={prefixId && `${prefixId}-table__pages`}
+            >
               <ZigTypography color="neutral300">Page</ZigTypography>
               <PageNumberContainer>
                 <ZigTypography variant="h3" color="neutral100">
@@ -217,14 +237,19 @@ export default function ZigTable<T extends object>({
                   <ZigTypography whiteSpace="nowrap" color="neutral300">
                     out of
                   </ZigTypography>
-                  <ZigTypography color="neutral100" fontWeight={600}>
-                    {table.getPageCount()}
+                  <ZigTypography
+                    color="neutral100"
+                    fontWeight={600}
+                    id={prefixId && `${prefixId}-table__total-page-count`}
+                  >
+                    {table.getPageCount() || 1}
                   </ZigTypography>
                 </>
               )}
             </Box>
             {loading && <Loader color="#fff" width="24px" height="24px" ariaLabel="loading" />}
             <IconButton
+              id={prefixId && `${prefixId}-table__go-next-page`}
               variant="flat"
               size="xlarge"
               shrinkWrap={true}
@@ -234,6 +259,7 @@ export default function ZigTable<T extends object>({
             />
             {table.getPageCount() !== -1 && (
               <IconButton
+                id={prefixId && `${prefixId}-table__go-last-page`}
                 variant="flat"
                 size="xlarge"
                 shrinkWrap={true}
@@ -243,10 +269,20 @@ export default function ZigTable<T extends object>({
               />
             )}
           </Box>
-          <Box flex={3} display="flex" gap={2} alignItems="center" justifyContent="flex-end" ml={2}>
+          <Box
+            flex={3}
+            display="flex"
+            gap={2}
+            alignItems="center"
+            mx={2}
+            flexBasis={["100%", "auto"]}
+            justifyContent={["center", "flex-end"]}
+            marginTop={[1, 0]}
+          >
             <ZigTypography color="neutral300">Displaying</ZigTypography>
             <SmallSelectWrapper>
               <ZigSelect
+                id={prefixId && `${prefixId}-table__items-per-page`}
                 options={pageSizeOptions}
                 value={table.getState().pagination.pageSize}
                 onChange={table.setPageSize}

@@ -3,4 +3,8 @@ export interface AssetsInPoolProps {
   numberOfInvestors?: number;
   convertedValue?: number;
   convertedValueCoin?: string;
+  createdAt?: string;
+  shorten?: boolean;
+  prefixId?: string;
+  serviceId: string;
 }

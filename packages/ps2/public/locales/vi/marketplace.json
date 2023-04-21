@@ -1,0 +1,25 @@
+{
+	"card": {
+		"top-rated": "Xếp hạng Top",
+		"assets": "Tài sản",
+		"investors": "Nhà đầu tư"
+	},
+	"invest-in-services": "Đầu tư Profit Sharing",
+	"invest-in-services-explainer": "Đầu tư với danh sách các nhà giao dịch chuyên nghiệp của chúng tôi và chỉ trả một phần lợi nhuận của bạn. Khoản đầu tư trung bình là 200 đô, nhưng bạn có thể bắt đầu chỉ với 1 đô.",
+	"table": {
+		"service-name": "Tên dịch vụ",
+		"manager": "Người Quản Lý",
+		"currency": "Đồng yết giá",
+		"assets": "Tài sản trong tài khoản chung",
+		"nb-investors": "# nhà đầu tư",
+		"n-months-pnl_one": "{{count}} PNL tháng",
+		"n-months-pnl_other": "{{count}} PNL tháng",
+		"n-months_one": "{{count}} tháng",
+		"n-months_other": "{{count}} tháng",
+		"n-years_one": "{{count}} năm",
+		"n-years_other": "{{count}} năm",
+		"account-age": "Tuổi tài khoản",
+		"x-investors_one": "{{count}} Nhà đầu tư",
+		"x-investors_other": "{{count}} Nhà đầu tư"
+	}
+}

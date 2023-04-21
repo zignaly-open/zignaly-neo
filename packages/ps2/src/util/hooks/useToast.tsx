@@ -25,9 +25,14 @@ const backendErrorText = (t: TFunction, error: BackendError) => {
 
 const lastShownBackendError = { error: '', time: 0, expiry: 10_000 };
 
-export const backendError = (t: TFunction, error: BackendError) => {
+export const backendError = (
+  t: TFunction,
+  error: BackendError,
+  ignoreDuplicate: boolean,
+) => {
   const text = backendErrorText(t, error);
   if (
+    !ignoreDuplicate &&
     lastShownBackendError.error === text &&
     lastShownBackendError.time + lastShownBackendError.expiry > Date.now()
   )
@@ -41,13 +46,14 @@ export function useToast(): {
   success: ToastFn;
   info: ToastFn;
   error: ToastFn;
-  backendError: (error?: BackendError) => void;
+  backendError: (error?: BackendError, ignoreDuplicate?: boolean) => void;
 } {
   const { t } = useTranslation('error');
   return {
     success: showToast('success'),
     error: showToast('error'),
     info: showToast('info'),
-    backendError: (error: BackendError) => backendError(t, error),
+    backendError: (error: BackendError, ignoreDuplicate: boolean) =>
+      backendError(t, error, ignoreDuplicate),
   };
 }

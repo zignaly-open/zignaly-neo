@@ -1,6 +1,7 @@
 {
   "yes": "Yes",
   "no": "No",
+  "ok": "OK",
   "back": "Back",
   "close": "Close",
   "loading": "Loading...",
@@ -22,7 +23,7 @@
     "description": "Something went wrong. Please try again later or contact support. Or abandon the industrial society and build a cabin in the woods."
   },
   "main-menu": {
-    "dropdown-link-forTrading": "For Trading Services",
+    "dropdown-link-forTrading": "Manage your Services",
     "dropdown-link-helpDocs": "Help Docs"
   },
   "refresh": {
@@ -31,9 +32,16 @@
   "account-menu": {
     "isAuth-button-logIn": "Log in",
     "isAuth-button-signUp": "SIGN UP",
-    "notAuth-dropdown-link-dashboard": "My Portfolio",
     "notAuth-dropdown-link-balances": "My Balances",
     "notAuth-dropdown-link-wallet": "ZIG Wallet",
+    "portfolio": "My Portfolio",
+    "referrals": "Referrals",
+    "marketplace": "Marketplace",
+    "balance": "Balances",
+    "rewards": "Rewards",
+    "notAuth-dropdown-link-settings": "Settings",
+    "notAuth-dropdown-link-password": "Password",
+    "notAuth-dropdown-link-2fa": "Two-Factor Authentication",
     "notAuth-button-logOut": "Logout"
   },
   "account-selector": {
@@ -44,7 +52,8 @@
     }
   },
   "navigation-menu": {
-    "profit-sharing": "Profit Sharing"
+    "profit-sharing": "Browse Top Traders",
+    "become-trader": "Offer your Trading Services"
   },
   "amount": "Amount",
   "percent": "{{value, prettyNumber}}%",
@@ -54,14 +63,27 @@
   "infinitely-better": "Yes, the current value is infinity percent better because the starting value is 0",
   "infinitely-worse": "Yes, the current value is infinity percent worse because the starting value is 0",
   "type-to-confirm": "Type \"{{word}}\" to confirm",
+  "balance": {
+    "total": "Total",
+    "available": "Available",
+    "deposit-funds": "Deposit Funds",
+    "find-traders": "Find traders to invest in",
+    "my-portfolio": "My Portfolio"
+  },
   "validation": {
     "insufficient-amount": "Insufficient funds",
+    "insufficient-amount-min": "Min amount: {{ minValue }} {{ minValueCoin }}",
     "invalid-value": "Invalid value",
     "negative-amount": "Should be >= 0",
     "max-allowed-length": "Should be under {{ maxLength }} characters",
     "negative-zeroable-amount": "Should be > 0",
     "min-amount": "Minimum amount is {{amount}} {{coin}}.",
     "invalid-amount": "You must indicate an amount",
-    "max-decimals": "Please enter numbers with no more than {{maxDecimals}} decimal places."
-  }
+    "max-decimals": "Please enter numbers with no more than 8 decimal places.",
+    "invalid-characters": "Invalid characters",
+    "letter-number": "Should contain at least one letter or number",
+    "min-invest-amount-for-owner": "Owner balance must be above {{minAmount}} {{minAmountCoin}}"
+  },
+  "follow-us": "Follow us",
+  "portfolio": "Portfolio"
 }

@@ -10,15 +10,12 @@
     "start": "env-cmd -f .env react-app-rewired start",
     "build": "GENERATE_SOURCEMAP=false react-app-rewired build",
     "test": "react-app-rewired test --passWithNoTests",
-    "test-storybook": "test-storybook",
     "eject": "react-app-rewired eject",
     "lint:tsc": "tsc --noemit",
     "lint:eslint": "eslint --fix --ignore-path .eslintignore ./src --ext .ts,.tsx",
     "lint:eslint-ci": "eslint --ignore-path .eslintignore ./src --ext .ts,.tsx",
     "lint": "run-s lint:tsc lint:eslint",
-    "lint-ci": "run-s lint:tsc lint:eslint-ci",
-    "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "lint-ci": "run-s lint:tsc lint:eslint-ci"
   },
   "browserslist": {
     "production": [
@@ -34,8 +31,8 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
+    "@emotion/react": "11.9.3",
+    "@emotion/styled": "11.9.3",
     "@ethersproject/contracts": "^5.6.2",
     "@hookform/resolvers": "^2.9.8",
     "@mui/icons-material": "5.8.4",
@@ -43,7 +40,6 @@
     "@mui/material": "5.8.7",
     "@mui/system": "5.8.7",
     "@mui/x-date-pickers": "^5.0.5",
-    "@storybook/react": "^6.5.6",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "12.1.5",
     "@testing-library/user-event": "12.1.5",
@@ -104,16 +100,6 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^6.5.6",
-    "@storybook/addon-essentials": "^6.5.6",
-    "@storybook/addon-interactions": "^6.5.6",
-    "@storybook/addon-links": "^6.5.6",
-    "@storybook/builder-webpack5": "^6.5.6",
-    "@storybook/manager-webpack5": "^6.5.6",
-    "@storybook/node-logger": "^6.5.6",
-    "@storybook/preset-create-react-app": "^4.1.2",
-    "@storybook/test-runner": "^0.7.1",
-    "@storybook/testing-library": "^0.0.11",
     "@types/jsonexport": "^3.0.2",
     "@types/lodash": "^4.14.182",
     "@types/react": "^17.0.2",
@@ -127,8 +113,6 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
     "prop-types": "^15.8.1",
-    "storybook-addon-apollo-client": "^4.0.12",
-    "storybook-react-i18next": "^1.0.20",
     "webpack": "^5.73.0"
   }
 }

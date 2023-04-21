@@ -4,6 +4,7 @@ import * as styled from "./styles";
 
 const Tab = (
   props: TabProps & {
+    id?: string;
     asideComponent?: React.ReactNode;
   },
 ) => {

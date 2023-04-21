@@ -1,0 +1,24 @@
+{
+	"managements-label": "Quản lý quỹ",
+	"investors-label": "Nhà đầu tư",
+	"coins-label": "Coins",
+	"dropdown": {
+		"manageServices": "Quản lý dịch vụ",
+		"trade": {
+			"title": "Giao dịch",
+			"links": {
+				"positions": "Vị thế của tôi",
+				"manual": "Giao dịch thủ công",
+				"signals": "Giao dịch tín hiệu",
+				"api": "Quản lý API"
+			}
+		},
+		"profile": {
+			"title": "Hồ sơ",
+			"links": {
+				"profile": "Xem hồ sơ",
+				"profile-edit": "Chỉnh sửa hồ sơ"
+			}
+		}
+	}
+}

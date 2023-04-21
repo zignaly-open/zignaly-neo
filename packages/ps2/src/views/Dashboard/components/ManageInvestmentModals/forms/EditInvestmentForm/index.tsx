@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { NumericFormat } from 'react-number-format';
 import { useTheme } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
@@ -18,7 +18,6 @@ import {
   Button,
   CoinIcon,
   InputAmountAdvanced,
-  PlusIcon,
   SliderInput,
   TextButton,
   Typography,
@@ -35,28 +34,30 @@ import { EditFormData, EditInvestmentFormProps } from './types';
 import { EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { useServiceDetails } from 'apis/service/use';
+import BigNumber from 'bignumber.js';
+import { useDebounce } from 'react-use';
 
 function EditInvestmentForm({
   onClickWithdrawInvestment,
-  close,
   setView,
 }: EditInvestmentFormProps) {
   const coin = useCurrentBalance();
   const theme = useTheme();
   const { t } = useTranslation('edit-investment');
-  const [isInputEnabled, setInputEnabled] = useState(false);
   const { serviceId, serviceName } = useSelectedInvestment();
-  const { isLoading: isEditingPercent, edit: editPercent } =
-    useUpdateTakeProfitPercentage(serviceId);
+  const { edit: editPercent } = useUpdateTakeProfitPercentage(serviceId);
   const { isLoading: isEditingInvestment, edit: editInvestment } =
     useUpdateTakeProfitAndInvestMore(serviceId);
   const { data: details } = useInvestmentDetails(serviceId);
+  const { data: service } = useServiceDetails(serviceId);
   const transferOutAll = details?.transferOutAll;
 
   const {
     handleSubmit,
     control,
     formState: { isValid, isDirty, errors },
+    watch,
   } = useForm<EditFormData>({
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -67,37 +68,53 @@ function EditInvestmentForm({
       },
       profitPercentage: details?.profitPercentage,
     },
-    resolver: isInputEnabled ? yupResolver(EditInvestmentValidation) : null,
+    resolver: yupResolver(
+      EditInvestmentValidation({
+        max: new BigNumber(service.maximumSbt)
+          .minus(service.invested)
+          .minus(service.pending)
+          .toString(),
+        coin: service.ssc,
+      }),
+    ),
   });
 
   const toast = useToast();
   const openBlockedToast = () => toast.error(t('error-blockedInvestment'));
 
-  const isLoading = isEditingPercent || isEditingInvestment;
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
   const onSubmit = async (values: EditFormData) => {
-    if (isInputEnabled) {
-      await editInvestment({
-        profitPercentage: values.profitPercentage,
+    await editInvestment({
+      amount: values?.amountTransfer?.value,
+    });
+    toast.success(
+      t('edit-investment:addMoreInvestmentSuccess', {
         amount: values?.amountTransfer?.value,
-      });
-      toast.success(
-        t('edit-investment:addMoreInvestmentSuccess', {
-          amount: values?.amountTransfer?.value,
-          currency: values?.amountTransfer?.token?.id,
-          serviceName,
-        }),
-      );
-      setView(EditInvestmentViews.EditInvestmentSuccess);
-    } else {
+        currency: values?.amountTransfer?.token?.id,
+        serviceName,
+      }),
+    );
+    setView(EditInvestmentViews.EditInvestmentSuccess);
+  };
+
+  const profitPercent = watch('profitPercentage');
+  const isFirstRun = useRef(true);
+
+  useDebounce(
+    async () => {
+      if (isFirstRun.current) {
+        isFirstRun.current = false;
+        return;
+      }
       await editPercent({
-        profitPercentage: values.profitPercentage,
+        profitPercentage: profitPercent,
       });
       toast.success(t('edit-investment:percentageChangedSuccess'));
-      close();
-    }
-  };
+    },
+    1000,
+    [profitPercent],
+  );
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -142,7 +159,7 @@ function EditInvestmentForm({
         </Row>
       </Field>
 
-      {isInputEnabled && coin && (
+      {coin && (
         <InputContainer>
           <InputAmountAdvanced
             name={'amountTransfer'}
@@ -158,36 +175,16 @@ function EditInvestmentForm({
       )}
 
       <ModalActions>
-        {!isInputEnabled && (
-          <TextButton
-            onClick={() =>
-              transferOutAll ? openBlockedToast() : setInputEnabled(true)
-            }
-            disabled={transferOutAll}
-            allowClickOnDisabled
-            as={'span'}
-            leftElement={
-              <PlusIcon
-                color={theme[transferOutAll ? 'neutral300' : 'links']}
-                width={'22px'}
-                height={'22px'}
-              />
-            }
-            caption={t('form.link.investMore')}
-          />
-        )}
         <Button
+          id={'edit-investment__save-invest'}
           size={'large'}
           type={'submit'}
-          loading={isLoading}
-          caption={
-            isInputEnabled
-              ? t('form.button.saveAndInvestment')
-              : t('form.button.saveAndClose')
-          }
-          disabled={isInputEnabled ? !canSubmit : false}
+          loading={isEditingInvestment}
+          caption={t('form.button.addInvestment')}
+          disabled={!canSubmit}
         />
         <TextButton
+          id={'edit-investment__withdraw'}
           rightElement={
             <ArrowRightIcon
               width={'22px'}

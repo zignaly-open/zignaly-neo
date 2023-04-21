@@ -12,14 +12,14 @@ import {
   TextButton,
   ZigCoinIcon,
   ZigTable,
+  ZigTablePriceLabel,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { FILTERS_TYPE, FilterValues, Transaction } from 'apis/wallet/types';
 import { useTransactionsHistory } from 'apis/wallet/use';
 import ChainIcon from 'components/ChainIcon';
-import { Add, ExpandLess, ExpandMore } from '@mui/icons-material';
-import { NumericFormat } from 'react-number-format';
+import { ExpandLess, ExpandMore, OpenInNew } from '@mui/icons-material';
 import TransactionDetails from '../TransactionDetails';
 import { PaginationState } from '@tanstack/react-table';
 import { StyledZigSelect } from './styles';
@@ -79,15 +79,14 @@ const WalletTransactions = () => {
         ),
         enableSorting: false,
       }),
-      columnHelper.accessor('formattedAmount', {
+      columnHelper.accessor('amount', {
         header: t('transactions.header.amount'),
         enableSorting: false,
-        cell: ({ getValue }) => (
+        cell: ({ getValue, row: { original } }) => (
           <ZigTypography color='almostWhite'>
-            <NumericFormat
-              value={getValue()}
-              displayType='text'
-              thousandSeparator={true}
+            <ZigTablePriceLabel
+              alwaysShowSign
+              value={original.type === 'withdraw' ? -getValue() : getValue()}
             />
           </ZigTypography>
         ),
@@ -176,7 +175,8 @@ const WalletTransactions = () => {
         </Box>
         <Box display='flex' gap={2}>
           <TextButton
-            rightElement={<Add sx={{ color: 'links' }} />}
+            id={'wallet__export-transactions'}
+            rightElement={<OpenInNew sx={{ color: 'links', width: '15px' }} />}
             caption={t('action:export')}
             onClick={() => downloadCsv()}
             loading={downloadCsvStatus.isLoading}
@@ -189,6 +189,7 @@ const WalletTransactions = () => {
         </Box>
       </Box>
       <ZigTable
+        prefixId={'wallet-transactions'}
         columns={columns}
         data={filteredData}
         renderSubComponent={({ row }) => (

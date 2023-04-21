@@ -38,6 +38,7 @@ export enum TransactionType {
   Payout = 'ZigBids Claim',
   RedeemCode = 'ZigBids Redeem Code',
   ReferralCode = 'ZigBids Referral Code',
+  Reward = 'ZigBids Email Verify Reward',
 }
 
 export type RedisAuctionData = {

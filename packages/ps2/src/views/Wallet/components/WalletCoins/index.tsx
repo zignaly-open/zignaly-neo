@@ -81,6 +81,7 @@ const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
         cell: ({ row: { original } }) => (
           <Box display='flex' justifyContent='flex-end'>
             <IconButton
+              id={'wallet-table__withdraw'}
               icon={<Remove color={'neutral300'} />}
               onClick={() =>
                 showModal(WalletWithdrawModal, {
@@ -113,6 +114,7 @@ const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
     <Box mb='70px'>
       <StyledTable>
         <ZigTable
+          prefixId={'wallet-coins'}
           columns={columns}
           data={data}
           initialState={{

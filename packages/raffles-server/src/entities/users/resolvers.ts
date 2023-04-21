@@ -46,6 +46,18 @@ export const resolvers = {
       data: { walletType: WalletType; publicAddress: string },
       { services }: ApolloContext,
     ) => services.User.getOrCreateUser(data),
+
+    verifyEmail: async (
+      _: any,
+      { userId, email }: { userId: number; email: string },
+      { services }: ApolloContext,
+    ) => services.User.verifyEmail(userId, email),
+
+    confirmEmail: async (
+      _: any,
+      { userId }: { userId: number },
+      { services }: ApolloContext,
+    ) => services.User.confirmEmail(userId),
   },
   Subscription: {
     balanceChanged: {

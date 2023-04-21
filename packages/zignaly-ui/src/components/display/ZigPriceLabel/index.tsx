@@ -5,17 +5,21 @@ import { getPrecisionForCoin, shortenNumber } from "./util";
 import ZigTypography from "../ZigTypography";
 import { Variant } from "@mui/material/styles/createTypography";
 import { Tooltip } from "@mui/material";
+import { numberOfDecimals, trimZeros } from "../../../utils/numbers";
 
 const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
+  id,
   value = 0,
   coin,
   precision,
   shorten,
+  prefix,
   exact,
   usd,
   coinProps,
   showTooltip = !usd,
   alwaysShowSign = false,
+  showApproximate = false,
   ...otherProps
 }) => {
   const withDefaultPropsCoin = {
@@ -40,14 +44,17 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
 
   const content = (
     <ZigTypography
+      id={id}
       {...withDefaultProps}
       sx={{ whiteSpace: "nowrap", ...(withDefaultProps?.sx || {}) }}
     >
+      {showApproximate && numberOfDecimals(value) > 2 && <>~</>}
+      {!!prefix && <>{prefix}</>}
       {+value >= 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
       {usd && "$"}
       <NumericFormat
         value={Math.abs(shorten ? shortened : +value)}
-        renderText={(v) => v}
+        renderText={(v) => trimZeros(v)}
         displayType={"text"}
         thousandSeparator={true}
         decimalScale={
@@ -61,7 +68,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
 
       {shorten ? shortenSuffix : ""}
 
-      {coin && (
+      {coin && !usd && (
         <>
           {" "}
           <ZigTypography {...withDefaultPropsCoin}>{coin}</ZigTypography>
@@ -72,14 +79,11 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
 
   return showTooltip || shorten ? (
     <Tooltip
-      title={
-        numericFormatter(value?.toString() ?? "", {
-          thousandSeparator: true,
-          displayType: "text",
-        }) +
-        " " +
-        coin
-      }
+      disableInteractive
+      title={`${usd ? "$" : ""}${numericFormatter(trimZeros((+value)?.toFixed(8)) ?? "", {
+        thousandSeparator: true,
+        displayType: "text",
+      })} ${!usd ? coin ?? "" : ""}`}
     >
       {content}
     </Tooltip>

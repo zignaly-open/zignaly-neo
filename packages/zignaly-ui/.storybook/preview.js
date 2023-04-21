@@ -4,6 +4,7 @@ import { addDecorator } from "@storybook/react";
 import { makeDecorator } from "@storybook/addons";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { ThemeProvider as ThemeProviderMui } from "@mui/material";
+import { ChartGradients } from "../src";
 
 // Testing Results
 import { withTests } from "@storybook/addon-jest";
@@ -23,6 +24,7 @@ const withStyledTheme = (storyFn) => {
     <ThemeProvider theme={currentTheme}>
       <ThemeProviderMui theme={darkMui}>
         <GlobalStyle darkMode />
+        <ChartGradients />
         {storyFn()}
       </ThemeProviderMui>
     </ThemeProvider>

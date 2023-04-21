@@ -14,6 +14,7 @@ export const buttonSizes = {
 };
 
 export type IconButtonProps = {
+  id?: string;
   icon?: string | ReactElement;
   shrinkWrap?: boolean;
   variant?: keyof typeof buttonVariants;

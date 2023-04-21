@@ -4,12 +4,12 @@
 	"title": "Inversores",
 	"tableHeader": {
 		"email": "Email",
-		"userId": "ID de usuario",
+		"userId": "ID de Usuario",
 		"investment": "Inversión",
 		"P&L": "P&L",
 		"P&LTotal": "P&L Totales",
 		"totalFeesPaid": "Total de Comisiones Pagadas",
-		"successFee": "Comisión por Beneficios",
+		"successFee": "Success Fee",
 		"feesZIG": "Comisiones en ZIG",
 		"status": "Estatus"
 	},
@@ -17,8 +17,8 @@
 	"status": {
 		"connected": "Conectado",
 		"pending": "Pendiente",
-		"soft-disconnect": "Desconexión Progresiva",
-		"hard-disconnect": "Desconexión Forzosa",
+		"soft-disconnect": "Retiro",
+		"hard-disconnect": "Retiro Instantáneo",
 		"suspended": "Suspendido",
 		"disconnected": "Desconectado",
 		"owner": "Propietario"

@@ -41,6 +41,7 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
 
               <WithdrawFundsButtonWrapper>
                 <ZigButton
+                  id={'withdraw__confirm-withdraw'}
                   onClick={() => setView(EditInvestmentViews.WithdrawPerform)}
                   variant='contained'
                   size='large'

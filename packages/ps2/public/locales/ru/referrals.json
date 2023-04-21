@@ -1,0 +1,12 @@
+{
+	"export": "Экспорт",
+	"table": {
+		"filter-status": "Статус",
+		"filter-type": "Тип"
+	},
+	"statusTypes": {
+		"Completed": "Завершенный",
+		"Pending": "В ожидании",
+		"Failed": "Ошибка"
+	}
+}

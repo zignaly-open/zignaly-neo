@@ -65,6 +65,7 @@ const PendingTransactionsList: React.FC<{
     <>
       <TransactionContainer>
         <ZigTable
+          prefixId={'pending-transactions'}
           columns={
             [
               {
@@ -96,6 +97,7 @@ const PendingTransactionsList: React.FC<{
 
       <ModalActions>
         <Button
+          id={'pending__pending-transactions'}
           leftElement={
             <ArrowLeftIcon color={'#fff'} width={'20px'} height={'20px'} />
           }

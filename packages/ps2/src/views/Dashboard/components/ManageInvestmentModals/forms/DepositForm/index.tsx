@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo } from 'react';
 import { Controller, useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
+import { ReactComponent as BinanceLogo } from '../../../../../../images/binance.svg';
 import {
   dark,
   InputText,
@@ -10,11 +11,13 @@ import {
   CloneIcon,
   Typography,
   Loader,
+  ZigTypography,
 } from '@zignaly-open/ui';
+import NorthEastIcon from '@mui/icons-material/NorthEast';
 import copy from 'copy-to-clipboard';
 import { DepositFormData } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Link } from '@mui/material';
 import { NumericFormat } from 'react-number-format';
 import {
   useCoinBalances,
@@ -29,6 +32,11 @@ import {
 } from '../../../../../../apis/user/use';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import { trackCta } from '@zignaly-open/tracker';
+import {
+  BUY_CRYPTO_URL,
+  DEPOSIT_INFO_URL,
+} from '../../../../../../util/constants';
+import { ExternalLink } from '../../../../../../components/AnchorLink';
 
 function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
@@ -55,7 +63,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         return {
           value: ssc,
           name,
-          label: <CoinOption coin={ssc} name={name} />,
+          label: <CoinOption key={ssc} coin={ssc} name={name} />,
           inOrders: balance?.balanceLocked || 0,
           balance: balance?.balanceTotal || 0,
           available: balance?.balanceFree || 0,
@@ -99,7 +107,22 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   return (
     <form onSubmit={handleSubmit(() => {})}>
       <Box mt={1} mb={1}>
-        <Typography>{t('description')}</Typography>
+        <ZigTypography>
+          <Trans t={t} i18nKey={'description'}>
+            <BinanceLogo
+              width={16}
+              height={16}
+              style={{
+                verticalAlign: 'middle',
+              }}
+            />
+            <ExternalLink
+              href={DEPOSIT_INFO_URL}
+              target={'_blank'}
+              rel={'nofollow noreferrer'}
+            ></ExternalLink>
+          </Trans>
+        </ZigTypography>
       </Box>
 
       <Grid container>
@@ -110,6 +133,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
+                id={'deposit__select-coin'}
                 menuPlacement='auto'
                 menuShouldScrollIntoView={false}
                 menuPosition='fixed'
@@ -176,6 +200,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
+                id={'deposit__select-network'}
                 menuPosition='fixed'
                 menuShouldBlockScroll
                 menuShouldScrollIntoView={false}
@@ -192,6 +217,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
           <>
             <Grid item xs={12} pt={3}>
               <InputText
+                id={'deposit__deposit-address'}
                 placeholder={t('depositAddress.placeholder')}
                 label={t('depositAddress.label')}
                 readOnly={true}
@@ -199,7 +225,12 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                   loading ? t('depositAddress.loading') : depositInfo?.address
                 }
                 rightSideElement={
-                  <CloneIcon width={40} height={40} color={dark.neutral300} />
+                  <CloneIcon
+                    width={40}
+                    height={40}
+                    color={dark.neutral300}
+                    id={'deposit-address__copy'}
+                  />
                 }
                 onClickRightSideElement={() => {
                   trackCta({
@@ -226,6 +257,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             {!!depositInfo?.tag && (
               <Grid item xs={12} pt={3}>
                 <InputText
+                  id={'deposit__deposit-memo'}
                   label={t('depositMemo.label')}
                   placeholder={t('depositAddress.placeholder')}
                   readOnly={true}
@@ -303,6 +335,22 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         {!!network && !networkObject?.depositEnable && (
           <ErrorMessage text={t('no-network')} />
         )}
+        <Grid item xs={12} pt={3}>
+          <Typography variant={'body2'} color={'neutral300'}>
+            <Link underline={'hover'} href={BUY_CRYPTO_URL} target={'_blank'}>
+              <Box
+                sx={{
+                  display: 'flex',
+                  gap: 0.5,
+                  alignItems: 'center',
+                }}
+              >
+                {t('buy-crypto')}
+                <NorthEastIcon fontSize={'inherit'} />
+              </Box>
+            </Link>
+          </Typography>
+        </Grid>
       </Grid>
     </form>
   );

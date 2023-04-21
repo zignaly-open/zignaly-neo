@@ -9,11 +9,13 @@ import {
   makePayout,
   payFee,
   getUserBalance,
+  getUserRewardsBalance,
   importBalance,
   importBalanceBulk,
 } from './service';
 import { getImportBalance } from './utils';
 import { UserBalanceZhits, Import } from './types';
+import { TransactionType } from '../../types';
 
 describe('Balance service', () => {
   beforeAll(waitUntilTablesAreCreated);
@@ -114,6 +116,43 @@ describe('Balance service', () => {
 
       const userBalance: UserBalanceZhits = await getUserBalance('0x001');
       expect(userBalance).toEqual('100');
+    });
+
+    it('should be able to deposit a  reward of 50 zhits with a reward transaction type', async () => {
+      const tx = await deposit({
+        walletAddress: '0x001',
+        amount: '50',
+        currency: '0x999',
+        blockchain: '',
+        transactionType: TransactionType.Reward,
+      });
+
+      const userBalance: UserBalanceZhits = await getUserRewardsBalance(
+        '0x001',
+      );
+      expect(userBalance).toEqual('50');
+      expect(tx.id).toEqual(expect.any(Number));
+    });
+
+    it('should be able to run a combo of deposit types and return a balance of 100 zhit', async () => {
+      await deposit({
+        walletAddress: '0x001',
+        amount: '50',
+        currency: '0x999',
+        blockchain: '',
+      });
+
+      const tx = await deposit({
+        walletAddress: '0x001',
+        amount: '50',
+        currency: '0x999',
+        blockchain: '',
+        transactionType: TransactionType.Reward,
+      });
+
+      const userBalance: UserBalanceZhits = await getUserBalance('0x001');
+      expect(userBalance).toEqual('100');
+      expect(tx.id).toEqual(expect.any(Number));
     });
   });
 

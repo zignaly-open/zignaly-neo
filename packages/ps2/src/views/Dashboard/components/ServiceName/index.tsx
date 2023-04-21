@@ -7,12 +7,19 @@ import { ROUTE_TRADING_SERVICE } from '../../../../routes';
 import { generatePath, Link } from 'react-router-dom';
 import { getServiceLogo } from '../../../../util/images';
 import { useTranslation } from 'react-i18next';
+import { Tooltip } from '@mui/material';
+import { StyledVerifiedIcon } from './styles';
 
-export const ServiceName = ({ service }: ServiceNameProps) => {
+export const ServiceName = ({
+  prefixId,
+  service,
+  showCoin = true,
+}: ServiceNameProps) => {
   const { t } = useTranslation('table');
 
   return (
     <Box
+      id={prefixId && `${prefixId}__service-${service.serviceId}`}
       component={Link}
       to={generatePath(ROUTE_TRADING_SERVICE, {
         serviceId: service.serviceId?.toString(),
@@ -23,10 +30,15 @@ export const ServiceName = ({ service }: ServiceNameProps) => {
         flexDirection: 'row',
         display: 'flex',
         textAlign: 'start',
+        width: 300,
       }}
     >
       <Icon>
-        <Avatar size={'x-large'} image={getServiceLogo(service.serviceLogo)} />
+        <Avatar
+          size={'x-large'}
+          image={getServiceLogo(service.serviceLogo)}
+          id={prefixId && `${prefixId}__logo-${service.serviceId}`}
+        />
       </Icon>
       <Box
         sx={{
@@ -35,15 +47,43 @@ export const ServiceName = ({ service }: ServiceNameProps) => {
           alignItems: 'flex-start',
         }}
       >
-        <ZigTypography fontWeight='medium' color='neutral100'>
+        <ZigTypography
+          id={prefixId && `${prefixId}__name-${service.serviceId}`}
+          fontWeight='medium'
+          color='neutral100'
+          whiteSpace='normal'
+        >
           {service.serviceName}
         </ZigTypography>
-        <ZigTypography variant='body2' fontWeight='medium' color='neutral400'>
-          {t('serviceName-by')} {service.ownerName}
-        </ZigTypography>
-        <ZigTypography variant='body2' fontWeight='medium' color='neutral400'>
-          {service.ssc}
-        </ZigTypography>
+        <div>
+          <ZigTypography
+            variant='body2'
+            fontWeight='medium'
+            color='neutral400'
+            id={prefixId && `${prefixId}__owner-${service.serviceId}`}
+          >
+            {t('serviceName-by')} {service.ownerName}
+          </ZigTypography>
+          {service.ownerVerified && (
+            <Tooltip title={t('owner-verified')}>
+              <StyledVerifiedIcon
+                width={13}
+                height={13}
+                id={prefixId && `${prefixId}__verified-${service.serviceId}`}
+              />
+            </Tooltip>
+          )}
+        </div>
+        {showCoin && (
+          <ZigTypography
+            variant='body2'
+            fontWeight='medium'
+            color='neutral400'
+            id={prefixId && `${prefixId}__ssc-${service.serviceId}`}
+          >
+            {service.ssc}
+          </ZigTypography>
+        )}
       </Box>
     </Box>
   );

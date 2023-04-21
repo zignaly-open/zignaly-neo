@@ -7,6 +7,7 @@ export const typeDef = gql`
     username: String
     onboardingCompletedAt: Date
     discordName: String
+    emailVerified: Boolean
     email: String
     createdAt: Date
   }
@@ -58,6 +59,8 @@ export const typeDef = gql`
     updateProfile(username: String, email: String, discordName: String): User
     getOrCreateUser(walletType: String!, publicAddress: String!): AuthUser
     authenticate(publicAddress: String!, signature: String!): AccessToken!
+    verifyEmail(userId: Int!, email: String!): Boolean
+    confirmEmail(userId: Int!): Boolean
   }
 
   extend type Subscription {

@@ -86,7 +86,25 @@ We actually do not do that anymore.
 
 ## How to deploy
 
-Push a `release-ps2-{date}-{description}` tag to deploy ps2, a `release-zigbids-{date}-{description}` tag to deploy zigbids. 
+### Deploy to `test`
+
+* Open a PR to master
+* Have it approved
+* The Auto-merge to test action will kick in and merge to test
+
+If it fails and we have conflicts, you'll have to manually resolve them and opush to `test` branch directly.
+
+Or you can circumvent all this and push to `test`. This is also an option. Just remember: `test` is a throwaway branch and it will NEVER be merged to `master`. If you open a `test` -> `master` PR, I will find you and ~break your legs~ explain that this is not the right thing to do.
+
+This applies only to the PS2 project.
+
+### Deploy to master
+
+An auto-deploy would trigger when you merge to master. 
+
+### Deploy to prod
+
+Create a release on Github with a `release-ps2-{date}-{description}` tag to deploy ps2, a `release-zigbids-{date}-{description}` tag to deploy zigbids. Like, `release-ps2-20121222-prevent-apocalypse`. Alternatively you can just push that tag directly but that would be considered *NOT COOL*.
 
 
 ## Packages

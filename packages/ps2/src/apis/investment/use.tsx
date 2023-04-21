@@ -8,7 +8,6 @@ import {
   useInvestedAmountQuery,
   useInvestInServiceMutation,
 } from './api';
-import { useActiveExchange, useIsAuthenticated } from '../user/use';
 import {
   InvestedInService,
   InvestmentDetails,
@@ -16,10 +15,13 @@ import {
 } from './types';
 import { RootState } from '../store';
 import { setSelectedInvestment } from './store';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { useCoinBalances } from '../coin/use';
 import { QueryReturnType } from '../../util/queryReturnType';
+import { useActiveExchange, useIsAuthenticated } from '../user/use';
+import { TraderServiceFull } from '../service/types';
+import { serviceToInvestmentServiceDetail } from './util';
 
 export const useInvestments = useInvestmentsQuery;
 
@@ -40,7 +42,27 @@ export function useSetSelectedInvestment(): (
   return (service) => dispatch(setSelectedInvestment(service));
 }
 
-export function useSelectedInvestment(): InvestmentServiceDetails {
+export function useSelectInvestment(
+  // we support both scenarios, so it's easier for you <3
+  service: InvestmentServiceDetails | TraderServiceFull,
+): void {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    service &&
+      dispatch(
+        setSelectedInvestment(
+          'serviceId' in service
+            ? service
+            : serviceToInvestmentServiceDetail(service),
+        ),
+      );
+    return () => {
+      dispatch(setSelectedInvestment(null));
+    };
+  }, [service]);
+}
+
+export function useSelectedInvestment(): InvestmentServiceDetails | undefined {
   return useSelector((state: RootState) => state.investment)
     ?.selectedInvestment;
 }
@@ -61,7 +83,7 @@ export function useIsInvestedInService(
   const { isLoading, data, refetch, isFetching } = useInvestedAmountQuery(
     serviceId,
     {
-      skip: !isAuthenticated || !exchange.internalId || options?.skip,
+      skip: !isAuthenticated || !exchange?.internalId || options?.skip,
     },
   );
 
@@ -106,7 +128,7 @@ export function useCurrentBalance(coin?: string): {
       id: coin || service?.ssc,
       balance: coins?.[coin || service?.ssc]?.balanceFree || '0',
     }),
-    [service?.ssc, coins],
+    [coin, service?.ssc, coins, isFetching],
   );
 }
 
@@ -169,7 +191,7 @@ export function useUpdateTakeProfitAndInvestMore(serviceId: string): {
     amount,
   }: {
     amount: BigNumber | number | string;
-    profitPercentage: number | string;
+    profitPercentage?: number | string;
   }) => Promise<void>;
 } {
   const [update, { isLoading }] = useUpdateTakeProfitAndInvestMoreMutation();

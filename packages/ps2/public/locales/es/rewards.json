@@ -1,0 +1,10 @@
+{
+	"active": "Activo",
+	"table": {
+		"time-and-date": "Hora & Fecha",
+		"status": "Estatus"
+	},
+	"statusTypes": {
+		"success_fee": "Comisión por Beneficios"
+	}
+}

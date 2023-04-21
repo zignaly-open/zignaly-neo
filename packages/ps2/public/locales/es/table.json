@@ -17,12 +17,13 @@
 	"balanceSummary-invested": "Invertido",
 	"selector-validation-notData": "Datos no disponibles",
 	"investColumn": {
-		"successFess": "10% de Comisión por Beneficios",
+		"successFess": "10% Success Fee",
 		"liquidated": "LIQUIDADO"
 	},
-	"tooltip-columnHeader": "Alternar OrdenarPor",
+	"tooltip-columnHeader": "Cambiar OrdenarPor",
 	"serviceName-by": "por",
 	"columns-hideOrShow": "Mostrar\/Ocultar columnas",
 	"assetsInPool-investors_one": "{{count}} inversor",
-	"assetsInPool-investors_other": "{{count}} inversores"
+	"assetsInPool-investors_other": "{{count}} inversores",
+	"owner-verified": "El Gestor ha sido verificado"
 }

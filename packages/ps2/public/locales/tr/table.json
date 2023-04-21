@@ -7,7 +7,7 @@
 		},
 		"page": {
 			"items": "Sayfa",
-			"out": "dışarı"
+			"out": "dışında"
 		},
 		"selector": {
 			"display": "Görüntüleniyor",
@@ -24,5 +24,6 @@
 	"serviceName-by": "tarafından",
 	"columns-hideOrShow": "Sütunları Göster\/Gizle",
 	"assetsInPool-investors_one": "{{count}} yatırımcı",
-	"assetsInPool-investors_other": "{{count}} yatırımcı"
+	"assetsInPool-investors_other": "{{count}} yatırımcı",
+	"owner-verified": "Yönetici doğrulandı"
 }

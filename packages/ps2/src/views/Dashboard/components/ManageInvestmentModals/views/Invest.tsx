@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InvestForm from '../forms/InvestForm';
 import InvestorDetails from './InvestorDetails';
 import EditInvestmentSuccess from './EditInvestmentSuccess';
 
-const Invest: React.FC<{ close: () => void }> = ({ close }) => {
-  const [isInvested, setIsInvested] = useState(false);
+const Invest: React.FC<{
+  close: () => void;
+  isInvested: boolean;
+  setIsInvested: (v: boolean) => void;
+}> = ({ close, isInvested, setIsInvested }) => {
   return isInvested ? (
     <EditInvestmentSuccess close={close} />
   ) : (

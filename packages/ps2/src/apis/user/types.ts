@@ -70,6 +70,7 @@ export type Exchange = {
   globalWhitelist: boolean;
   isBrokerAccount: boolean;
   activated: boolean;
+  createdAt: string;
 };
 
 export type SignupResponse = {
@@ -82,6 +83,7 @@ export type SignupPayload = {
   password: string;
   newPageAB?: boolean;
   ref?: string;
+  subtrack?: string;
 };
 
 export type LoginResponse = {
@@ -95,11 +97,6 @@ export type LoginResponse = {
 export type LoginPayload = {
   email: string;
   password: string;
-};
-
-export type LoginFullPayload = LoginPayload & {
-  gRecaptchaResponse: string;
-  c: number;
 };
 
 export type SessionResponse = {
@@ -116,3 +113,18 @@ export enum SessionsTypes {
 }
 
 export type ExtendedExchange = Exchange & { image: string };
+
+export type UserBalance = {
+  totalFreeBTC: number;
+  totalFreeUSDT: number;
+  totalLockedBTC: number;
+  totalLockedUSDT: number;
+  totalPnlBTC: number;
+  totalPnlUSDT: number;
+  totalWalletBTC: number;
+  totalWalletUSDT: number;
+  totalUnrealizedProfitBTC: number;
+  totalUnrealizedProfitUSDT: number;
+  totalMarginBTC: number;
+  totalMarginUSDT: number;
+};

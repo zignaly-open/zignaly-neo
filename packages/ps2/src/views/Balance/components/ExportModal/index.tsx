@@ -7,27 +7,37 @@ import { useTransactionsHistoryCsvMutation } from 'apis/coin/api';
 import { useActiveExchange } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
 import { ExportModalProps } from './types';
+import { differenceInDays } from 'date-fns';
 
 function ExportModal({
   close,
+  type,
   ...props
 }: ExportModalProps): React.ReactElement {
   const { t } = useTranslation('transactions-history');
   const [exportCsv, exportStatus] = useTransactionsHistoryCsvMutation();
-  const { internalId } = useActiveExchange();
+  const { internalId, createdAt } = useActiveExchange();
   const toast = useToast();
 
   return (
-    <ZModal wide {...props} close={close} title={t('export.title')}>
+    <ZModal authOnly wide {...props} close={close} title={t('export.title')}>
       <ZigTypography>{t('export.description')}</ZigTypography>
       <ModalActions>
-        <ZigButton onClick={close} variant='outlined' size='large'>
+        <ZigButton
+          onClick={close}
+          variant='outlined'
+          size='large'
+          id={'export-transactions__cancel'}
+        >
           {t('action:cancel')}
         </ZigButton>
         <ZigButton
+          id={'export-transactions__proceed'}
           onClick={() =>
             exportCsv({
               exchangeInternalId: internalId,
+              type,
+              days: differenceInDays(new Date(), new Date(createdAt)) + 1,
             }).then(() => {
               toast.success(t('export.success'));
               close();

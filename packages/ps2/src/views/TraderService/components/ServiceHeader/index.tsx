@@ -12,13 +12,9 @@ import { RouteDropdown, RouteGroup } from './atoms';
 import {
   ROUTE_TRADING_SERVICE,
   ROUTE_TRADING_SERVICE_API,
-  ROUTE_TRADING_SERVICE_COINS,
   ROUTE_TRADING_SERVICE_INVESTORS,
   ROUTE_TRADING_SERVICE_MANAGE,
-  ROUTE_TRADING_SERVICE_MANUAL,
-  ROUTE_TRADING_SERVICE_POSITIONS,
   ROUTE_TRADING_SERVICE_EDIT,
-  ROUTE_TRADING_SERVICE_SIGNALS,
 } from '../../../../routes';
 
 function ServiceHeader() {
@@ -28,7 +24,7 @@ function ServiceHeader() {
   const currentPath = useLocation()?.pathname;
   const isOwner = useIsServiceOwner(serviceId);
 
-  const myServicesList = useTraderServices();
+  const { data: myServicesList } = useTraderServices();
   const activeService = myServicesList?.find(
     (s: TraderService) => s.serviceId === serviceId,
   );
@@ -49,6 +45,7 @@ function ServiceHeader() {
       <MarginContainer>
         <Container>
           <MenuDropDown
+            id={'service-management-header__choose-service'}
             ref={menuDropDownRef}
             title={activeService?.serviceName}
             secondaryTitle={t('dropdown.manageServices')}
@@ -59,6 +56,7 @@ function ServiceHeader() {
             <Options>
               {myServicesList?.map((service: TraderService) => (
                 <Link
+                  id={`service-management-header__choose-${service?.serviceId}`}
                   to={currentPath.replace(serviceId, service?.serviceId)}
                   key={`--route-key-${service?.serviceId}`}
                 >
@@ -79,34 +77,7 @@ function ServiceHeader() {
                 path: generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
                   serviceId,
                 }),
-              },
-            ]}
-          />
-
-          <RouteDropdown
-            title={t('dropdown.trade.title')}
-            routes={[
-              {
-                name: t('dropdown.trade.links.positions'),
-                path: generatePath(ROUTE_TRADING_SERVICE_POSITIONS, {
-                  serviceId,
-                }),
-              },
-              {
-                name: t('dropdown.trade.links.manual'),
-                path: generatePath(ROUTE_TRADING_SERVICE_MANUAL, {
-                  serviceId,
-                }),
-              },
-              {
-                name: t('dropdown.trade.links.signals'),
-                path: generatePath(ROUTE_TRADING_SERVICE_SIGNALS, {
-                  serviceId,
-                }),
-              },
-              {
-                name: t('dropdown.trade.links.api'),
-                path: generatePath(ROUTE_TRADING_SERVICE_API, { serviceId }),
+                id: `service-management-header__manage-funds`,
               },
             ]}
           />
@@ -114,19 +85,27 @@ function ServiceHeader() {
           <RouteGroup
             routes={[
               {
-                name: t('coins-label'),
-                path: generatePath(ROUTE_TRADING_SERVICE_COINS, { serviceId }),
+                name: t('dropdown.trade.links.api'),
+                path: generatePath(ROUTE_TRADING_SERVICE_API, { serviceId }),
+                id: `service-management-header__service-api`,
               },
+            ]}
+          />
+
+          <RouteGroup
+            routes={[
               {
                 name: t('investors-label'),
                 path: generatePath(ROUTE_TRADING_SERVICE_INVESTORS, {
                   serviceId,
                 }),
+                id: `service-management-header__investors`,
               },
             ]}
           />
 
           <RouteDropdown
+            id={'service-management-header__choose-option'}
             title={t('dropdown.profile.title')}
             routes={[
               {
@@ -134,12 +113,14 @@ function ServiceHeader() {
                 path: generatePath(ROUTE_TRADING_SERVICE, {
                   serviceId,
                 }),
+                id: `service-management-header__service-profile`,
               },
               {
                 name: t('dropdown.profile.links.profile-edit'),
                 path: generatePath(ROUTE_TRADING_SERVICE_EDIT, {
                   serviceId,
                 }),
+                id: `service-management-header__edit-service`,
               },
             ]}
           />

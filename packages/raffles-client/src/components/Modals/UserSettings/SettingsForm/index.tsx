@@ -1,13 +1,22 @@
 import { Box, useMediaQuery } from '@mui/material';
 import { Gap } from 'components/Modals/ConnectWallet/styles';
 import React, { useState } from 'react';
-import { Button, ErrorMessage, InputText, Typography } from '@zignaly-open/ui';
+import {
+  Button,
+  ErrorMessage,
+  ZigTypography,
+  ZigInput,
+} from '@zignaly-open/ui';
 import { InputContainer } from '../styles';
 import theme from 'theme';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { useMutation } from '@apollo/client';
-import { CHANGE_PROFILE } from 'queries/users';
+import {
+  CHANGE_PROFILE,
+  GET_CURRENT_USER,
+  VERIFY_EMAIL_MUTATION,
+} from 'queries/users';
 import { UserSettingsValidation } from 'util/validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Form } from './styles';
@@ -57,12 +66,21 @@ const SettingsForm = (props: UserSettingsModalProps) => {
     }
   };
 
+  const [verifyEmail] = useMutation(VERIFY_EMAIL_MUTATION, {
+    refetchQueries: [{ query: GET_CURRENT_USER }],
+  });
+
   const submit = async (values: {
     username: string;
     email: string;
     discordName: string;
   }) => {
     try {
+      if (user.email !== values.email) {
+        verifyEmail({
+          variables: { userId: Number(user.id), email: values.email },
+        });
+      }
       await updateUsername({
         variables: values,
       });
@@ -83,69 +101,67 @@ const SettingsForm = (props: UserSettingsModalProps) => {
       >
         <Form onSubmit={handleSubmit(submit)}>
           <Box display='flex' alignItems='center' flexDirection='row' gap='2px'>
-            <Typography color='neutral200'>{t('username-label')}</Typography>
+            <ZigTypography color='neutral200'>
+              {t('username-label')}
+            </ZigTypography>
           </Box>
-          <Typography variant='h4' weight='medium' color='neutral400'>
+          <ZigTypography variant='h4' color='neutral400'>
             {t('username-info')}
-          </Typography>
+          </ZigTypography>
           <InputContainer width={getInputWidth()}>
             <Controller
               name='username'
               control={control}
               render={({ field }) => (
-                <InputText
-                  value={field.value}
-                  onChange={field.onChange}
+                <ZigInput
+                  fullWidth
                   placeholder={`${t('user')}#${user.id}`}
-                  minHeight={23}
-                  error={errors.username?.message}
+                  error={t(errors.username?.message)}
+                  {...field}
                 />
               )}
             />
           </InputContainer>
           <Gap gap={5} />
           <Box display='flex' alignItems='center' flexDirection='row' gap='2px'>
-            <Typography color='neutral200'>
+            <ZigTypography color='neutral200'>
               {t('discord-user-label')}
-            </Typography>
-            {/* <ErrorAlertIcon color='#89899A' /> */}
+            </ZigTypography>
           </Box>
-          <Typography variant='h4' weight='medium' color='neutral400'>
+          <ZigTypography variant='h4' color='neutral400'>
             {t('discordNameInfo')}
-          </Typography>
+          </ZigTypography>
           <InputContainer width={getInputWidth()}>
             <Controller
               name='discordName'
               control={control}
               render={({ field }) => (
-                <InputText
+                <ZigInput
+                  fullWidth
                   placeholder='user#0000'
-                  minHeight={23}
-                  value={field.value}
-                  onChange={field.onChange}
-                  error={errors.discordName?.message}
+                  error={t(errors.discordName?.message)}
+                  {...field}
                 />
               )}
             />
           </InputContainer>
           <Gap gap={5} />
           <Box display='flex' alignItems='center' flexDirection='row' gap='2px'>
-            <Typography color='neutral200'>{t('email-label')}</Typography>
+            <ZigTypography color='neutral200'>{t('email-label')}</ZigTypography>
           </Box>
-          <Typography variant='h4' weight='medium' color='neutral400'>
+          <ZigTypography variant='h4' color='neutral400'>
             {t('email-info')}
-          </Typography>
+          </ZigTypography>
           <InputContainer width={getInputWidth()}>
             <Controller
               name='email'
               control={control}
               render={({ field }) => (
-                <InputText
+                <ZigInput
+                  fullWidth
                   placeholder={t('email-placeholder')}
-                  minHeight={23}
-                  value={field.value}
-                  onChange={field.onChange}
                   error={errors.email?.message}
+                  {...field}
                 />
               )}
             />

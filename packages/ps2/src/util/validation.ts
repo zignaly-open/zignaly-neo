@@ -1,6 +1,32 @@
 import * as yup from 'yup';
 import BigNumber from 'bignumber.js';
-import i18n from './i18next';
+
+export const checkDecimals = (val: string | number, maxDecimals: number) => {
+  if (!val) return true;
+
+  const splitValueDot = val.toString().split('.');
+  // Handle incorrect number
+  if (splitValueDot.length > 2) return false;
+
+  const decimals = splitValueDot.length === 1 ? 0 : splitValueDot[1].length;
+
+  return decimals <= maxDecimals;
+};
+
+export const decimalsValidation = (maxDecimals: number) =>
+  yup
+    .string()
+    .test('int', 'common:validation.max-decimals', (val) =>
+      checkDecimals(val, maxDecimals),
+    );
+
+export const decimalsValidationNumber = (maxDecimals: number) =>
+  yup
+    .number()
+    .typeError('common:validation.invalid-value')
+    .test('int', 'common:validation.max-decimals', (val) =>
+      checkDecimals(val, maxDecimals),
+    );
 
 const inputAmountNumberValidation = yup
   .string()
@@ -38,6 +64,37 @@ const inputAmountNumberValidationMaxToken = inputAmountNumberValidationGt0.test(
   },
 );
 
+export const inputAmountMinOwnerInvested = (minInvestedAmount: number) =>
+  yup
+    .string()
+    .test(
+      'number',
+      'common:validation.min-invest-amount-for-owner',
+      function (val) {
+        const tokenBalance = new BigNumber(this.parent?.token?.balance);
+        const currentValue = new BigNumber(val);
+        const minBalance = new BigNumber(minInvestedAmount);
+        return tokenBalance
+          .minus(currentValue)
+          .isGreaterThanOrEqualTo(minBalance);
+      },
+    );
+
+export const inputAmountMinOwnerInvestedValidation = (minAmount: number) =>
+  yup.object().shape({
+    value: inputAmountMinOwnerInvested(minAmount),
+  });
+
+const inputAmountNumberValidationMinToken = inputAmountNumberValidationGt0.test(
+  'number',
+  'common:validation.insufficient-amount-min',
+  function (val) {
+    const minValue = new BigNumber(this.parent?.token?.min);
+    const currentValue = new BigNumber(val);
+    return !currentValue.isLessThan(minValue);
+  },
+);
+
 export const inputAmountTokenValidation = yup.object().shape({
   value: inputAmountNumberValidationGt0,
 });
@@ -50,21 +107,10 @@ export const inputAmountTokenMaxValidation = yup.object().shape({
   value: inputAmountNumberValidationMaxToken,
 });
 
-export const decimalsValidation = (maxDecimals: number) =>
-  yup
-    .string()
-    .test(
-      'int',
-      i18n.t('common:validation.max-decimals', { maxDecimals }),
-      (val) => {
-        if (!val) return false;
+export const inputAmountTokenMinValidation = yup.object().shape({
+  value: inputAmountNumberValidationMinToken,
+});
 
-        const splitValueDot = val.split('.');
-        // Handle incorrect number
-        if (splitValueDot.length > 2) return false;
-
-        const decimals =
-          splitValueDot.length === 1 ? 0 : splitValueDot[1].length;
-        return decimals <= maxDecimals;
-      },
-    );
+export const inputAmountTokenDecimalsValidation = yup.object().shape({
+  value: decimalsValidation(8),
+});

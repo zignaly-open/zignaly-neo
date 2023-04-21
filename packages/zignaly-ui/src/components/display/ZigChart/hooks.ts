@@ -1,12 +1,44 @@
 import { useMemo } from "react";
-import { AxisFormat, ChartColor, ChartGradientColor } from "./types";
+import { AxisFormat, ChartColor, ChartGradientColor, GradientVariant } from "./types";
 
-export function useChartData(data: AxisFormat[] | number[]): {
+const deltaToShowSecondChart = 0.2;
+
+const getGradient = (gradientVariant: GradientVariant, isGreen: boolean) => {
+  switch (gradientVariant) {
+    case "mini":
+      return isGreen ? ChartGradientColor.GreenMini : ChartGradientColor.RedMini;
+    case "card":
+      return isGreen ? ChartGradientColor.GreenCard : ChartGradientColor.RedCard;
+    default:
+      return isGreen ? ChartGradientColor.GreenFull : ChartGradientColor.RedFull;
+  }
+};
+
+/**
+ * Get y domain for chart, adjusted to leave space under 0 axis if needed
+ */
+const getYDomain = (data: AxisFormat[]) => {
+  const values = data.map((s) => s.y);
+  const ranges = [Math.min(0, ...values), Math.max(...values)];
+  if (ranges[0] < 0 && ranges[1] > 0)
+    ranges[0] = Math.min(
+      ranges[0],
+      (ranges[1] * -1 * deltaToShowSecondChart) / (1 - deltaToShowSecondChart),
+    );
+
+  return ranges as [number, number];
+};
+
+export function useChartData(
+  data: AxisFormat[] | number[],
+  gradientVariant = "full" as GradientVariant,
+): {
   data: AxisFormat[];
   color: ChartColor;
   gradient: ChartGradientColor;
+  yDomain: [number, number];
 } {
-  const processedData = useMemo<AxisFormat[]>(() => {
+  const [processedData, yDomain] = useMemo(() => {
     const chart =
       typeof data?.[0] === "number"
         ? data.map((value, index) => ({
@@ -14,8 +46,8 @@ export function useChartData(data: AxisFormat[] | number[]): {
             y: value as number,
           }))
         : (data as AxisFormat[]);
-    const min = chart.reduce((min, v) => Math.min(min, v.y), Number.MAX_VALUE);
-    return chart.map((c) => ({ ...c, y0: min }));
+    const yDomain = getYDomain(chart);
+    return [chart.map((c) => ({ ...c, y0: yDomain[0] })), yDomain];
   }, [data]);
 
   const firstTimestamp = processedData[0].y;
@@ -25,6 +57,7 @@ export function useChartData(data: AxisFormat[] | number[]): {
   return {
     data: processedData,
     color: isGreen ? ChartColor.Green : ChartColor.Red,
-    gradient: isGreen ? ChartGradientColor.Green : ChartGradientColor.Red,
+    gradient: getGradient(gradientVariant, isGreen),
+    yDomain,
   };
 }

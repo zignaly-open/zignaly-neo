@@ -33,10 +33,12 @@ export class User extends Model {
     type: DataType.VIRTUAL,
     get(): string {
       const address = this.getDataValue('publicAddress');
-      return `${address.slice(0, 6)}..${address.slice(
-        address.length - 5,
-        address.length - 1,
-      )}`;
+      return address
+        ? `${address.slice(0, 6)}..${address.slice(
+            address.length - 5,
+            address.length - 1,
+          )}`
+        : '';
     },
   })
   public shortAddress: string;
@@ -64,6 +66,18 @@ export class User extends Model {
   @Default(false)
   @Column
   public isAdmin: boolean;
+
+  @Default(false)
+  @Column
+  public emailVerificationSent: boolean;
+
+  @Default(false)
+  @Column
+  public emailVerified: boolean;
+
+  @Default(false)
+  @Column
+  public zhitRewarded: boolean;
 }
 
 export function generateUserNonce(): number {

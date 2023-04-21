@@ -17,6 +17,7 @@ import {
   useResendCodeMutation,
   useResendCodeNewUserMutation,
   useResendKnownDeviceCodeMutation,
+  useSessionQuery,
   useSetLocaleMutation,
   useSignupMutation,
   useVerify2FAMutation,
@@ -24,7 +25,6 @@ import {
   useVerifyCodeNewUserMutation,
   useVerifyKnownDeviceMutation,
 } from './api';
-import { useGoogleReCaptcha } from 'react-google-recaptcha-v3';
 import {
   activateExchange,
   logout,
@@ -49,6 +49,8 @@ import { useLazyTraderServicesQuery } from '../service/api';
 import { QueryReturnTypeBasic } from 'util/queryReturnType';
 import { useZModal } from 'components/ZModal/use';
 import Check2FAModal from 'views/Auth/components/Check2FAModal';
+import { useNavigate } from 'react-router-dom';
+import { track } from '@zignaly-open/tracker';
 
 const useStartSession = () => {
   const { showModal } = useModal();
@@ -56,11 +58,12 @@ const useStartSession = () => {
   const [loadSession] = useLazySessionQuery();
   const [loadTraderServices] = useLazyTraderServicesQuery();
   const [loadUser] = useLazyUserQuery();
-  const { i18n } = useTranslation();
 
-  return async (user: { token: string } & Partial<LoginResponse>) => {
+  return async (
+    user: { token: string; userId?: string } & Partial<LoginResponse>,
+  ) => {
     dispatch(setAccessToken(user.token));
-
+    user.userId && track({ userId: user.userId });
     const needsModal =
       user.ask2FA ||
       user.isUnknownDevice ||
@@ -90,7 +93,7 @@ const useStartSession = () => {
     dispatch(setUser(userData));
     startLiveSession(userData);
     trackNewSession(userData, SessionsTypes.Login);
-    i18n.changeLanguage(userData.locale);
+    localStorage.setItem('hasLoggedIn', 'true');
   };
 };
 
@@ -122,42 +125,41 @@ export const useAuthenticate = (): [
   (payload: LoginPayload) => Promise<void>,
 ] => {
   const [login] = useLoginMutation();
-  const performLogout = useLogout();
   const startSession = useStartSession();
 
   const [loading, setLoading] = useState(false);
 
-  const { executeRecaptcha } = useGoogleReCaptcha();
   // can't use useAsyncFn because https://github.com/streamich/react-use/issues/1768
   return [
     { loading },
     async (payload: LoginPayload) => {
       setLoading(true);
-      const gRecaptchaResponse = await executeRecaptcha('login');
 
       try {
         const user = await login({
           ...payload,
-          gRecaptchaResponse,
-          c: 3,
         }).unwrap();
         await startSession(user);
         setLoading(false);
       } catch (e) {
         setLoading(false);
-        performLogout();
         throw e;
       }
     },
   ];
 };
 
-export function useLogout(): () => void {
+export function useLogout(performRequest = true): () => void {
   const dispatch = useDispatch();
   const [logoutRequest] = useLogoutMutation();
+  const navigate = useNavigate();
+
   return () => {
-    logoutRequest();
+    if (performRequest) {
+      logoutRequest();
+    }
     dispatch(logout());
+    navigate('/login');
     endLiveSession();
     trackEndSession();
   };
@@ -192,10 +194,31 @@ export function useChangeLocale(): (locale: string) => void {
   const [save] = useSetLocaleMutation();
   const { i18n } = useTranslation();
   const isAuthenticated = useIsAuthenticated();
+  const userData = useCurrentUser();
+  const [newLocale, setNewLocale] = useState<string>(null);
+
+  useEffect(() => {
+    if (!isAuthenticated) return;
+    // After logged in
+
+    if (newLocale && userData?.locale !== newLocale) {
+      // Update BE with custom locale if changed
+      save({ locale: newLocale });
+    } else if (userData?.locale !== i18n.language) {
+      // Otherwise update locale to match BE
+      i18n.changeLanguage(userData.locale);
+    }
+  }, [userData?.locale]);
 
   return (locale: string) => {
     i18n.changeLanguage(locale);
-    isAuthenticated && save({ locale });
+    if (isAuthenticated) {
+      // Update locale to BE directly
+      save({ locale });
+    } else {
+      // Save locale for BE update after login
+      setNewLocale(locale);
+    }
   };
 }
 
@@ -269,6 +292,13 @@ export function useActivateExchange(
   }, [internalId]);
 
   return result;
+}
+
+export function useMaybeMakeSureSessionIsAlive(makeSure: boolean): void {
+  useSessionQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+    skip: !makeSure,
+  });
 }
 
 export function useCheck2FA({

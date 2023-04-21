@@ -21,9 +21,8 @@
       "withdraw": "Withdraw Investment"
     },
     "button": {
-      "saveAndClose": "Save and Close",
       "invest-now": "Invest {{amount}} {{coin}} now",
-      "saveAndInvestment": "Save and Add to Investment",
+      "addInvestment": "Add to Investment",
       "continue-to-confirmation": "Continue to Confirmation"
     }
   },
@@ -50,20 +49,7 @@
     "withdrawInvestment": {
       "title": "Withdrawal Request",
       "freeWithdrawal": {
-        "title": "Free Withdrawal",
-        "description": "You will receive your funds after the fund manager releases them. Take into account that your investment is at risk until the balance is transferred to you. This usually takes a few days but may take longer to complete depending on the fund manager.",
-        "button": {
-          "subtitle": "Withdraw on free funds",
-          "title": "No Fee"
-        }
-      },
-      "instant": {
-        "title": "Instant Withdrawal",
-        "description": "Instant withdrawals incur a {{fee}}% fee because Zignaly must cover your funds and inherit your risk.",
-        "button": {
-          "subtitle": "Withdraw instantly",
-          "title": "{{fee}}% Fee"
-        }
+        "description": "You will receive your funds after the fund manager releases them. Take into account that your investment is at risk until the balance is transferred to you. This usually takes a few days but may take longer to complete depending on the fund manager."
       }
     },
     "pendingTransaction": {
@@ -82,7 +68,7 @@
   },
   "modalSuccess": {
     "title": "Investment Processing (Up to 24h)",
-    "description": "Your funds will be transferred into the service’s account within 24 hours. You may withdraw your funds anytime before this transfer is made. Once funds are transferred, you’ll be able to withdraw via a <0>Free</0> or <0>Instant withdrawal.</0>",
+    "description": "Your funds will be transferred into the service’s account within 24 hours. You may withdraw your funds anytime before this transfer is made.",
     "button": "Close"
   },
   "invest-modal": {
@@ -90,6 +76,8 @@
     "amount-to-invest": "Amount to Invest",
     "type-transfer": "Type the word “{{word}}” in the field below to complete the transfer:",
     "transfer-error": "Invalid value. Please type the correct word.",
+    "max-funds": "Exceeds maximum funds allowed in this service. Invest max. {{max}} {{coin}}.",
+    "max-reached": "Cannot invest in this service because it has reached Maximum Funds limit.",
     "transfer-label": "Transfer",
     "i-understand-margin": "I understand my whole {{coin}} balance is now part of the margin and at risk",
     "i-understand-money-transferred": "I understand and confirm that my funds will be transferred to the trader's pool and will no longer appear in my available balance"

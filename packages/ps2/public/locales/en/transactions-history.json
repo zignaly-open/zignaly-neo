@@ -13,7 +13,8 @@
     "deposit": "Deposit",
     "withdrawal": "Withdrawal",
     "psDeposit": "Profit Sharing Deposit",
-    "psWithdraw": "Profit Sharing Withdrawal",
+    "psWithdraw": "Investment reduced",
+    "reward": "Commission",
     "ps2": "PS Internal Transfer",
     "psds": "Profit Sharing Withdrawal",
     "buyZig": "Buy Zig",
@@ -37,10 +38,11 @@
   },
   "export": {
     "title": "Transaction History Report",
-    "description": "We will process your request and send you an email in the following 10 minutes with the information to download your transactions history report.",
+    "description": "We are creating a report including all the transactions since this account was created. We will send you an email in the following 10 minutes with the steps to download your transactions history report.",
     "success": "Your request has been processed successfully. Please check your email for the download link."
   },
   "external": "External Address",
   "deleted": "Deleted Exchange Account",
-  "noData": "No transactions"
+  "noData": "No transactions",
+  "psService": "Profit Sharing Service"
 }

@@ -82,14 +82,16 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
 
     return Object.entries(balances)
       .filter(
-        ([c, balance]) => parseFloat(balance.balanceTotal) > 0 && coins[c],
+        ([c, balance]) =>
+          (parseFloat(balance.balanceTotal) > 0 || c == selectedCoin) &&
+          coins[c],
       )
       .map(([c, balance]) => {
         const name = coins[c]?.name || '';
         return {
           value: c,
           name,
-          label: <CoinOption coin={c} name={name} />,
+          label: <CoinOption key={c} coin={c} name={name} />,
           available: balance?.maxWithdrawAmount || 0,
           networks: coins[c].networks?.map((n) => ({
             label: n.name,
@@ -180,6 +182,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
+                id={'withdraw__select-coin'}
                 menuPlacement='auto'
                 menuShouldScrollIntoView={false}
                 menuPosition='fixed'
@@ -201,6 +204,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
+                id={'withdraw__select-network'}
                 menuPosition='fixed'
                 menuShouldBlockScroll
                 menuShouldScrollIntoView={false}
@@ -309,6 +313,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
 
             <ModalActions align='right'>
               <Button
+                id={'withdraw__close'}
                 size={'large'}
                 type={'button'}
                 variant={'secondary'}
@@ -317,6 +322,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
               />
 
               <Button
+                id={'withdraw__continue'}
                 size={'large'}
                 type={'submit'}
                 caption={t('confirmation.continue')}

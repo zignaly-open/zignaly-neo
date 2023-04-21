@@ -10,6 +10,7 @@ import {
   InputText,
   SliderInput,
   Typography,
+  ZigButton,
 } from '@zignaly-open/ui';
 import { EditInvestmentValidation } from './validations';
 import {
@@ -24,13 +25,20 @@ import { Box } from '@mui/material';
 import { CheckBox } from '@zignaly-open/ui';
 import { AmountInvested, TokenValue } from '../EditInvestmentForm/styles';
 import { NumericFormat } from 'react-number-format';
+import { useServiceDetails } from 'apis/service/use';
+import BigNumber from 'bignumber.js';
+import { Add } from '@mui/icons-material';
+import DepositModal from '../../DepositModal';
+import { useZModal } from '../../../../../../components/ZModal/use';
 
 function InvestForm({ close, onInvested }: InvestFormProps) {
   const coin = useCurrentBalance();
   const { t } = useTranslation('edit-investment');
   const service = useSelectedInvestment();
   const { isLoading, invest } = useInvestInService(service.serviceId);
+  const { data: serviceDetails } = useServiceDetails(service.serviceId);
   const toast = useToast();
+  const { showModal } = useZModal();
 
   // the safe word is Fluggaenkoecchicebolsen
   const transferMagicWord = t('invest-modal.transfer-label');
@@ -55,7 +63,15 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
       profitPercentage: 30,
       step: 1,
     },
-    resolver: yupResolver(EditInvestmentValidation),
+    resolver: yupResolver(
+      EditInvestmentValidation({
+        max: new BigNumber(serviceDetails.maximumSbt)
+          .minus(serviceDetails.invested)
+          .minus(serviceDetails.pending)
+          .toString(),
+        coin: service.ssc,
+      }),
+    ),
   });
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
@@ -104,7 +120,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                 {t('invest-modal.amount-to-invest')}
               </Typography>
               <AmountInvested>
-                <CoinIcon coin={coin.id} />
+                <CoinIcon coin={coin.id} name={'coin-icon'} />
                 <TokenValue>
                   <Typography variant={'bigNumber'} color={'neutral100'}>
                     <NumericFormat
@@ -120,16 +136,39 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
               </AmountInvested>
             </>
           ) : (
-            <InputAmountAdvanced
-              name={'amountTransfer'}
-              control={control}
-              label={t('form.inputAmount.label')}
-              labelBalance={t('form.inputAmount.labelBalance')}
-              showUnit={true}
-              placeholder={'0.0'}
-              tokens={[coin]}
-              error={isDirty && t(errors?.amountTransfer?.value?.message)}
-            />
+            <>
+              <InputAmountAdvanced
+                name={'amountTransfer'}
+                control={control}
+                label={t('form.inputAmount.label')}
+                labelBalance={t('form.inputAmount.labelBalance')}
+                showUnit={true}
+                placeholder={'0.0'}
+                tokens={[coin]}
+                error={isDirty && t(errors?.amountTransfer?.value?.message)}
+              />
+
+              <Box>
+                <ZigButton
+                  id={'account-menu-dropdown__deposit'}
+                  startIcon={<Add />}
+                  sx={{
+                    fontWeight: 400,
+                    mt: 1,
+                    color: (theme) => theme.palette.links,
+                  }}
+                  variant={'text'}
+                  onClick={() =>
+                    showModal(DepositModal, {
+                      ctaId: 'account-menu-deposit',
+                      selectedCoin: coin.id,
+                    })
+                  }
+                >
+                  {t('action:deposit-coin', { coin: coin.id })}
+                </ZigButton>
+              </Box>
+            </>
           )}
         </div>
         <div>
@@ -245,6 +284,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           }}
         >
           <Button
+            id={'invest-close'}
             size={'large'}
             type={'button'}
             disabled={isLoading}
@@ -254,6 +294,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           />
 
           <Button
+            id={'invest-confirm'}
             size={'large'}
             type={'submit'}
             loading={isLoading}

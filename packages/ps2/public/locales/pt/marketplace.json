@@ -1,0 +1,25 @@
+{
+	"card": {
+		"top-rated": "Melhor Classificado",
+		"assets": "Ativos",
+		"investors": "Investidores"
+	},
+	"invest-in-services": "Invista em Profit Sharing",
+	"invest-in-services-explainer": "Invista com a nossa seleção de traders profissionais e pague apenas uma parte dos teus lucros. O investimento médio é de $200, mas você pode começar com apenas $1.",
+	"table": {
+		"service-name": "Nome do Serviço",
+		"manager": "Gestor",
+		"currency": "Moeda Base",
+		"assets": "Ativos no Pool",
+		"nb-investors": "# de investidores",
+		"n-months-pnl_one": "{{count}} mês PNL",
+		"n-months-pnl_other": "{{count}} meses PNL",
+		"n-months_one": "{{count}} mês",
+		"n-months_other": "{{count}} meses",
+		"n-years_one": "{{count}} ano",
+		"n-years_other": "{{count}} anos",
+		"account-age": "Idade da conta",
+		"x-investors_one": "{{count}} investidor",
+		"x-investors_other": "{{count}} investidores"
+	}
+}

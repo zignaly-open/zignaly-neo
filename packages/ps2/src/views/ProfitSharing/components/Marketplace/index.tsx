@@ -18,7 +18,7 @@ import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace
 import AssetsInPool from '../../../../components/AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 import { TableWrapper } from './styles';
-import { formatLocalizedDistance } from '../../../Dashboard/components/MyDashboard/util';
+// import TopServicesCards from '../TopServicesCards';
 
 const Marketplace: React.FC = () => {
   const marketplaceEndpoint = useMarketplace();
@@ -28,21 +28,37 @@ const Marketplace: React.FC = () => {
   const columns = useMemo(
     () => [
       columnHelper.accessor('name', {
-        header: t('table.service-name'),
+        id: 'service-name',
+        header: () => (
+          <div id={'marketplace-table__header-service'}>
+            {t('table.service-name')}
+          </div>
+        ),
         style: {
           justifyContent: 'flex-start',
-          paddingLeft: '83px',
+          paddingLeft: '88px',
         },
         meta: {
           subtitle: (
             <>
-              <Box textAlign={'left'}>{t('table.manager')}</Box>
-              <Box textAlign={'left'}>{t('table.currency')}</Box>
+              <Box
+                textAlign={'left'}
+                id={'marketplace-table__header-service-manager'}
+              >
+                {t('table.manager')}
+              </Box>
+              <Box
+                textAlign={'left'}
+                id={'marketplace-table__header-service-currency'}
+              >
+                {t('table.currency')}
+              </Box>
             </>
           ),
         },
         cell: (props) => (
           <ServiceName
+            prefixId={`marketplace-table`}
             service={
               marketplaceServiceToInvestmentType(
                 props.row.original,
@@ -51,54 +67,79 @@ const Marketplace: React.FC = () => {
           />
         ),
       }),
-      columnHelper.accessor('invested', {
-        header: t('table.assets'),
+      columnHelper.accessor('investedUSDT', {
+        id: 'investedUSDT',
+        header: () => (
+          <div id={'marketplace-table__header-assets'}>{t('table.assets')}</div>
+        ),
         meta: {
-          subtitle: t('table.nb-investors'),
+          subtitle: (
+            <>
+              <div id={'marketplace-table__header-assets-investors'}>
+                {t('table.nb-investors')}
+              </div>
+              <div id={'marketplace-table__header-assets-age'}>
+                {t('table.account-age')}
+              </div>
+            </>
+          ),
         },
         cell: (props) => (
-          <AssetsInPool
-            assetsValue={props.getValue()}
-            numberOfInvestors={props.row.original.investors}
-          />
+          <Box
+            minWidth={148}
+            id={`marketplace-table__assets-${props.row.original.id}`}
+          >
+            <AssetsInPool
+              prefixId={'marketplace-table'}
+              serviceId={props.row.original.id}
+              assetsValue={props.getValue()}
+              numberOfInvestors={props.row.original.investors}
+              createdAt={props.row.original.createdAt}
+            />
+          </Box>
         ),
         sortingFn: 'alphanumeric',
       }),
       columnHelper.accessor((row) => Number(row.pnlPercent90t), {
         id: 'pnlPercent90t',
         header: t('table.n-months-pnl', { count: 3 }),
-        meta: {
-          subtitle: t('table.account-age'),
-        },
         cell: (props) => (
           <PercentageIndicator
+            id={`marketplace-table__pnl90t-${props.row.original.id}`}
             style={{
               fontSize: '18px',
               lineHeight: '28px',
             }}
             value={props.getValue()}
-            label={formatLocalizedDistance(
-              new Date(),
-              new Date(props.row.original.createdAt),
-            )}
           />
         ),
       }),
       columnHelper.accessor((row) => Number(row.pnlPercent30t), {
         id: 'pnlPercent30t',
         header: t('table.n-months-pnl', { count: 1 }),
-        cell: (props) =>
-          +props.getValue() ||
-          Object.keys(props.row.original.sparklines).length > 1 ? (
-            <>
-              <ZigChartMini midLine data={props.row.original.sparklines} />
-              <PercentageIndicator value={props.getValue()} type={'graph'} />
-            </>
-          ) : (
-            <ZigTypography variant='body2' color='neutral400'>
-              {t('tableHeader.1-mo.no-data')}
-            </ZigTypography>
-          ),
+        cell: (props) => (
+          <>
+            {+props.getValue() ||
+            Object.keys(props.row.original.sparklines).length > 1 ? (
+              <>
+                <ZigChartMini
+                  id={`marketplace-table__pnl30t-${props.row.original.id}-chart`}
+                  midLine
+                  data={[0, ...(props.row.original.sparklines as number[])]}
+                />
+                <PercentageIndicator
+                  value={props.getValue()}
+                  type={'graph'}
+                  id={`marketplace-table__pnl30t-${props.row.original.id}-percent`}
+                />
+              </>
+            ) : (
+              <ZigTypography variant='body2' color='neutral400'>
+                {t('tableHeader.1-mo.no-data')}
+              </ZigTypography>
+            )}
+          </>
+        ),
       }),
       columnHelper.display({
         header: '',
@@ -122,15 +163,30 @@ const Marketplace: React.FC = () => {
                 mb: 4,
               }}
             >
-              <ZigTypography variant={'h1'}>
+              <ZigTypography
+                variant={'h1'}
+                id={'marketplace__title'}
+                lineHeight='42px'
+              >
                 {t('invest-in-services')}
               </ZigTypography>
-              <ZigTypography variant={'body1'}>
+              <ZigTypography
+                variant={'body1'}
+                id={'marketplace__description'}
+                color='neutral300'
+              >
                 {t('invest-in-services-explainer')}
               </ZigTypography>
             </Box>
+            {/* <TopServicesCards
+              services={services
+                ?.slice()
+                .sort((a, b) => +b.pnlPercent90t - +a.pnlPercent90t)
+                .slice(0, 3)}
+            /> */}
             <TableWrapper>
               <ZigTable
+                prefixId={'marketplace'}
                 initialState={{
                   sorting: [
                     {

@@ -1,6 +1,8 @@
 {
     "deposit": "Deposit",
+    "deposit-coin": "Deposit {{coin}}",
     "edit": "Edit",
+    "claim": "Claim",
     "confirm": "Confirm",
     "delete": "Delete",
     "save": "Save",
@@ -12,5 +14,7 @@
     "save-and-close": "Save and Close",
     "copied": "Copied to clipboard",
     "proceed": "Proceed",
-    "export": "Export"
+    "export": "Export",
+    "hide": "Hide",
+    "show": "Show"
 }

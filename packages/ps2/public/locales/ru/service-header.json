@@ -1,0 +1,24 @@
+{
+	"managements-label": "Управление Средствами",
+	"investors-label": "Инвесторы",
+	"coins-label": "Монеты",
+	"dropdown": {
+		"manageServices": "Управление Сервисом",
+		"trade": {
+			"title": "Торговля",
+			"links": {
+				"positions": "Мои Позиции",
+				"manual": "Ручная торговля",
+				"signals": "Торговля по Сигналам",
+				"api": "Управление API"
+			}
+		},
+		"profile": {
+			"title": "Профиль",
+			"links": {
+				"profile": "Посмотреть Профиль",
+				"profile-edit": "Редактировать Профиль"
+			}
+		}
+	}
+}

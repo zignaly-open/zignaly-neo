@@ -22,6 +22,7 @@ export type DepositParams = {
   currency?: string;
   blockchain: string;
   note?: string;
+  transactionType?: TransactionType;
 };
 
 export type RedeemParams = {

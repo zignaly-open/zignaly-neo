@@ -23,6 +23,7 @@ import {
 import ConnectionStateLabel from '../ConnectionStateLabel';
 import { YesNo } from './atoms';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
+import { Box } from '@mui/material';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -44,19 +45,32 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       columnHelper.accessor('userId', {
         header: t('tableHeader.userId'),
       }),
-      columnHelper.accessor(
-        (row) => new BigNumber(row.invested).plus(new BigNumber(row.pending)),
-        {
-          header: t('tableHeader.investment'),
-          id: 'investment',
-          cell: (props) => (
+      columnHelper.accessor((row) => new BigNumber(row.invested).toNumber(), {
+        header: () => (
+          <Box display={'flex'} flexDirection={'column'}>
+            {t('tableHeader.invested')}
+            <Box fontSize={'12px'} color={'neutral300'}>
+              {t('tableHeader.pending')}
+            </Box>
+          </Box>
+        ),
+        id: 'investment',
+        cell: (props) => (
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <ZigTablePriceLabel
               coin={service?.ssc ?? 'USDT'}
-              value={props.getValue().toFixed()}
+              value={props.getValue()}
             />
-          ),
-        },
-      ),
+            <ZigTablePriceLabel
+              showApproximate
+              variant={'caption'}
+              coin={service?.ssc ?? 'USDT'}
+              value={props.row.original.pending}
+              color={'neutral300'}
+            />
+          </Box>
+        ),
+      }),
       columnHelper.accessor('pnlNetLc', {
         header: t('tableHeader.P&L'),
         cell: (props) => (
@@ -125,12 +139,15 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             </InvestorCounts>
 
             <ZigTable
+              prefixId={'investor'}
               columns={columns}
               data={investors.map((inv) => ({
                 ...inv,
-                successFee: management.successFee,
+                successFee:
+                  inv.accountType === 'owner' ? '0' : management.successFee,
               }))}
               emptyMessage={t('no-investors')}
+              enableSortingRemoval={false}
             />
           </>
         )}

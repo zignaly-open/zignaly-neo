@@ -33,6 +33,8 @@ import { useServiceApiKeyEditMutation } from '../../../../../apis/serviceApiKey/
 import { BooleanString, EditApiKeyFormType } from '../types';
 import { formTypeToBackendPayloadType } from '../util';
 import { useCheck2FA } from '../../../../../apis/user/use';
+import { useRefetchIfDesynchronizedState } from '../../../../../apis/serviceApiKey/use';
+import { BackendErrorResponse } from '../../../../../util/errors';
 
 function EditApiKeysModal({
   close,
@@ -47,6 +49,7 @@ function EditApiKeysModal({
   const { t } = useTranslation(['management']);
   const toast = useToast();
   const [updateApiKey, status] = useServiceApiKeyEditMutation();
+  const refetchIfDesyncronized = useRefetchIfDesynchronizedState(serviceId);
   const { isLoading } = status;
   const edit2FA = useCheck2FA({
     status,
@@ -61,9 +64,6 @@ function EditApiKeysModal({
       ) as BooleanString,
       ipRestrictions: apiKey.ips.join(', '),
       canTrade: apiKey.permissions?.includes(ServiceApiKeyPermission.canTrade),
-      marginTrade: apiKey.permissions?.includes(
-        ServiceApiKeyPermission.marginTrade,
-      ),
       futuresTrade: apiKey.permissions?.includes(
         ServiceApiKeyPermission.futuresTrade,
       ),
@@ -96,6 +96,8 @@ function EditApiKeysModal({
       if (!('error' in result)) {
         toast.success(t('common:changes-saved'));
         close();
+      } else {
+        refetchIfDesyncronized(result as BackendErrorResponse);
       }
     });
   };
@@ -107,6 +109,7 @@ function EditApiKeysModal({
 
   return (
     <ZModal
+      authOnly
       wide
       {...props}
       close={close}
@@ -237,18 +240,6 @@ function EditApiKeysModal({
               <FormControlLabel
                 control={
                   <Checkbox
-                    {...register('marginTrade')}
-                    checked={watch('marginTrade')}
-                    disabled={isLoading}
-                  />
-                }
-                label={t('api-keys.permissions-enable.marginTrade')}
-              />
-            </Grid>
-            <Grid item xs={12} md={6}>
-              <FormControlLabel
-                control={
-                  <Checkbox
                     {...register('futuresTrade')}
                     checked={watch('futuresTrade')}
                     disabled={isLoading}
@@ -322,6 +313,7 @@ function EditApiKeysModal({
 
         <Box sx={{ textAlign: 'center', mt: 4 }}>
           <ZigButton
+            id={'api-key__save-and-close'}
             variant={'contained'}
             loading={isLoading}
             type='submit'

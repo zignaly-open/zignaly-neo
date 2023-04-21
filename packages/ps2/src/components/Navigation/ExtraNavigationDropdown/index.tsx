@@ -4,13 +4,16 @@ import {
   OptionHorizontalDotsIcon,
 } from '@zignaly-open/ui';
 import React, { useCallback, useRef } from 'react';
-import { useTheme } from '@mui/material';
+import { useMediaQuery, useTheme } from '@mui/material';
 import { NavLink, Networks } from './styles';
 import { useTranslation } from 'react-i18next';
 import socialNetworksLinks from '../../../util/socialNetworks';
 import { supportedLanguages } from '../../../util/i18next';
-import { useChangeLocale } from '../../../apis/user/use';
-import { useFirstOwnedService } from '../../../apis/service/use';
+import { useChangeLocale, useIsAuthenticated } from '../../../apis/user/use';
+import {
+  useFirstOwnedService,
+  useTraderServices,
+} from '../../../apis/service/use';
 import { generatePath, useNavigate } from 'react-router-dom';
 import {
   ROUTE_BECOME_TRADER,
@@ -30,6 +33,9 @@ const ExtraNavigationDropdown: React.FC = () => {
   const { t, i18n } = useTranslation('common');
   const changeLocale = useChangeLocale();
   const service = useFirstOwnedService();
+  const { data: traderServices, isFetching } = useTraderServices();
+  const isAuthenticated = useIsAuthenticated();
+  const md = useMediaQuery(theme.breakpoints.up('md'));
 
   const onClose = useCallback(() => {
     dropDownRef.current?.closeDropDown();
@@ -50,31 +56,14 @@ const ExtraNavigationDropdown: React.FC = () => {
 
   let options: DropDownOption[] = [
     {
-      label: t('main-menu.dropdown-link-forTrading'),
-      id: 'menu__for-trading',
-      href:
-        service &&
-        generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-          serviceId: service.serviceId?.toString(),
-        }),
-      onClick: () =>
-        navigate(
-          service
-            ? generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-                serviceId: service.serviceId?.toString(),
-              })
-            : ROUTE_BECOME_TRADER,
-        ),
-    },
-    {
       label: t('main-menu.dropdown-link-helpDocs'),
-      id: 'menu__help-docs',
+      id: 'menu-dropdown__help-docs',
       target: '_blank',
       href: 'https://help.zignaly.com/hc/en-us',
     },
     {
       separator: true,
-      id: 'menu__language-switcher',
+      id: 'menu-dropdown__language-switcher',
       label: (
         <>
           <GlobeLanguagesStyled
@@ -87,7 +76,8 @@ const ExtraNavigationDropdown: React.FC = () => {
           </LabelButton>
         </>
       ),
-      children: languageMap.map((language) => ({
+      children: languageMap.map((language, index) => ({
+        id: `menu-dropdown-languages__${index.toString()}`,
         active: i18n.language === language.locale,
         label: language.label,
         onClick: () => handleSelectLanguage(language.locale),
@@ -103,6 +93,7 @@ const ExtraNavigationDropdown: React.FC = () => {
                 onClick={onClose}
                 href={socialNetwork.path}
                 key={`--social-network-nav-link-${index.toString()}`}
+                id={`menu-dropdown__social-network-${index.toString()}`}
                 target={'_blank'}
               >
                 <IconComponent height={'22px'} width={'22px'} />
@@ -115,13 +106,49 @@ const ExtraNavigationDropdown: React.FC = () => {
   ];
 
   if (languageMap.length === 1) {
-    options = options.filter((x) => x.id !== 'menu__language-switcher');
+    options = options.filter(
+      (x) => x.id !== 'menu-dropdown__language-switcher',
+    );
+  }
+  if (!md) {
+    options = [
+      {
+        label: t('navigation-menu.become-trader'),
+        id: 'menu-dropdown__become-trader',
+        href: ROUTE_BECOME_TRADER,
+        onClick: () => navigate(ROUTE_BECOME_TRADER),
+      },
+      ...options,
+    ];
+  }
+  if (isAuthenticated && traderServices?.length && !isFetching) {
+    options = [
+      {
+        label: t('main-menu.dropdown-link-forTrading'),
+        id: 'menu-dropdown__for-trading',
+        href:
+          service &&
+          generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+            serviceId: service.serviceId?.toString(),
+          }),
+        onClick: () =>
+          navigate(
+            service
+              ? generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
+                  serviceId: service.serviceId?.toString(),
+                })
+              : ROUTE_BECOME_TRADER,
+          ),
+      },
+      ...options,
+    ];
   }
 
   return (
     <DropDown
       component={({ open }) => (
         <IconButton
+          id={'menu__dropdown-trading'}
           variant={'flat'}
           icon={
             <OptionHorizontalDotsIcon

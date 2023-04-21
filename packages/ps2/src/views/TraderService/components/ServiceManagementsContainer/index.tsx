@@ -126,6 +126,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 />
                 <HorizontalConnection />
                 <Button
+                  id={'trader-service__transfer'}
                   variant='secondary'
                   size='large'
                   caption={t('transfer.title')}
@@ -168,6 +169,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                       coin={service?.ssc ?? 'USDT'}
                     />
                     <TextButton
+                      id={'trader-service__edit'}
                       leftElement={
                         <EditPenIcon
                           height={16}

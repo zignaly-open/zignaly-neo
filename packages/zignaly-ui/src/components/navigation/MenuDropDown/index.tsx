@@ -11,7 +11,14 @@ import { MenuDropDownProps } from "./types";
 import { defaultDropDownOptions } from "./types";
 
 const MenuDropDown = (
-  { title, focused = false, secondaryTitle = null, children, dropDownOptions }: MenuDropDownProps,
+  {
+    title,
+    focused = false,
+    secondaryTitle = null,
+    children,
+    dropDownOptions,
+    id,
+  }: MenuDropDownProps,
   innerRef: any,
 ) => {
   // Ref
@@ -42,7 +49,7 @@ const MenuDropDown = (
   }));
 
   return (
-    <Layout ref={menuRef}>
+    <Layout ref={menuRef} id={id}>
       <Button
         focused={focused}
         center={!secondaryTitle}

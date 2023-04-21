@@ -25,3 +25,8 @@ export type WithdrawModalProps = {
   setStep: (value: '' | 'confirm' | 'success') => void;
   close: () => void;
 };
+
+export enum ChooseDepositTypeViews {
+  DepositView = 'deposit',
+  ChooseDepositTypeView = 'choose-deposit-type',
+}

@@ -1,5 +1,5 @@
 import { UseQuery } from '@reduxjs/toolkit/dist/query/react/buildHooks';
-import { isArray } from 'lodash';
+import { isArray } from 'lodash-es';
 import { useState, useEffect, useRef } from 'react';
 import { useDeepCompareEffect, useUpdateEffect } from 'react-use';
 
@@ -64,10 +64,15 @@ const useInfinitePaginatedQuery = (
   }, [pageIndex]);
 
   const fetchMore = () => {
-    setLocalPage(({ page }) => ({
-      page: page + 1,
-      id: (queryResponse.data as InfiniteQueryResponseType).metadata?.from,
-    }));
+    if (data?.length !== limit) {
+      return;
+    }
+    setLocalPage(({ page }) => {
+      return {
+        page: page + 1,
+        id: (queryResponse.data as InfiniteQueryResponseType).metadata?.from,
+      };
+    });
   };
 
   return {

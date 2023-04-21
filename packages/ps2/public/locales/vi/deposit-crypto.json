@@ -1,0 +1,36 @@
+{
+	"title": "Nạp tiền",
+	"description": "Quá trình nạp tiền có thể mất đến 3 giờ để hiện trong số dư của bạn.",
+	"coinSelector": {
+		"label": "Đồng tiền:",
+		"placeholder": "Tìm kiếm loại tiền"
+	},
+	"balances": {
+		"loadingAriaLabel": "Đang tải số dư",
+		"total": "Số dư",
+		"balanceLocked": "Trong đơn đặt hàng:",
+		"balanceFree": "Khả dụng:"
+	},
+	"networkSelector": {
+		"label": "Mạng:",
+		"placeholder": "Chọn mạng"
+	},
+	"depositAddress": {
+		"label": "Địa chỉ gửi tiền:",
+		"loading": "Đang tải địa chỉ gửi tiền...",
+		"placeholder": "Đầu tiên, chọn loại tiền tệ và mạng",
+		"warning": "Chỉ gửi  {{network}} {{coin}} đến địa chỉ này",
+		"copied": "Đã sao chép địa chỉ gửi tiền vào khay nhớ tạm!"
+	},
+	"depositMemo": {
+		"label": "Nạp MEMO\/Tag:",
+		"copied": "Đã sao chép Memo tiền gửi vào khay nhớ tạm!",
+		"loading": "Đang tải tag của ví nhận..."
+	},
+	"depositQR": {
+		"address": "Địa chỉ {{coin}}",
+		"memo": "MEMO\/Tag"
+	},
+	"no-network": "Gửi tiền không khả dụng đối với mạng này",
+	"buy-crypto": "Mua Tiền Điện Tử"
+}

@@ -53,6 +53,7 @@ function InvestedFromOtherAccounts({
     >
       <Box mt={3}>
         <ZigTable
+          prefixId={'invested-from-others'}
           columns={
             [
               {
@@ -81,6 +82,7 @@ function InvestedFromOtherAccounts({
                     </ZigTypography>
                   ) : (
                     <TextButton
+                      id={`all-accounts__switch-${service.id}`}
                       leftElement={
                         <CompareArrowsIcon
                           sx={{

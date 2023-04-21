@@ -191,13 +191,18 @@ const SwapForm = ({
                 gap={1}
               >
                 <ZigButton
+                  id={'buy-zig__continue'}
                   type='submit'
                   disabled={!isValid || !amountTo}
                   variant='contained'
                 >
                   {t('buy.continue')}
                 </ZigButton>
-                <ZigButton onClick={onDepositMore} variant='text'>
+                <ZigButton
+                  id={'buy-zig__deposit-more'}
+                  onClick={onDepositMore}
+                  variant='text'
+                >
                   {t('buy.deposit.more', { coin: coinFrom })}
                 </ZigButton>
               </Grid>

@@ -44,7 +44,7 @@ function AuthVerifyModal({
   let [verify, verifyStatus] = verifyEmailNewUser;
   let [resend, resendStatus] = resendEmailNewUser;
 
-  if (isUnknownDevice) {
+  if (!emailUnconfirmed && isUnknownDevice) {
     [verify, verifyStatus] = verifyDevice;
     [resend, resendStatus] = resendDevice;
   } else if (disabled) {
@@ -68,7 +68,7 @@ function AuthVerifyModal({
       }
     } else if (ask2FA) {
       if (verifyStatus.isSuccess) {
-        // Do nothing
+        title = t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-title');
       } else if (isUnknownDevice) {
         title = t(
           'auth-verify-modal.isNotDisabled.ask2FA.isUnknownDevice-title',
@@ -95,12 +95,13 @@ function AuthVerifyModal({
 
   const getError = useCallback(
     (status: typeof verifyStatus) => {
-      const errorCode = (status.error as { data?: { error: { code: number } } })
-        ?.data?.error.code;
+      const errorCode = (
+        status?.error as { data?: { error: { code: number } } }
+      )?.data?.error?.code;
 
       return errorCode === 13
         ? t('error:error.login-session-expired')
-        : errorCode === 37
+        : [37, 108].includes(errorCode)
         ? t('error:error.wrong-code')
         : null;
     },
@@ -137,16 +138,17 @@ function AuthVerifyModal({
         )}
       </Title>
       <Container>
-        {(isUnknownDevice || disabled || emailUnconfirmed) && (
-          <EmailVerifyForm
-            clearOnError
-            onSubmit={(code) => verify({ code })}
-            onReSendCode={performResend}
-            error={getError(verifyStatus)}
-            isReSendLoading={resendStatus.isLoading}
-            isLoading={verifyStatus.isLoading}
-          />
-        )}
+        {(isUnknownDevice || disabled || emailUnconfirmed) &&
+          !verifyStatus.isSuccess && (
+            <EmailVerifyForm
+              clearOnError
+              onSubmit={(code) => verify({ code })}
+              onReSendCode={performResend}
+              error={getError(verifyStatus)}
+              isReSendLoading={resendStatus.isLoading}
+              isLoading={verifyStatus.isLoading}
+            />
+          )}
 
         {ask2FA && !status2FA.isSuccess && (
           <TwoFAForm

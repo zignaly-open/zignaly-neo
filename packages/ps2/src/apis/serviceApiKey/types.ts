@@ -20,3 +20,9 @@ export type ServiceApiKeyPayload = {
   permissions: string;
   code?: string;
 };
+
+export type ServiceApiKeyDeletePayload = {
+  serviceId: string;
+  keyId: string;
+  code?: string;
+};

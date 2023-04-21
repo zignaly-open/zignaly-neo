@@ -6,7 +6,8 @@ import {
   Service,
 } from '../../../../../apis/service/types';
 import {
-  ZigButton,
+  getPrecisionForCoin,
+  ZigButtonGroupInput,
   ZigChart,
   ZigPriceLabel,
   ZigSelect,
@@ -16,8 +17,8 @@ import { Box } from '@mui/material';
 import {
   ChartWrapper,
   GraphPercentageWrapperBox,
-  SqueezedButtonGroup,
   SelectWrapperBox,
+  SqueezedButtonGroupWrapper,
 } from '../styles';
 import { useChartConfig, useChartData } from '../../../../../apis/service/use';
 import Stub from '../../../../../components/Stub';
@@ -26,6 +27,11 @@ import CenteredLoader from '../../../../../components/CenteredLoader';
 import PercentChange from './PercentChange';
 import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../../util/numbers';
+import { numericFormatter } from 'react-number-format';
+import {
+  formatCompactNumber,
+  formatLocalizedDate,
+} from 'views/Dashboard/components/MyDashboard/util';
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   const { chartType, chartTimeframe, setChartTimeframe, setChartType } =
@@ -47,6 +53,10 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
       {
         label: t('chart-options.pnl_ssc', { coin: service.ssc }),
         value: GraphChartType.pnl_ssc,
+      },
+      {
+        label: t('chart-options.pnl_ssc_percent', { coin: service.ssc }),
+        value: GraphChartType.pnl_pct,
       },
       {
         label: t('chart-options.sbt_ssc', { coin: service.ssc }),
@@ -78,6 +88,12 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
     !isFetching;
   const value = data?.summary;
 
+  const isPercent = [
+    GraphChartType.pnl_pct_compound,
+    GraphChartType.at_risk_pct,
+    GraphChartType.pnl_pct,
+  ].includes(chartType);
+
   return (
     <Box>
       <Box
@@ -105,7 +121,9 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   GraphChartType.investors,
                 ].includes(chartType) && (
                   <>
-                    {chartType === GraphChartType.pnl_ssc && (
+                    {[GraphChartType.pnl_ssc, GraphChartType.pnl_pct].includes(
+                      chartType,
+                    ) && (
                       <ZigTypography
                         color={'neutral200'}
                         variant={'h1'}
@@ -159,43 +177,49 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
 
             {typeof data?.percentDiff !== 'undefined' && (
               <GraphPercentageWrapperBox sx={{ mr: 2 }}>
-                <PercentChange colored variant='h2' value={data?.percentDiff} />
+                <PercentChange
+                  id={'service-profile__percent-change'}
+                  colored
+                  variant='h2'
+                  value={data?.percentDiff}
+                />
               </GraphPercentageWrapperBox>
             )}
           </>
         )}
 
         <Box sx={{ flex: 1 }} />
-        <Box sx={{ mr: 2 }}>
-          <SqueezedButtonGroup variant={'outlined'}>
-            {Object.keys(GraphTimeframe).map((v: GraphTimeframe, i, all) => {
-              const isDisabled =
-                i > 0 &&
-                GraphTimeframeDayLength[v] > 30 &&
-                GraphTimeframeDayLength[all[i - 1]] > serviceStartedDaysAgo;
 
-              return (
-                <ZigButton
-                  active={v === chartTimeframe}
-                  size={'small'}
-                  variant={'outlined'}
-                  key={v}
-                  disabled={isDisabled}
-                  tooltip={
-                    isDisabled
+        <SqueezedButtonGroupWrapper sx={{ mr: 2 }}>
+          <ZigButtonGroupInput
+            options={Object.keys(GraphTimeframe).map(
+              (v: GraphTimeframe, i, all) => {
+                const isDisabled =
+                  i > 0 &&
+                  GraphTimeframeDayLength[v] > 30 &&
+                  GraphTimeframeDayLength[all[i - 1]] > serviceStartedDaysAgo;
+
+                return {
+                  value: v,
+                  label: t(`periods.${v}`),
+                  id: `service-profile__choose-period-${v}`,
+                  extraProps: {
+                    size: 'small',
+                    disabled: isDisabled,
+                    tooltip: isDisabled
                       ? t('service:not-enough-data')
-                      : t(`periods.${v}-full`)
-                  }
-                  onClick={() => setChartTimeframe(v)}
-                >
-                  {t(`periods.${v}`)}
-                </ZigButton>
-              );
-            })}
-          </SqueezedButtonGroup>
-        </Box>
+                      : t(`periods.${v}-full`),
+                  },
+                };
+              },
+            )}
+            value={chartTimeframe}
+            onChange={(v: GraphTimeframe) => setChartTimeframe(v)}
+          />
+        </SqueezedButtonGroupWrapper>
         <SelectWrapperBox>
           <ZigSelect
+            id={'service-profile__choose-graph-view'}
             outlined
             width={170}
             small
@@ -205,9 +229,11 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           />
         </SelectWrapperBox>
       </Box>
+
       <ChartWrapper>
         {isError ? (
           <Stub
+            id={'service-profile__error-load'}
             title={t('chart-error.heading')}
             description={t('chart-error.description')}
           />
@@ -215,23 +241,38 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
           <CenteredLoader />
         ) : (
           <ZigChart
-            bars={chartType === GraphChartType.pnl_ssc}
+            id={'service-profile__graph'}
+            bars={[GraphChartType.pnl_ssc, GraphChartType.pnl_pct].includes(
+              chartType,
+            )}
             onlyIntegerTicks={chartType === GraphChartType.investors}
             events={events}
             yAxisFormatter={(v) =>
-              `${v
-                .toString()
-                .replace(/000000$/, 'M')
-                .replace(/000$/, 'K')}${
-                [
-                  GraphChartType.pnl_pct_compound,
-                  GraphChartType.at_risk_pct,
-                ].includes(chartType)
-                  ? `%`
-                  : ``
+              `${formatCompactNumber(v, isPercent ? 2 : 8)}${
+                isPercent ? `%` : ``
               }`
             }
             data={data?.data}
+            tooltipFormatter={(v) =>
+              `${formatLocalizedDate(
+                (v as typeof v & { date?: Date }).date,
+                'PP',
+              )}\n${numericFormatter(v.y.toString(), {
+                ...(isPercent
+                  ? {
+                      decimalScale: 2,
+                      suffix: '%',
+                    }
+                  : {
+                      thousandSeparator: true,
+                      decimalScale: getPrecisionForCoin(service.ssc) ?? 8,
+                      suffix:
+                        chartType === GraphChartType.investors
+                          ? ''
+                          : ` ${service.ssc}`,
+                    }),
+              })}`
+            }
           />
         )}
       </ChartWrapper>

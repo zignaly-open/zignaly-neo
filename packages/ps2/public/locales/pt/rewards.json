@@ -1,0 +1,10 @@
+{
+	"active": "Ativo",
+	"table": {
+		"time-and-date": "Hora & Data",
+		"status": "Status"
+	},
+	"statusTypes": {
+		"success_fee": "Taxa de Sucesso"
+	}
+}

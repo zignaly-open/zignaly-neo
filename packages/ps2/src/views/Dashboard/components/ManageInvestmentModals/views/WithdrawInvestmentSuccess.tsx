@@ -11,7 +11,12 @@ function WithdrawInvestmentSuccess({ close }: { close: () => void }) {
         {t('success.description')}
       </Typography>
       <ModalActions>
-        <Button onClick={close} size={'large'} caption={t('success.button')} />
+        <Button
+          id={'withdraw__close'}
+          onClick={close}
+          size={'large'}
+          caption={t('success.button')}
+        />
       </ModalActions>
     </>
   );

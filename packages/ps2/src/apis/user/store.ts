@@ -32,6 +32,9 @@ export const userSlice = createSlice({
         (e) => e.internalId === action.payload,
       ).activated = true;
     },
+    enable2FA: (state, action: PayloadAction<boolean>) => {
+      state.user.ask2FA = action.payload;
+    },
   },
 });
 
@@ -43,6 +46,7 @@ export const {
   setSessionExpiryDate,
   setActiveExchangeInternalId,
   activateExchange,
+  enable2FA,
 } = userSlice.actions;
 
 export default userSlice.reducer;

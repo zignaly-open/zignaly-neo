@@ -1,0 +1,114 @@
+{
+	"service-by": "por <0>{{name}}<\/0>",
+	"service-age": "Comenzó hace <0>{{date}}<\/0>",
+	"link-copied": "¡Enlace copiado al portapapeles!",
+	"logo-alt": "Zignaly - Profit Sharing \/ Copy Trading Service Logo de {{name}}",
+	"liquidated": "Liquidado",
+	"invested-label": "Invertido",
+	"copy-link": "Copiar link",
+	"invest-button": {
+		"invest-now": "INVERTIR",
+		"max-reached": "Fondos Máximos Alcanzados",
+		"max-reached-tooltip": "No se permiten inversiones en este servicio porque ha alcanzado el Límite Máximo de Fondos. Descubra otros servicios de Profit Sharing en nuestro Marketplace.",
+		"all-accounts": "Ver todo ({{count}})",
+		"x-success-fee": "{{fee}}% Success fee"
+	},
+	"owner-verified": "El Gestor ha sido verificado",
+	"owner-from": "El Gestor es de {{country}}",
+	"strategy": "Estrategia",
+	"assets-in-pool": "Activos en el Pool",
+	"investors-count": "Inversores",
+	"strategy-empty": "El Gestor prefiere mantener un aire de misterio en torno a su estrategia de trading",
+	"about-trader": "Sobre el Gestor",
+	"about-trader-empty": "El Gestor prefiere mantener un aire de misterio a su alrededor.",
+	"about-trader-joined-time": "Se unió hace {{date}}",
+	"summary": {
+		"base-currency": "Moneda base:",
+		"funds-allocated": "Fondos asignados:",
+		"no-max-limit": "Sin límite máximo de fondos",
+		"success-fee": "Success fee:",
+		"tags": "Tags:"
+	},
+	"periods": {
+		"7d-full": "1 Semana",
+		"30d-full": "1 Mes",
+		"90d-full": "3 Meses",
+		"180d-full": "6 Meses",
+		"365d-full": "1 Año",
+		"all-full": "Todo el tiempo",
+		"7d": "1 Semana",
+		"30d": "1 Mes",
+		"90d": "3 Meses",
+		"180d": "6 Meses",
+		"365d": "1 Año",
+		"all": "Todas"
+	},
+	"other-accounts": {
+		"title": "Invertido en Todas las Cuentas",
+		"account": "Cuenta",
+		"active": "Activo",
+		"invested": "Invertido",
+		"switch-action": "Cambiar"
+	},
+	"not-enough-time": "No hay datos suficientes para este periodo",
+	"chart-error": {
+		"heading": "Se produjo un error :(",
+		"description": "Desafortunadamente, no pudimos procesar el gráfico"
+	},
+	"chart-options": {
+		"pnl_pct_compound": "PNL % Compuesto",
+		"pnl_ssc": "PNL Diario",
+		"pnl_ssc_percent": "% de PNL Diario",
+		"sbt_ssc": "Saldo total",
+		"at_risk_pct": "% en riesgo",
+		"investors": "N. de inversores"
+	},
+	"migrated-to-ps2": "Migrado a PS2",
+	"total": "Total:",
+	"not-enough-data": "No hay suficientes datos históricos para este periodo",
+	"edit": {
+		"title": "Editar Perfil del Servicio",
+		"name": "Nombre del Servicio:",
+		"logo": "Editar Logo",
+		"description": "Descripción:",
+		"success-fee-desc": "Importe de los beneficios que cobrarás a tus inversores (incluida la comisión del 5% de Zignaly)",
+		"pool-size": "Tamaño máximo del pool:",
+		"pool-size-desc": "Máximo que aceptarás de los inversores",
+		"visibility": {
+			"visibility": "Visibilidad:",
+			"unlisted": "Borrador No Publicado",
+			"unlisted-desc": "Servicio solo disponible para ti",
+			"private": "Estado del Servicio: Privado",
+			"private-desc": "Servicio disponible para los usuarios registrados con la URL",
+			"public": "Estado del Servicio: Público",
+			"public-desc": "Servicio disponible para cualquier visitante con la URL",
+			"marketplace": "Estado del Servicio: Marketplace",
+			"marketplace-desc": "Servicio publicado en el marketplace para todos",
+			"marketplace-requirements": "Para ser listado en el marketplace, revisa la <0>lista de requisitos<\/0> y contacta con nuestro soporte a través del widget una vez que tu servicio cumpla los requisitos"
+		},
+		"save": "Guardar Perfil",
+		"validation": {
+			"name-length": "Debe tener entre 5 y 50 caracteres",
+			"success-fee-range": "Debe ser 0 o un número entero entre 10 y 75"
+		}
+	},
+	"you-get-x": "Obtienes {{number}}%",
+	"create": {
+		"invest-in-your-service": "Invierte en tu servicio",
+		"select-type-first": "Seleccione primero un tipo de servicio",
+		"title": "Crear nuevo servicio",
+		"action": "Crear servicio",
+		"next-step": "Siguiente",
+		"service-type": "Tipo de servicio",
+		"service-name": "Nombre del Servicio",
+		"base-currency": "Moneda Base",
+		"types": {
+			"spot": "Spot",
+			"futures": "Futuros"
+		},
+		"minimum-balance": "Para operar y permitir que los inversores inviertan, necesitas invertir al menos {{ minValue }} {{ minValueCoin }} en tu servicio",
+		"profits-explainer": "Decide cuánto de tus beneficios provenientes de trading y del success fee deseas solicitar que se retiren automáticamente.",
+		"please-verify": "Por favor revisa tu información. El tipo, la base y el nombre no se pueden cambiar más adelante",
+		"zero-fee": "Si eliges success fee = 0, Zignaly tampoco cobrará ninguna comisión"
+	}
+}

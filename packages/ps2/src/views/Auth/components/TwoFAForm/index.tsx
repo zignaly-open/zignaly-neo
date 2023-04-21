@@ -2,7 +2,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { Layout, Field } from './styles';
 import { TwoFAFormProps } from './types';
-import { InputCode, Typography } from '@zignaly-open/ui';
+import { InputCode, ZigTypography } from '@zignaly-open/ui';
 
 function TwoFAForm({
   onSubmit,
@@ -14,9 +14,9 @@ function TwoFAForm({
   return (
     <Layout>
       <Field>
-        <Typography variant={'body1'}>
+        <ZigTypography>
           {t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-description')}
-        </Typography>
+        </ZigTypography>
         <InputCode
           fields={6}
           error={error}

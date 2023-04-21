@@ -4,14 +4,12 @@ import { Control } from "react-hook-form";
 export type TokenItem = {
   id: string;
   balance: string | number | BigNumber;
+  min?: string | number | BigNumber;
 };
 
 export type InputAmountAdvancedValue = {
   value: string | number | BigNumber;
-  token: {
-    id: string;
-    balance: string | number | BigNumber;
-  };
+  token: TokenItem;
 };
 
 export interface InputAmountProps {

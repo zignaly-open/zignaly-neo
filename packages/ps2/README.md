@@ -27,17 +27,6 @@ functioning brain and basic dev skills can reverse-engineer the code to get this
 * `REACT_APP_GTM_ID` - Google Tag Manager id
 * `REACT_APP_ENABLE_TEST_LANGUAGE` - pass truthy value to enable the test language to verify that all strings are
   externalized
-* `REACT_APP_GOOGLE_CAPTCHA_TOKEN` - captcha key
-
-⚠️ **WARNING!** Unless you want to spend time trying to figure out why the hell the backend responds with a captcha
-error, you _**have**_ to run the app on a `*.zignaly.com` domain. To do that, modify `sudo vim /etc/hosts` (or whatever
-in the System32 the path is on Windows) and add:
-
-```
-127.0.0.1 local.zignaly.com
-```
-
-Now open [http://local.zignaly.com:3000](http://local.zignaly.com:3000) and good luck using it.
 
 ### Scripts
 
@@ -81,5 +70,8 @@ src
 └── App.tsx                         # entry point with 100500 providers around it
 
 ```
+
+### IDs in PS 2.0:
+#### `location-sublocation__id`
 
 Please follow the existing codestyle. Good luck on your journey.

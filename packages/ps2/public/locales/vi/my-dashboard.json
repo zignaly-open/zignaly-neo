@@ -1,0 +1,55 @@
+{
+	"title": "Danh mục đầu tư của tôi",
+	"tableHeader": {
+		"summary": {
+			"title": "Giá trị hiện tại của tài khoản",
+			"subtitle": "Lời\/ lỗ"
+		},
+		"serviceName": {
+			"title": "Tên dịch vụ",
+			"subtitle": "Người quản lý\/Đơn vị tiền tệ cơ sở"
+		},
+		"1-mo": {
+			"title": "1 tháng.",
+			"no-data": "Chưa có dữ liệu để hiển thị"
+		},
+		"dailyAvg-title": "Trung bình hàng ngày.",
+		"3-mos-title": "3 tháng.",
+		"6-mos-title": "6 tháng.",
+		"all": {
+			"title": "Tất cả",
+			"subtitle": "Đầu tư kể từ"
+		}
+	},
+	"table-search-emptyMessage": "Bạn chưa kết nối với bất kỳ dịch vụ nào.",
+	"something-went-wrong": "Đã xảy ra lỗi!",
+	"loading-arialLabel": "Đang tải danh mục đầu tư của tôi",
+	"slider-input": {
+		"labels": {
+			"left": "Tái đầu tư",
+			"right": "Rút tiền"
+		}
+	},
+	"tooltip-date": "Bạn đang đầu tư vào dịch vụ này kể từ {{date}}",
+	"how-to-invest-steps": {
+		"title": "Cách đầu tư",
+		"step-1": {
+			"title": "Chọn nhà giao dịch chuyên nghiệp",
+			"description": "Chọn ít nhất một trong những nhà giao dịch chuyên nghiệp của chúng tôi từ <0>thị trường<\/0> phù hợp với phong cách đầu tư của bạn",
+			"time": "Mất 2 phút"
+		},
+		"step-2": {
+			"title": "Nạp tiền",
+			"description": "<0>Nạp<\/0> tiền mã hóa trong tài khoản của bạn. Nếu bạn không có tiền điện tử, bạn cũng có thể <1>mua<\/1><2\/> nó.",
+			"time": "Đợi 3 phút"
+		},
+		"step-3": {
+			"title": "Đầu tư (không tối thiểu)",
+			"description": "Đầu tư vào các dịch vụ và chờ đợi để xem lợi nhuận của bạn tăng lên từng ngày.",
+			"time": "Đợi \n2 phút"
+		},
+		"bottom-title": "Dịch vụ danh mục đầu tư của tôi",
+		"bottom-description": "Bạn chưa đầu tư dịch vụ nào, hãy bắt đầu để thu lợi nhuận.",
+		"start-investing": "Bắt đầu đầu tư ngay"
+	}
+}

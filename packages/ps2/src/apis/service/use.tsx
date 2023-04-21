@@ -4,10 +4,12 @@ import {
   useTraderServiceGraphQuery,
   useTraderServiceInvestorsQuery,
   useTraderServiceManagementQuery,
+  useTraderServicesQuery,
   useTraderServiceTransferFundsMutation,
   useTraderServiceUpdateScaMinimumMutation,
 } from './api';
 import { useDispatch, useSelector } from 'react-redux';
+import { format, parse, subDays } from 'date-fns';
 import {
   GraphChartType,
   GraphTimeframe,
@@ -24,15 +26,18 @@ import { useTranslation } from 'react-i18next';
 import { setChartTimeframe, setChartType } from './store';
 import { useMemo } from 'react';
 import { formatMonthDay } from '../../views/Dashboard/components/MyDashboard/util';
-import { format, parse, subDays } from 'date-fns';
 
-export function useTraderServices(): TraderService[] | undefined {
-  return useSelector((store: RootState) => store.service.traderServices);
+export function useTraderServices() {
+  const isAuthenticated = useIsAuthenticated();
+  return useTraderServicesQuery(null, {
+    skip: !isAuthenticated,
+  });
 }
 
-export function useIsServiceOwner(serviceId: string) {
-  const traderServices = useTraderServices();
+export function useIsServiceOwner(serviceId: string): boolean | undefined {
   const isAuthenticated = useIsAuthenticated();
+
+  const { data: traderServices } = useTraderServices();
   return (
     isAuthenticated &&
     traderServices?.some((s: TraderService) => s.serviceId === serviceId)
@@ -40,9 +45,8 @@ export function useIsServiceOwner(serviceId: string) {
 }
 
 export function useFirstOwnedService(): TraderService | null {
-  const traderServices = useTraderServices();
-  const isAuthenticated = useIsAuthenticated();
-  return (isAuthenticated && traderServices[0]) || null;
+  const { data: traderServices } = useTraderServices();
+  return (traderServices && traderServices[0]) || null;
 }
 
 export const useTraderServiceInvestors = useTraderServiceInvestorsQuery;
@@ -145,10 +149,14 @@ export function useChartData({
     }
 
     const dates = Object.entries(chart).sort(([a], [b]) => a.localeCompare(b));
-    const graph = dates?.map(([date, value]) => ({
-      x: formatMonthDay(parse(date, 'yyyy-MM-dd', Date.now())),
-      y: value,
-    }));
+    const graph = dates?.map(([date, value]) => {
+      const dateObj = parse(date, 'yyyy-MM-dd', Date.now());
+      return {
+        x: formatMonthDay(dateObj),
+        date: dateObj,
+        y: value,
+      };
+    });
 
     return {
       summary: data?.summary,

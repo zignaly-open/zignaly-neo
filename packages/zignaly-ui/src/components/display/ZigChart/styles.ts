@@ -3,11 +3,16 @@ import { dark } from "../../../theme";
 
 export const ChartLayoutLarge = styled("div")`
   width: 100%;
+  z-index: 3;
+
+  svg {
+    overflow: visible;
+  }
 `;
 
 export const ChartLayoutMini = styled("div")<{ height?: number }>`
   height: ${(props) => props.height || 100}px;
-  width: auto;
+  width: 100%;
   display: inline-block;
 `;
 
@@ -23,7 +28,7 @@ export const axisStyle = {
   },
   tickLabels: {
     fontSize: 11,
-    padding: 5,
+    padding: 7,
     // sorry not sorry
     fill: dark.neutral200,
     fontFamily: "Avenir Next",

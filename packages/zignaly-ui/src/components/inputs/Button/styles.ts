@@ -94,6 +94,7 @@ export const ButtonLoader = styled(Loader)`
  * Layout
  */
 interface LayoutProps {
+  width?: string;
   variant: keyof typeof buttonVariants;
   size: keyof typeof buttonSizes;
   color: keyof typeof buttonColors;
@@ -112,6 +113,7 @@ export const Layout = styled.button<LayoutProps>`
   padding: 0;
   cursor: pointer;
   outline: none;
+  width: ${(props) => props.width ?? "auto"};
 
   svg {
     width: 100%;

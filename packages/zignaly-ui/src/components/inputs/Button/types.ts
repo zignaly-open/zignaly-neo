@@ -20,6 +20,7 @@ export const buttonColors = {
 };
 
 export type ButtonProps = {
+  width?: string;
   variant?: keyof typeof buttonVariants;
   size?: keyof typeof buttonSizes;
   caption?: string | null | JSX.Element;

@@ -7,7 +7,7 @@ const ServiceOwnerWall: React.FC = () => {
   const { serviceId } = useParams();
   const isOwner = useIsServiceOwner(serviceId);
 
-  return !isOwner ? (
+  return isOwner === false ? (
     <Navigate
       to={generatePath(ROUTE_TRADING_SERVICE, {
         serviceId,

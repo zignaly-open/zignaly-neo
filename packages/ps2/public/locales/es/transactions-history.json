@@ -1,0 +1,48 @@
+{
+	"tableHeader": {
+		"coin": "Moneda",
+		"date": "Fecha",
+		"type": "Tipo",
+		"amount": "Cantidad",
+		"transactionId": "ID de Transacción",
+		"from": "Desde",
+		"to": "Hacia",
+		"status": "Estatus"
+	},
+	"type": {
+		"deposit": "Depósito",
+		"withdrawal": "Retiro",
+		"psDeposit": "Depósitos Profit Sharing",
+		"psWithdraw": "Inversión Reducida",
+		"reward": "Comisión",
+		"ps2": "PS Transferencia Interna",
+		"psds": "Retiros Profit Sharing",
+		"buyZig": "Comprar Zig",
+		"traderFee": "Success Fee del Trader",
+		"user": "Transferencia Interna"
+	},
+	"filter": {
+		"max": "(últimos 3 meses máximo)",
+		"all": "Todas las Transacciones"
+	},
+	"status": {
+		"pending": "Pendiente",
+		"completed": "Completo",
+		"error": "Error"
+	},
+	"details": {
+		"from": "De:",
+		"to": "Para:",
+		"txHash": "TX Hash:",
+		"note": "Notas:"
+	},
+	"export": {
+		"title": "Informe del Historial de Transacciones",
+		"description": "Estamos creando un informe que incluye todas las transacciones desde que se creó esta cuenta. Te enviaremos un correo electrónico en los próximos 10 minutos con los pasos para descargar tu informe con el historial de transacciones.",
+		"success": "Tu solicitud se ha procesado correctamente. Por favor, revisa tu correo electrónico para obtener el enlace de descarga."
+	},
+	"external": "Dirección Externa",
+	"deleted": "Cuenta de Exchange Eliminada",
+	"noData": "Sin transacciones",
+	"psService": "Servicio de Profit Sharing"
+}
