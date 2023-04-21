@@ -1,6 +1,7 @@
 {
   "name": "@zignaly-open/raffles-shared",
   "version": "1.0.2",
+  "private": true,
   "main": "index.ts",
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
   "license": "MIT",

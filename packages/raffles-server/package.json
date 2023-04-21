@@ -1,6 +1,7 @@
 {
   "name": "@zignaly-open/raffles-server",
   "version": "0.1.3",
+  "private": true,
   "license": "MIT",
   "author": "Alexander Mikhalchenko <alex@xfuturum.com>",
   "main": "index.js",

@@ -1,6 +1,7 @@
 {
   "name": "@zignaly-open/raffles-client",
   "version": "0.1.3",
+  "private": true,
   "publishConfig": {
     "access": "public"
   },
