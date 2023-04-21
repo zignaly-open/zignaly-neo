@@ -57,10 +57,6 @@ declare module '@mui/material/styles' {
     dropDownBackground: string;
     darkSpecial: string;
     almostWhite: string;
-    errorToasterBg: string;
-    errorToasterBorder: string;
-    successToasterBg: string;
-    successToasterBorder: string;
   }
 
   interface Palette extends CustomPalette {}
@@ -99,10 +95,6 @@ declare module '@mui/material/Button' {
     darkSpecial: true;
     avatarBack: true;
     almostWhite: true;
-    errorToasterBg: true;
-    errorToasterBorder: true;
-    successToasterBg: true;
-    successToasterBorder: true;
   }
 }
 
@@ -134,10 +126,6 @@ declare module '@mui/material/SvgIcon' {
     darkSpecial: true;
     avatarBack: true;
     almostWhite: true;
-    errorToasterBg: true;
-    errorToasterBorder: true;
-    successToasterBg: true;
-    successToasterBorder: true;
   }
 }
 
@@ -170,11 +158,7 @@ declare module '@emotion/react' {
     dropDownBackground: string;
     darkSpecial: string;
     almostWhite: string;
-    errorToasterBg: string;
-    errorToasterBorder: string;
     avatarBack: string;
-    successToasterBg: string;
-    successToasterBorder: string;
   }
 }
 

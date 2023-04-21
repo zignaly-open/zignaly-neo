@@ -22,10 +22,6 @@ interface Theme {
   dropDownBackground: string;
   darkSpecial: string;
   almostWhite: string;
-  errorToasterBg: string;
-  errorToasterBorder: string;
-  successToasterBg: string;
-  successToasterBorder: string;
 }
 
 export default Theme;
