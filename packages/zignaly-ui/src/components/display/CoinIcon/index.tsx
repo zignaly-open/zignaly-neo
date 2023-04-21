@@ -3,9 +3,7 @@ import { sizes, Image, Layout } from "./styles";
 
 import { CoinSize, CoinSizes, CoinTypeProps } from "./types";
 
-/**
- * @deprecated
- */
+// TODO: deprecate, replace with ZigCoinIcon
 const CoinIcon = ({ size = CoinSizes.Medium, name, coin, className = "" }: CoinTypeProps) => {
   const [src, setSrc] = useState(``);
 

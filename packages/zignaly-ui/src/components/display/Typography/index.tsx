@@ -2,9 +2,7 @@ import React from "react";
 import * as styled from "./styles";
 import { componentByVariants, TypographyProps } from "./types";
 
-/**
- * @deprecated
- */
+// TODO: deprecate, replace usages with ZigTypography
 function Typography({
   children,
   variant = "body1",

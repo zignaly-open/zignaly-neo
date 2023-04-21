@@ -3,6 +3,7 @@ import { Layout, ViewPort, Icon, Container, ButtonLoader, IconContainer } from "
 import { IconButtonProps } from "./types";
 import { LoaderTypes } from "components/display/Loader";
 
+// TODO: figure out what to do with this
 const IconButton = ({
   shrinkWrap,
   icon,

@@ -23,5 +23,4 @@ export type ZigSelectProps<T> = Omit<
   placeholder?: string;
   disabled?: boolean;
   menuPlacement?: MenuPlacement;
-  helperText?: string;
 };

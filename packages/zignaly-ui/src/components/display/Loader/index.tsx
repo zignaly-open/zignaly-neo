@@ -3,6 +3,7 @@ import { ReactElement } from "react";
 
 import { LoaderTypes, LoaderProps, componentsByType } from "./types";
 
+// TODO: deprecate, pull CircularProgress from ps2, add stories for CircularProgress
 function Loader({
   type = LoaderTypes.TAILSPIN,
   width,

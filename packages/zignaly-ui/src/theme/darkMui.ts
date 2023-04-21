@@ -126,10 +126,13 @@ const darkMui = createTheme({
           lineHeight: "20px",
           letterSpacing: "1.1px",
           fontWeight: 600,
+          padding: "10px 36px",
         },
         sizeLarge: {
           minHeight: "48px",
           minWidth: "110px",
+          fontWeight: 600,
+          fontSize: "13px",
         },
         sizeMedium: {
           minHeight: "36px",
@@ -195,49 +198,51 @@ const darkMui = createTheme({
       styleOverrides: {
         root: {
           letterSpacing: "0.55px",
+          color: dark.neutral100,
         },
         bigNumber: {
           fontSize: "26px",
           lineHeight: "40px",
-          color: dark.neutral000,
+          // color: dark.neutral000,
           fontWeight: "500",
         },
         h1: {
           fontSize: "22px",
           lineHeight: "36px",
-          color: dark.neutral000,
+          // color: dark.neutral000,
           fontWeight: "500",
         },
         h2: {
           fontSize: "18px",
           lineHeight: "28px",
-          color: dark.neutral000,
+          // color: dark.neutral000,
           fontWeight: "500",
         },
         h3: {
           fontSize: "15px",
           lineHeight: "24px",
-          color: dark.neutral000,
+          // color: dark.neutral000,
           fontWeight: "500",
         },
         h4: {
           fontSize: "13px",
           lineHeight: "20px",
-          color: dark.neutral000,
+          // color: dark.neutral000,
           fontWeight: "500",
         },
         h5: {
           fontSize: "11px",
           lineHeight: "16px",
-          color: dark.neutral000,
+          // color: dark.neutral000,
           fontWeight: "500",
         },
         h6: {
           fontSize: "10px",
           lineHeight: "14px",
-          color: dark.neutral000,
+          // color: dark.neutral000,
           fontWeight: "500",
         },
+        // todo: deprecate subtitle1 and 2
         subtitle1: {
           fontSize: "15px",
           lineHeight: "24px",
@@ -248,6 +253,11 @@ const darkMui = createTheme({
           lineHeight: "20px",
           color: dark.neutral200,
         },
+        caption: {
+          fontSize: "11px",
+          lineHeight: "16px",
+          color: dark.neutral200,
+        },
         body1: {
           fontSize: "15px",
           lineHeight: "24px",
@@ -256,7 +266,7 @@ const darkMui = createTheme({
         body2: {
           fontSize: "13px",
           lineHeight: "20px",
-          color: dark.neutral200,
+          color: dark.neutral300,
         },
       },
     },

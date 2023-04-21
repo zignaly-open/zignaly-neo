@@ -6,6 +6,7 @@ import { ReactElement } from "react";
 import * as styled from "./styles";
 import { ButtonProps } from "./types";
 
+// TODO: think of a good way to fix this
 function TextButton({
   caption = "Button",
   leftElement,

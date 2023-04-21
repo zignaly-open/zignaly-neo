@@ -14,6 +14,7 @@ import {
 import { useTheme } from "styled-components";
 import Theme from "theme/theme";
 
+// TODOL rename to ZigDropdown, add stories, move to inputs (questionable but I think it belonbgs there
 const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => JSX.Element = (
   {
     component,
