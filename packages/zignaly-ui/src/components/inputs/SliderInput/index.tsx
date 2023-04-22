@@ -13,6 +13,7 @@ import {
 } from "./styles";
 import { SliderInputProps, SliderModes } from "./types";
 import Typography from "components/display/Typography";
+import { useUpdateEffect } from "react-use";
 
 const SliderInput = ({
   className,
@@ -75,7 +76,7 @@ const SliderInput = ({
     };
   }, [enabled]);
 
-  useEffect(() => {
+  useUpdateEffect(() => {
     onChange(internalValue);
   }, [internalValue]);
 

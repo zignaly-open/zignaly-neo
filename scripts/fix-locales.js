@@ -80,7 +80,5 @@ function mkdir(path) {
 (async () => {
   const packagesPath = (p) => `${__dirname}/../packages/${p}/public/locales/`;
   mkdir(packagesPath('ps2') + testLocale);
-  mkdir(packagesPath('raffles-client') + testLocale);
   processFiles(getFiles(packagesPath('ps2') + 'en'));
-  processFiles(getFiles(packagesPath('raffles-client') + 'en'));
 })();

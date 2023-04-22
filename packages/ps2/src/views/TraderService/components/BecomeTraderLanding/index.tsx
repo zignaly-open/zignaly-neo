@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { Typography, ZigButton } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import {
   Layout,
   Header,
@@ -119,31 +119,31 @@ const BecomeTraderLanding: React.FC = () => {
   return (
     <Layout>
       <Header>
-        <Typography variant={'h1'} color={'neutral100'}>
+        <ZigTypography variant={'h1'} color={'neutral100'}>
           {t('header.title')}
-        </Typography>
+        </ZigTypography>
       </Header>
 
       <Sections>
         <Section>
           <Wrapper>
             <Side>
-              <Typography variant={'h2'} color={'neutral100'}>
+              <ZigTypography variant={'h2'} color={'neutral100'}>
                 {t('wrapper.title')}
-              </Typography>
+              </ZigTypography>
               <WrapperList>
                 <WrapperItem>
-                  <Typography variant={'body1'} color={'neutral300'}>
+                  <ZigTypography variant={'body1'} color={'neutral300'}>
                     {t('wrapper.list.item1')}
-                  </Typography>
+                  </ZigTypography>
                 </WrapperItem>
                 <WrapperItem>
-                  <Typography variant={'body1'} color={'neutral300'}>
+                  <ZigTypography variant={'body1'} color={'neutral300'}>
                     {t('wrapper.list.item2')}
-                  </Typography>
+                  </ZigTypography>
                 </WrapperItem>
                 <WrapperItem>
-                  <Typography variant={'body1'} color={'neutral300'}>
+                  <ZigTypography variant={'body1'} color={'neutral300'}>
                     <Trans i18nKey={'wrapper.list.item3'} t={t}>
                       <Link
                         underline={'hover'}
@@ -153,11 +153,12 @@ const BecomeTraderLanding: React.FC = () => {
                         target={'_blank'}
                       />
                     </Trans>
-                  </Typography>
+                  </ZigTypography>
                 </WrapperItem>
               </WrapperList>
               <WrapperAction>
                 <ZigButton
+                  ctaId={'offer-service__create-service'}
                   id={'offer-service__create-service'}
                   size={'large'}
                   variant={'contained'}
@@ -176,12 +177,12 @@ const BecomeTraderLanding: React.FC = () => {
             <InfoBarList itemsLength={infoBarItems.length}>
               {infoBarItems.map((item, index) => (
                 <InfoBarListItem key={`--info-bar-item-${index.toString()}`}>
-                  <Typography variant={'bigNumber'} color={'neutral100'}>
+                  <ZigTypography variant={'bigNumber'} color={'neutral100'}>
                     {item.title}
-                  </Typography>
-                  <Typography variant={'body1'} color={'neutral400'}>
+                  </ZigTypography>
+                  <ZigTypography variant={'body1'} color={'neutral400'}>
                     {item.description.toUpperCase()}
-                  </Typography>
+                  </ZigTypography>
                 </InfoBarListItem>
               ))}
             </InfoBarList>
@@ -189,9 +190,9 @@ const BecomeTraderLanding: React.FC = () => {
         </InfoBar>
 
         <Section>
-          <Typography variant={'h2'} color={'neutral100'}>
+          <ZigTypography variant={'h2'} color={'neutral100'}>
             {t('howWorks.title')}
-          </Typography>
+          </ZigTypography>
 
           <StepList itemsLength={howWorksItems.length}>
             {howWorksItems.map((howWorkItem, index) => (
@@ -199,16 +200,16 @@ const BecomeTraderLanding: React.FC = () => {
                 <Step>
                   <Box>
                     <Center>
-                      <Typography variant={'h2'} color={'neutral100'}>
+                      <ZigTypography variant={'h2'} color={'neutral100'}>
                         {howWorkItem.title.toUpperCase()}
-                      </Typography>
+                      </ZigTypography>
                       <StepImage
                         src={'/images/service-provider/' + howWorkItem.image}
                       />
                     </Center>
-                    <Typography variant={'body2'} color={'neutral400'}>
+                    <ZigTypography variant={'body2'} color={'neutral400'}>
                       {howWorkItem.description}
-                    </Typography>
+                    </ZigTypography>
                   </Box>
                 </Step>
                 {index < howWorksItems.length - 1 && <Separator />}
@@ -218,9 +219,9 @@ const BecomeTraderLanding: React.FC = () => {
         </Section>
 
         <Section>
-          <Typography variant={'h2'} color={'neutral100'}>
+          <ZigTypography variant={'h2'} color={'neutral100'}>
             {t('features.title')}
-          </Typography>
+          </ZigTypography>
 
           <FeaturesList itemsLength={featuresItems.length}>
             {featuresItems.map((feature, index) => (
@@ -229,12 +230,16 @@ const BecomeTraderLanding: React.FC = () => {
                   src={'/images/service-provider/' + feature.image}
                 />
                 <FeatureData>
-                  <Typography variant={'h3'} color={'neutral200'}>
+                  <ZigTypography variant={'h3'} color={'neutral200'}>
                     {feature.title}
-                  </Typography>
-                  <Typography variant={'body2'} color={'neutral400'}>
+                  </ZigTypography>
+                  <ZigTypography
+                    variant={'body2'}
+                    color={'neutral400'}
+                    sx={{ pl: '10px' }}
+                  >
                     {feature.description}
-                  </Typography>
+                  </ZigTypography>
                 </FeatureData>
               </Feature>
             ))}

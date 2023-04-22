@@ -237,7 +237,11 @@ export default function ZigTable<T extends object>({
                   <ZigTypography whiteSpace="nowrap" color="neutral300">
                     out of
                   </ZigTypography>
-                  <ZigTypography color="neutral100" fontWeight={600}>
+                  <ZigTypography
+                    color="neutral100"
+                    fontWeight={600}
+                    id={prefixId && `${prefixId}-table__total-page-count`}
+                  >
                     {table.getPageCount() || 1}
                   </ZigTypography>
                 </>
