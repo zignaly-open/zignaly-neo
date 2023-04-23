@@ -14,8 +14,8 @@ describe("components/display/CoinIcon", () => {
   describe("stories", () => {
     it("should be rendered image and checks use props", () => {
       const src = `https://res.cloudinary.com/zignaly/image/upload/c_scale,w_${
-        sizes[CoinSizes.MEDIUM]
-      },h_${sizes[CoinSizes.MEDIUM]},r_max/coins-binance/ETH`;
+        sizes[CoinSizes.Medium]
+      },h_${sizes[CoinSizes.Medium]},r_max/coins-binance/ETH`;
       const renderEtherCoin = render(<EtherCoinIconStory />);
       const etherCoinIconImage = renderEtherCoin.getByRole("img");
       expect(etherCoinIconImage).toHaveAttribute("src", src);
@@ -25,8 +25,8 @@ describe("components/display/CoinIcon", () => {
 
     it("should be rendered image fallback and checks use props", () => {
       const srcFallback = `https://res.cloudinary.com/zignaly/image/upload/c_scale,w_${
-        sizes[CoinSizes.MEDIUM]
-      },h_${sizes[CoinSizes.MEDIUM]},r_max/coins-binance/BTC`;
+        sizes[CoinSizes.Medium]
+      },h_${sizes[CoinSizes.Medium]},r_max/coins-binance/BTC`;
       const renderEtherCoinWithFallBack = render(<EtherCoinIconStory coin={"SCAQQFS"} />);
       const etherCoinIconImageFallBack = renderEtherCoinWithFallBack.getByRole("img");
       fireEvent.error(etherCoinIconImageFallBack);

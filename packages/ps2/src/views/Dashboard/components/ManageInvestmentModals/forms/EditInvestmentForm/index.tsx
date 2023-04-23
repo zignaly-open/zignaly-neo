@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { NumericFormat } from 'react-number-format';
 import { useTheme } from '@mui/material';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, FieldErrorsImpl, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import {
@@ -18,6 +18,7 @@ import {
   Button,
   CoinIcon,
   InputAmountAdvanced,
+  InputAmountAdvancedValueType,
   SliderInput,
   TextButton,
   Typography,
@@ -169,7 +170,14 @@ function EditInvestmentForm({
             showUnit={true}
             placeholder={'0.0'}
             tokens={[coin]}
-            error={isDirty && t(errors?.amountTransfer?.value?.message)}
+            error={
+              isDirty &&
+              t(
+                (
+                  errors?.amountTransfer as FieldErrorsImpl<InputAmountAdvancedValueType>
+                )?.value?.message,
+              )
+            }
           />
         </InputContainer>
       )}

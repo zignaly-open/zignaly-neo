@@ -1,4 +1,4 @@
-import Theme from '@zignaly-open/ui/lib/theme/theme';
+import { ThemeType } from '@zignaly-open/ui';
 import { FilterKeys, TransactionStateType } from 'apis/wallet/types';
 
 export const transactionStateName: {
@@ -10,7 +10,7 @@ export const transactionStateName: {
 };
 
 export const transactionStateColor: {
-  [key in TransactionStateType]: keyof Theme;
+  [key in TransactionStateType]: keyof ThemeType;
 } = {
   [TransactionStateType.COMPLETED]: 'greenGraph',
   [TransactionStateType.PENDING]: 'yellow',

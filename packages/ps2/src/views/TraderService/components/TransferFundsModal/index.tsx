@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldErrorsImpl, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NumericFormat } from 'react-number-format';
 import BigNumber from 'bignumber.js';
@@ -19,6 +19,7 @@ import {
   Button,
   InputAmountAdvanced,
   IconButton,
+  InputAmountAdvancedValueType,
 } from '@zignaly-open/ui';
 import { TransferFormData, TransferModalProps } from './types';
 import { TransferModalValidation } from './validation';
@@ -122,7 +123,14 @@ function TransferModal({
               placeholder={t('transfer.placeholder')}
               fullWidth={true}
               maxLength={26}
-              error={isDirty && t(errors?.amountValue?.value?.message)}
+              error={
+                isDirty &&
+                t(
+                  (
+                    errors?.amountValue as FieldErrorsImpl<InputAmountAdvancedValueType>
+                  )?.value?.message,
+                )
+              }
               name={'amountValue'}
               label={t(
                 fromTradingAccount

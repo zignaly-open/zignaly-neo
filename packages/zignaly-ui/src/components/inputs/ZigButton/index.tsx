@@ -29,7 +29,7 @@ const ZigButton = ({ active, tooltip, ctaId, color, ...props }: ZigButtonProps) 
   );
 };
 
-export const ZigButtonGroup: React.FC = styled(ButtonGroup)`
+export const ZigButtonGroup = styled(ButtonGroup)`
   .MuiButton-root {
     border-right-width: 0 !important;
 
@@ -47,6 +47,6 @@ export const ZigButtonGroup: React.FC = styled(ButtonGroup)`
       border-color: rgba(255, 255, 255, 0.1);
     }
   }
-`;
+` as typeof ButtonGroup;
 
 export default ZigButton as typeof LoadingButton & typeof ZigButton;
