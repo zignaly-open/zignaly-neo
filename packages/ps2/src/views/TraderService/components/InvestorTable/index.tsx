@@ -21,7 +21,6 @@ import {
   TraderServiceManagement,
 } from '../../../../apis/service/types';
 import ConnectionStateLabel from '../ConnectionStateLabel';
-import { YesNo } from './atoms';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { Box } from '@mui/material';
 
@@ -104,10 +103,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       columnHelper.accessor('successFee', {
         header: t('tableHeader.successFee'),
         cell: (props) => `${props.getValue()}%`,
-      }),
-      columnHelper.accessor('payZig', {
-        header: t('tableHeader.feesZIG'),
-        cell: (props) => <YesNo value={props.getValue()} />,
       }),
       columnHelper.accessor('accountType', {
         header: t('tableHeader.status'),
