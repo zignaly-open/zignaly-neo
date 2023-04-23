@@ -128,7 +128,7 @@ function AuthVerifyModal({
   return (
     <ZModal
       {...props}
-      close={emailUnconfirmed ? null : onClickClose}
+      close={onClickClose}
       title={texts.title}
       titleAlign='center'
     >
