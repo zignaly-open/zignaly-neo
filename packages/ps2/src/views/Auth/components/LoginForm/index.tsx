@@ -104,7 +104,7 @@ const LoginForm: React.FC = () => {
             size={'xlarge'}
             loading={loggingIn}
           />
-          <ZigTypography variant={'body1'} align={'center'}>
+          <ZigTypography variant={'body2'} align={'center'}>
             <Trans i18nKey={'login-form.link.signup'} t={t}>
               <Link
                 id={'login__signup'}
