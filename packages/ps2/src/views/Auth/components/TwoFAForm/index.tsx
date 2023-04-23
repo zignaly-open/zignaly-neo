@@ -14,7 +14,7 @@ function TwoFAForm({
   return (
     <Layout>
       <Field>
-        <ZigTypography>
+        <ZigTypography id={'twoFA-modal__description'}>
           {t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-description')}
         </ZigTypography>
         <InputCode
