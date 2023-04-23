@@ -23,8 +23,6 @@ This will install all dependencies and link projects together. Next, run instruc
 * `yarn test` - you guessed it - runs `yarn test` for all packages.
 * `yarn storybook` runs zignaly-ui (`@zignaly-open/ui`) storybook. More on that later.
 * `yarn ps2` runs Webapp Neo <sup>2</sup>. Needs `.env` config.
-* `yarn raffles-client` runs Raffles Client. Needs `.env` config.
-* `yarn raffles-server` runs Raffles Server. Needs `.env` config and a PostgreSQL instance
 * `yarn build` builds all repos (needed for UI repos)
 
 ### More FYIs
@@ -104,7 +102,7 @@ An auto-deploy would trigger when you merge to master.
 
 ### Deploy to prod
 
-Create a release on Github with a `release-ps2-{date}-{description}` tag to deploy ps2, a `release-zigbids-{date}-{description}` tag to deploy zigbids. Like, `release-ps2-20121222-prevent-apocalypse`. Alternatively you can just push that tag directly but that would be considered *NOT COOL*.
+Create a release on Github with a `release-ps2-{date}-{description}` tag to deploy ps2. Like, `release-ps2-20121222-prevent-apocalypse`. Alternatively you can just push that tag directly but that would be considered *NOT COOL*.
 
 
 ## Packages
@@ -120,24 +118,6 @@ More aliases than your average SoundCloud rapper.
 A replacement for the zignaly-webapp-neo, created with [CRA](https://github.com/facebook/create-react-app)
 , [Zignaly UI](https://www.npmjs.com/package/@zignaly-open/ui)
 and [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) for State management
-
-### Raffles Client aka `@zignaly-open/raffles-client`
-
-A React-based app for Zignaly Raffles. Please adjust `packages/raffles-client/.env` file and run it
-with `yarn raffles-client`. This will start all necessary watchers and you will be able to make changes to Zignaly Ui
-that would be automatically reflected.
-
-and open [http://localhost:3000](http://localhost:3000).
-
-### Raffles Server aka `@zignaly-open/raffles-server`
-
-An Apollo GraphQL-based app for Zignaly Raffles. Please adjust `packages/raffles-server/.env`, start the PostgreSQL
-server (details in `packages/raffles-server/README.md`) and run it
-with `yarn raffles-server`. Info about the fixtures is also present in that readme file.
-
-### Raffles Shared aka `@zignaly-open/raffles-shared`
-
-Some common stuff for Raffles, nothing to write home about.
 
 ## Some guidelines
 

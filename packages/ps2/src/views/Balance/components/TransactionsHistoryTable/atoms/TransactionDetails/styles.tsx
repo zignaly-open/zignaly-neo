@@ -27,4 +27,4 @@ export const TypographyPanelName = styled((props) => (
   && {
     color: rgb(193, 193, 200);
   }
-`;
+` as typeof ZigTypography;

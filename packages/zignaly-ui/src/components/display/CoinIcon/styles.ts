@@ -1,13 +1,13 @@
 import styled from "styled-components";
-import { CoinSizes } from "./types";
+import { CoinSize, CoinSizes } from "./types";
 
 export const sizes = {
-  [CoinSizes.SMALL]: 32,
-  [CoinSizes.MEDIUM]: 36,
-  [CoinSizes.LARGE]: 40,
+  [CoinSizes.Small]: 32,
+  [CoinSizes.Medium]: 36,
+  [CoinSizes.Large]: 40,
 };
 
-export const Layout = styled.div<{ size: CoinSizes }>`
+export const Layout = styled.div<{ size: CoinSize }>`
   overflow: hidden;
   border-radius: 50%;
 

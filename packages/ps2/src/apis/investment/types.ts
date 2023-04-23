@@ -1,4 +1,4 @@
-import type { AxisFormat } from '@zignaly-open/ui/lib/components/display/ZigChart/types';
+import { ZigChartAxisFormatType } from '@zignaly-open/ui';
 
 export interface InvestmentState {
   selectedInvestment?: InvestmentServiceDetails;
@@ -47,7 +47,7 @@ export type Investment = InvestmentServiceDetails & {
   pendingUSDT: string;
   version: number;
   accountId: string;
-  sparklines: AxisFormat[] | number[];
+  sparklines: ZigChartAxisFormatType[] | number[];
   createdAt: string;
   updatedAt: string;
   periodsLc: string;

@@ -1,16 +1,16 @@
 export const COIN_SIZES = {
-  SMALL: "small",
-  MEDIUM: "medium",
-  LARGE: "large",
+  Small: "small",
+  Medium: "medium",
+  Large: "large",
 } as const;
 
 type CoinSizesKeys = keyof typeof COIN_SIZES;
 export type CoinSizes = typeof COIN_SIZES[CoinSizesKeys];
 
 export const sizes = {
-  [COIN_SIZES.SMALL]: 24,
-  [COIN_SIZES.MEDIUM]: 36,
-  [COIN_SIZES.LARGE]: 42,
+  [COIN_SIZES.Small]: 24,
+  [COIN_SIZES.Medium]: 36,
+  [COIN_SIZES.Large]: 42,
 };
 
 export type ZIGCoinIconProps = {

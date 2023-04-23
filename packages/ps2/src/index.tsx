@@ -1,10 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './util/i18next';
 import App from './App';
+import './util/i18next';
 import reportWebVitals from './reportWebVitals';
+import * as ReactDOMClient from 'react-dom/client';
 
-ReactDOM.render(
+const container = document.getElementById('root');
+const root = ReactDOMClient.createRoot(container!);
+
+// Initial render: Render an element to the root.
+root.render(
   <React.StrictMode>
     <>
       <React.Suspense fallback={null}>
@@ -12,7 +16,6 @@ ReactDOM.render(
       </React.Suspense>
     </>
   </React.StrictMode>,
-  document.querySelector('#root') as HTMLElement,
 );
 
 // If you want to start measuring performance in your app, pass a function

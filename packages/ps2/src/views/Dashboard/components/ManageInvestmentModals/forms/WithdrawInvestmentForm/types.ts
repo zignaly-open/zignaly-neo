@@ -1,5 +1,5 @@
-import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
+import { InputAmountAdvancedValueType } from '@zignaly-open/ui';
 
 export type WithdrawInvestmentFormFormData = {
-  amountTransfer?: InputAmountAdvancedValue;
+  amountTransfer?: InputAmountAdvancedValueType;
 };

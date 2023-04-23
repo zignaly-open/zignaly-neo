@@ -1,9 +1,9 @@
 import { DialogProps } from '@mui/material/Dialog';
-import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
+import { InputAmountAdvancedValueType } from '@zignaly-open/ui';
 
 export type TransferModalProps = {
   close: () => void;
   serviceId: string;
 } & DialogProps;
 
-export type TransferFormData = { amountValue: InputAmountAdvancedValue };
+export type TransferFormData = { amountValue: InputAmountAdvancedValueType };

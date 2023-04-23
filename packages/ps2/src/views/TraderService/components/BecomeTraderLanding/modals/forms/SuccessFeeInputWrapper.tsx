@@ -4,10 +4,10 @@ import { ZigAlertMessage, ZigTypography } from '@zignaly-open/ui';
 import { SuccessFieldWrapper, SuccessFieldWrapperShit } from '../atoms';
 import { ZIGNALY_PROFIT_FEE } from '../../../../../../util/constants';
 
-const SuccessFeeInputWrapper: React.FC<{ value: number | string }> = ({
-  children,
-  value,
-}) => {
+const SuccessFeeInputWrapper: React.FC<{
+  children: JSX.Element;
+  value: number | string;
+}> = ({ children, value }) => {
   const { t } = useTranslation('service');
   const feeWeCharge = !value
     ? 0
