@@ -36,45 +36,51 @@ if (
   });
 }
 
+export const WrappedInProviders: React.FC = ({ children }) => (
+  <Provider store={store}>
+    <ThemeInheritorStyled theme={dark}>
+      <ThemeInheritorMui theme={theme}>
+        <ThemeProviderMui theme={theme}>
+          <GlobalStyle />
+          <ToastContainer
+            position='top-right'
+            autoClose={5000}
+            hideProgressBar
+            closeOnClick
+            pauseOnFocusLoss
+            draggable
+            closeButton={false}
+            pauseOnHover
+            theme='dark'
+          />
+          <PersistGate persistor={persistor} loading={<CenteredLoader />}>
+            <BrowserRouter>
+              <ModalProvider>{children}</ModalProvider>
+            </BrowserRouter>
+          </PersistGate>
+        </ThemeProviderMui>
+      </ThemeInheritorMui>
+    </ThemeInheritorStyled>
+  </Provider>
+);
+
 function App() {
   useReferralCookie();
 
   return (
-    <Provider store={store}>
-      <ThemeInheritorStyled theme={dark}>
-        <ThemeInheritorMui theme={theme}>
-          <ThemeProviderMui theme={theme}>
-            <GlobalStyle />
-            <ToastContainer
-              position='top-right'
-              autoClose={5000}
-              hideProgressBar
-              closeOnClick
-              pauseOnFocusLoss
-              draggable
-              closeButton={false}
-              pauseOnHover
-              theme='dark'
-            />
-            <PersistGate persistor={persistor} loading={<CenteredLoader />}>
-              <BrowserRouter>
-                <ModalProvider>
-                  <Header />
-                  <Tracker />
-                  <UpdateChecker />
-                  <DateLocaleFixer />
-                  <ChartGradients />
-                  <Suspense fallback={null}>
-                    <Router />
-                  </Suspense>
-                  <BottomNavigation />
-                </ModalProvider>
-              </BrowserRouter>
-            </PersistGate>
-          </ThemeProviderMui>
-        </ThemeInheritorMui>
-      </ThemeInheritorStyled>
-    </Provider>
+    <WrappedInProviders>
+      <>
+        <Header />
+        <Tracker />
+        <UpdateChecker />
+        <DateLocaleFixer />
+        <ChartGradients />
+        <Suspense fallback={null}>
+          <Router />
+        </Suspense>
+        <BottomNavigation />
+      </>
+    </WrappedInProviders>
   );
 }
 
