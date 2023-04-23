@@ -39,6 +39,7 @@ const PercentageIndicator = ({
                 suffix={"%"}
                 decimalScale={2}
                 thousandSeparator={","}
+                id={id}
               />
             </ValueIndicator>
             {!isZero && (
@@ -71,6 +72,7 @@ const PercentageIndicator = ({
                 thousandSeparator={","}
                 decimalScale={stableCoinOperative ? 2 : 8}
                 fixedDecimalScale={stableCoinOperative}
+                id={id}
               />
             </ValueIndicator>
           </Inline>
@@ -88,6 +90,7 @@ const PercentageIndicator = ({
                 thousandSeparator={","}
                 decimalScale={stableCoinOperative ? 2 : 8}
                 fixedDecimalScale={stableCoinOperative}
+                id={id}
               />
             </ValueIndicator>
           </Inline>
@@ -97,7 +100,7 @@ const PercentageIndicator = ({
   };
 
   return (
-    <Layout id={id}>
+    <Layout>
       <Container>
         <Tooltip title={labelTooltip}>
           <Row>

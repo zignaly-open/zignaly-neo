@@ -34,7 +34,7 @@ import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { Add } from '@mui/icons-material';
-import { DropDownHandle } from '@zignaly-open/ui/lib/components/display/DropDown/types';
+import { DropDownHandleType } from '@zignaly-open/ui';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme();
@@ -48,7 +48,7 @@ function AccountMenu(): React.ReactElement | null {
   const location = useLocation();
   const { showModal } = useZModal();
   const md = useMediaQuery(theme.breakpoints.up('sm'));
-  const dropDownRef = useRef<DropDownHandle>(null);
+  const dropDownRef = useRef<DropDownHandleType>(null);
   const onClose = useCallback(() => {
     dropDownRef.current?.closeDropDown();
   }, [dropDownRef]);

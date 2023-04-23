@@ -1,5 +1,5 @@
 import { ExchangeType } from '../../../../../../apis/user/types';
-import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
+import { InputAmountAdvancedValueType } from '@zignaly-open/ui';
 
 export type ServiceFormData = {
   serviceType: ExchangeType;
@@ -10,5 +10,5 @@ export type ServiceFormData = {
 
 export type ServiceInvestType = {
   profitPercentage: number;
-  amountToInvest: InputAmountAdvancedValue & { min: number };
+  amountToInvest: InputAmountAdvancedValueType & { min: number };
 };

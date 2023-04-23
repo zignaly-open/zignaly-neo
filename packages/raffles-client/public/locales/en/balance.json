@@ -1,7 +1,0 @@
-{
-  "success": "Success! Your balance will be updated as soon as the transaction is confirmed",
-  "your-balance": "Your balance: <0>{{balance}}</0>",
-  "buy-bids": "Buy bids",
-  "buy-x-bids": "Buy {{count}} bids",
-  "exit": "exit"
-}

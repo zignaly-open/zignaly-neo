@@ -1,7 +1,8 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import CoinIcon, { CoinSizes } from "./index";
+import CoinIcon from "./index";
+import { CoinSizes } from "./types";
 
 export default {
   title: "Display/CoinIcon",
@@ -9,8 +10,8 @@ export default {
   argTypes: {
     size: {
       control: "select",
-      default: CoinSizes.SMALL,
-      options: [CoinSizes.SMALL, CoinSizes.MEDIUM, CoinSizes.LARGE],
+      default: CoinSizes.Small,
+      options: [CoinSizes.Small, CoinSizes.Medium, CoinSizes.Large],
     },
     name: {
       control: "text",
@@ -26,20 +27,20 @@ const Template: ComponentStory<typeof CoinIcon> = (args) => <CoinIcon {...args} 
 export const EtherCoinIconStory = Template.bind({});
 EtherCoinIconStory.args = {
   name: "Ethereum",
-  size: CoinSizes.MEDIUM,
+  size: CoinSizes.Medium,
   coin: "ETH",
 };
 
 export const BitcoinCoinIconStory = Template.bind({});
 BitcoinCoinIconStory.args = {
   name: "Bitcoin",
-  size: CoinSizes.LARGE,
+  size: CoinSizes.Large,
   coin: "BTC",
 };
 
 export const TetherCoinIconStory = Template.bind({});
 TetherCoinIconStory.args = {
   name: "Tether",
-  size: CoinSizes.SMALL,
+  size: CoinSizes.Small,
   coin: "USDT",
 };

@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, FieldErrorsImpl, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import {
   ErrorMessage,
@@ -9,6 +9,7 @@ import {
   ZigInput,
   ZigTypography,
   ZigCoinIcon,
+  InputAmountAdvancedValueType,
 } from '@zignaly-open/ui';
 import { WalletWithdrawModalProps, WithdrawFormData } from './types';
 import { Box, Grid, Link } from '@mui/material';
@@ -272,7 +273,11 @@ function WalletWithdrawForm({
                     },
                   ]}
                   error={
-                    t(errors?.amount?.value?.message) ||
+                    t(
+                      (
+                        errors?.amount as FieldErrorsImpl<InputAmountAdvancedValueType>
+                      )?.value?.message,
+                    ) ||
                     (notEnoughZig && (
                       <>
                         {t('notEnoughZig')}&nbsp;

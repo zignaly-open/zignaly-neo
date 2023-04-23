@@ -1,5 +1,5 @@
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, FieldErrorsImpl, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { Field, Form } from './styles';
@@ -7,6 +7,7 @@ import {
   Button,
   CoinIcon,
   InputAmountAdvanced,
+  InputAmountAdvancedValueType,
   InputText,
   SliderInput,
   Typography,
@@ -145,7 +146,17 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                 showUnit={true}
                 placeholder={'0.0'}
                 tokens={[coin]}
-                error={isDirty && t(errors?.amountTransfer?.value?.message)}
+                error={
+                  isDirty &&
+                  t(
+                    (
+                      errors?.amountTransfer as FieldErrorsImpl<InputAmountAdvancedValueType>
+                    )?.value?.message,
+                  )
+                }
+                и
+                за
+                справками
               />
 
               <Box>

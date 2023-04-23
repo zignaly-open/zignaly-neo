@@ -180,3 +180,9 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
 };
 
 export default React.forwardRef(DropDown);
+
+export type {
+  DropDownProps as DropDownProps,
+  DropDownHandle as DropDownHandleType,
+  DropDownOption as DropDownOptionType,
+} from "./types";

@@ -1,23 +1,23 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { sizes, Image, Layout } from "./styles";
 
-import { CoinSizes, CoinTypeProps } from "./types";
+import { CoinSize, CoinSizes, CoinTypeProps } from "./types";
 
 /**
  * @deprecated
  */
-const CoinIcon = ({ size = CoinSizes.MEDIUM, name, coin, className = "" }: CoinTypeProps) => {
+const CoinIcon = ({ size = CoinSizes.Medium, name, coin, className = "" }: CoinTypeProps) => {
   const [src, setSrc] = useState(``);
 
   const srcFallBack = `https://res.cloudinary.com/zignaly/image/upload/c_scale,w_${
-    sizes[size as CoinSizes]
-  },h_${sizes[size as CoinSizes]},r_max/coins-binance/BTC`;
+    sizes[size as CoinSize]
+  },h_${sizes[size as CoinSize]},r_max/coins-binance/BTC`;
 
   const onError = useCallback(() => setSrc(srcFallBack), []);
   useEffect(() => {
     setSrc(
-      `https://res.cloudinary.com/zignaly/image/upload/c_scale,w_${sizes[size as CoinSizes]},h_${
-        sizes[size as CoinSizes]
+      `https://res.cloudinary.com/zignaly/image/upload/c_scale,w_${sizes[size as CoinSize]},h_${
+        sizes[size as CoinSize]
       },r_max/coins-binance/${coin}`,
     );
   }, [coin]);
@@ -31,5 +31,4 @@ const CoinIcon = ({ size = CoinSizes.MEDIUM, name, coin, className = "" }: CoinT
   );
 };
 
-export { CoinSizes };
 export default CoinIcon;

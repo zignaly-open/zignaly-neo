@@ -1,4 +1,4 @@
-import Theme from '@zignaly-open/ui/lib/theme/theme';
+import { ThemeType } from '@zignaly-open/ui';
 import { TransactionStateType } from 'apis/coin/types';
 
 export const transactionStateName: {
@@ -12,7 +12,7 @@ export const transactionStateName: {
 };
 
 export const transactionStateColor: {
-  [key in TransactionStateType]: keyof Theme;
+  [key in TransactionStateType]: keyof ThemeType;
 } = {
   [TransactionStateType.COMPLETED]: 'greenGraph',
   [TransactionStateType.SENT]: 'greenGraph',
