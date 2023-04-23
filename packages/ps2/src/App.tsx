@@ -36,7 +36,9 @@ if (
   });
 }
 
-export const WrappedInProviders: React.FC = ({ children }) => (
+export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
+  children,
+}) => (
   <Provider store={store}>
     <ThemeInheritorStyled theme={dark}>
       <ThemeInheritorMui theme={theme}>
