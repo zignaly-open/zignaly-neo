@@ -1,5 +1,4 @@
 interface Theme {
-  white: string;
   neutral800: string;
   neutral750: string;
   neutral700: string;
@@ -19,8 +18,7 @@ interface Theme {
   links: string;
   yellow: string;
   red: string;
-  dropDownBackground: string;
-  darkSpecial: string;
+
   almostWhite: string;
 }
 

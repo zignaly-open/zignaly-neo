@@ -344,7 +344,7 @@ const renderFocusedProps = (props: LayoutProps) => `
     ${styledIf(
       props.isFocused,
       ` 
-      background: ${props.theme.dropDownBackground};      
+      background: #12152C;      
       padding: 2px;
       border-radius: 4px 4px 0 0;
              
@@ -354,8 +354,8 @@ const renderFocusedProps = (props: LayoutProps) => `
       }
              
       ${Container} {
-        background: ${props.theme.dropDownBackground};
-        border: 1px solid ${props.theme.dropDownBackground} !important;
+        background: #12152C;
+        border: 1px solid #12152C !important;
               
         &:before {
           opacity: 0 !important;
