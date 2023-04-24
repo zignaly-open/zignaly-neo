@@ -9,6 +9,7 @@ import { ChartGradients } from "../src";
 import { withTests } from "@storybook/addon-jest";
 import results from "../.jest-test-results.json";
 import darkMui from "../src/theme/darkMui";
+import { Container } from "@mui/system";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -57,7 +58,7 @@ export const parameters = {
         <ThemeProviderMui theme={darkMui}>
           <GlobalStyle darkMode />
           <ChartGradients />
-          {children}
+          <Container sx={{ p: 5 }}>{children}</Container>
         </ThemeProviderMui>
       </ThemeProvider>
     ),
