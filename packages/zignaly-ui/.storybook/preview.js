@@ -29,18 +29,12 @@ const withStyledTheme = (storyFn) => {
   );
 };
 
-const styledThemed = makeDecorator({
-  name: "styled-theme",
-  wrapper: withStyledTheme,
-});
-
-addDecorator(styledThemed);
-
 export const decorators = [
   withTests({
     results,
     filesExt: "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
   }),
+  withStyledTheme,
 ];
 
 export const parameters = {
@@ -52,6 +46,7 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  backgrounds: { disable: true },
   docs: {
     container: ({ children }) => (
       <ThemeProvider theme={dark}>
