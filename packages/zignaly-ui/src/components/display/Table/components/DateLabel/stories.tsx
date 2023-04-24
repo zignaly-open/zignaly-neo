@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import DateLabel from "./index";
 
 export default {
-  title: "Display/Table/Components/DateLabel",
+  title: "Display/___FIXME____Table/Components/DateLabel",
   component: DateLabel,
   argTypes: {
     date: {

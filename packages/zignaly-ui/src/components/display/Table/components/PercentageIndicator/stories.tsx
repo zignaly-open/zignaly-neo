@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import PercentageIndicator from "./index";
 
 export default {
-  title: "Display/Table/Components/PercentageIndicator",
+  title: "Display/___FIXME____Table/Components/PercentageIndicator",
   component: PercentageIndicator,
 } as ComponentMeta<typeof PercentageIndicator>;
 

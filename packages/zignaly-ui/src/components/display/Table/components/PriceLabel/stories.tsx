@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import PriceLabel from "./index";
 
 export default {
-  title: "Display/Table/Components/PriceLabel",
+  title: "Display/___FIXME____Table/Components/PriceLabel",
   component: PriceLabel,
   argTypes: {
     value: {

@@ -14,7 +14,6 @@ const dark: Theme = {
   neutral150: "#BAC1E4",
   neutral100: "#C1C1C8",
   neutral000: "#E1E9F0",
-
   secondary: "#515AAC",
   highlighted: "#7682F7",
   redGraphOrError: "#CC3993",

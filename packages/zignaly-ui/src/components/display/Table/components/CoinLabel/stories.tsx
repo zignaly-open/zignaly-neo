@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import CoinLabel from "./index";
 
 export default {
-  title: "Display/Table/Components/CoinLabel",
+  title: "Display/___FIXME____Table/Components/CoinLabel",
   component: CoinLabel,
   argTypes: {
     name: {
