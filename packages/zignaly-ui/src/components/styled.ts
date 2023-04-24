@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import Typography from "./display/Typography";
+import ZigTypography from "./display/ZigTypography";
 
 export const ButtonGroup = styled.div`
   display: grid;
@@ -22,7 +22,7 @@ export const PageContainer = styled(MarginContainer)`
 `;
 
 // TODO: replace with proper styled comp usages instead of classes
-export const ValueIndicator = styled(Typography)<any>`
+export const ValueIndicator = styled(ZigTypography)<any>`
   display: inline;
   font-size: 15px !important;
   line-height: 24px !important;

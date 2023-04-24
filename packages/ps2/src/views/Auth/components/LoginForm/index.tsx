@@ -7,7 +7,7 @@ import { LoginValidation } from './validations';
 import { useAuthenticate } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
-import { Button, TextButton, Typography, ZigInput } from '@zignaly-open/ui';
+import { Button, TextButton, ZigTypography, ZigInput } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
 import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
@@ -45,7 +45,7 @@ const LoginForm: React.FC = () => {
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
       <TitleHead>
-        <Typography variant={'h2'}>{t('log-in-title')}</Typography>
+        <ZigTypography variant={'h2'}>{t('log-in-title')}</ZigTypography>
       </TitleHead>
       <Form onSubmit={handleSubmit(submit)}>
         <Controller

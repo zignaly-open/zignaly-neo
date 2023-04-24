@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { PriceLabel, Typography } from '@zignaly-open/ui';
+import { PriceLabel } from '@zignaly-open/ui';
 
 export const Layout = styled('div')`
   display: flex;
@@ -106,17 +106,6 @@ export const MiddleContainer = styled('div')`
 
 export const InlinePriceLabel = styled(PriceLabel)`
   display: inline-block;
-`;
-
-export const LabelHardDisc = styled(Typography)`
-  margin: 34px 0 16px;
-`;
-
-export const LineSeparator = styled('div')`
-  margin-top: 18px;
-  height: 1px;
-  width: 100%;
-  background: ${({ theme }) => theme.palette.neutral600};
 `;
 
 export const TradingFunds = styled('div')`

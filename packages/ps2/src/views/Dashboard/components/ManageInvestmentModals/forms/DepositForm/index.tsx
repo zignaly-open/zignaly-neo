@@ -9,7 +9,6 @@ import {
   ZignalyQRCode,
   ZigSelect,
   CloneIcon,
-  Typography,
   Loader,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -160,36 +159,60 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               flexDirection: 'column',
             }}
           >
-            <Typography variant='body2' color='neutral200' weight='medium'>
+            <ZigTypography
+              variant='body2'
+              color='neutral200'
+              fontWeight='medium'
+            >
               {t('balances.total')}{' '}
-              <Typography variant='body2' color='neutral000' weight='medium'>
+              <ZigTypography
+                variant='body2'
+                color='neutral000'
+                fontWeight='medium'
+              >
                 <NumericFormat
                   displayType={'text'}
                   value={coinObject?.balance ?? ''}
                 />
-              </Typography>{' '}
+              </ZigTypography>{' '}
               {coin ?? ''}
-            </Typography>
-            <Typography variant='body2' color='neutral200' weight='medium'>
+            </ZigTypography>
+            <ZigTypography
+              variant='body2'
+              color='neutral200'
+              fontWeight='medium'
+            >
               {t('balances.balanceLocked')}{' '}
-              <Typography variant='body2' color='neutral000' weight='medium'>
+              <ZigTypography
+                variant='body2'
+                color='neutral000'
+                fontWeight='medium'
+              >
                 <NumericFormat
                   value={coinObject?.inOrders ?? ''}
                   displayType={'text'}
                 />
-              </Typography>{' '}
+              </ZigTypography>{' '}
               {coin ?? ''}
-            </Typography>
-            <Typography variant='body2' color='neutral200' weight='medium'>
+            </ZigTypography>
+            <ZigTypography
+              variant='body2'
+              color='neutral200'
+              fontWeight='medium'
+            >
               {t('balances.balanceFree')}{' '}
-              <Typography variant='body2' color='neutral000' weight='medium'>
+              <ZigTypography
+                variant='body2'
+                color='neutral000'
+                fontWeight='medium'
+              >
                 <NumericFormat
                   value={coinObject?.available ?? ''}
                   displayType={'text'}
                 />
-              </Typography>{' '}
+              </ZigTypography>{' '}
               {coin ?? ''}
-            </Typography>
+            </ZigTypography>
           </Grid>
         )}
 
@@ -336,7 +359,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
           <ErrorMessage text={t('no-network')} />
         )}
         <Grid item xs={12} pt={3}>
-          <Typography variant={'body2'} color={'neutral300'}>
+          <ZigTypography variant={'body2'} color={'neutral300'}>
             <Link underline={'hover'} href={BUY_CRYPTO_URL} target={'_blank'}>
               <Box
                 sx={{
@@ -349,7 +372,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                 <NorthEastIcon fontSize={'inherit'} />
               </Box>
             </Link>
-          </Typography>
+          </ZigTypography>
         </Grid>
       </Grid>
     </form>

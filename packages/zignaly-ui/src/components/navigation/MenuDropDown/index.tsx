@@ -4,7 +4,7 @@ import { Layout, Field, Button, ArrowIcon, DropDown } from "./styles";
 
 import { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";
 
-import Typography from "components/display/Typography";
+import ZigTypography from "components/display/ZigTypography";
 
 import { MenuDropDownProps } from "./types";
 
@@ -58,8 +58,8 @@ const MenuDropDown = (
         onClick={handleActiveDropDown}
       >
         <Field>
-          {secondaryTitle && <Typography variant={"h5"}>{secondaryTitle}</Typography>}
-          <Typography variant={"h3"}>{title}</Typography>
+          {secondaryTitle && <ZigTypography variant={"h5"}>{secondaryTitle}</ZigTypography>}
+          <ZigTypography variant={"h3"}>{title}</ZigTypography>
         </Field>
         <ArrowIcon>
           <ArrowBottomIcon />

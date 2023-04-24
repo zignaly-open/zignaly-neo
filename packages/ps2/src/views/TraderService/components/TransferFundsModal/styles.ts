@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { Typography, PriceLabel } from '@zignaly-open/ui';
+import { ZigTypography, PriceLabel } from '@zignaly-open/ui';
 
 // TODO: Box
 export const Body = styled('div')`
@@ -56,11 +56,11 @@ export const MainPriceLabel = styled(PriceLabel)`
   }
 `;
 
-export const TypographyNumberResult = styled(Typography)`
+export const TypographyNumberResult = styled(ZigTypography)`
   margin-right: 8px;
 `;
 
-export const TypographyBalance = styled(Typography)`
+export const TypographyBalance = styled(ZigTypography)`
   margin-left: 4px;
 `;
 

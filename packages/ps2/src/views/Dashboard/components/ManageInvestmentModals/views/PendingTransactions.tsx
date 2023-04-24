@@ -4,7 +4,7 @@ import {
   ArrowRightIcon,
   RefreshIcon,
   TextButton,
-  Typography,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import { ChangeViewFn, EditInvestmentViews } from '../types';
 import { useTheme } from '@mui/material';
@@ -32,11 +32,11 @@ const PendingTransactions: React.FC<{
     <PendingTransaction>
       <Inline>
         <RefreshIcon />
-        <Typography variant={'body1'} color={'yellow'}>
+        <ZigTypography variant={'body1'} color={'yellow'}>
           {t('pendingTransactions.status', {
             count: pendingTransactionsCount,
           })}
-        </Typography>
+        </ZigTypography>
       </Inline>
       <div>
         <TextButton

@@ -6,6 +6,7 @@ import { Typography } from "@mui/material";
 import Select, { StylesConfig } from "react-select";
 import Theme from "../../../theme/theme";
 import { useTheme } from "styled-components";
+import ZigTypography from "../../display/ZigTypography";
 
 const customStyles = (small: boolean, theme: Theme, userStyles: StylesConfig): StylesConfig => ({
   ...userStyles,
@@ -67,7 +68,7 @@ function ZigSelect<T>({
   return (
     // @ts-ignore
     <StyledSelectWrapper error={error} width={width} small={small} outlined={outlined}>
-      {label && <Typography color={"neutral200"}>{label}</Typography>}
+      {label && <ZigTypography color={"neutral200"}>{label}</ZigTypography>}
       {ZigSelectGlobalStyle}
       <Select
         styles={styles}

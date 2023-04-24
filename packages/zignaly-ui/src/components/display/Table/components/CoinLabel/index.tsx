@@ -12,7 +12,7 @@ const CoinLabel = ({ name = "TEATHER", coin = "USDT" }: CoinLabelProps) => (
     <Icon coin={coin} name={name} />
     <WrapCoin>
       <Coin>{coin}</Coin>
-      <Name variant={"body2"} weight={"regular"} color={"neutral300"}>
+      <Name variant={"body2"} fontWeight={"regular"} color={"neutral300"}>
         {name}
       </Name>
     </WrapCoin>

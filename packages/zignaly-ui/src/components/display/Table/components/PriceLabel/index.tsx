@@ -5,10 +5,10 @@ import * as styled from "./styles";
 
 import { PriceLabelProps, UsdPriceLabelProps } from "./types";
 import { BottomElementWrap } from "./styles";
-import Typography from "components/display/Typography";
 import { useTheme } from "styled-components";
 import Theme from "../../../../../theme/theme";
 import { getPrecisionForCoin } from "../../../ZigPriceLabel/util";
+import ZigTypography from "../../../ZigTypography";
 
 /**
  * @deprecated
@@ -45,7 +45,7 @@ const PriceLabel = ({
           decimalScale={precision || getPrecisionForCoin(coin, value)}
         />
         {!hideCoinName && (
-          <styled.Coin weight="medium" variant={"body2"} color={"neutral400"}>
+          <styled.Coin fontWeight="medium" variant={"body2"} color={"neutral400"}>
             {coin}
           </styled.Coin>
         )}
@@ -54,7 +54,7 @@ const PriceLabel = ({
 
       {bottomElement && (
         <BottomElementWrap>
-          <Typography variant="body1">{bottomElement}</Typography>
+          <ZigTypography variant="body1">{bottomElement}</ZigTypography>
         </BottomElementWrap>
       )}
     </styled.Layout>

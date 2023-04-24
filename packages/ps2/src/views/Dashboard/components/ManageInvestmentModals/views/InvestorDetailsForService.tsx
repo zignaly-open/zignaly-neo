@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Typography } from '@zignaly-open/ui';
+import { Avatar, ZigTypography } from '@zignaly-open/ui';
 import { Investor, InvestorData, InvestorName } from '../styles';
 import { getServiceLogo } from 'util/images';
 import { useTranslation } from 'react-i18next';
@@ -23,11 +23,11 @@ const InvestorDetailsForService: React.FC<{
         </InvestorName>
 
         {service.successFee?.toString() && (
-          <Typography variant={'h3'} color={'neutral400'}>
+          <ZigTypography variant={'h3'} color={'neutral400'}>
             {t('investorDetail-successFee', {
               fee: service.successFee,
             })}
-          </Typography>
+          </ZigTypography>
         )}
       </InvestorData>
     </Investor>

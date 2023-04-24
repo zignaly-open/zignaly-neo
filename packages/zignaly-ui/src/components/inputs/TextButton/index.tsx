@@ -1,10 +1,10 @@
 import { LoaderTypes } from "components/display/Loader";
-import Typography from "components/display/Typography";
 import * as React from "react";
 import { ReactElement } from "react";
 
 import * as styled from "./styles";
 import { ButtonProps } from "./types";
+import ZigTypography from "../../display/ZigTypography";
 
 // TODO: think of a good way to fix this
 function TextButton({
@@ -27,6 +27,7 @@ function TextButton({
   type = "button",
   variant = "h4",
 }: ButtonProps): ReactElement {
+  // @ts-ignore
   return (
     <styled.Layout
       className={className}
@@ -49,14 +50,14 @@ function TextButton({
       <styled.Container>
         <styled.ElementsContainer>
           {leftElement && <styled.LeftElement>{leftElement}</styled.LeftElement>}
-          <Typography
+          <ZigTypography
             color={disabled ? "neutral300" : color}
-            weight="regular"
+            // @ts-ignore
             variant={variant}
             underline={underline}
           >
             {caption}
-          </Typography>
+          </ZigTypography>
           {rightElement && <styled.RightElement>{rightElement}</styled.RightElement>}
         </styled.ElementsContainer>
       </styled.Container>

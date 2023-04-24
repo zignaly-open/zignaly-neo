@@ -12,8 +12,8 @@ import {
   Header,
 } from "./styles";
 import { SliderInputProps, SliderModes } from "./types";
-import Typography from "components/display/Typography";
 import { useUpdateEffect } from "react-use";
+import ZigTypography from "../../display/ZigTypography";
 
 // TODO: rename to ZigSliderInout, add storiea
 const SliderInput = ({
@@ -87,9 +87,9 @@ const SliderInput = ({
     <>
       {labels.top && (
         <Header>
-          <Typography variant="body1" color={"neutral200"}>
+          <ZigTypography variant="body1" color={"neutral200"}>
             {labels.top}
-          </Typography>
+          </ZigTypography>
         </Header>
       )}
       <Layout style={style} className={className}>

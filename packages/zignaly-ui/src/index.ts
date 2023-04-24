@@ -55,7 +55,6 @@ export type {
   DropDownProps,
   DropDownOptionType,
 } from "./components/display/DropDown";
-export { default as Typography } from "./components/display/Typography";
 export { default as CoinIcon } from "components/display/CoinIcon";
 
 // TODO: deprecate - Inputs

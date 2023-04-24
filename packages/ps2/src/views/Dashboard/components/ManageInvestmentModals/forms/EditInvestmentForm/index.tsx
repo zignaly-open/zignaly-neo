@@ -21,7 +21,7 @@ import {
   InputAmountAdvancedValueType,
   SliderInput,
   TextButton,
-  Typography,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import { EditInvestmentValidation } from './validations';
 import {
@@ -121,20 +121,20 @@ function EditInvestmentForm({
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Field>
         <Row>
-          <Typography variant={'body1'}>{t('form.title')}</Typography>
+          <ZigTypography variant={'body1'}>{t('form.title')}</ZigTypography>
           <AmountInvested>
             <CoinIcon coin={coin.id} />
             <TokenValue>
-              <Typography variant={'bigNumber'} color={'neutral100'}>
+              <ZigTypography variant={'bigNumber'} color={'neutral100'}>
                 <NumericFormat
                   value={details?.invested}
                   displayType={'text'}
                   thousandSeparator={true}
                 />
-              </Typography>
-              <Typography variant={'h3'} color={'neutral400'}>
+              </ZigTypography>
+              <ZigTypography variant={'h3'} color={'neutral400'}>
                 {String(coin.id).toUpperCase()}
-              </Typography>
+              </ZigTypography>
             </TokenValue>
           </AmountInvested>
         </Row>

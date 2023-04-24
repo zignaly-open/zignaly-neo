@@ -14,7 +14,7 @@ import {
   Button,
   DropDown,
   IconButton,
-  Typography,
+  ZigTypography,
   UserIcon,
   ZigButton,
 } from '@zignaly-open/ui';
@@ -67,9 +67,9 @@ function AccountMenu(): React.ReactElement | null {
               width={'16px'}
               height={'16px'}
             />
-            <Typography variant={'buttonsm'} color={'neutral300'}>
+            <ZigTypography variant={'caption'} color={'neutral300'}>
               {t('account-menu.isAuth-button-logIn')}
-            </Typography>
+            </ZigTypography>
           </LoginButton>
         </Link>
         <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>

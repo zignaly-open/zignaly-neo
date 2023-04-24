@@ -14,12 +14,12 @@ import {
   TypographyNumberResult,
 } from './styles';
 import {
-  Typography,
   SwapVertIcon,
   Button,
   InputAmountAdvanced,
   IconButton,
   InputAmountAdvancedValueType,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import { TransferFormData, TransferModalProps } from './types';
 import { TransferModalValidation } from './validation';
@@ -112,7 +112,7 @@ function TransferModal({
       isLoading={!balance || isTransferring}
     >
       <Box sx={{ marginBottom: 3 }}>
-        <Typography>{t('transferFunds.description')}</Typography>
+        <ZigTypography>{t('transferFunds.description')}</ZigTypography>
       </Box>
 
       {balance && !isTransferring && (
@@ -156,7 +156,7 @@ function TransferModal({
             />
             <ToContainer>
               <ToOutline>
-                <Typography variant='h2'>
+                <ZigTypography variant='h2'>
                   {t(
                     `transfer.${
                       fromTradingAccount
@@ -164,7 +164,7 @@ function TransferModal({
                         : 'toTradingAccount'
                     }`,
                   )}
-                </Typography>
+                </ZigTypography>
                 <Inline>
                   <TypographyNumberResult
                     variant='bigNumber'
@@ -174,12 +174,12 @@ function TransferModal({
                       ? new BigNumber(amountTransferValue).toString()
                       : '--'}{' '}
                   </TypographyNumberResult>
-                  <Typography variant='h3' color='neutral400'>
+                  <ZigTypography variant='h3' color='neutral400'>
                     {service?.ssc ?? 'USDT'}
-                  </Typography>
+                  </ZigTypography>
                 </Inline>
               </ToOutline>
-              <Typography variant='body2' color='neutral200'>
+              <ZigTypography variant='body2' color='neutral200'>
                 {t('transfer.deposit-available')}
                 <TypographyBalance variant='body2' color='neutral000'>
                   <NumericFormat
@@ -189,7 +189,7 @@ function TransferModal({
                     thousandSeparator={true}
                   />
                 </TypographyBalance>
-              </Typography>
+              </ZigTypography>
             </ToContainer>
           </Body>
 

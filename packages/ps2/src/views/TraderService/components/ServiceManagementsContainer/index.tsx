@@ -6,7 +6,7 @@ import {
   Button,
   EditPenIcon,
   TextButton,
-  Typography,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import {
   BottomContainer,
@@ -73,9 +73,9 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
         ]) => (
           <>
             <Box>
-              <Typography variant='h2' color='neutral100'>
+              <ZigTypography variant='h2' color='neutral100'>
                 {t('totalFunds')}
-              </Typography>
+              </ZigTypography>
               <MainPriceLabel
                 value={parseFloat(balance.sbt)}
                 coin={service?.ssc ?? 'USDT'}
@@ -86,27 +86,27 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
             <BottomContainer>
               <Box>
                 <Circle />
-                <Typography variant='h2' color='neutral100'>
+                <ZigTypography variant='h2' color='neutral100'>
                   {t('tradingFunds')}
-                </Typography>
-                <Typography color='neutral200'>
+                </ZigTypography>
+                <ZigTypography color='neutral200'>
                   {t('tradingFunds-desc')}
-                </Typography>
+                </ZigTypography>
                 <TradingFunds>
-                  <Typography color='neutral400' variant='body2'>
+                  <ZigTypography color='neutral400' variant='body2'>
                     {t('availableTrading')}
                     <InlinePriceLabel
                       value={parseFloat(balance.staSscFree)}
                       coin={service?.ssc ?? 'USDT'}
                     />
-                  </Typography>
-                  <Typography color='neutral400' variant='body2'>
+                  </ZigTypography>
+                  <ZigTypography color='neutral400' variant='body2'>
                     {t('allocatedTrading')}
                     <InlinePriceLabel
                       value={parseFloat(balance.staSscSum)}
                       coin={service?.ssc ?? 'USDT'}
                     />
-                  </Typography>
+                  </ZigTypography>
                 </TradingFunds>
                 {/* <LabelHardDisc color='neutral200'>
                   {t('instantWithdrawn')}
@@ -141,28 +141,28 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
               </MiddleContainer>
               <Box>
                 <Circle />
-                <Typography variant='h2' color='neutral100'>
+                <ZigTypography variant='h2' color='neutral100'>
                   {t('standbyFunds')}
-                </Typography>
-                <Typography color='neutral200'>
+                </ZigTypography>
+                <ZigTypography color='neutral200'>
                   {t('standbyFunds-desc')}
-                </Typography>
+                </ZigTypography>
                 <TradingFunds>
-                  <Typography color='neutral400' variant='body2'>
+                  <ZigTypography color='neutral400' variant='body2'>
                     {t('availableWithdrawals')}
                     <InlinePriceLabel
                       value={parseFloat(balance.scaSscSum)}
                       coin={service?.ssc ?? 'USDT'}
                     />
-                  </Typography>
-                  <Typography color='neutral400' variant='body2'>
+                  </ZigTypography>
+                  <ZigTypography color='neutral400' variant='body2'>
                     {t('neededSnapshot')}
                     <InlinePriceLabel
                       value={parseFloat(management.transferOut)}
                       coin={service?.ssc ?? 'USDT'}
                     />
-                  </Typography>
-                  <Typography color='neutral400' variant='body2'>
+                  </ZigTypography>
+                  <ZigTypography color='neutral400' variant='body2'>
                     {t('minBalance.title')}
                     <InlinePriceLabel
                       value={parseFloat(management.minimumSca)}
@@ -180,15 +180,15 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                       caption={t('action:edit')}
                       onClick={onClickMinBalance}
                     />
-                  </Typography>
+                  </ZigTypography>
                   {/* <LineSeparator />
-                  <Typography color='neutral400' variant='body2'>
+                  <ZigTypography color='neutral400' variant='body2'>
                     {t('heldInstantWithdrawals')}
                     <InlinePriceLabel
                       value={parseFloat(balance.dfa)}
                       coin={service?.ssc ?? 'USDT'}
                     />
-                  </Typography> */}
+                  </ZigTypography> */}
                 </TradingFunds>
               </Box>
             </BottomContainer>

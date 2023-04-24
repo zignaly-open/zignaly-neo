@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
-import Typography from "components/display/Typography";
 import CoinIcon from "components/display/CoinIcon";
+import muiStyled from "@emotion/styled";
+import ZigTypography from "../../../ZigTypography";
 
 export const Layout = styled.div`
   flex-direction: row;
@@ -23,7 +24,7 @@ export const Icon = styled(CoinIcon)`
   margin-right: 12px;
 `;
 
-export const Name = styled(Typography)`
+export const Name = muiStyled(ZigTypography)`
   display: flex;
 `;
 

@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { Typography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
 
 export const NavList = styled('div')`
   display: flex;
@@ -34,7 +34,7 @@ export const LoginButton = styled('span')`
   `}
 `;
 
-export const AccountName = styled(Typography)`
+export const AccountName = styled(ZigTypography)`
   max-width: 155px;
   overflow: hidden;
   white-space: nowrap;

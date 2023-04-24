@@ -1,8 +1,8 @@
 import { QRCodeSVG } from "qrcode.react";
 import React from "react";
 import { Column } from "utils/column";
-import Typography from "../Typography";
 import { QRCodeContainer } from "./styles";
+import ZigTypography from "../ZigTypography";
 
 // TODO: rename to ZigQRCode
 const ZignalyQRCode = ({
@@ -15,9 +15,9 @@ const ZignalyQRCode = ({
   return (
     <Column justifyContent="center" alignItems="center" gap={8}>
       {label && (
-        <Typography variant="h4" color="neutral100">
+        <ZigTypography variant="h4" color="neutral100">
           {label}
-        </Typography>
+        </ZigTypography>
       )}
       <QRCodeContainer>
         <QRCodeSVG size={160} value={url} />

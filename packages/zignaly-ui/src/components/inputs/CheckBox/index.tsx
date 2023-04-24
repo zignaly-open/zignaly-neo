@@ -31,7 +31,9 @@ function CheckBox({
   return (
     <Layout onClick={handleClickChecked} isActive={isChecked} disabled={disabled}>
       <Box>{isChecked && <Icon />}</Box>
-      <Label>{label}</Label>
+      <Label variant={"body2"} color={"neutral300"}>
+        {label}
+      </Label>
     </Layout>
   );
 }

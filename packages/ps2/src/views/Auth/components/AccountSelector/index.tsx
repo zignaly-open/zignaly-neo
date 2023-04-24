@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useTheme } from '@mui/material';
 import { Layout, Field, Button, Container, Item } from './styles';
-import { Typography, Avatar, ArrowBottomIcon } from '@zignaly-open/ui';
+import { Avatar, ArrowBottomIcon, ZigTypography } from '@zignaly-open/ui';
 import { Exchange } from '../../../../apis/user/types';
 import { getImageOfAccount } from '../../../../util/images';
 import {
@@ -40,9 +40,9 @@ const AccountSelector: React.FC<AccountSelectorProps> = ({
       >
         <Field>
           <Avatar size={'medium'} image={activeExchange.image} />
-          <Typography variant={'body1'} color={'neutral100'}>
+          <ZigTypography variant={'body1'} color={'neutral100'}>
             {activeExchange.internalName}
-          </Typography>
+          </ZigTypography>
         </Field>
         {hasMultipleExchanges && (
           <ArrowBottomIcon
@@ -60,7 +60,7 @@ const AccountSelector: React.FC<AccountSelectorProps> = ({
               onClick={() => setActiveExchange(exchange.internalId)}
             >
               <Avatar size={'medium'} image={getImageOfAccount(index)} />
-              <Typography
+              <ZigTypography
                 variant={'body1'}
                 color={
                   activeExchange.internalId === exchange.internalId
@@ -69,7 +69,7 @@ const AccountSelector: React.FC<AccountSelectorProps> = ({
                 }
               >
                 {exchange.internalName}
-              </Typography>
+              </ZigTypography>
             </Item>
           ))}
         </Container>

@@ -13,12 +13,7 @@ import {
   InvestButtonContainer,
   StyledPencilIcon,
 } from '../styles';
-import {
-  TextButton,
-  Typography,
-  ZigPriceLabel,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { TextButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/system';
 import OtherAccountsButton from './OtherAccountsButton';
 
@@ -85,9 +80,9 @@ export const InvestedButtonBase: React.FC<{
 
   return (
     <InvestButtonContainer>
-      <Typography variant={'body2'} color='neutral200'>
+      <ZigTypography variant={'body2'} color='neutral200'>
         {t('invested-label')}
-      </Typography>
+      </ZigTypography>
       <Box>
         <BigNumberWrapperInvested
           id={prefixId && `${prefixId}__invested-${service.id}`}

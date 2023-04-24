@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
-import Typography from "components/display/Typography";
+import ZigTypography from "components/display/ZigTypography";
+import muiStyled from "@emotion/styled";
 
 export const Layout = styled.div`
   position: relative;
@@ -78,7 +79,7 @@ export const Dot = styled.div`
   height: 20px;
 `;
 
-export const Label = styled(Typography)`
+export const Label = styled(ZigTypography)`
   &.value {
     min-width: 40px;
   }
@@ -94,7 +95,7 @@ export const Header = styled.div`
   margin-bottom: 12px;
 `;
 
-export const DotLabel = styled(Typography)`
+export const DotLabel = muiStyled(ZigTypography)`
   position: relative;
   top: 26px;
 `;

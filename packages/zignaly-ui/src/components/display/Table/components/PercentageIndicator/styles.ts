@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ReactComponent as CaretTriangleIcon } from "assets/icons/caret-triangle-icon.svg";
-import Typography from "components/display/Typography";
+import muiStyled from "@emotion/styled";
+import ZigTypography from "../../../ZigTypography";
 
 export const Layout = styled.div`
   display: grid;
@@ -20,7 +21,7 @@ export const TropyContainer = styled.div`
   margin-left: 5px;
 `;
 
-export const Value = styled(Typography)<{ isPositive: boolean }>`
+export const Value = muiStyled(ZigTypography)<{ isPositive: boolean }>`
   display: inline;
   ${(props) => `
     font-size: 12px;
@@ -43,7 +44,7 @@ export const Inline = styled.div`
   align-items: center;
 `;
 
-export const Subtitle = styled(Typography)`
+export const Subtitle = muiStyled(ZigTypography)`
   display: block;
 `;
 

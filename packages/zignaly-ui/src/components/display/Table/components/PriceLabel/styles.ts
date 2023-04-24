@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import Typography from "components/display/Typography";
+import muiStyled from "@emotion/styled";
+import ZigTypography from "../../../ZigTypography";
 
 export const Layout = styled.div`
   text-align: center;
@@ -11,7 +12,7 @@ export const Value = styled.span`
   justify-content: center;
 `;
 
-export const Coin = styled(Typography)`
+export const Coin = muiStyled(ZigTypography)`
   margin: 0 4px;
   text-transform: uppercase;
   width: 45px;

@@ -1,11 +1,11 @@
 import React from "react";
 import { ToasterProps } from "./types";
 import * as styled from "./styles";
-import Typography from "../Typography";
 import { ReactComponent as SuccessIcon } from "assets/icons/check-icon.svg";
 import InfoIcon from "@mui/icons-material/Info";
 import { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.svg";
 import { dark } from "theme";
+import ZigTypography from "../ZigTypography";
 
 const Toaster = ({ variant = "error", size = "large", caption = "" }: ToasterProps) => {
   return (
@@ -17,9 +17,9 @@ const Toaster = ({ variant = "error", size = "large", caption = "" }: ToasterPro
       </styled.IconContainer>
 
       <styled.Caption>
-        <Typography variant={size === "large" ? "body1" : "body2"} weight="regular">
+        <ZigTypography variant={size === "large" ? "body1" : "body2"} fontWeight="regular">
           {caption}
-        </Typography>
+        </ZigTypography>
       </styled.Caption>
     </styled.ToastContainer>
   );

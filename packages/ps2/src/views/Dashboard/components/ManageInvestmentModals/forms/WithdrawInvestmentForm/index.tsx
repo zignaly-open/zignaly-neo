@@ -9,7 +9,7 @@ import {
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
   SliderInput,
-  Typography,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import BigNumber from 'bignumber.js';
 import {
@@ -102,7 +102,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box sx={{ mt: 1, mb: 2 }}>
-        <Typography>{t('replace-existing-amount')}</Typography>
+        <ZigTypography>{t('replace-existing-amount')}</ZigTypography>
       </Box>
       <Grid container spacing={5}>
         <Grid item xs={12} md={6}>

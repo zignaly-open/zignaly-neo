@@ -18,7 +18,6 @@ import { ROUTE_LOGIN } from '../../../../routes';
 import {
   ErrorMessage,
   TextButton,
-  Typography,
   ZigButton,
   ZigInput,
   ZigTypography,
@@ -148,15 +147,11 @@ const SignupForm: React.FC = () => {
                 helperText={
                   <Box display='flex' alignItems='center'>
                     <StyledErrorOutline height='24px' width='24px' />
-                    <Typography
-                      variant='body2'
-                      color='neutral200'
-                      weight='regular'
-                    >
+                    <ZigTypography variant='body2' color='neutral200'>
                       {t('error:error.password-requirements', {
                         length: 8,
                       })}
-                    </Typography>
+                    </ZigTypography>
                   </Box>
                 }
                 type={showPassword ? 'text' : 'password'}
@@ -180,7 +175,7 @@ const SignupForm: React.FC = () => {
               />
             )}
           />
-          <Typography
+          <ZigTypography
             marginTop={3}
             variant='h4'
             color='neutral300'
@@ -198,7 +193,7 @@ const SignupForm: React.FC = () => {
                 rel='noopener'
               />
             </Trans>
-          </Typography>
+          </ZigTypography>
 
           <Action>
             <ZigButton

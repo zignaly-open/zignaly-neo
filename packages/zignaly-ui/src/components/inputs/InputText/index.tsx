@@ -4,8 +4,8 @@ import { Layout, InputContainer, InputValue, Side, IconContainer, Label } from "
 import { InputTextProps } from "./types";
 
 import ErrorMessage from "components/display/ErrorMessage";
-import Typography from "components/display/Typography";
 import TextButton from "../TextButton";
+import ZigTypography from "../../display/ZigTypography";
 
 // TODO: deprecate
 function InputText(
@@ -49,9 +49,9 @@ function InputText(
   return (
     <Layout withError={!!error} disabled={disabled}>
       <Label>
-        <Typography variant="h3" weight="regular" color="neutral200">
+        <ZigTypography variant="h3" color="neutral200">
           {label}
-        </Typography>
+        </ZigTypography>
         {labelAction && (
           <TextButton
             tabIndex={labelAction.tabIndex}

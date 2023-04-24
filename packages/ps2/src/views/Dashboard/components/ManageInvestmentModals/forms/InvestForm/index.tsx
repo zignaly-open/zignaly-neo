@@ -10,7 +10,7 @@ import {
   InputAmountAdvancedValueType,
   InputText,
   SliderInput,
-  Typography,
+  ZigTypography,
   ZigButton,
 } from '@zignaly-open/ui';
 import { EditInvestmentValidation } from './validations';
@@ -117,22 +117,22 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
         <div>
           {isConfirmation ? (
             <>
-              <Typography variant={'body1'}>
+              <ZigTypography variant={'body1'}>
                 {t('invest-modal.amount-to-invest')}
-              </Typography>
+              </ZigTypography>
               <AmountInvested>
                 <CoinIcon coin={coin.id} name={'coin-icon'} />
                 <TokenValue>
-                  <Typography variant={'bigNumber'} color={'neutral100'}>
+                  <ZigTypography variant={'bigNumber'} color={'neutral100'}>
                     <NumericFormat
                       value={watch('amountTransfer')!.value.toString()}
                       displayType={'text'}
                       thousandSeparator={true}
                     />
-                  </Typography>
-                  <Typography variant={'h3'} color={'neutral400'}>
+                  </ZigTypography>
+                  <ZigTypography variant={'h3'} color={'neutral400'}>
                     {String(coin.id).toUpperCase()}
-                  </Typography>
+                  </ZigTypography>
                 </TokenValue>
               </AmountInvested>
             </>
@@ -185,19 +185,19 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
         <div>
           {isConfirmation ? (
             <>
-              <Typography variant={'body1'}>
+              <ZigTypography variant={'body1'}>
                 {t('form.profits.title-confirmation')}
-              </Typography>
+              </ZigTypography>
               <AmountInvested>
                 <TokenValue>
-                  <Typography variant={'bigNumber'} color={'neutral100'}>
+                  <ZigTypography variant={'bigNumber'} color={'neutral100'}>
                     <NumericFormat
                       value={watch('profitPercentage').toString()}
                       displayType={'text'}
                       suffix={'%'}
                       thousandSeparator={true}
                     />
-                  </Typography>
+                  </ZigTypography>
                 </TokenValue>
               </AmountInvested>
             </>

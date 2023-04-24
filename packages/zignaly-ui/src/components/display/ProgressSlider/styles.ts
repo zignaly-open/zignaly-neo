@@ -1,6 +1,7 @@
 import croma from "chroma-js";
 import styled from "styled-components";
-import Typography from "../Typography";
+import { styled as muiStyled } from "@mui/system";
+import ZigTypography from "../ZigTypography";
 
 export const Layout = styled.div`
   position: relative;
@@ -41,7 +42,7 @@ export const Dot = styled.div`
   width: 2px;
 `;
 
-export const Label = styled(Typography)`
+export const Label = muiStyled(ZigTypography)`
   color: RGB(193, 193, 200);
 
   &.body1 {
