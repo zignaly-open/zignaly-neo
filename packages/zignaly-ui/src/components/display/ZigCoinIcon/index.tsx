@@ -6,8 +6,8 @@ import { ZignalyIcon } from "../../../index";
 
 const ZigCoinIcon = ({
   size = COIN_SIZES.Medium,
-  name,
   coin,
+  // FIXME: wtf are we passing a classname?
   className = "",
   bucket = "coins-binance",
 }: ZIGCoinIconProps) => {
@@ -19,7 +19,7 @@ const ZigCoinIcon = ({
   if (!coin) return null;
 
   return src ? (
-    <Icon src={src} alt={name} size={s} className={className} onError={onError} />
+    <Icon src={src} alt={coin} size={s} className={className} onError={onError} />
   ) : coin.toLowerCase() === "zig" ? (
     <ZignalyIcon width={sizes[size as CoinSizes]} height={sizes[size as CoinSizes]} />
   ) : (
