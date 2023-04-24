@@ -51,4 +51,15 @@ export const parameters = {
       date: /Date$/,
     },
   },
+  docs: {
+    container: ({ children }) => (
+      <ThemeProvider theme={dark}>
+        <ThemeProviderMui theme={darkMui}>
+          <GlobalStyle darkMode />
+          <ChartGradients />
+          {children}
+        </ThemeProviderMui>
+      </ThemeProvider>
+    ),
+  },
 };
