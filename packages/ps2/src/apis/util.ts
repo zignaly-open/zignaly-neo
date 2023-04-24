@@ -46,7 +46,8 @@ export const injectEndpoints = <
     }
   }
   return base.injectEndpoints({
-    overrideExisting: module.hot?.status() === 'apply',
+    // @ts-ignore
+    overrideExisting: module?.hot?.status?.() === 'apply',
     endpoints,
   });
 };
