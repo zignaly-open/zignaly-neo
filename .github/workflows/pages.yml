@@ -3,7 +3,8 @@ name: Storybook to Github pages
 on:
   push:
     branches:
-      - master
+      #      - master
+      - feat/storybook2
 
 jobs:
   pre_job:
