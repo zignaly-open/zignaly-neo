@@ -6,4 +6,7 @@ addons.setConfig({
   sidebar: {
     showRoots: true,
   },
+  docs: {
+    theme,
+  },
 });

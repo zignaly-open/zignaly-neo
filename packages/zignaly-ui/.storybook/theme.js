@@ -1,6 +1,6 @@
 import { create } from "@storybook/theming";
 
-import ZignalyLogoWhite from "../images/zignaly-logo.svg";
+import ZignalyLogoWhite from "./images/zignaly-logo.svg";
 
 export default create({
   base: "dark",

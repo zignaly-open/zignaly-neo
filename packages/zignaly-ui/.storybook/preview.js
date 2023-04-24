@@ -1,10 +1,9 @@
 import { dark } from "../src/theme";
-import { addDecorator } from "@storybook/react";
-import { makeDecorator } from "@storybook/addons";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { DocsContainer } from "@storybook/addon-docs/blocks";
 import { ThemeProvider as ThemeProviderMui } from "@mui/material";
 import { ChartGradients } from "../src";
-
+import theme from "./theme";
 // Testing Results
 import { withTests } from "@storybook/addon-jest";
 import results from "../.jest-test-results.json";
@@ -48,14 +47,7 @@ export const parameters = {
   },
   backgrounds: { disable: true },
   docs: {
-    container: ({ children }) => (
-      <ThemeProvider theme={dark}>
-        <ThemeProviderMui theme={darkMui}>
-          <GlobalStyle darkMode />
-          <ChartGradients />
-          <Container sx={{ p: 5 }}>{children}</Container>
-        </ThemeProviderMui>
-      </ThemeProvider>
-    ),
+    theme,
+    container: DocsContainer,
   },
 };
