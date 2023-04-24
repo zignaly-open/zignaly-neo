@@ -28,7 +28,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
     <Card>
       <ChartBox>
         <ZigChartMini
-          data={service.sparklines}
+          data={[0, ...service.sparklines]}
           midLine={false}
           height={104}
           width={360}
