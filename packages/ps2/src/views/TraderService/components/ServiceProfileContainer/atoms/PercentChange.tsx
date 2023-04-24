@@ -12,7 +12,7 @@ const PercentChange: React.FC<{
   value: string | null | number;
   colored?: boolean;
   variant?: Variant;
-}> = ({ id, value, colored, variant = 'h6' }) => {
+}> = ({ id, value, colored, variant = 'caption' }) => {
   const { t } = useTranslation('common');
   const color = colored
     ? +value < 0

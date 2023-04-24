@@ -12,7 +12,7 @@ const TopServicesCards = ({ services }: TopServicesCardsProps) => {
   return (
     <Box>
       <Box display='flex' justifyContent='center' alignItems='center' m={2}>
-        <ZigTypography variant='subtitle2' color='neutral400'>
+        <ZigTypography variant='body2' color='neutral400'>
           {t('card.top-rated')}
         </ZigTypography>
         <TextButton

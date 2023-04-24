@@ -187,7 +187,7 @@ const darkMui = createTheme({
           style: {
             fontSize: "26px",
             lineHeight: "40px",
-            color: dark.neutral000,
+            color: dark.neutral100,
             fontWeight: "500",
           },
         },
@@ -198,12 +198,9 @@ const darkMui = createTheme({
           h2: "h2",
           h3: "h3",
           h4: "h4",
-          h5: "h5",
-          h6: "h6",
-          subtitle1: "h2",
-          subtitle2: "h2",
           body1: "span",
           body2: "span",
+          caption: "span",
         },
       },
       styleOverrides: {
@@ -246,23 +243,6 @@ const darkMui = createTheme({
           lineHeight: "16px",
           // color: dark.neutral000,
           fontWeight: "500",
-        },
-        h6: {
-          fontSize: "10px",
-          lineHeight: "14px",
-          // color: dark.neutral000,
-          fontWeight: "500",
-        },
-        // todo: deprecate subtitle1 and 2
-        subtitle1: {
-          fontSize: "15px",
-          lineHeight: "24px",
-          color: dark.neutral200,
-        },
-        subtitle2: {
-          fontSize: "13px",
-          lineHeight: "20px",
-          color: dark.neutral200,
         },
         caption: {
           fontSize: "11px",

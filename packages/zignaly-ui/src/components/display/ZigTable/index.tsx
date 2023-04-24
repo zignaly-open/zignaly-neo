@@ -186,7 +186,7 @@ export default function ZigTable<T extends object>({
       </TableContainer>
       {!data.length && !loading && (
         <ZigTypography
-          variant="subtitle1"
+          variant="body1"
           textAlign="center"
           padding="72px"
           display="flex"
