@@ -20,7 +20,7 @@ const renderIcon = (icon: keyof Icons) => {
 };
 
 export default {
-  title: "Inputs/TextButton",
+  title: "Inputs/___FIXME____TextButton",
   component: TextButton,
   parameters: {
     design: {

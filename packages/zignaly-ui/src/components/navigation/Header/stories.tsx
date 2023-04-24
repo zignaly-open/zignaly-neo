@@ -10,7 +10,7 @@ import { ReactComponent as UserIcon } from "assets/icons/user-icon.svg";
 import { HeaderLinksContainer } from "./styles";
 
 export default {
-  title: "Navigation/Header",
+  title: "Navigation/___FIXME____Header",
   component: Header,
 } as ComponentMeta<typeof Header>;
 
