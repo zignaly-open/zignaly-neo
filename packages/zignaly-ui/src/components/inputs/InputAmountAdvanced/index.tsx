@@ -25,6 +25,7 @@ import { COIN_SIZES } from "components/display/ZigCoinIcon/types";
 
 // FIXME this component still needs Jesus
 // TODO: rename to ZigInoutAmount, add stories
+// TODO: Wrap stories inside a form
 function InputAmount({
   tokens = [],
   name = "amountValue",
