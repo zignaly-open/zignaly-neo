@@ -1,5 +1,4 @@
-import { useDarkMode } from "storybook-dark-mode";
-import { dark, light } from "../src/theme";
+import { dark } from "../src/theme";
 import { addDecorator } from "@storybook/react";
 import { makeDecorator } from "@storybook/addons";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
@@ -18,10 +17,8 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const withStyledTheme = (storyFn) => {
-  const darkMode = useDarkMode();
-  const currentTheme = darkMode ? dark : light;
   return (
-    <ThemeProvider theme={currentTheme}>
+    <ThemeProvider theme={dark}>
       <ThemeProviderMui theme={darkMui}>
         <GlobalStyle darkMode />
         <ChartGradients />
