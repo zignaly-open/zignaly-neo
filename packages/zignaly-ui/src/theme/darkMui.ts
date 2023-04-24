@@ -127,12 +127,22 @@ const darkMui = createTheme({
           letterSpacing: "1.1px",
           fontWeight: 600,
           padding: "10px 36px",
+          ".MuiButton-startIcon": {
+            marginLeft: "-6px",
+          },
         },
         sizeLarge: {
           minHeight: "48px",
           minWidth: "110px",
           fontWeight: 600,
           fontSize: "13px",
+          lineHeight: "18px",
+          paddingLeft: "30px",
+          letterSpacing: "1.1px",
+          paddingRight: "30px",
+          ".MuiButton-startIcon": {
+            marginLeft: "-4px",
+          },
         },
         sizeMedium: {
           minHeight: "36px",
@@ -147,6 +157,7 @@ const darkMui = createTheme({
           transition: "all 0.3s linear",
         },
         containedPrimary: {
+          textTransform: "uppercase",
           color: dark.neutral000,
           background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
           "&:hover, &.MuiButton-active": {

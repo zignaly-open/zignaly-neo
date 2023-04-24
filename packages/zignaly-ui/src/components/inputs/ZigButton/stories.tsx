@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { Meta, Story } from "@storybook/react";
 import ZigButton, { ZigButtonProps } from "./index";
-import { ButtonGroup, ButtonGroupProps } from "@mui/material";
+import { ButtonGroup, ButtonGroupProps, Grid } from "@mui/material";
 import theme from "@zignaly-open/ps2/src/theme";
 import { UserIcon } from "../../../index";
+import { styled } from "@mui/system";
+import { Add } from "@mui/icons-material";
 
 export default {
   title: "Inputs/ZigButton",
@@ -59,34 +61,68 @@ Group.args = {
   children: "Amount to Withdraw",
 };
 
-const TemplateSizes: Story<typeof ZigButton> = (args) => {
+const Wrapper = styled("div")`
+  & > * {
+    display: inline-block;
+    margin-right: 15px !important;
+  }
+`;
+
+const TemplateTextButton: Story<typeof ZigButton> = (args) => {
+  return <ZigButton variant={"text"} {...args} />;
+};
+
+const TemplateOutlinedButton: Story<typeof ZigButton> = (args) => {
   return (
-    <>
-      <ZigButton
-        size="xlarge"
-        variant={"outlined"}
-        startIcon={<UserIcon width={"16px"} height={"16px"} />}
-      >
-        <b>csdfcasd</b>
-      </ZigButton>
-      <ZigButton size="small" {...args} />
-      <ZigButton size="medium" {...args} />
-      <ZigButton size="large" {...args} />
-      <br />
+    <Wrapper>
       <ZigButton variant={"outlined"} size="small" {...args} />
       <ZigButton variant={"outlined"} size="medium" {...args} />
       <ZigButton variant={"outlined"} size="large" {...args} />
       <ZigButton variant={"outlined"} size="xlarge" {...args} />
-      <br />
+    </Wrapper>
+  );
+};
+
+const TemplateContainedButton: Story<typeof ZigButton> = (args) => {
+  return (
+    <Wrapper>
       <ZigButton variant={"contained"} size="small" {...args} />
       <ZigButton variant={"contained"} size="medium" {...args} />
       <ZigButton variant={"contained"} size="large" {...args} />
       <ZigButton variant={"contained"} size="xlarge" {...args} />
-    </>
+    </Wrapper>
   );
 };
 
-export const Sizes = TemplateSizes.bind({});
-Sizes.args = {
+const TemplateIconButton: Story<typeof ZigButton> = (args) => {
+  return (
+    <Wrapper>
+      <ZigButton startIcon={<Add />} variant={"contained"} size="small">
+        {args.children}
+      </ZigButton>
+      <ZigButton startIcon={<Add />} variant={"contained"} size="medium">
+        {args.children}
+      </ZigButton>
+      <ZigButton startIcon={<Add />} variant={"contained"} size="large">
+        {args.children}
+      </ZigButton>
+      <ZigButton startIcon={<Add />} variant={"contained"} size="xlarge">
+        {args.children}
+      </ZigButton>
+    </Wrapper>
+  );
+};
+
+const buttonExampleArgs = {
   children: "Amount to Withdraw",
 };
+
+export const TextButton = TemplateTextButton.bind({});
+export const ContainedButton = TemplateContainedButton.bind({});
+export const OutlinedButton = TemplateOutlinedButton.bind({});
+export const Icon = TemplateIconButton.bind({});
+
+TextButton.args = buttonExampleArgs;
+OutlinedButton.args = buttonExampleArgs;
+ContainedButton.args = buttonExampleArgs;
+Icon.args = buttonExampleArgs;
