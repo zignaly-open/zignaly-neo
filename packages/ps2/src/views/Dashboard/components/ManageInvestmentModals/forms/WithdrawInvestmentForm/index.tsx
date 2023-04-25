@@ -27,6 +27,7 @@ import { ChangeViewFn, EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 import { useServiceDetails } from '../../../../../../apis/service/use';
+import { trimZeros } from '@zignaly-open/ui';
 
 const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
   setView,
@@ -139,7 +140,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
                 }
                 setValue('amountTransfer', {
                   ...watchAmountTransfer,
-                  value: parseFloat(
+                  value: trimZeros(
                     new BigNumber(coin.balance)
                       .multipliedBy(value)
                       .dividedBy(100)
