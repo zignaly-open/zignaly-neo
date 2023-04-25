@@ -5,13 +5,13 @@ import { useTranslation } from 'react-i18next';
 import { Field, Form } from './styles';
 import {
   Button,
-  CoinIcon,
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
   ZigSliderInput,
   ZigTypography,
   ZigButton,
   ZigInput,
+  ZigCoinIcon,
 } from '@zignaly-open/ui';
 import { EditInvestmentValidation } from './validations';
 import {
@@ -121,7 +121,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                 {t('invest-modal.amount-to-invest')}
               </ZigTypography>
               <AmountInvested>
-                <CoinIcon coin={coin.id} name={'coin-icon'} />
+                <ZigCoinIcon coin={coin.id} name={'coin-icon'} />
                 <TokenValue>
                   <ZigTypography variant={'bigNumber'} color={'neutral100'}>
                     <NumericFormat

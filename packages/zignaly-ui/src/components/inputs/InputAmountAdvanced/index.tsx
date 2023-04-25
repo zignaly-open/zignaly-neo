@@ -19,7 +19,7 @@ import { changeEvent } from "utils/event";
 import { useDeepCompareEffect } from "react-use";
 import ZigPriceLabel from "components/display/ZigPriceLabel";
 import { Box } from "@mui/material";
-import ZigCoinIcon, { CoinSizes } from "components/display/ZigCoinIcon";
+import ZigCoinIcon from "components/display/ZigCoinIcon";
 import { COIN_SIZES } from "components/display/ZigCoinIcon/types";
 import {ErrorMessage} from "../../display/ZigAlertMessage";
 
@@ -103,7 +103,8 @@ function InputAmount({
           <Side>
             {value?.token?.id && tokens.length < 2 && (
               <ZigCoinIcon
-                size={COIN_SIZES.Small as CoinSizes}
+                name={value?.token.id}
+                size={COIN_SIZES.SMALL}
                 coin={value?.token.id}
                 bucket={iconBucket}
               />

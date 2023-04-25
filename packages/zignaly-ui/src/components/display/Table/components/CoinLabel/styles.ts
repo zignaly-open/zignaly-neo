@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import CoinIcon from "components/display/CoinIcon";
 import muiStyled from "@emotion/styled";
 import ZigTypography from "../../../ZigTypography";
+import ZigCoinIcon from "../../../ZigCoinIcon";
 
 export const Layout = styled.div`
   flex-direction: row;
@@ -19,7 +19,7 @@ export const WrapCoin = styled.div`
   justify-content: space-between;
 `;
 
-export const Icon = styled(CoinIcon)`
+export const Icon = styled(ZigCoinIcon)`
   display: flex;
   margin-right: 12px;
 `;

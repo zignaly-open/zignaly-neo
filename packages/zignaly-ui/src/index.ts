@@ -67,7 +67,6 @@ export type {
   DropDownProps,
   DropDownOptionType,
 } from "./components/display/DropDown";
-export { default as CoinIcon } from "components/display/CoinIcon";
 
 // TODO: deprecate - Inputs
 export { default as Button } from "./components/inputs/Button";
