@@ -21,10 +21,9 @@ export { default as ZigSliderInput } from "components/inputs/ZigSliderInput";
 // this
 export { default as InputAmountAdvanced } from "components/inputs/InputAmountAdvanced";
 export type { InputAmountAdvancedValueType } from "components/inputs/InputAmountAdvanced";
-// this
-export { Loader, CenteredLoader } from "./components/display/Loader";
 
 // Basic display components
+export { Loader, CenteredLoader } from "./components/display/Loader";
 export { default as ZigTypography } from "./components/display/ZigTypography";
 export { default as ZigPriceLabel, ZigTablePriceLabel } from "./components/display/ZigPriceLabel";
 export { default as Avatar } from "./components/display/Avatar";
@@ -45,6 +44,12 @@ export { default as DateLabel } from "./components/display/Table/components/Date
 export { default as PercentageIndicator } from "./components/display/Table/components/PercentageIndicator"; // yes, this is used too
 export { default as CoinLabel } from "./components/display/Table/components/CoinLabel";
 
+//
+//
+//
+//
+//
+//
 // TODO: Layouts - questionable, probably shoudl deprecate
 export { MarginContainer, PageContainer } from "./components/styled";
 

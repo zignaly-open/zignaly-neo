@@ -13,7 +13,6 @@ import {
   InputField,
 } from "./styles";
 import TokenSelector from "./components/TokenSelector";
-import ErrorMessage from "components/display/ErrorMessage";
 import ZigTypography from "components/display/ZigTypography";
 import { InputAmountProps, TokenItem } from "./types";
 import { changeEvent } from "utils/event";
@@ -22,6 +21,7 @@ import ZigPriceLabel from "components/display/ZigPriceLabel";
 import { Box } from "@mui/material";
 import ZigCoinIcon, { CoinSizes } from "components/display/ZigCoinIcon";
 import { COIN_SIZES } from "components/display/ZigCoinIcon/types";
+import {ErrorMessage} from "../../display/ZigAlertMessage";
 
 // FIXME this component still needs Jesus
 // TODO: rename to ZigInoutAmount, add stories
