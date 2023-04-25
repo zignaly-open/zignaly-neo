@@ -25,20 +25,22 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
           ...(props.inputProps || {}),
         }}
         label={
-          <>
-            {props.label}
-            {labelAction && (
-              <ZigButton
-                variant={"text"}
-                tabIndex={labelAction.tabIndex}
-                onClick={labelAction.onClick}
-                href={labelAction.href}
-                id={labelAction.id}
-              >
-                {labelAction.text}
-              </ZigButton>
-            )}
-          </>
+          !props.label ? null : (
+            <>
+              {props.label}
+              {labelAction && (
+                <ZigButton
+                  variant={"text"}
+                  tabIndex={labelAction.tabIndex}
+                  onClick={labelAction.onClick}
+                  href={labelAction.href}
+                  id={labelAction.id}
+                >
+                  {labelAction.text}
+                </ZigButton>
+              )}
+            </>
+          )
         }
         variant={"standard"}
         error={!!error}
@@ -100,7 +102,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
   .MuiInput-root {
     border: 1px solid ${({ theme }) => theme.palette.neutral600};
     padding: 12px 24px;
-    margin-top: 4px;
+    margin-top: ${(props) => (props.label ? "4px" : 0)};
     min-height: 60px;
     border-radius: 5px;
     display: flex;
