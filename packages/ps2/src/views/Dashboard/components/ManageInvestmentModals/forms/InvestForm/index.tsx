@@ -8,10 +8,10 @@ import {
   CoinIcon,
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
-  InputText,
   SliderInput,
   ZigTypography,
   ZigButton,
+  ZigInput,
 } from '@zignaly-open/ui';
 import { EditInvestmentValidation } from './validations';
 import {
@@ -229,7 +229,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           name='transferConfirm'
           control={control}
           render={({ field }) => (
-            <InputText
+            <ZigInput
               label={t('invest-modal.type-transfer', {
                 word: transferMagicWord,
               })}
