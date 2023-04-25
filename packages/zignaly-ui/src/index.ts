@@ -15,6 +15,9 @@ export {
 } from "./components/inputs/ZigInput";
 export { default as ZigAutocomplete } from "./components/inputs/ZigAutocomplete";
 export { default as ZigSelect } from "./components/inputs/ZigSelect";
+export { default as InputCode } from "./components/inputs/InputCode";
+
+// this
 export { default as InputAmountAdvanced } from "components/inputs/InputAmountAdvanced";
 export type { InputAmountAdvancedValueType } from "components/inputs/InputAmountAdvanced";
 export { default as SliderInput } from "components/inputs/SliderInput";
@@ -65,9 +68,6 @@ export { default as CoinIcon } from "components/display/CoinIcon";
 export { default as Button } from "./components/inputs/Button";
 export { default as CheckBox } from "./components/inputs/CheckBox";
 export { default as IconButton } from "./components/inputs/IconButton";
-export { default as TextButton } from "./components/inputs/TextButton";
-export { default as InputText } from "./components/inputs/InputText";
-export { default as InputCode } from "./components/inputs/InputCode";
 export { ButtonGroup, ValueIndicator } from "./components/styled";
 
 // Icons - for the love of God, we should not do this
