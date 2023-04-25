@@ -15,12 +15,12 @@ import { SliderInputProps, SliderModes } from "./types";
 import { useUpdateEffect } from "react-use";
 import ZigTypography from "../../display/ZigTypography";
 
+// this slider was copied from the old code and I do not feel like debugging why values other than 0 and 100 don't work
+const min = 0;
+const max = 100;
+
 // TODO: rename to ZigSliderInout, add storiea
 const SliderInput = ({
-  className,
-  initialValue = 30,
-  max = 100,
-  min = 0,
   value,
   onChange = () => null,
   style,
@@ -33,7 +33,7 @@ const SliderInput = ({
 }: SliderInputProps) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [internalValue, setInternalValue] = useState<number>(
-    initialValue ? ((initialValue - min) / (max - min)) * 100 : 0,
+    value ? ((value - min) / (max - min)) * 100 : 0,
   );
   const [enabled, setEnabled] = useState<boolean>(false);
 
@@ -92,7 +92,7 @@ const SliderInput = ({
           </ZigTypography>
         </Header>
       )}
-      <Layout style={style} className={className}>
+      <Layout style={style}>
         <TextContainer>
           {!!labels.left && (
             <Label variant="body2" fontWeight="demibold" color="neutral200">

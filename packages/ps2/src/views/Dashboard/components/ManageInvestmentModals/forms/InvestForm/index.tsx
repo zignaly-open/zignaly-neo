@@ -215,7 +215,6 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                     right: t('form.profits.right'),
                   }}
                   value={field.value}
-                  initialValue={field.value}
                   onChange={field.onChange}
                 />
               )}

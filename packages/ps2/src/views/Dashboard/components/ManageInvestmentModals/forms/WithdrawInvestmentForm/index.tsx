@@ -132,7 +132,6 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
           <Box marginTop={5}>
             <SliderInput
               value={sliderValue}
-              initialValue={0}
               onChange={(value: number) => {
                 if (!watch('amountTransfer')?.value && !value) {
                   // means first render
