@@ -115,4 +115,4 @@ export { sortByValue } from "utils/numbers";
 export { NiceScrollbar } from "utils/css";
 export { styledIf } from "utils/styled";
 export { HeaderLinksContainer } from "components/navigation/Header/styles";
-export { getPrecisionForCoin } from "components/display/ZigPriceLabel/util";
+export { getPrecisionForCoin, shortenNumber } from "components/display/ZigPriceLabel/util";
