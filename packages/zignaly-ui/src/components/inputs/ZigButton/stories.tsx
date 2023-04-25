@@ -60,6 +60,28 @@ Group.args = {
   children: "Amount to Withdraw",
 };
 
+export const Tooltip = Template.bind({});
+Tooltip.args = {
+  children: "Amount to Withdraw",
+  variant: "contained",
+  tooltip: "I will never give you up I will never let you down",
+};
+
+export const Disabled = Template.bind({});
+Disabled.args = {
+  children: "Amount to Withdraw",
+  variant: "contained",
+  tooltip: "Molodoy chelovek, vy chto, ne vidite, u nas obed",
+  disabled: true,
+};
+
+export const Loading = Template.bind({});
+Loading.args = {
+  children: "Amount to Withdraw",
+  variant: "contained",
+  loading: true,
+};
+
 const Wrapper = styled("div")`
   & > * {
     display: inline-block;
@@ -192,10 +214,10 @@ export const TextButton = TemplateTextButton.bind({});
 export const ContainedButton = TemplateContainedButton.bind({});
 export const OutlinedButton = TemplateOutlinedButton.bind({});
 export const Icon = TemplateIconButton.bind({});
-export const Loading = TemplateLoadingButtons.bind({});
+export const LoadingAll = TemplateLoadingButtons.bind({});
 
 TextButton.args = buttonExampleArgs;
 OutlinedButton.args = buttonExampleArgs;
 ContainedButton.args = buttonExampleArgs;
 Icon.args = buttonExampleArgs;
-Loading.args = buttonExampleArgs;
+LoadingAll.args = buttonExampleArgs;
