@@ -4,10 +4,11 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   Button,
-  EditPenIcon,
   ZigButton,
+  ZigPriceLabel,
   ZigTypography,
 } from '@zignaly-open/ui';
+import EditIcon from '@mui/icons-material/Edit';
 import {
   BottomContainer,
   Box,
@@ -15,7 +16,6 @@ import {
   HorizontalConnection,
   InlinePriceLabel,
   Layout,
-  MainPriceLabel,
   MiddleContainer,
   TopConnector,
   TopHorizontalConnection,
@@ -76,7 +76,12 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
               <ZigTypography variant='h2' color='neutral100'>
                 {t('totalFunds')}
               </ZigTypography>
-              <MainPriceLabel
+              <ZigPriceLabel
+                variant={'bigNumber'}
+                coinProps={{
+                  color: 'highlighted',
+                  variant: 'body1',
+                }}
                 value={parseFloat(balance.sbt)}
                 coin={service?.ssc ?? 'USDT'}
               />
@@ -171,7 +176,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                     <ZigButton
                       variant={'text'}
                       id={'trader-service__edit'}
-                      startIcon={<EditPenIcon />}
+                      startIcon={<EditIcon />}
                       onClick={onClickMinBalance}
                     >
                       {t('action:edit')}

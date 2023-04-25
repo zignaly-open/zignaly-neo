@@ -57,7 +57,6 @@ export { default as InputAmountAdvanced } from "components/inputs/InputAmountAdv
 export type { InputAmountAdvancedValueType } from "components/inputs/InputAmountAdvanced";
 
 // TODO: deprecate
-export { default as PriceLabel } from "./components/display/ZigTable/components/PriceLabel";
 export { default as DropDown } from "./components/display/DropDown";
 export type {
   DropDownHandleType,
@@ -88,6 +87,7 @@ export { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-ico
 export { ReactComponent as ArrowUpIcon } from "assets/icons/arrow-up-icon.svg";
 export { ReactComponent as ArrowLeftIcon } from "assets/icons/arrow-left-icon.svg";
 export { ReactComponent as ArrowRightIcon } from "assets/icons/arrow-right-icon.svg";
+// @deprecated
 export { ReactComponent as UserIcon } from "assets/icons/user-icon.svg";
 export { ReactComponent as CheckIcon } from "assets/icons/check-icon.svg";
 export { ReactComponent as LogoDiscordIcon } from "assets/icons/discord-logo-icon.svg";

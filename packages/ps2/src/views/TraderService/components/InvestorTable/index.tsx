@@ -5,7 +5,6 @@ import { Layout, InvestorCounts } from './styles';
 import {
   UserIcon,
   ZigTypography,
-  PriceLabel,
   ChangeIndicator,
   ZigTable,
   createColumnHelper,
@@ -74,13 +73,13 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       columnHelper.accessor('pnlNetLc', {
         header: t('tableHeader.P&L'),
         cell: (props) => (
-          <PriceLabel
-            coin={service?.ssc ?? 'USDT'}
-            value={parseFloat(props.getValue())}
-            bottomElement={
-              <ChangeIndicator value={props.row.original.pnlPctLc} />
-            }
-          />
+          <>
+            <ZigTablePriceLabel
+              coin={service?.ssc ?? 'USDT'}
+              value={parseFloat(props.getValue())}
+            />
+            <ChangeIndicator value={props.row.original.pnlPctLc} />
+          </>
         ),
       }),
       columnHelper.accessor('pnlNetAt', {

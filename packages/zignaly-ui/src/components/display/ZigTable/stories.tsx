@@ -10,7 +10,6 @@ import { makeCoinsData, makeExchangeOrdersData, makeInvestorsData } from "./make
 import ZigPriceLabel, { ZigTablePriceLabel } from "../ZigPriceLabel";
 import ZigButton from "components/inputs/ZigButton";
 import { Box } from "@mui/material";
-import PriceLabel, { UsdPriceLabel } from "./components/PriceLabel";
 import ZigTypography from "../ZigTypography";
 import { Check, Close } from "@mui/icons-material";
 
@@ -175,11 +174,10 @@ const investorsTableColumns: ColumnDef<typeof investorsTableData[number], any>[]
     header: "P & L",
     accessorKey: "pnl",
     cell: ({ getValue, row: { original } }) => (
-      <PriceLabel
-        coin={original.coin}
-        value={getValue()}
-        bottomElement={<ChangeIndicator value={3} />}
-      />
+      <>
+        <ZigTablePriceLabel coin={original.coin} value={getValue()} />
+        <ChangeIndicator value={3} />
+      </>
     ),
   },
   {
