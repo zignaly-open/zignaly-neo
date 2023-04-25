@@ -47,5 +47,37 @@ TextareaInputer.args = {
   value:
     "https://zignaly.com/api/signals.php?key=YOURSECRETKEY&type=entry&exchange=zignaly&pair=ethusdt&orderType=limit&positionSize=10&signalId=123&limitPrice=3420&takeProfitPercentage1=20&takeProfitAmountPercentage1=100&stopLossPercentage=-5",
   multiline: true,
+  wide: true,
+  label: "Label",
+};
+
+export const Error: ComponentMeta<typeof InputText> = Template.bind({});
+Error.args = {
+  value: "https://zignaly com/api/",
+  wide: true,
+  error: "Invalid URL",
+  label: "Label",
+};
+
+export const LabelActionLink: ComponentMeta<typeof InputText> = Template.bind({});
+LabelActionLink.args = {
+  value: "",
+  wide: true,
+  labelAction: {
+    text: "Link to somewhere",
+    href: "https://xfuturum.com",
+  },
+  label: "Label",
+};
+
+export const LabelAction: ComponentMeta<typeof InputText> = Template.bind({});
+LabelAction.args = {
+  value: "",
+  wide: true,
+  labelAction: {
+    text: "Alert",
+    onClick: () => alert(),
+    tabIndex: -1,
+  },
   label: "Label",
 };
