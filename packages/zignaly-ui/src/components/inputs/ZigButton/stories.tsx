@@ -142,10 +142,13 @@ const TemplateLoadingButtons: Story<typeof ZigButton> = (args) => {
         <ZigButton variant={"contained"} loading size="xlarge" {...args} />
       </Wrapper>
       <Wrapper>
-        <ZigButton variant={"text"} loading size="small" {...args} />
-        <ZigButton variant={"text"} loading size="medium" {...args} />
-        <ZigButton variant={"text"} loading size="large" {...args} />
-        <ZigButton variant={"text"} loading size="xlarge" {...args} />
+        <ZigTypography variant={"body1"} component={"p"}>
+          Please welcome the{" "}
+          <ZigButton loading variant={"text"}>
+            Button
+          </ZigButton>
+          !
+        </ZigTypography>
       </Wrapper>
     </>
   );

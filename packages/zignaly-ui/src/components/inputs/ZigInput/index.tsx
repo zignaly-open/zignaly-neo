@@ -4,6 +4,7 @@ import ErrorMessage from "components/display/ErrorMessage";
 import { styled } from "@mui/material/styles";
 import { TextField } from "@mui/material";
 import TextButton from "../TextButton";
+import ZigButton from "../ZigButton";
 
 const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
   React.forwardRef(({ error, wide, labelAction, helperText, ...props }, ref) => (
@@ -11,19 +12,21 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
       inputRef={ref}
       {...props}
       inputProps={{
-        ...(props.inputProps || {})
+        ...(props.inputProps || {}),
       }}
       label={
         <>
           {props.label}
           {labelAction && (
-            <TextButton
+            <ZigButton
+              variant={"text"}
               tabIndex={labelAction.tabIndex}
               onClick={labelAction.onClick}
               href={labelAction.href}
-              caption={labelAction.text}
               id={labelAction.id}
-            />
+            >
+              {labelAction.text}
+            </ZigButton>
           )}
         </>
       }

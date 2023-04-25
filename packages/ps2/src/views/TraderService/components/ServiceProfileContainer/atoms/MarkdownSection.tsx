@@ -1,6 +1,6 @@
 import { Box } from '@mui/system';
 import React, { useLayoutEffect, useRef, useState } from 'react';
-import { TextButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
 import { useTranslation } from 'react-i18next';
@@ -75,14 +75,13 @@ const MarkdownSection: React.FC<{
       </HideReadMoreEffects>
 
       {shouldShowReadMore && (
-        <TextButton
-          leftElement={
-            <Icon sx={{ color: '#65647E' }} width={16} height={16} />
-          }
-          caption={shown ? t('read-less') : t('read-more')}
-          color={'links'}
+        <ZigButton
+          variant={'text'}
+          startIcon={<Icon />}
           onClick={() => setShown((v) => !v)}
-        />
+        >
+          {shown ? t('read-less') : t('read-more')}
+        </ZigButton>
       )}
     </Box>
   );

@@ -5,7 +5,7 @@ import {
   ArrowRightIcon,
   Button,
   EditPenIcon,
-  TextButton,
+  ZigButton,
   ZigTypography,
 } from '@zignaly-open/ui';
 import {
@@ -168,18 +168,14 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                       value={parseFloat(management.minimumSca)}
                       coin={service?.ssc ?? 'USDT'}
                     />
-                    <TextButton
+                    <ZigButton
+                      variant={'text'}
                       id={'trader-service__edit'}
-                      leftElement={
-                        <EditPenIcon
-                          height={16}
-                          width={16}
-                          color={theme.palette.neutral300}
-                        />
-                      }
-                      caption={t('action:edit')}
+                      startIcon={<EditPenIcon />}
                       onClick={onClickMinBalance}
-                    />
+                    >
+                      {t('action:edit')}
+                    </ZigButton>
                   </ZigTypography>
                   {/* <LineSeparator />
                   <ZigTypography color='neutral400' variant='body2'>

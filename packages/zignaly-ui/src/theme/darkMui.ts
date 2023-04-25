@@ -157,22 +157,27 @@ const darkMui = createTheme({
         text: {
           color: dark.links,
           display: "inline",
-          padding: "0 5px",
-          marginLeft: "-4px",
-          marginRight: "-4px",
+          padding: "0 2px !important",
+          borderRadius: "2px",
           fontSize: "inherit",
           verticalAlign: "baseline",
           minHeight: "0px !important",
+          ".MuiLoadingButton-loadingIndicatorCenter": {
+            transform: "translate(-50%, 50%)",
+            marginTop: "-4px",
+          },
           ".MuiButton-startIcon": {
-            marginRight: "4px",
+            marginRight: "5px",
           },
           ".MuiButton-endIcon": {
-            marginLeft: "4px",
+            marginLeft: "5px",
           },
           ".MuiButton-startIcon, .MuiButton-endIcon": {
             position: "relative",
+            display: "inline",
             top: "-1px",
             ".MuiSvgIcon-root": {
+              fill: dark.neutral300,
               verticalAlign: "middle",
             },
           },

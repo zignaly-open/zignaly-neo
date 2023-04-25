@@ -7,7 +7,7 @@ import { LoginValidation } from './validations';
 import { useAuthenticate } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
-import { Button, TextButton, ZigTypography, ZigInput } from '@zignaly-open/ui';
+import { Button, ZigTypography, ZigInput, ZigButton } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
 import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
@@ -105,11 +105,13 @@ const LoginForm: React.FC = () => {
             loading={loggingIn}
           />
 
-          <TextButton
+          <ZigButton
+            variant={'text'}
             id={'login__signup'}
             onClick={() => navigate(ROUTE_SIGNUP, { state: locationState })}
-            caption={t('login-form.link.signup')}
-          />
+          >
+            {t('login-form.link.signup')}
+          </ZigButton>
         </Action>
       </Form>
     </Box>

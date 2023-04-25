@@ -17,7 +17,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN } from '../../../../routes';
 import {
   ErrorMessage,
-  TextButton,
   ZigButton,
   ZigInput,
   ZigTypography,
@@ -232,11 +231,13 @@ const SignupForm: React.FC = () => {
               {t('signup-protect')}
             </ZigTypography>
           </Box>
-          <TextButton
+          <ZigButton
+            variant={'text'}
             id={'signup__login'}
             onClick={() => navigate(ROUTE_LOGIN, { state: locationState })}
-            caption={t('signup-form.link.login')}
-          />
+          >
+            {t('signup-form.link.login')}
+          </ZigButton>
         </Form>
       </Box>
     </Wrapper>

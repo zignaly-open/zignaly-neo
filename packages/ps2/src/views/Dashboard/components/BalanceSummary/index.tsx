@@ -5,7 +5,7 @@ import { Layout } from './styles';
 import { BalanceSummaryProps } from './types';
 import {
   PencilIcon,
-  TextButton,
+  ZigButton,
   ZigTypography,
   ZigPriceLabel,
 } from '@zignaly-open/ui';
@@ -51,13 +51,14 @@ export const BalanceSummary = ({
         )}
       </Box>
 
-      <TextButton
+      <ZigButton
+        variant={'text'}
         id={`${prefixId}__edit-${serviceId}`}
-        leftElement={<PencilIcon color='#65647E' width={16} height={16} />}
-        caption={t('action:edit')}
-        color={'links'}
+        startIcon={<PencilIcon />}
         onClick={onClickEdit}
-      />
+      >
+        {t('action:edit')}
+      </ZigButton>
     </Layout>
   );
 };

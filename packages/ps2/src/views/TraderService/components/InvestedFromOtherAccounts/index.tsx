@@ -6,7 +6,7 @@ import { useIsInvestedInService } from '../../../../apis/investment/use';
 import ZModal from '../../../../components/ZModal';
 import { Service } from '../../../../apis/service/types';
 import {
-  TextButton,
+  ZigButton,
   ZigTable,
   ZigTablePriceLabel,
   ZigTypography,
@@ -81,9 +81,10 @@ function InvestedFromOtherAccounts({
                       {t('other-accounts.active')}
                     </ZigTypography>
                   ) : (
-                    <TextButton
+                    <ZigButton
+                      variant={'text'}
                       id={`all-accounts__switch-${service.id}`}
-                      leftElement={
+                      startIcon={
                         <CompareArrowsIcon
                           sx={{
                             color: (theme) => theme.palette.links,
@@ -92,10 +93,10 @@ function InvestedFromOtherAccounts({
                           height={16}
                         />
                       }
-                      caption={t('other-accounts.switch-action')}
-                      color={'links'}
                       onClick={() => selectExchange(getValue())}
-                    />
+                    >
+                      {t('other-accounts.switch-action')}
+                    </ZigButton>
                   ),
               },
               // eslint-disable-next-line @typescript-eslint/no-explicit-any

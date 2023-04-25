@@ -1,13 +1,8 @@
 import React from 'react';
 import { Inline, PendingTransaction } from '../styles';
-import {
-  ArrowRightIcon,
-  RefreshIcon,
-  TextButton,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import { RefreshIcon, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ChangeViewFn, EditInvestmentViews } from '../types';
-import { useTheme } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import {
   useInvestmentDetails,
@@ -17,7 +12,6 @@ import {
 const PendingTransactions: React.FC<{
   setView: ChangeViewFn;
 }> = ({ setView }) => {
-  const theme = useTheme();
   const { serviceId } = useSelectedInvestment();
   const { data: details } = useInvestmentDetails(serviceId);
   const { t } = useTranslation('edit-investment');
@@ -39,17 +33,17 @@ const PendingTransactions: React.FC<{
         </ZigTypography>
       </Inline>
       <div>
-        <TextButton
-          rightElement={
-            <ArrowRightIcon
-              width={'22px'}
-              height={'22px'}
-              color={theme.palette.links}
+        <ZigButton
+          variant={'text'}
+          endIcon={
+            <KeyboardArrowRightIcon
+              sx={{ width: '22px !important', height: '22px !important' }}
             />
           }
-          caption={t('pendingTransactions.link-label')}
           onClick={() => setView(EditInvestmentViews.PendingTransactions)}
-        />
+        >
+          {t('pendingTransactions.link-label')}
+        </ZigButton>
       </div>
     </PendingTransaction>
   ) : null;

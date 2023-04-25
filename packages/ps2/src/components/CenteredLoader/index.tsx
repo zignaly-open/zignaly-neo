@@ -6,11 +6,10 @@ import { useTranslation } from 'react-i18next';
 const CenteredLoader: React.FC<{
   width?: number;
   height?: number;
-  className?: string;
-}> = ({ width = 40, height = 40, className = '' }) => {
+}> = ({ width = 40, height = 40 }) => {
   const { t } = useTranslation();
   return (
-    <Center className={className}>
+    <Center>
       <Loader
         color={'#fff'}
         width={width + 'px'}

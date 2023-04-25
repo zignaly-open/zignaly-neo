@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
 import { NumericFormat } from 'react-number-format';
-import { useTheme } from '@mui/material';
 import { Controller, FieldErrorsImpl, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
@@ -14,13 +13,12 @@ import {
 } from './styles';
 
 import {
-  ArrowRightIcon,
   Button,
   CoinIcon,
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
   SliderInput,
-  TextButton,
+  ZigButton,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { EditInvestmentValidation } from './validations';
@@ -38,13 +36,13 @@ import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
 import { useDebounce } from 'react-use';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 function EditInvestmentForm({
   onClickWithdrawInvestment,
   setView,
 }: EditInvestmentFormProps) {
   const coin = useCurrentBalance();
-  const theme = useTheme();
   const { t } = useTranslation('edit-investment');
   const { serviceId, serviceName } = useSelectedInvestment();
   const { edit: editPercent } = useUpdateTakeProfitPercentage(serviceId);
@@ -191,23 +189,21 @@ function EditInvestmentForm({
           caption={t('form.button.addInvestment')}
           disabled={!canSubmit}
         />
-        <TextButton
+        <ZigButton
+          variant={'text'}
           id={'edit-investment__withdraw'}
-          rightElement={
-            <ArrowRightIcon
-              width={'22px'}
-              height={'22px'}
-              color={theme[transferOutAll ? 'neutral300' : 'links']}
+          endIcon={
+            <KeyboardArrowRightIcon
+              sx={{ width: '22px !important', height: '22px !important' }}
             />
           }
-          allowClickOnDisabled
-          as={'span'}
           disabled={transferOutAll}
           onClick={
             transferOutAll ? openBlockedToast : onClickWithdrawInvestment
           }
-          caption={t('form.link.withdraw')}
-        />
+        >
+          {t('form.link.withdraw')}
+        </ZigButton>
       </ModalActions>
     </Form>
   );
