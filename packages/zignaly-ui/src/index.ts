@@ -18,6 +18,10 @@ export { default as ZigSelect } from "./components/inputs/ZigSelect";
 export { default as InputCode } from "./components/inputs/InputCode";
 export { default as ZigSliderInput } from "components/inputs/ZigSliderInput";
 
+// TODO: fix storybook & refactor
+export { default as InputAmountAdvanced } from "components/inputs/InputAmountAdvanced";
+export type { InputAmountAdvancedValueType } from "components/inputs/InputAmountAdvanced";
+
 // Basic display components
 export { Loader, CenteredLoader } from "./components/display/Loader";
 export { default as ZigTypography } from "./components/display/ZigTypography";
@@ -49,13 +53,6 @@ export * from "./components/display/ZigChart";
 //
 //
 //
-// TODO: Layouts - questionable, probably shoudl deprecate
-export { MarginContainer, PageContainer } from "./components/styled";
-
-// this
-export { default as InputAmountAdvanced } from "components/inputs/InputAmountAdvanced";
-export type { InputAmountAdvancedValueType } from "components/inputs/InputAmountAdvanced";
-
 // TODO: deprecate
 export { default as DropDown } from "./components/display/DropDown";
 export type {
@@ -69,6 +66,13 @@ export { default as Button } from "./components/inputs/Button";
 export { default as CheckBox } from "./components/inputs/CheckBox";
 export { default as IconButton } from "./components/inputs/IconButton";
 export { ButtonGroup, ValueIndicator } from "./components/styled";
+//
+//
+//
+//
+//
+//
+//
 
 // Icons - for the love of God, we should not do this
 // TODO: we have mui icons for a bloody reason
@@ -87,7 +91,6 @@ export { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-ico
 export { ReactComponent as ArrowUpIcon } from "assets/icons/arrow-up-icon.svg";
 export { ReactComponent as ArrowLeftIcon } from "assets/icons/arrow-left-icon.svg";
 export { ReactComponent as ArrowRightIcon } from "assets/icons/arrow-right-icon.svg";
-// @deprecated
 export { ReactComponent as UserIcon } from "assets/icons/user-icon.svg";
 export { ReactComponent as CheckIcon } from "assets/icons/check-icon.svg";
 export { ReactComponent as LogoDiscordIcon } from "assets/icons/discord-logo-icon.svg";
@@ -111,17 +114,21 @@ export { ReactComponent as TimeIcon } from "assets/icons/time-icon.svg";
 export { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
 export { ReactComponent as ZignalyExchangeIcon } from "assets/icons/zignaly-exchange-icon.svg";
 
+// Utils
+export { sortByValue, trimZeros } from "utils/numbers";
+export { NiceScrollbar } from "utils/css";
+export { getPrecisionForCoin, shortenNumber } from "components/display/ZigPriceLabel/util";
+
+// TODO: please stop using this
+export { styledIf } from "utils/styled";
+
+// Layouts
+// TODO: questionable, probably should move to ps2
+export { MarginContainer, PageContainer } from "./components/styled";
+
 // Navigation
 // TODO: @cwagner22 pls fix/bring to proper shape
 export { default as Header } from "./components/navigation/Header";
 export { default as MenuDropDown } from "./components/navigation/MenuDropDown";
 export { default as BrandImage } from "./components/navigation/Header/components/BrandImage";
 export { HeaderLinksContainer } from "components/navigation/Header/styles";
-
-// Utils
-export { sortByValue, trimZeros } from "utils/numbers";
-export { NiceScrollbar } from "utils/css";
-export { getPrecisionForCoin, shortenNumber } from "components/display/ZigPriceLabel/util";
-
-// please stop using this
-export { styledIf } from "utils/styled";

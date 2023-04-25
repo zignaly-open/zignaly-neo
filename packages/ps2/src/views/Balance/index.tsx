@@ -48,7 +48,7 @@ const MyBalances: React.FC = () => {
   return (
     <PageContainer className={'withSubHeader'}>
       <MarginContainer>
-        <Header sx={{}}>
+        <Header>
           <Box sx={{ flex: '0 0 100px' }} />
           <BalanceAccountSelector />
           <Box sx={{ flex: '0 0 100px' }}>
