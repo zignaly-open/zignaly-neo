@@ -1,8 +1,8 @@
 import React from "react";
 import ZigButton, { ZigButtonGroup, ZigButtonProps } from "../ZigButton";
 import ZigTypography from "../../display/ZigTypography";
-import ErrorMessage from "../../display/ErrorMessage";
 import { Box } from "@mui/system";
+import { ErrorMessage } from "../../display/ZigAlertMessage";
 
 const ZigButtonGroupInput = ({
   value,

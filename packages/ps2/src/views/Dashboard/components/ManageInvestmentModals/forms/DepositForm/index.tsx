@@ -295,12 +295,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                     height: '200px',
                   }}
                 >
-                  <Loader
-                    color={'#fff'}
-                    width={'40px'}
-                    height={'40px'}
-                    ariaLabel={t('loading')}
-                  />
+                  <Loader />
                 </Box>
               ) : (
                 <Box

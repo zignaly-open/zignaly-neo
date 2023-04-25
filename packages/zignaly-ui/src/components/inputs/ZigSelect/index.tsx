@@ -1,12 +1,11 @@
 import React, { useMemo } from "react";
 import { StyledSelectWrapper, ZigSelectGlobalStyle } from "./styles";
 import { ZigSelectOption, ZigSelectProps } from "./types";
-import ErrorMessage from "../../display/ErrorMessage";
-import { Typography } from "@mui/material";
 import Select, { StylesConfig } from "react-select";
 import Theme from "../../../theme/theme";
 import { useTheme } from "styled-components";
 import ZigTypography from "../../display/ZigTypography";
+import { ErrorMessage } from "../../display/ZigAlertMessage";
 
 const customStyles = (small: boolean, theme: Theme, userStyles: StylesConfig): StylesConfig => ({
   ...userStyles,
