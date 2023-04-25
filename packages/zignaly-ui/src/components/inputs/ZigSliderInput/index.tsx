@@ -11,7 +11,7 @@ import {
   TextContainer,
   Header,
 } from "./styles";
-import { SliderInputProps, SliderModes } from "./types";
+import { ZigSliderInputProps, SliderModes } from "./types";
 import { useUpdateEffect } from "react-use";
 import ZigTypography from "../../display/ZigTypography";
 
@@ -19,8 +19,7 @@ import ZigTypography from "../../display/ZigTypography";
 const min = 0;
 const max = 100;
 
-// TODO: rename to ZigSliderInout, add storiea
-const SliderInput = ({
+const ZigSliderInput = ({
   value,
   onChange = () => null,
   style,
@@ -30,7 +29,7 @@ const SliderInput = ({
     left: null,
     right: null,
   },
-}: SliderInputProps) => {
+}: ZigSliderInputProps) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [internalValue, setInternalValue] = useState<number>(
     value ? ((value - min) / (max - min)) * 100 : 0,
@@ -142,4 +141,4 @@ const SliderInput = ({
   );
 };
 
-export default SliderInput;
+export default ZigSliderInput;

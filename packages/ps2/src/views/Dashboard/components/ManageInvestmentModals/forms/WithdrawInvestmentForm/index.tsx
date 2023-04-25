@@ -8,7 +8,7 @@ import {
   Button,
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
-  SliderInput,
+  ZigSliderInput,
   ZigTypography,
 } from '@zignaly-open/ui';
 import BigNumber from 'bignumber.js';
@@ -130,7 +130,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
         </Grid>
         <Grid item xs={12} md={6}>
           <Box marginTop={5}>
-            <SliderInput
+            <ZigSliderInput
               value={sliderValue}
               onChange={(value: number) => {
                 if (!watch('amountTransfer')?.value && !value) {

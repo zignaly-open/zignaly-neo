@@ -1,6 +1,6 @@
 import React from "react";
 
-export type SliderInputProps = {
+export type ZigSliderInputProps = {
   value: number;
   style?: React.CSSProperties;
   step?: number;

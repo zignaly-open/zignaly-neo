@@ -17,7 +17,7 @@ import {
   CoinIcon,
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
-  SliderInput,
+  ZigSliderInput,
   ZigButton,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -142,7 +142,7 @@ function EditInvestmentForm({
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <SliderInput
+              <ZigSliderInput
                 mode={'range'}
                 labels={{
                   top: t('form.profits.title'),

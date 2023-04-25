@@ -8,7 +8,7 @@ import {
   CoinIcon,
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
-  SliderInput,
+  ZigSliderInput,
   ZigTypography,
   ZigButton,
   ZigInput,
@@ -207,7 +207,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <SliderInput
+                <ZigSliderInput
                   mode={'range'}
                   labels={{
                     top: t('form.profits.title'),
