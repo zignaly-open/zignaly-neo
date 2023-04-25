@@ -6,6 +6,7 @@ import { Box, Grid } from '@mui/material';
 import { WithdrawActions } from '../../styles';
 import {
   Button,
+  CenteredLoader,
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
   ZigSliderInput,
@@ -24,7 +25,6 @@ import {
 import { WithdrawInvestmentFormFormData } from './types';
 import { ChangeViewFn, EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import CenteredLoader from '../../../../../../components/CenteredLoader';
 import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 import { useServiceDetails } from '../../../../../../apis/service/use';
 

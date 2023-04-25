@@ -1,7 +1,6 @@
 import React from "react";
-import { Layout, ViewPort, Icon, Container, ButtonLoader, IconContainer } from "./styles";
+import { Layout, ViewPort, Icon, Container, IconContainer } from "./styles";
 import { IconButtonProps } from "./types";
-import { LoaderTypes } from "components/display/Loader";
 
 // TODO: figure out what to do with this
 const IconButton = ({
@@ -35,9 +34,7 @@ const IconButton = ({
         isFocused={isFocused}
       >
         <Container>
-          {loading ? (
-            <ButtonLoader type={LoaderTypes.TAILSPIN} color="#9CA3AF" ariaLabel="Loader" />
-          ) : (
+          {loading ? null : (
             <IconContainer>
               <Icon>{icon}</Icon>
             </IconContainer>

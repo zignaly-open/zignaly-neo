@@ -4,9 +4,9 @@ import {
   useCoinBalances,
   useExchangeCoinsList,
 } from '../../../../../apis/coin/use';
-import CenteredLoader from '../../../../../components/CenteredLoader';
 import { DepositModalProps } from '../types';
 import { useActivateExchange } from 'apis/user/use';
+import { CenteredLoader } from '@zignaly-open/ui';
 
 const DepositView: React.FC<DepositModalProps> = (props) => {
   const { isFetching: isFetchingBalances } = useCoinBalances({ convert: true });

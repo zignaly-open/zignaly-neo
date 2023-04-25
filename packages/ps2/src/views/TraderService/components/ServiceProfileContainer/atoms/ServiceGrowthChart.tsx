@@ -10,6 +10,7 @@ import {
   ZigButtonGroupInput,
   ZigChart,
   ZigPriceLabel,
+  CenteredLoader,
   ZigSelect,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -23,7 +24,6 @@ import {
 import { useChartConfig, useChartData } from '../../../../../apis/service/use';
 import Stub from '../../../../../components/Stub';
 import { useTranslation } from 'react-i18next';
-import CenteredLoader from '../../../../../components/CenteredLoader';
 import PercentChange from './PercentChange';
 import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../../util/numbers';

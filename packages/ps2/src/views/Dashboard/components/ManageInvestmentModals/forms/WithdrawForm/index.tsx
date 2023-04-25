@@ -9,6 +9,7 @@ import {
   ZigInput,
   ZigTypography,
   InputAmountAdvancedValueType,
+  CenteredLoader,
 } from '@zignaly-open/ui';
 import { WithdrawFormData } from './types';
 import { Box, Grid } from '@mui/material';
@@ -19,7 +20,6 @@ import {
 import { WithdrawModalProps } from '../../types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithdrawValidation } from './validations';
-import CenteredLoader from 'components/CenteredLoader';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import LabelValueLine from './atoms/LabelValueLine';

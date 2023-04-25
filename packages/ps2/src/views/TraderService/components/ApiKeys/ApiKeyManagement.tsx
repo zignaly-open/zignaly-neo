@@ -1,11 +1,10 @@
 import React from 'react';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, CenteredLoader, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 import { ApiKeysContainer, TitleBox } from './atoms';
 import { useParams } from 'react-router-dom';
 import { useServiceApiKeysQuery } from '../../../../apis/serviceApiKey/api';
-import CenteredLoader from '../../../../components/CenteredLoader';
 import { useZModal } from '../../../../components/ZModal/use';
 import CreateApiKey from './modals/CreateApiKey';
 import EditApiKey from './modals/EditApiKey';

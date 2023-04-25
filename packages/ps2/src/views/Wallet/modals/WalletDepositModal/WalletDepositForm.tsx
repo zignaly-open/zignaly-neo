@@ -8,10 +8,10 @@ import {
   ZigTypography,
   ZigCoinIcon,
   ZigCopyText,
+  CenteredLoader,
 } from '@zignaly-open/ui';
 import { DepositFormData, WalletDepositModalProps } from './types';
 import { Box, Grid } from '@mui/material';
-import CenteredLoader from 'components/CenteredLoader';
 import { useToast } from 'util/hooks/useToast';
 import { useDepositInfoQuery } from 'apis/wallet/api';
 import ChainOption, { filterOptions } from './atoms/ChainOption';

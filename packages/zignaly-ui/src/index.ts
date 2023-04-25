@@ -16,22 +16,19 @@ export {
 export { default as ZigAutocomplete } from "./components/inputs/ZigAutocomplete";
 export { default as ZigSelect } from "./components/inputs/ZigSelect";
 export { default as InputCode } from "./components/inputs/InputCode";
+export { default as ZigSliderInput } from "components/inputs/ZigSliderInput";
 
 // this
 export { default as InputAmountAdvanced } from "components/inputs/InputAmountAdvanced";
 export type { InputAmountAdvancedValueType } from "components/inputs/InputAmountAdvanced";
-export { default as ZigSliderInput } from "components/inputs/ZigSliderInput";
+// this
+export { Loader, CenteredLoader } from "./components/display/Loader";
 
 // Basic display components
 export { default as ZigTypography } from "./components/display/ZigTypography";
 export { default as ZigPriceLabel, ZigTablePriceLabel } from "./components/display/ZigPriceLabel";
 export { default as Avatar } from "./components/display/Avatar";
-
-// this
-export { default as Loader } from "./components/display/Loader";
-export { default as ErrorMessage } from "./components/display/ErrorMessage";
-
-export { default as ZigAlertMessage } from "./components/display/ZigAlertMessage";
+export { default as ZigAlertMessage, ErrorMessage } from "./components/display/ZigAlertMessage";
 export { default as Toaster } from "./components/display/Toaster";
 export { default as ZigCopyText } from "./components/display/ZigCopyText";
 export { default as ZigProgressBar } from "./components/display/ZigProgressBar";

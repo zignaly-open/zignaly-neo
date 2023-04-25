@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 import { buttonSizes, buttonVariants } from "./types";
-import Loader from "components/display/Loader";
 import Theme from "../../../theme/theme";
 
 // TODO: an icon button component should not take 500 LOC
@@ -34,7 +33,7 @@ export const Icon = styled.div`
   align-items: center;
 `;
 
-export const ButtonLoader = styled(Loader)`
+export const ButtonLoader = styled.div`
   justify-content: center;
   align-items: center;
 `;

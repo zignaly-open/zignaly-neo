@@ -1,34 +1,34 @@
 import * as React from "react";
-import { ReactElement } from "react";
+import { Oval } from "react-loader-spinner";
+import { Box } from "@mui/system";
 
-import { LoaderTypes, LoaderProps, componentsByType } from "./types";
-
-// TODO: deprecate, pull CircularProgress from ps2, add stories for CircularProgress
-function Loader({
-  type = LoaderTypes.TAILSPIN,
-  width,
-  height,
-  color,
-  secondaryColor,
-  ariaLabel,
-  strokeWidth,
-  className,
-}: LoaderProps): ReactElement {
-  const ComponentByType = componentsByType[type];
-
+export const Loader: React.FC<{
+  width?: number;
+  height?: number;
+}> = ({ width = 40, height = 40 }) => {
   return (
-    <ComponentByType
-      width={width}
-      height={height}
-      color={color}
-      ariaLabel={ariaLabel}
-      // @ts-ignore
-      secondaryColor={secondaryColor}
-      strokeWidth={strokeWidth}
-      wrapperClass={className}
+    <Oval
+      width={width + "px"}
+      height={height + "px"}
+      color={"#fff"}
+      secondaryColor={"rgba(255, 255, 255, 0.2)"}
+      ariaLabel={"Loading..."}
     />
   );
-}
+};
 
-export { LoaderTypes };
-export default Loader;
+export const CenteredLoader: React.FC<{
+  width?: number;
+  height?: number;
+}> = ({ width = 40, height = 40 }) => (
+  <Box
+    sx={{
+      display: "flex",
+      padding: "8em 0",
+      alignItems: "center",
+      justifyContent: "center",
+    }}
+  >
+    <Loader width={width} height={height} />
+  </Box>
+);

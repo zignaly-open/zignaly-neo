@@ -1,4 +1,3 @@
-import { LoaderTypes } from "components/display/Loader";
 import * as React from "react";
 import { ReactElement, useMemo } from "react";
 
@@ -22,7 +21,6 @@ function Button({
   testIdLeftElement = null,
   testIdCaptionElement = null,
   testIdRightElement = null,
-  testIdLoadingElement = null,
   minWidth,
   maxWidth,
   maxHeight,
@@ -95,18 +93,6 @@ function Button({
           )}
         </styled.ElementsContainer>
       </styled.Container>
-
-      {loading && (
-        <styled.LoaderContainer
-          data-testid={testIdLoadingElement ? testIdLoadingElement : "button-loading-element"}
-        >
-          <styled.ButtonLoader
-            type={LoaderTypes.TAILSPIN}
-            color="#9CA3AF"
-            ariaLabel="Loader"
-          ></styled.ButtonLoader>
-        </styled.LoaderContainer>
-      )}
     </styled.Layout>
   );
 }
