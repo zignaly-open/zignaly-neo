@@ -3,10 +3,10 @@ import { ReactElement } from "react";
 
 import { Bar, Dot, DotContainer, Label, LabelTooltip, Layout } from "./styles";
 
-import { ProgressSliderProps } from "./types";
+import { ZigProgressBarProps } from "./types";
 
-// TODO: rename to ZigProgressSlider
-function ProgressSlider({ className, value, max = 100 }: ProgressSliderProps): ReactElement {
+// TODO: rename to ZigZigProgressBar
+function ZigProgressBar({ className, value, max = 100 }: ZigProgressBarProps): ReactElement {
   const normalizedValue = (100 * Math.min(value, max)) / max;
   return (
     <Layout className={className}>
@@ -25,4 +25,4 @@ function ProgressSlider({ className, value, max = 100 }: ProgressSliderProps): R
   );
 }
 
-export default ProgressSlider;
+export default ZigProgressBar;

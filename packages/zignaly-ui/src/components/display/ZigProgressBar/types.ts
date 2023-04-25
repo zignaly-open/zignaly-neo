@@ -1,4 +1,4 @@
-export type ProgressSliderProps = {
+export type ZigProgressBarProps = {
   value: number;
   className?: string;
   max?: number;

@@ -111,7 +111,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 {/* <LabelHardDisc color='neutral200'>
                   {t('instantWithdrawn')}
                 </LabelHardDisc>
-                <ProgressSlider
+                <ZigProgressBar
                   value={new BigNumber(balance.debt.toString())
                     .dividedBy(new BigNumber(balance.sbt.toString()))
                     .toNumber()}
