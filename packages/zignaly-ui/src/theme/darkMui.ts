@@ -146,11 +146,36 @@ const darkMui = createTheme({
         },
         sizeMedium: {
           minHeight: "36px",
+          paddingTop: "6px",
+          paddingBottom: "6px",
           minWidth: "76px",
         },
         sizeSmall: {
           minHeight: "30px",
           minWidth: "76px",
+        },
+        text: {
+          color: dark.links,
+          display: "inline",
+          padding: "0 5px",
+          marginLeft: "-4px",
+          marginRight: "-4px",
+          fontSize: "inherit",
+          verticalAlign: "baseline",
+          minHeight: "0px !important",
+          ".MuiButton-startIcon": {
+            marginRight: "4px",
+          },
+          ".MuiButton-endIcon": {
+            marginLeft: "4px",
+          },
+          ".MuiButton-startIcon, .MuiButton-endIcon": {
+            position: "relative",
+            top: "-1px",
+            ".MuiSvgIcon-root": {
+              verticalAlign: "middle",
+            },
+          },
         },
         contained: {
           boxShadow: "0px 12px 16px -8px rgba(25, 25, 39, 0.36)",
