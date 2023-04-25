@@ -42,6 +42,13 @@ TextInputer.args = {
   placeholder: "Amount to Withdraw",
 };
 
+export const Sensitive: ComponentMeta<typeof InputText> = Template.bind({});
+Sensitive.args = {
+  label: "Amount to Withdraw",
+  sensitive: true,
+  placeholder: "Amount to Withdraw",
+};
+
 export const TextareaInputer: ComponentMeta<typeof InputText> = Template.bind({});
 TextareaInputer.args = {
   value:

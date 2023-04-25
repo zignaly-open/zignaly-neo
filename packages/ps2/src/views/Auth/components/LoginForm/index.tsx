@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +10,6 @@ import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
 import { Button, ZigTypography, ZigInput, ZigButton } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
-import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -31,7 +30,6 @@ const LoginForm: React.FC = () => {
   const [{ loading: loggingIn }, authenticate] = useAuthenticate();
   const navigate = useNavigate();
   const { state: locationState } = useLocation();
-  const [showPassword, setShowPassword] = useState(false);
 
   const submit = (data: LoginPayload) => {
     authenticate(data).catch((e) => {
@@ -81,15 +79,8 @@ const LoginForm: React.FC = () => {
               placeholder={t('login-form.inputText.password.label')}
               disabled={loggingIn}
               error={t(errors.password?.message)}
-              type={showPassword ? 'text' : 'password'}
-              InputProps={{
-                endAdornment: (
-                  <PasswordVisibilityAdornment
-                    show={showPassword}
-                    onToggle={() => setShowPassword(!showPassword)}
-                  />
-                ),
-              }}
+              type={'password'}
+              sensitive
               {...field}
             />
           )}

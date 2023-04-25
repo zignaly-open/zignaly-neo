@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
@@ -10,7 +10,6 @@ import { Box } from '@mui/material';
 import { useResetPasswordMutation } from 'apis/user/api';
 import { ROUTE_LOGIN } from 'routes';
 import { useToast } from 'util/hooks/useToast';
-import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
 
 const ResetPasswordForm = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -28,7 +27,6 @@ const ResetPasswordForm = () => {
   });
   const [resetPassword, resetPasswordStatus] = useResetPasswordMutation();
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
   const { token } = useParams();
   const toast = useToast();
 
@@ -70,15 +68,8 @@ const ResetPasswordForm = () => {
                   </ZigTypography>
                 </Box>
               }
-              type={showPassword ? 'text' : 'password'}
-              InputProps={{
-                endAdornment: (
-                  <PasswordVisibilityAdornment
-                    show={showPassword}
-                    onToggle={() => setShowPassword(!showPassword)}
-                  />
-                ),
-              }}
+              sensitive
+              type={'password'}
               {...field}
             />
           )}

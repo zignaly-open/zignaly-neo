@@ -28,7 +28,6 @@ import Mailcheck from 'react-mailcheck';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import LockIcon from '@mui/icons-material/Lock';
-import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
 
 const SignupForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -47,7 +46,6 @@ const SignupForm: React.FC = () => {
   });
   const [{ loading: signingUp }, signup] = useSignup();
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
 
   const { state: locationState } = useLocation();
@@ -139,10 +137,12 @@ const SignupForm: React.FC = () => {
             render={({ field }) => (
               <ZigInput
                 id={'login__password'}
+                sensitive
                 label={t('login-form.inputText.password.label') + ':'}
                 placeholder={t('login-form.inputText.password.label')}
                 disabled={signingUp}
                 error={t(errors.password?.message)}
+                type={'password'}
                 helperText={
                   <Box display='flex' alignItems='center'>
                     <StyledErrorOutline height='24px' width='24px' />
@@ -153,7 +153,6 @@ const SignupForm: React.FC = () => {
                     </ZigTypography>
                   </Box>
                 }
-                type={showPassword ? 'text' : 'password'}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment
@@ -162,12 +161,6 @@ const SignupForm: React.FC = () => {
                     >
                       <PasswordOutlinedIcon color={'secondary'} />
                     </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <PasswordVisibilityAdornment
-                      show={showPassword}
-                      onToggle={() => setShowPassword(!showPassword)}
-                    />
                   ),
                 }}
                 {...field}

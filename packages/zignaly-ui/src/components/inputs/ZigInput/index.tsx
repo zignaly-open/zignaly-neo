@@ -1,46 +1,78 @@
-import React from "react";
+import React, { useState } from "react";
 import { ZigInputProps } from "./types";
 import ErrorMessage from "components/display/ErrorMessage";
 import { styled } from "@mui/material/styles";
-import { TextField } from "@mui/material";
-import TextButton from "../TextButton";
+import { InputAdornment, TextField } from "@mui/material";
 import ZigButton from "../ZigButton";
+import dark from "../../../theme/dark";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+
+function valueToArray<T>(v: T | T[]): T[] {
+  return (Array.isArray(v) ? v : [v]).filter(Boolean);
+}
 
 const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
-  React.forwardRef(({ error, wide, labelAction, helperText, ...props }, ref) => (
-    <TextField
-      inputRef={ref}
-      {...props}
-      inputProps={{
-        ...(props.inputProps || {}),
-      }}
-      label={
-        <>
-          {props.label}
-          {labelAction && (
-            <ZigButton
-              variant={"text"}
-              tabIndex={labelAction.tabIndex}
-              onClick={labelAction.onClick}
-              href={labelAction.href}
-              id={labelAction.id}
-            >
-              {labelAction.text}
-            </ZigButton>
-          )}
-        </>
-      }
-      variant={"standard"}
-      error={!!error}
-      helperText={
-        typeof error === "string" && error !== ""
-          ? error && <ErrorMessage text={error} />
-          : helperText
-      }
-      InputProps={{ disableUnderline: true, ...(props.InputProps || {}) }}
-      InputLabelProps={{ shrink: true, ...(props.InputLabelProps || {}) }}
-    />
-  )),
+  React.forwardRef(({ error, wide, sensitive, labelAction, helperText, ...props }, ref) => {
+    const [isShown, setIsShown] = useState(false);
+    const EyeIcon = isShown ? VisibilityOffIcon : VisibilityIcon;
+
+    return (
+      <TextField
+        inputRef={ref}
+        {...props}
+        inputProps={{
+          ...(props.inputProps || {}),
+        }}
+        label={
+          <>
+            {props.label}
+            {labelAction && (
+              <ZigButton
+                variant={"text"}
+                tabIndex={labelAction.tabIndex}
+                onClick={labelAction.onClick}
+                href={labelAction.href}
+                id={labelAction.id}
+              >
+                {labelAction.text}
+              </ZigButton>
+            )}
+          </>
+        }
+        variant={"standard"}
+        error={!!error}
+        helperText={
+          typeof error === "string" && error !== ""
+            ? error && <ErrorMessage text={error} />
+            : helperText
+        }
+        type={sensitive ? (!isShown ? "password" : "text") : props.type}
+        InputProps={{
+          disableUnderline: true,
+          ...(props.InputProps || {}),
+          ...(sensitive
+            ? {
+                endAdornment: [
+                  <InputAdornment position="end" key={props.id + "sensivive"}>
+                    {!!sensitive && (
+                      <EyeIcon
+                        onClick={() => setIsShown((v) => !v)}
+                        width={40}
+                        height={40}
+                        sx={ZigInputInteractiveAdornmentStyle}
+                      />
+                    )}
+                  </InputAdornment>,
+                  ...valueToArray(props?.InputProps?.endAdornment),
+                ],
+              }
+            : {}),
+        }}
+        InputLabelProps={{ shrink: true, ...(props.InputLabelProps || {}) }}
+      />
+    );
+  }),
 )`
   ${(props) => props.wide && "display: block"};
 
@@ -136,5 +168,14 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
     }
   }
 `;
+
+export const ZigInputInteractiveAdornmentStyle = {
+  cursor: "pointer",
+  color: dark.neutral300,
+  transition: "all .3s",
+  "&:hover": {
+    color: dark.neutral200,
+  },
+};
 
 export default ZigInput;

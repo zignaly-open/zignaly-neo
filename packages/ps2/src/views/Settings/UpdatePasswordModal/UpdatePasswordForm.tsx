@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Box } from '@mui/material';
 import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
@@ -9,7 +9,6 @@ import { Form } from './styles';
 import { UpdatePasswordValidation } from './validations';
 import { StyledErrorOutline } from '../../Auth/components/SignupForm/styles';
 import { UpdatePasswordFormType } from './types';
-import PasswordVisibilityAdornment from '../../Auth/components/atoms/PasswordVisibilityAdornment';
 import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
 import { useCheck2FA, useLogout } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
@@ -26,8 +25,6 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
     resolver: yupResolver(UpdatePasswordValidation),
   });
   const [updatePassword, updatePasswordStatus] = useUpdatePasswordMutation();
-  const [showPassword, setShowPassword] = useState(false);
-  const [showNewPassword, setShowNewPassword] = useState(false);
   const check2FA = useCheck2FA({
     status: updatePasswordStatus,
   });
@@ -70,15 +67,8 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
               label={t('update-password.current-password')}
               placeholder={t('update-password.current-password')}
               error={t(errors.password?.message)}
-              type={showPassword ? 'text' : 'password'}
-              InputProps={{
-                endAdornment: (
-                  <PasswordVisibilityAdornment
-                    show={showPassword}
-                    onToggle={() => setShowPassword(!showPassword)}
-                  />
-                ),
-              }}
+              type={'password'}
+              sensitive
               {...field}
             />
           )}
@@ -101,15 +91,8 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
                   </ZigTypography>
                 </Box>
               }
-              type={showNewPassword ? 'text' : 'password'}
-              InputProps={{
-                endAdornment: (
-                  <PasswordVisibilityAdornment
-                    show={showNewPassword}
-                    onToggle={() => setShowNewPassword(!showNewPassword)}
-                  />
-                ),
-              }}
+              sensitive
+              type={'password'}
               {...field}
             />
           )}
