@@ -9,7 +9,10 @@ export { ReactComponent as ZignalyLogotype } from "assets/images/zignaly-logotyp
 export { default as ZigButton, ZigButtonGroup } from "./components/inputs/ZigButton";
 export type { ZigButtonProps } from "./components/inputs/ZigButton";
 export { default as ZigButtonGroupInput } from "./components/inputs/ZigButtonGroupInput";
-export { default as ZigInput } from "./components/inputs/ZigInput";
+export {
+  default as ZigInput,
+  ZigInputInteractiveAdornmentStyle,
+} from "./components/inputs/ZigInput";
 export { default as ZigAutocomplete } from "./components/inputs/ZigAutocomplete";
 export { default as ZigSelect } from "./components/inputs/ZigSelect";
 export { default as InputAmountAdvanced } from "components/inputs/InputAmountAdvanced";
@@ -24,6 +27,7 @@ export { default as ErrorMessage } from "./components/display/ErrorMessage";
 export { default as ZigAlertMessage } from "./components/display/ZigAlertMessage";
 export { default as Loader } from "./components/display/Loader";
 export { default as Toaster } from "./components/display/Toaster";
+export { default as ZigCopyText } from "./components/display/ZigCopyText";
 export { default as ZigProgressBar } from "./components/display/ZigProgressBar";
 export { default as ZigCoinIcon } from "components/display/ZigCoinIcon";
 export { default as ZigQrCode } from "./components/display/ZigQrCode";
@@ -113,6 +117,8 @@ export { default as BrandImage } from "./components/navigation/Header/components
 // Utils
 export { sortByValue } from "utils/numbers";
 export { NiceScrollbar } from "utils/css";
-export { styledIf } from "utils/styled";
 export { HeaderLinksContainer } from "components/navigation/Header/styles";
 export { getPrecisionForCoin, shortenNumber } from "components/display/ZigPriceLabel/util";
+
+// please stop using this
+export { styledIf } from "utils/styled";
