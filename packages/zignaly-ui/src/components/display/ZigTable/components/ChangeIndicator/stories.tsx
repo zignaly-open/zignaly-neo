@@ -1,16 +1,16 @@
 import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
-import PercentageIndicator from "./index";
+import ChangeIndicator from "./index";
 
 export default {
-  title: "Display/___FIXME____Table/Components/PercentageIndicator",
-  component: PercentageIndicator,
-} as ComponentMeta<typeof PercentageIndicator>;
+  title: "Display/Table/Components/ChangeIndicator",
+  component: ChangeIndicator,
+} as ComponentMeta<typeof ChangeIndicator>;
 
-const Template: ComponentStory<typeof PercentageIndicator> = (args) => (
+const Template: ComponentStory<typeof ChangeIndicator> = (args) => (
   <div style={{ display: "grid", justifyContent: "start" }}>
-    <PercentageIndicator {...args} />
+    <ChangeIndicator {...args} />
   </div>
 );
 

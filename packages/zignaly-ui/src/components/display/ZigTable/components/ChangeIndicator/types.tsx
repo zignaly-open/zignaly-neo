@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-export interface PercentageIndicatorProps {
+export interface ChangeIndicatorProps {
   labelTooltip?: string;
   value: string | number;
   type?: "default" | "graph" | "only_number";

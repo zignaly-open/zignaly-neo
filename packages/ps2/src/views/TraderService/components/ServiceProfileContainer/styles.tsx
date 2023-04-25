@@ -178,7 +178,7 @@ export const ChartWrapper = styled(Box)`
   justify-content: center;
 `;
 
-export const PercentageIndicatorSmall = styled(ZigTypography)`
+export const ChangeIndicatorSmall = styled(ZigTypography)`
   position: relative;
   top: -1.5px;
   font-size: 12px !important;

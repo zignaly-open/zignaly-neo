@@ -4,11 +4,12 @@ import { useTheme } from "styled-components";
 import BigNumber from "bignumber.js";
 import { Layout, Row, Container, Indicator, Subtitle, Inline } from "./styles";
 import { ValueIndicator } from "components/styled";
-import { PercentageIndicatorProps } from "./types";
+import { ChangeIndicatorProps } from "./types";
 import { Tooltip } from "@mui/material";
 import ZigTypography from "../../../ZigTypography";
 
-const PercentageIndicator = ({
+// looks ugly
+const ChangeIndicator = ({
   id,
   value = "0",
   label,
@@ -17,7 +18,7 @@ const PercentageIndicator = ({
   stableCoinOperative = false,
   style,
   labelTooltip = "",
-}: PercentageIndicatorProps) => {
+}: ChangeIndicatorProps) => {
   let bigNumberValue = new BigNumber(value);
   if (normalized) bigNumberValue = bigNumberValue.multipliedBy(100);
   const isPositiveValue = bigNumberValue.isPositive();
@@ -125,4 +126,4 @@ const PercentageIndicator = ({
   );
 };
 
-export default PercentageIndicator;
+export default ChangeIndicator;

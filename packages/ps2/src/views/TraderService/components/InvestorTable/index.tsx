@@ -6,7 +6,7 @@ import {
   UserIcon,
   ZigTypography,
   PriceLabel,
-  PercentageIndicator,
+  ChangeIndicator,
   ZigTable,
   createColumnHelper,
   ZigTablePriceLabel,
@@ -78,7 +78,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             coin={service?.ssc ?? 'USDT'}
             value={parseFloat(props.getValue())}
             bottomElement={
-              <PercentageIndicator value={props.row.original.pnlPctLc} />
+              <ChangeIndicator value={props.row.original.pnlPctLc} />
             }
           />
         ),

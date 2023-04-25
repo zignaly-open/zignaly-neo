@@ -2,15 +2,15 @@ import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { NumericFormat } from "react-number-format";
 import ZigTable from ".";
-import PercentageIndicator from "../Table/components/PercentageIndicator";
-import DateLabel from "../Table/components/DateLabel";
-import CoinLabel from "../Table/components/CoinLabel";
+import ChangeIndicator from "./components/ChangeIndicator";
+import DateLabel from "./components/DateLabel";
+import CoinLabel from "./components/CoinLabel";
 import { ColumnDef, createColumnHelper } from "@tanstack/react-table";
 import { makeCoinsData, makeExchangeOrdersData, makeInvestorsData } from "./makeData";
-import { ZigTablePriceLabel } from "../ZigPriceLabel";
+import ZigPriceLabel, { ZigTablePriceLabel } from "../ZigPriceLabel";
 import ZigButton from "components/inputs/ZigButton";
 import { Box } from "@mui/material";
-import PriceLabel, { UsdPriceLabel } from "../Table/components/PriceLabel";
+import PriceLabel, { UsdPriceLabel } from "./components/PriceLabel";
 import ZigTypography from "../ZigTypography";
 import { Check, Close } from "@mui/icons-material";
 
@@ -70,19 +70,19 @@ const userTableColumns = [
   }),
   columnHelperUserTable.accessor("dailyAvg.value", {
     header: "Daily avg",
-    cell: ({ getValue }) => <PercentageIndicator value={getValue()} />,
+    cell: ({ getValue }) => <ChangeIndicator value={getValue()} />,
   }),
   columnHelperUserTable.accessor("oneMonth.value", {
     header: "1 mo.",
-    cell: ({ getValue }) => <PercentageIndicator value={getValue()} />,
+    cell: ({ getValue }) => <ChangeIndicator value={getValue()} />,
   }),
   columnHelperUserTable.accessor("threeMonths.value", {
     header: "3 mo.",
-    cell: ({ getValue }) => <PercentageIndicator value={getValue()} />,
+    cell: ({ getValue }) => <ChangeIndicator value={getValue()} />,
   }),
   columnHelperUserTable.accessor("all.value", {
     header: "All",
-    cell: ({ getValue }) => <PercentageIndicator value={getValue()} />,
+    cell: ({ getValue }) => <ChangeIndicator value={getValue()} />,
   }),
 ];
 
@@ -126,7 +126,7 @@ const myCoinsTableColumns = [
   }),
   columnHelperMyCoins.accessor("valueInUsd.value", {
     header: "Value in USD",
-    cell: ({ getValue }) => <UsdPriceLabel value={getValue()} />,
+    cell: ({ getValue }) => <ZigPriceLabel usd value={getValue()} />,
   }),
   columnHelperMyCoins.display({
     header: "",
@@ -178,7 +178,7 @@ const investorsTableColumns: ColumnDef<typeof investorsTableData[number], any>[]
       <PriceLabel
         coin={original.coin}
         value={getValue()}
-        bottomElement={<PercentageIndicator value={3} />}
+        bottomElement={<ChangeIndicator value={3} />}
       />
     ),
   },
@@ -223,7 +223,7 @@ const investorsTableColumns: ColumnDef<typeof investorsTableData[number], any>[]
 ];
 
 export default {
-  title: "Display/ZigTable",
+  title: "Display/Table/ZigTable",
   component: ZigTable,
   decorators: [(story) => <div style={{ paddingBottom: "2rem" }}>{story()}</div>],
 } as ComponentMeta<typeof ZigTable>;

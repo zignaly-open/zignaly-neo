@@ -18,10 +18,6 @@ export { default as ZigSelect } from "./components/inputs/ZigSelect";
 export { default as InputCode } from "./components/inputs/InputCode";
 export { default as ZigSliderInput } from "components/inputs/ZigSliderInput";
 
-// this
-export { default as InputAmountAdvanced } from "components/inputs/InputAmountAdvanced";
-export type { InputAmountAdvancedValueType } from "components/inputs/InputAmountAdvanced";
-
 // Basic display components
 export { Loader, CenteredLoader } from "./components/display/Loader";
 export { default as ZigTypography } from "./components/display/ZigTypography";
@@ -40,11 +36,14 @@ export { createColumnHelper } from "@tanstack/react-table";
 export type { ColumnDef } from "@tanstack/react-table";
 export { default as ZigTable } from "./components/display/ZigTable";
 export { downloadTableCsv } from "./components/display/ZigTable/util";
-export { default as DateLabel } from "./components/display/Table/components/DateLabel"; // yes, this is used
-export { default as PercentageIndicator } from "./components/display/Table/components/PercentageIndicator"; // yes, this is used too
-export { default as CoinLabel } from "./components/display/Table/components/CoinLabel";
+export { default as DateLabel } from "./components/display/ZigTable/components/DateLabel"; // yes, this is used
+export { default as ChangeIndicator } from "./components/display/ZigTable/components/ChangeIndicator"; // yes, this is used too
+export { default as CoinLabel } from "./components/display/ZigTable/components/CoinLabel";
 
-//
+// Chart
+export * from "./components/display/ZigChart";
+
+// TODO: abandon all hope ye who enter here
 //
 //
 //
@@ -53,14 +52,12 @@ export { default as CoinLabel } from "./components/display/Table/components/Coin
 // TODO: Layouts - questionable, probably shoudl deprecate
 export { MarginContainer, PageContainer } from "./components/styled";
 
-// Chart
-export * from "./components/display/ZigChart";
+// this
+export { default as InputAmountAdvanced } from "components/inputs/InputAmountAdvanced";
+export type { InputAmountAdvancedValueType } from "components/inputs/InputAmountAdvanced";
 
 // TODO: deprecate
-export {
-  default as PriceLabel,
-  UsdPriceLabel,
-} from "./components/display/Table/components/PriceLabel";
+export { default as PriceLabel } from "./components/display/ZigTable/components/PriceLabel";
 export { default as DropDown } from "./components/display/DropDown";
 export type {
   DropDownHandleType,
@@ -76,6 +73,7 @@ export { ButtonGroup, ValueIndicator } from "./components/styled";
 
 // Icons - for the love of God, we should not do this
 // TODO: we have mui icons for a bloody reason
+// TODO: @Nikita9901 pls fix
 export { ReactComponent as CloneIcon } from "assets/icons/clone-icon.svg";
 export { ReactComponent as RefreshIcon } from "assets/icons/refresh-icon.svg";
 export { ReactComponent as PencilIcon } from "assets/icons/pencil-icon.svg";
@@ -114,14 +112,15 @@ export { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
 export { ReactComponent as ZignalyExchangeIcon } from "assets/icons/zignaly-exchange-icon.svg";
 
 // Navigation
+// TODO: @cwagner22 pls fix/bring to proper shape
 export { default as Header } from "./components/navigation/Header";
 export { default as MenuDropDown } from "./components/navigation/MenuDropDown";
 export { default as BrandImage } from "./components/navigation/Header/components/BrandImage";
+export { HeaderLinksContainer } from "components/navigation/Header/styles";
 
 // Utils
 export { sortByValue, trimZeros } from "utils/numbers";
 export { NiceScrollbar } from "utils/css";
-export { HeaderLinksContainer } from "components/navigation/Header/styles";
 export { getPrecisionForCoin, shortenNumber } from "components/display/ZigPriceLabel/util";
 
 // please stop using this

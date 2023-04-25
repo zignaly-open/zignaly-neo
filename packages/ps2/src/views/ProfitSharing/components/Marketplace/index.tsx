@@ -3,7 +3,7 @@ import { useMarketplace } from '../../../../apis/marketplace/use';
 import { useTranslation } from 'react-i18next';
 import {
   PageContainer,
-  PercentageIndicator,
+  ChangeIndicator,
   ZigTypography,
   ZigTable,
   createColumnHelper,
@@ -104,7 +104,7 @@ const Marketplace: React.FC = () => {
         id: 'pnlPercent90t',
         header: t('table.n-months-pnl', { count: 3 }),
         cell: (props) => (
-          <PercentageIndicator
+          <ChangeIndicator
             id={`marketplace-table__pnl90t-${props.row.original.id}`}
             style={{
               fontSize: '18px',
@@ -127,7 +127,7 @@ const Marketplace: React.FC = () => {
                   midLine
                   data={[0, ...(props.row.original.sparklines as number[])]}
                 />
-                <PercentageIndicator
+                <ChangeIndicator
                   value={props.getValue()}
                   type={'graph'}
                   id={`marketplace-table__pnl30t-${props.row.original.id}-percent`}
