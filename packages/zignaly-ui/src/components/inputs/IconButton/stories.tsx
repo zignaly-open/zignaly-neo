@@ -6,7 +6,7 @@ import { ReactComponent as OptionDotsIcon } from "assets/icons/option-dots-icon.
 import IconButton from "./";
 
 export default {
-  title: "Inputs/IconButton",
+  title: "Inputs/___FIXME____IconButton",
   component: IconButton,
 
   argTypes: {

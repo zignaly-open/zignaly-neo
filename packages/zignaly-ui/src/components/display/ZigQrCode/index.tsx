@@ -5,13 +5,7 @@ import { QRCodeContainer } from "./styles";
 import ZigTypography from "../ZigTypography";
 
 // TODO: rename to ZigQRCode
-const ZignalyQRCode = ({
-  url = "www.zignaly.com",
-  label = "",
-}: {
-  url?: string;
-  label?: string;
-}) => {
+const ZigQrCode = ({ url = "www.zignaly.com", label = "" }: { url?: string; label?: string }) => {
   return (
     <Column justifyContent="center" alignItems="center" gap={8}>
       {label && (
@@ -26,4 +20,4 @@ const ZignalyQRCode = ({
   );
 };
 
-export default ZignalyQRCode;
+export default ZigQrCode;

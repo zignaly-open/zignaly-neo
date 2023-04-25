@@ -6,7 +6,7 @@ import {
   dark,
   InputText,
   ErrorMessage,
-  ZignalyQRCode,
+  ZigQrCode,
   ZigSelect,
   CloneIcon,
   Loader,
@@ -335,14 +335,14 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                     gap: 2,
                   }}
                 >
-                  <ZignalyQRCode
+                  <ZigQrCode
                     label={t('depositQR.address', {
                       coin: coinObject?.name,
                     })}
                     url={depositInfo.address}
                   />
                   {depositInfo?.tag && (
-                    <ZignalyQRCode
+                    <ZigQrCode
                       label={t('depositQR.memo', {
                         coin: coinObject?.name,
                       })}

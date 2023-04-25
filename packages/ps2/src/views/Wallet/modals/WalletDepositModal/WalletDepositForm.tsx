@@ -5,7 +5,7 @@ import {
   dark,
   InputText,
   ErrorMessage,
-  ZignalyQRCode,
+  ZigQrCode,
   ZigSelect,
   CloneIcon,
   ZigTypography,
@@ -165,14 +165,14 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
                       gap: 2,
                     }}
                   >
-                    <ZignalyQRCode
+                    <ZigQrCode
                       label={t('depositQR.address', {
                         coin: coinObject?.name,
                       })}
                       url={depositInfo?.address}
                     />
                     {depositInfo?.memo && (
-                      <ZignalyQRCode
+                      <ZigQrCode
                         label={t('depositQR.memo', { coin: coinObject?.name })}
                         url={depositInfo?.memo}
                       />

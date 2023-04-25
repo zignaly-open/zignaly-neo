@@ -26,7 +26,7 @@ export { default as Loader } from "./components/display/Loader";
 export { default as Toaster } from "./components/display/Toaster";
 export { default as ZigProgressBar } from "./components/display/ZigProgressBar";
 export { default as ZigCoinIcon } from "components/display/ZigCoinIcon";
-export { default as ZignalyQRCode } from "./components/display/ZignalyQRCode";
+export { default as ZigQrCode } from "./components/display/ZigQrCode";
 export { default as ZigTabs, ZigTab, ZigTabPanel } from "./components/navigation/ZigTabs";
 
 // Table
