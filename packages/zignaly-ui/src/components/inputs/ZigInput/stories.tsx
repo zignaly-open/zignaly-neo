@@ -65,7 +65,7 @@ LabelActionLink.args = {
   wide: true,
   labelAction: {
     text: "Link to somewhere",
-    href: "https://xfuturum.com",
+    href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
   },
   label: "Label",
 };

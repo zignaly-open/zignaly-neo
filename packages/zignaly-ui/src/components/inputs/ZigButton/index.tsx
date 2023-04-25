@@ -7,16 +7,33 @@ export type ZigButtonProps = Omit<LoadingButtonProps, "size"> & {
   size?: LoadingButtonProps["size"] | "xlarge";
   ctaId?: string;
   tooltip?: string;
+  linkTarget?: "_blank";
+  linkRel?: "noopener noreferrer";
   active?: boolean;
 };
 
-const ZigButton = ({ active, tooltip, ctaId, color, size, ...props }: ZigButtonProps) => {
+const ZigButton = ({
+  active,
+  tooltip,
+  ctaId,
+  color,
+  size,
+  linkTarget,
+  linkRel,
+  ...props
+}: ZigButtonProps) => {
   const button = (
     <LoadingButton
       data-tack-cta={ctaId}
       // it wasn't me lol
       size={size as LoadingButtonProps["size"]}
       {...props}
+      {...(props.href
+        ? {
+            rel: linkRel ?? "noopener noreferrer",
+            target: linkTarget ?? "_blank",
+          }
+        : {})}
       // hack to preserve old behavior but allow for normal mui theming
       color={props.variant === "outlined" && !color ? "secondary" : color}
       className={active ? "MuiButton-active" : ""}

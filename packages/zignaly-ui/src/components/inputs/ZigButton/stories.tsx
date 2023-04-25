@@ -82,6 +82,13 @@ Loading.args = {
   loading: true,
 };
 
+export const Link = Template.bind({});
+Link.args = {
+  children: "The technical partner you can rely on",
+  variant: "contained",
+  href: "https://xfuturum.com",
+};
+
 const Wrapper = styled("div")`
   & > * {
     display: inline-block;
