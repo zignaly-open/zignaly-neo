@@ -2,7 +2,6 @@ import React, { useMemo } from "react";
 import { Box, TabsProps } from "@mui/material";
 import * as styled from "./styles";
 
-// TODO: move to Display. Actually, think of a better separation
 const ZigTabs = (props: TabsProps) => {
   const { children, ...restProps } = props;
 

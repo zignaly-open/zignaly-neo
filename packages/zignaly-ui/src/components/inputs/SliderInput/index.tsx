@@ -95,14 +95,14 @@ const SliderInput = ({
       <Layout style={style} className={className}>
         <TextContainer>
           {!!labels.left && (
-            <Label variant="body2" weight="demibold" color="neutral200">
+            <Label variant="body2" fontWeight="demibold" color="neutral200">
               {labels.left}
             </Label>
           )}
           <Label
             className={"value"}
             variant="body2"
-            weight="demibold"
+            fontWeight="demibold"
             color={labels.left ? "highlighted" : "neutral200"}
           >
             {isRangeMode ? 100 - value : 0}%
@@ -124,13 +124,13 @@ const SliderInput = ({
         </Bar>
         <TextContainer>
           {labels.right && (
-            <Label variant="body2" weight="demibold" color="neutral200">
+            <Label variant="body2" fontWeight="demibold" color="neutral200">
               {labels.right}
             </Label>
           )}
           <Label
             variant="body2"
-            weight="demibold"
+            fontWeight="demibold"
             className={"value"}
             color={labels.right ? "highlighted" : "neutral200"}
           >

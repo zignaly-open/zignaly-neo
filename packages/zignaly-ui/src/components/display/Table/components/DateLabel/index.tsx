@@ -5,7 +5,7 @@ import * as styled from "./styles";
 
 const DateLabel = ({ date }: { date: Date }) => (
   <styled.Layout>
-    <styled.Value variant={"body2"} fontWeight={"regular"} hasLowercase>
+    <styled.Value variant={"body2"} fontWeight={"regular"} sx={{ textTransform: "lowercase" }}>
       {format(date, "p")}
     </styled.Value>
     <styled.Value variant={"body2"} fontWeight={"regular"}>

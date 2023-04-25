@@ -95,7 +95,10 @@ export const Header = styled.div`
   margin-bottom: 12px;
 `;
 
-export const DotLabel = muiStyled(ZigTypography)`
+// https://github.com/microsoft/TypeScript/issues/48212
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+export const DotLabel: typeof ZigTypography = muiStyled(ZigTypography)`
   position: relative;
   top: 26px;
 `;
