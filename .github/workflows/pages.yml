@@ -3,7 +3,8 @@ name: Storybook to Github pages
 on:
   push:
     branches:
-      - master
+      #      - master
+      - feat/storybook2
 
 jobs:
   pre_job:
@@ -20,7 +21,6 @@ jobs:
             ui_repos:
               paths:
                 - 'packages/zignaly-ui/**/*'
-                - 'packages/raffles-client/**/*'
           # Can be mixed with the "global" 'paths_ignore' / 'paths' options, for example:
           # paths_ignore: '["**/README.md"]'
 

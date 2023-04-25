@@ -15,13 +15,13 @@ import {
 import TokenSelector from "./components/TokenSelector";
 import ErrorMessage from "components/display/ErrorMessage";
 import Typography from "components/display/Typography";
-import { COIN_SIZES } from "../../display/ZigCoinIcon/types";
 import { InputAmountProps, TokenItem } from "./types";
 import { changeEvent } from "utils/event";
 import { useDeepCompareEffect } from "react-use";
 import ZigPriceLabel from "components/display/ZigPriceLabel";
 import { Box } from "@mui/material";
-import ZigCoinIcon from "components/display/ZigCoinIcon";
+import ZigCoinIcon, { CoinSizes } from "components/display/ZigCoinIcon";
+import { COIN_SIZES } from "components/display/ZigCoinIcon/types";
 
 // FIXME this component still needs Jesus
 function InputAmount({
@@ -104,7 +104,7 @@ function InputAmount({
             {value?.token?.id && tokens.length < 2 && (
               <ZigCoinIcon
                 name={value?.token.id}
-                size={COIN_SIZES.SMALL}
+                size={COIN_SIZES.Small as CoinSizes}
                 coin={value?.token.id}
                 bucket={iconBucket}
               />
@@ -179,5 +179,7 @@ function InputAmount({
     </Layout>
   );
 }
+
+export type { InputAmountAdvancedValue as InputAmountAdvancedValueType } from "./types";
 
 export default InputAmount;

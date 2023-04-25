@@ -2,10 +2,11 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   InputAmountAdvanced,
+  InputAmountAdvancedValueType,
   ZigButton,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { useForm } from 'react-hook-form';
+import { FieldErrorsImpl, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { InvestInYourServiceValidation } from '../validations';
 import { Grid } from '@mui/material';
@@ -103,10 +104,15 @@ const InvestInYourServiceForm: React.FC<{
             showUnit={true}
             placeholder={'0.0'}
             tokens={[service.baseCurrency]}
-            error={t(errors?.amountToInvest?.value?.message, {
-              minValue,
-              minValueCoin: coin.id,
-            })}
+            error={t(
+              (
+                errors?.amountToInvest as FieldErrorsImpl<InputAmountAdvancedValueType>
+              )?.value?.message,
+              {
+                minValue,
+                minValueCoin: coin.id,
+              },
+            )}
           />
         </Grid>
       </Grid>

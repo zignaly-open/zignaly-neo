@@ -29,7 +29,11 @@ const Marketplace: React.FC = () => {
     () => [
       columnHelper.accessor('name', {
         id: 'service-name',
-        header: t('table.service-name'),
+        header: () => (
+          <div id={'marketplace-table__header-service'}>
+            {t('table.service-name')}
+          </div>
+        ),
         style: {
           justifyContent: 'flex-start',
           paddingLeft: '88px',
@@ -37,8 +41,18 @@ const Marketplace: React.FC = () => {
         meta: {
           subtitle: (
             <>
-              <Box textAlign={'left'}>{t('table.manager')}</Box>
-              <Box textAlign={'left'}>{t('table.currency')}</Box>
+              <Box
+                textAlign={'left'}
+                id={'marketplace-table__header-service-manager'}
+              >
+                {t('table.manager')}
+              </Box>
+              <Box
+                textAlign={'left'}
+                id={'marketplace-table__header-service-currency'}
+              >
+                {t('table.currency')}
+              </Box>
             </>
           ),
         },
@@ -55,12 +69,18 @@ const Marketplace: React.FC = () => {
       }),
       columnHelper.accessor('investedUSDT', {
         id: 'investedUSDT',
-        header: t('table.assets'),
+        header: () => (
+          <div id={'marketplace-table__header-assets'}>{t('table.assets')}</div>
+        ),
         meta: {
           subtitle: (
             <>
-              <div>{t('table.nb-investors')}</div>
-              <div>{t('table.account-age')}</div>
+              <div id={'marketplace-table__header-assets-investors'}>
+                {t('table.nb-investors')}
+              </div>
+              <div id={'marketplace-table__header-assets-age'}>
+                {t('table.account-age')}
+              </div>
             </>
           ),
         },
@@ -84,37 +104,41 @@ const Marketplace: React.FC = () => {
         id: 'pnlPercent90t',
         header: t('table.n-months-pnl', { count: 3 }),
         cell: (props) => (
-          <Box id={`marketplace-table__pnl90t-${props.row.original.id}`}>
-            <PercentageIndicator
-              style={{
-                fontSize: '18px',
-                lineHeight: '28px',
-              }}
-              value={props.getValue()}
-            />
-          </Box>
+          <PercentageIndicator
+            id={`marketplace-table__pnl90t-${props.row.original.id}`}
+            style={{
+              fontSize: '18px',
+              lineHeight: '28px',
+            }}
+            value={props.getValue()}
+          />
         ),
       }),
       columnHelper.accessor((row) => Number(row.pnlPercent30t), {
         id: 'pnlPercent30t',
         header: t('table.n-months-pnl', { count: 1 }),
         cell: (props) => (
-          <Box id={`marketplace-table__pnl30t-${props.row.original.id}`}>
+          <>
             {+props.getValue() ||
             Object.keys(props.row.original.sparklines).length > 1 ? (
               <>
                 <ZigChartMini
+                  id={`marketplace-table__pnl30t-${props.row.original.id}-chart`}
                   midLine
                   data={[0, ...(props.row.original.sparklines as number[])]}
                 />
-                <PercentageIndicator value={props.getValue()} type={'graph'} />
+                <PercentageIndicator
+                  value={props.getValue()}
+                  type={'graph'}
+                  id={`marketplace-table__pnl30t-${props.row.original.id}-percent`}
+                />
               </>
             ) : (
               <ZigTypography variant='body2' color='neutral400'>
                 {t('tableHeader.1-mo.no-data')}
               </ZigTypography>
             )}
-          </Box>
+          </>
         ),
       }),
       columnHelper.display({

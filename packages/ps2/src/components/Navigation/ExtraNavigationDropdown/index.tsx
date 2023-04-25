@@ -19,17 +19,14 @@ import {
   ROUTE_BECOME_TRADER,
   ROUTE_TRADING_SERVICE_MANAGE,
 } from '../../../routes';
-import {
-  DropDownHandle,
-  DropDownOption,
-} from '@zignaly-open/ui/lib/components/display/DropDown/types';
+import { DropDownHandleType, DropDownOptionType } from '@zignaly-open/ui';
 import { GlobeLanguagesStyled, LabelButton } from './styles';
 import { LocalizationLanguages } from '../../../util/languages';
 
 const ExtraNavigationDropdown: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const dropDownRef = useRef<DropDownHandle>(null);
+  const dropDownRef = useRef<DropDownHandleType>(null);
   const { t, i18n } = useTranslation('common');
   const changeLocale = useChangeLocale();
   const service = useFirstOwnedService();
@@ -54,7 +51,7 @@ const ExtraNavigationDropdown: React.FC = () => {
     onClose();
   };
 
-  let options: DropDownOption[] = [
+  let options: DropDownOptionType[] = [
     {
       label: t('main-menu.dropdown-link-helpDocs'),
       id: 'menu-dropdown__help-docs',

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { NumericFormat } from 'react-number-format';
-import { Tooltip, useTheme } from '@mui/material';
-import { Controller, useForm } from 'react-hook-form';
+import { useTheme } from '@mui/material';
+import { Controller, FieldErrorsImpl, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import {
@@ -17,7 +17,7 @@ import {
   ArrowRightIcon,
   Button,
   InputAmountAdvanced,
-  PlusIcon,
+  InputAmountAdvancedValueType,
   SliderInput,
   TextButton,
   Typography,
@@ -37,19 +37,17 @@ import { useToast } from '../../../../../../util/hooks/useToast';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
+import { useDebounce } from 'react-use';
 
 function EditInvestmentForm({
   onClickWithdrawInvestment,
-  close,
   setView,
 }: EditInvestmentFormProps) {
   const coin = useCurrentBalance();
   const theme = useTheme();
   const { t } = useTranslation('edit-investment');
-  const [isInputEnabled, setInputEnabled] = useState(false);
   const { serviceId, serviceName } = useSelectedInvestment();
-  const { isLoading: isEditingPercent, edit: editPercent } =
-    useUpdateTakeProfitPercentage(serviceId);
+  const { edit: editPercent } = useUpdateTakeProfitPercentage(serviceId);
   const { isLoading: isEditingInvestment, edit: editInvestment } =
     useUpdateTakeProfitAndInvestMore(serviceId);
   const { data: details } = useInvestmentDetails(serviceId);
@@ -60,6 +58,7 @@ function EditInvestmentForm({
     handleSubmit,
     control,
     formState: { isValid, isDirty, errors },
+    watch,
   } = useForm<EditFormData>({
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -70,58 +69,53 @@ function EditInvestmentForm({
       },
       profitPercentage: details?.profitPercentage,
     },
-    resolver: isInputEnabled
-      ? yupResolver(
-          EditInvestmentValidation({
-            max: new BigNumber(service.maximumSbt)
-              .minus(service.invested)
-              .minus(service.pending)
-              .toString(),
-            coin: service.ssc,
-          }),
-        )
-      : null,
+    resolver: yupResolver(
+      EditInvestmentValidation({
+        max: new BigNumber(service.maximumSbt)
+          .minus(service.invested)
+          .minus(service.pending)
+          .toString(),
+        coin: service.ssc,
+      }),
+    ),
   });
 
   const toast = useToast();
   const openBlockedToast = () => toast.error(t('error-blockedInvestment'));
 
-  const isLoading = isEditingPercent || isEditingInvestment;
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
   const onSubmit = async (values: EditFormData) => {
-    if (isInputEnabled) {
-      await editInvestment({
-        profitPercentage: values.profitPercentage,
+    await editInvestment({
+      amount: values?.amountTransfer?.value,
+    });
+    toast.success(
+      t('edit-investment:addMoreInvestmentSuccess', {
         amount: values?.amountTransfer?.value,
-      });
-      toast.success(
-        t('edit-investment:addMoreInvestmentSuccess', {
-          amount: values?.amountTransfer?.value,
-          currency: values?.amountTransfer?.token?.id,
-          serviceName,
-        }),
-      );
-      setView(EditInvestmentViews.EditInvestmentSuccess);
-    } else {
-      await editPercent({
-        profitPercentage: values.profitPercentage,
-      });
-      toast.success(t('edit-investment:percentageChangedSuccess'));
-      close();
-    }
+        currency: values?.amountTransfer?.token?.id,
+        serviceName,
+      }),
+    );
+    setView(EditInvestmentViews.EditInvestmentSuccess);
   };
 
-  const maxReached = +service.invested + service.pending >= service.maximumSbt;
+  const profitPercent = watch('profitPercentage');
+  const isFirstRun = useRef(true);
 
-  const tooltipWrap = (v: React.ReactElement) =>
-    maxReached ? (
-      <Tooltip title={t('service:invest-button.max-reached-tooltip')}>
-        {v}
-      </Tooltip>
-    ) : (
-      v
-    );
+  useDebounce(
+    async () => {
+      if (isFirstRun.current) {
+        isFirstRun.current = false;
+        return;
+      }
+      await editPercent({
+        profitPercentage: profitPercent,
+      });
+      toast.success(t('edit-investment:percentageChangedSuccess'));
+    },
+    1000,
+    [profitPercent],
+  );
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -166,7 +160,7 @@ function EditInvestmentForm({
         </Row>
       </Field>
 
-      {isInputEnabled && coin && (
+      {coin && (
         <InputContainer>
           <InputAmountAdvanced
             name={'amountTransfer'}
@@ -176,50 +170,26 @@ function EditInvestmentForm({
             showUnit={true}
             placeholder={'0.0'}
             tokens={[coin]}
-            error={isDirty && t(errors?.amountTransfer?.value?.message)}
+            error={
+              isDirty &&
+              t(
+                (
+                  errors?.amountTransfer as FieldErrorsImpl<InputAmountAdvancedValueType>
+                )?.value?.message,
+              )
+            }
           />
         </InputContainer>
       )}
 
       <ModalActions>
-        {!isInputEnabled &&
-          tooltipWrap(
-            <div>
-              <TextButton
-                id={'edit-investment__invest-more'}
-                onClick={() =>
-                  !maxReached &&
-                  (transferOutAll ? openBlockedToast() : setInputEnabled(true))
-                }
-                disabled={transferOutAll || maxReached}
-                allowClickOnDisabled
-                as={'span'}
-                leftElement={
-                  <PlusIcon
-                    color={theme[transferOutAll ? 'neutral300' : 'links']}
-                    width={'22px'}
-                    height={'22px'}
-                  />
-                }
-                caption={t('form.link.investMore')}
-              />
-            </div>,
-          )}
         <Button
-          id={
-            isInputEnabled
-              ? 'edit-investment__save-invest'
-              : 'edit-investment__save-close'
-          }
+          id={'edit-investment__save-invest'}
           size={'large'}
           type={'submit'}
-          loading={isLoading}
-          caption={
-            isInputEnabled
-              ? t('form.button.saveAndInvestment')
-              : t('form.button.saveAndClose')
-          }
-          disabled={isInputEnabled ? !canSubmit : false}
+          loading={isEditingInvestment}
+          caption={t('form.button.addInvestment')}
+          disabled={!canSubmit}
         />
         <TextButton
           id={'edit-investment__withdraw'}
