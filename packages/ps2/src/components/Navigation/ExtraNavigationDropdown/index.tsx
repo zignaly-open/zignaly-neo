@@ -1,5 +1,5 @@
 import {
-  DropDown,
+  ZigDropdown,
   IconButton,
   OptionHorizontalDotsIcon,
 } from '@zignaly-open/ui';
@@ -19,14 +19,14 @@ import {
   ROUTE_BECOME_TRADER,
   ROUTE_TRADING_SERVICE_MANAGE,
 } from '../../../routes';
-import { DropDownHandleType, DropDownOptionType } from '@zignaly-open/ui';
+import { ZigDropdownHandleType, ZigDropdownOptionType } from '@zignaly-open/ui';
 import { GlobeLanguagesStyled, LabelButton } from './styles';
 import { LocalizationLanguages } from '../../../util/languages';
 
 const ExtraNavigationDropdown: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const dropDownRef = useRef<DropDownHandleType>(null);
+  const dropDownRef = useRef<ZigDropdownHandleType>(null);
   const { t, i18n } = useTranslation('common');
   const changeLocale = useChangeLocale();
   const service = useFirstOwnedService();
@@ -51,7 +51,7 @@ const ExtraNavigationDropdown: React.FC = () => {
     onClose();
   };
 
-  let options: DropDownOptionType[] = [
+  let options: ZigDropdownOptionType[] = [
     {
       label: t('main-menu.dropdown-link-helpDocs'),
       id: 'menu-dropdown__help-docs',
@@ -142,7 +142,7 @@ const ExtraNavigationDropdown: React.FC = () => {
   }
 
   return (
-    <DropDown
+    <ZigDropdown
       component={({ open }) => (
         <IconButton
           id={'menu__dropdown-trading'}

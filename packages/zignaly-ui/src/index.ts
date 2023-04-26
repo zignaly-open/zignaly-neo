@@ -34,6 +34,12 @@ export { default as ZigProgressBar } from "./components/display/ZigProgressBar";
 export { default as ZigCoinIcon } from "components/display/ZigCoinIcon";
 export { default as ZigQrCode } from "./components/display/ZigQrCode";
 export { default as ZigTabs, ZigTab, ZigTabPanel } from "./components/navigation/ZigTabs";
+export { default as ZigDropdown } from "./components/display/ZigDropdown";
+export type {
+  ZigDropdownHandleType,
+  ZigDropdownProps,
+  ZigDropdownOptionType,
+} from "./components/display/ZigDropdown";
 
 // Table
 export { createColumnHelper } from "@tanstack/react-table";
@@ -52,14 +58,8 @@ export * from "./components/display/ZigChart";
 //
 //
 //
-//
-// TODO: rename to ZigDropdown
-export { default as DropDown } from "./components/display/DropDown";
-export type {
-  DropDownHandleType,
-  DropDownProps,
-  DropDownOptionType,
-} from "./components/display/DropDown";
+
+
 
 // TODO: deprecate - Inputs
 export { default as CheckBox } from "./components/inputs/CheckBox";

@@ -15,7 +15,7 @@ import {
   SmallSelectWrapper,
   SortBox,
 } from "./styles";
-import DropDown from "../DropDown";
+import ZigDropdown from "../ZigDropdown";
 import ZigTypography from "../ZigTypography";
 import IconButton from "../../inputs/IconButton";
 import CheckBox from "../../inputs/CheckBox";
@@ -112,7 +112,7 @@ export default function ZigTable<T extends object>({
                           {enableColumnVisibility &&
                             table.getHeaderGroups().length === groupIndex + 1 &&
                             headerGroup.headers.length === index + 1 && (
-                              <DropDown
+                              <ZigDropdown
                                 component={({ open }) => (
                                   <HeaderIconButton
                                     variant="flat"
@@ -247,7 +247,7 @@ export default function ZigTable<T extends object>({
                 </>
               )}
             </Box>
-            {loading && <Loader color="#fff" width="24px" height="24px" ariaLabel="loading" />}
+            {loading && <Loader width={24} height={24} ariaLabel="loading" />}
             <IconButton
               id={prefixId && `${prefixId}-table__go-next-page`}
               variant="flat"

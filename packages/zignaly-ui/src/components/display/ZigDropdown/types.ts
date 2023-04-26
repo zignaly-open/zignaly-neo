@@ -9,21 +9,21 @@ type Option = {
   active?: boolean;
 };
 
-export type DropDownOption = Option & {
+export type ZigDropdownOption = Option & {
   id?: string;
   children?: Option[];
   element?: JSX.Element;
   separator?: boolean;
 };
 
-export type DropDownProps = {
-  options: DropDownOption[];
+export type ZigDropdownProps = {
+  options: ZigDropdownOption[];
   component: ({ open }: { open: boolean }) => JSX.Element;
   anchorOrigin?: PopoverOrigin;
   anchorPosition?: PopoverPosition;
   transformOrigin?: PopoverOrigin;
 };
 
-export type DropDownHandle = {
+export type ZigDropdownHandle = {
   closeDropDown?: () => void;
 };

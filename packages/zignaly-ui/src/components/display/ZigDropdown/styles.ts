@@ -10,7 +10,7 @@ const withSeparator = (props: WithSeparator) =>
 
 type WithSeparator = { separator?: boolean };
 
-export const DropDownContainer = styled.div`
+export const ZigDropdownContainer = styled.div`
   user-select: none;
 `;
 

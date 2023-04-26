@@ -1,12 +1,12 @@
 import Popover from "@mui/material/Popover";
 import React, { MouseEvent, useEffect, useImperativeHandle } from "react";
-import { DropDownProps, DropDownHandle, DropDownOption } from "./types";
+import { ZigDropdownProps, ZigDropdownHandle, ZigDropdownOption } from "./types";
 import {
   ArrowBottomIconStyled,
   ChildContainer,
   Component,
   ComponentWrapper,
-  DropDownContainer,
+  ZigDropdownContainer,
   NavLink,
   NavList,
   SpaceTaker,
@@ -15,7 +15,10 @@ import { useTheme } from "styled-components";
 import Theme from "theme/theme";
 
 // TODO rename to ZigDropdown, add stories
-const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => JSX.Element = (
+const ZigDropdown: (
+  props: ZigDropdownProps,
+  innerRef: React.Ref<ZigDropdownHandle>,
+) => JSX.Element = (
   {
     component,
     options,
@@ -28,11 +31,11 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
       vertical: "top",
       horizontal: "right",
     },
-  }: DropDownProps,
-  innerRef: React.Ref<DropDownHandle>,
+  }: ZigDropdownProps,
+  innerRef: React.Ref<ZigDropdownHandle>,
 ) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const [childDropdownShow, setChildDropdownShown] = React.useState<null | DropDownOption>(null);
+  const [childDropdownShow, setChildDropdownShown] = React.useState<null | ZigDropdownOption>(null);
   const isOpen = !!anchorEl;
   const theme = useTheme() as Theme;
   const handleToggle = (event: React.MouseEvent<HTMLElement>) =>
@@ -98,7 +101,7 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
           transformOrigin={transformOrigin}
           anchorOrigin={anchorOrigin}
         >
-          <DropDownContainer>
+          <ZigDropdownContainer>
             <NavList>
               {options.map((option, i) => {
                 // this is a design requirement
@@ -173,17 +176,17 @@ const DropDown: (props: DropDownProps, innerRef: React.Ref<DropDownHandle>) => J
                   );
               })}
             </NavList>
-          </DropDownContainer>
+          </ZigDropdownContainer>
         </Popover>
       )}
     </>
   );
 };
 
-export default React.forwardRef(DropDown);
+export default React.forwardRef(ZigDropdown);
 
 export type {
-  DropDownProps as DropDownProps,
-  DropDownHandle as DropDownHandleType,
-  DropDownOption as DropDownOptionType,
+  ZigDropdownProps,
+  ZigDropdownHandle as ZigDropdownHandleType,
+  ZigDropdownOption as ZigDropdownOptionType,
 } from "./types";

@@ -11,7 +11,7 @@ import {
 } from '../../../apis/user/use';
 import {
   Avatar,
-  DropDown,
+  ZigDropdown,
   IconButton,
   ZigTypography,
   UserIcon,
@@ -33,7 +33,7 @@ import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { Add } from '@mui/icons-material';
-import { DropDownHandleType } from '@zignaly-open/ui';
+import { ZigDropdownHandleType } from '@zignaly-open/ui';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme();
@@ -47,7 +47,7 @@ function AccountMenu(): React.ReactElement | null {
   const location = useLocation();
   const { showModal } = useZModal();
   const md = useMediaQuery(theme.breakpoints.up('sm'));
-  const dropDownRef = useRef<DropDownHandleType>(null);
+  const dropDownRef = useRef<ZigDropdownHandleType>(null);
   const onClose = useCallback(() => {
     dropDownRef.current?.closeDropDown();
   }, [dropDownRef]);
@@ -81,7 +81,7 @@ function AccountMenu(): React.ReactElement | null {
   } else if (!md) return null;
 
   return (
-    <DropDown
+    <ZigDropdown
       ref={dropDownRef}
       component={({ open }) => (
         <IconButton
