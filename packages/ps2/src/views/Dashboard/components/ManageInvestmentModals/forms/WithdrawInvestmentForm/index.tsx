@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Grid } from '@mui/material';
 import { WithdrawActions } from '../../styles';
 import {
-  Button,
+  ZigButton,
   CenteredLoader,
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
@@ -154,13 +154,14 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
         </Grid>
       </Grid>
       <WithdrawActions>
-        <Button
+        <ZigButton
           id={'withdraw__confirm-withdraw'}
           size={'xlarge'}
           disabled={!isValid}
-          caption={t('button')}
           loading={isLoading}
-        />
+        >
+          {t('button')}
+        </ZigButton>
       </WithdrawActions>
     </form>
   );

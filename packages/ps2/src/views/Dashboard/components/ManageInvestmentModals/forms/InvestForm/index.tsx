@@ -4,7 +4,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { Field, Form } from './styles';
 import {
-  Button,
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
   ZigSliderInput,
@@ -293,31 +292,31 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
             justifyContent: 'flex-end',
           }}
         >
-          <Button
+          <ZigButton
             id={'invest-close'}
             size={'large'}
             type={'button'}
             disabled={isLoading}
-            variant={'secondary'}
-            caption={t(isConfirmation ? 'common:back' : 'common:close')}
+            variant={'outlined'}
             onClick={isConfirmation ? onGoBackToFirstStep : close}
-          />
+          >
+            {t(isConfirmation ? 'common:back' : 'common:close')}
+          </ZigButton>
 
-          <Button
+          <ZigButton
             id={'invest-confirm'}
             size={'large'}
             type={'submit'}
             loading={isLoading}
-            caption={
-              isConfirmation
-                ? t('form.button.invest-now', {
-                    amount: watch('amountTransfer')!.value.toString(),
-                    coin: coin.id,
-                  })
-                : t('form.button.continue-to-confirmation')
-            }
             disabled={!canSubmit}
-          />
+          >
+            {isConfirmation
+              ? t('form.button.invest-now', {
+                  amount: watch('amountTransfer')!.value.toString(),
+                  coin: coin.id,
+                })
+              : t('form.button.continue-to-confirmation')}
+          </ZigButton>
         </Box>
       </ModalActions>
     </Form>

@@ -7,7 +7,7 @@ import { LoginValidation } from './validations';
 import { useAuthenticate } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
-import { Button, ZigTypography, ZigInput, ZigButton } from '@zignaly-open/ui';
+import { ZigTypography, ZigInput, ZigButton } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
 
@@ -87,14 +87,14 @@ const LoginForm: React.FC = () => {
         />
 
         <Action>
-          <Button
+          <ZigButton
             type={'submit'}
-            variant={'primary'}
             id={'login__submit'}
-            caption={t('login-form.submit')}
             size={'xlarge'}
             loading={loggingIn}
-          />
+          >
+            {t('login-form.submit')}
+          </ZigButton>
 
           <ZigButton
             variant={'text'}

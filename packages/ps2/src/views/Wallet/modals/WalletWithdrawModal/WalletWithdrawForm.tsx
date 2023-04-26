@@ -5,10 +5,10 @@ import {
   ErrorMessage,
   ZigSelect,
   InputAmountAdvanced,
-  Button,
   ZigInput,
   ZigTypography,
   ZigCoinIcon,
+  ZigButton,
   InputAmountAdvancedValueType,
   CenteredLoader,
 } from '@zignaly-open/ui';
@@ -319,22 +319,25 @@ function WalletWithdrawForm({
             )}
 
             <ModalActions align='right'>
-              <Button
+              <ZigButton
                 id={'withdraw__close'}
                 size={'large'}
                 type={'button'}
-                variant={'secondary'}
-                caption={t('common:close')}
+                variant={'outlined'}
                 onClick={close}
-              />
+              >
+                {t('common:close')}
+              </ZigButton>
 
-              <Button
+              <ZigButton
+                variant={'contained'}
                 id={'withdraw__continue'}
                 size={'large'}
                 type={'submit'}
-                caption={t('confirmation.continue')}
                 disabled={!isValid || !feeInfo || notEnoughZig}
-              />
+              >
+                {t('confirmation.continue')}
+              </ZigButton>
             </ModalActions>
           </>
         )}

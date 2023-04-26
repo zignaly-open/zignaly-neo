@@ -13,7 +13,6 @@ import {
 } from './styles';
 
 import {
-  Button,
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
   ZigSliderInput,
@@ -180,14 +179,15 @@ function EditInvestmentForm({
       )}
 
       <ModalActions>
-        <Button
+        <ZigButton
           id={'edit-investment__save-invest'}
           size={'large'}
           type={'submit'}
           loading={isEditingInvestment}
-          caption={t('form.button.addInvestment')}
           disabled={!canSubmit}
-        />
+        >
+          {t('form.button.addInvestment')}
+        </ZigButton>
         <ZigButton
           variant={'text'}
           id={'edit-investment__withdraw'}

@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
-  Button,
   ZigButton,
   ZigPriceLabel,
   ZigTypography,
@@ -130,13 +129,14 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                   color={theme.palette.neutral600}
                 />
                 <HorizontalConnection />
-                <Button
+                <ZigButton
                   id={'trader-service__transfer'}
-                  variant='secondary'
+                  variant='outlined'
                   size='large'
-                  caption={t('transfer.title')}
                   onClick={onClickTransfers}
-                />
+                >
+                  {t('transfer.title')}
+                </ZigButton>
                 <HorizontalConnection />
                 <ArrowRightIcon
                   height={24}

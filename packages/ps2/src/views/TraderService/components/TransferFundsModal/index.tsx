@@ -15,11 +15,11 @@ import {
 } from './styles';
 import {
   SwapVertIcon,
-  Button,
   InputAmountAdvanced,
   IconButton,
   InputAmountAdvancedValueType,
   ZigTypography,
+  ZigButton,
 } from '@zignaly-open/ui';
 import { TransferFormData, TransferModalProps } from './types';
 import { TransferModalValidation } from './validation';
@@ -194,13 +194,14 @@ function TransferModal({
           </Body>
 
           <Actions>
-            <Button
+            <ZigButton
               id={'transfer__transfer-now'}
-              caption={t('transfer.now')}
               disabled={!isValid}
               size='xlarge'
               type='submit'
-            />
+            >
+              {t('transfer.now')}
+            </ZigButton>
           </Actions>
         </form>
       )}

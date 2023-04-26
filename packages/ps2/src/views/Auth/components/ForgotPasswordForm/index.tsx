@@ -5,7 +5,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import { Form, TitleHead } from './styles';
 import { ForgotPasswordValidation } from './validations';
 import { ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../../routes';
-import { Button, ZigInput, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useResetPasswordRequestMutation } from 'apis/user/api';
 import AnchorLink from 'components/AnchorLink';
@@ -78,15 +78,15 @@ const ForgotPasswordForm = () => {
           mt={2.5}
           gap={5}
         >
-          <Button
+          <ZigButton
             type={'submit'}
-            variant={'primary'}
-            caption={t('reset-password.send-instructions')}
             size={'xlarge'}
             loading={resetPasswordStatus.isLoading}
             disabled={!isValid}
             id='forgotpassword__submit'
-          />
+          >
+            {t('reset-password.send-instructions')}
+          </ZigButton>
           <Box display='flex' flexDirection='column' alignItems='center'>
             <ZigTypography variant='body2' fontWeight={500}>
               {t('reset-password.found-password')}

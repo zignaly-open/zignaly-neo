@@ -11,7 +11,6 @@ import {
 } from '../../../apis/user/use';
 import {
   Avatar,
-  Button,
   DropDown,
   IconButton,
   ZigTypography,
@@ -73,10 +72,9 @@ function AccountMenu(): React.ReactElement | null {
           </LoginButton>
         </Link>
         <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>
-          <Button
-            id={'menu__signup'}
-            caption={t('account-menu.isAuth-button-signUp')}
-          />
+          <ZigButton id={'menu__signup'} variant={'contained'} size={'small'}>
+            {t('account-menu.isAuth-button-signUp')}
+          </ZigButton>
         </Link>
       </>
     );

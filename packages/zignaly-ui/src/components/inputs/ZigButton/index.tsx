@@ -18,6 +18,7 @@ const ZigButton = ({
   ctaId,
   color,
   size,
+  variant = "contained",
   linkTarget,
   linkRel,
   ...props
@@ -27,6 +28,7 @@ const ZigButton = ({
       data-tack-cta={ctaId}
       // it wasn't me lol
       size={size as LoadingButtonProps["size"]}
+      variant={variant}
       {...props}
       {...(props.href
         ? {
@@ -35,7 +37,7 @@ const ZigButton = ({
           }
         : {})}
       // hack to preserve old behavior but allow for normal mui theming
-      color={props.variant === "outlined" && !color ? "secondary" : color}
+      color={variant === "outlined" && !color ? "secondary" : color}
       className={active ? "MuiButton-active" : ""}
     />
   );

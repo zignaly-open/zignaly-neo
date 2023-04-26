@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { Form, Action, TitleHead, StyledErrorOutline } from './styles';
 import { ResetPasswordValidation } from './validations';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, ZigInput, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useResetPasswordMutation } from 'apis/user/api';
 import { ROUTE_LOGIN } from 'routes';
@@ -76,15 +76,15 @@ const ResetPasswordForm = () => {
         />
 
         <Action>
-          <Button
+          <ZigButton
             type={'submit'}
-            variant={'primary'}
-            caption={t('reset-password.reset-password')}
             size={'xlarge'}
             loading={resetPasswordStatus.isLoading}
             disabled={!isValid}
             id='resetpassword__submit'
-          />
+          >
+            {t('reset-password.reset-password')}
+          </ZigButton>
         </Action>
       </Form>
     </Box>
