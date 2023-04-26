@@ -33,7 +33,7 @@ function TokenSelector({
       <Container onClick={() => setMenuActive(!isActiveMenu)}>
         {value && (
           <ValueContainer>
-            {value.id && <ZigCoinIcon coin={value.id} size={"small"} name={value.id} />}
+            {value.id && <ZigCoinIcon coin={value.id} size={"small"} />}
             <Value>{value.id.toUpperCase()}</Value>
           </ValueContainer>
         )}
@@ -51,7 +51,7 @@ function TokenSelector({
                 setMenuActive(false);
               }}
             >
-              {token.id && <ZigCoinIcon coin={token.id} size={"small"} name={token.id} />}
+              {token.id && <ZigCoinIcon coin={token.id} size={"small"} />}
               <Value>{token.id.toUpperCase()}</Value>
             </Item>
           ))}

@@ -15,7 +15,7 @@ export const ZigPriceLabelIcon = ({
 }) => {
   return (
     <Box display='flex' gap={1} alignItems='center' justifyContent='center'>
-      <ZigCoinIcon name={coin} coin={coin} bucket={iconBucket} />
+      <ZigCoinIcon coin={coin} bucket={iconBucket} />
       <ZigPriceLabel
         noWrap
         component='span'

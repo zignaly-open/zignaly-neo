@@ -120,7 +120,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                 {t('invest-modal.amount-to-invest')}
               </ZigTypography>
               <AmountInvested>
-                <ZigCoinIcon coin={coin.id} name={'coin-icon'} />
+                <ZigCoinIcon coin={coin.id} />
                 <TokenValue>
                   <ZigTypography variant={'bigNumber'} color={'neutral100'}>
                     <NumericFormat

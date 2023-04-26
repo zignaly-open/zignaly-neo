@@ -56,12 +56,7 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
 
       <Grid container>
         <Box display='flex' gap='11px' pt={3}>
-          <ZigCoinIcon
-            size='small'
-            coin={selectedCoin}
-            name={coinObject?.name}
-            bucket='coins'
-          />
+          <ZigCoinIcon size='small' coin={selectedCoin} bucket='coins' />
           <ZigTypography fontWeight={600}>{selectedCoin}</ZigTypography>&nbsp;
         </Box>
 

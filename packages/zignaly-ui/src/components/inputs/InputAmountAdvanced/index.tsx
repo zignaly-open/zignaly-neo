@@ -21,7 +21,7 @@ import ZigPriceLabel from "components/display/ZigPriceLabel";
 import { Box } from "@mui/material";
 import ZigCoinIcon from "components/display/ZigCoinIcon";
 import { COIN_SIZES } from "components/display/ZigCoinIcon/types";
-import {ErrorMessage} from "../../display/ZigAlertMessage";
+import { ErrorMessage } from "../../display/ZigAlertMessage";
 
 // FIXME this component still needs Jesus
 // TODO: rename to ZigInoutAmount, add stories
@@ -102,12 +102,7 @@ function InputAmount({
         <InputContainer>
           <Side>
             {value?.token?.id && tokens.length < 2 && (
-              <ZigCoinIcon
-                name={value?.token.id}
-                size={COIN_SIZES.SMALL}
-                coin={value?.token.id}
-                bucket={iconBucket}
-              />
+              <ZigCoinIcon size={COIN_SIZES.Small} coin={value?.token.id} bucket={iconBucket} />
             )}
             <InputField>
               <InputValue
