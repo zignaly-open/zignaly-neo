@@ -3,10 +3,6 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import Header from "./";
 import BrandImage from "./components/BrandImage";
-import IconButton from "../../inputs/IconButton";
-
-import { ReactComponent as ThreeDotsIcon } from "assets/icons/horizontal-three-dots-icon.svg";
-import { ReactComponent as UserIcon } from "assets/icons/user-icon.svg";
 import { HeaderLinksContainer } from "./styles";
 
 export default {
@@ -33,7 +29,5 @@ Main.args = {
         Menu 3
       </a>
     </HeaderLinksContainer>,
-    <IconButton key={"menu"} variant={"secondary"} icon={<ThreeDotsIcon />} />,
   ],
-  rightElements: [<IconButton key={"user"} variant={"flat"} icon={<UserIcon color="#65647E" />} />],
 };

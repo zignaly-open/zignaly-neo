@@ -121,7 +121,6 @@ const darkMui = createTheme({
         root: {},
         plain: {
           padding: "0 !important",
-
           ".MuiSvgIcon-root": {
             fill: dark.neutral300,
             transition: "all .2s",

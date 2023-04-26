@@ -1,8 +1,4 @@
-import {
-  ZigDropdown,
-  IconButton,
-  OptionHorizontalDotsIcon,
-} from '@zignaly-open/ui';
+import { ZigDropdown, OptionHorizontalDotsIcon } from '@zignaly-open/ui';
 import React, { useCallback, useRef } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { NavLink, Networks } from './styles';
@@ -22,6 +18,7 @@ import {
 import { ZigDropdownHandleType, ZigDropdownOptionType } from '@zignaly-open/ui';
 import { GlobeLanguagesStyled, LabelButton } from './styles';
 import { LocalizationLanguages } from '../../../util/languages';
+import { HeaderDropdownButton } from '../AccountMenu/styles';
 
 const ExtraNavigationDropdown: React.FC = () => {
   const theme = useTheme();
@@ -144,18 +141,13 @@ const ExtraNavigationDropdown: React.FC = () => {
   return (
     <ZigDropdown
       component={({ open }) => (
-        <IconButton
-          id={'menu__dropdown-trading'}
-          variant={'flat'}
-          icon={
-            <OptionHorizontalDotsIcon
-              width={14}
-              height={4}
-              color={open ? theme.palette.neutral100 : theme.palette.neutral300}
-            />
-          }
-          isFocused={open}
-        />
+        <HeaderDropdownButton id={'menu__dropdown-trading'} active={open}>
+          <OptionHorizontalDotsIcon
+            width={14}
+            height={4}
+            color={open ? theme.palette.neutral100 : theme.palette.neutral300}
+          />
+        </HeaderDropdownButton>
       )}
       options={options}
     />

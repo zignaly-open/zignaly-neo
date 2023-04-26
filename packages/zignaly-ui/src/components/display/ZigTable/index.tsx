@@ -17,7 +17,6 @@ import {
 } from "./styles";
 import ZigDropdown from "../ZigDropdown";
 import ZigTypography from "../ZigTypography";
-import IconButton from "../../inputs/IconButton";
 import CheckBox from "../../inputs/CheckBox";
 import { ZigTableProps } from "./types";
 import { Box } from "@mui/material";
@@ -25,6 +24,7 @@ import { ChevronLeft, ChevronRight, FirstPage, LastPage, MoreVert } from "@mui/i
 import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
+import ZigButton from "../../inputs/ZigButton";
 
 export default function ZigTable<T extends object>({
   prefixId,
@@ -201,24 +201,26 @@ export default function ZigTable<T extends object>({
         <Box p="22px" display="flex" alignItems="center" justifyContent="center" flexWrap="wrap">
           <Box display={["none", "flex"]} flex={3} justifyContent="flex-start" />
           <Box justifyContent="center" display="flex" gap={1} alignItems="center" flex={3}>
-            <IconButton
+            <ZigButton
+              variant={"plain"}
+              narrow
               id={prefixId && `${prefixId}-table__go-zero-page`}
-              variant="flat"
               size="xlarge"
-              shrinkWrap={true}
-              icon={<FirstPage width={24} height={24} sx={{ color: "neutral300" }} />}
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
-            />
-            <IconButton
+            >
+              <FirstPage width={24} height={24} />
+            </ZigButton>
+            <ZigButton
+              variant={"plain"}
+              narrow
               id={prefixId && `${prefixId}-table__go-previous-page`}
-              variant="flat"
               size="xlarge"
-              shrinkWrap={true}
-              icon={<ChevronLeft width={24} height={24} sx={{ color: "neutral300" }} />}
               onClick={table.previousPage}
               disabled={!table.getCanPreviousPage()}
-            />
+            >
+              <ChevronLeft width={24} height={24} />
+            </ZigButton>
             <Box
               display="flex"
               gap={1}
@@ -247,26 +249,29 @@ export default function ZigTable<T extends object>({
                 </>
               )}
             </Box>
-            {loading && <Loader width={24} height={24} ariaLabel="loading" />}
-            <IconButton
+            {loading && <Loader width={24} height={24} />}
+            <ZigButton
+              variant={"plain"}
+              narrow
               id={prefixId && `${prefixId}-table__go-next-page`}
-              variant="flat"
               size="xlarge"
-              shrinkWrap={true}
-              icon={<ChevronRight width={24} height={24} sx={{ color: "neutral300" }} />}
               onClick={table.nextPage}
               disabled={!table.getCanNextPage()}
-            />
+            >
+              <ChevronRight width={24} height={24} />
+            </ZigButton>
+
             {table.getPageCount() !== -1 && (
-              <IconButton
+              <ZigButton
+                variant={"plain"}
+                narrow
                 id={prefixId && `${prefixId}-table__go-last-page`}
-                variant="flat"
                 size="xlarge"
-                shrinkWrap={true}
-                icon={<LastPage width={24} height={24} sx={{ color: "neutral300" }} />}
                 onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                 disabled={!table.getCanNextPage()}
-              />
+              >
+                <LastPage width={24} height={24} />
+              </ZigButton>
             )}
           </Box>
           <Box

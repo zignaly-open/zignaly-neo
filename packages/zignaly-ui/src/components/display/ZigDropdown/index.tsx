@@ -39,7 +39,7 @@ const ZigDropdown: (
   const isOpen = !!anchorEl;
   const theme = useTheme() as Theme;
   const handleToggle = (event: React.MouseEvent<HTMLElement>) =>
-    setAnchorEl((v) => (v ? null : (event.target as HTMLElement)));
+    setAnchorEl((v) => (v ? null : event.currentTarget));
 
   const handleClose = () => {
     setChildDropdownShown(null);

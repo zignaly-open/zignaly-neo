@@ -1,6 +1,11 @@
 import React, { useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LoginButton, AccountDropdown, AccountName } from './styles';
+import {
+  LoginButton,
+  AccountDropdown,
+  AccountName,
+  HeaderDropdownButton,
+} from './styles';
 import { useMediaQuery, useTheme } from '@mui/material';
 import {
   useActiveExchange,
@@ -12,7 +17,6 @@ import {
 import {
   Avatar,
   ZigDropdown,
-  IconButton,
   ZigTypography,
   UserIcon,
   ZigButton,
@@ -84,13 +88,13 @@ function AccountMenu(): React.ReactElement | null {
     <ZigDropdown
       ref={dropDownRef}
       component={({ open }) => (
-        <IconButton
+        <HeaderDropdownButton
           id={'menu__dropdown-account'}
-          variant={'flat'}
-          icon={<Avatar size={'medium'} image={activeExchange?.image} />}
           key={'user'}
-          isFocused={open}
-        />
+          active={open}
+        >
+          <Avatar size={'medium'} image={activeExchange?.image} />
+        </HeaderDropdownButton>
       )}
       options={[
         {
