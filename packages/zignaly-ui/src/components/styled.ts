@@ -1,15 +1,5 @@
 import styled from "styled-components";
 import ZigTypography from "./display/ZigTypography";
-
-export const ButtonGroup = styled.div`
-  display: grid;
-
-  ${(props: any) => `
-    grid-template-columns: repeat(${props.children.length}, minmax(0%, 100%));
-    gap: 8px;
-  `}
-`;
-
 export const MarginContainer = styled.div`
   margin: 0 auto;
   max-width: 1430px;

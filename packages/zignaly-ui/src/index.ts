@@ -55,19 +55,10 @@ export * from "./components/display/ZigChart";
 
 // TODO: abandon all hope ye who enter here
 //
-//
-//
-//
-
-
 
 // TODO: deprecate - Inputs
 export { default as CheckBox } from "./components/inputs/CheckBox";
 export { default as IconButton } from "./components/inputs/IconButton";
-export { ButtonGroup, ValueIndicator } from "./components/styled";
-//
-//
-//
 //
 //
 //
