@@ -7,6 +7,7 @@ export type ZigButtonProps = Omit<LoadingButtonProps, "size"> & {
   size?: LoadingButtonProps["size"] | "xlarge";
   ctaId?: string;
   tooltip?: string;
+  narrow?: boolean;
   linkTarget?: "_blank";
   linkRel?: "noopener noreferrer";
   active?: boolean;
@@ -18,6 +19,7 @@ const ZigButton = ({
   ctaId,
   color,
   size,
+  narrow,
   variant = "contained",
   linkTarget,
   linkRel,
@@ -30,6 +32,14 @@ const ZigButton = ({
       size={size as LoadingButtonProps["size"]}
       variant={variant}
       {...props}
+      {...(narrow
+        ? {
+            sx: {
+              ...props.sx,
+              minWidth: "0 !important",
+            },
+          }
+        : {})}
       {...(props.href
         ? {
             rel: linkRel ?? "noopener noreferrer",

@@ -53,7 +53,7 @@ export * from "./components/display/ZigChart";
 //
 //
 //
-// TODO: deprecate
+// TODO: rename to ZigDropdown
 export { default as DropDown } from "./components/display/DropDown";
 export type {
   DropDownHandleType,
