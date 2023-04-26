@@ -18,7 +18,6 @@ import { ROUTE_LOGIN } from '../../../../routes';
 import {
   ErrorMessage,
   TextButton,
-  Typography,
   ZigButton,
   ZigInput,
   ZigTypography,
@@ -148,15 +147,11 @@ const SignupForm: React.FC = () => {
                 helperText={
                   <Box display='flex' alignItems='center'>
                     <StyledErrorOutline height='24px' width='24px' />
-                    <Typography
-                      variant='body2'
-                      color='neutral200'
-                      weight='regular'
-                    >
+                    <ZigTypography variant='body2' color='neutral200'>
                       {t('error:error.password-requirements', {
                         length: 8,
                       })}
-                    </Typography>
+                    </ZigTypography>
                   </Box>
                 }
                 type={showPassword ? 'text' : 'password'}
@@ -180,11 +175,11 @@ const SignupForm: React.FC = () => {
               />
             )}
           />
-          <Typography
-            marginTop={3}
+          <ZigTypography
             variant='h4'
             color='neutral300'
             component='h4'
+            align={'center'}
           >
             <Trans i18nKey='signup-form.accept-terms' t={t}>
               <Link
@@ -198,7 +193,7 @@ const SignupForm: React.FC = () => {
                 rel='noopener'
               />
             </Trans>
-          </Typography>
+          </ZigTypography>
 
           <Action>
             <ZigButton
@@ -208,12 +203,13 @@ const SignupForm: React.FC = () => {
               size={'large'}
               loading={signingUp}
               fullWidth={true}
-              sx={{ padding: '19px 0' }}
+              sx={{ padding: '19px 0', borderRadius: '5px' }}
             >
               <ZigTypography
                 variant={'h3'}
                 letterSpacing={1.2}
                 fontWeight={600}
+                textTransform={'uppercase'}
               >
                 {t('signup-form.submit')}
               </ZigTypography>
