@@ -119,6 +119,31 @@ const darkMui = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {},
+        plain: {
+          padding: "0 !important",
+
+          ".MuiSvgIcon-root": {
+            fill: dark.neutral300,
+            transition: "all .2s",
+          },
+
+          "&:hover": {
+            background: "none",
+          },
+
+          "&:hover .MuiSvgIcon-root": {
+            fill: dark.neutral100,
+          },
+
+          "&.Mui-disabled:hover .MuiSvgIcon-root": {
+            fill: dark.neutral300,
+          },
+
+          "&.Mui-disabled": {
+            opacity: 0.33,
+            cursor: "not-allowed",
+          },
+        },
         sizeXlarge: {
           minHeight: "60px",
           minWidth: "127px",

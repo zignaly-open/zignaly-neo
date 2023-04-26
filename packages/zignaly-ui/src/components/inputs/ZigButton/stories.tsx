@@ -89,6 +89,13 @@ Link.args = {
   href: "https://xfuturum.com",
 };
 
+export const PlainIcon = Template.bind({});
+PlainIcon.args = {
+  children: <Add />,
+  variant: "plain",
+  onClick: () => alert(),
+};
+
 const Wrapper = styled("div")`
   & > * {
     display: inline-block;

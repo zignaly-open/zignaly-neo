@@ -3,8 +3,9 @@ import { LoadingButton, LoadingButtonProps } from "@mui/lab";
 import { ButtonGroup, styled, Tooltip } from "@mui/material";
 import { dark } from "../../../theme";
 
-export type ZigButtonProps = Omit<LoadingButtonProps, "size"> & {
+export type ZigButtonProps = Omit<LoadingButtonProps, "size" | "variant"> & {
   size?: LoadingButtonProps["size"] | "xlarge";
+  variant?: LoadingButtonProps["variant"] | "plain";
   ctaId?: string;
   tooltip?: string;
   narrow?: boolean;
@@ -30,7 +31,7 @@ const ZigButton = ({
       data-tack-cta={ctaId}
       // it wasn't me lol
       size={size as LoadingButtonProps["size"]}
-      variant={variant}
+      variant={variant as LoadingButtonProps["variant"]}
       {...props}
       {...(narrow
         ? {
