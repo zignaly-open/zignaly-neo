@@ -11,6 +11,7 @@ import { MenuDropDownProps } from "./types";
 import { defaultDropDownOptions } from "./types";
 
 // TODO: put this to ps2
+// @deprecated
 const MenuDropDown = (
   {
     title,

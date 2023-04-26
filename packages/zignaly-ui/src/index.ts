@@ -62,7 +62,6 @@ export type {
 } from "./components/display/DropDown";
 
 // TODO: deprecate - Inputs
-export { default as Button } from "./components/inputs/Button";
 export { default as CheckBox } from "./components/inputs/CheckBox";
 export { default as IconButton } from "./components/inputs/IconButton";
 export { ButtonGroup, ValueIndicator } from "./components/styled";
