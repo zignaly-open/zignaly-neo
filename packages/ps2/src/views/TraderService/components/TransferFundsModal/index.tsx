@@ -16,7 +16,6 @@ import {
 import {
   SwapVertIcon,
   InputAmountAdvanced,
-  IconButton,
   InputAmountAdvancedValueType,
   ZigTypography,
   ZigButton,
@@ -146,14 +145,15 @@ function TransferModal({
               ]}
               showUnit
             />
-            <IconButton
+
+            <ZigButton
               id={'transfer__swap-zig'}
               size='xlarge'
-              icon={<SwapVertIcon color={'#65647E'} />}
-              variant='secondary'
+              variant='outlined'
               onClick={toggleDestination}
-              type='button'
-            />
+            >
+              <SwapVertIcon width={40} height={40} color={'#65647E'} />
+            </ZigButton>
             <ToContainer>
               <ToOutline>
                 <ZigTypography variant='h2'>

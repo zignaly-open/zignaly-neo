@@ -12,7 +12,6 @@ import {
   ListItemButton,
   ListItemText,
   Drawer,
-  IconButton,
   Collapse,
   ListItemIcon,
 } from '@mui/material';
@@ -82,15 +81,15 @@ const ZigDrawer = () => {
 
   return (
     <>
-      <IconButton
-        color='inherit'
+      <ZigButton
+        narrow
+        variant={'plain'}
         aria-label='open drawer'
-        edge='start'
         onClick={handleDrawerToggle}
         sx={{ mr: 2, display: { sm: 'none' } }}
       >
         <Menu />
-      </IconButton>
+      </ZigButton>
       <Box component='nav'>
         <Drawer
           variant='temporary'

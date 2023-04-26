@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  IconButton,
   ZigTable,
   ZigTablePriceLabel,
   createColumnHelper,
@@ -104,17 +103,19 @@ const MyBalancesTable = (): JSX.Element => {
             )}
             <Tooltip title={t('withdraw')}>
               <Box>
-                <IconButton
+                <ZigButton
+                  narrow
                   id={'balance-row__withdrawal'}
-                  icon={<Remove color={'neutral300'} />}
                   onClick={() =>
                     showModal(WithdrawModal, {
                       selectedCoin: row.original.coin,
                       ctaId: 'balances-table-row',
                     })
                   }
-                  variant='secondary'
-                />
+                  variant='outlined'
+                >
+                  <Remove color={'neutral300'} />
+                </ZigButton>
               </Box>
             </Tooltip>
           </Box>
