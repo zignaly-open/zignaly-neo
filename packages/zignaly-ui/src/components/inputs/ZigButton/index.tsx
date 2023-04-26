@@ -5,7 +5,7 @@ import { dark } from "../../../theme";
 
 export type ZigButtonProps = Omit<LoadingButtonProps, "size" | "variant"> & {
   size?: LoadingButtonProps["size"] | "xlarge";
-  variant?: LoadingButtonProps["variant"] | "plain";
+  variant?: LoadingButtonProps["variant"];
   ctaId?: string;
   tooltip?: string;
   narrow?: boolean;

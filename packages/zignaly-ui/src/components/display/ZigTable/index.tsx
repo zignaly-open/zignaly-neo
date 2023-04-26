@@ -19,7 +19,7 @@ import ZigDropdown from "../ZigDropdown";
 import ZigTypography from "../ZigTypography";
 import CheckBox from "../../inputs/CheckBox";
 import { ZigTableProps } from "./types";
-import { Box } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { ChevronLeft, ChevronRight, FirstPage, LastPage, MoreVert } from "@mui/icons-material";
 import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
@@ -113,12 +113,10 @@ export default function ZigTable<T extends object>({
                             table.getHeaderGroups().length === groupIndex + 1 &&
                             headerGroup.headers.length === index + 1 && (
                               <ZigDropdown
-                                component={({ open }) => (
-                                  <HeaderIconButton
-                                    variant="flat"
-                                    isFocused={open}
-                                    icon={<MoreVert sx={{ color: "neutral200" }} />}
-                                  />
+                                component={() => (
+                                  <HeaderIconButton>
+                                    <MoreVert sx={{ color: "neutral200" }} />
+                                  </HeaderIconButton>
                                 )}
                                 options={table
                                   .getAllLeafColumns()
@@ -201,26 +199,20 @@ export default function ZigTable<T extends object>({
         <Box p="22px" display="flex" alignItems="center" justifyContent="center" flexWrap="wrap">
           <Box display={["none", "flex"]} flex={3} justifyContent="flex-start" />
           <Box justifyContent="center" display="flex" gap={1} alignItems="center" flex={3}>
-            <ZigButton
-              variant={"plain"}
-              narrow
+            <IconButton
               id={prefixId && `${prefixId}-table__go-zero-page`}
-              size="xlarge"
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
             >
               <FirstPage width={24} height={24} />
-            </ZigButton>
-            <ZigButton
-              variant={"plain"}
-              narrow
+            </IconButton>
+            <IconButton
               id={prefixId && `${prefixId}-table__go-previous-page`}
-              size="xlarge"
               onClick={table.previousPage}
               disabled={!table.getCanPreviousPage()}
             >
               <ChevronLeft width={24} height={24} />
-            </ZigButton>
+            </IconButton>
             <Box
               display="flex"
               gap={1}
@@ -250,28 +242,22 @@ export default function ZigTable<T extends object>({
               )}
             </Box>
             {loading && <Loader width={24} height={24} />}
-            <ZigButton
-              variant={"plain"}
-              narrow
+            <IconButton
               id={prefixId && `${prefixId}-table__go-next-page`}
-              size="xlarge"
               onClick={table.nextPage}
               disabled={!table.getCanNextPage()}
             >
               <ChevronRight width={24} height={24} />
-            </ZigButton>
+            </IconButton>
 
             {table.getPageCount() !== -1 && (
-              <ZigButton
-                variant={"plain"}
-                narrow
+              <IconButton
                 id={prefixId && `${prefixId}-table__go-last-page`}
-                size="xlarge"
                 onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                 disabled={!table.getCanNextPage()}
               >
                 <LastPage width={24} height={24} />
-              </ZigButton>
+              </IconButton>
             )}
           </Box>
           <Box

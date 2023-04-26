@@ -53,16 +53,8 @@ export { default as CoinLabel } from "./components/display/ZigTable/components/C
 // Chart
 export * from "./components/display/ZigChart";
 
-// TODO: abandon all hope ye who enter here
-//
-
-// TODO: deprecate - Inputs
+// TODO: @Nikita9901 pls replace with mui and add stories
 export { default as CheckBox } from "./components/inputs/CheckBox";
-export { default as IconButton } from "./components/inputs/IconButton";
-//
-//
-//
-//
 
 // Icons - for the love of God, we should not do this
 // TODO: we have mui icons for a bloody reason
