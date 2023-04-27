@@ -11,6 +11,8 @@ import { useIsAuthenticated } from '../../../apis/user/use';
 import BalanceButton from '../BalanceButton';
 import { Box, Toolbar, useMediaQuery } from '@mui/material';
 import theme from 'theme';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { Container, StyledAppBar } from './styles';
 import Drawer from '../Drawer';
 import { MAIN_APP_URL } from '../../../util/constants';
