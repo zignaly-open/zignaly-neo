@@ -46,6 +46,7 @@ export const injectEndpoints = <
     }
   }
   return base.injectEndpoints({
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     overrideExisting: module?.hot?.status?.() === 'apply',
     endpoints,
