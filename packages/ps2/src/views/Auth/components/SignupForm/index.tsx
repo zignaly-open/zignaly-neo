@@ -172,6 +172,7 @@ const SignupForm: React.FC = () => {
             variant='h4'
             color='neutral300'
             component='h4'
+            textAlign={'center'}
           >
             <Trans i18nKey='signup-form.accept-terms' t={t}>
               <Link
@@ -195,12 +196,13 @@ const SignupForm: React.FC = () => {
               size={'large'}
               loading={signingUp}
               fullWidth={true}
-              sx={{ padding: '19px 0' }}
+              sx={{ padding: '19px 0', borderRadius: '5px' }}
             >
               <ZigTypography
                 variant={'h3'}
                 letterSpacing={1.2}
                 fontWeight={600}
+                textTransform={'uppercase'}
               >
                 {t('signup-form.submit')}
               </ZigTypography>
