@@ -6,7 +6,7 @@ import ZigButton from "../ZigButton";
 import dark from "../../../theme/dark";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
-import {ErrorMessage} from "../../display/ZigAlertMessage";
+import { ErrorMessage } from "../../display/ZigAlertMessage";
 
 function valueToArray<T>(v: T | T[]): T[] {
   return (Array.isArray(v) ? v : [v]).filter(Boolean);

@@ -24,7 +24,6 @@ import { ChevronLeft, ChevronRight, FirstPage, LastPage, MoreVert } from "@mui/i
 import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
-import ZigButton from "../../inputs/ZigButton";
 
 export default function ZigTable<T extends object>({
   prefixId,
