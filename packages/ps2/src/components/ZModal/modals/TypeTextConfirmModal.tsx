@@ -30,7 +30,7 @@ function TypeTextConfirmModal({
   const typedCorrectly =
     confirmWord?.toLocaleLowerCase() !== safeWord.toLocaleLowerCase();
   return (
-    <ZModal {...props} close={close} title={title}>
+    <ZModal allowUnauth {...props} close={close} title={title}>
       {!!description && (
         <ZigTypography sx={{ mb: 1 }}>{description}</ZigTypography>
       )}

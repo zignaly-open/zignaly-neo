@@ -37,6 +37,7 @@ function Check2FAModal({
   return (
     <ZModal
       {...props}
+      allowUnauth
       close={close}
       title={t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-title')}
       titleAlign='center'
