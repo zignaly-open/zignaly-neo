@@ -1,14 +1,14 @@
 import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useTranslation } from 'react-i18next';
+import { Trans, useTranslation } from 'react-i18next';
 import { Form, Action, TitleHead } from './styles';
 import { LoginValidation } from './validations';
 import { useAuthenticate } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
 import { ZigTypography, ZigInput, ZigButton } from '@zignaly-open/ui';
-import { Box } from '@mui/material';
+import { Box, Link } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
 
 const LoginForm: React.FC = () => {
@@ -96,13 +96,16 @@ const LoginForm: React.FC = () => {
             {t('login-form.submit')}
           </ZigButton>
 
-          <ZigButton
-            variant={'text'}
-            id={'login__signup'}
-            onClick={() => navigate(ROUTE_SIGNUP, { state: locationState })}
-          >
-            {t('login-form.link.signup')}
-          </ZigButton>
+          <ZigTypography variant={'body2'} align={'center'}>
+            <Trans i18nKey={'login-form.link.signup'} t={t}>
+              <Link
+                id={'login__signup'}
+                sx={{ cursor: 'pointer' }}
+                underline={'none'}
+                onClick={() => navigate(ROUTE_SIGNUP, { state: locationState })}
+              />
+            </Trans>
+          </ZigTypography>
         </Action>
       </Form>
     </Box>
