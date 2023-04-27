@@ -9,9 +9,9 @@ import { dark } from "theme";
 import ZigTypography from "../ZigTypography";
 
 // TODO(Vetle): Refactor usage of Dark theme when light theme is ready
-function ZigAlertMessage({ text, error, warning }: ZigAlertMessageProps) {
+function ZigAlertMessage({ text, error, warning, id }: ZigAlertMessageProps) {
   return (
-    <Layout>
+    <Layout id={id}>
       <Icon>
         <ErrorAlertIcon
           height="24px"
