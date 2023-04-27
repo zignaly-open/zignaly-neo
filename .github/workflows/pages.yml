@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - feat/storybook2
 
 jobs:
   pre_job:
