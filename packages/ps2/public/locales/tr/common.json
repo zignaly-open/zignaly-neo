@@ -29,7 +29,9 @@
 		"notAuth-dropdown-link-password": "Parola",
 		"notAuth-dropdown-link-2fa": "İki Faktörlü Kimlik Doğrulama",
 		"portfolio": "Portföyüm",
-		"marketplace": "Pazaryeri"
+		"marketplace": "Pazaryeri",
+		"balance": "Bakiyeler",
+		"rewards": "Ödüller"
 	},
 	"account-selector": {
 		"type": {
@@ -39,7 +41,8 @@
 		}
 	},
 	"navigation-menu": {
-		"profit-sharing": "En İyi Trader'lara Göz Atın"
+		"profit-sharing": "En İyi Trader'lara Göz Atın",
+		"become-trader": "Trade Servisinizi Sunun"
 	},
 	"amount": "Miktar",
 	"new-version": "Yeni sürüm, güncellemek için tıklayın",
@@ -80,5 +83,7 @@
 		"deposit-funds": "Para Yatırma",
 		"find-traders": "Yatırım yapacak trader'lar bulun",
 		"my-portfolio": "Portföyüm"
-	}
+	},
+	"follow-us": "Bizi takip edin",
+	"portfolio": "Portföy"
 }
