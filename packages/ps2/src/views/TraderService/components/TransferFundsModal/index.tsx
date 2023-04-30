@@ -150,9 +150,13 @@ function TransferModal({
               id={'transfer__swap-zig'}
               size='xlarge'
               variant='outlined'
+              narrow
+              sx={{
+                padding: '10px 20px',
+              }}
               onClick={toggleDestination}
             >
-              <SwapVertIcon width={40} height={40} color={'#65647E'} />
+              <SwapVertIcon width={24} height={24} color={'#65647E'} />
             </ZigButton>
             <ToContainer>
               <ToOutline>

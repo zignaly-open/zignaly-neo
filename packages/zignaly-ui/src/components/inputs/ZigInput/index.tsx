@@ -31,6 +31,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
               {labelAction && (
                 <ZigButton
                   variant={"text"}
+                  sx={{ fontSize: "13px", fontWeight: 400 }}
                   tabIndex={labelAction.tabIndex}
                   onClick={labelAction.onClick}
                   href={labelAction.href}
