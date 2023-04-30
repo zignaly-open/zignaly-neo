@@ -17,7 +17,11 @@ const Toaster = ({ variant = "error", size = "large", caption = "" }: ToasterPro
       </styled.IconContainer>
 
       <styled.Caption>
-        <ZigTypography variant={size === "large" ? "body1" : "body2"} fontWeight="regular">
+        <ZigTypography
+          variant={size === "large" ? "body1" : "body2"}
+          color={variant === "error" ? "redGraphOrError" : "greenGraph"}
+          fontWeight="regular"
+        >
           {caption}
         </ZigTypography>
       </styled.Caption>
