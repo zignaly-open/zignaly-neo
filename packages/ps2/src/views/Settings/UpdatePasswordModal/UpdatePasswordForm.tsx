@@ -1,13 +1,17 @@
 import React from 'react';
 import { Box } from '@mui/material';
-import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
+import {
+  ZigAlertMessage,
+  ZigButton,
+  ZigInput,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUpdatePasswordMutation } from 'apis/user/api';
 import { useForm, Controller } from 'react-hook-form';
 import { Form } from './styles';
 import { UpdatePasswordValidation } from './validations';
-import { StyledErrorOutline } from '../../Auth/components/SignupForm/styles';
 import { UpdatePasswordFormType } from './types';
 import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
 import { useCheck2FA, useLogout } from 'apis/user/use';
@@ -82,14 +86,11 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
               placeholder={t('update-password.new-password')}
               error={t(errors.newPassword?.message)}
               helperText={
-                <Box display='flex' alignItems='center'>
-                  <StyledErrorOutline height='24px' width='24px' />
-                  <ZigTypography variant='body2' color='neutral200'>
-                    {t('error:error.password-requirements', {
-                      length: 8,
-                    })}
-                  </ZigTypography>
-                </Box>
+                <ZigAlertMessage
+                  text={t('error:error.password-requirements', {
+                    length: 8,
+                  })}
+                />
               }
               sensitive
               type={'password'}

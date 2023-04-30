@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
-import { Form, Action, TitleHead, StyledErrorOutline } from './styles';
+import { Form, Action, StyledErrorOutline } from './styles';
 import { ResetPasswordValidation } from './validations';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
@@ -42,11 +42,9 @@ const ResetPasswordForm = () => {
 
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
-      <TitleHead>
-        <ZigTypography variant={'h2'}>
-          {t('reset-password.reset-password')}
-        </ZigTypography>
-      </TitleHead>
+      <ZigTypography variant={'h1'}>
+        {t('reset-password.reset-password')}
+      </ZigTypography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name='password'

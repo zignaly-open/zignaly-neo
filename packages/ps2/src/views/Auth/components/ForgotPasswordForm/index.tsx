@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
-import { Form, TitleHead } from './styles';
+import { Form } from './styles';
 import { ForgotPasswordValidation } from './validations';
 import { ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../../routes';
 import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
@@ -36,11 +36,9 @@ const ForgotPasswordForm = () => {
         display='flex'
         flexDirection='column'
       >
-        <TitleHead>
-          <ZigTypography variant='h2'>
-            {t('reset-password.reset-password')}
-          </ZigTypography>
-        </TitleHead>
+        <ZigTypography variant={'h1'} align={'center'}>
+          {t('reset-password.reset-password')}
+        </ZigTypography>
         <ZigTypography textAlign='center'>
           {t('reset-password.email-sent')}
         </ZigTypography>
@@ -50,11 +48,9 @@ const ForgotPasswordForm = () => {
 
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
-      <TitleHead>
-        <ZigTypography variant={'h2'}>
-          {t('reset-password.reset-password')}
-        </ZigTypography>
-      </TitleHead>
+      <ZigTypography variant={'h1'} align={'center'}>
+        {t('reset-password.reset-password')}
+      </ZigTypography>
       <Form onSubmit={handleSubmit(submit)}>
         <Controller
           name='email'

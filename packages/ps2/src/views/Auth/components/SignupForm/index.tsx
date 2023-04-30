@@ -2,21 +2,14 @@ import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
-import {
-  Form,
-  Action,
-  TitleHead,
-  StyledErrorOutline,
-  Wrapper,
-  LineBox,
-  ColouredLine,
-} from './styles';
+import { Form, Action, Wrapper, LineBox, ColouredLine } from './styles';
 import { SignupValidation } from './validations';
 import { useSignup } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN } from '../../../../routes';
 import {
   ErrorMessage,
+  ZigAlertMessage,
   ZigButton,
   ZigInput,
   ZigTypography,
@@ -65,25 +58,21 @@ const SignupForm: React.FC = () => {
         <Box flex={1} height={'100%'} />
       </LineBox>
       <Box padding={'0 32px'}>
-        <TitleHead>
-          <ZigTypography variant={'h1'} fontWeight={700}>
-            {t('signup-title')}
-          </ZigTypography>
-        </TitleHead>
-        <TitleHead>
-          <ZigTypography variant={'h2'}>
-            <Trans i18nKey={'signup-description'} t={t}>
-              <Link
-                underline={'always'}
-                sx={{
-                  color: 'neutral000',
-                  textUnderlineOffset: '10px',
-                  textDecorationColor: '#E1E9F0',
-                }}
-              />
-            </Trans>
-          </ZigTypography>
-        </TitleHead>
+        <ZigTypography variant={'h1'} align={'center'}>
+          {t('signup-title')}
+        </ZigTypography>
+        <ZigTypography variant={'h2'} align={'center'}>
+          <Trans i18nKey={'signup-description'} t={t}>
+            <Link
+              underline={'always'}
+              sx={{
+                color: 'neutral000',
+                textUnderlineOffset: '10px',
+                textDecorationColor: '#E1E9F0',
+              }}
+            />
+          </Trans>
+        </ZigTypography>
         <Form onSubmit={handleSubmit(onSubmit)}>
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
           {/* @ts-ignore */}
@@ -144,14 +133,11 @@ const SignupForm: React.FC = () => {
                 error={t(errors.password?.message)}
                 type={'password'}
                 helperText={
-                  <Box display='flex' alignItems='center'>
-                    <StyledErrorOutline height='24px' width='24px' />
-                    <ZigTypography variant='body2' color='neutral200'>
-                      {t('error:error.password-requirements', {
-                        length: 8,
-                      })}
-                    </ZigTypography>
-                  </Box>
+                  <ZigAlertMessage
+                    text={t('error:error.password-requirements', {
+                      length: 8,
+                    })}
+                  />
                 }
                 InputProps={{
                   startAdornment: (
