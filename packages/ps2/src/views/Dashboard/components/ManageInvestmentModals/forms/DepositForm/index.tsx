@@ -9,11 +9,12 @@ import {
   Loader,
   ZigTypography,
   ZigCopyText,
+  ZigLink,
 } from '@zignaly-open/ui';
 import NorthEastIcon from '@mui/icons-material/NorthEast';
 import { DepositFormData } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import { Box, Grid, Link } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { NumericFormat } from 'react-number-format';
 import {
   useCoinBalances,
@@ -331,7 +332,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         )}
         <Grid item xs={12} pt={3}>
           <ZigTypography variant={'body2'} color={'neutral300'}>
-            <Link underline={'hover'} href={BUY_CRYPTO_URL} target={'_blank'}>
+            <ZigLink href={BUY_CRYPTO_URL} target={'_blank'}>
               <Box
                 sx={{
                   display: 'flex',
@@ -342,7 +343,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                 {t('buy-crypto')}
                 <NorthEastIcon fontSize={'inherit'} />
               </Box>
-            </Link>
+            </ZigLink>
           </ZigTypography>
         </Grid>
       </Grid>

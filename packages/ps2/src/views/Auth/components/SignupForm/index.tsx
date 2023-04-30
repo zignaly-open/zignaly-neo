@@ -13,6 +13,7 @@ import {
   ZigButton,
   ZigInput,
   ZigTypography,
+  ZigLink,
 } from '@zignaly-open/ui';
 import { Box, InputAdornment, Link } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
@@ -161,12 +162,12 @@ const SignupForm: React.FC = () => {
             textAlign={'center'}
           >
             <Trans i18nKey='signup-form.accept-terms' t={t}>
-              <Link
+              <ZigLink
                 href='https://zignaly.com/legal/terms'
                 target='_blank'
                 rel='noopener'
               />
-              <Link
+              <ZigLink
                 href='https://zignaly.com/legal/privacy'
                 target='_blank'
                 rel='noopener'

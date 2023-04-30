@@ -1,14 +1,17 @@
-import React, { useMemo } from 'react';
+import React, { MouseEvent, useMemo } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import {
   PageContainer,
+  ZigLink,
   ZignalyLogotype,
   ZigTypography,
 } from '@zignaly-open/ui';
 import SignupForm from './components/SignupForm';
-import { Grid, Link, useMediaQuery, useTheme } from '@mui/material';
+import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
+import { generatePath, useNavigate } from 'react-router-dom';
+import { ROUTE_PROFIT_SHARING } from '../../routes';
 
 export type InfoBarItem = {
   title: string;
@@ -19,6 +22,7 @@ export type InfoBarItem = {
 const Signup: React.FC = () => {
   const { t } = useTranslation(['pages', 'sign-up']);
   const theme = useTheme();
+  const navigate = useNavigate();
   const matches = useMediaQuery(theme.breakpoints.up('md'));
 
   useTitle(t('pages:signup'));
@@ -89,13 +93,19 @@ const Signup: React.FC = () => {
                 textAlign={matches ? 'unset' : 'center'}
               >
                 <Trans i18nKey={'sign-up:description'} t={t}>
-                  <Link
-                    href={'/profit-sharing'}
+                  {/*Didn't use thr react-dom-router-link because it messed up thr bg*/}
+                  <ZigLink
+                    target={'_self'}
                     underline={'hover'}
+                    href={generatePath(ROUTE_PROFIT_SHARING)}
+                    onClick={(e: MouseEvent<HTMLAnchorElement>) => {
+                      navigate(ROUTE_PROFIT_SHARING);
+                      e.preventDefault();
+                    }}
                     fontWeight={600}
                     sx={{
                       backgroundImage:
-                        'linear-gradient(90deg, #3F3BB1, #138EA0)',
+                        'linear-gradient(90deg, #3F3BB1, #138EA0) !important',
                       backgroundClip: 'text',
                       color: 'transparent',
                     }}

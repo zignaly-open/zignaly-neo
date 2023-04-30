@@ -13,7 +13,7 @@ import {
   CenteredLoader,
 } from '@zignaly-open/ui';
 import { WalletWithdrawModalProps, WithdrawFormData } from './types';
-import { Box, Grid, Link } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithdrawValidation } from './validations';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
@@ -281,8 +281,8 @@ function WalletWithdrawForm({
                     (notEnoughZig && (
                       <>
                         {t('notEnoughZig')}&nbsp;
-                        <Link
-                          href='#'
+                        <ZigButton
+                          variant={'text'}
                           onClick={() => {
                             close();
                             setTimeout(() => {
@@ -296,7 +296,7 @@ function WalletWithdrawForm({
                           {t('wallet:buy.deposit.depositCoin', {
                             coin: 'ZIG',
                           })}
-                        </Link>
+                        </ZigButton>
                       </>
                     ))
                   }

@@ -4,6 +4,7 @@ import {
   ZigButton,
   ZigCopyText,
   ZigInput,
+  ZigLink,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Trans, useTranslation } from 'react-i18next';
@@ -61,11 +62,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
         <Box mt={1} mb='20px'>
           <ZigTypography whiteSpace='pre-line'>
             <Trans i18nKey='enable-2fa.setup-description' t={t}>
-              <Link
-                href={DOWNLOAD_GOOGLE_AUTHENTICATOR_URL}
-                target='_blank'
-                rel='noopener'
-              />
+              <ZigLink href={DOWNLOAD_GOOGLE_AUTHENTICATOR_URL} />
             </Trans>
           </ZigTypography>
         </Box>
