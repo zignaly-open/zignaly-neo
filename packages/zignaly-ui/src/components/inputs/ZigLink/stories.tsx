@@ -27,6 +27,11 @@ Default.args = {
 const TemplateTextButton: Story<typeof ZigLink> = (args) => {
   return (
     <>
+      <ZigTypography component={"p"}>
+        THis is basically the same thing as the ZigButton with type text, but with shorted syntax
+        and less shenanigans
+      </ZigTypography>
+
       <ZigTypography variant={"h1"}>
         Hello <ZigLink {...args} />
       </ZigTypography>
