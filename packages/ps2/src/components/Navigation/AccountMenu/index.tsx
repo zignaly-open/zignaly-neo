@@ -76,7 +76,7 @@ function AccountMenu(): React.ReactElement | null {
           </LoginButton>
         </Link>
         <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>
-          <ZigButton id={'menu__signup'} variant={'contained'} size={'small'}>
+          <ZigButton id={'menu__signup'} variant={'contained'}>
             {t('account-menu.isAuth-button-signUp')}
           </ZigButton>
         </Link>

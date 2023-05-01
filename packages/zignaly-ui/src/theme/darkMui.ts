@@ -126,7 +126,9 @@ const darkMui = createTheme({
 
     MuiButton: {
       styleOverrides: {
-        root: {},
+        root: {
+          borderRadius: 5,
+        },
         plain: {
           padding: "0 !important",
           ".MuiSvgIcon-root": {
@@ -185,6 +187,7 @@ const darkMui = createTheme({
         sizeSmall: {
           minHeight: "30px",
           minWidth: "76px",
+          padding: "4px 18px",
         },
         text: {
           color: dark.links,
@@ -217,6 +220,8 @@ const darkMui = createTheme({
         contained: {
           boxShadow: "0px 12px 16px -8px rgba(25, 25, 39, 0.36)",
           transition: "all 0.3s linear",
+          fontWeight: 600,
+          letterSpacing: "1.1px",
         },
         containedPrimary: {
           textTransform: "uppercase",

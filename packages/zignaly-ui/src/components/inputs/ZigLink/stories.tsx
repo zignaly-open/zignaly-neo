@@ -70,5 +70,5 @@ const buttonExampleArgs = {
   href: "https://xfuturum.com",
 };
 
-export const TextButton = TemplateTextButton.bind({});
-TextButton.args = buttonExampleArgs;
+export const AllSamples = TemplateTextButton.bind({});
+AllSamples.args = buttonExampleArgs;
