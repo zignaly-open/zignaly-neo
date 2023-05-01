@@ -186,6 +186,7 @@ const darkMui = createTheme({
           padding: "0 2px !important",
           borderRadius: "2px",
           fontSize: "inherit",
+          minWidth: "0 !important",
           verticalAlign: "baseline",
           minHeight: "0px !important",
           ".MuiLoadingButton-loadingIndicatorCenter": {
