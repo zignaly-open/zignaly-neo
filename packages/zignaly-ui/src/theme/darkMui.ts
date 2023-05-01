@@ -128,6 +128,10 @@ const darkMui = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 5,
+          ".MuiButton-startIcon, .MuiButton-endIcon": {
+            lineHeight: 1,
+            verticalAlign: "middle",
+          },
         },
         plain: {
           padding: "0 !important",
@@ -241,6 +245,9 @@ const darkMui = createTheme({
         outlinedSecondary: {
           borderColor: dark.neutral600,
           color: dark.neutral300,
+          "&.MuiButton-sizeLarge, &.MuiButton-sizeXlarge": {
+            textTransform: "uppercase",
+          },
           "&:hover, &.MuiButton-active": {
             color: dark.neutral000,
             borderColor: dark.neutral400,
