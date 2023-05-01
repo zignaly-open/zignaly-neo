@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Meta, Story } from "@storybook/react";
 import ZigButton, { ZigButtonProps } from "./index";
 import { ButtonGroup, ButtonGroupProps } from "@mui/material";
-import { styled } from "@mui/system";
+import { Box, styled } from "@mui/system";
 import { Add } from "@mui/icons-material";
 import ZigTypography from "../../display/ZigTypography";
 
@@ -155,6 +155,37 @@ const TemplateOutlinedButton: Story<typeof ZigButton> = (args) => {
   );
 };
 
+const TemplateTwoStorey: Story<typeof ZigButton> = (args) => {
+  return (
+    <Wrapper>
+      <ZigButton
+        variant={"contained"}
+        size="large"
+        startIcon={<Add sx={{ height: 30, width: 30 }} />}
+      >
+        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+          Invest
+          <ZigTypography variant={"h5"} color="neutral150">
+            Invest fee 146%
+          </ZigTypography>
+        </Box>
+      </ZigButton>
+
+      <ZigButton variant={"contained"} size="large">
+        <Box sx={{ display: "flex", flexDirection: "column" }}>
+          Invest
+          <ZigTypography variant={"h5"} color="neutral150">
+            Invest fee 146%
+          </ZigTypography>
+        </Box>
+      </ZigButton>
+
+      {/*Hack to show "Show code"*/}
+      {args.children}
+    </Wrapper>
+  );
+};
+
 const TemplateLoadingButtons: Story<typeof ZigButton> = (args) => {
   return (
     <>
@@ -222,9 +253,11 @@ export const ContainedButton = TemplateContainedButton.bind({});
 export const OutlinedButton = TemplateOutlinedButton.bind({});
 export const Icon = TemplateIconButton.bind({});
 export const LoadingAll = TemplateLoadingButtons.bind({});
+export const TwoStorey = TemplateTwoStorey.bind({});
 
 TextButton.args = buttonExampleArgs;
 OutlinedButton.args = buttonExampleArgs;
 ContainedButton.args = buttonExampleArgs;
 Icon.args = buttonExampleArgs;
 LoadingAll.args = buttonExampleArgs;
+TwoStorey.args = {};

@@ -221,6 +221,9 @@ const darkMui = createTheme({
         },
         containedPrimary: {
           textTransform: "uppercase",
+          ".MuiTypography-root": {
+            textTransform: "none",
+          },
           color: dark.neutral000,
           background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
           "&:hover, &.MuiButton-active": {
@@ -238,6 +241,9 @@ const darkMui = createTheme({
           color: dark.neutral300,
           "&.MuiButton-sizeLarge, &.MuiButton-sizeXlarge": {
             textTransform: "uppercase",
+            ".MuiTypography-root": {
+              textTransform: "none",
+            },
           },
           "&:hover, &.MuiButton-active": {
             color: dark.neutral000,
