@@ -33,7 +33,7 @@ const ChooseDepositType: React.FC<{
                 flexDirection: 'column',
                 alignItems: 'center',
                 width: '100%',
-                padding: '0 55px',
+                padding: '0 50px',
               }}
             >
               <Box
@@ -61,13 +61,7 @@ const ChooseDepositType: React.FC<{
                   setView(ChooseDepositTypeViews.DepositView);
                 }}
               >
-                <ZigTypography
-                  variant={'h4'}
-                  fontWeight={600}
-                  letterSpacing={1.1}
-                >
-                  {t('buttons.deposit', { coin })}
-                </ZigTypography>
+                {t('buttons.deposit', { coin })}
               </ZigButton>
             </Box>
           </Grid>
@@ -108,22 +102,10 @@ const ChooseDepositType: React.FC<{
                 <ZigButton
                   variant='contained'
                   id={'choose-deposit-type__purchase'}
+                  endIcon={<NorthEastIcon />}
                   size={'large'}
                 >
-                  <ZigTypography
-                    variant={'h4'}
-                    fontWeight={600}
-                    letterSpacing={1.1}
-                  >
-                    {t('buttons.purchase', { coin })}
-                  </ZigTypography>
-                  <NorthEastIcon
-                    fontSize={'small'}
-                    sx={{
-                      marginLeft: '3px',
-                      marginTop: '-3px',
-                    }}
-                  />
+                  {t('buttons.purchase', { coin })}
                 </ZigButton>
               </ZigLink>
             </Box>
