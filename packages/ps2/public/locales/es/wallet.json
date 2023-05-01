@@ -66,7 +66,8 @@
 	"deposit": {
 		"deposit": "Depósito",
 		"title": "Depositar Criptomonedas",
-		"description": "Para depositar {{coin}} tokens, selecciona la red y envíala a la siguiente dirección."
+		"description": "Para depositar {{coin}} tokens, selecciona la red y envíala a la siguiente dirección.",
+		"deposit-zig": "Deposita ZIG"
 	},
 	"coins": {
 		"header": {
@@ -76,7 +77,6 @@
 	"buy": {
 		"buy": "Comprar",
 		"title": "Comprar monedas ZIG",
-		"description": "Si quieres gastar más de {{max}} {{coin}}, compra ZIG en uno de los <0>exchanges disponibles.<\/0>",
 		"available-exchanges": "exchanges disponibles.",
 		"buy-exchanges": "Puedes comprar ZIG en estos exchanges:",
 		"exchangeAccount": "Seleccione la Cuenta de Exchange",
@@ -84,7 +84,6 @@
 		"confirm": "Confirmar compra ZIG",
 		"deposit": {
 			"title": "Deposita {{coin}} para comprar ZIGs",
-			"description": "Para comprar ZIGs primero necesitas depositar {{coin}} en tu Cuenta de Zignaly Exchange.",
 			"external": "Transferir cripto desde una billetera externa",
 			"depositCoin": "Deposita {{coin}}",
 			"buyCoin": "Compra {{coin}}",

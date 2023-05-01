@@ -37,6 +37,7 @@
 	"invite-for-total-investment-modal": "Mời bạn bè nhận < 0 > {{value}} {{symbol}} < \/0 > khi họ đầu tư tổng cộng $ {{threshold}} +.",
 	"invite-for-total-investment-days_one": "< 0 > Mời bạn bè < \/0 > < 1 > {{value}} {{symbol}} < \/1 > < 2 > khi họ đầu tư tổng cộng $ {{threshold}} + trong ít nhất {{count}} ngày < >",
 	"invite-for-total-investment-days_other": "< 0 > Mời bạn bè < \/0 > < 1 > {{value}} {{symbol}} < \/1 > < 2 > khi họ đầu tư tổng cộng $ {{threshold}} + trong ít nhất {{count}} ngày < >",
+	"invite-for-total-investment-modal-days_one": "Mời bạn bè nhận < 0 > {{value}} {{symbol}} < \/0 > khi họ đầu tư tổng cộng $ {{threshold}} + trong ít nhất {{count}} ngày.",
 	"invite-for-total-investment-modal-days_other": "Mời bạn bè nhận < 0 > {{value}} {{symbol}} < \/0 > khi họ đầu tư tổng cộng $ {{threshold}} + trong ít nhất {{count}} ngày.",
 	"invite-for-balance": "< 0 > Mời bạn bè < \/0 > < 1 > {{value}} {{symbol}} < \/1 > < 2 > khi số dư của họ đạt $ {{threshold}} + < \/ 2 >",
 	"invite-for-balance-modal": "Mời bạn bè nhận < 0 > {{value}} {{symbol}} < \/0 > khi số dư của họ đạt $ {{threshold}} +.",
@@ -65,6 +66,7 @@
 	"table": {
 		"title": "Lịch sử thu nhập",
 		"no-referrals": "Không có thu nhập để hiển thị",
+		"no-commission-history": "Lịch sử thu nhập trống. Mời một số bạn bè hoặc nhà giao dịch để kiếm tiền.",
 		"time-and-date": "Ngày & Giờ",
 		"user-trader": "Người dùng\/Nhà giao dịch",
 		"reward-type": "Loại thu nhập",

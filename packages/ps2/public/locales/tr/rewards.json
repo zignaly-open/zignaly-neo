@@ -1,10 +1,45 @@
 {
+	"title": "Ödül Merkezi",
+	"terms": "Koşullar >",
 	"active": "Etkin",
+	"reward-terms": "Ödül Koşulları",
+	"description": "Basit görevleri tamamlayarak ödüller kazanın. İşte bu kadar kolay!",
+	"header": {
+		"title": "20$ kazanın",
+		"description": "İlk para yatırma işleminde"
+	},
+	"active-rewards": "Aktif Ödüller",
+	"no-active-rewards": "Şu anda aktif ödül yok",
+	"disabled-voucher": "Kupon zaten etkinleştirildi",
 	"table": {
+		"title": "Ödül Geçmişi",
+		"no-benefits": "Henüz ödül yok",
 		"time-and-date": "Saat ve Tarih",
+		"reward-description": "Ödül Açıklaması",
+		"description-success_fee": "Ücret Kuponundan <0><\/0> harcandı, <1><\/1> kaldı.",
+		"description-awarded": "<0><\/0> İlk para yatırma işleminde Başarı Ücreti kuponu.",
 		"status": "Durum"
 	},
 	"statusTypes": {
-		"success_fee": "Başarım Ücreti"
+		"success_fee": "Başarım Ücreti",
+		"awarded": "Ödüllendirildi"
+	},
+	"rewardTypes": {
+		"voucher_active": "Başarım Ücreti Kuponu",
+		"voucher_pending": "Bonusu Yatırın"
+	},
+	"full-terms": {
+		"1": "Zignaly, kullanıcının uygunsuz, dürüst olmayan veya taciz edici faaliyetlerde bulunduğu tespit edilirse Ücret Kuponları'nı iptal etme hakkını saklı tutar.",
+		"2": "Zignaly, Ödül programının Hüküm ve Koşullarını istediği zaman önceden haber vermeksizin değiştirme hakkını saklı tutar.",
+		"3": "\"Ücret Kuponları\", Başarım Ücreti'nin Zignaly'ye ait kısmında kullanılmak üzere geçerlidir.",
+		"4": "\"Ücret Kuponları\" devredilemez ve yalnızca bunları alan asıl kullanıcı tarafından kullanılabilir.",
+		"5": "Zignaly logolu ücretli çevrimiçi reklamlar kesinlikle yasaktır.",
+		"6": "Zignaly tarafından yapılan tüm ödül hesaplamaları nihaidir.",
+		"7": "Bu şartları ihlal ettiği tespit edilen katılımcılar ödüllerden yararlanamayacaktır; herhangi bir hileli veya suistimal edici davranış, ödenmemiş tüm ödüllerin derhal feshedilmesiyle sonuçlanacaktır.",
+		"title": "Genel Koşullar"
+	},
+	"rewardDescriptions": {
+		"voucher_active": "{{amount}} $'lık kuponunuz sayesinde Başarım Ücretlerinden hemen tasarruf edin.",
+		"voucher_pending": "İstediğiniz tutarı yatırın ve Başarım Ücretlerinden tasarruf etmek için ${{amount}} kuponunu alın."
 	}
 }
