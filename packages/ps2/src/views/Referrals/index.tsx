@@ -230,9 +230,9 @@ const Referrals: React.FC = () => {
                         rewards: rewardsData,
                       })
                     }
+                    endIcon={<ChevronRight />}
                   >
                     {t('view-tiers')}
-                    <ChevronRight sx={{ mr: -1 }} />
                   </ZigButton>
                 </TierBox>
               </Box>
