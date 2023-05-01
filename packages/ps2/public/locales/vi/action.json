@@ -15,5 +15,6 @@
 	"copied": "Đã sao chép vào khay nhớ tạm",
 	"hide": "Ẩn",
 	"show": "Hiển thị",
-	"claim": "Lấy"
+	"claim": "Lấy",
+	"deposit-coin": "Nạp tiền {{coin}}"
 }

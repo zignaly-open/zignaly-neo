@@ -14,5 +14,7 @@
 	"save-and-close": "Sakla ve Kapat",
 	"copied": "Panoya kopyalandı",
 	"hide": "Gizle",
-	"show": "Göster"
+	"show": "Göster",
+	"claim": "Hakediş",
+	"deposit-coin": "{{coin}} yatırın"
 }

@@ -15,5 +15,6 @@
 	"copied": "Copiado para prancheta",
 	"hide": "Esconder",
 	"show": "Mostrar",
-	"claim": "Reclamar"
+	"claim": "Reclamar",
+	"deposit-coin": "Deposita {{coin}}"
 }

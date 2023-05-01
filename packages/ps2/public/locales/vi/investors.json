@@ -5,13 +5,14 @@
 	"tableHeader": {
 		"email": "E-mail",
 		"userId": "ID người dùng",
-		"investment": "Đầu tư",
 		"P&L": "P&L",
 		"P&LTotal": "Tổng P&L",
 		"totalFeesPaid": "Tổng phí đã trả",
 		"successFee": "Phí thành công",
 		"feesZIG": "Phí thanh toán bằng ZIG",
-		"status": "Trạng thái"
+		"status": "Trạng thái",
+		"invested": "Đã Đầu Tư",
+		"pending": "Chờ"
 	},
 	"loading-arialLabel": "Đang tải nhà đầu tư",
 	"status": {

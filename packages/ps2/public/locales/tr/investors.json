@@ -5,13 +5,14 @@
 	"tableHeader": {
 		"email": "E-posta",
 		"userId": "Kullanıcı Kimliği",
-		"investment": "Yatırım",
 		"P&L": "PnL",
 		"P&LTotal": "PnL Toplam",
 		"totalFeesPaid": "Ödenen Toplam Ücret",
 		"successFee": "Başarım Ücreti",
 		"feesZIG": "ZIG olarak ücretler",
-		"status": "Durum"
+		"status": "Durum",
+		"invested": "Yatırım yapılan bakiye",
+		"pending": "Bekliyor"
 	},
 	"loading-arialLabel": "Yatırımcılar yükleniyor",
 	"status": {
