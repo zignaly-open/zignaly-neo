@@ -77,6 +77,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
     );
   }),
 )`
+  // TODO: move to darkMui
   ${(props) => props.wide && "display: block"};
 
   .MuiInputLabel-root {
@@ -129,6 +130,13 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
 
       .MuiInputLabel-root {
         color: ${({ theme }) => theme.palette.neutral200};
+      }
+    }
+
+    .MuiInputAdornment-root {
+      .MuiSvgIcon-root {
+        width: 18px;
+        height: 18px;
       }
     }
   }
