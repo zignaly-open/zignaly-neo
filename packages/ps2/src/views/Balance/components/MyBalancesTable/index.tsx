@@ -4,7 +4,6 @@ import {
   ZigTable,
   ZigTablePriceLabel,
   createColumnHelper,
-  ZigTypography,
   ZigButton,
 } from '@zignaly-open/ui';
 import { BalanceTableDataType } from './types';
@@ -22,7 +21,7 @@ import {
 import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
 import WithdrawModal from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
 import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
-import { Box, Tooltip } from '@mui/material';
+import { Box } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
 import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
 
@@ -96,28 +95,27 @@ const MyBalancesTable = (): JSX.Element => {
                   })
                 }
                 variant='outlined'
-                sx={{ maxHeight: '20px' }}
+                sx={{ maxHeight: '20px', mr: 1 }}
               >
-                <ZigTypography>{t('deposit')}</ZigTypography>
+                {t('deposit')}
               </ZigButton>
             )}
-            <Tooltip title={t('withdraw')}>
-              <Box>
-                <ZigButton
-                  narrow
-                  id={'balance-row__withdrawal'}
-                  onClick={() =>
-                    showModal(WithdrawModal, {
-                      selectedCoin: row.original.coin,
-                      ctaId: 'balances-table-row',
-                    })
-                  }
-                  variant='outlined'
-                >
-                  <Remove color={'neutral300'} />
-                </ZigButton>
-              </Box>
-            </Tooltip>
+            <Box>
+              <ZigButton
+                narrow
+                tooltip={t('withdraw')}
+                id={'balance-row__withdrawal'}
+                onClick={() =>
+                  showModal(WithdrawModal, {
+                    selectedCoin: row.original.coin,
+                    ctaId: 'balances-table-row',
+                  })
+                }
+                variant='outlined'
+              >
+                <Remove color={'neutral300'} />
+              </ZigButton>
+            </Box>
           </Box>
         ),
       }),
