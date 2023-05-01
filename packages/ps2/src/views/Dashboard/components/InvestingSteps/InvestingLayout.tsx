@@ -50,6 +50,7 @@ const InvestingLayout: React.FC = () => {
               color='neutral000'
               fontWeight={600}
               letterSpacing={1.1}
+              textTransform={'uppercase'}
             >
               {t('how-to-invest-steps.start-investing')}
             </ZigTypography>
