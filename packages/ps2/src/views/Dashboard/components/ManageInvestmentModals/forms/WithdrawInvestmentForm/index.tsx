@@ -157,6 +157,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
       <WithdrawActions>
         <Button
           id={'withdraw__confirm-withdraw'}
+          type={'submit'}
           size={'xlarge'}
           disabled={!isValid}
           caption={t('button')}
