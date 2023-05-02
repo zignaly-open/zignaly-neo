@@ -1,9 +1,10 @@
 import React from 'react';
 import { Box, Link } from '@mui/material';
 import {
-  IconButton,
   ZigButton,
+  ZigCopyText,
   ZigInput,
+  ZigLink,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Trans, useTranslation } from 'react-i18next';
@@ -20,8 +21,6 @@ import {
   DOWNLOAD_GOOGLE_AUTHENTICATOR_URL,
   HELP_CREATE_ENABLE_2FA_URL,
 } from 'util/constants';
-import copy from 'copy-to-clipboard';
-import { ContentCopy } from '@mui/icons-material';
 
 const Enable2FAForm = ({ close }: { close: () => void }) => {
   const { t } = useTranslation('settings');
@@ -63,11 +62,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
         <Box mt={1} mb='20px'>
           <ZigTypography whiteSpace='pre-line'>
             <Trans i18nKey='enable-2fa.setup-description' t={t}>
-              <Link
-                href={DOWNLOAD_GOOGLE_AUTHENTICATOR_URL}
-                target='_blank'
-                rel='noopener'
-              />
+              <ZigLink href={DOWNLOAD_GOOGLE_AUTHENTICATOR_URL} />
             </Trans>
           </ZigTypography>
         </Box>
@@ -76,22 +71,11 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
         <ZigTypography color='yellow' mt={5} mb={3}>
           {t('enable-2fa.key-phrase-info')}
         </ZigTypography>
-        <ZigInput
+        <ZigCopyText
           label={t('enable-2fa.key-phrase')}
-          type='text'
           value={load2FAInfoResult.data[0]}
-          InputProps={{
-            endAdornment: (
-              <IconButton
-                aria-label='Toggle password visibility'
-                onClick={() => {
-                  copy(load2FAInfoResult.data[0]);
-                  toast.success(t('enable-2fa.key-phrase-copied'));
-                }}
-                icon={<ContentCopy sx={{ color: 'neutral200' }} />}
-                variant='flat'
-              />
-            ),
+          onCopied={() => {
+            toast.success(t('enable-2fa.key-phrase-copied'));
           }}
         />
         <Form onSubmit={handleSubmit(onSubmit)}>

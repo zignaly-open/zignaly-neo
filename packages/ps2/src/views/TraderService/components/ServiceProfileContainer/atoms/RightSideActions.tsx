@@ -45,9 +45,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
         </Box>
       )}
 
-      {isInvested.isLoading && !service.liquidated && (
-        <Loader color={'#fff'} width={'40px'} height={'40px'} ariaLabel={''} />
-      )}
+      {isInvested.isLoading && !service.liquidated && <Loader />}
     </RightSideActionWrapper>
   );
 };

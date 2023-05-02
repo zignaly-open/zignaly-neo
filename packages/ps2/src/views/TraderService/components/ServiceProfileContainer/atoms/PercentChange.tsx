@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 import { useTranslation } from 'react-i18next';
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUp from '@mui/icons-material/ArrowDropUp';
-import { PercentageIndicatorSmall, PercentChangeContainer } from '../styles';
+import { ChangeIndicatorSmall, PercentChangeContainer } from '../styles';
 import { ZigTypography } from '@zignaly-open/ui';
 import { Variant } from '@mui/material/styles/createTypography';
 import { Tooltip } from '@mui/material';
@@ -12,7 +12,7 @@ const PercentChange: React.FC<{
   value: string | null | number;
   colored?: boolean;
   variant?: Variant;
-}> = ({ id, value, colored, variant = 'h6' }) => {
+}> = ({ id, value, colored, variant = 'caption' }) => {
   const { t } = useTranslation('common');
   const color = colored
     ? +value < 0
@@ -63,14 +63,14 @@ const PercentChange: React.FC<{
         <>{'∞'}</>
       )}
 
-      <PercentageIndicatorSmall
+      <ChangeIndicatorSmall
         sx={{
           color: (theme) => theme.palette[color],
         }}
       >
         {/* eslint-disable-next-line i18next/no-literal-string */}
         {'%'}
-      </PercentageIndicatorSmall>
+      </ChangeIndicatorSmall>
     </PercentChangeContainer>,
   );
 };

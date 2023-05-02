@@ -4,14 +4,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import { Field, Form } from './styles';
 import {
-  Button,
-  CoinIcon,
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
-  InputText,
-  SliderInput,
-  Typography,
+  ZigSliderInput,
+  ZigTypography,
   ZigButton,
+  ZigInput,
+  ZigCoinIcon,
 } from '@zignaly-open/ui';
 import { EditInvestmentValidation } from './validations';
 import {
@@ -117,22 +116,22 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
         <div>
           {isConfirmation ? (
             <>
-              <Typography variant={'body1'}>
+              <ZigTypography variant={'body1'}>
                 {t('invest-modal.amount-to-invest')}
-              </Typography>
+              </ZigTypography>
               <AmountInvested>
-                <CoinIcon coin={coin.id} name={'coin-icon'} />
+                <ZigCoinIcon coin={coin.id} />
                 <TokenValue>
-                  <Typography variant={'bigNumber'} color={'neutral100'}>
+                  <ZigTypography variant={'bigNumber'} color={'neutral100'}>
                     <NumericFormat
                       value={watch('amountTransfer')!.value.toString()}
                       displayType={'text'}
                       thousandSeparator={true}
                     />
-                  </Typography>
-                  <Typography variant={'h3'} color={'neutral400'}>
+                  </ZigTypography>
+                  <ZigTypography variant={'h3'} color={'neutral400'}>
                     {String(coin.id).toUpperCase()}
-                  </Typography>
+                  </ZigTypography>
                 </TokenValue>
               </AmountInvested>
             </>
@@ -185,19 +184,19 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
         <div>
           {isConfirmation ? (
             <>
-              <Typography variant={'body1'}>
+              <ZigTypography variant={'body1'}>
                 {t('form.profits.title-confirmation')}
-              </Typography>
+              </ZigTypography>
               <AmountInvested>
                 <TokenValue>
-                  <Typography variant={'bigNumber'} color={'neutral100'}>
+                  <ZigTypography variant={'bigNumber'} color={'neutral100'}>
                     <NumericFormat
                       value={watch('profitPercentage').toString()}
                       displayType={'text'}
                       suffix={'%'}
                       thousandSeparator={true}
                     />
-                  </Typography>
+                  </ZigTypography>
                 </TokenValue>
               </AmountInvested>
             </>
@@ -207,7 +206,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <SliderInput
+                <ZigSliderInput
                   mode={'range'}
                   labels={{
                     top: t('form.profits.title'),
@@ -215,7 +214,6 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                     right: t('form.profits.right'),
                   }}
                   value={field.value}
-                  initialValue={field.value}
                   onChange={field.onChange}
                 />
               )}
@@ -229,7 +227,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           name='transferConfirm'
           control={control}
           render={({ field }) => (
-            <InputText
+            <ZigInput
               label={t('invest-modal.type-transfer', {
                 word: transferMagicWord,
               })}
@@ -294,31 +292,31 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
             justifyContent: 'flex-end',
           }}
         >
-          <Button
+          <ZigButton
             id={'invest-close'}
             size={'large'}
             type={'button'}
             disabled={isLoading}
-            variant={'secondary'}
-            caption={t(isConfirmation ? 'common:back' : 'common:close')}
+            variant={'outlined'}
             onClick={isConfirmation ? onGoBackToFirstStep : close}
-          />
+          >
+            {t(isConfirmation ? 'common:back' : 'common:close')}
+          </ZigButton>
 
-          <Button
+          <ZigButton
             id={'invest-confirm'}
             size={'large'}
             type={'submit'}
             loading={isLoading}
-            caption={
-              isConfirmation
-                ? t('form.button.invest-now', {
-                    amount: watch('amountTransfer')!.value.toString(),
-                    coin: coin.id,
-                  })
-                : t('form.button.continue-to-confirmation')
-            }
             disabled={!canSubmit}
-          />
+          >
+            {isConfirmation
+              ? t('form.button.invest-now', {
+                  amount: watch('amountTransfer')!.value.toString(),
+                  coin: coin.id,
+                })
+              : t('form.button.continue-to-confirmation')}
+          </ZigButton>
         </Box>
       </ModalActions>
     </Form>

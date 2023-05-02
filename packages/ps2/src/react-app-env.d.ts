@@ -33,7 +33,6 @@ declare module '@mui/material/styles' {
   }
 
   interface CustomPalette {
-    white: string;
     neutral800: string;
     neutral750: string;
     neutral700: string;
@@ -54,13 +53,8 @@ declare module '@mui/material/styles' {
     yellow: string;
     red: string;
     avatarBack: string;
-    dropDownBackground: string;
-    darkSpecial: string;
+
     almostWhite: string;
-    errorToasterBg: string;
-    errorToasterBorder: string;
-    successToasterBg: string;
-    successToasterBorder: string;
   }
 
   interface Palette extends CustomPalette {}
@@ -73,7 +67,6 @@ declare module '@mui/material/styles/createTheme' {
 
 declare module '@mui/material/Button' {
   interface ButtonPropsColorOverrides {
-    white: true;
     danger: true;
     success: true;
     neutral800: true;
@@ -95,20 +88,14 @@ declare module '@mui/material/Button' {
     links: true;
     yellow: true;
     red: true;
-    dropDownBackground: true;
-    darkSpecial: true;
+
     avatarBack: true;
     almostWhite: true;
-    errorToasterBg: true;
-    errorToasterBorder: true;
-    successToasterBg: true;
-    successToasterBorder: true;
   }
 }
 
 declare module '@mui/material/SvgIcon' {
   export interface SvgIconPropsColorOverrides {
-    white: true;
     danger: true;
     success: true;
     neutral800: true;
@@ -130,14 +117,9 @@ declare module '@mui/material/SvgIcon' {
     links: true;
     yellow: true;
     red: true;
-    dropDownBackground: true;
-    darkSpecial: true;
+
     avatarBack: true;
     almostWhite: true;
-    errorToasterBg: true;
-    errorToasterBorder: true;
-    successToasterBg: true;
-    successToasterBorder: true;
   }
 }
 
@@ -147,7 +129,6 @@ import React from 'react';
 
 declare module '@emotion/react' {
   export interface Theme extends MuiTheme {
-    white: string;
     neutral800: string;
     neutral750: string;
     neutral700: string;
@@ -167,14 +148,9 @@ declare module '@emotion/react' {
     links: string;
     yellow: string;
     red: string;
-    dropDownBackground: string;
-    darkSpecial: string;
+
     almostWhite: string;
-    errorToasterBg: string;
-    errorToasterBorder: string;
     avatarBack: string;
-    successToasterBg: string;
-    successToasterBorder: string;
   }
 }
 

@@ -34,7 +34,7 @@ export const StyledSwitch = styled(Switch)`
 `;
 
 export const SubTitle = withAttrs(ZigTypography, {
-  variant: 'subtitle1',
+  variant: 'body1',
   fontWeight: 600,
   fontSize: 12,
   color: 'neutral300',

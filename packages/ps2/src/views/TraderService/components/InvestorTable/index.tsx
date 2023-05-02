@@ -4,9 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Layout, InvestorCounts } from './styles';
 import {
   UserIcon,
-  Typography,
-  PriceLabel,
-  PercentageIndicator,
+  ZigTypography,
+  ChangeIndicator,
   ZigTable,
   createColumnHelper,
   ZigTablePriceLabel,
@@ -74,13 +73,13 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       columnHelper.accessor('pnlNetLc', {
         header: t('tableHeader.P&L'),
         cell: (props) => (
-          <PriceLabel
-            coin={service?.ssc ?? 'USDT'}
-            value={parseFloat(props.getValue())}
-            bottomElement={
-              <PercentageIndicator value={props.row.original.pnlPctLc} />
-            }
-          />
+          <>
+            <ZigTablePriceLabel
+              coin={service?.ssc ?? 'USDT'}
+              value={parseFloat(props.getValue())}
+            />
+            <ChangeIndicator value={props.row.original.pnlPctLc} />
+          </>
         ),
       }),
       columnHelper.accessor('pnlNetAt', {
@@ -131,11 +130,11 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           <>
             <InvestorCounts>
               <UserIcon width={'17px'} height={'20px'} color={'#65647E'} />
-              <Typography variant={'h3'} color={'almostWhite'}>
+              <ZigTypography variant={'h3'} color={'almostWhite'}>
                 {t('number-of-investors', {
                   count: investors?.length,
                 })}
-              </Typography>
+              </ZigTypography>
             </InvestorCounts>
 
             <ZigTable

@@ -12,9 +12,9 @@ import {
   ListItemButton,
   ListItemText,
   Drawer,
-  IconButton,
   Collapse,
   ListItemIcon,
+  IconButton,
 } from '@mui/material';
 import {
   Avatar,
@@ -83,9 +83,6 @@ const ZigDrawer = () => {
   return (
     <>
       <IconButton
-        color='inherit'
-        aria-label='open drawer'
-        edge='start'
         onClick={handleDrawerToggle}
         sx={{ mr: 2, display: { sm: 'none' } }}
       >

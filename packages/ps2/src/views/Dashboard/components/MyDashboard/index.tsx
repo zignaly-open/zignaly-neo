@@ -1,6 +1,6 @@
 import {
   createColumnHelper,
-  PercentageIndicator,
+  ChangeIndicator,
   ZigTable,
   ZigTypography,
   ZigChartMini,
@@ -93,7 +93,7 @@ const MyDashboard: React.FC = () => {
                 midLine
                 data={[0, ...(original.sparklines as number[])]}
               />
-              <PercentageIndicator
+              <ChangeIndicator
                 id={`portfolio-table__chart-percentage-${original.serviceId}`}
                 normalized
                 value={new BigNumber(original.pnl30dPct).toFixed()}
@@ -122,7 +122,7 @@ const MyDashboard: React.FC = () => {
       columnHelper.accessor('pnl90dPct', {
         header: t('tableHeader.3-mos-title'),
         cell: ({ getValue, row: { original } }) => (
-          <PercentageIndicator
+          <ChangeIndicator
             id={`portfolio-table__pnl90dPct-${original.serviceId}`}
             normalized
             type='default'
@@ -134,7 +134,7 @@ const MyDashboard: React.FC = () => {
       columnHelper.accessor('pnl180dPct', {
         header: t('tableHeader.6-mos-title'),
         cell: ({ getValue, row: { original } }) => (
-          <PercentageIndicator
+          <ChangeIndicator
             id={`portfolio-table__pnl180dPct-${original.serviceId}`}
             normalized
             type='default'
@@ -147,7 +147,7 @@ const MyDashboard: React.FC = () => {
         header: t('tableHeader.all.title'),
         meta: { subtitle: t('tableHeader.all.subtitle') },
         cell: ({ getValue, row: { original } }) => (
-          <PercentageIndicator
+          <ChangeIndicator
             id={`portfolio-table__pnlPctLc-${original.serviceId}`}
             type='default'
             normalized

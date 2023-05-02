@@ -13,17 +13,19 @@ import {
   InputField,
 } from "./styles";
 import TokenSelector from "./components/TokenSelector";
-import ErrorMessage from "components/display/ErrorMessage";
-import Typography from "components/display/Typography";
+import ZigTypography from "components/display/ZigTypography";
 import { InputAmountProps, TokenItem } from "./types";
 import { changeEvent } from "utils/event";
 import { useDeepCompareEffect } from "react-use";
 import ZigPriceLabel from "components/display/ZigPriceLabel";
 import { Box } from "@mui/material";
-import ZigCoinIcon, { CoinSizes } from "components/display/ZigCoinIcon";
+import ZigCoinIcon from "components/display/ZigCoinIcon";
 import { COIN_SIZES } from "components/display/ZigCoinIcon/types";
+import { ErrorMessage } from "../../display/ZigAlertMessage";
 
 // FIXME this component still needs Jesus
+// TODO: rename to ZigInoutAmount, add stories
+// TODO: Wrap stories inside a form
 function InputAmount({
   tokens = [],
   name = "amountValue",
@@ -95,19 +97,12 @@ function InputAmount({
 
   return (
     <Layout withError={!!error} disabled={disabled} fullWidth={fullWidth}>
-      <Typography weight="regular" color="neutral200">
-        {label}
-      </Typography>
+      <ZigTypography color="neutral200">{label}</ZigTypography>
       <Wrapper>
         <InputContainer>
           <Side>
             {value?.token?.id && tokens.length < 2 && (
-              <ZigCoinIcon
-                name={value?.token.id}
-                size={COIN_SIZES.Small as CoinSizes}
-                coin={value?.token.id}
-                bucket={iconBucket}
-              />
+              <ZigCoinIcon size={COIN_SIZES.Small} coin={value?.token.id} bucket={iconBucket} />
             )}
             <InputField>
               <InputValue
@@ -129,9 +124,9 @@ function InputAmount({
               <>
                 {/*TODO: calculate wiotdth properly*/}
                 <Unit widthCharacters={String(value?.value)?.length ?? 1}>
-                  <Typography color="neutral300" variant="h3">
+                  <ZigTypography color="neutral300" variant="h3">
                     {value?.token?.id.toUpperCase()}
-                  </Typography>
+                  </ZigTypography>
                 </Unit>
                 <UnitInvisible />
               </>

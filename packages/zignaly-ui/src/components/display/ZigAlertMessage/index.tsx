@@ -30,3 +30,8 @@ function ZigAlertMessage({ text, error, warning }: ZigAlertMessageProps) {
 }
 
 export default ZigAlertMessage;
+
+// added for backwards compatibility
+export const ErrorMessage: React.FC<Pick<ZigAlertMessageProps, "text">> = ({ text }) => (
+  <ZigAlertMessage text={text} error />
+);

@@ -7,18 +7,15 @@ import {
 } from '../../apis/referrals/api';
 import { Box, Grid } from '@mui/material';
 import {
-  CloneIcon,
-  dark,
-  InputText,
   PageContainer,
   ZigButton,
+  ZigCopyText,
   ZigPriceLabel,
   ZigTypography,
 } from '@zignaly-open/ui';
 import GroupIcon from '@mui/icons-material/Group';
 import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { useCurrentUser } from '../../apis/user/use';
-import copy from 'copy-to-clipboard';
 import { useToast } from '../../util/hooks/useToast';
 import { generatePath } from 'react-router-dom';
 import {
@@ -111,37 +108,24 @@ const Referrals: React.FC = () => {
                   sx={{
                     display: 'flex',
                     flexDirection: 'row',
-                    alignItems: 'flex-end',
+                    alignItems: 'flex-start',
                   }}
                 >
                   <Box sx={{ flex: 1 }}>
-                    <InputText
-                      readOnly={true}
+                    <ZigCopyText
+                      id={'deposit__deposit-address'}
+                      copyElementId={'referrals__copy-link'}
                       value={link}
-                      rightSideElement={
-                        <CloneIcon
-                          id='referrals__copy-link'
-                          width={40}
-                          height={40}
-                          color={dark.neutral300}
-                        />
-                      }
-                      onClickRightSideElement={() => {
-                        copy(link);
-                        toast.success(t('action:copied'));
-                      }}
+                      onCopied={() => toast.success(t('action:copied'))}
                     />
                   </Box>
                   <ZigButton
                     variant={'contained'}
                     id='referrals__open-invite-image-modal'
-                    size={'large'}
+                    size={'xlarge'}
                     sx={{
                       mb: '10px',
-                      height: '66px',
                       ml: 1,
-                      fontSize: '16px',
-                      textTransform: 'uppercase',
                     }}
                     onClick={openInviteModal}
                   >

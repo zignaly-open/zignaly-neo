@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
-import { TextButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useZAlert } from '../../../components/ZModal/use';
 import { UlList } from '../../Referrals/styles';
 import { Box } from '@mui/material';
@@ -28,7 +28,11 @@ const TermsButtonModal: React.FC = () => {
     });
   }, [t]);
 
-  return <TextButton caption={t('terms')} onClick={() => showTerms()} />;
+  return (
+    <ZigButton variant={'text'} onClick={() => showTerms()}>
+      {t('terms')}
+    </ZigButton>
+  );
 };
 
 export default TermsButtonModal;

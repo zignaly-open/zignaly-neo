@@ -1,6 +1,6 @@
 import React from 'react';
 import { Item, InternalName } from './styles';
-import { Avatar, DropDown } from '@zignaly-open/ui';
+import { Avatar, ZigDropdown } from '@zignaly-open/ui';
 import {
   useActiveExchange,
   useCurrentUser,
@@ -8,10 +8,10 @@ import {
 } from '../../apis/user/use';
 import { getImageOfAccount } from '../../util/images';
 import { Exchange, UserData } from '../../apis/user/types';
-import { DropDownProps } from '@zignaly-open/ui';
+import { ZigDropdownProps } from '@zignaly-open/ui';
 
 const AccountSelector: React.FC<{
-  component: DropDownProps['component'];
+  component: ZigDropdownProps['component'];
   exchangeFilter?: (exchange: Exchange) => boolean;
 }> = ({ component, exchangeFilter }) => {
   const user: UserData | Partial<UserData> = useCurrentUser();
@@ -27,7 +27,7 @@ const AccountSelector: React.FC<{
   return (
     <>
       {user.exchanges.length > 1 && (
-        <DropDown
+        <ZigDropdown
           component={component}
           options={exchanges
             .filter(exchangeFilter || Boolean)

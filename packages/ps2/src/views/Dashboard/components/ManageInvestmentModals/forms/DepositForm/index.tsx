@@ -3,21 +3,18 @@ import { Controller, useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 import { ReactComponent as BinanceLogo } from '../../../../../../images/binance.svg';
 import {
-  dark,
-  InputText,
   ErrorMessage,
-  ZignalyQRCode,
+  ZigQrCode,
   ZigSelect,
-  CloneIcon,
-  Typography,
   Loader,
   ZigTypography,
+  ZigCopyText,
+  ZigLink,
 } from '@zignaly-open/ui';
 import NorthEastIcon from '@mui/icons-material/NorthEast';
-import copy from 'copy-to-clipboard';
 import { DepositFormData } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import { Box, Grid, Link } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { NumericFormat } from 'react-number-format';
 import {
   useCoinBalances,
@@ -160,36 +157,60 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               flexDirection: 'column',
             }}
           >
-            <Typography variant='body2' color='neutral200' weight='medium'>
+            <ZigTypography
+              variant='body2'
+              color='neutral200'
+              fontWeight='medium'
+            >
               {t('balances.total')}{' '}
-              <Typography variant='body2' color='neutral000' weight='medium'>
+              <ZigTypography
+                variant='body2'
+                color='neutral000'
+                fontWeight='medium'
+              >
                 <NumericFormat
                   displayType={'text'}
                   value={coinObject?.balance ?? ''}
                 />
-              </Typography>{' '}
+              </ZigTypography>{' '}
               {coin ?? ''}
-            </Typography>
-            <Typography variant='body2' color='neutral200' weight='medium'>
+            </ZigTypography>
+            <ZigTypography
+              variant='body2'
+              color='neutral200'
+              fontWeight='medium'
+            >
               {t('balances.balanceLocked')}{' '}
-              <Typography variant='body2' color='neutral000' weight='medium'>
+              <ZigTypography
+                variant='body2'
+                color='neutral000'
+                fontWeight='medium'
+              >
                 <NumericFormat
                   value={coinObject?.inOrders ?? ''}
                   displayType={'text'}
                 />
-              </Typography>{' '}
+              </ZigTypography>{' '}
               {coin ?? ''}
-            </Typography>
-            <Typography variant='body2' color='neutral200' weight='medium'>
+            </ZigTypography>
+            <ZigTypography
+              variant='body2'
+              color='neutral200'
+              fontWeight='medium'
+            >
               {t('balances.balanceFree')}{' '}
-              <Typography variant='body2' color='neutral000' weight='medium'>
+              <ZigTypography
+                variant='body2'
+                color='neutral000'
+                fontWeight='medium'
+              >
                 <NumericFormat
                   value={coinObject?.available ?? ''}
                   displayType={'text'}
                 />
-              </Typography>{' '}
+              </ZigTypography>{' '}
               {coin ?? ''}
-            </Typography>
+            </ZigTypography>
           </Grid>
         )}
 
@@ -216,61 +237,40 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         {!!network && networkObject?.depositEnable && (
           <>
             <Grid item xs={12} pt={3}>
-              <InputText
+              <ZigCopyText
                 id={'deposit__deposit-address'}
-                placeholder={t('depositAddress.placeholder')}
                 label={t('depositAddress.label')}
-                readOnly={true}
                 value={
                   loading ? t('depositAddress.loading') : depositInfo?.address
                 }
-                rightSideElement={
-                  <CloneIcon
-                    width={40}
-                    height={40}
-                    color={dark.neutral300}
-                    id={'deposit-address__copy'}
-                  />
-                }
-                onClickRightSideElement={() => {
+                onCopied={() => {
                   trackCta({
                     userId,
                     ctaId: 'copy-deposit-address',
                   });
-                  copy(depositInfo?.address);
                   toast.success(t('depositAddress.copied'));
                 }}
+                error={
+                  !!networkObject?.label &&
+                  t('depositAddress.warning', {
+                    network: networkObject?.label,
+                    coin: coinObject?.name,
+                  })
+                }
               />
             </Grid>
 
-            {networkObject?.label && (
-              <Box>
-                <ErrorMessage
-                  text={t('depositAddress.warning', {
-                    network: networkObject?.label,
-                    coin: coinObject?.name,
-                  })}
-                />
-              </Box>
-            )}
-
             {!!depositInfo?.tag && (
               <Grid item xs={12} pt={3}>
-                <InputText
+                <ZigCopyText
                   id={'deposit__deposit-memo'}
                   label={t('depositMemo.label')}
-                  placeholder={t('depositAddress.placeholder')}
-                  readOnly={true}
                   value={loading ? t('depositMemo.loading') : depositInfo?.tag}
-                  rightSideElement={
-                    <CloneIcon width={40} height={40} color={dark.neutral300} />
-                  }
-                  onClickRightSideElement={() => {
+                  onCopied={() => {
                     trackCta({
                       userId,
                       ctaId: 'copy-deposit-memo',
                     });
-                    copy(depositInfo?.tag);
                     toast.success(t('depositMemo.copied'));
                   }}
                 />
@@ -296,12 +296,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                     height: '200px',
                   }}
                 >
-                  <Loader
-                    color={'#fff'}
-                    width={'40px'}
-                    height={'40px'}
-                    ariaLabel={t('loading')}
-                  />
+                  <Loader />
                 </Box>
               ) : (
                 <Box
@@ -312,14 +307,14 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                     gap: 2,
                   }}
                 >
-                  <ZignalyQRCode
+                  <ZigQrCode
                     label={t('depositQR.address', {
                       coin: coinObject?.name,
                     })}
                     url={depositInfo.address}
                   />
                   {depositInfo?.tag && (
-                    <ZignalyQRCode
+                    <ZigQrCode
                       label={t('depositQR.memo', {
                         coin: coinObject?.name,
                       })}
@@ -336,8 +331,8 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
           <ErrorMessage text={t('no-network')} />
         )}
         <Grid item xs={12} pt={3}>
-          <Typography variant={'body2'} color={'neutral300'}>
-            <Link underline={'hover'} href={BUY_CRYPTO_URL} target={'_blank'}>
+          <ZigTypography variant={'body2'} color={'neutral300'}>
+            <ZigLink href={BUY_CRYPTO_URL} target={'_blank'}>
               <Box
                 sx={{
                   display: 'flex',
@@ -348,8 +343,8 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                 {t('buy-crypto')}
                 <NorthEastIcon fontSize={'inherit'} />
               </Box>
-            </Link>
-          </Typography>
+            </ZigLink>
+          </ZigTypography>
         </Grid>
       </Grid>
     </form>

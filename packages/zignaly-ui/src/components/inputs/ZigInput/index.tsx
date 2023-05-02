@@ -1,40 +1,83 @@
-import React from "react";
+import React, { useState } from "react";
 import { ZigInputProps } from "./types";
-import ErrorMessage from "components/display/ErrorMessage";
 import { styled } from "@mui/material/styles";
-import { TextField } from "@mui/material";
-import TextButton from "../TextButton";
+import { InputAdornment, TextField } from "@mui/material";
+import ZigButton from "../ZigButton";
+import dark from "../../../theme/dark";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import { ErrorMessage } from "../../display/ZigAlertMessage";
+
+function valueToArray<T>(v: T | T[]): T[] {
+  return (Array.isArray(v) ? v : [v]).filter(Boolean);
+}
 
 const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
-  ({ error, wide, labelAction, helperText, ...props }) => (
-    <TextField
-      {...props}
-      label={
-        <>
-          {props.label}
-          {labelAction && (
-            <TextButton
-              tabIndex={labelAction.tabIndex}
-              onClick={labelAction.onClick}
-              href={labelAction.href}
-              caption={labelAction.text}
-              id={labelAction.id}
-            />
-          )}
-        </>
-      }
-      variant={"standard"}
-      error={!!error}
-      helperText={
-        typeof error === "string" && error !== ""
-          ? error && <ErrorMessage text={error} />
-          : helperText
-      }
-      InputProps={{ disableUnderline: true, ...(props.InputProps || {}) }}
-      InputLabelProps={{ shrink: true, ...(props.InputLabelProps || {}) }}
-    />
-  ),
+  React.forwardRef(({ error, wide, sensitive, labelAction, helperText, ...props }, ref) => {
+    const [isShown, setIsShown] = useState(false);
+    const EyeIcon = isShown ? VisibilityOffIcon : VisibilityIcon;
+
+    return (
+      <TextField
+        inputRef={ref}
+        {...props}
+        inputProps={{
+          ...(props.inputProps || {}),
+        }}
+        label={
+          !props.label ? null : (
+            <>
+              {props.label}
+              {labelAction && (
+                <ZigButton
+                  variant={"text"}
+                  sx={{ fontSize: "13px", fontWeight: 400 }}
+                  tabIndex={labelAction.tabIndex}
+                  onClick={labelAction.onClick}
+                  href={labelAction.href}
+                  id={labelAction.id}
+                >
+                  {labelAction.text}
+                </ZigButton>
+              )}
+            </>
+          )
+        }
+        variant={"standard"}
+        error={!!error}
+        helperText={
+          typeof error === "string" && error !== ""
+            ? error && <ErrorMessage text={error} />
+            : helperText
+        }
+        type={sensitive ? (!isShown ? "password" : "text") : props.type}
+        InputProps={{
+          disableUnderline: true,
+          ...(props.InputProps || {}),
+          ...(sensitive
+            ? {
+                endAdornment: [
+                  <InputAdornment position="end" key={props.id + "sensivive"}>
+                    {!!sensitive && (
+                      <EyeIcon
+                        onClick={() => setIsShown((v) => !v)}
+                        width={40}
+                        height={40}
+                        sx={ZigInputInteractiveAdornmentStyle}
+                      />
+                    )}
+                  </InputAdornment>,
+                  ...valueToArray(props?.InputProps?.endAdornment),
+                ],
+              }
+            : {}),
+        }}
+        InputLabelProps={{ shrink: true, ...(props.InputLabelProps || {}) }}
+      />
+    );
+  }),
 )`
+  // TODO: move to darkMui
   ${(props) => props.wide && "display: block"};
 
   .MuiInputLabel-root {
@@ -61,7 +104,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
   .MuiInput-root {
     border: 1px solid ${({ theme }) => theme.palette.neutral600};
     padding: 12px 24px;
-    margin-top: 4px;
+    margin-top: ${(props) => (props.label ? "4px" : 0)};
     min-height: 60px;
     border-radius: 5px;
     display: flex;
@@ -87,6 +130,13 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
 
       .MuiInputLabel-root {
         color: ${({ theme }) => theme.palette.neutral200};
+      }
+    }
+
+    .MuiInputAdornment-root {
+      .MuiSvgIcon-root {
+        width: 18px;
+        height: 18px;
       }
     }
   }
@@ -129,5 +179,14 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
     }
   }
 `;
+
+export const ZigInputInteractiveAdornmentStyle = {
+  cursor: "pointer",
+  color: dark.neutral300,
+  transition: "all .3s",
+  "&:hover": {
+    color: dark.neutral200,
+  },
+};
 
 export default ZigInput;
