@@ -25,7 +25,14 @@ export default {
 
 const Template: ComponentStory<typeof Toaster> = (args) => <Toaster {...args} />;
 
-export const ExampleToaster = Template.bind({});
-ExampleToaster.args = {
+export const Success = Template.bind({});
+Success.args = {
+  caption: "Something went right",
+  variant: "success",
+};
+
+export const Error = Template.bind({});
+Error.args = {
   caption: "Something went wrong",
+  variant: "error",
 };

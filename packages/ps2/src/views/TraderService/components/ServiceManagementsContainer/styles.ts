@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { PriceLabel, Typography } from '@zignaly-open/ui';
+import { ZigPriceLabel } from '@zignaly-open/ui';
 
 export const Layout = styled('div')`
   display: flex;
@@ -33,24 +33,6 @@ export const BottomContainer = styled('div')`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-`;
-
-export const MainPriceLabel = styled(PriceLabel)`
-  & > span {
-    margin-top: 16px;
-    justify-content: center;
-
-    > span:nth-of-type(1) {
-      color: #f3f4f6 !important;
-      font-weight: 500 !important;
-      font-size: 26px !important;
-    }
-
-    > span:nth-of-type(2) {
-      font-size: 15px;
-      color: ${({ theme }) => theme.palette.highlighted};
-    }
-  }
 `;
 
 export const TopConnector = styled('div')`
@@ -104,19 +86,8 @@ export const MiddleContainer = styled('div')`
   }
 `;
 
-export const InlinePriceLabel = styled(PriceLabel)`
-  display: inline-block;
-`;
-
-export const LabelHardDisc = styled(Typography)`
-  margin: 34px 0 16px;
-`;
-
-export const LineSeparator = styled('div')`
-  margin-top: 18px;
-  height: 1px;
-  width: 100%;
-  background: ${({ theme }) => theme.palette.neutral600};
+export const InlinePriceLabel = styled(ZigPriceLabel)`
+  margin-left: 16px;
 `;
 
 export const TradingFunds = styled('div')`
@@ -129,11 +100,6 @@ export const TradingFunds = styled('div')`
     margin-top: 18px;
     display: inline-flex;
     align-items: center;
-  }
-
-  span > span:nth-of-type(1) {
-    color: ${({ theme }) => theme.palette.neutral100} !important;
-    margin-left: 16px;
   }
 `;
 

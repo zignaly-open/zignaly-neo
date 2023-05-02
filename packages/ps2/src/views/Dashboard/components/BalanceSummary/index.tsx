@@ -3,12 +3,8 @@ import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
 import { Layout } from './styles';
 import { BalanceSummaryProps } from './types';
-import {
-  PencilIcon,
-  TextButton,
-  ZigTypography,
-  ZigPriceLabel,
-} from '@zignaly-open/ui';
+import EditIcon from '@mui/icons-material/Edit';
+import { ZigButton, ZigTypography, ZigPriceLabel } from '@zignaly-open/ui';
 import { getColorForNumber } from '../../../../util/numbers';
 import { Box } from '@mui/material';
 
@@ -51,13 +47,14 @@ export const BalanceSummary = ({
         )}
       </Box>
 
-      <TextButton
+      <ZigButton
+        variant={'text'}
         id={`${prefixId}__edit-${serviceId}`}
-        leftElement={<PencilIcon color='#65647E' width={16} height={16} />}
-        caption={t('action:edit')}
-        color={'links'}
+        startIcon={<EditIcon />}
         onClick={onClickEdit}
-      />
+      >
+        {t('action:edit')}
+      </ZigButton>
     </Layout>
   );
 };

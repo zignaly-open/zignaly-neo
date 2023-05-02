@@ -5,11 +5,12 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Grid } from '@mui/material';
 import { WithdrawActions } from '../../styles';
 import {
-  Button,
+  ZigButton,
+  CenteredLoader,
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
-  SliderInput,
-  Typography,
+  ZigSliderInput,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import BigNumber from 'bignumber.js';
 import {
@@ -24,7 +25,6 @@ import {
 import { WithdrawInvestmentFormFormData } from './types';
 import { ChangeViewFn, EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import CenteredLoader from '../../../../../../components/CenteredLoader';
 import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 import { useServiceDetails } from '../../../../../../apis/service/use';
 import { trimZeros } from '@zignaly-open/ui';
@@ -103,7 +103,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box sx={{ mt: 1, mb: 2 }}>
-        <Typography>{t('replace-existing-amount')}</Typography>
+        <ZigTypography>{t('replace-existing-amount')}</ZigTypography>
       </Box>
       <Grid container spacing={5}>
         <Grid item xs={12} md={6}>
@@ -131,9 +131,8 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
         </Grid>
         <Grid item xs={12} md={6}>
           <Box marginTop={5}>
-            <SliderInput
+            <ZigSliderInput
               value={sliderValue}
-              initialValue={0}
               onChange={(value: number) => {
                 if (!watch('amountTransfer')?.value && !value) {
                   // means first render
@@ -155,14 +154,15 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
         </Grid>
       </Grid>
       <WithdrawActions>
-        <Button
+        <ZigButton
           id={'withdraw__confirm-withdraw'}
           type={'submit'}
           size={'xlarge'}
           disabled={!isValid}
-          caption={t('button')}
           loading={isLoading}
-        />
+        >
+          {t('button')}
+        </ZigButton>
       </WithdrawActions>
     </form>
   );

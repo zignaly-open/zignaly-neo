@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import MenuDropDown from "./";
 
 export default {
-  title: "Navigation/MenuDropDown",
+  title: "Navigation/___FIXME____MenuDropDown",
   component: MenuDropDown,
   argTypes: {
     title: {

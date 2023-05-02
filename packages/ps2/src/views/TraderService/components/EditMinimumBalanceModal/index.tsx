@@ -5,7 +5,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { MinBalanceModalProps } from './types';
 import { MinBalanceModalValidation } from './validation';
 import BigNumber from 'bignumber.js';
-import { Button, InputAmountAdvanced, ZigTypography } from '@zignaly-open/ui';
+import {
+  ZigButton,
+  InputAmountAdvanced,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import {
   useServiceDetails,
   useTraderServiceManagement,
@@ -92,14 +96,15 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
         />
 
         <ModalActions>
-          <Button
+          <ZigButton
             id={'edit-balance__save'}
             loading={isLoadingManagement || isLoadingService || isUpdating}
-            caption={t('minBalanceModal.save')}
             disabled={!isValid}
             size='xlarge'
             type='submit'
-          />
+          >
+            {t('minBalanceModal.save')}
+          </ZigButton>
         </ModalActions>
       </form>
     </ZModal>

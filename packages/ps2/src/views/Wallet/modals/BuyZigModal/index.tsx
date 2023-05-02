@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import { Step, WalletDepositModalProps } from './types';
 import { DialogProps } from '@mui/material';
 import { useCurrentUser } from 'apis/user/use';
-import CenteredLoader from 'components/CenteredLoader';
 import { useBulkCoinsQuery } from 'apis/coin/api';
 import AddUsdtForm from './AddUsdtForm';
 import SwapZIGForm from './SwapForm';
 import ZModal from 'components/ZModal';
+import { CenteredLoader } from '@zignaly-open/ui';
 
 function BuyZigModal({
   coins,

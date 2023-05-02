@@ -1,18 +1,11 @@
 import React from 'react';
-import {
-  CloneIcon,
-  dark,
-  InputText,
-  ZigButton,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { ZigButton, ZigCopyText, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import PencilIcon from '@mui/icons-material/Create';
 import { useTranslation } from 'react-i18next';
 import { ApiKey, TextWrapperRow } from '../atoms';
 import { useParams } from 'react-router-dom';
-import copy from 'copy-to-clipboard';
 import { useToast } from '../../../../../util/hooks/useToast';
 import { addReadIfMissing } from '../util';
 import {
@@ -53,18 +46,10 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
       </ZigTypography>
       <Box sx={{ flexDirection: 'row', display: 'flex', gap: 3 }}>
         <Box sx={{ flex: 5, mr: 2 }}>
-          <InputText
-            placeholder={t('api-keys.api-key')}
+          <ZigCopyText
             label={t('api-keys.api-key')}
-            readOnly={true}
             value={apiKey.key}
-            rightSideElement={
-              <CloneIcon width={40} height={40} color={dark.neutral300} />
-            }
-            onClickRightSideElement={() => {
-              copy(apiKey.key);
-              toast.success(t('action:copied'));
-            }}
+            onCopied={() => toast.success(t('action:copied'))}
           />
         </Box>
         <Box sx={{ flex: 2 }}>

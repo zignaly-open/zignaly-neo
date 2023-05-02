@@ -2,25 +2,18 @@ import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
-import {
-  Form,
-  Action,
-  TitleHead,
-  StyledErrorOutline,
-  Wrapper,
-  LineBox,
-  ColouredLine,
-} from './styles';
+import { Form, Action, Wrapper, LineBox, ColouredLine } from './styles';
 import { SignupValidation } from './validations';
 import { useSignup } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_LOGIN } from '../../../../routes';
 import {
   ErrorMessage,
-  TextButton,
+  ZigAlertMessage,
   ZigButton,
   ZigInput,
   ZigTypography,
+  ZigLink,
 } from '@zignaly-open/ui';
 import { Box, InputAdornment, Link } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
@@ -29,7 +22,6 @@ import Mailcheck from 'react-mailcheck';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import LockIcon from '@mui/icons-material/Lock';
-import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
 
 const SignupForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -48,7 +40,6 @@ const SignupForm: React.FC = () => {
   });
   const [{ loading: signingUp }, signup] = useSignup();
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
 
   const { state: locationState } = useLocation();
@@ -68,25 +59,21 @@ const SignupForm: React.FC = () => {
         <Box flex={1} height={'100%'} />
       </LineBox>
       <Box padding={'0 32px'}>
-        <TitleHead>
-          <ZigTypography variant={'h1'} fontWeight={700}>
-            {t('signup-title')}
-          </ZigTypography>
-        </TitleHead>
-        <TitleHead>
-          <ZigTypography variant={'h2'}>
-            <Trans i18nKey={'signup-description'} t={t}>
-              <Link
-                underline={'always'}
-                sx={{
-                  color: 'neutral000',
-                  textUnderlineOffset: '10px',
-                  textDecorationColor: '#E1E9F0',
-                }}
-              />
-            </Trans>
-          </ZigTypography>
-        </TitleHead>
+        <ZigTypography variant={'h1'} align={'center'}>
+          {t('signup-title')}
+        </ZigTypography>
+        <ZigTypography variant={'h2'} align={'center'}>
+          <Trans i18nKey={'signup-description'} t={t}>
+            <Link
+              underline={'always'}
+              sx={{
+                color: 'neutral000',
+                textUnderlineOffset: '10px',
+                textDecorationColor: '#E1E9F0',
+              }}
+            />
+          </Trans>
+        </ZigTypography>
         <Form onSubmit={handleSubmit(onSubmit)}>
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
           {/* @ts-ignore */}
@@ -140,21 +127,19 @@ const SignupForm: React.FC = () => {
             render={({ field }) => (
               <ZigInput
                 id={'login__password'}
+                sensitive
                 label={t('login-form.inputText.password.label') + ':'}
                 placeholder={t('login-form.inputText.password.label')}
                 disabled={signingUp}
                 error={t(errors.password?.message)}
+                type={'password'}
                 helperText={
-                  <Box display='flex' alignItems='center'>
-                    <StyledErrorOutline height='24px' width='24px' />
-                    <ZigTypography variant='body2' color='neutral200'>
-                      {t('error:error.password-requirements', {
-                        length: 8,
-                      })}
-                    </ZigTypography>
-                  </Box>
+                  <ZigAlertMessage
+                    text={t('error:error.password-requirements', {
+                      length: 8,
+                    })}
+                  />
                 }
-                type={showPassword ? 'text' : 'password'}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment
@@ -164,30 +149,25 @@ const SignupForm: React.FC = () => {
                       <PasswordOutlinedIcon color={'secondary'} />
                     </InputAdornment>
                   ),
-                  endAdornment: (
-                    <PasswordVisibilityAdornment
-                      show={showPassword}
-                      onToggle={() => setShowPassword(!showPassword)}
-                    />
-                  ),
                 }}
                 {...field}
               />
             )}
           />
           <ZigTypography
+            marginTop={3}
             variant='h4'
             color='neutral300'
             component='h4'
-            align={'center'}
+            textAlign={'center'}
           >
             <Trans i18nKey='signup-form.accept-terms' t={t}>
-              <Link
+              <ZigLink
                 href='https://zignaly.com/legal/terms'
                 target='_blank'
                 rel='noopener'
               />
-              <Link
+              <ZigLink
                 href='https://zignaly.com/legal/privacy'
                 target='_blank'
                 rel='noopener'
@@ -233,11 +213,13 @@ const SignupForm: React.FC = () => {
               {t('signup-protect')}
             </ZigTypography>
           </Box>
-          <TextButton
+          <ZigButton
+            variant={'text'}
             id={'signup__login'}
             onClick={() => navigate(ROUTE_LOGIN, { state: locationState })}
-            caption={t('signup-form.link.login')}
-          />
+          >
+            {t('signup-form.link.login')}
+          </ZigButton>
         </Form>
       </Box>
     </Wrapper>

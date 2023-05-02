@@ -1,71 +1,20 @@
 import * as React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import Loader, { LoaderTypes } from "./";
+import { Loader, CenteredLoader } from "./";
 
 export default {
-  title: "Display/Loader",
-  component: Loader,
-  parameters: {
-    jest: ["loader"],
-  },
-} as ComponentMeta<typeof Loader>;
+  title: "Display/Loaders",
+  component: CenteredLoader,
+} as ComponentMeta<typeof CenteredLoader>;
 
-const Template: ComponentStory<typeof Loader> = (args) => <Loader {...args} />;
+const TemplateSmall: ComponentStory<typeof Loader> = (args) => <Loader {...args} />;
+const TemplateCentered: ComponentStory<typeof CenteredLoader> = (args) => (
+  <CenteredLoader {...args} />
+);
 
-const defaultProps = {
-  width: "34px",
-  height: "34px",
-  color: "#FFF",
-  ariaLabel: "Loader Example",
-};
+export const Small = TemplateSmall.bind({});
+Small.args = {};
 
-export const Bars = Template.bind({});
-Bars.args = {
-  type: LoaderTypes.BARS,
-  ...defaultProps,
-};
-
-export const Audio = Template.bind({});
-Audio.args = {
-  type: LoaderTypes.AUDIO,
-  ...defaultProps,
-};
-
-export const Circles = Template.bind({});
-Circles.args = {
-  type: LoaderTypes.CIRCLES,
-  ...defaultProps,
-};
-
-export const Grid = Template.bind({});
-Grid.args = {
-  type: LoaderTypes.GRID,
-  ...defaultProps,
-};
-
-export const Oval = Template.bind({});
-Oval.args = {
-  type: LoaderTypes.OVAL,
-  strokeWidth: "2",
-  secondaryColor: "rgba(255, 255, 255, 0.3)",
-  ...defaultProps,
-};
-
-export const FallingLines = Template.bind({});
-FallingLines.args = {
-  type: LoaderTypes.FALLING_LINES,
-  ...defaultProps,
-};
-
-export const TailSpin = Template.bind({});
-TailSpin.args = {
-  type: LoaderTypes.TAILSPIN,
-  ...defaultProps,
-};
-
-export const ThreeDots = Template.bind({});
-ThreeDots.args = {
-  type: LoaderTypes.THREE_DOTS,
-  ...defaultProps,
-};
+export const Centered = TemplateCentered.bind({});
+Centered.args = {};

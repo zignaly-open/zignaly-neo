@@ -1,8 +1,8 @@
 import React, { ReactElement } from 'react';
-import CenteredLoader from '../CenteredLoader';
 import CriticalError from '../Stub/CriticalError';
 import NoData from '../Stub/NoData';
 import { QueryReturnTypeBasic } from '../../util/queryReturnType';
+import { CenteredLoader } from '@zignaly-open/ui';
 
 type EndpointEsque = QueryReturnTypeBasic<unknown>;
 

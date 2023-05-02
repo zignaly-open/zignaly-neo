@@ -4,6 +4,7 @@ import { Layout, Box, Label, Icon } from "./styles";
 
 import { CheckBoxProps } from "./types";
 
+// TODO: deprecate, use ZigCheckbox
 function CheckBox({
   defaultValue = false,
   value,
@@ -30,7 +31,9 @@ function CheckBox({
   return (
     <Layout onClick={handleClickChecked} isActive={isChecked} disabled={disabled}>
       <Box>{isChecked && <Icon />}</Box>
-      <Label>{label}</Label>
+      <Label variant={"body2"} color={"neutral300"}>
+        {label}
+      </Label>
     </Layout>
   );
 }

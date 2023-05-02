@@ -1,5 +1,5 @@
 import { styled, css } from '@mui/material';
-import { styledIf, Typography } from '@zignaly-open/ui';
+import { styledIf, ZigTypography } from '@zignaly-open/ui';
 
 export const Layout = styled('div')<{ width: number }>`
   display: flex;
@@ -19,7 +19,7 @@ export const Layout = styled('div')<{ width: number }>`
   user-select: none;
 `;
 
-export const Title = styled(Typography)`
+export const Title = styled(ZigTypography)`
   display: flex;
   justify-content: space-between;
 `;
