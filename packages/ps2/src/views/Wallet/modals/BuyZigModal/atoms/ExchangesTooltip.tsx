@@ -22,7 +22,7 @@ const ExchangesTooltip = () => {
 
   return (
     <Tooltip placement='bottom' title={<ExchangesTooltipContent />}>
-      <ZigTypography color='links' style={{ cursor: 'pointer' }}>
+      <ZigTypography color='links'>
         {t('buy.available-exchanges')}
       </ZigTypography>
     </Tooltip>
