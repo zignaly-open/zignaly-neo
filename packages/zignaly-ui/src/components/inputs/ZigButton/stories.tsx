@@ -99,6 +99,8 @@ const Wrapper = styled("div")`
 const TemplateTextButton: Story<typeof ZigButton> = (args) => {
   return (
     <>
+      This button is always 13x bu design. If you needs a version that inherits the font size, pls
+      use ZigLink.
       <ZigTypography variant={"h1"}>
         Hello <ZigButton variant={"text"} {...args} />
       </ZigTypography>
@@ -118,7 +120,6 @@ const TemplateTextButton: Story<typeof ZigButton> = (args) => {
         <ZigButton variant={"text"} {...args} /> lived in a very long text and then died unhappily
         ever after. Yes, that was story of a button that lived in a very very long text.
       </ZigTypography>
-
       <ZigTypography variant={"body1"} component={"p"}>
         Hello, let me tell you a story of a button that lived in a very very long text. Hello, let
         me tell you a story of a button that lived in a very very long text. Yes, a{" "}
@@ -127,7 +128,6 @@ const TemplateTextButton: Story<typeof ZigButton> = (args) => {
         </ZigButton>{" "}
         can have icons, imagine that.
       </ZigTypography>
-
       <ZigTypography variant={"body1"} component={"p"}>
         Hello, let me tell you a story of a button that lived in a very very long text. Hello, let
         me tell you a story of a button that lived in a very very long text. Yes, a{" "}
@@ -136,7 +136,6 @@ const TemplateTextButton: Story<typeof ZigButton> = (args) => {
         </ZigButton>{" "}
         can be a link, imagine that.
       </ZigTypography>
-
       <ZigTypography variant={"body2"} component={"p"}>
         Hello <ZigButton variant={"text"} {...args} /> button in text in a very long
       </ZigTypography>

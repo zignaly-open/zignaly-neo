@@ -198,13 +198,17 @@ const darkMui = createTheme({
           display: "inline",
           padding: "0 2px !important",
           borderRadius: "2px",
-          fontSize: "inherit",
+          fontSize: "13px",
           minWidth: "0 !important",
           verticalAlign: "baseline",
           minHeight: "0px !important",
           ".MuiLoadingButton-loadingIndicatorCenter": {
             transform: "translate(-50%, 50%)",
             marginTop: "-4px",
+          },
+          "&:hover": {
+            background: "transparent",
+            textDecoration: "underline",
           },
           ".MuiButton-startIcon": {
             marginRight: "5px",
