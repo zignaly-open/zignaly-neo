@@ -186,12 +186,22 @@ const darkMui = createTheme({
           minHeight: "36px",
           paddingTop: "6px",
           paddingBottom: "6px",
+          letterSpacing: "0.55px",
           minWidth: "76px",
+          fontSize: "11px",
         },
         sizeSmall: {
           minHeight: "30px",
           minWidth: "76px",
           padding: "4px 18px",
+          letterSpacing: "0.55px",
+          fontSize: "11px",
+        },
+        containedSizeSmall: {
+          letterSpacing: "1.1px",
+        },
+        containedSizeMedium: {
+          letterSpacing: "1.1px",
         },
         text: {
           color: dark.links,
