@@ -106,10 +106,7 @@ const SignupForm: React.FC = () => {
                     }}
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment
-                          position='start'
-                          sx={{ marginRight: '10px', marginLeft: '-10px' }}
-                        >
+                        <InputAdornment position='start'>
                           <EmailOutlinedIcon color={'secondary'} />
                         </InputAdornment>
                       ),
@@ -142,10 +139,7 @@ const SignupForm: React.FC = () => {
                 }
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment
-                      position='start'
-                      sx={{ marginRight: '10px', marginLeft: '-10px' }}
-                    >
+                    <InputAdornment position='start'>
                       <PasswordOutlinedIcon color={'secondary'} />
                     </InputAdornment>
                   ),
