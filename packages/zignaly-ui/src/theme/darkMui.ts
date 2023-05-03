@@ -344,9 +344,10 @@ const darkMui = createTheme({
     },
     MuiLink: {
       styleOverrides: {
-        root: ({ theme }) => ({
-          color: theme.palette.links,
-        }),
+        root: {
+          cursor: "pointer",
+          color: dark.links,
+        },
       },
     },
   },
