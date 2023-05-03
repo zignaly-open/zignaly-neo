@@ -20,6 +20,7 @@ function EmailVerifyForm({
           {t('login-form.verifyEmail.title')}
         </ZigTypography>
         <InputCode
+          prefixId={'verify-email'}
           fields={6}
           error={error}
           loading={isLoading}
@@ -29,6 +30,7 @@ function EmailVerifyForm({
         />
         <ZigButton
           variant={'text'}
+          id={'verify-email__resend-code'}
           onClick={onReSendCode}
           loading={isReSendLoading}
         >

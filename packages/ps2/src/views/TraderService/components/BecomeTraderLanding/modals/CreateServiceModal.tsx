@@ -38,7 +38,6 @@ function CreateServiceModal({
 
   return (
     <ZModal
-      authOnly
       onGoBack={step === 1 && goBack}
       onBackdropClick={(e) => {
         e.stopPropagation();

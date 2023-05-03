@@ -11,7 +11,6 @@ import { useIsAuthenticated } from '../../../apis/user/use';
 import BalanceButton from '../BalanceButton';
 import { Box, Toolbar, useMediaQuery } from '@mui/material';
 import theme from 'theme';
-// FIXME
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { Container, StyledAppBar } from './styles';
@@ -33,7 +32,7 @@ const Header: React.FC = () => {
               <Box display='flex' alignItems='center' gap='28px'>
                 <a href={MAIN_APP_URL} key='logo' rel={'noopener'}>
                   <BrandImage
-                    id='menu__logo-portfolio'
+                    id='menu__logo'
                     height='32px'
                     type='isotype'
                     width='32px'

@@ -26,7 +26,7 @@ function AlertModal({
   const { t } = useTranslation('action');
 
   return (
-    <ZModal {...props} close={close} title={title}>
+    <ZModal allowUnauth {...props} close={close} title={title}>
       {!!description && <ZigTypography>{description}</ZigTypography>}
 
       <Box sx={{ mt: 2, textAlign: 'center' }}>
