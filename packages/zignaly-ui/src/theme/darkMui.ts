@@ -208,7 +208,7 @@ const darkMui = createTheme({
           display: "inline",
           padding: "0 2px !important",
           borderRadius: "2px",
-          fontSize: "13px",
+          fontSize: "13px !important",
           minWidth: "0 !important",
           verticalAlign: "baseline",
           minHeight: "0px !important",
