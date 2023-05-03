@@ -158,6 +158,19 @@ export function useChartData({
       };
     });
 
+    if (chartType === GraphChartType.pnl_pct_compound) {
+      // prepend previous date as 0 to graph
+      const firstDate = graph?.[0]?.date;
+      if (firstDate && graph?.[0]?.y !== 0) {
+        const previousDate = subDays(firstDate, 1);
+        graph?.unshift({
+          x: formatMonthDay(previousDate),
+          date: previousDate,
+          y: 0,
+        });
+      }
+    }
+
     return {
       summary: data?.summary,
       percentDiff: [GraphChartType.investors, GraphChartType.sbt_ssc].includes(
