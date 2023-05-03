@@ -103,6 +103,7 @@ const MyBalancesTable = (): JSX.Element => {
             <Box>
               <ZigButton
                 narrow
+                sx={{ padding: '6px' }}
                 tooltip={t('withdraw')}
                 id={'balance-row__withdrawal'}
                 onClick={() =>
