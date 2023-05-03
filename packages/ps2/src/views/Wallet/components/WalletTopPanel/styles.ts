@@ -6,7 +6,7 @@ import { withAttrs } from 'util/styles';
 export const TopPanel = styled(Grid)`
   background: #13122566;
   border-radius: 16px;
-  margin: 21px 0 40px;
+  margin: 10px 0 40px;
   flex: 1;
   padding: 40px 32px;
   justify-content: space-around;
@@ -39,7 +39,7 @@ export const SubTitle = withAttrs(ZigTypography, {
   fontSize: 12,
   color: 'neutral300',
   mb: '20px',
-  ml: '51px',
+  ml: '57px',
 });
 
 export const MinText = withAttrs(ZigTypography, {

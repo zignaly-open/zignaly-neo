@@ -156,7 +156,7 @@ const WalletTopPanel = ({ balances, savings, coins }: WalletTopPanelProps) => {
       </PanelItem>
       <Separator />
       <PanelItem item>
-        <SubTitle>{t('savings')}</SubTitle>
+        <SubTitle ml='53px'>{t('savings')}</SubTitle>
         <Box display='flex' gap='12px'>
           <RewardsIcon width={48} height={48} />
           <div>
