@@ -18,9 +18,6 @@ function Button({
   id,
   loading,
   type,
-  testIdLeftElement = null,
-  testIdCaptionElement = null,
-  testIdRightElement = null,
   minWidth,
   maxWidth,
   maxHeight,
@@ -67,30 +64,12 @@ function Button({
     >
       <styled.Container>
         <styled.ElementsContainer>
-          {leftElement && (
-            <styled.LeftElement
-              data-testid={testIdLeftElement ? testIdLeftElement : "button-left-element"}
-            >
-              {renderLeftElement}
-            </styled.LeftElement>
-          )}
+          {leftElement && <styled.LeftElement>{renderLeftElement}</styled.LeftElement>}
           <styled.CaptionContainer>
-            {caption && (
-              <styled.Caption
-                data-testid={testIdCaptionElement ? testIdCaptionElement : "button-caption-element"}
-              >
-                {caption}
-              </styled.Caption>
-            )}
+            {caption && <styled.Caption>{caption}</styled.Caption>}
             {bottomElement && bottomElement}
           </styled.CaptionContainer>
-          {rightElement && (
-            <styled.RightElement
-              data-testid={testIdRightElement ? testIdRightElement : "button-right-element"}
-            >
-              {renderRightElement}
-            </styled.RightElement>
-          )}
+          {rightElement && <styled.RightElement>{renderRightElement}</styled.RightElement>}
         </styled.ElementsContainer>
       </styled.Container>
     </styled.Layout>
