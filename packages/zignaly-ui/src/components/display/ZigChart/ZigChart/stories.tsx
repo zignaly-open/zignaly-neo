@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import * as React from "react";
 
 export default {
-  title: "Display/Chart/ZigChart",
+  title: "Display/Charts/ZigChart",
   component: ZigChart,
   argTypes: {
     midLine: {

@@ -15,5 +15,6 @@
 	"copied": "Copiado al portapapeles",
 	"hide": "Ocultar",
 	"show": "Mostrar",
-	"claim": "Reclamar"
+	"claim": "Reclamar",
+	"deposit-coin": "Deposita {{coin}}"
 }

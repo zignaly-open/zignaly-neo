@@ -1,7 +1,7 @@
 const path = require("path");
 const resolve = (dir) => path.resolve(__dirname, dir);
 
-module.exports = async ({config}) => {
+module.exports = async ({ config }) => {
   config.resolve = Object.assign(config.resolve, {
     alias: {
       assets: resolve("../src/assets"),
@@ -16,17 +16,19 @@ module.exports = async ({config}) => {
   fileLoaderRule.exclude = /\.svg$/i;
   config.module.rules.push({
     test: /\.svg$/i,
-    type: 'asset',
+    type: "asset",
     resourceQuery: /url/, // *.svg?url
   });
   config.module.rules.push({
     test: /\.svg$/i,
-    issuer: /\.[jt]sx?$/,
-    resourceQuery: {not: [/url/]},
-    use: [{
-      loader: '@svgr/webpack',
-      options: {exportType: 'named'}
-    }],
+    issuer: /\.(?:[jt]sx?|mdx)$/,
+    resourceQuery: { not: [/url/] },
+    use: [
+      {
+        loader: "@svgr/webpack",
+        options: { exportType: "named" },
+      },
+    ],
   });
   return config;
 };

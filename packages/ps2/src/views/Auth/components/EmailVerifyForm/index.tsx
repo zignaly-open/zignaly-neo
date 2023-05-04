@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputCode, TextButton, Typography } from '@zignaly-open/ui';
+import { InputCode, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { Layout, Field } from './styles';
 import { EmailVerifyFormProps } from './types';
@@ -16,9 +16,9 @@ function EmailVerifyForm({
   return (
     <Layout>
       <Field>
-        <Typography variant={'body1'}>
+        <ZigTypography variant={'body1'}>
           {t('login-form.verifyEmail.title')}
-        </Typography>
+        </ZigTypography>
         <InputCode
           prefixId={'verify-email'}
           fields={6}
@@ -28,12 +28,14 @@ function EmailVerifyForm({
           onComplete={onSubmit}
           autoFocus={false}
         />
-        <TextButton
+        <ZigButton
           id={'verify-email__resend-code'}
+          variant={'text'}
           onClick={onReSendCode}
-          caption={t('login-form.verifyEmail.button')}
           loading={isReSendLoading}
-        />
+        >
+          {t('login-form.verifyEmail.button')}
+        </ZigButton>
       </Field>
     </Layout>
   );

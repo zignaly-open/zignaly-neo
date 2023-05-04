@@ -1,8 +1,9 @@
-import Typography from "components/display/Typography";
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 
 import { ReactComponent as CheckmarkIcon } from "assets/icons/checkmark-active-icon.svg";
+import muiStyled from "@emotion/styled";
+import ZigTypography from "../../display/ZigTypography";
 
 export const Icon = styled(CheckmarkIcon)`
   width: 10px;
@@ -27,7 +28,7 @@ export const Box = styled.div`
   overflow: hidden;
 `;
 
-export const Label = styled(Typography).attrs({ variant: "body2", color: "neutral300" })`
+export const Label = muiStyled(ZigTypography)`
   font-weight: 400;
   margin: 0 12px;
 `;

@@ -1,7 +1,7 @@
 import React from 'react';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
-import { Box, Divider, Grid, Link } from '@mui/material';
+import { Box, Divider, Grid } from '@mui/material';
 import NorthEastIcon from '@mui/icons-material/NorthEast';
 import { BUY_CRYPTO_URL } from '../../../../../util/constants';
 import { ChooseDepositTypeViews } from '../types';
@@ -33,7 +33,7 @@ const ChooseDepositType: React.FC<{
                 flexDirection: 'column',
                 alignItems: 'center',
                 width: '100%',
-                padding: '0 55px',
+                padding: '0 50px',
               }}
             >
               <Box
@@ -61,13 +61,7 @@ const ChooseDepositType: React.FC<{
                   setView(ChooseDepositTypeViews.DepositView);
                 }}
               >
-                <ZigTypography
-                  variant={'h4'}
-                  fontWeight={600}
-                  letterSpacing={1.1}
-                >
-                  {t('buttons.deposit', { coin })}
-                </ZigTypography>
+                {t('buttons.deposit', { coin })}
               </ZigButton>
             </Box>
           </Grid>
@@ -84,10 +78,7 @@ const ChooseDepositType: React.FC<{
           <Grid item xs={12} md={5}>
             <Box
               sx={{
-                width: '100%',
-                padding: '0 0',
-                display: 'flex',
-                flexDirection: 'column',
+                textAlign: 'center',
               }}
             >
               <Box textAlign={'center'} height={90} paddingTop={'10px'}>
@@ -99,34 +90,15 @@ const ChooseDepositType: React.FC<{
                   {t('buy-crypto', { coin })}
                 </ZigTypography>
               </Box>
-              <Link
+              <ZigButton
                 href={BUY_CRYPTO_URL}
-                target={'_blank'}
-                display={'flex'}
-                justifyContent={'center'}
-                underline={'none'}
+                variant='contained'
+                id={'choose-deposit-type__purchase'}
+                endIcon={<NorthEastIcon />}
+                size={'large'}
               >
-                <ZigButton
-                  variant='contained'
-                  id={'choose-deposit-type__purchase'}
-                  size={'large'}
-                >
-                  <ZigTypography
-                    variant={'h4'}
-                    fontWeight={600}
-                    letterSpacing={1.1}
-                  >
-                    {t('buttons.purchase', { coin })}
-                  </ZigTypography>
-                  <NorthEastIcon
-                    fontSize={'small'}
-                    sx={{
-                      marginLeft: '3px',
-                      marginTop: '-3px',
-                    }}
-                  />
-                </ZigButton>
-              </Link>
+                {t('buttons.purchase', { coin })}
+              </ZigButton>
             </Box>
           </Grid>
         </Grid>

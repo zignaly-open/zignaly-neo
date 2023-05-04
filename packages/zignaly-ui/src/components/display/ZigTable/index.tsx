@@ -15,16 +15,15 @@ import {
   SmallSelectWrapper,
   SortBox,
 } from "./styles";
-import DropDown from "../DropDown";
+import ZigDropdown from "../ZigDropdown";
 import ZigTypography from "../ZigTypography";
-import IconButton from "../../inputs/IconButton";
 import CheckBox from "../../inputs/CheckBox";
 import { ZigTableProps } from "./types";
-import { Box } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { ChevronLeft, ChevronRight, FirstPage, LastPage, MoreVert } from "@mui/icons-material";
 import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
-import Loader from "../Loader";
+import { Loader } from "../Loader";
 
 export default function ZigTable<T extends object>({
   prefixId,
@@ -112,13 +111,11 @@ export default function ZigTable<T extends object>({
                           {enableColumnVisibility &&
                             table.getHeaderGroups().length === groupIndex + 1 &&
                             headerGroup.headers.length === index + 1 && (
-                              <DropDown
-                                component={({ open }) => (
-                                  <HeaderIconButton
-                                    variant="flat"
-                                    isFocused={open}
-                                    icon={<MoreVert sx={{ color: "neutral200" }} />}
-                                  />
+                              <ZigDropdown
+                                component={() => (
+                                  <HeaderIconButton>
+                                    <MoreVert sx={{ color: "neutral200" }} />
+                                  </HeaderIconButton>
                                 )}
                                 options={table
                                   .getAllLeafColumns()
@@ -135,7 +132,7 @@ export default function ZigTable<T extends object>({
                                           value={column.getIsVisible()}
                                           label={column.columnDef.header as string}
                                           onChange={(v) => {
-                                            if (v || table.getVisibleLeafColumns().length > 1) {
+                                            if (v || table.getVisibleLeafColumns().length > 2) {
                                               column.toggleVisibility(v);
                                             }
                                           }}
@@ -186,7 +183,7 @@ export default function ZigTable<T extends object>({
       </TableContainer>
       {!data.length && !loading && (
         <ZigTypography
-          variant="subtitle1"
+          variant="body1"
           textAlign="center"
           padding="72px"
           display="flex"
@@ -203,22 +200,18 @@ export default function ZigTable<T extends object>({
           <Box justifyContent="center" display="flex" gap={1} alignItems="center" flex={3}>
             <IconButton
               id={prefixId && `${prefixId}-table__go-zero-page`}
-              variant="flat"
-              size="xlarge"
-              shrinkWrap={true}
-              icon={<FirstPage width={24} height={24} sx={{ color: "neutral300" }} />}
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
-            />
+            >
+              <FirstPage width={24} height={24} />
+            </IconButton>
             <IconButton
               id={prefixId && `${prefixId}-table__go-previous-page`}
-              variant="flat"
-              size="xlarge"
-              shrinkWrap={true}
-              icon={<ChevronLeft width={24} height={24} sx={{ color: "neutral300" }} />}
               onClick={table.previousPage}
               disabled={!table.getCanPreviousPage()}
-            />
+            >
+              <ChevronLeft width={24} height={24} />
+            </IconButton>
             <Box
               display="flex"
               gap={1}
@@ -247,26 +240,23 @@ export default function ZigTable<T extends object>({
                 </>
               )}
             </Box>
-            {loading && <Loader color="#fff" width="24px" height="24px" ariaLabel="loading" />}
+            {loading && <Loader width={24} height={24} />}
             <IconButton
               id={prefixId && `${prefixId}-table__go-next-page`}
-              variant="flat"
-              size="xlarge"
-              shrinkWrap={true}
-              icon={<ChevronRight width={24} height={24} sx={{ color: "neutral300" }} />}
               onClick={table.nextPage}
               disabled={!table.getCanNextPage()}
-            />
+            >
+              <ChevronRight width={24} height={24} />
+            </IconButton>
+
             {table.getPageCount() !== -1 && (
               <IconButton
                 id={prefixId && `${prefixId}-table__go-last-page`}
-                variant="flat"
-                size="xlarge"
-                shrinkWrap={true}
-                icon={<LastPage width={24} height={24} sx={{ color: "neutral300" }} />}
                 onClick={() => table.setPageIndex(table.getPageCount() - 1)}
                 disabled={!table.getCanNextPage()}
-              />
+              >
+                <LastPage width={24} height={24} />
+              </IconButton>
             )}
           </Box>
           <Box

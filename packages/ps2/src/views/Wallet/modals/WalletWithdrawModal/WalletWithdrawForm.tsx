@@ -5,17 +5,17 @@ import {
   ErrorMessage,
   ZigSelect,
   InputAmountAdvanced,
-  Button,
   ZigInput,
   ZigTypography,
   ZigCoinIcon,
+  ZigButton,
   InputAmountAdvancedValueType,
+  CenteredLoader,
 } from '@zignaly-open/ui';
 import { WalletWithdrawModalProps, WithdrawFormData } from './types';
-import { Box, Grid, Link } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithdrawValidation } from './validations';
-import CenteredLoader from 'components/CenteredLoader';
 import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
 import LabelValueLine from './atoms/LabelValueLine';
 import {
@@ -281,8 +281,8 @@ function WalletWithdrawForm({
                     (notEnoughZig && (
                       <>
                         {t('notEnoughZig')}&nbsp;
-                        <Link
-                          href='#'
+                        <ZigButton
+                          variant={'text'}
                           onClick={() => {
                             close();
                             setTimeout(() => {
@@ -296,7 +296,7 @@ function WalletWithdrawForm({
                           {t('wallet:buy.deposit.depositCoin', {
                             coin: 'ZIG',
                           })}
-                        </Link>
+                        </ZigButton>
                       </>
                     ))
                   }
@@ -319,22 +319,25 @@ function WalletWithdrawForm({
             )}
 
             <ModalActions align='right'>
-              <Button
+              <ZigButton
                 id={'withdraw__close'}
                 size={'large'}
                 type={'button'}
-                variant={'secondary'}
-                caption={t('common:close')}
+                variant={'outlined'}
                 onClick={close}
-              />
+              >
+                {t('common:close')}
+              </ZigButton>
 
-              <Button
+              <ZigButton
+                variant={'contained'}
                 id={'withdraw__continue'}
                 size={'large'}
                 type={'submit'}
-                caption={t('confirmation.continue')}
                 disabled={!isValid || !feeInfo || notEnoughZig}
-              />
+              >
+                {t('confirmation.continue')}
+              </ZigButton>
             </ModalActions>
           </>
         )}

@@ -66,7 +66,8 @@
 	"deposit": {
 		"deposit": "Yatır",
 		"title": "Kripto Yatırma",
-		"description": "{{coin}} jeton yatırmak için ağı seçin ve aşağıdaki adrese gönderin."
+		"description": "{{coin}} jeton yatırmak için ağı seçin ve aşağıdaki adrese gönderin.",
+		"deposit-zig": "ZIG yatırın"
 	},
 	"coins": {
 		"header": {
@@ -76,7 +77,6 @@
 	"buy": {
 		"buy": "Satın Alın",
 		"title": "ZIG coin satın alın",
-		"description": "{{max}} {{coin}}'den fazla harcamak istiyorsanız, ZIG'i <0> borsalardan birinden satın alın.<\/0>",
 		"available-exchanges": "kullanılabilir borsalar.",
 		"buy-exchanges": "ZIG'i şu borsalarda satın alabilirsiniz:",
 		"exchangeAccount": "Borsa Hesabı Seçin",
@@ -84,7 +84,6 @@
 		"confirm": "ZIG satın almayı onaylayın",
 		"deposit": {
 			"title": "ZIG satın almak için {{coin}} yatırın",
-			"description": "ZIG satın almak için önce Zignaly Borsa Hesabınıza {{coin}} yatırmanız gerekir.",
 			"external": "Harici bir cüzdandan kripto aktarın",
 			"depositCoin": "{{coin}} yatırın",
 			"buyCoin": "{{coin}} satın al",

@@ -116,26 +116,137 @@ const darkMui = createTheme({
         },
       },
     },
+    MuiIconButton: {
+      styleOverrides: {
+        root: {
+          color: dark.neutral300,
+        },
+      },
+    },
+
     MuiButton: {
       styleOverrides: {
-        root: {},
+        root: {
+          borderRadius: 5,
+          ".MuiButton-startIcon, .MuiButton-endIcon": {
+            lineHeight: 1,
+            verticalAlign: "middle",
+          },
+        },
+        plain: {
+          padding: "0 !important",
+          ".MuiSvgIcon-root": {
+            fill: dark.neutral300,
+            transition: "all .2s",
+          },
+
+          "&:hover": {
+            background: "none",
+          },
+
+          "&:hover .MuiSvgIcon-root": {
+            fill: dark.neutral100,
+          },
+
+          "&.Mui-disabled:hover .MuiSvgIcon-root": {
+            fill: dark.neutral300,
+          },
+
+          "&.Mui-disabled": {
+            opacity: 0.33,
+            cursor: "not-allowed",
+          },
+        },
+        sizeXlarge: {
+          minHeight: "60px",
+          minWidth: "127px",
+          fontSize: "16px",
+          lineHeight: "20px",
+          letterSpacing: "1.1px",
+          fontWeight: 600,
+          padding: "10px 36px",
+          ".MuiButton-startIcon": {
+            marginLeft: "-6px",
+          },
+        },
         sizeLarge: {
           minHeight: "48px",
           minWidth: "110px",
+          fontWeight: 600,
+          fontSize: "13px",
+          lineHeight: "18px",
+          paddingLeft: "30px",
+          letterSpacing: "1.1px",
+          paddingRight: "30px",
+          ".MuiButton-startIcon": {
+            marginLeft: "-4px",
+          },
         },
         sizeMedium: {
           minHeight: "36px",
+          paddingTop: "6px",
+          paddingBottom: "6px",
+          letterSpacing: "0.55px",
           minWidth: "76px",
+          fontSize: "11px",
         },
         sizeSmall: {
           minHeight: "30px",
           minWidth: "76px",
+          padding: "4px 18px",
+          letterSpacing: "0.55px",
+          fontSize: "11px",
+        },
+        containedSizeSmall: {
+          letterSpacing: "1.1px",
+        },
+        containedSizeMedium: {
+          letterSpacing: "1.1px",
+        },
+        text: {
+          color: dark.links,
+          display: "inline",
+          padding: "0 2px !important",
+          borderRadius: "2px",
+          fontSize: "13px !important",
+          minWidth: "0 !important",
+          verticalAlign: "baseline",
+          minHeight: "0px !important",
+          ".MuiLoadingButton-loadingIndicatorCenter": {
+            transform: "translate(-50%, 50%)",
+            marginTop: "-4px",
+          },
+          "&:hover": {
+            background: "transparent",
+            textDecoration: "underline",
+          },
+          ".MuiButton-startIcon": {
+            marginRight: "5px",
+          },
+          ".MuiButton-endIcon": {
+            marginLeft: "5px",
+          },
+          ".MuiButton-startIcon, .MuiButton-endIcon": {
+            position: "relative",
+            display: "inline",
+            top: "-1px",
+            ".MuiSvgIcon-root": {
+              fill: dark.neutral300,
+              verticalAlign: "middle",
+            },
+          },
         },
         contained: {
           boxShadow: "0px 12px 16px -8px rgba(25, 25, 39, 0.36)",
           transition: "all 0.3s linear",
+          fontWeight: 600,
+          letterSpacing: "1.1px",
         },
         containedPrimary: {
+          textTransform: "uppercase",
+          ".MuiTypography-root": {
+            textTransform: "none",
+          },
           color: dark.neutral000,
           background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
           "&:hover, &.MuiButton-active": {
@@ -151,6 +262,12 @@ const darkMui = createTheme({
         outlinedSecondary: {
           borderColor: dark.neutral600,
           color: dark.neutral300,
+          "&.MuiButton-sizeLarge, &.MuiButton-sizeXlarge": {
+            textTransform: "uppercase",
+            ".MuiTypography-root": {
+              textTransform: "none",
+            },
+          },
           "&:hover, &.MuiButton-active": {
             color: dark.neutral000,
             borderColor: dark.neutral400,
@@ -165,7 +282,7 @@ const darkMui = createTheme({
           style: {
             fontSize: "26px",
             lineHeight: "40px",
-            color: dark.neutral000,
+            color: dark.neutral100,
             fontWeight: "500",
           },
         },
@@ -176,68 +293,55 @@ const darkMui = createTheme({
           h2: "h2",
           h3: "h3",
           h4: "h4",
-          h5: "h5",
-          h6: "h6",
-          subtitle1: "h2",
-          subtitle2: "h2",
           body1: "span",
           body2: "span",
+          caption: "span",
         },
       },
       styleOverrides: {
         root: {
           letterSpacing: "0.55px",
+          color: dark.neutral100,
         },
         bigNumber: {
           fontSize: "26px",
           lineHeight: "40px",
-          color: dark.neutral000,
+          // color: dark.neutral000,
           fontWeight: "500",
         },
         h1: {
           fontSize: "22px",
           lineHeight: "36px",
-          color: dark.neutral000,
+          // color: dark.neutral000,
           fontWeight: "500",
         },
         h2: {
           fontSize: "18px",
           lineHeight: "28px",
-          color: dark.neutral000,
+          // color: dark.neutral000,
           fontWeight: "500",
         },
         h3: {
           fontSize: "15px",
           lineHeight: "24px",
-          color: dark.neutral000,
+          // color: dark.neutral000,
           fontWeight: "500",
         },
         h4: {
           fontSize: "13px",
           lineHeight: "20px",
-          color: dark.neutral000,
+          // color: dark.neutral000,
           fontWeight: "500",
         },
         h5: {
           fontSize: "11px",
           lineHeight: "16px",
-          color: dark.neutral000,
+          // color: dark.neutral000,
           fontWeight: "500",
         },
-        h6: {
-          fontSize: "10px",
-          lineHeight: "14px",
-          color: dark.neutral000,
-          fontWeight: "500",
-        },
-        subtitle1: {
-          fontSize: "15px",
-          lineHeight: "24px",
-          color: dark.neutral200,
-        },
-        subtitle2: {
-          fontSize: "13px",
-          lineHeight: "20px",
+        caption: {
+          fontSize: "11px",
+          lineHeight: "16px",
           color: dark.neutral200,
         },
         body1: {
@@ -248,15 +352,16 @@ const darkMui = createTheme({
         body2: {
           fontSize: "13px",
           lineHeight: "20px",
-          color: dark.neutral200,
+          color: dark.neutral300,
         },
       },
     },
     MuiLink: {
       styleOverrides: {
-        root: ({ theme }) => ({
-          color: theme.palette.links,
-        }),
+        root: {
+          cursor: "pointer",
+          color: dark.links,
+        },
       },
     },
   },

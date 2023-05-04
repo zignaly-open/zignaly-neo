@@ -18,6 +18,10 @@ const result: ComponentMeta<typeof ZigSelect> = {
       type: "boolean",
       defaultValue: false,
     },
+    small: {
+      type: "boolean",
+      defaultValue: false,
+    },
     defaultValue: {
       type: "string",
     },
@@ -64,6 +68,7 @@ const Template: ComponentStory<typeof ZigSelect> = (args) => {
         error={args.error}
         label={args.label}
         value={value}
+        small={args.small}
         onChange={(v) => setValue(v!)}
         options={options}
       />

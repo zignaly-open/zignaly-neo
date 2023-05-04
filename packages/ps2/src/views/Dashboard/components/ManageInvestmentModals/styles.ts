@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { Typography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
 
 export const Investor = styled('div')`
   display: flex;
@@ -15,9 +15,7 @@ export const InvestorData = styled('div')`
   flex-direction: column;
 `;
 
-export const InvestorName = styled(Typography)``;
-
-export const InvestorSuccessFee = styled(Typography)``;
+export const InvestorName = styled(ZigTypography)``;
 
 export const PendingTransaction = styled('div')`
   display: flex;
@@ -91,7 +89,7 @@ export const Content = styled('div')`
   flex: 1;
 `;
 
-export const WithdrawFundsSpaceTaker = styled(Typography)`
+export const WithdrawFundsSpaceTaker = styled(ZigTypography)`
   flex: 1;
   text-align: justify;
 `;

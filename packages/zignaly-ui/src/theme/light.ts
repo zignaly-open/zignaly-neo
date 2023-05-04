@@ -1,7 +1,6 @@
 import Theme from "./theme";
 
 const light: Theme = {
-  white: "#FFFFFF",
   neutral800: "#06061A",
   neutral750: "#101225",
   neutral700: "#252339",
@@ -21,13 +20,7 @@ const light: Theme = {
   links: "#26C4C1",
   yellow: "#AE9C5B",
   red: "#CC394E",
-  dropDownBackground: "#12152C",
-  darkSpecial: "#0b0d1a",
   almostWhite: "#F3F4F6",
-  errorToasterBg: "#231630",
-  errorToasterBorder: "#321E46",
-  successToasterBg: "#122431",
-  successToasterBorder: "#1D2E3A",
 };
 
 export default light;

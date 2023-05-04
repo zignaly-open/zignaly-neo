@@ -1,7 +1,8 @@
-import Typography from "components/display/Typography";
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 import { dark } from "../../../theme";
+import ZigTypography from "components/display/ZigTypography";
+import muiStyled from "@emotion/styled";
 
 export const Wrapper = styled.div`
   display: flex;
@@ -37,7 +38,7 @@ export const InputValue = styled.input`
   font-family: "Avenir Next", sans-serif;
 `;
 
-export const BalanceLabel = styled(Typography)`
+export const BalanceLabel = muiStyled(ZigTypography)`
   padding-right: 4px;
 `;
 

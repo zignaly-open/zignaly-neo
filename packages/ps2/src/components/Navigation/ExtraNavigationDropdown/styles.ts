@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { GlobeLanguages, styledIf, Typography } from '@zignaly-open/ui';
+import { GlobeLanguages, styledIf, ZigTypography } from '@zignaly-open/ui';
 
 export const NavLink = styled('a')<{ active?: boolean; disabled?: boolean }>`
   color: #706f82;
@@ -84,6 +84,6 @@ export const GlobeLanguagesStyled = styled(GlobeLanguages)`
   transition: 0.15s linear;
 `;
 
-export const LabelButton = styled(Typography)`
+export const LabelButton = styled(ZigTypography)`
   transition: 0.15s linear;
 `;

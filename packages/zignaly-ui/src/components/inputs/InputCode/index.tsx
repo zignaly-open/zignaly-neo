@@ -2,9 +2,10 @@ import React, { useEffect, useRef } from "react";
 import ReactCodeInput from "@zignaly-open/react-verification-code-input";
 import { InputCodeProps } from "./types";
 import { Layout } from "./styles";
-import ErrorMessage from "components/display/ErrorMessage";
+import { ErrorMessage } from "../../display/ZigAlertMessage";
 import { Box } from "@mui/material";
 
+// TODO: rename to ZigInoutCode
 function InputCode({
   fields,
   loading,

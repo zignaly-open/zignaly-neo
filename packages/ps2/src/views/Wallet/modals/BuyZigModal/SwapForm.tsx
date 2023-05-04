@@ -198,6 +198,7 @@ const SwapForm = ({
                 <ZigButton
                   id={'buy-zig__continue'}
                   type='submit'
+                  size={'large'}
                   disabled={!isValid || !amountTo}
                   variant='contained'
                 >

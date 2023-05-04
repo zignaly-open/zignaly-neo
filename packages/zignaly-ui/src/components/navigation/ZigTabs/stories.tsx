@@ -31,7 +31,6 @@ const Template: Story<typeof Tabs & IProps> = (args) => {
   const [value, setValue] = useState(0);
   return (
     <>
-      {/* @ts-ignore */}
       <Tabs
         {...args}
         onChange={(_: React.SyntheticEvent, newValue: any) => {
@@ -39,13 +38,15 @@ const Template: Story<typeof Tabs & IProps> = (args) => {
         }}
         value={value}
       >
-        {args.tabs.map((t: string) => (
+        {/* @ts-ignore */}
+        {args.tabs?.map((t: string) => (
           <Tab label={t} key={t} />
         ))}
       </Tabs>
-      {args.content.map((c: string, i: number) => (
+      {/* @ts-ignore */}
+      {args?.content?.map((c: string, i: number) => (
         <TabPanel value={value} index={i} key={c}>
-          {args.content[i]}
+          {args?.content?.[i]}
         </TabPanel>
       ))}
     </>
@@ -55,5 +56,5 @@ const Template: Story<typeof Tabs & IProps> = (args) => {
 export const TabsExample = Template.bind({});
 TabsExample.args = {
   tabs: ["Tab 1", "Tab 2", "Tab with long title 3", "Another Tab 4"],
-  content: ["Content 1", "Content 2", "Content 3"],
+  content: ["Content 1", "Content 2", "Content 3", "Content 4"],
 };

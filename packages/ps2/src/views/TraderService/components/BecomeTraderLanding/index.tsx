@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigLink, ZigTypography } from '@zignaly-open/ui';
 import {
   Layout,
   Header,
@@ -31,7 +31,6 @@ import { FeatureItem, InfoBarItem, HowWorksItem } from './types';
 import { useIsAuthenticated } from '../../../../apis/user/use';
 import { ROUTE_SIGNUP } from '../../../../routes';
 import { useNavigate } from 'react-router-dom';
-import { Link } from '@mui/material';
 import { useZModal } from '../../../../components/ZModal/use';
 import CreateServiceModal from './modals/CreateServiceModal';
 
@@ -145,12 +144,10 @@ const BecomeTraderLanding: React.FC = () => {
                 <WrapperItem>
                   <ZigTypography variant={'body1'} color={'neutral300'}>
                     <Trans i18nKey={'wrapper.list.item3'} t={t}>
-                      <Link
-                        underline={'hover'}
+                      <ZigLink
                         href={
                           'https://help.zignaly.com/en/articles/6845502-rules-for-being-listed-in-the-marketplace'
                         }
-                        target={'_blank'}
                       />
                     </Trans>
                   </ZigTypography>

@@ -21,10 +21,8 @@
 			"withdraw": "Вывод Инвестиций"
 		},
 		"button": {
-			"saveAndClose": "Сохранить и Закрыть",
 			"continue-to-confirmation": "Перейти к Подтверждению",
-			"invest-now": "Инвестируйте {{amount}}{{coin}} сейчас",
-			"saveAndInvestment": "Сохранить и Добавить к Инвестициям"
+			"invest-now": "Инвестируйте {{amount}}{{coin}} сейчас"
 		}
 	},
 	"pendingMajorThan": {
@@ -45,7 +43,7 @@
 		"status_other": "У вас есть {{count}} незавершенных транзакций",
 		"link-label": "Посмотреть"
 	},
-	"investorDetail-successFee": "{{fee}} % Комиссия за успех",
+	"investorDetail-successFee": "{{fee}} % Success fee",
 	"modal": {
 		"withdrawInvestment": {
 			"title": "Запрос на Вывод Средств",

@@ -4,6 +4,9 @@ import theme from "./theme";
 addons.setConfig({
   theme,
   sidebar: {
-    showRoots: false,
+    showRoots: true,
+  },
+  docs: {
+    theme,
   },
 });
