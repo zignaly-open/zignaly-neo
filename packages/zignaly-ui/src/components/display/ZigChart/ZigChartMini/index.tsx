@@ -56,7 +56,7 @@ const ZigChartMini = ({
             }}
             data={[
               { x: 0, y: 0 },
-              { x: processedData.length, y: 0 },
+              { x: processedData.length - 1, y: 0 },
             ]}
           />
         )}
