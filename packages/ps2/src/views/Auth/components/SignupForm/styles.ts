@@ -1,4 +1,3 @@
-import { ErrorOutline } from '@mui/icons-material';
 import { styled, Box } from '@mui/material';
 
 export const Form = styled('form')`
@@ -44,15 +43,4 @@ export const ColouredLine = styled(Box)`
   height: 100%;
   border-radius: 2px;
   background: linear-gradient(100.88deg, #3f3bb1 6.99%, #138ea0 93.63%);
-`;
-
-export const TitleHead = styled('div')`
-  display: flex;
-  align-content: center;
-  justify-content: center;
-`;
-
-export const StyledErrorOutline = styled(ErrorOutline)`
-  color: ${({ theme }) => theme.palette.neutral300};
-  margin-right: 8px;
 `;

@@ -1,15 +1,14 @@
-import { useDarkMode } from "storybook-dark-mode";
-import { dark, light } from "../src/theme";
-import { addDecorator } from "@storybook/react";
-import { makeDecorator } from "@storybook/addons";
+import { dark } from "../src/theme";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
+import { DocsContainer } from "@storybook/addon-docs/blocks";
 import { ThemeProvider as ThemeProviderMui } from "@mui/material";
 import { ChartGradients } from "../src";
-
+import theme from "./theme";
 // Testing Results
 import { withTests } from "@storybook/addon-jest";
 import results from "../.jest-test-results.json";
 import darkMui from "../src/theme/darkMui";
+import { Container } from "@mui/system";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -18,10 +17,8 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const withStyledTheme = (storyFn) => {
-  const darkMode = useDarkMode();
-  const currentTheme = darkMode ? dark : light;
   return (
-    <ThemeProvider theme={currentTheme}>
+    <ThemeProvider theme={dark}>
       <ThemeProviderMui theme={darkMui}>
         <GlobalStyle darkMode />
         <ChartGradients />
@@ -31,18 +28,12 @@ const withStyledTheme = (storyFn) => {
   );
 };
 
-const styledThemed = makeDecorator({
-  name: "styled-theme",
-  wrapper: withStyledTheme,
-});
-
-addDecorator(styledThemed);
-
 export const decorators = [
   withTests({
     results,
     filesExt: "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
   }),
+  withStyledTheme,
 ];
 
 export const parameters = {
@@ -53,5 +44,10 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/,
     },
+  },
+  backgrounds: { disable: true },
+  docs: {
+    theme,
+    container: DocsContainer,
   },
 };

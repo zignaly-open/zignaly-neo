@@ -9,7 +9,7 @@ import {
   createColumnHelper,
   DateLabel,
   ListGradientIcon,
-  TextButton,
+  ZigButton,
   ZigCoinIcon,
   ZigTable,
   ZigTablePriceLabel,
@@ -174,13 +174,15 @@ const WalletTransactions = () => {
           </ZigTypography>
         </Box>
         <Box display='flex' gap={2}>
-          <TextButton
+          <ZigButton
+            variant={'text'}
             id={'wallet__export-transactions'}
-            rightElement={<OpenInNew sx={{ color: 'links', width: '15px' }} />}
-            caption={t('action:export')}
+            endIcon={<OpenInNew />}
             onClick={() => downloadCsv()}
             loading={downloadCsvStatus.isLoading}
-          />
+          >
+            {t('action:export')}
+          </ZigButton>
           <StyledZigSelect
             options={filterOptions}
             value={type}

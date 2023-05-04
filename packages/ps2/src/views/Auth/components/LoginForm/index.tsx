@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
-import { Form, Action, TitleHead } from './styles';
+import { Form, Action } from './styles';
 import { LoginValidation } from './validations';
 import { useAuthenticate } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTE_FORGOT_PASSWORD, ROUTE_SIGNUP } from '../../../../routes';
-import { Button, ZigInput, ZigTypography } from '@zignaly-open/ui';
-import { Box, Link } from '@mui/material';
+import { ZigTypography, ZigInput, ZigButton, ZigLink } from '@zignaly-open/ui';
+import { Box } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
-import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
 
 const LoginForm: React.FC = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -31,7 +30,6 @@ const LoginForm: React.FC = () => {
   const [{ loading: loggingIn }, authenticate] = useAuthenticate();
   const navigate = useNavigate();
   const { state: locationState } = useLocation();
-  const [showPassword, setShowPassword] = useState(false);
 
   const submit = (data: LoginPayload) => {
     authenticate(data).catch((e) => {
@@ -44,9 +42,9 @@ const LoginForm: React.FC = () => {
 
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
-      <TitleHead>
-        <ZigTypography variant={'h2'}>{t('log-in-title')}</ZigTypography>
-      </TitleHead>
+      <ZigTypography variant={'h1'} align={'center'}>
+        {t('log-in-title')}
+      </ZigTypography>
       <Form onSubmit={handleSubmit(submit)}>
         <Controller
           name='email'
@@ -81,35 +79,27 @@ const LoginForm: React.FC = () => {
               placeholder={t('login-form.inputText.password.label')}
               disabled={loggingIn}
               error={t(errors.password?.message)}
-              type={showPassword ? 'text' : 'password'}
-              InputProps={{
-                endAdornment: (
-                  <PasswordVisibilityAdornment
-                    show={showPassword}
-                    onToggle={() => setShowPassword(!showPassword)}
-                  />
-                ),
-              }}
+              type={'password'}
+              sensitive
               {...field}
             />
           )}
         />
 
         <Action>
-          <Button
+          <ZigButton
             type={'submit'}
-            variant={'primary'}
             id={'login__submit'}
-            caption={t('login-form.submit')}
             size={'xlarge'}
             loading={loggingIn}
-          />
+          >
+            {t('login-form.submit')}
+          </ZigButton>
+
           <ZigTypography variant={'body2'} align={'center'}>
             <Trans i18nKey={'login-form.link.signup'} t={t}>
-              <Link
+              <ZigLink
                 id={'login__signup'}
-                sx={{ cursor: 'pointer' }}
-                underline={'none'}
                 onClick={() => navigate(ROUTE_SIGNUP, { state: locationState })}
               />
             </Trans>

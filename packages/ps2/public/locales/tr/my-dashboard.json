@@ -32,8 +32,24 @@
 	},
 	"tooltip-date": "{{date}} tarihinden beri bu hizmete yatırım yapıyorsunuz",
 	"how-to-invest-steps": {
+		"title": "Nasıl yatırım yapılır",
 		"step-1": {
+			"title": "Profesyonel bir Trader Seçin",
+			"description": "<0>Pazar yerimizden<\/0> yatırım tarzınıza uygun en az bir profesyonel yatırımcımızı seçin",
 			"time": "2 dakika sürer"
-		}
+		},
+		"step-2": {
+			"title": "Fon yatırın",
+			"description": "Hesabınıza kripto para <0>yatırın<\/0>. Eğer kripto paranız yoksa, dilerseniz<2\/> <1>satın<\/1> alabilirsiniz.",
+			"time": "3 dakika sürer"
+		},
+		"step-3": {
+			"title": "Yatırım yapın (minimum değer yok)",
+			"description": "Servislere yatırım yapın ve getirilerinizin her geçen gün arttığını görmek için bekleyin",
+			"time": "2 dakika sürer"
+		},
+		"bottom-title": "Portföy Servislerim",
+		"bottom-description": "Henüz herhangi bir servisi takip etmiyorsunuz, kar elde etmek için onlara yatırım yapın.",
+		"start-investing": "Şimdi yatırım yapmaya başlayın"
 	}
 }

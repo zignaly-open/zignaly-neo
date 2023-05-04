@@ -1,10 +1,45 @@
 {
+	"title": "Centro de Recompensas",
+	"terms": "Termos >",
 	"active": "Ativo",
+	"reward-terms": "Termos de Recompensa",
+	"description": "Ganha recompensas completando tarefas simples. É assim tão fácil!",
+	"header": {
+		"title": "Receba $20",
+		"description": "No 1º depósito"
+	},
+	"active-rewards": "Recompensas Ativas",
+	"no-active-rewards": "Nenhuma recompensa ativa neste momento",
+	"disabled-voucher": "O Voucher já está ativado",
 	"table": {
+		"title": "Histórico de Recompensas",
+		"no-benefits": "Ainda sem recompensas",
 		"time-and-date": "Hora & Data",
+		"reward-description": "Descrição da Recompensa",
+		"description-success_fee": "Gastado <0><\/0> de Voucher para Taxas, <1><\/1> restante.",
+		"description-awarded": "<0><\/0> Voucher no Success Fee no 1º depósito.",
 		"status": "Status"
 	},
 	"statusTypes": {
-		"success_fee": "Taxa de Sucesso"
+		"success_fee": "Taxa de Sucesso",
+		"awarded": "Concedido"
+	},
+	"rewardTypes": {
+		"voucher_active": "Voucher de Success Fee",
+		"voucher_pending": "Bónus de Depósito"
+	},
+	"full-terms": {
+		"1": "A Zignaly reserva-se o direito de cancelar \"Vouchers de Taxas\" se o usuário for considerado envolvido em atividades inadequadas, desonestas ou abusivas.",
+		"2": "A Zignaly reserva-se o direito de alterar os Termos e Condições do programa de Recompensas a qualquer momento, sem aviso prévio.",
+		"3": "Os \"Vouchers de Taxa\" são aplicáveis à parte da Zignaly do \"Success Fee\".",
+		"4": "Os \"Vouchers de Taxa\" não são transferíveis e só serão utilizados pelo usuário original que os obteve.",
+		"5": "Anúncios on-line pagos com o logotipo da Zignaly são estritamente proibidos.",
+		"6": "Todos os cálculos de recompensa feitos por Zignaly são finais.",
+		"7": "Os participantes que violarem estes termos não serão elegíveis para as recompensas; qualquer comportamento fraudulento ou abusivo resultará na rescisão imediata de todas as recompensas pendentes.",
+		"title": "Termos Globais"
+	},
+	"rewardDescriptions": {
+		"voucher_active": "Economiza nos Success Fee agora graças ao teu voucher de ${{amount}}.",
+		"voucher_pending": "Deposita qualquer quantia e recebe um voucher ${{amount}} para economizar nos Sucess Fees."
 	}
 }

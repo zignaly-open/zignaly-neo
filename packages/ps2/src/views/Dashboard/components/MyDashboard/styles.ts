@@ -2,7 +2,7 @@ import { styled } from '@mui/material';
 import { PageContainer } from '@zignaly-open/ui';
 
 export const Layout = styled(PageContainer)`
-  padding-top: 120px;
+  padding-top: 120px !important;
 `;
 
 export const Heading = styled('div')`

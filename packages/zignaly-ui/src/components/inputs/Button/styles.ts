@@ -1,4 +1,3 @@
-import Loader from "components/display/Loader";
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
 import { buttonVariants, buttonSizes, buttonColors } from "./types";
@@ -85,7 +84,7 @@ export const CenterIcon = styled.div`
   top: 1px;
 `;
 
-export const ButtonLoader = styled(Loader)`
+export const ButtonLoader = styled.div`
   justify-content: center;
   align-items: center;
 `;

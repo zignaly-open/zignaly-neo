@@ -1,0 +1,25 @@
+{
+	"card": {
+		"top-rated": "Лучшие",
+		"assets": "Активы",
+		"investors": "Инвесторы"
+	},
+	"invest-in-services": "Инвестируйте в Profit Sharing",
+	"invest-in-services-explainer": "Инвестируйте с нашими профессиональными трейдерами и платите только часть своей прибыли. Средняя инвестиция составляет $200, но вы можете начать с $1.",
+	"table": {
+		"service-name": "Имя Сервиса",
+		"manager": "Управляющий",
+		"currency": "Базовая Валюта",
+		"assets": "Активы в Пуле",
+		"nb-investors": "# инвесторов",
+		"n-months-pnl_one": "{{count}} месяц PNL",
+		"n-months-pnl_other": "{{count}} месяцев PNL",
+		"n-months_one": "{{count}} месяц",
+		"n-months_other": "{{count}} месяцев",
+		"n-years_one": "{{count}} год",
+		"n-years_other": "{{count}} лет",
+		"account-age": "Возраст счета",
+		"x-investors_one": "{{count}} инвестор",
+		"x-investors_other": "{{count}} инвесторов"
+	}
+}

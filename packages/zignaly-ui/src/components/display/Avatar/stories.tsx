@@ -32,6 +32,18 @@ export default {
 
 const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args} />;
 
+const TemplateMultiple: ComponentStory<typeof Avatar> = (args) => {
+  return (
+    <>
+      <Avatar size={"small"} {...args} />
+      <Avatar size={"medium"} {...args} />
+      <Avatar size={"large"} {...args} />
+      <Avatar size={"x-large"} {...args} />
+      <Avatar size={"xx-large"} {...args} />
+    </>
+  );
+};
+
 // With Image
 export const Image = Template.bind({});
 Image.args = {
@@ -42,6 +54,14 @@ Image.args = {
 };
 Image.parameters = {
   jest: ["avatar"],
+};
+
+// With Image
+export const Sizes = TemplateMultiple.bind({});
+Sizes.args = {
+  hash: "",
+  image:
+    "https://64.media.tumblr.com/ef4e0c2294d9e304e339f19307953e7f/6c205b8b5946f8a9-7c/s250x400/9d66b8e486071ecabe8db5afdfb879a038cc79d5.png",
 };
 
 // With Metamask

@@ -3,19 +3,52 @@ import { LoadingButton, LoadingButtonProps } from "@mui/lab";
 import { ButtonGroup, styled, Tooltip } from "@mui/material";
 import { dark } from "../../../theme";
 
-export type ZigButtonProps = LoadingButtonProps & {
+export type ZigButtonProps = Omit<LoadingButtonProps, "size" | "variant"> & {
+  size?: LoadingButtonProps["size"] | "xlarge";
+  variant?: LoadingButtonProps["variant"];
   ctaId?: string;
   tooltip?: string;
+  narrow?: boolean;
+  linkTarget?: "_blank";
+  linkRel?: "noopener noreferrer";
   active?: boolean;
 };
 
-const ZigButton = ({ active, tooltip, ctaId, color, ...props }: ZigButtonProps) => {
+const ZigButton = ({
+  active,
+  tooltip,
+  ctaId,
+  color,
+  size,
+  narrow,
+  variant = "contained",
+  linkTarget,
+  linkRel,
+  ...props
+}: ZigButtonProps) => {
   const button = (
     <LoadingButton
       data-tack-cta={ctaId}
+      // it wasn't me lol
+      size={size as LoadingButtonProps["size"]}
+      variant={variant as LoadingButtonProps["variant"]}
       {...props}
+      {...(narrow
+        ? {
+            sx: {
+              ...props.sx,
+              minWidth: "0 !important",
+            },
+          }
+        : {})}
+      {...(props.href
+        ? {
+            rel: linkRel ?? "noopener noreferrer",
+            target: linkTarget ?? "_blank",
+          }
+        : {})}
       // hack to preserve old behavior but allow for normal mui theming
-      color={props.variant === "outlined" && !color ? "secondary" : color}
+      color={variant === "outlined" && !color ? "secondary" : color}
       className={active ? "MuiButton-active" : ""}
     />
   );

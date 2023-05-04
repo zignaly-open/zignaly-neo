@@ -4,7 +4,6 @@ import {
   VictoryAxis,
   VictoryLine,
   VictoryChart,
-  VictoryScatter,
   VictoryLabel,
   VictoryBar,
   VictoryVoronoiContainer,
@@ -28,9 +27,10 @@ const ZigChart = ({
   tickCount = 7,
   onlyIntegerTicks,
   chartProps = {},
+  precision = 2,
 }: ChartLargeProps) => {
   const theme = useTheme();
-  const { data: processedData, color, gradient, yDomain } = useChartData(data, "full");
+  const { data: processedData, color, gradient, yDomain } = useChartData(data, "full", precision);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
   const pureChartWidth = width ? width - 70 - 2 : 0;
@@ -90,13 +90,17 @@ const ZigChart = ({
           />
 
           {(events || []).map(({ x, label }) => (
-            <VictoryScatter
-              key={"event-text-" + x}
-              width={0}
-              data={[{ x, y: yDomain[1] }]}
+            <VictoryLine
+              name="eventLine"
+              key={"event-line-" + x}
+              style={{
+                data: { stroke: theme.palette.neutral500, strokeWidth: 0.5 },
+              }}
+              data={[
+                { x, y: yDomain[1] },
+                { x, y: yDomain[0] },
+              ]}
               labels={[label]}
-              size={0}
-              name="scatterText"
               labelComponent={
                 <VictoryLabel
                   dy={17}
@@ -106,20 +110,6 @@ const ZigChart = ({
                   textAnchor="end"
                 />
               }
-            />
-          ))}
-
-          {(events || []).map(({ x }) => (
-            <VictoryLine
-              name="eventLine"
-              key={"event-line-" + x}
-              style={{
-                data: { stroke: theme.palette.neutral500, strokeWidth: 0.5 },
-              }}
-              data={[
-                { x, y: yDomain[0] },
-                { x, y: yDomain[1] },
-              ]}
             />
           ))}
 

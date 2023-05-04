@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
 import ZModal from 'components/ZModal';
 import { useExchangeCoinsList } from '../../../../../apis/coin/use';
-import CenteredLoader from '../../../../../components/CenteredLoader';
 import InvestInYourServiceForm from './forms/InvestInYourServiceForm';
 import CreateServiceForm from './forms/CreateServiceForm';
 import { ServiceFormData } from './forms/types';
@@ -12,6 +11,7 @@ import {
   useCreateTraderServiceMutation,
   useTraderServiceTypesInfoQuery,
 } from '../../../../../apis/service/api';
+import { CenteredLoader } from '@zignaly-open/ui';
 
 function CreateServiceModal({
   close,

@@ -41,6 +41,7 @@ export interface ChartLargeProps {
   tooltipFormatter?: (v: AxisFormat) => string;
   chartProps?: VictoryChartProps;
   id?: string;
+  precision?: number;
 }
 
 export interface AxisFormat {

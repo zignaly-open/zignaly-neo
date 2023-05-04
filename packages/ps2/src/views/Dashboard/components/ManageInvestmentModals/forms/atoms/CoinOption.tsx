@@ -24,7 +24,7 @@ const CoinOption = ({ coin, name }: { coin: string; name: string }) => {
   return (
     <Box display='flex' alignItems='center'>
       <Box mr='11px'>
-        <ZigCoinIcon size={'small'} coin={coin} name={name} />
+        <ZigCoinIcon size={'small'} coin={coin} />
       </Box>
       <ZigTypography fontWeight={600}>{coin}</ZigTypography>&nbsp;
       <ZigTypography>{name}</ZigTypography>

@@ -44,7 +44,7 @@ const ZModal: React.FC<ZModalProps> = ({
       >
         {isLoading ? (
           <LoaderContainer>
-            <Loader color={'#fff'} ariaLabel={'Loading...'} />
+            <Loader />
           </LoaderContainer>
         ) : authOnly && !isAuthenticated ? (
           <AuthenticatedWall />

@@ -5,13 +5,14 @@
 	"tableHeader": {
 		"email": "Email",
 		"userId": "ID Пользователя",
-		"investment": "Инвестиции",
 		"P&L": "P&L",
 		"P&LTotal": "P&L Всего",
 		"totalFeesPaid": "Всего Уплачено Комиссии",
-		"successFee": "Плата за Успех",
+		"successFee": "Success Fee",
 		"feesZIG": "Комиссия в ZIG",
-		"status": "Статус"
+		"status": "Статус",
+		"invested": "Инвестировано",
+		"pending": "В ожидании"
 	},
 	"loading-arialLabel": "Загрузка инвесторов",
 	"status": {

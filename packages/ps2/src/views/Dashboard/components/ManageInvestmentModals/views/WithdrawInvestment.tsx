@@ -31,10 +31,10 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
           <Grid item sm={12}>
             <WithdrawFundsOptionWrapper>
               <WithdrawFundsSpaceTaker
-                component={'p'}
+                as={'p'}
                 variant={'body1'}
                 color={'neutral200'}
-                weight={'regular'}
+                fontWeight={'regular'}
               >
                 {t('modal.withdrawInvestment.freeWithdrawal.description')}
               </WithdrawFundsSpaceTaker>

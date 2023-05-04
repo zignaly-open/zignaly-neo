@@ -1,9 +1,5 @@
 import { Box } from '@mui/material';
-import {
-  PercentageIndicator,
-  ZigChartMini,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { ChangeIndicator, ZigChartMini, ZigTypography } from '@zignaly-open/ui';
 import { Investment } from 'apis/investment/types';
 import { marketplaceServiceToInvestmentType } from 'apis/marketplace/util';
 import AssetsInPool from 'components/AssetsInPool';
@@ -28,7 +24,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
     <Card>
       <ChartBox>
         <ZigChartMini
-          data={service.sparklines}
+          data={[0, ...service.sparklines]}
           midLine={false}
           height={104}
           width={360}
@@ -48,7 +44,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
           <ZigTypography fontSize='11px' color='neutral200'>
             {t('service:periods.30d')}
           </ZigTypography>
-          <PercentageIndicator
+          <ChangeIndicator
             style={{
               fontSize: '13px',
             }}
@@ -71,7 +67,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
       >
         <Box display='flex' flexDirection='column'>
           <ValueContainer>
-            <PercentageIndicator
+            <ChangeIndicator
               style={{
                 fontSize: '17px',
               }}

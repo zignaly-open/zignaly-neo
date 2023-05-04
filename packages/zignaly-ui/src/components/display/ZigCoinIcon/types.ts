@@ -15,7 +15,6 @@ export const sizes = {
 
 export type ZIGCoinIconProps = {
   size?: CoinSizes | number;
-  name: string;
   coin: string;
   className?: string;
   bucket?: string;
