@@ -52,6 +52,7 @@ const ResetPasswordForm = () => {
           rules={{ required: true }}
           render={({ field }) => (
             <ZigInput
+              id={'reset-password__new-password'}
               label={t('reset-password.new-password')}
               placeholder={t('reset-password.new-password')}
               disabled={resetPasswordStatus.isLoading}
@@ -79,7 +80,7 @@ const ResetPasswordForm = () => {
             size={'xlarge'}
             loading={resetPasswordStatus.isLoading}
             disabled={!isValid}
-            id='resetpassword__submit'
+            id={'reset-password__submit'}
           >
             {t('reset-password.reset-password')}
           </ZigButton>
