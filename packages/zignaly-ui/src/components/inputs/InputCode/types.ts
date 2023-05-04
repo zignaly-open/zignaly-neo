@@ -5,4 +5,5 @@ export type InputCodeProps = {
   clearOnError?: boolean;
   error?: string | null;
   autoFocus?: boolean;
+  prefixId?: string;
 };
