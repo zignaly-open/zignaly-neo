@@ -163,7 +163,7 @@ export function useChartData({
       const firstDate = graph?.[0]?.date;
       if (firstDate && graph?.[0]?.y !== 0) {
         const previousDate = subDays(firstDate, 1);
-        graph?.unshift({
+        graph.unshift({
           x: formatMonthDay(previousDate),
           date: previousDate,
           y: 0,
