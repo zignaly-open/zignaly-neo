@@ -16,11 +16,11 @@ function EmailVerifyForm({
   return (
     <Layout>
       <Field>
-        <ZigTypography variant={'body1'}>
+        <ZigTypography variant={'body1'} id={'new-device-modal__description'}>
           {t('login-form.verifyEmail.title')}
         </ZigTypography>
         <InputCode
-          prefixId={'verify-email'}
+          prefixId={'new-device-modal'}
           fields={6}
           error={error}
           loading={isLoading}
@@ -29,7 +29,7 @@ function EmailVerifyForm({
           autoFocus={false}
         />
         <ZigButton
-          id={'verify-email__resend-code'}
+          id={'new-device-modal__resend-code'}
           variant={'text'}
           onClick={onReSendCode}
           loading={isReSendLoading}
