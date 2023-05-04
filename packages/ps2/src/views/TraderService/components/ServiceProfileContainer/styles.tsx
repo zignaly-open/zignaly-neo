@@ -194,7 +194,9 @@ export const GraphPercentageWrapperBox = styled(Box)`
 
 export const SqueezedButtonGroupWrapper = styled(Box)`
   .MuiButton-root {
-    min-width: 55px !important;
+    min-width: 50px !important;
+    padding-left: 3px;
+    padding-right: 3px;
   }
 `;
 

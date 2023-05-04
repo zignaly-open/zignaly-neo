@@ -61,7 +61,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             />
             <ZigTablePriceLabel
               showApproximate
-              variant={'caption'}
+              variant={'body2'}
               coin={service?.ssc ?? 'USDT'}
               value={props.row.original.pending}
               color={'neutral300'}

@@ -1,5 +1,10 @@
 import React from 'react';
-import { ZigButton, CenteredLoader, ZigTypography } from '@zignaly-open/ui';
+import {
+  ZigButton,
+  CenteredLoader,
+  ZigTypography,
+  ZigLink,
+} from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { Trans, useTranslation } from 'react-i18next';
 import { ApiKeysContainer, TitleBox } from './atoms';
@@ -11,7 +16,6 @@ import EditApiKey from './modals/EditApiKey';
 import { ServiceApiKey } from 'apis/serviceApiKey/types';
 import Stub from '../../../../components/Stub';
 import ApiKeyEntry from './components/ApiKeyEntry';
-import { ExternalLink } from '../../../../components/AnchorLink';
 
 const ApiKeyManagement: React.FC = () => {
   const { t } = useTranslation(['management', 'actions']);
@@ -40,7 +44,7 @@ const ApiKeyManagement: React.FC = () => {
           <ZigTypography variant={'h1'}>{t('api-keys.title')}</ZigTypography>
           <ZigTypography variant={'body1'}>
             <Trans i18nKey='api-keys.description' t={t}>
-              <ExternalLink href={'https://trading.zignaly.com'} />
+              <ZigLink href={'https://trading.zignaly.com'} />
             </Trans>
           </ZigTypography>
         </Box>

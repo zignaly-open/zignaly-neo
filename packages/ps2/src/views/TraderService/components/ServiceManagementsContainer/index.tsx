@@ -174,6 +174,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                       coin={service?.ssc ?? 'USDT'}
                     />
                     <ZigButton
+                      sx={{ ml: 1.5 }}
                       variant={'text'}
                       id={'trader-service__edit'}
                       startIcon={<EditIcon />}

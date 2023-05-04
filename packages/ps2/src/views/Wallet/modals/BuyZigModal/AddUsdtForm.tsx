@@ -76,13 +76,7 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
                   );
                 }}
               >
-                <ZigTypography
-                  variant={'h4'}
-                  fontWeight={600}
-                  letterSpacing={1.1}
-                >
-                  {t('buy.deposit.depositCoin', { coin: 'USDT' })}
-                </ZigTypography>
+                {t('buy.deposit.depositCoin', { coin: 'USDT' })}
               </ZigButton>
             </Box>
           </Grid>
@@ -119,21 +113,9 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
                 variant='contained'
                 id={'choose-deposit-type__purchase'}
                 size={'large'}
+                endIcon={<NorthEastIcon />}
               >
-                <ZigTypography
-                  variant={'h4'}
-                  fontWeight={600}
-                  letterSpacing={1.1}
-                >
-                  {t('buy.deposit.buyCoin', { coin: 'USDT' })}
-                </ZigTypography>
-                <NorthEastIcon
-                  fontSize={'small'}
-                  sx={{
-                    marginLeft: '3px',
-                    marginTop: '-3px',
-                  }}
-                />
+                {t('buy.deposit.buyCoin', { coin: 'USDT' })}
               </ZigButton>
             </Box>
           </Grid>

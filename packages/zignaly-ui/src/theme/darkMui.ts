@@ -186,25 +186,39 @@ const darkMui = createTheme({
           minHeight: "36px",
           paddingTop: "6px",
           paddingBottom: "6px",
+          letterSpacing: "0.55px",
           minWidth: "76px",
+          fontSize: "11px",
         },
         sizeSmall: {
           minHeight: "30px",
           minWidth: "76px",
           padding: "4px 18px",
+          letterSpacing: "0.55px",
+          fontSize: "11px",
+        },
+        containedSizeSmall: {
+          letterSpacing: "1.1px",
+        },
+        containedSizeMedium: {
+          letterSpacing: "1.1px",
         },
         text: {
           color: dark.links,
           display: "inline",
           padding: "0 2px !important",
           borderRadius: "2px",
-          fontSize: "inherit",
+          fontSize: "13px !important",
           minWidth: "0 !important",
           verticalAlign: "baseline",
           minHeight: "0px !important",
           ".MuiLoadingButton-loadingIndicatorCenter": {
             transform: "translate(-50%, 50%)",
             marginTop: "-4px",
+          },
+          "&:hover": {
+            background: "transparent",
+            textDecoration: "underline",
           },
           ".MuiButton-startIcon": {
             marginRight: "5px",
@@ -344,9 +358,10 @@ const darkMui = createTheme({
     },
     MuiLink: {
       styleOverrides: {
-        root: ({ theme }) => ({
-          color: theme.palette.links,
-        }),
+        root: {
+          cursor: "pointer",
+          color: dark.links,
+        },
       },
     },
   },
