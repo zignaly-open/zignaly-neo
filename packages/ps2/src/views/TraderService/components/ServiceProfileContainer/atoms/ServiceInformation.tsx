@@ -81,9 +81,10 @@ const ServiceInformation: React.FC<{
         </GreySubHeader>
         {md ? <Separator /> : <Box mt={2} />}
         <ZigButton
+          narrow
           data-tack-cta={'service-profile-copy-link'}
           id={'service-profile__copy-link'}
-          sx={{ minWidth: '30px' }}
+          sx={{ '&&': { minWidth: '30px !important' } }}
           onClick={() => {
             copy(
               window.location.origin +
@@ -98,7 +99,7 @@ const ServiceInformation: React.FC<{
               <LinkIconWithSafariFix
                 style={{ width: '13px', height: '13px' }}
                 color='neutral300'
-                width={13}
+                width={15}
                 height={13}
               />
             )

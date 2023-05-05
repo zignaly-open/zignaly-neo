@@ -96,7 +96,6 @@ const Signup: React.FC = () => {
                   {/*Didn't use thr react-dom-router-link because it messed up thr bg*/}
                   <ZigLink
                     target={'_self'}
-                    underline={'hover'}
                     href={generatePath(ROUTE_PROFIT_SHARING)}
                     onClick={(e: MouseEvent<HTMLAnchorElement>) => {
                       navigate(ROUTE_PROFIT_SHARING);

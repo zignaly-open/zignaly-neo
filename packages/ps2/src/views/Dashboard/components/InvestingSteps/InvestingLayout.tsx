@@ -40,19 +40,11 @@ const InvestingLayout: React.FC = () => {
             id={'my-portfolio-steps__marketplace'}
             variant='contained'
             sx={{
-              padding: '18px 25px',
-              lineHeight: '20px',
               ml: 5,
             }}
+            size={'xlarge'}
           >
-            <ZigTypography
-              variant='body1'
-              color='neutral000'
-              fontWeight={600}
-              letterSpacing={1.1}
-            >
-              {t('how-to-invest-steps.start-investing')}
-            </ZigTypography>
+            {t('how-to-invest-steps.start-investing')}
           </ZigButton>
         </Link>
       </Box>

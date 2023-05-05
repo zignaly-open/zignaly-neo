@@ -1,5 +1,5 @@
 import React from 'react';
-import { ZigButton, ZigLink, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { Box, Divider, Grid } from '@mui/material';
 import NorthEastIcon from '@mui/icons-material/NorthEast';
@@ -78,10 +78,7 @@ const ChooseDepositType: React.FC<{
           <Grid item xs={12} md={5}>
             <Box
               sx={{
-                width: '100%',
-                padding: '0 0',
-                display: 'flex',
-                flexDirection: 'column',
+                textAlign: 'center',
               }}
             >
               <Box textAlign={'center'} height={90} paddingTop={'10px'}>
@@ -93,21 +90,15 @@ const ChooseDepositType: React.FC<{
                   {t('buy-crypto', { coin })}
                 </ZigTypography>
               </Box>
-              <ZigLink
+              <ZigButton
                 href={BUY_CRYPTO_URL}
-                display={'flex'}
-                justifyContent={'center'}
-                underline={'none'}
+                variant='contained'
+                id={'choose-deposit-type__purchase'}
+                endIcon={<NorthEastIcon />}
+                size={'large'}
               >
-                <ZigButton
-                  variant='contained'
-                  id={'choose-deposit-type__purchase'}
-                  endIcon={<NorthEastIcon />}
-                  size={'large'}
-                >
-                  {t('buttons.purchase', { coin })}
-                </ZigButton>
-              </ZigLink>
+                {t('buttons.purchase', { coin })}
+              </ZigButton>
             </Box>
           </Grid>
         </Grid>

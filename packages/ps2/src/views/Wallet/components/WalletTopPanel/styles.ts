@@ -1,36 +1,12 @@
-import { InfoOutlined } from '@mui/icons-material';
-import { Grid, styled, Switch } from '@mui/material';
+import { Box, styled } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
 import { withAttrs } from 'util/styles';
 
-export const TopPanel = styled(Grid)`
+export const TopPanel = styled(Box)`
   background: #13122566;
   border-radius: 16px;
   margin: 21px 0 40px;
-  flex: 1;
-  padding: 40px 32px;
-  justify-content: space-around;
-
-  ${({ theme }) => theme.breakpoints.down('sm')} {
-    justify-content: flex-start;
-    gap: 70px;
-  }
-`;
-
-export const PanelItem = styled(Grid)`
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
-`;
-
-export const StyledSwitch = styled(Switch)`
-  .MuiSwitch-switchBase.Mui-checked {
-    color: ${({ theme }) => theme.palette.greenGraph};
-  }
-
-  .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track {
-    background-color: ${({ theme }) => theme.palette.greenGraph};
-  }
+  padding: 60px 8%;
 `;
 
 export const SubTitle = withAttrs(ZigTypography, {
@@ -41,34 +17,6 @@ export const SubTitle = withAttrs(ZigTypography, {
   mb: '20px',
   ml: '51px',
 });
-
-export const MinText = withAttrs(ZigTypography, {
-  variant: 'h4',
-  color: 'greenGraph',
-  whiteSpace: 'nowrap',
-  display: 'flex',
-  alignItems: 'center',
-});
-
-export const PercText = withAttrs(ZigTypography, {
-  variant: 'h3',
-  color: 'greenGraph',
-  component: 'span',
-  fontWeight: 600,
-  fontSize: 20,
-});
-
-export const SwitchLabel = styled(ZigTypography)`
-  font-size: 12px;
-  color: ${({ theme }) => theme.palette.neutral200};
-`;
-
-export const TooltipIcon = styled(InfoOutlined)`
-  width: 12px;
-  height: 12px;
-  color: #65647e;
-  margin: 0 0 5px 4px;
-`;
 
 export const Separator = styled('div')`
   width: 1px;

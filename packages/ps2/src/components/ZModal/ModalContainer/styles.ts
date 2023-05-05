@@ -98,12 +98,6 @@ export const ModalActions = styled('div')`
   justify-content: center;
   margin-top: 56px;
   gap: 32px;
-
-  ${({ theme }) => `
-    svg {
-      fill: ${theme.palette.links};
-    }
-  `}
 `;
 
 // todo: check if it can replace ModalActions
