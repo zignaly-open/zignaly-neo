@@ -30,3 +30,9 @@ export const getColorForNumber = (
   value: number | string,
 ): undefined | 'redGraphOrError' | 'greenGraph' =>
   +value === 0 ? undefined : +value > 0 ? 'greenGraph' : 'redGraphOrError';
+
+/**
+ * Returns a number with a fixed number of decimals, not showing trailing zeros.
+ */
+export const prettyFloat = (value: number, decimals = 2) =>
+  parseFloat(value.toFixed(decimals));

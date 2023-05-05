@@ -6,8 +6,12 @@ import {
   loginResponseMockWrongCredentials,
 } from './mocks/login';
 import { LoginPayload } from '../apis/user/types';
+import {
+  referralRewardsResponseMockSuccess,
+  referralTierLevelsResponseMockSuccess,
+} from './mocks/referral';
 
-export const handlers = [
+const ps2Handlers = [
   rest.post<LoginPayload>(
     process.env.REACT_APP_BASE_API + '/login',
     async (req, res, ctx) => {
@@ -23,3 +27,23 @@ export const handlers = [
     },
   ),
 ];
+
+const referralsHandlers = [
+  rest.get(
+    process.env.REACT_APP_REFERRALS_API + '/v1/referrer/data',
+    async (req, res, ctx) => {
+      return res(ctx.status(200), ctx.json(referralRewardsResponseMockSuccess));
+    },
+  ),
+  rest.get(
+    process.env.REACT_APP_REFERRALS_API + '/v1/tier-levels',
+    async (req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.json(referralTierLevelsResponseMockSuccess),
+      );
+    },
+  ),
+];
+
+export const handlers = [...ps2Handlers, ...referralsHandlers];
