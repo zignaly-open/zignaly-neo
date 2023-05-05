@@ -125,7 +125,8 @@ const Referrals: React.FC = () => {
                     sx={{
                       display: 'flex',
                       flexDirection: 'row',
-                      alignItems: 'flex-start',
+                      alignItems: 'center',
+                      mb: '10px',
                     }}
                   >
                     <Box sx={{ flex: 1 }}>
@@ -141,7 +142,6 @@ const Referrals: React.FC = () => {
                       id='referrals__open-invite-image-modal'
                       size={'xlarge'}
                       sx={{
-                        mb: '10px',
                         ml: 1,
                       }}
                       onClick={openInviteModal}

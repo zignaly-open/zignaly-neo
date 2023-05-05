@@ -38,6 +38,7 @@ const ZigButton = ({
             sx: {
               ...props.sx,
               minWidth: "0 !important",
+              padding: "6px",
             },
           }
         : {})}
