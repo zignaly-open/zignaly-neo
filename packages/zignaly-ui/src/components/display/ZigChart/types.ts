@@ -28,6 +28,7 @@ export interface ChartMiniProps {
   width?: number;
   gradientVariant?: GradientVariant;
   chartProps?: VictoryChartProps;
+  id?: string;
 }
 
 export interface ChartLargeProps {
@@ -40,6 +41,7 @@ export interface ChartLargeProps {
   tooltipFormatter?: (v: AxisFormat) => string;
   chartProps?: VictoryChartProps;
   id?: string;
+  precision?: number;
 }
 
 export interface AxisFormat {

@@ -4,7 +4,7 @@ import { DialogProps } from '@mui/material/Dialog';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/system';
 import ZModal from '../index';
-import { ZigButtonProps } from '@zignaly-open/ui/lib/components/inputs/ZigButton';
+import { ZigButtonProps } from '@zignaly-open/ui';
 
 export type ConfirmModalProps = {
   title: string | JSX.Element;

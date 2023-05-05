@@ -15,7 +15,7 @@ import LayoutContentWrapper from '../../components/LayoutContentWrapper';
 import { BackendError, ErrorCodes } from '../../util/errors';
 import CriticalError from '../../components/Stub/CriticalError';
 import createZModalRouteElement from '../../components/ZModal/ZModalRoute';
-import InvestDepositModal from '../Dashboard/components/ManageInvestmentModals/IndestDepositModal';
+import InvestDepositModal from '../Dashboard/components/ManageInvestmentModals/InvestDepositModal';
 
 const ServiceProfile: React.FC = () => {
   const { serviceId } = useParams();

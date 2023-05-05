@@ -11,9 +11,6 @@ export default {
       default: "medium",
       options: ["small", "medium", "large"],
     },
-    name: {
-      control: "text",
-    },
     coin: {
       control: "text",
     },
@@ -22,20 +19,17 @@ export default {
 
 const Template: ComponentStory<typeof ZigCoinIcon> = (args) => <ZigCoinIcon {...args} />;
 
-export const EtherCoinIconStory = Template.bind({});
-EtherCoinIconStory.args = {
-  name: "Ethereum",
+export const EtherIconStory = Template.bind({});
+EtherIconStory.args = {
   coin: "ETH",
 };
 
-export const BitcoinCoinIconStory = Template.bind({});
-BitcoinCoinIconStory.args = {
-  name: "Bitcoin",
+export const BitcoinIconStory = Template.bind({});
+BitcoinIconStory.args = {
   coin: "BTC",
 };
 
-export const TetherCoinIconStory = Template.bind({});
-TetherCoinIconStory.args = {
-  name: "Tether",
+export const TetherIconStory = Template.bind({});
+TetherIconStory.args = {
   coin: "USDT",
 };

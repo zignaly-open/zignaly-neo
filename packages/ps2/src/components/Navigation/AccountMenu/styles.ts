@@ -1,22 +1,23 @@
 import { styled } from '@mui/material';
-import { Typography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
 
-export const NavList = styled('div')`
+export const HeaderDropdownButton = styled('button')<{ active: boolean }>`
+  appearance: none;
+  cursor: pointer;
+  border: none;
+  height: 54px;
+  padding-left: 15px;
+  padding-right: 15px;
   display: flex;
   flex-direction: column;
-
-  border-bottom: 1px solid #2c2d59;
-  padding: 12px 0;
-  gap: 8px;
-
-  &:first-child {
-    padding-top: 0;
+  justify-content: space-around;
+  text-align: center;
+  background: ${(props) => (props.active ? '#12152c' : 'transparent')};
+  &:hover {
+    background: #12152c;
   }
-
-  &.last {
-    border-bottom: none;
-    padding-bottom: 0;
-  }
+  transition: background-color 0.2s;
+  border-radius: 0;
 `;
 
 export const LoginButton = styled('span')`
@@ -34,7 +35,7 @@ export const LoginButton = styled('span')`
   `}
 `;
 
-export const AccountName = styled(Typography)`
+export const AccountName = styled(ZigTypography)`
   max-width: 155px;
   overflow: hidden;
   white-space: nowrap;

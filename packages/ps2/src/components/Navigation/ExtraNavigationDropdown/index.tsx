@@ -1,8 +1,4 @@
-import {
-  DropDown,
-  IconButton,
-  OptionHorizontalDotsIcon,
-} from '@zignaly-open/ui';
+import { ZigDropdown, OptionHorizontalDotsIcon } from '@zignaly-open/ui';
 import React, { useCallback, useRef } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { NavLink, Networks } from './styles';
@@ -19,17 +15,15 @@ import {
   ROUTE_BECOME_TRADER,
   ROUTE_TRADING_SERVICE_MANAGE,
 } from '../../../routes';
-import {
-  DropDownHandle,
-  DropDownOption,
-} from '@zignaly-open/ui/lib/components/display/DropDown/types';
+import { ZigDropdownHandleType, ZigDropdownOptionType } from '@zignaly-open/ui';
 import { GlobeLanguagesStyled, LabelButton } from './styles';
 import { LocalizationLanguages } from '../../../util/languages';
+import { HeaderDropdownButton } from '../AccountMenu/styles';
 
 const ExtraNavigationDropdown: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
-  const dropDownRef = useRef<DropDownHandle>(null);
+  const dropDownRef = useRef<ZigDropdownHandleType>(null);
   const { t, i18n } = useTranslation('common');
   const changeLocale = useChangeLocale();
   const service = useFirstOwnedService();
@@ -54,7 +48,7 @@ const ExtraNavigationDropdown: React.FC = () => {
     onClose();
   };
 
-  let options: DropDownOption[] = [
+  let options: ZigDropdownOptionType[] = [
     {
       label: t('main-menu.dropdown-link-helpDocs'),
       id: 'menu-dropdown__help-docs',
@@ -145,20 +139,15 @@ const ExtraNavigationDropdown: React.FC = () => {
   }
 
   return (
-    <DropDown
+    <ZigDropdown
       component={({ open }) => (
-        <IconButton
-          id={'menu__dropdown-trading'}
-          variant={'flat'}
-          icon={
-            <OptionHorizontalDotsIcon
-              width={14}
-              height={4}
-              color={open ? theme.palette.neutral100 : theme.palette.neutral300}
-            />
-          }
-          isFocused={open}
-        />
+        <HeaderDropdownButton id={'menu__dropdown-trading'} active={open}>
+          <OptionHorizontalDotsIcon
+            width={14}
+            height={4}
+            color={open ? theme.palette.neutral100 : theme.palette.neutral300}
+          />
+        </HeaderDropdownButton>
       )}
       options={options}
     />

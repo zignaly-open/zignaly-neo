@@ -1,11 +1,7 @@
 import React, { useMemo } from 'react';
 import { TransactionContainer } from '../styles';
-import {
-  ArrowLeftIcon,
-  Button,
-  ZigTable,
-  ZigTablePriceLabel,
-} from '@zignaly-open/ui';
+import { ZigButton, ZigTable, ZigTablePriceLabel } from '@zignaly-open/ui';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import {
   ChangeViewFn,
   EditInvestmentViews,
@@ -96,15 +92,15 @@ const PendingTransactionsList: React.FC<{
       </TransactionContainer>
 
       <ModalActions>
-        <Button
+        <ZigButton
           id={'pending__pending-transactions'}
-          leftElement={
-            <ArrowLeftIcon color={'#fff'} width={'20px'} height={'20px'} />
-          }
+          startIcon={<ArrowBackIosIcon />}
           onClick={() => setView(EditInvestmentViews.EditInvestment)}
           size={'large'}
-          caption={t('modal.pendingTransaction.button')}
-        />
+          variant={'contained'}
+        >
+          {t('modal.pendingTransaction.button')}
+        </ZigButton>
       </ModalActions>
     </>
   );

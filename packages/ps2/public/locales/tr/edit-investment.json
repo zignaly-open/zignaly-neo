@@ -21,10 +21,8 @@
 			"withdraw": "Yatırım Geri Çekimi"
 		},
 		"button": {
-			"saveAndClose": "Sakla ve Kapat",
 			"continue-to-confirmation": "Onay aşamasına geçin",
-			"invest-now": "Şimdi {{amount}} {{coin}} yatırım yapın",
-			"saveAndInvestment": "Sakla ve Yatırıma Ekle"
+			"invest-now": "Şimdi {{amount}} {{coin}} yatırım yapın"
 		}
 	},
 	"pendingMajorThan": {

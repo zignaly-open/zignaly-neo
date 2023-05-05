@@ -56,10 +56,13 @@ export function useSelectInvestment(
             : serviceToInvestmentServiceDetail(service),
         ),
       );
+    return () => {
+      dispatch(setSelectedInvestment(null));
+    };
   }, [service]);
 }
 
-export function useSelectedInvestment(): InvestmentServiceDetails {
+export function useSelectedInvestment(): InvestmentServiceDetails | undefined {
   return useSelector((state: RootState) => state.investment)
     ?.selectedInvestment;
 }
@@ -188,7 +191,7 @@ export function useUpdateTakeProfitAndInvestMore(serviceId: string): {
     amount,
   }: {
     amount: BigNumber | number | string;
-    profitPercentage: number | string;
+    profitPercentage?: number | string;
   }) => Promise<void>;
 } {
   const [update, { isLoading }] = useUpdateTakeProfitAndInvestMoreMutation();

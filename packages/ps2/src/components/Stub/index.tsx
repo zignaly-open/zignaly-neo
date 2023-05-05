@@ -11,7 +11,7 @@ const Stub: React.FC<{
   return (
     <Layout id={id}>
       <ZigTypography variant={'h1'}>{title}</ZigTypography>
-      <ZigTypography variant={'subtitle1'}>{description}</ZigTypography>
+      <ZigTypography variant={'body1'}>{description}</ZigTypography>
     </Layout>
   );
 };

@@ -1,6 +1,11 @@
 import React, { useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { LoginButton, AccountDropdown, AccountName } from './styles';
+import {
+  LoginButton,
+  AccountDropdown,
+  AccountName,
+  HeaderDropdownButton,
+} from './styles';
 import { useMediaQuery, useTheme } from '@mui/material';
 import {
   useActiveExchange,
@@ -11,10 +16,8 @@ import {
 } from '../../../apis/user/use';
 import {
   Avatar,
-  Button,
-  DropDown,
-  IconButton,
-  Typography,
+  ZigDropdown,
+  ZigTypography,
   UserIcon,
   ZigButton,
 } from '@zignaly-open/ui';
@@ -34,7 +37,7 @@ import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { Add } from '@mui/icons-material';
-import { DropDownHandle } from '@zignaly-open/ui/lib/components/display/DropDown/types';
+import { ZigDropdownHandleType } from '@zignaly-open/ui';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme();
@@ -48,7 +51,7 @@ function AccountMenu(): React.ReactElement | null {
   const location = useLocation();
   const { showModal } = useZModal();
   const md = useMediaQuery(theme.breakpoints.up('sm'));
-  const dropDownRef = useRef<DropDownHandle>(null);
+  const dropDownRef = useRef<ZigDropdownHandleType>(null);
   const onClose = useCallback(() => {
     dropDownRef.current?.closeDropDown();
   }, [dropDownRef]);
@@ -67,32 +70,31 @@ function AccountMenu(): React.ReactElement | null {
               width={'16px'}
               height={'16px'}
             />
-            <Typography variant={'buttonsm'} color={'neutral300'}>
+            <ZigTypography variant={'caption'} color={'neutral300'}>
               {t('account-menu.isAuth-button-logIn')}
-            </Typography>
+            </ZigTypography>
           </LoginButton>
         </Link>
         <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>
-          <Button
-            id={'menu__signup'}
-            caption={t('account-menu.isAuth-button-signUp')}
-          />
+          <ZigButton id={'menu__signup'} variant={'contained'}>
+            {t('account-menu.isAuth-button-signUp')}
+          </ZigButton>
         </Link>
       </>
     );
   } else if (!md) return null;
 
   return (
-    <DropDown
+    <ZigDropdown
       ref={dropDownRef}
       component={({ open }) => (
-        <IconButton
+        <HeaderDropdownButton
           id={'menu__dropdown-account'}
-          variant={'flat'}
-          icon={<Avatar size={'medium'} image={activeExchange?.image} />}
           key={'user'}
-          isFocused={open}
-        />
+          active={open}
+        >
+          <Avatar size={'medium'} image={activeExchange?.image} />
+        </HeaderDropdownButton>
       )}
       options={[
         {

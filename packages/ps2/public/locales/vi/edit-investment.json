@@ -21,10 +21,8 @@
 			"withdraw": "Rút tiền đầu tư"
 		},
 		"button": {
-			"saveAndClose": "Lưu và Đóng",
 			"continue-to-confirmation": "Tiếp tục xác nhận",
-			"invest-now": "Đầu tư {{số tiền}} {{coin}}",
-			"saveAndInvestment": "Lưu và thêm vào đầu tư"
+			"invest-now": "Đầu tư {{số tiền}} {{coin}}"
 		}
 	},
 	"pendingMajorThan": {

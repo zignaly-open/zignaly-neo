@@ -1,10 +1,45 @@
 {
+	"title": "Centro de Recompensas",
+	"terms": "Condiciones >",
 	"active": "Activo",
+	"reward-terms": "Condiciones de la Recompensa",
+	"description": "Gana recompensas completando tareas sencillas. ¡Es así de fácil!",
+	"header": {
+		"title": "Obtén $20",
+		"description": "En el 1er depósito"
+	},
+	"active-rewards": "Recompensas Activas",
+	"no-active-rewards": "No hay recompensas activas en este momento",
+	"disabled-voucher": "El Vale ya está activado",
 	"table": {
+		"title": "Historial de Recompensas",
+		"no-benefits": "Aún no hay recompensas",
 		"time-and-date": "Hora & Fecha",
+		"reward-description": "Descripción de Recompensa",
+		"description-success_fee": "Gastado <0><\/0> del vale de Comisiones, <1><\/1> restante.",
+		"description-awarded": "<0><\/0> Vale de Success Fee en el 1er depósito.",
 		"status": "Estatus"
 	},
 	"statusTypes": {
-		"success_fee": "Comisión por Beneficios"
+		"success_fee": "Comisión por Beneficios",
+		"awarded": "Otorgado"
+	},
+	"rewardTypes": {
+		"voucher_active": "Vale de Success Fee",
+		"voucher_pending": "Bono de Depósito"
+	},
+	"full-terms": {
+		"1": "Zignaly se reserva el derecho de cancelar los \"Vales de Comisiones\" si se descubre que el usuario está involucrado en actividades inapropiadas, deshonestas o abusivas.",
+		"2": "Zignaly se reserva el derecho de modificar los Términos y Condiciones del programa de Recompensas en cualquier momento y sin previo aviso.",
+		"3": "Los \"Vales de Comisiones\" son aplicables a la parte de Zignaly del \"Success Fee\".",
+		"4": "Los \"Vales de Comisiones\" no son transferibles y solo serán utilizados por el usuario original que los obtuvo.",
+		"5": "Los anuncios pagos online con el logotipo de Zignaly están estrictamente prohibidos.",
+		"6": "Todos los cálculos de recompensa realizados por Zignaly son definitivos.",
+		"7": "Los participantes que violen estos términos no serán elegibles para las recompensas; cualquier comportamiento fraudulento o abusivo resultará en la terminación inmediata de todas las recompensas pendientes.",
+		"title": "Condiciones Globales"
+	},
+	"rewardDescriptions": {
+		"voucher_active": "Ahorra en Success Fee ahora gracias a tu cupón de ${{amount}}.",
+		"voucher_pending": "Deposita cualquier cantidad y obtén un cupón de ${{amount}} para ahorrar en Success Fees."
 	}
 }

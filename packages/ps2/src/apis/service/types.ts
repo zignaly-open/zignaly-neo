@@ -1,4 +1,4 @@
-import { AxisFormat } from '@zignaly-open/ui/lib/components/display/ZigChart/types';
+import { ZigChartAxisFormatType } from '@zignaly-open/ui';
 import { ExchangeType } from '../user/types';
 
 type TraderServiceStatus = 'FULL' | string;
@@ -156,7 +156,7 @@ export type TraderServiceChart = {
 };
 
 export type TraderServiceChartProcessed = {
-  data: AxisFormat[];
+  data: ZigChartAxisFormatType[];
   summary: string | number;
   percentDiff?: number | string;
   migrationDate?: string;

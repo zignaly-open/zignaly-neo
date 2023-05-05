@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
-import { Form, Action, TitleHead, StyledErrorOutline } from './styles';
+import { Form, Action, StyledErrorOutline } from './styles';
 import { ResetPasswordValidation } from './validations';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Button, ZigInput, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useResetPasswordMutation } from 'apis/user/api';
 import { ROUTE_LOGIN } from 'routes';
 import { useToast } from 'util/hooks/useToast';
-import PasswordVisibilityAdornment from '../atoms/PasswordVisibilityAdornment';
 
 const ResetPasswordForm = () => {
   const { t } = useTranslation(['auth', 'error']);
@@ -28,7 +27,6 @@ const ResetPasswordForm = () => {
   });
   const [resetPassword, resetPasswordStatus] = useResetPasswordMutation();
   const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
   const { token } = useParams();
   const toast = useToast();
 
@@ -44,11 +42,9 @@ const ResetPasswordForm = () => {
 
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
-      <TitleHead>
-        <ZigTypography variant={'h2'}>
-          {t('reset-password.reset-password')}
-        </ZigTypography>
-      </TitleHead>
+      <ZigTypography variant={'h1'}>
+        {t('reset-password.reset-password')}
+      </ZigTypography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name='password'
@@ -70,30 +66,23 @@ const ResetPasswordForm = () => {
                   </ZigTypography>
                 </Box>
               }
-              type={showPassword ? 'text' : 'password'}
-              InputProps={{
-                endAdornment: (
-                  <PasswordVisibilityAdornment
-                    show={showPassword}
-                    onToggle={() => setShowPassword(!showPassword)}
-                  />
-                ),
-              }}
+              sensitive
+              type={'password'}
               {...field}
             />
           )}
         />
 
         <Action>
-          <Button
+          <ZigButton
             type={'submit'}
-            variant={'primary'}
-            caption={t('reset-password.reset-password')}
             size={'xlarge'}
             loading={resetPasswordStatus.isLoading}
             disabled={!isValid}
             id='resetpassword__submit'
-          />
+          >
+            {t('reset-password.reset-password')}
+          </ZigButton>
         </Action>
       </Form>
     </Box>

@@ -53,7 +53,7 @@ export const Button = styled.div<ButtonProps>`
   cursor: pointer;
 
   ${({ center, theme, isActiveDropDown, focused }) => `
-    background: ${theme.dropDownBackground};
+    background: #12152C;
     border: 1px solid #222249;
     
     ${styledIf(
@@ -101,7 +101,7 @@ export const DropDown = styled.div<any>`
   overflow: auto;
 
   ${(props: any) => `
-    background: ${props.theme.dropDownBackground};
+    background: #12152C;
     max-height: ${props.maxHeight ?? "200px"};
   `}
 

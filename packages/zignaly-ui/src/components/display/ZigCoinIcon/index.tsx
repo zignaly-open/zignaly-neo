@@ -1,12 +1,13 @@
 import React, { useCallback, useState } from "react";
 import { Icon, Placeholder } from "./styles";
-import { CoinSizes, ZIGCoinIconProps, COIN_SIZES, sizes } from "./types";
+import { COIN_SIZES, sizes } from "./types";
+import type { ZIGCoinIconProps, CoinSizes } from "./types";
 import { ZignalyIcon } from "../../../index";
 
 const ZigCoinIcon = ({
-  size = COIN_SIZES.MEDIUM,
-  name,
+  size = COIN_SIZES.Medium,
   coin,
+  // FIXME: wtf are we passing a classname?
   className = "",
   bucket = "coins-binance",
 }: ZIGCoinIconProps) => {
@@ -18,7 +19,7 @@ const ZigCoinIcon = ({
   if (!coin) return null;
 
   return src ? (
-    <Icon src={src} alt={name} size={s} className={className} onError={onError} />
+    <Icon src={src} alt={coin} size={s} className={className} onError={onError} />
   ) : coin.toLowerCase() === "zig" ? (
     <ZignalyIcon width={sizes[size as CoinSizes]} height={sizes[size as CoinSizes]} />
   ) : (

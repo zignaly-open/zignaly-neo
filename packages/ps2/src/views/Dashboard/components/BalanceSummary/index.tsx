@@ -3,16 +3,14 @@ import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
 import { Layout } from './styles';
 import { BalanceSummaryProps } from './types';
-import {
-  PencilIcon,
-  TextButton,
-  Typography,
-  ZigPriceLabel,
-} from '@zignaly-open/ui';
+import EditIcon from '@mui/icons-material/Edit';
+import { ZigButton, ZigTypography, ZigPriceLabel } from '@zignaly-open/ui';
 import { getColorForNumber } from '../../../../util/numbers';
+import { Box } from '@mui/material';
 
 export const BalanceSummary = ({
-  id,
+  prefixId,
+  serviceId,
   totalValue,
   profit,
   coin = 'USDT',
@@ -22,33 +20,41 @@ export const BalanceSummary = ({
   const { t } = useTranslation(['table', 'action']);
   return (
     <Layout>
-      {dashboardType === 'marketplace' ? (
-        <Typography>{t('balanceSummary.invested')}</Typography>
-      ) : (
-        <ZigPriceLabel
-          value={new BigNumber(totalValue).toFixed()}
-          coin={coin}
-        />
-      )}
-      {isNaN(+profit) || profit === '' ? (
-        // eslint-disable-next-line i18next/no-literal-string
-        <Typography variant={'body2'} color={'neutral400'}>
-          -
-        </Typography>
-      ) : (
-        <ZigPriceLabel
-          value={profit}
-          coin={coin}
-          color={getColorForNumber(profit)}
-        />
-      )}
-      <TextButton
-        id={id}
-        leftElement={<PencilIcon color='#65647E' width={16} height={16} />}
-        caption={t('action:edit')}
-        color={'links'}
+      <Box>
+        {dashboardType === 'marketplace' ? (
+          <ZigTypography>{t('balanceSummary.invested')}</ZigTypography>
+        ) : (
+          <ZigPriceLabel
+            id={prefixId && serviceId && `${prefixId}__invested-${serviceId}`}
+            value={new BigNumber(totalValue).toFixed()}
+            coin={coin}
+          />
+        )}
+      </Box>
+      <Box>
+        {isNaN(+profit) || profit === '' ? (
+          // eslint-disable-next-line i18next/no-literal-string
+          <ZigTypography variant={'body2'} color={'neutral400'}>
+            -
+          </ZigTypography>
+        ) : (
+          <ZigPriceLabel
+            id={prefixId && serviceId && `${prefixId}__profit-${serviceId}`}
+            value={profit}
+            coin={coin}
+            color={getColorForNumber(profit)}
+          />
+        )}
+      </Box>
+
+      <ZigButton
+        variant={'text'}
+        id={`${prefixId}__edit-${serviceId}`}
+        startIcon={<EditIcon />}
         onClick={onClickEdit}
-      />
+      >
+        {t('action:edit')}
+      </ZigButton>
     </Layout>
   );
 };

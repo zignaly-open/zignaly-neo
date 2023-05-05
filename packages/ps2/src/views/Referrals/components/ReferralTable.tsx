@@ -177,11 +177,13 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
 
             <ZigButton
               onClick={exporter}
+              variant={'text'}
               sx={{
                 color: (theme) => theme.palette.links,
               }}
+              endIcon={<OpenInNew />}
             >
-              {t('export')} <OpenInNew sx={{ ml: 1, width: '15px' }} />
+              {t('export')}
             </ZigButton>
           </FilterWrapperContainer>
         )}

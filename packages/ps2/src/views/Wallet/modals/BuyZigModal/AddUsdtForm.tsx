@@ -1,7 +1,7 @@
 import React from 'react';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import ExchangesTooltip from './atoms/ExchangesTooltip';
-import { Box, Divider, Grid, Link } from '@mui/material';
+import { Box, Divider, Grid } from '@mui/material';
 import { BUY_CRYPTO_URL } from 'util/constants';
 import { AddUsdtFormProps } from './types';
 import { useZModal } from 'components/ZModal/use';
@@ -17,13 +17,9 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
     <>
       <Grid container sx={{ padding: '10px 0' }}>
         <Grid item xs={12} sx={{ paddingRight: '0px' }}>
-          <ZigTypography variant={'body2'} fontSize={'15px'}>
-            {t('buy.deposit.description', { coin: 'USDT' })}
-          </ZigTypography>
-          <ZigTypography my={1}>
-            <br />
+          <ZigTypography my={1} lineHeight={1.8}>
             <Trans
-              i18nKey='buy.description'
+              i18nKey='buy.deposit.description'
               t={t}
               values={{
                 coin: 'USDT',
@@ -80,13 +76,7 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
                   );
                 }}
               >
-                <ZigTypography
-                  variant={'h4'}
-                  fontWeight={600}
-                  letterSpacing={1.1}
-                >
-                  {t('buy.deposit.depositCoin', { coin: 'USDT' })}
-                </ZigTypography>
+                {t('buy.deposit.depositCoin', { coin: 'USDT' })}
               </ZigButton>
             </Box>
           </Grid>
@@ -104,7 +94,7 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
             <Box
               sx={{
                 width: '100%',
-                padding: '0 0',
+                padding: '0 55px',
                 display: 'flex',
                 flexDirection: 'column',
               }}
@@ -118,34 +108,15 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
                   {t('buy.deposit.noCrypto')}
                 </ZigTypography>
               </Box>
-              <Link
+              <ZigButton
                 href={BUY_CRYPTO_URL}
-                target={'_blank'}
-                display={'flex'}
-                justifyContent={'center'}
-                underline={'none'}
+                variant='contained'
+                id={'choose-deposit-type__purchase'}
+                size={'large'}
+                endIcon={<NorthEastIcon />}
               >
-                <ZigButton
-                  variant='contained'
-                  id={'choose-deposit-type__purchase'}
-                  size={'large'}
-                >
-                  <ZigTypography
-                    variant={'h4'}
-                    fontWeight={600}
-                    letterSpacing={1.1}
-                  >
-                    {t('buy.deposit.buyCoin', { coin: 'USDT' })}
-                  </ZigTypography>
-                  <NorthEastIcon
-                    fontSize={'small'}
-                    sx={{
-                      marginLeft: '3px',
-                      marginTop: '-3px',
-                    }}
-                  />
-                </ZigButton>
-              </Link>
+                {t('buy.deposit.buyCoin', { coin: 'USDT' })}
+              </ZigButton>
             </Box>
           </Grid>
         </Grid>

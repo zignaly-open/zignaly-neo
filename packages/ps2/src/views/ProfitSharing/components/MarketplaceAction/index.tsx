@@ -9,10 +9,10 @@ import InvestButton from '../../../TraderService/components/ServiceProfileContai
 import { InvestedButtonBase } from '../../../TraderService/components/ServiceProfileContainer/atoms/InvestedButton';
 import { marketplaceServiceToServiceType } from '../../../../apis/marketplace/util';
 import { Service } from '../../../../apis/service/types';
-import CenteredLoader from '../../../../components/CenteredLoader';
 import { LoaderWrapper } from './styles';
 import { MarketplaceActionType } from './types';
 import BigNumber from 'bignumber.js';
+import { CenteredLoader } from '@zignaly-open/ui';
 
 const MarketplaceAction = ({
   service,

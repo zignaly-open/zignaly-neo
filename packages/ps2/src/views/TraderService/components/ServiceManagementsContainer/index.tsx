@@ -3,11 +3,11 @@ import { useTranslation } from 'react-i18next';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
-  Button,
-  EditPenIcon,
-  TextButton,
-  Typography,
+  ZigButton,
+  ZigPriceLabel,
+  ZigTypography,
 } from '@zignaly-open/ui';
+import EditIcon from '@mui/icons-material/Edit';
 import {
   BottomContainer,
   Box,
@@ -15,7 +15,6 @@ import {
   HorizontalConnection,
   InlinePriceLabel,
   Layout,
-  MainPriceLabel,
   MiddleContainer,
   TopConnector,
   TopHorizontalConnection,
@@ -73,10 +72,15 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
         ]) => (
           <>
             <Box>
-              <Typography variant='h2' color='neutral100'>
+              <ZigTypography variant='h2' color='neutral100'>
                 {t('totalFunds')}
-              </Typography>
-              <MainPriceLabel
+              </ZigTypography>
+              <ZigPriceLabel
+                variant={'bigNumber'}
+                coinProps={{
+                  color: 'highlighted',
+                  variant: 'body1',
+                }}
                 value={parseFloat(balance.sbt)}
                 coin={service?.ssc ?? 'USDT'}
               />
@@ -86,32 +90,32 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
             <BottomContainer>
               <Box>
                 <Circle />
-                <Typography variant='h2' color='neutral100'>
+                <ZigTypography variant='h2' color='neutral100'>
                   {t('tradingFunds')}
-                </Typography>
-                <Typography color='neutral200'>
+                </ZigTypography>
+                <ZigTypography color='neutral200'>
                   {t('tradingFunds-desc')}
-                </Typography>
+                </ZigTypography>
                 <TradingFunds>
-                  <Typography color='neutral400' variant='body2'>
+                  <ZigTypography color='neutral400' variant='body2'>
                     {t('availableTrading')}
                     <InlinePriceLabel
                       value={parseFloat(balance.staSscFree)}
                       coin={service?.ssc ?? 'USDT'}
                     />
-                  </Typography>
-                  <Typography color='neutral400' variant='body2'>
+                  </ZigTypography>
+                  <ZigTypography color='neutral400' variant='body2'>
                     {t('allocatedTrading')}
                     <InlinePriceLabel
                       value={parseFloat(balance.staSscSum)}
                       coin={service?.ssc ?? 'USDT'}
                     />
-                  </Typography>
+                  </ZigTypography>
                 </TradingFunds>
                 {/* <LabelHardDisc color='neutral200'>
                   {t('instantWithdrawn')}
                 </LabelHardDisc>
-                <ProgressSlider
+                <ZigProgressBar
                   value={new BigNumber(balance.debt.toString())
                     .dividedBy(new BigNumber(balance.sbt.toString()))
                     .toNumber()}
@@ -125,13 +129,14 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                   color={theme.palette.neutral600}
                 />
                 <HorizontalConnection />
-                <Button
+                <ZigButton
                   id={'trader-service__transfer'}
-                  variant='secondary'
+                  variant='outlined'
                   size='large'
-                  caption={t('transfer.title')}
                   onClick={onClickTransfers}
-                />
+                >
+                  {t('transfer.title')}
+                </ZigButton>
                 <HorizontalConnection />
                 <ArrowRightIcon
                   height={24}
@@ -141,54 +146,51 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
               </MiddleContainer>
               <Box>
                 <Circle />
-                <Typography variant='h2' color='neutral100'>
+                <ZigTypography variant='h2' color='neutral100'>
                   {t('standbyFunds')}
-                </Typography>
-                <Typography color='neutral200'>
+                </ZigTypography>
+                <ZigTypography color='neutral200'>
                   {t('standbyFunds-desc')}
-                </Typography>
+                </ZigTypography>
                 <TradingFunds>
-                  <Typography color='neutral400' variant='body2'>
+                  <ZigTypography color='neutral400' variant='body2'>
                     {t('availableWithdrawals')}
                     <InlinePriceLabel
                       value={parseFloat(balance.scaSscSum)}
                       coin={service?.ssc ?? 'USDT'}
                     />
-                  </Typography>
-                  <Typography color='neutral400' variant='body2'>
+                  </ZigTypography>
+                  <ZigTypography color='neutral400' variant='body2'>
                     {t('neededSnapshot')}
                     <InlinePriceLabel
                       value={parseFloat(management.transferOut)}
                       coin={service?.ssc ?? 'USDT'}
                     />
-                  </Typography>
-                  <Typography color='neutral400' variant='body2'>
+                  </ZigTypography>
+                  <ZigTypography color='neutral400' variant='body2'>
                     {t('minBalance.title')}
                     <InlinePriceLabel
                       value={parseFloat(management.minimumSca)}
                       coin={service?.ssc ?? 'USDT'}
                     />
-                    <TextButton
+                    <ZigButton
+                      sx={{ ml: 1.5 }}
+                      variant={'text'}
                       id={'trader-service__edit'}
-                      leftElement={
-                        <EditPenIcon
-                          height={16}
-                          width={16}
-                          color={theme.palette.neutral300}
-                        />
-                      }
-                      caption={t('action:edit')}
+                      startIcon={<EditIcon />}
                       onClick={onClickMinBalance}
-                    />
-                  </Typography>
+                    >
+                      {t('action:edit')}
+                    </ZigButton>
+                  </ZigTypography>
                   {/* <LineSeparator />
-                  <Typography color='neutral400' variant='body2'>
+                  <ZigTypography color='neutral400' variant='body2'>
                     {t('heldInstantWithdrawals')}
                     <InlinePriceLabel
                       value={parseFloat(balance.dfa)}
                       coin={service?.ssc ?? 'USDT'}
                     />
-                  </Typography> */}
+                  </ZigTypography> */}
                 </TradingFunds>
               </Box>
             </BottomContainer>

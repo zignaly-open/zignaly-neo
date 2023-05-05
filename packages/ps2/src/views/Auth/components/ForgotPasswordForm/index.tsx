@@ -2,10 +2,10 @@ import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
-import { Form, TitleHead } from './styles';
+import { Form } from './styles';
 import { ForgotPasswordValidation } from './validations';
 import { ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../../routes';
-import { Button, ZigInput, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useResetPasswordRequestMutation } from 'apis/user/api';
 import AnchorLink from 'components/AnchorLink';
@@ -36,11 +36,9 @@ const ForgotPasswordForm = () => {
         display='flex'
         flexDirection='column'
       >
-        <TitleHead>
-          <ZigTypography variant='h2'>
-            {t('reset-password.reset-password')}
-          </ZigTypography>
-        </TitleHead>
+        <ZigTypography variant={'h1'} align={'center'}>
+          {t('reset-password.reset-password')}
+        </ZigTypography>
         <ZigTypography textAlign='center'>
           {t('reset-password.email-sent')}
         </ZigTypography>
@@ -50,11 +48,9 @@ const ForgotPasswordForm = () => {
 
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
-      <TitleHead>
-        <ZigTypography variant={'h2'}>
-          {t('reset-password.reset-password')}
-        </ZigTypography>
-      </TitleHead>
+      <ZigTypography variant={'h1'} align={'center'}>
+        {t('reset-password.reset-password')}
+      </ZigTypography>
       <Form onSubmit={handleSubmit(submit)}>
         <Controller
           name='email'
@@ -78,15 +74,15 @@ const ForgotPasswordForm = () => {
           mt={2.5}
           gap={5}
         >
-          <Button
+          <ZigButton
             type={'submit'}
-            variant={'primary'}
-            caption={t('reset-password.send-instructions')}
             size={'xlarge'}
             loading={resetPasswordStatus.isLoading}
             disabled={!isValid}
             id='forgotpassword__submit'
-          />
+          >
+            {t('reset-password.send-instructions')}
+          </ZigButton>
           <Box display='flex' flexDirection='column' alignItems='center'>
             <ZigTypography variant='body2' fontWeight={500}>
               {t('reset-password.found-password')}

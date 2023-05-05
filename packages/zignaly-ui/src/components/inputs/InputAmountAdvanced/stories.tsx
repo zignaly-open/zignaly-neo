@@ -6,7 +6,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 import InputAmount from "./";
 
 export default {
-  title: "Inputs/InputAmount",
+  title: "Inputs/___FIXME____InputAmountAdvanced",
   component: InputAmount,
   argTypes: {
     label: {
