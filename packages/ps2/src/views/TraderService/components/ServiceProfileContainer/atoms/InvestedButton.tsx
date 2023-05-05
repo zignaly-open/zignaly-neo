@@ -106,7 +106,10 @@ export const InvestedButtonBase: React.FC<{
           {t('action:edit')}
         </ZigButton>
         {showOtherAccounts && (
-          <ZigTypography color={'neutral500'}>|</ZigTypography>
+          // eslint-disable-next-line i18next/no-literal-string
+          <ZigTypography color={'neutral500'} sx={{ ml: 0.5, mr: 0.5 }}>
+            |
+          </ZigTypography>
         )}
         {showOtherAccounts && <OtherAccountsButton service={service} />}
       </Box>

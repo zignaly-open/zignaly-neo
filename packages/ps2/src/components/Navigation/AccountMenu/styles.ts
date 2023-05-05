@@ -3,12 +3,19 @@ import { ZigTypography } from '@zignaly-open/ui';
 
 export const HeaderDropdownButton = styled('button')<{ active: boolean }>`
   appearance: none;
+  cursor: pointer;
   border: none;
-  height: 56px;
+  height: 54px;
   padding-left: 15px;
   padding-right: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   text-align: center;
   background: ${(props) => (props.active ? '#12152c' : 'transparent')};
+  &:hover {
+    background: #12152c;
+  }
   transition: background-color 0.2s;
   border-radius: 0;
 `;

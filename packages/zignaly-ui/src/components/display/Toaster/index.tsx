@@ -19,7 +19,9 @@ const Toaster = ({ variant = "error", size = "large", caption = "" }: ToasterPro
       <styled.Caption>
         <ZigTypography
           variant={size === "large" ? "body1" : "body2"}
-          color={variant === "error" ? "redGraphOrError" : "greenGraph"}
+          /* eslint-disable-next-line @typescript-eslint/ban-ts-comment */
+          /* @ts-ignore */
+          color={{ error: "redGraphOrError", success: "greenGraph" }[variant]}
           fontWeight="regular"
         >
           {caption}

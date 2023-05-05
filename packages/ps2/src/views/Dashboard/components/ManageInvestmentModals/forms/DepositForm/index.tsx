@@ -33,7 +33,6 @@ import {
   BUY_CRYPTO_URL,
   DEPOSIT_INFO_URL,
 } from '../../../../../../util/constants';
-import { ExternalLink } from '../../../../../../components/AnchorLink';
 
 function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
@@ -113,11 +112,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                 verticalAlign: 'middle',
               }}
             />
-            <ExternalLink
-              href={DEPOSIT_INFO_URL}
-              target={'_blank'}
-              rel={'nofollow noreferrer'}
-            ></ExternalLink>
+            <ZigLink href={DEPOSIT_INFO_URL}></ZigLink>
           </Trans>
         </ZigTypography>
       </Box>

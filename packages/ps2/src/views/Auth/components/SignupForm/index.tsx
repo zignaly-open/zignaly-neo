@@ -106,10 +106,7 @@ const SignupForm: React.FC = () => {
                     }}
                     InputProps={{
                       startAdornment: (
-                        <InputAdornment
-                          position='start'
-                          sx={{ marginRight: '10px', marginLeft: '-10px' }}
-                        >
+                        <InputAdornment position='start'>
                           <EmailOutlinedIcon color={'secondary'} />
                         </InputAdornment>
                       ),
@@ -142,10 +139,7 @@ const SignupForm: React.FC = () => {
                 }
                 InputProps={{
                   startAdornment: (
-                    <InputAdornment
-                      position='start'
-                      sx={{ marginRight: '10px', marginLeft: '-10px' }}
-                    >
+                    <InputAdornment position='start'>
                       <PasswordOutlinedIcon color={'secondary'} />
                     </InputAdornment>
                   ),
@@ -180,19 +174,11 @@ const SignupForm: React.FC = () => {
               type={'submit'}
               variant={'contained'}
               id={'signup__submit'}
-              size={'large'}
+              size={'xlarge'}
               loading={signingUp}
-              fullWidth={true}
-              sx={{ padding: '19px 0', borderRadius: '5px' }}
+              fullWidth
             >
-              <ZigTypography
-                variant={'h3'}
-                letterSpacing={1.2}
-                fontWeight={600}
-                textTransform={'uppercase'}
-              >
-                {t('signup-form.submit')}
-              </ZigTypography>
+              {t('signup-form.submit')}
             </ZigButton>
           </Action>
           <Box

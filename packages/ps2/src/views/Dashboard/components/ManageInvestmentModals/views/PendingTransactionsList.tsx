@@ -97,6 +97,7 @@ const PendingTransactionsList: React.FC<{
           startIcon={<ArrowBackIosIcon />}
           onClick={() => setView(EditInvestmentViews.EditInvestment)}
           size={'large'}
+          variant={'contained'}
         >
           {t('modal.pendingTransaction.button')}
         </ZigButton>
