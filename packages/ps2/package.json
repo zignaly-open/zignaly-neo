@@ -7,7 +7,7 @@
     "start": "react-scripts start",
     "analyze": "rm -rf ./build/*; lerna run build --scope=@zignaly-open/ps2 --include-dependencies; source-map-explorer 'build/static/js/*.js'",
     "build": "react-scripts build && generate-version",
-    "test": "react-scripts test --passWithNoTests",
+    "test": "react-scripts test",
     "release": "export REACT_APP_SENTRY_RELEASE=$(git rev-parse --short HEAD); react-scripts build && node scripts/sentry.js",
     "eject": "react-scripts eject",
     "lint:tsc": "tsc --noemit",
@@ -15,6 +15,11 @@
     "lint:eslint-ci": "eslint --ignore-path .eslintignore ./src --ext .ts,.tsx",
     "lint": "run-s lint:tsc lint:eslint",
     "lint-ci": "run-s lint:tsc lint:eslint-ci"
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "<rootDir>/node_modules/(?!lodash-es|react-markdown|react-image-webp)"
+    ]
   },
   "browserslist": {
     "production": [
@@ -64,6 +69,7 @@
     "i18next-http-backend": "^1.4.1",
     "js-cookie": "^3.0.1",
     "lodash-es": "^4.17.21",
+    "msw": "^1.2.1",
     "mui-modal-provider": "^2.0.0",
     "qrcode.react": "^3.1.0",
     "react": "18.2.0",
@@ -93,13 +99,16 @@
     "yup": "^0.32.11"
   },
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
     "@types/lodash": "^4.14.182",
     "@types/react": "^17",
     "@zignaly-open/eslint-config-zignaly-react": "^0.1.2",
     "eslint": "^8.16.0",
     "eslint-loader": "^4.0.2",
     "lint-staged": "^13.0.3",
+    "lodash": "^4.17.21",
     "npm-run-all": "^4.1.5",
+    "msw": "^1.2.1",
     "prettier": "^2.7.1",
     "webpack": "^5.73.0"
   }
