@@ -23,6 +23,10 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
         {...props}
         inputProps={{
           ...(props.inputProps || {}),
+          "data-testid":
+            props?.inputProps?.["data-testid"] ||
+            (process.env.NODE_ENV === "test" && props.id) ||
+            undefined,
         }}
         label={
           !props.label ? null : (

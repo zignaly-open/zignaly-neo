@@ -48,7 +48,9 @@ const ZigButton = ({
           }
         : {})}
       // @ts-ignore
-      data-testid={props["data-testid"] || props.id}
+      data-testid={
+        props["data-testid"] || (process.env.NODE_ENV === "test" && props.id) || undefined
+      }
       // hack to preserve old behavior but allow for normal mui theming
       color={variant === "outlined" && !color ? "secondary" : color}
       className={active ? "MuiButton-active" : ""}
