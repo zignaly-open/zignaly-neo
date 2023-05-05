@@ -5,6 +5,7 @@ import { ButtonGroup, ButtonGroupProps } from "@mui/material";
 import { Box, styled } from "@mui/system";
 import { Add } from "@mui/icons-material";
 import ZigTypography from "../../display/ZigTypography";
+import EditIcon from "@mui/icons-material/Edit";
 
 export default {
   title: "Inputs/ZigButton",
@@ -124,6 +125,10 @@ const TemplateTextButton: Story<typeof ZigButton> = (args) => {
         Hello, let me tell you a story of a button that lived in a very very long text. Hello, let
         me tell you a story of a button that lived in a very very long text. Yes, a{" "}
         <ZigButton startIcon={<Add />} endIcon={<Add />} variant={"text"}>
+          Button
+        </ZigButton>{" "}
+        can have icons,{" "}
+        <ZigButton startIcon={<EditIcon />} endIcon={<EditIcon />} variant={"text"}>
           Button
         </ZigButton>{" "}
         can have icons, imagine that.

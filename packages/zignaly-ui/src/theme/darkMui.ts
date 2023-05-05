@@ -168,6 +168,11 @@ const darkMui = createTheme({
           ".MuiButton-startIcon": {
             marginLeft: "-6px",
           },
+          ".MuiButton-startIcon, .MuiButton-endIcon": {
+            ".MuiSvgIcon-root": {
+              fontSize: "20px",
+            },
+          },
         },
         sizeLarge: {
           minHeight: "48px",
@@ -181,6 +186,11 @@ const darkMui = createTheme({
           ".MuiButton-startIcon": {
             marginLeft: "-4px",
           },
+          ".MuiButton-startIcon, .MuiButton-endIcon": {
+            ".MuiSvgIcon-root": {
+              fontSize: "16px",
+            },
+          },
         },
         sizeMedium: {
           minHeight: "36px",
@@ -189,6 +199,11 @@ const darkMui = createTheme({
           letterSpacing: "0.55px",
           minWidth: "76px",
           fontSize: "11px",
+          ".MuiButton-startIcon, .MuiButton-endIcon": {
+            ".MuiSvgIcon-root": {
+              fontSize: "13px",
+            },
+          },
         },
         sizeSmall: {
           minHeight: "30px",
@@ -196,6 +211,11 @@ const darkMui = createTheme({
           padding: "4px 18px",
           letterSpacing: "0.55px",
           fontSize: "11px",
+          ".MuiButton-startIcon, .MuiButton-endIcon": {
+            ".MuiSvgIcon-root": {
+              fontSize: "13px",
+            },
+          },
         },
         containedSizeSmall: {
           letterSpacing: "1.1px",
@@ -232,6 +252,7 @@ const darkMui = createTheme({
             top: "-1px",
             ".MuiSvgIcon-root": {
               fill: dark.neutral300,
+              fontSize: "13px",
               verticalAlign: "middle",
             },
           },
