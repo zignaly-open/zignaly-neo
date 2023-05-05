@@ -8,6 +8,7 @@ import { server } from './test/server';
 import ps2Api from './apis/baseApiPs2';
 import { api as walletApi } from './apis/wallet/api';
 import { api as referralApi } from './apis/referrals/api';
+import { cleanup } from '@testing-library/react';
 
 // Establish API mocking before all tests.
 beforeAll(() => {
@@ -22,6 +23,7 @@ afterEach(() => {
   store.dispatch(ps2Api.util.resetApiState());
   store.dispatch(walletApi.util.resetApiState());
   store.dispatch(referralApi.util.resetApiState());
+  cleanup();
 });
 
 // Clean up after the tests are finished.
