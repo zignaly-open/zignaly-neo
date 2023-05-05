@@ -4,9 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Layout, InvestorCounts } from './styles';
 import {
   UserIcon,
-  Typography,
-  PriceLabel,
-  PercentageIndicator,
+  ZigTypography,
+  ChangeIndicator,
   ZigTable,
   createColumnHelper,
   ZigTablePriceLabel,
@@ -21,8 +20,8 @@ import {
   TraderServiceManagement,
 } from '../../../../apis/service/types';
 import ConnectionStateLabel from '../ConnectionStateLabel';
-import { YesNo } from './atoms';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
+import { Box } from '@mui/material';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -44,32 +43,42 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       columnHelper.accessor('userId', {
         header: t('tableHeader.userId'),
       }),
-      columnHelper.accessor(
-        (row) =>
-          new BigNumber(row.invested)
-            .plus(new BigNumber(row.pending))
-            .toFixed(),
-        {
-          header: t('tableHeader.investment'),
-          id: 'investment',
-          cell: (props) => (
+      columnHelper.accessor((row) => new BigNumber(row.invested).toNumber(), {
+        header: () => (
+          <Box display={'flex'} flexDirection={'column'}>
+            {t('tableHeader.invested')}
+            <Box fontSize={'12px'} color={'neutral300'}>
+              {t('tableHeader.pending')}
+            </Box>
+          </Box>
+        ),
+        id: 'investment',
+        cell: (props) => (
+          <Box sx={{ display: 'flex', flexDirection: 'column' }}>
             <ZigTablePriceLabel
               coin={service?.ssc ?? 'USDT'}
               value={props.getValue()}
             />
-          ),
-        },
-      ),
+            <ZigTablePriceLabel
+              showApproximate
+              variant={'body2'}
+              coin={service?.ssc ?? 'USDT'}
+              value={props.row.original.pending}
+              color={'neutral300'}
+            />
+          </Box>
+        ),
+      }),
       columnHelper.accessor('pnlNetLc', {
         header: t('tableHeader.P&L'),
         cell: (props) => (
-          <PriceLabel
-            coin={service?.ssc ?? 'USDT'}
-            value={parseFloat(props.getValue())}
-            bottomElement={
-              <PercentageIndicator value={props.row.original.pnlPctLc} />
-            }
-          />
+          <>
+            <ZigTablePriceLabel
+              coin={service?.ssc ?? 'USDT'}
+              value={parseFloat(props.getValue())}
+            />
+            <ChangeIndicator value={props.row.original.pnlPctLc} />
+          </>
         ),
       }),
       columnHelper.accessor('pnlNetAt', {
@@ -94,10 +103,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         header: t('tableHeader.successFee'),
         cell: (props) => `${props.getValue()}%`,
       }),
-      columnHelper.accessor('payZig', {
-        header: t('tableHeader.feesZIG'),
-        cell: (props) => <YesNo value={props.getValue()} />,
-      }),
       columnHelper.accessor('accountType', {
         header: t('tableHeader.status'),
         cell: (props) => <ConnectionStateLabel stateId={props.getValue()} />,
@@ -120,11 +125,11 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           <>
             <InvestorCounts>
               <UserIcon width={'17px'} height={'20px'} color={'#65647E'} />
-              <Typography variant={'h3'} color={'almostWhite'}>
+              <ZigTypography variant={'h3'} color={'almostWhite'}>
                 {t('number-of-investors', {
                   count: investors?.length,
                 })}
-              </Typography>
+              </ZigTypography>
             </InvestorCounts>
 
             <ZigTable

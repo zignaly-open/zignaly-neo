@@ -1,6 +1,6 @@
 import { ExpandLess, ChevronRight } from '@mui/icons-material';
 import { Box } from '@mui/material';
-import { Avatar, DropDown } from '@zignaly-open/ui';
+import { Avatar, ZigDropdown } from '@zignaly-open/ui';
 import {
   useActiveExchange,
   useCurrentUser,
@@ -21,7 +21,7 @@ export const DropdownExchangeAccount = () => {
   };
 
   return (
-    <DropDown
+    <ZigDropdown
       component={({ open }) => (
         <Box display='flex' gap={1} justifyContent='center'>
           <Avatar size={'medium'} image={activeExchange?.image} />

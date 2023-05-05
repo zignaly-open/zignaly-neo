@@ -1,6 +1,6 @@
 import React from 'react';
-import { Box, Link } from '@mui/material';
-import { ZigTypography } from '@zignaly-open/ui';
+import { Box } from '@mui/material';
+import { ZigLink, ZigTypography } from '@zignaly-open/ui';
 import { StepBox, StepCounter } from './styles';
 import { Trans, useTranslation } from 'react-i18next';
 import AccessTimeFilledRoundedIcon from '@mui/icons-material/AccessTimeFilledRounded';
@@ -42,27 +42,19 @@ const InvestingStep: React.FC<{ step: number }> = ({ step }) => {
               successFee: 5,
             }}
           >
-            <ZigTypography
+            <ZigLink
               id={
                 step === 1
                   ? 'my-portfolio-steps__step-marketplace'
                   : 'my-portfolio-steps__step-deposit'
               }
-              component='span'
-              color={'links'}
-              sx={{
-                cursor: 'pointer',
-                '&:hover': {
-                  textDecoration: 'underline',
-                },
-              }}
               onClick={() => {
                 step === 1 && navigate(ROUTE_PROFIT_SHARING);
                 step === 2 && showModal(DepositModal);
               }}
             />
             {step === 2 && (
-              <Link
+              <ZigLink
                 id={'my-portfolio-steps__step-purchase'}
                 href={BUY_CRYPTO_URL}
                 underline={'hover'}

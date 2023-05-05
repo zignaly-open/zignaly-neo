@@ -8,6 +8,7 @@ import { Box, Grid, InputAdornment } from '@mui/material';
 import {
   ZigButton,
   ZigInput,
+  ZigLink,
   ZigSelect,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -19,7 +20,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { useTraderServiceEditMutation } from 'apis/service/api';
 import { VISIBILITY_LABEL } from './types';
 import { StyledZigSelect } from './styles';
-import { ExternalLink } from 'components/AnchorLink';
 import { HELP_CREATE_SERVICE_MARKETPLACE_URL } from 'util/constants';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { useUpdateEffect } from 'react-use';
@@ -261,7 +261,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                   i18nKey={'edit.visibility.marketplace-requirements'}
                   t={t}
                   components={[
-                    <ExternalLink
+                    <ZigLink
                       href={HELP_CREATE_SERVICE_MARKETPLACE_URL}
                       key={0}
                     />,

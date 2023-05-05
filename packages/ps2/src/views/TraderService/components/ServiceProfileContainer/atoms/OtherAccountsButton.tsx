@@ -4,9 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { useZModal } from '../../../../../components/ZModal/use';
 import { useInvestedAccountsCount } from '../../../../../apis/investment/use';
 import InvestedFromOtherAccounts from '../../InvestedFromOtherAccounts';
-import { TextButton } from '@zignaly-open/ui';
-import { StyledChevronRightIcon } from '../styles';
-import { Box } from '@mui/material';
+import { ZigButton } from '@zignaly-open/ui';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 const OtherAccountsButton: React.FC<{
   service: Service;
@@ -22,18 +21,16 @@ const OtherAccountsButton: React.FC<{
   };
 
   return (
-    <TextButton
+    <ZigButton
+      variant={'text'}
       id={'service__see-all'}
-      caption={t('invest-button.all-accounts', {
+      onClick={onClickViewOther}
+      endIcon={<ChevronRightIcon />}
+    >
+      {t('invest-button.all-accounts', {
         count: investedFromAccounts,
       })}
-      onClick={onClickViewOther}
-      rightElement={
-        <Box ml={-1}>
-          <StyledChevronRightIcon />
-        </Box>
-      }
-    />
+    </ZigButton>
   );
 };
 

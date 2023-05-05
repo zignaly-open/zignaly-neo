@@ -1,5 +1,5 @@
 import { Box, Collapse, Grid } from '@mui/material';
-import { TextButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import ServiceCard from '../ServiceCard';
@@ -12,14 +12,12 @@ const TopServicesCards = ({ prefixId, services }: TopServicesCardsProps) => {
   return (
     <Box>
       <Box display='flex' justifyContent='center' alignItems='center' m={2}>
-        <ZigTypography variant='subtitle2' color='neutral400'>
+        <ZigTypography variant='body2' color='neutral400'>
           {t('card.top-rated')}
         </ZigTypography>
-        <TextButton
-          color={'links'}
-          onClick={() => setShow(!show)}
-          caption={t(show ? 'action:hide' : 'action:show')}
-        />
+        <ZigButton variant={'text'} onClick={() => setShow(!show)}>
+          {t(show ? 'action:hide' : 'action:show')}
+        </ZigButton>
       </Box>
       <Collapse in={show}>
         <Grid

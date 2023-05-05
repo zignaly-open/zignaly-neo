@@ -3,9 +3,9 @@
 	"investors-label": "Inversores",
 	"coins-label": "Monedas",
 	"dropdown": {
-		"manageServices": "Gestionar el Servicio",
+		"manageServices": "Gestionar Servicio",
 		"trade": {
-			"title": "Trade",
+			"title": "Opera",
 			"links": {
 				"positions": "Mis Posiciones",
 				"manual": "Trading Manual",

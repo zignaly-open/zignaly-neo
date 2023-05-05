@@ -1,11 +1,11 @@
-import { Typography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
 import React from 'react';
 import CheckIcon from '@mui/icons-material/Check';
 import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
 import { styled } from '@mui/material';
 
-const TypographyStyled = styled(Typography)<{ opacity: number }>`
+const TypographyStyled = styled(ZigTypography)<{ opacity: number }>`
   opacity: ${(props) => props.opacity};
 
   svg {

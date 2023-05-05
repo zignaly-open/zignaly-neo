@@ -1,6 +1,6 @@
 import {
   createColumnHelper,
-  PercentageIndicator,
+  ChangeIndicator,
   ZigTable,
   ZigTypography,
   ZigChartMini,
@@ -48,27 +48,30 @@ const MyDashboard: React.FC = () => {
   const columnHelper = createColumnHelper<Investment>();
   const columns = useMemo(
     () => [
-      columnHelper.accessor('invested', {
-        header: t('tableHeader.summary.title'),
-        meta: { subtitle: t('tableHeader.summary.subtitle') },
-        cell: ({ row: { original } }) => {
-          const bigNumberInvestment = new BigNumber(original.invested);
-          const bigNumberPending = new BigNumber(original.pending);
-          const totalValue = bigNumberInvestment.plus(bigNumberPending);
-          return (
-            <BalanceSummary
-              prefixId={'portfolio-table'}
-              serviceId={original.serviceId.toString()}
-              totalValue={totalValue.toFixed()}
-              coin={original.ssc}
-              profit={new BigNumber(original.pnlSumLc).toFixed()}
-              onClickEdit={() => onClickEditInvestment(original)}
-            />
-          );
+      columnHelper.accessor(
+        (row) =>
+          new BigNumber(row.invested)
+            .plus(new BigNumber(row.pending))
+            .toNumber(),
+        {
+          header: t('tableHeader.summary.title'),
+          id: 'invested',
+          meta: { subtitle: t('tableHeader.summary.subtitle') },
+          cell: ({ getValue, row: { original } }) => {
+            return (
+              <BalanceSummary
+                prefixId={'portfolio-table'}
+                serviceId={original.serviceId.toString()}
+                totalValue={getValue().toString()}
+                coin={original.ssc}
+                profit={new BigNumber(original.pnlSumLc).toFixed()}
+                onClickEdit={() => onClickEditInvestment(original)}
+              />
+            );
+          },
+          enableHiding: false,
         },
-        enableHiding: false,
-        sortingFn: 'alphanumeric',
-      }),
+      ),
       columnHelper.accessor('serviceName', {
         style: {
           justifyContent: 'flex-start',
@@ -93,7 +96,7 @@ const MyDashboard: React.FC = () => {
                 midLine
                 data={[0, ...(original.sparklines as number[])]}
               />
-              <PercentageIndicator
+              <ChangeIndicator
                 id={`portfolio-table__chart-percentage-${original.serviceId}`}
                 normalized
                 value={new BigNumber(original.pnl30dPct).toFixed()}
@@ -122,7 +125,7 @@ const MyDashboard: React.FC = () => {
       columnHelper.accessor('pnl90dPct', {
         header: t('tableHeader.3-mos-title'),
         cell: ({ getValue, row: { original } }) => (
-          <PercentageIndicator
+          <ChangeIndicator
             id={`portfolio-table__pnl90dPct-${original.serviceId}`}
             normalized
             type='default'
@@ -134,7 +137,7 @@ const MyDashboard: React.FC = () => {
       columnHelper.accessor('pnl180dPct', {
         header: t('tableHeader.6-mos-title'),
         cell: ({ getValue, row: { original } }) => (
-          <PercentageIndicator
+          <ChangeIndicator
             id={`portfolio-table__pnl180dPct-${original.serviceId}`}
             normalized
             type='default'
@@ -147,7 +150,7 @@ const MyDashboard: React.FC = () => {
         header: t('tableHeader.all.title'),
         meta: { subtitle: t('tableHeader.all.subtitle') },
         cell: ({ getValue, row: { original } }) => (
-          <PercentageIndicator
+          <ChangeIndicator
             id={`portfolio-table__pnlPctLc-${original.serviceId}`}
             type='default'
             normalized
@@ -174,7 +177,12 @@ const MyDashboard: React.FC = () => {
             <>
               <Heading>
                 <Box sx={{ flex: '0 0 100px' }} />
-                <ZigTypography variant='h1' align={'center'} sx={{ flex: 1 }}>
+                <ZigTypography
+                  variant='h1'
+                  align={'center'}
+                  sx={{ flex: 1 }}
+                  id={'my-portfolio__title'}
+                >
                   {t('title')}
                 </ZigTypography>
                 <Box sx={{ flex: '0 0 100px' }}>
@@ -195,7 +203,15 @@ const MyDashboard: React.FC = () => {
               </Heading>
               <ZigTableWrapper>
                 <ZigTable
-                  prefixId={'dashboard'}
+                  prefixId={'portfolio'}
+                  initialState={{
+                    sorting: [
+                      {
+                        id: 'invested',
+                        desc: true,
+                      },
+                    ],
+                  }}
                   columns={columns}
                   data={services}
                   emptyMessage={t('table-search-emptyMessage')}

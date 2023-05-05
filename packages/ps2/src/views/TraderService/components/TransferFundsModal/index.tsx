@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldErrorsImpl, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NumericFormat } from 'react-number-format';
 import BigNumber from 'bignumber.js';
@@ -14,11 +14,11 @@ import {
   TypographyNumberResult,
 } from './styles';
 import {
-  Typography,
   SwapVertIcon,
-  Button,
   InputAmountAdvanced,
-  IconButton,
+  InputAmountAdvancedValueType,
+  ZigTypography,
+  ZigButton,
 } from '@zignaly-open/ui';
 import { TransferFormData, TransferModalProps } from './types';
 import { TransferModalValidation } from './validation';
@@ -111,7 +111,7 @@ function TransferModal({
       isLoading={!balance || isTransferring}
     >
       <Box sx={{ marginBottom: 3 }}>
-        <Typography>{t('transferFunds.description')}</Typography>
+        <ZigTypography>{t('transferFunds.description')}</ZigTypography>
       </Box>
 
       {balance && !isTransferring && (
@@ -122,7 +122,14 @@ function TransferModal({
               placeholder={t('transfer.placeholder')}
               fullWidth={true}
               maxLength={26}
-              error={isDirty && t(errors?.amountValue?.value?.message)}
+              error={
+                isDirty &&
+                t(
+                  (
+                    errors?.amountValue as FieldErrorsImpl<InputAmountAdvancedValueType>
+                  )?.value?.message,
+                )
+              }
               name={'amountValue'}
               label={t(
                 fromTradingAccount
@@ -138,17 +145,22 @@ function TransferModal({
               ]}
               showUnit
             />
-            <IconButton
+
+            <ZigButton
               id={'transfer__swap-zig'}
               size='xlarge'
-              icon={<SwapVertIcon color={'#65647E'} />}
-              variant='secondary'
+              variant='outlined'
+              narrow
+              sx={{
+                padding: '10px 20px',
+              }}
               onClick={toggleDestination}
-              type='button'
-            />
+            >
+              <SwapVertIcon width={24} height={24} color={'#65647E'} />
+            </ZigButton>
             <ToContainer>
               <ToOutline>
-                <Typography variant='h2'>
+                <ZigTypography variant='h2'>
                   {t(
                     `transfer.${
                       fromTradingAccount
@@ -156,7 +168,7 @@ function TransferModal({
                         : 'toTradingAccount'
                     }`,
                   )}
-                </Typography>
+                </ZigTypography>
                 <Inline>
                   <TypographyNumberResult
                     variant='bigNumber'
@@ -166,12 +178,12 @@ function TransferModal({
                       ? new BigNumber(amountTransferValue).toString()
                       : '--'}{' '}
                   </TypographyNumberResult>
-                  <Typography variant='h3' color='neutral400'>
+                  <ZigTypography variant='h3' color='neutral400'>
                     {service?.ssc ?? 'USDT'}
-                  </Typography>
+                  </ZigTypography>
                 </Inline>
               </ToOutline>
-              <Typography variant='body2' color='neutral200'>
+              <ZigTypography variant='body2' color='neutral200'>
                 {t('transfer.deposit-available')}
                 <TypographyBalance variant='body2' color='neutral000'>
                   <NumericFormat
@@ -181,18 +193,19 @@ function TransferModal({
                     thousandSeparator={true}
                   />
                 </TypographyBalance>
-              </Typography>
+              </ZigTypography>
             </ToContainer>
           </Body>
 
           <Actions>
-            <Button
+            <ZigButton
               id={'transfer__transfer-now'}
-              caption={t('transfer.now')}
               disabled={!isValid}
               size='xlarge'
               type='submit'
-            />
+            >
+              {t('transfer.now')}
+            </ZigButton>
           </Actions>
         </form>
       )}

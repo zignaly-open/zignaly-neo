@@ -1,7 +1,7 @@
 import { ExpandMore } from "@mui/icons-material";
 import { css, styled } from "@mui/system";
 import { SortDirection } from "@tanstack/react-table";
-import IconButton from "components/inputs/IconButton";
+import { IconButton } from "@mui/material";
 
 export const TableContainer = styled("div")`
   overflow: auto;

@@ -1,4 +1,4 @@
-import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
+import { InputAmountAdvancedValueType } from '@zignaly-open/ui';
 import { CoinBalances } from 'apis/coin/types';
 import { Exchange } from 'apis/user/types';
 import { WalletCoins } from 'apis/wallet/types';
@@ -37,7 +37,7 @@ export type AccountBalances = {
 
 export type SwapFormData = {
   exchangeAccount: string;
-  amount: InputAmountAdvancedValue;
+  amount: InputAmountAdvancedValueType;
 };
 
 export type SwapConfirmFormProps = {

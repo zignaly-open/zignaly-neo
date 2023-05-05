@@ -3,12 +3,8 @@ import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
 import { Layout } from './styles';
 import { BalanceSummaryProps } from './types';
-import {
-  PencilIcon,
-  TextButton,
-  ZigTypography,
-  ZigPriceLabel,
-} from '@zignaly-open/ui';
+import EditIcon from '@mui/icons-material/Edit';
+import { ZigButton, ZigTypography, ZigPriceLabel } from '@zignaly-open/ui';
 import { getColorForNumber } from '../../../../util/numbers';
 import { Box } from '@mui/material';
 
@@ -24,17 +20,18 @@ export const BalanceSummary = ({
   const { t } = useTranslation(['table', 'action']);
   return (
     <Layout>
-      <Box id={`${prefixId}__invested-${serviceId}`}>
+      <Box>
         {dashboardType === 'marketplace' ? (
           <ZigTypography>{t('balanceSummary.invested')}</ZigTypography>
         ) : (
           <ZigPriceLabel
+            id={prefixId && serviceId && `${prefixId}__invested-${serviceId}`}
             value={new BigNumber(totalValue).toFixed()}
             coin={coin}
           />
         )}
       </Box>
-      <Box id={`${prefixId}__profit-${serviceId}`}>
+      <Box>
         {isNaN(+profit) || profit === '' ? (
           // eslint-disable-next-line i18next/no-literal-string
           <ZigTypography variant={'body2'} color={'neutral400'}>
@@ -42,6 +39,7 @@ export const BalanceSummary = ({
           </ZigTypography>
         ) : (
           <ZigPriceLabel
+            id={prefixId && serviceId && `${prefixId}__profit-${serviceId}`}
             value={profit}
             coin={coin}
             color={getColorForNumber(profit)}
@@ -49,13 +47,14 @@ export const BalanceSummary = ({
         )}
       </Box>
 
-      <TextButton
+      <ZigButton
+        variant={'text'}
         id={`${prefixId}__edit-${serviceId}`}
-        leftElement={<PencilIcon color='#65647E' width={16} height={16} />}
-        caption={t('action:edit')}
-        color={'links'}
+        startIcon={<EditIcon />}
         onClick={onClickEdit}
-      />
+      >
+        {t('action:edit')}
+      </ZigButton>
     </Layout>
   );
 };

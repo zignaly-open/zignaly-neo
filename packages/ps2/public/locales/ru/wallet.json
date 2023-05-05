@@ -2,20 +2,30 @@
 	"title": "ZIG Wallet",
 	"totalBalance": "Общий Баланс ZIG",
 	"savings": "Награды и Сбережения",
-	"successFee": "Скидка на комиссию:",
-	"successFeeTooltip": "Оплатите комиссию за успех любого Profit Sharing сервиса с ZIG и получите скидку на сумму платежа.",
+	"successFee": "Скидка на Success Fee:",
+	"tradingFee": "Возврат торговых комиссий:",
+	"successFeeTooltip": "Оплатите success fees любого Profit Sharing сервиса в ZIG и получите скидку на сумму платежа.",
 	"tradingFeeTooltip": "Zignaly вернет на ваш счет всю комиссию за ваши новые сделки в USDT и взимает с вас эквивалентную сумму за вычетом скидки в ZIG.",
 	"withdraw": "Вывод",
+	"savingMoney": "Вы ЭКОНОМИТЕ ДЕНЬГИ с ZIG!",
+	"saveMoney": "ЭКОНОМЬТЕ ДЕНЬГИ с ZIG!",
 	"min": "мин.",
+	"notAvailable": "Сеть недоступна, повторите попытку позже",
 	"balance": {
-		"available": "Доступно"
+		"available": "Доступно",
+		"locked": "Заблокировано",
+		"unstaking": "Unstaking",
+		"staked": "Staked"
 	},
 	"transactions": {
 		"internal": "Внутренний Трансфер",
+		"noData": "Нет транзакций",
 		"header": {
+			"date": "Дата",
 			"type": "Тип",
 			"amount": "Сумма",
 			"coin": "Монета",
+			"network": "Сеть",
 			"status": "Статус"
 		},
 		"walletTransactions": "Операции с Кошельком",
@@ -24,7 +34,7 @@
 			"deposit": "Депозит",
 			"internal": "Внутренний",
 			"reward": "Награда",
-			"successfee": "Комиссия с Дохода",
+			"successfee": "Success Fee",
 			"coinsalvage": "Coin Salvage",
 			"withdraw": "Вывод",
 			"compensation": "Компенсация",
@@ -36,8 +46,10 @@
 			"zigpadtokensreward": "IDO Tokens Распределение",
 			"stakingvault": "Стейкинг Vault",
 			"stakingvaultreturn": "Staking Vault Return",
+			"unstakingvault": "Unstake",
 			"buyzig": "Купить ZIG",
-			"zigbidsreferralcode": "Реферальный код ZIGBids"
+			"zigbidsredeemcode": "Промо Код ZIGBids",
+			"zigbidsreferralcode": "Реферальный Код ZIGBids"
 		},
 		"status": {
 			"pending": "В ожидании",
@@ -47,12 +59,15 @@
 		"details": {
 			"from": "Откуда:",
 			"to": "Куда:",
+			"txHash": "TX Hash:",
 			"note": "Примечание:"
 		}
 	},
 	"deposit": {
 		"deposit": "Депозит",
-		"title": "Депозит Криптовалюты"
+		"title": "Депозит Криптовалюты",
+		"description": "Чтобы внести токены {{coin}}, выберите сеть и отправьте по указанному ниже адресу.",
+		"deposit-zig": "Депозит ZIG"
 	},
 	"coins": {
 		"header": {
@@ -60,19 +75,30 @@
 		}
 	},
 	"buy": {
+		"buy": "Купить",
+		"title": "Купить ZIG coins",
+		"available-exchanges": "доступные биржи.",
 		"buy-exchanges": "Вы можете купить ZIG на этих биржах:",
 		"exchangeAccount": "Выберите Учетную Запись Биржи",
 		"continue": "Перейти к Подтверждению",
+		"confirm": "Подтвердите покупку ZIG",
 		"deposit": {
-			"description": "Чтобы купить ZIGs, вам сначала нужно внести {{coin}} на свой биржевой счет Zignaly.",
+			"title": "Пополните {{coin}}, чтобы купить ZIGs",
 			"external": "Перевести криптовалюту с внешнего кошелька",
-			"noCrypto": "у меня пока нет крипты"
+			"depositCoin": "Пополнить {{coin}}",
+			"buyCoin": "Купить {{coin}}",
+			"noCrypto": "у меня пока нет крипты",
+			"more": "Пополните Больше {{coin}}"
 		},
 		"from": "Откуда:",
 		"swapFrom": "Обмен с",
 		"swapTo": "Поменять на",
+		"success": "Вы успешно купили {{coin}}.",
 		"received": "Полученная сумма",
+		"willReceive": "Вы получите:",
 		"rate": "Rate:",
-		"maxLeft": "Максимальная оставшаяся сумма составляет {{amount}} {{монета}}. Она обнуляется через {{минуты}} минут."
+		"max": "Максимальная сумма составляет {{amount}} {{coin}}.",
+		"maxLeft": "Максимальная оставшаяся сумма составляет {{amount}} {coin}. Будет обновлено через {{mins}} минут.",
+		"buyNow": "Купить {{coin}} Сейчас"
 	}
 }

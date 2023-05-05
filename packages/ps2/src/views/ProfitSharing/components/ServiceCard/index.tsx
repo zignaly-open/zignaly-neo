@@ -1,9 +1,5 @@
 import { Box } from '@mui/material';
-import {
-  PercentageIndicator,
-  ZigChartMini,
-  ZigTypography,
-} from '@zignaly-open/ui';
+import { ChangeIndicator, ZigChartMini, ZigTypography } from '@zignaly-open/ui';
 import { Investment } from 'apis/investment/types';
 import { marketplaceServiceToInvestmentType } from 'apis/marketplace/util';
 import AssetsInPool from 'components/AssetsInPool';
@@ -29,7 +25,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
       <ChartBox>
         <ZigChartMini
           id={prefixId && `${prefixId}__chart-${service.id}`}
-          data={service.sparklines}
+          data={[0, ...service.sparklines]}
           midLine={false}
           height={104}
           width={360}
@@ -49,8 +45,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
           <ZigTypography fontSize='11px' color='neutral200'>
             {t('service:periods.30d')}
           </ZigTypography>
-          <PercentageIndicator
-            id={prefixId && `${prefixId}__pnl30dpct-${service.id}`}
+          <ChangeIndicator
             style={{
               fontSize: '13px',
             }}
@@ -76,8 +71,7 @@ const ServiceCard = ({ prefixId, service }: ServiceCardProps) => {
       >
         <Box display='flex' flexDirection='column' flex={1}>
           <ValueContainer>
-            <PercentageIndicator
-              id={prefixId && `${prefixId}__pnl90dpct-${service.id}`}
+            <ChangeIndicator
               style={{
                 fontSize: '17px',
               }}

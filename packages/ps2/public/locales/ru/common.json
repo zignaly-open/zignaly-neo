@@ -20,15 +20,18 @@
 	},
 	"account-menu": {
 		"isAuth-button-logIn": "Войти",
-		"isAuth-button-signUp": "ЗАРЕГИСТРИРОВАТЬСЯ",
-		"notAuth-dropdown-link-dashboard": "Мое Портфолио",
+		"isAuth-button-signUp": "РЕГИСТРАЦИЯ",
 		"notAuth-dropdown-link-balances": "Мои Балансы",
 		"notAuth-button-logOut": "Выход",
 		"notAuth-dropdown-link-wallet": "ZIG Wallet",
 		"referrals": "Рефералы",
 		"notAuth-dropdown-link-settings": "Настройки",
 		"notAuth-dropdown-link-password": "Пароль",
-		"notAuth-dropdown-link-2fa": "Двухфакторная Аутентификация"
+		"notAuth-dropdown-link-2fa": "Двухфакторная Аутентификация",
+		"portfolio": "Мое Портфолио",
+		"marketplace": "Маркетплейс",
+		"balance": "Балансы",
+		"rewards": "Вознаграждения"
 	},
 	"account-selector": {
 		"type": {
@@ -39,7 +42,7 @@
 	},
 	"navigation-menu": {
 		"profit-sharing": "Просмотреть Топ Трейдеров",
-		"become-trader": "Предложить свой торговый сервис"
+		"become-trader": "Предложите свой Трейдинг Сервис"
 	},
 	"amount": "Сумма",
 	"new-version": "Новая версия, нажмите на меня, чтобы обновить",
@@ -73,5 +76,14 @@
 	"changes-saved": "Изменения успешно сохранены",
 	"name": "Имя",
 	"type-to-confirm": "Введите \" {{word}} \" для подтверждения",
-	"ok": "OK"
+	"ok": "OK",
+	"balance": {
+		"total": "Всего",
+		"available": "Доступно",
+		"deposit-funds": "Пополнить Счет",
+		"find-traders": "Найдите трейдеров для инвестиций",
+		"my-portfolio": "Мое Портфолио"
+	},
+	"follow-us": "Следуйте за нами",
+	"portfolio": "Портфолио"
 }

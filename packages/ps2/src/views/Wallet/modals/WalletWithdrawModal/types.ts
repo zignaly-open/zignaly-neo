@@ -1,4 +1,4 @@
-import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
+import { InputAmountAdvancedValueType } from '@zignaly-open/ui';
 import { WalletCoins } from 'apis/wallet/types';
 
 export type WithdrawFormData = {
@@ -6,7 +6,7 @@ export type WithdrawFormData = {
   network: string;
   tag: string;
   address: string;
-  amount: InputAmountAdvancedValue;
+  amount: InputAmountAdvancedValueType;
 };
 
 export type WalletWithdrawModalProps = {

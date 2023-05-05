@@ -17,7 +17,7 @@
 	"balanceSummary-invested": "Инвестировано",
 	"selector-validation-notData": "Данные недоступны",
 	"investColumn": {
-		"successFess": "10% Комиссия за Успех",
+		"successFess": "10% Success Fee",
 		"liquidated": "ЛИКВИДИРОВАН"
 	},
 	"tooltip-columnHeader": "Переключить Сортировать по",
@@ -25,5 +25,5 @@
 	"columns-hideOrShow": "Показать\/Скрыть Столбцы",
 	"assetsInPool-investors_one": "{{count}} инвестор",
 	"assetsInPool-investors_other": "{{count}} инвесторов",
-	"owner-verified": "Менеджер прошел проверку"
+	"owner-verified": "Управляющий прошел проверку"
 }

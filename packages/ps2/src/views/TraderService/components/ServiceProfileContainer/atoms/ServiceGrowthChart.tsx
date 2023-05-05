@@ -10,6 +10,7 @@ import {
   ZigButtonGroupInput,
   ZigChart,
   ZigPriceLabel,
+  CenteredLoader,
   ZigSelect,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -23,7 +24,6 @@ import {
 import { useChartConfig, useChartData } from '../../../../../apis/service/use';
 import Stub from '../../../../../components/Stub';
 import { useTranslation } from 'react-i18next';
-import CenteredLoader from '../../../../../components/CenteredLoader';
 import PercentChange from './PercentChange';
 import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../../util/numbers';
@@ -94,6 +94,8 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
     GraphChartType.pnl_pct,
   ].includes(chartType);
 
+  const precision = isPercent ? 2 : getPrecisionForCoin(service.ssc) ?? 8;
+
   return (
     <Box>
       <Box
@@ -133,9 +135,9 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                       </ZigTypography>
                     )}
                     <ZigPriceLabel
+                      precision={precision}
                       coin={service.ssc}
                       variant={'bigNumber'}
-                      shorten
                       color={
                         chartType === GraphChartType.sbt_ssc
                           ? 'neutral200'
@@ -273,6 +275,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                     }),
               })}`
             }
+            precision={precision}
           />
         )}
       </ChartWrapper>

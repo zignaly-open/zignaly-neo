@@ -66,7 +66,8 @@
 	"deposit": {
 		"deposit": "Nạp",
 		"title": "Nạp tiền",
-		"description": "Để nạp {{coin}}, hãy chọn mạng lưới và gửi đến địa chỉ bên dưới."
+		"description": "Để nạp {{coin}}, hãy chọn mạng lưới và gửi đến địa chỉ bên dưới.",
+		"deposit-zig": "Nạp ZIG"
 	},
 	"coins": {
 		"header": {
@@ -76,7 +77,6 @@
 	"buy": {
 		"buy": "Mua",
 		"title": "Mua ZIG",
-		"description": "Nếu bạn muốn dùng nhiều hơn {{max}} {{coin}} , hãy mua ZIG từ một trong < 0 > sàn sau. < \/0 >",
 		"available-exchanges": "Các exchange có sẵn.",
 		"buy-exchanges": "Bạn có thể mua ZIG trên các sàn giao dịch sau:",
 		"exchangeAccount": "Chọn Tài khoản Exchange",
@@ -84,7 +84,6 @@
 		"confirm": "Xác nhận mua ZIG",
 		"deposit": {
 			"title": "Nạp {{coin}} để mua ZIG",
-			"description": "Để mua ZIG, trước tiên bạn cần gửi {{coin}} vào Tài khoản Zignaly Exchange của mình.",
 			"external": "Chuyển tiền từ ví bên ngoài",
 			"depositCoin": "Nạp tiền {{coin}}",
 			"buyCoin": "Mua {{coin}}",

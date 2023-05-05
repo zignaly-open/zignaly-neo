@@ -1,19 +1,19 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { LiquidatedLabel as LiquidatedLabelElement } from '../styles';
-import { Typography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
 
 const LiquidatedLabel: React.FC = () => {
   const { t } = useTranslation('service');
   return (
     <LiquidatedLabelElement sx={{ p: 2.5 }}>
-      <Typography
-        weight={'demibold'}
-        variant={'buttonxl'}
+      <ZigTypography
+        fontWeight={'demibold'}
+        variant={'body1'}
         color='redGraphOrError'
       >
         {t('liquidated')}
-      </Typography>
+      </ZigTypography>
     </LiquidatedLabelElement>
   );
 };

@@ -1,8 +1,7 @@
-import { ZigButton } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import React from 'react';
 import {
   WithdrawFundsOptionWrapper,
-  WithdrawFundsSpaceTaker,
   WithdrawFundsButtonWrapper,
 } from '../styles';
 import InvestorDetails from './InvestorDetails';
@@ -30,14 +29,14 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
         >
           <Grid item sm={12}>
             <WithdrawFundsOptionWrapper>
-              <WithdrawFundsSpaceTaker
+              <ZigTypography
                 component={'p'}
+                sx={{ textAlign: 'justify' }}
                 variant={'body1'}
                 color={'neutral200'}
-                weight={'regular'}
               >
                 {t('modal.withdrawInvestment.freeWithdrawal.description')}
-              </WithdrawFundsSpaceTaker>
+              </ZigTypography>
 
               <WithdrawFundsButtonWrapper>
                 <ZigButton

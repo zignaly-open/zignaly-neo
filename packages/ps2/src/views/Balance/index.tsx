@@ -1,8 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import {
   MarginContainer,
   PageContainer,
-  TextButton,
   ZigButton,
   ZigTab,
   ZigTabPanel,
@@ -46,23 +45,10 @@ const MyBalances: React.FC = () => {
     }),
   );
 
-  const maxLegend = useCallback(
-    (_, state): CSSObject => ({
-      display: state.selectProps.menuIsOpen ? 'none' : 'inline-block',
-      textAlign: 'center',
-
-      ':after': {
-        content: `'\\A ${t('transactions-history:filter.max')}'`,
-        whiteSpace: 'pre',
-      },
-    }),
-    [t],
-  );
-
   return (
     <PageContainer className={'withSubHeader'}>
       <MarginContainer>
-        <Header sx={{}}>
+        <Header>
           <Box sx={{ flex: '0 0 100px' }} />
           <BalanceAccountSelector />
           <Box sx={{ flex: '0 0 100px' }}>
@@ -97,24 +83,36 @@ const MyBalances: React.FC = () => {
               label={t('my-balances:deposits-withdrawals')}
               asideComponent={
                 <Box display='flex' gap={2}>
-                  <TextButton
+                  <ZigButton
+                    variant={'text'}
                     id={'balance__export'}
-                    rightElement={
-                      <OpenInNew sx={{ color: 'links', width: '15px' }} />
-                    }
-                    caption={t('action:export')}
+                    endIcon={<OpenInNew />}
                     onClick={() => {
                       showModal(ExportModal, {
                         type: type !== 'all' ? type : null,
                       });
                     }}
-                  />
+                  >
+                    {t('action:export')}
+                  </ZigButton>
                   <StyledZigSelect
                     options={filterOptions}
                     value={type}
                     onChange={setType}
                     styles={{
-                      singleValue: maxLegend,
+                      singleValue: (_, state): CSSObject => ({
+                        display: state.selectProps.menuIsOpen
+                          ? 'none'
+                          : 'inline-block',
+                        textAlign: 'center',
+
+                        ':after': {
+                          content: `'\\A ${t(
+                            'transactions-history:filter.max',
+                          )}'`,
+                          whiteSpace: 'pre',
+                        },
+                      }),
                     }}
                   />
                 </Box>
