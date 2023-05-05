@@ -25,7 +25,10 @@ import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
 import { setChartTimeframe, setChartType } from './store';
 import { useMemo } from 'react';
-import { formatMonthDay } from '../../views/Dashboard/components/MyDashboard/util';
+import {
+  formatMonthDay,
+  formatMonthDayYear,
+} from '../../views/Dashboard/components/MyDashboard/util';
 
 export function useTraderServices() {
   const isAuthenticated = useIsAuthenticated();
@@ -149,14 +152,37 @@ export function useChartData({
     }
 
     const dates = Object.entries(chart).sort(([a], [b]) => a.localeCompare(b));
-    const graph = dates?.map(([date, value]) => {
+    const graph = dates?.reduce((acc, [date, value]) => {
       const dateObj = parse(date, 'yyyy-MM-dd', Date.now());
-      return {
-        x: formatMonthDay(dateObj),
-        date: dateObj,
-        y: value,
-      };
-    });
+      let label = formatMonthDay(dateObj);
+      const found = acc.find((a) => a.x === label);
+      if (found) {
+        // Duplicate label, append year to avoid overlapping issue
+        label = formatMonthDayYear(dateObj);
+      }
+
+      return [
+        ...acc,
+        {
+          x: label,
+          date: dateObj,
+          y: value,
+        },
+      ];
+    }, []);
+
+    if (chartType === GraphChartType.pnl_pct_compound) {
+      // prepend previous date as 0 to graph
+      const firstDate = graph?.[0]?.date;
+      if (firstDate && graph?.[0]?.y !== 0) {
+        const previousDate = subDays(firstDate, 1);
+        graph.unshift({
+          x: formatMonthDay(previousDate),
+          date: previousDate,
+          y: 0,
+        });
+      }
+    }
 
     return {
       summary: data?.summary,
