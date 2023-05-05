@@ -9,21 +9,6 @@ import ps2Api from './apis/baseApiPs2';
 import { api as walletApi } from './apis/wallet/api';
 import { api as referralApi } from './apis/referrals/api';
 
-jest.mock('react-i18next', () => ({
-  useTranslation: () => {
-    return {
-      t: (str: string) => str,
-      i18n: {
-        changeLanguage: () => new Promise(() => {}),
-      },
-    };
-  },
-  initReactI18next: {
-    type: '3rdParty',
-    init: () => {},
-  },
-}));
-
 // Establish API mocking before all tests.
 beforeAll(() => {
   server.listen();
