@@ -34,7 +34,6 @@ const BalanceAccountSelector: React.FC = () => {
                 id={'balance__account-switcher'}
                 variant={'outlined'}
                 active={open}
-                sx={{ padding: '6px' }}
                 narrow
               >
                 <ArrowBottomIcon
