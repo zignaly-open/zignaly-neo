@@ -134,7 +134,9 @@ function AuthVerifyModal({
     >
       <Title>
         {texts.description && (
-          <ZigTypography>{texts.description}</ZigTypography>
+          <ZigTypography id={'auth-verify-modal__description'}>
+            {texts.description}
+          </ZigTypography>
         )}
       </Title>
       <Container>

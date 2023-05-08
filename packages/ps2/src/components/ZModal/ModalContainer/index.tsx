@@ -33,6 +33,7 @@ function ModalContainer({
               variant='h1'
               sx={{ paddingRight: '20px' }}
               color='neutral100'
+              id={'modal__title'}
             >
               {title}
             </Title>
@@ -42,7 +43,10 @@ function ModalContainer({
           ? onClickClose &&
             typeof onClickClose === 'function' && (
               <HeaderButton onClick={onClickClose}>
-                <CloseIcon color={theme.palette.neutral300} />
+                <CloseIcon
+                  color={theme.palette.neutral300}
+                  id={'modal__close'}
+                />
               </HeaderButton>
             )
           : customHeaderAction}
