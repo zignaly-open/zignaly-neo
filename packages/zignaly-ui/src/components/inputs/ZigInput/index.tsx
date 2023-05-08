@@ -57,12 +57,18 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
           ...(sensitive
             ? {
                 endAdornment: [
-                  <InputAdornment position="end" key={props.id + "sensivive"}>
+                  <InputAdornment position="end" key={props.id + "sensitive"}>
                     {!!sensitive && (
                       <EyeIcon
+                        id={
+                          props?.id && isShown
+                            ? `${props.id}-visibility-off-icon`
+                            : `${props.id}-visibility-icon`
+                        }
                         onClick={() => setIsShown((v) => !v)}
                         width={40}
                         height={40}
+                        data-testid={null}
                         sx={ZigInputInteractiveAdornmentStyle}
                       />
                     )}
