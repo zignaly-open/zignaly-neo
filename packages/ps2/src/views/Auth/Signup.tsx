@@ -235,7 +235,7 @@ const Signup: React.FC = () => {
             alignItems={'center'}
             justifyContent={'center'}
             gap={'90px'}
-            paddingTop={'20px'}
+            padding={'20px 0'}
           >
             <Grid item>
               <ZigLink href={FORBES_URL}>
