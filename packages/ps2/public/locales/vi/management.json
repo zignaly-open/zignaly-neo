@@ -44,7 +44,7 @@
 	"availableWithdrawals": "Có thể rút:",
 	"api-keys": {
 		"title": "Giao dịch với API",
-		"description": "Tạo Binance API key cho dịch vụ Profit-sharing và kết nối chúng với công cụ hoặc ứng dụng yêu thích của bạn. Bạn cũng có thể kết nối các khóa API này với ứng dụng giao dịch Zignaly của chúng tôi tại <0>trading.zignaly.com<\/0>.",
+		"description": "Tạo Binance API key cho dịch vụ Profit-sharing và kết nối chúng với công cụ hoặc ứng dụng yêu thích của bạn.",
 		"create-key": "Tạo khóa API",
 		"no-keys": "Không có mã API nào",
 		"no-keys-description": "Bạn chưa tạo bất kỳ API key nào",

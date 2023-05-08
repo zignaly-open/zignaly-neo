@@ -201,6 +201,7 @@ const SwapForm = ({
                   size={'large'}
                   disabled={!isValid || !amountTo}
                   variant='contained'
+                  sx={{ mb: 1 }}
                 >
                   {t('buy.continue')}
                 </ZigButton>
