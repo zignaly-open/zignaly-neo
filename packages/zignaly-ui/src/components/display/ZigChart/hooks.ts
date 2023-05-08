@@ -42,12 +42,13 @@ export function useChartData(
 } {
   const [processedData, yDomain] = useMemo(() => {
     const chart = data.map((value, index) => {
-      const y = typeof value === "number" ? value : value.y;
+      const { x, y, ...rest } = typeof value === "object" ? value : { x: index, y: value };
       return {
-        ...(typeof value === "object" && { ...value }),
-        x: index,
+        x,
         // Remove extra decimals to normalize range (e.g. avoiding 0 to 0.0001%)
         y: +y.toFixed(precision),
+        // Keep rest of properties that may be useful for tooltip
+        ...rest,
       };
     });
     const yDomain = getYDomain(chart);
