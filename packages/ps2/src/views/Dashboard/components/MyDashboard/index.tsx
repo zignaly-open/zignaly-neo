@@ -88,26 +88,35 @@ const MyDashboard: React.FC = () => {
       }),
       columnHelper.accessor('pnl30dPct', {
         header: t('tableHeader.1-mo.title'),
-        cell: ({ row: { original } }) =>
-          original.pnl30dPct || Object.keys(original.sparklines).length > 1 ? (
-            <>
-              <ZigChartMini
-                id={`portfolio-table__chart-${original.serviceId}`}
-                midLine
-                data={[0, ...(original.sparklines as number[])]}
-              />
-              <ChangeIndicator
-                id={`portfolio-table__chart-percentage-${original.serviceId}`}
-                normalized
-                value={new BigNumber(original.pnl30dPct).toFixed()}
-                type='graph'
-              />
-            </>
-          ) : (
-            <ZigTypography variant='body2' color='neutral400'>
-              {t('tableHeader.1-mo.no-data')}
-            </ZigTypography>
-          ),
+        cell: ({ row: { original } }) => (
+          <Box
+            minHeight={'135px'}
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'center'}
+          >
+            {original.pnl30dPct ||
+            Object.keys(original.sparklines).length > 1 ? (
+              <>
+                <ZigChartMini
+                  id={`portfolio-table__chart-${original.serviceId}`}
+                  midLine
+                  data={[0, ...(original.sparklines as number[])]}
+                />
+                <ChangeIndicator
+                  id={`portfolio-table__chart-percentage-${original.serviceId}`}
+                  normalized
+                  value={new BigNumber(original.pnl30dPct).toFixed()}
+                  type='graph'
+                />
+              </>
+            ) : (
+              <ZigTypography variant='body2' color='neutral400'>
+                {t('tableHeader.1-mo.no-data')}
+              </ZigTypography>
+            )}
+          </Box>
+        ),
         sortingFn: 'alphanumeric',
       }),
       columnHelper.accessor('pnlDailyMeanLc', {
