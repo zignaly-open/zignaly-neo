@@ -177,6 +177,11 @@ const WalletTransactions = () => {
           <ZigButton
             variant={'text'}
             id={'wallet__export-transactions'}
+            sx={{
+              '.MuiSvgIcon-root.MuiSvgIcon-root': {
+                fill: (theme) => theme.palette.links,
+              },
+            }}
             endIcon={<OpenInNew />}
             onClick={() => downloadCsv()}
             loading={downloadCsvStatus.isLoading}
