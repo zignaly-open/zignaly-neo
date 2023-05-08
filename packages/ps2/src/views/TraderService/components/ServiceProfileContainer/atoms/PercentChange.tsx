@@ -6,6 +6,7 @@ import { ChangeIndicatorSmall, PercentChangeContainer } from '../styles';
 import { ZigTypography, shortenNumber } from '@zignaly-open/ui';
 import { Variant } from '@mui/material/styles/createTypography';
 import { Tooltip } from '@mui/material';
+import { NumericFormat } from 'react-number-format';
 
 const PercentChange: React.FC<{
   id?: string;
@@ -65,7 +66,12 @@ const PercentChange: React.FC<{
       {+value > 0 ? '' : <>&ndash;</>}
       {isFinite ? (
         shorten ? (
-          `${+Math.abs(shortened.toFixed(shortenedPrecision))}${shortenSuffix}`
+          <NumericFormat
+            displayType={'text'}
+            value={Math.abs(shortened)}
+            decimalScale={shortenedPrecision}
+            suffix={shortenSuffix}
+          />
         ) : (
           t('common:number', { value: Math.abs(+value || 0) })
         )
