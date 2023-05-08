@@ -44,7 +44,7 @@
 	"availableWithdrawals": "Доступно для вывода:",
 	"api-keys": {
 		"title": "Торговля с API",
-		"description": "Создайте API-ключи Binance для Profit Sharing и подключите их к своему любимому терминалу или сервису. Вы также можете подключить эти API-ключи к нашему торговому терминалу Zignaly на сайте <0>trading.zignaly.com<\/0>.",
+		"description": "Создайте API-ключи Binance для Profit Sharing и подключите их к своему любимому терминалу или сервису.",
 		"create-key": "Создать ключ API",
 		"no-keys": "Нет ключей API",
 		"no-keys-description": "Вы еще не создали ни одного API-ключа",
