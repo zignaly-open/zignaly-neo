@@ -98,7 +98,7 @@ export default function ZigTable<T extends object>({
                                 {flexRender(header.column.columnDef.header, header.getContext())}
                               </ZigTypography>
                               {header.column.columnDef.meta?.subtitle && (
-                                <ZigTypography color="neutral400" variant="h5">
+                                <ZigTypography color="neutral300" component="p" variant="caption">
                                   {flexRender(
                                     header.column.columnDef.meta.subtitle,
                                     header.getContext(),

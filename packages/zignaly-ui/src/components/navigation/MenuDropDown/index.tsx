@@ -59,7 +59,11 @@ const MenuDropDown = (
         onClick={handleActiveDropDown}
       >
         <Field>
-          {secondaryTitle && <ZigTypography variant={"h5"}>{secondaryTitle}</ZigTypography>}
+          {secondaryTitle && (
+            <ZigTypography variant={"caption"} component="p">
+              {secondaryTitle}
+            </ZigTypography>
+          )}
           <ZigTypography variant={"h3"}>{title}</ZigTypography>
         </Field>
         <ArrowIcon>
