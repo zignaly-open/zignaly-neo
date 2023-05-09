@@ -246,7 +246,7 @@ export function useWithdrawInvestment(): {
         exchangeInternalId: exchange.internalId,
         amount: amount.toString(),
       }).unwrap();
-      await refetch();
+      refetch();
       await fetchBalance({
         exchangeInternalId: exchange.internalId,
         force: true,
