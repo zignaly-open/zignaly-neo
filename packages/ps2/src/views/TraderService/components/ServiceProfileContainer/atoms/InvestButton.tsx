@@ -85,7 +85,12 @@ const InvestButton: React.FC<{
             )}
           </ZigTypography>
           {!maxReached && (
-            <ZigTypography variant={'h5'} color='neutral150' fontWeight={500}>
+            <ZigTypography
+              variant={'caption'}
+              component='p'
+              color='neutral150'
+              fontWeight={500}
+            >
               {t('invest-button.x-success-fee', {
                 fee: service.successFee,
               })}
