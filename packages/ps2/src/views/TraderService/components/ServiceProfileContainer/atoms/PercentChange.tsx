@@ -3,16 +3,18 @@ import { useTranslation } from 'react-i18next';
 import ArrowDropDown from '@mui/icons-material/ArrowDropDown';
 import ArrowDropUp from '@mui/icons-material/ArrowDropUp';
 import { ChangeIndicatorSmall, PercentChangeContainer } from '../styles';
-import { ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography, shortenNumber } from '@zignaly-open/ui';
 import { Variant } from '@mui/material/styles/createTypography';
 import { Tooltip } from '@mui/material';
+import { NumericFormat } from 'react-number-format';
 
 const PercentChange: React.FC<{
   id?: string;
   value: string | null | number;
   colored?: boolean;
   variant?: Variant;
-}> = ({ id, value, colored, variant = 'caption' }) => {
+  shorten?: boolean;
+}> = ({ id, value, colored, variant = 'caption', shorten }) => {
   const { t } = useTranslation('common');
   const color = colored
     ? +value < 0
@@ -21,6 +23,12 @@ const PercentChange: React.FC<{
     : 'neutral200';
 
   const isFinite = Number.isFinite(+value || 0);
+
+  const {
+    value: shortened,
+    precision: shortenedPrecision,
+    suffix: shortenSuffix,
+  } = shortenNumber(+value);
 
   const tooltipWrap = (v: ReactElement) =>
     !isFinite ? (
@@ -57,9 +65,17 @@ const PercentChange: React.FC<{
       {/* eslint-disable-next-line i18next/no-literal-string */}
       {+value > 0 ? '' : <>&ndash;</>}
       {isFinite ? (
-        t('common:number', { value: Math.abs(+value || 0) })
+        shorten ? (
+          <NumericFormat
+            displayType={'text'}
+            value={Math.abs(shortened)}
+            decimalScale={shortenedPrecision}
+            suffix={shortenSuffix}
+          />
+        ) : (
+          t('common:number', { value: Math.abs(+value || 0) })
+        )
       ) : (
-        // eslint-disable-next-line i18next/no-literal-string
         <>{'∞'}</>
       )}
 

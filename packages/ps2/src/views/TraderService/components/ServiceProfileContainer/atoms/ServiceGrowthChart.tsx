@@ -137,6 +137,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                     )}
                     <ZigPriceLabel
                       precision={precision}
+                      shorten
                       coin={service.ssc}
                       variant={'bigNumber'}
                       color={
@@ -185,6 +186,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   colored
                   variant='h2'
                   value={data?.percentDiff}
+                  shorten
                 />
               </GraphPercentageWrapperBox>
             )}
