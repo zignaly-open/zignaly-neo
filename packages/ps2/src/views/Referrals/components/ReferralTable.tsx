@@ -179,7 +179,9 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
               onClick={exporter}
               variant={'text'}
               sx={{
-                color: (theme) => theme.palette.links,
+                '.MuiSvgIcon-root.MuiSvgIcon-root': {
+                  fill: (theme) => theme.palette.links,
+                },
               }}
               endIcon={<OpenInNew />}
             >

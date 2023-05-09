@@ -86,6 +86,11 @@ const MyBalances: React.FC = () => {
                   <ZigButton
                     variant={'text'}
                     id={'balance__export'}
+                    sx={{
+                      '.MuiSvgIcon-root.MuiSvgIcon-root': {
+                        fill: (theme) => theme.palette.links,
+                      },
+                    }}
                     endIcon={<OpenInNew />}
                     onClick={() => {
                       showModal(ExportModal, {
