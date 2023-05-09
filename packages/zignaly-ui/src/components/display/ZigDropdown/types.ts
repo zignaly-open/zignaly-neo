@@ -17,6 +17,7 @@ export type ZigDropdownOption = Option & {
 };
 
 export type ZigDropdownProps = {
+  id?: string;
   options: ZigDropdownOption[];
   component: ({ open }: { open: boolean }) => JSX.Element;
   anchorOrigin?: PopoverOrigin;

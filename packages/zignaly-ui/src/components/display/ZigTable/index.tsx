@@ -77,11 +77,13 @@ export default function ZigTable<T extends object>({
                       key={header.id}
                       colSpan={header.colSpan}
                       id={
-                        prefixId &&
-                        header?.column?.columnDef?.header &&
-                        `${prefixId}-table__header-${header.column.columnDef.header
-                          .toString()
-                          .replace(/ /g, "")}`
+                        typeof header?.column?.columnDef?.header === "string"
+                          ? prefixId &&
+                            `${prefixId}-table__header-${header.column.columnDef.header
+                              .toString()
+                              .replace(/ /g, "")}`
+                          : header?.column?.columnDef?.id &&
+                            `${prefixId}-table__header-${header.column.columnDef.id}`
                       }
                     >
                       {header.isPlaceholder ? null : (
@@ -105,13 +107,17 @@ export default function ZigTable<T extends object>({
                               )}
                             </div>
                             {header.column.getCanSort() && (
-                              <SortIcon isSorted={header.column.getIsSorted()} />
+                              <SortIcon
+                                isSorted={header.column.getIsSorted()}
+                                id={prefixId && `${prefixId}-table__sorted-icon`}
+                              />
                             )}
                           </SortBox>
                           {enableColumnVisibility &&
                             table.getHeaderGroups().length === groupIndex + 1 &&
                             headerGroup.headers.length === index + 1 && (
                               <ZigDropdown
+                                id={prefixId && `${prefixId}-table__popover-filter`}
                                 component={() => (
                                   <HeaderIconButton>
                                     <MoreVert sx={{ color: "neutral200" }} />

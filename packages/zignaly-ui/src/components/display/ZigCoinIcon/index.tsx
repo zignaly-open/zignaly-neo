@@ -10,6 +10,7 @@ const ZigCoinIcon = ({
   // FIXME: wtf are we passing a classname?
   className = "",
   bucket = "coins-binance",
+  id,
 }: ZIGCoinIconProps) => {
   const s = typeof size === "number" ? size : sizes[size];
   const [src, setSrc] = useState(
@@ -19,11 +20,11 @@ const ZigCoinIcon = ({
   if (!coin) return null;
 
   return src ? (
-    <Icon src={src} alt={coin} size={s} className={className} onError={onError} />
+    <Icon src={src} alt={coin} size={s} className={className} onError={onError} id={id} />
   ) : coin.toLowerCase() === "zig" ? (
-    <ZignalyIcon width={sizes[size as CoinSizes]} height={sizes[size as CoinSizes]} />
+    <ZignalyIcon width={sizes[size as CoinSizes]} height={sizes[size as CoinSizes]} id={id} />
   ) : (
-    <Placeholder size={s} className={className} as="div">
+    <Placeholder size={s} className={className} as="div" id={id}>
       {coin[0]}
     </Placeholder>
   );
