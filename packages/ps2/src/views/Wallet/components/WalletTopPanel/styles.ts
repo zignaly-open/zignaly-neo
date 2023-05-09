@@ -5,8 +5,7 @@ import { withAttrs } from 'util/styles';
 export const TopPanel = styled(Box)`
   background: #13122566;
   border-radius: 16px;
-  margin: 21px 0 40px;
-  padding: 60px 8%;
+  padding: 40px 8% 80px;
 `;
 
 export const SubTitle = withAttrs(ZigTypography, {
@@ -15,7 +14,7 @@ export const SubTitle = withAttrs(ZigTypography, {
   fontSize: 12,
   color: 'neutral300',
   mb: '20px',
-  ml: '51px',
+  ml: '57px',
 });
 
 export const Separator = styled('div')`
