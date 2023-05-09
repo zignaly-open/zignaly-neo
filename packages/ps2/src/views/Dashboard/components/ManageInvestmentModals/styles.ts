@@ -70,6 +70,7 @@ export const WithdrawFundsOptionWrapper = styled('div')<{ border?: boolean }>`
 
 export const WithdrawFundsButtonWrapper = styled('div')`
   text-align: center;
+  margin-top: 56px;
 
   button {
     min-width: 170px;
