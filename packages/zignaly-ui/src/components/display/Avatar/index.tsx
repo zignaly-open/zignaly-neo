@@ -21,7 +21,7 @@ const Avatar = ({ size = AvatarSizes.MEDIUM, hash, image, alt, id }: AvatarTypeP
       {image ? (
         <Image src={image} alt={alt} />
       ) : (
-        <JazzIcon data-testid="icon-input" ref={jazzIconRef} />
+        <JazzIcon id={"icon-input"} data-testid="icon-input" ref={jazzIconRef} />
       )}
     </Layout>
   );

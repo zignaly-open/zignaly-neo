@@ -69,6 +69,7 @@ function Button({
         <styled.ElementsContainer>
           {leftElement && (
             <styled.LeftElement
+              id={"button-left-element"}
               data-testid={testIdLeftElement ? testIdLeftElement : "button-left-element"}
             >
               {renderLeftElement}
@@ -77,6 +78,7 @@ function Button({
           <styled.CaptionContainer>
             {caption && (
               <styled.Caption
+                id={"button-caption-element"}
                 data-testid={testIdCaptionElement ? testIdCaptionElement : "button-caption-element"}
               >
                 {caption}
@@ -86,6 +88,7 @@ function Button({
           </styled.CaptionContainer>
           {rightElement && (
             <styled.RightElement
+              id={"button-right-element"}
               data-testid={testIdRightElement ? testIdRightElement : "button-right-element"}
             >
               {renderRightElement}
