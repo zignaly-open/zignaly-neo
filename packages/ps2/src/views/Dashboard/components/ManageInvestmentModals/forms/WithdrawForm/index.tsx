@@ -26,6 +26,7 @@ import LabelValueLine from './atoms/LabelValueLine';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import { useWithdrawMutation } from 'apis/coin/api';
 import { useActiveExchange, useCheck2FA } from 'apis/user/use';
+import { useLazyBalanceQuery } from 'apis/user/api';
 
 function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const { t } = useTranslation('withdraw-crypto');
@@ -36,6 +37,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const [confirmationData, setConfirmationData] = useState<WithdrawFormData>();
   const { internalId } = useActiveExchange();
   const [withdraw, withdrawStatus] = useWithdrawMutation();
+  const [fetchBalance] = useLazyBalanceQuery();
 
   const check2FA = useCheck2FA({
     status: withdrawStatus,
@@ -52,6 +54,11 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
         amount: confirmationData.amount.value.toString(),
         code,
       }).unwrap();
+      await fetchBalance({
+        exchangeInternalId: internalId,
+        force: true,
+      });
+
       setStep('success');
     });
   };
