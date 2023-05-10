@@ -36,7 +36,11 @@ const ForgotPasswordForm = () => {
         display='flex'
         flexDirection='column'
       >
-        <ZigTypography variant={'h1'} align={'center'}>
+        <ZigTypography
+          variant={'h1'}
+          align={'center'}
+          textTransform={'capitalize'}
+        >
           {t('reset-password.reset-password')}
         </ZigTypography>
         <ZigTypography textAlign='center'>
@@ -52,6 +56,7 @@ const ForgotPasswordForm = () => {
         variant={'h1'}
         align={'center'}
         id={'forgot-password__title'}
+        textTransform={'capitalize'}
       >
         {t('reset-password.reset-password')}
       </ZigTypography>
