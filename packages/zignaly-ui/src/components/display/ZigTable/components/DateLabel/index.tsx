@@ -3,12 +3,21 @@ import { format } from "date-fns";
 
 import * as styled from "./styles";
 
-const DateLabel = ({ date }: { date: Date }) => (
+const DateLabel = ({ date, prefixId }: { date: Date; prefixId?: string }) => (
   <styled.Layout>
-    <styled.Value variant={"body2"} fontWeight={"regular"} sx={{ textTransform: "lowercase" }}>
+    <styled.Value
+      id={prefixId && `${prefixId}-date__time`}
+      variant={"body2"}
+      fontWeight={"regular"}
+      sx={{ textTransform: "lowercase" }}
+    >
       {format(date, "p")}
     </styled.Value>
-    <styled.Value variant={"body2"} fontWeight={"regular"}>
+    <styled.Value
+      id={prefixId && `${prefixId}-date__date`}
+      variant={"body2"}
+      fontWeight={"regular"}
+    >
       {format(date, "PP")}
     </styled.Value>
   </styled.Layout>
