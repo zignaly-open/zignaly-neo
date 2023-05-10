@@ -38,27 +38,22 @@ type OptionType = {
   active: boolean;
 };
 
-export const Option = styled('a', {
+export const Option = styled('span', {
   shouldForwardProp: (p) => p !== 'active',
 })<OptionType>`
   cursor: pointer;
   user-select: none;
 
-  ${({ theme, active }) => `
-    ${styledIf(
-      active,
-      `
-      color: ${theme.palette.secondary};
-    `,
-      `
-      color: ${theme.palette.neutral200};
-      
-      &:hover {
-        color: ${theme.palette.neutral150};
-      }        
-    `,
-    )}
-  `}
+  & > * {
+    transition: color 0.2s;
+    color: ${({ theme, active }) =>
+      (active ? theme.palette.neutral200 : '' + theme.palette.secondary.main) +
+      ''};
+  }
+
+  &:hover > * {
+    color: ${({ theme }) => theme.palette.neutral150};
+  }
 `;
 
 export const HeadOption = styled(Option)<OptionType>`
