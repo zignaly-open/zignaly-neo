@@ -152,6 +152,19 @@ export function useChartData({
     }
 
     const dates = Object.entries(chart).sort(([a], [b]) => a.localeCompare(b));
+
+    if (chartType === GraphChartType.pnl_pct_compound) {
+      // Prepend previous date as 0
+      const [firstDate, firstValue] = dates[0];
+      if (firstValue !== 0) {
+        const previousDate = format(
+          subDays(parse(firstDate, 'yyyy-MM-dd', Date.now()), 1),
+          'yyyy-MM-dd',
+        );
+        dates.unshift([previousDate, 0]);
+      }
+    }
+
     const graph = dates?.reduce((acc, [date, value]) => {
       const dateObj = parse(date, 'yyyy-MM-dd', Date.now());
       let label = formatMonthDay(dateObj);
@@ -170,19 +183,6 @@ export function useChartData({
         },
       ];
     }, []);
-
-    if (chartType === GraphChartType.pnl_pct_compound) {
-      // prepend previous date as 0 to graph
-      const firstDate = graph?.[0]?.date;
-      if (firstDate && graph?.[0]?.y !== 0) {
-        const previousDate = subDays(firstDate, 1);
-        graph.unshift({
-          x: formatMonthDay(previousDate),
-          date: previousDate,
-          y: 0,
-        });
-      }
-    }
 
     return {
       summary: data?.summary,
