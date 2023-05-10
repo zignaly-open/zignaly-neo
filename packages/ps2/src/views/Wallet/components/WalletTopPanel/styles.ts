@@ -15,6 +15,7 @@ export const SubTitle = withAttrs(ZigTypography, {
   color: 'neutral300',
   mb: '20px',
   ml: '57px',
+  display: 'block',
 });
 
 export const Separator = styled('div')`
