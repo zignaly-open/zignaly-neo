@@ -183,7 +183,9 @@ const ReferralTable: React.FC<{ referrals: ReferralHistoryEntry[] }> = ({
                   fill: (theme) => theme.palette.links,
                 },
               }}
-              endIcon={<OpenInNew />}
+              endIcon={
+                <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
+              }
             >
               {t('export')}
             </ZigButton>

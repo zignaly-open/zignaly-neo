@@ -91,7 +91,9 @@ const MyBalances: React.FC = () => {
                         fill: (theme) => theme.palette.links,
                       },
                     }}
-                    endIcon={<OpenInNew />}
+                    endIcon={
+                      <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
+                    }
                     onClick={() => {
                       showModal(ExportModal, {
                         type: type !== 'all' ? type : null,
