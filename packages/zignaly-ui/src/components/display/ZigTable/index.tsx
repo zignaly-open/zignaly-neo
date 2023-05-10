@@ -117,9 +117,10 @@ export default function ZigTable<T extends object>({
                             table.getHeaderGroups().length === groupIndex + 1 &&
                             headerGroup.headers.length === index + 1 && (
                               <ZigDropdown
-                                id={prefixId && `${prefixId}-table__popover-filter`}
                                 component={() => (
-                                  <HeaderIconButton>
+                                  <HeaderIconButton
+                                    id={prefixId && `${prefixId}-table__popover-filter`}
+                                  >
                                     <MoreVert sx={{ color: "neutral200" }} />
                                   </HeaderIconButton>
                                 )}

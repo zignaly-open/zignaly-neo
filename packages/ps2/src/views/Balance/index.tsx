@@ -103,6 +103,7 @@ const MyBalances: React.FC = () => {
                     {t('action:export')}
                   </ZigButton>
                   <StyledZigSelect
+                    id={'balances-transaction__select-type'}
                     options={filterOptions}
                     value={type}
                     onChange={setType}

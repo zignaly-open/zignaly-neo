@@ -58,6 +58,7 @@ function ZigSelect<T>({
   small = false,
   disabled,
   outlined,
+  id,
   styles: userStyles = {},
   ...props
 }: ZigSelectProps<T>): JSX.Element {
@@ -70,6 +71,7 @@ function ZigSelect<T>({
       {label && <ZigTypography color={"neutral200"}>{label}</ZigTypography>}
       {ZigSelectGlobalStyle}
       <Select
+        id={id}
         styles={styles}
         components={{
           IndicatorSeparator: () => null,
