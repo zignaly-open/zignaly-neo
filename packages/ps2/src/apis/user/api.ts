@@ -205,9 +205,13 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     }),
   }),
 
-  balance: builder.query<UserBalance, string>({
-    query: (exchangeInternalId) => ({
+  balance: builder.query<
+    UserBalance,
+    { exchangeInternalId: string; force?: boolean }
+  >({
+    query: ({ exchangeInternalId, force }) => ({
       url: `user/exchanges/${exchangeInternalId}/balance`,
+      params: { force },
     }),
   }),
 }));
@@ -237,4 +241,5 @@ export const {
   useLazyEnable2FAInfoQuery,
   useEnable2FAMutation,
   useBalanceQuery,
+  useLazyBalanceQuery,
 } = api;

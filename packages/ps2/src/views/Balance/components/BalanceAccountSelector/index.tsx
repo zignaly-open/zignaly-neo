@@ -22,19 +22,22 @@ const BalanceAccountSelector: React.FC = () => {
 
   return (
     <Layout>
-      <Avatar size={'xxlarge'} image={activeExchange.image} />
+      <Avatar
+        size={'xxlarge'}
+        image={activeExchange.image}
+        id={'balance__exchange-logo'}
+      />
       <Data>
         <Inline>
-          <ZigTypography variant={'h1'}>
+          <ZigTypography variant={'h1'} id={'balance__exhange-internal-name'}>
             {activeExchange.internalName}
           </ZigTypography>
           <AccountSelector
             component={({ open }) => (
               <ZigButton
-                id={'balance__account-switcher'}
+                id={'balance__exchange-switcher'}
                 variant={'outlined'}
                 active={open}
-                sx={{ padding: '6px' }}
                 narrow
               >
                 <ArrowBottomIcon
@@ -49,8 +52,8 @@ const BalanceAccountSelector: React.FC = () => {
           />
         </Inline>
         <TypeText variant={'h4'}>
-          <span>{t('account-selector.type.title')}</span>
-          <span>
+          <span id={'balance__type'}>{t('account-selector.type.title')}</span>
+          <span id={'balance__exchange-type'}>
             {t(
               'account-selector.type.' +
                 (activeExchange.exchangeType === 'futures'

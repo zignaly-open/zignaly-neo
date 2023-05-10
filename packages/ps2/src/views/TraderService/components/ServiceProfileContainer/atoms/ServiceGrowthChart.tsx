@@ -32,6 +32,7 @@ import {
   formatCompactNumber,
   formatLocalizedDate,
 } from 'views/Dashboard/components/MyDashboard/util';
+import BigNumber from 'bignumber.js';
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   const { chartType, chartTimeframe, setChartTimeframe, setChartType } =
@@ -136,6 +137,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                     )}
                     <ZigPriceLabel
                       precision={precision}
+                      shorten
                       coin={service.ssc}
                       variant={'bigNumber'}
                       color={
@@ -184,6 +186,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   colored
                   variant='h2'
                   value={data?.percentDiff}
+                  shorten
                 />
               </GraphPercentageWrapperBox>
             )}
@@ -259,7 +262,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
               `${formatLocalizedDate(
                 (v as typeof v & { date?: Date }).date,
                 'PP',
-              )}\n${numericFormatter(v.y.toString(), {
+              )}\n${numericFormatter(new BigNumber(v.y).toFormat(), {
                 ...(isPercent
                   ? {
                       decimalScale: 2,

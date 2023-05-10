@@ -158,7 +158,7 @@ const investorsTableColumns: ColumnDef<typeof investorsTableData[number], any>[]
     header: "User ID",
     accessorKey: "userId",
     cell: ({ getValue }) => (
-      <ZigTypography color="neutral200" variant="h5">
+      <ZigTypography color="neutral200" component="p" variant="caption">
         {getValue()}
       </ZigTypography>
     ),

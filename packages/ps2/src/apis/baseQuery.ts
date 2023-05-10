@@ -6,13 +6,14 @@ import {
 } from '@reduxjs/toolkit/dist/query/react';
 import { RootState } from './store';
 import { Mutex } from 'async-mutex';
-import { logout, setSessionExpiryDate } from './user/store';
+import { setSessionExpiryDate } from './user/store';
 import { SessionResponse } from './user/types';
 import { TIME_TO_START_REFRESHING_TOKEN } from '../util/constants';
 import i18next from '../util/i18next';
 import { backendError } from 'util/hooks/useToast';
 import { BackendError } from '../util/errors';
 import { BaseQueryApi } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
+import { clearUserSession } from './user/util';
 
 const mutex = new Mutex();
 
@@ -71,7 +72,7 @@ const customFetchBase: (
     // @ts-ignore
     !endpointsWhitelistedFor401.includes(args.url)
   ) {
-    api.dispatch(logout());
+    clearUserSession(api.dispatch);
   } else if (
     +new Date((api.getState() as RootState).user.sessionExpiryDate) -
       TIME_TO_START_REFRESHING_TOKEN <

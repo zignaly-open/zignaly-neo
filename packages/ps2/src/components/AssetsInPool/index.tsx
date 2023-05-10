@@ -48,7 +48,7 @@ const AssetsInPool = ({
           alignItems='start'
           id={prefixId && `${prefixId}__investors-${serviceId}`}
         >
-          <BlockTypography variant='h5' color='neutral400'>
+          <BlockTypography variant='caption' as='p' color='neutral400'>
             {t('table.x-investors', { count: numberOfInvestors })}
           </BlockTypography>
         </Box>
@@ -60,7 +60,7 @@ const AssetsInPool = ({
           alignItems='start'
           id={prefixId && `${prefixId}__created-at`}
         >
-          <BlockTypography variant='h5' color='neutral400'>
+          <BlockTypography variant='caption' as='p' color='neutral400'>
             {formatLocalizedDistance(new Date(), new Date(createdAt))}
           </BlockTypography>
         </Box>

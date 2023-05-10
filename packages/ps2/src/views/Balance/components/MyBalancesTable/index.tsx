@@ -39,14 +39,22 @@ const MyBalancesTable = (): JSX.Element => {
       columnHelper.accessor('coin', {
         header: t('tableHeader.coin'),
         cell: ({ getValue, row: { original } }) => (
-          <CoinLabel coin={getValue()} name={original.balance.name} />
+          <CoinLabel
+            coin={getValue()}
+            name={original.balance.name}
+            prefixId={'balances-table-coins'}
+          />
         ),
       }),
       columnHelper.accessor((row) => row.balance.balanceTotal, {
         id: 'totalBalance',
         header: t('tableHeader.totalBalance'),
         cell: ({ getValue, row }) => (
-          <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
+          <ZigTablePriceLabel
+            id={`balances-table-coins__total-balance-${row.original.coin}`}
+            coin={row.original.coin}
+            value={getValue()}
+          />
         ),
         sortingFn: 'alphanumeric',
       }),
@@ -54,7 +62,11 @@ const MyBalancesTable = (): JSX.Element => {
         id: 'balanceFree',
         header: t('tableHeader.availableBalance'),
         cell: ({ getValue, row }) => (
-          <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
+          <ZigTablePriceLabel
+            id={`balances-table-coins__balance-free-${row.original.coin}`}
+            coin={row.original.coin}
+            value={getValue()}
+          />
         ),
         sortingFn: 'alphanumeric',
       }),
@@ -62,23 +74,36 @@ const MyBalancesTable = (): JSX.Element => {
         id: 'balanceLocked',
         header: t('tableHeader.lockedBalance'),
         cell: ({ getValue, row }) => (
-          <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
+          <ZigTablePriceLabel
+            id={`balances-table-coins__locked-${row.original.coin}`}
+            coin={row.original.coin}
+            value={getValue()}
+          />
         ),
         sortingFn: 'alphanumeric',
       }),
       columnHelper.accessor((row) => row.balance.balanceTotalBTC, {
         id: 'balanceTotalBTC',
         header: t('tableHeader.valueBTC'),
-        cell: ({ getValue }) => (
-          <ZigTablePriceLabel coin='BTC' value={getValue()} />
+        cell: ({ getValue, row }) => (
+          <ZigTablePriceLabel
+            id={`balances-table-coins__total-btc-${row.original.coin}`}
+            coin='BTC'
+            value={getValue()}
+          />
         ),
         sortingFn: 'alphanumeric',
       }),
       columnHelper.accessor((row) => row.balance.balanceTotalUSDT, {
         id: 'balanceTotalUSDT',
         header: t('tableHeader.valueUSD'),
-        cell: ({ getValue }) => (
-          <ZigTablePriceLabel usd color='neutral100' value={getValue()} />
+        cell: ({ getValue, row }) => (
+          <ZigTablePriceLabel
+            id={`balances-table-coins__total-usdt-${row.original.coin}`}
+            usd
+            color='neutral100'
+            value={getValue()}
+          />
         ),
         sortingFn: 'alphanumeric',
       }),
@@ -88,7 +113,7 @@ const MyBalancesTable = (): JSX.Element => {
           <Box display='flex' justifyContent='flex-end' alignItems={'center'}>
             {!!allowedDeposits[exchangeType]?.includes(row.original.coin) && (
               <ZigButton
-                id={'balance-row__deposit'}
+                id={`balance-row__deposit-${row.original.coin}`}
                 onClick={() =>
                   showDepositModal({
                     selectedCoin: row.original.coin,
@@ -103,9 +128,8 @@ const MyBalancesTable = (): JSX.Element => {
             <Box>
               <ZigButton
                 narrow
-                sx={{ padding: '6px' }}
                 tooltip={t('withdraw')}
-                id={'balance-row__withdrawal'}
+                id={`balance-row__withdrawal-${row.original.coin}`}
                 onClick={() =>
                   showModal(WithdrawModal, {
                     selectedCoin: row.original.coin,
@@ -114,7 +138,10 @@ const MyBalancesTable = (): JSX.Element => {
                 }
                 variant='outlined'
               >
-                <Remove color={'neutral300'} />
+                <Remove
+                  sx={{ height: '18px', width: '22px' }}
+                  color={'neutral300'}
+                />
               </ZigButton>
             </Box>
           </Box>

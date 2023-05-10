@@ -15,10 +15,13 @@ export const formatLocalizedDistance = (date1: Date, date2: Date) =>
     locale: dateFnsLocaleMapping?.[i18n.language] || dateFnsLocaleMapping.en,
   });
 
-export const formatMonthDay = (date: Date) =>
+export const formatMonthDayYear = (date: Date) =>
   format(date, 'PP', {
     locale: dateFnsLocaleMapping?.[i18n.language] || dateFnsLocaleMapping.en,
-  }).replace(/, \d{4}$/, '');
+  });
+
+export const formatMonthDay = (date: Date) =>
+  formatMonthDayYear(date).replace(/, \d{4}$/, '');
 
 export const formatCompactNumber = (value: number | string, precision = 8) =>
   new Intl.NumberFormat('en-US', {

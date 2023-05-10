@@ -12,6 +12,12 @@ import { Grid, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_PROFIT_SHARING } from '../../routes';
+import {
+  BITCOIN_URL,
+  FORBES_URL,
+  NASDAQ_URL,
+  YAHOO_URL,
+} from '../../util/constants';
 
 export type InfoBarItem = {
   title: string;
@@ -189,7 +195,7 @@ const Signup: React.FC = () => {
           container
           alignItems={'center'}
           justifyContent={'center'}
-          marginTop={matches && '75px'}
+          marginTop={matches && '50px'}
           gap={'15px'}
           order={3}
         >
@@ -212,7 +218,7 @@ const Signup: React.FC = () => {
           container
           alignItems={'center'}
           justifyContent={'center'}
-          padding={'25px 0'}
+          padding={'20px 0'}
           flexDirection={'column'}
           order={4}
         >
@@ -229,19 +235,27 @@ const Signup: React.FC = () => {
             alignItems={'center'}
             justifyContent={'center'}
             gap={'90px'}
-            paddingTop={'25px'}
+            padding={'20px 0'}
           >
             <Grid item>
-              <img src={'/images/signup/forbes.svg'} alt='' />
+              <ZigLink href={FORBES_URL}>
+                <img src={'/images/signup/forbes.svg'} alt='' />
+              </ZigLink>
             </Grid>
             <Grid item>
-              <img src={'/images/signup/nasdaq.png'} alt='' />
+              <ZigLink href={NASDAQ_URL}>
+                <img src={'/images/signup/nasdaq.png'} alt='' />
+              </ZigLink>
             </Grid>
             <Grid item>
-              <img src={'/images/signup/yahoo.svg'} alt='' />
+              <ZigLink href={YAHOO_URL}>
+                <img src={'/images/signup/yahoo.svg'} alt='' />
+              </ZigLink>
             </Grid>
             <Grid item>
-              <img src={'/images/signup/bitcoin.svg'} alt='' />
+              <ZigLink href={BITCOIN_URL}>
+                <img src={'/images/signup/bitcoin.svg'} alt='' />
+              </ZigLink>
             </Grid>
           </Grid>
         </Grid>

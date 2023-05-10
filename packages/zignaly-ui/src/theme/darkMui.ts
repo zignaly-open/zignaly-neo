@@ -205,6 +205,7 @@ const darkMui = createTheme({
         },
         text: {
           color: dark.links,
+          fontWeight: "400 !important",
           display: "inline",
           padding: "0 2px !important",
           borderRadius: "2px",

@@ -34,6 +34,8 @@ const MyDashboard: React.FC = () => {
   const exchange = useActiveExchange();
   const investmentsEndpoint = useInvestments(exchange?.internalId, {
     skip: !exchange?.internalId,
+    // Force refresh on mount otherwise it will use cached value from balance button
+    refetchOnMountOrArgChange: true,
   });
   useCoinBalances();
   const showEditInvestmentModal = useZRouteModal(
