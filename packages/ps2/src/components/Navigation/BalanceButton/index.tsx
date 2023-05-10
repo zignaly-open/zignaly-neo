@@ -13,16 +13,20 @@ import { useZModal } from 'components/ZModal/use';
 import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { GradientBorderButtonWrapper } from '../ReferralButton/atoms';
 
+const UPDATE_INTERVAL = 60 * 1000;
+
 const BalanceButton = () => {
   const { t } = useTranslation('common');
   const { internalId } = useActiveExchange();
-  const { data: investments } = useInvestmentsQuery(internalId);
+  const { data: investments } = useInvestmentsQuery(internalId, {
+    pollingInterval: UPDATE_INTERVAL,
+  });
   const { data: balance } = useBalanceQuery(
     {
       exchangeInternalId: internalId,
     },
     {
-      pollingInterval: 60 * 1000,
+      pollingInterval: UPDATE_INTERVAL,
     },
   );
   const { showModal } = useZModal();
