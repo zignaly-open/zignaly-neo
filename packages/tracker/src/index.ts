@@ -20,7 +20,7 @@ const sendTz = (data: tzData) => {
     },
   };
 
-  return fetch('https://zignaly.com/api/fe/tz.php', options);
+  return fetch('https://zignaly.com/new_api/tz', options);
 };
 
 const delayTimeout = 100;

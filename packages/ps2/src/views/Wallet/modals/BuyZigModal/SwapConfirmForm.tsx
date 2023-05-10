@@ -121,8 +121,10 @@ const SwapConfirmForm = ({
           id={'confirm__buy-zig'}
           disabled={!priceInfo?.price}
           variant='contained'
+          size={'large'}
           onClick={handleSubmit}
           loading={buyStatus.isLoading}
+          sx={{ mb: 1 }}
         >
           {t('buy.buyNow', { coin: coinTo })}
         </ZigButton>

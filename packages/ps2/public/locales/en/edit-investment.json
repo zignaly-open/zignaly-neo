@@ -21,9 +21,8 @@
       "withdraw": "Withdraw Investment"
     },
     "button": {
-      "saveAndClose": "Save and Close",
       "invest-now": "Invest {{amount}} {{coin}} now",
-      "saveAndInvestment": "Save and Add to Investment",
+      "addInvestment": "Add to Investment",
       "continue-to-confirmation": "Continue to Confirmation"
     }
   },
@@ -50,7 +49,7 @@
     "withdrawInvestment": {
       "title": "Withdrawal Request",
       "freeWithdrawal": {
-        "description": "You will receive your funds after the fund manager releases them. Take into account that your investment is at risk until the balance is transferred to you. This usually takes a few days but may take longer to complete depending on the fund manager."
+        "description": "You will receive your funds after the fund manager releases them and daily accounting is performed. Please, take into account that your investment is at risk until the balance is transferred to you. Depending on the fund manager, this usually takes a few days but may take longer to complete."
       }
     },
     "pendingTransaction": {

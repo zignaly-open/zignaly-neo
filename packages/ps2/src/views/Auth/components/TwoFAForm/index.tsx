@@ -14,10 +14,11 @@ function TwoFAForm({
   return (
     <Layout>
       <Field>
-        <ZigTypography>
+        <ZigTypography id={'twoFA-modal__description'}>
           {t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-description')}
         </ZigTypography>
         <InputCode
+          prefixId={'ask-2fa-modal'}
           fields={6}
           error={error}
           loading={isLoading}

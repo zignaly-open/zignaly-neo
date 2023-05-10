@@ -7,9 +7,15 @@ export default {
   title: "Display/ZigAlertMessage",
   component: ZigAlertMessage,
   argTypes: {
-    type: {
-      options: ["default", "error", "warning"],
-      control: { type: "select" },
+    text: {
+      type: "string",
+    },
+    error: {
+      defaultValue: true,
+      type: "boolean",
+    },
+    warning: {
+      type: "boolean",
     },
   },
 } as ComponentMeta<typeof ZigAlertMessage>;
@@ -19,4 +25,5 @@ const Template: ComponentStory<typeof ZigAlertMessage> = (args) => <ZigAlertMess
 export const Error = Template.bind({});
 Error.args = {
   text: "Exceeds available balance",
+  error: true,
 };

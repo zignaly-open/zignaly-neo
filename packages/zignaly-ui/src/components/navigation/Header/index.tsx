@@ -5,6 +5,7 @@ import { headerConfig } from "./utils";
 
 import { Container, Layout, Side } from "./styles";
 
+// TODO: figure out is this is used or no, remove
 function Header({ leftElements = [], rightElements = [], className }: HeaderProps): ReactElement {
   return (
     <Layout className={className}>

@@ -10,6 +10,7 @@ import {
   ZigButtonGroupInput,
   ZigChart,
   ZigPriceLabel,
+  CenteredLoader,
   ZigSelect,
   ZigTypography,
 } from '@zignaly-open/ui';
@@ -23,7 +24,6 @@ import {
 import { useChartConfig, useChartData } from '../../../../../apis/service/use';
 import Stub from '../../../../../components/Stub';
 import { useTranslation } from 'react-i18next';
-import CenteredLoader from '../../../../../components/CenteredLoader';
 import PercentChange from './PercentChange';
 import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../../util/numbers';
@@ -32,6 +32,7 @@ import {
   formatCompactNumber,
   formatLocalizedDate,
 } from 'views/Dashboard/components/MyDashboard/util';
+import BigNumber from 'bignumber.js';
 
 const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
   const { chartType, chartTimeframe, setChartTimeframe, setChartType } =
@@ -94,6 +95,8 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
     GraphChartType.pnl_pct,
   ].includes(chartType);
 
+  const precision = isPercent ? 2 : getPrecisionForCoin(service.ssc) ?? 8;
+
   return (
     <Box>
       <Box
@@ -133,9 +136,10 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                       </ZigTypography>
                     )}
                     <ZigPriceLabel
+                      precision={precision}
+                      shorten
                       coin={service.ssc}
                       variant={'bigNumber'}
-                      shorten
                       color={
                         chartType === GraphChartType.sbt_ssc
                           ? 'neutral200'
@@ -182,6 +186,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                   colored
                   variant='h2'
                   value={data?.percentDiff}
+                  shorten
                 />
               </GraphPercentageWrapperBox>
             )}
@@ -257,7 +262,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
               `${formatLocalizedDate(
                 (v as typeof v & { date?: Date }).date,
                 'PP',
-              )}\n${numericFormatter(v.y.toString(), {
+              )}\n${numericFormatter(new BigNumber(v.y).toFormat(), {
                 ...(isPercent
                   ? {
                       decimalScale: 2,
@@ -273,6 +278,7 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                     }),
               })}`
             }
+            precision={precision}
           />
         )}
       </ChartWrapper>

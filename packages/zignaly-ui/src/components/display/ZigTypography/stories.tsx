@@ -1,64 +1,59 @@
-import React, { ReactNode } from "react";
+import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
-import { Typography } from "@mui/material";
 import { Variant } from "@mui/material/styles/createTypography";
+import ZigTypography from "./index";
 
 export default {
   title: "Display/ZigTypography",
-  component: Typography,
+  component: ZigTypography,
   argTypes: {
-    title: {
-      control: "text",
-      defaultValue: "Hello",
-    },
     text: {
       control: "text",
       defaultValue: "Hello",
+    },
+    variant: {
+      options: ["body1", "body2", "bigNumber", "h1", "h2", "h3", "h4", "caption"],
+      control: { type: "select" },
+      defaultValue: "body1",
     },
   },
   parameters: {
     jest: ["typography"],
   },
-} as ComponentMeta<typeof Typography>;
+} as ComponentMeta<typeof ZigTypography>;
 
-const Template: ComponentStory<React.FC<{ title: string; text: string; children: ReactNode }>> = ({
-  title,
+const Template: ComponentStory<React.FC<{ text: string; variant: string }>> = ({
+  variant,
   text,
-}) => {
-  const titles: Variant[] = ["h1", "h2", "h3", "h4", "h5", "h6"];
-  return (
-    <>
-      {titles.map((t) => (
-        <Typography key={t} variant={t}>
-          {t} {title}
-        </Typography>
-      ))}
+}) => (
+  <ZigTypography component={"p"} variant={variant as Variant}>
+    {text}
+  </ZigTypography>
+);
 
-      <Typography component={"p"} variant={"subtitle1"}>
-        Subtitle 1 {text}
-      </Typography>
+const ShowcaseTemplate: ComponentStory<React.FC<{ text: string }>> = ({ text }) => (
+  <>
+    <ZigTypography variant={"bigNumber"}>bigNumber: {text}</ZigTypography>
+    <ZigTypography variant={"h1"}>h1: {text}</ZigTypography>
+    <ZigTypography variant={"h2"}>h2: {text}</ZigTypography>
+    <ZigTypography variant={"h3"}>h3: {text}</ZigTypography>
+    <ZigTypography variant={"h4"}>h4: {text}</ZigTypography>
+    <ZigTypography variant={"body1"} component={"p"}>
+      body1: {text}
+    </ZigTypography>
+    <ZigTypography variant={"body2"} component={"p"}>
+      body2: {text}
+    </ZigTypography>
+    <ZigTypography variant={"caption"}>caption: {text}</ZigTypography>
+  </>
+);
 
-      <Typography component={"p"} variant={"subtitle2"}>
-        Subtitle 2 {text}
-      </Typography>
-
-      <Typography component={"p"} variant={"caption"}>
-        Caption {text}
-      </Typography>
-
-      <Typography component={"p"} variant={"body1"}>
-        Body 1 {text}
-      </Typography>
-
-      <Typography component={"p"} variant={"body2"}>
-        Body 2 {text}
-      </Typography>
-    </>
-  );
+export const Basic = Template.bind({});
+Basic.args = {
+  text: "Example text",
 };
 
-export const Text = Template.bind({});
-Text.args = {
-  title: "Example Title",
-  text: "To be or not to be this is the question whether it's nobler in the mind",
+export const Showcase = ShowcaseTemplate.bind({});
+Showcase.args = {
+  text: "Example text",
 };

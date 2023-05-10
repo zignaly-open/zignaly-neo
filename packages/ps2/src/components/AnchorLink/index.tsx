@@ -1,21 +1,10 @@
-import { styled } from '@mui/material';
-import { Link } from 'react-router-dom';
+import React from 'react';
+import { Link, LinkProps } from 'react-router-dom';
+import { ZigLink } from '@zignaly-open/ui';
 
-const AnchorLink = styled(Link)`
-  color: ${(props) => props.theme.palette.links};
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-export const ExternalLink = styled('a')`
-  color: ${(props) => props.theme.palette.links};
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-ExternalLink.defaultProps = { target: '_blank' };
-
+const AnchorLink = ({ children, ...props }: LinkProps) => (
+  <Link {...props}>
+    <ZigLink>{children}</ZigLink>
+  </Link>
+);
 export default AnchorLink;

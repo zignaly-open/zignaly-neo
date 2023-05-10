@@ -15,7 +15,7 @@ import { ROUTE_LOGIN, ROUTE_SIGNUP } from '../../../../../routes';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import OtherAccountsButton from './OtherAccountsButton';
 import { Box } from '@mui/material';
-import InvestDepositModal from 'views/Dashboard/components/ManageInvestmentModals/IndestDepositModal';
+import InvestDepositModal from 'views/Dashboard/components/ManageInvestmentModals/InvestDepositModal';
 
 const InvestButton: React.FC<{
   prefixId?: string;
@@ -85,7 +85,12 @@ const InvestButton: React.FC<{
             )}
           </ZigTypography>
           {!maxReached && (
-            <ZigTypography variant={'h5'} color='neutral150' fontWeight={500}>
+            <ZigTypography
+              variant={'caption'}
+              component='p'
+              color='neutral150'
+              fontWeight={500}
+            >
               {t('invest-button.x-success-fee', {
                 fee: service.successFee,
               })}

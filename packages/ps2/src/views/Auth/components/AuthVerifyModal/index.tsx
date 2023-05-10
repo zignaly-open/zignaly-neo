@@ -68,7 +68,7 @@ function AuthVerifyModal({
       }
     } else if (ask2FA) {
       if (verifyStatus.isSuccess) {
-        // Do nothing
+        title = t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-title');
       } else if (isUnknownDevice) {
         title = t(
           'auth-verify-modal.isNotDisabled.ask2FA.isUnknownDevice-title',
@@ -135,7 +135,9 @@ function AuthVerifyModal({
     >
       <Title>
         {texts.description && (
-          <ZigTypography>{texts.description}</ZigTypography>
+          <ZigTypography id={'auth-verify-modal__description'}>
+            {texts.description}
+          </ZigTypography>
         )}
       </Title>
       <Container>

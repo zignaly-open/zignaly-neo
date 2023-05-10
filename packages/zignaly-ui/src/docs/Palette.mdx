@@ -1,0 +1,24 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/blocks';
+import { darkMui, dark } from '../theme';
+
+<Meta title="Palette" />
+
+## Zignaly UI Kit
+
+The Zignaly UI Kit contains a collection of React components that can be used to build beautiful and performant React applications consistent with our company style.
+
+Please be advised that if you work on Zignaly projects and start implementing your own basic components so that we end up with two instances of components with the same roles, I will <span style={{textDecoration: 'line-through'}}>break your legs</span> kindly explain this is not the way things are done here.
+
+
+<ColorPalette>
+    {['primary', 'secondary', 'success', 'danger', ...Object.keys(dark)].map(x => {
+
+        console.error(x, darkMui.palette[x]);
+        return <ColorItem
+            key={x}
+            title={"theme.palette." + x}
+            subtitle="Some of the greys"
+            colors={typeof darkMui.palette[x] === 'string' ? { [x]: darkMui.palette[x] } : darkMui.palette[x]}
+          />
+      })}
+</ColorPalette>

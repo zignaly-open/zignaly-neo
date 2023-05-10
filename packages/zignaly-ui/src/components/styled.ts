@@ -1,15 +1,5 @@
 import styled from "styled-components";
-import Typography from "./display/Typography";
-
-export const ButtonGroup = styled.div`
-  display: grid;
-
-  ${(props: any) => `
-    grid-template-columns: repeat(${props.children.length}, minmax(0%, 100%));
-    gap: 8px;
-  `}
-`;
-
+import ZigTypography from "./display/ZigTypography";
 export const MarginContainer = styled.div`
   margin: 0 auto;
   max-width: 1430px;
@@ -22,7 +12,7 @@ export const PageContainer = styled(MarginContainer)`
 `;
 
 // TODO: replace with proper styled comp usages instead of classes
-export const ValueIndicator = styled(Typography)<any>`
+export const ValueIndicator = styled(ZigTypography)<any>`
   display: inline;
   font-size: 15px !important;
   line-height: 24px !important;

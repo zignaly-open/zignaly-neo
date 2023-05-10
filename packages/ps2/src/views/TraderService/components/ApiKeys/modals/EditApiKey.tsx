@@ -10,15 +10,12 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { EditKeyValidation } from '../validations';
 import {
-  CloneIcon,
-  dark,
-  InputText,
   ZigButton,
+  ZigCopyText,
   ZigInput,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Box } from '@mui/system';
-import copy from 'copy-to-clipboard';
 import { useToast } from '../../../../../util/hooks/useToast';
 import Checkbox from '@mui/material/Checkbox';
 import {
@@ -143,39 +140,23 @@ function EditApiKeysModal({
         )}
 
         <Box sx={{ mb: 4 }}>
-          <InputText
-            placeholder={t('api-keys.api-key')}
+          <ZigCopyText
             label={t('api-keys.api-key')}
-            readOnly={true}
             value={apiKey.key}
-            rightSideElement={
-              <CloneIcon width={40} height={40} color={dark.neutral300} />
-            }
-            onClickRightSideElement={() => {
-              copy(apiKey.key);
-              toast.success(t('action:copied'));
-            }}
+            onCopied={() => toast.success(t('action:copied'))}
           />
         </Box>
         <Box sx={{ mb: 4 }}>
           {isCreate ? (
-            <InputText
-              placeholder={t('api-keys.api-secret')}
+            <ZigCopyText
               label={
                 <MultilineLabel
                   title={t('api-keys.api-secret')}
                   subtitle={t('api-keys.api-secret-explainer')}
                 />
               }
-              readOnly={true}
               value={apiKey.secret}
-              rightSideElement={
-                <CloneIcon width={40} height={40} color={dark.neutral300} />
-              }
-              onClickRightSideElement={() => {
-                copy(apiKey.secret);
-                toast.success(t('action:copied'));
-              }}
+              onCopied={() => toast.success(t('action:copied'))}
             />
           ) : (
             <>
@@ -191,18 +172,10 @@ function EditApiKeysModal({
         </Box>
 
         <Box sx={{ mb: 4 }}>
-          <InputText
-            placeholder={t('api-keys.zignaly-code')}
+          <ZigCopyText
             label={t('api-keys.zignaly-code')}
-            readOnly={true}
             value={apiKey.id}
-            rightSideElement={
-              <CloneIcon width={40} height={40} color={dark.neutral300} />
-            }
-            onClickRightSideElement={() => {
-              copy(apiKey.id);
-              toast.success(t('action:copied'));
-            }}
+            onCopied={() => toast.success(t('action:copied'))}
           />
         </Box>
 

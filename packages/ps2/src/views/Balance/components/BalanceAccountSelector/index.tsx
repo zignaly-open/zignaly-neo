@@ -4,9 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { Layout, Data, Inline, TypeText } from './styles';
 import {
   Avatar,
-  IconButton,
   ZigTypography,
   ArrowBottomIcon,
+  ZigButton,
 } from '@zignaly-open/ui';
 import { useActiveExchange } from '../../../../apis/user/use';
 import AccountSelector from 'components/AccountSelector';
@@ -22,35 +22,38 @@ const BalanceAccountSelector: React.FC = () => {
 
   return (
     <Layout>
-      <Avatar size={'xxlarge'} image={activeExchange.image} />
+      <Avatar
+        size={'xxlarge'}
+        image={activeExchange.image}
+        id={'balance__exchange-logo'}
+      />
       <Data>
         <Inline>
-          <ZigTypography variant={'h1'}>
+          <ZigTypography variant={'h1'} id={'balance__exhange-internal-name'}>
             {activeExchange.internalName}
           </ZigTypography>
           <AccountSelector
             component={({ open }) => (
-              <IconButton
-                id={'balance__account-switcher'}
-                variant={'secondary'}
-                size={'medium'}
-                isFocused={open}
-                icon={
-                  <ArrowBottomIcon
-                    color={
-                      open ? theme.palette.neutral100 : theme.palette.neutral300
-                    }
-                    width={22}
-                    height={20}
-                  />
-                }
-              />
+              <ZigButton
+                id={'balance__exchange-switcher'}
+                variant={'outlined'}
+                active={open}
+                narrow
+              >
+                <ArrowBottomIcon
+                  color={
+                    open ? theme.palette.neutral100 : theme.palette.neutral300
+                  }
+                  width={22}
+                  height={20}
+                />
+              </ZigButton>
             )}
           />
         </Inline>
         <TypeText variant={'h4'}>
-          <span>{t('account-selector.type.title')}</span>
-          <span>
+          <span id={'balance__type'}>{t('account-selector.type.title')}</span>
+          <span id={'balance__exchange-type'}>
             {t(
               'account-selector.type.' +
                 (activeExchange.exchangeType === 'futures'

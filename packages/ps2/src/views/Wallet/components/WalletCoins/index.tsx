@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   createColumnHelper,
-  IconButton,
+  ZigButton,
   ZigCoinIcon,
   ZigPriceLabel,
   ZigTable,
@@ -63,7 +63,7 @@ const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
               gap={1}
             >
               <ZigPriceLabel value={getValue()} usd color='almostWhite' />
-              <ZigTypography variant='h5' color='neutral300'>
+              <ZigTypography variant='caption' component='p' color='neutral300'>
                 @
                 <NumericFormat
                   value={coins[original.coin].usdPrice}
@@ -80,9 +80,10 @@ const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
         id: 'action',
         cell: ({ row: { original } }) => (
           <Box display='flex' justifyContent='flex-end'>
-            <IconButton
+            <ZigButton
+              narrow
+              tooltip={t('withdraw')}
               id={'wallet-table__withdraw'}
-              icon={<Remove color={'neutral300'} />}
               onClick={() =>
                 showModal(WalletWithdrawModal, {
                   selectedCoin: original.coin,
@@ -90,8 +91,13 @@ const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
                   coins,
                 })
               }
-              variant='secondary'
-            />
+              variant='outlined'
+            >
+              <Remove
+                sx={{ height: '18px', width: '22px' }}
+                color={'neutral300'}
+              />
+            </ZigButton>
           </Box>
         ),
       }),

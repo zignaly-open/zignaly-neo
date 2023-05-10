@@ -1,5 +1,5 @@
 import { ChangeViewFn } from '../../types';
-import { InputAmountAdvancedValue } from '@zignaly-open/ui/lib/components/inputs/InputAmountAdvanced/types';
+import { InputAmountAdvancedValueType } from '@zignaly-open/ui';
 
 export type EditInvestmentFormProps = {
   onClickWithdrawInvestment: () => void;
@@ -8,6 +8,6 @@ export type EditInvestmentFormProps = {
 };
 
 export type EditFormData = {
-  profitPercentage: string | number;
-  amountTransfer?: InputAmountAdvancedValue;
+  profitPercentage?: string | number;
+  amountTransfer?: InputAmountAdvancedValueType;
 };

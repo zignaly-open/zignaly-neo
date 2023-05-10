@@ -7,7 +7,8 @@
   "tableHeader": {
     "email": "Email",
     "userId": "User ID",
-    "investment": "Investment",
+    "invested": "Invested",
+    "pending": "Pending",
     "P&L": "P&L",
     "P&LTotal": "P&L Total",
     "totalFeesPaid": "Total Fees Paid",

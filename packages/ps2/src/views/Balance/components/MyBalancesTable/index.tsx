@@ -1,11 +1,9 @@
 import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  IconButton,
   ZigTable,
   ZigTablePriceLabel,
   createColumnHelper,
-  ZigTypography,
   ZigButton,
 } from '@zignaly-open/ui';
 import { BalanceTableDataType } from './types';
@@ -23,7 +21,7 @@ import {
 import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
 import WithdrawModal from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
 import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
-import { Box, Tooltip } from '@mui/material';
+import { Box } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
 import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
 
@@ -41,14 +39,22 @@ const MyBalancesTable = (): JSX.Element => {
       columnHelper.accessor('coin', {
         header: t('tableHeader.coin'),
         cell: ({ getValue, row: { original } }) => (
-          <CoinLabel coin={getValue()} name={original.balance.name} />
+          <CoinLabel
+            coin={getValue()}
+            name={original.balance.name}
+            prefixId={'balances-table-coins'}
+          />
         ),
       }),
       columnHelper.accessor((row) => row.balance.balanceTotal, {
         id: 'totalBalance',
         header: t('tableHeader.totalBalance'),
         cell: ({ getValue, row }) => (
-          <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
+          <ZigTablePriceLabel
+            id={`balances-table-coins__total-balance-${row.original.coin}`}
+            coin={row.original.coin}
+            value={getValue()}
+          />
         ),
         sortingFn: 'alphanumeric',
       }),
@@ -56,7 +62,11 @@ const MyBalancesTable = (): JSX.Element => {
         id: 'balanceFree',
         header: t('tableHeader.availableBalance'),
         cell: ({ getValue, row }) => (
-          <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
+          <ZigTablePriceLabel
+            id={`balances-table-coins__balance-free-${row.original.coin}`}
+            coin={row.original.coin}
+            value={getValue()}
+          />
         ),
         sortingFn: 'alphanumeric',
       }),
@@ -64,23 +74,36 @@ const MyBalancesTable = (): JSX.Element => {
         id: 'balanceLocked',
         header: t('tableHeader.lockedBalance'),
         cell: ({ getValue, row }) => (
-          <ZigTablePriceLabel coin={row.original.coin} value={getValue()} />
+          <ZigTablePriceLabel
+            id={`balances-table-coins__locked-${row.original.coin}`}
+            coin={row.original.coin}
+            value={getValue()}
+          />
         ),
         sortingFn: 'alphanumeric',
       }),
       columnHelper.accessor((row) => row.balance.balanceTotalBTC, {
         id: 'balanceTotalBTC',
         header: t('tableHeader.valueBTC'),
-        cell: ({ getValue }) => (
-          <ZigTablePriceLabel coin='BTC' value={getValue()} />
+        cell: ({ getValue, row }) => (
+          <ZigTablePriceLabel
+            id={`balances-table-coins__total-btc-${row.original.coin}`}
+            coin='BTC'
+            value={getValue()}
+          />
         ),
         sortingFn: 'alphanumeric',
       }),
       columnHelper.accessor((row) => row.balance.balanceTotalUSDT, {
         id: 'balanceTotalUSDT',
         header: t('tableHeader.valueUSD'),
-        cell: ({ getValue }) => (
-          <ZigTablePriceLabel usd color='neutral100' value={getValue()} />
+        cell: ({ getValue, row }) => (
+          <ZigTablePriceLabel
+            id={`balances-table-coins__total-usdt-${row.original.coin}`}
+            usd
+            color='neutral100'
+            value={getValue()}
+          />
         ),
         sortingFn: 'alphanumeric',
       }),
@@ -90,33 +113,37 @@ const MyBalancesTable = (): JSX.Element => {
           <Box display='flex' justifyContent='flex-end' alignItems={'center'}>
             {!!allowedDeposits[exchangeType]?.includes(row.original.coin) && (
               <ZigButton
-                id={'balance-row__deposit'}
+                id={`balance-row__deposit-${row.original.coin}`}
                 onClick={() =>
                   showDepositModal({
                     selectedCoin: row.original.coin,
                   })
                 }
                 variant='outlined'
-                sx={{ maxHeight: '20px' }}
+                sx={{ maxHeight: '20px', mr: 1 }}
               >
-                <ZigTypography>{t('deposit')}</ZigTypography>
+                {t('deposit')}
               </ZigButton>
             )}
-            <Tooltip title={t('withdraw')}>
-              <Box>
-                <IconButton
-                  id={'balance-row__withdrawal'}
-                  icon={<Remove color={'neutral300'} />}
-                  onClick={() =>
-                    showModal(WithdrawModal, {
-                      selectedCoin: row.original.coin,
-                      ctaId: 'balances-table-row',
-                    })
-                  }
-                  variant='secondary'
+            <Box>
+              <ZigButton
+                narrow
+                tooltip={t('withdraw')}
+                id={`balance-row__withdrawal-${row.original.coin}`}
+                onClick={() =>
+                  showModal(WithdrawModal, {
+                    selectedCoin: row.original.coin,
+                    ctaId: 'balances-table-row',
+                  })
+                }
+                variant='outlined'
+              >
+                <Remove
+                  sx={{ height: '18px', width: '22px' }}
+                  color={'neutral300'}
                 />
-              </Box>
-            </Tooltip>
+              </ZigButton>
+            </Box>
           </Box>
         ),
       }),

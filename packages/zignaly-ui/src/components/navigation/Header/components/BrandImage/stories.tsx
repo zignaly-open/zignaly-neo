@@ -5,7 +5,7 @@ import BrandImage from "./";
 import { iconsByType } from "./types";
 
 export default {
-  title: "Navigation/Header/components/BrandImage",
+  title: "Navigation/___FIXME____Header/___FIXME____BrandImage",
   component: BrandImage,
   argTypes: {
     type: {

@@ -21,10 +21,8 @@
 			"withdraw": "Retirada de Investimento"
 		},
 		"button": {
-			"saveAndClose": "Guardar e Fechar",
 			"continue-to-confirmation": "Continuar a Confirmação",
-			"invest-now": "Investir {{amount}}{{coin}} agora",
-			"saveAndInvestment": "Salvar e Adicionar ao Investimento"
+			"invest-now": "Investir {{amount}}{{coin}} agora"
 		}
 	},
 	"pendingMajorThan": {

@@ -20,7 +20,6 @@ jobs:
             ui_repos:
               paths:
                 - 'packages/zignaly-ui/**/*'
-                - 'packages/raffles-client/**/*'
           # Can be mixed with the "global" 'paths_ignore' / 'paths' options, for example:
           # paths_ignore: '["**/README.md"]'
 

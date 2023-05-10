@@ -14,7 +14,7 @@ import {
   StyledPersonIcon,
   StyledVerifiedIcon,
 } from '../styles';
-import { Button } from '@zignaly-open/ui';
+import { ZigButton } from '@zignaly-open/ui';
 import copy from 'copy-to-clipboard';
 import { generatePath } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../../routes';
@@ -80,9 +80,11 @@ const ServiceInformation: React.FC<{
           />
         </GreySubHeader>
         {md ? <Separator /> : <Box mt={2} />}
-        <Button
+        <ZigButton
+          narrow
+          data-tack-cta={'service-profile-copy-link'}
           id={'service-profile__copy-link'}
-          minWidth={30}
+          sx={{ '&&': { minWidth: '30px !important' } }}
           onClick={() => {
             copy(
               window.location.origin +
@@ -92,30 +94,25 @@ const ServiceInformation: React.FC<{
             );
             toast.success(t('link-copied'));
           }}
-          leftElement={
+          startIcon={
             md ? null : (
               <LinkIconWithSafariFix
                 style={{ width: '13px', height: '13px' }}
                 color='neutral300'
-                width={13}
+                width={15}
                 height={13}
               />
             )
           }
-          size={'xsmall'}
-          variant={'secondary'}
-          caption={
-            md ? (
-              <LinkIconWithSafariFix
-                color='neutral300'
-                width={13}
-                height={13}
-              />
-            ) : (
-              t('copy-link')
-            )
-          }
-        />
+          size={'small'}
+          variant={'outlined'}
+        >
+          {md ? (
+            <LinkIconWithSafariFix color='neutral300' width={13} height={13} />
+          ) : (
+            t('copy-link')
+          )}
+        </ZigButton>
       </Box>
     </>
   );

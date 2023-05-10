@@ -7,9 +7,3 @@ export const Form = styled('form')`
   margin-top: 38px;
   width: 100%;
 `;
-
-export const TitleHead = styled('div')`
-  display: flex;
-  align-content: center;
-  justify-content: center;
-`;

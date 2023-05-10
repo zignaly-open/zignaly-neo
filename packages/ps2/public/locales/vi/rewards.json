@@ -1,10 +1,45 @@
 {
+	"title": "Khu phần thưởng",
+	"terms": "Điều khoản >",
 	"active": "Active",
+	"reward-terms": "Điều khoản thưởng",
+	"description": "Kiếm phần thưởng bằng cách hoàn thành các nhiệm vụ đơn giản. Thật dễ dàng!",
+	"header": {
+		"title": "Nhận $20",
+		"description": "Trên khoản tiền gửi thứ 1"
+	},
+	"active-rewards": "Phần thưởng đang hoạt động",
+	"no-active-rewards": "Không có phần thưởng hoạt động tại thời điểm này",
+	"disabled-voucher": "Voucher đã được kích hoạt",
 	"table": {
+		"title": "Lịch sử thưởng",
+		"no-benefits": "Chưa có phần thưởng",
 		"time-and-date": "Ngày & Giờ",
+		"reward-description": "Mô tả phần thưởng",
+		"description-success_fee": "Đã tiêu <0><\/0> từ Voucher phí, còn lại <1><\/1> .",
+		"description-awarded": "<0><\/0> Voucher phí thành công cho lần nạp tiền đầu tiên.",
 		"status": "Trạng thái"
 	},
 	"statusTypes": {
-		"success_fee": "Success Fee"
+		"success_fee": "Success Fee",
+		"awarded": "Đã thưởng"
+	},
+	"rewardTypes": {
+		"voucher_active": "Voucher phí thành công",
+		"voucher_pending": "Tiền thưởng cho nạp tiền"
+	},
+	"full-terms": {
+		"1": "Zignaly bảo lưu quyền hủy bỏ \"voucher phí\" nếu người dùng bị phát hiện có liên quan đến các hoạt động không phù hợp, không trung thực hoặc lạm dụng.",
+		"2": "Zignaly có quyền sửa đổi Điều khoản và Điều kiện của chương trình thưởng bất cứ lúc nào mà không cần thông báo trước.",
+		"3": "\"Voucher phí\" được áp dụng cho phần \"Phí thành công\" của Zignaly.",
+		"4": "\"Voucher phí\" không được chuyển nhượng và chỉ được sử dụng bởi người dùng ban đầu đã đạt được chúng.",
+		"5": "Quảng cáo trực tuyến trả phí có logo Zignaly đều bị nghiêm cấm.",
+		"6": "Tất cả các tính toán phần thưởng được chốt bởi Zignaly.",
+		"7": "Người tham gia bị phát hiện vi phạm các điều khoản này sẽ không đủ điều kiện nhận thưởng; bất kỳ hành vi gian lận hoặc lạm dụng nào sẽ dẫn đến việc chấm dứt ngay lập tức tất cả các phần thưởng giá trị cao.",
+		"title": "Điều khoản chung"
+	},
+	"rewardDescriptions": {
+		"voucher_active": "Tiết kiệm Phí thành công ngay bây giờ nhờ voucher $ {{amount}} của bạn.",
+		"voucher_pending": "Gửi bất kỳ số tiền nào và nhận voucher $ {{amount}} tiết kiệm Phí thành công."
 	}
 }

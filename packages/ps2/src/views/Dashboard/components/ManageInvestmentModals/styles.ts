@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { Typography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
 
 export const Investor = styled('div')`
   display: flex;
@@ -15,9 +15,7 @@ export const InvestorData = styled('div')`
   flex-direction: column;
 `;
 
-export const InvestorName = styled(Typography)``;
-
-export const InvestorSuccessFee = styled(Typography)``;
+export const InvestorName = styled(ZigTypography)``;
 
 export const PendingTransaction = styled('div')`
   display: flex;
@@ -49,14 +47,6 @@ export const Field = styled('div')`
   align-items: center;
 `;
 
-export const Row = styled('div')`
-  ${({ theme }) => `
-    &:first-child {
-      border-right: 1px solid ${theme.palette.neutral500};
-    }
-  `};
-`;
-
 export const Inline = styled('div')`
   display: flex;
   gap: 12px;
@@ -70,32 +60,6 @@ export const Grid = styled('div')`
   margin-top: 12px;
 `;
 
-export const Column = styled('div')`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-
-  &:first-child {
-    border-right: 1px solid ${({ theme }) => theme.palette.neutral500};
-    padding-right: 62px;
-  }
-
-  &:last-child {
-    padding-left: 62px;
-  }
-`;
-
-export const Content = styled('div')`
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-`;
-
-export const WithdrawFundsSpaceTaker = styled(Typography)`
-  flex: 1;
-  text-align: justify;
-`;
-
 export const WithdrawFundsOptionWrapper = styled('div')<{ border?: boolean }>`
   flex-direction: column;
   gap: 15px;
@@ -106,23 +70,11 @@ export const WithdrawFundsOptionWrapper = styled('div')<{ border?: boolean }>`
 
 export const WithdrawFundsButtonWrapper = styled('div')`
   text-align: center;
+  margin-top: 56px;
 
   button {
     min-width: 170px;
   }
-`;
-
-export const MultilineButton = styled('div')`
-  padding: 15px;
-  flex-direction: column;
-  display: flex;
-`;
-
-export const LoaderContainer = styled('div')`
-  padding: 4em 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;
 
 export const TransactionContainer = styled('div')`

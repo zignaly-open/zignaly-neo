@@ -3,6 +3,7 @@ import Router from './Router';
 import theme from './theme';
 import * as Sentry from '@sentry/browser';
 import {
+  CenteredLoader,
   ChartGradients,
   dark,
   ThemeProvider as ThemeInheritorStyled,
@@ -16,7 +17,6 @@ import { persistor, store } from './apis/store';
 import { Provider } from 'react-redux';
 import GlobalStyle from './styles';
 import { PersistGate } from 'redux-persist/integration/react';
-import CenteredLoader from './components/CenteredLoader';
 import Header from './components/Navigation/Header';
 import UpdateChecker from './components/Navigation/UpdateChecker';
 import DateLocaleFixer from './components/Navigation/DateLocaleFixer';
@@ -59,15 +59,17 @@ function App() {
             <PersistGate persistor={persistor} loading={<CenteredLoader />}>
               <BrowserRouter>
                 <ModalProvider>
-                  <Header />
-                  <Tracker />
-                  <UpdateChecker />
-                  <DateLocaleFixer />
-                  <ChartGradients />
                   <Suspense fallback={null}>
-                    <Router />
+                    <>
+                      <Header />
+                      <Tracker />
+                      <UpdateChecker />
+                      <DateLocaleFixer />
+                      <ChartGradients />
+                      <Router />
+                      <BottomNavigation />
+                    </>
                   </Suspense>
-                  <BottomNavigation />
                 </ModalProvider>
               </BrowserRouter>
             </PersistGate>

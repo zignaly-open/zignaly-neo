@@ -5,13 +5,14 @@
 	"tableHeader": {
 		"email": "Email",
 		"userId": "ID do Usuario",
-		"investment": "Investimento",
 		"P&L": "P&L",
 		"P&LTotal": "P&L Total",
 		"totalFeesPaid": "Taxas Totais Pagas",
 		"successFee": "Success Fee",
 		"feesZIG": "Taxas em ZIG",
-		"status": "Estado"
+		"status": "Estado",
+		"invested": "Investido",
+		"pending": "Pendente"
 	},
 	"loading-arialLabel": "Carregando investidores",
 	"status": {

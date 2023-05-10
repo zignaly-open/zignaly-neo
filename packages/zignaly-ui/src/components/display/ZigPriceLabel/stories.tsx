@@ -3,6 +3,7 @@ import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import ZigPriceLabel from "./index";
 
+// TODO: correct controls, fix story
 export default {
   title: "Display/ZigPriceLabel",
   component: ZigPriceLabel,

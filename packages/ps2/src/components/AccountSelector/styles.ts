@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { Typography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
 
 export const Layout = styled('div')`
   display: flex;
@@ -35,7 +35,7 @@ export const Item = styled('div')`
   }
 `;
 
-export const InternalName = styled(Typography)`
+export const InternalName = styled(ZigTypography)`
   text-overflow: ellipsis;
   overflow: hidden;
 `;

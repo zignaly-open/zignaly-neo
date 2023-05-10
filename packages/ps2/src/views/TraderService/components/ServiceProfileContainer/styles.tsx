@@ -3,11 +3,9 @@ import muiStyled from '@emotion/styled';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { ZigTypography } from '@zignaly-open/ui';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import EditIcon from '@mui/icons-material/Edit';
 import PersonIcon from '@mui/icons-material/Person';
 import { Box } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 export const LinkIconWithSafariFix = muiStyled(LinkIcon)`
   width: 13px !important;
@@ -68,20 +66,6 @@ export const StyledCalendarMonthIcon = styled(CalendarMonthIcon)`
 
 export const StyledPersonIcon = styled(PersonIcon)`
   ${iconStyle}
-`;
-
-export const StyledChevronRightIcon = styled(ChevronRightIcon)`
-  fill: ${({ theme }) => theme.palette.neutral300};
-  margin-top: 1px;
-`;
-
-export const StyledPencilIcon = styled(EditIcon)`
-  fill: ${({ theme }) => theme.palette.neutral300};
-  padding: 3px;
-  padding-right: 0;
-  margin-top: 1px;
-  position: relative;
-  left: 2px;
 `;
 
 export const Separator = styled('span')`
@@ -194,7 +178,7 @@ export const ChartWrapper = styled(Box)`
   justify-content: center;
 `;
 
-export const PercentageIndicatorSmall = styled(ZigTypography)`
+export const ChangeIndicatorSmall = styled(ZigTypography)`
   position: relative;
   top: -1.5px;
   font-size: 12px !important;
@@ -210,7 +194,9 @@ export const GraphPercentageWrapperBox = styled(Box)`
 
 export const SqueezedButtonGroupWrapper = styled(Box)`
   .MuiButton-root {
-    min-width: 55px !important;
+    min-width: 50px !important;
+    padding-left: 3px;
+    padding-right: 3px;
   }
 `;
 
