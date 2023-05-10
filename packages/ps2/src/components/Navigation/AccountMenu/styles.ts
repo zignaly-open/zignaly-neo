@@ -1,7 +1,9 @@
 import { styled } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
 
-export const HeaderDropdownButton = styled('button')<{ active?: boolean }>`
+export const HeaderDropdownButton = styled('button', {
+  shouldForwardProp: (p) => p !== 'active',
+})<{ active?: boolean }>`
   appearance: none;
   cursor: pointer;
   border: none;

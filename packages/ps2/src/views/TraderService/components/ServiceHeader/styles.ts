@@ -38,7 +38,9 @@ type OptionType = {
   active: boolean;
 };
 
-export const Option = styled('a')<OptionType>`
+export const Option = styled('a', {
+  shouldForwardProp: (p) => p !== 'active',
+})<OptionType>`
   cursor: pointer;
   user-select: none;
 

@@ -1,5 +1,5 @@
 import Popover from "@mui/material/Popover";
-import React, { MouseEvent, useEffect, useImperativeHandle } from "react";
+import React, { MouseEvent, Suspense, useEffect, useImperativeHandle } from "react";
 import { ZigDropdownProps, ZigDropdownHandle, ZigDropdownOption } from "./types";
 import {
   ArrowBottomIconStyled,
@@ -167,11 +167,16 @@ const ZigDropdown: (
                         )}
                       </NavLink>
                       {childDropdownShow === option &&
-                        option.children.map((c) => (
+                        option.children.map((c, index) => (
                           <NavLink
                             id={c.id}
-                            active={c?.active}
-                            key={"--sub-" + key + "--" + c.label}
+                            active={c?.active || undefined}
+                            key={
+                              "--sub-" +
+                              key +
+                              "--" +
+                              (typeof c.label === "string" ? c.label : `-child-${index}`)
+                            }
                             onClick={onClick(c.onClick!)}
                           >
                             {c.label}

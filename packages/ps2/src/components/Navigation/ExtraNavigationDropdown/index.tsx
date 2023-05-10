@@ -141,10 +141,7 @@ const ExtraNavigationDropdown: React.FC = () => {
   return (
     <ZigDropdown
       component={({ open }) => (
-        <HeaderDropdownButton
-          id={'menu__dropdown-trading'}
-          active={open || undefined}
-        >
+        <HeaderDropdownButton id={'menu__dropdown-trading'} active={open}>
           <OptionHorizontalDotsIcon
             width={14}
             height={4}
