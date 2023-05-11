@@ -34,7 +34,7 @@ const Wallet = () => {
           WalletBalances,
           TotalSavings,
         ]) => (
-          <>
+          <Box mx='22px'>
             <Box
               display='flex'
               gap={1}
@@ -54,7 +54,7 @@ const Wallet = () => {
             />
             <WalletCoinsTable balances={balances} coins={coins} />
             <WalletTransactions />
-          </>
+          </Box>
         )}
       />
     </PageContainer>
