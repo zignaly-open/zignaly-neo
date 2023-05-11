@@ -1,5 +1,4 @@
 import { Box, styled } from '@mui/material';
-import { ZigTypography } from '@zignaly-open/ui';
 
 export const Icon = styled('div')`
   margin-left: 8px;
@@ -16,8 +15,4 @@ export const PriceBoxOverride = styled(Box)`
     ${(props) => `color: ${props.theme.palette.neutral000}`} !important;
     position: relative;
   }
-`;
-
-export const BlockTypography = styled(ZigTypography)`
-  display: block;
 `;
