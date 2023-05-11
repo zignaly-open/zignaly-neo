@@ -75,7 +75,7 @@ const WalletTopPanel = ({ balances, coins }: WalletTopPanelProps) => {
               fontWeight={600}
               fontSize={16}
             />
-            <ZigTypography variant='h5' color='neutral300'>
+            <ZigTypography variant='caption' component='p' color='neutral300'>
               @{rate?.toFixed(8)}/ZIG
             </ZigTypography>
           </Box>

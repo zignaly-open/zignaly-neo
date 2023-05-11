@@ -17,7 +17,14 @@ const BalanceButton = () => {
   const { t } = useTranslation('common');
   const { internalId } = useActiveExchange();
   const { data: investments } = useInvestmentsQuery(internalId);
-  const { data: balance } = useBalanceQuery(internalId);
+  const { data: balance } = useBalanceQuery(
+    {
+      exchangeInternalId: internalId,
+    },
+    {
+      pollingInterval: 60 * 1000,
+    },
+  );
   const { showModal } = useZModal();
 
   const investedAmount = useMemo(() => {

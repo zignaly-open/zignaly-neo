@@ -22,7 +22,6 @@ function WalletWithdrawModal({
 
   return (
     <ZModal
-      authOnly
       wide
       {...props}
       close={close}

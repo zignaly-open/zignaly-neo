@@ -20,6 +20,7 @@ const ZigDropdown: (
   innerRef: React.Ref<ZigDropdownHandle>,
 ) => JSX.Element = (
   {
+    id,
     component,
     options,
     anchorOrigin = {
@@ -101,7 +102,7 @@ const ZigDropdown: (
           transformOrigin={transformOrigin}
           anchorOrigin={anchorOrigin}
         >
-          <ZigDropdownContainer>
+          <ZigDropdownContainer id={id}>
             <NavList>
               {options.map((option, i) => {
                 // this is a design requirement
@@ -114,7 +115,11 @@ const ZigDropdown: (
 
                 if (option.element)
                   return (
-                    <ComponentWrapper id={option.id} separator={option.separator} key={key}>
+                    <ComponentWrapper
+                      id={option.id || `dropdown-element-${i}`}
+                      separator={option.separator}
+                      key={key}
+                    >
                       {option.element}
                     </ComponentWrapper>
                   );

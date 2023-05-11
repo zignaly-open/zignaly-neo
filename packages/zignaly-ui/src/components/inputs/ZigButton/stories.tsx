@@ -164,7 +164,7 @@ const TemplateTwoStorey: Story<typeof ZigButton> = (args) => {
       >
         <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
           Invest
-          <ZigTypography variant={"h5"} color="neutral150">
+          <ZigTypography variant={"caption"} component="p" color="neutral150">
             Invest fee 146%
           </ZigTypography>
         </Box>
@@ -173,7 +173,7 @@ const TemplateTwoStorey: Story<typeof ZigButton> = (args) => {
       <ZigButton variant={"contained"} size="large">
         <Box sx={{ display: "flex", flexDirection: "column" }}>
           Invest
-          <ZigTypography variant={"h5"} color="neutral150">
+          <ZigTypography variant={"caption"} component="p" color="neutral150">
             Invest fee 146%
           </ZigTypography>
         </Box>

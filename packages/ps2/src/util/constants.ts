@@ -21,3 +21,15 @@ export const HELP_CREATE_ENABLE_2FA_URL =
 
 export const DOWNLOAD_GOOGLE_AUTHENTICATOR_URL =
   'https://support.google.com/accounts/answer/1066447';
+
+export const FORBES_URL =
+  'https://www.forbes.com/sites/tatianakoffman/2021/04/14/how-copy-trader-platforms-are-capitalizing-on-the-crypto-boom/?sh=71c6df5e64d3';
+
+export const NASDAQ_URL =
+  'https://www.nasdaq.com/articles/3-cryptos-to-buy-for-their-strong-use-cases-2021-10-14';
+
+export const YAHOO_URL =
+  'https://finance.yahoo.com/news/zignaly-launches-dao-unlock-expert-121500591.html';
+
+export const BITCOIN_URL =
+  'https://news.bitcoin.com/zignaly-lists-on-ascendex/';

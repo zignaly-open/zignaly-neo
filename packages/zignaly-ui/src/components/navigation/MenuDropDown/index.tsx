@@ -61,7 +61,7 @@ const MenuDropDown = (
       >
         <Field>
           {secondaryTitle && (
-            <ZigTypography color="neutral400" variant={"h5"}>
+            <ZigTypography color="neutral400" variant={"caption"} component="p">
               {secondaryTitle}
             </ZigTypography>
           )}

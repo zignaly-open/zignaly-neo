@@ -9,11 +9,18 @@ type ToastFn = (text: string, extraOptions?: ToastOptions) => void;
 const showToast =
   (type: 'success' | 'error' | 'info') =>
   (message: string, options?: ToastOptions) =>
-    toast(<Toaster variant={type} caption={message} />, {
-      type: type,
-      icon: false,
-      ...options,
-    } as ToastOptions);
+    toast(
+      <Toaster
+        variant={type}
+        caption={message}
+        id={type && `toast__${type}`}
+      />,
+      {
+        type: type,
+        icon: false,
+        ...options,
+      } as ToastOptions,
+    );
 
 const backendErrorText = (t: TFunction, error: BackendError) => {
   const { code, msg } = error?.data?.error || {};

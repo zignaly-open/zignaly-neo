@@ -7,9 +7,9 @@ import { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.
 import { dark } from "theme";
 import ZigTypography from "../ZigTypography";
 
-const Toaster = ({ variant = "error", size = "large", caption = "" }: ToasterProps) => {
+const Toaster = ({ variant = "error", size = "large", caption = "", id }: ToasterProps) => {
   return (
-    <styled.ToastContainer variant={variant} size={size}>
+    <styled.ToastContainer variant={variant} size={size} id={id}>
       <styled.IconContainer>
         {variant === "error" && <ErrorAlertIcon color={dark.redGraphOrError} />}
         {variant === "success" && <SuccessIcon color={dark.greenGraph} />}

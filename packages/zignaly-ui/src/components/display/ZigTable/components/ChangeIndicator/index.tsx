@@ -109,7 +109,7 @@ const ChangeIndicator = ({
               <>
                 {renderIndicator()}
                 {label && (
-                  <Subtitle variant="h5" color="neutral400">
+                  <Subtitle variant="caption" color="neutral400">
                     <>{label}</>
                   </Subtitle>
                 )}

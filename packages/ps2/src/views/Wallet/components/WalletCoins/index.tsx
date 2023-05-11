@@ -63,7 +63,7 @@ const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
               gap={1}
             >
               <ZigPriceLabel value={getValue()} usd color='almostWhite' />
-              <ZigTypography variant='h5' color='neutral300'>
+              <ZigTypography variant='caption' component='p' color='neutral300'>
                 @
                 <NumericFormat
                   value={coins[original.coin].usdPrice}

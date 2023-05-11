@@ -86,7 +86,14 @@ const MyBalances: React.FC = () => {
                   <ZigButton
                     variant={'text'}
                     id={'balance__export'}
-                    endIcon={<OpenInNew />}
+                    sx={{
+                      '.MuiSvgIcon-root.MuiSvgIcon-root': {
+                        fill: (theme) => theme.palette.links,
+                      },
+                    }}
+                    endIcon={
+                      <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
+                    }
                     onClick={() => {
                       showModal(ExportModal, {
                         type: type !== 'all' ? type : null,
@@ -96,6 +103,7 @@ const MyBalances: React.FC = () => {
                     {t('action:export')}
                   </ZigButton>
                   <StyledZigSelect
+                    id={'balances-transaction__select-type'}
                     options={filterOptions}
                     value={type}
                     onChange={setType}
