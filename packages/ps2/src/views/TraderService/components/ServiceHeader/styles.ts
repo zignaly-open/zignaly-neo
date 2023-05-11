@@ -40,12 +40,24 @@ type OptionType = {
 export const Option = styled('a')<OptionType>`
   cursor: pointer;
   user-select: none;
-  color: ${({ theme, active }) =>
-    active ? theme.palette.highlighted : theme.palette.neutral300};
+  ${({ theme, active }) =>
+    active
+      ? `
+        color: ${theme.palette.highlighted};
+      `
+      : `
+        color: ${theme.palette.neutral300};
+
+        &:hover {
+          color: ${theme.palette.neutral100};
+        }
+      `}
 
   &:hover {
-    color: ${({ theme }) => theme.palette.neutral100};
-    background: ${({ theme }) => theme.palette.neutral700};
+    ${({ theme }) =>
+      `
+      background: ${theme.palette.neutral700};
+    `}
   }
 `;
 
