@@ -19,6 +19,7 @@ import { getTransactionSideType, truncateAddress } from './util';
 import { TRANSACTION_TYPE } from 'apis/coin/types';
 import { useActiveExchange } from '../../../../apis/user/use';
 import CoinLabel from 'components/CoinLabel';
+import { useBalanceQuery } from 'apis/user/api';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(
@@ -38,8 +39,18 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
     pageIndex,
   );
   const coinsEndpoint = useExchangeCoinsList();
-
   const exchange = useActiveExchange();
+  // Trigger balance update to be sure that balance widget matches transactions data
+  useBalanceQuery(
+    {
+      exchangeInternalId: exchange?.internalId,
+    },
+    {
+      refetchOnMountOrArgChange: true,
+      skip: !exchange?.internalId,
+    },
+  );
+
   const defineSign = (typeTransaction: string, fromId: string) => {
     if (
       [
