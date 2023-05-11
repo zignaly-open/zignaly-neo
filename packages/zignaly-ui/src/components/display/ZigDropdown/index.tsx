@@ -1,5 +1,5 @@
 import Popover from "@mui/material/Popover";
-import React, { MouseEvent, Suspense, useEffect, useImperativeHandle } from "react";
+import React, { MouseEvent, useEffect, useImperativeHandle } from "react";
 import { ZigDropdownProps, ZigDropdownHandle, ZigDropdownOption } from "./types";
 import {
   ArrowBottomIconStyled,
