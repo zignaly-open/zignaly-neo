@@ -30,7 +30,6 @@ const ExtraNavigationDropdown: React.FC = () => {
   const { data: traderServices, isFetching } = useTraderServices();
   const isAuthenticated = useIsAuthenticated();
   const md = useMediaQuery(theme.breakpoints.up('md'));
-  const xl = useMediaQuery(theme.breakpoints.up('xl'));
 
   const onClose = useCallback(() => {
     dropDownRef.current?.closeDropDown();
@@ -116,7 +115,7 @@ const ExtraNavigationDropdown: React.FC = () => {
       ...options,
     ];
   }
-  if (isAuthenticated && traderServices?.length && !isFetching && !xl) {
+  if (isAuthenticated && traderServices?.length && !isFetching) {
     options = [
       {
         label: t('main-menu.dropdown-link-forTrading'),

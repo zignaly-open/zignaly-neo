@@ -2,11 +2,7 @@ import { HeaderLinksContainer, BrandImage } from '@zignaly-open/ui';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavigationLink } from './atoms';
-import {
-  ROUTE_BECOME_TRADER,
-  ROUTE_PROFIT_SHARING,
-  ROUTE_TRADING_SERVICE_MANAGE,
-} from '../../../routes';
+import { ROUTE_BECOME_TRADER, ROUTE_PROFIT_SHARING } from '../../../routes';
 import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
 import AccountMenu from '../AccountMenu';
 import ReferralButton from '../ReferralButton';
@@ -27,7 +23,6 @@ const Header: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const md = useMediaQuery(theme.breakpoints.up('md'));
-  const xl = useMediaQuery(theme.breakpoints.up('xl'));
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -59,15 +54,6 @@ const Header: React.FC = () => {
                       key='--route-bt'
                     >
                       {t('navigation-menu.become-trader')}
-                    </NavigationLink>
-                  )}
-                  {xl && (
-                    <NavigationLink
-                      id='menu__manage-service'
-                      to={ROUTE_TRADING_SERVICE_MANAGE}
-                      key='--route-ms'
-                    >
-                      {t('main-menu.dropdown-link-forTrading')}
                     </NavigationLink>
                   )}
                 </HeaderLinksContainer>
