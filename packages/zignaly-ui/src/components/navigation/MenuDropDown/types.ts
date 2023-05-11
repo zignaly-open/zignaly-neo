@@ -13,4 +13,5 @@ export type MenuDropDownProps = {
   dropDownOptions?: {
     maxHeight?: string;
   };
+  className?: string;
 };

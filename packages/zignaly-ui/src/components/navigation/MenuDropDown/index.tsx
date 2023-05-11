@@ -20,6 +20,7 @@ const MenuDropDown = (
     children,
     dropDownOptions,
     id,
+    className,
   }: MenuDropDownProps,
   innerRef: any,
 ) => {
@@ -51,7 +52,7 @@ const MenuDropDown = (
   }));
 
   return (
-    <Layout ref={menuRef} id={id}>
+    <Layout ref={menuRef} id={id} className={className}>
       <Button
         focused={focused}
         center={!secondaryTitle}
@@ -60,11 +61,13 @@ const MenuDropDown = (
       >
         <Field>
           {secondaryTitle && (
-            <ZigTypography variant={"caption"} component="p">
+            <ZigTypography color="neutral400" variant={"caption"} component="p">
               {secondaryTitle}
             </ZigTypography>
           )}
-          <ZigTypography variant={"h3"}>{title}</ZigTypography>
+          <ZigTypography color="neutral300" fontWeight={400} variant={"h3"} component="span">
+            {title}
+          </ZigTypography>
         </Field>
         <ArrowIcon>
           <ArrowBottomIcon />

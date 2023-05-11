@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { styledIf } from '@zignaly-open/ui';
+import { MenuDropDown } from '@zignaly-open/ui';
 
 export const Layout = styled('div')`
   flex-direction: row;
@@ -10,21 +10,20 @@ export const Layout = styled('div')`
   left: 0;
   background: #12152c;
   z-index: 50;
-
-  &:after {
-    content: '';
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    height: 1px;
-    background: #222249;
-  }
 `;
 
 export const Container = styled('div')`
   display: grid;
   grid-template-columns: 25% repeat(5, minmax(0%, 100%));
+
+  > div:first-of-type {
+    border-left: 1px dashed ${({ theme }) => theme.palette.neutral600};
+  }
+
+  > div:first-of-type,
+  > div:last-of-type {
+    border-right: 1px dashed ${({ theme }) => theme.palette.neutral600};
+  }
 `;
 
 export const Options = styled('nav')`
@@ -41,45 +40,48 @@ type OptionType = {
 export const Option = styled('a')<OptionType>`
   cursor: pointer;
   user-select: none;
+  ${({ theme, active }) =>
+    active
+      ? `
+        color: ${theme.palette.highlighted};
+      `
+      : `
+        color: ${theme.palette.neutral300};
 
-  ${({ theme, active }) => `
-    ${styledIf(
-      active,
+        &:hover {
+          color: ${theme.palette.neutral100};
+        }
+      `}
+
+  &:hover {
+    ${({ theme }) =>
       `
-      color: ${theme.palette.secondary};
-    `,
-      `
-      color: ${theme.palette.neutral200};
-      
-      &:hover {
-        color: ${theme.palette.neutral150};
-      }        
-    `,
-    )}
-  `}
+      background: ${theme.palette.neutral700};
+    `}
+  }
 `;
 
-export const HeadOption = styled(Option)<OptionType>`
+export const HeadOption = styled(Option)<
+  OptionType & { isSubOption?: boolean }
+>`
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 56px;
   background: #12152c;
-  border: 1px solid #222249;
 
-  ${({ theme, active }) => `
-    ${styledIf(
-      !active,
+  ${({ isSubOption, theme }) =>
+    isSubOption
+      ? `
+        padding: 0 10px 0 30px;
       `
-      color: ${theme.palette.neutral300};
-      
-      &:hover {
-        color: ${theme.palette.neutral150};
-      }        
-    `,
-      `
-       border-bottom: 3px solid ${theme.palette.secondary};
-       `,
-    )}
-  `}
+      : `
+        border-right: 1px dashed ${theme.palette.neutral600};
+        justify-content: center;
+      `}
+`;
+
+export const ServiceDropDown = styled(MenuDropDown)`
+  .MuiTypography-h3 {
+    color: ${({ theme }) => theme.palette.neutral100};
+  }
 `;

@@ -54,15 +54,12 @@ export const Button = styled.div<ButtonProps>`
 
   ${({ center, theme, isActiveDropDown, focused }) => `
     background: #12152C;
-    border: 1px solid #222249;
     
     ${styledIf(
       focused,
       `
-      border-bottom: 1px solid ${theme.secondary};
-      
       span {
-        color: ${theme.secondary};
+        color: ${theme.highlighted};
       }
     `,
       `
