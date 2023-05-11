@@ -247,10 +247,13 @@ export function useWithdrawInvestment(): {
         amount: amount.toString(),
       }).unwrap();
       refetch();
-      await fetchBalance({
-        exchangeInternalId: exchange.internalId,
-        force: true,
-      });
+      // Delayed balance force refresh
+      setTimeout(() => {
+        fetchBalance({
+          exchangeInternalId: exchange.internalId,
+          force: true,
+        });
+      }, 5000);
     },
   };
 }
