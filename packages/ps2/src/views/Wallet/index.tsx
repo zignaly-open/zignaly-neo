@@ -40,7 +40,7 @@ const Wallet = () => {
               gap={1}
               alignItems='center'
               color='neutral100'
-              mt={4}
+              mt={6}
             >
               <WalletGradientIcon width={40} height={40} />
               <ZigTypography textTransform='uppercase' variant='h3'>
