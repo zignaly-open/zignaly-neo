@@ -256,6 +256,9 @@ const darkMui = createTheme({
           "&.Mui-disabled": {
             opacity: 0.33,
           },
+          ".MuiButton-startIcon": {
+            color: "#8899D0",
+          },
         },
         outlined: {
           transition: "all 0.2s linear",
