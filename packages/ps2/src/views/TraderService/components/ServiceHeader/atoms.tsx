@@ -1,7 +1,7 @@
 import React from 'react';
 import { MenuDropDown, ZigTypography } from '@zignaly-open/ui';
-import { HeadOption } from './styles';
-import { Link, useLocation } from 'react-router-dom';
+import { HeadOption, MenuLink } from './styles';
+import { useLocation } from 'react-router-dom';
 
 export const ServiceListOption: React.FC<{
   path: string;
@@ -11,13 +11,13 @@ export const ServiceListOption: React.FC<{
 }> = ({ path, label, id, isSubOption }) => {
   const location = useLocation();
   return (
-    <Link to={path} id={id}>
+    <MenuLink to={path} id={id} isSubOption={isSubOption}>
       <HeadOption isSubOption={isSubOption} active={location.pathname === path}>
         <ZigTypography color='inherit' fontWeight='inherit' variant={'h3'}>
           {label}
         </ZigTypography>
       </HeadOption>
-    </Link>
+    </MenuLink>
   );
 };
 
