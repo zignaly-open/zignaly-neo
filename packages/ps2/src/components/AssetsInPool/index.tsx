@@ -1,7 +1,7 @@
 import React from 'react';
 import { Icon, PriceBoxOverride } from './styles';
 import { AssetsInPoolProps } from './types';
-import { WhaleIcon, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import { ZigWhaleIcon, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { formatLocalizedDistance } from 'views/Dashboard/components/MyDashboard/util';
@@ -37,7 +37,7 @@ const AssetsInPool = ({
         />
         {+assetsValue >= 200000 && (
           <Icon>
-            <WhaleIcon />
+            <ZigWhaleIcon />
           </Icon>
         )}
       </PriceBoxOverride>

@@ -18,7 +18,7 @@ import {
   Avatar,
   ZigDropdown,
   ZigTypography,
-  UserIcon,
+  ZigUserIcon,
   ZigButton,
 } from '@zignaly-open/ui';
 import {
@@ -65,7 +65,7 @@ function AccountMenu(): React.ReactElement | null {
       <>
         <Link to={ROUTE_LOGIN} state={{ redirectTo: location }}>
           <LoginButton id={'menu__login'}>
-            <UserIcon
+            <ZigUserIcon
               color={theme.palette.neutral300}
               width={'16px'}
               height={'16px'}
@@ -166,7 +166,7 @@ function AccountMenu(): React.ReactElement | null {
         {
           element: (
             <ZigButton
-              id={'account-menu-dropdown__deposit'}
+              id={'invest-form__deposit'}
               startIcon={<Add />}
               sx={{ fontWeight: 600, mb: 1 }}
               variant={'contained'}

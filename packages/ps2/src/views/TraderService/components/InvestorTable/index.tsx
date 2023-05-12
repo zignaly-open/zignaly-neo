@@ -3,7 +3,7 @@ import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
 import { Layout, InvestorCounts } from './styles';
 import {
-  UserIcon,
+  ZigUserIcon,
   ZigTypography,
   ChangeIndicator,
   ZigTable,
@@ -124,7 +124,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         ]) => (
           <>
             <InvestorCounts>
-              <UserIcon width={'17px'} height={'20px'} color={'#65647E'} />
+              <ZigUserIcon width={'17px'} height={'20px'} color={'#65647E'} />
               <ZigTypography variant={'h3'} color={'almostWhite'}>
                 {t('number-of-investors', {
                   count: investors?.length,
