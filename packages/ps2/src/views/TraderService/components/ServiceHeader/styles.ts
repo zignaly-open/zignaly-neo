@@ -53,10 +53,7 @@ export const Option = styled('a')<OptionType>`
       `}
 
   &:hover {
-    ${({ theme }) =>
-      `
-      background: ${theme.palette.neutral700};
-    `}
+    background: #1b213d;
   }
 `;
 
