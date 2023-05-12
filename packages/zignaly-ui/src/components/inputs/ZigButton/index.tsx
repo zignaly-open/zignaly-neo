@@ -1,7 +1,6 @@
 import React from "react";
 import { LoadingButton, LoadingButtonProps } from "@mui/lab";
 import { ButtonGroup, styled, Tooltip } from "@mui/material";
-import { dark } from "../../../theme";
 
 export type ZigButtonProps = Omit<LoadingButtonProps, "size" | "variant"> & {
   size?: LoadingButtonProps["size"] | "xlarge";
