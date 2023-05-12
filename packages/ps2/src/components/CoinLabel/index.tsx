@@ -5,20 +5,15 @@ import { Layout, WrapCoin, Coin, Icon } from './styles';
 
 import { CoinLabelProps } from './types';
 
-const CoinLabel = ({ name, coin, bucket, prefixId }: CoinLabelProps) => (
-  <Layout>
-    <Icon
-      coin={coin}
-      name={name}
-      bucket={bucket}
-      id={prefixId && `${prefixId}__icon-${coin}`}
-    />
+const CoinLabel = ({ name, coin, bucket, id }: CoinLabelProps) => (
+  <Layout id={id}>
+    <Icon coin={coin} name={name} bucket={bucket} className={`icon__${coin}`} />
     <WrapCoin>
-      <Coin id={prefixId && `${prefixId}__${coin}`}>{coin}</Coin>
+      <Coin className={`name__${coin}`}>{coin}</Coin>
       <ZigTypography
         variant='body2'
         color='neutral300'
-        id={prefixId && `${prefixId}__name-${name}`}
+        className={`name__${name}`}
       >
         {name}
       </ZigTypography>
