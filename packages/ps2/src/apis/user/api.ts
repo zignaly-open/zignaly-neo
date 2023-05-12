@@ -213,6 +213,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       url: `user/exchanges/${exchangeInternalId}/balance`,
       params: { force },
     }),
+    providesTags: ['Balance'],
   }),
 }));
 
