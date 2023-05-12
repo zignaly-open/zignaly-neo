@@ -53,7 +53,7 @@ const MarkdownSection: React.FC<{
   const Icon = shown ? RemoveIcon : AddIcon;
   return (
     <Box mt={8} mb={4}>
-      <ZigTypography variant={'h2'} sx={{ mb: 1 }}>
+      <ZigTypography variant={'h2'} sx={{ mb: 3 }} align='center'>
         {title}
       </ZigTypography>
       {subtitle}
@@ -65,7 +65,13 @@ const MarkdownSection: React.FC<{
       >
         {chunks.length ? (
           <MarkdownContainer>
-            <ReactMarkdown remarkPlugins={[breaks]} linkTarget='_blank'>
+            <ReactMarkdown
+              remarkPlugins={[breaks]}
+              linkTarget='_blank'
+              components={{
+                p: ZigTypography,
+              }}
+            >
               {content}
             </ReactMarkdown>
           </MarkdownContainer>
