@@ -1,7 +1,14 @@
 import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { MarginContainer, ZigTypography } from '@zignaly-open/ui';
-import { Layout, Container, Options, Option, ServiceDropDown } from './styles';
+import {
+  Layout,
+  Container,
+  Options,
+  Option,
+  ServiceDropDown,
+  ServiceOption,
+} from './styles';
 import {
   useIsServiceOwner,
   useTraderServices,
@@ -60,11 +67,11 @@ function ServiceHeader() {
                   to={currentPath.replace(serviceId, service?.serviceId)}
                   key={`--route-key-${service?.serviceId}`}
                 >
-                  <Option active={serviceId === service?.serviceId}>
+                  <ServiceOption active={serviceId === service?.serviceId}>
                     <ZigTypography color='inherit' variant={'body1'}>
                       {service?.serviceName}
                     </ZigTypography>
-                  </Option>
+                  </ServiceOption>
                 </Link>
               ))}
             </Options>
