@@ -31,7 +31,7 @@ const TransactionDetails = ({
       <Box display='flex' alignItems='center'>
         <TypographyPanelLabel>{t('details.txHash')}</TypographyPanelLabel>
         <TypographyPanelName
-          id={`balances-table-transaction-${txId}-expanded__txHash`}
+          id={`balances-table-transaction-expanded__txHash-${txId}`}
         >
           {transaction.txId}
         </TypographyPanelName>
@@ -40,7 +40,7 @@ const TransactionDetails = ({
         <Box display='flex' alignItems='center'>
           <TypographyPanelLabel>{t('details.note')}</TypographyPanelLabel>
           <TypographyPanelName
-            id={`balances-table-transaction-${txId}-expanded__note`}
+            id={`balances-table-transaction-expanded__note-${txId}`}
           >
             {transaction.message}
           </TypographyPanelName>

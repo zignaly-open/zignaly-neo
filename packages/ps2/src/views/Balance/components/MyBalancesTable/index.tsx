@@ -53,7 +53,7 @@ const MyBalancesTable = (): JSX.Element => {
           <CoinLabel
             coin={getValue()}
             name={original.balance.name}
-            prefixId={'balances-table-coins'}
+            id={'balances-table-coins'}
           />
         ),
       }),
