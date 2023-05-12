@@ -53,7 +53,7 @@ export const Button = styled.div<ButtonProps>`
   cursor: pointer;
 
   ${({ center, theme, isActiveDropDown, focused }) => `
-    background: #12152C;
+    background: #0F0F25;
     
     ${styledIf(
       focused,
@@ -104,4 +104,5 @@ export const DropDown = styled.div<any>`
 
   box-shadow: 0px 5px 11px rgba(11, 13, 26, 0.25);
   border-radius: 0 0 5px 5px;
+  border-top: 1px solid ${({ theme }) => theme.neutral700}80;
 `;
