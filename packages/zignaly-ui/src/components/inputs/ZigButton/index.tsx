@@ -64,17 +64,19 @@ const ZigButton = ({
 };
 
 export const ZigButtonGroup = styled(ButtonGroup)`
+  outline: 1px solid ${({ theme }) => theme.palette.neutral600};
+  outline-offset: -1px;
+
   .MuiButton-root {
-    border-right-width: 0 !important;
-
-    &:last-child {
-      border-right-width: 1px !important;
-    }
-
     &:hover,
     &.MuiButton-active {
       z-index: 3;
-      box-shadow: 1px 0 0 ${dark.neutral400};
+      border-color: #464a85 !important;
+      border-radius: 5px;
+
+      + button {
+        border-left-color: transparent;
+      }
     }
 
     &.Mui-disabled {
