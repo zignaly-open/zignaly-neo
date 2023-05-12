@@ -28,17 +28,18 @@ const ServiceProfileHeader: React.FC<{ service: Service }> = ({ service }) => {
         display: 'flex',
         flex: 1,
         alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
-      <Box sx={{ width: '55px', marginBottom: md ? 0 : 2 }}>
+      <Box sx={{ marginBottom: md ? 0 : 2 }}>
         <Avatar
-          size={'x-large'}
+          size={'xx-large'}
           alt={t('logo-alt', { name: service.name })}
           image={getServiceLogo(service.logo)}
           id={'service-profile__avatar'}
         />
       </Box>
-      <Box ml={md ? 2 : 0} flex={1} sx={{ textAlign: md ? 'left' : 'center' }}>
+      <Box ml={md ? '31px' : 0} sx={{ textAlign: md ? 'left' : 'center' }}>
         <ServiceInformation service={service} />
       </Box>
     </Box>

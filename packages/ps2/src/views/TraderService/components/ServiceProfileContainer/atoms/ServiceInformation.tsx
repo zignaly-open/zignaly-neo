@@ -14,7 +14,7 @@ import {
   StyledPersonIcon,
   StyledVerifiedIcon,
 } from '../styles';
-import { ZigButton } from '@zignaly-open/ui';
+import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import copy from 'copy-to-clipboard';
 import { generatePath } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE } from '../../../../../routes';
@@ -28,15 +28,16 @@ const ServiceInformation: React.FC<{
   const { t } = useTranslation('service');
   return (
     <>
-      <ServiceHeader component={'h1'} id={'service-profile__service-name'}>
+      <ZigTypography variant={'h1'} id={'service-profile__service-name'}>
         {service.name}
-      </ServiceHeader>
+      </ZigTypography>
       <Box
         sx={{
           flexDirection: md ? 'row' : 'column',
           display: 'flex',
           alignItems: 'center',
           paddingRight: md ? 3 : 0,
+          paddingTop: md ? 1 : 0,
         }}
       >
         <GreySubHeader

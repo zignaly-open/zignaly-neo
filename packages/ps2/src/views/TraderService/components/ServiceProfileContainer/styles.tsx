@@ -26,13 +26,6 @@ export const GreySubHeaderHighlight = styled(GreySubHeader)`
   // no highlight lol
 `;
 
-export const ServiceHeader: typeof ZigTypography = styled(ZigTypography)`
-  font-weight: 500 !important;
-  font-size: 18px !important;
-  line-height: 28px !important;
-  color: ${(props) => props.theme.palette.almostWhite} !important;
-`;
-
 export const LiquidatedLabel = muiStyled(Box)`
   border: 1px solid ${(props) => props.theme.palette.redGraphOrError};
   border-radius: 5px;
