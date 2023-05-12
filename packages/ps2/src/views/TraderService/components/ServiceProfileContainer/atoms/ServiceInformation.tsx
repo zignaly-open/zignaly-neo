@@ -9,7 +9,6 @@ import {
   GreySubHeaderHighlight,
   LinkIconWithSafariFix,
   Separator,
-  ServiceHeader,
   StyledCalendarMonthIcon,
   StyledPersonIcon,
   StyledVerifiedIcon,
