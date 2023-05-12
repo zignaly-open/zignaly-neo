@@ -5,7 +5,6 @@ import {
   Layout,
   Container,
   Options,
-  Option,
   ServiceDropDown,
   ServiceOption,
 } from './styles';
