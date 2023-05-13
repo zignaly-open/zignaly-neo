@@ -1,5 +1,6 @@
 import { styled } from '@mui/material';
 import { MenuDropDown } from '@zignaly-open/ui';
+import { Link } from 'react-router-dom';
 
 export const Layout = styled('div')`
   flex-direction: row;
@@ -16,12 +17,9 @@ export const Container = styled('div')`
   display: grid;
   grid-template-columns: 25% repeat(4, minmax(0%, 100%));
 
-  > div:first-of-type {
+  > div:first-of-type > div:first-of-type,
+  > div:last-of-type > div:first-of-type {
     border-left: 1px dotted ${({ theme }) => theme.palette.neutral600};
-  }
-
-  > div:first-of-type,
-  > div:last-of-type {
     border-right: 1px dotted ${({ theme }) => theme.palette.neutral600};
   }
 `;
@@ -53,10 +51,7 @@ export const Option = styled('a')<OptionType>`
       `}
 
   &:hover {
-    ${({ theme }) =>
-      `
-      background: ${theme.palette.neutral700};
-    `}
+    background: #1b213d;
   }
 `;
 
@@ -73,15 +68,25 @@ export const HeadOption = styled(Option)<
   height: 56px;
   background: #0f0f25;
 
-  ${({ isSubOption, theme }) =>
+  ${({ isSubOption }) =>
     isSubOption
       ? `
-        padding: 0 10px 0 54px;
+        padding: 0 18px 0 54px;
+        background: #11152B;
       `
       : `
-        border-right: 1px dotted ${theme.palette.neutral600};
         justify-content: center;
       `}
+`;
+
+export const MenuLink = styled(Link)<{ isSubOption: boolean }>`
+  ${({ isSubOption, theme }) =>
+    !isSubOption &&
+    `
+    &:not(:last-of-type) {
+      border-right: 1px dotted ${theme.palette.neutral600};
+    }
+  `}
 `;
 
 export const ServiceDropDown = styled(MenuDropDown)`

@@ -22,6 +22,8 @@ import {
   ROUTE_TRADING_SERVICE_MANAGE,
   ROUTE_TRADING_SERVICE_EDIT,
 } from '../../../../routes';
+import { Check } from '@mui/icons-material';
+import { Box } from '@mui/material';
 
 function ServiceHeader() {
   const menuDropDownRef = useRef(null);
@@ -67,9 +69,17 @@ function ServiceHeader() {
                   key={`--route-key-${service?.serviceId}`}
                 >
                   <ServiceOption active={serviceId === service?.serviceId}>
-                    <ZigTypography color='inherit' variant={'body1'}>
-                      {service?.serviceName}
-                    </ZigTypography>
+                    <Box
+                      display='flex'
+                      alignItems='center'
+                      justifyContent='space-between'
+                      flex={1}
+                    >
+                      <ZigTypography color='inherit' variant={'body1'}>
+                        {service?.serviceName}
+                      </ZigTypography>
+                      {serviceId === service?.serviceId && <Check />}
+                    </Box>
                   </ServiceOption>
                 </Link>
               ))}
