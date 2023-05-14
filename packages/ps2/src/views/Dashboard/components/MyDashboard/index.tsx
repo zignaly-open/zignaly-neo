@@ -92,7 +92,7 @@ const MyDashboard: React.FC = () => {
         header: t('tableHeader.1-mo.title'),
         cell: ({ row: { original } }) => (
           <Box
-            minHeight={'135px'}
+            minHeight={'125px'}
             display={'flex'}
             flexDirection={'column'}
             justifyContent={'center'}
@@ -124,12 +124,14 @@ const MyDashboard: React.FC = () => {
       columnHelper.accessor('pnlDailyMeanLc', {
         header: t('tableHeader.dailyAvg-title'),
         cell: ({ getValue, row: { original } }) => (
-          <ZigTablePriceLabel
-            id={`portfolio-table__dailyAvg-${original.serviceId}`}
-            coin={original.ssc}
-            value={new BigNumber(getValue()).toFixed()}
-            color={getColorForNumber(getValue())}
-          />
+          <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+            <ZigTablePriceLabel
+              id={`portfolio-table__dailyAvg-${original.serviceId}`}
+              coin={original.ssc}
+              value={new BigNumber(getValue()).toFixed()}
+              color={getColorForNumber(getValue())}
+            />
+          </Box>
         ),
         sortingFn: 'alphanumeric',
       }),
