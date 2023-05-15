@@ -59,42 +59,42 @@ export { default as CheckBox } from "./components/inputs/CheckBox";
 
 // Icons - for the love of God, we should not do this
 // TODO: we have mui icons for a bloody reason
-// TODO: @Nikita9901 pls fix
-export { ReactComponent as CloneIcon } from "assets/icons/clone-icon.svg";
-export { ReactComponent as RefreshIcon } from "assets/icons/refresh-icon.svg";
-export { ReactComponent as PencilIcon } from "assets/icons/pencil-icon.svg";
-export { ReactComponent as WhaleIcon } from "assets/icons/whale-icon.svg";
-export { ReactComponent as CloseIcon } from "assets/icons/close-icon.svg";
-export { ReactComponent as CopyIcon } from "assets/icons/copy-icon.svg";
-export { ReactComponent as OpenArrowIcon } from "assets/icons/open-arrow-icon.svg";
-export { ReactComponent as EyeOpenIcon } from "assets/icons/eye-open-icon.svg";
-export { ReactComponent as EyeClosedIcon } from "assets/icons/eye-closed-icon.svg";
-export { ReactComponent as OptionDotsIcon } from "assets/icons/option-dots-icon.svg";
-export { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";
-export { ReactComponent as ArrowUpIcon } from "assets/icons/arrow-up-icon.svg";
-export { ReactComponent as ArrowLeftIcon } from "assets/icons/arrow-left-icon.svg";
-export { ReactComponent as ArrowRightIcon } from "assets/icons/arrow-right-icon.svg";
-export { ReactComponent as UserIcon } from "assets/icons/user-icon.svg";
-export { ReactComponent as CheckIcon } from "assets/icons/check-icon.svg";
-export { ReactComponent as LogoDiscordIcon } from "assets/icons/discord-logo-icon.svg";
-export { ReactComponent as PlusIcon } from "assets/icons/plus-icon.svg";
-export { ReactComponent as LogoLinkedInIcon } from "assets/icons/linkedin-logo-icon.svg";
-export { ReactComponent as LogoTwitterIcon } from "assets/icons/twitter-logo-icon.svg";
-export { ReactComponent as LogoMediumIcon } from "assets/icons/medium-logo-icon.svg";
-export { ReactComponent as LogoTelegramIcon } from "assets/icons/telegram-logo-icon.svg";
-export { ReactComponent as WalletIcon } from "assets/icons/wallet-icon.svg";
-export { ReactComponent as WalletGradientIcon } from "assets/icons/wallet-gradient-icon.svg";
-export { ReactComponent as ListGradientIcon } from "assets/icons/list-gradient-icon.svg";
-export { ReactComponent as OptionHorizontalDotsIcon } from "assets/icons/horizontal-three-dots-icon.svg";
-export { ReactComponent as EditPenIcon } from "assets/icons/edit-pen-icon.svg";
-export { ReactComponent as SwapIcon } from "assets/icons/swap-icon.svg";
-export { ReactComponent as SwapVertIcon } from "assets/icons/swap-vert-icon.svg";
-export { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.svg";
+// UPD: apparently no, and we'll be using these ones ¯\_(ツ)_/¯
+export { ReactComponent as ZigCloneIcon } from "assets/icons/clone-icon.svg";
+export { ReactComponent as ZigRefreshIcon } from "assets/icons/refresh-icon.svg";
+export { ReactComponent as ZigPencilIcon } from "assets/icons/pencil-icon.svg";
+export { ReactComponent as ZigWhaleIcon } from "assets/icons/whale-icon.svg";
+export { ReactComponent as ZigCloseIcon } from "assets/icons/close-icon.svg";
+export { ReactComponent as ZigCopyIcon } from "assets/icons/copy-icon.svg";
+export { ReactComponent as ZigOpenArrowIcon } from "assets/icons/open-arrow-icon.svg";
+export { ReactComponent as ZigEyeOpenIcon } from "assets/icons/eye-open-icon.svg";
+export { ReactComponent as ZigEyeClosedIcon } from "assets/icons/eye-closed-icon.svg";
+export { ReactComponent as ZigOptionDotsIcon } from "assets/icons/option-dots-icon.svg";
+export { ReactComponent as ZigArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";
+export { ReactComponent as ZigArrowUpIcon } from "assets/icons/arrow-up-icon.svg";
+export { ReactComponent as ZigArrowLeftIcon } from "assets/icons/arrow-left-icon.svg";
+export { ReactComponent as ZigArrowRightIcon } from "assets/icons/arrow-right-icon.svg";
+export { ReactComponent as ZigUserIcon } from "assets/icons/user-icon.svg";
+export { ReactComponent as ZigCheckIcon } from "assets/icons/check-icon.svg";
+export { ReactComponent as ZigLogoDiscordIcon } from "assets/icons/discord-logo-icon.svg";
+export { ReactComponent as ZigPlusIcon } from "assets/icons/plus-icon.svg";
+export { ReactComponent as ZigLogoLinkedInIcon } from "assets/icons/linkedin-logo-icon.svg";
+export { ReactComponent as ZigLogoTwitterIcon } from "assets/icons/twitter-logo-icon.svg";
+export { ReactComponent as ZigLogoMediumIcon } from "assets/icons/medium-logo-icon.svg";
+export { ReactComponent as ZigLogoTelegramIcon } from "assets/icons/telegram-logo-icon.svg";
+export { ReactComponent as ZigWalletIcon } from "assets/icons/wallet-icon.svg";
+export { ReactComponent as ZigWalletGradientIcon } from "assets/icons/wallet-gradient-icon.svg";
+export { ReactComponent as ZigListGradientIcon } from "assets/icons/list-gradient-icon.svg";
+export { ReactComponent as ZigOptionHorizontalDotsIcon } from "assets/icons/horizontal-three-dots-icon.svg";
+export { ReactComponent as ZigEditPenIcon } from "assets/icons/edit-pen-icon.svg";
+export { ReactComponent as ZigSwapIcon } from "assets/icons/swap-icon.svg";
+export { ReactComponent as ZigSwapVertIcon } from "assets/icons/swap-vert-icon.svg";
+export { ReactComponent as ZigErrorAlertIcon } from "assets/icons/error-alert-icon.svg";
 export { ReactComponent as ZignalyIcon } from "assets/icons/coins/zignaly-coin.svg";
 export { ReactComponent as ZignalyLogo } from "assets/images/zignaly-isotype.svg";
-export { ReactComponent as GlobeLanguages } from "assets/icons/globe-languages.svg";
-export { ReactComponent as TimeIcon } from "assets/icons/time-icon.svg";
-export { ReactComponent as SearchIcon } from "assets/icons/search-icon.svg";
+export { ReactComponent as ZigGlobeLanguages } from "assets/icons/globe-languages.svg";
+export { ReactComponent as ZigTimeIcon } from "assets/icons/time-icon.svg";
+export { ReactComponent as ZigSearchIcon } from "assets/icons/search-icon.svg";
 export { ReactComponent as ZignalyExchangeIcon } from "assets/icons/zignaly-exchange-icon.svg";
 
 // Utils

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTheme } from '@mui/material';
 import { Layout, Header, Title, Body, HeaderButton, Inline } from './styles';
-import { CloseIcon, ArrowLeftIcon } from '@zignaly-open/ui';
+import { ZigCloseIcon, ZigArrowLeftIcon } from '@zignaly-open/ui';
 import { ModalContainerProps } from './types';
 
 function ModalContainer({
@@ -21,7 +21,7 @@ function ModalContainer({
         <Inline align={titleAlign}>
           {onGoBack && typeof onGoBack === 'function' && (
             <HeaderButton onClick={onGoBack}>
-              <ArrowLeftIcon
+              <ZigArrowLeftIcon
                 width={'32px'}
                 height={'32px'}
                 color={theme.palette.neutral300}
@@ -43,7 +43,7 @@ function ModalContainer({
           ? onClickClose &&
             typeof onClickClose === 'function' && (
               <HeaderButton onClick={onClickClose}>
-                <CloseIcon
+                <ZigCloseIcon
                   color={theme.palette.neutral300}
                   id={'modal__close'}
                 />
