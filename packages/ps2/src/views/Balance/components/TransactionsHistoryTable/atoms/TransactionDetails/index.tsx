@@ -22,14 +22,29 @@ const TransactionDetails = ({
   return (
     <TransactionPanel>
       <Box display='flex' alignItems='center'>
-        <TypographyPanelLabel>{t('details.from')}</TypographyPanelLabel>
+        <TypographyPanelLabel
+          className={'balances-table-transaction-expanded__text-from'}
+        >
+          {t('details.from')}
+        </TypographyPanelLabel>
         <FromTo side='from' transaction={transaction} txId={txId} />
-        <ArrowRightAlt style={{ margin: '0 21px' }} />
-        <TypographyPanelLabel>{t('details.to')}</TypographyPanelLabel>
+        <ArrowRightAlt
+          style={{ margin: '0 21px' }}
+          className={'balances-table-transaction-expanded__arrow-right'}
+        />
+        <TypographyPanelLabel
+          className={'balances-table-transaction-expanded__text-to'}
+        >
+          {t('details.to')}
+        </TypographyPanelLabel>
         <FromTo side='to' transaction={transaction} txId={txId} />
       </Box>
       <Box display='flex' alignItems='center'>
-        <TypographyPanelLabel>{t('details.txHash')}</TypographyPanelLabel>
+        <TypographyPanelLabel
+          className={'balances-table-transaction-expanded__text-txHash'}
+        >
+          {t('details.txHash')}
+        </TypographyPanelLabel>
         <TypographyPanelName
           id={`balances-table-transaction-expanded__txHash-${txId}`}
         >
