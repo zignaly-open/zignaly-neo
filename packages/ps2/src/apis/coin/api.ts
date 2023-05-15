@@ -88,7 +88,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       await queryFulfilled;
       setTimeout(() => {
         dispatch(api.util.invalidateTags(['Balance']));
-      }, 5000);
+      }, 10000);
     },
   }),
 
