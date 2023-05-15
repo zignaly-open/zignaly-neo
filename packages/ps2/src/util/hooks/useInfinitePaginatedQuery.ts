@@ -19,7 +19,7 @@ const useInfinitePaginatedQuery = (
   params: Record<string, string | number> & { limit?: number },
   pageIndex: number,
   hasMetadata: boolean,
-  queryOptions?: Parameters<UseQuery<any>>[1],
+  queryOptions?: Parameters<typeof useGetDataListQuery>[1],
 ) => {
   // Keep params as reference so we don't trigger a refresh when they change
   const localParams = useRef(params);
@@ -35,7 +35,8 @@ const useInfinitePaginatedQuery = (
         ? { from: localPage.id }
         : { offset: (localPage.page - 1) * limit }),
     },
-    queryOptions,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    queryOptions as any,
   );
 
   type InfiniteQueryResponseType = InfiniteQueryResponse<
