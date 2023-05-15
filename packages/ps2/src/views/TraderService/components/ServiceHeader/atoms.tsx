@@ -18,13 +18,13 @@ export const ServiceListOption: React.FC<{
         <Box
           display='flex'
           alignItems='center'
-          justifyContent='space-between'
+          justifyContent={isSubOption ? 'space-between' : 'center'}
           flex={1}
         >
           <ZigTypography color='inherit' fontWeight='inherit' variant={'h3'}>
             {label}
           </ZigTypography>
-          {location.pathname === path && <Check />}
+          {isSubOption && location.pathname === path && <Check />}
         </Box>
       </HeadOption>
     </MenuLink>
