@@ -313,6 +313,7 @@ const darkMui = createTheme({
         h1: {
           fontSize: "22px",
           lineHeight: "36px",
+          marginBottom: "6px",
           // color: dark.neutral000,
           fontWeight: "500",
         },
