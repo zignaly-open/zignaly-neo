@@ -98,11 +98,11 @@ const BalanceButton = () => {
           >
             <Box gap={1} display='flex' justifyContent='space-between'>
               <ZigTypography variant='body2' color='neutral300' fontSize='12px'>
-                {t('balance.total')}
+                {t('portfolio')}
               </ZigTypography>
               <ZigPriceLabel
                 usd
-                value={investedAmount + balance.totalFreeUSDT}
+                value={investedAmount}
                 color='neutral100'
                 variant='body2'
                 fontSize='12px'
