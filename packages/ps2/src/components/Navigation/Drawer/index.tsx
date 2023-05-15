@@ -22,6 +22,7 @@ import {
   ZigButton,
   ZigTypography,
   ZigGlobeLanguages,
+  ZigPlusIcon,
 } from '@zignaly-open/ui';
 import { useFirstOwnedService } from 'apis/service/use';
 import {
@@ -51,6 +52,7 @@ import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
 import { DropdownExchangeAccount } from './atoms';
+import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 
 const drawerWidth = 250;
 
@@ -257,7 +259,24 @@ const ZigDrawer = () => {
                   />
                 </ListItemButton>
               </ListItem>
+
+              <ListItem>
+                <ZigButton
+                  id={'my-portfolio__deposit'}
+                  startIcon={<ZigPlusIcon />}
+                  sx={{ fontWeight: 600, mb: 1 }}
+                  variant={'contained'}
+                  onClick={() =>
+                    showModal(DepositModal, {
+                      ctaId: 'account-menu-deposit',
+                    })
+                  }
+                >
+                  {t('action:deposit')}
+                </ZigButton>
+              </ListItem>
             </List>
+
             <List>
               <ListItem disablePadding>
                 <ListItemButton onClick={() => setLanguageOpen(!languageOpen)}>
