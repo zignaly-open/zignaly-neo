@@ -7,6 +7,10 @@ export const TableContainer = styled("div")`
   overflow: auto;
 `;
 
+export const FilterColumn = styled("th")`
+  width: 40px;
+`;
+
 export const Table = styled("table")`
   border-spacing: 0;
   width: 100%;
