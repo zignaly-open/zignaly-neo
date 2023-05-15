@@ -189,6 +189,8 @@ const darkMui = createTheme({
           letterSpacing: "0.55px",
           minWidth: "76px",
           fontSize: "11px",
+          paddingLeft: "18px",
+          paddingRight: "18px",
         },
         sizeSmall: {
           minHeight: "30px",
@@ -255,6 +257,12 @@ const darkMui = createTheme({
           },
           "&.Mui-disabled": {
             opacity: 0.33,
+          },
+          ".MuiButton-startIcon": {
+            color: "#8899D0",
+            "& svg.zig-icon": {
+              fill: "#8899D0",
+            },
           },
         },
         outlined: {

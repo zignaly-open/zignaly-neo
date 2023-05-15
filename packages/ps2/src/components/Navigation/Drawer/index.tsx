@@ -18,10 +18,10 @@ import {
 } from '@mui/material';
 import {
   Avatar,
-  UserIcon,
+  ZigUserIcon,
   ZigButton,
   ZigTypography,
-  GlobeLanguages,
+  ZigGlobeLanguages,
 } from '@zignaly-open/ui';
 import { useFirstOwnedService } from 'apis/service/use';
 import {
@@ -143,7 +143,7 @@ const ZigDrawer = () => {
                     id={'drawer__login'}
                     variant='text'
                     startIcon={
-                      <UserIcon
+                      <ZigUserIcon
                         color={theme.palette.neutral300}
                         width={'16px'}
                         height={'16px'}
@@ -262,7 +262,7 @@ const ZigDrawer = () => {
               <ListItem disablePadding>
                 <ListItemButton onClick={() => setLanguageOpen(!languageOpen)}>
                   <ListItemIcon sx={{ minWidth: '48px' }}>
-                    <GlobeLanguages
+                    <ZigGlobeLanguages
                       color={theme.palette.neutral300}
                       width={'26px'}
                       height={'26px'}

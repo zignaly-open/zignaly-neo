@@ -18,8 +18,9 @@ import {
   Avatar,
   ZigDropdown,
   ZigTypography,
-  UserIcon,
+  ZigUserIcon,
   ZigButton,
+  ZigPlusIcon,
 } from '@zignaly-open/ui';
 import {
   ROUTE_DASHBOARD,
@@ -36,7 +37,6 @@ import { useZModal } from 'components/ZModal/use';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
-import { Add } from '@mui/icons-material';
 import { ZigDropdownHandleType } from '@zignaly-open/ui';
 
 function AccountMenu(): React.ReactElement | null {
@@ -65,7 +65,7 @@ function AccountMenu(): React.ReactElement | null {
       <>
         <Link to={ROUTE_LOGIN} state={{ redirectTo: location }}>
           <LoginButton id={'menu__login'}>
-            <UserIcon
+            <ZigUserIcon
               color={theme.palette.neutral300}
               width={'16px'}
               height={'16px'}
@@ -166,8 +166,8 @@ function AccountMenu(): React.ReactElement | null {
         {
           element: (
             <ZigButton
-              id={'account-menu-dropdown__deposit'}
-              startIcon={<Add />}
+              id={'invest-form__deposit'}
+              startIcon={<ZigPlusIcon />}
               sx={{ fontWeight: 600, mb: 1 }}
               variant={'contained'}
               onClick={() => {

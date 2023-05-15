@@ -8,7 +8,7 @@ import {
 import {
   createColumnHelper,
   DateLabel,
-  ListGradientIcon,
+  ZigListGradientIcon,
   ZigButton,
   ZigCoinIcon,
   ZigTable,
@@ -168,7 +168,7 @@ const WalletTransactions = () => {
     <>
       <Box display='flex' mb={2} justifyContent='space-between'>
         <Box display='flex' gap={1} alignItems='center'>
-          <ListGradientIcon width={40} height={40} />
+          <ZigListGradientIcon width={40} height={40} />
           <ZigTypography textTransform='uppercase' variant='h3'>
             {t('transactions.walletTransactions')}
           </ZigTypography>

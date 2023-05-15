@@ -6,6 +6,7 @@ import {
   ZigChartMini,
   ZigTablePriceLabel,
   ZigButton,
+  ZigPlusIcon,
 } from '@zignaly-open/ui';
 import React, { useMemo } from 'react';
 import { Heading, Layout, ZigTableWrapper } from './styles';
@@ -24,7 +25,6 @@ import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../util/numbers';
 import InvestingLayout from '../InvestingSteps/InvestingLayout';
 import { ROUTE_DASHBOARD_EDIT_INVESTMENT } from '../../../../routes';
-import { Add } from '@mui/icons-material';
 import DepositModal from '../ManageInvestmentModals/DepositModal';
 import { Box } from '@mui/material';
 
@@ -199,7 +199,7 @@ const MyDashboard: React.FC = () => {
                 <Box sx={{ flex: '0 0 100px' }}>
                   <ZigButton
                     id={'my-portfolio__deposit'}
-                    startIcon={<Add />}
+                    startIcon={<ZigPlusIcon />}
                     sx={{ fontWeight: 600, mb: 1 }}
                     variant={'contained'}
                     onClick={() =>

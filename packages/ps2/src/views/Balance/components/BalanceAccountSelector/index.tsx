@@ -5,7 +5,7 @@ import { Layout, Data, Inline, TypeText } from './styles';
 import {
   Avatar,
   ZigTypography,
-  ArrowBottomIcon,
+  ZigArrowBottomIcon,
   ZigButton,
 } from '@zignaly-open/ui';
 import { useActiveExchange } from '../../../../apis/user/use';
@@ -40,7 +40,7 @@ const BalanceAccountSelector: React.FC = () => {
                 active={open}
                 narrow
               >
-                <ArrowBottomIcon
+                <ZigArrowBottomIcon
                   color={
                     open ? theme.palette.neutral100 : theme.palette.neutral300
                   }
