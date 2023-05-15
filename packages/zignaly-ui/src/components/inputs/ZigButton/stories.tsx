@@ -156,32 +156,39 @@ const TemplateOutlinedButton: Story<typeof ZigButton> = (args) => {
 
 const TemplateTwoStorey: Story<typeof ZigButton> = (args) => {
   return (
-    <Wrapper>
-      <ZigButton
-        variant={"contained"}
-        size="large"
-        startIcon={<Add sx={{ height: 30, width: 30 }} />}
-      >
-        <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-          Invest
-          <ZigTypography variant={"caption"} component="p" color="neutral150">
-            Invest fee 146%
-          </ZigTypography>
-        </Box>
-      </ZigButton>
+    <>
+      <Wrapper>
+        <ZigButton
+          variant={"contained"}
+          sx={{ padding: "7px 26px" }}
+          size="large"
+          startIcon={<Add sx={{ height: 30, width: 30 }} />}
+        >
+          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
+            Invest
+            <ZigTypography variant={"caption"} component="p" color="neutral150">
+              Invest fee 146%
+            </ZigTypography>
+          </Box>
+        </ZigButton>
 
-      <ZigButton variant={"contained"} size="large">
-        <Box sx={{ display: "flex", flexDirection: "column" }}>
-          Invest
-          <ZigTypography variant={"caption"} component="p" color="neutral150">
-            Invest fee 146%
-          </ZigTypography>
-        </Box>
-      </ZigButton>
+        <ZigButton variant={"contained"} size="large" sx={{ padding: "7px 26px" }}>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
+            Invest
+            <ZigTypography variant={"caption"} component="p" color="neutral150">
+              Invest fee 146%
+            </ZigTypography>
+          </Box>
+        </ZigButton>
 
-      {/*Hack to show "Show code"*/}
-      {args.children}
-    </Wrapper>
+        {/*Hack to show "Show code"*/}
+        {args.children}
+      </Wrapper>
+
+      <ZigTypography sx={{ mt: 2 }} variant={"caption"} component={"p"}>
+        You will have to adjust paddings yourself
+      </ZigTypography>
+    </>
   );
 };
 
