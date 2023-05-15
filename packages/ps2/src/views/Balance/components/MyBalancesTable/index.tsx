@@ -159,7 +159,7 @@ const MyBalancesTable = (): JSX.Element => {
         ),
       }),
     ],
-    [t],
+    [t, exchangeType],
   );
 
   const getFilteredData = useCallback(
