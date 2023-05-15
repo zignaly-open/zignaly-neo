@@ -94,7 +94,7 @@ const ForgotPasswordForm = () => {
             {t('reset-password.send-instructions')}
           </ZigButton>
           <Box display='flex' flexDirection='column' alignItems='center'>
-            <ZigTypography variant='body2' fontWeight={500}>
+            <ZigTypography variant='body2'>
               {t('reset-password.found-password')}
             </ZigTypography>
             <ZigTypography variant='body2'>
