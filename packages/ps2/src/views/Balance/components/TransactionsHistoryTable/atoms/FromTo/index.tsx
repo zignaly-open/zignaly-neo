@@ -34,7 +34,7 @@ const FromTo = ({
     />
   ) : sideType === 'external' ? (
     <>
-      <Box mr={2}>
+      <Box mr={2} className={`balances-table-transaction-expanded__chain-icon`}>
         <ChainIcon network={network} />
       </Box>
       <TypographyPanelName
