@@ -19,6 +19,7 @@ const useInfinitePaginatedQuery = (
   params: Record<string, string | number> & { limit?: number },
   pageIndex: number,
   hasMetadata: boolean,
+  queryOptions?: Parameters<UseQuery<any>>[1],
 ) => {
   // Keep params as reference so we don't trigger a refresh when they change
   const localParams = useRef(params);
@@ -26,13 +27,16 @@ const useInfinitePaginatedQuery = (
   const [localPage, setLocalPage] = useState({ page: 1, id: '' });
   const [combinedData, setCombinedData] = useState([]);
 
-  const queryResponse = useGetDataListQuery({
-    ...localParams.current,
-    limit,
-    ...(hasMetadata
-      ? { from: localPage.id }
-      : { offset: (localPage.page - 1) * limit }),
-  });
+  const queryResponse = useGetDataListQuery(
+    {
+      ...localParams.current,
+      limit,
+      ...(hasMetadata
+        ? { from: localPage.id }
+        : { offset: (localPage.page - 1) * limit }),
+    },
+    queryOptions,
+  );
 
   type InfiniteQueryResponseType = InfiniteQueryResponse<
     typeof useGetDataListQuery
