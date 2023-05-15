@@ -54,7 +54,7 @@ const InvestingLayout: React.FC = () => {
         <ZigTypography variant={'h2'} sx={{ mb: 2 }}>
           {t('how-to-invest-steps.bottom-title')}
         </ZigTypography>
-        <Paper sx={{ p: 2 }}>
+        <Paper sx={{ p: 2, mb: '20px' }}>
           <ZigTypography>
             {t('how-to-invest-steps.bottom-description')}
           </ZigTypography>
