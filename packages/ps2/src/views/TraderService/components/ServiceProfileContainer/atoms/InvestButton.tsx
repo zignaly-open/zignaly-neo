@@ -68,7 +68,7 @@ const InvestButton: React.FC<{
         variant='contained'
         size={'large'}
         disabled={maxReached}
-        sx={{ flexDirection: 'column', minWidth: 165 }}
+        sx={{ flexDirection: 'column', minWidth: 165, padding: '6px 26px' }}
         tooltip={maxReached ? t('invest-button.max-reached-tooltip') : null}
       >
         <>
