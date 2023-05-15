@@ -7,7 +7,12 @@ const ZignalyAccount = ({ name, id }: { name?: string; id?: string }) => {
   const { t } = useTranslation('transactions-history');
   return (
     <>
-      <ZignalyLogo width={24} height={24} style={{ marginRight: '16px' }} />
+      <ZignalyLogo
+        width={24}
+        height={24}
+        style={{ marginRight: '16px' }}
+        className={'zignaly-logo'}
+      />
       <TypographyPanelName id={id}>{name || t('deleted')}</TypographyPanelName>
     </>
   );
