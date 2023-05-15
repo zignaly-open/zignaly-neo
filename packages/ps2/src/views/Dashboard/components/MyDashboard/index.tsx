@@ -120,6 +120,7 @@ const MyDashboard: React.FC = () => {
           </Box>
         ),
         sortingFn: 'alphanumeric',
+        enableHiding: false,
       }),
       columnHelper.accessor('pnlDailyMeanLc', {
         header: t('tableHeader.dailyAvg-title'),
