@@ -30,7 +30,7 @@ const FromTo = ({
       serviceId={idAddress}
       serviceName={name}
       servicePsVersion={servicePsVersion}
-      id={`balances-table-transaction-${txId}-expanded__${side}`}
+      id={`balances-table-transaction-expanded__${side}-${txId}`}
     />
   ) : sideType === 'external' ? (
     <>
@@ -38,14 +38,14 @@ const FromTo = ({
         <ChainIcon network={network} />
       </Box>
       <TypographyPanelName
-        id={`balances-table-transaction-${txId}-expanded__${side}`}
+        id={`balances-table-transaction-expanded__${side}-${txId}`}
       >
         {idAddress || t('external')}
       </TypographyPanelName>
     </>
   ) : (
     <ZignalyAccount
-      id={`balances-table-transaction-${txId}-expanded__${side}`}
+      id={`balances-table-transaction-expanded__${side}-${txId}`}
       name={name}
     />
   );

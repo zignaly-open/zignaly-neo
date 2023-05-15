@@ -1,5 +1,6 @@
 import { styled } from '@mui/material';
-import { styledIf } from '@zignaly-open/ui';
+import { MenuDropDown } from '@zignaly-open/ui';
+import { Link } from 'react-router-dom';
 
 export const Layout = styled('div')`
   flex-direction: row;
@@ -8,30 +9,25 @@ export const Layout = styled('div')`
   width: 100%;
   right: 0;
   left: 0;
-  background: #12152c;
+  background: #0f0f25;
   z-index: 50;
-
-  &:after {
-    content: '';
-    left: 0;
-    bottom: 0;
-    right: 0;
-    position: absolute;
-    height: 1px;
-    background: #222249;
-  }
 `;
 
 export const Container = styled('div')`
   display: grid;
-  grid-template-columns: 25% repeat(5, minmax(0%, 100%));
+  grid-template-columns: 25% repeat(4, minmax(0%, 100%));
+
+  > div:first-of-type > div:first-of-type,
+  > div:last-of-type > div:first-of-type {
+    border-left: 1px dotted ${({ theme }) => theme.palette.neutral600};
+    border-right: 1px dotted ${({ theme }) => theme.palette.neutral600};
+  }
 `;
 
 export const Options = styled('nav')`
   display: flex;
   flex-direction: column;
-  padding: 30px 34px;
-  gap: 14px;
+  padding: 25px 0;
 `;
 
 type OptionType = {
@@ -43,40 +39,59 @@ export const Option = styled('span', {
 })<OptionType>`
   cursor: pointer;
   user-select: none;
+  transition: background-color 0.2s;
 
   & > * {
     transition: color 0.2s;
     color: ${({ theme, active }) =>
-      (active ? theme.palette.neutral200 : '' + theme.palette.secondary.main) +
+      (active ? theme.palette.highlighted : '' + theme.palette.neutral300) +
       ''};
   }
 
-  &:hover > * {
-    color: ${({ theme }) => theme.palette.neutral150};
+  &:hover {
+    background: #1b213d;
+    & > * {
+      color: ${({ theme }) => theme.palette.neutral100};
+    }
   }
 `;
 
-export const HeadOption = styled(Option)<OptionType>`
+export const ServiceOption = styled(Option)`
+  padding: 7px 34px;
+  display: flex;
+`;
+
+export const HeadOption = styled(Option)<
+  OptionType & { isSubOption?: boolean }
+>`
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 56px;
-  background: #12152c;
-  border: 1px solid #222249;
+  background: #0f0f25;
 
-  ${({ theme, active }) => `
-    ${styledIf(
-      !active,
+  ${({ isSubOption }) =>
+    isSubOption
+      ? `
+        padding: 0 18px 0 54px;
+        background: #11152B;
       `
-      color: ${theme.palette.neutral300};
-      
-      &:hover {
-        color: ${theme.palette.neutral150};
-      }        
-    `,
-      `
-       border-bottom: 3px solid ${theme.palette.secondary};
-       `,
-    )}
+      : `
+        justify-content: center;
+      `}
+`;
+
+export const MenuLink = styled(Link)<{ isSubOption: boolean }>`
+  ${({ isSubOption, theme }) =>
+    !isSubOption &&
+    `
+    &:not(:last-of-type) {
+      border-right: 1px dotted ${theme.palette.neutral600};
+    }
   `}
+`;
+
+export const ServiceDropDown = styled(MenuDropDown)`
+  .MuiTypography-h3 {
+    color: ${({ theme }) => theme.palette.neutral100};
+  }
 `;

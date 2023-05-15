@@ -36,7 +36,11 @@ const ForgotPasswordForm = () => {
         display='flex'
         flexDirection='column'
       >
-        <ZigTypography variant={'h1'} align={'center'}>
+        <ZigTypography
+          variant={'h1'}
+          align={'center'}
+          textTransform={'capitalize'}
+        >
           {t('reset-password.reset-password')}
         </ZigTypography>
         <ZigTypography textAlign='center'>
@@ -48,7 +52,12 @@ const ForgotPasswordForm = () => {
 
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
-      <ZigTypography variant={'h1'} align={'center'}>
+      <ZigTypography
+        variant={'h1'}
+        align={'center'}
+        id={'forgot-password__title'}
+        textTransform={'capitalize'}
+      >
         {t('reset-password.reset-password')}
       </ZigTypography>
       <Form onSubmit={handleSubmit(submit)}>
@@ -58,6 +67,7 @@ const ForgotPasswordForm = () => {
           rules={{ required: true }}
           render={({ field }) => (
             <ZigInput
+              id={'forgot-password__email-input'}
               label={t('login-form.inputText.email.label') + ':'}
               placeholder={t('login-form.inputText.email.label')}
               disabled={resetPasswordStatus.isLoading}
@@ -79,7 +89,7 @@ const ForgotPasswordForm = () => {
             size={'xlarge'}
             loading={resetPasswordStatus.isLoading}
             disabled={!isValid}
-            id='forgotpassword__submit'
+            id={'forgot-password__submit'}
           >
             {t('reset-password.send-instructions')}
           </ZigButton>

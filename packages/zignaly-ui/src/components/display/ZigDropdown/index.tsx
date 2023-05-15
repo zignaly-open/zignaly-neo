@@ -60,12 +60,15 @@ const ZigDropdown: (
   const onClick = (f: () => void) => (e: MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     handleClose();
-    if (e.button === 1) {
-      // middle button fix for Safari
-      window.open(e.currentTarget.href);
-    } else {
-      f();
-    }
+    // the timeout here is needed because an action can trigger Suspense and then the popover will remain somewhere on the page
+    setTimeout(() => {
+      if (e.button === 1) {
+        // middle button fix for Safari
+        window.open(e.currentTarget.href);
+      } else {
+        f();
+      }
+    });
   };
 
   useEffect(() => {

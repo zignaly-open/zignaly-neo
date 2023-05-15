@@ -7,7 +7,7 @@ import { isWebpSupported } from 'react-image-webp/dist/utils';
 
 // Copied from webapp-neo
 const GlobalStyle = createGlobalStyle`
-  body {
+body {
     padding: 0;
     margin: 0;
     background-color: #070819;
@@ -20,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
     font-size: 100%;
     color: #fff;
     overflow: overlay;
+    color-scheme: dark;
   }
 
   /* Use default scrollbar on Safari because it doesn't support overflow: overlay */

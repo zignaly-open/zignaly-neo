@@ -32,6 +32,12 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
         amount,
       },
     }),
+    async onQueryStarted(_, { dispatch, queryFulfilled }) {
+      await queryFulfilled;
+      setTimeout(() => {
+        dispatch(api.util.invalidateTags(['Balance']));
+      }, 5000);
+    },
   }),
 
   investedAmount: builder.query<InvestedInService, string>({

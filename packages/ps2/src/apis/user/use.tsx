@@ -289,9 +289,11 @@ export function useActivateExchange(
 }
 
 export function useMaybeMakeSureSessionIsAlive(makeSure: boolean): void {
+  const isAuthenticated = useIsAuthenticated();
   useSessionQuery(undefined, {
     refetchOnMountOrArgChange: true,
-    skip: !makeSure,
+    // we do not want to check that is the app is already aware that the user has been logged out
+    skip: !makeSure || !isAuthenticated,
   });
 }
 

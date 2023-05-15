@@ -26,13 +26,6 @@ export const GreySubHeaderHighlight = styled(GreySubHeader)`
   // no highlight lol
 `;
 
-export const ServiceHeader: typeof ZigTypography = styled(ZigTypography)`
-  font-weight: 500 !important;
-  font-size: 18px !important;
-  line-height: 28px !important;
-  color: ${(props) => props.theme.palette.almostWhite} !important;
-`;
-
 export const LiquidatedLabel = muiStyled(Box)`
   border: 1px solid ${(props) => props.theme.palette.redGraphOrError};
   border-radius: 5px;
@@ -193,10 +186,14 @@ export const GraphPercentageWrapperBox = styled(Box)`
 `;
 
 export const SqueezedButtonGroupWrapper = styled(Box)`
+  > div {
+    height: 45px;
+  }
+
   .MuiButton-root {
     min-width: 50px !important;
-    padding-left: 3px;
-    padding-right: 3px;
+    padding-left: 18px;
+    padding-right: 18px;
   }
 `;
 
@@ -207,10 +204,9 @@ export const AssetsInPoolWrapper = styled(Box)`
 `;
 
 export const SelectWrapperBox = styled(Box)`
-  height: 30px;
-
   .zig-react-select__control {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
+    height: 45px;
   }
 `;

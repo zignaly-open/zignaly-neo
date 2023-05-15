@@ -24,14 +24,25 @@ import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
 import { Box } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
 import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
+import { useBalanceQuery } from 'apis/user/api';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
   const balancesEndpoint = useCoinBalances({ convert: true, refetch: true });
   const coinsEndpoint = useExchangeCoinsList();
-  const { exchangeType } = useActiveExchange();
+  const { exchangeType, internalId } = useActiveExchange();
   const { showModal } = useZModal();
   const showDepositModal = useZRouteModal(ROUTE_MY_BALANCES_DEPOSIT_COIN);
+  // Trigger balance update to be sure that balance widget matches coins data
+  useBalanceQuery(
+    {
+      exchangeInternalId: internalId,
+    },
+    {
+      refetchOnMountOrArgChange: true,
+      skip: !internalId,
+    },
+  );
 
   const columnHelper = createColumnHelper<BalanceTableDataType>();
   const columns = useMemo(
@@ -42,7 +53,7 @@ const MyBalancesTable = (): JSX.Element => {
           <CoinLabel
             coin={getValue()}
             name={original.balance.name}
-            prefixId={'balances-table-coins'}
+            id={'balances-table-coins'}
           />
         ),
       }),

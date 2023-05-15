@@ -2,10 +2,15 @@ import React from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
-import { Form, Action, StyledErrorOutline } from './styles';
+import { Form, Action } from './styles';
 import { ResetPasswordValidation } from './validations';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
+import {
+  ZigAlertMessage,
+  ZigButton,
+  ZigInput,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useResetPasswordMutation } from 'apis/user/api';
 import { ROUTE_LOGIN } from 'routes';
@@ -42,7 +47,7 @@ const ResetPasswordForm = () => {
 
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
-      <ZigTypography variant={'h1'}>
+      <ZigTypography variant={'h1'} textTransform={'capitalize'}>
         {t('reset-password.reset-password')}
       </ZigTypography>
       <Form onSubmit={handleSubmit(onSubmit)}>
@@ -52,19 +57,18 @@ const ResetPasswordForm = () => {
           rules={{ required: true }}
           render={({ field }) => (
             <ZigInput
+              id={'reset-password__new-password'}
               label={t('reset-password.new-password')}
               placeholder={t('reset-password.new-password')}
               disabled={resetPasswordStatus.isLoading}
               error={t(errors.password?.message)}
               helperText={
-                <Box display='flex' alignItems='center'>
-                  <StyledErrorOutline height='24px' width='24px' />
-                  <ZigTypography variant='body2' color='neutral200'>
-                    {t('error:error.password-requirements', {
-                      length: 8,
-                    })}
-                  </ZigTypography>
-                </Box>
+                <ZigAlertMessage
+                  text={t('error:error.password-requirements', {
+                    length: 8,
+                  })}
+                  id={'reset-password__length-requirements'}
+                />
               }
               sensitive
               type={'password'}
@@ -79,7 +83,7 @@ const ResetPasswordForm = () => {
             size={'xlarge'}
             loading={resetPasswordStatus.isLoading}
             disabled={!isValid}
-            id='resetpassword__submit'
+            id={'reset-password__submit'}
           >
             {t('reset-password.reset-password')}
           </ZigButton>

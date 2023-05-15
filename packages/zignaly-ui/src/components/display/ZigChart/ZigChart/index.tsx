@@ -84,8 +84,9 @@ const ZigChart = ({
         >
           <VictoryAxis
             tickValues={ticks}
-            tickLabelComponent={<VictoryLabel textAnchor="end" text={getChartLabel} />}
+            tickLabelComponent={<VictoryLabel textAnchor="start" text={getChartLabel} />}
             dependentAxis
+            orientation="right"
             style={axisStyle}
           />
 
