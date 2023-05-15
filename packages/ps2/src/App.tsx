@@ -59,9 +59,9 @@ function App() {
             <PersistGate persistor={persistor} loading={<CenteredLoader />}>
               <BrowserRouter>
                 <ModalProvider>
-                  <Suspense fallback={null}>
+                  <Header />
+                  <Suspense fallback={<CenteredLoader />}>
                     <>
-                      <Header />
                       <Tracker />
                       <UpdateChecker />
                       <DateLocaleFixer />
