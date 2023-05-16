@@ -71,7 +71,7 @@ export const HeadOption = styled(Option)<
   ${({ isSubOption }) =>
     isSubOption
       ? `
-        padding: 0 18px 0 54px;
+        padding: 0 10%;
         background: #11152B;
       `
       : `
