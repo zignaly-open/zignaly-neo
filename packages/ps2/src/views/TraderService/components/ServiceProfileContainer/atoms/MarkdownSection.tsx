@@ -1,12 +1,11 @@
 import { Box } from '@mui/system';
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import { HideReadMoreEffects, MarkdownContainer } from '../styles';
 import breaks from 'remark-breaks';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 
 const MarkdownSection: React.FC<{
   title: string;
@@ -50,7 +49,7 @@ const MarkdownSection: React.FC<{
     }
   }, [scrollHeight, clientHeight]);
 
-  const Icon = shown ? RemoveIcon : AddIcon;
+  const Icon = shown ? ExpandLess : ExpandMore;
   return (
     <Box mt={8} mb={4}>
       <ZigTypography variant={'h2'} sx={{ mb: 3 }} align='center'>
@@ -83,10 +82,12 @@ const MarkdownSection: React.FC<{
       {shouldShowReadMore && (
         <ZigButton
           variant={'text'}
-          startIcon={<Icon />}
+          endIcon={
+            <Icon sx={{ color: 'links', fill: 'currentColor !important' }} />
+          }
           onClick={() => setShown((v) => !v)}
         >
-          {shown ? t('read-less') : t('read-more')}
+          {shown ? t('less') : t('more')}
         </ZigButton>
       )}
     </Box>

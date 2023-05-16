@@ -73,14 +73,24 @@ export const ZigButtonGroup = styled(ButtonGroup)`
       border-color: #464a85 !important;
       border-radius: 5px;
 
-      + button {
+      + button,
+      + span button {
         border-left-color: transparent;
       }
     }
 
-    &.Mui-disabled {
-      border-color: rgba(255, 255, 255, 0.1);
+    &:not(:last-child) {
+      border-right-color: transparent;
     }
+
+    &.Mui-disabled {
+      border-color: ${({ theme }) => theme.palette.neutral600};
+      color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  span button {
+    height: 100%;
   }
 ` as typeof ButtonGroup;
 

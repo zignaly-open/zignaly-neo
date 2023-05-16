@@ -36,7 +36,6 @@ const ServiceInformation: React.FC<{
           display: 'flex',
           alignItems: 'center',
           paddingRight: md ? 3 : 0,
-          paddingTop: md ? 1 : 0,
         }}
       >
         <GreySubHeader

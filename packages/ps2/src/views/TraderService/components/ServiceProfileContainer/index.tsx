@@ -23,26 +23,39 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
     <Box
       sx={{
         p: 2,
-        pt: 0,
+        pt: isOwner ? 7 : 0,
         pl: md ? 6 : 2,
         pr: md ? 6 : 2,
       }}
-      paddingTop={isOwner ? 7 : 0}
     >
       <Grid container>
-        <Grid item sx={{ display: 'flex' }} xs={12} md={8} pb={2} pr={[0, 7.5]}>
+        <Grid item md={1} />
+        <Grid item sx={{ display: 'flex' }} xs={12} md={9} pb={[0, 4]}>
           <ServiceProfileHeader service={service} />
         </Grid>
-        <Grid item xs={12} md={4} pb={2}>
+        <Grid item xs={12} md={2} pb={4}>
           <RightSideActions service={service} />
         </Grid>
-        <Grid item md={12} lg={8} pr={{ md: 0, lg: 7.5 }}>
-          <ServiceGrowthChart service={service} />
-          <ServiceDescription service={service} />
-          <ServiceManagerDescription service={service} />
-        </Grid>
-        <Grid item md={12} lg={4} pt={{ md: 3, lg: 0 }}>
-          <ServiceSummary service={service} />
+        <Grid
+          container
+          sx={{ gap: { lg: '75px', xl: '90px' }, flexWrap: { lg: 'nowrap' } }}
+        >
+          <Grid item xs={12} lg={8}>
+            <ServiceGrowthChart service={service} />
+            <ServiceDescription service={service} />
+            <ServiceManagerDescription service={service} />
+          </Grid>
+          <Grid
+            item
+            xs={12}
+            lg={4}
+            pt={{ sm: 3, lg: 0 }}
+            sx={{
+              minWidth: { lg: '422px' },
+            }}
+          >
+            <ServiceSummary service={service} />
+          </Grid>
         </Grid>
       </Grid>
     </Box>
