@@ -11,7 +11,7 @@ const ZignalyAccount = ({ name, id }: { name?: string; id?: string }) => {
         width={24}
         height={24}
         style={{ marginRight: '16px' }}
-        className={'zignaly-logo'}
+        className={'balances-table-transaction-expanded__zignaly-logo'}
       />
       <TypographyPanelName id={id}>{name || t('deleted')}</TypographyPanelName>
     </>
