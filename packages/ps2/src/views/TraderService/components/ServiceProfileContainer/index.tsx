@@ -36,12 +36,12 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
         <Grid item xs={12} md={4} pb={2}>
           <RightSideActions service={service} />
         </Grid>
-        <Grid item md={12} lg={8} pr={{ md: 0, lg: 7.5 }}>
+        <Grid item xs={12} md={12} lg={8} pr={{ md: 0, lg: 7.5 }}>
           <ServiceGrowthChart service={service} />
           <ServiceDescription service={service} />
           <ServiceManagerDescription service={service} />
         </Grid>
-        <Grid item md={12} lg={4} pt={{ md: 3, lg: 0 }}>
+        <Grid item xs={12} md={12} lg={4} pt={{ md: 3, lg: 0 }}>
           <ServiceSummary service={service} />
         </Grid>
       </Grid>
