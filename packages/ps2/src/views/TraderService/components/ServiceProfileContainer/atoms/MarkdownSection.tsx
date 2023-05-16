@@ -1,8 +1,6 @@
 import { Box } from '@mui/system';
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import { HideReadMoreEffects, MarkdownContainer } from '../styles';
