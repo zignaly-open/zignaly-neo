@@ -204,7 +204,7 @@ export const AssetsInPoolWrapper = styled(Box)`
     > div:nth-child(2) {
       width: 14px;
       height: 13px;
-      margin-top: -12px;
+      margin-top: -7px;
     }
   }
 `;

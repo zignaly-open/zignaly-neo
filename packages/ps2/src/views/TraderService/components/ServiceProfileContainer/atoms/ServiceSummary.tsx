@@ -47,7 +47,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             >
               {service.investors}
             </ZigTypography>
-            <ZigUserIcon color={'#65647E'} width={'16px'} />
+            <ZigUserIcon color={'#65647E'} height='13px' width={'12px'} />
           </Box>
         </GridCell>
       </GridWithBottomBorder>
