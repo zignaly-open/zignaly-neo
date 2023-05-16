@@ -47,7 +47,11 @@ const ResetPasswordForm = () => {
 
   return (
     <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
-      <ZigTypography variant={'h1'} textTransform={'capitalize'}>
+      <ZigTypography
+        variant={'h1'}
+        textTransform={'capitalize'}
+        textAlign={'center'}
+      >
         {t('reset-password.reset-password')}
       </ZigTypography>
       <Form onSubmit={handleSubmit(onSubmit)}>
