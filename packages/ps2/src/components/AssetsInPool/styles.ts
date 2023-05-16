@@ -2,8 +2,10 @@ import { Box, styled } from '@mui/material';
 
 export const Icon = styled('div')`
   margin-left: 8px;
-  width: 24px;
-  height: 24px;
+  height: 21.5px;
+  width: 23.5px;
+  margin-top: -7px;
+
   svg {
     width: 100%;
     height: 100%;

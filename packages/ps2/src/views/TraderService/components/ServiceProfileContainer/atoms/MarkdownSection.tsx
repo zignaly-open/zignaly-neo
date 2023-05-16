@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
 import { HideReadMoreEffects, MarkdownContainer } from '../styles';
 import breaks from 'remark-breaks';
+import { ArrowDownward, ExpandLess, ExpandMore } from '@mui/icons-material';
 
 const MarkdownSection: React.FC<{
   title: string;
@@ -83,10 +84,20 @@ const MarkdownSection: React.FC<{
       {shouldShowReadMore && (
         <ZigButton
           variant={'text'}
-          startIcon={<Icon />}
+          endIcon={
+            shown ? (
+              <ExpandLess
+                sx={{ color: 'links', fill: 'currentColor !important' }}
+              />
+            ) : (
+              <ExpandMore
+                sx={{ color: 'links', fill: 'currentColor !important' }}
+              />
+            )
+          }
           onClick={() => setShown((v) => !v)}
         >
-          {shown ? t('read-less') : t('read-more')}
+          {shown ? t('less') : t('more')}
         </ZigButton>
       )}
     </Box>

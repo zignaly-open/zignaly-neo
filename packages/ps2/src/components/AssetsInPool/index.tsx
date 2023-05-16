@@ -25,6 +25,7 @@ const AssetsInPool = ({
           display: 'flex',
           justifyContent: 'center',
           flexDirection: 'row',
+          alignItems: 'center',
         }}
       >
         <ZigPriceLabel

@@ -200,6 +200,12 @@ export const SqueezedButtonGroupWrapper = styled(Box)`
 export const AssetsInPoolWrapper = styled(Box)`
   & > .MuiBox-root > .MuiBox-root:first-child {
     margin-bottom: 8px;
+
+    > div:nth-child(2) {
+      width: 14px;
+      height: 13px;
+      margin-top: -12px;
+    }
   }
 `;
 

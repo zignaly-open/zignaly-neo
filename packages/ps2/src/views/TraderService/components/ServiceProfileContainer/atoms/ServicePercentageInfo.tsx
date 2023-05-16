@@ -16,7 +16,9 @@ const ServicePercentageInfo: React.FC<{
   const { t } = useTranslation('service');
   return (
     <>
-      <ZigTypography color={'neutral300'}>{title}</ZigTypography>
+      <ZigTypography textTransform='capitalize' color={'neutral300'}>
+        {title}
+      </ZigTypography>
 
       {canShow ? (
         <>

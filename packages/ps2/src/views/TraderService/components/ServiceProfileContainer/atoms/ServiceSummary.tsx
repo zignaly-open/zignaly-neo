@@ -1,7 +1,7 @@
 import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
-import { ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography, ZigUserIcon } from '@zignaly-open/ui';
 import { Box, Grid } from '@mui/material';
 import { GridCell, AssetsInPoolWrapper, GridWithBottomBorder } from '../styles';
 import AssetsInPool from '../../../../../components/AssetsInPool';
@@ -34,13 +34,21 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
           <ZigTypography color={'neutral300'}>
             {t('investors-count')}
           </ZigTypography>
-          <ZigTypography
-            variant={'h2'}
-            color={'neutral200'}
-            id={'service-profile__investors'}
+          <Box
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
+            gap={1}
           >
-            {service.investors}
-          </ZigTypography>
+            <ZigTypography
+              variant={'h2'}
+              color={'neutral200'}
+              id={'service-profile__investors'}
+            >
+              {service.investors}
+            </ZigTypography>
+            <ZigUserIcon color={'#65647E'} width={'16px'} />
+          </Box>
         </GridCell>
       </GridWithBottomBorder>
       <GridWithBottomBorder container pb={2.5} pt={2.5}>
