@@ -72,7 +72,7 @@ export const Button = styled.div<ButtonProps>`
       isActiveDropDown,
       `
       background: #11152b;
-      box-shadow: 0px 5px 16px rgba(11, 13, 26, 0.42);
+      box-shadow: 0px 2.5px 13.5px 1px rgba(0, 0, 0, 0.42);
       border-color: transparent !important;
 
       ${ArrowIcon} {
@@ -105,7 +105,7 @@ export const DropDown = styled.div<any>`
     max-height: ${props.maxHeight ?? "200px"};
   `}
 
-  box-shadow: 0px 5px 16px rgba(11, 13, 26, 0.42);
+  box-shadow: 0px 2.5px 13.5px 1px rgba(0, 0, 0, 0.42);
   border-radius: 0 0 8px 8px;
   border-top: 1px solid ${({ theme }) => theme.neutral700}80;
 `;
