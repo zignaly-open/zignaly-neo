@@ -1,4 +1,4 @@
-import { ZigDropdown, OptionHorizontalDotsIcon } from '@zignaly-open/ui';
+import { ZigDropdown, ZigOptionHorizontalDotsIcon } from '@zignaly-open/ui';
 import React, { useCallback, useRef } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { NavLink, Networks } from './styles';
@@ -142,7 +142,7 @@ const ExtraNavigationDropdown: React.FC = () => {
     <ZigDropdown
       component={({ open }) => (
         <HeaderDropdownButton id={'menu__dropdown-trading'} active={open}>
-          <OptionHorizontalDotsIcon
+          <ZigOptionHorizontalDotsIcon
             width={14}
             height={4}
             color={open ? theme.palette.neutral100 : theme.palette.neutral300}

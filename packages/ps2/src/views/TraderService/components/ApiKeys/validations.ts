@@ -68,6 +68,11 @@ export const EditKeyValidation = yup
               new Set(ipStringToArray(value)).size
           );
         },
-      ),
+      )
+      .test('length', 'common:validation.max-allowed-length', function (value) {
+        return (
+          this.parent.enableIpRestriction !== 'true' || value.length <= 500
+        );
+      }),
   })
   .required();

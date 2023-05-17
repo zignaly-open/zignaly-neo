@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
+  ZigArrowLeftIcon,
+  ZigArrowRightIcon,
   ZigButton,
   ZigPriceLabel,
   ZigTypography,
@@ -123,7 +123,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 /> */}
               </Box>
               <MiddleContainer>
-                <ArrowLeftIcon
+                <ZigArrowLeftIcon
                   height={24}
                   width={24}
                   color={theme.palette.neutral600}
@@ -138,7 +138,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                   {t('transfer.title')}
                 </ZigButton>
                 <HorizontalConnection />
-                <ArrowRightIcon
+                <ZigArrowRightIcon
                   height={24}
                   width={24}
                   color={theme.palette.neutral600}

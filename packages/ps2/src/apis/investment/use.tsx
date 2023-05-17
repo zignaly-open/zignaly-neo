@@ -22,7 +22,6 @@ import { QueryReturnType } from '../../util/queryReturnType';
 import { useActiveExchange, useIsAuthenticated } from '../user/use';
 import { TraderServiceFull } from '../service/types';
 import { serviceToInvestmentServiceDetail } from './util';
-import { useLazyBalanceQuery } from 'apis/user/api';
 
 export const useInvestments = useInvestmentsQuery;
 
@@ -166,7 +165,6 @@ export function useInvestInService(serviceId: string): {
   }) => Promise<void>;
 } {
   const [update, { isLoading }] = useInvestInServiceMutation();
-  const [fetchBalance] = useLazyBalanceQuery();
   const { refetch: refetchInvestedState } = useIsInvestedInService(serviceId);
   const exchange = useActiveExchange();
 
@@ -180,10 +178,6 @@ export function useInvestInService(serviceId: string): {
         exchangeInternalId: exchange.internalId,
       }).unwrap();
       refetchInvestedState();
-      await fetchBalance({
-        exchangeInternalId: exchange.internalId,
-        force: true,
-      });
     },
   };
 }
@@ -201,7 +195,6 @@ export function useUpdateTakeProfitAndInvestMore(serviceId: string): {
   const [update, { isLoading }] = useUpdateTakeProfitAndInvestMoreMutation();
   const exchange = useActiveExchange();
   const { refetch: refetchInvestedState } = useIsInvestedInService(serviceId);
-  const [fetchBalance] = useLazyBalanceQuery();
 
   return {
     isLoading,
@@ -214,10 +207,6 @@ export function useUpdateTakeProfitAndInvestMore(serviceId: string): {
       }).unwrap();
 
       refetchInvestedState();
-      await fetchBalance({
-        exchangeInternalId: exchange.internalId,
-        force: true,
-      });
     },
   };
 }
@@ -236,7 +225,6 @@ export function useWithdrawInvestment(): {
   const exchange = useActiveExchange();
   const service = useSelectedInvestment();
   const { refetch } = useInvestmentDetails(service.serviceId);
-  const [fetchBalance] = useLazyBalanceQuery();
 
   return {
     isLoading,
@@ -247,10 +235,6 @@ export function useWithdrawInvestment(): {
         amount: amount.toString(),
       }).unwrap();
       refetch();
-      await fetchBalance({
-        exchangeInternalId: exchange.internalId,
-        force: true,
-      });
     },
   };
 }

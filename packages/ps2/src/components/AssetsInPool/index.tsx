@@ -1,7 +1,7 @@
 import React from 'react';
-import { BlockTypography, Icon, PriceBoxOverride } from './styles';
+import { Icon, PriceBoxOverride } from './styles';
 import { AssetsInPoolProps } from './types';
-import { WhaleIcon, ZigPriceLabel } from '@zignaly-open/ui';
+import { ZigWhaleIcon, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { formatLocalizedDistance } from 'views/Dashboard/components/MyDashboard/util';
@@ -25,6 +25,7 @@ const AssetsInPool = ({
           display: 'flex',
           justifyContent: 'center',
           flexDirection: 'row',
+          alignItems: 'center',
         }}
       >
         <ZigPriceLabel
@@ -37,7 +38,7 @@ const AssetsInPool = ({
         />
         {+assetsValue >= 200000 && (
           <Icon>
-            <WhaleIcon />
+            <ZigWhaleIcon />
           </Icon>
         )}
       </PriceBoxOverride>
@@ -48,9 +49,9 @@ const AssetsInPool = ({
           alignItems='start'
           id={prefixId && `${prefixId}__investors-${serviceId}`}
         >
-          <BlockTypography variant='caption' as='p' color='neutral400'>
+          <ZigTypography variant='caption' component='p' color='neutral400'>
             {t('table.x-investors', { count: numberOfInvestors })}
-          </BlockTypography>
+          </ZigTypography>
         </Box>
       )}
 
@@ -60,9 +61,9 @@ const AssetsInPool = ({
           alignItems='start'
           id={prefixId && `${prefixId}__created-at`}
         >
-          <BlockTypography variant='caption' as='p' color='neutral400'>
+          <ZigTypography variant='caption' component='p' color='neutral400'>
             {formatLocalizedDistance(new Date(), new Date(createdAt))}
-          </BlockTypography>
+          </ZigTypography>
         </Box>
       )}
 

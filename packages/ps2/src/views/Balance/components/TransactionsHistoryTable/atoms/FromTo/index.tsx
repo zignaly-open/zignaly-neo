@@ -12,9 +12,11 @@ import { Side } from '../../types';
 const FromTo = ({
   transaction,
   side,
+  txId,
 }: {
   transaction: Transaction;
   side: Side;
+  txId?: string;
 }) => {
   const { from, to, fromName, toName, network, txType, servicePsVersion } =
     transaction;
@@ -28,16 +30,24 @@ const FromTo = ({
       serviceId={idAddress}
       serviceName={name}
       servicePsVersion={servicePsVersion}
+      id={`balances-table-transaction-expanded__${side}-${txId}`}
     />
   ) : sideType === 'external' ? (
     <>
-      <Box mr={2}>
+      <Box mr={2} className={`balances-table-transaction-expanded__chain-icon`}>
         <ChainIcon network={network} />
       </Box>
-      <TypographyPanelName>{idAddress || t('external')}</TypographyPanelName>
+      <TypographyPanelName
+        id={`balances-table-transaction-expanded__${side}-${txId}`}
+      >
+        {idAddress || t('external')}
+      </TypographyPanelName>
     </>
   ) : (
-    <ZignalyAccount name={name} />
+    <ZignalyAccount
+      id={`balances-table-transaction-expanded__${side}-${txId}`}
+      name={name}
+    />
   );
 };
 

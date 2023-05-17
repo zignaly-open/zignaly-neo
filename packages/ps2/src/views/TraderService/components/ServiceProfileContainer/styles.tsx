@@ -26,13 +26,6 @@ export const GreySubHeaderHighlight = styled(GreySubHeader)`
   // no highlight lol
 `;
 
-export const ServiceHeader: typeof ZigTypography = styled(ZigTypography)`
-  font-weight: 500 !important;
-  font-size: 18px !important;
-  line-height: 28px !important;
-  color: ${(props) => props.theme.palette.almostWhite} !important;
-`;
-
 export const LiquidatedLabel = muiStyled(Box)`
   border: 1px solid ${(props) => props.theme.palette.redGraphOrError};
   border-radius: 5px;
@@ -107,13 +100,21 @@ export const CountryFlag = styled('img')`
 `;
 
 export const HideReadMoreEffects = styled('div')<{
-  open: boolean;
-  heightLimit: number;
+  truncate: boolean;
 }>`
   transition: all 0.3s;
-  overflow: hidden;
   margin-bottom: 7px;
-  max-height: ${(props) => (props.open ? '100%' : `${props.heightLimit}px`)};
+
+  ${({ truncate }) =>
+    truncate &&
+    css`
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      overflow: hidden;
+      overflow-wrap: break-word;
+      text-overflow: ellipsis;
+    `}
 `;
 
 export const MarkdownContainer = styled('div')`
@@ -193,24 +194,33 @@ export const GraphPercentageWrapperBox = styled(Box)`
 `;
 
 export const SqueezedButtonGroupWrapper = styled(Box)`
+  > div {
+    height: 45px;
+  }
+
   .MuiButton-root {
     min-width: 50px !important;
-    padding-left: 3px;
-    padding-right: 3px;
+    padding-left: 18px;
+    padding-right: 18px;
   }
 `;
 
 export const AssetsInPoolWrapper = styled(Box)`
   & > .MuiBox-root > .MuiBox-root:first-child {
     margin-bottom: 8px;
+
+    > div:nth-child(2) {
+      width: 14px;
+      height: 13px;
+      margin-top: -7px;
+    }
   }
 `;
 
 export const SelectWrapperBox = styled(Box)`
-  height: 30px;
-
   .zig-react-select__control {
     margin-top: 0 !important;
     margin-bottom: 0 !important;
+    height: 45px;
   }
 `;

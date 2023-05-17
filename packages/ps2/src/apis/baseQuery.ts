@@ -42,6 +42,11 @@ const endpointsWhitelistedFor401 = [
   'change_password',
 ];
 
+const endpointsWhitelistedForSessionRefresh = [
+  'user/enable_2fa/step2',
+  `logout`,
+];
+
 const maybeReportError = (
   error: FetchBaseQueryError,
   requestType: BaseQueryApi['type'],
@@ -76,7 +81,10 @@ const customFetchBase: (
   } else if (
     +new Date((api.getState() as RootState).user.sessionExpiryDate) -
       TIME_TO_START_REFRESHING_TOKEN <
-    Date.now()
+      Date.now() &&
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    !endpointsWhitelistedForSessionRefresh.includes(args.url)
   ) {
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();

@@ -51,18 +51,14 @@ export const Button = styled.div<ButtonProps>`
   user-select: none;
   height: 56px;
   cursor: pointer;
+  background: #0f0f25;
 
-  ${({ center, theme, isActiveDropDown, focused }) => `
-    background: #12152C;
-    border: 1px solid #222249;
-    
+  ${({ center, theme, isActiveDropDown, focused }) => `    
     ${styledIf(
       focused,
       `
-      border-bottom: 1px solid ${theme.secondary};
-      
       span {
-        color: ${theme.secondary};
+        color: ${theme.highlighted};
       }
     `,
       `
@@ -75,6 +71,10 @@ export const Button = styled.div<ButtonProps>`
     ${styledIf(
       isActiveDropDown,
       `
+      background: #11152b;
+      box-shadow: 0px 2.5px 13.5px 1px rgba(0, 0, 0, 0.42);
+      border-color: transparent !important;
+
       ${ArrowIcon} {
         transform: rotate(-180deg);
       }
@@ -105,6 +105,7 @@ export const DropDown = styled.div<any>`
     max-height: ${props.maxHeight ?? "200px"};
   `}
 
-  box-shadow: 0px 5px 11px rgba(11, 13, 26, 0.25);
-  border-radius: 0 0 5px 5px;
+  box-shadow: 0px 2.5px 13.5px 1px rgba(0, 0, 0, 0.42);
+  border-radius: 0 0 8px 8px;
+  border-top: 1px solid ${({ theme }) => theme.neutral700}80;
 `;

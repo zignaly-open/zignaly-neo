@@ -47,6 +47,7 @@ export function useTransactionsHistory(
     },
     pageIndex,
     true,
+    { refetchOnMountOrArgChange: true },
   );
 
   return infinitePaginatedQuery;

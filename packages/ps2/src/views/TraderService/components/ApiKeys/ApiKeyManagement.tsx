@@ -13,7 +13,7 @@ import Stub from '../../../../components/Stub';
 import ApiKeyEntry from './components/ApiKeyEntry';
 
 const ApiKeyManagement: React.FC = () => {
-  const { t } = useTranslation(['management', 'actions']);
+  const { t } = useTranslation(['management', 'action']);
   const { serviceId } = useParams();
   const { showModal } = useZModal();
   const {

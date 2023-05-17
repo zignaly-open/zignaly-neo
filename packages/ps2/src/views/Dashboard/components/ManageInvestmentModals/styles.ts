@@ -62,7 +62,6 @@ export const Grid = styled('div')`
 
 export const WithdrawFundsOptionWrapper = styled('div')<{ border?: boolean }>`
   flex-direction: column;
-  gap: 15px;
   display: flex;
 
   height: 100%;

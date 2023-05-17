@@ -6,15 +6,17 @@ const ServiceLink = ({
   serviceId,
   serviceName,
   servicePsVersion,
+  id,
 }: {
   serviceId: string;
   serviceName: string;
   servicePsVersion: number;
+  id?: string;
 }) => {
   const { t } = useTranslation('transactions-history');
 
   return (
-    <TypographyPanelName>
+    <TypographyPanelName id={id}>
       {!serviceName || servicePsVersion === 1 ? (
         serviceName || t('psService')
       ) : (

@@ -23,7 +23,7 @@ import { useRefetchIfDesynchronizedState } from '../../../../../apis/serviceApiK
 import { BackendErrorResponse } from '../../../../../util/errors';
 
 const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
-  const { t, i18n } = useTranslation(['management', 'actions']);
+  const { t, i18n } = useTranslation(['management', 'action']);
   const { serviceId } = useParams();
   const refetchIfDesyncronized = useRefetchIfDesynchronizedState();
   const { showModal } = useZModal();

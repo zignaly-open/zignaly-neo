@@ -1,7 +1,7 @@
 import React from 'react';
 import {
   PageContainer,
-  WalletGradientIcon,
+  ZigWalletGradientIcon,
   ZigTypography,
 } from '@zignaly-open/ui';
 import { useTitle } from 'react-use';
@@ -34,15 +34,15 @@ const Wallet = () => {
           WalletBalances,
           TotalSavings,
         ]) => (
-          <>
+          <Box mx={{ xs: 0, sm: 3 }}>
             <Box
               display='flex'
               gap={1}
               alignItems='center'
               color='neutral100'
-              mt={4}
+              mt={6}
             >
-              <WalletGradientIcon width={40} height={40} />
+              <ZigWalletGradientIcon width={40} height={40} />
               <ZigTypography textTransform='uppercase' variant='h3'>
                 {t('title')}
               </ZigTypography>
@@ -54,7 +54,7 @@ const Wallet = () => {
             />
             <WalletCoinsTable balances={balances} coins={coins} />
             <WalletTransactions />
-          </>
+          </Box>
         )}
       />
     </PageContainer>
