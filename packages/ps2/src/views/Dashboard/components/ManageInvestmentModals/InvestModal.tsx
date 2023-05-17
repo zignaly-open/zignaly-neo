@@ -16,7 +16,7 @@ function InvestModal({
   const service = useSelectedInvestment();
   const { isLoading: isLoadingService } = useServiceDetails(service?.serviceId);
   const { isLoading: isLoadingCoins } = useCoinBalances();
-  const { t } = useTranslation(['edit-investment', 'withdraw-your-investment']);
+  const { t } = useTranslation('edit-investment');
   const isLoading = isLoadingService || isLoadingCoins;
   const [isInvested, setIsInvested] = useState(false);
 
