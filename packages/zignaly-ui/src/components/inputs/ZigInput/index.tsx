@@ -13,12 +13,13 @@ function valueToArray<T>(v: T | T[]): T[] {
 }
 
 const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
-  React.forwardRef(({ error, wide, sensitive, labelAction, helperText, ...props }, ref) => {
+  React.forwardRef(({ error, wide, sensitive, labelAction, helperText, id, ...props }, ref) => {
     const [isShown, setIsShown] = useState(false);
     const EyeIcon = isShown ? VisibilityOffIcon : VisibilityIcon;
 
     return (
       <TextField
+        id={id}
         inputRef={ref}
         {...props}
         inputProps={{
@@ -60,6 +61,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
                   <InputAdornment position="end" key={props.id + "sensivive"}>
                     {!!sensitive && (
                       <EyeIcon
+                        id={id && `${id}-visibility-icon`}
                         onClick={() => setIsShown((v) => !v)}
                         width={40}
                         height={40}
