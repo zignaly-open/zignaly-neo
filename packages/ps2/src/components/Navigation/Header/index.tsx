@@ -5,10 +5,7 @@ import { NavigationLink } from './atoms';
 import { ROUTE_BECOME_TRADER, ROUTE_PROFIT_SHARING } from '../../../routes';
 import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
 import AccountMenu from '../AccountMenu';
-import ReferralButton from '../ReferralButton';
-import RewardsButton from '../RewardsButton';
 import { useIsAuthenticated } from '../../../apis/user/use';
-import BalanceButton from '../BalanceButton';
 import { Box, Toolbar, useMediaQuery } from '@mui/material';
 import theme from 'theme';
 // FIXME
@@ -17,6 +14,7 @@ import theme from 'theme';
 import { Container, StyledAppBar } from './styles';
 import Drawer from '../Drawer';
 import { MAIN_APP_URL } from '../../../util/constants';
+import HeaderWidgetButtons from '../HeaderWidgetButtons';
 
 const Header: React.FC = () => {
   const { t } = useTranslation('common');
@@ -57,9 +55,7 @@ const Header: React.FC = () => {
                     </NavigationLink>
                   )}
                 </HeaderLinksContainer>
-                <Suspense fallback={null}>
-                  <ExtraNavigationDropdown />
-                </Suspense>
+                <ExtraNavigationDropdown />
               </Box>
             ) : (
               <Drawer />
@@ -75,13 +71,7 @@ const Header: React.FC = () => {
               }}
             >
               <Suspense fallback={null}>
-                {isAuthenticated && (
-                  <>
-                    <BalanceButton key={'balance'} />
-                    <RewardsButton key={'rewards'} />
-                    {md && <ReferralButton key={'referral'} />}
-                  </>
-                )}
+                {isAuthenticated && <HeaderWidgetButtons />}
                 <AccountMenu />
               </Suspense>
             </Box>

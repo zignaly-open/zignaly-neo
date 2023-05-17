@@ -3,10 +3,12 @@ import { Box } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router-dom';
-import { ROUTE_REWARDS } from '../../../routes';
-import TicketShape, { TicketShapeIndependent } from '../../TicketShape/atoms';
-import { useBenefitsQuery } from '../../../apis/referrals/api';
-import { BenefitType } from '../../../apis/referrals/types';
+import { ROUTE_REWARDS } from '../../../../routes';
+import TicketShape, {
+  TicketShapeIndependent,
+} from '../../../TicketShape/atoms';
+import { useBenefitsQuery } from '../../../../apis/referrals/api';
+import { BenefitType } from '../../../../apis/referrals/types';
 
 const RewardsButton = () => {
   const { t } = useTranslation('common');

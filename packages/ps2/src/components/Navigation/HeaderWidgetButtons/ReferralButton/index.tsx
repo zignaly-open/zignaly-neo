@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router-dom';
-import { ROUTE_REFERRALS } from '../../../routes';
+import { ROUTE_REFERRALS } from '../../../../routes';
 import { GradientBorderButtonWrapper } from './atoms';
 
 const ReferralButton = () => {
