@@ -1,5 +1,5 @@
 import { Box } from '@mui/material';
-import { ChangeIndicator, ZigChartMini, ZigTypography } from '@zignaly-open/ui';
+import { ChangeIndicator, ZigTypography } from '@zignaly-open/ui';
 import { Investment } from 'apis/investment/types';
 import { marketplaceServiceToInvestmentType } from 'apis/marketplace/util';
 import AssetsInPool from 'components/AssetsInPool';
@@ -16,6 +16,7 @@ import {
   ChartBox,
 } from './styles';
 import { ServiceCardProps } from './types';
+import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
   const { t } = useTranslation(['marketplace', 'service']);
@@ -23,7 +24,7 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
   return (
     <Card>
       <ChartBox>
-        <ZigChartMini
+        <ZigChartMiniSuspensed
           data={[0, ...service.sparklines]}
           midLine={false}
           height={104}

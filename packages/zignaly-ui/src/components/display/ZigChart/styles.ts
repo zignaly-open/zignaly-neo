@@ -13,7 +13,8 @@ export const ChartLayoutLarge = styled("div")`
 export const ChartLayoutMini = styled("div")<{ height?: number }>`
   height: ${(props) => props.height || 100}px;
   width: 100%;
-  display: inline-block;
+  display: block;
+  margin-bottom: 10px;
 `;
 
 export const axisStyle = {
