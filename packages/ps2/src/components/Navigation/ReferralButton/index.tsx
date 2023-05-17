@@ -7,7 +7,7 @@ import { ROUTE_REFERRALS } from '../../../routes';
 import { GradientBorderButtonWrapper } from './atoms';
 
 const ReferralButton = () => {
-  const { t } = useTranslation('referrals');
+  const { t } = useTranslation('common');
   return (
     <Link to={generatePath(ROUTE_REFERRALS)}>
       <GradientBorderButtonWrapper>
@@ -48,7 +48,7 @@ const ReferralButton = () => {
                 textAlign: 'center',
               }}
             >
-              {t('header.title')}
+              {t('header.referrals.title')}
             </ZigTypography>
             <ZigTypography
               sx={{
@@ -58,7 +58,7 @@ const ReferralButton = () => {
                 textAlign: 'center',
               }}
             >
-              {t('header.description')}
+              {t('header.referrals.description')}
             </ZigTypography>
           </Box>
         </ZigButton>

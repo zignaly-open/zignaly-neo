@@ -9,7 +9,7 @@ import { useBenefitsQuery } from '../../../apis/referrals/api';
 import { BenefitType } from '../../../apis/referrals/types';
 
 const RewardsButton = () => {
-  const { t } = useTranslation('rewards');
+  const { t } = useTranslation('common');
   const { data: benefits } = useBenefitsQuery();
 
   if (!benefits?.some((x) => x.status === BenefitType.Deposit)) return null;
@@ -60,7 +60,7 @@ const RewardsButton = () => {
                   textAlign: 'center',
                 }}
               >
-                {t('header.title')}
+                {t('header.rewards.title')}
               </ZigTypography>
               <ZigTypography
                 sx={{
@@ -70,7 +70,7 @@ const RewardsButton = () => {
                   textAlign: 'center',
                 }}
               >
-                {t('header.description')}
+                {t('header.rewards.description')}
               </ZigTypography>
             </Box>
           </Box>
