@@ -23,7 +23,7 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
     <Box
       sx={{
         p: 2,
-        pt: { xs: 4, md: isOwner ? 4 : 0 },
+        pt: { xs: 4, md: isOwner ? '11px' : 0 },
         pl: md ? 6 : 2,
         pr: md ? 6 : 2,
       }}
