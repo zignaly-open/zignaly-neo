@@ -100,13 +100,21 @@ export const CountryFlag = styled('img')`
 `;
 
 export const HideReadMoreEffects = styled('div')<{
-  open: boolean;
-  heightLimit: number;
+  truncate: boolean;
 }>`
   transition: all 0.3s;
-  overflow: hidden;
   margin-bottom: 7px;
-  max-height: ${(props) => (props.open ? '100%' : `${props.heightLimit}px`)};
+
+  ${({ truncate }) =>
+    truncate &&
+    css`
+      -webkit-line-clamp: 5;
+      -webkit-box-orient: vertical;
+      display: -webkit-box;
+      overflow: hidden;
+      overflow-wrap: break-word;
+      text-overflow: ellipsis;
+    `}
 `;
 
 export const MarkdownContainer = styled('div')`
