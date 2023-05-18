@@ -17,7 +17,8 @@ export const BalanceSummary = ({
   dashboardType = 'investor',
   onClickEdit = () => null,
 }: BalanceSummaryProps) => {
-  const { t } = useTranslation(['table', 'action']);
+  // we need editinvestment to have that ns when we fire the modal
+  const { t } = useTranslation(['table', 'action', 'edit-investment']);
   return (
     <Layout>
       <Box>
