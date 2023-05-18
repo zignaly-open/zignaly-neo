@@ -69,7 +69,7 @@ function ZigSelect<T>({
     // @ts-ignore
     <StyledSelectWrapper error={error} width={width} small={small} outlined={outlined}>
       {label && (
-        <ZigTypography color={"neutral200"} id={`zig-select__label-${label.toString()}`}>
+        <ZigTypography color={"neutral200"} id={id && `${id}-label`}>
           {label}
         </ZigTypography>
       )}

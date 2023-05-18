@@ -7,16 +7,19 @@ export const ZigPriceLabelIcon = ({
   coin,
   iconBucket,
   precision,
+  id,
 }: {
   amount: string | number;
   coin: string;
   iconBucket?: string;
   precision?: number;
+  id?: string;
 }) => {
   return (
     <Box display='flex' gap={1} alignItems='center' justifyContent='center'>
-      <ZigCoinIcon coin={coin} bucket={iconBucket} />
+      <ZigCoinIcon coin={coin} bucket={iconBucket} id={id && `${id}-icon`} />
       <ZigPriceLabel
+        id={id}
         noWrap
         component='span'
         color='neutral100'
