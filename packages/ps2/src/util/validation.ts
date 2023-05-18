@@ -1,5 +1,6 @@
 import * as yup from 'yup';
 import BigNumber from 'bignumber.js';
+import i18n from 'i18next';
 
 export const checkDecimals = (val: string | number, maxDecimals: number) => {
   if (!val) return true;
@@ -16,16 +17,20 @@ export const checkDecimals = (val: string | number, maxDecimals: number) => {
 export const decimalsValidation = (maxDecimals: number) =>
   yup
     .string()
-    .test('int', 'common:validation.max-decimals', (val) =>
-      checkDecimals(val, maxDecimals),
+    .test(
+      'int',
+      i18n.t('common:validation.max-decimals', { maxDecimals }),
+      (val) => checkDecimals(val, maxDecimals),
     );
 
 export const decimalsValidationNumber = (maxDecimals: number) =>
   yup
     .number()
     .typeError('common:validation.invalid-value')
-    .test('int', 'common:validation.max-decimals', (val) =>
-      checkDecimals(val, maxDecimals),
+    .test(
+      'int',
+      i18n.t('common:validation.max-decimals', { maxDecimals }),
+      (val) => checkDecimals(val, maxDecimals),
     );
 
 const inputAmountNumberValidation = yup
