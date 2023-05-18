@@ -11,7 +11,7 @@
       "spot": "Spot",
       "futures": "Futures"
     },
-    "please-verify": "Please review your info. Type, base and name can't be changed later"
+    "please-verify": "Please review your info. Type and base can't be changed later"
   },
   "wrapper": {
     "title": "Profit Sharing Service Benefits",

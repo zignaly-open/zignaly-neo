@@ -108,7 +108,7 @@
 		},
 		"minimum-balance": "Para tradear e permitir que os investidores invistam, você precisa investir pelo menos {{ minValue }} {{ minValueCoin }} no teu serviço",
 		"profits-explainer": "Decida quanto dos seus lucros de trading e success fee gostaria de solicitar a transferência automática.",
-		"please-verify": "Por favor, reveja as suas informações. Tipo, base e nome não podem ser alterados mais tarde",
+		"please-verify": "Por favor, reveja as suas informações. Tipo e base não podem ser alterados mais tarde",
 		"zero-fee": "Se você escolher success fee = 0, a Zignaly também não cobrará nenhuma taxa"
 	}
 }

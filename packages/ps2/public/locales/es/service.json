@@ -108,7 +108,7 @@
 		},
 		"minimum-balance": "Para operar y permitir que los inversores inviertan, necesitas invertir al menos {{ minValue }} {{ minValueCoin }} en tu servicio",
 		"profits-explainer": "Decide cuánto de tus beneficios provenientes de trading y del success fee deseas solicitar que se retiren automáticamente.",
-		"please-verify": "Por favor revisa tu información. El tipo, la base y el nombre no se pueden cambiar más adelante",
+		"please-verify": "Por favor revisa tu información. El tipo y la base no se pueden cambiar más adelante",
 		"zero-fee": "Si eliges success fee = 0, Zignaly tampoco cobrará ninguna comisión"
 	}
 }

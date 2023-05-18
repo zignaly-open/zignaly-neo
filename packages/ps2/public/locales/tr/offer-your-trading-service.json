@@ -11,7 +11,7 @@
 			"spot": "Spot",
 			"futures": "Vadeli İşlemler"
 		},
-		"please-verify": "Lütfen bilgilerinizi gözden geçirin. Tür, taban ve ad daha sonra değiştirilemez"
+		"please-verify": "Lütfen bilgilerinizi gözden geçirin. Tür ve taban daha sonra değiştirilemez"
 	},
 	"wrapper": {
 		"title": "Profit Sharing Servis Faydaları",

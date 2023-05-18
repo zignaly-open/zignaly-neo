@@ -90,6 +90,7 @@ const InvestButton: React.FC<{
               component='p'
               color='neutral150'
               fontWeight={500}
+              sx={{ textTransform: 'lowercase !important' }}
             >
               {t('invest-button.x-success-fee', {
                 fee: service.successFee,
