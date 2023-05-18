@@ -42,6 +42,7 @@ function InputAmount({
   showMaxButton = true,
   showBalance = true,
   iconBucket,
+  id,
 }: InputAmountProps) {
   const {
     field: { ref, onChange, onBlur, value },
@@ -97,7 +98,9 @@ function InputAmount({
 
   return (
     <Layout withError={!!error} disabled={disabled} fullWidth={fullWidth}>
-      <ZigTypography color="neutral200">{label}</ZigTypography>
+      <ZigTypography color="neutral200" id={id && `${id}-label`}>
+        {label}
+      </ZigTypography>
       <Wrapper>
         <InputContainer>
           <Side>
@@ -106,6 +109,7 @@ function InputAmount({
             )}
             <InputField>
               <InputValue
+                id={id}
                 autoComplete={"off"}
                 name={name}
                 ref={ref}
@@ -132,7 +136,7 @@ function InputAmount({
               </>
             )}
             {value?.token && tokens && showMaxButton && (
-              <MaxButton id={"input-amount__max"} onClick={onClickMaxValue}>
+              <MaxButton id={id && `${id}-max`} onClick={onClickMaxValue}>
                 MAX
               </MaxButton>
             )}
@@ -148,10 +152,11 @@ function InputAmount({
 
       {Number(value?.token?.balance) >= 0 && showBalance && (
         <Box mt={1}>
-          <BalanceLabel variant="body2" color="neutral200">
+          <BalanceLabel variant="body2" color="neutral200" id={id && `${id}-balance-label`}>
             {labelBalance}
           </BalanceLabel>
           <ZigPriceLabel
+            id={id && `${id}-balance`}
             value={value?.token.balance}
             variant="body2"
             component="span"
@@ -168,7 +173,7 @@ function InputAmount({
 
       {error && (
         <Box mt={value?.token?.balance && showBalance ? 1 : 0}>
-          <ErrorMessage text={error} />
+          <ErrorMessage text={error} id={id && `${id}-error`} />
         </Box>
       )}
     </Layout>
