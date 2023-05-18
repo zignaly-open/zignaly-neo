@@ -2,7 +2,6 @@ import React from 'react';
 import { Service } from '../../../../apis/service/types';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import ServiceProfileHeader from './atoms/ServiceProfileHeader';
-import { useIsServiceOwner } from '../../../../apis/service/use';
 import { Box, Grid, useMediaQuery } from '@mui/material';
 import theme from '../../../../theme';
 import RightSideActions from './atoms/RightSideActions';
@@ -16,16 +15,12 @@ const ServiceProfileContainer: React.FC<{ service: Service }> = ({
 }) => {
   // we do not use the results of this till before the modal
   useCoinBalances();
-  const isOwner = useIsServiceOwner(service.id);
-  const md = useMediaQuery(theme.breakpoints.up('sm'));
-
   return (
     <Box
       sx={{
         p: 2,
-        pt: { xs: 4, md: isOwner ? '11px' : 0 },
-        pl: md ? 6 : 2,
-        pr: md ? 6 : 2,
+        pt: 0,
+        mt: { xs: '-15px', md: '-45px' },
       }}
     >
       <Grid container>
