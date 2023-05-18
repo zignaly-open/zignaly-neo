@@ -6,6 +6,7 @@ import {
   CenteredLoader,
   ChartGradients,
   dark,
+  PageContainer,
   ThemeProvider as ThemeInheritorStyled,
   ThemeProviderMui as ThemeInheritorMui,
 } from '@zignaly-open/ui';
@@ -36,6 +37,12 @@ if (
   });
 }
 
+const LoaderSamePlaceAsComponentLevel = (
+  <PageContainer>
+    <CenteredLoader />
+  </PageContainer>
+);
+
 function App() {
   useReferralCookie();
 
@@ -56,21 +63,26 @@ function App() {
               pauseOnHover
               theme='dark'
             />
-            <PersistGate persistor={persistor} loading={<CenteredLoader />}>
+            <PersistGate
+              persistor={persistor}
+              loading={LoaderSamePlaceAsComponentLevel}
+            >
               <BrowserRouter>
-                <ModalProvider>
-                  <Header />
-                  <Suspense fallback={<CenteredLoader />}>
-                    <>
-                      <Tracker />
-                      <UpdateChecker />
-                      <DateLocaleFixer />
-                      <ChartGradients />
-                      <Router />
-                      <BottomNavigation />
-                    </>
-                  </Suspense>
-                </ModalProvider>
+                <Suspense fallback={LoaderSamePlaceAsComponentLevel}>
+                  <ModalProvider>
+                    <Header />
+                    <Suspense fallback={LoaderSamePlaceAsComponentLevel}>
+                      <>
+                        <Tracker />
+                        <UpdateChecker />
+                        <DateLocaleFixer />
+                        <ChartGradients />
+                        <Router />
+                        <BottomNavigation />
+                      </>
+                    </Suspense>
+                  </ModalProvider>
+                </Suspense>
               </BrowserRouter>
             </PersistGate>
           </ThemeProviderMui>

@@ -8,11 +8,7 @@ import DepositModal from '../Dashboard/components/ManageInvestmentModals/Deposit
 const ProfitSharing: React.FC = () => {
   const { t } = useTranslation('pages');
   useTitle(t('profit-sharing.title'));
-  return (
-    <>
-      <Marketplace />
-    </>
-  );
+  return <Marketplace />;
 };
 
 export default ProfitSharing;
