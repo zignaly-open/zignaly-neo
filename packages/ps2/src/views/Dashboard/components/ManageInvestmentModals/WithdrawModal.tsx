@@ -19,6 +19,7 @@ function WithdrawModal({
 
   return (
     <ZModal
+      id={'withdraw-modal'}
       wide
       {...props}
       close={close}

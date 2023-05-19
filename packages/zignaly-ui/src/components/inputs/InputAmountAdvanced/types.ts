@@ -13,6 +13,7 @@ export type InputAmountAdvancedValue = {
 };
 
 export interface InputAmountProps {
+  id?: string;
   name?: string;
   control: Control;
   label: string;

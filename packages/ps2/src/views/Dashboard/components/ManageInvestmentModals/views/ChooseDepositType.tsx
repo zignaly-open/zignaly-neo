@@ -16,7 +16,11 @@ const ChooseDepositType: React.FC<{
     <>
       <Grid container sx={{ padding: '10px 0' }}>
         <Grid item xs={12} sx={{ paddingRight: '38px' }}>
-          <ZigTypography variant={'body2'} fontSize={'15px'}>
+          <ZigTypography
+            variant={'body2'}
+            fontSize={'15px'}
+            id={'modal-choose-deposit-type__description'}
+          >
             {t('service-deposit.description', { coin })}
           </ZigTypography>
         </Grid>
@@ -48,6 +52,7 @@ const ChooseDepositType: React.FC<{
                   variant={'h3'}
                   letterSpacing={0.9}
                   color={'neutral100'}
+                  id={'modal-choose-deposit-type__transfer-crypto'}
                 >
                   {t('service-deposit.transfer-crypto', { coin })}
                 </ZigTypography>
@@ -55,7 +60,7 @@ const ChooseDepositType: React.FC<{
 
               <ZigButton
                 variant='contained'
-                id={'choose-deposit-type__deposit'}
+                id={'modal-choose-deposit-type__deposit'}
                 size={'large'}
                 onClick={() => {
                   setView(ChooseDepositTypeViews.DepositView);
@@ -86,6 +91,7 @@ const ChooseDepositType: React.FC<{
                   variant={'h3'}
                   letterSpacing={0.9}
                   color={'neutral100'}
+                  id={'modal-choose-deposit-type__buy-crypto'}
                 >
                   {t('service-deposit.buy-crypto', { coin })}
                 </ZigTypography>
@@ -93,7 +99,7 @@ const ChooseDepositType: React.FC<{
               <ZigButton
                 href={BUY_CRYPTO_URL}
                 variant='contained'
-                id={'choose-deposit-type__purchase'}
+                id={'modal-choose-deposit-type__purchase'}
                 endIcon={<NorthEastIcon />}
                 size={'large'}
               >

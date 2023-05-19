@@ -1,5 +1,5 @@
 import { Box } from '@mui/system';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
@@ -14,42 +14,20 @@ const MarkdownSection: React.FC<{
   content: string;
   heightLimit?: number;
   emptyText: string;
-}> = ({
-  title,
-  subtitle,
-  readMore = true,
-  heightLimit = 120,
-  content,
-  emptyText,
-}) => {
+}> = ({ title, subtitle, readMore = true, content, emptyText }) => {
   const { t } = useTranslation('action');
-  const ref = useRef();
+  const ref = useRef(null);
   const chunks = (content || '').trim().split(/\n+/).filter(Boolean);
-  const { scrollHeight = 0, clientHeight = 0 } =
-    ref?.current || ({} as { scrollHeight: number; clientHeight: number });
-
-  const [shown, setShown] = useState(false);
   const [shouldShowReadMore, setShouldShowReadMore] = useState(readMore);
-  const delta = 24 * 2;
+  const [isTruncated, setIsTruncated] = useState(true);
 
-  useLayoutEffect(() => {
-    if (scrollHeight && clientHeight && scrollHeight - delta < heightLimit) {
-      setShouldShowReadMore(false);
-    }
-  }, [clientHeight && scrollHeight]);
+  useEffect(() => {
+    setShouldShowReadMore(
+      readMore && ref.current.scrollHeight > ref.current.clientHeight,
+    );
+  }, [content]);
 
-  useLayoutEffect(() => {
-    if (
-      scrollHeight &&
-      clientHeight &&
-      scrollHeight > clientHeight &&
-      scrollHeight - delta < clientHeight
-    ) {
-      setShown(true);
-    }
-  }, [scrollHeight, clientHeight]);
-
-  const Icon = shown ? ExpandLess : ExpandMore;
+  const Icon = isTruncated ? ExpandMore : ExpandLess;
   return (
     <Box mt={8} mb={4}>
       <ZigTypography variant={'h2'} sx={{ mb: 3 }} align='center'>
@@ -59,10 +37,9 @@ const MarkdownSection: React.FC<{
 
       <HideReadMoreEffects
         ref={ref}
-        open={shown || !shouldShowReadMore}
-        heightLimit={heightLimit}
+        truncate={shouldShowReadMore && isTruncated}
       >
-        {chunks.length ? (
+        {chunks ? (
           <MarkdownContainer>
             <ReactMarkdown
               remarkPlugins={[breaks]}
@@ -85,9 +62,9 @@ const MarkdownSection: React.FC<{
           endIcon={
             <Icon sx={{ color: 'links', fill: 'currentColor !important' }} />
           }
-          onClick={() => setShown((v) => !v)}
+          onClick={() => setIsTruncated((v) => !v)}
         >
-          {shown ? t('less') : t('more')}
+          {isTruncated ? t('more') : t('less')}
         </ZigButton>
       )}
     </Box>

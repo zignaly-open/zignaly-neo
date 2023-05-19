@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
-import { Layout, InvestorCounts } from './styles';
+import { InvestorCounts } from './styles';
 import {
   ZigUserIcon,
   ZigTypography,
@@ -111,42 +111,36 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   }, []);
 
   return (
-    <Layout>
-      <LayoutContentWrapper
-        endpoint={[
-          investorsEndpoint,
-          managementEndpoint,
-          serviceDetailsEndpoint,
-        ]}
-        content={([investors, management]: [
-          Investor[],
-          TraderServiceManagement,
-        ]) => (
-          <>
-            <InvestorCounts>
-              <ZigUserIcon width={'17px'} height={'20px'} color={'#65647E'} />
-              <ZigTypography variant={'h3'} color={'almostWhite'}>
-                {t('number-of-investors', {
-                  count: investors?.length,
-                })}
-              </ZigTypography>
-            </InvestorCounts>
+    <LayoutContentWrapper
+      endpoint={[investorsEndpoint, managementEndpoint, serviceDetailsEndpoint]}
+      content={([investors, management]: [
+        Investor[],
+        TraderServiceManagement,
+      ]) => (
+        <>
+          <InvestorCounts>
+            <ZigUserIcon width={'17px'} height={'20px'} color={'#65647E'} />
+            <ZigTypography variant={'h3'} color={'almostWhite'}>
+              {t('number-of-investors', {
+                count: investors?.length,
+              })}
+            </ZigTypography>
+          </InvestorCounts>
 
-            <ZigTable
-              prefixId={'investor'}
-              columns={columns}
-              data={investors.map((inv) => ({
-                ...inv,
-                successFee:
-                  inv.accountType === 'owner' ? '0' : management.successFee,
-              }))}
-              emptyMessage={t('no-investors')}
-              enableSortingRemoval={false}
-            />
-          </>
-        )}
-      />
-    </Layout>
+          <ZigTable
+            prefixId={'investor'}
+            columns={columns}
+            data={investors.map((inv) => ({
+              ...inv,
+              successFee:
+                inv.accountType === 'owner' ? '0' : management.successFee,
+            }))}
+            emptyMessage={t('no-investors')}
+            enableSortingRemoval={false}
+          />
+        </>
+      )}
+    />
   );
 };
 

@@ -11,7 +11,7 @@
 			"spot": "Spot",
 			"futures": "Futuros"
 		},
-		"please-verify": "Por favor revisa tu información. El tipo, la base y el nombre no se pueden cambiar más adelante"
+		"please-verify": "Por favor revisa tu información. El tipo y la base no se pueden cambiar más adelante"
 	},
 	"wrapper": {
 		"title": "Beneficios del Servicio de Profit Sharing",

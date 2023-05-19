@@ -37,7 +37,9 @@ import { useZModal } from 'components/ZModal/use';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
-import { ZigDropdownHandleType } from '@zignaly-open/ui';
+import { ZigDropdownHandleType, ZigArrowBottomIcon } from '@zignaly-open/ui';
+import { ReactComponent as GiftIcon } from '../../../images/tab-rewards.svg';
+import { ReactComponent as InviteIcon } from '../../../images/tab-referrals.svg';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme();
@@ -92,8 +94,20 @@ function AccountMenu(): React.ReactElement | null {
           id={'menu__dropdown-account'}
           key={'user'}
           active={open}
+          sx={{
+            pl: '20px',
+            pr: '20px',
+            flexDirection: 'row',
+            alignItems: 'center',
+            gap: '8px',
+          }}
         >
           <Avatar size={'medium'} image={activeExchange?.image} />
+          <ZigArrowBottomIcon
+            color={theme.palette.neutral300}
+            width={'16px'}
+            height={'16px'}
+          />
         </HeaderDropdownButton>
       )}
       options={[
@@ -168,7 +182,7 @@ function AccountMenu(): React.ReactElement | null {
             <ZigButton
               id={'invest-form__deposit'}
               startIcon={<ZigPlusIcon />}
-              sx={{ fontWeight: 600, mb: 1 }}
+              sx={{ fontWeight: 600, mb: 1.5, mt: 1.5 }}
               variant={'contained'}
               onClick={() => {
                 // fun fact: without onClose react-select acts funky
@@ -186,11 +200,10 @@ function AccountMenu(): React.ReactElement | null {
           separator: true,
           label: (
             <>
-              <img
+              <GiftIcon
                 width={24}
                 height={24}
-                src='/images/tab-rewards.svg'
-                alt={t('account-menu.rewards')}
+                color={theme.palette.neutral175}
               />
               {t('account-menu.rewards')}
             </>
@@ -202,11 +215,10 @@ function AccountMenu(): React.ReactElement | null {
         {
           label: (
             <>
-              <img
+              <InviteIcon
                 width={24}
                 height={24}
-                src='/images/tab-referrals.svg'
-                alt={t('account-menu.rewards')}
+                color={theme.palette.neutral175}
               />
               {t('account-menu.referrals')}
             </>
@@ -217,7 +229,15 @@ function AccountMenu(): React.ReactElement | null {
         },
         {
           separator: true,
-          label: <>{t('account-menu.notAuth-button-logOut')}</>,
+          label: (
+            <ZigTypography
+              component={'p'}
+              sx={{ textAlign: 'center', p: 0.5, width: '100%' }}
+              color={'links'}
+            >
+              {t('account-menu.notAuth-button-logOut')}
+            </ZigTypography>
+          ),
           id: 'account-menu-dropdown__logout',
           onClick: logout,
         },
