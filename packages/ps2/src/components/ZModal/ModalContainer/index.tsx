@@ -21,21 +21,16 @@ function ModalContainer({
       <Header compact={!title && !onGoBack}>
         <Inline align={titleAlign}>
           {onGoBack && typeof onGoBack === 'function' && (
-            <HeaderButton onClick={onGoBack}>
+            <IconButton onClick={onGoBack}>
               <ZigArrowLeftIcon
                 width={'32px'}
                 height={'32px'}
                 color={theme.palette.neutral300}
               />
-            </HeaderButton>
+            </IconButton>
           )}
           {!!title && (
-            <Title
-              variant='h1'
-              sx={{ paddingRight: '20px' }}
-              color='neutral100'
-              id={'modal__title'}
-            >
+            <Title variant='h1' mb={0} color='neutral100' id={'modal__title'}>
               {title}
             </Title>
           )}

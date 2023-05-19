@@ -16,7 +16,7 @@ import { WalletWithdrawModalProps, WithdrawFormData } from './types';
 import { Box, Grid } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithdrawValidation } from './validations';
-import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { ModalActions as ModalActions } from 'components/ZModal/ModalContainer/styles';
 import LabelValueLine from './atoms/LabelValueLine';
 import {
   useBalanceQuery,

@@ -13,7 +13,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Form } from './styles';
 import { TwoFAValidation } from './validations';
 import { TwoFAFormType } from './types';
-import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
+import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { useToast } from 'util/hooks/useToast';
 import { useDispatch } from 'react-redux';
 import { enable2FA } from 'apis/user/store';
@@ -74,7 +74,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
           )}
         />
 
-        <ModalActionsNew align='right'>
+        <ModalActions align='right'>
           <ZigButton
             onClick={close}
             variant='outlined'
@@ -93,7 +93,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
           >
             {t('disable-2fa.title')}
           </ZigButton>
-        </ModalActionsNew>
+        </ModalActions>
       </Form>
     </>
   );

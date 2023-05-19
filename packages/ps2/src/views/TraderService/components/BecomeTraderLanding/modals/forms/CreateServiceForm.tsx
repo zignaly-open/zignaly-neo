@@ -21,7 +21,7 @@ import { ExchangeType } from '../../../../../../apis/user/types';
 import { ServiceFormData } from './types';
 import {
   AlertBlock,
-  ModalActionsNew,
+  ModalActions,
 } from 'components/ZModal/ModalContainer/styles';
 import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 
@@ -181,7 +181,7 @@ const CreateServiceForm: React.FC<{
         <ZigAlertMessage text={t('create.please-verify')} warning />
       </AlertBlock>
 
-      <ModalActionsNew>
+      <ModalActions>
         <ZigButton
           variant='contained'
           type='submit'
@@ -190,7 +190,7 @@ const CreateServiceForm: React.FC<{
         >
           {t('create.next-step')}
         </ZigButton>
-      </ModalActionsNew>
+      </ModalActions>
     </form>
   );
 };

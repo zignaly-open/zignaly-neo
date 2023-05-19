@@ -76,24 +76,15 @@ export const Inline = styled('div')<{ align?: string }>`
   gap: 12px;
 `;
 
-export const ModalActions = styled('div')`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 56px;
-  gap: 32px;
-`;
-
-// todo: check if it can replace ModalActions
-export const ModalActionsNew = styled('div')<{
+export const ModalActions = styled('div')<{
   align?: 'left' | 'center' | 'right';
+  direction?: 'row' | 'column';
 }>`
   display: flex;
   align-items: center;
   margin-top: 56px;
-  gap: 14px;
-  flex-direction: row;
+  gap: 32px;
+  flex-direction: ${({ direction }) => direction};
   width: 100%;
   justify-content: ${({ align }) =>
     align === 'left'
@@ -101,10 +92,6 @@ export const ModalActionsNew = styled('div')<{
       : align === 'right'
       ? 'flex-end'
       : 'center'};
-
-  button {
-    text-transform: uppercase;
-  }
 `;
 
 export const AlertBlock = styled('div')`
