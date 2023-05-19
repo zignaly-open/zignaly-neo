@@ -96,7 +96,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
     font-size: 15px !important;
     line-height: 24px;
     letter-spacing: 0.55px;
-      color: ${theme.palette.neutral200} !important;
+    color: ${theme.palette.neutral200} !important;
     
     display: flex;
     position: static;
