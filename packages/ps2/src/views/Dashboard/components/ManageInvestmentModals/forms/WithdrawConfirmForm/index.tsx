@@ -28,7 +28,11 @@ const WithdrawConfirmForm = ({
   if (status.isSuccess) {
     return (
       <Grid container direction='column'>
-        <ZigTypography my={1} color='neutral200'>
+        <ZigTypography
+          my={1}
+          color='neutral200'
+          id={'withdraw-modal-confirmation-success__description'}
+        >
           {t('success.description')}
         </ZigTypography>
         <ModalActions>
@@ -42,18 +46,30 @@ const WithdrawConfirmForm = ({
 
   return (
     <Grid container direction='column'>
-      <ZigTypography my={1} color='neutral200'>
+      <ZigTypography
+        my={1}
+        color='neutral200'
+        id={'withdraw-modal-confirmation__description'}
+      >
         {t('confirmation.description')}
       </ZigTypography>
-      <ZigTypography mt={4} color='neutral200'>
+      <ZigTypography
+        mt={4}
+        color='neutral200'
+        id={'withdraw-modal-confirmation__network-label'}
+      >
         {t('confirmation.network')}
       </ZigTypography>
       <Grid alignItems='center' direction='row' display='flex' gap={2} mt='8px'>
-        <ChainIcon network={networkCoin} />
+        <ChainIcon
+          network={networkCoin}
+          id={'withdraw-modal-confirmation__chain-icon'}
+        />
         <ZigTypography
           variant='h2'
           color='neutral100'
           sx={{ weight: 'medium' }}
+          id={'withdraw-modal-confirmation__network'}
         >
           {networkName}
         </ZigTypography>
@@ -61,6 +77,7 @@ const WithdrawConfirmForm = ({
       <Grid mt={3} gap={3} display='flex' direction='column'>
         <ZigInput
           label={t('confirmation.address')}
+          id={'withdraw-modal-confirmation__address'}
           InputProps={{
             readOnly: true,
           }}
@@ -69,6 +86,7 @@ const WithdrawConfirmForm = ({
         />
         {tag && (
           <ZigInput
+            id={'withdraw-modal-confirmation__memo'}
             label={t('withdrawMemo.label')}
             InputProps={{
               readOnly: true,
@@ -90,10 +108,16 @@ const WithdrawConfirmForm = ({
       >
         <AmountContainer sx={{ height: '100%', flex: 2 }}>
           <Grid display='flex' justifyContent='center' direction='column'>
-            <ZigTypography color='neutral200' variant='h3' fontWeight='regular'>
+            <ZigTypography
+              color='neutral200'
+              variant='h3'
+              fontWeight='regular'
+              id={'withdraw-modal-confirmation__amount-label'}
+            >
               {t('confirmation.amount')}
             </ZigTypography>
             <ZigPriceLabelIcon
+              id={'withdraw-modal-confirmation__amount'}
               amount={amount}
               coin={coin}
               iconBucket={iconBucket}
@@ -106,10 +130,12 @@ const WithdrawConfirmForm = ({
               variant='body2'
               color='neutral200'
               fontWeight='medium'
+              id={'withdraw-modal-confirmation__network-fee-label'}
             >
               {t('confirmation.networkFee')}
             </ZigTypography>
             <ZigPriceLabelIcon
+              id={'withdraw-modal-confirmation__network-fee'}
               amount={fee}
               coin={feeCoin}
               iconBucket={iconBucket}
@@ -125,10 +151,15 @@ const WithdrawConfirmForm = ({
           display='flex'
           alignItems='center'
         >
-          <ZigTypography color='neutral300' variant='h2'>
+          <ZigTypography
+            color='neutral300'
+            variant='h2'
+            id={'withdraw-modal-confirmation__receive-label'}
+          >
             {t('confirmation.receive')}
           </ZigTypography>
           <ZigPriceLabelIcon
+            id={'withdraw-modal-confirmation__receive'}
             amount={
               coin !== feeCoin
                 ? amount
@@ -141,7 +172,7 @@ const WithdrawConfirmForm = ({
       </AmountContainer>
       <ModalActions>
         <ZigButton
-          id={'confirm__back'}
+          id={'withdraw-modal-confirmation__back'}
           onClick={back}
           variant='outlined'
           size='large'
@@ -149,7 +180,7 @@ const WithdrawConfirmForm = ({
           {t('common:back')}
         </ZigButton>
         <ZigButton
-          id={'confirm__confirm-withdraw'}
+          id={'withdraw-modal-confirmation__confirm-withdraw'}
           onClick={action}
           variant='contained'
           size='large'

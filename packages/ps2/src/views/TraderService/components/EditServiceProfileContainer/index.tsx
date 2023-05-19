@@ -132,7 +132,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
     );
 
   return (
-    <Box onSubmit={handleSubmit(submit)} component='form' pt={7}>
+    <Box onSubmit={handleSubmit(submit)} component='form'>
       <ZigTypography textAlign='center' variant='h1'>
         {t('edit.title')}
       </ZigTypography>
