@@ -6,7 +6,6 @@ import {
   ZigButtonGroupInput,
   ZigInput,
   ZigSelect,
-  ZigTypography,
 } from '@zignaly-open/ui';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
@@ -76,7 +75,7 @@ const CreateServiceForm: React.FC<{
         value: 'spot',
         label: t(`create.types.spot`),
         extraProps: {
-          size: 'large' as ButtonProps['size'],
+          size: 'xlarge' as ButtonProps['size'],
           sx: { width: '50%' },
         },
       },
@@ -84,7 +83,7 @@ const CreateServiceForm: React.FC<{
         value: 'futures',
         label: t(`create.types.futures`),
         extraProps: {
-          size: 'large' as ButtonProps['size'],
+          size: 'xlarge' as ButtonProps['size'],
           sx: { width: '50%' },
         },
       },
@@ -123,11 +122,12 @@ const CreateServiceForm: React.FC<{
                 menuShouldScrollIntoView={false}
                 menuPosition='fixed'
                 menuShouldBlockScroll
-                label={t('create.base-currency')}
+                label={t('create.base-currency') + ':'}
                 placeholder={t('create.base-currency')}
                 options={coinOptions}
                 error={t(errors.baseCurrency?.message)}
                 filterOption={filterOptions}
+                width={240}
                 {...field}
               />
             </Box>
@@ -168,15 +168,9 @@ const CreateServiceForm: React.FC<{
               sx={{
                 mb: 1,
               }}
-              fullWidth
-              label={
-                <div>
-                  {t('summary.success-fee')}
-                  <ZigTypography variant='h4' color='neutral400'>
-                    {t('edit.success-fee-desc')}
-                  </ZigTypography>
-                </div>
-              }
+              label={t('create.total-fee')}
+              labelInline={true}
+              fullWidth={false}
               error={t(errors.successFee?.message)}
               {...field}
             />
@@ -192,7 +186,7 @@ const CreateServiceForm: React.FC<{
           variant='contained'
           type='submit'
           id={'create-service-modal__create-1st-step'}
-          size='large'
+          size='xlarge'
         >
           {t('create.next-step')}
         </ZigButton>

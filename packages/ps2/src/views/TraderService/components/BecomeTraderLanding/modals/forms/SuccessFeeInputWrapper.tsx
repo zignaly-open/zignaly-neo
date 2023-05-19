@@ -1,8 +1,9 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ZigAlertMessage, ZigTypography } from '@zignaly-open/ui';
-import { SuccessFieldWrapper, SuccessFieldWrapperShit } from '../atoms';
+import { SuccessFieldWrapper, SuccessFieldReceive } from '../atoms';
 import { ZIGNALY_PROFIT_FEE } from '../../../../../../util/constants';
+import { Box } from '@mui/material';
 
 const SuccessFeeInputWrapper: React.FC<{
   children: JSX.Element;
@@ -16,15 +17,41 @@ const SuccessFeeInputWrapper: React.FC<{
   return (
     <>
       <SuccessFieldWrapper>
-        {children}
+        <ZigTypography>{t('summary.success-fee')}</ZigTypography>
+        <ZigTypography variant='h4' color='neutral400'>
+          {t('edit.success-fee-desc')}
+        </ZigTypography>
 
-        <SuccessFieldWrapperShit>
-          <ZigTypography>
-            {t('you-get-x', {
-              number: Math.round(feeWeCharge),
-            })}
-          </ZigTypography>
-        </SuccessFieldWrapperShit>
+        <Box display='flex' mt={1.25}>
+          {children}
+          <SuccessFieldReceive>
+            <ZigTypography
+              variant='h5'
+              color='neutral300'
+              textAlign='center'
+              sx={{
+                position: 'absolute',
+                top: '8px',
+                left: '4px',
+                width: '100%',
+              }}
+            >
+              {t('you-receive')}
+            </ZigTypography>
+            <Box display='flex' paddingTop='24px'>
+              <ZigTypography color='neutral300' textAlign='center' width='100%'>
+                {Math.round(feeWeCharge)}
+              </ZigTypography>
+              <ZigTypography
+                color='neutral400'
+                sx={{ position: 'absolute', right: '22px' }}
+                // eslint-disable-next-line i18next/no-literal-string
+              >
+                %
+              </ZigTypography>
+            </Box>
+          </SuccessFieldReceive>
+        </Box>
       </SuccessFieldWrapper>
       {value === '0' && <ZigAlertMessage text={t('create.zero-fee')} />}
     </>
