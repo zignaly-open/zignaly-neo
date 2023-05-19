@@ -19,16 +19,16 @@ function ModalContainer({
   return (
     <Layout width={width}>
       <Header compact={!title && !onGoBack}>
+        {onGoBack && typeof onGoBack === 'function' && (
+          <IconButton onClick={onGoBack}>
+            <ZigArrowLeftIcon
+              width={'32px'}
+              height={'32px'}
+              color={theme.palette.neutral300}
+            />
+          </IconButton>
+        )}
         <Inline align={titleAlign}>
-          {onGoBack && typeof onGoBack === 'function' && (
-            <IconButton onClick={onGoBack}>
-              <ZigArrowLeftIcon
-                width={'32px'}
-                height={'32px'}
-                color={theme.palette.neutral300}
-              />
-            </IconButton>
-          )}
           {!!title && (
             <Title variant='h1' mb={0} color='neutral100' id={'modal__title'}>
               {title}
