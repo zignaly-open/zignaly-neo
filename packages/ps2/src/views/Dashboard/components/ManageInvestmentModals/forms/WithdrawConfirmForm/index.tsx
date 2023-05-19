@@ -36,7 +36,12 @@ const WithdrawConfirmForm = ({
           {t('success.description')}
         </ZigTypography>
         <ModalActions>
-          <ZigButton onClick={close} variant='outlined' size='large'>
+          <ZigButton
+            onClick={close}
+            variant='outlined'
+            size='large'
+            id={'withdraw-modal-confirmation-success__close'}
+          >
             {t('common:close')}
           </ZigButton>
         </ModalActions>
