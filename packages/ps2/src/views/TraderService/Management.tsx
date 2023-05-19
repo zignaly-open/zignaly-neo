@@ -1,5 +1,4 @@
 import React from 'react';
-import ServiceHeader from './components/ServiceHeader';
 import ServiceManagementsContainer from './components/ServiceManagementsContainer';
 import { useParams } from 'react-router-dom';
 import { TraderServicePageContainer } from './components/styles';
@@ -9,12 +8,9 @@ const Management: React.FC = () => {
   const { serviceId } = useParams();
   useTraderServiceTitle('profit-sharing.management', serviceId);
   return (
-    <>
-      <ServiceHeader />
-      <TraderServicePageContainer>
-        <ServiceManagementsContainer serviceId={serviceId} />
-      </TraderServicePageContainer>
-    </>
+    <TraderServicePageContainer>
+      <ServiceManagementsContainer serviceId={serviceId} />
+    </TraderServicePageContainer>
   );
 };
 
