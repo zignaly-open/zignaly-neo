@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { IconButton, useTheme } from '@mui/material';
 import { Layout, Header, Title, Body, Inline } from './styles';
 import { ZigArrowLeftIcon } from '@zignaly-open/ui';
 import { ModalContainerProps } from './types';
 import { Close } from '@mui/icons-material';
 
-function ModalContainer({
-  children,
-  title = null,
-  titleAlign = 'center',
-  onGoBack = null,
-  width,
-  onClickClose = null,
-  customHeaderAction = null,
-}: ModalContainerProps) {
+const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
+  const {
+    children,
+    title = null,
+    titleAlign = 'center',
+    onGoBack = null,
+    width,
+    onClickClose = null,
+    customHeaderAction = null,
+  } = props;
   const theme = useTheme();
 
   return (
-    <Layout width={width}>
+    <Layout width={width} ref={ref}>
       <Header compact={!title && !onGoBack}>
         {onGoBack && typeof onGoBack === 'function' && (
           <IconButton onClick={onGoBack}>
@@ -51,6 +52,6 @@ function ModalContainer({
       <Body>{children}</Body>
     </Layout>
   );
-}
+});
 
 export default ModalContainer;

@@ -1,7 +1,7 @@
-import { styled, css } from '@mui/material';
+import { styled, css, Box } from '@mui/material';
 import { styledIf, ZigTypography } from '@zignaly-open/ui';
 
-export const Layout = styled('div')<{ width: number }>`
+export const Layout = styled(Box)<{ width: number }>`
   display: flex;
   position: relative;
   flex-direction: column;
@@ -16,7 +16,6 @@ export const Layout = styled('div')<{ width: number }>`
     css`
       width: ${width}px; // TODO: responsiveness
     `};
-  user-select: none;
 `;
 
 export const Title = styled(ZigTypography)`
