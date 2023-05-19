@@ -22,6 +22,7 @@ export const Layout = styled('div')<{ width: number }>`
 export const Title = styled(ZigTypography)`
   display: flex;
   justify-content: space-between;
+  text-transform: capitalize;
 `;
 
 export const Body = styled('div')`
@@ -56,22 +57,6 @@ export const Header = styled('div')<{ compact: boolean }>`
     position: absolute;
     right: 56px;
     top: 40px;
-  `}
-`;
-
-export const HeaderButton = styled('button')`
-  border: 0;
-  padding: 0;
-  margin: 0;
-  height: 32px;
-  width: 32px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  ${({ theme }) => `
-    svg { 
-      fill: ${theme.palette.neutral300};
-    }
   `}
 `;
 
@@ -116,6 +101,10 @@ export const ModalActionsNew = styled('div')<{
       : align === 'right'
       ? 'flex-end'
       : 'center'};
+
+  button {
+    text-transform: uppercase;
+  }
 `;
 
 export const AlertBlock = styled('div')`

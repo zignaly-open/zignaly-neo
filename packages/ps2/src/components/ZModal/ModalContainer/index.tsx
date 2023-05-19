@@ -1,13 +1,14 @@
 import React from 'react';
-import { useTheme } from '@mui/material';
-import { Layout, Header, Title, Body, HeaderButton, Inline } from './styles';
-import { ZigCloseIcon, ZigArrowLeftIcon } from '@zignaly-open/ui';
+import { IconButton, useTheme } from '@mui/material';
+import { Layout, Header, Title, Body, Inline } from './styles';
+import { ZigArrowLeftIcon } from '@zignaly-open/ui';
 import { ModalContainerProps } from './types';
+import { Close } from '@mui/icons-material';
 
 function ModalContainer({
   children,
   title = null,
-  titleAlign = 'left',
+  titleAlign = 'center',
   onGoBack = null,
   width,
   onClickClose = null,
@@ -42,12 +43,13 @@ function ModalContainer({
         {!customHeaderAction
           ? onClickClose &&
             typeof onClickClose === 'function' && (
-              <HeaderButton onClick={onClickClose}>
-                <ZigCloseIcon
-                  color={theme.palette.neutral300}
+              <IconButton onClick={onClickClose}>
+                <Close
+                  sx={{ color: theme.palette.neutral300 }}
                   id={'modal__close'}
+                  fontSize='large'
                 />
-              </HeaderButton>
+              </IconButton>
             )
           : customHeaderAction}
       </Header>
