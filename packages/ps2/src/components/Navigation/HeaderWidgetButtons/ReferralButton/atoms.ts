@@ -9,12 +9,12 @@ export const GradientBorderButtonWrapper = styled(Box)`
 
   &:hover {
     background: ${({ theme }) => theme.palette.neutral600};
-    & > a {
+    & > div {
       background: ${({ theme }) => theme.palette.neutral700} !important;
     }
   }
 
-  & > a {
+  & > div {
     height: 40px;
     transition: background-color 0.3s;
     background: ${({ theme }) => theme.palette.neutral800} !important;

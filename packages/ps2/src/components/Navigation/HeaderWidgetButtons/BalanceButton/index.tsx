@@ -76,7 +76,7 @@ const BalanceButton = () => {
     <GradientBorderButtonWrapper>
       <ZigButton
         id='menu__balance-link'
-        component={'a'}
+        component={'div'}
         sx={{
           cursor: 'pointer',
           display: 'flex',
