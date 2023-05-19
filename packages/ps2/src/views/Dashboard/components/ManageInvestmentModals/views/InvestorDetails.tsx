@@ -3,11 +3,12 @@ import { useServiceDetails } from '../../../../../apis/service/use';
 import { useSelectedInvestment } from '../../../../../apis/investment/use';
 import InvestorDetailsForService from './InvestorDetailsForService';
 
-const InvestorDetails: React.FC = () => {
+const InvestorDetails: React.FC = ({ prefixId }: { prefixId?: string }) => {
   const service = useSelectedInvestment();
   const { data } = useServiceDetails(service.serviceId);
   return (
     <InvestorDetailsForService
+      prefixId={prefixId}
       service={{
         serviceLogo: service.serviceLogo,
         serviceName: service.serviceName,
