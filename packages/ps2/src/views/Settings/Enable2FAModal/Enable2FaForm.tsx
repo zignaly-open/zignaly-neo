@@ -100,15 +100,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
             )}
           />
 
-          <ModalActions align='right'>
-            <ZigButton
-              onClick={close}
-              variant='outlined'
-              size='large'
-              id={'enable-2fa__cancel'}
-            >
-              {t('action:cancel')}
-            </ZigButton>
+          <ModalActions>
             <ZigButton
               id={'enable-2fa__submit'}
               type='submit'
@@ -139,15 +131,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
         </ZigTypography>
       </Box>
 
-      <ModalActions align='right'>
-        <ZigButton
-          onClick={close}
-          variant='outlined'
-          size='large'
-          id='enable-2fa__setup-cancel'
-        >
-          {t('action:cancel')}
-        </ZigButton>
+      <ModalActions align='center'>
         <ZigButton
           onClick={() => load2FAInfo()}
           loading={load2FAInfoResult.isLoading || load2FAInfoResult.isFetching}

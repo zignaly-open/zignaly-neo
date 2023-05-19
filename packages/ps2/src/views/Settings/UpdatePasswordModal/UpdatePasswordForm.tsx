@@ -99,15 +99,7 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
           )}
         />
 
-        <ModalActions align='right'>
-          <ZigButton
-            onClick={close}
-            variant='outlined'
-            size='large'
-            id={'update-password__cancel'}
-          >
-            {t('action:cancel')}
-          </ZigButton>
+        <ModalActions>
           <ZigButton
             id={'update-password__submit'}
             type='submit'

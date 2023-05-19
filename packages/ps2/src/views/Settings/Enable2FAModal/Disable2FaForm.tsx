@@ -74,15 +74,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
           )}
         />
 
-        <ModalActions align='right'>
-          <ZigButton
-            onClick={close}
-            variant='outlined'
-            size='large'
-            id={'disable-2fa__cancel'}
-          >
-            {t('action:cancel')}
-          </ZigButton>
+        <ModalActions>
           <ZigButton
             id={'disable-2fa__submit'}
             type='submit'

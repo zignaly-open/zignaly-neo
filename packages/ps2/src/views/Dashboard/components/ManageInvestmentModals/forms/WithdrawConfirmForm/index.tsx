@@ -31,7 +31,7 @@ const WithdrawConfirmForm = ({
         <ZigTypography my={1} color='neutral200'>
           {t('success.description')}
         </ZigTypography>
-        <ModalActions align='left'>
+        <ModalActions>
           <ZigButton onClick={close} variant='outlined' size='large'>
             {t('common:close')}
           </ZigButton>
@@ -139,7 +139,7 @@ const WithdrawConfirmForm = ({
           />
         </Grid>
       </AmountContainer>
-      <ModalActions align='right'>
+      <ModalActions>
         <ZigButton
           id={'confirm__back'}
           onClick={back}

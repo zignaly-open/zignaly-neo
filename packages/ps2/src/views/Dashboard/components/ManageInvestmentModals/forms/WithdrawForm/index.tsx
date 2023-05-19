@@ -317,17 +317,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
               </Grid>
             )}
 
-            <ModalActions align='right'>
-              <ZigButton
-                id={'withdraw__close'}
-                size={'large'}
-                type={'button'}
-                variant={'outlined'}
-                onClick={close}
-              >
-                {t('common:close')}
-              </ZigButton>
-
+            <ModalActions>
               <ZigButton
                 id={'withdraw__continue'}
                 size={'large'}
