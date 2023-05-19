@@ -70,7 +70,7 @@ const Header: React.FC = () => {
                   !sm && { flex: 1, justifyContent: 'center' }),
               }}
             >
-              <Suspense fallback={null}>
+              <Suspense>
                 {isAuthenticated && <HeaderWidgetButtons />}
                 <AccountMenu />
               </Suspense>

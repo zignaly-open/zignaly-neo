@@ -15,6 +15,7 @@ import * as Routes from './routes';
 import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
 import ServiceHeader from './views/TraderService/components/ServiceHeader';
+import { zigSuspenseFallback } from 'util/suspense';
 
 const Wallet = lazy(() => import('./views/Wallet'));
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
@@ -52,7 +53,7 @@ const { default: ServiceProfile, ServiceProfileInvestment } = lazily(
 const outleted = (Component: JSX.Element) => (
   <>
     {Component}
-    <Suspense>
+    <Suspense fallback={zigSuspenseFallback}>
       <Outlet />
     </Suspense>
   </>
@@ -100,7 +101,7 @@ const Router: React.FC = () => (
       element={
         <>
           <ServiceHeader />
-          <Suspense>
+          <Suspense fallback={zigSuspenseFallback}>
             <ServiceOwnerWall />
           </Suspense>
         </>
