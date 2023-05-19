@@ -31,14 +31,14 @@ const SuccessFeeInputWrapper: React.FC<{
               textAlign='center'
               sx={{
                 position: 'absolute',
-                top: '8px',
+                top: '7px',
                 left: '4px',
                 width: '100%',
               }}
             >
               {t('you-receive')}
             </ZigTypography>
-            <Box display='flex' paddingTop='24px'>
+            <Box display='flex' paddingTop='23px'>
               <ZigTypography color='neutral300' textAlign='center' width='100%'>
                 {Math.round(feeWeCharge)}
               </ZigTypography>
