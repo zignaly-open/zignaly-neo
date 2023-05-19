@@ -20,14 +20,31 @@ export const filterOptions = (
   return true;
 };
 
-const CoinOption = ({ coin, name }: { coin: string; name: string }) => {
+const CoinOption = ({
+  coin,
+  name,
+  prefixId,
+}: {
+  coin: string;
+  name: string;
+  prefixId?: string;
+}) => {
   return (
     <Box display='flex' alignItems='center'>
       <Box mr='11px'>
-        <ZigCoinIcon size={'small'} coin={coin} />
+        <ZigCoinIcon
+          size={'small'}
+          coin={coin}
+          id={prefixId && `${prefixId}__coin-icon`}
+        />
       </Box>
-      <ZigTypography fontWeight={600}>{coin}</ZigTypography>&nbsp;
-      <ZigTypography>{name}</ZigTypography>
+      <ZigTypography fontWeight={600} id={prefixId && `${prefixId}__coin`}>
+        {coin}
+      </ZigTypography>
+      &nbsp;
+      <ZigTypography id={prefixId && `${prefixId}__coin-network`}>
+        {name}
+      </ZigTypography>
     </Box>
   );
 };
