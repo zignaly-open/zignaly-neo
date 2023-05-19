@@ -22,7 +22,8 @@
 		},
 		"button": {
 			"continue-to-confirmation": "Onay aşamasına geçin",
-			"invest-now": "Şimdi {{amount}} {{coin}} yatırım yapın"
+			"invest-now": "Şimdi {{amount}} {{coin}} yatırım yapın",
+			"addInvestment": "Yatırıma Ekleme Yap"
 		}
 	},
 	"pendingMajorThan": {
@@ -46,10 +47,7 @@
 	"investorDetail-successFee": "% {{fee}} Başarım ücreti",
 	"modal": {
 		"withdrawInvestment": {
-			"title": "Çekim Talebi",
-			"freeWithdrawal": {
-				"description": "Fon yöneticisi bakiyenizi serbest bıraktıktan sonra paranızı alacaksınız. Bakiye size aktarılana kadar yatırımınızın risk altında olduğunu göz önünde bulundurun. Bu işlem genellikle birkaç gün sürer ancak fon yöneticisine bağlı olarak tamamlanması daha uzun sürebilir."
-			}
+			"title": "Çekim Talebi"
 		},
 		"pendingTransaction": {
 			"title": "Bekleyen İşlemler",

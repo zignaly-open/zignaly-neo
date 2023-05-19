@@ -2,7 +2,7 @@
 	"title": "Solicitud de Retiro",
 	"success": {
 		"title": "Retiro Solicitado",
-		"description": "Tus fondos estarán disponibles tan pronto como el trader libere suficientes fondos del servicio. Esto puede tardar unos días o más en completarse. Zignaly no controla este periodo de tiempo, así que por favor se paciente.",
+		"description": "Recibirás tus fondos después de que el gestor de fondos los libere y se lleve a cabo la contabilidad diaria. Ten en cuenta que tu inversión está en riesgo hasta que se le transfiera el saldo. Dependiendo del gestor del fondo, esto suele tardar unos días, pero puede llevar más tiempo. Zignaly no controla este plazo, así que por favor se paciente.",
 		"button": "Cerrar"
 	}
 }

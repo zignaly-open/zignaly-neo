@@ -44,7 +44,6 @@
 	"availableWithdrawals": "Çekim için kullanılabilir meblağ:",
 	"api-keys": {
 		"title": "API ile alım-satım yapın",
-		"description": "Profit Sharing hizmetiniz için Binance API anahtarlarını oluşturun ve bunları favori aracınıza veya uygulamanıza bağlayın.",
 		"create-key": "API Anahtarı Oluştur",
 		"no-keys": "API anahtarı yok",
 		"no-keys-description": "Henüz herhangi bir API anahtarı oluşturmadınız",
