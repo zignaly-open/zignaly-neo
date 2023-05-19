@@ -52,7 +52,9 @@ const { default: ServiceProfile, ServiceProfileInvestment } = lazily(
 const outleted = (Component: JSX.Element) => (
   <>
     {Component}
-    <Outlet />
+    <Suspense>
+      <Outlet />
+    </Suspense>
   </>
 );
 
