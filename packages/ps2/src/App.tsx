@@ -23,6 +23,7 @@ import Tracker from './components/Navigation/Tracker/Tracker';
 import useReferralCookie from 'util/hooks/useReferralCookie';
 import BottomNavigation from 'components/Navigation/BottomNavigation';
 import { zigSuspenseFallback } from './util/suspense';
+import ZModal from './components/ZModal';
 
 if (
   process.env.NODE_ENV === 'production' &&
@@ -59,7 +60,9 @@ function App() {
             <PersistGate persistor={persistor} loading={zigSuspenseFallback}>
               <BrowserRouter>
                 <Suspense fallback={zigSuspenseFallback}>
-                  <ModalProvider>
+                  <ModalProvider
+                    fallback={<ZModal allowUnauth open isLoading />}
+                  >
                     <Header />
                     <Suspense fallback={zigSuspenseFallback}>
                       <>

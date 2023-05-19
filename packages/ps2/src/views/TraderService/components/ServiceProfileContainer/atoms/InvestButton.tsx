@@ -29,6 +29,7 @@ const InvestButton: React.FC<{
     // we need these two otherwise a Suspense will trigger when we load the other ns
     // and the page will scroll to top
     'deposit-crypto',
+    'edit-investment',
   ]);
   const isAuthenticated = useIsAuthenticated();
   const { showModal } = useZModal({ disableAutoDestroy: true });

@@ -35,7 +35,7 @@ import { useZModal } from '../../../../components/ZModal/use';
 import CreateServiceModal from './modals/CreateServiceModal';
 
 const BecomeTraderLanding: React.FC = () => {
-  const { t } = useTranslation('offer-your-trading-service');
+  const { t } = useTranslation(['offer-your-trading-service', 'service']);
   const { showModal } = useZModal();
   const isAuthenticated = useIsAuthenticated();
   const navigate = useNavigate();
