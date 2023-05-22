@@ -35,7 +35,7 @@ jobs:
       - name: Bootstrap modified packages
         run: lerna bootstrap
       - name: Test
-        run: yarn test
+        run: CI=1 yarn test
         working-directory: ./packages/ps2
       - name: Headpat yourself ^_^
         run: echo "Great job <3"
