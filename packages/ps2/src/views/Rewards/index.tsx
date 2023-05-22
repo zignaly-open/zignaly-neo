@@ -161,7 +161,7 @@ const Rewards: React.FC = () => {
                   sx={{
                     mb: 1,
                   }}
-                  variant={'bigNumber'}
+                  variant={'h1'}
                 >
                   {t('title')}
                 </ZigTypography>
