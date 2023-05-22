@@ -34,6 +34,18 @@ jobs:
         run: yarn global add lerna
       - name: Bootstrap modified packages
         run: lerna bootstrap
+      - name: Test .env
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          envkey_EXTEND_ESLINT: true
+          envkey_DISABLE_ESLINT_PLUGIN: true
+          envkey_ESLINT_NO_DEV_ERRORS: true
+          envkey_REACT_APP_ENABLE_TRACKING: false
+          envkey_REACT_APP_BASE_API: https://test.zignaly.com/new_api
+          envkey_REACT_APP_WALLET_API: https://wallet.zignaly.com/api
+          envkey_REACT_APP_REFERRALS_API: https://test-referrals.zignaly.com/
+          directory: packages/ps2
+          file_name: .env
       - name: Test
         run: CI=1 yarn test
         working-directory: ./packages/ps2
