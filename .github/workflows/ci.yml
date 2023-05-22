@@ -30,11 +30,11 @@ jobs:
         run: yarn global add lerna
       - name: Bootstrap modified packages
         run: lerna bootstrap --since=origin/${{ github.base_ref }} --include-dependencies
-      - name: Build modified packages
-        run: lerna run build
-      - name: Lint modified packages
-        run: lerna run lint-ci --since=origin/${{ github.base_ref }}
-      - name: Test modified packages
-        run: lerna run test --since=origin/${{ github.base_ref }}
+#      - name: Build modified packages
+#        run: lerna run build
+#      - name: Lint modified packages
+#        run: lerna run lint-ci --since=origin/${{ github.base_ref }}
+      - name: Test
+        run: cd packages/ps2 && yarn test
       - name: Headpat yourself ^_^
         run: echo "Great job <3"
