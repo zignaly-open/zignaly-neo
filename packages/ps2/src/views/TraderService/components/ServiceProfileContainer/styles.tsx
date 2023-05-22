@@ -136,6 +136,10 @@ export const MarkdownContainer = styled('div')`
   li {
     list-style-type: disc;
   }
+
+  img {
+    max-width: 100%;
+  }
 `;
 
 export const GridWithBottomBorder = styled(Grid)`

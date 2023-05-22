@@ -11,7 +11,7 @@
 			"spot": "Giao ngay",
 			"futures": "Hợp đồng tương lai"
 		},
-		"please-verify": "Vui lòng xem lại thông tin của bạn. Không thể thay đổi loại giao dịch, loại tiền về sau."
+		"please-verify": "Vui lòng xem lại thông tin của bạn. Loại và cơ sở không thể thay đổi sau này"
 	},
 	"wrapper": {
 		"title": "Lợi ích của Profit Sharing",
@@ -52,7 +52,8 @@
 				"description": "Nhận phí thành công hàng ngày từ các dịch vụ Profit Sharing của bạn."
 			},
 			"item4": {
-				"title": "ĐỘI HỖ TRỢ TRADER"
+				"title": "ĐỘI HỖ TRỢ TRADER",
+				"description": "Bạn sẽ có người tư vấn riêng trong quá trình này."
 			}
 		}
 	},

@@ -14,7 +14,7 @@ function ChooseDepositTypeModal({
   close: () => void;
   selectedCoin: string;
 } & DialogProps): React.ReactElement {
-  const { t } = useTranslation(['purchase-deposit-crypto', 'deposit-crypto']);
+  const { t } = useTranslation('deposit-crypto');
 
   const [view, setView] = useState<ChooseDepositTypeViews>(
     ChooseDepositTypeViews.ChooseDepositTypeView,
@@ -22,7 +22,7 @@ function ChooseDepositTypeModal({
 
   const views = {
     [ChooseDepositTypeViews.ChooseDepositTypeView]: {
-      title: t('purchase-deposit-crypto:title', { coin: selectedCoin }),
+      title: t('service-deposit.title', { coin: selectedCoin }),
       component: () => (
         <ChooseDepositType setView={setView} coin={selectedCoin} />
       ),

@@ -184,15 +184,8 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                           <InputAdornment position='end'>%</InputAdornment>
                         ),
                       }}
-                      fullWidth
-                      label={
-                        <div>
-                          {t('summary.success-fee')}
-                          <ZigTypography variant='h4' color='neutral400'>
-                            {t('edit.success-fee-desc')}
-                          </ZigTypography>
-                        </div>
-                      }
+                      label={t('create.total-fee')}
+                      labelInline={true}
                       error={t(errors.successFee?.message)}
                       {...field}
                     />

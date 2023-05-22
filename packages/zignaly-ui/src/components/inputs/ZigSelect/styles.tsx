@@ -13,7 +13,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
       border: 1px solid
         ${({ theme, error }) => (error ? theme.palette.redGraphOrError : theme.palette.neutral600)};
       padding: ${({ small }) => (small ? "3px 16px 3px 9px" : "11px 24px 11px 16px")};
-      margin-top: 4px;
+      margin-top: 10px;
       min-height: ${({ small }) => (small ? "0" : "60px")};
       border-radius: 5px;
       display: flex;

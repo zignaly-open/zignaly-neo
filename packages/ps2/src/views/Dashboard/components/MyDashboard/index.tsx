@@ -3,7 +3,6 @@ import {
   ChangeIndicator,
   ZigTable,
   ZigTypography,
-  ZigChartMini,
   ZigTablePriceLabel,
   ZigButton,
   ZigPlusIcon,
@@ -27,6 +26,7 @@ import InvestingLayout from '../InvestingSteps/InvestingLayout';
 import { ROUTE_DASHBOARD_EDIT_INVESTMENT } from '../../../../routes';
 import DepositModal from '../ManageInvestmentModals/DepositModal';
 import { Box } from '@mui/material';
+import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -100,7 +100,7 @@ const MyDashboard: React.FC = () => {
             {original.pnl30dPct ||
             Object.keys(original.sparklines).length > 1 ? (
               <>
-                <ZigChartMini
+                <ZigChartMiniSuspensed
                   id={`portfolio-table__chart-${original.serviceId}`}
                   midLine
                   data={[0, ...(original.sparklines as number[])]}

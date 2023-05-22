@@ -8,11 +8,16 @@ import { useTranslation } from 'react-i18next';
 const UpdateChecker: React.FC = () => {
   const toast = useToast();
   const { t } = useTranslation('common');
-  const { status, reloadPage } = useUpdateCheck({
-    type: 'interval',
+  const { status, reloadPage, checkUpdate } = useUpdateCheck({
+    type: 'manual',
     ignoreServerCache: true,
-    interval: VERSION_CHECK_INTERVAL,
   });
+
+  useEffect(() => {
+    if (status === UpdateStatus.available) return;
+    const timeoutId = window.setTimeout(checkUpdate, VERSION_CHECK_INTERVAL);
+    return () => clearTimeout(timeoutId);
+  }, [status, checkUpdate]);
 
   useEffect(() => {
     if (status === UpdateStatus.available) {

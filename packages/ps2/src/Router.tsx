@@ -1,4 +1,4 @@
-import React, { lazy } from 'react';
+import React, { lazy, Suspense } from 'react';
 import {
   Routes as RouterRoutes,
   Route,
@@ -14,6 +14,8 @@ import * as Routes from './routes';
 // views we load unconditionally
 import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
+import ServiceHeader from './views/TraderService/components/ServiceHeader';
+import { zigSuspenseFallback } from 'util/suspense';
 
 const Wallet = lazy(() => import('./views/Wallet'));
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
@@ -51,7 +53,9 @@ const { default: ServiceProfile, ServiceProfileInvestment } = lazily(
 const outleted = (Component: JSX.Element) => (
   <>
     {Component}
-    <Outlet />
+    <Suspense fallback={zigSuspenseFallback}>
+      <Outlet />
+    </Suspense>
   </>
 );
 
@@ -93,7 +97,16 @@ const Router: React.FC = () => (
       />
     </Route>
 
-    <Route element={<ServiceOwnerWall />}>
+    <Route
+      element={
+        <>
+          <ServiceHeader />
+          <Suspense fallback={zigSuspenseFallback}>
+            <ServiceOwnerWall />
+          </Suspense>
+        </>
+      }
+    >
       <Route
         path={Routes.ROUTE_TRADING_SERVICE_MANAGE}
         element={<Management />}

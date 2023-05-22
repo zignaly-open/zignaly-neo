@@ -80,33 +80,47 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
   }),
 )`
   // TODO: move to darkMui
-  ${(props) => props.wide && "display: block"};
+  ${(props) => props.wide && "display: block;"}
 
   .MuiInputLabel-root {
-    display: flex;
-    position: static;
-    flex-direction: row;
-    justify-content: space-between;
-    font-size: 15px !important;
-    line-height: 24px;
-    letter-spacing: 0.55px;
-    color: ${({ theme }) => theme.palette.neutral200} !important;
-    transition: color 0.2s;
     &.Mui-focused {
       color: ${({ theme }) => theme.palette.neutral000};
     }
     transform: none !important;
     width: 100%;
+    transition: color 0.2s;
+
+    ${({ theme, labelInline }) =>
+      !labelInline
+        ? `
+    font-size: 15px !important;
+    line-height: 24px;
+    letter-spacing: 0.55px;
+    color: ${theme.palette.neutral200} !important;
+    
+    display: flex;
+    position: static;
+    flex-direction: row;
+    justify-content: space-between;
 
     button {
       float: right;
     }
+  `
+        : `
+    text-align: center;
+    z-index: 2;
+    font-size: 11px;
+    letter-spacing: 0.33px;
+    margin-top: 8px;
+    color: ${theme.palette.neutral300} !important;
+  `}
   }
 
   .MuiInput-root {
     border: 1px solid ${({ theme }) => theme.palette.neutral600};
-    padding: 12px 24px;
-    margin-top: ${(props) => (props.label ? "4px" : 0)};
+    padding: ${({ labelInline }) => (labelInline ? "18px 24px 6px" : "12px 24px")};
+    margin-top: ${(props) => (props.label ? "10px" : 0)};
     min-height: 60px;
     border-radius: 5px;
     display: flex;

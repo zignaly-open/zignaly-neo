@@ -14,7 +14,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Form, QRCode } from './styles';
 import { TwoFAValidation } from './validations';
 import { TwoFAFormType } from './types';
-import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
+import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { useToast } from 'util/hooks/useToast';
 import { useLogout } from 'apis/user/use';
 import {
@@ -100,15 +100,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
             )}
           />
 
-          <ModalActionsNew align='right'>
-            <ZigButton
-              onClick={close}
-              variant='outlined'
-              size='large'
-              id={'enable-2fa__cancel'}
-            >
-              {t('action:cancel')}
-            </ZigButton>
+          <ModalActions>
             <ZigButton
               id={'enable-2fa__submit'}
               type='submit'
@@ -119,7 +111,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
             >
               {t('enable-2fa.enable-2fa')}
             </ZigButton>
-          </ModalActionsNew>
+          </ModalActions>
         </Form>
       </>
     );
@@ -139,15 +131,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
         </ZigTypography>
       </Box>
 
-      <ModalActionsNew align='right'>
-        <ZigButton
-          onClick={close}
-          variant='outlined'
-          size='large'
-          id='enable-2fa__setup-cancel'
-        >
-          {t('action:cancel')}
-        </ZigButton>
+      <ModalActions align='center'>
         <ZigButton
           onClick={() => load2FAInfo()}
           loading={load2FAInfoResult.isLoading || load2FAInfoResult.isFetching}
@@ -157,7 +141,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
         >
           {t('enable-2fa.setup-2fa')}
         </ZigButton>
-      </ModalActionsNew>
+      </ModalActions>
     </>
   );
 };

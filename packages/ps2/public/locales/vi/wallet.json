@@ -77,6 +77,7 @@
 	"buy": {
 		"buy": "Mua",
 		"title": "Mua ZIG",
+		"description": "Đối với các giao dịch mua ZIG lớn (hơn {{max}} {{coin}} ), vui lòng sử dụng một trong < 0 > trao đổi có sẵn. < \/0 >",
 		"available-exchanges": "Các exchange có sẵn.",
 		"buy-exchanges": "Bạn có thể mua ZIG trên các sàn giao dịch sau:",
 		"exchangeAccount": "Chọn Tài khoản Exchange",
@@ -84,6 +85,7 @@
 		"confirm": "Xác nhận mua ZIG",
 		"deposit": {
 			"title": "Nạp {{coin}} để mua ZIG",
+			"description": "Để mua ZIG, hãy gửi {{coin}} vào Tài khoản Zignaly Exchange của bạn. Đối với các giao dịch mua ZIG lớn (hơn {{max}} {{coin}} ), vui lòng sử dụng một trong < 0 > trao đổi có sẵn. < \/0 >",
 			"external": "Chuyển tiền từ ví bên ngoài",
 			"depositCoin": "Nạp tiền {{coin}}",
 			"buyCoin": "Mua {{coin}}",

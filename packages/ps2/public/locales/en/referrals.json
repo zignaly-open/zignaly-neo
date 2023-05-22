@@ -94,10 +94,6 @@
         "SUCCESS_FEE_REWARD": "Success Fee earning",
         "REBATE_COMMISSION_REWARD": "Rebate Fee earning"
     },
-    "header": {
-        "title": "Earn 20%",
-        "description": "Invite Friends"
-    },
     "create-invite": {
         "create-invite": "Share Invite",
         "invite-friends": "Invite Friends",
