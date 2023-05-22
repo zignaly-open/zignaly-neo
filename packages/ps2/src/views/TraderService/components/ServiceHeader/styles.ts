@@ -34,24 +34,25 @@ type OptionType = {
   active: boolean;
 };
 
-export const Option = styled('a')<OptionType>`
+export const Option = styled('span', {
+  shouldForwardProp: (p) => p !== 'active',
+})<OptionType>`
   cursor: pointer;
   user-select: none;
-  ${({ theme, active }) =>
-    active
-      ? `
-        color: ${theme.palette.highlighted};
-      `
-      : `
-        color: ${theme.palette.neutral300};
+  transition: background-color 0.2s;
 
-        &:hover {
-          color: ${theme.palette.neutral100};
-        }
-      `}
+  & > * {
+    transition: color 0.2s;
+    color: ${({ theme, active }) =>
+      (active ? theme.palette.highlighted : '' + theme.palette.neutral300) +
+      ''};
+  }
 
   &:hover {
     background: #1b213d;
+    & > * {
+      color: ${({ theme }) => theme.palette.neutral100};
+    }
   }
 `;
 

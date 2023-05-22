@@ -38,19 +38,19 @@ function EditInvestmentModal({
     EditInvestmentViews.EditInvestment,
   );
 
-  const { t } = useTranslation(['edit-investment', 'withdraw-your-investment']);
+  const { t } = useTranslation('edit-investment');
 
   const views = {
     [EditInvestmentViews.WithdrawInvestment]: {
-      title: t('withdraw-your-investment:title'),
+      title: t('withdrawal-request'),
       component: () => <WithdrawInvestment setView={setView} />,
     },
     [EditInvestmentViews.WithdrawSuccess]: {
-      title: t('withdraw-your-investment:success.title'),
+      title: t('withdrawal-success.title'),
       component: () => <WithdrawModalSuccess close={close} />,
     },
     [EditInvestmentViews.WithdrawPerform]: {
-      title: t('withdraw-your-investment:title'),
+      title: t('withdrawal-request'),
       component: () => (
         <WithdrawWithdrawInvestmentSuccessPerform setView={setView} />
       ),

@@ -3,7 +3,6 @@ import Router from './Router';
 import theme from './theme';
 import * as Sentry from '@sentry/browser';
 import {
-  CenteredLoader,
   ChartGradients,
   dark,
   ThemeProvider as ThemeInheritorStyled,
@@ -23,6 +22,8 @@ import DateLocaleFixer from './components/Navigation/DateLocaleFixer';
 import Tracker from './components/Navigation/Tracker/Tracker';
 import useReferralCookie from 'util/hooks/useReferralCookie';
 import BottomNavigation from 'components/Navigation/BottomNavigation';
+import { zigSuspenseFallback } from './util/suspense';
+import ZModal from './components/ZModal';
 
 if (
   process.env.NODE_ENV === 'production' &&
@@ -56,21 +57,25 @@ function App() {
               pauseOnHover
               theme='dark'
             />
-            <PersistGate persistor={persistor} loading={<CenteredLoader />}>
+            <PersistGate persistor={persistor} loading={zigSuspenseFallback}>
               <BrowserRouter>
-                <ModalProvider>
-                  <Header />
-                  <Suspense fallback={<CenteredLoader />}>
-                    <>
-                      <Tracker />
-                      <UpdateChecker />
-                      <DateLocaleFixer />
-                      <ChartGradients />
-                      <Router />
-                      <BottomNavigation />
-                    </>
-                  </Suspense>
-                </ModalProvider>
+                <Suspense fallback={zigSuspenseFallback}>
+                  <ModalProvider
+                    fallback={<ZModal allowUnauth open isLoading />}
+                  >
+                    <Header />
+                    <Suspense fallback={zigSuspenseFallback}>
+                      <>
+                        <Tracker />
+                        <UpdateChecker />
+                        <DateLocaleFixer />
+                        <ChartGradients />
+                        <Router />
+                        <BottomNavigation />
+                      </>
+                    </Suspense>
+                  </ModalProvider>
+                </Suspense>
               </BrowserRouter>
             </PersistGate>
           </ThemeProviderMui>
