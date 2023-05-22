@@ -77,17 +77,19 @@ function App() {
 
   return (
     <WrappedInProviders>
-      <Header />
-      <Suspense fallback={zigSuspenseFallback}>
-        <>
-          <Tracker />
-          <UpdateChecker />
-          <DateLocaleFixer />
-          <ChartGradients />
-          <Router />
-          <BottomNavigation />
-        </>
-      </Suspense>
+      <>
+        <Header />
+        <Suspense fallback={zigSuspenseFallback}>
+          <>
+            <Tracker />
+            <UpdateChecker />
+            <DateLocaleFixer />
+            <ChartGradients />
+            <Router />
+            <BottomNavigation />
+          </>
+        </Suspense>
+      </>
     </WrappedInProviders>
   );
 }
