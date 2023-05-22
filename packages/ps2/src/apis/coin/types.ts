@@ -66,8 +66,10 @@ export const TRANSACTION_TYPE = {
   DEPOSIT: 'deposit',
   // Withdrawal from a Zignaly exchange account to an external address
   WITHDRAW: 'withdrawal',
-  // Referral reward
-  REWARD: 'referral',
+  // todo
+  REWARD: 'reward',
+  // todo
+  REFERRAL: 'referral',
   // Investment in a PS1 service
   PS_DEPOSIT: 'psDeposit',
   // Investment out from a PS1 service
@@ -82,6 +84,8 @@ export const TRANSACTION_TYPE = {
   SUCCESS_FEE: 'psSuccessFee',
   // All the others that are mainly the ones between internal transfers between his accounts
   USER: 'user',
+  // System transfers
+  SYSTEM: 'system',
 };
 export type TransactionType = keyof typeof TRANSACTION_TYPE;
 
