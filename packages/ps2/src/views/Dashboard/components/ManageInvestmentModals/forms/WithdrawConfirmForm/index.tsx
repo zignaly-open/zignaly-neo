@@ -2,7 +2,7 @@ import React from 'react';
 import { AmountContainer } from './styles';
 import { Grid } from '@mui/material';
 import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
-import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { ModalActions as ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { ZigPriceLabelIcon } from './atoms/ZigPriceLabelIcon';
 import ChainIcon from 'components/ChainIcon';
 import { useTranslation } from 'react-i18next';
@@ -35,7 +35,7 @@ const WithdrawConfirmForm = ({
         >
           {t('success.description')}
         </ZigTypography>
-        <ModalActions align='left'>
+        <ModalActions>
           <ZigButton
             onClick={close}
             variant='outlined'
@@ -175,7 +175,7 @@ const WithdrawConfirmForm = ({
           />
         </Grid>
       </AmountContainer>
-      <ModalActions align='right'>
+      <ModalActions>
         <ZigButton
           id={'withdraw-modal-confirmation__back'}
           onClick={back}

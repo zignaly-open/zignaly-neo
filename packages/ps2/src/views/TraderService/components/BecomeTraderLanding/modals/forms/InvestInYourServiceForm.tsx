@@ -21,7 +21,7 @@ import {
 import { useActiveExchange } from '../../../../../../apis/user/use';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE_MANAGE } from '../../../../../../routes';
-import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
+import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 const InvestInYourServiceForm: React.FC<{
   service?: ServiceFormData;
@@ -117,7 +117,7 @@ const InvestInYourServiceForm: React.FC<{
         </Grid>
       </Grid>
 
-      <ModalActionsNew>
+      <ModalActions>
         <ZigButton
           id={'confirm__back'}
           onClick={goBack}
@@ -136,7 +136,7 @@ const InvestInYourServiceForm: React.FC<{
         >
           {t('create.action')}
         </ZigButton>
-      </ModalActionsNew>
+      </ModalActions>
     </form>
   );
 };

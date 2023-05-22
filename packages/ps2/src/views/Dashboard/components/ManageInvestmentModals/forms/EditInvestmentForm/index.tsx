@@ -178,7 +178,7 @@ function EditInvestmentForm({
         </InputContainer>
       )}
 
-      <ModalActions>
+      <ModalActions direction='column'>
         <ZigButton
           id={'edit-investment__save-invest'}
           size={'large'}

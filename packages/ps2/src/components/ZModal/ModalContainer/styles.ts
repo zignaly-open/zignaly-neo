@@ -1,7 +1,7 @@
-import { styled, css } from '@mui/material';
+import { styled, css, Box } from '@mui/material';
 import { styledIf, ZigTypography } from '@zignaly-open/ui';
 
-export const Layout = styled('div')<{ width: number }>`
+export const Layout = styled(Box)<{ width: number }>`
   display: flex;
   position: relative;
   flex-direction: column;
@@ -16,12 +16,12 @@ export const Layout = styled('div')<{ width: number }>`
     css`
       width: ${width}px; // TODO: responsiveness
     `};
-  user-select: none;
 `;
 
 export const Title = styled(ZigTypography)`
   display: flex;
   justify-content: space-between;
+  text-transform: capitalize;
 `;
 
 export const Body = styled('div')`
@@ -59,22 +59,6 @@ export const Header = styled('div')<{ compact: boolean }>`
   `}
 `;
 
-export const HeaderButton = styled('button')`
-  border: 0;
-  padding: 0;
-  margin: 0;
-  height: 32px;
-  width: 32px;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  ${({ theme }) => `
-    svg { 
-      fill: ${theme.palette.neutral300};
-    }
-  `}
-`;
-
 export const Inline = styled('div')<{ align?: string }>`
   ${({ align }) => `
     ${styledIf(
@@ -91,24 +75,15 @@ export const Inline = styled('div')<{ align?: string }>`
   gap: 12px;
 `;
 
-export const ModalActions = styled('div')`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin-top: 56px;
-  gap: 32px;
-`;
-
-// todo: check if it can replace ModalActions
-export const ModalActionsNew = styled('div')<{
+export const ModalActions = styled('div')<{
   align?: 'left' | 'center' | 'right';
+  direction?: 'row' | 'column';
 }>`
   display: flex;
   align-items: center;
   margin-top: 56px;
-  gap: 14px;
-  flex-direction: row;
+  gap: 32px;
+  flex-direction: ${({ direction }) => direction};
   width: 100%;
   justify-content: ${({ align }) =>
     align === 'left'

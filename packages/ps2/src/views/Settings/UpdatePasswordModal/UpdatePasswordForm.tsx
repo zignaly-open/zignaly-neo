@@ -13,7 +13,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Form } from './styles';
 import { UpdatePasswordValidation } from './validations';
 import { UpdatePasswordFormType } from './types';
-import { ModalActionsNew } from 'components/ZModal/ModalContainer/styles';
+import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { useCheck2FA, useLogout } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
 
@@ -99,15 +99,7 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
           )}
         />
 
-        <ModalActionsNew align='right'>
-          <ZigButton
-            onClick={close}
-            variant='outlined'
-            size='large'
-            id={'update-password__cancel'}
-          >
-            {t('action:cancel')}
-          </ZigButton>
+        <ModalActions>
           <ZigButton
             id={'update-password__submit'}
             type='submit'
@@ -118,7 +110,7 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
           >
             {t('update-password.title')}
           </ZigButton>
-        </ModalActionsNew>
+        </ModalActions>
       </Form>
     </>
   );
