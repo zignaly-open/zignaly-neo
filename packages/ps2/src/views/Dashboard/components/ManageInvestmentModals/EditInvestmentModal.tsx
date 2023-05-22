@@ -16,6 +16,7 @@ import WithdrawModalSuccess from './views/WithdrawInvestmentSuccess';
 import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import ZModal from '../../../../components/ZModal';
+import { usePrefetchTranslation } from '../../../../util/i18nextHelpers';
 
 function EditInvestmentModal({
   close,
@@ -38,7 +39,8 @@ function EditInvestmentModal({
     EditInvestmentViews.EditInvestment,
   );
 
-  const { t } = useTranslation('edit-investment');
+  const { t } = useTranslation(['edit-investment']);
+  usePrefetchTranslation('withdraw');
 
   const views = {
     [EditInvestmentViews.WithdrawInvestment]: {

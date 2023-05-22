@@ -16,9 +16,11 @@ import WalletDepositModal from '../../modals/WalletDepositModal';
 import BuyZigModal from '../../modals/BuyZigModal';
 import WalletWithdrawModal from '../../modals/WalletWithdrawModal';
 import WalletPopover from './atoms/WalletPopover';
+import { usePrefetchTranslation } from '../../../../util/i18nextHelpers';
 
 const WalletTopPanel = ({ balances, coins }: WalletTopPanelProps) => {
   const { t } = useTranslation('wallet');
+  usePrefetchTranslation(['withdraw', 'withdraw-crypto']);
   const balance = balances?.ZIG?.balance ?? 0;
   const { showModal } = useZModal();
   const rate = coins?.ZIG.usdPrice;
