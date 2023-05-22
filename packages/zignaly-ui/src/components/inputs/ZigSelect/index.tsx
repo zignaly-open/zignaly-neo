@@ -93,7 +93,7 @@ function ZigSelect<T>({
         classNamePrefix="zig-react-select"
         {...props}
       />
-      {!!error && <ErrorMessage text={error} />}
+      {!!error && <ErrorMessage text={error} id={id && `${id}-error-text`} />}
     </StyledSelectWrapper>
   );
 }

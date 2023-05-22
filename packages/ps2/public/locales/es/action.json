@@ -3,8 +3,6 @@
 	"edit": "Editar",
 	"save": "Guardar",
 	"withdraw": "Retirar",
-	"read-more": "Leer Más",
-	"read-less": "Leer Menos",
 	"cancel": "Cancelar",
 	"proceed": "Proceder",
 	"export": "Exportar",
@@ -16,5 +14,7 @@
 	"hide": "Ocultar",
 	"show": "Mostrar",
 	"claim": "Reclamar",
-	"deposit-coin": "Deposita {{coin}}"
+	"deposit-coin": "Deposita {{coin}}",
+	"more": "más",
+	"less": "menos"
 }

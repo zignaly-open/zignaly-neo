@@ -44,7 +44,7 @@
 	"availableWithdrawals": "Disponível para retiradas:",
 	"api-keys": {
 		"title": "Faz trading com API",
-		"description": "Crie as chaves da API Binance para o seu serviço de Profit Sharing e conecte-as à sua ferramenta ou aplicativo favorito.",
+		"description": "Cria as chaves API da Binance para o seu serviço de Profit Sharing e conecte-as à sua ferramenta ou aplicação favorita.",
 		"create-key": "Criar Chave API",
 		"no-keys": "Sem Chaves API",
 		"no-keys-description": "Você ainda não criou nenhuma chave API",

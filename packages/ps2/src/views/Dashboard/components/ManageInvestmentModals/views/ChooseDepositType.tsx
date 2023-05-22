@@ -17,7 +17,7 @@ const ChooseDepositType: React.FC<{
       <Grid container sx={{ padding: '10px 0' }}>
         <Grid item xs={12} sx={{ paddingRight: '38px' }}>
           <ZigTypography
-            variant={'body2'}
+            variant={'body1'}
             fontSize={'15px'}
             id={'modal-choose-deposit-type__description'}
           >
@@ -49,8 +49,6 @@ const ChooseDepositType: React.FC<{
                 }}
               >
                 <ZigTypography
-                  variant={'h3'}
-                  letterSpacing={0.9}
                   color={'neutral100'}
                   id={'modal-choose-deposit-type__transfer-crypto'}
                 >
@@ -88,8 +86,6 @@ const ChooseDepositType: React.FC<{
             >
               <Box textAlign={'center'} height={90} paddingTop={'10px'}>
                 <ZigTypography
-                  variant={'h3'}
-                  letterSpacing={0.9}
                   color={'neutral100'}
                   id={'modal-choose-deposit-type__buy-crypto'}
                 >

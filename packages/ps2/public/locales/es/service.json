@@ -36,8 +36,8 @@
 		"180d-full": "6 Meses",
 		"365d-full": "1 Año",
 		"all-full": "Todo el tiempo",
-		"7d": "1 Semana",
-		"30d": "1 Mes",
+		"7d": "Semana",
+		"30d": "Mes",
 		"90d": "3 Meses",
 		"180d": "6 Meses",
 		"365d": "1 Año",
@@ -108,7 +108,7 @@
 		},
 		"minimum-balance": "Para operar y permitir que los inversores inviertan, necesitas invertir al menos {{ minValue }} {{ minValueCoin }} en tu servicio",
 		"profits-explainer": "Decide cuánto de tus beneficios provenientes de trading y del success fee deseas solicitar que se retiren automáticamente.",
-		"please-verify": "Por favor revisa tu información. El tipo y la base no se pueden cambiar más adelante",
+		"please-verify": "Por favor, revisa tu información. El tipo y base no se pueden cambiar posteriormente",
 		"zero-fee": "Si eliges success fee = 0, Zignaly tampoco cobrará ninguna comisión"
 	}
 }

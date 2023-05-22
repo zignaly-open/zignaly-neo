@@ -10,8 +10,7 @@
 		"types": {
 			"spot": "Spot",
 			"futures": "Vadeli İşlemler"
-		},
-		"please-verify": "Lütfen bilgilerinizi gözden geçirin. Tür ve taban daha sonra değiştirilemez"
+		}
 	},
 	"wrapper": {
 		"title": "Profit Sharing Servis Faydaları",
@@ -52,7 +51,8 @@
 				"description": "Profit Sharing hizmetlerinizden günlük başarı ücretleri alın."
 			},
 			"item4": {
-				"title": "TRADER BAŞARI EKİBİ"
+				"title": "TRADER BAŞARI EKİBİ",
+				"description": "Süreç boyunca size yardımcı olmak üzere bir başarı yöneticiniz olacak."
 			}
 		}
 	},

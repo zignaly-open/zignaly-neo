@@ -36,8 +36,8 @@
 		"180d-full": "6 tháng",
 		"365d-full": "1 năm",
 		"all-full": "Tất cả",
-		"7d": "1 tuần",
-		"30d": "1 tháng",
+		"7d": "Tuần",
+		"30d": "Tháng",
 		"90d": "3 tháng",
 		"180d": "6 tháng",
 		"365d": "1 năm",
@@ -108,7 +108,7 @@
 		},
 		"minimum-balance": "Để giao dịch và cho phép nhà đầu tư đầu tư, bạn cần đầu tư ít nhất {{ minValue }} {{ minValueCoin }} vào dịch vụ của mình",
 		"profits-explainer": "Quyết định số tiền lãi từ phí giao dịch và phí thành công mà bạn muốn yêu cầu tự động chuyển ra ngoài.",
-		"please-verify": "Vui lòng xem lại thông tin của bạn. Không thể thay đổi loại giao dịch, loại tiền về sau.",
+		"please-verify": "Vui lòng xem lại thông tin của bạn. Loại và cơ sở không thể thay đổi sau này",
 		"zero-fee": "Nếu bạn chọn phí thành công = 0, Zignaly cũng sẽ không tính bất kỳ khoản phí nào"
 	}
 }

@@ -22,7 +22,8 @@
 		},
 		"button": {
 			"continue-to-confirmation": "Tiếp tục xác nhận",
-			"invest-now": "Đầu tư {{số tiền}} {{coin}}"
+			"invest-now": "Đầu tư {{số tiền}} {{coin}}",
+			"addInvestment": "Thêm tiền đầu tư"
 		}
 	},
 	"pendingMajorThan": {
@@ -48,7 +49,7 @@
 		"withdrawInvestment": {
 			"title": "Yêu cầu rút tiền",
 			"freeWithdrawal": {
-				"description": "Bạn sẽ nhận được tiền của mình sau khi người quản lý quỹ chuyển tiền ra. Hãy nhớ rằng khoản đầu tư của bạn vẫn có rủi ro cho đến khi số dư được chuyển cho bạn. Quá trình này thường mất vài ngày nhưng có thể mất lâu hơn để hoàn thành, tùy thuộc vào người quản lý quỹ."
+				"description": "Bạn sẽ nhận được tiền của mình sau khi người quản lý quỹ giải phóng chúng và kế toán hàng ngày được thực hiện. Vui lòng lưu ý rằng khoản đầu tư của bạn có nguy cơ cho đến khi số dư được chuyển cho bạn. Tùy thuộc vào người quản lý quỹ, việc này thường mất vài ngày nhưng có thể mất nhiều thời gian hơn để hoàn thành."
 			}
 		},
 		"pendingTransaction": {

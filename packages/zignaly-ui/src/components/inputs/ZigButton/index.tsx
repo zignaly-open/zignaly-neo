@@ -71,6 +71,9 @@ export const ZigButtonGroup = styled(ButtonGroup)`
   outline-offset: -1px;
 
   .MuiButton-root {
+    font-weight: 400;
+    text-transform: capitalize !important;
+
     &:hover,
     &.MuiButton-active {
       z-index: 3;

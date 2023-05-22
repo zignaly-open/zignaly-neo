@@ -36,8 +36,6 @@
 		"180d-full": "6 ay",
 		"365d-full": "1 yıl",
 		"all-full": "Tüm zamanlar",
-		"7d": "1 Hft",
-		"30d": "1 ay",
 		"90d": "3 ay",
 		"180d": "6 ay",
 		"365d": "1 yıl",
@@ -108,7 +106,6 @@
 		},
 		"minimum-balance": "Alım Satım yapmak ve yatırımcıların yatırım yapmasına izin vermek için, hizmetinize en az {{ minValue }} {{ minValueCoin }} yatırmanız gerekir.",
 		"profits-explainer": "Alım satım ve başarı ücretlerinden elde ettiğiniz kârın ne kadarının otomatik olarak transfer edilmesini istediğinize karar verin.",
-		"please-verify": "Lütfen bilgilerinizi gözden geçirin. Tür ve taban daha sonra değiştirilemez",
 		"zero-fee": "Başarı ücreti olarak eğer 0'ı seçerseniz, Zignaly de bu servisten bir komisyon kesmeyecektir"
 	}
 }

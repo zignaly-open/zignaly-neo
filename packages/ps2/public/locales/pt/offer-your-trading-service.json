@@ -11,7 +11,7 @@
 			"spot": "Spot",
 			"futures": "Futuros"
 		},
-		"please-verify": "Por favor, reveja as suas informações. Tipo e base não podem ser alterados mais tarde"
+		"please-verify": "Por favor, reveja as tuas informações. O tipo e a base não podem ser alterados posteriormente"
 	},
 	"wrapper": {
 		"title": "Benefícios do Serviço de Profit Sharing",
@@ -52,7 +52,8 @@
 				"description": "Receba diariamente o success fee dos seus serviços de Profit Sharing."
 			},
 			"item4": {
-				"title": "EQUIPE DE SUCCESS TRADER"
+				"title": "EQUIPE DE SUCCESS TRADER",
+				"description": "Terá um success manager designado para o ajudar durante o processo."
 			}
 		}
 	},

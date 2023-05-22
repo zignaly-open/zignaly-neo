@@ -20,7 +20,7 @@ import {
 import { WithdrawModalProps } from '../../types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithdrawValidation } from './validations';
-import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { ModalActions as ModalActions } from 'components/ZModal/ModalContainer/styles';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import LabelValueLine from './atoms/LabelValueLine';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
@@ -93,7 +93,14 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
         return {
           value: c,
           name,
-          label: <CoinOption key={c} coin={c} name={name} />,
+          label: (
+            <CoinOption
+              key={c}
+              coin={c}
+              name={name}
+              prefixId={'withdraw-modal'}
+            />
+          ),
           available: balance?.maxWithdrawAmount || 0,
           networks: coins[c].networks?.map((n) => ({
             label: n.name,
@@ -248,6 +255,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
             {networkObject?.label && (
               <Box>
                 <ErrorMessage
+                  id={'withdraw-modal__input-address-warning'}
                   text={t('withdrawAddress.warning', {
                     network: networkObject?.label,
                     coin: coinObject?.name,
@@ -325,17 +333,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
               </Grid>
             )}
 
-            <ModalActions align='right'>
-              <ZigButton
-                id={'withdraw-modal__close'}
-                size={'large'}
-                type={'button'}
-                variant={'outlined'}
-                onClick={close}
-              >
-                {t('common:close')}
-              </ZigButton>
-
+            <ModalActions>
               <ZigButton
                 id={'withdraw-modal__continue'}
                 size={'large'}

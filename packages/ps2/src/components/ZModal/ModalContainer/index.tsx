@@ -1,40 +1,37 @@
-import React from 'react';
-import { useTheme } from '@mui/material';
-import { Layout, Header, Title, Body, HeaderButton, Inline } from './styles';
-import { ZigCloseIcon, ZigArrowLeftIcon } from '@zignaly-open/ui';
+import React, { forwardRef } from 'react';
+import { IconButton, useTheme } from '@mui/material';
+import { Layout, Header, Title, Body, Inline } from './styles';
+import { ZigArrowLeftIcon } from '@zignaly-open/ui';
 import { ModalContainerProps } from './types';
+import { Close } from '@mui/icons-material';
 
-function ModalContainer({
-  children,
-  title = null,
-  titleAlign = 'left',
-  onGoBack = null,
-  width,
-  onClickClose = null,
-  customHeaderAction = null,
-}: ModalContainerProps) {
+const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
+  const {
+    children,
+    title = null,
+    titleAlign = 'center',
+    onGoBack = null,
+    width,
+    onClickClose = null,
+    customHeaderAction = null,
+  } = props;
   const theme = useTheme();
 
   return (
-    <Layout width={width}>
+    <Layout width={width} ref={ref}>
       <Header compact={!title && !onGoBack}>
+        {onGoBack && typeof onGoBack === 'function' && (
+          <IconButton onClick={onGoBack}>
+            <ZigArrowLeftIcon
+              width={'32px'}
+              height={'32px'}
+              color={theme.palette.neutral300}
+            />
+          </IconButton>
+        )}
         <Inline align={titleAlign}>
-          {onGoBack && typeof onGoBack === 'function' && (
-            <HeaderButton onClick={onGoBack}>
-              <ZigArrowLeftIcon
-                width={'32px'}
-                height={'32px'}
-                color={theme.palette.neutral300}
-              />
-            </HeaderButton>
-          )}
           {!!title && (
-            <Title
-              variant='h1'
-              sx={{ paddingRight: '20px' }}
-              color='neutral100'
-              id={'modal__title'}
-            >
+            <Title variant='h1' mb={0} color='neutral100' id={'modal__title'}>
               {title}
             </Title>
           )}
@@ -42,18 +39,19 @@ function ModalContainer({
         {!customHeaderAction
           ? onClickClose &&
             typeof onClickClose === 'function' && (
-              <HeaderButton onClick={onClickClose}>
-                <ZigCloseIcon
-                  color={theme.palette.neutral300}
+              <IconButton onClick={onClickClose}>
+                <Close
+                  sx={{ color: theme.palette.neutral300 }}
                   id={'modal__close'}
+                  fontSize='large'
                 />
-              </HeaderButton>
+              </IconButton>
             )
           : customHeaderAction}
       </Header>
       <Body>{children}</Body>
     </Layout>
   );
-}
+});
 
 export default ModalContainer;

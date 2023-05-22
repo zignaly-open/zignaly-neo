@@ -59,7 +59,14 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         return {
           value: ssc,
           name,
-          label: <CoinOption key={ssc} coin={ssc} name={name} />,
+          label: (
+            <CoinOption
+              key={ssc}
+              coin={ssc}
+              name={name}
+              prefixId={'deposit-modal'}
+            />
+          ),
           inOrders: balance?.balanceLocked || 0,
           balance: balance?.balanceTotal || 0,
           available: balance?.balanceFree || 0,
@@ -111,6 +118,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               style={{
                 verticalAlign: 'middle',
               }}
+              id={'modal-deposit-description__binance-logo'}
             />
             <ZigLink
               href={DEPOSIT_INFO_URL}

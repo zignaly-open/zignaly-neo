@@ -77,6 +77,7 @@
 	"buy": {
 		"buy": "Satın Alın",
 		"title": "ZIG coin satın alın",
+		"description": "Büyük ZIG alımları için ({{max}} {{coin}}'den fazla), lütfen <0>mevcut borsalardan<\/0> birini kullanın.",
 		"available-exchanges": "kullanılabilir borsalar.",
 		"buy-exchanges": "ZIG'i şu borsalarda satın alabilirsiniz:",
 		"exchangeAccount": "Borsa Hesabı Seçin",
@@ -84,6 +85,7 @@
 		"confirm": "ZIG satın almayı onaylayın",
 		"deposit": {
 			"title": "ZIG satın almak için {{coin}} yatırın",
+			"description": "ZIG satın almak için Zignaly hesabınıza {{coin}} yatırın. Büyük miktarda ZIG alımları için ({{max}} {{coin}}'den fazla), lütfen <0>ZIG'in listelenmiş olduğu borsalardan<\/0> birini kullanın.",
 			"external": "Harici bir cüzdandan kripto aktarın",
 			"depositCoin": "{{coin}} yatırın",
 			"buyCoin": "{{coin}} satın al",
