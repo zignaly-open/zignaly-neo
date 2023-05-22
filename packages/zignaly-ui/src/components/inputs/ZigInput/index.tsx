@@ -26,7 +26,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
           ...(props.inputProps || {}),
           "data-testid":
             props?.inputProps?.["data-testid"] ||
-            (process.env.NODE_ENV === "test" && props.id) ||
+            (process.env.NODE_ENV === "test" && id) ||
             undefined,
         }}
         label={
@@ -62,7 +62,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
           ...(sensitive
             ? {
                 endAdornment: [
-                  <InputAdornment position="end" key={props.id + "sensivive"}>
+                  <InputAdornment position="end" key={id + "-sensivive"}>
                     {!!sensitive && (
                       <EyeIcon
                         id={id && `${id}-visibility-icon`}
@@ -84,7 +84,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
   }),
 )`
   // TODO: move to darkMui
-  ${(props) => props.wide && "display: block"};
+  ${(props) => props.wide && "display: block;"}
 
   .MuiInputLabel-root {
     display: flex;
