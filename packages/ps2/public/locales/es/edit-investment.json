@@ -22,7 +22,8 @@
 		},
 		"button": {
 			"continue-to-confirmation": "Continuar con la Confirmación",
-			"invest-now": "Invierte {{amount}} {{coin}} ahora"
+			"invest-now": "Invierte {{amount}} {{coin}} ahora",
+			"addInvestment": "Añadir a la Inversión"
 		}
 	},
 	"pendingMajorThan": {
@@ -48,7 +49,7 @@
 		"withdrawInvestment": {
 			"title": "Solicitud de Retiro",
 			"freeWithdrawal": {
-				"description": "Recibirás tus fondos después de que el gestor del fondo los libere. Ten en cuenta que tu inversión está en riesgo hasta que se te transfiera el saldo. Esto generalmente toma unos días, pero puede tardar más en completarse dependiendo del gestor del fondo."
+				"description": "Recibirás tus fondos después de que el gestor de fondos los libere y se lleve a cabo la contabilidad diaria. Ten en cuenta que tu inversión está en riesgo hasta que se le transfiera el saldo. Dependiendo del gestor del fondo, esto suele tardar unos días, pero puede llevar más tiempo."
 			}
 		},
 		"pendingTransaction": {

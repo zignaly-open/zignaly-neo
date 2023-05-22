@@ -44,7 +44,7 @@
 	"availableWithdrawals": "Disponible para retiros:",
 	"api-keys": {
 		"title": "Opera con API",
-		"description": "Crea las llaves API de Binance para tu servicio Profit Sharing y conéctalas a tu herramienta o aplicación favorita.",
+		"description": "Crea las claves API de Binance para tu servicio de Profit Sharing y conéctalas a tu herramienta o aplicación favorita.",
 		"create-key": "Crear llave API",
 		"no-keys": "Sin llaves API",
 		"no-keys-description": "Aún no has creado ninguna llave API",

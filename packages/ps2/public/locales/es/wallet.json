@@ -77,6 +77,7 @@
 	"buy": {
 		"buy": "Comprar",
 		"title": "Comprar monedas ZIG",
+		"description": "Para compras grandes de ZIG (más de {{max}} {{coin}}), utiliza uno de los <0>exchanges disponibles.<\/0>",
 		"available-exchanges": "exchanges disponibles.",
 		"buy-exchanges": "Puedes comprar ZIG en estos exchanges:",
 		"exchangeAccount": "Seleccione la Cuenta de Exchange",
@@ -84,6 +85,7 @@
 		"confirm": "Confirmar compra ZIG",
 		"deposit": {
 			"title": "Deposita {{coin}} para comprar ZIGs",
+			"description": "Para comprar ZIGs, deposita {{coin}} en tu cuenta de exchange de Zignaly. Para compras grandes de ZIGs (más de {{max}} {{coin}}), por favor utiliza uno de los <0>exchanges disponibles.<\/0>",
 			"external": "Transferir cripto desde una billetera externa",
 			"depositCoin": "Deposita {{coin}}",
 			"buyCoin": "Compra {{coin}}",
