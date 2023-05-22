@@ -1,6 +1,10 @@
 name: Run CI checks
 
-on: [ pull_request ]
+on:
+  pull_request:
+  push:
+    branches:
+      - feat/testing
 
 jobs:
   lint_and_test:
