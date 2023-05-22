@@ -3,7 +3,6 @@ import Router from './Router';
 import theme from './theme';
 import * as Sentry from '@sentry/browser';
 import {
-  CenteredLoader,
   ChartGradients,
   dark,
   ThemeProvider as ThemeInheritorStyled,
@@ -57,7 +56,7 @@ export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
             pauseOnHover
             theme='dark'
           />
-          <PersistGate persistor={persistor} loading={<CenteredLoader />}>
+          <PersistGate persistor={persistor}>
             <BrowserRouter>
               <Suspense fallback={zigSuspenseFallback}>
                 <ModalProvider fallback={<ZModal allowUnauth open isLoading />}>
