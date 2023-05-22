@@ -4,10 +4,6 @@
   "active": "Active",
   "reward-terms": "Reward Terms",
   "description": "Earn rewards by completing simple tasks. It's that easy!",
-  "header": {
-    "title": "Get $20",
-    "description": "On 1st deposit"
-  },
   "active-rewards": "Active Rewards",
   "no-active-rewards": "No active rewards at this moment",
   "disabled-voucher": "The Voucher is already activated",

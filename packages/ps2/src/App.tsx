@@ -23,6 +23,8 @@ import DateLocaleFixer from './components/Navigation/DateLocaleFixer';
 import Tracker from './components/Navigation/Tracker/Tracker';
 import useReferralCookie from 'util/hooks/useReferralCookie';
 import BottomNavigation from 'components/Navigation/BottomNavigation';
+import { zigSuspenseFallback } from './util/suspense';
+import ZModal from './components/ZModal';
 
 if (
   process.env.NODE_ENV === 'production' &&
@@ -57,7 +59,11 @@ export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
           />
           <PersistGate persistor={persistor} loading={<CenteredLoader />}>
             <BrowserRouter>
-              <ModalProvider>{children}</ModalProvider>
+              <Suspense fallback={zigSuspenseFallback}>
+                <ModalProvider fallback={<ZModal allowUnauth open isLoading />}>
+                  {children}
+                </ModalProvider>
+              </Suspense>
             </BrowserRouter>
           </PersistGate>
         </ThemeProviderMui>
@@ -72,7 +78,7 @@ function App() {
   return (
     <WrappedInProviders>
       <Header />
-      <Suspense fallback={<CenteredLoader />}>
+      <Suspense fallback={zigSuspenseFallback}>
         <>
           <Tracker />
           <UpdateChecker />
