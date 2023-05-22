@@ -93,7 +93,14 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
         return {
           value: c,
           name,
-          label: <CoinOption key={c} coin={c} name={name} />,
+          label: (
+            <CoinOption
+              key={c}
+              coin={c}
+              name={name}
+              prefixId={'withdraw-modal'}
+            />
+          ),
           available: balance?.maxWithdrawAmount || 0,
           networks: coins[c].networks?.map((n) => ({
             label: n.name,
@@ -248,6 +255,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
             {networkObject?.label && (
               <Box>
                 <ErrorMessage
+                  id={'withdraw-modal__input-address-warning'}
                   text={t('withdrawAddress.warning', {
                     network: networkObject?.label,
                     coin: coinObject?.name,

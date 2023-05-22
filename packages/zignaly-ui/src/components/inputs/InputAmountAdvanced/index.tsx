@@ -105,7 +105,12 @@ function InputAmount({
         <InputContainer>
           <Side>
             {value?.token?.id && tokens.length < 2 && (
-              <ZigCoinIcon size={COIN_SIZES.Small} coin={value?.token.id} bucket={iconBucket} />
+              <ZigCoinIcon
+                size={COIN_SIZES.Small}
+                coin={value?.token.id}
+                bucket={iconBucket}
+                id={id && `${id}-coin-icon`}
+              />
             )}
             <InputField>
               <InputValue
