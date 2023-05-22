@@ -34,6 +34,10 @@ jobs:
         run: yarn global add lerna
       - name: Bootstrap modified packages
         run: lerna bootstrap
+      - name: Build
+        run: lerna run build
+      - name: Lint
+        run: lerna run lint-ci
       - name: Test .env
         uses: SpicyPizza/create-envfile@v1.3
         with:
@@ -47,7 +51,6 @@ jobs:
           directory: packages/ps2
           file_name: .env
       - name: Test
-        run: CI=1 yarn test
-        working-directory: ./packages/ps2
+        run: lerna run test
       - name: Headpat yourself ^_^
         run: echo "Great job <3"
