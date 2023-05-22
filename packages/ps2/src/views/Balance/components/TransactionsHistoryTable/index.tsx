@@ -1,7 +1,6 @@
 import React, { useEffect, useLayoutEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  CoinLabel,
   createColumnHelper,
   DateLabel,
   ZigTable,
@@ -19,6 +18,8 @@ import { PaginationState } from '@tanstack/react-table';
 import { getTransactionSideType, truncateAddress } from './util';
 import { TRANSACTION_TYPE } from 'apis/coin/types';
 import { useActiveExchange } from '../../../../apis/user/use';
+import CoinLabel from 'components/CoinLabel';
+import { useBalanceQuery } from 'apis/user/api';
 
 const TransactionsHistoryTable = ({ type }: { type?: string }) => {
   const [filteredData, setFilteredData] = useState<TransactionsTableDataType[]>(
@@ -38,8 +39,18 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
     pageIndex,
   );
   const coinsEndpoint = useExchangeCoinsList();
-
   const exchange = useActiveExchange();
+  // Trigger balance update to be sure that balance widget matches transactions data
+  useBalanceQuery(
+    {
+      exchangeInternalId: exchange?.internalId,
+    },
+    {
+      refetchOnMountOrArgChange: true,
+      skip: !exchange?.internalId,
+    },
+  );
+
   const defineSign = (typeTransaction: string, fromId: string) => {
     if (
       [
@@ -82,23 +93,33 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
     () => [
       columnHelper.accessor('datetime', {
         header: t('tableHeader.date'),
-        cell: ({ getValue }) => <DateLabel date={new Date(getValue())} />,
+        cell: ({ getValue, row }) => (
+          <DateLabel
+            id={`balances-table-transaction__date-${row.original.txId}`}
+            date={new Date(getValue())}
+          />
+        ),
         enableSorting: false,
       }),
       columnHelper.accessor('asset', {
         header: t('tableHeader.coin'),
         cell: ({ getValue, row: { original } }) => (
-          <CoinLabel coin={getValue()} name={original.assetName ?? '-'} />
+          <CoinLabel
+            id={`balances-table-transaction__coin-${original.txId}`}
+            coin={getValue()}
+            name={original.assetName ?? '-'}
+          />
         ),
         enableSorting: false,
       }),
       columnHelper.accessor('txType', {
         header: t('tableHeader.type'),
-        cell: ({ getValue }) => (
+        cell: ({ getValue, row: { original } }) => (
           <ZigTypography
             whiteSpace='normal'
             color='neutral100'
             fontWeight={500}
+            id={`balances-table-transaction__type-${original.txId}`}
           >
             {t(TRANSACTION_TYPE_NAME[getValue()])}
           </ZigTypography>
@@ -109,6 +130,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
         header: t('tableHeader.amount'),
         cell: ({ getValue, row: { original } }) => (
           <ZigTablePriceLabel
+            id={`balances-table-transaction__amount-${original.txId}`}
             exact
             coin={original.asset}
             alwaysShowSign
@@ -121,6 +143,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
         header: t('tableHeader.from'),
         cell: ({ getValue, row: { original } }) => (
           <ZigTypography
+            id={`balances-table-transaction__from-${original.txId}`}
             whiteSpace='normal'
             color='neutral100'
             fontWeight={500}
@@ -142,6 +165,7 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
             whiteSpace='normal'
             color='neutral100'
             fontWeight={500}
+            id={`balances-table-transaction__to-${original.txId}`}
           >
             {getValue() ||
               (original.to
@@ -163,7 +187,10 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
             gap={1}
           >
             <Box display='flex' justifyContent='center' flex={1}>
-              <TransactionStateLabel state={getValue()} />
+              <TransactionStateLabel
+                state={getValue()}
+                id={`balances-table-transaction__status-${row.original.txId}`}
+              />
             </Box>
             {row.getIsExpanded() ? <ExpandLess /> : <ExpandMore />}
           </Box>
@@ -191,7 +218,10 @@ const TransactionsHistoryTable = ({ type }: { type?: string }) => {
             ],
           }}
           renderSubComponent={({ row }) => (
-            <TransactionDetails transaction={row.original} />
+            <TransactionDetails
+              transaction={row.original}
+              txId={row.original.txId}
+            />
           )}
           manualPagination={true}
           pagination={pagination}

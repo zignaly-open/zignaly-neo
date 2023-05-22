@@ -73,7 +73,7 @@ function EditApiKeysModal({
     control,
     watch,
     register,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm<EditApiKeyFormType>({
     mode: 'onTouched',
     reValidateMode: 'onBlur',
@@ -106,7 +106,6 @@ function EditApiKeysModal({
 
   return (
     <ZModal
-      authOnly
       wide
       {...props}
       close={close}
@@ -276,7 +275,7 @@ function EditApiKeysModal({
                       subtitle={t('api-keys.ip-restrictions-allowed-explainer')}
                     />
                   }
-                  error={t(errors.ipRestrictions?.message)}
+                  error={t(errors.ipRestrictions?.message, { maxLength: 500 })}
                   {...field}
                 />
               )}
@@ -289,6 +288,7 @@ function EditApiKeysModal({
             id={'api-key__save-and-close'}
             variant={'contained'}
             loading={isLoading}
+            disabled={!isValid}
             type='submit'
             size={'large'}
           >

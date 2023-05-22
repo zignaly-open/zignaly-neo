@@ -153,9 +153,6 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                     )?.value?.message,
                   )
                 }
-                и
-                за
-                справками
               />
 
               <Box>

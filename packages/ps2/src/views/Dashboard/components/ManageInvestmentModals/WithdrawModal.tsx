@@ -19,7 +19,7 @@ function WithdrawModal({
 
   return (
     <ZModal
-      authOnly
+      id={'withdraw-modal'}
       wide
       {...props}
       close={close}

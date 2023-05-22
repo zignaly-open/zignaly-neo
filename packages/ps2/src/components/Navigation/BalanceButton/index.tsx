@@ -17,7 +17,14 @@ const BalanceButton = () => {
   const { t } = useTranslation('common');
   const { internalId } = useActiveExchange();
   const { data: investments } = useInvestmentsQuery(internalId);
-  const { data: balance } = useBalanceQuery(internalId);
+  const { data: balance } = useBalanceQuery(
+    {
+      exchangeInternalId: internalId,
+    },
+    {
+      pollingInterval: 60 * 1000,
+    },
+  );
   const { showModal } = useZModal();
 
   const investedAmount = useMemo(() => {
@@ -91,11 +98,11 @@ const BalanceButton = () => {
           >
             <Box gap={1} display='flex' justifyContent='space-between'>
               <ZigTypography variant='body2' color='neutral300' fontSize='12px'>
-                {t('balance.total')}
+                {t('portfolio')}
               </ZigTypography>
               <ZigPriceLabel
                 usd
-                value={investedAmount + balance.totalFreeUSDT}
+                value={investedAmount}
                 color='neutral100'
                 variant='body2'
                 fontSize='12px'

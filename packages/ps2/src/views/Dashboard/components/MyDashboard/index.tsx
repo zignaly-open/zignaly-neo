@@ -6,6 +6,7 @@ import {
   ZigChartMini,
   ZigTablePriceLabel,
   ZigButton,
+  ZigPlusIcon,
 } from '@zignaly-open/ui';
 import React, { useMemo } from 'react';
 import { Heading, Layout, ZigTableWrapper } from './styles';
@@ -24,7 +25,6 @@ import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../util/numbers';
 import InvestingLayout from '../InvestingSteps/InvestingLayout';
 import { ROUTE_DASHBOARD_EDIT_INVESTMENT } from '../../../../routes';
-import { Add } from '@mui/icons-material';
 import DepositModal from '../ManageInvestmentModals/DepositModal';
 import { Box } from '@mui/material';
 
@@ -34,6 +34,8 @@ const MyDashboard: React.FC = () => {
   const exchange = useActiveExchange();
   const investmentsEndpoint = useInvestments(exchange?.internalId, {
     skip: !exchange?.internalId,
+    // Force refresh on mount otherwise it will use cached value from balance button
+    refetchOnMountOrArgChange: true,
   });
   useCoinBalances();
   const showEditInvestmentModal = useZRouteModal(
@@ -88,37 +90,49 @@ const MyDashboard: React.FC = () => {
       }),
       columnHelper.accessor('pnl30dPct', {
         header: t('tableHeader.1-mo.title'),
-        cell: ({ row: { original } }) =>
-          original.pnl30dPct || Object.keys(original.sparklines).length > 1 ? (
-            <>
-              <ZigChartMini
-                id={`portfolio-table__chart-${original.serviceId}`}
-                midLine
-                data={[0, ...(original.sparklines as number[])]}
-              />
-              <ChangeIndicator
-                id={`portfolio-table__chart-percentage-${original.serviceId}`}
-                normalized
-                value={new BigNumber(original.pnl30dPct).toFixed()}
-                type='graph'
-              />
-            </>
-          ) : (
-            <ZigTypography variant='body2' color='neutral400'>
-              {t('tableHeader.1-mo.no-data')}
-            </ZigTypography>
-          ),
+        cell: ({ row: { original } }) => (
+          <Box
+            minHeight={'125px'}
+            display={'flex'}
+            flexDirection={'column'}
+            justifyContent={'center'}
+          >
+            {original.pnl30dPct ||
+            Object.keys(original.sparklines).length > 1 ? (
+              <>
+                <ZigChartMini
+                  id={`portfolio-table__chart-${original.serviceId}`}
+                  midLine
+                  data={[0, ...(original.sparklines as number[])]}
+                />
+                <ChangeIndicator
+                  id={`portfolio-table__chart-percentage-${original.serviceId}`}
+                  normalized
+                  value={new BigNumber(original.pnl30dPct).toFixed()}
+                  type='graph'
+                />
+              </>
+            ) : (
+              <ZigTypography variant='body2' color='neutral400'>
+                {t('tableHeader.1-mo.no-data')}
+              </ZigTypography>
+            )}
+          </Box>
+        ),
         sortingFn: 'alphanumeric',
+        enableHiding: false,
       }),
       columnHelper.accessor('pnlDailyMeanLc', {
         header: t('tableHeader.dailyAvg-title'),
         cell: ({ getValue, row: { original } }) => (
-          <ZigTablePriceLabel
-            id={`portfolio-table__dailyAvg-${original.serviceId}`}
-            coin={original.ssc}
-            value={new BigNumber(getValue()).toFixed()}
-            color={getColorForNumber(getValue())}
-          />
+          <Box display={'flex'} alignItems={'center'} justifyContent={'center'}>
+            <ZigTablePriceLabel
+              id={`portfolio-table__dailyAvg-${original.serviceId}`}
+              coin={original.ssc}
+              value={new BigNumber(getValue()).toFixed()}
+              color={getColorForNumber(getValue())}
+            />
+          </Box>
         ),
         sortingFn: 'alphanumeric',
       }),
@@ -188,7 +202,7 @@ const MyDashboard: React.FC = () => {
                 <Box sx={{ flex: '0 0 100px' }}>
                   <ZigButton
                     id={'my-portfolio__deposit'}
-                    startIcon={<Add />}
+                    startIcon={<ZigPlusIcon />}
                     sx={{ fontWeight: 600, mb: 1 }}
                     variant={'contained'}
                     onClick={() =>

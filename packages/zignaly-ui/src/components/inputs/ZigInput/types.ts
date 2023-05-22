@@ -14,4 +14,5 @@ export type ZigInputProps = Omit<FilledTextFieldProps, "variant" | "error"> & {
   wide?: boolean;
   sensitive?: boolean;
   error?: boolean | string;
+  id?: string;
 };

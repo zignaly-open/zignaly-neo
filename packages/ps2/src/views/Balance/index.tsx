@@ -3,6 +3,7 @@ import {
   MarginContainer,
   PageContainer,
   ZigButton,
+  ZigPlusIcon,
   ZigTab,
   ZigTabPanel,
   ZigTabs,
@@ -13,7 +14,7 @@ import BalanceAccountSelector from './components/BalanceAccountSelector';
 import { Header, StyledZigSelect } from './styles';
 import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
-import { Add, OpenInNew } from '@mui/icons-material';
+import { OpenInNew } from '@mui/icons-material';
 import ExportModal from './components/ExportModal';
 import { useZModal } from 'components/ZModal/use';
 import { Box } from '@mui/material';
@@ -54,7 +55,7 @@ const MyBalances: React.FC = () => {
           <Box sx={{ flex: '0 0 100px' }}>
             <ZigButton
               id={'balances__deposit-header'}
-              startIcon={<Add />}
+              startIcon={<ZigPlusIcon />}
               sx={{ fontWeight: 600, mb: 1 }}
               variant={'contained'}
               onClick={() =>
@@ -86,7 +87,14 @@ const MyBalances: React.FC = () => {
                   <ZigButton
                     variant={'text'}
                     id={'balance__export'}
-                    endIcon={<OpenInNew />}
+                    sx={{
+                      '.MuiSvgIcon-root.MuiSvgIcon-root': {
+                        fill: (theme) => theme.palette.links,
+                      },
+                    }}
+                    endIcon={
+                      <OpenInNew sx={{ width: '17.33px', height: '17.33px' }} />
+                    }
                     onClick={() => {
                       showModal(ExportModal, {
                         type: type !== 'all' ? type : null,
@@ -96,6 +104,7 @@ const MyBalances: React.FC = () => {
                     {t('action:export')}
                   </ZigButton>
                   <StyledZigSelect
+                    id={'balances-transaction__select-type'}
                     options={filterOptions}
                     value={type}
                     onChange={setType}

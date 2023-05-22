@@ -14,7 +14,7 @@ import {
   TypographyNumberResult,
 } from './styles';
 import {
-  SwapVertIcon,
+  ZigSwapVertIcon,
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
   ZigTypography,
@@ -105,7 +105,6 @@ function TransferModal({
     <ZModal
       wide
       {...props}
-      authOnly
       close={close}
       title={t('transferFunds.title')}
       isLoading={!balance || isTransferring}
@@ -156,7 +155,7 @@ function TransferModal({
               }}
               onClick={toggleDestination}
             >
-              <SwapVertIcon width={24} height={24} color={'#65647E'} />
+              <ZigSwapVertIcon width={24} height={24} color={'#65647E'} />
             </ZigButton>
             <ToContainer>
               <ToOutline>

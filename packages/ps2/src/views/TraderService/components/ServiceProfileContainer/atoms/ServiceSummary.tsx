@@ -1,7 +1,7 @@
 import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
-import { ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography, ZigUserIcon } from '@zignaly-open/ui';
 import { Box, Grid } from '@mui/material';
 import { GridCell, AssetsInPoolWrapper, GridWithBottomBorder } from '../styles';
 import AssetsInPool from '../../../../../components/AssetsInPool';
@@ -15,7 +15,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation(['service', 'marketplace']);
   return (
     <Box>
-      <GridWithBottomBorder container pb={2.5} pl={2} pr={2} pt={0}>
+      <GridWithBottomBorder container pb={2.5} pt={0}>
         <GridCell item xs={6}>
           <ZigTypography color={'neutral300'}>
             {t('assets-in-pool')}
@@ -34,17 +34,25 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
           <ZigTypography color={'neutral300'}>
             {t('investors-count')}
           </ZigTypography>
-          <ZigTypography
-            variant={'h2'}
-            color={'neutral200'}
-            id={'service-profile__investors'}
+          <Box
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
+            gap={1}
           >
-            {service.investors}
-          </ZigTypography>
+            <ZigTypography
+              variant={'h2'}
+              color={'neutral200'}
+              id={'service-profile__investors'}
+            >
+              {service.investors}
+            </ZigTypography>
+            <ZigUserIcon color={'#65647E'} height='13px' width={'12px'} />
+          </Box>
         </GridCell>
       </GridWithBottomBorder>
-      <GridWithBottomBorder container pb={2.5} pl={2} pr={2} pt={2.5}>
-        <GridCell item xs={4} rightBorder>
+      <GridWithBottomBorder container pb={2.5} pt={2.5}>
+        <GridCell item xs={4} rightBorder px={1}>
           <ServicePercentageInfo
             id={'service-profile__pnl30t'}
             title={t('marketplace:table.n-months', { count: 1 })}
@@ -54,7 +62,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             canShow={+new Date(service.createdAt) < +subMonths(new Date(), 1)}
           />
         </GridCell>
-        <GridCell item xs={4} rightBorder>
+        <GridCell item xs={4} rightBorder px={1}>
           <ServicePercentageInfo
             id={'service-profile__pnl90t'}
             title={t('marketplace:table.n-months', { count: 3 })}
@@ -64,7 +72,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             canShow={+new Date(service.createdAt) < +subMonths(new Date(), 3)}
           />
         </GridCell>
-        <GridCell item xs={4}>
+        <GridCell item xs={4} px={1}>
           <ServicePercentageInfo
             id={'service-profile__pnl365t'}
             title={t('marketplace:table.n-years', { count: 1 })}
@@ -75,7 +83,7 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
           />
         </GridCell>
       </GridWithBottomBorder>
-      <Grid container p={2}>
+      <Grid container py={2}>
         <Grid item xs={6}>
           <ZigTypography
             fontSize={12}

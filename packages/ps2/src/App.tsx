@@ -71,17 +71,17 @@ function App() {
 
   return (
     <WrappedInProviders>
-      <>
-        <Header />
-        <Tracker />
-        <UpdateChecker />
-        <DateLocaleFixer />
-        <ChartGradients />
-        <Suspense fallback={null}>
+      <Header />
+      <Suspense fallback={<CenteredLoader />}>
+        <>
+          <Tracker />
+          <UpdateChecker />
+          <DateLocaleFixer />
+          <ChartGradients />
           <Router />
-        </Suspense>
-        <BottomNavigation />
-      </>
+          <BottomNavigation />
+        </>
+      </Suspense>
     </WrappedInProviders>
   );
 }

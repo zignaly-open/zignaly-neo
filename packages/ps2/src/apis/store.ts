@@ -1,5 +1,5 @@
-import { Action, combineReducers, configureStore } from '@reduxjs/toolkit';
-import userReducer, { logout } from './user/store';
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import userReducer from './user/store';
 import ps2Api from './baseApiPs2';
 import investmentReducer from './investment/store';
 import serviceApiKeyReducer from './serviceApiKey/store';
@@ -45,16 +45,8 @@ const appReducer = combineReducers({
   wallet: walletReducer,
 });
 
-const rootReducer = (state: ReturnType<typeof appReducer>, action: Action) => {
-  if (logout.match(action)) {
-    state = undefined;
-  }
-
-  return appReducer(state, action);
-};
-
 export const store = configureStore({
-  reducer: persistReducer(persistConfig, rootReducer),
+  reducer: persistReducer(persistConfig, appReducer),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,

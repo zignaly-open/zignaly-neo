@@ -1,11 +1,20 @@
 import styled, { css } from "styled-components";
 import { styledIf } from "utils/styled";
 import { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";
+import dark from "theme/dark";
 
 const withSeparator = (props: WithSeparator) =>
   props.separator &&
   css`
-    border-top: 1px solid rgb(44, 45, 89);
+    position: relative;
+    &:after {
+      content: "";
+      border-top: 1px solid rgb(44, 45, 89);
+      position: absolute;
+      left: 30px;
+      right: 30px;
+      top: 0;
+    }
   `;
 
 type WithSeparator = { separator?: boolean };
@@ -25,18 +34,18 @@ export const Component = styled.div`
 `;
 
 export const ComponentWrapper = styled.div<WithSeparator>`
-  padding: 5px 18px;
+  padding: 5px 30px;
   ${withSeparator}
 `;
 
 export const NavLink = styled.span<
   { notClickable?: boolean; active?: boolean; disabled?: boolean } & WithSeparator
 >`
-  color: #706f82;
+  color: ${dark.neutral200};
   font-weight: 500;
   font-size: 14px;
   line-height: 28px;
-  padding: 12px 18px;
+  padding: 12px 30px;
   letter-spacing: 0.55px;
   text-decoration: none;
   transition: 0.15s linear;

@@ -1,7 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { MarginContainer, MenuDropDown, ZigTypography } from '@zignaly-open/ui';
-import { Layout, Container, Options, Option } from './styles';
+import { MarginContainer, ZigTypography } from '@zignaly-open/ui';
+import {
+  Layout,
+  Container,
+  Options,
+  ServiceDropDown,
+  ServiceOption,
+} from './styles';
 import {
   useIsServiceOwner,
   useTraderServices,
@@ -16,6 +22,8 @@ import {
   ROUTE_TRADING_SERVICE_MANAGE,
   ROUTE_TRADING_SERVICE_EDIT,
 } from '../../../../routes';
+import { Check } from '@mui/icons-material';
+import { Box } from '@mui/material';
 
 function ServiceHeader() {
   const menuDropDownRef = useRef(null);
@@ -44,7 +52,7 @@ function ServiceHeader() {
     <Layout>
       <MarginContainer>
         <Container>
-          <MenuDropDown
+          <ServiceDropDown
             id={'service-management-header__choose-service'}
             ref={menuDropDownRef}
             title={activeService?.serviceName}
@@ -60,15 +68,23 @@ function ServiceHeader() {
                   to={currentPath.replace(serviceId, service?.serviceId)}
                   key={`--route-key-${service?.serviceId}`}
                 >
-                  <Option active={serviceId === service?.serviceId}>
-                    <ZigTypography variant={'body1'}>
-                      {service?.serviceName}
-                    </ZigTypography>
-                  </Option>
+                  <ServiceOption active={serviceId === service?.serviceId}>
+                    <Box
+                      display='flex'
+                      alignItems='center'
+                      justifyContent='space-between'
+                      flex={1}
+                    >
+                      <ZigTypography color='inherit' variant={'body1'}>
+                        {service?.serviceName}
+                      </ZigTypography>
+                      {serviceId === service?.serviceId && <Check />}
+                    </Box>
+                  </ServiceOption>
                 </Link>
               ))}
             </Options>
-          </MenuDropDown>
+          </ServiceDropDown>
 
           <RouteGroup
             routes={[

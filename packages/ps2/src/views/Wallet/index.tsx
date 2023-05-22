@@ -1,10 +1,9 @@
 import React from 'react';
 import {
-  MarginContainer,
-  WalletGradientIcon,
+  PageContainer,
+  ZigWalletGradientIcon,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { Layout } from './styles';
 import { useTitle } from 'react-use';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
@@ -27,40 +26,38 @@ const Wallet = () => {
   const savingsEndpoint = useSavingsQuery();
 
   return (
-    <Layout>
-      <MarginContainer>
-        <LayoutContentWrapper
-          endpoint={[coinsEndpoint, balancesEndpoint, savingsEndpoint]}
-          content={([coins, balances, savings]: [
-            WalletCoins,
-            WalletBalances,
-            TotalSavings,
-          ]) => (
-            <>
-              <Box
-                display='flex'
-                gap={1}
-                alignItems='center'
-                color='neutral100'
-                paddingTop={'52px'}
-              >
-                <WalletGradientIcon width={40} height={40} />
-                <ZigTypography textTransform='uppercase' variant='h3'>
-                  {t('title')}
-                </ZigTypography>
-              </Box>
-              <WalletTopPanel
-                balances={balances}
-                savings={savings.total}
-                coins={coins}
-              />
-              <WalletCoinsTable balances={balances} coins={coins} />
-              <WalletTransactions />
-            </>
-          )}
-        />
-      </MarginContainer>
-    </Layout>
+    <PageContainer>
+      <LayoutContentWrapper
+        endpoint={[coinsEndpoint, balancesEndpoint, savingsEndpoint]}
+        content={([coins, balances, savings]: [
+          WalletCoins,
+          WalletBalances,
+          TotalSavings,
+        ]) => (
+          <Box mx={{ xs: 0, sm: 3 }}>
+            <Box
+              display='flex'
+              gap={1}
+              alignItems='center'
+              color='neutral100'
+              mt={6}
+            >
+              <ZigWalletGradientIcon width={40} height={40} />
+              <ZigTypography textTransform='uppercase' variant='h3'>
+                {t('title')}
+              </ZigTypography>
+            </Box>
+            <WalletTopPanel
+              balances={balances}
+              savings={savings.total}
+              coins={coins}
+            />
+            <WalletCoinsTable balances={balances} coins={coins} />
+            <WalletTransactions />
+          </Box>
+        )}
+      />
+    </PageContainer>
   );
 };
 

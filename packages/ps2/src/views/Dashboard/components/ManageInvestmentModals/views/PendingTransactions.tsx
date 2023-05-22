@@ -1,7 +1,7 @@
 import React from 'react';
 import { Inline, PendingTransaction } from '../styles';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import { RefreshIcon, ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigRefreshIcon, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ChangeViewFn, EditInvestmentViews } from '../types';
 import { useTranslation } from 'react-i18next';
 import {
@@ -25,7 +25,7 @@ const PendingTransactions: React.FC<{
   return pendingTransactionsCount > 0 ? (
     <PendingTransaction>
       <Inline>
-        <RefreshIcon />
+        <ZigRefreshIcon />
         <ZigTypography variant={'body1'} color={'yellow'}>
           {t('pendingTransactions.status', {
             count: pendingTransactionsCount,

@@ -18,10 +18,11 @@ import {
 } from '@mui/material';
 import {
   Avatar,
-  UserIcon,
+  ZigUserIcon,
   ZigButton,
   ZigTypography,
-  GlobeLanguages,
+  ZigGlobeLanguages,
+  ZigPlusIcon,
 } from '@zignaly-open/ui';
 import { useFirstOwnedService } from 'apis/service/use';
 import {
@@ -51,6 +52,7 @@ import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
 import { DropdownExchangeAccount } from './atoms';
+import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 
 const drawerWidth = 250;
 
@@ -143,7 +145,7 @@ const ZigDrawer = () => {
                     id={'drawer__login'}
                     variant='text'
                     startIcon={
-                      <UserIcon
+                      <ZigUserIcon
                         color={theme.palette.neutral300}
                         width={'16px'}
                         height={'16px'}
@@ -257,12 +259,29 @@ const ZigDrawer = () => {
                   />
                 </ListItemButton>
               </ListItem>
+
+              <ListItem>
+                <ZigButton
+                  id={'my-portfolio__deposit'}
+                  startIcon={<ZigPlusIcon />}
+                  sx={{ fontWeight: 600, mb: 1 }}
+                  variant={'contained'}
+                  onClick={() =>
+                    showModal(DepositModal, {
+                      ctaId: 'account-menu-deposit',
+                    })
+                  }
+                >
+                  {t('action:deposit')}
+                </ZigButton>
+              </ListItem>
             </List>
+
             <List>
               <ListItem disablePadding>
                 <ListItemButton onClick={() => setLanguageOpen(!languageOpen)}>
                   <ListItemIcon sx={{ minWidth: '48px' }}>
-                    <GlobeLanguages
+                    <ZigGlobeLanguages
                       color={theme.palette.neutral300}
                       width={'26px'}
                       height={'26px'}

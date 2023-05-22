@@ -36,8 +36,8 @@
     "180d-full": "6 Months",
     "365d-full": "1 Year",
     "all-full": "All time",
-    "7d": "1 W",
-    "30d": "1 Mo",
+    "7d": "Week",
+    "30d": "Month",
     "90d": "3 Mo",
     "180d": "6 Mo",
     "365d": "1 Y",
@@ -108,7 +108,7 @@
     },
     "minimum-balance": "To trade and allow investors to invest, you need to invest at least {{ minValue }} {{ minValueCoin }} in your service",
     "profits-explainer": "Decide how much of your profits from trading and success fees you would like to request to transfer out automatically.",
-    "please-verify": "Please review your info. Type, base and name can't be changed later",
+    "please-verify": "Please review your info. Type and base can't be changed later",
     "zero-fee": "If you choose success fee = 0, Zignaly will not charge any fee either"
   }
 }

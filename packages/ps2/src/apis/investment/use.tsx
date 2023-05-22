@@ -165,7 +165,6 @@ export function useInvestInService(serviceId: string): {
   }) => Promise<void>;
 } {
   const [update, { isLoading }] = useInvestInServiceMutation();
-  const { refetch } = useCoinBalances();
   const { refetch: refetchInvestedState } = useIsInvestedInService(serviceId);
   const exchange = useActiveExchange();
 
@@ -179,7 +178,6 @@ export function useInvestInService(serviceId: string): {
         exchangeInternalId: exchange.internalId,
       }).unwrap();
       refetchInvestedState();
-      refetch(); // TODO: proper cache invalidation
     },
   };
 }
@@ -196,8 +194,8 @@ export function useUpdateTakeProfitAndInvestMore(serviceId: string): {
 } {
   const [update, { isLoading }] = useUpdateTakeProfitAndInvestMoreMutation();
   const exchange = useActiveExchange();
-  const { refetch } = useCoinBalances();
   const { refetch: refetchInvestedState } = useIsInvestedInService(serviceId);
+
   return {
     isLoading,
     edit: async ({ profitPercentage, amount }) => {
@@ -207,8 +205,8 @@ export function useUpdateTakeProfitAndInvestMore(serviceId: string): {
         exchangeInternalId: exchange.internalId,
         amount: amount.toString(),
       }).unwrap();
+
       refetchInvestedState();
-      refetch(); // TODO: proper cache invalidation
     },
   };
 }
@@ -227,6 +225,7 @@ export function useWithdrawInvestment(): {
   const exchange = useActiveExchange();
   const service = useSelectedInvestment();
   const { refetch } = useInvestmentDetails(service.serviceId);
+
   return {
     isLoading,
     withdraw: async ({ serviceId, amount }) => {
@@ -235,7 +234,7 @@ export function useWithdrawInvestment(): {
         exchangeInternalId: exchange.internalId,
         amount: amount.toString(),
       }).unwrap();
-      await refetch();
+      refetch();
     },
   };
 }

@@ -174,7 +174,13 @@ const SwapForm = ({
                   )}
                 />
               </Grid>
-              <Grid item pt={3} display='flex' flexDirection='column'>
+              <Grid
+                item
+                pt={3}
+                display='flex'
+                flexDirection='column'
+                alignItems='flex-start'
+              >
                 <ZigTypography>{t('buy.swapTo')}</ZigTypography>
                 {priceInfo?.price || !amountFrom?.value ? (
                   <ZigPriceLabel
@@ -201,6 +207,7 @@ const SwapForm = ({
                   size={'large'}
                   disabled={!isValid || !amountTo}
                   variant='contained'
+                  sx={{ mb: 1 }}
                 >
                   {t('buy.continue')}
                 </ZigButton>

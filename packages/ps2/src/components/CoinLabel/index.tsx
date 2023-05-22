@@ -5,12 +5,16 @@ import { Layout, WrapCoin, Coin, Icon } from './styles';
 
 import { CoinLabelProps } from './types';
 
-const CoinLabel = ({ name, coin, bucket }: CoinLabelProps) => (
-  <Layout>
-    <Icon coin={coin} name={name} bucket={bucket} />
+const CoinLabel = ({ name, coin, bucket, id }: CoinLabelProps) => (
+  <Layout id={id}>
+    <Icon coin={coin} name={name} bucket={bucket} className={`icon__${coin}`} />
     <WrapCoin>
-      <Coin>{coin}</Coin>
-      <ZigTypography variant='body2' color='neutral300'>
+      <Coin className={`name__${coin}`}>{coin}</Coin>
+      <ZigTypography
+        variant='body2'
+        color='neutral300'
+        className={`name__${name}`}
+      >
         {name}
       </ZigTypography>
     </WrapCoin>

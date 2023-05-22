@@ -68,7 +68,7 @@ const InvestButton: React.FC<{
         variant='contained'
         size={'large'}
         disabled={maxReached}
-        sx={{ flexDirection: 'column', minWidth: 165 }}
+        sx={{ flexDirection: 'column', minWidth: 165, padding: '6px 26px' }}
         tooltip={maxReached ? t('invest-button.max-reached-tooltip') : null}
       >
         <>
@@ -85,7 +85,13 @@ const InvestButton: React.FC<{
             )}
           </ZigTypography>
           {!maxReached && (
-            <ZigTypography variant={'h5'} color='neutral150' fontWeight={500}>
+            <ZigTypography
+              variant={'caption'}
+              component='p'
+              color='neutral150'
+              fontWeight={500}
+              sx={{ textTransform: 'lowercase !important' }}
+            >
               {t('invest-button.x-success-fee', {
                 fee: service.successFee,
               })}

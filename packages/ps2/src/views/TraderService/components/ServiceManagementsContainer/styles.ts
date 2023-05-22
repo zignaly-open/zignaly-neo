@@ -6,7 +6,6 @@ export const Layout = styled('div')`
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 4em 0;
 `;
 
 export const Box = styled('div')`

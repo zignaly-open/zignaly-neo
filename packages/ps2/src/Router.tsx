@@ -16,17 +16,8 @@ import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
 
 const Wallet = lazy(() => import('./views/Wallet'));
-const Manual = lazy(() => import('./views/TraderService/Manual'));
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
 const ForgotPassword = lazy(() => import('./views/Auth/ForgotPassword'));
-const Management = lazy(() => import('./views/TraderService/Management'));
-const Investors = lazy(() => import('./views/TraderService/Investors'));
-const BecomeTrader = lazy(() => import('./views/TraderService/BecomeTrader'));
-const Positions = lazy(() => import('./views/TraderService/Positions'));
-const Coins = lazy(() => import('./views/TraderService/Coins'));
-const ServiceApi = lazy(() => import('./views/TraderService/ServiceApi'));
-const Signals = lazy(() => import('./views/TraderService/Signals'));
-const EditService = lazy(() => import('views/TraderService/EditService'));
 const HelpInvestor = lazy(() => import('./views/Help/HelpInvestor'));
 const NotFound = lazy(() => import('views/404'));
 const ResetPassword = lazy(() => import('views/Auth/ResetPassword'));
@@ -37,6 +28,19 @@ const Rewards = lazy(() => import('./views/Rewards'));
 const { default: Dashboard, DashboardModalInvestmentEdit } = lazily(
   () => import('./views/Dashboard'),
 );
+
+const {
+  Management,
+  Investors,
+  BecomeTrader,
+  Positions,
+  Coins,
+  ServiceApi,
+  Signals,
+  EditService,
+  Manual,
+} = lazily(() => import('./views/TraderService/routes'));
+
 const { default: MyBalances, MyBalancesDeposit } = lazily(
   () => import('./views/Balance'),
 );

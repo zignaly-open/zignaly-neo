@@ -3,6 +3,7 @@ import ReactCodeInput from "@zignaly-open/react-verification-code-input";
 import { InputCodeProps } from "./types";
 import { Layout } from "./styles";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
+import { Box } from "@mui/material";
 
 // TODO: rename to ZigInoutCode
 function InputCode({
@@ -12,6 +13,7 @@ function InputCode({
   autoFocus = false,
   clearOnError = false,
   error = null,
+  prefixId,
 }: InputCodeProps) {
   const inputRef = useRef<ReactCodeInput>(null);
 
@@ -37,16 +39,18 @@ function InputCode({
 
   return (
     <Layout error={error || undefined}>
-      <ReactCodeInput
-        ref={inputRef}
-        className={"input-box"}
-        fields={fields}
-        loading={loading}
-        disabled={loading}
-        autoFocus={autoFocus}
-        onComplete={onComplete}
-      />
-      {error && <ErrorMessage text={error} />}
+      <Box id={prefixId && `${prefixId}__code-input`}>
+        <ReactCodeInput
+          ref={inputRef}
+          className={"input-box"}
+          fields={fields}
+          loading={loading}
+          disabled={loading}
+          autoFocus={autoFocus}
+          onComplete={onComplete}
+        />
+      </Box>
+      {error && <ErrorMessage text={error} id={prefixId && `${prefixId}__error-message`} />}
     </Layout>
   );
 }

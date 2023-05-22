@@ -18,4 +18,5 @@ export type ZIGCoinIconProps = {
   coin: string;
   className?: string;
   bucket?: string;
+  id?: string;
 };

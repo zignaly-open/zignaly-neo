@@ -27,19 +27,14 @@ import {
 } from './api';
 import {
   activateExchange,
-  logout,
   setAccessToken,
   setActiveExchangeInternalId,
   setSessionExpiryDate,
   setUser,
 } from './store';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  trackConversion,
-  trackEndSession,
-  trackNewSession,
-} from '../../util/analytics';
-import { endLiveSession, startLiveSession } from '../../util/liveSession';
+import { trackConversion, trackNewSession } from '../../util/analytics';
+import { startLiveSession } from '../../util/liveSession';
 import { RootState } from '../store';
 import { useTranslation } from 'react-i18next';
 import { ShowFnOutput, useModal } from 'mui-modal-provider';
@@ -51,6 +46,7 @@ import { useZModal } from 'components/ZModal/use';
 import Check2FAModal from 'views/Auth/components/Check2FAModal';
 import { useNavigate } from 'react-router-dom';
 import { track } from '@zignaly-open/tracker';
+import { clearUserSession } from './util';
 
 const useStartSession = () => {
   const { showModal } = useModal();
@@ -158,10 +154,8 @@ export function useLogout(performRequest = true): () => void {
     if (performRequest) {
       logoutRequest();
     }
-    dispatch(logout());
+    clearUserSession(dispatch);
     navigate('/login');
-    endLiveSession();
-    trackEndSession();
   };
 }
 
@@ -295,9 +289,11 @@ export function useActivateExchange(
 }
 
 export function useMaybeMakeSureSessionIsAlive(makeSure: boolean): void {
+  const isAuthenticated = useIsAuthenticated();
   useSessionQuery(undefined, {
     refetchOnMountOrArgChange: true,
-    skip: !makeSure,
+    // we do not want to check that is the app is already aware that the user has been logged out
+    skip: !makeSure || !isAuthenticated,
   });
 }
 

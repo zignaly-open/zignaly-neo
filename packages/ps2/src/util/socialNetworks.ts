@@ -1,35 +1,35 @@
 import {
-  LogoTelegramIcon,
-  LogoMediumIcon,
-  LogoDiscordIcon,
-  LogoTwitterIcon,
-  LogoLinkedInIcon,
+  ZigLogoTelegramIcon,
+  ZigLogoMediumIcon,
+  ZigLogoDiscordIcon,
+  ZigLogoTwitterIcon,
+  ZigLogoLinkedInIcon,
 } from '@zignaly-open/ui';
 
 const socialNetworksLinks = [
   {
     name: 'Twitter',
-    image: LogoTwitterIcon,
+    image: ZigLogoTwitterIcon,
     path: 'https://twitter.com/zignaly',
   },
   {
     name: 'Telegram',
-    image: LogoTelegramIcon,
+    image: ZigLogoTelegramIcon,
     path: 'https://t.me/ZignalyHQ',
   },
   {
     name: 'Discord',
-    image: LogoDiscordIcon,
+    image: ZigLogoDiscordIcon,
     path: 'https://discord.gg/9H6cEa9uRN',
   },
   {
     name: 'Medium',
-    image: LogoMediumIcon,
+    image: ZigLogoMediumIcon,
     path: 'https://medium.com/zignaly',
   },
   {
     name: '',
-    image: LogoLinkedInIcon,
+    image: ZigLogoLinkedInIcon,
     path: 'https://www.linkedin.com/company/zignaly/',
   },
 ];

@@ -108,7 +108,7 @@
 		},
 		"minimum-balance": "Alım Satım yapmak ve yatırımcıların yatırım yapmasına izin vermek için, hizmetinize en az {{ minValue }} {{ minValueCoin }} yatırmanız gerekir.",
 		"profits-explainer": "Alım satım ve başarı ücretlerinden elde ettiğiniz kârın ne kadarının otomatik olarak transfer edilmesini istediğinize karar verin.",
-		"please-verify": "Lütfen bilgilerinizi gözden geçirin. Tür, taban ve ad daha sonra değiştirilemez",
+		"please-verify": "Lütfen bilgilerinizi gözden geçirin. Tür ve taban daha sonra değiştirilemez",
 		"zero-fee": "Başarı ücreti olarak eğer 0'ı seçerseniz, Zignaly de bu servisten bir komisyon kesmeyecektir"
 	}
 }

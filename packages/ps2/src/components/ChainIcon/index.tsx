@@ -17,13 +17,13 @@ export const getChainIcon = (chain: string) => {
   }
 };
 
-const ChainIcon = ({ network }: { network: string }) => {
+const ChainIcon = ({ network, id }: { network: string; id?: string }) => {
   const icon = getChainIcon(network);
 
   return icon ? (
-    <img width={24} height={24} src={icon} />
+    <img width={24} height={24} src={icon} id={id} />
   ) : (
-    <ZigCoinIcon size='small' coin={network} />
+    <ZigCoinIcon size='small' coin={network} id={id} />
   );
 };
 

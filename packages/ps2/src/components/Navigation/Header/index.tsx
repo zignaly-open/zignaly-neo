@@ -1,5 +1,5 @@
 import { HeaderLinksContainer, BrandImage } from '@zignaly-open/ui';
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavigationLink } from './atoms';
 import { ROUTE_BECOME_TRADER, ROUTE_PROFIT_SHARING } from '../../../routes';
@@ -33,7 +33,7 @@ const Header: React.FC = () => {
               <Box display='flex' alignItems='center' gap='28px'>
                 <a href={MAIN_APP_URL} key='logo' rel={'noopener'}>
                   <BrandImage
-                    id='menu__logo-portfolio'
+                    id='menu__logo'
                     height='32px'
                     type='isotype'
                     width='32px'
@@ -57,7 +57,9 @@ const Header: React.FC = () => {
                     </NavigationLink>
                   )}
                 </HeaderLinksContainer>
-                <ExtraNavigationDropdown />
+                <Suspense fallback={null}>
+                  <ExtraNavigationDropdown />
+                </Suspense>
               </Box>
             ) : (
               <Drawer />
@@ -72,14 +74,16 @@ const Header: React.FC = () => {
                   !sm && { flex: 1, justifyContent: 'center' }),
               }}
             >
-              {isAuthenticated && (
-                <>
-                  <BalanceButton key={'balance'} />
-                  <RewardsButton key={'rewards'} />
-                  {md && <ReferralButton key={'referral'} />}
-                </>
-              )}
-              <AccountMenu />
+              <Suspense fallback={null}>
+                {isAuthenticated && (
+                  <>
+                    <BalanceButton key={'balance'} />
+                    <RewardsButton key={'rewards'} />
+                    {md && <ReferralButton key={'referral'} />}
+                  </>
+                )}
+                <AccountMenu />
+              </Suspense>
             </Box>
           </Container>
         </Toolbar>
