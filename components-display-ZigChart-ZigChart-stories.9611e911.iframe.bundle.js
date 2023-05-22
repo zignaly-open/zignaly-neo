@@ -8,6 +8,7 @@
 `,ChartLayoutMini=(0,_mui_system__WEBPACK_IMPORTED_MODULE_0__.Z)("div")`
   height: ${props=>props.height||100}px;
   width: 100%;
-  display: inline-block;
+  display: block;
+  margin-bottom: 10px;
 `,axisStyle={axisLabel:{fontSize:20,padding:30,fill:_theme__WEBPACK_IMPORTED_MODULE_1__.Z.neutral200,fontFamily:"Avenir Next",letterSpacing:.55,lineHeight:16},tickLabels:{fontSize:11,padding:7,fill:_theme__WEBPACK_IMPORTED_MODULE_1__.Z.neutral200,fontFamily:"Avenir Next",letterSpacing:.55,lineHeight:16}}}}]);
-//# sourceMappingURL=components-display-ZigChart-ZigChart-stories.3771586e.iframe.bundle.js.map
+//# sourceMappingURL=components-display-ZigChart-ZigChart-stories.9611e911.iframe.bundle.js.map
