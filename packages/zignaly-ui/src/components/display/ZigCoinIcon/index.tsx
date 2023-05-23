@@ -30,5 +30,5 @@ const ZigCoinIcon = ({
   );
 };
 
-export { CoinSizes };
+export type { CoinSizes };
 export default ZigCoinIcon;

@@ -24,6 +24,10 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
         {...props}
         inputProps={{
           ...(props.inputProps || {}),
+          "data-testid":
+            props?.inputProps?.["data-testid"] ||
+            (process.env.NODE_ENV === "test" && id) ||
+            undefined,
         }}
         label={
           !props.label ? null : (
@@ -58,7 +62,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
           ...(sensitive
             ? {
                 endAdornment: [
-                  <InputAdornment position="end" key={props.id + "sensivive"}>
+                  <InputAdornment position="end" key={id + "-sensivive"}>
                     {!!sensitive && (
                       <EyeIcon
                         id={id && `${id}-visibility-icon`}
