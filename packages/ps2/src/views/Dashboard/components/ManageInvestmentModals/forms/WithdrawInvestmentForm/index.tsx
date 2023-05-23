@@ -103,11 +103,14 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Box sx={{ mt: 1, mb: 2 }}>
-        <ZigTypography>{t('replace-existing-amount')}</ZigTypography>
+        <ZigTypography id={'withdraw-modal__replace-amount-text'}>
+          {t('replace-existing-amount')}
+        </ZigTypography>
       </Box>
       <Grid container spacing={5}>
         <Grid item xs={12} md={6}>
           <InputAmountAdvanced
+            id={'withdraw-modal__input-amount'}
             name={'amountTransfer'}
             control={control}
             label={t('form.label')}
@@ -132,6 +135,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
         <Grid item xs={12} md={6}>
           <Box marginTop={5}>
             <ZigSliderInput
+              prefixId={'withdraw-modal-amount-transfer'}
               value={sliderValue}
               onChange={(value: number) => {
                 if (!watch('amountTransfer')?.value && !value) {
@@ -155,7 +159,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
       </Grid>
       <WithdrawActions>
         <ZigButton
-          id={'withdraw__confirm-withdraw'}
+          id={'withdraw-modal__confirm-withdraw'}
           type={'submit'}
           size={'xlarge'}
           disabled={!isValid}
