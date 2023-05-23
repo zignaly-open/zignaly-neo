@@ -16,6 +16,7 @@ import { BackendError, ErrorCodes } from '../../util/errors';
 import CriticalError from '../../components/Stub/CriticalError';
 import createZModalRouteElement from '../../components/ZModal/ZModalRoute';
 import InvestDepositModal from '../Dashboard/components/ManageInvestmentModals/InvestDepositModal';
+import { PageContainer } from '@zignaly-open/ui';
 
 const ServiceProfile: React.FC = () => {
   const { serviceId } = useParams();
@@ -28,7 +29,7 @@ const ServiceProfile: React.FC = () => {
   return (
     <>
       <ServiceHeader />
-      <TraderServicePageContainer isOwner={isOwner}>
+      <PageContainer>
         <LayoutContentWrapper
           endpoint={serviceDetailsEndpoint}
           error={(error: BackendError) => {
@@ -71,10 +72,14 @@ const ServiceProfile: React.FC = () => {
               }
             }
 
-            return <ServiceProfileContainer service={service} />;
+            return (
+              <TraderServicePageContainer isOwner={isOwner}>
+                <ServiceProfileContainer service={service} />
+              </TraderServicePageContainer>
+            );
           }}
         />
-      </TraderServicePageContainer>
+      </PageContainer>
     </>
   );
 };
