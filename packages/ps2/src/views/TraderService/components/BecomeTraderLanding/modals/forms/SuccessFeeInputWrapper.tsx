@@ -18,7 +18,7 @@ const SuccessFeeInputWrapper: React.FC<{
     <>
       <SuccessFieldWrapper>
         <ZigTypography>{t('summary.success-fee')}</ZigTypography>
-        <ZigTypography variant='h4' color='neutral400'>
+        <ZigTypography variant='body2' color='neutral400'>
           {t('edit.success-fee-desc')}
         </ZigTypography>
 

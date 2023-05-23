@@ -27,7 +27,7 @@ const ZigButtonGroupInput = ({
     <>
       {typeof label === "string" && (
         <Box sx={{ mb: 1.25 }}>
-          <ZigTypography variant="body1" color="neutral200" fontWeight={500}>
+          <ZigTypography variant="body1" color="neutral200">
             {label}
           </ZigTypography>
         </Box>

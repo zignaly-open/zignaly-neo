@@ -81,7 +81,7 @@ export const ModalActions = styled('div')<{
 }>`
   display: flex;
   align-items: center;
-  margin-top: 56px;
+  margin-top: 30px;
   gap: 32px;
   flex-direction: ${({ direction }) => direction};
   width: 100%;

@@ -96,6 +96,7 @@ export { ReactComponent as ZigGlobeLanguages } from "assets/icons/globe-language
 export { ReactComponent as ZigTimeIcon } from "assets/icons/time-icon.svg";
 export { ReactComponent as ZigSearchIcon } from "assets/icons/search-icon.svg";
 export { ReactComponent as ZignalyExchangeIcon } from "assets/icons/zignaly-exchange-icon.svg";
+export { ReactComponent as ZigCrossCircleIcon } from "assets/icons/cross-circle-icon.svg";
 
 // Utils
 export { sortByValue, trimZeros } from "utils/numbers";
