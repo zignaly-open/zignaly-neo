@@ -104,7 +104,7 @@ const CreateServiceForm: React.FC<{
             setValue('serviceType', v as ExchangeType);
             trigger('serviceType');
           }}
-          label={t('create.service-type')}
+          label={t('create.service-type') + '*'}
         />
       </ZigButtonGroupInputWrapper>
 
@@ -122,7 +122,7 @@ const CreateServiceForm: React.FC<{
                 menuShouldScrollIntoView={false}
                 menuPosition='fixed'
                 menuShouldBlockScroll
-                label={t('create.base-currency') + ':'}
+                label={t('create.base-currency') + ':*'}
                 placeholder={t('create.base-currency')}
                 options={coinOptions}
                 error={t(errors.baseCurrency?.message)}

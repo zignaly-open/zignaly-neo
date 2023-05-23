@@ -1,9 +1,8 @@
 import React, { forwardRef } from 'react';
 import { IconButton, useTheme } from '@mui/material';
 import { Layout, Header, Title, Body, Inline } from './styles';
-import { ZigArrowLeftIcon } from '@zignaly-open/ui';
+import { ZigArrowLeftIcon, ZigCrossCircleIcon } from '@zignaly-open/ui';
 import { ModalContainerProps } from './types';
-import { Close } from '@mui/icons-material';
 
 const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
   const {
@@ -23,8 +22,8 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
         {onGoBack && typeof onGoBack === 'function' && (
           <IconButton onClick={onGoBack}>
             <ZigArrowLeftIcon
-              width={'32px'}
-              height={'32px'}
+              width={'24px'}
+              height={'24px'}
               color={theme.palette.neutral300}
             />
           </IconButton>
@@ -40,10 +39,10 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
           ? onClickClose &&
             typeof onClickClose === 'function' && (
               <IconButton onClick={onClickClose}>
-                <Close
-                  sx={{ color: theme.palette.neutral300 }}
-                  id={'modal__close'}
-                  fontSize='large'
+                <ZigCrossCircleIcon
+                  width={'24px'}
+                  height={'24px'}
+                  color={theme.palette.neutral300}
                 />
               </IconButton>
             )

@@ -75,6 +75,8 @@ export const ZigButtonGroup = styled(ButtonGroup)`
       z-index: 3;
       border-color: #464a85 !important;
       border-radius: 5px;
+      background: #171b30;
+      color: ${({ theme }) => theme.palette.highlighted};
 
       + button,
       + span button {

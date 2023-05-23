@@ -7,7 +7,6 @@ import { ZignalyIcon } from "../../../index";
 const ZigCoinIcon = ({
   size = COIN_SIZES.Medium,
   coin,
-  // FIXME: wtf are we passing a classname?
   className = "",
   bucket = "coins-binance",
   id,
