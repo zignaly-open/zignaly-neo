@@ -265,6 +265,8 @@
       z-index: 3;
       border-color: #464a85 !important;
       border-radius: 5px;
+      background: #171b30;
+      color: ${({theme})=>theme.palette.highlighted};
 
       + button,
       + span button {
@@ -396,6 +398,8 @@
     }
 
     &__indicator {
+      color: ${({theme})=>theme.palette.neutral400};
+
       ${({width})=>width&&width<=100&&emotion_react_browser_esm.iv`
           padding: 0 2px;
         `};
@@ -429,4 +433,4 @@
 
   ${props=>`\n    \n    &.zero {\n      color: ${props.theme.neutral300}\n    }\n    \n    &.positive {\n      color: ${props.theme.greenGraph};\n    }\n    \n    &.negative {\n      color: ${props.theme.redGraphOrError};\n    }\n  `}
 `)},"./src/utils/styled.ts":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.d(__webpack_exports__,{W:()=>styledIf});const styledIf=(cond,primaryQuery,secondaryQuery)=>secondaryQuery?cond?primaryQuery:secondaryQuery:cond?primaryQuery:""},"./src/assets/icons/arrow-bottom-icon.svg":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.d(__webpack_exports__,{r:()=>SvgArrowBottomIcon});var react__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("../../node_modules/react/index.js");function _extends(){return _extends=Object.assign?Object.assign.bind():function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source)Object.prototype.hasOwnProperty.call(source,key)&&(target[key]=source[key])}return target},_extends.apply(this,arguments)}var SvgArrowBottomIcon=function SvgArrowBottomIcon(props){return react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg",_extends({width:"1em",height:"1em",viewBox:"0 0 24 24",fill:"none",xmlns:"http://www.w3.org/2000/svg",className:"zig-icon"},props),react__WEBPACK_IMPORTED_MODULE_0__.createElement("path",{d:"M16.293 9.29302L12 13.586L7.70701 9.29302C7.51841 9.11086 7.26581 9.01007 7.00361 9.01235C6.74141 9.01462 6.4906 9.11979 6.30519 9.3052C6.11978 9.49061 6.01461 9.74142 6.01234 10.0036C6.01006 10.2658 6.11085 10.5184 6.29301 10.707L11.293 15.707C11.4805 15.8945 11.7348 15.9998 12 15.9998C12.2652 15.9998 12.5195 15.8945 12.707 15.707L17.707 10.707C17.8025 10.6148 17.8787 10.5044 17.9311 10.3824C17.9835 10.2604 18.0111 10.1292 18.0123 9.99642C18.0134 9.86364 17.9881 9.73196 17.9378 9.60907C17.8876 9.48617 17.8133 9.37452 17.7194 9.28063C17.6255 9.18673 17.5139 9.11248 17.391 9.0622C17.2681 9.01192 17.1364 8.98662 17.0036 8.98777C16.8708 8.98892 16.7396 9.01651 16.6176 9.06892C16.4956 9.12133 16.3853 9.19751 16.293 9.29302Z",fill:props.color}))}},"./src/assets/icons/error-alert-icon.svg":(__unused_webpack_module,__webpack_exports__,__webpack_require__)=>{__webpack_require__.d(__webpack_exports__,{r:()=>SvgErrorAlertIcon});var react__WEBPACK_IMPORTED_MODULE_0__=__webpack_require__("../../node_modules/react/index.js");function _extends(){return _extends=Object.assign?Object.assign.bind():function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source)Object.prototype.hasOwnProperty.call(source,key)&&(target[key]=source[key])}return target},_extends.apply(this,arguments)}var SvgErrorAlertIcon=function SvgErrorAlertIcon(props){return react__WEBPACK_IMPORTED_MODULE_0__.createElement("svg",_extends({width:"1em",height:"1em",viewBox:"0 0 24 24",fill:"none",xmlns:"http://www.w3.org/2000/svg",className:"zig-icon"},props),react__WEBPACK_IMPORTED_MODULE_0__.createElement("path",{d:"M12 3C7.02979 3 3 7.03124 3 12C3 16.9717 7.02979 21 12 21C16.9702 21 21 16.9717 21 12C21 7.03124 16.9702 3 12 3ZM12 19.2581C7.98876 19.2581 4.74194 16.0126 4.74194 12C4.74194 7.9901 7.9889 4.74194 12 4.74194C16.0098 4.74194 19.2581 7.98887 19.2581 12C19.2581 16.0112 16.0126 19.2581 12 19.2581ZM13.5242 15.4839C13.5242 16.3243 12.8404 17.0081 12 17.0081C11.1596 17.0081 10.4758 16.3243 10.4758 15.4839C10.4758 14.6434 11.1596 13.9597 12 13.9597C12.8404 13.9597 13.5242 14.6434 13.5242 15.4839ZM10.5712 7.81206L10.818 12.7475C10.8296 12.9793 11.0209 13.1613 11.253 13.1613H12.747C12.9791 13.1613 13.1704 12.9793 13.182 12.7475L13.4287 7.81206C13.4412 7.56333 13.2429 7.35484 12.9938 7.35484H11.0062C10.7571 7.35484 10.5588 7.56333 10.5712 7.81206Z",fill:props.color}))}}}]);
-//# sourceMappingURL=components-display-ZigTable-stories.af2986d5.iframe.bundle.js.map
+//# sourceMappingURL=components-display-ZigTable-stories.2f0d3267.iframe.bundle.js.map
