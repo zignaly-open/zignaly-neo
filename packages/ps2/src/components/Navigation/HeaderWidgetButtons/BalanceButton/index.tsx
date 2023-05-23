@@ -3,7 +3,7 @@ import { Box, Divider } from '@mui/material';
 import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router-dom';
-import { ROUTE_DASHBOARD, ROUTE_PROFIT_SHARING } from '../../../routes';
+import { ROUTE_DASHBOARD, ROUTE_PROFIT_SHARING } from '../../../../routes';
 import { useBalanceQuery } from 'apis/user/api';
 import { useActiveExchange } from 'apis/user/use';
 import { ChevronRight } from '@mui/icons-material';
@@ -76,7 +76,7 @@ const BalanceButton = () => {
     <GradientBorderButtonWrapper>
       <ZigButton
         id='menu__balance-link'
-        component={'a'}
+        component={'div'}
         sx={{
           cursor: 'pointer',
           display: 'flex',

@@ -4,15 +4,15 @@ import { ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 function WithdrawInvestmentSuccess({ close }: { close: () => void }) {
-  const { t } = useTranslation('withdraw-your-investment');
+  const { t } = useTranslation('edit-investment');
   return (
     <>
       <ZigTypography variant={'body1'} color={'neutral200'}>
-        {t('success.description')}
+        {t('withdrawal-success.description')}
       </ZigTypography>
       <ModalActions>
         <ZigButton id={'withdraw__close'} onClick={close} size={'large'}>
-          {t('success.button')}
+          {t('withdrawal-success.button')}
         </ZigButton>
       </ModalActions>
     </>

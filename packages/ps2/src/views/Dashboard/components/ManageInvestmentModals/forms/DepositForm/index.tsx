@@ -59,7 +59,14 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         return {
           value: ssc,
           name,
-          label: <CoinOption key={ssc} coin={ssc} name={name} />,
+          label: (
+            <CoinOption
+              key={ssc}
+              coin={ssc}
+              name={name}
+              prefixId={'deposit-modal'}
+            />
+          ),
           inOrders: balance?.balanceLocked || 0,
           balance: balance?.balanceTotal || 0,
           available: balance?.balanceFree || 0,
@@ -103,7 +110,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   return (
     <form onSubmit={handleSubmit(() => {})}>
       <Box mt={1} mb={1}>
-        <ZigTypography>
+        <ZigTypography id={'modal-deposit__description'}>
           <Trans t={t} i18nKey={'description'}>
             <BinanceLogo
               width={16}
@@ -111,8 +118,12 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               style={{
                 verticalAlign: 'middle',
               }}
+              id={'modal-deposit-description__binance-logo'}
             />
-            <ZigLink href={DEPOSIT_INFO_URL}></ZigLink>
+            <ZigLink
+              href={DEPOSIT_INFO_URL}
+              id={'modal-deposit-description__external-link'}
+            ></ZigLink>
           </Trans>
         </ZigTypography>
       </Box>
@@ -125,7 +136,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
-                id={'deposit__select-coin'}
+                id={'modal-deposit__select-coin'}
                 menuPlacement='auto'
                 menuShouldScrollIntoView={false}
                 menuPosition='fixed'
@@ -156,6 +167,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               variant='body2'
               color='neutral200'
               fontWeight='medium'
+              id={'modal-deposit-balances__total-text'}
             >
               {t('balances.total')}{' '}
               <ZigTypography
@@ -164,6 +176,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                 fontWeight='medium'
               >
                 <NumericFormat
+                  id={'modal-deposit-balances__total'}
                   displayType={'text'}
                   value={coinObject?.balance ?? ''}
                 />
@@ -174,6 +187,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               variant='body2'
               color='neutral200'
               fontWeight='medium'
+              id={'modal-deposit-balances__locked-text'}
             >
               {t('balances.balanceLocked')}{' '}
               <ZigTypography
@@ -182,6 +196,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                 fontWeight='medium'
               >
                 <NumericFormat
+                  id={'modal-deposit-balances__locked'}
                   value={coinObject?.inOrders ?? ''}
                   displayType={'text'}
                 />
@@ -192,6 +207,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               variant='body2'
               color='neutral200'
               fontWeight='medium'
+              id={'modal-deposit-balances__free-text'}
             >
               {t('balances.balanceFree')}{' '}
               <ZigTypography
@@ -200,6 +216,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                 fontWeight='medium'
               >
                 <NumericFormat
+                  id={'modal-deposit-balances__free'}
                   value={coinObject?.available ?? ''}
                   displayType={'text'}
                 />
@@ -216,7 +233,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
-                id={'deposit__select-network'}
+                id={'modal-deposit__select-network'}
                 menuPosition='fixed'
                 menuShouldBlockScroll
                 menuShouldScrollIntoView={false}
@@ -233,7 +250,8 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
           <>
             <Grid item xs={12} pt={3}>
               <ZigCopyText
-                id={'deposit__deposit-address'}
+                id={'modal-deposit__deposit-address'}
+                copyElementId={'modal-deposit__deposit-address-copy'}
                 label={t('depositAddress.label')}
                 value={
                   loading ? t('depositAddress.loading') : depositInfo?.address
@@ -259,6 +277,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               <Grid item xs={12} pt={3}>
                 <ZigCopyText
                   id={'deposit__deposit-memo'}
+                  copyElementId={'modal-deposit__deposit-memo-copy'}
                   label={t('depositMemo.label')}
                   value={loading ? t('depositMemo.loading') : depositInfo?.tag}
                   onCopied={() => {
@@ -303,6 +322,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                   }}
                 >
                   <ZigQrCode
+                    id={'modal-deposit__deposit-qr-address'}
                     label={t('depositQR.address', {
                       coin: coinObject?.name,
                     })}
@@ -310,6 +330,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                   />
                   {depositInfo?.tag && (
                     <ZigQrCode
+                      id={'modal-deposit__deposit-qr-memo'}
                       label={t('depositQR.memo', {
                         coin: coinObject?.name,
                       })}
@@ -327,7 +348,11 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         )}
         <Grid item xs={12} pt={3}>
           <ZigTypography variant={'body2'} color={'neutral300'}>
-            <ZigLink href={BUY_CRYPTO_URL} target={'_blank'}>
+            <ZigLink
+              href={BUY_CRYPTO_URL}
+              target={'_blank'}
+              id={'modal-deposit__buy-crypto-link'}
+            >
               <Box
                 sx={{
                   display: 'flex',

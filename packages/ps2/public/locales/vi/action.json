@@ -3,8 +3,6 @@
 	"edit": "Sửa",
 	"save": "Lưu",
 	"withdraw": "Rút",
-	"read-more": "Đọc thêm",
-	"read-less": "Thu lại",
 	"cancel": "Hủy bỏ",
 	"proceed": "Tiến hành",
 	"export": "Xuất",
@@ -16,5 +14,7 @@
 	"hide": "Ẩn",
 	"show": "Hiển thị",
 	"claim": "Lấy",
-	"deposit-coin": "Nạp tiền {{coin}}"
+	"deposit-coin": "Nạp tiền {{coin}}",
+	"more": "nhiều hơn",
+	"less": "ít hơn"
 }

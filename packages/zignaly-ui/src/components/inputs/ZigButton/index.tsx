@@ -47,6 +47,10 @@ const ZigButton = ({
             target: linkTarget ?? "_blank",
           }
         : {})}
+      // @ts-ignore
+      data-testid={
+        props["data-testid"] || (process.env.NODE_ENV === "test" && props.id) || undefined
+      }
       // hack to preserve old behavior but allow for normal mui theming
       color={variant === "outlined" && !color ? "secondary" : color}
       className={active ? "MuiButton-active" : ""}
@@ -67,6 +71,9 @@ export const ZigButtonGroup = styled(ButtonGroup)`
   outline-offset: -1px;
 
   .MuiButton-root {
+    font-weight: 400;
+    text-transform: capitalize !important;
+
     &:hover,
     &.MuiButton-active {
       z-index: 3;

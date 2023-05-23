@@ -153,9 +153,6 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                     )?.value?.message,
                   )
                 }
-                и
-                за
-                справками
               />
 
               <Box>
@@ -283,41 +280,30 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
       </Box>
 
       <ModalActions>
-        <Box
-          sx={{
-            fledDirection: 'column',
-            display: 'flex',
-            width: '100%',
-            gap: '20px',
-            justifyContent: 'flex-end',
-          }}
+        <ZigButton
+          id={'invest-confirm'}
+          size={'large'}
+          type={'submit'}
+          loading={isLoading}
+          disabled={!canSubmit}
         >
-          <ZigButton
-            id={'invest-close'}
-            size={'large'}
-            type={'button'}
-            disabled={isLoading}
-            variant={'outlined'}
-            onClick={isConfirmation ? onGoBackToFirstStep : close}
-          >
-            {t(isConfirmation ? 'common:back' : 'common:close')}
-          </ZigButton>
-
-          <ZigButton
-            id={'invest-confirm'}
-            size={'large'}
-            type={'submit'}
-            loading={isLoading}
-            disabled={!canSubmit}
-          >
-            {isConfirmation
-              ? t('form.button.invest-now', {
-                  amount: watch('amountTransfer')!.value.toString(),
-                  coin: coin.id,
-                })
-              : t('form.button.continue-to-confirmation')}
-          </ZigButton>
-        </Box>
+          {isConfirmation
+            ? t('form.button.invest-now', {
+                amount: watch('amountTransfer')!.value.toString(),
+                coin: coin.id,
+              })
+            : t('form.button.continue-to-confirmation')}
+        </ZigButton>
+        <ZigButton
+          id={'invest-close'}
+          size={'large'}
+          type={'button'}
+          disabled={isLoading}
+          variant={'outlined'}
+          onClick={isConfirmation ? onGoBackToFirstStep : close}
+        >
+          {t(isConfirmation ? 'common:back' : 'common:close')}
+        </ZigButton>
       </ModalActions>
     </Form>
   );

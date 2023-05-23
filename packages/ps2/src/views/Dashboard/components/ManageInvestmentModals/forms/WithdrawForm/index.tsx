@@ -20,7 +20,7 @@ import {
 import { WithdrawModalProps } from '../../types';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithdrawValidation } from './validations';
-import { ModalActionsNew as ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { ModalActions as ModalActions } from 'components/ZModal/ModalContainer/styles';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import LabelValueLine from './atoms/LabelValueLine';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
@@ -93,7 +93,14 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
         return {
           value: c,
           name,
-          label: <CoinOption key={c} coin={c} name={name} />,
+          label: (
+            <CoinOption
+              key={c}
+              coin={c}
+              name={name}
+              prefixId={'withdraw-modal'}
+            />
+          ),
           available: balance?.maxWithdrawAmount || 0,
           networks: coins[c].networks?.map((n) => ({
             label: n.name,
@@ -173,7 +180,9 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
       autoComplete='off'
     >
       <Box mt={1} mb={1}>
-        <ZigTypography>{t('description')}</ZigTypography>
+        <ZigTypography id={'withdraw-modal-description'}>
+          {t('description')}
+        </ZigTypography>
       </Box>
 
       <Grid container>
@@ -184,7 +193,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
-                id={'withdraw__select-coin'}
+                id={'withdraw-modal__select-coin'}
                 menuPlacement='auto'
                 menuShouldScrollIntoView={false}
                 menuPosition='fixed'
@@ -206,7 +215,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSelect
-                id={'withdraw__select-network'}
+                id={'withdraw-modal__select-network'}
                 menuPosition='fixed'
                 menuShouldBlockScroll
                 menuShouldScrollIntoView={false}
@@ -233,6 +242,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
                 render={({ field }) => (
                   <ZigInput
                     fullWidth
+                    id={'withdraw-modal__input-address'}
                     label={t('withdrawAddress.label')}
                     placeholder={t('withdrawAddress.placeholder')}
                     error={t(errors.address?.message)}
@@ -245,6 +255,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
             {networkObject?.label && (
               <Box>
                 <ErrorMessage
+                  id={'withdraw-modal__input-address-warning'}
                   text={t('withdrawAddress.warning', {
                     network: networkObject?.label,
                     coin: coinObject?.name,
@@ -262,6 +273,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
                   render={({ field }) => (
                     <ZigInput
                       fullWidth
+                      id={'withdraw-modal__input-memo'}
                       label={t('withdrawMemo.label')}
                       placeholder={t('withdrawMemo.placeholder')}
                       error={t(errors.tag?.message)}
@@ -276,6 +288,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
               <Grid item xs={12} mt={3}>
                 <InputAmountAdvanced
                   name='amount'
+                  id={'withdraw-modal__input-amount'}
                   control={control}
                   label={t('amountToWithdraw.label')}
                   showUnit={true}
@@ -295,6 +308,7 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
                 />
                 <Box mt={1}>
                   <LabelValueLine
+                    prefixId={'withdraw-modal-balance'}
                     label={t('amountToWithdraw.labelBalance')}
                     value={coinObject.available.toString()}
                     coin={coin}
@@ -303,11 +317,13 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
                 {networkObject && (
                   <>
                     <LabelValueLine
+                      prefixId={'withdraw-modal-minimum'}
                       label={t('amountToWithdraw.minimum')}
                       value={networkObject.withdrawMin}
                       coin={coin}
                     />
                     <LabelValueLine
+                      prefixId={'withdraw-modal-fee'}
                       label={t('amountToWithdraw.fee')}
                       value={networkObject.withdrawFee}
                       coin={coin}
@@ -317,19 +333,9 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
               </Grid>
             )}
 
-            <ModalActions align='right'>
+            <ModalActions>
               <ZigButton
-                id={'withdraw__close'}
-                size={'large'}
-                type={'button'}
-                variant={'outlined'}
-                onClick={close}
-              >
-                {t('common:close')}
-              </ZigButton>
-
-              <ZigButton
-                id={'withdraw__continue'}
+                id={'withdraw-modal__continue'}
                 size={'large'}
                 type={'submit'}
                 disabled={!canSubmit}

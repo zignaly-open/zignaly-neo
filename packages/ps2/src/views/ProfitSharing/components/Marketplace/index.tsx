@@ -7,7 +7,6 @@ import {
   ZigTypography,
   ZigTable,
   createColumnHelper,
-  ZigChartMini,
 } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
@@ -18,6 +17,7 @@ import { marketplaceServiceToInvestmentType } from '../../../../apis/marketplace
 import AssetsInPool from '../../../../components/AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 import { TableWrapper } from './styles';
+import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace: React.FC = () => {
@@ -122,7 +122,7 @@ const Marketplace: React.FC = () => {
             {+props.getValue() ||
             Object.keys(props.row.original.sparklines).length > 1 ? (
               <>
-                <ZigChartMini
+                <ZigChartMiniSuspensed
                   id={`marketplace-table__pnl30t-${props.row.original.id}-chart`}
                   midLine
                   data={[0, ...(props.row.original.sparklines as number[])]}

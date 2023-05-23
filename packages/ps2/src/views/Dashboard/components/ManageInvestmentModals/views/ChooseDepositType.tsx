@@ -10,14 +10,18 @@ const ChooseDepositType: React.FC<{
   coin: string;
   setView: (view: ChooseDepositTypeViews) => void;
 }> = ({ coin, setView }) => {
-  const { t } = useTranslation('purchase-deposit-crypto');
+  const { t } = useTranslation('deposit-crypto');
 
   return (
     <>
       <Grid container sx={{ padding: '10px 0' }}>
         <Grid item xs={12} sx={{ paddingRight: '38px' }}>
-          <ZigTypography variant={'body2'} fontSize={'15px'}>
-            {t('description', { coin })}
+          <ZigTypography
+            variant={'body1'}
+            fontSize={'15px'}
+            id={'modal-choose-deposit-type__description'}
+          >
+            {t('service-deposit.description', { coin })}
           </ZigTypography>
         </Grid>
         <Grid
@@ -46,22 +50,21 @@ const ChooseDepositType: React.FC<{
               >
                 <ZigTypography
                   variant={'h3'}
-                  letterSpacing={0.9}
-                  color={'neutral100'}
+                  id={'modal-choose-deposit-type__transfer-crypto'}
                 >
-                  {t('transfer-crypto', { coin })}
+                  {t('service-deposit.transfer-crypto', { coin })}
                 </ZigTypography>
               </Box>
 
               <ZigButton
                 variant='contained'
-                id={'choose-deposit-type__deposit'}
+                id={'modal-choose-deposit-type__deposit'}
                 size={'large'}
                 onClick={() => {
                   setView(ChooseDepositTypeViews.DepositView);
                 }}
               >
-                {t('buttons.deposit', { coin })}
+                {t('service-deposit.buttons.deposit', { coin })}
               </ZigButton>
             </Box>
           </Grid>
@@ -84,20 +87,19 @@ const ChooseDepositType: React.FC<{
               <Box textAlign={'center'} height={90} paddingTop={'10px'}>
                 <ZigTypography
                   variant={'h3'}
-                  letterSpacing={0.9}
-                  color={'neutral100'}
+                  id={'modal-choose-deposit-type__buy-crypto'}
                 >
-                  {t('buy-crypto', { coin })}
+                  {t('service-deposit.buy-crypto', { coin })}
                 </ZigTypography>
               </Box>
               <ZigButton
                 href={BUY_CRYPTO_URL}
                 variant='contained'
-                id={'choose-deposit-type__purchase'}
+                id={'modal-choose-deposit-type__purchase'}
                 endIcon={<NorthEastIcon />}
                 size={'large'}
               >
-                {t('buttons.purchase', { coin })}
+                {t('service-deposit.buttons.purchase', { coin })}
               </ZigButton>
             </Box>
           </Grid>

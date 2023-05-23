@@ -42,7 +42,17 @@
     "notAuth-dropdown-link-settings": "Settings",
     "notAuth-dropdown-link-password": "Password",
     "notAuth-dropdown-link-2fa": "Two-Factor Authentication",
-    "notAuth-button-logOut": "Logout"
+    "notAuth-button-logOut": "Log out"
+  },
+  "header": {
+    "rewards": {
+      "title": "Get $20",
+      "description": "On 1st deposit"
+    },
+    "referrals": {
+      "title": "Earn 20%",
+      "description": "Invite Friends"
+    }
   },
   "account-selector": {
     "type": {

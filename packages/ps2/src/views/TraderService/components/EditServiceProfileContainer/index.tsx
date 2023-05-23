@@ -132,7 +132,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
     );
 
   return (
-    <Box onSubmit={handleSubmit(submit)} component='form' pt={7}>
+    <Box onSubmit={handleSubmit(submit)} component='form'>
       <ZigTypography textAlign='center' variant='h1'>
         {t('edit.title')}
       </ZigTypography>
@@ -184,15 +184,8 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                           <InputAdornment position='end'>%</InputAdornment>
                         ),
                       }}
-                      fullWidth
-                      label={
-                        <div>
-                          {t('summary.success-fee')}
-                          <ZigTypography variant='h4' color='neutral400'>
-                            {t('edit.success-fee-desc')}
-                          </ZigTypography>
-                        </div>
-                      }
+                      label={t('create.total-fee')}
+                      labelInline={true}
                       error={t(errors.successFee?.message)}
                       {...field}
                     />
