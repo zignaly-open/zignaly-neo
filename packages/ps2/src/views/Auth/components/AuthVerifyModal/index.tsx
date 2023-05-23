@@ -133,7 +133,7 @@ function AuthVerifyModal({
       title={texts.title}
       titleAlign='center'
     >
-      <Title>
+      <Title data-testid={'auth-verify-modal__title'}>
         {texts.description && (
           <ZigTypography id={'auth-verify-modal__description'}>
             {texts.description}

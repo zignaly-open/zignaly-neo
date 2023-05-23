@@ -15,6 +15,12 @@ export default {
   input: "src/index.ts",
   output: [
     {
+      file: 'lib/cjs.js',
+      format: 'cjs',
+      sourcemap: false,
+      interop: "compat",
+    },
+    {
       dir: "lib",
       format: "esm",
       preserveModules: true,

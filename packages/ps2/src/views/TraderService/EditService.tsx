@@ -11,6 +11,7 @@ import { BackendError, ErrorCodes } from 'util/errors';
 import { Service } from 'apis/service/types';
 import { ROUTE_404 } from 'routes';
 import CriticalError from 'components/Stub/CriticalError';
+import { PageContainer } from '@zignaly-open/ui';
 
 const EditService: React.FC = () => {
   const { serviceId } = useParams();
@@ -18,7 +19,7 @@ const EditService: React.FC = () => {
   const serviceDetailsEndpoint = useServiceDetails(serviceId);
 
   return (
-    <TraderServicePageContainer isOwner={true}>
+    <PageContainer>
       <LayoutContentWrapper
         endpoint={serviceDetailsEndpoint}
         unmountOnRefetch
@@ -29,10 +30,12 @@ const EditService: React.FC = () => {
           return <CriticalError />;
         }}
         content={(service: Service) => (
-          <EditServiceProfileContainer service={service} />
+          <TraderServicePageContainer>
+            <EditServiceProfileContainer service={service} />
+          </TraderServicePageContainer>
         )}
       />
-    </TraderServicePageContainer>
+    </PageContainer>
   );
 };
 

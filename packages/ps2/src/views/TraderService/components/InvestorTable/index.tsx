@@ -22,6 +22,7 @@ import {
 import ConnectionStateLabel from '../ConnectionStateLabel';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { Box } from '@mui/material';
+import { TraderServicePageContainer } from '../styles';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -117,7 +118,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         Investor[],
         TraderServiceManagement,
       ]) => (
-        <>
+        <TraderServicePageContainer>
           <InvestorCounts>
             <ZigUserIcon width={'17px'} height={'20px'} color={'#65647E'} />
             <ZigTypography variant={'h3'} color={'almostWhite'}>
@@ -138,7 +139,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             emptyMessage={t('no-investors')}
             enableSortingRemoval={false}
           />
-        </>
+        </TraderServicePageContainer>
       )}
     />
   );
