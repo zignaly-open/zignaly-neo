@@ -42,7 +42,7 @@ export const Body = styled('div')`
 
   /* Style Description  */
   > .MuiTypography-root:first-child {
-    margin-bottom: 32px;
+    margin-bottom: 24px;
   }
 `;
 
@@ -86,7 +86,7 @@ export const Form = styled(
     component: 'form',
     display: 'flex',
     flexDirection: 'column',
-    gap: 4,
+    gap: 3,
   }),
 )`
   > div:last-child {
@@ -100,7 +100,7 @@ export const ModalActions = styled('div')<{
 }>`
   display: flex;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 24px;
   gap: 32px;
   flex-direction: ${({ direction }) => direction};
   width: 100%;
