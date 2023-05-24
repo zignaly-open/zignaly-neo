@@ -14,7 +14,6 @@ import {
 import { useTheme } from "styled-components";
 import Theme from "theme/theme";
 
-// TODO rename to ZigDropdown, add stories
 const ZigDropdown: (
   props: ZigDropdownProps,
   innerRef: React.Ref<ZigDropdownHandle>,
@@ -112,9 +111,12 @@ const ZigDropdown: (
                 if (childDropdownShow && options.indexOf(childDropdownShow) < i) return null;
 
                 const key =
-                  option && "label" in option && typeof option.label === "string"
-                    ? option.label
-                    : Math.random().toString();
+                  (option &&
+                    "label" in option &&
+                    typeof option.label === "string" &&
+                    option.label) ||
+                  option.id ||
+                  Math.random().toString();
 
                 if (option.element)
                   return (
@@ -161,11 +163,12 @@ const ZigDropdown: (
                       >
                         {option.label}
                         <SpaceTaker />
+
                         {!!option.children?.length && (
                           <ArrowBottomIconStyled
                             color={theme.neutral300}
-                            width={"22px"}
-                            height={"22px"}
+                            rotated={childDropdownShow === option}
+                            width={"10.5px"}
                           />
                         )}
                       </NavLink>
