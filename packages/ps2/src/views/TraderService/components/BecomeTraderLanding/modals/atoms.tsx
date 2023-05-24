@@ -27,6 +27,13 @@ export const SuccessFieldWrapper = styled(Box)`
     p {
       white-space: nowrap;
     }
+
+    .MuiTypography-root,
+    .MuiInput-input {
+      color: ${({ theme }) => theme.palette.neutral200} !important;
+      -webkit-text-fill-color: ${({ theme }) =>
+        theme.palette.neutral200} !important;
+    }
   }
 `;
 
