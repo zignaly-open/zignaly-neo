@@ -22,17 +22,17 @@ export const SuccessFieldWrapper = styled(Box)`
         text-align: center;
         margin-left: 22px;
       }
+
+      .MuiTypography-root,
+      input {
+        color: ${({ theme }) => theme.palette.neutral200} !important;
+        -webkit-text-fill-color: ${({ theme }) =>
+          theme.palette.neutral200} !important;
+      }
     }
 
     p {
       white-space: nowrap;
-    }
-
-    .MuiTypography-root,
-    .MuiInput-input {
-      color: ${({ theme }) => theme.palette.neutral200} !important;
-      -webkit-text-fill-color: ${({ theme }) =>
-        theme.palette.neutral200} !important;
     }
   }
 `;
