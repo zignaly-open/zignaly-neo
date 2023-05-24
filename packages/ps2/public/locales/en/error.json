@@ -36,7 +36,7 @@
     "34": "Order would trigger immediately",
     "35": "Position closed",
     "36": "Error enabling 2FA",
-    "37": "Wrong Code",
+    "37": "2FA code incorrect",
     "38": "The take profit price has already been reached",
     "39": "Take Profit value has to be greater than 1",
     "40": "Selling price would be below allowed minimum order value.",
