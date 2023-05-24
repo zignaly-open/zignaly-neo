@@ -15,6 +15,7 @@ import {
 } from '../../../../../apis/investment/use';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { ColumnDef } from '@tanstack/react-table';
+import { Box } from '@mui/material';
 
 const PendingTransactionsList: React.FC<{
   setView: ChangeViewFn;
@@ -65,7 +66,21 @@ const PendingTransactionsList: React.FC<{
           columns={
             [
               {
-                header: t('modal.pendingTransaction.tableHeader.amount'),
+                header: (
+                  <Box position={'relative'} padding={'5px 15px'}>
+                    <Box
+                      component='img'
+                      sx={{
+                        position: 'absolute',
+                        width: '10px',
+                        right: 0,
+                        top: 0,
+                      }}
+                      src={`/images/portfolio/info-icon.svg`}
+                    />
+                    {t('modal.pendingTransaction.tableHeader.amount')}
+                  </Box>
+                ),
                 accessorKey: 'amount',
                 cell: (props) => (
                   <ZigTablePriceLabel

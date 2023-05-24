@@ -6,7 +6,6 @@ import ZigTypography from "../ZigTypography";
 import { Variant } from "@mui/material/styles/createTypography";
 import { Box, Tooltip } from "@mui/material";
 import { numberOfDecimals, trimZeros } from "../../../utils/numbers";
-import { ReactComponent as InfoIcon } from "../../../assets/icons/info-icon.svg";
 
 const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   id,
@@ -43,11 +42,6 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
     suffix: shortenSuffix,
   } = shortenNumber(+value);
 
-  const showInfoIcon =
-    showApproximate &&
-    numberOfDecimals(value) > (precision || getPrecisionForCoin(coin || "USDT", value)) &&
-    value < 0.01;
-
   const content = (
     <Box position={"relative"}>
       <ZigTypography
@@ -55,13 +49,15 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
         {...withDefaultProps}
         sx={{ whiteSpace: "nowrap", ...(withDefaultProps?.sx || {}) }}
       >
-        {showInfoIcon && <>~</>}
+        {showApproximate &&
+          numberOfDecimals(value) > (precision || getPrecisionForCoin(coin || "USDT", value)) &&
+          value < 0.01 && <>~</>}
         {!!prefix && <>{prefix}</>}
         {+value >= 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
         {usd && "$"}
         <NumericFormat
           value={Math.abs(shorten ? shortened : +value)}
-          renderText={(v) => (showInfoIcon ? v : trimZeros(v))}
+          renderText={(v) => (showApproximate ? v : trimZeros(v))}
           displayType={"text"}
           thousandSeparator={true}
           decimalScale={
@@ -80,11 +76,6 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
             {" "}
             <ZigTypography {...withDefaultPropsCoin}>{coin}</ZigTypography>
           </>
-        )}
-        {showInfoIcon && (
-          <Box position={"absolute"} right={"10px"} top={"-10px"} width={"5px"}>
-            <InfoIcon width={"10px"} />
-          </Box>
         )}
       </ZigTypography>
     </Box>
