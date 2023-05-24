@@ -54,7 +54,7 @@ export const Header = styled('div')<{ compact: boolean }>`
   justify-content: space-between;
   width: 100%;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   ${({ compact }) =>
     compact &&
     `
