@@ -12,7 +12,7 @@ import {
   CenteredLoader,
 } from '@zignaly-open/ui';
 import { WithdrawFormData } from './types';
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import {
   useCoinBalances,
   useExchangeCoinsList,
