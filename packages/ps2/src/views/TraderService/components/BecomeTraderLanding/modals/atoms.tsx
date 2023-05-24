@@ -34,8 +34,6 @@ export const SuccessFieldReceive = styled(Box)`
   min-width: 135px;
   height: 60px;
   text-align: center;
-  border: 1px solid #35334a;
-  border-left-width: 0;
   position: relative;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
