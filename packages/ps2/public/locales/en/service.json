@@ -101,7 +101,7 @@
     "next-step": "Next",
     "service-type": "Service type:",
     "service-name": "Service name",
-    "base-currency": "Base Currency",
+    "base-currency": "Base currency",
     "types": {
       "spot": "Spot",
       "futures": "Futures"

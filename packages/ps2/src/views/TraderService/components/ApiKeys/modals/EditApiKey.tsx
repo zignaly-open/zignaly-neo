@@ -32,6 +32,7 @@ import { formTypeToBackendPayloadType } from '../util';
 import { useCheck2FA } from '../../../../../apis/user/use';
 import { useRefetchIfDesynchronizedState } from '../../../../../apis/serviceApiKey/use';
 import { BackendErrorResponse } from '../../../../../util/errors';
+import { Form, ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 function EditApiKeysModal({
   close,
@@ -112,12 +113,12 @@ function EditApiKeysModal({
       title={t(isCreate ? 'api-keys.create-new-key' : 'api-keys.edit-key')}
     >
       {isCreate && (
-        <ZigTypography sx={{ mb: 3 }}>
+        <ZigTypography>
           {t('api-keys.create-new-key-description')}
         </ZigTypography>
       )}
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <Form onSubmit={handleSubmit(onSubmit)}>
         {!isCreate && (
           <Controller
             name='alias'
@@ -125,9 +126,6 @@ function EditApiKeysModal({
             rules={{ required: true }}
             render={({ field }) => (
               <ZigInput
-                sx={{
-                  mb: 4,
-                }}
                 wide
                 label={t('common:name') + ':'}
                 placeholder={t('common:name')}
@@ -139,47 +137,41 @@ function EditApiKeysModal({
           />
         )}
 
-        <Box sx={{ mb: 4 }}>
+        <ZigCopyText
+          label={t('api-keys.api-key')}
+          value={apiKey.key}
+          onCopied={() => toast.success(t('action:copied'))}
+        />
+        {isCreate ? (
           <ZigCopyText
-            label={t('api-keys.api-key')}
-            value={apiKey.key}
-            onCopied={() => toast.success(t('action:copied'))}
-          />
-        </Box>
-        <Box sx={{ mb: 4 }}>
-          {isCreate ? (
-            <ZigCopyText
-              label={
-                <MultilineLabel
-                  title={t('api-keys.api-secret')}
-                  subtitle={t('api-keys.api-secret-explainer')}
-                />
-              }
-              value={apiKey.secret}
-              onCopied={() => toast.success(t('action:copied'))}
-            />
-          ) : (
-            <>
+            label={
               <MultilineLabel
                 title={t('api-keys.api-secret')}
                 subtitle={t('api-keys.api-secret-explainer')}
               />
-              <Tooltip title={t('api-keys.api-settings-tooltip')}>
-                <ZigTypography>********</ZigTypography>
-              </Tooltip>
-            </>
-          )}
-        </Box>
-
-        <Box sx={{ mb: 4 }}>
-          <ZigCopyText
-            label={t('api-keys.zignaly-code')}
-            value={apiKey.id}
+            }
+            value={apiKey.secret}
             onCopied={() => toast.success(t('action:copied'))}
           />
-        </Box>
+        ) : (
+          <div>
+            <MultilineLabel
+              title={t('api-keys.api-secret')}
+              subtitle={t('api-keys.api-secret-explainer')}
+            />
+            <Tooltip title={t('api-keys.api-settings-tooltip')}>
+              <ZigTypography>********</ZigTypography>
+            </Tooltip>
+          </div>
+        )}
 
-        <Box sx={{ mb: 4 }}>
+        <ZigCopyText
+          label={t('api-keys.zignaly-code')}
+          value={apiKey.id}
+          onCopied={() => toast.success(t('action:copied'))}
+        />
+
+        <div>
           <ZigTypography>{t('api-keys.api-settings')}</ZigTypography>
           <Grid container>
             <Grid item xs={12} md={6}>
@@ -221,9 +213,9 @@ function EditApiKeysModal({
               />
             </Grid>
           </Grid>
-        </Box>
+        </div>
 
-        <Box sx={{ mb: showIpRestrictions ? 1 : 4 }}>
+        <div>
           <ZigTypography>{t('api-keys.restrict-ip')}</ZigTypography>
 
           <RadioGroup
@@ -251,39 +243,38 @@ function EditApiKeysModal({
               label={t('api-keys.ip-restrictions-on')}
             />
           </RadioGroup>
-        </Box>
+          {showIpRestrictions && (
+            <Box sx={{ mt: 2 }}>
+              <Controller
+                name='ipRestrictions'
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <ZigInput
+                    disabled={isLoading}
+                    multiline
+                    rows={2}
+                    wide
+                    label={
+                      <MultilineLabel
+                        title={t('api-keys.ip-restrictions-allowed')}
+                        subtitle={t(
+                          'api-keys.ip-restrictions-allowed-explainer',
+                        )}
+                      />
+                    }
+                    error={t(errors.ipRestrictions?.message, {
+                      maxLength: 500,
+                    })}
+                    {...field}
+                  />
+                )}
+              />
+            </Box>
+          )}
+        </div>
 
-        {showIpRestrictions && (
-          <Box>
-            <Controller
-              name='ipRestrictions'
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <ZigInput
-                  disabled={isLoading}
-                  sx={{
-                    mt: 2,
-                    mb: 4,
-                  }}
-                  multiline
-                  rows={2}
-                  wide
-                  label={
-                    <MultilineLabel
-                      title={t('api-keys.ip-restrictions-allowed')}
-                      subtitle={t('api-keys.ip-restrictions-allowed-explainer')}
-                    />
-                  }
-                  error={t(errors.ipRestrictions?.message, { maxLength: 500 })}
-                  {...field}
-                />
-              )}
-            />
-          </Box>
-        )}
-
-        <Box sx={{ textAlign: 'center', mt: 4 }}>
+        <ModalActions>
           <ZigButton
             id={'api-key__save-and-close'}
             variant={'contained'}
@@ -294,8 +285,8 @@ function EditApiKeysModal({
           >
             {t('action:save-and-close')}
           </ZigButton>
-        </Box>
-      </form>
+        </ModalActions>
+      </Form>
     </ZModal>
   );
 }

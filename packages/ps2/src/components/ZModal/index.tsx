@@ -63,3 +63,4 @@ const ZModal: React.FC<ZModalProps> = ({
 };
 
 export default ZModal;
+export { Form, ModalActions } from './ModalContainer/styles';

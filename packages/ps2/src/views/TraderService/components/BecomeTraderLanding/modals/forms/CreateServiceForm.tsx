@@ -14,15 +14,12 @@ import CoinOption, {
   filterOptions,
 } from '../../../../../Dashboard/components/ManageInvestmentModals/forms/atoms/CoinOption';
 import { useExchangeCoinsList } from '../../../../../../apis/coin/use';
-import { Box, ButtonProps, InputAdornment, Tooltip } from '@mui/material';
+import { ButtonProps, InputAdornment, Tooltip } from '@mui/material';
 import { ZigButtonGroupInputWrapper } from '../atoms';
 import SuccessFeeInputWrapper from './SuccessFeeInputWrapper';
 import { ExchangeType } from '../../../../../../apis/user/types';
 import { ServiceFormData } from './types';
-import {
-  AlertBlock,
-  ModalActions,
-} from 'components/ZModal/ModalContainer/styles';
+import { Form, ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 
 const CreateServiceForm: React.FC<{
@@ -94,8 +91,8 @@ const CreateServiceForm: React.FC<{
   register('serviceType');
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <ZigButtonGroupInputWrapper sx={{ mb: 2 }}>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+      <ZigButtonGroupInputWrapper>
         <ZigButtonGroupInput
           value={exchangeType}
           options={serviceTypes}
@@ -114,23 +111,21 @@ const CreateServiceForm: React.FC<{
         rules={{ required: true }}
         render={({ field }) => (
           <Tooltip title={!exchangeType ? t('create.select-type-first') : ''}>
-            <Box>
-              <ZigSelect
-                disabled={!exchangeType}
-                id={'create-service__base-currency'}
-                menuPlacement='auto'
-                menuShouldScrollIntoView={false}
-                menuPosition='fixed'
-                menuShouldBlockScroll
-                label={t('create.base-currency') + ':*'}
-                placeholder={t('create.base-currency')}
-                options={coinOptions}
-                error={t(errors.baseCurrency?.message)}
-                filterOption={filterOptions}
-                width={240}
-                {...field}
-              />
-            </Box>
+            <ZigSelect
+              disabled={!exchangeType}
+              id={'create-service__base-currency'}
+              menuPlacement='auto'
+              menuShouldScrollIntoView={false}
+              menuPosition='fixed'
+              menuShouldBlockScroll
+              label={t('create.base-currency') + ':*'}
+              placeholder={t('create.base-currency')}
+              options={coinOptions}
+              error={t(errors.baseCurrency?.message)}
+              filterOption={filterOptions}
+              width={240}
+              {...field}
+            />
           </Tooltip>
         )}
       />
@@ -141,10 +136,6 @@ const CreateServiceForm: React.FC<{
         rules={{ required: true }}
         render={({ field }) => (
           <ZigInput
-            sx={{
-              mt: 2,
-              mb: 2,
-            }}
             wide
             id={'create-service__service-name'}
             label={t('create.service-name') + ':'}
@@ -165,9 +156,6 @@ const CreateServiceForm: React.FC<{
               InputProps={{
                 endAdornment: <InputAdornment position='end'>%</InputAdornment>,
               }}
-              sx={{
-                mb: 1,
-              }}
               label={t('create.total-fee')}
               labelInline={true}
               fullWidth={false}
@@ -177,9 +165,7 @@ const CreateServiceForm: React.FC<{
           </SuccessFeeInputWrapper>
         )}
       />
-      <AlertBlock>
-        <ZigAlertMessage text={t('create.please-verify')} warning />
-      </AlertBlock>
+      <ZigAlertMessage text={t('create.please-verify')} warning />
 
       <ModalActions>
         <ZigButton
@@ -191,7 +177,7 @@ const CreateServiceForm: React.FC<{
           {t('create.next-step')}
         </ZigButton>
       </ModalActions>
-    </form>
+    </Form>
   );
 };
 
