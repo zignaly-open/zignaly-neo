@@ -26,6 +26,7 @@ import LabelValueLine from './atoms/LabelValueLine';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import { useWithdrawMutation } from 'apis/coin/api';
 import { useActiveExchange, useCheck2FA } from 'apis/user/use';
+import { precisionNumberToDecimals } from '../../../../../../util/numbers';
 
 function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
   const { t } = useTranslation('withdraw-crypto');
@@ -293,6 +294,11 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
                   (
                     errors?.amount as FieldErrorsImpl<InputAmountAdvancedValueType>
                   )?.value?.message,
+                  {
+                    maxDecimals: precisionNumberToDecimals(
+                      networkObject?.integerMultiple,
+                    ),
+                  },
                 )}
               />
               <Box mt={1}>
