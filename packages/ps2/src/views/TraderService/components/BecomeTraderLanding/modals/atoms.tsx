@@ -28,6 +28,12 @@ export const SuccessFieldWrapper = styled(Box)`
         color: ${({ theme }) => theme.palette.neutral200} !important;
         -webkit-text-fill-color: ${({ theme }) =>
           theme.palette.neutral200} !important;
+
+        ::-webkit-inner-spin-button,
+        ::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
       }
     }
 
