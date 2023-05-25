@@ -7,8 +7,7 @@ export const HeaderDropdownButton = styled('button', {
   appearance: none;
   cursor: pointer;
   border: none;
-  background: #f00;
-  height: 52px;
+  height: 49px;
   margin-top: 4px;
   padding-bottom: 4px;
   padding-left: 15px;
