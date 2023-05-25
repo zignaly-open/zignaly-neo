@@ -49,7 +49,7 @@ const ChooseDepositType: React.FC<{
                 }}
               >
                 <ZigTypography
-                  color={'neutral100'}
+                  variant={'h3'}
                   id={'modal-choose-deposit-type__transfer-crypto'}
                 >
                   {t('service-deposit.transfer-crypto', { coin })}
@@ -86,7 +86,7 @@ const ChooseDepositType: React.FC<{
             >
               <Box textAlign={'center'} height={90} paddingTop={'10px'}>
                 <ZigTypography
-                  color={'neutral100'}
+                  variant={'h3'}
                   id={'modal-choose-deposit-type__buy-crypto'}
                 >
                   {t('service-deposit.buy-crypto', { coin })}

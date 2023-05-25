@@ -33,6 +33,7 @@ import {
   BUY_CRYPTO_URL,
   DEPOSIT_INFO_URL,
 } from '../../../../../../util/constants';
+import { Form } from 'components/ZModal';
 
 function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
@@ -108,28 +109,26 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit(() => {})}>
-      <Box mt={1} mb={1}>
-        <ZigTypography id={'modal-deposit__description'}>
-          <Trans t={t} i18nKey={'description'}>
-            <BinanceLogo
-              width={16}
-              height={16}
-              style={{
-                verticalAlign: 'middle',
-              }}
-              id={'modal-deposit-description__binance-logo'}
-            />
-            <ZigLink
-              href={DEPOSIT_INFO_URL}
-              id={'modal-deposit-description__external-link'}
-            ></ZigLink>
-          </Trans>
-        </ZigTypography>
-      </Box>
+    <Form onSubmit={handleSubmit(() => {})}>
+      <ZigTypography id={'modal-deposit__description'}>
+        <Trans t={t} i18nKey={'description'}>
+          <BinanceLogo
+            width={16}
+            height={16}
+            style={{
+              verticalAlign: 'middle',
+            }}
+            id={'modal-deposit-description__binance-logo'}
+          />
+          <ZigLink
+            href={DEPOSIT_INFO_URL}
+            id={'modal-deposit-description__external-link'}
+          ></ZigLink>
+        </Trans>
+      </ZigTypography>
 
-      <Grid container>
-        <Grid item xs={12} md={6} pt={3}>
+      <Grid container rowGap={4}>
+        <Grid item xs={12} md={6}>
           <Controller
             name='coin'
             control={control}
@@ -157,7 +156,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             xs={12}
             md={6}
             sx={{
-              pt: 6,
+              pt: 3,
               pl: 6,
               display: 'flex',
               flexDirection: 'column',
@@ -226,7 +225,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
           </Grid>
         )}
 
-        <Grid item xs={12} pt={3}>
+        <Grid item xs={12}>
           <Controller
             name='network'
             control={control}
@@ -248,7 +247,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
 
         {!!network && networkObject?.depositEnable && (
           <>
-            <Grid item xs={12} pt={3}>
+            <Grid item xs={12}>
               <ZigCopyText
                 id={'modal-deposit__deposit-address'}
                 copyElementId={'modal-deposit__deposit-address-copy'}
@@ -274,7 +273,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             </Grid>
 
             {!!depositInfo?.tag && (
-              <Grid item xs={12} pt={3}>
+              <Grid item xs={12}>
                 <ZigCopyText
                   id={'deposit__deposit-memo'}
                   copyElementId={'modal-deposit__deposit-memo-copy'}
@@ -294,7 +293,6 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             <Grid
               item
               xs={12}
-              mt={3}
               sx={{
                 minHeight: '200px',
                 alignItems: 'center',
@@ -346,7 +344,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         {!!network && !networkObject?.depositEnable && (
           <ErrorMessage text={t('no-network')} />
         )}
-        <Grid item xs={12} pt={3}>
+        <Grid item xs={12}>
           <ZigTypography variant={'body2'} color={'neutral300'}>
             <ZigLink
               href={BUY_CRYPTO_URL}
@@ -367,7 +365,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
           </ZigTypography>
         </Grid>
       </Grid>
-    </form>
+    </Form>
   );
 }
 
