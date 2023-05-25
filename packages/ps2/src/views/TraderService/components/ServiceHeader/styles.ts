@@ -44,8 +44,7 @@ export const Option = styled('span', {
   & > * {
     transition: color 0.2s;
     color: ${({ theme, active }) =>
-      (active ? theme.palette.highlighted : '' + theme.palette.neutral300) +
-      ''};
+      active ? theme.palette.highlighted : theme.palette.neutral300};
   }
 
   &:hover {
