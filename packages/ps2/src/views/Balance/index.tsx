@@ -55,7 +55,7 @@ const MyBalances: React.FC = () => {
           <Box sx={{ flex: '0 0 100px' }}>
             <ZigButton
               id={'balances__deposit-header'}
-              startIcon={<ZigPlusIcon />}
+              startIcon={<ZigPlusIcon width={17} height={17} />}
               sx={{ fontWeight: 600, mb: 1 }}
               variant={'contained'}
               onClick={() =>

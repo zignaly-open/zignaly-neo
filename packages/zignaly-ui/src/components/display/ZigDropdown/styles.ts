@@ -1,6 +1,6 @@
 import styled, { css } from "styled-components";
 import { styledIf } from "utils/styled";
-import { ReactComponent as ArrowBottomIcon } from "assets/icons/arrow-bottom-icon.svg";
+import { ReactComponent as ArrowBottomIcon } from "assets/icons/caret-down.svg";
 import dark from "theme/dark";
 
 const withSeparator = (props: WithSeparator) =>
@@ -21,6 +21,7 @@ type WithSeparator = { separator?: boolean };
 
 export const ZigDropdownContainer = styled.div`
   user-select: none;
+  min-width: 275px;
 `;
 
 export const Component = styled.div`
@@ -41,11 +42,11 @@ export const ComponentWrapper = styled.div<WithSeparator>`
 export const NavLink = styled.span<
   { notClickable?: boolean; active?: boolean; disabled?: boolean } & WithSeparator
 >`
-  color: ${dark.neutral200};
-  font-weight: 500;
+  color: ${dark.neutral100};
+  font-weight: 400;
   font-size: 14px;
   line-height: 28px;
-  padding: 12px 30px;
+  padding: 6px 36px;
   letter-spacing: 0.55px;
   text-decoration: none;
   transition: 0.15s linear;
@@ -115,6 +116,7 @@ export const SpaceTaker = styled.span`
   flex: 1;
 `;
 
-export const ArrowBottomIconStyled = styled(ArrowBottomIcon)`
+export const ArrowBottomIconStyled = styled(ArrowBottomIcon)<{ rotated?: boolean }>`
   transition: 0.15s linear;
+  transform: rotate(${(props) => (props.rotated ? "180deg" : "0deg")});
 `;
