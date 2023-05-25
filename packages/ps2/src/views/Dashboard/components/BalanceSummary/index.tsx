@@ -29,7 +29,6 @@ export const BalanceSummary = ({
             id={prefixId && serviceId && `${prefixId}__invested-${serviceId}`}
             value={new BigNumber(totalValue).toFixed()}
             coin={coin}
-            showApproximate
           />
         )}
       </Box>

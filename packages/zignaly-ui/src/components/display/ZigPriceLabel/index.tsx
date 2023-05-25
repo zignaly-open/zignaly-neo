@@ -49,8 +49,9 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
       sx={{ whiteSpace: "nowrap", ...(withDefaultProps?.sx || {}) }}
     >
       {showApproximate &&
-        numberOfDecimals(value) > (precision || getPrecisionForCoin(coin || "USDT", value)) &&
-        value < 0.01 && <>~</>}
+        numberOfDecimals(value) > (precision || getPrecisionForCoin(coin || "USDT", value)) && (
+          <>~</>
+        )}
       {!!prefix && <>{prefix}</>}
       {+value >= 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
       {usd && "$"}
