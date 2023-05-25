@@ -97,7 +97,7 @@ const BalanceButton = () => {
             }}
           >
             <Box gap={1} display='flex' justifyContent='space-between'>
-              <ZigTypography variant='body2' color='neutral300' fontSize='12px'>
+              <ZigTypography variant='body2' color='neutral200' fontSize='11px'>
                 {t('portfolio')}
               </ZigTypography>
               <ZigPriceLabel
@@ -109,7 +109,7 @@ const BalanceButton = () => {
               />
             </Box>
             <Box gap={1} display='flex' justifyContent='space-between'>
-              <ZigTypography variant='body2' color='neutral300' fontSize='12px'>
+              <ZigTypography variant='body2' color='neutral200' fontSize='11px'>
                 {t('balance.available')}
               </ZigTypography>
               <ZigPriceLabel
@@ -126,8 +126,9 @@ const BalanceButton = () => {
             orientation='vertical'
             sx={{
               borderColor: (theme) => theme.palette.neutral600,
+              borderStyle: 'dotted',
               mx: 1.5,
-              my: 0,
+              my: '7px',
             }}
             flexItem
           />
@@ -140,9 +141,9 @@ const BalanceButton = () => {
           >
             <ZigTypography
               variant='body2'
-              color='neutral300'
               textAlign='center'
-              fontSize='12px'
+              color='neutral200'
+              fontSize='11px'
             >
               {balanceStatus === BalanceStatus.NoFunds
                 ? t('balance.deposit-funds')
