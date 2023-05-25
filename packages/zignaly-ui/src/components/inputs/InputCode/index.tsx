@@ -5,7 +5,7 @@ import { Layout } from "./styles";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
 import { Box } from "@mui/material";
 
-// TODO: rename to ZigInoutCode
+// TODO: rename to ZigInputCode
 function InputCode({
   fields,
   loading,
@@ -37,6 +37,7 @@ function InputCode({
     }
   }, [error, clearOnError]);
 
+  // @ts-ignore
   return (
     <Layout error={error || undefined}>
       <Box id={prefixId && `${prefixId}__code-input`}>
