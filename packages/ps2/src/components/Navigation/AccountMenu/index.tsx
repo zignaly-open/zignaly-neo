@@ -40,9 +40,11 @@ import DepositModal from '../../../views/Dashboard/components/ManageInvestmentMo
 import { ZigDropdownHandleType, ZigArrowBottomIcon } from '@zignaly-open/ui';
 import { ReactComponent as GiftIcon } from '../../../images/tab-rewards.svg';
 import { ReactComponent as InviteIcon } from '../../../images/tab-referrals.svg';
+import { usePrefetchTranslation } from '../../../util/i18nextHelpers';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme();
+  usePrefetchTranslation('settings');
   const logout = useLogout();
   const { t } = useTranslation(['common', 'action']);
   const isAuthenticated = useIsAuthenticated();
@@ -115,7 +117,7 @@ function AccountMenu(): React.ReactElement | null {
           label: (
             <AccountDropdown>
               <Avatar size={'medium'} image={activeExchange?.image} />
-              <AccountName variant={'body1'} color={'neutral100'}>
+              <AccountName variant={'body1'} color={'neutral200'}>
                 {activeExchange?.internalName}
               </AccountName>
             </AccountDropdown>
@@ -181,8 +183,8 @@ function AccountMenu(): React.ReactElement | null {
           element: (
             <ZigButton
               id={'invest-form__deposit'}
-              startIcon={<ZigPlusIcon />}
-              sx={{ fontWeight: 600, mb: 1.5, mt: 1.5 }}
+              startIcon={<ZigPlusIcon width={17} height={17} />}
+              sx={{ fontWeight: 600, mt: '10px', mb: '20px' }}
               variant={'contained'}
               onClick={() => {
                 // fun fact: without onClose react-select acts funky
@@ -232,7 +234,12 @@ function AccountMenu(): React.ReactElement | null {
           label: (
             <ZigTypography
               component={'p'}
-              sx={{ textAlign: 'center', p: 0.5, width: '100%' }}
+              sx={{
+                textAlign: 'center',
+                p: 0.5,
+                fontSize: '14px',
+                width: '100%',
+              }}
               color={'links'}
             >
               {t('account-menu.notAuth-button-logOut')}

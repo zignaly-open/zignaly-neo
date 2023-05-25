@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box } from '@mui/material';
 import {
   ZigAlertMessage,
   ZigButton,
@@ -10,10 +9,9 @@ import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useUpdatePasswordMutation } from 'apis/user/api';
 import { useForm, Controller } from 'react-hook-form';
-import { Form } from './styles';
 import { UpdatePasswordValidation } from './validations';
 import { UpdatePasswordFormType } from './types';
-import { ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { Form, ModalActions } from 'components/ZModal';
 import { useCheck2FA, useLogout } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
 
@@ -57,11 +55,9 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
 
   return (
     <>
-      <Box mt={1} mb={1}>
-        <ZigTypography whiteSpace='pre-line'>
-          {t('update-password.description')}
-        </ZigTypography>
-      </Box>
+      <ZigTypography whiteSpace='pre-line'>
+        {t('update-password.description')}
+      </ZigTypography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name='password'

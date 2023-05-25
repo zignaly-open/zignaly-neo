@@ -12,7 +12,7 @@ const Invest: React.FC<{
     <EditInvestmentSuccess close={close} />
   ) : (
     <>
-      <InvestorDetails />
+      <InvestorDetails prefixId={'invest-modal'} />
       <InvestForm close={close} onInvested={() => setIsInvested(true)} />
     </>
   );

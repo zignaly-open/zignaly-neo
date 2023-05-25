@@ -18,7 +18,7 @@ const SuccessFeeInputWrapper: React.FC<{
     <>
       <SuccessFieldWrapper>
         <ZigTypography>{t('summary.success-fee')}</ZigTypography>
-        <ZigTypography variant='h4' color='neutral400'>
+        <ZigTypography variant='body2' color='neutral400'>
           {t('edit.success-fee-desc')}
         </ZigTypography>
 
@@ -26,8 +26,8 @@ const SuccessFeeInputWrapper: React.FC<{
           {children}
           <SuccessFieldReceive>
             <ZigTypography
-              variant='h5'
-              color='neutral300'
+              variant='caption'
+              color='neutral400'
               textAlign='center'
               sx={{
                 position: 'absolute',
@@ -39,7 +39,7 @@ const SuccessFeeInputWrapper: React.FC<{
               {t('you-receive')}
             </ZigTypography>
             <Box display='flex' paddingTop='23px'>
-              <ZigTypography color='neutral300' textAlign='center' width='100%'>
+              <ZigTypography color='neutral400' textAlign='center' width='100%'>
                 {Math.round(feeWeCharge)}
               </ZigTypography>
               <ZigTypography

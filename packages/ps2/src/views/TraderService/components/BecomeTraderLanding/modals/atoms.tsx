@@ -22,6 +22,19 @@ export const SuccessFieldWrapper = styled(Box)`
         text-align: center;
         margin-left: 22px;
       }
+
+      .MuiTypography-root,
+      input {
+        color: ${({ theme }) => theme.palette.neutral200} !important;
+        -webkit-text-fill-color: ${({ theme }) =>
+          theme.palette.neutral200} !important;
+
+        ::-webkit-inner-spin-button,
+        ::-webkit-outer-spin-button {
+          -webkit-appearance: none;
+          margin: 0;
+        }
+      }
     }
 
     p {
@@ -34,8 +47,6 @@ export const SuccessFieldReceive = styled(Box)`
   min-width: 135px;
   height: 60px;
   text-align: center;
-  border: 1px solid #35334a;
-  border-left-width: 0;
   position: relative;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;

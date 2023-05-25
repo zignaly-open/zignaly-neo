@@ -17,7 +17,7 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
   return (
     <Box display='flex' flexDirection='column' alignItems='center'>
       <Grid container md={8}>
-        <InvestorDetails />
+        <InvestorDetails prefixId={'withdraw-modal'} />
 
         <Grid
           container
@@ -34,13 +34,14 @@ const WithdrawInvestment: React.FC<{ setView: ChangeViewFn }> = ({
                 sx={{ textAlign: 'justify' }}
                 variant={'body1'}
                 color={'neutral200'}
+                id={'withdraw-modal__description'}
               >
                 {t('modal.withdrawInvestment.freeWithdrawal.description')}
               </ZigTypography>
 
               <WithdrawFundsButtonWrapper>
                 <ZigButton
-                  id={'withdraw__confirm-withdraw'}
+                  id={'withdraw-modal__confirm-withdraw'}
                   onClick={() => setView(EditInvestmentViews.WithdrawPerform)}
                   variant='contained'
                   size='large'

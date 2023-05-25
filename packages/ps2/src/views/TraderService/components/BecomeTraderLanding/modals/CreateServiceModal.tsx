@@ -43,12 +43,12 @@ function CreateServiceModal({
         e.stopPropagation();
         return false;
       }}
-      wide
       {...props}
       close={close}
       title={
         step === 1 ? t('create.invest-in-your-service') : t('create.title')
       }
+      width={622}
     >
       {isLoading && <CenteredLoader />}
       {!isLoading && step === 0 && (
