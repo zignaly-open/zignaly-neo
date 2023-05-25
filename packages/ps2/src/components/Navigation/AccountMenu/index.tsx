@@ -40,9 +40,11 @@ import DepositModal from '../../../views/Dashboard/components/ManageInvestmentMo
 import { ZigDropdownHandleType, ZigArrowBottomIcon } from '@zignaly-open/ui';
 import { ReactComponent as GiftIcon } from '../../../images/tab-rewards.svg';
 import { ReactComponent as InviteIcon } from '../../../images/tab-referrals.svg';
+import { usePrefetchTranslation } from '../../../util/i18nextHelpers';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme();
+  usePrefetchTranslation('settings');
   const logout = useLogout();
   const { t } = useTranslation(['common', 'action']);
   const isAuthenticated = useIsAuthenticated();
