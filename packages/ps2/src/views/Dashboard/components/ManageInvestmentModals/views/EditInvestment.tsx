@@ -10,8 +10,11 @@ const EditInvestment: React.FC<{
 }> = ({ setView, close }) => {
   return (
     <>
-      <InvestorDetails />
-      <PendingTransactions setView={setView} />
+      <InvestorDetails prefixId={'edit-investment-modal'} />
+      <PendingTransactions
+        setView={setView}
+        prefixId={'edit-investment-modal'}
+      />
       <EditInvestmentForm
         close={close}
         setView={setView}

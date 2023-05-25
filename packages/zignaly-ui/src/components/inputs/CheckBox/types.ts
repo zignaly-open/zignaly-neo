@@ -4,4 +4,5 @@ export type CheckBoxProps = {
   label: string;
   onChange?: (value: boolean) => void;
   disabled?: boolean;
+  id?: string;
 };

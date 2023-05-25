@@ -53,10 +53,11 @@ const ReferralButton = () => {
             <ZigTypography
               sx={{
                 mt: '1px',
-                fontSize: '12px',
+                fontSize: '11px',
                 lineHeight: 1.3,
                 textAlign: 'center',
               }}
+              color='neutral200'
             >
               {t('header.referrals.description')}
             </ZigTypography>

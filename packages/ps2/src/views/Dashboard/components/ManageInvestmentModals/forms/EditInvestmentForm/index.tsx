@@ -118,18 +118,28 @@ function EditInvestmentForm({
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Field>
         <Row>
-          <ZigTypography variant={'body1'}>{t('form.title')}</ZigTypography>
+          <ZigTypography variant={'body1'} id={'edit-investment-modal__title'}>
+            {t('form.title')}
+          </ZigTypography>
           <AmountInvested>
-            <ZigCoinIcon coin={coin.id} />
+            <ZigCoinIcon
+              coin={coin.id}
+              id={'edit-investment-modal__coin-icon'}
+            />
             <TokenValue>
               <ZigTypography variant={'bigNumber'} color={'neutral100'}>
                 <NumericFormat
+                  id={'edit-investment-modal__invested'}
                   value={details?.invested}
                   displayType={'text'}
                   thousandSeparator={true}
                 />
               </ZigTypography>
-              <ZigTypography variant={'h3'} color={'neutral400'}>
+              <ZigTypography
+                variant={'h3'}
+                color={'neutral400'}
+                id={'edit-investment-modal__coin-name'}
+              >
                 {String(coin.id).toUpperCase()}
               </ZigTypography>
             </TokenValue>
@@ -142,6 +152,7 @@ function EditInvestmentForm({
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSliderInput
+                prefixId={'edit-investment-modal'}
                 mode={'range'}
                 labels={{
                   top: t('form.profits.title'),
@@ -159,6 +170,7 @@ function EditInvestmentForm({
       {coin && (
         <InputContainer>
           <InputAmountAdvanced
+            id={'edit-investment-modal__input-amount'}
             name={'amountTransfer'}
             control={control}
             label={t('form.inputAmount.label')}
@@ -180,7 +192,7 @@ function EditInvestmentForm({
 
       <ModalActions direction='column'>
         <ZigButton
-          id={'edit-investment__save-invest'}
+          id={'edit-investment-modal__save-invest'}
           size={'large'}
           type={'submit'}
           loading={isEditingInvestment}
@@ -190,7 +202,7 @@ function EditInvestmentForm({
         </ZigButton>
         <ZigButton
           variant={'text'}
-          id={'edit-investment__withdraw'}
+          id={'edit-investment-modal__withdraw'}
           endIcon={
             <KeyboardArrowRightIcon
               sx={{ width: '22px !important', height: '22px !important' }}

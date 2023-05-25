@@ -26,8 +26,8 @@ const SuccessFeeInputWrapper: React.FC<{
           {children}
           <SuccessFieldReceive>
             <ZigTypography
-              variant='h5'
-              color='neutral300'
+              variant='caption'
+              color='neutral400'
               textAlign='center'
               sx={{
                 position: 'absolute',

@@ -10,20 +10,33 @@ const InvestorDetailsForService: React.FC<{
     serviceLogo?: string;
     successFee: string;
   };
-}> = ({ service }) => {
+  prefixId?: string;
+}> = ({ service, prefixId }) => {
   const { t } = useTranslation('edit-investment');
   return (
-    <Investor>
+    <Investor id={prefixId && `${prefixId}__investor-details`}>
       {!!service.serviceLogo && (
-        <Avatar size={'xx-large'} image={getServiceLogo(service.serviceLogo)} />
+        <Avatar
+          size={'xx-large'}
+          image={getServiceLogo(service.serviceLogo)}
+          id={prefixId && `${prefixId}__investor-details-avatar`}
+        />
       )}
       <InvestorData>
-        <InvestorName variant={'h2'} color={'neutral100'}>
+        <InvestorName
+          variant={'h2'}
+          color={'neutral100'}
+          id={prefixId && `${prefixId}__investor-details-name`}
+        >
           {service.serviceName}
         </InvestorName>
 
         {service.successFee?.toString() && (
-          <ZigTypography variant={'h3'} color={'neutral400'}>
+          <ZigTypography
+            variant={'h3'}
+            color={'neutral400'}
+            id={prefixId && `${prefixId}__investor-details-fee`}
+          >
             {t('investorDetail-successFee', {
               fee: service.successFee,
             })}

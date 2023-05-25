@@ -116,20 +116,31 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
         <div>
           {isConfirmation ? (
             <>
-              <ZigTypography variant={'body1'}>
+              <ZigTypography
+                variant={'body1'}
+                id={'invest-modal-confirmation__amount-to-invest-label'}
+              >
                 {t('invest-modal.amount-to-invest')}
               </ZigTypography>
               <AmountInvested>
-                <ZigCoinIcon coin={coin.id} />
+                <ZigCoinIcon
+                  coin={coin.id}
+                  id={'invest-modal-confirmation__coin-icon'}
+                />
                 <TokenValue>
                   <ZigTypography variant={'bigNumber'} color={'neutral100'}>
                     <NumericFormat
+                      id={'invest-modal-confirmation__amount-to-invest'}
                       value={watch('amountTransfer')!.value.toString()}
                       displayType={'text'}
                       thousandSeparator={true}
                     />
                   </ZigTypography>
-                  <ZigTypography variant={'h3'} color={'neutral400'}>
+                  <ZigTypography
+                    variant={'h3'}
+                    color={'neutral400'}
+                    id={'invest-modal-confirmation__coin'}
+                  >
                     {String(coin.id).toUpperCase()}
                   </ZigTypography>
                 </TokenValue>
@@ -138,6 +149,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           ) : (
             <>
               <InputAmountAdvanced
+                id={'invest-modal__input-amount'}
                 name={'amountTransfer'}
                 control={control}
                 label={t('form.inputAmount.label')}
@@ -157,7 +169,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
 
               <Box>
                 <ZigButton
-                  id={'account-menu-dropdown__deposit'}
+                  id={'invest-modal__deposit'}
                   startIcon={<Add />}
                   sx={{
                     fontWeight: 400,
@@ -167,7 +179,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                   variant={'text'}
                   onClick={() =>
                     showModal(DepositModal, {
-                      ctaId: 'account-menu-deposit',
+                      ctaId: 'invest-modal-deposit',
                       selectedCoin: coin.id,
                     })
                   }
@@ -181,13 +193,17 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
         <div>
           {isConfirmation ? (
             <>
-              <ZigTypography variant={'body1'}>
+              <ZigTypography
+                variant={'body1'}
+                id={'invest-modal-confirmation__percentage-to-withdraw'}
+              >
                 {t('form.profits.title-confirmation')}
               </ZigTypography>
               <AmountInvested>
                 <TokenValue>
                   <ZigTypography variant={'bigNumber'} color={'neutral100'}>
                     <NumericFormat
+                      id={'invest-modal-confirmation__profit-percentage'}
                       value={watch('profitPercentage').toString()}
                       displayType={'text'}
                       suffix={'%'}
@@ -204,6 +220,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
               rules={{ required: true }}
               render={({ field }) => (
                 <ZigSliderInput
+                  prefixId={'invest-modal'}
                   mode={'range'}
                   labels={{
                     top: t('form.profits.title'),
@@ -225,6 +242,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           control={control}
           render={({ field }) => (
             <ZigInput
+              id={'invest-modal-confirmation__input-transfer'}
               label={t('invest-modal.type-transfer', {
                 word: transferMagicWord,
               })}
@@ -256,6 +274,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           defaultValue={false}
           render={({ field: { onChange, value } }) => (
             <CheckBox
+              id={'invest-modal__understand-margin'}
               onChange={onChange}
               value={value}
               label={t('invest-modal.i-understand-margin', {
@@ -271,6 +290,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           defaultValue={false}
           render={({ field: { onChange, value } }) => (
             <CheckBox
+              id={'invest-modal__understand-money-transferred'}
               onChange={onChange}
               value={value}
               label={t('invest-modal.i-understand-money-transferred')}
@@ -281,7 +301,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
 
       <ModalActions>
         <ZigButton
-          id={'invest-confirm'}
+          id={'invest-modal__confirm'}
           size={'large'}
           type={'submit'}
           loading={isLoading}
@@ -295,7 +315,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
             : t('form.button.continue-to-confirmation')}
         </ZigButton>
         <ZigButton
-          id={'invest-close'}
+          id={'invest-modal__close'}
           size={'large'}
           type={'button'}
           disabled={isLoading}
