@@ -39,7 +39,7 @@ function InputCode({
 
   // @ts-ignore
   return (
-    <Layout error={error || undefined}>
+    <Layout error={error || undefined} loading={loading}>
       <Box id={prefixId && `${prefixId}__code-input`}>
         <ReactCodeInput
           ref={inputRef}
@@ -49,6 +49,7 @@ function InputCode({
           disabled={loading}
           autoFocus={autoFocus}
           onComplete={onComplete}
+          placeholder={[...Array(fields).keys()].map(() => "")}
         />
       </Box>
       {error && <ErrorMessage text={error} id={prefixId && `${prefixId}__error-message`} />}
