@@ -37,10 +37,10 @@ const DropdownStorybookCrutch: React.FC = () => {
           target: "_blank",
           href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         },
+        { separator: true },
         {
           label: "Important link 3 with separator",
           id: "dropwown-one",
-          separator: true,
           target: "_blank",
           href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         },

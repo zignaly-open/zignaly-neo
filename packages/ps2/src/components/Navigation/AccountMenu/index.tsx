@@ -123,6 +123,7 @@ function AccountMenu(): React.ReactElement | null {
             </AccountDropdown>
           ),
           id: 'account-menu-dropdown__account-switcher',
+          customStyle: `background: #171a31;`,
           children: (exchanges?.length > 1 ? exchanges : []).map(
             (exchange, index) => ({
               onClick: () => setActiveExchange(exchange.internalId),
@@ -183,7 +184,7 @@ function AccountMenu(): React.ReactElement | null {
           element: (
             <ZigButton
               id={'invest-form__deposit'}
-              startIcon={<ZigPlusIcon width={17} height={17} />}
+              startIcon={<ZigPlusIcon width={10} height={10} />}
               sx={{ fontWeight: 600, mt: '10px', mb: '20px' }}
               variant={'contained'}
               onClick={() => {
@@ -198,8 +199,9 @@ function AccountMenu(): React.ReactElement | null {
             </ZigButton>
           ),
         },
+        { separator: true },
         {
-          separator: true,
+          customStyle: `margin-top: 12px;`,
           label: (
             <>
               <GiftIcon
@@ -215,6 +217,7 @@ function AccountMenu(): React.ReactElement | null {
           onClick: () => navigate(ROUTE_REWARDS),
         },
         {
+          customStyle: `margin-bottom: 12px;`,
           label: (
             <>
               <InviteIcon
@@ -229,14 +232,14 @@ function AccountMenu(): React.ReactElement | null {
           href: generatePath(ROUTE_REFERRALS),
           onClick: () => navigate(ROUTE_REFERRALS),
         },
+        { separator: true },
         {
-          separator: true,
           label: (
             <ZigTypography
               component={'p'}
               sx={{
                 textAlign: 'center',
-                p: 0.5,
+                p: '9px',
                 fontSize: '14px',
                 width: '100%',
               }}

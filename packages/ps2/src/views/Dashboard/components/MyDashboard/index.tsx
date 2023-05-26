@@ -202,7 +202,7 @@ const MyDashboard: React.FC = () => {
                 <Box sx={{ flex: '0 0 100px' }}>
                   <ZigButton
                     id={'my-portfolio__deposit'}
-                    startIcon={<ZigPlusIcon width={17} height={17} />}
+                    startIcon={<ZigPlusIcon width={10} height={10} />}
                     sx={{ fontWeight: 600, mb: 1 }}
                     variant={'contained'}
                     onClick={() =>

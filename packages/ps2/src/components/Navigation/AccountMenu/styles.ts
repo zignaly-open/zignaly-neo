@@ -44,6 +44,7 @@ export const LoginButton = styled('span')`
 export const AccountName = styled(ZigTypography)`
   max-width: 155px;
   overflow: hidden;
+  font-size: 14px;
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
