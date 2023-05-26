@@ -120,7 +120,7 @@ export default function ZigTable<T extends object>({
                 })}
 
                 {enableColumnVisibility && table.getHeaderGroups().length === groupIndex + 1 && (
-                  <th>
+                  <th style={{ width: "50px" }}>
                     <ZigDropdown
                       component={() => (
                         <HeaderIconButton id={prefixId && `${prefixId}-table__popover-filter`}>
@@ -166,22 +166,16 @@ export default function ZigTable<T extends object>({
                       style: { cursor: "pointer" },
                     })}
                   >
-                    {row.getVisibleCells().map((cell, index) => {
+                    {row.getVisibleCells().map((cell) => {
                       return (
-                        <td
-                          key={cell.id}
-                          colSpan={
-                            enableColumnVisibility && row.getVisibleCells().length === index + 1
-                              ? 2
-                              : undefined
-                          }
-                        >
+                        <td key={cell.id}>
                           <ZigTypography fontWeight="medium" color="neutral200">
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </ZigTypography>
                         </td>
                       );
                     })}
+                    {enableColumnVisibility && <td />}
                   </tr>
                   {row.getIsExpanded() && (
                     <tr style={{ border: "none", padding: "0 14px" }}>
