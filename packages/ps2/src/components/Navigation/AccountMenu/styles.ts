@@ -23,7 +23,7 @@ export const HeaderDropdownButton = styled('button', {
   }
 
   transition: background-color 0.2s;
-  border-radius: 5px 5px 0 0;
+  border-radius: ${(props) => (props.active ? '5px 5px 0 0' : '5px')};
 `;
 
 export const LoginButton = styled('span')`
