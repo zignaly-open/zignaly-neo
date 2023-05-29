@@ -8,6 +8,7 @@ declare global {
       push: (payload: unknown) => void;
     };
     safari?: unknown;
+    _paq: any;
   }
 }
 
