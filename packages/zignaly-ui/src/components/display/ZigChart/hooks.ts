@@ -29,7 +29,7 @@ const getYDomain = (data: AxisFormat[]) => {
   } else if (ranges[1] <= 0) {
     // If all values are negative, we need to force the upper value to be slightly above 0 to
     // avoid the x axis being on top.
-    // This doesn't work:https://stackoverflow.com/questions/53392275/victory-how-to-display-x-axis-from-the-lowest-negative-y-axis-value
+    // This doesn't work: https://stackoverflow.com/a/53396988/1494428
 
     // Calculate the data range, then set the upper limit to a small fraction of that range
     ranges[1] = Math.abs(ranges[1] - ranges[0]) * 0.01;
@@ -62,7 +62,6 @@ export function useChartData(
     const yDomain = getYDomain(chart);
     return [chart.map((c) => ({ ...c, y0: yDomain[0] })), yDomain];
   }, [data]);
-  console.log(processedData, yDomain);
 
   const firstTimestamp = processedData[0].y;
   const lastTimeStamp = processedData[data.length - 1].y;
