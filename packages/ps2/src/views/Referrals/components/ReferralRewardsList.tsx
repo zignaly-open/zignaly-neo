@@ -474,20 +474,22 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         </ZigTypography>
       </Grid>
 
-      <Grid
-        item
-        xs={12}
-        md={Math.min(4, 12 / cols) * elementsThem.slice(0, 1).length}
-      >
-        <ZigTypography
-          variant={'h1'}
-          textAlign={'center'}
-          fontWeight={600}
-          sx={{ mt: 2, mb: 2.5 }}
+      {elementsThem?.length > 0 && (
+        <Grid
+          item
+          xs={12}
+          md={Math.min(4, 12 / cols) * elementsThem.slice(0, 1).length}
         >
-          {t('what-they-get')}
-        </ZigTypography>
-      </Grid>
+          <ZigTypography
+            variant={'h1'}
+            textAlign={'center'}
+            fontWeight={600}
+            sx={{ mt: 2, mb: 2.5 }}
+          >
+            {t('what-they-get')}
+          </ZigTypography>
+        </Grid>
+      )}
 
       <Grid item xs={12} />
 
