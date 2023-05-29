@@ -196,20 +196,23 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
   );
 
   const elementsThem = useMemo(
-    () => [
-      config.enableSuccessFeeReward && !!config.zignalySuccessFee && (
-        <Trans
-          i18nKey='referrals:they-get-invest'
-          t={t}
-          values={hardcodedInviteeReward}
-        >
-          {/*desparate times call for desperate measures*/}
-          <ZigTypography sx={{ opacity: 0 }} />
-          <TotalBoxValue />
-          <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
-        </Trans>
-      ),
-    ],
+    () =>
+      [
+        config.enableSuccessFeeReward &&
+          !!config.zignalySuccessFee &&
+          hardcodedInviteeReward && (
+            <Trans
+              i18nKey='referrals:they-get-invest'
+              t={t}
+              values={hardcodedInviteeReward}
+            >
+              {/*desparate times call for desperate measures*/}
+              <ZigTypography sx={{ opacity: 0 }} />
+              <TotalBoxValue />
+              <ZigTypography color='neutral400' sx={{ fontSize: '13px' }} />
+            </Trans>
+          ),
+      ].filter(Boolean),
     [config, t],
   );
 
@@ -376,16 +379,19 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
   );
 
   const modalThemElements = useMemo(
-    () => [
-      <Trans
-        key='they-get-invest-modal'
-        i18nKey='they-get-invest-modal'
-        t={t}
-        values={hardcodedInviteeReward}
-      >
-        <ZigTypography fontWeight={600} color={'neutral100'} />
-      </Trans>,
-    ],
+    () =>
+      [
+        hardcodedInviteeReward && (
+          <Trans
+            key='they-get-invest-modal'
+            i18nKey='they-get-invest-modal'
+            t={t}
+            values={hardcodedInviteeReward}
+          >
+            <ZigTypography fontWeight={600} color={'neutral100'} />
+          </Trans>
+        ),
+      ].filter(Boolean),
     [config, t],
   );
 
