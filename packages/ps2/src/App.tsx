@@ -24,6 +24,7 @@ import useReferralCookie from 'util/hooks/useReferralCookie';
 import BottomNavigation from 'components/Navigation/BottomNavigation';
 import { zigSuspenseFallback } from './util/suspense';
 import ZModal from './components/ZModal';
+import { ChunkLoadErrorBoundary } from './util/ChunkLoadErrorBoundary';
 
 if (
   process.env.NODE_ENV === 'production' &&
@@ -40,35 +41,39 @@ if (
 export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
   children,
 }) => (
-  <Provider store={store}>
-    <ThemeInheritorStyled theme={dark}>
-      <ThemeInheritorMui theme={theme}>
-        <ThemeProviderMui theme={theme}>
-          <GlobalStyle />
-          <ToastContainer
-            position='top-right'
-            autoClose={5000}
-            hideProgressBar
-            closeOnClick
-            pauseOnFocusLoss
-            draggable
-            closeButton={false}
-            pauseOnHover
-            theme='dark'
-          />
-          <PersistGate persistor={persistor}>
-            <BrowserRouter>
-              <Suspense fallback={zigSuspenseFallback}>
-                <ModalProvider fallback={<ZModal allowUnauth open isLoading />}>
-                  {children}
-                </ModalProvider>
-              </Suspense>
-            </BrowserRouter>
-          </PersistGate>
-        </ThemeProviderMui>
-      </ThemeInheritorMui>
-    </ThemeInheritorStyled>
-  </Provider>
+  <ChunkLoadErrorBoundary>
+    <Provider store={store}>
+      <ThemeInheritorStyled theme={dark}>
+        <ThemeInheritorMui theme={theme}>
+          <ThemeProviderMui theme={theme}>
+            <GlobalStyle />
+            <ToastContainer
+              position='top-right'
+              autoClose={5000}
+              hideProgressBar
+              closeOnClick
+              pauseOnFocusLoss
+              draggable
+              closeButton={false}
+              pauseOnHover
+              theme='dark'
+            />
+            <PersistGate persistor={persistor}>
+              <BrowserRouter>
+                <Suspense fallback={zigSuspenseFallback}>
+                  <ModalProvider
+                    fallback={<ZModal allowUnauth open isLoading />}
+                  >
+                    {children}
+                  </ModalProvider>
+                </Suspense>
+              </BrowserRouter>
+            </PersistGate>
+          </ThemeProviderMui>
+        </ThemeInheritorMui>
+      </ThemeInheritorStyled>
+    </Provider>
+  </ChunkLoadErrorBoundary>
 );
 
 function App() {
