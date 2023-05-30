@@ -22,7 +22,7 @@
 		"isAuth-button-logIn": "Giriş",
 		"isAuth-button-signUp": "KAYIT OL",
 		"notAuth-dropdown-link-balances": "Bakiyelerim",
-		"notAuth-button-logOut": "Oturumu Kapat",
+		"notAuth-button-logOut": "Çıkış yapın",
 		"notAuth-dropdown-link-wallet": "ZIG Cüzdan",
 		"referrals": "Referanslar",
 		"notAuth-dropdown-link-settings": "Ayarlar",
@@ -85,5 +85,15 @@
 		"my-portfolio": "Portföyüm"
 	},
 	"follow-us": "Bizi takip edin",
-	"portfolio": "Portföy"
+	"portfolio": "Portföy",
+	"header": {
+		"rewards": {
+			"title": "20$ kazanın",
+			"description": "İlk para yatırma işleminde"
+		},
+		"referrals": {
+			"title": "%20 kazanın",
+			"description": "Arkadaşlarınızı Davet Edin"
+		}
+	}
 }

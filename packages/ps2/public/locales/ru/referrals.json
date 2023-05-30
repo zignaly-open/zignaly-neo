@@ -90,10 +90,6 @@
 		"SUCCESS_FEE_REWARD": "Доход Success Fee",
 		"REBATE_COMMISSION_REWARD": "Ребейт Комиссии доход"
 	},
-	"header": {
-		"title": "Заработайте 20%",
-		"description": "Пригласить Друзей"
-	},
 	"invite-traders-for-revenue": "<0>Пригласить Трейдеров<\/0><1>{{value}}%<\/1><2> от дохода Zignaly<\/2>",
 	"invite-traders-for-revenue-modal": "Пригласите трейдеров, чтобы получать <0>{{value}}%<\/0> от дохода Zignaly с вашего реферала.",
 	"invite-friends-for-revenue": "<0>Пригласите друзей<\/0><1>{{value}}%<\/1><2>от дохода Zignaly<\/2>",

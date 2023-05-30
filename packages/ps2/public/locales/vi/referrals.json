@@ -90,10 +90,6 @@
 		"SUCCESS_FEE_REWARD": "Thu từ phí thành công",
 		"REBATE_COMMISSION_REWARD": "Thu từ phí chiết khấu"
 	},
-	"header": {
-		"title": "Kiếm 20%",
-		"description": "Mời bạn bè"
-	},
 	"invite-traders-for-revenue": "<0>Mời nhà giao dịch<\/0><1>{{value}}%<\/1><2>doanh thu của Zignaly<\/2>",
 	"invite-traders-for-revenue-modal": "Mời các nhà giao dịch để nhận <0>{{value}}%<\/0> từ doanh thu của Zignaly kiếm được từ dịch vụ chia sẻ Lợi nhuận của Nhà giao dịch vĩnh viễn.",
 	"invite-friends-for-revenue": "<0>Mời bạn bè<\/0><1>{{value}}%<\/1><2>doanh thu của Zignaly<\/2>",

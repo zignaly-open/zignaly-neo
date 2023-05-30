@@ -22,7 +22,7 @@
 		"isAuth-button-logIn": "Iniciar sesión",
 		"isAuth-button-signUp": "REGISTRARSE",
 		"notAuth-dropdown-link-balances": "Mi Saldo",
-		"notAuth-button-logOut": "Cerrar Sesión",
+		"notAuth-button-logOut": "Cerrar sesión",
 		"notAuth-dropdown-link-wallet": "Billetera ZIG",
 		"referrals": "Referidos",
 		"notAuth-dropdown-link-settings": "Configuraciones",
@@ -85,5 +85,15 @@
 		"my-portfolio": "Mi Portafolio"
 	},
 	"follow-us": "Síguenos",
-	"portfolio": "Portafolio"
+	"portfolio": "Portafolio",
+	"header": {
+		"rewards": {
+			"title": "Obtén $20",
+			"description": "En el 1er depósito"
+		},
+		"referrals": {
+			"title": "Gana un 20%",
+			"description": "Invita Amigos"
+		}
+	}
 }

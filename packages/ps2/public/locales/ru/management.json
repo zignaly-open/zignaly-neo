@@ -44,6 +44,7 @@
 	"availableWithdrawals": "Доступно для вывода:",
 	"api-keys": {
 		"title": "Торговля с API",
+		"description": "Создайте API-ключи Binance для вашего сервиса Profit Sharing и подключите их к вашему любимому терминалу или приложению.",
 		"create-key": "Создать ключ API",
 		"no-keys": "Нет ключей API",
 		"no-keys-description": "Вы еще не создали ни одного API-ключа",
