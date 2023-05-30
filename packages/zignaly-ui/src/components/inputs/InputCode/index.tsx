@@ -37,7 +37,6 @@ function InputCode({
     }
   }, [error, clearOnError]);
 
-  // @ts-ignore
   return (
     <Layout error={error || undefined} loading={loading}>
       <Box id={prefixId && `${prefixId}__code-input`}>
@@ -49,7 +48,7 @@ function InputCode({
           disabled={loading}
           autoFocus={autoFocus}
           onComplete={onComplete}
-          placeholder={[...Array(fields).keys()].map(() => "")}
+          placeholder={new Array(fields).fill("")}
         />
       </Box>
       {error && <ErrorMessage text={error} id={prefixId && `${prefixId}__error-message`} />}
