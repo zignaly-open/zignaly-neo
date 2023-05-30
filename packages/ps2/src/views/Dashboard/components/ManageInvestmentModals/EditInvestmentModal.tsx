@@ -91,6 +91,7 @@ function EditInvestmentModal({
           EditInvestmentViews.EditInvestment,
           EditInvestmentViews.EditInvestmentSuccess,
           EditInvestmentViews.WithdrawSuccess,
+          EditInvestmentViews.PendingTransactions,
         ].includes(view)
           ? () => setView(EditInvestmentViews.EditInvestment)
           : undefined
