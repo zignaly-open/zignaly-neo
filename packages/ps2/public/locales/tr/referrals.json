@@ -90,10 +90,6 @@
 		"SUCCESS_FEE_REWARD": "Başarım Ücreti Kazancı",
 		"REBATE_COMMISSION_REWARD": "Ücret iadesi kazancı"
 	},
-	"header": {
-		"title": "%20 kazanın",
-		"description": "Arkadaşlarınızı Davet Edin"
-	},
 	"invite-traders-for-revenue": "<0>Trader'ları Davet Edin<\/0><1>Zignaly'nin Gelirinden<\/1><2>%{{value}}<\/2>kazanın",
 	"invite-traders-for-revenue-modal": "Trader'ları, Zignaly'nin trader Profit Sharing servisinden elde ettiği Gelirin <0>%{{value}}<\/0> kadarını ömür boyu almak üzere davet edin.",
 	"invite-friends-for-revenue": "<0>Arkadaşlarınızı Davet Edin<\/0><1>Zignaly'nin Gelirinden<\/1><2>%{{value}}<\/2>kazanın",

@@ -36,6 +36,8 @@
 		"180d-full": "6 ay",
 		"365d-full": "1 yıl",
 		"all-full": "Tüm zamanlar",
+		"7d": "Hafta",
+		"30d": "Ay",
 		"90d": "3 ay",
 		"180d": "6 ay",
 		"365d": "1 yıl",
@@ -90,22 +92,24 @@
 			"success-fee-range": "0 veya 10 ile 75 arasında bir tamsayı olmalıdır"
 		}
 	},
-	"you-get-x": "%{{number}} elde edersiniz",
 	"create": {
 		"invest-in-your-service": "Servisinize yatırım yapın",
 		"select-type-first": "Önce servis türünü seçin",
 		"title": "Yeni servis oluşturun",
 		"action": "Servis oluşturun",
 		"next-step": "Sıradaki",
-		"service-type": "Servis Türü",
+		"service-type": "Servis tipi:",
 		"service-name": "Servis adı",
-		"base-currency": "Temel Birim",
+		"base-currency": "Temel para birimi",
 		"types": {
 			"spot": "Spot",
 			"futures": "Vadeli İşlemler"
 		},
 		"minimum-balance": "Alım Satım yapmak ve yatırımcıların yatırım yapmasına izin vermek için, hizmetinize en az {{ minValue }} {{ minValueCoin }} yatırmanız gerekir.",
 		"profits-explainer": "Alım satım ve başarı ücretlerinden elde ettiğiniz kârın ne kadarının otomatik olarak transfer edilmesini istediğinize karar verin.",
-		"zero-fee": "Başarı ücreti olarak eğer 0'ı seçerseniz, Zignaly de bu servisten bir komisyon kesmeyecektir"
-	}
+		"zero-fee": "Başarı ücreti olarak eğer 0'ı seçerseniz, Zignaly de bu servisten bir komisyon kesmeyecektir",
+		"total-fee": "Toplam komisyon",
+		"you-receive": "Size ulaşacak miktar"
+	},
+	"you-receive": "Size ulaşacak miktar"
 }
