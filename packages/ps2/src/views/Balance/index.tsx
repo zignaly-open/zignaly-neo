@@ -23,6 +23,7 @@ import { TRANSACTION_TYPE_NAME } from './components/TransactionsHistoryTable/typ
 import { CSSObject } from '@emotion/react';
 import createZModalRouteElement from '../../components/ZModal/ZModalRoute';
 import DepositModal from '../Dashboard/components/ManageInvestmentModals/DepositModal';
+import { usePrefetchTranslation } from 'util/i18nextHelpers';
 
 const MyBalances: React.FC = () => {
   const { t } = useTranslation([
@@ -31,6 +32,7 @@ const MyBalances: React.FC = () => {
     'transactions-history',
   ]);
   useTitle(t('my-balances'));
+  usePrefetchTranslation(['withdraw-crypto', 'deposit-crypto']);
   const [tab, setTab] = useState(0);
   const [type, setType] = useState('all');
   const { showModal } = useZModal();
