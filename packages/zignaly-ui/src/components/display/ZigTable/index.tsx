@@ -20,7 +20,7 @@ import ZigTypography from "../ZigTypography";
 import CheckBox from "../../inputs/CheckBox";
 import { ZigTableProps } from "./types";
 import { Box, IconButton } from "@mui/material";
-import { ChevronLeft, ChevronRight, FirstPage, LastPage, MoreVert } from "@mui/icons-material";
+import { ChevronLeft, ChevronRight, FirstPage, LastPage } from "@mui/icons-material";
 import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
