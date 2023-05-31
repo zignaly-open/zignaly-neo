@@ -15,10 +15,11 @@ import {
   ROUTE_BECOME_TRADER,
   ROUTE_TRADING_SERVICE_MANAGE,
 } from '../../../routes';
-import { ZigDropdownHandleType, ZigDropdownOptionType } from '@zignaly-open/ui';
+import { ZigDropdownHandleType } from '@zignaly-open/ui';
 import { GlobeLanguagesStyled, LabelButton } from './styles';
 import { LocalizationLanguages } from '../../../util/languages';
 import { HeaderDropdownButton } from '../AccountMenu/styles';
+import { ZigDropdownProps } from '@zignaly-open/ui/src/components/display/ZigDropdown/types';
 
 const ExtraNavigationDropdown: React.FC = () => {
   const theme = useTheme();
@@ -48,15 +49,15 @@ const ExtraNavigationDropdown: React.FC = () => {
     onClose();
   };
 
-  let options: ZigDropdownOptionType[] = [
+  let options: ZigDropdownProps['options'] = [
     {
       label: t('main-menu.dropdown-link-helpDocs'),
       id: 'menu-dropdown__help-docs',
       target: '_blank',
       href: 'https://help.zignaly.com/hc/en-us',
     },
+    { separator: true },
     {
-      separator: true,
       id: 'menu-dropdown__language-switcher',
       label: (
         <>

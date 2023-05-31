@@ -18,10 +18,11 @@ const withSeparator = (props: WithSeparator) =>
   `;
 
 type WithSeparator = { separator?: boolean };
+type WithCustomStyle = { customStyle?: string };
 
 export const ZigDropdownContainer = styled.div`
   user-select: none;
-  min-width: 275px;
+  min-width: 245px;
 `;
 
 export const Component = styled.div`
@@ -34,13 +35,20 @@ export const Component = styled.div`
   outline: inherit;
 `;
 
-export const ComponentWrapper = styled.div<WithSeparator>`
+export const ComponentWrapper = styled.div<WithSeparator & WithCustomStyle>`
   padding: 5px 30px;
+  ${(props) => props.customStyle || ""};
   ${withSeparator}
 `;
 
 export const NavLink = styled.span<
-  { notClickable?: boolean; active?: boolean; disabled?: boolean } & WithSeparator
+  {
+    notClickable?: boolean;
+    active?: boolean;
+    disabled?: boolean;
+    customStyle?: string;
+  } & WithSeparator &
+    WithCustomStyle
 >`
   color: ${dark.neutral100};
   font-weight: 400;
@@ -50,6 +58,7 @@ export const NavLink = styled.span<
   letter-spacing: 0.55px;
   text-decoration: none;
   transition: 0.15s linear;
+  max-width: 245px;
 
   display: flex;
   flex-direction: row;
@@ -93,7 +102,18 @@ export const NavLink = styled.span<
     css`
       cursor: default !important;
     `}
+
+  ${(props) => props.customStyle || ""};
   ${withSeparator};
+`;
+
+export const ComponentSeparator = styled.div<
+  WithSeparator & {
+    customStyle?: string;
+  }
+>`
+  ${withSeparator};
+  ${(props) => props.customStyle || ""};
 `;
 
 export const NavList = styled.div`

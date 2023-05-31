@@ -23,6 +23,7 @@ import { TRANSACTION_TYPE_NAME } from './components/TransactionsHistoryTable/typ
 import { CSSObject } from '@emotion/react';
 import createZModalRouteElement from '../../components/ZModal/ZModalRoute';
 import DepositModal from '../Dashboard/components/ManageInvestmentModals/DepositModal';
+import { usePrefetchTranslation } from 'util/i18nextHelpers';
 
 const MyBalances: React.FC = () => {
   const { t } = useTranslation([
@@ -31,6 +32,7 @@ const MyBalances: React.FC = () => {
     'transactions-history',
   ]);
   useTitle(t('my-balances'));
+  usePrefetchTranslation(['withdraw-crypto', 'deposit-crypto']);
   const [tab, setTab] = useState(0);
   const [type, setType] = useState('all');
   const { showModal } = useZModal();
@@ -55,7 +57,7 @@ const MyBalances: React.FC = () => {
           <Box sx={{ flex: '0 0 100px' }}>
             <ZigButton
               id={'balances__deposit-header'}
-              startIcon={<ZigPlusIcon width={17} height={17} />}
+              startIcon={<ZigPlusIcon width={10} height={10} />}
               sx={{ fontWeight: 600, mb: 1 }}
               variant={'contained'}
               onClick={() =>
