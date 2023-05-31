@@ -27,7 +27,12 @@ import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import { useWithdrawMutation } from 'apis/coin/api';
 import { useActiveExchange, useCheck2FA } from 'apis/user/use';
 
-function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
+function WithdrawForm({
+  setStep,
+  selectedCoin,
+  close,
+  step,
+}: WithdrawModalProps) {
   const { t } = useTranslation('withdraw-crypto');
   const { data: balances, isLoading: isLoadingBalances } = useCoinBalances({
     convert: true,
@@ -151,19 +156,15 @@ function WithdrawForm({ setStep, selectedCoin, close }: WithdrawModalProps) {
     return <CenteredLoader />;
   }
 
-  if (confirmationData) {
+  if (confirmationData && step === 'confirm') {
     return (
       <WithdrawConfirmForm
         action={handleWithdraw}
         status={withdrawStatus}
-        back={() => {
-          setConfirmationData(null);
-          setStep('');
-        }}
         {...confirmationData}
         amount={Number(confirmationData.amount.value)}
         networkName={networkObject.name}
-        networkCoin={networkObject.coin}
+        networkCoin={networkObject.network}
         coin={coin}
         fee={parseFloat(networkObject.withdrawFee)}
         close={close}

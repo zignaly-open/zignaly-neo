@@ -30,9 +30,17 @@ function WithdrawModal({
           ? 'confirmation.title'
           : 'title',
       )}
+      onGoBack={
+        step === 'confirm'
+          ? () => {
+              setStep('');
+            }
+          : undefined
+      }
     >
       <WithdrawForm
         setStep={setStep}
+        step={step}
         selectedCoin={selectedCoin}
         close={close}
       />

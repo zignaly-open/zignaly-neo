@@ -21,6 +21,7 @@ export type DepositModalProps = {
 };
 
 export type WithdrawModalProps = {
+  step: string;
   selectedCoin?: string;
   setStep: (value: '' | 'confirm' | 'success') => void;
   close: () => void;
