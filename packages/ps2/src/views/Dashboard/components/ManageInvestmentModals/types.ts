@@ -30,3 +30,8 @@ export enum ChooseDepositTypeViews {
   DepositView = 'deposit',
   ChooseDepositTypeView = 'choose-deposit-type',
 }
+
+export type UseModalReturn = {
+  title: string;
+  component: () => JSX.Element;
+};
