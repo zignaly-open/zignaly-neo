@@ -33,6 +33,7 @@ import WalletDepositModal from '../WalletDepositModal';
 
 function WalletWithdrawForm({
   setStep,
+  step,
   selectedCoin,
   close,
   coins,
@@ -151,14 +152,10 @@ function WalletWithdrawForm({
 
   const balance = balances[selectedCoin]?.availableBalance ?? 0;
 
-  if (confirmationData) {
+  if (confirmationData && step === 'confirm') {
     return (
       <WithdrawConfirmForm
         coin={selectedCoin}
-        back={() => {
-          setConfirmationData(null);
-          setStep('');
-        }}
         close={close}
         {...confirmationData}
         amount={Number(confirmationData.amount.value)}
@@ -168,7 +165,6 @@ function WalletWithdrawForm({
         status={withdrawStatus}
         fee={Number(feeInfo.floatFee)}
         feeCoin={feeCoin}
-        iconBucket='coins'
       />
     );
   }

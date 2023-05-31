@@ -34,12 +34,12 @@
 		"title": "Confirmar Retirada",
 		"description": "Por favor confirmar que as informações estão corretas e enviar sua retirada.",
 		"receive": "Você irá Receber:",
-		"network": "Rede de Retirada",
-		"address": "Retirada para Endereço",
-		"amount": "Quantidade de Retirada",
-		"networkFee": "Taxa de Rede",
+		"network": "Rede de Retirada:",
+		"address": "Retirada para Endereço:",
+		"amount": "Quantidade de Retirada:",
+		"networkFee": "Taxa de Rede:",
 		"continue": "Continuar para Confirmação",
-		"withdrawNow": "Retirar agora!"
+		"withdrawNow": "Retirar agora"
 	},
 	"success": {
 		"title": "Retirada com Sucesso",

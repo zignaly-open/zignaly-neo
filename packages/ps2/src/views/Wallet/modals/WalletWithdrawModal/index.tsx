@@ -32,8 +32,16 @@ function WalletWithdrawModal({
           ? 'confirmation.title'
           : 'title',
       )}
+      onGoBack={
+        step === 'confirm'
+          ? () => {
+              setStep('');
+            }
+          : undefined
+      }
     >
       <WalletWithdrawForm
+        step={step}
         setStep={setStep}
         selectedCoin={selectedCoin}
         close={close}
