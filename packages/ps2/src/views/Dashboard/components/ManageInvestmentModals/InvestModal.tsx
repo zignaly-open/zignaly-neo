@@ -10,10 +10,13 @@ import { UseModalReturn } from './types';
 
 export function useInvestModalContent(): UseModalReturn {
   const service = useSelectedInvestment();
-  const { isLoading: isLoadingService } = useServiceDetails(service?.serviceId);
+  const { isLoading: isLoadingService } = useServiceDetails(
+    service?.serviceId,
+    { skip: !service },
+  );
   const { isLoading: isLoadingCoins } = useCoinBalances();
   const { t } = useTranslation('edit-investment');
-  const isLoading = isLoadingService || isLoadingCoins;
+  const isLoading = isLoadingService || isLoadingCoins || !service;
   const [isInvested, setIsInvested] = useState(false);
   return {
     title: t(isInvested ? 'modalSuccess.title' : 'invest-modal.invest-with'),
