@@ -66,8 +66,8 @@ const ReferralInviteNewImage: React.FC<{
             i18nKey={'create-invite.ugly-' + mode + '-cta'}
             t={t}
             values={{
-              depositAmount: hardcodedInviteeReward.threshold,
-              reward: hardcodedInviteeReward.value,
+              depositAmount: hardcodedInviteeReward?.threshold || 0,
+              reward: hardcodedInviteeReward?.value || 0,
             }}
           >
             <span style={{ color: '#ACB6FF' }} />
@@ -92,7 +92,7 @@ const ReferralInviteNewImage: React.FC<{
             i18nKey={`create-invite.deposit-${mode}-cta`}
             t={t}
             values={{
-              depositAmount: hardcodedInviteeReward.threshold,
+              depositAmount: hardcodedInviteeReward?.threshold || 0,
             }}
           >
             <span style={{ fontWeight: 700 }} />
