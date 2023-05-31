@@ -49,7 +49,7 @@ const ReferralInviteNewImage: React.FC<{
 
       <InviteTemplate x={0} y={0} height={imageHeight} width={imageWidth} />
 
-      <foreignObject x={sidePadding} y={130} width={423} height={150}>
+      <foreignObject x={sidePadding} y={130} width={423} height={220}>
         <div
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
