@@ -207,6 +207,7 @@ function AccountMenu(): React.ReactElement | null {
               <GiftIcon
                 width={24}
                 height={24}
+                style={{ marginTop: -1 }}
                 color={theme.palette.neutral175}
               />
               {t('account-menu.rewards')}
@@ -223,6 +224,7 @@ function AccountMenu(): React.ReactElement | null {
               <InviteIcon
                 width={24}
                 height={24}
+                style={{ marginTop: -1 }}
                 color={theme.palette.neutral175}
               />
               {t('account-menu.referrals')}
