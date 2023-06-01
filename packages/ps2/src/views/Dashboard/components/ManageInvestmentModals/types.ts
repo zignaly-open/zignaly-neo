@@ -21,6 +21,7 @@ export type DepositModalProps = {
 };
 
 export type WithdrawModalProps = {
+  step: string;
   selectedCoin?: string;
   setStep: (value: '' | 'confirm' | 'success') => void;
   close: () => void;
@@ -30,3 +31,8 @@ export enum ChooseDepositTypeViews {
   DepositView = 'deposit',
   ChooseDepositTypeView = 'choose-deposit-type',
 }
+
+export type UseModalReturn = {
+  title: string;
+  component: () => JSX.Element;
+};

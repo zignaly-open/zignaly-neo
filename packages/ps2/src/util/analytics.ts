@@ -74,4 +74,5 @@ export const trackConversion = () => {
 
 export const trackPage = () => {
   analytics?.page();
+  window._paq?.push(['trackPageView']);
 };

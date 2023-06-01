@@ -85,5 +85,15 @@
 		"my-portfolio": "Danh mục đầu tư của tôi"
 	},
 	"follow-us": "Theo dõi",
-	"portfolio": "Danh mục đầu tư"
+	"portfolio": "Danh mục đầu tư",
+	"header": {
+		"rewards": {
+			"title": "Nhận $20",
+			"description": "Trên khoản tiền gửi thứ 1"
+		},
+		"referrals": {
+			"title": "Kiếm 20%",
+			"description": "Mời bạn bè"
+		}
+	}
 }

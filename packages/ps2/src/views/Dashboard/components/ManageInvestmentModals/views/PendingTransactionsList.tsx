@@ -84,6 +84,7 @@ const PendingTransactionsList: React.FC<{
                 accessorKey: 'amount',
                 cell: (props) => (
                   <ZigTablePriceLabel
+                    id={`pending-transactions-table__amount-${props.row.id}`}
                     coin={coin.id}
                     value={props.getValue()}
                     showApproximate
@@ -94,10 +95,22 @@ const PendingTransactionsList: React.FC<{
               {
                 header: t('modal.pendingTransaction.tableHeader.type'),
                 accessorKey: 'type',
+                cell: (props) => (
+                  <Box id={`pending-transactions-table__type-${props.row.id}`}>
+                    {props.getValue()}
+                  </Box>
+                ),
               },
               {
                 header: t('modal.pendingTransaction.tableHeader.status'),
                 accessorKey: 'status',
+                cell: (props) => (
+                  <Box
+                    id={`pending-transactions-table__status-${props.row.id}`}
+                  >
+                    {props.getValue()}
+                  </Box>
+                ),
               },
             ] as ColumnDef<
               typeof pendingTransactionsList[number],
@@ -112,7 +125,7 @@ const PendingTransactionsList: React.FC<{
 
       <ModalActions>
         <ZigButton
-          id={'pending__pending-transactions'}
+          id={'pending-transactions__close'}
           startIcon={<ArrowBackIosIcon />}
           onClick={() => setView(EditInvestmentViews.EditInvestment)}
           size={'large'}

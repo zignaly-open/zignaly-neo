@@ -35,12 +35,12 @@
     "title": "Confirm Withdrawal",
     "description": "Please confirm the information is correct and submit your withdrawal.",
     "receive": "You’ll Receive:",
-    "network": "Withdrawal Network",
-    "address": "Withdraw to Address",
-    "amount": "Withdrawal Amount",
-    "networkFee": "Network Fee",
+    "network": "Withdrawal Network:",
+    "address": "Withdrawal Address:",
+    "amount": "Withdrawal Amount:",
+    "networkFee": "Network Fee:",
     "continue": "Continue to Confirmation",
-    "withdrawNow": "Withdraw now!"
+    "withdrawNow": "Withdraw now"
   },
   "success": {
     "title": "Withdrawal Success",

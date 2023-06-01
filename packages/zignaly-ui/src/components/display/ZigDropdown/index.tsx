@@ -10,6 +10,7 @@ import {
   NavLink,
   NavList,
   SpaceTaker,
+  ComponentSeparator,
 } from "./styles";
 import { useTheme } from "styled-components";
 import Theme from "theme/theme";
@@ -106,23 +107,32 @@ const ZigDropdown: (
         >
           <ZigDropdownContainer id={id}>
             <NavList>
-              {options.map((option, i) => {
+              {options.map((entry, i) => {
                 // this is a design requirement
                 if (childDropdownShow && options.indexOf(childDropdownShow) < i) return null;
 
                 const key =
-                  (option &&
-                    "label" in option &&
-                    typeof option.label === "string" &&
-                    option.label) ||
-                  option.id ||
+                  (entry && "label" in entry && typeof entry.label === "string" && entry.label) ||
+                  entry.id ||
                   Math.random().toString();
+
+                if ("separator" in entry) {
+                  return (
+                    <ComponentSeparator
+                      id={entry.id || `dropdown-element-${i}`}
+                      separator={entry.separator}
+                      key={key}
+                    />
+                  );
+                }
+
+                const option = entry as ZigDropdownOption;
 
                 if (option.element)
                   return (
                     <ComponentWrapper
                       id={option.id || `dropdown-element-${i}`}
-                      separator={option.separator}
+                      customStyle={option.customStyle}
                       key={key}
                     >
                       {option.element}
@@ -134,9 +144,9 @@ const ZigDropdown: (
                     <NavLink
                       id={option.id}
                       key={key}
-                      separator={option.separator}
                       target={option?.target}
                       active={option?.active}
+                      customStyle={option.customStyle}
                       as={"a"}
                       href={option.href}
                       onClick={option.onClick && onClick(option.onClick)}
@@ -147,14 +157,11 @@ const ZigDropdown: (
 
                 if (option.children)
                   return (
-                    <ChildContainer
-                      separator={option.separator}
-                      key={key}
-                      active={childDropdownShow === option}
-                    >
+                    <ChildContainer key={key} active={childDropdownShow === option}>
                       <NavLink
                         active={option?.active}
                         id={option.id}
+                        customStyle={option.customStyle}
                         notClickable={!option.children?.length}
                         onClick={() =>
                           option.children?.length &&

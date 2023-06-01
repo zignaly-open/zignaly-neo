@@ -45,7 +45,7 @@ export const HeaderLinksContainer = styled("nav")`
 
   a {
     color: ${({ theme }) => theme.palette.neutral200};
-    font-weight: 500;
+    font-weight: 400;
     font-size: 14px;
     line-height: 28px;
     letter-spacing: 0.55px;

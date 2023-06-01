@@ -49,7 +49,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
       {...withDefaultProps}
       sx={{
         whiteSpace: "nowrap",
-        display: "flex",
+        display: "inline-flex",
         alignItems: "center",
         justifyContent: "center",
         ...(withDefaultProps?.sx || {}),

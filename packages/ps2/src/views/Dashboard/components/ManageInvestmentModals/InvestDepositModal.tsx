@@ -7,10 +7,11 @@ import {
 } from '../../../../apis/investment/use';
 import { useServiceDetails } from '../../../../apis/service/use';
 import useMaybeNavigateNotLoggedIn from '../../../../util/hooks/useMaybeNavigateNotLoggedIn';
-import InvestModal from './InvestModal';
-import ChooseDepositTypeModal from './ChooseDepositTypeModal';
-import ZModal from '../../../../components/ZModal';
+import { useInvestModalContent } from './InvestModal';
 import { useIsAuthenticated } from '../../../../apis/user/use';
+import { UseModalReturn } from './types';
+import { useDepositModalContent } from './ChooseDepositTypeModal';
+import ZModal from '../../../../components/ZModal';
 
 function InvestDepositModal({
   serviceId,
@@ -42,6 +43,9 @@ function InvestDepositModal({
   useSelectInvestment(service);
   useMaybeNavigateNotLoggedIn();
 
+  const depositModal = useDepositModalContent(service?.ssc);
+  const investModal = useInvestModalContent();
+
   const showDeposit = +balance === 0;
 
   // we need it here because this modal is not technically a ZModal
@@ -50,13 +54,20 @@ function InvestDepositModal({
     return null;
   }
 
-  if (!ready) {
-    return <ZModal title={''} wide {...props} close={props.close} isLoading />;
-  } else if (showDeposit) {
-    return <ChooseDepositTypeModal {...props} selectedCoin={service?.ssc} />;
-  } else {
-    return <InvestModal {...props} />;
-  }
+  const { title, component } =
+    (showDeposit ? depositModal : investModal) || ({} as UseModalReturn);
+
+  return (
+    <ZModal
+      title={ready ? title : ''}
+      wide
+      {...props}
+      close={props.close}
+      isLoading={!ready}
+    >
+      {ready && component()}
+    </ZModal>
+  );
 }
 
 export default InvestDepositModal;

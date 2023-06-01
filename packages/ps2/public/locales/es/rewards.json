@@ -4,10 +4,6 @@
 	"active": "Activo",
 	"reward-terms": "Condiciones de la Recompensa",
 	"description": "Gana recompensas completando tareas sencillas. ¡Es así de fácil!",
-	"header": {
-		"title": "Obtén $20",
-		"description": "En el 1er depósito"
-	},
 	"active-rewards": "Recompensas Activas",
 	"no-active-rewards": "No hay recompensas activas en este momento",
 	"disabled-voucher": "El Vale ya está activado",

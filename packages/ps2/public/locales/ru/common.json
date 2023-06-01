@@ -22,7 +22,7 @@
 		"isAuth-button-logIn": "Войти",
 		"isAuth-button-signUp": "РЕГИСТРАЦИЯ",
 		"notAuth-dropdown-link-balances": "Мои Балансы",
-		"notAuth-button-logOut": "Выход",
+		"notAuth-button-logOut": "Выйти",
 		"notAuth-dropdown-link-wallet": "ZIG Wallet",
 		"referrals": "Рефералы",
 		"notAuth-dropdown-link-settings": "Настройки",
@@ -85,5 +85,15 @@
 		"my-portfolio": "Мое Портфолио"
 	},
 	"follow-us": "Следуйте за нами",
-	"portfolio": "Портфолио"
+	"portfolio": "Портфолио",
+	"header": {
+		"rewards": {
+			"title": "Получите $20",
+			"description": "На 1-й депозит"
+		},
+		"referrals": {
+			"title": "Заработайте 20%",
+			"description": "Пригласить Друзей"
+		}
+	}
 }
