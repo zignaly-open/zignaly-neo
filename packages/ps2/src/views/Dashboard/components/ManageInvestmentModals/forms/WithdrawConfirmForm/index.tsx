@@ -239,7 +239,7 @@ const WithdrawConfirmForm = ({
           id={'withdraw-modal-confirmation__confirm-withdraw'}
           onClick={action}
           variant='contained'
-          size='large'
+          size='xlarge'
           loading={status.isLoading}
           type='submit'
         >
