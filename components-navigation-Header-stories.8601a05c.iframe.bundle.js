@@ -34,7 +34,7 @@
 
   a {
     color: ${({theme})=>theme.palette.neutral200};
-    font-weight: 500;
+    font-weight: 400;
     font-size: 14px;
     line-height: 28px;
     letter-spacing: 0.55px;
@@ -67,4 +67,4 @@
 
   ${props=>`\n    \n    &.zero {\n      color: ${props.theme.neutral300}\n    }\n    \n    &.positive {\n      color: ${props.theme.greenGraph};\n    }\n    \n    &.negative {\n      color: ${props.theme.redGraphOrError};\n    }\n  `}
 `)}}]);
-//# sourceMappingURL=components-navigation-Header-stories.56462f22.iframe.bundle.js.map
+//# sourceMappingURL=components-navigation-Header-stories.8601a05c.iframe.bundle.js.map
