@@ -8,7 +8,11 @@ import ZModal from '../../../../components/ZModal';
 import InvestView from './views/Invest';
 import { UseModalReturn } from './types';
 
-export function useInvestModalContent(): UseModalReturn {
+export function useInvestModalContent({
+  close,
+}: {
+  close: () => void;
+}): UseModalReturn {
   const service = useSelectedInvestment();
   const { isLoading: isLoadingService } = useServiceDetails(service?.serviceId);
   const { isLoading: isLoadingCoins } = useCoinBalances();
@@ -37,7 +41,7 @@ function InvestModal({
   const { isLoading: isLoadingService } = useServiceDetails(service?.serviceId);
   const { isLoading: isLoadingCoins } = useCoinBalances();
   const isLoading = isLoadingService || isLoadingCoins;
-  const { title, component } = useInvestModalContent();
+  const { title, component } = useInvestModalContent({ close });
 
   return (
     <ZModal wide {...props} close={close} title={title} isLoading={isLoading}>
