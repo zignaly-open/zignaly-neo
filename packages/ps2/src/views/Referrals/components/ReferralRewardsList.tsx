@@ -454,6 +454,8 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
     });
   }, [elementsYou]);
 
+  elementsYou.splice(1);
+
   const cols =
     elementsYou.slice(0, 2).length + elementsThem.slice(0, 1).length + 1;
   return (
@@ -468,7 +470,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
       <Grid
         item
         xs={12}
-        md={Math.min(4, 12 / cols) * elementsYou.slice(0, 2).length}
+        md={Math.min(6, 12 / cols) * elementsYou.slice(0, 2).length}
       >
         <ZigTypography
           variant={'h1'}
@@ -484,7 +486,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
         <Grid
           item
           xs={12}
-          md={Math.min(4, 12 / cols) * elementsThem.slice(0, 1).length}
+          md={Math.min(6, 12 / cols) * elementsThem.slice(0, 1).length}
         >
           <ZigTypography
             variant={'h1'}
@@ -506,7 +508,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           xs={12}
           pl={3}
           pr={3}
-          md={Math.min(4, 12 / cols)}
+          md={Math.min(6, 12 / cols)}
         >
           <GetWhatYouDeserveLabel>{x}</GetWhatYouDeserveLabel>
         </Grid>
@@ -522,7 +524,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
           sx={{
             borderLeft: (theme) => `1px solid ${theme.palette.neutral700}`,
           }}
-          md={Math.min(4, 12 / cols)}
+          md={Math.min(6, 12 / cols)}
         >
           <GetWhatYouDeserveLabel>{x}</GetWhatYouDeserveLabel>
         </Grid>
@@ -531,7 +533,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
       <Grid
         item
         xs={12}
-        md={Math.min(4, 12 / cols)}
+        md={Math.min(6, 12 / cols)}
         pl={3}
         pr={3}
         sx={{
