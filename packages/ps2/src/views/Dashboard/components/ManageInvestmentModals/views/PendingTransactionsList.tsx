@@ -66,13 +66,28 @@ const PendingTransactionsList: React.FC<{
           columns={
             [
               {
-                header: t('modal.pendingTransaction.tableHeader.amount'),
+                header: (
+                  <Box position={'relative'} padding={'5px 15px'}>
+                    <Box
+                      component='img'
+                      sx={{
+                        position: 'absolute',
+                        width: '10px',
+                        right: 0,
+                        top: 0,
+                      }}
+                      src={`/images/portfolio/info-icon.svg`}
+                    />
+                    {t('modal.pendingTransaction.tableHeader.amount')}
+                  </Box>
+                ),
                 accessorKey: 'amount',
                 cell: (props) => (
                   <ZigTablePriceLabel
                     id={`pending-transactions-table__amount-${props.row.id}`}
                     coin={coin.id}
                     value={props.getValue()}
+                    showApproximate
                   />
                 ),
                 sortingFn: 'alphanumeric',
