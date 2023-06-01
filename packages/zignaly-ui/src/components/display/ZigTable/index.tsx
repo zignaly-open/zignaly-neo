@@ -20,10 +20,12 @@ import ZigTypography from "../ZigTypography";
 import CheckBox from "../../inputs/CheckBox";
 import { ZigTableProps } from "./types";
 import { Box, IconButton } from "@mui/material";
-import { ChevronLeft, ChevronRight, FirstPage, LastPage, MoreVert } from "@mui/icons-material";
+import { ChevronLeft, ChevronRight, FirstPage, LastPage } from "@mui/icons-material";
 import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
+import { ZigDotsVerticalIcon } from "../../../icons";
+import { dark } from "../../../theme";
 
 export default function ZigTable<T extends object>({
   prefixId,
@@ -124,7 +126,7 @@ export default function ZigTable<T extends object>({
                     <ZigDropdown
                       component={() => (
                         <HeaderIconButton id={prefixId && `${prefixId}-table__popover-filter`}>
-                          <MoreVert sx={{ color: "neutral200" }} />
+                          <ZigDotsVerticalIcon color={dark.neutral200} height={16} width={16} />
                         </HeaderIconButton>
                       )}
                       options={table
