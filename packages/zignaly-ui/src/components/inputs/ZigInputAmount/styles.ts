@@ -29,9 +29,6 @@ export const TopDivider = styled(Divider)`
 `;
 
 export const MaxButton = styled(ZigButton)`
-  /* width: 46px; */
-  /* height: 26.5px; */
-  /* margin: 0 0 0 173px; */
   padding: 3px 10px;
   border-radius: 13px;
   border: solid 1px #35334a;

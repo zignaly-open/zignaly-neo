@@ -11,26 +11,7 @@ import ZigCoinIcon from "../../display/ZigCoinIcon";
 export { InputExtraInfo } from "./atoms";
 
 const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
-  // How to add fees but keep default label, maybe even pick order
-  // How can I pass all these values, and optionally override label?
-  const {
-    label,
-    error,
-    wide,
-    sensitive,
-    coin,
-    id,
-    extraInfo,
-    onMax,
-    // extraInfo = [
-    //   { value: 1000, text: "Available" },
-    //   { value: 100, text: "Min. deposit" },
-    // ],
-    // extraInfo = [
-    //   <ZigTypography key={0}>Available: 1,000 USDT</ZigTypography>,
-    //   <ZigTypography key={1}>Min. deposit: 100 USDT</ZigTypography>,
-    // ],
-  } = props;
+  const { label, error, wide, coin, extraInfo, onMax } = props;
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
 
   return (
@@ -49,9 +30,12 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
         </Box>
         <ZigInput
           {...props}
+          inputRef={ref}
+          type="number"
           wide={wide}
           label={null}
           sx={{ width: wide ? 1 : "auto" }}
+          error={!!error}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -63,97 +47,17 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
           }}
         />
       </Box>
-      {typeof extraInfo === "function" ? (
-        extraInfo
-      ) : extraInfo ? (
-        <InputExtraInfo coin={coinVal} {...extraInfo} />
-      ) : null}
-      {/* {Number() >= 0 && showBalance && (
-        <Box mt={1}>
-          <BalanceLabel variant="body2" color="neutral200" id={id && `${id}-balance-label`}>
-            {labelBalance}
-          </BalanceLabel>
-          <ZigPriceLabel
-            id={id && `${id}-balance`}
-            value={value?.token.balance}
-            variant="body2"
-            component="span"
-            color="neutral000"
-            precision={8}
-            coin={value?.token.id}
-            coinProps={{
-              color: "neutral000",
-              fontWeight: 500,
-            }}
-          />
-        </Box>
-      )} */}
+      <Box alignSelf="flex-start" mt="11px">
+        {error && typeof error === "string" && <ErrorMessage text={error} />}
+      </Box>
+      <Box mt={extraInfo && error && typeof error === "string" ? "7px" : "14px"}>
+        {typeof extraInfo === "function" ? (
+          extraInfo
+        ) : extraInfo ? (
+          <InputExtraInfo coin={coinVal} {...extraInfo} />
+        ) : null}
+      </Box>
     </Layout>
-  );
-
-  return (
-    <TextField
-      id={id}
-      inputRef={ref}
-      {...props}
-      inputProps={{
-        ...(props.inputProps || {}),
-        "data-testid":
-          props?.inputProps?.["data-testid"] ||
-          (process.env.NODE_ENV === "test" && id) ||
-          undefined,
-      }}
-      label={
-        !props.label ? null : (
-          <>
-            {props.label}
-            {labelAction && (
-              <ZigButton
-                variant={"text"}
-                sx={{ fontSize: "13px", fontWeight: 400 }}
-                tabIndex={labelAction.tabIndex}
-                onClick={labelAction.onClick}
-                href={labelAction.href}
-                id={labelAction.id}
-              >
-                {labelAction.text}
-              </ZigButton>
-            )}
-          </>
-        )
-      }
-      variant={"standard"}
-      error={!!error}
-      helperText={
-        typeof error === "string" && error !== ""
-          ? error && <ErrorMessage text={error} />
-          : helperText
-      }
-      type={sensitive ? (!isShown ? "password" : "text") : props.type}
-      InputProps={{
-        disableUnderline: true,
-        ...(props.InputProps || {}),
-        ...(sensitive
-          ? {
-              endAdornment: [
-                <InputAdornment position="end" key={id + "-sensivive"}>
-                  {!!sensitive && (
-                    <EyeIcon
-                      id={id && `${id}-visibility-icon`}
-                      onClick={() => setIsShown((v) => !v)}
-                      width={40}
-                      height={40}
-                      sx={ZigInputInteractiveAdornmentStyle}
-                    />
-                  )}
-                </InputAdornment>,
-                ...valueToArray(props?.InputProps?.endAdornment),
-              ],
-            }
-          : {}),
-      }}
-      InputLabelProps={{ shrink: true, ...(props.InputLabelProps || {}) }}
-    />
   );
 });
 

@@ -75,7 +75,6 @@ export const InputExtraInfo = ({
     <Box
       display="flex"
       flexWrap="wrap"
-      mt={"14px"}
       flexDirection={items.length <= 2 ? "row" : "column"}
       gap="6px"
     >

@@ -7,7 +7,6 @@ export type Coin = {
 
 export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"> & {
   wide?: boolean;
-  sensitive?: boolean;
   error?: boolean | string;
   id?: string;
   coin?: string | Coin;

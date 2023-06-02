@@ -195,6 +195,12 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
       opacity: 0.67;
       color: ${({ theme }) => theme.palette.neutral100} !important;
     }
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
   }
 `;
 
