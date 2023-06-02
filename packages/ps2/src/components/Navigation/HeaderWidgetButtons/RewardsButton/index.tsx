@@ -67,10 +67,11 @@ const RewardsButton = () => {
               <ZigTypography
                 sx={{
                   mt: '1px',
-                  fontSize: '10px',
                   lineHeight: 1.3,
                   textAlign: 'center',
                 }}
+                color='neutral200'
+                fontSize='11px'
               >
                 {t('header.rewards.description')}
               </ZigTypography>

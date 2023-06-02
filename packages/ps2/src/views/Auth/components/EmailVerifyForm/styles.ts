@@ -10,10 +10,10 @@ export const Layout = styled('form')`
 
 export const Field = styled('fieldset')`
   border: 0;
-  padding: 0;
+  padding: 0 0 4px;
   text-align: center;
   align-items: center;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 40px;
 `;

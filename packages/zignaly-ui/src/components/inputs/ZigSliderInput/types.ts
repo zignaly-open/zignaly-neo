@@ -12,6 +12,7 @@ export type ZigSliderInputProps = {
     left: string | null;
     right: string | null;
   };
+  prefixId?: string;
 };
 
 export const SliderModes = {

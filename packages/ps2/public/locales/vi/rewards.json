@@ -4,10 +4,6 @@
 	"active": "Active",
 	"reward-terms": "Điều khoản thưởng",
 	"description": "Kiếm phần thưởng bằng cách hoàn thành các nhiệm vụ đơn giản. Thật dễ dàng!",
-	"header": {
-		"title": "Nhận $20",
-		"description": "Trên khoản tiền gửi thứ 1"
-	},
 	"active-rewards": "Phần thưởng đang hoạt động",
 	"no-active-rewards": "Không có phần thưởng hoạt động tại thời điểm này",
 	"disabled-voucher": "Voucher đã được kích hoạt",

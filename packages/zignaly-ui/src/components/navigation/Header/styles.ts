@@ -1,10 +1,9 @@
-import styled from "styled-components";
-
 // Config
 import { headerConfig } from "./utils";
 import { MarginContainer } from "../../styled";
+import { styled } from "@mui/system";
 
-export const Layout = styled.header`
+export const Layout = styled("header")`
   background: linear-gradient(269.14deg, #080810 0%, #11122b 100%);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
   display: flex;
@@ -31,22 +30,22 @@ export const Container = styled(MarginContainer)`
   justify-content: space-between;
 `;
 
-export const Side = styled.div`
+export const Side = styled("div")`
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 28px;
 `;
 
-export const HeaderLinksContainer = styled.nav`
+export const HeaderLinksContainer = styled("nav")`
   display: flex;
   flex-direction: row;
   gap: 28px;
   user-select: none;
 
   a {
-    color: #706f82;
-    font-weight: 500;
+    color: ${({ theme }) => theme.palette.neutral200};
+    font-weight: 400;
     font-size: 14px;
     line-height: 28px;
     letter-spacing: 0.55px;

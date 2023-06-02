@@ -5,7 +5,7 @@ import { Layout } from "./styles";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
 import { Box } from "@mui/material";
 
-// TODO: rename to ZigInoutCode
+// TODO: rename to ZigInputCode
 function InputCode({
   fields,
   loading,
@@ -38,7 +38,7 @@ function InputCode({
   }, [error, clearOnError]);
 
   return (
-    <Layout error={error || undefined}>
+    <Layout error={error || undefined} loading={loading}>
       <Box id={prefixId && `${prefixId}__code-input`}>
         <ReactCodeInput
           ref={inputRef}
@@ -48,6 +48,7 @@ function InputCode({
           disabled={loading}
           autoFocus={autoFocus}
           onComplete={onComplete}
+          placeholder={new Array(fields).fill("")}
         />
       </Box>
       {error && <ErrorMessage text={error} id={prefixId && `${prefixId}__error-message`} />}

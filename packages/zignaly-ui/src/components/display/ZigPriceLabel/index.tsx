@@ -26,6 +26,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
     variant: "body2" as Variant,
     color: "neutral200",
     fontWeight: "regular",
+    ml: "0.4em",
     ...(coinProps || ""),
   };
 
@@ -46,15 +47,24 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
     <ZigTypography
       id={id}
       {...withDefaultProps}
-      sx={{ whiteSpace: "nowrap", ...(withDefaultProps?.sx || {}) }}
+      sx={{
+        whiteSpace: "nowrap",
+        display: "inline-flex",
+        alignItems: "center",
+        justifyContent: "center",
+        ...(withDefaultProps?.sx || {}),
+      }}
     >
-      {showApproximate && numberOfDecimals(value) > 2 && <>~</>}
+      {showApproximate &&
+        numberOfDecimals(value) > (precision || getPrecisionForCoin(coin || "USDT", value)) && (
+          <>~</>
+        )}
       {!!prefix && <>{prefix}</>}
       {+value >= 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
       {usd && "$"}
       <NumericFormat
         value={Math.abs(shorten ? shortened : +value)}
-        renderText={(v) => trimZeros(v)}
+        renderText={(v) => (showApproximate ? v : trimZeros(v))}
         displayType={"text"}
         thousandSeparator={true}
         decimalScale={

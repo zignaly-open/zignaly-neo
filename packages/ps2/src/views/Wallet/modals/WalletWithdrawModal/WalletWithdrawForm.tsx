@@ -13,10 +13,13 @@ import {
   CenteredLoader,
 } from '@zignaly-open/ui';
 import { WalletWithdrawModalProps, WithdrawFormData } from './types';
-import { Box, Grid } from '@mui/material';
+import { Box } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { WithdrawValidation } from './validations';
-import { ModalActions as ModalActions } from 'components/ZModal/ModalContainer/styles';
+import {
+  Form,
+  ModalActions as ModalActions,
+} from 'components/ZModal/ModalContainer/styles';
 import LabelValueLine from './atoms/LabelValueLine';
 import {
   useBalanceQuery,
@@ -30,6 +33,7 @@ import WalletDepositModal from '../WalletDepositModal';
 
 function WalletWithdrawForm({
   setStep,
+  step,
   selectedCoin,
   close,
   coins,
@@ -148,14 +152,10 @@ function WalletWithdrawForm({
 
   const balance = balances[selectedCoin]?.availableBalance ?? 0;
 
-  if (confirmationData) {
+  if (confirmationData && step === 'confirm') {
     return (
       <WithdrawConfirmForm
         coin={selectedCoin}
-        back={() => {
-          setConfirmationData(null);
-          setStep('');
-        }}
         close={close}
         {...confirmationData}
         amount={Number(confirmationData.amount.value)}
@@ -165,174 +165,159 @@ function WalletWithdrawForm({
         status={withdrawStatus}
         fee={Number(feeInfo.floatFee)}
         feeCoin={feeCoin}
-        iconBucket='coins'
       />
     );
   }
 
   return (
-    <form
+    <Form
       onSubmit={handleSubmit((data) => {
         setStep('confirm');
         setConfirmationData({ ...data, coin: selectedCoin });
       })}
       autoComplete='off'
     >
-      <Box mt={1} mb={1}>
-        <ZigTypography>{t('description')}</ZigTypography>
+      <ZigTypography>{t('description')}</ZigTypography>
+
+      <Box display='flex' gap='11px'>
+        <ZigCoinIcon
+          size='small'
+          coin={selectedCoin}
+          name={coinObject?.name}
+          bucket='coins'
+        />
+        <ZigTypography fontWeight={600}>{selectedCoin}</ZigTypography>&nbsp;
       </Box>
 
-      <Grid container>
-        <Grid item xs={12} pt={3}>
-          <Box display='flex' gap='11px' pt={3}>
-            <ZigCoinIcon
-              size='small'
-              coin={selectedCoin}
-              name={coinObject?.name}
-              bucket='coins'
-            />
-            <ZigTypography fontWeight={600}>{selectedCoin}</ZigTypography>&nbsp;
-          </Box>
-        </Grid>
+      <Controller
+        name='network'
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <ZigSelect
+            menuPosition='fixed'
+            menuShouldBlockScroll
+            menuShouldScrollIntoView={false}
+            label={t('networkSelector.label')}
+            placeholder={t('networkSelector.placeholder')}
+            options={networkOptions}
+            {...field}
+          />
+        )}
+      />
 
-        <Grid item xs={12} pt={3}>
+      {!!network && !networkObject?.withdrawEnable ? (
+        <ErrorMessage text={t('wallet:notAvailable')} />
+      ) : (
+        <>
           <Controller
-            name='network'
+            name='address'
             control={control}
             rules={{ required: true }}
             render={({ field }) => (
-              <ZigSelect
-                menuPosition='fixed'
-                menuShouldBlockScroll
-                menuShouldScrollIntoView={false}
-                label={t('networkSelector.label')}
-                placeholder={t('networkSelector.placeholder')}
-                options={networkOptions}
+              <ZigInput
+                fullWidth
+                label={t('withdrawAddress.label')}
+                placeholder={t('withdrawAddress.placeholder')}
+                error={t(errors.address?.message)}
                 {...field}
               />
             )}
           />
-        </Grid>
 
-        {!!network && !networkObject?.withdrawEnable ? (
-          <Box mt={2}>
-            <ErrorMessage text={t('wallet:notAvailable')} />
-          </Box>
-        ) : (
-          <>
-            <Grid item xs={12} pt={3}>
-              <Controller
-                name='address'
+          {!!networkObject?.memoRegex && (
+            <Controller
+              name='tag'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <ZigInput
+                  fullWidth
+                  label={t('withdrawMemo.label')}
+                  placeholder={t('withdrawMemo.placeholder')}
+                  error={t(errors.tag?.message)}
+                  {...field}
+                />
+              )}
+            />
+          )}
+
+          {coinObject && (
+            <div>
+              <InputAmountAdvanced
+                name='amount'
                 control={control}
-                rules={{ required: true }}
-                render={({ field }) => (
-                  <ZigInput
-                    fullWidth
-                    label={t('withdrawAddress.label')}
-                    placeholder={t('withdrawAddress.placeholder')}
-                    error={t(errors.address?.message)}
-                    {...field}
-                  />
-                )}
-              />
-            </Grid>
-
-            {!!networkObject?.memoRegex && (
-              <Grid item xs={12} pt={3}>
-                <Controller
-                  name='tag'
-                  control={control}
-                  rules={{ required: true }}
-                  render={({ field }) => (
-                    <ZigInput
-                      fullWidth
-                      label={t('withdrawMemo.label')}
-                      placeholder={t('withdrawMemo.placeholder')}
-                      error={t(errors.tag?.message)}
-                      {...field}
-                    />
-                  )}
-                />
-              </Grid>
-            )}
-
-            {coinObject && (
-              <Grid item xs={12} mt={3}>
-                <InputAmountAdvanced
-                  name='amount'
-                  control={control}
-                  label={t('amountToWithdraw.label')}
-                  showUnit={true}
-                  showBalance={false}
-                  placeholder='0.0'
-                  iconBucket='coins'
-                  tokens={[
-                    {
-                      id: selectedCoin,
-                      balance,
-                    },
-                  ]}
-                  error={
-                    t(
-                      (
-                        errors?.amount as FieldErrorsImpl<InputAmountAdvancedValueType>
-                      )?.value?.message,
-                    ) ||
-                    (notEnoughZig && (
-                      <>
-                        {t('notEnoughZig')}&nbsp;
-                        <ZigButton
-                          variant={'text'}
-                          onClick={() => {
-                            close();
-                            setTimeout(() => {
-                              showModal(WalletDepositModal, {
-                                selectedCoin: 'ZIG',
-                                coins,
-                              });
+                label={t('amountToWithdraw.label')}
+                showUnit={true}
+                showBalance={false}
+                placeholder='0.0'
+                iconBucket='coins'
+                tokens={[
+                  {
+                    id: selectedCoin,
+                    balance,
+                  },
+                ]}
+                error={
+                  t(
+                    (
+                      errors?.amount as FieldErrorsImpl<InputAmountAdvancedValueType>
+                    )?.value?.message,
+                  ) ||
+                  (notEnoughZig && (
+                    <>
+                      {t('notEnoughZig')}&nbsp;
+                      <ZigButton
+                        variant={'text'}
+                        onClick={() => {
+                          close();
+                          setTimeout(() => {
+                            showModal(WalletDepositModal, {
+                              selectedCoin: 'ZIG',
+                              coins,
                             });
-                          }}
-                        >
-                          {t('wallet:buy.deposit.depositCoin', {
-                            coin: 'ZIG',
-                          })}
-                        </ZigButton>
-                      </>
-                    ))
-                  }
+                          });
+                        }}
+                      >
+                        {t('wallet:buy.deposit.depositCoin', {
+                          coin: 'ZIG',
+                        })}
+                      </ZigButton>
+                    </>
+                  ))
+                }
+              />
+              <Box mt={1}>
+                <LabelValueLine
+                  label={t('amountToWithdraw.labelBalance')}
+                  value={balance.toString()}
+                  coin={selectedCoin}
                 />
-                <Box mt={1}>
-                  <LabelValueLine
-                    label={t('amountToWithdraw.labelBalance')}
-                    value={balance.toString()}
-                    coin={selectedCoin}
-                  />
-                </Box>
-                {feeInfo && (
-                  <LabelValueLine
-                    label={t('amountToWithdraw.fee')}
-                    value={feeInfo.floatFee}
-                    coin={feeCoin}
-                  />
-                )}
-              </Grid>
-            )}
+              </Box>
+              {feeInfo && (
+                <LabelValueLine
+                  label={t('amountToWithdraw.fee')}
+                  value={feeInfo.floatFee}
+                  coin={feeCoin}
+                />
+              )}
+            </div>
+          )}
 
-            <ModalActions>
-              <ZigButton
-                variant={'contained'}
-                id={'withdraw__continue'}
-                size={'large'}
-                type={'submit'}
-                disabled={!isValid || !feeInfo || notEnoughZig}
-              >
-                {t('confirmation.continue')}
-              </ZigButton>
-            </ModalActions>
-          </>
-        )}
-      </Grid>
-    </form>
+          <ModalActions>
+            <ZigButton
+              variant={'contained'}
+              id={'withdraw__continue'}
+              size={'large'}
+              type={'submit'}
+              disabled={!isValid || !feeInfo || notEnoughZig}
+            >
+              {t('confirmation.continue')}
+            </ZigButton>
+          </ModalActions>
+        </>
+      )}
+    </Form>
   );
 }
 

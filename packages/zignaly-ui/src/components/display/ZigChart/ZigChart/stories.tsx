@@ -78,6 +78,33 @@ ExampleChartSlightlyNegative.args = {
   ],
 };
 
+export const ExampleChartFullyNegative = Template.bind({});
+ExampleChartFullyNegative.args = {
+  data: [
+    { x: "Jul 1", y: -100 },
+    { x: "Jul 2", y: -150 },
+    { x: "Jul 3", y: -230 },
+    { x: "Jul 4", y: -150 },
+    { x: "Jul 5", y: -80 },
+    { x: "Jul 6", y: -80 },
+    { x: "Jul 7", y: -70 },
+  ],
+};
+
+export const ExampleChartFullyNegative2 = Template.bind({});
+ExampleChartFullyNegative2.args = {
+  data: [
+    { x: "Jul 1", y: -0.00001 },
+    { x: "Jul 2", y: -0.00001 },
+    { x: "Jul 3", y: -0.00003 },
+    { x: "Jul 4", y: -0.00009 },
+    { x: "Jul 5", y: -0.00003 },
+    { x: "Jul 6", y: -0.00004 },
+    { x: "Jul 7", y: -0.00009 },
+  ],
+  precision: 8,
+};
+
 export const ExampleBarChart = Template.bind({});
 ExampleBarChart.args = {
   bars: true,

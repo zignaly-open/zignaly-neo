@@ -1,5 +1,6 @@
-import { styled, css, Box } from '@mui/material';
+import { styled, css, Box, IconButton } from '@mui/material';
 import { styledIf, ZigTypography } from '@zignaly-open/ui';
+import { withAttrs } from 'util/styles';
 
 export const Layout = styled(Box)<{ width: number }>`
   display: flex;
@@ -38,6 +39,11 @@ export const Body = styled('div')`
   width: calc(100% + 80px);
   padding-left: 40px;
   padding-right: 40px;
+
+  /* Style Description  */
+  > .MuiTypography-root:first-child {
+    margin-bottom: 24px;
+  }
 `;
 
 export const Header = styled('div')<{ compact: boolean }>`
@@ -48,7 +54,7 @@ export const Header = styled('div')<{ compact: boolean }>`
   justify-content: space-between;
   width: 100%;
   align-items: center;
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   ${({ compact }) =>
     compact &&
     `
@@ -75,13 +81,26 @@ export const Inline = styled('div')<{ align?: string }>`
   gap: 12px;
 `;
 
+export const Form = styled(
+  withAttrs(Box, {
+    component: 'form',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 3,
+  }),
+)`
+  > div:last-child {
+    margin-top: 0;
+  }
+`;
+
 export const ModalActions = styled('div')<{
   align?: 'left' | 'center' | 'right';
   direction?: 'row' | 'column';
 }>`
   display: flex;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 24px;
   gap: 32px;
   flex-direction: ${({ direction }) => direction};
   width: 100%;
@@ -93,7 +112,8 @@ export const ModalActions = styled('div')<{
       : 'center'};
 `;
 
-export const AlertBlock = styled('div')`
-  display: flex;
-  margin-top: 15px;
+export const CloseIconButton = styled(IconButton)`
+  position: absolute;
+  right: 22px;
+  top: 16px;
 `;

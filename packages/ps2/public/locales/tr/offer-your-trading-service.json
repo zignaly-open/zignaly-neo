@@ -10,7 +10,8 @@
 		"types": {
 			"spot": "Spot",
 			"futures": "Vadeli İşlemler"
-		}
+		},
+		"please-verify": "Lütfen bilgilerinizi gözden geçirin. Tip ve taban daha sonra değiştirilemez"
 	},
 	"wrapper": {
 		"title": "Profit Sharing Servis Faydaları",

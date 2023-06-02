@@ -7,11 +7,18 @@ function EditInvestmentSuccessModal({ close }: { close: () => void }) {
   const { t } = useTranslation('edit-investment');
   return (
     <>
-      <ZigTypography color={'neutral200'}>
+      <ZigTypography
+        color={'neutral200'}
+        id={'edit-investment-success-modal__description'}
+      >
         {t('modalSuccess.description')}
       </ZigTypography>
       <ModalActions>
-        <ZigButton id={'invest-success__close'} onClick={close} size={'large'}>
+        <ZigButton
+          id={'edit-investment-success-modal__close'}
+          onClick={close}
+          size={'large'}
+        >
           {t('modalSuccess.button')}
         </ZigButton>
       </ModalActions>

@@ -1,17 +1,22 @@
 import React, { useMemo } from 'react';
 import { Box, Divider } from '@mui/material';
-import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import {
+  ZigButton,
+  ZigCaretRightIcon,
+  ZigPriceLabel,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router-dom';
 import { ROUTE_DASHBOARD, ROUTE_PROFIT_SHARING } from '../../../../routes';
 import { useBalanceQuery } from 'apis/user/api';
 import { useActiveExchange } from 'apis/user/use';
-import { ChevronRight } from '@mui/icons-material';
 import { useInvestmentsQuery } from 'apis/investment/api';
 import { BalanceStatus } from './types';
 import { useZModal } from 'components/ZModal/use';
 import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { GradientBorderButtonWrapper } from '../ReferralButton/atoms';
+import theme from '../../../../theme';
 
 const BalanceButton = () => {
   const { t } = useTranslation('common');
@@ -97,7 +102,7 @@ const BalanceButton = () => {
             }}
           >
             <Box gap={1} display='flex' justifyContent='space-between'>
-              <ZigTypography variant='body2' color='neutral300' fontSize='12px'>
+              <ZigTypography variant='body2' color='neutral200' fontSize='11px'>
                 {t('portfolio')}
               </ZigTypography>
               <ZigPriceLabel
@@ -109,7 +114,7 @@ const BalanceButton = () => {
               />
             </Box>
             <Box gap={1} display='flex' justifyContent='space-between'>
-              <ZigTypography variant='body2' color='neutral300' fontSize='12px'>
+              <ZigTypography variant='body2' color='neutral200' fontSize='11px'>
                 {t('balance.available')}
               </ZigTypography>
               <ZigPriceLabel
@@ -125,9 +130,10 @@ const BalanceButton = () => {
             variant='middle'
             orientation='vertical'
             sx={{
-              borderColor: (theme) => theme.palette.neutral600,
+              borderColor: (muiTheme) => muiTheme.palette.neutral600,
+              borderStyle: 'dotted',
               mx: 1.5,
-              my: 0,
+              my: '7px',
             }}
             flexItem
           />
@@ -140,9 +146,10 @@ const BalanceButton = () => {
           >
             <ZigTypography
               variant='body2'
-              color='neutral300'
               textAlign='center'
-              fontSize='12px'
+              color='neutral200'
+              fontSize='11px'
+              sx={{ mr: 0.5 }}
             >
               {balanceStatus === BalanceStatus.NoFunds
                 ? t('balance.deposit-funds')
@@ -150,7 +157,11 @@ const BalanceButton = () => {
                 ? t('balance.find-traders')
                 : t('balance.my-portfolio')}
             </ZigTypography>
-            <ChevronRight />
+            <ZigCaretRightIcon
+              color={theme.palette.neutral300}
+              width={12}
+              height={12}
+            />
           </Box>
         </Box>
       </ZigButton>

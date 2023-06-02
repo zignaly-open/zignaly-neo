@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Link } from '@mui/material';
+import { Link } from '@mui/material';
 import {
   ZigButton,
   ZigCopyText,
@@ -11,10 +11,10 @@ import { Trans, useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEnable2FAMutation, useLazyEnable2FAInfoQuery } from 'apis/user/api';
 import { useForm, Controller } from 'react-hook-form';
-import { Form, QRCode } from './styles';
+import { QRCode } from './styles';
 import { TwoFAValidation } from './validations';
 import { TwoFAFormType } from './types';
-import { ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { Form, ModalActions } from 'components/ZModal';
 import { useToast } from 'util/hooks/useToast';
 import { useLogout } from 'apis/user/use';
 import {
@@ -42,8 +42,10 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
     enable2FA(data)
       .unwrap()
       .then(() => {
-        toast.success(t('enable-2fa.success'));
-        logout();
+        setTimeout(() => {
+          toast.success(t('enable-2fa.success'));
+          logout();
+        });
         close();
       })
       .catch((e) => {
@@ -59,26 +61,24 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
   if (!load2FAInfoResult.isFetching && load2FAInfoResult.data) {
     return (
       <>
-        <Box mt={1} mb='20px'>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <ZigTypography whiteSpace='pre-line'>
             <Trans i18nKey='enable-2fa.setup-description' t={t}>
               <ZigLink href={DOWNLOAD_GOOGLE_AUTHENTICATOR_URL} />
             </Trans>
           </ZigTypography>
-        </Box>
-        <QRCode aria-labelledby='QR Code' src={load2FAInfoResult.data[1]} />
+          <QRCode aria-labelledby='QR Code' src={load2FAInfoResult.data[1]} />
 
-        <ZigTypography color='yellow' mt={5} mb={3}>
-          {t('enable-2fa.key-phrase-info')}
-        </ZigTypography>
-        <ZigCopyText
-          label={t('enable-2fa.key-phrase')}
-          value={load2FAInfoResult.data[0]}
-          onCopied={() => {
-            toast.success(t('enable-2fa.key-phrase-copied'));
-          }}
-        />
-        <Form onSubmit={handleSubmit(onSubmit)}>
+          <ZigTypography color='yellow'>
+            {t('enable-2fa.key-phrase-info')}
+          </ZigTypography>
+          <ZigCopyText
+            label={t('enable-2fa.key-phrase')}
+            value={load2FAInfoResult.data[0]}
+            onCopied={() => {
+              toast.success(t('enable-2fa.key-phrase-copied'));
+            }}
+          />
           <Controller
             name='code'
             control={control}
@@ -119,17 +119,15 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
 
   return (
     <>
-      <Box mt={1} mb={1}>
-        <ZigTypography whiteSpace='pre-line'>
-          <Trans i18nKey='enable-2fa.description' t={t}>
-            <Link
-              href={HELP_CREATE_ENABLE_2FA_URL}
-              target='_blank'
-              rel='noopener'
-            />
-          </Trans>
-        </ZigTypography>
-      </Box>
+      <ZigTypography whiteSpace='pre-line'>
+        <Trans i18nKey='enable-2fa.description' t={t}>
+          <Link
+            href={HELP_CREATE_ENABLE_2FA_URL}
+            target='_blank'
+            rel='noopener'
+          />
+        </Trans>
+      </ZigTypography>
 
       <ModalActions align='center'>
         <ZigButton

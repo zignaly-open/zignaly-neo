@@ -15,6 +15,7 @@ import {
 } from '../../../../../apis/investment/use';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { ColumnDef } from '@tanstack/react-table';
+import { Box } from '@mui/material';
 
 const PendingTransactionsList: React.FC<{
   setView: ChangeViewFn;
@@ -65,20 +66,51 @@ const PendingTransactionsList: React.FC<{
           columns={
             [
               {
-                header: t('modal.pendingTransaction.tableHeader.amount'),
+                header: (
+                  <Box position={'relative'} padding={'5px 15px'}>
+                    <Box
+                      component='img'
+                      sx={{
+                        position: 'absolute',
+                        width: '10px',
+                        right: 0,
+                        top: 0,
+                      }}
+                      src={`/images/portfolio/info-icon.svg`}
+                    />
+                    {t('modal.pendingTransaction.tableHeader.amount')}
+                  </Box>
+                ),
                 accessorKey: 'amount',
                 cell: (props) => (
-                  <ZigTablePriceLabel coin={coin.id} value={props.getValue()} />
+                  <ZigTablePriceLabel
+                    id={`pending-transactions-table__amount-${props.row.id}`}
+                    coin={coin.id}
+                    value={props.getValue()}
+                    showApproximate
+                  />
                 ),
                 sortingFn: 'alphanumeric',
               },
               {
                 header: t('modal.pendingTransaction.tableHeader.type'),
                 accessorKey: 'type',
+                cell: (props) => (
+                  <Box id={`pending-transactions-table__type-${props.row.id}`}>
+                    {props.getValue()}
+                  </Box>
+                ),
               },
               {
                 header: t('modal.pendingTransaction.tableHeader.status'),
                 accessorKey: 'status',
+                cell: (props) => (
+                  <Box
+                    id={`pending-transactions-table__status-${props.row.id}`}
+                  >
+                    {props.getValue()}
+                  </Box>
+                ),
               },
             ] as ColumnDef<
               typeof pendingTransactionsList[number],
@@ -93,7 +125,7 @@ const PendingTransactionsList: React.FC<{
 
       <ModalActions>
         <ZigButton
-          id={'pending__pending-transactions'}
+          id={'pending-transactions__close'}
           startIcon={<ArrowBackIosIcon />}
           onClick={() => setView(EditInvestmentViews.EditInvestment)}
           size={'large'}

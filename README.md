@@ -80,25 +80,11 @@ yarn storybook
 
 We also will have this very storybook deployed to GH pages once the repo issues are fixed.
 
-**TODO 2**: Fix repo issues.
-
-### Publishing
-
-We actually do not do that anymore.
-
 ## How to deploy
 
 ### Deploy to `test`
 
-* Open a PR to master
-* Have it approved
-* The Auto-merge to test action will kick in and merge to test
-
-If it fails and we have conflicts, you'll have to manually resolve them and opush to `test` branch directly.
-
-Or you can circumvent all this and push to `test`. This is also an option. Just remember: `test` is a throwaway branch and it will NEVER be merged to `master`. If you open a `test` -> `master` PR, I will find you and ~break your legs~ explain that this is not the right thing to do.
-
-This applies only to the PS2 project.
+We do not do that anymore.
 
 ### Deploy to master
 

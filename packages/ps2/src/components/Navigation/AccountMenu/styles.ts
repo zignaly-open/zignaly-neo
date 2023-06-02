@@ -7,7 +7,9 @@ export const HeaderDropdownButton = styled('button', {
   appearance: none;
   cursor: pointer;
   border: none;
-  height: 54px;
+  height: 49px;
+  margin-top: 4px;
+  padding-bottom: 4px;
   padding-left: 15px;
   padding-right: 15px;
   display: flex;
@@ -15,11 +17,13 @@ export const HeaderDropdownButton = styled('button', {
   justify-content: space-around;
   text-align: center;
   background: ${(props) => (props.active ? '#12152c' : 'transparent')};
+
   &:hover {
     background: #12152c;
   }
+
   transition: background-color 0.2s;
-  border-radius: 0;
+  border-radius: ${(props) => (props.active ? '5px 5px 0 0' : '5px')};
 `;
 
 export const LoginButton = styled('span')`
@@ -40,6 +44,7 @@ export const LoginButton = styled('span')`
 export const AccountName = styled(ZigTypography)`
   max-width: 155px;
   overflow: hidden;
+  font-size: 14px;
   white-space: nowrap;
   text-overflow: ellipsis;
 `;
@@ -50,8 +55,8 @@ export const AccountDropdown = styled('div')`
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding-top: 7px;
-  padding-bottom: 7px;
+  padding-top: 12px;
+  padding-bottom: 12px;
   overflow: hidden;
 
   span {

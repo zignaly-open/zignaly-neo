@@ -1,5 +1,4 @@
 import React from 'react';
-import { Box } from '@mui/material';
 import {
   ErrorMessage,
   ZigButton,
@@ -10,10 +9,9 @@ import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useDisable2FAMutation } from 'apis/user/api';
 import { useForm, Controller } from 'react-hook-form';
-import { Form } from './styles';
 import { TwoFAValidation } from './validations';
 import { TwoFAFormType } from './types';
-import { ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { Form, ModalActions } from 'components/ZModal';
 import { useToast } from 'util/hooks/useToast';
 import { useDispatch } from 'react-redux';
 import { enable2FA } from 'apis/user/store';
@@ -53,11 +51,9 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
 
   return (
     <>
-      <Box mt={1} mb={1}>
-        <ZigTypography whiteSpace='pre-line'>
-          {t('disable-2fa.description')}
-        </ZigTypography>
-      </Box>
+      <ZigTypography whiteSpace='pre-line'>
+        {t('disable-2fa.description')}
+      </ZigTypography>
       <ErrorMessage text={t('disable-2fa.security')} />
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Controller

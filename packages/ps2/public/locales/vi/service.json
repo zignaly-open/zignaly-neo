@@ -92,23 +92,24 @@
 			"success-fee-range": "Phải là 0 hoặc một số nguyên từ 10 đến 75"
 		}
 	},
-	"you-get-x": "Bạn nhận được {{number}} %",
 	"create": {
 		"invest-in-your-service": "Đầu tư vào dịch vụ của bạn",
 		"select-type-first": "Chọn loại dịch vụ",
 		"title": "Tạo mới",
 		"action": "Tạo dịch vụ",
 		"next-step": "Kế tiếp",
-		"service-type": "Loại dịch vụ",
+		"service-type": "Loại dịch vụ:",
 		"service-name": "Tên dịch vụ",
-		"base-currency": "Đồng yết giá",
+		"base-currency": "Đồng tiền cơ bản",
 		"types": {
 			"spot": "Giao ngay",
 			"futures": "Hợp đồng tương lai"
 		},
 		"minimum-balance": "Để giao dịch và cho phép nhà đầu tư đầu tư, bạn cần đầu tư ít nhất {{ minValue }} {{ minValueCoin }} vào dịch vụ của mình",
 		"profits-explainer": "Quyết định số tiền lãi từ phí giao dịch và phí thành công mà bạn muốn yêu cầu tự động chuyển ra ngoài.",
-		"please-verify": "Vui lòng xem lại thông tin của bạn. Loại và cơ sở không thể thay đổi sau này",
-		"zero-fee": "Nếu bạn chọn phí thành công = 0, Zignaly cũng sẽ không tính bất kỳ khoản phí nào"
-	}
+		"zero-fee": "Nếu bạn chọn phí thành công = 0, Zignaly cũng sẽ không tính bất kỳ khoản phí nào",
+		"total-fee": "Tổng phí",
+		"you-receive": "Bạn nhận được"
+	},
+	"you-receive": "Bạn nhận được"
 }

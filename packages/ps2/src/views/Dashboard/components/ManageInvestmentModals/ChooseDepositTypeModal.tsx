@@ -4,16 +4,9 @@ import { DialogProps } from '@mui/material/Dialog';
 import ZModal from '../../../../components/ZModal';
 import ChooseDepositType from './views/ChooseDepositType';
 import DepositView from './views/Deposit';
-import { ChooseDepositTypeViews } from './types';
+import { ChooseDepositTypeViews, UseModalReturn } from './types';
 
-function ChooseDepositTypeModal({
-  close,
-  selectedCoin,
-  ...props
-}: {
-  close: () => void;
-  selectedCoin: string;
-} & DialogProps): React.ReactElement {
+export function useDepositModalContent(selectedCoin: string): UseModalReturn {
   const { t } = useTranslation('deposit-crypto');
 
   const [view, setView] = useState<ChooseDepositTypeViews>(
@@ -40,7 +33,18 @@ function ChooseDepositTypeModal({
 
   const { title, component } =
     views[view in views ? view : ChooseDepositTypeViews.ChooseDepositTypeView];
+  return { title, component };
+}
 
+function ChooseDepositTypeModal({
+  close,
+  selectedCoin,
+  ...props
+}: {
+  close: () => void;
+  selectedCoin: string;
+} & DialogProps): React.ReactElement {
+  const { title, component } = useDepositModalContent(selectedCoin);
   return (
     <ZModal wide {...props} close={close} title={title}>
       {component()}

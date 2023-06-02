@@ -4,10 +4,6 @@
 	"active": "Etkin",
 	"reward-terms": "Ödül Koşulları",
 	"description": "Basit görevleri tamamlayarak ödüller kazanın. İşte bu kadar kolay!",
-	"header": {
-		"title": "20$ kazanın",
-		"description": "İlk para yatırma işleminde"
-	},
 	"active-rewards": "Aktif Ödüller",
 	"no-active-rewards": "Şu anda aktif ödül yok",
 	"disabled-voucher": "Kupon zaten etkinleştirildi",

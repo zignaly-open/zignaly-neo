@@ -29,6 +29,7 @@ const ZigSliderInput = ({
     left: null,
     right: null,
   },
+  prefixId,
 }: ZigSliderInputProps) => {
   const sliderRef = useRef<HTMLDivElement>(null);
   const [internalValue, setInternalValue] = useState<number>(
@@ -86,7 +87,11 @@ const ZigSliderInput = ({
     <>
       {labels.top && (
         <Header>
-          <ZigTypography variant="body1" color={"neutral200"}>
+          <ZigTypography
+            variant="body1"
+            color={"neutral200"}
+            id={prefixId && `${prefixId}__top-label`}
+          >
             {labels.top}
           </ZigTypography>
         </Header>
@@ -94,7 +99,12 @@ const ZigSliderInput = ({
       <Layout style={style}>
         <TextContainer>
           {!!labels.left && (
-            <Label variant="body2" fontWeight="demibold" color="neutral200">
+            <Label
+              variant="body2"
+              fontWeight="demibold"
+              color="neutral200"
+              id={prefixId && `${prefixId}__left-label`}
+            >
               {labels.left}
             </Label>
           )}
@@ -103,18 +113,23 @@ const ZigSliderInput = ({
             variant="body2"
             fontWeight="demibold"
             color={labels.left ? "highlighted" : "neutral200"}
+            id={prefixId && `${prefixId}__left-label-value`}
           >
             {isRangeMode ? 100 - value : 0}%
           </Label>
         </TextContainer>
         <Bar ref={sliderRef}>
-          <Line variant="left" />
-          <Line variant="middle" />
-          <Line variant="right" />
+          <Line variant="left" id={prefixId && `${prefixId}__line-left`} />
+          <Line variant="middle" id={prefixId && `${prefixId}__line-middle`} />
+          <Line variant="right" id={prefixId && `${prefixId}__line-right`} />
           <DotContainer onMouseDown={() => setEnabled(true)} value={value}>
-            <Dot>
+            <Dot id={prefixId && `${prefixId}__dot`}>
               {!isRangeMode && (
-                <DotLabel variant={"body2"} color={"highlighted"}>
+                <DotLabel
+                  variant={"body2"}
+                  color={"highlighted"}
+                  id={prefixId && `${prefixId}__dot-label`}
+                >
                   {value}%
                 </DotLabel>
               )}
@@ -123,7 +138,12 @@ const ZigSliderInput = ({
         </Bar>
         <TextContainer>
           {labels.right && (
-            <Label variant="body2" fontWeight="demibold" color="neutral200">
+            <Label
+              variant="body2"
+              fontWeight="demibold"
+              color="neutral200"
+              id={prefixId && `${prefixId}__right-label`}
+            >
               {labels.right}
             </Label>
           )}
@@ -132,6 +152,7 @@ const ZigSliderInput = ({
             fontWeight="demibold"
             className={"value"}
             color={labels.right ? "highlighted" : "neutral200"}
+            id={prefixId && `${prefixId}__right-label-value`}
           >
             {isRangeMode ? value : 100}%
           </Label>
