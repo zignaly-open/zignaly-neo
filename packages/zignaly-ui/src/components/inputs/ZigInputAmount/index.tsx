@@ -1,10 +1,10 @@
 import React, { useState, forwardRef } from "react";
 import { ZigInputAmountProps } from "./types";
-import { InputAdornment, TextField, Box } from "@mui/material";
+import { InputAdornment, TextField, Box, Divider } from "@mui/material";
 import ZigButton from "../ZigButton";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
 import ZigInput from "../ZigInput";
-import { Layout } from "./styles";
+import { Layout, MaxButton, TopDivider } from "./styles";
 import ZigTypography from "components/display/ZigTypography";
 import { InputExtraInfo } from "./atoms";
 import ZigCoinIcon from "../../display/ZigCoinIcon";
@@ -21,6 +21,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     coin,
     id,
     extraInfo,
+    onMax,
     // extraInfo = [
     //   { value: 1000, text: "Available" },
     //   { value: 100, text: "Min. deposit" },
@@ -33,16 +34,34 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
 
   return (
-    <Layout>
-      <ZigTypography>{label}</ZigTypography>
-      <Box display="flex" alignItems="center" gap={2}>
+    <Layout display={wide ? "flex" : "inline-flex"}>
+      <TopDivider>
+        <ZigTypography color="neutral300" variant="body2">
+          {label}
+        </ZigTypography>
+      </TopDivider>
+      <Box display="flex" alignItems="center" gap={2} width={wide ? 1 : "auto"}>
         <Box display="flex" alignItems="center" gap={1}>
           <ZigCoinIcon size="small" coin={coinVal} />
           <ZigTypography color="neutral100" variant="h3">
             {coinVal}
           </ZigTypography>
         </Box>
-        <ZigInput {...props} label={null} />
+        <ZigInput
+          {...props}
+          wide={wide}
+          label={null}
+          sx={{ width: wide ? 1 : "auto" }}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position="end">
+                <MaxButton variant="outlined" onClick={onMax}>
+                  Max
+                </MaxButton>
+              </InputAdornment>
+            ),
+          }}
+        />
       </Box>
       {typeof extraInfo === "function" ? (
         extraInfo

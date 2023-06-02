@@ -12,6 +12,7 @@ export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"
   id?: string;
   coin?: string | Coin;
   extraInfo?: InputExtraInfo;
+  onMax?: () => void;
 };
 
 export type InputExtraInfoItem = { value: string | number; label: string };

@@ -140,7 +140,15 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
 
     &.Mui-focused,
     &:hover {
-      border-color: ${({ theme }) => theme.palette.neutral400};
+      &,
+      .MuiInput-input {
+        border-color: ${({ theme }) => theme.palette.neutral400};
+        background: #171b30;
+      }
+
+      .MuiInput-input {
+        -webkit-text-fill-color: #878dd1 !important;
+      }
     }
 
     &.Mui-error,
@@ -175,16 +183,6 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
     box-shadow: none !important;
     resize: none;
     background: linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%);
-
-    &:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0 1000px white inset;
-      -webkit-background-clip: text;
-    }
-
-    &:-webkit-autofill:focus {
-      -webkit-box-shadow: 0 0 0 50px white inset;
-      -webkit-text-fill-color: #333;
-    }
 
     -webkit-text-fill-color: #838b95 !important;
 

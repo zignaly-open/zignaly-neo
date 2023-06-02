@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import "@mui/system";
-import { Meta, ComponentStory, Story } from "@storybook/react";
-import ZigInputAmount, { InputExtraInfo } from "./index";
+import { Meta, StoryObj } from "@storybook/react";
+import ZigInputAmount from "./index";
 import "@mui/system";
 import ZigTypography from "components/display/ZigTypography";
+import { ZigInputAmountProps } from "./types";
 
-export default {
+const meta = {
   title: "Inputs/ZigInputAmount",
   component: ZigInputAmount,
   argTypes: {
@@ -32,21 +33,64 @@ export default {
     },
   },
 } as Meta;
+export default meta;
+
+const ZigInputAmountWithState = (props: ZigInputAmountProps) => {
+  // Sets the hooks for both the label and primary props
+  const [value, setValue] = useState(props.value);
+  // const [isPrimary, setIsPrimary] = useState(false);
+
+  // Sets a click handler to change the label's value
+  // const handleOnChange = () => {
+  //   if (!isPrimary) {
+  //     setIsPrimary(true);
+  //     setValue("Primary");
+  //   }
+  // };
+  return (
+    <ZigInputAmount
+      {...props}
+      // onMax={
+      //   typeof props.extraInfo === "object" && props.extraInfo !== null
+      //     ? () => setValue(props.extraInfo?.balance)
+      //     : null
+      // }
+      // onMax1={
+      //   props.extraInfo && typeof props.extraInfo === "object" && "balance" in props.extraInfo
+      //     ? () => setValue(props.extraInfo.balance)
+      //     : undefined
+      // }
+      // onMax0={
+      //   typeof props.extraInfo === "object" && "balance" in props.extraInfo
+      //     ? () => setValue(props.extraInfo.balance)
+      //     : null
+      // }
+      // onMax={
+      //   props.extraInfo && props.extraInfo.balance ? () => setValue(props.extraInfo.balance) : null
+      // }
+      onMax={
+        props.extraInfo && props.extraInfo?.balance
+          ? () => setValue(props.extraInfo.balance)
+          : undefined
+      }
+      value={value}
+    />
+  );
+};
+
+type Story = StoryObj<typeof meta>;
 
 export const Default = { args: {} };
-export const WithLabel = {
+export const WithLabel: Story = {
   args: {
     label: "A label",
-    // coin: { coin: "USDT", balance: 10 },
     coin: "USDT",
-    // extraInfo: (
-    //   <InputExtraInfo balance={{ value: 1000, label: "Cuustom balance label" }} min={100} />
-    // ),
     extraInfo: {
       balance: 1000,
       min: { value: 100, label: "Min. deposit:" },
     },
   },
+  render: (props) => <ZigInputAmountWithState {...props} />,
 };
 
 export const WithCustomExtraInfo = {
