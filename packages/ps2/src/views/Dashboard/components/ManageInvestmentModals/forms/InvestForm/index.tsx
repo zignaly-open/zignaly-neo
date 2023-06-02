@@ -9,6 +9,7 @@ import {
   ZigInput,
   ZigCoinIcon,
   ZigInputAmount,
+  ZigSliderInput,
 } from '@zignaly-open/ui';
 import { EditInvestmentValidation } from './validations';
 import {
@@ -31,7 +32,7 @@ import { useZModal } from '../../../../../../components/ZModal/use';
 
 function InvestForm({ close, onInvested }: InvestFormProps) {
   const coin = useCurrentBalance();
-  const { t } = useTranslation('edit-investment');
+  const { t } = useTranslation(['edit-investment', 'action']);
   const service = useSelectedInvestment();
   const { isLoading, invest } = useInvestInService(service.serviceId);
   const { data: serviceDetails } = useServiceDetails(service.serviceId);
@@ -52,10 +53,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {
-      amountTransfer: {
-        value: '',
-        token: coin,
-      },
+      amountTransfer: '',
       transferLabelForValidation: transferMagicWord,
       transferConfirm: '',
       profitPercentage: 30,
@@ -63,6 +61,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
     },
     resolver: yupResolver(
       EditInvestmentValidation({
+        balance: coin?.balance,
         max: new BigNumber(serviceDetails.maximumSbt)
           .minus(serviceDetails.invested)
           .minus(serviceDetails.pending)
@@ -73,6 +72,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
   });
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
+  console.log(errors);
 
   const onSubmitFirstStep = () => {
     setValue('transferConfirm', '');
@@ -212,32 +212,42 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
       )}
     >
       <div>
+        <Controller
+          name={'amountTransfer'}
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <ZigInputAmount
+              id={'invest-modal__input-amount'}
+              label={t('form.inputAmount.label')}
+              wide={true}
+              coin={coin.id}
+              balance={coin.balance}
+              extraInfo={{
+                others: [renderDepositCoin()],
+              }}
+              error={
+                isDirty &&
+                t(
+                  (
+                    errors?.amountTransfer as FieldErrorsImpl<InputAmountAdvancedValueType>
+                  )?.value?.message,
+                )
+              }
+              // onMax={field.onChange}
+              // onMax={(e) => {
+              //   console.log(e);
+              //   field.onChange({ ...e, value: coin.balance });
+              // }}
+              {...field}
+              // onChange={(value) => {
+              //   console.log(value, field.onChange);
+              //   field.onChange(value);
+              // }}
+            />
+          )}
+        />
         <div>
-          <ZigInputAmount
-            id={'invest-modal__input-amount'}
-            name={'amountTransfer'}
-            // control={control}
-            label={t('form.inputAmount.label')}
-            // labelBalance={t('form.inputAmount.labelBalance')}
-            wide={true}
-            coin={coin.id}
-            extraInfo={{
-              balance: coin.balance,
-              // min: serviceDetails.minimumBalance,
-              // min: { value: 100, label: t('form.inputAmount.labelMinDeposit') },
-              others: [renderDepositCoin()],
-            }}
-            error={
-              isDirty &&
-              t(
-                (
-                  errors?.amountTransfer as FieldErrorsImpl<InputAmountAdvancedValueType>
-                )?.value?.message,
-              )
-            }
-          />
-        </div>
-        {/* <div>
           <Controller
             name='profitPercentage'
             control={control}
@@ -256,7 +266,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
               />
             )}
           />
-        </div> */}
+        </div>
       </div>
 
       <Box
@@ -307,22 +317,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           loading={isLoading}
           disabled={!canSubmit}
         >
-          {isConfirmation
-            ? t('form.button.invest-now', {
-                amount: watch('amountTransfer')!.value.toString(),
-                coin: coin.id,
-              })
-            : t('form.button.continue-to-confirmation')}
-        </ZigButton>
-        <ZigButton
-          id={'invest-modal__close'}
-          size={'large'}
-          type={'button'}
-          disabled={isLoading}
-          variant={'outlined'}
-          onClick={isConfirmation ? onGoBackToFirstStep : close}
-        >
-          {t(isConfirmation ? 'common:back' : 'common:close')}
+          {t('continue')}
         </ZigButton>
       </ModalActions>
     </form>

@@ -10,9 +10,27 @@ export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"
   error?: boolean | string;
   id?: string;
   coin?: string | Coin;
+  /**
+   * Extra info to show under the input.
+   * By default it will show the balance, min and max (if the values are provided).
+   * To hide the balance set it to false.
+   * To pass a custom label, pass an object with the value and label properties. Or a full JSX.Element.
+   */
   extraInfo?: InputExtraInfo;
   wrapExtraInfo?: number | boolean;
+  /**
+   * Custom onMax callback, if not provided, onChange will be called with the max value.
+   */
   onMax?: () => void;
+  /**
+   * Pressing the MAX button will trigger this value to be set.
+   * Also showed as info under the input.
+   * */
+  balance?: string | number;
+  /** Showed as info. */
+  min?: string | number;
+  /** Showed as info. */
+  max?: string | number;
 };
 
 export type InputExtraInfoItem = { value: string | number; label: string };

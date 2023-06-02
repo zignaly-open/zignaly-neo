@@ -114,3 +114,59 @@ export const inputAmountTokenMinValidation = yup.object().shape({
 export const inputAmountTokenDecimalsValidation = yup.object().shape({
   value: decimalsValidation(8),
 });
+
+// const inputAmountNumberValidationMinToken = inputAmountNumberValidationGt0.test(
+//   'number',
+//   'common:validation.insufficient-amount-min',
+//   function (val) {
+//     const minValue = new BigNumber(this.parent?.token?.min);
+//     const currentValue = new BigNumber(val);
+//     return !currentValue.isLessThan(minValue);
+//   },
+// );
+
+export const inputAmountValidation = ({
+  min,
+  balance,
+  maxDecimals = 8,
+}: {
+  min?: number | string;
+  balance?: number | string;
+  maxDecimals?: number;
+}) => {
+  let validation = yup.number();
+
+  if (balance !== undefined) {
+    validation = validation.test(
+      'number',
+      'common:validation.insufficient-amount',
+      (val) => !new BigNumber(val).isGreaterThan(new BigNumber(balance)),
+    );
+  }
+
+  if (min !== undefined) {
+    validation = validation.test(
+      'number',
+      'common:validation.insufficient-amount-min',
+      (val) => !new BigNumber(val).isLessThan(new BigNumber(min)),
+    );
+  }
+
+  if (maxDecimals !== undefined) {
+    validation = validation.test(
+      'number',
+      'common:validation.max-decimals',
+      (val) => checkDecimals(val, maxDecimals),
+    );
+  }
+
+  return validation;
+};
+// .test('common:validation.min-invest-amount-for-owner', function (val) {
+//   const tokenBalance = new BigNumber(this.parent?.token?.balance);
+//   const currentValue = new BigNumber(val);
+//   const minBalance = new BigNumber(min);
+//   return tokenBalance
+//     .minus(currentValue)
+//     .isGreaterThanOrEqualTo(minBalance);
+// });

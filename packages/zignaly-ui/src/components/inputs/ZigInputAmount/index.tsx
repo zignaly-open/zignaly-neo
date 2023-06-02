@@ -8,11 +8,30 @@ import { Layout, MaxButton, TopDivider } from "./styles";
 import ZigTypography from "components/display/ZigTypography";
 import { InputExtraInfo } from "./atoms";
 import ZigCoinIcon from "../../display/ZigCoinIcon";
+import { changeEvent } from "utils/event";
 export { InputExtraInfo } from "./atoms";
 
 const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
-  const { label, error, wide, coin, extraInfo, onMax, placeholder = "0.0", wrapExtraInfo } = props;
+  const {
+    label,
+    error,
+    wide,
+    coin,
+    extraInfo,
+    onMax,
+    placeholder = "0.0",
+    wrapExtraInfo,
+    balance,
+    min,
+    max,
+  } = props;
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
+
+  const handleMax = () => {
+    onMax
+      ? onMax()
+      : props.onChange?.(changeEvent(props.name, balance) as React.ChangeEvent<HTMLInputElement>);
+  };
 
   return (
     <Layout display={wide ? "flex" : "inline-flex"}>
@@ -40,7 +59,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
-                <MaxButton variant="outlined" onClick={onMax}>
+                <MaxButton variant="outlined" onClick={handleMax}>
                   Max
                 </MaxButton>
               </InputAdornment>
@@ -55,7 +74,14 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
         {typeof extraInfo === "function" ? (
           extraInfo
         ) : extraInfo ? (
-          <InputExtraInfo coin={coinVal} wrapExtraInfo={wrapExtraInfo} {...extraInfo} />
+          <InputExtraInfo
+            coin={coinVal}
+            wrapExtraInfo={wrapExtraInfo}
+            balance={balance}
+            min={min}
+            max={max}
+            {...extraInfo}
+          />
         ) : null}
       </Box>
     </Layout>

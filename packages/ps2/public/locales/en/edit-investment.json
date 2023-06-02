@@ -14,7 +14,6 @@
     },
     "inputAmount": {
       "label": "Amount to Invest",
-      "labelBalance": "Available:",
       "labelMinDeposit": "Min. deposit:"
     },
     "link": {

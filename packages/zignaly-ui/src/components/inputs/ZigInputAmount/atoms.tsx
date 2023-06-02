@@ -3,15 +3,13 @@ import ZigTypography from "components/display/ZigTypography";
 import React from "react";
 import { InputExtraInfoFalseableItem, InputExtraInfoItem, InputExtraInfoProps } from "./types";
 import { NumericFormat } from "react-number-format";
-import BigNumber from "bignumber.js";
 import { getPrecisionForCoin } from "components/display/ZigPriceLabel/util";
 
 const DEFAULT_ITEMS = {
   balance: "Available:",
   min: "Min:",
+  max: "Max:",
 };
-
-// const DEFAULT_ITEMS = [{}];
 
 const extractItem = (item: InputExtraInfoFalseableItem, key?: keyof typeof DEFAULT_ITEMS) => {
   if (!item) return null;
@@ -29,6 +27,7 @@ const extractItem = (item: InputExtraInfoFalseableItem, key?: keyof typeof DEFAU
 export const InputExtraInfo = ({
   balance,
   min,
+  max,
   others,
   coin,
   wrapExtraInfo = 3,
@@ -41,7 +40,6 @@ export const InputExtraInfo = ({
     | null
   )[];
 
-  // let items = [];
   if (others) {
     items = items.concat(
       others.map((item) =>
@@ -50,27 +48,6 @@ export const InputExtraInfo = ({
     );
   }
   items = items.filter(Boolean);
-  console.log(items);
-
-  // return (
-  //   <Divider orientation="vertical" sx={{ backgroundColor: "red" }} variant="middle">
-  //     <div>
-  //       <ZigTypography variant="body2">
-  //         {/* {LABELS.balance} */}
-  //         {item.label}
-  //         &nbsp;
-  //         <ZigTypography variant="body2" color="neutral100">
-  //           <NumericFormat
-  //             value={item.value}
-  //             displayType="text"
-  //             thousandSeparator={true}
-  //             suffix={` ${coin}`}
-  //           />
-  //         </ZigTypography>
-  //       </ZigTypography>
-  //     </div>
-  //   </Divider>
-  // );
 
   const displayInRow =
     typeof wrapExtraInfo === "number" ? items.length <= wrapExtraInfo : wrapExtraInfo;
@@ -90,7 +67,6 @@ export const InputExtraInfo = ({
             item
           ) : (
             <ZigTypography variant="body2">
-              {/* {LABELS.balance} */}
               {(item as InputExtraInfoItem).label}
               &nbsp;
               <ZigTypography variant="body2" color="neutral100">
