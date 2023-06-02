@@ -53,6 +53,12 @@ export const BalanceSummary = ({
         id={`${prefixId}__edit-${serviceId}`}
         startIcon={<EditIcon />}
         onClick={onClickEdit}
+        sx={{
+          border: 'dashed 1px #35334a',
+          padding: '5px 0 !important',
+          width: '90px',
+          borderRadius: '5px',
+        }}
       >
         {t('action:edit')}
       </ZigButton>
