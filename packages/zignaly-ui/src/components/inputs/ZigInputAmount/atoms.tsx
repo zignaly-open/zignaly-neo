@@ -4,6 +4,7 @@ import React from "react";
 import { InputExtraInfoFalseableItem, InputExtraInfoItem, InputExtraInfoProps } from "./types";
 import { NumericFormat } from "react-number-format";
 import BigNumber from "bignumber.js";
+import { getPrecisionForCoin } from "components/display/ZigPriceLabel/util";
 
 const DEFAULT_ITEMS = {
   balance: "Available:",
@@ -30,16 +31,15 @@ export const InputExtraInfo = ({
   min,
   others,
   coin,
+  wrapExtraInfo = 3,
 }: InputExtraInfoProps & {
   coin: string;
 }) => {
-  let items = [
-    extractItem(balance ?? false, "balance"),
-    extractItem(min ?? false, "min"),
-    // { value: balance, text: DEFAULT_ITEMS.balance },
-    // { value: min, text: LABELS.min },
-    // { value: balance, text },
-  ] as (InputExtraInfoItem | JSX.Element | null)[];
+  let items = [extractItem(balance ?? false, "balance"), extractItem(min ?? false, "min")] as (
+    | InputExtraInfoItem
+    | JSX.Element
+    | null
+  )[];
 
   // let items = [];
   if (others) {
@@ -49,6 +49,7 @@ export const InputExtraInfo = ({
       ),
     );
   }
+  items = items.filter(Boolean);
   console.log(items);
 
   // return (
@@ -71,14 +72,19 @@ export const InputExtraInfo = ({
   //   </Divider>
   // );
 
+  const displayInRow =
+    typeof wrapExtraInfo === "number" ? items.length <= wrapExtraInfo : wrapExtraInfo;
+
   return (
     <Box
       display="flex"
       flexWrap="wrap"
-      flexDirection={items.length <= 2 ? "row" : "column"}
+      flexDirection={displayInRow ? "row" : "column"}
       gap="6px"
+      alignItems={displayInRow ? "center" : "flex-start"}
+      justifyContent={displayInRow ? "center" : "flex-start"}
     >
-      {items.filter(Boolean).map((item, i) => (
+      {items.map((item, i) => (
         <React.Fragment key={i}>
           {React.isValidElement(item) ? (
             item
@@ -93,14 +99,15 @@ export const InputExtraInfo = ({
                   displayType="text"
                   thousandSeparator={true}
                   suffix={` ${coin}`}
+                  decimalScale={getPrecisionForCoin(coin, (item as InputExtraInfoItem).value)}
                 />
               </ZigTypography>
             </ZigTypography>
           )}
-          {i === 0 && items.length === 2 && (
+          {displayInRow && i < items.length - 1 && (
             <Divider
               orientation="vertical"
-              sx={{ backgroundColor: "#35334a", m: "1px 22px" }}
+              sx={{ backgroundColor: "#35334a", m: "1px 12px" }}
               flexItem
             />
           )}

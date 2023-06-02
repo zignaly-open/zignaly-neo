@@ -26,6 +26,9 @@ import { ErrorMessage } from "../../display/ZigAlertMessage";
 // FIXME this component still needs Jesus
 // TODO: rename to ZigInoutAmount, add stories
 // TODO: Wrap stories inside a form
+/**
+ * @deprecated
+ */
 function InputAmount({
   tokens = [],
   name = "amountValue",

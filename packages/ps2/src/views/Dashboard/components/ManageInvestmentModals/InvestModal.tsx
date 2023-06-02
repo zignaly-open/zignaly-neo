@@ -22,11 +22,11 @@ function InvestModal({
 
   return (
     <ZModal
-      wide
       {...props}
       close={close}
       title={t(isInvested ? 'modalSuccess.title' : 'invest-modal.invest-with')}
       isLoading={isLoading}
+      width={622}
     >
       {!isLoading && (
         <InvestView

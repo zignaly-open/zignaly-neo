@@ -23,6 +23,8 @@ export { default as ZigSliderInput } from "components/inputs/ZigSliderInput";
 export { default as InputAmountAdvanced } from "components/inputs/InputAmountAdvanced";
 export type { InputAmountAdvancedValueType } from "components/inputs/InputAmountAdvanced";
 
+export { default as ZigInputAmount } from "components/inputs/ZigInputAmount";
+
 // Basic display components
 export { Loader, CenteredLoader } from "./components/display/Loader";
 export { default as ZigTypography } from "./components/display/ZigTypography";

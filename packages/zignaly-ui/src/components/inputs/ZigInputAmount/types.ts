@@ -11,6 +11,7 @@ export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"
   id?: string;
   coin?: string | Coin;
   extraInfo?: InputExtraInfo;
+  wrapExtraInfo?: number | boolean;
   onMax?: () => void;
 };
 
@@ -22,6 +23,7 @@ export type InputExtraInfoProps = {
   min?: InputExtraInfoFalseableItem;
   max?: InputExtraInfoFalseableItem;
   others?: (InputExtraInfoItem | JSX.Element)[];
+  wrapExtraInfo?: number | boolean;
 };
 
 export type InputExtraInfo = JSX.Element | false | InputExtraInfoProps;
