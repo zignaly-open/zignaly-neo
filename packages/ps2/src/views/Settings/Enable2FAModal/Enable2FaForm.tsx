@@ -42,8 +42,10 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
     enable2FA(data)
       .unwrap()
       .then(() => {
-        toast.success(t('enable-2fa.success'));
-        logout();
+        setTimeout(() => {
+          toast.success(t('enable-2fa.success'));
+          logout();
+        });
         close();
       })
       .catch((e) => {
