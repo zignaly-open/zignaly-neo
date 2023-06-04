@@ -8,12 +8,19 @@ import ZModal from '../../../../components/ZModal';
 import InvestView from './views/Invest';
 import { UseModalReturn } from './types';
 
-export function useInvestModalContent(): UseModalReturn {
+export function useInvestModalContent({
+  close,
+}: {
+  close: () => void;
+}): UseModalReturn {
   const service = useSelectedInvestment();
-  const { isLoading: isLoadingService } = useServiceDetails(service?.serviceId);
+  const { isLoading: isLoadingService } = useServiceDetails(
+    service?.serviceId,
+    { skip: !service },
+  );
   const { isLoading: isLoadingCoins } = useCoinBalances();
   const { t } = useTranslation('edit-investment');
-  const isLoading = isLoadingService || isLoadingCoins;
+  const isLoading = isLoadingService || isLoadingCoins || !service;
   const [isInvested, setIsInvested] = useState(false);
   return {
     title: t(isInvested ? 'modalSuccess.title' : 'invest-modal.invest-with'),
@@ -37,7 +44,7 @@ function InvestModal({
   const { isLoading: isLoadingService } = useServiceDetails(service?.serviceId);
   const { isLoading: isLoadingCoins } = useCoinBalances();
   const isLoading = isLoadingService || isLoadingCoins;
-  const { title, component } = useInvestModalContent();
+  const { title, component } = useInvestModalContent({ close });
 
   return (
     <ZModal wide {...props} close={close} title={title} isLoading={isLoading}>

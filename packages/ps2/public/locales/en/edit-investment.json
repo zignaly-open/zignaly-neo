@@ -59,7 +59,8 @@
         "type": "Type",
         "status": "Status"
       },
-      "button": "Back"
+      "button": "Back",
+      "hoverTooltip": "Hover over the amount to see the full decimals"
     },
     "editInvestments": {
       "title": "Edit Investment",

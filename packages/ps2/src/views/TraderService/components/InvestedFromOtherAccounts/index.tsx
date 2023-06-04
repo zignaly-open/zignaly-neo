@@ -93,7 +93,10 @@ function InvestedFromOtherAccounts({
                           height={16}
                         />
                       }
-                      onClick={() => selectExchange(getValue())}
+                      onClick={() => {
+                        setTimeout(() => selectExchange(getValue()));
+                        close();
+                      }}
                     >
                       {t('other-accounts.switch-action')}
                     </ZigButton>

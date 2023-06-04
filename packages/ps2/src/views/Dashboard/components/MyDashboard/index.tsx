@@ -23,10 +23,15 @@ import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
 import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../util/numbers';
 import InvestingLayout from '../InvestingSteps/InvestingLayout';
-import { ROUTE_DASHBOARD_EDIT_INVESTMENT } from '../../../../routes';
+import {
+  ROUTE_DASHBOARD_EDIT_INVESTMENT,
+  ROUTE_TRADING_SERVICE,
+} from '../../../../routes';
 import DepositModal from '../ManageInvestmentModals/DepositModal';
 import { Box } from '@mui/material';
 import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
+import { generatePath, Link } from 'react-router-dom';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
@@ -176,6 +181,30 @@ const MyDashboard: React.FC = () => {
           />
         ),
         sortingFn: 'alphanumeric',
+      }),
+      columnHelper.display({
+        id: 'link',
+        cell: ({ row }) => (
+          <Box
+            component={Link}
+            to={generatePath(ROUTE_TRADING_SERVICE, {
+              serviceId: row?.original?.serviceId?.toString(),
+            })}
+            sx={{
+              cursor: 'pointer',
+              alignItems: 'center',
+              flexDirection: 'row',
+              display: 'flex',
+              textAlign: 'start',
+              width: '0px',
+            }}
+            id={`portfolio-table__link-${row.original.serviceId}`}
+          >
+            <ArrowForwardIosIcon
+              sx={{ color: '#26c4c1', width: '28px', height: '28px' }}
+            />
+          </Box>
+        ),
       }),
     ],
     [t],

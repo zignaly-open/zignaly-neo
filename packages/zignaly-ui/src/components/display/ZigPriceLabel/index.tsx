@@ -55,13 +55,16 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
         ...(withDefaultProps?.sx || {}),
       }}
     >
-      {showApproximate && numberOfDecimals(value) > 2 && <>~</>}
+      {showApproximate &&
+        numberOfDecimals(value) > (precision || getPrecisionForCoin(coin || "USDT", value)) && (
+          <>~</>
+        )}
       {!!prefix && <>{prefix}</>}
       {+value >= 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
       {usd && "$"}
       <NumericFormat
         value={Math.abs(shorten ? shortened : +value)}
-        renderText={(v) => trimZeros(v)}
+        renderText={(v) => (showApproximate ? v : trimZeros(v))}
         displayType={"text"}
         thousandSeparator={true}
         decimalScale={
