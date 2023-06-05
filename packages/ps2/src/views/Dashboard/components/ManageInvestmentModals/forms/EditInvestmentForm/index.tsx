@@ -127,65 +127,38 @@ function EditInvestmentForm({
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Grid container mb={8}>
-        <Grid item sm={4.5}>
-          <AmountInvested
-            idPrefix='edit-investment-modal'
-            label={t('form.title')}
-            coin={coin.id}
-            value={details?.invested + details?.pending}
-          />
-        </Grid>
-        <Grid
-          item
-          sm={1}
-          container
-          direction='row'
-          justifyContent='center'
-          alignItems='center'
-        >
-          <Divider
-            orientation='vertical'
-            sx={{
-              borderColor: 'neutral600',
-              borderRightStyle: 'dashed',
-            }}
-            flexItem
-            variant='middle'
-          />
-        </Grid>
-        <Grid item sm={6.5}>
-          <Box
-            display='flex'
-            flexDirection='column'
-            alignItems='center'
-            gap={3}
+      <Field>
+        <AmountInvested
+          idPrefix='edit-investment-modal'
+          label={t('form.title')}
+          coin={coin.id}
+          value={details?.invested + details?.pending}
+        />
+        <Box display='flex' flexDirection='column' alignItems='center' gap={3}>
+          <ZigTypography
+            variant={'body2'}
+            color='neutral300'
+            id='edit-investment-modal__title'
           >
-            <ZigTypography
-              variant={'body2'}
-              color='neutral300'
-              id='edit-investment-modal__title'
-            >
-              {t('form.profits.title')}
-            </ZigTypography>
-            <Controller
-              name='profitPercentage'
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <ZigSlider
-                  track={false}
-                  {...field}
-                  labels={{
-                    start: t('form.profits.left'),
-                    end: t('form.profits.right'),
-                  }}
-                />
-              )}
-            />
-          </Box>
-        </Grid>
-      </Grid>
+            {t('form.profits.title')}
+          </ZigTypography>
+          <Controller
+            name='profitPercentage'
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <ZigSlider
+                track={false}
+                {...field}
+                labels={{
+                  start: t('form.profits.left'),
+                  end: t('form.profits.right'),
+                }}
+              />
+            )}
+          />
+        </Box>
+      </Field>
 
       <Controller
         name={'amountTransfer'}
