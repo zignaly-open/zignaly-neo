@@ -84,7 +84,7 @@ export const InputExtraInfo = ({
           {displayInRow && i < items.length - 1 && (
             <Divider
               orientation="vertical"
-              sx={{ backgroundColor: "#35334a", m: "1px 12px" }}
+              sx={{ borderColor: "neutral600", m: "1px 12px" }}
               flexItem
             />
           )}

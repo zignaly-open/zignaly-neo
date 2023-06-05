@@ -25,7 +25,7 @@ export const AmountInvested = ({
     <Box display='flex' gap={1}>
       <ZigCoinIcon coin={coin} id={`${idPrefix}__coin-icon`} />
       <Box>
-        <ZigTypography variant={'bigNumber'} color={'neutral100'}>
+        <ZigTypography variant={'bigNumber'} color={'neutral200'}>
           <NumericFormat
             id={`${idPrefix}__invested`}
             value={value}

@@ -29,7 +29,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import DepositModal from '../../DepositModal';
 import { useZModal } from 'components/ZModal/use';
 import { Add } from '@mui/icons-material';
-import { Box } from '@mui/material';
+import { Box, Grid, Divider } from '@mui/material';
 import { AmountInvested } from './atoms';
 
 function EditInvestmentForm({
@@ -127,16 +127,34 @@ function EditInvestmentForm({
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Field>
-        <Row>
+      <Grid container mb={8}>
+        <Grid item sm={4.5}>
           <AmountInvested
             idPrefix='edit-investment-modal'
             label={t('form.title')}
             coin={coin.id}
-            value={details?.invested}
+            value={details?.invested + details?.pending}
           />
-        </Row>
-        <Row>
+        </Grid>
+        <Grid
+          item
+          sm={1}
+          container
+          direction='row'
+          justifyContent='center'
+          alignItems='center'
+        >
+          <Divider
+            orientation='vertical'
+            sx={{
+              borderColor: 'neutral600',
+              borderRightStyle: 'dashed',
+            }}
+            flexItem
+            variant='middle'
+          />
+        </Grid>
+        <Grid item sm={6.5}>
           <Box
             display='flex'
             flexDirection='column'
@@ -164,23 +182,10 @@ function EditInvestmentForm({
                   }}
                 />
               )}
-              // render={({ field }) => (
-              //   <ZigSliderInput
-              //     prefixId={'edit-investment-modal'}
-              //     mode={'range'}
-              //     labels={{
-              //       top: t('form.profits.title'),
-              //       left: t('form.profits.left'),
-              //       right: t('form.profits.right'),
-              //     }}
-              //     value={field.value}
-              //     onChange={field.onChange}
-              //   />
-              // )}
             />
           </Box>
-        </Row>
-      </Field>
+        </Grid>
+      </Grid>
 
       <Controller
         name={'amountTransfer'}

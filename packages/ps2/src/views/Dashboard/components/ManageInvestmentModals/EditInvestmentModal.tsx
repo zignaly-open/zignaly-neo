@@ -82,7 +82,6 @@ function EditInvestmentModal({
 
   return (
     <ZModal
-      wide
       {...props}
       close={close}
       title={title}
