@@ -51,7 +51,7 @@ export const InputExtraInfo = ({
   items = items.filter(Boolean);
 
   const displayInRow =
-    typeof wrapExtraInfo === "number" ? items.length <= wrapExtraInfo : wrapExtraInfo;
+    typeof wrapExtraInfo === "number" ? items.length <= wrapExtraInfo : !wrapExtraInfo;
 
   return (
     <Box

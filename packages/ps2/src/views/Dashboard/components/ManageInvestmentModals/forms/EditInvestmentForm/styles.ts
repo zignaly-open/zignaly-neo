@@ -31,8 +31,10 @@ export const TokenValue = styled('div')`
   gap: 8px;
 `;
 
-export const InputContainer = styled('div')`
-  margin-top: 68px;
+export const InputAmountWrapper = styled('div')`
+  hr:last-of-type {
+    display: none;
+  }
 `;
 
 export const Form = styled('form')``;

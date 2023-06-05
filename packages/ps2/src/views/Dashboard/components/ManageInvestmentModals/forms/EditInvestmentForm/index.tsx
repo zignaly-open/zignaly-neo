@@ -1,26 +1,25 @@
 import React, { useRef } from 'react';
 import { NumericFormat } from 'react-number-format';
-import { Controller, FieldErrorsImpl, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import {
   AmountInvested,
   Field,
   Form,
-  InputContainer,
+  InputAmountWrapper,
   Row,
   TokenValue,
 } from './styles';
 
 import {
-  InputAmountAdvanced,
-  InputAmountAdvancedValueType,
   ZigSliderInput,
   ZigButton,
   ZigTypography,
   ZigCoinIcon,
+  ZigInputAmount,
 } from '@zignaly-open/ui';
-import { EditInvestmentValidation } from './validations';
+import { editInvestmentValidation } from './validations';
 import {
   useCurrentBalance,
   useInvestmentDetails,
@@ -36,6 +35,10 @@ import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
 import { useDebounce } from 'react-use';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import DepositModal from '../../DepositModal';
+import { useZModal } from 'components/ZModal/use';
+import { Add } from '@mui/icons-material';
+import { Box } from '@mui/material';
 
 function EditInvestmentForm({
   onClickWithdrawInvestment,
@@ -50,6 +53,7 @@ function EditInvestmentForm({
   const { data: details } = useInvestmentDetails(serviceId);
   const { data: service } = useServiceDetails(serviceId);
   const transferOutAll = details?.transferOutAll;
+  const { showModal } = useZModal();
 
   const {
     handleSubmit,
@@ -60,19 +64,14 @@ function EditInvestmentForm({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {
-      amountTransfer: {
-        value: '',
-        token: coin,
-      },
       profitPercentage: details?.profitPercentage,
     },
     resolver: yupResolver(
-      EditInvestmentValidation({
+      editInvestmentValidation({
         max: new BigNumber(service.maximumSbt)
           .minus(service.invested)
           .minus(service.pending)
           .toString(),
-        coin: service.ssc,
       }),
     ),
   });
@@ -84,12 +83,12 @@ function EditInvestmentForm({
 
   const onSubmit = async (values: EditFormData) => {
     await editInvestment({
-      amount: values?.amountTransfer?.value,
+      amount: values?.amountTransfer,
     });
     toast.success(
       t('edit-investment:addMoreInvestmentSuccess', {
-        amount: values?.amountTransfer?.value,
-        currency: values?.amountTransfer?.token?.id,
+        amount: values?.amountTransfer,
+        currency: service.ssc,
         serviceName,
       }),
     );
@@ -112,6 +111,40 @@ function EditInvestmentForm({
     },
     1000,
     [profitPercent],
+  );
+
+  const renderDepositCoin = () => (
+    <ZigButton
+      id={'invest-modal__deposit'}
+      startIcon={<Add sx={{ fill: 'currentColor !important' }} />}
+      sx={{
+        fontWeight: 400,
+        color: 'links',
+      }}
+      variant={'text'}
+      onClick={() =>
+        showModal(DepositModal, {
+          ctaId: 'invest-modal-deposit',
+          selectedCoin: coin.id,
+        })
+      }
+    >
+      {t('action:deposit-coin', { coin: coin.id })}
+    </ZigButton>
+  );
+
+  const renderInvestButton = () => (
+    <Box flexBasis='100%' display='flex' justifyContent='center' mt={2} mb={1}>
+      <ZigButton
+        id={'edit-investment-modal__save-invest'}
+        size={'large'}
+        type={'submit'}
+        loading={isEditingInvestment}
+        disabled={!canSubmit}
+      >
+        {t('form.button.addInvestment')}
+      </ZigButton>
+    </Box>
   );
 
   return (
@@ -167,45 +200,39 @@ function EditInvestmentForm({
         </Row>
       </Field>
 
-      {coin && (
-        <InputContainer>
-          <InputAmountAdvanced
-            id={'edit-investment-modal__input-amount'}
-            name={'amountTransfer'}
-            control={control}
-            label={t('form.inputAmount.label')}
-            labelBalance={t('form.inputAmount.labelBalance')}
-            showUnit={true}
-            placeholder={'0.0'}
-            tokens={[coin]}
-            error={
-              isDirty &&
-              t(
-                (
-                  errors?.amountTransfer as FieldErrorsImpl<InputAmountAdvancedValueType>
-                )?.value?.message,
-              )
-            }
-          />
-        </InputContainer>
-      )}
+      <InputAmountWrapper>
+        <Controller
+          name={'amountTransfer'}
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <ZigInputAmount
+              id={'edit-investment-modal__input-amount'}
+              label={t('form.button.addInvestment')}
+              wide={true}
+              coin={coin.id}
+              balance={coin.balance}
+              extraInfo={{
+                others: [renderDepositCoin(), renderInvestButton()],
+              }}
+              wrapExtraInfo={false}
+              error={t(errors?.amountTransfer?.message)}
+              {...field}
+            />
+          )}
+        />
+      </InputAmountWrapper>
 
       <ModalActions direction='column'>
-        <ZigButton
-          id={'edit-investment-modal__save-invest'}
-          size={'large'}
-          type={'submit'}
-          loading={isEditingInvestment}
-          disabled={!canSubmit}
-        >
-          {t('form.button.addInvestment')}
-        </ZigButton>
         <ZigButton
           variant={'text'}
           id={'edit-investment-modal__withdraw'}
           endIcon={
             <KeyboardArrowRightIcon
-              sx={{ width: '22px !important', height: '22px !important' }}
+              sx={{
+                color: 'links',
+                fill: 'currentColor !important',
+              }}
             />
           }
           disabled={transferOutAll}

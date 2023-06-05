@@ -102,7 +102,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
   const renderDepositCoin = () => (
     <ZigButton
       id={'invest-modal__deposit'}
-      startIcon={<Add />}
+      startIcon={<Add sx={{ fill: 'currentColor !important' }} />}
       sx={{
         fontWeight: 400,
         color: 'links',

@@ -17,6 +17,9 @@ export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"
    * To pass a custom label, pass an object with the value and label properties. Or a full JSX.Element.
    */
   extraInfo?: InputExtraInfo;
+  /**
+   * Wrap info if more than specified number of items. Default is 2. Set to true/false to force.
+   */
   wrapExtraInfo?: number | boolean;
   /**
    * Custom onMax callback, if not provided, onChange will be called with the max value.
