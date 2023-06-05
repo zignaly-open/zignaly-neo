@@ -20,6 +20,7 @@ export const Layout = styled.div<{ error?: string; loading?: boolean }>`
         div:last-of-type {
           height: 64px;
           border-radius: 8px;
+          background: unset;
         }
     `,
     )}
@@ -46,7 +47,7 @@ export const Layout = styled.div<{ error?: string; loading?: boolean }>`
       border-image-source: linear-gradient(101deg, #3f3bb1 7%, #138ea0 94%);
       border-image-slice: 1;
       background-image: linear-gradient(to bottom, #101225, #101225),
-        linear-gradient(101deg, rgba(63, 59, 177, 0.7) 7%, rgba(19, 142, 160, 0.7) 94%);
+        linear-gradient(101deg, rgba(63, 59, 177, 0.4) 7%, rgba(19, 142, 160, 0.4) 94%);
       background-origin: border-box;
       background-clip: content-box, border-box;
       border: none !important;
