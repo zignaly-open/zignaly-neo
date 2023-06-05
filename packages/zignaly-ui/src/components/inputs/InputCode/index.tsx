@@ -48,7 +48,7 @@ function InputCode({
           disabled={loading}
           autoFocus={autoFocus}
           onComplete={onComplete}
-          placeholder={new Array(fields).fill("")}
+          placeholder={new Array(fields).fill(" ")}
         />
       </Box>
       {error && <ErrorMessage text={error} id={prefixId && `${prefixId}__error-message`} />}
