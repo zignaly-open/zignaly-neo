@@ -201,7 +201,7 @@ const MyDashboard: React.FC = () => {
             id={`portfolio-table__link-${row.original.serviceId}`}
           >
             <ArrowForwardIosIcon
-              sx={{ color: '#26c4c1', width: '28px', height: '28px' }}
+              sx={{ color: '#26c4c1', width: '20px', height: '20px' }}
             />
           </Box>
         ),
