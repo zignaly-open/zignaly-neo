@@ -14,7 +14,7 @@ export const Investor = styled('div')`
 export const InvestorData = styled('div')`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 `;
 
 export const InvestorName = styled(ZigTypography)``;

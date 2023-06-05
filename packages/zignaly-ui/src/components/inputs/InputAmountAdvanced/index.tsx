@@ -188,6 +188,9 @@ function InputAmount({
   );
 }
 
+/**
+ * @deprecated
+ */
 export type { InputAmountAdvancedValue as InputAmountAdvancedValueType } from "./types";
 
 export default InputAmount;

@@ -17,7 +17,7 @@ const InvestorDetailsForService: React.FC<{
     <Investor id={prefixId && `${prefixId}__investor-details`}>
       {!!service.serviceLogo && (
         <Avatar
-          size={'xx-large'}
+          size={48}
           image={getServiceLogo(service.serviceLogo)}
           id={prefixId && `${prefixId}__investor-details-avatar`}
         />

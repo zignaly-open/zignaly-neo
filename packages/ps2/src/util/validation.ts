@@ -127,14 +127,20 @@ export const inputAmountTokenDecimalsValidation = yup.object().shape({
 
 export const inputAmountValidation = ({
   min,
+  max,
   balance,
   maxDecimals = 8,
 }: {
   min?: number | string;
+  max?: number | string;
   balance?: number | string;
   maxDecimals?: number;
 }) => {
-  let validation = yup.number();
+  let validation = yup
+    .string()
+    .required('common:validation.invalid-amount')
+    .typeError('common:validation.invalid-value');
+  // let validation = yup.number();
 
   if (balance !== undefined) {
     validation = validation.test(
@@ -149,6 +155,14 @@ export const inputAmountValidation = ({
       'number',
       'common:validation.insufficient-amount-min',
       (val) => !new BigNumber(val).isLessThan(new BigNumber(min)),
+    );
+  }
+
+  if (max !== undefined) {
+    validation = validation.test(
+      'number',
+      'common:validation.insufficient-amount-max',
+      (val) => !new BigNumber(val).isGreaterThan(new BigNumber(max)),
     );
   }
 

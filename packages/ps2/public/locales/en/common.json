@@ -83,6 +83,7 @@
   "validation": {
     "insufficient-amount": "Insufficient funds",
     "insufficient-amount-min": "Min amount: {{ minValue }} {{ minValueCoin }}",
+    "insufficient-amount-max": "Max amount: {{ maxValue }} {{ coin }}",
     "invalid-value": "Invalid value",
     "negative-amount": "Should be >= 0",
     "max-allowed-length": "Should be under {{ maxLength }} characters",

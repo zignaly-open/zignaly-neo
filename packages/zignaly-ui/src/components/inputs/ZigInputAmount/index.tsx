@@ -24,11 +24,12 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     balance,
     min,
     max,
+    id,
   } = props;
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
 
   /**
-   * @description Call custom onMax function or call onChange with max value
+   * @description Call custom onMax function or call onChange with max value event for RHF
    */
   const handleMax = () => {
     if (onMax) return onMax();
@@ -60,6 +61,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
         </Box>
         <ZigInput
           {...props}
+          id={id}
           inputRef={ref}
           type="number"
           wide={wide}
@@ -79,7 +81,9 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
         />
       </Box>
       <Box alignSelf="flex-start" mt="11px">
-        {error && typeof error === "string" && <ErrorMessage text={error} />}
+        {error && typeof error === "string" && (
+          <ErrorMessage text={error} id={id && `${id}-error`} />
+        )}
       </Box>
       <Box mt={extraInfo && error && typeof error === "string" ? "7px" : "14px"} width={1}>
         {typeof extraInfo === "function" ? (

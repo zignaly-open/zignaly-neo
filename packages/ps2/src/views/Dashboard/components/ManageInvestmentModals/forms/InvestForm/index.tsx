@@ -11,7 +11,7 @@ import {
   ZigInputAmount,
   ZigSliderInput,
 } from '@zignaly-open/ui';
-import { EditInvestmentValidation } from './validations';
+import { editInvestmentValidation } from './validations';
 import {
   useCurrentBalance,
   useInvestInService,
@@ -60,7 +60,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
       step: 1,
     },
     resolver: yupResolver(
-      EditInvestmentValidation({
+      editInvestmentValidation({
         balance: coin?.balance,
         max: new BigNumber(serviceDetails.maximumSbt)
           .minus(serviceDetails.invested)
@@ -79,11 +79,6 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
     setValue('step', 2);
   };
 
-  const onGoBackToFirstStep = () => {
-    setValue('step', 1);
-    trigger('transferConfirm');
-  };
-
   const isConfirmation = watch('step') === 2;
 
   const onSubmitSecondStep = async ({
@@ -92,12 +87,12 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
   }: InvestFormData) => {
     await invest({
       profitPercentage,
-      amount: amountTransfer?.value?.toString(),
+      amount: amountTransfer,
     });
     toast.success(
       t('edit-investment:addMoreInvestmentSuccess', {
-        amount: amountTransfer?.value,
-        currency: amountTransfer?.token?.id,
+        amount: amountTransfer,
+        currency: service.ssc,
         serviceName: service.serviceName,
       }),
     );
@@ -110,8 +105,6 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
       startIcon={<Add />}
       sx={{
         fontWeight: 400,
-        // mt: 1,
-        // color: (theme) => theme.palette.links,
         color: 'links',
       }}
       variant={'text'}
@@ -144,7 +137,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
             <ZigTypography variant={'bigNumber'} color={'neutral100'}>
               <NumericFormat
                 id={'invest-modal-confirmation__amount-to-invest'}
-                value={watch('amountTransfer')!.value.toString()}
+                value={watch('amountTransfer')}
                 displayType={'text'}
                 thousandSeparator={true}
               />
@@ -226,24 +219,8 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
               extraInfo={{
                 others: [renderDepositCoin()],
               }}
-              error={
-                isDirty &&
-                t(
-                  (
-                    errors?.amountTransfer as FieldErrorsImpl<InputAmountAdvancedValueType>
-                  )?.value?.message,
-                )
-              }
-              // onMax={field.onChange}
-              // onMax={(e) => {
-              //   console.log(e);
-              //   field.onChange({ ...e, value: coin.balance });
-              // }}
+              error={t(errors?.amountTransfer?.message)}
               {...field}
-              // onChange={(value) => {
-              //   console.log(value, field.onChange);
-              //   field.onChange(value);
-              // }}
             />
           )}
         />
