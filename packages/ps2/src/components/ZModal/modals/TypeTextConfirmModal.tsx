@@ -8,6 +8,7 @@ import { ConfirmModalProps } from './ConfirmModal';
 
 export type TypeTextConfirmModalProps = {
   safeWord: string;
+  noCancelButton: boolean;
 } & ConfirmModalProps;
 
 function TypeTextConfirmModal({
@@ -20,6 +21,7 @@ function TypeTextConfirmModal({
   yesButtonProps,
   noLabel,
   noAction,
+  noCancelButton = false,
   ...props
 }: {
   close: () => void;
@@ -30,9 +32,11 @@ function TypeTextConfirmModal({
   const typedCorrectly =
     confirmWord?.toLocaleLowerCase() !== safeWord.toLocaleLowerCase();
   return (
-    <ZModal allowUnauth {...props} close={close} title={title}>
+    <ZModal allowUnauth wide {...props} close={close} title={title}>
       {!!description && (
-        <ZigTypography sx={{ mb: 1 }}>{description}</ZigTypography>
+        <ZigTypography sx={{ mb: 1 }} textAlign={'center'}>
+          {description}
+        </ZigTypography>
       )}
 
       <ZigInput
@@ -44,7 +48,13 @@ function TypeTextConfirmModal({
         fullWidth
       />
 
-      <Box sx={{ mt: 2 }}>
+      <Box
+        sx={{
+          mt: 5,
+          ml: 'auto',
+          mr: 'auto',
+        }}
+      >
         <ZigButton
           variant={'contained'}
           disabled={typedCorrectly}
@@ -64,18 +74,20 @@ function TypeTextConfirmModal({
           {yesLabel || t('confirm')}
         </ZigButton>
 
-        <ZigButton
-          sx={{ ml: 1 }}
-          variant={'outlined'}
-          type='submit'
-          size={'large'}
-          onClick={() => {
-            noAction?.();
-            close();
-          }}
-        >
-          {noLabel || t('cancel')}
-        </ZigButton>
+        {!noCancelButton && (
+          <ZigButton
+            sx={{ ml: 1 }}
+            variant={'outlined'}
+            type='submit'
+            size={'large'}
+            onClick={() => {
+              noAction?.();
+              close();
+            }}
+          >
+            {noLabel || t('cancel')}
+          </ZigButton>
+        )}
       </Box>
     </ZModal>
   );

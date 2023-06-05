@@ -15,6 +15,7 @@ import { Form, ModalActions } from 'components/ZModal';
 import { useToast } from 'util/hooks/useToast';
 import { useDispatch } from 'react-redux';
 import { enable2FA } from 'apis/user/store';
+import { Box } from '@mui/material';
 
 const Disable2FAForm = ({ close }: { close: () => void }) => {
   const { t } = useTranslation('settings');
@@ -51,10 +52,13 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
 
   return (
     <>
-      <ZigTypography whiteSpace='pre-line'>
+      <ZigTypography whiteSpace='pre-line' textAlign={'center'}>
         {t('disable-2fa.description')}
       </ZigTypography>
-      <ErrorMessage text={t('disable-2fa.security')} />
+      <Box marginBottom={'24px'}>
+        <ErrorMessage text={t('disable-2fa.security')} />
+      </Box>
+
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name='code'
