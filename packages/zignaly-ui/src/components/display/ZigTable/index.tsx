@@ -14,6 +14,7 @@ import {
   PageNumberContainer,
   SmallSelectWrapper,
   SortBox,
+  HeaderBox,
 } from "./styles";
 import ZigDropdown from "../ZigDropdown";
 import ZigTypography from "../ZigTypography";
@@ -88,8 +89,8 @@ export default function ZigTable<T extends object>({
                             `${prefixId}-table__header-${header.column.columnDef.id}`
                       }
                     >
-                      {header.isPlaceholder ? null : (
-                        <Box display="flex" justifyContent="center" alignItems="center">
+                      {!header.isPlaceholder && (
+                        <HeaderBox>
                           <SortBox
                             canSort={header.column.getCanSort()}
                             onClick={header.column.getToggleSortingHandler()}
@@ -115,7 +116,7 @@ export default function ZigTable<T extends object>({
                               />
                             )}
                           </SortBox>
-                        </Box>
+                        </HeaderBox>
                       )}
                     </th>
                   );
