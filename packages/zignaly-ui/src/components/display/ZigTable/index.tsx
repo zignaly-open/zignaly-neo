@@ -168,16 +168,22 @@ export default function ZigTable<T extends object>({
                       style: { cursor: "pointer" },
                     })}
                   >
-                    {row.getVisibleCells().map((cell) => {
+                    {row.getVisibleCells().map((cell, index) => {
                       return (
-                        <td key={cell.id}>
+                        <td
+                          key={cell.id}
+                          colSpan={
+                            enableColumnVisibility && row.getVisibleCells().length === index + 1
+                              ? 2
+                              : undefined
+                          }
+                        >
                           <ZigTypography fontWeight="medium" color="neutral200">
                             {flexRender(cell.column.columnDef.cell, cell.getContext())}
                           </ZigTypography>
                         </td>
                       );
                     })}
-                    {enableColumnVisibility && <td />}
                   </tr>
                   {row.getIsExpanded() && (
                     <tr style={{ border: "none", padding: "0 14px" }}>
