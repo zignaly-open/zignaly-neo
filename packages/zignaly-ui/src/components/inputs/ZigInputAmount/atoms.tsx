@@ -30,15 +30,16 @@ export const InputExtraInfo = ({
   max,
   others,
   coin,
-  wrapExtraInfo = 3,
+  wrapExtraInfo = 2,
 }: InputExtraInfoProps & {
   coin: string;
 }) => {
-  let items = [extractItem(balance ?? false, "balance"), extractItem(min ?? false, "min")] as (
-    | InputExtraInfoItem
-    | JSX.Element
-    | null
-  )[];
+  // Default items
+  let items = [
+    extractItem(balance ?? false, "balance"),
+    extractItem(min ?? false, "min"),
+    extractItem(max ?? false, "max"),
+  ] as (InputExtraInfoItem | JSX.Element | null)[];
 
   if (others) {
     items = items.concat(

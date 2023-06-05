@@ -1,7 +1,6 @@
-import React, { useState, forwardRef } from "react";
+import React, { forwardRef } from "react";
 import { ZigInputAmountProps } from "./types";
-import { InputAdornment, TextField, Box, Divider } from "@mui/material";
-import ZigButton from "../ZigButton";
+import { InputAdornment, Box } from "@mui/material";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
 import ZigInput from "../ZigInput";
 import { Layout, MaxButton, TopDivider } from "./styles";
@@ -9,6 +8,7 @@ import ZigTypography from "components/display/ZigTypography";
 import { InputExtraInfo } from "./atoms";
 import ZigCoinIcon from "../../display/ZigCoinIcon";
 import { changeEvent } from "utils/event";
+import BigNumber from "bignumber.js";
 export { InputExtraInfo } from "./atoms";
 
 const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
@@ -27,10 +27,21 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
   } = props;
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
 
+  /**
+   * @description Call custom onMax function or call onChange with max value
+   */
   const handleMax = () => {
-    onMax
-      ? onMax()
-      : props.onChange?.(changeEvent(props.name, balance) as React.ChangeEvent<HTMLInputElement>);
+    if (onMax) return onMax();
+    if (props.onChange && balance !== "undefined") {
+      props.onChange(
+        changeEvent(
+          props.name,
+          max !== "undefined" && new BigNumber(max!).isLessThan(new BigNumber(balance!))
+            ? max
+            : balance,
+        ) as React.ChangeEvent<HTMLInputElement>,
+      );
+    }
   };
 
   return (

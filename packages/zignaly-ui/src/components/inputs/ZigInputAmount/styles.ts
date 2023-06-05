@@ -11,6 +11,17 @@ export const Layout = styled(Box)`
   padding: 24px 24px 12px;
   position: relative;
   border-radius: 5px;
+
+  && {
+    .MuiInput-root {
+      padding: 2px 24px;
+    }
+
+    .MuiInput-input {
+      font-size: 30px;
+      font-weight: 500;
+    }
+  }
 `;
 
 export const TopDivider = styled(Divider)`
