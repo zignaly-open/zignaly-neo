@@ -19,6 +19,9 @@ import ZigTypography from "../../display/ZigTypography";
 const min = 0;
 const max = 100;
 
+/**
+ * @deprecated
+ */
 const ZigSliderInput = ({
   value,
   onChange = () => null,

@@ -1,13 +1,11 @@
 import React from 'react';
-import { Controller, FieldErrorsImpl, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
 import {
-  InputAmountAdvancedValueType,
   ZigTypography,
   ZigButton,
   ZigInput,
-  ZigCoinIcon,
   ZigInputAmount,
   ZigSliderInput,
 } from '@zignaly-open/ui';
@@ -22,13 +20,13 @@ import { useToast } from '../../../../../../util/hooks/useToast';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 import { Box } from '@mui/material';
 import { CheckBox } from '@zignaly-open/ui';
-import { AmountInvested, TokenValue } from '../EditInvestmentForm/styles';
 import { NumericFormat } from 'react-number-format';
 import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
 import { Add } from '@mui/icons-material';
 import DepositModal from '../../DepositModal';
 import { useZModal } from '../../../../../../components/ZModal/use';
+import { AmountInvested } from '../EditInvestmentForm/atoms';
 
 function InvestForm({ close, onInvested }: InvestFormProps) {
   const coin = useCurrentBalance();
@@ -122,35 +120,12 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
   if (isConfirmation) {
     return (
       <>
-        <ZigTypography
-          variant={'body1'}
-          id={'invest-modal-confirmation__amount-to-invest-label'}
-        >
-          {t('invest-modal.amount-to-invest')}
-        </ZigTypography>
-        <AmountInvested>
-          <ZigCoinIcon
-            coin={coin.id}
-            id={'invest-modal-confirmation__coin-icon'}
-          />
-          <TokenValue>
-            <ZigTypography variant={'bigNumber'} color={'neutral100'}>
-              <NumericFormat
-                id={'invest-modal-confirmation__amount-to-invest'}
-                value={watch('amountTransfer')}
-                displayType={'text'}
-                thousandSeparator={true}
-              />
-            </ZigTypography>
-            <ZigTypography
-              variant={'h3'}
-              color={'neutral400'}
-              id={'invest-modal-confirmation__coin'}
-            >
-              {String(coin.id).toUpperCase()}
-            </ZigTypography>
-          </TokenValue>
-        </AmountInvested>
+        <AmountInvested
+          idPrefix='invest-modal-confirmation'
+          label={t('invest-modal.amount-to-invest')}
+          coin={coin.id}
+          value={watch('amountTransfer')}
+        />
         <div>
           <>
             <ZigTypography
@@ -159,7 +134,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
             >
               {t('form.profits.title-confirmation')}
             </ZigTypography>
-            <AmountInvested>
+            {/* <AmountInvested>
               <TokenValue>
                 <ZigTypography variant={'bigNumber'} color={'neutral100'}>
                   <NumericFormat
@@ -171,7 +146,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
                   />
                 </ZigTypography>
               </TokenValue>
-            </AmountInvested>
+            </AmountInvested> */}
           </>
         </div>
         <Controller

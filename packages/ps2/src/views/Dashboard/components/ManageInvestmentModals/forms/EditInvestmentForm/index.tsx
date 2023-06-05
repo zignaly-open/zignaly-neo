@@ -1,23 +1,14 @@
 import React, { useRef } from 'react';
-import { NumericFormat } from 'react-number-format';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
-import {
-  AmountInvested,
-  Field,
-  Form,
-  InputAmountWrapper,
-  Row,
-  TokenValue,
-} from './styles';
+import { Field, Form, Row } from './styles';
 
 import {
-  ZigSliderInput,
   ZigButton,
   ZigTypography,
-  ZigCoinIcon,
   ZigInputAmount,
+  ZigSlider,
 } from '@zignaly-open/ui';
 import { editInvestmentValidation } from './validations';
 import {
@@ -39,6 +30,7 @@ import DepositModal from '../../DepositModal';
 import { useZModal } from 'components/ZModal/use';
 import { Add } from '@mui/icons-material';
 import { Box } from '@mui/material';
+import { AmountInvested } from './atoms';
 
 function EditInvestmentForm({
   onClickWithdrawInvestment,
@@ -133,95 +125,92 @@ function EditInvestmentForm({
     </ZigButton>
   );
 
-  const renderInvestButton = () => (
-    <Box flexBasis='100%' display='flex' justifyContent='center' mt={2} mb={1}>
-      <ZigButton
-        id={'edit-investment-modal__save-invest'}
-        size={'large'}
-        type={'submit'}
-        loading={isEditingInvestment}
-        disabled={!canSubmit}
-      >
-        {t('form.button.addInvestment')}
-      </ZigButton>
-    </Box>
-  );
-
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Field>
         <Row>
-          <ZigTypography variant={'body1'} id={'edit-investment-modal__title'}>
-            {t('form.title')}
-          </ZigTypography>
-          <AmountInvested>
-            <ZigCoinIcon
-              coin={coin.id}
-              id={'edit-investment-modal__coin-icon'}
-            />
-            <TokenValue>
-              <ZigTypography variant={'bigNumber'} color={'neutral100'}>
-                <NumericFormat
-                  id={'edit-investment-modal__invested'}
-                  value={details?.invested}
-                  displayType={'text'}
-                  thousandSeparator={true}
-                />
-              </ZigTypography>
-              <ZigTypography
-                variant={'h3'}
-                color={'neutral400'}
-                id={'edit-investment-modal__coin-name'}
-              >
-                {String(coin.id).toUpperCase()}
-              </ZigTypography>
-            </TokenValue>
-          </AmountInvested>
+          <AmountInvested
+            idPrefix='edit-investment-modal'
+            label={t('form.title')}
+            coin={coin.id}
+            value={details?.invested}
+          />
         </Row>
         <Row>
-          <Controller
-            name='profitPercentage'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <ZigSliderInput
-                prefixId={'edit-investment-modal'}
-                mode={'range'}
-                labels={{
-                  top: t('form.profits.title'),
-                  left: t('form.profits.left'),
-                  right: t('form.profits.right'),
-                }}
-                value={field.value}
-                onChange={field.onChange}
-              />
-            )}
-          />
+          <Box
+            display='flex'
+            flexDirection='column'
+            alignItems='center'
+            gap={1}
+          >
+            <ZigTypography
+              variant={'body2'}
+              color='neutral300'
+              id='edit-investment-modal__title'
+            >
+              {t('form.profits.title')}
+            </ZigTypography>
+            <Controller
+              name='profitPercentage'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <ZigSlider
+                  track={false}
+                  {...field}
+                  labels={{
+                    start: t('form.profits.left'),
+                    end: t('form.profits.right'),
+                  }}
+                />
+              )}
+              // render={({ field }) => (
+              //   <ZigSliderInput
+              //     prefixId={'edit-investment-modal'}
+              //     mode={'range'}
+              //     labels={{
+              //       top: t('form.profits.title'),
+              //       left: t('form.profits.left'),
+              //       right: t('form.profits.right'),
+              //     }}
+              //     value={field.value}
+              //     onChange={field.onChange}
+              //   />
+              // )}
+            />
+          </Box>
         </Row>
       </Field>
 
-      <InputAmountWrapper>
-        <Controller
-          name={'amountTransfer'}
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <ZigInputAmount
-              id={'edit-investment-modal__input-amount'}
-              label={t('form.button.addInvestment')}
-              wide={true}
-              coin={coin.id}
-              balance={coin.balance}
-              extraInfo={{
-                others: [renderDepositCoin(), renderInvestButton()],
-              }}
-              wrapExtraInfo={false}
-              error={t(errors?.amountTransfer?.message)}
-              {...field}
-            />
-          )}
-        />
-      </InputAmountWrapper>
+      <Controller
+        name={'amountTransfer'}
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <ZigInputAmount
+            id={'edit-investment-modal__input-amount'}
+            label={t('form.button.addInvestment')}
+            wide={true}
+            coin={coin.id}
+            balance={coin.balance}
+            extraInfo={{
+              others: [renderDepositCoin()],
+            }}
+            error={t(errors?.amountTransfer?.message)}
+            {...field}
+          >
+            <ZigButton
+              id={'edit-investment-modal__save-invest'}
+              size={'large'}
+              type={'submit'}
+              loading={isEditingInvestment}
+              disabled={!canSubmit}
+            >
+              {t('form.button.addInvestment')}
+            </ZigButton>
+          </ZigInputAmount>
+        )}
+      />
 
       <ModalActions direction='column'>
         <ZigButton

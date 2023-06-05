@@ -25,6 +25,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     min,
     max,
     id,
+    children,
   } = props;
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
 
@@ -86,18 +87,23 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
         )}
       </Box>
       <Box mt={extraInfo && error && typeof error === "string" ? "7px" : "14px"} width={1}>
-        {typeof extraInfo === "function" ? (
-          extraInfo
-        ) : extraInfo ? (
-          <InputExtraInfo
-            coin={coinVal}
-            wrapExtraInfo={wrapExtraInfo}
-            balance={balance}
-            min={min}
-            max={max}
-            {...extraInfo}
-          />
-        ) : null}
+        <>
+          {typeof extraInfo === "function" ? (
+            extraInfo
+          ) : extraInfo ? (
+            <InputExtraInfo
+              coin={coinVal}
+              wrapExtraInfo={wrapExtraInfo}
+              balance={balance}
+              min={min}
+              max={max}
+              {...extraInfo}
+            />
+          ) : null}
+          <Box display="flex" justifyContent="center" mt={3} mb={1}>
+            {children}
+          </Box>
+        </>
       </Box>
     </Layout>
   );
