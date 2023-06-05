@@ -1,13 +1,9 @@
 import React from "react";
 import { Box, Slider } from "@mui/material";
 import { ZigSliderProps } from "./types";
-import ZigTypography from "components/display/ZigTypography";
 import { SliderLabelValue } from "./atoms";
 
 const marks = [
-  {
-    value: 0,
-  },
   {
     value: 25,
   },
@@ -17,17 +13,32 @@ const marks = [
   {
     value: 75,
   },
-  {
-    value: 100,
-  },
 ];
 
 const ZigSlider = ({ labels, ...props }: ZigSliderProps) => {
+  const showLabels = labels && typeof props.value === "number";
+
   return (
-    <Box display="flex" width={1} gap={1}>
-      {labels && <SliderLabelValue side="start" labels={labels} max={props.max} />}
-      <Slider marks={marks} {...props} />
-      {labels && <SliderLabelValue side="end" labels={labels} max={props.max} />}
+    <Box display="flex" width={1} gap={1} alignItems="center" pt={3} position="relative">
+      <Box display="flex" width={1} gap={1} alignItems="center">
+        {showLabels && (
+          <SliderLabelValue
+            side="start"
+            labels={labels}
+            max={props.max}
+            value={props.value as number}
+          />
+        )}
+        <Slider marks={marks} {...props} />
+        {showLabels && (
+          <SliderLabelValue
+            side="end"
+            labels={labels}
+            max={props.max}
+            value={props.value as number}
+          />
+        )}
+      </Box>
     </Box>
   );
 };

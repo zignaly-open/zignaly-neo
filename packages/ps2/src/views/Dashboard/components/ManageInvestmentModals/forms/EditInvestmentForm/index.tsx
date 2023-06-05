@@ -141,7 +141,7 @@ function EditInvestmentForm({
             display='flex'
             flexDirection='column'
             alignItems='center'
-            gap={1}
+            gap={3}
           >
             <ZigTypography
               variant={'body2'}

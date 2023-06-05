@@ -5,8 +5,8 @@ export const Field = styled('div')`
   grid-template-columns: 0.7fr 1fr;
   user-select: none;
   gap: 42px;
-  align-items: center;
   margin-bottom: 36px;
+  align-items: flex-start;
 `;
 
 export const Row = styled('div')`

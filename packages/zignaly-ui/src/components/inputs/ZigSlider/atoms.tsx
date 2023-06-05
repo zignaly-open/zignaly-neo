@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, SliderProps } from "@mui/material";
 import { ZigTypography } from "index";
 import React from "react";
 import { SliderLabels } from "./types";
@@ -13,19 +13,26 @@ export const SliderLabelValue = ({
   side: "start" | "end";
   max?: number;
   value?: number;
-}) => (
-  <Box display="flex" flexDirection="column" alignItems="center">
-    <ZigTypography color="neutral100" variant="body2">
-      {side === "start" ? labels.start : labels.end}
-    </ZigTypography>
-    <ZigTypography color="neutral400" variant="body2">
-      {side === "start"
-        ? labels.displayDifference !== false
-          ? max - value
-          : value
-        : labels.displayDifference !== false
-        ? value
-        : max}
-    </ZigTypography>
-  </Box>
-);
+}) => {
+  return (
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems={side === "start" ? "flex-start" : "flex-end"}
+      minWidth="44px"
+    >
+      <ZigTypography color="neutral100" variant="body2" sx={{ position: "absolute", top: 0 }}>
+        {side === "start" ? labels.start : labels.end}
+      </ZigTypography>
+      <ZigTypography color="neutral400" variant="body2">
+        {side === "start"
+          ? labels.percent !== false
+            ? `${max - value}%`
+            : value
+          : labels.percent !== false
+          ? `${value}%`
+          : max}
+      </ZigTypography>
+    </Box>
+  );
+};
