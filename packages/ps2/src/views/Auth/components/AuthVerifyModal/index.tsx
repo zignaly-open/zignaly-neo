@@ -127,7 +127,7 @@ function AuthVerifyModal({
 
   return (
     <ZModal
-      width={650}
+      wide
       allowUnauth
       {...props}
       close={emailUnconfirmed ? null : onClickClose}
@@ -136,7 +136,10 @@ function AuthVerifyModal({
     >
       <Title data-testid={'auth-verify-modal__title'}>
         {texts.description && (
-          <ZigTypography id={'auth-verify-modal__description'}>
+          <ZigTypography
+            id={'auth-verify-modal__description'}
+            textAlign={'center'}
+          >
             {texts.description}
           </ZigTypography>
         )}

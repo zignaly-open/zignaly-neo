@@ -78,7 +78,11 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
             </ZigTypography>
           </TextWrapperRow>
         </Box>
-        <Box sx={{ alignSelf: 'center' }}>
+        <Box
+          sx={{
+            alignSelf: 'center',
+          }}
+        >
           <ZigButton
             id={'trader-api__edit-key'}
             sx={{ mr: 2 }}
@@ -103,6 +107,7 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
                   variant: 'outlined',
                 },
                 description: t('api-keys.delete-description'),
+                noCancelButton: true,
                 yesAction: () => {
                   delete2FA((code) =>
                     handleDeleteWrapper({ serviceId, keyId: apiKey.id, code }),
