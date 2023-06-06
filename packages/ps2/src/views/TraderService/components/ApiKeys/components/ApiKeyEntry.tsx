@@ -107,7 +107,7 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
                   variant: 'outlined',
                 },
                 description: t('api-keys.delete-description'),
-                noCancelButton: true,
+                cancelButton: false,
                 yesAction: () => {
                   delete2FA((code) =>
                     handleDeleteWrapper({ serviceId, keyId: apiKey.id, code }),

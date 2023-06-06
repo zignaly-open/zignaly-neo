@@ -8,7 +8,7 @@ import { ConfirmModalProps } from './ConfirmModal';
 
 export type TypeTextConfirmModalProps = {
   safeWord: string;
-  noCancelButton: boolean;
+  cancelButton: boolean;
 } & ConfirmModalProps;
 
 function TypeTextConfirmModal({
@@ -21,7 +21,7 @@ function TypeTextConfirmModal({
   yesButtonProps,
   noLabel,
   noAction,
-  noCancelButton = false,
+  cancelButton = true,
   ...props
 }: {
   close: () => void;
@@ -74,7 +74,7 @@ function TypeTextConfirmModal({
           {yesLabel || t('confirm')}
         </ZigButton>
 
-        {!noCancelButton && (
+        {cancelButton && (
           <ZigButton
             sx={{ ml: 1 }}
             variant={'outlined'}

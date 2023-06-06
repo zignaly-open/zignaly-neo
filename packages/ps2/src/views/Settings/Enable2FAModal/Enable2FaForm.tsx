@@ -119,7 +119,11 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
 
   return (
     <>
-      <ZigTypography whiteSpace='pre-line' textAlign={'center'}>
+      <ZigTypography
+        marginBottom={'21px'}
+        whiteSpace='pre-line'
+        textAlign={'center'}
+      >
         <Trans i18nKey='enable-2fa.description' t={t}>
           <Link
             href={HELP_CREATE_ENABLE_2FA_URL}
