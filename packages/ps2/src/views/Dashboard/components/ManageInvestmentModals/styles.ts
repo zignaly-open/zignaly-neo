@@ -7,7 +7,7 @@ export const Investor = styled('div')`
   gap: 22px;
   align-items: center;
   justify-content: center;
-  margin-bottom: 32px;
+  margin-bottom: 36px;
   margin-top: 10px;
 `;
 

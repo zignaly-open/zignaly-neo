@@ -27,8 +27,8 @@ export const SliderLabelValue = ({
         sx={{
           position: "absolute",
           top: 0,
-          left: side === "start" ? "-6px" : "auto",
-          right: side === "start" ? "auto" : "-6px",
+          left: side === "start" ? 0 : "auto",
+          right: side === "start" ? "auto" : 0,
         }}
       >
         {side === "start" ? labels.start : labels.end}

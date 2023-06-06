@@ -80,7 +80,8 @@
     "max-reached": "Cannot invest in this service because it has reached Maximum Funds limit.",
     "transfer-label": "Transfer",
     "i-understand-margin": "I understand my whole {{coin}} balance is now part of the margin and at risk",
-    "i-understand-money-transferred": "I understand and confirm that my funds will be transferred to the trader's pool and will no longer appear in my available balance"
+    "i-understand-money-transferred": "I understand and confirm that my funds will be transferred to the trader's pool and will no longer appear in my available balance",
+    "i-understand-disconnecting": "I understand that when disconnecting, I will only be able to withdraw my investment once the trader closes all open positions."
   },
   "withdrawal-request": "Withdrawal Request",
   "withdrawal-success": {

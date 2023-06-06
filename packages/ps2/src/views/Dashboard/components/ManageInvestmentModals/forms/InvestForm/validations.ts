@@ -54,4 +54,7 @@ export const editInvestmentValidation = ({
     understandMoneyTransferred: yup
       .boolean()
       .oneOf([true], 'error:error.required'),
+    understandDisconnecting: yup
+      .boolean()
+      .oneOf([true], 'error:error.required'),
   });

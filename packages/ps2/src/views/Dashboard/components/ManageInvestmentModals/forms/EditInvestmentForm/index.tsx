@@ -148,6 +148,7 @@ function EditInvestmentForm({
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSlider
+                prefixId={'edit-investment-modal'}
                 track={false}
                 {...field}
                 labels={{

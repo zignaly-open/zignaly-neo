@@ -7,7 +7,7 @@ import {
   ZigButton,
   ZigInput,
   ZigInputAmount,
-  ZigSliderInput,
+  ZigSlider,
 } from '@zignaly-open/ui';
 import { editInvestmentValidation } from './validations';
 import {
@@ -17,7 +17,7 @@ import {
 } from '../../../../../../apis/investment/use';
 import { InvestFormData, InvestFormProps } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import { ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { Form, ModalActions } from 'components/ZModal';
 import { Box } from '@mui/material';
 import { CheckBox } from '@zignaly-open/ui';
 import { NumericFormat } from 'react-number-format';
@@ -28,7 +28,7 @@ import DepositModal from '../../DepositModal';
 import { useZModal } from '../../../../../../components/ZModal/use';
 import { AmountInvested } from '../EditInvestmentForm/atoms';
 
-function InvestForm({ close, onInvested }: InvestFormProps) {
+function InvestForm({ onInvested }: InvestFormProps) {
   const coin = useCurrentBalance();
   const { t } = useTranslation(['edit-investment', 'action']);
   const service = useSelectedInvestment();
@@ -45,8 +45,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
     control,
     setValue,
     watch,
-    trigger,
-    formState: { isValid, isDirty, errors },
+    formState: { isValid, errors },
   } = useForm<InvestFormData>({
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -174,60 +173,64 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
   }
 
   return (
-    <form
+    <Form
       onSubmit={handleSubmit(
         isConfirmation ? onSubmitSecondStep : onSubmitFirstStep,
       )}
     >
-      <div>
-        <Controller
-          name={'amountTransfer'}
-          control={control}
-          rules={{ required: true }}
-          render={({ field }) => (
-            <ZigInputAmount
-              id={'invest-modal__input-amount'}
-              label={t('form.inputAmount.label')}
-              wide={true}
-              coin={coin.id}
-              balance={coin.balance}
-              extraInfo={{
-                others: [renderDepositCoin()],
-              }}
-              error={t(errors?.amountTransfer?.message)}
-              {...field}
-            />
-          )}
-        />
-        <div>
-          <Controller
-            name='profitPercentage'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <ZigSliderInput
-                prefixId={'invest-modal'}
-                mode={'range'}
-                labels={{
-                  top: t('form.profits.title'),
-                  left: t('form.profits.left'),
-                  right: t('form.profits.right'),
-                }}
-                value={field.value}
-                onChange={field.onChange}
-              />
-            )}
+      <Controller
+        name={'amountTransfer'}
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <ZigInputAmount
+            id={'invest-modal__input-amount'}
+            label={t('form.inputAmount.label')}
+            wide={true}
+            coin={coin.id}
+            balance={coin.balance}
+            extraInfo={{
+              others: [renderDepositCoin()],
+            }}
+            error={t(errors?.amountTransfer?.message)}
+            {...field}
           />
-        </div>
-      </div>
+        )}
+      />
+      <Controller
+        name='profitPercentage'
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <ZigSlider
+            prefixId={'invest-modal'}
+            track={false}
+            {...field}
+            labels={{
+              top: (
+                <ZigTypography
+                  variant={'body2'}
+                  color='neutral300'
+                  id='invest-modal__title'
+                  display='block'
+                  textAlign='center'
+                >
+                  {t('form.profits.title')}
+                </ZigTypography>
+              ),
+              start: t('form.profits.left'),
+              end: t('form.profits.right'),
+            }}
+          />
+        )}
+      />
 
       <Box
         sx={{
-          display: isConfirmation ? 'none' : 'flex',
+          display: 'flex',
           flexDirection: 'column',
           gap: 2.5,
-          mt: 5,
-          mb: 5,
+          mt: 1,
         }}
       >
         <Controller
@@ -259,6 +262,20 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
             />
           )}
         />
+
+        <Controller
+          control={control}
+          name='understandDisconnecting'
+          defaultValue={false}
+          render={({ field: { onChange, value } }) => (
+            <CheckBox
+              id={'invest-modal__understand-disconnecting'}
+              onChange={onChange}
+              value={value}
+              label={t('invest-modal.i-understand-disconnecting')}
+            />
+          )}
+        />
       </Box>
 
       <ModalActions>
@@ -272,7 +289,7 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
           {t('continue')}
         </ZigButton>
       </ModalActions>
-    </form>
+    </Form>
   );
 }
 

@@ -10,5 +10,6 @@ export type InvestFormData = {
   transferLabelForValidation: string;
   understandMargin: boolean;
   understandMoneyTransferred: boolean;
+  understandDisconnecting: boolean;
   amountTransfer?: string;
 };
