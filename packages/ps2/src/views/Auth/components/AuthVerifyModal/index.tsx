@@ -102,7 +102,7 @@ function AuthVerifyModal({
       return errorCode === 13
         ? t('error:error.login-session-expired')
         : [37, 108, 1086].includes(errorCode)
-        ? t('error:error.wrong-code')
+        ? t(`error:error.${errorCode}`)
         : null;
     },
     [t],
@@ -127,7 +127,7 @@ function AuthVerifyModal({
 
   return (
     <ZModal
-      width={540}
+      wide
       allowUnauth
       {...props}
       close={emailUnconfirmed ? null : onClickClose}
@@ -136,7 +136,10 @@ function AuthVerifyModal({
     >
       <Title data-testid={'auth-verify-modal__title'}>
         {texts.description && (
-          <ZigTypography id={'auth-verify-modal__description'}>
+          <ZigTypography
+            id={'auth-verify-modal__description'}
+            textAlign={'center'}
+          >
             {texts.description}
           </ZigTypography>
         )}

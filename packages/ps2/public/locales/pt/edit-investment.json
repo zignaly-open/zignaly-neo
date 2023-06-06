@@ -74,7 +74,7 @@
 	"invest-modal": {
 		"invest-with": "Invista com",
 		"amount-to-invest": "Quantidade a Investir",
-		"type-transfer": "Escreva a palavra \"{{word}}\" no campo abaixo para completar a transferência:",
+		"type-transfer": "Escreva a palavra <0>\"{{word}}\"</0> no campo abaixo para completar a transferência:",
 		"transfer-error": "Valor inválido. Por favor, escreva a palavra correcta.",
 		"transfer-label": "Transferência",
 		"i-understand-margin": "Entendo e confirmo que todo o meu {{coin}} saldo faz agora parte do margin e está em risco",

@@ -275,59 +275,61 @@ function WithdrawForm({
             />
           )}
 
-          {coinObject && (
-            <div>
-              <InputAmountAdvanced
-                name='amount'
-                id={'withdraw-modal__input-amount'}
-                control={control}
-                label={t('amountToWithdraw.label')}
-                showUnit={true}
-                showBalance={false}
-                placeholder='0.0'
-                tokens={[
-                  {
-                    id: coin,
-                    balance: coinObject.available,
-                  },
-                ]}
-                error={t(
-                  (
-                    errors?.amount as FieldErrorsImpl<InputAmountAdvancedValueType>
-                  )?.value?.message,
-                  {
-                    maxDecimals: precisionNumberToDecimals(
-                      networkObject?.integerMultiple,
-                    ),
-                  },
-                )}
-              />
-              <Box mt={1}>
-                <LabelValueLine
-                  prefixId={'withdraw-modal-balance'}
-                  label={t('amountToWithdraw.labelBalance')}
-                  value={coinObject.available.toString()}
-                  coin={coin}
+          <Box sx={{ minHeight: 134 }}>
+            {coinObject && (
+              <div>
+                <InputAmountAdvanced
+                  name='amount'
+                  id={'withdraw-modal__input-amount'}
+                  control={control}
+                  label={t('amountToWithdraw.label')}
+                  showUnit={true}
+                  showBalance={false}
+                  placeholder='0.0'
+                  tokens={[
+                    {
+                      id: coin,
+                      balance: coinObject.available,
+                    },
+                  ]}
+                  error={t(
+                    (
+                      errors?.amount as FieldErrorsImpl<InputAmountAdvancedValueType>
+                    )?.value?.message,
+                    {
+                      maxDecimals: precisionNumberToDecimals(
+                        networkObject?.integerMultiple,
+                      ),
+                    },
+                  )}
                 />
-              </Box>
-              {networkObject && (
-                <>
+                <Box mt={1}>
                   <LabelValueLine
-                    prefixId={'withdraw-modal-minimum'}
-                    label={t('amountToWithdraw.minimum')}
-                    value={networkObject.withdrawMin}
+                    prefixId={'withdraw-modal-balance'}
+                    label={t('amountToWithdraw.labelBalance')}
+                    value={coinObject.available.toString()}
                     coin={coin}
                   />
-                  <LabelValueLine
-                    prefixId={'withdraw-modal-fee'}
-                    label={t('amountToWithdraw.fee')}
-                    value={networkObject.withdrawFee}
-                    coin={coin}
-                  />
-                </>
-              )}
-            </div>
-          )}
+                </Box>
+                {networkObject && (
+                  <>
+                    <LabelValueLine
+                      prefixId={'withdraw-modal-minimum'}
+                      label={t('amountToWithdraw.minimum')}
+                      value={networkObject.withdrawMin}
+                      coin={coin}
+                    />
+                    <LabelValueLine
+                      prefixId={'withdraw-modal-fee'}
+                      label={t('amountToWithdraw.fee')}
+                      value={networkObject.withdrawFee}
+                      coin={coin}
+                    />
+                  </>
+                )}
+              </div>
+            )}
+          </Box>
 
           <ModalActions>
             <ZigButton

@@ -17,7 +17,7 @@ const InvestorDetailsForService: React.FC<{
     <Investor id={prefixId && `${prefixId}__investor-details`}>
       {!!service.serviceLogo && (
         <Avatar
-          size={'xx-large'}
+          size={48}
           image={getServiceLogo(service.serviceLogo)}
           id={prefixId && `${prefixId}__investor-details-avatar`}
         />
@@ -25,7 +25,7 @@ const InvestorDetailsForService: React.FC<{
       <InvestorData>
         <InvestorName
           variant={'h2'}
-          color={'neutral100'}
+          color={'neutral200'}
           id={prefixId && `${prefixId}__investor-details-name`}
         >
           {service.serviceName}
@@ -33,8 +33,8 @@ const InvestorDetailsForService: React.FC<{
 
         {service.successFee?.toString() && (
           <ZigTypography
-            variant={'h3'}
-            color={'neutral400'}
+            variant={'caption'}
+            color={'neutral300'}
             id={prefixId && `${prefixId}__investor-details-fee`}
           >
             {t('investorDetail-successFee', {

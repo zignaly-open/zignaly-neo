@@ -176,16 +176,6 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
     resize: none;
     background: linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%);
 
-    &:-webkit-autofill {
-      -webkit-box-shadow: 0 0 0 1000px white inset;
-      -webkit-background-clip: text;
-    }
-
-    &:-webkit-autofill:focus {
-      -webkit-box-shadow: 0 0 0 50px white inset;
-      -webkit-text-fill-color: #333;
-    }
-
     -webkit-text-fill-color: #838b95 !important;
 
     &::placeholder {
@@ -196,6 +186,12 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
       cursor: not-allowed;
       opacity: 0.67;
       color: ${({ theme }) => theme.palette.neutral100} !important;
+    }
+
+    &::-webkit-inner-spin-button,
+    &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
     }
   }
 `;

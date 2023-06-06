@@ -31,13 +31,14 @@ const WithdrawConfirmForm = ({
           my={1}
           color='neutral200'
           id={'withdraw-modal-confirmation-success__description'}
+          textAlign={'center'}
         >
           {t('success.description')}
         </ZigTypography>
         <ModalActions>
           <ZigButton
             onClick={close}
-            variant='outlined'
+            variant='contained'
             size='large'
             id={'withdraw-modal-confirmation-success__close'}
           >

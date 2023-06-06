@@ -100,7 +100,7 @@ export const InvestedButtonBase: React.FC<{
         <ZigButton
           variant={'text'}
           id={prefixId && `${prefixId}__edit-${service.id}`}
-          startIcon={<EditIcon />}
+          startIcon={<EditIcon sx={{ width: '15px', height: '15px' }} />}
           onClick={onClickEditInvestment}
         >
           {t('action:edit')}

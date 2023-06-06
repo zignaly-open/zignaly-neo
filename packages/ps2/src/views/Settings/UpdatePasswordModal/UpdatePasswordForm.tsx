@@ -55,7 +55,7 @@ const UpdatePasswordForm = ({ close }: { close: () => void }) => {
 
   return (
     <>
-      <ZigTypography whiteSpace='pre-line'>
+      <ZigTypography whiteSpace='pre-line' textAlign={'center'}>
         {t('update-password.description')}
       </ZigTypography>
       <Form onSubmit={handleSubmit(onSubmit)}>

@@ -53,7 +53,7 @@ const ZigButton = ({
       }
       // hack to preserve old behavior but allow for normal mui theming
       color={variant === "outlined" && !color ? "secondary" : color}
-      className={active ? "MuiButton-active" : ""}
+      className={active ? `${props.className} MuiButton-active` : props.className}
     />
   );
   return tooltip ? (

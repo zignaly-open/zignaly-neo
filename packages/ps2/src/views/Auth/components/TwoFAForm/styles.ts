@@ -15,5 +15,5 @@ export const Field = styled('fieldset')`
   display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 40px;
+  gap: 14px;
 `;

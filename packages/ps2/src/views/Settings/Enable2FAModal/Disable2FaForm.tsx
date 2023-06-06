@@ -51,10 +51,9 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
 
   return (
     <>
-      <ZigTypography whiteSpace='pre-line'>
+      <ZigTypography whiteSpace='pre-line' textAlign={'center'}>
         {t('disable-2fa.description')}
       </ZigTypography>
-      <ErrorMessage text={t('disable-2fa.security')} />
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name='code'
@@ -69,6 +68,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
             />
           )}
         />
+        <ErrorMessage text={t('disable-2fa.security')} />
 
         <ModalActions>
           <ZigButton

@@ -2,37 +2,14 @@ import { styled } from '@mui/material';
 
 export const Field = styled('div')`
   display: grid;
-  grid-template-columns: 0.9fr 1fr;
-  user-select: none;
-  gap: 42px;
-  align-items: center;
-`;
+  grid-template-columns: 0.7fr 1fr;
+  gap: 34px;
+  margin-bottom: 54px;
 
-export const Row = styled('div')`
-  ${({ theme }) => `
-    &:first-child {
-      padding-right: 22px;
-      border-right: 1px solid ${theme.palette.neutral500};
-    }
-  `};
-`;
-
-export const AmountInvested = styled('div')`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 8px;
-  margin-top: 12px;
-`;
-
-export const TokenValue = styled('div')`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
-export const InputContainer = styled('div')`
-  margin-top: 68px;
+  > div:first-child {
+    padding-right: 17px;
+    border-right: 1px dashed ${({ theme }) => theme.palette.neutral600};
+  }
 `;
 
 export const Form = styled('form')``;

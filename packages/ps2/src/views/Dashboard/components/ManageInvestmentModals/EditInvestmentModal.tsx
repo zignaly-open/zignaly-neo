@@ -82,8 +82,8 @@ function EditInvestmentModal({
 
   return (
     <ZModal
-      wide
       {...props}
+      wide
       close={close}
       title={title}
       onGoBack={

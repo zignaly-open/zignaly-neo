@@ -9,38 +9,14 @@ export const sizes = {
   [AvatarSizes.XXLARGE]: 80,
 };
 
-export const Layout = styled.div`
+export const Layout = styled.div<{ size: number }>`
   overflow: hidden;
+  border-radius: 50%;
 
-  &.${AvatarSizes.SMALL} {
-    width: ${sizes[AvatarSizes.SMALL]}px;
-    height: ${sizes[AvatarSizes.SMALL]}px;
-    border-radius: ${sizes[AvatarSizes.SMALL]}px;
-  }
-
-  &.${AvatarSizes.MEDIUM} {
-    width: ${sizes[AvatarSizes.MEDIUM]}px;
-    height: ${sizes[AvatarSizes.MEDIUM]}px;
-    border-radius: ${sizes[AvatarSizes.MEDIUM]}px;
-  }
-
-  &.${AvatarSizes.LARGE} {
-    width: ${sizes[AvatarSizes.LARGE]}px;
-    height: ${sizes[AvatarSizes.LARGE]}px;
-    border-radius: ${sizes[AvatarSizes.LARGE]}px;
-  }
-
-  &.${AvatarSizes.XLARGE} {
-    width: ${sizes[AvatarSizes.XLARGE]}px;
-    height: ${sizes[AvatarSizes.XLARGE]}px;
-    border-radius: ${sizes[AvatarSizes.XLARGE]}px;
-  }
-
-  &.${AvatarSizes.XXLARGE} {
-    width: ${sizes[AvatarSizes.XXLARGE]}px;
-    height: ${sizes[AvatarSizes.XXLARGE]}px;
-    border-radius: ${sizes[AvatarSizes.XXLARGE]}px;
-  }
+  ${({ size }) => `
+    width: ${size}px;
+    height: ${size}px;
+  `}
 `;
 
 export const Image = styled.img`

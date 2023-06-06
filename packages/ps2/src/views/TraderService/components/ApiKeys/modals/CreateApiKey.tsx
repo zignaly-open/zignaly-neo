@@ -56,7 +56,9 @@ function CreateApiKeysModal({
 
   return (
     <ZModal wide {...props} close={close} title={t('api-keys.create-new-key')}>
-      <ZigTypography>{t('api-keys.create-new-key-description')}</ZigTypography>
+      <ZigTypography textAlign={'center'}>
+        {t('api-keys.create-new-key-description')}
+      </ZigTypography>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Controller
           name='alias'

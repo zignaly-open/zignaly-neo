@@ -48,7 +48,7 @@ function CreateServiceModal({
       title={
         step === 1 ? t('create.invest-in-your-service') : t('create.title')
       }
-      width={622}
+      wide
     >
       {isLoading && <CenteredLoader />}
       {!isLoading && step === 0 && (
