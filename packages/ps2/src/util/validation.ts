@@ -40,7 +40,7 @@ const inputAmountNumberValidation = yup
 
 const inputAmountNumberValidationGt0 = inputAmountNumberValidation.test(
   'min',
-  'common:validation.negative-zeroable-amount',
+  'common:validation.negative-amount',
   function (val) {
     return new BigNumber(val).gt(0);
   },
@@ -48,7 +48,7 @@ const inputAmountNumberValidationGt0 = inputAmountNumberValidation.test(
 
 const inputAmountNumberValidationGte0 = inputAmountNumberValidation.test(
   'min',
-  'common:validation.negative-amount',
+  'common:validation.negative-zeroable-amount',
   function (val) {
     return new BigNumber(val).gte(0);
   },
@@ -128,12 +128,9 @@ export const inputAmountValidation = ({
 }) => {
   let validation = yup
     .string()
-    .required('common:validation.invalid-amount')
     .typeError('common:validation.invalid-value')
     .concat(inputAmountNumberValidation)
     .concat(inputAmountNumberValidationGt0);
-
-  // let validation = yup.number();
 
   if (balance !== undefined) {
     validation = validation.test(
@@ -169,11 +166,3 @@ export const inputAmountValidation = ({
 
   return validation;
 };
-// .test('common:validation.min-invest-amount-for-owner', function (val) {
-//   const tokenBalance = new BigNumber(this.parent?.token?.balance);
-//   const currentValue = new BigNumber(val);
-//   const minBalance = new BigNumber(min);
-//   return tokenBalance
-//     .minus(currentValue)
-//     .isGreaterThanOrEqualTo(minBalance);
-// });

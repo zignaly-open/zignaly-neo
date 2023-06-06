@@ -35,7 +35,7 @@ export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"
   balance?: string | number;
   /** Showed as info. */
   min?: string | number;
-  /** Showed as info. */
+  /** Showed as info */
   max?: string | number;
   className?: string;
 };
@@ -57,8 +57,5 @@ export type InputExtraInfoObject = {
   others?: InputExtraInfoFalseableItem[];
   wrapExtraInfo?: number | boolean;
 };
-
-// export type InputExtraInfoType = Omit<InputExtraInfoProps, "others">;
-// export type InputExtraInfoObject = InputExtraInfoProps;
 
 export type InputExtraInfo = JSX.Element | false | InputExtraInfoObject;
