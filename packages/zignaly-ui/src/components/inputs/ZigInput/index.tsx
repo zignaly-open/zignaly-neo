@@ -140,15 +140,7 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
 
     &.Mui-focused,
     &:hover {
-      &,
-      .MuiInput-input {
-        border-color: ${({ theme }) => theme.palette.neutral400};
-        background: #171b30;
-      }
-
-      .MuiInput-input {
-        -webkit-text-fill-color: #878dd1 !important;
-      }
+      border-color: ${({ theme }) => theme.palette.neutral400};
     }
 
     &.Mui-error,

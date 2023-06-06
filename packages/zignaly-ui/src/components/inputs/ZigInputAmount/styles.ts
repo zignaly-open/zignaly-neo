@@ -15,11 +15,15 @@ export const Layout = styled(Box)`
   && {
     .MuiInput-root {
       padding: 2px 24px;
+      background: #171b30;
     }
 
     .MuiInput-input {
       font-size: 30px;
       font-weight: 500;
+      border-color: ${({ theme }) => theme.palette.neutral400};
+      background: #171b30;
+      -webkit-text-fill-color: #878dd1 !important;
     }
   }
 `;
