@@ -75,7 +75,8 @@
   "invest-modal": {
     "invest-with": "Invest with",
     "amount-to-invest": "Amount to Invest:",
-    "type-transfer": "Type the word <0>“{{word}}”</0> in the field below to complete the transfer:",
+    "type-transfer": "Type the word <0>“{{word}}”</0> in the field below to agree with the transfer:",
+    "type-transfer-placeholder": "Type “{{word}}” in here",
     "transfer-error": "Invalid value. Please type the correct word.",
     "max-funds": "Exceeds maximum funds allowed in this service. Invest max. {{max}} {{coin}}.",
     "max-reached": "Cannot invest in this service because it has reached Maximum Funds limit.",

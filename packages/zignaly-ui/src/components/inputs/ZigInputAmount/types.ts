@@ -12,9 +12,12 @@ export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"
   coin?: string | Coin;
   /**
    * Extra info to show under the input.
-   * By default it will show the balance, min and max (if the values are provided).
-   * To hide the balance set it to false.
-   * To pass a custom label, pass an object with the value and label properties. Or a full JSX.Element.
+   * By default it will show the balance, min and max, if those values are provided.
+   * To hide them, set them to false.
+   * To change the labels, set them to a string.
+   *
+   * To add additional items, use the `others` array property:
+   * { value: "value", label: "label" } or JSX.Element
    */
   extraInfo?: InputExtraInfo;
   /**
@@ -37,14 +40,24 @@ export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"
 };
 
 export type InputExtraInfoItem = { value: string | number; label: string };
-export type InputExtraInfoFalseableItem = string | number | InputExtraInfoItem | false;
+export type InputExtraInfoFalseableItem = string | InputExtraInfoItem | false;
 
 export type InputExtraInfoProps = {
+  balance?: string | number;
+  min?: string | number;
+  max?: string | number;
+  extraInfo?: InputExtraInfoObject;
+};
+
+export type InputExtraInfoObject = {
   balance?: InputExtraInfoFalseableItem;
   min?: InputExtraInfoFalseableItem;
   max?: InputExtraInfoFalseableItem;
-  others?: (InputExtraInfoItem | JSX.Element)[];
+  others?: InputExtraInfoFalseableItem[];
   wrapExtraInfo?: number | boolean;
 };
 
-export type InputExtraInfo = JSX.Element | false | InputExtraInfoProps;
+// export type InputExtraInfoType = Omit<InputExtraInfoProps, "others">;
+// export type InputExtraInfoObject = InputExtraInfoProps;
+
+export type InputExtraInfo = JSX.Element | false | InputExtraInfoObject;

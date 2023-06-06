@@ -174,7 +174,9 @@ function InvestForm({ onInvested }: InvestFormProps) {
                   />
                 </ZigTypography>
               }
-              placeholder={transferMagicWord}
+              placeholder={t('invest-modal.type-transfer-placeholder', {
+                word: transferMagicWord,
+              })}
               disabled={isLoading}
               error={t(errors.transferConfirm?.message)}
               // weird issue with the default value, likely some react form shenanigan

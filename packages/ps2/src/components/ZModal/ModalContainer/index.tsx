@@ -16,7 +16,7 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
   const theme = useTheme();
 
   return (
-    <Layout width={width} ref={ref}>
+    <Layout width={width} ref={ref} tabIndex={-1}>
       <Header compact={!title && !onGoBack}>
         {onGoBack && typeof onGoBack === 'function' && (
           <IconButton onClick={onGoBack}>

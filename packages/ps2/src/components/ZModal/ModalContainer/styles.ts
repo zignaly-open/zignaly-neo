@@ -51,7 +51,7 @@ export const Body = styled('div')`
   }
 `;
 
-export const Header = styled('div')<{ compact: boolean }>`
+export const Header = styled(Box)<{ compact: boolean }>`
   display: flex;
   z-index: 999;
   position: relative;

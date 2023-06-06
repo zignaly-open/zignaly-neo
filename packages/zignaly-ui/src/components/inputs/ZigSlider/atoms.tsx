@@ -1,7 +1,7 @@
-import { Box, SliderProps } from "@mui/material";
-import { ZigTypography } from "index";
+import { Box } from "@mui/material";
 import React from "react";
 import { SliderLabels } from "./types";
+import ZigTypography from "components/display/ZigTypography";
 
 export const SliderLabelValue = ({
   labels,

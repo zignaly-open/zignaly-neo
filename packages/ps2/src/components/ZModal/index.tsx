@@ -31,6 +31,7 @@ const ZModal: React.FC<ZModalProps> = ({
     notLoggedInWhenNeeded && setTimeout(close);
   }, [notLoggedInWhenNeeded]);
 
+  console.log(props);
   return (
     <MuiModal
       {...props}

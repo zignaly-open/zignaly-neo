@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { ZigInputAmountProps } from "./types";
+import { InputExtraInfoObject, ZigInputAmountProps } from "./types";
 import { InputAdornment, Box } from "@mui/material";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
 import ZigInput from "../ZigInput";
@@ -26,11 +26,12 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     max,
     id,
     children,
+    ...rest
   } = props;
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
 
   /**
-   * @description Call custom onMax function or call onChange with max value event for RHF
+   * Call custom onMax function or call onChange with max value event for RHF
    */
   const handleMax = () => {
     if (onMax) return onMax();
@@ -61,7 +62,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
           </ZigTypography>
         </Box>
         <ZigInput
-          {...props}
+          {...rest}
           id={id}
           inputRef={ref}
           type="number"
@@ -71,13 +72,14 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
           error={!!error}
           placeholder={placeholder}
           InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <MaxButton variant="outlined" onClick={handleMax}>
-                  Max
-                </MaxButton>
-              </InputAdornment>
-            ),
+            endAdornment:
+              balance || handleMax ? (
+                <InputAdornment position="end">
+                  <MaxButton variant="outlined" onClick={handleMax}>
+                    Max
+                  </MaxButton>
+                </InputAdornment>
+              ) : null,
           }}
         />
       </Box>
@@ -88,16 +90,15 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
       </Box>
       <Box mt={extraInfo && error && typeof error === "string" ? "7px" : "14px"} width={1}>
         <>
-          {typeof extraInfo === "function" ? (
+          {React.isValidElement(extraInfo) ? (
             extraInfo
-          ) : extraInfo ? (
+          ) : extraInfo !== null ? (
             <InputExtraInfo
               coin={coinVal}
-              wrapExtraInfo={wrapExtraInfo}
-              balance={balance}
               min={min}
               max={max}
-              {...extraInfo}
+              balance={balance}
+              extraInfo={extraInfo as InputExtraInfoObject}
             />
           ) : null}
           <Box display="flex" justifyContent="center" mt={3} mb={1}>

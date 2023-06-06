@@ -24,9 +24,6 @@ const meta = {
       type: "boolean",
       defaultValue: false,
     },
-    defaultValue: {
-      type: "string",
-    },
     error: {
       type: "string",
       defaultValue: "",
@@ -36,43 +33,12 @@ const meta = {
 export default meta;
 
 const ZigInputAmountWithState = (props: ZigInputAmountProps) => {
-  // Sets the hooks for both the label and primary props
   const [value, setValue] = useState(props.value);
-  // const [isPrimary, setIsPrimary] = useState(false);
 
-  // Sets a click handler to change the label's value
-  // const handleOnChange = () => {
-  //   if (!isPrimary) {
-  //     setIsPrimary(true);
-  //     setValue("Primary");
-  //   }
-  // };
   return (
     <ZigInputAmount
       {...props}
-      // onMax={
-      //   typeof props.extraInfo === "object" && props.extraInfo !== null
-      //     ? () => setValue(props.extraInfo?.balance)
-      //     : null
-      // }
-      // onMax1={
-      //   props.extraInfo && typeof props.extraInfo === "object" && "balance" in props.extraInfo
-      //     ? () => setValue(props.extraInfo.balance)
-      //     : undefined
-      // }
-      // onMax0={
-      //   typeof props.extraInfo === "object" && "balance" in props.extraInfo
-      //     ? () => setValue(props.extraInfo.balance)
-      //     : null
-      // }
-      // onMax={
-      //   props.extraInfo && props.extraInfo.balance ? () => setValue(props.extraInfo.balance) : null
-      // }
-      onMax={
-        props.extraInfo && props.extraInfo?.balance
-          ? () => setValue(props.extraInfo.balance)
-          : undefined
-      }
+      onMax={props.balance ? () => setValue(props.balance) : undefined}
       value={value}
     />
   );
@@ -80,30 +46,29 @@ const ZigInputAmountWithState = (props: ZigInputAmountProps) => {
 
 type Story = StoryObj<typeof meta>;
 
-export const Default = { args: {} };
 export const WithLabel: Story = {
   args: {
     label: "A label",
     coin: "USDT",
+    balance: 1000,
+    min: 100,
     extraInfo: {
-      balance: 1000,
-      min: { value: 100, label: "Min. deposit:" },
+      min: { label: "Min. deposit:" },
     },
   },
   render: (props) => <ZigInputAmountWithState {...props} />,
 };
 
-export const WithCustomExtraInfo = {
+export const WithoutLabels: Story = { args: {} };
+
+export const WithCustomExtraInfo: Story = {
   args: {
     label: "A label",
-    // coin: { coin: "USDT", balance: 10 },
+    balance: 1000,
     coin: "USDT",
-    // extraInfo: (
-    //   <InputExtraInfo balance={{ value: 1000, label: "Cuustom balance label" }} min={100} />
-    // ),
+    min: 100,
     extraInfo: {
-      balance: 1000,
-      min: { value: 100, label: "Min. deposit:" },
+      min: "Min. deposit:",
       others: [
         {
           label: "Custom label:",
@@ -115,61 +80,16 @@ export const WithCustomExtraInfo = {
       ],
     },
   },
+  render: (props) => <ZigInputAmountWithState {...props} />,
 };
 
-// export const Default = Template.bind({});
-
-// const Template: ComponentStory<typeof InputText> = (args) => <InputText {...args} />;
-
-// export const TextInputer: ComponentMeta<typeof InputText> = Template.bind({});
-// TextInputer.args = {
-//   label: "Amount to Withdraw",
-//   placeholder: "Amount to Withdraw",
-// };
-
-// export const Sensitive: ComponentMeta<typeof InputText> = Template.bind({});
-// Sensitive.args = {
-//   label: "Amount to Withdraw",
-//   sensitive: true,
-//   placeholder: "Amount to Withdraw",
-// };
-
-// export const TextareaInputer: ComponentMeta<typeof InputText> = Template.bind({});
-// TextareaInputer.args = {
-//   value:
-//     "https://zignaly.com/api/signals.php?key=YOURSECRETKEY&type=entry&exchange=zignaly&pair=ethusdt&orderType=limit&positionSize=10&signalId=123&limitPrice=3420&takeProfitPercentage1=20&takeProfitAmountPercentage1=100&stopLossPercentage=-5",
-//   multiline: true,
-//   wide: true,
-//   label: "Label",
-// };
-
-// export const Error: ComponentMeta<typeof InputText> = Template.bind({});
-// Error.args = {
-//   value: "https://zignaly com/api/",
-//   wide: true,
-//   error: "Invalid URL",
-//   label: "Label",
-// };
-
-// export const LabelActionLink: ComponentMeta<typeof InputText> = Template.bind({});
-// LabelActionLink.args = {
-//   value: "",
-//   wide: true,
-//   labelAction: {
-//     text: "Link to somewhere",
-//     href: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-//   },
-//   label: "Label",
-// };
-
-// export const LabelAction: ComponentMeta<typeof InputText> = Template.bind({});
-// LabelAction.args = {
-//   value: "",
-//   wide: true,
-//   labelAction: {
-//     text: "Alert",
-//     onClick: () => alert(),
-//     tabIndex: -1,
-//   },
-//   label: "Label",
-// };
+export const WithNestedComponent: Story = {
+  args: {
+    label: "A label",
+    balance: 1000,
+    coin: "USDT",
+    min: 100,
+    children: <ZigTypography variant="body2">Custom nested element</ZigTypography>,
+  },
+  render: (props) => <ZigInputAmountWithState {...props} />,
+};
