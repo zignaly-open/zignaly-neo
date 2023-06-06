@@ -6,28 +6,25 @@ import Avatar from ".";
 describe("components/display/Avatar", () => {
   describe("renders", () => {
     it("Avatar with small size", () => {
-      const { container } = render(<Avatar size={"small"} />);
+      const { container } = render(<Avatar hash="avsas" size={"small"} />);
 
-      const tag = container.querySelector("div");
-      expect(tag).toBeVisible();
-
-      expect((container!.firstChild as HTMLElement).classList!.contains("small")).toBe(true);
+      const svg = container.querySelector("svg");
+      expect(svg).toBeVisible();
+      expect(svg?.getAttribute("width")).toBe("20");
     });
     it("Avatar with medium size", () => {
-      const { container } = render(<Avatar size={"medium"} />);
+      const { container } = render(<Avatar hash="avsas" size={"medium"} />);
 
-      const tag = container.querySelector("div");
-      expect(tag).toBeVisible();
-
-      expect((container!.firstChild as HTMLElement).classList.contains("medium")).toBe(true);
+      const svg = container.querySelector("svg");
+      expect(svg).toBeVisible();
+      expect(svg?.getAttribute("width")).toBe("26");
     });
     it("Avatar with large size", () => {
-      const { container } = render(<Avatar size={"large"} />);
+      const { container } = render(<Avatar hash="avsas" size={"large"} />);
 
-      const tag = container.querySelector("div");
-      expect(tag).toBeVisible();
-
-      expect((container!.firstChild as HTMLElement).classList.contains("large")).toBe(true);
+      const svg = container.querySelector("svg");
+      expect(svg).toBeVisible();
+      expect(svg?.getAttribute("width")).toBe("36");
     });
 
     it("Avatar with hash", () => {
