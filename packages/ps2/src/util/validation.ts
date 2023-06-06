@@ -40,7 +40,7 @@ const inputAmountNumberValidation = yup
 
 const inputAmountNumberValidationGt0 = inputAmountNumberValidation.test(
   'min',
-  'common:validation.negative-amount',
+  'common:validation.negative-zeroable-amount',
   function (val) {
     return new BigNumber(val).gt(0);
   },
@@ -48,7 +48,7 @@ const inputAmountNumberValidationGt0 = inputAmountNumberValidation.test(
 
 const inputAmountNumberValidationGte0 = inputAmountNumberValidation.test(
   'min',
-  'common:validation.negative-zeroable-amount',
+  'common:validation.negative-amount',
   function (val) {
     return new BigNumber(val).gte(0);
   },
@@ -115,16 +115,6 @@ export const inputAmountTokenDecimalsValidation = yup.object().shape({
   value: decimalsValidation(8),
 });
 
-// const inputAmountNumberValidationMinToken = inputAmountNumberValidationGt0.test(
-//   'number',
-//   'common:validation.insufficient-amount-min',
-//   function (val) {
-//     const minValue = new BigNumber(this.parent?.token?.min);
-//     const currentValue = new BigNumber(val);
-//     return !currentValue.isLessThan(minValue);
-//   },
-// );
-
 export const inputAmountValidation = ({
   min,
   max,
@@ -139,7 +129,10 @@ export const inputAmountValidation = ({
   let validation = yup
     .string()
     .required('common:validation.invalid-amount')
-    .typeError('common:validation.invalid-value');
+    .typeError('common:validation.invalid-value')
+    .concat(inputAmountNumberValidation)
+    .concat(inputAmountNumberValidationGt0);
+
   // let validation = yup.number();
 
   if (balance !== undefined) {

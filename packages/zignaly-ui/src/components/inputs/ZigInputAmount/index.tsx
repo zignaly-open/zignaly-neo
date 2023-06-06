@@ -102,9 +102,11 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
               extraInfo={extraInfo as InputExtraInfoObject}
             />
           ) : null}
-          <Box display="flex" justifyContent="center" mt={3} mb={1}>
-            {children}
-          </Box>
+          {children && (
+            <Box display="flex" justifyContent="center" mt={3} mb={1}>
+              {children}
+            </Box>
+          )}
         </>
       </Box>
     </Layout>
