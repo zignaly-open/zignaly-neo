@@ -152,6 +152,7 @@ function TransferModal({
               narrow
               sx={{
                 padding: '10px 20px',
+                width: '60px',
               }}
               onClick={toggleDestination}
             >
