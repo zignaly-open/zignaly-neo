@@ -60,10 +60,10 @@ function InvestDepositModal({
   return (
     <ZModal
       title={ready ? title : ''}
-      wide
       {...props}
       close={props.close}
       isLoading={!ready}
+      width={622}
     >
       {ready && component()}
     </ZModal>
