@@ -37,14 +37,14 @@ const ReferralInviteModal: React.FC<
   const [tab, setTab] = useState(0);
   const [friendText, setFriendText] = useState<string>(
     t('create-invite.invite-text-friend', {
-      depositThreshold: hardcodedInviteeReward.threshold,
-      reward: hardcodedInviteeReward.value,
+      depositThreshold: hardcodedInviteeReward?.threshold || 0,
+      reward: hardcodedInviteeReward?.value || 0,
     }),
   );
   const [traderText, setTraderText] = useState<string>(
     t('create-invite.invite-text-trader', {
-      depositThreshold: hardcodedInviteeReward.threshold,
-      reward: hardcodedInviteeReward.value,
+      depositThreshold: hardcodedInviteeReward?.threshold || 0,
+      reward: hardcodedInviteeReward?.value || 0,
     }),
   );
 

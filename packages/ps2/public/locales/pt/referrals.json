@@ -90,10 +90,6 @@
 		"SUCCESS_FEE_REWARD": "Ganho de Success Fee",
 		"REBATE_COMMISSION_REWARD": "Ganho de Taxas de Reembolso"
 	},
-	"header": {
-		"title": "Ganhe 20%",
-		"description": "Convidar Amigos"
-	},
 	"invite-traders-for-revenue": "<0>Convide Traders<\/0><1>{{{value}}%<\/1><2>da Arrecadação da Zignaly<\/2>",
 	"invite-traders-for-revenue-modal": "Convide traders para obter <0>{{value}}%<\/0> da Arrecadação da Zignaly obtida com o serviço de Profit Sharing do Trader para toda a vida.",
 	"invite-friends-for-revenue": "<0>Convide Amigos<\/0><1>{{{value}}%<\/1><2>da Arrecadação da Zignaly<\/2>",

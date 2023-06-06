@@ -34,12 +34,12 @@
 		"title": "Xác nhận rút tiền",
 		"description": "Vui lòng xác nhận thông tin là chính xác và gửi yêu cầu rút tiền của bạn.",
 		"receive": "Bạn sẽ nhận được:",
-		"network": "Mạng rút tiền",
-		"address": "Rút về địa chỉ",
-		"amount": "Số tiền rút",
-		"networkFee": "Phí mạng",
+		"network": "Mạng rút tiền:",
+		"address": "Rút về địa chỉ:",
+		"amount": "Số tiền rút:",
+		"networkFee": "Phí mạng:",
 		"continue": "Tiếp tục xác nhận",
-		"withdrawNow": "Rút ngay!"
+		"withdrawNow": "Rút ngay"
 	},
 	"success": {
 		"title": "Rút tiền thành công",

@@ -10,6 +10,7 @@ export type WithdrawFormData = {
 };
 
 export type WalletWithdrawModalProps = {
+  step: string;
   coins: WalletCoins;
   selectedCoin: string;
   setStep: (value: '' | 'confirm' | 'success') => void;

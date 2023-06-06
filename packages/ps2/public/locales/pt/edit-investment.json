@@ -81,5 +81,11 @@
 		"i-understand-money-transferred": "Eu entendo e confirmo que meus fundos serão transferidos para o pool do trader e não aparecerão mais no meu saldo disponível.",
 		"max-funds": "Excede os fundos máximos permitidos neste serviço. Investir no máximo {{max}} {{coin}}.",
 		"max-reached": "Não é possível investir neste serviço porque atingiu o limite Máximo de Fundos."
+	},
+	"withdrawal-request": "Pedido de Retirada",
+	"withdrawal-success": {
+		"title": "Retirada Solicitada",
+		"description": "Receberá os seus fundos depois que o gestor do fundo os liberar e a contabilidade diária for realizada. Por favor, considere que o seu investimento está em risco até que o saldo seja transferido para você. Dependendo do administrador do fundo, isso geralmente leva alguns dias, mas pode levar mais tempo para ser concluído. A Zignaly não controla esse período de tempo, portanto, seja paciente.",
+		"button": "Fechar"
 	}
 }

@@ -126,7 +126,7 @@ const ZigSliderInput = ({
           <Line variant="middle" id={prefixId && `${prefixId}__line-middle`} />
           <Line variant="right" id={prefixId && `${prefixId}__line-right`} />
           <DotContainer onMouseDown={() => setEnabled(true)} value={value}>
-            <Dot>
+            <Dot id={prefixId && `${prefixId}__dot`}>
               {!isRangeMode && (
                 <DotLabel
                   variant={"body2"}

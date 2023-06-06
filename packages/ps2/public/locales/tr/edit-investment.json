@@ -47,7 +47,10 @@
 	"investorDetail-successFee": "% {{fee}} Başarım ücreti",
 	"modal": {
 		"withdrawInvestment": {
-			"title": "Çekim Talebi"
+			"title": "Çekim Talebi",
+			"freeWithdrawal": {
+				"description": "Fon yöneticisi fonları serbest bıraktıktan ve günlük muhasebe yapıldıktan sonra fonlarınızı alacaksınız. Lütfen bakiye size aktarılana kadar yatırımınızın risk altında olduğunu göz önünde bulundurun. Fon yöneticisine bağlı olarak bu işlem genellikle birkaç gün sürer ancak tamamlanması daha uzun sürebilir."
+			}
 		},
 		"pendingTransaction": {
 			"title": "Bekleyen İşlemler",
@@ -78,5 +81,11 @@
 		"i-understand-money-transferred": "Paramın trader'ın havuzuna aktarılacağını ve artık mevcut bakiyemde görünmeyeceğini anlıyor ve onaylıyorum.",
 		"max-funds": "Bu tutar hizmette izin verilen maksimum fon miktarını aşıyor. Maksimum yatırabiliceğiniz miktar  {{max}} {{coin}}.",
 		"max-reached": "Maksimum Fon sınırına ulaştığı için bu hizmete yatırım yapılamıyor."
+	},
+	"withdrawal-request": "Çekim Talebi",
+	"withdrawal-success": {
+		"title": "Çekim Talep Edildi",
+		"description": "Fon yöneticisi fonları serbest bıraktıktan ve günlük hesaplama işlemi yapıldıktan sonra fonlarınızı alabileceksiniz. Lütfen bakiye size aktarılana kadar yatırımınızın risk altında olduğunu göz önünde bulundurun. Fon yöneticisine bağlı olarak,  genellikle bu durum birkaç gün sürer ancak tamamlanması daha uzun sürebilir. Zignaly bu zaman dilimini kontrol etmez, bu yüzden lütfen sabırlı olun.",
+		"button": "Kapat"
 	}
 }

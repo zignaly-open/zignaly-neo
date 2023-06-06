@@ -2,6 +2,8 @@ import { css, styled } from '@mui/material';
 
 export const AmountContainer = styled('div')<{
   coloredBorder?: boolean;
+  coloredBackground?: boolean;
+  noBorders?: boolean;
 }>`
   position: relative;
   display: flex;
@@ -9,7 +11,7 @@ export const AmountContainer = styled('div')<{
   align-items: center;
   justify-content: center;
   background: #101225;
-  box-shadow: inset 0px 0px 0px 1px #35334a;
+  box-shadow: inset 0 0 0 1px #35334a;
   border-radius: 5px;
   box-sizing: border-box;
   padding: 10px 18px;
@@ -30,6 +32,20 @@ export const AmountContainer = styled('div')<{
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
   }
+
+  ${({ noBorders }) =>
+    noBorders &&
+    css`
+      margin: 0 18px;
+      padding: 15px 0;
+      box-shadow: unset;
+    `}
+
+  ${({ coloredBackground }) =>
+    coloredBackground &&
+    css`
+      background: #181e34;
+    `}
 
   ${({ coloredBorder }) =>
     coloredBorder &&

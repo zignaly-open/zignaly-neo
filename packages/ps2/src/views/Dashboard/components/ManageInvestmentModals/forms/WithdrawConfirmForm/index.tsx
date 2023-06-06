@@ -1,17 +1,17 @@
 import React from 'react';
 import { AmountContainer } from './styles';
 import { Grid } from '@mui/material';
-import { ZigButton, ZigInput, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { ModalActions as ModalActions } from 'components/ZModal/ModalContainer/styles';
-import { ZigPriceLabelIcon } from './atoms/ZigPriceLabelIcon';
 import ChainIcon from 'components/ChainIcon';
 import { useTranslation } from 'react-i18next';
 import { WithdrawConfirmFormProps } from './types';
 import BigNumber from 'bignumber.js';
+import ArrowRightAltIcon from '@mui/icons-material/ArrowRightAlt';
+import RemoveIcon from '@mui/icons-material/Remove';
 
 const WithdrawConfirmForm = ({
   action,
-  back,
   status,
   address,
   tag,
@@ -22,7 +22,6 @@ const WithdrawConfirmForm = ({
   fee,
   feeCoin = coin,
   close,
-  iconBucket,
 }: WithdrawConfirmFormProps) => {
   const { t } = useTranslation('withdraw-crypto');
   if (status.isSuccess) {
@@ -55,12 +54,13 @@ const WithdrawConfirmForm = ({
         my={1}
         color='neutral200'
         id={'withdraw-modal-confirmation__description'}
+        textAlign={'center'}
       >
         {t('confirmation.description')}
       </ZigTypography>
       <ZigTypography
         mt={4}
-        color='neutral200'
+        variant={'body2'}
         id={'withdraw-modal-confirmation__network-label'}
       >
         {t('confirmation.network')}
@@ -71,7 +71,7 @@ const WithdrawConfirmForm = ({
           id={'withdraw-modal-confirmation__chain-icon'}
         />
         <ZigTypography
-          variant='h2'
+          variant='h3'
           color='neutral100'
           sx={{ weight: 'medium' }}
           id={'withdraw-modal-confirmation__network'}
@@ -79,116 +79,167 @@ const WithdrawConfirmForm = ({
           {networkName}
         </ZigTypography>
       </Grid>
-      <Grid mt={3} gap={3} display='flex' direction='column'>
-        <ZigInput
-          label={t('confirmation.address')}
-          id={'withdraw-modal-confirmation__address'}
-          InputProps={{
-            readOnly: true,
-          }}
-          value={address}
-          fullWidth
-        />
-        {tag && (
-          <ZigInput
+      <ZigTypography
+        mt={4}
+        variant={'body2'}
+        id={'withdraw-modal-confirmation__address-label'}
+      >
+        {t('confirmation.address')}
+      </ZigTypography>
+      <ZigTypography
+        variant='h3'
+        color='neutral100'
+        sx={{ weight: 'medium' }}
+        id={'withdraw-modal-confirmation__address'}
+        mt={'10px'}
+      >
+        {address}
+      </ZigTypography>
+      {tag && (
+        <>
+          <ZigTypography
+            mt={4}
+            variant={'body2'}
+            id={'withdraw-modal-confirmation__memo-label'}
+          >
+            {t('withdrawMemo.label')}
+          </ZigTypography>
+          <ZigTypography
+            variant='h3'
+            color='neutral100'
+            sx={{ weight: 'medium' }}
             id={'withdraw-modal-confirmation__memo'}
-            label={t('withdrawMemo.label')}
-            InputProps={{
-              readOnly: true,
-            }}
-            value={tag}
-            fullWidth
-          />
-        )}
-      </Grid>
+            mt={'10px'}
+          >
+            {tag}
+          </ZigTypography>
+        </>
+      )}
       <Grid
         justifyContent='center'
-        gap={2}
+        gap={1}
         alignItems='center'
         mt={4}
         mb={2}
         display='flex'
         direction='row'
-        height='96px'
       >
-        <AmountContainer sx={{ height: '100%', flex: 2 }}>
-          <Grid display='flex' justifyContent='center' direction='column'>
+        <AmountContainer sx={{ height: '100%', flex: 5 }} noBorders>
+          <Grid
+            display='flex'
+            justifyContent='center'
+            direction='column'
+            gap={1}
+          >
             <ZigTypography
-              color='neutral200'
-              variant='h3'
+              variant='body2'
               fontWeight='regular'
               id={'withdraw-modal-confirmation__amount-label'}
             >
               {t('confirmation.amount')}
             </ZigTypography>
-            <ZigPriceLabelIcon
+            <ZigPriceLabel
               id={'withdraw-modal-confirmation__amount'}
-              amount={amount}
+              noWrap
+              component='span'
+              color='neutral100'
+              variant='bigNumber'
+              value={+amount}
               coin={coin}
-              iconBucket={iconBucket}
+              coinProps={{
+                color: 'neutral400',
+                variant: 'h3',
+                component: 'span',
+                fontWeight: 500,
+              }}
+              sx={{ display: 'flex', flexDirection: 'column' }}
             />
           </Grid>
         </AmountContainer>
-        <AmountContainer sx={{ height: '100%', flex: 1 }}>
-          <Grid direction='column' justifyContent='center'>
+        <RemoveIcon sx={{ flex: 1, color: 'neutral400', opacity: 0.8 }} />
+        <AmountContainer sx={{ height: '100%', flex: 5 }} noBorders>
+          <Grid
+            direction='column'
+            justifyContent='center'
+            display={'flex'}
+            gap={1}
+          >
             <ZigTypography
               variant='body2'
-              color='neutral200'
               fontWeight='medium'
               id={'withdraw-modal-confirmation__network-fee-label'}
             >
               {t('confirmation.networkFee')}
             </ZigTypography>
-            <ZigPriceLabelIcon
+            <ZigPriceLabel
               id={'withdraw-modal-confirmation__network-fee'}
-              amount={fee}
-              coin={feeCoin}
-              iconBucket={iconBucket}
+              noWrap
+              component='span'
+              color='neutral100'
+              variant='bigNumber'
+              value={+fee}
+              coin={coin}
+              coinProps={{
+                color: 'neutral400',
+                variant: 'h3',
+                component: 'span',
+                fontWeight: 500,
+              }}
+              sx={{ display: 'flex', flexDirection: 'column' }}
+            />
+          </Grid>
+        </AmountContainer>
+        <ArrowRightAltIcon
+          sx={{ flex: 1, color: 'neutral400', opacity: 0.8 }}
+        />
+        <AmountContainer
+          sx={{ height: '100%', flex: 6 }}
+          coloredBackground
+          noBorders
+        >
+          <Grid
+            direction='column'
+            justifyContent='center'
+            display={'flex'}
+            gap={1}
+          >
+            <ZigTypography
+              color='neutral300'
+              variant='body2'
+              id={'withdraw-modal-confirmation__receive-label'}
+            >
+              {t('confirmation.receive')}
+            </ZigTypography>
+            <ZigPriceLabel
+              id={'withdraw-modal-confirmation__receive'}
+              noWrap
+              component='span'
+              color='neutral100'
+              variant='bigNumber'
+              coinProps={{
+                color: 'neutral400',
+                variant: 'h3',
+                component: 'span',
+                fontWeight: 500,
+              }}
+              value={
+                coin !== feeCoin
+                  ? +amount
+                  : +BigNumber(amount).minus(fee).toString()
+              }
+              coin={coin}
+              sx={{ display: 'flex', flexDirection: 'column' }}
             />
           </Grid>
         </AmountContainer>
       </Grid>
 
-      <AmountContainer coloredBorder={true} sx={{ height: '120px' }}>
-        <Grid
-          gap={2}
-          justifyContent='center'
-          display='flex'
-          alignItems='center'
-        >
-          <ZigTypography
-            color='neutral300'
-            variant='h2'
-            id={'withdraw-modal-confirmation__receive-label'}
-          >
-            {t('confirmation.receive')}
-          </ZigTypography>
-          <ZigPriceLabelIcon
-            id={'withdraw-modal-confirmation__receive'}
-            amount={
-              coin !== feeCoin
-                ? amount
-                : BigNumber(amount).minus(fee).toString()
-            }
-            coin={coin}
-            iconBucket={iconBucket}
-          />
-        </Grid>
-      </AmountContainer>
       <ModalActions>
-        <ZigButton
-          id={'withdraw-modal-confirmation__back'}
-          onClick={back}
-          variant='outlined'
-          size='large'
-        >
-          {t('common:back')}
-        </ZigButton>
         <ZigButton
           id={'withdraw-modal-confirmation__confirm-withdraw'}
           onClick={action}
           variant='contained'
-          size='large'
+          size='xlarge'
           loading={status.isLoading}
           type='submit'
         >

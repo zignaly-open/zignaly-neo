@@ -4,10 +4,6 @@
 	"active": "Ativo",
 	"reward-terms": "Termos de Recompensa",
 	"description": "Ganha recompensas completando tarefas simples. É assim tão fácil!",
-	"header": {
-		"title": "Receba $20",
-		"description": "No 1º depósito"
-	},
 	"active-rewards": "Recompensas Ativas",
 	"no-active-rewards": "Nenhuma recompensa ativa neste momento",
 	"disabled-voucher": "O Voucher já está ativado",

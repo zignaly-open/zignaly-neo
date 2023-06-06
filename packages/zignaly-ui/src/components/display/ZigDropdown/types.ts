@@ -9,16 +9,21 @@ type Option = {
   active?: boolean;
 };
 
-export type ZigDropdownOption = Option & {
+type ZigDropdownOptionCommon = {
   id?: string;
+  customStyle?: string; // why yes of course this is a crutch
+};
+
+export type ZigDropdownOption = Option & {
   children?: Option[];
   element?: JSX.Element;
-  separator?: boolean;
-};
+} & ZigDropdownOptionCommon;
+
+export type ZigDropdownOptionSeparator = { separator?: boolean } & ZigDropdownOptionCommon;
 
 export type ZigDropdownProps = {
   id?: string;
-  options: ZigDropdownOption[];
+  options: (ZigDropdownOption | ZigDropdownOptionSeparator)[];
   component: ({ open }: { open: boolean }) => JSX.Element;
   anchorOrigin?: PopoverOrigin;
   anchorPosition?: PopoverPosition;

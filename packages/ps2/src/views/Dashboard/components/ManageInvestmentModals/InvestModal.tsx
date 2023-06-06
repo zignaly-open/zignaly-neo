@@ -6,7 +6,34 @@ import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import ZModal from '../../../../components/ZModal';
 import InvestView from './views/Invest';
+import { UseModalReturn } from './types';
 
+export function useInvestModalContent({
+  close,
+}: {
+  close: () => void;
+}): UseModalReturn {
+  const service = useSelectedInvestment();
+  const { isLoading: isLoadingService } = useServiceDetails(
+    service?.serviceId,
+    { skip: !service },
+  );
+  const { isLoading: isLoadingCoins } = useCoinBalances();
+  const { t } = useTranslation('edit-investment');
+  const isLoading = isLoadingService || isLoadingCoins || !service;
+  const [isInvested, setIsInvested] = useState(false);
+  return {
+    title: t(isInvested ? 'modalSuccess.title' : 'invest-modal.invest-with'),
+    component: () =>
+      !isLoading && (
+        <InvestView
+          close={close}
+          isInvested={isInvested}
+          setIsInvested={setIsInvested}
+        />
+      ),
+  };
+}
 function InvestModal({
   close,
   ...props
@@ -16,25 +43,12 @@ function InvestModal({
   const service = useSelectedInvestment();
   const { isLoading: isLoadingService } = useServiceDetails(service?.serviceId);
   const { isLoading: isLoadingCoins } = useCoinBalances();
-  const { t } = useTranslation('edit-investment');
   const isLoading = isLoadingService || isLoadingCoins;
-  const [isInvested, setIsInvested] = useState(false);
+  const { title, component } = useInvestModalContent({ close });
 
   return (
-    <ZModal
-      {...props}
-      close={close}
-      title={t(isInvested ? 'modalSuccess.title' : 'invest-modal.invest-with')}
-      isLoading={isLoading}
-      width={622}
-    >
-      {!isLoading && (
-        <InvestView
-          close={close}
-          isInvested={isInvested}
-          setIsInvested={setIsInvested}
-        />
-      )}
+    <ZModal wide {...props} close={close} title={title} isLoading={isLoading}>
+      {component()}
     </ZModal>
   );
 }

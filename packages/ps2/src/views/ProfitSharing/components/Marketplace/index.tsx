@@ -18,6 +18,9 @@ import AssetsInPool from '../../../../components/AssetsInPool';
 import MarketplaceAction from '../MarketplaceAction';
 import { TableWrapper } from './styles';
 import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
+import { generatePath, Link } from 'react-router-dom';
+import { ROUTE_TRADING_SERVICE } from '../../../../routes';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 // import TopServicesCards from '../TopServicesCards';
 
 const Marketplace: React.FC = () => {
@@ -145,6 +148,30 @@ const Marketplace: React.FC = () => {
         header: '',
         id: 'action',
         cell: (props) => <MarketplaceAction service={props.row.original} />,
+      }),
+      columnHelper.display({
+        id: 'link',
+        cell: ({ row }) => (
+          <Box
+            component={Link}
+            to={generatePath(ROUTE_TRADING_SERVICE, {
+              serviceId: row?.original?.id?.toString(),
+            })}
+            sx={{
+              cursor: 'pointer',
+              alignItems: 'center',
+              flexDirection: 'row',
+              display: 'flex',
+              textAlign: 'start',
+              width: '10px',
+            }}
+            id={`portfolio-table__link-${row.original.id}`}
+          >
+            <ArrowForwardIosIcon
+              sx={{ color: '#26c4c1', width: '20px', height: '20px' }}
+            />
+          </Box>
+        ),
       }),
     ],
     [t],

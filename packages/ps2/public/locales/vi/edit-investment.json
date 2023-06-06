@@ -81,5 +81,11 @@
 		"i-understand-money-transferred": "Tôi hiểu và xác nhận rằng tiền của tôi sẽ được chuyển vào dịch vụ và sẽ không còn xuất hiện trong số dư khả dụng của tôi nữa",
 		"max-funds": "Vượt quá số tiền tối đa cho phép trong dịch vụ này. Đầu tư tối đa {{max}} {{coin}}.",
 		"max-reached": "Không thể đầu tư vào dịch vụ này vì nó đã đạt đến giới hạn Quỹ tối đa."
+	},
+	"withdrawal-request": "Yêu cầu rút tiền",
+	"withdrawal-success": {
+		"title": "Đã yêu cầu rút",
+		"description": "Bạn sẽ nhận được tiền của mình sau khi người quản lý quỹ giải phóng chúng và kế toán hàng ngày được thực hiện. Vui lòng lưu ý rằng khoản đầu tư của bạn có nguy cơ cho đến khi số dư được chuyển cho bạn. Tùy thuộc vào người quản lý quỹ, việc này thường mất vài ngày nhưng có thể mất nhiều thời gian hơn để hoàn thành. Zignaly không kiểm soát khung thời gian này, vì vậy hãy kiên nhẫn.",
+		"button": "Đóng"
 	}
 }

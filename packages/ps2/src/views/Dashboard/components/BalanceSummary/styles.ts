@@ -5,6 +5,7 @@ export const Layout = styled(ZigTypography)`
   text-align: center;
   display: grid;
   gap: 8px;
+  justify-content: center;
 `;
 
 export const Symbol = styled(ZigTypography)`

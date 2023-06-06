@@ -2,7 +2,6 @@ import { QueryReturnTypeBasic } from 'util/queryReturnType';
 
 export interface WithdrawConfirmFormProps {
   action: () => void;
-  back: () => void;
   close: () => void;
   status: QueryReturnTypeBasic<unknown>;
   address: string;
@@ -13,5 +12,4 @@ export interface WithdrawConfirmFormProps {
   amount: number;
   fee: number;
   feeCoin?: string;
-  iconBucket?: string;
 }

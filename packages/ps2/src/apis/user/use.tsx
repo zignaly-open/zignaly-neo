@@ -47,6 +47,7 @@ import Check2FAModal from 'views/Auth/components/Check2FAModal';
 import { useNavigate } from 'react-router-dom';
 import { track } from '@zignaly-open/tracker';
 import { clearUserSession } from './util';
+import { junkyard } from '../../util/junkyard';
 
 const useStartSession = () => {
   const { showModal } = useModal();
@@ -89,7 +90,7 @@ const useStartSession = () => {
     dispatch(setUser(userData));
     startLiveSession(userData);
     trackNewSession(userData, SessionsTypes.Login);
-    localStorage.setItem('hasLoggedIn', 'true');
+    junkyard.set('hasLoggedIn', 'true');
   };
 };
 
