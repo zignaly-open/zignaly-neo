@@ -12,6 +12,11 @@ export const Layout = styled(Box)<{ width: number }>`
   border: 1px solid #35334a;
   border-radius: 16px;
   padding: 40px 56px;
+
+  &:focus-visible {
+    outline: none;
+  }
+
   ${({ width }) =>
     width &&
     css`

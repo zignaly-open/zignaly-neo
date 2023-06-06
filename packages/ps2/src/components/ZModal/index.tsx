@@ -35,7 +35,7 @@ const ZModal: React.FC<ZModalProps> = ({
     <MuiModal
       {...props}
       onClose={close}
-      style={{
+      sx={{
         alignItems: 'center',
         justifyContent: 'center',
         display: 'flex',

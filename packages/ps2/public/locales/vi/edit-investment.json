@@ -74,7 +74,7 @@
 	"invest-modal": {
 		"invest-with": "Đầu tư với",
 		"amount-to-invest": "Số tiền đầu tư",
-		"type-transfer": "Nhập từ “ {{word}} ” vào trường bên dưới để hoàn tất quá trình chuyển:",
+		"type-transfer": "Nhập từ <0>“ {{word}} ”</0> vào trường bên dưới để hoàn tất quá trình chuyển:",
 		"transfer-error": "Giá trị không hợp lệ. Vui lòng nhập từ chính xác.",
 		"transfer-label": "Chuyển",
 		"i-understand-margin": "Tôi hiểu toàn bộ số dư {{coin}} của tôi hiện là một phần của ký quỹ và chịu rủi ro",

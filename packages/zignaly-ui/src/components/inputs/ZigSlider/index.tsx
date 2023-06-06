@@ -16,11 +16,18 @@ const marks = [
   },
 ];
 
-const ZigSlider = ({ labels, prefixId, ...props }: ZigSliderProps) => {
+const ZigSlider = ({ labels, prefixId, className = "", ...props }: ZigSliderProps) => {
   const showLabels = (labels?.start || labels?.end) && typeof props.value === "number";
 
   return (
-    <Box display="flex" flexDirection="column" id={prefixId && `${prefixId}-slider`} gap="10px">
+    <Box
+      display="flex"
+      flexDirection="column"
+      id={prefixId && `${prefixId}-slider`}
+      gap="10px"
+      width={1}
+      className={className}
+    >
       {labels?.top && (
         <ZigTypography color={"neutral200"} id={prefixId && `${prefixId}-title`}>
           {labels?.top}

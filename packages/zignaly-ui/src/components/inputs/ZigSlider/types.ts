@@ -5,5 +5,6 @@ export type SliderLabels = {
   start: string;
   end: string;
   percent?: boolean;
+  className?: string;
 };
 export type ZigSliderProps = SliderProps & { prefixId?: string; labels?: SliderLabels };

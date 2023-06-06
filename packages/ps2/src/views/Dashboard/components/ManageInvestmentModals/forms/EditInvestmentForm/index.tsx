@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useTranslation } from 'react-i18next';
-import { Field, Form, Row } from './styles';
+import { Field, Form } from './styles';
 
 import {
   ZigButton,
@@ -29,7 +29,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import DepositModal from '../../DepositModal';
 import { useZModal } from 'components/ZModal/use';
 import { Add } from '@mui/icons-material';
-import { Box, Grid, Divider } from '@mui/material';
+import { Box } from '@mui/material';
 import { AmountInvested } from './atoms';
 
 function EditInvestmentForm({
