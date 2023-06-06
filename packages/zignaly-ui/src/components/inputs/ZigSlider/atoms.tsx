@@ -21,7 +21,16 @@ export const SliderLabelValue = ({
       alignItems={side === "start" ? "flex-start" : "flex-end"}
       minWidth="44px"
     >
-      <ZigTypography color="neutral100" variant="body2" sx={{ position: "absolute", top: 0 }}>
+      <ZigTypography
+        color="neutral100"
+        variant="body2"
+        sx={{
+          position: "absolute",
+          top: 0,
+          left: side === "start" ? "-6px" : "auto",
+          right: side === "start" ? "auto" : "-6px",
+        }}
+      >
         {side === "start" ? labels.start : labels.end}
       </ZigTypography>
       <ZigTypography color="neutral400" variant="body2">

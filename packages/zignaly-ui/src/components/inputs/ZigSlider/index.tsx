@@ -20,7 +20,7 @@ const ZigSlider = ({ labels, ...props }: ZigSliderProps) => {
 
   return (
     <Box display="flex" width={1} gap={1} alignItems="center" pt={3} position="relative">
-      <Box display="flex" width={1} gap={1} alignItems="center">
+      <Box display="flex" width={1} gap={1} alignItems="center" px={showLabels ? "6px" : 0}>
         {showLabels && (
           <SliderLabelValue
             side="start"

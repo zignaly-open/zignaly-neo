@@ -374,6 +374,23 @@ const darkMui = createTheme({
         },
       },
     },
+    MuiSlider: {
+      styleOverrides: {
+        rail: {
+          backgroundColor: "#4a4958",
+          opacity: 1,
+        },
+        mark: {
+          color: "#888999",
+          width: "4px",
+          height: "4px",
+          borderRadius: "50%",
+        },
+        thumb: {
+          color: "#999ee0",
+        },
+      },
+    },
   },
 } as ThemeOptions);
 

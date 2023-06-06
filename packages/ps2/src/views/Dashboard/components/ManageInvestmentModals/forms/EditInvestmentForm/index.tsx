@@ -50,7 +50,7 @@ function EditInvestmentForm({
   const {
     handleSubmit,
     control,
-    formState: { isValid, isDirty, errors },
+    formState: { isValid, errors },
     watch,
   } = useForm<EditFormData>({
     mode: 'onChange',
