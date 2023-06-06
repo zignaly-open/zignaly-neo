@@ -35,14 +35,14 @@ const ZModal: React.FC<ZModalProps> = ({
     <MuiModal
       {...props}
       onClose={close}
-      style={{
+      sx={{
         alignItems: 'center',
         justifyContent: 'center',
         display: 'flex',
       }}
     >
       <ModalContainer
-        width={(wide && 784) || width}
+        width={(wide && 620) || width}
         title={title}
         onClickClose={close}
         onGoBack={onGoBack}

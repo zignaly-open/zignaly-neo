@@ -6,13 +6,15 @@ export const Investor = styled('div')`
   flex-direction: row;
   gap: 22px;
   align-items: center;
-  margin-bottom: 32px;
-  margin-top: 18px;
+  justify-content: center;
+  margin-bottom: 36px;
+  margin-top: 10px;
 `;
 
 export const InvestorData = styled('div')`
   display: flex;
   flex-direction: column;
+  gap: 6px;
 `;
 
 export const InvestorName = styled(ZigTypography)``;

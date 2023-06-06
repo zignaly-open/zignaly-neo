@@ -12,6 +12,11 @@ export const Layout = styled(Box)<{ width: number }>`
   border: 1px solid #35334a;
   border-radius: 16px;
   padding: 40px 56px;
+
+  &:focus-visible {
+    outline: none;
+  }
+
   ${({ width }) =>
     width &&
     css`
@@ -46,7 +51,7 @@ export const Body = styled('div')`
   }
 `;
 
-export const Header = styled('div')<{ compact: boolean }>`
+export const Header = styled(Box)<{ compact: boolean }>`
   display: flex;
   z-index: 999;
   position: relative;
@@ -100,7 +105,7 @@ export const ModalActions = styled('div')<{
 }>`
   display: flex;
   align-items: center;
-  margin-top: 24px;
+  margin-top: 18px !important;
   gap: 32px;
   flex-direction: ${({ direction }) => direction};
   width: 100%;

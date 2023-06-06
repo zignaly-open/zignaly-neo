@@ -1,18 +1,15 @@
 import React from 'react';
-import { Controller, FieldErrorsImpl, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useTranslation } from 'react-i18next';
-import { Field, Form } from './styles';
+import { Trans, useTranslation } from 'react-i18next';
 import {
-  InputAmountAdvanced,
-  InputAmountAdvancedValueType,
-  ZigSliderInput,
   ZigTypography,
   ZigButton,
   ZigInput,
-  ZigCoinIcon,
+  ZigInputAmount,
+  ZigSlider,
 } from '@zignaly-open/ui';
-import { EditInvestmentValidation } from './validations';
+import { editInvestmentValidation } from './validations';
 import {
   useCurrentBalance,
   useInvestInService,
@@ -20,20 +17,21 @@ import {
 } from '../../../../../../apis/investment/use';
 import { InvestFormData, InvestFormProps } from './types';
 import { useToast } from '../../../../../../util/hooks/useToast';
-import { ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { Form, ModalActions } from 'components/ZModal';
 import { Box } from '@mui/material';
 import { CheckBox } from '@zignaly-open/ui';
-import { AmountInvested, TokenValue } from '../EditInvestmentForm/styles';
-import { NumericFormat } from 'react-number-format';
 import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
 import { Add } from '@mui/icons-material';
 import DepositModal from '../../DepositModal';
 import { useZModal } from '../../../../../../components/ZModal/use';
+import { AmountInvested } from '../EditInvestmentForm/atoms';
+import { Field } from './styles';
+import { NumericFormat } from 'react-number-format';
 
-function InvestForm({ close, onInvested }: InvestFormProps) {
+function InvestForm({ onInvested }: InvestFormProps) {
   const coin = useCurrentBalance();
-  const { t } = useTranslation('edit-investment');
+  const { t } = useTranslation(['edit-investment', 'action']);
   const service = useSelectedInvestment();
   const { isLoading, invest } = useInvestInService(service.serviceId);
   const { data: serviceDetails } = useServiceDetails(service.serviceId);
@@ -48,23 +46,20 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
     control,
     setValue,
     watch,
-    trigger,
-    formState: { isValid, isDirty, errors },
+    formState: { isValid, errors },
   } = useForm<InvestFormData>({
     mode: 'onChange',
     reValidateMode: 'onChange',
     defaultValues: {
-      amountTransfer: {
-        value: '',
-        token: coin,
-      },
+      amountTransfer: '',
       transferLabelForValidation: transferMagicWord,
       transferConfirm: '',
       profitPercentage: 30,
       step: 1,
     },
     resolver: yupResolver(
-      EditInvestmentValidation({
+      editInvestmentValidation({
+        balance: coin?.balance,
         max: new BigNumber(serviceDetails.maximumSbt)
           .minus(serviceDetails.invested)
           .minus(serviceDetails.pending)
@@ -81,11 +76,6 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
     setValue('step', 2);
   };
 
-  const onGoBackToFirstStep = () => {
-    setValue('step', 1);
-    trigger('transferConfirm');
-  };
-
   const isConfirmation = watch('step') === 2;
 
   const onSubmitSecondStep = async ({
@@ -94,178 +84,177 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
   }: InvestFormData) => {
     await invest({
       profitPercentage,
-      amount: amountTransfer?.value?.toString(),
+      amount: amountTransfer,
     });
     toast.success(
       t('edit-investment:addMoreInvestmentSuccess', {
-        amount: amountTransfer?.value,
-        currency: amountTransfer?.token?.id,
+        amount: amountTransfer,
+        currency: service.ssc,
         serviceName: service.serviceName,
       }),
     );
     onInvested();
   };
 
-  return (
-    <Form
-      onSubmit={handleSubmit(
-        isConfirmation ? onSubmitSecondStep : onSubmitFirstStep,
-      )}
+  const renderDepositCoin = () => (
+    <ZigButton
+      id={'invest-modal__deposit'}
+      startIcon={<Add sx={{ fill: 'currentColor !important' }} />}
+      sx={{
+        fontWeight: 400,
+        color: 'links',
+      }}
+      variant={'text'}
+      onClick={() =>
+        showModal(DepositModal, {
+          ctaId: 'invest-modal-deposit',
+          selectedCoin: coin.id,
+        })
+      }
     >
-      <Field>
-        <div>
-          {isConfirmation ? (
-            <>
-              <ZigTypography
-                variant={'body1'}
-                id={'invest-modal-confirmation__amount-to-invest-label'}
-              >
-                {t('invest-modal.amount-to-invest')}
-              </ZigTypography>
-              <AmountInvested>
-                <ZigCoinIcon
-                  coin={coin.id}
-                  id={'invest-modal-confirmation__coin-icon'}
-                />
-                <TokenValue>
-                  <ZigTypography variant={'bigNumber'} color={'neutral100'}>
-                    <NumericFormat
-                      id={'invest-modal-confirmation__amount-to-invest'}
-                      value={watch('amountTransfer')!.value.toString()}
-                      displayType={'text'}
-                      thousandSeparator={true}
-                    />
-                  </ZigTypography>
-                  <ZigTypography
-                    variant={'h3'}
-                    color={'neutral400'}
-                    id={'invest-modal-confirmation__coin'}
-                  >
-                    {String(coin.id).toUpperCase()}
-                  </ZigTypography>
-                </TokenValue>
-              </AmountInvested>
-            </>
-          ) : (
-            <>
-              <InputAmountAdvanced
-                id={'invest-modal__input-amount'}
-                name={'amountTransfer'}
-                control={control}
-                label={t('form.inputAmount.label')}
-                labelBalance={t('form.inputAmount.labelBalance')}
-                showUnit={true}
-                placeholder={'0.0'}
-                tokens={[coin]}
-                error={
-                  isDirty &&
-                  t(
-                    (
-                      errors?.amountTransfer as FieldErrorsImpl<InputAmountAdvancedValueType>
-                    )?.value?.message,
-                  )
-                }
+      {t('action:deposit-coin', { coin: coin.id })}
+    </ZigButton>
+  );
+
+  if (isConfirmation) {
+    return (
+      <form onSubmit={handleSubmit(onSubmitSecondStep)}>
+        <Field>
+          <AmountInvested
+            idPrefix='invest-modal-confirmation'
+            label={t('invest-modal.amount-to-invest')}
+            coin={coin.id}
+            value={watch('amountTransfer')}
+          />
+          <Box
+            display='flex'
+            flexDirection='column'
+            alignItems='center'
+            gap={1}
+          >
+            <ZigTypography
+              variant={'body2'}
+              color='neutral300'
+              id={'invest-modal-confirmation__percentage-to-withdraw'}
+            >
+              {t('form.profits.title-confirmation')}
+            </ZigTypography>
+            <ZigTypography variant={'bigNumber'} color={'neutral200'}>
+              <NumericFormat
+                id={'invest-modal-confirmation__profit-percentage'}
+                value={watch('profitPercentage').toString()}
+                displayType={'text'}
+                suffix={'%'}
+                thousandSeparator={true}
               />
-
-              <Box>
-                <ZigButton
-                  id={'invest-modal__deposit'}
-                  startIcon={<Add />}
-                  sx={{
-                    fontWeight: 400,
-                    mt: 1,
-                    color: (theme) => theme.palette.links,
-                  }}
-                  variant={'text'}
-                  onClick={() =>
-                    showModal(DepositModal, {
-                      ctaId: 'invest-modal-deposit',
-                      selectedCoin: coin.id,
-                    })
-                  }
-                >
-                  {t('action:deposit-coin', { coin: coin.id })}
-                </ZigButton>
-              </Box>
-            </>
-          )}
-        </div>
-        <div>
-          {isConfirmation ? (
-            <>
-              <ZigTypography
-                variant={'body1'}
-                id={'invest-modal-confirmation__percentage-to-withdraw'}
-              >
-                {t('form.profits.title-confirmation')}
-              </ZigTypography>
-              <AmountInvested>
-                <TokenValue>
-                  <ZigTypography variant={'bigNumber'} color={'neutral100'}>
-                    <NumericFormat
-                      id={'invest-modal-confirmation__profit-percentage'}
-                      value={watch('profitPercentage').toString()}
-                      displayType={'text'}
-                      suffix={'%'}
-                      thousandSeparator={true}
-                    />
-                  </ZigTypography>
-                </TokenValue>
-              </AmountInvested>
-            </>
-          ) : (
-            <Controller
-              name='profitPercentage'
-              control={control}
-              rules={{ required: true }}
-              render={({ field }) => (
-                <ZigSliderInput
-                  prefixId={'invest-modal'}
-                  mode={'range'}
-                  labels={{
-                    top: t('form.profits.title'),
-                    left: t('form.profits.left'),
-                    right: t('form.profits.right'),
-                  }}
-                  value={field.value}
-                  onChange={field.onChange}
-                />
-              )}
-            />
-          )}
-        </div>
-      </Field>
-
-      <Box sx={{ mt: 4, display: isConfirmation ? 'block' : 'none' }}>
-        <Controller
-          name='transferConfirm'
-          control={control}
-          render={({ field }) => (
-            <ZigInput
-              id={'invest-modal-confirmation__input-transfer'}
-              label={t('invest-modal.type-transfer', {
+            </ZigTypography>
+          </Box>
+        </Field>
+        <Box display='flex' flexDirection='column' alignItems='center'>
+          <ZigTypography variant='body2' textAlign='center' mb='22px'>
+            <Trans
+              i18nKey={'invest-modal.type-transfer'}
+              t={t}
+              components={[
+                <ZigTypography variant='body2' color='neutral100' key={0} />,
+              ]}
+              values={{
                 word: transferMagicWord,
-              })}
-              placeholder={transferMagicWord}
-              disabled={isLoading}
-              error={t(errors.transferConfirm?.message)}
-              // weird issue with the default value, likely some react form shenanigan
-              {...{
-                ...field,
-                value: typeof field.value === 'string' ? field.value : '',
               }}
             />
-          )}
-        />
-      </Box>
+          </ZigTypography>
+          <Controller
+            name='transferConfirm'
+            control={control}
+            render={({ field }) => (
+              <ZigInput
+                id={'invest-modal-confirmation__input-transfer'}
+                placeholder={t('invest-modal.type-transfer-placeholder', {
+                  word: transferMagicWord,
+                })}
+                disabled={isLoading}
+                error={t(errors.transferConfirm?.message)}
+                wide={true}
+                // weird issue with the default value, likely some react form shenanigan
+                {...{
+                  ...field,
+                  value: typeof field.value === 'string' ? field.value : '',
+                }}
+                sx={{ minWidth: '344px' }}
+              />
+            )}
+          />
+        </Box>
+        <ModalActions>
+          <ZigButton
+            id={'invest-modal__confirm'}
+            size={'large'}
+            type={'submit'}
+            loading={isLoading}
+            disabled={!canSubmit}
+          >
+            {t('form.button.transfer-now')}
+          </ZigButton>
+        </ModalActions>
+      </form>
+    );
+  }
+
+  return (
+    <Form onSubmit={handleSubmit(onSubmitFirstStep)}>
+      <Controller
+        name={'amountTransfer'}
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <ZigInputAmount
+            id={'invest-modal__input-amount'}
+            label={t('form.inputAmount.label')}
+            wide={true}
+            coin={coin.id}
+            balance={coin.balance}
+            extraInfo={{
+              others: [renderDepositCoin()],
+            }}
+            error={t(errors?.amountTransfer?.message)}
+            {...field}
+          />
+        )}
+      />
+      <Controller
+        name='profitPercentage'
+        control={control}
+        rules={{ required: true }}
+        render={({ field }) => (
+          <ZigSlider
+            prefixId={'invest-modal'}
+            track={false}
+            {...field}
+            labels={{
+              top: (
+                <ZigTypography
+                  variant={'body2'}
+                  color='neutral300'
+                  id='invest-modal__title'
+                  display='block'
+                  textAlign='center'
+                >
+                  {t('form.profits.title')}
+                </ZigTypography>
+              ),
+              start: t('form.profits.left'),
+              end: t('form.profits.right'),
+            }}
+          />
+        )}
+      />
 
       <Box
         sx={{
-          display: isConfirmation ? 'none' : 'flex',
+          display: 'flex',
           flexDirection: 'column',
           gap: 2.5,
-          mt: 5,
-          mb: 5,
+          mt: 1,
         }}
       >
         <Controller
@@ -297,32 +286,31 @@ function InvestForm({ close, onInvested }: InvestFormProps) {
             />
           )}
         />
+
+        <Controller
+          control={control}
+          name='understandDisconnecting'
+          defaultValue={false}
+          render={({ field: { onChange, value } }) => (
+            <CheckBox
+              id={'invest-modal__understand-disconnecting'}
+              onChange={onChange}
+              value={value}
+              label={t('invest-modal.i-understand-disconnecting')}
+            />
+          )}
+        />
       </Box>
 
       <ModalActions>
         <ZigButton
-          id={'invest-modal__confirm'}
+          id={'invest-modal__continue'}
           size={'large'}
           type={'submit'}
           loading={isLoading}
           disabled={!canSubmit}
         >
-          {isConfirmation
-            ? t('form.button.invest-now', {
-                amount: watch('amountTransfer')!.value.toString(),
-                coin: coin.id,
-              })
-            : t('form.button.continue-to-confirmation')}
-        </ZigButton>
-        <ZigButton
-          id={'invest-modal__close'}
-          size={'large'}
-          type={'button'}
-          disabled={isLoading}
-          variant={'outlined'}
-          onClick={isConfirmation ? onGoBackToFirstStep : close}
-        >
-          {t(isConfirmation ? 'common:back' : 'common:close')}
+          {t('continue')}
         </ZigButton>
       </ModalActions>
     </Form>

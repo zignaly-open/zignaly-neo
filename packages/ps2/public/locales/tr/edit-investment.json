@@ -74,7 +74,7 @@
 	"invest-modal": {
 		"invest-with": "İle yatırım yapın",
 		"amount-to-invest": "Yatırılacak tutarı girin",
-		"type-transfer": "Transferi tamamlamak için aşağıdaki alana “ {{word}} ” kelimesini yazın:",
+		"type-transfer": "Transferi tamamlamak için aşağıdaki alana <0>“ {{word}} ”</0> kelimesini yazın:",
 		"transfer-error": "Geçersiz giriş. Lütfen doğru kelimeyi yazın.",
 		"transfer-label": "Transfer",
 		"i-understand-margin": "{{coin}} bakiyemin tamamının artık marjın bir parçası olduğunu ve risk altında olduğunu anlıyorum",

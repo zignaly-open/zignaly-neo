@@ -17,11 +17,14 @@ export { default as ZigAutocomplete } from "./components/inputs/ZigAutocomplete"
 export { default as ZigSelect } from "./components/inputs/ZigSelect";
 export { default as ZigLink } from "./components/inputs/ZigLink";
 export { default as InputCode } from "./components/inputs/InputCode";
+export { default as ZigSlider } from "components/inputs/ZigSlider";
 export { default as ZigSliderInput } from "components/inputs/ZigSliderInput";
 
 // TODO: fix storybook & refactor
 export { default as InputAmountAdvanced } from "components/inputs/InputAmountAdvanced";
 export type { InputAmountAdvancedValueType } from "components/inputs/InputAmountAdvanced";
+
+export { default as ZigInputAmount } from "components/inputs/ZigInputAmount";
 
 // Basic display components
 export { Loader, CenteredLoader } from "./components/display/Loader";
