@@ -2,7 +2,6 @@ import { ExpandMore } from "@mui/icons-material";
 import { Box, css, styled } from "@mui/system";
 import { SortDirection } from "@tanstack/react-table";
 import { IconButton } from "@mui/material";
-import { safariStyle } from "../../../utils/css";
 
 export const TableContainer = styled("div")`
   overflow: auto;
