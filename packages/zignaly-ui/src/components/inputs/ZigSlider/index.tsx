@@ -18,7 +18,7 @@ const marks = [
 
 const ZigSlider = forwardRef(
   ({ labels, prefixId, className = "", ...props }: ZigSliderProps, ref) => {
-    const showLabels = (labels?.start || labels?.end) && typeof props.value === "number";
+    const showLabels = labels?.start || labels?.end;
 
     return (
       <Box
@@ -45,7 +45,15 @@ const ZigSlider = forwardRef(
                 value={props.value as number}
               />
             )}
-            <Slider marks={marks} {...props} />
+            <Slider
+              marks={marks}
+              sx={{
+                "& .MuiSlider-track": {
+                  color: "transparent",
+                },
+              }}
+              {...props}
+            />
             {showLabels && (
               <SliderLabelValue
                 side="end"

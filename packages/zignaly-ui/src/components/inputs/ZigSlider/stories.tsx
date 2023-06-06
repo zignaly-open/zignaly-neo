@@ -1,41 +1,28 @@
+import React from "react";
 import { Meta, StoryObj } from "@storybook/react";
-import { ZigSlider } from "./index";
+import ZigSlider from "./index";
+import { useState } from "react";
+import { ZigSliderProps } from "./types";
 
 const meta = {
   title: "Inputs/ZigSlider",
   component: ZigSlider,
-  argTypes: {
-    // label: {
-    //   type: "string",
-    // },
-    // placeholder: {
-    //   type: "string",
-    // },
-    // wide: {
-    //   type: "boolean",
-    //   defaultValue: false,
-    // },
-    // disabled: {
-    //   type: "boolean",
-    //   defaultValue: false,
-    // },
-    // defaultValue: {
-    //   type: "string",
-    // },
-    // error: {
-    //   type: "string",
-    //   defaultValue: "",
-    // },
-  },
 } as Meta;
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+const ZigSliderControlled = (props: ZigSliderProps) => {
+  const [value, setValue] = useState(props.value);
 
-export const Default = { args: {} };
+  return <ZigSlider {...props} value={value} onChange={(e, v) => setValue(v)} />;
+};
+
+type Story = StoryObj<typeof meta>;
 
 export const WithLabel: Story = {
   args: {
-    labels: { start: "Start", end: "End", displayDifference: true },
+    labels: { top: "My Slider", start: "Start", end: "End", displayDifference: true },
   },
+  render: (props) => <ZigSliderControlled {...props} />,
 };
+
+export const WithoutLabels: Story = { args: {} };

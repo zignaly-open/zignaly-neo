@@ -1,12 +1,7 @@
 import { Box, Divider } from "@mui/material";
 import ZigTypography from "components/display/ZigTypography";
 import React, { useMemo } from "react";
-import {
-  InputExtraInfoFalseableItem,
-  InputExtraInfoItem,
-  InputExtraInfoObject,
-  InputExtraInfoProps,
-} from "./types";
+import { InputExtraInfoFalseableItem, InputExtraInfoItem, InputExtraInfoProps } from "./types";
 import { NumericFormat } from "react-number-format";
 import { getPrecisionForCoin } from "components/display/ZigPriceLabel/util";
 

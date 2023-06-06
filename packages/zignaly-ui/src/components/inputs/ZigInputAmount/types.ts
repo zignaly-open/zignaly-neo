@@ -37,6 +37,7 @@ export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"
   min?: string | number;
   /** Showed as info. */
   max?: string | number;
+  className?: string;
 };
 
 export type InputExtraInfoItem = { value: string | number; label: string };

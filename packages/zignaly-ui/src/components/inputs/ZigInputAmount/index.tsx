@@ -26,6 +26,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     max,
     id,
     children,
+    className = "",
     ...rest
   } = props;
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
@@ -48,7 +49,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
   };
 
   return (
-    <Layout display={wide ? "flex" : "inline-flex"}>
+    <Layout display={wide ? "flex" : "inline-flex"} className={className}>
       <TopDivider>
         <ZigTypography color="neutral300" variant="body2">
           {label}

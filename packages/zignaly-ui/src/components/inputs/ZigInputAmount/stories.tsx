@@ -9,26 +9,6 @@ import { ZigInputAmountProps } from "./types";
 const meta = {
   title: "Inputs/ZigInputAmount",
   component: ZigInputAmount,
-  argTypes: {
-    label: {
-      type: "string",
-    },
-    placeholder: {
-      type: "string",
-    },
-    wide: {
-      type: "boolean",
-      defaultValue: false,
-    },
-    disabled: {
-      type: "boolean",
-      defaultValue: false,
-    },
-    error: {
-      type: "string",
-      defaultValue: "",
-    },
-  },
 } as Meta;
 export default meta;
 
@@ -53,7 +33,7 @@ export const WithLabel: Story = {
     balance: 1000,
     min: 100,
     extraInfo: {
-      min: { label: "Min. deposit:" },
+      min: "Min. deposit:",
     },
   },
   render: (props) => <ZigInputAmountWithState {...props} />,

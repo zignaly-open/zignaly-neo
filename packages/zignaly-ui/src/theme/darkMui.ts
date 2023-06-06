@@ -382,6 +382,7 @@ const darkMui = createTheme({
         },
         mark: {
           color: "#888999",
+          backgroundColor: "currentcolor",
           width: "4px",
           height: "4px",
           borderRadius: "50%",
