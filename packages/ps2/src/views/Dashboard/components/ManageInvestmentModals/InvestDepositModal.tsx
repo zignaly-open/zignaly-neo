@@ -63,7 +63,7 @@ function InvestDepositModal({
       {...props}
       close={props.close}
       isLoading={!ready}
-      width={622}
+      wide
     >
       {ready && component()}
     </ZModal>
