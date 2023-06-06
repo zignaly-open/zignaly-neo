@@ -150,43 +150,41 @@ function InvestForm({ onInvested }: InvestFormProps) {
             </ZigTypography>
           </Box>
         </Field>
-        <Controller
-          name='transferConfirm'
-          control={control}
-          render={({ field }) => (
-            <ZigInput
-              id={'invest-modal-confirmation__input-transfer'}
-              label={
-                <ZigTypography variant='body2'>
-                  <Trans
-                    i18nKey={'invest-modal.type-transfer'}
-                    t={t}
-                    components={[
-                      <ZigTypography
-                        variant='body2'
-                        color='neutral100'
-                        key={0}
-                      />,
-                    ]}
-                    values={{
-                      word: transferMagicWord,
-                    }}
-                  />
-                </ZigTypography>
-              }
-              placeholder={t('invest-modal.type-transfer-placeholder', {
+        <Box display='flex' flexDirection='column' alignItems='center'>
+          <ZigTypography variant='body2' textAlign='center' mb='22px'>
+            <Trans
+              i18nKey={'invest-modal.type-transfer'}
+              t={t}
+              components={[
+                <ZigTypography variant='body2' color='neutral100' key={0} />,
+              ]}
+              values={{
                 word: transferMagicWord,
-              })}
-              disabled={isLoading}
-              error={t(errors.transferConfirm?.message)}
-              // weird issue with the default value, likely some react form shenanigan
-              {...{
-                ...field,
-                value: typeof field.value === 'string' ? field.value : '',
               }}
             />
-          )}
-        />
+          </ZigTypography>
+          <Controller
+            name='transferConfirm'
+            control={control}
+            render={({ field }) => (
+              <ZigInput
+                id={'invest-modal-confirmation__input-transfer'}
+                placeholder={t('invest-modal.type-transfer-placeholder', {
+                  word: transferMagicWord,
+                })}
+                disabled={isLoading}
+                error={t(errors.transferConfirm?.message)}
+                wide={true}
+                // weird issue with the default value, likely some react form shenanigan
+                {...{
+                  ...field,
+                  value: typeof field.value === 'string' ? field.value : '',
+                }}
+                sx={{ minWidth: '344px' }}
+              />
+            )}
+          />
+        </Box>
         <ModalActions>
           <ZigButton
             id={'invest-modal__confirm'}
