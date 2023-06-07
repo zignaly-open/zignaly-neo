@@ -51,7 +51,7 @@ export const BalanceSummary = ({
       <DottedButton
         variant={'text'}
         id={`${prefixId}__edit-${serviceId}`}
-        startIcon={<EditIcon sx={{ width: '9px', height: '9px' }} />}
+        startIcon={<EditIcon sx={{ width: '12px', height: '12px' }} />}
         onClick={onClickEdit}
         sx={{}}
       >
