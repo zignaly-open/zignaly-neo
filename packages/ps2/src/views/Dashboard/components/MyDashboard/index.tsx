@@ -109,6 +109,7 @@ const MyDashboard: React.FC = () => {
                   id={`portfolio-table__chart-${original.serviceId}`}
                   midLine
                   data={[0, ...(original.sparklines as number[])]}
+                  precision={2}
                 />
                 <ChangeIndicator
                   id={`portfolio-table__chart-percentage-${original.serviceId}`}
