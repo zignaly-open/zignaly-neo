@@ -94,6 +94,7 @@ export const Form = styled(
     gap: 3,
   }),
 )`
+  // Set ModalActions margin-top here to be sure it's only applied when inside a Form
   > div:last-child {
     margin-top: 18px;
   }
@@ -105,6 +106,7 @@ export const ModalActions = styled('div')<{
 }>`
   display: flex;
   align-items: center;
+  /* margin-top only kept if not inside a Form */
   margin-top: 42px;
   gap: 32px;
   flex-direction: ${({ direction }) => direction};
