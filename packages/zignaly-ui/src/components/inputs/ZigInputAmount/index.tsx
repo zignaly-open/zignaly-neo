@@ -48,6 +48,29 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     }
   };
 
+  /**
+   * Format the input value to keep only decimals.
+   * We can't use type=number because it allows commas, which we replace by dots here.
+   */
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+
+    // Remove all non-numeric characters except the comma and dot
+    value = value.replace(/[^0-9,\.]/g, "");
+
+    // if the value ends with a comma, replace it with a dot
+    if (value.endsWith(",")) {
+      value = value.slice(0, -1) + ".";
+    } else {
+      // otherwise, remove all commas
+      value = value.replace(/,/g, "");
+    }
+
+    // eslint-disable-next-line no-param-reassign
+    e.target.value = value;
+    props.onChange?.(e);
+  };
+
   return (
     <Box display="flex" flexDirection="column" className={className}>
       <Layout display={wide ? "flex" : "inline-flex"} error={!!error}>
@@ -67,7 +90,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
             {...rest}
             id={id}
             inputRef={ref}
-            type="number"
+            type="string"
             wide={wide}
             label={null}
             sx={{ width: wide ? 1 : "auto" }}
@@ -83,9 +106,10 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
                   </InputAdornment>
                 ) : null,
             }}
+            onChange={handleChange}
           />
         </Box>
-        <Box mt={extraInfo && error && typeof error === "string" ? "7px" : "16px"} width={1}>
+        <Box mt="16px" width={1}>
           <>
             {React.isValidElement(extraInfo) ? (
               extraInfo

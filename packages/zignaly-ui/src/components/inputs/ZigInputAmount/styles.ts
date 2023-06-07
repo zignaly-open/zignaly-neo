@@ -31,7 +31,9 @@ export const Layout = styled(Box)<{ error: boolean }>`
   }
 `;
 
-export const TopDivider = styled(Divider)<{ error: boolean }>`
+export const TopDivider = styled(Divider, {
+  shouldForwardProp: (prop) => prop !== "error",
+})<{ error: boolean }>`
   position: absolute;
   text-align: center;
   left: 0;
