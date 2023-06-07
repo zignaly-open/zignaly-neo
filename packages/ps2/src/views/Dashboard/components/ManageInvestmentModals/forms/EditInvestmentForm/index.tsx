@@ -64,6 +64,8 @@ function EditInvestmentForm({
           .minus(service.invested)
           .minus(service.pending)
           .toString(),
+        balance: coin?.balance,
+        coin: service.ssc,
       }),
     ),
   });
