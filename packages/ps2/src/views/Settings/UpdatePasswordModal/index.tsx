@@ -15,12 +15,7 @@ const UpdatePasswordModal = ({
   const { t } = useTranslation('settings');
 
   return (
-    <ZModal
-      {...props}
-      width={620}
-      close={close}
-      title={t('update-password.title')}
-    >
+    <ZModal {...props} wide close={close} title={t('update-password.title')}>
       <UpdatePasswordForm close={close} />
     </ZModal>
   );

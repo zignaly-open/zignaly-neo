@@ -32,7 +32,7 @@ function TypeTextConfirmModal({
   const typedCorrectly =
     confirmWord?.toLocaleLowerCase() !== safeWord.toLocaleLowerCase();
   return (
-    <ZModal allowUnauth width={620} {...props} close={close} title={title}>
+    <ZModal allowUnauth wide {...props} close={close} title={title}>
       {!!description && (
         <ZigTypography sx={{ mb: 1 }} textAlign={'center'}>
           {description}

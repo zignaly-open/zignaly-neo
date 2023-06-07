@@ -42,7 +42,7 @@ const ZModal: React.FC<ZModalProps> = ({
       }}
     >
       <ModalContainer
-        width={(wide && 784) || width}
+        width={(wide && 620) || width}
         title={title}
         onClickClose={close}
         onGoBack={onGoBack}

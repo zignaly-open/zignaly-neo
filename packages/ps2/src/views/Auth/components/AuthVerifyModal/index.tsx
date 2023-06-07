@@ -127,7 +127,7 @@ function AuthVerifyModal({
 
   return (
     <ZModal
-      width={620}
+      wide
       allowUnauth
       {...props}
       close={emailUnconfirmed ? null : onClickClose}
