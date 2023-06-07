@@ -55,7 +55,12 @@ function CreateApiKeysModal({
   };
 
   return (
-    <ZModal wide {...props} close={close} title={t('api-keys.create-new-key')}>
+    <ZModal
+      width={620}
+      {...props}
+      close={close}
+      title={t('api-keys.create-new-key')}
+    >
       <ZigTypography textAlign={'center'}>
         {t('api-keys.create-new-key-description')}
       </ZigTypography>

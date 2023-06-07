@@ -18,7 +18,7 @@ const UpdatePasswordModal = ({
   const user = useCurrentUser();
 
   return (
-    <ZModal {...props} wide close={close} title={t('enable-2fa.title')}>
+    <ZModal {...props} width={620} close={close} title={t('enable-2fa.title')}>
       {user.ask2FA ? (
         <Disable2FAForm close={close} />
       ) : (

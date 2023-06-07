@@ -91,13 +91,9 @@ export const Form = styled(
     component: 'form',
     display: 'flex',
     flexDirection: 'column',
-    gap: '42px',
+    gap: 3,
   }),
-)`
-  > div:last-child {
-    margin-top: 0;
-  }
-`;
+)``;
 
 export const ModalActions = styled('div')<{
   align?: 'left' | 'center' | 'right';
@@ -105,7 +101,7 @@ export const ModalActions = styled('div')<{
 }>`
   display: flex;
   align-items: center;
-  margin-top: 20px;
+  margin-top: 18px;
   gap: 32px;
   flex-direction: ${({ direction }) => direction};
   width: 100%;
