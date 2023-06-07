@@ -14,9 +14,8 @@ export const Symbol = styled(ZigTypography)`
 
 export const DottedButton = styled(ZigButton)`
   border: dotted 1px #35334a;
-  padding: 5px 0 !important;
-  width: 65px;
+  width: 68px;
   height: 25px;
   border-radius: 5px;
-  font-size: 10px !important;
+  font-size: 11px !important;
 `;
