@@ -23,6 +23,7 @@ export type GradientVariant = "mini" | "full" | "card";
 
 export interface ChartMiniProps {
   readonly data: AxisFormat[] | number[];
+  precision?: number;
   midLine?: boolean | null;
   height?: number;
   width?: number;
