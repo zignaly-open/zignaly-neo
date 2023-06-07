@@ -114,7 +114,7 @@ export const HideReadMoreEffects = styled('div')<{
     truncate &&
     css`
       -webkit-line-clamp: 5;
-      max-height: 1050px;
+      max-height: 150px;
       height: 100%;
       -webkit-box-orient: vertical;
       display: ${isSafari ? 'block' : '-webkit-box'};
