@@ -54,7 +54,7 @@ export function useChartData(
       return {
         x,
         // Remove extra decimals to normalize range (e.g. avoiding 0 to 0.0001%)
-        y: +y.toFixed(precision),
+        y: precision ? +y.toFixed(precision) : y,
         // Keep rest of properties that may be useful for tooltip
         ...rest,
       };
