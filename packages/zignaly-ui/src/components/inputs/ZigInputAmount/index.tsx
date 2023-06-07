@@ -84,12 +84,12 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
           }}
         />
       </Box>
-      <Box alignSelf="flex-start" mt="11px">
-        {error && typeof error === "string" && (
+      {error && typeof error === "string" && (
+        <Box alignSelf="flex-start" mt="11px">
           <ErrorMessage text={error} id={id && `${id}-error`} />
-        )}
-      </Box>
-      <Box mt={extraInfo && error && typeof error === "string" ? "7px" : "14px"} width={1}>
+        </Box>
+      )}
+      <Box mt={extraInfo && error && typeof error === "string" ? "7px" : "16px"} width={1}>
         <>
           {React.isValidElement(extraInfo) ? (
             extraInfo

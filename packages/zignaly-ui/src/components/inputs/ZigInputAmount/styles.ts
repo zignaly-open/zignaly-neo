@@ -3,7 +3,7 @@ import { styled, Box } from "@mui/system";
 import ZigButton from "../ZigButton";
 
 export const Layout = styled(Box)`
-  border: 1px dashed ${({ theme }) => theme.palette.neutral600};
+  border: 1px dotted ${({ theme }) => theme.palette.neutral600};
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -16,6 +16,7 @@ export const Layout = styled(Box)`
     .MuiInput-root {
       padding: 2px 24px;
       background: #171b30;
+      border: none;
     }
 
     .MuiInput-input {
@@ -39,7 +40,7 @@ export const TopDivider = styled(Divider)`
   &:before,
   &:after {
     border-color: ${({ theme }) => theme.palette.neutral600};
-    border-top-style: dashed;
+    border-top-style: dotted;
   }
 `;
 

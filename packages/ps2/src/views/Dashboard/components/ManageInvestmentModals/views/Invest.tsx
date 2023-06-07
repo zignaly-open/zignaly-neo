@@ -2,6 +2,7 @@ import React from 'react';
 import InvestForm from '../forms/InvestForm';
 import InvestorDetails from './InvestorDetails';
 import EditInvestmentSuccess from './EditInvestmentSuccess';
+import { Box } from '@mui/material';
 
 const Invest: React.FC<{
   close: () => void;
@@ -11,10 +12,10 @@ const Invest: React.FC<{
   return isInvested ? (
     <EditInvestmentSuccess close={close} />
   ) : (
-    <>
+    <Box paddingX='30px'>
       <InvestorDetails prefixId={'invest-modal'} />
       <InvestForm close={close} onInvested={() => setIsInvested(true)} />
-    </>
+    </Box>
   );
 };
 
