@@ -1,5 +1,5 @@
 import { ExpandMore } from "@mui/icons-material";
-import { css, styled } from "@mui/system";
+import { Box, css, styled } from "@mui/system";
 import { SortDirection } from "@tanstack/react-table";
 import { IconButton } from "@mui/material";
 
@@ -92,6 +92,13 @@ export const SmallSelectWrapper = styled("div")`
 
 export const HeaderIconButton = styled(IconButton)`
   margin-left: -20px;
+`;
+
+export const HeaderBox = styled(Box)`
+  min-height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const SortBox = styled("div", {
