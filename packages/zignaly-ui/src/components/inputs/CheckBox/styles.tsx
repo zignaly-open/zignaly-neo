@@ -19,7 +19,7 @@ export const Box = styled.div`
   justify-content: center;
 
   background: #101427;
-  border: 1px solid #706f82;
+  border: 1px dotted #706f82;
   border-radius: 2.5px;
   position: relative;
   flex: 0 0 18px;

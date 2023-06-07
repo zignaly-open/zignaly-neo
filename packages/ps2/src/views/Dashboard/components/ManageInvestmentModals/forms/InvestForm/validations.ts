@@ -9,7 +9,7 @@ export const investAmountValidation = (
   coin: string,
   balance: string,
 ) =>
-  inputAmountValidation({ balance, max })
+  inputAmountValidation({ balance, max, coin })
     .test(
       'sbt',
       i18n.t('edit-investment:invest-modal.max-reached'),

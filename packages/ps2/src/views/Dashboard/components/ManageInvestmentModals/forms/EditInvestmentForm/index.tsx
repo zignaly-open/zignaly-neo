@@ -64,6 +64,8 @@ function EditInvestmentForm({
           .minus(service.invested)
           .minus(service.pending)
           .toString(),
+        balance: coin?.balance,
+        coin: service.ssc,
       }),
     ),
   });
@@ -134,7 +136,12 @@ function EditInvestmentForm({
           coin={coin.id}
           value={details?.invested + details?.pending}
         />
-        <Box display='flex' flexDirection='column' alignItems='center' gap={3}>
+        <Box
+          display='flex'
+          flexDirection='column'
+          alignItems='center'
+          gap={2.5}
+        >
           <ZigTypography
             variant={'body2'}
             color='neutral300'

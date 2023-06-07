@@ -14,18 +14,23 @@ export const AmountInvested = ({
   value: string | number;
   label: string;
 }) => (
-  <Box display='flex' flexDirection='column' alignItems='center' gap={1}>
+  <Box display='flex' flexDirection='column' alignItems='center' gap={1.75}>
     <ZigTypography
       variant={'body2'}
       color='neutral300'
       id={`${idPrefix}__title`}
+      textAlign='center'
     >
       {label}
     </ZigTypography>
     <Box display='flex' gap={1}>
-      <ZigCoinIcon coin={coin} id={`${idPrefix}__coin-icon`} />
+      <ZigCoinIcon size='small' coin={coin} id={`${idPrefix}__coin-icon`} />
       <Box>
-        <ZigTypography variant={'bigNumber'} color={'neutral200'}>
+        <ZigTypography
+          variant={'bigNumber'}
+          color={'neutral200'}
+          lineHeight='30px'
+        >
           <NumericFormat
             id={`${idPrefix}__invested`}
             value={value}

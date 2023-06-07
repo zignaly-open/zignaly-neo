@@ -8,7 +8,7 @@ export const Field = styled('div')`
 
   > div:first-child {
     padding-right: 17px;
-    border-right: 1px dashed ${({ theme }) => theme.palette.neutral600};
+    border-right: 1px dotted ${({ theme }) => theme.palette.neutral600};
   }
 `;
 

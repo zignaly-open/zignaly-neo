@@ -48,68 +48,94 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     }
   };
 
+  /**
+   * Format the input value to keep only decimals.
+   * We can't use type=number because it allows commas, which we replace by dots here.
+   */
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let value = e.target.value;
+
+    // Remove all non-numeric characters except the comma and dot
+    value = value.replace(/[^0-9,\.]/g, "");
+
+    // if the value ends with a comma, replace it with a dot
+    if (value.endsWith(",")) {
+      value = value.slice(0, -1) + ".";
+    } else {
+      // otherwise, remove all commas
+      value = value.replace(/,/g, "");
+    }
+
+    // eslint-disable-next-line no-param-reassign
+    e.target.value = value;
+    props.onChange?.(e);
+  };
+
   return (
-    <Layout display={wide ? "flex" : "inline-flex"} className={className}>
-      <TopDivider>
-        <ZigTypography color="neutral300" variant="body2">
-          {label}
-        </ZigTypography>
-      </TopDivider>
-      <Box display="flex" alignItems="center" gap={2} width={wide ? 1 : "auto"}>
-        <Box display="flex" alignItems="center" gap={1}>
-          <ZigCoinIcon size="small" coin={coinVal} />
-          <ZigTypography color="neutral100" variant="h3">
-            {coinVal}
+    <Box display="flex" flexDirection="column" className={className}>
+      <Layout display={wide ? "flex" : "inline-flex"} error={!!error}>
+        <TopDivider error={!!error}>
+          <ZigTypography color="neutral300" variant="body2">
+            {label}
           </ZigTypography>
+        </TopDivider>
+        <Box display="flex" alignItems="center" gap={2} width={wide ? 1 : "auto"}>
+          <Box display="flex" alignItems="center" gap={1}>
+            <ZigCoinIcon size="small" coin={coinVal} />
+            <ZigTypography color="neutral100" variant="h3">
+              {coinVal}
+            </ZigTypography>
+          </Box>
+          <ZigInput
+            {...rest}
+            id={id}
+            inputRef={ref}
+            type="string"
+            wide={wide}
+            label={null}
+            sx={{ width: wide ? 1 : "auto" }}
+            error={!!error}
+            placeholder={placeholder}
+            InputProps={{
+              endAdornment:
+                balance || handleMax ? (
+                  <InputAdornment position="end">
+                    <MaxButton variant="outlined" onClick={handleMax}>
+                      Max
+                    </MaxButton>
+                  </InputAdornment>
+                ) : null,
+            }}
+            onChange={handleChange}
+          />
         </Box>
-        <ZigInput
-          {...rest}
-          id={id}
-          inputRef={ref}
-          type="number"
-          wide={wide}
-          label={null}
-          sx={{ width: wide ? 1 : "auto" }}
-          error={!!error}
-          placeholder={placeholder}
-          InputProps={{
-            endAdornment:
-              balance || handleMax ? (
-                <InputAdornment position="end">
-                  <MaxButton variant="outlined" onClick={handleMax}>
-                    Max
-                  </MaxButton>
-                </InputAdornment>
-              ) : null,
-          }}
-        />
-      </Box>
-      <Box alignSelf="flex-start" mt="11px">
-        {error && typeof error === "string" && (
+        <Box mt="16px" width={1}>
+          <>
+            {React.isValidElement(extraInfo) ? (
+              extraInfo
+            ) : extraInfo !== null ? (
+              <InputExtraInfo
+                coin={coinVal}
+                min={min}
+                max={max}
+                balance={balance}
+                extraInfo={extraInfo as InputExtraInfoObject}
+              />
+            ) : null}
+            {children && (
+              <Box display="flex" justifyContent="center" mt={3} mb={1}>
+                {children}
+              </Box>
+            )}
+          </>
+        </Box>
+      </Layout>
+      {error && typeof error === "string" && (
+        <Box alignSelf="flex-start" mt="11px">
           <ErrorMessage text={error} id={id && `${id}-error`} />
-        )}
-      </Box>
-      <Box mt={extraInfo && error && typeof error === "string" ? "7px" : "14px"} width={1}>
-        <>
-          {React.isValidElement(extraInfo) ? (
-            extraInfo
-          ) : extraInfo !== null ? (
-            <InputExtraInfo
-              coin={coinVal}
-              min={min}
-              max={max}
-              balance={balance}
-              extraInfo={extraInfo as InputExtraInfoObject}
-            />
-          ) : null}
-          {children && (
-            <Box display="flex" justifyContent="center" mt={3} mb={1}>
-              {children}
-            </Box>
-          )}
-        </>
-      </Box>
-    </Layout>
+        </Box>
+      )}
+    </Box>
   );
 });
 

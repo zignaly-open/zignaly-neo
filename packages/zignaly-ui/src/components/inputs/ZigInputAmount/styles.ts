@@ -2,8 +2,8 @@ import { Divider } from "@mui/material";
 import { styled, Box } from "@mui/system";
 import ZigButton from "../ZigButton";
 
-export const Layout = styled(Box)`
-  border: 1px dashed ${({ theme }) => theme.palette.neutral600};
+export const Layout = styled(Box)<{ error: boolean }>`
+  border: 1px dotted ${({ theme }) => theme.palette.neutral600};
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -12,10 +12,13 @@ export const Layout = styled(Box)`
   position: relative;
   border-radius: 5px;
 
+  ${({ error, theme }) => error && `border-color: ${theme.palette.redGraphOrError};`}
+
   && {
     .MuiInput-root {
       padding: 2px 24px;
       background: #171b30;
+      border: none;
     }
 
     .MuiInput-input {
@@ -28,7 +31,9 @@ export const Layout = styled(Box)`
   }
 `;
 
-export const TopDivider = styled(Divider)`
+export const TopDivider = styled(Divider, {
+  shouldForwardProp: (prop) => prop !== "error",
+})<{ error: boolean }>`
   position: absolute;
   text-align: center;
   left: 0;
@@ -38,8 +43,9 @@ export const TopDivider = styled(Divider)`
 
   &:before,
   &:after {
-    border-color: ${({ theme }) => theme.palette.neutral600};
-    border-top-style: dashed;
+    border-color: ${({ theme, error }) =>
+      error ? theme.palette.redGraphOrError : theme.palette.neutral600};
+    border-top-style: dotted;
   }
 `;
 
