@@ -61,6 +61,7 @@ export default function ZigTable<T extends object>({
     getExpandedRowModel: getExpandedRowModel(),
     getRowCanExpand: () => !!renderSubComponent,
     debugTable: false,
+    sortDescFirst: true, // or let it be overriden next line
     ...rest,
   });
 
