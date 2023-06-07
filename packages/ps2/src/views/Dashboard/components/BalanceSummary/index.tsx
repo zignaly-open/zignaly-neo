@@ -1,10 +1,10 @@
 import React from 'react';
 import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
-import { Layout } from './styles';
+import { DottedButton, Layout } from './styles';
 import { BalanceSummaryProps } from './types';
 import EditIcon from '@mui/icons-material/Edit';
-import { ZigButton, ZigTypography, ZigPriceLabel } from '@zignaly-open/ui';
+import { ZigTypography, ZigPriceLabel } from '@zignaly-open/ui';
 import { getColorForNumber } from '../../../../util/numbers';
 import { Box } from '@mui/material';
 
@@ -48,20 +48,15 @@ export const BalanceSummary = ({
         )}
       </Box>
 
-      <ZigButton
+      <DottedButton
         variant={'text'}
         id={`${prefixId}__edit-${serviceId}`}
-        startIcon={<EditIcon sx={{ width: '15px', height: '15px' }} />}
+        startIcon={<EditIcon sx={{ width: '9px', height: '9px' }} />}
         onClick={onClickEdit}
-        sx={{
-          border: 'dotted 1px #35334a',
-          padding: '5px 0 !important',
-          width: '90px',
-          borderRadius: '5px',
-        }}
+        sx={{}}
       >
         {t('action:edit')}
-      </ZigButton>
+      </DottedButton>
     </Layout>
   );
 };
