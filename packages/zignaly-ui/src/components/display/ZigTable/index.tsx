@@ -288,6 +288,7 @@ export default function ZigTable<T extends object>({
             <ZigTypography color="neutral300">Displaying</ZigTypography>
             <SmallSelectWrapper>
               <ZigSelect
+                menuPlacement={"top"}
                 id={prefixId && `${prefixId}-table__items-per-page`}
                 options={pageSizeOptions}
                 value={table.getState().pagination.pageSize}
