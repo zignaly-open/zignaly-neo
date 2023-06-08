@@ -54,7 +54,7 @@ function InvestForm({ onInvested }: InvestFormProps) {
       amountTransfer: '',
       transferLabelForValidation: transferMagicWord,
       transferConfirm: '',
-      profitPercentage: 30,
+      profitPercentage: 0,
       step: 1,
     },
     resolver: yupResolver(
@@ -268,44 +268,14 @@ function InvestForm({ onInvested }: InvestFormProps) {
       >
         <Controller
           control={control}
-          name='understandMargin'
+          name='understandRisk'
           defaultValue={false}
           render={({ field: { onChange, value } }) => (
             <CheckBox
-              id={'invest-modal__understand-margin'}
+              id={'invest-modal__understand-risk'}
               onChange={onChange}
               value={value}
-              label={t('invest-modal.i-understand-margin', {
-                coin: service.ssc,
-              })}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name='understandMoneyTransferred'
-          defaultValue={false}
-          render={({ field: { onChange, value } }) => (
-            <CheckBox
-              id={'invest-modal__understand-money-transferred'}
-              onChange={onChange}
-              value={value}
-              label={t('invest-modal.i-understand-money-transferred')}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name='understandDisconnecting'
-          defaultValue={false}
-          render={({ field: { onChange, value } }) => (
-            <CheckBox
-              id={'invest-modal__understand-disconnecting'}
-              onChange={onChange}
-              value={value}
-              label={t('invest-modal.i-understand-disconnecting')}
+              label={t('invest-modal.i-understand-risk')}
             />
           )}
         />
