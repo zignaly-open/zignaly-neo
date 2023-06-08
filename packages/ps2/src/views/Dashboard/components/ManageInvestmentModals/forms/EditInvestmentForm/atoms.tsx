@@ -32,6 +32,7 @@ export const AmountInvested = ({
           color: 'neutral300',
           fontWeight: 400,
           display: 'block',
+          margin: 0,
         }}
         variant={'bigNumber'}
         color={'neutral200'}
