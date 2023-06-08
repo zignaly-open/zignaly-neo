@@ -8,12 +8,15 @@ import { BoxTypeMap } from "@mui/system";
 type Props = { error?: string; width?: number; small?: boolean; outlined?: boolean };
 
 export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(Box)<Props>`
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+
   .zig-react-select {
     &__control {
       border: 1px solid
         ${({ theme, error }) => (error ? theme.palette.redGraphOrError : theme.palette.neutral600)};
       padding: ${({ small }) => (small ? "3px 16px 3px 9px" : "11px 24px 11px 16px")};
-      margin-top: 10px;
       min-height: ${({ small }) => (small ? "0" : "60px")};
       border-radius: 5px;
       display: flex;

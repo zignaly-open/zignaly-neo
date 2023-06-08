@@ -43,3 +43,4 @@ export { ReactComponent as ZigCaretRightIcon } from "assets/icons/caret-right.sv
 export { ReactComponent as ZigDotsVerticalIcon } from "assets/icons/dots-vertical.svg";
 export { ReactComponent as ZigDotsHorizontalIcon } from "assets/icons/dots-horizontal.svg";
 export { ReactComponent as ZigCrossCircleIcon } from "assets/icons/cross-circle-icon.svg";
+export { ReactComponent as ZigBackIcon } from "assets/icons/back-icon.svg";
