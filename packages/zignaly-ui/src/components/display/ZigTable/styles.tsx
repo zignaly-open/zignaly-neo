@@ -66,17 +66,6 @@ export const SortIcon = styled(ExpandMore, {
       : ``}
 `;
 
-export const PageNumberContainer = styled("div")`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 41px;
-  height: 38px;
-  border-radius: 5px;
-  background: ${({ theme }) => theme.palette.neutral750};
-  box-shadow: inset 0px 0px 0px 1px ${({ theme }) => theme.palette.neutral600};
-`;
-
 export const SmallSelectWrapper = styled("div")`
   min-width: 84px;
 

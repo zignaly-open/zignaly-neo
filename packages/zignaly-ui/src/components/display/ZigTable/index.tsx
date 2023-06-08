@@ -11,7 +11,6 @@ import {
 import {
   TableContainer,
   HeaderIconButton,
-  PageNumberContainer,
   SmallSelectWrapper,
   SortBox,
   HeaderBox,
@@ -237,11 +236,11 @@ export default function ZigTable<T extends object>({
               id={prefixId && `${prefixId}-table__pages`}
             >
               <ZigTypography color="neutral300">Page</ZigTypography>
-              <PageNumberContainer>
-                <ZigTypography variant="h3" color="neutral100">
-                  {table.getState().pagination.pageIndex + 1}
-                </ZigTypography>
-              </PageNumberContainer>
+
+              <ZigTypography variant="h3" color="neutral100">
+                {table.getState().pagination.pageIndex + 1}
+              </ZigTypography>
+
               {table.getPageCount() !== -1 && (
                 <>
                   <ZigTypography whiteSpace="nowrap" color="neutral300">
