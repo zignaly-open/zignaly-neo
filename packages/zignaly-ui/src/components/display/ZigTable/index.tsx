@@ -8,13 +8,7 @@ import {
   getSortedRowModel,
   getExpandedRowModel,
 } from "@tanstack/react-table";
-import {
-  TableContainer,
-  HeaderIconButton,
-  SmallSelectWrapper,
-  SortBox,
-  HeaderBox,
-} from "./styles";
+import { TableContainer, HeaderIconButton, SmallSelectWrapper, SortBox, HeaderBox } from "./styles";
 import ZigDropdown from "../ZigDropdown";
 import ZigTypography from "../ZigTypography";
 import CheckBox from "../../inputs/CheckBox";
