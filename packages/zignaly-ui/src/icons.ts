@@ -16,6 +16,7 @@ export { ReactComponent as ZigArrowUpIcon } from "assets/icons/arrow-up-icon.svg
 export { ReactComponent as ZigArrowLeftIcon } from "assets/icons/arrow-left-icon.svg";
 export { ReactComponent as ZigArrowRightIcon } from "assets/icons/arrow-right-icon.svg";
 export { ReactComponent as ZigUserIcon } from "assets/icons/user-icon.svg";
+export { ReactComponent as ZigLoginUserIcon } from "assets/icons/login-user-icon.svg";
 export { ReactComponent as ZigCheckIcon } from "assets/icons/check-icon.svg";
 export { ReactComponent as ZigLogoDiscordIcon } from "assets/icons/discord-logo-icon.svg";
 export { ReactComponent as ZigPlusIcon } from "assets/icons/plus-icon.svg";
