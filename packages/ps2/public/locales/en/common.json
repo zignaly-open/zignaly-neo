@@ -74,11 +74,11 @@
   "infinitely-worse": "Yes, the current value is infinity percent worse because the starting value is 0",
   "type-to-confirm": "Type \"{{word}}\" to confirm",
   "balance": {
-    "total": "Total",
-    "available": "Available",
+    "available": "Available:",
     "deposit-funds": "Deposit Funds",
     "find-traders": "Find traders to invest in",
-    "my-portfolio": "My Portfolio"
+    "my-portfolio": "My Portfolio",
+    "portfolio": "Portfolio:"
   },
   "validation": {
     "insufficient-amount": "Insufficient funds",

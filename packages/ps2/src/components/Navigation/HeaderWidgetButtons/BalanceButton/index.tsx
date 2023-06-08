@@ -15,8 +15,8 @@ import { useInvestmentsQuery } from 'apis/investment/api';
 import { BalanceStatus } from './types';
 import { useZModal } from 'components/ZModal/use';
 import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
-import { GradientBorderButtonWrapper } from '../ReferralButton/atoms';
 import theme from '../../../../theme';
+import { ButtonWrapper } from './styles';
 
 const BalanceButton = () => {
   const { t } = useTranslation('common');
@@ -78,10 +78,9 @@ const BalanceButton = () => {
     );
 
   return linkWrap(
-    <GradientBorderButtonWrapper>
+    <ButtonWrapper>
       <ZigButton
         id='menu__balance-link'
-        component={'div'}
         sx={{
           cursor: 'pointer',
           display: 'flex',
@@ -101,9 +100,19 @@ const BalanceButton = () => {
               justifyContent: 'center',
             }}
           >
-            <Box gap={1} display='flex' justifyContent='space-between'>
-              <ZigTypography variant='body2' color='neutral200' fontSize='11px'>
-                {t('portfolio')}
+            <Box
+              gap={1}
+              display='flex'
+              justifyContent='space-between'
+              alignItems='center'
+            >
+              <ZigTypography
+                variant='body2'
+                color='neutral300'
+                fontSize='12px'
+                lineHeight='16px'
+              >
+                {t('balance.portfolio')}
               </ZigTypography>
               <ZigPriceLabel
                 usd
@@ -111,10 +120,22 @@ const BalanceButton = () => {
                 color='neutral100'
                 variant='body2'
                 fontSize='12px'
+                lineHeight='16px'
+                fontWeight={400}
               />
             </Box>
-            <Box gap={1} display='flex' justifyContent='space-between'>
-              <ZigTypography variant='body2' color='neutral200' fontSize='11px'>
+            <Box
+              gap={1}
+              display='flex'
+              justifyContent='space-between'
+              alignItems='center'
+            >
+              <ZigTypography
+                variant='body2'
+                color='neutral300'
+                fontSize='12px'
+                lineHeight='16px'
+              >
                 {t('balance.available')}
               </ZigTypography>
               <ZigPriceLabel
@@ -123,6 +144,8 @@ const BalanceButton = () => {
                 color='neutral100'
                 variant='body2'
                 fontSize='12px'
+                lineHeight='16px'
+                fontWeight={400}
               />
             </Box>
           </Box>
@@ -147,7 +170,7 @@ const BalanceButton = () => {
             <ZigTypography
               variant='body2'
               textAlign='center'
-              color='neutral200'
+              color='neutral300'
               fontSize='11px'
               sx={{ mr: 0.5 }}
             >
@@ -165,7 +188,7 @@ const BalanceButton = () => {
           </Box>
         </Box>
       </ZigButton>
-    </GradientBorderButtonWrapper>,
+    </ButtonWrapper>,
   );
 };
 
