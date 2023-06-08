@@ -18,9 +18,9 @@ import {
   Avatar,
   ZigDropdown,
   ZigTypography,
-  ZigUserIcon,
   ZigButton,
   ZigPlusIcon,
+  ZigLoginUserIcon,
 } from '@zignaly-open/ui';
 import {
   ROUTE_DASHBOARD,
@@ -69,7 +69,7 @@ function AccountMenu(): React.ReactElement | null {
       <>
         <Link to={ROUTE_LOGIN} state={{ redirectTo: location }}>
           <LoginButton id={'menu__login'}>
-            <ZigUserIcon
+            <ZigLoginUserIcon
               color={theme.palette.neutral300}
               width={'16px'}
               height={'16px'}
