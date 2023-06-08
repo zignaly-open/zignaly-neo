@@ -1,7 +1,6 @@
 import { Box } from '@mui/material';
-import { ZigCoinIcon, ZigTypography } from '@zignaly-open/ui';
+import { ZigCoinIcon, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import React from 'react';
-import { NumericFormat } from 'react-number-format';
 
 export const AmountInvested = ({
   idPrefix,
@@ -25,28 +24,21 @@ export const AmountInvested = ({
     </ZigTypography>
     <Box display='flex' gap={1}>
       <ZigCoinIcon size='small' coin={coin} id={`${idPrefix}__coin-icon`} />
-      <Box>
-        <ZigTypography
-          variant={'bigNumber'}
-          color={'neutral200'}
-          lineHeight='30px'
-        >
-          <NumericFormat
-            id={`${idPrefix}__invested`}
-            value={value}
-            displayType={'text'}
-            thousandSeparator={true}
-          />
-        </ZigTypography>
-        <ZigTypography
-          variant={'h3'}
-          color={'neutral300'}
-          fontWeight={400}
-          id={`${idPrefix}__coin-name`}
-        >
-          {String(coin).toUpperCase()}
-        </ZigTypography>
-      </Box>
+      <ZigPriceLabel
+        value={value}
+        coin={String(coin).toUpperCase()}
+        coinProps={{
+          variant: 'h3',
+          color: 'neutral300',
+          fontWeight: 400,
+          display: 'block',
+        }}
+        variant={'bigNumber'}
+        color={'neutral200'}
+        lineHeight='30px'
+        flexDirection='column'
+        id={idPrefix}
+      />
     </Box>
   </Box>
 );
