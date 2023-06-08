@@ -4,6 +4,7 @@ import VerifiedIcon from '@mui/icons-material/Verified';
 import { ZigTypography } from '@zignaly-open/ui';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import PersonIcon from '@mui/icons-material/Person';
+import { isSafari } from 'react-device-detect';
 import { Box } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 
@@ -105,13 +106,19 @@ export const HideReadMoreEffects = styled('div')<{
   transition: all 0.3s;
   margin-bottom: 7px;
 
+  & ol {
+    padding-inline-start: 20px !important;
+  }
+
   ${({ truncate }) =>
     truncate &&
     css`
       -webkit-line-clamp: 5;
+      ${isSafari ? `max-height: 150px;` : ''};
+      height: 100%;
       -webkit-box-orient: vertical;
-      display: -webkit-box;
-      overflow: hidden;
+      display: ${isSafari ? 'block' : '-webkit-box'};
+      overflow-y: hidden;
       overflow-wrap: break-word;
       text-overflow: ellipsis;
     `}

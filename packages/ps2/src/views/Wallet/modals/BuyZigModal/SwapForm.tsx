@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { Controller, FieldErrorsImpl, useForm } from 'react-hook-form';
 import { Box, CircularProgress, Grid } from '@mui/material';
 import {
+  Avatar,
   InputAmountAdvanced,
   InputAmountAdvancedValueType,
   ZigButton,
-  ZignalyExchangeIcon,
   ZigPriceLabel,
   ZigSelect,
   ZigTypography,
@@ -20,6 +20,7 @@ import { differenceInMinutes, fromUnixTime } from 'date-fns';
 import { useUpdateEffect } from 'react-use';
 import SwapConfirmForm from './SwapConfirmForm';
 import ExchangesTooltip from './atoms/ExchangesTooltip';
+import { getImageOfAccount } from '../../../../util/images';
 
 const SwapForm = ({
   coinFrom = 'USDT',
@@ -53,11 +54,11 @@ const SwapForm = ({
       exchangeAccount: accountsBalances[0]?.exchange.internalId,
     },
   });
-  const exchangeOptions = accountsBalances.map((a) => ({
+  const exchangeOptions = accountsBalances.map((a, index) => ({
     value: a.exchange.internalId,
     label: (
       <Box display='flex' alignItems='center' gap={1}>
-        <ZignalyExchangeIcon width={40} height={40} />
+        <Avatar size={'medium'} image={getImageOfAccount(index)} />
         <ZigTypography>{a.exchange.internalName}</ZigTypography>
       </Box>
     ),

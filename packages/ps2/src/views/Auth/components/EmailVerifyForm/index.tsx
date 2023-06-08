@@ -19,7 +19,7 @@ function EmailVerifyForm({
         <ZigTypography
           variant={'body1'}
           id={'new-device-modal__description'}
-          sx={{ mb: '56px' }}
+          sx={{ mb: '40px' }}
         >
           {t('login-form.verifyEmail.title')}
         </ZigTypography>

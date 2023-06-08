@@ -110,7 +110,7 @@ const MyBalancesTable = (): JSX.Element => {
         header: t('tableHeader.valueUSD'),
         cell: ({ getValue, row }) => (
           <ZigTablePriceLabel
-            id={`balances-table-coins__total-usdt-${row.original.coin}`}
+            id={`balances-table-coins__total-usd-${row.original.coin}`}
             usd
             color='neutral100'
             value={getValue()}
