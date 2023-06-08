@@ -4,7 +4,6 @@ import React, { useMemo } from "react";
 import { InputExtraInfoFalseableItem, InputExtraInfoItem, InputExtraInfoProps } from "./types";
 import { NumericFormat, numericFormatter } from "react-number-format";
 import { getPrecisionForCoin } from "components/display/ZigPriceLabel/util";
-import ZigPriceLabel from "components/display/ZigPriceLabel";
 import { trimZeros } from "utils/numbers";
 
 const DEFAULT_ITEMS = {
