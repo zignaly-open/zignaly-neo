@@ -5,7 +5,6 @@ export const Layout = styled(ZigTypography)`
   text-align: center;
   display: grid;
   gap: 8px;
-  justify-content: center;
 `;
 
 export const Symbol = styled(ZigTypography)`
@@ -18,4 +17,5 @@ export const DottedButton = styled(ZigButton)`
   height: 25px;
   border-radius: 5px;
   font-size: 11px !important;
+  margin: 0 auto;
 `;
