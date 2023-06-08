@@ -2,6 +2,7 @@
 // TODO: we have mui icons for a bloody reason
 // UPD: apparently no, and we'll be using these ones ¯\_(ツ)_/¯
 export { ReactComponent as ZigCloneIcon } from "assets/icons/clone-icon.svg";
+export { ReactComponent as ZigArrowOutIcon } from "assets/icons/arrow-out-icon.svg";
 export { ReactComponent as ZigRefreshIcon } from "assets/icons/refresh-icon.svg";
 export { ReactComponent as ZigPencilIcon } from "assets/icons/pencil-icon.svg";
 export { ReactComponent as ZigWhaleIcon } from "assets/icons/whale-icon.svg";
