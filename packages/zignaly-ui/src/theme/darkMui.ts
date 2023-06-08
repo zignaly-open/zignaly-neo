@@ -393,6 +393,8 @@ const darkMui = createTheme({
         },
         thumb: {
           color: "#999ee0",
+          width: "17px",
+          height: "17px",
         },
       },
     },

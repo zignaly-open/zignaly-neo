@@ -148,6 +148,9 @@ const ServiceGrowthChart: React.FC<{ service: Service }> = ({ service }) => {
                           : 'redGraphOrError'
                       }
                       value={value}
+                      coinProps={{
+                        paddingTop: '6px',
+                      }}
                     />
                   </>
                 )}

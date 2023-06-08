@@ -39,7 +39,6 @@ export const editInvestmentValidation = ({
 }) =>
   yup.object().shape({
     amountTransfer: investAmountValidation(max, coin, balance),
-    understandMargin: yup.boolean().oneOf([true], 'error:error.required'),
     transferConfirm: yup
       .string()
       .test(
@@ -53,10 +52,5 @@ export const editInvestmentValidation = ({
           );
         },
       ),
-    understandMoneyTransferred: yup
-      .boolean()
-      .oneOf([true], 'error:error.required'),
-    understandDisconnecting: yup
-      .boolean()
-      .oneOf([true], 'error:error.required'),
+    understandRisk: yup.boolean().oneOf([true], 'error:error.required'),
   });

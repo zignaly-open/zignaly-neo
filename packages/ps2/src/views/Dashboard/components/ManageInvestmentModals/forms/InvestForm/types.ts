@@ -10,8 +10,6 @@ export type InvestFormData = {
   profitPercentage: string | number;
   transferConfirm: string;
   transferLabelForValidation: string;
-  understandMargin: boolean;
-  understandMoneyTransferred: boolean;
-  understandDisconnecting: boolean;
+  understandRisk: boolean;
   amountTransfer?: string;
 };
