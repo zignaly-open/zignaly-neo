@@ -17,14 +17,14 @@ import { Provider } from 'react-redux';
 import GlobalStyle from './styles';
 import { PersistGate } from 'redux-persist/integration/react';
 import Header from './components/Navigation/Header';
-import UpdateChecker from './components/Navigation/UpdateChecker';
-import DateLocaleFixer from './components/Navigation/DateLocaleFixer';
-import Tracker from './components/Navigation/Tracker/Tracker';
 import useReferralCookie from 'util/hooks/useReferralCookie';
 import BottomNavigation from 'components/Navigation/BottomNavigation';
 import { zigSuspenseFallback } from './util/suspense';
 import ZModal from './components/ZModal';
 import { ChunkLoadErrorBoundary } from './util/ChunkLoadErrorBoundary';
+import { useDateLocaleFixer } from './util/i18nextHelpers';
+import { useTracker } from './util/analytics';
+import { useUpdateChecker } from './util/updateChecker';
 
 if (
   process.env.NODE_ENV === 'production' &&
@@ -78,24 +78,26 @@ export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
 
 function App() {
   useReferralCookie();
+  useDateLocaleFixer();
+  useTracker();
+  useUpdateChecker();
 
   return (
-    <WrappedInProviders>
-      <>
-        <Header />
-        <Suspense fallback={zigSuspenseFallback}>
-          <>
-            <Tracker />
-            <UpdateChecker />
-            <DateLocaleFixer />
-            <ChartGradients />
-            <Router />
-            <BottomNavigation />
-          </>
-        </Suspense>
-      </>
-    </WrappedInProviders>
+    <>
+      <Header />
+      <Suspense fallback={zigSuspenseFallback}>
+        <>
+          <ChartGradients />
+          <Router />
+          <BottomNavigation />
+        </>
+      </Suspense>
+    </>
   );
 }
 
-export default App;
+export default () => (
+  <WrappedInProviders>
+    <App />
+  </WrappedInProviders>
+);

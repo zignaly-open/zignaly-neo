@@ -1,11 +1,12 @@
-import React, { useEffect } from 'react';
-import { useUpdateCheck } from 'react-update-notification';
-import { UpdateStatus } from 'react-update-notification/lib/types';
-import { VERSION_CHECK_INTERVAL } from './constants';
-import { useToast } from '../../../util/hooks/useToast';
+import { useToast } from './hooks/useToast';
 import { useTranslation } from 'react-i18next';
+import { useUpdateCheck } from 'react-update-notification';
+import { useEffect } from 'react';
+import { UpdateStatus } from 'react-update-notification/lib/types';
 
-const UpdateChecker: React.FC = () => {
+export const VERSION_CHECK_INTERVAL = 10 * 60_000;
+
+export function useUpdateChecker(): void {
   const toast = useToast();
   const { t } = useTranslation('common');
   const { status, reloadPage, checkUpdate } = useUpdateCheck({
@@ -28,8 +29,4 @@ const UpdateChecker: React.FC = () => {
       });
     }
   }, [status]);
-
-  return null;
-};
-
-export default UpdateChecker;
+}

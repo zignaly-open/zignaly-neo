@@ -4,6 +4,10 @@ import Analytics, { AnalyticsInstance } from 'analytics';
 import segmentPlugin from '@analytics/segment';
 import * as Sentry from '@sentry/browser';
 import { SessionsTypes, UserData } from '../apis/user/types';
+import { useCurrentUser } from '../apis/user/use';
+import { useLocation } from 'react-router-dom';
+import { useEffect } from 'react';
+import { track, trackCta } from '@zignaly-open/tracker';
 
 let analytics: AnalyticsInstance | null = null;
 
@@ -76,3 +80,30 @@ export const trackPage = () => {
   analytics?.page();
   window._paq?.push(['trackPageView']);
 };
+
+export function useTracker(): void {
+  const { userId } = useCurrentUser();
+  const location = useLocation();
+
+  useEffect(() => {
+    const clickListener = (e: MouseEvent) => {
+      const node = e.target as HTMLElement;
+      if (['a', 'button'].includes(node?.tagName.toLocaleLowerCase())) {
+        const ctaId =
+          node.getAttribute('data-track-cta') || node.getAttribute('id');
+        ctaId &&
+          trackCta({
+            userId,
+            ctaId,
+          });
+      }
+    };
+    document.addEventListener('click', clickListener);
+    return () => document.removeEventListener('click', clickListener);
+  }, [userId]);
+
+  useEffect(() => {
+    track({ userId });
+    trackPage();
+  }, [location.pathname, userId]);
+}
