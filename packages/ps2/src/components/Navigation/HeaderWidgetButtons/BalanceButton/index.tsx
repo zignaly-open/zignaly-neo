@@ -133,7 +133,7 @@ const BalanceButton = () => {
               <ZigTypography
                 variant='body2'
                 color='neutral300'
-                fontSize='12px'
+                fontSize='11px'
                 lineHeight='16px'
               >
                 {t('balance.available')}
@@ -143,7 +143,7 @@ const BalanceButton = () => {
                 value={balance.totalFreeUSDT}
                 color='neutral100'
                 variant='body2'
-                fontSize='12px'
+                fontSize='11px'
                 lineHeight='16px'
                 fontWeight={400}
               />
