@@ -62,7 +62,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
     return (
       <>
         <Form onSubmit={handleSubmit(onSubmit)}>
-          <ZigTypography whiteSpace='pre-line'>
+          <ZigTypography whiteSpace='pre-line' textAlign={'center'}>
             <Trans i18nKey='enable-2fa.setup-description' t={t}>
               <ZigLink href={DOWNLOAD_GOOGLE_AUTHENTICATOR_URL} />
             </Trans>
@@ -118,7 +118,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
   }
 
   return (
-    <>
+    <Form>
       <ZigTypography whiteSpace='pre-line' textAlign={'center'}>
         <Trans i18nKey='enable-2fa.description' t={t}>
           <Link
@@ -141,7 +141,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
           {t('enable-2fa.setup-2fa')}
         </ZigButton>
       </ModalActions>
-    </>
+    </Form>
   );
 };
 
