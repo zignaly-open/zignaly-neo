@@ -28,8 +28,9 @@ import { useZModal } from '../../../../../../components/ZModal/use';
 import { AmountInvested } from '../EditInvestmentForm/atoms';
 import { Field, ZigInputWrapper } from './styles';
 import { NumericFormat } from 'react-number-format';
+import { InvestmentViews } from '../../types';
 
-function InvestForm({ onInvested }: InvestFormProps) {
+function InvestForm({ view, setView }: InvestFormProps) {
   const coin = useCurrentBalance();
   const { t } = useTranslation(['edit-investment', 'action']);
   const service = useSelectedInvestment();
@@ -55,7 +56,6 @@ function InvestForm({ onInvested }: InvestFormProps) {
       transferLabelForValidation: transferMagicWord,
       transferConfirm: '',
       profitPercentage: 0,
-      step: 1,
     },
     resolver: yupResolver(
       editInvestmentValidation({
@@ -65,6 +65,7 @@ function InvestForm({ onInvested }: InvestFormProps) {
           .minus(serviceDetails.pending)
           .toString(),
         coin: service.ssc,
+        checkTransferInput: view === InvestmentViews.InvestmentConfirm,
       }),
     ),
   });
@@ -73,10 +74,8 @@ function InvestForm({ onInvested }: InvestFormProps) {
 
   const onSubmitFirstStep = () => {
     setValue('transferConfirm', '');
-    setValue('step', 2);
+    setView(InvestmentViews.InvestmentConfirm);
   };
-
-  const isConfirmation = watch('step') === 2;
 
   const onSubmitSecondStep = async ({
     profitPercentage,
@@ -93,7 +92,7 @@ function InvestForm({ onInvested }: InvestFormProps) {
         serviceName: service.serviceName,
       }),
     );
-    onInvested();
+    setView(InvestmentViews.InvestmentSuccess);
   };
 
   const renderDepositCoin = () => (
@@ -116,7 +115,7 @@ function InvestForm({ onInvested }: InvestFormProps) {
     </ZigButton>
   );
 
-  if (isConfirmation) {
+  if (view === InvestmentViews.InvestmentConfirm) {
     return (
       <form onSubmit={handleSubmit(onSubmitSecondStep)}>
         <Field>

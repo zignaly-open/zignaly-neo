@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { DialogProps } from '@mui/material/Dialog';
 import { useSelectedInvestment } from '../../../../apis/investment/use';
 import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
-import ZModal from '../../../../components/ZModal';
 import InvestView from './views/Invest';
-import { UseModalReturn } from './types';
+import { InvestmentViews, UseModalReturn } from './types';
 
 export function useInvestModalContent({
   close,
@@ -21,38 +19,19 @@ export function useInvestModalContent({
   const { isLoading: isLoadingCoins } = useCoinBalances();
   const { t } = useTranslation('edit-investment');
   const isLoading = isLoadingService || isLoadingCoins || !service;
-  const [isInvested, setIsInvested] = useState(false);
+  const [view, setView] = useState(InvestmentViews.Investment);
+
   return {
-    title: t(isInvested ? 'modalSuccess.title' : 'invest-modal.invest-with'),
+    title: t(
+      view === InvestmentViews.InvestmentSuccess
+        ? 'modalSuccess.title'
+        : 'invest-modal.invest-with',
+    ),
+    onGoBack:
+      view === InvestmentViews.InvestmentConfirm
+        ? () => setView(InvestmentViews.Investment)
+        : undefined,
     component: () =>
-      !isLoading && (
-        <InvestView
-          close={close}
-          isInvested={isInvested}
-          setIsInvested={setIsInvested}
-        />
-      ),
+      !isLoading && <InvestView close={close} view={view} setView={setView} />,
   };
 }
-function InvestModal({
-  close,
-  ...props
-}: {
-  close: () => void;
-} & DialogProps): React.ReactElement {
-  const service = useSelectedInvestment();
-  const { isLoading: isLoadingService } = useServiceDetails(service?.serviceId);
-  const { isLoading: isLoadingCoins } = useCoinBalances();
-  const isLoading = isLoadingService || isLoadingCoins;
-  const { title, component } = useInvestModalContent({ close });
-
-  return (
-    <ZModal wide {...props} close={close} title={title} isLoading={isLoading}>
-      {component()}
-    </ZModal>
-  );
-}
-
-InvestModal.trackId = 'invest';
-
-export default InvestModal;

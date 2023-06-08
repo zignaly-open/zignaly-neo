@@ -30,10 +30,12 @@ export const editInvestmentValidation = ({
   max,
   coin,
   balance,
+  checkTransferInput = false,
 }: {
   max: string;
   coin: string;
   balance: string;
+  checkTransferInput?: boolean;
 }) =>
   yup.object().shape({
     amountTransfer: investAmountValidation(max, coin, balance),
@@ -44,9 +46,9 @@ export const editInvestmentValidation = ({
         'edit-investment:invest-modal.transfer-error',
         function (value) {
           return (
+            !checkTransferInput ||
             value.toLocaleLowerCase() ===
-              this.parent.transferLabelForValidation?.toLocaleLowerCase() ||
-            this.parent.step === 1
+              this.parent.transferLabelForValidation?.toLocaleLowerCase()
           );
         },
       ),

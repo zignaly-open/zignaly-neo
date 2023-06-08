@@ -128,6 +128,10 @@ const darkMui = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 5,
+          "&&": {
+            // Fix for variant='text' causing endIcon to be wrapped in a new line on firefox
+            display: "inline-flex",
+          },
           ".MuiButton-startIcon, .MuiButton-endIcon": {
             lineHeight: 1,
             verticalAlign: "middle",
