@@ -10,7 +10,7 @@ jobs:
     timeout-minutes: 30
     strategy:
       matrix:
-        node: [ 16.x ]
+        node: [16.x]
 
     steps:
       - name: Checkout code
@@ -28,7 +28,7 @@ jobs:
           node-version: 16.x
           cache: 'yarn'
       - name: Install Lerna
-        run: yarn global add lerna
+        run: yarn global add lerna@6.6.2
       - name: Bootstrap modified packages
         run: lerna bootstrap
       - name: Build
