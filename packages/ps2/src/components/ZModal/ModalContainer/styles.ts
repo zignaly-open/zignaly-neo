@@ -121,6 +121,12 @@ export const Form = styled(
   }
 `;
 
+export const BackIconButton = styled(IconButton)`
+  position: absolute;
+  left: 22px;
+  top: 16px;
+`;
+
 export const CloseIconButton = styled(IconButton)`
   position: absolute;
   right: 22px;
