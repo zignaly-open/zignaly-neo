@@ -67,7 +67,7 @@ const ChooseDepositType: React.FC<{
 
           <Grid item container xs={false} md={1} justifyContent='center'>
             <Divider
-              sx={{ border: '1px solid #A8A8A830' }}
+              sx={{ border: '1px dotted #A8A8A830' }}
               orientation={'vertical'}
               flexItem
               role={'presentation'}
