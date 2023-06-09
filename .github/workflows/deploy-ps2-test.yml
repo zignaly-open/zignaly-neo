@@ -60,10 +60,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: "16"
+          node-version: '16'
           cache: 'yarn'
       - name: Install Lerna
-        run: yarn global add lerna
+        run: yarn global add lerna@6.6.2
       - name: Restore Lerna modules
         uses: actions/cache@v3
         with:
