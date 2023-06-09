@@ -27,7 +27,6 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
     color: "neutral200",
     fontWeight: "regular",
     ml: "0.4em",
-    mt: "1px",
     ...(coinProps || ""),
   };
 
