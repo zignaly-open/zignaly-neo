@@ -40,7 +40,7 @@ function TypeTextConfirmModal({
       )}
 
       <ZigInput
-        label={t('common:type-to-confirm', { word: safeWord })}
+        label={t('common:type-to-confirm', { word: safeWord.toUpperCase() })}
         onChange={(e) => {
           setConfirmWord(e.target.value);
         }}
@@ -56,7 +56,6 @@ function TypeTextConfirmModal({
         }}
       >
         <ZigButton
-          variant={'contained'}
           disabled={typedCorrectly}
           tooltip={
             typedCorrectly

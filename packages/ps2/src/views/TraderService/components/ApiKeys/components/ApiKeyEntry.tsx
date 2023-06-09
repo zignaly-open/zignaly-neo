@@ -105,7 +105,6 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
                 yesLabel: t('action:delete'),
                 yesButtonProps: {
                   color: 'danger',
-                  variant: 'outlined',
                 },
                 description: t('api-keys.delete-description'),
                 cancelButton: false,
