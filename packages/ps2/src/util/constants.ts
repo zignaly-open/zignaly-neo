@@ -33,3 +33,7 @@ export const YAHOO_URL =
 
 export const BITCOIN_URL =
   'https://news.bitcoin.com/zignaly-lists-on-ascendex/';
+
+export const MOBILE_VERSION_AUTH_TOKEN_COOKIE = 'zignalyMobileAuthToken';
+
+export const MOBILE_VERSION_FORCE_DESKTOP = 'zignalyMobileForceDesktop';

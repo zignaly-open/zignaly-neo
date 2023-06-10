@@ -20,6 +20,7 @@ import { GlobeLanguagesStyled, LabelButton } from './styles';
 import { LocalizationLanguages } from '../../../util/languages';
 import { HeaderDropdownButton } from '../AccountMenu/styles';
 import { ZigDropdownProps } from '@zignaly-open/ui/src/components/display/ZigDropdown/types';
+import { useGoToMobileVersion, isMobile } from '../../../util/mobile';
 
 const ExtraNavigationDropdown: React.FC = () => {
   const theme = useTheme();
@@ -28,6 +29,7 @@ const ExtraNavigationDropdown: React.FC = () => {
   const { t, i18n } = useTranslation('common');
   const changeLocale = useChangeLocale();
   const service = useFirstOwnedService();
+  const goToMobileVersion = useGoToMobileVersion();
   const { data: traderServices, isFetching } = useTraderServices();
   const isAuthenticated = useIsAuthenticated();
   const md = useMediaQuery(theme.breakpoints.up('md'));
@@ -55,6 +57,11 @@ const ExtraNavigationDropdown: React.FC = () => {
       id: 'menu-dropdown__help-docs',
       target: '_blank',
       href: 'https://help.zignaly.com/hc/en-us',
+    },
+    isMobile && {
+      label: t('main-menu.dropdown-link-mobile-version'),
+      id: 'menu-dropdown__to-mobile',
+      onClick: goToMobileVersion,
     },
     { separator: true },
     {
@@ -98,7 +105,7 @@ const ExtraNavigationDropdown: React.FC = () => {
         </Networks>
       ),
     },
-  ];
+  ].filter(Boolean);
 
   if (languageMap.length === 1) {
     options = options.filter(

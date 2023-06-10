@@ -25,6 +25,7 @@ import { ChunkLoadErrorBoundary } from './util/ChunkLoadErrorBoundary';
 import { useDateLocaleFixer } from './util/i18nextHelpers';
 import { useTracker } from './util/analytics';
 import { useUpdateChecker } from './util/updateChecker';
+import { useMobileRedirect } from './util/mobile';
 
 if (
   process.env.NODE_ENV === 'production' &&
@@ -79,6 +80,7 @@ export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
 function App() {
   useReferralCookie();
   useDateLocaleFixer();
+  useMobileRedirect();
   useTracker();
   useUpdateChecker();
 

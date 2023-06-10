@@ -53,15 +53,13 @@ import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
 import { DropdownExchangeAccount } from './atoms';
 import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
+import { isMobile, useGoToMobileVersion } from '../../../util/mobile';
 
 const drawerWidth = 250;
 
 const ZigDrawer = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  const handleDrawerToggle = () => {
-    setMobileOpen((prevState) => !prevState);
-  };
+  const goToMobileVersion = useGoToMobileVersion();
   const logout = useLogout();
   const { t, i18n } = useTranslation('common');
   const isAuthenticated = useIsAuthenticated();
@@ -72,6 +70,8 @@ const ZigDrawer = () => {
   const { exchanges, email, imageUrl } = useCurrentUser();
   const location = useLocation();
   const changeLocale = useChangeLocale();
+
+  const handleDrawerToggle = () => setMobileOpen((prevState) => !prevState);
 
   const languageMap = supportedLanguages
     ? supportedLanguages.map((x) => LocalizationLanguages[x])
@@ -259,6 +259,16 @@ const ZigDrawer = () => {
                   />
                 </ListItemButton>
               </ListItem>
+
+              {isMobile && (
+                <ListItem disablePadding onClick={handleDrawerToggle}>
+                  <ListItemButton onClick={goToMobileVersion}>
+                    <ListItemText
+                      primary={t('main-menu.dropdown-link-mobile-version')}
+                    />
+                  </ListItemButton>
+                </ListItem>
+              )}
 
               <ListItem>
                 <ZigButton

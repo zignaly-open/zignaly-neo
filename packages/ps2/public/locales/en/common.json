@@ -24,6 +24,7 @@
   },
   "main-menu": {
     "dropdown-link-forTrading": "Manage your Services",
+    "dropdown-link-mobile-version": "Go to Mobile Version",
     "dropdown-link-helpDocs": "Help Docs"
   },
   "refresh": {

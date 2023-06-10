@@ -31,6 +31,7 @@ export type UserData = {
   sellsCount: number;
   buysCount: number;
   verified: boolean;
+  token: string;
   tradingFeeDiscount: boolean;
   payFeeWithZig: boolean;
   refRewardType: RefRewardType;
