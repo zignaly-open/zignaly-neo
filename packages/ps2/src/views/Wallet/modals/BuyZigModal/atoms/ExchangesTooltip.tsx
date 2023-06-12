@@ -21,7 +21,11 @@ const ExchangesTooltip = () => {
   const { t } = useTranslation('wallet');
 
   return (
-    <Tooltip placement='bottom' title={<ExchangesTooltipContent />}>
+    <Tooltip
+      leaveDelay={190}
+      placement='bottom'
+      title={<ExchangesTooltipContent />}
+    >
       <ZigTypography color='links'>
         {t('buy.available-exchanges')}
       </ZigTypography>
