@@ -75,7 +75,7 @@ const ReferralInviteModal: React.FC<
   };
 
   return (
-    <ZModal wide {...props}>
+    <ZModal {...props} width={800}>
       <ZigTabs
         sx={{
           margin: '0 auto',
