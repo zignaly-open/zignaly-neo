@@ -91,7 +91,9 @@ export function useTracker(): void {
       if (['a', 'button'].includes(node?.tagName.toLocaleLowerCase())) {
         const ctaId =
           node.getAttribute('data-track-cta') || node.getAttribute('id');
+        // remove dynamic ids
         ctaId &&
+          !/^:.*:$/.test(ctaId) &&
           trackCta({
             userId,
             ctaId,
