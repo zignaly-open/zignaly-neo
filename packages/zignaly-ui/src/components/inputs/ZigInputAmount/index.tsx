@@ -72,7 +72,6 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     props.onChange?.(e);
   };
 
-  console.log("omfg", labelInline);
   return (
     <Box display="flex" flexDirection="column" className={className}>
       {!labelInline && label && <ZigTypography pb="10px">{label}</ZigTypography>}

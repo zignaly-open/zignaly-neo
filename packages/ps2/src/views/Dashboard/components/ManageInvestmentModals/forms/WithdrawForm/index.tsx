@@ -9,6 +9,7 @@ import {
   ZigTypography,
   CenteredLoader,
   ZigInputAmount,
+  ZigListIcon,
 } from '@zignaly-open/ui';
 import { WithdrawFormData } from './types';
 import { Box } from '@mui/material';
@@ -313,7 +314,7 @@ function WithdrawForm({
             )}
           </Box>
 
-          <ModalActions>
+          <ModalActions position='relative'>
             <ZigButton
               id={'withdraw-modal__continue'}
               size={'large'}
@@ -321,6 +322,23 @@ function WithdrawForm({
               disabled={!canSubmit}
             >
               {t('confirmation.continue')}
+            </ZigButton>
+            <ZigButton
+              sx={{ position: 'absolute', right: '-22px', bottom: '-7px' }}
+              id={'withdraw-modal__history'}
+              startIcon={
+                <Box mt='5px'>
+                  <ZigListIcon
+                    width={'24px'}
+                    height={'24px'}
+                    color={'neutral100'}
+                  />
+                </Box>
+              }
+              variant='text'
+              onClick={close}
+            >
+              {t('history')}
             </ZigButton>
           </ModalActions>
         </>
