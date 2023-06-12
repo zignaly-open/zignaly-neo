@@ -17,6 +17,7 @@ import {
 } from '../../../../apis/user/use';
 import { useToast } from '../../../../util/hooks/useToast';
 import ZModal from '../../../../components/ZModal';
+import { trackCta } from '@zignaly-open/tracker';
 
 function AuthVerifyModal({
   user,
@@ -120,6 +121,7 @@ function AuthVerifyModal({
 
   useEffect(() => {
     if (allGood) {
+      trackCta({ ctaId: 'verify-success' });
       onSuccess();
       close();
     }
@@ -169,5 +171,7 @@ function AuthVerifyModal({
     </ZModal>
   );
 }
+
+AuthVerifyModal.trackId = '2fa-verify';
 
 export default AuthVerifyModal;

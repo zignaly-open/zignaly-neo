@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
@@ -28,6 +28,8 @@ import { useZModal } from '../../../../../../components/ZModal/use';
 import { AmountInvested } from '../EditInvestmentForm/atoms';
 import { Field, ZigInputWrapper } from './styles';
 import { NumericFormat } from 'react-number-format';
+import { trackCta } from '@zignaly-open/tracker';
+import { useDebounce } from 'react-use';
 
 function InvestForm({ onInvested }: InvestFormProps) {
   const coin = useCurrentBalance();
@@ -76,7 +78,24 @@ function InvestForm({ onInvested }: InvestFormProps) {
     setValue('step', 2);
   };
 
+  const reinvestAmount = watch('profitPercentage')?.toString();
   const isConfirmation = watch('step') === 2;
+
+  useDebounce(
+    () => {
+      trackCta({ ctaId: 'reinvest-amount-change' });
+    },
+    300,
+    [reinvestAmount],
+  );
+
+  const hasAgreedToAll =
+    watch('understandMargin') &&
+    watch('understandMoneyTransferred') &&
+    watch('understandDisconnecting');
+  useEffect(() => {
+    hasAgreedToAll && trackCta({ ctaId: 'agreed-to-all' });
+  }, [hasAgreedToAll]);
 
   const onSubmitSecondStep = async ({
     profitPercentage,
@@ -147,7 +166,7 @@ function InvestForm({ onInvested }: InvestFormProps) {
             >
               <NumericFormat
                 id={'invest-modal-confirmation__profit-percentage'}
-                value={watch('profitPercentage').toString()}
+                value={reinvestAmount}
                 displayType={'text'}
                 suffix={'%'}
                 thousandSeparator={true}
@@ -217,6 +236,7 @@ function InvestForm({ onInvested }: InvestFormProps) {
         rules={{ required: true }}
         render={({ field }) => (
           <ZigInputAmount
+            onMax={() => trackCta({ ctaId: 'invest-max' })}
             id={'invest-modal__input-amount'}
             label={t('form.inputAmount.label')}
             wide={true}

@@ -37,7 +37,7 @@ import { trackConversion, trackNewSession } from '../../util/analytics';
 import { startLiveSession } from '../../util/liveSession';
 import { RootState } from '../store';
 import { useTranslation } from 'react-i18next';
-import { ShowFnOutput, useModal } from 'mui-modal-provider';
+import { ShowFnOutput } from 'mui-modal-provider';
 import AuthVerifyModal from '../../views/Auth/components/AuthVerifyModal';
 import { getImageOfAccount } from '../../util/images';
 import { useLazyTraderServicesQuery } from '../service/api';
@@ -50,7 +50,7 @@ import { clearUserSession } from './util';
 import { junkyard } from '../../util/junkyard';
 
 const useStartSession = () => {
-  const { showModal } = useModal();
+  const { showModal } = useZModal();
   const dispatch = useDispatch();
   const [loadSession] = useLazySessionQuery();
   const [loadTraderServices] = useLazyTraderServicesQuery();
