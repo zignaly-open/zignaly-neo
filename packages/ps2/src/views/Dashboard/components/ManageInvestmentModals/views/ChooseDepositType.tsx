@@ -13,12 +13,10 @@ const ChooseDepositType: React.FC<{
   return (
     <>
       <Grid container sx={{ padding: '10px 0' }}>
-        <Grid item xs={12} sx={{ paddingRight: '10px' }}>
+        <Grid item xs={12} sx={{ paddingRight: '10px', textAlign: 'center' }}>
           <ZigTypography
             variant={'body1'}
-            fontSize={'15px'}
             id={'modal-choose-deposit-type__description'}
-            textAlign={'center'}
           >
             {t('service-deposit.description', { coin })}
           </ZigTypography>
@@ -69,7 +67,7 @@ const ChooseDepositType: React.FC<{
 
           <Grid item container xs={false} md={1} justifyContent='center'>
             <Divider
-              sx={{ border: '1px solid #A8A8A830' }}
+              sx={{ border: '1px dotted #A8A8A830' }}
               orientation={'vertical'}
               flexItem
               role={'presentation'}

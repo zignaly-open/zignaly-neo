@@ -1,4 +1,5 @@
-import { styled, css, Box, IconButton } from '@mui/material';
+import styled from '@emotion/styled';
+import { css, Box, IconButton } from '@mui/material';
 import { styledIf, ZigTypography } from '@zignaly-open/ui';
 import { withAttrs } from 'util/styles';
 
@@ -86,28 +87,17 @@ export const Inline = styled('div')<{ align?: string }>`
   gap: 12px;
 `;
 
-export const Form = styled(
+export const ModalActions = styled(
   withAttrs(Box, {
-    component: 'form',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 3,
+    /* margin-top will be overwritten when inside Form */
+    mt: '35px',
   }),
-)`
-  // Set ModalActions margin-top here to be sure it's only applied when inside a Form
-  > div:last-child {
-    margin-top: 11px;
-  }
-`;
-
-export const ModalActions = styled('div')<{
+)<{
   align?: 'left' | 'center' | 'right';
   direction?: 'row' | 'column';
 }>`
   display: flex;
   align-items: center;
-  /* margin-top only kept if not inside a Form */
-  margin-top: 35px;
   gap: 32px;
   flex-direction: ${({ direction }) => direction};
   width: 100%;
@@ -117,6 +107,21 @@ export const ModalActions = styled('div')<{
       : align === 'right'
       ? 'flex-end'
       : 'center'};
+`;
+
+export const Form = styled(
+  withAttrs(Box, {
+    component: 'form',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: 3,
+  }),
+)`
+  // Set ModalActions margin-top here to be sure it's only applied when inside a Form
+  // todo: https://mui.com/system/styled/#how-to-use-components-selector-api
+  > div:last-child:has(button) {
+    margin-top: 11px;
+  }
 `;
 
 export const BackIconButton = styled(IconButton)`
