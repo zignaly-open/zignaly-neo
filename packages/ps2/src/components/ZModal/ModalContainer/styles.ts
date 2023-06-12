@@ -87,14 +87,17 @@ export const Inline = styled('div')<{ align?: string }>`
   gap: 12px;
 `;
 
-export const ModalActions = styled('div')<{
+export const ModalActions = styled(
+  withAttrs(Box, {
+    /* margin-top will be overwritten when inside Form */
+    mt: '35px',
+  }),
+)<{
   align?: 'left' | 'center' | 'right';
   direction?: 'row' | 'column';
 }>`
   display: flex;
   align-items: center;
-  /* margin-top only kept if not inside a Form */
-  margin-top: 35px;
   gap: 32px;
   flex-direction: ${({ direction }) => direction};
   width: 100%;
