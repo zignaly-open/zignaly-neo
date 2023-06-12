@@ -25,6 +25,8 @@ import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import { useWithdrawMutation } from 'apis/coin/api';
 import { useActiveExchange, useCheck2FA } from 'apis/user/use';
+import { ROUTE_MY_BALANCES_TRANSACTIONS } from 'routes';
+import { useNavigate } from 'react-router-dom';
 
 function WithdrawForm({
   setStep,
@@ -32,6 +34,7 @@ function WithdrawForm({
   close,
   step,
 }: WithdrawModalProps) {
+  const navigate = useNavigate();
   const { t } = useTranslation('withdraw-crypto');
   const { data: balances, isLoading: isLoadingBalances } = useCoinBalances({
     convert: true,
@@ -325,7 +328,7 @@ function WithdrawForm({
               {t('confirmation.continue')}
             </ZigButton>
             <ZigButton
-              sx={{ position: 'absolute', right: '-22px', bottom: '-7px' }}
+              sx={{ position: 'absolute', right: '-22px', bottom: 0 }}
               id={'withdraw-modal__history'}
               startIcon={
                 <Box mt='5px'>
@@ -337,7 +340,7 @@ function WithdrawForm({
                 </Box>
               }
               variant='text'
-              onClick={close}
+              onClick={() => navigate(ROUTE_MY_BALANCES_TRANSACTIONS)}
             >
               {t('history')}
             </ZigButton>

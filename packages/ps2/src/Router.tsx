@@ -80,6 +80,10 @@ const Router: React.FC = () => (
           element={<MyBalancesDeposit bgRoute={Routes.ROUTE_MY_BALANCES} />}
         />
       </Route>
+      <Route
+        path={Routes.ROUTE_MY_BALANCES_TRANSACTIONS}
+        element={outleted(<MyBalances />)}
+      />
       <Route path={Routes.ROUTE_WALLET} element={<Wallet />} />
       <Route path={Routes.ROUTE_REFERRALS} element={<Referrals />} />
       <Route path={Routes.ROUTE_REWARDS} element={<Rewards />} />
