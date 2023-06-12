@@ -157,7 +157,7 @@ function WithdrawForm({
     return <CenteredLoader />;
   }
 
-  if (confirmationData && step === 'confirm') {
+  if (confirmationData && ['confirm', 'success'].includes(step)) {
     return (
       <WithdrawConfirmForm
         action={handleWithdraw}
