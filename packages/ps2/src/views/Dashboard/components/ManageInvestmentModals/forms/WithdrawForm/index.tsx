@@ -1,15 +1,14 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Controller, FieldErrorsImpl, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import {
   ErrorMessage,
   ZigSelect,
-  InputAmountAdvanced,
   ZigButton,
   ZigInput,
   ZigTypography,
-  InputAmountAdvancedValueType,
   CenteredLoader,
+  ZigInputAmount,
 } from '@zignaly-open/ui';
 import { WithdrawFormData } from './types';
 import { Box } from '@mui/material';
@@ -19,14 +18,12 @@ import {
 } from '../../../../../../apis/coin/use';
 import { WithdrawModalProps } from '../../types';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { WithdrawValidation } from './validations';
+import { withdrawAmountValidation } from './validations';
 import { Form, ModalActions } from 'components/ZModal';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
-import LabelValueLine from './atoms/LabelValueLine';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import { useWithdrawMutation } from 'apis/coin/api';
 import { useActiveExchange, useCheck2FA } from 'apis/user/use';
-import { precisionNumberToDecimals } from '../../../../../../util/numbers';
 
 function WithdrawForm({
   setStep,
@@ -55,7 +52,7 @@ function WithdrawForm({
         exchangeInternalId: internalId,
         address: confirmationData.address,
         tag: confirmationData.tag,
-        amount: confirmationData.amount.value.toString(),
+        amount: confirmationData.amount,
         code,
       }).unwrap();
 
@@ -77,9 +74,16 @@ function WithdrawForm({
     defaultValues: {
       address: '',
       tag: '',
+      amount: '',
     },
     resolver: (data, context, options) =>
-      yupResolver(WithdrawValidation(networkObject))(data, context, options),
+      yupResolver(
+        withdrawAmountValidation(
+          coin,
+          coinObject?.available.toString(),
+          networkObject,
+        ),
+      )(data, context, options),
   });
 
   const coin = watch('coin') as string;
@@ -142,7 +146,7 @@ function WithdrawForm({
 
   useEffect(() => {
     const { amount, address } = getValues();
-    if (amount && amount.value !== '') {
+    if (amount) {
       trigger('amount');
     }
 
@@ -163,7 +167,7 @@ function WithdrawForm({
         action={handleWithdraw}
         status={withdrawStatus}
         {...confirmationData}
-        amount={Number(confirmationData.amount.value)}
+        amount={Number(confirmationData.amount)}
         networkName={networkObject.name}
         networkCoin={networkObject.network}
         coin={coin}
@@ -181,7 +185,7 @@ function WithdrawForm({
       })}
       autoComplete='off'
     >
-      <ZigTypography id={'withdraw-modal-description'}>
+      <ZigTypography id={'withdraw-modal-description'} textAlign='center'>
         {t('description')}
       </ZigTypography>
 
@@ -200,6 +204,7 @@ function WithdrawForm({
             placeholder={t('coinSelector.placeholder')}
             options={coinOptions}
             filterOption={filterOptions}
+            width={260}
             {...field}
           />
         )}
@@ -218,6 +223,7 @@ function WithdrawForm({
             label={t('networkSelector.label')}
             placeholder={t('networkSelector.placeholder')}
             options={coinObject?.networks}
+            width={260}
             {...field}
           />
         )}
@@ -278,57 +284,32 @@ function WithdrawForm({
 
           <Box sx={{ minHeight: 134 }}>
             {coinObject && (
-              <div>
-                <InputAmountAdvanced
-                  name='amount'
-                  id={'withdraw-modal__input-amount'}
-                  control={control}
-                  label={t('amountToWithdraw.label')}
-                  showUnit={true}
-                  showBalance={false}
-                  placeholder='0.0'
-                  tokens={[
-                    {
-                      id: coin,
-                      balance: coinObject.available,
-                    },
-                  ]}
-                  error={t(
-                    (
-                      errors?.amount as FieldErrorsImpl<InputAmountAdvancedValueType>
-                    )?.value?.message,
-                    {
-                      maxDecimals: precisionNumberToDecimals(
-                        networkObject?.integerMultiple,
-                      ),
-                    },
-                  )}
-                />
-                <Box mt={1}>
-                  <LabelValueLine
-                    prefixId={'withdraw-modal-balance'}
-                    label={t('amountToWithdraw.labelBalance')}
-                    value={coinObject.available.toString()}
+              <Controller
+                name={'amount'}
+                control={control}
+                rules={{ required: true }}
+                render={({ field }) => (
+                  <ZigInputAmount
+                    id={'withdraw-modal__input-amount'}
+                    label={t('amountToWithdraw.label')}
+                    labelInline={false}
+                    wide={true}
                     coin={coin}
+                    balance={coinObject.available}
+                    min={networkObject?.withdrawMin}
+                    extraInfo={{
+                      others: networkObject?.withdrawFee && [
+                        {
+                          label: t('amountToWithdraw.fee'),
+                          value: networkObject?.withdrawFee,
+                        },
+                      ],
+                    }}
+                    error={t(errors?.amount?.message)}
+                    {...field}
                   />
-                </Box>
-                {networkObject && (
-                  <>
-                    <LabelValueLine
-                      prefixId={'withdraw-modal-minimum'}
-                      label={t('amountToWithdraw.minimum')}
-                      value={networkObject.withdrawMin}
-                      coin={coin}
-                    />
-                    <LabelValueLine
-                      prefixId={'withdraw-modal-fee'}
-                      label={t('amountToWithdraw.fee')}
-                      value={networkObject.withdrawFee}
-                      coin={coin}
-                    />
-                  </>
                 )}
-              </div>
+              />
             )}
           </Box>
 
