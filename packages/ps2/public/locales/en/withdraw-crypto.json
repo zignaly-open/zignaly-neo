@@ -1,6 +1,6 @@
 {
   "title": "Withdraw Crypto",
-  "description": "Withdraw crypto to an external account.",
+  "description": "Withdraw crypto to an external account. To move funds between Zignaly accounts, use a transfer instead.",
   "coinSelector": {
     "label": "Coin:",
     "placeholder": "Search a coin"
@@ -21,7 +21,7 @@
     "invalid": "MEMO/Tag is invalid, please review your target wallet network details"
   },
   "amountToWithdraw": {
-    "label": "Amount to Withdraw:",
+    "label": "Amount:",
     "labelBalance": "Available:",
     "minimum": "Minimum:",
     "fee": "Fee:"
@@ -39,11 +39,12 @@
     "address": "Withdrawal Address:",
     "amount": "Withdrawal Amount:",
     "networkFee": "Network Fee:",
-    "continue": "Continue to Confirmation",
+    "continue": "Continue",
     "withdrawNow": "Withdraw now"
   },
   "success": {
     "title": "Withdrawal Success",
     "description": "Your withdrawal request has been sent and should be processed shortly."
-  }
+  },
+  "history": "History"
 }

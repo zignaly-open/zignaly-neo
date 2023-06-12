@@ -2,17 +2,17 @@ import { Divider } from "@mui/material";
 import { styled, Box } from "@mui/system";
 import ZigButton from "../ZigButton";
 
-export const Layout = styled(Box)<{ error: boolean }>`
+export const Layout = styled(Box)<{ error: boolean; labelInline: boolean }>`
   border: 1px dotted ${({ theme }) => theme.palette.neutral600};
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-top: none;
   padding: 24px 24px 12px;
   position: relative;
   border-radius: 5px;
 
   ${({ error, theme }) => error && `border-color: ${theme.palette.redGraphOrError};`}
+  ${({ labelInline }) => labelInline && `border-top: none`}
 
   && {
     .MuiInput-root {
