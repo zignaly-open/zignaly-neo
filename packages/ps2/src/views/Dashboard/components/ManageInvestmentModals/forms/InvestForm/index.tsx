@@ -89,10 +89,8 @@ function InvestForm({ view, setView }: InvestFormProps) {
     [reinvestAmount],
   );
 
-  const hasAgreedToAll =
-    watch('understandMargin') &&
-    watch('understandMoneyTransferred') &&
-    watch('understandDisconnecting');
+  const hasAgreedToAll = watch('understandRisk');
+
   useEffect(() => {
     hasAgreedToAll && trackCta({ ctaId: 'agreed-to-all' });
   }, [hasAgreedToAll]);
