@@ -299,6 +299,7 @@ function WithdrawForm({
                     balance={coinObject.available}
                     min={networkObject?.withdrawMin}
                     extraInfo={{
+                      wrapExtraInfo: 3,
                       others: networkObject?.withdrawFee && [
                         {
                           label: t('amountToWithdraw.fee'),
