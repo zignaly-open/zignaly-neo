@@ -274,8 +274,6 @@ export default function ZigTable<T extends object>({
             display="flex"
             gap={2}
             alignItems="center"
-            mx={2}
-            flexBasis={["100%", "auto"]}
             justifyContent={["center", "flex-end"]}
             marginTop={[1, 0]}
           >
