@@ -1,5 +1,5 @@
 import React from 'react';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigArrowOutIcon, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import ExchangesTooltip from './atoms/ExchangesTooltip';
 import { Box, Divider, Grid } from '@mui/material';
 import { BUY_CRYPTO_URL } from 'util/constants';
@@ -7,7 +7,6 @@ import { AddUsdtFormProps } from './types';
 import { useZModal } from 'components/ZModal/use';
 import { useTranslation, Trans } from 'react-i18next';
 import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
-import NorthEastIcon from '@mui/icons-material/NorthEast';
 
 const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
   const { t } = useTranslation('wallet');
@@ -16,7 +15,7 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
   return (
     <>
       <Grid container sx={{ padding: '10px 0' }}>
-        <Grid item xs={12} sx={{ paddingRight: '0px' }}>
+        <Grid item xs={12} sx={{ paddingRight: '0px', textAlign: 'center' }}>
           <ZigTypography my={1} lineHeight={1.8}>
             <Trans
               i18nKey='buy.deposit.description'
@@ -43,7 +42,6 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 width: '100%',
-                padding: '0 55px',
               }}
             >
               <Box
@@ -64,7 +62,6 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
               </Box>
 
               <ZigButton
-                variant='contained'
                 id={'choose-deposit-type__deposit'}
                 size={'large'}
                 onClick={() => {
@@ -83,7 +80,7 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
 
           <Grid item container xs={false} md={1} justifyContent='center'>
             <Divider
-              sx={{ border: '1px solid #A8A8A830' }}
+              sx={{ border: '1px dotted #A8A8A830' }}
               orientation={'vertical'}
               flexItem
               role={'presentation'}
@@ -94,7 +91,7 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
             <Box
               sx={{
                 width: '100%',
-                padding: '0 55px',
+                padding: '0 22px',
                 display: 'flex',
                 flexDirection: 'column',
               }}
@@ -110,10 +107,15 @@ const AddUsdtForm = ({ close }: AddUsdtFormProps) => {
               </Box>
               <ZigButton
                 href={BUY_CRYPTO_URL}
-                variant='contained'
                 id={'choose-deposit-type__purchase'}
                 size={'large'}
-                endIcon={<NorthEastIcon />}
+                endIcon={
+                  <ZigArrowOutIcon
+                    width={'9px'}
+                    height={'9px'}
+                    style={{ marginBottom: '2px' }}
+                  />
+                }
               >
                 {t('buy.deposit.buyCoin', { coin: 'USDT' })}
               </ZigButton>

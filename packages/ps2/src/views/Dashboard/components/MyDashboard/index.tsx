@@ -6,6 +6,7 @@ import {
   ZigTablePriceLabel,
   ZigButton,
   ZigPlusIcon,
+  getPrecisionForCoin,
 } from '@zignaly-open/ui';
 import React, { useMemo } from 'react';
 import { Heading, Layout, ZigTableWrapper } from './styles';
@@ -109,7 +110,7 @@ const MyDashboard: React.FC = () => {
                   id={`portfolio-table__chart-${original.serviceId}`}
                   midLine
                   data={[0, ...(original.sparklines as number[])]}
-                  precision={2}
+                  precision={getPrecisionForCoin(original.ssc)}
                 />
                 <ChangeIndicator
                   id={`portfolio-table__chart-percentage-${original.serviceId}`}

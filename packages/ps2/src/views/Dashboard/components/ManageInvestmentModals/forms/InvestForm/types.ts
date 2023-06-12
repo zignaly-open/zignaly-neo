@@ -1,15 +1,15 @@
+import { InvestmentViews } from '../../types';
+
 export type InvestFormProps = {
   close: () => void;
-  onInvested: () => void;
+  view: InvestmentViews;
+  setView: (view: InvestmentViews) => void;
 };
 
 export type InvestFormData = {
-  step: 1 | 2;
   profitPercentage: string | number;
   transferConfirm: string;
   transferLabelForValidation: string;
-  understandMargin: boolean;
-  understandMoneyTransferred: boolean;
-  understandDisconnecting: boolean;
+  understandRisk: boolean;
   amountTransfer?: string;
 };

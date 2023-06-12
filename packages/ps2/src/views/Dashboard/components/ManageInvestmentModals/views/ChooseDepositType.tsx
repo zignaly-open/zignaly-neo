@@ -1,8 +1,7 @@
 import React from 'react';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigArrowOutIcon, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { Box, Divider, Grid } from '@mui/material';
-import NorthEastIcon from '@mui/icons-material/NorthEast';
 import { BUY_CRYPTO_URL } from '../../../../../util/constants';
 import { ChooseDepositTypeViews } from '../types';
 
@@ -11,14 +10,12 @@ const ChooseDepositType: React.FC<{
   setView: (view: ChooseDepositTypeViews) => void;
 }> = ({ coin, setView }) => {
   const { t } = useTranslation('deposit-crypto');
-
   return (
     <>
       <Grid container sx={{ padding: '10px 0' }}>
-        <Grid item xs={12} sx={{ paddingRight: '38px' }}>
+        <Grid item xs={12} sx={{ paddingRight: '10px', textAlign: 'center' }}>
           <ZigTypography
             variant={'body1'}
-            fontSize={'15px'}
             id={'modal-choose-deposit-type__description'}
           >
             {t('service-deposit.description', { coin })}
@@ -37,7 +34,6 @@ const ChooseDepositType: React.FC<{
                 flexDirection: 'column',
                 alignItems: 'center',
                 width: '100%',
-                padding: '0 50px',
               }}
             >
               <Box
@@ -71,14 +67,14 @@ const ChooseDepositType: React.FC<{
 
           <Grid item container xs={false} md={1} justifyContent='center'>
             <Divider
-              sx={{ border: '1px solid #A8A8A830' }}
+              sx={{ border: '1px dotted #A8A8A830' }}
               orientation={'vertical'}
               flexItem
               role={'presentation'}
             />
           </Grid>
 
-          <Grid item xs={12} md={5}>
+          <Grid item xs={12} md={5} marginLeft={'15px'}>
             <Box
               sx={{
                 textAlign: 'center',
@@ -96,7 +92,13 @@ const ChooseDepositType: React.FC<{
                 href={BUY_CRYPTO_URL}
                 variant='contained'
                 id={'modal-choose-deposit-type__purchase'}
-                endIcon={<NorthEastIcon />}
+                endIcon={
+                  <ZigArrowOutIcon
+                    width={'9px'}
+                    height={'9px'}
+                    style={{ marginBottom: '2px' }}
+                  />
+                }
                 size={'large'}
               >
                 {t('service-deposit.buttons.purchase', { coin })}

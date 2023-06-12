@@ -1,9 +1,10 @@
-import { Box, Divider } from "@mui/material";
+import { Box, Divider, Tooltip } from "@mui/material";
 import ZigTypography from "components/display/ZigTypography";
 import React, { useMemo } from "react";
 import { InputExtraInfoFalseableItem, InputExtraInfoItem, InputExtraInfoProps } from "./types";
-import { NumericFormat } from "react-number-format";
+import { NumericFormat, numericFormatter } from "react-number-format";
 import { getPrecisionForCoin } from "components/display/ZigPriceLabel/util";
+import { trimZeros } from "utils/numbers";
 
 const DEFAULT_ITEMS = {
   balance: "Available:",
@@ -27,6 +28,30 @@ const extractItem = (
     if (!defaultValue) return null;
     return { value: defaultValue, label: item ?? defaultLabel ?? "" };
   }
+};
+
+const WithTooltip = ({
+  value,
+  coin,
+  children,
+}: {
+  value?: string | number;
+  coin?: string;
+  children: JSX.Element;
+}) => {
+  return value ? (
+    <Tooltip
+      disableInteractive
+      title={`${numericFormatter(trimZeros((+value)?.toFixed(8)), {
+        thousandSeparator: true,
+        displayType: "text",
+      })} ${coin}`}
+    >
+      <span>{children}</span>
+    </Tooltip>
+  ) : (
+    children
+  );
 };
 
 export const InputExtraInfo = (
@@ -84,13 +109,15 @@ export const InputExtraInfo = (
               {(item as InputExtraInfoItem).label}
               &nbsp;
               <ZigTypography variant="body2" color="neutral100">
-                <NumericFormat
-                  value={(item as InputExtraInfoItem).value}
-                  displayType="text"
-                  thousandSeparator={true}
-                  suffix={` ${coin}`}
-                  decimalScale={getPrecisionForCoin(coin, (item as InputExtraInfoItem).value)}
-                />
+                <WithTooltip value={(item as InputExtraInfoItem).value} coin={coin}>
+                  <NumericFormat
+                    value={(item as InputExtraInfoItem).value}
+                    displayType="text"
+                    thousandSeparator={true}
+                    suffix={` ${coin}`}
+                    decimalScale={getPrecisionForCoin(coin, (item as InputExtraInfoItem).value)}
+                  />
+                </WithTooltip>
               </ZigTypography>
             </ZigTypography>
           )}

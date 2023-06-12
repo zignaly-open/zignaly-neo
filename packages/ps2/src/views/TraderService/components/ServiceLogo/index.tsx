@@ -56,7 +56,11 @@ const ServiceLogo = ({
         )}
       </LogoContainer>
 
-      <ZigButton startIcon={<Edit />} variant='text' component='label'>
+      <ZigButton
+        startIcon={<Edit sx={{ width: '12px', height: '12px' }} />}
+        variant='text'
+        component='label'
+      >
         {t('edit.logo')}
         <input hidden type='file' onChange={uploadLogo} />
       </ZigButton>

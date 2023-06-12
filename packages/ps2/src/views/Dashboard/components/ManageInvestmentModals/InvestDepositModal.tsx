@@ -54,7 +54,7 @@ function InvestDepositModal({
     return null;
   }
 
-  const { title, component } =
+  const { title, component, onGoBack } =
     (showDeposit ? depositModal : investModal) || ({} as UseModalReturn);
 
   return (
@@ -63,11 +63,14 @@ function InvestDepositModal({
       {...props}
       close={props.close}
       isLoading={!ready}
+      onGoBack={onGoBack}
       wide
     >
       {ready && component()}
     </ZModal>
   );
 }
+
+// InvestDepositModal.trackId = 'invest';
 
 export default InvestDepositModal;
