@@ -198,7 +198,7 @@ function EditInvestmentForm({
         )}
       />
 
-      <ModalActions direction='column'>
+      <ModalActions direction='column' mt='25px'>
         <ZigButton
           variant={'text'}
           id={'edit-investment-modal__withdraw'}
