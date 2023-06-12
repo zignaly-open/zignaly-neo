@@ -152,7 +152,7 @@ function WalletWithdrawForm({
 
   const balance = balances[selectedCoin]?.availableBalance ?? 0;
 
-  if (confirmationData && step === 'confirm') {
+  if (confirmationData && ['confirm', 'success'].includes(step)) {
     return (
       <WithdrawConfirmForm
         coin={selectedCoin}

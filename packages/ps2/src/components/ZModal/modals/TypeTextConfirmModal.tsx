@@ -8,7 +8,7 @@ import { ConfirmModalProps } from './ConfirmModal';
 
 export type TypeTextConfirmModalProps = {
   safeWord: string;
-  noCancelButton: boolean;
+  cancelButton: boolean;
 } & ConfirmModalProps;
 
 function TypeTextConfirmModal({
@@ -21,7 +21,7 @@ function TypeTextConfirmModal({
   yesButtonProps,
   noLabel,
   noAction,
-  noCancelButton = false,
+  cancelButton = true,
   ...props
 }: {
   close: () => void;
@@ -40,7 +40,7 @@ function TypeTextConfirmModal({
       )}
 
       <ZigInput
-        label={t('common:type-to-confirm', { word: safeWord })}
+        label={t('common:type-to-confirm', { word: safeWord.toUpperCase() })}
         onChange={(e) => {
           setConfirmWord(e.target.value);
         }}
@@ -56,7 +56,6 @@ function TypeTextConfirmModal({
         }}
       >
         <ZigButton
-          variant={'contained'}
           disabled={typedCorrectly}
           tooltip={
             typedCorrectly
@@ -74,7 +73,7 @@ function TypeTextConfirmModal({
           {yesLabel || t('confirm')}
         </ZigButton>
 
-        {!noCancelButton && (
+        {cancelButton && (
           <ZigButton
             sx={{ ml: 1 }}
             variant={'outlined'}

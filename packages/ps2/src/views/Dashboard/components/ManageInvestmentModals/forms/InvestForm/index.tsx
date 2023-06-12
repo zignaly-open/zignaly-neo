@@ -30,8 +30,9 @@ import { Field, ZigInputWrapper } from './styles';
 import { NumericFormat } from 'react-number-format';
 import { trackCta } from '@zignaly-open/tracker';
 import { useDebounce } from 'react-use';
+import { InvestmentViews } from '../../types';
 
-function InvestForm({ onInvested }: InvestFormProps) {
+function InvestForm({ view, setView }: InvestFormProps) {
   const coin = useCurrentBalance();
   const { t } = useTranslation(['edit-investment', 'action']);
   const service = useSelectedInvestment();
@@ -56,8 +57,7 @@ function InvestForm({ onInvested }: InvestFormProps) {
       amountTransfer: '',
       transferLabelForValidation: transferMagicWord,
       transferConfirm: '',
-      profitPercentage: 30,
-      step: 1,
+      profitPercentage: 0,
     },
     resolver: yupResolver(
       editInvestmentValidation({
@@ -67,6 +67,7 @@ function InvestForm({ onInvested }: InvestFormProps) {
           .minus(serviceDetails.pending)
           .toString(),
         coin: service.ssc,
+        checkTransferInput: view === InvestmentViews.InvestmentConfirm,
       }),
     ),
   });
@@ -75,11 +76,10 @@ function InvestForm({ onInvested }: InvestFormProps) {
 
   const onSubmitFirstStep = () => {
     setValue('transferConfirm', '');
-    setValue('step', 2);
+    setView(InvestmentViews.InvestmentConfirm);
   };
 
   const reinvestAmount = watch('profitPercentage')?.toString();
-  const isConfirmation = watch('step') === 2;
 
   useDebounce(
     () => {
@@ -112,7 +112,7 @@ function InvestForm({ onInvested }: InvestFormProps) {
         serviceName: service.serviceName,
       }),
     );
-    onInvested();
+    setView(InvestmentViews.InvestmentSuccess);
   };
 
   const renderDepositCoin = () => (
@@ -135,7 +135,7 @@ function InvestForm({ onInvested }: InvestFormProps) {
     </ZigButton>
   );
 
-  if (isConfirmation) {
+  if (view === InvestmentViews.InvestmentConfirm) {
     return (
       <form onSubmit={handleSubmit(onSubmitSecondStep)}>
         <Field>
@@ -288,44 +288,14 @@ function InvestForm({ onInvested }: InvestFormProps) {
       >
         <Controller
           control={control}
-          name='understandMargin'
+          name='understandRisk'
           defaultValue={false}
           render={({ field: { onChange, value } }) => (
             <CheckBox
-              id={'invest-modal__understand-margin'}
+              id={'invest-modal__understand-risk'}
               onChange={onChange}
               value={value}
-              label={t('invest-modal.i-understand-margin', {
-                coin: service.ssc,
-              })}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name='understandMoneyTransferred'
-          defaultValue={false}
-          render={({ field: { onChange, value } }) => (
-            <CheckBox
-              id={'invest-modal__understand-money-transferred'}
-              onChange={onChange}
-              value={value}
-              label={t('invest-modal.i-understand-money-transferred')}
-            />
-          )}
-        />
-
-        <Controller
-          control={control}
-          name='understandDisconnecting'
-          defaultValue={false}
-          render={({ field: { onChange, value } }) => (
-            <CheckBox
-              id={'invest-modal__understand-disconnecting'}
-              onChange={onChange}
-              value={value}
-              label={t('invest-modal.i-understand-disconnecting')}
+              label={t('invest-modal.i-understand-risk')}
             />
           )}
         />

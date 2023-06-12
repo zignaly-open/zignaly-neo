@@ -8,14 +8,7 @@ import {
   getSortedRowModel,
   getExpandedRowModel,
 } from "@tanstack/react-table";
-import {
-  TableContainer,
-  HeaderIconButton,
-  PageNumberContainer,
-  SmallSelectWrapper,
-  SortBox,
-  HeaderBox,
-} from "./styles";
+import { TableContainer, HeaderIconButton, SmallSelectWrapper, SortBox, HeaderBox } from "./styles";
 import ZigDropdown from "../ZigDropdown";
 import ZigTypography from "../ZigTypography";
 import CheckBox from "../../inputs/CheckBox";
@@ -237,11 +230,11 @@ export default function ZigTable<T extends object>({
               id={prefixId && `${prefixId}-table__pages`}
             >
               <ZigTypography color="neutral300">Page</ZigTypography>
-              <PageNumberContainer>
-                <ZigTypography variant="h3" color="neutral100">
-                  {table.getState().pagination.pageIndex + 1}
-                </ZigTypography>
-              </PageNumberContainer>
+
+              <ZigTypography variant="h3" color="neutral100">
+                {table.getState().pagination.pageIndex + 1}
+              </ZigTypography>
+
               {table.getPageCount() !== -1 && (
                 <>
                   <ZigTypography whiteSpace="nowrap" color="neutral300">

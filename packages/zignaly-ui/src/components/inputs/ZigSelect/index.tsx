@@ -65,6 +65,7 @@ function ZigSelect<T>({
   const theme = useTheme() as Theme;
   const styles = useMemo(() => customStyles(small, theme, userStyles), [small, theme, userStyles]);
 
+  console.log(label);
   return (
     // @ts-ignore
     <StyledSelectWrapper error={error} width={width} small={small} outlined={outlined}>

@@ -139,6 +139,7 @@ function AuthVerifyModal({
       <Title data-testid={'auth-verify-modal__title'}>
         {texts.description && (
           <ZigTypography
+            whiteSpace='pre-line'
             id={'auth-verify-modal__description'}
             textAlign={'center'}
           >

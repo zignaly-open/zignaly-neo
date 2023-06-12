@@ -31,6 +31,9 @@ const ServicePercentageInfo: React.FC<{
             color={getColorForNumber(value)}
             value={+value}
             coin={ssc}
+            coinProps={{
+              paddingTop: '6px',
+            }}
           />
           <PercentChange value={percent} id={id && `${id}-pct`} />
         </>

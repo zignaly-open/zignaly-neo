@@ -2,6 +2,7 @@
 // TODO: we have mui icons for a bloody reason
 // UPD: apparently no, and we'll be using these ones ¯\_(ツ)_/¯
 export { ReactComponent as ZigCloneIcon } from "assets/icons/clone-icon.svg";
+export { ReactComponent as ZigArrowOutIcon } from "assets/icons/arrow-out-icon.svg";
 export { ReactComponent as ZigRefreshIcon } from "assets/icons/refresh-icon.svg";
 export { ReactComponent as ZigPencilIcon } from "assets/icons/pencil-icon.svg";
 export { ReactComponent as ZigWhaleIcon } from "assets/icons/whale-icon.svg";
@@ -16,6 +17,7 @@ export { ReactComponent as ZigArrowUpIcon } from "assets/icons/arrow-up-icon.svg
 export { ReactComponent as ZigArrowLeftIcon } from "assets/icons/arrow-left-icon.svg";
 export { ReactComponent as ZigArrowRightIcon } from "assets/icons/arrow-right-icon.svg";
 export { ReactComponent as ZigUserIcon } from "assets/icons/user-icon.svg";
+export { ReactComponent as ZigLoginUserIcon } from "assets/icons/login-user-icon.svg";
 export { ReactComponent as ZigCheckIcon } from "assets/icons/check-icon.svg";
 export { ReactComponent as ZigLogoDiscordIcon } from "assets/icons/discord-logo-icon.svg";
 export { ReactComponent as ZigPlusIcon } from "assets/icons/plus-icon.svg";
@@ -42,3 +44,4 @@ export { ReactComponent as ZigCaretRightIcon } from "assets/icons/caret-right.sv
 export { ReactComponent as ZigDotsVerticalIcon } from "assets/icons/dots-vertical.svg";
 export { ReactComponent as ZigDotsHorizontalIcon } from "assets/icons/dots-horizontal.svg";
 export { ReactComponent as ZigCrossCircleIcon } from "assets/icons/cross-circle-icon.svg";
+export { ReactComponent as ZigBackIcon } from "assets/icons/back-icon.svg";

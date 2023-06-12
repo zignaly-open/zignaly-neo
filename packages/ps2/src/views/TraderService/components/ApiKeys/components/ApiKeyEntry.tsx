@@ -25,7 +25,7 @@ import { BackendErrorResponse } from '../../../../../util/errors';
 const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
   const { t, i18n } = useTranslation(['management', 'action']);
   const { serviceId } = useParams();
-  const refetchIfDesyncronized = useRefetchIfDesynchronizedState();
+  const refetchIfDesynchronized = useRefetchIfDesynchronizedState();
   const { showModal } = useZModal();
   const askConfirm = useZTypeWordConfirm();
   const toast = useToast();
@@ -36,7 +36,8 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
 
   const handleDeleteWrapper = async (args: ServiceApiKeyDeletePayload) => {
     const result = await deleteKey(args);
-    'error' in result && refetchIfDesyncronized(result as BackendErrorResponse);
+    'error' in result &&
+      refetchIfDesynchronized(result as BackendErrorResponse);
   };
 
   return (
@@ -104,10 +105,9 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
                 yesLabel: t('action:delete'),
                 yesButtonProps: {
                   color: 'danger',
-                  variant: 'outlined',
                 },
                 description: t('api-keys.delete-description'),
-                noCancelButton: true,
+                cancelButton: false,
                 yesAction: () => {
                   delete2FA((code) =>
                     handleDeleteWrapper({ serviceId, keyId: apiKey.id, code }),

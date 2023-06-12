@@ -229,33 +229,34 @@ function WithdrawForm({
         </Box>
       ) : (
         <>
-          <Controller
-            name='address'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <ZigInput
-                fullWidth
-                id={'withdraw-modal__input-address'}
-                label={t('withdrawAddress.label')}
-                placeholder={t('withdrawAddress.placeholder')}
-                error={t(errors.address?.message)}
-                {...field}
-              />
+          <div>
+            <Controller
+              name='address'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <ZigInput
+                  fullWidth
+                  id={'withdraw-modal__input-address'}
+                  label={t('withdrawAddress.label')}
+                  placeholder={t('withdrawAddress.placeholder')}
+                  error={t(errors.address?.message)}
+                  {...field}
+                />
+              )}
+            />
+            {networkObject?.label && (
+              <Box>
+                <ErrorMessage
+                  id={'withdraw-modal__input-address-warning'}
+                  text={t('withdrawAddress.warning', {
+                    network: networkObject?.label,
+                    coin: coinObject?.name,
+                  })}
+                />
+              </Box>
             )}
-          />
-
-          {networkObject?.label && (
-            <Box>
-              <ErrorMessage
-                id={'withdraw-modal__input-address-warning'}
-                text={t('withdrawAddress.warning', {
-                  network: networkObject?.label,
-                  coin: coinObject?.name,
-                })}
-              />
-            </Box>
-          )}
+          </div>
 
           {!!networkObject?.memoRegex && (
             <Controller

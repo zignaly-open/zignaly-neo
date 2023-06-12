@@ -11,6 +11,7 @@ function WithdrawInvestmentSuccess({ close }: { close: () => void }) {
         variant={'body1'}
         color={'neutral200'}
         id={'withdraw-modal-success__description'}
+        textAlign={'center'}
       >
         {t('withdrawal-success.description')}
       </ZigTypography>
