@@ -30,7 +30,7 @@ export const LoginButton = styled('span')`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 6px;
+  margin-top: 4px;
   gap: 4px;
   cursor: pointer;
 

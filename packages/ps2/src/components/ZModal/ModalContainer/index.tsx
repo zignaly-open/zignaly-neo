@@ -28,8 +28,8 @@ const ModalContainer = forwardRef((props: ModalContainerProps, ref) => {
       {onGoBack && typeof onGoBack === 'function' && (
         <BackIconButton onClick={onGoBack}>
           <ZigBackIcon
-            width={'24px'}
-            height={'24px'}
+            width={'32px'}
+            height={'32px'}
             color={theme.palette.neutral100}
             id={'modal__back'}
           />

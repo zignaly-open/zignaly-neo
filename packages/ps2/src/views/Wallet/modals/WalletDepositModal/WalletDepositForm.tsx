@@ -79,18 +79,21 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
 
       {!!network && networkObject?.depositEnable && (
         <>
-          <ZigCopyText
-            label={t('depositAddress.label')}
-            value={loading ? t('depositAddress.loading') : depositInfo?.address}
-            onCopied={() => toast.success(t('depositAddress.copied'))}
-          />
-
-          <ErrorMessage
-            text={t('depositAddress.warning', {
-              network: networkObject?.name,
-              coin: coinObject?.name,
-            })}
-          />
+          <div>
+            <ZigCopyText
+              label={t('depositAddress.label')}
+              value={
+                loading ? t('depositAddress.loading') : depositInfo?.address
+              }
+              onCopied={() => toast.success(t('depositAddress.copied'))}
+            />
+            <ErrorMessage
+              text={t('depositAddress.warning', {
+                network: networkObject?.name,
+                coin: coinObject?.name,
+              })}
+            />
+          </div>
 
           {!!depositInfo?.memo && (
             <ZigCopyText
