@@ -61,22 +61,6 @@ export const Grid = styled('div')`
   margin-top: 12px;
 `;
 
-export const WithdrawFundsOptionWrapper = styled('div')<{ border?: boolean }>`
-  flex-direction: column;
-  display: flex;
-
-  height: 100%;
-`;
-
-export const WithdrawFundsButtonWrapper = styled('div')`
-  text-align: center;
-  margin-top: 56px;
-
-  button {
-    min-width: 170px;
-  }
-`;
-
 export const TransactionContainer = styled('div')`
   margin: 42px -10px 0;
 `;
