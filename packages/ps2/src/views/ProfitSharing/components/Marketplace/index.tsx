@@ -165,7 +165,7 @@ const Marketplace: React.FC = () => {
               textAlign: 'start',
               width: '10px',
             }}
-            id={`portfolio-table__link-${row.original.id}`}
+            id={`marketplace-table__link-${row.original.id}`}
           >
             <ArrowForwardIosIcon
               sx={{ color: '#26c4c1', width: '20px', height: '20px' }}
