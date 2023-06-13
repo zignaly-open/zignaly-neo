@@ -1,15 +1,11 @@
 import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Controller, FieldErrorsImpl, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Box, Grid } from '@mui/material';
 import { WithdrawActions } from '../../styles';
 import {
   ZigButton,
   CenteredLoader,
-  InputAmountAdvanced,
-  InputAmountAdvancedValueType,
-  ZigSliderInput,
   ZigTypography,
   ZigInputAmount,
   ZigSlider,
@@ -20,18 +16,13 @@ import {
   useSelectedInvestment,
   useWithdrawInvestment,
 } from '../../../../../../apis/investment/use';
-import {
-  EditInvestmentValidation,
-  EditInvestmentValidationOwner,
-  withdrawValidation,
-} from './validations';
+import { withdrawValidation } from './validations';
 import { WithdrawInvestmentFormFormData } from './types';
 import { ChangeViewFn, EditInvestmentViews } from '../../types';
 import { useToast } from '../../../../../../util/hooks/useToast';
 import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 import { useServiceDetails } from '../../../../../../apis/service/use';
 import { trimZeros } from '@zignaly-open/ui';
-import { inputAmountValidation } from 'util/validation';
 import { Form } from 'components/ZModal';
 
 const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
@@ -64,8 +55,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
     control,
     watch,
     setValue,
-    trigger,
-    formState: { errors, isDirty, isValid },
+    formState: { errors, isValid },
   } = useForm<WithdrawInvestmentFormFormData>({
     mode: 'onChange',
     reValidateMode: 'onChange',
@@ -81,9 +71,6 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
     ),
   });
 
-  const watchAmountTransfer = watch(
-    'amountTransfer',
-  ) as WithdrawInvestmentFormFormData['amountTransfer'];
   const onSubmit = async (values: WithdrawInvestmentFormFormData) => {
     await withdraw({
       amount: values.amountTransfer,
@@ -92,12 +79,11 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
     toast.success(t('edit-investment:withdrawInvestmentSuccess'));
     setView(EditInvestmentViews.WithdrawSuccess);
   };
-  const tokenBalance = new BigNumber(coin.balance);
-  const amount = new BigNumber(watchAmountTransfer?.value);
 
-  let sliderValue = +amount
+  const watchAmountTransfer = watch('amountTransfer');
+  let sliderValue = +new BigNumber(watchAmountTransfer)
     .multipliedBy(new BigNumber(100))
-    .div(tokenBalance)
+    .div(new BigNumber(coin.balance))
     .dp(2);
   if (isNaN(sliderValue)) sliderValue = 0;
   sliderValue = Math.min(sliderValue, 100);
@@ -133,6 +119,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
             {...field}
           >
             <ZigSlider
+              value={sliderValue}
               prefixId={'withdraw-modal-amount-transfer'}
               onChange={(
                 _: React.ChangeEvent<HTMLInputElement>,
@@ -146,6 +133,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
                       .dividedBy(100)
                       .toFixed(8),
                   ),
+                  { shouldValidate: true },
                 );
               }}
             />

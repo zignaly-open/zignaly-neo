@@ -4,7 +4,7 @@ export const Field = styled('div')`
   display: grid;
   grid-template-columns: 0.7fr 1fr;
   gap: 34px;
-  margin-bottom: 54px;
+  margin-bottom: 50px;
 
   > div:first-child {
     padding-right: 17px;

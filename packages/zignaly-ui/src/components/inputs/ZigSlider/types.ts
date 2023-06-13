@@ -5,8 +5,6 @@ export type SliderLabels = {
   start?: string;
   end?: string;
   className?: string;
-  /** Format slider value, by default it will shows value + % if max is 100. Set to null to disable. */
-  valueLabelFormat?: (value: number) => string;
   showValues?: boolean;
   /**
    * Left value: max - value, Right value: value
@@ -14,7 +12,10 @@ export type SliderLabels = {
    */
   invertSliderValues?: boolean;
 };
+
 export type ZigSliderProps = SliderProps & {
   prefixId?: string;
   labels?: SliderLabels;
+  /** Format slider value, by default it will add a % sign if max is 100. Set to null to always show the number only. */
+  valueLabelFormat?: (value: number) => string;
 };

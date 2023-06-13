@@ -17,8 +17,12 @@ const marks = [
 ];
 
 const ZigSlider = forwardRef(
-  ({ labels = {}, prefixId, className = "", ...props }: ZigSliderProps, ref) => {
-    const { start, end, showValues = true, valueLabelFormat } = labels;
+  ({ labels = {}, prefixId, className = "", valueLabelFormat, ...props }: ZigSliderProps, ref) => {
+    let valueLabelFormatDefaulted = valueLabelFormat;
+    if (!valueLabelFormatDefaulted && (!props.max || props.max === 100)) {
+      valueLabelFormatDefaulted = (value: number) => `${value}%`;
+    }
+    const { start, end, showValues = true } = labels;
     const showLabels = start || end;
 
     return (
@@ -49,19 +53,27 @@ const ZigSlider = forwardRef(
               <SliderLabelValue
                 side="start"
                 labels={labels}
+                min={props.min}
                 max={props.max}
                 value={props.value as number}
-                valueLabelFormat={valueLabelFormat}
+                valueLabelFormat={valueLabelFormatDefaulted}
               />
             )}
-            <Slider marks={marks} track={false} {...props} />
+            <Slider
+              marks={marks}
+              track={false}
+              valueLabelDisplay={labels.invertSliderValues ? "off" : "auto"}
+              valueLabelFormat={valueLabelFormatDefaulted}
+              {...props}
+            />
             {showValues && (
               <SliderLabelValue
                 side="end"
                 labels={labels}
+                min={props.min}
                 max={props.max}
                 value={props.value as number}
-                valueLabelFormat={valueLabelFormat}
+                valueLabelFormat={valueLabelFormatDefaulted}
               />
             )}
           </Box>

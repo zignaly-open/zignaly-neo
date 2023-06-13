@@ -7,12 +7,14 @@ export const SliderLabelValue = ({
   labels,
   side,
   max = 100,
+  min = 0,
   value = 0,
   valueLabelFormat,
 }: {
   labels: SliderLabels;
   side: "start" | "end";
   max?: number;
+  min?: number;
   value?: number;
   valueLabelFormat?: (value: number) => string;
 }) => {
@@ -20,7 +22,7 @@ export const SliderLabelValue = ({
     side === "start"
       ? labels.invertSliderValues
         ? max - value
-        : value
+        : min
       : labels.invertSliderValues
       ? value
       : max;

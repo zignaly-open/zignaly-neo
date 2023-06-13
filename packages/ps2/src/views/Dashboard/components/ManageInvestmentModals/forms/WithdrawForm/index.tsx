@@ -286,7 +286,7 @@ function WithdrawForm({
             />
           )}
 
-          <Box sx={{ minHeight: 134, mt: '5px' }}>
+          <Box sx={{ minHeight: 134 }}>
             {coinObject && (
               <Controller
                 name={'amount'}
