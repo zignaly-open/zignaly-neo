@@ -135,7 +135,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
         </Box>
       </Layout>
       {error && typeof error === "string" && (
-        <Box alignSelf="flex-start" mt="11px">
+        <Box alignSelf="flex-start">
           <ErrorMessage text={error} id={id && `${id}-error`} />
         </Box>
       )}
