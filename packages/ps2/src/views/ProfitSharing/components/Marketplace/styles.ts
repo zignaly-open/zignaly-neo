@@ -11,6 +11,7 @@ export const Inline = styled('div')`
 `;
 
 export const TableWrapper = styled('div')`
+  padding: 0 30px;
   td,
   th {
     &:first-of-type {

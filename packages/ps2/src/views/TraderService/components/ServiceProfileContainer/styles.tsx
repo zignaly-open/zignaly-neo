@@ -1,4 +1,4 @@
-import { styled, css, Grid } from '@mui/material';
+import { styled, css, Grid, Divider } from '@mui/material';
 import muiStyled from '@emotion/styled';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { ZigTypography } from '@zignaly-open/ui';
@@ -70,11 +70,33 @@ export const Separator = styled('span')`
 `;
 
 export const InvestButtonContainer = styled('div')`
+  border: 1px dotted ${({ theme }) => theme.palette.neutral600};
+  border-top: none;
+  align-items: center;
+  margin: 0 20px;
+  position: relative;
+  border-radius: 5px;
   text-align: center;
   height: 88px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+`;
+
+export const TopDivider = styled(Divider)`
+  position: absolute;
+  text-align: center;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 0 3px;
+  transform: translateY(-50%);
+
+  &:before,
+  &:after {
+    border-color: ${({ theme }) => theme.palette.neutral600};
+    border-top-style: dotted;
+  }
 `;
 
 export const BigNumberWrapperInvested = styled('div')`
