@@ -18,6 +18,7 @@ import {
   NASDAQ_URL,
   YAHOO_URL,
 } from '../../util/constants';
+import { useMaybeSaveMissedDestinationUrl } from '../../util/navigation';
 
 export type InfoBarItem = {
   title: string;
@@ -29,6 +30,7 @@ const Signup: React.FC = () => {
   const { t } = useTranslation(['pages', 'sign-up']);
   const theme = useTheme();
   const navigate = useNavigate();
+  useMaybeSaveMissedDestinationUrl();
   const matches = useMediaQuery(theme.breakpoints.up('md'));
 
   useTitle(t('pages:signup'));
