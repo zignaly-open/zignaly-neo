@@ -3,7 +3,6 @@
   "addMoreInvestmentSuccess": "You invested {{amount}} {{currency}} successfully in service {{serviceName}}.",
   "withdrawInvestmentSuccess": "Withdrawal requested successfully.",
   "validation-indicateAnAmount": "You must indicate an amount.",
-  "error-blockedInvestment": "All your funds are pending to be transferred out of the service.",
   "form": {
     "title": "Amount Invested:",
     "profits": {
@@ -25,7 +24,8 @@
       "transfer-now": "Transfer now",
       "addInvestment": "Add to Investment",
       "continue-to-confirmation": "Continue to Confirmation"
-    }
+    },
+    "transferOutAll": "Your entire investment is pending withdrawal and will be processed shortly during daily accounting, once the trader releases the funds."
   },
   "pendingMajorThan": {
     "type": "New investment",
