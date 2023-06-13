@@ -135,11 +135,13 @@ const WithdrawConfirmForm = ({
             <ZigTypography
               variant='body2'
               fontWeight='regular'
+              noWrap
               id={'withdraw-modal-confirmation__amount-label'}
             >
               {t('confirmation.amount')}
             </ZigTypography>
             <ZigPriceLabel
+              showTooltip
               id={'withdraw-modal-confirmation__amount'}
               noWrap
               component='span'
@@ -153,7 +155,7 @@ const WithdrawConfirmForm = ({
                 component: 'span',
                 fontWeight: 500,
               }}
-              sx={{ display: 'flex', flexDirection: 'column' }}
+              sx={{ display: 'flex', flexDirection: 'column', zIndex: 1 }}
             />
           </Grid>
         </AmountContainer>
@@ -173,6 +175,7 @@ const WithdrawConfirmForm = ({
               {t('confirmation.networkFee')}
             </ZigTypography>
             <ZigPriceLabel
+              showTooltip
               id={'withdraw-modal-confirmation__network-fee'}
               noWrap
               component='span'
@@ -186,7 +189,7 @@ const WithdrawConfirmForm = ({
                 component: 'span',
                 fontWeight: 500,
               }}
-              sx={{ display: 'flex', flexDirection: 'column' }}
+              sx={{ display: 'flex', flexDirection: 'column', zIndex: 1 }}
             />
           </Grid>
         </AmountContainer>
@@ -194,7 +197,7 @@ const WithdrawConfirmForm = ({
           sx={{ flex: 1, color: 'neutral400', opacity: 0.8 }}
         />
         <AmountContainer
-          sx={{ height: '100%', flex: 6 }}
+          sx={{ height: '100%', flex: 7 }}
           coloredBackground
           noBorders
         >
@@ -212,6 +215,7 @@ const WithdrawConfirmForm = ({
               {t('confirmation.receive')}
             </ZigTypography>
             <ZigPriceLabel
+              showTooltip
               id={'withdraw-modal-confirmation__receive'}
               noWrap
               component='span'
@@ -229,7 +233,7 @@ const WithdrawConfirmForm = ({
                   : +BigNumber(amount).minus(fee).toString()
               }
               coin={coin}
-              sx={{ display: 'flex', flexDirection: 'column' }}
+              sx={{ display: 'flex', flexDirection: 'column', zIndex: 1 }}
             />
           </Grid>
         </AmountContainer>
