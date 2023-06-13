@@ -286,7 +286,7 @@ function WithdrawForm({
             />
           )}
 
-          <Box sx={{ minHeight: 134 }}>
+          <Box sx={{ minHeight: 134, mt: '5px' }}>
             {coinObject && (
               <Controller
                 name={'amount'}
@@ -296,7 +296,6 @@ function WithdrawForm({
                   <ZigInputAmount
                     id={'withdraw-modal__input-amount'}
                     label={t('amountToWithdraw.label')}
-                    labelInline={false}
                     wide={true}
                     coin={coin}
                     balance={coinObject.available}
