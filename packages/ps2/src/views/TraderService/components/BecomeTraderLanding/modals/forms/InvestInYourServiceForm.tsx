@@ -76,6 +76,7 @@ const InvestInYourServiceForm: React.FC<{
     <form onSubmit={handleSubmit(onSubmit)}>
       <InvestorDetailsForService
         service={{
+          serviceLogo: '',
           successFee: service.successFee?.toString(),
           serviceName: service.serviceName,
         }}
@@ -87,7 +88,7 @@ const InvestInYourServiceForm: React.FC<{
             variant='h4'
             color='neutral400'
             textAlign={'center'}
-            marginBottom={'15px'}
+            marginBottom={'20px'}
           >
             {t('create.minimum-balance', {
               minValue,
