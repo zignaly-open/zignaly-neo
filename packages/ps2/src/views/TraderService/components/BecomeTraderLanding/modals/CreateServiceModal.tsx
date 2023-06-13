@@ -61,10 +61,7 @@ function CreateServiceModal({
         />
       )}
       {!isLoading && step === 1 && (
-        <InvestInYourServiceForm
-          goBack={goBack}
-          service={service as ServiceFormData}
-        />
+        <InvestInYourServiceForm service={service as ServiceFormData} />
       )}
     </ZModal>
   );
