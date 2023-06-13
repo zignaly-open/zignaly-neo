@@ -155,11 +155,11 @@ function EditInvestmentForm({
             render={({ field }) => (
               <ZigSlider
                 prefixId={'edit-investment-modal'}
-                track={false}
                 {...field}
                 labels={{
                   start: t('form.profits.left'),
                   end: t('form.profits.right'),
+                  invertSliderValues: true,
                 }}
               />
             )}
