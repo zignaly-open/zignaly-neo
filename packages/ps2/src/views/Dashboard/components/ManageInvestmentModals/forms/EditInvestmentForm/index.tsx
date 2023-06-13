@@ -9,6 +9,7 @@ import {
   ZigTypography,
   ZigInputAmount,
   ZigSlider,
+  ZigAlertMessage,
 } from '@zignaly-open/ui';
 import { editInvestmentValidation } from './validations';
 import {
@@ -44,7 +45,6 @@ function EditInvestmentForm({
     useUpdateTakeProfitAndInvestMore(serviceId);
   const { data: details } = useInvestmentDetails(serviceId);
   const { data: service } = useServiceDetails(serviceId);
-  const transferOutAll = details?.transferOutAll;
   const { showModal } = useZModal();
 
   const {
@@ -71,7 +71,6 @@ function EditInvestmentForm({
   });
 
   const toast = useToast();
-  const openBlockedToast = () => toast.error(t('error-blockedInvestment'));
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
@@ -168,56 +167,59 @@ function EditInvestmentForm({
         </Box>
       </Field>
 
-      <Controller
-        name={'amountTransfer'}
-        control={control}
-        rules={{ required: true }}
-        render={({ field }) => (
-          <ZigInputAmount
-            id={'edit-investment-modal__input-amount'}
-            label={t('form.button.addInvestment')}
-            wide={true}
-            coin={coin.id}
-            balance={coin.balance}
-            extraInfo={{
-              others: [renderDepositCoin()],
-            }}
-            error={t(errors?.amountTransfer?.message)}
-            {...field}
-          >
-            <ZigButton
-              id={'edit-investment-modal__save-invest'}
-              size={'large'}
-              type={'submit'}
-              loading={isEditingInvestment}
-              disabled={!canSubmit}
-            >
-              {t('form.button.addInvestment')}
-            </ZigButton>
-          </ZigInputAmount>
-        )}
-      />
+      {details?.transferOutAll ? (
+        <ZigAlertMessage warning text={t('form.transferOutAll')} />
+      ) : (
+        <>
+          <Controller
+            name={'amountTransfer'}
+            control={control}
+            rules={{ required: true }}
+            render={({ field }) => (
+              <ZigInputAmount
+                id={'edit-investment-modal__input-amount'}
+                label={t('form.button.addInvestment')}
+                wide={true}
+                coin={coin.id}
+                balance={coin.balance}
+                extraInfo={{
+                  others: [renderDepositCoin()],
+                }}
+                error={t(errors?.amountTransfer?.message)}
+                {...field}
+              >
+                <ZigButton
+                  id={'edit-investment-modal__save-invest'}
+                  size={'large'}
+                  type={'submit'}
+                  loading={isEditingInvestment}
+                  disabled={!canSubmit}
+                >
+                  {t('form.button.addInvestment')}
+                </ZigButton>
+              </ZigInputAmount>
+            )}
+          />
 
-      <ModalActions direction='column' mt='25px'>
-        <ZigButton
-          variant={'text'}
-          id={'edit-investment-modal__withdraw'}
-          endIcon={
-            <KeyboardArrowRightIcon
-              sx={{
-                color: 'links',
-                fill: 'currentColor !important',
-              }}
-            />
-          }
-          disabled={transferOutAll}
-          onClick={
-            transferOutAll ? openBlockedToast : onClickWithdrawInvestment
-          }
-        >
-          {t('form.link.withdraw')}
-        </ZigButton>
-      </ModalActions>
+          <ModalActions direction='column' mt='25px'>
+            <ZigButton
+              variant={'text'}
+              id={'edit-investment-modal__withdraw'}
+              endIcon={
+                <KeyboardArrowRightIcon
+                  sx={{
+                    color: 'links',
+                    fill: 'currentColor !important',
+                  }}
+                />
+              }
+              onClick={onClickWithdrawInvestment}
+            >
+              {t('form.link.withdraw')}
+            </ZigButton>
+          </ModalActions>
+        </>
+      )}
     </Form>
   );
 }
