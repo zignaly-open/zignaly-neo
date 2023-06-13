@@ -8,12 +8,30 @@ export const SliderLabelValue = ({
   side,
   max = 100,
   value = 0,
+  valueLabelFormat,
 }: {
   labels: SliderLabels;
   side: "start" | "end";
   max?: number;
   value?: number;
+  valueLabelFormat?: (value: number) => string;
 }) => {
+  const valueLabel =
+    side === "start"
+      ? labels.invertSliderValues
+        ? max - value
+        : value
+      : labels.invertSliderValues
+      ? value
+      : max;
+
+  let valueLabelStr = valueLabel.toString();
+  if (valueLabelFormat) {
+    valueLabelStr = valueLabelFormat(valueLabel);
+  } else if (max === 100 && valueLabelFormat !== null) {
+    valueLabelStr = `${valueLabel}%`;
+  }
+
   return (
     <Box
       display="flex"
@@ -34,13 +52,7 @@ export const SliderLabelValue = ({
         {side === "start" ? labels.start : labels.end}
       </ZigTypography>
       <ZigTypography color="neutral400" variant="body2">
-        {side === "start"
-          ? labels.percent !== false
-            ? `${max - value}%`
-            : value
-          : labels.percent !== false
-          ? `${value}%`
-          : max}
+        {valueLabelStr}
       </ZigTypography>
     </Box>
   );

@@ -255,7 +255,6 @@ function InvestForm({ view, setView }: InvestFormProps) {
         render={({ field }) => (
           <ZigSlider
             prefixId={'invest-modal'}
-            track={false}
             {...field}
             labels={{
               top: (
@@ -271,6 +270,7 @@ function InvestForm({ view, setView }: InvestFormProps) {
               ),
               start: t('form.profits.left'),
               end: t('form.profits.right'),
+              invertSliderValues: true,
             }}
           />
         )}

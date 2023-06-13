@@ -12,7 +12,7 @@ export const Layout = styled(Box)<{ error: boolean; labelInline: boolean }>`
   border-radius: 5px;
 
   ${({ error, theme }) => error && `border-color: ${theme.palette.redGraphOrError};`}
-  ${({ labelInline }) => labelInline && `border-top: none`}
+  ${({ labelInline }) => labelInline && `border-top: none;`}
 
   && {
     .MuiInput-root {

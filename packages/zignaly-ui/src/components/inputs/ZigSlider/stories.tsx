@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 
 export const WithLabel: Story = {
   args: {
-    labels: { top: "My Slider", start: "Start", end: "End", displayDifference: true },
+    labels: { top: "My Slider", start: "Start", end: "End", invertSliderValues: true },
   },
   render: (props) => <ZigSliderControlled {...props} />,
 };

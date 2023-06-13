@@ -37,15 +37,13 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
    */
   const handleMax = () => {
     if (onMax) return onMax();
-    if (props.onChange && balance !== "undefined") {
-      props.onChange(
-        changeEvent(
-          props.name,
-          max !== "undefined" && new BigNumber(max!).isLessThan(new BigNumber(balance!))
-            ? max
-            : balance,
-        ) as React.ChangeEvent<HTMLInputElement>,
-      );
+    if (props.onChange && (balance !== undefined || max !== undefined)) {
+      const newValue =
+        max !== undefined &&
+        (balance === undefined || new BigNumber(max!).isLessThan(new BigNumber(balance!)))
+          ? max
+          : balance;
+      props.onChange(changeEvent(props.name, newValue) as React.ChangeEvent<HTMLInputElement>);
     }
   };
 
@@ -135,7 +133,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
         </Box>
       </Layout>
       {error && typeof error === "string" && (
-        <Box alignSelf="flex-start" mt="11px">
+        <Box alignSelf="flex-start">
           <ErrorMessage text={error} id={id && `${id}-error`} />
         </Box>
       )}
