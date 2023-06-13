@@ -121,6 +121,7 @@ const ZigDropdown: (
                     <ComponentSeparator
                       id={entry.id || `dropdown-element-${i}`}
                       separator={entry.separator}
+                      customStyle={entry.customStyle}
                       key={key}
                     />
                   );

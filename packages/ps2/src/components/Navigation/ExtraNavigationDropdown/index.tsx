@@ -56,7 +56,10 @@ const ExtraNavigationDropdown: React.FC = () => {
       target: '_blank',
       href: 'https://help.zignaly.com/hc/en-us',
     },
-    { separator: true },
+    {
+      separator: true,
+      customStyle: `padding-top: 10px;`,
+    },
     {
       id: 'menu-dropdown__language-switcher',
       label: (

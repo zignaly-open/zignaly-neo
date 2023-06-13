@@ -6,15 +6,8 @@ import dark from "theme/dark";
 const withSeparator = (props: WithSeparator) =>
   props.separator &&
   css`
-    position: relative;
-    &:after {
-      content: "";
-      border-top: 1px solid rgb(44, 45, 89);
-      position: absolute;
-      left: 30px;
-      right: 30px;
-      top: 0;
-    }
+    border-top: 1px dotted rgb(44, 45, 89);
+    margin: 6px 35px 6px;
   `;
 
 type WithSeparator = { separator?: boolean };
@@ -22,7 +15,7 @@ type WithCustomStyle = { customStyle?: string };
 
 export const ZigDropdownContainer = styled.div`
   user-select: none;
-  min-width: 245px;
+  min-width: 254px;
 `;
 
 export const Component = styled.div`
@@ -36,7 +29,8 @@ export const Component = styled.div`
 `;
 
 export const ComponentWrapper = styled.div<WithSeparator & WithCustomStyle>`
-  padding: 5px 30px;
+  padding: 10px 40px;
+
   ${(props) => props.customStyle || ""};
   ${withSeparator}
 `;
@@ -50,15 +44,14 @@ export const NavLink = styled.span<
   } & WithSeparator &
     WithCustomStyle
 >`
-  color: ${dark.neutral100};
+  color: ${dark.neutral200};
   font-weight: 400;
   font-size: 14px;
   line-height: 28px;
-  padding: 6px 36px;
+  padding: 10px 40px;
   letter-spacing: 0.55px;
   text-decoration: none;
   transition: 0.15s linear;
-  max-width: 245px;
 
   display: flex;
   flex-direction: row;

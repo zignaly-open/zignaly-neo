@@ -185,7 +185,7 @@ function AccountMenu(): React.ReactElement | null {
             <ZigButton
               id={'invest-form__deposit'}
               startIcon={<ZigPlusIcon width={10} height={10} />}
-              sx={{ fontWeight: 600, mt: '10px', mb: '20px' }}
+              sx={{ fontWeight: 600, mt: '10px', mb: '14px' }}
               variant={'contained'}
               onClick={() => {
                 // fun fact: without onClose react-select acts funky
@@ -201,7 +201,7 @@ function AccountMenu(): React.ReactElement | null {
         },
         { separator: true },
         {
-          customStyle: `margin-top: 12px;`,
+          customStyle: `margin-top: 6px;`,
           label: (
             <>
               <GiftIcon
