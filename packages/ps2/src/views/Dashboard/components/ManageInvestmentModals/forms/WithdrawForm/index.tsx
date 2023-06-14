@@ -189,10 +189,6 @@ function WithdrawForm({
       })}
       autoComplete='off'
     >
-      <ZigTypography id={'withdraw-modal-description'} textAlign='center'>
-        {t('description')}
-      </ZigTypography>
-
       <Controller
         name='coin'
         control={control}

@@ -5,6 +5,7 @@ import { InputExtraInfoFalseableItem, InputExtraInfoItem, InputExtraInfoProps } 
 import { NumericFormat, numericFormatter } from "react-number-format";
 import { getPrecisionForCoin } from "components/display/ZigPriceLabel/util";
 import { trimZeros } from "utils/numbers";
+import ZigPriceLabel from "components/display/ZigPriceLabel";
 
 const DEFAULT_ITEMS = {
   balance: "Available:",
@@ -111,7 +112,7 @@ export const InputExtraInfo = (
               <ZigTypography variant="body2" color="neutral100">
                 <WithTooltip value={(item as InputExtraInfoItem).value} coin={coin}>
                   <NumericFormat
-                    value={(item as InputExtraInfoItem).value}
+                    value={parseFloat((item as InputExtraInfoItem).value.toString())}
                     displayType="text"
                     thousandSeparator={true}
                     suffix={` ${coin}`}
