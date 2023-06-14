@@ -5,7 +5,6 @@ import { NumericFormat } from 'react-number-format';
 import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
 import {
-  ZigSwapVertIcon,
   ZigTypography,
   ZigButton,
   ZigInputAmount,
@@ -22,7 +21,6 @@ import { useToast } from '../../../../util/hooks/useToast';
 import ZModal, { Form, ModalActions } from 'components/ZModal';
 import { useUpdateEffect } from 'react-use';
 import { Box } from '@mui/material';
-import { ZigInputAmountStyled } from './styles';
 
 function TransferModal({
   serviceId,
@@ -52,7 +50,6 @@ function TransferModal({
     handleSubmit,
     control,
     trigger,
-    setValue,
     formState: { isValid, errors, isDirty },
   } = useForm<TransferFormData>({
     mode: 'onChange',
