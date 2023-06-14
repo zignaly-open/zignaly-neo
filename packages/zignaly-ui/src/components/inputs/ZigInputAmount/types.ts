@@ -25,7 +25,7 @@ export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"
    */
   wrapExtraInfo?: number | boolean;
   /**
-   * Custom onMax callback, if not provided, onChange will be called with the max value.
+   * Custom onMax callback but onChange will already be called with the max value.
    */
   onMax?: () => void;
   /**
