@@ -15,7 +15,7 @@ type WithCustomStyle = { customStyle?: string };
 
 export const ZigDropdownContainer = styled.div`
   user-select: none;
-  min-width: 254px;
+  min-width: 245px;
 `;
 
 export const Component = styled.div`
@@ -29,7 +29,7 @@ export const Component = styled.div`
 `;
 
 export const ComponentWrapper = styled.div<WithSeparator & WithCustomStyle>`
-  padding: 10px 40px;
+  padding: 6px 32px;
 
   ${(props) => props.customStyle || ""};
   ${withSeparator}
@@ -48,7 +48,7 @@ export const NavLink = styled.span<
   font-weight: 400;
   font-size: 14px;
   line-height: 28px;
-  padding: 10px 40px;
+  padding: 6px 32px;
   letter-spacing: 0.55px;
   text-decoration: none;
   transition: 0.15s linear;
@@ -58,6 +58,7 @@ export const NavLink = styled.span<
   align-items: center;
   gap: 12px;
   overflow: hidden;
+  max-width: 245px;
 
   svg {
     transition: 0.15s linear;
