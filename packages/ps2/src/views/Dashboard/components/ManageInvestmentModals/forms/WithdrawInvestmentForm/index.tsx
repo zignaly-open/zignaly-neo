@@ -145,7 +145,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
         <ZigButton
           id={'withdraw-modal__confirm-withdraw'}
           type={'submit'}
-          size={'xlarge'}
+          size={'large'}
           disabled={!isValid}
           loading={isLoading}
         >

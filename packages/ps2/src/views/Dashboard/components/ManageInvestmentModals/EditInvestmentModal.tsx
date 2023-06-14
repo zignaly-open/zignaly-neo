@@ -17,6 +17,7 @@ import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import ZModal from '../../../../components/ZModal';
 import { usePrefetchTranslation } from '../../../../util/i18nextHelpers';
+import { Box } from '@mui/material';
 
 function EditInvestmentModal({
   close,
@@ -98,7 +99,7 @@ function EditInvestmentModal({
       }
       isLoading={isLoading}
     >
-      {!isLoading && component()}
+      <Box paddingX='30px'>{!isLoading && component()}</Box>
     </ZModal>
   );
 }
