@@ -7,6 +7,7 @@ export const Container = styled('div')`
   justify-content: center;
   flex-direction: column;
   gap: 60px;
+  overflow-y: hidden;
 `;
 
 export const Title = styled('div')`
