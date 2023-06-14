@@ -8,7 +8,7 @@ const ZigTabs = (props: TabsProps) => {
   // Find a tab asideComponent matching current selected tab
   const asideComponent = useMemo(() => {
     const arr = Array.isArray(children) ? children : [children];
-    const el = arr.find((c, i) => i === props.value && c.props.asideComponent);
+    const el = arr.find((c) => c.props.value === props.value && c.props.asideComponent);
     return el?.props.asideComponent;
   }, [props.value, children]);
 
