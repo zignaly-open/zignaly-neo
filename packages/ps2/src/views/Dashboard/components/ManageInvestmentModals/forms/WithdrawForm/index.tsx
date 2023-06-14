@@ -6,7 +6,6 @@ import {
   ZigSelect,
   ZigButton,
   ZigInput,
-  ZigTypography,
   CenteredLoader,
   ZigInputAmount,
   ZigListIcon,
