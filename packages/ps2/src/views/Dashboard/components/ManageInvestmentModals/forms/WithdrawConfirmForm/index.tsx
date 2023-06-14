@@ -48,6 +48,11 @@ const WithdrawConfirmForm = ({
       </Grid>
     );
   }
+  const getApproximatedDecimalsNumber = (
+    coinToWithdraw: string,
+  ): number | undefined => {
+    return ['BTC', 'ETH', 'BNB'].includes(coinToWithdraw) ? 4 : undefined;
+  };
 
   return (
     <Grid container direction='column'>
@@ -141,6 +146,7 @@ const WithdrawConfirmForm = ({
               {t('confirmation.amount')}
             </ZigTypography>
             <ZigPriceLabel
+              precision={getApproximatedDecimalsNumber(coin)}
               showTooltip
               id={'withdraw-modal-confirmation__amount'}
               noWrap
@@ -175,6 +181,7 @@ const WithdrawConfirmForm = ({
               {t('confirmation.networkFee')}
             </ZigTypography>
             <ZigPriceLabel
+              precision={getApproximatedDecimalsNumber(coin)}
               showTooltip
               id={'withdraw-modal-confirmation__network-fee'}
               noWrap
@@ -215,6 +222,7 @@ const WithdrawConfirmForm = ({
               {t('confirmation.receive')}
             </ZigTypography>
             <ZigPriceLabel
+              precision={getApproximatedDecimalsNumber(coin)}
               showTooltip
               id={'withdraw-modal-confirmation__receive'}
               noWrap
