@@ -11,6 +11,7 @@ import {
   BigNumberWrapper,
   BigNumberWrapperInvested,
   InvestButtonContainer,
+  TopDivider,
 } from '../styles';
 import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/system';
@@ -80,9 +81,12 @@ export const InvestedButtonBase: React.FC<{
 
   return (
     <InvestButtonContainer>
-      <ZigTypography variant={'body2'} color='neutral200'>
-        {t('invested-label')}
-      </ZigTypography>
+      <TopDivider>
+        <ZigTypography variant={'body2'} color='neutral400'>
+          {t('invested-label')}
+        </ZigTypography>
+      </TopDivider>
+
       <Box>
         <BigNumberWrapperInvested
           id={prefixId && `${prefixId}__invested-${service.id}`}
@@ -100,7 +104,7 @@ export const InvestedButtonBase: React.FC<{
         <ZigButton
           variant={'text'}
           id={prefixId && `${prefixId}__edit-${service.id}`}
-          startIcon={<EditIcon sx={{ width: '15px', height: '15px' }} />}
+          startIcon={<EditIcon sx={{ width: '12px', height: '12px' }} />}
           onClick={onClickEditInvestment}
         >
           {t('action:edit')}
