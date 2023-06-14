@@ -103,7 +103,6 @@ const InvestInYourServiceForm: React.FC<{
               <ZigInputAmount
                 id={'withdraw-modal__input-amount'}
                 label={t('edit-investment:form.inputAmount.label')}
-                wide={true}
                 coin={coin.id}
                 placeholder={'0.0'}
                 balance={coin.balance}
