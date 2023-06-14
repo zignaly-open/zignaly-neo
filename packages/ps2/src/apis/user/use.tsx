@@ -48,7 +48,6 @@ import { useNavigate } from 'react-router-dom';
 import { track } from '@zignaly-open/tracker';
 import { clearUserSession } from './util';
 import { junkyard } from '../../util/junkyard';
-import { clearMissedDestinationUrl } from '../../util/navigation';
 
 const useStartSession = () => {
   const { showModal } = useZModal();
@@ -156,7 +155,6 @@ export function useLogout(performRequest = true): () => void {
     if (performRequest) {
       logoutRequest();
     }
-    clearMissedDestinationUrl();
     clearUserSession(dispatch);
     navigate('/login');
   };
