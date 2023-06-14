@@ -32,11 +32,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
   } = props;
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
 
-  /**
-   * Call custom onMax function or call onChange with max value event for RHF
-   */
   const handleMax = () => {
-    if (onMax) return onMax();
     if (props.onChange && (balance !== undefined || max !== undefined)) {
       const newValue =
         max !== undefined &&
@@ -45,6 +41,9 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
           : balance;
       props.onChange(changeEvent(props.name, newValue) as React.ChangeEvent<HTMLInputElement>);
     }
+
+    // Optional callback
+    onMax?.();
   };
 
   /**
