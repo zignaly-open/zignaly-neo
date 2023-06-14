@@ -20,6 +20,11 @@ export const useMaybeSaveMissedDestinationUrl = () => {
   }, []);
 };
 
-export const getMissedDestinationUrl = () => junkyard.getSession('missedRoute');
-export const clearMissedDestinationUrl = () =>
-  junkyard.setSession('missedRoute', '');
+export const popMissedDestinationUrl = () => {
+  const value = junkyard.getSession('missedRoute');
+  // we need a timeout here for it to work in the dev mode
+  // because of strict mode double render shenanigans
+  // works fine without the timeout in prod
+  setTimeout(() => junkyard.setSession('missedRoute', ''), 0);
+  return value;
+};
