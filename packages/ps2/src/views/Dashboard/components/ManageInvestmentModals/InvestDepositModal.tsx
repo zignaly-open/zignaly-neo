@@ -12,6 +12,7 @@ import { useIsAuthenticated } from '../../../../apis/user/use';
 import { UseModalReturn } from './types';
 import { useDepositModalContent } from './ChooseDepositTypeModal';
 import ZModal from '../../../../components/ZModal';
+import { Box } from '@mui/material';
 
 function InvestDepositModal({
   serviceId,
@@ -66,7 +67,7 @@ function InvestDepositModal({
       onGoBack={onGoBack}
       wide
     >
-      {ready && component()}
+      <Box paddingX='30px'>{ready && component()}</Box>
     </ZModal>
   );
 }
