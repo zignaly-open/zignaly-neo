@@ -15,13 +15,11 @@ const InvestorDetailsForService: React.FC<{
   const { t } = useTranslation('edit-investment');
   return (
     <Investor id={prefixId && `${prefixId}__investor-details`}>
-      {!!service.serviceLogo && (
-        <Avatar
-          size={48}
-          image={getServiceLogo(service.serviceLogo)}
-          id={prefixId && `${prefixId}__investor-details-avatar`}
-        />
-      )}
+      <Avatar
+        size={48}
+        image={getServiceLogo(service.serviceLogo)}
+        id={prefixId && `${prefixId}__investor-details-avatar`}
+      />
       <InvestorData>
         <InvestorName
           variant={'h2'}
