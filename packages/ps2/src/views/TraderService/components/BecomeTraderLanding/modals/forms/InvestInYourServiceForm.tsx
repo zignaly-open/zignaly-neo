@@ -89,6 +89,7 @@ const InvestInYourServiceForm: React.FC<{
             color='neutral400'
             textAlign={'center'}
             marginBottom={'20px'}
+            whiteSpace={'pre-line'}
           >
             {t('create.minimum-balance', {
               minValue,
