@@ -7,6 +7,7 @@ import {
   ROUTE_SIGNUP,
 } from '../../routes';
 import { popMissedDestinationUrl } from '../navigation';
+import { usePrevious } from 'react-use';
 
 const UnauthenticatedWall: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
@@ -22,9 +23,23 @@ const UnauthenticatedWall: React.FC = () => {
     } else {
       return null;
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, pathname]);
 
-  return isAuthenticated ? <Navigate to={redirectPath} replace /> : <Outlet />;
+  const prevIsAuthenticated = usePrevious(isAuthenticated);
+  const prevPath = usePrevious(pathname);
+  // this means that a redirect happened between children of this Wall
+  // and the user is authenticated
+  const isRedirectLoop =
+    prevPath !== pathname && prevIsAuthenticated && isAuthenticated;
+
+  return isAuthenticated ? (
+    <Navigate
+      to={isRedirectLoop ? ROUTE_PROFIT_SHARING : redirectPath}
+      replace
+    />
+  ) : (
+    <Outlet />
+  );
 };
 
 export default UnauthenticatedWall;
