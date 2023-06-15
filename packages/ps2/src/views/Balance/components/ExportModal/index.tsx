@@ -21,16 +21,10 @@ function ExportModal({
 
   return (
     <ZModal wide {...props} close={close} title={t('export.title')}>
-      <ZigTypography>{t('export.description')}</ZigTypography>
+      <ZigTypography textAlign={'center'}>
+        {t('export.description')}
+      </ZigTypography>
       <ModalActions>
-        <ZigButton
-          onClick={close}
-          variant='outlined'
-          size='large'
-          id={'export-transactions__cancel'}
-        >
-          {t('action:cancel')}
-        </ZigButton>
         <ZigButton
           id={'export-transactions__proceed'}
           onClick={() =>

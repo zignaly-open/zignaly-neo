@@ -438,7 +438,7 @@ const ReferralRewardsList: React.FC<{ rewards: ReferralRewards }> = ({
             </Box>
           )}
 
-          <Box sx={{ mb: 4 }}>
+          <Box sx={{ mb: '32px' }}>
             <ZigTypography variant={'h3'}>{t('terms.title')}</ZigTypography>
             <OlList>
               <li>{t('terms.1')}</li>
