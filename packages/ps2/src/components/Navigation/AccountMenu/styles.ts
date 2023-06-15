@@ -55,8 +55,8 @@ export const AccountDropdown = styled('div')`
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  padding-top: 12px;
-  padding-bottom: 12px;
+  padding-top: 11px;
+  padding-bottom: 11px;
   overflow: hidden;
 
   span {

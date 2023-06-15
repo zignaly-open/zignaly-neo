@@ -123,7 +123,7 @@ function AccountMenu(): React.ReactElement | null {
             </AccountDropdown>
           ),
           id: 'account-menu-dropdown__account-switcher',
-          customStyle: `background: #171a31;`,
+          customStyle: `background: #171a31; margin-top: -6px;`,
           children: (exchanges?.length > 1 ? exchanges : []).map(
             (exchange, index) => ({
               onClick: () => setActiveExchange(exchange.internalId),
@@ -240,7 +240,7 @@ function AccountMenu(): React.ReactElement | null {
               component={'p'}
               sx={{
                 textAlign: 'center',
-                p: '9px',
+                p: '4px 9px 3px',
                 fontSize: '14px',
                 width: '100%',
               }}
