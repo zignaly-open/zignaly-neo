@@ -113,6 +113,12 @@ export const ComponentSeparator = styled.div<
 export const NavList = styled.div`
   display: flex;
   flex-direction: column;
+  > *:first-child {
+    margin-top: 6px;
+  }
+  > *:last-child {
+    margin-bottom: 6px;
+  }
 `;
 
 export const ChildContainer = styled.div<{ active: boolean } & WithSeparator>`
