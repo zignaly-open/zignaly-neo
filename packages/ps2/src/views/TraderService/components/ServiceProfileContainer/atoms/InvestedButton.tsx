@@ -7,12 +7,7 @@ import {
 import { useZModal } from '../../../../../components/ZModal/use';
 import EditInvestmentModal from '../../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
 import { useTranslation } from 'react-i18next';
-import {
-  BigNumberWrapper,
-  BigNumberWrapperInvested,
-  InvestButtonContainer,
-  TopDivider,
-} from '../styles';
+import { BigNumberWrapper, InvestButtonContainer, TopDivider } from '../styles';
 import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/system';
 import OtherAccountsButton from './OtherAccountsButton';
@@ -32,6 +27,10 @@ const BigNumber: React.FC<{
         coin={ssc}
         shorten={shorten}
         color={green ? 'greenGraph' : red ? 'redGraphOrError' : undefined}
+        variant={'h1'}
+        coinProps={{
+          paddingTop: '6px',
+        }}
       />
     </BigNumberWrapper>
   );
@@ -87,12 +86,8 @@ export const InvestedButtonBase: React.FC<{
         </ZigTypography>
       </TopDivider>
 
-      <Box>
-        <BigNumberWrapperInvested
-          id={prefixId && `${prefixId}__invested-${service.id}`}
-        >
-          <BigNumber ssc={service.ssc} value={investedAmount} green />
-        </BigNumberWrapperInvested>
+      <Box id={prefixId && `${prefixId}__invested-${service.id}`}>
+        <BigNumber ssc={service.ssc} value={investedAmount} green shorten />
       </Box>
       <Box
         sx={{
