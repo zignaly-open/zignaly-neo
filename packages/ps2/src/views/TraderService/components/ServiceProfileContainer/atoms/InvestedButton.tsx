@@ -29,7 +29,7 @@ const BigNumber: React.FC<{
         color={green ? 'greenGraph' : red ? 'redGraphOrError' : undefined}
         variant={'h2'}
         coinProps={{
-          paddingTop: '6px',
+          paddingTop: '3px',
         }}
       />
     </BigNumberWrapper>
