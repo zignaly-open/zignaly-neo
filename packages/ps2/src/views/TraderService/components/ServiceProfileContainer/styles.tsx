@@ -73,7 +73,7 @@ export const InvestButtonContainer = styled('div')`
   border: 1px dotted ${({ theme }) => theme.palette.neutral600};
   border-top: none;
   align-items: center;
-  padding: 0 15px;
+  padding: 15px 25px;
   position: relative;
   border-radius: 5px;
   text-align: center;
