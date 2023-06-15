@@ -95,11 +95,7 @@ function TransferModal({
       title={t('transferFunds.title')}
       isLoading={!balance || isTransferring}
     >
-      <Form
-        onSubmit={handleSubmit(onSubmit)}
-        alignItems='center'
-        paddingX='30px'
-      >
+      <Form onSubmit={handleSubmit(onSubmit)} alignItems='center'>
         <ZigTypography textAlign='center' component='div'>
           {t('transferFunds.description')}
         </ZigTypography>
@@ -111,25 +107,27 @@ function TransferModal({
               control={control}
               rules={{ required: true }}
               render={({ field }) => (
-                <ZigInputAmount
-                  id={'edit-investment-modal__input-amount'}
-                  wide={true}
-                  label={
-                    <ZigTypography variant='h2' textAlign='center'>
-                      {t(
-                        fromTradingAccount
-                          ? 'transfer.fromTradingAccount'
-                          : 'transfer.fromStandbyAccount',
-                      )}
-                    </ZigTypography>
-                  }
-                  labelInline={false}
-                  coin={coin}
-                  balance={balanceFrom}
-                  error={t(errors?.amountValue?.message)}
-                  placeholder={t('transfer.placeholder')}
-                  {...field}
-                />
+                <Box maxWidth='440px'>
+                  <ZigInputAmount
+                    id={'edit-investment-modal__input-amount'}
+                    wide={true}
+                    label={
+                      <ZigTypography variant='h2' textAlign='center'>
+                        {t(
+                          fromTradingAccount
+                            ? 'transfer.fromTradingAccount'
+                            : 'transfer.fromStandbyAccount',
+                        )}
+                      </ZigTypography>
+                    }
+                    labelInline={false}
+                    coin={coin}
+                    balance={balanceFrom}
+                    error={t(errors?.amountValue?.message)}
+                    placeholder={t('transfer.placeholder')}
+                    {...field}
+                  />
+                </Box>
               )}
             />
             <ZigButton
