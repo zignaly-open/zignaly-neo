@@ -1,5 +1,5 @@
 export type WhitelabelOverride = {
   promptMobile?: boolean;
-  basicSignup?: boolean;
+  plainSignup?: boolean;
   xSource?: string;
 };

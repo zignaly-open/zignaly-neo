@@ -14,8 +14,10 @@ import * as Routes from './routes';
 // views we load unconditionally
 import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
+import SignupPlain from './views/Auth/SignupPlain';
 import ServiceHeader from './views/TraderService/components/ServiceHeader';
 import { zigSuspenseFallback } from 'util/suspense';
+import whitelabel from './whitelabel';
 
 const Wallet = lazy(() => import('./views/Wallet'));
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
@@ -59,102 +61,122 @@ const outleted = (Component: JSX.Element) => (
   </>
 );
 
-const Router: React.FC = () => (
-  <RouterRoutes>
-    <Route element={<AuthenticatedWall />}>
-      <Route path={Routes.ROUTE_DASHBOARD} element={outleted(<Dashboard />)}>
+const Router: React.FC = () => {
+  const { plainSignup } = whitelabel;
+  return (
+    <RouterRoutes>
+      <Route element={<AuthenticatedWall />}>
+        <Route path={Routes.ROUTE_DASHBOARD} element={outleted(<Dashboard />)}>
+          <Route
+            path={Routes.ROUTE_DASHBOARD_EDIT_INVESTMENT}
+            element={
+              <DashboardModalInvestmentEdit bgRoute={Routes.ROUTE_DASHBOARD} />
+            }
+          />
+        </Route>
         <Route
-          path={Routes.ROUTE_DASHBOARD_EDIT_INVESTMENT}
-          element={
-            <DashboardModalInvestmentEdit bgRoute={Routes.ROUTE_DASHBOARD} />
-          }
+          path={Routes.ROUTE_MY_BALANCES}
+          element={outleted(<MyBalances />)}
+        >
+          <Route
+            path={Routes.ROUTE_MY_BALANCES_DEPOSIT}
+            element={<MyBalancesDeposit bgRoute={Routes.ROUTE_MY_BALANCES} />}
+          />
+          <Route
+            path={Routes.ROUTE_MY_BALANCES_DEPOSIT_COIN}
+            element={<MyBalancesDeposit bgRoute={Routes.ROUTE_MY_BALANCES} />}
+          />
+        </Route>
+        <Route
+          path={Routes.ROUTE_MY_BALANCES_TRANSACTIONS}
+          element={outleted(<MyBalances />)}
         />
+        <Route path={Routes.ROUTE_WALLET} element={<Wallet />} />
+        <Route path={Routes.ROUTE_REFERRALS} element={<Referrals />} />
+        <Route path={Routes.ROUTE_REWARDS} element={<Rewards />} />
       </Route>
-      <Route path={Routes.ROUTE_MY_BALANCES} element={outleted(<MyBalances />)}>
+
+      <Route element={outleted(<ServiceHeader />)}>
         <Route
-          path={Routes.ROUTE_MY_BALANCES_DEPOSIT}
-          element={<MyBalancesDeposit bgRoute={Routes.ROUTE_MY_BALANCES} />}
-        />
-        <Route
-          path={Routes.ROUTE_MY_BALANCES_DEPOSIT_COIN}
-          element={<MyBalancesDeposit bgRoute={Routes.ROUTE_MY_BALANCES} />}
-        />
+          path={Routes.ROUTE_TRADING_SERVICE}
+          element={outleted(<ServiceProfile />)}
+        >
+          <Route
+            path={Routes.ROUTE_PROFIT_SHARING_SERVICE_INVEST}
+            element={
+              <ServiceProfileInvestment
+                bgRoute={Routes.ROUTE_TRADING_SERVICE}
+              />
+            }
+          />
+        </Route>
+        <Route element={<ServiceOwnerWall />}>
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_MANAGE}
+            element={<Management />}
+          />
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_INVESTORS}
+            element={<Investors />}
+          />
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_POSITIONS}
+            element={<Positions />}
+          />
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_COINS}
+            element={<Coins />}
+          />
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_MANUAL}
+            element={<Manual />}
+          />
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_API}
+            element={<ServiceApi />}
+          />
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_SIGNALS}
+            element={<Signals />}
+          />
+          <Route
+            path={Routes.ROUTE_TRADING_SERVICE_EDIT}
+            element={<EditService />}
+          />
+        </Route>
       </Route>
+
+      <Route path={Routes.ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
+      <Route path={Routes.ROUTE_HELP_INVESTOR} element={<HelpInvestor />} />
+
+      <Route element={<UnauthenticatedWall />}>
+        <Route path={Routes.ROUTE_REFERRALS_INVITE} element={<Invite />} />
+        <Route
+          path={Routes.ROUTE_REFERRALS_INVITE_SHORT}
+          element={<Invite />}
+        />
+        <Route path={Routes.ROUTE_LOGIN} element={<Login />} />
+        <Route
+          path={Routes.ROUTE_SIGNUP}
+          element={plainSignup ? <SignupPlain /> : <Signup />}
+        />
+        <Route
+          path={Routes.ROUTE_FORGOT_PASSWORD}
+          element={<ForgotPassword />}
+        />
+        <Route path={Routes.ROUTE_RESET_PASSWORD} element={<ResetPassword />} />
+      </Route>
+
+      <Route path={Routes.ROUTE_PROFIT_SHARING} element={<ProfitSharing />} />
+      <Route path={Routes.ROUTE_404} element={<NotFound />} />
+
       <Route
-        path={Routes.ROUTE_MY_BALANCES_TRANSACTIONS}
-        element={outleted(<MyBalances />)}
+        path='/'
+        element={<Navigate to={Routes.ROUTE_PROFIT_SHARING} replace />}
       />
-      <Route path={Routes.ROUTE_WALLET} element={<Wallet />} />
-      <Route path={Routes.ROUTE_REFERRALS} element={<Referrals />} />
-      <Route path={Routes.ROUTE_REWARDS} element={<Rewards />} />
-    </Route>
-
-    <Route element={outleted(<ServiceHeader />)}>
-      <Route
-        path={Routes.ROUTE_TRADING_SERVICE}
-        element={outleted(<ServiceProfile />)}
-      >
-        <Route
-          path={Routes.ROUTE_PROFIT_SHARING_SERVICE_INVEST}
-          element={
-            <ServiceProfileInvestment bgRoute={Routes.ROUTE_TRADING_SERVICE} />
-          }
-        />
-      </Route>
-      <Route element={<ServiceOwnerWall />}>
-        <Route
-          path={Routes.ROUTE_TRADING_SERVICE_MANAGE}
-          element={<Management />}
-        />
-        <Route
-          path={Routes.ROUTE_TRADING_SERVICE_INVESTORS}
-          element={<Investors />}
-        />
-        <Route
-          path={Routes.ROUTE_TRADING_SERVICE_POSITIONS}
-          element={<Positions />}
-        />
-        <Route path={Routes.ROUTE_TRADING_SERVICE_COINS} element={<Coins />} />
-        <Route
-          path={Routes.ROUTE_TRADING_SERVICE_MANUAL}
-          element={<Manual />}
-        />
-        <Route
-          path={Routes.ROUTE_TRADING_SERVICE_API}
-          element={<ServiceApi />}
-        />
-        <Route
-          path={Routes.ROUTE_TRADING_SERVICE_SIGNALS}
-          element={<Signals />}
-        />
-        <Route
-          path={Routes.ROUTE_TRADING_SERVICE_EDIT}
-          element={<EditService />}
-        />
-      </Route>
-    </Route>
-
-    <Route path={Routes.ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
-    <Route path={Routes.ROUTE_HELP_INVESTOR} element={<HelpInvestor />} />
-
-    <Route element={<UnauthenticatedWall />}>
-      <Route path={Routes.ROUTE_REFERRALS_INVITE} element={<Invite />} />
-      <Route path={Routes.ROUTE_REFERRALS_INVITE_SHORT} element={<Invite />} />
-      <Route path={Routes.ROUTE_LOGIN} element={<Login />} />
-      <Route path={Routes.ROUTE_SIGNUP} element={<Signup />} />
-      <Route path={Routes.ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />
-      <Route path={Routes.ROUTE_RESET_PASSWORD} element={<ResetPassword />} />
-    </Route>
-
-    <Route path={Routes.ROUTE_PROFIT_SHARING} element={<ProfitSharing />} />
-    <Route path={Routes.ROUTE_404} element={<NotFound />} />
-
-    <Route
-      path='/'
-      element={<Navigate to={Routes.ROUTE_PROFIT_SHARING} replace />}
-    />
-    <Route path='*' element={<Navigate to={Routes.ROUTE_404} replace />} />
-  </RouterRoutes>
-);
+      <Route path='*' element={<Navigate to={Routes.ROUTE_404} replace />} />
+    </RouterRoutes>
+  );
+};
 
 export default Router;

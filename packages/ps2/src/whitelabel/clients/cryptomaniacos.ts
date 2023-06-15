@@ -1,3 +1,5 @@
 import { WhitelabelOverride } from '../type';
 
-export default {} as WhitelabelOverride;
+export default {
+  plainSignup: true,
+} as WhitelabelOverride;
