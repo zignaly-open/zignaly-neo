@@ -6,7 +6,7 @@ import dark from "theme/dark";
 const withSeparator = (props: WithSeparator) =>
   props.separator &&
   css`
-    border-top: 1px dotted rgb(44, 45, 89);
+    border-top: 1px dotted ${({ theme }) => theme.neutral600};
     margin: 6px 35px 6px;
   `;
 

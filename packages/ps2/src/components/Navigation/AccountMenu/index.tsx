@@ -240,7 +240,7 @@ function AccountMenu(): React.ReactElement | null {
               component={'p'}
               sx={{
                 textAlign: 'center',
-                p: '9px',
+                p: '4px 9px 9px',
                 fontSize: '14px',
                 width: '100%',
               }}
