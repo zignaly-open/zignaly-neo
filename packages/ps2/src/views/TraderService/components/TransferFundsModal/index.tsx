@@ -95,7 +95,11 @@ function TransferModal({
       title={t('transferFunds.title')}
       isLoading={!balance || isTransferring}
     >
-      <Form onSubmit={handleSubmit(onSubmit)} alignItems='center'>
+      <Form
+        onSubmit={handleSubmit(onSubmit)}
+        alignItems='center'
+        paddingX='30px'
+      >
         <ZigTypography textAlign='center' component='div'>
           {t('transferFunds.description')}
         </ZigTypography>
