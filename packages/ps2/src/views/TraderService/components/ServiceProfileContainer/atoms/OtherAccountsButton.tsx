@@ -25,6 +25,7 @@ const OtherAccountsButton: React.FC<{
       variant={'text'}
       id={'service__see-all'}
       onClick={onClickViewOther}
+      sx={{ fontSize: '11px !important' }}
       endIcon={<ChevronRightIcon />}
     >
       {t('invest-button.all-accounts', {
