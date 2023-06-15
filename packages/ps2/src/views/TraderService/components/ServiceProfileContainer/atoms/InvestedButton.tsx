@@ -81,7 +81,7 @@ export const InvestedButtonBase: React.FC<{
   return (
     <InvestButtonContainer>
       <TopDivider>
-        <ZigTypography variant={'body2'} color='neutral400'>
+        <ZigTypography variant={'body2'} fontSize={'11px'} color='neutral400'>
           {t('invested-label')}
         </ZigTypography>
       </TopDivider>
@@ -98,6 +98,7 @@ export const InvestedButtonBase: React.FC<{
       >
         <ZigButton
           variant={'text'}
+          sx={{ fontSize: '11px !important' }}
           id={prefixId && `${prefixId}__edit-${service.id}`}
           startIcon={<EditIcon sx={{ width: '12px', height: '12px' }} />}
           onClick={onClickEditInvestment}
