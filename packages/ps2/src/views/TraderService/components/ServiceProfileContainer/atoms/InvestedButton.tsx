@@ -27,7 +27,7 @@ const BigNumber: React.FC<{
         coin={ssc}
         shorten={shorten}
         color={green ? 'greenGraph' : red ? 'redGraphOrError' : undefined}
-        variant={'h1'}
+        variant={'h2'}
         coinProps={{
           paddingTop: '6px',
         }}
@@ -87,7 +87,7 @@ export const InvestedButtonBase: React.FC<{
       </TopDivider>
 
       <Box id={prefixId && `${prefixId}__invested-${service.id}`}>
-        <BigNumber ssc={service.ssc} value={investedAmount} green shorten />
+        <BigNumber ssc={service.ssc} value={investedAmount} green />
       </Box>
       <Box
         sx={{
