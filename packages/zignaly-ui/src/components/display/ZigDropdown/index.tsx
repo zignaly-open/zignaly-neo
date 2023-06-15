@@ -11,6 +11,7 @@ import {
   NavList,
   SpaceTaker,
   ComponentSeparator,
+  SubNavList,
 } from "./styles";
 import { useTheme } from "styled-components";
 import Theme from "theme/theme";
@@ -181,7 +182,7 @@ const ZigDropdown: (
                         )}
                       </NavLink>
                       {childDropdownShow === option && (
-                        <NavList>
+                        <SubNavList>
                           {option.children.map((c, index) => (
                             <NavLink
                               id={c.id}
@@ -197,7 +198,7 @@ const ZigDropdown: (
                               {c.label}
                             </NavLink>
                           ))}
-                        </NavList>
+                        </SubNavList>
                       )}
                     </ChildContainer>
                   );
