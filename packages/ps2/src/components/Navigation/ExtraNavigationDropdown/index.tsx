@@ -58,7 +58,7 @@ const ExtraNavigationDropdown: React.FC = () => {
     },
     {
       separator: true,
-      customStyle: `padding-top: 6px;`,
+      customStyle: `margin-top: 11px; margin-bottom: 12px;`,
     },
     {
       id: 'menu-dropdown__language-switcher',
