@@ -100,6 +100,7 @@ const CreateServiceForm: React.FC<{
           onChange={(v) => {
             setValue('serviceType', v as ExchangeType);
             trigger('serviceType');
+            setValue('baseCurrency', '');
           }}
           label={t('create.service-type') + '*'}
         />
