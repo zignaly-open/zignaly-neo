@@ -119,7 +119,7 @@ export const Form = styled(
 )`
   // Set ModalActions margin-top here to be sure it's only applied when inside a Form
   // todo: https://mui.com/system/styled/#how-to-use-components-selector-api
-  > div:last-child:has(button) {
+  > div:last-child {
     margin-top: 11px;
   }
 `;
