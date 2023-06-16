@@ -147,7 +147,14 @@ function AuthVerifyModal({
           </ZigTypography>
         )}
       </Title>
-      <Container>
+      <Container
+        isSeveralCodes={
+          (isUnknownDevice || disabled || emailUnconfirmed) &&
+          !verifyStatus.isSuccess &&
+          ask2FA &&
+          !status2FA.isSuccess
+        }
+      >
         {(isUnknownDevice || disabled || emailUnconfirmed) &&
           !verifyStatus.isSuccess && (
             <EmailVerifyForm
