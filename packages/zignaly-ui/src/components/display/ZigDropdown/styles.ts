@@ -117,7 +117,7 @@ export const NavList = styled.div`
     margin-top: 11px;
   }
   > *:last-child {
-    padding-bottom: 6px;
+    margin-bottom: 6px;
   }
 `;
 
@@ -137,6 +137,7 @@ export const ChildContainer = styled.div<{ active: boolean } & WithSeparator>`
     props.active &&
     css`
       background: rgb(25, 26, 48);
+      margin-bottom: 0 !important;
     `}
 
   ${withSeparator}
