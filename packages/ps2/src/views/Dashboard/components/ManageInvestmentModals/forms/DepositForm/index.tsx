@@ -251,6 +251,11 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               />
             )}
           />
+          <div>
+            {!!network && !networkObject?.depositEnable && (
+              <ErrorMessage text={t('no-network')} />
+            )}
+          </div>
         </Grid>
 
         {!!network && networkObject?.depositEnable && (
@@ -349,9 +354,6 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
           </>
         )}
 
-        {!!network && !networkObject?.depositEnable && (
-          <ErrorMessage text={t('no-network')} />
-        )}
         <Grid item xs={12}>
           <ZigTypography variant={'body2'} color={'neutral300'}>
             <ZigLink

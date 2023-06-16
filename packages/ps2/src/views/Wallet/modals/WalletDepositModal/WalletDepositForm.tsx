@@ -58,24 +58,29 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
         <ZigTypography fontWeight={600}>{selectedCoin}</ZigTypography>&nbsp;
       </Box>
 
-      <Controller
-        name='network'
-        control={control}
-        rules={{ required: true }}
-        render={({ field }) => (
-          <ZigSelect
-            id={'deposit__select-network'}
-            menuPosition='fixed'
-            menuShouldBlockScroll
-            menuShouldScrollIntoView={false}
-            label={t('networkSelector.label')}
-            placeholder={t('networkSelector.placeholder')}
-            {...field}
-            options={networkOptions}
-            filterOption={filterOptions}
-          />
+      <div>
+        <Controller
+          name='network'
+          control={control}
+          rules={{ required: true }}
+          render={({ field }) => (
+            <ZigSelect
+              id={'deposit__select-network'}
+              menuPosition='fixed'
+              menuShouldBlockScroll
+              menuShouldScrollIntoView={false}
+              label={t('networkSelector.label')}
+              placeholder={t('networkSelector.placeholder')}
+              {...field}
+              options={networkOptions}
+              filterOption={filterOptions}
+            />
+          )}
+        />
+        {!!network && !networkObject?.depositEnable && (
+          <ErrorMessage text={t('no-network')} />
         )}
-      />
+      </div>
 
       {!!network && networkObject?.depositEnable && (
         <>
@@ -148,10 +153,6 @@ function WalletDepositForm({ coins, selectedCoin }: WalletDepositModalProps) {
             )}
           </Box>
         </>
-      )}
-
-      {!!network && !networkObject?.depositEnable && (
-        <ErrorMessage text={t('no-network')} />
       )}
     </Form>
   );
