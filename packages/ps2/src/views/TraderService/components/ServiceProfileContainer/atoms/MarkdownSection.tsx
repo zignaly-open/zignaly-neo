@@ -6,6 +6,7 @@ import ReactMarkdown from 'react-markdown';
 import { HideReadMoreEffects, MarkdownContainer } from '../styles';
 import breaks from 'remark-breaks';
 import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { withAttrs } from 'util/styles';
 
 const MarkdownSection: React.FC<{
   title: string;
@@ -45,7 +46,7 @@ const MarkdownSection: React.FC<{
               remarkPlugins={[breaks]}
               linkTarget='_blank'
               components={{
-                p: ZigTypography,
+                p: withAttrs(ZigTypography, { component: 'p' }),
               }}
             >
               {content}
