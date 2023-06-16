@@ -159,6 +159,10 @@ export const MarkdownContainer = styled('div')`
   img {
     max-width: 100%;
   }
+
+  p + p {
+    margin-top: 16px;
+  }
 `;
 
 export const GridWithBottomBorder = styled(Grid)`
