@@ -160,8 +160,8 @@ export const MarkdownContainer = styled('div')`
     max-width: 100%;
   }
 
-  p + p {
-    margin-top: 16px;
+  p {
+    margin-bottom: 16px;
   }
 `;
 
