@@ -136,7 +136,7 @@ export function useChartData({
   });
 
   const chartData = useMemo<TraderServiceChartProcessed>(() => {
-    const chart = { ...(data?.data || {}) };
+    const chart = { '2022-12-17': 20209.23141031, ...(data?.data || {}) };
     const now = new Date();
     for (
       let i = -1 * (GraphTimeframeDayLength[chartTimeframe] || 0);
@@ -164,6 +164,8 @@ export function useChartData({
         dates.unshift([previousDate, 0]);
       }
     }
+
+    console.log(dates, chartType);
 
     const graph = dates?.reduce((acc, [date, value]) => {
       const dateObj = parse(date, 'yyyy-MM-dd', Date.now());
