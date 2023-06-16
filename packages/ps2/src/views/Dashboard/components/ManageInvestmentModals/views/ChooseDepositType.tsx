@@ -96,10 +96,11 @@ const ChooseDepositType: React.FC<{
                   <ZigArrowOutIcon
                     width={'9px'}
                     height={'9px'}
-                    style={{ marginBottom: '2px' }}
+                    style={{ marginBottom: '4px' }}
                   />
                 }
                 size={'large'}
+                sx={{ padding: '8px 20px' }}
               >
                 {t('service-deposit.buttons.purchase', { coin })}
               </ZigButton>

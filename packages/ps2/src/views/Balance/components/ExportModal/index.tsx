@@ -8,6 +8,7 @@ import { useActiveExchange } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
 import { ExportModalProps } from './types';
 import { differenceInDays } from 'date-fns';
+import { Box } from '@mui/material';
 
 function ExportModal({
   close,
@@ -21,10 +22,8 @@ function ExportModal({
 
   return (
     <ZModal wide {...props} close={close} title={t('export.title')}>
-      <div>
-        <ZigTypography textAlign={'center'}>
-          {t('export.description')}
-        </ZigTypography>
+      <Box textAlign={'center'}>
+        <ZigTypography>{t('export.description')}</ZigTypography>
         <ModalActions>
           <ZigButton
             id={'export-transactions__proceed'}
@@ -45,7 +44,7 @@ function ExportModal({
             {t('action:proceed')}
           </ZigButton>
         </ModalActions>
-      </div>
+      </Box>
     </ZModal>
   );
 }
