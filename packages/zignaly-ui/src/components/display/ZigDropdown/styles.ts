@@ -117,7 +117,7 @@ export const NavList = styled.div`
     margin-top: 11px;
   }
   > *:last-child {
-    margin-bottom: 6px;
+    padding-bottom: 6px;
   }
 `;
 
