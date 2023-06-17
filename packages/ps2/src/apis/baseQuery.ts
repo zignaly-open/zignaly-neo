@@ -14,6 +14,7 @@ import { backendError } from 'util/hooks/useToast';
 import { BackendError } from '../util/errors';
 import { BaseQueryApi } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 import { clearUserSession } from './user/util';
+import whitelabel from '../whitelabel';
 
 const mutex = new Mutex();
 
@@ -22,6 +23,9 @@ const baseQuery = (baseUrl = process.env.REACT_APP_BASE_API) =>
     baseUrl,
     prepareHeaders: (headers, { getState, endpoint }) => {
       const token = (getState() as RootState).user.accessToken;
+      const { xSource } = whitelabel;
+      headers.set('authorization', `Bearer ${token}`);
+      xSource && headers.set('x-source', xSource);
       if (token && !['login', 'signup'].includes(endpoint)) {
         headers.set('authorization', `Bearer ${token}`);
       }
