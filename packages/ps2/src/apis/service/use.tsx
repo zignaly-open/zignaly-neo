@@ -29,8 +29,6 @@ import {
   formatMonthDay,
   formatMonthDayYear,
 } from '../../views/Dashboard/components/MyDashboard/util';
-import { isFeatureOn } from '../../whitelabel';
-import { Features } from '../../whitelabel/type';
 
 export function useTraderServices() {
   const isAuthenticated = useIsAuthenticated();
@@ -51,7 +49,6 @@ export function useIsServiceOwner(serviceId: string): boolean | undefined {
 
 export function useFirstOwnedService(): TraderService | null {
   const { data: traderServices } = useTraderServices();
-  if (!isFeatureOn(Features.Trader)) return null;
   return (traderServices && traderServices[0]) || null;
 }
 

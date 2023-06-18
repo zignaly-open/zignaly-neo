@@ -22,8 +22,6 @@ import {
 import { LocalizationLanguages } from '../../../util/languages';
 import { HeaderDropdownButton } from '../AccountMenu/styles';
 import { ZigDropdownProps } from '@zignaly-open/ui/src/components/display/ZigDropdown/types';
-import { isFeatureOn } from '../../../whitelabel';
-import { Features } from '../../../whitelabel/type';
 
 const ExtraNavigationDropdown: React.FC = () => {
   const theme = useTheme();
@@ -123,12 +121,7 @@ const ExtraNavigationDropdown: React.FC = () => {
       ...options,
     ];
   }
-  if (
-    isAuthenticated &&
-    traderServices?.length &&
-    !isFetching &&
-    isFeatureOn(Features.Trader)
-  ) {
+  if (isAuthenticated && traderServices?.length && !isFetching) {
     options = [
       {
         label: t('main-menu.dropdown-link-forTrading'),

@@ -230,7 +230,7 @@ const ZigDrawer = () => {
                       </ListItemButton>
                     </ListItem>
                   )}
-                  {service && isFeatureOn(Features.Trader) && (
+                  {service && (
                     <ListItem disablePadding onClick={handleDrawerToggle}>
                       <ListItemButton
                         id='drawer__for-trading'
