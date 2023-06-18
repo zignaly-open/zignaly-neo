@@ -3,11 +3,11 @@ export enum Features {
   Referrals,
   Trader,
   ZigWallet,
+  NewSignup,
 }
 
 export type WhitelabelOverride = {
   promptMobile?: boolean;
-  plainSignup?: boolean;
   disabledFeatures: Features[];
   xSource?: string;
 };

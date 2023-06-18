@@ -19,7 +19,8 @@ import {
   YAHOO_URL,
 } from '../../util/constants';
 import { useMaybeSaveMissedDestinationUrl } from '../../util/navigation';
-import { whitelabel } from '../../whitelabel';
+import { isFeatureOn } from '../../whitelabel';
+import { Features } from '../../whitelabel/type';
 
 export type InfoBarItem = {
   title: string;
@@ -32,7 +33,7 @@ const Signup: React.FC = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   useMaybeSaveMissedDestinationUrl();
-  const { plainSignup } = whitelabel;
+
   const matches = useMediaQuery(theme.breakpoints.up('md'));
 
   useTitle(t('pages:signup'));
@@ -67,7 +68,7 @@ const Signup: React.FC = () => {
         alignItems: 'center',
       }}
     >
-      {plainSignup ? (
+      {!isFeatureOn(Features.NewSignup) ? (
         <SignupForm />
       ) : (
         <Grid

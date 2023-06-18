@@ -17,7 +17,7 @@ import Signup from './views/Auth/Signup';
 import SignupPlain from './views/Auth/SignupPlain';
 import ServiceHeader from './views/TraderService/components/ServiceHeader';
 import { zigSuspenseFallback } from 'util/suspense';
-import { isFeatureOn, whitelabel } from './whitelabel';
+import { isFeatureOn } from './whitelabel';
 import { Features } from './whitelabel/type';
 
 const Wallet = lazy(() => import('./views/Wallet'));
@@ -155,7 +155,7 @@ const Router: React.FC = () => (
       <Route path={Routes.ROUTE_LOGIN} element={<Login />} />
       <Route
         path={Routes.ROUTE_SIGNUP}
-        element={whitelabel.plainSignup ? <SignupPlain /> : <Signup />}
+        element={isFeatureOn(Features.NewSignup) ? <Signup /> : <SignupPlain />}
       />
       <Route path={Routes.ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />
       <Route path={Routes.ROUTE_RESET_PASSWORD} element={<ResetPassword />} />
