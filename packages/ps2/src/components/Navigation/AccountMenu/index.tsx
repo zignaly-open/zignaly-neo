@@ -31,7 +31,7 @@ import {
   ROUTE_REFERRALS,
   ROUTE_REWARDS,
 } from '../../../routes';
-import { generatePath, Link, useLocation, useNavigate } from 'react-router-dom';
+import { generatePath, Link, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
 import { useZModal } from 'components/ZModal/use';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
@@ -52,7 +52,6 @@ function AccountMenu(): React.ReactElement | null {
   const navigate = useNavigate();
   const { exchanges } = useCurrentUser();
   const selectExchange = useSelectExchange();
-  const location = useLocation();
   const { showModal } = useZModal();
   const md = useMediaQuery(theme.breakpoints.up('sm'));
   const dropDownRef = useRef<ZigDropdownHandleType>(null);
@@ -67,7 +66,7 @@ function AccountMenu(): React.ReactElement | null {
   if (!isAuthenticated) {
     return (
       <>
-        <Link to={ROUTE_LOGIN} state={{ redirectTo: location }}>
+        <Link to={ROUTE_LOGIN}>
           <LoginButton id={'menu__login'}>
             <ZigLoginUserIcon
               color={theme.palette.neutral300}
@@ -79,7 +78,7 @@ function AccountMenu(): React.ReactElement | null {
             </ZigTypography>
           </LoginButton>
         </Link>
-        <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>
+        <Link to={ROUTE_SIGNUP}>
           <ZigButton id={'menu__signup'} variant={'contained'}>
             {t('account-menu.isAuth-button-signUp')}
           </ZigButton>
