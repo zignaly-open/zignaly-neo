@@ -34,7 +34,7 @@ import {
 import { useZModal } from 'components/ZModal/use';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { generatePath, Link, useLocation } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 import {
   ROUTE_LOGIN,
   ROUTE_SIGNUP,
@@ -70,7 +70,6 @@ const ZigDrawer = () => {
   const { showModal } = useZModal();
   const service = useFirstOwnedService();
   const { exchanges, email, imageUrl } = useCurrentUser();
-  const location = useLocation();
   const changeLocale = useChangeLocale();
 
   const languageMap = supportedLanguages
@@ -140,7 +139,7 @@ const ZigDrawer = () => {
                 gap={2}
                 onClick={handleDrawerToggle}
               >
-                <Link to={ROUTE_LOGIN} state={{ redirectTo: location }}>
+                <Link to={ROUTE_LOGIN}>
                   <ZigButton
                     id={'drawer__login'}
                     variant='text'
@@ -156,7 +155,7 @@ const ZigDrawer = () => {
                     {t('account-menu.isAuth-button-logIn')}
                   </ZigButton>
                 </Link>
-                <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>
+                <Link to={ROUTE_SIGNUP}>
                   <ZigButton id={'drawer__signup'} variant='contained'>
                     {t('account-menu.isAuth-button-signUp')}
                   </ZigButton>
