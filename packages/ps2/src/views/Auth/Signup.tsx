@@ -19,7 +19,7 @@ import {
   YAHOO_URL,
 } from '../../util/constants';
 import { useMaybeSaveMissedDestinationUrl } from '../../util/navigation';
-import whitelabel from '../../whitelabel';
+import { whitelabel } from '../../whitelabel';
 
 export type InfoBarItem = {
   title: string;

@@ -14,7 +14,7 @@ import { backendError } from 'util/hooks/useToast';
 import { BackendError } from '../util/errors';
 import { BaseQueryApi } from '@reduxjs/toolkit/dist/query/baseQueryTypes';
 import { clearUserSession } from './user/util';
-import whitelabel from '../whitelabel';
+import { whitelabel } from '../whitelabel';
 
 const mutex = new Mutex();
 

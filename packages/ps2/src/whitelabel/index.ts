@@ -1,9 +1,12 @@
 import * as clients from './configs';
-import { WhitelabelOverride } from './type';
+import { Features, WhitelabelOverride } from './type';
 
-const { REACT_APP_WHITELABEL: whitelabel } = process.env;
+const { REACT_APP_WHITELABEL: whitelabelConfig } = process.env;
 
-export default ((whitelabel &&
-  typeof clients[whitelabel] !== 'undefined' &&
-  clients[whitelabel]) ||
+export const whitelabel = ((whitelabelConfig &&
+  typeof clients[whitelabelConfig] !== 'undefined' &&
+  clients[whitelabelConfig]) ||
   {}) as WhitelabelOverride;
+
+export const isFeatureOn = (feature: Features): boolean =>
+  !whitelabel?.disabledFeatures?.includes(feature);
