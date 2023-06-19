@@ -89,7 +89,7 @@ export const Inline = styled('div')<{ align?: string }>`
 
 export const ModalActions = styled(
   withAttrs(Box, {
-    /* margin-top will be overwritten when inside Form */
+    /* Will be overwritten to a smaller margin when inside Form */
     mt: '35px',
   }),
 )<{
@@ -117,9 +117,7 @@ export const Form = styled(
     gap: 3,
   }),
 )`
-  // Set ModalActions margin-top here to be sure it's only applied when inside a Form
-  // todo: https://mui.com/system/styled/#how-to-use-components-selector-api
-  > div:last-child {
+  > ${ModalActions} {
     margin-top: 11px;
   }
 `;

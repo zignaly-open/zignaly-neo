@@ -10,7 +10,7 @@
       "purchase": "Purchase {{coin}}"
     }
   },
-  "description": "Deposit Crypto in your Zignaly Account. Zignaly is an official <0></0> Binance Broker. Your funds will be safe on Binance. <1>More info</1>.",
+  "description": "Deposit Crypto in your Zignaly Account. Zignaly is an official <0>Binance Broker</0>. Your funds will be safe on Binance. <1>More info</1>.",
   "coinSelector": {
     "label": "Coin:",
     "placeholder": "Search a coin"
