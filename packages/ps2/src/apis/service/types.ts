@@ -97,6 +97,8 @@ export type Investor = {
   sfOwnerAt: string;
   sfOwnerLc: string;
   userId: string;
+
+  actions: string;
 };
 
 export type InternalAccountType = 'STA' | 'SCA';
