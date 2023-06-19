@@ -9,5 +9,5 @@ export const QRCodeContainer = styled("div")<{ width: number; height: number }>`
   height: ${({ height }) => height}px;
   border-radius: 8px;
   background: #e1e9f0;
-  padding: 6px;
+  /* padding: 6px; */
 `;

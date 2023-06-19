@@ -30,10 +30,8 @@ const ZigQrCode = ({
       flexDirection="column"
       justifyContent="center"
       alignItems="center"
-      gap={8}
+      gap="8px"
       className={className}
-      width={width}
-      height={height}
     >
       {label && (
         <ZigTypography variant="h4" color="neutral100" id={`${id}-label`}>

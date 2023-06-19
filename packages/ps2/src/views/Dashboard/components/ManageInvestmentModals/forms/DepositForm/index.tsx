@@ -381,7 +381,11 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
           display='flex'
           justifyContent='space-between'
           alignItems='center'
-          mt={!!network && networkObject?.depositEnable ? -4 : 0}
+          mt={
+            !!network && networkObject?.depositEnable && !depositInfo?.tag
+              ? -4
+              : 0
+          }
         >
           <ZigButton
             id={'deposit-modal__history'}
