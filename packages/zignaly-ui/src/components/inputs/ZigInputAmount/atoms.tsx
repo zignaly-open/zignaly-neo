@@ -31,6 +31,7 @@ const extractItem = (
 export const InputExtraInfo = (
   props: InputExtraInfoProps & {
     coin: string;
+    id: string;
   },
 ) => {
   const { balance, min, max, coin, extraInfo = {} } = props;
@@ -72,6 +73,7 @@ export const InputExtraInfo = (
       gap="6px"
       alignItems={displayInRow ? "center" : "flex-start"}
       justifyContent={displayInRow ? "center" : "flex-start"}
+      id={props.id}
     >
       {items.map((item, i) => (
         // eslint-disable-next-line react/no-array-index-key
@@ -79,10 +81,19 @@ export const InputExtraInfo = (
           {React.isValidElement(item) ? (
             item
           ) : (
-            <ZigTypography variant="body2">
+            <ZigTypography
+              variant="body2"
+              id={
+                props.id &&
+                `${props.id}-${(item as InputExtraInfoItem).label
+                  .toLowerCase()
+                  .replace(/[\s.:,%]/g, "")}`
+              }
+            >
               {(item as InputExtraInfoItem).label}
               &nbsp;
               <ZigPriceLabel
+                id={props.id && `${props.id}-value-${(item as InputExtraInfoItem).label}`}
                 value={(item as InputExtraInfoItem).value}
                 coin={coin}
                 coinProps={{ color: "neutral100" }}
@@ -94,6 +105,7 @@ export const InputExtraInfo = (
           )}
           {displayInRow && i < items.length - 1 && (
             <Divider
+              id={props.id && `${props.id}-divider`}
               orientation="vertical"
               sx={{ borderColor: "neutral600", m: "1px 12px" }}
               flexItem

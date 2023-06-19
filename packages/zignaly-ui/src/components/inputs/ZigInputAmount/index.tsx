@@ -75,15 +75,15 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
       <Layout display={wide ? "flex" : "inline-flex"} error={!!error} labelInline={labelInline}>
         {labelInline && (
           <TopDivider error={!!error}>
-            <ZigTypography color="neutral300" variant="body2">
+            <ZigTypography color="neutral300" variant="body2" id={id && `${id}-top-label`}>
               {label}
             </ZigTypography>
           </TopDivider>
         )}
         <Box display="flex" alignItems="center" gap={2} width={wide ? 1 : "auto"}>
           <Box display="flex" alignItems="center" gap={1}>
-            <ZigCoinIcon size="small" coin={coinVal} />
-            <ZigTypography color="neutral100" variant="h3">
+            <ZigCoinIcon size="small" coin={coinVal} id={id && `${id}-coin-icon`} />
+            <ZigTypography color="neutral100" variant="h3" id={id && `${id}-coin-name`}>
               {coinVal}
             </ZigTypography>
           </Box>
@@ -101,7 +101,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
               endAdornment:
                 balance || handleMax ? (
                   <InputAdornment position="end">
-                    <MaxButton variant="outlined" onClick={handleMax}>
+                    <MaxButton variant="outlined" onClick={handleMax} id={id && `${id}-max-button`}>
                       Max
                     </MaxButton>
                   </InputAdornment>
@@ -116,6 +116,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
               extraInfo
             ) : extraInfo !== null ? (
               <InputExtraInfo
+                id={id && `${id}-extra-info`}
                 coin={coinVal}
                 min={min}
                 max={max}
