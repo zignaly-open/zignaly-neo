@@ -1,10 +1,10 @@
 import React, { useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  LoginButton,
   AccountDropdown,
   AccountName,
   HeaderDropdownButton,
+  LoginButton,
 } from './styles';
 import { useMediaQuery, useTheme } from '@mui/material';
 import {
@@ -16,31 +16,34 @@ import {
 } from '../../../apis/user/use';
 import {
   Avatar,
-  ZigDropdown,
-  ZigTypography,
+  ZigArrowBottomIcon,
   ZigButton,
-  ZigPlusIcon,
+  ZigDropdown,
+  ZigDropdownHandleType,
   ZigLoginUserIcon,
+  ZigPlusIcon,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import {
   ROUTE_DASHBOARD,
   ROUTE_LOGIN,
-  ROUTE_SIGNUP,
   ROUTE_MY_BALANCES,
-  ROUTE_WALLET,
   ROUTE_REFERRALS,
   ROUTE_REWARDS,
+  ROUTE_SIGNUP,
+  ROUTE_WALLET,
 } from '../../../routes';
-import { generatePath, Link, useLocation, useNavigate } from 'react-router-dom';
+import { generatePath, Link, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
 import { useZModal } from 'components/ZModal/use';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
-import { ZigDropdownHandleType, ZigArrowBottomIcon } from '@zignaly-open/ui';
 import { ReactComponent as GiftIcon } from '../../../images/tab-rewards.svg';
 import { ReactComponent as InviteIcon } from '../../../images/tab-referrals.svg';
 import { usePrefetchTranslation } from '../../../util/i18nextHelpers';
+import { isFeatureOn } from '../../../whitelabel';
+import { Features } from '../../../whitelabel/type';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme();
@@ -52,7 +55,6 @@ function AccountMenu(): React.ReactElement | null {
   const navigate = useNavigate();
   const { exchanges } = useCurrentUser();
   const selectExchange = useSelectExchange();
-  const location = useLocation();
   const { showModal } = useZModal();
   const md = useMediaQuery(theme.breakpoints.up('sm'));
   const dropDownRef = useRef<ZigDropdownHandleType>(null);
@@ -67,7 +69,7 @@ function AccountMenu(): React.ReactElement | null {
   if (!isAuthenticated) {
     return (
       <>
-        <Link to={ROUTE_LOGIN} state={{ redirectTo: location }}>
+        <Link to={ROUTE_LOGIN}>
           <LoginButton id={'menu__login'}>
             <ZigLoginUserIcon
               color={theme.palette.neutral300}
@@ -79,7 +81,7 @@ function AccountMenu(): React.ReactElement | null {
             </ZigTypography>
           </LoginButton>
         </Link>
-        <Link to={ROUTE_SIGNUP} state={{ redirectTo: location }}>
+        <Link to={ROUTE_SIGNUP}>
           <ZigButton id={'menu__signup'} variant={'contained'}>
             {t('account-menu.isAuth-button-signUp')}
           </ZigButton>
@@ -158,7 +160,7 @@ function AccountMenu(): React.ReactElement | null {
           href: generatePath(ROUTE_MY_BALANCES),
           onClick: () => navigate(ROUTE_MY_BALANCES),
         },
-        {
+        isFeatureOn(Features.ZigWallet) && {
           label: t('account-menu.notAuth-dropdown-link-wallet'),
           id: 'account-menu-dropdown__wallet',
           href: generatePath(ROUTE_WALLET),
@@ -200,7 +202,7 @@ function AccountMenu(): React.ReactElement | null {
           ),
         },
         { separator: true },
-        {
+        isFeatureOn(Features.Rewards) && {
           customStyle: `margin-top: 4px;`,
           label: (
             <>
@@ -217,7 +219,7 @@ function AccountMenu(): React.ReactElement | null {
           href: generatePath(ROUTE_REWARDS),
           onClick: () => navigate(ROUTE_REWARDS),
         },
-        {
+        isFeatureOn(Features.Referrals) && {
           label: (
             <>
               <InviteIcon
@@ -233,7 +235,9 @@ function AccountMenu(): React.ReactElement | null {
           href: generatePath(ROUTE_REFERRALS),
           onClick: () => navigate(ROUTE_REFERRALS),
         },
-        { separator: true },
+        (isFeatureOn(Features.Referrals) || isFeatureOn(Features.Rewards)) && {
+          separator: true,
+        },
         {
           label: (
             <ZigTypography
@@ -252,7 +256,7 @@ function AccountMenu(): React.ReactElement | null {
           id: 'account-menu-dropdown__logout',
           onClick: logout,
         },
-      ]}
+      ].filter(Boolean)}
     />
   );
 }

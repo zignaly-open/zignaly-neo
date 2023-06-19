@@ -7,8 +7,13 @@ import { Box } from '@mui/material';
 
 const SuccessFeeInputWrapper: React.FC<{
   children: JSX.Element;
+  title?: string;
+  description?: string;
+  newValueLabel?: string;
+  precision?: number;
+  newValue?: number | string;
   value: number | string;
-}> = ({ children, value }) => {
+}> = ({ title, newValue, description, children, newValueLabel, value }) => {
   const { t } = useTranslation('service');
   const feeWeCharge = !value
     ? 0
@@ -17,9 +22,9 @@ const SuccessFeeInputWrapper: React.FC<{
   return (
     <>
       <SuccessFieldWrapper>
-        <ZigTypography>{t('summary.success-fee')}</ZigTypography>
+        <ZigTypography>{title || t('summary.success-fee')}</ZigTypography>
         <ZigTypography variant='body2' color='neutral400'>
-          {t('edit.success-fee-desc')}
+          {description || t('edit.success-fee-desc')}
         </ZigTypography>
 
         <Box display='flex' mt={1.25}>
@@ -36,11 +41,11 @@ const SuccessFeeInputWrapper: React.FC<{
                 width: '100%',
               }}
             >
-              {t('you-receive')}
+              {newValueLabel || t('you-receive')}
             </ZigTypography>
             <Box display='flex' paddingTop='23px'>
               <ZigTypography color='neutral400' textAlign='center' width='100%'>
-                {Math.round(feeWeCharge)}
+                {newValue ?? Math.round(feeWeCharge)}
               </ZigTypography>
               <ZigTypography
                 color='neutral400'

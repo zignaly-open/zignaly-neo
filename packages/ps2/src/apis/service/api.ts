@@ -51,7 +51,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     }),
   }),
   traderServiceInvestors: builder.query<Investor[], string>({
-    providesTags: (result, error, id) => [{ type: 'Service', id }],
+    providesTags: ['ServiceInvestors'],
     query: (id) => ({
       url: `services/${id}/investors`,
     }),
@@ -98,6 +98,21 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       body: payload,
     }),
   }),
+  traderServiceEditSuccessFee: builder.mutation<
+    void,
+    { accountId: string; discount: number; serviceId: string }
+  >({
+    invalidatesTags: ['ServiceInvestors'],
+    query: ({ discount, serviceId, accountId }) => ({
+      url: `v1/investor/owner-sf-discount`,
+      method: 'POST',
+      body: {
+        owner_sf_discount: discount,
+        service_id: serviceId,
+        account_id: accountId,
+      },
+    }),
+  }),
   traderServiceEdit: builder.mutation<void, EditServicePayload>({
     invalidatesTags: (result, error, args) => [
       { type: 'Service', id: args.id },
@@ -124,5 +139,6 @@ export const {
   useLazyTraderServicesQuery,
   useTraderServiceTransferFundsMutation,
   useTraderServicesQuery,
+  useTraderServiceEditSuccessFeeMutation,
   useTraderServiceEditMutation,
 } = api;

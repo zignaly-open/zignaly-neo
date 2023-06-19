@@ -2,7 +2,14 @@ import React, { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Trans, useTranslation } from 'react-i18next';
-import { Form, Action, Wrapper, LineBox, ColouredLine } from './styles';
+import {
+  Form,
+  Action,
+  Wrapper,
+  LineBox,
+  ColouredLine,
+  WrapperPlain,
+} from './styles';
 import { SignupValidation } from './validations';
 import { useSignup } from '../../../../apis/user/use';
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -23,7 +30,7 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PasswordOutlinedIcon from '@mui/icons-material/PasswordOutlined';
 import LockIcon from '@mui/icons-material/Lock';
 
-const SignupForm: React.FC = () => {
+const SignupForm: React.FC<{ plain?: boolean }> = ({ plain }) => {
   const { t } = useTranslation(['auth', 'error']);
   const {
     handleSubmit,
@@ -52,28 +59,35 @@ const SignupForm: React.FC = () => {
     });
   };
 
+  const FormWrapper = plain ? WrapperPlain : Wrapper;
+
   return (
-    <Wrapper>
-      <LineBox>
-        <ColouredLine />
-        <Box flex={1} height={'100%'} />
-      </LineBox>
+    <FormWrapper>
+      {!plain && (
+        <LineBox>
+          <ColouredLine />
+          <Box flex={1} height={'100%'} />
+        </LineBox>
+      )}
+
       <Box padding={'0 32px'}>
         <ZigTypography variant={'h1'} align={'center'}>
           {t('signup-title')}
         </ZigTypography>
-        <ZigTypography variant={'h2'} align={'center'}>
-          <Trans i18nKey={'signup-description'} t={t}>
-            <Link
-              underline={'always'}
-              sx={{
-                color: 'neutral000',
-                textUnderlineOffset: '10px',
-                textDecorationColor: '#E1E9F0',
-              }}
-            />
-          </Trans>
-        </ZigTypography>
+        {!plain && (
+          <ZigTypography variant={'h2'} align={'center'}>
+            <Trans i18nKey={'signup-description'} t={t}>
+              <Link
+                underline={'always'}
+                sx={{
+                  color: 'neutral000',
+                  textUnderlineOffset: '10px',
+                  textDecorationColor: '#E1E9F0',
+                }}
+              />
+            </Trans>
+          </ZigTypography>
+        )}
         <Form onSubmit={handleSubmit(onSubmit)}>
           {/* eslint-disable-next-line @typescript-eslint/ban-ts-comment */}
           {/* @ts-ignore */}
@@ -176,29 +190,32 @@ const SignupForm: React.FC = () => {
               id={'signup__submit'}
               size={'xlarge'}
               loading={signingUp}
-              fullWidth
+              fullWidth={!plain}
             >
               {t('signup-form.submit')}
             </ZigButton>
           </Action>
-          <Box
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '5px',
-            }}
-          >
-            <LockIcon color={'secondary'} fontSize={'small'} />
-            <ZigTypography
-              variant={'h3'}
-              color={'neutral300'}
-              textAlign={'center'}
-              marginTop={'5px'}
+
+          {!plain && (
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '5px',
+              }}
             >
-              {t('signup-protect')}
-            </ZigTypography>
-          </Box>
+              <LockIcon color={'secondary'} fontSize={'small'} />
+              <ZigTypography
+                variant={'h3'}
+                color={'neutral300'}
+                textAlign={'center'}
+                marginTop={'5px'}
+              >
+                {t('signup-protect')}
+              </ZigTypography>
+            </Box>
+          )}
           <ZigButton
             variant={'text'}
             id={'signup__login'}
@@ -208,7 +225,7 @@ const SignupForm: React.FC = () => {
           </ZigButton>
         </Form>
       </Box>
-    </Wrapper>
+    </FormWrapper>
   );
 };
 

@@ -1,31 +1,13 @@
-name: PS2 Test deploy
+name: PS2 Cryptomaniacos test deploy
 on:
   push:
     branches:
-      - test
-      - feat/new-domains
+      - feat/whitelabel
 
 jobs:
-  pre_job:
-    runs-on: ubuntu-latest
-    outputs:
-      should_skip: ${{ steps.skip_check.outputs.should_skip }}
-      paths_result: ${{ steps.skip_check.outputs.paths_result }}
-    steps:
-      - id: skip_check
-        uses: fkirc/skip-duplicate-actions@v4
-        with:
-          paths_filter: |
-            ui_repos:
-              paths:
-                - 'packages/ps2/**/*'
-                - 'packages/zignaly-ui/**/*'
-
   build:
-    name: PS2 Test deploy
-    needs: pre_job
+    name: PS2 Test (temporarily Cryptomaniacos) deploy
     timeout-minutes: 20
-    if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).ui_repos.should_skip
     runs-on: ubuntu-latest
     environment: test
     steps:
@@ -36,6 +18,7 @@ jobs:
       - name: Create client .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
+          envkey_REACT_APP_WHITELABEL: cryptomaniacos
           envkey_EXTEND_ESLINT: true
           envkey_DISABLE_ESLINT_PLUGIN: true
           envkey_ESLINT_NO_DEV_ERRORS: true

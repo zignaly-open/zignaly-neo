@@ -5,26 +5,9 @@ on:
       - master
 
 jobs:
-  pre_job:
-    runs-on: ubuntu-latest
-    outputs:
-      should_skip: ${{ steps.skip_check.outputs.should_skip }}
-      paths_result: ${{ steps.skip_check.outputs.paths_result }}
-    steps:
-      - id: skip_check
-        uses: fkirc/skip-duplicate-actions@v4
-        with:
-          paths_filter: |
-            ui_repos:
-              paths:
-                - 'packages/ps2/**/*'
-                - 'packages/zignaly-ui/**/*'
-
   build:
     name: PS2 Staging deploy
-    needs: pre_job
     timeout-minutes: 20
-    if: needs.pre_job.outputs.should_skip != 'true' || !fromJSON(needs.pre_job.outputs.paths_result).ui_repos.should_skip
     runs-on: ubuntu-latest
     environment: test
     steps:
@@ -40,9 +23,6 @@ jobs:
           envkey_REACT_APP_SEGMENT_KEY: ${{ secrets.PS2_SEGMENT_KEY }}
           envkey_REACT_APP_ENABLE_TRACKING: true
           envkey_REACT_APP_SEGMENT_SCRIPT_SRC: ${{ secrets.PS2_SEGMENT_SCRIPT_SRC }}
-          # well yeah we could store all this as action secrets in the repo
-          # but would that make any sense since these values are not secret
-          # and anyone with a half-functioning brain can reverse-engineer those from the source code
           envkey_REACT_APP_GTM_ID: GTM-5ZQ4JLK
           envkey_REACT_APP_ENABLE_TEST_LANGUAGE: 1
           envkey_REACT_APP_MOBILE_VERSION_URL: https://m.staging.zignaly.com

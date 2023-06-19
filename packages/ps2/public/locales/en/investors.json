@@ -4,6 +4,17 @@
   "title": "Investors",
   "number-of-investors_one": "{{count}} Investor",
   "number-of-investors_other": "{{count}} Investors",
+  "change-fee": "Edit success fee",
+  "change-fee-modal": {
+    "title": "Success Fee Discount",
+    "desc": "Recognize your valuable investors offering them a discount in the Success Fee",
+    "input-desc": "Discount that will be applied on the Success Fee",
+    "discount": "Discount",
+    "new-success-fee": "Success Fee",
+    "fee-edited": "Success Fee edited successfully",
+    "validate-must-be-gte-0": "Must not be < 0",
+    "validate-must-be-lte-100": "Must be not more than 100%"
+  },
   "tableHeader": {
     "email": "Email",
     "userId": "User ID",
