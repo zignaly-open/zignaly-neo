@@ -9,10 +9,12 @@ const ZigQrCode = ({
   url = "www.zignaly.com",
   label = "",
   id,
+  extraInfo,
 }: {
   url?: string;
   label?: string;
   id?: string;
+  extraInfo?: JSX.Element;
 }) => {
   return (
     <Column justifyContent="center" alignItems="center" gap={8}>
@@ -22,6 +24,17 @@ const ZigQrCode = ({
         </ZigTypography>
       )}
       <QRCodeContainer>
+        {extraInfo && (
+          <ZigTypography
+            color="neutral600"
+            lineHeight="20px"
+            fontSize="13px"
+            marginTop="-8px"
+            marginBottom="7px"
+          >
+            {extraInfo}
+          </ZigTypography>
+        )}
         <QRCodeSVG size={160} value={url} id={id} />
       </QRCodeContainer>
     </Column>

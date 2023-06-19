@@ -7,18 +7,24 @@ import { DepositModalProps } from './types';
 
 function DepositModal({
   close,
+  onClose,
   selectedCoin,
   allowedCoins,
   ...props
 }: {
-  close: () => void;
+  // Callback to close invest modal when called from there
+  onClose: () => void;
 } & DepositModalProps &
   DialogProps): React.ReactElement {
   const { t } = useTranslation(['deposit-crypto']);
 
   return (
     <ZModal wide {...props} close={close} title={t('title')}>
-      <DepositView allowedCoins={allowedCoins} selectedCoin={selectedCoin} />
+      <DepositView
+        allowedCoins={allowedCoins}
+        selectedCoin={selectedCoin}
+        close={onClose}
+      />
     </ZModal>
   );
 }
