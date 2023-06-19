@@ -10,6 +10,8 @@ import {
   ZigTypography,
   ZigCopyText,
   ZigLink,
+  ZigButton,
+  ZigListIcon,
 } from '@zignaly-open/ui';
 import NorthEastIcon from '@mui/icons-material/NorthEast';
 import { DepositFormData } from './types';
@@ -34,14 +36,17 @@ import {
   DEPOSIT_INFO_URL,
 } from '../../../../../../util/constants';
 import { Form } from 'components/ZModal';
+import { ROUTE_MY_BALANCES_TRANSACTIONS } from 'routes';
+import { useNavigate } from 'react-router-dom';
 
-function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
+function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
   const { data: balances } = useCoinBalances({ convert: true });
   const { data: coins } = useExchangeCoinsList();
   const { exchangeType } = useActiveExchange();
   const { userId } = useCurrentUser();
   const toast = useToast();
+  const navigate = useNavigate();
 
   const { handleSubmit, control, watch, setValue } = useForm<DepositFormData>({
     mode: 'onChange',
@@ -116,9 +121,15 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
     }
   }, []);
 
+  const navigateHistory = () => {
+    // Close invest modal
+    close();
+    navigate(ROUTE_MY_BALANCES_TRANSACTIONS);
+  };
+
   return (
     <Form onSubmit={handleSubmit(() => {})}>
-      <ZigTypography id={'deposit-modal__description'}>
+      <ZigTypography id={'deposit-modal__description'} textAlign='center'>
         <Trans t={t} i18nKey={'description'}>
           <BinanceLogo
             width={16}
@@ -164,7 +175,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             xs={12}
             md={6}
             sx={{
-              pt: 3,
+              pt: '32px',
               pl: 6,
               display: 'flex',
               flexDirection: 'column',
@@ -173,35 +184,25 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
             <ZigTypography
               variant='body2'
               color='neutral200'
-              fontWeight='medium'
-              id={'deposit-modal-balances__total-text'}
+              id={'deposit-modal-balances__free-text'}
             >
-              {t('balances.total')}{' '}
-              <ZigTypography
-                variant='body2'
-                color='neutral000'
-                fontWeight='medium'
-              >
+              {t('balances.balanceFree')}{' '}
+              <ZigTypography variant='body2' color='neutral200'>
                 <NumericFormat
-                  id={'deposit-modal-balances__total'}
+                  id={'deposit-modal-balances__free'}
+                  value={coinObject?.available ?? ''}
                   displayType={'text'}
-                  value={coinObject?.balance ?? ''}
                 />
               </ZigTypography>{' '}
               {coin ?? ''}
             </ZigTypography>
             <ZigTypography
               variant='body2'
-              color='neutral200'
-              fontWeight='medium'
+              color='neutral400'
               id={'deposit-modal-balances__locked-text'}
             >
               {t('balances.balanceLocked')}{' '}
-              <ZigTypography
-                variant='body2'
-                color='neutral000'
-                fontWeight='medium'
-              >
+              <ZigTypography variant='body2' color='neutral400'>
                 <NumericFormat
                   id={'deposit-modal-balances__locked'}
                   value={coinObject?.inOrders ?? ''}
@@ -211,21 +212,16 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               {coin ?? ''}
             </ZigTypography>
             <ZigTypography
+              color='neutral400'
               variant='body2'
-              color='neutral200'
-              fontWeight='medium'
-              id={'deposit-modal-balances__free-text'}
+              id={'deposit-modal-balances__total-text'}
             >
-              {t('balances.balanceFree')}{' '}
-              <ZigTypography
-                variant='body2'
-                color='neutral000'
-                fontWeight='medium'
-              >
+              {t('balances.total')}{' '}
+              <ZigTypography variant='body2' color='neutral400'>
                 <NumericFormat
-                  id={'deposit-modal-balances__free'}
-                  value={coinObject?.available ?? ''}
+                  id={'deposit-modal-balances__total'}
                   displayType={'text'}
+                  value={coinObject?.balance ?? ''}
                 />
               </ZigTypography>{' '}
               {coin ?? ''}
@@ -354,25 +350,41 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
           </>
         )}
 
-        <Grid item xs={12}>
-          <ZigTypography variant={'body2'} color={'neutral300'}>
-            <ZigLink
-              href={BUY_CRYPTO_URL}
-              target={'_blank'}
-              id={'deposit-modal__buy-crypto-link'}
-            >
-              <Box
-                sx={{
-                  display: 'flex',
-                  gap: 0.5,
-                  alignItems: 'center',
-                }}
-              >
-                {t('buy-crypto')}
-                <NorthEastIcon fontSize={'inherit'} />
-              </Box>
-            </ZigLink>
-          </ZigTypography>
+        <Grid
+          item
+          xs={12}
+          display='flex'
+          justifyContent='space-between'
+          alignItems='center'
+        >
+          <ZigButton
+            id={'deposit-modal__history'}
+            endIcon={
+              <NorthEastIcon
+                fontSize={'inherit'}
+                sx={{ fill: 'currentcolor !important' }}
+              />
+            }
+            variant='text'
+            href={BUY_CRYPTO_URL}
+          >
+            {t('buy-crypto')}
+          </ZigButton>
+          <ZigButton
+            id={'deposit-modal__history'}
+            startIcon={
+              <ZigListIcon
+                width={'24px'}
+                height={'24px'}
+                color={'neutral100'}
+                style={{ marginTop: '3px' }}
+              />
+            }
+            variant='text'
+            onClick={navigateHistory}
+          >
+            {t('history')}
+          </ZigButton>
         </Grid>
       </Grid>
     </Form>

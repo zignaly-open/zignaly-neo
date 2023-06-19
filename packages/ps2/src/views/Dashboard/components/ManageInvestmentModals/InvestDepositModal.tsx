@@ -44,7 +44,7 @@ function InvestDepositModal({
   useSelectInvestment(service);
   useMaybeNavigateNotLoggedIn();
 
-  const depositModal = useDepositModalContent(service?.ssc);
+  const depositModal = useDepositModalContent(service?.ssc, props.close);
   const investModal = useInvestModalContent({ close: props.close });
 
   const showDeposit = +balance === 0;

@@ -32,7 +32,7 @@ import { trackCta } from '@zignaly-open/tracker';
 import { useDebounce } from 'react-use';
 import { InvestmentViews } from '../../types';
 
-function InvestForm({ view, setView }: InvestFormProps) {
+function InvestForm({ view, setView, close }: InvestFormProps) {
   const coin = useCurrentBalance();
   const { t } = useTranslation(['edit-investment', 'action']);
   const service = useSelectedInvestment();
@@ -126,6 +126,8 @@ function InvestForm({ view, setView }: InvestFormProps) {
         showModal(DepositModal, {
           ctaId: 'invest-modal-deposit',
           selectedCoin: coin.id,
+          // Callback to close the modal if user navigates to history from the deposit modal
+          onClose: close,
         })
       }
     >

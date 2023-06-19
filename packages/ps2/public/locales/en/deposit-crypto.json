@@ -18,7 +18,7 @@
   "balances": {
     "loadingAriaLabel": "Loading coin balances",
     "total": "Balance:",
-    "balanceLocked": "In Orders:",
+    "balanceLocked": "In orders:",
     "balanceFree": "Available:"
   },
   "networkSelector": {
@@ -42,5 +42,6 @@
     "address": "{{coin}} Address",
     "memo": "{{coin}} MEMO/Tag"
   },
-  "buy-crypto": "Buy Crypto"
+  "buy-crypto": "Buy Crypto",
+  "history": "History"
 }
