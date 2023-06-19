@@ -317,7 +317,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
               item
               xs={12}
               sx={{
-                minHeight: '100px',
+                minHeight: '160px',
                 alignItems: 'center',
                 textAlign: 'center',
               }}
@@ -328,7 +328,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    height: '200px',
+                    height: '160px',
                   }}
                 >
                   <Loader />
@@ -381,7 +381,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
           display='flex'
           justifyContent='space-between'
           alignItems='center'
-          mt={-1}
+          mt={!!network && networkObject?.depositEnable ? -4 : 0}
         >
           <ZigButton
             id={'deposit-modal__history'}
