@@ -6,7 +6,7 @@ import dark from "theme/dark";
 const withSeparator = (props: WithSeparator) =>
   props.separator &&
   css`
-    border-top: 1px dotted rgb(44, 45, 89);
+    border-top: 1px dotted ${({ theme }) => theme.neutral600};
     margin: 6px 35px 6px;
   `;
 
@@ -113,6 +113,23 @@ export const ComponentSeparator = styled.div<
 export const NavList = styled.div`
   display: flex;
   flex-direction: column;
+  > *:first-child {
+    margin-top: 11px;
+  }
+  > *:last-child {
+    margin-bottom: 6px;
+  }
+`;
+
+export const SubNavList = styled.div`
+  display: flex;
+  flex-direction: column;
+  > *:first-child {
+    margin-top: 6px;
+  }
+  > *:last-child {
+    margin-bottom: 6px;
+  }
 `;
 
 export const ChildContainer = styled.div<{ active: boolean } & WithSeparator>`
@@ -120,6 +137,7 @@ export const ChildContainer = styled.div<{ active: boolean } & WithSeparator>`
     props.active &&
     css`
       background: rgb(25, 26, 48);
+      margin-bottom: 0 !important;
     `}
 
   ${withSeparator}

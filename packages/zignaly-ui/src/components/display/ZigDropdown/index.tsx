@@ -11,6 +11,7 @@ import {
   NavList,
   SpaceTaker,
   ComponentSeparator,
+  SubNavList,
 } from "./styles";
 import { useTheme } from "styled-components";
 import Theme from "theme/theme";
@@ -180,22 +181,25 @@ const ZigDropdown: (
                           />
                         )}
                       </NavLink>
-                      {childDropdownShow === option &&
-                        option.children.map((c, index) => (
-                          <NavLink
-                            id={c.id}
-                            active={c?.active || undefined}
-                            key={
-                              "--sub-" +
-                              key +
-                              "--" +
-                              (typeof c.label === "string" ? c.label : `-child-${index}`)
-                            }
-                            onClick={onClick(c.onClick!)}
-                          >
-                            {c.label}
-                          </NavLink>
-                        ))}
+                      {childDropdownShow === option && (
+                        <SubNavList>
+                          {option.children.map((c, index) => (
+                            <NavLink
+                              id={c.id}
+                              active={c?.active || undefined}
+                              key={
+                                "--sub-" +
+                                key +
+                                "--" +
+                                (typeof c.label === "string" ? c.label : `-child-${index}`)
+                              }
+                              onClick={onClick(c.onClick!)}
+                            >
+                              {c.label}
+                            </NavLink>
+                          ))}
+                        </SubNavList>
+                      )}
                     </ChildContainer>
                   );
               })}

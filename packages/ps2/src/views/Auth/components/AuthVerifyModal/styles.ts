@@ -1,6 +1,6 @@
 import { styled } from '@mui/material';
 
-export const Container = styled('div')`
+export const Container = styled('div')<{ isSeveralCodes?: boolean }>`
   display: flex;
   width: 100%;
   align-items: center;
@@ -8,6 +8,12 @@ export const Container = styled('div')`
   flex-direction: column;
   gap: 60px;
   overflow-y: hidden;
+  ${(props) => `
+  form > fieldset > :first-child {
+    margin-bottom: ${props.isSeveralCodes && '0'};
+  }
+    
+  `}
 `;
 
 export const Title = styled('div')`

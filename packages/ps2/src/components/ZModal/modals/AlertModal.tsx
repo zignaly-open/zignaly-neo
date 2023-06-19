@@ -27,22 +27,24 @@ function AlertModal({
 
   return (
     <ZModal allowUnauth {...props} close={close} title={title}>
-      {!!description && <ZigTypography>{description}</ZigTypography>}
+      <div>
+        {!!description && <ZigTypography>{description}</ZigTypography>}
 
-      <Box sx={{ mt: 2, textAlign: 'center' }}>
-        <ZigButton
-          sx={{ mr: 1 }}
-          variant={'contained'}
-          type='submit'
-          size={'large'}
-          onClick={() => {
-            okAction?.();
-            close();
-          }}
-        >
-          {okLabel || t('confirm')}
-        </ZigButton>
-      </Box>
+        <Box sx={{ mt: '35px', textAlign: 'center' }}>
+          <ZigButton
+            sx={{ mr: 1 }}
+            variant={'contained'}
+            type='submit'
+            size={'large'}
+            onClick={() => {
+              okAction?.();
+              close();
+            }}
+          >
+            {okLabel || t('confirm')}
+          </ZigButton>
+        </Box>
+      </div>
     </ZModal>
   );
 }

@@ -71,8 +71,8 @@ export const Networks = styled('div')`
   align-items: center;
   gap: 16px;
   background: rgb(28, 29, 53);
-  padding: 20px 32px;
-  margin: 0px -32px -6px;
+  padding: 19px 32px;
+  margin: 6px -32px -12px;
 
   > a {
     line-height: 0;

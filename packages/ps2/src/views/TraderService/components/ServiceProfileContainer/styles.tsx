@@ -73,7 +73,7 @@ export const InvestButtonContainer = styled('div')`
   border: 1px dotted ${({ theme }) => theme.palette.neutral600};
   border-top: none;
   align-items: center;
-  margin: 0 20px;
+  padding: 15px 25px;
   position: relative;
   border-radius: 5px;
   text-align: center;
@@ -99,19 +99,9 @@ export const TopDivider = styled(Divider)`
   }
 `;
 
-export const BigNumberWrapperInvested = styled('div')`
-  span {
-    font-weight: 500;
-    font-size: 22px !important;
-    line-height: 36px !important;
-  }
-`;
-
 export const BigNumberWrapper = styled('div')`
   & > div span {
     font-weight: 500;
-    font-size: 22px !important;
-    line-height: 36px !important;
   }
 `;
 
@@ -168,6 +158,10 @@ export const MarkdownContainer = styled('div')`
 
   img {
     max-width: 100%;
+  }
+
+  p {
+    margin-bottom: 16px;
   }
 `;
 
