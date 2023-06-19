@@ -8,7 +8,7 @@
     "analyze": "rm -rf ./build/*; lerna run build --scope=@zignaly-open/ps2 --include-dependencies; source-map-explorer 'build/static/js/*.js'",
     "build": "react-app-rewired build && generate-version",
     "test": "react-app-rewired test",
-    "test:ci": "CI=1 react-app-rewired test --passWithNoTests a",
+    "test:ci": "CI=1 react-app-rewired test --passWithNoTests a --transformIgnorePatterns \"node_modules/(?!lodash-es|react-markdown|react-image-webp)\"",
     "eject": "react-scripts eject",
     "lint:tsc": "tsc --noemit",
     "lint:eslint": "eslint --fix --ignore-path .eslintignore ./src --ext .ts,.tsx",
