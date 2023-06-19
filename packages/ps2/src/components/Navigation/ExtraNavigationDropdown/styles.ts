@@ -66,12 +66,17 @@ export const NavList = styled('div')`
 
 export const Networks = styled('div')`
   display: grid;
-  max-width: 185px;
   grid-template-columns: repeat(5, minmax(0%, 100%));
   justify-content: center;
   align-items: center;
   gap: 16px;
-  padding-top: 8px;
+  background: rgb(28, 29, 53);
+  padding: 19px 32px;
+  margin: 6px -32px -12px;
+
+  > a {
+    line-height: 0;
+  }
 
   span svg {
     fill: #707185;

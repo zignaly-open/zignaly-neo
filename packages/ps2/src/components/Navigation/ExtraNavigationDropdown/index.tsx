@@ -63,7 +63,10 @@ const ExtraNavigationDropdown: React.FC = () => {
       id: 'menu-dropdown__to-mobile',
       onClick: goToMobileVersion,
     },
-    { separator: true },
+    {
+      separator: true,
+      customStyle: `margin-top: 11px; margin-bottom: 12px;`,
+    },
     {
       id: 'menu-dropdown__language-switcher',
       label: (

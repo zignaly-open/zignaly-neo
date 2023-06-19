@@ -87,14 +87,17 @@ export const Inline = styled('div')<{ align?: string }>`
   gap: 12px;
 `;
 
-export const ModalActions = styled('div')<{
+export const ModalActions = styled(
+  withAttrs(Box, {
+    /* margin-top will be overwritten when inside Form */
+    mt: '35px',
+  }),
+)<{
   align?: 'left' | 'center' | 'right';
   direction?: 'row' | 'column';
 }>`
   display: flex;
   align-items: center;
-  /* margin-top only kept if not inside a Form */
-  margin-top: 35px;
   gap: 32px;
   flex-direction: ${({ direction }) => direction};
   width: 100%;
@@ -116,7 +119,7 @@ export const Form = styled(
 )`
   // Set ModalActions margin-top here to be sure it's only applied when inside a Form
   // todo: https://mui.com/system/styled/#how-to-use-components-selector-api
-  > div:last-child:has(button) {
+  > div:last-child {
     margin-top: 11px;
   }
 `;

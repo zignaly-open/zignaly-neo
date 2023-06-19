@@ -41,8 +41,8 @@ const MarketplaceAction = ({
     : 0;
 
   return (
-    <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-      <Box sx={{ minWidth: 195 }}>
+    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+      <Box sx={{ minWidth: 155 }}>
         {isLoading ? (
           loadingSpinner
         ) : (

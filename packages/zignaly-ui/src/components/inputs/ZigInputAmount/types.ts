@@ -25,7 +25,7 @@ export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"
    */
   wrapExtraInfo?: number | boolean;
   /**
-   * Custom onMax callback, if not provided, onChange will be called with the max value.
+   * Custom onMax callback but onChange will already be called with the max value.
    */
   onMax?: () => void;
   /**
@@ -38,6 +38,7 @@ export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"
   /** Showed as info */
   max?: string | number;
   className?: string;
+  labelInline?: boolean;
 };
 
 export type InputExtraInfoItem = { value: string | number; label: string };

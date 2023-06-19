@@ -27,25 +27,23 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     id,
     children,
     className = "",
+    labelInline = true,
     ...rest
   } = props;
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
 
-  /**
-   * Call custom onMax function or call onChange with max value event for RHF
-   */
   const handleMax = () => {
-    if (onMax) return onMax();
-    if (props.onChange && balance !== "undefined") {
-      props.onChange(
-        changeEvent(
-          props.name,
-          max !== "undefined" && new BigNumber(max!).isLessThan(new BigNumber(balance!))
-            ? max
-            : balance,
-        ) as React.ChangeEvent<HTMLInputElement>,
-      );
+    if (props.onChange && (balance !== undefined || max !== undefined)) {
+      const newValue =
+        max !== undefined &&
+        (balance === undefined || new BigNumber(max!).isLessThan(new BigNumber(balance!)))
+          ? max
+          : balance;
+      props.onChange(changeEvent(props.name, newValue) as React.ChangeEvent<HTMLInputElement>);
     }
+
+    // Optional callback
+    onMax?.();
   };
 
   /**
@@ -73,12 +71,15 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
 
   return (
     <Box display="flex" flexDirection="column" className={className}>
-      <Layout display={wide ? "flex" : "inline-flex"} error={!!error}>
-        <TopDivider error={!!error}>
-          <ZigTypography color="neutral300" variant="body2">
-            {label}
-          </ZigTypography>
-        </TopDivider>
+      {!labelInline && label && <ZigTypography pb="10px">{label}</ZigTypography>}
+      <Layout display={wide ? "flex" : "inline-flex"} error={!!error} labelInline={labelInline}>
+        {labelInline && (
+          <TopDivider error={!!error}>
+            <ZigTypography color="neutral300" variant="body2">
+              {label}
+            </ZigTypography>
+          </TopDivider>
+        )}
         <Box display="flex" alignItems="center" gap={2} width={wide ? 1 : "auto"}>
           <Box display="flex" alignItems="center" gap={1}>
             <ZigCoinIcon size="small" coin={coinVal} />
@@ -131,7 +132,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
         </Box>
       </Layout>
       {error && typeof error === "string" && (
-        <Box alignSelf="flex-start" mt="11px">
+        <Box alignSelf="flex-start">
           <ErrorMessage text={error} id={id && `${id}-error`} />
         </Box>
       )}

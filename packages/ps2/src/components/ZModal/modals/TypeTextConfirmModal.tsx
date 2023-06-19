@@ -45,6 +45,7 @@ function TypeTextConfirmModal({
           setConfirmWord(e.target.value);
         }}
         value={confirmWord}
+        placeholder={safeWord.toUpperCase()}
         fullWidth
       />
 
@@ -59,7 +60,7 @@ function TypeTextConfirmModal({
           disabled={typedCorrectly}
           tooltip={
             typedCorrectly
-              ? t('common:type-to-confirm', { word: safeWord })
+              ? t('common:type-to-confirm', { word: safeWord.toUpperCase() })
               : undefined
           }
           type='submit'

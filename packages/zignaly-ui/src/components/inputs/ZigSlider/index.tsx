@@ -17,8 +17,13 @@ const marks = [
 ];
 
 const ZigSlider = forwardRef(
-  ({ labels, prefixId, className = "", ...props }: ZigSliderProps, ref) => {
-    const showLabels = labels?.start || labels?.end;
+  ({ labels = {}, prefixId, className = "", valueLabelFormat, ...props }: ZigSliderProps, ref) => {
+    let valueLabelFormatDefaulted = valueLabelFormat;
+    if (!valueLabelFormatDefaulted && (!props.max || props.max === 100)) {
+      valueLabelFormatDefaulted = (value: number) => `${value}%`;
+    }
+    const { start, end, showValues = true } = labels;
+    const showLabels = start || end;
 
     return (
       <Box
@@ -35,31 +40,40 @@ const ZigSlider = forwardRef(
             {labels?.top}
           </ZigTypography>
         )}
-        <Box display="flex" width={1} gap={1} alignItems="center" pt={3} position="relative">
+        <Box
+          display="flex"
+          width={1}
+          gap={1}
+          alignItems="center"
+          pt={showLabels ? 3 : 0}
+          position="relative"
+        >
           <Box display="flex" width={1} gap={1} alignItems="center" px={showLabels ? "6px" : 0}>
-            {showLabels && (
+            {showValues && (
               <SliderLabelValue
                 side="start"
                 labels={labels}
+                min={props.min}
                 max={props.max}
                 value={props.value as number}
+                valueLabelFormat={valueLabelFormatDefaulted}
               />
             )}
             <Slider
               marks={marks}
-              sx={{
-                "& .MuiSlider-track": {
-                  color: "transparent",
-                },
-              }}
+              track={false}
+              valueLabelDisplay={labels.invertSliderValues ? "off" : "auto"}
+              valueLabelFormat={valueLabelFormatDefaulted}
               {...props}
             />
-            {showLabels && (
+            {showValues && (
               <SliderLabelValue
                 side="end"
                 labels={labels}
+                min={props.min}
                 max={props.max}
                 value={props.value as number}
+                valueLabelFormat={valueLabelFormatDefaulted}
               />
             )}
           </Box>

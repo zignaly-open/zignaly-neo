@@ -6,15 +6,8 @@ import dark from "theme/dark";
 const withSeparator = (props: WithSeparator) =>
   props.separator &&
   css`
-    position: relative;
-    &:after {
-      content: "";
-      border-top: 1px solid rgb(44, 45, 89);
-      position: absolute;
-      left: 30px;
-      right: 30px;
-      top: 0;
-    }
+    border-top: 1px dotted ${({ theme }) => theme.neutral600};
+    margin: 6px 35px 6px;
   `;
 
 type WithSeparator = { separator?: boolean };
@@ -36,7 +29,8 @@ export const Component = styled.div`
 `;
 
 export const ComponentWrapper = styled.div<WithSeparator & WithCustomStyle>`
-  padding: 5px 30px;
+  padding: 6px 32px;
+
   ${(props) => props.customStyle || ""};
   ${withSeparator}
 `;
@@ -50,21 +44,21 @@ export const NavLink = styled.span<
   } & WithSeparator &
     WithCustomStyle
 >`
-  color: ${dark.neutral100};
+  color: ${dark.neutral200};
   font-weight: 400;
   font-size: 14px;
   line-height: 28px;
-  padding: 6px 36px;
+  padding: 6px 32px;
   letter-spacing: 0.55px;
   text-decoration: none;
   transition: 0.15s linear;
-  max-width: 245px;
 
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 12px;
   overflow: hidden;
+  max-width: 245px;
 
   svg {
     transition: 0.15s linear;
@@ -119,6 +113,23 @@ export const ComponentSeparator = styled.div<
 export const NavList = styled.div`
   display: flex;
   flex-direction: column;
+  > *:first-child {
+    margin-top: 11px;
+  }
+  > *:last-child {
+    margin-bottom: 6px;
+  }
+`;
+
+export const SubNavList = styled.div`
+  display: flex;
+  flex-direction: column;
+  > *:first-child {
+    margin-top: 6px;
+  }
+  > *:last-child {
+    margin-bottom: 6px;
+  }
 `;
 
 export const ChildContainer = styled.div<{ active: boolean } & WithSeparator>`
@@ -126,6 +137,7 @@ export const ChildContainer = styled.div<{ active: boolean } & WithSeparator>`
     props.active &&
     css`
       background: rgb(25, 26, 48);
+      margin-bottom: 0 !important;
     `}
 
   ${withSeparator}

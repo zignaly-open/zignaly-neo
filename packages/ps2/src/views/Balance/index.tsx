@@ -12,7 +12,7 @@ import MyBalancesTable from './components/MyBalancesTable';
 import TransactionHistoryTable from './components/TransactionsHistoryTable';
 import BalanceAccountSelector from './components/BalanceAccountSelector';
 import { Header, StyledZigSelect } from './styles';
-import { useTitle } from 'react-use';
+import { useTitle, useUpdateEffect } from 'react-use';
 import { useTranslation } from 'react-i18next';
 import { OpenInNew } from '@mui/icons-material';
 import ExportModal from './components/ExportModal';
@@ -24,6 +24,13 @@ import { CSSObject } from '@emotion/react';
 import createZModalRouteElement from '../../components/ZModal/ZModalRoute';
 import DepositModal from '../Dashboard/components/ManageInvestmentModals/DepositModal';
 import { usePrefetchTranslation } from 'util/i18nextHelpers';
+import { ROUTE_MY_BALANCES, ROUTE_MY_BALANCES_TRANSACTIONS } from 'routes';
+import { Link, generatePath, matchPath } from 'react-router-dom';
+
+const matchRoute = () =>
+  [ROUTE_MY_BALANCES_TRANSACTIONS, ROUTE_MY_BALANCES].find((tab) =>
+    matchPath({ path: tab, end: false }, location.pathname),
+  );
 
 const MyBalances: React.FC = () => {
   const { t } = useTranslation([
@@ -33,7 +40,13 @@ const MyBalances: React.FC = () => {
   ]);
   useTitle(t('my-balances'));
   usePrefetchTranslation(['withdraw-crypto', 'deposit-crypto']);
-  const [tab, setTab] = useState(0);
+
+  useUpdateEffect(() => {
+    // On url change, find the matching tab and set it as the active tab
+    setTab(matchRoute());
+  }, [location.pathname]);
+
+  const [tab, setTab] = useState(matchRoute());
   const [type, setType] = useState('all');
   const { showModal } = useZModal();
 
@@ -72,18 +85,28 @@ const MyBalances: React.FC = () => {
         </Header>
         <Box height='67px' display='flex' alignItems='center'>
           <ZigTabs
-            onChange={(_, newValue) => {
+            value={tab}
+            onChange={(event, newValue) => {
               setTab(newValue);
             }}
-            value={tab}
           >
             <ZigTab
               label={t('my-balances:my-coins')}
               id={'balance__my-coins'}
+              value={ROUTE_MY_BALANCES}
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              to={generatePath(ROUTE_MY_BALANCES)}
+              component={Link}
             />
             <ZigTab
               id={'balance__deposits-withdrawals'}
               label={t('my-balances:deposits-withdrawals')}
+              value={ROUTE_MY_BALANCES_TRANSACTIONS}
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              component={Link}
+              to={generatePath(ROUTE_MY_BALANCES_TRANSACTIONS)}
               asideComponent={
                 <Box display='flex' gap={2}>
                   <ZigButton
@@ -131,10 +154,10 @@ const MyBalances: React.FC = () => {
             />
           </ZigTabs>
         </Box>
-        <ZigTabPanel value={tab} index={0}>
+        <ZigTabPanel value={tab} index={ROUTE_MY_BALANCES}>
           <MyBalancesTable />
         </ZigTabPanel>
-        <ZigTabPanel value={tab} index={1}>
+        <ZigTabPanel value={tab} index={ROUTE_MY_BALANCES_TRANSACTIONS}>
           <TransactionHistoryTable type={type !== 'all' ? type : null} />
         </ZigTabPanel>
       </MarginContainer>

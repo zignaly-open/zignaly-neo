@@ -52,6 +52,10 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
   const coin = watch('coin');
   const network = watch('network');
 
+  useEffect(() => {
+    network && trackCta({ ctaId: 'select-network' });
+  }, [network]);
+
   const coinOptions = useMemo(
     () =>
       allowedDeposits[exchangeType]?.map((ssc) => {
@@ -85,6 +89,10 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
     coin,
     network,
   );
+
+  useEffect(() => {
+    depositInfo && trackCta({ ctaId: 'show-deposit-info' });
+  }, [depositInfo]);
 
   const coinObject = coin && coinOptions?.find((x) => x.value === coin);
   const networkObject =
@@ -243,6 +251,11 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               />
             )}
           />
+          <div>
+            {!!network && !networkObject?.depositEnable && (
+              <ErrorMessage text={t('no-network')} />
+            )}
+          </div>
         </Grid>
 
         {!!network && networkObject?.depositEnable && (
@@ -341,9 +354,6 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
           </>
         )}
 
-        {!!network && !networkObject?.depositEnable && (
-          <ErrorMessage text={t('no-network')} />
-        )}
         <Grid item xs={12}>
           <ZigTypography variant={'body2'} color={'neutral300'}>
             <ZigLink

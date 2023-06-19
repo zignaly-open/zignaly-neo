@@ -1,12 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  InputAmountAdvanced,
-  InputAmountAdvancedValueType,
+  getPrecisionForCoin,
   ZigButton,
+  ZigInputAmount,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { FieldErrorsImpl, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 import { InvestInYourServiceValidation } from '../validations';
 import { Grid } from '@mui/material';
@@ -25,8 +25,7 @@ import { ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 const InvestInYourServiceForm: React.FC<{
   service?: ServiceFormData;
-  goBack: () => void;
-}> = ({ service, goBack }) => {
+}> = ({ service }) => {
   const { t } = useTranslation(['service', 'edit-investment']);
   const coin = useCurrentBalance(service.baseCurrency);
   const exchange = useActiveExchange();
@@ -40,26 +39,25 @@ const InvestInYourServiceForm: React.FC<{
     handleSubmit,
     control,
     formState: { errors },
+    watch,
   } = useForm<ServiceInvestType>({
-    mode: 'onTouched',
-    reValidateMode: 'onBlur',
-    resolver: yupResolver(InvestInYourServiceValidation),
-    defaultValues: {
-      amountToInvest: {
-        value: '',
-        token: {
-          ...coin,
-          min: minValue,
-        },
-      },
-    },
+    mode: 'onChange',
+    reValidateMode: 'onChange',
+    resolver: yupResolver(
+      InvestInYourServiceValidation({
+        maxDecimals: getPrecisionForCoin(coin.id),
+        min: minValue,
+        coin: coin.id,
+        balance: coin.balance,
+      }),
+    ),
   });
 
   const onSubmit = async ({ amountToInvest }: ServiceInvestType) => {
     const result = await createService({
       name: service.serviceName,
       type: service.serviceType.toLocaleUpperCase(),
-      amount: amountToInvest.value,
+      amount: amountToInvest,
       ssc: service.baseCurrency,
       successFee: service.successFee,
       exchangeInternalId: exchange.internalId,
@@ -78,6 +76,7 @@ const InvestInYourServiceForm: React.FC<{
     <form onSubmit={handleSubmit(onSubmit)}>
       <InvestorDetailsForService
         service={{
+          serviceLogo: '',
           successFee: service.successFee?.toString(),
           serviceName: service.serviceName,
         }}
@@ -85,33 +84,36 @@ const InvestInYourServiceForm: React.FC<{
 
       <Grid container spacing={5}>
         <Grid item xs={12} md={12}>
-          <InputAmountAdvanced
+          <ZigTypography
+            variant='h4'
+            color='neutral400'
+            textAlign={'center'}
+            marginBottom={'20px'}
+            whiteSpace={'pre-line'}
+          >
+            {t('create.minimum-balance', {
+              minValue,
+              minValueCoin: coin.id,
+            })}
+          </ZigTypography>
+          <Controller
             name={'amountToInvest'}
             control={control}
-            disabled={isLoading}
-            label={
-              <div>
-                {t('edit-investment:form.inputAmount.label')}
-                <ZigTypography variant='h4' color='neutral400'>
-                  {t('create.minimum-balance', {
-                    minValue,
-                    minValueCoin: coin.id,
-                  })}
-                </ZigTypography>
-              </div>
-            }
-            labelBalance={t('edit-investment:form.inputAmount.labelBalance')}
-            showUnit={true}
-            placeholder={'0.0'}
-            tokens={[service.baseCurrency]}
-            error={t(
-              (
-                errors?.amountToInvest as FieldErrorsImpl<InputAmountAdvancedValueType>
-              )?.value?.message,
-              {
-                minValue,
-                minValueCoin: coin.id,
-              },
+            rules={{ required: true }}
+            render={({ field }) => (
+              <ZigInputAmount
+                id={'withdraw-modal__input-amount'}
+                label={t('edit-investment:form.inputAmount.label')}
+                coin={coin.id}
+                placeholder={'0.0'}
+                balance={coin.balance}
+                min={minValue}
+                error={t(errors?.amountToInvest?.message, {
+                  minValue,
+                  minValueCoin: coin.id,
+                })}
+                {...field}
+              />
             )}
           />
         </Grid>
@@ -119,20 +121,12 @@ const InvestInYourServiceForm: React.FC<{
 
       <ModalActions>
         <ZigButton
-          id={'confirm__back'}
-          onClick={goBack}
-          variant='outlined'
-          size='large'
-        >
-          {t('common:back')}
-        </ZigButton>
-
-        <ZigButton
           variant='contained'
           type='submit'
           loading={isLoading}
+          disabled={!!errors?.amountToInvest || !watch('amountToInvest')}
           id={'create-service-modal__invest-and-create'}
-          size='large'
+          size='xlarge'
         >
           {t('create.action')}
         </ZigButton>

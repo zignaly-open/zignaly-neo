@@ -7,11 +7,7 @@ import {
 import { useZModal } from '../../../../../components/ZModal/use';
 import EditInvestmentModal from '../../../../Dashboard/components/ManageInvestmentModals/EditInvestmentModal';
 import { useTranslation } from 'react-i18next';
-import {
-  BigNumberWrapper,
-  BigNumberWrapperInvested,
-  InvestButtonContainer,
-} from '../styles';
+import { BigNumberWrapper, InvestButtonContainer, TopDivider } from '../styles';
 import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/system';
 import OtherAccountsButton from './OtherAccountsButton';
@@ -31,6 +27,10 @@ const BigNumber: React.FC<{
         coin={ssc}
         shorten={shorten}
         color={green ? 'greenGraph' : red ? 'redGraphOrError' : undefined}
+        variant={'h2'}
+        coinProps={{
+          paddingTop: '3px',
+        }}
       />
     </BigNumberWrapper>
   );
@@ -80,15 +80,14 @@ export const InvestedButtonBase: React.FC<{
 
   return (
     <InvestButtonContainer>
-      <ZigTypography variant={'body2'} color='neutral200'>
-        {t('invested-label')}
-      </ZigTypography>
-      <Box>
-        <BigNumberWrapperInvested
-          id={prefixId && `${prefixId}__invested-${service.id}`}
-        >
-          <BigNumber ssc={service.ssc} value={investedAmount} green />
-        </BigNumberWrapperInvested>
+      <TopDivider>
+        <ZigTypography variant={'body2'} fontSize={'11px'} color='neutral400'>
+          {t('invested-label')}
+        </ZigTypography>
+      </TopDivider>
+
+      <Box id={prefixId && `${prefixId}__invested-${service.id}`}>
+        <BigNumber ssc={service.ssc} value={investedAmount} green />
       </Box>
       <Box
         sx={{
@@ -99,8 +98,9 @@ export const InvestedButtonBase: React.FC<{
       >
         <ZigButton
           variant={'text'}
+          sx={{ fontSize: '11px !important' }}
           id={prefixId && `${prefixId}__edit-${service.id}`}
-          startIcon={<EditIcon sx={{ width: '15px', height: '15px' }} />}
+          startIcon={<EditIcon sx={{ width: '12px', height: '12px' }} />}
           onClick={onClickEditInvestment}
         >
           {t('action:edit')}

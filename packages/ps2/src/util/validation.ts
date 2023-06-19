@@ -147,7 +147,7 @@ export const inputAmountValidation = ({
     validation = validation.test(
       'number',
       i18n.t('common:validation.insufficient-amount-min', {
-        minValue: coin,
+        minValue: min,
         minValueCoin: coin,
       }),
       (val) => !new BigNumber(val).isLessThan(new BigNumber(min)),

@@ -63,7 +63,7 @@ export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
               <BrowserRouter>
                 <Suspense fallback={zigSuspenseFallback}>
                   <ModalProvider
-                    fallback={<ZModal allowUnauth open isLoading />}
+                    fallback={<ZModal allowUnauth wide open isLoading />}
                   >
                     {children}
                   </ModalProvider>

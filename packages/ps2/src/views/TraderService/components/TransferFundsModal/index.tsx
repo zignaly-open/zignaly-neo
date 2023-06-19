@@ -1,36 +1,26 @@
 import React, { useCallback, useState } from 'react';
-import { FieldErrorsImpl, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { NumericFormat } from 'react-number-format';
 import BigNumber from 'bignumber.js';
 import { useTranslation } from 'react-i18next';
 import {
-  Actions,
-  Body,
-  ToContainer,
-  ToOutline,
-  TypographyBalance,
-  Inline,
-  TypographyNumberResult,
-} from './styles';
-import {
-  ZigSwapVertIcon,
-  InputAmountAdvanced,
-  InputAmountAdvancedValueType,
   ZigTypography,
   ZigButton,
+  ZigInputAmount,
+  ZigTransferIcon,
 } from '@zignaly-open/ui';
 import { TransferFormData, TransferModalProps } from './types';
-import { TransferModalValidation } from './validation';
-
-import { Box } from '@mui/system';
+import { transferModalValidation } from './validation';
 import {
   useTraderServiceBalance,
   useServiceDetails,
   useTraderServiceTransferFunds,
 } from '../../../../apis/service/use';
 import { useToast } from '../../../../util/hooks/useToast';
-import ZModal from 'components/ZModal';
+import ZModal, { Form, ModalActions } from 'components/ZModal';
+import { useUpdateEffect } from 'react-use';
+import { Box } from '@mui/material';
 
 function TransferModal({
   serviceId,
@@ -51,6 +41,7 @@ function TransferModal({
   const disconnectBalance = new BigNumber(balance?.scaSscSum || 0).toFixed();
   const balanceFrom = fromTradingAccount ? freeBalance : disconnectBalance;
   const balanceTo = !fromTradingAccount ? freeBalance : disconnectBalance;
+  const coin = service?.ssc ?? 'USDT';
 
   // TODO: maybe refetch useTraderServiceBalance just in case?
 
@@ -59,40 +50,35 @@ function TransferModal({
     handleSubmit,
     control,
     trigger,
-    setValue,
     formState: { isValid, errors, isDirty },
   } = useForm<TransferFormData>({
     mode: 'onChange',
-    resolver: yupResolver(TransferModalValidation),
+    resolver: yupResolver(transferModalValidation(balanceFrom)),
+    defaultValues: {
+      amountValue: '',
+    },
   });
 
-  const amountTransferValue = watch('amountValue')?.value;
+  const amountTransferValue = watch('amountValue');
 
   const toggleDestination = () => {
-    const { value, token } = watch('amountValue');
-    setValue('amountValue', {
-      value,
-      token: {
-        ...token,
-        balance: balanceTo,
-      },
-    });
-    trigger('amountValue');
     setFromTradingAccount((v) => !v);
   };
+
+  useUpdateEffect(() => {
+    if (isDirty) trigger('amountValue');
+  }, [fromTradingAccount]);
 
   const onSubmit = useCallback(
     ({ amountValue }: TransferFormData) => {
       transfer({
-        amount: amountValue?.value?.toString(),
+        amount: amountValue,
         from: fromTradingAccount ? 'STA' : 'SCA',
         to: fromTradingAccount ? 'SCA' : 'STA',
       }).then(() => {
         toast.success(
           t('management:transfer.success', {
-            amount: `${new BigNumber(amountValue?.value).toFixed()} ${
-              amountValue?.token.id
-            }`,
+            amount: `${new BigNumber(amountValue).toFixed()} ${coin}`,
           }),
         );
         close();
@@ -109,106 +95,99 @@ function TransferModal({
       title={t('transferFunds.title')}
       isLoading={!balance || isTransferring}
     >
-      <Box sx={{ marginBottom: 3 }}>
-        <ZigTypography>{t('transferFunds.description')}</ZigTypography>
-      </Box>
+      <Form onSubmit={handleSubmit(onSubmit)} alignItems='center'>
+        <ZigTypography textAlign='center' component='div'>
+          {t('transferFunds.description')}
+        </ZigTypography>
 
-      {balance && !isTransferring && (
-        <form noValidate onSubmit={handleSubmit(onSubmit)}>
-          <Body>
-            <InputAmountAdvanced
-              control={control}
-              placeholder={t('transfer.placeholder')}
-              fullWidth={true}
-              maxLength={26}
-              error={
-                isDirty &&
-                t(
-                  (
-                    errors?.amountValue as FieldErrorsImpl<InputAmountAdvancedValueType>
-                  )?.value?.message,
-                )
-              }
+        {balance && !isTransferring && (
+          <>
+            <Controller
               name={'amountValue'}
-              label={t(
-                fromTradingAccount
-                  ? 'transfer.fromTradingAccount'
-                  : 'transfer.fromStandbyAccount',
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <Box maxWidth='440px'>
+                  <ZigInputAmount
+                    id={'edit-investment-modal__input-amount'}
+                    wide={true}
+                    label={
+                      <ZigTypography variant='h2' textAlign='center'>
+                        {t(
+                          fromTradingAccount
+                            ? 'transfer.fromTradingAccount'
+                            : 'transfer.fromStandbyAccount',
+                        )}
+                      </ZigTypography>
+                    }
+                    labelInline={false}
+                    coin={coin}
+                    balance={balanceFrom}
+                    error={t(errors?.amountValue?.message)}
+                    placeholder={t('transfer.placeholder')}
+                    {...field}
+                  />
+                </Box>
               )}
-              labelBalance={t('transfer.labelBalance')}
-              tokens={[
-                {
-                  id: service?.ssc ?? 'USDT',
-                  balance: balanceFrom,
-                },
-              ]}
-              showUnit
             />
-
             <ZigButton
               id={'transfer__swap-zig'}
-              size='xlarge'
               variant='outlined'
               narrow
-              sx={{
-                padding: '10px 20px',
-                width: '60px',
-              }}
               onClick={toggleDestination}
             >
-              <ZigSwapVertIcon width={24} height={24} color={'#65647E'} />
+              <ZigTransferIcon width={24} height={24} color={'#65647E'} />
             </ZigButton>
-            <ToContainer>
-              <ToOutline>
-                <ZigTypography variant='h2'>
-                  {t(
-                    `transfer.${
-                      fromTradingAccount
-                        ? 'toStandbyAccount'
-                        : 'toTradingAccount'
-                    }`,
-                  )}
+
+            <Box
+              display='flex'
+              flexDirection='column'
+              alignItems='center'
+              gap={1}
+            >
+              <ZigTypography variant='h2'>
+                {t(
+                  `transfer.${
+                    fromTradingAccount ? 'toStandbyAccount' : 'toTradingAccount'
+                  }`,
+                )}
+              </ZigTypography>
+              <Box display='flex' alignItems='center'>
+                <ZigTypography variant='bigNumber' color='neutral100' mr='8px'>
+                  {amountTransferValue
+                    ? new BigNumber(amountTransferValue).toString()
+                    : '--'}{' '}
                 </ZigTypography>
-                <Inline>
-                  <TypographyNumberResult
-                    variant='bigNumber'
-                    color='neutral100'
-                  >
-                    {amountTransferValue
-                      ? new BigNumber(amountTransferValue).toString()
-                      : '--'}{' '}
-                  </TypographyNumberResult>
-                  <ZigTypography variant='h3' color='neutral400'>
-                    {service?.ssc ?? 'USDT'}
-                  </ZigTypography>
-                </Inline>
-              </ToOutline>
-              <ZigTypography variant='body2' color='neutral200'>
+                <ZigTypography variant='h3' color='neutral400'>
+                  {service?.ssc ?? 'USDT'}
+                </ZigTypography>
+              </Box>
+              <ZigTypography variant='body2' mt='-3px'>
                 {t('transfer.deposit-available')}
-                <TypographyBalance variant='body2' color='neutral000'>
+                <ZigTypography variant='body2' color='neutral100' ml='4px'>
                   <NumericFormat
                     value={balanceTo}
                     displayType={'text'}
                     suffix={` ${service?.ssc ?? 'USDT'}`}
                     thousandSeparator={true}
                   />
-                </TypographyBalance>
+                </ZigTypography>
               </ZigTypography>
-            </ToContainer>
-          </Body>
+            </Box>
 
-          <Actions>
-            <ZigButton
-              id={'transfer__transfer-now'}
-              disabled={!isValid}
-              size='xlarge'
-              type='submit'
-            >
-              {t('transfer.now')}
-            </ZigButton>
-          </Actions>
-        </form>
-      )}
+            <ModalActions>
+              <ZigButton
+                id={'transfer__transfer-now'}
+                disabled={!isValid}
+                size='large'
+                type='submit'
+              >
+                {t('transfer.now')}
+              </ZigButton>
+            </ModalActions>
+          </>
+        )}
+      </Form>
     </ZModal>
   );
 }
