@@ -330,10 +330,14 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                 >
                   <ZigQrCode
                     id={'deposit-modal__deposit-qr-address'}
-                    label={t('depositQR.address', {
-                      coin: coinObject?.name,
-                    })}
+                    label={
+                      depositInfo?.tag &&
+                      t('depositQR.address', {
+                        coin: coinObject?.name,
+                      })
+                    }
                     url={depositInfo.address}
+                    extraInfo={!depositInfo?.tag && t('depositQR.scan')}
                   />
                   {depositInfo?.tag && (
                     <ZigQrCode

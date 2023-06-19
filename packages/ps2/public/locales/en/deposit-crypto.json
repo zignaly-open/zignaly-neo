@@ -40,7 +40,8 @@
   },
   "depositQR": {
     "address": "{{coin}} Address",
-    "memo": "{{coin}} MEMO/Tag"
+    "memo": "{{coin}} MEMO/Tag",
+    "scan": "Scan for mobile deposits"
   },
   "buy-crypto": "Buy Crypto",
   "history": "History"

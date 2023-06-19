@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const QRCodeContainer = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 200px;
