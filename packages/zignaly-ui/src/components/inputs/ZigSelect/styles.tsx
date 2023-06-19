@@ -35,7 +35,6 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
           );`};
         `}
       transition: border-color 0.2s;
-      margin-bottom: 3px;
 
       ${({ width }) => width && `width: ${width}${width?.toString().includes("%") ? "" : "px"}`};
 

@@ -6,6 +6,7 @@ import Theme from "../../../theme/theme";
 import { useTheme } from "styled-components";
 import ZigTypography from "../../display/ZigTypography";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
+import { Box } from "@mui/material";
 
 const customStyles = (small: boolean, theme: Theme, userStyles: StylesConfig): StylesConfig => ({
   ...userStyles,
@@ -93,7 +94,11 @@ function ZigSelect<T>({
         classNamePrefix="zig-react-select"
         {...props}
       />
-      {!!error && <ErrorMessage text={error} id={id && `${id}-error-text`} />}
+      {!!error && (
+        <Box mt="3px">
+          <ErrorMessage text={error} id={id && `${id}-error-text`} />
+        </Box>
+      )}
     </StyledSelectWrapper>
   );
 }
