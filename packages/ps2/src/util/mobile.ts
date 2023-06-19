@@ -6,11 +6,16 @@ import {
   MOBILE_VERSION_FORCE_DESKTOP,
 } from './constants';
 import { useCurrentUser } from '../apis/user/use';
+import { whitelabel } from '../whitelabel';
 
 export function useMobileRedirect() {
   const goToMobileVersion = useGoToMobileVersion();
   useEffect(() => {
-    if (isMobile && !Cookies.get(MOBILE_VERSION_FORCE_DESKTOP)) {
+    if (
+      whitelabel.promptMobile !== false &&
+      isMobile &&
+      !Cookies.get(MOBILE_VERSION_FORCE_DESKTOP)
+    ) {
       goToMobileVersion();
     }
   }, [isMobile]);
