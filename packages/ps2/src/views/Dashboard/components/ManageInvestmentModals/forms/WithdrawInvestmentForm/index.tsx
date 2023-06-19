@@ -107,7 +107,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
         rules={{ required: true }}
         render={({ field }) => (
           <ZigInputAmount
-            id={'edit-investment-modal__input-amount'}
+            id={'withdraw-modal__input-amount'}
             label={t('form.label')}
             wide={true}
             coin={coin.id}
@@ -120,7 +120,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
           >
             <ZigSlider
               value={sliderValue}
-              prefixId={'withdraw-modal-amount-transfer'}
+              prefixId={'withdraw-modal__slider-amount'}
               onChange={(
                 _: React.ChangeEvent<HTMLInputElement>,
                 value: number,

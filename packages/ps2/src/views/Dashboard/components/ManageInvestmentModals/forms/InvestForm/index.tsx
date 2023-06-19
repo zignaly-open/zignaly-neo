@@ -175,7 +175,12 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
           </Box>
         </Field>
         <Box display='flex' flexDirection='column' alignItems='center'>
-          <ZigTypography variant='body2' textAlign='center' mb='22px'>
+          <ZigTypography
+            variant='body2'
+            textAlign='center'
+            mb='22px'
+            id={'invest-modal-confirmation__type-safe-word'}
+          >
             <Trans
               i18nKey={'invest-modal.type-transfer'}
               t={t}
@@ -256,7 +261,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
         rules={{ required: true }}
         render={({ field }) => (
           <ZigSlider
-            prefixId={'invest-modal'}
+            prefixId={'invest-modal-slider'}
             {...field}
             labels={{
               top: (

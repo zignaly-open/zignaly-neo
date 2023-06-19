@@ -29,14 +29,14 @@ const ZigSlider = forwardRef(
       <Box
         display="flex"
         flexDirection="column"
-        id={prefixId && `${prefixId}-slider`}
+        id={prefixId && `${prefixId}__container`}
         gap="10px"
         width={1}
         className={className}
         ref={ref}
       >
         {labels?.top && (
-          <ZigTypography color={"neutral200"} id={prefixId && `${prefixId}-title`}>
+          <ZigTypography color={"neutral200"} id={prefixId && `${prefixId}__title`}>
             {labels?.top}
           </ZigTypography>
         )}
@@ -51,6 +51,7 @@ const ZigSlider = forwardRef(
           <Box display="flex" width={1} gap={1} alignItems="center" px={showLabels ? "6px" : 0}>
             {showValues && (
               <SliderLabelValue
+                prefixId={prefixId && `${prefixId}__label-start`}
                 side="start"
                 labels={labels}
                 min={props.min}
@@ -60,6 +61,8 @@ const ZigSlider = forwardRef(
               />
             )}
             <Slider
+              itemID={"adadsds"}
+              id={prefixId && `${prefixId}__slider`}
               marks={marks}
               track={false}
               valueLabelDisplay={labels.invertSliderValues ? "off" : "auto"}
@@ -68,6 +71,7 @@ const ZigSlider = forwardRef(
             />
             {showValues && (
               <SliderLabelValue
+                prefixId={prefixId && `${prefixId}__label-end`}
                 side="end"
                 labels={labels}
                 min={props.min}
