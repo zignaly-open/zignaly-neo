@@ -9,6 +9,7 @@ import { InputExtraInfo } from "./atoms";
 import ZigCoinIcon from "../../display/ZigCoinIcon";
 import { changeEvent } from "utils/event";
 import BigNumber from "bignumber.js";
+import { trimZeros } from "utils/numbers";
 export { InputExtraInfo } from "./atoms";
 
 const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
@@ -39,7 +40,9 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
         (balance === undefined || new BigNumber(max!).isLessThan(new BigNumber(balance!)))
           ? max
           : balance;
-      props.onChange(changeEvent(props.name, newValue) as React.ChangeEvent<HTMLInputElement>);
+      props.onChange(
+        changeEvent(props.name, trimZeros(newValue!)) as React.ChangeEvent<HTMLInputElement>,
+      );
     }
 
     // Optional callback
