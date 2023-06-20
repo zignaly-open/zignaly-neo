@@ -13,7 +13,7 @@
     "new-success-fee": "Success Fee",
     "fee-edited": "Success Fee edited successfully",
     "validate-must-be-gte-0": "Must not be < 0",
-    "validate-must-be-lte-100": "Must be not more than 100%"
+    "validate-must-be-lte-max": "Must be not more than {{max}}%"
   },
   "tableHeader": {
     "email": "Email",
@@ -36,5 +36,8 @@
     "suspended": "Suspended",
     "disconnected": "Disconnected",
     "owner": "Owner"
-  }
+  },
+  "first-grade-math-explainer": "Please note that a 10% discount on a 50% fee adds up to 40% fee",
+  "success-fee-explainer": "You get {{owner}}%, Zignaly gets {{zignalyFee}}%",
+  "success-fee-explainer-with-discount": "You get {{discounted}}% ({{owner}}% - {{discount}}% discount), Zignaly gets {{zignalyFee}}%"
 }

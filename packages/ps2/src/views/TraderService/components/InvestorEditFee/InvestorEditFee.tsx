@@ -12,15 +12,20 @@ import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessF
 import { useServiceDetails } from '../../../../apis/service/use';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { ServiceFeeEditModalValidation } from './validation';
+import { getServiceOwnerFee } from '../../../../util/fee';
 
-type EditFeeFormValues = { value: number };
+type EditFeeFormValues = { value: number; maxDiscount: number };
 
 function InvestorEditFee({
   close,
+  ownerSuccessFee,
+  ownerSfDiscount,
   serviceId,
   ...props
 }: {
   close: () => void;
+  ownerSuccessFee: number;
+  ownerSfDiscount: number;
   serviceId: string;
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation(['investors']);
@@ -32,12 +37,19 @@ function InvestorEditFee({
     handleSubmit,
     control,
     watch,
+    register,
     formState: { isValid, errors },
   } = useForm<EditFeeFormValues>({
     mode: 'onChange',
-    defaultValues: {},
+    defaultValues: {
+      value: ownerSfDiscount,
+      maxDiscount: ownerSuccessFee + ownerSfDiscount,
+    },
     resolver: yupResolver(ServiceFeeEditModalValidation),
   });
+
+  // needed only for validation
+  register('maxDiscount');
 
   const onSubmit = useCallback(({ value: discount }: EditFeeFormValues) => {
     editFee({
@@ -64,11 +76,10 @@ function InvestorEditFee({
             <SuccessFeeInputWrapper
               value={watch('value')}
               title={t('change-fee-modal.title')}
-              description={t('change-fee-modal.input-desc')}
-              newValueLabel={t('change-fee-modal.new-success-fee')}
-              newValue={
-                ((+data?.successFee || 0) * (100 - (watch('value') || 0))) / 100
-              }
+              description={t('first-grade-math-explainer')}
+              newValue={getServiceOwnerFee(
+                (+data?.successFee || 0) - watch('value'),
+              )}
             >
               <ZigInput
                 type='number'
@@ -80,7 +91,9 @@ function InvestorEditFee({
                 label={t('change-fee-modal.discount')}
                 labelInline={true}
                 fullWidth={false}
-                error={t(errors.value?.message)}
+                error={t(errors.value?.message, {
+                  max: ownerSuccessFee + ownerSfDiscount,
+                })}
                 {...field}
               />
             </SuccessFeeInputWrapper>

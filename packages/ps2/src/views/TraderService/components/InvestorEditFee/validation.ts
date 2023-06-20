@@ -3,6 +3,8 @@ import { number } from 'yup';
 
 export const ServiceFeeEditModalValidation = yup.object({
   value: number()
+    .typeError('error:error.required')
+    .required('error:error.required')
     .test(
       'int',
       'investors:change-fee-modal.validate-must-be-gte-0',
@@ -10,7 +12,9 @@ export const ServiceFeeEditModalValidation = yup.object({
     )
     .test(
       'int',
-      'investors:change-fee-modal.validate-must-be-lte-100',
-      (val) => val <= 100,
+      'investors:change-fee-modal.validate-must-be-lte-max',
+      function (val) {
+        return val <= this.parent.maxDiscount;
+      },
     ),
 });

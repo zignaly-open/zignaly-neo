@@ -24,10 +24,11 @@ import {
 } from '../../../../apis/service/types';
 import ConnectionStateLabel from '../ConnectionStateLabel';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
-import { Box, IconButton } from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 import { TraderServicePageContainer } from '../styles';
 import { useZModal } from '../../../../components/ZModal/use';
 import InvestorEditFee from '../InvestorEditFee/InvestorEditFee';
+import { getServiceTotalFee, getServiceZignalyFee } from '../../../../util/fee';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -41,7 +42,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
 
   const { t } = useTranslation('investors');
 
-  const columnHelper = createColumnHelper<Investor & { successFee: string }>();
+  const columnHelper = createColumnHelper<Investor>();
   const columns = useMemo(() => {
     return [
       columnHelper.accessor('email', {
@@ -106,9 +107,30 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           />
         ),
       }),
-      columnHelper.accessor('successFee', {
+      columnHelper.accessor('ownerSuccessFee', {
         header: t('tableHeader.successFee'),
-        cell: (props) => `${props.getValue()}%`,
+        cell: ({
+          row: {
+            original: { ownerSuccessFee, ownerSfDiscount },
+          },
+        }) => (
+          <Tooltip
+            title={t(
+              `success-fee-explainer${ownerSfDiscount ? '-with-discount' : ''}`,
+              {
+                discounted: ownerSuccessFee,
+                owner: ownerSuccessFee + ownerSfDiscount,
+                zignalyFee: getServiceZignalyFee(ownerSuccessFee),
+                discount: ownerSfDiscount,
+              },
+            )}
+          >
+            <ZigTypography>
+              {/* eslint-disable-next-line i18next/no-literal-string */}
+              {getServiceTotalFee(ownerSuccessFee)}%
+            </ZigTypography>
+          </Tooltip>
+        ),
       }),
       columnHelper.accessor('accountType', {
         header: t('tableHeader.status'),
@@ -117,7 +139,11 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       columnHelper.accessor('actions', {
         header: '',
         enableSorting: false,
-        cell: () => (
+        cell: ({
+          row: {
+            original: { ownerSfDiscount, ownerSuccessFee },
+          },
+        }) => (
           <ZigDropdown
             component={() => (
               <IconButton>
@@ -134,6 +160,8 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                 onClick: () =>
                   showModal(InvestorEditFee, {
                     serviceId,
+                    ownerSuccessFee,
+                    ownerSfDiscount,
                   }),
               },
             ]}
@@ -145,6 +173,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
 
   return (
     <LayoutContentWrapper
+      unmountOnRefetch
       endpoint={[investorsEndpoint, managementEndpoint, serviceDetailsEndpoint]}
       content={([investors, management]: [
         Investor[],
