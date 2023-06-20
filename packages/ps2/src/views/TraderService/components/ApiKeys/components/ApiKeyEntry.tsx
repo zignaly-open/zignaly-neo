@@ -89,7 +89,7 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
             sx={{ mr: 2 }}
             onClick={() => showModal(EditApiKey, { apiKey, serviceId })}
             startIcon={
-              <EditIcon sx={{ width: '12px', height: '12px', mb: 0.5 }} />
+              <EditIcon sx={{ width: '12px', height: '12px', mb: '3px' }} />
             }
             variant={'outlined'}
           >
@@ -118,7 +118,9 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
               })
             }
             color={'danger'}
-            startIcon={<DeleteIcon />}
+            startIcon={
+              <DeleteIcon sx={{ width: '12px', height: '12px', mb: '3px' }} />
+            }
             variant={'outlined'}
           >
             {t('action:delete')}
