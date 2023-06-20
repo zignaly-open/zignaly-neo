@@ -74,7 +74,7 @@ const ChooseDepositType: React.FC<{
             />
           </Grid>
 
-          <Grid item xs={12} md={5} marginLeft={'15px'}>
+          <Grid item xs={12} md={5} marginLeft={'5px'}>
             <Box
               sx={{
                 textAlign: 'center',

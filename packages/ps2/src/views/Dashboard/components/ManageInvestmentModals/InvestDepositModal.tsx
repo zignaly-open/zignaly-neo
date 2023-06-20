@@ -67,7 +67,7 @@ function InvestDepositModal({
       onGoBack={onGoBack}
       wide
     >
-      <Box paddingX='30px'>{ready && component()}</Box>
+      <Box paddingX={!showDeposit && '30px'}>{ready && component()}</Box>
     </ZModal>
   );
 }
