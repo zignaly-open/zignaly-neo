@@ -176,7 +176,9 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                     sx={{ ml: 1.5 }}
                     variant={'text'}
                     id={'trader-service__edit'}
-                    startIcon={<EditIcon />}
+                    startIcon={
+                      <EditIcon sx={{ width: '12px', height: '12px' }} />
+                    }
                     onClick={onClickMinBalance}
                   >
                     {t('action:edit')}

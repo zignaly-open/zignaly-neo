@@ -2,7 +2,6 @@ import React from 'react';
 import { ZigButton, ZigCopyText, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
-import PencilIcon from '@mui/icons-material/Create';
 import { useTranslation } from 'react-i18next';
 import { ApiKey, TextWrapperRow } from '../atoms';
 import { useParams } from 'react-router-dom';
@@ -21,6 +20,7 @@ import {
 } from '../../../../../apis/serviceApiKey/types';
 import { useRefetchIfDesynchronizedState } from '../../../../../apis/serviceApiKey/use';
 import { BackendErrorResponse } from '../../../../../util/errors';
+import EditIcon from '@mui/icons-material/Edit';
 
 const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
   const { t, i18n } = useTranslation(['management', 'action']);
@@ -88,7 +88,9 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
             id={'trader-api__edit-key'}
             sx={{ mr: 2 }}
             onClick={() => showModal(EditApiKey, { apiKey, serviceId })}
-            startIcon={<PencilIcon />}
+            startIcon={
+              <EditIcon sx={{ width: '12px', height: '12px', mb: 0.5 }} />
+            }
             variant={'outlined'}
           >
             {t('action:edit')}
