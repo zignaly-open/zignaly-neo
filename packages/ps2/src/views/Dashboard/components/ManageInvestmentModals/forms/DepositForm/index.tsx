@@ -12,6 +12,7 @@ import {
   ZigLink,
   ZigButton,
   ZigListIcon,
+  trimZeros,
 } from '@zignaly-open/ui';
 import NorthEastIcon from '@mui/icons-material/NorthEast';
 import { DepositFormData } from './types';
@@ -206,7 +207,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                 <ZigTypography variant='body2' color='neutral200'>
                   <NumericFormat
                     id={'deposit-modal-balances__free'}
-                    value={coinObject?.available ?? ''}
+                    value={trimZeros(coinObject?.available) ?? ''}
                     displayType={'text'}
                   />
                 </ZigTypography>{' '}
@@ -221,7 +222,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                 <ZigTypography variant='body2' color='neutral400'>
                   <NumericFormat
                     id={'deposit-modal-balances__locked'}
-                    value={coinObject?.inOrders ?? ''}
+                    value={trimZeros(coinObject?.inOrders) ?? ''}
                     displayType={'text'}
                   />
                 </ZigTypography>{' '}
@@ -237,7 +238,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                   <NumericFormat
                     id={'deposit-modal-balances__total'}
                     displayType={'text'}
-                    value={coinObject?.balance ?? ''}
+                    value={trimZeros(coinObject?.balance) ?? ''}
                   />
                 </ZigTypography>{' '}
                 {coin ?? ''}
