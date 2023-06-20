@@ -172,6 +172,7 @@ const BalanceButton = () => {
               textAlign='center'
               color='neutral300'
               fontSize='11px'
+              lineHeight='16px'
               sx={{ mr: 0.5 }}
             >
               {balanceStatus === BalanceStatus.NoFunds
