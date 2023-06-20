@@ -13,7 +13,7 @@ const ChooseDepositType: React.FC<{
   return (
     <>
       <Grid container sx={{ padding: '10px 0' }}>
-        <Grid item xs={12} sx={{ paddingRight: '10px', textAlign: 'center' }}>
+        <Grid item xs={12} sx={{ textAlign: 'center' }}>
           <ZigTypography
             variant={'body1'}
             id={'modal-choose-deposit-type__description'}
