@@ -62,7 +62,7 @@ export const Grid = styled('div')`
 `;
 
 export const TransactionContainer = styled('div')`
-  margin: 42px -10px 0;
+  margin: 42px -20px 0;
 `;
 
 export const WithdrawActions = styled('div')`
