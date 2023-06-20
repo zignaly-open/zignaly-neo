@@ -47,6 +47,7 @@ const BinanceBroker = ({ children }: { children?: JSX.Element }) => {
       display='inline-flex'
       alignItems='center'
       gap='5px'
+      sx={{ verticalAlign: 'middle' }}
     >
       <BinanceLogo
         width={16}
@@ -383,7 +384,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
           alignItems='center'
           mt={
             !!network && networkObject?.depositEnable && !depositInfo?.tag
-              ? -4
+              ? -3.5
               : 0
           }
         >
