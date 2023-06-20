@@ -15,7 +15,7 @@ const SuccessFeeInputWrapper: React.FC<{
     : Math.max(0, Math.min(75, +value) - ZIGNALY_PROFIT_FEE);
 
   return (
-    <>
+    <div>
       <SuccessFieldWrapper>
         <ZigTypography>{t('summary.success-fee')}</ZigTypography>
         <ZigTypography variant='body2' color='neutral400'>
@@ -53,8 +53,12 @@ const SuccessFeeInputWrapper: React.FC<{
           </SuccessFieldReceive>
         </Box>
       </SuccessFieldWrapper>
-      {value === '0' && <ZigAlertMessage text={t('create.zero-fee')} />}
-    </>
+      {value === '0' && (
+        <Box mt='3px'>
+          <ZigAlertMessage text={t('create.zero-fee')} />
+        </Box>
+      )}
+    </div>
   );
 };
 
