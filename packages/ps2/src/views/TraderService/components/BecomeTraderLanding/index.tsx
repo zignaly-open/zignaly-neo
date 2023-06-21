@@ -29,16 +29,15 @@ import {
 } from './styles';
 import { FeatureItem, InfoBarItem, HowWorksItem } from './types';
 import { useIsAuthenticated } from '../../../../apis/user/use';
-import { ROUTE_SIGNUP } from '../../../../routes';
-import { useNavigate } from 'react-router-dom';
 import { useZModal } from '../../../../components/ZModal/use';
 import CreateServiceModal from './modals/CreateServiceModal';
+import useMaybeNavigateNotLoggedIn from '../../../../util/hooks/useMaybeNavigateNotLoggedIn';
 
 const BecomeTraderLanding: React.FC = () => {
   const { t } = useTranslation(['offer-your-trading-service', 'service']);
   const { showModal } = useZModal();
   const isAuthenticated = useIsAuthenticated();
-  const navigate = useNavigate();
+  const navigateIfNotLoggedIn = useMaybeNavigateNotLoggedIn();
 
   const infoBarItems: InfoBarItem[] = useMemo(
     () => [
@@ -111,7 +110,7 @@ const BecomeTraderLanding: React.FC = () => {
         ctaId: 'create-service',
       });
     } else {
-      navigate(ROUTE_SIGNUP);
+      navigateIfNotLoggedIn();
     }
   };
 
