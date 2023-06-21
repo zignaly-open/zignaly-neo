@@ -1,1 +1,1 @@
-export { default as cryptomaniacos } from './clients/cryptomaniacos';
+export { default as criptomaniacos } from './clients/cryptimaniacos';

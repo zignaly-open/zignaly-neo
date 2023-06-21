@@ -1,4 +1,4 @@
-name: PS2 Cryptomaniacos
+name: PS2 Criptomaniacos
 on:
   push:
     branches:

@@ -8,5 +8,5 @@ export default {
     Features.ZigWallet,
     Features.NewSignup,
   ],
-  xSource: 'cryptomaniacos',
+  xSource: 'criptomaniacos',
 } as WhitelabelOverride;
