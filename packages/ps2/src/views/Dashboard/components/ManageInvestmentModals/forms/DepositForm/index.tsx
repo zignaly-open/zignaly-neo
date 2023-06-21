@@ -385,7 +385,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
           alignItems='center'
           mt={
             !!network && networkObject?.depositEnable && !depositInfo?.tag
-              ? '-26px'
+              ? '-30px'
               : 0
           }
         >
