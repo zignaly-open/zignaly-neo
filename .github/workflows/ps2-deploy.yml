@@ -29,5 +29,21 @@ jobs:
           envkey_REACT_APP_WALLET_API: ${{ env.PS2_WALLET_API }}
           envkey_REACT_APP_REFERRALS_API: ${{ env.PS2_REFERRALS_API }}
 
+          #constant
+          envkey_EXTEND_ESLINT: true
+          envkey_DISABLE_ESLINT_PLUGIN: true
+          envkey_ESLINT_NO_DEV_ERRORS: true
+
+          # non-env-specific
+          envkey_REACT_APP_CUSTOMER_IO_ORG_ID: ${{ env.CUSTOMER_IO_ORG_ID }}
+          envkey_REACT_APP_CUSTOMER_IO_SITE_ID: ${{ env.CUSTOMER_IO_SITE_ID }}
+          envkey_REACT_APP_SEGMENT_NAME: ${{ env.SEGMENT_NAME }}
+          envkey_REACT_APP_SENTRY_DNS: ${{ env.SENTRY_DNS }}
+
+          # these do not need to be secrets but I am too lazy to change that
+          envkey_REACT_APP_LIVE_SESSION_TRACK_ID: ${{ secrets.PS2_LIVE_SESSION_TRACK_ID }}
+          envkey_REACT_APP_SEGMENT_KEY: ${{ secrets.PS2_SEGMENT_KEY }}
+          envkey_REACT_APP_SEGMENT_SCRIPT_SRC: ${{ secrets.PS2_SEGMENT_SCRIPT_SRC }}
+
           directory: packages/ps2
           file_name: .env
