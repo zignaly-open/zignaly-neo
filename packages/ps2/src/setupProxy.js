@@ -4,7 +4,7 @@ module.exports = function (app) {
   app.use(
     '/new_api',
     createProxyMiddleware({
-      target: 'https://test.zignaly.com/',
+      target: 'https://staging.zignaly.com/',
       changeOrigin: true,
     }),
   );
