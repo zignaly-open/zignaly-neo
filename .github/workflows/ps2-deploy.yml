@@ -11,7 +11,7 @@ jobs:
     name: PS2 deploy
     timeout-minutes: 20
     runs-on: ubuntu-latest
-    environment: ${{ inputs.deploy-env }}
+    environment: criptomaniacos
     steps:
       - name: Checkout
         uses: actions/checkout@v3
