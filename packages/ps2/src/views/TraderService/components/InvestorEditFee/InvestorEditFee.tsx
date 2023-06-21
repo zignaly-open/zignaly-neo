@@ -82,7 +82,7 @@ function InvestorEditFee({
                 zignalyFee: ZIGNALY_PROFIT_FEE,
               })}
               newValue={getServiceTotalFee(
-                (+data?.successFee || 0) - watch('value'),
+                (+data?.successFee || 0) - watch('value') - ZIGNALY_PROFIT_FEE,
               )}
             >
               <ZigInput
