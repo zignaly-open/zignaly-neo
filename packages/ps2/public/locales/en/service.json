@@ -71,7 +71,7 @@
     "name": "Service Name:",
     "logo": "Edit Logo",
     "description": "Description:",
-    "success-fee-desc": "Amount of profits you will charge your investors (including 5% Zignaly fee)",
+    "success-fee-desc": "Amount of profits you will charge your investors (including {{ zignalyFee }}% Zignaly fee)",
     "pool-size": "Maximum pool size:",
     "pool-size-desc": "Max you'll accept from investors",
     "visibility": {

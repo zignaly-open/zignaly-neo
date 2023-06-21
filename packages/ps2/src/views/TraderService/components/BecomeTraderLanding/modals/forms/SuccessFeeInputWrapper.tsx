@@ -4,6 +4,7 @@ import { ZigAlertMessage, ZigTypography } from '@zignaly-open/ui';
 import { SuccessFieldWrapper, SuccessFieldReceive } from '../atoms';
 import { Box } from '@mui/material';
 import { getServiceOwnerFee } from '../../../../../../util/fee';
+import { ZIGNALY_PROFIT_FEE } from '../../../../../../util/constants';
 
 const SuccessFeeInputWrapper: React.FC<{
   children: JSX.Element;
@@ -22,7 +23,8 @@ const SuccessFeeInputWrapper: React.FC<{
       <SuccessFieldWrapper>
         <ZigTypography>{title || t('summary.success-fee')}</ZigTypography>
         <ZigTypography variant='body2' color='neutral400'>
-          {description || t('edit.success-fee-desc')}
+          {description ||
+            t('edit.success-fee-desc', { zignalyFee: ZIGNALY_PROFIT_FEE })}
         </ZigTypography>
 
         <Box display='flex' mt={1.25}>
