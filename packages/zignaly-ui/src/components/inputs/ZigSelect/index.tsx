@@ -70,35 +70,37 @@ function ZigSelect<T>({
     // @ts-ignore
     <StyledSelectWrapper error={error} width={width} small={small} outlined={outlined}>
       {label && (
-        <ZigTypography color={"neutral200"} id={id && `${id}-label`} mb="10px">
+        <ZigTypography color={"neutral200"} id={id && `${id}-label`}>
           {label}
         </ZigTypography>
       )}
-      {ZigSelectGlobalStyle}
-      <Select
-        id={id}
-        styles={styles}
-        components={{
-          IndicatorSeparator: () => null,
-        }}
-        // if you want to use this inside of a modal, pass it `menuPosition="fixed"`, `menuShouldScrollIntoView={false}` and `menuShouldBlockScroll`
-        isOptionDisabled={(option) => !!(option as ZigSelectOption<T>).disabled}
-        options={options as unknown as { label: string; value: number }[]}
-        isDisabled={disabled}
-        onChange={(v) => {
-          onChange?.((v as ZigSelectOption<T>)?.value, (v as ZigSelectOption<T>) || null);
-        }}
-        menuPortalTarget={document.body}
-        placeholder={placeholder || label}
-        value={options?.find?.((x) => x.value === value || (x as unknown) === value) || null}
-        classNamePrefix="zig-react-select"
-        {...props}
-      />
-      {!!error && (
-        <Box mt="3px">
-          <ErrorMessage text={error} id={id && `${id}-error-text`} />
-        </Box>
-      )}
+      <div>
+        {ZigSelectGlobalStyle}
+        <Select
+          id={id}
+          styles={styles}
+          components={{
+            IndicatorSeparator: () => null,
+          }}
+          // if you want to use this inside of a modal, pass it `menuPosition="fixed"`, `menuShouldScrollIntoView={false}` and `menuShouldBlockScroll`
+          isOptionDisabled={(option) => !!(option as ZigSelectOption<T>).disabled}
+          options={options as unknown as { label: string; value: number }[]}
+          isDisabled={disabled}
+          onChange={(v) => {
+            onChange?.((v as ZigSelectOption<T>)?.value, (v as ZigSelectOption<T>) || null);
+          }}
+          menuPortalTarget={document.body}
+          placeholder={placeholder || label}
+          value={options?.find?.((x) => x.value === value || (x as unknown) === value) || null}
+          classNamePrefix="zig-react-select"
+          {...props}
+        />
+        {!!error && (
+          <Box mt="3px">
+            <ErrorMessage text={error} id={id && `${id}-error-text`} />
+          </Box>
+        )}
+      </div>
     </StyledSelectWrapper>
   );
 }
