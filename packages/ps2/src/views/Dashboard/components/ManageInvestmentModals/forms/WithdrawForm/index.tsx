@@ -229,7 +229,7 @@ function WithdrawForm({
       />
 
       {!!network && !networkObject?.withdrawEnable ? (
-        <Box mt={2}>
+        <Box mt='-21px'>
           <ErrorMessage text={networkObject?.withdrawDesc} />
         </Box>
       ) : (
