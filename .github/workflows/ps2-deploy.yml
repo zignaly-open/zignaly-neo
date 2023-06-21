@@ -11,8 +11,22 @@ jobs:
     name: PS2 deploy
     timeout-minutes: 20
     runs-on: ubuntu-latest
-    environment: crip
+    environment: ${{ inputs.deploy-env }}
     steps:
       - name: Checkout
         uses: actions/checkout@v3
       - run: echo "${{ env.WHITELABEL }}"
+      - name: Create client .env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          # env-specific
+          envkey_REACT_APP_WHITELABEL: ${{ env.WHITELABEL }}
+          envkey_REACT_APP_ENABLE_TRACKING: ${{ env.ENABLE_TRACKING }}
+          envkey_REACT_APP_GTM_ID: ${{ env.GTM_ID }}
+          envkey_REACT_APP_ENABLE_TEST_LANGUAGE: ${{ env.ENABLE_TEST_LANGUAGE }}
+          envkey_REACT_APP_BASE_API: ${{ env.PS2_BASE_API }}
+          envkey_REACT_APP_WALLET_API: ${{ env.PS2_WALLET_API }}
+          envkey_REACT_APP_REFERRALS_API: ${{ env.PS2_REFERRALS_API }}
+
+          directory: packages/ps2
+          file_name: .env
