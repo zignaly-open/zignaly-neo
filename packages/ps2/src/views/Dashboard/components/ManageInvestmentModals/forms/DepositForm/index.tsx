@@ -385,7 +385,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
           alignItems='center'
           mt={
             !!network && networkObject?.depositEnable && !depositInfo?.tag
-              ? '-30px'
+              ? '-28px'
               : 0
           }
         >
@@ -406,12 +406,14 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
           </ZigButton>
           <ZigButton
             id={'deposit-modal__history'}
-            startIcon={
+            endIcon={
               <ZigListIcon
-                width={'24px'}
-                height={'24px'}
+                width={'22px'}
+                height={'22px'}
                 color={'neutral100'}
-                style={{ marginTop: '3px' }}
+                style={{
+                  verticalAlign: 'middle',
+                }}
               />
             }
             variant='text'
