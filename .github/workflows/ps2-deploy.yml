@@ -15,7 +15,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - run: echo "${{ env.WHITELABEL }}"
+      - run: echo "----${{ env.WHITELABEL }}"
+      - run: echo "----${{ inputs.deploy-env }}"
       - name: Create client .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
