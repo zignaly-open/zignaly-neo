@@ -30,7 +30,7 @@ function Check2FAModal({
     return errorCode === 13
       ? t('error:error.login-session-expired')
       : errorCode === 37
-      ? t('error:error.wrong-code')
+      ? t(`error:error.${errorCode}`)
       : null;
   }, [t, status]);
 
