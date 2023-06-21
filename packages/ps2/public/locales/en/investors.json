@@ -7,7 +7,7 @@
   "change-fee": "Edit success fee",
   "change-fee-modal": {
     "title": "Success Fee Discount",
-    "desc": "Recognize your valuable investors offering them a discount in the Success Fee",
+    "desc": "Recognize your valuable investors by offering them a Success Fee discount",
     "input-desc": "Discount that will be applied on the Success Fee",
     "discount": "Discount",
     "new-success-fee": "Success Fee",
@@ -37,7 +37,7 @@
     "disconnected": "Disconnected",
     "owner": "Owner"
   },
-  "first-grade-math-explainer": "Please note that a 10% discount on a 50% fee adds up to 40% fee",
+  "first-grade-math-explainer": "Apply a discount on your Success Fee besides the {{zignalyFee}}% charged by Zignaly",
   "success-fee-explainer": "You get {{owner}}%, Zignaly gets {{zignalyFee}}%",
   "success-fee-explainer-with-discount": "You get {{discounted}}% ({{owner}}% - {{discount}}% discount), Zignaly gets {{zignalyFee}}%"
 }

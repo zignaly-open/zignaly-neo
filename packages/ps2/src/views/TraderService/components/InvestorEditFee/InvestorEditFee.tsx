@@ -12,7 +12,8 @@ import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessF
 import { useServiceDetails } from '../../../../apis/service/use';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { ServiceFeeEditModalValidation } from './validation';
-import { getServiceOwnerFee } from '../../../../util/fee';
+import { getServiceTotalFee } from '../../../../util/fee';
+import { ZIGNALY_PROFIT_FEE } from '../../../../util/constants';
 
 type EditFeeFormValues = { value: number; maxDiscount: number };
 
@@ -75,9 +76,12 @@ function InvestorEditFee({
           render={({ field }) => (
             <SuccessFeeInputWrapper
               value={watch('value')}
+              newValueLabel={t('change-fee-modal.new-success-fee')}
               title={t('change-fee-modal.title')}
-              description={t('first-grade-math-explainer')}
-              newValue={getServiceOwnerFee(
+              description={t('first-grade-math-explainer', {
+                zignalyFee: ZIGNALY_PROFIT_FEE,
+              })}
+              newValue={getServiceTotalFee(
                 (+data?.successFee || 0) - watch('value'),
               )}
             >
