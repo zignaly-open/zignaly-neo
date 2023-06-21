@@ -43,7 +43,11 @@ const PendingTransactions: React.FC<{
           id={prefixId && `${prefixId}__show-pending-transactions`}
           endIcon={
             <KeyboardArrowRightIcon
-              sx={{ width: '22px !important', height: '22px !important' }}
+              sx={{
+                width: '22px !important',
+                height: '22px !important',
+                fill: 'currentcolor !important',
+              }}
             />
           }
           onClick={() => setView(EditInvestmentViews.PendingTransactions)}
