@@ -390,7 +390,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
           }
         >
           <ZigButton
-            id={'deposit-modal__history'}
+            id={'deposit-modal__buy-crypto-link'}
             endIcon={
               <NorthEastIcon
                 sx={{
