@@ -42,7 +42,7 @@ function InvestDepositModal({
   }, [loading]);
 
   useSelectInvestment(service);
-  useMaybeNavigateNotLoggedIn();
+  useMaybeNavigateNotLoggedIn()();
 
   const depositModal = useDepositModalContent(service?.ssc);
   const investModal = useInvestModalContent({ close: props.close });
