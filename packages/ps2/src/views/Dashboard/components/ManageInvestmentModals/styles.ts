@@ -64,10 +64,3 @@ export const Grid = styled('div')`
 export const TransactionContainer = styled('div')`
   margin: 42px -28px 0;
 `;
-
-export const WithdrawActions = styled('div')`
-  margin-top: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
