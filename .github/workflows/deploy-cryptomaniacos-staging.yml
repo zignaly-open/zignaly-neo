@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - feat/whitelabel
+      - feat/whitelabel-debug
 
 jobs:
   deploy:
