@@ -9,4 +9,4 @@ jobs:
     name: PS2 Criptomaniacos deploy
     uses: ./.github/workflows/ps2-deploy.yml
     with:
-      deploy-env: criptpmaniacos
+      deploy-env: criptomaniacos
