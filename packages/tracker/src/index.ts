@@ -67,9 +67,9 @@ const triggerTz = async (
     const response = await sendTz({
       action: 'gTid',
     });
-    const json = await response.json();
+    const json = await response.text();
     if (!response.ok) {
-      throw json.error || json;
+      throw json;
     }
     data.tid = json;
     localStorage.setItem('tid', json);
