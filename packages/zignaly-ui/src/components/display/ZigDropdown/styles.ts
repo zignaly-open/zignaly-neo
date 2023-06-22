@@ -140,7 +140,9 @@ export const ChildContainer = styled.div<{ active: boolean } & WithSeparator>`
     props.active &&
     css`
       background: rgb(25, 26, 48);
+      /* When the menu is expanded, replace bottom margin with padding to fit the background until the bottom */
       margin-bottom: 0 !important;
+      padding-bottom: 12px;
     `}
 
   ${withSeparator}

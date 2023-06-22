@@ -10,6 +10,9 @@ import {
   ZigTypography,
   ZigCopyText,
   ZigLink,
+  ZigButton,
+  ZigListIcon,
+  trimZeros,
 } from '@zignaly-open/ui';
 import NorthEastIcon from '@mui/icons-material/NorthEast';
 import { DepositFormData } from './types';
@@ -34,14 +37,34 @@ import {
   DEPOSIT_INFO_URL,
 } from '../../../../../../util/constants';
 import { Form } from 'components/ZModal';
+import { ROUTE_MY_BALANCES_TRANSACTIONS } from 'routes';
+import { useNavigate } from 'react-router-dom';
 
-function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
+const BinanceBroker = ({ children }: { children?: JSX.Element }) => {
+  return (
+    <Box component='span' whiteSpace='nowrap'>
+      <BinanceLogo
+        width={16}
+        height={16}
+        style={{
+          marginRight: '5px',
+          marginBottom: '-3px',
+        }}
+        id={'deposit-modal-description__binance-logo'}
+      />
+      {children}
+    </Box>
+  );
+};
+
+function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
   const { t } = useTranslation('deposit-crypto');
   const { data: balances } = useCoinBalances({ convert: true });
   const { data: coins } = useExchangeCoinsList();
   const { exchangeType } = useActiveExchange();
   const { userId } = useCurrentUser();
   const toast = useToast();
+  const navigate = useNavigate();
 
   const { handleSubmit, control, watch, setValue } = useForm<DepositFormData>({
     mode: 'onChange',
@@ -116,18 +139,17 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
     }
   }, []);
 
+  const navigateHistory = () => {
+    // Close invest modal
+    close();
+    navigate(ROUTE_MY_BALANCES_TRANSACTIONS);
+  };
+
   return (
     <Form onSubmit={handleSubmit(() => {})}>
-      <ZigTypography id={'deposit-modal__description'}>
+      <ZigTypography id={'deposit-modal__description'} textAlign='center'>
         <Trans t={t} i18nKey={'description'}>
-          <BinanceLogo
-            width={16}
-            height={16}
-            style={{
-              verticalAlign: 'middle',
-            }}
-            id={'deposit-modal-description__binance-logo'}
-          />
+          <BinanceBroker />
           <ZigLink
             href={DEPOSIT_INFO_URL}
             id={'deposit-modal-description__external-link'}
@@ -135,105 +157,91 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
         </Trans>
       </ZigTypography>
 
-      <Grid container rowGap={4}>
-        <Grid item xs={12} md={6}>
-          <Controller
-            name='coin'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <ZigSelect
-                id={'deposit-modal__select-coin'}
-                menuPlacement='auto'
-                menuShouldScrollIntoView={false}
-                menuPosition='fixed'
-                menuShouldBlockScroll
-                label={t('coinSelector.label')}
-                placeholder={t('coinSelector.placeholder')}
-                options={coinOptions}
-                filterOption={filterOptions}
-                {...field}
-              />
-            )}
-          />
+      <Grid container rowGap={3}>
+        <Grid container xs={12}>
+          <Grid item xs={12} md={6}>
+            <Controller
+              name='coin'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <ZigSelect
+                  id={'deposit-modal__select-coin'}
+                  menuPlacement='auto'
+                  menuShouldScrollIntoView={false}
+                  menuPosition='fixed'
+                  menuShouldBlockScroll
+                  label={t('coinSelector.label')}
+                  placeholder={t('coinSelector.placeholder')}
+                  options={coinOptions}
+                  filterOption={filterOptions}
+                  {...field}
+                />
+              )}
+            />
+          </Grid>
+          {!!coin && (
+            <Grid
+              item
+              xs={12}
+              md={6}
+              sx={{
+                pt: { xs: 2.5, md: '35px' },
+                pl: { xs: 0, md: 6 },
+                display: 'flex',
+                flexDirection: 'column',
+              }}
+            >
+              <ZigTypography
+                variant='body2'
+                color='neutral200'
+                id={'deposit-modal-balances__free-text'}
+              >
+                {t('balances.balanceFree')}{' '}
+                <ZigTypography variant='body2' color='neutral200'>
+                  <NumericFormat
+                    id={'deposit-modal-balances__free'}
+                    value={trimZeros(coinObject?.available) ?? ''}
+                    displayType={'text'}
+                  />
+                </ZigTypography>{' '}
+                {coin ?? ''}
+              </ZigTypography>
+              <ZigTypography
+                variant='body2'
+                color='neutral400'
+                id={'deposit-modal-balances__locked-text'}
+              >
+                {t('balances.balanceLocked')}{' '}
+                <ZigTypography variant='body2' color='neutral400'>
+                  <NumericFormat
+                    id={'deposit-modal-balances__locked'}
+                    value={trimZeros(coinObject?.inOrders) ?? ''}
+                    displayType={'text'}
+                  />
+                </ZigTypography>{' '}
+                {coin ?? ''}
+              </ZigTypography>
+              <ZigTypography
+                color='neutral400'
+                variant='body2'
+                id={'deposit-modal-balances__total-text'}
+              >
+                {t('balances.total')}{' '}
+                <ZigTypography variant='body2' color='neutral400'>
+                  <NumericFormat
+                    id={'deposit-modal-balances__total'}
+                    displayType={'text'}
+                    value={trimZeros(coinObject?.balance) ?? ''}
+                  />
+                </ZigTypography>{' '}
+                {coin ?? ''}
+              </ZigTypography>
+            </Grid>
+          )}
         </Grid>
 
-        {!!coin && (
-          <Grid
-            item
-            xs={12}
-            md={6}
-            sx={{
-              pt: 3,
-              pl: 6,
-              display: 'flex',
-              flexDirection: 'column',
-            }}
-          >
-            <ZigTypography
-              variant='body2'
-              color='neutral200'
-              fontWeight='medium'
-              id={'deposit-modal-balances__total-text'}
-            >
-              {t('balances.total')}{' '}
-              <ZigTypography
-                variant='body2'
-                color='neutral000'
-                fontWeight='medium'
-              >
-                <NumericFormat
-                  id={'deposit-modal-balances__total'}
-                  displayType={'text'}
-                  value={coinObject?.balance ?? ''}
-                />
-              </ZigTypography>{' '}
-              {coin ?? ''}
-            </ZigTypography>
-            <ZigTypography
-              variant='body2'
-              color='neutral200'
-              fontWeight='medium'
-              id={'deposit-modal-balances__locked-text'}
-            >
-              {t('balances.balanceLocked')}{' '}
-              <ZigTypography
-                variant='body2'
-                color='neutral000'
-                fontWeight='medium'
-              >
-                <NumericFormat
-                  id={'deposit-modal-balances__locked'}
-                  value={coinObject?.inOrders ?? ''}
-                  displayType={'text'}
-                />
-              </ZigTypography>{' '}
-              {coin ?? ''}
-            </ZigTypography>
-            <ZigTypography
-              variant='body2'
-              color='neutral200'
-              fontWeight='medium'
-              id={'deposit-modal-balances__free-text'}
-            >
-              {t('balances.balanceFree')}{' '}
-              <ZigTypography
-                variant='body2'
-                color='neutral000'
-                fontWeight='medium'
-              >
-                <NumericFormat
-                  id={'deposit-modal-balances__free'}
-                  value={coinObject?.available ?? ''}
-                  displayType={'text'}
-                />
-              </ZigTypography>{' '}
-              {coin ?? ''}
-            </ZigTypography>
-          </Grid>
-        )}
-
-        <Grid item xs={12}>
+        <Grid item xs={12} md={6}>
           <Controller
             name='network'
             control={control}
@@ -251,11 +259,9 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               />
             )}
           />
-          <div>
-            {!!network && !networkObject?.depositEnable && (
-              <ErrorMessage text={t('no-network')} />
-            )}
-          </div>
+          {!!network && !networkObject?.depositEnable && (
+            <ErrorMessage text={t('no-network')} />
+          )}
         </Grid>
 
         {!!network && networkObject?.depositEnable && (
@@ -307,7 +313,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
               item
               xs={12}
               sx={{
-                minHeight: '200px',
+                minHeight: '160px',
                 alignItems: 'center',
                 textAlign: 'center',
               }}
@@ -318,7 +324,7 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    height: '200px',
+                    height: '160px',
                   }}
                 >
                   <Loader />
@@ -330,14 +336,22 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                     justifyContent: 'space-evenly',
                     flexDirection: ['column', 'row'],
                     gap: 2,
+                    mt: '-6px',
                   }}
                 >
                   <ZigQrCode
                     id={'deposit-modal__deposit-qr-address'}
-                    label={t('depositQR.address', {
-                      coin: coinObject?.name,
-                    })}
+                    label={
+                      depositInfo?.tag &&
+                      t('depositQR.address', {
+                        coin: coinObject?.name,
+                      })
+                    }
                     url={depositInfo.address}
+                    extraInfo={!depositInfo?.tag && t('depositQR.scan')}
+                    size={130}
+                    height={160}
+                    width={160}
                   />
                   {depositInfo?.tag && (
                     <ZigQrCode
@@ -346,6 +360,9 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
                         coin: coinObject?.name,
                       })}
                       url={depositInfo?.tag}
+                      size={130}
+                      height={160}
+                      width={160}
                     />
                   )}
                 </Box>
@@ -354,25 +371,50 @@ function DepositForm({ allowedCoins, selectedCoin }: DepositModalProps) {
           </>
         )}
 
-        <Grid item xs={12}>
-          <ZigTypography variant={'body2'} color={'neutral300'}>
-            <ZigLink
-              href={BUY_CRYPTO_URL}
-              target={'_blank'}
-              id={'deposit-modal__buy-crypto-link'}
-            >
-              <Box
+        <Grid
+          item
+          xs={12}
+          display='flex'
+          justifyContent='space-between'
+          alignItems='center'
+          mt={
+            !!network && networkObject?.depositEnable && !depositInfo?.tag
+              ? '-28px'
+              : 0
+          }
+        >
+          <ZigButton
+            id={'deposit-modal__buy-crypto-link'}
+            endIcon={
+              <NorthEastIcon
                 sx={{
-                  display: 'flex',
-                  gap: 0.5,
-                  alignItems: 'center',
+                  fill: 'currentcolor !important',
+                  fontSize: 'inherit !important',
                 }}
-              >
-                {t('buy-crypto')}
-                <NorthEastIcon fontSize={'inherit'} />
-              </Box>
-            </ZigLink>
-          </ZigTypography>
+              />
+            }
+            variant='text'
+            href={BUY_CRYPTO_URL}
+          >
+            {t('buy-crypto')}
+          </ZigButton>
+          <ZigButton
+            id={'deposit-modal__history'}
+            startIcon={
+              <ZigListIcon
+                width={'22px'}
+                height={'22px'}
+                color={'neutral100'}
+                style={{
+                  verticalAlign: 'middle',
+                }}
+              />
+            }
+            variant='text'
+            onClick={navigateHistory}
+          >
+            {t('history')}
+          </ZigButton>
         </Grid>
       </Grid>
     </Form>

@@ -28,7 +28,7 @@ const SuccessFeeInputWrapper: React.FC<{
   const feeWeCharge = getServiceOwnerFee(+value);
 
   return (
-    <>
+    <div>
       <SuccessFieldWrapper>
         <ZigTypography>{title || t('summary.success-fee')}</ZigTypography>
         <ZigTypography variant='body2' color='neutral400'>
@@ -68,9 +68,11 @@ const SuccessFeeInputWrapper: React.FC<{
         </Box>
       </SuccessFieldWrapper>
       {!!showZeroFeeExplainer && value === '0' && (
-        <ZigAlertMessage text={t('create.zero-fee')} />
+        <Box mt='3px'>
+          <ZigAlertMessage text={t('create.zero-fee')} />
+        </Box>
       )}
-    </>
+    </div>
   );
 };
 

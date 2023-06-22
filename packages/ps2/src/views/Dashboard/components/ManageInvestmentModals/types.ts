@@ -24,6 +24,7 @@ export type PendingTransactionListItemType = {
 export type DepositModalProps = {
   selectedCoin?: string;
   allowedCoins?: string[];
+  close: () => void;
 };
 
 export type WithdrawModalProps = {

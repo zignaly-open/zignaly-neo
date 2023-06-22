@@ -10,6 +10,7 @@ export const SliderLabelValue = ({
   min = 0,
   value = 0,
   valueLabelFormat,
+  prefixId,
 }: {
   labels: SliderLabels;
   side: "start" | "end";
@@ -17,6 +18,7 @@ export const SliderLabelValue = ({
   min?: number;
   value?: number;
   valueLabelFormat?: (value: number) => string;
+  prefixId: string;
 }) => {
   const valueLabel =
     side === "start"
@@ -50,10 +52,11 @@ export const SliderLabelValue = ({
           left: side === "start" ? 0 : "auto",
           right: side === "start" ? "auto" : 0,
         }}
+        id={prefixId && `${prefixId}-label`}
       >
         {side === "start" ? labels.start : labels.end}
       </ZigTypography>
-      <ZigTypography color="neutral400" variant="body2">
+      <ZigTypography color="neutral400" variant="body2" id={prefixId && `${prefixId}-value`}>
         {valueLabelStr}
       </ZigTypography>
     </Box>

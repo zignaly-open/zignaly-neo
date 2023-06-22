@@ -10,7 +10,7 @@
       "purchase": "Purchase {{coin}}"
     }
   },
-  "description": "Deposit Crypto in your Zignaly Account. Zignaly is an official <0></0> Binance Broker. Your funds will be safe on Binance. <1>More info</1>.",
+  "description": "Deposit Crypto in your Zignaly Account. Zignaly is an official <0>Binance Broker</0>. Your funds will be safe on Binance. <1>More info</1>.",
   "coinSelector": {
     "label": "Coin:",
     "placeholder": "Search a coin"
@@ -18,7 +18,7 @@
   "balances": {
     "loadingAriaLabel": "Loading coin balances",
     "total": "Balance:",
-    "balanceLocked": "In Orders:",
+    "balanceLocked": "In orders:",
     "balanceFree": "Available:"
   },
   "networkSelector": {
@@ -40,7 +40,9 @@
   },
   "depositQR": {
     "address": "{{coin}} Address",
-    "memo": "{{coin}} MEMO/Tag"
+    "memo": "{{coin}} MEMO/Tag",
+    "scan": "Scan for mobile deposits"
   },
-  "buy-crypto": "Buy Crypto"
+  "buy-crypto": "Buy Crypto",
+  "history": "History"
 }

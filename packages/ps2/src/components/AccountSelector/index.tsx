@@ -1,5 +1,5 @@
 import React from 'react';
-import { Item, InternalName } from './styles';
+import { Item } from './styles';
 import { Avatar, ZigDropdown } from '@zignaly-open/ui';
 import {
   useActiveExchange,
@@ -9,6 +9,7 @@ import {
 import { getImageOfAccount } from '../../util/images';
 import { Exchange, UserData } from '../../apis/user/types';
 import { ZigDropdownProps } from '@zignaly-open/ui';
+import { AccountName } from '../Navigation/AccountMenu/styles';
 
 const AccountSelector: React.FC<{
   component: ZigDropdownProps['component'];
@@ -41,7 +42,7 @@ const AccountSelector: React.FC<{
                     key={`--exchange-key-${index.toString()}`}
                   >
                     <Avatar size={'medium'} image={getImageOfAccount(index)} />
-                    <InternalName
+                    <AccountName
                       variant={'body1'}
                       color={
                         activeExchange.internalId === exchange.internalId
@@ -49,8 +50,8 @@ const AccountSelector: React.FC<{
                           : 'neutral200'
                       }
                     >
-                      {exchange.internalName}
-                    </InternalName>
+                      {exchange?.internalName}
+                    </AccountName>
                   </Item>
                 ),
               };

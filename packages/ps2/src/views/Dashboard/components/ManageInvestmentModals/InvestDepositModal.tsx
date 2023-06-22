@@ -1,5 +1,5 @@
 import { DialogProps } from '@mui/material/Dialog';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   useCurrentBalance,
   useSelectedInvestment,
@@ -42,12 +42,12 @@ function InvestDepositModal({
   }, [loading]);
 
   useSelectInvestment(service);
-  useMaybeNavigateNotLoggedIn();
+  useMaybeNavigateNotLoggedIn()();
 
-  const depositModal = useDepositModalContent(service?.ssc);
+  const depositModal = useDepositModalContent(service?.ssc, props.close);
   const investModal = useInvestModalContent({ close: props.close });
 
-  const showDeposit = +balance === 0;
+  const showDeposit = useMemo(() => +balance === 0, [ready]);
 
   // we need it here because this modal is not technically a ZModal
   if (!isAuthenticated) {
@@ -67,7 +67,7 @@ function InvestDepositModal({
       onGoBack={onGoBack}
       wide
     >
-      <Box paddingX='30px'>{ready && component()}</Box>
+      <Box paddingX={!showDeposit && '30px'}>{ready && component()}</Box>
     </ZModal>
   );
 }

@@ -108,7 +108,7 @@ function EditInvestmentForm({
 
   const renderDepositCoin = () => (
     <ZigButton
-      id={'invest-modal__deposit'}
+      id={'edit-investment-modal__deposit'}
       startIcon={<Add sx={{ fill: 'currentColor !important' }} />}
       sx={{
         fontWeight: 400,
@@ -154,7 +154,7 @@ function EditInvestmentForm({
             rules={{ required: true }}
             render={({ field }) => (
               <ZigSlider
-                prefixId={'edit-investment-modal'}
+                prefixId={'edit-investment-modal-slider'}
                 {...field}
                 labels={{
                   start: t('form.profits.left'),
@@ -168,7 +168,11 @@ function EditInvestmentForm({
       </Field>
 
       {details?.transferOutAll ? (
-        <ZigAlertMessage warning text={t('form.transferOutAll')} />
+        <ZigAlertMessage
+          warning
+          text={t('form.transferOutAll')}
+          id={'edit-investment-modal-slider__warning'}
+        />
       ) : (
         <>
           <Controller

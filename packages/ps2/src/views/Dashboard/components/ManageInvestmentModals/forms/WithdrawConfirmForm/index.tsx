@@ -204,7 +204,7 @@ const WithdrawConfirmForm = ({
           sx={{ flex: 1, color: 'neutral400', opacity: 0.8 }}
         />
         <AmountContainer
-          sx={{ height: '100%', flex: 7 }}
+          sx={{ padding: '20px', flex: 7 }}
           coloredBackground
           noBorders
         >

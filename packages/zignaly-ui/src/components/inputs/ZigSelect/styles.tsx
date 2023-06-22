@@ -8,6 +8,7 @@ import { BoxTypeMap } from "@mui/system";
 type Props = { error?: string; width?: number; small?: boolean; outlined?: boolean };
 
 export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(Box)<Props>`
+  gap: 10px;
   display: flex;
   flex-direction: column;
 
@@ -35,7 +36,6 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
           );`};
         `}
       transition: border-color 0.2s;
-      margin-bottom: 3px;
 
       ${({ width }) => width && `width: ${width}${width?.toString().includes("%") ? "" : "px"}`};
 

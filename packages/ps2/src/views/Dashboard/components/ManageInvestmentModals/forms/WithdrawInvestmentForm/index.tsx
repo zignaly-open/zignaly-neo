@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { WithdrawActions } from '../../styles';
 import {
   ZigButton,
   CenteredLoader,
@@ -23,7 +22,7 @@ import { useToast } from '../../../../../../util/hooks/useToast';
 import { useTraderServiceTypesInfoQuery } from '../../../../../../apis/service/api';
 import { useServiceDetails } from '../../../../../../apis/service/use';
 import { trimZeros } from '@zignaly-open/ui';
-import { Form } from 'components/ZModal';
+import { Form, ModalActions } from 'components/ZModal';
 
 const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
   setView,
@@ -107,7 +106,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
         rules={{ required: true }}
         render={({ field }) => (
           <ZigInputAmount
-            id={'edit-investment-modal__input-amount'}
+            id={'withdraw-modal__input-amount'}
             label={t('form.label')}
             wide={true}
             coin={coin.id}
@@ -120,7 +119,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
           >
             <ZigSlider
               value={sliderValue}
-              prefixId={'withdraw-modal-amount-transfer'}
+              prefixId={'withdraw-modal__slider-amount'}
               onChange={(
                 _: React.ChangeEvent<HTMLInputElement>,
                 value: number,
@@ -141,7 +140,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
         )}
       />
 
-      <WithdrawActions>
+      <ModalActions>
         <ZigButton
           id={'withdraw-modal__confirm-withdraw'}
           type={'submit'}
@@ -151,7 +150,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
         >
           {t('button')}
         </ZigButton>
-      </WithdrawActions>
+      </ModalActions>
     </Form>
   );
 };
