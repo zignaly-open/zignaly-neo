@@ -42,19 +42,13 @@ import { useNavigate } from 'react-router-dom';
 
 const BinanceBroker = ({ children }: { children?: JSX.Element }) => {
   return (
-    <Box
-      component='span'
-      whiteSpace='nowrap'
-      display='inline-flex'
-      alignItems='center'
-      gap='5px'
-      sx={{ verticalAlign: 'middle' }}
-    >
+    <Box component='span' whiteSpace='nowrap'>
       <BinanceLogo
         width={16}
         height={16}
         style={{
-          verticalAlign: 'middle',
+          marginRight: '5px',
+          marginBottom: '-3px',
         }}
         id={'deposit-modal-description__binance-logo'}
       />
