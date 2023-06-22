@@ -36,8 +36,8 @@ export const AmountContainer = styled('div')<{
   ${({ noBorders }) =>
     noBorders &&
     css`
-      margin: 0 18px;
-      padding: 15px 0;
+      margin: 0 10px;
+      padding: 0;
       box-shadow: unset;
     `}
 
