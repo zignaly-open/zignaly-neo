@@ -29,6 +29,7 @@ import { TraderServicePageContainer } from '../styles';
 import { useZModal } from '../../../../components/ZModal/use';
 import InvestorEditFee from '../InvestorEditFee/InvestorEditFee';
 import { getServiceTotalFee, getServiceZignalyFee } from '../../../../util/fee';
+import { useToast } from '../../../../util/hooks/useToast';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -41,7 +42,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   const { data: service } = serviceDetailsEndpoint;
 
   const { t } = useTranslation('investors');
-
+  const toast = useToast();
   const columnHelper = createColumnHelper<Investor>();
   const columns = useMemo(() => {
     return [
@@ -157,12 +158,17 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             options={[
               {
                 label: t('change-fee'),
-                onClick: () =>
-                  showModal(InvestorEditFee, {
-                    serviceId,
-                    ownerSuccessFee,
-                    ownerSfDiscount,
-                  }),
+                onClick: () => {
+                  if (ownerSuccessFee > 0) {
+                    showModal(InvestorEditFee, {
+                      serviceId,
+                      ownerSuccessFee,
+                      ownerSfDiscount,
+                    });
+                  } else {
+                    toast.error(t('change-fee-modal.already-0'));
+                  }
+                },
               },
             ]}
           />

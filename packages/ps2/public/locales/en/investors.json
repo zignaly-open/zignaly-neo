@@ -12,7 +12,8 @@
     "discount": "Discount",
     "new-success-fee": "Success Fee",
     "fee-edited": "Success Fee edited successfully",
-    "validate-must-be-between": "Must be an integer (0 to {{max}}). Or {{full}} to make free"
+    "validate-must-be-between": "Must be an integer (0 to {{max}}). Or {{full}} to make free",
+    "already-0": "Come on, your service is already free, we can't discount any lower"
   },
   "tableHeader": {
     "email": "Email",
