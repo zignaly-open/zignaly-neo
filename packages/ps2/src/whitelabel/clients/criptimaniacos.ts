@@ -1,7 +1,6 @@
 import { Features, WhitelabelOverride } from '../type';
 
 export default {
-  defaultLanguage: 'pt',
   disabledFeatures: [
     Features.Referrals,
     Features.Rewards,
