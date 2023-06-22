@@ -12,7 +12,11 @@ import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessF
 import { useServiceDetails } from '../../../../apis/service/use';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { ServiceFeeEditModalValidation } from './validation';
-import { getServiceTotalFee } from '../../../../util/fee';
+import {
+  adjustDiscountFromBackend,
+  adjustDiscountToBackend,
+  getServiceTotalFee,
+} from '../../../../util/fee';
 import { ZIGNALY_PROFIT_FEE } from '../../../../util/constants';
 
 type EditFeeFormValues = {
@@ -47,11 +51,7 @@ function InvestorEditFee({
   } = useForm<EditFeeFormValues>({
     mode: 'onChange',
     defaultValues: {
-      // adjust for the backend implementation
-      value:
-        ownerSfDiscount === serviceTotalFee - ZIGNALY_PROFIT_FEE
-          ? serviceTotalFee
-          : ownerSfDiscount,
+      value: adjustDiscountFromBackend(ownerSfDiscount, serviceTotalFee),
       maxDiscount: {
         max: Math.max(0, serviceTotalFee - 2 * ZIGNALY_PROFIT_FEE),
         full: serviceTotalFee,
@@ -66,8 +66,7 @@ function InvestorEditFee({
   const onSubmit = useCallback(
     ({ value: discount, maxDiscount: { full } }: EditFeeFormValues) => {
       editFee({
-        // adjust for the backend implementation
-        discount: discount - (discount === full ? ZIGNALY_PROFIT_FEE : 0),
+        discount: adjustDiscountToBackend(discount, full),
         accountId,
         serviceId,
       })
