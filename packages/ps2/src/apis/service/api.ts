@@ -102,7 +102,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     void,
     { accountId: string; discount: number; serviceId: string }
   >({
-    invalidatesTags: ['ServiceInvestors'],
+    invalidatesTags: (result, error) => (error ? [] : ['ServiceInvestors']),
     query: ({ discount, serviceId, accountId }) => ({
       url: `services/${serviceId}/owner_sf_discount`,
       method: 'PUT',

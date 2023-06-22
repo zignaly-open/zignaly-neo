@@ -57,11 +57,13 @@ function InvestorEditFee({
       discount,
       accountId,
       serviceId,
-    }).then(() => {
-      // TODO
-      toast.success(t('change-fee-modal.fee-edited'));
-      close();
-    });
+    })
+      .unwrap()
+      .then(() => {
+        // TODO
+        toast.success(t('change-fee-modal.fee-edited'));
+        close();
+      });
   }, []);
 
   return (
