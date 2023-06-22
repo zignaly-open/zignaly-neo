@@ -159,7 +159,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
               {
                 label: t('change-fee'),
                 onClick: () => {
-                  if (ownerSuccessFee > 0) {
+                  if ((service?.successFee || 0) > 0) {
                     showModal(InvestorEditFee, {
                       serviceId,
                       ownerSuccessFee,
