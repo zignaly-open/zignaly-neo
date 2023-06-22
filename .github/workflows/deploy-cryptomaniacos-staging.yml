@@ -3,6 +3,8 @@ on:
   push:
     branches:
       - feat/whitelabel
+    tags:
+      - 'release-ps2_cm-*'
 
 jobs:
   deploy:
