@@ -37,6 +37,7 @@ function InvestorEditFee({
   const [editFee, { isLoading }] = useTraderServiceEditSuccessFeeMutation();
   const toast = useToast();
   const { data } = useServiceDetails(serviceId);
+  const serviceTotalFee = +data?.successFee || 0;
   const {
     handleSubmit,
     control,
@@ -46,10 +47,14 @@ function InvestorEditFee({
   } = useForm<EditFeeFormValues>({
     mode: 'onChange',
     defaultValues: {
-      value: ownerSfDiscount,
+      // adjust for the backend implementation
+      value:
+        ownerSfDiscount === serviceTotalFee - ZIGNALY_PROFIT_FEE
+          ? serviceTotalFee
+          : ownerSfDiscount,
       maxDiscount: {
-        max: Math.max(0, (+data?.successFee || 0) - 2 * ZIGNALY_PROFIT_FEE),
-        full: +data?.successFee || 0,
+        max: Math.max(0, serviceTotalFee - 2 * ZIGNALY_PROFIT_FEE),
+        full: serviceTotalFee,
       },
     },
     resolver: yupResolver(ServiceFeeEditModalValidation),
@@ -58,19 +63,22 @@ function InvestorEditFee({
   // needed only for validation
   register('maxDiscount');
 
-  const onSubmit = useCallback(({ value: discount }: EditFeeFormValues) => {
-    editFee({
-      discount,
-      accountId,
-      serviceId,
-    })
-      .unwrap()
-      .then(() => {
-        // TODO
-        toast.success(t('change-fee-modal.fee-edited'));
-        close();
-      });
-  }, []);
+  const onSubmit = useCallback(
+    ({ value: discount, maxDiscount: { full } }: EditFeeFormValues) => {
+      editFee({
+        // adjust for the backend implementation
+        discount: discount - (discount === full ? ZIGNALY_PROFIT_FEE : 0),
+        accountId,
+        serviceId,
+      })
+        .unwrap()
+        .then(() => {
+          toast.success(t('change-fee-modal.fee-edited'));
+          close();
+        });
+    },
+    [],
+  );
 
   return (
     <ZModal wide {...props} close={close} title={t('change-fee-modal.title')}>
@@ -91,9 +99,7 @@ function InvestorEditFee({
               })}
               newValue={getServiceTotalFee(
                 Math.max(
-                  (+data?.successFee || 0) -
-                    watch('value') -
-                    ZIGNALY_PROFIT_FEE,
+                  serviceTotalFee - watch('value') - ZIGNALY_PROFIT_FEE,
                   0,
                 ),
               )}
