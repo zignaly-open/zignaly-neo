@@ -177,7 +177,10 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                 name='successFee'
                 control={control}
                 render={({ field }) => (
-                  <SuccessFeeInputWrapper value={watch('successFee') || 0}>
+                  <SuccessFeeInputWrapper
+                    value={watch('successFee') || 0}
+                    showZeroFeeExplainer
+                  >
                     <ZigInput
                       InputProps={{
                         endAdornment: (
@@ -185,7 +188,7 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
                         ),
                       }}
                       label={t('create.total-fee')}
-                      labelInline={true}
+                      labelInline
                       error={t(errors.successFee?.message)}
                       {...field}
                     />

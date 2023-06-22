@@ -11,10 +11,19 @@ const SuccessFeeInputWrapper: React.FC<{
   title?: string;
   description?: string;
   newValueLabel?: string;
+  showZeroFeeExplainer?: boolean;
   precision?: number;
   newValue?: number | string;
   value: number | string;
-}> = ({ title, newValue, description, children, newValueLabel, value }) => {
+}> = ({
+  title,
+  newValue,
+  showZeroFeeExplainer,
+  description,
+  children,
+  newValueLabel,
+  value,
+}) => {
   const { t } = useTranslation('service');
   const feeWeCharge = getServiceOwnerFee(+value);
 
@@ -58,7 +67,9 @@ const SuccessFeeInputWrapper: React.FC<{
           </SuccessFieldReceive>
         </Box>
       </SuccessFieldWrapper>
-      {value === '0' && <ZigAlertMessage text={t('create.zero-fee')} />}
+      {!!showZeroFeeExplainer && value === '0' && (
+        <ZigAlertMessage text={t('create.zero-fee')} />
+      )}
     </>
   );
 };

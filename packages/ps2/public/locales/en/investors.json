@@ -12,8 +12,7 @@
     "discount": "Discount",
     "new-success-fee": "Success Fee",
     "fee-edited": "Success Fee edited successfully",
-    "validate-must-be-gte-0": "Must not be < 0",
-    "validate-must-be-lte-max": "Must be not more than {{max}}%"
+    "validate-must-be-between": "Must be an integer (0 to {{max}}). Or {{full}} to make free"
   },
   "tableHeader": {
     "email": "Email",

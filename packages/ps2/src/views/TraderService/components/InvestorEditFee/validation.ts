@@ -3,18 +3,21 @@ import { number } from 'yup';
 
 export const ServiceFeeEditModalValidation = yup.object({
   value: number()
-    .typeError('error:error.required')
-    .required('error:error.required')
+    .typeError('investors:change-fee-modal.validate-must-be-between')
+    .required('investors:change-fee-modal.validate-must-be-between')
     .test(
       'int',
-      'investors:change-fee-modal.validate-must-be-gte-0',
+      'investors:change-fee-modal.validate-must-be-between',
       (val) => val >= 0,
     )
     .test(
       'int',
-      'investors:change-fee-modal.validate-must-be-lte-max',
+      'investors:change-fee-modal.validate-must-be-between',
       function (val) {
-        return val <= this.parent.maxDiscount;
+        return (
+          val <= this.parent.maxDiscount.max ||
+          val === this.parent.maxDiscount.full
+        );
       },
     ),
 });

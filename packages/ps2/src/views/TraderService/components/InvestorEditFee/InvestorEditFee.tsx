@@ -15,7 +15,10 @@ import { ServiceFeeEditModalValidation } from './validation';
 import { getServiceTotalFee } from '../../../../util/fee';
 import { ZIGNALY_PROFIT_FEE } from '../../../../util/constants';
 
-type EditFeeFormValues = { value: number; maxDiscount: number };
+type EditFeeFormValues = {
+  value: number;
+  maxDiscount: { max: number; full: number };
+};
 
 function InvestorEditFee({
   close,
@@ -44,7 +47,10 @@ function InvestorEditFee({
     mode: 'onChange',
     defaultValues: {
       value: ownerSfDiscount,
-      maxDiscount: ownerSuccessFee + ownerSfDiscount,
+      maxDiscount: {
+        max: Math.max(0, (+data?.successFee || 0) - 2 * ZIGNALY_PROFIT_FEE),
+        full: +data?.successFee || 0,
+      },
     },
     resolver: yupResolver(ServiceFeeEditModalValidation),
   });
@@ -84,7 +90,12 @@ function InvestorEditFee({
                 zignalyFee: ZIGNALY_PROFIT_FEE,
               })}
               newValue={getServiceTotalFee(
-                (+data?.successFee || 0) - watch('value') - ZIGNALY_PROFIT_FEE,
+                Math.max(
+                  (+data?.successFee || 0) -
+                    watch('value') -
+                    ZIGNALY_PROFIT_FEE,
+                  0,
+                ),
               )}
             >
               <ZigInput
@@ -97,9 +108,7 @@ function InvestorEditFee({
                 label={t('change-fee-modal.discount')}
                 labelInline={true}
                 fullWidth={false}
-                error={t(errors.value?.message, {
-                  max: ownerSuccessFee + ownerSfDiscount,
-                })}
+                error={t(errors.value?.message, watch('maxDiscount'))}
                 {...field}
               />
             </SuccessFeeInputWrapper>
