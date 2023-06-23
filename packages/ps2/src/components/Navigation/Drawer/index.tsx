@@ -259,21 +259,23 @@ const ZigDrawer = () => {
                 </ListItemButton>
               </ListItem>
 
-              <ListItem>
-                <ZigButton
-                  id={'my-portfolio__deposit'}
-                  startIcon={<ZigPlusIcon width={10} height={10} />}
-                  sx={{ fontWeight: 600, mb: 1 }}
-                  variant={'contained'}
-                  onClick={() =>
-                    showModal(DepositModal, {
-                      ctaId: 'account-menu-deposit',
-                    })
-                  }
-                >
-                  {t('action:deposit')}
-                </ZigButton>
-              </ListItem>
+              {isAuthenticated && (
+                <ListItem>
+                  <ZigButton
+                    id={'my-portfolio__deposit'}
+                    startIcon={<ZigPlusIcon width={10} height={10} />}
+                    sx={{ fontWeight: 600, mb: 1 }}
+                    variant={'contained'}
+                    onClick={() =>
+                      showModal(DepositModal, {
+                        ctaId: 'account-menu-deposit',
+                      })
+                    }
+                  >
+                    {t('action:deposit')}
+                  </ZigButton>
+                </ListItem>
+              )}
             </List>
 
             <List>
