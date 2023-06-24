@@ -10,7 +10,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { useTraderServiceEditSuccessFeeMutation } from '../../../../apis/service/api';
 import SuccessFeeInputWrapper from '../BecomeTraderLanding/modals/forms/SuccessFeeInputWrapper';
 import { useServiceDetails } from '../../../../apis/service/use';
-import { useActiveExchange } from '../../../../apis/user/use';
 import { ServiceFeeEditModalValidation } from './validation';
 import {
   adjustDiscountFromBackend,
@@ -28,16 +27,17 @@ function InvestorEditFee({
   close,
   ownerSuccessFee,
   ownerSfDiscount,
+  accountId,
   serviceId,
   ...props
 }: {
   close: () => void;
   ownerSuccessFee: number;
+  accountId: string;
   ownerSfDiscount: number;
   serviceId: string;
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation(['investors']);
-  const { internalId: accountId } = useActiveExchange();
   const [editFee, { isLoading }] = useTraderServiceEditSuccessFeeMutation();
   const toast = useToast();
   const { data } = useServiceDetails(serviceId);

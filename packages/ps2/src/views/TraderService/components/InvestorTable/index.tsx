@@ -142,7 +142,11 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         enableSorting: false,
         cell: ({
           row: {
-            original: { ownerSfDiscount, ownerSuccessFee },
+            original: {
+              account_id: accountId,
+              ownerSfDiscount,
+              ownerSuccessFee,
+            },
           },
         }) => (
           <ZigDropdown
@@ -162,6 +166,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
                   if ((service?.successFee || 0) > 0) {
                     showModal(InvestorEditFee, {
                       serviceId,
+                      accountId,
                       ownerSuccessFee,
                       ownerSfDiscount,
                     });
@@ -175,7 +180,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         ),
       }),
     ];
-  }, []);
+  }, [service]);
 
   return (
     <LayoutContentWrapper
