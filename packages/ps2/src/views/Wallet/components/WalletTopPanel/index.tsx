@@ -12,7 +12,6 @@ import { Box, IconButton } from '@mui/material';
 import { ChevronRight, Remove } from '@mui/icons-material';
 import { WalletTopPanelProps } from './types';
 import { useZModal } from 'components/ZModal/use';
-import BuyZigModal from '../../modals/BuyZigModal';
 import WalletWithdrawModal from '../../modals/WalletWithdrawModal';
 import WalletPopover from './atoms/WalletPopover';
 import { usePrefetchTranslation } from '../../../../util/i18nextHelpers';
@@ -83,17 +82,6 @@ const WalletTopPanel = ({ balances, coins }: WalletTopPanelProps) => {
         </div>
       </Box>
       <Box display='flex' flexDirection='row' mt='20px' gap={1}>
-        <ZigButton
-          id={'wallet__buy-zig'}
-          variant='contained'
-          onClick={() => {
-            showModal(BuyZigModal, {
-              ctaId: 'buy-zig',
-            });
-          }}
-        >
-          {t('buy.buy')}
-        </ZigButton>
         <ZigButton
           id={'wallet__withdraw-zig'}
           startIcon={<Remove />}
