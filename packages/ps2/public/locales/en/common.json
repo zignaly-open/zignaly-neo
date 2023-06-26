@@ -81,7 +81,7 @@
     "portfolio": "Portfolio:"
   },
   "validation": {
-    "insufficient-amount": "Insufficient funds",
+    "insufficient-amount": "Exceeds available balance",
     "insufficient-amount-min": "Min amount: {{ minValue }} {{ minValueCoin }}",
     "insufficient-amount-max": "Max amount: {{ maxValue }} {{ coin }}",
     "invalid-value": "Invalid value",

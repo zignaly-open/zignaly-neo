@@ -325,13 +325,14 @@ function WithdrawForm({
               sx={{ position: 'absolute', right: '-22px', bottom: 0 }}
               id={'withdraw-modal__history'}
               startIcon={
-                <Box mt='5px'>
-                  <ZigListIcon
-                    width={'24px'}
-                    height={'24px'}
-                    color={'neutral100'}
-                  />
-                </Box>
+                <ZigListIcon
+                  width={'24px'}
+                  height={'24px'}
+                  color={'neutral100'}
+                  style={{
+                    verticalAlign: 'middle',
+                  }}
+                />
               }
               variant='text'
               onClick={() => navigate(ROUTE_MY_BALANCES_TRANSACTIONS)}
