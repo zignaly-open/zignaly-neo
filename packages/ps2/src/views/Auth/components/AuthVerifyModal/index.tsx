@@ -95,7 +95,6 @@ function AuthVerifyModal({
     }
     return { title, description };
   }, [user, t, verifyStatus.isSuccess]);
-  console.log(texts);
 
   const getError = useCallback(
     (status: typeof verifyStatus) => {
