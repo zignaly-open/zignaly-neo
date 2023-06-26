@@ -113,6 +113,7 @@ const PendingTransactionsList: React.FC<{
                 cell: (props) => (
                   <Box
                     id={`pending-transactions-table__status-${props.row.id}`}
+                    whiteSpace='normal'
                   >
                     {props.getValue()}
                   </Box>
