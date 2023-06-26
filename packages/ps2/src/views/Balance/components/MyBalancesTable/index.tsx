@@ -200,7 +200,7 @@ const MyBalancesTable = (): JSX.Element => {
 
   return (
     <LayoutContentWrapper
-      unmountOnRefetch={true}
+      unmountOnRefetch={false}
       endpoint={[coinsEndpoint, balancesEndpoint]}
       content={([coins, balances]: [CoinDetails, CoinBalances]) => (
         <ZigTable

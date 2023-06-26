@@ -22,7 +22,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
         convert: convert,
       },
     }),
-    providesTags: ['Balance'],
+    providesTags: ['Balance', 'Assets'],
   }),
 
   bulkCoins: builder.query<AccountCoinBalances, { exchangeAccounts: string[] }>(
