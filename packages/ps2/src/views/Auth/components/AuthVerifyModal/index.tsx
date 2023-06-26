@@ -66,6 +66,8 @@ function AuthVerifyModal({
         description = t(
           'auth-verify-modal.isDisabled.isNotVerifyEmailValid.description',
         );
+      } else {
+        title = t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-title');
       }
     } else if (ask2FA) {
       if (verifyStatus.isSuccess) {
@@ -93,6 +95,7 @@ function AuthVerifyModal({
     }
     return { title, description };
   }, [user, t, verifyStatus.isSuccess]);
+  console.log(texts);
 
   const getError = useCallback(
     (status: typeof verifyStatus) => {
