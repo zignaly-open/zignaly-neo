@@ -51,7 +51,7 @@ const ForgotPasswordForm = () => {
   }
 
   return (
-    <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
+    <Box sx={{ width: '100%', p: 4, maxWidth: 500, textAlign: 'center' }}>
       <ZigTypography
         variant={'h1'}
         align={'center'}
@@ -59,6 +59,9 @@ const ForgotPasswordForm = () => {
         textTransform={'capitalize'}
       >
         {t('reset-password.reset-password')}
+      </ZigTypography>
+      <ZigTypography variant={'body1'}>
+        {t('reset-password.description')}
       </ZigTypography>
       <Form onSubmit={handleSubmit(submit)}>
         <Controller
