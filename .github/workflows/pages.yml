@@ -54,7 +54,7 @@ jobs:
           node-version: 16.x
           cache: 'yarn'
       - name: Install Lerna
-        run: yarn global add lerna
+        run: yarn global add lerna@6.6.2
       - name: Bootstrap
         run: lerna bootstrap --scope=*/ui
       - name: Build modified packages
