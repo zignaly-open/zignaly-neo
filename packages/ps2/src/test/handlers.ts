@@ -5,6 +5,7 @@ import {
   loginResponseMockSuccess,
   loginResponseMockWrongCredentials,
 } from './mocks/login';
+import { exchangeAssets, exchangeCoinsList } from './mocks/exchange';
 import { LoginPayload } from '../apis/user/types';
 
 export const handlers = [
@@ -22,4 +23,10 @@ export const handlers = [
       }
     },
   ),
+  rest.get(/coins\/zgly_(.*)/, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(exchangeCoinsList));
+  }),
+  rest.get(/user\/exchanges\/(.*)\/assets/, (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json(exchangeAssets));
+  }),
 ];

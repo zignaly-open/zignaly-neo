@@ -5,6 +5,8 @@ import { WrappedInProviders } from '../App';
 import { store } from '../apis/store';
 import i18n from 'i18next';
 import { initReactI18next, I18nextProvider } from 'react-i18next';
+import ModalProvider from 'mui-modal-provider';
+import { Provider } from 'react-redux';
 
 // todo: maybe make it a fuly functional smth and use properly
 i18n.use(initReactI18next).init({
@@ -23,9 +25,13 @@ export function renderWithProviders(ui: JSX.Element, renderOptions = {}) {
   return {
     store,
     ...render(
-      <I18nextProvider i18n={i18n}>
-        <Suspense fallback={null}>{ui}</Suspense>
-      </I18nextProvider>,
+      <Provider store={store}>
+        <I18nextProvider i18n={i18n}>
+          <ModalProvider>
+            <Suspense fallback={null}>{ui}</Suspense>
+          </ModalProvider>
+        </I18nextProvider>
+      </Provider>,
       {
         wrapper: WrappedInProviders,
         ...renderOptions,
