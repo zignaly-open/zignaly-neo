@@ -159,7 +159,7 @@ const ZigDropdown: (
 
                 if (option.children)
                   return (
-                    <ChildContainer key={key} active={true}>
+                    <ChildContainer key={key} active={childDropdownShow === option}>
                       <NavLink
                         active={option?.active}
                         id={option.id}
