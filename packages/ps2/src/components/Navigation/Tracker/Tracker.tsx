@@ -7,6 +7,7 @@ import { trackPage } from 'util/analytics';
 const Tracker: React.FC = () => {
   const { userId } = useCurrentUser();
   const location = useLocation();
+  const navigationCtaId = (location.state as { ctaId?: string })?.ctaId || null;
 
   useEffect(() => {
     const clickListener = (e: MouseEvent) => {
@@ -26,9 +27,9 @@ const Tracker: React.FC = () => {
   }, [userId]);
 
   useEffect(() => {
-    track({ userId });
+    track({ userId, ctaId: navigationCtaId });
     trackPage();
-  }, [location.pathname, userId]);
+  }, [location.pathname, userId, navigationCtaId]);
 
   return null;
 };

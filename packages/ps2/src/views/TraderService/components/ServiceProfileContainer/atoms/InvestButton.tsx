@@ -51,7 +51,10 @@ const InvestButton: React.FC<{
     } else {
       const newUser = !localStorage.getItem('hasLoggedIn');
       navigate(newUser ? ROUTE_SIGNUP : ROUTE_LOGIN, {
-        state: { redirectTo: location },
+        state: {
+          redirectTo: location,
+          ctaId: modalRoute ? 'service-profile__invest' : 'marketplace__invest',
+        },
       });
     }
   };
