@@ -1,4 +1,4 @@
-import React, { ComponentType, useEffect } from 'react';
+import React, { ComponentType, useEffect, useRef } from 'react';
 import { generatePath, useNavigate, useParams } from 'react-router-dom';
 import { useZModal } from './use';
 import { UseModalOptions } from 'mui-modal-provider';
@@ -22,8 +22,14 @@ export const ZModalRouteElement: React.FC<{
     },
     ...(options || {}),
   });
+
+  // fix for local double mount
+  const initialized = useRef(false);
   useEffect(() => {
-    showModal(component, { ctaId, ...params });
+    if (!initialized.current) {
+      initialized.current = true;
+      showModal(component, { ctaId, ...params });
+    }
   }, []);
   return null;
 };
