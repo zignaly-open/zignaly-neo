@@ -55,7 +55,7 @@ const InvestingStep: React.FC<{ step: number }> = ({ step }) => {
             />
             {step === 2 && (
               <ZigLink
-                id={'my-portfolio-steps__step-purchase'}
+                id={'my-portfolio-steps__purchase'}
                 href={BUY_CRYPTO_URL}
                 underline={'hover'}
                 target={'_blank'}
