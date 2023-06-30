@@ -17,7 +17,9 @@ const Tracker: React.FC = () => {
         if (['a', 'button'].includes(node?.tagName.toLocaleLowerCase())) {
           const ctaId =
             node.getAttribute('data-track-cta') || node.getAttribute('id');
+          const noAutoTrack = node.getAttribute('data-no-auto-track');
           ctaId &&
+            !noAutoTrack &&
             trackCta({
               userId,
               ctaId,

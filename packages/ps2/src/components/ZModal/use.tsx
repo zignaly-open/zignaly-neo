@@ -21,9 +21,10 @@ export function useZModal(options?: UseZModalOptions) {
     ) => {
       const { ctaId, ...modalProps } = props || {};
       const trackId = Component.trackId?.toLocaleLowerCase();
-      trackId && track({ hash: trackId, userId, ctaId });
+      trackId && track({ hash: trackId, userId, ctaId, modal: true });
       const modal: ShowFnOutput<void> = showModal(Component, {
         ...modalProps,
+        ctaId,
         close: () => {
           trackId && track({ userId });
           customClose ? customClose(modal) : modal.destroy();

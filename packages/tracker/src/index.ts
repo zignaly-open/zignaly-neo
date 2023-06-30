@@ -84,16 +84,21 @@ export const track = ({
   location = '',
   ctaId = '',
   hash = '',
+  modal = false,
   userId = '',
 }: {
   location?: string;
   hash?: string;
   ctaId?: string;
+  modal?: boolean;
   userId?: string;
 }) => {
   const url = new URL(location || window.location.href);
   url.hash =
-    (hash || url.hash?.split('?')[0]) + (ctaId ? `?ctaId=${ctaId}` : '');
+    (hash || url.hash?.split('?')[0]) +
+    (ctaId || modal ? '?' : '') +
+    (ctaId ? `ctaId=${ctaId}&` : '') +
+    (modal ? `modal` : '');
   triggerTz(url.toString(), userId, referrer);
   referrer = url.toString();
 };
