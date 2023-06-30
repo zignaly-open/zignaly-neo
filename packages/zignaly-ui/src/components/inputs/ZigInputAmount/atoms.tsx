@@ -31,7 +31,7 @@ const extractItem = (
 export const InputExtraInfo = (
   props: InputExtraInfoProps & {
     coin: string;
-    id: string;
+    id?: string;
   },
 ) => {
   const { balance, min, max, coin, extraInfo = {} } = props;

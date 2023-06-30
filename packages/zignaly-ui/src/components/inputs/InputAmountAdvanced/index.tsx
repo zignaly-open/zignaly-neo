@@ -134,7 +134,7 @@ function InputAmount({
 
             {tokens?.length === 1 && showUnit && value?.value.length !== 0 && (
               <>
-                {/*TODO: calculate wiotdth properly*/}
+                {/*TODO: calculate width properly*/}
                 <Unit widthCharacters={String(value?.value)?.length ?? 1}>
                   <ZigTypography color="neutral300" variant="h3">
                     {value?.token?.id.toUpperCase()}

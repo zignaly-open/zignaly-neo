@@ -10,6 +10,7 @@ import ZigCoinIcon from "../../display/ZigCoinIcon";
 import { changeEvent } from "utils/event";
 import BigNumber from "bignumber.js";
 import { trimZeros } from "utils/numbers";
+import ZigSelect from "../ZigSelect";
 export { InputExtraInfo } from "./atoms";
 
 const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
@@ -29,6 +30,9 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     children,
     className = "",
     labelInline = true,
+    withCoinSelector = false,
+    tokenOptions,
+    onTokenChange,
     ...rest
   } = props;
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
@@ -73,9 +77,19 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
   };
 
   return (
-    <Box display="flex" flexDirection="column" className={className}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems={withCoinSelector ? "center" : "unset"}
+      className={className}
+    >
       {!labelInline && label && <ZigTypography pb="10px">{label}</ZigTypography>}
-      <Layout display={wide ? "flex" : "inline-flex"} error={!!error} labelInline={labelInline}>
+      <Layout
+        withCoinSelector={withCoinSelector}
+        display={wide ? "flex" : "inline-flex"}
+        error={!!error}
+        labelInline={labelInline}
+      >
         {labelInline && (
           <TopDivider error={!!error}>
             <ZigTypography color="neutral300" variant="body2" id={id && `${id}-top-label`}>
@@ -83,13 +97,20 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
             </ZigTypography>
           </TopDivider>
         )}
-        <Box display="flex" alignItems="center" gap={2} width={wide ? 1 : "auto"}>
-          <Box display="flex" alignItems="center" gap={1}>
-            <ZigCoinIcon size="small" coin={coinVal} id={id && `${id}-coin-icon`} />
-            <ZigTypography color="neutral100" variant="h3" id={id && `${id}-coin-name`}>
-              {coinVal}
-            </ZigTypography>
-          </Box>
+        <Box
+          display="flex"
+          alignItems="center"
+          gap={!withCoinSelector ? 2 : 0}
+          width={wide ? 1 : "auto"}
+        >
+          {!withCoinSelector && tokenOptions?.length < 2 && (
+            <Box display="flex" alignItems="center" gap={1}>
+              <ZigCoinIcon size="small" coin={coinVal} id={id && `${id}-coin-icon`} />
+              <ZigTypography color="neutral100" variant="h3" id={id && `${id}-coin-name`}>
+                {coinVal}
+              </ZigTypography>
+            </Box>
+          )}
           <ZigInput
             {...rest}
             id={id}
@@ -112,6 +133,19 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
             }}
             onChange={handleChange}
           />
+          {withCoinSelector && tokenOptions?.length >= 2 && (
+            <Box>
+              <ZigSelect
+                outlined
+                width={150}
+                value={coin}
+                onChange={(v1, v2) => {
+                  onTokenChange?.(v2);
+                }}
+                options={tokenOptions}
+              />
+            </Box>
+          )}
         </Box>
         <Box mt="16px" width={1}>
           <>

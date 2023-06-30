@@ -1,0 +1,16 @@
+{
+  "title": "Swap Coins",
+  "continue": "Continue to Confirmation",
+  "confirmation": {
+    "title": "Confirm Swap"
+  },
+  "from-input": {
+    "label": "Swap from:",
+    "placeholder": "Amount"
+
+  },
+  "to-input": {
+    "label": "Swap to:",
+    "placeholder": "Amount received"
+  }
+}

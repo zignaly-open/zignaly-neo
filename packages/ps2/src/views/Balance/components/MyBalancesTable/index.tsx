@@ -10,7 +10,7 @@ import { BalanceTableDataType } from './types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { allowedDeposits } from 'util/coins';
-import { Remove } from '@mui/icons-material';
+import { Add, Remove, SwapHoriz } from '@mui/icons-material';
 import { useCoinBalances, useExchangeCoinsList } from 'apis/coin/use';
 import {
   CoinBalance,
@@ -25,6 +25,7 @@ import { Box } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
 import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
 import { useBalanceQuery } from 'apis/user/api';
+import SwapCoinsModal from '../SwapCoinsModal';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
@@ -124,6 +125,8 @@ const MyBalancesTable = (): JSX.Element => {
           <Box display='flex' justifyContent='flex-end' alignItems={'center'}>
             {!!allowedDeposits[exchangeType]?.includes(row.original.coin) && (
               <ZigButton
+                narrow
+                tooltip={t('deposit')}
                 id={`balance-row__deposit-${row.original.coin}`}
                 onClick={() =>
                   showDepositModal({
@@ -133,28 +136,42 @@ const MyBalancesTable = (): JSX.Element => {
                 variant='outlined'
                 sx={{ maxHeight: '20px', mr: 1 }}
               >
-                {t('deposit')}
-              </ZigButton>
-            )}
-            <Box>
-              <ZigButton
-                narrow
-                tooltip={t('withdraw')}
-                id={`balance-row__withdrawal-${row.original.coin}`}
-                onClick={() =>
-                  showModal(WithdrawModal, {
-                    selectedCoin: row.original.coin,
-                    ctaId: 'balances-table-row',
-                  })
-                }
-                variant='outlined'
-              >
-                <Remove
+                <Add
                   sx={{ height: '18px', width: '22px' }}
                   color={'neutral300'}
                 />
               </ZigButton>
-            </Box>
+            )}
+            <ZigButton
+              narrow
+              tooltip={t('withdraw')}
+              id={`balance-row__withdrawal-${row.original.coin}`}
+              onClick={() =>
+                showModal(WithdrawModal, {
+                  selectedCoin: row.original.coin,
+                  ctaId: 'balances-table-row',
+                })
+              }
+              variant='outlined'
+              sx={{ maxHeight: '20px', mr: 1 }}
+            >
+              <Remove
+                sx={{ height: '18px', width: '22px' }}
+                color={'neutral300'}
+              />
+            </ZigButton>
+            <ZigButton
+              id={`balance-row__withdrawal-${row.original.coin}`}
+              onClick={() =>
+                showModal(SwapCoinsModal, {
+                  selectedCoin: row.original,
+                })
+              }
+              variant='outlined'
+              startIcon={<SwapHoriz width={10} height={10} />}
+            >
+              {t('swap')}
+            </ZigButton>
           </Box>
         ),
       }),

@@ -2,16 +2,22 @@ import { Divider } from "@mui/material";
 import { styled, Box } from "@mui/system";
 import ZigButton from "../ZigButton";
 
-export const Layout = styled(Box)<{ error: boolean; labelInline: boolean }>`
-  border: 1px dotted ${({ theme }) => theme.palette.neutral600};
+export const Layout = styled(Box)<{
+  withCoinSelector?: boolean;
+  error: boolean;
+  labelInline: boolean;
+}>`
+  border: ${({ withCoinSelector, theme }) =>
+    withCoinSelector ? "none;" : `1px dotted ${theme.palette.neutral600};`};
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 24px 24px 12px;
+  padding: ${(withCoinSelector) => (withCoinSelector ? "5px 24px 12px;" : "24px 24px 12px;")};
   position: relative;
   border-radius: 5px;
 
-  ${({ error, theme }) => error && `border-color: ${theme.palette.redGraphOrError};`}
+  ${({ error, theme, withCoinSelector }) =>
+    error && !withCoinSelector && `border-color: ${theme.palette.redGraphOrError};`}
   ${({ labelInline }) =>
     labelInline &&
     `
@@ -23,14 +29,23 @@ export const Layout = styled(Box)<{ error: boolean; labelInline: boolean }>`
     .MuiInput-root {
       padding: 2px 24px;
       background: #171b30;
-      border: none;
+      ${({ withCoinSelector }) =>
+        withCoinSelector &&
+        `
+        border-radius: 5px 0 0 5px;
+        background: unset;
+      `}
+
+      border: ${({ withCoinSelector, theme }) =>
+        withCoinSelector ? `1px dotted ${theme.palette.neutral600};` : `none;`};
+      border-right: none;
     }
 
     .MuiInput-input {
       font-size: 30px;
       font-weight: 500;
       border-color: ${({ theme }) => theme.palette.neutral400};
-      background: #171b30;
+      background: ${(withCoinSelector) => (withCoinSelector ? "unset;" : "#171b30;")};
       -webkit-text-fill-color: #878dd1 !important;
     }
   }
