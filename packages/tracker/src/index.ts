@@ -33,6 +33,13 @@ const delayTimeout = 100;
 const sendTzDelayed = (data: tzData) => {
   if (
     lastDelayedTrack.event?.userId === data?.userId &&
+    data.urlDestination === lastDelayedTrack.event?.urlDestination
+  )
+    // this is mainly intended to fix the react 18 double mount in dev mode
+    return;
+
+  if (
+    lastDelayedTrack.event?.userId === data?.userId &&
     data.urlDestination?.indexOf(
       lastDelayedTrack.event?.urlDestination + '#',
     ) === 0
