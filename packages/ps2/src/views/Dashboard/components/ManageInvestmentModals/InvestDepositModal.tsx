@@ -58,7 +58,7 @@ function InvestDepositModal({
   const depositModal = useDepositModalContent(service?.ssc, trackAwareClose);
   const investModal = useInvestModalContent({ close: trackAwareClose });
 
-  const showDeposit = useMemo(() => +balance >= 0, [ready]);
+  const showDeposit = useMemo(() => +balance === 0, [ready]);
 
   useEffect(() => {
     // if not authenticated, we'll be redirecting right away
