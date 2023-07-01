@@ -1,5 +1,5 @@
 import { DialogProps } from '@mui/material/Dialog';
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   useCurrentBalance,
   useSelectedInvestment,
@@ -14,7 +14,6 @@ import { useDepositModalContent } from './ChooseDepositTypeModal';
 import ZModal from '../../../../components/ZModal';
 import { Box } from '@mui/material';
 import { track } from '@zignaly-open/tracker';
-import DepositModal from './DepositModal';
 
 function InvestDepositModal({
   serviceId,
@@ -55,22 +54,30 @@ function InvestDepositModal({
     props.close();
   };
 
-  const depositModal = useDepositModalContent(service?.ssc, trackAwareClose);
+  const depositModal = useDepositModalContent({
+    coin: service?.ssc,
+    close: trackAwareClose,
+  });
   const investModal = useInvestModalContent({ close: trackAwareClose });
 
   const showDeposit = useMemo(() => +balance === 0, [ready]);
 
+  // the logic below is for tracking only
+  const trackHash = showDeposit ? depositModal.view : 'invest';
+  const firstTrack = useRef(true);
   useEffect(() => {
     // if not authenticated, we'll be redirecting right away
-    isAuthenticated &&
+    if (isAuthenticated && ready) {
       track({
         // make sure we reuse the exact same track id
-        hash: showDeposit ? DepositModal.trackId : 'invest',
+        hash: trackHash,
         userId,
-        ctaId,
+        ctaId: firstTrack.current ? ctaId : undefined,
         modal: true,
       });
-  }, []);
+      firstTrack.current = false;
+    }
+  }, [trackHash, ready, isAuthenticated, firstTrack]);
 
   // we need it here because this modal is not technically a ZModal
   if (!isAuthenticated) {
