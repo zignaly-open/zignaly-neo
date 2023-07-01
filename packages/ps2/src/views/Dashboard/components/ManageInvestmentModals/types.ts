@@ -36,11 +36,12 @@ export type WithdrawModalProps = {
 
 export enum ChooseDepositTypeViews {
   DepositView = 'deposit',
-  ChooseDepositTypeView = 'choose-deposit-type',
+  ChooseDepositTypeView = 'deposit_or_buy',
 }
 
 export type UseModalReturn = {
   title: string;
   component: () => JSX.Element;
   onGoBack?: () => void;
+  view?: string;
 };

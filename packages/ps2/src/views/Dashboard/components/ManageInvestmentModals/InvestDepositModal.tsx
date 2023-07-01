@@ -14,7 +14,6 @@ import { useDepositModalContent } from './ChooseDepositTypeModal';
 import ZModal from '../../../../components/ZModal';
 import { Box } from '@mui/material';
 import { track } from '@zignaly-open/tracker';
-import DepositModal from './DepositModal';
 
 function InvestDepositModal({
   serviceId,
@@ -49,24 +48,31 @@ function InvestDepositModal({
   useMaybeNavigateNotLoggedIn()();
 
   const trackAwareClose = () => {
+    // we need this because we're not using the normal zmodal
     track({ userId });
     props.close();
   };
 
-  const depositModal = useDepositModalContent(service?.ssc, trackAwareClose);
+  const depositModal = useDepositModalContent({
+    coin: service?.ssc,
+    close: trackAwareClose,
+  });
   const investModal = useInvestModalContent({ close: trackAwareClose });
 
   const showDeposit = useMemo(() => +balance === 0, [ready]);
 
+  // the logic below is for tracking only
+  const trackHash = showDeposit ? depositModal.view : 'invest';
   useEffect(() => {
     // if not authenticated, we'll be redirecting right away
-    isAuthenticated &&
+    if (isAuthenticated && ready) {
       track({
         // make sure we reuse the exact same track id
-        hash: showDeposit ? DepositModal.trackId : 'invest',
+        hash: trackHash,
         userId,
       });
-  }, []);
+    }
+  }, [trackHash, ready, isAuthenticated]);
 
   // we need it here because this modal is not technically a ZModal
   if (!isAuthenticated) {
