@@ -16,7 +16,7 @@ import { CenteredLoader } from '@zignaly-open/ui';
 
 const loadingSpinner = (
   <LoaderWrapper>
-    <CenteredLoader width={165} height={40} />
+    <CenteredLoader width={155} height={40} />
   </LoaderWrapper>
 );
 
@@ -42,7 +42,7 @@ const MarketplaceAction = ({
 
   return (
     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
-      <Box sx={{ minWidth: 155 }}>
+      <Box sx={{ minWidth: 165 }}>
         {isLoading ? (
           loadingSpinner
         ) : (
