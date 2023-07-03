@@ -128,6 +128,17 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       },
     }),
   }),
+  quoteAssetsCoin: builder.query<
+    Array<string>,
+    {
+      exchangeInternalId: string;
+      coinId: string;
+    }
+  >({
+    query: ({ exchangeInternalId, coinId }) => ({
+      url: `quote_assets/${exchangeInternalId}/${coinId}`,
+    }),
+  }),
 }));
 
 export const {
@@ -138,4 +149,5 @@ export const {
   useWithdrawMutation,
   useTransactionsHistoryCsvMutation,
   useTransactionsHistoryQuery,
+  useQuoteAssetsCoinQuery,
 } = api;

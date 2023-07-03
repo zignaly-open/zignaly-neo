@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { SwapCoinsModalProps } from './types';
+import { SwapCoinsModalProps, CoinsSelect } from './types';
 import { CenteredLoader, ZigButton, ZigInputAmount } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { useForm, Controller } from 'react-hook-form';
@@ -8,6 +8,7 @@ import CoinOption from '../../../Dashboard/components/ManageInvestmentModals/for
 import {
   useCoinBalances,
   useExchangeCoinsList,
+  useQuoteAssetsCoin,
 } from '../../../../apis/coin/use';
 import { SwapHoriz } from '@mui/icons-material';
 import { Box } from '@mui/material';
@@ -49,14 +50,41 @@ function SwapCoinsForm({ setStep, step, selectedCoin }: SwapCoinsModalProps) {
       };
     });
   }, [balances, coins]);
-  const [selectedFromToken, setSelectedFromToken] = useState(
-    coinOptions.find((coin) => (coin.coin = selectedCoin.coin)),
+
+  const [selectedFromToken, setSelectedFromToken] = useState<CoinsSelect>(
+    coinOptions.find((coin) => coin.coin === selectedCoin.coin),
   );
-  const [selectedToToken, setSelectedToToken] = useState();
+  const { data: allowedCoinsToSwap, isLoading: isLoadingAssets } =
+    useQuoteAssetsCoin(selectedFromToken.coin);
+  const coinOptions2 = useMemo(() => {
+    if (!balances || !coins || !allowedCoinsToSwap) return [];
+
+    return allowedCoinsToSwap.map((c) => {
+      const balance = balances[c];
+      const name = coins[c]?.name || '';
+      return {
+        coin: c,
+        name,
+        available: balance?.balanceFree || 0,
+        label: (
+          <CoinOption
+            key={c}
+            coin={c}
+            name={''}
+            prefixId={'swap-coins-modal'}
+          />
+        ),
+      };
+    });
+  }, [balances, coins, allowedCoinsToSwap]);
+  const [selectedToToken, setSelectedToToken] = useState<CoinsSelect>(
+    {} as CoinsSelect,
+  );
   const nonZeroBalanceCoinOptions = coinOptions.filter((c) => c.available > 0);
-  if (isLoadingCoins || isLoadingBalances) {
+  if (isLoadingCoins || isLoadingBalances || isLoadingAssets) {
     return <CenteredLoader />;
   }
+
   return (
     <Form>
       <Controller
@@ -74,6 +102,7 @@ function SwapCoinsForm({ setStep, step, selectedCoin }: SwapCoinsModalProps) {
             coin={selectedFromToken}
             onTokenChange={(token: typeof selectedFromToken) => {
               setSelectedFromToken(token);
+              setSelectedToToken({} as typeof selectedToToken);
             }}
             balance={selectedFromToken.available}
             {...fromField}
@@ -90,8 +119,10 @@ function SwapCoinsForm({ setStep, step, selectedCoin }: SwapCoinsModalProps) {
         defaultValue=''
         render={({ field }) => (
           <ZigInputAmount
+            disabled={!selectedToToken?.coin}
+            showMaxButton={false}
             withCoinSelector
-            tokenOptions={coinOptions}
+            tokenOptions={coinOptions2}
             id={'swap-coins-modal__to-input-amount'}
             label={t('to-input.label')}
             wide

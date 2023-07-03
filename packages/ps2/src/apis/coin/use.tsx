@@ -3,6 +3,7 @@ import {
   useCoinsQuery,
   useDepositInfoQuery,
   useTransactionsHistoryQuery,
+  useQuoteAssetsCoinQuery,
 } from './api';
 import { CoinBalances, CoinDetails, DepositInfo } from './types';
 import { QueryReturnType } from 'util/queryReturnType';
@@ -21,6 +22,18 @@ export function useCoinBalances(options?: {
       convert,
     },
     { skip: !exchange?.internalId, refetchOnMountOrArgChange: refetch || 30 },
+  );
+}
+export function useQuoteAssetsCoin(
+  coinId: string,
+): QueryReturnType<Array<string>> {
+  const exchange = useActiveExchange();
+  return useQuoteAssetsCoinQuery(
+    {
+      exchangeInternalId: exchange?.internalId,
+      coinId,
+    },
+    { skip: !exchange?.internalId || !coinId },
   );
 }
 

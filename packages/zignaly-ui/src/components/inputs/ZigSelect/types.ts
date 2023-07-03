@@ -10,6 +10,9 @@ export type ZigSelectProps<T> = Omit<
   SelectProps,
   "isDisabled" | "isOptionDisabled" | "onChange" | "options"
 > & {
+  dottedBorder?: boolean;
+  showLeftBorder?: boolean;
+  borderRadius?: string;
   label?: string | JSX.Element;
   id?: string;
   small?: boolean;

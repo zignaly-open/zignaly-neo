@@ -1,6 +1,6 @@
 import React, { forwardRef } from "react";
 import { InputExtraInfoObject, ZigInputAmountProps } from "./types";
-import { InputAdornment, Box } from "@mui/material";
+import { InputAdornment, Box, Divider } from "@mui/material";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
 import ZigInput from "../ZigInput";
 import { Layout, MaxButton, TopDivider } from "./styles";
@@ -33,6 +33,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     withCoinSelector = false,
     tokenOptions,
     onTokenChange,
+    showMaxButton = true,
     ...rest
   } = props;
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
@@ -123,7 +124,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
             placeholder={placeholder}
             InputProps={{
               endAdornment:
-                balance || handleMax ? (
+                (balance || handleMax) && showMaxButton ? (
                   <InputAdornment position="end">
                     <MaxButton variant="outlined" onClick={handleMax} id={id && `${id}-max-button`}>
                       Max
@@ -134,10 +135,28 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
             onChange={handleChange}
           />
           {withCoinSelector && tokenOptions?.length >= 2 && (
-            <Box>
+            <Box display={"flex"}>
+              <Box
+                sx={{
+                  padding: "8px 0",
+                  borderTop: "1px dotted #35334A",
+                  borderBottom: "1px dotted #35334A",
+                  width: "100%",
+                  height: "100%",
+                }}
+              >
+                <Divider
+                  orientation={"vertical"}
+                  sx={{ border: "1px dotted #35334A", height: "42px" }}
+                />
+              </Box>
               <ZigSelect
+                borderRadius={"0 5px 5px 0;"}
+                dottedBorder
+                placeholder={"Select coin"}
+                showLeftBorder={false}
                 outlined
-                width={150}
+                width={160}
                 value={coin}
                 onChange={(v1, v2) => {
                   onTokenChange?.(v2);

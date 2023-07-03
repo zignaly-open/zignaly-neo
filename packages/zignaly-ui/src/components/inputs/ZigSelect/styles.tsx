@@ -5,7 +5,15 @@ import { css } from "@emotion/react";
 import { StyledComponent } from "@emotion/styled";
 import { BoxTypeMap } from "@mui/system";
 
-type Props = { error?: string; width?: number; small?: boolean; outlined?: boolean };
+type Props = {
+  error?: string;
+  width?: number;
+  small?: boolean;
+  outlined?: boolean;
+  dotted?: boolean;
+  showLeftBorder?: boolean;
+  borderRadius?: string;
+};
 
 export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(Box)<Props>`
   gap: 10px;
@@ -14,11 +22,14 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
 
   .zig-react-select {
     &__control {
-      border: 1px solid
-        ${({ theme, error }) => (error ? theme.palette.redGraphOrError : theme.palette.neutral600)};
+      border-style: ${({ dotted }) => (dotted ? `dotted` : `solid`)};
+      border-width: 1px;
+      border-color: ${({ theme, error }) =>
+        error ? theme.palette.redGraphOrError : theme.palette.neutral600};
+      ${({ showLeftBorder }) => !showLeftBorder && "border-left: none;"};
       padding: ${({ small }) => (small ? "3px 16px 3px 9px" : "11px 24px 11px 16px")};
       min-height: ${({ small }) => (small ? "0" : "60px")};
-      border-radius: 5px;
+      border-radius: ${({ borderRadius }) => borderRadius ?? "5px"};
       display: flex;
       align-items: center;
       cursor: pointer;
@@ -33,6 +44,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
             rgb(16 18 37) 0%,
             rgb(16 18 37) 35%,
             rgb(16 18 37) 100%
+            
           );`};
         `}
       transition: border-color 0.2s;
@@ -59,9 +71,11 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
       }
 
       &--is-focused {
-        border: 1px solid
-          ${({ theme, error }) =>
-            error ? theme.palette.redGraphOrError : theme.palette.neutral400};
+        border-style: ${({ dotted }) => (dotted ? `dotted` : `solid`)};
+        border-width: 1px;
+        ${({ showLeftBorder }) => !showLeftBorder && "border-left: none;"};
+        border-color: ${({ theme, error }) =>
+          error ? theme.palette.redGraphOrError : theme.palette.neutral400};
         box-shadow: none !important;
       }
     }
