@@ -21,7 +21,7 @@ export const CreateKeyValidation = yup
   .required();
 
 export const ipStringToArray = (value: string) =>
-  value.split(/\s*,\s*/).filter(Boolean);
+  value.split(/(?:\s*,\s*|\s+)/).filter(Boolean);
 
 export const EditKeyValidation = yup
   .object({

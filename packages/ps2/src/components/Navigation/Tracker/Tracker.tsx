@@ -7,28 +7,37 @@ import { trackPage } from 'util/analytics';
 const Tracker: React.FC = () => {
   const { userId } = useCurrentUser();
   const location = useLocation();
+  const navigationCtaId = (location.state as { ctaId?: string })?.ctaId || null;
 
   useEffect(() => {
     const clickListener = (e: MouseEvent) => {
-      const node = e.target as HTMLElement;
-      if (['a', 'button'].includes(node?.tagName.toLocaleLowerCase())) {
-        const ctaId =
-          node.getAttribute('data-track-cta') || node.getAttribute('id');
-        ctaId &&
-          trackCta({
-            userId,
-            ctaId,
-          });
-      }
+      let node = e.target as HTMLElement;
+      // the target could be a child event of a button
+      do {
+        if (['a', 'button'].includes(node?.tagName.toLocaleLowerCase())) {
+          const ctaId =
+            node.getAttribute('data-track-cta') || node.getAttribute('id');
+          const noAutoTrack = node.getAttribute('data-no-auto-track');
+          ctaId &&
+            !noAutoTrack &&
+            trackCta({
+              userId,
+              ctaId,
+            });
+          break;
+        } else {
+          node = node.parentNode as HTMLElement;
+        }
+      } while (node);
     };
     document.addEventListener('click', clickListener);
     return () => document.removeEventListener('click', clickListener);
   }, [userId]);
 
   useEffect(() => {
-    track({ userId });
+    track({ userId, ctaId: navigationCtaId });
     trackPage();
-  }, [location.pathname, userId]);
+  }, [location.pathname, userId, navigationCtaId]);
 
   return null;
 };

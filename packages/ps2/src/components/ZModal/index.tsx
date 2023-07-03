@@ -15,6 +15,7 @@ const ZModal: React.FC<ZModalProps> = ({
   close,
   isLoading,
   allowUnauth,
+  disableBackdropClose,
   children,
   onGoBack,
   title,
@@ -34,7 +35,12 @@ const ZModal: React.FC<ZModalProps> = ({
   return (
     <MuiModal
       {...props}
-      onClose={close}
+      onClose={(event, reason) => {
+        if (disableBackdropClose && reason === 'backdropClick') {
+          return;
+        }
+        close();
+      }}
       sx={{
         alignItems: 'center',
         justifyContent: 'center',

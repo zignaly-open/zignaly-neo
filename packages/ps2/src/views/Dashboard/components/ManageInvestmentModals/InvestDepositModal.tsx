@@ -8,17 +8,21 @@ import {
 import { useServiceDetails } from '../../../../apis/service/use';
 import useMaybeNavigateNotLoggedIn from '../../../../util/hooks/useMaybeNavigateNotLoggedIn';
 import { useInvestModalContent } from './InvestModal';
-import { useIsAuthenticated } from '../../../../apis/user/use';
+import { useCurrentUser, useIsAuthenticated } from '../../../../apis/user/use';
 import { UseModalReturn } from './types';
 import { useDepositModalContent } from './ChooseDepositTypeModal';
 import ZModal from '../../../../components/ZModal';
 import { Box } from '@mui/material';
+import { track } from '@zignaly-open/tracker';
+import DepositModal from './DepositModal';
 
 function InvestDepositModal({
   serviceId,
+  ctaId,
   ...props
 }: {
   serviceId: string;
+  ctaId?: string;
   close: () => void;
 } & DialogProps): React.ReactElement {
   const {
@@ -41,13 +45,32 @@ function InvestDepositModal({
     setReady((r) => !loading || r);
   }, [loading]);
 
+  const { userId } = useCurrentUser();
+
   useSelectInvestment(service);
   useMaybeNavigateNotLoggedIn()();
 
-  const depositModal = useDepositModalContent(service?.ssc, props.close);
-  const investModal = useInvestModalContent({ close: props.close });
+  const trackAwareClose = () => {
+    track({ userId });
+    props.close();
+  };
+
+  const depositModal = useDepositModalContent(service?.ssc, trackAwareClose);
+  const investModal = useInvestModalContent({ close: trackAwareClose });
 
   const showDeposit = useMemo(() => +balance === 0, [ready]);
+
+  useEffect(() => {
+    // if not authenticated, we'll be redirecting right away
+    isAuthenticated &&
+      track({
+        // make sure we reuse the exact same track id
+        hash: showDeposit ? DepositModal.trackId : 'invest',
+        userId,
+        ctaId,
+        modal: true,
+      });
+  }, []);
 
   // we need it here because this modal is not technically a ZModal
   if (!isAuthenticated) {
@@ -62,7 +85,7 @@ function InvestDepositModal({
     <ZModal
       title={ready ? title : ''}
       {...props}
-      close={props.close}
+      close={trackAwareClose}
       isLoading={!ready}
       onGoBack={onGoBack}
       wide
@@ -72,6 +95,7 @@ function InvestDepositModal({
   );
 }
 
-// InvestDepositModal.trackId = 'invest';
+// We should not do this because the logic inside this InvestDeposit makes sure we call the right track
+// InvestDepositModal.trackId = 'invest-deposit';
 
 export default InvestDepositModal;

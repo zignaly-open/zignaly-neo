@@ -8,17 +8,21 @@ import {
   ZigArrowBottomIcon,
   ZigButton,
 } from '@zignaly-open/ui';
-import { useActiveExchange } from '../../../../apis/user/use';
+import { useActiveExchange, useCurrentUser } from '../../../../apis/user/use';
 import AccountSelector from 'components/AccountSelector';
 
 const BalanceAccountSelector: React.FC = () => {
   const theme = useTheme();
   const { t } = useTranslation('common');
   const activeExchange = useActiveExchange();
+  const user = useCurrentUser();
 
   if (!activeExchange) {
     return null;
   }
+
+  const shouldShowTypeInfo =
+    activeExchange.exchangeType === 'futures' || user.exchanges?.length > 1;
 
   return (
     <Layout>
@@ -51,17 +55,19 @@ const BalanceAccountSelector: React.FC = () => {
             )}
           />
         </Inline>
-        <TypeText variant={'h4'}>
-          <span id={'balance__type'}>{t('account-selector.type.title')}</span>
-          <span id={'balance__exchange-type'}>
-            {t(
-              'account-selector.type.' +
-                (activeExchange.exchangeType === 'futures'
-                  ? 'futures'
-                  : 'spot'),
-            )}
-          </span>
-        </TypeText>
+        {shouldShowTypeInfo && (
+          <TypeText variant={'h4'}>
+            <span id={'balance__type'}>{t('account-selector.type.title')}</span>
+            <span id={'balance__exchange-type'}>
+              {t(
+                'account-selector.type.' +
+                  (activeExchange.exchangeType === 'futures'
+                    ? 'futures'
+                    : 'spot'),
+              )}
+            </span>
+          </TypeText>
+        )}
       </Data>
     </Layout>
   );

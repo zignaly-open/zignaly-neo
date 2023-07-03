@@ -33,6 +33,13 @@ const delayTimeout = 100;
 const sendTzDelayed = (data: tzData) => {
   if (
     lastDelayedTrack.event?.userId === data?.userId &&
+    data.urlDestination === lastDelayedTrack.event?.urlDestination
+  )
+    // this is mainly intended to fix the react 18 double mount in dev mode
+    return;
+
+  if (
+    lastDelayedTrack.event?.userId === data?.userId &&
     data.urlDestination?.indexOf(
       lastDelayedTrack.event?.urlDestination + '#',
     ) === 0
@@ -84,16 +91,21 @@ export const track = ({
   location = '',
   ctaId = '',
   hash = '',
+  modal = false,
   userId = '',
 }: {
   location?: string;
   hash?: string;
   ctaId?: string;
+  modal?: boolean;
   userId?: string;
 }) => {
   const url = new URL(location || window.location.href);
   url.hash =
-    (hash || url.hash?.split('?')[0]) + (ctaId ? `?ctaId=${ctaId}` : '');
+    (hash || url.hash?.split('?')[0]) +
+    (ctaId || modal ? '?' : '') +
+    (ctaId ? `ctaId=${ctaId}&` : '') +
+    (modal ? `modal` : '');
   triggerTz(url.toString(), userId, referrer);
   referrer = url.toString();
 };
