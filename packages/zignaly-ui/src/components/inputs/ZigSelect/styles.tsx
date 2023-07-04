@@ -6,13 +6,14 @@ import { StyledComponent } from "@emotion/styled";
 import { BoxTypeMap } from "@mui/system";
 
 type Props = {
-  error?: string;
+  error?: string | boolean;
   width?: number;
   small?: boolean;
   outlined?: boolean;
   dotted?: boolean;
   showLeftBorder?: boolean;
   borderRadius?: string;
+  hoverBackground?: boolean;
 };
 
 export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(Box)<Props>`
@@ -56,8 +57,9 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
       &:hover {
         border-color: ${({ theme, error }) =>
           error ? theme.palette?.redGraphOrError : theme.palette.neutral400};
-        ${({ outlined }) =>
+        ${({ outlined, hoverBackground }) =>
           outlined &&
+          hoverBackground &&
           css`
             background-color: rgba(118, 130, 247, 0.08);
           `}

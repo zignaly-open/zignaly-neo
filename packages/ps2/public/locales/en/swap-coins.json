@@ -2,7 +2,12 @@
   "title": "Swap Coins",
   "continue": "Continue to Confirmation",
   "confirmation": {
-    "title": "Confirm Swap"
+    "title": "Confirm Swap",
+    "rate": "Rate:",
+    "from": "From:",
+    "to": "To:",
+    "receive": "You receive:",
+    "confirm": "Swap Now"
   },
   "from-input": {
     "label": "Swap from:",

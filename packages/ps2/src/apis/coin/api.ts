@@ -139,6 +139,48 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       url: `quote_assets/${exchangeInternalId}/${coinId}`,
     }),
   }),
+  convertPreview: builder.query<
+    { side: string; lastPrice: number; estimatedAmount: number; min: number },
+    {
+      from: string;
+      qty: string;
+      to: string;
+    }
+  >({
+    query: ({ from, qty, to }) => ({
+      url: `${from}/convert-preview`,
+      method: 'POST',
+      body: {
+        from,
+        qty,
+        to,
+      },
+    }),
+  }),
+  convert: builder.mutation<
+    {
+      status: string;
+      filled: number;
+      remaining: number;
+      feeCost: number;
+      fee: number;
+      id: string;
+    },
+    {
+      exchangeInternalId: string;
+      from: string;
+      qty: number;
+      to: string;
+    }
+  >({
+    query: ({ exchangeInternalId, ...rest }) => ({
+      url: `user/exchanges/${exchangeInternalId}/convert`,
+      method: 'POST',
+      body: {
+        ...rest,
+      },
+    }),
+  }),
 }));
 
 export const {
@@ -150,4 +192,6 @@ export const {
   useTransactionsHistoryCsvMutation,
   useTransactionsHistoryQuery,
   useQuoteAssetsCoinQuery,
+  useConvertPreviewQuery,
+  useConvertMutation,
 } = api;

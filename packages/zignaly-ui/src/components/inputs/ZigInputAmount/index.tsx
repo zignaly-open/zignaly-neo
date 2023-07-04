@@ -3,7 +3,7 @@ import { InputExtraInfoObject, ZigInputAmountProps } from "./types";
 import { InputAdornment, Box, Divider } from "@mui/material";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
 import ZigInput from "../ZigInput";
-import { Layout, MaxButton, TopDivider } from "./styles";
+import { DividerWrapper, Layout, MaxButton, TopDivider } from "./styles";
 import ZigTypography from "components/display/ZigTypography";
 import { InputExtraInfo } from "./atoms";
 import ZigCoinIcon from "../../display/ZigCoinIcon";
@@ -134,23 +134,21 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
             }}
             onChange={handleChange}
           />
-          {withCoinSelector && tokenOptions?.length >= 2 && (
+          {withCoinSelector && (
             <Box display={"flex"}>
-              <Box
-                sx={{
-                  padding: "8px 0",
-                  borderTop: "1px dotted #35334A",
-                  borderBottom: "1px dotted #35334A",
-                  width: "100%",
-                  height: "100%",
-                }}
-              >
+              <DividerWrapper error={!!error}>
                 <Divider
                   orientation={"vertical"}
                   sx={{ border: "1px dotted #35334A", height: "42px" }}
                 />
-              </Box>
+              </DividerWrapper>
+
               <ZigSelect
+                menuPosition={"fixed"}
+                menuShouldScrollIntoView={false}
+                menuShouldBlockScroll
+                error={!!error}
+                hoverBackground={false}
                 borderRadius={"0 5px 5px 0;"}
                 dottedBorder
                 placeholder={"Select coin"}
@@ -166,6 +164,11 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
             </Box>
           )}
         </Box>
+        {withCoinSelector && error && typeof error === "string" && (
+          <Box alignSelf="flex-start" mt={1}>
+            <ErrorMessage text={error} id={id && `${id}-error`} />
+          </Box>
+        )}
         <Box mt="16px" width={1}>
           <>
             {React.isValidElement(extraInfo) ? (
@@ -188,7 +191,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
           </>
         </Box>
       </Layout>
-      {error && typeof error === "string" && (
+      {!withCoinSelector && error && typeof error === "string" && (
         <Box alignSelf="flex-start">
           <ErrorMessage text={error} id={id && `${id}-error`} />
         </Box>

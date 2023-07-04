@@ -4,6 +4,7 @@ import {
   useDepositInfoQuery,
   useTransactionsHistoryQuery,
   useQuoteAssetsCoinQuery,
+  useConvertPreviewQuery,
 } from './api';
 import { CoinBalances, CoinDetails, DepositInfo } from './types';
 import { QueryReturnType } from 'util/queryReturnType';
@@ -34,6 +35,26 @@ export function useQuoteAssetsCoin(
       coinId,
     },
     { skip: !exchange?.internalId || !coinId },
+  );
+}
+
+export function useConvertPreview(data: {
+  from: string;
+  to: string;
+  amount: string;
+}): QueryReturnType<{
+  side: string;
+  lastPrice: number;
+  estimatedAmount: number;
+  min: number;
+}> {
+  return useConvertPreviewQuery(
+    {
+      from: data.from,
+      to: data.to,
+      qty: data.amount || '1',
+    },
+    { skip: !data.from || !data.to },
   );
 }
 

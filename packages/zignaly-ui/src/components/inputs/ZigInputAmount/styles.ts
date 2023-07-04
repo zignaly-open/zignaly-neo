@@ -51,6 +51,16 @@ export const Layout = styled(Box)<{
   }
 `;
 
+export const DividerWrapper = styled(Box)<{ error?: boolean }>`
+  padding: 8px 0;
+  border-top: 1px dotted;
+  border-bottom: 1px dotted;
+  border-color: ${({ theme, error }) =>
+    error ? theme.palette.redGraphOrError : theme.palette.neutral600};
+  width: 100%;
+  height: 100%;
+`;
+
 export const TopDivider = styled(Divider, {
   shouldForwardProp: (prop) => prop !== "error",
 })<{ error: boolean }>`

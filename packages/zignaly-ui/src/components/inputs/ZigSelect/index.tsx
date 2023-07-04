@@ -63,6 +63,7 @@ function ZigSelect<T>({
   id,
   showLeftBorder = true,
   borderRadius,
+  hoverBackground = true,
   styles: userStyles = {},
   ...props
 }: ZigSelectProps<T>): JSX.Element {
@@ -79,6 +80,7 @@ function ZigSelect<T>({
       outlined={outlined}
       showLeftBorder={showLeftBorder}
       borderRadius={borderRadius}
+      hoverBackground={hoverBackground}
     >
       {label && (
         <ZigTypography color={"neutral200"} id={id && `${id}-label`}>
@@ -106,7 +108,7 @@ function ZigSelect<T>({
           classNamePrefix="zig-react-select"
           {...props}
         />
-        {!!error && (
+        {!!error && typeof error === "string" && (
           <Box mt="3px">
             <ErrorMessage text={error} id={id && `${id}-error-text`} />
           </Box>

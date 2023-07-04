@@ -160,18 +160,24 @@ const MyBalancesTable = (): JSX.Element => {
                 color={'neutral300'}
               />
             </ZigButton>
-            <ZigButton
-              id={`balance-row__withdrawal-${row.original.coin}`}
-              onClick={() =>
-                showModal(SwapCoinsModal, {
-                  selectedCoin: row.original,
-                })
-              }
-              variant='outlined'
-              startIcon={<SwapHoriz width={10} height={10} />}
-            >
-              {t('swap')}
-            </ZigButton>
+            {exchangeType === 'spot' &&
+              Number(row.original.balance.balanceTotal) > 0 &&
+              ['BUSD', 'USDT', 'BTC', 'ETH', 'BNB'].includes(
+                row.original.coin,
+              ) && (
+                <ZigButton
+                  id={`balance-row__swap-coins-${row.original.coin}`}
+                  onClick={() =>
+                    showModal(SwapCoinsModal, {
+                      selectedCoin: row.original,
+                    })
+                  }
+                  variant='outlined'
+                  startIcon={<SwapHoriz width={10} height={10} />}
+                >
+                  {t('swap')}
+                </ZigButton>
+              )}
           </Box>
         ),
       }),
