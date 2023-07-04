@@ -57,7 +57,7 @@ const darkMui = createTheme({
           display: flex;
           align-items: center;
           background: rgba(16, 18, 37);
-          background: linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%);
+          background: ${backgrounds.input};
           transition: border-color 0.2s;
           
           &.Mui-disabled {
@@ -100,7 +100,7 @@ const darkMui = createTheme({
             font-family: "Avenir Next", sans-serif;
             box-shadow: none !important;
             resize: none;
-            background: linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%);
+            background: ${backgrounds.input};
             -webkit-text-fill-color: #838b95 !important;\`,
           }
           

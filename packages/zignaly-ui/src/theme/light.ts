@@ -17,7 +17,7 @@ const light: Theme = {
   highlighted: "#7682f7",
   redGraphOrError: "#CC3993",
   greenGraph: "#26c496",
-  links: "#26C4C1",
+  links: "#f00",
   yellow: "#AE9C5B",
   red: "#CC394E",
   almostWhite: "#F3F4F6",

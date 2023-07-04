@@ -10,7 +10,7 @@ export const transactionStateName: {
 };
 
 export const transactionStateColor: {
-  [key in TransactionStateType]: keyof ThemeType;
+  [key in TransactionStateType]: keyof ThemeType['palette'];
 } = {
   [TransactionStateType.COMPLETED]: 'greenGraph',
   [TransactionStateType.PENDING]: 'yellow',
