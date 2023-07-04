@@ -43,7 +43,7 @@ const ugly: Theme = {
     neutral400: "#f77",
     neutral300: "#f55",
     neutral200: "#f44",
-    neutral175: "#fff",
+    neutral175: "#f0c",
     neutral150: "#f33",
     neutral100: "#f22",
     neutral000: "#f11",
