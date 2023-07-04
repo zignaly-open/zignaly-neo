@@ -2,7 +2,7 @@ import { createTheme, ThemeOptions } from "@mui/material/styles";
 import dark from "./dark";
 import { linearProgressClasses } from "@mui/material";
 
-const { palette, mode } = dark;
+const { palette, mode, backgrounds } = dark;
 
 const {
   palette: { augmentColor },
@@ -154,6 +154,20 @@ const darkMui = createTheme({
           }
         `,
         },
+      },
+    },
+    MuiAppBar: {
+      styleOverrides: {
+        root: `
+            background: ${backgrounds.header};
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            flex-direction: row;
+            height: 52px;
+            border: none;
+            z-index: 12;
+          `,
       },
     },
     MuiLinearProgress: {
@@ -336,9 +350,9 @@ const darkMui = createTheme({
             textTransform: "none",
           },
           color: palette.neutral000,
-          background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
+          background: backgrounds.buttonPrimary,
           "&:hover, &.MuiButton-active": {
-            background: "linear-gradient(rgba(20, 156, 173, 0.64),rgba(69, 64, 193, 0.64))",
+            background: backgrounds.buttonPrimaryHover,
           },
           "&.Mui-disabled": {
             opacity: 0.33,

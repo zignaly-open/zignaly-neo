@@ -26,6 +26,8 @@ const dark: Theme = {
   },
   backgrounds: {
     header: "linear-gradient(269.14deg, #080810 0%, #11122b 100%)",
+    buttonPrimary: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
+    buttonPrimaryHover: "linear-gradient(rgba(20, 156, 173, 0.64),rgba(69, 64, 193, 0.64))",
   },
 };
 

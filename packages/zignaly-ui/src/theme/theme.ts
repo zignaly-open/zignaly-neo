@@ -22,9 +22,7 @@ interface Theme {
 
     almostWhite: string;
   };
-  backgrounds: {
-    header: string;
-  };
+  backgrounds: Record<"buttonPrimary" | "buttonPrimaryHover" | "header", string>;
   mode: "dark" | "light";
 }
 
