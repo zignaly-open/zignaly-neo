@@ -122,77 +122,8 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
   }
 
   .MuiInput-root {
-    border: 1px solid ${({ theme }) => theme.palette.neutral600};
     padding: ${({ labelInline }) => (labelInline ? "18px 24px 6px" : "12px 24px")};
     margin-top: ${(props) => (props.label ? "10px" : 0)};
-    min-height: 60px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    background: rgba(16, 18, 37);
-    background: linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%);
-    transition: border-color 0.2s;
-
-    &.Mui-disabled {
-      cursor: not-allowed;
-      border-color: ${({ theme }) => theme.palette.neutral700};
-    }
-
-    &.Mui-focused,
-    &:hover {
-      border-color: ${({ theme }) => theme.palette.neutral400};
-    }
-
-    &.Mui-error,
-    &.Mui-error:hover,
-    &.Mui-error.Mui-focused {
-      border-color: ${({ theme }) => theme.palette.redGraphOrError};
-
-      .MuiInputLabel-root {
-        color: ${({ theme }) => theme.palette.neutral200};
-      }
-    }
-
-    .MuiInputAdornment-root {
-      .MuiSvgIcon-root {
-        width: 18px;
-        height: 18px;
-      }
-    }
-  }
-
-  .MuiInput-input {
-    background: transparent;
-    border: none;
-    color: ${({ theme }) => theme.palette.neutral100} !important;
-    outline: none;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 20px;
-    letter-spacing: 0.55px;
-    width: 100%;
-    font-family: "Avenir Next", sans-serif;
-    box-shadow: none !important;
-    resize: none;
-    background: linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%);
-
-    -webkit-text-fill-color: #838b95 !important;
-
-    &::placeholder {
-      -webkit-text-fill-color: ${({ theme }) => theme.palette.neutral400} !important;
-    }
-
-    &.Mui-disabled {
-      cursor: not-allowed;
-      opacity: 0.67;
-      color: ${({ theme }) => theme.palette.neutral100} !important;
-    }
-
-    &::-webkit-inner-spin-button,
-    &::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-    }
   }
 `;
 
