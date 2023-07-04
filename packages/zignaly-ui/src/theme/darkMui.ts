@@ -2,6 +2,8 @@ import { createTheme, ThemeOptions } from "@mui/material/styles";
 import dark from "./dark";
 import { linearProgressClasses } from "@mui/material";
 
+const { palette, mode } = dark;
+
 const {
   palette: { augmentColor },
 } = createTheme();
@@ -9,13 +11,13 @@ const createColor = (mainColor: string) => augmentColor({ color: { main: mainCol
 
 const darkMui = createTheme({
   palette: {
-    ...dark,
-    mode: "dark",
+    ...palette,
+    mode,
 
-    primary: createColor(dark.highlighted),
-    secondary: createColor(dark.neutral300),
-    danger: createColor(dark.redGraphOrError),
-    success: createColor(dark.greenGraph),
+    primary: createColor(palette.highlighted),
+    secondary: createColor(palette.neutral300),
+    danger: createColor(palette.redGraphOrError),
+    success: createColor(palette.greenGraph),
 
     // Used by `getContrastText()` to maximize the contrast between
     // the background and the text.
@@ -40,16 +42,16 @@ const darkMui = createTheme({
     MuiPaper: {
       styleOverrides: {
         root: {
-          border: `1px solid ${dark.neutral600}`,
+          border: `1px solid ${palette.neutral600}`,
           background: "rgba(16, 18, 37)",
-          color: dark.neutral200,
+          color: palette.neutral200,
         },
       },
     },
     MuiInput: {
       styleOverrides: {
         root: `
-          border: 1px solid ${dark.neutral600};
+          border: 1px solid ${palette.neutral600};
           min-height: 60px;
           border-radius: 5px;
           display: flex;
@@ -60,21 +62,21 @@ const darkMui = createTheme({
           
           &.Mui-disabled {
             cursor: not-allowed;
-            border-color: ${dark.neutral700};
+            border-color: ${palette.neutral700};
           }
       
           &.Mui-focused,
           &:hover {
-            border-color: ${dark.neutral400};
+            border-color: ${palette.neutral400};
           }
           
           &.Mui-error,
           &.Mui-error:hover,
           &.Mui-error.Mui-focused {
-            border-color: ${dark.redGraphOrError};
+            border-color: ${palette.redGraphOrError};
       
             .MuiInputLabel-root {
-              color: ${dark.neutral200};
+              color: ${palette.neutral200};
             }
           }          
           
@@ -88,7 +90,7 @@ const darkMui = createTheme({
           .MuiInput-input {
             background: transparent;
             border: none;
-            color: ${dark.neutral100} !important;
+            color: ${palette.neutral100} !important;
             outline: none;
             font-weight: 400;
             font-size: 16px;
@@ -104,13 +106,13 @@ const darkMui = createTheme({
           
           .MuiInput-input {
             &::placeholder {
-              -webkit-text-fill-color: ${dark.neutral400} !important;
+              -webkit-text-fill-color: ${palette.neutral400} !important;
             }
         
             &.Mui-disabled {
               cursor: not-allowed;
               opacity: 0.67;
-              color: ${dark.neutral100} !important;
+              color: ${palette.neutral100} !important;
             }
         
             &::-webkit-inner-spin-button,
@@ -198,7 +200,7 @@ const darkMui = createTheme({
     MuiIconButton: {
       styleOverrides: {
         root: {
-          color: dark.neutral300,
+          color: palette.neutral300,
         },
       },
     },
@@ -219,7 +221,7 @@ const darkMui = createTheme({
         plain: {
           padding: "0 !important",
           ".MuiSvgIcon-root": {
-            fill: dark.neutral300,
+            fill: palette.neutral300,
             transition: "all .2s",
           },
 
@@ -228,11 +230,11 @@ const darkMui = createTheme({
           },
 
           "&:hover .MuiSvgIcon-root": {
-            fill: dark.neutral100,
+            fill: palette.neutral100,
           },
 
           "&.Mui-disabled:hover .MuiSvgIcon-root": {
-            fill: dark.neutral300,
+            fill: palette.neutral300,
           },
 
           "&.Mui-disabled": {
@@ -289,7 +291,7 @@ const darkMui = createTheme({
           letterSpacing: "1.1px",
         },
         text: {
-          color: dark.links,
+          color: palette.links,
           fontWeight: "400 !important",
           display: "inline",
           padding: "0 2px !important",
@@ -317,7 +319,7 @@ const darkMui = createTheme({
             display: "inline",
             top: "-1px",
             ".MuiSvgIcon-root": {
-              fill: dark.neutral300,
+              fill: palette.neutral300,
               verticalAlign: "middle",
             },
           },
@@ -333,7 +335,7 @@ const darkMui = createTheme({
           ".MuiTypography-root": {
             textTransform: "none",
           },
-          color: dark.neutral000,
+          color: palette.neutral000,
           background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
           "&:hover, &.MuiButton-active": {
             background: "linear-gradient(rgba(20, 156, 173, 0.64),rgba(69, 64, 193, 0.64))",
@@ -352,8 +354,8 @@ const darkMui = createTheme({
           transition: "all 0.2s linear",
         },
         outlinedSecondary: {
-          borderColor: dark.neutral600,
-          color: dark.neutral300,
+          borderColor: palette.neutral600,
+          color: palette.neutral300,
           "&.MuiButton-sizeLarge, &.MuiButton-sizeXlarge": {
             textTransform: "uppercase",
             ".MuiTypography-root": {
@@ -361,8 +363,8 @@ const darkMui = createTheme({
             },
           },
           "&:hover, &.MuiButton-active": {
-            color: dark.neutral000,
-            borderColor: dark.neutral400,
+            color: palette.neutral000,
+            borderColor: palette.neutral400,
           },
         },
       },
@@ -374,7 +376,7 @@ const darkMui = createTheme({
           style: {
             fontSize: "26px",
             lineHeight: "40px",
-            color: dark.neutral100,
+            color: palette.neutral100,
             fontWeight: "500",
           },
         },
@@ -393,7 +395,7 @@ const darkMui = createTheme({
       styleOverrides: {
         root: {
           letterSpacing: "0.55px",
-          color: dark.neutral100,
+          color: palette.neutral100,
         },
         bigNumber: {
           fontSize: "26px",
@@ -435,17 +437,17 @@ const darkMui = createTheme({
         caption: {
           fontSize: "11px",
           lineHeight: "16px",
-          color: dark.neutral200,
+          color: palette.neutral200,
         },
         body1: {
           fontSize: "15px",
           lineHeight: "24px",
-          color: dark.neutral200,
+          color: palette.neutral200,
         },
         body2: {
           fontSize: "13px",
           lineHeight: "20px",
-          color: dark.neutral300,
+          color: palette.neutral300,
         },
       },
     },
@@ -453,7 +455,7 @@ const darkMui = createTheme({
       styleOverrides: {
         root: {
           cursor: "pointer",
-          color: dark.links,
+          color: palette.links,
         },
       },
     },
