@@ -117,7 +117,7 @@ function EditInvestmentForm({
       variant={'text'}
       onClick={() =>
         showModal(DepositModal, {
-          ctaId: 'invest-modal-deposit',
+          ctaId: 'edit-investment-modal__deposit',
           selectedCoin: coin.id,
         })
       }

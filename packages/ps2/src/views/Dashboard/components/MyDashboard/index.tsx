@@ -238,7 +238,7 @@ const MyDashboard: React.FC = () => {
                     variant={'contained'}
                     onClick={() =>
                       showModal(DepositModal, {
-                        ctaId: 'account-menu-deposit',
+                        ctaId: 'my-portfolio__deposit',
                       })
                     }
                   >

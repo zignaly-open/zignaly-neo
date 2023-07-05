@@ -21,7 +21,7 @@ export function useZModal(options?: UseZModalOptions) {
     ) => {
       const { ctaId, ...modalProps } = props || {};
       const trackId = Component.trackId?.toLocaleLowerCase();
-      trackId && track({ hash: trackId, userId, ctaId, modal: true });
+      trackId && track({ hash: trackId, userId, ctaId });
       const modal: ShowFnOutput<void> = showModal(Component, {
         ...modalProps,
         ctaId,
