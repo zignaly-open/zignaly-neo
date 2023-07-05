@@ -17,14 +17,13 @@ export function useZModal(options?: UseZModalOptions) {
   const ourShowModal = useCallback(
     (
       Component: ComponentType & { trackId?: string },
-      props?: Record<string, unknown> & { ctaId?: string },
+      props?: Record<string, unknown>,
     ) => {
-      const { ctaId, ...modalProps } = props || {};
+      const { ...modalProps } = props || {};
       const trackId = Component.trackId?.toLocaleLowerCase();
-      trackId && track({ hash: trackId, userId, ctaId });
+      trackId && track({ hash: trackId, userId });
       const modal: ShowFnOutput<void> = showModal(Component, {
         ...modalProps,
-        ctaId,
         close: () => {
           trackId && track({ userId });
           customClose ? customClose(modal) : modal.destroy();

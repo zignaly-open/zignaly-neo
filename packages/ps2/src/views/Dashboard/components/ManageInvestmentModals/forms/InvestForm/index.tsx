@@ -124,7 +124,6 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
       variant={'text'}
       onClick={() =>
         showModal(DepositModal, {
-          ctaId: 'invest-modal__deposit',
           selectedCoin: coin.id,
           // Callback to close the modal if user navigates to history from the deposit modal
           onClose: close,

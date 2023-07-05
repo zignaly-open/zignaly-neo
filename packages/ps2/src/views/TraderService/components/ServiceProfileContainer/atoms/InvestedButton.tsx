@@ -56,23 +56,16 @@ const InvestedButton: React.FC<{
 export const InvestedButtonBase: React.FC<{
   prefixId?: string;
   service: Service;
-  ctaId?: string;
   investedAmount: string;
   showMultipleAccountButton?: boolean;
-}> = ({
-  prefixId,
-  service,
-  investedAmount,
-  ctaId,
-  showMultipleAccountButton,
-}) => {
+}> = ({ prefixId, service, investedAmount, showMultipleAccountButton }) => {
   const { showModal } = useZModal({ disableAutoDestroy: true });
   const investedFromAccounts = useInvestedAccountsCount(service.id, {
     skip: !showMultipleAccountButton,
   });
 
   const onClickEditInvestment = () =>
-    showModal(EditInvestmentModal, { ctaId, serviceId: service.id });
+    showModal(EditInvestmentModal, { serviceId: service.id });
   const { t } = useTranslation(['service', 'action']);
 
   const showOtherAccounts =

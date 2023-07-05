@@ -106,9 +106,7 @@ const BecomeTraderLanding: React.FC = () => {
 
   const onClickCreateService = () => {
     if (isAuthenticated) {
-      showModal(CreateServiceModal, {
-        ctaId: 'create-service',
-      });
+      showModal(CreateServiceModal);
     } else {
       navigateIfNotLoggedIn();
     }

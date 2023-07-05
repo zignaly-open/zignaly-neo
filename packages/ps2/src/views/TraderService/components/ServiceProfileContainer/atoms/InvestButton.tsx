@@ -46,7 +46,7 @@ const InvestButton: React.FC<{
       if (modalRoute) {
         showInvestModal({ serviceId: service.id });
       } else {
-        showModal(InvestDepositModal, { ctaId, serviceId: service.id });
+        showModal(InvestDepositModal, { serviceId: service.id });
       }
     } else {
       const newUser = !localStorage.getItem('hasLoggedIn');

@@ -5,10 +5,9 @@ import { UseModalOptions } from 'mui-modal-provider';
 
 export const ZModalRouteElement: React.FC<{
   bgRoute: string;
-  ctaId?: string;
   component: ComponentType;
   options?: UseModalOptions;
-}> = ({ bgRoute, component, ctaId, options }) => {
+}> = ({ bgRoute, component, options }) => {
   const navigate = useNavigate();
   const params = useParams();
   const { showModal } = useZModal({
@@ -26,18 +25,16 @@ export const ZModalRouteElement: React.FC<{
   // sometimes 2 modals would open due in dev mode
   // this if fine, this is react 18
   useEffect(() => {
-    showModal(component, { ctaId, ...params });
+    showModal(component, params);
   }, []);
   return null;
 };
 
 const createZModalRouteElement = ({
   component,
-  ctaId,
   options,
 }: {
   component: ComponentType;
-  ctaId?: string;
   options?: UseModalOptions;
 }): React.FC<{ bgRoute: string }> => {
   return ({ bgRoute }) => (
@@ -45,7 +42,6 @@ const createZModalRouteElement = ({
       bgRoute={bgRoute}
       component={component}
       options={options}
-      ctaId={ctaId}
     />
   );
 };

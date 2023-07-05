@@ -266,11 +266,7 @@ const ZigDrawer = () => {
                     startIcon={<ZigPlusIcon width={10} height={10} />}
                     sx={{ fontWeight: 600, mb: 1 }}
                     variant={'contained'}
-                    onClick={() =>
-                      showModal(DepositModal, {
-                        ctaId: 'account-menu-deposit',
-                      })
-                    }
+                    onClick={() => showModal(DepositModal)}
                   >
                     {t('action:deposit')}
                   </ZigButton>
