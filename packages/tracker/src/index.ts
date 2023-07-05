@@ -31,24 +31,31 @@ const delayTimeout = 100;
  * @param data
  */
 const sendTzDelayed = (data: tzData) => {
-  if (
-    lastDelayedTrack.event?.userId === data?.userId &&
-    data.urlDestination === lastDelayedTrack.event?.urlDestination
-  )
+  const to = data.urlDestination;
+  const from = lastDelayedTrack.event?.urlDestination;
+  const sameUser = lastDelayedTrack.event?.userId === data?.userId;
+
+  if (sameUser && to === from)
     // this is mainly intended to fix the react 18 double mount in dev mode
     return;
 
+  // here we want tio check if we're opening a new view or no
+  // like, profit-sharing#edit-investment -> profit-sharing#edit-investment?ctaId=marketplace-table__edit-62fe886f8aedc6579c1d275f" within 1 s is no new view
   if (
-    lastDelayedTrack.event?.userId === data?.userId &&
-    data.urlDestination?.indexOf(
-      lastDelayedTrack.event?.urlDestination + '#',
-    ) === 0
+    sameUser &&
+    (to?.indexOf(from + '#') === 0 || to?.indexOf(from + '?ctaId=') === 0)
   ) {
     // if the timeout has already executed, no harm no foul
     clearTimeout(lastDelayedTrack.timeout);
+    // we effectively merge the two events
+    data.urlReferer = lastDelayedTrack.event?.urlReferer;
   }
+
   lastDelayedTrack.event = data;
-  lastDelayedTrack.timeout = setTimeout(() => sendTz(data), delayTimeout);
+  lastDelayedTrack.timeout = setTimeout(() => {
+    lastDelayedTrack.event = null;
+    sendTz(data);
+  }, delayTimeout);
 };
 
 /**
@@ -91,21 +98,16 @@ export const track = ({
   location = '',
   ctaId = '',
   hash = '',
-  modal = false,
   userId = '',
 }: {
   location?: string;
   hash?: string;
   ctaId?: string;
-  modal?: boolean;
   userId?: string;
 }) => {
   const url = new URL(location || window.location.href);
   url.hash =
-    (hash || url.hash?.split('?')[0]) +
-    (ctaId || modal ? '?' : '') +
-    (ctaId ? `ctaId=${ctaId}&` : '') +
-    (modal ? `modal` : '');
+    (hash || url.hash?.split('?')[0]) + (ctaId ? `?ctaId=${ctaId}` : '');
   triggerTz(url.toString(), userId, referrer);
   referrer = url.toString();
 };

@@ -1,4 +1,4 @@
-import React, { ComponentType, useEffect, useRef } from 'react';
+import React, { ComponentType, useEffect } from 'react';
 import { generatePath, useNavigate, useParams } from 'react-router-dom';
 import { useZModal } from './use';
 import { UseModalOptions } from 'mui-modal-provider';
@@ -23,13 +23,10 @@ export const ZModalRouteElement: React.FC<{
     ...(options || {}),
   });
 
-  // fix for local double mount
-  const initialized = useRef(false);
+  // sometimes 2 modals would open due in dev mode
+  // this if fine, this is react 18
   useEffect(() => {
-    if (!initialized.current) {
-      initialized.current = true;
-      showModal(component, { ctaId, ...params });
-    }
+    showModal(component, { ctaId, ...params });
   }, []);
   return null;
 };
