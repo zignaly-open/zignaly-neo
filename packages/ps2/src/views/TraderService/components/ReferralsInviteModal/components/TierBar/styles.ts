@@ -1,15 +1,19 @@
 import { Box, styled } from '@mui/material';
 
-export const TierBarContainer = styled(Box)<{ opacity: number }>`
+export const TierBarContainer = styled(Box)<{
+  opacity: number;
+  emphasis: boolean;
+}>`
   align-items: center;
   display: flex;
   flex-direction: column;
   border-radius: 4px;
-  background-image: linear-gradient(
+  /* background-image: linear-gradient(
     to top,
     rgba(18, 33, 59, ${({ opacity }) => opacity}),
     rgba(33, 81, 78, ${({ opacity }) => 0.48 * opacity})
-  );
+  ); */
+  background-image: linear-gradient(to top, #12213bcc, rgba(33, 81, 78, 0.8));
   margin: 0 10px;
   position: relative;
   padding-top: 4px;
@@ -30,18 +34,18 @@ export const TierBarContainer = styled(Box)<{ opacity: number }>`
     right: 0;
     bottom: 0;
     border-radius: 4px;
-    padding: 2px;
+    padding: 1.5px;
     background: none;
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask: linear-gradient(#fff 0 0) content-box,
       linear-gradient(#fff 0 0);
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
-    background: linear-gradient(to top, #15192f, #009179);
     background-image: linear-gradient(
       to top,
-      rgba(21, 25, 47, ${({ opacity }) => opacity}),
-      rgba(0, 145, 121, ${({ opacity }) => opacity})
+      rgba(22, 25, 47, ${({ opacity }) => opacity}),
+      ${({ emphasis, opacity }) =>
+        emphasis ? '#2ab168cc' : `rgb(0, 145, 121, ${opacity})`}
     );
   }
 `;

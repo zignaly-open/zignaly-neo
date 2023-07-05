@@ -11,7 +11,7 @@ const TierBar = ({
   tiers,
   minHeight = 32,
   maxHeight = 206,
-  width = 46,
+  width = 60,
   showArrow = true,
   minOpacity = 0.2,
 }: {
@@ -45,7 +45,8 @@ const TierBar = ({
     () =>
       minOpacity +
       Math.pow((tier.commissionPct - min) / (max - min), opacityPower) *
-        (1 - minOpacity),
+        // todo: 0.8?
+        (0.8 - minOpacity),
     [min, max, tier],
   );
 
@@ -68,9 +69,14 @@ const TierBar = ({
   // const baseCommission = 10;
 
   return (
-    <TierBarContainer opacity={opacity} width={width} height={height}>
-      {/* eslint-disable-next-line i18next/no-literal-string */}
+    <TierBarContainer
+      opacity={opacity}
+      width={width}
+      height={height}
+      emphasis={showArrow}
+    >
       <ZigTypography color='neutral200' fontSize={12} fontWeight={500}>
+        {/* eslint-disable-next-line i18next/no-literal-string */}
         {tier.commissionPct}%
       </ZigTypography>
       {tier.commissionPct > 1 && <BoltIcon />}

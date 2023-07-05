@@ -48,16 +48,61 @@ const TiersTable = ({
             </Tooltip>
           </ZigTypography>
         </td>
-        {tiers?.map((tier) => (
+        {tiers?.map((tier, tierIndex) => (
           <td style={{ verticalAlign: 'bottom' }} key={tier.id}>
             <Box display='flex' justifyContent='center'>
               <TierBar
+                showArrow={tierIndex === tiers.length - 1}
                 tier={tier}
                 boost={2 || referral.boost}
                 tiers={tiers}
                 traderCommission={10}
               />
             </Box>
+          </td>
+        ))}
+      </tr>
+      <tr>
+        <td>
+          <ZigTypography
+            fontWeight={500}
+            variant='h4'
+            textAlign='end'
+            lineHeight='24px'
+          >
+            {t('trader-boost')}
+            <Tooltip title={t('zig-held-tooltip')}>
+              <TooltipIcon />
+            </Tooltip>
+          </ZigTypography>
+        </td>
+        {tiers?.map((tier, tierIndex) => (
+          <td key={tier.id} style={{ textAlign: 'center' }}>
+            <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
+              {composeInvitesValue(tierIndex, tiers)}
+            </ZigTypography>
+          </td>
+        ))}
+      </tr>
+      <tr>
+        <td>
+          <ZigTypography
+            fontWeight={500}
+            variant='h4'
+            textAlign='end'
+            lineHeight='24px'
+          >
+            {t('within-1-week')}
+            <Tooltip title={t('zig-held-tooltip')}>
+              <TooltipIcon />
+            </Tooltip>
+          </ZigTypography>
+        </td>
+        {tiers?.map((tier, tierIndex) => (
+          <td key={tier.id} style={{ textAlign: 'center' }}>
+            <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
+              {composeInvitesValue(tierIndex, tiers)}
+            </ZigTypography>
           </td>
         ))}
       </tr>

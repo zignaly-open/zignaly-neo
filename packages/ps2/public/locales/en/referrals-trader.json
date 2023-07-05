@@ -8,5 +8,7 @@
     "invite-and-earn": "Invite {{invite}}+ people and earn {{commission}}%",
     "max-earnings-from-fees": "Max earnings\nfrom {{amount}} of fees:",
     "base-commission": "Base commission:",
+    "within-1-week": "Within 1 week",
+    "trader-boost": "Trader Boost",
     "invites": "Invites:"
 }
