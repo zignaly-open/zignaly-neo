@@ -18,11 +18,9 @@ import DepositModal from './DepositModal';
 
 function InvestDepositModal({
   serviceId,
-  ctaId,
   ...props
 }: {
   serviceId: string;
-  ctaId?: string;
   close: () => void;
 } & DialogProps): React.ReactElement {
   const {
@@ -67,7 +65,6 @@ function InvestDepositModal({
         // make sure we reuse the exact same track id
         hash: showDeposit ? DepositModal.trackId : 'invest',
         userId,
-        ctaId,
       });
   }, []);
 

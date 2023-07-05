@@ -152,7 +152,6 @@ const BecomeTraderLanding: React.FC = () => {
               </WrapperList>
               <WrapperAction>
                 <ZigButton
-                  ctaId={'offer-service__create-service'}
                   id={'offer-service__create-service'}
                   size={'large'}
                   variant={'contained'}

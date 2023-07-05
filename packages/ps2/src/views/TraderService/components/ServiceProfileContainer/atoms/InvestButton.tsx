@@ -21,9 +21,8 @@ const InvestButton: React.FC<{
   prefixId?: string;
   service: Service;
   modalRoute?: string;
-  ctaId?: string;
   showMultipleAccountButton?: boolean;
-}> = ({ prefixId, modalRoute, service, ctaId, showMultipleAccountButton }) => {
+}> = ({ prefixId, modalRoute, service, showMultipleAccountButton }) => {
   const { t } = useTranslation([
     'service',
     // we need these two otherwise a Suspense will trigger when we load the other ns
@@ -53,7 +52,6 @@ const InvestButton: React.FC<{
       navigate(newUser ? ROUTE_SIGNUP : ROUTE_LOGIN, {
         state: {
           redirectTo: location,
-          ctaId: modalRoute ? 'service-profile__invest' : 'marketplace__invest',
         },
       });
     }
@@ -69,7 +67,6 @@ const InvestButton: React.FC<{
         id={prefixId && `${prefixId}__invest-${service.id}`}
         onClick={onClickMakeInvestment}
         variant='contained'
-        data-no-auto-track='1'
         size={'large'}
         disabled={maxReached}
         sx={{ flexDirection: 'column', minWidth: 165, padding: '6px 26px' }}
