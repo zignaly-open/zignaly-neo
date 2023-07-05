@@ -277,7 +277,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                 onCopied={() => {
                   trackCta({
                     userId,
-                    ctaId: 'copy-deposit-address',
+                    ctaId: 'deposit-modal__deposit-address',
                   });
                   toast.success(t('depositAddress.copied'));
                 }}
@@ -301,7 +301,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                   onCopied={() => {
                     trackCta({
                       userId,
-                      ctaId: 'copy-deposit-memo',
+                      ctaId: 'deposit-modal__deposit-memo',
                     });
                     toast.success(t('depositMemo.copied'));
                   }}

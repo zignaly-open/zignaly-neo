@@ -68,7 +68,6 @@ function InvestDepositModal({
         hash: showDeposit ? DepositModal.trackId : 'invest',
         userId,
         ctaId,
-        modal: true,
       });
   }, []);
 
