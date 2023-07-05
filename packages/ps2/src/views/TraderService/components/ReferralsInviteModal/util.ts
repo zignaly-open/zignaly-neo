@@ -6,8 +6,8 @@ export const maxCommission = () => {};
 
 export const getBoostedCommissionPct = (
   baseCommission: number,
-  traderCommission: number,
   boost: number,
+  traderCommission = 0,
 ) => {
   return baseCommission * boost + traderCommission;
 };
@@ -19,8 +19,8 @@ export const getMaxEarnings = (
 ) => {
   const boostedCommission = getBoostedCommissionPct(
     baseCommission,
-    serviceCommission.commission,
     boost,
+    serviceCommission.commission,
   );
   console.log(
     serviceCommission.zignaly,

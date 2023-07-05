@@ -1,30 +1,33 @@
-import { Box, styled } from '@mui/material';
+import { Box, css, styled } from '@mui/material';
 
 export const TierBarContainer = styled(Box)<{
   opacity: number;
   emphasis: boolean;
+  subLayer: boolean;
 }>`
-  align-items: center;
-  display: flex;
-  flex-direction: column;
   border-radius: 4px;
   /* background-image: linear-gradient(
     to top,
     rgba(18, 33, 59, ${({ opacity }) => opacity}),
     rgba(33, 81, 78, ${({ opacity }) => 0.48 * opacity})
   ); */
-  background-image: linear-gradient(to top, #12213bcc, rgba(33, 81, 78, 0.8));
+  /* background-image: linear-gradient(to top, #12213bcc, rgba(33, 81, 78, 0.8)); */
+  background-image: linear-gradient(to top, #12213b, rgb(33, 81, 78));
   margin: 0 10px;
   position: relative;
   padding-top: 4px;
   overflow: hidden;
+  opacity: ${({ opacity }) => opacity * 0.52};
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 
-  svg {
-    height: 12px;
-    min-height: 12px;
-    width: 7.5px;
-    min-width: 7.5px;
-  }
+  ${({ subLayer }) =>
+    subLayer &&
+    css`
+      position: absolute;
+      bottom: 0;
+    `}
 
   &:before {
     content: '';
@@ -43,9 +46,8 @@ export const TierBarContainer = styled(Box)<{
     mask-composite: exclude;
     background-image: linear-gradient(
       to top,
-      rgba(22, 25, 47, ${({ opacity }) => opacity}),
-      ${({ emphasis, opacity }) =>
-        emphasis ? '#2ab168cc' : `rgb(0, 145, 121, ${opacity})`}
+      rgba(22, 25, 47),
+      ${({ emphasis, opacity }) => (emphasis ? '#2ab168' : `rgb(0, 145, 121)`)}
     );
   }
 `;
@@ -54,7 +56,7 @@ export const TierArrow = styled('div')<{ opacity: number }>`
   position: relative;
   width: 30px;
   height: 100%;
-  margin-top: 6px;
+  margin-top: 42px;
   opacity: ${({ opacity }) => opacity};
 
   &::before {
@@ -67,7 +69,7 @@ export const TierArrow = styled('div')<{ opacity: number }>`
     height: 0;
     border-left: 15px solid transparent;
     border-right: 15px solid transparent;
-    border-bottom: 15px solid rgba(33, 81, 78, 0.69);
+    border-bottom: 15px solid #28ba62;
   }
 
   &::after {
@@ -78,6 +80,25 @@ export const TierArrow = styled('div')<{ opacity: number }>`
     bottom: 0;
     transform: translateX(-50%);
     width: 14px;
-    background-image: linear-gradient(to top, #111a30, rgba(33, 81, 78, 0.69));
+    background: linear-gradient(#28ba62 18%, #111a30 100%),
+      linear-gradient(#103e50, #111a30 100%);
+  }
+`;
+
+export const BarContent = styled(Box)`
+  position: absolute;
+  padding-top: 6px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  svg {
+    height: 12px;
+    min-height: 12px;
+    width: 7.5px;
+    min-width: 7.5px;
   }
 `;

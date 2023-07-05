@@ -51,12 +51,24 @@ const TiersTable = ({
         {tiers?.map((tier, tierIndex) => (
           <td style={{ verticalAlign: 'bottom' }} key={tier.id}>
             <Box display='flex' justifyContent='center'>
-              <TierBar
+              {/* <TierBar
                 showArrow={tierIndex === tiers.length - 1}
                 tier={tier}
                 boost={2 || referral.boost}
                 tiers={tiers}
                 traderCommission={10}
+                layer={1}
+                totalLayers={3}
+              /> */}
+              <TierBar
+                showArrow={tierIndex === tiers.length - 1}
+                tier={tier}
+                boost={2 || referral.boost}
+                tiers={tiers}
+                serviceCommission={0}
+                layer={0}
+                totalLayers={3}
+                layers={2}
               />
             </Box>
           </td>

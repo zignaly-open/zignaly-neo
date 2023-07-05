@@ -1,19 +1,25 @@
 import React, { useMemo } from 'react';
-import { TierArrow, TierBarContainer } from './styles';
+import { BarContent, TierArrow, TierBarContainer } from './styles';
 import { ReactComponent as BoltIcon } from 'images/referrals/bolt.svg';
 import { ZigTypography } from '@zignaly-open/ui';
 import { TierLevel } from 'apis/referrals/types';
+import { getBoostedCommissionPct } from '../../util';
+import { Box } from '@mui/material';
 
 const TierBar = ({
   tier,
-  traderCommission,
+  serviceCommission,
   boost,
   tiers,
   minHeight = 32,
-  maxHeight = 206,
+  maxHeight = 240,
   width = 60,
   showArrow = true,
   minOpacity = 0.2,
+  layer,
+  totalLayers,
+  layers = 1,
+  specialBoost = false,
 }: {
   tier: TierLevel;
   tiers: TierLevel[];
@@ -23,8 +29,21 @@ const TierBar = ({
   showArrow?: boolean;
   minOpacity?: number;
   boost: number;
-  traderCommission: number;
+  serviceCommission: number;
+  layer: number;
+  layers: number;
+  totalLayers: number;
+  specialBoost: boolean;
 }) => {
+  // Full layer
+  const layer1 = useMemo(() => {
+    const value = getBoostedCommissionPct(tier.commissionPct, boost, 0);
+    // apply min height
+    // const layerHeight =
+    // console.log('a', boost);
+    return { value };
+  }, [serviceCommission, tier, boost]);
+
   const min = tiers[0].commissionPct;
   const max = tiers[tiers.length - 1].commissionPct;
 
@@ -68,20 +87,91 @@ const TierBar = ({
   // const invites = 5;
   // const baseCommission = 10;
 
+  const layer1Value = tier.commissionPct;
+
+  const layer3Value = serviceCommission
+    ? getBoostedCommissionPct(tier.commissionPct, boost, serviceCommission)
+    : null;
+  // const layer2Value =
+  //   boost > 1 ? getBoostedCommissionPct(tier.commissionPct, boost) : null;
+
+  const layer2 = useMemo(() => {
+    // Don't apply boost here if there is no service commission, since it will be applied in layer 1
+    const layerBoost = serviceCommission > 0 ? boost : 1;
+    const value = getBoostedCommissionPct(tier.commissionPct, layerBoost);
+    // apply min height
+    const layerHeight = (value / layer1.value) * height;
+    // console.log('a', layerHeight, layer2Value, fullLayer.value, boost);
+    // console.log(layer2Value);
+    return { value: value, height: layerHeight };
+  }, [serviceCommission, tier, boost, layer1]);
+
+  const layer3 = useMemo(() => {
+    // Only used to show the base commission when there is a boost and service commission
+    const value = boost > 1 && serviceCommission ? tier.commissionPct : 0;
+
+    const layerHeight = (value / layer1.value) * height;
+    // console.log('a', layerHeight, layer2Value, fullLayer.value, boost);
+    // console.log(layer2Value);
+    return { value: value, height: layerHeight };
+  }, [serviceCommission, tier, boost, layer1]);
+
+  console.log(layer1, layer2, layer3, serviceCommission, boost);
+
   return (
-    <TierBarContainer
-      opacity={opacity}
-      width={width}
-      height={height}
-      emphasis={showArrow}
-    >
-      <ZigTypography color='neutral200' fontSize={12} fontWeight={500}>
-        {/* eslint-disable-next-line i18next/no-literal-string */}
-        {tier.commissionPct}%
-      </ZigTypography>
-      {tier.commissionPct > 1 && <BoltIcon />}
-      {showArrow && <TierArrow opacity={opacityArrow} />}
-    </TierBarContainer>
+    <Box position='relative'>
+      <div>
+        <TierBarContainer
+          opacity={opacity}
+          width={width}
+          height={height}
+          emphasis={showArrow}
+        >
+          {showArrow && <TierArrow opacity={opacityArrow} />}
+        </TierBarContainer>
+        <BarContent height={height}>
+          {showArrow && tier.commissionPct > 1 && <BoltIcon />}
+          <ZigTypography color='neutral200' fontSize={12} fontWeight={500}>
+            {/* eslint-disable-next-line i18next/no-literal-string */}
+            {layer1.value}%
+          </ZigTypography>
+        </BarContent>
+      </div>
+      {layer2.value > 0 && (
+        <>
+          <TierBarContainer
+            opacity={opacity}
+            width={width}
+            height={layer2.height}
+            emphasis={showArrow}
+            subLayer={true}
+          />
+          <BarContent height={layer2.height}>
+            <ZigTypography color='neutral200' fontSize={12} fontWeight={500}>
+              {/* eslint-disable-next-line i18next/no-literal-string */}
+              {tier.commissionPct}%
+            </ZigTypography>
+          </BarContent>
+        </>
+      )}
+      {layer3.value > 0 && (
+        <>
+          <TierBarContainer
+            opacity={opacity}
+            width={width}
+            height={layer3.height}
+            emphasis={showArrow}
+            subLayer={true}
+          />
+          <BarContent height={layer3.height}>
+            <ZigTypography color='neutral200' fontSize={12} fontWeight={500}>
+              {/* eslint-disable-next-line i18next/no-literal-string */}
+              {tier.commissionPct}%
+            </ZigTypography>
+          </BarContent>
+        </>
+      )}
+    </Box>
   );
 };
 
