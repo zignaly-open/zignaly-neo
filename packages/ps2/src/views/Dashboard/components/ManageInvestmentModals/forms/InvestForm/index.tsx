@@ -83,7 +83,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
 
   useDebounce(
     () => {
-      trackClick({ ctaId: 'reinvest-amount-change' });
+      +reinvestAmount && trackClick({ ctaId: 'reinvest-amount-change' });
     },
     300,
     [reinvestAmount],
