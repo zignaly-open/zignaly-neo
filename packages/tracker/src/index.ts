@@ -70,7 +70,7 @@ export const track = ({
   // mousedown does come first, but these 50ms are here just in case
   setTimeout(() => {
     // this is to prevent the double track event sent thanks to react 18 double mount in dev mode
-    if(url.toString() !== referrer)
+    if (url.toString() !== referrer)
       triggerTz(url.toString(), userId, referrer);
     referrer = url.toString();
   }, 50);
