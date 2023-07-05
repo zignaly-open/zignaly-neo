@@ -1,0 +1,12 @@
+{
+    "title": "Invite and Earn Up to {{max}}%",
+    "commission-rate": "Commission Rate",
+    "when-you-invite": "when you invite {{invite}}+ people to Zignaly",
+    "split-commission": "Split your commission with friends you invite",
+    "trader-referral-link": "Your referral link to this trader:",
+    "earn-success-fees": "Earn a % of success fees paid by people you invite",
+    "invite-and-earn": "Invite {{invite}}+ people and earn {{commission}}%",
+    "max-earnings-from-fees": "Max earnings\nfrom {{amount}} of fees:",
+    "base-commission": "Base commission:",
+    "invites": "Invites:"
+}

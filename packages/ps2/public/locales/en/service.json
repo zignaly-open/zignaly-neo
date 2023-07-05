@@ -112,5 +112,6 @@
     "zero-fee": "If you choose success fee = 0, Zignaly will not charge any fee either",
     "total-fee": "Total fee",
     "you-receive": "You receive"
-  }
+  },
+  "z-score": "Z-Score"
 }

@@ -7,8 +7,12 @@ export type ReferralRewards = {
   usdtPending: number;
   tierLevelId: number;
   tierLevelFactor: number;
-  usdtAum: number;
-  zigBalance: number;
+  // usdtAum: number;
+  // zigBalance: number;
+  discountPct: number;
+  boost: number;
+  boostEndsAt: string;
+  // can be removed
   configuration: {
     zignalySuccessFee: number;
     zignalyRebateFee: number;
@@ -79,10 +83,18 @@ export type BenefitClaimed = {
 
 export type TierLevel = {
   id: number;
-  minZig: number;
-  maxZig: number;
-  minAum: number;
-  maxAum: number;
-  tierLevelFactor: number;
+  name: string;
+  invitees: number;
+  commissionPct: number;
 };
 export type TierLevels = TierLevel[];
+
+export type ServiceCommission = {
+  commission: number;
+  zignaly: number;
+};
+
+export type ServiceCommissionPayload = {
+  service: string;
+  commission: number;
+};
