@@ -17,7 +17,6 @@ import Signup from './views/Auth/Signup';
 import ServiceHeader from './views/TraderService/components/ServiceHeader';
 import { zigSuspenseFallback } from 'util/suspense';
 
-const Wallet = lazy(() => import('./views/Wallet'));
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
 const ForgotPassword = lazy(() => import('./views/Auth/ForgotPassword'));
 const HelpInvestor = lazy(() => import('./views/Help/HelpInvestor'));
@@ -84,7 +83,6 @@ const Router: React.FC = () => (
         path={Routes.ROUTE_MY_BALANCES_TRANSACTIONS}
         element={outleted(<MyBalances />)}
       />
-      <Route path={Routes.ROUTE_WALLET} element={<Wallet />} />
       <Route path={Routes.ROUTE_REFERRALS} element={<Referrals />} />
       <Route path={Routes.ROUTE_REWARDS} element={<Rewards />} />
     </Route>

@@ -27,7 +27,6 @@ import {
   ROUTE_LOGIN,
   ROUTE_SIGNUP,
   ROUTE_MY_BALANCES,
-  ROUTE_WALLET,
   ROUTE_REFERRALS,
   ROUTE_REWARDS,
 } from '../../../routes';
@@ -156,12 +155,6 @@ function AccountMenu(): React.ReactElement | null {
           id: 'account-menu-dropdown__balance',
           href: generatePath(ROUTE_MY_BALANCES),
           onClick: () => navigate(ROUTE_MY_BALANCES),
-        },
-        {
-          label: t('account-menu.notAuth-dropdown-link-wallet'),
-          id: 'account-menu-dropdown__wallet',
-          href: generatePath(ROUTE_WALLET),
-          onClick: () => navigate(ROUTE_WALLET),
         },
         {
           id: 'account-menu-dropdown__settings',
