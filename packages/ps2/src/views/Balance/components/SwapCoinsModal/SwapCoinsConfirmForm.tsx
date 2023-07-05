@@ -32,7 +32,7 @@ const SwapCoinsConfirmForm = ({
           display: 'flex',
           width: '100%',
           justifyContent: 'center',
-          gap: 2,
+          gap: 3,
           alignItems: 'center',
         }}
       >
@@ -57,15 +57,37 @@ const SwapCoinsConfirmForm = ({
         />
       </Box>
       <Divider
-        sx={{ border: '1px dotted #35334A', width: '90%', mb: '10px' }}
+        sx={{ border: '1px dotted #35334A', width: '100%', mb: '25px' }}
       />
       <Box display={'flex'}>
         <ZigTypography variant={'body1'} mr={'10px'}>
           {t('confirmation.rate')}
         </ZigTypography>
         <ZigPriceLabel coin={fromCoin} value={1} showTooltip />
-        {' = '}
+        &nbsp;{'='}&nbsp;
         <ZigPriceLabel coin={toCoin} value={rate} showTooltip />
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          width: '100%',
+          padding: '25px',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '10px',
+          backgroundColor: '#0c0d1d',
+          mt: '25px',
+        }}
+      >
+        <ZigTypography variant={'h1'}>
+          {t('confirmation.receive')}
+        </ZigTypography>
+        <ZigPriceLabel
+          variant={'h1'}
+          coinProps={{ variant: 'h2' }}
+          coin={toCoin}
+          value={toCoinAmount}
+        />
       </Box>
 
       <ModalActions>

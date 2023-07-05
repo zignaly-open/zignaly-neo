@@ -59,13 +59,13 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
           ...(withDefaultProps?.sx || {}),
         }}
       >
-        <Box display={"flex"}>
+        <Box display={"flex"} flexDirection={"column"}>
           {label && (
             <ZigTypography variant={"h2"} mb={"12px"}>
               {label}
             </ZigTypography>
           )}
-          <>
+          <Box display={"flex"} alignItems={"center"}>
             {showCoinIcon && (
               <Box mr={"10px"} mt={"5px"}>
                 <ZigCoinIcon size={"medium"} coin={coin || "USDT"} />
@@ -99,7 +99,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
                 <ZigTypography {...withDefaultPropsCoin}>{coin}</ZigTypography>
               </>
             )}
-          </>
+          </Box>
         </Box>
       </ZigTypography>
     </>

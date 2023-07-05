@@ -143,7 +143,7 @@ function SwapCoinsForm({
     if (convertPreview && selectedToToken?.coin) {
       setValue(
         'toCoinAmount',
-        trimZeros((+amount / convertPreview?.lastPrice).toFixed(8)).toString(),
+        trimZeros((+amount * convertPreview?.lastPrice).toFixed(8)).toString(),
       );
     }
   }, [amount, convertPreview]);
