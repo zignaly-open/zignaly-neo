@@ -4,6 +4,7 @@ export const TierBarContainer = styled(Box)<{
   opacity: number;
   emphasis: boolean;
   subLayer: boolean;
+  highlighted: boolean;
 }>`
   border-radius: 4px;
   /* background-image: linear-gradient(
@@ -50,6 +51,18 @@ export const TierBarContainer = styled(Box)<{
       rgba(18, 33, 59, 0.52)
     );
   }
+`;
+
+export const HighlightRate = styled(Box)`
+  position: absolute;
+  top: 1.5px;
+  left: 0;
+  right: 0;
+  background: #156747;
+  margin: 0 auto;
+  border-radius: 2.5px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 `;
 
 export const TierArrow = styled('div')<{ opacity: number }>`

@@ -125,7 +125,7 @@ const TiersTable = ({
               <TierBar
                 showArrow={tierIndex === tiers.length - 1}
                 tier={tier}
-                boost={referral.boost}
+                referral={referral}
                 tiers={tiers}
                 serviceCommission={serviceCommission.commission}
               />

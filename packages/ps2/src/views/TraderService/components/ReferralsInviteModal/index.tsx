@@ -80,22 +80,6 @@ const ReferralsInviteModal = ({
     boostEndsAt: '2023-07-07T06:01:00',
   };
   console.log(tiers, serviceCommission, referralData);
-  // const { data: balance } = useTraderServiceBalance(serviceId);
-  // const { data: service } = useServiceDetails(serviceId);
-  // const [fromTradingAccount, setFromTradingAccount] = useState(true);
-  // const toast = useToast();
-  // const [transfer, { isLoading: isTransferring }] =
-  //   useTraderServiceTransferFunds(serviceId);
-
-  // // staSscFree is the available balance on the trading account, aka freeBalance
-  // const freeBalance = new BigNumber(balance?.staSscFree || 0).toFixed();
-  // // scaSscSum is the balance on the disconnect account
-  // const disconnectBalance = new BigNumber(balance?.scaSscSum || 0).toFixed();
-  // const balanceFrom = fromTradingAccount ? freeBalance : disconnectBalance;
-  // const balanceTo = !fromTradingAccount ? freeBalance : disconnectBalance;
-  // const coin = service?.ssc ?? 'USDT';
-
-  // // TODO: maybe refetch useTraderServiceBalance just in case?
 
   const {
     watch,
@@ -113,7 +97,6 @@ const ReferralsInviteModal = ({
 
   const onSubmit = () => {};
 
-  const currentRate = 1;
   const maxCommission = trimZeros(1 * 100);
   const inviteLeft = 5;
 
