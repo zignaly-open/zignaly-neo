@@ -189,9 +189,7 @@ function AccountMenu(): React.ReactElement | null {
               onClick={() => {
                 // fun fact: without onClose react-select acts funky
                 onClose();
-                showModal(DepositModal, {
-                  ctaId: 'account-menu-deposit',
-                });
+                showModal(DepositModal);
               }}
             >
               {t('action:deposit')}

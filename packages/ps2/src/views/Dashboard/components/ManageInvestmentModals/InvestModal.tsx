@@ -31,6 +31,7 @@ export function useInvestModalContent({
       view === InvestmentViews.InvestmentConfirm
         ? () => setView(InvestmentViews.Investment)
         : undefined,
+    view,
     component: () =>
       !isLoading && <InvestView close={close} view={view} setView={setView} />,
   };

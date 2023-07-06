@@ -32,10 +32,7 @@ const Rewards: React.FC = () => {
   const benefitsEndpoint = useBenefitsQuery();
   const rewardsClaimed = useBenefitsClaimedQuery();
   const { showModal } = useZModal();
-  const deposit = () =>
-    showModal(DepositModal, {
-      ctaId: 'rewards-deposit-button',
-    });
+  const deposit = () => showModal(DepositModal);
 
   const columnHelper = createColumnHelper<BenefitClaimed & { title?: never }>();
   const columns = useMemo(

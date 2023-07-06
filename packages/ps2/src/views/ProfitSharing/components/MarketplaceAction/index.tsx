@@ -55,11 +55,7 @@ const MarketplaceAction = ({
                   investedAmount={investedAmount.toString()}
                 />
               ) : (
-                <InvestButton
-                  prefixId={prefixId}
-                  service={traderService}
-                  ctaId={'marketplace-invest-button'}
-                />
+                <InvestButton prefixId={prefixId} service={traderService} />
               )}
             </>
           </Suspense>

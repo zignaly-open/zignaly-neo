@@ -73,11 +73,7 @@ const MyBalances: React.FC = () => {
               startIcon={<ZigPlusIcon width={10} height={10} />}
               sx={{ fontWeight: 600, mb: 1 }}
               variant={'contained'}
-              onClick={() =>
-                showModal(DepositModal, {
-                  ctaId: 'balance-deposit-header-button',
-                })
-              }
+              onClick={() => showModal(DepositModal)}
             >
               {t('action:deposit')}
             </ZigButton>
@@ -169,5 +165,4 @@ export default MyBalances;
 
 export const MyBalancesDeposit = createZModalRouteElement({
   component: DepositModal,
-  ctaId: 'balances-table-row',
 });
