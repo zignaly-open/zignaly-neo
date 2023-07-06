@@ -5,12 +5,13 @@ import {
   ZigTablePriceLabel,
   createColumnHelper,
   ZigButton,
+  ZigSwapCircleIcon,
 } from '@zignaly-open/ui';
 import { BalanceTableDataType } from './types';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { allowedDeposits } from 'util/coins';
-import { Add, Remove, SwapHoriz } from '@mui/icons-material';
+import { Add, Remove } from '@mui/icons-material';
 import { useCoinBalances, useExchangeCoinsList } from 'apis/coin/use';
 import {
   CoinBalance,
@@ -173,7 +174,11 @@ const MyBalancesTable = (): JSX.Element => {
                     })
                   }
                   variant='outlined'
-                  startIcon={<SwapHoriz width={10} height={10} />}
+                  startIcon={
+                    <Box mt={'2px'}>
+                      <ZigSwapCircleIcon width={15} height={15} />
+                    </Box>
+                  }
                 >
                   {t('swap')}
                 </ZigButton>

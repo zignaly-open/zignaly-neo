@@ -1,12 +1,16 @@
 import React from 'react';
 import { Box, Divider, Grid } from '@mui/material';
-import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
+import {
+  ZigButton,
+  ZigPriceLabel,
+  ZigSwapCircleIcon,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { ModalActions as ModalActions } from 'components/ZModal/ModalContainer/styles';
 
 import { useTranslation } from 'react-i18next';
 import { SwapCoinsConfirmFormProps } from './types';
 import { useToast } from '../../../../util/hooks/useToast';
-import { SwapHoriz } from '@mui/icons-material';
 
 const SwapCoinsConfirmForm = ({
   action,
@@ -45,7 +49,10 @@ const SwapCoinsConfirmForm = ({
           coinProps={{ variant: 'h2' }}
           showTooltip
         />
-        <SwapHoriz sx={{ width: '30px', height: '30px', mt: '20px' }} />
+        <Box mt={'25px'}>
+          <ZigSwapCircleIcon width={'35px'} height={'35px'} />
+        </Box>
+
         <ZigPriceLabel
           showCoinIcon
           coin={toCoin}
