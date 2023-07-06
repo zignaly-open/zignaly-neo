@@ -25,6 +25,66 @@ const composeInvitesValue = (tierIndex: number, tiers: TierLevels) => {
   return currentTier.invitees;
 };
 
+const CellLabelBaseCommission = () => {
+  const { t } = useTranslation('referrals-trader');
+
+  return (
+    <td style={{ verticalAlign: 'bottom' }}>
+      <ZigTypography
+        fontWeight={500}
+        variant='h4'
+        textAlign='end'
+        lineHeight='24px'
+      >
+        {t('base-commission')}
+        <Tooltip title={t('zig-held-tooltip')}>
+          <TooltipIcon />
+        </Tooltip>
+      </ZigTypography>
+    </td>
+  );
+};
+
+const CellLabelBoost = () => {
+  const { t } = useTranslation('referrals-trader');
+
+  return (
+    <td>
+      <ZigTypography
+        fontWeight={500}
+        variant='h4'
+        textAlign='end'
+        lineHeight='24px'
+      >
+        {t('within-1-week')}
+        <Tooltip title={t('zig-held-tooltip')}>
+          <TooltipIcon />
+        </Tooltip>
+      </ZigTypography>
+    </td>
+  );
+};
+
+const CellLabelTraderBoost = () => {
+  const { t } = useTranslation('referrals-trader');
+
+  return (
+    <td>
+      <ZigTypography
+        fontWeight={500}
+        variant='h4'
+        textAlign='end'
+        lineHeight='24px'
+      >
+        {t('trader-boost')}
+        <Tooltip title={t('zig-held-tooltip')}>
+          <TooltipIcon />
+        </Tooltip>
+      </ZigTypography>
+    </td>
+  );
+};
+
 const TiersTable = ({
   tiers,
   referral,
@@ -32,92 +92,76 @@ const TiersTable = ({
 }: TiersTableProps) => {
   const { t } = useTranslation(['referrals-trader', 'service']);
 
+  const composeFirstCell = () => {
+    if (serviceCommission.commission > 0 && referral.boost > 1) {
+      return <CellLabelTraderBoost />;
+    } else if (serviceCommission.commission > 0 || referral.boost > 1) {
+      return <CellLabelBoost />;
+    }
+
+    return <CellLabelBaseCommission />;
+  };
+
+  const composeSecondCell = () => {
+    if (serviceCommission.commission > 0) {
+      return <CellLabelTraderBoost />;
+    } else if (serviceCommission.commission > 0 || referral.boost > 1) {
+      return <CellLabelBaseCommission />;
+    }
+
+    return null;
+  };
+
+  const composeThirdCell = () => {
+    if (serviceCommission.commission > 1) {
+      return <CellLabelBaseCommission />;
+    }
+
+    return null;
+  };
+
   return (
     <table>
       <tr>
-        <td style={{ verticalAlign: 'bottom' }}>
-          <ZigTypography
-            fontWeight={500}
-            variant='h4'
-            textAlign='end'
-            lineHeight='24px'
-          >
-            {t('base-commission')}
-            <Tooltip title={t('zig-held-tooltip')}>
-              <TooltipIcon />
-            </Tooltip>
-          </ZigTypography>
-        </td>
+        {composeFirstCell()}
         {tiers?.map((tier, tierIndex) => (
           <td style={{ verticalAlign: 'bottom' }} key={tier.id}>
             <Box display='flex' justifyContent='center'>
-              {/* <TierBar
-                showArrow={tierIndex === tiers.length - 1}
-                tier={tier}
-                boost={2 || referral.boost}
-                tiers={tiers}
-                traderCommission={10}
-                layer={1}
-                totalLayers={3}
-              /> */}
               <TierBar
                 showArrow={tierIndex === tiers.length - 1}
                 tier={tier}
-                boost={2 || referral.boost}
+                boost={referral.boost}
                 tiers={tiers}
-                serviceCommission={0}
-                layer={0}
-                totalLayers={3}
-                layers={2}
+                serviceCommission={serviceCommission.commission}
               />
             </Box>
           </td>
         ))}
       </tr>
-      <tr>
-        <td>
-          <ZigTypography
-            fontWeight={500}
-            variant='h4'
-            textAlign='end'
-            lineHeight='24px'
-          >
-            {t('trader-boost')}
-            <Tooltip title={t('zig-held-tooltip')}>
-              <TooltipIcon />
-            </Tooltip>
-          </ZigTypography>
-        </td>
-        {tiers?.map((tier, tierIndex) => (
-          <td key={tier.id} style={{ textAlign: 'center' }}>
-            <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
-              {composeInvitesValue(tierIndex, tiers)}
-            </ZigTypography>
-          </td>
-        ))}
-      </tr>
-      <tr>
-        <td>
-          <ZigTypography
-            fontWeight={500}
-            variant='h4'
-            textAlign='end'
-            lineHeight='24px'
-          >
-            {t('within-1-week')}
-            <Tooltip title={t('zig-held-tooltip')}>
-              <TooltipIcon />
-            </Tooltip>
-          </ZigTypography>
-        </td>
-        {tiers?.map((tier, tierIndex) => (
-          <td key={tier.id} style={{ textAlign: 'center' }}>
-            <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
-              {composeInvitesValue(tierIndex, tiers)}
-            </ZigTypography>
-          </td>
-        ))}
-      </tr>
+      {composeSecondCell() && (
+        <tr>
+          {composeSecondCell()}
+          {tiers?.map((tier, tierIndex) => (
+            <td key={tier.id} style={{ textAlign: 'center' }}>
+              <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
+                {composeInvitesValue(tierIndex, tiers)}
+              </ZigTypography>
+            </td>
+          ))}
+        </tr>
+      )}
+      {composeThirdCell() && (
+        <tr>
+          {composeThirdCell()}
+          {tiers?.map((tier, tierIndex) => (
+            <td key={tier.id} style={{ textAlign: 'center' }}>
+              <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
+                {composeInvitesValue(tierIndex, tiers)}
+              </ZigTypography>
+            </td>
+          ))}
+        </tr>
+      )}
       <tr>
         <td>
           <ZigTypography

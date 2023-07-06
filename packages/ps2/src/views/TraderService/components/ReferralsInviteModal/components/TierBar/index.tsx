@@ -35,15 +35,6 @@ const TierBar = ({
   totalLayers: number;
   specialBoost: boolean;
 }) => {
-  // Full layer
-  const layer1 = useMemo(() => {
-    const value = getBoostedCommissionPct(tier.commissionPct, boost, 0);
-    // apply min height
-    // const layerHeight =
-    // console.log('a', boost);
-    return { value };
-  }, [serviceCommission, tier, boost]);
-
   const min = tiers[0].commissionPct;
   const max = tiers[tiers.length - 1].commissionPct;
 
@@ -83,27 +74,19 @@ const TierBar = ({
       : 0;
   }, [min, max, tier]);
 
-  // const maxEarnings = 500;
-  // const invites = 5;
-  // const baseCommission = 10;
-
-  const layer1Value = tier.commissionPct;
-
-  const layer3Value = serviceCommission
-    ? getBoostedCommissionPct(tier.commissionPct, boost, serviceCommission)
-    : null;
-  // const layer2Value =
-  //   boost > 1 ? getBoostedCommissionPct(tier.commissionPct, boost) : null;
+  // Full layer
+  const layer1 = useMemo(() => {
+    const value = getBoostedCommissionPct(tier.commissionPct, boost, 0);
+    return { value };
+  }, [serviceCommission, tier, boost]);
 
   const layer2 = useMemo(() => {
     // Don't apply boost here if there is no service commission, since it will be applied in layer 1
     const layerBoost = serviceCommission > 0 ? boost : 1;
+
     const value = getBoostedCommissionPct(tier.commissionPct, layerBoost);
-    // apply min height
     const layerHeight = (value / layer1.value) * height;
-    // console.log('a', layerHeight, layer2Value, fullLayer.value, boost);
-    // console.log(layer2Value);
-    return { value: value, height: layerHeight };
+    return { value: value !== layer1.value ? value : 0, height: layerHeight };
   }, [serviceCommission, tier, boost, layer1]);
 
   const layer3 = useMemo(() => {
@@ -111,8 +94,6 @@ const TierBar = ({
     const value = boost > 1 && serviceCommission ? tier.commissionPct : 0;
 
     const layerHeight = (value / layer1.value) * height;
-    // console.log('a', layerHeight, layer2Value, fullLayer.value, boost);
-    // console.log(layer2Value);
     return { value: value, height: layerHeight };
   }, [serviceCommission, tier, boost, layer1]);
 

@@ -66,7 +66,19 @@ const ReferralsInviteModal = ({
   };
   const [updateComission, updateComissionLoading] =
     useUpdateServiceCommissionMutation();
-  const { data: referralData } = useReferralRewardsQuery();
+  const { data: referralData0 } = useReferralRewardsQuery();
+  const referralData = {
+    referralCode: 'code_2003',
+    invitedCount: 3,
+    investorsCount: 0,
+    usdtEarned: 11.0,
+    usdtPending: 20.0,
+    tierLevelId: 3,
+    tierLevelFactor: 30.0,
+    discountPct: 25.0,
+    boost: 1.5,
+    boostEndsAt: '2023-07-07T06:01:00',
+  };
   console.log(tiers, serviceCommission, referralData);
   // const { data: balance } = useTraderServiceBalance(serviceId);
   // const { data: service } = useServiceDetails(serviceId);
