@@ -28,18 +28,13 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
       {!isInvested.isLoading && !service.liquidated && (
         <Box sx={{ mt: md ? 0 : 3 }}>
           {isAuthenticated && isInvested.thisAccount ? (
-            <InvestedButton
-              prefixId={'service-profile'}
-              service={service}
-              ctaId={'service-profile-invested-button'}
-            />
+            <InvestedButton prefixId={'service-profile'} service={service} />
           ) : (
             <InvestButton
               modalRoute={ROUTE_PROFIT_SHARING_SERVICE_INVEST}
               prefixId={'service-profile'}
               showMultipleAccountButton
               service={service}
-              ctaId={'service-profile-invest-button'}
             />
           )}
         </Box>

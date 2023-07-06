@@ -143,24 +143,24 @@ const MyBalancesTable = (): JSX.Element => {
                 />
               </ZigButton>
             )}
-            <ZigButton
-              narrow
-              tooltip={t('withdraw')}
-              id={`balance-row__withdrawal-${row.original.coin}`}
-              onClick={() =>
-                showModal(WithdrawModal, {
-                  selectedCoin: row.original.coin,
-                  ctaId: 'balances-table-row',
-                })
-              }
-              variant='outlined'
-              sx={{ maxHeight: '20px', mr: 1 }}
-            >
-              <Remove
-                sx={{ height: '18px', width: '22px' }}
-                color={'neutral300'}
-              />
-            </ZigButton>
+            <Box>
+              <ZigButton
+                narrow
+                tooltip={t('withdraw')}
+                id={`balance-row__withdrawal-${row.original.coin}`}
+                onClick={() =>
+                  showModal(WithdrawModal, {
+                    selectedCoin: row.original.coin,
+                  })
+                }
+                variant='outlined'
+              >
+                <Remove
+                  sx={{ height: '18px', width: '22px' }}
+                  color={'neutral300'}
+                />
+              </ZigButton>
+            </Box>
             {exchangeType === 'spot' &&
               Number(row.original.balance.balanceTotal) > 0 &&
               ['BUSD', 'USDT', 'BTC', 'ETH', 'BNB'].includes(

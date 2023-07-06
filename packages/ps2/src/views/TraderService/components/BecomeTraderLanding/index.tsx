@@ -106,9 +106,7 @@ const BecomeTraderLanding: React.FC = () => {
 
   const onClickCreateService = () => {
     if (isAuthenticated) {
-      showModal(CreateServiceModal, {
-        ctaId: 'create-service',
-      });
+      showModal(CreateServiceModal);
     } else {
       navigateIfNotLoggedIn();
     }
@@ -154,7 +152,6 @@ const BecomeTraderLanding: React.FC = () => {
               </WrapperList>
               <WrapperAction>
                 <ZigButton
-                  ctaId={'offer-service__create-service'}
                   id={'offer-service__create-service'}
                   size={'large'}
                   variant={'contained'}

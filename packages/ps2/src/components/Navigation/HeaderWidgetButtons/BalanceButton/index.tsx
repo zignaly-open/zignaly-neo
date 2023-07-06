@@ -56,15 +56,7 @@ const BalanceButton = () => {
 
   const linkWrap = (v: React.ReactElement) =>
     balanceStatus === BalanceStatus.NoFunds ? (
-      <div
-        onClick={() =>
-          showModal(DepositModal, {
-            ctaId: 'balance-add-funds-button',
-          })
-        }
-      >
-        {v}
-      </div>
+      <div onClick={() => showModal(DepositModal)}>{v}</div>
     ) : (
       <Link
         to={generatePath(
