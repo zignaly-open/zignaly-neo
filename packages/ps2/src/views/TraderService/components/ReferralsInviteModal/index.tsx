@@ -220,7 +220,8 @@ const ReferralsInviteModal = ({
         <Tiers
           tiers={tiers}
           referral={referralData}
-          serviceCommission={serviceCommission}
+          serviceCommission={serviceCommission.commission}
+          zignalyCommission={5}
         />
       )}
     </ZModal>

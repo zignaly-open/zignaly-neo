@@ -1,11 +1,8 @@
-import {
-  ReferralRewards,
-  ServiceCommission,
-  TierLevels,
-} from 'apis/referrals/types';
+import { ReferralRewards, TierLevels } from 'apis/referrals/types';
 
 export type TiersTableProps = {
   tiers: TierLevels;
   referral: ReferralRewards;
-  serviceCommission: ServiceCommission;
+  serviceCommission: number;
+  zignalyCommission: number;
 };

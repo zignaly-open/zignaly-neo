@@ -117,15 +117,17 @@ const TierBar = ({
     return { value: value, height: layerHeight };
   }, [serviceCommission, tier, boost, layer1]);
 
-  if (referral.tierLevelId === tier.id) {
-    console.log(layer1, layer2, layer3);
-  }
+  // if (referral.tierLevelId === tier.id) {
+  //   console.log(layer1, layer2, layer3);
+  // }
+  console.log(`\n---\nTier ${tier.id}:`);
+  console.table([layer1, layer2, layer3]);
   // Due to using absolute positioning for the bar content (to not apply the opacity to the text / icon),
   // we need to set a min height for the container, which need to be larger if there is a bolt icon (more than 1 layer?)
   const layer1MinHeight = layers > 1 ? layer2.height + 48 : 0;
 
   return (
-    <Box position='relative' minHeight={layer1MinHeight}>
+    <Box position='relative' minHeight={layer1MinHeight} height={layer1.height}>
       <TierBarContainer
         opacity={opacity}
         width={width}

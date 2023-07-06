@@ -1,6 +1,5 @@
-import { ServiceCommission, TierLevel } from 'apis/referrals/types';
-
 export const MAX_FEES_AMOUNT = 100000;
+const ZIGNALY_DEFAULT_COMMISSION = 5;
 
 export const maxCommission = () => {};
 
@@ -9,29 +8,22 @@ export const getBoostedCommissionPct = (
   boost: number,
   traderCommission = 0,
 ) => {
-  return baseCommission * boost + traderCommission;
+  const traderBoost = traderCommission / ZIGNALY_DEFAULT_COMMISSION;
+  return baseCommission * boost + traderBoost * 100;
 };
 
 export const getMaxEarnings = (
   baseCommission: number,
   boost: number,
-  serviceCommission: ServiceCommission,
+  serviceCommission: number,
+  zignalyCommission: number,
 ) => {
   const boostedCommission = getBoostedCommissionPct(
     baseCommission,
     boost,
-    serviceCommission.commission,
-  );
-  console.log(
-    serviceCommission.zignaly,
-    baseCommission,
     serviceCommission,
-    boost,
-    boostedCommission,
-    (MAX_FEES_AMOUNT * serviceCommission.zignaly * boostedCommission) / 100,
   );
   return (
-    MAX_FEES_AMOUNT *
-    (((serviceCommission.zignaly / 100) * boostedCommission) / 100)
+    MAX_FEES_AMOUNT * (((zignalyCommission / 100) * boostedCommission) / 100)
   );
 };

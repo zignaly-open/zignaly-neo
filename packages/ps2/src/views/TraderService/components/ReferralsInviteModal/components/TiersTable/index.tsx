@@ -84,6 +84,7 @@ const TiersTable = ({
   tiers,
   referral,
   serviceCommission,
+  zignalyCommission,
 }: TiersTableProps) => {
   const { t } = useTranslation(['referrals-trader', 'service']);
 
@@ -92,19 +93,19 @@ const TiersTable = ({
       1,
       tiers[0].commissionPct,
       referral.boost,
-      serviceCommission.commission,
+      serviceCommission,
     );
     const layer2Value = calculateLayerValue(
       2,
       tiers[0].commissionPct,
       referral.boost,
-      serviceCommission.commission,
+      serviceCommission,
     );
     const layer3Value = calculateLayerValue(
       3,
       tiers[0].commissionPct,
       referral.boost,
-      serviceCommission.commission,
+      serviceCommission,
     );
     return (
       <td style={{ verticalAlign: 'bottom' }}>
@@ -127,7 +128,7 @@ const TiersTable = ({
                 tier={tier}
                 referral={referral}
                 tiers={tiers}
-                serviceCommission={serviceCommission.commission}
+                serviceCommission={serviceCommission}
               />
             </Box>
           </td>
@@ -185,6 +186,7 @@ const TiersTable = ({
                   tier.commissionPct,
                   referral.boost,
                   serviceCommission,
+                  zignalyCommission,
                 ).toFixed()}
                 displayType={'text'}
                 thousandSeparator={true}
