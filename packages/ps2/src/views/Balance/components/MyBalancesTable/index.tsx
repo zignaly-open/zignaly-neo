@@ -153,6 +153,7 @@ const MyBalancesTable = (): JSX.Element => {
                     selectedCoin: row.original.coin,
                   })
                 }
+                sx={{ maxHeight: '20px', mr: 1 }}
                 variant='outlined'
               >
                 <Remove
