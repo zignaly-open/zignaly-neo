@@ -5,6 +5,7 @@ import {
   trimZeros,
   ZigButton,
   ZigInputAmount,
+  ZigSwapCircleIcon,
 } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { useForm, Controller } from 'react-hook-form';
@@ -15,7 +16,6 @@ import {
   useConvertPreview,
   useQuoteAssetsCoin,
 } from '../../../../apis/coin/use';
-import { SwapHoriz } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import SwapCoinsConfirmForm from './SwapCoinsConfirmForm';
 import { useConvertMutation } from '../../../../apis/coin/api';
@@ -206,7 +206,7 @@ function SwapCoinsForm({
         )}
       />
       <Box margin={'0 auto'}>
-        <SwapHoriz sx={{ width: '30px', height: '30px' }} />
+        <ZigSwapCircleIcon width={'35px'} height={'35px'} />
       </Box>
 
       <Controller
