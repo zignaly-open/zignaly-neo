@@ -91,7 +91,6 @@ export type TierLevels = TierLevel[];
 
 export type ServiceCommission = {
   commission: number;
-  zignaly: number;
 };
 
 export type ServiceCommissionPayload = {

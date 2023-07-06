@@ -9,7 +9,8 @@ export const getBoostedCommissionPct = (
   traderCommission = 0,
 ) => {
   const traderBoost = traderCommission / ZIGNALY_DEFAULT_COMMISSION;
-  return baseCommission * boost + traderBoost * 100;
+  const boostedCommission = baseCommission * boost;
+  return boostedCommission + boostedCommission * traderBoost;
 };
 
 export const getMaxEarnings = (

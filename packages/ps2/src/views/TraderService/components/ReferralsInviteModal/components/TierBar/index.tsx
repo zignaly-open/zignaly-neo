@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import {
   BarContent,
   HighlightRate,
+  Overlay,
   TierArrow,
   TierBarContainer,
 } from './styles';
@@ -14,7 +15,9 @@ import { ca } from 'date-fns/locale';
 import { calculateLayerValue } from './util';
 import { TierBarProps } from './types';
 
-const BOLT_SPACE = 80;
+const BOLT_SPACE = 18;
+const MIN_HEIGHT = 48;
+const MULTIPLIER = 1.7;
 
 const TierBar = ({
   tier,
@@ -40,6 +43,8 @@ const TierBar = ({
       : serviceCommission > 0 || boost > 1
       ? 2
       : 1;
+  const minHeightConstraints =
+    layers * minHeight + (layers > 1 ? BOLT_SPACE : 0);
 
   // Bar opacity
   const opacityPower = 0.9;
@@ -48,6 +53,12 @@ const TierBar = ({
       minOpacity +
       Math.pow((tier.commissionPct - min) / (max - min), opacityPower) *
         (maxOpacity - minOpacity),
+    [min, max, tier],
+  );
+  console.log(opacity);
+
+  const mul = useMemo(
+    () => 1 + Math.pow((tier.commissionPct - min) / (max - min), 1) * (1 - 0),
     [min, max, tier],
   );
 
@@ -62,6 +73,7 @@ const TierBar = ({
   );
 
   // Arrow opacity
+  // todo: review
   const minArrowOpacity = 0.15;
   const opacityArrow = useMemo(() => {
     const minAbove1 = tiers.find((t) => t.commissionPct > 1).commissionPct;
@@ -83,12 +95,15 @@ const TierBar = ({
       boost,
       serviceCommission,
     );
+    // const lastLayer = layers === 3 ? layer3 : layers === 2 ? layer2 : null;
+
     // Adjust this value to control the curve
-    const power = 1.74;
+    const power = 1;
     const height =
-      minHeight * layers +
+      minHeightConstraints +
       Math.pow((tier.commissionPct - min) / (max - min), power) *
-        (maxHeight - minHeight);
+        (maxHeight - minHeightConstraints);
+    console.log(minHeightConstraints);
     return { value, height };
   }, [min, max, serviceCommission, tier, boost]);
 
@@ -99,10 +114,11 @@ const TierBar = ({
       boost,
       serviceCommission,
     );
-    const layerHeight = (value / layer1.value) * layer1.height;
+    const height = (value / layer1.value) * layer1.height;
+
     return {
       value: value !== layer1.value ? value : 0,
-      height: layerHeight,
+      height: Math.max(height, minHeight * (layers - 1)),
     };
   }, [serviceCommission, tier, boost, layer1]);
 
@@ -113,8 +129,13 @@ const TierBar = ({
       boost,
       serviceCommission,
     );
-    const layerHeight = (value / layer1.value) * layer1.height;
-    return { value: value, height: layerHeight };
+    // const height =
+    //   Math.min(value / layer1.value, 0.25) * layer1.height * MULTIPLIER;
+    const height = (value / layer1.value) * layer1.height;
+    return {
+      value: value,
+      height: Math.max(height, minHeight * (layers - 2)),
+    };
   }, [serviceCommission, tier, boost, layer1]);
 
   // if (referral.tierLevelId === tier.id) {
@@ -134,72 +155,87 @@ const TierBar = ({
         height={1}
         emphasis={showArrow}
       >
+        <BarContent>
+          {layers > 1 && <BoltIcon />}
+          <ZigTypography
+            color={
+              layers > 1 ? (showArrow ? '#28ba62' : 'greenGraph') : 'neutral200'
+            }
+            fontSize={fontSize}
+            fontWeight={showArrow ? 600 : 500}
+          >
+            {/* eslint-disable-next-line i18next/no-literal-string */}
+            {layer1.value}%
+          </ZigTypography>
+        </BarContent>
         {showArrow && <TierArrow opacity={opacityArrow} />}
+        <Overlay opacity={opacity} />
       </TierBarContainer>
       {referral.tierLevelId === tier.id && (
         <HighlightRate
-          height={
-            Math.max(
-              layer1.height - layer2.height,
-              layer1MinHeight - layer2.height,
-            ) + 1
-          }
+          height={Math.max(
+            layer1.height - layer2.height,
+            layer1MinHeight - layer2.height,
+          )}
           width={width - 3}
         />
       )}
-      <BarContent height={1}>
-        {layers > 1 && <BoltIcon />}
-        <ZigTypography
-          color={
-            layers > 1 ? (showArrow ? '#28ba62' : 'greenGraph') : 'neutral200'
-          }
-          fontSize={fontSize}
-          fontWeight={showArrow ? 600 : 500}
-        >
-          {/* eslint-disable-next-line i18next/no-literal-string */}
-          {layer1.value}%
-        </ZigTypography>
-      </BarContent>
+
       {layer2.value > 0 && (
         <>
           <TierBarContainer
+            // opacity={showArrow ? 0.45 : opacity}
+            // opacity={opacity / 2}
             opacity={opacity}
             width={width}
             height={layer2.height}
             emphasis={showArrow}
             subLayer={true}
-          />
-          <BarContent height={layer2.height}>
-            <ZigTypography
-              color={layers > 2 ? 'greenGraph' : 'neutral200'}
-              fontSize={fontSize}
-              fontWeight={500}
-            >
-              {/* eslint-disable-next-line i18next/no-literal-string */}
-              {layer2.value}%
-            </ZigTypography>
-          </BarContent>
+          >
+            <Overlay opacity={opacity} />
+            <BarContent subLayer={true}>
+              <ZigTypography
+                color={layers > 2 ? 'greenGraph' : 'neutral200'}
+                fontSize={fontSize}
+                fontWeight={500}
+              >
+                {/* eslint-disable-next-line i18next/no-literal-string */}
+                {layer2.value}%
+              </ZigTypography>
+            </BarContent>
+          </TierBarContainer>
+          {/* <BarContent
+            height={layer2.height}
+            subLayer={true}
+            pb={`${layer3.height}px`}
+          ></BarContent> */}
         </>
       )}
       {layer3.value > 0 && (
         <>
           <TierBarContainer
+            // opacity={showArrow ? 0.3 : opacity}
+            // opacity={opacity / 2.7}
             opacity={opacity}
             width={width}
             height={layer3.height}
             emphasis={showArrow}
             subLayer={true}
-          />
-          <BarContent height={layer3.height}>
-            <ZigTypography
-              color='neutral200'
-              fontSize={fontSize}
-              fontWeight={500}
-            >
-              {/* eslint-disable-next-line i18next/no-literal-string */}
-              {layer3.value}%
-            </ZigTypography>
-          </BarContent>
+          >
+            <Overlay opacity={opacity} />
+            <BarContent subLayer={true}>
+              <ZigTypography
+                color='neutral200'
+                fontSize={fontSize}
+                fontWeight={500}
+              >
+                {/* eslint-disable-next-line i18next/no-literal-string */}
+                {layer3.value}%
+              </ZigTypography>
+            </BarContent>
+          </TierBarContainer>
+
+          {/* <BarContent height={layer3.height} subLayer={true}></BarContent> */}
         </>
       )}
     </Box>

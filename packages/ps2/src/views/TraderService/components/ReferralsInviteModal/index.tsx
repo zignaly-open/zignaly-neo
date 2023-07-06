@@ -61,8 +61,7 @@ const ReferralsInviteModal = ({
   ];
   const { data: serviceCommission0 } = useServiceCommissionQuery({ serviceId });
   const serviceCommission = {
-    commission: 10,
-    zignaly: 5,
+    commission: 5,
   };
   const [updateComission, updateComissionLoading] =
     useUpdateServiceCommissionMutation();
