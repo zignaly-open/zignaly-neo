@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Tooltip } from '@mui/material';
-import { ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography, trimZeros } from '@zignaly-open/ui';
 import { MAX_FEES_AMOUNT, getMaxEarnings, maxCommission } from '../../util';
 import { useTranslation } from 'react-i18next';
 import { TierLevels } from 'apis/referrals/types';
@@ -9,6 +9,7 @@ import { TooltipIcon } from '../../styles';
 import TierBar from '../TierBar';
 import { TiersTableProps } from './types';
 import { StyledTd, TableItem, ItemContainer } from './styles';
+import { calculateLayerValue } from '../TierBar/util';
 
 const composeInvitesValue = (tierIndex: number, tiers: TierLevels) => {
   const currentTier = tiers[tierIndex];
@@ -29,19 +30,17 @@ const CellLabelBaseCommission = () => {
   const { t } = useTranslation('referrals-trader');
 
   return (
-    <td style={{ verticalAlign: 'bottom' }}>
-      <ZigTypography
-        fontWeight={500}
-        variant='h4'
-        textAlign='end'
-        lineHeight='24px'
-      >
-        {t('base-commission')}
-        <Tooltip title={t('zig-held-tooltip')}>
-          <TooltipIcon />
-        </Tooltip>
-      </ZigTypography>
-    </td>
+    <ZigTypography
+      fontWeight={500}
+      variant='h4'
+      textAlign='end'
+      lineHeight='24px'
+    >
+      {t('base-commission')}
+      <Tooltip title={t('zig-held-tooltip')}>
+        <TooltipIcon />
+      </Tooltip>
+    </ZigTypography>
   );
 };
 
@@ -49,19 +48,17 @@ const CellLabelBoost = () => {
   const { t } = useTranslation('referrals-trader');
 
   return (
-    <td>
-      <ZigTypography
-        fontWeight={500}
-        variant='h4'
-        textAlign='end'
-        lineHeight='24px'
-      >
-        {t('within-1-week')}
-        <Tooltip title={t('zig-held-tooltip')}>
-          <TooltipIcon />
-        </Tooltip>
-      </ZigTypography>
-    </td>
+    <ZigTypography
+      fontWeight={500}
+      variant='h4'
+      textAlign='end'
+      lineHeight='24px'
+    >
+      {t('within-1-week')}
+      <Tooltip title={t('zig-held-tooltip')}>
+        <TooltipIcon />
+      </Tooltip>
+    </ZigTypography>
   );
 };
 
@@ -69,19 +66,17 @@ const CellLabelTraderBoost = () => {
   const { t } = useTranslation('referrals-trader');
 
   return (
-    <td>
-      <ZigTypography
-        fontWeight={500}
-        variant='h4'
-        textAlign='end'
-        lineHeight='24px'
-      >
-        {t('trader-boost')}
-        <Tooltip title={t('zig-held-tooltip')}>
-          <TooltipIcon />
-        </Tooltip>
-      </ZigTypography>
-    </td>
+    <ZigTypography
+      fontWeight={500}
+      variant='h4'
+      textAlign='end'
+      lineHeight='24px'
+    >
+      {t('trader-boost')}
+      <Tooltip title={t('zig-held-tooltip')}>
+        <TooltipIcon />
+      </Tooltip>
+    </ZigTypography>
   );
 };
 
@@ -92,38 +87,38 @@ const TiersTable = ({
 }: TiersTableProps) => {
   const { t } = useTranslation(['referrals-trader', 'service']);
 
-  const composeFirstCell = () => {
-    if (serviceCommission.commission > 0 && referral.boost > 1) {
-      return <CellLabelTraderBoost />;
-    } else if (serviceCommission.commission > 0 || referral.boost > 1) {
-      return <CellLabelBoost />;
-    }
-
-    return <CellLabelBaseCommission />;
-  };
-
-  const composeSecondCell = () => {
-    if (serviceCommission.commission > 0) {
-      return <CellLabelTraderBoost />;
-    } else if (serviceCommission.commission > 0 || referral.boost > 1) {
-      return <CellLabelBaseCommission />;
-    }
-
-    return null;
-  };
-
-  const composeThirdCell = () => {
-    if (serviceCommission.commission > 1) {
-      return <CellLabelBaseCommission />;
-    }
-
-    return null;
+  const composeCellTierLabels = () => {
+    const layer1Value = calculateLayerValue(
+      1,
+      tiers[0].commissionPct,
+      referral.boost,
+      serviceCommission.commission,
+    );
+    const layer2Value = calculateLayerValue(
+      2,
+      tiers[0].commissionPct,
+      referral.boost,
+      serviceCommission.commission,
+    );
+    const layer3Value = calculateLayerValue(
+      3,
+      tiers[0].commissionPct,
+      referral.boost,
+      serviceCommission.commission,
+    );
+    return (
+      <td style={{ verticalAlign: 'bottom' }}>
+        {layer3Value > 0 && <CellLabelTraderBoost />}
+        {layer2Value !== layer1Value && <CellLabelBoost />}
+        <CellLabelBaseCommission />
+      </td>
+    );
   };
 
   return (
     <table>
       <tr>
-        {composeFirstCell()}
+        {composeCellTierLabels()}
         {tiers?.map((tier, tierIndex) => (
           <td style={{ verticalAlign: 'bottom' }} key={tier.id}>
             <Box display='flex' justifyContent='center'>
@@ -138,30 +133,6 @@ const TiersTable = ({
           </td>
         ))}
       </tr>
-      {composeSecondCell() && (
-        <tr>
-          {composeSecondCell()}
-          {tiers?.map((tier, tierIndex) => (
-            <td key={tier.id} style={{ textAlign: 'center' }}>
-              <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
-                {composeInvitesValue(tierIndex, tiers)}
-              </ZigTypography>
-            </td>
-          ))}
-        </tr>
-      )}
-      {composeThirdCell() && (
-        <tr>
-          {composeThirdCell()}
-          {tiers?.map((tier, tierIndex) => (
-            <td key={tier.id} style={{ textAlign: 'center' }}>
-              <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
-                {composeInvitesValue(tierIndex, tiers)}
-              </ZigTypography>
-            </td>
-          ))}
-        </tr>
-      )}
       <tr>
         <td>
           <ZigTypography
@@ -212,10 +183,9 @@ const TiersTable = ({
               <NumericFormat
                 value={getMaxEarnings(
                   tier.commissionPct,
-                  // todo
-                  referral.boost ?? 1,
+                  referral.boost,
                   serviceCommission,
-                )}
+                ).toFixed()}
                 displayType={'text'}
                 thousandSeparator={true}
                 prefix={'$'}

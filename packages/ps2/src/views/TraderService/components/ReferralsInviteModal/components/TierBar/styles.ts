@@ -17,7 +17,8 @@ export const TierBarContainer = styled(Box)<{
   position: relative;
   padding-top: 4px;
   overflow: hidden;
-  opacity: ${({ opacity }) => opacity * 0.52};
+  opacity: ${({ emphasis, opacity }) => opacity};
+  /* opacity: ${({ emphasis, opacity }) => opacity * (emphasis ? 0.52 : 1)}; */
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -45,9 +46,8 @@ export const TierBarContainer = styled(Box)<{
     -webkit-mask-composite: destination-out;
     mask-composite: exclude;
     background-image: linear-gradient(
-      to top,
-      rgba(22, 25, 47),
-      ${({ emphasis, opacity }) => (emphasis ? '#2ab168' : `rgb(0, 145, 121)`)}
+      ${({ emphasis, opacity }) => (emphasis ? '#2ab168' : `rgb(0, 145, 121)`)},
+      rgba(18, 33, 59, 0.52)
     );
   }
 `;

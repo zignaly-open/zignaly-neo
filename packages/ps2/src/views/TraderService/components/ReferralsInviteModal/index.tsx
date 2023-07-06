@@ -61,7 +61,7 @@ const ReferralsInviteModal = ({
   ];
   const { data: serviceCommission0 } = useServiceCommissionQuery({ serviceId });
   const serviceCommission = {
-    commission: 0,
+    commission: 10,
     zignaly: 5,
   };
   const [updateComission, updateComissionLoading] =
@@ -76,7 +76,7 @@ const ReferralsInviteModal = ({
     tierLevelId: 3,
     tierLevelFactor: 30.0,
     discountPct: 25.0,
-    boost: 1.5,
+    boost: 2,
     boostEndsAt: '2023-07-07T06:01:00',
   };
   console.log(tiers, serviceCommission, referralData);

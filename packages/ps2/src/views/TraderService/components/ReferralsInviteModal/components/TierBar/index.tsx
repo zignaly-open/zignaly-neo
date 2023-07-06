@@ -5,6 +5,8 @@ import { ZigTypography } from '@zignaly-open/ui';
 import { TierLevel } from 'apis/referrals/types';
 import { getBoostedCommissionPct } from '../../util';
 import { Box } from '@mui/material';
+import { ca } from 'date-fns/locale';
+import { calculateLayerValue } from './util';
 
 const TierBar = ({
   tier,
@@ -16,9 +18,6 @@ const TierBar = ({
   width = 60,
   showArrow = true,
   minOpacity = 0.2,
-  layer,
-  totalLayers,
-  layers = 1,
   specialBoost = false,
 }: {
   tier: TierLevel;
@@ -30,20 +29,23 @@ const TierBar = ({
   minOpacity?: number;
   boost: number;
   serviceCommission: number;
-  layer: number;
-  layers: number;
-  totalLayers: number;
   specialBoost: boolean;
 }) => {
   const min = tiers[0].commissionPct;
   const max = tiers[tiers.length - 1].commissionPct;
+  const layers =
+    serviceCommission > 0 && boost > 1
+      ? 3
+      : serviceCommission > 0 || boost > 1
+      ? 2
+      : 1;
 
   // Adjust this value to control the curve
   const power = 1.74;
   // Bar height
   const height = useMemo(
     () =>
-      minHeight +
+      minHeight * layers +
       Math.pow((tier.commissionPct - min) / (max - min), power) *
         (maxHeight - minHeight),
     [min, max, tier],
@@ -76,28 +78,41 @@ const TierBar = ({
 
   // Full layer
   const layer1 = useMemo(() => {
-    const value = getBoostedCommissionPct(tier.commissionPct, boost, 0);
+    const value = calculateLayerValue(
+      1,
+      tier.commissionPct,
+      boost,
+      serviceCommission,
+    );
     return { value };
   }, [serviceCommission, tier, boost]);
 
   const layer2 = useMemo(() => {
-    // Don't apply boost here if there is no service commission, since it will be applied in layer 1
-    const layerBoost = serviceCommission > 0 ? boost : 1;
-
-    const value = getBoostedCommissionPct(tier.commissionPct, layerBoost);
+    const value = calculateLayerValue(
+      2,
+      tier.commissionPct,
+      boost,
+      serviceCommission,
+    );
     const layerHeight = (value / layer1.value) * height;
-    return { value: value !== layer1.value ? value : 0, height: layerHeight };
+    return {
+      value: value !== layer1.value ? value : 0,
+      height: layerHeight,
+    };
   }, [serviceCommission, tier, boost, layer1]);
 
   const layer3 = useMemo(() => {
-    // Only used to show the base commission when there is a boost and service commission
-    const value = boost > 1 && serviceCommission ? tier.commissionPct : 0;
-
+    const value = calculateLayerValue(
+      3,
+      tier.commissionPct,
+      boost,
+      serviceCommission,
+    );
     const layerHeight = (value / layer1.value) * height;
     return { value: value, height: layerHeight };
   }, [serviceCommission, tier, boost, layer1]);
 
-  console.log(layer1, layer2, layer3, serviceCommission, boost);
+  console.log(layer1, layer2, layer3);
 
   return (
     <Box position='relative'>
@@ -112,7 +127,11 @@ const TierBar = ({
         </TierBarContainer>
         <BarContent height={height}>
           {showArrow && tier.commissionPct > 1 && <BoltIcon />}
-          <ZigTypography color='neutral200' fontSize={12} fontWeight={500}>
+          <ZigTypography
+            color={layers > 1 ? 'greenGraph' : 'neutral200'}
+            fontSize={12}
+            fontWeight={500}
+          >
             {/* eslint-disable-next-line i18next/no-literal-string */}
             {layer1.value}%
           </ZigTypography>
@@ -130,7 +149,7 @@ const TierBar = ({
           <BarContent height={layer2.height}>
             <ZigTypography color='neutral200' fontSize={12} fontWeight={500}>
               {/* eslint-disable-next-line i18next/no-literal-string */}
-              {tier.commissionPct}%
+              {layer2.value}%
             </ZigTypography>
           </BarContent>
         </>
@@ -147,7 +166,7 @@ const TierBar = ({
           <BarContent height={layer3.height}>
             <ZigTypography color='neutral200' fontSize={12} fontWeight={500}>
               {/* eslint-disable-next-line i18next/no-literal-string */}
-              {tier.commissionPct}%
+              {layer3.value}%
             </ZigTypography>
           </BarContent>
         </>
