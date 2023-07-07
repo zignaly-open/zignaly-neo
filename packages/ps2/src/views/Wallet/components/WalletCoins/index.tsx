@@ -87,7 +87,6 @@ const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
               onClick={() =>
                 showModal(WalletWithdrawModal, {
                   selectedCoin: original.coin,
-                  ctaId: 'wallet-table-row',
                   coins,
                 })
               }

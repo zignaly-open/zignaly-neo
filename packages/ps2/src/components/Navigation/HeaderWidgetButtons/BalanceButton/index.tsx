@@ -56,15 +56,7 @@ const BalanceButton = () => {
 
   const linkWrap = (v: React.ReactElement) =>
     balanceStatus === BalanceStatus.NoFunds ? (
-      <div
-        onClick={() =>
-          showModal(DepositModal, {
-            ctaId: 'balance-add-funds-button',
-          })
-        }
-      >
-        {v}
-      </div>
+      <div onClick={() => showModal(DepositModal)}>{v}</div>
     ) : (
       <Link
         to={generatePath(
@@ -111,10 +103,12 @@ const BalanceButton = () => {
                 color='neutral300'
                 fontSize='12px'
                 lineHeight='16px'
+                id='top-widget__portolio-label'
               >
                 {t('balance.portfolio')}
               </ZigTypography>
               <ZigPriceLabel
+                id='top-widget__portolio-amount'
                 usd
                 value={investedAmount}
                 color='neutral100'
@@ -135,10 +129,12 @@ const BalanceButton = () => {
                 color='neutral300'
                 fontSize='11px'
                 lineHeight='16px'
+                id='top-widget__available-label'
               >
                 {t('balance.available')}
               </ZigTypography>
               <ZigPriceLabel
+                id='top-widget__available-amount'
                 usd
                 value={balance.totalFreeUSDT}
                 color='neutral100'
@@ -174,6 +170,7 @@ const BalanceButton = () => {
               fontSize='11px'
               lineHeight='16px'
               sx={{ mr: 0.5 }}
+              id='top-widget__link'
             >
               {balanceStatus === BalanceStatus.NoFunds
                 ? t('balance.deposit-funds')

@@ -13,7 +13,6 @@ const Dashboard: React.FC = () => {
 
 export const DashboardModalInvestmentEdit = createZModalRouteElement({
   component: EditInvestmentModal,
-  ctaId: 'edit-investment-dashboard',
 });
 
 export default Dashboard;

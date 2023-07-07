@@ -88,7 +88,6 @@ const WalletTopPanel = ({ balances, coins }: WalletTopPanelProps) => {
           variant='outlined'
           onClick={() => {
             showModal(WalletWithdrawModal, {
-              ctaId: 'withdraw-zig',
               coins,
               selectedCoin: 'ZIG',
             });

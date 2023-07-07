@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react';
 import { useCurrentUser } from '../../../apis/user/use';
-import { track, trackCta } from '@zignaly-open/tracker';
+import { track, trackClick } from '@zignaly-open/tracker';
 import { useLocation } from 'react-router-dom';
 import { trackPage } from 'util/analytics';
 
 const Tracker: React.FC = () => {
   const { userId } = useCurrentUser();
   const location = useLocation();
-  const navigationCtaId = (location.state as { ctaId?: string })?.ctaId || null;
 
   useEffect(() => {
     const clickListener = (e: MouseEvent) => {
@@ -20,7 +19,7 @@ const Tracker: React.FC = () => {
           const noAutoTrack = node.getAttribute('data-no-auto-track');
           ctaId &&
             !noAutoTrack &&
-            trackCta({
+            trackClick({
               userId,
               ctaId,
             });
@@ -30,14 +29,14 @@ const Tracker: React.FC = () => {
         }
       } while (node);
     };
-    document.addEventListener('click', clickListener);
-    return () => document.removeEventListener('click', clickListener);
+    document.addEventListener('mouseup', clickListener);
+    return () => document.removeEventListener('mouseup', clickListener);
   }, [userId]);
 
   useEffect(() => {
-    track({ userId, ctaId: navigationCtaId });
+    track({ userId });
     trackPage();
-  }, [location.pathname, userId, navigationCtaId]);
+  }, [location.pathname, userId]);
 
   return null;
 };

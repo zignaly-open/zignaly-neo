@@ -1,14 +1,13 @@
-import React, { ComponentType, useEffect, useRef } from 'react';
+import React, { ComponentType, useEffect } from 'react';
 import { generatePath, useNavigate, useParams } from 'react-router-dom';
 import { useZModal } from './use';
 import { UseModalOptions } from 'mui-modal-provider';
 
 export const ZModalRouteElement: React.FC<{
   bgRoute: string;
-  ctaId?: string;
   component: ComponentType;
   options?: UseModalOptions;
-}> = ({ bgRoute, component, ctaId, options }) => {
+}> = ({ bgRoute, component, options }) => {
   const navigate = useNavigate();
   const params = useParams();
   const { showModal } = useZModal({
@@ -23,24 +22,19 @@ export const ZModalRouteElement: React.FC<{
     ...(options || {}),
   });
 
-  // fix for local double mount
-  const initialized = useRef(false);
+  // sometimes 2 modals would open due in dev mode
+  // this if fine, this is react 18
   useEffect(() => {
-    if (!initialized.current) {
-      initialized.current = true;
-      showModal(component, { ctaId, ...params });
-    }
+    showModal(component, params);
   }, []);
   return null;
 };
 
 const createZModalRouteElement = ({
   component,
-  ctaId,
   options,
 }: {
   component: ComponentType;
-  ctaId?: string;
   options?: UseModalOptions;
 }): React.FC<{ bgRoute: string }> => {
   return ({ bgRoute }) => (
@@ -48,7 +42,6 @@ const createZModalRouteElement = ({
       bgRoute={bgRoute}
       component={component}
       options={options}
-      ctaId={ctaId}
     />
   );
 };

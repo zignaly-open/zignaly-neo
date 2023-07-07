@@ -43,18 +43,13 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
             Invite
           </ZigButton>
           {isAuthenticated && isInvested.thisAccount ? (
-            <InvestedButton
-              prefixId={'service-profile'}
-              service={service}
-              ctaId={'service-profile-invested-button'}
-            />
+            <InvestedButton prefixId={'service-profile'} service={service} />
           ) : (
             <InvestButton
               modalRoute={ROUTE_PROFIT_SHARING_SERVICE_INVEST}
               prefixId={'service-profile'}
               showMultipleAccountButton
               service={service}
-              ctaId={'service-profile-invest-button'}
             />
           )}
         </Box>

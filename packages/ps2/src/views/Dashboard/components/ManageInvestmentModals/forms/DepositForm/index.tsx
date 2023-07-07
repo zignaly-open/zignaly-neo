@@ -31,7 +31,7 @@ import {
   useCurrentUser,
 } from '../../../../../../apis/user/use';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
-import { trackCta } from '@zignaly-open/tracker';
+import { trackClick } from '@zignaly-open/tracker';
 import {
   BUY_CRYPTO_URL,
   DEPOSIT_INFO_URL,
@@ -76,7 +76,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
   const network = watch('network');
 
   useEffect(() => {
-    network && trackCta({ ctaId: 'select-network' });
+    network && trackClick({ ctaId: 'select-network' });
   }, [network]);
 
   const coinOptions = useMemo(
@@ -114,7 +114,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
   );
 
   useEffect(() => {
-    depositInfo && trackCta({ ctaId: 'show-deposit-info' });
+    depositInfo && trackClick({ ctaId: 'show-deposit-info' });
   }, [depositInfo]);
 
   const coinObject = coin && coinOptions?.find((x) => x.value === coin);
@@ -275,9 +275,9 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                   loading ? t('depositAddress.loading') : depositInfo?.address
                 }
                 onCopied={() => {
-                  trackCta({
+                  trackClick({
                     userId,
-                    ctaId: 'copy-deposit-address',
+                    ctaId: 'deposit-modal__deposit-address',
                   });
                   toast.success(t('depositAddress.copied'));
                 }}
@@ -299,9 +299,9 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                   label={t('depositMemo.label')}
                   value={loading ? t('depositMemo.loading') : depositInfo?.tag}
                   onCopied={() => {
-                    trackCta({
+                    trackClick({
                       userId,
-                      ctaId: 'copy-deposit-memo',
+                      ctaId: 'deposit-modal__deposit-memo',
                     });
                     toast.success(t('depositMemo.copied'));
                   }}

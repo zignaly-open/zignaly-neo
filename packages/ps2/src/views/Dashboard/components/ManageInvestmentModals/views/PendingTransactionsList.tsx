@@ -66,6 +66,7 @@ const PendingTransactionsList: React.FC<{
           columns={
             [
               {
+                id: 'Amount',
                 header: (
                   <Box position={'relative'} padding={'5px 15px'}>
                     <Tooltip
