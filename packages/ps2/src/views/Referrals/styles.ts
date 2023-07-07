@@ -1,4 +1,3 @@
-import { InfoOutlined } from '@mui/icons-material';
 import { Box, Grid, Paper, styled } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
 
@@ -126,36 +125,6 @@ export const TierBox = styled(Box)`
   background-color: ${({ theme }) => theme.palette.neutral600}4d;
   border: 1px solid ${({ theme }) => theme.palette.neutral700};
   margin-left: 60px;
-`;
-
-export const BoostBox = styled(Box)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 10px 0 18px;
-  padding: 6px 16px 6.5px 22px;
-  border-radius: 5px;
-  background-color: ${({ theme }) => theme.palette.greenGraph}1a;
-
-  .MuiTypography-root {
-    color: rgba(38, 196, 150, 0.9);
-    margin-right: 10px;
-    font-weight: 500;
-  }
-`;
-
-export const BoostChipBox = styled(BoostBox)`
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  margin: 0;
-  padding: 4px 9px;
-  border-radius: 24px;
-
-  .MuiTypography-root {
-    margin-left: 6px;
-    margin-right: 0;
-  }
 `;
 
 export const TierBarStyle = styled('div')`

@@ -12,20 +12,21 @@ import { TierLevel } from 'apis/referrals/types';
 import { getBoostedCommissionPct } from '../../util';
 import { Box } from '@mui/material';
 import { ca } from 'date-fns/locale';
-import { calculateLayerValue } from './util';
+import { calculateLayerValue, useTierLayers } from './util';
 import { TierBarProps } from './types';
 
-const BOLT_SPACE = 18;
 const MIN_HEIGHT = 48;
 const MULTIPLIER = 1.7;
+export const DEFAULT_MIN_HEIGHT = 32;
+export const DEFAULT_MAX_HEIGHT = 240;
 
 const TierBar = ({
   tier,
   serviceCommission,
   referral,
   tiers,
-  minHeight = 32,
-  maxHeight = 240,
+  minHeight = DEFAULT_MIN_HEIGHT,
+  maxHeight = DEFAULT_MAX_HEIGHT,
   width = 60,
   showArrow = true,
   minOpacity = 0.2,
@@ -37,14 +38,14 @@ const TierBar = ({
   const boost = referral?.boost;
   const min = tiers[0].commissionPct;
   const max = tiers[tiers.length - 1].commissionPct;
+
+  // replace by number of layers returned by hook?
   const layers =
     serviceCommission > 0 && boost > 1
       ? 3
       : serviceCommission > 0 || boost > 1
       ? 2
       : 1;
-  const minHeightConstraints =
-    layers * minHeight + (layers > 1 ? BOLT_SPACE : 0);
 
   // Bar opacity
   const opacityPower = 0.9;
@@ -55,12 +56,11 @@ const TierBar = ({
         (maxOpacity - minOpacity),
     [min, max, tier],
   );
-  console.log(opacity);
 
-  const mul = useMemo(
-    () => 1 + Math.pow((tier.commissionPct - min) / (max - min), 1) * (1 - 0),
-    [min, max, tier],
-  );
+  // const mul = useMemo(
+  //   () => 1 + Math.pow((tier.commissionPct - min) / (max - min), 1) * (1 - 0),
+  //   [min, max, tier],
+  // );
 
   // Bar font size
   const fontSizePower = 0.9;
@@ -87,64 +87,22 @@ const TierBar = ({
       : 0;
   }, [min, max, tier]);
 
-  // Layer 1 (Full bar)
-  const layer1 = useMemo(() => {
-    const value = calculateLayerValue(
-      1,
-      tier.commissionPct,
-      boost,
-      serviceCommission,
-    );
-    // const lastLayer = layers === 3 ? layer3 : layers === 2 ? layer2 : null;
-
-    // Adjust this value to control the curve
-    const power = 1;
-    const height =
-      minHeightConstraints +
-      Math.pow((tier.commissionPct - min) / (max - min), power) *
-        (maxHeight - minHeightConstraints);
-    console.log(minHeightConstraints);
-    return { value, height };
-  }, [min, max, serviceCommission, tier, boost]);
-
-  const layer2 = useMemo(() => {
-    const value = calculateLayerValue(
-      2,
-      tier.commissionPct,
-      boost,
-      serviceCommission,
-    );
-    const height = (value / layer1.value) * layer1.height;
-
-    return {
-      value: value !== layer1.value ? value : 0,
-      height: Math.max(height, minHeight * (layers - 1)),
-    };
-  }, [serviceCommission, tier, boost, layer1]);
-
-  const layer3 = useMemo(() => {
-    const value = calculateLayerValue(
-      3,
-      tier.commissionPct,
-      boost,
-      serviceCommission,
-    );
-    // const height =
-    //   Math.min(value / layer1.value, 0.25) * layer1.height * MULTIPLIER;
-    const height = (value / layer1.value) * layer1.height;
-    return {
-      value: value,
-      height: Math.max(height, minHeight * (layers - 2)),
-    };
-  }, [serviceCommission, tier, boost, layer1]);
+  const [layer1, layer2, layer3] = useTierLayers(
+    tier.commissionPct,
+    boost,
+    serviceCommission,
+    { min, max, minHeight, maxHeight },
+  );
 
   // if (referral.tierLevelId === tier.id) {
   //   console.log(layer1, layer2, layer3);
   // }
   console.log(`\n---\nTier ${tier.id}:`);
   console.table([layer1, layer2, layer3]);
+
   // Due to using absolute positioning for the bar content (to not apply the opacity to the text / icon),
   // we need to set a min height for the container, which need to be larger if there is a bolt icon (more than 1 layer?)
+  // todo: still needed?
   const layer1MinHeight = layers > 1 ? layer2.height + 48 : 0;
 
   return (
