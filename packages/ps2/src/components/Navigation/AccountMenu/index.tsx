@@ -182,7 +182,7 @@ function AccountMenu(): React.ReactElement | null {
         {
           element: (
             <ZigButton
-              id={'invest-form__deposit'}
+              id={'account-menu-deposit'}
               startIcon={<ZigPlusIcon width={10} height={10} />}
               sx={{ fontWeight: 600, mt: '10px', mb: '12px' }}
               variant={'contained'}

@@ -349,10 +349,27 @@ const darkMui = createTheme({
           ".MuiTypography-root": {
             textTransform: "none",
           },
-          color: palette.neutral000,
+          color: dark.neutral000,
           background: backgrounds.buttonPrimary,
-          "&:hover, &.MuiButton-active": {
-            background: backgrounds.buttonPrimaryHover,
+          position: "relative",
+          overflow: "hidden",
+          "&:first-child": {
+            zIndex: 1,
+            position: "relative",
+          },
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: 0,
+            zIndex: -1,
+            height: "100%",
+            background: "rgba(0, 0, 0, .1)",
+            transition: "width 0.5s",
+          },
+          "&:hover::before, &.MuiButton-active::before": {
+            width: "100%",
           },
           "&.Mui-disabled": {
             opacity: 0.33,

@@ -262,7 +262,7 @@ const ZigDrawer = () => {
               {isAuthenticated && (
                 <ListItem>
                   <ZigButton
-                    id={'my-portfolio__deposit'}
+                    id={'account-menu-deposit'}
                     startIcon={<ZigPlusIcon width={10} height={10} />}
                     sx={{ fontWeight: 600, mb: 1 }}
                     variant={'contained'}
