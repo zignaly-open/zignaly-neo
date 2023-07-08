@@ -13,7 +13,7 @@ import {
 import { Trans, useTranslation } from 'react-i18next';
 import { SwapFormData, SwapFormProps } from './types';
 import { useGenerateBuyPriceQuery } from 'apis/wallet/api';
-import { track } from '@zignaly-open/tracker';
+import { trackClick } from '@zignaly-open/tracker';
 import { SwapValidation } from './validation';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { differenceInMinutes, fromUnixTime } from 'date-fns';
@@ -146,7 +146,7 @@ const SwapForm = ({
                   {...field}
                   onChange={(value) => {
                     field.onChange(value);
-                    track({ ctaId: 'select-account-zig' });
+                    trackClick({ ctaId: 'select-account-zig' });
                   }}
                 />
               )}

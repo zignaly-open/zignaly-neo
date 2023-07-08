@@ -28,7 +28,7 @@ import { useZModal } from '../../../../../../components/ZModal/use';
 import { AmountInvested } from '../EditInvestmentForm/atoms';
 import { Field, ZigInputWrapper } from './styles';
 import { NumericFormat } from 'react-number-format';
-import { trackCta } from '@zignaly-open/tracker';
+import { trackClick } from '@zignaly-open/tracker';
 import { useDebounce } from 'react-use';
 import { InvestmentViews } from '../../types';
 
@@ -83,7 +83,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
 
   useDebounce(
     () => {
-      trackCta({ ctaId: 'reinvest-amount-change' });
+      +reinvestAmount && trackClick({ ctaId: 'reinvest-amount-change' });
     },
     300,
     [reinvestAmount],
@@ -92,7 +92,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
   const hasAgreedToAll = watch('understandRisk');
 
   useEffect(() => {
-    hasAgreedToAll && trackCta({ ctaId: 'agreed-to-all' });
+    hasAgreedToAll && trackClick({ ctaId: 'agreed-to-all' });
   }, [hasAgreedToAll]);
 
   const onSubmitSecondStep = async ({
@@ -124,7 +124,6 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
       variant={'text'}
       onClick={() =>
         showModal(DepositModal, {
-          ctaId: 'invest-modal__deposit',
           selectedCoin: coin.id,
           // Callback to close the modal if user navigates to history from the deposit modal
           onClose: close,
@@ -241,7 +240,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
         rules={{ required: true }}
         render={({ field }) => (
           <ZigInputAmount
-            onMax={() => trackCta({ ctaId: 'invest-max' })}
+            onMax={() => trackClick({ ctaId: 'invest-max' })}
             id={'invest-modal__input-amount'}
             label={t('form.inputAmount.label')}
             wide={true}

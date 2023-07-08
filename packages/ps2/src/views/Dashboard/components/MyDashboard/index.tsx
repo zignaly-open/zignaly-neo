@@ -236,11 +236,7 @@ const MyDashboard: React.FC = () => {
                     startIcon={<ZigPlusIcon width={10} height={10} />}
                     sx={{ fontWeight: 600, mb: 1 }}
                     variant={'contained'}
-                    onClick={() =>
-                      showModal(DepositModal, {
-                        ctaId: 'my-portfolio__deposit',
-                      })
-                    }
+                    onClick={() => showModal(DepositModal)}
                   >
                     {t('action:deposit')}
                   </ZigButton>
