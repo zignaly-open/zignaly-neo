@@ -1,0 +1,13 @@
+name: PS2 Criptomaniacos
+on:
+  push:
+    branches:
+      - feat/whitelabel
+
+jobs:
+  deploy:
+    name: PS2 Criptomaniacos deploy
+    uses: ./.github/workflows/ps2-deploy.yml
+    secrets: inherit
+    with:
+      deploy-env: criptomaniacos

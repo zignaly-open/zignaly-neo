@@ -71,7 +71,7 @@
       },
       "item3": {
         "title": "Split Profits",
-        "description": "Choose your desired success fee. Zignaly's share is always 5% which must be included."
+        "description": "Choose your desired success fee. Zignaly's share is always {{ zignalyFee }}% which must be included."
       }
     }
   }

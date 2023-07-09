@@ -9,6 +9,9 @@ import {
   ZigTable,
   createColumnHelper,
   ZigTablePriceLabel,
+  ZigDropdown,
+  ZigDotsVerticalIcon,
+  dark,
 } from '@zignaly-open/ui';
 import {
   useTraderServiceInvestors,
@@ -21,12 +24,17 @@ import {
 } from '../../../../apis/service/types';
 import ConnectionStateLabel from '../ConnectionStateLabel';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
-import { Box } from '@mui/material';
+import { Box, IconButton, Tooltip } from '@mui/material';
 import { TraderServicePageContainer } from '../styles';
+import { useZModal } from '../../../../components/ZModal/use';
+import InvestorEditFee from '../InvestorEditFee/InvestorEditFee';
+import { getServiceTotalFee, getServiceZignalyFee } from '../../../../util/fee';
+import { useToast } from '../../../../util/hooks/useToast';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
 }) => {
+  const { showModal } = useZModal();
   const investorsEndpoint = useTraderServiceInvestors(serviceId);
   const serviceDetailsEndpoint = useServiceDetails(serviceId);
   const managementEndpoint = useTraderServiceManagement(serviceId);
@@ -34,8 +42,8 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   const { data: service } = serviceDetailsEndpoint;
 
   const { t } = useTranslation('investors');
-
-  const columnHelper = createColumnHelper<Investor & { successFee: string }>();
+  const toast = useToast();
+  const columnHelper = createColumnHelper<Investor>();
   const columns = useMemo(() => {
     return [
       columnHelper.accessor('email', {
@@ -100,19 +108,83 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           />
         ),
       }),
-      columnHelper.accessor('successFee', {
+      columnHelper.accessor('ownerSuccessFee', {
         header: t('tableHeader.successFee'),
-        cell: (props) => `${props.getValue()}%`,
+        cell: ({
+          row: {
+            original: { ownerSuccessFee, ownerSfDiscount },
+          },
+        }) => (
+          <Tooltip
+            title={t(
+              `success-fee-explainer${ownerSfDiscount ? '-with-discount' : ''}`,
+              {
+                discounted: ownerSuccessFee,
+                owner: ownerSuccessFee + ownerSfDiscount,
+                zignalyFee: getServiceZignalyFee(ownerSuccessFee),
+                discount: ownerSfDiscount,
+              },
+            )}
+          >
+            <ZigTypography>
+              {/* eslint-disable-next-line i18next/no-literal-string */}
+              {getServiceTotalFee(ownerSuccessFee)}%
+            </ZigTypography>
+          </Tooltip>
+        ),
       }),
       columnHelper.accessor('accountType', {
         header: t('tableHeader.status'),
         cell: (props) => <ConnectionStateLabel stateId={props.getValue()} />,
       }),
+      columnHelper.accessor('actions', {
+        header: '',
+        enableSorting: false,
+        cell: ({
+          row: {
+            original: {
+              account_id: accountId,
+              ownerSfDiscount,
+              ownerSuccessFee,
+            },
+          },
+        }) => (
+          <ZigDropdown
+            component={() => (
+              <IconButton>
+                <ZigDotsVerticalIcon
+                  color={dark.neutral200}
+                  height={16}
+                  width={16}
+                />
+              </IconButton>
+            )}
+            options={[
+              {
+                label: t('change-fee'),
+                onClick: () => {
+                  if ((service?.successFee || 0) > 0) {
+                    showModal(InvestorEditFee, {
+                      serviceId,
+                      accountId,
+                      ownerSuccessFee,
+                      ownerSfDiscount,
+                    });
+                  } else {
+                    toast.error(t('change-fee-modal.already-0'));
+                  }
+                },
+              },
+            ]}
+          />
+        ),
+      }),
     ];
-  }, []);
+  }, [service]);
 
   return (
     <LayoutContentWrapper
+      unmountOnRefetch
       endpoint={[investorsEndpoint, managementEndpoint, serviceDetailsEndpoint]}
       content={([investors, management]: [
         Investor[],
