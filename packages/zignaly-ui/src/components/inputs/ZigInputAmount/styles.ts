@@ -22,7 +22,7 @@ export const Layout = styled(Box)<{ error: boolean; labelInline: boolean }>`
   && {
     .MuiInput-root {
       padding: 2px 24px;
-      background: #171b30;
+      background: ${({ theme }) => theme.palette.neutral750};
       border: none;
     }
 
@@ -30,7 +30,7 @@ export const Layout = styled(Box)<{ error: boolean; labelInline: boolean }>`
       font-size: 30px;
       font-weight: 500;
       border-color: ${({ theme }) => theme.palette.neutral400};
-      background: #171b30;
+      background: ${({ theme }) => theme.palette.neutral750};
       -webkit-text-fill-color: #878dd1 !important;
     }
   }

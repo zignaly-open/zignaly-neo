@@ -3,8 +3,9 @@ import Theme from "./theme";
 const dark: Theme = {
   mode: "dark",
   palette: {
-    neutral800: "#06061A",
-    neutral750: "#12152c",
+    neutral900: "#06061A",
+    neutral800: "#12152c",
+    neutral750: "#171b30",
     neutral700: "#252339",
     neutral600: "#35334A",
     neutral500: "#4A4958",
@@ -34,8 +35,9 @@ const dark: Theme = {
 const ugly: Theme = {
   mode: "light",
   palette: {
-    neutral800: "#fba9a5",
-    neutral750: "#fa7f79",
+    neutral900: "#fba9a5",
+    neutral800: "#fa7f79",
+    neutral750: "#F96860",
     neutral700: "#F75850",
     neutral600: "#f55047",
     neutral500: "#F42015",

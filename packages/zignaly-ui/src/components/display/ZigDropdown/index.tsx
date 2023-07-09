@@ -94,7 +94,7 @@ const ZigDropdown: (
           PaperProps={{
             sx: {
               minWidth: "220px",
-              backgroundColor: dark.palette.neutral750,
+              backgroundColor: dark.palette.neutral800,
               whiteSpace: "nowrap",
               color: "#fff",
               boxShadow: "0 4px 6px -2px #00000061",

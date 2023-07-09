@@ -50,6 +50,6 @@ export const SuccessFieldReceive = styled(Box)`
   position: relative;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
-  background: #171b30;
+  background: ${({ theme }) => theme.palette.neutral750};
   margin-left: -4px;
 `;

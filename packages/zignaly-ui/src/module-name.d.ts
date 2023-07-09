@@ -3,6 +3,7 @@ import React from "react";
 
 declare module "@mui/material/styles" {
   interface CustomPalette {
+    neutral900: string;
     neutral800: string;
     neutral750: string;
     neutral700: string;
@@ -51,6 +52,7 @@ declare module "@mui/material/Button" {
   interface ButtonPropsColorOverrides {
     danger: true;
     success: true;
+    neutral900: true;
     neutral800: true;
     neutral750: true;
     neutral700: true;
@@ -79,8 +81,8 @@ declare module "@mui/material/SvgIcon" {
   export interface SvgIconPropsColorOverrides {
     danger: true;
     success: true;
+    neutral900: true;
     neutral800: true;
-    neutral750: true;
     neutral700: true;
     neutral600: true;
     neutral500: true;
@@ -105,6 +107,7 @@ declare module "@mui/material/SvgIcon" {
 
 declare module "@emotion/react" {
   export interface Theme extends MuiTheme {
+    neutral900: string;
     neutral800: string;
     neutral750: string;
     neutral700: string;

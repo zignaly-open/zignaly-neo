@@ -17,10 +17,10 @@ export const HeaderDropdownButton = styled('button', {
   justify-content: space-around;
   text-align: center;
   background: ${(props) =>
-    props.active ? props.theme.palette.neutral750 : 'transparent'};
+    props.active ? props.theme.palette.neutral800 : 'transparent'};
 
   &:hover {
-    background: ${({ theme }) => theme.palette.neutral750};
+    background: ${({ theme }) => theme.palette.neutral800};
   }
 
   transition: background-color 0.2s;

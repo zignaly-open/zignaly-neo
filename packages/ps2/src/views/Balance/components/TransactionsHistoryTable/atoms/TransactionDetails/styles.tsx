@@ -3,7 +3,7 @@ import { styled } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
 
 export const TransactionPanel = styled('div')`
-  background: ${({ theme }) => theme.palette.neutral800};
+  background: ${({ theme }) => theme.palette.neutral900};
   border-radius: 8px;
   display: flex;
   flex-direction: column;

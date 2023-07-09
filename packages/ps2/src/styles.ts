@@ -4,16 +4,22 @@ import { NiceScrollbar } from '@zignaly-open/ui';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { isWebpSupported } from 'react-image-webp/dist/utils';
+import { whitelabel } from './whitelabel';
 
 // Copied from webapp-neo
 const GlobalStyle = createGlobalStyle`
 body {
     padding: 0;
     margin: 0;
-    background-color: #070819;
-    background-image: url("/background-dark.${
-      isWebpSupported() ? 'webp' : 'png'
-    }");
+    background-color: ${whitelabel.background || '#070819'};
+    background-image: ${
+      whitelabel.backgroundImage === null
+        ? 'none'
+        : `url("${
+            whitelabel.backgroundImage ||
+            `/background-dark.${isWebpSupported() ? 'webp' : 'png'}`
+          }")`
+    };
     background-repeat: no-repeat;
     background-size: cover;
     font-family: 'Avenir Next', sans-serif;

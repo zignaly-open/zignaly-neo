@@ -101,7 +101,7 @@ export const DropDown = styled.div<any>`
   overflow: auto;
 
   ${(props: any) => `
-    background: ${props.theme.palette.neutral750};
+    background: ${props.theme.palette.neutral800};
     max-height: ${props.maxHeight ?? "200px"};
   `}
 

@@ -19,7 +19,7 @@ export const Box = styled('div')`
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
-  background: ${({ theme }) => theme.palette.neutral750};
+  background: ${({ theme }) => theme.palette.neutral800};
   border: 1px solid ${({ theme }) => theme.palette.neutral600};
   box-shadow: inset 0 0 0 1px ${({ theme }) => theme.palette.neutral600};
 

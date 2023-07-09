@@ -79,7 +79,7 @@ export const ZigButtonGroup = styled(ButtonGroup)`
       z-index: 3;
       border-color: #464a85 !important;
       border-radius: 5px;
-      background: #171b30;
+      background: ${({ theme }) => theme.palette.neutral750};
       color: ${({ theme }) => theme.palette.highlighted};
 
       + button,

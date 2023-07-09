@@ -15,4 +15,6 @@ export default {
   mainAppLink: ROUTE_DASHBOARD,
   // I do not give 1 fcuk that this image is 500kb because we do not load it
   logo: '/images/whitelabel/doge.png',
+  background: '#fcdcdc',
+  backgroundImage: null,
 } as WhitelabelOverride;

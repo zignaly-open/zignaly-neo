@@ -1,5 +1,6 @@
 interface Theme {
   palette: {
+    neutral900: string;
     neutral800: string;
     neutral750: string;
     neutral700: string;

@@ -16,4 +16,6 @@ export type WhitelabelOverride = {
   xSource?: string;
   mainAppLink?: string;
   logo?: string;
+  background?: string;
+  backgroundImage?: string | null;
 };
