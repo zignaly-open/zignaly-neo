@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 
 export const InputContainer = styled.div`
   position: relative;
-  border: 1px solid #35334a;
+  border: 1px solid ${(props) => `${props.theme.palette.neutral600}`};
   padding: 8px 18px;
   border-radius: 5px;
   display: flex;
@@ -43,7 +43,7 @@ export const BalanceLabel = muiStyled(ZigTypography)`
 `;
 
 export const MaxButton = styled.div`
-  border: 1px solid #35334a;
+  border: 1px solid ${(props) => `${props.theme.palette.neutral600}`};
   padding: 8px 18px;
   background: #1012254d;
   color: #89899a;

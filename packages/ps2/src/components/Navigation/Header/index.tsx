@@ -41,6 +41,7 @@ const Header: React.FC = () => {
                 {!logoRoute.startsWith('http') ? (
                   <NavigationLink
                     id='menu__logo'
+                    style={{ display: 'flex' }}
                     to={logoRoute}
                     key='--route-main'
                   >

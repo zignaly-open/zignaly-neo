@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
 import { Tabs } from "@mui/material";
+import { dark } from "../../../theme";
 
 export const ZigTabs = styled(Tabs)`
   .MuiTabs-indicator {
-    background: linear-gradient(289.8deg, #149cad 0%, #4540c1 100%);
+    background: ${dark.backgrounds.buttonPrimary};
     border-radius: 6px;
   }
 

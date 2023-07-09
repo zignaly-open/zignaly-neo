@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Oval } from "react-loader-spinner";
 import { Box } from "@mui/system";
+import { dark } from "../../../theme";
 
 export const Loader: React.FC<{
   width?: number;
@@ -10,7 +11,7 @@ export const Loader: React.FC<{
     <Oval
       width={width + "px"}
       height={height + "px"}
-      color={"#fff"}
+      color={dark.backgrounds.loader}
       secondaryColor={"rgba(255, 255, 255, 0.2)"}
       ariaLabel={"Loading..."}
     />

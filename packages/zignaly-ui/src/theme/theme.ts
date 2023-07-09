@@ -23,7 +23,19 @@ interface Theme {
 
     almostWhite: string;
   };
-  backgrounds: Partial<Record<"buttonPrimary" | "buttonPrimaryHover" | "header" | "input", string>>;
+  backgrounds: Partial<
+    Record<
+      | "tableRow"
+      | "tableHeader"
+      | "buttonPrimary"
+      | "loader"
+      | "buttonPrimaryHover"
+      | "header"
+      | "input",
+      string
+    >
+  >;
+  boxShadows: Partial<Record<"tableHeader" | "header" | "button", string>>;
   mode: "dark" | "light";
 }
 

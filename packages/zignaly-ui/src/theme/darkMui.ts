@@ -43,7 +43,7 @@ const darkMui = createTheme({
       styleOverrides: {
         root: {
           border: `1px solid ${palette.neutral600}`,
-          background: "rgba(16, 18, 37)",
+          background: palette.neutral800,
           color: palette.neutral200,
         },
       },
@@ -56,7 +56,7 @@ const darkMui = createTheme({
           border-radius: 5px;
           display: flex;
           align-items: center;
-          background: rgba(16, 18, 37);
+          background: ${palette.neutral800};
           background: ${backgrounds.input};
           transition: border-color 0.2s;
           
@@ -160,7 +160,7 @@ const darkMui = createTheme({
       styleOverrides: {
         root: `
             background: ${backgrounds.header};
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 8px ${dark.boxShadows.header};
             display: flex;
             align-items: center;
             flex-direction: row;
@@ -339,7 +339,9 @@ const darkMui = createTheme({
           },
         },
         contained: {
-          boxShadow: "0px 12px 16px -8px rgba(25, 25, 39, 0.36)",
+          "&, &:hover": {
+            boxShadow: `0px 12px 16px -8px ${dark.boxShadows.button}`,
+          },
           transition: "all 0.3s linear",
           fontWeight: 600,
           letterSpacing: "1.1px",

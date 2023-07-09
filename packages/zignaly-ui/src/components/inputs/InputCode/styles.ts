@@ -34,7 +34,7 @@ export const Layout = styled.div<{ error?: string; loading?: boolean }>`
       background: #0f1124;
       background: linear-gradient(90deg, #0f1124 0%, #0f1124 35%, #0f1124 100%);
       border-radius: 8px;
-      border: 1px solid #35334a !important;
+      border: 1px solid ${(props) => `${props.theme.palette.neutral600}`} !important;
       color: ${(props) => `${props.theme.palette.neutral100}`};
       font-family: "Avenir Next", "Red Hat Text", sans-serif;
       width: 64px !important;

@@ -27,8 +27,16 @@ const dark: Theme = {
   },
   backgrounds: {
     header: "linear-gradient(269.14deg, #080810 0%, #11122b 100%)",
+    tableHeader: "#08081d",
+    tableRow: "#13122566",
+    loader: "#fff",
     buttonPrimary: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
     input: "linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%)",
+  },
+  boxShadows: {
+    tableHeader: "#16192b",
+    button: "rgba(25, 25, 39, 0.36)",
+    header: "rgba(0, 0, 0, 0.5)",
   },
 };
 
@@ -61,7 +69,15 @@ const ugly: Theme = {
     header: "linear-gradient(269.14deg, #ffcccc 0%, #eebbbb 100%)",
     buttonPrimary: "linear-gradient(289.8deg, #f99 0%, #f9f 100%)",
     buttonPrimaryHover: "linear-gradient(#fcc,#fcf)",
+    tableHeader: "#f88",
+    loader: "#f9a",
+    tableRow: "#ff999966",
     input: "linear-gradient(90deg, rgb(255 230 200) 0%, rgb(255 200 200) 100%)",
+  },
+  boxShadows: {
+    tableHeader: "#fcc",
+    button: "#ffffffaa",
+    header: "rgba(255, 255, 255, 0.3)",
   },
 };
 
