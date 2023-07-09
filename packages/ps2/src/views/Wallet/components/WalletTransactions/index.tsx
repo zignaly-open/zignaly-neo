@@ -71,7 +71,7 @@ const WalletTransactions = () => {
       columnHelper.accessor('type', {
         header: t('transactions.header.type'),
         cell: ({ getValue }) => (
-          <ZigTypography color='almostWhite'>
+          <ZigTypography color='contrasting'>
             {t(
               `transactions.type.${getValue().replace(/_/g, '').toLowerCase()}`,
             )}
@@ -83,7 +83,7 @@ const WalletTransactions = () => {
         header: t('transactions.header.amount'),
         enableSorting: false,
         cell: ({ getValue, row: { original } }) => (
-          <ZigTypography color='almostWhite'>
+          <ZigTypography color='contrasting'>
             <ZigTablePriceLabel
               alwaysShowSign
               value={original.type === 'withdraw' ? -getValue() : getValue()}
@@ -117,13 +117,13 @@ const WalletTransactions = () => {
               alignItems='center'
               justifyContent='center'
               gap={1}
-              color='almostWhite'
+              color='contrasting'
             >
               <ChainIcon network={getValue()} />
               {original.networkName}
             </ZigTypography>
           ) : (
-            <ZigTypography color='almostWhite'>
+            <ZigTypography color='contrasting'>
               {t('transactions.internal')}
             </ZigTypography>
           ),

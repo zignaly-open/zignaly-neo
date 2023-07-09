@@ -21,7 +21,7 @@ interface Theme {
     yellow: string;
     red: string;
 
-    almostWhite: string;
+    contrasting: string;
   };
   backgrounds: Partial<
     Record<
@@ -37,6 +37,16 @@ interface Theme {
   >;
   boxShadows: Partial<Record<"tableHeader" | "header" | "button", string>>;
   mode: "dark" | "light";
+  chart: Record<
+    | "greenGradient"
+    | "greenMiniGradient"
+    | "redGradient"
+    | "redMiniGradient"
+    | "greenCard"
+    | "redCard",
+    string[]
+  > &
+    Record<"red" | "green", string>;
 }
 
 export default Theme;

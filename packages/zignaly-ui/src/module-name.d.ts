@@ -24,7 +24,7 @@ declare module "@mui/material/styles" {
     yellow: string;
     red: string;
 
-    almostWhite: string;
+    contrasting: string;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -73,7 +73,7 @@ declare module "@mui/material/Button" {
     yellow: true;
     red: true;
 
-    almostWhite: true;
+    contrasting: true;
   }
 }
 
@@ -101,7 +101,7 @@ declare module "@mui/material/SvgIcon" {
     yellow: true;
     red: true;
 
-    almostWhite: true;
+    contrasting: true;
   }
 }
 
@@ -128,6 +128,6 @@ declare module "@emotion/react" {
     yellow: string;
     red: string;
 
-    almostWhite: string;
+    contrasting: string;
   }
 }

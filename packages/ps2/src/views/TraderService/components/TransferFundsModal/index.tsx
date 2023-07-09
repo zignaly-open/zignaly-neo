@@ -20,7 +20,7 @@ import {
 import { useToast } from '../../../../util/hooks/useToast';
 import ZModal, { Form, ModalActions } from 'components/ZModal';
 import { useUpdateEffect } from 'react-use';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 
 function TransferModal({
   serviceId,
@@ -32,6 +32,7 @@ function TransferModal({
   const { data: service } = useServiceDetails(serviceId);
   const [fromTradingAccount, setFromTradingAccount] = useState(true);
   const toast = useToast();
+  const theme = useTheme();
   const [transfer, { isLoading: isTransferring }] =
     useTraderServiceTransferFunds(serviceId);
 
@@ -136,7 +137,11 @@ function TransferModal({
               narrow
               onClick={toggleDestination}
             >
-              <ZigTransferIcon width={24} height={24} color={'#65647E'} />
+              <ZigTransferIcon
+                width={24}
+                height={24}
+                color={theme.palette.highlighted}
+              />
             </ZigButton>
 
             <Box

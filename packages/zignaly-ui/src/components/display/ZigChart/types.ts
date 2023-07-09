@@ -1,9 +1,10 @@
 import { VictoryChartProps } from "victory";
+import { dark } from "../../../theme";
 
-export enum ChartColor {
-  Green = "#039179",
-  Red = "#CC3993",
-}
+export const ChartColor = {
+  Green: dark.chart.green,
+  Red: dark.chart.red,
+};
 
 export enum ChartGradientColor {
   GreenMini = "chart-gradient-mini-green",

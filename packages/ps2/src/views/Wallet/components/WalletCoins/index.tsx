@@ -41,7 +41,7 @@ const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
       columnHelper.accessor('balance.balance', {
         header: t('transactions.header.amount'),
         cell: ({ getValue }) => (
-          <ZigTypography color='almostWhite'>
+          <ZigTypography color='contrasting'>
             <NumericFormat
               value={getValue()}
               displayType='text'
@@ -62,7 +62,7 @@ const WalletCoins = ({ coins, balances }: WalletCoinsProps) => {
               justifyContent='center'
               gap={1}
             >
-              <ZigPriceLabel value={getValue()} usd color='almostWhite' />
+              <ZigPriceLabel value={getValue()} usd color='contrasting' />
               <ZigTypography variant='caption' component='p' color='neutral300'>
                 @
                 <NumericFormat

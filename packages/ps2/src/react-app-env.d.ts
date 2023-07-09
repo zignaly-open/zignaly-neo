@@ -56,7 +56,7 @@ declare module '@mui/material/styles' {
     red: string;
     avatarBack: string;
 
-    almostWhite: string;
+    contrasting: string;
   }
 
   interface Palette extends CustomPalette {}
@@ -93,7 +93,7 @@ declare module '@mui/material/Button' {
     red: true;
 
     avatarBack: true;
-    almostWhite: true;
+    contrasting: true;
   }
 }
 
@@ -101,6 +101,7 @@ declare module '@mui/material/SvgIcon' {
   export interface SvgIconPropsColorOverrides {
     danger: true;
     success: true;
+    neutral950: true;
     neutral900: true;
     neutral800: true;
     neutral750: true;
@@ -123,7 +124,7 @@ declare module '@mui/material/SvgIcon' {
     red: true;
 
     avatarBack: true;
-    almostWhite: true;
+    contrasting: true;
   }
 }
 
@@ -133,6 +134,7 @@ import React from 'react';
 
 declare module '@emotion/react' {
   export interface Theme extends MuiTheme {
+    neutral950: string;
     neutral900: string;
     neutral800: string;
     neutral750: string;
@@ -154,7 +156,7 @@ declare module '@emotion/react' {
     yellow: string;
     red: string;
 
-    almostWhite: string;
+    contrasting: string;
     avatarBack: string;
   }
 }

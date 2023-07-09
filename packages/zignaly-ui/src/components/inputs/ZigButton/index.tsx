@@ -77,7 +77,7 @@ export const ZigButtonGroup = styled(ButtonGroup)`
     &:hover,
     &.MuiButton-active {
       z-index: 3;
-      border-color: #464a85 !important;
+      border-color: ${({ theme }) => theme.palette.secondary.main} !important;
       border-radius: 5px;
       background: ${({ theme }) => theme.palette.neutral750};
       color: ${({ theme }) => theme.palette.highlighted};

@@ -23,7 +23,7 @@ const dark: Theme = {
     links: "#26C4C1",
     yellow: "#AE9C5B",
     red: "#CC394E",
-    almostWhite: "#F3F4F6",
+    contrasting: "#F3F4F6",
   },
   backgrounds: {
     header: "linear-gradient(269.14deg, #080810 0%, #11122b 100%)",
@@ -37,6 +37,21 @@ const dark: Theme = {
     tableHeader: "#16192b",
     button: "rgba(25, 25, 39, 0.36)",
     header: "rgba(0, 0, 0, 0.5)",
+  },
+  chart: {
+    red: "#CC3993",
+    green: "#039179",
+    greenGradient: ["rgba(18, 33, 59, 0.52)", "rgba(33, 81, 78, 0.69)"],
+    greenMiniGradient: ["rgba(17, 27, 47, 0)", "rgba(22, 41, 67, 0.5)", "rgba(39, 110, 107, 1)"],
+    redGradient: ["rgba(31, 18, 59, 0.52)", "rgba(74, 33, 81, 0.69)"],
+    redMiniGradient: ["rgba(18, 20, 39, 0)", "rgba(21, 21, 57, 0.5)", "rgba(86, 36, 108, 1)"],
+    greenCard: [
+      "rgba(16, 33, 33, 0.68)",
+      "rgba(0, 45, 20, 0.44)",
+      "rgba(7, 47, 30, 0.44)",
+      "rgba(56, 235, 170, 0.69)",
+    ],
+    redCard: ["rgba(37, 15, 38, 0.38)", "rgba(46, 0, 28, 0.44)", "rgba(204, 57, 147, 0.69)"],
   },
 };
 
@@ -63,7 +78,7 @@ const ugly: Theme = {
     links: "#9c00a9",
     yellow: "#ffc800",
     red: "#ff0024",
-    almostWhite: "#F3F4F6",
+    contrasting: "#030406",
   },
   backgrounds: {
     header: "linear-gradient(269.14deg, #ffcccc 0%, #eebbbb 100%)",
@@ -78,6 +93,26 @@ const ugly: Theme = {
     tableHeader: "#fcc",
     button: "#ffffffaa",
     header: "rgba(255, 255, 255, 0.3)",
+  },
+  chart: {
+    red: "#f00",
+    green: "#0f0",
+    greenGradient: ["rgba(18, 33, 18, 0.52)", "rgba(33, 81, 33, 0.69)"],
+    greenMiniGradient: ["rgba(17, 27, 17, 0)", "rgba(22, 67, 22, 0.5)", "rgba(39, 110, 39, 1)"],
+    redGradient: ["rgba(131, 59, 59, 0.52)", "rgba(174, 81, 81, 0.69)"],
+    redMiniGradient: [
+      "rgba(181, 59, 59, 0.52)",
+      "rgba(174, 81, 81, 0.69)",
+      "rgba(164, 81, 81, 0.69)",
+      "rgba(154, 81, 81, 0.69)",
+    ],
+    greenCard: [
+      "rgba(16, 33, 33, 0.68)",
+      "rgba(0, 45, 20, 0.44)",
+      "rgba(7, 47, 30, 0.44)",
+      "rgba(56, 235, 170, 0.69)",
+    ],
+    redCard: ["rgba(137, 38, 38, 0.38)", "rgba(96, 28, 28, 0.44)", "rgba(204, 147, 147, 0.69)"],
   },
 };
 

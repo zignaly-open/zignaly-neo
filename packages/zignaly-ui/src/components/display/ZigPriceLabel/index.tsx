@@ -31,7 +31,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   };
 
   const withDefaultProps = {
-    color: "almostWhite",
+    color: "contrasting",
     variant: "body1" as Variant,
     fontWeight: "500",
     ...(otherProps || ""),
