@@ -6,7 +6,7 @@ import dark from "theme/dark";
 const withSeparator = (props: WithSeparator) =>
   props.separator &&
   css`
-    border-top: 1px dotted ${({ theme }) => theme.neutral600};
+    border-top: 1px dotted ${dark.palette.neutral600};
     margin: 6px 35px 6px;
   `;
 
@@ -44,7 +44,7 @@ export const NavLink = styled.span<
   } & WithSeparator &
     WithCustomStyle
 >`
-  color: ${dark.neutral200};
+  color: ${dark.palette.neutral200};
   font-weight: 400;
   font-size: 14px;
   line-height: 28px;
@@ -68,7 +68,7 @@ export const NavLink = styled.span<
     !notClickable &&
     css`
       &:hover {
-        background: rgb(28, 29, 53);
+        background: ${dark.palette.neutral600};
       }
     `}
 
@@ -76,7 +76,7 @@ export const NavLink = styled.span<
     ${styledIf(
       active,
       `
-      color: #7682f7;
+      color: ${dark.palette.highlighted};
     `,
       `
 
@@ -84,7 +84,7 @@ export const NavLink = styled.span<
         cursor: pointer;
 
         &:hover {
-          color: #fff;
+          color: ${dark.palette.neutral000};
         }
       }
     `,
@@ -139,7 +139,7 @@ export const ChildContainer = styled.div<{ active: boolean } & WithSeparator>`
   ${(props) =>
     props.active &&
     css`
-      background: rgb(25, 26, 48);
+      background: ${dark.palette.neutral700};
       /* When the menu is expanded, replace bottom margin with padding to fit the background until the bottom */
       margin-bottom: 0 !important;
       padding-bottom: 12px;

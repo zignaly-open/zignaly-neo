@@ -11,9 +11,9 @@ const Toaster = ({ variant = "error", size = "large", caption = "", id }: Toaste
   return (
     <styled.ToastContainer variant={variant} size={size} id={id}>
       <styled.IconContainer>
-        {variant === "error" && <ErrorAlertIcon color={dark.redGraphOrError} />}
-        {variant === "success" && <SuccessIcon color={dark.greenGraph} />}
-        {variant === "info" && <InfoIcon fill={dark.neutral600} />}
+        {variant === "error" && <ErrorAlertIcon color={dark.palette.redGraphOrError} />}
+        {variant === "success" && <SuccessIcon color={dark.palette.greenGraph} />}
+        {variant === "info" && <InfoIcon fill={dark.palette.neutral600} />}
       </styled.IconContainer>
 
       <styled.Caption>

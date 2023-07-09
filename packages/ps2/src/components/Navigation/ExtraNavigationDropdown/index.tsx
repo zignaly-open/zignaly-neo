@@ -67,7 +67,7 @@ const ExtraNavigationDropdown: React.FC = () => {
       label: (
         <>
           <GlobeLanguagesStyled
-            color={theme.palette.neutral300}
+            color={theme.palette.neutral400}
             width={'26px'}
             height={'26px'}
           />

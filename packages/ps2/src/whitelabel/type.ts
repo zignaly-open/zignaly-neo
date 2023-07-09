@@ -14,4 +14,6 @@ export type WhitelabelOverride = {
   endpointOverrides?: Record<OverrideableEndpoints, string>;
   disabledFeatures: Features[];
   xSource?: string;
+  mainAppLink?: string;
+  logo?: string;
 };

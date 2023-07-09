@@ -125,7 +125,7 @@ function AccountMenu(): React.ReactElement | null {
             </AccountDropdown>
           ),
           id: 'account-menu-dropdown__account-switcher',
-          customStyle: `background: #171a31; margin-top: -11px;`,
+          customStyle: `background: ${theme.palette.neutral700}; margin-top: -11px;`,
           children: (exchanges?.length > 1 ? exchanges : []).map(
             (exchange, index) => ({
               onClick: () => setActiveExchange(exchange.internalId),

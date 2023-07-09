@@ -28,7 +28,7 @@ export const InputValue = styled.input`
   padding: 0 16px 0 4px;
   background: transparent;
   border: none;
-  color: ${dark.neutral100};
+  color: ${dark.palette.neutral100};
   outline: none;
   font-weight: 500;
   font-size: 22px;

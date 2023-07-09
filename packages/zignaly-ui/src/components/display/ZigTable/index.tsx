@@ -121,7 +121,11 @@ export default function ZigTable<T extends object>({
                     <ZigDropdown
                       component={() => (
                         <HeaderIconButton id={prefixId && `${prefixId}-table__popover-filter`}>
-                          <ZigDotsVerticalIcon color={dark.neutral200} height={16} width={16} />
+                          <ZigDotsVerticalIcon
+                            color={dark.palette.neutral200}
+                            height={16}
+                            width={16}
+                          />
                         </HeaderIconButton>
                       )}
                       options={table

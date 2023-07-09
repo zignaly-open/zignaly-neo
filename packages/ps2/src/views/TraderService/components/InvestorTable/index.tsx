@@ -153,7 +153,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             component={() => (
               <IconButton>
                 <ZigDotsVerticalIcon
-                  color={dark.neutral200}
+                  color={dark.palette.neutral200}
                   height={16}
                   width={16}
                 />

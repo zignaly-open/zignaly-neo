@@ -22,7 +22,7 @@ export const axisStyle = {
     fontSize: 20,
     padding: 30,
     // sorry not sorry
-    fill: dark.neutral200,
+    fill: dark.palette.neutral200,
     fontFamily: "Avenir Next",
     letterSpacing: 0.55,
     lineHeight: 16,
@@ -31,7 +31,7 @@ export const axisStyle = {
     fontSize: 11,
     padding: 7,
     // sorry not sorry
-    fill: dark.neutral200,
+    fill: dark.palette.neutral200,
     fontFamily: "Avenir Next",
     letterSpacing: 0.55,
     lineHeight: 16,

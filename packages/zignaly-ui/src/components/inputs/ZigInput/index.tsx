@@ -129,10 +129,10 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
 
 export const ZigInputInteractiveAdornmentStyle = {
   cursor: "pointer",
-  color: dark.neutral300,
+  color: dark.palette.neutral300,
   transition: "all .3s",
   "&:hover": {
-    color: dark.neutral200,
+    color: dark.palette.neutral200,
   },
 };
 

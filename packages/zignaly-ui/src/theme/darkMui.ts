@@ -349,7 +349,7 @@ const darkMui = createTheme({
           ".MuiTypography-root": {
             textTransform: "none",
           },
-          color: dark.neutral000,
+          color: dark.palette.neutral000,
           background: backgrounds.buttonPrimary,
           position: "relative",
           overflow: "hidden",
@@ -431,38 +431,32 @@ const darkMui = createTheme({
         bigNumber: {
           fontSize: "26px",
           lineHeight: "40px",
-          // color: dark.neutral000,
           fontWeight: "500",
         },
         h1: {
           fontSize: "22px",
           lineHeight: "36px",
           marginBottom: "6px",
-          // color: dark.neutral000,
           fontWeight: "500",
         },
         h2: {
           fontSize: "18px",
           lineHeight: "28px",
-          // color: dark.neutral000,
           fontWeight: "500",
         },
         h3: {
           fontSize: "15px",
           lineHeight: "24px",
-          // color: dark.neutral000,
           fontWeight: "500",
         },
         h4: {
           fontSize: "13px",
           lineHeight: "20px",
-          // color: dark.neutral000,
           fontWeight: "500",
         },
         h5: {
           fontSize: "11px",
           lineHeight: "16px",
-          // color: dark.neutral000,
           fontWeight: "500",
         },
         caption: {

@@ -54,7 +54,7 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
     props.variant === "success" &&
     css`
       ${Caption} {
-        color: ${props.theme.greenGraph};
+        color: ${props.theme.palette.greenGraph};
       }
 
       border: 1px solid #122431;
@@ -66,18 +66,18 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
     props.variant === "info" &&
     css`
       ${Caption} {
-        color: ${props.theme.neutral200};
+        color: ${props.theme.palette.neutral200};
       }
 
-      border: 1px solid ${props.theme.neutral600};
-      background: ${props.theme.neutral600};
+      border: 1px solid ${props.theme.palette.neutral600};
+      background: ${props.theme.palette.neutral600};
     `}
 
   ${(props) =>
     props.variant === "error" &&
     css`
       ${Caption} {
-        color: ${props.theme.redGraphOrError};
+        color: ${props.theme.palette.redGraphOrError};
       }
 
       border: 1px solid #231630;

@@ -35,7 +35,7 @@ export const Layout = styled.div<{ error?: string; loading?: boolean }>`
       background: linear-gradient(90deg, #0f1124 0%, #0f1124 35%, #0f1124 100%);
       border-radius: 8px;
       border: 1px solid #35334a !important;
-      color: ${(props) => `${props.theme.neutral100}`};
+      color: ${(props) => `${props.theme.palette.neutral100}`};
       font-family: "Avenir Next", "Red Hat Text", sans-serif;
       width: 64px !important;
       height: 64px !important;
@@ -61,7 +61,7 @@ export const Layout = styled.div<{ error?: string; loading?: boolean }>`
        .input-box {
           margin-bottom: 10px;
           input {
-            border-color: ${props.theme.redGraphOrError} !important;
+            border-color: ${props.theme.palette.redGraphOrError} !important;
           }
        }
     `,

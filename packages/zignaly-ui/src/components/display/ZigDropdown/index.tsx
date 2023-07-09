@@ -15,6 +15,7 @@ import {
 } from "./styles";
 import { useTheme } from "styled-components";
 import Theme from "theme/theme";
+import { dark } from "../../../theme";
 
 const ZigDropdown: (
   props: ZigDropdownProps,
@@ -93,7 +94,7 @@ const ZigDropdown: (
           PaperProps={{
             sx: {
               minWidth: "220px",
-              backgroundColor: "#12152c",
+              backgroundColor: dark.palette.neutral750,
               whiteSpace: "nowrap",
               color: "#fff",
               boxShadow: "0 4px 6px -2px #00000061",
@@ -175,7 +176,7 @@ const ZigDropdown: (
 
                         {!!option.children?.length && (
                           <ArrowBottomIconStyled
-                            color={theme.neutral300}
+                            color={theme.palette.neutral300}
                             rotated={childDropdownShow === option}
                             width={"10.5px"}
                           />

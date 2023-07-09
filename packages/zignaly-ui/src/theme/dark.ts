@@ -4,7 +4,7 @@ const dark: Theme = {
   mode: "dark",
   palette: {
     neutral800: "#06061A",
-    neutral750: "#101225",
+    neutral750: "#12152c",
     neutral700: "#252339",
     neutral600: "#35334A",
     neutral500: "#4A4958",
@@ -27,7 +27,6 @@ const dark: Theme = {
   backgrounds: {
     header: "linear-gradient(269.14deg, #080810 0%, #11122b 100%)",
     buttonPrimary: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
-    buttonPrimaryHover: "linear-gradient(rgba(20, 156, 173, 0.64),rgba(69, 64, 193, 0.64))",
     input: "linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%)",
   },
 };
@@ -35,23 +34,23 @@ const dark: Theme = {
 const ugly: Theme = {
   mode: "light",
   palette: {
-    neutral800: "#fcc",
-    neutral750: "#fbb",
-    neutral700: "#faa",
-    neutral600: "#f99",
-    neutral500: "#f88",
-    neutral400: "#f77",
-    neutral300: "#f55",
-    neutral200: "#f44",
-    neutral175: "#f0c",
-    neutral150: "#f33",
-    neutral100: "#f22",
-    neutral000: "#f11",
+    neutral800: "#fba9a5",
+    neutral750: "#fa7f79",
+    neutral700: "#F75850",
+    neutral600: "#f55047",
+    neutral500: "#F42015",
+    neutral400: "#D6140A",
+    neutral300: "#9D0E07",
+    neutral200: "#890C06",
+    neutral175: "#a81a79",
+    neutral150: "#760A04",
+    neutral100: "#620804",
+    neutral000: "#490300",
     secondary: "#af558b",
-    highlighted: "#e676f7",
+    highlighted: "#e10095",
     redGraphOrError: "#cc3939",
     greenGraph: "#53c426",
-    links: "#2640c4",
+    links: "#9c00a9",
     yellow: "#ffc800",
     red: "#ff0024",
     almostWhite: "#F3F4F6",
@@ -64,4 +63,5 @@ const ugly: Theme = {
   },
 };
 
+// export default dark;
 export default ugly;

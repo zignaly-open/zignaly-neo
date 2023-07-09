@@ -16,12 +16,24 @@ function ZigAlertMessage({ text, error, warning, id }: ZigAlertMessageProps) {
         <ErrorAlertIcon
           height="24px"
           width="24px"
-          color={error ? dark.redGraphOrError : warning ? dark.yellow : dark.neutral400}
+          color={
+            error
+              ? dark.palette.redGraphOrError
+              : warning
+              ? dark.palette.yellow
+              : dark.palette.neutral400
+          }
         />
       </Icon>
       <ZigTypography
         variant="body2"
-        sx={{ color: error ? dark.redGraphOrError : warning ? dark.yellow : dark.neutral400 }}
+        sx={{
+          color: error
+            ? dark.palette.redGraphOrError
+            : warning
+            ? dark.palette.yellow
+            : dark.palette.neutral400,
+        }}
       >
         {text}
       </ZigTypography>

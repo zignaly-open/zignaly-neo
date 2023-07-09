@@ -17,8 +17,8 @@ const customStyles = (small: boolean, theme: Theme, userStyles: StylesConfig): S
   menu: (base) => ({
     ...base,
     background: "rgba(16, 18, 37) !important",
-    border: `1px solid ${theme.neutral600} !important`,
-    color: `${theme.neutral200} !important`,
+    border: `1px solid ${theme.palette.neutral600} !important`,
+    color: `${theme.palette.neutral200} !important`,
   }),
   option: (base, state) => ({
     ...base,
