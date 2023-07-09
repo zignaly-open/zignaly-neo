@@ -17,5 +17,6 @@
   "to-input": {
     "label": "Swap to:",
     "placeholder": "Amount received"
-  }
+  },
+  "toast-success": "Successfully converted"
 }

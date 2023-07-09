@@ -12,7 +12,7 @@ export const Layout = styled(Box)<{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: ${(withCoinSelector) => (withCoinSelector ? "5px 24px 12px;" : "24px 24px 12px;")};
+  padding: ${({ withCoinSelector }) => (withCoinSelector ? "5px 24px 12px;" : "24px 24px 12px;")};
   position: relative;
   border-radius: 5px;
 
@@ -28,17 +28,13 @@ export const Layout = styled(Box)<{
   && {
     .MuiInput-root {
       padding: 2px 24px;
-      background: #171b30;
       ${({ withCoinSelector }) =>
-        withCoinSelector &&
+        !withCoinSelector &&
         `
-        border-radius: 5px 0 0 5px;
-        background: unset;
+        background: #171b30;
       `}
 
-      border: ${({ withCoinSelector, theme }) =>
-        withCoinSelector ? `1px dotted ${theme.palette.neutral600};` : `none;`};
-      border-right: none;
+      border: none;
     }
 
     .MuiInput-input {
@@ -53,10 +49,6 @@ export const Layout = styled(Box)<{
 
 export const DividerWrapper = styled(Box)<{ error?: boolean }>`
   padding: 8px 0;
-  border-top: 1px dotted;
-  border-bottom: 1px dotted;
-  border-color: ${({ theme, error }) =>
-    error ? theme.palette.redGraphOrError : theme.palette.neutral600};
   width: 100%;
   height: 100%;
 `;
@@ -83,6 +75,33 @@ export const TopDivider = styled(Divider, {
       error ? theme.palette.redGraphOrError : theme.palette.neutral600};
     border-top-style: dotted;
   }
+`;
+export const InputWrapper = styled(Box)<{
+  withCoinSelector?: boolean;
+  error: boolean;
+  wide?: boolean;
+  disabled?: boolean;
+}>`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: ${({ wide }) => (wide ? "1;" : "auto;")};
+  ${({ withCoinSelector, theme, error, disabled }) =>
+    withCoinSelector &&
+    `
+    gap: 0;
+    border-radius: 5px;
+    border: 1px dotted ${error ? theme.palette.redGraphOrError : theme.palette.neutral600};
+    &:hover{
+      border-color: ${
+        error
+          ? theme.palette.redGraphOrError
+          : disabled
+          ? theme.palette.neutral600
+          : theme.palette.neutral400
+      };
+    }
+    `};
 `;
 
 export const MaxButton = styled(ZigButton)`

@@ -49,7 +49,6 @@ const customStyles = (small: boolean, theme: Theme, userStyles: StylesConfig): S
 });
 
 function ZigSelect<T>({
-  dottedBorder = false,
   onChange,
   value,
   label,
@@ -61,8 +60,7 @@ function ZigSelect<T>({
   disabled,
   outlined,
   id,
-  showLeftBorder = true,
-  borderRadius,
+  showBorder = true,
   hoverBackground = true,
   styles: userStyles = {},
   ...props
@@ -73,13 +71,11 @@ function ZigSelect<T>({
   return (
     // @ts-ignore
     <StyledSelectWrapper
-      dotted={dottedBorder}
       error={error}
       width={width}
       small={small}
       outlined={outlined}
-      showLeftBorder={showLeftBorder}
-      borderRadius={borderRadius}
+      showBorder={showBorder}
       hoverBackground={hoverBackground}
     >
       {label && (

@@ -3,7 +3,7 @@ import { InputExtraInfoObject, ZigInputAmountProps } from "./types";
 import { InputAdornment, Box, Divider } from "@mui/material";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
 import ZigInput from "../ZigInput";
-import { DividerWrapper, Layout, MaxButton, TopDivider } from "./styles";
+import { DividerWrapper, InputWrapper, Layout, MaxButton, TopDivider } from "./styles";
 import ZigTypography from "components/display/ZigTypography";
 import { InputExtraInfo } from "./atoms";
 import ZigCoinIcon from "../../display/ZigCoinIcon";
@@ -34,6 +34,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     tokenOptions,
     onTokenChange,
     showMaxButton = true,
+    disabled = false,
     ...rest
   } = props;
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
@@ -98,13 +99,13 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
             </ZigTypography>
           </TopDivider>
         )}
-        <Box
-          display="flex"
-          alignItems="center"
-          gap={!withCoinSelector ? 2 : 0}
-          width={wide ? 1 : "auto"}
+        <InputWrapper
+          wide={wide}
+          withCoinSelector={withCoinSelector}
+          error={!!error}
+          disabled={disabled}
         >
-          {!withCoinSelector && tokenOptions?.length < 2 && (
+          {!withCoinSelector && (
             <Box display="flex" alignItems="center" gap={1}>
               <ZigCoinIcon size="small" coin={coinVal} id={id && `${id}-coin-icon`} />
               <ZigTypography color="neutral100" variant="h3" id={id && `${id}-coin-name`}>
@@ -114,6 +115,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
           )}
           <ZigInput
             {...rest}
+            disabled={disabled}
             id={id}
             inputRef={ref}
             type="string"
@@ -149,10 +151,8 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
                 menuShouldBlockScroll
                 error={!!error}
                 hoverBackground={false}
-                borderRadius={"0 5px 5px 0;"}
-                dottedBorder
                 placeholder={"Select coin"}
-                showLeftBorder={false}
+                showBorder={false}
                 outlined
                 width={160}
                 value={coin}
@@ -163,7 +163,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
               />
             </Box>
           )}
-        </Box>
+        </InputWrapper>
         {withCoinSelector && error && typeof error === "string" && (
           <Box alignSelf="flex-start" mt={1}>
             <ErrorMessage text={error} id={id && `${id}-error`} />

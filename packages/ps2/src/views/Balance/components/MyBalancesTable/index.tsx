@@ -26,7 +26,7 @@ import { Box } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
 import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
 import { useBalanceQuery } from 'apis/user/api';
-import SwapCoinsModal from '../SwapCoinsModal';
+import SwapCoinsModal, { coinsAllowedToSwap } from '../SwapCoinsModal';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
@@ -164,9 +164,7 @@ const MyBalancesTable = (): JSX.Element => {
             </Box>
             {exchangeType === 'spot' &&
               Number(row.original.balance.balanceTotal) > 0 &&
-              ['BUSD', 'USDT', 'BTC', 'ETH', 'BNB'].includes(
-                row.original.coin,
-              ) && (
+              coinsAllowedToSwap.includes(row.original.coin) && (
                 <ZigButton
                   id={`balance-row__swap-coins-${row.original.coin}`}
                   onClick={() =>

@@ -22,6 +22,7 @@ import { useConvertMutation } from '../../../../apis/coin/api';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { convertAmountValidation } from './validation';
+import { coinsAllowedToSwap } from './index';
 
 function SwapCoinsForm({
   setStep,
@@ -148,8 +149,7 @@ function SwapCoinsForm({
     }
   }, [amount, convertPreview]);
   const nonZeroBalanceCoinOptions = coinOptions.filter(
-    (c) =>
-      c.available > 0 && ['BUSD', 'USDT', 'BTC', 'ETH', 'BNB'].includes(c.coin),
+    (c) => c.available > 0 && coinsAllowedToSwap.includes(c.coin),
   );
   if (isLoadingBalances || isLoadingAssets) {
     return <CenteredLoader />;

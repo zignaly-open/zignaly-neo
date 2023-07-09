@@ -10,9 +10,7 @@ type Props = {
   width?: number;
   small?: boolean;
   outlined?: boolean;
-  dotted?: boolean;
-  showLeftBorder?: boolean;
-  borderRadius?: string;
+  showBorder?: boolean;
   hoverBackground?: boolean;
 };
 
@@ -23,14 +21,12 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
 
   .zig-react-select {
     &__control {
-      border-style: ${({ dotted }) => (dotted ? `dotted` : `solid`)};
-      border-width: 1px;
-      border-color: ${({ theme, error }) =>
-        error ? theme.palette.redGraphOrError : theme.palette.neutral600};
-      ${({ showLeftBorder }) => !showLeftBorder && "border-left: none;"};
+      border: 1px solid
+        ${({ theme, error }) => (error ? theme.palette.redGraphOrError : theme.palette.neutral600)};
+      ${({ showBorder }) => !showBorder && "border: none;"};
       padding: ${({ small }) => (small ? "3px 16px 3px 9px" : "11px 24px 11px 16px")};
       min-height: ${({ small }) => (small ? "0" : "60px")};
-      border-radius: ${({ borderRadius }) => borderRadius ?? "5px"};
+      border-radius: 5px;
       display: flex;
       align-items: center;
       cursor: pointer;
@@ -73,12 +69,11 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
       }
 
       &--is-focused {
-        border-style: ${({ dotted }) => (dotted ? `dotted` : `solid`)};
-        border-width: 1px;
-        ${({ showLeftBorder }) => !showLeftBorder && "border-left: none;"};
-        border-color: ${({ theme, error }) =>
-          error ? theme.palette.redGraphOrError : theme.palette.neutral400};
+        border: 1px solid
+          ${({ theme, error }) =>
+            error ? theme.palette.redGraphOrError : theme.palette.neutral400};
         box-shadow: none !important;
+        ${({ showBorder }) => !showBorder && "border: none;"};
       }
     }
 

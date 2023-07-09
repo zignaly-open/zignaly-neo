@@ -25,7 +25,7 @@ const SwapCoinsConfirmForm = ({
   const { t } = useTranslation('swap-coins');
   const toast = useToast();
   if (status.isSuccess) {
-    toast.success('Successfully converted');
+    toast.success(t('toast-success'));
     close();
   }
 
