@@ -21,9 +21,8 @@ const InvestButton: React.FC<{
   prefixId?: string;
   service: Service;
   modalRoute?: string;
-  ctaId?: string;
   showMultipleAccountButton?: boolean;
-}> = ({ prefixId, modalRoute, service, ctaId, showMultipleAccountButton }) => {
+}> = ({ prefixId, modalRoute, service, showMultipleAccountButton }) => {
   const { t } = useTranslation([
     'service',
     // we need these two otherwise a Suspense will trigger when we load the other ns
@@ -46,12 +45,14 @@ const InvestButton: React.FC<{
       if (modalRoute) {
         showInvestModal({ serviceId: service.id });
       } else {
-        showModal(InvestDepositModal, { ctaId, serviceId: service.id });
+        showModal(InvestDepositModal, { serviceId: service.id });
       }
     } else {
       const newUser = !localStorage.getItem('hasLoggedIn');
       navigate(newUser ? ROUTE_SIGNUP : ROUTE_LOGIN, {
-        state: { redirectTo: location },
+        state: {
+          redirectTo: location,
+        },
       });
     }
   };

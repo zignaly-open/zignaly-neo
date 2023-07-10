@@ -66,6 +66,7 @@ const PendingTransactionsList: React.FC<{
           columns={
             [
               {
+                id: 'Amount',
                 header: (
                   <Box position={'relative'} padding={'5px 15px'}>
                     <Tooltip
@@ -113,6 +114,7 @@ const PendingTransactionsList: React.FC<{
                 cell: (props) => (
                   <Box
                     id={`pending-transactions-table__status-${props.row.id}`}
+                    whiteSpace='normal'
                   >
                     {props.getValue()}
                   </Box>

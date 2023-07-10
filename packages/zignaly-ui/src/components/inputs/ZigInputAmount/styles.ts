@@ -45,6 +45,12 @@ export const TopDivider = styled(Divider, {
   right: 0;
   top: 0;
   transform: translateY(-50%);
+  &:before {
+    left: 1.5px;
+  }
+  &:after {
+    right: 1.5px;
+  }
 
   &:before,
   &:after {

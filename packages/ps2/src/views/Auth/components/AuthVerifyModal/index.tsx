@@ -17,7 +17,7 @@ import {
 } from '../../../../apis/user/use';
 import { useToast } from '../../../../util/hooks/useToast';
 import ZModal from '../../../../components/ZModal';
-import { trackCta } from '@zignaly-open/tracker';
+import { trackClick } from '@zignaly-open/tracker';
 
 function AuthVerifyModal({
   user,
@@ -66,6 +66,8 @@ function AuthVerifyModal({
         description = t(
           'auth-verify-modal.isDisabled.isNotVerifyEmailValid.description',
         );
+      } else {
+        title = t('auth-verify-modal.isNotDisabled.ask2FA.twoFA-title');
       }
     } else if (ask2FA) {
       if (verifyStatus.isSuccess) {
@@ -121,7 +123,7 @@ function AuthVerifyModal({
 
   useEffect(() => {
     if (allGood) {
-      trackCta({ ctaId: 'verify-success' });
+      trackClick({ ctaId: 'verify-success' });
       onSuccess();
       close();
     }
@@ -131,6 +133,7 @@ function AuthVerifyModal({
     <ZModal
       wide
       allowUnauth
+      disableBackdropClose
       {...props}
       close={emailUnconfirmed ? null : onClickClose}
       title={texts.title}

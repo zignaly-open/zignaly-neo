@@ -23,7 +23,7 @@ import { Form, ModalActions } from 'components/ZModal';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
 import WithdrawConfirmForm from '../WithdrawConfirmForm';
 import { useWithdrawMutation } from 'apis/coin/api';
-import { useActiveExchange, useCheck2FA } from 'apis/user/use';
+import { useActiveExchange, useCheckWithdraw } from 'apis/user/use';
 import { ROUTE_MY_BALANCES_TRANSACTIONS } from 'routes';
 import { useNavigate } from 'react-router-dom';
 
@@ -43,12 +43,12 @@ function WithdrawForm({
   const { internalId } = useActiveExchange();
   const [withdraw, withdrawStatus] = useWithdrawMutation();
 
-  const check2FA = useCheck2FA({
+  const checkWithdraw = useCheckWithdraw({
     status: withdrawStatus,
   });
 
   const handleWithdraw = async () => {
-    check2FA(async (code) => {
+    checkWithdraw(async (code) => {
       await withdraw({
         asset: coin,
         network: confirmationData.network,
@@ -325,13 +325,14 @@ function WithdrawForm({
               sx={{ position: 'absolute', right: '-22px', bottom: 0 }}
               id={'withdraw-modal__history'}
               startIcon={
-                <Box mt='5px'>
-                  <ZigListIcon
-                    width={'24px'}
-                    height={'24px'}
-                    color={'neutral100'}
-                  />
-                </Box>
+                <ZigListIcon
+                  width={'24px'}
+                  height={'24px'}
+                  color={'neutral100'}
+                  style={{
+                    verticalAlign: 'middle',
+                  }}
+                />
               }
               variant='text'
               onClick={() => navigate(ROUTE_MY_BALANCES_TRANSACTIONS)}

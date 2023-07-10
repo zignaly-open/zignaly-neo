@@ -10,7 +10,7 @@ import { Box } from '@mui/material';
 import { useResetPasswordRequestMutation } from 'apis/user/api';
 import AnchorLink from 'components/AnchorLink';
 
-const ForgotPasswordForm = () => {
+const ForgotPasswordForm = ({ defaultEmail }: { defaultEmail?: string }) => {
   const { t } = useTranslation(['auth', 'error']);
   const {
     handleSubmit,
@@ -20,6 +20,9 @@ const ForgotPasswordForm = () => {
     mode: 'onTouched',
     reValidateMode: 'onBlur',
     resolver: yupResolver(ForgotPasswordValidation),
+    defaultValues: {
+      email: defaultEmail || '',
+    },
   });
   const [resetPassword, resetPasswordStatus] =
     useResetPasswordRequestMutation();
@@ -51,7 +54,7 @@ const ForgotPasswordForm = () => {
   }
 
   return (
-    <Box sx={{ width: '100%', p: 4, maxWidth: 500 }}>
+    <Box sx={{ width: '100%', p: 4, maxWidth: 500, textAlign: 'center' }}>
       <ZigTypography
         variant={'h1'}
         align={'center'}
@@ -59,6 +62,9 @@ const ForgotPasswordForm = () => {
         textTransform={'capitalize'}
       >
         {t('reset-password.reset-password')}
+      </ZigTypography>
+      <ZigTypography variant={'body1'}>
+        {t('reset-password.description')}
       </ZigTypography>
       <Form onSubmit={handleSubmit(submit)}>
         <Controller

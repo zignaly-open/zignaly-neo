@@ -141,12 +141,11 @@ const MyBalancesTable = (): JSX.Element => {
                 narrow
                 tooltip={t('withdraw')}
                 id={`balance-row__withdrawal-${row.original.coin}`}
-                onClick={() =>
+                onClick={() => {
                   showModal(WithdrawModal, {
                     selectedCoin: row.original.coin,
-                    ctaId: 'balances-table-row',
-                  })
-                }
+                  });
+                }}
                 variant='outlined'
               >
                 <Remove
@@ -200,7 +199,7 @@ const MyBalancesTable = (): JSX.Element => {
 
   return (
     <LayoutContentWrapper
-      unmountOnRefetch={true}
+      unmountOnRefetch={false}
       endpoint={[coinsEndpoint, balancesEndpoint]}
       content={([coins, balances]: [CoinDetails, CoinBalances]) => (
         <ZigTable

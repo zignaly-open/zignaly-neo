@@ -62,5 +62,5 @@ export const Grid = styled('div')`
 `;
 
 export const TransactionContainer = styled('div')`
-  margin: 42px -28px 0;
+  margin: 42px -54px 0;
 `;

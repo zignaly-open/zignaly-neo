@@ -13,6 +13,7 @@ const baseApiPs2 = createApi({
     'Marketplace',
     'Investment',
     'Balance',
+    'Assets',
   ],
 });
 

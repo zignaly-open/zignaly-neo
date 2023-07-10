@@ -10,6 +10,8 @@ import {
 import baseApiPs2 from '../baseApiPs2';
 import { injectEndpoints } from 'apis/util';
 
+let lastUsdBalance = null as number;
+
 export const api = injectEndpoints(baseApiPs2, (builder) => ({
   signup: builder.mutation<SignupResponse, SignupPayload>({
     query: (credentials) => ({
@@ -43,6 +45,12 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
   resendCodeNewUser: builder.mutation<void, void>({
     query: () => ({
       url: `user/resend_code/verify_email`,
+      method: 'POST',
+    }),
+  }),
+  sendCodeWithdraw: builder.mutation<void, void>({
+    query: () => ({
+      url: `user/resend_code/withdraw`,
       method: 'POST',
     }),
   }),
@@ -214,6 +222,15 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       params: { force },
     }),
     providesTags: ['Balance'],
+    async onQueryStarted(_, { dispatch, queryFulfilled }) {
+      const { data } = await queryFulfilled;
+      // Invalidate assets if USD balance changed
+      const usdBalance = (data as UserBalance)?.totalFreeUSDT;
+      if (lastUsdBalance && usdBalance !== lastUsdBalance) {
+        dispatch(api.util.invalidateTags(['Assets']));
+      }
+      lastUsdBalance = usdBalance;
+    },
   }),
 }));
 
@@ -243,4 +260,5 @@ export const {
   useEnable2FAMutation,
   useBalanceQuery,
   useLazyBalanceQuery,
+  useSendCodeWithdrawMutation,
 } = api;

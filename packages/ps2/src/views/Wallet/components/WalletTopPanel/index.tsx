@@ -9,11 +9,9 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import { Box, IconButton } from '@mui/material';
-import { Add, ChevronRight, Remove } from '@mui/icons-material';
+import { ChevronRight, Remove } from '@mui/icons-material';
 import { WalletTopPanelProps } from './types';
 import { useZModal } from 'components/ZModal/use';
-import WalletDepositModal from '../../modals/WalletDepositModal';
-import BuyZigModal from '../../modals/BuyZigModal';
 import WalletWithdrawModal from '../../modals/WalletWithdrawModal';
 import WalletPopover from './atoms/WalletPopover';
 import { usePrefetchTranslation } from '../../../../util/i18nextHelpers';
@@ -85,37 +83,11 @@ const WalletTopPanel = ({ balances, coins }: WalletTopPanelProps) => {
       </Box>
       <Box display='flex' flexDirection='row' mt='20px' gap={1}>
         <ZigButton
-          id={'wallet__buy-zig'}
-          variant='contained'
-          onClick={() => {
-            showModal(BuyZigModal, {
-              ctaId: 'buy-zig',
-            });
-          }}
-        >
-          {t('buy.buy')}
-        </ZigButton>
-        <ZigButton
-          id={'wallet__deposit-zig'}
-          variant='contained'
-          startIcon={<Add />}
-          onClick={() => {
-            showModal(WalletDepositModal, {
-              ctaId: 'deposit-zig',
-              coins,
-              selectedCoin: 'ZIG',
-            });
-          }}
-        >
-          {t('deposit.deposit-zig')}
-        </ZigButton>
-        <ZigButton
           id={'wallet__withdraw-zig'}
           startIcon={<Remove />}
           variant='outlined'
           onClick={() => {
             showModal(WalletWithdrawModal, {
-              ctaId: 'withdraw-zig',
               coins,
               selectedCoin: 'ZIG',
             });
