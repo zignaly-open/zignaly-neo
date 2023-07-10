@@ -84,7 +84,7 @@ yarn && yarn lerna bootstrap
 yarn ps2 
 ```
 
-A tab with [localhost:3000](http://localhost:3000) will open. Now feel free to modify the color scheme to your heart's desire.
+A tab with [localhost:3000](http://localhost:3000) will open. Now feel free to modify the color scheme to your heart's desire. The changes will be picked up automatically and the app will auto-refresh.
 
 Customizable fonts will be implemented over the next 2 days.
 
