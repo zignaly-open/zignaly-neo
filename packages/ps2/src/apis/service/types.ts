@@ -56,6 +56,7 @@ export type ServiceTypesInfo = Record<
 
 export type TraderServiceManagement = {
   createdAt: string;
+  claims: number;
   dfa: string;
   dfaMqDebt: string;
   invested: string;
