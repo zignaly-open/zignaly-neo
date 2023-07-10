@@ -27,6 +27,7 @@ interface Theme {
     Record<
       | "toastSuccess"
       | "toastError"
+      | "secondaryBackground"
       | "sliderMark"
       | "tableRow"
       | "sliderThumb"
