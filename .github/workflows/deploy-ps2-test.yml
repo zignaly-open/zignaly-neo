@@ -31,8 +31,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          ref: test
       - name: Create client .env file
         uses: SpicyPizza/create-envfile@v1.3
         with:
@@ -49,6 +47,7 @@ jobs:
           envkey_REACT_APP_GTM_ID: GTM-5ZQ4JLK
           envkey_REACT_APP_ENABLE_TEST_LANGUAGE: 1
           envkey_REACT_APP_BASE_API: https://test.zignaly.com/new_api
+          envkey_REACT_APP_WHITELABEL: acid
           envkey_REACT_APP_WALLET_API: https://wallet.zignaly.com/api
           envkey_REACT_APP_REFERRALS_API: https://test-referrals.zignaly.com/
           envkey_REACT_APP_SEGMENT_NAME: zignaly
@@ -60,7 +59,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '16'
           cache: 'yarn'
       - name: Install Lerna
         run: yarn global add lerna@6.6.2
