@@ -17,4 +17,9 @@ export default {
   logo: '/images/whitelabel/doge.png',
   background: '#fcdcdc',
   backgroundImage: null,
+  // theme: 'ugly',
+  fontFamilySrc: {
+    '400': '/fonts/AmaticSC/AmaticSC-Regular.ttf',
+    '700': '/fonts/AmaticSC/AmaticSC-Bold.ttf',
+  },
 } as WhitelabelOverride;

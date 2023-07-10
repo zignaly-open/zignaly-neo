@@ -27,7 +27,7 @@ export default ({ palette, mode, backgrounds, boxShadows }: Theme) =>
       tonalOffset: 0.2,
     },
     typography: {
-      fontFamily: ["Avenir777Next", "Roboto", "Helvetica", "Arial", "sans-serif"].join(","),
+      fontFamily: ["Avenir Next", "Roboto", "Helvetica", "Arial", "sans-serif"].join(","),
       button: {
         textTransform: "none",
       },
@@ -96,7 +96,7 @@ export default ({ palette, mode, backgrounds, boxShadows }: Theme) =>
             line-height: 20px;
             letter-spacing: 0.55px;
             width: 100%;
-            font-family: "Avenir777Next", sans-serif;
+            font-family: "Avenir Next", sans-serif;
             box-shadow: none !important;
             resize: none;
             background: ${backgrounds.input};

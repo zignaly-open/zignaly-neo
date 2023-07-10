@@ -1,7 +1,8 @@
 import Theme from "./theme";
 import createMuiTheme from "./createMuiTheme";
 
-const ugly: Theme = {
+// aesthetic-wise, this very theme is a very good example of how NOT to design apps
+const example: Theme = {
   mode: "light",
   palette: {
     neutral900: "#fba9a5",
@@ -67,5 +68,5 @@ const ugly: Theme = {
   },
 };
 
-export default ugly;
-export const uglyMui = createMuiTheme(ugly);
+export default example;
+export const exampleMui = createMuiTheme(example);

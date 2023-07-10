@@ -47,7 +47,7 @@ jobs:
           envkey_REACT_APP_GTM_ID: GTM-5ZQ4JLK
           envkey_REACT_APP_ENABLE_TEST_LANGUAGE: 1
           envkey_REACT_APP_BASE_API: https://test.zignaly.com/new_api
-          envkey_REACT_APP_WHITELABEL: acid
+          envkey_REACT_APP_WHITELABEL: example
           envkey_REACT_APP_WALLET_API: https://wallet.zignaly.com/api
           envkey_REACT_APP_REFERRALS_API: https://test-referrals.zignaly.com/
           envkey_REACT_APP_SEGMENT_NAME: zignaly
