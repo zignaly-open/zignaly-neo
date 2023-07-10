@@ -489,18 +489,18 @@ const darkMui = createTheme({
     MuiSlider: {
       styleOverrides: {
         rail: {
-          backgroundColor: "#4a4958",
+          backgroundColor: dark.palette.neutral500,
           opacity: 1,
         },
         mark: {
-          color: "#888999",
+          color: dark.backgrounds.sliderMark,
           backgroundColor: "currentcolor",
           width: "4px",
           height: "4px",
           borderRadius: "50%",
         },
         thumb: {
-          color: "#999ee0",
+          color: dark.backgrounds.sliderThumb,
           width: "17px",
           height: "17px",
         },

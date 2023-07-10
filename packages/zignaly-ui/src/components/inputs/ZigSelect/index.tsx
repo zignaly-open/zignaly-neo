@@ -37,7 +37,7 @@ const customStyles = (small: boolean, theme: Theme, userStyles: StylesConfig): S
     ...(state.isSelected
       ? {
           color: theme.palette.neutral000,
-          background: "rgba(255, 255, 255, 0.2) !important",
+          background: theme.palette.contrasting + "33 !important",
         }
       : {}),
     ...userStyles.option?.(base, state),

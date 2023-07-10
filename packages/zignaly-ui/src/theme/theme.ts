@@ -25,7 +25,11 @@ interface Theme {
   };
   backgrounds: Partial<
     Record<
+      | "toastSuccess"
+      | "toastError"
+      | "sliderMark"
       | "tableRow"
+      | "sliderThumb"
       | "tableHeader"
       | "buttonPrimary"
       | "loader"

@@ -32,7 +32,7 @@ export const ZigTabs = styled(Tabs)`
   }
 
   .Mui-selected {
-    color: #f3f4f6;
+    color: ${dark.palette.contrasting};
     font-weight: 600;
   }
 `;

@@ -1,4 +1,5 @@
 import styled, { css } from "styled-components";
+import { dark } from "../../../theme";
 
 export const Caption = styled.div`
   margin: 0 8px;
@@ -22,7 +23,7 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 6px 4px ${(props) => props.theme.neutral900}44;
   border-radius: 5px;
   position: absolute;
 
@@ -57,8 +58,8 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
         color: ${props.theme.palette.greenGraph};
       }
 
-      border: 1px solid #122431;
-      background: #122431;
+      border: 1px solid ${dark.backgrounds.toastSuccess};
+      background: ${dark.backgrounds.toastSuccess};
     `}
 
 
@@ -80,7 +81,7 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
         color: ${props.theme.palette.redGraphOrError};
       }
 
-      border: 1px solid #231630;
-      background: #321e46;
+      border: 1px solid ${dark.backgrounds.toastError};
+      background: ${dark.backgrounds.toastError};
     `}
 `;

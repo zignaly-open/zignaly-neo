@@ -8,7 +8,7 @@ import {
   ZigTable,
   createColumnHelper,
 } from '@zignaly-open/ui';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { MarketplaceService } from '../../../../apis/marketplace/types';
 import { Investment } from '../../../../apis/investment/types';
@@ -26,7 +26,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 const Marketplace: React.FC = () => {
   const marketplaceEndpoint = useMarketplace();
   const { t } = useTranslation('marketplace');
-
+  const theme = useTheme();
   const columnHelper = createColumnHelper<MarketplaceService>();
   const columns = useMemo(
     () => [
@@ -168,7 +168,7 @@ const Marketplace: React.FC = () => {
             id={`marketplace-table__link-${row.original.id}`}
           >
             <ArrowForwardIosIcon
-              sx={{ color: '#26c4c1', width: '20px', height: '20px' }}
+              sx={{ color: theme.palette.links, width: '20px', height: '20px' }}
             />
           </Box>
         ),

@@ -35,7 +35,7 @@ const WalletTopPanel = ({ balances, coins }: WalletTopPanelProps) => {
             <ZigPriceLabel
               value={balance}
               variant='h1'
-              color='almostWhite'
+              color='contrasting'
               coin='ZIG'
               coinProps={{
                 color: '#9864EF',
@@ -71,7 +71,7 @@ const WalletTopPanel = ({ balances, coins }: WalletTopPanelProps) => {
             <ZigPriceLabel
               value={balance * rate}
               usd
-              color='almostWhite'
+              color='contrasting'
               fontWeight={600}
               fontSize={16}
             />

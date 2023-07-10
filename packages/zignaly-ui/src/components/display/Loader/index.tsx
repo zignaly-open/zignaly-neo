@@ -12,7 +12,7 @@ export const Loader: React.FC<{
       width={width + "px"}
       height={height + "px"}
       color={dark.backgrounds.loader}
-      secondaryColor={"rgba(255, 255, 255, 0.2)"}
+      secondaryColor={dark.palette.contrasting + "33"}
       ariaLabel={"Loading..."}
     />
   );

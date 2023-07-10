@@ -79,16 +79,16 @@ type LayoutProps = {
   children: React.ReactNode[] | React.ReactNode;
 };
 
-export const Layout = styled.div`
+export const Layout = styled.div<LayoutProps>`
   display: flex;
   flex-direction: column;
 
-  ${(props: LayoutProps) => `
+  ${(props) => `
     ${styledIf(
       props.withError,
       `
       ${InputContainer} {
-        border-color: #CC3993;
+        border-color: ${props.theme.palette.redGraphOrError};
       }
     `,
     )}
@@ -109,7 +109,7 @@ export const Layout = styled.div`
       }
       
       ${InputValue} {
-        color: #C1C1C8;
+        color: ${props.theme.palette.neutral100};
       }
     `,
     )}
