@@ -22,10 +22,14 @@ import { useActiveExchange } from '../../../../../../apis/user/use';
 import { generatePath, useNavigate } from 'react-router-dom';
 import { ROUTE_TRADING_SERVICE_MANAGE } from '../../../../../../routes';
 import { ModalActions } from 'components/ZModal/ModalContainer/styles';
+import { Add } from '@mui/icons-material';
+import DepositModal from '../../../../../Dashboard/components/ManageInvestmentModals/DepositModal';
+import { useZModal } from '../../../../../../components/ZModal/use';
 
 const InvestInYourServiceForm: React.FC<{
   service?: ServiceFormData;
 }> = ({ service }) => {
+  const { showModal } = useZModal();
   const { t } = useTranslation(['service', 'edit-investment']);
   const coin = useCurrentBalance(service.baseCurrency);
   const exchange = useActiveExchange();
@@ -52,6 +56,28 @@ const InvestInYourServiceForm: React.FC<{
       }),
     ),
   });
+
+  const renderDepositCoin = () => (
+    <ZigButton
+      id={'invest-modal__deposit'}
+      startIcon={<Add sx={{ fill: 'currentColor !important' }} />}
+      sx={{
+        fontWeight: 400,
+        color: 'links',
+      }}
+      variant={'text'}
+      onClick={() =>
+        showModal(DepositModal, {
+          ctaId: 'invest-modal__deposit',
+          selectedCoin: coin.id,
+          // Callback to close the modal if user navigates to history from the deposit modal
+          onClose: close,
+        })
+      }
+    >
+      {t('action:deposit-coin', { coin: coin.id })}
+    </ZigButton>
+  );
 
   const onSubmit = async ({ amountToInvest }: ServiceInvestType) => {
     const result = await createService({
@@ -105,13 +131,16 @@ const InvestInYourServiceForm: React.FC<{
                 id={'withdraw-modal__input-amount'}
                 label={t('edit-investment:form.inputAmount.label')}
                 coin={coin.id}
-                placeholder={'0.0'}
                 balance={coin.balance}
                 min={minValue}
                 error={t(errors?.amountToInvest?.message, {
                   minValue,
                   minValueCoin: coin.id,
                 })}
+                extraInfo={{
+                  wrapExtraInfo: 3,
+                  others: [renderDepositCoin()],
+                }}
                 {...field}
               />
             )}
