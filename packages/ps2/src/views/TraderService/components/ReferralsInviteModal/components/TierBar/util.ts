@@ -1,8 +1,11 @@
 import { useMemo } from 'react';
 import { getBoostedCommissionPct } from '../../util';
 import { TierLevels } from 'apis/referrals/types';
+import { Options } from 'views/TraderService/components/ServiceHeader/styles';
 
 const BOLT_SPACE = 18;
+export const DEFAULT_MIN_HEIGHT = 32;
+export const DEFAULT_MAX_HEIGHT = 240;
 
 export const calculateLayerValue = (
   layer: number,
@@ -43,8 +46,10 @@ export const useTierLayers = (
   tierId: number,
   boost: number,
   serviceCommission: number,
-  { minHeight, maxHeight }: { minHeight: number; maxHeight: number },
+  options: { minHeight?: number; maxHeight?: number } = {},
 ) => {
+  const { minHeight = DEFAULT_MIN_HEIGHT, maxHeight = DEFAULT_MAX_HEIGHT } =
+    options;
   const tierCommission = tiers.find(
     (tier) => tier.id === tierId,
   )?.commissionPct;

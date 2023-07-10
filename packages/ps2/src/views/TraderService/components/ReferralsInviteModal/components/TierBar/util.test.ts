@@ -1,5 +1,4 @@
 import { renderHook } from '@testing-library/react';
-import { DEFAULT_MAX_HEIGHT, DEFAULT_MIN_HEIGHT } from '.';
 import { useTierLayers } from './util';
 
 const tiers = [
@@ -39,12 +38,7 @@ describe('useTierLayers', () => {
   it('should calculate the 3 layers when user + trader boost', () => {
     const {
       result: { current: layers },
-    } = renderHook(() =>
-      useTierLayers(tiers, 1, 2, 5, {
-        minHeight: DEFAULT_MIN_HEIGHT,
-        maxHeight: DEFAULT_MAX_HEIGHT,
-      }),
-    );
+    } = renderHook(() => useTierLayers(tiers, 1, 2, 5));
 
     expect(layers).toEqual([
       { value: 40, height: 114 },
@@ -62,12 +56,7 @@ describe('useTierLayers', () => {
   it('should calculate the 2 layers when user boost only', () => {
     const {
       result: { current: layers },
-    } = renderHook(() =>
-      useTierLayers(tiers, 1, 2, 0, {
-        minHeight: DEFAULT_MIN_HEIGHT,
-        maxHeight: DEFAULT_MAX_HEIGHT,
-      }),
-    );
+    } = renderHook(() => useTierLayers(tiers, 1, 2, 0));
 
     expect(layers).toEqual([
       { value: 20, height: expect.any(Number) },
@@ -85,12 +74,7 @@ describe('useTierLayers', () => {
   it('should calculate the 2 layers when trader boost only', () => {
     const {
       result: { current: layers },
-    } = renderHook(() =>
-      useTierLayers(tiers, 1, 1, 5, {
-        minHeight: DEFAULT_MIN_HEIGHT,
-        maxHeight: DEFAULT_MAX_HEIGHT,
-      }),
-    );
+    } = renderHook(() => useTierLayers(tiers, 1, 1, 5));
 
     expect(layers).toEqual([
       { value: 20, height: expect.any(Number) },
@@ -108,12 +92,7 @@ describe('useTierLayers', () => {
   it('should calculate the only layer when no boosts', () => {
     const {
       result: { current: layers },
-    } = renderHook(() =>
-      useTierLayers(tiers, 1, 1, 0, {
-        minHeight: DEFAULT_MIN_HEIGHT,
-        maxHeight: DEFAULT_MAX_HEIGHT,
-      }),
-    );
+    } = renderHook(() => useTierLayers(tiers, 1, 1, 0));
 
     expect(layers).toEqual([
       { value: 10, height: expect.any(Number) },

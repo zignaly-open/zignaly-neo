@@ -20,6 +20,9 @@ import { numericFormatter } from 'react-number-format';
 import Tiers from './components/TiersTable';
 import { ArrowForward, ArrowRight, ArrowRightAlt } from '@mui/icons-material';
 import { DescriptionLine } from './atoms';
+import { isFuture } from 'date-fns';
+import { getBoostedCommissionPct } from './util';
+import { max } from 'lodash';
 
 const ReferralsInviteModal = ({
   serviceId,
@@ -63,14 +66,14 @@ const ReferralsInviteModal = ({
   ];
   const { data: serviceCommission0 } = useServiceCommissionQuery({ serviceId });
   const serviceCommission = {
-    commission: 0,
+    commission: 10,
   };
   const [updateComission, updateComissionLoading] =
     useUpdateServiceCommissionMutation();
   const { data: referralData0 } = useReferralRewardsQuery();
   const referralData = {
     referralCode: 'code_2003',
-    invitedCount: 3,
+    invitedCount: 0,
     investorsCount: 0,
     usdtEarned: 11.0,
     usdtPending: 20.0,
@@ -78,7 +81,7 @@ const ReferralsInviteModal = ({
     tierLevelFactor: 30.0,
     discountPct: 25.0,
     boost: 2,
-    boostEndsAt: '2023-07-07T06:01:00',
+    boostEndsAt: '2023-07-17T06:01:00',
   };
   console.log(tiers, serviceCommission, referralData);
 
@@ -98,8 +101,19 @@ const ReferralsInviteModal = ({
 
   const onSubmit = () => {};
 
-  const maxCommission = trimZeros(1 * 100);
+  const maxCommission = getBoostedCommissionPct(
+    tiers[tiers.length - 1].commissionPct,
+    referralData.boost,
+    serviceCommission.commission,
+  );
+  const maxCommissionWithoutTraderBoost = getBoostedCommissionPct(
+    tiers[tiers.length - 1].commissionPct,
+    referralData.boost,
+    0,
+  );
+
   const inviteLeft = 5;
+  const boostRunning = isFuture(new Date(referralData.boostEndsAt));
 
   return (
     <ZModal
@@ -199,16 +213,59 @@ const ReferralsInviteModal = ({
         display='flex'
         flexDirection={'column'}
         alignItems={'center'}
-        mt='39px'
+        mt='40px'
+        mb='16px'
       >
         <Box display='flex' flexDirection={'column'}>
-          <DescriptionLine text={t('earn-success-fees')} />
-          <DescriptionLine
-            text={t('invite-and-earn', {
-              invite: inviteLeft,
-              commission: maxCommission,
-            })}
-          />
+          {inviteLeft > 0 && (
+            <>
+              {referralData.invitedCount > 0 ? (
+                <ZigTypography
+                  fontSize={19}
+                  textAlign={'left'}
+                  fontWeight={600}
+                >
+                  {t('invite-more', {
+                    invite: inviteLeft,
+                    commission: maxCommission,
+                  })}
+                </ZigTypography>
+              ) : (
+                <>
+                  <DescriptionLine text={t('earn-success-fees')} />
+                  {!boostRunning && !serviceCommission.commission && (
+                    <DescriptionLine
+                      text={t('invite-and-earn', {
+                        invite: inviteLeft,
+                        commission: maxCommission,
+                      })}
+                    />
+                  )}
+                  {boostRunning && (
+                    <DescriptionLine
+                      text={t('invite-and-earn-1-week', {
+                        invite: inviteLeft,
+                        commission: maxCommissionWithoutTraderBoost,
+                      })}
+                    />
+                  )}
+                  {serviceCommission.commission > 0 && (
+                    <DescriptionLine
+                      text={t('invite-and-earn-trader-boost', {
+                        invite: inviteLeft,
+                        commissionBefore: trimZeros(
+                          maxCommissionWithoutTraderBoost,
+                        ),
+                        commission: maxCommission,
+                        multiplier:
+                          maxCommission / maxCommissionWithoutTraderBoost,
+                      })}
+                    />
+                  )}
+                </>
+              )}
+            </>
+          )}
         </Box>
       </Box>
       {referralData && (

@@ -6,9 +6,13 @@
     "trader-referral-link": "Your referral link to this trader:",
     "earn-success-fees": "Earn a % of success fees paid by people you invite",
     "invite-and-earn": "Invite {{invite}}+ people and earn {{commission}}%",
+    "invite-more": "Invite {{invite}} More People and Get {{commission}}%",
+    "invite-and-earn-1-week": "Invite {{invite}}+ people within 1 week and earn {{commission}}%",
+    "invite-and-earn-trader-boost": "Invite {{invite}}+ people and earn {{commission}}% ({{commissionBefore}}% + {{multiplier}}x trader boost)",
     "max-earnings-from-fees": "Max earnings\nfrom {{amount}} of fees:",
     "base-commission": "Base commission:",
     "within-1-week": "Within 1 week",
+    "1-week-boost": "First week boost",
     "trader-boost": "Trader Boost",
     "invites": "Invites:",
     "your-rate": "Your Rate"

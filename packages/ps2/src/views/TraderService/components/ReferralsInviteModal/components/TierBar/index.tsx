@@ -14,16 +14,14 @@ import { TierBarProps } from './types';
 import { UserRate } from './atoms';
 
 const MULTIPLIER = 1.7;
-export const DEFAULT_MIN_HEIGHT = 32;
-export const DEFAULT_MAX_HEIGHT = 240;
 
 const TierBar = ({
   tier,
   serviceCommission,
   referral,
   tiers,
-  minHeight = DEFAULT_MIN_HEIGHT,
-  maxHeight = DEFAULT_MAX_HEIGHT,
+  minHeight,
+  maxHeight,
   width = 60,
   showArrow = true,
   minOpacity = 0.2,

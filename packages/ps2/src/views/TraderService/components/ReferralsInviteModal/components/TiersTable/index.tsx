@@ -6,11 +6,12 @@ import { useTranslation } from 'react-i18next';
 import { TierLevels } from 'apis/referrals/types';
 import { numericFormatter } from 'react-number-format';
 import { TooltipIcon } from '../../styles';
-import TierBar, { DEFAULT_MAX_HEIGHT, DEFAULT_MIN_HEIGHT } from '../TierBar';
+import TierBar from '../TierBar';
 import { TiersTableProps } from './types';
 import { useTierLayers } from '../TierBar/util';
 import BoostChip from '../BoostChip';
 import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
+import { isPast } from 'date-fns';
 
 const composeInvitesValue = (tierIndex: number, tiers: TierLevels) => {
   const currentTier = tiers[tierIndex];
@@ -45,7 +46,13 @@ const CellLabelBaseCommission = () => {
   );
 };
 
-const CellLabelBoost = ({ boost }: { boost: number }) => {
+const CellLabelBoost = ({
+  boost,
+  activated,
+}: {
+  boost: number;
+  activated: boolean;
+}) => {
   const { t } = useTranslation('referrals-trader');
 
   return (
@@ -56,9 +63,9 @@ const CellLabelBoost = ({ boost }: { boost: number }) => {
         variant='h4'
         textAlign='end'
         lineHeight='24px'
-        color='#e93ea7'
+        color={activated ? '#24b68d' : '#e93ea7'}
       >
-        {t('within-1-week')}
+        {t(activated ? '1-week-boost' : 'within-1-week')}
         <Tooltip title={t('zig-held-tooltip')}>
           <TooltipIcon />
         </Tooltip>
@@ -106,10 +113,6 @@ const TiersTable = ({
     tiers[0].id,
     referral.boost,
     serviceCommission,
-    {
-      minHeight: DEFAULT_MIN_HEIGHT,
-      maxHeight: DEFAULT_MAX_HEIGHT,
-    },
   );
 
   const composeCellTierLabels = () => {
@@ -117,13 +120,7 @@ const TiersTable = ({
       <td style={{ verticalAlign: 'bottom', position: 'relative' }}>
         {serviceCommission > 0 && (
           <Box position='absolute' bottom={layers[1].height} right={0}>
-            <CellLabelTraderBoost
-              boost={
-                referral.boost > 1
-                  ? layers[1].value / layers[2].value
-                  : layers[0].value / layers[1].value
-              }
-            />
+            <CellLabelTraderBoost boost={layers[0].value / layers[1].value} />
           </Box>
         )}
         {referral.boost > 1 && (
@@ -132,7 +129,10 @@ const TiersTable = ({
             bottom={layers.reverse().find((l) => l.value).height}
             right={0}
           >
-            <CellLabelBoost boost={referral.boost} />
+            <CellLabelBoost
+              activated={isPast(new Date(referral.boostEndsAt))}
+              boost={referral.boost}
+            />
           </Box>
         )}
         <CellLabelBaseCommission />
