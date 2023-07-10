@@ -1,7 +1,7 @@
 import { Box, css, styled } from '@mui/material';
 
 export const Overlay = styled(Box)<{ opacity: number }>`
-  background-image: ${({ emphasis, opacity }) =>
+  background-image: ${({ opacity }) =>
     `linear-gradient(rgba(33, 81, 78, ${opacity}), rgba(18,33,59, ${
       opacity * 0.52
     }))`};
@@ -15,23 +15,14 @@ export const Overlay = styled(Box)<{ opacity: number }>`
 export const TierBarContainer = styled(Box)<{
   opacity: number;
   emphasis: boolean;
-  subLayer: boolean;
-  highlighted: boolean;
+  subLayer?: boolean;
+  highlighted?: boolean;
 }>`
   border-radius: 4px;
-  /* background-image: linear-gradient(
-    to top,
-    rgba(18, 33, 59, ${({ opacity }) => opacity}),
-    rgba(33, 81, 78, ${({ opacity }) => 0.48 * opacity})
-  ); */
-  /* background-image: linear-gradient(to top, #12213bcc, rgba(33, 81, 78, 0.8)); */
-  /* background-image: linear-gradient(to top, #12213b, rgb(33, 81, 78)); */
   margin: 0 10px;
   position: relative;
   padding-top: 4px;
   overflow: hidden;
-  /* opacity: ${({ emphasis, opacity }) => opacity}; */
-  /* opacity: ${({ emphasis, opacity }) => opacity * (emphasis ? 0.52 : 1)}; */
 
   ${({ subLayer }) =>
     subLayer &&
@@ -140,7 +131,7 @@ export const BarContent0 = styled(Box)<{ subLayer: boolean }>`
   }
 `;
 
-export const BarContent = styled(Box)<{ subLayer: boolean }>`
+export const BarContent = styled(Box)<{ subLayer?: boolean }>`
   position: relative;
   align-items: center;
   display: flex;

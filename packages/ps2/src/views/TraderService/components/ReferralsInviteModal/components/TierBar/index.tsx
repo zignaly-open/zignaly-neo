@@ -8,15 +8,11 @@ import {
 } from './styles';
 import { ReactComponent as BoltIcon } from 'images/referrals/bolt.svg';
 import { ZigTypography } from '@zignaly-open/ui';
-import { TierLevel } from 'apis/referrals/types';
-import { getBoostedCommissionPct } from '../../util';
 import { Box } from '@mui/material';
-import { ca } from 'date-fns/locale';
-import { calculateLayerValue, useTierLayers } from './util';
+import { useTierLayers } from './util';
 import { TierBarProps } from './types';
 import { UserRate } from './atoms';
 
-const MIN_HEIGHT = 48;
 const MULTIPLIER = 1.7;
 export const DEFAULT_MIN_HEIGHT = 32;
 export const DEFAULT_MAX_HEIGHT = 240;
@@ -34,7 +30,6 @@ const TierBar = ({
   maxOpacity = 0.8,
   minFontSize = 12,
   maxFontSize = 15.5,
-  specialBoost = false,
 }: TierBarProps) => {
   const boost = referral?.boost;
   const min = tiers[0].commissionPct;
@@ -57,11 +52,6 @@ const TierBar = ({
         (maxOpacity - minOpacity),
     [min, max, tier],
   );
-
-  // const mul = useMemo(
-  //   () => 1 + Math.pow((tier.commissionPct - min) / (max - min), 1) * (1 - 0),
-  //   [min, max, tier],
-  // );
 
   // Bar font size
   const fontSizePower = 0.9;
@@ -89,15 +79,13 @@ const TierBar = ({
   }, [min, max, tier]);
 
   const [layer1, layer2, layer3] = useTierLayers(
-    tier.commissionPct,
+    tiers,
+    tier.id,
     boost,
     serviceCommission,
-    { min, max, minHeight, maxHeight },
+    { minHeight, maxHeight },
   );
 
-  // if (referral.tierLevelId === tier.id) {
-  //   console.log(layer1, layer2, layer3);
-  // }
   console.log(`\n---\nTier ${tier.id}:`);
   console.table([layer1, layer2, layer3]);
 

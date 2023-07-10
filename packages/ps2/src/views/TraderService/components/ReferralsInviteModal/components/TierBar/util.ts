@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { getBoostedCommissionPct } from '../../util';
+import { TierLevels } from 'apis/referrals/types';
 
 const BOLT_SPACE = 18;
 
@@ -28,17 +29,28 @@ export const calculateLayerValue = (
   return 0;
 };
 
+/**
+ * Calculate the commission value and height for each layer of the tier bar.
+ * - 1st layer: Full bar, including all the boosts.
+ * - 2nd layer:
+ *   - If trader boost (in layer 1): Show user boost
+ *   - Else if user boost (in layer 1): Show base commission
+ *   - Otherwise none
+ * - 3rd layer: Show the base commission only if user boost AND trader boost.
+ */
 export const useTierLayers = (
-  tierCommission: number,
+  tiers: TierLevels,
+  tierId: number,
   boost: number,
   serviceCommission: number,
-  {
-    min,
-    max,
-    minHeight,
-    maxHeight,
-  }: { min: number; max: number; minHeight: number; maxHeight: number },
+  { minHeight, maxHeight }: { minHeight: number; maxHeight: number },
 ) => {
+  const tierCommission = tiers.find(
+    (tier) => tier.id === tierId,
+  )?.commissionPct;
+  const min = tiers[0].commissionPct;
+  const max = tiers[tiers.length - 1].commissionPct;
+
   const layers =
     serviceCommission > 0 && boost > 1
       ? 3

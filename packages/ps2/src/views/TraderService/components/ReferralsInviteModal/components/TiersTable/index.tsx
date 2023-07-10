@@ -1,15 +1,14 @@
 import React from 'react';
 import { Box, Tooltip } from '@mui/material';
-import { ZigTypography, ZigUserIcon, trimZeros } from '@zignaly-open/ui';
-import { MAX_FEES_AMOUNT, getMaxEarnings, maxCommission } from '../../util';
+import { ZigTypography } from '@zignaly-open/ui';
+import { MAX_FEES_AMOUNT, getMaxEarnings } from '../../util';
 import { useTranslation } from 'react-i18next';
 import { TierLevels } from 'apis/referrals/types';
-import { NumericFormat, numericFormatter } from 'react-number-format';
+import { numericFormatter } from 'react-number-format';
 import { TooltipIcon } from '../../styles';
 import TierBar, { DEFAULT_MAX_HEIGHT, DEFAULT_MIN_HEIGHT } from '../TierBar';
 import { TiersTableProps } from './types';
-import { StyledTd, TableItem, ItemContainer } from './styles';
-import { calculateLayerValue, useTierLayers } from '../TierBar/util';
+import { useTierLayers } from '../TierBar/util';
 import BoostChip from '../BoostChip';
 import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
 
@@ -46,12 +45,12 @@ const CellLabelBaseCommission = () => {
   );
 };
 
-const CellLabelBoost = () => {
+const CellLabelBoost = ({ boost }: { boost: number }) => {
   const { t } = useTranslation('referrals-trader');
 
   return (
     <Box display='flex' alignItems='center' gap='7px' justifyContent='flex-end'>
-      <BoostChip boost={2} />
+      <BoostChip boost={boost} />
       <ZigTypography
         fontWeight={500}
         variant='h4'
@@ -68,7 +67,7 @@ const CellLabelBoost = () => {
   );
 };
 
-const CellLabelTraderBoost = () => {
+const CellLabelTraderBoost = ({ boost }: { boost: number }) => {
   const { t } = useTranslation('referrals-trader');
 
   return (
@@ -78,7 +77,7 @@ const CellLabelTraderBoost = () => {
       gap='10px'
       justifyContent='flex-end'
     >
-      <BoostChip boost={2} showBolt />
+      <BoostChip boost={boost} showBolt />
       <ZigTypography
         fontWeight={500}
         variant='h4'
@@ -103,12 +102,11 @@ const TiersTable = ({
   const { t } = useTranslation(['referrals-trader', 'service']);
 
   const layers = useTierLayers(
-    tiers[0].commissionPct,
+    tiers,
+    tiers[0].id,
     referral.boost,
     serviceCommission,
     {
-      min: tiers[0].commissionPct,
-      max: tiers[tiers.length - 1].commissionPct,
       minHeight: DEFAULT_MIN_HEIGHT,
       maxHeight: DEFAULT_MAX_HEIGHT,
     },
@@ -117,14 +115,24 @@ const TiersTable = ({
   const composeCellTierLabels = () => {
     return (
       <td style={{ verticalAlign: 'bottom', position: 'relative' }}>
-        {layers[1].value > 0 && (
+        {serviceCommission > 0 && (
           <Box position='absolute' bottom={layers[1].height} right={0}>
-            <CellLabelTraderBoost boost={layers[1].value} />
+            <CellLabelTraderBoost
+              boost={
+                referral.boost > 1
+                  ? layers[1].value / layers[2].value
+                  : layers[0].value / layers[1].value
+              }
+            />
           </Box>
         )}
-        {layers[2].value > 0 && (
-          <Box position='absolute' bottom={layers[2].height} right={0}>
-            <CellLabelBoost />
+        {referral.boost > 1 && (
+          <Box
+            position='absolute'
+            bottom={layers.reverse().find((l) => l.value).height}
+            right={0}
+          >
+            <CellLabelBoost boost={referral.boost} />
           </Box>
         )}
         <CellLabelBaseCommission />

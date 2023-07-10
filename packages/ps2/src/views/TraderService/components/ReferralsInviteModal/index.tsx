@@ -18,6 +18,8 @@ import { InviteBox, TooltipIcon } from './styles';
 import TierBar from './components/TierBar';
 import { numericFormatter } from 'react-number-format';
 import Tiers from './components/TiersTable';
+import { ArrowForward, ArrowRight, ArrowRightAlt } from '@mui/icons-material';
+import { DescriptionLine } from './atoms';
 
 const ReferralsInviteModal = ({
   serviceId,
@@ -75,7 +77,7 @@ const ReferralsInviteModal = ({
     tierLevelId: 3,
     tierLevelFactor: 30.0,
     discountPct: 25.0,
-    boost: 1.5,
+    boost: 2,
     boostEndsAt: '2023-07-07T06:01:00',
   };
   console.log(tiers, serviceCommission, referralData);
@@ -200,19 +202,13 @@ const ReferralsInviteModal = ({
         mt='39px'
       >
         <Box display='flex' flexDirection={'column'}>
-          <ZigTypography color='rgba(255, 255, 255, 0.6)' fontSize={16}>
-            {t('earn-success-fees')}
-          </ZigTypography>
-          <ZigTypography
-            color='rgba(255, 255, 255, 0.6)'
-            fontSize={16}
-            textAlign={'left'}
-          >
-            {t('invite-and-earn', {
+          <DescriptionLine text={t('earn-success-fees')} />
+          <DescriptionLine
+            text={t('invite-and-earn', {
               invite: inviteLeft,
               commission: maxCommission,
             })}
-          </ZigTypography>
+          />
         </Box>
       </Box>
       {referralData && (
