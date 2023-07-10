@@ -1,5 +1,5 @@
 import { styled } from '@mui/material';
-import { MenuDropDown } from '@zignaly-open/ui';
+import { dark, MenuDropDown } from '@zignaly-open/ui';
 import { Link } from 'react-router-dom';
 
 export const Layout = styled('div')`
@@ -9,7 +9,7 @@ export const Layout = styled('div')`
   width: 100%;
   right: 0;
   left: 0;
-  background: #0f0f25;
+  background: ${dark.backgrounds.secondaryBackground};
   z-index: 50;
 `;
 
@@ -48,7 +48,7 @@ export const Option = styled('span', {
   }
 
   &:hover {
-    background: #1b213d;
+    background: ${dark.palette.neutral750};
     & > * {
       color: ${({ theme }) => theme.palette.neutral100};
     }
@@ -66,13 +66,13 @@ export const HeadOption = styled(Option)<
   display: flex;
   align-items: center;
   height: 56px;
-  background: #0f0f25;
+  background: ${dark.backgrounds.secondaryBackground};
 
   ${({ isSubOption }) =>
     isSubOption
       ? `
         padding: 0 10%;
-        background: #11152B;
+        background: ${dark.palette.neutral800};
       `
       : `
         justify-content: center;

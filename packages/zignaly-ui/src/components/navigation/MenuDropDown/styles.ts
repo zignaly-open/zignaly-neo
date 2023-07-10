@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { dark } from "theme";
 import { styledIf } from "../../../utils/styled";
 
 export const Layout = styled.div`
@@ -51,7 +52,7 @@ export const Button = styled.div<ButtonProps>`
   user-select: none;
   height: 56px;
   cursor: pointer;
-  background: #0f0f25;
+  background: ${dark.backgrounds.secondaryBackground};
 
   ${({ center, theme, isActiveDropDown, focused }) => `    
     ${styledIf(
@@ -71,8 +72,7 @@ export const Button = styled.div<ButtonProps>`
     ${styledIf(
       isActiveDropDown,
       `
-      background: #11152b;
-      box-shadow: 0px 2.5px 13.5px 1px rgba(0, 0, 0, 0.42);
+      background: ${theme.palette.neutral800};
       border-color: transparent !important;
 
       ${ArrowIcon} {
@@ -105,7 +105,6 @@ export const DropDown = styled.div<any>`
     max-height: ${props.maxHeight ?? "200px"};
   `}
 
-  box-shadow: 0px 2.5px 13.5px 1px rgba(0, 0, 0, 0.42);
   border-radius: 0 0 8px 8px;
   border-top: 1px solid ${({ theme }) => theme.palette.neutral700}80;
 `;
