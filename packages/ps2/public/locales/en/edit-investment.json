@@ -46,6 +46,7 @@
     "link-label": "View"
   },
   "investorDetail-successFee": "{{fee}}% Success fee",
+  "investorDetail-successFee-discounted": "<0>{{oldFee}}%</0> {{fee}}% Success fee",
   "modal": {
     "withdrawInvestment": {
       "title": "Withdrawal Request",
