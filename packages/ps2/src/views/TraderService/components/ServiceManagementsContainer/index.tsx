@@ -169,7 +169,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                       { claim: Math.abs(management.claims) },
                     )}
                   >
-                    {t('neededSnapshot')}
+                    <div>{t('neededSnapshot')}</div>
                   </Tooltip>
                   <InlinePriceLabel
                     value={parseFloat((-management.claims).toString())}
