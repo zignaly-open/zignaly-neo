@@ -96,7 +96,7 @@ An auto-deploy would trigger when you merge to `master`.
 
 ### Deploy to prod
 
-Create a release on Github with a `release-ps2-{date}-{description}` tag to deploy ps2. Like, `release-ps2-20121222-prevent-apocalypse`. Alternatively you can just push that tag directly but that would be considered *NOT COOL*.
+Create a release on Github with a `release-ps2-{date}-{description}` tag to deploy ps2. Like, `release-ps2-20121222-prevent-apocalypse`. 
 
 
 ## Packages
