@@ -75,7 +75,7 @@ yarn storybook
 
 ### Themes
 
-If you'd like to re change the color palette, please modify corresponding values in `packages/zignaly-ui/src/theme/example.ts`. Feel free to use `packages/zignaly-ui/src/theme/dark.ts` (the the,e we use for the Zignaly Profit Sharing app) as reference. 
+If you'd like to re change the color palette, please modify corresponding values in `packages/zignaly-ui/src/theme/example.ts`. Feel free to use `packages/zignaly-ui/src/theme/dark.ts` (the theme we use for the Zignaly Profit Sharing app) as reference. 
 
 So, to play with the colors:
 
