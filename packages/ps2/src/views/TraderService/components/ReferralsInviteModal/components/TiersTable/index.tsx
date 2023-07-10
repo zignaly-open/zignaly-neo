@@ -113,8 +113,8 @@ const TiersTable = ({
     tiers[0].id,
     referral.boost,
     serviceCommission,
+    zignalyCommission,
   );
-
   const composeCellTierLabels = () => {
     return (
       <td style={{ verticalAlign: 'bottom', position: 'relative' }}>
@@ -153,6 +153,7 @@ const TiersTable = ({
                 referral={referral}
                 tiers={tiers}
                 serviceCommission={serviceCommission}
+                zignalyCommission={zignalyCommission}
               />
             </Box>
           </td>

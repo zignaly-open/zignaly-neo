@@ -12,10 +12,16 @@ export const calculateLayerValue = (
   tierCommission: number,
   boost: number,
   serviceCommission: number,
+  zignalyCommission: number,
 ) => {
   if (layer === 1) {
     // User boost + Trader boost
-    return getBoostedCommissionPct(tierCommission, boost, serviceCommission);
+    return getBoostedCommissionPct(
+      tierCommission,
+      boost,
+      serviceCommission,
+      zignalyCommission,
+    );
   } else if (layer === 2) {
     if (boost === 1 && serviceCommission === 0) return 0;
 
@@ -46,6 +52,7 @@ export const useTierLayers = (
   tierId: number,
   boost: number,
   serviceCommission: number,
+  zignalyCommission?: number,
   options: { minHeight?: number; maxHeight?: number } = {},
 ) => {
   const { minHeight = DEFAULT_MIN_HEIGHT, maxHeight = DEFAULT_MAX_HEIGHT } =
@@ -72,6 +79,7 @@ export const useTierLayers = (
       tierCommission,
       boost,
       serviceCommission,
+      zignalyCommission,
     );
 
     // Adjust this value to control the curve
@@ -90,6 +98,7 @@ export const useTierLayers = (
       tierCommission,
       boost,
       serviceCommission,
+      zignalyCommission,
     );
     const height = (value / layer1.value) * layer1.height;
 
@@ -105,6 +114,7 @@ export const useTierLayers = (
       tierCommission,
       boost,
       serviceCommission,
+      zignalyCommission,
     );
     // const height =
     //   Math.min(value / layer1.value, 0.25) * layer1.height * MULTIPLIER;

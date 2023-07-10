@@ -12,6 +12,7 @@ export type TierBarProps = {
   minFontSize?: number;
   maxFontSize?: number;
   serviceCommission: number;
+  zignalyCommission: number;
   specialBoost: boolean;
   referral: ReferralRewards;
 };

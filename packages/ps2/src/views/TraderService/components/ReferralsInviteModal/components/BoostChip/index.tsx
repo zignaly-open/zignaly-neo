@@ -12,7 +12,7 @@ const BoostChip = ({
 }) => (
   <BoostBox>
     <ZigTypography fontSize={13}>
-      {+boost.toFixed(1)}
+      {+boost.toFixed(2)}
       {'x'}
     </ZigTypography>
     {showBolt && <BoltIcon width={10} height={19} />}

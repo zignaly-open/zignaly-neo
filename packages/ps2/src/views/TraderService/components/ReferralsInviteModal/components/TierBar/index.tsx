@@ -18,6 +18,7 @@ const MULTIPLIER = 1.7;
 const TierBar = ({
   tier,
   serviceCommission,
+  zignalyCommission,
   referral,
   tiers,
   minHeight,
@@ -81,6 +82,7 @@ const TierBar = ({
     tier.id,
     boost,
     serviceCommission,
+    zignalyCommission,
     { minHeight, maxHeight },
   );
 

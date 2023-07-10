@@ -68,6 +68,7 @@ const ReferralsInviteModal = ({
   const serviceCommission = {
     commission: 10,
   };
+  const zignalyCommission = 5;
   const [updateComission, updateComissionLoading] =
     useUpdateServiceCommissionMutation();
   const { data: referralData0 } = useReferralRewardsQuery();
@@ -105,6 +106,7 @@ const ReferralsInviteModal = ({
     tiers[tiers.length - 1].commissionPct,
     referralData.boost,
     serviceCommission.commission,
+    zignalyCommission,
   );
   const maxCommissionWithoutTraderBoost = getBoostedCommissionPct(
     tiers[tiers.length - 1].commissionPct,
@@ -273,7 +275,7 @@ const ReferralsInviteModal = ({
           tiers={tiers}
           referral={referralData}
           serviceCommission={serviceCommission.commission}
-          zignalyCommission={5}
+          zignalyCommission={zignalyCommission}
         />
       )}
     </ZModal>
