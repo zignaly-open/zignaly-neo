@@ -48,6 +48,12 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       method: 'POST',
     }),
   }),
+  sendCodeWithdraw: builder.mutation<void, void>({
+    query: () => ({
+      url: `user/resend_code/withdraw`,
+      method: 'POST',
+    }),
+  }),
 
   verifyCode: builder.mutation<void, { code: string }>({
     query: ({ code }) => ({
@@ -254,4 +260,5 @@ export const {
   useEnable2FAMutation,
   useBalanceQuery,
   useLazyBalanceQuery,
+  useSendCodeWithdrawMutation,
 } = api;

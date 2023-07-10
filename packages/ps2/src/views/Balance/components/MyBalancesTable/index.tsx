@@ -141,11 +141,11 @@ const MyBalancesTable = (): JSX.Element => {
                 narrow
                 tooltip={t('withdraw')}
                 id={`balance-row__withdrawal-${row.original.coin}`}
-                onClick={() =>
+                onClick={() => {
                   showModal(WithdrawModal, {
                     selectedCoin: row.original.coin,
-                  })
-                }
+                  });
+                }}
                 variant='outlined'
               >
                 <Remove

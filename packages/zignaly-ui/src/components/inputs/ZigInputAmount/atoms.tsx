@@ -31,7 +31,7 @@ const extractItem = (
 export const InputExtraInfo = (
   props: InputExtraInfoProps & {
     coin: string;
-    id: string;
+    id?: string;
   },
 ) => {
   const { balance, min, max, coin, extraInfo = {} } = props;
@@ -107,7 +107,7 @@ export const InputExtraInfo = (
             <Divider
               id={props.id && `${props.id}-divider`}
               orientation="vertical"
-              sx={{ borderColor: "neutral600", m: "1px 12px" }}
+              sx={{ borderColor: "neutral600", m: "1px 10px" }}
               flexItem
             />
           )}
