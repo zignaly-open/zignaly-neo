@@ -9,19 +9,23 @@ export const calculateLayerValue = (
   boost: number,
   serviceCommission: number,
 ) => {
-  if (layer === 3) {
-    // Only used to show the base commission when there is a boost and service commission
-    return boost > 1 && serviceCommission > 0 ? tierCommission : 0;
+  if (layer === 1) {
+    // User boost + Trader boost
+    return getBoostedCommissionPct(tierCommission, boost, serviceCommission);
   } else if (layer === 2) {
-    // Don't apply boost here if there is no service commission, since it will be applied in layer 1
+    if (boost === 1 && serviceCommission === 0) return 0;
+
+    // User boost without trader boost OR trader boost
     return getBoostedCommissionPct(
       tierCommission,
       serviceCommission > 0 ? boost : 1,
     );
-  } else {
-    // layer 1 = max value
-    return getBoostedCommissionPct(tierCommission, boost, serviceCommission);
+  } else if (layer === 3) {
+    // Only used to show the base commission when there is a boost and service commission
+    return boost > 1 && serviceCommission > 0 ? tierCommission : 0;
   }
+
+  return 0;
 };
 
 export const useTierLayers = (

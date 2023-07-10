@@ -14,6 +14,7 @@ import { Box } from '@mui/material';
 import { ca } from 'date-fns/locale';
 import { calculateLayerValue, useTierLayers } from './util';
 import { TierBarProps } from './types';
+import { UserRate } from './atoms';
 
 const MIN_HEIGHT = 48;
 const MULTIPLIER = 1.7;
@@ -106,97 +107,101 @@ const TierBar = ({
   const layer1MinHeight = layers > 1 ? layer2.height + 48 : 0;
 
   return (
-    <Box position='relative' minHeight={layer1MinHeight} height={layer1.height}>
-      <TierBarContainer
-        opacity={opacity}
-        width={width}
-        height={1}
-        emphasis={showArrow}
+    <div>
+      {referral.tierLevelId === tier.id && <UserRate />}
+      <Box
+        position='relative'
+        minHeight={layer1MinHeight}
+        height={layer1.height}
       >
-        <BarContent>
-          {layers > 1 && <BoltIcon />}
-          <ZigTypography
-            color={
-              layers > 1 ? (showArrow ? '#28ba62' : 'greenGraph') : 'neutral200'
-            }
-            fontSize={fontSize}
-            fontWeight={showArrow ? 600 : 500}
-          >
-            {/* eslint-disable-next-line i18next/no-literal-string */}
-            {layer1.value}%
-          </ZigTypography>
-        </BarContent>
-        {showArrow && <TierArrow opacity={opacityArrow} />}
-        <Overlay opacity={opacity} />
-      </TierBarContainer>
-      {referral.tierLevelId === tier.id && (
-        <HighlightRate
-          height={Math.max(
-            layer1.height - layer2.height,
-            layer1MinHeight - layer2.height,
-          )}
-          width={width - 3}
-        />
-      )}
-
-      {layer2.value > 0 && (
-        <>
-          <TierBarContainer
-            // opacity={showArrow ? 0.45 : opacity}
-            // opacity={opacity / 2}
-            opacity={opacity}
-            width={width}
-            height={layer2.height}
-            emphasis={showArrow}
-            subLayer={true}
-          >
-            <Overlay opacity={opacity} />
-            <BarContent subLayer={true}>
-              <ZigTypography
-                color={layers > 2 ? 'greenGraph' : 'neutral200'}
-                fontSize={fontSize}
-                fontWeight={500}
-              >
-                {/* eslint-disable-next-line i18next/no-literal-string */}
-                {layer2.value}%
-              </ZigTypography>
-            </BarContent>
-          </TierBarContainer>
-          {/* <BarContent
-            height={layer2.height}
-            subLayer={true}
-            pb={`${layer3.height}px`}
-          ></BarContent> */}
-        </>
-      )}
-      {layer3.value > 0 && (
-        <>
-          <TierBarContainer
-            // opacity={showArrow ? 0.3 : opacity}
-            // opacity={opacity / 2.7}
-            opacity={opacity}
-            width={width}
-            height={layer3.height}
-            emphasis={showArrow}
-            subLayer={true}
-          >
-            <Overlay opacity={opacity} />
-            <BarContent subLayer={true}>
-              <ZigTypography
-                color='neutral200'
-                fontSize={fontSize}
-                fontWeight={500}
-              >
-                {/* eslint-disable-next-line i18next/no-literal-string */}
-                {layer3.value}%
-              </ZigTypography>
-            </BarContent>
-          </TierBarContainer>
-
-          {/* <BarContent height={layer3.height} subLayer={true}></BarContent> */}
-        </>
-      )}
-    </Box>
+        <TierBarContainer
+          opacity={opacity}
+          width={width}
+          height={1}
+          emphasis={showArrow}
+        >
+          <BarContent>
+            {layers > 1 && <BoltIcon />}
+            <ZigTypography
+              color={
+                layers > 1
+                  ? showArrow
+                    ? '#28ba62'
+                    : 'greenGraph'
+                  : 'neutral200'
+              }
+              fontSize={fontSize}
+              fontWeight={showArrow ? 600 : 500}
+            >
+              {layer1.value}
+              {'%'}
+            </ZigTypography>
+          </BarContent>
+          {showArrow && <TierArrow opacity={opacityArrow} />}
+          <Overlay opacity={opacity} />
+        </TierBarContainer>
+        {referral.tierLevelId === tier.id && (
+          <HighlightRate
+            height={Math.max(
+              layer1.height - layer2.height,
+              layer1MinHeight - layer2.height,
+            )}
+            width={width - 3}
+          />
+        )}
+        {layer2.value > 0 && (
+          <>
+            <TierBarContainer
+              // opacity={showArrow ? 0.45 : opacity}
+              // opacity={opacity / 2}
+              opacity={opacity}
+              width={width}
+              height={layer2.height}
+              emphasis={showArrow}
+              subLayer={true}
+            >
+              <Overlay opacity={opacity} />
+              <BarContent subLayer={true}>
+                <ZigTypography
+                  color={layers > 2 ? 'greenGraph' : 'neutral200'}
+                  fontSize={fontSize}
+                  fontWeight={500}
+                >
+                  {layer2.value}
+                  {'%'}
+                </ZigTypography>
+              </BarContent>
+            </TierBarContainer>
+          </>
+        )}
+        {layer3.value > 0 && (
+          <>
+            <TierBarContainer
+              // opacity={showArrow ? 0.3 : opacity}
+              // opacity={opacity / 2.7}
+              opacity={opacity}
+              width={width}
+              height={layer3.height}
+              emphasis={showArrow}
+              subLayer={true}
+            >
+              <Overlay opacity={opacity} />
+              <BarContent subLayer={true}>
+                <ZigTypography
+                  color='neutral200'
+                  fontSize={fontSize}
+                  fontWeight={500}
+                >
+                  {layer3.value}
+                  {'%'}
+                </ZigTypography>
+              </BarContent>
+            </TierBarContainer>
+            {/* <BarContent height={layer3.height} subLayer={true}></BarContent> */}
+          </>
+        )}
+      </Box>
+    </div>
   );
 };
 

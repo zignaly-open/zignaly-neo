@@ -117,12 +117,12 @@ const TiersTable = ({
   const composeCellTierLabels = () => {
     return (
       <td style={{ verticalAlign: 'bottom', position: 'relative' }}>
-        {layers[2] && (
+        {layers[1].value > 0 && (
           <Box position='absolute' bottom={layers[1].height} right={0}>
-            <CellLabelTraderBoost />
+            <CellLabelTraderBoost boost={layers[1].value} />
           </Box>
         )}
-        {layers[1] && (
+        {layers[2].value > 0 && (
           <Box position='absolute' bottom={layers[2].height} right={0}>
             <CellLabelBoost />
           </Box>
@@ -133,7 +133,7 @@ const TiersTable = ({
   };
 
   return (
-    <table>
+    <table style={{ marginTop: '16px' }}>
       <tr>
         {composeCellTierLabels()}
         {tiers?.map((tier, tierIndex) => (

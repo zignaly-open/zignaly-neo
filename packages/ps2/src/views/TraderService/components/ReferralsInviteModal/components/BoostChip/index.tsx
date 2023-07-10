@@ -11,8 +11,10 @@ const BoostChip = ({
   showBolt?: boolean;
 }) => (
   <BoostBox>
-    {/* eslint-disable-next-line i18next/no-literal-string */}
-    <ZigTypography fontSize={13}>{boost}x</ZigTypography>
+    <ZigTypography fontSize={13}>
+      {boost}
+      {'x'}
+    </ZigTypography>
     {showBolt && <BoltIcon width={10} height={19} />}
   </BoostBox>
 );
