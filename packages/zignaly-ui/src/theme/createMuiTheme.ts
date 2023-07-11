@@ -162,9 +162,13 @@ export default ({ palette, mode, backgrounds, boxShadows, fontFamily }: Theme) =
             display: flex;
             align-items: center;
             flex-direction: row;
-            height: 52px;
+            &, & > .MuiToolbar-root {
+              height: 52px;
+              min-height: 52px;
+            }
             border: none;
             z-index: 12;
+            
           `,
         },
       },
