@@ -161,20 +161,25 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 </ZigTypography>
 
                 <ZigTypography color='neutral400' variant='body2'>
+                  <div>{t('neededSnapshot')}</div>
                   <Tooltip
                     title={t(
                       `${
-                        management.claims >= 0 ? 'positive' : 'negative'
+                        management?.claims >= 0 ? 'positive' : 'negative'
                       }-claim`,
-                      { claim: Math.abs(management.claims) },
+                      {
+                        claim: Math.abs(management?.claims),
+                        coin: service?.ssc ?? 'USDT',
+                      },
                     )}
                   >
-                    <div>{t('neededSnapshot')}</div>
+                    <div>
+                      <InlinePriceLabel
+                        value={parseFloat((-management?.claims).toString())}
+                        coin={service?.ssc ?? 'USDT'}
+                      />
+                    </div>
                   </Tooltip>
-                  <InlinePriceLabel
-                    value={parseFloat((-management.claims).toString())}
-                    coin={service?.ssc ?? 'USDT'}
-                  />
                 </ZigTypography>
 
                 <ZigTypography color='neutral400' variant='body2'>
