@@ -36,7 +36,6 @@ export const Layout = styled.div<{ error?: string; loading?: boolean }>`
       border-radius: 8px;
       border: 1px solid ${(props) => `${props.theme.palette.neutral600}`} !important;
       color: ${(props) => `${props.theme.palette.neutral100}`};
-      font-family: "Avenir Next", "Red Hat Text", sans-serif;
       width: 64px !important;
       height: 64px !important;
       font-size: 26px;

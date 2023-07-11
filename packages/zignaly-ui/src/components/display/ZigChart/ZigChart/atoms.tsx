@@ -22,13 +22,13 @@ export const ChartTooltip = React.memo(
             {
               fill: theme.palette.neutral300,
               fontSize: "14px",
-              fontFamily: "Avenir Next",
+              fontFamily: theme.typography.fontFamily,
             },
             {
               fill: theme.palette.neutral200,
               fontSize: "15px",
               fontWeight: 500,
-              fontFamily: "Avenir Next",
+              fontFamily: theme.typography.fontFamily,
             },
           ]}
         />

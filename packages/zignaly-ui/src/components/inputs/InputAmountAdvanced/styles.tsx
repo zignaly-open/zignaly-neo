@@ -35,7 +35,6 @@ export const InputValue = styled.input`
   line-height: 36px;
   letter-spacing: 0.55px;
   width: 100%;
-  font-family: "Avenir Next", sans-serif;
 `;
 
 export const BalanceLabel = muiStyled(ZigTypography)`

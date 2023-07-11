@@ -1,3 +1,4 @@
+import React from 'react';
 import { createGlobalStyle } from 'styled-components';
 import { NiceScrollbar } from '@zignaly-open/ui';
 // TODO: fix this, smth weird with type defs not loading
@@ -5,9 +6,11 @@ import { NiceScrollbar } from '@zignaly-open/ui';
 // @ts-ignore
 import { isWebpSupported } from 'react-image-webp/dist/utils';
 import { whitelabel } from './whitelabel';
+import { GlobalStyles } from '@mui/system';
+import { useTheme } from '@mui/material';
 
 // Copied from webapp-neo
-const GlobalStyle = createGlobalStyle`
+const GlobalAppStyle = createGlobalStyle`
 body {
     padding: 0;
     margin: 0;
@@ -22,7 +25,6 @@ body {
     };
     background-repeat: no-repeat;
     background-size: cover;
-    font-family: 'Avenir Next', sans-serif;
     font-size: 100%;
     color: #fff;
     overflow: overlay;
@@ -748,4 +750,14 @@ body {
   }
 `;
 
-export default GlobalStyle;
+export default () => {
+  const theme = useTheme();
+  return (
+    <>
+      <GlobalAppStyle />
+      <GlobalStyles
+        styles={{ body: { fontFamily: theme.typography.fontFamily } }}
+      />
+    </>
+  );
+};

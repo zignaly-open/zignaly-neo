@@ -7,7 +7,7 @@ const {
 } = createTheme();
 const createColor = (mainColor: string) => augmentColor({ color: { main: mainColor } });
 
-export default ({ palette, mode, backgrounds, boxShadows }: Theme) =>
+export default ({ palette, mode, backgrounds, boxShadows, fontFamily }: Theme) =>
   createTheme({
     palette: {
       ...palette,
@@ -27,7 +27,7 @@ export default ({ palette, mode, backgrounds, boxShadows }: Theme) =>
       tonalOffset: 0.2,
     },
     typography: {
-      fontFamily: ["Avenir Next", "Roboto", "Helvetica", "Arial", "sans-serif"].join(","),
+      fontFamily: fontFamily.join(","),
       button: {
         textTransform: "none",
       },
@@ -96,7 +96,6 @@ export default ({ palette, mode, backgrounds, boxShadows }: Theme) =>
             line-height: 20px;
             letter-spacing: 0.55px;
             width: 100%;
-            font-family: "Avenir Next", sans-serif;
             box-shadow: none !important;
             resize: none;
             background: ${backgrounds.input};

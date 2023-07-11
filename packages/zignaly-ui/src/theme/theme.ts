@@ -1,4 +1,5 @@
 interface Theme {
+  fontFamily: string[];
   palette: {
     neutral900: string;
     neutral800: string;

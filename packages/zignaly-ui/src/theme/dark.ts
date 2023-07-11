@@ -3,6 +3,7 @@ import createMuiTheme from "./createMuiTheme";
 
 const dark: Theme = {
   mode: "dark",
+  fontFamily: ["Avenir Next", "Roboto", "Helvetica", "Arial", "sans-serif"],
   palette: {
     neutral900: "#06061A",
     neutral800: "#12152c",

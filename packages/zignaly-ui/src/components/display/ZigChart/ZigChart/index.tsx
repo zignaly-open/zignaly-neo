@@ -8,7 +8,7 @@ import {
   VictoryBar,
   VictoryVoronoiContainer,
 } from "victory";
-import { axisStyle, ChartLayoutLarge } from "../styles";
+import { useAxisStyle, ChartLayoutLarge } from "../styles";
 import { AxisFormat, ChartColor, ChartLargeProps } from "../types";
 import { useChartData } from "../hooks";
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -30,6 +30,7 @@ const ZigChart = ({
   precision = 2,
 }: ChartLargeProps) => {
   const theme = useTheme();
+  const axisStyle = useAxisStyle();
   const { data: processedData, color, gradient, yDomain } = useChartData(data, "full", precision);
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
