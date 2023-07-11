@@ -17,6 +17,6 @@ export type WhitelabelOverride = {
   mainAppLink?: string;
   logo?: string;
   background?: string;
-  fontImport?: string;
+  loadFontsFromGoogle?: boolean;
   backgroundImage?: string | null;
 };

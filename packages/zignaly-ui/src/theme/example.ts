@@ -4,7 +4,7 @@ import createMuiTheme from "./createMuiTheme";
 // aesthetic-wise, this very theme is a very good example of how NOT to design apps
 const example: Theme = {
   mode: "light",
-  fontFamily: ["Amatic SC", "cursive"],
+  fontFamily: ["Handlee", "cursive"],
   palette: {
     neutral900: "#fba9a5",
     neutral800: "#fa7f79",

@@ -8,6 +8,7 @@ import { isWebpSupported } from 'react-image-webp/dist/utils';
 import { whitelabel } from './whitelabel';
 import { GlobalStyles } from '@mui/system';
 import { useTheme } from '@mui/material';
+import GoogleFontLoader from 'react-google-font-loader';
 
 // Copied from webapp-neo
 const GlobalAppStyle = createGlobalStyle`
@@ -50,7 +51,7 @@ body {
   }
 
   ${
-    whitelabel.fontImport ||
+    !whitelabel.loadFontsFromGoogle &&
     css`
       /** Fonts **/
       @font-face {
@@ -760,6 +761,14 @@ export default () => {
   return (
     <>
       <GlobalAppStyle />
+      <GoogleFontLoader
+        fonts={[
+          {
+            font: theme.typography.fontFamily.split(',')[0],
+            weights: [400, 700],
+          },
+        ]}
+      />
       <GlobalStyles
         styles={{ body: { fontFamily: theme.typography.fontFamily } }}
       />

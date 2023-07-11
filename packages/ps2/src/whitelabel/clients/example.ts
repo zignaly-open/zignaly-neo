@@ -18,5 +18,5 @@ export default {
   background: '#fcdcdc',
   backgroundImage: null,
   // theme: 'ugly',
-  fontImport: `@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');`,
+  loadFontsFromGoogle: true,
 } as WhitelabelOverride;
