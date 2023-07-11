@@ -248,14 +248,6 @@ const darkMui = createTheme({
           transition: "all 0.3s linear",
           fontWeight: 600,
           letterSpacing: "1.1px",
-        },
-        containedPrimary: {
-          textTransform: "uppercase",
-          ".MuiTypography-root": {
-            textTransform: "none",
-          },
-          color: dark.neutral000,
-          background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
           position: "relative",
           overflow: "hidden",
           "&:first-child": {
@@ -276,6 +268,18 @@ const darkMui = createTheme({
           "&:hover::before, &.MuiButton-active::before": {
             width: "100%",
           },
+        },
+        containedDanger: {
+          "&:hover": {},
+        },
+        containedPrimary: {
+          textTransform: "uppercase",
+          ".MuiTypography-root": {
+            textTransform: "none",
+          },
+          color: dark.neutral000,
+          background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
+
           "&.Mui-disabled": {
             opacity: 0.33,
           },
