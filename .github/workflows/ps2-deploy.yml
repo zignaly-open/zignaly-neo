@@ -25,7 +25,7 @@ jobs:
           envkey_REACT_APP_ENABLE_TEST_LANGUAGE: ${{ vars.ENABLE_TEST_LANGUAGE }}
           envkey_REACT_APP_BASE_API: ${{ vars.PS2_BASE_API }}
           envkey_REACT_APP_WALLET_API: ${{ vars.PS2_WALLET_API }}
-          envkey_REACT_APP_REFERRALS_API: ${{ vars.PS2_REFERRALS_API }}
+          envkey_REACT_APP_REFERRALS_API: ${{ vars.PS2_REFERRAL_API }}
 
           #constant
           envkey_EXTEND_ESLINT: true
