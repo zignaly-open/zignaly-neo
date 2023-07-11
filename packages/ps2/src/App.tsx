@@ -1,10 +1,9 @@
 import React, { Suspense } from 'react';
 import Router from './Router';
-import theme from './theme';
+import themeMui, { legacyStyledComponentsDoNotUse } from './theme';
 import * as Sentry from '@sentry/browser';
 import {
   ChartGradients,
-  dark,
   ThemeProvider as ThemeInheritorStyled,
   ThemeProviderMui as ThemeInheritorMui,
 } from '@zignaly-open/ui';
@@ -43,9 +42,9 @@ export const WrappedInProviders: React.FC<{ children: JSX.Element }> = ({
 }) => (
   <ChunkLoadErrorBoundary>
     <Provider store={store}>
-      <ThemeInheritorStyled theme={dark}>
-        <ThemeInheritorMui theme={theme}>
-          <ThemeProviderMui theme={theme}>
+      <ThemeInheritorStyled theme={legacyStyledComponentsDoNotUse}>
+        <ThemeInheritorMui theme={themeMui}>
+          <ThemeProviderMui theme={themeMui}>
             <GlobalStyle />
             <ToastContainer
               position='top-right'

@@ -17,6 +17,6 @@ export default {
   logo: '/images/whitelabel/doge.png',
   background: '#fcdcdc',
   backgroundImage: null,
-  // theme: 'ugly',
+  theme: 'example',
   loadFontsFromGoogle: true,
 } as WhitelabelOverride;

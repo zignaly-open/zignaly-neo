@@ -19,4 +19,5 @@ export type WhitelabelOverride = {
   background?: string;
   loadFontsFromGoogle?: boolean;
   backgroundImage?: string | null;
+  theme: string;
 };
