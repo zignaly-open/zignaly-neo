@@ -9,6 +9,7 @@
   },
   "withdraw": "Withdraw",
   "deposit": "Deposit",
+  "swap": "Swap",
   "my-coins": "My Coins",
   "deposits-withdrawals": "Transaction History",
   "table-search-placeholder": "Type to search for coins.",
