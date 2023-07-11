@@ -250,7 +250,7 @@ const darkMui = createTheme({
           letterSpacing: "1.1px",
           position: "relative",
           overflow: "hidden",
-          "&:first-child": {
+          "&:nth-child(n)": {
             zIndex: 1,
             position: "relative",
           },
