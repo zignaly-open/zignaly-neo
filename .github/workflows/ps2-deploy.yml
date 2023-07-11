@@ -48,7 +48,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '18'
           cache: 'yarn'
       - name: Install Lerna
         run: yarn global add lerna@6.6.2
@@ -72,8 +72,8 @@ jobs:
           AWS_REGION: 'us-east-1'
           SOURCE_DIR: 'packages/ps2/build'
 
-      - name: Invalidate Cloudflare #TODO: pass env
+      - name: Invalidate Cloudflare
         uses: strrife/cloudflare-chunked-purge-action@master
         env:
-          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE_TEST }}
-          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_KEY_TEST }}
+          CLOUDFLARE_ZONE: ${{ secrets.CF_ZONE }}
+          CLOUDFLARE_TOKEN: ${{ secrets.CF_TOKEN }}
