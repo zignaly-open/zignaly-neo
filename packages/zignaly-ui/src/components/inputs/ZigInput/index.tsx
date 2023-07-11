@@ -3,7 +3,7 @@ import { ZigInputProps } from "./types";
 import { styled } from "@mui/material/styles";
 import { InputAdornment, TextField } from "@mui/material";
 import ZigButton from "../ZigButton";
-import dark from "../../../theme/dark";
+import { dark } from "../../../theme";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { ErrorMessage } from "../../display/ZigAlertMessage";

@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { styledIf } from "utils/styled";
 import { ReactComponent as ArrowBottomIcon } from "assets/icons/caret-down.svg";
-import dark from "theme/dark";
+import { dark } from "theme";
 
 const withSeparator = (props: WithSeparator) =>
   props.separator &&
