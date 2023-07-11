@@ -1,6 +1,6 @@
 import React from "react";
 import { LoadingButton, LoadingButtonProps } from "@mui/lab";
-import { ButtonGroup, styled, Tooltip } from "@mui/material";
+import { Box, ButtonGroup, styled, Tooltip } from "@mui/material";
 
 export type ZigButtonProps = Omit<LoadingButtonProps, "size" | "variant"> & {
   size?: LoadingButtonProps["size"] | "xlarge";
@@ -26,35 +26,37 @@ const ZigButton = ({
   ...props
 }: ZigButtonProps) => {
   const button = (
-    <LoadingButton
-      data-tack-cta={ctaId}
-      // it wasn't me lol
-      size={size as LoadingButtonProps["size"]}
-      variant={variant as LoadingButtonProps["variant"]}
-      {...props}
-      {...(narrow
-        ? {
-            sx: {
-              ...props.sx,
-              minWidth: "0 !important",
-              padding: "6px",
-            },
-          }
-        : {})}
-      {...(props.href
-        ? {
-            rel: linkRel ?? "noopener noreferrer",
-            target: linkTarget ?? "_blank",
-          }
-        : {})}
-      // @ts-ignore
-      data-testid={
-        props["data-testid"] || (process.env.NODE_ENV === "test" && props.id) || undefined
-      }
-      // hack to preserve old behavior but allow for normal mui theming
-      color={variant === "outlined" && !color ? "secondary" : color}
-      className={active ? `${props.className} MuiButton-active` : props.className}
-    />
+    <Box display={"inline-flex"}>
+      <LoadingButton
+        data-tack-cta={ctaId}
+        // it wasn't me lol
+        size={size as LoadingButtonProps["size"]}
+        variant={variant as LoadingButtonProps["variant"]}
+        {...props}
+        {...(narrow
+          ? {
+              sx: {
+                ...props.sx,
+                minWidth: "0 !important",
+                padding: "6px",
+              },
+            }
+          : {})}
+        {...(props.href
+          ? {
+              rel: linkRel ?? "noopener noreferrer",
+              target: linkTarget ?? "_blank",
+            }
+          : {})}
+        // @ts-ignore
+        data-testid={
+          props["data-testid"] || (process.env.NODE_ENV === "test" && props.id) || undefined
+        }
+        // hack to preserve old behavior but allow for normal mui theming
+        color={variant === "outlined" && !color ? "secondary" : color}
+        className={active ? `${props.className} MuiButton-active` : props.className}
+      />
+    </Box>
   );
   return tooltip ? (
     <Tooltip title={tooltip}>
