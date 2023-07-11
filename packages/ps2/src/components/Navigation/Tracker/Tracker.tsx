@@ -13,7 +13,7 @@ const Tracker: React.FC = () => {
       let node = e.target as HTMLElement;
       // the target could be a child event of a button
       do {
-        if (['a', 'button'].includes(node?.tagName.toLocaleLowerCase())) {
+        if (['a', 'button'].includes(node?.tagName?.toLocaleLowerCase())) {
           const ctaId =
             node.getAttribute('data-track-cta') || node.getAttribute('id');
           const noAutoTrack = node.getAttribute('data-no-auto-track');
