@@ -1,6 +1,18 @@
 import { styled } from '@mui/material';
-import { dark, MenuDropDown } from '@zignaly-open/ui';
+import { MenuDropDown } from '@zignaly-open/ui';
 import { Link } from 'react-router-dom';
+import { Theme } from '@mui/system';
+
+const secondaryBackground = ({ theme }: { theme: Theme }) => `
+  background: ${
+    // one may ask, but why tsignore this if you can just extend the theme the same way you did for the entire palette, Alex?
+    // I did it on purpose to prevent people from overusing that is intended for zignaly-ui only
+    // so rather tsignore this than make it easily usable
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    theme.palette.backgrounds.secondaryBackground
+  };
+`;
 
 export const Layout = styled('div')`
   flex-direction: row;
@@ -9,7 +21,7 @@ export const Layout = styled('div')`
   width: 100%;
   right: 0;
   left: 0;
-  background: ${dark.backgrounds.secondaryBackground};
+  ${secondaryBackground};
   z-index: 50;
 `;
 
@@ -48,7 +60,7 @@ export const Option = styled('span', {
   }
 
   &:hover {
-    background: ${dark.palette.neutral750};
+    background: ${({ theme }) => theme.palette.neutral750};
     & > * {
       color: ${({ theme }) => theme.palette.neutral100};
     }
@@ -66,13 +78,13 @@ export const HeadOption = styled(Option)<
   display: flex;
   align-items: center;
   height: 56px;
-  background: ${dark.backgrounds.secondaryBackground};
+  ${secondaryBackground};
 
-  ${({ isSubOption }) =>
+  ${({ isSubOption, theme }) =>
     isSubOption
       ? `
         padding: 0 10%;
-        background: ${dark.palette.neutral800};
+        background: ${theme.palette.neutral800};
       `
       : `
         justify-content: center;

@@ -11,7 +11,6 @@ import {
   ZigTablePriceLabel,
   ZigDropdown,
   ZigDotsVerticalIcon,
-  dark,
 } from '@zignaly-open/ui';
 import {
   useTraderServiceInvestors,
@@ -154,7 +153,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             component={() => (
               <IconButton>
                 <ZigDotsVerticalIcon
-                  color={dark.palette.neutral200}
+                  color={theme.palette.neutral200}
                   height={16}
                   width={16}
                 />
