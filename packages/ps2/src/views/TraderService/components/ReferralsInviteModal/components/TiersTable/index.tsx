@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Tooltip } from '@mui/material';
-import { ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography, ZigUserFilledIcon } from '@zignaly-open/ui';
 import { MAX_FEES_AMOUNT, getMaxEarnings } from '../../util';
 import { useTranslation } from 'react-i18next';
 import { TierLevels } from 'apis/referrals/types';
@@ -11,7 +11,7 @@ import { TiersTableProps } from './types';
 import { useTierLayers } from '../TierBar/util';
 import BoostChip from '../BoostChip';
 import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
-import { isPast } from 'date-fns';
+import { isFuture, isPast } from 'date-fns';
 
 const composeInvitesValue = (tierIndex: number, tiers: TierLevels) => {
   const currentTier = tiers[tierIndex];
@@ -65,7 +65,7 @@ const CellLabelBoost = ({
         lineHeight='24px'
         color={activated ? '#24b68d' : '#e93ea7'}
       >
-        {t(activated ? '1-week-boost' : 'within-1-week')}
+        {t(activated ? 'welcome-boost' : 'within-1-week')}
         <Tooltip title={t('zig-held-tooltip')}>
           <TooltipIcon />
         </Tooltip>
@@ -105,13 +105,15 @@ const TiersTable = ({
   referral,
   serviceCommission,
   zignalyCommission,
+  boostRunning,
+  boost,
 }: TiersTableProps) => {
   const { t } = useTranslation(['referrals-trader', 'service']);
 
   const layers = useTierLayers(
     tiers,
     tiers[0].id,
-    referral.boost,
+    boost,
     serviceCommission,
     zignalyCommission,
   );
@@ -123,16 +125,13 @@ const TiersTable = ({
             <CellLabelTraderBoost boost={layers[0].value / layers[1].value} />
           </Box>
         )}
-        {referral.boost > 1 && (
+        {boost > 1 && (
           <Box
             position='absolute'
             bottom={layers.reverse().find((l) => l.value).height}
             right={0}
           >
-            <CellLabelBoost
-              activated={isPast(new Date(referral.boostEndsAt))}
-              boost={referral.boost}
-            />
+            <CellLabelBoost activated={!boostRunning} boost={boost} />
           </Box>
         )}
         <CellLabelBaseCommission />
@@ -154,6 +153,7 @@ const TiersTable = ({
                 tiers={tiers}
                 serviceCommission={serviceCommission}
                 zignalyCommission={zignalyCommission}
+                boost={boost}
               />
             </Box>
           </td>
@@ -161,24 +161,40 @@ const TiersTable = ({
       </tr>
       <tr>
         <td height='36px'>
-          <ZigTypography
-            fontWeight={500}
-            variant='h3'
-            textAlign='end'
-            lineHeight='24px'
-            color='#979ce0'
+          <Box
+            display={'flex'}
+            alignItems={'center'}
+            gap='12px'
+            justifyContent='flex-end'
           >
-            {t('invites')}
-            <Tooltip title={t('zig-held-tooltip')}>
-              <TooltipIcon />
-            </Tooltip>
-          </ZigTypography>
+            <ZigUserFilledIcon color='#979ce0' height={19.5} width={16.5} />
+            <ZigTypography
+              fontWeight={500}
+              variant='h3'
+              textAlign='end'
+              lineHeight='24px'
+              color='#979ce0'
+            >
+              {t('invites')}
+              <Tooltip title={t('zig-held-tooltip')}>
+                <TooltipIcon />
+              </Tooltip>
+            </ZigTypography>
+          </Box>
         </td>
         {tiers?.map((tier, tierIndex) => (
           <td key={tier.id} style={{ textAlign: 'center' }}>
-            <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
-              {composeInvitesValue(tierIndex, tiers)}
-            </ZigTypography>
+            <Box
+              display={'flex'}
+              alignItems={'center'}
+              gap='9px'
+              justifyContent='center'
+            >
+              <ZigTypography fontWeight={600} fontSize={16} color='#999fe1'>
+                {composeInvitesValue(tierIndex, tiers)}
+              </ZigTypography>
+              <ZigUserFilledIcon color='#979ce0' height={12} width={10} />
+            </Box>
           </td>
         ))}
       </tr>

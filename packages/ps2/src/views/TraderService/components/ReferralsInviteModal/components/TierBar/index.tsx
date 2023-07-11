@@ -20,6 +20,7 @@ const TierBar = ({
   serviceCommission,
   zignalyCommission,
   referral,
+  boost,
   tiers,
   minHeight,
   maxHeight,
@@ -30,17 +31,8 @@ const TierBar = ({
   minFontSize = 12,
   maxFontSize = 15.5,
 }: TierBarProps) => {
-  const boost = referral?.boost;
   const min = tiers[0].commissionPct;
   const max = tiers[tiers.length - 1].commissionPct;
-
-  // replace by number of layers returned by hook?
-  const layers =
-    serviceCommission > 0 && boost > 1
-      ? 3
-      : serviceCommission > 0 || boost > 1
-      ? 2
-      : 1;
 
   // Bar opacity
   const opacityPower = 0.9;
@@ -77,7 +69,7 @@ const TierBar = ({
       : 0;
   }, [min, max, tier]);
 
-  const [layer1, layer2, layer3] = useTierLayers(
+  const layers = useTierLayers(
     tiers,
     tier.id,
     boost,
@@ -85,6 +77,8 @@ const TierBar = ({
     zignalyCommission,
     { minHeight, maxHeight },
   );
+  const [layer1, layer2, layer3] = layers;
+  const layersCount = layers.filter((l) => l.value > 0).length;
 
   console.log(`\n---\nTier ${tier.id}:`);
   console.table([layer1, layer2, layer3]);
@@ -92,7 +86,7 @@ const TierBar = ({
   // Due to using absolute positioning for the bar content (to not apply the opacity to the text / icon),
   // we need to set a min height for the container, which need to be larger if there is a bolt icon (more than 1 layer?)
   // todo: still needed?
-  const layer1MinHeight = layers > 1 ? layer2.height + 48 : 0;
+  const layer1MinHeight = layersCount > 1 ? layer2.height + 48 : 0;
 
   return (
     <div>
@@ -109,10 +103,10 @@ const TierBar = ({
           emphasis={showArrow}
         >
           <BarContent>
-            {layers > 1 && <BoltIcon />}
+            {layersCount > 1 && <BoltIcon />}
             <ZigTypography
               color={
-                layers > 1
+                layersCount > 1
                   ? showArrow
                     ? '#28ba62'
                     : 'greenGraph'
@@ -151,7 +145,7 @@ const TierBar = ({
               <Overlay opacity={opacity} />
               <BarContent subLayer={true}>
                 <ZigTypography
-                  color={layers > 2 ? 'greenGraph' : 'neutral200'}
+                  color={layersCount > 2 ? 'greenGraph' : 'neutral200'}
                   fontSize={fontSize}
                   fontWeight={500}
                 >

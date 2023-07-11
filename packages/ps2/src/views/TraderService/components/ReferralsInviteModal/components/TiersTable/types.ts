@@ -5,4 +5,6 @@ export type TiersTableProps = {
   referral: ReferralRewards;
   serviceCommission: number;
   zignalyCommission: number;
+  boostRunning: boolean;
+  boost: number;
 };

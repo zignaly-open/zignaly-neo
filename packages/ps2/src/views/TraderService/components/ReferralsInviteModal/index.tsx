@@ -27,15 +27,20 @@ import Tiers from './components/TiersTable';
 import { ArrowForward, ArrowRight, ArrowRightAlt } from '@mui/icons-material';
 import { DescriptionLine } from './atoms';
 import {
+  addMinutes,
+  addSeconds,
   differenceInDays,
   differenceInHours,
   differenceInMinutes,
+  differenceInSeconds,
+  format,
   isFuture,
 } from 'date-fns';
 import { getBoostedCommissionPct } from './util';
 import { max } from 'lodash';
 import { useInterval } from 'react-use';
 
+const fakeDate = format(addSeconds(new Date(), 10), "yyyy-MM-dd'T'HH:mm:ss");
 const ReferralsInviteModal = ({
   serviceId,
   service,
@@ -93,8 +98,9 @@ const ReferralsInviteModal = ({
     tierLevelId: 3,
     tierLevelFactor: 30.0,
     discountPct: 25.0,
-    boost: 2,
-    boostEndsAt: '2023-07-17T06:01:00',
+    boost: 1,
+    // boostEndsAt: '2023-07-17T06:01:00',
+    boostEndsAt: fakeDate,
   };
   console.log(tiers, serviceCommission, referralData);
   const [currentDate, setCurrentDate] = useState(new Date());
@@ -129,6 +135,8 @@ const ReferralsInviteModal = ({
   const inviteLeft = 5;
   const boostEndsDate = new Date(referralData.boostEndsAt);
   const boostRunning = isFuture(boostEndsDate);
+  const d = differenceInSeconds(boostEndsDate, currentDate);
+  console.log(boostRunning, d);
   const days = differenceInDays(boostEndsDate, currentDate);
   const hours = differenceInHours(boostEndsDate, currentDate) % 24;
   const minutes = differenceInMinutes(boostEndsDate, currentDate) % 60;
@@ -136,7 +144,7 @@ const ReferralsInviteModal = ({
     () => {
       setCurrentDate(new Date());
     },
-    boostRunning ? 1000 * 60 : null,
+    boostRunning ? 10000 : null,
   );
 
   return (
@@ -220,14 +228,16 @@ const ReferralsInviteModal = ({
               />
             </Trans>
           </ZigTypography>
-          <Box display={'flex'} alignItems={'center'} gap='9px' mt='11px'>
-            <ZigClockIcon color='#e93ea7' />
-            <ZigTypography color='#e93ea7' variant='h4' fontWeight={400}>
-              {`${t('day', { count: days })}, ${t('hour', {
-                count: hours,
-              })}, ${t('minute', { count: minutes })}`}
-            </ZigTypography>
-          </Box>
+          {boostRunning && (
+            <Box display={'flex'} alignItems={'center'} gap='9px' mt='11px'>
+              <ZigClockIcon color='#e93ea7' />
+              <ZigTypography color='#e93ea7' variant='h4' fontWeight={400}>
+                {`${t('day', { count: days })}, ${t('hour', {
+                  count: hours,
+                })}, ${t('minute', { count: minutes })}`}
+              </ZigTypography>
+            </Box>
+          )}
           <Box
             sx={{
               borderRadius: '15px',
@@ -324,6 +334,8 @@ const ReferralsInviteModal = ({
           referral={referralData}
           serviceCommission={serviceCommission.commission}
           zignalyCommission={zignalyCommission}
+          boost={boostRunning ? 2 : referralData.boost}
+          boostRunning={boostRunning}
         />
       )}
     </ZModal>

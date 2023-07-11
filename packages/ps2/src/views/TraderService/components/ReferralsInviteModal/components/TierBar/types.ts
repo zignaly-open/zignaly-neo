@@ -15,4 +15,5 @@ export type TierBarProps = {
   zignalyCommission: number;
   specialBoost: boolean;
   referral: ReferralRewards;
+  boost: number;
 };
