@@ -70,7 +70,7 @@ export const Networks = styled('div')`
   justify-content: center;
   align-items: center;
   gap: 16px;
-  background: ${({ theme }) => theme.palette.neutral600};
+  background: ${({ theme }) => theme.palette.neutral700};
   padding: 19px 32px;
   margin: 6px -32px -12px;
 
