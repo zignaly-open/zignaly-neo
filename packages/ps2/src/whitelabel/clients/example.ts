@@ -18,8 +18,5 @@ export default {
   background: '#fcdcdc',
   backgroundImage: null,
   // theme: 'ugly',
-  fontFamilySrc: {
-    '400': '/fonts/AmaticSC/AmaticSC-Regular.ttf',
-    '700': '/fonts/AmaticSC/AmaticSC-Bold.ttf',
-  },
+  fontImport: `@import url('https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&display=swap');`,
 } as WhitelabelOverride;

@@ -1,5 +1,5 @@
 import React from 'react';
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 import { NiceScrollbar } from '@zignaly-open/ui';
 // TODO: fix this, smth weird with type defs not loading
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -49,21 +49,26 @@ body {
     list-style-type: none;
   }
 
-  /** Fonts **/
-  @font-face {
-    font-family: "Avenir Next", sans-serif;
-    src: url("/fonts/AvenirNext/AvenirNextLTPro-Regular.otf");
-    font-weight: 400;
-    font-style: normal;
-    font-display: swap;
-  }
+  ${
+    whitelabel.fontImport ||
+    css`
+      /** Fonts **/
+      @font-face {
+        font-family: 'Avenir Next', sans-serif;
+        src: url('/fonts/AvenirNext/AvenirNextLTPro-Regular.otf');
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
 
-  @font-face {
-    font-family: "Avenir Next", sans-serif;
-    src: url("/fonts/AvenirNext/AvenirNextLTPro-Bold.otf");
-    font-weight: 700;
-    font-style: normal;
-    font-display: swap;
+      @font-face {
+        font-family: 'Avenir Next', sans-serif;
+        src: url('/fonts/AvenirNext/AvenirNextLTPro-Bold.otf');
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+    `
   }
 
   :root {
