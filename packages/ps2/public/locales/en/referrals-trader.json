@@ -2,6 +2,8 @@
     "title": "Invite and Earn Up to {{max}}%",
     "commission-rate": "Commission Rate",
     "when-you-invite": "when you invite {{invite}}+ people to Zignaly",
+    "get-by-inviting": "Get <0>{{commission}}%</0> by inviting {{invite}} more people to Zignaly",
+    "get-by-inviting-in": "Get <0>{{commission}}%</0> by inviting {{invite}} more people to Zignaly in:",
     "split-commission": "Split your commission with friends you invite",
     "trader-referral-link": "Your referral link to this trader:",
     "earn-success-fees": "Earn a % of success fees paid by people you invite",
@@ -15,5 +17,11 @@
     "1-week-boost": "First week boost",
     "trader-boost": "Trader Boost",
     "invites": "Invites:",
-    "your-rate": "Your Rate"
+    "your-rate": "Your Rate",
+    "day_one": "{{count}} day",
+    "day_other": "{{count}} days",
+    "hour_one": "{{count}} hr",
+    "hour_other": "{{count}} hrs",
+    "minute_one": "{{count}} min",
+    "minute_other": "{{count}} mins"
 }

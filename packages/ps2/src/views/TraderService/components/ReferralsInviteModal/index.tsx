@@ -1,7 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { useTranslation } from 'react-i18next';
-import { Avatar, ZigButton, ZigTypography, trimZeros } from '@zignaly-open/ui';
+import { Trans, useTranslation } from 'react-i18next';
+import {
+  Avatar,
+  ZigButton,
+  ZigClockIcon,
+  ZigTypography,
+  trimZeros,
+} from '@zignaly-open/ui';
 import { TransferFormData, ReferralsInviteModalProps } from './types';
 import ZModal, { Form } from 'components/ZModal';
 import {
@@ -20,9 +26,15 @@ import { numericFormatter } from 'react-number-format';
 import Tiers from './components/TiersTable';
 import { ArrowForward, ArrowRight, ArrowRightAlt } from '@mui/icons-material';
 import { DescriptionLine } from './atoms';
-import { isFuture } from 'date-fns';
+import {
+  differenceInDays,
+  differenceInHours,
+  differenceInMinutes,
+  isFuture,
+} from 'date-fns';
 import { getBoostedCommissionPct } from './util';
 import { max } from 'lodash';
+import { useInterval } from 'react-use';
 
 const ReferralsInviteModal = ({
   serviceId,
@@ -74,7 +86,7 @@ const ReferralsInviteModal = ({
   const { data: referralData0 } = useReferralRewardsQuery();
   const referralData = {
     referralCode: 'code_2003',
-    invitedCount: 0,
+    invitedCount: 1,
     investorsCount: 0,
     usdtEarned: 11.0,
     usdtPending: 20.0,
@@ -85,7 +97,7 @@ const ReferralsInviteModal = ({
     boostEndsAt: '2023-07-17T06:01:00',
   };
   console.log(tiers, serviceCommission, referralData);
-
+  const [currentDate, setCurrentDate] = useState(new Date());
   const {
     watch,
     handleSubmit,
@@ -115,7 +127,17 @@ const ReferralsInviteModal = ({
   );
 
   const inviteLeft = 5;
-  const boostRunning = isFuture(new Date(referralData.boostEndsAt));
+  const boostEndsDate = new Date(referralData.boostEndsAt);
+  const boostRunning = isFuture(boostEndsDate);
+  const days = differenceInDays(boostEndsDate, currentDate);
+  const hours = differenceInHours(boostEndsDate, currentDate) % 24;
+  const minutes = differenceInMinutes(boostEndsDate, currentDate) % 60;
+  useInterval(
+    () => {
+      setCurrentDate(new Date());
+    },
+    boostRunning ? 1000 * 60 : null,
+  );
 
   return (
     <ZModal
@@ -174,12 +196,38 @@ const ReferralsInviteModal = ({
             py='15px'
             lineHeight='50px'
           >
-            {/* eslint-disable-next-line i18next/no-literal-string */}
-            {maxCommission}%
+            {maxCommission}
+            {'%'}
           </ZigTypography>
           <ZigTypography color='neutral200' variant='h3' fontWeight={400}>
-            {t('when-you-invite', { invite: inviteLeft })}
+            <Trans
+              i18nKey={
+                referralData.invitedCount > 0
+                  ? `get-by-inviting${boostRunning ? '-in' : ''}`
+                  : 'when-you-invite'
+              }
+              t={t}
+              values={{
+                invite: inviteLeft,
+                commission: maxCommission,
+              }}
+            >
+              <ZigTypography
+                component='span'
+                variant='h3'
+                fontWeight={400}
+                color='#25c89b'
+              />
+            </Trans>
           </ZigTypography>
+          <Box display={'flex'} alignItems={'center'} gap='9px' mt='11px'>
+            <ZigClockIcon color='#e93ea7' />
+            <ZigTypography color='#e93ea7' variant='h4' fontWeight={400}>
+              {`${t('day', { count: days })}, ${t('hour', {
+                count: hours,
+              })}, ${t('minute', { count: minutes })}`}
+            </ZigTypography>
+          </Box>
           <Box
             sx={{
               borderRadius: '15px',
