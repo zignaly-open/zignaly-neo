@@ -9,13 +9,14 @@ import {
   VictoryVoronoiContainer,
 } from "victory";
 import { useAxisStyle, ChartLayoutLarge } from "../styles";
-import { AxisFormat, ChartColor, ChartLargeProps } from "../types";
+import { AxisFormat, ChartLargeProps } from "../types";
 import { useChartData } from "../hooks";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as d3Scale from "victory-vendor/d3-scale";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { useTheme } from "@mui/material";
 import { ChartTooltip } from "./atoms";
+import { useChartColor } from "./util";
 
 const ZigChart = ({
   id,
@@ -35,6 +36,7 @@ const ZigChart = ({
   const wrapperRef = useRef<HTMLDivElement>(null);
   const width = wrapperRef?.current?.getBoundingClientRect().width;
   const pureChartWidth = width ? width - 70 - 2 : 0;
+  const chartColors = useChartColor();
   const barChartWidth = pureChartWidth / processedData.length;
   const barChartWidthAdjustedForPadding = Math.min(25, pureChartWidth / (processedData.length + 2));
 
@@ -147,7 +149,7 @@ const ZigChart = ({
               style={{
                 data: {
                   fill: ({ datum }) => {
-                    return datum.y > 0 ? ChartColor.Green : ChartColor.Red;
+                    return datum.y > 0 ? chartColors.green : chartColors.red;
                   },
                   maxWidth: 20,
                   strokeWidth: 0,

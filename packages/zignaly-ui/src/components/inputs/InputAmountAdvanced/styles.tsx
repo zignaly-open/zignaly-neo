@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
-import { dark } from "../../../theme";
 import ZigTypography from "components/display/ZigTypography";
 import muiStyled from "@emotion/styled";
 
@@ -24,11 +23,11 @@ export const InputContainer = styled.div`
   overflow: hidden;
 `;
 
-export const InputValue = styled.input`
+export const InputValue = muiStyled("input")`
   padding: 0 16px 0 4px;
   background: transparent;
   border: none;
-  color: ${dark.palette.neutral100};
+  color: ${({ theme }) => theme.palette.neutral100};
   outline: none;
   font-weight: 500;
   font-size: 22px;

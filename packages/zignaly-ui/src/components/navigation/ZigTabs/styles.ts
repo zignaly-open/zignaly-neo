@@ -1,10 +1,9 @@
 import styled from "@emotion/styled";
 import { Tabs } from "@mui/material";
-import { dark } from "../../../theme";
 
 export const ZigTabs = styled(Tabs)`
   .MuiTabs-indicator {
-    background: ${dark.backgrounds.buttonPrimary};
+    background: ${({ theme }) => theme.palette.backgrounds.buttonPrimary};
     border-radius: 6px;
   }
 
@@ -32,7 +31,7 @@ export const ZigTabs = styled(Tabs)`
   }
 
   .Mui-selected {
-    color: ${dark.palette.contrasting};
+    color: ${({ theme }) => theme.palette.contrasting};
     font-weight: 600;
   }
 `;

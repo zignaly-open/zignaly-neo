@@ -31,7 +31,7 @@ export const Layout = styled(Box)<{ error: boolean; labelInline: boolean }>`
       font-weight: 500;
       border-color: ${({ theme }) => theme.palette.neutral400};
       background: ${({ theme }) => theme.palette.neutral750};
-      -webkit-text-fill-color: ${({ theme }) => theme.palette.neutral175ф} !important;
+      -webkit-text-fill-color: ${({ theme }) => theme.palette.neutral175} !important;
     }
   }
 `;

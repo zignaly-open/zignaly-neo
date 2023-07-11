@@ -7,7 +7,7 @@ const {
 } = createTheme();
 const createColor = (mainColor: string) => augmentColor({ color: { main: mainColor } });
 
-export default ({ palette, mode, backgrounds, boxShadows, fontFamily }: Theme) =>
+export default ({ palette, mode, chart, backgrounds, boxShadows, fontFamily }: Theme) =>
   createTheme({
     palette: {
       ...palette,
@@ -25,6 +25,10 @@ export default ({ palette, mode, backgrounds, boxShadows, fontFamily }: Theme) =
       // two indexes within its tonal palette.
       // E.g., shift from Red 500 to Red 300 or Red 700.
       tonalOffset: 0.2,
+
+      backgrounds,
+      boxShadows,
+      chart,
     },
     typography: {
       fontFamily: fontFamily.join(","),
@@ -99,7 +103,7 @@ export default ({ palette, mode, backgrounds, boxShadows, fontFamily }: Theme) =
             box-shadow: none !important;
             resize: none;
             background: ${backgrounds.input};
-            -webkit-text-fill-color: #838b95 !important;\`,
+            -webkit-text-fill-color: ${palette.neutral100} !important;\`,
           }
           
           .MuiInput-input {

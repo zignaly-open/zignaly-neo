@@ -15,7 +15,6 @@ import {
 } from "./styles";
 import { useTheme } from "styled-components";
 import Theme from "theme/theme";
-import { dark } from "../../../theme";
 
 const ZigDropdown: (
   props: ZigDropdownProps,
@@ -94,7 +93,7 @@ const ZigDropdown: (
           PaperProps={{
             sx: {
               minWidth: "220px",
-              backgroundColor: dark.palette.neutral800,
+              backgroundColor: theme.palette.neutral800,
               whiteSpace: "nowrap",
               color: "#fff",
               boxShadow: "0 4px 6px -2px #00000061",

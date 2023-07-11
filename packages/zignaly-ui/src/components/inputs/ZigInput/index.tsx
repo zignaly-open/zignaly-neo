@@ -3,7 +3,6 @@ import { ZigInputProps } from "./types";
 import { styled } from "@mui/material/styles";
 import { InputAdornment, TextField } from "@mui/material";
 import ZigButton from "../ZigButton";
-import { dark } from "../../../theme";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
@@ -129,10 +128,10 @@ const ZigInput: React.FC<ZigInputProps> = styled<React.FC<ZigInputProps>>(
 
 export const ZigInputInteractiveAdornmentStyle = {
   cursor: "pointer",
-  color: dark.palette.neutral300,
+  color: "neutral300",
   transition: "all .3s",
   "&:hover": {
-    color: dark.palette.neutral200,
+    color: "neutral200",
   },
 };
 

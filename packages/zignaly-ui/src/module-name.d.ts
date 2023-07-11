@@ -23,8 +23,38 @@ declare module "@mui/material/styles" {
     links: string;
     yellow: string;
     red: string;
-
     contrasting: string;
+
+    backgrounds: Partial<
+      Record<
+        | "toastSuccess"
+        | "toastError"
+        | "secondaryBackground"
+        | "sliderMark"
+        | "tableRow"
+        | "sliderThumb"
+        | "tableHeader"
+        | "buttonPrimary"
+        | "loader"
+        | "buttonPrimaryHover"
+        | "header"
+        | "input",
+        string
+      >
+    >;
+
+    boxShadows: Partial<Record<"tableHeader" | "header" | "button", string>>;
+
+    chart: Record<
+      | "greenGradient"
+      | "greenMiniGradient"
+      | "redGradient"
+      | "redMiniGradient"
+      | "greenCard"
+      | "redCard",
+      string[]
+    > &
+      Record<"red" | "green", string>;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

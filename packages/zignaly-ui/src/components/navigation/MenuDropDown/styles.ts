@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { dark } from "theme";
 import { styledIf } from "../../../utils/styled";
 
 export const Layout = styled.div`
@@ -52,7 +51,7 @@ export const Button = styled.div<ButtonProps>`
   user-select: none;
   height: 56px;
   cursor: pointer;
-  background: ${dark.backgrounds.secondaryBackground};
+  background: ${({ theme }) => theme.palette.backgrounds.secondaryBackground};
 
   ${({ center, theme, isActiveDropDown, focused }) => `    
     ${styledIf(

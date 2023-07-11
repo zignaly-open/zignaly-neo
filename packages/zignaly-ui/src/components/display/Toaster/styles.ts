@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import { dark } from "../../../theme";
 
 export const Caption = styled.div`
   margin: 0 8px;
@@ -51,37 +50,37 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
       height: 32px;
     `}
 
-  ${(props) =>
-    props.variant === "success" &&
+  ${({ variant, theme: { palette } }) =>
+    variant === "success" &&
     css`
       ${Caption} {
-        color: ${props.theme.palette.greenGraph};
+        color: ${palette.greenGraph};
       }
 
-      border: 1px solid ${dark.backgrounds.toastSuccess};
-      background: ${dark.backgrounds.toastSuccess};
+      border: 1px solid ${palette.backgrounds.toastSuccess};
+      background: ${palette.backgrounds.toastSuccess};
     `}
 
 
-  ${(props) =>
-    props.variant === "info" &&
+  ${({ variant, theme: { palette } }) =>
+    variant === "info" &&
     css`
       ${Caption} {
-        color: ${props.theme.palette.neutral200};
+        color: ${palette.neutral200};
       }
 
-      border: 1px solid ${props.theme.palette.neutral600};
-      background: ${props.theme.palette.neutral600};
+      border: 1px solid ${palette.neutral600};
+      background: ${palette.neutral600};
     `}
 
-  ${(props) =>
-    props.variant === "error" &&
+  ${({ variant, theme: { palette } }) =>
+    variant === "error" &&
     css`
       ${Caption} {
-        color: ${props.theme.palette.redGraphOrError};
+        color: ${palette.redGraphOrError};
       }
 
-      border: 1px solid ${dark.backgrounds.toastError};
-      background: ${dark.backgrounds.toastError};
+      border: 1px solid ${palette.backgrounds.toastError};
+      background: ${palette.backgrounds.toastError};
     `}
 `;

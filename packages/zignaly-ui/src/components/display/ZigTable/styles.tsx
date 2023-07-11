@@ -2,7 +2,6 @@ import { ExpandMore } from "@mui/icons-material";
 import { Box, css, styled } from "@mui/system";
 import { SortDirection } from "@tanstack/react-table";
 import { IconButton } from "@mui/material";
-import { dark } from "../../../theme";
 
 export const TableContainer = styled("div")`
   overflow: auto;
@@ -16,8 +15,8 @@ export const Table = styled("table")`
   thead {
     height: 56px;
     user-select: none;
-    background: ${dark.backgrounds.tableHeader};
-    box-shadow: 0 0 10px ${dark.boxShadows.tableHeader};
+    background: ${({ theme }) => theme.palette.backgrounds.tableHeader};
+    box-shadow: 0 0 10px ${({ theme }) => theme.palette.boxShadows.tableHeader};
   }
 
   th {
@@ -37,7 +36,7 @@ export const Table = styled("table")`
 
   tbody {
     tr {
-      background: ${dark.backgrounds.tableRow};
+      background: ${({ theme }) => theme.palette.backgrounds.tableRow};
 
       :last-child {
         td {
