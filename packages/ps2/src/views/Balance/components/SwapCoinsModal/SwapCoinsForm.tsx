@@ -22,7 +22,7 @@ import { useConvertMutation } from '../../../../apis/coin/api';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { convertAmountValidation } from './validation';
-import { coinsAllowedToSwap } from './index';
+import { coinsAllowedSwap } from './index';
 
 function SwapCoinsForm({
   setStep,
@@ -50,7 +50,7 @@ function SwapCoinsForm({
   const { data: balances, isLoading: isLoadingBalances } = useCoinBalances({
     convert: true,
   });
-  const nonZeroBalanceCoinOptions = useMemo(() => {
+  const coinOptionsAllowedSwapFrom = useMemo(() => {
     if (!balances) return [];
 
     return Object.entries(balances)
@@ -67,11 +67,11 @@ function SwapCoinsForm({
           />
         ),
       }))
-      .filter((c) => c.available > 0 && coinsAllowedToSwap.includes(c.coin));
-  }, [balances, coinsAllowedToSwap]);
+      .filter((c) => c.available > 0 && coinsAllowedSwap.includes(c.coin));
+  }, [balances]);
 
   const [selectedFromToken, setSelectedFromToken] = useState<CoinsSelect>(
-    nonZeroBalanceCoinOptions.find((coin) => coin.coin === selectedCoin.coin),
+    coinOptionsAllowedSwapFrom.find((coin) => coin.coin === selectedCoin.coin),
   );
   const [selectedToToken, setSelectedToToken] = useState<CoinsSelect>(
     {} as CoinsSelect,
@@ -96,7 +96,7 @@ function SwapCoinsForm({
     },
     resolver: yupResolver(
       convertAmountValidation({
-        min: minAmount,
+        min: minAmount - 10,
         coin: selectedFromToken.coin,
         balance: selectedFromToken.available,
       }),
@@ -104,7 +104,7 @@ function SwapCoinsForm({
   });
 
   const amount = watch('fromCoinAmount');
-  const { data: convertPreview, isLoading: isLoadingConvertPreview } =
+  const { data: convertPreview, isFetching: isFetchingConvertPreview } =
     useConvertPreview({
       from: selectedFromToken.coin,
       amount,
@@ -116,7 +116,7 @@ function SwapCoinsForm({
     if (amount) {
       trigger('fromCoinAmount');
     }
-  }, [convertPreview, isLoadingConvertPreview]);
+  }, [convertPreview, isFetchingConvertPreview]);
 
   const { data: allowedCoinsSwapTo } = useQuoteAssetsCoin(
     selectedFromToken.coin,
@@ -125,7 +125,7 @@ function SwapCoinsForm({
     if (!allowedCoinsSwapTo) return [];
 
     return allowedCoinsSwapTo
-      .filter((c) => coinsAllowedToSwap.includes(c))
+      .filter((c) => coinsAllowedSwap.includes(c))
       .map((c) => ({
         value: c,
         coin: c,
@@ -138,7 +138,7 @@ function SwapCoinsForm({
           />
         ),
       }));
-  }, [allowedCoinsSwapTo, coinsAllowedToSwap]);
+  }, [allowedCoinsSwapTo]);
 
   useEffect(() => {
     if (convertPreview && selectedToToken?.coin) {
@@ -150,6 +150,7 @@ function SwapCoinsForm({
       setValue('toCoinAmount', trimZeros(calculatedValue).toString());
     }
   }, [amount, convertPreview]);
+
   if (isLoadingBalances) {
     return <CenteredLoader />;
   }
@@ -169,6 +170,12 @@ function SwapCoinsForm({
       />
     );
   }
+  const canSubmit =
+    !isValid ||
+    !selectedToToken.coin ||
+    !selectedFromToken.coin ||
+    !amount ||
+    !watch('toCoinAmount');
 
   return (
     <Form
@@ -192,7 +199,7 @@ function SwapCoinsForm({
             error={t(errors.fromCoinAmount?.message)}
             labelInline={false}
             withCoinSelector
-            tokenOptions={nonZeroBalanceCoinOptions}
+            tokenOptions={coinOptionsAllowedSwapFrom}
             id={'swap-coins-modal__from-input-amount'}
             label={t('from-input.label')}
             wide
@@ -234,6 +241,7 @@ function SwapCoinsForm({
             onTokenChange={(token: CoinsSelect) => {
               if (amount) {
                 trigger('fromCoinAmount');
+                setValue('toCoinAmount', '');
               }
               setSelectedToToken(token);
             }}
@@ -245,16 +253,10 @@ function SwapCoinsForm({
       <ModalActions position={'relative'}>
         <ZigButton
           id={'swap-coins-modal__continue'}
-          loading={isLoadingConvertPreview}
+          loading={isFetchingConvertPreview}
           size={'large'}
           type={'submit'}
-          disabled={
-            !isValid ||
-            !selectedToToken.coin ||
-            !selectedFromToken.coin ||
-            !amount ||
-            isLoadingConvertPreview
-          }
+          disabled={canSubmit}
         >
           {t('continue')}
         </ZigButton>
