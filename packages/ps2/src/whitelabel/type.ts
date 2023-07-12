@@ -2,7 +2,6 @@ export enum Features {
   Rewards,
   Referrals,
   Trader,
-  ZigWallet,
   NewSignup,
 }
 
