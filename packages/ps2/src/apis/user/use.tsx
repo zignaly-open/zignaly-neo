@@ -23,6 +23,7 @@ import {
   useVerify2FAMutation,
   useVerifyCodeMutation,
   useVerifyCodeNewUserMutation,
+  useSendCodeWithdrawMutation,
   useVerifyKnownDeviceMutation,
 } from './api';
 import {
@@ -48,6 +49,7 @@ import { useNavigate } from 'react-router-dom';
 import { track } from '@zignaly-open/tracker';
 import { clearUserSession } from './util';
 import { junkyard } from '../../util/junkyard';
+import EmailVerifyWithdrawModal from 'views/Auth/components/EmailVerifyWithdrawModal';
 
 const useStartSession = () => {
   const { showModal } = useZModal();
@@ -176,6 +178,8 @@ export const useVerifyEmailNewUser: typeof useVerifyCodeNewUserMutation =
   useVerifyCodeNewUserMutation;
 export const useVerifyEmail: typeof useVerifyCodeMutation =
   useVerifyCodeMutation;
+export const useSendCodeWithdraw: typeof useSendCodeWithdrawMutation =
+  useSendCodeWithdrawMutation;
 export const useVerifyEmailKnownDevice: typeof useVerifyKnownDeviceMutation =
   useVerifyKnownDeviceMutation;
 export const useResendCode: typeof useResendCodeMutation =
@@ -296,6 +300,36 @@ export function useMaybeMakeSureSessionIsAlive(makeSure: boolean): void {
     // we do not want to check that is the app is already aware that the user has been logged out
     skip: !makeSure || !isAuthenticated,
   });
+}
+
+export function useCheckWithdraw({
+  status,
+}: {
+  status: QueryReturnTypeBasic<unknown>;
+}): (action: (code?: string) => void) => void {
+  const { showModal, updateModal } = useZModal();
+  const modalId = useRef<null | string>(null);
+  const { ask2FA } = useCurrentUser();
+  useEffect(() => {
+    if (modalId.current) {
+      updateModal(modalId.current, {
+        status,
+      });
+    }
+  }, [status]);
+  return (action) => {
+    const modal = showModal(ask2FA ? Check2FAModal : EmailVerifyWithdrawModal, {
+      status,
+      action,
+      TransitionProps: {
+        onClose: () => {
+          modalId.current = null;
+        },
+      },
+    });
+
+    modalId.current = modal.id;
+  };
 }
 
 export function useCheck2FA({

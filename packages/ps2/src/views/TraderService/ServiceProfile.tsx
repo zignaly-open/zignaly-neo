@@ -91,5 +91,4 @@ export const ServiceProfileInvestment = createZModalRouteElement({
   options: {
     disableAutoDestroy: true,
   },
-  ctaId: 'service-profile-invest-modal',
 });

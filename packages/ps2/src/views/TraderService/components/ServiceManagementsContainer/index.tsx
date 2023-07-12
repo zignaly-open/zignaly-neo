@@ -20,7 +20,7 @@ import {
   TopHorizontalConnection,
   TradingFunds,
 } from './styles';
-
+import { Box as MuiBox } from '@mui/material';
 import {
   useServiceDetails,
   useTraderServiceBalance,
@@ -36,7 +36,7 @@ import {
   TraderServiceManagement,
 } from '../../../../apis/service/types';
 import { useZModal } from '../../../../components/ZModal/use';
-import { useTheme } from '@mui/material';
+import { Tooltip, useTheme } from '@mui/material';
 
 function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
   const theme = useTheme();
@@ -159,13 +159,33 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                     coin={service?.ssc ?? 'USDT'}
                   />
                 </ZigTypography>
+
                 <ZigTypography color='neutral400' variant='body2'>
                   {t('neededSnapshot')}
-                  <InlinePriceLabel
-                    value={parseFloat(management.transferOut)}
-                    coin={service?.ssc ?? 'USDT'}
-                  />
+                  <Tooltip
+                    title={
+                      <MuiBox sx={{ whiteSpace: 'nowrap' }}>
+                        {t(
+                          `${
+                            management?.claims >= 0 ? 'positive' : 'negative'
+                          }-claim`,
+                          {
+                            claim: Math.abs(management?.claims),
+                            coin: service?.ssc ?? 'USDT',
+                          },
+                        )}
+                      </MuiBox>
+                    }
+                  >
+                    <div>
+                      <InlinePriceLabel
+                        value={parseFloat((-management?.claims).toString())}
+                        coin={service?.ssc ?? 'USDT'}
+                      />
+                    </div>
+                  </Tooltip>
                 </ZigTypography>
+
                 <ZigTypography color='neutral400' variant='body2'>
                   {t('minBalance.title')}
                   <InlinePriceLabel

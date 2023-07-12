@@ -10,6 +10,7 @@ export type ZigSelectProps<T> = Omit<
   SelectProps,
   "isDisabled" | "isOptionDisabled" | "onChange" | "options"
 > & {
+  showBorder?: boolean;
   label?: string | JSX.Element;
   id?: string;
   small?: boolean;
@@ -19,8 +20,9 @@ export type ZigSelectProps<T> = Omit<
   onChange?: (value: ZigSelectOption<T>["value"], option: ZigSelectOption<T> | null) => void;
   value?: ZigSelectOption<T>["value"];
   width?: number;
-  error?: string;
+  error?: string | boolean;
   placeholder?: string;
   disabled?: boolean;
   menuPlacement?: MenuPlacement;
+  hoverBackground?: boolean;
 };

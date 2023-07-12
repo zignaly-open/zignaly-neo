@@ -1,10 +1,10 @@
 import React, { useCallback, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
-  LoginButton,
   AccountDropdown,
   AccountName,
   HeaderDropdownButton,
+  LoginButton,
 } from './styles';
 import { useMediaQuery, useTheme } from '@mui/material';
 import {
@@ -16,19 +16,21 @@ import {
 } from '../../../apis/user/use';
 import {
   Avatar,
-  ZigDropdown,
-  ZigTypography,
+  ZigArrowBottomIcon,
   ZigButton,
-  ZigPlusIcon,
+  ZigDropdown,
+  ZigDropdownHandleType,
   ZigLoginUserIcon,
+  ZigPlusIcon,
+  ZigTypography,
 } from '@zignaly-open/ui';
 import {
   ROUTE_DASHBOARD,
   ROUTE_LOGIN,
-  ROUTE_SIGNUP,
   ROUTE_MY_BALANCES,
   ROUTE_REFERRALS,
   ROUTE_REWARDS,
+  ROUTE_SIGNUP,
 } from '../../../routes';
 import { generatePath, Link, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
@@ -36,10 +38,11 @@ import { useZModal } from 'components/ZModal/use';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
-import { ZigDropdownHandleType, ZigArrowBottomIcon } from '@zignaly-open/ui';
 import { ReactComponent as GiftIcon } from '../../../images/tab-rewards.svg';
 import { ReactComponent as InviteIcon } from '../../../images/tab-referrals.svg';
 import { usePrefetchTranslation } from '../../../util/i18nextHelpers';
+import { isFeatureOn } from '../../../whitelabel';
+import { Features } from '../../../whitelabel/type';
 
 function AccountMenu(): React.ReactElement | null {
   const theme = useTheme();
@@ -175,16 +178,14 @@ function AccountMenu(): React.ReactElement | null {
         {
           element: (
             <ZigButton
-              id={'invest-form__deposit'}
+              id={'account-menu-deposit'}
               startIcon={<ZigPlusIcon width={10} height={10} />}
               sx={{ fontWeight: 600, mt: '10px', mb: '12px' }}
               variant={'contained'}
               onClick={() => {
                 // fun fact: without onClose react-select acts funky
                 onClose();
-                showModal(DepositModal, {
-                  ctaId: 'account-menu-deposit',
-                });
+                showModal(DepositModal);
               }}
             >
               {t('action:deposit')}
@@ -192,7 +193,7 @@ function AccountMenu(): React.ReactElement | null {
           ),
         },
         { separator: true },
-        {
+        isFeatureOn(Features.Rewards) && {
           customStyle: `margin-top: 4px;`,
           label: (
             <>
@@ -209,7 +210,7 @@ function AccountMenu(): React.ReactElement | null {
           href: generatePath(ROUTE_REWARDS),
           onClick: () => navigate(ROUTE_REWARDS),
         },
-        {
+        isFeatureOn(Features.Referrals) && {
           label: (
             <>
               <InviteIcon
@@ -225,7 +226,9 @@ function AccountMenu(): React.ReactElement | null {
           href: generatePath(ROUTE_REFERRALS),
           onClick: () => navigate(ROUTE_REFERRALS),
         },
-        { separator: true },
+        (isFeatureOn(Features.Referrals) || isFeatureOn(Features.Rewards)) && {
+          separator: true,
+        },
         {
           label: (
             <ZigTypography
@@ -244,7 +247,7 @@ function AccountMenu(): React.ReactElement | null {
           id: 'account-menu-dropdown__logout',
           onClick: logout,
         },
-      ]}
+      ].filter(Boolean)}
     />
   );
 }

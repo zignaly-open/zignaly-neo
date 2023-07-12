@@ -56,6 +56,7 @@ export type ServiceTypesInfo = Record<
 
 export type TraderServiceManagement = {
   createdAt: string;
+  claims: number;
   dfa: string;
   dfaMqDebt: string;
   invested: string;
@@ -86,6 +87,7 @@ export type TraderServiceBalance = {
 };
 
 export type Investor = {
+  account_id: string;
   accountType: string;
   email: string;
   invested: string;
@@ -94,9 +96,13 @@ export type Investor = {
   pnlNetAt: string;
   pnlNetLc: string;
   pnlPctLc: string;
+  ownerSuccessFee: number;
+  ownerSfDiscount: number;
   sfOwnerAt: string;
   sfOwnerLc: string;
   userId: string;
+
+  actions: string;
 };
 
 export type InternalAccountType = 'STA' | 'SCA';

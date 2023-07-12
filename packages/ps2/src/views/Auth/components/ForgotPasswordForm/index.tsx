@@ -10,7 +10,7 @@ import { Box } from '@mui/material';
 import { useResetPasswordRequestMutation } from 'apis/user/api';
 import AnchorLink from 'components/AnchorLink';
 
-const ForgotPasswordForm = () => {
+const ForgotPasswordForm = ({ defaultEmail }: { defaultEmail?: string }) => {
   const { t } = useTranslation(['auth', 'error']);
   const {
     handleSubmit,
@@ -20,6 +20,9 @@ const ForgotPasswordForm = () => {
     mode: 'onTouched',
     reValidateMode: 'onBlur',
     resolver: yupResolver(ForgotPasswordValidation),
+    defaultValues: {
+      email: defaultEmail || '',
+    },
   });
   const [resetPassword, resetPasswordStatus] =
     useResetPasswordRequestMutation();

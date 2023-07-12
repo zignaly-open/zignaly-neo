@@ -32,6 +32,7 @@ import { useIsAuthenticated } from '../../../../apis/user/use';
 import { useZModal } from '../../../../components/ZModal/use';
 import CreateServiceModal from './modals/CreateServiceModal';
 import useMaybeNavigateNotLoggedIn from '../../../../util/hooks/useMaybeNavigateNotLoggedIn';
+import { ZIGNALY_PROFIT_FEE } from '../../../../util/constants';
 
 const BecomeTraderLanding: React.FC = () => {
   const { t } = useTranslation(['offer-your-trading-service', 'service']);
@@ -97,7 +98,9 @@ const BecomeTraderLanding: React.FC = () => {
       },
       {
         title: t('howWorks.list.item3.title'),
-        description: t('howWorks.list.item3.description'),
+        description: t('howWorks.list.item3.description', {
+          zignalyFee: ZIGNALY_PROFIT_FEE,
+        }),
         image: 'split-profits.png',
       },
     ],
@@ -106,9 +109,7 @@ const BecomeTraderLanding: React.FC = () => {
 
   const onClickCreateService = () => {
     if (isAuthenticated) {
-      showModal(CreateServiceModal, {
-        ctaId: 'create-service',
-      });
+      showModal(CreateServiceModal);
     } else {
       navigateIfNotLoggedIn();
     }
@@ -154,7 +155,6 @@ const BecomeTraderLanding: React.FC = () => {
               </WrapperList>
               <WrapperAction>
                 <ZigButton
-                  ctaId={'offer-service__create-service'}
                   id={'offer-service__create-service'}
                   size={'large'}
                   variant={'contained'}

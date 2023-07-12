@@ -1,15 +1,16 @@
 import React, { forwardRef } from "react";
 import { InputExtraInfoObject, ZigInputAmountProps } from "./types";
-import { InputAdornment, Box } from "@mui/material";
+import { InputAdornment, Box, Divider } from "@mui/material";
 import { ErrorMessage } from "../../display/ZigAlertMessage";
 import ZigInput from "../ZigInput";
-import { Layout, MaxButton, TopDivider } from "./styles";
+import { DividerWrapper, InputWrapper, Layout, MaxButton, TopDivider } from "./styles";
 import ZigTypography from "components/display/ZigTypography";
 import { InputExtraInfo } from "./atoms";
 import ZigCoinIcon from "../../display/ZigCoinIcon";
 import { changeEvent } from "utils/event";
 import BigNumber from "bignumber.js";
 import { trimZeros } from "utils/numbers";
+import ZigSelect from "../ZigSelect";
 export { InputExtraInfo } from "./atoms";
 
 const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
@@ -29,6 +30,11 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
     children,
     className = "",
     labelInline = true,
+    withCoinSelector = false,
+    tokenOptions,
+    onTokenChange,
+    showMaxButton = true,
+    disabled = false,
     ...rest
   } = props;
   const coinVal = typeof coin === "object" ? coin.coin : coin ?? "";
@@ -73,9 +79,19 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
   };
 
   return (
-    <Box display="flex" flexDirection="column" className={className}>
+    <Box
+      display="flex"
+      flexDirection="column"
+      alignItems={withCoinSelector ? "center" : "unset"}
+      className={className}
+    >
       {!labelInline && label && <ZigTypography pb="10px">{label}</ZigTypography>}
-      <Layout display={wide ? "flex" : "inline-flex"} error={!!error} labelInline={labelInline}>
+      <Layout
+        withCoinSelector={withCoinSelector}
+        display={wide ? "flex" : "inline-flex"}
+        error={!!error}
+        labelInline={labelInline}
+      >
         {labelInline && (
           <TopDivider error={!!error}>
             <ZigTypography color="neutral300" variant="body2" id={id && `${id}-top-label`}>
@@ -83,15 +99,23 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
             </ZigTypography>
           </TopDivider>
         )}
-        <Box display="flex" alignItems="center" gap={2} width={wide ? 1 : "auto"}>
-          <Box display="flex" alignItems="center" gap={1}>
-            <ZigCoinIcon size="small" coin={coinVal} id={id && `${id}-coin-icon`} />
-            <ZigTypography color="neutral100" variant="h3" id={id && `${id}-coin-name`}>
-              {coinVal}
-            </ZigTypography>
-          </Box>
+        <InputWrapper
+          wide={wide}
+          withCoinSelector={withCoinSelector}
+          error={!!error}
+          disabled={disabled}
+        >
+          {!withCoinSelector && (
+            <Box display="flex" alignItems="center" gap={1}>
+              <ZigCoinIcon size="small" coin={coinVal} id={id && `${id}-coin-icon`} />
+              <ZigTypography color="neutral100" variant="h3" id={id && `${id}-coin-name`}>
+                {coinVal}
+              </ZigTypography>
+            </Box>
+          )}
           <ZigInput
             {...rest}
+            disabled={disabled}
             id={id}
             inputRef={ref}
             type="string"
@@ -102,7 +126,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
             placeholder={placeholder}
             InputProps={{
               endAdornment:
-                balance || handleMax ? (
+                (balance || handleMax) && showMaxButton ? (
                   <InputAdornment position="end">
                     <MaxButton variant="outlined" onClick={handleMax} id={id && `${id}-max-button`}>
                       Max
@@ -112,7 +136,39 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
             }}
             onChange={handleChange}
           />
-        </Box>
+          {withCoinSelector && (
+            <Box display={"flex"}>
+              <DividerWrapper error={!!error}>
+                <Divider
+                  orientation={"vertical"}
+                  sx={{ border: "1px dotted #35334A", height: "42px" }}
+                />
+              </DividerWrapper>
+
+              <ZigSelect
+                menuPosition={"fixed"}
+                menuShouldScrollIntoView={false}
+                menuShouldBlockScroll
+                error={!!error}
+                hoverBackground={false}
+                placeholder={"Select coin"}
+                showBorder={false}
+                outlined
+                width={160}
+                value={coin}
+                onChange={(v1, v2) => {
+                  onTokenChange?.(v2);
+                }}
+                options={tokenOptions}
+              />
+            </Box>
+          )}
+        </InputWrapper>
+        {withCoinSelector && error && typeof error === "string" && (
+          <Box alignSelf="flex-start" mt={1}>
+            <ErrorMessage text={error} id={id && `${id}-error`} />
+          </Box>
+        )}
         <Box mt="16px" width={1}>
           <>
             {React.isValidElement(extraInfo) ? (
@@ -135,7 +191,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
           </>
         </Box>
       </Layout>
-      {error && typeof error === "string" && (
+      {!withCoinSelector && error && typeof error === "string" && (
         <Box alignSelf="flex-start">
           <ErrorMessage text={error} id={id && `${id}-error`} />
         </Box>

@@ -151,7 +151,10 @@ const CreateServiceForm: React.FC<{
         name='successFee'
         control={control}
         render={({ field }) => (
-          <SuccessFeeInputWrapper value={watch('successFee') || 0}>
+          <SuccessFeeInputWrapper
+            value={watch('successFee') || 0}
+            showZeroFeeExplainer
+          >
             <ZigInput
               type='number'
               InputProps={{
