@@ -19,3 +19,10 @@ export const TooltipIcon = styled(InfoOutlined)`
   color: #65647e;
   margin: 0 0 5px 4px;
 `;
+
+export const CommissionBoostChip = styled(Box)`
+  position: absolute;
+  top: 12px;
+  right: 0;
+  transform: translate(100%);
+`;

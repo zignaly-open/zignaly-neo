@@ -70,4 +70,5 @@ export const {
   useTierLevelsQuery,
   useServiceCommissionQuery,
   useUpdateServiceCommissionMutation,
+  useUpdateDiscountMutation,
 } = api;

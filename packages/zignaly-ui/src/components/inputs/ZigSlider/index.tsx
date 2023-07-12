@@ -4,26 +4,18 @@ import { ZigSliderProps } from "./types";
 import { SliderLabelValue } from "./atoms";
 import ZigTypography from "components/display/ZigTypography";
 
-const marks = [
-  {
-    value: 25,
-  },
-  {
-    value: 50,
-  },
-  {
-    value: 75,
-  },
-];
-
 const ZigSlider = forwardRef(
   ({ labels = {}, prefixId, className = "", valueLabelFormat, ...props }: ZigSliderProps, ref) => {
     let valueLabelFormatDefaulted = valueLabelFormat;
     if (!valueLabelFormatDefaulted && (!props.max || props.max === 100)) {
       valueLabelFormatDefaulted = (value: number) => `${value}%`;
     }
-    const { start, end, showValues = true } = labels;
+    const { start, end, showValues = true, labelsAbove } = labels;
     const showLabels = start || end;
+
+    const marks = [25, 50, 75].map((percentage) => ({
+      value: (percentage * (props.max || 100)) / 100,
+    }));
 
     return (
       <Box
@@ -45,10 +37,11 @@ const ZigSlider = forwardRef(
           width={1}
           gap={1}
           alignItems="center"
-          pt={showLabels ? 3 : 0}
+          pt={showLabels && labelsAbove !== false ? 3 : 0}
+          pb={showLabels && labelsAbove === false ? 3 : 0}
           position="relative"
         >
-          <Box display="flex" width={1} gap={1} alignItems="center" px={showLabels ? "6px" : 0}>
+          <Box display="flex" width={1} gap={"13px"} alignItems="center">
             {showValues && (
               <SliderLabelValue
                 prefixId={prefixId && `${prefixId}__label-start`}
@@ -61,12 +54,12 @@ const ZigSlider = forwardRef(
               />
             )}
             <Slider
-              itemID={"adadsds"}
               id={prefixId && `${prefixId}__slider`}
               marks={marks}
               track={false}
               valueLabelDisplay={labels.invertSliderValues ? "off" : "auto"}
               valueLabelFormat={valueLabelFormatDefaulted}
+              sx={{ width: "auto", flex: 1 }}
               {...props}
             />
             {showValues && (
