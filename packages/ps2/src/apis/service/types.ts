@@ -179,7 +179,7 @@ export enum GraphTimeframe {
 }
 
 export const GraphTimeframeDayLength = {
-  [GraphTimeframe['7d']]: 7,
+  // [GraphTimeframe['7d']]: 7,
   [GraphTimeframe['30d']]: 30,
   [GraphTimeframe['90d']]: 90,
   [GraphTimeframe['180d']]: 180,
