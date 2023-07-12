@@ -70,7 +70,7 @@ export const InputExtraInfo = (
       display="flex"
       flexWrap="wrap"
       flexDirection={displayInRow ? "row" : "column"}
-      gap={wrapExtraInfo >= 3 ? 0 : "6px"}
+      gap={"6px"}
       alignItems={displayInRow ? "center" : "flex-start"}
       justifyContent={displayInRow ? "center" : "flex-start"}
       id={props.id}
@@ -107,7 +107,7 @@ export const InputExtraInfo = (
             <Divider
               id={props.id && `${props.id}-divider`}
               orientation="vertical"
-              sx={{ borderColor: "neutral600", m: wrapExtraInfo >= 3 ? "1px 5px" : "1px 10px" }}
+              sx={{ borderColor: "neutral600", m: "1px 10px" }}
               flexItem
             />
           )}
