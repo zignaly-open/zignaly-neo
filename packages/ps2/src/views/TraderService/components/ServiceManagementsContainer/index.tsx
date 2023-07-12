@@ -167,7 +167,7 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                       <MuiBox sx={{ whiteSpace: 'nowrap' }}>
                         {t(
                           `${
-                            management?.claims < 0 ? 'positive' : 'negative'
+                            management?.claims >= 0 ? 'positive' : 'negative'
                           }-claim`,
                           {
                             claim: Math.abs(management?.claims),
