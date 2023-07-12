@@ -61,14 +61,14 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
       >
         <Box display={"flex"} flexDirection={"column"}>
           {label && (
-            <ZigTypography variant={"h2"} mb={"12px"}>
+            <ZigTypography variant={"h2"} mb={"12px"} id={id && `${id}-label`}>
               {label}
             </ZigTypography>
           )}
           <Box display={"flex"} alignItems={"center"}>
             {showCoinIcon && (
               <Box mr={"10px"} mt={"5px"}>
-                <ZigCoinIcon size={"medium"} coin={coin || "USDT"} />
+                <ZigCoinIcon id={id && `${id}-coin-icon`} size={"medium"} coin={coin || "USDT"} />
               </Box>
             )}
             {showApproximate &&
@@ -77,26 +77,30 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
             {!!prefix && <>{prefix}</>}
             {+value >= 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
             {usd && "$"}
-            <NumericFormat
-              value={Math.abs(shorten ? shortened : +value)}
-              renderText={(v) => (showApproximate ? v : trimZeros(v))}
-              displayType={"text"}
-              thousandSeparator={true}
-              decimalScale={
-                exact
-                  ? undefined
-                  : shorten
-                  ? shortenedPrecision
-                  : precision || getPrecisionForCoin(coin || "USDT", value)
-              }
-            />
+            <Box id={id && `${id}-value`}>
+              <NumericFormat
+                value={Math.abs(shorten ? shortened : +value)}
+                renderText={(v) => (showApproximate ? v : trimZeros(v))}
+                displayType={"text"}
+                thousandSeparator={true}
+                decimalScale={
+                  exact
+                    ? undefined
+                    : shorten
+                    ? shortenedPrecision
+                    : precision || getPrecisionForCoin(coin || "USDT", value)
+                }
+              />
+            </Box>
 
             {shorten ? shortenSuffix : ""}
 
             {coin && !usd && (
               <>
                 {" "}
-                <ZigTypography {...withDefaultPropsCoin}>{coin}</ZigTypography>
+                <ZigTypography id={id && `${id}-coin`} {...withDefaultPropsCoin}>
+                  {coin}
+                </ZigTypography>
               </>
             )}
           </Box>

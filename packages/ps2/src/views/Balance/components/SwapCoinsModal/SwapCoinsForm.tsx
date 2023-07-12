@@ -50,12 +50,11 @@ function SwapCoinsForm({
   const { data: balances, isLoading: isLoadingBalances } = useCoinBalances({
     convert: true,
   });
-  const coinOptions = useMemo(() => {
+  const nonZeroBalanceCoinOptions = useMemo(() => {
     if (!balances) return [];
 
-    return Object.entries(balances).map(([c]) => {
-      const balance = balances[c];
-      return {
+    return Object.entries(balances)
+      .map(([c, balance]) => ({
         value: c,
         coin: c,
         available: balance?.balanceFree || 0,
@@ -67,12 +66,12 @@ function SwapCoinsForm({
             prefixId={'swap-coins-modal'}
           />
         ),
-      };
-    });
-  }, [balances]);
+      }))
+      .filter((c) => c.available > 0 && coinsAllowedToSwap.includes(c.coin));
+  }, [balances, coinsAllowedToSwap]);
 
   const [selectedFromToken, setSelectedFromToken] = useState<CoinsSelect>(
-    coinOptions.find((coin) => coin.coin === selectedCoin.coin),
+    nonZeroBalanceCoinOptions.find((coin) => coin.coin === selectedCoin.coin),
   );
   const [selectedToToken, setSelectedToToken] = useState<CoinsSelect>(
     {} as CoinsSelect,
@@ -119,13 +118,15 @@ function SwapCoinsForm({
     }
   }, [convertPreview, isLoadingConvertPreview]);
 
-  const { data: allowedCoinsSwapTo, isLoading: isLoadingAssets } =
-    useQuoteAssetsCoin(selectedFromToken.coin);
-  const coinOptionsSwapTo = useMemo(() => {
+  const { data: allowedCoinsSwapTo } = useQuoteAssetsCoin(
+    selectedFromToken.coin,
+  );
+  const coinOptionsAllowedSwapTo = useMemo(() => {
     if (!allowedCoinsSwapTo) return [];
 
-    return allowedCoinsSwapTo.map((c) => {
-      return {
+    return allowedCoinsSwapTo
+      .filter((c) => coinsAllowedToSwap.includes(c))
+      .map((c) => ({
         value: c,
         coin: c,
         label: (
@@ -136,29 +137,31 @@ function SwapCoinsForm({
             prefixId={'swap-coins-modal'}
           />
         ),
-      };
-    });
-  }, [allowedCoinsSwapTo]);
+      }));
+  }, [allowedCoinsSwapTo, coinsAllowedToSwap]);
 
   useEffect(() => {
     if (convertPreview && selectedToToken?.coin) {
-      setValue(
-        'toCoinAmount',
-        trimZeros((+amount / convertPreview?.lastPrice).toFixed(8)).toString(),
-      );
+      const calculatedValue =
+        convertPreview.side === 'buy'
+          ? (+amount / convertPreview.lastPrice).toFixed(8)
+          : (+amount * convertPreview.lastPrice).toFixed(8);
+
+      setValue('toCoinAmount', trimZeros(calculatedValue).toString());
     }
   }, [amount, convertPreview]);
-  const nonZeroBalanceCoinOptions = coinOptions.filter(
-    (c) => c.available > 0 && coinsAllowedToSwap.includes(c.coin),
-  );
-  if (isLoadingBalances || isLoadingAssets) {
+  if (isLoadingBalances) {
     return <CenteredLoader />;
   }
 
   if (confirmationData && step === 'confirm') {
     return (
       <SwapCoinsConfirmForm
-        rate={1 / convertPreview.lastPrice}
+        rate={
+          convertPreview?.side === 'buy'
+            ? 1 / convertPreview.lastPrice
+            : convertPreview.lastPrice
+        }
         action={handleConvert}
         close={close}
         status={convertStatus}
@@ -206,7 +209,11 @@ function SwapCoinsForm({
         )}
       />
       <Box margin={'0 auto'}>
-        <ZigSwapCircleIcon width={'35px'} height={'35px'} />
+        <ZigSwapCircleIcon
+          id={'swap-coins-modal__swap-icon'}
+          width={'35px'}
+          height={'35px'}
+        />
       </Box>
 
       <Controller
@@ -218,7 +225,7 @@ function SwapCoinsForm({
             disabled
             showMaxButton={false}
             withCoinSelector
-            tokenOptions={coinOptionsSwapTo}
+            tokenOptions={coinOptionsAllowedSwapTo}
             id={'swap-coins-modal__to-input-amount'}
             label={t('to-input.label')}
             wide
@@ -237,6 +244,7 @@ function SwapCoinsForm({
 
       <ModalActions position={'relative'}>
         <ZigButton
+          id={'swap-coins-modal__continue'}
           loading={isLoadingConvertPreview}
           size={'large'}
           type={'submit'}
