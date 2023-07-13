@@ -170,7 +170,6 @@ export type TraderServiceChartProcessed = {
 };
 
 export enum GraphTimeframe {
-  '7d' = '7d',
   '30d' = '30d',
   '90d' = '90d',
   '180d' = '180d',
@@ -179,7 +178,6 @@ export enum GraphTimeframe {
 }
 
 export const GraphTimeframeDayLength = {
-  [GraphTimeframe['7d']]: 7,
   [GraphTimeframe['30d']]: 30,
   [GraphTimeframe['90d']]: 90,
   [GraphTimeframe['180d']]: 180,
