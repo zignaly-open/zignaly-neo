@@ -1,5 +1,5 @@
 import React from 'react';
-import { ZigTypography, ZignalyLogo } from '@zignaly-open/ui';
+import { ZigScoreIcon, ZigTypography, ZignalyLogo } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
 
@@ -28,7 +28,7 @@ const ZScoreChip = ({
         {t('z-score')}
       </ZigTypography>
       <Box display='flex' alignItems={'center'} gap='8px'>
-        <ZignalyLogo width={16} height={16} />
+        <ZigScoreIcon width={16} height={16} />
         <ZigTypography
           variant='h2'
           fontWeight={600}

@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 import {
   Avatar,
@@ -9,44 +8,31 @@ import {
   ZigUserFilledIcon,
   trimZeros,
 } from '@zignaly-open/ui';
-import { TransferFormData, ReferralsInviteModalProps } from './types';
-import ZModal, { Form } from 'components/ZModal';
+import { ReferralsInviteModalProps } from './types';
+import ZModal from 'components/ZModal';
 import {
   useReferralRewardsQuery,
   useServiceCommissionQuery,
   useTierLevelsQuery,
   useUpdateServiceCommissionMutation,
 } from 'apis/referrals/api';
-import { Box, Grid, Tooltip } from '@mui/material';
-import { getServiceLogo } from 'util/images';
-import ZScoreChip from 'components/ZScoreChip';
-import { fontWeight } from '@mui/system';
-import { CommissionBoostChip, InviteBox, TooltipIcon } from './styles';
-import TierBar from './components/TierBar';
-import { numericFormatter } from 'react-number-format';
-import Tiers from './components/TiersTable';
+import { Box, Grid } from '@mui/material';
+import { CommissionBoostChip, InviteBox } from './styles';
+import Tiers from './atoms/TiersTable';
+import { Verified } from '@mui/icons-material';
 import {
-  ArrowForward,
-  ArrowRight,
-  ArrowRightAlt,
-  Verified,
-} from '@mui/icons-material';
-import { DescriptionLine } from './atoms';
-import {
-  addMinutes,
-  addSeconds,
   differenceInDays,
   differenceInHours,
   differenceInMinutes,
-  differenceInSeconds,
-  format,
   isFuture,
 } from 'date-fns';
 import { getBoostedCommissionPct } from './util';
-import { max } from 'lodash';
 import { useInterval } from 'react-use';
-import BoostChip from './components/BoostChip';
-import { ShareCommissionSlider } from './components/ShareCommissionSlider';
+import BoostChip from './atoms/BoostChip';
+import { ShareCommissionSlider } from './atoms/ShareCommissionSlider';
+import { DescriptionLine } from './atoms/DescriptionLine';
+import TraderCard from './atoms/TraderCard';
+import ReferralLinkInvite from './atoms/ReferralLinkInvite';
 
 // const fakeDate = format(addSeconds(new Date(), 10), "yyyy-MM-dd'T'HH:mm:ss");
 const ReferralsInviteModal = ({
@@ -98,7 +84,7 @@ const ReferralsInviteModal = ({
     useUpdateServiceCommissionMutation();
   const { data: referralData0 } = useReferralRewardsQuery();
   const referralData = {
-    referralCode: 'code_2003',
+    referralCode: 'K823FE',
     invitedCount: 1,
     investorsCount: 0,
     usdtEarned: 11.0,
@@ -149,33 +135,7 @@ const ReferralsInviteModal = ({
     >
       <Grid container>
         <Grid item sm={12} md={4}>
-          <Box
-            width='228px'
-            display='flex'
-            flexDirection={'column'}
-            alignItems={'center'}
-            position='relative'
-            gap='12px'
-            sx={{
-              borderRadius: '7.5px',
-              border: 'solid 1px #25233c',
-              backgroundImage:
-                'radial-gradient(circle at 0 0, #131e53, #090824)',
-            }}
-          >
-            <ZigTypography variant='h1' fontWeight='600'>
-              {service.name}
-            </ZigTypography>
-            <Avatar
-              size={134}
-              alt={t('logo-alt', { name: service.name })}
-              image={getServiceLogo(service.logo)}
-              id={'referrals-invite-modal__avatar'}
-            />
-            <Box position='absolute' bottom='-28px'>
-              <ZScoreChip prefixId='referrals-invite-modal' score={50} />
-            </Box>
-          </Box>
+          <TraderCard service={service} />
         </Grid>
         <Grid
           item
@@ -204,7 +164,16 @@ const ReferralsInviteModal = ({
                 position={'relative'}
               >
                 {maxCommission}
-                {'%'}
+                <ZigTypography
+                  fontSize={25}
+                  fontWeight={600}
+                  color='inherit'
+                  position={'relative'}
+                  top='-11px'
+                  left='1px'
+                >
+                  {'%'}
+                </ZigTypography>
                 {serviceCommission.commission && (
                   <CommissionBoostChip>
                     <BoostChip boost={traderBoostMultiplier} showBolt />
@@ -274,25 +243,10 @@ const ReferralsInviteModal = ({
         </Grid>
       </Grid>
       <Box display='flex' gap='22px' mt='44px' px='22px'>
-        <InviteBox>
-          <ZigTypography color='neutral300' variant='h3' fontWeight={400}>
-            {t('trader-referral-link')}
-          </ZigTypography>
-          <ZigTypography color='#ffffff' variant='h3'>
-            https://zignaly.com/trader1920?=K823FE
-          </ZigTypography>
-        </InviteBox>
-        <ZigButton
-          sx={{
-            height: '68px',
-            minWidth: '152px',
-            textTransform: 'uppercase',
-            fontWeight: 600,
-            fontSize: '15px',
-          }}
-        >
-          {t('copy-link', { ns: 'service' })}
-        </ZigButton>
+        <ReferralLinkInvite
+          serviceId={serviceId}
+          referralCode={referralData.referralCode}
+        />
       </Box>
       <Box
         display='flex'
