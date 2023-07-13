@@ -179,7 +179,11 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                   >
                     <div>
                       <InlinePriceLabel
-                        value={parseFloat((-management?.claims).toString())}
+                        value={
+                          management?.claims < 0
+                            ? parseFloat((-management?.claims).toString())
+                            : 0
+                        }
                         coin={service?.ssc ?? 'USDT'}
                       />
                     </div>
