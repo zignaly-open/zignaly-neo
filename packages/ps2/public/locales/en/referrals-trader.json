@@ -27,5 +27,6 @@
     "minute_one": "{{count}} min",
     "minute_other": "{{count}} mins",
     "for-me": "for me",
-    "for-friends": "for friends"
+    "for-friends": "for friends",
+    "trader-boost-value": "{{boost}}x Boost"
 }

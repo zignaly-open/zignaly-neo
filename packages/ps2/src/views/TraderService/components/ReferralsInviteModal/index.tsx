@@ -133,9 +133,9 @@ const ReferralsInviteModal = ({
       title={t('title', { commission: maxCommission })}
       // isLoading={!balance || isTransferring}
     >
-      <Grid container>
+      <Grid container mt={'22px'}>
         <Grid item sm={12} md={4}>
-          <TraderCard service={service} />
+          <TraderCard service={service} traderBoost={traderBoostMultiplier} />
         </Grid>
         <Grid
           item

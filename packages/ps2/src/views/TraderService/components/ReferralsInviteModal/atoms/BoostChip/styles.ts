@@ -17,5 +17,6 @@ export const BoostBox = styled(Box)`
 
   svg {
     height: 15px;
+    width: auto;
   }
 `;

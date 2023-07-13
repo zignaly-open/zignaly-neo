@@ -24,7 +24,12 @@ const ReferralLinkInvite = ({
           <ZigTypography color='neutral300' variant='h3' fontWeight={400}>
             {t('trader-referral-link')}
           </ZigTypography>
-          <ZigTypography color='#ffffff' variant='h3' whiteSpace={'nowrap'}>
+          <ZigTypography
+            color='#ffffff'
+            variant='h3'
+            whiteSpace={'nowrap'}
+            id='referrals-invite-modal__referral-link'
+          >
             {url}
           </ZigTypography>
         </Box>
@@ -37,6 +42,7 @@ const ReferralLinkInvite = ({
           fontWeight: 600,
           fontSize: '15px',
         }}
+        id='referrals-invite-modal__copy-link'
         onClick={() => {
           // trackClick({
           //   userId,
