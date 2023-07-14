@@ -26,12 +26,8 @@ import {
 } from '../../../../../../apis/coin/use';
 import { DepositModalProps } from '../../types';
 import { allowedDeposits } from '../../../../../../util/coins';
-import {
-  useActiveExchange,
-  useCurrentUser,
-} from '../../../../../../apis/user/use';
+import { useActiveExchange } from '../../../../../../apis/user/use';
 import CoinOption, { filterOptions } from '../atoms/CoinOption';
-import { trackClick } from '@zignaly-open/tracker';
 import {
   BUY_CRYPTO_URL,
   DEPOSIT_INFO_URL,
@@ -39,6 +35,7 @@ import {
 import { Form } from 'components/ZModal';
 import { ROUTE_MY_BALANCES_TRANSACTIONS } from 'routes';
 import { useNavigate } from 'react-router-dom';
+import useTrackEvent from '../../../../../../components/Navigation/Tracker/use';
 
 const BinanceBroker = ({ children }: { children?: JSX.Element }) => {
   return (
@@ -62,8 +59,8 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
   const { data: balances } = useCoinBalances({ convert: true });
   const { data: coins } = useExchangeCoinsList();
   const { exchangeType } = useActiveExchange();
-  const { userId } = useCurrentUser();
   const toast = useToast();
+  const trackEvent = useTrackEvent();
   const navigate = useNavigate();
 
   const { handleSubmit, control, watch, setValue } = useForm<DepositFormData>({
@@ -76,8 +73,12 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
   const network = watch('network');
 
   useEffect(() => {
-    network && trackClick({ ctaId: 'select-network' });
+    network && trackEvent('select-network');
   }, [network]);
+
+  useEffect(() => {
+    coin && trackEvent('select-coin');
+  }, [coin]);
 
   const coinOptions = useMemo(
     () =>
@@ -114,7 +115,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
   );
 
   useEffect(() => {
-    depositInfo && trackClick({ ctaId: 'show-deposit-info' });
+    depositInfo && trackEvent('show-deposit-info');
   }, [depositInfo]);
 
   const coinObject = coin && coinOptions?.find((x) => x.value === coin);
@@ -275,10 +276,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                   loading ? t('depositAddress.loading') : depositInfo?.address
                 }
                 onCopied={() => {
-                  trackClick({
-                    userId,
-                    ctaId: 'deposit-modal__deposit-address',
-                  });
+                  trackEvent('deposit-modal__deposit-address');
                   toast.success(t('depositAddress.copied'));
                 }}
                 error={
@@ -299,10 +297,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                   label={t('depositMemo.label')}
                   value={loading ? t('depositMemo.loading') : depositInfo?.tag}
                   onCopied={() => {
-                    trackClick({
-                      userId,
-                      ctaId: 'deposit-modal__deposit-memo',
-                    });
+                    trackEvent('deposit-modal__deposit-memo');
                     toast.success(t('depositMemo.copied'));
                   }}
                 />
