@@ -20,7 +20,7 @@ import {
   TopHorizontalConnection,
   TradingFunds,
 } from './styles';
-
+import { Box as MuiBox } from '@mui/material';
 import {
   useServiceDetails,
   useTraderServiceBalance,
@@ -161,20 +161,33 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 </ZigTypography>
 
                 <ZigTypography color='neutral400' variant='body2'>
+                  {t('neededSnapshot')}
                   <Tooltip
-                    title={t(
-                      `${
-                        management.claims >= 0 ? 'positive' : 'negative'
-                      }-claim`,
-                      { claim: Math.abs(management.claims) },
-                    )}
+                    title={
+                      <MuiBox sx={{ whiteSpace: 'nowrap' }}>
+                        {t(
+                          `${
+                            management?.claims >= 0 ? 'positive' : 'negative'
+                          }-claim`,
+                          {
+                            claim: Math.abs(management?.claims),
+                            coin: service?.ssc ?? 'USDT',
+                          },
+                        )}
+                      </MuiBox>
+                    }
                   >
-                    <div>{t('neededSnapshot')}</div>
+                    <div>
+                      <InlinePriceLabel
+                        value={
+                          management?.claims < 0
+                            ? parseFloat((-management?.claims).toString())
+                            : 0
+                        }
+                        coin={service?.ssc ?? 'USDT'}
+                      />
+                    </div>
                   </Tooltip>
-                  <InlinePriceLabel
-                    value={parseFloat((-management.claims).toString())}
-                    coin={service?.ssc ?? 'USDT'}
-                  />
                 </ZigTypography>
 
                 <ZigTypography color='neutral400' variant='body2'>

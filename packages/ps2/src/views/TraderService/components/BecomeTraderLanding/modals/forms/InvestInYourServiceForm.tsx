@@ -30,7 +30,11 @@ const InvestInYourServiceForm: React.FC<{
   service?: ServiceFormData;
 }> = ({ service }) => {
   const { showModal } = useZModal();
-  const { t } = useTranslation(['service', 'edit-investment']);
+  const { t } = useTranslation([
+    'service',
+    'edit-investment',
+    'deposit-crypto',
+  ]);
   const coin = useCurrentBalance(service.baseCurrency);
   const exchange = useActiveExchange();
   const navigate = useNavigate();

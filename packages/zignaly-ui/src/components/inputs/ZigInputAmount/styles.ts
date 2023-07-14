@@ -2,16 +2,22 @@ import { Divider } from "@mui/material";
 import { styled, Box } from "@mui/system";
 import ZigButton from "../ZigButton";
 
-export const Layout = styled(Box)<{ error: boolean; labelInline: boolean }>`
-  border: 1px dotted ${({ theme }) => theme.palette.neutral600};
+export const Layout = styled(Box)<{
+  withCoinSelector?: boolean;
+  error: boolean;
+  labelInline: boolean;
+}>`
+  border: ${({ withCoinSelector, theme }) =>
+    withCoinSelector ? "none;" : `1px dotted ${theme.palette.neutral600};`};
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 24px 24px 12px;
+  padding: ${({ withCoinSelector }) => (withCoinSelector ? "5px 24px 12px;" : "24px 24px 12px;")};
   position: relative;
   border-radius: 5px;
 
-  ${({ error, theme }) => error && `border-color: ${theme.palette.redGraphOrError};`}
+  ${({ error, theme, withCoinSelector }) =>
+    error && !withCoinSelector && `border-color: ${theme.palette.redGraphOrError};`}
   ${({ labelInline }) =>
     labelInline &&
     `
@@ -22,7 +28,11 @@ export const Layout = styled(Box)<{ error: boolean; labelInline: boolean }>`
   && {
     .MuiInput-root {
       padding: 2px 24px;
-      background: ${({ theme }) => theme.palette.neutral750};
+      ${({ withCoinSelector }) =>
+        !withCoinSelector &&
+        `
+        background: ${({ theme }) => theme.palette.neutral750};
+      `}
       border: none;
     }
 
@@ -30,10 +40,16 @@ export const Layout = styled(Box)<{ error: boolean; labelInline: boolean }>`
       font-size: 30px;
       font-weight: 500;
       border-color: ${({ theme }) => theme.palette.neutral400};
-      background: ${({ theme }) => theme.palette.neutral750};
+      background: ${({ theme, withCoinSelector }) => withCoinSelector ? "unset" : theme.palette.neutral750};
       -webkit-text-fill-color: ${({ theme }) => theme.palette.neutral175} !important;
     }
   }
+`;
+
+export const DividerWrapper = styled(Box)<{ error?: boolean }>`
+  padding: 8px 0;
+  width: 100%;
+  height: 100%;
 `;
 
 export const TopDivider = styled(Divider, {
@@ -58,6 +74,33 @@ export const TopDivider = styled(Divider, {
       error ? theme.palette.redGraphOrError : theme.palette.neutral600};
     border-top-style: dotted;
   }
+`;
+export const InputWrapper = styled(Box)<{
+  withCoinSelector?: boolean;
+  error: boolean;
+  wide?: boolean;
+  disabled?: boolean;
+}>`
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: ${({ wide }) => (wide ? "1;" : "auto;")};
+  ${({ withCoinSelector, theme, error, disabled }) =>
+    withCoinSelector &&
+    `
+    gap: 0;
+    border-radius: 5px;
+    border: 1px dotted ${error ? theme.palette.redGraphOrError : theme.palette.neutral600};
+    &:hover{
+      border-color: ${
+        error
+          ? theme.palette.redGraphOrError
+          : disabled
+          ? theme.palette.neutral600
+          : theme.palette.neutral400
+      };
+    }
+    `};
 `;
 
 export const MaxButton = styled(ZigButton)`

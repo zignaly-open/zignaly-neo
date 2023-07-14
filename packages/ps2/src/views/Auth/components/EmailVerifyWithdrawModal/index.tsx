@@ -5,6 +5,9 @@ import ZModal from '../../../../components/ZModal';
 import { QueryReturnTypeBasic } from 'util/queryReturnType';
 import EmailVerifyForm from '../EmailVerifyForm';
 import { useSendCodeWithdraw } from '../../../../apis/user/use';
+import { ZigTypography } from '@zignaly-open/ui';
+import { useToast } from '../../../../util/hooks/useToast';
+import { Title } from '../AuthVerifyModal/styles';
 function EmailVerifyWithdrawModal({
   close,
   action,
@@ -16,10 +19,14 @@ function EmailVerifyWithdrawModal({
   status: QueryReturnTypeBasic<void>;
 } & DialogProps): React.ReactElement {
   const { t } = useTranslation(['auth', 'error']);
-  const [verify] = useSendCodeWithdraw();
+  const [sendCode] = useSendCodeWithdraw();
   useEffect(() => {
-    verify();
-  }, [verify]);
+    sendCode();
+  }, [sendCode]);
+  const toast = useToast();
+  const performResend = () => {
+    sendCode().then(() => toast.success(t('auth:resend-code')));
+  };
 
   useEffect(() => {
     if (status.isSuccess) {
@@ -33,8 +40,8 @@ function EmailVerifyWithdrawModal({
 
     return errorCode === 13
       ? t('error:error.login-session-expired')
-      : errorCode === 37
-      ? t(`error:error.wrong-code`)
+      : errorCode === 1086
+      ? t(`error:error.${errorCode}`)
       : null;
   }, [t, status]);
 
@@ -46,9 +53,20 @@ function EmailVerifyWithdrawModal({
       title={t('auth:email-verify-withdraw-modal.title')}
       titleAlign='center'
     >
+      <Title data-testid={'auth-verify-modal__title'}>
+        <ZigTypography
+          whiteSpace='pre-line'
+          id={'auth-verify-modal__description'}
+          textAlign={'center'}
+        >
+          {t(
+            'auth:auth-verify-modal.isNotDisabled.askNot2FA.isEmailUnconfirmed.description',
+          )}
+        </ZigTypography>
+      </Title>
       <EmailVerifyForm
-        onReSendCode={() => {}}
         clearOnError
+        onReSendCode={performResend}
         onSubmit={action}
         isLoading={status.isLoading}
         error={error}

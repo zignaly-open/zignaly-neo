@@ -5,7 +5,14 @@ import { css } from "@emotion/react";
 import { StyledComponent } from "@emotion/styled";
 import { BoxTypeMap } from "@mui/system";
 
-type Props = { error?: string; width?: number; small?: boolean; outlined?: boolean };
+type Props = {
+  error?: string | boolean;
+  width?: number;
+  small?: boolean;
+  outlined?: boolean;
+  showBorder?: boolean;
+  hoverBackground?: boolean;
+};
 
 export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(Box)<Props>`
   gap: 10px;
@@ -16,6 +23,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
     &__control {
       border: 1px solid
         ${({ theme, error }) => (error ? theme.palette.redGraphOrError : theme.palette.neutral600)};
+      ${({ showBorder }) => !showBorder && "border: none;"};
       padding: ${({ small }) => (small ? "3px 16px 3px 9px" : "11px 24px 11px 16px")};
       min-height: ${({ small }) => (small ? "0" : "60px")};
       border-radius: 5px;
@@ -36,8 +44,9 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
       &:hover {
         border-color: ${({ theme, error }) =>
           error ? theme.palette?.redGraphOrError : theme.palette.neutral400};
-        ${({ outlined }) =>
+        ${({ outlined, hoverBackground }) =>
           outlined &&
+          hoverBackground &&
           css`
             background-color: rgba(118, 130, 247, 0.08);
           `}
@@ -55,6 +64,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
           ${({ theme, error }) =>
             error ? theme.palette.redGraphOrError : theme.palette.neutral400};
         box-shadow: none !important;
+        ${({ showBorder }) => !showBorder && "border: none;"};
       }
     }
 
