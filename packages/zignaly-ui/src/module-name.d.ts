@@ -38,9 +38,11 @@ declare module "@mui/material/styles" {
       | "tableRow"
       | "sliderThumb"
       | "tableHeader"
+      | "input2fa"
+      | "input2faGradient"
+      | "input2faGradientBorder"
       | "buttonPrimary"
       | "loader"
-      | "buttonPrimaryHover"
       | "header"
       | "input",
       string

@@ -31,7 +31,6 @@ const example: Theme = {
   backgrounds: {
     header: "linear-gradient(269.14deg, #ffcccc 0%, #eebbbb 100%)",
     buttonPrimary: "linear-gradient(289.8deg, #f99 0%, #f9f 100%)",
-    buttonPrimaryHover: "linear-gradient(#fcc,#fcf)",
     tableHeader: "#f88",
     loader: "#f9a",
     sliderMark: "#aa8999",
@@ -45,6 +44,9 @@ const example: Theme = {
     secondaryBackground: "#eebbbb",
     toastSuccess: "#9f9",
     toastError: "#f99",
+    input2fa: "#fff",
+    input2faGradient: "linear-gradient(101deg, #3f3bb1 7%, #138ea0 94%)",
+    input2faGradientBorder: "linear-gradient(101deg, #3f3bb1 7%, #138ea0 94%)",
     input: "linear-gradient(90deg, #F96860 0%, #F96860 100%)",
   },
   boxShadows: {

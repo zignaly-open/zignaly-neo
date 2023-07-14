@@ -43,6 +43,9 @@ const dark: Theme = {
     sliderMark: "#888999",
     sliderThumb: "#999ee0",
     buttonPrimary: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
+    input2fa: "#0f1124",
+    input2faGradient: "linear-gradient(101deg, #3f3bb1 7%, #138ea0 94%)",
+    input2faGradientBorder: "linear-gradient(101deg, #3f3bb1 7%, #138ea0 94%)",
     input: "linear-gradient(90deg, rgb(16 18 37) 0%, rgb(16 18 37) 35%, rgb(16 18 37) 100%)",
   },
   boxShadows: {
