@@ -9,6 +9,7 @@ export const HeaderDropdownButton = styled('button', {
   border: none;
   height: 49px;
   padding-bottom: 4px;
+  padding-top: 4px;
   padding-left: 15px;
   padding-right: 15px;
   display: flex;
