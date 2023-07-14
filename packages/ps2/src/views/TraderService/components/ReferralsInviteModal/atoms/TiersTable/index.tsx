@@ -11,7 +11,6 @@ import { TiersTableProps } from './types';
 import { useTierLayers } from '../TierBar/util';
 import BoostChip from '../BoostChip';
 import { formatCompactNumber } from 'views/Dashboard/components/MyDashboard/util';
-import { isFuture, isPast } from 'date-fns';
 
 const composeInvitesValue = (tierIndex: number, tiers: TierLevels) => {
   const currentTier = tiers[tierIndex];

@@ -1,4 +1,4 @@
-import { Box, css, styled } from '@mui/material';
+import { Box, css, styled, keyframes } from '@mui/material';
 
 export const Overlay = styled(Box)<{ opacity: number }>`
   background-image: ${({ opacity }) =>
@@ -152,4 +152,20 @@ export const BarContent = styled(Box)<{ subLayer?: boolean }>`
     width: 7.5px;
     min-width: 7.5px;
   }
+`;
+const growAnimation = keyframes`
+  from {
+    transform: scaleY(0);
+    opacity: 0;
+    transform-origin: bottom;
+  }
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+    transform-origin: bottom;
+  }
+`;
+
+export const AnimatedContainer = styled(Box)`
+  animation: ${growAnimation} 0.3s ease-in-out;
 `;

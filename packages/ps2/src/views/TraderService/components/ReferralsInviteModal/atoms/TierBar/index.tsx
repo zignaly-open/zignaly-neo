@@ -5,6 +5,7 @@ import {
   Overlay,
   TierArrow,
   TierBarContainer,
+  AnimatedContainer,
 } from './styles';
 import { ReactComponent as BoltIcon } from 'images/referrals/bolt.svg';
 import { ZigTypography } from '@zignaly-open/ui';
@@ -12,8 +13,6 @@ import { Box } from '@mui/material';
 import { useTierLayers } from './util';
 import { TierBarProps } from './types';
 import { UserRate } from './atoms';
-
-const MULTIPLIER = 1.7;
 
 const TierBar = ({
   tier,
@@ -80,8 +79,9 @@ const TierBar = ({
   const [layer1, layer2, layer3] = layers;
   const layersCount = layers.filter((l) => l.value > 0).length;
 
-  console.log(`\n---\nTier ${tier.id}:`);
-  console.table([layer1, layer2, layer3]);
+  // Layer debug
+  // console.log(`\n---\nTier ${tier.id}:`);
+  // console.table([layer1, layer2, layer3]);
 
   // Due to using absolute positioning for the bar content (to not apply the opacity to the text / icon),
   // we need to set a min height for the container, which need to be larger if there is a bolt icon (more than 1 layer?)
@@ -89,7 +89,7 @@ const TierBar = ({
   const layer1MinHeight = layersCount > 1 ? layer2.height + 48 : 0;
 
   return (
-    <div>
+    <AnimatedContainer>
       {referral.tierLevelId === tier.id && <UserRate />}
       <Box
         position='relative'
@@ -183,7 +183,7 @@ const TierBar = ({
           </>
         )}
       </Box>
-    </div>
+    </AnimatedContainer>
   );
 };
 
