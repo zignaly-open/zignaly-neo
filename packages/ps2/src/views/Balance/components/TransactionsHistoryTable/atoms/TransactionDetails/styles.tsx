@@ -15,7 +15,7 @@ export const TransactionPanel = styled('div')`
 export const TypographyPanelLabel = styled(ZigTypography)`
   && {
     margin-right: 16px;
-    color: ${(props) => props.theme.palette.neutral100};
+    color: ${(props) => props.theme.palette.neutral400};
     font-weight: 400;
     font-size: 13px;
   }

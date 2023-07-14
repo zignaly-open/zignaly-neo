@@ -51,7 +51,7 @@ export const Button = styled.div<ButtonProps>`
   user-select: none;
   height: 56px;
   cursor: pointer;
-  background: ${({ theme }) => theme.palette.backgrounds.secondaryBackground};
+  background: ${({ theme }) => theme.backgrounds.secondaryBackground};
 
   ${({ center, theme, isActiveDropDown, focused }) => `    
     ${styledIf(

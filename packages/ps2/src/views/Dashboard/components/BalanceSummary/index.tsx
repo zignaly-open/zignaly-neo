@@ -26,7 +26,7 @@ export const BalanceSummary = ({
           <ZigTypography>{t('balanceSummary.invested')}</ZigTypography>
         ) : (
           <ZigPriceLabel
-            color={'neutral200'}
+            color={'contrasting'}
             id={prefixId && serviceId && `${prefixId}__invested-${serviceId}`}
             value={new BigNumber(totalValue).toFixed()}
             coin={coin}
