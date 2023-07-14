@@ -9,7 +9,6 @@ export const InviteBox = styled(Box)`
   flex: 1;
   align-content: space-between;
   padding: 7px 12px;
-  /* padding: 0 12px; */
   height: 68px;
 `;
 

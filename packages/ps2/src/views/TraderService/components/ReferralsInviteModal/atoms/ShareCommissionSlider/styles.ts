@@ -5,7 +5,7 @@ export const SliderContainer = styled(Box)`
   position: relative;
   width: 100%;
   height: 114px;
-  border: 1px solid #9496b41a;
+  border: 1px solid #1a1d35;
   border-radius: 15px;
   padding: 16px;
   width: 428px;
@@ -24,7 +24,7 @@ export const ContainerArrow = styled('div')`
   height: 0;
   border-left: 22px solid transparent;
   border-right: 22px solid transparent;
-  border-bottom: 20px solid #9496b41a;
+  border-bottom: 20px solid #1a1d35;
 
   &:after {
     content: '';
