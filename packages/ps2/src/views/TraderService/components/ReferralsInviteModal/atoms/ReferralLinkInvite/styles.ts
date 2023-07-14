@@ -1,5 +1,5 @@
 import { Box, styled } from '@mui/material';
-import { ZigInviteIcon } from '@zignaly-open/ui';
+import { ZigInput, ZigInviteIcon } from '@zignaly-open/ui';
 
 export const InviteBox = styled(Box)`
   border-radius: 5px;
@@ -19,4 +19,17 @@ export const StyledInviteIcon = styled(ZigInviteIcon)`
   position: relative;
   min-width: 58px;
   height: auto;
+`;
+
+export const InviteUrlInput = styled('input')`
+  font-family: inherit;
+  width: 390px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  border: none;
+  letter-spacing: 0.56px;
+  font-size: 16px;
+  font-weight: 500;
+  outline: none;
+  background: transparent;
 `;

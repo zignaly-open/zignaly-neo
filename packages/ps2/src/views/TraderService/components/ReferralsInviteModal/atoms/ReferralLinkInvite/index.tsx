@@ -1,6 +1,11 @@
-import { ZigTypography, ZigButton, ZigInviteIcon } from '@zignaly-open/ui';
+import {
+  ZigTypography,
+  ZigButton,
+  ZigInviteIcon,
+  ZigInput,
+} from '@zignaly-open/ui';
 import React from 'react';
-import { InviteBox, StyledInviteIcon } from './styles';
+import { InviteBox, InviteUrlInput, StyledInviteIcon } from './styles';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
 import { useToast } from 'util/hooks/useToast';
@@ -24,17 +29,11 @@ const ReferralLinkInvite = ({
           <ZigTypography color='neutral300' variant='h3' fontWeight={400}>
             {t('trader-referral-link')}
           </ZigTypography>
-          <ZigTypography
-            color='#ffffff'
-            variant='h3'
-            whiteSpace={'nowrap'}
-            overflow={'hidden'}
-            textOverflow={'ellipsis'}
-            width={'390px'}
+          <InviteUrlInput
+            value={url}
             id='referrals-invite-modal__referral-link'
-          >
-            {url}
-          </ZigTypography>
+            readOnly
+          />
         </Box>
       </InviteBox>
       <ZigButton

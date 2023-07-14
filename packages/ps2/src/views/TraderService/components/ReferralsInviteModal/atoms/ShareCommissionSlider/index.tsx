@@ -15,27 +15,9 @@ export const ShareCommissionSlider = ({
   max: number;
 }) => {
   const { t } = useTranslation(['referrals-trader', 'common']);
-
-  const {
-    watch,
-    handleSubmit,
-    control,
-    trigger,
-    formState: { isValid, errors, isDirty },
-  } = useForm<{ value: number }>({
-    mode: 'onChange',
-    // resolver: yupResolver(transferModalValidation(balanceFrom)),
-    // defaultValues: {
-    //   amountValue: '',
-    // },
-  });
-
-  const onSubmit = () => {};
   const [value, setValue] = useState(Math.round((discountPct / max) * 100));
-  const [updateDiscount, updating] = useUpdateDiscountMutation();
+  const [updateDiscount] = useUpdateDiscountMutation();
   const toast = useToast();
-  console.log(value);
-
   const isFirstRun = useRef(true);
 
   useDebounce(
