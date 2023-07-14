@@ -50,15 +50,15 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
       height: 32px;
     `}
 
-  ${({ variant, theme: { palette } }) =>
+  ${({ variant, theme: { palette, backgrounds } }) =>
     variant === "success" &&
     css`
       ${Caption} {
         color: ${palette.greenGraph};
       }
 
-      border: 1px solid ${palette.backgrounds.toastSuccess};
-      background: ${palette.backgrounds.toastSuccess};
+      border: 1px solid ${backgrounds.toastSuccess};
+      background: ${backgrounds.toastSuccess};
     `}
 
 
@@ -73,14 +73,14 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
       background: ${palette.neutral600};
     `}
 
-  ${({ variant, theme: { palette } }) =>
+  ${({ variant, theme: { palette, backgrounds } }) =>
     variant === "error" &&
     css`
       ${Caption} {
         color: ${palette.redGraphOrError};
       }
 
-      border: 1px solid ${palette.backgrounds.toastError};
-      background: ${palette.backgrounds.toastError};
+      border: 1px solid ${backgrounds.toastError};
+      background: ${backgrounds.toastError};
     `}
 `;
