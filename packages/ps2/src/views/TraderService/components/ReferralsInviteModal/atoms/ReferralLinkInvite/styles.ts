@@ -1,5 +1,5 @@
 import { Box, styled } from '@mui/material';
-import { ZigInput, ZigInviteIcon } from '@zignaly-open/ui';
+import { ZigInviteIcon } from '@zignaly-open/ui';
 
 export const InviteBox = styled(Box)`
   border-radius: 5px;

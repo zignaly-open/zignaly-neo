@@ -1,8 +1,7 @@
-import { ZigSlider, ZigTypography } from '@zignaly-open/ui';
+import { ZigTypography } from '@zignaly-open/ui';
 import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { SliderContainer, ContainerArrow, StyledZigSlider } from './styles';
-import { useForm } from 'react-hook-form';
 import { useDebounce } from 'react-use';
 import { useUpdateDiscountMutation } from 'apis/referrals/api';
 import { useToast } from 'util/hooks/useToast';
@@ -55,7 +54,7 @@ export const ShareCommissionSlider = ({
         }}
         prefixId='referrals-invite-modal'
         value={value}
-        onChange={(_, v: number) => {
+        onChange={(_: React.ChangeEvent<HTMLInputElement>, v: number) => {
           setValue(v);
         }}
         max={max}

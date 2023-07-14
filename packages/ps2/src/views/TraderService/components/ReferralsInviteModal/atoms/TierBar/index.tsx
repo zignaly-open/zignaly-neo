@@ -53,21 +53,6 @@ const TierBar = ({
     [min, max, tier],
   );
 
-  // Arrow opacity
-  // todo: review
-  const minArrowOpacity = 0.15;
-  const opacityArrow = useMemo(() => {
-    const minAbove1 = tiers.find((t) => t.commissionPct > 1).commissionPct;
-    return tier.commissionPct > 1
-      ? minArrowOpacity +
-          Math.pow(
-            (tier.commissionPct - minAbove1) / (max - minAbove1),
-            opacityPower,
-          ) *
-            (1 - minArrowOpacity)
-      : 0;
-  }, [min, max, tier]);
-
   const layers = useTierLayers(
     tiers,
     tier.id,
@@ -79,23 +64,14 @@ const TierBar = ({
   const [layer1, layer2, layer3] = layers;
   const layersCount = layers.filter((l) => l.value > 0).length;
 
-  // Layer debug
+  // Layers debug
   // console.log(`\n---\nTier ${tier.id}:`);
   // console.table([layer1, layer2, layer3]);
-
-  // Due to using absolute positioning for the bar content (to not apply the opacity to the text / icon),
-  // we need to set a min height for the container, which need to be larger if there is a bolt icon (more than 1 layer?)
-  // todo: still needed?
-  const layer1MinHeight = layersCount > 1 ? layer2.height + 48 : 0;
 
   return (
     <AnimatedContainer>
       {referral.tierLevelId === tier.id && <UserRate />}
-      <Box
-        position='relative'
-        minHeight={layer1MinHeight}
-        height={layer1.height}
-      >
+      <Box position='relative' height={layer1.height}>
         <TierBarContainer
           opacity={opacity}
           width={width}
@@ -103,7 +79,7 @@ const TierBar = ({
           emphasis={showArrow}
         >
           <BarContent>
-            {layersCount > 1 && <BoltIcon />}
+            {serviceCommission > 0 && <BoltIcon />}
             <ZigTypography
               color={
                 layersCount > 1
@@ -119,23 +95,18 @@ const TierBar = ({
               {'%'}
             </ZigTypography>
           </BarContent>
-          {showArrow && <TierArrow opacity={opacityArrow} />}
+          {showArrow && <TierArrow />}
           <Overlay opacity={opacity} />
         </TierBarContainer>
         {referral.tierLevelId === tier.id && (
           <HighlightRate
-            height={Math.max(
-              layer1.height - layer2.height,
-              layer1MinHeight - layer2.height,
-            )}
+            height={layer1.height - layer2.height}
             width={width - 3}
           />
         )}
         {layer2.value > 0 && (
           <>
             <TierBarContainer
-              // opacity={showArrow ? 0.45 : opacity}
-              // opacity={opacity / 2}
               opacity={opacity}
               width={width}
               height={layer2.height}
@@ -159,8 +130,6 @@ const TierBar = ({
         {layer3.value > 0 && (
           <>
             <TierBarContainer
-              // opacity={showArrow ? 0.3 : opacity}
-              // opacity={opacity / 2.7}
               opacity={opacity}
               width={width}
               height={layer3.height}
@@ -179,7 +148,6 @@ const TierBar = ({
                 </ZigTypography>
               </BarContent>
             </TierBarContainer>
-            {/* <BarContent height={layer3.height} subLayer={true}></BarContent> */}
           </>
         )}
       </Box>

@@ -16,7 +16,6 @@ export const TierBarContainer = styled(Box)<{
   opacity: number;
   emphasis: boolean;
   subLayer?: boolean;
-  highlighted?: boolean;
 }>`
   border-radius: 4px;
   margin: 0 10px;
@@ -65,14 +64,7 @@ export const HighlightRate = styled(Box)`
   border-bottom-right-radius: 0;
 `;
 
-export const TierArrow = styled('div')<{ opacity: number }>`
-  /* position: absolute;
-  width: 30px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0; */
-  /* opacity: ${({ opacity }) => opacity}; */
+export const TierArrow = styled('div')`
   position: relative;
   height: 100%;
   margin-top: 12px;
@@ -105,9 +97,7 @@ export const TierArrow = styled('div')<{ opacity: number }>`
 
 export const BarContent0 = styled(Box)<{ subLayer: boolean }>`
   position: absolute;
-  /* padding-top: 12%; */
   justify-content: center;
-  /* transform: translateY(-30%); */
   left: 0;
   right: 0;
   bottom: 0;
@@ -118,7 +108,6 @@ export const BarContent0 = styled(Box)<{ subLayer: boolean }>`
   ${({ subLayer }) =>
     !subLayer &&
     css`
-      /* padding-top: 20%; */
       transform: translateY(8%);
       justify-content: start;
     `}
@@ -141,9 +130,7 @@ export const BarContent = styled(Box)<{ subLayer?: boolean }>`
   ${({ subLayer }) =>
     !subLayer &&
     css`
-      /* padding-top: 20%; */
       transform: translateY(18%);
-      /* justify-content: start; */
     `}
 
   svg {

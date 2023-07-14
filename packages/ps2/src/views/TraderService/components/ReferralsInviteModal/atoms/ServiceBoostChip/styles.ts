@@ -8,9 +8,6 @@ export const BoostBox = styled(Box)`
   gap: 8px;
   padding: 2px 24px;
   height: 34px;
-  /* background: linear-gradient(to bottom, black 0%, white 100%); */
-  /* background-clip: text; */
-  /* -webkit-text-fill-color: transparent; */
   box-shadow: 0 0 5px 1.5px rgba(255, 229, 105, 0.16);
   background-color: #0c1b30;
 

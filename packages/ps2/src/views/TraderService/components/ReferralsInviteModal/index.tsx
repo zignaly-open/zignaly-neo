@@ -79,7 +79,7 @@ const ReferralsInviteModal = ({
   ];
   const { data: serviceCommission0 } = useServiceCommissionQuery({ serviceId });
   const serviceCommission = {
-    commission: 10,
+    commission: 5,
   };
   const zignalyCommission = 5;
   const [updateComission, updateComissionLoading] =
@@ -91,12 +91,12 @@ const ReferralsInviteModal = ({
     investorsCount: 0,
     usdtEarned: 11.0,
     usdtPending: 20.0,
-    tierLevelId: 3,
+    tierLevelId: 1,
     tierLevelFactor: 30.0,
     discountPct: 25.0,
     boost: 1,
-    // boostEndsAt: '2023-07-17T06:01:00',
-    boostEndsAt: fakeDate,
+    boostEndsAt: '2023-07-13T06:01:00',
+    // boostEndsAt: fakeDate,
   };
   const [currentDate, setCurrentDate] = useState(new Date());
   const inviteLeft = 5;
@@ -175,7 +175,7 @@ const ReferralsInviteModal = ({
                 >
                   {'%'}
                 </ZigTypography>
-                {serviceCommission.commission && (
+                {serviceCommission.commission > 0 && (
                   <CommissionBoostChip>
                     <BoostChip boost={traderBoostMultiplier} showBolt />
                   </CommissionBoostChip>

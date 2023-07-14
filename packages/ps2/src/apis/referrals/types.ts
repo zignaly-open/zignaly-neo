@@ -7,12 +7,10 @@ export type ReferralRewards = {
   usdtPending: number;
   tierLevelId: number;
   tierLevelFactor: number;
-  // usdtAum: number;
-  // zigBalance: number;
   discountPct: number;
   boost: number;
   boostEndsAt: string;
-  // can be removed
+  // can be removed?
   configuration: {
     zignalySuccessFee: number;
     zignalyRebateFee: number;

@@ -1,9 +1,8 @@
 import { useMemo } from 'react';
 import { getBoostedCommissionPct } from '../../util';
 import { TierLevels } from 'apis/referrals/types';
-import { Options } from 'views/TraderService/components/ServiceHeader/styles';
 
-const BOLT_SPACE = 18;
+const BOLT_SPACE = 25;
 export const DEFAULT_MIN_HEIGHT = 32;
 export const DEFAULT_MAX_HEIGHT = 240;
 
@@ -38,6 +37,42 @@ export const calculateLayerValue = (
   return 0;
 };
 
+const calculateLayerHeight = (
+  value: number,
+  min: number,
+  max: number,
+  minHeight: number,
+  maxHeight: number,
+) => {
+  // Adjust this value to control the curve
+  const power = 1;
+  const height =
+    minHeight +
+    Math.pow((value - min) / (max - min), power) * (maxHeight - minHeight);
+
+  return height;
+};
+
+const calculateSubLayerHeight = (
+  value: number,
+  fullValue: number,
+  fullHeight: number,
+  heightAbove: number,
+  minHeight: number,
+) => {
+  let height = (value / fullValue) * fullHeight;
+
+  const heightMissing = minHeight - (heightAbove - height);
+
+  // Reduce height to respect layer above's min height
+  if (heightMissing > 0) {
+    height -= heightMissing;
+  }
+
+  // Apply current layer minHeight
+  return Math.max(height, minHeight);
+};
+
 /**
  * Calculate the commission value and height for each layer of the tier bar.
  * - 1st layer: Full bar, including all the boosts.
@@ -69,8 +104,8 @@ export const useTierLayers = (
       : serviceCommission > 0 || boost > 1
       ? 2
       : 1;
-  const minHeightConstraints =
-    layers * minHeight + (layers > 1 ? BOLT_SPACE : 0);
+  const minAdditionalHeight = serviceCommission > 0 ? BOLT_SPACE : 0;
+  const minHeightConstraints = layers * minHeight + minAdditionalHeight;
 
   // Layer 1 (Full bar)
   const layer1 = useMemo(() => {
@@ -82,14 +117,16 @@ export const useTierLayers = (
       zignalyCommission,
     );
 
-    // Adjust this value to control the curve
-    const power = 1;
-    const height =
-      minHeightConstraints +
-      Math.pow((tierCommission - min) / (max - min), power) *
-        (maxHeight - minHeightConstraints);
-
-    return { value, height };
+    return {
+      value,
+      height: calculateLayerHeight(
+        tierCommission,
+        min,
+        max,
+        minHeightConstraints,
+        maxHeight,
+      ),
+    };
   }, [min, max, serviceCommission, tierCommission, boost]);
 
   const layer2 = useMemo(() => {
@@ -100,11 +137,18 @@ export const useTierLayers = (
       serviceCommission,
       zignalyCommission,
     );
-    const height = (value / layer1.value) * layer1.height;
+
+    const height = calculateSubLayerHeight(
+      value,
+      layer1.value,
+      layer1.height,
+      layer1.height,
+      minHeight * (layers - 1),
+    );
 
     return {
       value: value !== layer1.value ? value : 0,
-      height: Math.max(height, minHeight * (layers - 1)),
+      height,
     };
   }, [serviceCommission, tierCommission, boost, layer1]);
 
@@ -116,14 +160,20 @@ export const useTierLayers = (
       serviceCommission,
       zignalyCommission,
     );
-    // const height =
-    //   Math.min(value / layer1.value, 0.25) * layer1.height * MULTIPLIER;
-    const height = (value / layer1.value) * layer1.height;
+
+    const height = calculateSubLayerHeight(
+      value,
+      layer1.value,
+      layer1.height,
+      layer2.height,
+      minHeight * (layers - 2),
+    );
+
     return {
-      value: value,
-      height: Math.max(height, minHeight * (layers - 2)),
+      value,
+      height,
     };
-  }, [serviceCommission, tierCommission, boost, layer1]);
+  }, [serviceCommission, tierCommission, boost, layer1, layer2]);
 
   return [layer1, layer2, layer3];
 };

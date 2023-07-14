@@ -47,7 +47,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
               gap={1}
               alignItems={'center'}
             >
-              <ZigInviteIcon width={20} height={'auto'} />
+              <ZigInviteIcon width={20} height={'100%'} />
               {t('invite')}
             </Box>
           </ZigButton>
