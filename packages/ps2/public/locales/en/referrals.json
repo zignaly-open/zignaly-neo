@@ -19,11 +19,10 @@
             "description": "You'll earn unlimited commissions: {{successFee}}% of Success Fees paid to Zignaly. They get ${{reward}} in ZIG if they invest any amount"
         }
     },
-    "they-get-invest": "<0>They get</0><1>${{value}}</1><> in Fee Voucher on First Deposit",
+    "they-get-invest": "<0>They get</0><1>${{value}}</1><2> in Fee Voucher on First Deposit",
     "they-get-invest-modal": "Your invitee gets a <0>${{value}}</0> Fee Voucher on their First Deposit.",
     "invite-traders-for-revenue": "<0>Invite Traders</0><1>{{value}}%</1><2>of Zignaly’s Revenue</2>",
-    "invite-traders-for-revenue-modal": "Invite traders to get <0>{{value}}%</0> of Zignaly’s Revenue earned from the Trader's Profit sharing service for the lifetime{{optionalDetails}}.",
-    "invite-traders-for-revenue-details-modal": " (instead of {{value}}% thanks to your boost)",
+    "invite-traders-for-revenue-modal": "Invite traders to get <0>{{value}}%</0> of Zignaly’s Revenue earned from the Trader's Profit sharing service for the lifetime.",
     "invite-traders-for-percent": "<0>Invite Traders</0><1>{{value}}%</1><2> of all their investors' success fees</2>",
     "invite-traders-for-percent-modal": "Invite traders to get <0>{{value}}%</0>  of the Zignaly’s Revenue from Success Fees from that invitee for the lifetime.",
     "invite-friends-for-revenue": "<0>Invite Friends</0><1>{{value}}%</1><2>of Zignaly’s Revenue</2>",
@@ -48,7 +47,6 @@
     "invite-for-balance-modal": "Invite friends to get <0>{{value}} {{symbol}}</0> when their balance reaches ${{threshold}}+.",
     "invite-for-signup": "<0>Invite Friends</0><1>{{value}} {{symbol}}</1><2> when they create and verify an account</2>",
     "invite-for-signup-modal": "Invite friends to get <0>{{value}} {{symbol}}</0> when they create and verify an account.",
-    "revenue-tooltip": "You are earning {{new}}% instead of {{old}}% thanks to your boost",
     "terms": {
         "title": "Fixed Terms:",
         "1": "Zignaly reserves the right to disqualify a participant if they engage in inappropriate, dishonest, or abusive activities.",
@@ -116,21 +114,5 @@
     "share": {
         "email-subject": "Zignaly, a new way to trade",
         "facebook-hashtags": "#crypto #trading"
-    },
-    "boost-title": "Boost Your Earnings By Holding ZIG",
-    "boost-desc": "When you hold ZIG tokens you’ll earn a higher percentage of the success fees of the traders you invited. The more you hold, the more you earn.",
-    "my-tier": "My Tier",
-    "hold-zig": "Hold ZIG to Earn More!",
-    "view-tiers": "View tiers",
-    "boost": "Boost",
-    "zig-held": "ZIG held:",
-    "zig-held-tooltip": "Amount of ZIGs that you have in your ZIG Wallet in Zignaly",
-    "AUM": "AUM:",
-    "AUM-tooltip": "Amount invested in Profit Sharing by you and all your invited friends to Zignaly",
-    "or": "or",
-    "boost-tiers": "ZIG Boost Tiers",
-    "to-next-boost": "to next boost",
-    "current-tier": "Current Tier",
-    "next-tier": "Next Tier",
-    "buy-zig": "Buy ZIG coins"
+    }
 }

@@ -21,9 +21,11 @@ import { CommissionBoostChip, InviteBox } from './styles';
 import Tiers from './atoms/TiersTable';
 import { Verified } from '@mui/icons-material';
 import {
+  addSeconds,
   differenceInDays,
   differenceInHours,
   differenceInMinutes,
+  format,
   isFuture,
 } from 'date-fns';
 import { getBoostedCommissionPct } from './util';
@@ -34,7 +36,7 @@ import { DescriptionLine } from './atoms/DescriptionLine';
 import TraderCard from './atoms/TraderCard';
 import ReferralLinkInvite from './atoms/ReferralLinkInvite';
 
-// const fakeDate = format(addSeconds(new Date(), 10), "yyyy-MM-dd'T'HH:mm:ss");
+const fakeDate = format(addSeconds(new Date(), 10), "yyyy-MM-dd'T'HH:mm:ss");
 const ReferralsInviteModal = ({
   serviceId,
   service,
@@ -93,10 +95,9 @@ const ReferralsInviteModal = ({
     tierLevelFactor: 30.0,
     discountPct: 25.0,
     boost: 1,
-    boostEndsAt: '2023-07-17T06:01:00',
-    // boostEndsAt: fakeDate,
+    // boostEndsAt: '2023-07-17T06:01:00',
+    boostEndsAt: fakeDate,
   };
-  console.log(tiers, serviceCommission, referralData);
   const [currentDate, setCurrentDate] = useState(new Date());
   const inviteLeft = 5;
   const boostEndsDate = new Date(referralData.boostEndsAt);

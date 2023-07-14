@@ -114,27 +114,3 @@ export const ShareIconsContainer = styled(Box)`
     }
   }
 `;
-
-export const TierBox = styled(Box)`
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 7px;
-  background-color: ${({ theme }) => theme.palette.neutral600}4d;
-  border: 1px solid ${({ theme }) => theme.palette.neutral700};
-  margin-left: 60px;
-`;
-
-export const TierBarStyle = styled('div')`
-  .MuiTypography-root {
-    font-size: 8.5px;
-    line-height: 15px;
-  }
-
-  && svg {
-    height: 10px;
-    min-height: 10px;
-  }
-`;
