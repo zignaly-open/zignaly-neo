@@ -139,7 +139,7 @@ export const ChildContainer = styled.div<{ active: boolean } & WithSeparator>`
   ${({ active, theme }) =>
     active &&
     css`
-      background: ${theme.palette.neutral700};
+      background: ${theme.backgrounds.dropdown2ndLevel};
       /* When the menu is expanded, replace bottom margin with padding to fit the background until the bottom */
       margin-bottom: 0 !important;
       padding-bottom: 12px;

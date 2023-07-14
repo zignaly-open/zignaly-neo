@@ -67,7 +67,8 @@ const ExtraNavigationDropdown: React.FC = () => {
       label: (
         <>
           <GlobeLanguagesStyled
-            color={theme.palette.neutral400}
+            // yeah, why not change the icon to a shade slightly different from the text
+            color={theme.palette.neutral300}
             width={'26px'}
             height={'26px'}
           />

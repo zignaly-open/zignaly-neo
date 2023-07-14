@@ -70,7 +70,14 @@ export const Networks = styled('div')`
   justify-content: center;
   align-items: center;
   gap: 16px;
-  background: ${({ theme }) => theme.palette.neutral700};
+  background: ${
+    // why tsignore instead of defined types?
+    // we should not be using this in ps2 but we end up using it :\
+    // byw we use this fcuking color only once and only in this place
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    ({ theme }) => theme.palette.backgrounds.socialNetworksTab
+  };
   padding: 19px 32px;
   margin: 6px -32px -12px;
 

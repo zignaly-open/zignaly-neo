@@ -25,22 +25,25 @@ declare module "@mui/material/styles" {
     red: string;
     contrasting: string;
 
-    backgrounds: Partial<
-      Record<
-        | "toastSuccess"
-        | "toastError"
-        | "secondaryBackground"
-        | "sliderMark"
-        | "tableRow"
-        | "sliderThumb"
-        | "tableHeader"
-        | "buttonPrimary"
-        | "loader"
-        | "buttonPrimaryHover"
-        | "header"
-        | "input",
-        string
-      >
+    backgrounds: Record<
+      | "toastSuccess"
+      | "toastError"
+      | "greyedOutBorder"
+      | "investorsIcon" // why have a dedicated color used only once? because fuck me, that's why
+      | "socialNetworksTab" // why have a dedicated color used only once? because fuck me, that's why
+      | "dropdown2ndLevel" // why have a dedicated color used only once? because fuck me, that's why
+      | "modal"
+      | "secondaryBackground"
+      | "sliderMark"
+      | "tableRow"
+      | "sliderThumb"
+      | "tableHeader"
+      | "buttonPrimary"
+      | "loader"
+      | "buttonPrimaryHover"
+      | "header"
+      | "input",
+      string
     >;
 
     boxShadows: Partial<Record<"tableHeader" | "header" | "button", string>>;

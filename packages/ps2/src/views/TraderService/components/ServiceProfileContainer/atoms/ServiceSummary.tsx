@@ -50,7 +50,12 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
               {service.investors}
             </ZigTypography>
             <ZigUserIcon
-              color={theme.palette.highlighted}
+              // why tsignore instead of defined types?
+              // we should not be using this in ps2 but we end up using it :\
+              // byw we use this fcuking color only once and only in this place
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              color={theme.palette.backgrounds.investorsIcon}
               height='13px'
               width={'12px'}
             />
