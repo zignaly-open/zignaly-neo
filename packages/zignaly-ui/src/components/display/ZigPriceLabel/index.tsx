@@ -4,8 +4,9 @@ import { ZigPriceLabelProps } from "./types";
 import { getPrecisionForCoin, shortenNumber } from "./util";
 import ZigTypography from "../ZigTypography";
 import { Variant } from "@mui/material/styles/createTypography";
-import { Tooltip } from "@mui/material";
+import { Box, Tooltip } from "@mui/material";
 import { numberOfDecimals, trimZeros } from "../../../utils/numbers";
+import { ZigCoinIcon } from "../../../index";
 
 const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   id,
@@ -20,6 +21,8 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   showTooltip = !usd,
   alwaysShowSign = false,
   showApproximate = false,
+  showCoinIcon = false,
+  label = "",
   ...otherProps
 }) => {
   const withDefaultPropsCoin = {
@@ -44,47 +47,62 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
   } = shortenNumber(+value);
 
   const content = (
-    <ZigTypography
-      id={id}
-      {...withDefaultProps}
-      sx={{
-        whiteSpace: "nowrap",
-        display: "inline-flex",
-        alignItems: "center",
-        justifyContent: "center",
-        ...(withDefaultProps?.sx || {}),
-      }}
-    >
-      {showApproximate &&
-        numberOfDecimals(value) > (precision || getPrecisionForCoin(coin || "USDT", value)) && (
-          <>~</>
-        )}
-      {!!prefix && <>{prefix}</>}
-      {+value >= 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
-      {usd && "$"}
-      <NumericFormat
-        value={Math.abs(shorten ? shortened : +value)}
-        renderText={(v) => (showApproximate ? v : trimZeros(v))}
-        displayType={"text"}
-        thousandSeparator={true}
-        decimalScale={
-          exact
-            ? undefined
-            : shorten
-            ? shortenedPrecision
-            : precision || getPrecisionForCoin(coin || "USDT", value)
-        }
-      />
+    <>
+      <ZigTypography
+        id={id}
+        {...withDefaultProps}
+        sx={{
+          whiteSpace: "nowrap",
+          display: "inline-flex",
+          alignItems: "center",
+          justifyContent: "center",
+          ...(withDefaultProps?.sx || {}),
+        }}
+      >
+        <Box display={"flex"} flexDirection={"column"}>
+          {label && (
+            <ZigTypography variant={"h2"} mb={"12px"}>
+              {label}
+            </ZigTypography>
+          )}
+          <Box display={"flex"} alignItems={"center"}>
+            {showCoinIcon && (
+              <Box mr={"10px"} mt={"5px"}>
+                <ZigCoinIcon size={"medium"} coin={coin || "USDT"} />
+              </Box>
+            )}
+            {showApproximate &&
+              numberOfDecimals(value) >
+                (precision || getPrecisionForCoin(coin || "USDT", value)) && <>~</>}
+            {!!prefix && <>{prefix}</>}
+            {+value >= 0 ? alwaysShowSign ? "+" : "" : <>&ndash;</>}
+            {usd && "$"}
+            <NumericFormat
+              value={Math.abs(shorten ? shortened : +value)}
+              renderText={(v) => (showApproximate ? v : trimZeros(v))}
+              displayType={"text"}
+              thousandSeparator={true}
+              decimalScale={
+                exact
+                  ? undefined
+                  : shorten
+                  ? shortenedPrecision
+                  : precision || getPrecisionForCoin(coin || "USDT", value)
+              }
+            />
 
-      {shorten ? shortenSuffix : ""}
+            {shorten ? shortenSuffix : ""}
 
-      {coin && !usd && (
-        <>
-          {" "}
-          <ZigTypography {...withDefaultPropsCoin}>{coin}</ZigTypography>
-        </>
-      )}
-    </ZigTypography>
+            {coin && !usd && (
+              <>
+                {" "}
+                <ZigTypography {...withDefaultPropsCoin}>{coin}</ZigTypography>
+              </>
+            )}
+          </Box>
+        </Box>
+      </ZigTypography>
+    </>
   );
 
   return showTooltip || shorten ? (

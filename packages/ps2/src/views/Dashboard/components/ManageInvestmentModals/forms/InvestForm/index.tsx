@@ -243,7 +243,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
             onMax={() => trackClick({ ctaId: 'invest-max' })}
             id={'invest-modal__input-amount'}
             label={t('form.inputAmount.label')}
-            wide={true}
+            wide
             coin={coin.id}
             balance={coin.balance}
             extraInfo={{

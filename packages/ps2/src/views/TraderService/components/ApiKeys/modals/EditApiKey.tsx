@@ -165,12 +165,6 @@ function EditApiKeysModal({
           </div>
         )}
 
-        <ZigCopyText
-          label={t('api-keys.zignaly-code')}
-          value={apiKey.id}
-          onCopied={() => toast.success(t('action:copied'))}
-        />
-
         <div>
           <ZigTypography>{t('api-keys.api-settings')}</ZigTypography>
           <Grid container>

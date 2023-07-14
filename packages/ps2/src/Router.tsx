@@ -1,9 +1,9 @@
 import React, { lazy, Suspense } from 'react';
 import {
-  Routes as RouterRoutes,
-  Route,
   Navigate,
   Outlet,
+  Route,
+  Routes as RouterRoutes,
 } from 'react-router-dom';
 import { lazily } from 'react-lazily';
 import AuthenticatedWall from 'util/walls/AuthenticatedWall';
@@ -14,10 +14,12 @@ import * as Routes from './routes';
 // views we load unconditionally
 import Login from './views/Auth/Login';
 import Signup from './views/Auth/Signup';
+import SignupPlain from './views/Auth/SignupPlain';
 import ServiceHeader from './views/TraderService/components/ServiceHeader';
 import { zigSuspenseFallback } from 'util/suspense';
+import { isFeatureOn } from './whitelabel';
+import { Features } from './whitelabel/type';
 
-const Wallet = lazy(() => import('./views/Wallet'));
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
 const ForgotPassword = lazy(() => import('./views/Auth/ForgotPassword'));
 const HelpInvestor = lazy(() => import('./views/Help/HelpInvestor'));
@@ -84,9 +86,12 @@ const Router: React.FC = () => (
         path={Routes.ROUTE_MY_BALANCES_TRANSACTIONS}
         element={outleted(<MyBalances />)}
       />
-      <Route path={Routes.ROUTE_WALLET} element={<Wallet />} />
-      <Route path={Routes.ROUTE_REFERRALS} element={<Referrals />} />
-      <Route path={Routes.ROUTE_REWARDS} element={<Rewards />} />
+      {isFeatureOn(Features.Referrals) && (
+        <Route path={Routes.ROUTE_REFERRALS} element={<Referrals />} />
+      )}
+      {isFeatureOn(Features.Rewards) && (
+        <Route path={Routes.ROUTE_REWARDS} element={<Rewards />} />
+      )}
     </Route>
 
     <Route element={outleted(<ServiceHeader />)}>
@@ -134,14 +139,20 @@ const Router: React.FC = () => (
       </Route>
     </Route>
 
-    <Route path={Routes.ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
+    {isFeatureOn(Features.Trader) && (
+      <Route path={Routes.ROUTE_BECOME_TRADER} element={<BecomeTrader />} />
+    )}
+
     <Route path={Routes.ROUTE_HELP_INVESTOR} element={<HelpInvestor />} />
 
     <Route element={<UnauthenticatedWall />}>
       <Route path={Routes.ROUTE_REFERRALS_INVITE} element={<Invite />} />
       <Route path={Routes.ROUTE_REFERRALS_INVITE_SHORT} element={<Invite />} />
       <Route path={Routes.ROUTE_LOGIN} element={<Login />} />
-      <Route path={Routes.ROUTE_SIGNUP} element={<Signup />} />
+      <Route
+        path={Routes.ROUTE_SIGNUP}
+        element={isFeatureOn(Features.NewSignup) ? <Signup /> : <SignupPlain />}
+      />
       <Route path={Routes.ROUTE_FORGOT_PASSWORD} element={<ForgotPassword />} />
       <Route path={Routes.ROUTE_RESET_PASSWORD} element={<ResetPassword />} />
     </Route>

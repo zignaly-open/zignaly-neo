@@ -25,7 +25,6 @@ export const ROUTE_MY_BALANCES_TRANSACTIONS = '/my-balances/transactions';
 export const ROUTE_MY_BALANCES_DEPOSIT_COIN =
   '/my-balances/deposit/:selectedCoin';
 export const ROUTE_MY_BALANCES_DEPOSIT = '/my-balances/deposit';
-export const ROUTE_WALLET = '/zigwallet';
 export const ROUTE_REFERRALS = '/referrals';
 export const ROUTE_REWARDS = '/rewards';
 export const ROUTE_REFERRALS_INVITE = '/invite/:key';

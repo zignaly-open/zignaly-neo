@@ -155,7 +155,7 @@
     "1072": "Service owner not found",
     "1073": "Service is private",
     "1074": "User is not the owner of the service",
-    "1086": "Verify email code incorrect",
+    "1086": "Email code incorrect",
     "2001": "Wallet not found",
     "2004": "Withdraw data error",
     "9000": "Missing exchange account in your account, please contact with support.",

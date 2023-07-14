@@ -1,0 +1,22 @@
+{
+  "title": "Swap Coins",
+  "continue": "Continue to Confirmation",
+  "confirmation": {
+    "title": "Confirm Swap",
+    "rate": "Rate:",
+    "from": "From:",
+    "to": "To:",
+    "receive": "You receive:",
+    "confirm": "Swap Now"
+  },
+  "from-input": {
+    "label": "Swap from:",
+    "placeholder": "Amount"
+
+  },
+  "to-input": {
+    "label": "Swap to:",
+    "placeholder": "Amount received"
+  },
+  "toast-success": "Successfully converted"
+}

@@ -239,6 +239,29 @@ const darkMui = createTheme({
           transition: "all 0.3s linear",
           fontWeight: 600,
           letterSpacing: "1.1px",
+          position: "relative",
+          overflow: "hidden",
+          "&:nth-child(n)": {
+            zIndex: 1,
+            position: "relative",
+          },
+          "&::before": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            width: 0,
+            zIndex: -1,
+            height: "100%",
+            background: "rgba(0, 0, 0, .1)",
+            transition: "width 0.5s",
+          },
+          "&:hover::before, &.MuiButton-active::before": {
+            width: "100%",
+          },
+        },
+        containedDanger: {
+          "&:hover": {},
         },
         containedPrimary: {
           textTransform: "uppercase",
@@ -247,9 +270,7 @@ const darkMui = createTheme({
           },
           color: dark.neutral000,
           background: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
-          "&:hover, &.MuiButton-active": {
-            background: "linear-gradient(rgba(20, 156, 173, 0.64),rgba(69, 64, 193, 0.64))",
-          },
+
           "&.Mui-disabled": {
             opacity: 0.33,
           },

@@ -7,6 +7,7 @@ const baseApiPs2 = createApi({
   endpoints: () => ({}),
   tagTypes: [
     'ServiceApiKey',
+    'ServiceInvestors',
     'Service',
     'ServiceChart',
     'Marketplace',

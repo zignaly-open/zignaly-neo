@@ -9,6 +9,8 @@
   "standbyFunds-desc": "Funds available to return to investors who want to withdraw",
   "availableWithdrawals": "Available for withdrawals:",
   "neededSnapshot": "Needed for daily snapshot:",
+  "positive-claim": "Users are investing {{ claim }} {{ coin }} on next accounting.",
+  "negative-claim": "Users are requesting to withdraw {{ claim }} {{ coin }}.",
   "helper": "Need help with these numbers? Please check out our <0>how profit sharing balances work</0>.",
   "minBalance": {
     "title": "Minimum balance:",

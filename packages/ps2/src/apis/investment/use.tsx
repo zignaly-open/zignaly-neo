@@ -10,6 +10,7 @@ import {
 } from './api';
 import {
   InvestedInService,
+  Investment,
   InvestmentDetails,
   InvestmentServiceDetails,
 } from './types';
@@ -25,6 +26,12 @@ import { serviceToInvestmentServiceDetail } from './util';
 
 export const useInvestments = useInvestmentsQuery;
 
+export const useSingleInvestment = (serviceId: string): Investment => {
+  const exchange = useActiveExchange();
+  const { data: investments } = useInvestments(exchange?.internalId);
+  return investments?.find((x) => x.serviceId === serviceId);
+};
+
 export function useInvestmentDetails(
   serviceId: string,
 ): QueryReturnType<InvestmentDetails> {
@@ -33,13 +40,6 @@ export function useInvestmentDetails(
     exchangeInternalId: exchange?.internalId,
     serviceId,
   });
-}
-
-export function useSetSelectedInvestment(): (
-  service: InvestmentServiceDetails,
-) => void {
-  const dispatch = useDispatch();
-  return (service) => dispatch(setSelectedInvestment(service));
 }
 
 export function useSelectInvestment(
