@@ -42,7 +42,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
             rgb(16 18 37) 35%,
             rgb(16 18 37) 100%
             
-          );`};
+          )`};
         `}
       transition: border-color 0.2s;
 
