@@ -20,7 +20,7 @@ import {
   TopHorizontalConnection,
   TradingFunds,
 } from './styles';
-
+import { Box as MuiBox } from '@mui/material';
 import {
   useServiceDetails,
   useTraderServiceBalance,
@@ -161,21 +161,29 @@ function ServiceManagementsContainer({ serviceId }: { serviceId: string }) {
                 </ZigTypography>
 
                 <ZigTypography color='neutral400' variant='body2'>
-                  <div>{t('neededSnapshot')}</div>
+                  {t('neededSnapshot')}
                   <Tooltip
-                    title={t(
-                      `${
-                        management?.claims >= 0 ? 'positive' : 'negative'
-                      }-claim`,
-                      {
-                        claim: Math.abs(management?.claims),
-                        coin: service?.ssc ?? 'USDT',
-                      },
-                    )}
+                    title={
+                      <MuiBox sx={{ whiteSpace: 'nowrap' }}>
+                        {t(
+                          `${
+                            management?.claims >= 0 ? 'positive' : 'negative'
+                          }-claim`,
+                          {
+                            claim: Math.abs(management?.claims),
+                            coin: service?.ssc ?? 'USDT',
+                          },
+                        )}
+                      </MuiBox>
+                    }
                   >
                     <div>
                       <InlinePriceLabel
-                        value={parseFloat((-management?.claims).toString())}
+                        value={
+                          management?.claims < 0
+                            ? parseFloat((-management?.claims).toString())
+                            : 0
+                        }
                         coin={service?.ssc ?? 'USDT'}
                       />
                     </div>

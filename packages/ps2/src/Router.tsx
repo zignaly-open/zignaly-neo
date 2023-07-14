@@ -20,7 +20,6 @@ import { zigSuspenseFallback } from 'util/suspense';
 import { isFeatureOn } from './whitelabel';
 import { Features } from './whitelabel/type';
 
-const Wallet = lazy(() => import('./views/Wallet'));
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
 const ForgotPassword = lazy(() => import('./views/Auth/ForgotPassword'));
 const HelpInvestor = lazy(() => import('./views/Help/HelpInvestor'));
@@ -87,9 +86,6 @@ const Router: React.FC = () => (
         path={Routes.ROUTE_MY_BALANCES_TRANSACTIONS}
         element={outleted(<MyBalances />)}
       />
-      {isFeatureOn(Features.ZigWallet) && (
-        <Route path={Routes.ROUTE_WALLET} element={<Wallet />} />
-      )}
       {isFeatureOn(Features.Referrals) && (
         <Route path={Routes.ROUTE_REFERRALS} element={<Referrals />} />
       )}

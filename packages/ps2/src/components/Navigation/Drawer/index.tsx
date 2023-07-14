@@ -41,7 +41,6 @@ import {
   ROUTE_PROFIT_SHARING,
   ROUTE_SIGNUP,
   ROUTE_TRADING_SERVICE_MANAGE,
-  ROUTE_WALLET,
 } from 'routes';
 import theme from 'theme';
 import { HELP_URL } from 'util/constants';
@@ -168,21 +167,6 @@ const ZigDrawer = () => {
             <List>
               {isAuthenticated ? (
                 <>
-                  {isFeatureOn(Features.ZigWallet) && (
-                    <ListItem disablePadding onClick={handleDrawerToggle}>
-                      <ListItemButton
-                        id='drawer__wallet'
-                        to={ROUTE_WALLET}
-                        component={Link}
-                      >
-                        <ListItemText
-                          primary={t(
-                            'account-menu.notAuth-dropdown-link-wallet',
-                          )}
-                        />
-                      </ListItemButton>
-                    </ListItem>
-                  )}
                   <ListItemButton
                     onClick={() => setSettingsOpen(!settingsOpen)}
                   >

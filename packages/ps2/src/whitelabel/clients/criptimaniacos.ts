@@ -5,7 +5,6 @@ export default {
     Features.Referrals,
     Features.Rewards,
     Features.Trader,
-    Features.ZigWallet,
     Features.NewSignup,
   ],
   endpointOverrides: {
