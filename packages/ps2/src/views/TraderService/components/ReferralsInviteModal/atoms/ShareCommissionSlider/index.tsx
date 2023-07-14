@@ -56,7 +56,12 @@ export const ShareCommissionSlider = ({
   return (
     <SliderContainer>
       <ContainerArrow />
-      <ZigTypography fontSize={16} fontWeight={500}>
+      <ZigTypography
+        fontSize={16}
+        fontWeight={500}
+        letterSpacing={'0.48px'}
+        textAlign={'center'}
+      >
         {t('split-commission')}
       </ZigTypography>
       <StyledZigSlider

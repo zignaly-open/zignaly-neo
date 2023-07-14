@@ -4,11 +4,11 @@ import { ZigSlider } from '@zignaly-open/ui';
 export const SliderContainer = styled(Box)`
   position: relative;
   width: 100%;
-  height: 150px;
-  border: 1px solid red;
-  /* #9496b41a */
+  height: 114px;
+  border: 1px solid #9496b41a;
   border-radius: 15px;
-  padding: 16px 40px;
+  padding: 16px;
+  width: 428px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,7 +24,7 @@ export const ContainerArrow = styled('div')`
   height: 0;
   border-left: 22px solid transparent;
   border-right: 22px solid transparent;
-  border-bottom: 20px solid red;
+  border-bottom: 20px solid #9496b41a;
 
   &:after {
     content: '';
@@ -40,10 +40,12 @@ export const ContainerArrow = styled('div')`
 `;
 
 export const StyledZigSlider = styled(ZigSlider)`
-  margin-top: 18px;
+  margin-top: 13px;
+  padding: 0 24px;
+  width: 350px;
 
   div:has(> .MuiTypography-root) {
-    min-width: 60px;
+    min-width: 64px;
   }
 
   .MuiTypography-root {

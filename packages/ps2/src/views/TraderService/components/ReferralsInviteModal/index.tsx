@@ -234,7 +234,7 @@ const ReferralsInviteModal = ({
             </Box>
           )}
 
-          <Box px={2}>
+          <Box px='20px'>
             <ShareCommissionSlider
               discountPct={referralData.discountPct}
               max={maxCommission}

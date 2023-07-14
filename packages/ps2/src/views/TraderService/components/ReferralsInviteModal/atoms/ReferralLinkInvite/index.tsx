@@ -15,7 +15,7 @@ const ReferralLinkInvite = ({
 }) => {
   const toast = useToast();
   const { t } = useTranslation(['referrals-trader', 'service', 'action']);
-  const url = `https://zignaly.com/profit-sharing/${serviceId}?=${referralCode}`;
+  const url = `https://zignaly.com/app/profit-sharing/${serviceId}?=${referralCode}`;
   return (
     <>
       <InviteBox>
@@ -28,6 +28,9 @@ const ReferralLinkInvite = ({
             color='#ffffff'
             variant='h3'
             whiteSpace={'nowrap'}
+            overflow={'hidden'}
+            textOverflow={'ellipsis'}
+            width={'390px'}
             id='referrals-invite-modal__referral-link'
           >
             {url}
@@ -48,7 +51,7 @@ const ReferralLinkInvite = ({
           //   userId,
           //   ctaId: 'deposit-modal__deposit-address',
           // });
-          copy();
+          copy(url);
           toast.success(t('copied', { ns: 'action' }));
         }}
       >

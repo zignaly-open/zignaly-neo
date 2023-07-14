@@ -18,12 +18,12 @@ const TraderCard = ({
   return (
     <CardBox
       width='228px'
+      height='288px'
       display='flex'
       flexDirection={'column'}
       alignItems={'center'}
       position='relative'
       gap='12px'
-      height={1}
       padding='42px 32px 30px'
     >
       {traderBoost && (
