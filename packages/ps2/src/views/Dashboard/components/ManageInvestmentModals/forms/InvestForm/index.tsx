@@ -240,7 +240,6 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
         rules={{ required: true }}
         render={({ field }) => (
           <ZigInputAmount
-            onMax={() => trackEvent('invest-max')}
             id={'invest-modal__input-amount'}
             label={t('form.inputAmount.label')}
             wide
@@ -251,6 +250,10 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
             }}
             error={t(errors?.amountTransfer?.message)}
             {...field}
+            onBlur={() => {
+              watch('amountTransfer') && trackEvent('invest-amount-change');
+              field.onBlur();
+            }}
           />
         )}
       />

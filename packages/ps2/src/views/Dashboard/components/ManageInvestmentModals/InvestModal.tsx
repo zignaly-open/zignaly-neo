@@ -5,6 +5,9 @@ import { useServiceDetails } from '../../../../apis/service/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
 import InvestView from './views/Invest';
 import { InvestmentViews, UseModalReturn } from './types';
+import { useUpdateEffect } from 'react-use';
+import { track } from '@zignaly-open/tracker';
+import { useCurrentUser } from '../../../../apis/user/use';
 
 export function useInvestModalContent({
   close,
@@ -16,10 +19,23 @@ export function useInvestModalContent({
     service?.serviceId,
     { skip: !service },
   );
+  const { userId } = useCurrentUser();
   const { isLoading: isLoadingCoins } = useCoinBalances();
   const { t } = useTranslation('edit-investment');
   const isLoading = isLoadingService || isLoadingCoins || !service;
   const [view, setView] = useState(InvestmentViews.Investment);
+
+  // poor man's router
+  useUpdateEffect(() => {
+    track({
+      hash: {
+        [InvestmentViews.InvestmentConfirm]: 'invest-confirm',
+        [InvestmentViews.Investment]: 'invest',
+        [InvestmentViews.InvestmentSuccess]: 'invest-success',
+      }[view],
+      userId,
+    });
+  }, [view]);
 
   return {
     title: t(
