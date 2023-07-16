@@ -1,7 +1,6 @@
 import { css, styled } from '@mui/material';
 
 export const AmountContainer = styled('div')<{
-  coloredBorder?: boolean;
   coloredBackground?: boolean;
   noBorders?: boolean;
 }>`
@@ -43,13 +42,5 @@ export const AmountContainer = styled('div')<{
     coloredBackground &&
     css`
       background: ${theme.palette.backgrounds.withdrawalHighlight};
-    `}
-
-  ${({ coloredBorder }) =>
-    coloredBorder &&
-    css`
-      &:before {
-        background: linear-gradient(#8671f7, #7ec9f9);
-      }
     `}
 `;
