@@ -351,20 +351,13 @@ export default ({ palette, mode, chart, backgrounds, boxShadows, fontFamily }: T
             transition: "all 0.3s linear",
             fontWeight: 600,
             letterSpacing: "1.1px",
-          },
-          containedPrimary: {
             textTransform: "uppercase",
             ".MuiTypography-root": {
               textTransform: "none",
             },
-            color: palette.neutral000,
-            background: backgrounds.buttonPrimary,
             position: "relative",
             overflow: "hidden",
-            "&:first-child": {
-              zIndex: 1,
-              position: "relative",
-            },
+            zIndex: 1,
             "&::before": {
               content: '""',
               position: "absolute",
@@ -382,10 +375,17 @@ export default ({ palette, mode, chart, backgrounds, boxShadows, fontFamily }: T
             "&.Mui-disabled": {
               opacity: 0.33,
             },
+          },
+          containedPrimary: {
+            ".MuiTypography-root": {
+              textTransform: "none",
+            },
+            color: palette.neutral000,
+            background: backgrounds.buttonPrimary,
             ".MuiButton-startIcon": {
-              color: "#8899D0",
+              color: palette.neutral175,
               "& svg.zig-icon": {
-                fill: "#8899D0",
+                fill: palette.neutral175,
               },
             },
           },
