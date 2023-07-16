@@ -31,6 +31,7 @@ const dark: Theme = {
     header: "linear-gradient(269.14deg, #080810 0%, #11122b 100%)",
     selectInputFill: "#101225",
     toastSuccess: "#122431",
+    withdrawalHighlight: "rgb(24, 30, 52)",
     toastError: "#231630",
     tableHeader: "#08081d",
     investorsIcon: "#65647E",

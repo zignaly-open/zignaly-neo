@@ -34,6 +34,7 @@ const example: Theme = {
     buttonPrimary: "linear-gradient(289.8deg, #f99 0%, #f9f 100%)",
     inputTextFill: "#f00",
     tableHeader: "#f88",
+    withdrawalHighlight: "F96860",
     loader: "#f9a",
     sliderMark: "#aa8999",
     greyedOutBorder: "#f00",

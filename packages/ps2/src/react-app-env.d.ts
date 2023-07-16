@@ -66,6 +66,7 @@ declare module '@mui/material/styles' {
       | 'socialNetworksTab'
       | 'modal'
       | 'investorsIcon'
+      | 'withdrawalHighlight'
       | 'secondaryBackground'
       | 'selectInputFill',
       string

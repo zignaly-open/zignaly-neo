@@ -26,6 +26,7 @@ declare module "@mui/material/styles" {
     contrasting: string;
 
     backgrounds: Record<
+      | "withdrawalHighlight" // why have a dedicated color used only once? because fuck me, that's why
       | "selectInputFill"
       | "inputTextFill"
       | "toastSuccess"

@@ -42,7 +42,7 @@ export const AmountContainer = styled('div')<{
   ${({ coloredBackground, theme }) =>
     coloredBackground &&
     css`
-      background: ${theme.palette.neutral750};
+      background: ${theme.palette.backgrounds.withdrawalHighlight};
     `}
 
   ${({ coloredBorder }) =>
