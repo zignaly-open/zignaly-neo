@@ -195,8 +195,6 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             <ZigUserIcon
               width={'17px'}
               height={'20px'}
-              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-              // @ts-ignore
               color={theme.palette.backgrounds.investorsIcon}
             />
             <ZigTypography variant={'h3'} color={'contrasting'}>

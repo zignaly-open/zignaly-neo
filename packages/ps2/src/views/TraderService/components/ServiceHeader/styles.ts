@@ -4,14 +4,7 @@ import { Link } from 'react-router-dom';
 import { Theme } from '@mui/system';
 
 const secondaryBackground = ({ theme }: { theme: Theme }) => `
-  background: ${
-    // one may ask, but why tsignore this if you can just extend the theme the same way you did for the entire palette, Alex?
-    // I did it on purpose to prevent people from overusing that is intended for zignaly-ui only
-    // so rather tsignore this than make it easily usable
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    theme.palette.backgrounds.secondaryBackground
-  };
+  background: ${theme.palette.backgrounds.secondaryBackground};
 `;
 
 export const Layout = styled('div')`

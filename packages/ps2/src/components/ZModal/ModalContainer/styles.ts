@@ -10,10 +10,6 @@ export const Layout = styled(Box)<{ width: number }>`
   justify-content: center;
   align-items: flex-start;
   background: ${({ theme }) =>
-    // why tsignore instead of defined types?
-    // we should not be using this in ps2 but we end up using it :\
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
     theme.palette.backgrounds.modal || theme.palette.neutral800};
   border: 1px solid ${(props) => `${props.theme.palette.neutral600}`};
   border-radius: 16px;

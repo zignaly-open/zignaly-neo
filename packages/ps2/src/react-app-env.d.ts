@@ -55,8 +55,21 @@ declare module '@mui/material/styles' {
     yellow: string;
     red: string;
     avatarBack: string;
-
     contrasting: string;
+
+    // I am sorry
+    // Here we define some of the "new" colors - only thoise needed in ps2
+    // not all because a) I am lazy b) we do not need them c) we SHOULD NOT need them in the first place
+    // d) because I added them here only because adding an explanatory comment and a ts-ignore every time
+    // is too much of a hassle (see a).).
+    backgrounds: Record<
+      | 'socialNetworksTab'
+      | 'modal'
+      | 'investorsIcon'
+      | 'secondaryBackground'
+      | 'selectInputFill',
+      string
+    >;
   }
 
   interface Palette extends CustomPalette {}
