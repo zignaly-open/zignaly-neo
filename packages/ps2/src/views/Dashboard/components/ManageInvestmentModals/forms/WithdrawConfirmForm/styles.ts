@@ -10,8 +10,6 @@ export const AmountContainer = styled('div')<{
   text-align: center;
   align-items: center;
   justify-content: center;
-  background: ${({ theme }) => theme.palette.neutral800};
-  box-shadow: inset 0 0 0 1px ${({ theme }) => theme.palette.neutral600};
   border-radius: 5px;
   box-sizing: border-box;
   padding: 10px 18px;
