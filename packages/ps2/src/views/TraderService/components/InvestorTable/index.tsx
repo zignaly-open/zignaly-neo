@@ -199,7 +199,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
               // @ts-ignore
               color={theme.palette.backgrounds.investorsIcon}
             />
-            <ZigTypography variant={'h3'} color={'neutral200'}>
+            <ZigTypography variant={'h3'} color={'contrasting'}>
               {t('number-of-investors', {
                 count: investors?.length,
               })}
