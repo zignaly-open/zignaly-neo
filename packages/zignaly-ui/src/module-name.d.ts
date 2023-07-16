@@ -26,6 +26,8 @@ declare module "@mui/material/styles" {
     contrasting: string;
 
     backgrounds: Record<
+      | "selectInputFill"
+      | "inputTextFill"
       | "toastSuccess"
       | "toastError"
       | "greyedOutBorder"

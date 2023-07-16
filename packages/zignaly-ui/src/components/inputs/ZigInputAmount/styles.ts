@@ -28,10 +28,10 @@ export const Layout = styled(Box)<{
   && {
     .MuiInput-root {
       padding: 2px 24px;
-      ${({ withCoinSelector }) =>
+      ${({ withCoinSelector, theme }) =>
         !withCoinSelector &&
         `
-        background: ${({ theme }) => theme.palette.neutral750};
+        background: ${theme.palette.neutral750};
       `}
       border: none;
     }
@@ -40,7 +40,8 @@ export const Layout = styled(Box)<{
       font-size: 30px;
       font-weight: 500;
       border-color: ${({ theme }) => theme.palette.neutral400};
-      background: ${({ theme, withCoinSelector }) => withCoinSelector ? "unset" : theme.palette.neutral750};
+      background: ${({ theme, withCoinSelector }) =>
+        withCoinSelector ? "unset" : theme.palette.neutral750};
       -webkit-text-fill-color: ${({ theme }) => theme.palette.neutral175} !important;
     }
   }

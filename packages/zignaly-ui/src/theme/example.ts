@@ -29,8 +29,10 @@ const example: Theme = {
     contrasting: "#030406",
   },
   backgrounds: {
+    selectInputFill: "#fa7f79",
     header: "linear-gradient(269.14deg, #ffcccc 0%, #eebbbb 100%)",
     buttonPrimary: "linear-gradient(289.8deg, #f99 0%, #f9f 100%)",
+    inputTextFill: "#f00",
     tableHeader: "#f88",
     loader: "#f9a",
     sliderMark: "#aa8999",

@@ -29,10 +29,12 @@ const dark: Theme = {
   },
   backgrounds: {
     header: "linear-gradient(269.14deg, #080810 0%, #11122b 100%)",
+    selectInputFill: "#101225",
     toastSuccess: "#122431",
     toastError: "#231630",
     tableHeader: "#08081d",
     investorsIcon: "#65647E",
+    inputTextFill: "#838b95",
     socialNetworksTab: "#1c1d35",
     secondaryBackground: "#0f0f25",
     dropdown2ndLevel: "rgb(25, 26, 48)",

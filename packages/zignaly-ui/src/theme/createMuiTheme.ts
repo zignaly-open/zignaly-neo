@@ -103,7 +103,7 @@ export default ({ palette, mode, chart, backgrounds, boxShadows, fontFamily }: T
             box-shadow: none !important;
             resize: none;
             background: ${backgrounds.input};
-            -webkit-text-fill-color: ${palette.neutral100} !important;\`,
+            -webkit-text-fill-color: ${backgrounds.inputTextFill} !important;
           }
           
           .MuiInput-input {

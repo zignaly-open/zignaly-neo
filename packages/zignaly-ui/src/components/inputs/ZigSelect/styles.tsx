@@ -33,7 +33,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
       flex-wrap: nowrap;
       ${({ outlined, theme }) =>
         css`
-          background: ${outlined ? "transparent" : theme.palette.neutral800};
+          background: ${outlined ? "transparent" : theme.palette.backgrounds.selectInputFill};
         `}
       transition: border-color 0.2s;
 
