@@ -28,9 +28,9 @@ import { useZModal } from '../../../../../../components/ZModal/use';
 import { AmountInvested } from '../EditInvestmentForm/atoms';
 import { Field, ZigInputWrapper } from './styles';
 import { NumericFormat } from 'react-number-format';
-import { trackClick } from '@zignaly-open/tracker';
 import { useDebounce } from 'react-use';
 import { InvestmentViews } from '../../types';
+import useTrackEvent from '../../../../../../components/Navigation/Tracker/use';
 
 function InvestForm({ view, setView, close }: InvestFormProps) {
   const coin = useCurrentBalance();
@@ -40,7 +40,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
   const { data: serviceDetails } = useServiceDetails(service.serviceId);
   const toast = useToast();
   const { showModal } = useZModal();
-
+  const trackEvent = useTrackEvent();
   // the safe word is Fluggaenkoecchicebolsen
   const transferMagicWord = t('invest-modal.transfer-label');
 
@@ -83,7 +83,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
 
   useDebounce(
     () => {
-      +reinvestAmount && trackClick({ ctaId: 'reinvest-amount-change' });
+      +reinvestAmount && trackEvent('reinvest-amount-change');
     },
     300,
     [reinvestAmount],
@@ -92,7 +92,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
   const hasAgreedToAll = watch('understandRisk');
 
   useEffect(() => {
-    hasAgreedToAll && trackClick({ ctaId: 'agreed-to-all' });
+    hasAgreedToAll && trackEvent('agreed-to-all');
   }, [hasAgreedToAll]);
 
   const onSubmitSecondStep = async ({
@@ -240,7 +240,6 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
         rules={{ required: true }}
         render={({ field }) => (
           <ZigInputAmount
-            onMax={() => trackClick({ ctaId: 'invest-max' })}
             id={'invest-modal__input-amount'}
             label={t('form.inputAmount.label')}
             wide
@@ -251,6 +250,10 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
             }}
             error={t(errors?.amountTransfer?.message)}
             {...field}
+            onBlur={() => {
+              watch('amountTransfer') && trackEvent('invest-amount-change');
+              field.onBlur();
+            }}
           />
         )}
       />
