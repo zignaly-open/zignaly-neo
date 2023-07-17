@@ -17,7 +17,7 @@ import {
 } from '../../../../apis/user/use';
 import { useToast } from '../../../../util/hooks/useToast';
 import ZModal from '../../../../components/ZModal';
-import { trackClick } from '@zignaly-open/tracker';
+import useTrackEvent from '../../../../components/Navigation/Tracker/use';
 
 function AuthVerifyModal({
   user,
@@ -35,6 +35,7 @@ function AuthVerifyModal({
   const { ask2FA, disabled, emailUnconfirmed, isUnknownDevice } = user;
   const resendEmail = useResendCode();
   const resendEmailNewUser = useResendCodeNewUser();
+  const trackEvent = useTrackEvent();
   const resendDevice = useResendKnownDeviceCode();
   const verifyEmail = useVerifyEmail();
   const verifyEmailNewUser = useVerifyEmailNewUser();
@@ -123,7 +124,7 @@ function AuthVerifyModal({
 
   useEffect(() => {
     if (allGood) {
-      trackClick({ ctaId: 'verify-success' });
+      trackEvent('verify-success');
       onSuccess();
       close();
     }

@@ -1,12 +1,14 @@
 import React, { useEffect } from 'react';
 import { useCurrentUser } from '../../../apis/user/use';
-import { track, trackClick } from '@zignaly-open/tracker';
+import { track } from '@zignaly-open/tracker';
 import { useLocation } from 'react-router-dom';
 import { trackPage } from 'util/analytics';
+import useTrackEvent from './use';
 
 const Tracker: React.FC = () => {
   const { userId } = useCurrentUser();
   const location = useLocation();
+  const trackEvent = useTrackEvent();
 
   useEffect(() => {
     const clickListener = (e: MouseEvent) => {
@@ -17,12 +19,7 @@ const Tracker: React.FC = () => {
           const ctaId =
             node.getAttribute('data-track-cta') || node.getAttribute('id');
           const noAutoTrack = node.getAttribute('data-no-auto-track');
-          ctaId &&
-            !noAutoTrack &&
-            trackClick({
-              userId,
-              ctaId,
-            });
+          ctaId && !noAutoTrack && trackEvent(ctaId);
           break;
         } else {
           node = node.parentNode as HTMLElement;
