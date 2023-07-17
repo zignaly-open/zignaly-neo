@@ -107,7 +107,7 @@ export const InputWrapper = styled(Box)<{
 export const MaxButton = styled(ZigButton)`
   padding: 3px 10px;
   border-radius: 13px;
-  border: solid 1px ${(props) => `${props.theme.palette.neutral600}`};
+  border: solid 1px ${(props) => props.theme.palette.neutral600};
   min-width: 44px;
   min-height: 30px;
   font-size: 12px;

@@ -8,7 +8,7 @@ export const Layout = styled(ZigTypography)`
 `;
 
 export const DottedButton = styled(ZigButton)`
-  border: dotted 1px ${(props) => `${props.theme.palette.neutral600}`};
+  border: dotted 1px ${(props) => props.theme.palette.neutral600};
   width: 68px;
   height: 25px;
   border-radius: 5px;

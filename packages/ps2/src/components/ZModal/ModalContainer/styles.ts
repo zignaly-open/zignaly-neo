@@ -11,7 +11,7 @@ export const Layout = styled(Box)<{ width: number }>`
   align-items: flex-start;
   background: ${({ theme }) =>
     theme.palette.backgrounds.modal || theme.palette.neutral800};
-  border: 1px solid ${(props) => `${props.theme.palette.neutral600}`};
+  border: 1px solid ${(props) => props.theme.palette.neutral600};
   border-radius: 16px;
   padding: 40px 56px;
 
