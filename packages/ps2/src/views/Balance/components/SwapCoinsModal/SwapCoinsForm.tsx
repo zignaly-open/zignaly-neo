@@ -96,7 +96,7 @@ function SwapCoinsForm({
     },
     resolver: yupResolver(
       convertAmountValidation({
-        min: minAmount - 10,
+        min: minAmount,
         coin: selectedFromToken.coin,
         balance: selectedFromToken.available,
       }),
@@ -171,11 +171,11 @@ function SwapCoinsForm({
     );
   }
   const canSubmit =
-    !isValid ||
-    !selectedToToken.coin ||
-    !selectedFromToken.coin ||
-    !amount ||
-    !watch('toCoinAmount');
+    isValid &&
+    selectedToToken.coin &&
+    selectedFromToken.coin &&
+    amount &&
+    watch('toCoinAmount');
 
   return (
     <Form
@@ -256,7 +256,7 @@ function SwapCoinsForm({
           loading={isFetchingConvertPreview}
           size={'large'}
           type={'submit'}
-          disabled={canSubmit}
+          disabled={!canSubmit}
         >
           {t('continue')}
         </ZigButton>
