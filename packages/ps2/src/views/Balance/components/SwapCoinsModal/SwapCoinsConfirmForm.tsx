@@ -40,28 +40,36 @@ const SwapCoinsConfirmForm = ({
           alignItems: 'center',
         }}
       >
-        <ZigPriceLabel
-          showCoinIcon
-          coin={fromCoin}
-          value={fromCoinAmount}
-          variant={'h1'}
-          label={t('confirmation.from')}
-          coinProps={{ variant: 'h2' }}
-          showTooltip
-        />
+        <Box>
+          <ZigTypography variant={'h2'} mb={'12px'}>
+            {t('confirmation.from')}
+          </ZigTypography>
+          <ZigPriceLabel
+            showCoinIcon
+            coin={fromCoin}
+            value={fromCoinAmount}
+            variant={'h1'}
+            coinProps={{ variant: 'h2' }}
+            showTooltip
+          />
+        </Box>
+
         <Box mt={'25px'}>
           <ZigSwapCircleIcon width={'35px'} height={'35px'} />
         </Box>
-
-        <ZigPriceLabel
-          showCoinIcon
-          coin={toCoin}
-          value={toCoinAmount}
-          variant={'h1'}
-          label={t('confirmation.to')}
-          coinProps={{ variant: 'h2' }}
-          showTooltip
-        />
+        <Box>
+          <ZigTypography variant={'h2'} mb={'12px'}>
+            {t('confirmation.to')}
+          </ZigTypography>
+          <ZigPriceLabel
+            showCoinIcon
+            coin={toCoin}
+            value={toCoinAmount}
+            variant={'h1'}
+            coinProps={{ variant: 'h2' }}
+            showTooltip
+          />
+        </Box>
       </Box>
       <Divider
         sx={{ border: '1px dotted #35334A', width: '100%', mb: '25px' }}
