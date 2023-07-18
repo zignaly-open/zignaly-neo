@@ -13,13 +13,12 @@ import ZigDropdown from "../ZigDropdown";
 import ZigTypography from "../ZigTypography";
 import CheckBox from "../../inputs/CheckBox";
 import { ZigTableProps } from "./types";
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, useTheme } from "@mui/material";
 import { ChevronLeft, ChevronRight, FirstPage, LastPage } from "@mui/icons-material";
 import ZigSelect from "components/inputs/ZigSelect";
 import { Table, SortIcon } from "./styles";
 import { Loader } from "../Loader";
 import { ZigDotsVerticalIcon } from "../../../icons";
-import { dark } from "../../../theme";
 
 export default function ZigTable<T extends object>({
   prefixId,
@@ -34,6 +33,7 @@ export default function ZigTable<T extends object>({
   emptyMessage,
   ...rest
 }: ZigTableProps<T>) {
+  const theme = useTheme();
   const [sorting, setSorting] = React.useState<SortingState>(initialState.sorting ?? []);
   const [columnVisibility, setColumnVisibility] = React.useState(
     Object.assign({}, ...defaultHiddenColumns.map((c) => ({ [c]: false }))),
@@ -121,7 +121,11 @@ export default function ZigTable<T extends object>({
                     <ZigDropdown
                       component={() => (
                         <HeaderIconButton id={prefixId && `${prefixId}-table__popover-filter`}>
-                          <ZigDotsVerticalIcon color={dark.neutral200} height={16} width={16} />
+                          <ZigDotsVerticalIcon
+                            color={theme.palette.neutral200}
+                            height={16}
+                            width={16}
+                          />
                         </HeaderIconButton>
                       )}
                       options={table

@@ -13,24 +13,23 @@ export const Icon = styled(CheckmarkIcon)`
   transform: scale(0);
 `;
 
+export const Label = muiStyled(ZigTypography)`
+  font-weight: 400;
+  margin: 0 12px;
+`;
+
 export const Box = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  background: #101427;
-  border: 1px dotted #706f82;
+  background: ${({ theme }) => theme.palette.neutral800};
+  border: 1px dotted ${({ theme }) => theme.palette.neutral400};
   border-radius: 2.5px;
   position: relative;
   flex: 0 0 18px;
   width: 18px;
   height: 18px;
   overflow: hidden;
-`;
-
-export const Label = muiStyled(ZigTypography)`
-  font-weight: 400;
-  margin: 0 12px;
 `;
 
 type LayoutProps = {
@@ -44,17 +43,17 @@ export const Layout = styled.div<LayoutProps>`
   user-select: none;
   align-items: flex-start;
 
-  ${({ isActive }) => `
+  ${({ isActive, theme }) => `
     ${styledIf(
       isActive,
       `
       ${Box} {
-        border-color: #706f82;
-        color: #7682f7;
+        border-color: ${theme.palette.neutral400};
+        color: ${theme.palette.highlighted};
       }
       ${Icon} {
         transform: scale(1) !important;
-        fill: #7682f7;
+        fill: ${theme.palette.highlighted};
       }
     `,
     )}

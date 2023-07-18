@@ -26,7 +26,9 @@ export const Value = muiStyled(ZigTypography)<{ isPositive: boolean }>`
   ${(props) => `
     font-size: 12px;
     font-weight: 500;
-    color: ${props.isPositive ? props.theme.greenGraph : props.theme.redGraphOrError};
+    color: ${
+      props.isPositive ? props.theme.palette.greenGraph : props.theme.palette.redGraphOrError
+    };
   `}
 `;
 

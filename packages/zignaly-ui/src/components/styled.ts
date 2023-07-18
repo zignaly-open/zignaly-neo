@@ -21,15 +21,15 @@ export const ValueIndicator = styled(ZigTypography)<any>`
   ${(props: any) => `
     
     &.zero {
-      color: ${props.theme.neutral300}
+      color: ${props.theme.palette.neutral300}
     }
     
     &.positive {
-      color: ${props.theme.greenGraph};
+      color: ${props.theme.palette.greenGraph};
     }
     
     &.negative {
-      color: ${props.theme.redGraphOrError};
+      color: ${props.theme.palette.redGraphOrError};
     }
   `}
 `;

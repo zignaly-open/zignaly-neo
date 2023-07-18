@@ -7,8 +7,7 @@ import theme from "./theme";
 // Testing Results
 import { withTests } from "@storybook/addon-jest";
 import results from "../.jest-test-results.json";
-import darkMui from "../src/theme/darkMui";
-import { Container } from "@mui/system";
+import darkMui from "../src/theme/dark";
 
 const GlobalStyle = createGlobalStyle`
   body {

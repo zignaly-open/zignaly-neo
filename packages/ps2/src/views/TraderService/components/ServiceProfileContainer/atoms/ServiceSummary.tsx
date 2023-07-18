@@ -2,7 +2,7 @@ import React from 'react';
 import { Service } from '../../../../../apis/service/types';
 import { useTranslation } from 'react-i18next';
 import { ZigTypography, ZigUserIcon } from '@zignaly-open/ui';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, useTheme } from '@mui/material';
 import { GridCell, AssetsInPoolWrapper, GridWithBottomBorder } from '../styles';
 import AssetsInPool from '../../../../../components/AssetsInPool';
 import ServicePercentageInfo from './ServicePercentageInfo';
@@ -13,6 +13,8 @@ const SBT_UNLIMITED = 1000000000;
 
 const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
   const { t } = useTranslation(['service', 'marketplace']);
+  const theme = useTheme();
+
   return (
     <Box>
       <GridWithBottomBorder container pb={2.5} pt={0}>
@@ -47,7 +49,11 @@ const ServiceSummary: React.FC<{ service: Service }> = ({ service }) => {
             >
               {service.investors}
             </ZigTypography>
-            <ZigUserIcon color={'#65647E'} height='13px' width={'12px'} />
+            <ZigUserIcon
+              color={theme.palette.backgrounds.investorsIcon}
+              height='13px'
+              width={'12px'}
+            />
           </Box>
         </GridCell>
       </GridWithBottomBorder>

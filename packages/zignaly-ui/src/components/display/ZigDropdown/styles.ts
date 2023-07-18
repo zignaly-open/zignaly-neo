@@ -1,12 +1,12 @@
 import styled, { css } from "styled-components";
 import { styledIf } from "utils/styled";
 import { ReactComponent as ArrowBottomIcon } from "assets/icons/caret-down.svg";
-import dark from "theme/dark";
+import { Theme } from "@mui/system";
 
-const withSeparator = (props: WithSeparator) =>
+const withSeparator = (props: WithSeparator & { theme: Theme }) =>
   props.separator &&
   css`
-    border-top: 1px dotted ${({ theme }) => theme.neutral600};
+    border-top: 1px dotted ${props.theme.palette.neutral600};
     margin: 6px 35px 6px;
   `;
 
@@ -44,7 +44,7 @@ export const NavLink = styled.span<
   } & WithSeparator &
     WithCustomStyle
 >`
-  color: ${dark.neutral200};
+  color: ${({ theme }) => theme.palette.neutral200};
   font-weight: 400;
   font-size: 14px;
   line-height: 28px;
@@ -64,19 +64,19 @@ export const NavLink = styled.span<
     transition: 0.15s linear;
   }
 
-  ${({ notClickable }) =>
+  ${({ notClickable, theme }) =>
     !notClickable &&
     css`
       &:hover {
-        background: rgb(28, 29, 53);
+        background: ${theme.palette.neutral600};
       }
     `}
 
-  ${({ active }) => `
+  ${({ active, theme }) => `
     ${styledIf(
       active,
       `
-      color: #7682f7;
+      color: ${theme.palette.highlighted};
     `,
       `
 
@@ -84,7 +84,7 @@ export const NavLink = styled.span<
         cursor: pointer;
 
         &:hover {
-          color: #fff;
+          color: ${theme.palette.neutral000};
         }
       }
     `,
@@ -136,10 +136,10 @@ export const SubNavList = styled.div`
 `;
 
 export const ChildContainer = styled.div<{ active: boolean } & WithSeparator>`
-  ${(props) =>
-    props.active &&
+  ${({ active, theme }) =>
+    active &&
     css`
-      background: rgb(25, 26, 48);
+      background: ${theme.backgrounds.dropdown2ndLevel};
       /* When the menu is expanded, replace bottom margin with padding to fit the background until the bottom */
       margin-bottom: 0 !important;
       padding-bottom: 12px;

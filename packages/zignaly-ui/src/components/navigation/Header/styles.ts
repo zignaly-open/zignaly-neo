@@ -53,13 +53,13 @@ export const HeaderLinksContainer = styled("nav")`
     transition: color 0.2s;
 
     &:hover {
-      color: #fff;
+      color: ${({ theme }) => theme.palette.neutral100};
     }
 
     &.active {
       &,
       &:hover {
-        color: #7682f7;
+        color: ${({ theme }) => theme.palette.highlighted};
       }
     }
   }

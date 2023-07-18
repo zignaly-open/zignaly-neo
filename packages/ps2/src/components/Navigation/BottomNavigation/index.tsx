@@ -63,7 +63,7 @@ const ZigBottomNavigation = () => {
         elevation={3}
       >
         <BottomNavigation
-          sx={{ backgroundColor: 'neutral800' }}
+          sx={{ backgroundColor: 'neutral900' }}
           showLabels
           value={tabValue}
           onChange={(event, newValue) => {

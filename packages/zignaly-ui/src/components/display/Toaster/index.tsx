@@ -4,16 +4,17 @@ import * as styled from "./styles";
 import { ReactComponent as SuccessIcon } from "assets/icons/check-icon.svg";
 import InfoIcon from "@mui/icons-material/Info";
 import { ReactComponent as ErrorAlertIcon } from "assets/icons/error-alert-icon.svg";
-import { dark } from "theme";
 import ZigTypography from "../ZigTypography";
+import { useTheme } from "@mui/material";
 
 const Toaster = ({ variant = "error", size = "large", caption = "", id }: ToasterProps) => {
+  const { palette } = useTheme();
   return (
     <styled.ToastContainer variant={variant} size={size} id={id}>
       <styled.IconContainer>
-        {variant === "error" && <ErrorAlertIcon color={dark.redGraphOrError} />}
-        {variant === "success" && <SuccessIcon color={dark.greenGraph} />}
-        {variant === "info" && <InfoIcon fill={dark.neutral600} />}
+        {variant === "error" && <ErrorAlertIcon color={palette.redGraphOrError} />}
+        {variant === "success" && <SuccessIcon color={palette.greenGraph} />}
+        {variant === "info" && <InfoIcon fill={palette.neutral600} />}
       </styled.IconContainer>
 
       <styled.Caption>

@@ -15,8 +15,8 @@ export const Table = styled("table")`
   thead {
     height: 56px;
     user-select: none;
-    background: #08081d;
-    box-shadow: 0 0 10px #16192b;
+    background: ${({ theme }) => theme.palette.backgrounds.tableHeader};
+    box-shadow: 0 0 10px ${({ theme }) => theme.palette.boxShadows.tableHeader};
   }
 
   th {
@@ -36,7 +36,7 @@ export const Table = styled("table")`
 
   tbody {
     tr {
-      background: #13122566;
+      background: ${({ theme }) => theme.palette.backgrounds.tableRow};
 
       :last-child {
         td {

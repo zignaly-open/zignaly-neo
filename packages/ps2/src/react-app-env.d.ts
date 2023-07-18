@@ -34,6 +34,7 @@ declare module '@mui/material/styles' {
   }
 
   interface CustomPalette {
+    neutral900: string;
     neutral800: string;
     neutral750: string;
     neutral700: string;
@@ -54,8 +55,22 @@ declare module '@mui/material/styles' {
     yellow: string;
     red: string;
     avatarBack: string;
+    contrasting: string;
 
-    almostWhite: string;
+    // I am sorry
+    // Here we define some of the "new" colors - only thoise needed in ps2
+    // not all because a) I am lazy b) we do not need them c) we SHOULD NOT need them in the first place
+    // d) because I added them here only because adding an explanatory comment and a ts-ignore every time
+    // is too much of a hassle (see a).).
+    backgrounds: Record<
+      | 'socialNetworksTab'
+      | 'modal'
+      | 'investorsIcon'
+      | 'withdrawalHighlight'
+      | 'secondaryBackground'
+      | 'selectInputFill',
+      string
+    >;
   }
 
   interface Palette extends CustomPalette {}
@@ -70,6 +85,7 @@ declare module '@mui/material/Button' {
   interface ButtonPropsColorOverrides {
     danger: true;
     success: true;
+    neutral900: true;
     neutral800: true;
     neutral750: true;
     neutral700: true;
@@ -91,7 +107,7 @@ declare module '@mui/material/Button' {
     red: true;
 
     avatarBack: true;
-    almostWhite: true;
+    contrasting: true;
   }
 }
 
@@ -99,6 +115,8 @@ declare module '@mui/material/SvgIcon' {
   export interface SvgIconPropsColorOverrides {
     danger: true;
     success: true;
+    neutral950: true;
+    neutral900: true;
     neutral800: true;
     neutral750: true;
     neutral700: true;
@@ -120,7 +138,7 @@ declare module '@mui/material/SvgIcon' {
     red: true;
 
     avatarBack: true;
-    almostWhite: true;
+    contrasting: true;
   }
 }
 
@@ -130,6 +148,8 @@ import React from 'react';
 
 declare module '@emotion/react' {
   export interface Theme extends MuiTheme {
+    neutral950: string;
+    neutral900: string;
     neutral800: string;
     neutral750: string;
     neutral700: string;
@@ -150,7 +170,7 @@ declare module '@emotion/react' {
     yellow: string;
     red: string;
 
-    almostWhite: string;
+    contrasting: string;
     avatarBack: string;
   }
 }

@@ -8,18 +8,19 @@ export const HeaderDropdownButton = styled('button', {
   cursor: pointer;
   border: none;
   height: 49px;
-  margin-top: 4px;
   padding-bottom: 4px;
+  padding-top: 4px;
   padding-left: 15px;
   padding-right: 15px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
-  background: ${(props) => (props.active ? '#12152c' : 'transparent')};
+  background: ${(props) =>
+    props.active ? props.theme.palette.neutral800 : 'transparent'};
 
   &:hover {
-    background: #12152c;
+    background: ${({ theme }) => theme.palette.neutral800};
   }
 
   transition: background-color 0.2s;
