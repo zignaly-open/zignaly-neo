@@ -1,5 +1,6 @@
 import { useMemo } from "react";
-import { AxisFormat, ChartColor, ChartGradientColor, GradientVariant } from "./types";
+import { AxisFormat, ChartGradientColor, GradientVariant } from "./types";
+import { useChartColor } from "./ZigChart/util";
 
 const deltaToShowSecondChart = 0.2;
 
@@ -44,10 +45,11 @@ export function useChartData(
   precision?: number,
 ): {
   data: AxisFormat[];
-  color: ChartColor;
+  color: string;
   gradient: ChartGradientColor;
   yDomain: [number, number];
 } {
+  const chartColors = useChartColor();
   const [processedData, yDomain] = useMemo(() => {
     const chart = data.map((value, index) => {
       const { x, y, ...rest } = typeof value === "object" ? value : { x: index, y: value };
@@ -69,7 +71,7 @@ export function useChartData(
 
   return {
     data: processedData,
-    color: isGreen ? ChartColor.Green : ChartColor.Red,
+    color: isGreen ? chartColors.green : chartColors.red,
     gradient: getGradient(gradientVariant, isGreen),
     yDomain,
   };

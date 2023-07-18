@@ -43,7 +43,7 @@ export const Dot = styled.div`
 `;
 
 export const Label = muiStyled(ZigTypography)`
-  color: RGB(193, 193, 200);
+  color: ${(props) => props.theme.palette.neutral100};
 
   &.body1 {
     font-size: 13px;

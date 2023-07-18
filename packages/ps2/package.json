@@ -75,6 +75,7 @@
     "react": "18.2.0",
     "react-device-detect": "^2.2.2",
     "react-dom": "18.2.0",
+    "react-google-font-loader": "^1.1.0",
     "react-hook-form": "^7.32.0",
     "react-i18next": "^11.16.9",
     "react-image-webp": "^0.8.0",

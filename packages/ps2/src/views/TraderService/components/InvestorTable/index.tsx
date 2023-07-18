@@ -11,7 +11,6 @@ import {
   ZigTablePriceLabel,
   ZigDropdown,
   ZigDotsVerticalIcon,
-  dark,
 } from '@zignaly-open/ui';
 import {
   useTraderServiceInvestors,
@@ -24,7 +23,7 @@ import {
 } from '../../../../apis/service/types';
 import ConnectionStateLabel from '../ConnectionStateLabel';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
-import { Box, IconButton, Tooltip } from '@mui/material';
+import { Box, IconButton, Tooltip, useTheme } from '@mui/material';
 import { TraderServicePageContainer } from '../styles';
 import { useZModal } from '../../../../components/ZModal/use';
 import InvestorEditFee from '../InvestorEditFee/InvestorEditFee';
@@ -41,6 +40,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
 
   const { data: service } = serviceDetailsEndpoint;
 
+  const theme = useTheme();
   const { t } = useTranslation('investors');
   const toast = useToast();
   const columnHelper = createColumnHelper<Investor>();
@@ -153,7 +153,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             component={() => (
               <IconButton>
                 <ZigDotsVerticalIcon
-                  color={dark.neutral200}
+                  color={theme.palette.neutral200}
                   height={16}
                   width={16}
                 />
@@ -192,8 +192,12 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
       ]) => (
         <TraderServicePageContainer>
           <InvestorCounts>
-            <ZigUserIcon width={'17px'} height={'20px'} color={'#65647E'} />
-            <ZigTypography variant={'h3'} color={'almostWhite'}>
+            <ZigUserIcon
+              width={'17px'}
+              height={'20px'}
+              color={theme.palette.backgrounds.investorsIcon}
+            />
+            <ZigTypography variant={'h3'} color={'contrasting'}>
               {t('number-of-investors', {
                 count: investors?.length,
               })}

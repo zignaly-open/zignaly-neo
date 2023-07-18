@@ -16,9 +16,9 @@ const customStyles = (small: boolean, theme: Theme, userStyles: StylesConfig): S
   }),
   menu: (base) => ({
     ...base,
-    background: "rgba(16, 18, 37) !important",
-    border: `1px solid ${theme.neutral600} !important`,
-    color: `${theme.neutral200} !important`,
+    background: `${theme.palette.neutral800} !important`,
+    border: `1px solid ${theme.palette.neutral600} !important`,
+    color: `${theme.palette.neutral200} !important`,
   }),
   option: (base, state) => ({
     ...base,
@@ -36,7 +36,8 @@ const customStyles = (small: boolean, theme: Theme, userStyles: StylesConfig): S
       : {}),
     ...(state.isSelected
       ? {
-          background: "rgba(255, 255, 255, 0.2) !important",
+          color: theme.palette.neutral000,
+          background: theme.palette.contrasting + "33 !important",
         }
       : {}),
     ...userStyles.option?.(base, state),

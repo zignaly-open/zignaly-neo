@@ -28,7 +28,7 @@ export const ArrowIcon = styled.div`
 
   svg {
     ${(props: any) => `
-      fill: ${props.theme.neutral300};
+      fill: ${props.theme.palette.neutral300};
     `}
     width: 100%;
     height: 100%;
@@ -51,19 +51,19 @@ export const Button = styled.div<ButtonProps>`
   user-select: none;
   height: 56px;
   cursor: pointer;
-  background: #0f0f25;
+  background: ${({ theme }) => theme.backgrounds.secondaryBackground};
 
   ${({ center, theme, isActiveDropDown, focused }) => `    
     ${styledIf(
       focused,
       `
       span {
-        color: ${theme.highlighted};
+        color: ${theme.palette.highlighted};
       }
     `,
       `
       span {
-        color: ${theme.neutral300};
+        color: ${theme.palette.neutral300};
       }
     `,
     )}
@@ -71,8 +71,7 @@ export const Button = styled.div<ButtonProps>`
     ${styledIf(
       isActiveDropDown,
       `
-      background: #11152b;
-      box-shadow: 0px 2.5px 13.5px 1px rgba(0, 0, 0, 0.42);
+      background: ${theme.palette.neutral800};
       border-color: transparent !important;
 
       ${ArrowIcon} {
@@ -101,11 +100,10 @@ export const DropDown = styled.div<any>`
   overflow: auto;
 
   ${(props: any) => `
-    background: #12152C;
+    background: ${props.theme.palette.neutral800};
     max-height: ${props.maxHeight ?? "200px"};
   `}
 
-  box-shadow: 0px 2.5px 13.5px 1px rgba(0, 0, 0, 0.42);
   border-radius: 0 0 8px 8px;
-  border-top: 1px solid ${({ theme }) => theme.neutral700}80;
+  border-top: 1px solid ${({ theme }) => theme.palette.neutral700}80;
 `;

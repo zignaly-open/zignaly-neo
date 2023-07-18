@@ -20,6 +20,8 @@ const ReferralInviteNewImage: React.FC<{
   const { t } = useTranslation(['referrals', 'pages']);
   const { refCode } = useCurrentUser();
 
+  // note that we do not need custom fonts here
+  // referrals are for the main app only, not the whitelabels
   return (
     <svg height={389} width={300} viewBox={`0 0 ${imageWidth} ${imageHeight}`}>
       <defs>

@@ -31,18 +31,9 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
       align-items: center;
       cursor: pointer;
       flex-wrap: nowrap;
-      ${({ outlined }) =>
+      ${({ outlined, theme }) =>
         css`
-          background: ${outlined ? "transparent" : "rgba(16, 18, 37)"};
-          background: ${outlined
-            ? "transparent"
-            : `linear-gradient(
-            90deg,
-            rgb(16 18 37) 0%,
-            rgb(16 18 37) 35%,
-            rgb(16 18 37) 100%
-            
-          )`};
+          background: ${outlined ? "transparent" : theme.palette.backgrounds.selectInputFill};
         `}
       transition: border-color 0.2s;
 
@@ -119,7 +110,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
     .zig-react-select__menu {
       border: 1px solid ${({ theme }) => theme.palette.neutral600} !important;
       color: ${({ theme }) => theme.palette.neutral200} !important;
-      background: rgba(16, 18, 37) !important;
+      background: ${({ theme }) => theme.palette.neutral800} !important;
     }
 
     &__placeholder {

@@ -111,7 +111,7 @@ export const ShareIconsContainer = styled(Box)`
     fill: url(#shareIconGradient);
     transition: fill 0.2s;
     &:hover {
-      fill: #7682f7;
+      fill: ${({ theme }) => theme.palette.highlighted};
     }
   }
 `;

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { styledIf } from "utils/styled";
-import { dark } from "../../../theme";
 import ZigTypography from "components/display/ZigTypography";
 import muiStyled from "@emotion/styled";
 
@@ -12,7 +11,7 @@ export const Wrapper = styled.div`
 
 export const InputContainer = styled.div`
   position: relative;
-  border: 1px solid #35334a;
+  border: 1px solid ${(props) => props.theme.palette.neutral600};
   padding: 8px 18px;
   border-radius: 5px;
   display: flex;
@@ -24,18 +23,17 @@ export const InputContainer = styled.div`
   overflow: hidden;
 `;
 
-export const InputValue = styled.input`
+export const InputValue = muiStyled("input")`
   padding: 0 16px 0 4px;
   background: transparent;
   border: none;
-  color: ${dark.neutral100};
+  color: ${({ theme }) => theme.palette.neutral100};
   outline: none;
   font-weight: 500;
   font-size: 22px;
   line-height: 36px;
   letter-spacing: 0.55px;
   width: 100%;
-  font-family: "Avenir Next", sans-serif;
 `;
 
 export const BalanceLabel = muiStyled(ZigTypography)`
@@ -43,7 +41,7 @@ export const BalanceLabel = muiStyled(ZigTypography)`
 `;
 
 export const MaxButton = styled.div`
-  border: 1px solid #35334a;
+  border: 1px solid ${(props) => props.theme.palette.neutral600};
   padding: 8px 18px;
   background: #1012254d;
   color: #89899a;
@@ -79,16 +77,16 @@ type LayoutProps = {
   children: React.ReactNode[] | React.ReactNode;
 };
 
-export const Layout = styled.div`
+export const Layout = styled.div<LayoutProps>`
   display: flex;
   flex-direction: column;
 
-  ${(props: LayoutProps) => `
+  ${(props) => `
     ${styledIf(
       props.withError,
       `
       ${InputContainer} {
-        border-color: #CC3993;
+        border-color: ${props.theme.palette.redGraphOrError};
       }
     `,
     )}
@@ -109,7 +107,7 @@ export const Layout = styled.div`
       }
       
       ${InputValue} {
-        color: #C1C1C8;
+        color: ${props.theme.palette.neutral100};
       }
     `,
     )}

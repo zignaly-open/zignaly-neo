@@ -93,7 +93,7 @@ const ZigDropdown: (
           PaperProps={{
             sx: {
               minWidth: "220px",
-              backgroundColor: "#12152c",
+              backgroundColor: theme.palette.neutral800,
               whiteSpace: "nowrap",
               color: "#fff",
               boxShadow: "0 4px 6px -2px #00000061",
@@ -175,7 +175,7 @@ const ZigDropdown: (
 
                         {!!option.children?.length && (
                           <ArrowBottomIconStyled
-                            color={theme.neutral300}
+                            color={theme.palette.neutral300}
                             rotated={childDropdownShow === option}
                             width={"10.5px"}
                           />

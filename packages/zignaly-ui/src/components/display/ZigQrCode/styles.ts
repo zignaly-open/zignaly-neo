@@ -8,6 +8,6 @@ export const QRCodeContainer = styled("div")<{ width: number; height: number }>`
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   border-radius: 8px;
-  background: #e1e9f0;
+  background: ${({ theme }) => theme.palette.neutral000};
   /* padding: 6px; */
 `;

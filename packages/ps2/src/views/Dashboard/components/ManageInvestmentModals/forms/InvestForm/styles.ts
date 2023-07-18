@@ -10,7 +10,7 @@ export const ZigInputWrapper = styled('div')`
     &:not(:hover):not(:has(input:focus)) {
       &,
       .MuiInput-input {
-        background: #171b30;
+        background: ${({ theme }) => theme.palette.neutral750};
       }
     }
   }

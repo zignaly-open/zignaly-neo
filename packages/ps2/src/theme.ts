@@ -1,3 +1,8 @@
-import { darkMui } from '@zignaly-open/ui';
+import { themes } from '@zignaly-open/ui';
+import { whitelabel } from './whitelabel';
 
-export default darkMui;
+const { mui, legacyStyledComponentsDoNotUse } =
+  (whitelabel?.theme && themes[whitelabel?.theme]) || themes.dark;
+
+export default mui;
+export { legacyStyledComponentsDoNotUse };

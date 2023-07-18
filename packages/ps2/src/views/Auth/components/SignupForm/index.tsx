@@ -22,7 +22,7 @@ import {
   ZigTypography,
   ZigLink,
 } from '@zignaly-open/ui';
-import { Box, InputAdornment, Link } from '@mui/material';
+import { Box, InputAdornment, Link, useTheme } from '@mui/material';
 import { LoginPayload } from '../../../../apis/user/types';
 import Cookies from 'js-cookie';
 import Mailcheck from 'react-mailcheck';
@@ -45,6 +45,7 @@ const SignupForm: React.FC<{ plain?: boolean }> = ({ plain }) => {
       password: '',
     },
   });
+  const theme = useTheme();
   const [{ loading: signingUp }, signup] = useSignup();
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
@@ -82,7 +83,7 @@ const SignupForm: React.FC<{ plain?: boolean }> = ({ plain }) => {
                 sx={{
                   color: 'neutral000',
                   textUnderlineOffset: '10px',
-                  textDecorationColor: '#E1E9F0',
+                  textDecorationColor: theme.palette.neutral000,
                 }}
               />
             </Trans>

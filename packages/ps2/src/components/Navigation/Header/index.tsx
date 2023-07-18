@@ -15,7 +15,7 @@ import { Container, StyledAppBar } from './styles';
 import Drawer from '../Drawer';
 import { MAIN_APP_URL } from '../../../util/constants';
 import HeaderWidgetButtons from '../HeaderWidgetButtons';
-import { isFeatureOn } from '../../../whitelabel';
+import { isFeatureOn, whitelabel } from '../../../whitelabel';
 import { Features } from 'whitelabel/type';
 
 const Header: React.FC = () => {
@@ -23,6 +23,13 @@ const Header: React.FC = () => {
   const isAuthenticated = useIsAuthenticated();
   const sm = useMediaQuery(theme.breakpoints.up('sm'));
   const md = useMediaQuery(theme.breakpoints.up('md'));
+  const logoRoute = whitelabel.mainAppLink || MAIN_APP_URL;
+
+  const logo = whitelabel.logo ? (
+    <img src={whitelabel.logo} id='menu__logo' height='32' width='32' />
+  ) : (
+    <BrandImage id='menu__logo' height='32px' type='isotype' width='32px' />
+  );
 
   return (
     <Box sx={{ display: 'flex' }}>
@@ -31,14 +38,25 @@ const Header: React.FC = () => {
           <Container>
             {sm ? (
               <Box display='flex' alignItems='center' gap='28px'>
-                <a href={MAIN_APP_URL} key='logo' rel={'noopener'}>
-                  <BrandImage
+                {!logoRoute.startsWith('http') ? (
+                  <NavigationLink
                     id='menu__logo'
-                    height='32px'
-                    type='isotype'
-                    width='32px'
-                  />
-                </a>
+                    style={{ display: 'flex' }}
+                    to={logoRoute}
+                    key='--route-main'
+                  >
+                    {logo}
+                  </NavigationLink>
+                ) : (
+                  <a
+                    style={{ display: 'flex' }}
+                    href={logoRoute}
+                    key='logo'
+                    rel={'noopener'}
+                  >
+                    {logo}
+                  </a>
+                )}
                 <HeaderLinksContainer key='links'>
                   <NavigationLink
                     id='menu__marketplace'

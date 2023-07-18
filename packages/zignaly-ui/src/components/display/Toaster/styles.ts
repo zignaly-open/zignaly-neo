@@ -22,7 +22,7 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  box-shadow: 4px 6px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 4px 6px 4px ${(props) => props.theme.neutral900}44;
   border-radius: 5px;
   position: absolute;
 
@@ -50,37 +50,37 @@ export const ToastContainer = styled.div<{ variant: string; size: string }>`
       height: 32px;
     `}
 
-  ${(props) =>
-    props.variant === "success" &&
+  ${({ variant, theme: { palette, backgrounds } }) =>
+    variant === "success" &&
     css`
       ${Caption} {
-        color: ${props.theme.greenGraph};
+        color: ${palette.greenGraph};
       }
 
-      border: 1px solid #122431;
-      background: #122431;
+      border: 1px solid ${backgrounds.toastSuccess};
+      background: ${backgrounds.toastSuccess};
     `}
 
 
-  ${(props) =>
-    props.variant === "info" &&
+  ${({ variant, theme: { palette } }) =>
+    variant === "info" &&
     css`
       ${Caption} {
-        color: ${props.theme.neutral200};
+        color: ${palette.neutral200};
       }
 
-      border: 1px solid ${props.theme.neutral600};
-      background: ${props.theme.neutral600};
+      border: 1px solid ${palette.neutral600};
+      background: ${palette.neutral600};
     `}
 
-  ${(props) =>
-    props.variant === "error" &&
+  ${({ variant, theme: { palette, backgrounds } }) =>
+    variant === "error" &&
     css`
       ${Caption} {
-        color: ${props.theme.redGraphOrError};
+        color: ${palette.redGraphOrError};
       }
 
-      border: 1px solid #231630;
-      background: #321e46;
+      border: 1px solid ${backgrounds.toastError};
+      background: ${backgrounds.toastError};
     `}
 `;
