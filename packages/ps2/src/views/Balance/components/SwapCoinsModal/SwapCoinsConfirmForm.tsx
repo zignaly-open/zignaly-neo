@@ -41,10 +41,15 @@ const SwapCoinsConfirmForm = ({
         }}
       >
         <Box>
-          <ZigTypography variant={'h2'} mb={'12px'}>
+          <ZigTypography
+            variant={'h2'}
+            mb={'12px'}
+            id={'swap-coins-confirm-modal__from-label'}
+          >
             {t('confirmation.from')}
           </ZigTypography>
           <ZigPriceLabel
+            id={'swap-coins-confirm-modal__from'}
             showCoinIcon
             coin={fromCoin}
             value={fromCoinAmount}
@@ -58,10 +63,15 @@ const SwapCoinsConfirmForm = ({
           <ZigSwapCircleIcon width={'35px'} height={'35px'} />
         </Box>
         <Box>
-          <ZigTypography variant={'h2'} mb={'12px'}>
+          <ZigTypography
+            variant={'h2'}
+            mb={'12px'}
+            id={'swap-coins-confirm-modal__to-label'}
+          >
             {t('confirmation.to')}
           </ZigTypography>
           <ZigPriceLabel
+            id={'swap-coins-confirm-modal__to'}
             showCoinIcon
             coin={toCoin}
             value={toCoinAmount}
@@ -75,12 +85,26 @@ const SwapCoinsConfirmForm = ({
         sx={{ border: '1px dotted #35334A', width: '100%', mb: '25px' }}
       />
       <Box display={'flex'}>
-        <ZigTypography variant={'body1'} mr={'10px'}>
+        <ZigTypography
+          variant={'body1'}
+          mr={'10px'}
+          id={'swap-coins-confirm-modal__rate-label'}
+        >
           {t('confirmation.rate')}
         </ZigTypography>
-        <ZigPriceLabel coin={fromCoin} value={1} showTooltip />
+        <ZigPriceLabel
+          coin={fromCoin}
+          value={1}
+          showTooltip
+          id={'swap-coins-confirm-modal__rate-from'}
+        />
         &nbsp;{'='}&nbsp;
-        <ZigPriceLabel coin={toCoin} value={rate} showTooltip />
+        <ZigPriceLabel
+          coin={toCoin}
+          value={rate}
+          showTooltip
+          id={'swap-coins-confirm-modal__rate-to'}
+        />
       </Box>
       <Box
         sx={{
@@ -98,6 +122,7 @@ const SwapCoinsConfirmForm = ({
           {t('confirmation.receive')}
         </ZigTypography>
         <ZigPriceLabel
+          exact
           variant={'h1'}
           coinProps={{ variant: 'h2' }}
           coin={toCoin}
