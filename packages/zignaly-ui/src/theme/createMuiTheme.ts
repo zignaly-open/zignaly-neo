@@ -403,7 +403,7 @@ export default ({ palette, mode, chart, backgrounds, boxShadows, fontFamily }: T
             },
             "&:hover, &.MuiButton-active": {
               color: palette.neutral000,
-              borderColor: backgrounds.greyedOutBorder,
+              borderColor: palette.neutral400,
             },
           },
         },
