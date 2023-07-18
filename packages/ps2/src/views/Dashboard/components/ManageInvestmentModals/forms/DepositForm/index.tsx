@@ -342,7 +342,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
                         coin: coinObject?.name,
                       })
                     }
-                    url={depositInfo.address}
+                    url={depositInfo?.address}
                     extraInfo={!depositInfo?.tag && t('depositQR.scan')}
                     size={130}
                     height={160}
