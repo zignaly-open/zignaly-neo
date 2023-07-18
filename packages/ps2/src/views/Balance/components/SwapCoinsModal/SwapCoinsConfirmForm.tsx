@@ -41,7 +41,11 @@ const SwapCoinsConfirmForm = ({
         }}
       >
         <Box>
-          <ZigTypography variant={'h2'} mb={'12px'} id={'swap-coins-confirm-modal__from-label'}>
+          <ZigTypography
+            variant={'h2'}
+            mb={'12px'}
+            id={'swap-coins-confirm-modal__from-label'}
+          >
             {t('confirmation.from')}
           </ZigTypography>
           <ZigPriceLabel
@@ -59,7 +63,11 @@ const SwapCoinsConfirmForm = ({
           <ZigSwapCircleIcon width={'35px'} height={'35px'} />
         </Box>
         <Box>
-          <ZigTypography variant={'h2'} mb={'12px'} id={'swap-coins-confirm-modal__to-label'}>
+          <ZigTypography
+            variant={'h2'}
+            mb={'12px'}
+            id={'swap-coins-confirm-modal__to-label'}
+          >
             {t('confirmation.to')}
           </ZigTypography>
           <ZigPriceLabel
