@@ -12,7 +12,7 @@ export const Layout = styled(Box)<{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: ${({ withCoinSelector }) => (withCoinSelector ? "5px 24px 12px" : "24px 24px 12px")};
+  padding: ${({ withCoinSelector }) => (withCoinSelector ? "5px 24px 0" : "24px 24px 12px")};
   position: relative;
   border-radius: 5px;
 

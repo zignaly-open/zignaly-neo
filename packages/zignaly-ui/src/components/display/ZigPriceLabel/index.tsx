@@ -89,7 +89,9 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
       {coin && !usd && (
         <>
           {" "}
-          <ZigTypography id={id && `${id}-coin`} {...withDefaultPropsCoin}>{coin}</ZigTypography>
+          <ZigTypography id={id && `${id}-coin`} {...withDefaultPropsCoin}>
+            {coin}
+          </ZigTypography>
         </>
       )}
     </ZigTypography>

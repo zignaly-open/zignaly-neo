@@ -40,6 +40,7 @@ const SwapCoinsConfirmForm = ({
           justifyContent: 'center',
           gap: 3,
           alignItems: 'center',
+          mt: '5px',
         }}
       >
         <Box>
