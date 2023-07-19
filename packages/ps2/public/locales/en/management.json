@@ -73,6 +73,7 @@
       "futuresTrade": "Enable futures trading"
     },
     "create-new-key": "Create New API Key",
+    "delete-api-key-toast": "API Key was successfully deleted",
     "create-new-key-description": "Create a new API key to connect and trade from your favorite trading platform.",
     "edit-key": "Edit API Key Settings",
     "delete-title": "Delete {{title}} API Key",
