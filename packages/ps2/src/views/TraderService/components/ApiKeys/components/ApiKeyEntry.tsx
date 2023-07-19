@@ -36,9 +36,9 @@ const ApiKeyEntry: React.FC<{ apiKey: ServiceApiKey }> = ({ apiKey }) => {
 
   const handleDeleteWrapper = async (args: ServiceApiKeyDeletePayload) => {
     const result = await deleteKey(args);
-    toast.success(t('management:api-keys.delete-api-key-toast'));
-    'error' in result &&
-      refetchIfDesynchronized(result as BackendErrorResponse);
+    'error' in result
+      ? refetchIfDesynchronized(result as BackendErrorResponse)
+      : toast.success(t('management:api-keys.delete-api-key-toast'));
   };
 
   return (
