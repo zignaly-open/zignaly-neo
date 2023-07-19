@@ -151,7 +151,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         }) => (
           <ZigDropdown
             component={() => (
-              <IconButton>
+              <IconButton sx={{ mr: '-4px' }}>
                 <ZigDotsVerticalIcon
                   color={theme.palette.neutral200}
                   height={16}
