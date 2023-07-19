@@ -126,7 +126,7 @@ const MyBalancesTable = (): JSX.Element => {
           <Box display='flex' justifyContent='flex-end' alignItems={'center'}>
             {!!allowedDeposits[exchangeType]?.includes(row.original.coin) && (
               <ZigButton
-                narrow
+                narrow={exchangeType === 'spot'}
                 tooltip={t('deposit')}
                 id={`balance-row__deposit-${row.original.coin}`}
                 onClick={() =>
@@ -137,10 +137,14 @@ const MyBalancesTable = (): JSX.Element => {
                 variant='outlined'
                 sx={{ maxHeight: '20px', mr: 1 }}
               >
-                <Add
-                  sx={{ height: '18px', width: '22px' }}
-                  color={'neutral300'}
-                />
+                {exchangeType === 'futures' ? (
+                  t('deposit')
+                ) : (
+                  <Add
+                    sx={{ height: '18px', width: '22px' }}
+                    color={'neutral300'}
+                  />
+                )}
               </ZigButton>
             )}
             <Box>
