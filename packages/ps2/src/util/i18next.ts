@@ -40,9 +40,30 @@ export const dateFnsLocaleMapping = {
   vi: dateLocaleVi,
 };
 
+const getFallbackLanguage = (locale: string): string | string[] => {
+  const getFamily = (x: string) => x.split(/[_-]/)[0];
+  return supportedLanguages.includes(locale)
+    ? locale
+    : [
+        ...supportedLanguages.filter((x) => getFamily(x) === getFamily(locale)),
+        'en',
+      ];
+};
+
+const simpleBrowserDetector = new LanguageDetector();
+simpleBrowserDetector.addDetector({
+  name: 'simpleBrowserDetector',
+  lookup() {
+    return getFallbackLanguage(
+      navigator?.languages?.[0] || navigator?.language || '',
+    );
+  },
+});
+
 i18n
   .use(Backend)
   .use(LanguageDetector)
+  .use(simpleBrowserDetector)
   .use(initReactI18next)
   // for all options read: https://www.i18next.com/overview/configuration-options
   .init({
@@ -54,7 +75,16 @@ i18n
     supportedLngs: supportedLanguages,
     defaultNS: 'common',
     fallbackNS: 'common',
-    fallbackLng: 'en',
+    fallbackLng: getFallbackLanguage,
+    detection: {
+      order: ['cookie', 'querystring', 'simpleBrowserDetector', 'navigator'],
+      lookupQuerystring: 'lng',
+      lookupCookie: 'i18next-lng',
+      lookupFromPathIndex: 0,
+      lookupFromSubdomainIndex: 0,
+      caches: ['cookie'],
+      cookieOptions: { path: '/', sameSite: 'strict' },
+    },
     interpolation: {
       escapeValue: false,
       format: (value: string | number, format?: string): string => {
