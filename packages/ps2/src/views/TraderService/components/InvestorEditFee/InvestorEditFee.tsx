@@ -42,6 +42,10 @@ function InvestorEditFee({
   const toast = useToast();
   const { data } = useServiceDetails(serviceId);
   const serviceTotalFee = +data?.successFee || 0;
+  const previousValue = adjustDiscountFromBackend(
+    ownerSfDiscount,
+    serviceTotalFee,
+  );
   const {
     handleSubmit,
     control,
@@ -51,7 +55,7 @@ function InvestorEditFee({
   } = useForm<EditFeeFormValues>({
     mode: 'onChange',
     defaultValues: {
-      value: adjustDiscountFromBackend(ownerSfDiscount, serviceTotalFee),
+      value: previousValue,
       maxDiscount: {
         max: Math.max(0, serviceTotalFee - 2 * ZIGNALY_PROFIT_FEE),
         full: serviceTotalFee,
@@ -63,20 +67,24 @@ function InvestorEditFee({
   // needed only for validation
   register('maxDiscount');
 
+  const value = watch('value');
+
   const onSubmit = useCallback(
     ({ value: discount, maxDiscount: { full } }: EditFeeFormValues) => {
-      editFee({
-        discount: adjustDiscountToBackend(discount, full),
-        accountId,
-        serviceId,
-      })
-        .unwrap()
-        .then(() => {
-          toast.success(t('change-fee-modal.fee-edited'));
-          close();
-        });
+      if (previousValue !== Number(value)) {
+        editFee({
+          discount: adjustDiscountToBackend(discount, full),
+          accountId,
+          serviceId,
+        })
+          .unwrap()
+          .then(() => {
+            toast.success(t('change-fee-modal.fee-edited'));
+            close();
+          });
+      } else close();
     },
-    [],
+    [value],
   );
 
   return (
@@ -90,7 +98,7 @@ function InvestorEditFee({
           control={control}
           render={({ field }) => (
             <SuccessFeeInputWrapper
-              value={watch('value')}
+              value={value}
               newValueLabel={t('change-fee-modal.new-success-fee')}
               title={t('change-fee-modal.title')}
               description={t('first-grade-math-explainer', {
