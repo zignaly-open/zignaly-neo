@@ -174,6 +174,7 @@ const MyBalancesTable = (): JSX.Element => {
                   onClick={() =>
                     showModal(SwapCoinsModal, {
                       selectedCoin: row.original,
+                      refetchBalance: balancesEndpoint.refetch,
                     })
                   }
                   variant='outlined'

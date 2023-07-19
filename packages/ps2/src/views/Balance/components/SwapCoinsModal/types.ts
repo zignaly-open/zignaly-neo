@@ -5,6 +5,7 @@ export type SwapCoinsModalProps = {
   step: string;
   setStep: (value: '' | 'confirm') => void;
   close: () => void;
+  refetchBalance: () => void;
   selectedCoin?: { coin: string; balance: CoinBalance & CoinDetail };
 };
 
@@ -22,5 +23,6 @@ export type SwapCoinsConfirmFormProps = {
   fromCoin: string;
   toCoinAmount: number;
   fromCoinAmount: number;
+  refetchBalance: () => void;
   rate: number;
 };

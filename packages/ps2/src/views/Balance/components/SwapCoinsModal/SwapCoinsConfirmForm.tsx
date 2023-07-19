@@ -19,6 +19,7 @@ const SwapCoinsConfirmForm = ({
   fromCoin,
   toCoinAmount,
   fromCoinAmount,
+  refetchBalance,
   close,
   rate,
 }: SwapCoinsConfirmFormProps) => {
@@ -26,6 +27,7 @@ const SwapCoinsConfirmForm = ({
   const toast = useToast();
   if (status.isSuccess) {
     toast.success(t('toast-success'));
+    refetchBalance();
     close();
   }
 
