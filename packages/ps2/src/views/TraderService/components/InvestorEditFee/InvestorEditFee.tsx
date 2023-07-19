@@ -71,20 +71,18 @@ function InvestorEditFee({
 
   const onSubmit = useCallback(
     ({ value: discount, maxDiscount: { full } }: EditFeeFormValues) => {
-      if (previousValue !== Number(value)) {
-        editFee({
-          discount: adjustDiscountToBackend(discount, full),
-          accountId,
-          serviceId,
-        })
-          .unwrap()
-          .then(() => {
-            toast.success(t('change-fee-modal.fee-edited'));
-            close();
-          });
-      } else close();
+      editFee({
+        discount: adjustDiscountToBackend(discount, full),
+        accountId,
+        serviceId,
+      })
+        .unwrap()
+        .then(() => {
+          toast.success(t('change-fee-modal.fee-edited'));
+          close();
+        });
     },
-    [value],
+    [],
   );
 
   return (
@@ -132,7 +130,7 @@ function InvestorEditFee({
           <ZigButton
             id={'edit-success-fee__save'}
             loading={isLoading}
-            disabled={!isValid}
+            disabled={!isValid || previousValue === Number(value)}
             size='xlarge'
             type='submit'
           >
