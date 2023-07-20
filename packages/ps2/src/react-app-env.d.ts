@@ -68,7 +68,8 @@ declare module '@mui/material/styles' {
       | 'investorsIcon'
       | 'withdrawalHighlight'
       | 'secondaryBackground'
-      | 'selectInputFill',
+      | 'selectInputFill'
+      | 'manageServiceMenuHover',
       string
     >;
   }
