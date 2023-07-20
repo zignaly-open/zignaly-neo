@@ -53,7 +53,8 @@ export const Option = styled('span', {
   }
 
   &:hover {
-    background: ${({ theme }) => theme.palette.neutral750};
+    background: ${({ theme }) =>
+      theme.palette.backgrounds.manageServiceMenuHover};
     & > * {
       color: ${({ theme }) => theme.palette.neutral100};
     }

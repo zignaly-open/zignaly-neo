@@ -45,6 +45,7 @@ const dark: Theme = {
     greyedOutBorder: "#464a85",
     sliderMark: "#888999",
     sliderThumb: "#999ee0",
+    manageServiceMenuHover: "#1b213d",
     buttonPrimary: "linear-gradient(289.8deg, #149CAD 0%, #4540C1 100%)",
     input2fa: "#0f1124",
     input2faGradient: "linear-gradient(101deg, #3f3bb1 7%, #138ea0 94%)",
