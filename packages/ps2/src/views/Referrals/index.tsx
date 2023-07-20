@@ -185,7 +185,7 @@ const Referrals: React.FC = () => {
                     label={t('total-invitees')}
                     value={
                       <ZigTypography color={'neutral175'}>
-                        {rewardsData.invitedCount} <GroupIcon />
+                        {rewardsData.investorsCount} <GroupIcon />
                       </ZigTypography>
                     }
                   />

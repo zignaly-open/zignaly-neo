@@ -1,6 +1,6 @@
 {
     "title": "Invite and Earn Up to {{commission}}%",
-    "title-loading": "Invite and Earn",
+    "invite-earn": "Invite and Earn",
     "commission-rate": "Commission Rate",
     "max-commission": "Max Commission",
     "my-invites": "My Invites",

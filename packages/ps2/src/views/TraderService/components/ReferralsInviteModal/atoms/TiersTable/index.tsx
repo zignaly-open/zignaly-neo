@@ -141,6 +141,7 @@ const TiersTable = ({
   return (
     <table
       style={{
+        marginTop: '16px',
         backgroundImage:
           'radial-gradient(circle at center, rgba(16, 13, 70, 0.4) 0%, rgba(16, 25, 70, 0.4) 27%, transparent 51%)',
       }}

@@ -44,7 +44,12 @@ const ReferralsInviteModal = ({
   const { data: referral } = useReferralRewardsQuery();
 
   const [currentDate, setCurrentDate] = useState(new Date());
-  const inviteLeft = 5;
+  const lastTier = tiers?.[tiers?.length - 1];
+  const inviteLeft =
+    // in case it reached last tier but invites is increased afterwards
+    referral?.tierLevelId === lastTier?.id
+      ? 0
+      : lastTier?.invitees - referral?.investorsCount;
   const boostEndsDate = new Date(referral?.boostEndsAt);
   const boostRunning = isFuture(boostEndsDate);
   const boost = boostRunning ? 2 : referral?.boost;
@@ -80,7 +85,7 @@ const ReferralsInviteModal = ({
       width={838}
       {...props}
       close={close}
-      title={t(loading ? 'title-loading' : 'title', {
+      title={t(loading || inviteLeft <= 0 ? 'invite-earn' : 'title', {
         commission: maxCommission,
       })}
       isLoading={loading}
@@ -110,7 +115,7 @@ const ReferralsInviteModal = ({
                 >
                   <ZigTypography textTransform='uppercase' variant='h4'>
                     {t(
-                      referral.invitedCount > 0
+                      referral.investorsCount > 0 && inviteLeft > 0
                         ? 'max-commission'
                         : 'commission-rate',
                     )}
@@ -142,7 +147,7 @@ const ReferralsInviteModal = ({
                     )}
                   </ZigTypography>
                 </Box>
-                {referral.invitedCount > 0 && (
+                {referral.investorsCount > 0 && (
                   <Box display='flex' flexDirection={'column'}>
                     <ZigTypography textTransform='uppercase' variant='h4'>
                       {t('my-invites')}
@@ -160,43 +165,60 @@ const ReferralsInviteModal = ({
                         pl='9px'
                         pr='7px'
                       >
-                        {referral.invitedCount}
+                        {referral.investorsCount}
                       </ZigTypography>
                       <Verified sx={{ color: '#26c496' }} />
                     </Box>
                   </Box>
                 )}
               </Box>
-              <ZigTypography color='neutral200' variant='h3' fontWeight={400}>
-                <Trans
-                  i18nKey={
-                    referral.invitedCount > 0
-                      ? `get-by-inviting${boostRunning ? '-in' : ''}`
-                      : 'when-you-invite'
-                  }
-                  t={t}
-                  values={{
-                    invite: inviteLeft,
-                    commission: maxCommission,
-                  }}
-                >
+              {inviteLeft > 0 && (
+                <>
                   <ZigTypography
-                    component='span'
+                    color='neutral200'
                     variant='h3'
                     fontWeight={400}
-                    color='#25c89b'
-                  />
-                </Trans>
-              </ZigTypography>
-              {boostRunning && (
-                <Box display={'flex'} alignItems={'center'} gap='9px' mt='11px'>
-                  <ZigClockIcon color='#e93ea7' />
-                  <ZigTypography color='#e93ea7' variant='h4' fontWeight={400}>
-                    {`${t('day', { count: days })}, ${t('hour', {
-                      count: hours,
-                    })}, ${t('minute', { count: minutes })}`}
+                  >
+                    <Trans
+                      i18nKey={
+                        referral.investorsCount > 0
+                          ? `get-by-inviting${boostRunning ? '-in' : ''}`
+                          : 'when-you-invite'
+                      }
+                      t={t}
+                      values={{
+                        invite: inviteLeft,
+                        commission: maxCommission,
+                      }}
+                    >
+                      <ZigTypography
+                        component='span'
+                        variant='h3'
+                        fontWeight={400}
+                        color='#25c89b'
+                      />
+                    </Trans>
                   </ZigTypography>
-                </Box>
+                  {boostRunning && (
+                    <Box
+                      display={'flex'}
+                      alignItems={'center'}
+                      gap='9px'
+                      mt='11px'
+                    >
+                      <ZigClockIcon color='#e93ea7' />
+                      <ZigTypography
+                        color='#e93ea7'
+                        variant='h4'
+                        fontWeight={400}
+                      >
+                        {`${t('day', { count: days })}, ${t('hour', {
+                          count: hours,
+                        })}, ${t('minute', { count: minutes })}`}
+                      </ZigTypography>
+                    </Box>
+                  )}
+                </>
               )}
 
               <Box px='20px'>
@@ -213,64 +235,61 @@ const ReferralsInviteModal = ({
               referralCode={referral.referralCode}
             />
           </Box>
-          <Box
-            display='flex'
-            flexDirection={'column'}
-            alignItems={'center'}
-            mt='40px'
-            mb='16px'
-          >
-            <Box display='flex' flexDirection={'column'}>
-              {inviteLeft > 0 && (
-                <>
-                  {referral.invitedCount > 0 ? (
-                    <ZigTypography
-                      fontSize={19}
-                      textAlign={'left'}
-                      fontWeight={600}
-                    >
-                      {t('invite-more', {
-                        invite: inviteLeft,
-                        commission: maxCommission,
-                      })}
-                    </ZigTypography>
-                  ) : (
-                    <>
-                      <DescriptionLine text={t('earn-success-fees')} />
-                      {!boostRunning && !serviceCommission.commission && (
-                        <DescriptionLine
-                          text={t('invite-and-earn', {
-                            invite: inviteLeft,
-                            commission: maxCommission,
-                          })}
-                        />
-                      )}
-                      {boostRunning && (
-                        <DescriptionLine
-                          text={t('invite-and-earn-1-week', {
-                            invite: inviteLeft,
-                            commission: maxCommissionWithoutTraderBoost,
-                          })}
-                        />
-                      )}
-                      {serviceCommission.commission > 0 && (
-                        <DescriptionLine
-                          text={t('invite-and-earn-trader-boost', {
-                            invite: inviteLeft,
-                            commissionBefore: trimZeros(
-                              maxCommissionWithoutTraderBoost,
-                            ),
-                            commission: maxCommission,
-                            multiplier: traderBoostMultiplier,
-                          })}
-                        />
-                      )}
-                    </>
-                  )}
-                </>
-              )}
+          {inviteLeft > 0 && (
+            <Box
+              display='flex'
+              flexDirection={'column'}
+              alignItems={'center'}
+              mt='40px'
+            >
+              <Box display='flex' flexDirection={'column'}>
+                {referral.investorsCount > 0 ? (
+                  <ZigTypography
+                    fontSize={19}
+                    textAlign={'left'}
+                    fontWeight={600}
+                  >
+                    {t('invite-more', {
+                      invite: inviteLeft,
+                      commission: maxCommission,
+                    })}
+                  </ZigTypography>
+                ) : (
+                  <>
+                    <DescriptionLine text={t('earn-success-fees')} />
+                    {!boostRunning && !serviceCommission.commission && (
+                      <DescriptionLine
+                        text={t('invite-and-earn', {
+                          invite: inviteLeft,
+                          commission: maxCommission,
+                        })}
+                      />
+                    )}
+                    {boostRunning && (
+                      <DescriptionLine
+                        text={t('invite-and-earn-1-week', {
+                          invite: inviteLeft,
+                          commission: maxCommissionWithoutTraderBoost,
+                        })}
+                      />
+                    )}
+                    {serviceCommission.commission > 0 && (
+                      <DescriptionLine
+                        text={t('invite-and-earn-trader-boost', {
+                          invite: inviteLeft,
+                          commissionBefore: trimZeros(
+                            maxCommissionWithoutTraderBoost,
+                          ),
+                          commission: maxCommission,
+                          multiplier: traderBoostMultiplier,
+                        })}
+                      />
+                    )}
+                  </>
+                )}
+              </Box>
             </Box>
-          </Box>
+          )}
           <Tiers
             tiers={tiers}
             referral={referral}

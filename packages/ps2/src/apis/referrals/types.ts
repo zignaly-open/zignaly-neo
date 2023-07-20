@@ -3,6 +3,7 @@ export type ReferralsState = Record<string, never>;
 export type ReferralRewards = {
   referralCode: string;
   invitedCount: number;
+  investorsCount: number;
   usdtEarned: number;
   usdtPending: number;
   tierLevelId: number;
