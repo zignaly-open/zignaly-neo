@@ -28,6 +28,7 @@ const ResetPassword = lazy(() => import('views/Auth/ResetPassword'));
 const Referrals = lazy(() => import('./views/Referrals'));
 const Invite = lazy(() => import('./views/Referrals/Invite'));
 const Rewards = lazy(() => import('./views/Rewards'));
+const Kyc = lazy(() => import('./views/Kyc'));
 
 const { default: Dashboard, DashboardModalInvestmentEdit } = lazily(
   () => import('./views/Dashboard'),
@@ -82,6 +83,7 @@ const Router: React.FC = () => (
           element={<MyBalancesDeposit bgRoute={Routes.ROUTE_MY_BALANCES} />}
         />
       </Route>
+      <Route path={Routes.ROUTE_KYC} element={<Kyc />}></Route>
       <Route
         path={Routes.ROUTE_MY_BALANCES_TRANSACTIONS}
         element={outleted(<MyBalances />)}

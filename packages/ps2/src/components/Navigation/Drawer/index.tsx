@@ -37,6 +37,7 @@ import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router-dom';
 import {
   ROUTE_BECOME_TRADER,
+  ROUTE_KYC,
   ROUTE_LOGIN,
   ROUTE_PROFIT_SHARING,
   ROUTE_SIGNUP,
@@ -199,6 +200,23 @@ const ZigDrawer = () => {
                           primary={t('account-menu.notAuth-dropdown-link-2fa')}
                         />
                       </ListItemButton>
+                      {isFeatureOn(Features.Kyc) && (
+                        <ListItem
+                          disablePadding
+                          onClick={handleDrawerToggle}
+                          sx={{ pl: 4 }}
+                        >
+                          <ListItemButton
+                            id='drawer__kyc'
+                            to={ROUTE_KYC}
+                            component={Link}
+                          >
+                            <ListItemText
+                              primary={t('account-menu.dropdown-link-kyc')}
+                            />
+                          </ListItemButton>
+                        </ListItem>
+                      )}
                     </List>
                   </Collapse>
                   {isFeatureOn(Features.Trader) && (

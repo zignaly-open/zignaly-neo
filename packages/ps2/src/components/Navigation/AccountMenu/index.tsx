@@ -26,6 +26,7 @@ import {
 } from '@zignaly-open/ui';
 import {
   ROUTE_DASHBOARD,
+  ROUTE_KYC,
   ROUTE_LOGIN,
   ROUTE_MY_BALANCES,
   ROUTE_REFERRALS,
@@ -173,7 +174,13 @@ function AccountMenu(): React.ReactElement | null {
               label: t('account-menu.notAuth-dropdown-link-2fa'),
               onClick: () => showModal(Enable2FAModal),
             },
-          ],
+            isFeatureOn(Features.Kyc) && {
+              id: `menu-dropdown-settings__kyc`,
+              label: t('account-menu.dropdown-link-kyc'),
+              href: generatePath(ROUTE_KYC),
+              onClick: () => navigate(ROUTE_KYC),
+            },
+          ].filter(Boolean),
         },
         {
           element: (

@@ -3,6 +3,7 @@ export enum Features {
   Referrals,
   Trader,
   NewSignup,
+  Kyc,
 }
 
 // yes, the trailing slash IS important
