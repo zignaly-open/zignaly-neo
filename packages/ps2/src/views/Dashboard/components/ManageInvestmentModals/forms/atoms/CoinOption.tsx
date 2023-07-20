@@ -31,7 +31,7 @@ const CoinOption = ({
 }) => {
   return (
     <Box display='flex' alignItems='center'>
-      <Box mr='11px'>
+      <Box mr='11px' mt={'4px'}>
         <ZigCoinIcon
           size={'small'}
           coin={coin}
