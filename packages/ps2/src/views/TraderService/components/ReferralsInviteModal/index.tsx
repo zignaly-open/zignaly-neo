@@ -93,7 +93,14 @@ const ReferralsInviteModal = ({
       {!loading && (
         <>
           <Grid container mt={'22px'}>
-            <Grid item sm={12} md={4}>
+            <Grid
+              item
+              sm={12}
+              md={4}
+              display={'flex'}
+              justifyContent={'center'}
+              mb={{ sm: 3, md: 0 }}
+            >
               <TraderCard
                 service={service}
                 traderBoost={traderBoostMultiplier}
