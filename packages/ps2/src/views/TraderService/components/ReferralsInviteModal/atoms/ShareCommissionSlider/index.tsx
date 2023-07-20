@@ -58,6 +58,7 @@ export const ShareCommissionSlider = ({
           setValue(v);
         }}
         max={max}
+        valueLabelFormat={(v: number) => v}
       />
     </SliderContainer>
   );
