@@ -6,7 +6,6 @@ import SwapCoinsForm from './SwapCoinsForm';
 import { CoinBalance, CoinDetail } from '../../../../apis/coin/types';
 
 export type Step = '' | 'confirm';
-export const coinsAllowedSwap = ['BUSD', 'USDT', 'BTC', 'ETH', 'BNB'];
 
 function SwapCoinsModal({
   close,

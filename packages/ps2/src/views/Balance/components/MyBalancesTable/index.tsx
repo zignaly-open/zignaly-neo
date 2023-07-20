@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   ZigTable,
@@ -26,14 +26,13 @@ import { Box } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
 import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
 import { useBalanceQuery } from 'apis/user/api';
-import SwapCoinsModal, { coinsAllowedSwap } from '../SwapCoinsModal';
+import SwapCoinsModal from '../SwapCoinsModal';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
   const balancesEndpoint = useCoinBalances({ convert: true, refetch: true });
   const coinsEndpoint = useExchangeCoinsList();
   const { exchangeType, internalId } = useActiveExchange();
-  const [hasNonZeroBalance, setHasNonZeroBalance] = useState<boolean>(true);
   const { showModal } = useZModal();
   const showDepositModal = useZRouteModal(ROUTE_MY_BALANCES_DEPOSIT_COIN);
   // Trigger balance update to be sure that balance widget matches coins data
@@ -46,6 +45,51 @@ const MyBalancesTable = (): JSX.Element => {
       skip: !internalId,
     },
   );
+  const getFilteredData = useCallback(
+    (coins: CoinDetails, balances: CoinBalances) => {
+      // Populate coins that can be deposited
+      const depositCoinsBalances: CoinBalances = Object.fromEntries(
+        allowedDeposits[exchangeType].map((coin) => [
+          coin,
+          {
+            balanceFree: '',
+            balanceFreeBTC: '',
+            balanceFreeUSDT: '',
+            balanceLocked: '',
+            balanceLockedBTC: '',
+            balanceLockedUSDT: '',
+            balanceTotal: '',
+            balanceTotalBTC: '',
+            balanceTotalExchCoin: '',
+            balanceTotalUSDT: '',
+            exchCoin: '',
+            maxWithdrawAmount: '',
+          },
+        ]),
+      );
+
+      return Object.entries<CoinBalance & CoinDetail>(
+        mergeCoinsAndBalances(coins, { ...depositCoinsBalances, ...balances }),
+      )
+        .filter(
+          ([coin, balance]) =>
+            allowedDeposits[exchangeType]?.includes(coin) ||
+            +balance.balanceTotal > 0,
+        )
+        .map(([coin, balance]) => ({ coin, balance }));
+    },
+    [exchangeType, t],
+  );
+  const hasNonZeroBalance = useMemo(() => {
+    if (coinsEndpoint?.isSuccess && balancesEndpoint?.isSuccess) {
+      return getFilteredData(coinsEndpoint?.data, balancesEndpoint?.data).some(
+        (coin) =>
+          allowedDeposits.spot.includes(coin.coin) &&
+          +coin?.balance?.balanceTotal !== 0,
+      );
+    }
+    return true;
+  }, [coinsEndpoint?.data, balancesEndpoint?.data]);
 
   const columnHelper = createColumnHelper<BalanceTableDataType>();
   const columns = useMemo(
@@ -128,7 +172,7 @@ const MyBalancesTable = (): JSX.Element => {
             {!!allowedDeposits[exchangeType]?.includes(row.original.coin) && (
               <ZigButton
                 narrow={exchangeType === 'spot' && hasNonZeroBalance}
-                tooltip={t('deposit')}
+                tooltip={hasNonZeroBalance && t('deposit')}
                 id={`balance-row__deposit-${row.original.coin}`}
                 onClick={() =>
                   showDepositModal({
@@ -169,7 +213,7 @@ const MyBalancesTable = (): JSX.Element => {
             </Box>
             {exchangeType === 'spot' &&
               Number(row.original.balance.balanceTotal) > 0 &&
-              coinsAllowedSwap.includes(row.original.coin) && (
+              allowedDeposits.spot.includes(row.original.coin) && (
                 <ZigButton
                   id={`balance-row__swap-coins-${row.original.coin}`}
                   onClick={() =>
@@ -192,55 +236,8 @@ const MyBalancesTable = (): JSX.Element => {
         ),
       }),
     ],
-    [t, exchangeType],
+    [t, exchangeType, hasNonZeroBalance],
   );
-
-  const getFilteredData = useCallback(
-    (coins: CoinDetails, balances: CoinBalances) => {
-      // Populate coins that can be deposited
-      const depositCoinsBalances: CoinBalances = Object.fromEntries(
-        allowedDeposits[exchangeType].map((coin) => [
-          coin,
-          {
-            balanceFree: '',
-            balanceFreeBTC: '',
-            balanceFreeUSDT: '',
-            balanceLocked: '',
-            balanceLockedBTC: '',
-            balanceLockedUSDT: '',
-            balanceTotal: '',
-            balanceTotalBTC: '',
-            balanceTotalExchCoin: '',
-            balanceTotalUSDT: '',
-            exchCoin: '',
-            maxWithdrawAmount: '',
-          },
-        ]),
-      );
-
-      return Object.entries<CoinBalance & CoinDetail>(
-        mergeCoinsAndBalances(coins, { ...depositCoinsBalances, ...balances }),
-      )
-        .filter(
-          ([coin, balance]) =>
-            allowedDeposits[exchangeType]?.includes(coin) ||
-            +balance.balanceTotal > 0,
-        )
-        .map(([coin, balance]) => ({ coin, balance }));
-    },
-    [exchangeType, t],
-  );
-  useEffect(() => {
-    if (coinsEndpoint?.data && balancesEndpoint?.data) {
-      setHasNonZeroBalance(
-        getFilteredData(coinsEndpoint?.data, balancesEndpoint?.data).some(
-          (coin) =>
-            coinsAllowedSwap.includes(coin.coin) &&
-            +coin?.balance?.balanceTotal !== 0,
-        ),
-      );
-    }
-  }, [coinsEndpoint.isFetching, balancesEndpoint.isFetching]);
 
   return (
     <LayoutContentWrapper
