@@ -36,7 +36,7 @@ function ConfirmModal({
     <ZModal allowUnauth {...props} close={close} title={title}>
       {!!description && <ZigTypography>{description}</ZigTypography>}
 
-      <Box sx={{ mt: 2 }}>
+      <Box sx={{ mt: 2, textAlign: 'center' }}>
         <ZigButton
           sx={{ mr: 1 }}
           variant={'contained'}
