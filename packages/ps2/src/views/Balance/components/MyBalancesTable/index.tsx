@@ -26,7 +26,7 @@ import { Box } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
 import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
 import { useBalanceQuery } from 'apis/user/api';
-import SwapCoinsModal, { coinsAllowedSwap } from '../SwapCoinsModal';
+import SwapCoinsModal from '../SwapCoinsModal';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
@@ -128,7 +128,7 @@ const MyBalancesTable = (): JSX.Element => {
             {!!allowedDeposits[exchangeType]?.includes(row.original.coin) && (
               <ZigButton
                 narrow={exchangeType === 'spot' && hasNonZeroBalance}
-                tooltip={t('deposit')}
+                tooltip={hasNonZeroBalance && t('deposit')}
                 id={`balance-row__deposit-${row.original.coin}`}
                 onClick={() =>
                   showDepositModal({
@@ -169,7 +169,7 @@ const MyBalancesTable = (): JSX.Element => {
             </Box>
             {exchangeType === 'spot' &&
               Number(row.original.balance.balanceTotal) > 0 &&
-              coinsAllowedSwap.includes(row.original.coin) && (
+              allowedDeposits.spot.includes(row.original.coin) && (
                 <ZigButton
                   id={`balance-row__swap-coins-${row.original.coin}`}
                   onClick={() =>
@@ -231,16 +231,16 @@ const MyBalancesTable = (): JSX.Element => {
     [exchangeType, t],
   );
   useEffect(() => {
-    if (coinsEndpoint?.data && balancesEndpoint?.data) {
+    if (coinsEndpoint?.isSuccess && balancesEndpoint?.isSuccess) {
       setHasNonZeroBalance(
         getFilteredData(coinsEndpoint?.data, balancesEndpoint?.data).some(
           (coin) =>
-            coinsAllowedSwap.includes(coin.coin) &&
+            allowedDeposits.spot.includes(coin.coin) &&
             +coin?.balance?.balanceTotal !== 0,
         ),
       );
     }
-  }, [coinsEndpoint.isFetching, balancesEndpoint.isFetching]);
+  }, [coinsEndpoint?.data, balancesEndpoint?.data, hasNonZeroBalance]);
 
   return (
     <LayoutContentWrapper
