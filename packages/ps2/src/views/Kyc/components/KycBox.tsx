@@ -4,7 +4,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import DataUsageTwoToneIcon from '@mui/icons-material/DataUsageTwoTone';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { Loader, ZigButton, ZigTypography } from '@zignaly-open/ui';
 import { useKycStatusQuery } from '../../../apis/user/api';
 import { useTranslation } from 'react-i18next';
 import { UlList } from '../../Referrals/styles';
@@ -37,9 +37,8 @@ const KycBox: React.FC<{
   disabled,
 }) => {
   // n+1 queries? never heard about him, is he a rapper?
-  const kycStatusEndpoint = useKycStatusQuery(name);
+  const { isLoading } = useKycStatusQuery(name);
   const { t } = useTranslation(['kyc']);
-  console.error(kycStatusEndpoint);
   const theme = useTheme();
   const showModal = useZConfirm();
 
@@ -63,7 +62,10 @@ const KycBox: React.FC<{
   };
 
   return (
-    <Grid container sx={{ mb: 8.5, opacity: disabled ? 0.5 : 1 }}>
+    <Grid
+      container
+      sx={{ mt: 3, mb: 6, opacity: disabled ? 0.5 : 1, minHeight: 200 }}
+    >
       <Grid
         item
         sm={12}
@@ -100,64 +102,75 @@ const KycBox: React.FC<{
               </ZigTypography>
             </>
           )}
-          {status === 'completed' && (
-            <ZigTypography
-              sx={{ mt: 2 }}
-              component={'p'}
-              color={'greenGraph'}
-              fontWeight={600}
-              variant={'body1'}
-            >
-              {t('status.completed')}
-              <CheckCircleOutlineIcon sx={{ ...largeIconStyle, ml: 1 }} />
-            </ZigTypography>
-          )}
-          {status === 'pending' && (
-            <ZigTypography
-              sx={{ mt: 2 }}
-              component={'p'}
-              color={'yellow'}
-              fontWeight={600}
-              variant={'body1'}
-            >
-              <DataUsageTwoToneIcon sx={largeIconStyle} />
-              {t('status.pending')}
-              <Tooltip title={t('progress-explainer')}>
-                <InfoOutlinedIcon
-                  sx={{
-                    height: '13px',
-                    verticalAlign: 'sub',
-                    color: theme.palette.backgrounds.investorsIcon,
-                  }}
-                />
-              </Tooltip>
-            </ZigTypography>
-          )}
-          {status === 'failed' && (
-            <ZigTypography
-              component={'p'}
-              sx={{ mt: 2 }}
-              color={'redGraphOrError'}
-              fontWeight={600}
-              variant={'body1'}
-            >
-              <ErrorOutlineOutlinedIcon sx={largeIconStyle} />
-              {t('status.failed')}
-              <Tooltip title={t('progress-explainer')}>
-                <InfoOutlinedIcon sx={infoIconStyle} />
-              </Tooltip>
-            </ZigTypography>
-          )}
 
-          <ZigButton
-            sx={{ mt: 2.5 }}
-            variant={'contained'}
-            disabled={disabled}
-            onClick={openKyc}
-            size={'large'}
-          >
-            {t('verify')}
-          </ZigButton>
+          {isLoading ? (
+            <Box sx={{ pt: 3, pb: 3 }}>
+              <Loader />
+            </Box>
+          ) : (
+            <>
+              {status === 'completed' && (
+                <ZigTypography
+                  sx={{ mt: 2 }}
+                  component={'p'}
+                  color={'greenGraph'}
+                  fontWeight={600}
+                  variant={'body1'}
+                >
+                  {t('status.completed')}
+                  <CheckCircleOutlineIcon sx={{ ...largeIconStyle, ml: 1 }} />
+                </ZigTypography>
+              )}
+
+              {status === 'pending' && (
+                <ZigTypography
+                  sx={{ mt: 2 }}
+                  component={'p'}
+                  color={'yellow'}
+                  fontWeight={600}
+                  variant={'body1'}
+                >
+                  <DataUsageTwoToneIcon sx={largeIconStyle} />
+                  {t('status.pending')}
+                  <Tooltip title={t('progress-explainer')}>
+                    <InfoOutlinedIcon
+                      sx={{
+                        height: '13px',
+                        verticalAlign: 'sub',
+                        color: theme.palette.backgrounds.investorsIcon,
+                      }}
+                    />
+                  </Tooltip>
+                </ZigTypography>
+              )}
+
+              {status === 'failed' && (
+                <ZigTypography
+                  component={'p'}
+                  sx={{ mt: 2 }}
+                  color={'redGraphOrError'}
+                  fontWeight={600}
+                  variant={'body1'}
+                >
+                  <ErrorOutlineOutlinedIcon sx={largeIconStyle} />
+                  {t('status.failed')}
+                  <Tooltip title={t('progress-explainer')}>
+                    <InfoOutlinedIcon sx={infoIconStyle} />
+                  </Tooltip>
+                </ZigTypography>
+              )}
+
+              <ZigButton
+                sx={{ mt: 2.5 }}
+                variant={'contained'}
+                disabled={disabled}
+                onClick={openKyc}
+                size={'large'}
+              >
+                {t('verify')}
+              </ZigButton>
+            </>
+          )}
         </Box>
       </Grid>
       <Grid item sm={12} md={7}>

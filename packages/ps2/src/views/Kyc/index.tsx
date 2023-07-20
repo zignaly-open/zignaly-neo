@@ -15,12 +15,12 @@ const Kyc: React.FC = () => {
   const { t } = useTranslation(['kyc', 'pages']);
   useTitle(t('pages:kyc'));
   return (
-    <PageContainer style={{ maxWidth: '915px' }}>
+    <PageContainer style={{ maxWidth: '615px' }}>
       <Box
         sx={{
           textAlign: 'center',
           mt: 4,
-          mb: 4,
+          pb: 4,
         }}
       >
         <ZigTypography variant={'h1'} id={'kyc__title'}>
