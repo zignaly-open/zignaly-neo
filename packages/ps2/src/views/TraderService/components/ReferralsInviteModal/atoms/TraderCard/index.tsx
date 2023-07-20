@@ -1,7 +1,6 @@
 import { Box } from '@mui/material';
 import { Avatar, ZigTypography } from '@zignaly-open/ui';
 import { Service } from 'apis/service/types';
-import ZScoreChip from 'components/ZScoreChip';
 import { t } from 'i18next';
 import React from 'react';
 import { getServiceLogo } from 'util/images';

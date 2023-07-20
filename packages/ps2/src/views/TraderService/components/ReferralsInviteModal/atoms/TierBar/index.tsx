@@ -66,7 +66,7 @@ const TierBar = ({
 
   // Layers debug
   // console.log(`\n---\nTier ${tier.id}:`);
-  // console.table([layer1, layer2, layer3]);
+  // console.table(layers);
 
   return (
     <AnimatedContainer>
@@ -91,7 +91,7 @@ const TierBar = ({
               fontSize={fontSize}
               fontWeight={showArrow ? 600 : 500}
             >
-              {layer1.value}
+              {Math.floor(layer1.value)}
               {'%'}
             </ZigTypography>
           </BarContent>
@@ -120,7 +120,7 @@ const TierBar = ({
                   fontSize={fontSize}
                   fontWeight={500}
                 >
-                  {layer2.value}
+                  {Math.floor(layer2.value)}
                   {'%'}
                 </ZigTypography>
               </BarContent>
@@ -143,7 +143,7 @@ const TierBar = ({
                   fontSize={fontSize}
                   fontWeight={500}
                 >
-                  {layer3.value}
+                  {Math.floor(layer3.value)}
                   {'%'}
                 </ZigTypography>
               </BarContent>

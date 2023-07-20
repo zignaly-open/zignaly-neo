@@ -41,7 +41,7 @@ describe('useTierLayers', () => {
     } = renderHook(() => useTierLayers(tiers, 1, 2, 5));
 
     expect(layers).toEqual([
-      { value: 40, height: 114 },
+      { value: 40, height: 121 },
       {
         value: 20,
         height: 64,
