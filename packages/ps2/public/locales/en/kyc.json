@@ -1,0 +1,35 @@
+{
+  "title": "Verify your account",
+  "verify": "Verify",
+  "description": "Complete the verification process to access all services.",
+  "description-explainer": "Verification only takes 1-2 minutes.",
+  "balance-limit": "Balance Limit:",
+  "balance-range-from-to": "{{from}} - {{to}} {{coin}}",
+  "balance-range-up-to": "Over {{to}} {{coin}}",
+  "name-level-1": "Silver Level",
+  "name-level-2": "Gold Level",
+  "progress-explainer": "We're working tirelessly on processing the verification progress, please hold tight",
+  "status": {
+    "completed": "Completed",
+    "pending": "Pending",
+    "failed": "Failed"
+  },
+  "requirements-level-1": {
+    "identity": "Identify Document",
+    "phone-and-mail": "Phone and Email Verification",
+    "selfie": "Selfie/Liveness Verification"
+  },
+  "requirements-level-2": {
+    "identity": "Identify Document",
+    "identity-2": "Secondary Identification Document",
+    "phone-and-mail": "Phone and Email Verification",
+    "selfie": "Selfie/Liveness Verification",
+    "residence": "Proof of Residence",
+    "questionnaire": "Questionnaire"
+  },
+  "modal": {
+    "title": "Verify your account",
+    "description": "You will be redirected to a 3rd-party KYC service, yay or nay",
+    "ok": "Proceed"
+  }
+}

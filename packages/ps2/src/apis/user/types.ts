@@ -104,6 +104,8 @@ export type SessionResponse = {
   userId: string;
 };
 
+export type KycResponse = {};
+
 export type UserLocale = string;
 export type RefRewardType = 'perpetual';
 
