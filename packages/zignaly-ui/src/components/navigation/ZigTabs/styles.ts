@@ -3,7 +3,7 @@ import { Tabs } from "@mui/material";
 
 export const ZigTabs = styled(Tabs)`
   .MuiTabs-indicator {
-    background: linear-gradient(289.8deg, #149cad 0%, #4540c1 100%);
+    background: ${({ theme }) => theme.palette.backgrounds.buttonPrimary};
     border-radius: 6px;
   }
 
@@ -31,7 +31,7 @@ export const ZigTabs = styled(Tabs)`
   }
 
   .Mui-selected {
-    color: #f3f4f6;
+    color: ${({ theme }) => theme.palette.contrasting};
     font-weight: 600;
   }
 `;

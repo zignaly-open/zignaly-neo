@@ -1,7 +1,6 @@
 import { css, styled } from '@mui/material';
 
 export const AmountContainer = styled('div')<{
-  coloredBorder?: boolean;
   coloredBackground?: boolean;
   noBorders?: boolean;
 }>`
@@ -10,8 +9,6 @@ export const AmountContainer = styled('div')<{
   text-align: center;
   align-items: center;
   justify-content: center;
-  background: #101225;
-  box-shadow: inset 0 0 0 1px #35334a;
   border-radius: 5px;
   box-sizing: border-box;
   padding: 10px 18px;
@@ -41,17 +38,9 @@ export const AmountContainer = styled('div')<{
       box-shadow: unset;
     `}
 
-  ${({ coloredBackground }) =>
+  ${({ coloredBackground, theme }) =>
     coloredBackground &&
     css`
-      background: #181e34;
-    `}
-
-  ${({ coloredBorder }) =>
-    coloredBorder &&
-    css`
-      &:before {
-        background: linear-gradient(#8671f7, #7ec9f9);
-      }
+      background: ${theme.palette.backgrounds.withdrawalHighlight};
     `}
 `;

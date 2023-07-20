@@ -30,7 +30,7 @@ const ZigCopyText: React.FC<ZigCopyTextProps> = styled<React.FC<ZigCopyTextProps
             </InputAdornment>
           ),
         }}
-        readOnly={true}
+        readOnly
       />
     );
   },

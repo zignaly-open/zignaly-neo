@@ -6,15 +6,17 @@ import SwapCoinsForm from './SwapCoinsForm';
 import { CoinBalance, CoinDetail } from '../../../../apis/coin/types';
 
 export type Step = '' | 'confirm';
-export const coinsAllowedToSwap = ['BUSD', 'USDT', 'BTC', 'ETH', 'BNB'];
+export const coinsAllowedSwap = ['BUSD', 'USDT', 'BTC', 'ETH', 'BNB'];
 
 function SwapCoinsModal({
   close,
   selectedCoin,
+  refetchBalance,
   ...props
 }: {
   close: () => void;
   selectedCoin: { coin: string; balance: CoinBalance & CoinDetail };
+  refetchBalance: () => void;
 } & DialogProps): React.ReactElement {
   const [step, setStep] = useState<Step>('');
   const { t } = useTranslation(['swap-coins']);
@@ -35,6 +37,7 @@ function SwapCoinsModal({
       }
     >
       <SwapCoinsForm
+        refetchBalance={refetchBalance}
         selectedCoin={selectedCoin}
         setStep={setStep}
         step={step}

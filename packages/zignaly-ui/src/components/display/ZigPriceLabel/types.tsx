@@ -15,5 +15,4 @@ export type ZigPriceLabelProps = Partial<TypographyProps> & {
   id?: string;
   showApproximate?: boolean;
   showCoinIcon?: boolean;
-  label?: string;
 };

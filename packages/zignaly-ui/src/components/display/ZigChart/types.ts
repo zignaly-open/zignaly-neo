@@ -1,9 +1,9 @@
 import { VictoryChartProps } from "victory";
 
-export enum ChartColor {
-  Green = "#039179",
-  Red = "#CC3993",
-}
+export type ChartColors = {
+  green: string;
+  red: string;
+};
 
 export enum ChartGradientColor {
   GreenMini = "chart-gradient-mini-green",

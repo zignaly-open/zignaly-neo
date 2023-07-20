@@ -26,7 +26,7 @@ import { Box } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
 import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
 import { useBalanceQuery } from 'apis/user/api';
-import SwapCoinsModal, { coinsAllowedToSwap } from '../SwapCoinsModal';
+import SwapCoinsModal, { coinsAllowedSwap } from '../SwapCoinsModal';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
@@ -126,7 +126,7 @@ const MyBalancesTable = (): JSX.Element => {
           <Box display='flex' justifyContent='flex-end' alignItems={'center'}>
             {!!allowedDeposits[exchangeType]?.includes(row.original.coin) && (
               <ZigButton
-                narrow
+                narrow={exchangeType === 'spot'}
                 tooltip={t('deposit')}
                 id={`balance-row__deposit-${row.original.coin}`}
                 onClick={() =>
@@ -137,10 +137,14 @@ const MyBalancesTable = (): JSX.Element => {
                 variant='outlined'
                 sx={{ maxHeight: '20px', mr: 1 }}
               >
-                <Add
-                  sx={{ height: '18px', width: '22px' }}
-                  color={'neutral300'}
-                />
+                {exchangeType === 'futures' ? (
+                  t('deposit')
+                ) : (
+                  <Add
+                    sx={{ height: '18px', width: '22px' }}
+                    color={'neutral300'}
+                  />
+                )}
               </ZigButton>
             )}
             <Box>
@@ -164,12 +168,13 @@ const MyBalancesTable = (): JSX.Element => {
             </Box>
             {exchangeType === 'spot' &&
               Number(row.original.balance.balanceTotal) > 0 &&
-              coinsAllowedToSwap.includes(row.original.coin) && (
+              coinsAllowedSwap.includes(row.original.coin) && (
                 <ZigButton
                   id={`balance-row__swap-coins-${row.original.coin}`}
                   onClick={() =>
                     showModal(SwapCoinsModal, {
                       selectedCoin: row.original,
+                      refetchBalance: balancesEndpoint.refetch,
                     })
                   }
                   variant='outlined'

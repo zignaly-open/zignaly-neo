@@ -3,7 +3,7 @@ import { styled } from '@mui/material';
 import { ZigTypography } from '@zignaly-open/ui';
 
 export const TransactionPanel = styled('div')`
-  background: ${({ theme }) => theme.palette.neutral800};
+  background: ${({ theme }) => theme.palette.neutral900};
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@ export const TransactionPanel = styled('div')`
 export const TypographyPanelLabel = styled(ZigTypography)`
   && {
     margin-right: 16px;
-    color: rgb(112, 111, 130);
+    color: ${(props) => props.theme.palette.neutral400};
     font-weight: 400;
     font-size: 13px;
   }
@@ -25,6 +25,6 @@ export const TypographyPanelName = styled((props) => (
   <ZigTypography {...props} variant='body2' />
 ))`
   && {
-    color: rgb(193, 193, 200);
+    color: ${(props) => props.theme.palette.neutral100};
   }
 ` as typeof ZigTypography;

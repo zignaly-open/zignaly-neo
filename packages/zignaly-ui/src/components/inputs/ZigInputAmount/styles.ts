@@ -8,11 +8,11 @@ export const Layout = styled(Box)<{
   labelInline: boolean;
 }>`
   border: ${({ withCoinSelector, theme }) =>
-    withCoinSelector ? "none;" : `1px dotted ${theme.palette.neutral600};`};
+    withCoinSelector ? "none;" : `1px dotted ${theme.palette.neutral600}`};
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: ${({ withCoinSelector }) => (withCoinSelector ? "5px 24px 12px;" : "24px 24px 12px;")};
+  padding: ${({ withCoinSelector }) => (withCoinSelector ? "5px 24px 0" : "24px 24px 12px")};
   position: relative;
   border-radius: 5px;
 
@@ -28,12 +28,11 @@ export const Layout = styled(Box)<{
   && {
     .MuiInput-root {
       padding: 2px 24px;
-      ${({ withCoinSelector }) =>
+      ${({ withCoinSelector, theme }) =>
         !withCoinSelector &&
         `
-        background: #171b30;
+        background: ${theme.palette.neutral750};
       `}
-
       border: none;
     }
 
@@ -41,8 +40,9 @@ export const Layout = styled(Box)<{
       font-size: 30px;
       font-weight: 500;
       border-color: ${({ theme }) => theme.palette.neutral400};
-      background: ${(withCoinSelector) => (withCoinSelector ? "unset;" : "#171b30;")};
-      -webkit-text-fill-color: #878dd1 !important;
+      background: ${({ theme, withCoinSelector }) =>
+        withCoinSelector ? "unset" : theme.palette.neutral750};
+      -webkit-text-fill-color: ${({ theme }) => theme.palette.neutral175} !important;
     }
   }
 `;
@@ -85,7 +85,7 @@ export const InputWrapper = styled(Box)<{
   display: flex;
   align-items: center;
   gap: 16px;
-  width: ${({ wide }) => (wide ? "1;" : "auto;")};
+  width: ${({ wide }) => (wide ? "1" : "auto")};
   ${({ withCoinSelector, theme, error, disabled }) =>
     withCoinSelector &&
     `
@@ -107,7 +107,7 @@ export const InputWrapper = styled(Box)<{
 export const MaxButton = styled(ZigButton)`
   padding: 3px 10px;
   border-radius: 13px;
-  border: solid 1px #35334a;
+  border: solid 1px ${(props) => props.theme.palette.neutral600};
   min-width: 44px;
   min-height: 30px;
   font-size: 12px;

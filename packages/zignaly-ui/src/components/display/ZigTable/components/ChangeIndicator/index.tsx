@@ -51,10 +51,10 @@ const ChangeIndicator = ({
                 isPositive={isPositiveValue}
                 color={
                   isZero
-                    ? theme.neutral300
+                    ? theme.palette.neutral300
                     : isPositiveValue
-                    ? theme.greenGraph
-                    : theme.redGraphOrError
+                    ? theme.palette.greenGraph
+                    : theme.palette.redGraphOrError
                 }
               />
             )}

@@ -22,12 +22,13 @@ import { useConvertMutation } from '../../../../apis/coin/api';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { convertAmountValidation } from './validation';
-import { coinsAllowedToSwap } from './index';
+import { coinsAllowedSwap } from './index';
 
 function SwapCoinsForm({
   setStep,
   step,
   selectedCoin,
+  refetchBalance,
   close,
 }: SwapCoinsModalProps) {
   const { t } = useTranslation('swap-coins');
@@ -50,12 +51,11 @@ function SwapCoinsForm({
   const { data: balances, isLoading: isLoadingBalances } = useCoinBalances({
     convert: true,
   });
-  const coinOptions = useMemo(() => {
+  const coinOptionsAllowedSwapFrom = useMemo(() => {
     if (!balances) return [];
 
-    return Object.entries(balances).map(([c]) => {
-      const balance = balances[c];
-      return {
+    return Object.entries(balances)
+      .map(([c, balance]) => ({
         value: c,
         coin: c,
         available: balance?.balanceFree || 0,
@@ -67,12 +67,12 @@ function SwapCoinsForm({
             prefixId={'swap-coins-modal'}
           />
         ),
-      };
-    });
+      }))
+      .filter((c) => c.available > 0 && coinsAllowedSwap.includes(c.coin));
   }, [balances]);
 
   const [selectedFromToken, setSelectedFromToken] = useState<CoinsSelect>(
-    coinOptions.find((coin) => coin.coin === selectedCoin.coin),
+    coinOptionsAllowedSwapFrom.find((coin) => coin.coin === selectedCoin.coin),
   );
   const [selectedToToken, setSelectedToToken] = useState<CoinsSelect>(
     {} as CoinsSelect,
@@ -105,7 +105,7 @@ function SwapCoinsForm({
   });
 
   const amount = watch('fromCoinAmount');
-  const { data: convertPreview, isLoading: isLoadingConvertPreview } =
+  const { data: convertPreview, isFetching: isFetchingConvertPreview } =
     useConvertPreview({
       from: selectedFromToken.coin,
       amount,
@@ -117,15 +117,17 @@ function SwapCoinsForm({
     if (amount) {
       trigger('fromCoinAmount');
     }
-  }, [convertPreview, isLoadingConvertPreview]);
+  }, [convertPreview, isFetchingConvertPreview]);
 
-  const { data: allowedCoinsSwapTo, isLoading: isLoadingAssets } =
-    useQuoteAssetsCoin(selectedFromToken.coin);
-  const coinOptionsSwapTo = useMemo(() => {
+  const { data: allowedCoinsSwapTo } = useQuoteAssetsCoin(
+    selectedFromToken.coin,
+  );
+  const coinOptionsAllowedSwapTo = useMemo(() => {
     if (!allowedCoinsSwapTo) return [];
 
-    return allowedCoinsSwapTo.map((c) => {
-      return {
+    return allowedCoinsSwapTo
+      .filter((c) => coinsAllowedSwap.includes(c))
+      .map((c) => ({
         value: c,
         coin: c,
         label: (
@@ -136,29 +138,33 @@ function SwapCoinsForm({
             prefixId={'swap-coins-modal'}
           />
         ),
-      };
-    });
+      }));
   }, [allowedCoinsSwapTo]);
 
   useEffect(() => {
     if (convertPreview && selectedToToken?.coin) {
-      setValue(
-        'toCoinAmount',
-        trimZeros((+amount / convertPreview?.lastPrice).toFixed(8)).toString(),
-      );
+      const calculatedValue =
+        convertPreview.side === 'buy'
+          ? (+amount / convertPreview.lastPrice).toFixed(8)
+          : (+amount * convertPreview.lastPrice).toFixed(8);
+
+      setValue('toCoinAmount', trimZeros(calculatedValue).toString());
     }
   }, [amount, convertPreview]);
-  const nonZeroBalanceCoinOptions = coinOptions.filter(
-    (c) => c.available > 0 && coinsAllowedToSwap.includes(c.coin),
-  );
-  if (isLoadingBalances || isLoadingAssets) {
+
+  if (isLoadingBalances) {
     return <CenteredLoader />;
   }
 
   if (confirmationData && step === 'confirm') {
     return (
       <SwapCoinsConfirmForm
-        rate={1 / convertPreview.lastPrice}
+        refetchBalance={refetchBalance}
+        rate={
+          convertPreview?.side === 'buy'
+            ? 1 / convertPreview.lastPrice
+            : convertPreview.lastPrice
+        }
         action={handleConvert}
         close={close}
         status={convertStatus}
@@ -166,6 +172,12 @@ function SwapCoinsForm({
       />
     );
   }
+  const canSubmit =
+    isValid &&
+    selectedToToken.coin &&
+    selectedFromToken.coin &&
+    amount &&
+    watch('toCoinAmount');
 
   return (
     <Form
@@ -189,7 +201,7 @@ function SwapCoinsForm({
             error={t(errors.fromCoinAmount?.message)}
             labelInline={false}
             withCoinSelector
-            tokenOptions={nonZeroBalanceCoinOptions}
+            tokenOptions={coinOptionsAllowedSwapFrom}
             id={'swap-coins-modal__from-input-amount'}
             label={t('from-input.label')}
             wide
@@ -206,7 +218,11 @@ function SwapCoinsForm({
         )}
       />
       <Box margin={'0 auto'}>
-        <ZigSwapCircleIcon width={'35px'} height={'35px'} />
+        <ZigSwapCircleIcon
+          id={'swap-coins-modal__swap-icon'}
+          width={'35px'}
+          height={'35px'}
+        />
       </Box>
 
       <Controller
@@ -218,7 +234,7 @@ function SwapCoinsForm({
             disabled
             showMaxButton={false}
             withCoinSelector
-            tokenOptions={coinOptionsSwapTo}
+            tokenOptions={coinOptionsAllowedSwapTo}
             id={'swap-coins-modal__to-input-amount'}
             label={t('to-input.label')}
             wide
@@ -227,6 +243,7 @@ function SwapCoinsForm({
             onTokenChange={(token: CoinsSelect) => {
               if (amount) {
                 trigger('fromCoinAmount');
+                setValue('toCoinAmount', '');
               }
               setSelectedToToken(token);
             }}
@@ -237,16 +254,11 @@ function SwapCoinsForm({
 
       <ModalActions position={'relative'}>
         <ZigButton
-          loading={isLoadingConvertPreview}
+          id={'swap-coins-modal__continue'}
+          loading={isFetchingConvertPreview}
           size={'large'}
           type={'submit'}
-          disabled={
-            !isValid ||
-            !selectedToToken.coin ||
-            !selectedFromToken.coin ||
-            !amount ||
-            isLoadingConvertPreview
-          }
+          disabled={!canSubmit}
         >
           {t('continue')}
         </ZigButton>

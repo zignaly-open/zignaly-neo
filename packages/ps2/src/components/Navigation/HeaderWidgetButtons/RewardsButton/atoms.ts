@@ -17,7 +17,7 @@ export const GradientBorderButtonWrapper = styled(Box)`
   & > a {
     height: 40px;
     transition: background-color 0.3s;
-    background: ${({ theme }) => theme.palette.neutral800} !important;
+    background: ${({ theme }) => theme.palette.neutral900} !important;
     border-width: 0 !important;
   }
 `;

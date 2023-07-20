@@ -29,7 +29,7 @@ import {
   ROUTE_TRADING_SERVICE,
 } from '../../../../routes';
 import DepositModal from '../ManageInvestmentModals/DepositModal';
-import { Box } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
 import { generatePath, Link } from 'react-router-dom';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -37,6 +37,7 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
   const { showModal } = useZModal();
+  const theme = useTheme();
   const exchange = useActiveExchange();
   const investmentsEndpoint = useInvestments(exchange?.internalId, {
     skip: !exchange?.internalId,
@@ -203,7 +204,11 @@ const MyDashboard: React.FC = () => {
             id={`portfolio-table__link-${row.original.serviceId}`}
           >
             <ArrowForwardIosIcon
-              sx={{ color: '#26c4c1', width: '20px', height: '20px' }}
+              sx={{
+                color: theme.palette.links,
+                width: '20px',
+                height: '20px',
+              }}
             />
           </Box>
         ),
