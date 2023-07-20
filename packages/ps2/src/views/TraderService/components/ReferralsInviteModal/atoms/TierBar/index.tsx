@@ -95,15 +95,15 @@ const TierBar = ({
               {'%'}
             </ZigTypography>
           </BarContent>
-          {showArrow && <TierArrow />}
           <Overlay opacity={opacity} />
+          {referral.tierLevelId === tier.id && (
+            <HighlightRate
+              height={layer1.height - layer2.height}
+              width={width - 3}
+            />
+          )}
+          {showArrow && <TierArrow />}
         </TierBarContainer>
-        {referral.tierLevelId === tier.id && (
-          <HighlightRate
-            height={layer1.height - layer2.height}
-            width={width - 3}
-          />
-        )}
         {layer2.value > 0 && (
           <>
             <TierBarContainer

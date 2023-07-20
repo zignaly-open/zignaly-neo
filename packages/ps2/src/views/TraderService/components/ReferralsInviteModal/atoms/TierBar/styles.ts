@@ -23,13 +23,6 @@ export const TierBarContainer = styled(Box)<{
   padding-top: 4px;
   overflow: hidden;
 
-  ${({ subLayer }) =>
-    subLayer &&
-    css`
-      position: absolute;
-      bottom: 0;
-    `}
-
   &:before {
     content: '';
     position: absolute;
@@ -50,6 +43,13 @@ export const TierBarContainer = styled(Box)<{
       rgba(33, 81, 78, ${opacity})
     )`};
   }
+
+  ${({ subLayer }) =>
+    subLayer &&
+    css`
+      position: absolute;
+      bottom: 0;
+    `}
 `;
 
 export const HighlightRate = styled(Box)`
@@ -68,6 +68,7 @@ export const TierArrow = styled('div')`
   position: relative;
   height: 100%;
   margin-top: 12px;
+  opacity: 0.3;
 
   &::before {
     content: '';
