@@ -1,8 +1,6 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import {
-  Avatar,
-  ZigButton,
   ZigClockIcon,
   ZigTypography,
   ZigUserFilledIcon,
@@ -14,18 +12,15 @@ import {
   useReferralRewardsQuery,
   useServiceCommissionQuery,
   useTierLevelsQuery,
-  useUpdateServiceCommissionMutation,
 } from 'apis/referrals/api';
 import { Box, Grid } from '@mui/material';
-import { CommissionBoostChip, InviteBox } from './styles';
+import { CommissionBoostChip } from './styles';
 import Tiers from './atoms/TiersTable';
 import { Verified } from '@mui/icons-material';
 import {
-  addSeconds,
   differenceInDays,
   differenceInHours,
   differenceInMinutes,
-  format,
   isFuture,
 } from 'date-fns';
 import { getBoostedCommissionPct } from './util';
@@ -35,7 +30,6 @@ import { ShareCommissionSlider } from './atoms/ShareCommissionSlider';
 import { DescriptionLine } from './atoms/DescriptionLine';
 import TraderCard from './atoms/TraderCard';
 import ReferralLinkInvite from './atoms/ReferralLinkInvite';
-import { prettyFloat } from 'util/numbers';
 
 const ReferralsInviteModal = ({
   service,

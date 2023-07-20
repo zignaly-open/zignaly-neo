@@ -10,7 +10,6 @@ export type ReferralRewards = {
   discountPct: number;
   boost: number;
   boostEndsAt: string;
-  // can be removed?
   configuration: {
     zignalySuccessFee: number;
     zignalyRebateFee: number;
