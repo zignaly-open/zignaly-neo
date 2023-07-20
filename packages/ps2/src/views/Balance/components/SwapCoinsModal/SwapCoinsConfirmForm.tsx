@@ -58,7 +58,7 @@ const SwapCoinsConfirmForm = ({
             value={fromCoinAmount}
             variant={'h1'}
             coinProps={{ variant: 'h2' }}
-            showTooltip
+            showTooltip={false}
           />
         </Box>
 
@@ -80,7 +80,7 @@ const SwapCoinsConfirmForm = ({
             value={toCoinAmount}
             variant={'h1'}
             coinProps={{ variant: 'h2' }}
-            showTooltip
+            showTooltip={false}
           />
         </Box>
       </Box>

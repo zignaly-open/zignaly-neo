@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
   ZigTable,
@@ -33,6 +33,7 @@ const MyBalancesTable = (): JSX.Element => {
   const balancesEndpoint = useCoinBalances({ convert: true, refetch: true });
   const coinsEndpoint = useExchangeCoinsList();
   const { exchangeType, internalId } = useActiveExchange();
+  const [hasNonZeroBalance, setHasNonZeroBalance] = useState<boolean>(true);
   const { showModal } = useZModal();
   const showDepositModal = useZRouteModal(ROUTE_MY_BALANCES_DEPOSIT_COIN);
   // Trigger balance update to be sure that balance widget matches coins data
@@ -126,7 +127,7 @@ const MyBalancesTable = (): JSX.Element => {
           <Box display='flex' justifyContent='flex-end' alignItems={'center'}>
             {!!allowedDeposits[exchangeType]?.includes(row.original.coin) && (
               <ZigButton
-                narrow={exchangeType === 'spot'}
+                narrow={exchangeType === 'spot' && hasNonZeroBalance}
                 tooltip={t('deposit')}
                 id={`balance-row__deposit-${row.original.coin}`}
                 onClick={() =>
@@ -137,7 +138,7 @@ const MyBalancesTable = (): JSX.Element => {
                 variant='outlined'
                 sx={{ maxHeight: '20px', mr: 1 }}
               >
-                {exchangeType === 'futures' ? (
+                {exchangeType === 'futures' || !hasNonZeroBalance ? (
                   t('deposit')
                 ) : (
                   <Add
@@ -229,6 +230,17 @@ const MyBalancesTable = (): JSX.Element => {
     },
     [exchangeType, t],
   );
+  useEffect(() => {
+    if (coinsEndpoint?.data && balancesEndpoint?.data) {
+      setHasNonZeroBalance(
+        getFilteredData(coinsEndpoint?.data, balancesEndpoint?.data).some(
+          (coin) =>
+            coinsAllowedSwap.includes(coin.coin) &&
+            +coin?.balance?.balanceTotal !== 0,
+        ),
+      );
+    }
+  }, [coinsEndpoint.isFetching, balancesEndpoint.isFetching]);
 
   return (
     <LayoutContentWrapper
