@@ -28,6 +28,7 @@ function SwapCoinsForm({
   setStep,
   step,
   selectedCoin,
+  refetchBalance,
   close,
 }: SwapCoinsModalProps) {
   const { t } = useTranslation('swap-coins');
@@ -158,6 +159,7 @@ function SwapCoinsForm({
   if (confirmationData && step === 'confirm') {
     return (
       <SwapCoinsConfirmForm
+        refetchBalance={refetchBalance}
         rate={
           convertPreview?.side === 'buy'
             ? 1 / convertPreview.lastPrice

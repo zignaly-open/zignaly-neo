@@ -19,6 +19,7 @@ const SwapCoinsConfirmForm = ({
   fromCoin,
   toCoinAmount,
   fromCoinAmount,
+  refetchBalance,
   close,
   rate,
 }: SwapCoinsConfirmFormProps) => {
@@ -26,6 +27,7 @@ const SwapCoinsConfirmForm = ({
   const toast = useToast();
   if (status.isSuccess) {
     toast.success(t('toast-success'));
+    refetchBalance();
     close();
   }
 
@@ -38,6 +40,7 @@ const SwapCoinsConfirmForm = ({
           justifyContent: 'center',
           gap: 3,
           alignItems: 'center',
+          mt: '5px',
         }}
       >
         <Box>
@@ -123,6 +126,7 @@ const SwapCoinsConfirmForm = ({
         </ZigTypography>
         <ZigPriceLabel
           exact
+          showTooltip={false}
           variant={'h1'}
           coinProps={{ variant: 'h2' }}
           coin={toCoin}
