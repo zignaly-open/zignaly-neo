@@ -37,7 +37,7 @@ const KycBox: React.FC<{
   disabled,
 }) => {
   // n+1 queries? never heard about him, is he a rapper?
-  const { isLoading } = useKycStatusQuery(name);
+  const { isLoading, data } = useKycStatusQuery(name);
   const { t } = useTranslation(['kyc']);
   const theme = useTheme();
   const showModal = useZConfirm();
@@ -154,9 +154,11 @@ const KycBox: React.FC<{
                 >
                   <ErrorOutlineOutlinedIcon sx={largeIconStyle} />
                   {t('status.failed')}
-                  <Tooltip title={t('progress-explainer')}>
-                    <InfoOutlinedIcon sx={infoIconStyle} />
-                  </Tooltip>
+                  {!!data?.reason && (
+                    <Tooltip title={data?.reason}>
+                      <InfoOutlinedIcon sx={infoIconStyle} />
+                    </Tooltip>
+                  )}
                 </ZigTypography>
               )}
 
