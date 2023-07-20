@@ -33,7 +33,6 @@ const MyBalancesTable = (): JSX.Element => {
   const balancesEndpoint = useCoinBalances({ convert: true, refetch: true });
   const coinsEndpoint = useExchangeCoinsList();
   const { exchangeType, internalId } = useActiveExchange();
-  // const [hasNonZeroBalance, setHasNonZeroBalance] = useState<boolean>(true);
   const { showModal } = useZModal();
   const showDepositModal = useZRouteModal(ROUTE_MY_BALANCES_DEPOSIT_COIN);
   // Trigger balance update to be sure that balance widget matches coins data
