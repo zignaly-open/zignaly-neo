@@ -22,12 +22,13 @@ import { useConvertMutation } from '../../../../apis/coin/api';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { convertAmountValidation } from './validation';
-import { coinsAllowedSwap } from './index';
+import { allowedDeposits } from '../../../../util/coins';
 
 function SwapCoinsForm({
   setStep,
   step,
   selectedCoin,
+  refetchBalance,
   close,
 }: SwapCoinsModalProps) {
   const { t } = useTranslation('swap-coins');
@@ -67,7 +68,7 @@ function SwapCoinsForm({
           />
         ),
       }))
-      .filter((c) => c.available > 0 && coinsAllowedSwap.includes(c.coin));
+      .filter((c) => c.available > 0 && allowedDeposits.spot.includes(c.coin));
   }, [balances]);
 
   const [selectedFromToken, setSelectedFromToken] = useState<CoinsSelect>(
@@ -125,7 +126,7 @@ function SwapCoinsForm({
     if (!allowedCoinsSwapTo) return [];
 
     return allowedCoinsSwapTo
-      .filter((c) => coinsAllowedSwap.includes(c))
+      .filter((c) => allowedDeposits.spot.includes(c))
       .map((c) => ({
         value: c,
         coin: c,
@@ -158,6 +159,7 @@ function SwapCoinsForm({
   if (confirmationData && step === 'confirm') {
     return (
       <SwapCoinsConfirmForm
+        refetchBalance={refetchBalance}
         rate={
           convertPreview?.side === 'buy'
             ? 1 / convertPreview.lastPrice

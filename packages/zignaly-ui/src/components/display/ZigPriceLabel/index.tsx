@@ -59,7 +59,7 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
     >
       {showCoinIcon && (
         <Box mr={"10px"} mt={"5px"}>
-          <ZigCoinIcon size={"medium"} coin={coin || "USDT"} id={id && `${id}-coin-icon`}/>
+          <ZigCoinIcon size={"medium"} coin={coin || "USDT"} id={id && `${id}-coin-icon`} />
         </Box>
       )}
       {showApproximate &&
@@ -89,7 +89,9 @@ const ZigPriceLabel: React.FC<ZigPriceLabelProps> = ({
       {coin && !usd && (
         <>
           {" "}
-          <ZigTypography id={id && `${id}-coin`} {...withDefaultPropsCoin}>{coin}</ZigTypography>
+          <ZigTypography id={id && `${id}-coin`} {...withDefaultPropsCoin}>
+            {coin}
+          </ZigTypography>
         </>
       )}
     </ZigTypography>

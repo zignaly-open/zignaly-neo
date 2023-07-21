@@ -68,7 +68,7 @@ export const NavLink = styled.span<
     !notClickable &&
     css`
       &:hover {
-        background: ${theme.palette.neutral600};
+        background: ${theme.backgrounds.socialNetworksTab};
       }
     `}
 
