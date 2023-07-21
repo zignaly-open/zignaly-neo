@@ -9,6 +9,7 @@ export const whitelabel = ((whitelabelConfig &&
   {}) as WhitelabelOverride;
 
 export const isFeatureOn = (feature: Features): boolean =>
+  (feature !== Features.Kyc || whitelabelConfig) &&
   !whitelabel?.disabledFeatures?.includes(feature);
 
 export const maybeOverrideEndpoint = (
