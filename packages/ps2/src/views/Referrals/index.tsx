@@ -32,8 +32,12 @@ import ReferralInviteModal from './components/ReferralInviteModal';
 
 const Referrals: React.FC = () => {
   const { t } = useTranslation(['referrals', 'pages']);
-  const rewards = useReferralRewardsQuery();
-  const history = useReferralHistoryQuery();
+  const rewards = useReferralRewardsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
+  const history = useReferralHistoryQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
   const { refCode } = useCurrentUser();
   const toast = useToast();
   const { showModal } = useZModal();
