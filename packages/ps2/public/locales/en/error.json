@@ -176,6 +176,33 @@
     "login-session-expired": "Session expired, please log in again",
     "XX": "Transaction error. Please try again."
   },
+  "access": {
+    "banned": {
+      "title": "You're banned",
+      "description": "Your naughty actions resulted in a ban. Santa has been informed as well.",
+      "action": "I am so sorry"
+    },
+    "not-verified": {
+      "title": "Verify your account (KYC/KYB)",
+      "description": "Verify your account to start accessing all the services. Process is easy and fast and it will take you approximately 2 minutes.",
+      "action": "Start Verification"
+    },
+    "kyc-pending": {
+      "title": "Verification Pending",
+      "description": "Your account verification is in progress. Please hold on.",
+      "action": "See how it goes"
+    },
+    "frozen": {
+      "title": "Frozen Account",
+      "description": "We are verifying a recent transfer in your account that requires manual approval. As soon as everything has been verified and approved by our team you will be able to manage your account normally.",
+      "action": "OK :("
+    },
+    "kyc-expired": {
+      "title": "Verification (KYC/KYB) Expired",
+      "description": "Your verification (KYC/KYB) has expired and you need to resubmit it to continue accessing all the services.",
+      "action": "Review KYC"
+    }
+  },
   "something-went-wrong": "Something went wrong",
   "404": {
     "title": "Page not found",

@@ -1,0 +1,121 @@
+import { useMemo } from 'react';
+import { UserAccessLevel as Level } from '../../apis/user/types';
+import {
+  useIsAuthenticated,
+  useLogout,
+  useUserAccessLevel,
+} from '../../apis/user/use';
+import { isFeatureOn } from '../../whitelabel';
+import { Features } from '../../whitelabel/type';
+import { useTranslation } from 'react-i18next';
+import AlertModal, {
+  AlertModalProps,
+} from '../../components/ZModal/modals/AlertModal';
+import { useZModal } from '../../components/ZModal/use';
+import { ROUTE_KYC } from '../../routes';
+import { useNavigate } from 'react-router-dom';
+
+const usePerformLevelCheck = (levelThreshold: Level): (() => boolean) => {
+  const isAuthenticated = useIsAuthenticated();
+  const accessLevel = useUserAccessLevel();
+  const { t } = useTranslation(['error']);
+  const { showModal } = useZModal();
+  const logout = useLogout();
+  const navigate = useNavigate();
+
+  const errorLevelMapping = useMemo<
+    Partial<Record<Level, { modal: typeof AlertModal; props: AlertModalProps }>>
+  >(
+    () => ({
+      [Level.Banned]: {
+        modal: AlertModal,
+        props: {
+          title: t('access.banned.title'),
+          okLabel: t('access.banned.action'),
+          description: t('access.banned.description'),
+          okAction: () => logout(),
+        },
+      },
+      [Level.NotVerified]: {
+        modal: AlertModal,
+        props: {
+          title: t('access.not-verified.title'),
+          okLabel: t('access.not-verified.action'),
+          description: t('access.not-verified.description'),
+          okAction: () => navigate(ROUTE_KYC),
+        },
+      },
+      [Level.KycPending]: {
+        modal: AlertModal,
+        props: {
+          title: t('access.kyc-pending.title'),
+          okLabel: t('access.kyc-pending.action'),
+          description: t('access.kyc-pending.description'),
+          okAction: () => navigate(ROUTE_KYC),
+        },
+      },
+      // [Level.NoSubscription]: {
+      //   modal: AlertModal,
+      //   props: {
+      //     title: t('access.banned.title'),
+      //     description: t('access.banned.title'),
+      //     okAction: () =>
+      //       window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
+      //   },
+      // },
+      [Level.Frozen]: {
+        modal: AlertModal,
+        props: {
+          title: t('access.frozen.title'),
+          description: t('access.frozen.title'),
+          okLabel: t('access.frozen.action'),
+        },
+      },
+      [Level.KycExpired]: {
+        modal: AlertModal,
+        props: {
+          title: t('access.kyc-expired.title'),
+          description: t('access.kyc-expired.title'),
+          okAction: () =>
+            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
+        },
+      },
+      [Level.SubscriptionExpired]: {
+        modal: AlertModal,
+        props: {
+          title: t('access.banned.title'),
+          description: t('access.banned.title'),
+          okAction: () =>
+            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
+        },
+      },
+    }),
+    [t, logout],
+  );
+
+  return () => {
+    if (!isFeatureOn(Features.AccessLevels)) return true;
+    for (const l of Object.keys(Level)) {
+      if (!isAuthenticated || !accessLevel) {
+        // Do nothing here
+      } else if (levelThreshold < +l) {
+        // Do nothing, means we do not need so high of a level
+      } else if (accessLevel < +l && errorLevelMapping[l]) {
+        showModal(errorLevelMapping[l].modal, errorLevelMapping[l].props);
+        return false;
+      }
+    }
+    return true;
+  };
+};
+export const useCanLogIn = () => usePerformLevelCheck(Level.Banned);
+
+export const useCanInsertCoupon = () => usePerformLevelCheck(Level.Frozen);
+
+export const useCanDeposit = () => usePerformLevelCheck(Level.Admin);
+
+export const useCanInvestIn = () => usePerformLevelCheck(Level.Admin);
+
+export const useCanInvestOut = () => usePerformLevelCheck(Level.Admin);
+
+export const useCanWithdraw = () => usePerformLevelCheck(Level.Admin);

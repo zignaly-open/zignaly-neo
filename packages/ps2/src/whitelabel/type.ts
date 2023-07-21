@@ -1,4 +1,5 @@
 export enum Features {
+  AccessLevels,
   Rewards,
   Referrals,
   Trader,

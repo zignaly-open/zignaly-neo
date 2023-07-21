@@ -5,12 +5,26 @@ export interface UserState {
   activeExchangeInternalId?: string;
 }
 
+export enum UserAccessLevel {
+  Banned = -100,
+  NotVerified = 100,
+  KycPending = 350,
+  NoSubscription = 375,
+  Frozen = 400,
+  KycExpired = 450,
+  SubscriptionExpired = 475,
+  Normal = 500,
+  Support = 700,
+  Admin = 900,
+}
+
 export type UserData = {
   userId: string;
   firstName: string;
   email: string;
   createdAt: string;
   locale: UserLocale;
+  accessLevel: UserAccessLevel;
   intercomHash: string;
   isTrader?: {
     profit_sharing: boolean;
