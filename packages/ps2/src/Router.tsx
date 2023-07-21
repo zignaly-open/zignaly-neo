@@ -83,7 +83,11 @@ const Router: React.FC = () => (
           element={<MyBalancesDeposit bgRoute={Routes.ROUTE_MY_BALANCES} />}
         />
       </Route>
-      <Route path={Routes.ROUTE_KYC} element={<Kyc />}></Route>
+
+      {isFeatureOn(Features.Kyc) && (
+        <Route path={Routes.ROUTE_KYC} element={<Kyc />}></Route>
+      )}
+
       <Route
         path={Routes.ROUTE_MY_BALANCES_TRANSACTIONS}
         element={outleted(<MyBalances />)}
