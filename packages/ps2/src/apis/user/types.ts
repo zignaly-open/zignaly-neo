@@ -105,8 +105,13 @@ export type SessionResponse = {
 };
 
 export type KycResponse = {
-  status?: string;
+  status?: 'rejected' | 'pending' | 'completed';
   reason?: string;
+  canBeRetried?: boolean;
+};
+
+export type KycLinkResponse = {
+  link: string;
 };
 
 export type UserLocale = string;

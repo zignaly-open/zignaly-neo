@@ -45,7 +45,6 @@ const Kyc: React.FC = () => {
           to: '100k',
           coin: 'USDT',
         })}
-        status={'failed'}
         items={t(`requirements-level-1`, { returnObjects: true })}
         title={t(`name-level-1`)}
         icon={<SilverIcon />}

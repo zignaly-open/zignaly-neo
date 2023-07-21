@@ -5,10 +5,11 @@ import DataUsageTwoToneIcon from '@mui/icons-material/DataUsageTwoTone';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
 import { Loader, ZigButton, ZigTypography } from '@zignaly-open/ui';
-import { useKycStatusQuery } from '../../../apis/user/api';
+import { useKycStatusQuery, useLazyKycLinkQuery } from '../../../apis/user/api';
 import { useTranslation } from 'react-i18next';
 import { UlList } from '../../Referrals/styles';
 import { useZConfirm } from '../../../components/ZModal/use';
+import { OpenInNew } from '@mui/icons-material';
 
 const largeIconStyle = {
   height: '16px',
@@ -20,7 +21,6 @@ const largeIconStyle = {
 const KycBox: React.FC<{
   name: string;
   labelColor: string;
-  status?: 'failed' | 'pending' | 'completed';
   balanceRestriction?: string;
   title: string;
   disabled?: boolean;
@@ -29,7 +29,6 @@ const KycBox: React.FC<{
 }> = ({
   icon,
   name,
-  status,
   balanceRestriction,
   items,
   labelColor,
@@ -37,6 +36,8 @@ const KycBox: React.FC<{
   disabled,
 }) => {
   // n+1 queries? never heard about him, is he a rapper?
+  const [getCerificationLinkUrl, { isLoading: loadingVerification }] =
+    useLazyKycLinkQuery();
   const { isLoading, data } = useKycStatusQuery(name);
   const { t } = useTranslation(['kyc']);
   const theme = useTheme();
@@ -49,16 +50,24 @@ const KycBox: React.FC<{
     color: theme.palette.backgrounds.investorsIcon,
   };
 
-  // TODO
-  const kycLink = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ';
-
-  const openKyc = () => {
-    showModal({
-      title: t('modal.title'),
-      description: t('modal.description'),
-      yesLabel: t('modal.ok'),
-      yesAction: () => window.open(kycLink),
-    });
+  const openKyc = async () => {
+    await getCerificationLinkUrl(name)
+      .unwrap()
+      .then(({ link: kycLink }) =>
+        showModal({
+          title: t('modal.title'),
+          description: t('modal.description'),
+          yesLabel: (
+            <>
+              {t('modal.ok')}{' '}
+              <OpenInNew
+                sx={{ marginLeft: '5px', width: '17.33px', height: '17.33px' }}
+              />
+            </>
+          ),
+          yesAction: () => window.open(kycLink),
+        }),
+      );
   };
 
   return (
@@ -109,7 +118,7 @@ const KycBox: React.FC<{
             </Box>
           ) : (
             <>
-              {status === 'completed' && (
+              {data?.status === 'completed' && (
                 <ZigTypography
                   sx={{ mt: 2 }}
                   component={'p'}
@@ -122,7 +131,7 @@ const KycBox: React.FC<{
                 </ZigTypography>
               )}
 
-              {status === 'pending' && (
+              {data?.status === 'pending' && (
                 <ZigTypography
                   sx={{ mt: 2 }}
                   component={'p'}
@@ -144,7 +153,7 @@ const KycBox: React.FC<{
                 </ZigTypography>
               )}
 
-              {status === 'failed' && (
+              {data?.status === 'rejected' && (
                 <ZigTypography
                   component={'p'}
                   sx={{ mt: 2 }}
@@ -162,15 +171,19 @@ const KycBox: React.FC<{
                 </ZigTypography>
               )}
 
-              <ZigButton
-                sx={{ mt: 2.5 }}
-                variant={'contained'}
-                disabled={disabled}
-                onClick={openKyc}
-                size={'large'}
-              >
-                {t('verify')}
-              </ZigButton>
+              {((!!data?.canBeRetried && data?.status === 'rejected') ||
+                !data?.status) && (
+                <ZigButton
+                  sx={{ mt: 2.5 }}
+                  variant={'contained'}
+                  disabled={disabled}
+                  loading={loadingVerification}
+                  onClick={openKyc}
+                  size={'large'}
+                >
+                  {t('verify')}
+                </ZigButton>
+              )}
             </>
           )}
         </Box>

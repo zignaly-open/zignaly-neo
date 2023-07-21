@@ -8,7 +8,7 @@
   "balance-range-up-to": "Over {{to}} {{coin}}",
   "name-level-1": "Silver Level",
   "name-level-2": "Gold Level",
-  "progress-explainer": "We're working tirelessly on processing the verification progress, please hold tight",
+  "progress-explainer": "We're working tirelessly on it, please hold tight",
   "status": {
     "completed": "Completed",
     "pending": "Pending",
@@ -28,8 +28,8 @@
     "questionnaire": "Questionnaire"
   },
   "modal": {
-    "title": "Verify your account",
-    "description": "You will be redirected to a 3rd-party KYC service, yay or nay",
-    "ok": "Proceed"
+    "title": "Start your account verification",
+    "description": "Start the verification process clicking on the button. You will be redirected to an external page to complete the process.",
+    "ok": "Get Verified"
   }
 }
