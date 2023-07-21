@@ -116,7 +116,7 @@ export const NavList = styled.div`
   > *:first-child {
     margin-top: 11px;
     &:last-child {
-      margin-top: 11px;
+      margin-top: 6px;
     }
   }
   > *:last-child {
