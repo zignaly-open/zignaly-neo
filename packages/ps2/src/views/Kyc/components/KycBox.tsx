@@ -4,12 +4,16 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import DataUsageTwoToneIcon from '@mui/icons-material/DataUsageTwoTone';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
 import InfoOutlinedIcon from '@mui/icons-material/InfoOutlined';
-import { Loader, ZigButton, ZigTypography } from '@zignaly-open/ui';
+import {
+  Loader,
+  ZigArrowOutIcon,
+  ZigButton,
+  ZigTypography,
+} from '@zignaly-open/ui';
 import { useKycStatusQuery, useLazyKycLinkQuery } from '../../../apis/user/api';
 import { useTranslation } from 'react-i18next';
 import { UlList } from '../../Referrals/styles';
 import { useZConfirm } from '../../../components/ZModal/use';
-import { OpenInNew } from '@mui/icons-material';
 
 const largeIconStyle = {
   height: '16px',
@@ -60,8 +64,10 @@ const KycBox: React.FC<{
           yesLabel: (
             <>
               {t('modal.ok')}{' '}
-              <OpenInNew
-                sx={{ marginLeft: '5px', width: '17.33px', height: '17.33px' }}
+              <ZigArrowOutIcon
+                width={'9px'}
+                height={'9px'}
+                style={{ marginBottom: '3px', marginLeft: '5px' }}
               />
             </>
           ),
@@ -193,7 +199,9 @@ const KycBox: React.FC<{
           <UlList>
             {Object.entries(items).map(([k, v]) => (
               <li style={{ marginTop: 4, marginBottom: 4 }} key={k}>
-                {v}
+                <ZigTypography fontWeight={500} color={'neutral100'}>
+                  {v}
+                </ZigTypography>
               </li>
             ))}
           </UlList>
