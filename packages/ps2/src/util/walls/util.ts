@@ -115,10 +115,11 @@ export const useCanLogIn = () => usePerformLevelCheck(Level.Banned);
 
 export const useCanInsertCoupon = () => usePerformLevelCheck(Level.Frozen);
 
-export const useCanDeposit = () => usePerformLevelCheck(Level.Admin);
+export const useCanDeposit = () => usePerformLevelCheck(Level.Normal);
 
-export const useCanInvestIn = () => usePerformLevelCheck(Level.Admin);
+export const useCanInvestIn = () => usePerformLevelCheck(Level.Normal);
 
-export const useCanInvestOut = () => usePerformLevelCheck(Level.Admin);
+export const useCanInvestOut = () => usePerformLevelCheck(Level.KycExpired);
 
-export const useCanWithdraw = () => usePerformLevelCheck(Level.Admin);
+export const useCanWithdraw = () =>
+  usePerformLevelCheck(Level.SubscriptionExpired);

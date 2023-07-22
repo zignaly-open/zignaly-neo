@@ -6,7 +6,7 @@ export interface UserState {
 }
 
 export enum UserAccessLevel {
-  Banned = -100, // -
+  Banned = -100,
   NotVerified = 100, // -
   KycPending = 350, // -
   NoSubscription = 375, // -
