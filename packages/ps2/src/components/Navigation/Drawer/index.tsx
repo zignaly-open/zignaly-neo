@@ -52,7 +52,7 @@ import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
 import { DropdownExchangeAccount } from './atoms';
-import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
+import { useOpenDepositModal } from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { isFeatureOn } from '../../../whitelabel';
 import { Features } from '../../../whitelabel/type';
 
@@ -72,6 +72,7 @@ const ZigDrawer = () => {
   const { showModal } = useZModal();
   const service = useFirstOwnedService();
   const { exchanges, email, imageUrl } = useCurrentUser();
+  const openDepositModal = useOpenDepositModal();
   const changeLocale = useChangeLocale();
 
   const languageMap = supportedLanguages
@@ -276,7 +277,7 @@ const ZigDrawer = () => {
                     startIcon={<ZigPlusIcon width={10} height={10} />}
                     sx={{ fontWeight: 600, mb: 1 }}
                     variant={'contained'}
-                    onClick={() => showModal(DepositModal)}
+                    onClick={() => openDepositModal()}
                   >
                     {t('action:deposit')}
                   </ZigButton>

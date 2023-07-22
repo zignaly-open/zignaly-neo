@@ -15,7 +15,9 @@ import { useZModal } from '../../components/ZModal/use';
 import { ROUTE_KYC } from '../../routes';
 import { useNavigate } from 'react-router-dom';
 
-const usePerformLevelCheck = (levelThreshold: Level): (() => boolean) => {
+const usePerformLevelCheck = (
+  levelThreshold: Level,
+): ((onlyCheck?: boolean) => boolean) => {
   const isAuthenticated = useIsAuthenticated();
   const accessLevel = useUserAccessLevel();
   const { t } = useTranslation(['error']);
@@ -67,7 +69,7 @@ const usePerformLevelCheck = (levelThreshold: Level): (() => boolean) => {
         modal: AlertModal,
         props: {
           title: t('access.frozen.title'),
-          description: t('access.frozen.title'),
+          description: t('access.frozen.description'),
           okLabel: t('access.frozen.action'),
         },
       },
@@ -75,16 +77,16 @@ const usePerformLevelCheck = (levelThreshold: Level): (() => boolean) => {
         modal: AlertModal,
         props: {
           title: t('access.kyc-expired.title'),
-          description: t('access.kyc-expired.title'),
-          okAction: () =>
-            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
+          description: t('access.kyc-expired.description'),
+          okLabel: t('access.kyc-expired.action'),
+          okAction: () => navigate(ROUTE_KYC),
         },
       },
       [Level.SubscriptionExpired]: {
         modal: AlertModal,
         props: {
           title: t('access.banned.title'),
-          description: t('access.banned.title'),
+          description: t('access.banned.description'),
           okAction: () =>
             window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
         },
@@ -93,7 +95,7 @@ const usePerformLevelCheck = (levelThreshold: Level): (() => boolean) => {
     [t, logout],
   );
 
-  return () => {
+  return (onlyCheck = false) => {
     if (!isFeatureOn(Features.AccessLevels)) return true;
     for (const l of Object.keys(Level)) {
       if (!isAuthenticated || !accessLevel) {
@@ -101,7 +103,8 @@ const usePerformLevelCheck = (levelThreshold: Level): (() => boolean) => {
       } else if (levelThreshold < +l) {
         // Do nothing, means we do not need so high of a level
       } else if (accessLevel < +l && errorLevelMapping[l]) {
-        showModal(errorLevelMapping[l].modal, errorLevelMapping[l].props);
+        !onlyCheck &&
+          showModal(errorLevelMapping[l].modal, errorLevelMapping[l].props);
         return false;
       }
     }

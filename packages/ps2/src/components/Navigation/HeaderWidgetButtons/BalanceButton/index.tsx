@@ -13,14 +13,14 @@ import { useBalanceQuery } from 'apis/user/api';
 import { useActiveExchange } from 'apis/user/use';
 import { useInvestmentsQuery } from 'apis/investment/api';
 import { BalanceStatus } from './types';
-import { useZModal } from 'components/ZModal/use';
-import DepositModal from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
+import { useOpenDepositModal } from 'views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import theme from '../../../../theme';
 import { ButtonWrapper } from './styles';
 
 const BalanceButton = () => {
   const { t } = useTranslation('common');
   const { internalId } = useActiveExchange();
+  const openDepositModal = useOpenDepositModal();
   const { data: investments } = useInvestmentsQuery(internalId);
   const { data: balance } = useBalanceQuery(
     {
@@ -30,7 +30,6 @@ const BalanceButton = () => {
       pollingInterval: 60 * 1000,
     },
   );
-  const { showModal } = useZModal();
 
   const investedAmount = useMemo(() => {
     return investments?.reduce(
@@ -56,7 +55,7 @@ const BalanceButton = () => {
 
   const linkWrap = (v: React.ReactElement) =>
     balanceStatus === BalanceStatus.NoFunds ? (
-      <div onClick={() => showModal(DepositModal)}>{v}</div>
+      <div onClick={() => openDepositModal()}>{v}</div>
     ) : (
       <Link
         to={generatePath(

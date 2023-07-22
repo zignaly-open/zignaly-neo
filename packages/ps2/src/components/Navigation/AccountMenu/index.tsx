@@ -38,7 +38,7 @@ import { getImageOfAccount } from '../../../util/images';
 import { useZModal } from 'components/ZModal/use';
 import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
-import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
+import { useOpenDepositModal } from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { ReactComponent as GiftIcon } from '../../../images/tab-rewards.svg';
 import { ReactComponent as InviteIcon } from '../../../images/tab-referrals.svg';
 import { usePrefetchTranslation } from '../../../util/i18nextHelpers';
@@ -56,15 +56,12 @@ function AccountMenu(): React.ReactElement | null {
   const { exchanges } = useCurrentUser();
   const selectExchange = useSelectExchange();
   const { showModal } = useZModal();
+  const openDepositModal = useOpenDepositModal();
   const md = useMediaQuery(theme.breakpoints.up('sm'));
   const dropDownRef = useRef<ZigDropdownHandleType>(null);
   const onClose = useCallback(() => {
     dropDownRef.current?.closeDropDown();
   }, [dropDownRef]);
-
-  const setActiveExchange = (exchangeInternalId: string) => {
-    selectExchange(exchangeInternalId);
-  };
 
   if (!isAuthenticated) {
     return (
@@ -128,7 +125,7 @@ function AccountMenu(): React.ReactElement | null {
           customStyle: `background: ${theme.palette.neutral750}; margin-top: -11px;`,
           children: (exchanges?.length > 1 ? exchanges : []).map(
             (exchange, index) => ({
-              onClick: () => setActiveExchange(exchange.internalId),
+              onClick: () => selectExchange(exchange.internalId),
               id: `account-switcher-dropdown__account-${index}`,
               label: (
                 <>
@@ -192,7 +189,7 @@ function AccountMenu(): React.ReactElement | null {
               onClick={() => {
                 // fun fact: without onClose react-select acts funky
                 onClose();
-                showModal(DepositModal);
+                openDepositModal();
               }}
             >
               {t('action:deposit')}
