@@ -3,11 +3,13 @@ import EditInvestmentForm from '../forms/EditInvestmentForm';
 import { ChangeViewFn, EditInvestmentViews } from '../types';
 import InvestorDetails from './InvestorDetails';
 import PendingTransactions from './PendingTransactions';
+import { useCanInvestOut } from '../../../../../util/walls/util';
 
 const EditInvestment: React.FC<{
   setView: ChangeViewFn;
   close: () => void;
 }> = ({ setView, close }) => {
+  const canInvestOut = useCanInvestOut();
   return (
     <>
       <InvestorDetails prefixId={'edit-investment-modal'} />
@@ -19,7 +21,7 @@ const EditInvestment: React.FC<{
         close={close}
         setView={setView}
         onClickWithdrawInvestment={() =>
-          setView(EditInvestmentViews.WithdrawInvestment)
+          canInvestOut() && setView(EditInvestmentViews.WithdrawInvestment)
         }
       />
     </>

@@ -182,15 +182,15 @@
       "description": "Your naughty actions resulted in a ban. Santa has been informed as well.",
       "action": "I am so sorry"
     },
-    "not-verified": {
+    "mail-not-verified": {
+      "title": "Verify your email address",
+      "description": "Before you're able to log in, you will need to verify your email address",
+      "action": "Got it"
+    },
+    "kyc-pending": {
       "title": "Verify your account (KYC/KYB)",
       "description": "Verify your account to start accessing all the services. Process is easy and fast and it will take you approximately 2 minutes.",
       "action": "Start Verification"
-    },
-    "kyc-pending": {
-      "title": "Verification Pending",
-      "description": "Your account verification is in progress. Please hold on.",
-      "action": "See how it goes"
     },
     "frozen": {
       "title": "Frozen Account",

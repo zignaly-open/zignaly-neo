@@ -20,7 +20,7 @@ import { ServiceName } from '../ServiceName';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { useActiveExchange } from '../../../../apis/user/use';
 import { useCoinBalances } from '../../../../apis/coin/use';
-import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
+import { useZRouteModal } from '../../../../components/ZModal/use';
 import { differenceInDays } from 'date-fns';
 import { getColorForNumber } from '../../../../util/numbers';
 import InvestingLayout from '../InvestingSteps/InvestingLayout';
@@ -28,7 +28,7 @@ import {
   ROUTE_DASHBOARD_EDIT_INVESTMENT,
   ROUTE_TRADING_SERVICE,
 } from '../../../../routes';
-import DepositModal from '../ManageInvestmentModals/DepositModal';
+import { useOpenDepositModal } from '../ManageInvestmentModals/DepositModal';
 import { Box, useTheme } from '@mui/material';
 import ZigChartMiniSuspensed from '../../../../components/ZigChartMiniSuspensed';
 import { generatePath, Link } from 'react-router-dom';
@@ -36,9 +36,9 @@ import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const MyDashboard: React.FC = () => {
   const { t } = useTranslation(['my-dashboard', 'table']);
-  const { showModal } = useZModal();
   const theme = useTheme();
   const exchange = useActiveExchange();
+  const openDepositModal = useOpenDepositModal();
   const investmentsEndpoint = useInvestments(exchange?.internalId, {
     skip: !exchange?.internalId,
     // Force refresh on mount otherwise it will use cached value from balance button
@@ -241,7 +241,7 @@ const MyDashboard: React.FC = () => {
                     startIcon={<ZigPlusIcon width={10} height={10} />}
                     sx={{ fontWeight: 600, mb: 1 }}
                     variant={'contained'}
-                    onClick={() => showModal(DepositModal)}
+                    onClick={() => openDepositModal()}
                   >
                     {t('action:deposit')}
                   </ZigButton>

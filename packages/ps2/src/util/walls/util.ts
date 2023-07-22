@@ -41,10 +41,10 @@ const usePerformLevelCheck = (
       [Level.NotVerified]: {
         modal: AlertModal,
         props: {
-          title: t('access.not-verified.title'),
-          okLabel: t('access.not-verified.action'),
-          description: t('access.not-verified.description'),
-          okAction: () => navigate(ROUTE_KYC),
+          title: t('access.mail-not-verified.title'),
+          okLabel: t('access.mail-not-verified.action'),
+          description: t('access.mail-not-verified.description'),
+          okAction: () => logout(),
         },
       },
       [Level.KycPending]: {
@@ -82,15 +82,15 @@ const usePerformLevelCheck = (
           okAction: () => navigate(ROUTE_KYC),
         },
       },
-      [Level.SubscriptionExpired]: {
-        modal: AlertModal,
-        props: {
-          title: t('access.banned.title'),
-          description: t('access.banned.description'),
-          okAction: () =>
-            window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
-        },
-      },
+      // [Level.SubscriptionExpired]: {
+      //   modal: AlertModal,
+      //   props: {
+      //     title: t('access.banned.title'),
+      //     description: t('access.banned.description'),
+      //     okAction: () =>
+      //       window.open('https://www.youtube.com/watch?v=dQw4w9WgXcQ'),
+      //   },
+      // },
     }),
     [t, logout],
   );

@@ -26,7 +26,7 @@ function AlertModal({
   const { t } = useTranslation('action');
 
   return (
-    <ZModal allowUnauth {...props} close={close} title={title}>
+    <ZModal wide allowUnauth {...props} close={close} title={title}>
       <div>
         {!!description && <ZigTypography>{description}</ZigTypography>}
 

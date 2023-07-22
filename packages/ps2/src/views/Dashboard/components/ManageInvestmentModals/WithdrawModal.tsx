@@ -3,17 +3,21 @@ import { useTranslation } from 'react-i18next';
 import { DialogProps } from '@mui/material/Dialog';
 import ZModal from '../../../../components/ZModal';
 import WithdrawForm from './forms/WithdrawForm';
+import { useZModal } from '../../../../components/ZModal/use';
+import { useCanWithdraw } from '../../../../util/walls/util';
 
 export type Step = '' | 'confirm' | 'success';
+
+type WithdrawModalProps = {
+  close: () => void;
+  selectedCoin: string;
+};
 
 function WithdrawModal({
   close,
   selectedCoin,
   ...props
-}: {
-  close: () => void;
-  selectedCoin: string;
-} & DialogProps): React.ReactElement {
+}: WithdrawModalProps & DialogProps): React.ReactElement {
   const [step, setStep] = useState<Step>('');
   const { t } = useTranslation(['withdraw-crypto']);
 
@@ -50,4 +54,17 @@ function WithdrawModal({
 
 WithdrawModal.trackId = 'withdraw';
 
-export default WithdrawModal;
+export const useOpenWithdrawModal = (): ((
+  props?: Partial<WithdrawModalProps>,
+) => void) => {
+  const checkCanWithdraw = useCanWithdraw();
+  const { showModal } = useZModal({ disableAutoDestroy: true });
+  return (props) => {
+    if (checkCanWithdraw()) {
+      showModal(WithdrawModal, props);
+    }
+  };
+};
+
+// No default export to enforce the usage of the hook
+// export default WithdrawModal;
