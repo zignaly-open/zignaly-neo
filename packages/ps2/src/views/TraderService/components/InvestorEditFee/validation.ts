@@ -4,6 +4,7 @@ import { number } from 'yup';
 export const ServiceFeeEditModalValidation = yup.object({
   value: number()
     .typeError('investors:change-fee-modal.validate-must-be-between')
+    .integer('investors:change-fee-modal.validate-must-be-between')
     .required('investors:change-fee-modal.validate-must-be-between')
     .test(
       'int',
