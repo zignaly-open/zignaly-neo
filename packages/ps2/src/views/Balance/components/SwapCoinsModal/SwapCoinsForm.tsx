@@ -117,7 +117,7 @@ function SwapCoinsForm({
     if (amount) {
       trigger('fromCoinAmount');
     }
-  }, [convertPreview, isFetchingConvertPreview]);
+  }, [convertPreview, isFetchingConvertPreview, trigger, minAmount]);
 
   const { data: allowedCoinsSwapTo } = useQuoteAssetsCoin(
     selectedFromToken.coin,
