@@ -48,6 +48,7 @@ function EmailVerifyWithdrawModal({
   return (
     <ZModal
       {...props}
+      disableBackdropClose
       allowUnauth
       close={close}
       title={t('auth:email-verify-withdraw-modal.title')}
