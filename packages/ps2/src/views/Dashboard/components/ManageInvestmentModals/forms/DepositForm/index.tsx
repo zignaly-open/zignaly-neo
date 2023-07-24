@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Trans, useTranslation } from 'react-i18next';
 import { ReactComponent as BinanceLogo } from '../../../../../../images/binance.svg';
@@ -62,6 +62,7 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
   const toast = useToast();
   const trackEvent = useTrackEvent();
   const navigate = useNavigate();
+  const [coinParam, setCoinParam] = useState(null);
 
   const { handleSubmit, control, watch, setValue } = useForm<DepositFormData>({
     mode: 'onChange',
@@ -109,10 +110,11 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
     [coins, allowedCoins, exchangeType],
   );
 
-  const { isFetching: loading, data: depositInfo } = useDepositInfo(
-    coin,
-    network,
-  );
+  const {
+    isFetching: loading,
+    data: depositInfo,
+    error,
+  } = useDepositInfo(coinParam, network);
 
   useEffect(() => {
     depositInfo && trackEvent('show-deposit-info');
@@ -131,6 +133,12 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
     } else if (coinOptions?.length === 1) {
       setValue('coin', coinOptions[0].value);
     }
+  }, [coin]);
+
+  useEffect(() => {
+    // Hack to only start refetching after the above useEffect has updated the network
+    // Because switching coin will change the network
+    setCoinParam(coin);
   }, [coin]);
 
   useEffect(() => {
@@ -242,30 +250,41 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
           )}
         </Grid>
 
-        <Grid item xs={12} md={6}>
-          <Controller
-            name='network'
-            control={control}
-            rules={{ required: true }}
-            render={({ field }) => (
-              <ZigSelect
-                id={'deposit-modal__select-network'}
-                menuPosition='fixed'
-                menuShouldBlockScroll
-                menuShouldScrollIntoView={false}
-                label={t('networkSelector.label')}
-                placeholder={t('networkSelector.placeholder')}
-                {...field}
-                options={coinObject?.networks}
+        <Grid item container xs={12}>
+          <Grid item md={6} xs={12}>
+            <Controller
+              name='network'
+              control={control}
+              rules={{ required: true }}
+              render={({ field }) => (
+                <ZigSelect
+                  id={'deposit-modal__select-network'}
+                  menuPosition='fixed'
+                  menuShouldBlockScroll
+                  menuShouldScrollIntoView={false}
+                  label={t('networkSelector.label')}
+                  placeholder={t('networkSelector.placeholder')}
+                  {...field}
+                  options={coinObject?.networks}
+                />
+              )}
+            />
+          </Grid>
+
+          {!!network && (!networkObject?.depositEnable || error) && (
+            <Grid item xs={12}>
+              <ErrorMessage
+                text={
+                  !networkObject?.depositEnable
+                    ? t('no-network')
+                    : t('network-unavailable')
+                }
               />
-            )}
-          />
-          {!!network && !networkObject?.depositEnable && (
-            <ErrorMessage text={t('no-network')} />
+            </Grid>
           )}
         </Grid>
 
-        {!!network && networkObject?.depositEnable && (
+        {!!network && networkObject?.depositEnable && !error && (
           <>
             <Grid item xs={12}>
               <ZigCopyText
@@ -373,7 +392,11 @@ function DepositForm({ allowedCoins, selectedCoin, close }: DepositModalProps) {
           justifyContent='space-between'
           alignItems='center'
           mt={
-            !!network && networkObject?.depositEnable && !depositInfo?.tag
+            // Hack to fit without scrolling
+            !!network &&
+            networkObject?.depositEnable &&
+            !error &&
+            !depositInfo?.tag
               ? '-28px'
               : 0
           }
