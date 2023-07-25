@@ -16,7 +16,7 @@ export type SliderLabels = {
   labelsAbove?: boolean;
 };
 
-export type ZigSliderProps = SliderProps & {
+export type ZigSliderProps = Omit<SliderProps, "valueLabelFormat"> & {
   prefixId?: string;
   labels?: SliderLabels;
   /** Format slider value, by default it will add a % sign if max is 100. Set to null to always show the number only. */

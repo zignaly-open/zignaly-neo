@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { FieldErrorsImpl, useForm } from 'react-hook-form';
+import { Control, FieldErrorsImpl, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MinBalanceModalProps } from './types';
@@ -72,6 +72,8 @@ function MinBalanceModal({ close, serviceId, ...props }: MinBalanceModalProps) {
           label={t('common:amount') + ':'}
           placeholder={t('minBalanceModal.placeholder')}
           labelBalance={t('minBalanceModal.labelBalance')}
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
           control={control}
           name={'amountValue'}
           fullWidth={true}
