@@ -22,7 +22,11 @@ const kycConfig: Record<'kyc' | 'kyb', KycDefinitionConfig[]> = {
       restriction: silverRestriction,
       requirements: `requirements-level-1`,
       label: `name-level-1`,
-      name: 'Silver',
+      // name: 'Silver',
+      // TODO: make this dynamic or smth
+      // this should NOT be hardcoded, even as a constant
+      // @NataliaAvila-PM
+      name: 'QUA_individual_sandbox',
     },
     {
       color: '#FFD232',
@@ -30,7 +34,11 @@ const kycConfig: Record<'kyc' | 'kyb', KycDefinitionConfig[]> = {
       restriction: goldRestriction,
       requirements: `requirements-level-2`,
       label: `name-level-2`,
-      name: 'Gold',
+      // name: 'Gold',
+      // TODO: make this dynamic or smth
+      // this should NOT be hardcoded, even as a constant
+      // @NataliaAvila-PM
+      name: 'QUA_individual_sandbox',
     },
   ],
   kyb: [
@@ -40,7 +48,11 @@ const kycConfig: Record<'kyc' | 'kyb', KycDefinitionConfig[]> = {
       restriction: silverRestriction,
       requirements: `requirements-level-1-corp`,
       label: `name-level-1`,
-      name: 'Silver_Corporate',
+      // name: 'Silver_Corporate',
+      // TODO: make this dynamic or smth
+      // this should NOT be hardcoded, even as a constant
+      // @NataliaAvila-PM
+      name: 'QUA_individual_sandbox',
     },
     {
       color: '#FFD232',
@@ -48,7 +60,11 @@ const kycConfig: Record<'kyc' | 'kyb', KycDefinitionConfig[]> = {
       restriction: goldRestriction,
       requirements: `requirements-level-2-corp`,
       label: `name-level-2`,
-      name: 'Gold_Corporate',
+      // name: 'Gold_Corporate',
+      // TODO: make this dynamic or smth
+      // this should NOT be hardcoded, even as a constant
+      // @NataliaAvila-PM
+      name: 'QUA_individual_sandbox',
     },
   ],
 };

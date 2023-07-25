@@ -65,12 +65,7 @@ const Kyc: React.FC = () => {
           title={t(c.label)}
           key={c.name}
           icon={c.icon}
-          level={
-            // TODO: make this dynamic or smth
-            // this should NOT be hardcoded, even as a constant
-            // @NataliaAvila-PM
-            'QUA_individual_sandbox'
-          }
+          level={c.name}
         />
       )) || false}
     </PageContainer>

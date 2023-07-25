@@ -82,7 +82,7 @@ const KycBox: React.FC<{
       );
   };
 
-  const disabled = previous?.status !== 'completed';
+  const disabled = requiresLevel && previous?.status !== 'completed';
   return (
     <Grid
       container
