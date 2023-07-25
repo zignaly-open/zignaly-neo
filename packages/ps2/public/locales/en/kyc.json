@@ -5,10 +5,14 @@
   "description-explainer": "Verification only takes 1-2 minutes.",
   "balance-limit": "Balance Limit:",
   "balance-range-from-to": "{{from}} - {{to}} {{coin}}",
-  "balance-range-up-to": "Over {{to}} {{coin}}",
+  "balance-range-from": "Over {{from}} {{coin}}",
   "name-level-1": "Silver Level",
   "name-level-2": "Gold Level",
   "progress-explainer": "We're working tirelessly on it, please hold tight",
+  "tabs": {
+    "kyc": "KYC",
+    "kyb": "KYB"
+  },
   "status": {
     "completed": "Completed",
     "pending": "Pending",

@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import {
   PageContainer,
+  ZigTab,
+  ZigTabs,
   ZigTypography,
-  // ZigTypography,
 } from '@zignaly-open/ui';
-import { ReactComponent as SilverIcon } from '../../images/kyc/silver.svg';
-import { ReactComponent as GoldIcon } from '../../images/kyc/gold.svg';
 import { Box } from '@mui/material';
 import KycBox from './components/KycBox';
+import kycConfig from './kycDefinitions';
 
 const Kyc: React.FC = () => {
   const { t } = useTranslation(['kyc', 'pages']);
   useTitle(t('pages:kyc'));
+  const [tab, setTab] = useState<'kyc' | 'kyb'>('kyc');
+
   return (
     <PageContainer style={{ maxWidth: '615px' }}>
       <Box
@@ -38,41 +40,38 @@ const Kyc: React.FC = () => {
         </ZigTypography>
       </Box>
 
-      <KycBox
-        labelColor={'#fff'}
-        balanceRestriction={t('balance-range-from-to', {
-          from: '0',
-          to: '100k',
-          coin: 'USDT',
-        })}
-        items={t(`requirements-level-1`, { returnObjects: true })}
-        title={t(`name-level-1`)}
-        icon={<SilverIcon />}
-        name={
-          // TODO: make this dynamic or smth
-          // this should NOT be hardcoded, even as a constant
-          // @NataliaAvila-PM
-          'QUA_individual_sandbox'
-        }
-      />
-
-      <KycBox
-        labelColor={'#FFD232'}
-        balanceRestriction={t('balance-range-up-to', {
-          to: '100k',
-          coin: 'USDT',
-        })}
-        disabled
-        icon={<GoldIcon />}
-        items={t(`requirements-level-2`, { returnObjects: true })}
-        title={t(`name-level-2`)}
-        name={
-          // TODO: make this dynamic or smth
-          // this should NOT be hardcoded, even as a constant
-          // @NataliaAvila-PM
-          'QUA_individual_sandbox'
-        }
-      />
+      <ZigTabs
+        sx={{
+          mt: 0,
+          mb: 4,
+          ml: 'auto',
+          mr: 'auto',
+        }}
+        onChange={(_, newValue) => setTab(newValue)}
+        value={tab}
+      >
+        <ZigTab label={t('tabs.kyc')} value={'kyc'} />
+        <ZigTab label={t('tabs.kyb')} value={'kyb'} />
+      </ZigTabs>
+      {kycConfig[tab]?.map((c) => (
+        <KycBox
+          labelColor={c.color}
+          balanceRestriction={t(
+            `balance-range-from${c.restriction.to ? '-to' : ''}`,
+            c.restriction,
+          )}
+          items={t(c.requirements, { returnObjects: true })}
+          title={t(c.label)}
+          key={c.name}
+          icon={c.icon}
+          name={
+            // TODO: make this dynamic or smth
+            // this should NOT be hardcoded, even as a constant
+            // @NataliaAvila-PM
+            'QUA_individual_sandbox'
+          }
+        />
+      )) || false}
     </PageContainer>
   );
 };
