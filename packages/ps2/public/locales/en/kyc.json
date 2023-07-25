@@ -19,12 +19,12 @@
     "failed": "Failed"
   },
   "requirements-level-1": {
-    "identity": "Identify Document",
+    "identity": "Identity Document",
     "phone-and-mail": "Phone and Email Verification",
     "selfie": "Selfie/Liveness Verification"
   },
   "requirements-level-2": {
-    "identity": "Identify Document",
+    "identity": "Identity Document",
     "identity-2": "Secondary Identification Document",
     "phone-and-mail": "Phone and Email Verification",
     "selfie": "Selfie/Liveness Verification",
