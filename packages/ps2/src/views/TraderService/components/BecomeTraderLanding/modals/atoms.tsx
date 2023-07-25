@@ -20,7 +20,8 @@ export const SuccessFieldWrapper = styled(Box)`
 
       input {
         text-align: center;
-        margin-left: 22px;
+        margin-left: 18px;
+        width: 100%;
       }
 
       .MuiTypography-root,
