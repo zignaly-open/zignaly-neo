@@ -25,7 +25,7 @@ const TraderCard = ({
       gap='12px'
       padding='42px 32px 30px'
     >
-      {traderBoost && (
+      {traderBoost > 1 && (
         <CommissionBoostChip>
           <ServiceBoostChip boost={traderBoost} />
         </CommissionBoostChip>
