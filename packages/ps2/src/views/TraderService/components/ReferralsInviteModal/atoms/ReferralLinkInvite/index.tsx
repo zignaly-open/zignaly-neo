@@ -5,6 +5,8 @@ import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
 import { useToast } from 'util/hooks/useToast';
 import copy from 'copy-to-clipboard';
+import { generatePath } from 'react-router-dom';
+import { ROUTE_TRADING_SERVICE } from 'routes';
 
 const ReferralLinkInvite = ({
   serviceId,
@@ -15,7 +17,13 @@ const ReferralLinkInvite = ({
 }) => {
   const toast = useToast();
   const { t } = useTranslation(['referrals-trader', 'service', 'action']);
-  const url = `https://zignaly.com/app/profit-sharing/${serviceId}?=${referralCode}`;
+  const url = `https://zignaly.com/app${
+    (generatePath(ROUTE_TRADING_SERVICE, {
+      serviceId: serviceId,
+    }),
+    serviceId)
+  }?=${referralCode}`;
+
   return (
     <>
       <InviteBox>
@@ -41,10 +49,6 @@ const ReferralLinkInvite = ({
         }}
         id='referrals-invite-modal__copy-link'
         onClick={() => {
-          // trackClick({
-          //   userId,
-          //   ctaId: 'deposit-modal__deposit-address',
-          // });
           copy(url);
           toast.success(t('copied', { ns: 'action' }));
         }}

@@ -1,11 +1,12 @@
+import { ZIGNALY_PROFIT_FEE } from 'util/constants';
+
 export const MAX_FEES_AMOUNT = 100000;
-const ZIGNALY_DEFAULT_COMMISSION = 5;
 
 export const getBoostedCommissionPct = (
   baseCommission: number,
   boost: number,
   traderCommission = 0,
-  zignalyCommission = ZIGNALY_DEFAULT_COMMISSION,
+  zignalyCommission = ZIGNALY_PROFIT_FEE,
 ) => {
   const traderBoost = traderCommission / zignalyCommission;
   const boostedCommission = baseCommission * boost;

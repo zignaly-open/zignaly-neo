@@ -5,7 +5,7 @@ import { styled } from '@mui/system';
 export const TooltipIcon = styled(InfoOutlined)`
   width: 12px;
   height: 12px;
-  color: #65647e;
+  color: ${({ theme }) => theme.palette.backgrounds.investorsIcon};
   margin: 0 0 5px 4px;
 `;
 

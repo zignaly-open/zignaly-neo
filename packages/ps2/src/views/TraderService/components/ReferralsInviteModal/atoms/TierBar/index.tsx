@@ -64,10 +64,6 @@ const TierBar = ({
   const [layer1, layer2, layer3] = layers;
   const layersCount = layers.filter((l) => l.value > 0).length;
 
-  // Layers debug
-  // console.log(`\n---\nTier ${tier.id}:`);
-  // console.table(layers);
-
   return (
     <AnimatedContainer>
       {referral.tierLevelId === tier.id && <UserRate />}
@@ -104,51 +100,35 @@ const TierBar = ({
           )}
           {showArrow && <TierArrow />}
         </TierBarContainer>
-        {layer2.value > 0 && (
-          <>
-            <TierBarContainer
-              opacity={opacity}
-              width={width}
-              height={layer2.height}
-              emphasis={showArrow}
-              subLayer={true}
-            >
-              <Overlay opacity={opacity} />
-              <BarContent subLayer={true}>
-                <ZigTypography
-                  color={layersCount > 2 ? 'greenGraph' : 'neutral200'}
-                  fontSize={fontSize}
-                  fontWeight={500}
-                >
-                  {Math.floor(layer2.value)}
-                  {'%'}
-                </ZigTypography>
-              </BarContent>
-            </TierBarContainer>
-          </>
-        )}
-        {layer3.value > 0 && (
-          <>
-            <TierBarContainer
-              opacity={opacity}
-              width={width}
-              height={layer3.height}
-              emphasis={showArrow}
-              subLayer={true}
-            >
-              <Overlay opacity={opacity} />
-              <BarContent subLayer={true}>
-                <ZigTypography
-                  color='neutral200'
-                  fontSize={fontSize}
-                  fontWeight={500}
-                >
-                  {Math.floor(layer3.value)}
-                  {'%'}
-                </ZigTypography>
-              </BarContent>
-            </TierBarContainer>
-          </>
+        {[layer2, layer3].map(
+          (layer, index) =>
+            layer.value > 0 && (
+              <TierBarContainer
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                opacity={opacity}
+                width={width}
+                height={layer.height}
+                emphasis={showArrow}
+                subLayer={true}
+              >
+                <Overlay opacity={opacity} />
+                <BarContent subLayer={true}>
+                  <ZigTypography
+                    color={
+                      index === 0 && layersCount > 2
+                        ? 'greenGraph'
+                        : 'neutral200'
+                    }
+                    fontSize={fontSize}
+                    fontWeight={500}
+                  >
+                    {Math.floor(layer.value)}
+                    {'%'}
+                  </ZigTypography>
+                </BarContent>
+              </TierBarContainer>
+            ),
         )}
       </Box>
     </AnimatedContainer>

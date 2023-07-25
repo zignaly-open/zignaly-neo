@@ -54,11 +54,11 @@ export const ShareCommissionSlider = ({
         }}
         prefixId='referrals-invite-modal'
         value={value}
-        onChange={(_: React.ChangeEvent<HTMLInputElement>, v: number) => {
+        onChange={(_, v) => {
           setValue(v);
         }}
         max={max}
-        valueLabelFormat={(v: number) => v}
+        valueLabelFormat={(v) => v}
       />
     </SliderContainer>
   );
