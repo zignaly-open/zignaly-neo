@@ -1,9 +1,9 @@
 import React from 'react';
-import { ZigArrowOutIcon, ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigArrowOutIcon } from '@zignaly-open/ui';
 import { useTranslation } from 'react-i18next';
-import { Box, Divider, Grid } from '@mui/material';
 import { BUY_CRYPTO_URL } from '../../../../../util/constants';
 import { ChooseDepositTypeViews } from '../types';
+import ChooseBetweenTwo from './ChooseBetweenTwo';
 
 const ChooseDepositType: React.FC<{
   coin: string;
@@ -12,102 +12,32 @@ const ChooseDepositType: React.FC<{
   const { t } = useTranslation('deposit-crypto');
   return (
     <>
-      <Grid container sx={{ padding: '10px 0' }}>
-        <Grid item xs={12} sx={{ paddingRight: '10px', textAlign: 'center' }}>
-          <ZigTypography
-            variant={'body1'}
-            id={'modal-choose-deposit-type__description'}
-          >
-            {t('service-deposit.description', { coin })}
-          </ZigTypography>
-        </Grid>
-        <Grid
-          item
-          container
-          justifyContent='center'
-          sx={{ height: '160px', paddingTop: '25px' }}
-        >
-          <Grid item xs={12} md={5}>
-            <Box
-              sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-                width: '100%',
-              }}
-            >
-              <Box
-                sx={{
-                  textAlign: 'center',
-                  height: '90px',
-                  paddingTop: '10px',
-                  lineHeight: 2,
-                }}
-              >
-                <ZigTypography
-                  variant={'h3'}
-                  id={'modal-choose-deposit-type__transfer-crypto'}
-                >
-                  {t('service-deposit.transfer-crypto', { coin })}
-                </ZigTypography>
-              </Box>
-
-              <ZigButton
-                variant='contained'
-                id={'modal-choose-deposit-type__deposit'}
-                size={'large'}
-                onClick={() => {
-                  setView(ChooseDepositTypeViews.DepositView);
-                }}
-              >
-                {t('service-deposit.buttons.deposit', { coin })}
-              </ZigButton>
-            </Box>
-          </Grid>
-
-          <Grid item container xs={false} md={1} justifyContent='center'>
-            <Divider
-              sx={{ border: '1px dotted #A8A8A830' }}
-              orientation={'vertical'}
-              flexItem
-              role={'presentation'}
+      <ChooseBetweenTwo
+        description={t('service-deposit.description', { coin })}
+        descriptionProps={{ id: 'modal-choose-deposit-type__description' }}
+        cta1={t('service-deposit.buttons.deposit', { coin })}
+        cta2={t('service-deposit.buttons.purchase', { coin })}
+        button1Props={{
+          id: 'modal-choose-deposit-type__deposit',
+          onClick: () => setView(ChooseDepositTypeViews.DepositView),
+        }}
+        button2Props={{
+          href: BUY_CRYPTO_URL,
+          id: 'modal-choose-deposit-type__purchase',
+          endIcon: (
+            <ZigArrowOutIcon
+              width={'9px'}
+              height={'9px'}
+              style={{ marginBottom: '4px' }}
             />
-          </Grid>
-
-          <Grid item xs={12} md={5} marginLeft={'5px'}>
-            <Box
-              sx={{
-                textAlign: 'center',
-              }}
-            >
-              <Box textAlign={'center'} height={90} paddingTop={'10px'}>
-                <ZigTypography
-                  variant={'h3'}
-                  id={'modal-choose-deposit-type__buy-crypto'}
-                >
-                  {t('service-deposit.buy-crypto', { coin })}
-                </ZigTypography>
-              </Box>
-              <ZigButton
-                href={BUY_CRYPTO_URL}
-                variant='contained'
-                id={'modal-choose-deposit-type__purchase'}
-                endIcon={
-                  <ZigArrowOutIcon
-                    width={'9px'}
-                    height={'9px'}
-                    style={{ marginBottom: '4px' }}
-                  />
-                }
-                size={'large'}
-                sx={{ padding: '8px 20px' }}
-              >
-                {t('service-deposit.buttons.purchase', { coin })}
-              </ZigButton>
-            </Box>
-          </Grid>
-        </Grid>
-      </Grid>
+          ),
+          sx: { padding: '8px 20px' },
+        }}
+        explainer1={t('service-deposit.transfer-crypto', { coin })}
+        explainer1Props={{ id: 'modal-choose-deposit-type__transfer-crypto' }}
+        explainer2={t('service-deposit.buy-crypto', { coin })}
+        explainer2Props={{ id: 'modal-choose-deposit-type__buy-crypto' }}
+      />
     </>
   );
 };
