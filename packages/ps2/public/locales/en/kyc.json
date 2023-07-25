@@ -31,6 +31,23 @@
     "residence": "Proof of Residence",
     "questionnaire": "Questionnaire"
   },
+  "requirements-level-1-corp": {
+    "email": "Email Verification",
+    "questionnaire": "Questionnaire",
+    "cert-of-incorporation": "Certificate of Incorporation",
+    "licence": "Trade License",
+    "cert-of-incumbency": "Register of Members or Certificate of Incumbency (should be issued within the last 12 months)",
+    "shareholders": "Shareholder Registry",
+    "director": "Director Registry"
+  },
+  "requirements-level-2-corp": {
+    "cert-of-incorporation": "Certificate of Incorporation or a Trade License",
+    "cert-of-incumbency": "Register of Members or Certificate of Incumbency (should be issued within the last 12 months)",
+    "shareholders": "Shareholder Registry",
+    "director": "Director Registry",
+    "questionnaire": "Questionnaire: type of Business",
+    "source-of-funds": "Source of Funds"
+  },
   "modal": {
     "title": "Start your account verification",
     "description": "Start the verification process clicking on the button. You will be redirected to an external page to complete the process.",
