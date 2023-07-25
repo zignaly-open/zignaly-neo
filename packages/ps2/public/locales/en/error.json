@@ -192,6 +192,22 @@
       "description": "Verify your account to start accessing all the services. Process is easy and fast and it will take you approximately 2 minutes.",
       "action": "Start Verification"
     },
+    "no-subscription": {
+      "title": "Activate your Subscription",
+      "description": "To start investing in a service you need a subscription code first.",
+      "explainer-1": "Redeem subscription code",
+      "explainer-2": "I don’t have any subscription code",
+      "cta-1": "Redeem",
+      "cta-2": "Purchase"
+    },
+    "expired-subscription": {
+      "title": "Subscription Expired",
+      "description": "Your subscription has expired, please purchase the renewal code to continue.",
+      "explainer-1": "Redeem subscription code",
+      "explainer-2": "I don’t have any subscription code",
+      "cta-1": "Redeem",
+      "cta-2": "Purchase"
+    },
     "frozen": {
       "title": "Frozen Account",
       "description": "We are verifying a recent transfer in your account that requires manual approval. As soon as everything has been verified and approved by our team you will be able to manage your account normally.",

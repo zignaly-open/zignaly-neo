@@ -9,7 +9,7 @@ export enum UserAccessLevel {
   Banned = -100,
   NotVerified = 100, // -
   KycPending = 350, // -
-  NoSubscription = 375, // -
+  NoSubscription = 1375, // -
   Frozen = 400, // -
   KycExpired = 450,
   SubscriptionExpired = 475, // -

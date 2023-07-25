@@ -4,8 +4,7 @@ import { Box, Divider, Grid } from '@mui/material';
 import { TypographyProps } from '@mui/system';
 
 type ExtendedTypographyProps = TypographyProps & { id: string };
-// we kinda don't reuse this shit except 1 case when we do
-const ChooseBetweenTwo: React.FC<{
+export type ChooseBetweenTwoProps = {
   description?: string | JSX.Element;
   descriptionProps?: Partial<ExtendedTypographyProps>;
   explainer1?: string | JSX.Element;
@@ -16,7 +15,10 @@ const ChooseBetweenTwo: React.FC<{
   button1Props?: ZigButtonProps;
   cta2: string | JSX.Element;
   button2Props?: ZigButtonProps;
-}> = ({
+};
+
+// we kinda don't reuse this shit except 1 case when we do
+const ChooseBetweenTwo: React.FC<ChooseBetweenTwoProps> = ({
   button1Props,
   button2Props,
   cta1,
