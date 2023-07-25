@@ -211,9 +211,7 @@ const KycBox: React.FC<{
           <UlList>
             {Object.entries(items).map(([k, v]) => (
               <li style={{ marginTop: 4, marginBottom: 4 }} key={k}>
-                <ZigTypography fontWeight={500} color={'neutral100'}>
-                  {v}
-                </ZigTypography>
+                <ZigTypography color={'neutral100'}>{v}</ZigTypography>
               </li>
             ))}
           </UlList>
