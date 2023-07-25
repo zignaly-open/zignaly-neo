@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Control, FieldErrorsImpl, useForm } from 'react-hook-form';
+import { FieldErrorsImpl, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { MinBalanceModalProps } from './types';
