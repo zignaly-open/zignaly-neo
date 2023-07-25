@@ -4,6 +4,7 @@ export enum Features {
   Referrals,
   Trader,
   NewSignup,
+  Subscriptions,
   Kyc,
 }
 
@@ -13,8 +14,9 @@ export type OverrideableEndpoints = 'marketplace/';
 export type WhitelabelOverride = {
   promptMobile?: boolean;
   endpointOverrides?: Record<OverrideableEndpoints, string>;
-  disabledFeatures: Features[];
+  featureOverrides: Record<Partial<Features>, boolean>;
   xSource?: string;
+  subscriptionPurchaseLink?: string;
   mainAppLink?: string;
   logo?: string;
   background?: string;
