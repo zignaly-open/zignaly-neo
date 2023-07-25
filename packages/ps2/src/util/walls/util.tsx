@@ -168,11 +168,12 @@ const usePerformLevelCheck = (
     return true;
   };
 };
+
 export const useCanLogIn = () => usePerformLevelCheck(Level.Banned);
 
 export const useCanInsertCoupon = () => usePerformLevelCheck(Level.Frozen);
 
-export const useCanDeposit = () => usePerformLevelCheck(Level.NoSubscription);
+export const useCanDeposit = () => usePerformLevelCheck(Level.Normal);
 
 export const useCanInvestIn = () => usePerformLevelCheck(Level.Normal);
 
