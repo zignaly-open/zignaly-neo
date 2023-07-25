@@ -29,6 +29,7 @@ import { useZModal } from '../../../../components/ZModal/use';
 import InvestorEditFee from '../InvestorEditFee/InvestorEditFee';
 import { getServiceTotalFee, getServiceZignalyFee } from '../../../../util/fee';
 import { useToast } from '../../../../util/hooks/useToast';
+import { useCurrentUser } from '../../../../apis/user/use';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -43,14 +44,41 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   const theme = useTheme();
   const { t } = useTranslation('investors');
   const toast = useToast();
+  const userData = useCurrentUser();
   const columnHelper = createColumnHelper<Investor>();
   const columns = useMemo(() => {
     return [
       columnHelper.accessor('email', {
         header: t('tableHeader.email'),
+        cell: ({
+          getValue,
+          row: {
+            original: { userId },
+          },
+        }) =>
+          userId === userData.userId ? (
+            <Tooltip title={t('it-is-you')}>
+              <ZigTypography>{getValue()}</ZigTypography>
+            </Tooltip>
+          ) : (
+            getValue()
+          ),
       }),
       columnHelper.accessor('userId', {
         header: t('tableHeader.userId'),
+        cell: ({
+          getValue,
+          row: {
+            original: { userId },
+          },
+        }) =>
+          userId === userData.userId ? (
+            <Tooltip title={t('it-is-you')}>
+              <ZigTypography>{getValue()}</ZigTypography>
+            </Tooltip>
+          ) : (
+            getValue()
+          ),
       }),
       columnHelper.accessor((row) => new BigNumber(row.invested).toNumber(), {
         header: () => (
@@ -112,7 +140,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         header: t('tableHeader.successFee'),
         cell: ({
           row: {
-            original: { ownerSuccessFee, ownerSfDiscount },
+            original: { ownerSuccessFee, ownerSfDiscount, userId },
           },
         }) => (
           <Tooltip
@@ -128,7 +156,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           >
             <ZigTypography>
               {/* eslint-disable-next-line i18next/no-literal-string */}
-              {getServiceTotalFee(ownerSuccessFee)}%
+              {getServiceTotalFee(ownerSuccessFee, userId === userData.userId)}%
             </ZigTypography>
           </Tooltip>
         ),
@@ -143,41 +171,43 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         cell: ({
           row: {
             original: {
+              userId,
               account_id: accountId,
               ownerSfDiscount,
               ownerSuccessFee,
             },
           },
-        }) => (
-          <ZigDropdown
-            component={() => (
-              <IconButton sx={{ mr: '-4px' }}>
-                <ZigDotsVerticalIcon
-                  color={theme.palette.neutral200}
-                  height={16}
-                  width={16}
-                />
-              </IconButton>
-            )}
-            options={[
-              {
-                label: t('change-fee'),
-                onClick: () => {
-                  if ((service?.successFee || 0) > 0) {
-                    showModal(InvestorEditFee, {
-                      serviceId,
-                      accountId,
-                      ownerSuccessFee,
-                      ownerSfDiscount,
-                    });
-                  } else {
-                    toast.error(t('change-fee-modal.already-0'));
-                  }
+        }) =>
+          userId !== userData.userId && (
+            <ZigDropdown
+              component={() => (
+                <IconButton sx={{ mr: '-4px' }}>
+                  <ZigDotsVerticalIcon
+                    color={theme.palette.neutral200}
+                    height={16}
+                    width={16}
+                  />
+                </IconButton>
+              )}
+              options={[
+                {
+                  label: t('change-fee'),
+                  onClick: () => {
+                    if ((service?.successFee || 0) > 0) {
+                      showModal(InvestorEditFee, {
+                        serviceId,
+                        accountId,
+                        ownerSuccessFee,
+                        ownerSfDiscount,
+                      });
+                    } else {
+                      toast.error(t('change-fee-modal.already-0'));
+                    }
+                  },
                 },
-              },
-            ]}
-          />
-        ),
+              ]}
+            />
+          ),
       }),
     ];
   }, [service]);
