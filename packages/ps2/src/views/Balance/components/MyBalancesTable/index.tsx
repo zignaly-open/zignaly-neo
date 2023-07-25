@@ -26,7 +26,7 @@ import { Box } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
 import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
 import { useBalanceQuery } from 'apis/user/api';
-import SwapCoinsModal, { coinsAllowedToSwap } from '../SwapCoinsModal';
+import SwapCoinsModal from '../SwapCoinsModal';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
@@ -46,6 +46,51 @@ const MyBalancesTable = (): JSX.Element => {
       skip: !internalId,
     },
   );
+  const getFilteredData = useCallback(
+    (coins: CoinDetails, balances: CoinBalances) => {
+      // Populate coins that can be deposited
+      const depositCoinsBalances: CoinBalances = Object.fromEntries(
+        allowedDeposits[exchangeType].map((coin) => [
+          coin,
+          {
+            balanceFree: '',
+            balanceFreeBTC: '',
+            balanceFreeUSDT: '',
+            balanceLocked: '',
+            balanceLockedBTC: '',
+            balanceLockedUSDT: '',
+            balanceTotal: '',
+            balanceTotalBTC: '',
+            balanceTotalExchCoin: '',
+            balanceTotalUSDT: '',
+            exchCoin: '',
+            maxWithdrawAmount: '',
+          },
+        ]),
+      );
+
+      return Object.entries<CoinBalance & CoinDetail>(
+        mergeCoinsAndBalances(coins, { ...depositCoinsBalances, ...balances }),
+      )
+        .filter(
+          ([coin, balance]) =>
+            allowedDeposits[exchangeType]?.includes(coin) ||
+            +balance.balanceTotal > 0,
+        )
+        .map(([coin, balance]) => ({ coin, balance }));
+    },
+    [exchangeType, t],
+  );
+  const hasNonZeroBalance = useMemo(() => {
+    if (coinsEndpoint?.isSuccess && balancesEndpoint?.isSuccess) {
+      return getFilteredData(coinsEndpoint?.data, balancesEndpoint?.data).some(
+        (coin) =>
+          allowedDeposits.spot.includes(coin.coin) &&
+          +coin?.balance?.balanceTotal !== 0,
+      );
+    }
+    return true;
+  }, [coinsEndpoint?.data, balancesEndpoint?.data]);
 
   const columnHelper = createColumnHelper<BalanceTableDataType>();
   const columns = useMemo(
@@ -127,8 +172,8 @@ const MyBalancesTable = (): JSX.Element => {
           <Box display='flex' justifyContent='flex-end' alignItems={'center'}>
             {!!allowedDeposits[exchangeType]?.includes(row.original.coin) && (
               <ZigButton
-                narrow
-                tooltip={t('deposit')}
+                narrow={exchangeType === 'spot' && hasNonZeroBalance}
+                tooltip={hasNonZeroBalance && t('deposit')}
                 id={`balance-row__deposit-${row.original.coin}`}
                 onClick={() =>
                   showDepositModal({
@@ -138,10 +183,14 @@ const MyBalancesTable = (): JSX.Element => {
                 variant='outlined'
                 sx={{ maxHeight: '20px', mr: 1 }}
               >
-                <Add
-                  sx={{ height: '18px', width: '22px' }}
-                  color={'neutral300'}
-                />
+                {exchangeType === 'futures' || !hasNonZeroBalance ? (
+                  t('deposit')
+                ) : (
+                  <Add
+                    sx={{ height: '18px', width: '22px' }}
+                    color={'neutral300'}
+                  />
+                )}
               </ZigButton>
             )}
             <Box>
@@ -165,12 +214,13 @@ const MyBalancesTable = (): JSX.Element => {
             </Box>
             {exchangeType === 'spot' &&
               Number(row.original.balance.balanceTotal) > 0 &&
-              coinsAllowedToSwap.includes(row.original.coin) && (
+              allowedDeposits.spot.includes(row.original.coin) && (
                 <ZigButton
                   id={`balance-row__swap-coins-${row.original.coin}`}
                   onClick={() =>
                     showModal(SwapCoinsModal, {
                       selectedCoin: row.original,
+                      refetchBalance: balancesEndpoint.refetch,
                     })
                   }
                   variant='outlined'
@@ -187,43 +237,7 @@ const MyBalancesTable = (): JSX.Element => {
         ),
       }),
     ],
-    [t, exchangeType],
-  );
-
-  const getFilteredData = useCallback(
-    (coins: CoinDetails, balances: CoinBalances) => {
-      // Populate coins that can be deposited
-      const depositCoinsBalances: CoinBalances = Object.fromEntries(
-        allowedDeposits[exchangeType].map((coin) => [
-          coin,
-          {
-            balanceFree: '',
-            balanceFreeBTC: '',
-            balanceFreeUSDT: '',
-            balanceLocked: '',
-            balanceLockedBTC: '',
-            balanceLockedUSDT: '',
-            balanceTotal: '',
-            balanceTotalBTC: '',
-            balanceTotalExchCoin: '',
-            balanceTotalUSDT: '',
-            exchCoin: '',
-            maxWithdrawAmount: '',
-          },
-        ]),
-      );
-
-      return Object.entries<CoinBalance & CoinDetail>(
-        mergeCoinsAndBalances(coins, { ...depositCoinsBalances, ...balances }),
-      )
-        .filter(
-          ([coin, balance]) =>
-            allowedDeposits[exchangeType]?.includes(coin) ||
-            +balance.balanceTotal > 0,
-        )
-        .map(([coin, balance]) => ({ coin, balance }));
-    },
-    [exchangeType, t],
+    [t, exchangeType, hasNonZeroBalance],
   );
 
   return (

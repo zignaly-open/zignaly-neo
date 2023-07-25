@@ -73,6 +73,7 @@
       "futuresTrade": "Enable futures trading"
     },
     "create-new-key": "Create New API Key",
+    "delete-api-key-toast": "API Key was successfully deleted",
     "create-new-key-description": "Create a new API key to connect and trade from your favorite trading platform.",
     "edit-key": "Edit API Key Settings",
     "delete-title": "Delete {{title}} API Key",
@@ -83,7 +84,7 @@
     "ip-restrictions-ranges": "Sorry we do not support IP ranges",
     "ip-restrictions-duplicates": "Some ips are listed twice, please remove duplicates",
     "ip-restrictions-allowed": "IP Addresses",
-    "ip-restrictions-allowed-explainer": "When entering more than one IP address, please separate them with commas",
+    "ip-restrictions-allowed-explainer": "When entering more than one IP address, please separate them with commas or spaces",
     "ip-restrictions-on": "Restrict access to trusted IPs only (recommended)"
   }
 }

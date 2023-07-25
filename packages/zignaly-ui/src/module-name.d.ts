@@ -47,6 +47,7 @@ declare module "@mui/material/styles" {
       | "buttonPrimary"
       | "loader"
       | "header"
+      | "manageServiceMenuHover" // why have a dedicated color used only once? because fuck me, that's why
       | "input",
       string
     >;

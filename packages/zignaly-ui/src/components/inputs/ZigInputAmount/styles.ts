@@ -8,11 +8,11 @@ export const Layout = styled(Box)<{
   labelInline: boolean;
 }>`
   border: ${({ withCoinSelector, theme }) =>
-    withCoinSelector ? "none;" : `1px dotted ${theme.palette.neutral600};`};
+    withCoinSelector ? "none;" : `1px dotted ${theme.palette.neutral600}`};
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: ${({ withCoinSelector }) => (withCoinSelector ? "5px 24px 12px;" : "24px 24px 12px;")};
+  padding: ${({ withCoinSelector }) => (withCoinSelector ? "5px 24px 0" : "24px 24px 12px")};
   position: relative;
   border-radius: 5px;
 
@@ -85,7 +85,7 @@ export const InputWrapper = styled(Box)<{
   display: flex;
   align-items: center;
   gap: 16px;
-  width: ${({ wide }) => (wide ? "1;" : "auto;")};
+  width: ${({ wide }) => (wide ? "1" : "auto")};
   ${({ withCoinSelector, theme, error, disabled }) =>
     withCoinSelector &&
     `

@@ -85,7 +85,11 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
       alignItems={withCoinSelector ? "center" : "unset"}
       className={className}
     >
-      {!labelInline && label && <ZigTypography pb="10px">{label}</ZigTypography>}
+      {!labelInline && label && (
+        <ZigTypography pb="10px" id={id && `${id}-top-label`}>
+          {label}
+        </ZigTypography>
+      )}
       <Layout
         withCoinSelector={withCoinSelector}
         display={wide ? "flex" : "inline-flex"}
@@ -146,6 +150,7 @@ const ZigInputAmount = forwardRef((props: ZigInputAmountProps, ref) => {
               </DividerWrapper>
 
               <ZigSelect
+                id={id && `${id}-select`}
                 menuPosition={"fixed"}
                 menuShouldScrollIntoView={false}
                 menuShouldBlockScroll

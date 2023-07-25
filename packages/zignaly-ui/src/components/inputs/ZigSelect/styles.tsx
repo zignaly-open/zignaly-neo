@@ -123,7 +123,7 @@ export const StyledSelectWrapper: StyledComponent<BoxTypeMap & Props> = styled(B
 
     &__indicator {
       color: ${({ theme }) => theme.palette.neutral400};
-
+      padding-top: 6px;
       ${({ width }) =>
         width &&
         width <= 100 &&
