@@ -1,5 +1,5 @@
 import { Box, Grid, Paper, Tooltip, useTheme } from '@mui/material';
-import React from 'react';
+import React, { useCallback } from 'react';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import DataUsageTwoToneIcon from '@mui/icons-material/DataUsageTwoTone';
 import ErrorOutlineOutlinedIcon from '@mui/icons-material/ErrorOutlineOutlined';
@@ -60,7 +60,7 @@ const KycBox: React.FC<{
     color: theme.palette.backgrounds.investorsIcon,
   };
 
-  const openKyc = async () => {
+  const openKyc = useCallback(async () => {
     await getCerificationLinkUrl(level)
       .unwrap()
       .then(({ link: kycLink }) =>
@@ -80,7 +80,7 @@ const KycBox: React.FC<{
           yesAction: () => window.open(kycLink),
         }),
       );
-  };
+  }, [level, getCerificationLinkUrl]);
 
   const disabled = requiresLevel && previous?.status !== 'completed';
   return (
