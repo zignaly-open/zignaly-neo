@@ -53,8 +53,9 @@ const Kyc: React.FC = () => {
         <ZigTab label={t('tabs.kyc')} value={'kyc'} />
         <ZigTab label={t('tabs.kyb')} value={'kyb'} />
       </ZigTabs>
-      {kycConfig[tab]?.map((c) => (
+      {kycConfig[tab]?.map((c, i, all) => (
         <KycBox
+          requiresLevel={all[i - 1]?.name}
           labelColor={c.color}
           balanceRestriction={t(
             `balance-range-from${c.restriction.to ? '-to' : ''}`,
@@ -64,7 +65,7 @@ const Kyc: React.FC = () => {
           title={t(c.label)}
           key={c.name}
           icon={c.icon}
-          name={
+          level={
             // TODO: make this dynamic or smth
             // this should NOT be hardcoded, even as a constant
             // @NataliaAvila-PM

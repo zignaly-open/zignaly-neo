@@ -23,26 +23,32 @@ const largeIconStyle = {
 };
 
 const KycBox: React.FC<{
-  name: string;
+  level: string;
   labelColor: string;
   balanceRestriction?: string;
+  requiresLevel?: string;
   title: string;
-  disabled?: boolean;
   icon: JSX.Element;
   items: Record<string, string>;
 }> = ({
   icon,
-  name,
+  level,
   balanceRestriction,
+  requiresLevel,
   items,
   labelColor,
   title,
-  disabled,
 }) => {
   // n+1 queries? never heard about him, is he a rapper?
   const [getCerificationLinkUrl, { isLoading: loadingVerification }] =
     useLazyKycLinkQuery();
-  const { isLoading, data } = useKycStatusQuery(name);
+  const { isLoading, data } = useKycStatusQuery(level);
+  const { isLoading: isLoadingPrevious, data: previous } = useKycStatusQuery(
+    requiresLevel,
+    {
+      skip: !requiresLevel,
+    },
+  );
   const { t } = useTranslation(['kyc']);
   const theme = useTheme();
   const showModal = useZConfirm();
@@ -55,7 +61,7 @@ const KycBox: React.FC<{
   };
 
   const openKyc = async () => {
-    await getCerificationLinkUrl(name)
+    await getCerificationLinkUrl(level)
       .unwrap()
       .then(({ link: kycLink }) =>
         showModal({
@@ -76,10 +82,16 @@ const KycBox: React.FC<{
       );
   };
 
+  const disabled = previous?.status !== 'completed';
   return (
     <Grid
       container
-      sx={{ mt: 3, mb: 6, opacity: disabled ? 0.5 : 1, minHeight: 200 }}
+      sx={{
+        mt: 3,
+        mb: 6,
+        opacity: disabled ? 0.5 : 1,
+        minHeight: 200,
+      }}
     >
       <Grid
         item
@@ -118,7 +130,7 @@ const KycBox: React.FC<{
             </>
           )}
 
-          {isLoading ? (
+          {isLoading || isLoadingPrevious ? (
             <Box sx={{ pt: 3, pb: 3 }}>
               <Loader />
             </Box>
