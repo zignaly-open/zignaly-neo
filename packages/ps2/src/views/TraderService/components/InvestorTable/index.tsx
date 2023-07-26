@@ -29,7 +29,7 @@ import { useZModal } from '../../../../components/ZModal/use';
 import InvestorEditFee from '../InvestorEditFee/InvestorEditFee';
 import { getServiceTotalFee, getServiceZignalyFee } from '../../../../util/fee';
 import { useToast } from '../../../../util/hooks/useToast';
-import { useCurrentUser } from '../../../../apis/user/use';
+import { useActiveExchange } from '../../../../apis/user/use';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -44,7 +44,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   const theme = useTheme();
   const { t } = useTranslation('investors');
   const toast = useToast();
-  const userData = useCurrentUser();
+  const exchange = useActiveExchange();
   const columnHelper = createColumnHelper<Investor>();
   const columns = useMemo(() => {
     return [
@@ -53,10 +53,10 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         cell: ({
           getValue,
           row: {
-            original: { userId },
+            original: { account_id: accountId },
           },
         }) =>
-          userId === userData.userId ? (
+          accountId === exchange.internalId ? (
             <Tooltip title={t('it-is-you')}>
               <ZigTypography>{getValue()}</ZigTypography>
             </Tooltip>
@@ -69,10 +69,10 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         cell: ({
           getValue,
           row: {
-            original: { userId },
+            original: { account_id: accountId },
           },
         }) =>
-          userId === userData.userId ? (
+          accountId === exchange.internalId ? (
             <Tooltip title={t('it-is-you')}>
               <ZigTypography>{getValue()}</ZigTypography>
             </Tooltip>
@@ -140,23 +140,37 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         header: t('tableHeader.successFee'),
         cell: ({
           row: {
-            original: { ownerSuccessFee, ownerSfDiscount, userId },
+            original: {
+              ownerSuccessFee,
+              ownerSfDiscount,
+              account_id: accountId,
+            },
           },
         }) => (
           <Tooltip
-            title={t(
-              `success-fee-explainer${ownerSfDiscount ? '-with-discount' : ''}`,
-              {
-                discounted: ownerSuccessFee,
-                owner: ownerSuccessFee + ownerSfDiscount,
-                zignalyFee: getServiceZignalyFee(ownerSuccessFee),
-                discount: ownerSfDiscount,
-              },
-            )}
+            title={
+              accountId === exchange.internalId
+                ? t('it-is-you-0-fee')
+                : t(
+                    `success-fee-explainer${
+                      ownerSfDiscount ? '-with-discount' : ''
+                    }`,
+                    {
+                      discounted: ownerSuccessFee,
+                      owner: ownerSuccessFee + ownerSfDiscount,
+                      zignalyFee: getServiceZignalyFee(ownerSuccessFee),
+                      discount: ownerSfDiscount,
+                    },
+                  )
+            }
           >
             <ZigTypography>
+              {getServiceTotalFee(
+                ownerSuccessFee,
+                accountId === exchange.internalId,
+              )}
               {/* eslint-disable-next-line i18next/no-literal-string */}
-              {getServiceTotalFee(ownerSuccessFee, userId === userData.userId)}%
+              {'%'}
             </ZigTypography>
           </Tooltip>
         ),
@@ -171,14 +185,13 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         cell: ({
           row: {
             original: {
-              userId,
               account_id: accountId,
               ownerSfDiscount,
               ownerSuccessFee,
             },
           },
         }) =>
-          userId !== userData.userId && (
+          accountId !== exchange.internalId && (
             <ZigDropdown
               component={() => (
                 <IconButton sx={{ mr: '-4px' }}>
