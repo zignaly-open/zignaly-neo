@@ -2,6 +2,7 @@
   "no-investors": "This service does not have any investors yet",
   "failed-to-load": "Failed to load the data",
   "title": "Investors",
+  "it-is-you": "It's you! Btw you look amazing today",
   "number-of-investors_one": "{{count}} Investor",
   "number-of-investors_other": "{{count}} Investors",
   "change-fee": "Edit success fee",

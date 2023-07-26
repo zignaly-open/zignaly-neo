@@ -4,8 +4,8 @@
 
 import { ZIGNALY_PROFIT_FEE } from './constants';
 
-export function getServiceTotalFee(ownerFee: number) {
-  return ownerFee + getServiceZignalyFee(ownerFee);
+export function getServiceTotalFee(ownerFee: number, isSelf?: boolean) {
+  return isSelf ? 0 : ownerFee + getServiceZignalyFee(ownerFee);
 }
 
 export function getServiceZignalyFee(ownerFee: number) {
