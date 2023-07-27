@@ -19,7 +19,12 @@ const largeIconStyle = {
   height: '16px',
   width: '16px',
   mr: 1,
-  verticalAlign: 'sub',
+};
+
+const iconWrapStyle = {
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
 };
 
 const KycBox: React.FC<{
@@ -54,9 +59,7 @@ const KycBox: React.FC<{
   const showModal = useZConfirm();
 
   const infoIconStyle = {
-    height: '13px',
-    position: 'relative',
-    top: '1px',
+    height: '15.6px',
     color: theme.palette.backgrounds.investorsIcon,
   };
 
@@ -138,7 +141,7 @@ const KycBox: React.FC<{
             <>
               {data?.status === 'completed' && (
                 <ZigTypography
-                  sx={{ mt: 2 }}
+                  sx={{ mt: 2, ...iconWrapStyle }}
                   component={'p'}
                   color={'greenGraph'}
                   fontWeight={600}
@@ -151,7 +154,7 @@ const KycBox: React.FC<{
 
               {data?.status === 'pending' && (
                 <ZigTypography
-                  sx={{ mt: 2 }}
+                  sx={{ mt: 2, ...iconWrapStyle }}
                   component={'p'}
                   color={'yellow'}
                   fontWeight={600}
@@ -160,13 +163,7 @@ const KycBox: React.FC<{
                   <DataUsageTwoToneIcon sx={largeIconStyle} />
                   {t('status.pending')}
                   <Tooltip title={t('progress-explainer')}>
-                    <InfoOutlinedIcon
-                      sx={{
-                        height: '13px',
-                        verticalAlign: 'sub',
-                        color: theme.palette.backgrounds.investorsIcon,
-                      }}
-                    />
+                    <InfoOutlinedIcon sx={infoIconStyle} />
                   </Tooltip>
                 </ZigTypography>
               )}
@@ -174,7 +171,7 @@ const KycBox: React.FC<{
               {data?.status === 'rejected' && (
                 <ZigTypography
                   component={'p'}
-                  sx={{ mt: 2 }}
+                  sx={{ mt: 2, ...iconWrapStyle }}
                   color={'redGraphOrError'}
                   fontWeight={600}
                   variant={'body1'}
@@ -192,7 +189,7 @@ const KycBox: React.FC<{
               {((!!data?.canBeRetried && data?.status === 'rejected') ||
                 !data?.status) && (
                 <ZigButton
-                  sx={{ mt: 2.5 }}
+                  sx={{ mt: 2.5, ...iconWrapStyle }}
                   variant={'contained'}
                   disabled={disabled}
                   loading={loadingVerification}
