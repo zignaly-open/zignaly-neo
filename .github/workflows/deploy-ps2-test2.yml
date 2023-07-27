@@ -1,0 +1,14 @@
+name: PS2 Test deploy
+on:
+  push:
+    branches:
+      - test
+      - feat/kyc
+
+jobs:
+  deploy:
+    name: PS2 Staging deploy
+    uses: ./.github/workflows/ps2-deploy.yml
+    secrets: inherit
+    with:
+      deploy-env: test

@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - test
-      - feat/kyc
 
 jobs:
   pre_job:
