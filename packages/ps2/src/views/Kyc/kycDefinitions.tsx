@@ -14,6 +14,21 @@ const goldRestriction = {
   coin: 'USDT',
 };
 
+const kycEnvLevels = process.env.REACT_APP_KYC_LEVELS;
+let environmentConfig: Record<'kyc' | 'kyb', [string, string]> = null;
+
+if (kycEnvLevels) {
+  try {
+    environmentConfig = JSON.parse(kycEnvLevels);
+  } catch (e) {
+    // Too bad :(
+    // eslint-disable-next-line no-console
+    console.error('KYC Config: not a valid JSON');
+  }
+}
+
+export const hasValidKycConfig = !!environmentConfig;
+
 const kycConfig: Record<'kyc' | 'kyb', KycDefinitionConfig[]> = {
   kyc: [
     {
@@ -22,11 +37,7 @@ const kycConfig: Record<'kyc' | 'kyb', KycDefinitionConfig[]> = {
       restriction: silverRestriction,
       requirements: `requirements-level-1`,
       label: `name-level-1`,
-      // name: 'Silver',
-      // TODO: make this dynamic or smth
-      // this should NOT be hardcoded, even as a constant
-      // @NataliaAvila-PM
-      name: 'QUA_individual_sandbox',
+      name: environmentConfig?.kyc?.[0],
     },
     {
       color: '#FFD232',
@@ -34,11 +45,7 @@ const kycConfig: Record<'kyc' | 'kyb', KycDefinitionConfig[]> = {
       restriction: goldRestriction,
       requirements: `requirements-level-2`,
       label: `name-level-2`,
-      // name: 'Gold',
-      // TODO: make this dynamic or smth
-      // this should NOT be hardcoded, even as a constant
-      // @NataliaAvila-PM
-      name: 'QUA_individual_sandbox',
+      name: environmentConfig?.kyc?.[1],
     },
   ],
   kyb: [
@@ -48,11 +55,7 @@ const kycConfig: Record<'kyc' | 'kyb', KycDefinitionConfig[]> = {
       restriction: silverRestriction,
       requirements: `requirements-level-1-corp`,
       label: `name-level-1`,
-      // name: 'Silver_Corporate',
-      // TODO: make this dynamic or smth
-      // this should NOT be hardcoded, even as a constant
-      // @NataliaAvila-PM
-      name: 'QUA_individual_sandbox',
+      name: environmentConfig?.kyb?.[0],
     },
     {
       color: '#FFD232',
@@ -60,11 +63,7 @@ const kycConfig: Record<'kyc' | 'kyb', KycDefinitionConfig[]> = {
       restriction: goldRestriction,
       requirements: `requirements-level-2-corp`,
       label: `name-level-2`,
-      // name: 'Gold_Corporate',
-      // TODO: make this dynamic or smth
-      // this should NOT be hardcoded, even as a constant
-      // @NataliaAvila-PM
-      name: 'QUA_individual_sandbox',
+      name: environmentConfig?.kyb?.[1],
     },
   ],
 };
