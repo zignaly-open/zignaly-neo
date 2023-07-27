@@ -119,7 +119,7 @@ export type SessionResponse = {
 };
 
 export type KycResponse = {
-  status?: 'rejected' | 'pending' | 'completed';
+  status?: 'rejected' | 'pending' | 'approved';
   reason?: string;
   canBeRetried?: boolean;
 };

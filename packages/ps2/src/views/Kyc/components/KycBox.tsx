@@ -85,7 +85,7 @@ const KycBox: React.FC<{
       );
   }, [level, getCerificationLinkUrl]);
 
-  const disabled = requiresLevel && previous?.status !== 'completed';
+  const disabled = requiresLevel && previous?.status !== 'approved';
   return (
     <Grid
       container
@@ -139,7 +139,7 @@ const KycBox: React.FC<{
             </Box>
           ) : (
             <>
-              {data?.status === 'completed' && (
+              {data?.status === 'approved' && (
                 <ZigTypography
                   sx={{ mt: 2, ...iconWrapStyle }}
                   component={'p'}
