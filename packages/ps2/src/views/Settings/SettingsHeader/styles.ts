@@ -17,12 +17,15 @@ export const Layout = styled('div')`
 `;
 
 export const Container = styled('div')`
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0%, 100%));
+  display: flex;
+  flex-direction: row;
   & > * {
+    flex: 1;
+  }
+  &:last-child {
+    border-right: 1px dotted ${({ theme }) => theme.palette.neutral600};
+  }
+  &:first-child {
     border-left: 1px dotted ${({ theme }) => theme.palette.neutral600};
-    &:last-child {
-      border-right: 1px dotted ${({ theme }) => theme.palette.neutral600};
-    }
   }
 `;

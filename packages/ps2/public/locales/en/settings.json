@@ -1,4 +1,12 @@
 {
+  "header": {
+    "2fa": "2FA",
+    "edit-profile": "Edit Profile",
+    "edit-password": "Password",
+    "verification": "Verification",
+    "verification-kyc": "KYC",
+    "verification-kyb": "KYB"
+  },
   "update-password": {
     "title": "Update Password",
     "description": "Update the password of your Zignaly Account.\nFor your security, you will be logged out after clicking Update password.",

@@ -1,31 +1,23 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { MarginContainer } from '@zignaly-open/ui';
 import { Layout, Container } from './styles';
 import { generatePath } from 'react-router-dom';
 import {
-  ROUTE_TRADING_SERVICE,
-  ROUTE_TRADING_SERVICE_API,
-  ROUTE_TRADING_SERVICE_INVESTORS,
-  ROUTE_TRADING_SERVICE_MANAGE,
-  ROUTE_TRADING_SERVICE_EDIT,
+  ROUTE_EDIT_PROFILE,
+  ROUTE_2FA,
+  ROUTE_PASSWORD,
+  ROUTE_KYC,
 } from '../../../routes';
 import {
   RouteDropdown,
   RouteGroup,
 } from 'views/TraderService/components/ServiceHeader/atoms';
+import { isFeatureOn } from '../../../whitelabel';
+import { Features } from '../../../whitelabel/type';
 
 function SettingsHeader() {
-  const menuDropDownRef = useRef(null);
-  const { t } = useTranslation('service-header');
-  const serviceId = 'sfdv sdvsfd';
-
-  useEffect(() => {
-    if (menuDropDownRef && menuDropDownRef.current) {
-      menuDropDownRef?.current?.setIsDropDownActive(false);
-    }
-  }, [serviceId]);
-
+  const { t } = useTranslation('settings');
   return (
     <Layout>
       <MarginContainer>
@@ -33,11 +25,9 @@ function SettingsHeader() {
           <RouteGroup
             routes={[
               {
-                name: t('managements-label'),
-                path: generatePath(ROUTE_TRADING_SERVICE_MANAGE, {
-                  serviceId,
-                }),
-                id: `service-management-header__manage-funds`,
+                name: t('header.edit-profile'),
+                path: generatePath(ROUTE_EDIT_PROFILE),
+                id: `settings__edit-profile`,
               },
             ]}
           />
@@ -45,9 +35,9 @@ function SettingsHeader() {
           <RouteGroup
             routes={[
               {
-                name: t('dropdown.trade.links.api'),
-                path: generatePath(ROUTE_TRADING_SERVICE_API, { serviceId }),
-                id: `service-management-header__service-api`,
+                name: t('header.2fa'),
+                path: generatePath(ROUTE_2FA),
+                id: `settings__edit-2fa`,
               },
             ]}
           />
@@ -55,35 +45,35 @@ function SettingsHeader() {
           <RouteGroup
             routes={[
               {
-                name: t('investors-label'),
-                path: generatePath(ROUTE_TRADING_SERVICE_INVESTORS, {
-                  serviceId,
-                }),
-                id: `service-management-header__investors`,
+                name: t('header.edit-password'),
+                path: generatePath(ROUTE_PASSWORD),
+                id: `settings__edit-password`,
               },
             ]}
           />
 
-          <RouteDropdown
-            id={'service-management-header__choose-option'}
-            title={t('dropdown.profile.title')}
-            routes={[
-              {
-                name: t('dropdown.profile.links.profile'),
-                path: generatePath(ROUTE_TRADING_SERVICE, {
-                  serviceId,
-                }),
-                id: `service-management-header__service-profile`,
-              },
-              {
-                name: t('dropdown.profile.links.profile-edit'),
-                path: generatePath(ROUTE_TRADING_SERVICE_EDIT, {
-                  serviceId,
-                }),
-                id: `service-management-header__edit-service`,
-              },
-            ]}
-          />
+          {isFeatureOn(Features.Kyc) && (
+            <RouteDropdown
+              id={'settings_verification__choose-option'}
+              title={t('header.verification')}
+              routes={[
+                {
+                  name: t('header.verification-kyc'),
+                  path: generatePath(ROUTE_KYC, {
+                    type: 'kyc',
+                  }),
+                  id: `settings__verification-kyc`,
+                },
+                {
+                  name: t('header.verification-kyb'),
+                  path: generatePath(ROUTE_KYC, {
+                    type: 'kyb',
+                  }),
+                  id: `settings__verification-kyb`,
+                },
+              ]}
+            />
+          )}
         </Container>
       </MarginContainer>
     </Layout>
