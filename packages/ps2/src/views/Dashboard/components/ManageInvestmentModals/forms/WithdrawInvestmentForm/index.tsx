@@ -120,10 +120,7 @@ const WithdrawInvestmentForm: React.FC<{ setView: ChangeViewFn }> = ({
             <ZigSlider
               value={sliderValue}
               prefixId={'withdraw-modal__slider-amount'}
-              onChange={(
-                _: React.ChangeEvent<HTMLInputElement>,
-                value: number,
-              ) => {
+              onChange={(_, value: number) => {
                 setValue(
                   'amountTransfer',
                   trimZeros(

@@ -4,6 +4,9 @@ import {
   ReferralHistory,
   Benefit,
   BenefitClaimed,
+  TierLevels,
+  ServiceCommission,
+  ServiceCommissionPayload,
 } from './types';
 import baseQuery from '../baseQuery';
 
@@ -32,6 +35,30 @@ export const api = createApi({
         url: 'v1/referrer/history',
       }),
     }),
+    tierLevels: builder.query<TierLevels, void>({
+      query: () => ({
+        url: 'v1/tier-levels',
+      }),
+    }),
+    serviceCommission: builder.query<ServiceCommission, { serviceId: string }>({
+      query: ({ serviceId }) => ({
+        url: `v1/service/commission/${serviceId}`,
+      }),
+    }),
+    updateServiceCommission: builder.mutation<void, ServiceCommissionPayload>({
+      query: (payload) => ({
+        url: 'v1/service/commission',
+        method: 'POST',
+        body: payload,
+      }),
+    }),
+    updateDiscount: builder.mutation<void, { discount: number }>({
+      query: (payload) => ({
+        url: 'v1/referrer',
+        method: 'PUT',
+        body: payload,
+      }),
+    }),
   }),
 });
 
@@ -40,4 +67,8 @@ export const {
   useBenefitsQuery,
   useReferralHistoryQuery,
   useReferralRewardsQuery,
+  useTierLevelsQuery,
+  useServiceCommissionQuery,
+  useUpdateServiceCommissionMutation,
+  useUpdateDiscountMutation,
 } = api;

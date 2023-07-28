@@ -9,13 +9,18 @@ import { Service } from '../../../../../apis/service/types';
 import { useMediaQuery } from '@mui/material';
 import theme from '../../../../../theme';
 import { RightSideActionWrapper } from '../styles';
-import { Loader } from '@zignaly-open/ui';
+import { Loader, ZigButton, ZigInviteIcon } from '@zignaly-open/ui';
 import { ROUTE_PROFIT_SHARING_SERVICE_INVEST } from '../../../../../routes';
+import { useZModal } from 'components/ZModal/use';
+import ReferralsInviteModal from '../../ReferralsInviteModal';
+import { useTranslation } from 'react-i18next';
 
 const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const isAuthenticated = useIsAuthenticated();
   const isInvested = useIsInvestedInService(service.id);
   const md = useMediaQuery(theme.breakpoints.up('sm'));
+  const { showModal } = useZModal();
+  const { t } = useTranslation('service');
 
   return (
     <RightSideActionWrapper>
@@ -26,7 +31,27 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
       )}
 
       {!isInvested.isLoading && !service.liquidated && (
-        <Box sx={{ mt: md ? 0 : 3 }}>
+        <Box sx={{ mt: md ? 0 : 3 }} display='flex' gap={3}>
+          <ZigButton
+            ctaId={'service-profile-invite-button'}
+            onClick={() =>
+              showModal(ReferralsInviteModal, {
+                service,
+                serviceId: service.id,
+              })
+            }
+          >
+            <Box
+              display={'flex'}
+              flexDirection={'column'}
+              gap={1}
+              alignItems={'center'}
+              justifyContent={'center'}
+            >
+              <ZigInviteIcon width={20} height={'100%'} />
+              {t('invite')}
+            </Box>
+          </ZigButton>
           {isAuthenticated && isInvested.thisAccount ? (
             <InvestedButton prefixId={'service-profile'} service={service} />
           ) : (

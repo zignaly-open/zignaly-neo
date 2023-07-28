@@ -1,7 +1,7 @@
 import { coinPrecisions } from "./constants";
 
-export function getPrecisionForCoin(coin: string, value: string | number): number {
-  if (+value === 0) return 2;
+export function getPrecisionForCoin(coin: string, value?: string | number): number {
+  if (value !== undefined && +value === 0) return 2;
   const coinPrecision = coinPrecisions[coin];
   return coinPrecision || 8;
 }
