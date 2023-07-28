@@ -118,63 +118,71 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           </>
         ),
       }),
-      columnHelper.accessor('pnlNetAt', {
+      columnHelper.accessor((row) => +row.pnlNetAt, {
         header: t('tableHeader.P&LTotal'),
+        id: 'pnlNetAt',
         cell: (props) => (
           <ZigTablePriceLabel
             coin={service?.ssc ?? 'USDT'}
-            value={parseFloat(props.getValue())}
+            value={props.getValue()}
           />
         ),
       }),
-      columnHelper.accessor('sfOwnerAt', {
+      columnHelper.accessor((row) => +row.sfOwnerAt, {
         header: t('tableHeader.totalFeesPaid'),
+        id: 'totalFeesPaid',
         cell: (props) => (
           <ZigTablePriceLabel
             coin={service?.ssc ?? 'USDT'}
-            value={parseFloat(props.getValue())}
+            value={props.getValue()}
           />
         ),
       }),
-      columnHelper.accessor('ownerSuccessFee', {
-        header: t('tableHeader.successFee'),
-        cell: ({
-          row: {
-            original: {
-              ownerSuccessFee,
-              ownerSfDiscount,
-              account_id: accountId,
-            },
-          },
-        }) => (
-          <Tooltip
-            title={
-              accountId === exchange.internalId
-                ? t('it-is-you-0-fee')
-                : t(
-                    `success-fee-explainer${
-                      ownerSfDiscount ? '-with-discount' : ''
-                    }`,
-                    {
-                      discounted: ownerSuccessFee,
-                      owner: ownerSuccessFee + ownerSfDiscount,
-                      zignalyFee: getServiceZignalyFee(ownerSuccessFee),
-                      discount: ownerSfDiscount,
-                    },
-                  )
-            }
-          >
-            <ZigTypography>
-              {getServiceTotalFee(
+      columnHelper.accessor(
+        (row) =>
+          getServiceTotalFee(
+            row.ownerSuccessFee,
+            row.account_id === exchange.internalId,
+          ),
+        {
+          header: t('tableHeader.successFee'),
+          id: 'ownerSuccessFee',
+          cell: ({
+            getValue,
+            row: {
+              original: {
                 ownerSuccessFee,
-                accountId === exchange.internalId,
-              )}
-              {/* eslint-disable-next-line i18next/no-literal-string */}
-              {'%'}
-            </ZigTypography>
-          </Tooltip>
-        ),
-      }),
+                ownerSfDiscount,
+                account_id: accountId,
+              },
+            },
+          }) => (
+            <Tooltip
+              title={
+                accountId === exchange.internalId
+                  ? t('it-is-you-0-fee')
+                  : t(
+                      `success-fee-explainer${
+                        ownerSfDiscount ? '-with-discount' : ''
+                      }`,
+                      {
+                        discounted: ownerSuccessFee,
+                        owner: ownerSuccessFee + ownerSfDiscount,
+                        zignalyFee: getServiceZignalyFee(ownerSuccessFee),
+                        discount: ownerSfDiscount,
+                      },
+                    )
+              }
+            >
+              <ZigTypography>
+                {getValue()}
+                {/* eslint-disable-next-line i18next/no-literal-string */}
+                {'%'}
+              </ZigTypography>
+            </Tooltip>
+          ),
+        },
+      ),
       columnHelper.accessor('accountType', {
         header: t('tableHeader.status'),
         cell: (props) => <ConnectionStateLabel stateId={props.getValue()} />,
