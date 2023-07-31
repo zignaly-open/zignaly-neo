@@ -33,15 +33,12 @@ jobs:
           envkey_ESLINT_NO_DEV_ERRORS: true
 
           # non-env-specific
-          envkey_REACT_APP_CUSTOMER_IO_ORG_ID: ${{ vars.CUSTOMER_IO_ORG_ID }}
-          envkey_REACT_APP_CUSTOMER_IO_SITE_ID: ${{ vars.CUSTOMER_IO_SITE_ID }}
-          envkey_REACT_APP_SEGMENT_NAME: ${{ vars.SEGMENT_NAME }}
           envkey_REACT_APP_SENTRY_DNS: ${{ vars.SENTRY_DNS }}
+          envkey_REACT_APP_CUSTOMER_IO_SITE_ID: ${{ vars.CUSTOMER_IO_SITE_ID }}
+          envkey_REACT_APP_INTERCOM_APP_ID: ${{ vars.INTERCOM_APP_ID }}
 
           # these do not need to be secrets but I am too lazy to change that
           envkey_REACT_APP_LIVE_SESSION_TRACK_ID: ${{ secrets.PS2_LIVE_SESSION_TRACK_ID }}
-          envkey_REACT_APP_SEGMENT_KEY: ${{ secrets.PS2_SEGMENT_KEY }}
-          envkey_REACT_APP_SEGMENT_SCRIPT_SRC: ${{ secrets.PS2_SEGMENT_SCRIPT_SRC }}
 
           directory: packages/ps2
           file_name: .env

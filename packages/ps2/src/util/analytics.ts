@@ -1,22 +1,34 @@
 import Analytics, { AnalyticsInstance } from 'analytics';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore missing typedefs
-import segmentPlugin from '@analytics/segment';
 import * as Sentry from '@sentry/browser';
 import { SessionsTypes, UserData } from '../apis/user/types';
+import googleTagManager from '@analytics/google-tag-manager';
+import customerIo from '@analytics/customerio';
+import intercomPlugin from '@analytics/intercom';
 
 let analytics: AnalyticsInstance | null = null;
 
-if (
-  process.env.REACT_APP_SEGMENT_KEY &&
-  process.env.REACT_APP_ENABLE_TRACKING === 'true'
-) {
+const customerIoPlugin = customerIo({
+  siteId: process.env.REACT_APP_CUSTOMER_IO_SITE_ID,
+});
+
+const originalInitialize = customerIoPlugin.initialize;
+
+customerIoPlugin.initialize = (args: unknown) => {
+  originalInitialize.call(customerIoPlugin, args);
+  const cio = document.getElementById('cio-tracker');
+  cio?.setAttribute('data-use-in-app', 'true');
+};
+
+if (process.env.REACT_APP_ENABLE_TRACKING === 'true') {
   analytics = Analytics({
-    app: process.env.REACT_APP_SEGMENT_NAME || 'zignaly',
+    app: 'zignaly',
     plugins: [
-      segmentPlugin({
-        writeKey: process.env.REACT_APP_SEGMENT_KEY,
-        customScriptSrc: process.env.REACT_APP_SEGMENT_SCRIPT_SRC,
+      googleTagManager({
+        containerId: process.env.REACT_APP_GTM_ID,
+      }),
+      customerIoPlugin,
+      intercomPlugin({
+        appId: process.env.REACT_APP_INTERCOM_APP_ID,
       }),
     ],
   });
@@ -44,10 +56,6 @@ export const trackNewSession = (
         },
       },
     );
-    // Manually call customer.io identify due to in-app plugin not loaded if using the library from segment
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    _cio?.identify?.({ email, id: userId, name: firstName });
     Sentry.setUser({ email, id: userId });
     if (eventType === SessionsTypes.Signup) {
       analytics?.track('newUser', { userId });
@@ -74,5 +82,4 @@ export const trackConversion = () => {
 
 export const trackPage = () => {
   analytics?.page();
-  window._paq?.push(['trackPageView']);
 };
