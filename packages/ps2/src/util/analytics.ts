@@ -7,19 +7,18 @@ import intercomPlugin from '@analytics/intercom';
 
 let analytics: AnalyticsInstance | null = null;
 
-const customerIoPlugin = customerIo({
-  siteId: process.env.REACT_APP_CUSTOMER_IO_SITE_ID,
-});
-
-const originalInitialize = customerIoPlugin.initialize;
-
-customerIoPlugin.initialize = (args: unknown) => {
-  originalInitialize.call(customerIoPlugin, args);
-  const cio = document.getElementById('cio-tracker');
-  cio?.setAttribute('data-use-in-app', 'true');
-};
-
 if (process.env.REACT_APP_ENABLE_TRACKING === 'true') {
+  const customerIoPlugin = customerIo({
+    siteId: process.env.REACT_APP_CUSTOMER_IO_SITE_ID,
+  });
+  const originalInitialize = customerIoPlugin.initialize;
+
+  customerIoPlugin.initialize = (args: unknown) => {
+    originalInitialize.call(customerIoPlugin, args);
+    const cio = document.getElementById('cio-tracker');
+    cio?.setAttribute('data-use-in-app', 'true');
+  };
+
   analytics = Analytics({
     app: 'zignaly',
     plugins: [
