@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import {
+  ZigButton,
   ZigClockIcon,
   ZigTypography,
   ZigUserFilledIcon,
@@ -13,10 +14,10 @@ import {
   useServiceCommissionQuery,
   useTierLevelsQuery,
 } from 'apis/referrals/api';
-import { Box, Grid } from '@mui/material';
+import { Box, Grid, Icon } from '@mui/material';
 import { CommissionBoostChip } from './styles';
 import Tiers from './atoms/TiersTable';
-import { Verified } from '@mui/icons-material';
+import { ChevronRight, Verified } from '@mui/icons-material';
 import {
   differenceInDays,
   differenceInHours,
@@ -305,6 +306,17 @@ const ReferralsInviteModal = ({
             boost={boost}
             boostRunning={boostRunning}
           />
+          <ZigButton
+            variant={'text'}
+            sx={{ fontSize: '16px !important', marginTop: '31px' }}
+            endIcon={
+              <ChevronRight
+                sx={{ color: 'links', fill: 'currentColor !important' }}
+              />
+            }
+          >
+            {t('terms')}
+          </ZigButton>
         </>
       )}
     </ZModal>
