@@ -21,8 +21,6 @@ export const Container = styled('div')`
   flex-direction: row;
   & > * {
     flex: 1;
-  }
-  &:last-child {
     border-right: 1px dotted ${({ theme }) => theme.palette.neutral600};
   }
   &:first-child {
