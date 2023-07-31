@@ -209,7 +209,7 @@ const ZigDrawer = () => {
                         >
                           <ListItemButton
                             id='drawer__kyc'
-                            to={ROUTE_KYC}
+                            to={generatePath(ROUTE_KYC, { type: 'kyc' })}
                             component={Link}
                           >
                             <ListItemText

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { generatePath, useNavigate } from 'react-router-dom';
 import { ZigArrowOutIcon } from '@zignaly-open/ui';
 import { UserAccessLevel as Level } from '../../apis/user/types';
 import {
@@ -62,7 +62,7 @@ const usePerformLevelCheck = (
           title: t('access.kyc-pending.title'),
           okLabel: t('access.kyc-pending.action'),
           description: t('access.kyc-pending.description'),
-          okAction: () => navigate(ROUTE_KYC),
+          okAction: () => navigate(generatePath(ROUTE_KYC, { type: 'kyc' })),
         },
       },
       [Level.NoSubscription]: subscriptionsEnabled && {
@@ -112,7 +112,7 @@ const usePerformLevelCheck = (
           title: t('access.kyc-expired.title'),
           description: t('access.kyc-expired.description'),
           okLabel: t('access.kyc-expired.action'),
-          okAction: () => navigate(ROUTE_KYC),
+          okAction: () => navigate(generatePath(ROUTE_KYC, { type: 'kyc' })),
         },
       },
       [Level.SubscriptionExpired]: subscriptionsEnabled && {

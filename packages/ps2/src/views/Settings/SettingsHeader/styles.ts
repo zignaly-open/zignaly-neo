@@ -19,6 +19,8 @@ export const Layout = styled('div')`
 export const Container = styled('div')`
   display: flex;
   flex-direction: row;
+  max-width: 900px;
+  margin: 0 auto;
   & > * {
     flex: 1;
     border-right: 1px dotted ${({ theme }) => theme.palette.neutral600};

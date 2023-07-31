@@ -174,8 +174,8 @@ function AccountMenu(): React.ReactElement | null {
             isFeatureOn(Features.Kyc) && {
               id: `menu-dropdown-settings__kyc`,
               label: t('account-menu.dropdown-link-kyc'),
-              href: generatePath(ROUTE_KYC),
-              onClick: () => navigate(ROUTE_KYC),
+              href: generatePath(ROUTE_KYC, { type: 'kyc' }),
+              onClick: () => navigate(generatePath(ROUTE_KYC, { type: 'kyc' })),
             },
           ].filter(Boolean),
         },

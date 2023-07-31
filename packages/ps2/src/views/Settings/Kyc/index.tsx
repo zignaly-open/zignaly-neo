@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import {
@@ -11,11 +11,19 @@ import { Box } from '@mui/material';
 import KycBox from './components/KycBox';
 import kycConfig from './kycDefinitions';
 import { PageWithHeaderContainer } from '../../TraderService/components/styles';
+import { generatePath, useNavigate, useParams } from 'react-router-dom';
+import { ROUTE_KYC } from '../../../routes';
 
 const Kyc: React.FC = () => {
   const { t } = useTranslation(['kyc', 'pages']);
   useTitle(t('pages:kyc'));
-  const [tab, setTab] = useState<'kyc' | 'kyb'>('kyc');
+  const { type: kycType } = useParams();
+  const navigate = useNavigate();
+  const switchToTab = useCallback((type: string) => {
+    navigate(generatePath(ROUTE_KYC, { type }));
+  }, []);
+
+  const tab = kycType in kycConfig ? kycType : 'kyc';
 
   return (
     <PageContainer style={{ maxWidth: '615px' }}>
@@ -49,7 +57,7 @@ const Kyc: React.FC = () => {
             ml: 'auto',
             mr: 'auto',
           }}
-          onChange={(_, newValue) => setTab(newValue)}
+          onChange={(_, newValue) => switchToTab(newValue)}
           value={tab}
         >
           <ZigTab label={t('tabs.kyc')} value={'kyc'} />
