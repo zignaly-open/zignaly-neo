@@ -14,12 +14,12 @@
     "invite-more": "Invite {{invite}} More People and Get {{commission}}%",
     "invite-and-earn-1-week": "Invite {{invite}}+ people within 1 week and earn {{commission}}%",
     "invite-and-earn-trader-boost": "Invite {{invite}}+ people and earn {{commission}}% ({{commissionBefore}}% + {{multiplier}}x trader boost)",
-    "max-earnings-from-fees": "Max earnings\nfrom {{amount}} of fees",
-    "base-commission": "Base commission",
+    "max-earnings-from-fees": "Max earnings\nfrom {{amount}} of fees:",
+    "base-commission": "Base commission:",
     "within-1-week": "Within 1 week",
-    "welcome-boost": "Welcome Boost",
+    "welcome-boost": "Welcome Boost:",
     "trader-boost": "Trader Boost",
-    "invites": "Invites",
+    "invites": "Invites:",
     "your-rate": "Your Rate",
     "day_one": "{{count}} day",
     "day_other": "{{count}} days",
@@ -29,5 +29,6 @@
     "minute_other": "{{count}} mins",
     "for-me": "for me",
     "for-friends": "for friends",
-    "trader-boost-value": "{{boost}}x Boost"
+    "trader-boost-value": "{{boost}}x Boost",
+    "terms": "Full terms & FAQs"
 }
