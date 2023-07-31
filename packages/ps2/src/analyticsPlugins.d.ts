@@ -4,28 +4,28 @@ type AnalyticsPlugin = {
   name: string;
 
   /** exposed events of plugin */
-  EVENTS?: any;
+  EVENTS?: unknown;
 
   /** Configuration of plugin */
-  config?: any;
+  config?: unknown;
 
   /** Load analytics scripts method */
-  initialize?: (...params: any[]) => any;
+  initialize?: (...params: unknown[]) => unknown;
 
   /** Page visit tracking method */
-  page?: (...params: any[]) => any;
+  page?: (...params: unknown[]) => unknown;
 
   /** Custom event tracking method */
-  track?: (...params: any[]) => any;
+  track?: (...params: unknown[]) => unknown;
 
   /** User identify method */
-  identify?: (...params: any[]) => any;
+  identify?: (...params: unknown[]) => unknown;
 
   /** Function to determine if analytics script loaded */
-  loaded?: (...params: any[]) => any;
+  loaded?: (...params: unknown[]) => unknown;
 
   /** Fire function when plugin ready */
-  ready?: (...params: any[]) => any;
+  ready?: (...params: unknown[]) => unknown;
 };
 
 declare module '@analytics/google-tag-manager' {
