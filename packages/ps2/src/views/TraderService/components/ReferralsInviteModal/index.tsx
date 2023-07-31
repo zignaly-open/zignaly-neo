@@ -14,7 +14,7 @@ import {
   useServiceCommissionQuery,
   useTierLevelsQuery,
 } from 'apis/referrals/api';
-import { Box, Grid, Icon } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import { CommissionBoostChip } from './styles';
 import Tiers from './atoms/TiersTable';
 import { ChevronRight, Verified } from '@mui/icons-material';
