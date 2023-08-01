@@ -29,13 +29,6 @@ export const api = createApi({
       query: () => ({
         url: 'v1/referrer/data',
       }),
-      transformResponse: (response: any) => ({
-        ...response,
-        boost: 1,
-        investorsCount: 0,
-        tierId: null,
-        boostEndsAt: '2023-08-10T23:59:59.000Z',
-      }),
     }),
     referralHistory: builder.query<ReferralHistory, void>({
       query: () => ({
@@ -50,9 +43,6 @@ export const api = createApi({
     serviceCommission: builder.query<ServiceCommission, { serviceId: string }>({
       query: ({ serviceId }) => ({
         url: `v1/service/commission/${serviceId}`,
-      }),
-      transformResponse: () => ({
-        commission: 5,
       }),
     }),
     updateServiceCommission: builder.mutation<void, ServiceCommissionPayload>({
