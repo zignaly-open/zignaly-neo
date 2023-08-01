@@ -32,11 +32,7 @@ const UpdatePassword: React.FC = () => {
           </ZigTypography>
         </Box>
 
-        <UpdatePasswordForm
-          close={() => {
-            // Do nothing
-          }}
-        />
+        <UpdatePasswordForm />
       </PageWithHeaderContainer>
     </PageContainer>
   );
