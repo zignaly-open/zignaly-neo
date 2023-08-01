@@ -2,7 +2,6 @@ import { FilledTextFieldProps } from "@mui/material/TextField/TextField";
 
 export type Coin = {
   coin: string;
-  balance: string | number;
 };
 
 export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"> & {
@@ -47,7 +46,7 @@ export type ZigInputAmountProps = Omit<FilledTextFieldProps, "variant" | "error"
 };
 
 export type InputExtraInfoItem = { value: string | number; label: string };
-export type InputExtraInfoFalseableItem = string | InputExtraInfoItem | false;
+export type InputExtraInfoFalseableItem = string | InputExtraInfoItem | JSX.Element | false;
 
 export type InputExtraInfoProps = {
   balance?: string | number;

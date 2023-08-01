@@ -3,8 +3,14 @@ export type ReferralsState = Record<string, never>;
 export type ReferralRewards = {
   referralCode: string;
   invitedCount: number;
+  investorsCount: number;
   usdtEarned: number;
   usdtPending: number;
+  tierId: number;
+  tierFactor: number;
+  discountPct: number;
+  boost: number;
+  boostEndsAt: string;
   configuration: {
     zignalySuccessFee: number;
     zignalyRebateFee: number;
@@ -71,4 +77,21 @@ export type BenefitClaimed = {
   amount: number;
   remaining: number;
   status: BenefitClaimedStatus;
+};
+
+export type TierLevel = {
+  id: number;
+  name: string;
+  invitees: number;
+  commissionPct: number;
+};
+export type TierLevels = TierLevel[];
+
+export type ServiceCommission = {
+  commission: number;
+};
+
+export type ServiceCommissionPayload = {
+  service: string;
+  commission: number;
 };

@@ -7,7 +7,7 @@ export type InvestFormProps = {
 };
 
 export type InvestFormData = {
-  profitPercentage: string | number;
+  profitPercentage: number;
   transferConfirm: string;
   transferLabelForValidation: string;
   understandRisk: boolean;

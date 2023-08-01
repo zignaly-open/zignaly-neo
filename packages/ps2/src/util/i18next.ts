@@ -43,7 +43,7 @@ export const dateFnsLocaleMapping = {
 const getFallbackLanguage = (locale: string): string | string[] => {
   const getFamily = (x: string) => x.split(/[_-]/)[0];
   return supportedLanguages.includes(locale)
-    ? locale
+    ? [locale, 'en']
     : [
         ...supportedLanguages.filter((x) => getFamily(x) === getFamily(locale)),
         'en',

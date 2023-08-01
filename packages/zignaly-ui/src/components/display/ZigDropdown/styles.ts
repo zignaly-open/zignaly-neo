@@ -114,10 +114,7 @@ export const NavList = styled.div`
   display: flex;
   flex-direction: column;
   > *:first-child {
-    margin-top: 11px;
-    &:last-child {
-      margin-top: 6px;
-    }
+    margin-top: 6px;
   }
   > *:last-child {
     margin-bottom: 6px;
