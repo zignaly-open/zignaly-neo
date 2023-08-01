@@ -44,17 +44,12 @@ export const trackNewSession = (
   try {
     pushGtmEvent({ event: eventType, ...userData });
     const { email, userId, firstName, intercomHash, createdAt } = userData;
-    analytics?.identify(
-      userId,
-      { email, name: firstName, created_at: +createdAt },
-      {
-        integrations: {
-          Intercom: {
-            user_hash: intercomHash,
-          },
-        },
-      },
-    );
+    analytics?.identify(userId, {
+      email,
+      name: firstName,
+      created_at: +createdAt,
+      user_hash: intercomHash,
+    });
     Sentry.setUser({ email, id: userId });
     if (eventType === SessionsTypes.Signup) {
       analytics?.track('newUser', { userId });
