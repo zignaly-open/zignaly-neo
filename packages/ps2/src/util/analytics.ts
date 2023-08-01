@@ -48,8 +48,8 @@ export const trackNewSession = (
       email,
       name: firstName,
       created_at: +createdAt,
-      user_hash: intercomHash,
     });
+    window.intercomSettings.user_hash = intercomHash;
     Sentry.setUser({ email, id: userId });
     if (eventType === SessionsTypes.Signup) {
       analytics?.track('newUser', { userId });
