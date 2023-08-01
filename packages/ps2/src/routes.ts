@@ -6,6 +6,7 @@ export const ROUTE_LOGIN = '/login';
 export const ROUTE_SIGNUP = '/signup';
 export const ROUTE_FORGOT_PASSWORD = '/forgot-password';
 export const ROUTE_RESET_PASSWORD = '/reset-password/:token';
+export const ROUTE_SUBSCRIPTIONS = '/subscriptions';
 export const ROUTE_TRADING_SERVICE = '/profit-sharing/:serviceId';
 export const ROUTE_PROFIT_SHARING_SERVICE_INVEST =
   '/profit-sharing/:serviceId/invest';

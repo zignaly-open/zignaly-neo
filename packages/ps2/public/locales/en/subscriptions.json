@@ -1,0 +1,17 @@
+{
+  "title": "Subscriptions",
+  "quantwise": {
+    "quantwise": "Quantwise",
+    "packages": {
+      "plus": "PLUS",
+      "pro": "PRO",
+      "expert": "EXPERT",
+      "master": "MASTER"
+    },
+    "fees": "Performance Fees: {{ fee }}%***",
+    "license": "Yearly license*",
+    "renewal-date": "Renewal date: {{ date }}",
+    "get-started": "Get Started",
+    "your-subscription": "Your subscription"
+  }
+}

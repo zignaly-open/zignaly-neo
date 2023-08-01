@@ -28,6 +28,7 @@ const ResetPassword = lazy(() => import('views/Auth/ResetPassword'));
 const Referrals = lazy(() => import('./views/Referrals'));
 const Invite = lazy(() => import('./views/Referrals/Invite'));
 const Rewards = lazy(() => import('./views/Rewards'));
+const Subscriptions = lazy(() => import('./views/Subscriptions'));
 
 const { default: Dashboard, DashboardModalInvestmentEdit } = lazily(
   () => import('./views/Dashboard'),
@@ -86,6 +87,7 @@ const Router: React.FC = () => (
         path={Routes.ROUTE_MY_BALANCES_TRANSACTIONS}
         element={outleted(<MyBalances />)}
       />
+      <Route path={Routes.ROUTE_SUBSCRIPTIONS} element={<Subscriptions />} />
       {isFeatureOn(Features.Referrals) && (
         <Route path={Routes.ROUTE_REFERRALS} element={<Referrals />} />
       )}

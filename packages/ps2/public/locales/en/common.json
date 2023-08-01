@@ -63,7 +63,8 @@
   },
   "navigation-menu": {
     "profit-sharing": "Browse Top Traders",
-    "become-trader": "Offer your Trading Services"
+    "become-trader": "Offer your Trading Services",
+    "subscriptions": "Subscriptions"
   },
   "amount": "Amount",
   "percent": "{{value, prettyNumber}}%",
