@@ -39,6 +39,7 @@ import {
   ROUTE_BECOME_TRADER,
   ROUTE_KYC,
   ROUTE_LOGIN,
+  ROUTE_PASSWORD,
   ROUTE_PROFIT_SHARING,
   ROUTE_SIGNUP,
   ROUTE_TRADING_SERVICE_MANAGE,
@@ -49,9 +50,8 @@ import { supportedLanguages } from 'util/i18next';
 import { LocalizationLanguages } from 'util/languages';
 import socialNetworksLinks from 'util/socialNetworks';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
-import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
-import { DropdownExchangeAccount } from './atoms';
+import { DrawerMenuItem, DropdownExchangeAccount } from './atoms';
 import { useOpenDepositModal } from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { isFeatureOn } from '../../../whitelabel';
 import { Features } from '../../../whitelabel/type';
@@ -183,16 +183,12 @@ const ZigDrawer = () => {
                       disablePadding
                       onClick={handleDrawerToggle}
                     >
-                      <ListItemButton
-                        sx={{ pl: 4 }}
-                        onClick={() => showModal(UpdatePasswordModal)}
-                      >
-                        <ListItemText
-                          primary={t(
-                            'account-menu.notAuth-dropdown-link-password',
-                          )}
-                        />
-                      </ListItemButton>
+                      <DrawerMenuItem
+                        id='drawer__update-password'
+                        path={generatePath(ROUTE_PASSWORD)}
+                        closeDrawer={handleDrawerToggle}
+                        label={t('account-menu.notAuth-dropdown-link-password')}
+                      />
                       <ListItemButton
                         onClick={() => showModal(Enable2FAModal)}
                         sx={{ pl: 4 }}
@@ -202,21 +198,12 @@ const ZigDrawer = () => {
                         />
                       </ListItemButton>
                       {isFeatureOn(Features.Kyc) && (
-                        <ListItem
-                          disablePadding
-                          onClick={handleDrawerToggle}
-                          sx={{ pl: 4 }}
-                        >
-                          <ListItemButton
-                            id='drawer__kyc'
-                            to={generatePath(ROUTE_KYC, { type: 'kyc' })}
-                            component={Link}
-                          >
-                            <ListItemText
-                              primary={t('account-menu.dropdown-link-kyc')}
-                            />
-                          </ListItemButton>
-                        </ListItem>
+                        <DrawerMenuItem
+                          id='drawer__kyc'
+                          path={generatePath(ROUTE_KYC, { type: 'kyc' })}
+                          closeDrawer={handleDrawerToggle}
+                          label={t('account-menu.dropdown-link-kyc')}
+                        />
                       )}
                     </List>
                   </Collapse>

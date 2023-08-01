@@ -1,5 +1,5 @@
 import { ExpandLess, ChevronRight } from '@mui/icons-material';
-import { Box } from '@mui/material';
+import { Box, ListItem, ListItemButton, ListItemText } from '@mui/material';
 import { Avatar, ZigDropdown } from '@zignaly-open/ui';
 import {
   useActiveExchange,
@@ -7,6 +7,7 @@ import {
   useSelectExchange,
 } from 'apis/user/use';
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { getImageOfAccount } from 'util/images';
 import { AccountName } from '../AccountMenu/styles';
 
@@ -55,3 +56,16 @@ export const DropdownExchangeAccount = () => {
     />
   );
 };
+
+export const DrawerMenuItem: React.FC<{
+  closeDrawer: () => void;
+  id: string;
+  path: string;
+  label: string;
+}> = ({ closeDrawer, id, path, label }) => (
+  <ListItem disablePadding onClick={closeDrawer} sx={{ pl: 4 }}>
+    <ListItemButton id={id} to={path} component={Link}>
+      <ListItemText primary={label} />
+    </ListItemButton>
+  </ListItem>
+);

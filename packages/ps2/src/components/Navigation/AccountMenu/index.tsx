@@ -29,6 +29,7 @@ import {
   ROUTE_KYC,
   ROUTE_LOGIN,
   ROUTE_MY_BALANCES,
+  ROUTE_PASSWORD,
   ROUTE_REFERRALS,
   ROUTE_REWARDS,
   ROUTE_SIGNUP,
@@ -36,7 +37,6 @@ import {
 import { generatePath, Link, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
 import { useZModal } from 'components/ZModal/use';
-import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import { useOpenDepositModal } from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { ReactComponent as GiftIcon } from '../../../images/tab-rewards.svg';
@@ -164,7 +164,8 @@ function AccountMenu(): React.ReactElement | null {
             {
               id: `menu-dropdown-settings__password`,
               label: t('account-menu.notAuth-dropdown-link-password'),
-              onClick: () => showModal(UpdatePasswordModal),
+              href: generatePath(ROUTE_PASSWORD),
+              onClick: () => navigate(generatePath(ROUTE_PASSWORD)),
             },
             {
               id: `menu-dropdown-settings__2fa`,

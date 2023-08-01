@@ -20,6 +20,7 @@ import { zigSuspenseFallback } from 'util/suspense';
 import { isFeatureOn } from './whitelabel';
 import { Features } from './whitelabel/type';
 import SettingsHeader from './views/Settings/SettingsHeader';
+import UpdatePassword from './views/Settings/UpdatePassword';
 
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
 const ForgotPassword = lazy(() => import('./views/Auth/ForgotPassword'));
@@ -149,7 +150,7 @@ const Router: React.FC = () => (
         )}
         <Route path={Routes.ROUTE_2FA} element={<Kyc />} />
         <Route path={Routes.ROUTE_EDIT_PROFILE} element={<Kyc />} />
-        <Route path={Routes.ROUTE_PASSWORD} element={<Kyc />} />
+        <Route path={Routes.ROUTE_PASSWORD} element={<UpdatePassword />} />
       </Route>
     </Route>
 

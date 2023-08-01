@@ -17,7 +17,7 @@ import { ROUTE_KYC } from '../../../routes';
 const Kyc: React.FC = () => {
   const { t } = useTranslation(['kyc', 'pages']);
   useTitle(t('pages:kyc'));
-  const { type: kycType } = useParams();
+  const { type: kycType } = useParams<{ type: 'kyc' | 'kyb' }>();
   const navigate = useNavigate();
   const switchToTab = useCallback((type: string) => {
     navigate(generatePath(ROUTE_KYC, { type }));
