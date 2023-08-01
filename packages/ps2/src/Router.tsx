@@ -20,10 +20,6 @@ import { zigSuspenseFallback } from 'util/suspense';
 import { isFeatureOn } from './whitelabel';
 import { Features } from './whitelabel/type';
 
-import SettingsHeader from './views/Settings/SettingsHeader';
-import UpdatePassword from './views/Settings/UpdatePassword';
-import Toggle2FA from './views/Settings/Toggle2FA';
-
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
 const ForgotPassword = lazy(() => import('./views/Auth/ForgotPassword'));
 const HelpInvestor = lazy(() => import('./views/Help/HelpInvestor'));
@@ -32,7 +28,6 @@ const ResetPassword = lazy(() => import('views/Auth/ResetPassword'));
 const Referrals = lazy(() => import('./views/Referrals'));
 const Invite = lazy(() => import('./views/Referrals/Invite'));
 const Rewards = lazy(() => import('./views/Rewards'));
-const Kyc = lazy(() => import('./views/Settings/Kyc'));
 
 const { default: Dashboard, DashboardModalInvestmentEdit } = lazily(
   () => import('./views/Dashboard'),
@@ -49,6 +44,10 @@ const {
   EditService,
   Manual,
 } = lazily(() => import('./views/TraderService/routes'));
+
+const { Kyc, SettingsHeader, UpdatePassword, Toggle2FA } = lazily(
+  () => import('./views/Settings/routes'),
+);
 
 const { default: MyBalances, MyBalancesDeposit } = lazily(
   () => import('./views/Balance'),
