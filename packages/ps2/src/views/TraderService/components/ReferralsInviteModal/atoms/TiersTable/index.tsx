@@ -1,6 +1,10 @@
 import React from 'react';
 import { Box, Tooltip } from '@mui/material';
-import { ZigTypography, ZigUserFilledIcon } from '@zignaly-open/ui';
+import {
+  ZigClockIcon,
+  ZigTypography,
+  ZigUserFilledIcon,
+} from '@zignaly-open/ui';
 import { MAX_FEES_AMOUNT, getMaxEarnings } from '../../util';
 import { useTranslation } from 'react-i18next';
 import { TierLevels } from 'apis/referrals/types';
@@ -57,6 +61,7 @@ const CellLabelBoost = ({
   return (
     <Box display='flex' alignItems='center' gap='7px' justifyContent='flex-end'>
       <BoostChip boost={boost} />
+      <ZigClockIcon color='#e93ea7' />
       <ZigTypography
         fontWeight={500}
         variant='h4'
