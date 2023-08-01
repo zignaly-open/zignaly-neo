@@ -31,11 +31,11 @@ import {
   useIsAuthenticated,
   useLogout,
 } from 'apis/user/use';
-import { useZModal } from 'components/ZModal/use';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router-dom';
 import {
+  ROUTE_2FA,
   ROUTE_BECOME_TRADER,
   ROUTE_KYC,
   ROUTE_LOGIN,
@@ -49,7 +49,6 @@ import { HELP_URL } from 'util/constants';
 import { supportedLanguages } from 'util/i18next';
 import { LocalizationLanguages } from 'util/languages';
 import socialNetworksLinks from 'util/socialNetworks';
-import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
 import { DrawerMenuItem, DropdownExchangeAccount } from './atoms';
 import { useOpenDepositModal } from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
@@ -69,7 +68,6 @@ const ZigDrawer = () => {
   const isAuthenticated = useIsAuthenticated();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
-  const { showModal } = useZModal();
   const service = useFirstOwnedService();
   const { exchanges, email, imageUrl } = useCurrentUser();
   const openDepositModal = useOpenDepositModal();
@@ -189,14 +187,12 @@ const ZigDrawer = () => {
                         closeDrawer={handleDrawerToggle}
                         label={t('account-menu.notAuth-dropdown-link-password')}
                       />
-                      <ListItemButton
-                        onClick={() => showModal(Enable2FAModal)}
-                        sx={{ pl: 4 }}
-                      >
-                        <ListItemText
-                          primary={t('account-menu.notAuth-dropdown-link-2fa')}
-                        />
-                      </ListItemButton>
+                      <DrawerMenuItem
+                        id='drawer__2fa'
+                        path={generatePath(ROUTE_2FA)}
+                        closeDrawer={handleDrawerToggle}
+                        label={t('account-menu.notAuth-dropdown-link-2fa')}
+                      />
                       {isFeatureOn(Features.Kyc) && (
                         <DrawerMenuItem
                           id='drawer__kyc'

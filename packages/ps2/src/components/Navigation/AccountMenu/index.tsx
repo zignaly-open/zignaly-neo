@@ -25,6 +25,7 @@ import {
   ZigTypography,
 } from '@zignaly-open/ui';
 import {
+  ROUTE_2FA,
   ROUTE_DASHBOARD,
   ROUTE_KYC,
   ROUTE_LOGIN,
@@ -36,8 +37,6 @@ import {
 } from '../../../routes';
 import { generatePath, Link, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
-import { useZModal } from 'components/ZModal/use';
-import Enable2FAModal from 'views/Settings/Enable2FAModal';
 import { useOpenDepositModal } from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { ReactComponent as GiftIcon } from '../../../images/tab-rewards.svg';
 import { ReactComponent as InviteIcon } from '../../../images/tab-referrals.svg';
@@ -55,7 +54,6 @@ function AccountMenu(): React.ReactElement | null {
   const navigate = useNavigate();
   const { exchanges } = useCurrentUser();
   const selectExchange = useSelectExchange();
-  const { showModal } = useZModal();
   const openDepositModal = useOpenDepositModal();
   const md = useMediaQuery(theme.breakpoints.up('sm'));
   const dropDownRef = useRef<ZigDropdownHandleType>(null);
@@ -170,7 +168,8 @@ function AccountMenu(): React.ReactElement | null {
             {
               id: `menu-dropdown-settings__2fa`,
               label: t('account-menu.notAuth-dropdown-link-2fa'),
-              onClick: () => showModal(Enable2FAModal),
+              href: generatePath(ROUTE_2FA),
+              onClick: () => navigate(generatePath(ROUTE_2FA)),
             },
             isFeatureOn(Features.Kyc) && {
               id: `menu-dropdown-settings__kyc`,
