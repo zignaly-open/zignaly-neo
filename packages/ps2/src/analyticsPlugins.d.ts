@@ -43,6 +43,11 @@ declare module '@analytics/google-tag-manager' {
   export default googleTagManager;
 }
 
+declare module '@analytics/google-analytics' {
+  function GoogleAnalytics(options: unknown): AnalyticsPlugin;
+  export default GoogleAnalytics;
+}
+
 declare module '@analytics/customerio' {
   function customerIOServer(configuration: unknown): AnalyticsPlugin;
   export default customerIOServer;
