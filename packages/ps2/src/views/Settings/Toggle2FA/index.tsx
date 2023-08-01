@@ -27,9 +27,17 @@ const Toggle2FA: React.FC = () => {
         </Box>
 
         {user.ask2FA ? (
-          <Disable2FAForm close={close} />
+          <Disable2FAForm
+            close={() => {
+              // Do nothing
+            }}
+          />
         ) : (
-          <Enable2FAForm close={close} />
+          <Enable2FAForm
+            close={() => {
+              // Do nothing
+            }}
+          />
         )}
       </PageWithHeaderContainer>
     </PageContainer>
