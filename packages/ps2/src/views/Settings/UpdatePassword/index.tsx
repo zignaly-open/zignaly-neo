@@ -7,7 +7,7 @@ import { useTitle } from 'react-use';
 import { Box } from '@mui/material';
 
 const UpdatePassword: React.FC = () => {
-  const { t } = useTranslation('settings');
+  const { t } = useTranslation(['settings', 'pages']);
   useTitle(t('pages:update-password'));
   return (
     <PageContainer style={{ maxWidth: '615px' }}>

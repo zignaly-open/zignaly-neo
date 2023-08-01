@@ -17,7 +17,7 @@ import { isFeatureOn } from '../../../whitelabel';
 import { Features } from '../../../whitelabel/type';
 
 function SettingsHeader() {
-  const { t } = useTranslation('settings');
+  const { t } = useTranslation(['settings', 'pages']);
   return (
     <Layout>
       <MarginContainer>

@@ -9,7 +9,7 @@ import { PageContainer, ZigTypography } from '@zignaly-open/ui';
 import { PageWithHeaderContainer } from '../../TraderService/components/styles';
 
 const Toggle2FA: React.FC = () => {
-  const { t } = useTranslation('settings');
+  const { t } = useTranslation(['settings', 'pages']);
   useTitle(t('pages:2fa'));
   const user = useCurrentUser();
   return (
