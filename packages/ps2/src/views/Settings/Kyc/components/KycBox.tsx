@@ -10,10 +10,13 @@ import {
   ZigButton,
   ZigTypography,
 } from '@zignaly-open/ui';
-import { useKycStatusQuery, useLazyKycLinkQuery } from '../../../apis/user/api';
+import {
+  useKycStatusQuery,
+  useLazyKycLinkQuery,
+} from '../../../../apis/user/api';
 import { useTranslation } from 'react-i18next';
-import { UlList } from '../../Referrals/styles';
-import { useZConfirm } from '../../../components/ZModal/use';
+import { UlList } from '../../../Referrals/styles';
+import { useZConfirm } from '../../../../components/ZModal/use';
 
 const largeIconStyle = {
   height: '16px',

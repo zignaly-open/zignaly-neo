@@ -1,6 +1,6 @@
 import React from 'react';
-import { ReactComponent as SilverIcon } from '../../images/kyc/silver.svg';
-import { ReactComponent as GoldIcon } from '../../images/kyc/gold.svg';
+import { ReactComponent as SilverIcon } from '../../../images/kyc/silver.svg';
+import { ReactComponent as GoldIcon } from '../../../images/kyc/gold.svg';
 import { KycDefinitionConfig } from './types';
 
 const silverRestriction = {

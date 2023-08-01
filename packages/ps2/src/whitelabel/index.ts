@@ -1,7 +1,7 @@
 import * as clients from './configs';
 import { Features, OverrideableEndpoints, WhitelabelOverride } from './type';
 import defaultFeatureState from './default';
-import { hasValidKycConfig } from '../views/Kyc/kycDefinitions';
+import { hasValidKycConfig } from '../views/Settings/Kyc/kycDefinitions';
 
 const { REACT_APP_WHITELABEL: whitelabelConfig } = process.env;
 

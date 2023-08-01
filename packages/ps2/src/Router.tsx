@@ -19,6 +19,7 @@ import ServiceHeader from './views/TraderService/components/ServiceHeader';
 import { zigSuspenseFallback } from 'util/suspense';
 import { isFeatureOn } from './whitelabel';
 import { Features } from './whitelabel/type';
+import SettingsHeader from './views/Settings/SettingsHeader';
 
 const ProfitSharing = lazy(() => import('./views/ProfitSharing'));
 const ForgotPassword = lazy(() => import('./views/Auth/ForgotPassword'));
@@ -28,7 +29,7 @@ const ResetPassword = lazy(() => import('views/Auth/ResetPassword'));
 const Referrals = lazy(() => import('./views/Referrals'));
 const Invite = lazy(() => import('./views/Referrals/Invite'));
 const Rewards = lazy(() => import('./views/Rewards'));
-const Kyc = lazy(() => import('./views/Kyc'));
+const Kyc = lazy(() => import('./views/Settings/Kyc'));
 
 const { default: Dashboard, DashboardModalInvestmentEdit } = lazily(
   () => import('./views/Dashboard'),
@@ -84,10 +85,6 @@ const Router: React.FC = () => (
         />
       </Route>
 
-      {isFeatureOn(Features.Kyc) && (
-        <Route path={Routes.ROUTE_KYC} element={<Kyc />}></Route>
-      )}
-
       <Route
         path={Routes.ROUTE_MY_BALANCES_TRANSACTIONS}
         element={outleted(<MyBalances />)}
@@ -142,6 +139,17 @@ const Router: React.FC = () => (
           path={Routes.ROUTE_TRADING_SERVICE_EDIT}
           element={<EditService />}
         />
+      </Route>
+    </Route>
+
+    <Route element={outleted(<SettingsHeader />)}>
+      <Route element={<AuthenticatedWall />}>
+        {isFeatureOn(Features.Kyc) && (
+          <Route path={Routes.ROUTE_KYC} element={<Kyc />} />
+        )}
+        <Route path={Routes.ROUTE_2FA} element={<Kyc />} />
+        <Route path={Routes.ROUTE_EDIT_PROFILE} element={<Kyc />} />
+        <Route path={Routes.ROUTE_PASSWORD} element={<Kyc />} />
       </Route>
     </Route>
 
