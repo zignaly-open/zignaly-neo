@@ -25,7 +25,6 @@ if (process.env.REACT_APP_ENABLE_TRACKING === 'true') {
     plugins: [
       googleTagManager({
         containerId: process.env.REACT_APP_GTM_ID,
-        dataLayerName: 'test',
       }),
       customerIoPlugin,
       intercomPlugin({
