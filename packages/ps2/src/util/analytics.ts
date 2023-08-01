@@ -4,6 +4,7 @@ import { SessionsTypes, UserData } from '../apis/user/types';
 import googleTagManager from '@analytics/google-tag-manager';
 import customerIo from '@analytics/customerio';
 import intercomPlugin from '@analytics/intercom';
+import { getUnixTime } from 'date-fns';
 
 let analytics: AnalyticsInstance | null = null;
 
@@ -24,6 +25,7 @@ if (process.env.REACT_APP_ENABLE_TRACKING === 'true') {
     plugins: [
       googleTagManager({
         containerId: process.env.REACT_APP_GTM_ID,
+        dataLayerName: 'test',
       }),
       customerIoPlugin,
       intercomPlugin({
@@ -47,9 +49,11 @@ export const trackNewSession = (
     analytics?.identify(userId, {
       email,
       name: firstName,
-      created_at: +new Date(createdAt),
+      created_at: getUnixTime(new Date(createdAt)),
     });
-    window.intercomSettings.user_hash = intercomHash;
+    if (window.intercomSettings) {
+      window.intercomSettings.user_hash = intercomHash;
+    }
     Sentry.setUser({ email, id: userId });
     if (eventType === SessionsTypes.Signup) {
       analytics?.track('newUser', { userId });
