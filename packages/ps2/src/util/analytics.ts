@@ -5,6 +5,7 @@ import googleTagManager from '@analytics/google-tag-manager';
 import customerIo from '@analytics/customerio';
 import intercomPlugin from '@analytics/intercom';
 import { getUnixTime } from 'date-fns';
+import googleAnalytics from '@analytics/google-analytics';
 
 let analytics: AnalyticsInstance | null = null;
 
@@ -26,6 +27,9 @@ if (process.env.REACT_APP_ENABLE_TRACKING === 'true') {
       googleTagManager({
         containerId: process.env.REACT_APP_GTM_ID,
       }),
+      googleAnalytics({
+        measurementIds: [process.env.REACT_APP_GA_ID],
+      }),
       customerIoPlugin,
       intercomPlugin({
         appId: process.env.REACT_APP_INTERCOM_APP_ID,
@@ -34,16 +38,11 @@ if (process.env.REACT_APP_ENABLE_TRACKING === 'true') {
   });
 }
 
-const pushGtmEvent = (payload: unknown): void => {
-  window?.dataLayer?.push?.(payload);
-};
-
 export const trackNewSession = (
   userData: UserData,
   eventType: SessionsTypes,
 ) => {
   try {
-    pushGtmEvent({ event: eventType, ...userData });
     const { email, userId, firstName, intercomHash, createdAt } = userData;
     analytics?.identify(userId, {
       email,
