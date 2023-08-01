@@ -66,7 +66,7 @@ const TierBar = ({
 
   return (
     <AnimatedContainer>
-      {referral.tierLevelId === tier.id && <UserRate />}
+      {referral.tierId === tier.id && <UserRate />}
       <Box position='relative' height={layer1.height}>
         <TierBarContainer
           opacity={opacity}
@@ -92,7 +92,7 @@ const TierBar = ({
             </ZigTypography>
           </BarContent>
           <Overlay opacity={opacity} />
-          {referral.tierLevelId === tier.id && (
+          {referral.tierId === tier.id && (
             <HighlightRate
               height={layer1.height - layer2.height}
               width={width - 3}

@@ -48,7 +48,7 @@ const ReferralsInviteModal = ({
   const lastTier = tiers?.[tiers?.length - 1];
   const inviteLeft =
     // in case it reached last tier but invites is increased afterwards
-    referral?.tierLevelId === lastTier?.id
+    referral?.tierId === lastTier?.id
       ? 0
       : lastTier?.invitees - referral?.investorsCount;
   const boostEndsDate = new Date(referral?.boostEndsAt);
