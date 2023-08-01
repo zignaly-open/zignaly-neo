@@ -1,6 +1,6 @@
 import React from 'react';
 import { AmountContainer } from './styles';
-import { Grid } from '@mui/material';
+import { Grid, Tooltip } from '@mui/material';
 import { ZigButton, ZigPriceLabel, ZigTypography } from '@zignaly-open/ui';
 import { ModalActions as ModalActions } from 'components/ZModal/ModalContainer/styles';
 import ChainIcon from 'components/ChainIcon';
@@ -53,6 +53,22 @@ const WithdrawConfirmForm = ({
   ): number | undefined => {
     return ['BTC', 'ETH', 'BNB'].includes(coinToWithdraw) ? 4 : undefined;
   };
+  const shortenAddress = () => {
+    const addressLength = address.length;
+    if (addressLength <= 58) return address;
+    const visibleCharacters = 27;
+    const ellipsis = '......';
+
+    return (
+      <Tooltip title={address}>
+        <div>
+          {address.slice(0, visibleCharacters) +
+            ellipsis +
+            address.slice(-visibleCharacters)}
+        </div>
+      </Tooltip>
+    );
+  };
 
   return (
     <Grid container direction='column'>
@@ -99,7 +115,7 @@ const WithdrawConfirmForm = ({
         id={'withdraw-modal-confirmation__address'}
         mt={'10px'}
       >
-        {address}
+        {shortenAddress()}
       </ZigTypography>
       {tag && (
         <>
