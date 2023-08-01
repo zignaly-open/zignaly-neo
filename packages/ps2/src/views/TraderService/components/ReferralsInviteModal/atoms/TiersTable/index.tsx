@@ -61,7 +61,7 @@ const CellLabelBoost = ({
   return (
     <Box display='flex' alignItems='center' gap='7px' justifyContent='flex-end'>
       <BoostChip boost={boost} />
-      <ZigClockIcon color='#e93ea7' />
+      {!activated && <ZigClockIcon color='#e93ea7' />}
       <ZigTypography
         fontWeight={500}
         variant='h4'
