@@ -143,6 +143,9 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       payFeeWithZig?: boolean;
       tradingFeeDiscount?: boolean;
       refRewardType?: string;
+      email?: string;
+      about?: string;
+      countryCode: string;
     }
   >({
     query: (params) => ({

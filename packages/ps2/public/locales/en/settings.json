@@ -7,6 +7,19 @@
     "verification-kyc": "KYC",
     "verification-kyb": "KYB"
   },
+  "edit-profile": {
+    "title": "Edit Profile",
+    "description": "Customize your user profile data",
+    "username": "Username",
+    "visible-if-trader": "(Visible if you are manager of a service)",
+    "internal-use": "(For internal use)",
+    "user-id": "User ID",
+    "about-you": "About you",
+    "update-profile": "Update profile",
+    "success": "Profile updated successfully",
+    "country": "Country",
+    "email": "Email"
+  },
   "update-password": {
     "title": "Update Password",
     "description": "Update the password of your Zignaly Account.\nFor your security, you will be logged out after clicking Update password.",

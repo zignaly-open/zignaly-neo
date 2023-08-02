@@ -45,7 +45,7 @@ const {
   Manual,
 } = lazily(() => import('./views/TraderService/routes'));
 
-const { Kyc, SettingsHeader, UpdatePassword, Toggle2FA } = lazily(
+const { Kyc, SettingsHeader, UpdatePassword, Toggle2FA, EditProfile } = lazily(
   () => import('./views/Settings/routes'),
 );
 
@@ -150,7 +150,7 @@ const Router: React.FC = () => (
           <Route path={Routes.ROUTE_KYC} element={<Kyc />} />
         )}
         <Route path={Routes.ROUTE_2FA} element={<Toggle2FA />} />
-        <Route path={Routes.ROUTE_EDIT_PROFILE} element={<Kyc />} />
+        <Route path={Routes.ROUTE_EDIT_PROFILE} element={<EditProfile />} />
         <Route path={Routes.ROUTE_PASSWORD} element={<UpdatePassword />} />
       </Route>
     </Route>

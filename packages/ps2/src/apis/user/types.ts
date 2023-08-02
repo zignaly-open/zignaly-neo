@@ -49,6 +49,7 @@ export type UserData = {
   payFeeWithZig: boolean;
   refRewardType: RefRewardType;
   refCode: string;
+  bio?: string;
   wall?: {
     banned: boolean;
   };
