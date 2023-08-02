@@ -20,7 +20,7 @@ export const ProfileStatusBox: React.FC<{
       >
         {status}
       </ZigTypography>
-      {isSuccess && (
+      {!isSuccess && (
         <ZigButton variant={'text'} onClick={cta}>
           {ctaLabel}
         </ZigButton>
