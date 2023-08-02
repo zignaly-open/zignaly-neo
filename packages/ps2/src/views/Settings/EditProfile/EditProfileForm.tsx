@@ -19,10 +19,14 @@ import { Grid } from '@mui/material';
 import Flag from '../../../components/Flag';
 import ServiceLogo from '../../TraderService/components/ServiceLogo';
 import { Box } from '@mui/system';
+import { ProfileStatusBox } from './atoms';
+import { generatePath, useNavigate } from 'react-router-dom';
+import { ROUTE_2FA } from '../../../routes';
 
 const EditProfileForm = () => {
   const { t, i18n } = useTranslation('settings');
   const user = useCurrentUser();
+  const navigate = useNavigate();
   const [loadUser, userReloadStatus] = useLazyUserQuery();
   const {
     handleSubmit,
@@ -34,6 +38,7 @@ const EditProfileForm = () => {
     defaultValues: {
       username: user.userName,
       email: user.email,
+      imageUrl: user.imageUrl,
       bio: user.bio || '',
     },
   });
@@ -62,7 +67,7 @@ const EditProfileForm = () => {
       email: data.email,
       about: data.bio,
       countryCode: data.country,
-      // imageUrl?: string;
+      imageUrl: data.imageUrl,
     })
       .unwrap()
       .then(() => {
@@ -86,6 +91,28 @@ const EditProfileForm = () => {
                 />
               )}
             />
+
+            <Box sx={{ pt: 2 }}>
+              <ProfileStatusBox
+                isSuccess={user.ask2FA}
+                label={t('edit-profile.status-box.2fa')}
+                ctaLabel={t('edit-profile.status-box.enable-2fa-cta')}
+                cta={() => navigate(generatePath(ROUTE_2FA))}
+                status={t(
+                  user.ask2FA
+                    ? 'edit-profile.status-box.enabled'
+                    : 'edit-profile.status-box.disabled',
+                )}
+              />
+
+              {/*  <ProfileStatusBox*/}
+              {/*    isSuccess={true}*/}
+              {/*    ctaLabel={t('edit-profile.status-box.pass-kyc-cta')}*/}
+              {/*    cta={() => {}}*/}
+              {/*    label={t('edit-profile.status-box.kyc')}*/}
+              {/*    status={}*/}
+              {/*  />*/}
+            </Box>
           </Box>
           <Grid container>
             <Grid sm={5} xs={12} p={1} pb={2}>

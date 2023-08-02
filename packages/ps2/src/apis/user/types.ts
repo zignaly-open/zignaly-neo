@@ -31,7 +31,7 @@ export type UserData = {
     copy_trading: boolean;
     signal_providers: boolean;
   };
-  imageUrl: false | string;
+  imageUrl?: string;
   providerEnable: boolean;
   '2FAEnable': boolean;
   ask2FA: boolean;

@@ -19,7 +19,15 @@
     "success": "Profile updated successfully",
     "edit-avatar": "Edit Avatar",
     "country": "Country",
-    "email": "Email"
+    "email": "Email",
+    "status-box": {
+      "2fa": "2FA",
+      "kyc": "KYC",
+      "enable-2fa-cta": "Enable",
+      "enabled": "Enabled",
+      "disabled": "Disabled",
+      "pass-kyc-cta": "Verify"
+    }
   },
   "update-password": {
     "title": "Update Password",
