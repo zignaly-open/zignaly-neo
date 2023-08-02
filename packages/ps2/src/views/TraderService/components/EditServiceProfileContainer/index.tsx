@@ -141,7 +141,9 @@ const EditServiceProfileContainer: React.FC<{ service: Service }> = ({
           <Controller
             name='logo'
             control={control}
-            render={({ field }) => <ServiceLogo service={service} {...field} />}
+            render={({ field }) => (
+              <ServiceLogo label={t('edit.logo')} {...field} />
+            )}
           />
         </Grid>
         <Grid container sm={12} md={7} pb={2} alignItems='flex-start' gap={6}>

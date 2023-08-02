@@ -17,6 +17,7 @@ import { useCurrentUser } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
 import { Grid } from '@mui/material';
 import Flag from '../../../components/Flag';
+import ServiceLogo from '../../TraderService/components/ServiceLogo';
 
 const EditProfileForm = () => {
   const { t, i18n } = useTranslation('settings');
@@ -72,105 +73,122 @@ const EditProfileForm = () => {
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Grid container>
-          <Grid sm={5} xs={12} p={1} pb={2}>
+          <Grid sm={2} xs={12} sx={{ pt: 2 }}>
             <Controller
-              name='username'
+              name='imageUrl'
               control={control}
               render={({ field }) => (
-                <ZigInput
-                  wide
-                  label={t('edit-profile.username')}
-                  placeholder={t('edit-profile.username')}
-                  error={t(errors.username?.message)}
+                <ServiceLogo
+                  size={100}
+                  label={t('edit-profile.edit-avatar')}
                   {...field}
                 />
               )}
             />
           </Grid>
-          <Grid sm={7} xs={12} p={1} pb={2}>
-            <Controller
-              name='email'
-              control={control}
-              render={({ field }) => (
-                <ZigInput
-                  wide
-                  label={t('edit-profile.email')}
-                  placeholder={t('edit-profile.email')}
-                  error={t(errors.email?.message)}
-                  {...field}
+          <Grid sm={10} xs={12}>
+            <Grid container>
+              <Grid sm={5} xs={12} p={1} pb={2}>
+                <Controller
+                  name='username'
+                  control={control}
+                  render={({ field }) => (
+                    <ZigInput
+                      wide
+                      label={t('edit-profile.username')}
+                      placeholder={t('edit-profile.username')}
+                      error={t(errors.username?.message)}
+                      {...field}
+                    />
+                  )}
                 />
-              )}
-            />
-          </Grid>
-          <Grid sm={12} p={1} pb={2}>
-            <ZigTypography>
-              {t('edit-profile.user-id')}
-              <ZigTypography
-                sx={{ pl: 1 }}
-                variant={'body2'}
-                color={'neutral400'}
-              >
-                {t('edit-profile.internal-use')}
-              </ZigTypography>
-            </ZigTypography>
+              </Grid>
+              <Grid sm={7} xs={12} p={1} pb={2}>
+                <Controller
+                  name='email'
+                  control={control}
+                  render={({ field }) => (
+                    <ZigInput
+                      wide
+                      label={t('edit-profile.email')}
+                      placeholder={t('edit-profile.email')}
+                      error={t(errors.email?.message)}
+                      {...field}
+                    />
+                  )}
+                />
+              </Grid>
+              <Grid sm={12} p={1} pb={2}>
+                <ZigTypography>
+                  {t('edit-profile.user-id')}
+                  <ZigTypography
+                    sx={{ pl: 1 }}
+                    variant={'body2'}
+                    color={'neutral400'}
+                  >
+                    {t('edit-profile.internal-use')}
+                  </ZigTypography>
+                </ZigTypography>
 
-            <ZigTypography component={'p'} sx={{ mt: 2 }}>
-              {user.userId}
-            </ZigTypography>
-          </Grid>
-          <Grid sm={12} p={1} pb={2}>
-            <Controller
-              name='country'
-              control={control}
-              render={({ field }) => (
-                <ZigSelect
-                  {...field}
-                  label={
-                    <>
-                      {t('edit-profile.country')}
-                      <ZigTypography
-                        sx={{ pl: 1 }}
-                        variant={'body2'}
-                        color={'neutral400'}
-                      >
-                        {t('edit-profile.visible-if-trader')}
-                      </ZigTypography>
-                    </>
-                  }
-                  placeholder={t('edit-profile.country')}
-                  options={countryOptions}
-                  error={t(errors.country?.message)}
+                <ZigTypography component={'p'} sx={{ mt: 2 }}>
+                  {user.userId}
+                </ZigTypography>
+              </Grid>
+              <Grid sm={12} p={1} pb={2}>
+                <Controller
+                  name='country'
+                  control={control}
+                  render={({ field }) => (
+                    <ZigSelect
+                      {...field}
+                      label={
+                        <>
+                          {t('edit-profile.country')}
+                          <ZigTypography
+                            sx={{ pl: 1 }}
+                            variant={'body2'}
+                            color={'neutral400'}
+                          >
+                            {t('edit-profile.visible-if-trader')}
+                          </ZigTypography>
+                        </>
+                      }
+                      placeholder={t('edit-profile.country')}
+                      options={countryOptions}
+                      error={t(errors.country?.message)}
+                    />
+                  )}
                 />
-              )}
-            />
-          </Grid>
-          <Grid sm={12} p={1} pb={2}>
-            <Controller
-              name='bio'
-              control={control}
-              render={({ field }) => (
-                <ZigInput
-                  wide
-                  multiline
-                  rows={3}
-                  label={
-                    <ZigTypography>
-                      {t('edit-profile.about-you')}
-                      <ZigTypography
-                        sx={{ pl: 1 }}
-                        variant={'body2'}
-                        color={'neutral400'}
-                      >
-                        {t('edit-profile.visible-if-trader')}
-                      </ZigTypography>
-                    </ZigTypography>
-                  }
-                  placeholder={t('edit-profile.username')}
-                  error={t(errors.bio?.message)}
-                  {...field}
+              </Grid>
+              <Grid sm={12} p={1} pb={2}>
+                <Controller
+                  name='bio'
+                  control={control}
+                  render={({ field }) => (
+                    <ZigInput
+                      wide
+                      multiline
+                      rows={3}
+                      label={
+                        <ZigTypography>
+                          {t('edit-profile.about-you')}
+                          <ZigTypography
+                            sx={{ pl: 1 }}
+                            variant={'body2'}
+                            color={'neutral400'}
+                          >
+                            {t('edit-profile.visible-if-trader')}
+                          </ZigTypography>
+                        </ZigTypography>
+                      }
+                      placeholder={t('edit-profile.username')}
+                      error={t(errors.bio?.message)}
+                      {...field}
+                    />
+                  )}
                 />
-              )}
-            />
+              </Grid>
+            </Grid>
           </Grid>
         </Grid>
 
