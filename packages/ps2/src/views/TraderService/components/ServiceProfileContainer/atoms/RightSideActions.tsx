@@ -31,27 +31,36 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
       )}
 
       {!isInvested.isLoading && !service.liquidated && (
-        <Box sx={{ mt: md ? 0 : 3 }} display='flex' gap={3}>
-          <ZigButton
-            ctaId={'service-profile-invite-button'}
-            onClick={() =>
-              showModal(ReferralsInviteModal, {
-                service,
-                serviceId: service.id,
-              })
-            }
-          >
-            <Box
-              display={'flex'}
-              flexDirection={'column'}
-              gap={1}
-              alignItems={'center'}
-              justifyContent={'center'}
+        <Box
+          sx={{ mt: md ? 0 : 3 }}
+          display='flex'
+          gap={3}
+          alignItems={'center'}
+        >
+          {isAuthenticated && (
+            <ZigButton
+              ctaId={'service-profile-invite-button'}
+              onClick={() =>
+                showModal(ReferralsInviteModal, {
+                  service,
+                  serviceId: service.id,
+                })
+              }
+              sx={{ maxHeight: '60px', overflow: 'visible' }}
             >
-              <ZigInviteIcon width={20} height={'100%'} />
-              {t('invite')}
-            </Box>
-          </ZigButton>
+              <Box
+                display={'flex'}
+                flexDirection={'column'}
+                gap={1}
+                alignItems={'center'}
+                justifyContent={'center'}
+                mt={'-13px'}
+              >
+                <ZigInviteIcon width={40} height={'100%'} />
+                {t('invite')}
+              </Box>
+            </ZigButton>
+          )}
           {isAuthenticated && isInvested.thisAccount ? (
             <InvestedButton prefixId={'service-profile'} service={service} />
           ) : (
