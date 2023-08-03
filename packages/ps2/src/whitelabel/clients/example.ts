@@ -14,8 +14,7 @@ export default {
     'marketplace/': 'market',
   },
   mainAppLink: ROUTE_DASHBOARD,
-  // I do not give 1 fcuk that this image is 500kb because we do not load it
-  logo: '/images/whitelabel/doge.png',
+  logo: '/images/whitelabel/qw.svg',
   subscriptionPurchaseLink: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   // background: '#fcdcdc',
   // backgroundImage: null,
