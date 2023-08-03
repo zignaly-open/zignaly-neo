@@ -6,8 +6,8 @@ export type ReferralRewards = {
   investorsCount: number;
   usdtEarned: number;
   usdtPending: number;
-  tierLevelId: number;
-  tierLevelFactor: number;
+  tierId: number;
+  tierFactor: number;
   discountPct: number;
   boost: number;
   boostEndsAt: string;
