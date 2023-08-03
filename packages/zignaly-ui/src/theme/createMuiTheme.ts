@@ -71,6 +71,9 @@ export default ({ palette, mode, chart, backgrounds, boxShadows, fontFamily }: T
           &.Mui-focused,
           &:hover {
             border-color: ${palette.neutral400};
+            &.Mui-disabled {
+              border-color: ${palette.neutral700};
+            }
           }
           
           &.Mui-error,
