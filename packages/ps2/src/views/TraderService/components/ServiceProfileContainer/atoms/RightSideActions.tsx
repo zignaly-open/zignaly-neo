@@ -37,28 +37,30 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
           gap={3}
           alignItems={'center'}
         >
-          <ZigButton
-            ctaId={'service-profile-invite-button'}
-            onClick={() =>
-              showModal(ReferralsInviteModal, {
-                service,
-                serviceId: service.id,
-              })
-            }
-            sx={{ maxHeight: '60px', overflow: 'visible' }}
-          >
-            <Box
-              display={'flex'}
-              flexDirection={'column'}
-              gap={1}
-              alignItems={'center'}
-              justifyContent={'center'}
-              mt={'-13px'}
+          {isAuthenticated && (
+            <ZigButton
+              ctaId={'service-profile-invite-button'}
+              onClick={() =>
+                showModal(ReferralsInviteModal, {
+                  service,
+                  serviceId: service.id,
+                })
+              }
+              sx={{ maxHeight: '60px', overflow: 'visible' }}
             >
-              <ZigInviteIcon width={40} height={'100%'} />
-              {t('invite')}
-            </Box>
-          </ZigButton>
+              <Box
+                display={'flex'}
+                flexDirection={'column'}
+                gap={1}
+                alignItems={'center'}
+                justifyContent={'center'}
+                mt={'-13px'}
+              >
+                <ZigInviteIcon width={40} height={'100%'} />
+                {t('invite')}
+              </Box>
+            </ZigButton>
+          )}
           {isAuthenticated && isInvested.thisAccount ? (
             <InvestedButton prefixId={'service-profile'} service={service} />
           ) : (
