@@ -21,14 +21,15 @@ const Subscriptions: React.FC = () => {
       status: 2,
     },
   ];
+  const isInputValid = (input: string) => {
+    return /^[A-Za-z]{0,2}(-[A-Za-z0-9]{0,4}){0,3}$/.test(input);
+  };
+
   const handleCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value;
-    const formattedValue = inputValue.replace(
-      /[^A-Za-z0-9-]|(?<=^..)(?=[^-])/g,
-      '',
-    );
-    console.log(formattedValue.toUpperCase());
-    setCode(formattedValue);
+    const inputValue = event.target.value.toUpperCase();
+    if (isInputValid(inputValue)) {
+      setCode(inputValue);
+    }
   };
   const handleTabChange = (event: React.SyntheticEvent, newTab: number) => {
     setActiveTab(newTab);
