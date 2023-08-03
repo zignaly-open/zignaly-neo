@@ -2,7 +2,7 @@ import React from 'react';
 import ServiceHeader from './components/ServiceHeader';
 import { Navigate, useLocation, useParams } from 'react-router-dom';
 import ServiceProfileContainer from './components/ServiceProfileContainer';
-import { TraderServicePageContainer } from 'views/TraderService/components/styles';
+import { PageWithHeaderContainer } from 'views/TraderService/components/styles';
 import {
   useIsServiceOwner,
   useServiceDetails,
@@ -73,9 +73,9 @@ const ServiceProfile: React.FC = () => {
             }
 
             return (
-              <TraderServicePageContainer isOwner={isOwner}>
+              <PageWithHeaderContainer hasHeader={isOwner}>
                 <ServiceProfileContainer service={service} />
-              </TraderServicePageContainer>
+              </PageWithHeaderContainer>
             );
           }}
         />

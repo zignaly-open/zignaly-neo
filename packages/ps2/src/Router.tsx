@@ -45,6 +45,10 @@ const {
   Manual,
 } = lazily(() => import('./views/TraderService/routes'));
 
+const { Kyc, SettingsHeader, UpdatePassword, Toggle2FA, EditProfile } = lazily(
+  () => import('./views/Settings/routes'),
+);
+
 const { default: MyBalances, MyBalancesDeposit } = lazily(
   () => import('./views/Balance'),
 );
@@ -82,6 +86,7 @@ const Router: React.FC = () => (
           element={<MyBalancesDeposit bgRoute={Routes.ROUTE_MY_BALANCES} />}
         />
       </Route>
+
       <Route
         path={Routes.ROUTE_MY_BALANCES_TRANSACTIONS}
         element={outleted(<MyBalances />)}
@@ -136,6 +141,17 @@ const Router: React.FC = () => (
           path={Routes.ROUTE_TRADING_SERVICE_EDIT}
           element={<EditService />}
         />
+      </Route>
+    </Route>
+
+    <Route element={outleted(<SettingsHeader />)}>
+      <Route element={<AuthenticatedWall />}>
+        {isFeatureOn(Features.Kyc) && (
+          <Route path={Routes.ROUTE_KYC} element={<Kyc />} />
+        )}
+        <Route path={Routes.ROUTE_2FA} element={<Toggle2FA />} />
+        <Route path={Routes.ROUTE_EDIT_PROFILE} element={<EditProfile />} />
+        <Route path={Routes.ROUTE_PASSWORD} element={<UpdatePassword />} />
       </Route>
     </Route>
 

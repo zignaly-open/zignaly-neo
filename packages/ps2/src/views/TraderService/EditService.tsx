@@ -1,5 +1,5 @@
 import React from 'react';
-import { TraderServicePageContainer } from 'views/TraderService/components/styles';
+import { PageWithHeaderContainer } from 'views/TraderService/components/styles';
 import { Navigate, useParams } from 'react-router-dom';
 import {
   useServiceDetails,
@@ -30,9 +30,9 @@ const EditService: React.FC = () => {
           return <CriticalError />;
         }}
         content={(service: Service) => (
-          <TraderServicePageContainer>
+          <PageWithHeaderContainer>
             <EditServiceProfileContainer service={service} />
-          </TraderServicePageContainer>
+          </PageWithHeaderContainer>
         )}
       />
     </PageContainer>

@@ -24,7 +24,7 @@ import {
 import ConnectionStateLabel from '../ConnectionStateLabel';
 import LayoutContentWrapper from '../../../../components/LayoutContentWrapper';
 import { Box, IconButton, Tooltip, useTheme } from '@mui/material';
-import { TraderServicePageContainer } from '../styles';
+import { PageWithHeaderContainer } from '../styles';
 import { useZModal } from '../../../../components/ZModal/use';
 import InvestorEditFee from '../InvestorEditFee/InvestorEditFee';
 import { getServiceTotalFee, getServiceZignalyFee } from '../../../../util/fee';
@@ -241,7 +241,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         Investor[],
         TraderServiceManagement,
       ]) => (
-        <TraderServicePageContainer>
+        <PageWithHeaderContainer>
           <InvestorCounts>
             <ZigUserIcon
               width={'17px'}
@@ -266,7 +266,7 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
             emptyMessage={t('no-investors')}
             enableSortingRemoval={false}
           />
-        </TraderServicePageContainer>
+        </PageWithHeaderContainer>
       )}
     />
   );

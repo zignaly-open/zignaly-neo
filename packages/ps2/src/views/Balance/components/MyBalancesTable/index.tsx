@@ -20,7 +20,7 @@ import {
   CoinDetails,
 } from 'apis/coin/types';
 import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
-import WithdrawModal from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
+import { useOpenWithdrawModal } from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
 import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
 import { Box } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
@@ -34,6 +34,7 @@ const MyBalancesTable = (): JSX.Element => {
   const coinsEndpoint = useExchangeCoinsList();
   const { exchangeType, internalId } = useActiveExchange();
   const { showModal } = useZModal();
+  const openWithdrawModal = useOpenWithdrawModal();
   const showDepositModal = useZRouteModal(ROUTE_MY_BALANCES_DEPOSIT_COIN);
   // Trigger balance update to be sure that balance widget matches coins data
   useBalanceQuery(
@@ -197,11 +198,11 @@ const MyBalancesTable = (): JSX.Element => {
                 narrow
                 tooltip={t('withdraw')}
                 id={`balance-row__withdrawal-${row.original.coin}`}
-                onClick={() => {
-                  showModal(WithdrawModal, {
+                onClick={() =>
+                  openWithdrawModal({
                     selectedCoin: row.original.coin,
-                  });
-                }}
+                  })
+                }
                 sx={{ maxHeight: '20px', mr: 1 }}
                 variant='outlined'
               >

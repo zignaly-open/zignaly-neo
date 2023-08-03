@@ -27,8 +27,7 @@ import { useServiceDetails } from 'apis/service/use';
 import BigNumber from 'bignumber.js';
 import { useDebounce } from 'react-use';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
-import DepositModal from '../../DepositModal';
-import { useZModal } from 'components/ZModal/use';
+import { useOpenDepositModal } from '../../DepositModal';
 import { Add } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import { AmountInvested } from './atoms';
@@ -39,13 +38,13 @@ function EditInvestmentForm({
 }: EditInvestmentFormProps) {
   const coin = useCurrentBalance();
   const { t } = useTranslation('edit-investment');
+  const openDepositModal = useOpenDepositModal();
   const { serviceId, serviceName } = useSelectedInvestment();
   const { edit: editPercent } = useUpdateTakeProfitPercentage(serviceId);
   const { isLoading: isEditingInvestment, edit: editInvestment } =
     useUpdateTakeProfitAndInvestMore(serviceId);
   const { data: details } = useInvestmentDetails(serviceId);
   const { data: service } = useServiceDetails(serviceId);
-  const { showModal } = useZModal();
 
   const {
     handleSubmit,
@@ -116,7 +115,7 @@ function EditInvestmentForm({
       }}
       variant={'text'}
       onClick={() =>
-        showModal(DepositModal, {
+        openDepositModal({
           selectedCoin: coin.id,
         })
       }

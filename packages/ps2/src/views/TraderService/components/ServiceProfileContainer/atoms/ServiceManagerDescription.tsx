@@ -5,9 +5,10 @@ import MarkdownSection from './MarkdownSection';
 import { Box } from '@mui/system';
 import { ZigTypography } from '@zignaly-open/ui';
 import Countries from 'i18n-iso-countries';
-import { CountryFlag, StyledVerifiedIcon } from '../styles';
+import { StyledVerifiedIcon } from '../styles';
 import { Tooltip } from '@mui/material';
 import { formatLocalizedDistance } from '../../../../Dashboard/components/MyDashboard/util';
+import Flag from '../../../../../components/Flag';
 
 const ServiceManagerDescription: React.FC<{ service: Service }> = ({
   service,
@@ -53,8 +54,8 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
                     country: country || service.ownerCountry,
                   })}
                 >
-                  <CountryFlag
-                    src={`/images/country-flags/${service.ownerCountry.toUpperCase()}.svg`}
+                  <Flag
+                    country={service.ownerCountry}
                     onError={() => {
                       setFlagInFolder(false);
                     }}

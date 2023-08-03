@@ -1,4 +1,6 @@
 import {
+  KycLinkResponse,
+  KycResponse,
   LoginPayload,
   LoginResponse,
   SessionResponse,
@@ -114,6 +116,18 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     }),
   }),
 
+  kycStatus: builder.query<KycResponse, string>({
+    query: (level) => ({
+      url: `user/kyc/${level}`,
+    }),
+  }),
+
+  kycLink: builder.query<KycLinkResponse, string>({
+    query: (level) => ({
+      url: `user/kyc/${level}/link`,
+    }),
+  }),
+
   activateExchange: builder.mutation<void, { exchangeInternalId: string }>({
     query: ({ exchangeInternalId }) => ({
       url: `/user/exchanges/${exchangeInternalId}/activate`,
@@ -129,6 +143,9 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
       payFeeWithZig?: boolean;
       tradingFeeDiscount?: boolean;
       refRewardType?: string;
+      email?: string;
+      about?: string;
+      countryCode: string;
     }
   >({
     query: (params) => ({
@@ -257,6 +274,8 @@ export const {
   useDisable2FAMutation,
   useEnable2FAInfoQuery,
   useLazyEnable2FAInfoQuery,
+  useLazyKycLinkQuery,
+  useKycStatusQuery,
   useEnable2FAMutation,
   useBalanceQuery,
   useLazyBalanceQuery,

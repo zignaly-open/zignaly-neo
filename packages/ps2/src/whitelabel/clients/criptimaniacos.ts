@@ -1,12 +1,12 @@
 import { Features, WhitelabelOverride } from '../type';
 
 export default {
-  disabledFeatures: [
-    Features.Referrals,
-    Features.Rewards,
-    Features.Trader,
-    Features.NewSignup,
-  ],
+  featureOverrides: {
+    [Features.Referrals]: false,
+    [Features.Rewards]: false,
+    [Features.Trader]: false,
+    [Features.NewSignup]: false,
+  },
   endpointOverrides: {
     'marketplace/': 'market',
   },
