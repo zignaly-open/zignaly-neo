@@ -167,6 +167,7 @@ const ReferralsInviteModal = ({
                         height={21.5}
                       />
                       <ZigTypography
+                        fontWeight={600}
                         variant='h4'
                         color='#999fe1'
                         fontSize={35}
@@ -256,6 +257,7 @@ const ReferralsInviteModal = ({
                     fontSize={19}
                     textAlign={'left'}
                     fontWeight={600}
+                    color={'neutral100'}
                   >
                     {t('invite-more', {
                       invite: inviteLeft,

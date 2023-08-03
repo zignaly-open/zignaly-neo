@@ -40,6 +40,7 @@ const CellLabelBaseCommission = () => {
       variant='h4'
       textAlign='end'
       lineHeight='24px'
+      color={'neutral200'}
     >
       {t('base-commission')}
       <Tooltip title={t('zig-held-tooltip')}>
@@ -218,6 +219,7 @@ const TiersTable = ({
             textAlign='end'
             lineHeight='24px'
             whiteSpace='pre-line'
+            color={'neutral200'}
           >
             {t('max-earnings-from-fees', {
               amount: numericFormatter(MAX_FEES_AMOUNT.toString(), {
