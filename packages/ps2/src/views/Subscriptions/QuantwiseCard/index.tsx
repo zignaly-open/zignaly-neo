@@ -1,14 +1,12 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { ZigButton, ZigTypography } from '@zignaly-open/ui';
+import { ZigButton, ZigLink, ZigTypography } from '@zignaly-open/ui';
 import { Box, useTheme } from '@mui/material';
 import { QuantwiseCardProps } from './types';
-import { CrossedPrice } from './styles';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 const QuantwiseCard = ({
   packageSub,
-  startPrice,
   price,
   fee,
   status,
@@ -66,16 +64,6 @@ const QuantwiseCard = ({
             {t(`quantwise.packages.${packageSub}`)}
           </ZigTypography>
         </Box>
-        <CrossedPrice
-          fontWeight={700}
-          variant={'h1'}
-          color={'neutral200'}
-          fontSize={'28px'}
-          letterSpacing={1}
-        >
-          {/* eslint-disable-next-line i18next/no-literal-string */}
-          {startPrice}&#8364;
-        </CrossedPrice>
         <ZigTypography
           fontWeight={700}
           variant={'h1'}
@@ -99,12 +87,17 @@ const QuantwiseCard = ({
             {t('quantwise.fees', { fee })}
           </ZigTypography>
         </Box>
-
-        <ZigButton size={'large'} fullWidth disabled={status !== 2}>
-          {status === 1
-            ? t('quantwise.your-subscription')
-            : t('quantwise.get-started')}
-        </ZigButton>
+        <ZigLink
+          href={'http://shop.quantwise.ai/'}
+          target={'_blank'}
+          sx={{ width: '100%' }}
+        >
+          <ZigButton size={'large'} fullWidth disabled={status !== 2}>
+            {status === 1
+              ? t('quantwise.your-subscription')
+              : t('quantwise.get-started')}
+          </ZigButton>
+        </ZigLink>
       </Box>
     </Box>
   );
