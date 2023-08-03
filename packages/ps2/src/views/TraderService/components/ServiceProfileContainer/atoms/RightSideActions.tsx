@@ -31,7 +31,12 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
       )}
 
       {!isInvested.isLoading && !service.liquidated && (
-        <Box sx={{ mt: md ? 0 : 3 }} display='flex' gap={3}>
+        <Box
+          sx={{ mt: md ? 0 : 3 }}
+          display='flex'
+          gap={3}
+          alignItems={'center'}
+        >
           <ZigButton
             ctaId={'service-profile-invite-button'}
             onClick={() =>
@@ -40,6 +45,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
                 serviceId: service.id,
               })
             }
+            sx={{ maxHeight: '60px', overflow: 'visible' }}
           >
             <Box
               display={'flex'}
@@ -47,8 +53,9 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
               gap={1}
               alignItems={'center'}
               justifyContent={'center'}
+              mt={'-13px'}
             >
-              <ZigInviteIcon width={20} height={'100%'} />
+              <ZigInviteIcon width={40} height={'100%'} />
               {t('invite')}
             </Box>
           </ZigButton>
