@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import {
   ZigButton,
   ZigInput,
@@ -15,7 +15,7 @@ import { EditProfileFormType } from './types';
 import { Form, ModalActions } from 'components/ZModal';
 import { useCurrentUser } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
-import { Grid } from '@mui/material';
+import { Grid, Tooltip } from '@mui/material';
 import Flag from '../../../components/Flag';
 import ServiceLogo from '../../TraderService/components/ServiceLogo';
 import { Box } from '@mui/system';
@@ -43,11 +43,34 @@ const EditProfileForm = () => {
     },
   });
 
+  const filterCountries = useCallback(
+    (
+      option: {
+        value?: string;
+        data: {
+          text?: string;
+        };
+      },
+      input: string,
+    ) => {
+      if (input) {
+        const lowerInput = input.toLowerCase();
+        return (
+          option.value?.toLowerCase().includes(lowerInput) ||
+          option.data?.text?.toLowerCase().includes(lowerInput)
+        );
+      }
+      return true;
+    },
+    [],
+  );
+
   const countryOptions = useMemo(
     () =>
       Object.entries(Countries.getNames(i18n.language)).map(
         ([value, label]) => ({
           value,
+          text: label,
           label: (
             <ZigTypography sx={{ display: 'flex', alignItems: 'center' }}>
               <Flag country={value} />
@@ -135,13 +158,17 @@ const EditProfileForm = () => {
                 name='email'
                 control={control}
                 render={({ field }) => (
-                  <ZigInput
-                    wide
-                    label={t('edit-profile.email')}
-                    placeholder={t('edit-profile.email')}
-                    error={t(errors.email?.message)}
-                    {...field}
-                  />
+                  <Tooltip title={t('edit-profile.change-email')}>
+                    <ZigInput
+                      wide
+                      disabled
+                      InputProps={{ readOnly: true }}
+                      label={t('edit-profile.email')}
+                      placeholder={t('edit-profile.email')}
+                      error={t(errors.email?.message)}
+                      {...field}
+                    />
+                  </Tooltip>
                 )}
               />
             </Grid>
@@ -168,6 +195,9 @@ const EditProfileForm = () => {
                 render={({ field }) => (
                   <ZigSelect
                     {...field}
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    // @ts-ignore
+                    filterOption={filterCountries}
                     label={
                       <>
                         {t('edit-profile.country')}

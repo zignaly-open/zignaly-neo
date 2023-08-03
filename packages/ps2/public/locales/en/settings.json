@@ -18,6 +18,7 @@
     "update-profile": "Update profile",
     "success": "Profile updated successfully",
     "edit-avatar": "Edit Avatar",
+    "change-email": "It's not possible to change the email",
     "country": "Country",
     "email": "Email",
     "status-box": {
