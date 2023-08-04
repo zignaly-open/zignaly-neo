@@ -46,7 +46,12 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
                   serviceId: service.id,
                 })
               }
-              sx={{ maxHeight: '54px', width: '63px', overflow: 'visible' }}
+              sx={{
+                maxHeight: '54px',
+                minWidth: '63px',
+                padding: '0',
+                overflow: 'visible',
+              }}
             >
               <Box
                 display={'flex'}
