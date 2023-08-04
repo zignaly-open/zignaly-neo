@@ -17,8 +17,8 @@ export const StyledInviteIcon = styled(ZigInviteIcon)`
   margin-left: 6px;
   margin-right: 20px;
   position: relative;
-  width: 49px;
-  height: 54px;
+  width: 56px;
+  height: 63px;
 `;
 
 export const InviteUrlInput = styled('input')`
