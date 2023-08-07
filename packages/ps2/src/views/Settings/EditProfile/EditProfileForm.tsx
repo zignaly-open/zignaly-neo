@@ -238,7 +238,9 @@ const EditProfileForm = () => {
                         </ZigTypography>
                       </ZigTypography>
                     }
-                    placeholder={t('edit-profile.username')}
+                    placeholder={t(
+                      'edit-profile.tell-me-the-story-of-your-left',
+                    )}
                     error={t(errors.bio?.message)}
                     {...field}
                   />
