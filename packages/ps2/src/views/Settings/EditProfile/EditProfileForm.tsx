@@ -239,7 +239,7 @@ const EditProfileForm = () => {
                       </ZigTypography>
                     }
                     placeholder={t('edit-profile.username')}
-                    error={t(errors.bio?.message)}
+                    error={t(errors.bio?.message, { maxLength: 200 })}
                     {...field}
                   />
                 )}
