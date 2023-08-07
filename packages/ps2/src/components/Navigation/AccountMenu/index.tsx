@@ -167,16 +167,16 @@ function AccountMenu(): React.ReactElement | null {
               onClick: () => navigate(generatePath(ROUTE_EDIT_PROFILE)),
             },
             {
-              id: `menu-dropdown-settings__password`,
-              label: t('account-menu.notAuth-dropdown-link-password'),
-              href: generatePath(ROUTE_PASSWORD),
-              onClick: () => navigate(generatePath(ROUTE_PASSWORD)),
-            },
-            {
               id: `menu-dropdown-settings__2fa`,
               label: t('account-menu.notAuth-dropdown-link-2fa'),
               href: generatePath(ROUTE_2FA),
               onClick: () => navigate(generatePath(ROUTE_2FA)),
+            },
+            {
+              id: `menu-dropdown-settings__password`,
+              label: t('account-menu.notAuth-dropdown-link-password'),
+              href: generatePath(ROUTE_PASSWORD),
+              onClick: () => navigate(generatePath(ROUTE_PASSWORD)),
             },
             isFeatureOn(Features.Kyc) && {
               id: `menu-dropdown-settings__kyc`,
