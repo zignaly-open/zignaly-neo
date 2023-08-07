@@ -37,6 +37,7 @@ import { generatePath, Link } from 'react-router-dom';
 import {
   ROUTE_2FA,
   ROUTE_BECOME_TRADER,
+  ROUTE_EDIT_PROFILE,
   ROUTE_KYC,
   ROUTE_LOGIN,
   ROUTE_PASSWORD,
@@ -181,6 +182,12 @@ const ZigDrawer = () => {
                       disablePadding
                       onClick={handleDrawerToggle}
                     >
+                      <DrawerMenuItem
+                        id='drawer__profile'
+                        path={generatePath(ROUTE_EDIT_PROFILE)}
+                        closeDrawer={handleDrawerToggle}
+                        label={t('account-menu.notAuth-dropdown-link-profile')}
+                      />
                       <DrawerMenuItem
                         id='drawer__update-password'
                         path={generatePath(ROUTE_PASSWORD)}

@@ -27,6 +27,7 @@ import {
 import {
   ROUTE_2FA,
   ROUTE_DASHBOARD,
+  ROUTE_EDIT_PROFILE,
   ROUTE_KYC,
   ROUTE_LOGIN,
   ROUTE_MY_BALANCES,
@@ -159,6 +160,12 @@ function AccountMenu(): React.ReactElement | null {
           id: 'account-menu-dropdown__settings',
           label: t('account-menu.notAuth-dropdown-link-settings'),
           children: [
+            {
+              id: `menu-dropdown-settings__profile`,
+              label: t('account-menu.notAuth-dropdown-link-profile'),
+              href: generatePath(ROUTE_EDIT_PROFILE),
+              onClick: () => navigate(generatePath(ROUTE_EDIT_PROFILE)),
+            },
             {
               id: `menu-dropdown-settings__password`,
               label: t('account-menu.notAuth-dropdown-link-password'),
