@@ -27,6 +27,7 @@ import {
 import {
   ROUTE_2FA,
   ROUTE_DASHBOARD,
+  ROUTE_EDIT_PROFILE,
   ROUTE_KYC,
   ROUTE_LOGIN,
   ROUTE_MY_BALANCES,
@@ -160,16 +161,22 @@ function AccountMenu(): React.ReactElement | null {
           label: t('account-menu.notAuth-dropdown-link-settings'),
           children: [
             {
-              id: `menu-dropdown-settings__password`,
-              label: t('account-menu.notAuth-dropdown-link-password'),
-              href: generatePath(ROUTE_PASSWORD),
-              onClick: () => navigate(generatePath(ROUTE_PASSWORD)),
+              id: `menu-dropdown-settings__profile`,
+              label: t('account-menu.notAuth-dropdown-link-profile'),
+              href: generatePath(ROUTE_EDIT_PROFILE),
+              onClick: () => navigate(generatePath(ROUTE_EDIT_PROFILE)),
             },
             {
               id: `menu-dropdown-settings__2fa`,
               label: t('account-menu.notAuth-dropdown-link-2fa'),
               href: generatePath(ROUTE_2FA),
               onClick: () => navigate(generatePath(ROUTE_2FA)),
+            },
+            {
+              id: `menu-dropdown-settings__password`,
+              label: t('account-menu.notAuth-dropdown-link-password'),
+              href: generatePath(ROUTE_PASSWORD),
+              onClick: () => navigate(generatePath(ROUTE_PASSWORD)),
             },
             isFeatureOn(Features.Kyc) && {
               id: `menu-dropdown-settings__kyc`,

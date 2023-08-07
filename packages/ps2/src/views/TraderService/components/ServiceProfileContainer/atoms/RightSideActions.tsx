@@ -47,8 +47,9 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
                 })
               }
               sx={{
-                maxHeight: '54px',
+                height: '54px',
                 minWidth: '63px',
+                maxWidth: '63px',
                 padding: '0',
                 overflow: 'visible',
               }}
@@ -56,7 +57,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
               <Box
                 display={'flex'}
                 flexDirection={'column'}
-                gap={1}
+                gap={0.5}
                 alignItems={'center'}
                 justifyContent={'center'}
                 mt={'-10px'}
