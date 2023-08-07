@@ -18,7 +18,6 @@ const Toggle2FA: React.FC = () => {
         <Box
           sx={{
             textAlign: 'center',
-            mt: 4,
           }}
         >
           <ZigTypography variant={'h1'} id={'update-password__title'}>
