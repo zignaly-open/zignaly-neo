@@ -13,7 +13,7 @@ export const EditProfileValidation = yup
         'maxlength',
         'common:validation.max-allowed-length',
         function (val) {
-          return val.length <= 200;
+          return val.length <= 2000;
         },
       ),
   })
