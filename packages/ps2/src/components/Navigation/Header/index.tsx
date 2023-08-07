@@ -23,7 +23,7 @@ const Header: React.FC = () => {
   const logoRoute = whitelabel.mainAppLink || MAIN_APP_URL;
 
   const logo = whitelabel.logo ? (
-    <img src={whitelabel.logo} id='menu__logo' height='32' width='32' />
+    <img src={whitelabel.logo} id='menu__logo' height='32' />
   ) : (
     <BrandImage id='menu__logo' height='32px' type='isotype' width='32px' />
   );
