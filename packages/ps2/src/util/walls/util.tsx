@@ -159,7 +159,7 @@ const usePerformLevelCheck = (
         // Do nothing here
       } else if (levelThreshold < +l) {
         // Do nothing, means we do not need so high of a level
-      } else if (accessLevel < +l && errorLevelMapping[l]) {
+      } else if (accessLevel <= +l && errorLevelMapping[l]) {
         !onlyCheck &&
           showModal(errorLevelMapping[l].modal, errorLevelMapping[l].props);
         return false;
