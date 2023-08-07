@@ -33,3 +33,5 @@ export const YAHOO_URL =
 
 export const BITCOIN_URL =
   'https://news.bitcoin.com/zignaly-lists-on-ascendex/';
+
+export const QUANTWISE_URL = 'http://shop.quantwise.ai/';
