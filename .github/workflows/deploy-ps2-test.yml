@@ -4,6 +4,7 @@ on:
     branches:
       - test
       - feat/kyc
+      - feat/subscriptions-page
 
 jobs:
   deploy:
