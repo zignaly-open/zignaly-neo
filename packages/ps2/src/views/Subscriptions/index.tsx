@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Layout, StyledTab, StyledTabs } from './styles';
 import { useTranslation } from 'react-i18next';
 import { ZigInput, ZigTypography } from '@zignaly-open/ui';
@@ -11,16 +11,31 @@ const Subscriptions: React.FC = () => {
   useTitle(t('pages:subscriptions'));
   const [code, setCode] = useState<string>('');
   const [activeTab, setActiveTab] = useState<number>(0);
-  const data = [
-    { packageSub: 'plus', price: 397, fee: 50, status: 0 },
-    { packageSub: 'pro', price: 1497, fee: 42, status: 1 },
-    {
-      packageSub: 'expert',
-      price: 3997,
-      fee: 30,
-      status: 2,
-    },
-  ];
+  const data = useMemo(
+    () =>
+      activeTab === 0
+        ? [
+            { packageSub: 'plus', price: 397, fee: 50, status: 0 },
+            { packageSub: 'pro', price: 1497, fee: 42, status: 1 },
+            {
+              packageSub: 'expert',
+              price: 3997,
+              fee: 30,
+              status: 2,
+            },
+          ]
+        : [
+            { packageSub: 'plus', price: 797, fee: 50, status: 2 },
+            { packageSub: 'pro', price: 3997, fee: 42, status: 2 },
+            {
+              packageSub: 'expert',
+              price: 5997,
+              fee: 30,
+              status: 2,
+            },
+          ],
+    [activeTab],
+  );
   const isInputValid = (input: string) => {
     return /^[A-Za-z]{0,2}(-[A-Za-z0-9]{0,4}){0,3}$/.test(input);
   };
