@@ -8,7 +8,7 @@
   "balance-range-from": "Over {{from}} {{coin}}",
   "name-level-1": "Silver Level",
   "name-level-2": "Gold Level",
-  "progress-explainer": "We're working tirelessly on it, please hold tight",
+  "progress-explainer": "We're working tirelessly on it, please hold tight. Usually it takes only a few minutes",
   "tabs": {
     "kyc": "KYC",
     "kyb": "KYB"
