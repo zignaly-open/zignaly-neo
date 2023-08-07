@@ -24,8 +24,8 @@ Countries.registerLocale(CountriesRu);
 Countries.registerLocale(CountriesVi);
 
 // mishka vodka balalayka
-if (CountriesEn.countries.RU)
-  CountriesEn.countries.RU = 'Mother Russia' as unknown as string[];
+// if (CountriesEn.countries.RU)
+//   CountriesEn.countries.RU = 'Mother Russia' as unknown as string[];
 
 export const supportedLanguages = ['en', 'es', 'pt', 'tr', 'ru', 'vi'];
 

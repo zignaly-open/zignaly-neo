@@ -22,8 +22,7 @@ import {
 } from '../../apis/referrals/api';
 import BenefitBox from './components/BenefitBox';
 import { formatLocalizedDate } from '../Dashboard/components/MyDashboard/util';
-import DepositModal from '../Dashboard/components/ManageInvestmentModals/DepositModal';
-import { useZModal } from '../../components/ZModal/use';
+import { useOpenDepositModal } from '../Dashboard/components/ManageInvestmentModals/DepositModal';
 import TermsButtonModal from './components/TermsButtonModal';
 
 const Rewards: React.FC = () => {
@@ -31,8 +30,7 @@ const Rewards: React.FC = () => {
   useTitle(t('pages:rewards'));
   const benefitsEndpoint = useBenefitsQuery();
   const rewardsClaimed = useBenefitsClaimedQuery();
-  const { showModal } = useZModal();
-  const deposit = () => showModal(DepositModal);
+  const deposit = useOpenDepositModal();
 
   const columnHelper = createColumnHelper<BenefitClaimed & { title?: never }>();
   const columns = useMemo(

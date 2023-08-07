@@ -1,23 +1,23 @@
 import React, { useState } from 'react';
 import { Box, CircularProgress, IconButton } from '@mui/material';
-import { Service } from 'apis/service/types';
 import { Avatar, ZigButton } from '@zignaly-open/ui';
-import { useTranslation } from 'react-i18next';
 import { Close, Edit } from '@mui/icons-material';
 import { LogoContainer } from './styles';
 import { getServiceLogo } from 'util/images';
 import { uploadImage } from 'apis/cloudinary';
+import { AvatarSizes } from '@zignaly-open/ui/lib/components/display/Avatar';
 
 const ServiceLogo = ({
-  service,
+  label,
   value,
+  size,
   onChange,
 }: {
-  service: Service;
+  label: string | JSX.Element;
   value: string;
+  size?: AvatarSizes | AvatarSizes[keyof AvatarSizes] | number;
   onChange: (logo: string) => void;
 }) => {
-  const { t } = useTranslation('service');
   const [uploading, setUploading] = useState(false);
 
   async function uploadLogo(e: React.ChangeEvent<HTMLInputElement>) {
@@ -41,8 +41,8 @@ const ServiceLogo = ({
     >
       <LogoContainer>
         <Avatar
-          size={'xx-large'}
-          alt={t('logo-alt', { name: service.name })}
+          size={size || 'xx-large'}
+          alt={''}
           image={getServiceLogo(value)}
         />
         {uploading ? (
@@ -61,7 +61,7 @@ const ServiceLogo = ({
         variant='text'
         component='label'
       >
-        {t('edit.logo')}
+        {label}
         <input hidden type='file' onChange={uploadLogo} />
       </ZigButton>
     </Box>

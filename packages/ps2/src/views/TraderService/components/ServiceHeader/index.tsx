@@ -25,6 +25,7 @@ import {
 import { Check } from '@mui/icons-material';
 import { Box } from '@mui/material';
 
+// TODO: make a generic component
 function ServiceHeader() {
   const menuDropDownRef = useRef(null);
   const { t } = useTranslation('service-header');

@@ -6,6 +6,7 @@ import {
   LoginResponse,
   SessionsTypes,
   SignupPayload,
+  UserAccessLevel,
   UserData,
 } from './types';
 import {
@@ -164,6 +165,10 @@ export function useLogout(performRequest = true): () => void {
 export function useIsAuthenticated(): boolean {
   const user = useSelector((state: RootState) => state.user)?.user;
   return !!user;
+}
+
+export function useUserAccessLevel(): UserAccessLevel {
+  return useSelector((state: RootState) => state.user)?.user?.accessLevel;
 }
 
 export function useCurrentUser(): UserData | Partial<UserData> {

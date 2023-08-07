@@ -13,12 +13,12 @@ export const InviteBox = styled(Box)`
 `;
 
 export const StyledInviteIcon = styled(ZigInviteIcon)`
-  top: -11px;
+  top: -14px;
   margin-left: 6px;
   margin-right: 20px;
   position: relative;
-  min-width: 58px;
-  height: auto;
+  width: 56px;
+  height: 63px;
 `;
 
 export const InviteUrlInput = styled('input')`

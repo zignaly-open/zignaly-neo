@@ -31,13 +31,15 @@ import {
   useIsAuthenticated,
   useLogout,
 } from 'apis/user/use';
-import { useZModal } from 'components/ZModal/use';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { generatePath, Link } from 'react-router-dom';
 import {
+  ROUTE_2FA,
   ROUTE_BECOME_TRADER,
+  ROUTE_KYC,
   ROUTE_LOGIN,
+  ROUTE_PASSWORD,
   ROUTE_PROFIT_SHARING,
   ROUTE_SIGNUP,
   ROUTE_TRADING_SERVICE_MANAGE,
@@ -47,11 +49,9 @@ import { HELP_URL } from 'util/constants';
 import { supportedLanguages } from 'util/i18next';
 import { LocalizationLanguages } from 'util/languages';
 import socialNetworksLinks from 'util/socialNetworks';
-import Enable2FAModal from 'views/Settings/Enable2FAModal';
-import UpdatePasswordModal from 'views/Settings/UpdatePasswordModal';
 import { NavLink, Networks } from '../ExtraNavigationDropdown/styles';
-import { DropdownExchangeAccount } from './atoms';
-import DepositModal from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
+import { DrawerMenuItem, DropdownExchangeAccount } from './atoms';
+import { useOpenDepositModal } from '../../../views/Dashboard/components/ManageInvestmentModals/DepositModal';
 import { isFeatureOn } from '../../../whitelabel';
 import { Features } from '../../../whitelabel/type';
 
@@ -68,9 +68,9 @@ const ZigDrawer = () => {
   const isAuthenticated = useIsAuthenticated();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [languageOpen, setLanguageOpen] = useState(false);
-  const { showModal } = useZModal();
   const service = useFirstOwnedService();
   const { exchanges, email, imageUrl } = useCurrentUser();
+  const openDepositModal = useOpenDepositModal();
   const changeLocale = useChangeLocale();
 
   const languageMap = supportedLanguages
@@ -181,24 +181,26 @@ const ZigDrawer = () => {
                       disablePadding
                       onClick={handleDrawerToggle}
                     >
-                      <ListItemButton
-                        sx={{ pl: 4 }}
-                        onClick={() => showModal(UpdatePasswordModal)}
-                      >
-                        <ListItemText
-                          primary={t(
-                            'account-menu.notAuth-dropdown-link-password',
-                          )}
+                      <DrawerMenuItem
+                        id='drawer__update-password'
+                        path={generatePath(ROUTE_PASSWORD)}
+                        closeDrawer={handleDrawerToggle}
+                        label={t('account-menu.notAuth-dropdown-link-password')}
+                      />
+                      <DrawerMenuItem
+                        id='drawer__2fa'
+                        path={generatePath(ROUTE_2FA)}
+                        closeDrawer={handleDrawerToggle}
+                        label={t('account-menu.notAuth-dropdown-link-2fa')}
+                      />
+                      {isFeatureOn(Features.Kyc) && (
+                        <DrawerMenuItem
+                          id='drawer__kyc'
+                          path={generatePath(ROUTE_KYC, { type: 'kyc' })}
+                          closeDrawer={handleDrawerToggle}
+                          label={t('account-menu.dropdown-link-kyc')}
                         />
-                      </ListItemButton>
-                      <ListItemButton
-                        onClick={() => showModal(Enable2FAModal)}
-                        sx={{ pl: 4 }}
-                      >
-                        <ListItemText
-                          primary={t('account-menu.notAuth-dropdown-link-2fa')}
-                        />
-                      </ListItemButton>
+                      )}
                     </List>
                   </Collapse>
                   {isFeatureOn(Features.Trader) && (
@@ -258,7 +260,7 @@ const ZigDrawer = () => {
                     startIcon={<ZigPlusIcon width={10} height={10} />}
                     sx={{ fontWeight: 600, mb: 1 }}
                     variant={'contained'}
-                    onClick={() => showModal(DepositModal)}
+                    onClick={() => openDepositModal()}
                   >
                     {t('action:deposit')}
                   </ZigButton>
