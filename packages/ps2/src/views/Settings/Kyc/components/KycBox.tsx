@@ -147,7 +147,7 @@ const KycBox: React.FC<{
                   sx={{ mt: 2, ...iconWrapStyle }}
                   component={'p'}
                   color={'greenGraph'}
-                  fontWeight={600}
+                  fontWeight={500}
                   variant={'body1'}
                 >
                   {t('status.completed')}
@@ -160,7 +160,7 @@ const KycBox: React.FC<{
                   sx={{ mt: 2, ...iconWrapStyle }}
                   component={'p'}
                   color={'yellow'}
-                  fontWeight={600}
+                  fontWeight={500}
                   variant={'body1'}
                 >
                   <DataUsageTwoToneIcon sx={largeIconStyle} />
@@ -176,7 +176,7 @@ const KycBox: React.FC<{
                   component={'p'}
                   sx={{ mt: 2, ...iconWrapStyle }}
                   color={'redGraphOrError'}
-                  fontWeight={600}
+                  fontWeight={500}
                   variant={'body1'}
                 >
                   <ErrorOutlineOutlinedIcon sx={largeIconStyle} />
