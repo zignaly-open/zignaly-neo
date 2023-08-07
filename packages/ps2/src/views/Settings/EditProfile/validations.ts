@@ -7,5 +7,14 @@ export const EditProfileValidation = yup
       .string()
       .required('error:error.required')
       .email('error:error.email-invalid'),
+    bio: yup
+      .string()
+      .test(
+        'maxlength',
+        'common:validation.max-allowed-length',
+        function (val) {
+          return val.length <= 2000;
+        },
+      ),
   })
   .required();

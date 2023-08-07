@@ -241,7 +241,7 @@ const EditProfileForm = () => {
                     placeholder={t(
                       'edit-profile.tell-me-the-story-of-your-left',
                     )}
-                    error={t(errors.bio?.message)}
+                    error={t(errors.bio?.message, { maxLength: 2000 })}
                     {...field}
                   />
                 )}
