@@ -61,6 +61,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
                 alignItems={'center'}
                 justifyContent={'center'}
                 mt={'-10px'}
+                textTransform={'capitalize'}
               >
                 <ZigInviteIcon width={35} height={'100%'} />
                 {t('invite')}
