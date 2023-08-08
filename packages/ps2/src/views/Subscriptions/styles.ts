@@ -14,8 +14,9 @@ export const StyledTab = styled(Tab)<{ active: boolean }>`
       ? theme.palette.backgrounds.secondaryBackground
       : theme.palette.backgrounds.modal};
   border-radius: 5px;
-  border: 1px solid ${({ theme, active }) =>
-    active ? theme.palette.active : theme.palette.neutral600};
+  border: 1px solid
+    ${({ theme, active }) =>
+      active ? theme.palette.active : theme.palette.neutral600};
   padding: 19px 65px 17px 65px;
   z-index: ${({ active }) => (active ? 2 : 1)};
   margin-left: -10px;
