@@ -91,7 +91,7 @@ const UpdatePasswordForm = () => {
             id={'update-password__submit'}
             type='submit'
             variant='contained'
-            size='large'
+            size='xlarge'
             loading={updatePasswordStatus.isLoading}
             disabled={!isValid}
           >
