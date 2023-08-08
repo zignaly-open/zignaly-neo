@@ -14,7 +14,7 @@ export default {
     'marketplace/': 'market',
   },
   mainAppLink: ROUTE_DASHBOARD,
-  logo: '/images/whitelabel/qw.svg',
+  logo: '/images/whitelabel/qauntwise.svg',
   subscriptionPurchaseLink: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
   // background: '#fcdcdc',
   // backgroundImage: null,
