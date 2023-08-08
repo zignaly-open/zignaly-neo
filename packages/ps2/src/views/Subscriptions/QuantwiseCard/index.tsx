@@ -7,6 +7,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { Card, Wrapper } from './styles';
 
 // TODO: remove hardcoded quantwise renewal date
+// TODO: currency should be dynamic
 const QuantwiseCard = ({
   packageSub,
   price,
