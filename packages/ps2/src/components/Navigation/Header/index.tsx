@@ -1,12 +1,8 @@
-import { HeaderLinksContainer, BrandImage } from '@zignaly-open/ui';
+import { BrandImage, HeaderLinksContainer } from '@zignaly-open/ui';
 import React, { Suspense } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavigationLink } from './atoms';
-import {
-  ROUTE_BECOME_TRADER,
-  ROUTE_PROFIT_SHARING,
-  ROUTE_SUBSCRIPTIONS,
-} from '../../../routes';
+import { ROUTE_BECOME_TRADER, ROUTE_PROFIT_SHARING } from '../../../routes';
 import ExtraNavigationDropdown from '../ExtraNavigationDropdown';
 import AccountMenu from '../AccountMenu';
 import { useIsAuthenticated } from '../../../apis/user/use';
@@ -65,13 +61,6 @@ const Header: React.FC = () => {
                     key='--route-ps'
                   >
                     {t('navigation-menu.profit-sharing')}
-                  </NavigationLink>
-                  <NavigationLink
-                    id='menu__subscriptions'
-                    to={ROUTE_SUBSCRIPTIONS}
-                    key='--route-sub'
-                  >
-                    {t('navigation-menu.subscriptions')}
                   </NavigationLink>
                   {isFeatureOn(Features.Trader) && md && (
                     <NavigationLink

@@ -5,8 +5,8 @@ import { Box } from '@mui/material';
 import { QuantwiseCardProps } from './types';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { Card, Wrapper } from './styles';
-import { QUANTWISE_URL } from '../../../util/constants';
 
+// TODO: remove hardcoded quantwise renewal date
 const QuantwiseCard = ({
   packageSub,
   price,
@@ -56,7 +56,11 @@ const QuantwiseCard = ({
             {t('quantwise.fees', { fee })}
           </ZigTypography>
         </Box>
-        <ZigLink href={QUANTWISE_URL} target={'_blank'} sx={{ width: '100%' }}>
+        <ZigLink
+          href={process.env.QUANTWISE_URL}
+          target={'_blank'}
+          sx={{ width: '100%' }}
+        >
           <ZigButton size={'large'} fullWidth disabled={status !== 2}>
             {status === 1
               ? t('quantwise.your-subscription')

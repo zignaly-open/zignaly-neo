@@ -34,6 +34,7 @@ import {
   ROUTE_REFERRALS,
   ROUTE_REWARDS,
   ROUTE_SIGNUP,
+  ROUTE_SUBSCRIPTIONS,
 } from '../../../routes';
 import { generatePath, Link, useNavigate } from 'react-router-dom';
 import { getImageOfAccount } from '../../../util/images';
@@ -231,6 +232,13 @@ function AccountMenu(): React.ReactElement | null {
           onClick: () => navigate(ROUTE_REFERRALS),
         },
         (isFeatureOn(Features.Referrals) || isFeatureOn(Features.Rewards)) && {
+          separator: true,
+        },
+        isFeatureOn(Features.Subscriptions) && {
+          label: t('account-menu.subscription'),
+          id: 'account-menu-dropdown__balance',
+          href: generatePath(ROUTE_SUBSCRIPTIONS),
+          onClick: () => navigate(ROUTE_SUBSCRIPTIONS),
           separator: true,
         },
         {
