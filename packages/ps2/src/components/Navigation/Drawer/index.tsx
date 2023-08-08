@@ -203,7 +203,7 @@ const ZigDrawer = () => {
                       {isFeatureOn(Features.Kyc) && (
                         <DrawerMenuItem
                           id='drawer__kyc'
-                          path={generatePath(ROUTE_KYC, { type: 'kyc' })}
+                          path={generatePath(ROUTE_KYC)}
                           closeDrawer={handleDrawerToggle}
                           label={t('account-menu.dropdown-link-kyc')}
                         />

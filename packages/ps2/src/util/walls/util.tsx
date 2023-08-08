@@ -62,7 +62,7 @@ const usePerformLevelCheck = (
           title: t('access.kyc-pending.title'),
           okLabel: t('access.kyc-pending.action'),
           description: t('access.kyc-pending.description'),
-          okAction: () => navigate(generatePath(ROUTE_KYC, { type: 'kyc' })),
+          okAction: () => navigate(generatePath(ROUTE_KYC)),
         },
       },
       [Level.NoSubscription]: subscriptionsEnabled && {
@@ -112,7 +112,7 @@ const usePerformLevelCheck = (
           title: t('access.kyc-expired.title'),
           description: t('access.kyc-expired.description'),
           okLabel: t('access.kyc-expired.action'),
-          okAction: () => navigate(generatePath(ROUTE_KYC, { type: 'kyc' })),
+          okAction: () => navigate(generatePath(ROUTE_KYC)),
         },
       },
       [Level.SubscriptionExpired]: subscriptionsEnabled && {

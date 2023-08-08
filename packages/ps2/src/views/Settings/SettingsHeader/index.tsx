@@ -9,10 +9,7 @@ import {
   ROUTE_PASSWORD,
   ROUTE_KYC,
 } from '../../../routes';
-import {
-  RouteDropdown,
-  RouteGroup,
-} from 'views/TraderService/components/ServiceHeader/atoms';
+import { RouteGroup } from 'views/TraderService/components/ServiceHeader/atoms';
 import { isFeatureOn } from '../../../whitelabel';
 import { Features } from '../../../whitelabel/type';
 
@@ -53,23 +50,12 @@ function SettingsHeader() {
           />
 
           {isFeatureOn(Features.Kyc) && (
-            <RouteDropdown
-              id={'settings_verification__choose-option'}
-              title={t('header.verification')}
+            <RouteGroup
               routes={[
                 {
                   name: t('header.verification-kyc'),
-                  path: generatePath(ROUTE_KYC, {
-                    type: 'kyc',
-                  }),
-                  id: `settings__verification-kyc`,
-                },
-                {
-                  name: t('header.verification-kyb'),
-                  path: generatePath(ROUTE_KYC, {
-                    type: 'kyb',
-                  }),
-                  id: `settings__verification-kyb`,
+                  path: generatePath(ROUTE_KYC),
+                  id: `settings__kyc`,
                 },
               ]}
             />
