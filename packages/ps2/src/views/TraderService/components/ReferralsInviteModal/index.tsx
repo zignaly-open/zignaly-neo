@@ -42,7 +42,9 @@ const ReferralsInviteModal = ({
   const { data: serviceCommission } = useServiceCommissionQuery({
     serviceId: service.id,
   });
-  const { data: referral } = useReferralRewardsQuery();
+  const { data: referral } = useReferralRewardsQuery(undefined, {
+    refetchOnMountOrArgChange: true,
+  });
 
   const [currentDate, setCurrentDate] = useState(new Date());
   const lastTier = tiers?.[tiers?.length - 1];
