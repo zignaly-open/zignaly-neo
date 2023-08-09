@@ -105,7 +105,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
               id={'enable-2fa__submit'}
               type='submit'
               variant='contained'
-              size='large'
+              size='xlarge'
               loading={enable2FAStatus.isLoading}
               disabled={!isValid}
             >
@@ -135,7 +135,7 @@ const Enable2FAForm = ({ close }: { close: () => void }) => {
           onClick={() => load2FAInfo()}
           loading={load2FAInfoResult.isLoading || load2FAInfoResult.isFetching}
           variant='contained'
-          size='large'
+          size='xlarge'
           id='enable-2fa__setup'
         >
           {t('enable-2fa.setup-2fa')}

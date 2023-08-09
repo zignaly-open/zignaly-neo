@@ -3,8 +3,7 @@ on:
   push:
     branches:
       - test
-      - feat/kyc
-      - feat/subscriptions-page
+      - master
 
 jobs:
   deploy:

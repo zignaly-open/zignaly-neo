@@ -37,6 +37,7 @@ import { generatePath, Link } from 'react-router-dom';
 import {
   ROUTE_2FA,
   ROUTE_BECOME_TRADER,
+  ROUTE_EDIT_PROFILE,
   ROUTE_KYC,
   ROUTE_LOGIN,
   ROUTE_PASSWORD,
@@ -182,10 +183,10 @@ const ZigDrawer = () => {
                       onClick={handleDrawerToggle}
                     >
                       <DrawerMenuItem
-                        id='drawer__update-password'
-                        path={generatePath(ROUTE_PASSWORD)}
+                        id='drawer__profile'
+                        path={generatePath(ROUTE_EDIT_PROFILE)}
                         closeDrawer={handleDrawerToggle}
-                        label={t('account-menu.notAuth-dropdown-link-password')}
+                        label={t('account-menu.notAuth-dropdown-link-profile')}
                       />
                       <DrawerMenuItem
                         id='drawer__2fa'
@@ -193,10 +194,16 @@ const ZigDrawer = () => {
                         closeDrawer={handleDrawerToggle}
                         label={t('account-menu.notAuth-dropdown-link-2fa')}
                       />
+                      <DrawerMenuItem
+                        id='drawer__update-password'
+                        path={generatePath(ROUTE_PASSWORD)}
+                        closeDrawer={handleDrawerToggle}
+                        label={t('account-menu.notAuth-dropdown-link-password')}
+                      />
                       {isFeatureOn(Features.Kyc) && (
                         <DrawerMenuItem
                           id='drawer__kyc'
-                          path={generatePath(ROUTE_KYC, { type: 'kyc' })}
+                          path={generatePath(ROUTE_KYC)}
                           closeDrawer={handleDrawerToggle}
                           label={t('account-menu.dropdown-link-kyc')}
                         />

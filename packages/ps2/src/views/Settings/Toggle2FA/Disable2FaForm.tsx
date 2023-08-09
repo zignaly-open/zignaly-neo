@@ -80,7 +80,7 @@ const Disable2FAForm = ({ close }: { close: () => void }) => {
             id={'disable-2fa__submit'}
             type='submit'
             variant='contained'
-            size='large'
+            size='xlarge'
             loading={disable2FAStatus.isLoading}
             disabled={!isValid}
           >

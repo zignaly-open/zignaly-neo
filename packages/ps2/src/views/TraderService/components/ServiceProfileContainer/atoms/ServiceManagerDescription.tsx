@@ -51,15 +51,18 @@ const ServiceManagerDescription: React.FC<{ service: Service }> = ({
               {service.ownerCountry && flagInFolder && (
                 <Tooltip
                   title={t('owner-from', {
-                    country: country || service.ownerCountry,
+                    country:
+                      country || service.ownerCountry?.toLocaleUpperCase(),
                   })}
                 >
-                  <Flag
-                    country={service.ownerCountry}
-                    onError={() => {
-                      setFlagInFolder(false);
-                    }}
-                  />
+                  <span>
+                    <Flag
+                      country={service.ownerCountry}
+                      onError={() => {
+                        setFlagInFolder(false);
+                      }}
+                    />
+                  </span>
                 </Tooltip>
               )}
               <ZigTypography

@@ -16,7 +16,7 @@ import {
 } from '../../../../apis/user/api';
 import { useTranslation } from 'react-i18next';
 import { UlList } from '../../../Referrals/styles';
-import { useZConfirm } from '../../../../components/ZModal/use';
+import { useZAlert } from '../../../../components/ZModal/use';
 
 const largeIconStyle = {
   height: '16px',
@@ -59,7 +59,7 @@ const KycBox: React.FC<{
   );
   const { t } = useTranslation(['kyc']);
   const theme = useTheme();
-  const showModal = useZConfirm();
+  const showModal = useZAlert();
 
   const infoIconStyle = {
     height: '15.6px',
@@ -73,7 +73,7 @@ const KycBox: React.FC<{
         showModal({
           title: t('modal.title'),
           description: t('modal.description'),
-          yesLabel: (
+          okLabel: (
             <>
               {t('modal.ok')}{' '}
               <ZigArrowOutIcon
@@ -83,7 +83,7 @@ const KycBox: React.FC<{
               />
             </>
           ),
-          yesAction: () => window.open(kycLink),
+          okAction: () => window.open(kycLink),
         }),
       );
   }, [level, getCerificationLinkUrl]);
@@ -147,7 +147,7 @@ const KycBox: React.FC<{
                   sx={{ mt: 2, ...iconWrapStyle }}
                   component={'p'}
                   color={'greenGraph'}
-                  fontWeight={600}
+                  fontWeight={500}
                   variant={'body1'}
                 >
                   {t('status.completed')}
@@ -160,7 +160,7 @@ const KycBox: React.FC<{
                   sx={{ mt: 2, ...iconWrapStyle }}
                   component={'p'}
                   color={'yellow'}
-                  fontWeight={600}
+                  fontWeight={500}
                   variant={'body1'}
                 >
                   <DataUsageTwoToneIcon sx={largeIconStyle} />
@@ -176,7 +176,7 @@ const KycBox: React.FC<{
                   component={'p'}
                   sx={{ mt: 2, ...iconWrapStyle }}
                   color={'redGraphOrError'}
-                  fontWeight={600}
+                  fontWeight={500}
                   variant={'body1'}
                 >
                   <ErrorOutlineOutlinedIcon sx={largeIconStyle} />

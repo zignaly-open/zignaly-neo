@@ -3,9 +3,14 @@ import * as yup from 'yup';
 export const EditProfileValidation = yup
   .object({
     username: yup.string().required('error:error.required'),
-    email: yup
+    bio: yup
       .string()
-      .required('error:error.required')
-      .email('error:error.email-invalid'),
+      .test(
+        'maxlength',
+        'common:validation.max-allowed-length',
+        function (val) {
+          return val.length <= 2000;
+        },
+      ),
   })
   .required();

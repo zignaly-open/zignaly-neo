@@ -15,7 +15,6 @@ const UpdatePassword: React.FC = () => {
         <Box
           sx={{
             textAlign: 'center',
-            mt: 4,
             pb: 4,
           }}
         >

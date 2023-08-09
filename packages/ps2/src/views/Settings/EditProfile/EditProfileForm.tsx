@@ -15,7 +15,7 @@ import { EditProfileFormType } from './types';
 import { Form, ModalActions } from 'components/ZModal';
 import { useCurrentUser } from 'apis/user/use';
 import { useToast } from 'util/hooks/useToast';
-import { Grid, Tooltip } from '@mui/material';
+import { Grid } from '@mui/material';
 import Flag from '../../../components/Flag';
 import ServiceLogo from '../../TraderService/components/ServiceLogo';
 import { Box } from '@mui/system';
@@ -37,7 +37,6 @@ const EditProfileForm = () => {
     resolver: yupResolver(EditProfileValidation),
     defaultValues: {
       username: user.userName,
-      email: user.email,
       imageUrl: user.imageUrl,
       bio: user.bio || '',
     },
@@ -87,7 +86,6 @@ const EditProfileForm = () => {
   const onSubmit = (data: EditProfileFormType) =>
     updateUser({
       userName: data.username,
-      email: data.email,
       about: data.bio,
       countryCode: data.country,
       imageUrl: data.imageUrl,
@@ -138,7 +136,31 @@ const EditProfileForm = () => {
             </Box>
           </Box>
           <Grid container>
-            <Grid sm={5} xs={12} p={1} pb={2}>
+            <Grid sm={6} p={1} pb={2}>
+              <ZigTypography>
+                {t('edit-profile.user-id')}
+                <ZigTypography
+                  sx={{ pl: 1 }}
+                  variant={'body2'}
+                  color={'neutral400'}
+                >
+                  {t('edit-profile.internal-use')}
+                </ZigTypography>
+              </ZigTypography>
+
+              <ZigTypography component={'p'} sx={{ mt: 1 }}>
+                {user.userId}
+              </ZigTypography>
+            </Grid>
+            <Grid sm={6} xs={12} p={1} pb={2}>
+              <ZigTypography>{t('edit-profile.email')}</ZigTypography>
+
+              <ZigTypography component={'p'} sx={{ mt: 1 }}>
+                {user.email}
+              </ZigTypography>
+            </Grid>
+
+            <Grid sm={12} xs={12} p={1} pb={2}>
               <Controller
                 name='username'
                 control={control}
@@ -153,41 +175,7 @@ const EditProfileForm = () => {
                 )}
               />
             </Grid>
-            <Grid sm={7} xs={12} p={1} pb={2}>
-              <Controller
-                name='email'
-                control={control}
-                render={({ field }) => (
-                  <Tooltip title={t('edit-profile.change-email')}>
-                    <ZigInput
-                      wide
-                      disabled
-                      InputProps={{ readOnly: true }}
-                      label={t('edit-profile.email')}
-                      placeholder={t('edit-profile.email')}
-                      error={t(errors.email?.message)}
-                      {...field}
-                    />
-                  </Tooltip>
-                )}
-              />
-            </Grid>
-            <Grid sm={12} p={1} pb={2}>
-              <ZigTypography>
-                {t('edit-profile.user-id')}
-                <ZigTypography
-                  sx={{ pl: 1 }}
-                  variant={'body2'}
-                  color={'neutral400'}
-                >
-                  {t('edit-profile.internal-use')}
-                </ZigTypography>
-              </ZigTypography>
 
-              <ZigTypography component={'p'} sx={{ mt: 2 }}>
-                {user.userId}
-              </ZigTypography>
-            </Grid>
             <Grid sm={12} p={1} pb={2}>
               <Controller
                 name='country'
@@ -238,8 +226,10 @@ const EditProfileForm = () => {
                         </ZigTypography>
                       </ZigTypography>
                     }
-                    placeholder={t('edit-profile.username')}
-                    error={t(errors.bio?.message)}
+                    placeholder={t(
+                      'edit-profile.tell-me-the-story-of-your-left',
+                    )}
+                    error={t(errors.bio?.message, { maxLength: 2000 })}
                     {...field}
                   />
                 )}

@@ -32,7 +32,7 @@ export const hasValidKycConfig = !!environmentConfig;
 const kycConfig: Record<'kyc' | 'kyb', KycDefinitionConfig[]> = {
   kyc: [
     {
-      color: '#fff',
+      color: '#E1E9F0',
       icon: <SilverIcon />,
       restriction: silverRestriction,
       requirements: `requirements-level-1`,
@@ -50,7 +50,7 @@ const kycConfig: Record<'kyc' | 'kyb', KycDefinitionConfig[]> = {
   ],
   kyb: [
     {
-      color: '#fff',
+      color: '#E1E9F0',
       icon: <SilverIcon />,
       restriction: silverRestriction,
       requirements: `requirements-level-1-corp`,

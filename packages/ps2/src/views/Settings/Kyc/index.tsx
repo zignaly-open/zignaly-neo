@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import {
@@ -11,19 +11,11 @@ import { Box } from '@mui/material';
 import KycBox from './components/KycBox';
 import kycConfig from './kycDefinitions';
 import { PageWithHeaderContainer } from '../../TraderService/components/styles';
-import { generatePath, useNavigate, useParams } from 'react-router-dom';
-import { ROUTE_KYC } from '../../../routes';
 
 const Kyc: React.FC = () => {
   const { t } = useTranslation(['kyc', 'pages']);
   useTitle(t('pages:kyc'));
-  const { type: kycType } = useParams<{ type: 'kyc' | 'kyb' }>();
-  const navigate = useNavigate();
-  const switchToTab = useCallback((type: string) => {
-    navigate(generatePath(ROUTE_KYC, { type }));
-  }, []);
-
-  const tab = kycType in kycConfig ? kycType : 'kyc';
+  const [tab, switchToTab] = useState<'kyc' | 'kyb'>('kyc');
 
   return (
     <PageContainer style={{ maxWidth: '615px' }}>
@@ -31,7 +23,6 @@ const Kyc: React.FC = () => {
         <Box
           sx={{
             textAlign: 'center',
-            mt: 4,
             pb: 4,
           }}
         >
