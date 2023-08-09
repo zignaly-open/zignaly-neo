@@ -3,7 +3,7 @@ import { Layout, StyledTab, StyledTabs } from './styles';
 import { useTranslation } from 'react-i18next';
 import { ZigInput, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import QuantwiseCard from './QuantwiseCard';
+import SubscriptionCard from './SubscriptionCard';
 import { useTitle } from 'react-use';
 
 const Subscriptions: React.FC = () => {
@@ -67,7 +67,7 @@ const Subscriptions: React.FC = () => {
       </Box>
       <Box display={'flex'} gap={4} mb={15}>
         {data.map((el) => (
-          <QuantwiseCard key={el.packageSub} {...el} />
+          <SubscriptionCard key={el.packageSub} {...el} />
         ))}
       </Box>
       <Box display={'flex'} flexDirection={'column'} width={'62%'} gap={0.5}>

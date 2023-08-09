@@ -2,18 +2,18 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { ZigButton, ZigLink, ZigTypography } from '@zignaly-open/ui';
 import { Box } from '@mui/material';
-import { QuantwiseCardProps } from './types';
+import { SubscriptionCardProps } from './types';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { Card, Wrapper } from './styles';
 
 // TODO: remove hardcoded quantwise renewal date
 // TODO: currency should be dynamic
-const QuantwiseCard = ({
+const SubscriptionCard = ({
   packageSub,
   price,
   fee,
   status,
-}: QuantwiseCardProps) => {
+}: SubscriptionCardProps) => {
   const { t } = useTranslation('subscriptions');
   return (
     <Box position={'relative'}>
@@ -72,4 +72,4 @@ const QuantwiseCard = ({
     </Box>
   );
 };
-export default QuantwiseCard;
+export default SubscriptionCard;

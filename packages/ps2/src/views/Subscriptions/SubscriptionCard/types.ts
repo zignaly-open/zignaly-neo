@@ -1,4 +1,4 @@
-export type QuantwiseCardProps = {
+export type SubscriptionCardProps = {
   packageSub: string;
   price: number;
   fee: number;
