@@ -18,7 +18,7 @@ const Kyc: React.FC = () => {
   const [tab, switchToTab] = useState<'kyc' | 'kyb'>('kyc');
 
   return (
-    <PageContainer style={{ maxWidth: '615px' }}>
+    <PageContainer style={{ maxWidth: '815px' }}>
       <PageWithHeaderContainer hasHeader>
         <Box
           sx={{

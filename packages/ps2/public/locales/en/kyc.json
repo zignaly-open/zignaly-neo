@@ -29,24 +29,44 @@
     "phone-and-mail": "Phone and Email Verification",
     "selfie": "Selfie/Liveness Verification",
     "residence": "Proof of Residence",
-    "questionnaire": "Questionnaire"
+    "questionnaire": {
+      "title":"Questionnaire",
+      "items": {
+        "profession": "Current Profession",
+        "proof-of-funds": "Proof of Funds Document <span>(Employment Certificate or Bank statement showing sources income. Please make sure that the document proves a net worth of at least from 100.000 to USD 250,000)</span>"
+      }
+    }
   },
   "requirements-level-1-corp": {
     "email": "Email Verification",
-    "questionnaire": "Questionnaire",
-    "cert-of-incorporation": "Certificate of Incorporation",
-    "licence": "Trade License",
-    "cert-of-incumbency": "Register of Members or Certificate of Incumbency (should be issued within the last 12 months)",
-    "shareholders": "Shareholder Registry",
-    "director": "Director Registry"
+    "questionnaire": {
+      "title": "Company Documents",
+      "items": {
+        "cert-of-incorporation": "Certificate of Incorporation",
+        "licence": "Trade License",
+        "cert-of-incumbency": "Register of Members or Certificate of Incumbency <span>(should be issued within the last 12 months)</span>",
+        "shareholders": "Shareholder Registry",
+        "director": "Director Registry"
+      }
+    }
   },
   "requirements-level-2-corp": {
-    "cert-of-incorporation": "Certificate of Incorporation or a Trade License",
-    "cert-of-incumbency": "Register of Members or Certificate of Incumbency (should be issued within the last 12 months)",
-    "shareholders": "Shareholder Registry",
-    "director": "Director Registry",
-    "questionnaire": "Questionnaire: type of Business",
-    "source-of-funds": "Source of Funds"
+    "company-docs": {
+      "title": "Company Documents",
+      "items": {
+        "cert-of-incorporation": "Certificate of Incorporation or a Trade License",
+        "cert-of-incumbency": "Register of Members or Certificate of Incumbency (should be issued within the last 12 months)",
+        "shareholders": "Shareholder Registry",
+        "director": "Director Registry"
+      }
+    },
+    "questionnaire": {
+      "title": "Questionnaire",
+      "items": {
+        "type-of-business": "Type of Business / Nature of Business"
+      }
+    },
+    "source-of-funds": "Source of Funds <span>(Source of Funds Verification can be copies of latest audited Company Accounts, proof of digital asset balances on other exchanges, or Bank statements showing sources of business revenue. Ensure the uploaded document covers the last 12 months)</span>"
   },
   "modal": {
     "title": "Start your account verification",

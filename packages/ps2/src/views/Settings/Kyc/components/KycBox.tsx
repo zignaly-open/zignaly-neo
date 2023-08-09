@@ -15,8 +15,9 @@ import {
   useLazyKycLinkQuery,
 } from '../../../../apis/user/api';
 import { useTranslation } from 'react-i18next';
-import { UlList } from '../../../Referrals/styles';
+import { OlList, UlList } from '../../../Referrals/styles';
 import { useZAlert } from '../../../../components/ZModal/use';
+import { KycBoxListEntry } from './atoms';
 
 const largeIconStyle = {
   height: '16px',
@@ -37,7 +38,10 @@ const KycBox: React.FC<{
   requiresLevel?: string;
   title: string;
   icon: JSX.Element;
-  items: Record<string, string>;
+  items: Record<
+    string,
+    string | { title: string; items: Record<string, string> }
+  >;
 }> = ({
   icon,
   level,
@@ -208,13 +212,29 @@ const KycBox: React.FC<{
       </Grid>
       <Grid item sm={12} md={7}>
         <Paper sx={{ p: 3.5, pt: 2.5, pb: 2.5 }}>
-          <UlList>
+          <OlList>
             {Object.entries(items).map(([k, v]) => (
               <li style={{ marginTop: 4, marginBottom: 4 }} key={k}>
-                <ZigTypography color={'neutral100'}>{v}</ZigTypography>
+                {typeof v === 'string' ? (
+                  <KycBoxListEntry>{v}</KycBoxListEntry>
+                ) : (
+                  <>
+                    <KycBoxListEntry>{v.title}</KycBoxListEntry>
+                    <UlList>
+                      {Object.entries(v.items).map(([itemKey, text]) => (
+                        <li
+                          style={{ marginTop: 4, marginBottom: 4 }}
+                          key={k + '_' + itemKey}
+                        >
+                          <KycBoxListEntry>{text}</KycBoxListEntry>
+                        </li>
+                      ))}
+                    </UlList>
+                  </>
+                )}
               </li>
             ))}
-          </UlList>
+          </OlList>
         </Paper>
       </Grid>
     </Grid>
