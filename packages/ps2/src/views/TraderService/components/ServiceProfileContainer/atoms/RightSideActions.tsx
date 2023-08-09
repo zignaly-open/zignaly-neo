@@ -14,6 +14,8 @@ import { ROUTE_PROFIT_SHARING_SERVICE_INVEST } from '../../../../../routes';
 import { useZModal } from 'components/ZModal/use';
 import ReferralsInviteModal from '../../ReferralsInviteModal';
 import { useTranslation } from 'react-i18next';
+import { isFeatureOn } from '../../../../../whitelabel';
+import { Features } from '../../../../../whitelabel/type';
 
 const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
   const isAuthenticated = useIsAuthenticated();
@@ -37,7 +39,7 @@ const RightSideActions: React.FC<{ service: Service }> = ({ service }) => {
           gap={3}
           alignItems={'center'}
         >
-          {isAuthenticated && (
+          {isAuthenticated && isFeatureOn(Features.Referrals) && (
             <ZigButton
               ctaId={'service-profile-invite-button'}
               onClick={() =>
