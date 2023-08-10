@@ -157,9 +157,9 @@ const usePerformLevelCheck = (
     for (const l of Object.keys(Level)) {
       if (!isAuthenticated || !accessLevel) {
         // Do nothing here
-      } else if (levelThreshold < +l) {
+      } else if (levelThreshold <= +l) {
         // Do nothing, means we do not need so high of a level
-      } else if (accessLevel <= +l && errorLevelMapping[l]) {
+      } else if (accessLevel < +l && errorLevelMapping[l]) {
         !onlyCheck &&
           showModal(errorLevelMapping[l].modal, errorLevelMapping[l].props);
         return false;
@@ -169,9 +169,10 @@ const usePerformLevelCheck = (
   };
 };
 
-export const useCanLogIn = () => usePerformLevelCheck(Level.Banned);
+export const useCanLogIn = () => usePerformLevelCheck(Level.KycPending);
 
-export const useCanInsertCoupon = () => usePerformLevelCheck(Level.Frozen);
+export const useCanInsertCoupon = () =>
+  usePerformLevelCheck(Level.NoSubscription);
 
 export const useCanDeposit = () => usePerformLevelCheck(Level.Normal);
 
