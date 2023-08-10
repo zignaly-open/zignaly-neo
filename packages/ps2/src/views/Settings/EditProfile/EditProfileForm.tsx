@@ -36,8 +36,8 @@ const EditProfileForm = () => {
     mode: 'onBlur',
     resolver: yupResolver(EditProfileValidation),
     defaultValues: {
-      username: user.userName,
-      imageUrl: user.imageUrl,
+      username: user.userName || '',
+      imageUrl: user.imageUrl || '',
       bio: user.bio || '',
     },
   });
