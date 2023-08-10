@@ -72,11 +72,15 @@ const SignupForm: React.FC<{ plain?: boolean }> = ({ plain }) => {
       )}
 
       <Box padding={'0 32px'}>
-        <ZigTypography variant={'h1'} align={'center'}>
+        <ZigTypography variant={'h1'} align={'center'} id={'signup__title'}>
           {t('signup-title')}
         </ZigTypography>
         {!plain && (
-          <ZigTypography variant={'h2'} align={'center'}>
+          <ZigTypography
+            variant={'h2'}
+            align={'center'}
+            id={'signup__description'}
+          >
             <Trans i18nKey={'signup-description'} t={t}>
               <Link
                 underline={'always'}
@@ -100,7 +104,7 @@ const SignupForm: React.FC<{ plain?: boolean }> = ({ plain }) => {
                 rules={{ required: true }}
                 render={({ field }) => (
                   <ZigInput
-                    id={'signup'}
+                    id={'signup__input-email'}
                     label={t('login-form.inputText.email.label') + ':'}
                     placeholder={t('login-form.inputText.email.label')}
                     disabled={signingUp}
@@ -138,7 +142,7 @@ const SignupForm: React.FC<{ plain?: boolean }> = ({ plain }) => {
             rules={{ required: true }}
             render={({ field }) => (
               <ZigInput
-                id={'login__password'}
+                id={'signup__input-password'}
                 sensitive
                 label={t('login-form.inputText.password.label') + ':'}
                 placeholder={t('login-form.inputText.password.label')}
@@ -147,6 +151,7 @@ const SignupForm: React.FC<{ plain?: boolean }> = ({ plain }) => {
                 type={'password'}
                 helperText={
                   <ZigAlertMessage
+                    id={'signup__input-password-requirements'}
                     text={t('error:error.password-requirements', {
                       length: 8,
                     })}
@@ -169,6 +174,7 @@ const SignupForm: React.FC<{ plain?: boolean }> = ({ plain }) => {
             color='neutral300'
             component='h4'
             textAlign={'center'}
+            id={'signup__accept-terms-and-conditions-label'}
           >
             <Trans i18nKey='signup-form.accept-terms' t={t}>
               <ZigLink
@@ -212,6 +218,7 @@ const SignupForm: React.FC<{ plain?: boolean }> = ({ plain }) => {
                 color={'neutral300'}
                 textAlign={'center'}
                 marginTop={'5px'}
+                id={'signup__protect-label'}
               >
                 {t('signup-protect')}
               </ZigTypography>
