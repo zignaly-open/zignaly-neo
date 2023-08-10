@@ -91,6 +91,7 @@ export const enum TransactionStateType {
   TRANSFER = 'transfer',
   PENDING = 'pending',
   ERROR = 'error',
+  REVIEWING = 'reviewing',
 }
 
 export type Transaction = {

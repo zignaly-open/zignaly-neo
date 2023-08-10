@@ -4,6 +4,7 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { transactionStateName, transactionStateColor } from './types';
+import { Tooltip } from '@mui/material';
 
 const TransactionStateLabel = ({
   state,
@@ -14,9 +15,11 @@ const TransactionStateLabel = ({
 }) => {
   const { t } = useTranslation('transactions-history');
   return (
-    <ZigTypography color={transactionStateColor[state]} id={id}>
-      {t(transactionStateName[state])}
-    </ZigTypography>
+    <Tooltip title={state === 'reviewing' ? t('status.reviewing-tooltip') : ''}>
+      <ZigTypography color={transactionStateColor[state]} id={id}>
+        {t(transactionStateName[state])}
+      </ZigTypography>
+    </Tooltip>
   );
 };
 
