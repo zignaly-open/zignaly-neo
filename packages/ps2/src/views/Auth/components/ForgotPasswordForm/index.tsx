@@ -43,10 +43,11 @@ const ForgotPasswordForm = ({ defaultEmail }: { defaultEmail?: string }) => {
           variant={'h1'}
           align={'center'}
           textTransform={'capitalize'}
+          id={'reset-password__title'}
         >
           {t('reset-password.reset-password')}
         </ZigTypography>
-        <ZigTypography textAlign='center'>
+        <ZigTypography textAlign='center' id={'reset-password__description'}>
           {t('reset-password.email-sent')}
         </ZigTypography>
       </Box>
