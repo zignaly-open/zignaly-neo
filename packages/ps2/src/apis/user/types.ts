@@ -25,6 +25,7 @@ export type UserData = {
   createdAt: string;
   locale: UserLocale;
   accessLevel: UserAccessLevel;
+  KYCPending: boolean;
   intercomHash: string;
   isTrader?: {
     profit_sharing: boolean;

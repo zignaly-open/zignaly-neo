@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useTitle } from 'react-use';
 import {
@@ -11,15 +11,21 @@ import { Box } from '@mui/material';
 import KycBox from './components/KycBox';
 import kycConfig from './kycDefinitions';
 import { PageWithHeaderContainer } from '../../TraderService/components/styles';
-import { useKycStatusesQuery } from '../../../apis/user/api';
+import { useKycStatusesQuery, useLazyUserQuery } from '../../../apis/user/api';
 import CriticalError from '../../../components/Stub/CriticalError';
 import LayoutContentWrapper from '../../../components/LayoutContentWrapper';
+import { useCurrentUser } from '../../../apis/user/use';
 
 const Kyc: React.FC = () => {
   const { t } = useTranslation(['kyc', 'pages']);
   useTitle(t('pages:kyc'));
+  const currentUser = useCurrentUser();
+  const [loadUser] = useLazyUserQuery();
+  useEffect(() => {
+    currentUser.KYCPending && loadUser();
+  }, []);
   const statusesEndpoint = useKycStatusesQuery();
-  const [tab, switchToTab] = useState<'KYC' | 'KYB'>('KYB');
+  const [tab, switchToTab] = useState<'KYC' | 'KYB'>('KYC');
 
   return (
     <LayoutContentWrapper
@@ -65,7 +71,7 @@ const Kyc: React.FC = () => {
               </ZigTabs>
               {kycConfig[tab]?.map((c, i) => (
                 <KycBox
-                  requiresLevel={status[i - 1].name}
+                  requiresLevel={status[i - 1]?.level}
                   labelColor={c.color}
                   balanceRestriction={t(
                     `balance-range-from${c.restriction.to ? '-to' : ''}`,
@@ -73,9 +79,9 @@ const Kyc: React.FC = () => {
                   )}
                   items={t(c.requirements, { returnObjects: true })}
                   title={t(c.label)}
-                  key={status[i].name}
+                  key={status[i].level}
                   icon={c.icon}
-                  level={status[i].name}
+                  level={status[i].level}
                 />
               )) || false}
             </PageWithHeaderContainer>
