@@ -15,6 +15,7 @@ import { useKycStatusesQuery, useLazyUserQuery } from '../../../apis/user/api';
 import CriticalError from '../../../components/Stub/CriticalError';
 import LayoutContentWrapper from '../../../components/LayoutContentWrapper';
 import { useCurrentUser } from '../../../apis/user/use';
+import { KycResponse } from '../../../apis/user/types';
 
 const Kyc: React.FC = () => {
   const { t } = useTranslation(['kyc', 'pages']);
@@ -31,7 +32,10 @@ const Kyc: React.FC = () => {
     <LayoutContentWrapper
       endpoint={statusesEndpoint}
       error={() => <CriticalError />}
-      content={({ status }) => {
+      content={({ status }: { status: KycResponse[] }) => {
+        const correctOrder = status
+          .filter((x) => x.category === tab)
+          .sort((a, b) => a.order - b.order);
         return (
           <PageContainer style={{ maxWidth: '815px' }}>
             <PageWithHeaderContainer hasHeader>
@@ -71,17 +75,21 @@ const Kyc: React.FC = () => {
               </ZigTabs>
               {kycConfig[tab]?.map((c, i) => (
                 <KycBox
-                  requiresLevel={status[i - 1]?.level}
+                  isMissingPreviousLevel={
+                    correctOrder[i - 1] &&
+                    correctOrder[i - 1].status !== 'approved'
+                  }
                   labelColor={c.color}
                   balanceRestriction={t(
                     `balance-range-from${c.restriction.to ? '-to' : ''}`,
                     c.restriction,
                   )}
+                  response={correctOrder[i]}
                   items={t(c.requirements, { returnObjects: true })}
                   title={t(c.label)}
-                  key={status[i].level}
+                  key={correctOrder[i].level}
                   icon={c.icon}
-                  level={status[i].level}
+                  level={correctOrder[i].level}
                 />
               )) || false}
             </PageWithHeaderContainer>

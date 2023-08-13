@@ -121,16 +121,12 @@ export type SessionResponse = {
 };
 
 export type KycResponse = {
-  status?: 'rejected' | 'pending' | 'approved';
+  status?: 'rejected' | 'pending' | 'approved' | 'init' | null;
   reason?: string;
   canBeRetried?: boolean;
-};
-
-export type KycStatus = {
   category: 'KYC' | 'KYB';
   level: string;
   order: number;
-  status: null | string;
 };
 
 export type KycLinkResponse = {

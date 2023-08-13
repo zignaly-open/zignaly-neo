@@ -1,7 +1,6 @@
 import {
   KycLinkResponse,
   KycResponse,
-  KycStatus,
   LoginPayload,
   LoginResponse,
   SessionResponse,
@@ -123,7 +122,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     }),
   }),
 
-  kycStatuses: builder.query<{ status: KycStatus[] }, void>({
+  kycStatuses: builder.query<{ status: KycResponse[] }, void>({
     query: () => ({
       url: `user/kyc`,
     }),
