@@ -33,13 +33,14 @@
       "title":"Questionnaire",
       "items": {
         "profession": "Current Profession",
-        "proof-of-funds": "Proof of Funds Document <span>(Employment Certificate or Bank statement showing sources income. Please make sure that the document proves a net worth of at least from 100.000 to USD 250,000)</span>"
+        "proof-of-funds": "Proof of Funds Document <span>(Employment Certificate or Bank statement showing sources of income. Please make sure that the document proves a net worth of at least from 100.000 to USD 250,000)</span>"
       }
     }
   },
   "requirements-level-1-corp": {
     "email": "Email Verification",
-    "questionnaire": {
+    "questionnaire": "Questionnaire",
+    "company-docs": {
       "title": "Company Documents",
       "items": {
         "cert-of-incorporation": "Certificate of Incorporation",
