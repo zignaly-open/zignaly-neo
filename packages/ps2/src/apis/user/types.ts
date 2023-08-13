@@ -125,6 +125,13 @@ export type KycResponse = {
   canBeRetried?: boolean;
 };
 
+export type KycStatus = {
+  category: 'KYC' | 'KYB';
+  level: string;
+  order: number;
+  status: null | string;
+};
+
 export type KycLinkResponse = {
   link: string;
 };

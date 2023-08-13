@@ -14,30 +14,14 @@ const goldRestriction = {
   coin: 'USDT',
 };
 
-const kycEnvLevels = process.env.REACT_APP_KYC_LEVELS;
-let environmentConfig: Record<'kyc' | 'kyb', [string, string]> = null;
-
-if (kycEnvLevels) {
-  try {
-    environmentConfig = JSON.parse(kycEnvLevels);
-  } catch (e) {
-    // Too bad :(
-    // eslint-disable-next-line no-console
-    console.error('KYC Config: not a valid JSON');
-  }
-}
-
-export const hasValidKycConfig = !!environmentConfig;
-
-const kycConfig: Record<'kyc' | 'kyb', KycDefinitionConfig[]> = {
-  kyc: [
+const kycConfig: Record<'KYC' | 'KYB', KycDefinitionConfig[]> = {
+  KYC: [
     {
       color: '#E1E9F0',
       icon: <SilverIcon />,
       restriction: silverRestriction,
       requirements: `requirements-level-1`,
       label: `name-level-1`,
-      name: environmentConfig?.kyc?.[0],
     },
     {
       color: '#FFD232',
@@ -45,17 +29,15 @@ const kycConfig: Record<'kyc' | 'kyb', KycDefinitionConfig[]> = {
       restriction: goldRestriction,
       requirements: `requirements-level-2`,
       label: `name-level-2`,
-      name: environmentConfig?.kyc?.[1],
     },
   ],
-  kyb: [
+  KYB: [
     {
       color: '#E1E9F0',
       icon: <SilverIcon />,
       restriction: silverRestriction,
       requirements: `requirements-level-1-corp`,
       label: `name-level-1`,
-      name: environmentConfig?.kyb?.[0],
     },
     {
       color: '#FFD232',
@@ -63,7 +45,6 @@ const kycConfig: Record<'kyc' | 'kyb', KycDefinitionConfig[]> = {
       restriction: goldRestriction,
       requirements: `requirements-level-2-corp`,
       label: `name-level-2`,
-      name: environmentConfig?.kyb?.[1],
     },
   ],
 };

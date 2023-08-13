@@ -1,6 +1,7 @@
 import {
   KycLinkResponse,
   KycResponse,
+  KycStatus,
   LoginPayload,
   LoginResponse,
   SessionResponse,
@@ -119,6 +120,12 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
   kycStatus: builder.query<KycResponse, string>({
     query: (level) => ({
       url: `user/kyc/${level}`,
+    }),
+  }),
+
+  kycStatuses: builder.query<{ status: KycStatus[] }, void>({
+    query: () => ({
+      url: `user/kyc`,
     }),
   }),
 
@@ -275,6 +282,7 @@ export const {
   useEnable2FAInfoQuery,
   useLazyEnable2FAInfoQuery,
   useLazyKycLinkQuery,
+  useKycStatusesQuery,
   useKycStatusQuery,
   useEnable2FAMutation,
   useBalanceQuery,
