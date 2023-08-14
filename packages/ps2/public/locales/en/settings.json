@@ -28,7 +28,9 @@
       "enable-2fa-cta": "Enable",
       "enabled": "Enabled",
       "disabled": "Disabled",
-      "pass-kyc-cta": "Verify"
+      "pass-kyc-cta": "Verify",
+      "verified": "Verified",
+      "not-verified": "Not verified"
     }
   },
   "update-password": {

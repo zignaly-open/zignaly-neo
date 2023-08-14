@@ -14,7 +14,6 @@ export const ProfileStatusBox: React.FC<{
       <ZigTypography color={'neutral200'}>{label}</ZigTypography>
       <ZigTypography
         component={'p'}
-        sx={{ m: 0.5 }}
         fontWeight={600}
         color={isSuccess ? 'greenGraph' : 'red'}
       >
