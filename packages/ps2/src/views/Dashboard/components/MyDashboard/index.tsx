@@ -144,8 +144,9 @@ const MyDashboard: React.FC = () => {
         ),
         sortingFn: 'alphanumeric',
       }),
-      columnHelper.accessor('pnl90dPct', {
+      columnHelper.accessor((row) => +row.pnl90dPct, {
         header: t('tableHeader.3-mos-title'),
+        id: 'pnl90dPct',
         cell: ({ getValue, row: { original } }) => (
           <ChangeIndicator
             id={`portfolio-table__pnl90dPct-${original.serviceId}`}
@@ -154,10 +155,11 @@ const MyDashboard: React.FC = () => {
             value={new BigNumber(getValue()).toFixed()}
           />
         ),
-        sortingFn: 'alphanumeric',
+        sortingFn: 'auto',
       }),
-      columnHelper.accessor('pnl180dPct', {
+      columnHelper.accessor((row) => +row.pnl180dPct, {
         header: t('tableHeader.6-mos-title'),
+        id: 'pnl180dPct',
         cell: ({ getValue, row: { original } }) => (
           <ChangeIndicator
             id={`portfolio-table__pnl180dPct-${original.serviceId}`}
@@ -166,10 +168,11 @@ const MyDashboard: React.FC = () => {
             value={new BigNumber(getValue()).toFixed()}
           />
         ),
-        sortingFn: 'alphanumeric',
+        sortingFn: 'auto',
       }),
-      columnHelper.accessor('pnlPctLc', {
+      columnHelper.accessor((row) => +row.pnlPctLc, {
         header: t('tableHeader.all.title'),
+        id: 'pnlPctLc',
         meta: { subtitle: t('tableHeader.all.subtitle') },
         cell: ({ getValue, row: { original } }) => (
           <ChangeIndicator
@@ -183,7 +186,7 @@ const MyDashboard: React.FC = () => {
             })}
           />
         ),
-        sortingFn: 'alphanumeric',
+        sortingFn: 'auto',
       }),
       columnHelper.display({
         id: 'link',
