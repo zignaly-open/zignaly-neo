@@ -59,7 +59,7 @@ src
 ├── views                           # high-level components aka pages
 │   ├── ViewName                    # Page name or a group of pages
 │   │   ├── components              # components used only by this page - if used by multiple, put it in src/components 
-│   │   │   ├── index.tsx           # actual component with export default
+│   │   │   ├── UpdateChecker.tsx           # actual component with export default
 │   │   │   ├── validations.ts      # if it's a form, yup resolvers
 │   │   │   ├── styles.tsx          # styled components
 │   │   │   ├── types.tsx           # type definitions

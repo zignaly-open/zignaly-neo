@@ -22,7 +22,7 @@ const Kyc: React.FC = () => {
   const currentUser = useCurrentUser();
   const [loadUser] = useLazyUserQuery();
   useEffect(() => {
-    currentUser.KYCPending && loadUser();
+    currentUser.KYCMonitoring && loadUser();
   }, []);
   const statusesEndpoint = useKycStatusesQuery();
   const [tab, switchToTab] = useState<'KYC' | 'KYB'>('KYC');

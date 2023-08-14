@@ -98,5 +98,6 @@
     "min-invest-amount-for-owner": "Owner balance must be above {{minAmount}} {{minAmountCoin}}"
   },
   "follow-us": "Follow us",
-  "portfolio": "Portfolio"
+  "portfolio": "Portfolio",
+  "kyc-updated": "KYC status updated!"
 }
