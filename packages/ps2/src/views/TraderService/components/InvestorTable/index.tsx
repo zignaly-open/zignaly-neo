@@ -30,6 +30,7 @@ import InvestorEditFee from '../InvestorEditFee/InvestorEditFee';
 import { getServiceTotalFee, getServiceZignalyFee } from '../../../../util/fee';
 import { useToast } from '../../../../util/hooks/useToast';
 import { useActiveExchange } from '../../../../apis/user/use';
+import { ConnectionStateLabelId } from '../ConnectionStateLabel/types';
 
 const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
   serviceId,
@@ -196,10 +197,12 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
               account_id: accountId,
               ownerSfDiscount,
               ownerSuccessFee,
+              accountType,
             },
           },
         }) =>
-          accountId !== exchange.internalId && (
+          accountId !== exchange.internalId &&
+          accountType !== ConnectionStateLabelId.DISCONNECTED && (
             <ZigDropdown
               component={() => (
                 <IconButton sx={{ mr: '-4px' }}>
