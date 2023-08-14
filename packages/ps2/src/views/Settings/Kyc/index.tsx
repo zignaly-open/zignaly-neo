@@ -12,7 +12,6 @@ import KycBox from './components/KycBox';
 import kycConfig from './kycDefinitions';
 import { PageWithHeaderContainer } from '../../TraderService/components/styles';
 import { useKycStatusesQuery, useLazyUserQuery } from '../../../apis/user/api';
-import CriticalError from '../../../components/Stub/CriticalError';
 import LayoutContentWrapper from '../../../components/LayoutContentWrapper';
 import { useCurrentUser } from '../../../apis/user/use';
 import { KycResponse } from '../../../apis/user/types';
@@ -31,7 +30,7 @@ const Kyc: React.FC = () => {
   return (
     <LayoutContentWrapper
       endpoint={statusesEndpoint}
-      error={() => <CriticalError />}
+      hasHeader
       content={({ status }: { status: KycResponse[] }) => {
         const correctOrder = status
           .filter((x) => x.category === tab)
