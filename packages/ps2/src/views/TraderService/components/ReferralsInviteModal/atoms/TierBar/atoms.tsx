@@ -15,7 +15,7 @@ export const UserRate = () => {
       gap='6px'
       mb='13px'
     >
-      <ZigTypography variant='h3' fontWeight={600} color='#999fe1'>
+      <ZigTypography variant='h3' color='#999fe1'>
         {t('your-rate')}
       </ZigTypography>
       <ArrowDownward style={{ color: '#999fe1', height: '20px' }} />
