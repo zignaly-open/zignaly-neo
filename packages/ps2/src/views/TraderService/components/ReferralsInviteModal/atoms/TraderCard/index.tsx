@@ -35,6 +35,9 @@ const TraderCard = ({
         fontWeight='600'
         textAlign={'center'}
         lineHeight={'28px'}
+        noWrap
+        textOverflow={'ellipsis'}
+        maxWidth={'170px'}
       >
         {service.name}
       </ZigTypography>
