@@ -29,7 +29,7 @@ export const InviteUrlInput = styled('input')`
   border: none;
   letter-spacing: 0.56px;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 400;
   outline: none;
   background: transparent;
 `;
