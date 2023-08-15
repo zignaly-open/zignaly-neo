@@ -95,8 +95,9 @@ const MyDashboard: React.FC = () => {
           <ServiceName prefixId={'portfolio-table'} service={original} />
         ),
       }),
-      columnHelper.accessor('pnl30dPct', {
+      columnHelper.accessor((row) => +row.pnl30dPct, {
         header: t('tableHeader.1-mo.title'),
+        id: 'pnl30dPct',
         cell: ({ row: { original } }) => (
           <Box
             minHeight={'125px'}
@@ -127,7 +128,7 @@ const MyDashboard: React.FC = () => {
             )}
           </Box>
         ),
-        sortingFn: 'alphanumeric',
+        sortingFn: 'auto',
         enableHiding: false,
       }),
       columnHelper.accessor('pnlDailyMeanLc', {
