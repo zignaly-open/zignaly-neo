@@ -92,6 +92,7 @@ export const enum TransactionStateType {
   PENDING = 'pending',
   ERROR = 'error',
   REVIEWING = 'reviewing',
+  PENDING_TO_APPROVE = 'pending_to_approve',
 }
 
 export type Transaction = {
