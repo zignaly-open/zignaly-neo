@@ -91,7 +91,7 @@ const CellLabelTraderBoost = ({ boost }: { boost: number }) => {
     >
       <BoostChip boost={boost} showBolt />
       <ZigTypography
-        fontWeight={400}
+        fontWeight={500}
         variant='h4'
         lineHeight='24px'
         color='#24b68d'
