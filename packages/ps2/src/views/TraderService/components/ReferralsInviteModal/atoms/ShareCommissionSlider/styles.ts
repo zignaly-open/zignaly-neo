@@ -51,7 +51,7 @@ export const StyledZigSlider = styled(ZigSlider)`
   .MuiTypography-root {
     &:nth-of-type(2) {
       font-size: 24px;
-      font-weight: 500;
+      font-weight: 600;
       color: #999fe1;
       position: relative;
 
