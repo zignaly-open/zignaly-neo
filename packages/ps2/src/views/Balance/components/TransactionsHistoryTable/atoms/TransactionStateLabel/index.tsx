@@ -15,7 +15,13 @@ const TransactionStateLabel = ({
 }) => {
   const { t } = useTranslation('transactions-history');
   return (
-    <Tooltip title={state === 'reviewing' ? t('status.reviewing-tooltip') : ''}>
+    <Tooltip
+      title={
+        ['reviewing', 'pending_to_approve'].includes(state)
+          ? t('status.reviewing-tooltip')
+          : ''
+      }
+    >
       <ZigTypography color={transactionStateColor[state]} id={id}>
         {t(transactionStateName[state])}
       </ZigTypography>
