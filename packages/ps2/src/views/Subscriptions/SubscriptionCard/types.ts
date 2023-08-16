@@ -1,6 +1,6 @@
 export type SubscriptionCardProps = {
-  packageSub: string;
+  name: string;
   price: number;
-  fee: number;
+  successFeePct: number;
   status: number;
 };

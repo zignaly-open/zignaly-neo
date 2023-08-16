@@ -9,9 +9,9 @@ import { Card, Wrapper } from './styles';
 // TODO: remove hardcoded quantwise renewal date
 // TODO: currency should be dynamic
 const SubscriptionCard = ({
-  packageSub,
+  name,
   price,
-  fee,
+  successFeePct,
   status,
 }: SubscriptionCardProps) => {
   const { t } = useTranslation('subscriptions');
@@ -31,7 +31,7 @@ const SubscriptionCard = ({
           </ZigTypography>
           &nbsp;
           <ZigTypography fontWeight={700} color={'neutral000'}>
-            {t(`quantwise.packages.${packageSub}`)}
+            {t(`quantwise.packages.${name.split(' ')[1].toLowerCase()}`)}
           </ZigTypography>
         </Box>
         <ZigTypography
@@ -54,7 +54,7 @@ const SubscriptionCard = ({
             sx={{ marginTop: '1px' }}
           />
           <ZigTypography mb={'25px'} color={'neutral000'}>
-            {t('quantwise.fees', { fee })}
+            {t('quantwise.fees', { fee: successFeePct })}
           </ZigTypography>
         </Box>
         <ZigLink
