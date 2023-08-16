@@ -129,7 +129,7 @@ const PendingTransactionsList: React.FC<{
                         <Box
                           component='img'
                           sx={{
-                            width: '20px',
+                            width: '10px',
                             zIndex: 1,
                             position: 'absolute',
                             ml: '8px',
