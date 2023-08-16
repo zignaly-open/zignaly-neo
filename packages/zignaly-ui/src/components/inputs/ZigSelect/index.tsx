@@ -103,6 +103,7 @@ function ZigSelect<T>({
           placeholder={placeholder || label}
           value={options?.find?.((x) => x.value === value || (x as unknown) === value) || null}
           classNamePrefix="zig-react-select"
+          instanceId={id}
           {...props}
         />
         {!!error && typeof error === "string" && (

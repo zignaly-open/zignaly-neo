@@ -21,7 +21,10 @@ import ServiceLogo from '../../TraderService/components/ServiceLogo';
 import { Box } from '@mui/system';
 import { ProfileStatusBox } from './atoms';
 import { generatePath, useNavigate } from 'react-router-dom';
-import { ROUTE_2FA } from '../../../routes';
+import { ROUTE_2FA, ROUTE_KYC } from '../../../routes';
+import { isFeatureOn } from '../../../whitelabel';
+import { Features } from '../../../whitelabel/type';
+import { UserAccessLevel } from '../../../apis/user/types';
 
 const EditProfileForm = () => {
   const { t, i18n } = useTranslation('settings');
@@ -36,8 +39,8 @@ const EditProfileForm = () => {
     mode: 'onBlur',
     resolver: yupResolver(EditProfileValidation),
     defaultValues: {
-      username: user.userName,
-      imageUrl: user.imageUrl,
+      username: user.userName || '',
+      imageUrl: user.imageUrl || '',
       bio: user.bio || '',
     },
   });
@@ -126,16 +129,30 @@ const EditProfileForm = () => {
                 )}
               />
 
-              {/*  <ProfileStatusBox*/}
-              {/*    isSuccess={true}*/}
-              {/*    ctaLabel={t('edit-profile.status-box.pass-kyc-cta')}*/}
-              {/*    cta={() => {}}*/}
-              {/*    label={t('edit-profile.status-box.kyc')}*/}
-              {/*    status={}*/}
-              {/*  />*/}
+              {isFeatureOn(Features.Kyc) && (
+                <ProfileStatusBox
+                  isSuccess={user.accessLevel >= UserAccessLevel.Normal}
+                  ctaLabel={t('edit-profile.status-box.pass-kyc-cta')}
+                  cta={() => navigate(generatePath(ROUTE_KYC))}
+                  label={t('edit-profile.status-box.kyc')}
+                  status={t(
+                    user.accessLevel >= UserAccessLevel.Normal
+                      ? 'edit-profile.status-box.verified'
+                      : 'edit-profile.status-box.not-verified',
+                  )}
+                />
+              )}
             </Box>
           </Box>
           <Grid container>
+            <Grid sm={6} xs={12} p={1} pb={2}>
+              <ZigTypography>{t('edit-profile.email')}</ZigTypography>
+
+              <ZigTypography component={'p'} sx={{ mt: 1 }}>
+                {user.email}
+              </ZigTypography>
+            </Grid>
+
             <Grid sm={6} p={1} pb={2}>
               <ZigTypography>
                 {t('edit-profile.user-id')}
@@ -150,13 +167,6 @@ const EditProfileForm = () => {
 
               <ZigTypography component={'p'} sx={{ mt: 1 }}>
                 {user.userId}
-              </ZigTypography>
-            </Grid>
-            <Grid sm={6} xs={12} p={1} pb={2}>
-              <ZigTypography>{t('edit-profile.email')}</ZigTypography>
-
-              <ZigTypography component={'p'} sx={{ mt: 1 }}>
-                {user.email}
               </ZigTypography>
             </Grid>
 

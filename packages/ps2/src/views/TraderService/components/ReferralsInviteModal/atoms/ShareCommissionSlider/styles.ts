@@ -65,7 +65,7 @@ export const StyledZigSlider = styled(ZigSlider)`
     &:nth-of-type(1) {
       color: #c6c6d1;
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 400;
     }
   }
 `;

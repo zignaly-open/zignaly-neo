@@ -122,6 +122,12 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     }),
   }),
 
+  kycStatuses: builder.query<{ status: KycResponse[] }, void>({
+    query: () => ({
+      url: `user/kyc`,
+    }),
+  }),
+
   kycLink: builder.query<KycLinkResponse, string>({
     query: (level) => ({
       url: `user/kyc/${level}/link`,
@@ -275,6 +281,7 @@ export const {
   useEnable2FAInfoQuery,
   useLazyEnable2FAInfoQuery,
   useLazyKycLinkQuery,
+  useKycStatusesQuery,
   useKycStatusQuery,
   useEnable2FAMutation,
   useBalanceQuery,

@@ -16,7 +16,8 @@ import { Provider } from 'react-redux';
 import GlobalStyle from './styles';
 import { PersistGate } from 'redux-persist/integration/react';
 import Header from './components/Navigation/Header';
-import UpdateChecker from './components/Navigation/UpdateChecker';
+import UpdateChecker from './components/Navigation/Checkers/UpdateChecker';
+import UserKycChecker from './components/Navigation/Checkers/UserKycChecker';
 import DateLocaleFixer from './components/Navigation/DateLocaleFixer';
 import Tracker from './components/Navigation/Tracker/Tracker';
 import useReferralCookie from 'util/hooks/useReferralCookie';
@@ -86,6 +87,7 @@ function App() {
           <>
             <Tracker />
             <UpdateChecker />
+            <UserKycChecker />
             <DateLocaleFixer />
             <ChartGradients />
             <Router />

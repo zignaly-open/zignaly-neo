@@ -31,6 +31,7 @@ import { useOpenDepositModal } from '../../DepositModal';
 import { Add } from '@mui/icons-material';
 import { Box } from '@mui/material';
 import { AmountInvested } from './atoms';
+import { useCanInvestIn } from '../../../../../../util/walls/util';
 
 function EditInvestmentForm({
   onClickWithdrawInvestment,
@@ -70,21 +71,24 @@ function EditInvestmentForm({
   });
 
   const toast = useToast();
+  const checkCanInvest = useCanInvestIn();
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
   const onSubmit = async (values: EditFormData) => {
-    await editInvestment({
-      amount: values?.amountTransfer,
-    });
-    toast.success(
-      t('edit-investment:addMoreInvestmentSuccess', {
+    if (checkCanInvest()) {
+      await editInvestment({
         amount: values?.amountTransfer,
-        currency: service.ssc,
-        serviceName,
-      }),
-    );
-    setView(EditInvestmentViews.EditInvestmentSuccess);
+      });
+      toast.success(
+        t('edit-investment:addMoreInvestmentSuccess', {
+          amount: values?.amountTransfer,
+          currency: service.ssc,
+          serviceName,
+        }),
+      );
+      setView(EditInvestmentViews.EditInvestmentSuccess);
+    }
   };
 
   const profitPercent = watch('profitPercentage');

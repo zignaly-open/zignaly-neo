@@ -25,6 +25,7 @@ export type UserData = {
   createdAt: string;
   locale: UserLocale;
   accessLevel: UserAccessLevel;
+  KYCMonitoring: boolean;
   intercomHash: string;
   isTrader?: {
     profit_sharing: boolean;
@@ -120,9 +121,12 @@ export type SessionResponse = {
 };
 
 export type KycResponse = {
-  status?: 'rejected' | 'pending' | 'approved';
+  status?: 'rejected' | 'pending' | 'approved' | 'init' | null;
   reason?: string;
   canBeRetried?: boolean;
+  category: 'KYC' | 'KYB';
+  level: string;
+  order: number;
 };
 
 export type KycLinkResponse = {

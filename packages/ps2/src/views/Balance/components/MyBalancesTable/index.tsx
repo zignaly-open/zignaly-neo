@@ -21,12 +21,13 @@ import {
 } from 'apis/coin/types';
 import { mergeCoinsAndBalances } from '../../../../apis/coin/util';
 import { useOpenWithdrawModal } from '../../../Dashboard/components/ManageInvestmentModals/WithdrawModal';
-import { useZModal, useZRouteModal } from '../../../../components/ZModal/use';
+import { useZModal } from '../../../../components/ZModal/use';
 import { Box } from '@mui/material';
 import CoinLabel from 'components/CoinLabel';
 import { ROUTE_MY_BALANCES_DEPOSIT_COIN } from '../../../../routes';
 import { useBalanceQuery } from 'apis/user/api';
 import SwapCoinsModal from '../SwapCoinsModal';
+import { useOpenDepositModal } from '../../../Dashboard/components/ManageInvestmentModals/DepositModal';
 
 const MyBalancesTable = (): JSX.Element => {
   const { t } = useTranslation('my-balances');
@@ -35,7 +36,7 @@ const MyBalancesTable = (): JSX.Element => {
   const { exchangeType, internalId } = useActiveExchange();
   const { showModal } = useZModal();
   const openWithdrawModal = useOpenWithdrawModal();
-  const showDepositModal = useZRouteModal(ROUTE_MY_BALANCES_DEPOSIT_COIN);
+  const showDepositModal = useOpenDepositModal(ROUTE_MY_BALANCES_DEPOSIT_COIN);
   // Trigger balance update to be sure that balance widget matches coins data
   useBalanceQuery(
     {

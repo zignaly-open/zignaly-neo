@@ -28,7 +28,9 @@
   "status": {
     "pending": "Pending",
     "completed": "Completed",
-    "error": "Error"
+    "error": "Error",
+    "reviewing": "In progress",
+    "reviewing-tooltip": "The transfer is under review and will be completed shortly."
   },
   "details": {
     "from": "From:",

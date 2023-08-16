@@ -115,8 +115,29 @@ const PendingTransactionsList: React.FC<{
                   <Box
                     id={`pending-transactions-table__status-${props.row.id}`}
                     whiteSpace='normal'
+                    position={'relative'}
                   >
                     {props.getValue()}
+                    {props.row.original.status ===
+                      t('transferOutMajorThan.status') && (
+                      <Tooltip
+                        disableInteractive
+                        title={t(
+                          'modal.pendingTransaction.waiting-for-next-accounting-tooltip',
+                        )}
+                      >
+                        <Box
+                          component='img'
+                          sx={{
+                            width: '10px',
+                            zIndex: 1,
+                            position: 'absolute',
+                            ml: '8px',
+                          }}
+                          src={`/images/portfolio/info-icon.svg`}
+                        />
+                      </Tooltip>
+                    )}
                   </Box>
                 ),
               },

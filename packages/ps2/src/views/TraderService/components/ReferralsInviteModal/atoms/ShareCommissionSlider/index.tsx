@@ -39,7 +39,6 @@ export const ShareCommissionSlider = ({
       <ContainerArrow />
       <ZigTypography
         fontSize={16}
-        fontWeight={500}
         letterSpacing={'0.48px'}
         textAlign={'center'}
       >

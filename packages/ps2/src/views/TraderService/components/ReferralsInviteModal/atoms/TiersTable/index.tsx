@@ -36,7 +36,7 @@ const CellLabelBaseCommission = () => {
 
   return (
     <ZigTypography
-      fontWeight={500}
+      fontWeight={400}
       variant='h4'
       textAlign='end'
       lineHeight='24px'
@@ -180,7 +180,7 @@ const TiersTable = ({
           >
             <ZigUserFilledIcon color='#979ce0' height={19.5} width={16.5} />
             <ZigTypography
-              fontWeight={500}
+              fontWeight={400}
               variant='h3'
               textAlign='end'
               lineHeight='24px'
@@ -212,7 +212,7 @@ const TiersTable = ({
       <tr>
         <td>
           <ZigTypography
-            fontWeight={500}
+            fontWeight={400}
             variant='h4'
             mt='2px'
             mr='16px'
