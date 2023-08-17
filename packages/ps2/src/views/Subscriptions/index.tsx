@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Layout, StyledTab, StyledTabs } from './styles';
 import { useTranslation } from 'react-i18next';
 import { ZigInput, ZigTypography } from '@zignaly-open/ui';
@@ -10,6 +10,8 @@ import { SubscriptionPlan } from '../../apis/subscription/types';
 import { useSubscriptionsQuery } from '../../apis/subscription/api';
 import { useCurrentUser } from '../../apis/user/use';
 import { format, parseISO } from 'date-fns';
+import { useSubscribe } from '../../apis/subscription/use';
+import { useToast } from '../../util/hooks/useToast';
 
 const Subscriptions: React.FC = () => {
   const { t } = useTranslation(['subscriptions', 'pages']);
@@ -18,6 +20,8 @@ const Subscriptions: React.FC = () => {
   const [activeTab, setActiveTab] = useState<number>(0);
   const subscriptionsEndpoint = useSubscriptionsQuery();
   const currentUser = useCurrentUser();
+  const { isLoading, subscribe } = useSubscribe();
+  const toast = useToast();
   const isInputValid = (input: string) => {
     return /^[A-Za-z]{0,2}(-[A-Za-z0-9]{0,4}){0,3}$/.test(input);
   };
@@ -28,6 +32,12 @@ const Subscriptions: React.FC = () => {
       setCode(inputValue);
     }
   };
+  useEffect(() => {
+    if (code.length === 17)
+      subscribe({ subscriptionCode: code }).then(() =>
+        toast.success(t('toast-success')),
+      );
+  }, [code]);
   const handleTabChange = (event: React.SyntheticEvent, newTab: number) => {
     setActiveTab(newTab);
   };
@@ -59,16 +69,19 @@ const Subscriptions: React.FC = () => {
                   name={el.name}
                   price={activeTab === 0 ? el.priceYear : el.priceLifetime}
                   status={
-                    currentUser?.subscriptionPlan.id > el.id
+                    currentUser?.subscriptionPlan?.id > el.id
                       ? 0
-                      : currentUser?.subscriptionPlan.id === el.id
+                      : currentUser?.subscriptionPlan?.id === el.id
                       ? 1
                       : 2
                   }
-                  subscriptionFinishesAt={format(
-                    parseISO(currentUser?.subscriptionFinishesAt),
-                    'MMMM do, yyyy',
-                  )}
+                  subscriptionFinishesAt={
+                    currentUser?.subscriptionFinishesAt &&
+                    format(
+                      parseISO(currentUser?.subscriptionFinishesAt),
+                      'MMMM do, yyyy',
+                    )
+                  }
                 />
               ))}
             </Box>
@@ -82,7 +95,12 @@ const Subscriptions: React.FC = () => {
                 {t('redeem-code')}
               </ZigTypography>
               <Box width={'60%'} mb={9}>
-                <ZigInput value={code} fullWidth onChange={handleCodeChange} />
+                <ZigInput
+                  disabled={isLoading}
+                  value={code}
+                  fullWidth
+                  onChange={handleCodeChange}
+                />
               </Box>
               <ZigTypography color={'neutral000'} variant={'h2'}>
                 {t('platform-renew', { amount: 29 })}

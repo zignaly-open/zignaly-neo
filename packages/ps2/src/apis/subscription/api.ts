@@ -12,7 +12,7 @@ export const api = injectEndpoints(baseApiPs2, (builder) => ({
     query: ({ subscriptionCode }) => ({
       method: 'POST',
       url: `subscriptions`,
-      body: { subscriptionCode },
+      body: { code: subscriptionCode },
     }),
   }),
 }));

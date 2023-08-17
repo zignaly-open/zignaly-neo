@@ -18,7 +18,7 @@ const SubscriptionCard = ({
   const { t } = useTranslation('subscriptions');
   return (
     <Box position={'relative'}>
-      {status === 1 && (
+      {status === 1 && subscriptionFinishesAt && (
         <Wrapper>
           <ZigTypography variant={'body1'} color={'neutral000'}>
             {t('quantwise.renewal-date', { date: subscriptionFinishesAt })}
