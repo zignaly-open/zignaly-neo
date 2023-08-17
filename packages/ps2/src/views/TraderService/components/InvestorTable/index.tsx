@@ -143,7 +143,8 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
         (row) =>
           getServiceTotalFee(
             row.ownerSuccessFee,
-            row.account_id === exchange.internalId,
+            row.account_id === exchange.internalId ||
+              row.accountType === 'owner',
           ),
         {
           header: t('tableHeader.successFee'),
@@ -202,7 +203,8 @@ const ServiceInvestorsContainer: React.FC<{ serviceId: string }> = ({
           },
         }) =>
           accountId !== exchange.internalId &&
-          accountType !== ConnectionStateLabelId.DISCONNECTED && (
+          accountType !== ConnectionStateLabelId.DISCONNECTED &&
+          accountType !== 'owner' && (
             <ZigDropdown
               component={() => (
                 <IconButton sx={{ mr: '-4px' }}>
