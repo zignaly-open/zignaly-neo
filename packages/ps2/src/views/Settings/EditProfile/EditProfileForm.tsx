@@ -148,7 +148,10 @@ const EditProfileForm = () => {
             <Grid sm={6} xs={12} p={1} pb={2}>
               <ZigTypography>{t('edit-profile.email')}</ZigTypography>
 
-              <ZigTypography component={'p'} sx={{ mt: 1 }}>
+              <ZigTypography
+                component={'p'}
+                sx={{ mt: 1, wordWrap: 'break-word' }}
+              >
                 {user.email}
               </ZigTypography>
             </Grid>
