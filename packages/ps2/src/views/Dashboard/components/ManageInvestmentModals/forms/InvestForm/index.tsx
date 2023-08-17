@@ -48,6 +48,7 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
     control,
     setValue,
     watch,
+    trigger,
     formState: { isValid, errors },
   } = useForm<InvestFormData>({
     mode: 'onChange',
@@ -70,6 +71,9 @@ function InvestForm({ view, setView, close }: InvestFormProps) {
       }),
     ),
   });
+  useEffect(() => {
+    if (watch('amountTransfer')) trigger('amountTransfer');
+  }, [view]);
 
   const canSubmit = isValid && Object.keys(errors).length === 0;
 
